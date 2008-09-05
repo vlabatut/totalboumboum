@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<players 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+		xsi:noNamespaceSchemaLocation="..\..\..\xml\schemas\players.xsd" >
+	
+	<situation players="1">
+		<location player="0" col="1" line="1" />
+	</situation>
+	<situation players="2">
+		<location player="0" col="1" line="1" />
+		<location player="1" col="15" line="13" />
+	</situation>
+	<situation players="3">
+		<location player="0" col="1" line="1" />
+		<location player="1" col="15" line="1" />
+		<location player="2" col="1" line="13" />
+	</situation>
+	<situation players="4">
+		<location player="0" col="1" line="1" />
+		<location player="1" col="15" line="1" />
+		<location player="2" col="1" line="13" />
+		<location player="3" col="15" line="13" />
+	</situation>
+	
+</players>
