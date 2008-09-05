@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<language
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+	xsi:noNamespaceSchemaLocation="..\xml\schemas\language.xsd">
+	
+<!-- MAIN MENU -->
+	
+	<text name="MainMenuButtonHeroes" value="Heroes" />
+	<text name="MainMenuButtonHeroesTooltip" value="Show the available controlable characters" />
+	
+	<text name="MainMenuButtonLevels" value="Levels" />
+	<text name="MainMenuButtonLevelsTooltip" value="Show the available levels" />
+
+	<text name="MainMenuButtonOptions" value="Options" />
+	<text name="MainMenuButtonOptionsTooltip" value="Access the game options" />
+	
+	<text name="MainMenuButtonProfiles" value="Profiles" />
+	<text name="MainMenuButtonProfilesTooltip" value="Edit the players' profiles" />
+	
+	<text name="MainMenuButtonQuickMatch" value="Quick match" />
+	<text name="MainMenuButtonQuickMatchTooltip" value="Play only one match" />
+	
+	<text name="MainMenuButtonStatistics" value="Statistics" />
+	<text name="MainMenuButtonStatisticsTooltip" value="See the player's statistics" />
+
+	<text name="MainMenuButtonTournament" value="Tournament" />
+	<text name="MainMenuButtonTournamentTooltip" value="Select and play a tournament" />
+	
+<!-- OPTIONS MENU -->
+	
+	<text name="OptionMenuButtonBack" value="Back" />
+	<text name="OptionMenuButtonBackTooltip" value="Go back to the main menu" />
+	
+	<text name="OptionMenuButtonGamePlay" value="Gameplay" />
+	<text name="OptionMenuButtonGamePlayTooltip" value="Modify the way of playing" />
+
+	<text name="OptionMenuButtonVideo" value="Video" />
+	<text name="OptionMenuButtonVideoTooltip" value="Access the video settings" />
+
+<!-- TOURNAMENT MENU -->	
+	
+	<text name="TournamentMenuButtonBack" value="Back" />
+	<text name="TournamentMenuButtonBackTooltip" value="Go to back the main menu" />
+	
+	<text name="TournamentMenuButtonContinue" value="Continue" />
+	<text name="TournamentMenuButtonContinueTooltip" value="Continue with the current tournament" />
+	
+	<text name="TournamentMenuButtonLoad" value="Load" />
+	<text name="TournamentMenuButtonLoadTooltip" value="Load an existing tournament" />
+	
+	<text name="TournamentMenuButtonNew" value="New" />
+	<text name="TournamentMenuButtonNewTooltip" value="Start a new tournament" />
+	
+	<text name="TournamentMenuButtonPlayers" value="Players" />
+	<text name="TournamentMenuButtonPlayersTooltip" value="Select the players" />
+	
+	<text name="TournamentMenuButtonRules" value="Rules" />
+	<text name="TournamentMenuButtonRulesTooltip" value="See the parameters of the tournament" />
+	
+	<text name="TournamentMenuButtonSaveAs" value="Save as..." />
+	<text name="TournamentMenuButtonSaveAsTooltip" value="Save the current tournament in a different file than the default one" />
+	
+	<text name="TournamentMenuButtonStart" value="Start" />
+	<text name="TournamentMenuButtonStartTooltip" value="Start the tournament" />
+
+<!-- TOURNAMENT PANEL -->
+	<text name="TournamentButtonCurrentMatch" value="Current Match" />
+	<text name="TournamentButtonCurrentMatchTooltip" value="Go to the current match" />
+
+	<text name="TournamentButtonDescription" value="Description" />
+	<text name="TournamentButtonDescriptionTooltip" value="See the description of the current tournament" />
+
+	<text name="TournamentButtonFinish" value="Finish" />
+	<text name="TournamentButtonFinishMatchTooltip" value="Finish the current tournament and go back to the main menu" />
+
+	<text name="TournamentButtonNextMatch" value="Next Match" />
+	<text name="TournamentButtonNextMatchTooltip" value="Go to the next match" />
+
+	<text name="TournamentButtonQuit" value="Quit" />
+	<text name="TournamentButtonQuitTooltip" value="Quit the current tournament" />
+	
+	<text name="TournamentButtonResults" value="Results" />
+	<text name="TournamentButtonResultsTooltip" value="See the current results of this tournament" />
+
+	<text name="TournamentButtonStatistics" value="Statistics" />
+	<text name="TournamentButtonStatisticsTooltip" value="See the detailed statistics of the current tournament" />
+	
+<!-- MATCH PANEL -->
+	<text name="MatchButtonCurrentRound" value="Current Round" />
+	<text name="MatchButtonCurrentRoundTooltip" value="Go to the current round" />
+
+	<text name="MatchButtonCurrentTournament" value="Current Tournament" />
+	<text name="MatchButtonCurrentTournamentTooltip" value="Go to the current tournament" />
+
+	<text name="MatchButtonDescription" value="Description" />
+	<text name="MatchButtonDescriptionTooltip" value="See the description of the current match" />
+
+	<text name="MatchButtonNextMatch" value="Next Match" />
+	<text name="MatchButtonNextMatchTooltip" value="Start the next match" />
+	
+	<text name="MatchButtonQuit" value="Quit" />
+	<text name="MatchButtonQuitTooltip" value="Quit the current tournament" />
+
+	<text name="MatchButtonNextRound" value="Next Round" />
+	<text name="MatchButtonNextRoundTooltip" value="Go to the next round" />
+
+	<text name="MatchButtonResults" value="Results" />
+	<text name="MatchButtonResultsTooltip" value="See the current results of this match" />
+
+	<text name="MatchButtonStatistics" value="Statistics" />
+	<text name="MatchButtonStatisticsTooltip" value="See the detailed statistics of the current match" />
+	
+<!-- ROUND PANEL -->
+	<text name="RoundButtonCurrentMatch" value="Current Match" />
+	<text name="RoundButtonCurrentMatchTooltip" value="Go to the current match" />
+
+	<text name="RoundButtonDescription" value="Description" />
+	<text name="RoundButtonDescriptionTooltip" value="See the description of the current round" />
+	
+	<text name="RoundButtonNextRound" value="Next Round" />
+	<text name="RoundButtonNextRoundTooltip" value="Start the next round" />
+
+	<text name="RoundButtonPlay" value="Play" />
+	<text name="RoundButtonPlayTooltip" value="Start to play" />
+
+	<text name="RoundButtonQuit" value="Quit" />
+	<text name="RoundButtonQuitTooltip" value="Quit the current tournament" />
+
+	<text name="RoundButtonResults" value="Results" />
+	<text name="RoundButtonResultsTooltip" value="See the results of the current round" />
+
+	<text name="RoundButtonStatistics" value="Statistics" />
+	<text name="RoundButtonStatisticsTooltip" value="See the detailed statistics of the current round" />
+	
+</language>
