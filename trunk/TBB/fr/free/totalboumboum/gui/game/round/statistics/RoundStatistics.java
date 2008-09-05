@@ -1,0 +1,39 @@
+package fr.free.totalboumboum.gui.game.round.statistics;
+
+import java.awt.Color;
+import java.awt.Dimension;
+
+import javax.swing.Box;
+import javax.swing.BoxLayout;
+import javax.swing.JLabel;
+
+import fr.free.totalboumboum.gui.generic.InnerDataPanel;
+import fr.free.totalboumboum.gui.generic.MenuContainer;
+import fr.free.totalboumboum.gui.generic.MenuPanel;
+import fr.free.totalboumboum.gui.generic.SimpleMenuPanel;
+import fr.free.totalboumboum.gui.generic.SplitMenuPanel;
+import fr.free.totalboumboum.gui.menus.options.OptionsMenu;
+import fr.free.totalboumboum.gui.menus.tournament.TournamentMain;
+import fr.free.totalboumboum.tools.GuiTools;
+
+public class RoundStatistics extends InnerDataPanel
+{	
+	private static final long serialVersionUID = 1L;
+
+	public RoundStatistics(SplitMenuPanel container)
+	{	super(container);
+		// background
+		setBackground(Color.YELLOW);		
+		add(new JLabel("Round Statistics"));
+	}
+
+	@Override
+	public void refresh()
+	{	// nothing to do here
+	}
+
+	@Override
+	public void updateData()
+	{	// nothing to do here
+	}
+}
