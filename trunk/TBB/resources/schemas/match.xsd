@@ -36,6 +36,7 @@
 
 	<xsd:complexType name="tGame">
 		<xsd:attribute name="playMode" type="tPlayMode" use="required" />
+		<xsd:attribute name="timeLimit" type="xsd:long" use="required" />
 	</xsd:complexType>
 
 	<xsd:complexType name="tPoints">

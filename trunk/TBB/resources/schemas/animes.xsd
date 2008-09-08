@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema">
 <xsd:include schemaLocation="_direction.xsd"/>
+<xsd:include schemaLocation="_colors.xsd"/>
 
 	<xsd:simpleType name="tBasePosition">
 		<xsd:restriction base="xsd:string">
@@ -65,24 +66,6 @@
 	<xsd:complexType name="tShadows">
 		<xsd:sequence>
 			<xsd:element name="shadow" type="tShadow" minOccurs="0" maxOccurs="unbounded"/>
-		</xsd:sequence>
-		<xsd:attribute name="folder" type="xsd:string" use="optional" />
-	</xsd:complexType>
-
-	<xsd:complexType name="tColormap">
-		<xsd:attribute name="name" type="xsd:string" use="required" />
-		<xsd:attribute name="file" type="xsd:string" use="required" />
-	</xsd:complexType>
-
-	<xsd:complexType name="tColorsprite">
-		<xsd:attribute name="name" type="xsd:string" use="required" />
-		<xsd:attribute name="folder" type="xsd:string" use="required" />
-	</xsd:complexType>
-
-	<xsd:complexType name="tColors">
-		<xsd:sequence>
-			<xsd:element name="colormap" type="tColormap" minOccurs="0" maxOccurs="unbounded" />
-			<xsd:element name="colorsprite" type="tColorsprite" minOccurs="0" maxOccurs="unbounded" />
 		</xsd:sequence>
 		<xsd:attribute name="folder" type="xsd:string" use="optional" />
 	</xsd:complexType>
