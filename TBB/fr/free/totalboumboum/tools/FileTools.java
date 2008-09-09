@@ -43,6 +43,7 @@ public class FileTools
 	public static final String FILE_PLAYERS = "players";
 	public static final String FILE_POINT = "point";
 	public static final String FILE_POINTS = "points";
+	public static final String FILE_PORTRAITS = "portraits";
 	public static final String FILE_PROFILE = "profile";
 	public static final String FILE_PROFILES = "profiles";
 	public static final String FILE_PROPERTIES = "properties";
@@ -80,6 +81,7 @@ public class FileTools
 	public static final String FOLDER_PERMISSIONS = "permissions";
 	public static final String FOLDER_PLAYERS = "players";
 	public static final String FOLDER_POINTS = "points";
+	public static final String FOLDER_PORTRAITS = "portraits";
 	public static final String FOLDER_PROFILES = "profiles";
 	public static final String FOLDER_REMOTE = "remote";
 	public static final String FOLDER_RESOURCES = "resources";
@@ -143,5 +145,4 @@ public class FileTools
 	public static String getStatisticsPath()
 	{	return getResourcesPath()+File.separator+FOLDER_STATISTICS;		
 	}
-	
 }

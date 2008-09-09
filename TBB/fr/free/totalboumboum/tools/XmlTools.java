@@ -7,18 +7,20 @@ package fr.free.totalboumboum.tools;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import javax.xml.XMLConstants;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
+import javax.xml.parsers.SAXParser;
+import javax.xml.parsers.SAXParserFactory;
 import javax.xml.validation.Schema;
 import javax.xml.validation.SchemaFactory;
 
-import org.w3c.dom.Document;
-import org.w3c.dom.Element;
-import org.w3c.dom.Node;
-import org.w3c.dom.NodeList;
+import org.jdom.Document;
+import org.jdom.Element;
+import org.jdom.input.DOMBuilder;
 import org.xml.sax.ErrorHandler;
 import org.xml.sax.SAXException;
 import org.xml.sax.SAXParseException;
@@ -70,6 +72,7 @@ public class XmlTools
 	public static final String ELT_HARDWALLS = "hardwalls";
 	public static final String ELT_HERO = "hero";
 	public static final String ELT_HEROES = "heroes";
+	public static final String ELT_INGAME = "ingame";
 	public static final String ELT_INSTANCE = "instance";
 	public static final String ELT_ITEM = "item";
 	public static final String ELT_ITEMS = "items";
@@ -98,11 +101,13 @@ public class XmlTools
 	public static final String ELT_OFF = "off";
 	public static final String ELT_OPTIONS = "options";
 	public static final String ELT_ORIGIN = "origin";
+	public static final String ELT_OUTGAME = "outgame";
 	public static final String ELT_PANEL_DIMENSION = "panelDimension";
 	public static final String ELT_PERMISSION = "permission";
 	public static final String ELT_PERMISSIONS = "permissions";
 	public static final String ELT_POINT = "point";
 	public static final String ELT_POINTS = "points";
+	public static final String ELT_PORTRAIT = "portrait";
 	public static final String ELT_PROFILE = "profile";
 	public static final String ELT_PROFILES = "profiles";
 	public static final String ELT_PROPERTIES = "properties";
@@ -200,6 +205,7 @@ public class XmlTools
 	public static final String ATT_TARGET = "target";
 	public static final String ATT_TILE_POSITION = "tilePosition";
 	public static final String ATT_TIME = "time";
+	public static final String ATT_TIME_LIMIT = "timeLimit";
 	public static final String ATT_TYPE = "type";
 	public static final String ATT_UPLINE = "upLine";
 	public static final String ATT_USES = "uses";
@@ -214,138 +220,62 @@ public class XmlTools
 	public static final String ATT_ZSHIFT = "zShift";
 	public static final String ATT_ZPOSITION = "zPosition";
 	
-	public static Element getRootFromFile(File dataFile, File schemaFile) throws ParserConfigurationException, SAXException, IOException
-	{	// schema
-        SchemaFactory schemaFactory = SchemaFactory.newInstance(XMLConstants.W3C_XML_SCHEMA_NS_URI);
-        schemaFactory.setErrorHandler(new ErrorHandler()
-        {	public void error(SAXParseException e) throws SAXException
-        	{   throw e;
-        	}
-			public void fatalError(SAXParseException e) throws SAXException
-        	{   throw e;
-        	}
-			public void warning(SAXParseException e) throws SAXException
-        	{   throw e;
-        	}
-        });
-        Schema schema = schemaFactory.newSchema(schemaFile);
-        // document builder
-        DocumentBuilderFactory documentBuilderfactory = DocumentBuilderFactory.newInstance();
-        documentBuilderfactory.setNamespaceAware(true);
-        documentBuilderfactory.setIgnoringElementContentWhitespace(true);
-        documentBuilderfactory.setSchema(schema);
-        DocumentBuilder builder = documentBuilderfactory.newDocumentBuilder();
-        builder.setErrorHandler(new ErrorHandler()
-        {   public void fatalError(SAXParseException e) throws SAXException
-        	{   throw e;
-        	}
-	        public void error(SAXParseException e) throws SAXParseException
-	    	{   throw e;
-	    	}
-	        public void warning(SAXParseException e) throws SAXParseException
-	        {   throw e;
-	        }
-		});
-        // documment
-		Document document = builder.parse(dataFile);
-		// racine
-		Element result = document.getDocumentElement();
-		return result;
-	}
+	public static final HashMap<String,DocumentBuilder> documentBuilders = new HashMap<String,DocumentBuilder>();
 	
-/*
-	public static Document getDocumentFromFile(File dataFile, ArrayList<File> schemaFiles) throws ParserConfigurationException, SAXException, IOException
-	{	// schema
-        SchemaFactory schemaFactory = SchemaFactory.newInstance(XMLConstants.W3C_XML_SCHEMA_NS_URI);
-        schemaFactory.setErrorHandler(new ErrorHandler()
-        {	public void error(SAXParseException e) throws SAXException
-        	{   throw e;
-        	}
-			public void fatalError(SAXParseException e) throws SAXException
-        	{   throw e;
-        	}
-			public void warning(SAXParseException e) throws SAXException
-        	{   throw e;
-        	}
-        });
-        Source sources[] = new Source[schemaFiles.size()];
-        for(int i=0;i<schemaFiles.size();i++)
-        	sources[i] = new StreamSource(schemaFiles.get(i));    
-//        Schema schema = schemaFactory.newSchema(sources);
-Schema schema = schemaFactory.newSchema(schemaFiles.get(schemaFiles.size()-1));
-        // document builder
-        DocumentBuilderFactory documentBuilderfactory = DocumentBuilderFactory.newInstance();
-        documentBuilderfactory.setNamespaceAware(true);
-        documentBuilderfactory.setIgnoringElementContentWhitespace(true);
-        documentBuilderfactory.setSchema(schema);
-        DocumentBuilder builder = documentBuilderfactory.newDocumentBuilder();
-        builder.setErrorHandler(new ErrorHandler()
-        {   public void fatalError(SAXParseException e) throws SAXException
-        	{   throw e;
-        	}
-	        public void error(SAXParseException e) throws SAXParseException
+	public static void init() throws SAXException, ParserConfigurationException
+	{	// init
+		SchemaFactory schemaFactory = SchemaFactory.newInstance(XMLConstants.W3C_XML_SCHEMA_NS_URI);
+	    schemaFactory.setErrorHandler(new ErrorHandler()
+	    {	public void error(SAXParseException e) throws SAXException
 	    	{   throw e;
 	    	}
-	        public void warning(SAXParseException e) throws SAXParseException
-	        {   throw e;
+			public void fatalError(SAXParseException e) throws SAXException
+	    	{   throw e;
+	    	}
+			public void warning(SAXParseException e) throws SAXException
+	    	{   throw e;
+	    	}
+	    });
+	    // loading all schemas
+//	    System.setProperty("javax.xml.parsers.DocumentBuilderFactory", "org.apache.xerces.parsers.SAXParser");
+//	    System.setProperty("javax.xml.parsers.SAXParserFactory", "org.apache.xerces.jaxp.SAXParserFactoryImpl");
+		File folder = new File(FileTools.getSchemasPath());
+		File[] files = folder.listFiles();
+		for(int i=0;i<files.length;i++)
+		{	if(files[i].isFile())
+			{	String name = files[i].getName();
+				Schema schema = schemaFactory.newSchema(files[i]);
+				// DOM parser
+				DocumentBuilderFactory documentBuilderfactory = DocumentBuilderFactory.newInstance();
+		        documentBuilderfactory.setNamespaceAware(true);
+		        documentBuilderfactory.setIgnoringElementContentWhitespace(true);
+		        documentBuilderfactory.setSchema(schema);
+		        DocumentBuilder builder = documentBuilderfactory.newDocumentBuilder();
+		        builder.setErrorHandler(new ErrorHandler()
+		        {   public void fatalError(SAXParseException e) throws SAXException
+		        	{   throw e;
+		        	}
+			        public void error(SAXParseException e) throws SAXParseException
+			    	{   throw e;
+			    	}
+			        public void warning(SAXParseException e) throws SAXParseException
+			        {   throw e;
+			        }
+				});
+				documentBuilders.put(name,builder);
 	        }
-		});
-        // documment
-		Document document = builder.parse(dataFile);
-		return document;    
-	}
-*/
-	public static Element getChildElement(Element e)
-	{	return getChildElement(e,null);		
-	}
-	public static Element getChildElement(Element e, String name)
-	{	Element result = null;
-		ArrayList<Element> temp = getChildElements(e, name);
-		if(temp.size()>0)
-			result = temp.get(0);
-		return result;
-	}
-	public static boolean hasChildElement(Element e, String name)
-	{	ArrayList<Element> temp = getChildElements(e, name);
-		return temp.size()>0;
-	}
-
-	public static ArrayList<Element> getChildElements(Element e)
-	{	return getChildElements(e,null);		
-	}
-	public static ArrayList<Element> getChildElements(Element e, String name)
-	{	ArrayList<Element> result = new ArrayList<Element>();
-		NodeList nodeList = e.getChildNodes();
-		for(int i=0;i<nodeList.getLength();i++)
-		{	Node node = nodeList.item(i);
-			if(node instanceof Element)
-			{	Element elt = (Element) node;
-				if(name == null)
-					result.add(elt);
-				else if(name.equals(elt.getTagName()))
-					result.add(elt);
-			}
 		}
-		return result;
 	}
 	
-/*	
-	public static String getStringFromXPath(Document document, String expression) throws XPathExpressionException
-    {   //creating the XPath object
-        XPathFactory factory = XPathFactory.newInstance();
-        XPath xpath = factory.newXPath();
-        //evaluating the XPath expression
-        XPathExpression exp = xpath.compile(expression);
-        String result = exp.evaluate(document);
-        return result;
-     }
-	
-    public static NodeList getNodeListFromXPath(Document document, String expression) throws XPathExpressionException
-    {	XPathFactory factory = XPathFactory.newInstance();
-		XPath xpath = factory.newXPath();
-		XPathExpression exp = xpath.compile(expression);
-		NodeList result = (NodeList)exp.evaluate(document,XPathConstants.NODESET);
+	public static Element getRootFromFile(File dataFile, File schemaFile) throws ParserConfigurationException, SAXException, IOException
+	{	// JAXP
+		DocumentBuilder bldr = documentBuilders.get(schemaFile.getName());
+		org.w3c.dom.Document doc = bldr.parse(dataFile);
+		// JDOM
+		DOMBuilder builder = new DOMBuilder();
+        Document document = builder.build(doc);
+		// root
+		Element result = document.getRootElement();
 		return result;
 	}
-*/
 }

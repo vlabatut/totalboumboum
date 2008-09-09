@@ -1,21 +1,33 @@
 package fr.free.totalboumboum.tools;
 
+import java.awt.AlphaComposite;
 import java.awt.Graphics2D;
 import java.awt.GraphicsConfiguration;
 import java.awt.GraphicsEnvironment;
+import java.awt.RenderingHints;
+import java.awt.geom.AffineTransform;
 import java.awt.image.BufferedImage;
 import java.awt.image.ColorModel;
 import java.awt.image.IndexColorModel;
 import java.awt.image.WritableRaster;
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Hashtable;
 import java.util.Iterator;
+import java.util.List;
 import java.util.Map.Entry;
 
 import javax.imageio.ImageIO;
+import javax.xml.parsers.ParserConfigurationException;
 
+import org.jdom.Attribute;
+import org.jdom.Element;
+import org.xml.sax.SAXException;
+
+import fr.free.totalboumboum.data.profile.PredefinedColor;
 import fr.free.totalboumboum.engine.content.feature.anime.Colormap;
+import fr.free.totalboumboum.engine.content.feature.anime.ColormapLoader;
 
 
 public class ImageTools
@@ -174,4 +186,79 @@ public class ImageTools
 		//
     	return result;
     }
+
+
+
+    public static Object loadColorsElement(Element root, String individualFolder, PredefinedColor color) throws IOException, ParserConfigurationException, SAXException
+    {	Object result=null;
+    	// folder
+    	String localFilePath = individualFolder;
+    	Attribute attribute = root.getAttribute(XmlTools.ATT_FOLDER);
+    	if(attribute!=null)
+			localFilePath = localFilePath+File.separator+attribute.getValue();
+		// colormaps
+    	List<Element> clrs = root.getChildren();
+    	int i=0;
+		while(result==null && i<clrs.size())
+    	{	Element temp = clrs.get(i);
+    		String name = temp.getAttribute(XmlTools.ATT_NAME).getValue().trim();
+    		if(name.equalsIgnoreCase(color.toString()))
+    		{	// colormap
+    			if(temp.getName().equals(XmlTools.ELT_COLORMAP))
+    				result = loadColormapElement(temp,localFilePath);
+    			// colorsprite
+    			else if(temp.getName().equals(XmlTools.ELT_COLORSPRITE))
+    				result = loadColorspriteElement(temp);
+    		}
+    		else
+    			i++;
+    	}
+		if(result==null)
+			;// erreur
+		return result;
+    }
+    
+    private static Colormap loadColormapElement(Element root, String individualFolder) throws IOException, ParserConfigurationException, SAXException
+    {	// file
+    	String localPath = individualFolder+File.separator;
+    	localPath = localPath + root.getAttribute(XmlTools.ATT_FILE).getValue().trim();
+    	// colormap
+    	Colormap colormap = ColormapLoader.loadColormap(localPath);
+    	return colormap;
+    }
+    
+    private static String loadColorspriteElement(Element root) throws IOException, ParserConfigurationException, SAXException
+    {	// folder
+    	String colorFolder = root.getAttribute(XmlTools.ATT_FOLDER).getValue().trim();
+    	return colorFolder;
+    }
+    
+    
+    
+    public static BufferedImage resize(BufferedImage imgOld, double zoom, boolean smooth)
+    {	int xDim = (int)(imgOld.getWidth()*zoom);
+		int yDim = (int)(imgOld.getHeight()*zoom);
+//		double actualZoom = xDim/imgOld.getWidth();
+		BufferedImage result = new BufferedImage(xDim, yDim, BufferedImage.TYPE_INT_ARGB);
+		Graphics2D g = result.createGraphics();
+		g.setComposite(AlphaComposite.Src);
+		if(smooth)
+		{	g.setRenderingHint(RenderingHints.KEY_INTERPOLATION, RenderingHints.VALUE_INTERPOLATION_BICUBIC);
+			g.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
+		}
+		else
+		{	g.setRenderingHint(RenderingHints.KEY_INTERPOLATION, RenderingHints.VALUE_INTERPOLATION_NEAREST_NEIGHBOR);
+			g.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_OFF);
+		}
+		g.setRenderingHint(RenderingHints.KEY_RENDERING, RenderingHints.VALUE_RENDER_QUALITY);
+		g.setRenderingHint(RenderingHints.KEY_COLOR_RENDERING, RenderingHints.VALUE_COLOR_RENDER_QUALITY);
+		g.setRenderingHint(RenderingHints.KEY_DITHERING, RenderingHints.VALUE_DITHER_ENABLE);		
+		//g.drawImage(imgOld, 0, 0, xDim, yDim, null);
+		AffineTransform xform = AffineTransform.getScaleInstance(zoom,zoom);
+		g.drawRenderedImage(imgOld, xform);
+		g.dispose();
+		//
+    	return result; 
+    }
 }
+
