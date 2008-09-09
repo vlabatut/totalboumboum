@@ -30,6 +30,10 @@
 		<ability strength="6000" frame="false" time="-1" uses="-1">
 			<name value="hero-celebration-duration" />
 		</ability>
+<!--  	hero-entry-duration --> 
+		<ability strength="3000" frame="false" time="-1" uses="-1">
+			<name value="hero-entry-duration" />
+		</ability>
 <!--  	hero-punch-duration --> 
 		<ability strength="230" frame="false" time="-1" uses="-1">
 			<name value="hero-punch-duration" />

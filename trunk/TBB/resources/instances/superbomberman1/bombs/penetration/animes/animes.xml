@@ -1,23 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
 <animes xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
-		xsi:noNamespaceSchemaLocation="..\..\..\..\..\xml\schemas\animes.xsd" 
+		xsi:noNamespaceSchemaLocation="..\..\..\..\..\schemas\animes.xsd" 
 		scale="1" default="standing" >
 		
 	<colors folder="colormaps" >
 		<colormap name="black" file="black" />
 		<colormap name="blue" file="blue" />
 		<colormap name="brown" file="brown" />
-		<colormap name="lightblue" file="cyan" />
-		<colormap name="lightgreen" file="grass" />
+		<colormap name="cyan" file="cyan" />
+		<colormap name="grass" file="grass" />
 		<colormap name="green" file="green" />
 		<colormap name="grey" file="grey" />
-		<colormap name="darkpurple" file="indigo" />
+		<colormap name="indigo" file="indigo" />
 		<colormap name="orange" file="orange" />
 		<colormap name="pink" file="pink" />
 		<colormap name="purple" file="purple" />
 		<colormap name="red" file="red" />
-		<colormap name="lightbrown" file="rust" />
-		<colormap name="darkblue" file="ultramarine" />
+		<colormap name="rust" file="rust" />
+		<colormap name="ultramarine" file="ultramarine" />
 		<colormap name="white" file="white" />
 		<colormap name="yellow" file="yellow" />
 	</colors>
