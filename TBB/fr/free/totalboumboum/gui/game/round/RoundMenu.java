@@ -25,6 +25,7 @@ import fr.free.totalboumboum.game.tournament.cup.CupTournament;
 import fr.free.totalboumboum.game.tournament.league.LeagueTournament;
 import fr.free.totalboumboum.game.tournament.sequence.SequenceTournament;
 import fr.free.totalboumboum.game.tournament.single.SingleTournament;
+import fr.free.totalboumboum.gui.SwingTools;
 import fr.free.totalboumboum.gui.game.loop.LoopPanel;
 import fr.free.totalboumboum.gui.game.match.description.MatchDescription;
 import fr.free.totalboumboum.gui.game.match.results.MatchResults;
@@ -67,21 +68,21 @@ public class RoundMenu extends InnerMenuPanel implements RoundRenderPanel
 		setBackground(Color.LIGHT_GRAY);
 		
 		// buttons
-		buttonQuit = GuiTools.createHorizontalMenuButton(GuiTools.ROUND_BUTTON_QUIT,this,getConfiguration());
+		buttonQuit = SwingTools.createHorizontalMenuButton(GuiTools.ROUND_BUTTON_QUIT,this,getConfiguration());
 		add(Box.createHorizontalGlue());
-		buttonMatch = GuiTools.createHorizontalMenuButton(GuiTools.ROUND_BUTTON_CURRENT_MATCH,this,getConfiguration());
-		add(Box.createRigidArea(new Dimension(getConfiguration().getHorizontalMenuButtonSpace(),0)));
+		buttonMatch = SwingTools.createHorizontalMenuButton(GuiTools.ROUND_BUTTON_CURRENT_MATCH,this,getConfiguration());
+		add(Box.createRigidArea(new Dimension(SwingTools.getSize(SwingTools.HORIZONTAL_MENU_BUTTON_SPACE),0)));
 	    ButtonGroup group = new ButtonGroup();
-		buttonDescription = GuiTools.createHorizontalMenuToggleButton(GuiTools.ROUND_BUTTON_DESCRIPTION,this,getConfiguration());
+		buttonDescription = SwingTools.createHorizontalMenuToggleButton(GuiTools.ROUND_BUTTON_DESCRIPTION,this,getConfiguration());
 		buttonDescription.setSelected(true);
 	    group.add(buttonDescription);
-		buttonResults = GuiTools.createHorizontalMenuToggleButton(GuiTools.ROUND_BUTTON_RESULTS,this,getConfiguration());
+		buttonResults = SwingTools.createHorizontalMenuToggleButton(GuiTools.ROUND_BUTTON_RESULTS,this,getConfiguration());
 	    group.add(buttonResults);
-		buttonStatistics = GuiTools.createHorizontalMenuToggleButton(GuiTools.ROUND_BUTTON_STATISTICS,this,getConfiguration());
+		buttonStatistics = SwingTools.createHorizontalMenuToggleButton(GuiTools.ROUND_BUTTON_STATISTICS,this,getConfiguration());
 	    group.add(buttonStatistics);
-		add(Box.createRigidArea(new Dimension(getConfiguration().getHorizontalMenuButtonSpace(),0)));
+		add(Box.createRigidArea(new Dimension(SwingTools.getSize(SwingTools.HORIZONTAL_MENU_BUTTON_SPACE),0)));
 		// NOTE à tester (enable)
-		buttonPlay = GuiTools.createHorizontalMenuButton(GuiTools.ROUND_BUTTON_PLAY,this,getConfiguration());
+		buttonPlay = SwingTools.createHorizontalMenuButton(GuiTools.ROUND_BUTTON_PLAY,this,getConfiguration());
 		// panels
 		roundDescription = null;
 		roundDescription = new RoundDescription(container);

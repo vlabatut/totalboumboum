@@ -24,6 +24,7 @@ import fr.free.totalboumboum.game.tournament.cup.CupTournament;
 import fr.free.totalboumboum.game.tournament.league.LeagueTournament;
 import fr.free.totalboumboum.game.tournament.sequence.SequenceTournament;
 import fr.free.totalboumboum.game.tournament.single.SingleTournament;
+import fr.free.totalboumboum.gui.SwingTools;
 import fr.free.totalboumboum.gui.game.match.description.MatchDescription;
 import fr.free.totalboumboum.gui.game.match.results.MatchResults;
 import fr.free.totalboumboum.gui.game.match.statistics.MatchStatistics;
@@ -63,20 +64,20 @@ public class MatchMenu extends InnerMenuPanel implements MatchRenderPanel
 		setBackground(Color.LIGHT_GRAY);
 		
 		// buttons
-		buttonQuit = GuiTools.createHorizontalMenuButton(GuiTools.MATCH_BUTTON_QUIT,this,getConfiguration());
+		buttonQuit = SwingTools.createHorizontalMenuButton(GuiTools.MATCH_BUTTON_QUIT,this,getConfiguration());
 		add(Box.createHorizontalGlue());
-		buttonTournament = GuiTools.createHorizontalMenuButton(GuiTools.MATCH_BUTTON_CURRENT_TOURNAMENT,this,getConfiguration());
-		add(Box.createRigidArea(new Dimension(getConfiguration().getHorizontalMenuButtonSpace(),0)));
+		buttonTournament = SwingTools.createHorizontalMenuButton(GuiTools.MATCH_BUTTON_CURRENT_TOURNAMENT,this,getConfiguration());
+		add(Box.createRigidArea(new Dimension(SwingTools.getSize(SwingTools.HORIZONTAL_MENU_BUTTON_SPACE),0)));
 	    ButtonGroup group = new ButtonGroup();
-		buttonDescription = GuiTools.createHorizontalMenuToggleButton(GuiTools.MATCH_BUTTON_DESCRIPTION,this,getConfiguration());
+		buttonDescription = SwingTools.createHorizontalMenuToggleButton(GuiTools.MATCH_BUTTON_DESCRIPTION,this,getConfiguration());
 		buttonDescription.setSelected(true);
 	    group.add(buttonDescription);
-		buttonResults = GuiTools.createHorizontalMenuToggleButton(GuiTools.MATCH_BUTTON_RESULTS,this,getConfiguration());
+		buttonResults = SwingTools.createHorizontalMenuToggleButton(GuiTools.MATCH_BUTTON_RESULTS,this,getConfiguration());
 	    group.add(buttonResults);
-		buttonStatistics = GuiTools.createHorizontalMenuToggleButton(GuiTools.MATCH_BUTTON_STATISTICS,this,getConfiguration());
+		buttonStatistics = SwingTools.createHorizontalMenuToggleButton(GuiTools.MATCH_BUTTON_STATISTICS,this,getConfiguration());
 	    group.add(buttonStatistics);
-		add(Box.createRigidArea(new Dimension(getConfiguration().getHorizontalMenuButtonSpace(),0)));
-		buttonRound = GuiTools.createHorizontalMenuButton(GuiTools.MATCH_BUTTON_NEXT_ROUND,this,getConfiguration());
+		add(Box.createRigidArea(new Dimension(SwingTools.getSize(SwingTools.HORIZONTAL_MENU_BUTTON_SPACE),0)));
+		buttonRound = SwingTools.createHorizontalMenuButton(GuiTools.MATCH_BUTTON_NEXT_ROUND,this,getConfiguration());
 		// panels
 		matchDescription = null;
 //		Match match = getConfiguration().getTournament().getCurrentMatch();
@@ -156,9 +157,9 @@ public class MatchMenu extends InnerMenuPanel implements MatchRenderPanel
 		{	buttonRound.setEnabled(true);
 			Round round = match.getCurrentRound();
 			if(round==null || round.isOver())
-				GuiTools.setButtonText(GuiTools.MATCH_BUTTON_NEXT_ROUND, buttonRound, getConfiguration());
+				SwingTools.setButtonText(GuiTools.MATCH_BUTTON_NEXT_ROUND, buttonRound, getConfiguration());
 			else
-				GuiTools.setButtonText(GuiTools.MATCH_BUTTON_CURRENT_ROUND, buttonRound, getConfiguration());
+				SwingTools.setButtonText(GuiTools.MATCH_BUTTON_CURRENT_ROUND, buttonRound, getConfiguration());
 		}
 	}
 
