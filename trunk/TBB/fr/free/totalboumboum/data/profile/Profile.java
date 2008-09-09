@@ -18,6 +18,7 @@ public class Profile
 //NOTE ça serait intéressant de charger l'IA une fois pour toutes au début du tournoi, et non pas avant chaque round
 	private String ai;
 	//
+	private Portraits portraits;
 	
 	private PlayerControl spriteControl;
 	
@@ -86,5 +87,12 @@ public class Profile
 			result = temp.getName().equalsIgnoreCase(name);
 		}
 		return result;
+	}
+
+	public Portraits getPortraits()
+	{	return portraits;
+	}
+	public void setPortraits(Portraits portraits)
+	{	this.portraits = portraits;
 	}
 }
