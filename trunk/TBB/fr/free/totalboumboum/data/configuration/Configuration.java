@@ -97,41 +97,13 @@ public class Configuration
 	// PANEL			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	private Dimension panelDimension;
-	private Dimension verticalMenuButtonDimension;
-	private int verticalMenuButtonSpace;
-	private Dimension horizontalMenuButtonDimension;
-	private int horizontalMenuButtonSpace;
-	private int textHeight;
 	
 	public void setPanelDimension(int width, int height)
 	{	panelDimension = new Dimension(width,height);
-		//
-		verticalMenuButtonDimension = new Dimension(width/4,height/20);
-		verticalMenuButtonSpace = height/20/2;
-		//
-		horizontalMenuButtonDimension = new Dimension(width/8,height/20);
-		horizontalMenuButtonSpace = width/20/2;
-		//
-		textHeight = height/20/3;
 	}
 	public Dimension getPanelDimension()
 	{	return panelDimension;	
 	}
-	public Dimension getVerticalMenuButtonDimension()
-	{	return verticalMenuButtonDimension;
-	}
-	public int getVerticalMenuButtonSpace()
-	{	return verticalMenuButtonSpace;
-	}	
-	public Dimension getHorizontalMenuButtonDimension()
-	{	return horizontalMenuButtonDimension;
-	}
-	public int getHorizontalMenuButtonSpace()
-	{	return horizontalMenuButtonSpace;
-	}	
-	public int getTextHeight()
-	{	return textHeight;
-	}	
 
 	/////////////////////////////////////////////////////////////////
 	// PROFILES			/////////////////////////////////////////////
