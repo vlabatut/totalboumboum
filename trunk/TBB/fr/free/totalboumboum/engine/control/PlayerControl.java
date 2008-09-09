@@ -21,6 +21,7 @@ public class PlayerControl implements KeyListener
 	
 	public PlayerControl(Player player)
 	{	this.player = player;
+		configuration = player.getConfiguration();
 	}
 	
 	public Loop getLoop()
@@ -34,8 +35,9 @@ public class PlayerControl implements KeyListener
 	{	return player.getControlSettings();
 	}
 	
+    private Configuration configuration;
 	public Configuration getConfiguration()
-	{	return player.getConfiguration();
+	{	return configuration;
 	}
 	
 	@Override

@@ -5,11 +5,12 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
+import java.util.List;
 
 import javax.xml.parsers.ParserConfigurationException;
 
-import org.w3c.dom.Document;
-import org.w3c.dom.Element;
+import org.jdom.Attribute;
+import org.jdom.Element;
 import org.xml.sax.SAXException;
 
 import fr.free.totalboumboum.engine.container.level.Level;
@@ -42,7 +43,7 @@ public class ItemsetLoader
     private static HashMap<String,ItemFactory> loadItemsetElement(Element root, String folder, Level level) throws IOException, ParserConfigurationException, SAXException, ClassNotFoundException
 	{	HashMap<String,ItemFactory> result = new HashMap<String,ItemFactory>();
     	String individualFolder = folder;
-		ArrayList<Element> items = XmlTools.getChildElements(root, XmlTools.ELT_ITEM);	
+		List<Element> items = root.getChildren(XmlTools.ELT_ITEM);	
 		Iterator<Element> i = items.iterator();
 		while(i.hasNext())
 		{	Element temp = i.next();
@@ -54,10 +55,11 @@ public class ItemsetLoader
     private static void loadItemElement(Element root, String folder, Level level, HashMap<String,ItemFactory> itemFactories) throws ParserConfigurationException, SAXException, IOException, ClassNotFoundException
     {	// folder
     	String individualFolder = folder;
-		if(root.hasAttribute(XmlTools.ATT_FOLDER))
-			individualFolder = individualFolder+File.separator+root.getAttribute(XmlTools.ATT_FOLDER).trim();
+		Attribute attribute = root.getAttribute(XmlTools.ATT_FOLDER);
+		if(attribute!=null)
+			individualFolder = individualFolder+File.separator+attribute.getValue().trim();
 		// name
-		String name = root.getAttribute(XmlTools.ATT_NAME).trim();
+		String name = root.getAttribute(XmlTools.ATT_NAME).getValue().trim();
 		// abilities
 		ArrayList<AbstractAbility> abilities = AbilityLoader.loadAbilitiesElement(root,level);
 		// factory
@@ -65,3 +67,9 @@ public class ItemsetLoader
 		itemFactories.put(name,itemFactory);
     }     
 }
+
+
+
+
+
+

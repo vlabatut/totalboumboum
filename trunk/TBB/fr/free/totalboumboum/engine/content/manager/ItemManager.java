@@ -24,12 +24,14 @@ public class ItemManager
 	
 	public ItemManager(Sprite sprite)
 	{	this.sprite = sprite;
+		configuration = sprite.getConfiguration();
 		collectedItems = new LinkedList<Item>();
 		abilities = new ArrayList<AbstractAbility>();
 	}
 
+    private Configuration configuration;
 	public Configuration getConfiguration()
-	{	return sprite.getConfiguration();		
+	{	return configuration;		
 	}
 	
 	public ArrayList<AbstractAbility> getItemAbilities()

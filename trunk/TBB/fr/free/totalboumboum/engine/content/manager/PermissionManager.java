@@ -35,15 +35,17 @@ public class PermissionManager
 	private ArrayList<AbstractAbility> modulationAbilities;
 	
 	public PermissionManager(Sprite sprite)
-	{	this.sprite = sprite;	
+	{	this.sprite = sprite;
+		configuration = sprite.getConfiguration();
 		permissions = new PermissionPack();
 		currentGesture = GestureConstants.NONE;
 		currentDirection = Direction.NONE;
 		modulationAbilities = new ArrayList<AbstractAbility>();
 	}
 	
+    private Configuration configuration;
 	public Configuration getConfiguration()
-	{	return sprite.getConfiguration();	
+	{	return configuration;	
 	}
 	
 	public Level getLevel()

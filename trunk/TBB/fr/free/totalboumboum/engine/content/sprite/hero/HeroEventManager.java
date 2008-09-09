@@ -52,14 +52,17 @@ public class HeroEventManager extends EventManager
 	}
 
 	public void initGesture()
-	{	gesture = GestureConstants.STANDING;
-		spriteDirection = Direction.DOWN;
-		StateAbility ability = sprite.computeAbility(StateAbility.HERO_WAIT_DURATION);
+	{	spriteDirection = Direction.DOWN;
+		StateAbility ability = sprite.computeAbility(StateAbility.HERO_ENTRY_DURATION);
 		if(ability.isActive())
-		{	double duration = ability.getStrength();
-			sprite.addDelay(DelayManager.DL_WAIT,duration);
-		}		
-		sprite.setGesture(gesture,spriteDirection,Direction.NONE,true);
+		{	gesture = GestureConstants.APPEARING;
+			double duration = ability.getStrength();
+			sprite.setGesture(gesture,spriteDirection,Direction.NONE,true,duration);
+		}
+		else
+		{	gesture = GestureConstants.STANDING;
+			sprite.setGesture(gesture,spriteDirection,Direction.NONE,true);
+		}
 	}
 
 /*
@@ -304,8 +307,14 @@ public class HeroEventManager extends EventManager
 				|| gesture.equals(GestureConstants.EXULTING))
 		{	sprite.getLoop().celebrationOver();
 		}
+		else if(gesture.equals(GestureConstants.APPEARING))
+		{	setWaitDelay();
+			gesture = GestureConstants.STANDING;
+			sprite.setGesture(gesture,spriteDirection,controlDirection,true);
+		}
 		else if(gesture.equals(GestureConstants.PUNCHING))
-		{	gesture = GestureConstants.STANDING;
+		{	setWaitDelay();
+			gesture = GestureConstants.STANDING;
 			sprite.setGesture(gesture,spriteDirection,controlDirection,true);
 		}
 		else if(gesture.equals(GestureConstants.WAITING))

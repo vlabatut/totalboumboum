@@ -44,6 +44,7 @@ public class Player
 	
 	public Player(Profile profile, Level level) throws IllegalArgumentException, SecurityException, ParserConfigurationException, SAXException, IOException, IllegalAccessException, NoSuchFieldException, ClassNotFoundException
 	{	this.level = level;
+		configuration = level.getConfiguration();
 		this.profile = profile;
 		// sprite
 		String folder = FileTools.getHeroesPath()+File.separator+this.profile.getSpritePack();
@@ -62,8 +63,9 @@ public class Player
     	}
 	}
 
+    private Configuration configuration;
 	public Configuration getConfiguration()
-	{	return level.getConfiguration();
+	{	return configuration;
 	}
 
 	public Loop getLoop()

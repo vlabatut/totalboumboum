@@ -7,6 +7,7 @@ import java.awt.FontMetrics;
 import java.awt.Graphics;
 import java.awt.geom.Rectangle2D;
 import java.io.File;
+import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -72,8 +73,9 @@ public class Level
 	
 	public Level(Loop loop)				
 	{	this.loop = loop;
+		configuration = loop.getConfiguration();
 		// dimension
-		Dimension dim = getConfiguration().getPanelDimension();
+		Dimension dim = configuration.getPanelDimension();
 		this.sizeX = dim.getWidth();
 		this.sizeY = dim.getHeight();
 			
@@ -108,7 +110,7 @@ public class Level
 		double ratioY = (int)(sizeY/visibleHeight)/standardTileDimension;
 		double zoomFactor = Math.min(ratioX,ratioY);
 		loop.setZoomFactor(zoomFactor);
-//getConfiguration().setZoomFactor(1.0f);
+//configuration.setZoomFactor(1.0f);
 		// position
 		posX = sizeX/2;
 		posY = sizeY/2;
@@ -247,14 +249,14 @@ public class Level
 		// contours
 		if(horizontalBorderHeight>0)
 		{	Color temp = g.getColor();
-			g.setColor(getConfiguration().getBorderColor());
+			g.setColor(configuration.getBorderColor());
 			g.fillRect((int)horizontalBorderX, (int)upBorderY, (int)horizontalBorderWidth, (int)horizontalBorderHeight);
 			g.fillRect((int)horizontalBorderX, (int)downBorderY, (int)horizontalBorderWidth, (int)horizontalBorderHeight);
 			g.setColor(temp);
 		}
 		if(verticalBorderWidth>0)
 		{	Color temp = g.getColor();
-			g.setColor(getConfiguration().getBorderColor());
+			g.setColor(configuration.getBorderColor());
 			g.fillRect((int)leftBorderX, (int)verticalBorderY, (int)verticalBorderWidth, (int)verticalBorderHeight);
 			g.fillRect((int)rightBorderX, (int)verticalBorderY, (int)verticalBorderWidth, (int)verticalBorderHeight);
 			g.setColor(temp);
@@ -262,8 +264,8 @@ public class Level
 		if(loop.getShowGrid())
 		{	g.setColor(Color.CYAN);
 			// croix					
-//			g.drawLine((int)posX, 0, (int)posX, getConfiguration().getPanelDimensionY());
-//			g.drawLine(0,(int)posY, getConfiguration().getPanelDimensionX(), (int)posY);
+//			g.drawLine((int)posX, 0, (int)posX, configuration.getPanelDimensionY());
+//			g.drawLine(0,(int)posY, configuration.getPanelDimensionX(), (int)posY);
 			// grille
 			for(int line=0;line<globalHeight;line++)
 				for(int col=0;col<globalWidth;col++)
@@ -314,10 +316,30 @@ public class Level
 			Font font = new Font("Dialog", Font.PLAIN, 18);
 			g.setFont(font);
 			FontMetrics metrics = g.getFontMetrics(font);
-			String text = "Speed: "+getConfiguration().getSpeedCoeff();
+			String text = "Speed: "+configuration.getSpeedCoeff();
 			Rectangle2D box = metrics.getStringBounds(text, g);
 			int x = 10;
 			int y = (int)Math.round(10+box.getHeight()/2);
+			g.drawString(text, x, y);
+		}
+		if(loop.getShowTime())
+		{	g.setColor(Color.MAGENTA);
+			Font font = new Font("Dialog", Font.PLAIN, 18);
+			g.setFont(font);
+			FontMetrics metrics = g.getFontMetrics(font);
+			NumberFormat nf = NumberFormat.getInstance();
+			nf.setMinimumIntegerDigits(2);
+			long time = loop.getTotalTime();
+			String hours = nf.format(time/3600000);	time = time%3600000;
+			String minutes = nf.format(time/60000);	time = time%60000;
+			String seconds = nf.format(time/1000);	time = time%1000;
+			nf = NumberFormat.getInstance();
+			nf.setMinimumIntegerDigits(3);
+			String milliseconds = nf.format(time);
+			String text = "Time: "+hours+"h"+minutes+"m"+seconds+"s"+milliseconds;
+			Rectangle2D box = metrics.getStringBounds(text, g);
+			int x = 10;
+			int y = (int)Math.round(30+box.getHeight()/2);
 			g.drawString(text, x, y);
 		}
 	}
@@ -459,8 +481,11 @@ System.out.println("resX:"+result[0]+" resY:"+result[1]);
 	public Loop getLoop()
 	{	return loop;	
 	}
-	public Configuration getConfiguration()
-	{	return loop.getConfiguration();		
+	
+    private Configuration configuration;
+
+    public Configuration getConfiguration()
+	{	return configuration;		
 	}
 	
 	public void addSprite(Sprite sprite)

@@ -7,7 +7,8 @@ import java.util.ArrayList;
 import javax.xml.parsers.ParserConfigurationException;
 
 
-import org.w3c.dom.Element;
+import org.jdom.Attribute;
+import org.jdom.Element;
 import org.xml.sax.SAXException;
 
 import fr.free.totalboumboum.data.configuration.Configuration;

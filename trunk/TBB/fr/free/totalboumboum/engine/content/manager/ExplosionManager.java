@@ -22,12 +22,14 @@ public class ExplosionManager
 	protected int flameRange;
 	
 	public ExplosionManager(Sprite sprite)
-	{	this.sprite = sprite;		
+	{	this.sprite = sprite;
+		configuration = sprite.getConfiguration();
 		explosion = null;
 	}
 	
+    private Configuration configuration;
 	public Configuration getConfiguration()
-	{	return sprite.getConfiguration();		
+	{	return configuration;		
 	}
 	
 	public int getFlameRange()

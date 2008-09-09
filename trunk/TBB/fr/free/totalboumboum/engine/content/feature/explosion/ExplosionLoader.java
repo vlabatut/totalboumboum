@@ -5,8 +5,8 @@ import java.io.IOException;
 
 import javax.xml.parsers.ParserConfigurationException;
 
-import org.w3c.dom.Document;
-import org.w3c.dom.Element;
+import org.jdom.Attribute;
+import org.jdom.Element;
 import org.xml.sax.SAXException;
 
 import fr.free.totalboumboum.data.configuration.Configuration;
@@ -37,7 +37,7 @@ public class ExplosionLoader
     private static Explosion loadExplosionElement(Element root, Level level) throws ParserConfigurationException, SAXException, IOException, ClassNotFoundException
     {	Explosion result = new Explosion();
     	// fire
-    	Element elt = XmlTools.getChildElement(root, XmlTools.ELT_FIRESET);
+    	Element elt = root.getChild(XmlTools.ELT_FIRESET);
     	Fireset fireset = loadFiresetElement(elt,level);
     	//
     	result.setFireset(fireset);
@@ -45,7 +45,7 @@ public class ExplosionLoader
     }
     
     private static Fireset loadFiresetElement(Element root, Level level) throws ParserConfigurationException, SAXException, IOException, ClassNotFoundException
-    {	String name = root.getAttribute(XmlTools.ATT_NAME).trim();
+    {	String name = root.getAttribute(XmlTools.ATT_NAME).getValue().trim();
 		String folder = level.getInstancePath()+File.separator+FileTools.FOLDER_FIRES;
 		folder = folder + File.separator+name;
     	Fireset result = FiresetLoader.loadFireset(folder,level);
