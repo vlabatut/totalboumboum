@@ -4,6 +4,7 @@ public class GestureConstants
 {
 	public static final String NONE = "none";
 
+	public static final String APPEARING = "appearing";
 	public static final String BOUNCING = "bouncing";
 	public static final String BURNING = "burning";
 //	public static final String CARRYING = "carrying";

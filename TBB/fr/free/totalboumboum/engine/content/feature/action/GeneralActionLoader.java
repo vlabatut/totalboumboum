@@ -1,6 +1,8 @@
 package fr.free.totalboumboum.engine.content.feature.action;
 
-import org.w3c.dom.Element;
+
+import org.jdom.Attribute;
+import org.jdom.Element;
 
 import fr.free.totalboumboum.data.configuration.Configuration;
 import fr.free.totalboumboum.engine.content.feature.Contact;
@@ -23,12 +25,13 @@ public class GeneralActionLoader
 	
 	public static GeneralAction loadActionElement(Element root) throws ClassNotFoundException
     {	// name
-		String name = root.getAttribute(XmlTools.ATT_NAME).trim();
+		String name = root.getAttribute(XmlTools.ATT_NAME).getValue().trim();
 		GeneralAction result = new GeneralAction(name);
 		
 		// actor
-		{	if(root.hasAttribute(XmlTools.ATT_ACTOR))
-			{	String actorStr = root.getAttribute(XmlTools.ATT_ACTOR).trim();
+		{	Attribute attribute = root.getAttribute(XmlTools.ATT_ACTOR);
+			if(attribute!=null)
+			{	String actorStr = attribute.getValue().trim();
 				if(actorStr.equals(AbstractAction.ROLE_ALL))
 				{	result.addActor(Block.class);
 					result.addActor(Bomb.class);
@@ -45,8 +48,9 @@ public class GeneralActionLoader
 		}
 		
 		// target
-		{	if(root.hasAttribute(XmlTools.ATT_TARGET))
-			{	String targetStr = root.getAttribute(XmlTools.ATT_TARGET).trim();
+		{	Attribute attribute = root.getAttribute(XmlTools.ATT_TARGET);
+			if(attribute!=null)
+			{	String targetStr = attribute.getValue().trim();
 				if(targetStr.equals(AbstractAction.ROLE_ALL))
 				{	result.addTarget(Block.class);
 					result.addTarget(Bomb.class);
@@ -63,7 +67,7 @@ public class GeneralActionLoader
 		}
 		
 		// direction
-		{	String directionStr = root.getAttribute(XmlTools.ATT_DIRECTION).trim();
+		{	String directionStr = root.getAttribute(XmlTools.ATT_DIRECTION).getValue().trim();
 			if(directionStr.equals(AbstractAction.DIRECTION_ALL))
 			{	for(Direction d : Direction.values())
 					result.addDirection(d);
@@ -73,7 +77,7 @@ public class GeneralActionLoader
 		}
 		
 		// contact
-		{	String contactStr = root.getAttribute(XmlTools.ATT_CONTACT).trim();
+		{	String contactStr = root.getAttribute(XmlTools.ATT_CONTACT).getValue().trim();
 			if(contactStr.equals(AbstractAction.CONTACT_ALL))
 			{	for(Contact c : Contact.values())
 					result.addContact(c);
@@ -83,7 +87,7 @@ public class GeneralActionLoader
 		}
 		
 		// tilePosition
-		{	String tilePositionStr = root.getAttribute(XmlTools.ATT_TILE_POSITION).trim();
+		{	String tilePositionStr = root.getAttribute(XmlTools.ATT_TILE_POSITION).getValue().trim();
 			if(tilePositionStr.equals(AbstractAction.TILE_POSITION_ALL))
 			{	for(TilePosition c : TilePosition.values())
 					result.addTilePosition(c);
@@ -93,7 +97,7 @@ public class GeneralActionLoader
 		}
 		
 		// orientation
-		{	String orientationStr = root.getAttribute(XmlTools.ATT_ORIENTATION).trim();
+		{	String orientationStr = root.getAttribute(XmlTools.ATT_ORIENTATION).getValue().trim();
 			if(orientationStr.equals(AbstractAction.ORIENTATION_ALL))
 			{	for(Orientation c : Orientation.values())
 					result.addOrientation(c);

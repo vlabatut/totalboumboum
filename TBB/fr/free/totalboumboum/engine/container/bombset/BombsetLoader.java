@@ -4,11 +4,12 @@ import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.List;
 
 import javax.xml.parsers.ParserConfigurationException;
 
-import org.w3c.dom.Document;
-import org.w3c.dom.Element;
+import org.jdom.Attribute;
+import org.jdom.Element;
 import org.xml.sax.SAXException;
 
 import fr.free.totalboumboum.data.configuration.Configuration;
@@ -46,7 +47,7 @@ public class BombsetLoader
     private static Bombset loadBombsetElement(Element root, String folder, PredefinedColor color, Level level) throws ParserConfigurationException, SAXException, IOException, ClassNotFoundException
     {	Bombset result = new Bombset();
     	String individualFolder = folder;
-    	ArrayList<Element> bombs = XmlTools.getChildElements(root, XmlTools.ELT_BOMB);
+    	List<Element> bombs = root.getChildren(XmlTools.ELT_BOMB);
     	Iterator<Element> i = bombs.iterator();
     	while(i.hasNext())
     	{	Element temp = i.next();
@@ -57,11 +58,12 @@ public class BombsetLoader
     
     private static void loadBombElement(Element root, String folder, PredefinedColor color, Level level, Bombset bombset) throws ParserConfigurationException, SAXException, IOException, ClassNotFoundException
     {	// name
-		String name = root.getAttribute(XmlTools.ATT_NAME).trim();
+		String name = root.getAttribute(XmlTools.ATT_NAME).getValue().trim();
     	// folder
     	String individualFolder = folder;
-		if(root.hasAttribute(XmlTools.ATT_FOLDER))
-			individualFolder = individualFolder+File.separator+root.getAttribute(XmlTools.ATT_FOLDER).trim();
+		Attribute attribute = root.getAttribute(XmlTools.ATT_FOLDER);
+		if(attribute!=null)
+			individualFolder = individualFolder+File.separator+attribute.getValue().trim();
 		// required abilities
 		ArrayList<AbstractAbility> requiredAbilities = AbilityLoader.loadAbilitiesElement(root,level);
 		Iterator<AbstractAbility> i = requiredAbilities.iterator();

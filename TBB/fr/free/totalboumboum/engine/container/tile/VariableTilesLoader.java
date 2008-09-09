@@ -3,8 +3,10 @@ package fr.free.totalboumboum.engine.container.tile;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
+import java.util.List;
 
-import org.w3c.dom.Element;
+import org.jdom.Attribute;
+import org.jdom.Element;
 
 import fr.free.totalboumboum.engine.container.level.LevelLoader;
 import fr.free.totalboumboum.tools.XmlTools;
@@ -15,7 +17,7 @@ public class VariableTilesLoader
 
     public static HashMap<String,VariableTile> loadVariableTilesElement(Element root)
     {	HashMap<String,VariableTile> result = new HashMap<String, VariableTile>();
-    	ArrayList<Element> elements = XmlTools.getChildElements(root, XmlTools.ELT_VARIABLE_TILE);
+    	List<Element> elements = root.getChildren(XmlTools.ELT_VARIABLE_TILE);
     	Iterator<Element> i = elements.iterator();
     	while(i.hasNext())
     	{	Element temp = i.next();
@@ -26,15 +28,15 @@ public class VariableTilesLoader
     }
     
     private static VariableTile loadVariableTileElement(Element root)
-    {	String name = root.getAttribute(XmlTools.ATT_NAME).trim();
+    {	String name = root.getAttribute(XmlTools.ATT_NAME).getValue().trim();
     	VariableTile result = new VariableTile(name);
-    	ArrayList<Element> elements = XmlTools.getChildElements(root,XmlTools.ELT_VALUE);
+    	List<Element> elements = root.getChildren(XmlTools.ELT_VALUE);
     	Iterator<Element> i = elements.iterator();
     	float sum = 0;
     	while(i.hasNext())
     	{	Element temp = i.next();
     		String[] elts = LevelLoader.loadBasicTileElement(temp);    	
-        	float tProba = Float.valueOf(temp.getAttribute(XmlTools.ATT_PROBA).trim());
+        	float tProba = Float.valueOf(temp.getAttribute(XmlTools.ATT_PROBA).getValue().trim());
     		ValueTile vt = new ValueTile(elts[0],elts[1],elts[2],tProba);
     		/*
     		 * NOTE 

@@ -116,7 +116,7 @@ public class TrajectoryManager
 		xMove = 0;
 		yMove = 0;
 		this.sprite = sprite;
-		this.sprite = sprite;
+		configuration = sprite.getConfiguration();
 		forcedDurationCoeff = 1;
 		totalDuration = 0;
 		forcedTotalXShift = 0;
@@ -754,8 +754,9 @@ if(sprite instanceof Hero)
 		return result;
 	}
 
-	private Configuration getConfiguration()
-	{	return sprite.getConfiguration();	
+    private Configuration configuration;
+	public Configuration getConfiguration()
+	{	return configuration;	
 	}
 	
 /* ********************************

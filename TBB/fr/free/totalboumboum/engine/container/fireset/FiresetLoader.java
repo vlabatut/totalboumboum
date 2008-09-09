@@ -4,11 +4,12 @@ import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.List;
 
 import javax.xml.parsers.ParserConfigurationException;
 
-import org.w3c.dom.Document;
-import org.w3c.dom.Element;
+import org.jdom.Attribute;
+import org.jdom.Element;
 import org.xml.sax.SAXException;
 
 import fr.free.totalboumboum.data.configuration.Configuration;
@@ -38,11 +39,11 @@ public class FiresetLoader
 	
     private static Fireset loadFiresetElement(String folder, Element root, Level level) throws ParserConfigurationException, SAXException, IOException, ClassNotFoundException
     {	Fireset result = new Fireset();
-    	ArrayList<Element> elts = XmlTools.getChildElements(root, XmlTools.ELT_FIRE);
+    	List<Element> elts = root.getChildren(XmlTools.ELT_FIRE);
     	Iterator<Element> i = elts.iterator();
     	while(i.hasNext())
     	{	Element temp = i.next();
-			String name = temp.getAttribute(XmlTools.ATT_NAME).trim();
+			String name = temp.getAttribute(XmlTools.ATT_NAME).getValue().trim();
     		FireFactory fireFactory = loadFireElement(folder,temp,level);
     		result.addFireFactory(name, fireFactory);
     	}
@@ -51,8 +52,9 @@ public class FiresetLoader
     
     private static FireFactory loadFireElement(String folder, Element root, Level level) throws ParserConfigurationException, SAXException, IOException, ClassNotFoundException
     {	String individualFolder = folder;
-		if(root.hasAttribute(XmlTools.ATT_FOLDER))
-		{	String f = root.getAttribute(XmlTools.ATT_FOLDER).trim();
+		Attribute attribute = root.getAttribute(XmlTools.ATT_FOLDER);
+		if(attribute!=null)
+		{	String f = attribute.getValue().trim();
 			individualFolder = folder+File.separator+f;
 		}    	
     	//

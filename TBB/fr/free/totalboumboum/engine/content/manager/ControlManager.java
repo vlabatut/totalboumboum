@@ -66,6 +66,7 @@ public class ControlManager
 		else if(controlEvents.size()>0)
 			updateEvents();
 	}
+	
 	private void updateEvents()
 	{	// transmiting the events to the event manager
 		Iterator<ControlEvent> i = controlEvents.iterator();
@@ -125,8 +126,7 @@ public class ControlManager
 				removeEvent(eventsList,event);
 				event = new ControlEvent(eventName,false);
 				eventsList.offer(event);
-			}
-			
+			}		
 		}
 		
 		// transmiting the events to the event manager

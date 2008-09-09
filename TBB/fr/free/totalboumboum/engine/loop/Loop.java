@@ -36,6 +36,7 @@ public class Loop implements Runnable
 	
 	public Loop(Round round)
 	{	this.round = round;
+		configuration = round.getConfiguration();
 	}	
 	
 	public void init() throws ParserConfigurationException, SAXException, IOException, ClassNotFoundException, IllegalArgumentException, SecurityException, IllegalAccessException, NoSuchFieldException
@@ -93,8 +94,9 @@ public class Loop implements Runnable
 	/////////////////////////////////////////////////////////////////
 	// ROUND			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
+    private Configuration configuration;
 	public Configuration getConfiguration()
-	{	return round.getConfiguration();	
+	{	return configuration;	
 	}
 	
 	/////////////////////////////////////////////////////////////////
@@ -109,6 +111,7 @@ public class Loop implements Runnable
 	private int showTilesPositions = 0;
 	private int showSpritesPositions = 0;
 	private boolean showSpeed = false;
+	private boolean showTime = false;
 
 	public synchronized void setShowGrid(boolean showGrid)
 	{	this.showGrid = showGrid;		
@@ -122,6 +125,13 @@ public class Loop implements Runnable
 	}
 	public synchronized boolean getShowSpeed()
 	{	return showSpeed;		
+	}
+
+	public synchronized void setShowTime(boolean showTime)
+	{	this.showTime = showTime;		
+	}
+	public synchronized boolean getShowTime()
+	{	return showTime;		
 	}
 
 	public synchronized void setShowTilesPositions(int showTilesPositions)
@@ -220,7 +230,10 @@ public class Loop implements Runnable
 
 			afterTime = System.nanoTime();
 			timeDiff = afterTime - beforeTime;
-			totalTime = totalTime + timeDiff;
+			if(!isPaused)
+			{	totalTime = totalTime + (timeDiff/1000000);
+				round.updateTime(totalTime);
+			}
 			sleepTime = (getConfiguration().getNanoPeriod() - timeDiff) - overSleepTime;
 
 			if (sleepTime > 0)
@@ -264,7 +277,6 @@ loopOver = true;
 		}
 		round.loopOver();
 		panel.loopOver();	
-		finish();
 	}
 
 	private void update()

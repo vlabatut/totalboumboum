@@ -16,11 +16,13 @@ public class SystemControl implements KeyListener
 	
 	public SystemControl(Loop loop)
 	{	this.loop = loop;
+		configuration = loop.getConfiguration();
 		keysPressed = new HashMap<Integer,Boolean>();
 	}
 
+    private Configuration configuration;
 	public Configuration getConfiguration()
-	{	return loop.getConfiguration();	
+	{	return configuration;	
 	}
 	
 	// handles termination and game-play keys
@@ -66,6 +68,10 @@ public class SystemControl implements KeyListener
 			// debug : sprites positions
 			else if ((keyCode == KeyEvent.VK_F4))
 			{	loop.setShowSpritesPositions((loop.getShowSpritesPositions()+1)%3);
+			}
+			// debug : time
+			else if ((keyCode == KeyEvent.VK_F5))
+			{	loop.setShowTime(!loop.getShowTime());
 			}
 		}
 	}

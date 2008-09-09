@@ -45,6 +45,7 @@ public class Tile
 	
 	public Tile(Level level,int line, int col, double posX, double posY, Floor floor)
 	{	this.level = level;
+		configuration = level.getConfiguration();
 		this.posX = posX;
 		this.posY = posY;
 		this.line = line;
@@ -547,8 +548,9 @@ if(fires.size()>0)
 	{	return level.getTileDimension();		
 	}
 		
+    private Configuration configuration;
 	public Configuration getConfiguration()
-	{	return level.getConfiguration();		
+	{	return configuration;		
 	}
 	
 	public String toString()

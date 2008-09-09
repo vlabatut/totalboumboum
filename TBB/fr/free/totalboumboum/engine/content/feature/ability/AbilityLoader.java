@@ -4,11 +4,12 @@ import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.List;
 
 import javax.xml.parsers.ParserConfigurationException;
 
-import org.w3c.dom.Document;
-import org.w3c.dom.Element;
+import org.jdom.Attribute;
+import org.jdom.Element;
 import org.xml.sax.SAXException;
 
 import fr.free.totalboumboum.data.configuration.Configuration;
@@ -27,30 +28,34 @@ public class AbilityLoader
     {	AbstractAbility result = null;
 		// max
 		float max = Float.MAX_VALUE;
-		if(root.hasAttribute(XmlTools.ATT_MAX_STRENGTH))
-			max = Float.parseFloat(root.getAttribute(XmlTools.ATT_MAX_STRENGTH));
+		Attribute attribute = root.getAttribute(XmlTools.ATT_MAX_STRENGTH);
+		if(attribute!=null)
+			max = Float.parseFloat(attribute.getValue());
     	// strength
-		String strengthStr = root.getAttribute(XmlTools.ATT_STRENGTH).trim();
+		String strengthStr = root.getAttribute(XmlTools.ATT_STRENGTH).getValue().trim();
 		float strength;
 		if(strengthStr.equals(AbstractAbility.MAXIMUM_VALUE))
 			strength = Float.MAX_VALUE; //NOTE format de données à inclure dans le XSD
 		else
 			strength = Float.parseFloat(strengthStr);
     	// frame
-		boolean frame = Boolean.parseBoolean(root.getAttribute(XmlTools.ATT_FRAME));
+		attribute = root.getAttribute(XmlTools.ATT_FRAME);
+		boolean frame = Boolean.parseBoolean(attribute.getValue());
     	// uses
-		int uses = Integer.parseInt(root.getAttribute(XmlTools.ATT_USES));
+		attribute = root.getAttribute(XmlTools.ATT_USES);
+		int uses = Integer.parseInt(attribute.getValue());
     	// time
-		int time = Integer.parseInt(root.getAttribute(XmlTools.ATT_TIME));
+		attribute = root.getAttribute(XmlTools.ATT_TIME);
+		int time = Integer.parseInt(attribute.getValue());
 		// state ?
-		if(XmlTools.hasChildElement(root, XmlTools.ELT_NAME))
-		{	Element temp = XmlTools.getChildElement(root, XmlTools.ELT_NAME);
-			String name = temp.getAttribute(XmlTools.ATT_VALUE);
+		Element temp = root.getChild(XmlTools.ELT_NAME);
+		if(temp!=null)
+		{	String name = temp.getAttribute(XmlTools.ATT_VALUE).getValue();
 			result = new StateAbility(name,level);
 		}
 		// or action ?
 		else
-		{	Element temp = XmlTools.getChildElement(root, XmlTools.ELT_ACTION);
+		{	temp = root.getChild(XmlTools.ELT_ACTION);
 			GeneralAction action = GeneralActionLoader.loadActionElement(temp);
 			result = new ActionAbility(action,level);				
 		}
@@ -64,7 +69,7 @@ public class AbilityLoader
     
     public static ArrayList<AbstractAbility> loadAbilitiesElement(Element root, Level level) throws ClassNotFoundException
     {	ArrayList<AbstractAbility> result = new ArrayList<AbstractAbility>();
-    	ArrayList<Element> abilitiesElts = XmlTools.getChildElements(root,XmlTools.ELT_ABILITY);
+    	List<Element> abilitiesElts = root.getChildren(XmlTools.ELT_ABILITY);
 		Iterator<Element> i = abilitiesElts.iterator();
 		while(i.hasNext())
 		{	Element elt = i.next();

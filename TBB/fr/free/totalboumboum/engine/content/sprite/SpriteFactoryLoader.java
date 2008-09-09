@@ -6,7 +6,8 @@ import java.io.IOException;
 import javax.xml.parsers.ParserConfigurationException;
 
 
-import org.w3c.dom.Element;
+import org.jdom.Attribute;
+import org.jdom.Element;
 import org.xml.sax.SAXException;
 
 import fr.free.totalboumboum.engine.container.level.Level;
@@ -34,9 +35,9 @@ public abstract class SpriteFactoryLoader
 
 	protected static <T extends Sprite> void loadExplosion(Element root, Level level, SpriteFactory<T> result) throws ParserConfigurationException, SAXException, IOException, ClassNotFoundException
 	{	Explosion explosion = new Explosion();
-		if(XmlTools.hasChildElement(root, XmlTools.ELT_EXPLOSION))
-		{	Element elt = XmlTools.getChildElement(root, XmlTools.ELT_EXPLOSION);
-			String name = elt.getAttribute(XmlTools.ATT_NAME).trim();
+		Element elt = root.getChild(XmlTools.ELT_EXPLOSION);
+		if(elt!=null)
+		{	String name = elt.getAttribute(XmlTools.ATT_NAME).getValue().trim();
 			String folder = level.getInstancePath()+File.separator+FileTools.FOLDER_EXPLOSIONS;
 			folder = folder + File.separator+name;
 			explosion = ExplosionLoader.loadExplosion(folder,level);

@@ -84,6 +84,10 @@ public class StateAbility extends AbstractAbility
 	 */
 	public static final String HERO_CELEBRATION_DURATION = "hero-celebration-duration";
 	/** 
+	 * durée de l'animation d'entrée du héros au début du round 
+	 */
+	public static final String HERO_ENTRY_DURATION = "hero-entry-duration";
+	/** 
 	 * durée du coup de poing donné par le hero 
 	 */
 	public static final String HERO_PUNCH_DURATION = "hero-punch-duration";

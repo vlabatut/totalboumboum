@@ -43,11 +43,12 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
+import java.util.List;
 
 import javax.xml.parsers.ParserConfigurationException;
 
-import org.w3c.dom.Document;
-import org.w3c.dom.Element;
+import org.jdom.Attribute;
+import org.jdom.Element;
 import org.xml.sax.SAXException;
 
 import fr.free.totalboumboum.data.configuration.Configuration;
@@ -91,38 +92,38 @@ public class LevelLoader
 		String content;
 		
 		// display
-		element = XmlTools.getChildElement(root,XmlTools.ELT_DISPLAY);
-		content = element.getAttribute(XmlTools.ATT_FORCE_ALL).trim();
+		element = root.getChild(XmlTools.ELT_DISPLAY);
+		content = element.getAttribute(XmlTools.ATT_FORCE_ALL).getValue().trim();
 		boolean displayForceAll = Boolean.parseBoolean(content);
 		result.setDisplayForceAll(displayForceAll);
-		content = element.getAttribute(XmlTools.ATT_MAXIMIZE).trim();
+		content = element.getAttribute(XmlTools.ATT_MAXIMIZE).getValue().trim();
 		boolean displayMaximize = Boolean.parseBoolean(content);
 		result.setDisplayMaximize(displayMaximize);
 
 		// global size
-		element = XmlTools.getChildElement(root,XmlTools.ELT_GLOBAL_DIMENSION);
-		content = element.getAttribute(XmlTools.ATT_HEIGHT).trim();
+		element = root.getChild(XmlTools.ELT_GLOBAL_DIMENSION);
+		content = element.getAttribute(XmlTools.ATT_HEIGHT).getValue().trim();
 		int globalHeight = Integer.parseInt(content);
-		content = element.getAttribute(XmlTools.ATT_WIDTH).trim();
+		content = element.getAttribute(XmlTools.ATT_WIDTH).getValue().trim();
 		int globalWidth = Integer.parseInt(content);
 		// visible size
-		element = XmlTools.getChildElement(root,XmlTools.ELT_VISIBLE_DIMENSION);
-		content = element.getAttribute(XmlTools.ATT_HEIGHT).trim();
+		element = root.getChild(XmlTools.ELT_VISIBLE_DIMENSION);
+		content = element.getAttribute(XmlTools.ATT_HEIGHT).getValue().trim();
 		int visibleHeight = Integer.parseInt(content);
-		content = element.getAttribute(XmlTools.ATT_WIDTH).trim();
+		content = element.getAttribute(XmlTools.ATT_WIDTH).getValue().trim();
 		int visibleWidth = Integer.parseInt(content);
 		// visible position
-		element = XmlTools.getChildElement(root,XmlTools.ELT_VISIBLE_POSITION);
-		content = element.getAttribute(XmlTools.ATT_UPLINE).trim();
+		element = root.getChild(XmlTools.ELT_VISIBLE_POSITION);
+		content = element.getAttribute(XmlTools.ATT_UPLINE).getValue().trim();
 		int visibleUpLine = Integer.parseInt(content);
-		content = element.getAttribute(XmlTools.ATT_LEFTCOL).trim();
+		content = element.getAttribute(XmlTools.ATT_LEFTCOL).getValue().trim();
 		int visibleLeftCol = Integer.parseInt(content);
 		// set matrix dimension
 		result.setMatrixDimension(globalWidth, globalHeight, visibleWidth, visibleHeight, visibleLeftCol, visibleUpLine);		
 
 		// instance
-		element = XmlTools.getChildElement(root,XmlTools.ELT_INSTANCE);
-		String instanceName = element.getAttribute(XmlTools.ATT_NAME).trim();
+		element = root.getChild(XmlTools.ELT_INSTANCE);
+		String instanceName = element.getAttribute(XmlTools.ATT_NAME).getValue().trim();
 		String instanceFolder = FileTools.getInstancesPath()+File.separator+instanceName;
 		result.setInstancePath(instanceFolder);
 
@@ -141,8 +142,8 @@ public class LevelLoader
 		result.setItemset(itemset);
 
 		// theme
-		element = XmlTools.getChildElement(root,XmlTools.ELT_THEME);
-		String themeName = element.getAttribute(XmlTools.ATT_NAME).trim();
+		element = root.getChild(XmlTools.ELT_THEME);
+		String themeName = element.getAttribute(XmlTools.ATT_NAME).getValue().trim();
 		String themeFolder = instanceFolder + File.separator + FileTools.FOLDER_THEMES;
 		themeFolder = themeFolder + File.separator+themeName;
 		Theme theme = ThemeLoader.loadTheme(themeFolder,result);
@@ -165,10 +166,10 @@ public class LevelLoader
 		schemaFile = new File(schemaFolder+File.separator+FileTools.FILE_ZONE+FileTools.EXTENSION_SCHEMA);
 		root = XmlTools.getRootFromFile(dataFile,schemaFile);
 		// tiles random variable
-		Element variables = XmlTools.getChildElement(root, XmlTools.ELT_VARIABLE_TILES);
+		Element variables = root.getChild(XmlTools.ELT_VARIABLE_TILES);
 		HashMap<String,VariableTile> variableTiles = VariableTilesLoader.loadVariableTilesElement(variables);
 		// matrix
-		Element matrx = XmlTools.getChildElement(root,XmlTools.ELT_MATRIX);
+		Element matrx = root.getChild(XmlTools.ELT_MATRIX);
 		loadMatrixElement(matrx, globalHeight, globalWidth, variableTiles, result);
     }
     
@@ -203,7 +204,7 @@ public class LevelLoader
     }
     
     private static void loadPlayersElement(Element root, Loop loop, HashMap<Integer, PlayerLocation[]> result)
-    {	ArrayList<Element> elements = XmlTools.getChildElements(root, XmlTools.ELT_SITUATION);
+    {	List<Element> elements = root.getChildren(XmlTools.ELT_SITUATION);
 		Iterator<Element> i = elements.iterator();
 		while(i.hasNext())
 		{	Element temp = i.next();
@@ -212,10 +213,10 @@ public class LevelLoader
     }
     
     private static void loadSitutationElement(Element root, Loop loop, HashMap<Integer,PlayerLocation[]> result)
-    {	String valStr = root.getAttribute(XmlTools.ATT_PLAYERS).trim();
+    {	String valStr = root.getAttribute(XmlTools.ATT_PLAYERS).getValue().trim();
 		int value = Integer.valueOf(valStr);
 		PlayerLocation[] locations = new PlayerLocation[value];
-		ArrayList<Element> elements = XmlTools.getChildElements(root,XmlTools.ELT_LOCATION);
+		List<Element> elements = root.getChildren(XmlTools.ELT_LOCATION);
 		Iterator<Element> i = elements.iterator();
 		int index = 0;
 		while(i.hasNext())
@@ -229,13 +230,13 @@ public class LevelLoader
     }
     	
     private static void loadLocationElement(Element root, Loop loop, PlayerLocation result)
-    {	String str = root.getAttribute(XmlTools.ATT_PLAYER).trim();
+    {	String str = root.getAttribute(XmlTools.ATT_PLAYER).getValue().trim();
 		int number = Integer.valueOf(str);
 		result.setNumber(number);
-		str = root.getAttribute(XmlTools.ATT_COL).trim();
+		str = root.getAttribute(XmlTools.ATT_COL).getValue().trim();
 		int col = Integer.valueOf(str);
 		result.setCol(col);
-		str = root.getAttribute(XmlTools.ATT_LINE).trim();
+		str = root.getAttribute(XmlTools.ATT_LINE).getValue().trim();
 		int line = Integer.valueOf(str);
 		result.setLine(line);
     }
@@ -254,21 +255,21 @@ public class LevelLoader
     	}
 
     	// matrix
-    	ArrayList<Element> elements = XmlTools.getChildElements(root, XmlTools.ELT_LINE);
+    	List<Element> elements = root.getChildren(XmlTools.ELT_LINE);
     	Iterator<Element> i = elements.iterator();
     	while(i.hasNext())
     	{	Element line = i.next();
-    		int posL = Integer.parseInt(line.getAttribute(XmlTools.ATT_POSITION).trim());
-    		ArrayList<Element> elementsL = XmlTools.getChildElements(line, XmlTools.ELT_TILE);
+    		int posL = Integer.parseInt(line.getAttribute(XmlTools.ATT_POSITION).getValue().trim());
+    		List<Element> elementsL = line.getChildren(XmlTools.ELT_TILE);
         	Iterator<Element> iL = elementsL.iterator();
         	while(iL.hasNext())
         	{	String[] content = {null,null,null};
         		Element tile = iL.next();
-        		int posT = Integer.parseInt(tile.getAttribute(XmlTools.ATT_POSITION).trim());
+        		int posT = Integer.parseInt(tile.getAttribute(XmlTools.ATT_POSITION).getValue().trim());
         		// variable tile
-        		if(XmlTools.hasChildElement(tile,XmlTools.ELT_REFERENCE))
-        		{	Element elt = XmlTools.getChildElement(tile,XmlTools.ELT_REFERENCE);
-        			String name = elt.getAttribute(XmlTools.ATT_NAME);
+        		Element elt = tile.getChild(XmlTools.ELT_REFERENCE);
+        		if(elt!=null)
+        		{	String name = elt.getAttribute(XmlTools.ATT_NAME).getValue();
         			VariableTile vt = variableTiles.get(name);
 					boolean found = false;
 					double proba = Math.random();
@@ -311,26 +312,27 @@ public class LevelLoader
     public static String[] loadBasicTileElement(Element root)
     {	String[] result = new String[3];
 		// floor
-		ArrayList<Element> elementsT = XmlTools.getChildElements(root,XmlTools.ELT_FLOOR);
+		List<Element> elementsT = root.getChildren(XmlTools.ELT_FLOOR);
 		if(elementsT.size()>0)
-		{	String name = elementsT.get(0).getAttribute(XmlTools.ATT_NAME);
+		{	String name = elementsT.get(0).getAttribute(XmlTools.ATT_NAME).getValue();
 			result[0] = name;
 		}
 		// block
-		elementsT = XmlTools.getChildElements(root,XmlTools.ELT_BLOCK);
+		elementsT = root.getChildren(XmlTools.ELT_BLOCK);
 		if(elementsT.size()>0)
-		{	String name = elementsT.get(0).getAttribute(XmlTools.ATT_NAME);
+		{	String name = elementsT.get(0).getAttribute(XmlTools.ATT_NAME).getValue();
 			String group;
-			if(elementsT.get(0).hasAttribute(XmlTools.ATT_GROUP))
-				group = elementsT.get(0).getAttribute(XmlTools.ATT_GROUP);
+			Attribute attribute = elementsT.get(0).getAttribute(XmlTools.ATT_GROUP);
+			if(attribute!=null)
+				group = attribute.getValue();
 			else
 				group = Theme.DEFAULT_GROUP;
 			result[1] = group+Theme.GROUP_SEPARATOR+name;
 		}
 		// item
-		elementsT = XmlTools.getChildElements(root,XmlTools.ELT_ITEM);
+		elementsT = root.getChildren(XmlTools.ELT_ITEM);
 		if(elementsT.size()>0)
-		{	String type = elementsT.get(0).getAttribute(XmlTools.ATT_TYPE);
+		{	String type = elementsT.get(0).getAttribute(XmlTools.ATT_TYPE).getValue();
 			result[2] = type;
 		}
 		//

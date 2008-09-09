@@ -92,6 +92,7 @@ public abstract class Sprite
 		toBeRemovedFromSprite = null;
 		boundToSprite = null;
 		this.level = level;
+		configuration = level.getConfiguration();
 		color = null;
 		currentGesture = null;
 	}
@@ -545,8 +546,9 @@ public abstract class Sprite
 		setCurrentPosY(posY);
 	}
 	
+    private Configuration configuration;
 	public Configuration getConfiguration()
-	{	return level.getConfiguration();		
+	{	return configuration;		
 	}
 	
 	

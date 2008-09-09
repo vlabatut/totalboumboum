@@ -5,11 +5,12 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
+import java.util.List;
 
 import javax.xml.parsers.ParserConfigurationException;
 
-import org.w3c.dom.Document;
-import org.w3c.dom.Element;
+import org.jdom.Attribute;
+import org.jdom.Element;
 import org.xml.sax.SAXException;
 
 import fr.free.totalboumboum.engine.container.level.Level;
@@ -42,13 +43,14 @@ public class ThemeLoader
     	Element element;
 		// folder
 		String localFilePath = individualFolder;
-		if(root.hasAttribute(XmlTools.ATT_FOLDER))
-			localFilePath = localFilePath+File.separator+root.getAttribute(XmlTools.ATT_FOLDER);
+		Attribute attribute = root.getAttribute(XmlTools.ATT_FOLDER);
+		if(attribute!=null)
+			localFilePath = localFilePath+File.separator+attribute.getValue();
 		// blocks
-		element = XmlTools.getChildElement(root,XmlTools.ELT_BLOCKS);
+		element = root.getChild(XmlTools.ELT_BLOCKS);
 		HashMap<String,BlockFactory> blocks = loadBlocksElement(element,localFilePath,level);
 		// floors
-		element = XmlTools.getChildElement(root,XmlTools.ELT_FLOORS);
+		element = root.getChild(XmlTools.ELT_FLOORS);
 		HashMap<String,FloorFactory> floors = loadFloorsElement(element,localFilePath,level);
 		// theme
 		result = new Theme(blocks,floors);
@@ -59,10 +61,11 @@ public class ThemeLoader
     {	HashMap<String,BlockFactory> result = new HashMap<String,BlockFactory>();
     	// folder
     	String localFilePath = individualFolder;
-		if(root.hasAttribute(XmlTools.ATT_FOLDER))
-			localFilePath = localFilePath+File.separator+root.getAttribute(XmlTools.ATT_FOLDER);
+		Attribute attribute = root.getAttribute(XmlTools.ATT_FOLDER);
+		if(attribute!=null)
+			localFilePath = localFilePath+File.separator+attribute.getValue();
 		// groups
-		{	ArrayList<Element> components = XmlTools.getChildElements(root,XmlTools.ELT_GROUP);
+		{	List<Element> components = root.getChildren(XmlTools.ELT_GROUP);
 			Iterator<Element> i = components.iterator();
 			while(i.hasNext())
 			{	Element temp = i.next();	
@@ -71,7 +74,7 @@ public class ThemeLoader
 			}
 		}
 		// blocks
-		{	ArrayList<Element> components = XmlTools.getChildElements(root,XmlTools.ELT_BLOCK);
+		{	List<Element> components = root.getChildren(XmlTools.ELT_BLOCK);
 			Iterator<Element> i = components.iterator();
 			while(i.hasNext())
 			{	Element temp = i.next();	
@@ -85,12 +88,13 @@ public class ThemeLoader
     {	HashMap<String,BlockFactory> result = new HashMap<String,BlockFactory>();
 		// folder
     	String localFilePath = individualFolder;
-		if(root.hasAttribute(XmlTools.ATT_FOLDER))
-			localFilePath = localFilePath+File.separator+root.getAttribute(XmlTools.ATT_FOLDER);
+		Attribute attribute = root.getAttribute(XmlTools.ATT_FOLDER);
+		if(attribute!=null)
+			localFilePath = localFilePath+File.separator+attribute.getValue();
 		// name
-		String name = root.getAttribute(XmlTools.ATT_NAME);
+		String name = root.getAttribute(XmlTools.ATT_NAME).getValue();
 		// blocks
-		ArrayList<Element> components = XmlTools.getChildElements(root,XmlTools.ELT_BLOCK);
+		List<Element> components = root.getChildren(XmlTools.ELT_BLOCK);
 		Iterator<Element> i = components.iterator();
 		while(i.hasNext())
 		{	Element temp = i.next();	
@@ -103,13 +107,14 @@ public class ThemeLoader
     private static void loadBlockElement(Element root, String individualFolder, String groupName, HashMap<String,BlockFactory> blockFactories, Level level) throws IOException, ParserConfigurationException, SAXException, ClassNotFoundException
     {	// folder
     	String localFilePath = individualFolder;
-		if(root.hasAttribute(XmlTools.ATT_FOLDER))
-			localFilePath = localFilePath+File.separator+root.getAttribute(XmlTools.ATT_FOLDER);
+		Attribute attribute = root.getAttribute(XmlTools.ATT_FOLDER);
+		if(attribute!=null)
+			localFilePath = localFilePath+File.separator+attribute.getValue();
 		// components
 		//String content = root.getTextContent().trim();
 		BlockFactory blockFactory = BlockFactoryLoader.loadBlockFactory(localFilePath,level);
 		// name
-		String name = groupName+Theme.GROUP_SEPARATOR+root.getAttribute(XmlTools.ATT_NAME);
+		String name = groupName+Theme.GROUP_SEPARATOR+root.getAttribute(XmlTools.ATT_NAME).getValue();
 		blockFactories.put(name,blockFactory);
     }
 
@@ -117,10 +122,11 @@ public class ThemeLoader
     {	HashMap<String,FloorFactory> result = new HashMap<String,FloorFactory>();
 		// folder
     	String localFilePath = individualFolder;
-		if(root.hasAttribute(XmlTools.ATT_FOLDER))
-			localFilePath = localFilePath+File.separator+root.getAttribute(XmlTools.ATT_FOLDER);
+		Attribute attribute = root.getAttribute(XmlTools.ATT_FOLDER);
+		if(attribute!=null)
+			localFilePath = localFilePath+File.separator+attribute.getValue();
 		// floors
-		ArrayList<Element> components = XmlTools.getChildElements(root,XmlTools.ELT_FLOOR);
+		List<Element> components = root.getChildren(XmlTools.ELT_FLOOR);
 		Iterator<Element> i = components.iterator();
 		while(i.hasNext())
 		{	Element temp = i.next();	
@@ -133,13 +139,14 @@ public class ThemeLoader
     private static void loadFloorElement(Element root, String individualFolder, HashMap<String,FloorFactory> floorFactories, Level level) throws IOException, ParserConfigurationException, SAXException, ClassNotFoundException
     {	// folder
     	String localFilePath = individualFolder;
-		if(root.hasAttribute(XmlTools.ATT_FOLDER))
-			localFilePath = localFilePath+File.separator+root.getAttribute(XmlTools.ATT_FOLDER);
+		Attribute attribute = root.getAttribute(XmlTools.ATT_FOLDER);
+		if(attribute!=null)
+			localFilePath = localFilePath+File.separator+attribute.getValue();
 		// components
 		//String content = root.getTextContent().trim();
 		FloorFactory floorFactory = FloorFactoryLoader.loadFloorFactory(localFilePath,level);
 		// name
-		String name = root.getAttribute(XmlTools.ATT_NAME);
+		String name = root.getAttribute(XmlTools.ATT_NAME).getValue();
 		floorFactories.put(name,floorFactory);
     }
 }
