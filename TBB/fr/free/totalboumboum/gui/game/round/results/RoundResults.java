@@ -15,6 +15,7 @@ import javax.swing.BoxLayout;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.SpringLayout;
 import javax.swing.SwingConstants;
 
 import fr.free.totalboumboum.data.profile.Portraits;
@@ -22,6 +23,7 @@ import fr.free.totalboumboum.data.profile.Profile;
 import fr.free.totalboumboum.data.statistics.StatisticRound;
 import fr.free.totalboumboum.game.ranking.PlayerPoints;
 import fr.free.totalboumboum.game.round.Round;
+import fr.free.totalboumboum.gui.SpringUtilities;
 import fr.free.totalboumboum.gui.generic.InnerDataPanel;
 import fr.free.totalboumboum.gui.generic.MenuContainer;
 import fr.free.totalboumboum.gui.generic.MenuPanel;
@@ -61,13 +63,15 @@ public class RoundResults extends InnerDataPanel
 		{	Round round = getConfiguration().getTournament().getCurrentMatch().getCurrentRound();
 			int playerNumber = round.getProfiles().size();
 			int lines = playerNumber+1;
-			int cols = 3;
-			GridLayout layout = new GridLayout(lines,cols,10,10);
-			resultsPanel = new JPanel(layout);
+			int cols = 3;			
+//			GridLayout layout = new GridLayout(lines,cols,10,10);
+SpringLayout layout = new SpringLayout();			
+			resultsPanel = new JPanel(layout);			
 			Dimension d = getConfiguration().getPanelDimension();
 			Dimension dim = new Dimension((int)(d.width*0.9),(int)(d.height*0.7));
-			resultsPanel.setPreferredSize(dim);
-			resultsPanel.setMaximumSize(dim);
+//			resultsPanel.setPreferredSize(dim);
+			resultsPanel.setSize(dim);
+//			resultsPanel.setMaximumSize(dim);
 			// labels
 			for(int i=0;i<lines;i++)
 				for(int j=0;j<cols;j++)
@@ -89,6 +93,7 @@ public class RoundResults extends InnerDataPanel
 			lbl = (JLabel)resultsPanel.getComponent(2);
 			lbl.setText("Points");
 			updateData();
+SpringUtilities.makeCompactGrid(resultsPanel,lines,cols,10,10,10,10);
 			add(resultsPanel);
 		}
 		add(Box.createVerticalGlue());
