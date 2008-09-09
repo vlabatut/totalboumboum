@@ -93,7 +93,6 @@ public class TournamentMenu extends InnerMenuPanel implements TournamentRenderPa
 		{
 			// NOTE à compléter
 		}
-		tournament.init();
 		tournament.setPanel(this);
 	}
 	

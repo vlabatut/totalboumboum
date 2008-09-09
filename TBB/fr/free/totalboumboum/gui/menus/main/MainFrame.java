@@ -12,6 +12,7 @@ import fr.free.totalboumboum.data.configuration.GameConstants;
 import fr.free.totalboumboum.gui.generic.MenuContainer;
 import fr.free.totalboumboum.gui.generic.MenuPanel;
 import fr.free.totalboumboum.tools.FileTools;
+import fr.free.totalboumboum.tools.XmlTools;
 
 
 import java.awt.BorderLayout;
@@ -31,6 +32,7 @@ public class MainFrame extends JFrame implements WindowListener,MenuContainer
 	public MainFrame() throws ParserConfigurationException, SAXException, IOException, IllegalArgumentException, SecurityException, IllegalAccessException, NoSuchFieldException, ClassNotFoundException
 	{	super("TBB v."+GameConstants.VERSION);
 		// configuration
+		XmlTools.init();
 		this.configuration = loadConfiguration();
 		// frame
 		addWindowListener(this);

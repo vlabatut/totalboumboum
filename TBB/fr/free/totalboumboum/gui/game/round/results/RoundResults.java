@@ -5,17 +5,21 @@ import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.GridLayout;
+import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.TreeSet;
 
 import javax.swing.Box;
 import javax.swing.BoxLayout;
+import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 
+import fr.free.totalboumboum.data.profile.Portraits;
 import fr.free.totalboumboum.data.profile.Profile;
+import fr.free.totalboumboum.data.statistics.StatisticRound;
 import fr.free.totalboumboum.game.ranking.PlayerPoints;
 import fr.free.totalboumboum.game.round.Round;
 import fr.free.totalboumboum.gui.generic.InnerDataPanel;
@@ -26,6 +30,7 @@ import fr.free.totalboumboum.gui.generic.SplitMenuPanel;
 import fr.free.totalboumboum.gui.menus.options.OptionsMenu;
 import fr.free.totalboumboum.gui.menus.tournament.TournamentMain;
 import fr.free.totalboumboum.tools.GuiTools;
+import fr.free.totalboumboum.tools.ImageTools;
 
 public class RoundResults extends InnerDataPanel
 {	
@@ -56,7 +61,7 @@ public class RoundResults extends InnerDataPanel
 		{	Round round = getConfiguration().getTournament().getCurrentMatch().getCurrentRound();
 			int playerNumber = round.getProfiles().size();
 			int lines = playerNumber+1;
-			int cols = 2;
+			int cols = 3;
 			GridLayout layout = new GridLayout(lines,cols,10,10);
 			resultsPanel = new JPanel(layout);
 			Dimension d = getConfiguration().getPanelDimension();
@@ -78,8 +83,10 @@ public class RoundResults extends InnerDataPanel
 			// titles
 			JLabel lbl;
 			lbl = (JLabel)resultsPanel.getComponent(0);
-			lbl.setText("Players");
+			lbl.setText("Player");
 			lbl = (JLabel)resultsPanel.getComponent(1);
+			lbl.setText("Name");
+			lbl = (JLabel)resultsPanel.getComponent(2);
 			lbl.setText("Points");
 			updateData();
 			add(resultsPanel);
@@ -96,25 +103,29 @@ public class RoundResults extends InnerDataPanel
 	public void updateData()
 	{	// init
 		Round round = getConfiguration().getTournament().getCurrentMatch().getCurrentRound();
-		float[] points = round.getStats().getPoints();
+		StatisticRound stats = round.getStats();
 		ArrayList<Profile> players = round.getProfiles();
-		
-		// sorting players according to points
-		TreeSet<PlayerPoints> ranking = new TreeSet<PlayerPoints>();
-		for(int i=0;i<points.length;i++)
-		{	PlayerPoints pp = new PlayerPoints(players.get(i).getName(),i);
-			pp.addPoint(points[i]);
-			ranking.add(pp);
-		}
+		TreeSet<PlayerPoints> ranking = stats.getOrderedPlayers();
 		
 		// display the ranking
 		Iterator<PlayerPoints> i = ranking.descendingIterator();
-		int k = 2;
+		int k = 3;
 		while(i.hasNext())
 		{	PlayerPoints pp = i.next();
+			Profile profile = players.get(pp.getIndex());
 			// color
-			Color clr = players.get(pp.getIndex()).getSpriteColor().getColor();
+			Color clr = profile.getSpriteColor().getColor();
 			Color bg = new Color(clr.getRed(),clr.getGreen(),clr.getBlue(),128);
+			// portrait
+			JLabel portraitLabel = (JLabel)resultsPanel.getComponent(k++);
+			BufferedImage image = profile.getPortraits().getOutgamePortrait(Portraits.OUTGAME_HEAD);
+			double zoom = portraitLabel.getSize().height/(double)image.getHeight();
+if(zoom!=0)
+	image = ImageTools.resize(image,zoom,true);
+			ImageIcon icon = new ImageIcon(image);
+			portraitLabel.setIcon(icon);
+			portraitLabel.setBackground(bg);			
+			portraitLabel.setText("");
 			// name
 			JLabel nameLabel = (JLabel)resultsPanel.getComponent(k++);
 			nameLabel.setText(pp.getPlayer());

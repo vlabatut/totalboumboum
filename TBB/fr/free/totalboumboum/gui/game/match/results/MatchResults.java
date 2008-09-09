@@ -156,11 +156,12 @@ public class MatchResults extends InnerDataPanel
 		{	PlayerPoints pp = i.next();
 			// color
 			Color clr = players.get(pp.getIndex()).getSpriteColor().getColor();
-			Color bg = new Color(clr.getRed(),clr.getGreen(),clr.getBlue(),128);
 			// name
-			JLabel nameLabel = (JLabel)resultsPanel.getComponent(k++);
-			nameLabel.setText(pp.getPlayer());
-			nameLabel.setBackground(bg);
+			{	JLabel nameLabel = (JLabel)resultsPanel.getComponent(k++);
+				nameLabel.setText(pp.getPlayer());
+				Color bg = new Color(clr.getRed(),clr.getGreen(),clr.getBlue(),120);
+				nameLabel.setBackground(bg);
+			}
 			// rounds
 			Iterator<StatisticRound> r = rounds.iterator();
 			while(r.hasNext())
@@ -168,18 +169,25 @@ public class MatchResults extends InnerDataPanel
 				float p = statRound.getPoints()[pp.getIndex()];
 				JLabel pointsLabel = (JLabel)resultsPanel.getComponent(k++);
 				pointsLabel.setText(Float.toString(p));
+				Color bg = new Color(clr.getRed(),clr.getGreen(),clr.getBlue(),120);
 				pointsLabel.setBackground(bg);
 			}
 			// total
 			{	JLabel pointsLabel = (JLabel)resultsPanel.getComponent(k++);
 				float p = partialPoints[pp.getIndex()];
 				pointsLabel.setText(Float.toString(p));
+				Color bg = new Color(clr.getRed(),clr.getGreen(),clr.getBlue(),170);
 				pointsLabel.setBackground(bg);
 			}
 			// points
-			JLabel pointsLabel = (JLabel)resultsPanel.getComponent(k++);
-			pointsLabel.setText(pp.getPoints().next().toString());
-			pointsLabel.setBackground(bg);
+			{	JLabel pointsLabel = (JLabel)resultsPanel.getComponent(k++);
+				if(match.isOver())	
+					pointsLabel.setText(pp.getPoints().next().toString());
+				else
+					pointsLabel.setText("-");
+				Color bg = new Color(clr.getRed(),clr.getGreen(),clr.getBlue(),190);
+				pointsLabel.setBackground(bg);
+			}
 		}
 	}
 }
