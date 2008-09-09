@@ -16,6 +16,7 @@
 <!-- GUI -->	
 	<panelDimension width="750" height="600" />
 	<font file="Anime Ace.ttf" />
+<!--	<font file="Anime Ace.ttf" />  -->
 	
 <!-- PROFILES -->	
 	<profiles>
