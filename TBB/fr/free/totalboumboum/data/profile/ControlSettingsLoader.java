@@ -4,12 +4,13 @@ import java.awt.event.KeyEvent;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.List;
 
 import javax.xml.parsers.ParserConfigurationException;
 
 
-import org.w3c.dom.Document;
-import org.w3c.dom.Element;
+import org.jdom.Attribute;
+import org.jdom.Element;
 import org.xml.sax.SAXException;
 
 import fr.free.totalboumboum.tools.FileTools;
@@ -30,7 +31,7 @@ public class ControlSettingsLoader
 	
     private static ControlSettings loadControlsElement(Element root) throws IllegalArgumentException, SecurityException, IllegalAccessException, NoSuchFieldException
 	{	ControlSettings result = new ControlSettings();
-    	ArrayList<Element> eventsList = XmlTools.getChildElements(root,XmlTools.ELT_EVENT);
+    	List<Element> eventsList = root.getChildren(XmlTools.ELT_EVENT);
 		for(int i=0;i<eventsList.size();i++)
 			loadEventElement(eventsList.get(i),result);
 		return result;
@@ -38,22 +39,20 @@ public class ControlSettingsLoader
     
     private static void loadEventElement(Element root, ControlSettings result) throws IllegalArgumentException, SecurityException, IllegalAccessException, NoSuchFieldException
     {	// name
-    	String name = root.getAttribute(XmlTools.ATT_NAME);
+    	String name = root.getAttribute(XmlTools.ATT_NAME).getValue();
     	// autofire
-		String autofStr = root.getAttribute(XmlTools.ATT_AUTOFIRE);
+		String autofStr = root.getAttribute(XmlTools.ATT_AUTOFIRE).getValue();
 		boolean autofire = Boolean.parseBoolean(autofStr);
 		if(autofire)
 			result.addAutofire(name);
 		// on key
-		if(XmlTools.hasChildElement(root, XmlTools.ELT_ON))
-		{	Element onElt = XmlTools.getChildElement(root, XmlTools.ELT_ON);
+		Element onElt = root.getChild(XmlTools.ELT_ON);
+		if(onElt!=null)
 			loadKeyElement(onElt,name,true,result);
-		}
 		// off key
-		if(XmlTools.hasChildElement(root, XmlTools.ELT_OFF))
-		{	Element offElt = XmlTools.getChildElement(root, XmlTools.ELT_OFF);
+		Element offElt = root.getChild(XmlTools.ELT_OFF);
+		if(offElt!=null)
 			loadKeyElement(offElt,name,false,result);
-		}
     }	
     
     /**
@@ -61,7 +60,7 @@ public class ControlSettingsLoader
      */
     private static void loadKeyElement(Element root, String name, boolean mode, ControlSettings result) throws IllegalArgumentException, SecurityException, IllegalAccessException, NoSuchFieldException
     {	// value
-    	String cst = root.getAttribute(XmlTools.ATT_KEY);
+    	String cst = root.getAttribute(XmlTools.ATT_KEY).getValue();
     	int value = KeyEvent.class.getField(cst).getInt(KeyEvent.class);
     	if(mode)
     		result.addOnKey(value, name);

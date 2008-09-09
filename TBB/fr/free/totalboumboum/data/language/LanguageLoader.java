@@ -4,10 +4,12 @@ import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.List;
 
 import javax.xml.parsers.ParserConfigurationException;
 
-import org.w3c.dom.Element;
+import org.jdom.Attribute;
+import org.jdom.Element;
 import org.xml.sax.SAXException;
 
 import fr.free.totalboumboum.tools.FileTools;
@@ -27,7 +29,7 @@ public class LanguageLoader
 	}
 
 	private static void loadLanguageElement(Element root, Language result)
-	{	ArrayList<Element> elements = XmlTools.getChildElements(root, XmlTools.ELT_TEXT);
+	{	List<Element> elements = root.getChildren(XmlTools.ELT_TEXT);
 		Iterator<Element> i = elements.iterator();
 		while(i.hasNext())
 		{	Element temp = i.next();
@@ -36,8 +38,8 @@ public class LanguageLoader
 	}
 
 	private static void loadTextElement(Element root, Language result)
-	{	String key = root.getAttribute(XmlTools.ATT_NAME).trim();
-		String value = root.getAttribute(XmlTools.ATT_VALUE).trim();
+	{	String key = root.getAttribute(XmlTools.ATT_NAME).getValue().trim();
+		String value = root.getAttribute(XmlTools.ATT_VALUE).getValue().trim();
 		result.addText(key, value);	
 	}
 }
