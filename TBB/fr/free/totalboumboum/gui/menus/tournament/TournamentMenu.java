@@ -51,6 +51,7 @@ import javax.xml.parsers.ParserConfigurationException;
 import org.xml.sax.SAXException;
 
 import fr.free.totalboumboum.game.tournament.AbstractTournament;
+import fr.free.totalboumboum.gui.SwingTools;
 import fr.free.totalboumboum.gui.game.tournament.TournamentSplitPanel;
 import fr.free.totalboumboum.gui.generic.ContentPanel;
 import fr.free.totalboumboum.gui.generic.InnerDataPanel;
@@ -83,16 +84,16 @@ public class TournamentMenu extends InnerMenuPanel
 		
 		// buttons
 		add(Box.createVerticalGlue());
-		buttonNew = GuiTools.createVerticalMenuButton(GuiTools.TOURNAMENT_MENU_BUTTON_NEW,this,getConfiguration());
-		buttonLoad = GuiTools.createVerticalMenuButton(GuiTools.TOURNAMENT_MENU_BUTTON_LOAD,this,getConfiguration());
-		buttonSaveAs = GuiTools.createVerticalMenuButton(GuiTools.TOURNAMENT_MENU_BUTTON_SAVE_AS,this,getConfiguration());
-		add(Box.createRigidArea(new Dimension(0,getConfiguration().getVerticalMenuButtonSpace())));
-		buttonRules = GuiTools.createVerticalMenuButton(GuiTools.TOURNAMENT_MENU_BUTTON_RULES,this,getConfiguration());
-		buttonPlayers = GuiTools.createVerticalMenuButton(GuiTools.TOURNAMENT_MENU_BUTTON_PLAYERS,this,getConfiguration());
-		add(Box.createRigidArea(new Dimension(0,getConfiguration().getVerticalMenuButtonSpace())));
-		buttonPlay = GuiTools.createVerticalMenuButton(GuiTools.TOURNAMENT_MENU_BUTTON_START,this,getConfiguration());
-		add(Box.createRigidArea(new Dimension(0,getConfiguration().getVerticalMenuButtonSpace())));
-		buttonBack = GuiTools.createVerticalMenuButton(GuiTools.TOURNAMENT_MENU_BUTTON_BACK,this,getConfiguration());
+		buttonNew = SwingTools.createSecondaryVerticalMenuButton(GuiTools.TOURNAMENT_MENU_BUTTON_NEW,this,getConfiguration());
+		buttonLoad = SwingTools.createSecondaryVerticalMenuButton(GuiTools.TOURNAMENT_MENU_BUTTON_LOAD,this,getConfiguration());
+		buttonSaveAs = SwingTools.createSecondaryVerticalMenuButton(GuiTools.TOURNAMENT_MENU_BUTTON_SAVE_AS,this,getConfiguration());
+		add(Box.createRigidArea(new Dimension(0,SwingTools.getSize(SwingTools.VERTICAL_MENU_BUTTON_SPACE))));
+		buttonRules = SwingTools.createSecondaryVerticalMenuButton(GuiTools.TOURNAMENT_MENU_BUTTON_RULES,this,getConfiguration());
+		buttonPlayers = SwingTools.createSecondaryVerticalMenuButton(GuiTools.TOURNAMENT_MENU_BUTTON_PLAYERS,this,getConfiguration());
+		add(Box.createRigidArea(new Dimension(0,SwingTools.getSize(SwingTools.VERTICAL_MENU_BUTTON_SPACE))));
+		buttonPlay = SwingTools.createSecondaryVerticalMenuButton(GuiTools.TOURNAMENT_MENU_BUTTON_START,this,getConfiguration());
+		add(Box.createRigidArea(new Dimension(0,SwingTools.getSize(SwingTools.VERTICAL_MENU_BUTTON_SPACE))));
+		buttonBack = SwingTools.createSecondaryVerticalMenuButton(GuiTools.TOURNAMENT_MENU_BUTTON_BACK,this,getConfiguration());
 		add(Box.createVerticalGlue());
 		
 		// panels
@@ -174,12 +175,12 @@ public class TournamentMenu extends InnerMenuPanel
 		{	buttonSaveAs.setEnabled(true);
 			buttonPlay.setEnabled(true);
 			if(tournament.hasBegun())
-			{	GuiTools.setButtonText(GuiTools.TOURNAMENT_MENU_BUTTON_CONTINUE,buttonPlay,getConfiguration());
+			{	SwingTools.setButtonText(GuiTools.TOURNAMENT_MENU_BUTTON_CONTINUE,buttonPlay,getConfiguration());
 				buttonPlayers.setEnabled(false);
 				buttonRules.setEnabled(false);
 			}
 			else
-			{	GuiTools.setButtonText(GuiTools.TOURNAMENT_MENU_BUTTON_START,buttonPlay,getConfiguration());
+			{	SwingTools.setButtonText(GuiTools.TOURNAMENT_MENU_BUTTON_START,buttonPlay,getConfiguration());
 				buttonPlayers.setEnabled(true);
 				buttonRules.setEnabled(true);
 			}

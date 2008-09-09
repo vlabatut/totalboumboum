@@ -12,6 +12,7 @@ import javax.xml.parsers.ParserConfigurationException;
 
 import org.xml.sax.SAXException;
 
+import fr.free.totalboumboum.gui.SwingTools;
 import fr.free.totalboumboum.gui.generic.MenuContainer;
 import fr.free.totalboumboum.gui.generic.MenuPanel;
 import fr.free.totalboumboum.gui.generic.SimpleMenuPanel;
@@ -49,15 +50,15 @@ public class MainMenu extends SimpleMenuPanel
 		
 		// buttons
 		add(Box.createVerticalGlue());
-		buttonOptions = GuiTools.createVerticalMenuButton(GuiTools.MAIN_MENU_BUTTON_OPTIONS,this,getConfiguration());
-		add(Box.createRigidArea(new Dimension(0,getConfiguration().getVerticalMenuButtonSpace())));
-		buttonProfiles = GuiTools.createVerticalMenuButton(GuiTools.MAIN_MENU_BUTTON_PROFILES,this,getConfiguration());
-		buttonStats = GuiTools.createVerticalMenuButton(GuiTools.MAIN_MENU_BUTTON_STATISTICS,this,getConfiguration());
-		buttonHeroes = GuiTools.createVerticalMenuButton(GuiTools.MAIN_MENU_BUTTON_HEROES,this,getConfiguration());
-		buttonLevels = GuiTools.createVerticalMenuButton(GuiTools.MAIN_MENU_BUTTON_LEVELS,this,getConfiguration());
-		add(Box.createRigidArea(new Dimension(0,getConfiguration().getVerticalMenuButtonSpace())));
-		buttonTournament = GuiTools.createVerticalMenuButton(GuiTools.MAIN_MENU_BUTTON_TOURNAMENT,this,getConfiguration());
-		buttonQuickMatch = GuiTools.createVerticalMenuButton(GuiTools.MAIN_MENU_BUTTON_QUICKMATCH,this,getConfiguration());
+		buttonOptions = SwingTools.createPrincipalVerticalMenuButton(GuiTools.MAIN_MENU_BUTTON_OPTIONS,this,getConfiguration());
+		add(Box.createRigidArea(new Dimension(0,SwingTools.getSize(SwingTools.VERTICAL_MENU_BUTTON_SPACE))));
+		buttonProfiles = SwingTools.createPrincipalVerticalMenuButton(GuiTools.MAIN_MENU_BUTTON_PROFILES,this,getConfiguration());
+		buttonStats = SwingTools.createPrincipalVerticalMenuButton(GuiTools.MAIN_MENU_BUTTON_STATISTICS,this,getConfiguration());
+		buttonHeroes = SwingTools.createPrincipalVerticalMenuButton(GuiTools.MAIN_MENU_BUTTON_HEROES,this,getConfiguration());
+		buttonLevels = SwingTools.createPrincipalVerticalMenuButton(GuiTools.MAIN_MENU_BUTTON_LEVELS,this,getConfiguration());
+		add(Box.createRigidArea(new Dimension(0,SwingTools.getSize(SwingTools.VERTICAL_MENU_BUTTON_SPACE))));
+		buttonTournament = SwingTools.createPrincipalVerticalMenuButton(GuiTools.MAIN_MENU_BUTTON_TOURNAMENT,this,getConfiguration());
+		buttonQuickMatch = SwingTools.createPrincipalVerticalMenuButton(GuiTools.MAIN_MENU_BUTTON_QUICKMATCH,this,getConfiguration());
 		add(Box.createVerticalGlue());		
 	}
 	
