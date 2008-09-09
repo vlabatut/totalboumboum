@@ -75,8 +75,11 @@ public class Adapter implements InterfaceAI
     {	controlKeys = new ArrayList<Integer>();		
     }
     
+    private Configuration configuration;
+    
 	public void setPlayer(Player player)
 	{	this.player = player;
+		configuration = player.getConfiguration();
 	}
 	
 	public Loop getLoop()
@@ -117,7 +120,7 @@ public class Adapter implements InterfaceAI
 	}		
 	
 	public Configuration getConfiguration()
-	{	return player.getConfiguration();		
+	{	return configuration;		
 	}
 	
 	private Sprite getSprite()
@@ -389,9 +392,9 @@ public class Adapter implements InterfaceAI
 						case ArtificialIntelligence.AI_ACTION_GO_DOWN :
 							if(debug)
 			    				System.out.print("down\t");
+							getSprite().putControlEvent(new ControlEvent(ControlEvent.DOWN,true));
 							if(!controlKeys.contains(ArtificialIntelligence.AI_ACTION_GO_DOWN))
 							{	controlKeys.add(ArtificialIntelligence.AI_ACTION_GO_DOWN);
-								getSprite().putControlEvent(new ControlEvent(ControlEvent.DOWN,true));
 								if(debug)
 				    				System.out.print("x ");
 							}
@@ -433,9 +436,9 @@ public class Adapter implements InterfaceAI
 						case ArtificialIntelligence.AI_ACTION_GO_LEFT :
 							if(debug)
 			    				System.out.print("left\t");
+							getSprite().putControlEvent(new ControlEvent(ControlEvent.DOWN,false));
 							if(controlKeys.contains(ArtificialIntelligence.AI_ACTION_GO_DOWN))
 							{	controlKeys.remove((Object)ArtificialIntelligence.AI_ACTION_GO_DOWN);
-								getSprite().putControlEvent(new ControlEvent(ControlEvent.DOWN,false));
 								if(debug)
 				    				System.out.print("^ ");
 							}
@@ -477,9 +480,9 @@ public class Adapter implements InterfaceAI
 						case ArtificialIntelligence.AI_ACTION_GO_RIGHT :
 							if(debug)
 			    				System.out.print("right\t");
+							getSprite().putControlEvent(new ControlEvent(ControlEvent.DOWN,false));
 							if(controlKeys.contains(ArtificialIntelligence.AI_ACTION_GO_DOWN))
 							{	controlKeys.remove((Object)ArtificialIntelligence.AI_ACTION_GO_DOWN);
-								getSprite().putControlEvent(new ControlEvent(ControlEvent.DOWN,false));
 								if(debug)
 				    				System.out.print("^ ");
 							}
@@ -507,9 +510,9 @@ public class Adapter implements InterfaceAI
 							{	if(debug)
 				    				System.out.print("x ");
 							}
+							getSprite().putControlEvent(new ControlEvent(ControlEvent.UP,false)); //NOTE sorti du 'if' suivant 
 							if(controlKeys.contains(ArtificialIntelligence.AI_ACTION_GO_UP))
 							{	controlKeys.remove((Object)ArtificialIntelligence.AI_ACTION_GO_UP);
-								getSprite().putControlEvent(new ControlEvent(ControlEvent.UP,false));
 								if(debug)
 				    				System.out.print("^ ");
 							}
@@ -521,9 +524,9 @@ public class Adapter implements InterfaceAI
 						case ArtificialIntelligence.AI_ACTION_GO_UP :
 							if(debug)
 			    				System.out.print("up\t");
+							getSprite().putControlEvent(new ControlEvent(ControlEvent.DOWN,false));
 							if(controlKeys.contains(ArtificialIntelligence.AI_ACTION_GO_DOWN))
 							{	controlKeys.remove((Object)ArtificialIntelligence.AI_ACTION_GO_DOWN);
-								getSprite().putControlEvent(new ControlEvent(ControlEvent.DOWN,false));
 								if(debug)
 				    				System.out.print("^ ");
 							}
@@ -568,8 +571,7 @@ public class Adapter implements InterfaceAI
 							getSprite().putControlEvent(new ControlEvent(ControlEvent.DROPBOMB,true));
 							getSprite().putControlEvent(new ControlEvent(ControlEvent.DROPBOMB,false));
 							if(controlKeys.contains(ArtificialIntelligence.AI_ACTION_GO_DOWN))
-							{	controlKeys.remove((Object)ArtificialIntelligence.AI_ACTION_GO_DOWN);
-								getSprite().putControlEvent(new ControlEvent(ControlEvent.DOWN,false));
+							{	getSprite().putControlEvent(new ControlEvent(ControlEvent.DOWN,true)); //NOTE largement modifié
 								if(debug)
 				    				System.out.print("^ ");
 							}
@@ -578,8 +580,7 @@ public class Adapter implements InterfaceAI
 				    				System.out.print("- ");
 							}
 							if(controlKeys.contains(ArtificialIntelligence.AI_ACTION_GO_LEFT))
-							{	controlKeys.remove((Object)ArtificialIntelligence.AI_ACTION_GO_LEFT);
-								getSprite().putControlEvent(new ControlEvent(ControlEvent.LEFT,false));
+							{	getSprite().putControlEvent(new ControlEvent(ControlEvent.LEFT,true));
 								if(debug)
 				    				System.out.print("^ ");
 							}
@@ -588,8 +589,7 @@ public class Adapter implements InterfaceAI
 				    				System.out.print("- ");
 							}
 							if(controlKeys.contains(ArtificialIntelligence.AI_ACTION_GO_RIGHT))
-							{	controlKeys.remove((Object)ArtificialIntelligence.AI_ACTION_GO_RIGHT);
-								getSprite().putControlEvent(new ControlEvent(ControlEvent.RIGHT,false));
+							{	getSprite().putControlEvent(new ControlEvent(ControlEvent.RIGHT,true));
 								if(debug)
 				    				System.out.print("^ ");
 							}
@@ -598,8 +598,7 @@ public class Adapter implements InterfaceAI
 				    				System.out.print("- ");
 							}
 							if(controlKeys.contains(ArtificialIntelligence.AI_ACTION_GO_UP))
-							{	controlKeys.remove((Object)ArtificialIntelligence.AI_ACTION_GO_UP);
-								getSprite().putControlEvent(new ControlEvent(ControlEvent.UP,false));
+							{	getSprite().putControlEvent(new ControlEvent(ControlEvent.UP,true));
 								if(debug)
 				    				System.out.print("^ ");
 							}
