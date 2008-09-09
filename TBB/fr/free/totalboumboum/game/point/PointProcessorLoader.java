@@ -3,10 +3,12 @@ package fr.free.totalboumboum.game.point;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.List;
 
 import javax.xml.parsers.ParserConfigurationException;
 
-import org.w3c.dom.Element;
+import org.jdom.Attribute;
+import org.jdom.Element;
 import org.xml.sax.SAXException;
 
 import fr.free.totalboumboum.game.score.Score;
@@ -24,7 +26,7 @@ public class PointProcessorLoader
 		dataFile = new File(individualFolder+FileTools.EXTENSION_DATA);
 		schemaFile = new File(schemaFolder+File.separator+FileTools.FILE_POINT+FileTools.EXTENSION_SCHEMA);
 		Element root = XmlTools.getRootFromFile(dataFile,schemaFile);
-		Element elt = XmlTools.getChildElement(root);
+		Element elt = (Element) root.getChildren().get(0);
 		PointProcessor result = loadPointProcessorElement(elt);
 		return result;
 	}
@@ -38,14 +40,14 @@ public class PointProcessorLoader
 		dataFile = new File(individualFolder+File.separator+name+FileTools.EXTENSION_DATA);
 		schemaFile = new File(schemaFolder+File.separator+FileTools.FILE_POINT+FileTools.EXTENSION_SCHEMA);
 		Element root = XmlTools.getRootFromFile(dataFile,schemaFile);
-		Element elt = XmlTools.getChildElement(root);
+		Element elt = (Element) root.getChildren().get(0);
 		PointProcessor result = loadPointProcessorElement(elt);
 		return result;
 	}
 
 	private static PointProcessor loadPointProcessorElement(Element root)
 	{	PointProcessor result = null;
-		String type = root.getTagName();
+		String type = root.getName();
 
 		if(type.equals(XmlTools.ELT_POINTS))
 			result = loadPointsElement(root);
@@ -85,7 +87,7 @@ public class PointProcessorLoader
 
 	private static PointScores loadScoresElement(Element root)
 	{	// type
-		String str = root.getAttribute(XmlTools.ATT_TYPE);
+		String str = root.getAttribute(XmlTools.ATT_TYPE).getValue();
 		Score score  = Score.valueOf(str.toUpperCase().trim());
 		// result
 		PointScores result = new PointScores(score);
@@ -93,7 +95,7 @@ public class PointProcessorLoader
 	}
 	private static PointConstant loadConstantElement(Element root)
 	{	// value
-		String str = root.getAttribute(XmlTools.ATT_VALUE);
+		String str = root.getAttribute(XmlTools.ATT_VALUE).getValue();
 		float value = Float.valueOf(str);
 		// result
 		PointConstant result = new PointConstant(value);
@@ -102,7 +104,7 @@ public class PointProcessorLoader
 	
 	private static PointMaximum loadMaximumElement(Element root)
 	{	// source
-		Element src = XmlTools.getChildElement(root);
+		Element src = (Element) root.getChildren().get(0);
 		PointProcessor source = loadPointProcessorElement(src);
 		// result
 		PointMaximum result = new PointMaximum(source);
@@ -110,7 +112,7 @@ public class PointProcessorLoader
 	}
 	private static PointMinimum loadMinimumElement(Element root)
 	{	// source
-		Element src = XmlTools.getChildElement(root);
+		Element src = (Element) root.getChildren().get(0);
 		PointProcessor source = loadPointProcessorElement(src);
 		// result
 		PointMinimum result = new PointMinimum(source);
@@ -118,7 +120,7 @@ public class PointProcessorLoader
 	}
 	private static PointTotal loadTotalElement(Element root)
 	{	// source
-		Element src = XmlTools.getChildElement(root);
+		Element src = (Element) root.getChildren().get(0);
 		PointProcessor source = loadPointProcessorElement(src);
 		// result
 		PointTotal result = new PointTotal(source);
@@ -126,10 +128,10 @@ public class PointProcessorLoader
 	}
 	private static PointRankings loadRankingsElement(Element root)
 	{	// invert
-		String str = root.getAttribute(XmlTools.ATT_INVERT);
+		String str = root.getAttribute(XmlTools.ATT_INVERT).getValue();
 		boolean invert = Boolean.valueOf(str);
 		// source
-		Element src = XmlTools.getChildElement(root);
+		Element src = (Element) root.getChildren().get(0);
 		PointProcessor source = loadPointProcessorElement(src);
 		// result
 		PointRankings result = new PointRankings(source,invert);
@@ -137,25 +139,25 @@ public class PointProcessorLoader
 	}
 	private static PointDiscretize loadDiscretizeElement(Element root)
 	{	// source
-		Element src = XmlTools.getChildElement(root);
+		Element src = (Element) root.getChildren().get(0);
 		PointProcessor source = loadPointProcessorElement(src);
 		// thresholds
-		Element thresholdsElt = XmlTools.getChildElement(root,XmlTools.ELT_THRESHOLDS);
-		ArrayList<Element> thresholds = XmlTools.getChildElements(thresholdsElt,XmlTools.ELT_THRESHOLD);
+		Element thresholdsElt = root.getChild(XmlTools.ELT_THRESHOLDS);
+		List<Element> thresholds = thresholdsElt.getChildren(XmlTools.ELT_THRESHOLD);
 		float thresh[] = new float[thresholds.size()];
 		for(int i=0;i<thresh.length;i++)
 		{	Element temp = thresholds.get(i);
-			String str = temp.getAttribute(XmlTools.ATT_VALUE);
+			String str = temp.getAttribute(XmlTools.ATT_VALUE).getValue();
 			float value = Float.valueOf(str);
 			thresh[i] = value;
 		}
 		// values
-		Element valuesElt = XmlTools.getChildElement(root,XmlTools.ELT_VALUES);
-		ArrayList<Element> values = XmlTools.getChildElements(valuesElt,XmlTools.ELT_VALUE);
+		Element valuesElt = root.getChild(XmlTools.ELT_VALUES);
+		List<Element> values = valuesElt.getChildren(XmlTools.ELT_VALUE);
 		float vals[] = new float[values.size()];
 		for(int i=0;i<vals.length;i++)
 		{	Element temp = values.get(i);
-			String str = temp.getAttribute(XmlTools.ATT_VALUE);
+			String str = temp.getAttribute(XmlTools.ATT_VALUE).getValue();
 			float value = Float.valueOf(str);
 			vals[i] = value;
 		}
@@ -166,7 +168,7 @@ public class PointProcessorLoader
 	
 	private static PointAddition loadAdditionElement(Element root)
 	{	// left source
-		ArrayList<Element> sources = XmlTools.getChildElements(root);
+		List<Element> sources = root.getChildren();
 		Element leftSrc = sources.get(0);
 		PointProcessor leftSource = loadPointProcessorElement(leftSrc);
 		// right source
@@ -178,7 +180,7 @@ public class PointProcessorLoader
 	}
 	private static PointSubtraction loadSubtractionElement(Element root)
 	{	// left source
-		ArrayList<Element> sources = XmlTools.getChildElements(root);
+		List<Element> sources = root.getChildren();
 		Element leftSrc = sources.get(0);
 		PointProcessor leftSource = loadPointProcessorElement(leftSrc);
 		// right source
@@ -190,7 +192,7 @@ public class PointProcessorLoader
 	}
 	private static PointMultiplication loadMultiplicationElement(Element root)
 	{	// left source
-		ArrayList<Element> sources = XmlTools.getChildElements(root);
+		List<Element> sources = root.getChildren();
 		Element leftSrc = sources.get(0);
 		PointProcessor leftSource = loadPointProcessorElement(leftSrc);
 		// right source
@@ -202,7 +204,7 @@ public class PointProcessorLoader
 	}
 	private static PointDivision loadDivisionElement(Element root)
 	{	// left source
-		ArrayList<Element> sources = XmlTools.getChildElements(root);
+		List<Element> sources = root.getChildren();
 		Element leftSrc = sources.get(0);
 		PointProcessor leftSource = loadPointProcessorElement(leftSrc);
 		// right source

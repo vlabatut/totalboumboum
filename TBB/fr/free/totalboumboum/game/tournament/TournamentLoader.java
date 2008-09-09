@@ -3,10 +3,12 @@ package fr.free.totalboumboum.game.tournament;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.List;
 
 import javax.xml.parsers.ParserConfigurationException;
 
-import org.w3c.dom.Element;
+import org.jdom.Attribute;
+import org.jdom.Element;
 import org.xml.sax.SAXException;
 
 import fr.free.totalboumboum.data.configuration.Configuration;
@@ -32,8 +34,7 @@ public class TournamentLoader
 		dataFile = new File(folderPath+File.separator+FileTools.FILE_TOURNAMENT+FileTools.EXTENSION_DATA);
 		schemaFile = new File(schemaFolder+File.separator+FileTools.FILE_TOURNAMENT+FileTools.EXTENSION_SCHEMA);
 		Element root = XmlTools.getRootFromFile(dataFile,schemaFile);
-		AbstractTournament result = loadTournamentElement(folderPath,root);
-		result.setConfiguration(configuration);
+		AbstractTournament result = loadTournamentElement(folderPath,root,configuration);
 		return result;
 	}
 	public static AbstractTournament loadTournamentFromName(String name, Configuration configuration) throws ParserConfigurationException, SAXException, IOException, ClassNotFoundException
@@ -42,25 +43,25 @@ public class TournamentLoader
 		return result;
     }
 	
-	private static AbstractTournament loadTournamentElement(String path,Element root) throws ParserConfigurationException, SAXException, IOException
+	private static AbstractTournament loadTournamentElement(String path, Element root, Configuration configuration) throws ParserConfigurationException, SAXException, IOException
 	{	// init
 		AbstractTournament result = null;
 		Element element;
 		// name
-		element = XmlTools.getChildElement(root,XmlTools.ELT_GENERAL);
-		String name = element.getAttribute(XmlTools.ATT_NAME).trim();
+		element = root.getChild(XmlTools.ELT_GENERAL);
+		String name = element.getAttribute(XmlTools.ATT_NAME).getValue().trim();
 		// content
-		ArrayList<Element> elements = XmlTools.getChildElements(root);
+		List<Element> elements = root.getChildren();
 		element = elements.get(1);
-		String type = element.getTagName();
+		String type = element.getName();
 		if(type.equalsIgnoreCase(CUP))
-			result = CupTournamentLoader.loadTournamentElement(path,element);
+			result = CupTournamentLoader.loadTournamentElement(path,element,configuration);
 		else if(type.equalsIgnoreCase(LEAGUE))
-			result = LeagueTournamentLoader.loadTournamentElement(path,element);
+			result = LeagueTournamentLoader.loadTournamentElement(path,element,configuration);
 		else if(type.equalsIgnoreCase(SEQUENCE))
-			result = SequenceTournamentLoader.loadTournamentElement(path,element);
+			result = SequenceTournamentLoader.loadTournamentElement(path,element,configuration);
 		else if(type.equalsIgnoreCase(SINGLE))
-			result = SingleTournamentLoader.loadTournamentElement(path,element);
+			result = SingleTournamentLoader.loadTournamentElement(path,element,configuration);
 		result.setName(name);
 		return result;
 	}

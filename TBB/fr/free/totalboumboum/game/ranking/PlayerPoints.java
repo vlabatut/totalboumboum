@@ -21,6 +21,9 @@ public class PlayerPoints implements Comparable<PlayerPoints>
 
 	@Override
 	public int compareTo(PlayerPoints pp)
+	{	return compareTo(pp,true);
+	}
+	public int compareTo(PlayerPoints pp, boolean absolute)
 	{	int result = 0;
 		int index = 0;
 		//
@@ -38,11 +41,17 @@ public class PlayerPoints implements Comparable<PlayerPoints>
 		{	// if pp has more different points, it is greater
 			if(pp.points.size()>points.size())
 				result = -1;
-			else
+			else if(absolute) // only if we need an absolute order, we consider the player's name
 				result = -player.compareTo(pp.player); //on inverse car ce classement sera lui-même pris à rebours
 		}
 		//
 		return result;
+	}
+	public int compareToPoints(PlayerPoints pp)
+	{	return compareTo(pp,false);
+	}
+	public boolean equalsPoints(PlayerPoints pp)
+	{	return compareToPoints(pp) == 0;		
 	}
 
 	public String getPlayer()

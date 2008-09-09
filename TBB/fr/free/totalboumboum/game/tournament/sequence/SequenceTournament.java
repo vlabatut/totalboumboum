@@ -8,6 +8,7 @@ import javax.xml.parsers.ParserConfigurationException;
 
 import org.xml.sax.SAXException;
 
+import fr.free.totalboumboum.data.configuration.Configuration;
 import fr.free.totalboumboum.data.statistics.StatisticMatch;
 import fr.free.totalboumboum.data.statistics.StatisticRound;
 import fr.free.totalboumboum.game.match.Match;
@@ -18,14 +19,19 @@ import fr.free.totalboumboum.gui.game.match.statistics.MatchStatistics;
 public class SequenceTournament extends AbstractTournament
 {
 	
+	public SequenceTournament(Configuration configuration)
+	{	this.configuration = configuration; 
+	}
+	
 	/////////////////////////////////////////////////////////////////
 	// GAME				/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	private boolean tournamentOver = false;
 	
 	@Override
-	public void init() throws IllegalArgumentException, SecurityException, ParserConfigurationException, SAXException, IOException, IllegalAccessException, NoSuchFieldException
-	{	// NOTE vérifier si le nombre de joueurs sélectionnés correspond
+	public void init() throws IllegalArgumentException, SecurityException, ParserConfigurationException, SAXException, IOException, IllegalAccessException, NoSuchFieldException, ClassNotFoundException
+	{	begun = true;
+		// NOTE vérifier si le nombre de joueurs sélectionnés correspond
 		setProfiles(getConfiguration().getProfiles());
 		iterator = matches.iterator();
 		stats.init(this);
@@ -70,7 +76,6 @@ public class SequenceTournament extends AbstractTournament
 
 	public void addMatch(Match match)
 	{	matches.add(match);
-		match.setTournament(this);
 	}
 
 	@Override
