@@ -19,19 +19,19 @@ import fr.free.totalboumboum.game.tournament.AbstractTournament;
 
 public class Match
 {	
-
+	public Match(AbstractTournament tournament)
+	{	this.tournament = tournament;
+		configuration = tournament.getConfiguration();
+	}
+	
 	/////////////////////////////////////////////////////////////////
 	// TOURNAMENT		/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	private AbstractTournament tournament;
 	
-	public void setTournament(AbstractTournament tournament)
-	{	this.tournament = tournament;
-	}
-	
+    private Configuration configuration;
 	public Configuration getConfiguration()
-	{	Configuration result = tournament.getConfiguration();
-		return result;
+	{	return configuration;
 	}
 	
 	/////////////////////////////////////////////////////////////////
@@ -50,8 +50,7 @@ public class Match
 	{	if(!isOver())
 		{	// init round
 			LevelDescription levelDescription = iterator.next();
-			currentRound = new Round();
-			currentRound.setMatch(this);
+			currentRound = new Round(this);
 			currentRound.init(levelDescription);
 			rounds.add(currentRound);
 		}

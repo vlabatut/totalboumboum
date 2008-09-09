@@ -22,7 +22,7 @@ public abstract class AbstractTournament
 	/////////////////////////////////////////////////////////////////
 	protected boolean begun = false;
 	
-	public abstract void init() throws IllegalArgumentException, SecurityException, ParserConfigurationException, SAXException, IOException, IllegalAccessException, NoSuchFieldException;
+	public abstract void init() throws IllegalArgumentException, SecurityException, ParserConfigurationException, SAXException, IOException, IllegalAccessException, NoSuchFieldException, ClassNotFoundException;
 	public abstract void progress();
 	public abstract void finish();
 	public abstract boolean isOver();
@@ -31,9 +31,6 @@ public abstract class AbstractTournament
 	
 	public boolean hasBegun()
 	{	return begun;	
-	}
-	public void begin()
-	{	begun = true;
 	}
 
 	/////////////////////////////////////////////////////////////////
@@ -45,11 +42,8 @@ public abstract class AbstractTournament
 	/////////////////////////////////////////////////////////////////
 	// CONFIGURATION	/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	private Configuration configuration; //NOTE a virer quand on aura mis une référence vers de la GUI (?)
+	protected Configuration configuration; //NOTE a virer quand on aura mis une référence vers de la GUI (?)
 	
-	public void setConfiguration(Configuration configuration)
-	{	this.configuration = configuration;
-	}
 	public Configuration getConfiguration()
 	{	return configuration;	
 	}
@@ -61,7 +55,7 @@ public abstract class AbstractTournament
 	protected int minPlayerNumber;
 	protected int maxPlayerNumber;
 
-	public void setProfiles(ArrayList<String> profilesNames) throws IllegalArgumentException, SecurityException, ParserConfigurationException, SAXException, IOException, IllegalAccessException, NoSuchFieldException
+	public void setProfiles(ArrayList<String> profilesNames) throws IllegalArgumentException, SecurityException, ParserConfigurationException, SAXException, IOException, IllegalAccessException, NoSuchFieldException, ClassNotFoundException
 	{	Iterator<String> i = profilesNames.iterator();
 		while(i.hasNext())
 		{	String name = i.next();

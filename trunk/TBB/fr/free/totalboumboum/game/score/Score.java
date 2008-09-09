@@ -36,33 +36,6 @@ public enum Score
 		}
 		return result;
 	}
-	public long[] init(StatisticRound stats)
-	{	long[] result = new long[stats.getPlayers().size()];
-		switch(this)
-		{	case BOMBS:
-				result = initBombs(stats);
-				break;
-			case CROWNS:
-				result = initCrowns(stats);
-				break;
-			case DEATHS:
-				result = initDeaths(stats);
-				break;
-			case ITEMS:
-				result = initItems(stats);
-				break;
-			case KILLS:
-				result = initKills(stats);
-				break;
-			case PAINTINGS:
-				result = initPaintings(stats);
-				break;
-			case TIME:
-				result = initTime(stats);
-				break;
-		}
-		return result;
-	}
 
 	public long[] processBombs(StatisticRound stats, StatisticEvent event)
 	{	// init
@@ -73,12 +46,6 @@ public enum Score
 		{	int index = players.indexOf(event.getActor());
 			result[index] = result[index] + 1;
 		}
-		return result;
-	}
-	public long[] initBombs(StatisticRound stats)
-	{	long result[] = new long[stats.getPlayers().size()];
-		for(int i=0;i<result.length;i++)
-			result[i] = 0;
 		return result;
 	}
 
@@ -97,12 +64,6 @@ public enum Score
 		}
 		return result;
 	}
-	public long[] initCrowns(StatisticRound stats)
-	{	long result[] = new long[stats.getPlayers().size()];
-		for(int i=0;i<result.length;i++)
-			result[i] = 0;
-		return result;
-	}
 
 	public long[] processDeaths(StatisticRound stats, StatisticEvent event)
 	{	// init
@@ -116,12 +77,6 @@ public enum Score
 		}
 		return result;
 	}
-	public long[] initDeaths(StatisticRound stats)
-	{	long result[] = new long[stats.getPlayers().size()];
-		for(int i=0;i<result.length;i++)
-			result[i] = 0;
-		return result;
-	}
 
 	public long[] processItems(StatisticRound stats, StatisticEvent event)
 	{	// init
@@ -132,12 +87,6 @@ public enum Score
 		{	int index = players.indexOf(event.getActor());
 			result[index] = result[index] + 1;
 		}
-		return result;
-	}
-	public long[] initItems(StatisticRound stats)
-	{	long result[] = new long[stats.getPlayers().size()];
-		for(int i=0;i<result.length;i++)
-			result[i] = 0;
 		return result;
 	}
 
@@ -153,12 +102,6 @@ public enum Score
 				result[index] = result[index] + 1;
 			}
 		}
-		return result;
-	}
-	public long[] initKills(StatisticRound stats)
-	{	long result[] = new long[stats.getPlayers().size()];
-		for(int i=0;i<result.length;i++)
-			result[i] = 0;
 		return result;
 	}
 
@@ -180,13 +123,8 @@ public enum Score
 		}
 		return result;
 	}
-	public long[] initPaintings(StatisticRound stats)
-	{	long result[] = new long[stats.getPlayers().size()];
-		for(int i=0;i<result.length;i++)
-			result[i] = 0;
-		return result;
-	}
 
+//TODO trouver un moyen de gérer TIME en temps réel...
 	public long[] processTime(StatisticRound stats, StatisticEvent event)
 	{	// init
 		ArrayList<String> players = stats.getPlayers();
@@ -196,14 +134,8 @@ public enum Score
 		if(event.getAction() == StatisticAction.KILL_PLAYER)
 		{	int index = players.indexOf(event.getTarget());
 			long time = event.getTime();
-			result[index] = time;
+			result[index] = -time;
 		}
-		return result;
-	}
-	public long[] initTime(StatisticRound stats)
-	{	long result[] = new long[stats.getPlayers().size()];
-		for(int i=0;i<result.length;i++)
-			result[i] = Long.MAX_VALUE;
 		return result;
 	}
 }

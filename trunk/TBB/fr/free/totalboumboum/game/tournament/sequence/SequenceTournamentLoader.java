@@ -4,12 +4,15 @@ import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.List;
 
 import javax.xml.parsers.ParserConfigurationException;
 
-import org.w3c.dom.Element;
+import org.jdom.Attribute;
+import org.jdom.Element;
 import org.xml.sax.SAXException;
 
+import fr.free.totalboumboum.data.configuration.Configuration;
 import fr.free.totalboumboum.game.match.Match;
 import fr.free.totalboumboum.game.match.MatchLoader;
 import fr.free.totalboumboum.game.point.PointProcessor;
@@ -20,17 +23,17 @@ import fr.free.totalboumboum.tools.XmlTools;
 
 public class SequenceTournamentLoader
 {	
-	public static SequenceTournament loadTournamentElement(String folder, Element root) throws ParserConfigurationException, SAXException, IOException
-	{	SequenceTournament result = new SequenceTournament();
+	public static SequenceTournament loadTournamentElement(String folder, Element root, Configuration configuration) throws ParserConfigurationException, SAXException, IOException
+	{	SequenceTournament result = new SequenceTournament(configuration);
 		Element element;
 		// matches
-		element = XmlTools.getChildElement(root,XmlTools.ELT_MATCHES);
+		element = root.getChild(XmlTools.ELT_MATCHES);
 		loadMatchesElement(element,folder,result);
 		return result;
 	}
 	
 	private static void loadMatchesElement(Element root, String folder, SequenceTournament result) throws ParserConfigurationException, SAXException, IOException
-	{	ArrayList<Element> matches = XmlTools.getChildElements(root, XmlTools.ELT_MATCH);
+	{	List<Element> matches = root.getChildren(XmlTools.ELT_MATCH);
 		Iterator<Element> i = matches.iterator();
 		while(i.hasNext())
 		{	Element temp = i.next();
@@ -42,39 +45,39 @@ public class SequenceTournamentLoader
     {	Match match;
 		Element element;
 		// location
-		element = XmlTools.getChildElement(root,XmlTools.ELT_LOCATION);
-		match = loadLocationElement(element,folder);
+		element = root.getChild(XmlTools.ELT_LOCATION);
+		match = loadLocationElement(element,folder,result);
 		// points
-		element = XmlTools.getChildElement(root,XmlTools.ELT_POINTS);
+		element = root.getChild(XmlTools.ELT_POINTS);
 		loadPointsElement(element,folder,match);
 		// result
 		result.addMatch(match);
 	}
 
-	private static Match loadLocationElement(Element root, String folder) throws ParserConfigurationException, SAXException, IOException
+	private static Match loadLocationElement(Element root, String folder, SequenceTournament tournament) throws ParserConfigurationException, SAXException, IOException
 	{	Match result;
 		// local
-		String localStr = root.getAttribute(XmlTools.ATT_LOCAL).trim();
+		String localStr = root.getAttribute(XmlTools.ATT_LOCAL).getValue().trim();
 		boolean local = Boolean.valueOf(localStr);
 		// name
-		String name = root.getAttribute(XmlTools.ATT_NAME);
+		String name = root.getAttribute(XmlTools.ATT_NAME).getValue();
 		// loading
 		if(local)
 		{	folder = folder+File.separator+name;
-			result = MatchLoader.loadMatchFromFolderPath(folder);
+			result = MatchLoader.loadMatchFromFolderPath(folder,tournament);
 		}
 		else
-			result = MatchLoader.loadMatchFromName(name);
+			result = MatchLoader.loadMatchFromName(name,tournament);
 		return result;
 	}
 	
 	private static void loadPointsElement(Element root, String folder, Match result) throws ParserConfigurationException, SAXException, IOException
 	{	PointProcessor pp;
 		// local
-		String localStr = root.getAttribute(XmlTools.ATT_LOCAL).trim();
+		String localStr = root.getAttribute(XmlTools.ATT_LOCAL).getValue().trim();
 		boolean local = Boolean.valueOf(localStr);
 		// name
-		String name = root.getAttribute(XmlTools.ATT_NAME);
+		String name = root.getAttribute(XmlTools.ATT_NAME).getValue();
 		// loading
 		if(local)
 		{	folder = folder+File.separator+name;
