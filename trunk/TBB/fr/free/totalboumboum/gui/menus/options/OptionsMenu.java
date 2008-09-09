@@ -8,6 +8,7 @@ import javax.swing.Box;
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
 
+import fr.free.totalboumboum.gui.SwingTools;
 import fr.free.totalboumboum.gui.generic.MenuContainer;
 import fr.free.totalboumboum.gui.generic.MenuPanel;
 import fr.free.totalboumboum.gui.generic.SimpleMenuPanel;
@@ -32,10 +33,10 @@ public class OptionsMenu extends SimpleMenuPanel
 		
 		// buttons
 		add(Box.createVerticalGlue());
-		buttonGamePlay = GuiTools.createVerticalMenuButton(GuiTools.OPTIONS_MENU_BUTTON_GAMEPLAY,this,getConfiguration());
-		buttonVideo = GuiTools.createVerticalMenuButton(GuiTools.OPTIONS_MENU_BUTTON_VIDEO,this,getConfiguration());
-		add(Box.createRigidArea(new Dimension(0,getConfiguration().getVerticalMenuButtonSpace())));
-		buttonBack = GuiTools.createVerticalMenuButton(GuiTools.OPTIONS_MENU_BUTTON_BACK,this,getConfiguration());
+		buttonGamePlay = SwingTools.createPrincipalVerticalMenuButton(GuiTools.OPTIONS_MENU_BUTTON_GAMEPLAY,this,getConfiguration());
+		buttonVideo = SwingTools.createPrincipalVerticalMenuButton(GuiTools.OPTIONS_MENU_BUTTON_VIDEO,this,getConfiguration());
+		add(Box.createRigidArea(new Dimension(0,SwingTools.getSize(SwingTools.VERTICAL_MENU_BUTTON_SPACE))));
+		buttonBack = SwingTools.createPrincipalVerticalMenuButton(GuiTools.OPTIONS_MENU_BUTTON_BACK,this,getConfiguration());
 		add(Box.createVerticalGlue());		
 	}
 	

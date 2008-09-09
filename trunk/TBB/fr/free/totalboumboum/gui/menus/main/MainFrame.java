@@ -1,6 +1,7 @@
 package fr.free.totalboumboum.gui.menus.main;
 
 import javax.swing.JFrame;
+import javax.swing.SwingUtilities;
 import javax.xml.parsers.ParserConfigurationException;
 
 import org.xml.sax.SAXException;
@@ -9,6 +10,7 @@ import fr.free.totalboumboum.data.configuration.Configuration;
 import fr.free.totalboumboum.data.configuration.ConfigurationLoader;
 import fr.free.totalboumboum.data.configuration.ConfigurationSaver;
 import fr.free.totalboumboum.data.configuration.GameConstants;
+import fr.free.totalboumboum.gui.SwingTools;
 import fr.free.totalboumboum.gui.generic.MenuContainer;
 import fr.free.totalboumboum.gui.generic.MenuPanel;
 import fr.free.totalboumboum.tools.FileTools;
@@ -31,15 +33,11 @@ public class MainFrame extends JFrame implements WindowListener,MenuContainer
 
 	public MainFrame() throws ParserConfigurationException, SAXException, IOException, IllegalArgumentException, SecurityException, IllegalAccessException, NoSuchFieldException, ClassNotFoundException
 	{	super("TBB v."+GameConstants.VERSION);
-		// configuration
+		// init
 		XmlTools.init();
 		this.configuration = loadConfiguration();
 		// frame
 		addWindowListener(this);
-		// panel
-		mainMenuPanel = new MainMenu(this,null);
-		currentPanel = mainMenuPanel;
-		getContentPane().add(mainMenuPanel, BorderLayout.CENTER);
 		// icon
 		String iconPath = FileTools.getResourcesPath()+File.separator+"misc"+File.separator+"icon.png";
 		Image icon = Toolkit.getDefaultToolkit().getImage(iconPath);
@@ -48,6 +46,24 @@ public class MainFrame extends JFrame implements WindowListener,MenuContainer
 		setResizable(false);
 		setVisible(true);
 		pack();
+
+		final MainFrame f = this;
+		SwingUtilities.invokeLater(new Runnable()
+		{	public void run()
+			{	// end init
+				SwingTools.init(configuration,getGraphics());
+				// panel
+				try
+				{	mainMenuPanel = new MainMenu(f,null);
+				}
+				catch (Exception e)
+				{	e.printStackTrace();
+				}
+				currentPanel = mainMenuPanel;
+				getContentPane().add(mainMenuPanel, BorderLayout.CENTER);
+				pack();
+			}
+		});		
 	}
 
 	// ----------------- window listener methods -------------

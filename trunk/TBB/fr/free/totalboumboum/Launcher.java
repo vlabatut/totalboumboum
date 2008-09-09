@@ -547,7 +547,8 @@ public class Launcher
 
 	/*
 	 * A FAIRE :
-	 * 0) accélérer le chargement des rounds
+	 * 0) revoir le layout des résultats
+	 * 1) mettre une barre d'évolution pdt le chargement du niveau
 	 * x) redescendre les stats dans loop, et gestion de fin de partie, puis synchroniser les stats dans round
 	 * 1) définir les présentations des rounds
 	 * 2) passer à un système gérant plusieurs pointProcesseurs
