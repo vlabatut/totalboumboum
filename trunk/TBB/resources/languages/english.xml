@@ -71,13 +71,16 @@
 	<text name="TournamentButtonDescriptionTooltip" value="See the description of the current tournament" />
 
 	<text name="TournamentButtonFinish" value="Finish" />
-	<text name="TournamentButtonFinishMatchTooltip" value="Finish the current tournament and go back to the main menu" />
+	<text name="TournamentButtonFinishMatchTooltip" value="Finish the current tournament and go back to the tournament menu" />
+
+	<text name="TournamentButtonMenu" value="Menu" />
+	<text name="TournamentButtonMenuTooltip" value="Go back to the tournament menu" />
 
 	<text name="TournamentButtonNextMatch" value="Next match" />
 	<text name="TournamentButtonNextMatchTooltip" value="Go to the next match" />
 
 	<text name="TournamentButtonQuit" value="Quit" />
-	<text name="TournamentButtonQuitTooltip" value="Quit the current tournament" />
+	<text name="TournamentButtonQuitTooltip" value="Go back to the main menu" />
 	
 	<text name="TournamentButtonResults" value="Results" />
 	<text name="TournamentButtonResultsTooltip" value="See the current results of this tournament" />
@@ -131,5 +134,17 @@
 
 	<text name="RoundButtonStatistics" value="Statistics" />
 	<text name="RoundButtonStatisticsTooltip" value="See the detailed statistics of the current round" />
+
+<!-- GAME PANEL -->
+
+	<text name="GameTitleTournamentDescription" value="Tournament description" />
+	<text name="GameTitleTournamentResults" value="Tournament results" />
+	<text name="GameTitleTournamentStatistics" value="Tournament statistics" />
+	<text name="GameTitleMatchDescription" value="Match description" />
+	<text name="GameTitleMatchResults" value="Match results" />
+	<text name="GameTitleMatchStatistics" value="Match statistics" />
+	<text name="GameTitleRoundDescription" value="Round description" />
+	<text name="GameTitleRoundResults" value="Round results" />
+	<text name="GameTitleRoundStatistics" value="Round statistics" />
 	
 </language>

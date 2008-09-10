@@ -40,6 +40,7 @@ public class RoundResults extends InnerDataPanel
 	private static final long serialVersionUID = 1L;
 
 	private JPanel resultsPanel;
+	private JLabel title;
 	
 	public RoundResults(SplitMenuPanel container)
 	{	super(container);
@@ -56,8 +57,8 @@ public class RoundResults extends InnerDataPanel
 		
 		add(Box.createVerticalGlue());
 		// title
-		{	JLabel title = new JLabel("Round Results");
-			Font font = getConfiguration().getFont().deriveFont(30f);
+		{	title = new JLabel(getConfiguration().getLanguage().getText(GuiTools.GAME_TITLE_ROUND_RESULTS));
+			Font font = getConfiguration().getFont().deriveFont((float)SwingTools.getSize(SwingTools.GAME_TITLE_FONT_SIZE));
 			title.setForeground(Color.BLACK);
 			title.setBackground(Color.BLUE);
 			title.setOpaque(true);
@@ -65,16 +66,16 @@ public class RoundResults extends InnerDataPanel
 			title.setAlignmentX(Component.CENTER_ALIGNMENT);
 			add(title);
 		}
-		add(Box.createRigidArea(new Dimension(0,25)));
+		add(Box.createVerticalGlue());
 		// results panel
 		{	Round round = getConfiguration().getTournament().getCurrentMatch().getCurrentRound();
 			int playerNumber = round.getProfiles().size();
 			int lines = playerNumber+1;
 			int cols = 3;			
-			GridLayout layout = new GridLayout(lines,cols,10,10);
-//SpringLayout layout = new SpringLayout();			
+//			GridLayout layout = new GridLayout(lines,cols,10,10);
+SpringLayout layout = new SpringLayout();			
 			resultsPanel = new JPanel(layout);			
-			Dimension dim = new Dimension((int)(width*0.9),(int)(height*0.7));
+			Dimension dim = new Dimension(SwingTools.getSize(SwingTools.GAME_RESULTS_PANEL_WIDTH),SwingTools.getSize(SwingTools.GAME_RESULTS_PANEL_HEIGHT));
 			resultsPanel.setPreferredSize(dim);
 			resultsPanel.setMinimumSize(dim);
 			resultsPanel.setMaximumSize(dim);
@@ -82,7 +83,7 @@ public class RoundResults extends InnerDataPanel
 			for(int i=0;i<lines;i++)
 				for(int j=0;j<cols;j++)
 				{	JLabel lbl = new JLabel("N/A");
-					Font font = getConfiguration().getFont().deriveFont(20f);
+					Font font = getConfiguration().getFont().deriveFont((float)SwingTools.getSize(SwingTools.GAME_RESULTS_FONT_SIZE));
 					lbl.setFont(font);
 					lbl.setHorizontalAlignment(SwingConstants.CENTER);
 					lbl.setBackground(new Color(0,0,0,128));
@@ -93,13 +94,17 @@ public class RoundResults extends InnerDataPanel
 			// titles
 			JLabel lbl;
 			lbl = (JLabel)resultsPanel.getComponent(0);
-			lbl.setText("Player");
+			lbl.setOpaque(false);
+			lbl.setText("");//			lbl.setText("Player");
+			lbl.setPreferredSize(new Dimension(SwingTools.getSize(SwingTools.GAME_LABEL_PORTRAIT_HEIGHT),SwingTools.getSize(SwingTools.GAME_LABEL_PORTRAIT_HEIGHT)));
+			lbl.setMaximumSize(new Dimension(SwingTools.getSize(SwingTools.GAME_LABEL_PORTRAIT_HEIGHT),SwingTools.getSize(SwingTools.GAME_LABEL_PORTRAIT_HEIGHT)));
+			lbl.setMinimumSize(new Dimension(SwingTools.getSize(SwingTools.GAME_LABEL_PORTRAIT_HEIGHT),SwingTools.getSize(SwingTools.GAME_LABEL_PORTRAIT_HEIGHT)));
 			lbl = (JLabel)resultsPanel.getComponent(1);
 			lbl.setText("Name");
 			lbl = (JLabel)resultsPanel.getComponent(2);
 			lbl.setText("Points");
 			updateData();
-//SpringUtilities.makeCompactGrid(resultsPanel,lines,cols,10,10,10,10);
+SpringUtilities.makeCompactGrid(resultsPanel,lines,cols,0,0,SwingTools.getSize(SwingTools.GAME_RESULTS_MARGIN_SIZE),SwingTools.getSize(SwingTools.GAME_RESULTS_MARGIN_SIZE));
 			add(resultsPanel);
 		}
 		add(Box.createVerticalGlue());
@@ -130,7 +135,8 @@ public class RoundResults extends InnerDataPanel
 			// portrait
 			JLabel portraitLabel = (JLabel)resultsPanel.getComponent(k++);
 			BufferedImage image = profile.getPortraits().getOutgamePortrait(Portraits.OUTGAME_HEAD);
-			double zoom = portraitLabel.getSize().height/(double)image.getHeight();
+			double zoom = SwingTools.getSize(SwingTools.GAME_LABEL_PORTRAIT_HEIGHT)/(double)image.getHeight();
+//			double zoom = portraitLabel.getSize().height/(double)image.getHeight();
 if(zoom!=0)
 	image = ImageTools.resize(image,zoom,true);
 			ImageIcon icon = new ImageIcon(image);

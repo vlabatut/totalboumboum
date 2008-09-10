@@ -552,8 +552,7 @@ public class Launcher
 
 	/*
 	 * A FAIRE :
-	 * 0) encore un pb de fuite de mémoire (?) après 3 parties...
-	 * 0) revoir les icones en carrés
+	 * 0) revoir les icones en carrés + plus grandes + play en rouge
 	 * 0) revoir le layout des résultats
 	 * 1) mettre une barre d'évolution pdt le chargement du niveau
 	 * x) redescendre les stats dans loop, et gestion de fin de partie, puis synchroniser les stats dans round

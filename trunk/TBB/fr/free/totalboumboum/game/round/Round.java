@@ -73,7 +73,6 @@ public class Round
 	{	match.currentRoundOver();
 		panel.roundOver();
 		// loop
-		loop.finish();
 		loop = null;
 	}
 	
@@ -128,7 +127,7 @@ public class Round
 	{	if(!roundOver)
 		{	remainingPlayers --;
 			playersInGame.set(index,new Boolean(false));
-			if(remainingPlayers<2 && getPlayMode()==PlayMode.SURVIVAL)
+			if(remainingPlayers<2 /*&& getPlayMode()==PlayMode.SURVIVAL*/)
 			{	roundOver = true;
 				stats.finish(loop.getTotalTime());
 				stats.computePoints(getPointProcessor());

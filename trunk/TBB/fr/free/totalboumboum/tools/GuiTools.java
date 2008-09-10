@@ -31,6 +31,7 @@ public class GuiTools
 	public static final String TOURNAMENT_BUTTON_CURRENT_MATCH = "TournamentButtonCurrentMatch";
 	public static final String TOURNAMENT_BUTTON_DESCRIPTION = "TournamentButtonDescription";
 	public static final String TOURNAMENT_BUTTON_FINISH = "TournamentButtonFinish";
+	public static final String TOURNAMENT_BUTTON_MENU = "TournamentButtonMenu";
 	public static final String TOURNAMENT_BUTTON_NEXT_MATCH = "TournamentButtonNextMatch";
 	public static final String TOURNAMENT_BUTTON_RESULTS = "TournamentButtonResults";
 	public static final String TOURNAMENT_BUTTON_STATISTICS = "TournamentButtonStatistics";
@@ -53,4 +54,16 @@ public class GuiTools
 	public static final String ROUND_BUTTON_PLAY = "RoundButtonPlay";
 	public static final String ROUND_BUTTON_RESULTS = "RoundButtonResults";
 	public static final String ROUND_BUTTON_STATISTICS = "RoundButtonStatistics";
+	
+	// GAME PANEL
+	public static final String GAME_TITLE_TOURNAMENT_DESCRIPTION = "GameTitleTournamentDescription";
+	public static final String GAME_TITLE_TOURNAMENT_RESULTS = "GameTitleTournamentResults";
+	public static final String GAME_TITLE_TOURNAMENT_STATISTICS = "GameTitleTournamentStatistics";
+	public static final String GAME_TITLE_MATCH_DESCRIPTION = "GameTitleMatchDescription";
+	public static final String GAME_TITLE_MATCH_RESULTS = "GameTitleMatchResults";
+	public static final String GAME_TITLE_MATCH_STATISTICS = "GameTitleMatchStatistics";
+	public static final String GAME_TITLE_ROUND_DESCRIPTION = "GameTitleRoundDescription";
+	public static final String GAME_TITLE_ROUND_RESULTS = "GameTitleRoundResults";
+	public static final String GAME_TITLE_ROUND_STATISTICS = "GameTitleRoundStatistics";
+	
 }
