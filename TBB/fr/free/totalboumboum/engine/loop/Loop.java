@@ -276,7 +276,8 @@ loopOver = true;
 */		
 		}
 		round.loopOver();
-		panel.loopOver();	
+		panel.loopOver();
+		finish();
 	}
 
 	private void update()

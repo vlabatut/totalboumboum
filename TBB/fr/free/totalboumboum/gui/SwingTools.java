@@ -27,11 +27,8 @@ public class SwingTools
 {	// buttons
 	public static final String MENU_BUTTON_HEIGHT = "MENU_BUTTON_HEIGHT";
 	public static final String HORIZONTAL_MENU_BUTTON_WIDTH = "HORIZONTAL_MENU_BUTTON_WIDTH";
-	public static final String HORIZONTAL_MENU_BUTTON_SPACE = "HORIZONTAL_MENU_BUTTON_SPACE";
 	public static final String PRINCIPAL_VERTICAL_MENU_BUTTON_WIDTH = "PRINCIPAL_VERTICAL_MENU_BUTTON_WIDTH";
 	public static final String SECONDARY_VERTICAL_MENU_BUTTON_WIDTH = "SECONDARY_VERTICAL_MENU_BUTTON_WIDTH";
-	public static final String VERTICAL_MENU_BUTTON_SPACE = "VERTICAL_MENU_BUTTON_SPACE";
-	public static final String MENU_BUTTON_FONT_SIZE = "MENU_BUTTON_FONT_SIZE";
 	// panels
 	public static final String HORIZONTAL_SPLIT_MENU_PANEL_HEIGHT = "HORIZONTAL_SPLIT_MENU_PANEL_HEIGHT";
 	public static final String HORIZONTAL_SPLIT_MENU_PANEL_WIDTH = "HORIZONTAL_SPLIT_MENU_PANEL_WIDTH";
@@ -41,6 +38,22 @@ public class SwingTools
 	public static final String VERTICAL_SPLIT_MENU_PANEL_WIDTH = "VERTICAL_SPLIT_MENU_PANEL_WIDTH";
 	public static final String VERTICAL_SPLIT_DATA_PANEL_HEIGHT = "VERTICAL_SPLIT_DATA_PANEL_HEIGHT";
 	public static final String VERTICAL_SPLIT_DATA_PANEL_WIDTH = "VERTICAL_SPLIT_DATA_PANEL_WIDTH";
+	public static final String GAME_RESULTS_PANEL_HEIGHT = "GAME_RESULTS_PANEL_HEIGHT";
+	public static final String GAME_RESULTS_PANEL_WIDTH = "GAME_RESULTS_PANEL_WIDTH";
+	// fonts
+	public static final String MENU_BUTTON_FONT_SIZE = "MENU_BUTTON_FONT_SIZE";
+	public static final String GAME_TITLE_FONT_SIZE = "GAME_TITLE_FONT_SIZE";
+	public static final String GAME_RESULTS_FONT_SIZE = "GAME_RESULTS_FONT_SIZE";
+	// spaces
+	public static final String VERTICAL_MENU_BUTTON_SPACE = "VERTICAL_MENU_BUTTON_SPACE";
+	public static final String HORIZONTAL_MENU_BUTTON_SPACE = "HORIZONTAL_MENU_BUTTON_SPACE";
+	public static final String GAME_TITLE_MARGIN_SIZE = "GAME_MARGIN_SIZE";
+	public static final String GAME_RESULTS_MARGIN_SIZE = "GAME_RESULTS_MARGIN_SIZE";
+	// labels
+	public static final String GAME_LABEL_TITLE_HEIGHT = "GAME_LABEL_TITLE_HEIGHT";
+	public static final String GAME_LABEL_PORTRAIT_HEIGHT = "GAME_LABEL_PORTRAIT_HEIGHT";
+	public static final String GAME_RESULTS_LABEL_LINE_HEIGHT = "GAME_RESULTS_LABEL_LINE_HEIGHT";
+		
 	// sizes
 	private static final HashMap<String,Integer> sizes = new HashMap<String,Integer>();
 	
@@ -54,6 +67,7 @@ public class SwingTools
 	public static final String GAME_ICON_STATS = "GAME_ICON_STATS";
 	// icons
 	private static final HashMap<String,BufferedImage> icons = new HashMap<String,BufferedImage>();
+	
 
 	public static void init(Configuration configuration, Graphics g)
 	{	// init
@@ -71,117 +85,140 @@ public class SwingTools
 		int secondaryVerticalMenuButtonWIdth = (int)(width*0.25);
 		sizes.put(SECONDARY_VERTICAL_MENU_BUTTON_WIDTH,secondaryVerticalMenuButtonWIdth);
 		sizes.put(VERTICAL_MENU_BUTTON_SPACE,(int)(height*0.025));
-		// font
-		int menuButtonFontSize = 0;
-		int fheight;
-		do
-		{	menuButtonFontSize++;
-			Font font = configuration.getFont().deriveFont((float)menuButtonFontSize);
-			g.setFont(font);
-			FontMetrics metrics = g.getFontMetrics(font);
-			fheight = metrics.getHeight();
-		}
-		while(fheight<menuButtonHeight*0.9);
-		sizes.put(MENU_BUTTON_FONT_SIZE, menuButtonFontSize);
 		
-		// panels
+		// menu panels
 		int horizontalSplitMenuPanelHeight = menuButtonHeight; 
 		sizes.put(HORIZONTAL_SPLIT_MENU_PANEL_HEIGHT,horizontalSplitMenuPanelHeight);
 		sizes.put(HORIZONTAL_SPLIT_MENU_PANEL_WIDTH,width);
-		sizes.put(HORIZONTAL_SPLIT_DATA_PANEL_HEIGHT,height-horizontalSplitMenuPanelHeight);
-		sizes.put(HORIZONTAL_SPLIT_DATA_PANEL_WIDTH,width);
+		int horizontalSplitDataPanelHeight = height-horizontalSplitMenuPanelHeight; 
+		sizes.put(HORIZONTAL_SPLIT_DATA_PANEL_HEIGHT,horizontalSplitDataPanelHeight);
+		int horizontalSplitDataPanelWidth = width; 
+		sizes.put(HORIZONTAL_SPLIT_DATA_PANEL_WIDTH,horizontalSplitDataPanelHeight);
 		sizes.put(VERTICAL_SPLIT_MENU_PANEL_HEIGHT,height);
 		int verticalSplitMenuPanelWidth = secondaryVerticalMenuButtonWIdth;
 		sizes.put(VERTICAL_SPLIT_MENU_PANEL_WIDTH,verticalSplitMenuPanelWidth);
 		sizes.put(VERTICAL_SPLIT_DATA_PANEL_HEIGHT,height);
 		sizes.put(VERTICAL_SPLIT_DATA_PANEL_WIDTH,width-verticalSplitMenuPanelWidth);
+		// font
+		int menuButtonFontSize = getFontSize(menuButtonHeight*0.9,configuration,g);
+		sizes.put(MENU_BUTTON_FONT_SIZE, menuButtonFontSize);
+		
+		// font
+		int gameTitleFontSize = (int)(menuButtonFontSize*1.2);
+		sizes.put(GAME_TITLE_FONT_SIZE, gameTitleFontSize);
+		// labels
+		int gameLabelTitleHeight;
+		{	Font font = configuration.getFont().deriveFont((float)gameTitleFontSize);
+			g.setFont(font);
+			FontMetrics metrics = g.getFontMetrics(font);
+			gameLabelTitleHeight = metrics.getHeight();
+		}
+		sizes.put(GAME_LABEL_TITLE_HEIGHT, gameLabelTitleHeight);
+		// game panel
+		int gameTitleMarginSize = (int)(width*0.025);
+		sizes.put(GAME_TITLE_MARGIN_SIZE,gameTitleMarginSize);
+		int gameResultPanelHeight = horizontalSplitDataPanelHeight-3*gameTitleMarginSize-gameLabelTitleHeight;
+		sizes.put(GAME_RESULTS_PANEL_HEIGHT,gameResultPanelHeight);
+		int gameResultPanelWidth = horizontalSplitDataPanelWidth-2*gameTitleMarginSize;
+		sizes.put(GAME_RESULTS_PANEL_WIDTH,gameResultPanelWidth);
+		int gameResultsMarginSize = (int)(height*0.005);
+		sizes.put(GAME_RESULTS_MARGIN_SIZE,gameResultsMarginSize);
+		int gameLabelPortraitHeight = (gameResultPanelHeight-15*gameResultsMarginSize)/16;
+		sizes.put(GAME_LABEL_PORTRAIT_HEIGHT,gameLabelPortraitHeight);
+		int gameResultFontSize = getFontSize(gameLabelPortraitHeight*1.1, configuration, g);
+		sizes.put(GAME_RESULTS_FONT_SIZE,gameResultFontSize);
 		
 		// icons
 		BufferedImage absent = ImageTools.getAbsentImage(64,64);
 		BufferedImage image;
 		String folder = FileTools.getIconsPath()+File.separator;
-		try
-		{	image = ImageTools.loadImage(folder+"description.png",null);
+		{
+			try
+			{	image = ImageTools.loadImage(folder+"description.png",null);
+			}
+			catch (IOException e)
+			{	image = absent;
+			}
+			icons.put(GuiTools.TOURNAMENT_BUTTON_DESCRIPTION,image);
+			icons.put(GuiTools.MATCH_BUTTON_DESCRIPTION,image);
+			icons.put(GuiTools.ROUND_BUTTON_DESCRIPTION,image);
 		}
-		catch (IOException e)
-		{	image = absent;
+		{	try
+			{	image = ImageTools.loadImage(folder+"left_blue.png",null);
+			}
+			catch (IOException e)
+			{	image = absent;
+			}
+			icons.put(GuiTools.TOURNAMENT_BUTTON_MENU,image);
+			icons.put(GuiTools.MATCH_BUTTON_CURRENT_TOURNAMENT,image);
+			icons.put(GuiTools.ROUND_BUTTON_CURRENT_MATCH,image);
 		}
-		icons.put(GuiTools.TOURNAMENT_BUTTON_DESCRIPTION,image);
-		icons.put(GuiTools.MATCH_BUTTON_DESCRIPTION,image);
-		icons.put(GuiTools.ROUND_BUTTON_DESCRIPTION,image);
-		try
-		{	image = ImageTools.loadImage(folder+"left_blue.png",null);
+		{	try
+			{	image = ImageTools.loadImage(folder+"left_red.png",null);
+			}
+			catch (IOException e)
+			{	image = absent;
+			}
+			icons.put(GuiTools.TOURNAMENT_BUTTON_FINISH,image);
+			icons.put(GuiTools.MATCH_BUTTON_FINISH,image);
+			icons.put(GuiTools.ROUND_BUTTON_FINISH,image);
 		}
-		catch (IOException e)
-		{	image = absent;
+		{	try
+			{	image = ImageTools.loadImage(folder+"play.png",null);
+			}
+			catch (IOException e)
+			{	image = absent;
+			}
+			icons.put(GuiTools.ROUND_BUTTON_PLAY,image);
 		}
-		icons.put(GuiTools.MATCH_BUTTON_CURRENT_TOURNAMENT,image);
-		icons.put(GuiTools.ROUND_BUTTON_CURRENT_MATCH,image);
-		try
-		{	image = ImageTools.loadImage(folder+"left_red.png",null);
+		{	try
+			{	image = ImageTools.loadImage(folder+"home.png",null);
+			}
+			catch (IOException e)
+			{	image = absent;
+			}
+			icons.put(GuiTools.TOURNAMENT_BUTTON_QUIT,image);
+			icons.put(GuiTools.MATCH_BUTTON_QUIT,image);
+			icons.put(GuiTools.ROUND_BUTTON_QUIT,image);
 		}
-		catch (IOException e)
-		{	image = absent;
+		{	try
+			{	image = ImageTools.loadImage(folder+"results.png",null);
+			}
+			catch (IOException e)
+			{	image = absent;
+			}
+			icons.put(GuiTools.TOURNAMENT_BUTTON_RESULTS,image);
+			icons.put(GuiTools.MATCH_BUTTON_RESULTS,image);
+			icons.put(GuiTools.ROUND_BUTTON_RESULTS,image);
 		}
-		icons.put(GuiTools.MATCH_BUTTON_FINISH,image);
-		icons.put(GuiTools.ROUND_BUTTON_FINISH,image);
-		try
-		{	image = ImageTools.loadImage(folder+"play.png",null);
+		{	try
+			{	image = ImageTools.loadImage(folder+"right_blue.png",null);
+			}
+			catch (IOException e)
+			{	image = absent;
+			}
+			try
+			{	image = ImageTools.loadImage(folder+"right_red.png",null);
+			}
+			catch (IOException e)
+			{	image = absent;
+			}
+			icons.put(GuiTools.TOURNAMENT_BUTTON_CURRENT_MATCH,image);
+			icons.put(GuiTools.TOURNAMENT_BUTTON_NEXT_MATCH,image);
+			icons.put(GuiTools.MATCH_BUTTON_CURRENT_ROUND,image);
+			icons.put(GuiTools.MATCH_BUTTON_NEXT_ROUND,image);
 		}
-		catch (IOException e)
-		{	image = absent;
-		}
-		icons.put(GuiTools.ROUND_BUTTON_PLAY,image);
-		try
-		{	image = ImageTools.loadImage(folder+"home_blue.png",null);
-		}
-		catch (IOException e)
-		{	image = absent;
-		}
-		icons.put(GuiTools.TOURNAMENT_BUTTON_QUIT,image);
-		icons.put(GuiTools.MATCH_BUTTON_QUIT,image);
-		icons.put(GuiTools.ROUND_BUTTON_QUIT,image);
-		try
-		{	image = ImageTools.loadImage(folder+"home_red.png",null);
-		}
-		catch (IOException e)
-		{	image = absent;
-		}
-		icons.put(GuiTools.TOURNAMENT_BUTTON_FINISH,image);
-		try
-		{	image = ImageTools.loadImage(folder+"results.png",null);
-		}
-		catch (IOException e)
-		{	image = absent;
-		}
-		icons.put(GuiTools.TOURNAMENT_BUTTON_RESULTS,image);
-		icons.put(GuiTools.MATCH_BUTTON_RESULTS,image);
-		icons.put(GuiTools.ROUND_BUTTON_RESULTS,image);
-		try
-		{	image = ImageTools.loadImage(folder+"right_blue.png",null);
-		}
-		catch (IOException e)
-		{	image = absent;
-		}
-		try
-		{	image = ImageTools.loadImage(folder+"right_red.png",null);
-		}
-		catch (IOException e)
-		{	image = absent;
-		}
-		icons.put(GuiTools.TOURNAMENT_BUTTON_CURRENT_MATCH,image);
-		icons.put(GuiTools.TOURNAMENT_BUTTON_NEXT_MATCH,image);
-		icons.put(GuiTools.MATCH_BUTTON_CURRENT_ROUND,image);
-		icons.put(GuiTools.MATCH_BUTTON_NEXT_ROUND,image);
-		try
-		{	image = ImageTools.loadImage(folder+"stats.png",null);
-		}
-		catch (IOException e)
-		{	image = absent;
-		}
-		icons.put(GuiTools.TOURNAMENT_BUTTON_STATISTICS,image);
-		icons.put(GuiTools.MATCH_BUTTON_STATISTICS,image);
-		icons.put(GuiTools.ROUND_BUTTON_STATISTICS,image);
+		{	try
+			{	image = ImageTools.loadImage(folder+"stats.png",null);
+			}
+			catch (IOException e)
+			{	image = absent;
+			}
+			icons.put(GuiTools.TOURNAMENT_BUTTON_STATISTICS,image);
+			icons.put(GuiTools.MATCH_BUTTON_STATISTICS,image);
+			icons.put(GuiTools.ROUND_BUTTON_STATISTICS,image);
+		}		
+		
 	}
 	public static int getSize(String key)
 	{	int result = -1;
@@ -199,7 +236,19 @@ public class SwingTools
 			result = temp;
 		return result;
 	}
-	
+	public static int getFontSize(double limit, Configuration configuration, Graphics g)
+	{	int result = 0;
+		int fheight;
+		do
+		{	result++;
+			Font font = configuration.getFont().deriveFont((float)result);
+			g.setFont(font);
+			FontMetrics metrics = g.getFontMetrics(font);
+			fheight = metrics.getHeight();
+		}
+		while(fheight<limit);
+		return result;
+	}
 	
 	
 	

@@ -5,7 +5,7 @@ Author	: Everaldo Coelho
 Site	: http://www.everaldo.com/crystal/
 License	: LGPL (GNU Lesser General Public License)
 
-	+ home_blue.png
+	+ home.png
 	+ stats.png
 	+ play.png
 
@@ -17,7 +17,6 @@ License	: GPLv2 (GNU General Public License)
 
 	+ description.png	(derivative work from Crystal Project Icons)
 	+ frame.png
-	+ home_red.png		(derivative work from Crystal Project Icons)
 	+ left_blue.png		(derivative work from Crystal Project Icons)
 	+ left_red.png		(derivative work from Crystal Project Icons)
 	+ results.png		(derivative work from Crystal Project Icons)
