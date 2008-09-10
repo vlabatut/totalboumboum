@@ -10,6 +10,7 @@ import javax.swing.Box;
 import javax.swing.BoxLayout;
 import javax.swing.ButtonGroup;
 import javax.swing.JButton;
+import javax.swing.JLabel;
 import javax.swing.JToggleButton;
 import javax.swing.SwingUtilities;
 import javax.xml.parsers.ParserConfigurationException;
@@ -55,12 +56,25 @@ public class TournamentMenu extends InnerMenuPanel implements TournamentRenderPa
 		// layout
 		BoxLayout layout = new BoxLayout(this,BoxLayout.LINE_AXIS); 
 		setLayout(layout);
+		// size
+		int height = SwingTools.getSize(SwingTools.HORIZONTAL_SPLIT_MENU_PANEL_HEIGHT);
+		int width = SwingTools.getSize(SwingTools.HORIZONTAL_SPLIT_MENU_PANEL_WIDTH);
+		setPreferredSize(new Dimension(width,height));
 		// background
 		setBackground(Color.LIGHT_GRAY);
 		
 		// buttons
 		buttonQuit = SwingTools.createHorizontalMenuButton(GuiTools.TOURNAMENT_BUTTON_QUIT,this,getConfiguration());
 		add(Box.createHorizontalGlue());
+		JLabel fakeButton = new JLabel();
+		fakeButton.setBackground(Color.GRAY);
+		fakeButton.setOpaque(true);
+		Dimension dim = new Dimension(SwingTools.getSize(SwingTools.HORIZONTAL_MENU_BUTTON_WIDTH),SwingTools.getSize(SwingTools.MENU_BUTTON_HEIGHT));
+		fakeButton.setMinimumSize(dim);
+		fakeButton.setMaximumSize(dim);
+		fakeButton.setPreferredSize(dim);
+		add(fakeButton);
+		add(Box.createRigidArea(new Dimension(SwingTools.getSize(SwingTools.HORIZONTAL_MENU_BUTTON_SPACE),0)));
 	    ButtonGroup group = new ButtonGroup();
 		buttonDescription = SwingTools.createHorizontalMenuToggleButton(GuiTools.TOURNAMENT_BUTTON_DESCRIPTION,this,getConfiguration());
 		buttonDescription.setSelected(true);
@@ -134,9 +148,9 @@ public class TournamentMenu extends InnerMenuPanel implements TournamentRenderPa
 		{	buttonMatch.setEnabled(true);
 			Match match = tournament.getCurrentMatch();
 			if(match==null || match.isOver())
-				SwingTools.setButtonText(GuiTools.TOURNAMENT_BUTTON_NEXT_MATCH, buttonMatch, getConfiguration());
+				SwingTools.setButtonContent(GuiTools.TOURNAMENT_BUTTON_NEXT_MATCH, buttonMatch, getConfiguration());
 			else
-				SwingTools.setButtonText(GuiTools.TOURNAMENT_BUTTON_CURRENT_MATCH, buttonMatch, getConfiguration());
+				SwingTools.setButtonContent(GuiTools.TOURNAMENT_BUTTON_CURRENT_MATCH, buttonMatch, getConfiguration());
 		}
 	}
 

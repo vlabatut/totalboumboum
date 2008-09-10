@@ -1,11 +1,17 @@
 package fr.free.totalboumboum.tools;
 
 import java.awt.AlphaComposite;
+import java.awt.BasicStroke;
+import java.awt.Color;
+import java.awt.Font;
+import java.awt.FontMetrics;
+import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.GraphicsConfiguration;
 import java.awt.GraphicsEnvironment;
 import java.awt.RenderingHints;
 import java.awt.geom.AffineTransform;
+import java.awt.geom.Rectangle2D;
 import java.awt.image.BufferedImage;
 import java.awt.image.ColorModel;
 import java.awt.image.IndexColorModel;
@@ -259,6 +265,33 @@ public class ImageTools
 		g.dispose();
 		//
     	return result; 
+    }
+    
+    public static BufferedImage getAbsentImage(int width, int height)
+    {	BufferedImage result = new BufferedImage(width,height,BufferedImage.TYPE_INT_ARGB);
+		Graphics g = result.createGraphics();
+
+		// red cross
+		Graphics2D g2d = (Graphics2D) g;
+		g2d.setColor(Color.RED);
+		int strokeSize = width/5;
+        g2d.setStroke(new BasicStroke(strokeSize));
+        g2d.drawLine(0+strokeSize,0+strokeSize,width-strokeSize,height-strokeSize);
+        g2d.drawLine(0+strokeSize,height-strokeSize,width-strokeSize,0+strokeSize);
+/*        
+        // question mark
+        g.setColor(Color.BLACK);
+		Font font = new Font("Arial",Font.PLAIN,height);
+		g.setFont(font);
+		FontMetrics metrics = g.getFontMetrics(font);
+		String text = "?";
+		Rectangle2D box = metrics.getStringBounds(text,g);
+		int x = (int)Math.round(width/2-box.getWidth()/2);
+		int y = (int)Math.round(height/2+box.getHeight()/3);
+		g.drawString(text,x,y);
+*/
+		g.dispose();
+		return result;
     }
 }
 

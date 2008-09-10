@@ -62,6 +62,10 @@ public class MatchMenu extends InnerMenuPanel implements MatchRenderPanel
 		setLayout(layout);
 		// background
 		setBackground(Color.LIGHT_GRAY);
+		// size
+		int height = SwingTools.getSize(SwingTools.HORIZONTAL_SPLIT_MENU_PANEL_HEIGHT);
+		int width = SwingTools.getSize(SwingTools.HORIZONTAL_SPLIT_MENU_PANEL_WIDTH);
+		setPreferredSize(new Dimension(width,height));
 		
 		// buttons
 		buttonQuit = SwingTools.createHorizontalMenuButton(GuiTools.MATCH_BUTTON_QUIT,this,getConfiguration());
@@ -97,7 +101,8 @@ public class MatchMenu extends InnerMenuPanel implements MatchRenderPanel
 		if(e.getActionCommand().equals(GuiTools.MATCH_BUTTON_QUIT))
 		{	getFrame().setMainMenuPanel();
 	    }
-		else if(e.getActionCommand().equals(GuiTools.MATCH_BUTTON_CURRENT_TOURNAMENT))
+		else if(e.getActionCommand().equals(GuiTools.MATCH_BUTTON_CURRENT_TOURNAMENT)
+				|| e.getActionCommand().equals(GuiTools.MATCH_BUTTON_FINISH))
 		{	replaceWith(parent);
 	    }
 		else if(e.getActionCommand().equals(GuiTools.MATCH_BUTTON_DESCRIPTION))
@@ -152,14 +157,21 @@ public class MatchMenu extends InnerMenuPanel implements MatchRenderPanel
 	public void refresh()
 	{	Match match = getConfiguration().getTournament().getCurrentMatch(); 
 		if(match.isOver())
+		{	// Round
 			buttonRound.setEnabled(false);
+			// Finish
+			SwingTools.setButtonContent(GuiTools.MATCH_BUTTON_FINISH, buttonTournament, getConfiguration());
+		}
 		else
-		{	buttonRound.setEnabled(true);
+		{	// Round
+			buttonRound.setEnabled(true);
 			Round round = match.getCurrentRound();
 			if(round==null || round.isOver())
-				SwingTools.setButtonText(GuiTools.MATCH_BUTTON_NEXT_ROUND, buttonRound, getConfiguration());
+				SwingTools.setButtonContent(GuiTools.MATCH_BUTTON_NEXT_ROUND, buttonRound, getConfiguration());
 			else
-				SwingTools.setButtonText(GuiTools.MATCH_BUTTON_CURRENT_ROUND, buttonRound, getConfiguration());
+				SwingTools.setButtonContent(GuiTools.MATCH_BUTTON_CURRENT_ROUND, buttonRound, getConfiguration());
+			// Tournament
+			SwingTools.setButtonContent(GuiTools.MATCH_BUTTON_CURRENT_TOURNAMENT, buttonTournament, getConfiguration());
 		}
 	}
 

@@ -20,6 +20,7 @@ import fr.free.totalboumboum.data.statistics.StatisticRound;
 import fr.free.totalboumboum.game.match.Match;
 import fr.free.totalboumboum.game.ranking.PlayerPoints;
 import fr.free.totalboumboum.game.round.Round;
+import fr.free.totalboumboum.gui.SwingTools;
 import fr.free.totalboumboum.gui.generic.InnerDataPanel;
 import fr.free.totalboumboum.gui.generic.MenuContainer;
 import fr.free.totalboumboum.gui.generic.MenuPanel;
@@ -43,6 +44,10 @@ public class MatchResults extends InnerDataPanel
 		}
 		// background
 		setBackground(new Color(230,230,230));
+		// size
+		int height = SwingTools.getSize(SwingTools.HORIZONTAL_SPLIT_DATA_PANEL_HEIGHT);
+		int width = SwingTools.getSize(SwingTools.HORIZONTAL_SPLIT_DATA_PANEL_WIDTH);
+		setPreferredSize(new Dimension(width,height));
 		
 		add(Box.createVerticalGlue());
 		// title

@@ -64,7 +64,7 @@
 	<text name="TournamentMenuButtonStartTooltip" value="Start the tournament" />
 
 <!-- TOURNAMENT PANEL -->
-	<text name="TournamentButtonCurrentMatch" value="Current Match" />
+	<text name="TournamentButtonCurrentMatch" value="Current match" />
 	<text name="TournamentButtonCurrentMatchTooltip" value="Go to the current match" />
 
 	<text name="TournamentButtonDescription" value="Description" />
@@ -73,7 +73,7 @@
 	<text name="TournamentButtonFinish" value="Finish" />
 	<text name="TournamentButtonFinishMatchTooltip" value="Finish the current tournament and go back to the main menu" />
 
-	<text name="TournamentButtonNextMatch" value="Next Match" />
+	<text name="TournamentButtonNextMatch" value="Next match" />
 	<text name="TournamentButtonNextMatchTooltip" value="Go to the next match" />
 
 	<text name="TournamentButtonQuit" value="Quit" />
@@ -86,20 +86,20 @@
 	<text name="TournamentButtonStatisticsTooltip" value="See the detailed statistics of the current tournament" />
 	
 <!-- MATCH PANEL -->
-	<text name="MatchButtonCurrentRound" value="Current Round" />
+	<text name="MatchButtonCurrentRound" value="Current round" />
 	<text name="MatchButtonCurrentRoundTooltip" value="Go to the current round" />
 
-	<text name="MatchButtonCurrentTournament" value="Current Tournament" />
+	<text name="MatchButtonCurrentTournament" value="Current tournament" />
 	<text name="MatchButtonCurrentTournamentTooltip" value="Go to the current tournament" />
 
 	<text name="MatchButtonDescription" value="Description" />
 	<text name="MatchButtonDescriptionTooltip" value="See the description of the current match" />
 
-	<text name="MatchButtonNextMatch" value="Next Match" />
-	<text name="MatchButtonNextMatchTooltip" value="Start the next match" />
-	
 	<text name="MatchButtonQuit" value="Quit" />
 	<text name="MatchButtonQuitTooltip" value="Quit the current tournament" />
+
+	<text name="MatchButtonFinish" value="Finish the current match" />
+	<text name="MatchButtonFinishTooltip" value="Finish this match and back to the tournament" />
 
 	<text name="MatchButtonNextRound" value="Next Round" />
 	<text name="MatchButtonNextRoundTooltip" value="Go to the next round" />
@@ -111,14 +111,14 @@
 	<text name="MatchButtonStatisticsTooltip" value="See the detailed statistics of the current match" />
 	
 <!-- ROUND PANEL -->
-	<text name="RoundButtonCurrentMatch" value="Current Match" />
+	<text name="RoundButtonCurrentMatch" value="Current match" />
 	<text name="RoundButtonCurrentMatchTooltip" value="Go to the current match" />
 
 	<text name="RoundButtonDescription" value="Description" />
 	<text name="RoundButtonDescriptionTooltip" value="See the description of the current round" />
 	
-	<text name="RoundButtonNextRound" value="Next Round" />
-	<text name="RoundButtonNextRoundTooltip" value="Start the next round" />
+	<text name="RoundButtonFinish" value="Finish the current round" />
+	<text name="RoundButtonFinishTooltip" value="Finish this round and back to the match" />
 
 	<text name="RoundButtonPlay" value="Play" />
 	<text name="RoundButtonPlayTooltip" value="Start to play" />

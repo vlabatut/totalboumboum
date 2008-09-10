@@ -79,6 +79,10 @@ public class TournamentMenu extends InnerMenuPanel
 		// layout
 		BoxLayout layout = new BoxLayout(this,BoxLayout.PAGE_AXIS); 
 		setLayout(layout);
+		// size
+		int height = SwingTools.getSize(SwingTools.VERTICAL_SPLIT_MENU_PANEL_HEIGHT);
+		int width = SwingTools.getSize(SwingTools.VERTICAL_SPLIT_MENU_PANEL_WIDTH);
+		setPreferredSize(new Dimension(width,height));
 		// background
 		setBackground(Color.PINK);
 		
@@ -175,12 +179,12 @@ public class TournamentMenu extends InnerMenuPanel
 		{	buttonSaveAs.setEnabled(true);
 			buttonPlay.setEnabled(true);
 			if(tournament.hasBegun())
-			{	SwingTools.setButtonText(GuiTools.TOURNAMENT_MENU_BUTTON_CONTINUE,buttonPlay,getConfiguration());
+			{	SwingTools.setButtonContent(GuiTools.TOURNAMENT_MENU_BUTTON_CONTINUE,buttonPlay,getConfiguration());
 				buttonPlayers.setEnabled(false);
 				buttonRules.setEnabled(false);
 			}
 			else
-			{	SwingTools.setButtonText(GuiTools.TOURNAMENT_MENU_BUTTON_START,buttonPlay,getConfiguration());
+			{	SwingTools.setButtonContent(GuiTools.TOURNAMENT_MENU_BUTTON_START,buttonPlay,getConfiguration());
 				buttonPlayers.setEnabled(true);
 				buttonRules.setEnabled(true);
 			}

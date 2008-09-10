@@ -51,18 +51,13 @@ public class Round
 	}
 	
 	public void finish()
-	{	// loop
-		loop.finish();
-		loop = null;
-		// misc
+	{	// misc
 		configuration = null;
 		levelDescription = null;
 		match = null;
 		panel = null;
 		playersInGame.clear();
 		stats = null;
-		//NOTE jamais appelé ! (car besoin dans le GUI)
-		// faudrait l'appeler à la destruction du panel...
 	}
 
 	/////////////////////////////////////////////////////////////////
@@ -77,6 +72,8 @@ public class Round
 	public void loopOver()
 	{	match.currentRoundOver();
 		panel.roundOver();
+		// loop
+		loop.finish();
 		loop = null;
 	}
 	

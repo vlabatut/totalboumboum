@@ -6,6 +6,7 @@ import java.awt.event.ActionEvent;
 
 import javax.swing.BoxLayout;
 
+import fr.free.totalboumboum.gui.SwingTools;
 import fr.free.totalboumboum.gui.generic.InnerDataPanel;
 import fr.free.totalboumboum.gui.generic.SplitMenuPanel;
 
@@ -18,7 +19,9 @@ public class TournamentData extends InnerDataPanel
 		BoxLayout layout = new BoxLayout(this,BoxLayout.PAGE_AXIS); 
 		setLayout(layout);
 		// size
-		setPreferredSize(new Dimension(300,300));
+		int height = SwingTools.getSize(SwingTools.VERTICAL_SPLIT_DATA_PANEL_HEIGHT);
+		int width = SwingTools.getSize(SwingTools.VERTICAL_SPLIT_DATA_PANEL_WIDTH);
+		setPreferredSize(new Dimension(width,height));
 		// background
 		setBackground(Color.YELLOW);
 	}
