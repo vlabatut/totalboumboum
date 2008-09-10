@@ -24,6 +24,7 @@ import fr.free.totalboumboum.data.statistics.StatisticRound;
 import fr.free.totalboumboum.game.ranking.PlayerPoints;
 import fr.free.totalboumboum.game.round.Round;
 import fr.free.totalboumboum.gui.SpringUtilities;
+import fr.free.totalboumboum.gui.SwingTools;
 import fr.free.totalboumboum.gui.generic.InnerDataPanel;
 import fr.free.totalboumboum.gui.generic.MenuContainer;
 import fr.free.totalboumboum.gui.generic.MenuPanel;
@@ -48,12 +49,18 @@ public class RoundResults extends InnerDataPanel
 		}
 		// background
 		setBackground(new Color(230,230,230));
+		// size
+		int height = SwingTools.getSize(SwingTools.HORIZONTAL_SPLIT_DATA_PANEL_HEIGHT);
+		int width = SwingTools.getSize(SwingTools.HORIZONTAL_SPLIT_DATA_PANEL_WIDTH);
+		setPreferredSize(new Dimension(width,height));
 		
 		add(Box.createVerticalGlue());
 		// title
 		{	JLabel title = new JLabel("Round Results");
 			Font font = getConfiguration().getFont().deriveFont(30f);
 			title.setForeground(Color.BLACK);
+			title.setBackground(Color.BLUE);
+			title.setOpaque(true);
 			title.setFont(font);
 			title.setAlignmentX(Component.CENTER_ALIGNMENT);
 			add(title);
@@ -64,14 +71,13 @@ public class RoundResults extends InnerDataPanel
 			int playerNumber = round.getProfiles().size();
 			int lines = playerNumber+1;
 			int cols = 3;			
-//			GridLayout layout = new GridLayout(lines,cols,10,10);
-SpringLayout layout = new SpringLayout();			
+			GridLayout layout = new GridLayout(lines,cols,10,10);
+//SpringLayout layout = new SpringLayout();			
 			resultsPanel = new JPanel(layout);			
-			Dimension d = getConfiguration().getPanelDimension();
-			Dimension dim = new Dimension((int)(d.width*0.9),(int)(d.height*0.7));
-//			resultsPanel.setPreferredSize(dim);
-			resultsPanel.setSize(dim);
-//			resultsPanel.setMaximumSize(dim);
+			Dimension dim = new Dimension((int)(width*0.9),(int)(height*0.7));
+			resultsPanel.setPreferredSize(dim);
+			resultsPanel.setMinimumSize(dim);
+			resultsPanel.setMaximumSize(dim);
 			// labels
 			for(int i=0;i<lines;i++)
 				for(int j=0;j<cols;j++)
@@ -93,7 +99,7 @@ SpringLayout layout = new SpringLayout();
 			lbl = (JLabel)resultsPanel.getComponent(2);
 			lbl.setText("Points");
 			updateData();
-SpringUtilities.makeCompactGrid(resultsPanel,lines,cols,10,10,10,10);
+//SpringUtilities.makeCompactGrid(resultsPanel,lines,cols,10,10,10,10);
 			add(resultsPanel);
 		}
 		add(Box.createVerticalGlue());

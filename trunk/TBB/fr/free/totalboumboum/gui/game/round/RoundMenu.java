@@ -66,6 +66,10 @@ public class RoundMenu extends InnerMenuPanel implements RoundRenderPanel
 		setLayout(layout);
 		// background
 		setBackground(Color.LIGHT_GRAY);
+		// size
+		int height = SwingTools.getSize(SwingTools.HORIZONTAL_SPLIT_MENU_PANEL_HEIGHT);
+		int width = SwingTools.getSize(SwingTools.HORIZONTAL_SPLIT_MENU_PANEL_WIDTH);
+		setPreferredSize(new Dimension(width,height));
 		
 		// buttons
 		buttonQuit = SwingTools.createHorizontalMenuButton(GuiTools.ROUND_BUTTON_QUIT,this,getConfiguration());
@@ -81,7 +85,6 @@ public class RoundMenu extends InnerMenuPanel implements RoundRenderPanel
 		buttonStatistics = SwingTools.createHorizontalMenuToggleButton(GuiTools.ROUND_BUTTON_STATISTICS,this,getConfiguration());
 	    group.add(buttonStatistics);
 		add(Box.createRigidArea(new Dimension(SwingTools.getSize(SwingTools.HORIZONTAL_MENU_BUTTON_SPACE),0)));
-		// NOTE à tester (enable)
 		buttonPlay = SwingTools.createHorizontalMenuButton(GuiTools.ROUND_BUTTON_PLAY,this,getConfiguration());
 		// panels
 		roundDescription = null;
@@ -103,6 +106,11 @@ public class RoundMenu extends InnerMenuPanel implements RoundRenderPanel
 	    }
 		else if(e.getActionCommand().equals(GuiTools.ROUND_BUTTON_CURRENT_MATCH))
 		{	replaceWith(parent);
+	    }
+		else if(e.getActionCommand().equals(GuiTools.ROUND_BUTTON_FINISH))
+		{	Round round = getConfiguration().getTournament().getCurrentMatch().getCurrentRound();
+			round.finish();
+			replaceWith(parent);
 	    }
 		else if(e.getActionCommand().equals(GuiTools.ROUND_BUTTON_DESCRIPTION))
 		{	container.setDataPart(roundDescription);
@@ -152,11 +160,19 @@ public class RoundMenu extends InnerMenuPanel implements RoundRenderPanel
 
 	@Override
 	public void refresh()
-	{	Round round = getConfiguration().getTournament().getCurrentMatch().getCurrentRound(); 
+	{	Round round = getConfiguration().getTournament().getCurrentMatch().getCurrentRound();
 		if(round.isOver())
+		{	// play
 			buttonPlay.setEnabled(false);
+			// finish
+			SwingTools.setButtonContent(GuiTools.ROUND_BUTTON_FINISH, buttonMatch, getConfiguration());
+		}
 		else
+		{	// play
 			buttonPlay.setEnabled(true);
+			// match
+			SwingTools.setButtonContent(GuiTools.ROUND_BUTTON_CURRENT_MATCH, buttonMatch, getConfiguration());
+		}
 	} 
 
 	@Override

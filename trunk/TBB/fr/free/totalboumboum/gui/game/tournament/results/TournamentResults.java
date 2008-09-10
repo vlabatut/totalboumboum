@@ -22,6 +22,7 @@ import fr.free.totalboumboum.game.match.Match;
 import fr.free.totalboumboum.game.ranking.PlayerPoints;
 import fr.free.totalboumboum.game.tournament.AbstractTournament;
 import fr.free.totalboumboum.game.tournament.sequence.SequenceTournament;
+import fr.free.totalboumboum.gui.SwingTools;
 import fr.free.totalboumboum.gui.generic.InnerDataPanel;
 import fr.free.totalboumboum.gui.generic.MenuContainer;
 import fr.free.totalboumboum.gui.generic.MenuPanel;
@@ -43,6 +44,10 @@ public class TournamentResults extends InnerDataPanel
 		{	BoxLayout layout = new BoxLayout(this,BoxLayout.PAGE_AXIS); 
 			setLayout(layout);
 		}
+		// size
+		int height = SwingTools.getSize(SwingTools.HORIZONTAL_SPLIT_DATA_PANEL_HEIGHT);
+		int width = SwingTools.getSize(SwingTools.HORIZONTAL_SPLIT_DATA_PANEL_WIDTH);
+		setPreferredSize(new Dimension(width,height));
 		// background
 		setBackground(new Color(230,230,230));
 		

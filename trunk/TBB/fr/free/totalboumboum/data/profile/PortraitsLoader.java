@@ -120,10 +120,8 @@ public class PortraitsLoader
 	private static void completePortraits(Portraits result)
 	{	// square images
 		{	// creation
-			int width=30,height=30;
-			BufferedImage image = new BufferedImage(width,height,BufferedImage.TYPE_INT_ARGB);
-			Graphics g = image.createGraphics();
-			drawAbsentImage(g,width,height);
+			int width=64,height=64;
+			BufferedImage image = ImageTools.getAbsentImage(width,height);
 			// verification
 			if(!result.containsIngamePortrait(Portraits.INGAME_LOST))
 				result.addIngamePortrait(Portraits.INGAME_LOST,image);
@@ -138,37 +136,11 @@ public class PortraitsLoader
 		}		
 		// rectangular images
 		{	// creation
-			int width=30,height=60;
-			BufferedImage image = new BufferedImage(width,height,BufferedImage.TYPE_INT_ARGB);
-			Graphics g = image.createGraphics();
-			g.setColor(Color.BLACK);
-			drawAbsentImage(g,width,height);
+			int width=64,height=128;
+			BufferedImage image = ImageTools.getAbsentImage(width, height);
 			// verification
 			if(!result.containsIngamePortrait(Portraits.OUTGAME_BODY))
 				result.addIngamePortrait(Portraits.OUTGAME_BODY,image);
 		}				
-	}
-	
-	private static void drawAbsentImage(Graphics g, int width, int height)
-	{	// red cross
-		Graphics2D g2d = (Graphics2D) g;
-		g2d.setColor(Color.RED);
-		int strokeSize = width/5;
-        g2d.setStroke(new BasicStroke(strokeSize));
-        g2d.drawLine(0+strokeSize,0+strokeSize,width-strokeSize,height-strokeSize);
-        g2d.drawLine(0+strokeSize,height-strokeSize,width-strokeSize,0+strokeSize);
-        
-        // question mark
-        g.setColor(Color.BLACK);
-		Font font = new Font("Arial",Font.PLAIN,height);
-		g.setFont(font);
-		FontMetrics metrics = g.getFontMetrics(font);
-		String text = "?";
-		Rectangle2D box = metrics.getStringBounds(text,g);
-		int x = (int)Math.round(width/2-box.getWidth()/2);
-		int y = (int)Math.round(height/2+box.getHeight()/3);
-		g.drawString(text,x,y);
-
-		g.dispose();
 	}
 }

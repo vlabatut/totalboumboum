@@ -39,7 +39,7 @@ public class MainFrame extends JFrame implements WindowListener,MenuContainer
 		// frame
 		addWindowListener(this);
 		// icon
-		String iconPath = FileTools.getResourcesPath()+File.separator+"misc"+File.separator+"icon.png";
+		String iconPath = FileTools.getIconsPath()+File.separator+"frame.png";
 		Image icon = Toolkit.getDefaultToolkit().getImage(iconPath);
 		setIconImage(icon);
 		// dimensions

@@ -40,7 +40,7 @@ public class GuiTools
 	public static final String MATCH_BUTTON_CURRENT_ROUND = "MatchButtonCurrentRound";
 	public static final String MATCH_BUTTON_CURRENT_TOURNAMENT = "MatchButtonCurrentTournament";
 	public static final String MATCH_BUTTON_DESCRIPTION = "MatchButtonDescription";
-	public static final String MATCH_BUTTON_NEXT_MATCH = "MatchButtonNextMatch";
+	public static final String MATCH_BUTTON_FINISH = "MatchButtonFinish";
 	public static final String MATCH_BUTTON_NEXT_ROUND = "MatchButtonNextRound";
 	public static final String MATCH_BUTTON_RESULTS = "MatchButtonResults";
 	public static final String MATCH_BUTTON_STATISTICS = "MatchButtonStatistics";
@@ -49,7 +49,7 @@ public class GuiTools
 	public static final String ROUND_BUTTON_QUIT = "RoundButtonQuit";
 	public static final String ROUND_BUTTON_CURRENT_MATCH = "RoundButtonCurrentMatch";
 	public static final String ROUND_BUTTON_DESCRIPTION = "RoundButtonDescription";
-	public static final String ROUND_BUTTON_NEXT_ROUND = "RoundButtonNextRound";
+	public static final String ROUND_BUTTON_FINISH = "RoundButtonFinish";
 	public static final String ROUND_BUTTON_PLAY = "RoundButtonPlay";
 	public static final String ROUND_BUTTON_RESULTS = "RoundButtonResults";
 	public static final String ROUND_BUTTON_STATISTICS = "RoundButtonStatistics";
