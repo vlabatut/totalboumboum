@@ -363,7 +363,6 @@
 				<reference name="tile1" />
 			</tile>
 			<tile pos="8">
-				<block group="hardwalls" name="regular" />
 			</tile>
 			<tile pos="9">
 				<reference name="tile1" />
@@ -413,10 +412,8 @@
 				<reference name="tile1" />
 			</tile>
 			<tile pos="7">
-				<reference name="tile1" />
 			</tile>
 			<tile pos="8">
-				<reference name="tile1" />
 			</tile>
 			<tile pos="9">
 			</tile>
@@ -470,8 +467,10 @@
 			<tile pos="8">
 			</tile>
 			<tile pos="9">
+				<reference name="tile1" />
 			</tile>
 			<tile pos="10">
+				<block group="hardwalls" name="regular" />
 			</tile>
 			<tile pos="11">
 				<reference name="tile1" />
@@ -521,6 +520,7 @@
 				<reference name="tile1" />
 			</tile>
 			<tile pos="9">
+				<reference name="tile1" />
 			</tile>
 			<tile pos="10">
 				<reference name="tile1" />
