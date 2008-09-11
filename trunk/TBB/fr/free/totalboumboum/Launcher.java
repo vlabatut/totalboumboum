@@ -557,14 +557,18 @@ public class Launcher
 	 */
 	
 	/*
-	 * A FAIRE :
+	 * TODO
+	 * FAIT :
 	 * - mise en place d'icones à la place des menus horizontaux
 	 * - améliration de l'affichage des résultats
 	 * - icones + plus grandes + play en rouge
-	 * 
-	 * - revoir les icones en carrés 
+	 * - revoir le titre des résultats : plus gros, et carré blanc transparent (comme tableau)
 	 * - compléter le layout des résultats
+	 * 
+	 * A FAIRE :
 	 * - mettre une barre d'évolution pdt le chargement du niveau
+	 * - revoir les icones en carrés 
+	 * - quand un héro reçoit l'ordre de pleurer, il ne le fait pas s'il est en train de mourir
 	 * - redescendre les stats dans loop, et gestion de fin de partie, puis synchroniser les stats dans round
 	 * - définir les présentations des rounds
 	 * - passer à un système gérant plusieurs pointProcesseurs

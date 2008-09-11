@@ -3,7 +3,7 @@
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
 	xsi:noNamespaceSchemaLocation="..\..\xml\schemas\profiles.xsd">
 	
- 	<general name="BingolKetenci" ai="bingolketenci.BingolKetenci" /> 
+ 	<general name="Bingol+Ketenci" ai="bingolketenci.BingolKetenci" /> 
  	<character name="shirobon" packname="superbomberman1" color="blue" />     
 <!-- 	<character name="prognathe" packname="totalboumboum" color="red" />   -->
 	

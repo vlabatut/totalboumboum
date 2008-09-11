@@ -41,7 +41,6 @@ public class RoundResults extends InnerDataPanel
 	private static final long serialVersionUID = 1L;
 
 	private JPanel resultsPanel;
-	private JLabel title;
 	
 	public RoundResults(SplitMenuPanel container)
 	{	super(container);
@@ -50,24 +49,33 @@ public class RoundResults extends InnerDataPanel
 			setLayout(layout);
 		}
 		// background
-		setBackground(new Color(230,230,230));
+		setBackground(new Color(50,50,50));
 		// size
 		int height = SwingTools.getSize(SwingTools.HORIZONTAL_SPLIT_DATA_PANEL_HEIGHT);
 		int width = SwingTools.getSize(SwingTools.HORIZONTAL_SPLIT_DATA_PANEL_WIDTH);
 		setPreferredSize(new Dimension(width,height));
 		
 		add(Box.createVerticalGlue());
+		
 		// title
-		{	title = new JLabel(getConfiguration().getLanguage().getText(GuiTools.GAME_TITLE_ROUND_RESULTS));
+		{	String txt = getConfiguration().getLanguage().getText(GuiTools.GAME_ROUND_TITLE_RESULTS);
+			JLabel title = new JLabel(txt);
+			title.setHorizontalAlignment(SwingConstants.CENTER);
 			Font font = getConfiguration().getFont().deriveFont((float)SwingTools.getSize(SwingTools.GAME_TITLE_FONT_SIZE));
 			title.setForeground(Color.BLACK);
-//			title.setBackground(Color.BLUE);
-//			title.setOpaque(true);
+			title.setBackground(new Color(255,255,255,128));
+			title.setOpaque(true);
 			title.setFont(font);
 			title.setAlignmentX(Component.CENTER_ALIGNMENT);
+			Dimension dim = new Dimension(SwingTools.getSize(SwingTools.GAME_DATA_PANEL_WIDTH),SwingTools.getSize(SwingTools.GAME_DATA_LABEL_TITLE_HEIGHT));
+			title.setPreferredSize(dim);
+			title.setMinimumSize(dim);
+			title.setMaximumSize(dim);
 			add(title);
 		}
+		
 		add(Box.createVerticalGlue());
+		
 		// results panel
 		{	Round round = getConfiguration().getTournament().getCurrentMatch().getCurrentRound();
 			int playerNumber = round.getProfiles().size();
@@ -77,12 +85,12 @@ public class RoundResults extends InnerDataPanel
 //			GridLayout layout = new GridLayout(lines,cols,10,10);
 			SpringLayout layout = new SpringLayout();			
 			resultsPanel = new JPanel(layout);			
+			resultsPanel.setBackground(new Color(255,255,255,128));
 			Dimension dim = new Dimension(SwingTools.getSize(SwingTools.GAME_DATA_PANEL_WIDTH),SwingTools.getSize(SwingTools.GAME_DATA_PANEL_HEIGHT));
 			resultsPanel.setPreferredSize(dim);
 			resultsPanel.setMinimumSize(dim);
 			resultsPanel.setMaximumSize(dim);
 			// headers
-			// titles
 			Font font = getConfiguration().getFont().deriveFont((float)SwingTools.getSize(SwingTools.GAME_RESULTS_HEADER_FONT_SIZE));
 			{	JLabel lbl = new JLabel(" ");
 				lbl.setOpaque(false);
@@ -91,7 +99,8 @@ public class RoundResults extends InnerDataPanel
 				lbl.setMinimumSize(new Dimension(SwingTools.getSize(SwingTools.GAME_RESULTS_LABEL_LINE_HEIGHT),SwingTools.getSize(SwingTools.GAME_RESULTS_LABEL_HEADER_HEIGHT)));
 				resultsPanel.add(lbl);
 			}
-			{	JLabel lbl = new JLabel("Name");
+			{	String txt = getConfiguration().getLanguage().getText(GuiTools.GAME_ROUND_HEADER_NAME);
+				JLabel lbl = new JLabel(txt);
 				lbl.setFont(font);
 				lbl.setHorizontalAlignment(SwingConstants.CENTER);
 				lbl.setBackground(new Color(0,0,0,128));
@@ -99,7 +108,8 @@ public class RoundResults extends InnerDataPanel
 				lbl.setOpaque(true);
 				resultsPanel.add(lbl);
 			}
-			{	JLabel lbl = new JLabel("Pts");
+			{	String txt = getConfiguration().getLanguage().getText(GuiTools.GAME_ROUND_HEADER_POINTS);
+				JLabel lbl = new JLabel(txt);
 				lbl.setFont(font);
 				lbl.setHorizontalAlignment(SwingConstants.CENTER);
 				lbl.setBackground(new Color(0,0,0,128));
@@ -145,6 +155,7 @@ public class RoundResults extends InnerDataPanel
 			SpringUtilities.makeCompactGrid(resultsPanel,lines,cols,margin,margin,margin,margin);
 			add(resultsPanel);
 		}
+		
 		add(Box.createVerticalGlue());
 	}
 
@@ -170,7 +181,6 @@ public class RoundResults extends InnerDataPanel
 			Profile profile = players.get(pp.getIndex());
 			// color
 			Color clr = profile.getSpriteColor().getColor();
-			Color bg = new Color(clr.getRed(),clr.getGreen(),clr.getBlue(),128);
 			// portrait
 			{	JLabel portraitLabel = (JLabel)resultsPanel.getComponent(k++);
 				BufferedImage image = profile.getPortraits().getOutgamePortrait(Portraits.OUTGAME_HEAD);
@@ -180,12 +190,14 @@ public class RoundResults extends InnerDataPanel
 					image = ImageTools.resize(image,zoom,true);
 				ImageIcon icon = new ImageIcon(image);
 				portraitLabel.setIcon(icon);
+				Color bg = new Color(clr.getRed(),clr.getGreen(),clr.getBlue(),128);
 				portraitLabel.setBackground(bg);			
 				portraitLabel.setText("");
 			}
 			// name
 			{	JLabel nameLabel = (JLabel)resultsPanel.getComponent(k++);
 				nameLabel.setText(pp.getPlayer());
+				Color bg = new Color(clr.getRed(),clr.getGreen(),clr.getBlue(),128);
 				nameLabel.setBackground(bg);
 			}
 			// points
@@ -196,6 +208,7 @@ public class RoundResults extends InnerDataPanel
 				nf.setMinimumFractionDigits(0);
 				String txt = nf.format(pts);
 				pointsLabel.setText(txt);
+				Color bg = new Color(clr.getRed(),clr.getGreen(),clr.getBlue(),170);
 				pointsLabel.setBackground(bg);
 			}
 		}

@@ -107,14 +107,14 @@ public class SwingTools
 		sizes.put(MENU_ALL_BUTTON_FONT_SIZE, menuButtonFontSize);
 		
 		// font
-		int gameTitleFontSize = (int)(menuButtonFontSize*1.2);
+		int gameTitleFontSize = (int)(menuButtonFontSize*1.3);
 		sizes.put(GAME_TITLE_FONT_SIZE, gameTitleFontSize);
 		// labels
 		int gameLabelTitleHeight;
 		{	Font font = configuration.getFont().deriveFont((float)gameTitleFontSize);
 			g.setFont(font);
 			FontMetrics metrics = g.getFontMetrics(font);
-			gameLabelTitleHeight = metrics.getHeight();
+			gameLabelTitleHeight = (int)(metrics.getHeight()*1.2);
 		}
 		sizes.put(GAME_DATA_LABEL_TITLE_HEIGHT, gameLabelTitleHeight);
 		// game panel
