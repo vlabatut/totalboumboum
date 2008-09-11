@@ -56,14 +56,25 @@ public class GuiTools
 	public static final String ROUND_BUTTON_STATISTICS = "RoundButtonStatistics";
 	
 	// GAME PANEL
-	public static final String GAME_TITLE_TOURNAMENT_DESCRIPTION = "GameTitleTournamentDescription";
-	public static final String GAME_TITLE_TOURNAMENT_RESULTS = "GameTitleTournamentResults";
-	public static final String GAME_TITLE_TOURNAMENT_STATISTICS = "GameTitleTournamentStatistics";
-	public static final String GAME_TITLE_MATCH_DESCRIPTION = "GameTitleMatchDescription";
-	public static final String GAME_TITLE_MATCH_RESULTS = "GameTitleMatchResults";
-	public static final String GAME_TITLE_MATCH_STATISTICS = "GameTitleMatchStatistics";
-	public static final String GAME_TITLE_ROUND_DESCRIPTION = "GameTitleRoundDescription";
-	public static final String GAME_TITLE_ROUND_RESULTS = "GameTitleRoundResults";
-	public static final String GAME_TITLE_ROUND_STATISTICS = "GameTitleRoundStatistics";
+	public static final String GAME_TOURNAMENT_TITLE_DESCRIPTION = "GameTournamentTitleDescription";
+	public static final String GAME_TOURNAMENT_TITLE_RESULTS = "GameTournamentTitleResults";
+	public static final String GAME_TOURNAMENT_TITLE_STATISTICS = "GameTournamentTitleStatistics";
+	public static final String GAME_TOURNAMENT_HEADER_NAME = "GameTournamentHeaderName";
+	public static final String GAME_TOURNAMENT_HEADER_TOTAL = "GameTournamentHeaderTotal";
+	public static final String GAME_TOURNAMENT_HEADER_MATCH = "GameTournamentHeaderMatch";
+	
+	public static final String GAME_MATCH_TITLE_DESCRIPTION = "GameMatchTitleDescription";
+	public static final String GAME_MATCH_TITLE_RESULTS = "GameMatchTitleResults";
+	public static final String GAME_MATCH_TITLE_STATISTICS = "GameMatchTitleStatistics";
+	public static final String GAME_MATCH_HEADER_NAME = "GameMatchHeaderName";
+	public static final String GAME_MATCH_HEADER_POINTS = "GameMatchHeaderPoints";
+	public static final String GAME_MATCH_HEADER_TOTAL = "GameMatchHeaderTotal";
+	public static final String GAME_MATCH_HEADER_ROUND = "GameMatchHeaderRound";
+	
+	public static final String GAME_ROUND_TITLE_DESCRIPTION = "GameRoundTitleDescription";
+	public static final String GAME_ROUND_TITLE_RESULTS = "GameRoundTitleResults";
+	public static final String GAME_ROUND_TITLE_STATISTICS = "GameRoundTitleStatistics";
+	public static final String GAME_ROUND_HEADER_NAME = "GameRoundHeaderName";
+	public static final String GAME_ROUND_HEADER_POINTS = "GameRoundHeaderPoints";
 	
 }

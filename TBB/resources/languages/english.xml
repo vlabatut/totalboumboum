@@ -137,14 +137,25 @@
 
 <!-- GAME PANEL -->
 
-	<text name="GameTitleTournamentDescription" value="Tournament description" />
-	<text name="GameTitleTournamentResults" value="Tournament results" />
-	<text name="GameTitleTournamentStatistics" value="Tournament statistics" />
-	<text name="GameTitleMatchDescription" value="Match description" />
-	<text name="GameTitleMatchResults" value="Match results" />
-	<text name="GameTitleMatchStatistics" value="Match statistics" />
-	<text name="GameTitleRoundDescription" value="Round description" />
-	<text name="GameTitleRoundResults" value="Round results" />
-	<text name="GameTitleRoundStatistics" value="Round statistics" />
+	<text name="GameTournamentTitleDescription" value="Tournament description" />
+	<text name="GameTournamentTitleResults" value="Tournament results" />
+	<text name="GameTournamentTitleStatistics" value="Tournament statistics" />
+	<text name="GameTournamentHeaderName" value="Name" />
+	<text name="GameTournamentHeaderTotal" value="Pts" />
+	<text name="GameTournamentHeaderMatch" value="M." />
+	
+	<text name="GameMatchTitleDescription" value="Match description" />
+	<text name="GameMatchTitleResults" value="Match results" />
+	<text name="GameMatchTitleStatistics" value="Match statistics" />
+	<text name="GameMatchHeaderName" value="Name" />
+	<text name="GameMatchHeaderTotal" value="All" />
+	<text name="GameMatchHeaderPoints" value="Pts" />
+	<text name="GameMatchHeaderRound" value="R." />
+	
+	<text name="GameRoundTitleDescription" value="Round description" />
+	<text name="GameRoundTitleResults" value="Round results" />
+	<text name="GameRoundTitleStatistics" value="Round statistics" />
+	<text name="GameRoundHeaderName" value="Name" />
+	<text name="GameRoundHeaderPoints" value="Pts" />
 	
 </language>
