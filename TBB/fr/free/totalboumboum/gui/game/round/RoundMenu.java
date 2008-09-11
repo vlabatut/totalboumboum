@@ -75,7 +75,7 @@ public class RoundMenu extends InnerMenuPanel implements RoundRenderPanel
 		buttonQuit = SwingTools.createHorizontalMenuButton(GuiTools.ROUND_BUTTON_QUIT,this,getConfiguration());
 		add(Box.createHorizontalGlue());
 		buttonMatch = SwingTools.createHorizontalMenuButton(GuiTools.ROUND_BUTTON_CURRENT_MATCH,this,getConfiguration());
-		add(Box.createRigidArea(new Dimension(SwingTools.getSize(SwingTools.HORIZONTAL_MENU_BUTTON_SPACE),0)));
+		add(Box.createRigidArea(new Dimension(SwingTools.getSize(SwingTools.MENU_HORIZONTAL_BUTTON_SPACE),0)));
 	    ButtonGroup group = new ButtonGroup();
 		buttonDescription = SwingTools.createHorizontalMenuToggleButton(GuiTools.ROUND_BUTTON_DESCRIPTION,this,getConfiguration());
 		buttonDescription.setSelected(true);
@@ -84,7 +84,7 @@ public class RoundMenu extends InnerMenuPanel implements RoundRenderPanel
 	    group.add(buttonResults);
 		buttonStatistics = SwingTools.createHorizontalMenuToggleButton(GuiTools.ROUND_BUTTON_STATISTICS,this,getConfiguration());
 	    group.add(buttonStatistics);
-		add(Box.createRigidArea(new Dimension(SwingTools.getSize(SwingTools.HORIZONTAL_MENU_BUTTON_SPACE),0)));
+		add(Box.createRigidArea(new Dimension(SwingTools.getSize(SwingTools.MENU_HORIZONTAL_BUTTON_SPACE),0)));
 		buttonPlay = SwingTools.createHorizontalMenuButton(GuiTools.ROUND_BUTTON_PLAY,this,getConfiguration());
 		// panels
 		roundDescription = null;

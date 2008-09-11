@@ -71,7 +71,7 @@ public class MatchMenu extends InnerMenuPanel implements MatchRenderPanel
 		buttonQuit = SwingTools.createHorizontalMenuButton(GuiTools.MATCH_BUTTON_QUIT,this,getConfiguration());
 		add(Box.createHorizontalGlue());
 		buttonTournament = SwingTools.createHorizontalMenuButton(GuiTools.MATCH_BUTTON_CURRENT_TOURNAMENT,this,getConfiguration());
-		add(Box.createRigidArea(new Dimension(SwingTools.getSize(SwingTools.HORIZONTAL_MENU_BUTTON_SPACE),0)));
+		add(Box.createRigidArea(new Dimension(SwingTools.getSize(SwingTools.MENU_HORIZONTAL_BUTTON_SPACE),0)));
 	    ButtonGroup group = new ButtonGroup();
 		buttonDescription = SwingTools.createHorizontalMenuToggleButton(GuiTools.MATCH_BUTTON_DESCRIPTION,this,getConfiguration());
 		buttonDescription.setSelected(true);
@@ -80,7 +80,7 @@ public class MatchMenu extends InnerMenuPanel implements MatchRenderPanel
 	    group.add(buttonResults);
 		buttonStatistics = SwingTools.createHorizontalMenuToggleButton(GuiTools.MATCH_BUTTON_STATISTICS,this,getConfiguration());
 	    group.add(buttonStatistics);
-		add(Box.createRigidArea(new Dimension(SwingTools.getSize(SwingTools.HORIZONTAL_MENU_BUTTON_SPACE),0)));
+		add(Box.createRigidArea(new Dimension(SwingTools.getSize(SwingTools.MENU_HORIZONTAL_BUTTON_SPACE),0)));
 		buttonRound = SwingTools.createHorizontalMenuButton(GuiTools.MATCH_BUTTON_NEXT_ROUND,this,getConfiguration());
 		// panels
 		matchDescription = null;

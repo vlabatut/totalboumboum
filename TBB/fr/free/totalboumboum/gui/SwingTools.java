@@ -24,12 +24,16 @@ import fr.free.totalboumboum.tools.GuiTools;
 import fr.free.totalboumboum.tools.ImageTools;
 
 public class SwingTools
-{	// buttons
-	public static final String MENU_BUTTON_HEIGHT = "MENU_BUTTON_HEIGHT";
-	public static final String HORIZONTAL_MENU_BUTTON_WIDTH = "HORIZONTAL_MENU_BUTTON_WIDTH";
-	public static final String PRINCIPAL_VERTICAL_MENU_BUTTON_WIDTH = "PRINCIPAL_VERTICAL_MENU_BUTTON_WIDTH";
-	public static final String SECONDARY_VERTICAL_MENU_BUTTON_WIDTH = "SECONDARY_VERTICAL_MENU_BUTTON_WIDTH";
-	// panels
+{	// menus
+	public static final String MENU_HORIZONTAL_BUTTON_HEIGHT = "MENU_HORIZONTAL_BUTTON_HEIGHT";
+	public static final String MENU_VERTICAL_BUTTON_HEIGHT = "MENU_VERTICAL_BUTTON_HEIGHT";
+	public static final String MENU_ALL_BUTTON_FONT_SIZE = "MENU_ALL_BUTTON_FONT_SIZE";
+	public static final String MENU_HORIZONTAL_BUTTON_WIDTH = "MENU_HORIZONTAL_BUTTON_WIDTH";
+	public static final String MENU_VERTICAL_PRIMARY_BUTTON_WIDTH = "MENU_VERTICAL_PRIMARY_BUTTON_WIDTH";
+	public static final String MENU_VERTICAL_SECONDARY_BUTTON_WIDTH = "MENU_VERTICAL_SECONDARY_BUTTON_WIDTH";
+	public static final String MENU_VERTICAL_BUTTON_SPACE = "MENU_VERTICAL_BUTTON_SPACE";
+	public static final String MENU_HORIZONTAL_BUTTON_SPACE = "MENU_HORIZONTAL_BUTTON_SPACE";
+	// splits
 	public static final String HORIZONTAL_SPLIT_MENU_PANEL_HEIGHT = "HORIZONTAL_SPLIT_MENU_PANEL_HEIGHT";
 	public static final String HORIZONTAL_SPLIT_MENU_PANEL_WIDTH = "HORIZONTAL_SPLIT_MENU_PANEL_WIDTH";
 	public static final String HORIZONTAL_SPLIT_DATA_PANEL_HEIGHT = "HORIZONTAL_SPLIT_DATA_PANEL_HEIGHT";
@@ -38,21 +42,18 @@ public class SwingTools
 	public static final String VERTICAL_SPLIT_MENU_PANEL_WIDTH = "VERTICAL_SPLIT_MENU_PANEL_WIDTH";
 	public static final String VERTICAL_SPLIT_DATA_PANEL_HEIGHT = "VERTICAL_SPLIT_DATA_PANEL_HEIGHT";
 	public static final String VERTICAL_SPLIT_DATA_PANEL_WIDTH = "VERTICAL_SPLIT_DATA_PANEL_WIDTH";
-	public static final String GAME_RESULTS_PANEL_HEIGHT = "GAME_RESULTS_PANEL_HEIGHT";
-	public static final String GAME_RESULTS_PANEL_WIDTH = "GAME_RESULTS_PANEL_WIDTH";
-	// fonts
-	public static final String MENU_BUTTON_FONT_SIZE = "MENU_BUTTON_FONT_SIZE";
+	// game
+	public static final String GAME_DATA_PANEL_HEIGHT = "GAME_DATA_PANEL_HEIGHT";
+	public static final String GAME_DATA_PANEL_WIDTH = "GAME_DATA_PANEL_WIDTH";
+	public static final String GAME_DATA_LABEL_TITLE_HEIGHT = "GAME_DATA_LABEL_TITLE_HEIGHT";
+	public static final String GAME_DATA_MARGIN_SIZE = "GAME_DATA_MARGIN_SIZE";
 	public static final String GAME_TITLE_FONT_SIZE = "GAME_TITLE_FONT_SIZE";
-	public static final String GAME_RESULTS_FONT_SIZE = "GAME_RESULTS_FONT_SIZE";
-	// spaces
-	public static final String VERTICAL_MENU_BUTTON_SPACE = "VERTICAL_MENU_BUTTON_SPACE";
-	public static final String HORIZONTAL_MENU_BUTTON_SPACE = "HORIZONTAL_MENU_BUTTON_SPACE";
-	public static final String GAME_TITLE_MARGIN_SIZE = "GAME_MARGIN_SIZE";
-	public static final String GAME_RESULTS_MARGIN_SIZE = "GAME_RESULTS_MARGIN_SIZE";
-	// labels
-	public static final String GAME_LABEL_TITLE_HEIGHT = "GAME_LABEL_TITLE_HEIGHT";
-	public static final String GAME_LABEL_PORTRAIT_HEIGHT = "GAME_LABEL_PORTRAIT_HEIGHT";
 	public static final String GAME_RESULTS_LABEL_LINE_HEIGHT = "GAME_RESULTS_LABEL_LINE_HEIGHT";
+	public static final String GAME_RESULTS_LABEL_HEADER_HEIGHT = "GAME_RESULTS_LABEL_HEADER_HEIGHT";
+	public static final String GAME_RESULTS_LINE_FONT_SIZE = "GAME_RESULTS_LINE_FONT_SIZE";
+	public static final String GAME_RESULTS_HEADER_FONT_SIZE = "GAME_RESULTS_HEADER_FONT_SIZE";
+	public static final String GAME_RESULTS_MARGIN_SIZE = "GAME_RESULTS_MARGIN_SIZE";
+	public static final String GAME_RESULTS_LABEL_NAME_WIDTH = "GAME_RESULTS_LABEL_NAME_WIDTH";
 		
 	// sizes
 	private static final HashMap<String,Integer> sizes = new HashMap<String,Integer>();
@@ -76,18 +77,20 @@ public class SwingTools
 		int height = panelDimension.height;
 		
 		// buttons
-		int menuButtonHeight = (int)(height*0.05);
-		sizes.put(MENU_BUTTON_HEIGHT,menuButtonHeight);
-		int horizontalMenuButtonWIdth = menuButtonHeight;
-		sizes.put(HORIZONTAL_MENU_BUTTON_WIDTH,horizontalMenuButtonWIdth);
-		sizes.put(HORIZONTAL_MENU_BUTTON_SPACE,(int)(width*0.025));
-		sizes.put(PRINCIPAL_VERTICAL_MENU_BUTTON_WIDTH,(int)(width*0.33));
+		int verticalMenuButtonHeight = (int)(height*0.05);
+		sizes.put(MENU_VERTICAL_BUTTON_HEIGHT,verticalMenuButtonHeight);
+		int horizontalMenuButtonHeight = (int)(height*0.07);
+		sizes.put(MENU_HORIZONTAL_BUTTON_HEIGHT,horizontalMenuButtonHeight);
+		int horizontalMenuButtonWidth = horizontalMenuButtonHeight;
+		sizes.put(MENU_HORIZONTAL_BUTTON_WIDTH,horizontalMenuButtonWidth);
+		sizes.put(MENU_HORIZONTAL_BUTTON_SPACE,(int)(width*0.025));
+		sizes.put(MENU_VERTICAL_PRIMARY_BUTTON_WIDTH,(int)(width*0.33));
 		int secondaryVerticalMenuButtonWIdth = (int)(width*0.25);
-		sizes.put(SECONDARY_VERTICAL_MENU_BUTTON_WIDTH,secondaryVerticalMenuButtonWIdth);
-		sizes.put(VERTICAL_MENU_BUTTON_SPACE,(int)(height*0.025));
+		sizes.put(MENU_VERTICAL_SECONDARY_BUTTON_WIDTH,secondaryVerticalMenuButtonWIdth);
+		sizes.put(MENU_VERTICAL_BUTTON_SPACE,(int)(height*0.025));
 		
 		// menu panels
-		int horizontalSplitMenuPanelHeight = menuButtonHeight; 
+		int horizontalSplitMenuPanelHeight = horizontalMenuButtonHeight; 
 		sizes.put(HORIZONTAL_SPLIT_MENU_PANEL_HEIGHT,horizontalSplitMenuPanelHeight);
 		sizes.put(HORIZONTAL_SPLIT_MENU_PANEL_WIDTH,width);
 		int horizontalSplitDataPanelHeight = height-horizontalSplitMenuPanelHeight; 
@@ -100,8 +103,8 @@ public class SwingTools
 		sizes.put(VERTICAL_SPLIT_DATA_PANEL_HEIGHT,height);
 		sizes.put(VERTICAL_SPLIT_DATA_PANEL_WIDTH,width-verticalSplitMenuPanelWidth);
 		// font
-		int menuButtonFontSize = getFontSize(menuButtonHeight*0.9,configuration,g);
-		sizes.put(MENU_BUTTON_FONT_SIZE, menuButtonFontSize);
+		int menuButtonFontSize = getFontSize(verticalMenuButtonHeight*0.9,configuration,g);
+		sizes.put(MENU_ALL_BUTTON_FONT_SIZE, menuButtonFontSize);
 		
 		// font
 		int gameTitleFontSize = (int)(menuButtonFontSize*1.2);
@@ -113,20 +116,27 @@ public class SwingTools
 			FontMetrics metrics = g.getFontMetrics(font);
 			gameLabelTitleHeight = metrics.getHeight();
 		}
-		sizes.put(GAME_LABEL_TITLE_HEIGHT, gameLabelTitleHeight);
+		sizes.put(GAME_DATA_LABEL_TITLE_HEIGHT, gameLabelTitleHeight);
 		// game panel
-		int gameTitleMarginSize = (int)(width*0.025);
-		sizes.put(GAME_TITLE_MARGIN_SIZE,gameTitleMarginSize);
-		int gameResultPanelHeight = horizontalSplitDataPanelHeight-3*gameTitleMarginSize-gameLabelTitleHeight;
-		sizes.put(GAME_RESULTS_PANEL_HEIGHT,gameResultPanelHeight);
-		int gameResultPanelWidth = horizontalSplitDataPanelWidth-2*gameTitleMarginSize;
-		sizes.put(GAME_RESULTS_PANEL_WIDTH,gameResultPanelWidth);
+		int gameDataMarginSize = (int)(width*0.025);
+		sizes.put(GAME_DATA_MARGIN_SIZE,gameDataMarginSize);
+		int gameDataPanelHeight = horizontalSplitDataPanelHeight-3*gameDataMarginSize-gameLabelTitleHeight;
+		sizes.put(GAME_DATA_PANEL_HEIGHT,gameDataPanelHeight);
+		int gameDataPanelWidth = horizontalSplitDataPanelWidth-2*gameDataMarginSize;
+		sizes.put(GAME_DATA_PANEL_WIDTH,gameDataPanelWidth);
 		int gameResultsMarginSize = (int)(height*0.005);
 		sizes.put(GAME_RESULTS_MARGIN_SIZE,gameResultsMarginSize);
-		int gameLabelPortraitHeight = (gameResultPanelHeight-15*gameResultsMarginSize)/16;
-		sizes.put(GAME_LABEL_PORTRAIT_HEIGHT,gameLabelPortraitHeight);
-		int gameResultFontSize = getFontSize(gameLabelPortraitHeight*1.1, configuration, g);
-		sizes.put(GAME_RESULTS_FONT_SIZE,gameResultFontSize);
+		int gameResultsLabelLineHeight = (gameDataPanelHeight-16*gameResultsMarginSize)/17;
+		sizes.put(GAME_RESULTS_LABEL_LINE_HEIGHT,gameResultsLabelLineHeight);
+		int gameResultLineFontSize = getFontSize(gameResultsLabelLineHeight*0.9, configuration, g);
+		sizes.put(GAME_RESULTS_LINE_FONT_SIZE,gameResultLineFontSize);
+		int gameResultLabelNameWidth = (int)(gameDataPanelWidth/3);
+		sizes.put(GAME_RESULTS_LABEL_NAME_WIDTH,gameResultLabelNameWidth);
+		int gameResultsLabelHeaderHeight = gameDataPanelHeight-16*gameResultsMarginSize-16*gameResultsLabelLineHeight;
+		sizes.put(GAME_RESULTS_LABEL_HEADER_HEIGHT,gameResultsLabelHeaderHeight);
+		int gameResultHeaderFontSize = getFontSize(gameResultsLabelHeaderHeight*0.9, configuration, g);
+		sizes.put(GAME_RESULTS_HEADER_FONT_SIZE,gameResultHeaderFontSize);
+		
 		
 		// icons
 		BufferedImage absent = ImageTools.getAbsentImage(64,64);
@@ -281,7 +291,7 @@ public class SwingTools
 		else
 		{	// text 
 			String text = configuration.getLanguage().getText(name);
-			Font font = configuration.getFont().deriveFont((float)sizes.get(MENU_BUTTON_FONT_SIZE));
+			Font font = configuration.getFont().deriveFont((float)sizes.get(MENU_ALL_BUTTON_FONT_SIZE));
 			button.setFont(font);
 			button.setText(text);
 		}		
@@ -292,9 +302,9 @@ public class SwingTools
 		String text = configuration.getLanguage().getText(toolTip);
 		button.setToolTipText(text);
 	}		
-	public static void initButton(AbstractButton result,String name, int width, ButtonAware panel, Configuration configuration)
+	public static void initButton(AbstractButton result,String name, int width, int height, ButtonAware panel, Configuration configuration)
 	{	// dimension
-		Dimension dim = new Dimension(width,sizes.get(MENU_BUTTON_HEIGHT));
+		Dimension dim = new Dimension(width,height);
 		result.setMinimumSize(dim);
 		result.setMaximumSize(dim);
 		result.setPreferredSize(dim);
@@ -305,30 +315,34 @@ public class SwingTools
 		result.addActionListener(panel);
 	}
 	public static JButton createPrincipalVerticalMenuButton(String name, ButtonAware panel, Configuration configuration)
-	{	int width = sizes.get(PRINCIPAL_VERTICAL_MENU_BUTTON_WIDTH);
+	{	int width = sizes.get(MENU_VERTICAL_PRIMARY_BUTTON_WIDTH);
+		int height = sizes.get(MENU_VERTICAL_BUTTON_HEIGHT);
 		JButton result = new JButton();
-		initButton(result,name,width,panel,configuration);
+		initButton(result,name,width,height,panel,configuration);
 		result.setAlignmentX(Component.CENTER_ALIGNMENT);
 		return result;
 	}
 	public static JButton createSecondaryVerticalMenuButton(String name, ButtonAware panel, Configuration configuration)
-	{	int width = sizes.get(SECONDARY_VERTICAL_MENU_BUTTON_WIDTH);
+	{	int width = sizes.get(MENU_VERTICAL_SECONDARY_BUTTON_WIDTH);
+		int height = sizes.get(MENU_VERTICAL_BUTTON_HEIGHT);
 		JButton result = new JButton();
-		initButton(result,name,width,panel,configuration);
+		initButton(result,name,width,height,panel,configuration);
 		result.setAlignmentX(Component.CENTER_ALIGNMENT);
 		return result;
 	}	
 	public static JButton createHorizontalMenuButton(String name, ButtonAware panel, Configuration configuration)
-	{	int width = sizes.get(HORIZONTAL_MENU_BUTTON_WIDTH);
+	{	int width = sizes.get(MENU_HORIZONTAL_BUTTON_WIDTH);
+		int height = sizes.get(MENU_HORIZONTAL_BUTTON_HEIGHT);
 		JButton result = new JButton();
-		initButton(result,name,width,panel,configuration);
+		initButton(result,name,width,height,panel,configuration);
 		result.setAlignmentY(Component.CENTER_ALIGNMENT);
 		return result;
 	}
 	public static JToggleButton createHorizontalMenuToggleButton(String name, ButtonAware panel, Configuration configuration)
-	{	int width = sizes.get(HORIZONTAL_MENU_BUTTON_WIDTH);
+	{	int width = sizes.get(MENU_HORIZONTAL_BUTTON_WIDTH);
+		int height = sizes.get(MENU_HORIZONTAL_BUTTON_HEIGHT);
 		JToggleButton result = new JToggleButton();
-		initButton(result,name,width,panel,configuration);
+		initButton(result,name,width,height,panel,configuration);
 		result.setAlignmentY(Component.CENTER_ALIGNMENT);
 		return result;
 	}
