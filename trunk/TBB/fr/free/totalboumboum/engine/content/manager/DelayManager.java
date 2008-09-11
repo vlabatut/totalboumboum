@@ -19,7 +19,7 @@ public class DelayManager
 	public static final String DL_WAIT = "DL_WAIT";
 	
 	private Sprite sprite;
-	protected HashMap<String,Double> delays;
+	private HashMap<String,Double> delays;
 
 	public DelayManager(Sprite sprite)
 	{	this.sprite = sprite;

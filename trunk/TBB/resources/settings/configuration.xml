@@ -22,9 +22,13 @@
 	<profiles>
 		<profile value="DoganDemirkol" /> <!-- white -->
 		<profile value="BingolKetenci" /> <!-- blue -->
-<!-- 		<profile value="OkanYuksel" /> --> <!-- black -->   
+<!-- 		<profile value="OkanYuksel" /> BUGGÉ --> <!-- black -->   
 		<profile value="GokselMenges" />  <!-- green --> 
-		<profile value="KilicPala" /> <!-- rouge -->
+		<profile value="KilicPala" /> <!-- red -->
+<!--		<profile value="CaglayanElmas" BUGGÉ /> --> <!-- orange -->
+<!--		<profile value="GoksayKose" /> --> <!-- pink -->
+		<profile value="BasmanSandalli" /> <!-- brown -->
+
 	</profiles>
 
 <!-- TOURNAMENT -->	

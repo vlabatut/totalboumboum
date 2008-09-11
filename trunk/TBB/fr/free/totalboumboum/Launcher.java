@@ -551,18 +551,28 @@ public class Launcher
 	 */
 
 	/*
+	 * TODO couleurs
+	 * en fait la couleur dans le profil est une couleur préférée par défaut
+	 * mais quand on choisit les joueurs pour un tournoi, ils peuvent changer leur couleur
+	 */
+	
+	/*
 	 * A FAIRE :
-	 * 0) revoir les icones en carrés + plus grandes + play en rouge
-	 * 0) revoir le layout des résultats
-	 * 1) mettre une barre d'évolution pdt le chargement du niveau
-	 * x) redescendre les stats dans loop, et gestion de fin de partie, puis synchroniser les stats dans round
-	 * 1) définir les présentations des rounds
-	 * 2) passer à un système gérant plusieurs pointProcesseurs
-	 * 3) gérer le partage des points en cas d'égalité
-	 * 4) pb lors de l'affichage du résultat d'un match : le classement des non-gagnants ne respecte pas le total des points...
-	 * 5) problème de collisions quand on change la vitesse (surement un problème d'arrondi, ou alors un saut trop grand (en distance), voir si j'avais implémenté la maximalisation du déplacement malgré une éventuelle collision...)
-	 * 6) revoir le système des IA
-	 * 7) considérer qu'une partie peut s'arrêter à cause d'une limite de points ou de score (ex: pr frag, a une goalaverage>10)
-	 * 8) voir pq on ne peut plus controler l'IA
+	 * - mise en place d'icones à la place des menus horizontaux
+	 * - améliration de l'affichage des résultats
+	 * - icones + plus grandes + play en rouge
+	 * 
+	 * - revoir les icones en carrés 
+	 * - compléter le layout des résultats
+	 * - mettre une barre d'évolution pdt le chargement du niveau
+	 * - redescendre les stats dans loop, et gestion de fin de partie, puis synchroniser les stats dans round
+	 * - définir les présentations des rounds
+	 * - passer à un système gérant plusieurs pointProcesseurs
+	 * - gérer le partage des points en cas d'égalité
+	 * - pb lors de l'affichage du résultat d'un match : le classement des non-gagnants ne respecte pas le total des points...
+	 * - problème de collisions quand on change la vitesse (surement un problème d'arrondi, ou alors un saut trop grand (en distance), voir si j'avais implémenté la maximalisation du déplacement malgré une éventuelle collision...)
+	 * - revoir le système des IA
+	 * - considérer qu'une partie peut s'arrêter à cause d'une limite de points ou de score (ex: pr frag, a un goalaverage>10)
+	 * - voir pq on ne peut plus controler l'IA
 	 */
 }

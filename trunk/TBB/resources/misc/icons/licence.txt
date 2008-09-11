@@ -7,7 +7,6 @@ License	: LGPL (GNU Lesser General Public License)
 
 	+ home.png
 	+ stats.png
-	+ play.png
 
 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 Total Boum Boum
@@ -19,6 +18,7 @@ License	: GPLv2 (GNU General Public License)
 	+ frame.png
 	+ left_blue.png		(derivative work from Crystal Project Icons)
 	+ left_red.png		(derivative work from Crystal Project Icons)
+	+ play.png			(derivative work from Crystal Project Icons)
 	+ results.png		(derivative work from Crystal Project Icons)
 	+ right_blue.png	(derivative work from Crystal Project Icons)
 	+ right_red.png		(derivative work from Crystal Project Icons)
