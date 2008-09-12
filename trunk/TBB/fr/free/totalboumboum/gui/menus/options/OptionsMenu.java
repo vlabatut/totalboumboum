@@ -17,7 +17,7 @@ import fr.free.totalboumboum.tools.GuiTools;
 public class OptionsMenu extends SimpleMenuPanel
 {	private static final long serialVersionUID = 1L;
 	
-	private JButton buttonGamePlay; 
+	private JButton buttonGamePlay;
 	private JButton buttonVideo;
 	private JButton buttonBack;
 	

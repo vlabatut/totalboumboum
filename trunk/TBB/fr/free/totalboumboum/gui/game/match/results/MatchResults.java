@@ -40,7 +40,7 @@ import fr.free.totalboumboum.tools.ImageTools;
 public class MatchResults extends InnerDataPanel
 {	
 	private static final long serialVersionUID = 1L;
- 
+
 	private JPanel resultsPanel;
 	
 	public MatchResults(SplitMenuPanel container)

@@ -15,7 +15,7 @@ import fr.free.totalboumboum.data.statistics.StatisticTournament;
 import fr.free.totalboumboum.game.match.Match;
 import fr.free.totalboumboum.game.match.MatchRenderPanel;
 
-public abstract class AbstractTournament 
+public abstract class AbstractTournament
 {	
 	/////////////////////////////////////////////////////////////////
 	// GAME		/////////////////////////////////////////////

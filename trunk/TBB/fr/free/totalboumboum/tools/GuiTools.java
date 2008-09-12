@@ -1,6 +1,6 @@
 package fr.free.totalboumboum.tools;
 
-public class GuiTools 
+public class GuiTools
 {	
 	// MAIN MENU
 	public static final String MAIN_MENU_BUTTON_HEROES = "MainMenuButtonHeroes";
@@ -54,6 +54,12 @@ public class GuiTools
 	public static final String ROUND_BUTTON_PLAY = "RoundButtonPlay";
 	public static final String ROUND_BUTTON_RESULTS = "RoundButtonResults";
 	public static final String ROUND_BUTTON_STATISTICS = "RoundButtonStatistics";
+	public static final String ROUND_PROGRESSBAR_BOMBSET = "RoundProgressbarBombset";
+	public static final String ROUND_PROGRESSBAR_ITEMSET = "RoundProgressbarItemset";
+	public static final String ROUND_PROGRESSBAR_THEME = "RoundProgressbarTheme";
+	public static final String ROUND_PROGRESSBAR_ZONE = "RoundProgressbarZone";
+	public static final String ROUND_PROGRESSBAR_PLAYER = "RoundProgressbarPlayer";
+	public static final String ROUND_PROGRESSBAR_COMPLETE = "RoundProgressbarComplete";
 	
 	// GAME PANEL
 	public static final String GAME_TOURNAMENT_TITLE_DESCRIPTION = "GameTournamentTitleDescription";

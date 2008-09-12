@@ -25,7 +25,7 @@ import fr.free.totalboumboum.gui.generic.SimpleMenuPanel;
 
 public class LoopPanel extends SimpleMenuPanel implements LoopRenderPanel
 {	private static final long serialVersionUID = 1L;
-	private Loop loop; 
+	private Loop loop;
 	
 	public LoopPanel(MenuContainer container, MenuPanel parent)
 	{	super(container,parent);
@@ -35,14 +35,9 @@ public class LoopPanel extends SimpleMenuPanel implements LoopRenderPanel
 		setBackground(Color.lightGray);
 		setFocusable(true);
 		Loop loop = getConfiguration().getTournament().getCurrentMatch().getCurrentRound().getLoop();
-		loop.setPanel(this);
 		// the JPanel now has focus, so receives key events
 		// NOTE : surement à modifier, car un peu cra-cra (focus à donner à partir de l'extérieur)
-		SwingUtilities.invokeLater(new Runnable()
-		{	public void run()
-			{	requestFocus();	
-			}
-		});
+		loop.setPanel(this);
 		// thread
 		Thread animator = new Thread(loop);
 		animator.start();

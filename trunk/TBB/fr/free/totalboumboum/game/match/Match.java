@@ -21,7 +21,7 @@ public class Match
 {	
 	public Match(AbstractTournament tournament)
 	{	this.tournament = tournament;
-		configuration = tournament.getConfiguration(); 
+		configuration = tournament.getConfiguration();
 	}
 	
 	/////////////////////////////////////////////////////////////////

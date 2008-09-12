@@ -71,7 +71,7 @@
 	<text name="TournamentButtonDescriptionTooltip" value="See the description of the current tournament" />
 
 	<text name="TournamentButtonFinish" value="Finish" />
-	<text name="TournamentButtonFinishMatchTooltip" value="Finish the current tournament and go back to the tournament menu" />
+	<text name="TournamentButtonFinishTooltip" value="Finish the current tournament and go back to the tournament menu" />
 
 	<text name="TournamentButtonMenu" value="Menu" />
 	<text name="TournamentButtonMenuTooltip" value="Go back to the tournament menu" />
@@ -134,6 +134,13 @@
 
 	<text name="RoundButtonStatistics" value="Statistics" />
 	<text name="RoundButtonStatisticsTooltip" value="See the detailed statistics of the current round" />
+
+	<text name="RoundProgressbarBombset" value="Loading bombs" />
+	<text name="RoundProgressbarComplete" value="Loading complete" />
+	<text name="RoundProgressbarItemset" value="Loading items" />
+	<text name="RoundProgressbarPlayer" value="Loading player" />
+	<text name="RoundProgressbarTheme" value="Loading theme" />
+	<text name="RoundProgressbarZone" value="Loading zone" />
 
 <!-- GAME PANEL -->
 

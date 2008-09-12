@@ -40,7 +40,7 @@ import fr.free.totalboumboum.tools.GuiTools;
 
 public class TournamentMenu extends InnerMenuPanel implements TournamentRenderPanel
 {	private static final long serialVersionUID = 1L;
-	 
+	
 	private MenuPanel matchPanel;
 	private InnerDataPanel tournamentDescription;
 	private InnerDataPanel tournamentResults;

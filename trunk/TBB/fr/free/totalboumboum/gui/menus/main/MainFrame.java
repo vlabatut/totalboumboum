@@ -29,7 +29,7 @@ import java.io.IOException;
 public class MainFrame extends JFrame implements WindowListener,MenuContainer
 {	private static final long serialVersionUID = 1L;
 
-	private MainMenu mainMenuPanel; 
+	private MainMenu mainMenuPanel;
 
 	public MainFrame() throws ParserConfigurationException, SAXException, IOException, IllegalArgumentException, SecurityException, IllegalAccessException, NoSuchFieldException, ClassNotFoundException
 	{	super("TBB v."+GameConstants.VERSION);

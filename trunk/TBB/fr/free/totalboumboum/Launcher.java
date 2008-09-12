@@ -558,25 +558,33 @@ public class Launcher
 	
 	/*
 	 * TODO
-	 * FAIT :
+	 * *******************************************************
+	 * ************************* FAIT ************************
+	 * *******************************************************
+	 * + alpha.37
 	 * - mise en place d'icones à la place des menus horizontaux
-	 * - améliration de l'affichage des résultats
+	 * - amélioration de l'affichage des résultats
 	 * - icones + plus grandes + play en rouge
 	 * - revoir le titre des résultats : plus gros, et carré blanc transparent (comme tableau)
 	 * - compléter le layout des résultats
 	 * 
-	 * A FAIRE :
+	 * + alpha.38
 	 * - mettre une barre d'évolution pdt le chargement du niveau
-	 * - revoir les icones en carrés 
+	 * 
+	 * *******************************************************
+	 * *********************** A FAIRE ***********************
+	 * *******************************************************
 	 * - quand un héro reçoit l'ordre de pleurer, il ne le fait pas s'il est en train de mourir
-	 * - redescendre les stats dans loop, et gestion de fin de partie, puis synchroniser les stats dans round
+	 * - gérer le partage des points en cas d'égalité
+	 * - optimisation du chargement : ne charger qu'une seule fois les caractéristiques des joueurs !
+	 * - revoir les icones en carrés 
 	 * - définir les présentations des rounds
 	 * - passer à un système gérant plusieurs pointProcesseurs
-	 * - gérer le partage des points en cas d'égalité
 	 * - pb lors de l'affichage du résultat d'un match : le classement des non-gagnants ne respecte pas le total des points...
 	 * - problème de collisions quand on change la vitesse (surement un problème d'arrondi, ou alors un saut trop grand (en distance), voir si j'avais implémenté la maximalisation du déplacement malgré une éventuelle collision...)
 	 * - revoir le système des IA
 	 * - considérer qu'une partie peut s'arrêter à cause d'une limite de points ou de score (ex: pr frag, a un goalaverage>10)
 	 * - voir pq on ne peut plus controler l'IA
+	 * - redescendre les stats dans loop, et gestion de fin de partie, puis synchroniser les stats dans round
 	 */
 }

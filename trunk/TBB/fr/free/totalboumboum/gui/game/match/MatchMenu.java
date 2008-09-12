@@ -42,7 +42,7 @@ import fr.free.totalboumboum.tools.GuiTools;
 
 public class MatchMenu extends InnerMenuPanel implements MatchRenderPanel
 {	private static final long serialVersionUID = 1L;
-	 
+	
 	private MenuPanel roundPanel;
 	private InnerDataPanel matchDescription;
 	private InnerDataPanel matchResults;
