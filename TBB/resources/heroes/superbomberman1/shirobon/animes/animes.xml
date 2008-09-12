@@ -22,7 +22,7 @@
 		<colormap name="yellow" file="yellow" />
 	</colors>
 	
-	<gestures folder="gestures" >
+	<gestures folder="pictures" >
 		<gesture name="appearing" folder="disappearing">
 			<direction name="none">
 				<step duration="40" file="9.gif" shadow="shadow9.png" />
