@@ -1,5 +1,6 @@
 package fr.free.totalboumboum.gui;
 
+import java.awt.Color;
 import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.Font;
@@ -59,15 +60,14 @@ public class SwingTools
 	// sizes
 	private static final HashMap<String,Integer> sizes = new HashMap<String,Integer>();
 	
-	// tournament/match/result
-	public static final String GAME_ICON_INFO = "GAME_ICON_INFO";
-	public static final String GAME_ICON_LEFT = "GAME_ICON_LEFT";
-	public static final String GAME_ICON_PLAY = "GAME_ICON_PLAY";
-	public static final String GAME_ICON_QUIT = "GAME_ICON_QUIT";
-	public static final String GAME_ICON_RESULTS = "GAME_ICON_RESULTS";
-	public static final String GAME_ICON_RIGHT = "GAME_ICON_RIGHT";
-	public static final String GAME_ICON_STATS = "GAME_ICON_STATS";
 	// icons
+	public static final String ICON_NORMAL = "_normal";
+	public static final String ICON_NORMAL_SELECTED = "_normal_selected";
+	public static final String ICON_DISABLED = "_disabled";
+	public static final String ICON_DISABLED_SELECTED = "_disabled_selected";
+	public static final String ICON_ROLLOVER = "_rollover";
+	public static final String ICON_ROLLOVER_SELECTED = "_rollover_selected";
+	public static final String ICON_PRESSED = "_pressed";
 	private static final HashMap<String,BufferedImage> icons = new HashMap<String,BufferedImage>();
 	
 
@@ -144,92 +144,79 @@ public class SwingTools
 		// icons
 		BufferedImage absent = ImageTools.getAbsentImage(64,64);
 		BufferedImage image;
+		String[] buttonStates = {ICON_NORMAL,ICON_NORMAL_SELECTED,
+				ICON_DISABLED,ICON_DISABLED_SELECTED,
+				ICON_ROLLOVER,ICON_ROLLOVER_SELECTED,
+				ICON_PRESSED};
+		
 		String folder = FileTools.getIconsPath()+File.separator;
-		{
-			try
-			{	image = ImageTools.loadImage(folder+"description.png",null);
+		{	String name = "description";
+			for(int i=0;i<buttonStates.length;i++)
+			{	image = loadIcon(folder+name+buttonStates[i]+".png",absent);
+				icons.put(GuiTools.TOURNAMENT_BUTTON_DESCRIPTION+buttonStates[i],image);
+				icons.put(GuiTools.MATCH_BUTTON_DESCRIPTION+buttonStates[i],image);
+				icons.put(GuiTools.ROUND_BUTTON_DESCRIPTION+buttonStates[i],image);
 			}
-			catch (IOException e)
-			{	image = absent;
-			}
-			icons.put(GuiTools.TOURNAMENT_BUTTON_DESCRIPTION,image);
-			icons.put(GuiTools.MATCH_BUTTON_DESCRIPTION,image);
-			icons.put(GuiTools.ROUND_BUTTON_DESCRIPTION,image);
 		}
-		{	try
-			{	image = ImageTools.loadImage(folder+"left_blue.png",null);
+		{	String name = "left_blue";
+			for(int i=0;i<buttonStates.length;i++)
+			{	image = loadIcon(folder+name+buttonStates[i]+".png",absent);
+				icons.put(GuiTools.TOURNAMENT_BUTTON_MENU+buttonStates[i],image);
+				icons.put(GuiTools.MATCH_BUTTON_CURRENT_TOURNAMENT+buttonStates[i],image);
+				icons.put(GuiTools.ROUND_BUTTON_CURRENT_MATCH+buttonStates[i],image);
 			}
-			catch (IOException e)
-			{	image = absent;
-			}
-			icons.put(GuiTools.TOURNAMENT_BUTTON_MENU,image);
-			icons.put(GuiTools.MATCH_BUTTON_CURRENT_TOURNAMENT,image);
-			icons.put(GuiTools.ROUND_BUTTON_CURRENT_MATCH,image);
 		}
-		{	try
-			{	image = ImageTools.loadImage(folder+"left_red.png",null);
+		{	String name = "left_red";
+			for(int i=0;i<buttonStates.length;i++)
+			{	image = loadIcon(folder+name+buttonStates[i]+".png",absent);
+				icons.put(GuiTools.TOURNAMENT_BUTTON_FINISH+buttonStates[i],image);
+				icons.put(GuiTools.MATCH_BUTTON_FINISH+buttonStates[i],image);
+				icons.put(GuiTools.ROUND_BUTTON_FINISH+buttonStates[i],image);
 			}
-			catch (IOException e)
-			{	image = absent;
-			}
-			icons.put(GuiTools.TOURNAMENT_BUTTON_FINISH,image);
-			icons.put(GuiTools.MATCH_BUTTON_FINISH,image);
-			icons.put(GuiTools.ROUND_BUTTON_FINISH,image);
 		}
-		{	try
-			{	image = ImageTools.loadImage(folder+"play.png",null);
+		{	String name = "play";
+			for(int i=0;i<buttonStates.length;i++)
+			{	image = loadIcon(folder+name+buttonStates[i]+".png",absent);
+				icons.put(GuiTools.ROUND_BUTTON_PLAY+buttonStates[i],image);
 			}
-			catch (IOException e)
-			{	image = absent;
-			}
-			icons.put(GuiTools.ROUND_BUTTON_PLAY,image);
 		}
-		{	try
-			{	image = ImageTools.loadImage(folder+"home.png",null);
+		{	String name = "home";
+			for(int i=0;i<buttonStates.length;i++)
+			{	image = loadIcon(folder+name+buttonStates[i]+".png",absent);
+				icons.put(GuiTools.TOURNAMENT_BUTTON_QUIT+buttonStates[i],image);
+				icons.put(GuiTools.MATCH_BUTTON_QUIT+buttonStates[i],image);
+				icons.put(GuiTools.ROUND_BUTTON_QUIT+buttonStates[i],image);
 			}
-			catch (IOException e)
-			{	image = absent;
-			}
-			icons.put(GuiTools.TOURNAMENT_BUTTON_QUIT,image);
-			icons.put(GuiTools.MATCH_BUTTON_QUIT,image);
-			icons.put(GuiTools.ROUND_BUTTON_QUIT,image);
 		}
-		{	try
-			{	image = ImageTools.loadImage(folder+"results.png",null);
+		{	String name = "results";
+			for(int i=0;i<buttonStates.length;i++)
+			{	image = loadIcon(folder+name+buttonStates[i]+".png",absent);
+				icons.put(GuiTools.TOURNAMENT_BUTTON_RESULTS+buttonStates[i],image);
+				icons.put(GuiTools.MATCH_BUTTON_RESULTS+buttonStates[i],image);
+				icons.put(GuiTools.ROUND_BUTTON_RESULTS+buttonStates[i],image);
 			}
-			catch (IOException e)
-			{	image = absent;
-			}
-			icons.put(GuiTools.TOURNAMENT_BUTTON_RESULTS,image);
-			icons.put(GuiTools.MATCH_BUTTON_RESULTS,image);
-			icons.put(GuiTools.ROUND_BUTTON_RESULTS,image);
 		}
-		{	try
-			{	image = ImageTools.loadImage(folder+"right_blue.png",null);
+		{	String name = "right_blue";
+			for(int i=0;i<buttonStates.length;i++)
+			{	image = loadIcon(folder+name+buttonStates[i]+".png",absent);
 			}
-			catch (IOException e)
-			{	image = absent;
-			}
-			try
-			{	image = ImageTools.loadImage(folder+"right_red.png",null);
-			}
-			catch (IOException e)
-			{	image = absent;
-			}
-			icons.put(GuiTools.TOURNAMENT_BUTTON_CURRENT_MATCH,image);
-			icons.put(GuiTools.TOURNAMENT_BUTTON_NEXT_MATCH,image);
-			icons.put(GuiTools.MATCH_BUTTON_CURRENT_ROUND,image);
-			icons.put(GuiTools.MATCH_BUTTON_NEXT_ROUND,image);
 		}
-		{	try
-			{	image = ImageTools.loadImage(folder+"stats.png",null);
+		{	String name = "right_red";
+			for(int i=0;i<buttonStates.length;i++)
+			{	image = loadIcon(folder+name+buttonStates[i]+".png",absent);
+				icons.put(GuiTools.TOURNAMENT_BUTTON_CURRENT_MATCH+buttonStates[i],image);
+				icons.put(GuiTools.TOURNAMENT_BUTTON_NEXT_MATCH+buttonStates[i],image);
+				icons.put(GuiTools.MATCH_BUTTON_CURRENT_ROUND+buttonStates[i],image);
+				icons.put(GuiTools.MATCH_BUTTON_NEXT_ROUND+buttonStates[i],image);
 			}
-			catch (IOException e)
-			{	image = absent;
+		}
+		{	String name = "stats";
+			for(int i=0;i<buttonStates.length;i++)
+			{	image = loadIcon(folder+name+buttonStates[i]+".png",absent);
+				icons.put(GuiTools.TOURNAMENT_BUTTON_STATISTICS+buttonStates[i],image);
+				icons.put(GuiTools.MATCH_BUTTON_STATISTICS+buttonStates[i],image);
+				icons.put(GuiTools.ROUND_BUTTON_STATISTICS+buttonStates[i],image);
 			}
-			icons.put(GuiTools.TOURNAMENT_BUTTON_STATISTICS,image);
-			icons.put(GuiTools.MATCH_BUTTON_STATISTICS,image);
-			icons.put(GuiTools.ROUND_BUTTON_STATISTICS,image);
 		}		
 		
 	}
@@ -241,7 +228,7 @@ public class SwingTools
 		return result;
 	}
 	public static BufferedImage getIcon(String key)
-	{	BufferedImage result;;
+	{	BufferedImage result;
 		BufferedImage temp = icons.get(key);
 		if(temp==null)
 			result = ImageTools.getAbsentImage(64,64);
@@ -262,6 +249,16 @@ public class SwingTools
 		while(fheight<limit);
 		return result;
 	}
+	public static BufferedImage loadIcon(String path, BufferedImage absent)
+	{	BufferedImage image;
+		try
+		{	image = ImageTools.loadImage(path,null);
+		}
+		catch (IOException e)
+		{	image = absent;
+		}
+		return image;	
+	}
 	
 	
 	
@@ -276,20 +273,67 @@ public class SwingTools
 	
 	
 	
-	
-	
+
 	
 	public static void setButtonContent(String name, AbstractButton button, Configuration configuration)
 	{	// content
 		if(icons.containsKey(name))
-		{	//icon
-			BufferedImage icon = getIcon(name);
-			double zoom = button.getPreferredSize().getHeight()/(double)icon.getHeight();
-			icon = ImageTools.resize(icon,zoom*0.9,true);
-			ImageIcon ii = new ImageIcon(icon);
-			button.setIcon(ii);
-//			button.setBorderPainted(false);
-//			button.setBorder(null);
+		{	// normal icon
+			{	BufferedImage icon = getIcon(name+ICON_NORMAL);
+				double zoom = button.getPreferredSize().getHeight()/(double)icon.getHeight();
+				icon = ImageTools.resize(icon,zoom*0.9,true);
+				ImageIcon ii = new ImageIcon(icon);
+				button.setIcon(ii);
+			}
+			// disabled icon
+			{	BufferedImage icon = getIcon(name+ICON_DISABLED);
+				double zoom = button.getPreferredSize().getHeight()/(double)icon.getHeight();
+				icon = ImageTools.resize(icon,zoom*0.9,true);
+				ImageIcon ii = new ImageIcon(icon);
+				button.setDisabledIcon(ii);
+			}
+			// pressed icon
+			{	BufferedImage icon = getIcon(name+ICON_PRESSED);
+				double zoom = button.getPreferredSize().getHeight()/(double)icon.getHeight();
+				icon = ImageTools.resize(icon,zoom*0.9,true);
+				ImageIcon ii = new ImageIcon(icon);
+				button.setPressedIcon(ii);
+			}
+			// selected icon
+			{	BufferedImage icon = getIcon(name+ICON_NORMAL_SELECTED);
+				double zoom = button.getPreferredSize().getHeight()/(double)icon.getHeight();
+				icon = ImageTools.resize(icon,zoom*0.9,true);
+				ImageIcon ii = new ImageIcon(icon);
+				button.setSelectedIcon(ii);
+			}
+			// disabled selected icon
+			{	BufferedImage icon = getIcon(name+ICON_DISABLED_SELECTED);
+				double zoom = button.getPreferredSize().getHeight()/(double)icon.getHeight();
+				icon = ImageTools.resize(icon,zoom*0.9,true);
+				ImageIcon ii = new ImageIcon(icon);
+				button.setDisabledSelectedIcon(ii);
+			}
+			// rollover icon
+			{	BufferedImage icon = getIcon(name+ICON_ROLLOVER);
+				double zoom = button.getPreferredSize().getHeight()/(double)icon.getHeight();
+				icon = ImageTools.resize(icon,zoom*0.9,true);
+				ImageIcon ii = new ImageIcon(icon);
+				button.setRolloverEnabled(true);
+				button.setRolloverIcon(ii);
+			}
+			// rollover selected icon
+			{	BufferedImage icon = getIcon(name+ICON_ROLLOVER_SELECTED);
+				double zoom = button.getPreferredSize().getHeight()/(double)icon.getHeight();
+				icon = ImageTools.resize(icon,zoom*0.9,true);
+				ImageIcon ii = new ImageIcon(icon);
+				button.setRolloverSelectedIcon(ii);
+			}
+			// 
+			button.setBorderPainted(false);
+			button.setBorder(null);
+			button.setMargin(null);
+			button.setBackground(new Color(0,0,0,0));
+			
 		}
 		else
 		{	// text 
