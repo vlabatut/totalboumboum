@@ -64,4 +64,17 @@ public class TrajectoryPack
 			}
 		}
 	}
+	
+	public TrajectoryPack copy()
+	{	TrajectoryPack result = new TrajectoryPack();
+		Iterator<Entry<String,TrajectoryGesture>> it = gestures.entrySet().iterator();
+		while(it.hasNext())
+		{	Entry<String,TrajectoryGesture> t = it.next();
+			TrajectoryGesture value = t.getValue().copy();
+			String key = t.getKey();
+			result.setTrajectoryGesture(key,value);
+		}
+		result.finished = finished;
+		return result;
+	}
 }

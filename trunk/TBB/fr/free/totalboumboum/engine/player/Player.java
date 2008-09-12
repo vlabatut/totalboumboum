@@ -2,6 +2,7 @@ package fr.free.totalboumboum.engine.player;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 
 import javax.xml.parsers.ParserConfigurationException;
 
@@ -17,6 +18,9 @@ import fr.free.totalboumboum.data.profile.ProfileLoader;
 import fr.free.totalboumboum.data.statistics.StatisticMatch;
 import fr.free.totalboumboum.engine.container.bombset.Bombset;
 import fr.free.totalboumboum.engine.container.level.Level;
+import fr.free.totalboumboum.engine.content.feature.ability.AbstractAbility;
+import fr.free.totalboumboum.engine.content.feature.permission.PermissionPack;
+import fr.free.totalboumboum.engine.content.feature.trajectory.TrajectoryPack;
 import fr.free.totalboumboum.engine.content.sprite.Sprite;
 import fr.free.totalboumboum.engine.content.sprite.hero.Hero;
 import fr.free.totalboumboum.engine.content.sprite.hero.HeroFactory;
@@ -42,14 +46,14 @@ public class Player
 	/** current color */
 	private PredefinedColor color;
 	
-	public Player(Profile profile, Level level) throws IllegalArgumentException, SecurityException, ParserConfigurationException, SAXException, IOException, IllegalAccessException, NoSuchFieldException, ClassNotFoundException
+	public Player(Profile profile, Level level, ArrayList<AbstractAbility> ablts, PermissionPack permissions, TrajectoryPack trajectories) throws IllegalArgumentException, SecurityException, ParserConfigurationException, SAXException, IOException, IllegalAccessException, NoSuchFieldException, ClassNotFoundException
 	{	this.level = level;
 		configuration = level.getConfiguration();
 		this.profile = profile;
 		// sprite
 		String folder = FileTools.getHeroesPath()+File.separator+this.profile.getSpritePack();
 		folder = folder + File.separator+this.profile.getSpriteName();
-		HeroFactory tempHeroFactory = HeroFactoryLoader.loadHeroFactory(folder,level,this.profile.getSpriteColor());
+		HeroFactory tempHeroFactory = HeroFactoryLoader.loadHeroFactory(folder,level,this.profile.getSpriteColor(),ablts,permissions,trajectories);
 		sprite = tempHeroFactory.makeSprite();
 		sprite.initGesture();
 		sprite.setControlSettings(this.profile.getControlSettings());

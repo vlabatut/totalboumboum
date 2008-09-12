@@ -30,13 +30,15 @@ public class StateModulation extends AbstractPermission
 		result = "<"+strength+","+frame+">";
 		return result;
 	}
-/*	
+	
 	public StateModulation copy()
 	{	StateModulation result = new StateModulation(name);
-		result.setStrength(strength);
-		result.setFrame(frame);
-		result.setGestureName(gestureName);
+		result.name = name;
+		result.finished = finished;
+		result.frame = frame;
+		result.gestureName = gestureName;
+		result.strength = strength;
 		return result;
 	}
-*/
+
 }

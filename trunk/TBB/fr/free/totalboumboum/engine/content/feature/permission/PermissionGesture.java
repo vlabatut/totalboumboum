@@ -141,4 +141,40 @@ public class PermissionGesture
 			}
 		}
 	}
+	
+	public PermissionGesture copy()
+	{	PermissionGesture result = new PermissionGesture();
+		// actor permissions
+		{	Iterator<ActorPermission> it = actorPermissions.iterator();
+			while(it.hasNext())
+			{	ActorPermission temp = it.next().copy();
+				result.addPermission(temp);
+			}
+		}
+		// state permissions
+		{	Iterator<StateModulation> it = stateModulations.iterator();
+			while(it.hasNext())
+			{	StateModulation temp = it.next().copy();
+				result.addModulation(temp);
+			}
+		}
+		// target permissions
+		{	Iterator<TargetPermission> it = targetPermissions.iterator();
+			while(it.hasNext())
+			{	TargetPermission temp = it.next().copy();
+				result.addPermission(temp);
+			}
+		}
+		// third permissions
+		{	Iterator<ThirdPermission> it = thirdPermissions.iterator();
+			while(it.hasNext())
+			{	ThirdPermission temp = it.next().copy();
+				result.addPermission(temp);
+			}
+		}
+		//
+		result.finished = finished;
+		result.name = name;
+		return result;
+	}
 }

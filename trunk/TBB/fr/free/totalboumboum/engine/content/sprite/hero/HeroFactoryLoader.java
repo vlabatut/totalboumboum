@@ -3,6 +3,7 @@ package fr.free.totalboumboum.engine.content.sprite.hero;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Iterator;
 
 import javax.xml.parsers.ParserConfigurationException;
 
@@ -33,16 +34,22 @@ import fr.free.totalboumboum.tools.FileTools;
 
 public class HeroFactoryLoader extends SpriteFactoryLoader
 {	
-	public static HeroFactory loadHeroFactory(String folderPath, Level level, PredefinedColor color) throws ParserConfigurationException, SAXException, IOException, ClassNotFoundException
+	public static HeroFactory loadHeroFactory(String folderPath, Level level, PredefinedColor color, ArrayList<AbstractAbility> ablts, PermissionPack permissions, TrajectoryPack trajectories) throws ParserConfigurationException, SAXException, IOException, ClassNotFoundException
 	{	// init
 		HeroFactory result = new HeroFactory(level);
 		Element root = SpriteFactoryLoader.openFile(folderPath);
 		String folder;
 		
 		// ABILITIES
-		folder = level.getInstancePath()+File.separator+FileTools.FOLDER_HEROES;
-		folder = folder + File.separator+FileTools.FOLDER_ABILITIES;
-		ArrayList<AbstractAbility> abilities = AbilityLoader.loadAbilityPack(folder,level);
+//		folder = level.getInstancePath()+File.separator+FileTools.FOLDER_HEROES;
+//		folder = folder + File.separator+FileTools.FOLDER_ABILITIES;
+//		ArrayList<AbstractAbility> abilities = AbilityLoader.loadAbilityPack(folder,level);
+		ArrayList<AbstractAbility> abilities = new ArrayList<AbstractAbility>();
+		Iterator<AbstractAbility> i = ablts.iterator();
+		while (i.hasNext())
+		{	AbstractAbility temp = i.next().copy();
+			abilities.add(temp);
+		}
 		result.setAbilities(abilities);
 		
 		// ANIMES
@@ -54,15 +61,17 @@ public class HeroFactoryLoader extends SpriteFactoryLoader
 		loadExplosion(root,level,result);
 		
 		//PERMISSIONS
-		folder = level.getInstancePath()+File.separator+FileTools.FOLDER_HEROES;
-		folder = folder + File.separator+FileTools.FOLDER_PERMISSIONS;
-		PermissionPack permissionPack = PermissionPackLoader.loadPermissionPack(folder,level);
+//		folder = level.getInstancePath()+File.separator+FileTools.FOLDER_HEROES;
+//		folder = folder + File.separator+FileTools.FOLDER_PERMISSIONS;
+//		PermissionPack permissionPack = PermissionPackLoader.loadPermissionPack(folder,level);
+		PermissionPack permissionPack = permissions.copy();
 		result.setPermissionPack(permissionPack);
 		
 		// TRAJECTORIES
-		folder = level.getInstancePath()+File.separator+FileTools.FOLDER_HEROES;
-		folder = folder + File.separator+FileTools.FOLDER_TRAJECTORIES;
-		TrajectoryPack trajectoryPack = TrajectoryPackLoader.loadTrajectoryPack(folder,level);
+//		folder = level.getInstancePath()+File.separator+FileTools.FOLDER_HEROES;
+//		folder = folder + File.separator+FileTools.FOLDER_TRAJECTORIES;
+//		TrajectoryPack trajectoryPack = TrajectoryPackLoader.loadTrajectoryPack(folder,level);
+		TrajectoryPack trajectoryPack = trajectories.copy();
 		result.setTrajectoryPack(trajectoryPack);
 		
 		// BOMBSET

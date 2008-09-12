@@ -570,13 +570,14 @@ public class Launcher
 	 * 
 	 * + alpha.38
 	 * - mettre une barre d'évolution pdt le chargement du niveau
+	 * - optimisation du chargement : ne charger qu'une seule fois les caractéristiques des joueurs !
+	 * - correction de quelques bugs graphiques dans les thèmes de SBM1
 	 * 
 	 * *******************************************************
 	 * *********************** A FAIRE ***********************
 	 * *******************************************************
-	 * - quand un héro reçoit l'ordre de pleurer, il ne le fait pas s'il est en train de mourir
+	 * - quand un héro reçoit l'ordre de pleurer, il ne le fait pas s'il est en train de mourir (en fait faut mettre une vraie action avec permissions et tout)
 	 * - gérer le partage des points en cas d'égalité
-	 * - optimisation du chargement : ne charger qu'une seule fois les caractéristiques des joueurs !
 	 * - revoir les icones en carrés 
 	 * - définir les présentations des rounds
 	 * - passer à un système gérant plusieurs pointProcesseurs

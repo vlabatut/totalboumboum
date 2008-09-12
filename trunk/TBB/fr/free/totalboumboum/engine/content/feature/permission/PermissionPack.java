@@ -86,4 +86,17 @@ public class PermissionPack
 			}
 		}
 	}
+	
+	public PermissionPack copy()
+	{	PermissionPack result = new PermissionPack();
+		Iterator<Entry<String,PermissionGesture>> it = gestures.entrySet().iterator();
+		while(it.hasNext())
+		{	Entry<String,PermissionGesture> t = it.next();
+			PermissionGesture value = t.getValue().copy();
+			String key = t.getKey();
+			result.setPermissionGesture(key,value);
+		}
+		result.finished = finished;
+		return result;		
+	}
 }

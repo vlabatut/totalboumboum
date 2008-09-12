@@ -200,4 +200,28 @@ public class TrajectoryDirection
 			direction = null;
 		}
 	}
+	
+	public TrajectoryDirection copy()
+	{	TrajectoryDirection result = new TrajectoryDirection();
+		Iterator<TrajectoryStep> it = steps.iterator();
+		while(it.hasNext())
+		{	TrajectoryStep temp = it.next().copy();
+			result.add(temp);
+		}
+		result.direction = direction;
+		result.finished = finished;
+		result.forcedPositionTime = forcedPositionTime;
+		result.forcedXPosition = forcedXPosition;
+		result.forcedYPosition = forcedYPosition;
+		result.forcedZPosition = forcedZPosition;
+		result.forceXPosition = forceXPosition;
+		result.forceYPosition = forceYPosition;
+		result.forceZPosition = forceZPosition;
+		result.gestureName = gestureName;
+		result.proportional = proportional;
+		result.repeat = repeat;
+		result.xInteraction = xInteraction;
+		result.yInteraction = yInteraction;		
+		return result;
+	}
 }

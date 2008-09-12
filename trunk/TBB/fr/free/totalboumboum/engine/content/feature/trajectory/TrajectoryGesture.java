@@ -56,4 +56,18 @@ public class TrajectoryGesture
 			}
 		}
 	}
+	
+	public TrajectoryGesture copy()
+	{	TrajectoryGesture result = new TrajectoryGesture();
+		Iterator<Entry<Direction,TrajectoryDirection>> it = trajectories.entrySet().iterator();
+		while(it.hasNext())
+		{	Entry<Direction,TrajectoryDirection> t = it.next();
+			TrajectoryDirection value = t.getValue().copy();
+			Direction key = t.getKey();
+			result.setTrajectoryDirection(key,value);
+		}
+		result.name = name;
+		result.finished = finished;
+		return result;
+	}
 }
