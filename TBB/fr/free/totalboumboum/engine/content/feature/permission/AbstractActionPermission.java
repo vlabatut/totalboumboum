@@ -23,11 +23,11 @@ public abstract class AbstractActionPermission extends AbstractPermission
 	/** 
 	 * abilités necessaires à l'acteur pour avoir la permission  
 	 */
-	private ArrayList<AbstractAbility> actorRestrictions;
+	protected ArrayList<AbstractAbility> actorRestrictions;
 	/** 
 	 * abilités necessaires à la cible pour avoir la permission  
 	 */
-	private ArrayList<AbstractAbility> targetRestrictions;
+	protected ArrayList<AbstractAbility> targetRestrictions;
 	
 	public AbstractActionPermission(GeneralAction action)
 	{	super();

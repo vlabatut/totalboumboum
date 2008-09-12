@@ -51,5 +51,5 @@ public abstract class AbstractPermission
 	{	if(!finished)
 		{	finished = true;
 		}
-	}
+	}	
 }

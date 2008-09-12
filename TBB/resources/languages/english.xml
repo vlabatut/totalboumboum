@@ -136,6 +136,7 @@
 	<text name="RoundButtonStatisticsTooltip" value="See the detailed statistics of the current round" />
 
 	<text name="RoundProgressbarBombset" value="Loading bombs" />
+	<text name="RoundProgressbarCommon" value="Loading common player data" />
 	<text name="RoundProgressbarComplete" value="Loading complete" />
 	<text name="RoundProgressbarItemset" value="Loading items" />
 	<text name="RoundProgressbarPlayer" value="Loading player" />

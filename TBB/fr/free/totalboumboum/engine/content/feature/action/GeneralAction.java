@@ -208,4 +208,52 @@ public class GeneralAction extends AbstractAction
 			tilePositions = null;
 		}
 	}
+	
+	public GeneralAction copy()
+	{	GeneralAction result = new GeneralAction(name);
+		// actors
+		{	Iterator<Class<?>> i = actors.iterator();
+			while(i.hasNext())
+			{	Class<?> a = i.next();
+				result.addActor(a);
+			}
+		}
+		// contacts
+		{	Iterator<Contact> i = contacts.iterator();
+			while(i.hasNext())
+			{	Contact c = i.next();
+				result.addContact(c); 
+			}
+		}
+		// orientations
+		{	Iterator<Orientation> i = orientations.iterator();
+			while(i.hasNext())
+			{	Orientation o = i.next();
+				result.addOrientation(o); 
+			}
+		}
+		// targets
+		{	Iterator<Class<?>> i = targets.iterator();
+			while(i.hasNext())
+			{	Class<?> t = i.next();
+				result.addTarget(t); 
+			}
+		}
+		// directions
+		{	Iterator<Direction> i = directions.iterator();
+			while(i.hasNext())
+			{	Direction d = i.next();
+				result.addDirection(d);
+			}
+		}
+		// tile positions
+		{	Iterator<TilePosition> i = tilePositions.iterator();
+			while(i.hasNext())
+			{	TilePosition tp = i.next();
+				result.addTilePosition(tp);
+			}
+		}
+		result.finished = finished;
+		return result;
+	}
 }

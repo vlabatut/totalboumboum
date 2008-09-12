@@ -55,11 +55,12 @@ public class GuiTools
 	public static final String ROUND_BUTTON_RESULTS = "RoundButtonResults";
 	public static final String ROUND_BUTTON_STATISTICS = "RoundButtonStatistics";
 	public static final String ROUND_PROGRESSBAR_BOMBSET = "RoundProgressbarBombset";
+	public static final String ROUND_PROGRESSBAR_COMMON = "RoundProgressbarCommon";
+	public static final String ROUND_PROGRESSBAR_COMPLETE = "RoundProgressbarComplete";
 	public static final String ROUND_PROGRESSBAR_ITEMSET = "RoundProgressbarItemset";
+	public static final String ROUND_PROGRESSBAR_PLAYER = "RoundProgressbarPlayer";
 	public static final String ROUND_PROGRESSBAR_THEME = "RoundProgressbarTheme";
 	public static final String ROUND_PROGRESSBAR_ZONE = "RoundProgressbarZone";
-	public static final String ROUND_PROGRESSBAR_PLAYER = "RoundProgressbarPlayer";
-	public static final String ROUND_PROGRESSBAR_COMPLETE = "RoundProgressbarComplete";
 	
 	// GAME PANEL
 	public static final String GAME_TOURNAMENT_TITLE_DESCRIPTION = "GameTournamentTitleDescription";

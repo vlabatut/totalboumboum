@@ -4,6 +4,7 @@ import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.Toolkit;
+import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -22,7 +23,13 @@ import fr.free.totalboumboum.data.profile.Profile;
 import fr.free.totalboumboum.data.statistics.StatisticEvent;
 import fr.free.totalboumboum.engine.container.level.Level;
 import fr.free.totalboumboum.engine.container.level.LevelLoader;
+import fr.free.totalboumboum.engine.content.feature.ability.AbilityLoader;
+import fr.free.totalboumboum.engine.content.feature.ability.AbstractAbility;
 import fr.free.totalboumboum.engine.content.feature.event.EngineEvent;
+import fr.free.totalboumboum.engine.content.feature.permission.PermissionPack;
+import fr.free.totalboumboum.engine.content.feature.permission.PermissionPackLoader;
+import fr.free.totalboumboum.engine.content.feature.trajectory.TrajectoryPack;
+import fr.free.totalboumboum.engine.content.feature.trajectory.TrajectoryPackLoader;
 import fr.free.totalboumboum.engine.content.sprite.Sprite;
 import fr.free.totalboumboum.engine.content.sprite.hero.Hero;
 import fr.free.totalboumboum.engine.control.SystemControl;
@@ -30,6 +37,7 @@ import fr.free.totalboumboum.engine.player.Player;
 import fr.free.totalboumboum.engine.player.PlayerLocation;
 import fr.free.totalboumboum.game.round.PlayMode;
 import fr.free.totalboumboum.game.round.Round;
+import fr.free.totalboumboum.tools.FileTools;
 
 public class Loop implements Runnable
 {	private Round round;
@@ -40,12 +48,24 @@ public class Loop implements Runnable
 	}	
 	
 	public void init() throws ParserConfigurationException, SAXException, IOException, ClassNotFoundException, IllegalArgumentException, SecurityException, IllegalAccessException, NoSuchFieldException
-	{	image = round.getPanel().getImage();
+	{	// init
+		image = round.getPanel().getImage();
 		graphics = image.getGraphics();
 		systemControl = new SystemControl(this);
+
 		// load level
 		level = LevelLoader.loadLevel(round.getLevelDescription().getPath(),this);
-		// load players
+
+		// load players : common stuff
+		String baseFolder = level.getInstancePath()+File.separator+FileTools.FOLDER_HEROES;
+		String folder = baseFolder + File.separator+FileTools.FOLDER_ABILITIES;
+		ArrayList<AbstractAbility> abilities = AbilityLoader.loadAbilityPack(folder,level);
+		folder = baseFolder + File.separator+FileTools.FOLDER_TRAJECTORIES;
+		TrajectoryPack trajectoryPack = TrajectoryPackLoader.loadTrajectoryPack(folder,level);
+		folder = baseFolder + File.separator+FileTools.FOLDER_PERMISSIONS;
+		PermissionPack permissionPack = PermissionPackLoader.loadPermissionPack(folder,level);
+//		loadStepOver();		
+		// load players : individual stuff
 		ArrayList<Profile> profiles = round.getProfiles();
 		int remainingPlayers = profiles.size();
 		PlayerLocation[] initialPositions = level.getPlayersLocations().get(remainingPlayers);
@@ -54,7 +74,7 @@ public class Loop implements Runnable
 		while(i.hasNext())
 		{	Profile profile = i.next();
 			PlayerLocation pl = initialPositions[j];
-			Player player = new Player(profile,level);
+			Player player = new Player(profile,level,abilities,permissionPack,trajectoryPack);
 			players.add(player);
 			level.addHero((Hero)player.getSprite(),pl.getLine(),pl.getCol());
 			loadStepOver();
