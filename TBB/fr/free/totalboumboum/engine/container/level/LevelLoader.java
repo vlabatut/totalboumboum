@@ -69,7 +69,7 @@ import fr.free.totalboumboum.tools.XmlTools;
 
 
 
-public class LevelLoader
+public class LevelLoader 
 {	
 	public static Level loadLevel(String folder, Loop loop) throws ParserConfigurationException, SAXException, IOException, ClassNotFoundException
 	{	// init

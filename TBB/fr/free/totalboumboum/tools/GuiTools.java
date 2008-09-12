@@ -1,6 +1,6 @@
 package fr.free.totalboumboum.tools;
 
-public class GuiTools
+public class GuiTools 
 {	
 	// MAIN MENU
 	public static final String MAIN_MENU_BUTTON_HEROES = "MainMenuButtonHeroes";

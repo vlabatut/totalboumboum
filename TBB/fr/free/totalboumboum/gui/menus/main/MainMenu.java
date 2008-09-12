@@ -20,7 +20,7 @@ import fr.free.totalboumboum.gui.menus.options.OptionsMenu;
 import fr.free.totalboumboum.gui.menus.tournament.TournamentMain;
 import fr.free.totalboumboum.tools.GuiTools;
 
-public class MainMenu extends SimpleMenuPanel
+public class MainMenu extends SimpleMenuPanel 
 {	private static final long serialVersionUID = 1L;
 	
 	private MenuPanel tournamentMainPanel;

@@ -40,7 +40,7 @@ public class RoundResults extends InnerDataPanel
 {	
 	private static final long serialVersionUID = 1L;
 
-	private JPanel resultsPanel;
+	private JPanel resultsPanel; 
 	
 	public RoundResults(SplitMenuPanel container)
 	{	super(container);
