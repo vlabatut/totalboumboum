@@ -40,7 +40,7 @@ public class RoundResults extends InnerDataPanel
 {	
 	private static final long serialVersionUID = 1L;
 
-	private JPanel resultsPanel; 
+	private JPanel resultsPanel;
 	
 	public RoundResults(SplitMenuPanel container)
 	{	super(container);
@@ -62,10 +62,10 @@ public class RoundResults extends InnerDataPanel
 			JLabel title = new JLabel(txt);
 			title.setHorizontalAlignment(SwingConstants.CENTER);
 			Font font = getConfiguration().getFont().deriveFont((float)SwingTools.getSize(SwingTools.GAME_TITLE_FONT_SIZE));
+			title.setFont(font);
 			title.setForeground(Color.BLACK);
 			title.setBackground(new Color(255,255,255,128));
 			title.setOpaque(true);
-			title.setFont(font);
 			title.setAlignmentX(Component.CENTER_ALIGNMENT);
 			Dimension dim = new Dimension(SwingTools.getSize(SwingTools.GAME_DATA_PANEL_WIDTH),SwingTools.getSize(SwingTools.GAME_DATA_LABEL_TITLE_HEIGHT));
 			title.setPreferredSize(dim);

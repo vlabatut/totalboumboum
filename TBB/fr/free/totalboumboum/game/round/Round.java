@@ -23,13 +23,17 @@ public class Round
 {
 	public Round(Match match)
 	{	this.match = match;
-		configuration = match.getConfiguration(); 
+		configuration = match.getConfiguration();
 	}
 	
 	/////////////////////////////////////////////////////////////////
 	// GAME 			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	private boolean roundOver = false;
+	
+	public void loadStepOver()
+	{	panel.loadStepOver();		
+	}
 	
 	public void init(LevelDescription levelDescription) throws ParserConfigurationException, SAXException, IOException, ClassNotFoundException, IllegalArgumentException, SecurityException, IllegalAccessException, NoSuchFieldException
 	{	this.levelDescription = levelDescription;

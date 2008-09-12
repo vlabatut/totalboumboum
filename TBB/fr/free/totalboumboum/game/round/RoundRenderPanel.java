@@ -7,5 +7,8 @@ public interface RoundRenderPanel
 {
 	public void roundOver();
 	public Image getImage();
+	
+	public void loadStepOver();
+	
 
 }

@@ -31,7 +31,7 @@ import fr.free.totalboumboum.engine.player.PlayerLocation;
 import fr.free.totalboumboum.game.round.PlayMode;
 import fr.free.totalboumboum.game.round.Round;
 
-public class Loop implements Runnable 
+public class Loop implements Runnable
 {	private Round round;
 	
 	public Loop(Round round)
@@ -56,12 +56,15 @@ public class Loop implements Runnable
 			PlayerLocation pl = initialPositions[j];
 			Player player = new Player(profile,level);
 			players.add(player);
-			//NOTE : à voir
 			level.addHero((Hero)player.getSprite(),pl.getLine(),pl.getCol());
+			loadStepOver();
 			j++;
-		}			
+		}
 	}
 	
+	public void loadStepOver()
+	{	round.loadStepOver();
+	}
 	
 	private boolean finished = false;
 	

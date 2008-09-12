@@ -69,7 +69,7 @@ import fr.free.totalboumboum.tools.XmlTools;
 
 
 
-public class LevelLoader 
+public class LevelLoader
 {	
 	public static Level loadLevel(String folder, Loop loop) throws ParserConfigurationException, SAXException, IOException, ClassNotFoundException
 	{	// init
@@ -135,11 +135,13 @@ public class LevelLoader
 		String bombsetFolder = instanceFolder + File.separator+FileTools.FOLDER_BOMBS;
 		Bombset bombset = BombsetLoader.loadBombset(bombsetFolder,result);
 		result.setBombset(bombset);
+		loop.loadStepOver();
 
 		// itemset
 		String itemFolder = instanceFolder + File.separator+FileTools.FOLDER_ITEMS;
 		Itemset itemset = ItemsetLoader.loadItemset(itemFolder,result);
 		result.setItemset(itemset);
+		loop.loadStepOver();
 
 		// theme
 		element = root.getChild(XmlTools.ELT_THEME);
@@ -148,9 +150,11 @@ public class LevelLoader
 		themeFolder = themeFolder + File.separator+themeName;
 		Theme theme = ThemeLoader.loadTheme(themeFolder,result);
 		result.setTheme(theme);
+		loop.loadStepOver();
 
 		// zone
 		loadZone(folder,globalHeight,globalWidth,result);
+		loop.loadStepOver();
 
 		return result;
 	}

@@ -23,7 +23,7 @@ import fr.free.totalboumboum.tools.FileTools;
 import fr.free.totalboumboum.tools.GuiTools;
 import fr.free.totalboumboum.tools.ImageTools;
 
-public class SwingTools 
+public class SwingTools
 {	// menus
 	public static final String MENU_HORIZONTAL_BUTTON_HEIGHT = "MENU_HORIZONTAL_BUTTON_HEIGHT";
 	public static final String MENU_VERTICAL_BUTTON_HEIGHT = "MENU_VERTICAL_BUTTON_HEIGHT";
@@ -48,6 +48,7 @@ public class SwingTools
 	public static final String GAME_DATA_LABEL_TITLE_HEIGHT = "GAME_DATA_LABEL_TITLE_HEIGHT";
 	public static final String GAME_DATA_MARGIN_SIZE = "GAME_DATA_MARGIN_SIZE";
 	public static final String GAME_TITLE_FONT_SIZE = "GAME_TITLE_FONT_SIZE";
+	public static final String GAME_PROGRESSBAR_FONT_SIZE = "GAME_PROGRESSBAR_FONT_SIZE";
 	public static final String GAME_RESULTS_LABEL_LINE_HEIGHT = "GAME_RESULTS_LABEL_LINE_HEIGHT";
 	public static final String GAME_RESULTS_LABEL_HEADER_HEIGHT = "GAME_RESULTS_LABEL_HEADER_HEIGHT";
 	public static final String GAME_RESULTS_LINE_FONT_SIZE = "GAME_RESULTS_LINE_FONT_SIZE";
@@ -84,6 +85,8 @@ public class SwingTools
 		int horizontalMenuButtonWidth = horizontalMenuButtonHeight;
 		sizes.put(MENU_HORIZONTAL_BUTTON_WIDTH,horizontalMenuButtonWidth);
 		sizes.put(MENU_HORIZONTAL_BUTTON_SPACE,(int)(width*0.025));
+		int gameProgressbarFontSize = getFontSize(horizontalMenuButtonHeight*0.6, configuration, g); 
+		sizes.put(GAME_PROGRESSBAR_FONT_SIZE,gameProgressbarFontSize);
 		sizes.put(MENU_VERTICAL_PRIMARY_BUTTON_WIDTH,(int)(width*0.33));
 		int secondaryVerticalMenuButtonWIdth = (int)(width*0.25);
 		sizes.put(MENU_VERTICAL_SECONDARY_BUTTON_WIDTH,secondaryVerticalMenuButtonWIdth);

@@ -28,7 +28,7 @@ import fr.free.totalboumboum.game.round.Round;
 import fr.free.totalboumboum.tools.CalculusTools;
 
 
-public class Level 
+public class Level
 {	private Loop loop;
 	private HashMap<Integer, PlayerLocation[]> playersLocations;
 	private Tile matrix[][];

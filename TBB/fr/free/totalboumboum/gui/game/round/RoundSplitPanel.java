@@ -20,4 +20,3 @@ public class RoundSplitPanel extends SplitMenuPanel
 		setMenuPart(new RoundMenu(this,parent));
 	}
 }
- 

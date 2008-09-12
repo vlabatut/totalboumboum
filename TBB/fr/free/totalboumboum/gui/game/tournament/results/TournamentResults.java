@@ -44,7 +44,7 @@ public class TournamentResults extends InnerDataPanel
 	private static final long serialVersionUID = 1L;
 
 	private JPanel resultsPanel;
-	 
+	
 	public TournamentResults(SplitMenuPanel container)
 	{	super(container);
 		// layout

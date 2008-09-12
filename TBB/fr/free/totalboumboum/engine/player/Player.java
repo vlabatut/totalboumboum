@@ -27,7 +27,7 @@ import fr.free.totalboumboum.game.round.Round;
 import fr.free.totalboumboum.tools.FileTools;
 import fr.free.totalboumboum.tools.XmlTools;
 
- 
+
 public class Player
 {	
 	private Profile profile;

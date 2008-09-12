@@ -3,6 +3,7 @@ package fr.free.totalboumboum.gui.game.round;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.Font;
 import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.io.IOException;
@@ -11,6 +12,7 @@ import javax.swing.Box;
 import javax.swing.BoxLayout;
 import javax.swing.ButtonGroup;
 import javax.swing.JButton;
+import javax.swing.JProgressBar;
 import javax.swing.JToggleButton;
 import javax.swing.SwingUtilities;
 import javax.xml.parsers.ParserConfigurationException;
@@ -47,7 +49,7 @@ import fr.free.totalboumboum.tools.GuiTools;
 public class RoundMenu extends InnerMenuPanel implements RoundRenderPanel
 {	private static final long serialVersionUID = 1L;
 	
-	private MenuPanel loopPanel; 
+	private MenuPanel loopPanel;
 	private InnerDataPanel roundDescription;
 	private InnerDataPanel roundResults;
 	private InnerDataPanel roundStatistics;
@@ -58,6 +60,8 @@ public class RoundMenu extends InnerMenuPanel implements RoundRenderPanel
 	private JToggleButton buttonResults;
 	private JToggleButton buttonStatistics;
 	private JButton buttonPlay;
+	
+	private JProgressBar loadProgressBar;
 	
 	public RoundMenu(SplitMenuPanel container, MenuPanel parent)
 	{	super(container,parent);
@@ -126,35 +130,24 @@ public class RoundMenu extends InnerMenuPanel implements RoundRenderPanel
 	    }
 		else if(e.getActionCommand().equals(GuiTools.ROUND_BUTTON_PLAY))
 		{	Round round = getConfiguration().getTournament().getCurrentMatch().getCurrentRound();
-			try
-			{	round.progress();
-			}
-			catch (IllegalArgumentException e1)
-			{	e1.printStackTrace();
-			}
-			catch (SecurityException e1)
-			{	e1.printStackTrace();
-			}
-			catch (ParserConfigurationException e1)
-			{	e1.printStackTrace();
-			}
-			catch (SAXException e1)
-			{	e1.printStackTrace();
-			}
-			catch (IOException e1)
-			{	e1.printStackTrace();
-			}
-			catch (ClassNotFoundException e1)
-			{	e1.printStackTrace();
-			}
-			catch (IllegalAccessException e1)
-			{	e1.printStackTrace();
-			}
-			catch (NoSuchFieldException e1)
-			{	e1.printStackTrace();
-			}
-			loopPanel = new LoopPanel(container.getContainer(),container);
-			replaceWith(loopPanel);
+			int limit = round.getProfiles().size()+3;
+			loadProgressBar = new JProgressBar(0,limit);
+			Font font = getConfiguration().getFont().deriveFont((float)SwingTools.getSize(SwingTools.GAME_PROGRESSBAR_FONT_SIZE));
+			loadProgressBar.setFont(font);
+			loadProgressBar.setStringPainted(true); 
+			String text = getConfiguration().getLanguage().getText(GuiTools.ROUND_PROGRESSBAR_BOMBSET);
+			loadProgressBar.setString(text);
+			int width = Integer.MAX_VALUE;
+			int height = SwingTools.getSize(SwingTools.MENU_HORIZONTAL_BUTTON_HEIGHT);
+			Dimension dim = new Dimension(width,height);
+			loadProgressBar.setMaximumSize(dim);
+//			loadProgressBar.setPreferredSize(dim);
+			remove(1);
+			add(loadProgressBar,1);
+			validate();
+			repaint();
+			Thread t = new Thread(new RoundThreadLoader(round));
+			t.start();				
 	    }
 	} 
 
@@ -184,9 +177,57 @@ public class RoundMenu extends InnerMenuPanel implements RoundRenderPanel
 	public void roundOver()
 	{	SwingUtilities.invokeLater(new Runnable()
 		{	public void run()
-			{	roundResults.updateData();
+			{	// remove progress bar
+				remove(1);
+				add(Box.createHorizontalGlue(),1);
+				//
+				roundResults.updateData();
 				buttonResults.doClick();
 			}
 		});	
+	}
+
+	@Override
+	public void loadStepOver()
+	{	int val = loadProgressBar.getValue();
+		loadProgressBar.setValue(val+1);
+		String text;
+		switch(val)
+		{	// itemset
+			case 0:
+				text = getConfiguration().getLanguage().getText(GuiTools.ROUND_PROGRESSBAR_ITEMSET);
+				loadProgressBar.setString(text);
+				loadProgressBar.repaint();
+				break;
+			// theme
+			case 1:
+				text = getConfiguration().getLanguage().getText(GuiTools.ROUND_PROGRESSBAR_THEME);
+				loadProgressBar.setString(text);
+				loadProgressBar.repaint();
+				break;
+			// zone
+			case 2:
+				text = getConfiguration().getLanguage().getText(GuiTools.ROUND_PROGRESSBAR_ZONE);
+				loadProgressBar.setString(text);
+				loadProgressBar.repaint();
+				break;
+			// players
+			default:
+				Round round = getConfiguration().getTournament().getCurrentMatch().getCurrentRound();
+				if(val==round.getProfiles().size()+3)
+				{	text = getConfiguration().getLanguage().getText(GuiTools.ROUND_PROGRESSBAR_COMPLETE);
+					loadProgressBar.setString(text);
+					loadProgressBar.repaint();
+					loopPanel = new LoopPanel(container.getContainer(),container);
+					replaceWith(loopPanel);
+					loopPanel.requestFocus();					
+				}
+				else
+				{	text = getConfiguration().getLanguage().getText(GuiTools.ROUND_PROGRESSBAR_PLAYER)+" "+(val-2);
+					loadProgressBar.setString(text);
+					loadProgressBar.repaint();
+				}
+				break;
+		}
 	}
 }

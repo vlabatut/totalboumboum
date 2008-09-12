@@ -2,7 +2,7 @@
 <controls
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
 	xsi:noNamespaceSchemaLocation="..\..\xml\schemas\controls.xsd">
-	 
+	
 	<!-- directions -->
 	<event name="DOWN" autofire="true">
 		<on key="VK_NUMPAD5" />

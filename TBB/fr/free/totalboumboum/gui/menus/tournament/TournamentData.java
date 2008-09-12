@@ -14,7 +14,7 @@ public class TournamentData extends InnerDataPanel
 {	private static final long serialVersionUID = 1L;
 	
 	public TournamentData(SplitMenuPanel container)
-	{	super(container); 
+	{	super(container);
 		// layout
 		BoxLayout layout = new BoxLayout(this,BoxLayout.PAGE_AXIS); 
 		setLayout(layout);
