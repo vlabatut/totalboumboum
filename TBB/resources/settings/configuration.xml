@@ -4,7 +4,7 @@
 	xsi:noNamespaceSchemaLocation="..\schemas\configuration.xsd">
 	
 <!-- LANGUAGE -->	
-	<language value="english" />
+	<language value="english"  />
 	
 <!-- ENGINE -->	
 	<fps value="100" />
