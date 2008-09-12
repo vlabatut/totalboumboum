@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+
+	<xsd:simpleType name="tMatchLimit">
+		<xsd:restriction base="xsd:string">
+			<xsd:enumeration value="all-levels" />
+			<xsd:enumeration value="round-limit" />
+			<xsd:enumeration value="points-limit" />
+		</xsd:restriction>
+	</xsd:simpleType>
+
+	<xsd:simpleType name="tMatchLimitValue">
+		<xsd:restriction base="xsd:integer">
+			<xsd:minInclusive value="1" />
+		</xsd:restriction>
+	</xsd:simpleType>
+
+	<xsd:complexType name="tOptions">
+		<xsd:attribute name="matchLimit" type="tMatchLimit" use="required" />
+		<xsd:attribute name="matchLimitValue" type="tMatchLimitValue" use="required" />
+	</xsd:complexType>
+
+	<xsd:simpleType name="tPlayMode">
+		<xsd:restriction base="xsd:string">
+			<xsd:enumeration value="survival" />
+			<xsd:enumeration value="crown" />
+			<xsd:enumeration value="paint" />
+			<xsd:enumeration value="frag" />
+		</xsd:restriction>
+	</xsd:simpleType>
+
+	<xsd:complexType name="tLocation">
+		<xsd:attribute name="packname" type="xsd:string" use="required" />
+		<xsd:attribute name="name" type="xsd:string" use="required" />
+	</xsd:complexType>
+
+	<xsd:complexType name="tGame">
+		<xsd:attribute name="playMode" type="tPlayMode" use="required" />
+		<xsd:attribute name="timeLimit" type="xsd:long" use="required" />
+	</xsd:complexType>
+
+	<xsd:complexType name="tPoints">
+		<xsd:attribute name="name" type="xsd:string" use="required" />
+		<xsd:attribute name="local" type="xsd:boolean" use="optional" default="false" />
+	</xsd:complexType>
+
+	<xsd:complexType name="tLevel">
+		<xsd:sequence>
+			<xsd:element name="location" type="tLocation" />
+			<xsd:element name="game" type="tGame" />
+			<xsd:element name="points" type="tPoints" />
+		</xsd:sequence>
+	</xsd:complexType>
+
+	<xsd:complexType name="tLevels">
+		<xsd:sequence>
+			<xsd:element name="level" type="tLevel" maxOccurs="unbounded"/>
+		</xsd:sequence>
+		<xsd:attribute name="randomOrder" type="xsd:boolean" use="optional" default="false" />
+	</xsd:complexType>
+
+	<xsd:complexType name="tMatch">
+		<xsd:sequence>
+			<xsd:element name="options" type="tOptions" />
+			<xsd:element name="levels" type="tLevels" />
+		</xsd:sequence>
+	</xsd:complexType>
+
+	<xsd:element name="match" type="tMatch" />
+
+</xsd:schema>

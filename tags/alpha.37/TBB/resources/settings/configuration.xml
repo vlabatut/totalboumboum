@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+	xsi:noNamespaceSchemaLocation="..\schemas\configuration.xsd">
+	
+<!-- LANGUAGE -->	
+	<language value="english"  />
+	
+<!-- ENGINE -->	
+	<fps value="100" />
+	<speed value="4" />
+
+<!-- DISPLAY -->	
+	<smoothGraphics value="true" />
+		
+<!-- GUI -->	
+	<panelDimension width="750" height="600" />
+	<font file="Anime Ace.ttf" />
+<!--	<font file="Anime Ace.ttf" />  -->
+	
+<!-- PROFILES -->	
+	<profiles>
+		<profile value="DoganDemirkol" /> <!-- white -->
+		<profile value="BingolKetenci" /> <!-- blue -->
+<!-- 		<profile value="OkanYuksel" /> BUGGÉ --> <!-- black -->   
+		<profile value="GokselMenges" />  <!-- green --> 
+		<profile value="KilicPala" /> <!-- red -->
+<!--		<profile value="CaglayanElmas" BUGGÉ /> --> <!-- orange -->
+<!--		<profile value="GoksayKose" /> --> <!-- pink -->
+		<profile value="BasmanSandalli" /> <!-- brown -->
+
+	</profiles>
+
+<!-- TOURNAMENT -->	
+	<tournament value="tournamentTest" />
+	
+</configuration>
