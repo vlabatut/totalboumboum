@@ -277,7 +277,7 @@ public class SwingTools
 	
 	public static void setButtonContent(String name, AbstractButton button, Configuration configuration)
 	{	// content
-		if(icons.containsKey(name))
+		if(icons.containsKey(name+ICON_NORMAL))
 		{	// normal icon
 			{	BufferedImage icon = getIcon(name+ICON_NORMAL);
 				double zoom = button.getPreferredSize().getHeight()/(double)icon.getHeight();
@@ -332,7 +332,8 @@ public class SwingTools
 			button.setBorderPainted(false);
 			button.setBorder(null);
 			button.setMargin(null);
-			button.setBackground(new Color(0,0,0,0));
+//			button.setBackground(new Color(0,0,0,0));
+	        button.setContentAreaFilled(false);
 			
 		}
 		else

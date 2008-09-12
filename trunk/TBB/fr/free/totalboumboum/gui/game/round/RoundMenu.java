@@ -129,7 +129,8 @@ public class RoundMenu extends InnerMenuPanel implements RoundRenderPanel
 			dataPart = roundStatistics;
 	    }
 		else if(e.getActionCommand().equals(GuiTools.ROUND_BUTTON_PLAY))
-		{	Round round = getConfiguration().getTournament().getCurrentMatch().getCurrentRound();
+		{	buttonPlay.setEnabled(false);
+			Round round = getConfiguration().getTournament().getCurrentMatch().getCurrentRound();
 			int limit = round.getProfiles().size()+3;
 			loadProgressBar = new JProgressBar(0,limit);
 			Font font = getConfiguration().getFont().deriveFont((float)SwingTools.getSize(SwingTools.GAME_PROGRESSBAR_FONT_SIZE));
