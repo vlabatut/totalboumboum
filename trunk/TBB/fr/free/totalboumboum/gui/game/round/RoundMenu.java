@@ -47,7 +47,7 @@ import fr.free.totalboumboum.tools.GuiTools;
 public class RoundMenu extends InnerMenuPanel implements RoundRenderPanel
 {	private static final long serialVersionUID = 1L;
 	
-	private MenuPanel loopPanel;
+	private MenuPanel loopPanel; 
 	private InnerDataPanel roundDescription;
 	private InnerDataPanel roundResults;
 	private InnerDataPanel roundStatistics;

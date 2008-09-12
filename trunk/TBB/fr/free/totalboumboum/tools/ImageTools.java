@@ -36,7 +36,7 @@ import fr.free.totalboumboum.engine.content.feature.anime.Colormap;
 import fr.free.totalboumboum.engine.content.feature.anime.ColormapLoader;
 
 
-public class ImageTools
+public class ImageTools 
 {
 
 	/** 

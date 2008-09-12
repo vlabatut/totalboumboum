@@ -60,7 +60,7 @@ import fr.free.totalboumboum.gui.generic.MenuPanel;
 import fr.free.totalboumboum.gui.generic.SplitMenuPanel;
 import fr.free.totalboumboum.tools.GuiTools;
 
-public class TournamentMenu extends InnerMenuPanel
+public class TournamentMenu extends InnerMenuPanel 
 {	private static final long serialVersionUID = 1L;
 	
 	private MenuPanel tournamentGamePanel;

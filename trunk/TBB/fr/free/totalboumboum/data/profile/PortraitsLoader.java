@@ -27,7 +27,7 @@ import fr.free.totalboumboum.tools.FileTools;
 import fr.free.totalboumboum.tools.ImageTools;
 import fr.free.totalboumboum.tools.XmlTools;
 
-public class PortraitsLoader
+public class PortraitsLoader 
 {
 	protected static Portraits loadPortraits(String spriteFolderPath, PredefinedColor color) throws ParserConfigurationException, SAXException, IOException, ClassNotFoundException
 	{	// init

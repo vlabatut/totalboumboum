@@ -25,7 +25,7 @@ import fr.free.totalboumboum.gui.generic.SimpleMenuPanel;
 
 public class LoopPanel extends SimpleMenuPanel implements LoopRenderPanel
 {	private static final long serialVersionUID = 1L;
-	private Loop loop;
+	private Loop loop; 
 	
 	public LoopPanel(MenuContainer container, MenuPanel parent)
 	{	super(container,parent);

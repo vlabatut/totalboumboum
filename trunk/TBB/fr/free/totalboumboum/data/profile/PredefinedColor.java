@@ -2,7 +2,7 @@ package fr.free.totalboumboum.data.profile;
 
 import java.awt.Color;
 
-public enum PredefinedColor
+public enum PredefinedColor 
 {
 	BLACK,
 	BLUE,

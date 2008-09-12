@@ -24,3 +24,4 @@ public class TournamentSplitPanel extends SplitMenuPanel
 	}
 
 }
+ 

@@ -31,7 +31,7 @@ import fr.free.totalboumboum.engine.player.PlayerLocation;
 import fr.free.totalboumboum.game.round.PlayMode;
 import fr.free.totalboumboum.game.round.Round;
 
-public class Loop implements Runnable
+public class Loop implements Runnable 
 {	private Round round;
 	
 	public Loop(Round round)

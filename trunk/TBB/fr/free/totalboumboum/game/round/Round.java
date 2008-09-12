@@ -23,7 +23,7 @@ public class Round
 {
 	public Round(Match match)
 	{	this.match = match;
-		configuration = match.getConfiguration();
+		configuration = match.getConfiguration(); 
 	}
 	
 	/////////////////////////////////////////////////////////////////
