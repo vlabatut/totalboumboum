@@ -563,6 +563,13 @@ public class Launcher
 	 */
 	
 	/*
+	 * TODO une fois qu'on a déterminer les nombres de joueurs, y a moyen de gérer les threads de meilleure manière en :
+	 * 		- créant un executor au niveau du tournoi
+	 * 		- il doit contenir un pool de (nbre d'IA max pvant jouer à la fois)+1(pr loop)
+	 * 		- par la suite, au lieu de créer un thread pour chaque ia ou pour le chargement/loop, on en demande un à l'executor
+	 */
+	
+	/*
 	 * TODO
 	 * *******************************************************
 	 * ************************* FAIT ************************
