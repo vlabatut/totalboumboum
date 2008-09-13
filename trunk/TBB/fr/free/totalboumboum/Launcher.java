@@ -577,6 +577,7 @@ public class Launcher
 	 * *******************************************************
 	 * *********************** A FAIRE ***********************
 	 * *******************************************************
+	 * - mutualiser les threads
 	 * - quand un héro reçoit l'ordre de pleurer, il ne le fait pas s'il est en train de mourir (en fait faut mettre une vraie action avec permissions et tout)
 	 * - voir pq on ne peut plus controler l'IA
 	 * - gérer le partage des points en cas d'égalité

@@ -118,6 +118,9 @@ public class Player
 	public void finish()
 	{	if(!finished)
 		{	finished = true;
+			// control
+			spriteControl.finish();
+			spriteControl = null;
 			// ai
 			if(ai!=null)
 			{	ai.finish();
@@ -128,9 +131,6 @@ public class Player
 			level = null;
 			profile = null;
 			sprite = null;
-			// control
-			spriteControl.finish();
-			spriteControl = null;
 		}
 	}
 }

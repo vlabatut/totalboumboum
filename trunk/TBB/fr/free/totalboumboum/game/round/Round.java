@@ -50,7 +50,9 @@ public class Round
 	public void progress() throws IllegalArgumentException, SecurityException, ParserConfigurationException, SAXException, IOException, ClassNotFoundException, IllegalAccessException, NoSuchFieldException
 	{	if(!isOver())
 		{	loop = new Loop(this);
-			loop.init();
+			Thread animator = new Thread(loop);
+			animator.start();
+//			loop.init();
 		}
 	}
 	
