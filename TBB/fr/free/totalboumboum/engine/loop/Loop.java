@@ -8,6 +8,8 @@ import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.concurrent.locks.Lock;
+import java.util.concurrent.locks.ReentrantLock;
 
 import javax.swing.SwingUtilities;
 import javax.xml.parsers.ParserConfigurationException;
@@ -91,10 +93,13 @@ public class Loop implements Runnable
 	public void finish()
 	{	if(!finished)
 		{	finished = true;	
+			// system listener
+			panel.removeKeyListener(systemControl);
 			// players
 			Iterator<Player> i = players.iterator();
 			while(i.hasNext())
 			{	Player temp = i.next();
+				panel.removeKeyListener(temp.getSpriteControl());
 				temp.finish();
 				i.remove();
 			}
@@ -178,7 +183,7 @@ public class Loop implements Runnable
 	private LoopRenderPanel panel;
 	private Image image = null;
 
-	public void setPanel(LoopRenderPanel panel)
+	public synchronized void setPanel(LoopRenderPanel panel)
 	{	// panel
 		this.panel = panel;
 		// system listener
@@ -188,7 +193,9 @@ public class Loop implements Runnable
 		while(i.hasNext())
 		{	Player player = i.next();
 			panel.addKeyListener(player.getSpriteControl());
-		}	
+		}
+		// waking the process thread up
+		notifyAll();
 	}
 	public LoopRenderPanel getPanel()
 	{	return panel;
@@ -234,7 +241,46 @@ public class Loop implements Runnable
 	{	return totalTime;	
 	}
 	
-	public void run()
+	public synchronized void run()
+	{	try
+		{	// load the round
+			init();
+			// wait for the GUI to be ready
+			if(panel==null)
+				wait();
+			// start the game
+			process();
+		}
+		catch (IllegalArgumentException e)
+		{	e.printStackTrace();
+		}
+		catch (SecurityException e)
+		{	e.printStackTrace();
+		}
+		catch (ParserConfigurationException e)
+		{	e.printStackTrace();
+		}
+		catch (SAXException e)
+		{	e.printStackTrace();
+		}
+		catch (IOException e)
+		{	e.printStackTrace();
+		}
+		catch (ClassNotFoundException e)
+		{	e.printStackTrace();
+		}
+		catch (IllegalAccessException e)
+		{	e.printStackTrace();
+		}
+		catch (NoSuchFieldException e)
+		{	e.printStackTrace();
+		}
+		catch (InterruptedException e)
+		{	e.printStackTrace();
+		}
+	}
+	
+	public void process()
 	{	long beforeTime, afterTime, timeDiff, sleepTime;
 		long overSleepTime = 0L;
 		int noDelays = 0;

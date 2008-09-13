@@ -8,6 +8,7 @@ public interface LoopRenderPanel
 	public void paintScreen();
 	public Image getImage();
 	public void addKeyListener(KeyListener listener);
+	public void removeKeyListener(KeyListener listener);
 	public void loopOver();
 	public void playerOut(int index);
 }

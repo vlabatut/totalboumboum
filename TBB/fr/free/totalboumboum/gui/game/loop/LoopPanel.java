@@ -39,8 +39,8 @@ public class LoopPanel extends SimpleMenuPanel implements LoopRenderPanel
 		// NOTE : surement à modifier, car un peu cra-cra (focus à donner à partir de l'extérieur)
 		loop.setPanel(this);
 		// thread
-		Thread animator = new Thread(loop);
-		animator.start();
+//		Thread animator = new Thread(loop);
+//		animator.start();
 	}
 
 	// ----------------------------------------------

@@ -147,8 +147,36 @@ public class RoundMenu extends InnerMenuPanel implements RoundRenderPanel
 			add(loadProgressBar,1);
 			validate();
 			repaint();
-			Thread t = new Thread(new RoundThreadLoader(round));
-			t.start();				
+			try
+			{
+				round.progress();
+			}
+			catch (IllegalArgumentException e1)
+			{	e1.printStackTrace();
+			}
+			catch (SecurityException e1)
+			{	e1.printStackTrace();
+			}
+			catch (ParserConfigurationException e1)
+			{	e1.printStackTrace();
+			}
+			catch (SAXException e1)
+			{	e1.printStackTrace();
+			}
+			catch (IOException e1)
+			{	e1.printStackTrace();
+			}
+			catch (ClassNotFoundException e1)
+			{	e1.printStackTrace();
+			}
+			catch (IllegalAccessException e1)
+			{	e1.printStackTrace();
+			}
+			catch (NoSuchFieldException e1)
+			{	e1.printStackTrace();
+			}
+//			Thread t = new Thread(new RoundThreadLoader(round));
+//			t.start();				
 	    }
 	} 
 
