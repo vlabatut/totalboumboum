@@ -5,6 +5,6 @@
 	
  	<general name="Basman+Sandalli" ai="basmansandalli.BasmanSandalli" /> 
  	<character name="shirobon" packname="superbomberman1" color="brown" />     
-<!-- 	<character name="prognathe" packname="totalboumboum" color="red" />   -->
+<!-- 	<character name="prognathe" packname="totalboumboum" color="brown" />   -->
 	
 </profile>

@@ -557,6 +557,12 @@ public class Launcher
 	 */
 	
 	/*
+	 * TODO tournoi séquence
+	 * ça pourrait aussi être un match prédéfini unique, qui se répèterait jusqu'à atteindre une précondition donnée
+	 * voire un tirage au sort entre plusieurs matches, comme pour les rounds...
+	 */
+	
+	/*
 	 * TODO
 	 * *******************************************************
 	 * ************************* FAIT ************************
@@ -573,13 +579,13 @@ public class Launcher
 	 * - optimisation du chargement : ne charger qu'une seule fois les caractéristiques des joueurs !
 	 * - correction de quelques bugs graphiques dans les thèmes de SBM1
 	 * - amélioration graphique des icones/boutons du menu horizontal
+	 * - optimisation du chargement : 1 thread au lieu d'une séquence de 2 !
 	 * 
 	 * *******************************************************
 	 * *********************** A FAIRE ***********************
 	 * *******************************************************
-	 * - mutualiser les threads
-	 * - quand un héro reçoit l'ordre de pleurer, il ne le fait pas s'il est en train de mourir (en fait faut mettre une vraie action avec permissions et tout)
 	 * - voir pq on ne peut plus controler l'IA
+	 * - quand un héro reçoit l'ordre de pleurer, il ne le fait pas s'il est en train de mourir (en fait faut mettre une vraie action avec permissions et tout)
 	 * - gérer le partage des points en cas d'égalité
 	 * - définir les présentations des rounds
 	 * - passer à un système gérant plusieurs pointProcesseurs

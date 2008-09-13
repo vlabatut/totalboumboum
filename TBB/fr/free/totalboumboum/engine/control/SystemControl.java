@@ -37,7 +37,7 @@ public class SystemControl implements KeyListener
 			if ((keyCode == KeyEvent.VK_ESCAPE)
 					|| (keyCode == KeyEvent.VK_END)
 					|| ((keyCode == KeyEvent.VK_C) && e.isControlDown()))
-				loop.setRunning(false);
+				loop.setLooping(false);
 			
 			// faire renaitre le bonhomme
 			else if ((keyCode == KeyEvent.VK_1))

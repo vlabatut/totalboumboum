@@ -34,15 +34,18 @@ public class LoopPanel extends SimpleMenuPanel implements LoopRenderPanel
 		setDoubleBuffered(false);
 		setBackground(Color.lightGray);
 		setFocusable(true);
-		Loop loop = getConfiguration().getTournament().getCurrentMatch().getCurrentRound().getLoop();
 		// the JPanel now has focus, so receives key events
 		// NOTE : surement à modifier, car un peu cra-cra (focus à donner à partir de l'extérieur)
-		loop.setPanel(this);
 		// thread
 //		Thread animator = new Thread(loop);
 //		animator.start();
 	}
 
+	public void start()
+	{	requestFocus();					
+		loop.setPanel(this);
+	}
+	
 	// ----------------------------------------------
 
 	// use active rendering to put the buffered image on-screen
