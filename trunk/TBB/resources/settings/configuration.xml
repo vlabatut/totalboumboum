@@ -27,8 +27,8 @@
 		<profile value="KilicPala" /> <!-- red -->
 <!--		<profile value="CaglayanElmas" BUGGÉ /> --> <!-- orange -->
 <!--		<profile value="GoksayKose" /> --> <!-- pink -->
-<!-- 		<profile value="BasmanSandalli" /> --> <!-- brown -->
-		<profile value="manual" /> <!-- cyan -->
+ 		<profile value="BasmanSandalli" /> <!-- brown -->
+<!--		<profile value="manual" /> --> <!-- cyan -->
 
 	</profiles>
 
