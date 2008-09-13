@@ -590,16 +590,16 @@ public class Launcher
 	 * - correction de quelques bugs graphiques dans les thèmes de SBM1
 	 * - amélioration graphique des icones/boutons du menu horizontal
 	 * - optimisation du chargement : 1 thread au lieu d'une séquence de 2 !
+	 * - correction d'un bug sur le control manuel d'un perso
 	 * 
 	 * *******************************************************
 	 * *********************** A FAIRE ***********************
 	 * *******************************************************
-	 * - voir pq on ne peut plus controler l'IA
+	 * - passer à un système gérant plusieurs pointProcesseurs
+	 * - pb lors de l'affichage du résultat d'un match : le classement des non-gagnants ne respecte pas le total des points...
 	 * - quand un héro reçoit l'ordre de pleurer, il ne le fait pas s'il est en train de mourir (en fait faut mettre une vraie action avec permissions et tout)
 	 * - gérer le partage des points en cas d'égalité
 	 * - définir les présentations des rounds
-	 * - passer à un système gérant plusieurs pointProcesseurs
-	 * - pb lors de l'affichage du résultat d'un match : le classement des non-gagnants ne respecte pas le total des points...
 	 * - problème de collisions quand on change la vitesse (surement un problème d'arrondi, ou alors un saut trop grand (en distance), voir si j'avais implémenté la maximalisation du déplacement malgré une éventuelle collision...)
 	 * - revoir le système des IA
 	 * - considérer qu'une partie peut s'arrêter à cause d'une limite de points ou de score (ex: pr frag, a un goalaverage>10)
