@@ -567,6 +567,9 @@ public class Launcher
 	 * 		- créant un executor au niveau du tournoi
 	 * 		- il doit contenir un pool de (nbre d'IA max pvant jouer à la fois)+1(pr loop)
 	 * 		- par la suite, au lieu de créer un thread pour chaque ia ou pour le chargement/loop, on en demande un à l'executor
+	 * http://java.sun.com/javase/6/docs/api/java/util/concurrent/ExecutorService.html
+	 * http://java.sun.com/docs/books/tutorial/essential/concurrency/pools.html
+	 * http://java.sun.com/docs/books/tutorial/essential/concurrency/interrupt.html
 	 */
 	
 	/*
