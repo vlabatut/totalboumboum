@@ -5,6 +5,6 @@
 	
  	<general name="Caglayan+Elmas" ai="caglayanelmas.CaglayanElmas" /> 
  	<character name="shirobon" packname="superbomberman1" color="orange" />     
-<!-- 	<character name="prognathe" packname="totalboumboum" color="red" />   -->
+<!-- 	<character name="prognathe" packname="totalboumboum" color="orange" />   -->
 	
 </profile>

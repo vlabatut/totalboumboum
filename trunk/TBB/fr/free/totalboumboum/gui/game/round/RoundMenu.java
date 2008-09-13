@@ -19,6 +19,7 @@ import javax.xml.parsers.ParserConfigurationException;
 
 import org.xml.sax.SAXException;
 
+import fr.free.totalboumboum.engine.loop.Loop;
 import fr.free.totalboumboum.game.match.Match;
 import fr.free.totalboumboum.game.round.Round;
 import fr.free.totalboumboum.game.round.RoundRenderPanel;
@@ -49,7 +50,7 @@ import fr.free.totalboumboum.tools.GuiTools;
 public class RoundMenu extends InnerMenuPanel implements RoundRenderPanel
 {	private static final long serialVersionUID = 1L;
 	
-	private MenuPanel loopPanel;
+	private LoopPanel loopPanel;
 	private InnerDataPanel roundDescription;
 	private InnerDataPanel roundResults;
 	private InnerDataPanel roundStatistics;
@@ -249,7 +250,7 @@ public class RoundMenu extends InnerMenuPanel implements RoundRenderPanel
 					loadProgressBar.repaint();
 					loopPanel = new LoopPanel(container.getContainer(),container);
 					replaceWith(loopPanel);
-					loopPanel.requestFocus();					
+					loopPanel.start();
 				}
 				else
 				{	text = getConfiguration().getLanguage().getText(GuiTools.ROUND_PROGRESSBAR_PLAYER)+" "+(val-2);

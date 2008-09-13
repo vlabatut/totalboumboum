@@ -8,6 +8,7 @@ import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.concurrent.locks.Condition;
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
 
@@ -49,6 +50,9 @@ public class Loop implements Runnable
 		configuration = round.getConfiguration();
 	}	
 	
+	private Lock loadLock = new ReentrantLock();
+	private Condition cond = loadLock.newCondition();
+	
 	public void init() throws ParserConfigurationException, SAXException, IOException, ClassNotFoundException, IllegalArgumentException, SecurityException, IllegalAccessException, NoSuchFieldException
 	{	// init
 		image = round.getPanel().getImage();
@@ -81,7 +85,7 @@ public class Loop implements Runnable
 			level.addHero((Hero)player.getSprite(),pl.getLine(),pl.getCol());
 			loadStepOver();
 			j++;
-		}
+		}	
 	}
 	
 	public void loadStepOver()
@@ -140,40 +144,71 @@ public class Loop implements Runnable
 	private int showSpritesPositions = 0;
 	private boolean showSpeed = false;
 	private boolean showTime = false;
+	private Lock debugLock = new ReentrantLock();
 
-	public synchronized void setShowGrid(boolean showGrid)
-	{	this.showGrid = showGrid;		
+	public void setShowGrid(boolean showGrid)
+	{	debugLock.lock();
+		this.showGrid = showGrid;
+		debugLock.unlock();
 	}
-	public synchronized boolean getShowGrid()
-	{	return showGrid;		
-	}
-
-	public synchronized void setShowSpeed(boolean showSpeed)
-	{	this.showSpeed = showSpeed;		
-	}
-	public synchronized boolean getShowSpeed()
-	{	return showSpeed;		
-	}
-
-	public synchronized void setShowTime(boolean showTime)
-	{	this.showTime = showTime;		
-	}
-	public synchronized boolean getShowTime()
-	{	return showTime;		
+	public boolean getShowGrid()
+	{	boolean result;
+		debugLock.lock();
+		result = showGrid;
+		debugLock.unlock();
+		return result;
 	}
 
-	public synchronized void setShowTilesPositions(int showTilesPositions)
-	{	this.showTilesPositions = showTilesPositions;		
+	public void setShowSpeed(boolean showSpeed)
+	{	debugLock.lock();
+		this.showSpeed = showSpeed;		
+		debugLock.unlock();
 	}
-	public synchronized int getShowTilesPositions()
-	{	return showTilesPositions;		
+	public boolean getShowSpeed()
+	{	boolean result;
+		debugLock.lock();
+		result = showSpeed;
+		debugLock.unlock();
+		return result;
 	}
 
-	public synchronized void setShowSpritesPositions(int showSpritesPositions)
-	{	this.showSpritesPositions = showSpritesPositions;		
+	public void setShowTime(boolean showTime)
+	{	debugLock.lock();
+		this.showTime = showTime;		
+		debugLock.unlock();
 	}
-	public synchronized int getShowSpritesPositions()
-	{	return showSpritesPositions;		
+	public boolean getShowTime()
+	{	boolean result;
+		debugLock.lock();
+		result = showTime;
+		debugLock.unlock();
+		return result;
+	}
+
+	public void setShowTilesPositions(int showTilesPositions)
+	{	debugLock.lock();
+		this.showTilesPositions = showTilesPositions;		
+		debugLock.unlock();
+	}
+	public int getShowTilesPositions()
+	{	int result;
+		debugLock.lock();
+		result = showTilesPositions;
+		debugLock.unlock();
+		return result;
+	}
+
+	public void setShowSpritesPositions(int showSpritesPositions)
+	{	debugLock.lock();
+		this.showSpritesPositions = showSpritesPositions;		
+		debugLock.unlock();
+	}
+	public int getShowSpritesPositions()
+	{	int result;
+		debugLock.lock();
+		result = showSpritesPositions;
+		debugLock.unlock();
+		return result;
 	}
 
 	/////////////////////////////////////////////////////////////////
@@ -183,8 +218,9 @@ public class Loop implements Runnable
 	private LoopRenderPanel panel;
 	private Image image = null;
 
-	public synchronized void setPanel(LoopRenderPanel panel)
-	{	// panel
+	public void setPanel(LoopRenderPanel panel)
+	{	loadLock.lock();
+		// panel
 		this.panel = panel;
 		// system listener
 		panel.addKeyListener(systemControl);
@@ -195,7 +231,8 @@ public class Loop implements Runnable
 			panel.addKeyListener(player.getSpriteControl());
 		}
 		// waking the process thread up
-		notifyAll();
+		cond.signal();
+		loadLock.lock();		
 	}
 	public LoopRenderPanel getPanel()
 	{	return panel;
@@ -220,34 +257,48 @@ public class Loop implements Runnable
 	 */ 
 	private static int MAX_FRAME_SKIPS = 5;
 	/** used to stop the animation thread */
-	private boolean isRunning = false;
+	private boolean isLooping = false;
 	private boolean isPaused = false;
+	private Lock loopLock = new ReentrantLock();
 	
-	public synchronized void setPause(boolean isPaused)
-	{	this.isPaused = isPaused;
+	public void setPause(boolean isPaused)
+	{	loopLock.lock();
+		this.isPaused = isPaused;
+		loopLock.unlock();
 	}
-	public synchronized boolean isPaused()
-	{	return isPaused;
+	public boolean isPaused()
+	{	boolean result;
+		loopLock.lock();
+		result = isPaused;
+		loopLock.unlock();
+		return result;
 	}
 
-	public synchronized void setRunning(boolean isRunning)
-	{	this.isRunning = isRunning;
+	public void setLooping(boolean isRunning)
+	{	loopLock.lock();
+		this.isLooping = isRunning;
+		loopLock.unlock();
 	}
-	public synchronized boolean isRunning()
-	{	return isRunning;
+	public boolean isLooping()
+	{	boolean result;
+		loopLock.lock();
+		result = isLooping;
+		loopLock.unlock();
+		return result;
 	}
 
 	public long getTotalTime()
 	{	return totalTime;	
 	}
 	
-	public synchronized void run()
-	{	try
+	public void run()
+	{	loadLock.lock();
+		try
 		{	// load the round
 			init();
 			// wait for the GUI to be ready
 			if(panel==null)
-				wait();
+				cond.await();
 			// start the game
 			process();
 		}
@@ -289,10 +340,10 @@ public class Loop implements Runnable
 		beforeTime = System.nanoTime();
 		totalTime = 0;
 
-		setRunning(true);
+		setLooping(true);
 
 		// The frames of the animation are drawn inside the while loop
-		while(isRunning() && !isOver())
+		while(isLooping() && !isOver())
 		{	update();
 			getLevel().draw(graphics);
 			panel.paintScreen();
