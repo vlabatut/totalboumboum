@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+
+	<xsd:complexType name="tLocation">
+		<xsd:attribute name="player" type="xsd:integer" use="required" />
+		<xsd:attribute name="col" type="xsd:integer" use="required" />
+		<xsd:attribute name="line" type="xsd:integer" use="required" />
+	</xsd:complexType>
+
+	<xsd:complexType name="tSituation">
+		<xsd:sequence>
+			<xsd:element name="location" type="tLocation" minOccurs="0" maxOccurs="unbounded"/>
+		</xsd:sequence>
+		<xsd:attribute name="players" type="xsd:integer" use="required" />
+	</xsd:complexType>
+
+	<xsd:complexType name="tPlayers">
+		<xsd:sequence>
+			<xsd:element name="situation" type="tSituation" minOccurs="0" maxOccurs="unbounded"/>
+		</xsd:sequence>
+	</xsd:complexType>
+
+	<xsd:element name="players" type="tPlayers" />
+
+</xsd:schema>
