@@ -66,6 +66,7 @@
 	<xsd:complexType name="tTournament">
 		<xsd:sequence>
 			<xsd:element name="general" type="tGeneral" />
+			<xsd:element name="points" type="tPoints" />
 			<xsd:group ref="gTournament" />
 		</xsd:sequence>
 	</xsd:complexType>

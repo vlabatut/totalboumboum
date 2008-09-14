@@ -90,7 +90,8 @@ public class SequenceTournament extends AbstractTournament
 		panel.matchOver();
 		//
 		if(!iterator.hasNext())
-		{	tournamentOver = true;
+		{	stats.computePoints(pointProcessor);
+			tournamentOver = true;
 			panel.tournamentOver();
 		}
 	}
@@ -105,4 +106,17 @@ public class SequenceTournament extends AbstractTournament
 		// TODO charger partiellement tous les matches 
 		// pour déterminer le nombre de joueurs nécessaire
 	}
+
+	/////////////////////////////////////////////////////////////////
+	// POINTS			/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	private PointProcessor pointProcessor;
+
+	public void setPointProcessor(PointProcessor pointProcessor)
+	{	this.pointProcessor = pointProcessor;
+	}
+	public PointProcessor getPointProcessor()
+	{	return pointProcessor;
+	}
+
 }
