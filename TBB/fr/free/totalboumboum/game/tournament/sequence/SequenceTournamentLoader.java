@@ -26,6 +26,10 @@ public class SequenceTournamentLoader
 	public static SequenceTournament loadTournamentElement(String folder, Element root, Configuration configuration) throws ParserConfigurationException, SAXException, IOException
 	{	SequenceTournament result = new SequenceTournament(configuration);
 		Element element;
+		// points
+		element = root.getChild(XmlTools.ELT_POINTS);
+		PointProcessor pp = loadPointsElement(element,folder);
+		result.setPointProcessor(pp);
 		// matches
 		element = root.getChild(XmlTools.ELT_MATCHES);
 		loadMatchesElement(element,folder,result);
@@ -49,7 +53,8 @@ public class SequenceTournamentLoader
 		match = loadLocationElement(element,folder,result);
 		// points
 		element = root.getChild(XmlTools.ELT_POINTS);
-		loadPointsElement(element,folder,match);
+		PointProcessor pp = loadPointsElement(element,folder);
+		match.setPointProcessor(pp);
 		// result
 		result.addMatch(match);
 	}
@@ -71,8 +76,8 @@ public class SequenceTournamentLoader
 		return result;
 	}
 	
-	private static void loadPointsElement(Element root, String folder, Match result) throws ParserConfigurationException, SAXException, IOException
-	{	PointProcessor pp;
+	private static PointProcessor loadPointsElement(Element root, String folder) throws ParserConfigurationException, SAXException, IOException
+	{	PointProcessor result;
 		// local
 		String localStr = root.getAttribute(XmlTools.ATT_LOCAL).getValue().trim();
 		boolean local = Boolean.valueOf(localStr);
@@ -81,10 +86,10 @@ public class SequenceTournamentLoader
 		// loading
 		if(local)
 		{	folder = folder+File.separator+name;
-			pp = PointProcessorLoader.loadPointProcessorFromFilePath(folder);
+			result = PointProcessorLoader.loadPointProcessorFromFilePath(folder);
 		}
 		else
-			pp = PointProcessorLoader.loadPointProcessorFromName(name);
-		result.setPointProcessor(pp);
+			result = PointProcessorLoader.loadPointProcessorFromName(name);
+		return result;
 	}
 }

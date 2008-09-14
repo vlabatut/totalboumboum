@@ -13,7 +13,7 @@ import fr.free.totalboumboum.game.point.PointProcessor;
 import fr.free.totalboumboum.game.score.Score;
 import fr.free.totalboumboum.game.tournament.AbstractTournament;
 
-public class StatisticTournament implements Serializable
+public class StatisticTournament implements Serializable, StatisticBase
 {
 	private static final long serialVersionUID = 1L;
 	
@@ -24,6 +24,7 @@ public class StatisticTournament implements Serializable
 	private final ArrayList<StatisticMatch> matches = new ArrayList<StatisticMatch>();
 	private final HashMap<Score,long[]> scores = new HashMap<Score,long[]>();
 	private float[] points;
+	private float[] partialPoints;
 	
 	//NOTE à généraliser à matches et round, puisqu'on peut sauver pour reprendre plus tard...
 	public StatisticTournament()
@@ -44,6 +45,10 @@ public class StatisticTournament implements Serializable
 		points = new float[players.size()];
 		for(int j=0;j<points.length;j++)
 			points[j] = 0;
+		// partial points
+		partialPoints = new float[players.size()];
+		for(int j=0;j<partialPoints.length;j++)
+			partialPoints[j] = 0;
 		// scores
 		for (Score score : Score.values())
 		{	long[] sc = new long[players.size()];
@@ -67,12 +72,16 @@ public class StatisticTournament implements Serializable
 			for(int i=0;i<matchScores.length;i++)
 				currentScores[i] = currentScores[i] + matchScores[i];
 		}
-		// points
+		// partial points
 		float[] matchPoints = match.getPoints();
 		for(int i=0;i<players.size();i++)
-			points[i] = points[i] + matchPoints[i];
+			partialPoints[i] = partialPoints[i] + matchPoints[i];
 	}
 	
+	public void computePoints(PointProcessor pointProcessor)
+	{	points = pointProcessor.process(this);
+	}
+
 	public Date getDate()
 	{	return date;
 	}
@@ -94,8 +103,17 @@ public class StatisticTournament implements Serializable
 	{	return points;		
 	}
 
+	public float[] getPartialPoints()
+	{	return partialPoints;
+	}
+
 	public ArrayList<StatisticMatch> getStatMatches()
 	{	return matches;
+	}
+
+	@Override
+	public ArrayList<String> getPlayers()
+	{	return players;
 	}
 }
 
