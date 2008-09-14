@@ -4,7 +4,6 @@
 	xsi:noNamespaceSchemaLocation="..\..\..\schemas\tournament.xsd">
 	
 	<general name="Tournament-séquence de Test"/>
-	<points local="false" name="tournamentSimple" />
 
 	<sequence>
 		<matches>
@@ -20,6 +19,8 @@
 			</match>
 			
 		</matches>
+		
+		<points local="false" name="tournamentSimple" />
 	</sequence>
 		
 		
