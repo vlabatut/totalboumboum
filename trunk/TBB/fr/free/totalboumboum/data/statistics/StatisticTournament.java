@@ -9,6 +9,7 @@ import java.util.HashMap;
 import java.util.Iterator;
 
 import fr.free.totalboumboum.data.profile.Profile;
+import fr.free.totalboumboum.game.point.PointProcessor;
 import fr.free.totalboumboum.game.score.Score;
 import fr.free.totalboumboum.game.tournament.AbstractTournament;
 
@@ -24,7 +25,7 @@ public class StatisticTournament implements Serializable
 	private final HashMap<Score,long[]> scores = new HashMap<Score,long[]>();
 	private float[] points;
 	
-	//BOTE à généraliser à matches et round, puisqu'on peut sauver pour reprendre plus tard...
+	//NOTE à généraliser à matches et round, puisqu'on peut sauver pour reprendre plus tard...
 	public StatisticTournament()
 	{	Calendar cal = new GregorianCalendar();
 		date = cal.getTime();
@@ -41,8 +42,8 @@ public class StatisticTournament implements Serializable
 		}
 		// points
 		points = new float[players.size()];
-		for(int i=0;i<points.length;i++)
-			points[i] = 0;
+		for(int j=0;j<points.length;j++)
+			points[j] = 0;
 		// scores
 		for (Score score : Score.values())
 		{	long[] sc = new long[players.size()];
@@ -67,9 +68,9 @@ public class StatisticTournament implements Serializable
 				currentScores[i] = currentScores[i] + matchScores[i];
 		}
 		// points
-		float roundPoints[] = match.getPoints();
+		float[] matchPoints = match.getPoints();
 		for(int i=0;i<players.size();i++)
-			points[i] = points[i] + roundPoints[i];	
+			points[i] = points[i] + matchPoints[i];
 	}
 	
 	public Date getDate()
@@ -83,8 +84,14 @@ public class StatisticTournament implements Serializable
 	{	return matches.size();
 	}
 
+	public long[] getScores(Score score)
+	{	long[] result;
+		result = scores.get(score);
+		return result;	
+	}
+
 	public float[] getPoints()
-	{	return points;
+	{	return points;		
 	}
 
 	public ArrayList<StatisticMatch> getStatMatches()

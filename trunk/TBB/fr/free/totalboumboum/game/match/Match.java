@@ -169,7 +169,7 @@ public class Match
 	/////////////////////////////////////////////////////////////////
 	// POINTS			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	private PointProcessor pointProcessor = new PointPoints();
+	private PointProcessor pointProcessor;
 
 	public void setPointProcessor(PointProcessor pointProcessor)
 	{	this.pointProcessor = pointProcessor;

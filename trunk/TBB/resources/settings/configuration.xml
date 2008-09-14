@@ -23,12 +23,12 @@
 		<profile value="DoganDemirkol" /> <!-- white -->
 		<profile value="BingolKetenci" /> <!-- blue -->
 <!-- 		<profile value="OkanYuksel" /> BUGGÉ --> <!-- black -->   
-		<profile value="GokselMenges" />  <!-- green --> 
+<!--		<profile value="GokselMenges" /> --> <!-- green --> 
 		<profile value="KilicPala" /> <!-- red -->
 <!--		<profile value="CaglayanElmas" BUGGÉ /> --> <!-- orange -->
 <!--		<profile value="GoksayKose" /> --> <!-- pink -->
  		<profile value="BasmanSandalli" /> <!-- brown -->
-<!--		<profile value="manual" /> --> <!-- cyan -->
+		<profile value="manual" />  <!-- cyan -->
 
 	</profiles>
 

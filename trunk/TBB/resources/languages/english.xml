@@ -163,15 +163,35 @@
 	<text name="GameRoundTitleDescription" value="Round description" />
 	<text name="GameRoundTitleResults" value="Round results" />
 	<text name="GameRoundTitleStatistics" value="Round statistics" />
+	<!--  -->
 	<text name="GameRoundHeaderName" value="Name" />
+	<text name="GameRoundHeaderNameTooltip" value="Name of the player" />
+	<!--  -->
 	<text name="GameRoundHeaderPoints" value="Pts" />
+	<text name="GameRoundHeaderPointsTooltip" value="Number of points scored for this round" />
+	<!--  -->
 	<text name="GameRoundHeaderBombs" value="Bombs" />
+	<text name="GameRoundHeaderBombsTooltip" value="Number of bombs dropped during this round" />
+	<!--  -->
 	<text name="GameRoundHeaderDeaths" value="Deaths" />
+	<text name="GameRoundHeaderDeathsTooltip" value="Number of times the player was killed during this round" />
+	<!--  -->
 	<text name="GameRoundHeaderItems" value="Items" />
+	<text name="GameRoundHeaderItemsTooltip" value="Number of items picked during this round" />
+	<!--  -->
 	<text name="GameRoundHeaderKills" value="Kills" />
+	<text name="GameRoundHeaderKillsTooltip" value="Number of players killed during this round" />
+	<!--  -->
 	<text name="GameRoundHeaderCrowns" value="Crowns" />
+	<text name="GameRoundHeaderCrownsTooltip" value="Number of crowns possessed at the end of this round" />
+	<!--  -->
 	<text name="GameRoundHeaderFrags" value="Frags" />
+	<text name="GameRoundHeaderFragsTooltip" value="Difference between the number of kills and deaths for this round" />
+	<!--  -->
 	<text name="GameRoundHeaderPaintings" value="Paints" />
+	<text name="GameRoundHeaderPaintingsTooltip" value="Number of tiles painted during this round" />
+	<!--  -->
 	<text name="GameRoundHeaderTime" value="Time" />
+	<text name="GameRoundHeaderTimeTooltip" value="Time the player survived for this round" />
 	
 </language>
