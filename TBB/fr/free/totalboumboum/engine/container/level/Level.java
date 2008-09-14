@@ -26,6 +26,7 @@ import fr.free.totalboumboum.engine.loop.Loop;
 import fr.free.totalboumboum.engine.player.PlayerLocation;
 import fr.free.totalboumboum.game.round.Round;
 import fr.free.totalboumboum.tools.CalculusTools;
+import fr.free.totalboumboum.tools.StringTools;
 
 
 public class Level
@@ -311,6 +312,7 @@ public class Level
 					g.drawString(textY, x, y);
 				}
 		}		
+		// vitesse
 		if(loop.getShowSpeed())
 		{	g.setColor(Color.MAGENTA);
 			Font font = new Font("Dialog", Font.PLAIN, 18);
@@ -322,21 +324,14 @@ public class Level
 			int y = (int)Math.round(10+box.getHeight()/2);
 			g.drawString(text, x, y);
 		}
+		// temps écoulé
 		if(loop.getShowTime())
 		{	g.setColor(Color.MAGENTA);
 			Font font = new Font("Dialog", Font.PLAIN, 18);
 			g.setFont(font);
 			FontMetrics metrics = g.getFontMetrics(font);
-			NumberFormat nf = NumberFormat.getInstance();
-			nf.setMinimumIntegerDigits(2);
 			long time = loop.getTotalTime();
-			String hours = nf.format(time/3600000);	time = time%3600000;
-			String minutes = nf.format(time/60000);	time = time%60000;
-			String seconds = nf.format(time/1000);	time = time%1000;
-			nf = NumberFormat.getInstance();
-			nf.setMinimumIntegerDigits(3);
-			String milliseconds = nf.format(time);
-			String text = "Time: "+hours+"h"+minutes+"m"+seconds+"s"+milliseconds;
+			String text = "Time: "+StringTools.formatTimeWithHours(time);
 			Rectangle2D box = metrics.getStringBounds(text, g);
 			int x = 10;
 			int y = (int)Math.round(30+box.getHeight()/2);

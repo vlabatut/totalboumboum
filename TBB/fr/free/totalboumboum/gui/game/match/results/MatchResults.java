@@ -277,7 +277,7 @@ public class MatchResults extends InnerDataPanel
 				float pts = partialPoints[pp.getIndex()];
 				String txt = nf.format(pts);
 				totalLabel.setText(txt);
-				Color bg = new Color(clr.getRed(),clr.getGreen(),clr.getBlue(),170);
+				Color bg = new Color(clr.getRed(),clr.getGreen(),clr.getBlue(),160);
 				totalLabel.setBackground(bg);
 			}
 			// points

@@ -61,13 +61,13 @@ public class SwingTools
 	private static final HashMap<String,Integer> sizes = new HashMap<String,Integer>();
 	
 	// icons
-	public static final String ICON_NORMAL = "_normal";
-	public static final String ICON_NORMAL_SELECTED = "_normal_selected";
-	public static final String ICON_DISABLED = "_disabled";
-	public static final String ICON_DISABLED_SELECTED = "_disabled_selected";
-	public static final String ICON_ROLLOVER = "_rollover";
-	public static final String ICON_ROLLOVER_SELECTED = "_rollover_selected";
-	public static final String ICON_PRESSED = "_pressed";
+	public static final String ICON_NORMAL = "normal";
+	public static final String ICON_NORMAL_SELECTED = "normal_selected";
+	public static final String ICON_DISABLED = "disabled";
+	public static final String ICON_DISABLED_SELECTED = "disabled_selected";
+	public static final String ICON_ROLLOVER = "rollover";
+	public static final String ICON_ROLLOVER_SELECTED = "rollover_selected";
+	public static final String ICON_PRESSED = "pressed";
 	private static final HashMap<String,BufferedImage> icons = new HashMap<String,BufferedImage>();
 	
 
@@ -139,87 +139,131 @@ public class SwingTools
 		sizes.put(GAME_RESULTS_LABEL_HEADER_HEIGHT,gameResultsLabelHeaderHeight);
 		int gameResultHeaderFontSize = getFontSize(gameResultsLabelHeaderHeight*0.9, configuration, g);
 		sizes.put(GAME_RESULTS_HEADER_FONT_SIZE,gameResultHeaderFontSize);
-		
-		
+				
 		// icons
 		BufferedImage absent = ImageTools.getAbsentImage(64,64);
 		BufferedImage image;
-		String[] buttonStates = {ICON_NORMAL,ICON_NORMAL_SELECTED,
-				ICON_DISABLED,ICON_DISABLED_SELECTED,
-				ICON_ROLLOVER,ICON_ROLLOVER_SELECTED,
-				ICON_PRESSED};
+		// buttons
+		{	String[] buttonStates = {ICON_NORMAL,ICON_NORMAL_SELECTED,
+					ICON_DISABLED,ICON_DISABLED_SELECTED,
+					ICON_ROLLOVER,ICON_ROLLOVER_SELECTED,
+					ICON_PRESSED};
+			//
+			String baseFolder = FileTools.getIconsPath()+File.separator+"buttons";
+			{	String folder = baseFolder+File.separator+"description"+File.separator;
+				for(int i=0;i<buttonStates.length;i++)
+				{	image = loadIcon(folder+buttonStates[i]+".png",absent);
+					icons.put(GuiTools.TOURNAMENT_BUTTON_DESCRIPTION+buttonStates[i],image);
+					icons.put(GuiTools.MATCH_BUTTON_DESCRIPTION+buttonStates[i],image);
+					icons.put(GuiTools.ROUND_BUTTON_DESCRIPTION+buttonStates[i],image);
+				}
+			}
+			{	String folder = baseFolder+File.separator+"left_blue"+File.separator;
+				for(int i=0;i<buttonStates.length;i++)
+				{	image = loadIcon(folder+buttonStates[i]+".png",absent);
+					icons.put(GuiTools.TOURNAMENT_BUTTON_MENU+buttonStates[i],image);
+					icons.put(GuiTools.MATCH_BUTTON_CURRENT_TOURNAMENT+buttonStates[i],image);
+					icons.put(GuiTools.ROUND_BUTTON_CURRENT_MATCH+buttonStates[i],image);
+				}
+			}
+			{	String folder = baseFolder+File.separator+"left_red"+File.separator;
+				for(int i=0;i<buttonStates.length;i++)
+				{	image = loadIcon(folder+buttonStates[i]+".png",absent);
+					icons.put(GuiTools.TOURNAMENT_BUTTON_FINISH+buttonStates[i],image);
+					icons.put(GuiTools.MATCH_BUTTON_FINISH+buttonStates[i],image);
+					icons.put(GuiTools.ROUND_BUTTON_FINISH+buttonStates[i],image);
+				}
+			}
+			{	String folder = baseFolder+File.separator+"play"+File.separator;
+				for(int i=0;i<buttonStates.length;i++)
+				{	image = loadIcon(folder+buttonStates[i]+".png",absent);
+					icons.put(GuiTools.ROUND_BUTTON_PLAY+buttonStates[i],image);
+				}
+			}
+			{	String folder = baseFolder+File.separator+"home"+File.separator;
+				for(int i=0;i<buttonStates.length;i++)
+				{	image = loadIcon(folder+buttonStates[i]+".png",absent);
+					icons.put(GuiTools.TOURNAMENT_BUTTON_QUIT+buttonStates[i],image);
+					icons.put(GuiTools.MATCH_BUTTON_QUIT+buttonStates[i],image);
+					icons.put(GuiTools.ROUND_BUTTON_QUIT+buttonStates[i],image);
+				}
+			}
+			{	String folder = baseFolder+File.separator+"results"+File.separator;
+				for(int i=0;i<buttonStates.length;i++)
+				{	image = loadIcon(folder+buttonStates[i]+".png",absent);
+					icons.put(GuiTools.TOURNAMENT_BUTTON_RESULTS+buttonStates[i],image);
+					icons.put(GuiTools.MATCH_BUTTON_RESULTS+buttonStates[i],image);
+					icons.put(GuiTools.ROUND_BUTTON_RESULTS+buttonStates[i],image);
+				}
+			}
+			{	String folder = baseFolder+File.separator+"right_blue"+File.separator;
+				for(int i=0;i<buttonStates.length;i++)
+				{	image = loadIcon(folder+buttonStates[i]+".png",absent);
+				}
+			}
+			{	String folder = baseFolder+File.separator+"right_red"+File.separator;
+				for(int i=0;i<buttonStates.length;i++)
+				{	image = loadIcon(folder+buttonStates[i]+".png",absent);
+					icons.put(GuiTools.TOURNAMENT_BUTTON_CURRENT_MATCH+buttonStates[i],image);
+					icons.put(GuiTools.TOURNAMENT_BUTTON_NEXT_MATCH+buttonStates[i],image);
+					icons.put(GuiTools.MATCH_BUTTON_CURRENT_ROUND+buttonStates[i],image);
+					icons.put(GuiTools.MATCH_BUTTON_NEXT_ROUND+buttonStates[i],image);
+				}
+			}
+			{	String folder = baseFolder+File.separator+"stats"+File.separator;
+				for(int i=0;i<buttonStates.length;i++)
+				{	image = loadIcon(folder+buttonStates[i]+".png",absent);
+					icons.put(GuiTools.TOURNAMENT_BUTTON_STATISTICS+buttonStates[i],image);
+					icons.put(GuiTools.MATCH_BUTTON_STATISTICS+buttonStates[i],image);
+					icons.put(GuiTools.ROUND_BUTTON_STATISTICS+buttonStates[i],image);
+				}
+			}
+		}
 		
-		String folder = FileTools.getIconsPath()+File.separator;
-		{	String name = "description";
-			for(int i=0;i<buttonStates.length;i++)
-			{	image = loadIcon(folder+name+buttonStates[i]+".png",absent);
-				icons.put(GuiTools.TOURNAMENT_BUTTON_DESCRIPTION+buttonStates[i],image);
-				icons.put(GuiTools.MATCH_BUTTON_DESCRIPTION+buttonStates[i],image);
-				icons.put(GuiTools.ROUND_BUTTON_DESCRIPTION+buttonStates[i],image);
-			}
-		}
-		{	String name = "left_blue";
-			for(int i=0;i<buttonStates.length;i++)
-			{	image = loadIcon(folder+name+buttonStates[i]+".png",absent);
-				icons.put(GuiTools.TOURNAMENT_BUTTON_MENU+buttonStates[i],image);
-				icons.put(GuiTools.MATCH_BUTTON_CURRENT_TOURNAMENT+buttonStates[i],image);
-				icons.put(GuiTools.ROUND_BUTTON_CURRENT_MATCH+buttonStates[i],image);
-			}
-		}
-		{	String name = "left_red";
-			for(int i=0;i<buttonStates.length;i++)
-			{	image = loadIcon(folder+name+buttonStates[i]+".png",absent);
-				icons.put(GuiTools.TOURNAMENT_BUTTON_FINISH+buttonStates[i],image);
-				icons.put(GuiTools.MATCH_BUTTON_FINISH+buttonStates[i],image);
-				icons.put(GuiTools.ROUND_BUTTON_FINISH+buttonStates[i],image);
-			}
-		}
-		{	String name = "play";
-			for(int i=0;i<buttonStates.length;i++)
-			{	image = loadIcon(folder+name+buttonStates[i]+".png",absent);
-				icons.put(GuiTools.ROUND_BUTTON_PLAY+buttonStates[i],image);
-			}
-		}
-		{	String name = "home";
-			for(int i=0;i<buttonStates.length;i++)
-			{	image = loadIcon(folder+name+buttonStates[i]+".png",absent);
-				icons.put(GuiTools.TOURNAMENT_BUTTON_QUIT+buttonStates[i],image);
-				icons.put(GuiTools.MATCH_BUTTON_QUIT+buttonStates[i],image);
-				icons.put(GuiTools.ROUND_BUTTON_QUIT+buttonStates[i],image);
-			}
-		}
-		{	String name = "results";
-			for(int i=0;i<buttonStates.length;i++)
-			{	image = loadIcon(folder+name+buttonStates[i]+".png",absent);
-				icons.put(GuiTools.TOURNAMENT_BUTTON_RESULTS+buttonStates[i],image);
-				icons.put(GuiTools.MATCH_BUTTON_RESULTS+buttonStates[i],image);
-				icons.put(GuiTools.ROUND_BUTTON_RESULTS+buttonStates[i],image);
-			}
-		}
-		{	String name = "right_blue";
-			for(int i=0;i<buttonStates.length;i++)
-			{	image = loadIcon(folder+name+buttonStates[i]+".png",absent);
-			}
-		}
-		{	String name = "right_red";
-			for(int i=0;i<buttonStates.length;i++)
-			{	image = loadIcon(folder+name+buttonStates[i]+".png",absent);
-				icons.put(GuiTools.TOURNAMENT_BUTTON_CURRENT_MATCH+buttonStates[i],image);
-				icons.put(GuiTools.TOURNAMENT_BUTTON_NEXT_MATCH+buttonStates[i],image);
-				icons.put(GuiTools.MATCH_BUTTON_CURRENT_ROUND+buttonStates[i],image);
-				icons.put(GuiTools.MATCH_BUTTON_NEXT_ROUND+buttonStates[i],image);
-			}
-		}
-		{	String name = "stats";
-			for(int i=0;i<buttonStates.length;i++)
-			{	image = loadIcon(folder+name+buttonStates[i]+".png",absent);
-				icons.put(GuiTools.TOURNAMENT_BUTTON_STATISTICS+buttonStates[i],image);
-				icons.put(GuiTools.MATCH_BUTTON_STATISTICS+buttonStates[i],image);
-				icons.put(GuiTools.ROUND_BUTTON_STATISTICS+buttonStates[i],image);
-			}
-		}		
-		
+		// tables
+		{	String folder = FileTools.getIconsPath()+File.separator+"tables"+File.separator;
+			// bombs
+			image = loadIcon(folder+"bombs.png",absent);
+			icons.put(GuiTools.GAME_ROUND_HEADER_BOMBS,image);
+			// crowns
+			image = loadIcon(folder+"crowns.png",absent);
+			icons.put(GuiTools.GAME_ROUND_HEADER_CROWNS,image);
+			// deaths
+			image = loadIcon(folder+"deaths.png",absent);
+			icons.put(GuiTools.GAME_ROUND_HEADER_DEATHS,image);
+			// frags
+			image = loadIcon(folder+"frags.png",absent);
+			icons.put(GuiTools.GAME_ROUND_HEADER_FRAGS,image);
+			// items
+			image = loadIcon(folder+"items.png",absent);
+			icons.put(GuiTools.GAME_ROUND_HEADER_ITEMS,image);
+			// kills
+			image = loadIcon(folder+"kills.png",absent);
+			icons.put(GuiTools.GAME_ROUND_HEADER_KILLS,image);
+			// name
+			image = loadIcon(folder+"name.png",absent);
+			icons.put(GuiTools.GAME_TOURNAMENT_HEADER_NAME,image);
+			icons.put(GuiTools.GAME_MATCH_HEADER_NAME,image);
+			icons.put(GuiTools.GAME_ROUND_HEADER_NAME,image);
+			// paintings
+			image = loadIcon(folder+"paintings.png",absent);
+			icons.put(GuiTools.GAME_ROUND_HEADER_PAINTINGS,image);
+			// points
+			image = loadIcon(folder+"points.png",absent);
+			icons.put(GuiTools.GAME_TOURNAMENT_HEADER_POINTS,image);
+			icons.put(GuiTools.GAME_MATCH_HEADER_POINTS,image);
+			icons.put(GuiTools.GAME_ROUND_HEADER_POINTS,image);
+			// time
+			image = loadIcon(folder+"time.png",absent);
+			icons.put(GuiTools.GAME_ROUND_HEADER_TIME,image);
+			// total
+			image = loadIcon(folder+"total.png",absent);
+			icons.put(GuiTools.GAME_TOURNAMENT_HEADER_TOTAL,image);
+			icons.put(GuiTools.GAME_MATCH_HEADER_TOTAL,image);
+		}			
 	}
+	
+	
 	public static int getSize(String key)
 	{	int result = -1;
 		Integer temp = sizes.get(key);

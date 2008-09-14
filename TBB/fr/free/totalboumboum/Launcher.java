@@ -534,23 +534,6 @@ public class Launcher
 	 */
 	
 	/*
-	 * TODO pb de synchro concernant le delayMgr :
-	 * 
-	 *  
-	 *  Exception in thread "Thread-4" java.util.ConcurrentModificationException
-		at java.util.HashMap$HashIterator.nextEntry(HashMap.java:793)
-		at java.util.HashMap$EntryIterator.next(HashMap.java:834)
-		at java.util.HashMap$EntryIterator.next(HashMap.java:832)
-		at fr.free.totalboumboum.engine.content.manager.DelayManager.update(DelayManager.java:32)
-		at fr.free.totalboumboum.engine.content.sprite.Sprite.update(Sprite.java:205)
-		at fr.free.totalboumboum.engine.container.tile.Tile.update(Tile.java:108)
-		at fr.free.totalboumboum.engine.container.level.Level.update(Level.java:201)
-		at fr.free.totalboumboum.engine.loop.Loop.update(Loop.java:272)
-		at fr.free.totalboumboum.engine.loop.Loop.run(Loop.java:217)
-		at java.lang.Thread.run(Thread.java:619)
-	 */
-
-	/*
 	 * TODO couleurs
 	 * en fait la couleur dans le profil est une couleur préférée par défaut
 	 * mais quand on choisit les joueurs pour un tournoi, ils peuvent changer leur couleur
@@ -570,6 +553,11 @@ public class Launcher
 	 * http://java.sun.com/javase/6/docs/api/java/util/concurrent/ExecutorService.html
 	 * http://java.sun.com/docs/books/tutorial/essential/concurrency/pools.html
 	 * http://java.sun.com/docs/books/tutorial/essential/concurrency/interrupt.html
+	 */
+
+	/*
+	 * TODO vérifier qu'il n'y a pas d'interférences entre une fin de partie par manque de joueur,
+	 * puis la fin temporelle se produit pendant les célébrations
 	 */
 	
 	/*
@@ -592,17 +580,31 @@ public class Launcher
 	 * - optimisation du chargement : 1 thread au lieu d'une séquence de 2 !
 	 * - correction d'un bug sur le control manuel d'un perso
 	 * 
+	 * + alpha.39
+	 * - modification de la fenêtre de résultats du round, de manière à afficher les scores (deaths, etc)
+	 * - modication de la fenêtre de résultats, pour gagner de la place : icones dans les en-têtes (à la place du texte) 
+	 * - correction d'un bug de synchronisation du gestionnaire de délais
+	 * - modification du système de points de manière à pouvoir effectuer un classement en considérant plusieurs paramètres complètement ordonnés
+	 * 
 	 * *******************************************************
 	 * *********************** A FAIRE ***********************
 	 * *******************************************************
-	 * - passer à un système gérant plusieurs pointProcesseurs
+	 * - il FAUT un pointProcessor pour le tournament, pour gérer les égalités
+	 * - gérer le partage des points en cas d'égalité
 	 * - pb lors de l'affichage du résultat d'un match : le classement des non-gagnants ne respecte pas le total des points...
 	 * - quand un héro reçoit l'ordre de pleurer, il ne le fait pas s'il est en train de mourir (en fait faut mettre une vraie action avec permissions et tout)
-	 * - gérer le partage des points en cas d'égalité
 	 * - définir les présentations des rounds
 	 * - problème de collisions quand on change la vitesse (surement un problème d'arrondi, ou alors un saut trop grand (en distance), voir si j'avais implémenté la maximalisation du déplacement malgré une éventuelle collision...)
 	 * - revoir le système des IA
 	 * - considérer qu'une partie peut s'arrêter à cause d'une limite de points ou de score (ex: pr frag, a un goalaverage>10)
 	 * - redescendre les stats dans loop, et gestion de fin de partie, puis synchroniser les stats dans round
 	 */
+	
+	
+	
+	//TODO le tournament a-t-il besoin de point processor ?? 
+	// pas pour transformer les points marqués, mais plus pour gérer les égalités
+	// du cp le panel tournament est pareil que le panel match
+	// dans le panel round, je peux afficher les scores de base + le score dépendant du play mode
+
 }

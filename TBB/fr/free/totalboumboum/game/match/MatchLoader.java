@@ -114,7 +114,7 @@ public class MatchLoader
     	result.setTimeLimit(timeLimit);
     }
     
-	private static void loadPointsElement(Element root, String folder, LevelDescription result) throws ParserConfigurationException, SAXException, IOException
+    private static void loadPointsElement(Element root, String folder, LevelDescription result) throws ParserConfigurationException, SAXException, IOException
 	{	PointProcessor pp;
 		// local
 		String localStr = root.getAttribute(XmlTools.ATT_LOCAL).getValue().trim();

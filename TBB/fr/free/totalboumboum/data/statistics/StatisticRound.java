@@ -36,8 +36,8 @@ public class StatisticRound implements Serializable, StatisticBase
 		playMode = round.getPlayMode();
 		// points
 		points = new float[players.size()];
-		for(int i=0;i<points.length;i++)
-			points[i] = 0;
+		for(int j=0;j<points.length;j++)
+			points[j] = 0;
 		// scores
 		for (Score score : Score.values())
 		{	long[] sc = new long[players.size()];

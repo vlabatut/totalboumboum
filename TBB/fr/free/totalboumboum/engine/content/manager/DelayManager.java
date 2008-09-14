@@ -1,6 +1,7 @@
 package fr.free.totalboumboum.engine.content.manager;
 
 import java.awt.image.BufferedImage;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map.Entry;
@@ -8,6 +9,7 @@ import java.util.Map.Entry;
 import fr.free.totalboumboum.engine.content.feature.anime.AnimeGesture;
 import fr.free.totalboumboum.engine.content.feature.event.EngineEvent;
 import fr.free.totalboumboum.engine.content.sprite.Sprite;
+import fr.free.totalboumboum.engine.content.sprite.bomb.Bomb;
 
 
 
@@ -20,35 +22,64 @@ public class DelayManager
 	
 	private Sprite sprite;
 	private HashMap<String,Double> delays;
+	private HashMap<String,Double> addedDelays;
+	private ArrayList<String> removedDelays;
 
 	public DelayManager(Sprite sprite)
 	{	this.sprite = sprite;
 		delays = new HashMap<String,Double>();
+		addedDelays = new HashMap<String,Double>();
+		removedDelays = new ArrayList<String>();
 	}
 
 	public void update()
-	{	Iterator<Entry<String,Double>> i = delays.entrySet().iterator();
-		while(i.hasNext())
-		{	Entry<String,Double> temp = i.next();
-			String name = temp.getKey();
-			double duration = temp.getValue();
-			double period = sprite.getConfiguration().getMilliPeriod();
-			double speedCoeff = sprite.getConfiguration().getSpeedCoeff();
-			duration = duration - period*speedCoeff;
-			if(duration<=0)
-			{	i.remove();
-				sprite.processEvent(new EngineEvent(EngineEvent.DELAY_OVER,name));
+	{	
+//if(sprite instanceof Bomb)
+//	System.out.println();
+		
+		// added delays
+		{	Iterator<Entry<String,Double>> i = addedDelays.entrySet().iterator();
+			while(i.hasNext())
+			{	Entry<String,Double> temp = i.next();
+				Double value = temp.getValue();
+				String key = temp.getKey();
+				delays.put(key,value);
+				i.remove();
 			}
-			else
-				temp.setValue(duration);			
+		}
+		// removed delays
+		{	Iterator<String> i = removedDelays.iterator();
+			while(i.hasNext())
+			{	String key = i.next();
+				delays.remove(key);
+				i.remove();
+			}
+		}
+		
+		// update remaining delays
+		{	Iterator<Entry<String,Double>> i = delays.entrySet().iterator();
+			while(i.hasNext())
+			{	Entry<String,Double> temp = i.next();
+				String name = temp.getKey();
+				double duration = temp.getValue();
+				double period = sprite.getConfiguration().getMilliPeriod();
+				double speedCoeff = sprite.getConfiguration().getSpeedCoeff();
+				duration = duration - period*speedCoeff;
+				if(duration<=0)
+				{	i.remove();
+					sprite.processEvent(new EngineEvent(EngineEvent.DELAY_OVER,name));
+				}
+				else
+					temp.setValue(duration);
+			}
 		}
 	}
 	
 	public void addDelay(String name, double duration)
-	{	delays.put(name, duration);		
+	{	addedDelays.put(name, duration);		
 	}
 	public void removeDelay(String name)
-	{	delays.remove(name);		
+	{	removedDelays.add(name);		
 	}
 	/**
 	 * returns the current delay associated to the name parameter,
@@ -60,10 +91,12 @@ public class DelayManager
 	{	double result = -1;
 		if(delays.containsKey(name))
 			result = delays.get(name);
+		else if(addedDelays.containsKey(name))
+			result = addedDelays.get(name);
 		return result;
 	}
 	public boolean hasDelay(String name)
-	{	return delays.containsKey(name);		
+	{	return delays.containsKey(name) || addedDelays.containsKey(name);		
 	}
 
 	private boolean finished = false;

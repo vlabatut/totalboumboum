@@ -31,12 +31,12 @@ public class StatisticMatch implements Serializable, StatisticBase
 		}
 		// points
 		points = new float[players.size()];
-		for(int i=0;i<points.length;i++)
-			points[i] = 0;
+		for(int j=0;j<points.length;j++)
+			points[j] = 0;
 		// partial points
 		partialPoints = new float[players.size()];
-		for(int i=0;i<partialPoints.length;i++)
-			partialPoints[i] = 0;
+		for(int j=0;j<partialPoints.length;j++)
+			partialPoints[j] = 0;
 		// scores
 		for (Score score : Score.values())
 		{	long[] sc = new long[players.size()];
@@ -64,7 +64,7 @@ public class StatisticMatch implements Serializable, StatisticBase
 				currentScores[i] = currentScores[i] + roundScores[i];
 		}
 		// partial points
-		float roundPoints[] = round.getPoints();
+		float[] roundPoints = round.getPoints();
 		for(int i=0;i<players.size();i++)
 			partialPoints[i] = partialPoints[i] + roundPoints[i];
 	}
