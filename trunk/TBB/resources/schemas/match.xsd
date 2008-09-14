@@ -39,16 +39,16 @@
 		<xsd:attribute name="timeLimit" type="xsd:long" use="required" />
 	</xsd:complexType>
 
-	<xsd:complexType name="tPoints">
+	<xsd:complexType name="tPointProcessor">
 		<xsd:attribute name="name" type="xsd:string" use="required" />
 		<xsd:attribute name="local" type="xsd:boolean" use="optional" default="false" />
 	</xsd:complexType>
-
+	
 	<xsd:complexType name="tLevel">
 		<xsd:sequence>
 			<xsd:element name="location" type="tLocation" />
 			<xsd:element name="game" type="tGame" />
-			<xsd:element name="points" type="tPoints" />
+			<xsd:element name="points" type="tPointProcessor" />
 		</xsd:sequence>
 	</xsd:complexType>
 

@@ -150,7 +150,7 @@
 	<text name="GameTournamentTitleStatistics" value="Tournament statistics" />
 	<text name="GameTournamentHeaderName" value="Name" />
 	<text name="GameTournamentHeaderTotal" value="Pts" />
-	<text name="GameTournamentHeaderMatch" value="M." />
+	<text name="GameTournamentHeaderMatch" value="M" />
 	
 	<text name="GameMatchTitleDescription" value="Match description" />
 	<text name="GameMatchTitleResults" value="Match results" />
@@ -158,12 +158,20 @@
 	<text name="GameMatchHeaderName" value="Name" />
 	<text name="GameMatchHeaderTotal" value="All" />
 	<text name="GameMatchHeaderPoints" value="Pts" />
-	<text name="GameMatchHeaderRound" value="R." />
+	<text name="GameMatchHeaderRound" value="R" />
 	
 	<text name="GameRoundTitleDescription" value="Round description" />
 	<text name="GameRoundTitleResults" value="Round results" />
 	<text name="GameRoundTitleStatistics" value="Round statistics" />
 	<text name="GameRoundHeaderName" value="Name" />
 	<text name="GameRoundHeaderPoints" value="Pts" />
+	<text name="GameRoundHeaderBombs" value="Bombs" />
+	<text name="GameRoundHeaderDeaths" value="Deaths" />
+	<text name="GameRoundHeaderItems" value="Items" />
+	<text name="GameRoundHeaderKills" value="Kills" />
+	<text name="GameRoundHeaderCrowns" value="Crowns" />
+	<text name="GameRoundHeaderFrags" value="Frags" />
+	<text name="GameRoundHeaderPaintings" value="Paints" />
+	<text name="GameRoundHeaderTime" value="Time" />
 	
 </language>

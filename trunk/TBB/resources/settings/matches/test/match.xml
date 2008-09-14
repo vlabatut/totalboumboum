@@ -7,7 +7,7 @@
  	<levels randomOrder="false" >
  		<level>
  			<location packname="superbomberman1" name="test3" />
- 			<game playMode="survival" timeLimit="60000" /> 
+ 			<game playMode="survival" timeLimit="60000" />
  			<points local="false" name="basicSurvival" />
  		</level>
 

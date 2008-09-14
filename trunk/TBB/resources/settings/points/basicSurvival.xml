@@ -6,6 +6,7 @@
 	<discretize>
 		<rankings>
 			<scores type="time" />
+			<scores type="bombs"/>
 		</rankings>
 		<thresholds>
 			<threshold value="1" />
