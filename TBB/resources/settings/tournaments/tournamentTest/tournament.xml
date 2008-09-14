@@ -10,12 +10,12 @@
 		
 			<match>
 				<location local="false" name="test" />
- 				<points local="false" name="tournamentSimple" />
+				<points local="false" name="matchSimple" />
 			</match>
 			
 			<match>
 				<location local="true" name="testMatch" />
- 				<points local="false" name="tournamentSimple" />
+				<points local="false" name="matchSimple" />
 			</match>
 			
 		</matches>

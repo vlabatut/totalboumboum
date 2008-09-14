@@ -43,7 +43,7 @@
 	
 	<xsd:complexType name="tPointRankings">
 		<xsd:sequence>
-			<xsd:group ref="gPoint" />
+			<xsd:group ref="gPoint" maxOccurs="unbounded"/>
 		</xsd:sequence>
 		<xsd:attribute name="invert" type="xsd:boolean" use="optional" default="false" />
 	</xsd:complexType>
