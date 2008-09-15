@@ -84,7 +84,6 @@ public class RoundResults extends InnerDataPanel
 			playerNumber = 16;
 			int lines = playerNumber+1;
 			int cols = 2+5+1;			
-//			GridLayout layout = new GridLayout(lines,cols,10,10);
 			SpringLayout layout = new SpringLayout();			
 			resultsPanel = new JPanel(layout);			
 			resultsPanel.setBackground(new Color(255,255,255,128));
@@ -189,7 +188,6 @@ public class RoundResults extends InnerDataPanel
 					ImageIcon icon = new ImageIcon(icons[i]);
 					lbl.setIcon(icon);
 				}
-			
 			}
 			// data
 			{	Font font = getConfiguration().getFont().deriveFont((float)SwingTools.getSize(SwingTools.GAME_RESULTS_LINE_FONT_SIZE));
@@ -212,7 +210,7 @@ public class RoundResults extends InnerDataPanel
 						lbl.setMaximumSize(dimension);
 						resultsPanel.add(lbl);
 					}
-					// points
+					// scores/points
 					for(int j=2;j<cols;j++)
 					{	JLabel lbl = new JLabel(" ");
 						lbl.setFont(font);
@@ -265,14 +263,14 @@ public class RoundResults extends InnerDataPanel
 					image = ImageTools.resize(image,zoom,true);
 				ImageIcon icon = new ImageIcon(image);
 				portraitLabel.setIcon(icon);
-				Color bg = new Color(clr.getRed(),clr.getGreen(),clr.getBlue(),130);
+				Color bg = new Color(clr.getRed(),clr.getGreen(),clr.getBlue(),120);
 				portraitLabel.setBackground(bg);			
 				portraitLabel.setText("");
 			}
 			// name
 			{	JLabel nameLabel = (JLabel)resultsPanel.getComponent(k++);
 				nameLabel.setText(pp.getPlayer());
-				Color bg = new Color(clr.getRed(),clr.getGreen(),clr.getBlue(),130);
+				Color bg = new Color(clr.getRed(),clr.getGreen(),clr.getBlue(),120);
 				nameLabel.setBackground(bg);
 			}
 			// scores
@@ -304,7 +302,7 @@ public class RoundResults extends InnerDataPanel
 				for(int j=0;j<scores.length;j++)
 				{	JLabel pointsLabel = (JLabel)resultsPanel.getComponent(k++);
 					pointsLabel.setText(scores[j]);
-					Color bg = new Color(clr.getRed(),clr.getGreen(),clr.getBlue(),140);
+					Color bg = new Color(clr.getRed(),clr.getGreen(),clr.getBlue(),120);
 					pointsLabel.setBackground(bg);
 				}
 			}			

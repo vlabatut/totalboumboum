@@ -68,6 +68,10 @@ public class GuiTools
 	public static final String GAME_TOURNAMENT_TITLE_STATISTICS = "GameTournamentTitleStatistics";
 	public static final String GAME_TOURNAMENT_HEADER_NAME = "GameTournamentHeaderName";
 	public static final String GAME_TOURNAMENT_HEADER_POINTS = "GameTournamentHeaderPoints";
+	public static final String GAME_TOURNAMENT_HEADER_BOMBS = "GameTournamentHeaderBombs";
+	public static final String GAME_TOURNAMENT_HEADER_DEATHS = "GameTournamentHeaderDeaths";
+	public static final String GAME_TOURNAMENT_HEADER_ITEMS = "GameTournamentHeaderItems";
+	public static final String GAME_TOURNAMENT_HEADER_KILLS = "GameTournamentHeaderKills";
 	public static final String GAME_TOURNAMENT_HEADER_TOTAL = "GameTournamentHeaderTotal";
 	public static final String GAME_TOURNAMENT_HEADER_MATCH = "GameTournamentHeaderMatch";
 	
@@ -76,6 +80,10 @@ public class GuiTools
 	public static final String GAME_MATCH_TITLE_STATISTICS = "GameMatchTitleStatistics";
 	public static final String GAME_MATCH_HEADER_NAME = "GameMatchHeaderName";
 	public static final String GAME_MATCH_HEADER_POINTS = "GameMatchHeaderPoints";
+	public static final String GAME_MATCH_HEADER_BOMBS = "GameMatchHeaderBombs";
+	public static final String GAME_MATCH_HEADER_DEATHS = "GameMatchHeaderDeaths";
+	public static final String GAME_MATCH_HEADER_ITEMS = "GameMatchHeaderItems";
+	public static final String GAME_MATCH_HEADER_KILLS = "GameMatchHeaderKills";
 	public static final String GAME_MATCH_HEADER_TOTAL = "GameMatchHeaderTotal";
 	public static final String GAME_MATCH_HEADER_ROUND = "GameMatchHeaderRound";
 	

@@ -602,9 +602,7 @@ public class Launcher
 	
 	
 	
-	//TODO le tournament a-t-il besoin de point processor ?? 
-	// pas pour transformer les points marqués, mais plus pour gérer les égalités
-	// du cp le panel tournament est pareil que le panel match
-	// dans le panel round, je peux afficher les scores de base + le score dépendant du play mode
+	// TODO problème de raffraichissement des scores dans tournament
+	// également : le match n'apparait pas une fois qu'il est terminé (à re-tester ?)
 
 }
