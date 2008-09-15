@@ -224,21 +224,29 @@ public class SwingTools
 		{	String folder = FileTools.getIconsPath()+File.separator+"tables"+File.separator;
 			// bombs
 			image = loadIcon(folder+"bombs.png",absent);
+			icons.put(GuiTools.GAME_TOURNAMENT_HEADER_BOMBS,image);
+			icons.put(GuiTools.GAME_MATCH_HEADER_BOMBS,image);
 			icons.put(GuiTools.GAME_ROUND_HEADER_BOMBS,image);
 			// crowns
 			image = loadIcon(folder+"crowns.png",absent);
 			icons.put(GuiTools.GAME_ROUND_HEADER_CROWNS,image);
 			// deaths
 			image = loadIcon(folder+"deaths.png",absent);
+			icons.put(GuiTools.GAME_TOURNAMENT_HEADER_DEATHS,image);
+			icons.put(GuiTools.GAME_MATCH_HEADER_DEATHS,image);
 			icons.put(GuiTools.GAME_ROUND_HEADER_DEATHS,image);
 			// frags
 			image = loadIcon(folder+"frags.png",absent);
 			icons.put(GuiTools.GAME_ROUND_HEADER_FRAGS,image);
 			// items
 			image = loadIcon(folder+"items.png",absent);
+			icons.put(GuiTools.GAME_TOURNAMENT_HEADER_ITEMS,image);
+			icons.put(GuiTools.GAME_MATCH_HEADER_ITEMS,image);
 			icons.put(GuiTools.GAME_ROUND_HEADER_ITEMS,image);
 			// kills
 			image = loadIcon(folder+"kills.png",absent);
+			icons.put(GuiTools.GAME_TOURNAMENT_HEADER_KILLS,image);
+			icons.put(GuiTools.GAME_MATCH_HEADER_KILLS,image);
 			icons.put(GuiTools.GAME_ROUND_HEADER_KILLS,image);
 			// name
 			image = loadIcon(folder+"name.png",absent);

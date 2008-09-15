@@ -23,8 +23,10 @@ import fr.free.totalboumboum.data.profile.Portraits;
 import fr.free.totalboumboum.data.profile.Profile;
 import fr.free.totalboumboum.data.statistics.StatisticMatch;
 import fr.free.totalboumboum.data.statistics.StatisticRound;
+import fr.free.totalboumboum.data.statistics.StatisticTournament;
 import fr.free.totalboumboum.game.match.Match;
 import fr.free.totalboumboum.game.ranking.PlayerPoints;
+import fr.free.totalboumboum.game.score.Score;
 import fr.free.totalboumboum.game.tournament.AbstractTournament;
 import fr.free.totalboumboum.game.tournament.sequence.SequenceTournament;
 import fr.free.totalboumboum.gui.SpringUtilities;
@@ -83,7 +85,7 @@ public class TournamentResults extends InnerDataPanel
 			int playerNumber = tournament.getProfiles().size();
 			playerNumber = 16;
 			int lines = playerNumber+1;
-			int cols = 3;
+			int cols = 2+4+2;
 			SpringLayout layout = new SpringLayout();			
 			resultsPanel = new JPanel(layout);
 			resultsPanel.setBackground(new Color(255,255,255,128));
@@ -92,62 +94,98 @@ public class TournamentResults extends InnerDataPanel
 			resultsPanel.setMinimumSize(dim);
 			resultsPanel.setMaximumSize(dim);
 			// headers
-			Font font = getConfiguration().getFont().deriveFont((float)SwingTools.getSize(SwingTools.GAME_RESULTS_HEADER_FONT_SIZE));
-			{	JLabel lbl = new JLabel(" ");
-				lbl.setOpaque(false);
-				lbl.setPreferredSize(new Dimension(SwingTools.getSize(SwingTools.GAME_RESULTS_LABEL_LINE_HEIGHT),SwingTools.getSize(SwingTools.GAME_RESULTS_LABEL_HEADER_HEIGHT)));
-				lbl.setMaximumSize(new Dimension(SwingTools.getSize(SwingTools.GAME_RESULTS_LABEL_LINE_HEIGHT),SwingTools.getSize(SwingTools.GAME_RESULTS_LABEL_HEADER_HEIGHT)));
-				lbl.setMinimumSize(new Dimension(SwingTools.getSize(SwingTools.GAME_RESULTS_LABEL_LINE_HEIGHT),SwingTools.getSize(SwingTools.GAME_RESULTS_LABEL_HEADER_HEIGHT)));
-				resultsPanel.add(lbl);
-			}
-			{	String txt = getConfiguration().getLanguage().getText(GuiTools.GAME_TOURNAMENT_HEADER_NAME);
-				JLabel lbl = new JLabel(txt);
-				lbl.setFont(font);
-				lbl.setHorizontalAlignment(SwingConstants.CENTER);
-				lbl.setBackground(new Color(0,0,0,128));
-				lbl.setForeground(Color.BLACK);
-				lbl.setOpaque(true);
-				resultsPanel.add(lbl);
-			}
-			{	String txt = getConfiguration().getLanguage().getText(GuiTools.GAME_TOURNAMENT_HEADER_TOTAL);
-				JLabel lbl = new JLabel(txt);
-				lbl.setFont(font);
-				lbl.setHorizontalAlignment(SwingConstants.CENTER);
-				lbl.setBackground(new Color(0,0,0,128));
-				lbl.setForeground(Color.BLACK);
-				lbl.setOpaque(true);
-				resultsPanel.add(lbl);
+			{	Font font = getConfiguration().getFont().deriveFont((float)SwingTools.getSize(SwingTools.GAME_RESULTS_HEADER_FONT_SIZE));
+				{	JLabel lbl = new JLabel(" ");
+					lbl.setOpaque(false);
+					lbl.setPreferredSize(new Dimension(SwingTools.getSize(SwingTools.GAME_RESULTS_LABEL_LINE_HEIGHT),SwingTools.getSize(SwingTools.GAME_RESULTS_LABEL_HEADER_HEIGHT)));
+					lbl.setMaximumSize(new Dimension(SwingTools.getSize(SwingTools.GAME_RESULTS_LABEL_LINE_HEIGHT),SwingTools.getSize(SwingTools.GAME_RESULTS_LABEL_HEADER_HEIGHT)));
+					lbl.setMinimumSize(new Dimension(SwingTools.getSize(SwingTools.GAME_RESULTS_LABEL_LINE_HEIGHT),SwingTools.getSize(SwingTools.GAME_RESULTS_LABEL_HEADER_HEIGHT)));
+					resultsPanel.add(lbl);
+				}
+/*				
+				{	String txt = getConfiguration().getLanguage().getText(GuiTools.GAME_TOURNAMENT_HEADER_NAME);
+					JLabel lbl = new JLabel(txt);
+					lbl.setFont(font);
+					lbl.setHorizontalAlignment(SwingConstants.CENTER);
+					lbl.setBackground(new Color(0,0,0,128));
+					lbl.setForeground(Color.BLACK);
+					lbl.setOpaque(true);
+					resultsPanel.add(lbl);
+				}
+				{	String txt = getConfiguration().getLanguage().getText(GuiTools.GAME_TOURNAMENT_HEADER_TOTAL);
+					JLabel lbl = new JLabel(txt);
+					lbl.setFont(font);
+					lbl.setHorizontalAlignment(SwingConstants.CENTER);
+					lbl.setBackground(new Color(0,0,0,128));
+					lbl.setForeground(Color.BLACK);
+					lbl.setOpaque(true);
+					resultsPanel.add(lbl);
+				}
+*/				
+				BufferedImage[] icons = 
+				{	SwingTools.getIcon(GuiTools.GAME_TOURNAMENT_HEADER_NAME),
+					SwingTools.getIcon(GuiTools.GAME_TOURNAMENT_HEADER_BOMBS),
+					SwingTools.getIcon(GuiTools.GAME_TOURNAMENT_HEADER_ITEMS),
+					SwingTools.getIcon(GuiTools.GAME_TOURNAMENT_HEADER_DEATHS),
+					SwingTools.getIcon(GuiTools.GAME_TOURNAMENT_HEADER_KILLS),
+					SwingTools.getIcon(GuiTools.GAME_TOURNAMENT_HEADER_TOTAL),
+					SwingTools.getIcon(GuiTools.GAME_TOURNAMENT_HEADER_POINTS)
+				};
+				String[] tooltips = 
+				{	getConfiguration().getLanguage().getText(GuiTools.GAME_TOURNAMENT_HEADER_NAME+"Tooltip"),
+					getConfiguration().getLanguage().getText(GuiTools.GAME_TOURNAMENT_HEADER_BOMBS+"Tooltip"),
+					getConfiguration().getLanguage().getText(GuiTools.GAME_TOURNAMENT_HEADER_ITEMS+"Tooltip"),
+					getConfiguration().getLanguage().getText(GuiTools.GAME_TOURNAMENT_HEADER_DEATHS+"Tooltip"),
+					getConfiguration().getLanguage().getText(GuiTools.GAME_TOURNAMENT_HEADER_KILLS+"Tooltip"),
+					getConfiguration().getLanguage().getText(GuiTools.GAME_TOURNAMENT_HEADER_TOTAL+"Tooltip"),
+					getConfiguration().getLanguage().getText(GuiTools.GAME_TOURNAMENT_HEADER_POINTS+"Tooltip")
+				};
+				for(int i=0;i<icons.length;i++)
+				{	JLabel lbl = new JLabel(" ");
+					lbl.setText("");
+					lbl.setToolTipText(tooltips[i]);
+					lbl.setHorizontalAlignment(SwingConstants.CENTER);
+					lbl.setBackground(new Color(0,0,0,128));
+					lbl.setOpaque(true);
+					resultsPanel.add(lbl);
+					int lineHeight = SwingTools.getSize(SwingTools.GAME_RESULTS_LABEL_HEADER_HEIGHT);
+					double zoom = lineHeight/(double)icons[i].getHeight();
+						icons[i] = ImageTools.resize(icons[i],zoom,true);
+					ImageIcon icon = new ImageIcon(icons[i]);
+					lbl.setIcon(icon);
+				}
 			}
 			// data
-			font = getConfiguration().getFont().deriveFont((float)SwingTools.getSize(SwingTools.GAME_RESULTS_LINE_FONT_SIZE));
-			for(int i=1;i<lines;i++)
-			{	// portrait
-				{	JLabel lbl = new JLabel(" ");
-					lbl.setHorizontalAlignment(SwingConstants.CENTER);
-					lbl.setBackground(new Color(0,0,0,20));
-					lbl.setOpaque(true);
-					resultsPanel.add(lbl);
-				}
-				// name
-				{	JLabel lbl = new JLabel(" ");
-					lbl.setFont(font);
-					lbl.setHorizontalAlignment(SwingConstants.CENTER);
-					lbl.setBackground(new Color(0,0,0,20));
-					lbl.setForeground(Color.BLACK);
-					lbl.setOpaque(true);
-					Dimension dimension = new Dimension(Integer.MAX_VALUE,SwingTools.getSize(SwingTools.GAME_RESULTS_LABEL_LINE_HEIGHT));
-					lbl.setMaximumSize(dimension);
-					resultsPanel.add(lbl);
-				}
-				// total
-				for(int j=2;j<cols;j++)
-				{	JLabel lbl = new JLabel(" ");
-					lbl.setFont(font);
-					lbl.setHorizontalAlignment(SwingConstants.CENTER);
-					lbl.setBackground(new Color(0,0,0,20));
-					lbl.setForeground(Color.BLACK);
-					lbl.setOpaque(true);
-					resultsPanel.add(lbl);
+			{	Font font = getConfiguration().getFont().deriveFont((float)SwingTools.getSize(SwingTools.GAME_RESULTS_LINE_FONT_SIZE));
+				for(int i=1;i<lines;i++)
+				{	// portrait
+					{	JLabel lbl = new JLabel(" ");
+						lbl.setHorizontalAlignment(SwingConstants.CENTER);
+						lbl.setBackground(new Color(0,0,0,20));
+						lbl.setOpaque(true);
+						resultsPanel.add(lbl);
+					}
+					// name
+					{	JLabel lbl = new JLabel(" ");
+						lbl.setFont(font);
+						lbl.setHorizontalAlignment(SwingConstants.CENTER);
+						lbl.setBackground(new Color(0,0,0,20));
+						lbl.setForeground(Color.BLACK);
+						lbl.setOpaque(true);
+						Dimension dimension = new Dimension(Integer.MAX_VALUE,SwingTools.getSize(SwingTools.GAME_RESULTS_LABEL_LINE_HEIGHT));
+						lbl.setMaximumSize(dimension);
+						resultsPanel.add(lbl);
+					}
+					// total
+					for(int j=2;j<cols;j++)
+					{	JLabel lbl = new JLabel(" ");
+						lbl.setFont(font);
+						lbl.setHorizontalAlignment(SwingConstants.CENTER);
+						lbl.setBackground(new Color(0,0,0,20));
+						lbl.setForeground(Color.BLACK);
+						lbl.setOpaque(true);
+						resultsPanel.add(lbl);
+					}
 				}
 			}
 			//
@@ -170,25 +208,34 @@ public class TournamentResults extends InnerDataPanel
 	{	// init
 		SequenceTournament tournament = (SequenceTournament)getConfiguration().getTournament();
 		ArrayList<Profile> players = tournament.getProfiles();
-		ArrayList<StatisticMatch> matches = tournament.getStats().getStatMatches();
-		float[] points = tournament.getStats().getPoints();
+		StatisticTournament stats = tournament.getStats();
+		ArrayList<StatisticMatch> matches = stats.getStatMatches();
+		float[] partialPoints = stats.getPartialPoints();
+		float[] points = stats.getPoints();
 		
-		// sorting players according to points points
+		// sorting players according to points/partial points
 		TreeSet<PlayerPoints> ranking = new TreeSet<PlayerPoints>();
+		float[] tp;
+		if(tournament.isOver())
+			tp = points;
+		else
+			tp = partialPoints;
 		for(int i=0;i<points.length;i++)
 		{	PlayerPoints pp = new PlayerPoints(players.get(i).getName(),i);
-			pp.addPoint(points[i]);
+			pp.addPoint(tp[i]);
 			ranking.add(pp);
 		}
 		
 		// completing missing labels
 		int lines = 16+1/*players.size()+1*/;
-		int cols = 2+matches.size()+1;
+		int cols = 2+4+matches.size()+2;
 		if(resultsPanel.getComponentCount()<lines*cols)
-		{	int colNbr = 2+matches.size()-1;
+		{	int colNbr = 2+4+matches.size()-1;
 			// header
 			{	String txt = getConfiguration().getLanguage().getText(GuiTools.GAME_TOURNAMENT_HEADER_MATCH)+(matches.size());
 				JLabel lbl = new JLabel(txt);
+				txt = getConfiguration().getLanguage().getText(GuiTools.GAME_TOURNAMENT_HEADER_MATCH+"Tooltip")+" "+matches.size();
+				lbl.setToolTipText(txt);
 				Font font = getConfiguration().getFont().deriveFont((float)SwingTools.getSize(SwingTools.GAME_RESULTS_HEADER_FONT_SIZE));
 				lbl.setFont(font);
 				lbl.setHorizontalAlignment(SwingConstants.CENTER);
@@ -222,10 +269,6 @@ public class TournamentResults extends InnerDataPanel
 		while(i.hasNext())
 		{	PlayerPoints pp = i.next();
 			Profile profile = players.get(pp.getIndex());
-			// number format
-			NumberFormat nf = NumberFormat.getInstance();
-			nf.setMaximumFractionDigits(2);
-			nf.setMinimumFractionDigits(0);
 			// color
 			Color clr = players.get(pp.getIndex()).getSpriteColor().getColor();
 			// portrait
@@ -245,23 +288,60 @@ public class TournamentResults extends InnerDataPanel
 				Color bg = new Color(clr.getRed(),clr.getGreen(),clr.getBlue(),120);
 				nameLabel.setBackground(bg);
 			}
+			// scores
+			{	NumberFormat nf = NumberFormat.getInstance();
+				nf.setMaximumFractionDigits(2);
+				nf.setMinimumFractionDigits(0);
+				String[] scores = 
+				{	nf.format(stats.getScores(Score.BOMBS)[pp.getIndex()]),
+					nf.format(stats.getScores(Score.ITEMS)[pp.getIndex()]),
+					nf.format(stats.getScores(Score.DEATHS)[pp.getIndex()]),
+					nf.format(stats.getScores(Score.KILLS)[pp.getIndex()]),
+				};
+				for(int j=0;j<scores.length;j++)
+				{	JLabel pointsLabel = (JLabel)resultsPanel.getComponent(k++);
+					pointsLabel.setText(scores[j]);
+					Color bg = new Color(clr.getRed(),clr.getGreen(),clr.getBlue(),100);
+					pointsLabel.setBackground(bg);
+				}
+			}			
 			// matches
 			Iterator<StatisticMatch> m = matches.iterator();
 			while(m.hasNext())
 			{	JLabel matchLabel = (JLabel)resultsPanel.getComponent(k++);
 				StatisticMatch statMatch = m.next();
 				float pts = statMatch.getPoints()[pp.getIndex()];
+				NumberFormat nf = NumberFormat.getInstance();
+				nf.setMaximumFractionDigits(2);
+				nf.setMinimumFractionDigits(0);
 				String txt = nf.format(pts);
 				matchLabel.setText(txt);
-				Color bg = new Color(clr.getRed(),clr.getGreen(),clr.getBlue(),120);
+				Color bg = new Color(clr.getRed(),clr.getGreen(),clr.getBlue(),140);
 				matchLabel.setBackground(bg);
 			}
 			// total
 			{	JLabel totalLabel = (JLabel)resultsPanel.getComponent(k++);
-				float pts = pp.getPoints().next();
+				float pts = partialPoints[pp.getIndex()];
+				NumberFormat nf = NumberFormat.getInstance();
+				nf.setMaximumFractionDigits(2);
+				nf.setMinimumFractionDigits(0);
 				String txt = nf.format(pts);
 				totalLabel.setText(txt);
-				Color bg = new Color(clr.getRed(),clr.getGreen(),clr.getBlue(),190);
+				Color bg = new Color(clr.getRed(),clr.getGreen(),clr.getBlue(),180);
+				totalLabel.setBackground(bg);
+			}
+			// points
+			{	JLabel totalLabel = (JLabel)resultsPanel.getComponent(k++);
+				String txt = "-";
+				NumberFormat nf = NumberFormat.getInstance();
+				nf.setMaximumFractionDigits(2);
+				nf.setMinimumFractionDigits(0);
+				if(tournament.isOver())	
+				{	float pts = pp.getPoints().next();
+					txt = nf.format(pts);
+				}
+				totalLabel.setText(txt);
+				Color bg = new Color(clr.getRed(),clr.getGreen(),clr.getBlue(),210);
 				totalLabel.setBackground(bg);
 			}
 		}
