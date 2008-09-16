@@ -139,6 +139,7 @@ public class Match
 	public void roundOver()
 	{	StatisticRound statsRound = currentRound.getStats();
 		stats.addStatisticRound(statsRound);
+		stats.computePoints(pointProcessor);
 		//
 		int played = rounds.size();
 		switch(matchLimit)
@@ -158,8 +159,7 @@ public class Match
 				break;
 		}
 		if(matchOver)
-		{	stats.computePoints(pointProcessor);
-			tournament.matchOver();
+		{	tournament.matchOver();
 			panel.matchOver();
 		}
 		else

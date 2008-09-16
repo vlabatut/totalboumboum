@@ -215,14 +215,10 @@ public class TournamentResults extends InnerDataPanel
 		
 		// sorting players according to points/partial points
 		TreeSet<PlayerPoints> ranking = new TreeSet<PlayerPoints>();
-		float[] tp;
-		if(tournament.isOver())
-			tp = points;
-		else
-			tp = partialPoints;
 		for(int i=0;i<points.length;i++)
 		{	PlayerPoints pp = new PlayerPoints(players.get(i).getName(),i);
-			pp.addPoint(tp[i]);
+			pp.addPoint(points[i]);
+			pp.addPoint(partialPoints[i]);
 			ranking.add(pp);
 		}
 		
@@ -337,7 +333,7 @@ public class TournamentResults extends InnerDataPanel
 				nf.setMaximumFractionDigits(2);
 				nf.setMinimumFractionDigits(0);
 				if(tournament.isOver())	
-				{	float pts = pp.getPoints().next();
+				{	float pts = points[pp.getIndex()];
 					txt = nf.format(pts);
 				}
 				totalLabel.setText(txt);

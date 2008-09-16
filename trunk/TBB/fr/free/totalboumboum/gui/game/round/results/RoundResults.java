@@ -244,6 +244,7 @@ public class RoundResults extends InnerDataPanel
 		StatisticRound stats = round.getStats();
 		ArrayList<Profile> players = round.getProfiles();
 		TreeSet<PlayerPoints> ranking = stats.getOrderedPlayers();
+		float[] points = stats.getPoints();
 		
 		// display the ranking
 		Iterator<PlayerPoints> i = ranking.descendingIterator();
@@ -308,7 +309,7 @@ public class RoundResults extends InnerDataPanel
 			}			
 			// points
 			{	JLabel pointsLabel = (JLabel)resultsPanel.getComponent(k++);
-				double pts = pp.getPoints().next();
+				double pts = points[pp.getIndex()];
 				NumberFormat nf = NumberFormat.getInstance();
 				nf.setMaximumFractionDigits(2);
 				nf.setMinimumFractionDigits(0);
