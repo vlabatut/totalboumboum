@@ -1,4 +1,4 @@
-package fr.free.totalboumboum.game.ranking;
+package fr.free.totalboumboum.game.point;
 
 import java.util.ArrayList;
 import java.util.Comparator;

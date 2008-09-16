@@ -9,11 +9,11 @@ import javax.xml.parsers.ParserConfigurationException;
 import org.xml.sax.SAXException;
 
 import fr.free.totalboumboum.data.configuration.Configuration;
+import fr.free.totalboumboum.data.statistics.Score;
 import fr.free.totalboumboum.data.statistics.StatisticMatch;
 import fr.free.totalboumboum.data.statistics.StatisticRound;
 import fr.free.totalboumboum.game.match.Match;
 import fr.free.totalboumboum.game.point.PointProcessor;
-import fr.free.totalboumboum.game.score.Score;
 import fr.free.totalboumboum.game.tournament.AbstractTournament;
 import fr.free.totalboumboum.gui.game.match.statistics.MatchStatistics;
 
@@ -84,7 +84,7 @@ public class SequenceTournament extends AbstractTournament
 	{	return currentMatch;	
 	}
 	@Override
-	public void currentMatchOver()
+	public void matchOver()
 	{	StatisticMatch statsMatch = currentMatch.getStats();
 		stats.addStatisticMatch(statsMatch);
 		panel.matchOver();

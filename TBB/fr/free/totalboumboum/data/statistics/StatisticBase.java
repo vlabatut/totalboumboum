@@ -2,7 +2,6 @@ package fr.free.totalboumboum.data.statistics;
 
 import java.util.ArrayList;
 
-import fr.free.totalboumboum.game.score.Score;
 
 public interface StatisticBase
 {

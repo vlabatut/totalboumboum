@@ -74,6 +74,7 @@
 			<xsd:element name="thresholds" type="tThresholds" />
 			<xsd:element name="values" type="tValues" />
 		</xsd:sequence>
+		<xsd:attribute name="exaequoShare" type="xsd:boolean"  use="optional"/>
 	</xsd:complexType>
 	
 	<xsd:complexType name="tPointAddition">

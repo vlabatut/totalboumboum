@@ -10,12 +10,8 @@ public class PointRankings implements PointProcessor
 	private ArrayList<PointProcessor> sources = new ArrayList<PointProcessor>();
 	private boolean inverted;
 	
-	public PointRankings(PointProcessor source, boolean inverted)
-	{	sources.add(source);
-		this.inverted = inverted;
-	}
 	public PointRankings(ArrayList<PointProcessor> sources, boolean inverted)
-	{	sources.addAll(sources);
+	{	this.sources.addAll(sources);
 		this.inverted = inverted;
 	}
 	
@@ -26,7 +22,7 @@ public class PointRankings implements PointProcessor
 		Iterator<PointProcessor> it = sources.iterator();
 		while (it.hasNext())
 		{	PointProcessor source = it.next();
-		values.add(source.process(stats));
+			values.add(source.process(stats));
 		}
 		// result
 		ArrayList<String> players = stats.getPlayers();

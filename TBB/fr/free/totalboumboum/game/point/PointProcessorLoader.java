@@ -3,6 +3,7 @@ package fr.free.totalboumboum.game.point;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 import javax.xml.parsers.ParserConfigurationException;
@@ -11,7 +12,7 @@ import org.jdom.Attribute;
 import org.jdom.Element;
 import org.xml.sax.SAXException;
 
-import fr.free.totalboumboum.game.score.Score;
+import fr.free.totalboumboum.data.statistics.Score;
 import fr.free.totalboumboum.tools.FileTools;
 import fr.free.totalboumboum.tools.XmlTools;
 
@@ -130,15 +131,24 @@ public class PointProcessorLoader
 	{	// invert
 		String str = root.getAttribute(XmlTools.ATT_INVERT).getValue();
 		boolean invert = Boolean.valueOf(str);
-		// source
-		Element src = (Element) root.getChildren().get(0);
-		PointProcessor source = loadPointProcessorElement(src);
+		// sources
+		ArrayList<PointProcessor> sources = new ArrayList<PointProcessor>();
+		List<Element> srcs = root.getChildren();
+		Iterator<Element> it = srcs.iterator();
+		while(it.hasNext())
+		{	Element src = it.next();
+			PointProcessor source = loadPointProcessorElement(src);
+			sources.add(source);
+		}
 		// result
-		PointRankings result = new PointRankings(source,invert);
+		PointRankings result = new PointRankings(sources,invert);
 		return result;
 	}
 	private static PointDiscretize loadDiscretizeElement(Element root)
-	{	// source
+	{	// share
+		String str = root.getAttribute(XmlTools.ATT_EXAEQUO_SHARE).getValue();
+		boolean exaequoShare = Boolean.valueOf(str);
+		// source
 		Element src = (Element) root.getChildren().get(0);
 		PointProcessor source = loadPointProcessorElement(src);
 		// thresholds
@@ -147,7 +157,7 @@ public class PointProcessorLoader
 		float thresh[] = new float[thresholds.size()];
 		for(int i=0;i<thresh.length;i++)
 		{	Element temp = thresholds.get(i);
-			String str = temp.getAttribute(XmlTools.ATT_VALUE).getValue();
+			str = temp.getAttribute(XmlTools.ATT_VALUE).getValue();
 			float value = Float.valueOf(str);
 			thresh[i] = value;
 		}
@@ -157,12 +167,12 @@ public class PointProcessorLoader
 		float vals[] = new float[values.size()];
 		for(int i=0;i<vals.length;i++)
 		{	Element temp = values.get(i);
-			String str = temp.getAttribute(XmlTools.ATT_VALUE).getValue();
+			str = temp.getAttribute(XmlTools.ATT_VALUE).getValue();
 			float value = Float.valueOf(str);
 			vals[i] = value;
 		}
 		// result
-		PointDiscretize result = new PointDiscretize(source,thresh,vals);
+		PointDiscretize result = new PointDiscretize(source,thresh,vals,exaequoShare);
 		return result;
 	}
 	

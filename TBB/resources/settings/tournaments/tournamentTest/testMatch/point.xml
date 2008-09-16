@@ -3,7 +3,7 @@
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
 	xsi:noNamespaceSchemaLocation="..\..\..\..\schemas\point.xsd">
 	
-	<discretize>
+	<discretize exaequoShare="false">
 		<rankings>
 			<scores type="time" />
 			<scores type="bombs"/>

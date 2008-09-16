@@ -584,13 +584,13 @@ public class Launcher
 	 * - modification de la fenêtre de résultats du round, de manière à afficher les scores (deaths, etc)
 	 * - modication de la fenêtre de résultats, pour gagner de la place : icones dans les en-têtes (à la place du texte) 
 	 * - correction d'un bug de synchronisation du gestionnaire de délais
+	 * - il FAUT un pointProcessor pour le tournament, pour gérer les égalités
 	 * - modification du système de points de manière à pouvoir effectuer un classement en considérant plusieurs paramètres complètement ordonnés
+	 * - gérer le partage des points en cas d'égalité
 	 * 
 	 * *******************************************************
 	 * *********************** A FAIRE ***********************
 	 * *******************************************************
-	 * - il FAUT un pointProcessor pour le tournament, pour gérer les égalités
-	 * - gérer le partage des points en cas d'égalité
 	 * - pb lors de l'affichage du résultat d'un match : le classement des non-gagnants ne respecte pas le total des points...
 	 * - quand un héro reçoit l'ordre de pleurer, il ne le fait pas s'il est en train de mourir (en fait faut mettre une vraie action avec permissions et tout)
 	 * - définir les présentations des rounds
@@ -598,6 +598,8 @@ public class Launcher
 	 * - revoir le système des IA
 	 * - considérer qu'une partie peut s'arrêter à cause d'une limite de points ou de score (ex: pr frag, a un goalaverage>10)
 	 * - redescendre les stats dans loop, et gestion de fin de partie, puis synchroniser les stats dans round
+	 * - pb de temps NEGATIF quand j'arrête la partie avec esc, plus bouton encore actif
+	 * - à la fin du round, faire apparaitre les résultats par transparence...ça serait la classe ça !
 	 */
 	
 	

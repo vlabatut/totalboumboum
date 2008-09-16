@@ -163,6 +163,7 @@ public class XmlTools
 	public static final String ATT_DEFAULT = "default";
 	public static final String ATT_DIRECTION = "direction";
 	public static final String ATT_DURATION = "duration";
+	public static final String ATT_EXAEQUO_SHARE = "exaequoShare";
 	public static final String ATT_FILE = "file";
 	public static final String ATT_FOLDER = "folder";
 	public static final String ATT_FORCE_ALL = "forceAll";
