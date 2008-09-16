@@ -50,6 +50,7 @@ public class SwingTools
 	public static final String GAME_DATA_MARGIN_SIZE = "GAME_DATA_MARGIN_SIZE";
 	public static final String GAME_TITLE_FONT_SIZE = "GAME_TITLE_FONT_SIZE";
 	public static final String GAME_PROGRESSBAR_FONT_SIZE = "GAME_PROGRESSBAR_FONT_SIZE";
+	public static final String GAME_DESCRIPTION_PANEL_WIDTH = "GAME_DESCRIPTION_PANEL_WIDTH"; //TODO
 	public static final String GAME_RESULTS_LABEL_LINE_HEIGHT = "GAME_RESULTS_LABEL_LINE_HEIGHT";
 	public static final String GAME_RESULTS_LABEL_HEADER_HEIGHT = "GAME_RESULTS_LABEL_HEADER_HEIGHT";
 	public static final String GAME_RESULTS_LINE_FONT_SIZE = "GAME_RESULTS_LINE_FONT_SIZE";
@@ -139,6 +140,8 @@ public class SwingTools
 		sizes.put(GAME_RESULTS_LABEL_HEADER_HEIGHT,gameResultsLabelHeaderHeight);
 		int gameResultHeaderFontSize = getFontSize(gameResultsLabelHeaderHeight*0.9, configuration, g);
 		sizes.put(GAME_RESULTS_HEADER_FONT_SIZE,gameResultHeaderFontSize);
+		int gameDescriptionPanelWidth = (gameDataPanelHeight-gameDataMarginSize)/2;
+		sizes.put(GAME_DESCRIPTION_PANEL_WIDTH,gameDescriptionPanelWidth);
 				
 		// icons
 		BufferedImage absent = ImageTools.getAbsentImage(64,64);
@@ -261,6 +264,9 @@ public class SwingTools
 			icons.put(GuiTools.GAME_TOURNAMENT_HEADER_POINTS,image);
 			icons.put(GuiTools.GAME_MATCH_HEADER_POINTS,image);
 			icons.put(GuiTools.GAME_ROUND_HEADER_POINTS,image);
+			// rank
+			image = loadIcon(folder+"rank.png",absent);
+			icons.put(GuiTools.GAME_MATCH_HEADER_RANK,image);
 			// time
 			image = loadIcon(folder+"time.png",absent);
 			icons.put(GuiTools.GAME_ROUND_HEADER_TIME,image);

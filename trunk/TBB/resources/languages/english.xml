@@ -195,11 +195,14 @@
 	<text name="GameMatchHeaderPoints" value="Pts" />
 	<text name="GameMatchHeaderPointsTooltip" value="Number of points scored for this match" />
 	<!--  -->
-	<text name="GameMatchHeaderTotal" value="All" />
-	<text name="GameMatchHeaderTotalTooltip" value="Total number of points scored for all the rounds" />
+	<text name="GameMatchHeaderRank" value="#" />
+	<text name="GameMatchHeaderRankTooltip" value="Current rank of the player in the tournament" />
 	<!--  -->
 	<text name="GameMatchHeaderRound" value="R" />
 	<text name="GameMatchHeaderRoundTooltip" value="Number of points scored for the round number" />
+	<!--  -->
+	<text name="GameMatchHeaderTotal" value="All" />
+	<text name="GameMatchHeaderTotalTooltip" value="Total number of points scored for all the rounds" />
 	
 	<text name="GameRoundTitleDescription" value="Round description" />
 	<text name="GameRoundTitleResults" value="Round results" />
