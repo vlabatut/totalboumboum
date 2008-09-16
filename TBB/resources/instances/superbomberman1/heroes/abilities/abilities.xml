@@ -5,9 +5,9 @@
 		<!-- STATE -->
 <!--  	sprite-flat --> 
 <!--  	sprite-above --> 
-<!--	sprite-traverse-bomb --> 
-<!--	sprite-traverse-item --> 
-<!--	sprite-traverse-wall --> 
+<!--		sprite-traverse-bomb --> 
+<!--		sprite-traverse-item --> 
+<!--		sprite-traverse-wall --> 
 <!--  	block-spawn --> 
 <!--  	bomb-explosion-latency --> 
 <!--  	bomb-failure-maxduration --> 
@@ -50,11 +50,21 @@
 				orientation="all" target="all" tilePosition="all" />
 		</ability>
 <!--  	consume --> 
+<!--  	cry --> 
+		<ability strength="1" frame="false" time="-1" uses="-1">
+			<action name="cry" contact="all" direction="all"
+				orientation="all" target="none" tilePosition="all" />
+		</ability>
 <!--  	detonate --> 
 <!--  	drop --> 
 		<ability strength="1" frame="false" time="-1" uses="-1">
 			<action name="drop" contact="all" direction="all"
 				orientation="all" target="bomb" tilePosition="same" />
+		</ability>
+<!--  	exult --> 
+		<ability strength="1" frame="false" time="-1" uses="-1">
+			<action name="exult" contact="all" direction="all"
+				orientation="all" target="none" tilePosition="all" />
 		</ability>
 <!--  	gather --> 
 		<ability strength="1" frame="false" time="-1" uses="-1">

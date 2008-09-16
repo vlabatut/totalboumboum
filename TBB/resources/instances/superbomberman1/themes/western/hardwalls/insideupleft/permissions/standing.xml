@@ -52,8 +52,22 @@
 	<third-permissions>
 <!--  	appear --> 
 <!--  	consume --> 
+<!--  	cry --> 
+		<permission frame="true" strength="1" >
+			<action name="cry" direction="all" contact="all"
+				tilePosition="all" orientation="all" actor="all" />
+			<actor-restrictions />
+			<target-restrictions />
+		</permission>
 <!--  	detonate --> 
 <!--  	drop --> 
+<!--  	exult --> 
+		<permission frame="true" strength="1" >
+			<action name="exult" direction="all" contact="all"
+				tilePosition="all" orientation="all" actor="all" />
+			<actor-restrictions />
+			<target-restrictions />
+		</permission>
 <!--  	gather --> 
 <!--  	jump --> 
 		<permission frame="true" strength="1" >

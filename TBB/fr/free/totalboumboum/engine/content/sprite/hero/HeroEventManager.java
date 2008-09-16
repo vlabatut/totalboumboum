@@ -305,7 +305,9 @@ public class HeroEventManager extends EventManager
 		}
 		else if(gesture.equals(GestureConstants.CRYING)
 				|| gesture.equals(GestureConstants.EXULTING))
-		{	sprite.getLoop().celebrationOver();
+		{	//sprite.getLoop().celebrationOver();
+			gesture = GestureConstants.STANDING;
+			sprite.setGesture(gesture,spriteDirection,controlDirection,true);
 		}
 		else if(gesture.equals(GestureConstants.APPEARING))
 		{	setWaitDelay();
@@ -431,18 +433,54 @@ public class HeroEventManager extends EventManager
 	}
 	
 	private void engVictory(EngineEvent event)
-	{	StateAbility ability = sprite.computeAbility(StateAbility.HERO_CELEBRATION_DURATION);
+	{	
+		
+		SpecificAction specificAction = new SpecificAction(AbstractAction.EXULT,sprite,null,Direction.NONE);
+		ActionAbility ability = sprite.computeAbility(specificAction);
+		if(ability.isActive())
+		{	StateAbility ablt = sprite.computeAbility(StateAbility.HERO_CELEBRATION_DURATION);
+			double duration = ablt.getStrength();
+			gesture = GestureConstants.EXULTING;							
+			sprite.setGesture(gesture,spriteDirection,controlDirection,true,duration);
+		}
+		else
+		{
+			//NOTE programmer l'action quand ce sera possible
+		}
+		
+		
+/*		
+		StateAbility ability = sprite.computeAbility(StateAbility.HERO_CELEBRATION_DURATION);
 		double duration = ability.getStrength();
 		gesture = GestureConstants.EXULTING;							
 		sprite.setGesture(gesture,spriteDirection,controlDirection,true,duration);
+*/		
 	}
 	
 	private void engDefeat(EngineEvent event)
-	{	StateAbility ability = sprite.computeAbility(StateAbility.HERO_CELEBRATION_DURATION);
+	{	
+		SpecificAction specificAction = new SpecificAction(AbstractAction.CRY,sprite,null,Direction.NONE);
+		ActionAbility ability = sprite.computeAbility(specificAction);
+		if(ability.isActive())
+		{	StateAbility ablt = sprite.computeAbility(StateAbility.HERO_CELEBRATION_DURATION);
+			double duration = ablt.getStrength();
+			gesture = GestureConstants.CRYING;
+			sprite.setGesture(gesture,spriteDirection,controlDirection,true,duration);
+		}
+		else
+		{
+			//NOTE programmer l'action quand ce sera possible
+		}
+		
+		
+/*		
+		StateAbility ability = sprite.computeAbility(StateAbility.HERO_CELEBRATION_DURATION);
 		double duration = ability.getStrength();
 		gesture = GestureConstants.CRYING;							
 		sprite.setGesture(gesture,spriteDirection,controlDirection,true,duration);
+*/		
 	}
+	
 
 	public void finish()
 	{	if(!finished)

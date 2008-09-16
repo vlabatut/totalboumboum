@@ -588,11 +588,14 @@ public class Launcher
 	 * - modification du système de points de manière à pouvoir effectuer un classement en considérant plusieurs paramètres complètement ordonnés
 	 * - gérer le partage des points en cas d'égalité
 	 * - pb lors de l'affichage du résultat d'un match : le classement des non-gagnants ne respecte pas le total des points...
+	 * - quand un héro reçoit l'ordre de pleurer, il ne le fait pas s'il est en train de mourir (en fait faut mettre une vraie action avec permissions et tout)
+	 * - correction d'un bug quand l'animation de victoire/défaite ne peut pas être activée : il ne faut pas base la fin de la boucle sur la fin de l'animation, mais sur la fin d'un délai indépendant et équivalent
+	 * 
+	 *   + alpha.40
 	 * 
 	 * *******************************************************
 	 * *********************** A FAIRE ***********************
 	 * *******************************************************
-	 * - quand un héro reçoit l'ordre de pleurer, il ne le fait pas s'il est en train de mourir (en fait faut mettre une vraie action avec permissions et tout)
 	 * - définir les présentations des rounds
 	 * - problème de collisions quand on change la vitesse (surement un problème d'arrondi, ou alors un saut trop grand (en distance), voir si j'avais implémenté la maximalisation du déplacement malgré une éventuelle collision...)
 	 * - revoir le système des IA
@@ -601,6 +604,7 @@ public class Launcher
 	 * - pb de temps NEGATIF quand j'arrête la partie avec esc, plus bouton encore actif
 	 * - à la fin du round, faire apparaitre les résultats par transparence...ça serait la classe ça !
 	 * - problème de cohérence entre les nombres totaux de kills et de deaths (qui devraient être égaux)
+	 * - gérer l'apparition comme une action en soit. si pas possible d'apparaître au début de la partie, faire un atterrissage ?
 	 */
 	
 	

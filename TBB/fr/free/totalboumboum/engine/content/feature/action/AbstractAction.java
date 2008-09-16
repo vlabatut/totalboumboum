@@ -62,6 +62,7 @@ public abstract class AbstractAction
 	 * 	<br>paramètre: restriction=N/D
 	 */	
 	public static final String CONSUME = "consume";
+	public static final String CRY = "cry";
 	/** 
 	 * action volontaire de brûler (par exemple explosion timer pr une bombe)
 	 * action de créer une explosion, alors que consume = fait de brûler(?)
@@ -148,6 +149,7 @@ public abstract class AbstractAction
 	 * 	<br>paramètre: restriction=éventuellement
 	 */
 	public static final String GATHER = "gather";
+	public static final String EXULT = "exult";
 	/** 
 	 * action de sauter en l'air (hors déplacement sur le plan, qui est lié à movehigh)
 	 * INTRANSITIVE

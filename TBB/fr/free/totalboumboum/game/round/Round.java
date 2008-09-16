@@ -156,7 +156,8 @@ public class Round
 		}
 	}
 	private void celebrate()
-	{	ArrayList<PlayerPoints> winners = stats.getWinners();
+	{	loop.initCelebrationDelay();
+		ArrayList<PlayerPoints> winners = stats.getWinners();
 		// indexes of the winners
 		ArrayList<Integer> winnersIndex = new ArrayList<Integer>();
 		{	Iterator<PlayerPoints> i = winners.iterator();
