@@ -76,6 +76,13 @@
 			<actor-restrictions />
 			<target-restrictions />
 		</permission>
+<!--  	cry --> 
+		<permission frame="true" strength="1" >
+			<action name="cry" direction="all" contact="all"
+				tilePosition="all" orientation="all" actor="all" />
+			<actor-restrictions />
+			<target-restrictions />
+		</permission>
 <!--  	detonate --> 
 		<permission frame="true" strength="1" >
 			<action name="detonate" direction="all" contact="all"
@@ -87,6 +94,13 @@
 		<permission frame="true" strength="1" >
 			<action name="drop" direction="all" contact="all"
 				tilePosition="all" orientation="all" actor="all" target="all" />
+			<actor-restrictions />
+			<target-restrictions />
+		</permission>
+<!--  	exult --> 
+		<permission frame="true" strength="1" >
+			<action name="exult" direction="all" contact="all"
+				tilePosition="all" orientation="all" actor="all" />
 			<actor-restrictions />
 			<target-restrictions />
 		</permission>

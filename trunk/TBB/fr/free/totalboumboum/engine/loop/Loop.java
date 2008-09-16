@@ -28,6 +28,7 @@ import fr.free.totalboumboum.engine.container.level.Level;
 import fr.free.totalboumboum.engine.container.level.LevelLoader;
 import fr.free.totalboumboum.engine.content.feature.ability.AbilityLoader;
 import fr.free.totalboumboum.engine.content.feature.ability.AbstractAbility;
+import fr.free.totalboumboum.engine.content.feature.ability.StateAbility;
 import fr.free.totalboumboum.engine.content.feature.event.EngineEvent;
 import fr.free.totalboumboum.engine.content.feature.permission.PermissionPack;
 import fr.free.totalboumboum.engine.content.feature.permission.PermissionPackLoader;
@@ -352,7 +353,7 @@ public class Loop implements Runnable
 			timeDiff = afterTime - beforeTime;
 			if(!isPaused)
 			{	totalTime = totalTime + (timeDiff/1000000);
-				round.updateTime(totalTime);
+				round.updateTime(totalTime);				
 			}
 			sleepTime = (getConfiguration().getNanoPeriod() - timeDiff) - overSleepTime;
 
@@ -402,7 +403,13 @@ loopOver = true;
 
 	private void update()
 	{	if(!isPaused)
-		{	getLevel().update();
+		{	if(celebrationDelay>=0)
+			{	celebrationDelay = celebrationDelay - (getConfiguration().getMilliPeriod()*getConfiguration().getSpeedCoeff());
+				if(celebrationDelay<0)
+					loopOver = true;
+			}		
+		
+		getLevel().update();
 			Iterator<Player> i = players.iterator();
 			while(i.hasNext())
 			{	Player temp = i.next();
@@ -426,9 +433,6 @@ loopOver = true;
 	{	int index = players.indexOf(player);
 		round.playerOut(index);
 		panel.playerOut(index);	
-	}
-	public void celebrationOver()
-	{	loopOver = true;
 	}
 
 	/////////////////////////////////////////////////////////////////
@@ -488,6 +492,15 @@ loopOver = true;
 	
 	public void addStatisticEvent(StatisticEvent event)
 	{	round.addStatisticEvent(event);
+	}
+	
+	double celebrationDelay = -1;
+
+	public void initCelebrationDelay()
+	{	Player player = players.get(0);
+		Sprite sprite = player.getSprite();
+		StateAbility ability = sprite.computeAbility(StateAbility.HERO_CELEBRATION_DURATION);
+		celebrationDelay = ability.getStrength();
 	}
 	
 	public void reportVictory(int index)

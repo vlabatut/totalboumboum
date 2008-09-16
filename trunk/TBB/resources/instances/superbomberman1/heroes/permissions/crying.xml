@@ -4,13 +4,10 @@
 
 	<state-modulations>
 <!--  	sprite-flat --> 
-		<modulation frame="true" strength="0">
-			<name value="sprite-flat"/>
-		</modulation>
 <!--  	sprite-above --> 
-<!--	sprite-traverse-bomb --> 
-<!--	sprite-traverse-item --> 
-<!--	sprite-traverse-wall --> 
+<!--		sprite-traverse-bomb --> 
+<!--		sprite-traverse-item --> 
+<!--		sprite-traverse-wall --> 
 <!--  	block-spawn --> 
 <!--  	bomb-explosion-latency --> 
 <!--  	bomb-failure-maxduration --> 
@@ -43,7 +40,7 @@
 	</actor-permissions>
 	
 	<target-permissions>
-<!-- 	appear -->
+<!--  	appear --> 
 <!--  	consume --> 
 <!--  	drop --> 
 <!--  	gather --> 
@@ -56,13 +53,23 @@
 <!--  	appear --> 
 		<permission frame="true" strength="1" >
 			<action name="appear" direction="all" contact="all"
+				tilePosition="all" orientation="all" actor="bomb" target="all" />
+			<actor-restrictions />
+			<target-restrictions />
+		</permission>
+		<permission frame="true" strength="1" >
+			<action name="appear" direction="all" contact="all"
 				tilePosition="all" orientation="all" actor="fire" target="all" />
-			<actor-restrictions>
-				<ability><name value="sprite-traverse-item" /></ability>
-			</actor-restrictions>
+			<actor-restrictions />
 			<target-restrictions />
 		</permission>
 <!--  	consume --> 
+		<permission frame="true" strength="1" >
+			<action name="consume" direction="all" contact="all"
+				tilePosition="all" orientation="all" actor="all" target="all" />
+			<actor-restrictions />
+			<target-restrictions />
+		</permission>
 <!--  	cry --> 
 		<permission frame="true" strength="1" >
 			<action name="cry" direction="all" contact="all"
@@ -108,7 +115,7 @@
 <!--  	land --> 
 		<permission frame="true" strength="1" >
 			<action name="land" direction="all" contact="all"
-				tilePosition="all" orientation="all" actor="all" />
+				tilePosition="all" orientation="all" actor="hero" />
 			<actor-restrictions />
 			<target-restrictions />
 		</permission>
@@ -122,7 +129,7 @@
 <!--  	movelow --> 
 		<permission frame="true" strength="1" >
 			<action name="movelow" direction="all" contact="all"
-				tilePosition="all" orientation="all" actor="all" />
+				tilePosition="all" orientation="all" actor="hero" />
 			<actor-restrictions />
 			<target-restrictions />
 		</permission>

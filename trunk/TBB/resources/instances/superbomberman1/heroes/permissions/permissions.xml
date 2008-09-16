@@ -6,6 +6,8 @@
 
 	<gesture name="bouncing" file="bouncing.xml" />
 	<gesture name="burning" file="burning.xml" />
+	<gesture name="crying" file="burning.xml" />
+	<gesture name="exulting" file="burning.xml" />
 	<gesture name="jumping" file="jumping.xml" />
 	<gesture name="landing" file="landing.xml" />
 	<gesture name="punching" file="punching.xml" />
