@@ -84,6 +84,7 @@ public class GuiTools
 	public static final String GAME_MATCH_HEADER_DEATHS = "GameMatchHeaderDeaths";
 	public static final String GAME_MATCH_HEADER_ITEMS = "GameMatchHeaderItems";
 	public static final String GAME_MATCH_HEADER_KILLS = "GameMatchHeaderKills";
+	public static final String GAME_MATCH_HEADER_RANK = "GameMatchHeaderRank";
 	public static final String GAME_MATCH_HEADER_TOTAL = "GameMatchHeaderTotal";
 	public static final String GAME_MATCH_HEADER_ROUND = "GameMatchHeaderRound";
 	
