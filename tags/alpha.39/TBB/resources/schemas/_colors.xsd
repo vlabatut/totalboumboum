@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+
+	<xsd:simpleType name="tColor">
+		<xsd:restriction base="xsd:string">
+			<xsd:enumeration value="black" />
+			<xsd:enumeration value="blue" />
+			<xsd:enumeration value="brown" />
+			<xsd:enumeration value="cyan" />
+			<xsd:enumeration value="grass" />
+			<xsd:enumeration value="green" />
+			<xsd:enumeration value="grey" />
+			<xsd:enumeration value="indigo" />
+			<xsd:enumeration value="orange" />
+			<xsd:enumeration value="pink" />
+			<xsd:enumeration value="purple" />
+			<xsd:enumeration value="red" />
+			<xsd:enumeration value="rust" />
+			<xsd:enumeration value="ultramarine" />
+			<xsd:enumeration value="white" />
+			<xsd:enumeration value="yellow" />
+		</xsd:restriction>
+	</xsd:simpleType>
+
+	<xsd:complexType name="tColormap">
+		<xsd:attribute name="name" type="tColor" use="required" />
+		<xsd:attribute name="file" type="xsd:string" use="required" />
+	</xsd:complexType>
+
+	<xsd:complexType name="tColorsprite">
+		<xsd:attribute name="name" type="tColor" use="required" />
+		<xsd:attribute name="folder" type="xsd:string" use="required" />
+	</xsd:complexType>
+
+	<xsd:complexType name="tColors">
+		<xsd:sequence>
+			<xsd:element name="colormap" type="tColormap" minOccurs="0" maxOccurs="unbounded" />
+			<xsd:element name="colorsprite" type="tColorsprite" minOccurs="0" maxOccurs="unbounded" />
+		</xsd:sequence>
+		<xsd:attribute name="folder" type="xsd:string" use="optional" />
+	</xsd:complexType>
+
+
+</xsd:schema>
