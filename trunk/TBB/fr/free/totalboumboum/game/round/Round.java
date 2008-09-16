@@ -16,8 +16,8 @@ import fr.free.totalboumboum.engine.loop.Loop;
 import fr.free.totalboumboum.engine.player.Player;
 import fr.free.totalboumboum.game.match.LevelDescription;
 import fr.free.totalboumboum.game.match.Match;
+import fr.free.totalboumboum.game.point.PlayerPoints;
 import fr.free.totalboumboum.game.point.PointProcessor;
-import fr.free.totalboumboum.game.ranking.PlayerPoints;
 
 public class Round
 {
@@ -76,7 +76,7 @@ public class Round
 	}	
 	
 	public void loopOver()
-	{	match.currentRoundOver();
+	{	match.roundOver();
 		panel.roundOver();
 		// loop
 		loop = null;

@@ -15,7 +15,7 @@ public class SingleTournament extends AbstractTournament
 {
 
 	@Override
-	public void currentMatchOver() {
+	public void matchOver() {
 		// TODO Auto-generated method stub
 		
 	}

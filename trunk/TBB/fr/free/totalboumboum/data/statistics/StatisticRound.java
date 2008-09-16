@@ -7,11 +7,10 @@ import java.util.Iterator;
 import java.util.TreeSet;
 
 import fr.free.totalboumboum.data.profile.Profile;
+import fr.free.totalboumboum.game.point.PlayerPoints;
 import fr.free.totalboumboum.game.point.PointProcessor;
-import fr.free.totalboumboum.game.ranking.PlayerPoints;
 import fr.free.totalboumboum.game.round.PlayMode;
 import fr.free.totalboumboum.game.round.Round;
-import fr.free.totalboumboum.game.score.Score;
 
 public class StatisticRound implements Serializable, StatisticBase
 {

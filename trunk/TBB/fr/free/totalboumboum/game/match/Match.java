@@ -136,7 +136,7 @@ public class Match
 	public Round getCurrentRound()
 	{	return currentRound;	
 	}
-	public void currentRoundOver()
+	public void roundOver()
 	{	StatisticRound statsRound = currentRound.getStats();
 		stats.addStatisticRound(statsRound);
 		//
@@ -159,11 +159,13 @@ public class Match
 		}
 		if(matchOver)
 		{	stats.computePoints(pointProcessor);
-			tournament.currentMatchOver();
+			tournament.matchOver();
 			panel.matchOver();
 		}
 		else
+		{	//tournament.roundOver();
 			panel.roundOver();
+		}
 	}
 	
 	/////////////////////////////////////////////////////////////////

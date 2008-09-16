@@ -1,7 +1,7 @@
 package fr.free.totalboumboum.game.point;
 
+import fr.free.totalboumboum.data.statistics.Score;
 import fr.free.totalboumboum.data.statistics.StatisticBase;
-import fr.free.totalboumboum.game.score.Score;
 
 public class PointScores implements PointProcessor
 {	

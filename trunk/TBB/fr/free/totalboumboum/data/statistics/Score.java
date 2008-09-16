@@ -1,10 +1,7 @@
-package fr.free.totalboumboum.game.score;
+package fr.free.totalboumboum.data.statistics;
 
 import java.util.ArrayList;
 
-import fr.free.totalboumboum.data.statistics.StatisticAction;
-import fr.free.totalboumboum.data.statistics.StatisticEvent;
-import fr.free.totalboumboum.data.statistics.StatisticRound;
 
 public enum Score
 {	BOMBS, CROWNS, DEATHS, ITEMS, KILLS, PAINTINGS, TIME;

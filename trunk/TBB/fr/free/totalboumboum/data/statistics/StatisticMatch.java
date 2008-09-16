@@ -8,7 +8,6 @@ import java.util.Iterator;
 import fr.free.totalboumboum.data.profile.Profile;
 import fr.free.totalboumboum.game.match.Match;
 import fr.free.totalboumboum.game.point.PointProcessor;
-import fr.free.totalboumboum.game.score.Score;
 
 public class StatisticMatch implements Serializable, StatisticBase
 {

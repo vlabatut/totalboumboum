@@ -170,8 +170,8 @@
 	<text name="GameTournamentHeaderTotal" value="All" />
 	<text name="GameTournamentHeaderTotalTooltip" value="Total number of points scored for all the matches" />
 	<!--  -->
-	<text name="GameTournamentHeaderTournament" value="M" />
-	<text name="GameTournamentHeaderRoundTooltip" value="Number of points scored for the match number" />
+	<text name="GameTournamentHeaderMatch" value="M" />
+	<text name="GameTournamentHeaderMatchTooltip" value="Number of points scored for the match number" />
 	
 	<text name="GameMatchTitleDescription" value="Match description" />
 	<text name="GameMatchTitleResults" value="Match results" />

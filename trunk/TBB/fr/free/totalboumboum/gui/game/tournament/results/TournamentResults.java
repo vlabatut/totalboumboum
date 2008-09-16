@@ -21,12 +21,12 @@ import javax.swing.SwingConstants;
 
 import fr.free.totalboumboum.data.profile.Portraits;
 import fr.free.totalboumboum.data.profile.Profile;
+import fr.free.totalboumboum.data.statistics.Score;
 import fr.free.totalboumboum.data.statistics.StatisticMatch;
 import fr.free.totalboumboum.data.statistics.StatisticRound;
 import fr.free.totalboumboum.data.statistics.StatisticTournament;
 import fr.free.totalboumboum.game.match.Match;
-import fr.free.totalboumboum.game.ranking.PlayerPoints;
-import fr.free.totalboumboum.game.score.Score;
+import fr.free.totalboumboum.game.point.PlayerPoints;
 import fr.free.totalboumboum.game.tournament.AbstractTournament;
 import fr.free.totalboumboum.game.tournament.sequence.SequenceTournament;
 import fr.free.totalboumboum.gui.SpringUtilities;
@@ -240,7 +240,7 @@ public class TournamentResults extends InnerDataPanel
 				lbl.setFont(font);
 				lbl.setHorizontalAlignment(SwingConstants.CENTER);
 				lbl.setBackground(new Color(0,0,0,128));
-				lbl.setForeground(Color.BLACK);
+				lbl.setForeground(Color.WHITE);
 				lbl.setOpaque(true);
 				resultsPanel.add(lbl,colNbr);
 			}
