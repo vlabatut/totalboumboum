@@ -587,11 +587,11 @@ public class Launcher
 	 * - il FAUT un pointProcessor pour le tournament, pour gérer les égalités
 	 * - modification du système de points de manière à pouvoir effectuer un classement en considérant plusieurs paramètres complètement ordonnés
 	 * - gérer le partage des points en cas d'égalité
+	 * - pb lors de l'affichage du résultat d'un match : le classement des non-gagnants ne respecte pas le total des points...
 	 * 
 	 * *******************************************************
 	 * *********************** A FAIRE ***********************
 	 * *******************************************************
-	 * - pb lors de l'affichage du résultat d'un match : le classement des non-gagnants ne respecte pas le total des points...
 	 * - quand un héro reçoit l'ordre de pleurer, il ne le fait pas s'il est en train de mourir (en fait faut mettre une vraie action avec permissions et tout)
 	 * - définir les présentations des rounds
 	 * - problème de collisions quand on change la vitesse (surement un problème d'arrondi, ou alors un saut trop grand (en distance), voir si j'avais implémenté la maximalisation du déplacement malgré une éventuelle collision...)
@@ -600,6 +600,7 @@ public class Launcher
 	 * - redescendre les stats dans loop, et gestion de fin de partie, puis synchroniser les stats dans round
 	 * - pb de temps NEGATIF quand j'arrête la partie avec esc, plus bouton encore actif
 	 * - à la fin du round, faire apparaitre les résultats par transparence...ça serait la classe ça !
+	 * - problème de cohérence entre les nombres totaux de kills et de deaths (qui devraient être égaux)
 	 */
 	
 	

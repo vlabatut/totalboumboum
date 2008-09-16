@@ -87,10 +87,11 @@ public class SequenceTournament extends AbstractTournament
 	public void matchOver()
 	{	StatisticMatch statsMatch = currentMatch.getStats();
 		stats.addStatisticMatch(statsMatch);
+		stats.computePoints(pointProcessor);
 		panel.matchOver();
 		//
 		if(!iterator.hasNext())
-		{	stats.computePoints(pointProcessor);
+		{	//stats.computePoints(pointProcessor);
 			tournamentOver = true;
 			panel.tournamentOver();
 		}

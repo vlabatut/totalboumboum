@@ -57,9 +57,9 @@ public class PlayerPoints implements Comparable<PlayerPoints>
 	public String getPlayer()
 	{	return player;
 	}
-	public Iterator<Float> getPoints()
+/*	public Iterator<Float> getPoints()
 	{	return points.iterator();
-	}
+	}*/
 	public int getIndex()
 	{	return index;
 	}
