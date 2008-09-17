@@ -4,19 +4,30 @@ import java.awt.Color;
 import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.Font;
+import java.awt.Graphics;
 import java.awt.LayoutManager;
+import java.awt.Point;
 import java.awt.image.BufferedImage;
 import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.Iterator;
 
+import javax.security.auth.callback.TextOutputCallback;
 import javax.swing.Box;
 import javax.swing.BoxLayout;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JTextPane;
 import javax.swing.SpringLayout;
 import javax.swing.SwingConstants;
+import javax.swing.event.ChangeListener;
+import javax.swing.text.BadLocationException;
+import javax.swing.text.Caret;
+import javax.swing.text.JTextComponent;
+import javax.swing.text.SimpleAttributeSet;
+import javax.swing.text.StyleConstants;
+import javax.swing.text.StyledDocument;
 
 import fr.free.totalboumboum.data.profile.Portraits;
 import fr.free.totalboumboum.data.profile.Profile;
@@ -84,17 +95,15 @@ public class MatchDescription extends InnerDataPanel
 			infoPanel.setPreferredSize(dim);
 			infoPanel.setMinimumSize(dim);
 			infoPanel.setMaximumSize(dim);
-			infoPanel.add(Box.createHorizontalGlue());
 			infoPanel.setOpaque(false);
+			//
 			// players panel
-			{	JPanel playersPanel = new JPanel();
-				int playerNumber = match.getProfiles().size();
+			{	int playerNumber = match.getProfiles().size();
 				playerNumber = 16;
 				int lines = playerNumber+1;
 				int cols = 2+1;
 				SpringLayout layout = new SpringLayout();			
-				playersPanel = new JPanel(layout);
-				playersPanel.setOpaque(true);
+				JPanel playersPanel = new JPanel(layout);
 				playersPanel.setBackground(new Color(255,255,255,128));
 				dim = new Dimension(SwingTools.getSize(SwingTools.GAME_DESCRIPTION_PANEL_WIDTH),SwingTools.getSize(SwingTools.GAME_DATA_PANEL_HEIGHT));
 				playersPanel.setPreferredSize(dim);
@@ -211,28 +220,209 @@ public class MatchDescription extends InnerDataPanel
 				{	BoxLayout layout = new BoxLayout(textPanel,BoxLayout.PAGE_AXIS); 
 					textPanel.setLayout(layout);
 				}
-			
-				textPanel.add(Box.createVerticalGlue());
+				textPanel.setOpaque(false);
+				dim = new Dimension(SwingTools.getSize(SwingTools.GAME_DESCRIPTION_PANEL_WIDTH),SwingTools.getSize(SwingTools.GAME_DATA_PANEL_HEIGHT));
+				textPanel.setPreferredSize(dim);
+				textPanel.setMinimumSize(dim);
+				textPanel.setMaximumSize(dim);
+				//
 				// rounds panel
 				{	JPanel roundsPanel = new JPanel();
-				
+					{	BoxLayout layout = new BoxLayout(roundsPanel,BoxLayout.PAGE_AXIS); 
+						roundsPanel.setLayout(layout);
+					}
+					roundsPanel.setBackground(new Color(255,255,255,128));
+					dim = new Dimension(SwingTools.getSize(SwingTools.GAME_DESCRIPTION_PANEL_WIDTH),SwingTools.getSize(SwingTools.GAME_DESCRIPTION_PANEL_HEIGHT));
+					roundsPanel.setPreferredSize(dim);
+					roundsPanel.setMinimumSize(dim);
+					roundsPanel.setMaximumSize(dim);
+					//
+					roundsPanel.add(Box.createVerticalGlue());
+					// title
+					{	JLabel titleLabel = new JLabel(" ");
+						Font font = getConfiguration().getFont().deriveFont((float)SwingTools.getSize(SwingTools.GAME_RESULTS_HEADER_FONT_SIZE));
+						titleLabel.setFont(font);
+						String text = getConfiguration().getLanguage().getText(GuiTools.GAME_MATCH_HEADER_ROUNDS);
+						titleLabel.setText(text);
+						String tooltip = getConfiguration().getLanguage().getText(GuiTools.GAME_MATCH_HEADER_ROUNDS+"Tooltip");
+						titleLabel.setToolTipText(tooltip);
+						titleLabel.setHorizontalAlignment(SwingConstants.CENTER);
+						titleLabel.setForeground(Color.WHITE);
+						titleLabel.setBackground(new Color(0,0,0,128));
+						titleLabel.setOpaque(true);
+						dim = new Dimension(SwingTools.getSize(SwingTools.GAME_DESCRIPTION_LABEL_LINE_WIDTH),SwingTools.getSize(SwingTools.GAME_RESULTS_LABEL_HEADER_HEIGHT));
+						titleLabel.setPreferredSize(dim);
+						titleLabel.setMinimumSize(dim);
+						titleLabel.setMaximumSize(dim);
+						titleLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
+						roundsPanel.add(titleLabel);
+					}
+					//
+					roundsPanel.add(Box.createVerticalGlue());
+					//
+					{	JTextPane textPane = new JTextPane();
+						textPane.setEditable(false);
+						textPane.setHighlighter(null);
+//						textPane.setSelectedTextColor(null);
+//						textPane.setEnabled(false);
+//						textPane.setDisabledTextColor(Color.BLACK);
+/*
+						textPane.setCaret(new Caret()
+				        {	public void install(JTextComponent c){}
+				            public void deinstall(JTextComponent c){}
+				            public void paint(Graphics g){}
+				            public void addChangeListener(ChangeListener l){}
+				            public void removeChangeListener(ChangeListener l){}
+				            public boolean isVisible(){return false;}
+				            public void setVisible(boolean v){}
+				            public boolean isSelectionVisible(){return false;}
+				            public void setSelectionVisible(boolean v){}
+				            public void setMagicCaretPosition(Point p){}
+				            public Point getMagicCaretPosition(){return new Point(0,0);}
+				            public void setBlinkRate(int rate){}
+				            public int getBlinkRate(){return 10000;}
+				            public int getDot(){return 0;}
+				            public int getMark(){return 0;}
+				            public void setDot(int dot){}
+				            public void moveDot(int dot){}
+				        });
+*/				        
+						SimpleAttributeSet sa = new SimpleAttributeSet();
+						StyleConstants.setAlignment(sa,StyleConstants.ALIGN_JUSTIFIED);
+						Font font = getConfiguration().getFont().deriveFont((float)SwingTools.getSize(SwingTools.GAME_DESCRIPTION_LABEL_TEXT_FONT_SIZE));
+						StyleConstants.setFontFamily(sa, font.getFamily());
+						StyleConstants.setFontSize(sa, font.getSize());
+						StyledDocument doc = textPane.getStyledDocument();
+						String text = "Here goes a short description of the different rounds in this match. Blablabla blabla blabla blabla blabla blabla. Blablabla blabla blabla blabla blabla blabla. Blablabla blabla blabla blabla blabla blabla. Blablabla blabla blabla blabla blabla blabla. Blablabla blabla blabla blabla blabla blabla. Blablabla blabla blabla blabla blabla blabla. Blablabla blabla blabla blabla blabla blabla. Blablabla blabla blabla blabla blabla blabla.";
+						try
+						{	doc.insertString(0,text,sa);
+						}
+						catch (BadLocationException e)
+						{	e.printStackTrace();
+						}
+						doc.setParagraphAttributes(0,doc.getLength()-1,sa,true);
+						textPane.setBackground(new Color(0,0,0,20));
+						dim = new Dimension(SwingTools.getSize(SwingTools.GAME_DESCRIPTION_LABEL_LINE_WIDTH),SwingTools.getSize(SwingTools.GAME_DESCRIPTION_LABEL_TEXT_HEIGHT));
+						textPane.setPreferredSize(dim);
+						textPane.setMinimumSize(dim);
+						textPane.setMaximumSize(dim);
+						textPane.setAlignmentX(Component.CENTER_ALIGNMENT);
+						roundsPanel.add(textPane);
+					}
+					//
+					roundsPanel.add(Box.createVerticalGlue());
 					textPanel.add(roundsPanel);
 				}
+				//
 				textPanel.add(Box.createVerticalGlue());
 				// points panel
 				{	JPanel pointsPanel = new JPanel();
-				
+					{	BoxLayout layout = new BoxLayout(pointsPanel,BoxLayout.PAGE_AXIS); 
+						pointsPanel.setLayout(layout);
+					}
+					pointsPanel.setBackground(new Color(255,255,255,128));
+					dim = new Dimension(SwingTools.getSize(SwingTools.GAME_DESCRIPTION_PANEL_WIDTH),SwingTools.getSize(SwingTools.GAME_DESCRIPTION_PANEL_HEIGHT));
+					pointsPanel.setPreferredSize(dim);
+					pointsPanel.setMinimumSize(dim);
+					pointsPanel.setMaximumSize(dim);
+					//
+					pointsPanel.add(Box.createVerticalGlue());
+					// title
+					{	JLabel titleLabel = new JLabel(" ");
+						Font font = getConfiguration().getFont().deriveFont((float)SwingTools.getSize(SwingTools.GAME_RESULTS_HEADER_FONT_SIZE));
+						titleLabel.setFont(font);
+						String text = getConfiguration().getLanguage().getText(GuiTools.GAME_MATCH_HEADER_POINTSPROCESS);
+						titleLabel.setText(text);
+						String tooltip = getConfiguration().getLanguage().getText(GuiTools.GAME_MATCH_HEADER_POINTSPROCESS+"Tooltip");
+						titleLabel.setToolTipText(tooltip);
+						titleLabel.setHorizontalAlignment(SwingConstants.CENTER);
+						titleLabel.setForeground(Color.WHITE);
+						titleLabel.setBackground(new Color(0,0,0,128));
+						titleLabel.setOpaque(true);
+						dim = new Dimension(SwingTools.getSize(SwingTools.GAME_DESCRIPTION_LABEL_LINE_WIDTH),SwingTools.getSize(SwingTools.GAME_RESULTS_LABEL_HEADER_HEIGHT));
+						titleLabel.setPreferredSize(dim);
+						titleLabel.setMinimumSize(dim);
+						titleLabel.setMaximumSize(dim);
+						titleLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
+						pointsPanel.add(titleLabel);
+					}
+					//
+					pointsPanel.add(Box.createVerticalGlue());
+					//
+					{	JLabel textLabel = new JLabel(" ");
+						String text = "sdfgsgdsfgsdfgsdfgsdfgdfgsdfgsdfgsdfgsdfgsdfgsdfgs";
+						textLabel.setText(text);
+						textLabel.setHorizontalAlignment(SwingConstants.LEFT);
+						textLabel.setBackground(new Color(0,0,0,20));
+						textLabel.setOpaque(true);
+						dim = new Dimension(SwingTools.getSize(SwingTools.GAME_DESCRIPTION_LABEL_LINE_WIDTH),SwingTools.getSize(SwingTools.GAME_DESCRIPTION_LABEL_TEXT_HEIGHT));
+						textLabel.setPreferredSize(dim);
+						textLabel.setMinimumSize(dim);
+						textLabel.setMaximumSize(dim);
+						textLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
+						pointsPanel.add(textLabel);
+					}
+					//
+					pointsPanel.add(Box.createVerticalGlue());
 					textPanel.add(pointsPanel);
 				}
+				//
 				textPanel.add(Box.createVerticalGlue());
 				// limit panel
 				{	JPanel limitPanel = new JPanel();
-				
+					{	BoxLayout layout = new BoxLayout(limitPanel,BoxLayout.PAGE_AXIS); 
+						limitPanel.setLayout(layout);
+					}
+					limitPanel.setBackground(new Color(255,255,255,128));
+					dim = new Dimension(SwingTools.getSize(SwingTools.GAME_DESCRIPTION_PANEL_WIDTH),SwingTools.getSize(SwingTools.GAME_DESCRIPTION_PANEL_HEIGHT));
+					limitPanel.setPreferredSize(dim);
+					limitPanel.setMinimumSize(dim);
+					limitPanel.setMaximumSize(dim);
+					//
+					limitPanel.add(Box.createVerticalGlue());
+					// title
+					{	JLabel titleLabel = new JLabel(" ");
+						Font font = getConfiguration().getFont().deriveFont((float)SwingTools.getSize(SwingTools.GAME_RESULTS_HEADER_FONT_SIZE));
+						titleLabel.setFont(font);
+						String text = getConfiguration().getLanguage().getText(GuiTools.GAME_MATCH_HEADER_LIMITS);
+						titleLabel.setText(text);
+						String tooltip = getConfiguration().getLanguage().getText(GuiTools.GAME_MATCH_HEADER_LIMITS+"Tooltip");
+						titleLabel.setToolTipText(tooltip);
+						titleLabel.setHorizontalAlignment(SwingConstants.CENTER);
+						titleLabel.setForeground(Color.WHITE);
+						titleLabel.setBackground(new Color(0,0,0,128));
+						titleLabel.setOpaque(true);
+						dim = new Dimension(SwingTools.getSize(SwingTools.GAME_DESCRIPTION_LABEL_LINE_WIDTH),SwingTools.getSize(SwingTools.GAME_RESULTS_LABEL_HEADER_HEIGHT));
+						titleLabel.setPreferredSize(dim);
+						titleLabel.setMinimumSize(dim);
+						titleLabel.setMaximumSize(dim);
+						titleLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
+						limitPanel.add(titleLabel);
+					}
+					//
+					limitPanel.add(Box.createVerticalGlue());
+					//
+					{	JLabel textLabel = new JLabel(" ");
+						String text = "sdfgsgdsfgsdfgsdfgsdfgdfgsdfgsdfgsdfgsdfgsdfgsdfgs";
+						textLabel.setText(text);
+						textLabel.setHorizontalAlignment(SwingConstants.LEFT);
+						textLabel.setBackground(new Color(0,0,0,20));
+						textLabel.setOpaque(true);
+						dim = new Dimension(SwingTools.getSize(SwingTools.GAME_DESCRIPTION_LABEL_LINE_WIDTH),SwingTools.getSize(SwingTools.GAME_DESCRIPTION_LABEL_TEXT_HEIGHT));
+						textLabel.setPreferredSize(dim);
+						textLabel.setMinimumSize(dim);
+						textLabel.setMaximumSize(dim);
+						textLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
+						limitPanel.add(textLabel);
+					}
+					//
+					limitPanel.add(Box.createVerticalGlue());
 					textPanel.add(limitPanel);
 				}
-				textPanel.add(Box.createVerticalGlue());
+				//
+				infoPanel.add(textPanel);
 			}
-			infoPanel.add(Box.createHorizontalGlue());
+			//
 			add(infoPanel);
 		}
 

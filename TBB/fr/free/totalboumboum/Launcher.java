@@ -603,13 +603,11 @@ public class Launcher
 	 * - redescendre les stats dans loop, et gestion de fin de partie, puis synchroniser les stats dans round
 	 * - pb de temps NEGATIF quand j'arrête la partie avec esc, plus bouton encore actif
 	 * - à la fin du round, faire apparaitre les résultats par transparence...ça serait la classe ça !
-	 * - problème de cohérence entre les nombres totaux de kills et de deaths (qui devraient être égaux)
+	 * - problème de cohérence entre les nombres totaux de kills et de deaths (qui devraient être égaux) : on dirait que ça ne compte pas le dernier tué (qui termine le round) ?
 	 * - gérer l'apparition comme une action en soit. si pas possible d'apparaître au début de la partie, faire un atterrissage ?
+	 * - bug à corriger : collision bizarre, les flammes ne peuvent pas se croiser...
 	 */
 	
 	
-	
-	// TODO problème de raffraichissement des scores dans tournament
-	// également : le match n'apparait pas une fois qu'il est terminé (à re-tester ?)
 
 }
