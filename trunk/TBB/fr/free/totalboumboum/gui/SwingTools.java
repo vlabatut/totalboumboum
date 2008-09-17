@@ -50,7 +50,11 @@ public class SwingTools
 	public static final String GAME_DATA_MARGIN_SIZE = "GAME_DATA_MARGIN_SIZE";
 	public static final String GAME_TITLE_FONT_SIZE = "GAME_TITLE_FONT_SIZE";
 	public static final String GAME_PROGRESSBAR_FONT_SIZE = "GAME_PROGRESSBAR_FONT_SIZE";
-	public static final String GAME_DESCRIPTION_PANEL_WIDTH = "GAME_DESCRIPTION_PANEL_WIDTH"; //TODO
+	public static final String GAME_DESCRIPTION_PANEL_WIDTH = "GAME_DESCRIPTION_PANEL_WIDTH";
+	public static final String GAME_DESCRIPTION_PANEL_HEIGHT = "GAME_DESCRIPTION_PANEL_HEIGHT";
+	public static final String GAME_DESCRIPTION_LABEL_LINE_WIDTH = "GAME_DESCRIPTION_LABEL_LINE_WIDTH";
+	public static final String GAME_DESCRIPTION_LABEL_TEXT_HEIGHT = "GAME_DESCRIPTION_LABEL_TEXT_HEIGHT";
+	public static final String GAME_DESCRIPTION_LABEL_TEXT_FONT_SIZE = "GAME_DESCRIPTION_LABEL_TEXT_FONT_SIZE";
 	public static final String GAME_RESULTS_LABEL_LINE_HEIGHT = "GAME_RESULTS_LABEL_LINE_HEIGHT";
 	public static final String GAME_RESULTS_LABEL_HEADER_HEIGHT = "GAME_RESULTS_LABEL_HEADER_HEIGHT";
 	public static final String GAME_RESULTS_LINE_FONT_SIZE = "GAME_RESULTS_LINE_FONT_SIZE";
@@ -140,9 +144,17 @@ public class SwingTools
 		sizes.put(GAME_RESULTS_LABEL_HEADER_HEIGHT,gameResultsLabelHeaderHeight);
 		int gameResultHeaderFontSize = getFontSize(gameResultsLabelHeaderHeight*0.9, configuration, g);
 		sizes.put(GAME_RESULTS_HEADER_FONT_SIZE,gameResultHeaderFontSize);
-		int gameDescriptionPanelWidth = (gameDataPanelHeight-gameDataMarginSize)/2;
+		int gameDescriptionPanelWidth = (gameDataPanelWidth-gameDataMarginSize)/2;
 		sizes.put(GAME_DESCRIPTION_PANEL_WIDTH,gameDescriptionPanelWidth);
-				
+		int gameDescriptionPanelHeight = (gameDataPanelHeight-2*gameDataMarginSize)/3;
+		sizes.put(GAME_DESCRIPTION_PANEL_HEIGHT,gameDescriptionPanelHeight);
+		int gameDescriptionLabelLineWidth = gameDescriptionPanelWidth-2*gameResultsMarginSize;
+		sizes.put(GAME_DESCRIPTION_LABEL_LINE_WIDTH,gameDescriptionLabelLineWidth);
+		int gameDescriptionLabelTextHeight = gameDescriptionPanelHeight-3*gameResultsMarginSize-gameResultsLabelHeaderHeight;
+		sizes.put(GAME_DESCRIPTION_LABEL_TEXT_HEIGHT,gameDescriptionLabelTextHeight);
+		int gameDescriptionLabelTextFontSize = gameDescriptionLabelTextHeight/10;
+		sizes.put(GAME_DESCRIPTION_LABEL_TEXT_FONT_SIZE,gameDescriptionLabelTextFontSize);
+		
 		// icons
 		BufferedImage absent = ImageTools.getAbsentImage(64,64);
 		BufferedImage image;

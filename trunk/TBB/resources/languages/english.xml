@@ -172,6 +172,15 @@
 	<!--  -->
 	<text name="GameTournamentHeaderMatch" value="M" />
 	<text name="GameTournamentHeaderMatchTooltip" value="Number of points scored for the match number" />
+	<!--  -->
+	<text name="GameTournamentHeaderMatches" value="Matches" />
+	<text name="GameTournamentHeaderMatchesTooltip" value="Information about the matches of this tournament" />
+	<!--  -->
+	<text name="GameTournamentHeaderLimits" value="Limits" />
+	<text name="GameTournamentHeaderLimitsTooltip" value="Information about what may cause the tournament to end" />
+	<!--  -->
+	<text name="GameTournamentHeaderPointprocess" value="Points" />
+	<text name="GameTournamentHeaderPointprocessTooltip" value="Information about how points are processed for this tournament" />
 	
 	<text name="GameMatchTitleDescription" value="Match description" />
 	<text name="GameMatchTitleResults" value="Match results" />
@@ -203,6 +212,15 @@
 	<!--  -->
 	<text name="GameMatchHeaderTotal" value="All" />
 	<text name="GameMatchHeaderTotalTooltip" value="Total number of points scored for all the rounds" />
+	<!--  -->
+	<text name="GameMatchHeaderRounds" value="Rounds" />
+	<text name="GameMatchHeaderRoundsTooltip" value="Information about the rounds of this match" />
+	<!--  -->
+	<text name="GameMatchHeaderLimits" value="Limits" />
+	<text name="GameMatchHeaderLimitsTooltip" value="Information about what may cause the match to end" />
+	<!--  -->
+	<text name="GameMatchHeaderPointprocess" value="Points" />
+	<text name="GameMatchHeaderPointprocessTooltip" value="Information about how points are processed for this match" />
 	
 	<text name="GameRoundTitleDescription" value="Round description" />
 	<text name="GameRoundTitleResults" value="Round results" />

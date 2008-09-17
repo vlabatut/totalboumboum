@@ -74,6 +74,9 @@ public class GuiTools
 	public static final String GAME_TOURNAMENT_HEADER_KILLS = "GameTournamentHeaderKills";
 	public static final String GAME_TOURNAMENT_HEADER_TOTAL = "GameTournamentHeaderTotal";
 	public static final String GAME_TOURNAMENT_HEADER_MATCH = "GameTournamentHeaderMatch";
+	public static final String GAME_TOURNAMENT_HEADER_MATCHES = "GameTournamentHeaderMatches";	
+	public static final String GAME_TOURNAMENT_HEADER_LIMITS = "GameTournamentHeaderLimits";	
+	public static final String GAME_TOURNAMENT_HEADER_POINTSPROCESS = "GameTournamentHeaderPointprocess";	
 	
 	public static final String GAME_MATCH_TITLE_DESCRIPTION = "GameMatchTitleDescription";
 	public static final String GAME_MATCH_TITLE_RESULTS = "GameMatchTitleResults";
@@ -87,6 +90,9 @@ public class GuiTools
 	public static final String GAME_MATCH_HEADER_RANK = "GameMatchHeaderRank";
 	public static final String GAME_MATCH_HEADER_TOTAL = "GameMatchHeaderTotal";
 	public static final String GAME_MATCH_HEADER_ROUND = "GameMatchHeaderRound";
+	public static final String GAME_MATCH_HEADER_ROUNDS = "GameMatchHeaderRounds";	
+	public static final String GAME_MATCH_HEADER_LIMITS = "GameMatchHeaderLimits";	
+	public static final String GAME_MATCH_HEADER_POINTSPROCESS = "GameMatchHeaderPointprocess";	
 	
 	public static final String GAME_ROUND_TITLE_DESCRIPTION = "GameRoundTitleDescription";
 	public static final String GAME_ROUND_TITLE_RESULTS = "GameRoundTitleResults";
