@@ -602,6 +602,8 @@ public class Launcher
 	 * - assombrir l'image de fond quand y a des tables par dessus
 	 * - mutualisation des éléments de la GUI : tableaux, etc
 	 * - meilleure gestion de la touche echap pendant un match
+	 * - possibilité de donner des noms aux matches et aux rounds
+	 * - gérer le shrink
 	 * - problème de collisions quand on change la vitesse (surement un problème d'arrondi, ou alors un saut trop grand (en distance), voir si j'avais implémenté la maximalisation du déplacement malgré une éventuelle collision...)
 	 * - revoir le système des IA
 	 * - considérer qu'une partie peut s'arrêter à cause d'une limite de points ou de score (ex: pr frag, a un goalaverage>10)
@@ -612,6 +614,8 @@ public class Launcher
 	 * - gérer l'apparition comme une action en soit. si pas possible d'apparaître au début de la partie, faire un atterrissage ?
 	 * - bug à corriger : collision bizarre, les flammes ne peuvent pas se croiser...
 	 * - problème graphique quand on monte en résolution avec certain thèmes
+	 * - les limites sont gérées au même niveau que les points (car elles leur sont liées), ie: pr round pas dans level,mais dans match
+	 * - pour painting, possibilité de définir quelles cases peuvent être repeinte, ce qui permet de poser comme limite un %age de cases repeintes 
 	 * 
 	 */
 	
