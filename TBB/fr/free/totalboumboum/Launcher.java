@@ -592,11 +592,16 @@ public class Launcher
 	 * - correction d'un bug quand l'animation de victoire/défaite ne peut pas être activée : il ne faut pas base la fin de la boucle sur la fin de l'animation, mais sur la fin d'un délai indépendant et équivalent
 	 * 
 	 *   + alpha.40
+	 * - image de fond du menu principal
+	 * - blocage des boutons quit et match pendant le chargement du round
 	 * 
 	 * *******************************************************
 	 * *********************** A FAIRE ***********************
 	 * *******************************************************
 	 * - définir les présentations des rounds
+	 * - assombrir l'image de fond quand y a des tables par dessus
+	 * - mutualisation des éléments de la GUI : tableaux, etc
+	 * - meilleure gestion de la touche echap pendant un match
 	 * - problème de collisions quand on change la vitesse (surement un problème d'arrondi, ou alors un saut trop grand (en distance), voir si j'avais implémenté la maximalisation du déplacement malgré une éventuelle collision...)
 	 * - revoir le système des IA
 	 * - considérer qu'une partie peut s'arrêter à cause d'une limite de points ou de score (ex: pr frag, a un goalaverage>10)
@@ -606,6 +611,8 @@ public class Launcher
 	 * - problème de cohérence entre les nombres totaux de kills et de deaths (qui devraient être égaux) : on dirait que ça ne compte pas le dernier tué (qui termine le round) ?
 	 * - gérer l'apparition comme une action en soit. si pas possible d'apparaître au début de la partie, faire un atterrissage ?
 	 * - bug à corriger : collision bizarre, les flammes ne peuvent pas se croiser...
+	 * - problème graphique quand on monte en résolution avec certain thèmes
+	 * 
 	 */
 	
 	

@@ -1,6 +1,8 @@
 package fr.free.totalboumboum.gui.menus.main;
 
+import javax.swing.ImageIcon;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.SwingUtilities;
 import javax.xml.parsers.ParserConfigurationException;
 
@@ -45,6 +47,7 @@ public class MainFrame extends JFrame implements WindowListener,MenuContainer
 		// dimensions
 		setResizable(false);
 		setVisible(true);
+		//
 		pack();
 
 		final MainFrame f = this;

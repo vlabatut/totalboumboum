@@ -8,6 +8,8 @@ import java.awt.Graphics;
 import java.awt.LayoutManager;
 import java.awt.Point;
 import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
 import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -44,6 +46,7 @@ import fr.free.totalboumboum.gui.generic.SimpleMenuPanel;
 import fr.free.totalboumboum.gui.generic.SplitMenuPanel;
 import fr.free.totalboumboum.gui.menus.options.OptionsMenu;
 import fr.free.totalboumboum.gui.menus.tournament.TournamentMain;
+import fr.free.totalboumboum.tools.FileTools;
 import fr.free.totalboumboum.tools.GuiTools;
 import fr.free.totalboumboum.tools.ImageTools;
 
@@ -57,12 +60,13 @@ public class MatchDescription extends InnerDataPanel
 		{	BoxLayout layout = new BoxLayout(this,BoxLayout.PAGE_AXIS); 
 			setLayout(layout);
 		}
-		// background
-		setBackground(new Color(50,50,50));
 		// size
 		int height = SwingTools.getSize(SwingTools.HORIZONTAL_SPLIT_DATA_PANEL_HEIGHT);
 		int width = SwingTools.getSize(SwingTools.HORIZONTAL_SPLIT_DATA_PANEL_WIDTH);
 		setPreferredSize(new Dimension(width,height));
+		// background
+//		setBackground(new Color(50,50,50));
+		setOpaque(false);
 		
 		add(Box.createVerticalGlue());
 
@@ -72,7 +76,7 @@ public class MatchDescription extends InnerDataPanel
 			title.setHorizontalAlignment(SwingConstants.CENTER);
 			Font font = getConfiguration().getFont().deriveFont((float)SwingTools.getSize(SwingTools.GAME_TITLE_FONT_SIZE));
 			title.setForeground(Color.BLACK);
-			title.setBackground(new Color(255,255,255,128));
+			title.setBackground(new Color(255,255,255,200));
 			title.setOpaque(true);
 			title.setFont(font);
 			title.setAlignmentX(Component.CENTER_ALIGNMENT);
@@ -104,7 +108,7 @@ public class MatchDescription extends InnerDataPanel
 				int cols = 2+1;
 				SpringLayout layout = new SpringLayout();			
 				JPanel playersPanel = new JPanel(layout);
-				playersPanel.setBackground(new Color(255,255,255,128));
+				playersPanel.setBackground(new Color(255,255,255,200));
 				dim = new Dimension(SwingTools.getSize(SwingTools.GAME_DESCRIPTION_PANEL_WIDTH),SwingTools.getSize(SwingTools.GAME_DATA_PANEL_HEIGHT));
 				playersPanel.setPreferredSize(dim);
 				playersPanel.setMinimumSize(dim);
@@ -231,7 +235,7 @@ public class MatchDescription extends InnerDataPanel
 					{	BoxLayout layout = new BoxLayout(roundsPanel,BoxLayout.PAGE_AXIS); 
 						roundsPanel.setLayout(layout);
 					}
-					roundsPanel.setBackground(new Color(255,255,255,128));
+					roundsPanel.setBackground(new Color(255,255,255,200));
 					dim = new Dimension(SwingTools.getSize(SwingTools.GAME_DESCRIPTION_PANEL_WIDTH),SwingTools.getSize(SwingTools.GAME_DESCRIPTION_PANEL_HEIGHT));
 					roundsPanel.setPreferredSize(dim);
 					roundsPanel.setMinimumSize(dim);
@@ -320,7 +324,7 @@ public class MatchDescription extends InnerDataPanel
 					{	BoxLayout layout = new BoxLayout(pointsPanel,BoxLayout.PAGE_AXIS); 
 						pointsPanel.setLayout(layout);
 					}
-					pointsPanel.setBackground(new Color(255,255,255,128));
+					pointsPanel.setBackground(new Color(255,255,255,200));
 					dim = new Dimension(SwingTools.getSize(SwingTools.GAME_DESCRIPTION_PANEL_WIDTH),SwingTools.getSize(SwingTools.GAME_DESCRIPTION_PANEL_HEIGHT));
 					pointsPanel.setPreferredSize(dim);
 					pointsPanel.setMinimumSize(dim);
@@ -373,7 +377,7 @@ public class MatchDescription extends InnerDataPanel
 					{	BoxLayout layout = new BoxLayout(limitPanel,BoxLayout.PAGE_AXIS); 
 						limitPanel.setLayout(layout);
 					}
-					limitPanel.setBackground(new Color(255,255,255,128));
+					limitPanel.setBackground(new Color(255,255,255,200));
 					dim = new Dimension(SwingTools.getSize(SwingTools.GAME_DESCRIPTION_PANEL_WIDTH),SwingTools.getSize(SwingTools.GAME_DESCRIPTION_PANEL_HEIGHT));
 					limitPanel.setPreferredSize(dim);
 					limitPanel.setMinimumSize(dim);
@@ -438,4 +442,5 @@ public class MatchDescription extends InnerDataPanel
 	public void updateData()
 	{	// nothing to do here
 	}
+
 }
