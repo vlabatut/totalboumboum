@@ -70,6 +70,7 @@ public class FileTools
 	public static final String FOLDER_GRAPHICS = "graphics";
 	public static final String FOLDER_HEROES = "heroes";
 	public static final String FOLDER_ICONS = "icons";
+	public static final String FOLDER_IMAGES = "images";
 	public static final String FOLDER_ITEMS = "items";
 	public static final String FOLDER_INSTANCES = "instances";
 	public static final String FOLDER_LANGUAGES = "languages";
@@ -124,6 +125,9 @@ public class FileTools
 	}
 	public static String getIconsPath()
 	{	return getMiscPath()+File.separator+FOLDER_ICONS;		
+	}
+	public static String getImagesPath()
+	{	return getMiscPath()+File.separator+FOLDER_IMAGES;		
 	}
 	
 	public static String getSchemasPath()

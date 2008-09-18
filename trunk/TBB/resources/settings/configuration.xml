@@ -14,7 +14,8 @@
 	<smoothGraphics value="true" />
 		
 <!-- GUI -->	
-	<panelDimension width="750" height="600" />
+	<panelDimension width="1024" height="768" />
+<!-- 	<panelDimension width="750" height="600" />  -->
 	<font file="Anime Ace.ttf" />
 <!--	<font file="Anime Ace.ttf" />  -->
 	

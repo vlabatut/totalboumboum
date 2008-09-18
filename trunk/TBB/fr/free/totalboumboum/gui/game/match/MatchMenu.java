@@ -61,7 +61,7 @@ public class MatchMenu extends InnerMenuPanel implements MatchRenderPanel
 		BoxLayout layout = new BoxLayout(this,BoxLayout.LINE_AXIS); 
 		setLayout(layout);
 		// background
-		setBackground(Color.LIGHT_GRAY);
+		setBackground(new Color(0,0,0,128));
 		// size
 		int height = SwingTools.getSize(SwingTools.HORIZONTAL_SPLIT_MENU_PANEL_HEIGHT);
 		int width = SwingTools.getSize(SwingTools.HORIZONTAL_SPLIT_MENU_PANEL_WIDTH);

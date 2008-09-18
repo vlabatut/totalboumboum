@@ -2,27 +2,38 @@ package fr.free.totalboumboum.gui.menus.main;
 
 import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.Graphics;
+import java.awt.Image;
 import java.awt.event.ActionEvent;
+import java.awt.image.BufferedImage;
+import java.io.File;
 import java.io.IOException;
 
 import javax.swing.Box;
 import javax.swing.BoxLayout;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
+import javax.swing.JLabel;
 import javax.xml.parsers.ParserConfigurationException;
 
 import org.xml.sax.SAXException;
 
+import fr.free.totalboumboum.data.profile.Portraits;
 import fr.free.totalboumboum.gui.SwingTools;
 import fr.free.totalboumboum.gui.generic.MenuContainer;
 import fr.free.totalboumboum.gui.generic.MenuPanel;
 import fr.free.totalboumboum.gui.generic.SimpleMenuPanel;
 import fr.free.totalboumboum.gui.menus.options.OptionsMenu;
 import fr.free.totalboumboum.gui.menus.tournament.TournamentMain;
+import fr.free.totalboumboum.tools.FileTools;
 import fr.free.totalboumboum.tools.GuiTools;
+import fr.free.totalboumboum.tools.ImageTools;
 
 public class MainMenu extends SimpleMenuPanel
 {	private static final long serialVersionUID = 1L;
 	
+	private BufferedImage image;
+
 	private MenuPanel tournamentMainPanel;
 	private MenuPanel optionsMenuPanel;
 	
@@ -42,8 +53,13 @@ public class MainMenu extends SimpleMenuPanel
 		// size
 		setPreferredSize(getConfiguration().getPanelDimension());
 		// background
-		setBackground(Color.GRAY);
-		
+//		setBackground(Color.GRAY);
+		String imagePath = FileTools.getImagesPath()+File.separator+"background.jpg";
+		image = ImageTools.loadImage(imagePath,null);
+		double zoomY = getPreferredSize().getHeight()/(double)image.getHeight();
+		double zoomX = getPreferredSize().getWidth()/(double)image.getWidth();
+		double zoom = Math.max(zoomX,zoomY);
+		image = ImageTools.resize(image,zoom,true);
 		// panels
 		tournamentMainPanel = new TournamentMain(getContainer(),this);
 		optionsMenuPanel = new OptionsMenu(getContainer(),this);
@@ -60,6 +76,11 @@ public class MainMenu extends SimpleMenuPanel
 		buttonTournament = SwingTools.createPrincipalVerticalMenuButton(GuiTools.MAIN_MENU_BUTTON_TOURNAMENT,this,getConfiguration());
 		buttonQuickMatch = SwingTools.createPrincipalVerticalMenuButton(GuiTools.MAIN_MENU_BUTTON_QUICKMATCH,this,getConfiguration());
 		add(Box.createVerticalGlue());		
+	}
+	
+	@Override
+	public void paintComponent(Graphics g)
+	{	g.drawImage(image, 0, 0, null);
 	}
 	
 	public void actionPerformed(ActionEvent e)

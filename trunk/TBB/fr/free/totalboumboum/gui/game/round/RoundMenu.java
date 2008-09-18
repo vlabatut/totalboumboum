@@ -131,6 +131,8 @@ public class RoundMenu extends InnerMenuPanel implements RoundRenderPanel
 	    }
 		else if(e.getActionCommand().equals(GuiTools.ROUND_BUTTON_PLAY))
 		{	buttonPlay.setEnabled(false);
+			buttonQuit.setEnabled(false);
+			buttonMatch.setEnabled(false);
 			Round round = getConfiguration().getTournament().getCurrentMatch().getCurrentRound();
 			int limit = round.getProfiles().size()+3;
 			loadProgressBar = new JProgressBar(0,limit);
@@ -211,6 +213,8 @@ public class RoundMenu extends InnerMenuPanel implements RoundRenderPanel
 				remove(1);
 				add(Box.createHorizontalGlue(),1);
 				//
+				buttonMatch.setEnabled(true);
+				buttonQuit.setEnabled(true);
 				roundResults.updateData();
 				buttonResults.doClick();
 			}
