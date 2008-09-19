@@ -57,6 +57,12 @@
 	
 	<third-permissions>
 <!--  	appear --> 
+		<permission frame="true" strength="1" >
+			<action name="appear" direction="all" contact="all"
+				tilePosition="all" orientation="all" actor="all" target="all" />
+			<actor-restrictions />
+			<target-restrictions />
+		</permission>
 <!--  	consume --> 
 		<permission frame="true" strength="1" >
 			<action name="consume" direction="all" contact="all"

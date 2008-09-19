@@ -594,6 +594,7 @@ public class Launcher
 	 *   + alpha.40
 	 * - image de fond du menu principal
 	 * - blocage des boutons quit et match pendant le chargement du round
+	 * - bug corrigé : collision bizarre, les flammes ne peuvent pas se croiser...
 	 * 
 	 * *******************************************************
 	 * *********************** A FAIRE ***********************
@@ -612,7 +613,6 @@ public class Launcher
 	 * - à la fin du round, faire apparaitre les résultats par transparence...ça serait la classe ça !
 	 * - problème de cohérence entre les nombres totaux de kills et de deaths (qui devraient être égaux) : on dirait que ça ne compte pas le dernier tué (qui termine le round) ?
 	 * - gérer l'apparition comme une action en soit. si pas possible d'apparaître au début de la partie, faire un atterrissage ?
-	 * - bug à corriger : collision bizarre, les flammes ne peuvent pas se croiser...
 	 * - problème graphique quand on monte en résolution avec certain thèmes
 	 * - les limites sont gérées au même niveau que les points (car elles leur sont liées), ie: pr round pas dans level,mais dans match
 	 * - pour painting, possibilité de définir quelles cases peuvent être repeinte, ce qui permet de poser comme limite un %age de cases repeintes 
