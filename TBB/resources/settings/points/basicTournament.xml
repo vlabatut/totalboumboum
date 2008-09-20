@@ -3,25 +3,17 @@
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
 	xsi:noNamespaceSchemaLocation="..\..\schemas\point.xsd">
 	
-	<discretize exaequoShare="true" >
-		<rankings >
-			<scores type="time" />
+	<discretize exaequoShare="false">
+		<rankings>
+			<points />
 			<scores type="kills"/>
 			<scores type="bombs"/>
 			<scores type="items"/>
 		</rankings>
 		<thresholds>
 			<threshold value="1" />
-			<threshold value="2" />
-			<threshold value="3" />
-			<threshold value="4" />
-			<threshold value="5" />
 		</thresholds>
 		<values>
-			<value value="12" />
-			<value value="8" />
-			<value value="5" />
-			<value value="2" />
 			<value value="1" />
 			<value value="0" />
 		</values>

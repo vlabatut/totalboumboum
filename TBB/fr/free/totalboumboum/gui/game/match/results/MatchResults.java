@@ -183,6 +183,8 @@ public class MatchResults extends InnerDataPanel
 						lbl.setOpaque(true);
 						Dimension dimension = new Dimension(Integer.MAX_VALUE,SwingTools.getSize(SwingTools.GAME_RESULTS_LABEL_LINE_HEIGHT));
 						lbl.setMaximumSize(dimension);
+						dimension = new Dimension(SwingTools.getSize(SwingTools.GAME_RESULTS_LABEL_HEADER_HEIGHT),SwingTools.getSize(SwingTools.GAME_RESULTS_LABEL_LINE_HEIGHT));
+						lbl.setMinimumSize(dimension);
 						resultsPanel.add(lbl);
 					}
 					// scores/total/points
@@ -290,6 +292,7 @@ public class MatchResults extends InnerDataPanel
 			// name
 			{	JLabel nameLabel = (JLabel)resultsPanel.getComponent(k++);
 				nameLabel.setText(pp.getPlayer());
+				nameLabel.setToolTipText(pp.getPlayer());
 				Color bg = new Color(clr.getRed(),clr.getGreen(),clr.getBlue(),120);
 				nameLabel.setBackground(bg);
 			}

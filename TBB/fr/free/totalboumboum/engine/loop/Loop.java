@@ -422,9 +422,9 @@ loopOver = true;
 	private void update()
 	{	if(!isPaused)
 		{	// celebration ?
-			if(celebrationDelay>=0)
+			if(celebrationDelay>0)
 			{	celebrationDelay = celebrationDelay - (getConfiguration().getMilliPeriod()*getConfiguration().getSpeedCoeff());
-				if(celebrationDelay<0)
+				if(celebrationDelay<=0)
 					setOver(true);
 			}		
 			// normal update (level and AI)
