@@ -258,10 +258,25 @@ public class Loop implements Runnable
 	 */ 
 	private static int MAX_FRAME_SKIPS = 5;
 	/** used to stop the animation thread */
-	private boolean isLooping = false;
 	private boolean isPaused = false;
 	private Lock loopLock = new ReentrantLock();
+	private boolean isCanceled = false;
+/*
+	private boolean isLooping = false;
 	
+	public void setLooping(boolean isLooping)
+	{	loopLock.lock();
+		this.isLooping = isLooping;
+		loopLock.unlock();
+	}
+	public boolean isLooping()
+	{	boolean result;
+		loopLock.lock();
+		result = isLooping;
+		loopLock.unlock();
+		return result;
+	}
+*/
 	public void setPause(boolean isPaused)
 	{	loopLock.lock();
 		this.isPaused = isPaused;
@@ -275,15 +290,15 @@ public class Loop implements Runnable
 		return result;
 	}
 
-	public void setLooping(boolean isRunning)
+	public void setCanceled(boolean isCanceled)
 	{	loopLock.lock();
-		this.isLooping = isRunning;
+		this.isCanceled = isCanceled;
 		loopLock.unlock();
 	}
-	public boolean isLooping()
+	public boolean isCanceled()
 	{	boolean result;
 		loopLock.lock();
-		result = isLooping;
+		result = isCanceled;
 		loopLock.unlock();
 		return result;
 	}
@@ -341,10 +356,9 @@ public class Loop implements Runnable
 		beforeTime = System.nanoTime();
 		totalTime = 0;
 
-		setLooping(true);
-
+//		setLooping(true);
 		// The frames of the animation are drawn inside the while loop
-		while(isLooping() && !isOver())
+		while(/*isLooping() && */!isOver())
 		{	update();
 			getLevel().draw(graphics);
 			panel.paintScreen();
@@ -395,6 +409,10 @@ playerOut(players.get(1));
 playerOut(players.get(2));
 loopOver = true;
 */		
+			if(isCanceled())
+			{	round.closeGame();
+				setCanceled(false);
+			}
 		}
 		round.loopOver();
 		panel.loopOver();
@@ -403,13 +421,14 @@ loopOver = true;
 
 	private void update()
 	{	if(!isPaused)
-		{	if(celebrationDelay>=0)
+		{	// celebration ?
+			if(celebrationDelay>=0)
 			{	celebrationDelay = celebrationDelay - (getConfiguration().getMilliPeriod()*getConfiguration().getSpeedCoeff());
 				if(celebrationDelay<0)
-					loopOver = true;
+					setOver(true);
 			}		
-		
-		getLevel().update();
+			// normal update (level and AI)
+			getLevel().update();
 			Iterator<Player> i = players.iterator();
 			while(i.hasNext())
 			{	Player temp = i.next();
@@ -424,11 +443,16 @@ loopOver = true;
 	/////////////////////////////////////////////////////////////////
 	// LOOP END		/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	private boolean loopOver = false;
+	private boolean isOver = false;
 	
-	private boolean isOver()
-	{	return loopOver;	
+	public void setOver(boolean isOver)
+	{	this.isOver = isOver;
+		
 	}
+	public boolean isOver()
+	{	return isOver;
+	}
+	
 	public void playerOut(Player player)
 	{	int index = players.indexOf(player);
 		round.playerOut(index);

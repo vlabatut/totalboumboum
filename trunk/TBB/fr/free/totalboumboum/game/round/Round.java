@@ -134,11 +134,7 @@ public class Round
 		{	remainingPlayers --;
 			playersInGame.set(index,new Boolean(false));
 			if(remainingPlayers<2 /*&& getPlayMode()==PlayMode.SURVIVAL*/)
-			{	roundOver = true;
-				stats.finish(loop.getTotalTime());
-				stats.computePoints(getPointProcessor());
-				celebrate();
-			}
+				closeGame();
 		}
 	}
 	public void updateTime(long time)
@@ -146,14 +142,16 @@ public class Round
 		{	stats.updateTime(time);			
 //			if(getTimeLimit()>0 && time>=getTimeLimit()/getConfiguration().getSpeedCoeff())
 			if(getTimeLimit()>0 && time>=getTimeLimit())
-			{	roundOver = true;
-				stats.finish(loop.getTotalTime());
-				stats.computePoints(getPointProcessor());
-				celebrate();
-			}
+				closeGame();
 			else
 				stats.computePoints(getPointProcessor());
 		}
+	}
+	public void closeGame()
+	{	roundOver = true;
+		stats.finish(loop.getTotalTime());
+		stats.computePoints(getPointProcessor());
+		celebrate();		
 	}
 	private void celebrate()
 	{	loop.initCelebrationDelay();

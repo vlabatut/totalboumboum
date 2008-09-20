@@ -35,9 +35,10 @@ public class SystemControl implements KeyListener
 			// termination keys
 			// allow a convenient exit from the full screen configuration
 			if ((keyCode == KeyEvent.VK_ESCAPE)
-					|| (keyCode == KeyEvent.VK_END)
-					|| ((keyCode == KeyEvent.VK_C) && e.isControlDown()))
-				loop.setLooping(false);
+//					|| (keyCode == KeyEvent.VK_END)
+//					|| ((keyCode == KeyEvent.VK_C) && e.isControlDown())
+				)
+				loop.setCanceled(true);
 			
 			// faire renaitre le bonhomme
 			else if ((keyCode == KeyEvent.VK_1))
@@ -61,13 +62,13 @@ public class SystemControl implements KeyListener
 			else if ((keyCode == KeyEvent.VK_F2))
 			{	loop.setShowTilesPositions((loop.getShowTilesPositions()+1)%3);
 			}
-			// debug : speed coeff
-			else if ((keyCode == KeyEvent.VK_F3))
-			{	loop.setShowSpeed(!loop.getShowSpeed());
-			}
 			// debug : sprites positions
-			else if ((keyCode == KeyEvent.VK_F4))
+			else if ((keyCode == KeyEvent.VK_F3))
 			{	loop.setShowSpritesPositions((loop.getShowSpritesPositions()+1)%3);
+			}
+			// debug : speed coeff
+			else if ((keyCode == KeyEvent.VK_F4))
+			{	loop.setShowSpeed(!loop.getShowSpeed());
 			}
 			// debug : time
 			else if ((keyCode == KeyEvent.VK_F5))
