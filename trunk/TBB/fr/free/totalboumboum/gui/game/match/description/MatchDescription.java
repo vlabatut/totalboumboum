@@ -164,6 +164,8 @@ public class MatchDescription extends InnerDataPanel
 							lbl.setOpaque(true);
 							Dimension dimension = new Dimension(Integer.MAX_VALUE,SwingTools.getSize(SwingTools.GAME_RESULTS_LABEL_LINE_HEIGHT));
 							lbl.setMaximumSize(dimension);
+							dimension = new Dimension(SwingTools.getSize(SwingTools.GAME_RESULTS_LABEL_HEADER_HEIGHT),SwingTools.getSize(SwingTools.GAME_RESULTS_LABEL_LINE_HEIGHT));
+							lbl.setMinimumSize(dimension);
 							playersPanel.add(lbl);
 						}
 						// rank
@@ -201,6 +203,7 @@ public class MatchDescription extends InnerDataPanel
 					// name
 					{	JLabel nameLabel = (JLabel)playersPanel.getComponent(k++);
 						nameLabel.setText(profile.getName());
+						nameLabel.setToolTipText(profile.getName());
 						Color bg = new Color(clr.getRed(),clr.getGreen(),clr.getBlue(),120);
 						nameLabel.setBackground(bg);
 					}

@@ -21,7 +21,7 @@ public class MatchSplitPanel extends SplitMenuPanel
 	{	super(container,parent,BorderLayout.PAGE_END);
 		// size
 		setPreferredSize(getConfiguration().getPanelDimension());
-		try 
+/*		try 
 		{	String imagePath = FileTools.getImagesPath()+File.separator+"background.jpg";
 			image = ImageTools.loadImage(imagePath,null);
 			double zoomY = getPreferredSize().getHeight()/(double)image.getHeight();
@@ -31,14 +31,14 @@ public class MatchSplitPanel extends SplitMenuPanel
 		}
 		catch (IOException e)
 		{	e.printStackTrace();
-		}
+		}*/
 		// panels
 		setMenuPart(new MatchMenu(this,parent));
 	}
 
-	
+/*	
 	@Override
 	public void paintComponent(Graphics g)
 	{	g.drawImage(image, 0, 0, null);
-	}
+	}*/
 }

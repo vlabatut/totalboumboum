@@ -597,13 +597,15 @@ public class Launcher
 	 * - bug corrigé : collision bizarre, les flammes ne peuvent pas se croiser...
 	 * - changement du système de touches de controle du jeu (debug) : inversion de F3 et F4 et ESC pour arrêter prématurément une partie
 	 * - pb de temps NEGATIF quand j'arrête la partie avec esc, plus bouton encore actif
+	 * - pb d'affichage des résultats quand trop de rounds : taille minimale du nom fixée à la taille de l'icone, et tooltip avec le nom complet
+	 * - tout petit pb de synchronisation de l'animation de fin de partie avec la fin effective du panel d'animation
 	 * 
 	 * *******************************************************
 	 * *********************** A FAIRE ***********************
 	 * *******************************************************
-	 * - au deuxième match, ça se met à ralentir terrible >> c en fait indépendant du match, on dirait que c'est lié au chargement d'images de fond ??
 	 * - définir les présentations des rounds
 	 * - assombrir l'image de fond quand y a des tables par dessus
+	 * - la taille minimale du nom dans les résultats est la largeur de l'icone
 	 * - mutualisation des éléments de la GUI : tableaux, etc
 	 * - possibilité de donner des noms aux matches et aux rounds
 	 * - gérer le shrink
@@ -613,15 +615,25 @@ public class Launcher
 	 * - redescendre les stats dans loop, et gestion de fin de partie et tout ce qui est en fait directement lié au moteur
 	 * - en fait tout le process de points dans les stats est à déplacer dans les rounds/matches, etc 
 	 * - à la fin du round, faire apparaitre les résultats par transparence...ça serait la classe ça !
-	 * - problème de cohérence entre les nombres totaux de kills et de deaths (qui devraient être égaux) : on dirait que ça ne compte pas le dernier tué (qui termine le round) ?
+	 * - problème de cohérence entre les nombres totaux de kills et de deaths (qui devraient être égaux) : on dirait que ça ne compte pas le dernier tué (qui termine le round), on dirait que ça ne compte pas toujours les suicides comme des kills (juste le côté death)
 	 * - gérer l'apparition comme une action en soit. si pas possible d'apparaître au début de la partie, faire un atterrissage ?
 	 * - problème graphique quand on monte en résolution avec certain thèmes
 	 * - les limites sont gérées au même niveau que les points (car elles leur sont liées), ie: pr round pas dans level,mais dans match
 	 * - pb de dimension de l'image de fond en fonction de la résolution... (zones pas peintes)
 	 * - pour painting, possibilité de définir quelles cases peuvent être repeinte, ce qui permet de poser comme limite un %age de cases repeintes
-	 * 
+	 * - results panel : quand il y a trop de rounds dans un match pour que ça rentre à l'écran, ne pas tout afficher
 	 */
 	
 	
+	 /* bug qui fait ralentir terriblement le jeu : 
+	  * 	- quand une image de fond de menu est chargée, ça occupe bcp de mémoire
+	  * 	- du coup, au deuxième match (c indépendant du nbre de rounds), la mémoire est presque occupée à fond
+	  * 	- du coup, le garbage collector tente de libérer de la mémoire, et il prend 100% de CPU s'il peut
+	  * 	- le jeu ralentit et est injouable.
+	  * question : pq ça ne fait rien pendant les rounds alors ?
+	  * 	- p-ê que d'importantes ressources ne sont pas libérées quand on enchaine un autre match ?
+	  * 	- ça doit être des ressources relatives au match précédent, mais ça ne peut pas être par rapport au round, qui a été cleané (à vérifier).
+	  * 	- p-e que la demande de clean doit venir d'en haut (clean à la demande)  
+	  */
 
 }

@@ -34,6 +34,7 @@
 	</profiles>
 
 <!-- TOURNAMENT -->	
-	<tournament value="tournamentTest" />
+<!-- 	<tournament value="tournamentTest" /> -->
+	<tournament value="tournamentLong" />
 	
 </configuration>
