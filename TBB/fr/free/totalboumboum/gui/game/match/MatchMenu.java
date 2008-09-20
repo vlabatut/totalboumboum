@@ -101,9 +101,13 @@ public class MatchMenu extends InnerMenuPanel implements MatchRenderPanel
 		if(e.getActionCommand().equals(GuiTools.MATCH_BUTTON_QUIT))
 		{	getFrame().setMainMenuPanel();
 	    }
-		else if(e.getActionCommand().equals(GuiTools.MATCH_BUTTON_CURRENT_TOURNAMENT)
-				|| e.getActionCommand().equals(GuiTools.MATCH_BUTTON_FINISH))
+		else if(e.getActionCommand().equals(GuiTools.MATCH_BUTTON_CURRENT_TOURNAMENT))				
 		{	replaceWith(parent);
+	    }
+		else if(e.getActionCommand().equals(GuiTools.MATCH_BUTTON_FINISH))
+		{	Match match = getConfiguration().getTournament().getCurrentMatch();
+			match.finish();
+			replaceWith(parent);
 	    }
 		else if(e.getActionCommand().equals(GuiTools.MATCH_BUTTON_DESCRIPTION))
 		{	container.setDataPart(matchDescription);

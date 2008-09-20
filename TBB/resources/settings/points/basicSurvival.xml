@@ -7,8 +7,8 @@
 		<rankings >
 			<scores type="time" />
 			<scores type="kills"/>
-			<scores type="bombs"/>
 			<scores type="items"/>
+			<scores type="bombs"/>
 		</rankings>
 		<thresholds>
 			<threshold value="1" />
