@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<tournament
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+	xsi:noNamespaceSchemaLocation="..\..\..\schemas\tournament.xsd">
+	
+	<general name="Tournament-séquence loooong"/>
+
+	<sequence>
+		<matches>
+		
+			<match>
+				<location local="false" name="matchLong" />
+				<points local="false" name="basicMatch" />
+			</match>
+			
+			<match>
+				<location local="false" name="matchLong" />
+				<points local="false" name="basicMatch" />
+			</match>
+			
+			<match>
+				<location local="false" name="matchLong" />
+				<points local="false" name="basicMatch" />
+			</match>
+			
+		</matches>
+		
+		<points local="false" name="basicTournament" />
+	</sequence>
+		
+		
+</tournament>
