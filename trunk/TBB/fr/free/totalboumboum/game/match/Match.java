@@ -168,6 +168,25 @@ public class Match
 		}
 	}
 	
+	public void finish()
+	{	// rounds
+		currentRound = null;
+		iterator = null;
+		levels.clear();
+		rounds.clear();
+		// misc
+		configuration = null;
+		matchLimit = null;
+		panel = null;
+		pointProcessor = null;
+		profiles.clear();
+		stats = null;
+		tournament = null;
+		// garbage collect
+		Runtime rt = Runtime.getRuntime();
+		rt.gc(); 
+	}
+	
 	/////////////////////////////////////////////////////////////////
 	// POINTS			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////

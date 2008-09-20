@@ -57,13 +57,19 @@ public class Round
 	}
 	
 	public void finish()
-	{	// misc
+	{	// loop
+		loop.finish();
+		loop = null;
+		// misc
 		configuration = null;
 		levelDescription = null;
 		match = null;
 		panel = null;
 		playersInGame.clear();
 		stats = null;
+		// garbage collect
+		Runtime rt = Runtime.getRuntime();
+		rt.gc(); 
 	}
 
 	/////////////////////////////////////////////////////////////////
@@ -78,8 +84,6 @@ public class Round
 	public void loopOver()
 	{	match.roundOver();
 		panel.roundOver();
-		// loop
-		loop = null;
 	}
 	
 	/////////////////////////////////////////////////////////////////

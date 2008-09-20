@@ -599,6 +599,7 @@ public class Launcher
 	 * - pb de temps NEGATIF quand j'arrête la partie avec esc, plus bouton encore actif
 	 * - pb d'affichage des résultats quand trop de rounds : taille minimale du nom fixée à la taille de l'icone, et tooltip avec le nom complet
 	 * - tout petit pb de synchronisation de l'animation de fin de partie avec la fin effective du panel d'animation
+	 * - correction du bug qui faisait activer le GC et ramer le jeu au cours du deuxième match.
 	 * 
 	 * *******************************************************
 	 * *********************** A FAIRE ***********************
@@ -623,17 +624,4 @@ public class Launcher
 	 * - pour painting, possibilité de définir quelles cases peuvent être repeinte, ce qui permet de poser comme limite un %age de cases repeintes
 	 * - results panel : quand il y a trop de rounds dans un match pour que ça rentre à l'écran, ne pas tout afficher
 	 */
-	
-	
-	 /* bug qui fait ralentir terriblement le jeu : 
-	  * 	- quand une image de fond de menu est chargée, ça occupe bcp de mémoire
-	  * 	- du coup, au deuxième match (c indépendant du nbre de rounds), la mémoire est presque occupée à fond
-	  * 	- du coup, le garbage collector tente de libérer de la mémoire, et il prend 100% de CPU s'il peut
-	  * 	- le jeu ralentit et est injouable.
-	  * question : pq ça ne fait rien pendant les rounds alors ?
-	  * 	- p-ê que d'importantes ressources ne sont pas libérées quand on enchaine un autre match ?
-	  * 	- ça doit être des ressources relatives au match précédent, mais ça ne peut pas être par rapport au round, qui a été cleané (à vérifier).
-	  * 	- p-e que la demande de clean doit venir d'en haut (clean à la demande)  
-	  */
-
 }

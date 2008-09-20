@@ -414,9 +414,8 @@ loopOver = true;
 				setCanceled(false);
 			}
 		}
-		round.loopOver();
 		panel.loopOver();
-		finish();
+		round.loopOver();
 	}
 
 	private void update()
