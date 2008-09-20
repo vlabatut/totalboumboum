@@ -445,7 +445,7 @@ public class HeroEventManager extends EventManager
 		}
 		else
 		{
-			//NOTE programmer l'action quand ce sera possible
+			//NOTE programmer l'action (exécution retardée) quand ce sera possible
 		}
 		
 		

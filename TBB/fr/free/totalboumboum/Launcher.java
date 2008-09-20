@@ -595,27 +595,30 @@ public class Launcher
 	 * - image de fond du menu principal
 	 * - blocage des boutons quit et match pendant le chargement du round
 	 * - bug corrigé : collision bizarre, les flammes ne peuvent pas se croiser...
+	 * - changement du système de touches de controle du jeu (debug) : inversion de F3 et F4 et ESC pour arrêter prématurément une partie
+	 * - pb de temps NEGATIF quand j'arrête la partie avec esc, plus bouton encore actif
 	 * 
 	 * *******************************************************
 	 * *********************** A FAIRE ***********************
 	 * *******************************************************
+	 * - au deuxième match, ça se met à ralentir terrible >> c en fait indépendant du match, on dirait que c'est lié au chargement d'images de fond ??
 	 * - définir les présentations des rounds
 	 * - assombrir l'image de fond quand y a des tables par dessus
 	 * - mutualisation des éléments de la GUI : tableaux, etc
-	 * - meilleure gestion de la touche echap pendant un match
 	 * - possibilité de donner des noms aux matches et aux rounds
 	 * - gérer le shrink
 	 * - problème de collisions quand on change la vitesse (surement un problème d'arrondi, ou alors un saut trop grand (en distance), voir si j'avais implémenté la maximalisation du déplacement malgré une éventuelle collision...)
 	 * - revoir le système des IA
 	 * - considérer qu'une partie peut s'arrêter à cause d'une limite de points ou de score (ex: pr frag, a un goalaverage>10)
-	 * - redescendre les stats dans loop, et gestion de fin de partie, puis synchroniser les stats dans round
-	 * - pb de temps NEGATIF quand j'arrête la partie avec esc, plus bouton encore actif
+	 * - redescendre les stats dans loop, et gestion de fin de partie et tout ce qui est en fait directement lié au moteur
+	 * - en fait tout le process de points dans les stats est à déplacer dans les rounds/matches, etc 
 	 * - à la fin du round, faire apparaitre les résultats par transparence...ça serait la classe ça !
 	 * - problème de cohérence entre les nombres totaux de kills et de deaths (qui devraient être égaux) : on dirait que ça ne compte pas le dernier tué (qui termine le round) ?
 	 * - gérer l'apparition comme une action en soit. si pas possible d'apparaître au début de la partie, faire un atterrissage ?
 	 * - problème graphique quand on monte en résolution avec certain thèmes
 	 * - les limites sont gérées au même niveau que les points (car elles leur sont liées), ie: pr round pas dans level,mais dans match
-	 * - pour painting, possibilité de définir quelles cases peuvent être repeinte, ce qui permet de poser comme limite un %age de cases repeintes 
+	 * - pb de dimension de l'image de fond en fonction de la résolution... (zones pas peintes)
+	 * - pour painting, possibilité de définir quelles cases peuvent être repeinte, ce qui permet de poser comme limite un %age de cases repeintes
 	 * 
 	 */
 	
