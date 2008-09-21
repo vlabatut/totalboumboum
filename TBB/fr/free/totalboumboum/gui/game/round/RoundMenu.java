@@ -65,11 +65,14 @@ public class RoundMenu extends InnerMenuPanel implements RoundRenderPanel
 	
 	public RoundMenu(SplitMenuPanel container, MenuPanel parent)
 	{	super(container,parent);
+	
 		// layout
 		BoxLayout layout = new BoxLayout(this,BoxLayout.LINE_AXIS); 
 		setLayout(layout);
+		
 		// background
-		setBackground(Color.LIGHT_GRAY);
+		setBackground(GuiTools.COLOR_COMMON_BACKGROUND);
+		
 		// size
 		int height = GuiTools.getSize(GuiTools.HORIZONTAL_SPLIT_MENU_PANEL_HEIGHT);
 		int width = GuiTools.getSize(GuiTools.HORIZONTAL_SPLIT_MENU_PANEL_WIDTH);
@@ -90,6 +93,7 @@ public class RoundMenu extends InnerMenuPanel implements RoundRenderPanel
 	    group.add(buttonStatistics);
 		add(Box.createRigidArea(new Dimension(GuiTools.getSize(GuiTools.MENU_HORIZONTAL_BUTTON_SPACE),0)));
 		buttonPlay = GuiTools.createHorizontalMenuButton(GuiTools.ROUND_BUTTON_PLAY,this,getConfiguration());
+		
 		// panels
 		roundDescription = null;
 		roundDescription = new RoundDescription(container);
@@ -97,10 +101,11 @@ public class RoundMenu extends InnerMenuPanel implements RoundRenderPanel
 		dataPart = roundDescription;
 		roundResults = new RoundResults(container);
 		roundStatistics = new RoundStatistics(container);		
-//		round.init();
+		
 		// round
 		Round round = getConfiguration().getCurrentRound();
 		round.setPanel(this);
+//		round.init();
 	}
 	
 	public void actionPerformed(ActionEvent e)
