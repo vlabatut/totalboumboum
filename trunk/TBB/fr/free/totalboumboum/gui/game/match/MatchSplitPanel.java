@@ -20,14 +20,17 @@ public class MatchSplitPanel extends SplitMenuPanel
 
 	public MatchSplitPanel(MenuContainer container, MenuPanel parent)
 	{	super(container,parent,BorderLayout.PAGE_END);
+	
 		// size
 		setPreferredSize(getConfiguration().getPanelDimension());
+		
 		// background
 		image = getConfiguration().getBackground();
 		float[] scales = { 0.5f, 0.5f, 0.5f, 1f };
 		float[] offsets = new float[4];
 		RescaleOp rop = new RescaleOp(scales, offsets, null);
 	    image = rop.filter(image, null);
+	    
 		// panels
 		setMenuPart(new MatchMenu(this,parent));
 	}

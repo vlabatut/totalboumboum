@@ -7,6 +7,7 @@ import javax.swing.Box;
 import javax.swing.BoxLayout;
 import javax.swing.JLabel;
 
+import fr.free.totalboumboum.gui.generic.EntitledDataPanel;
 import fr.free.totalboumboum.gui.generic.InnerDataPanel;
 import fr.free.totalboumboum.gui.generic.MenuContainer;
 import fr.free.totalboumboum.gui.generic.MenuPanel;
@@ -16,20 +17,17 @@ import fr.free.totalboumboum.gui.menus.options.OptionsMenu;
 import fr.free.totalboumboum.gui.menus.tournament.TournamentMain;
 import fr.free.totalboumboum.gui.tools.GuiTools;
 
-public class RoundStatistics extends InnerDataPanel
+public class RoundStatistics extends EntitledDataPanel
 {	
 	private static final long serialVersionUID = 1L;
 
 	public RoundStatistics(SplitMenuPanel container)
 	{	super(container);
-		// background
-		setBackground(Color.YELLOW);		
-		// size
-		int height = GuiTools.getSize(GuiTools.HORIZONTAL_SPLIT_DATA_PANEL_HEIGHT);
-		int width = GuiTools.getSize(GuiTools.HORIZONTAL_SPLIT_DATA_PANEL_WIDTH);
-		setPreferredSize(new Dimension(width,height));
-		//
-		add(new JLabel("Round Statistics"));
+
+		// title
+		String txt = getConfiguration().getLanguage().getText(GuiTools.GAME_ROUND_TITLE_STATISTICS);
+		setTitle(txt);
+	
 	}
 
 	@Override

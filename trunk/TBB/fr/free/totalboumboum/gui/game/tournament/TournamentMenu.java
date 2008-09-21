@@ -54,15 +54,18 @@ public class TournamentMenu extends InnerMenuPanel implements TournamentRenderPa
 	
 	public TournamentMenu(SplitMenuPanel container, MenuPanel parent) throws IllegalArgumentException, SecurityException, ParserConfigurationException, SAXException, IOException, IllegalAccessException, NoSuchFieldException
 	{	super(container,parent);
+	
 		// layout
 		BoxLayout layout = new BoxLayout(this,BoxLayout.LINE_AXIS); 
 		setLayout(layout);
+		
+		// background
+		setBackground(GuiTools.COLOR_COMMON_BACKGROUND);
+		
 		// size
 		int height = GuiTools.getSize(GuiTools.HORIZONTAL_SPLIT_MENU_PANEL_HEIGHT);
 		int width = GuiTools.getSize(GuiTools.HORIZONTAL_SPLIT_MENU_PANEL_WIDTH);
 		setPreferredSize(new Dimension(width,height));
-		// background
-		setBackground(Color.LIGHT_GRAY);
 		
 		// buttons
 		buttonQuit = GuiTools.createHorizontalMenuButton(GuiTools.TOURNAMENT_BUTTON_QUIT,this,getConfiguration());
