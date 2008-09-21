@@ -12,6 +12,7 @@ import org.jdom.Attribute;
 import org.jdom.Element;
 import org.xml.sax.SAXException;
 
+import fr.free.totalboumboum.gui.tools.GuiFileTools;
 import fr.free.totalboumboum.tools.FileTools;
 import fr.free.totalboumboum.tools.XmlTools;
 
@@ -19,7 +20,7 @@ public class LanguageLoader
 {	
 	public static Language loadLanguage(String name) throws ParserConfigurationException, SAXException, IOException
 	{	Language result = new Language();
-		String individualFolder = FileTools.getLanguagesPath();
+		String individualFolder = GuiFileTools.getLanguagesPath();
 		File dataFile = new File(individualFolder+File.separator+name+FileTools.EXTENSION_DATA);
 		String schemaFolder = FileTools.getSchemasPath();
 		File schemaFile = new File(schemaFolder+File.separator+FileTools.FILE_LANGUAGE+FileTools.EXTENSION_SCHEMA);
