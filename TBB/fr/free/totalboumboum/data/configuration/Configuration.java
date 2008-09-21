@@ -10,16 +10,12 @@ import javax.xml.parsers.ParserConfigurationException;
 
 import org.xml.sax.SAXException;
 
-import fr.free.totalboumboum.data.language.Language;
-import fr.free.totalboumboum.data.language.LanguageLoader;
 import fr.free.totalboumboum.game.tournament.AbstractTournament;
 
 public class Configuration
 {	
 	public Configuration() throws ParserConfigurationException, SAXException, IOException
-	{	// language
-		setLanguage(LanguageLoader.loadLanguage("english"));
-		// engine
+	{	// engine
 		setFps(100);
 		setSpeedCoeff(1);
 		// display
@@ -28,18 +24,6 @@ public class Configuration
 		// panel
 		setPanelDimension(750,600);
 		// profiles
-	}
-	
-	/////////////////////////////////////////////////////////////////
-	// LANGUAGE				/////////////////////////////////////////////
-	/////////////////////////////////////////////////////////////////
-	private Language language;
-		
-	public void setLanguage(Language language)
-	{	this.language = language;	
-	}
-	public Language getLanguage()
-	{	return language;	
 	}
 	
 	/////////////////////////////////////////////////////////////////
