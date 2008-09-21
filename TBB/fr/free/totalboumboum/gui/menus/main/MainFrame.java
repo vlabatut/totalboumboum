@@ -12,9 +12,12 @@ import fr.free.totalboumboum.data.configuration.Configuration;
 import fr.free.totalboumboum.data.configuration.ConfigurationLoader;
 import fr.free.totalboumboum.data.configuration.ConfigurationSaver;
 import fr.free.totalboumboum.data.configuration.GameConstants;
+import fr.free.totalboumboum.gui.data.configuration.GuiConfiguration;
+import fr.free.totalboumboum.gui.data.configuration.GuiConfigurationLoader;
 import fr.free.totalboumboum.gui.generic.MenuContainer;
 import fr.free.totalboumboum.gui.generic.MenuPanel;
-import fr.free.totalboumboum.gui.tools.SwingTools;
+import fr.free.totalboumboum.gui.tools.GuiFileTools;
+import fr.free.totalboumboum.gui.tools.GuiTools;
 import fr.free.totalboumboum.tools.FileTools;
 import fr.free.totalboumboum.tools.XmlTools;
 
@@ -41,11 +44,11 @@ public class MainFrame extends JFrame implements WindowListener,MenuContainer
 		// frame
 		addWindowListener(this);
 		// icon
-		String iconPath = FileTools.getIconsPath()+File.separator+"frame.png";
+		String iconPath = GuiFileTools.getIconsPath()+File.separator+GuiFileTools.FILE_FRAME;
 		Image icon = Toolkit.getDefaultToolkit().getImage(iconPath);
 		setIconImage(icon);
 		// dimensions
-		setPreferredSize(getConfiguration().getPanelDimension());
+		setPreferredSize(getConfiguration().getGameConfiguration().getPanelDimension());
 		setResizable(false);
 		setVisible(true);
 		//
@@ -55,7 +58,7 @@ public class MainFrame extends JFrame implements WindowListener,MenuContainer
 		SwingUtilities.invokeLater(new Runnable()
 		{	public void run()
 			{	// end init
-				SwingTools.init(configuration,getGraphics());
+				GuiTools.init(configuration,getGraphics());
 				// panel
 				try
 				{	mainMenuPanel = new MainMenu(f,null);
@@ -111,15 +114,15 @@ public class MainFrame extends JFrame implements WindowListener,MenuContainer
 	/////////////////////////////////////////////////////////////////
 	// CONFIGURATION	/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	private Configuration configuration;
+	private GuiConfiguration configuration;
 
 	@Override
-	public Configuration getConfiguration()
+	public GuiConfiguration getConfiguration()
 	{	return configuration;
 	}
 
-	private Configuration loadConfiguration() throws IllegalArgumentException, SecurityException, ParserConfigurationException, SAXException, IOException, IllegalAccessException, NoSuchFieldException, ClassNotFoundException
-	{	Configuration result = ConfigurationLoader.loadConfiguration();
+	private GuiConfiguration loadConfiguration() throws IllegalArgumentException, SecurityException, ParserConfigurationException, SAXException, IOException, IllegalAccessException, NoSuchFieldException, ClassNotFoundException
+	{	GuiConfiguration result = GuiConfigurationLoader.loadConfiguration();
 		return result;
 	}
 	

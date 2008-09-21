@@ -3,6 +3,7 @@ package fr.free.totalboumboum.gui.generic;
 import javax.swing.JPanel;
 
 import fr.free.totalboumboum.data.configuration.Configuration;
+import fr.free.totalboumboum.gui.data.configuration.GuiConfiguration;
 import fr.free.totalboumboum.gui.menus.main.MainFrame;
 
 public abstract class ContentPanel extends JPanel
@@ -19,7 +20,7 @@ public abstract class ContentPanel extends JPanel
 	/////////////////////////////////////////////////////////////////
 	// CONFIGURATION	/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	public Configuration getConfiguration()
+	public GuiConfiguration getConfiguration()
 	{	return getFrame().getConfiguration();
 	}
 }

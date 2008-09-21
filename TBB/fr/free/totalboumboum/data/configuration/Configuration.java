@@ -115,16 +115,4 @@ public class Configuration
 	public void setTournament(AbstractTournament tournament)
 	{	this.tournament = tournament;
 	}
-	
-	/////////////////////////////////////////////////////////////////
-	// FONT		/////////////////////////////////////////////
-	/////////////////////////////////////////////////////////////////
-	private Font font;
-	
-	public Font getFont()
-	{	return font;	
-	}
-	public void setFont(Font font)
-	{	this.font = font;	
-	}
 }

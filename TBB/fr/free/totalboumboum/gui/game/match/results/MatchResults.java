@@ -37,8 +37,7 @@ import fr.free.totalboumboum.gui.generic.TablePanel;
 import fr.free.totalboumboum.gui.menus.options.OptionsMenu;
 import fr.free.totalboumboum.gui.menus.tournament.TournamentMain;
 import fr.free.totalboumboum.gui.tools.SpringUtilities;
-import fr.free.totalboumboum.gui.tools.SwingTools;
-import fr.free.totalboumboum.tools.GuiTools;
+import fr.free.totalboumboum.gui.tools.GuiTools;
 import fr.free.totalboumboum.tools.ImageTools;
 import fr.free.totalboumboum.tools.StringTools;
 
@@ -56,28 +55,28 @@ public class MatchResults extends EntitledDataPanel
 		setTitle(txt);
 		
 		// data
-		{	int lines = SwingTools.getSize(SwingTools.GAME_RESULTS_LABEL_LINE_NUMBER)+1;
+		{	int lines = GuiTools.getSize(GuiTools.GAME_RESULTS_LABEL_LINE_NUMBER)+1;
 			int cols = 2+4+2;
-			int width = SwingTools.getSize(SwingTools.GAME_DATA_PANEL_WIDTH);
-			int height = SwingTools.getSize(SwingTools.GAME_DATA_PANEL_HEIGHT); 
+			int width = GuiTools.getSize(GuiTools.GAME_DATA_PANEL_WIDTH);
+			int height = GuiTools.getSize(GuiTools.GAME_DATA_PANEL_HEIGHT); 
 			resultsPanel = new TablePanel(width,height,cols,lines,getConfiguration());
 			
 			// headers
 			{	{	JLabel lbl = resultsPanel.getLabel(0,0);
 					lbl.setText(null);
-					lbl.setPreferredSize(new Dimension(SwingTools.getSize(SwingTools.GAME_RESULTS_LABEL_LINE_HEIGHT),SwingTools.getSize(SwingTools.GAME_RESULTS_LABEL_HEADER_HEIGHT)));
-					lbl.setMaximumSize(new Dimension(SwingTools.getSize(SwingTools.GAME_RESULTS_LABEL_LINE_HEIGHT),SwingTools.getSize(SwingTools.GAME_RESULTS_LABEL_HEADER_HEIGHT)));
-					lbl.setMinimumSize(new Dimension(SwingTools.getSize(SwingTools.GAME_RESULTS_LABEL_LINE_HEIGHT),SwingTools.getSize(SwingTools.GAME_RESULTS_LABEL_HEADER_HEIGHT)));
+					lbl.setPreferredSize(new Dimension(GuiTools.getSize(GuiTools.GAME_RESULTS_LABEL_LINE_HEIGHT),GuiTools.getSize(GuiTools.GAME_RESULTS_LABEL_HEADER_HEIGHT)));
+					lbl.setMaximumSize(new Dimension(GuiTools.getSize(GuiTools.GAME_RESULTS_LABEL_LINE_HEIGHT),GuiTools.getSize(GuiTools.GAME_RESULTS_LABEL_HEADER_HEIGHT)));
+					lbl.setMinimumSize(new Dimension(GuiTools.getSize(GuiTools.GAME_RESULTS_LABEL_LINE_HEIGHT),GuiTools.getSize(GuiTools.GAME_RESULTS_LABEL_HEADER_HEIGHT)));
 					lbl.setOpaque(false);
 				}
 				BufferedImage[] icons = 
-				{	SwingTools.getIcon(GuiTools.GAME_MATCH_HEADER_NAME),
-					SwingTools.getIcon(GuiTools.GAME_MATCH_HEADER_BOMBS),
-					SwingTools.getIcon(GuiTools.GAME_MATCH_HEADER_ITEMS),
-					SwingTools.getIcon(GuiTools.GAME_MATCH_HEADER_DEATHS),
-					SwingTools.getIcon(GuiTools.GAME_MATCH_HEADER_KILLS),
-					SwingTools.getIcon(GuiTools.GAME_MATCH_HEADER_TOTAL),
-					SwingTools.getIcon(GuiTools.GAME_MATCH_HEADER_POINTS)
+				{	GuiTools.getIcon(GuiTools.GAME_MATCH_HEADER_NAME),
+					GuiTools.getIcon(GuiTools.GAME_MATCH_HEADER_BOMBS),
+					GuiTools.getIcon(GuiTools.GAME_MATCH_HEADER_ITEMS),
+					GuiTools.getIcon(GuiTools.GAME_MATCH_HEADER_DEATHS),
+					GuiTools.getIcon(GuiTools.GAME_MATCH_HEADER_KILLS),
+					GuiTools.getIcon(GuiTools.GAME_MATCH_HEADER_TOTAL),
+					GuiTools.getIcon(GuiTools.GAME_MATCH_HEADER_POINTS)
 				};
 				String[] tooltips = 
 				{	getConfiguration().getLanguage().getText(GuiTools.GAME_MATCH_HEADER_NAME+"Tooltip"),
@@ -92,7 +91,7 @@ public class MatchResults extends EntitledDataPanel
 				{	JLabel lbl = resultsPanel.getLabel(0,1+i);
 					lbl.setText(null);
 					lbl.setToolTipText(tooltips[i]);
-					int lineHeight = SwingTools.getSize(SwingTools.GAME_RESULTS_LABEL_HEADER_HEIGHT);
+					int lineHeight = GuiTools.getSize(GuiTools.GAME_RESULTS_LABEL_HEADER_HEIGHT);
 					double zoom = lineHeight/(double)icons[i].getHeight();
 						icons[i] = ImageTools.resize(icons[i],zoom,true);
 					ImageIcon icon = new ImageIcon(icons[i]);
@@ -103,9 +102,9 @@ public class MatchResults extends EntitledDataPanel
 			{	for(int i=1;i<lines;i++)
 				{	// name
 					{	JLabel lbl = resultsPanel.getLabel(i,1);
-						Dimension dimension = new Dimension(Integer.MAX_VALUE,SwingTools.getSize(SwingTools.GAME_RESULTS_LABEL_LINE_HEIGHT));
+						Dimension dimension = new Dimension(Integer.MAX_VALUE,GuiTools.getSize(GuiTools.GAME_RESULTS_LABEL_LINE_HEIGHT));
 						lbl.setMaximumSize(dimension);
-						dimension = new Dimension(SwingTools.getSize(SwingTools.GAME_RESULTS_LABEL_HEADER_HEIGHT),SwingTools.getSize(SwingTools.GAME_RESULTS_LABEL_LINE_HEIGHT));
+						dimension = new Dimension(GuiTools.getSize(GuiTools.GAME_RESULTS_LABEL_HEADER_HEIGHT),GuiTools.getSize(GuiTools.GAME_RESULTS_LABEL_LINE_HEIGHT));
 						lbl.setMinimumSize(dimension);
 					}
 				}
@@ -124,7 +123,7 @@ public class MatchResults extends EntitledDataPanel
 	@Override
 	public void updateData()
 	{	// init
-		Match match = getConfiguration().getTournament().getCurrentMatch();
+		Match match = getConfiguration().getCurrentMatch();
 		ArrayList<Profile> players = match.getProfiles();
 		StatisticMatch stats = match.getStats();
 		ArrayList<StatisticRound> rounds = stats.getStatRounds();
@@ -147,7 +146,7 @@ public class MatchResults extends EntitledDataPanel
 		
 		// display the ranking
 		Iterator<PlayerPoints> i = ranking.descendingIterator();
-		int lineHeight = SwingTools.getSize(SwingTools.GAME_RESULTS_LABEL_LINE_HEIGHT);
+		int lineHeight = GuiTools.getSize(GuiTools.GAME_RESULTS_LABEL_LINE_HEIGHT);
 		int line = 0;
 		while(i.hasNext())
 		{	// init
@@ -164,7 +163,7 @@ public class MatchResults extends EntitledDataPanel
 				image = ImageTools.resize(image,zoom,true);
 				ImageIcon icon = new ImageIcon(image);
 				portraitLabel.setIcon(icon);
-				int alpha = SwingTools.ALPHA_TABLE_REGULAR_BACKGROUND_LEVEL3;
+				int alpha = GuiTools.ALPHA_TABLE_REGULAR_BACKGROUND_LEVEL3;
 				Color bg = new Color(clr.getRed(),clr.getGreen(),clr.getBlue(),alpha);
 				portraitLabel.setBackground(bg);			
 				portraitLabel.setText("");
@@ -173,7 +172,7 @@ public class MatchResults extends EntitledDataPanel
 			{	JLabel nameLabel = resultsPanel.getLabel(line, col++);
 				nameLabel.setText(pp.getPlayer());
 				nameLabel.setToolTipText(pp.getPlayer());
-				int alpha = SwingTools.ALPHA_TABLE_REGULAR_BACKGROUND_LEVEL3;
+				int alpha = GuiTools.ALPHA_TABLE_REGULAR_BACKGROUND_LEVEL3;
 				Color bg = new Color(clr.getRed(),clr.getGreen(),clr.getBlue(),alpha);
 				nameLabel.setBackground(bg);
 			}
@@ -190,7 +189,7 @@ public class MatchResults extends EntitledDataPanel
 				for(int j=0;j<scores.length;j++)
 				{	JLabel pointsLabel = resultsPanel.getLabel(line, col++);
 					pointsLabel.setText(scores[j]);
-					int alpha = SwingTools.ALPHA_TABLE_REGULAR_BACKGROUND_LEVEL1;
+					int alpha = GuiTools.ALPHA_TABLE_REGULAR_BACKGROUND_LEVEL1;
 					Color bg = new Color(clr.getRed(),clr.getGreen(),clr.getBlue(),alpha);
 					pointsLabel.setBackground(bg);
 				}
@@ -206,7 +205,7 @@ public class MatchResults extends EntitledDataPanel
 				nf.setMinimumFractionDigits(0);
 				String txt = nf.format(pts);
 				rndLabel.setText(txt);
-				int alpha = SwingTools.ALPHA_TABLE_REGULAR_BACKGROUND_LEVEL2;
+				int alpha = GuiTools.ALPHA_TABLE_REGULAR_BACKGROUND_LEVEL2;
 				Color bg = new Color(clr.getRed(),clr.getGreen(),clr.getBlue(),alpha);
 				rndLabel.setBackground(bg);
 			}
@@ -218,7 +217,7 @@ public class MatchResults extends EntitledDataPanel
 				nf.setMinimumFractionDigits(0);
 				String txt = nf.format(pts);
 				totalLabel.setText(txt);
-				int alpha = SwingTools.ALPHA_TABLE_REGULAR_BACKGROUND_LEVEL3;
+				int alpha = GuiTools.ALPHA_TABLE_REGULAR_BACKGROUND_LEVEL3;
 				Color bg = new Color(clr.getRed(),clr.getGreen(),clr.getBlue(),alpha);
 				totalLabel.setBackground(bg);
 			}
@@ -233,7 +232,7 @@ public class MatchResults extends EntitledDataPanel
 					txt = nf.format(pts);
 				}
 				totalLabel.setText(txt);
-				int alpha = SwingTools.ALPHA_TABLE_REGULAR_BACKGROUND_LEVEL3;
+				int alpha = GuiTools.ALPHA_TABLE_REGULAR_BACKGROUND_LEVEL3;
 				Color bg = new Color(clr.getRed(),clr.getGreen(),clr.getBlue(),alpha);
 				totalLabel.setBackground(bg);
 			}

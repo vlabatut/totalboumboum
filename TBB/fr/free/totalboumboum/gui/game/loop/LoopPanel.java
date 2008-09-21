@@ -29,7 +29,7 @@ public class LoopPanel extends SimpleMenuPanel implements LoopRenderPanel
 	
 	public LoopPanel(MenuContainer container, MenuPanel parent)
 	{	super(container,parent);
-		loop = getConfiguration().getTournament().getCurrentMatch().getCurrentRound().getLoop();
+		loop = getConfiguration().getCurrentRound().getLoop();
 		setPreferredSize(getConfiguration().getPanelDimension());
 		setDoubleBuffered(false);
 		setBackground(Color.lightGray);

@@ -11,7 +11,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 
-import fr.free.totalboumboum.gui.tools.SwingTools;
+import fr.free.totalboumboum.gui.tools.GuiTools;
 
 public abstract class EntitledDataPanel extends InnerDataPanel
 {	private static final long serialVersionUID = 1L;
@@ -31,8 +31,8 @@ public abstract class EntitledDataPanel extends InnerDataPanel
 		setOpaque(false);
 		
 		// size
-		int height = SwingTools.getSize(SwingTools.HORIZONTAL_SPLIT_DATA_PANEL_HEIGHT);
-		int width = SwingTools.getSize(SwingTools.HORIZONTAL_SPLIT_DATA_PANEL_WIDTH);
+		int height = GuiTools.getSize(GuiTools.HORIZONTAL_SPLIT_DATA_PANEL_HEIGHT);
+		int width = GuiTools.getSize(GuiTools.HORIZONTAL_SPLIT_DATA_PANEL_WIDTH);
 		setPreferredSize(new Dimension(width,height));
 		
 		add(Box.createVerticalGlue());
@@ -41,13 +41,13 @@ public abstract class EntitledDataPanel extends InnerDataPanel
 		{	String text = "N/A";
 			title = new JLabel(text);
 			title.setHorizontalAlignment(SwingConstants.CENTER);
-			Font font = getConfiguration().getFont().deriveFont((float)SwingTools.getSize(SwingTools.GAME_TITLE_FONT_SIZE));
-			title.setForeground(SwingTools.COLOR_TITLE_FOREGROUND);
-			title.setBackground(SwingTools.COLOR_COMMON_BACKGROUND);
+			Font font = getConfiguration().getFont().deriveFont((float)GuiTools.getSize(GuiTools.GAME_TITLE_FONT_SIZE));
+			title.setForeground(GuiTools.COLOR_TITLE_FOREGROUND);
+			title.setBackground(GuiTools.COLOR_COMMON_BACKGROUND);
 			title.setOpaque(true);
 			title.setFont(font);
 			title.setAlignmentX(Component.CENTER_ALIGNMENT);
-			Dimension dim = new Dimension(SwingTools.getSize(SwingTools.GAME_DATA_PANEL_WIDTH),SwingTools.getSize(SwingTools.GAME_DATA_LABEL_TITLE_HEIGHT));
+			Dimension dim = new Dimension(GuiTools.getSize(GuiTools.GAME_DATA_PANEL_WIDTH),GuiTools.getSize(GuiTools.GAME_DATA_LABEL_TITLE_HEIGHT));
 			title.setPreferredSize(dim);
 			title.setMinimumSize(dim);
 			title.setMaximumSize(dim);
@@ -58,8 +58,8 @@ public abstract class EntitledDataPanel extends InnerDataPanel
 		
 		// data panel
 		{	data = new JPanel();
-			data.setBackground(SwingTools.COLOR_COMMON_BACKGROUND);
-			Dimension dim = new Dimension(SwingTools.getSize(SwingTools.GAME_DATA_PANEL_WIDTH),SwingTools.getSize(SwingTools.GAME_DATA_PANEL_HEIGHT));
+			data.setBackground(GuiTools.COLOR_COMMON_BACKGROUND);
+			Dimension dim = new Dimension(GuiTools.getSize(GuiTools.GAME_DATA_PANEL_WIDTH),GuiTools.getSize(GuiTools.GAME_DATA_PANEL_HEIGHT));
 			data.setPreferredSize(dim);
 			data.setMinimumSize(dim);
 			data.setMaximumSize(dim);

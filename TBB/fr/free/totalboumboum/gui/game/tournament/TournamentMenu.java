@@ -35,8 +35,7 @@ import fr.free.totalboumboum.gui.generic.InnerDataPanel;
 import fr.free.totalboumboum.gui.generic.InnerMenuPanel;
 import fr.free.totalboumboum.gui.generic.MenuPanel;
 import fr.free.totalboumboum.gui.generic.SplitMenuPanel;
-import fr.free.totalboumboum.gui.tools.SwingTools;
-import fr.free.totalboumboum.tools.GuiTools;
+import fr.free.totalboumboum.gui.tools.GuiTools;
 
 public class TournamentMenu extends InnerMenuPanel implements TournamentRenderPanel
 {	private static final long serialVersionUID = 1L;
@@ -59,31 +58,31 @@ public class TournamentMenu extends InnerMenuPanel implements TournamentRenderPa
 		BoxLayout layout = new BoxLayout(this,BoxLayout.LINE_AXIS); 
 		setLayout(layout);
 		// size
-		int height = SwingTools.getSize(SwingTools.HORIZONTAL_SPLIT_MENU_PANEL_HEIGHT);
-		int width = SwingTools.getSize(SwingTools.HORIZONTAL_SPLIT_MENU_PANEL_WIDTH);
+		int height = GuiTools.getSize(GuiTools.HORIZONTAL_SPLIT_MENU_PANEL_HEIGHT);
+		int width = GuiTools.getSize(GuiTools.HORIZONTAL_SPLIT_MENU_PANEL_WIDTH);
 		setPreferredSize(new Dimension(width,height));
 		// background
 		setBackground(Color.LIGHT_GRAY);
 		
 		// buttons
-		buttonQuit = SwingTools.createHorizontalMenuButton(GuiTools.TOURNAMENT_BUTTON_QUIT,this,getConfiguration());
+		buttonQuit = GuiTools.createHorizontalMenuButton(GuiTools.TOURNAMENT_BUTTON_QUIT,this,getConfiguration());
 		add(Box.createHorizontalGlue());
-		buttonMenu = SwingTools.createHorizontalMenuButton(GuiTools.TOURNAMENT_BUTTON_MENU,this,getConfiguration());
-		add(Box.createRigidArea(new Dimension(SwingTools.getSize(SwingTools.MENU_HORIZONTAL_BUTTON_SPACE),0)));
+		buttonMenu = GuiTools.createHorizontalMenuButton(GuiTools.TOURNAMENT_BUTTON_MENU,this,getConfiguration());
+		add(Box.createRigidArea(new Dimension(GuiTools.getSize(GuiTools.MENU_HORIZONTAL_BUTTON_SPACE),0)));
 	    ButtonGroup group = new ButtonGroup();
-		buttonDescription = SwingTools.createHorizontalMenuToggleButton(GuiTools.TOURNAMENT_BUTTON_DESCRIPTION,this,getConfiguration());
+		buttonDescription = GuiTools.createHorizontalMenuToggleButton(GuiTools.TOURNAMENT_BUTTON_DESCRIPTION,this,getConfiguration());
 		buttonDescription.setSelected(true);
 	    group.add(buttonDescription);
-		buttonResults = SwingTools.createHorizontalMenuToggleButton(GuiTools.TOURNAMENT_BUTTON_RESULTS,this,getConfiguration());
+		buttonResults = GuiTools.createHorizontalMenuToggleButton(GuiTools.TOURNAMENT_BUTTON_RESULTS,this,getConfiguration());
 	    group.add(buttonResults);
-		buttonStatistics = SwingTools.createHorizontalMenuToggleButton(GuiTools.TOURNAMENT_BUTTON_STATISTICS,this,getConfiguration());
+		buttonStatistics = GuiTools.createHorizontalMenuToggleButton(GuiTools.TOURNAMENT_BUTTON_STATISTICS,this,getConfiguration());
 	    group.add(buttonStatistics);
-		add(Box.createRigidArea(new Dimension(SwingTools.getSize(SwingTools.MENU_HORIZONTAL_BUTTON_SPACE),0)));
-		buttonMatch = SwingTools.createHorizontalMenuButton(GuiTools.TOURNAMENT_BUTTON_NEXT_MATCH,this,getConfiguration());
+		add(Box.createRigidArea(new Dimension(GuiTools.getSize(GuiTools.MENU_HORIZONTAL_BUTTON_SPACE),0)));
+		buttonMatch = GuiTools.createHorizontalMenuButton(GuiTools.TOURNAMENT_BUTTON_NEXT_MATCH,this,getConfiguration());
 		
 		// panels
 		tournamentDescription = null;
-		AbstractTournament tournament = getConfiguration().getTournament();
+		AbstractTournament tournament = getConfiguration().getCurrentTournament();
 		if(tournament instanceof SequenceTournament)
 		{	tournamentDescription = new SequenceDescription(container);
 			container.setDataPart(tournamentDescription);
@@ -115,7 +114,7 @@ public class TournamentMenu extends InnerMenuPanel implements TournamentRenderPa
 		{	replaceWith(parent);
 	    }
 		else if(e.getActionCommand().equals(GuiTools.TOURNAMENT_BUTTON_FINISH))
-		{	AbstractTournament tournament = getConfiguration().getTournament();
+		{	AbstractTournament tournament = getConfiguration().getCurrentTournament();
 			tournament.finish();
 			replaceWith(parent);
 	    }
@@ -135,7 +134,7 @@ public class TournamentMenu extends InnerMenuPanel implements TournamentRenderPa
 		{	replaceWith(matchPanel);
 	    }
 		else if(e.getActionCommand().equals(GuiTools.TOURNAMENT_BUTTON_NEXT_MATCH))
-		{	AbstractTournament tournament = getConfiguration().getTournament();
+		{	AbstractTournament tournament = getConfiguration().getCurrentTournament();
 			tournament.progress();
 			matchPanel = new MatchSplitPanel(container.getContainer(),container);
 			replaceWith(matchPanel);
@@ -144,23 +143,23 @@ public class TournamentMenu extends InnerMenuPanel implements TournamentRenderPa
 
 	@Override
 	public void refresh()
-	{	AbstractTournament tournament = getConfiguration().getTournament(); 
+	{	AbstractTournament tournament = getConfiguration().getCurrentTournament(); 
 		if(tournament.isOver())
 		{	// match
 			buttonMatch.setEnabled(false);
 			// finish
-			SwingTools.setButtonContent(GuiTools.TOURNAMENT_BUTTON_FINISH, buttonMenu, getConfiguration());
+			GuiTools.setButtonContent(GuiTools.TOURNAMENT_BUTTON_FINISH, buttonMenu, getConfiguration());
 		}
 		else
 		{	// match
 			buttonMatch.setEnabled(true);
 			Match match = tournament.getCurrentMatch();
 			if(match==null || match.isOver())
-				SwingTools.setButtonContent(GuiTools.TOURNAMENT_BUTTON_NEXT_MATCH, buttonMatch, getConfiguration());
+				GuiTools.setButtonContent(GuiTools.TOURNAMENT_BUTTON_NEXT_MATCH, buttonMatch, getConfiguration());
 			else
-				SwingTools.setButtonContent(GuiTools.TOURNAMENT_BUTTON_CURRENT_MATCH, buttonMatch, getConfiguration());
+				GuiTools.setButtonContent(GuiTools.TOURNAMENT_BUTTON_CURRENT_MATCH, buttonMatch, getConfiguration());
 			// menu
-			SwingTools.setButtonContent(GuiTools.TOURNAMENT_BUTTON_MENU, buttonMenu, getConfiguration());
+			GuiTools.setButtonContent(GuiTools.TOURNAMENT_BUTTON_MENU, buttonMenu, getConfiguration());
 		}
 	}
 

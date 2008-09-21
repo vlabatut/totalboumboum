@@ -14,7 +14,6 @@ import fr.free.totalboumboum.gui.generic.SimpleMenuPanel;
 import fr.free.totalboumboum.gui.generic.SplitMenuPanel;
 import fr.free.totalboumboum.gui.menus.options.OptionsMenu;
 import fr.free.totalboumboum.gui.menus.tournament.TournamentMain;
-import fr.free.totalboumboum.tools.GuiTools;
 
 public class SequenceDescription extends TournamentDescription
 {	

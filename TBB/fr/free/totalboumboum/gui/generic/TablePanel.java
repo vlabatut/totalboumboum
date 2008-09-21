@@ -9,8 +9,9 @@ import javax.swing.SpringLayout;
 import javax.swing.SwingConstants;
 
 import fr.free.totalboumboum.data.configuration.Configuration;
+import fr.free.totalboumboum.gui.data.configuration.GuiConfiguration;
 import fr.free.totalboumboum.gui.tools.SpringUtilities;
-import fr.free.totalboumboum.gui.tools.SwingTools;
+import fr.free.totalboumboum.gui.tools.GuiTools;
 
 public class TablePanel extends JPanel
 {	private static final long serialVersionUID = 1L;
@@ -22,12 +23,12 @@ public class TablePanel extends JPanel
 //	private Configuration configuration;
 	
 
-	public TablePanel(int width, int height, int columns, int lines, Configuration configuration)
+	public TablePanel(int width, int height, int columns, int lines, GuiConfiguration configuration)
 	{	// init
 //		this.configuration = configuration;
 		
 		// background
-		setBackground(SwingTools.COLOR_COMMON_BACKGROUND);
+		setBackground(GuiTools.COLOR_COMMON_BACKGROUND);
 
 		// layout
 		SpringLayout layout = new SpringLayout();
@@ -40,8 +41,8 @@ public class TablePanel extends JPanel
 		setMaximumSize(dim);
 		
 		// fonts
-		headerFont = configuration.getFont().deriveFont((float)SwingTools.getSize(SwingTools.GAME_RESULTS_HEADER_FONT_SIZE));
-		regularFont = configuration.getFont().deriveFont((float)SwingTools.getSize(SwingTools.GAME_RESULTS_LINE_FONT_SIZE));
+		headerFont = configuration.getFont().deriveFont((float)GuiTools.getSize(GuiTools.GAME_RESULTS_HEADER_FONT_SIZE));
+		regularFont = configuration.getFont().deriveFont((float)GuiTools.getSize(GuiTools.GAME_RESULTS_LINE_FONT_SIZE));
 
 		// table
 		this.lines = lines;
@@ -61,8 +62,8 @@ public class TablePanel extends JPanel
 			JLabel lbl = new JLabel(txt);
 			lbl.setFont(headerFont);
 			lbl.setHorizontalAlignment(SwingConstants.CENTER);
-			lbl.setBackground(SwingTools.COLOR_TABLE_HEADER_BACKGROUND);
-			lbl.setForeground(SwingTools.COLOR_TABLE_HEADER_FOREGROUND);
+			lbl.setBackground(GuiTools.COLOR_TABLE_HEADER_BACKGROUND);
+			lbl.setForeground(GuiTools.COLOR_TABLE_HEADER_FOREGROUND);
 			lbl.setOpaque(true);
 			add(lbl,index);		
 		}
@@ -73,8 +74,8 @@ public class TablePanel extends JPanel
 			JLabel lbl = new JLabel(txt);
 			lbl.setFont(regularFont);
 			lbl.setHorizontalAlignment(SwingConstants.CENTER);
-			lbl.setBackground(SwingTools.COLOR_TABLE_NEUTRAL_BACKGROUND);
-			lbl.setForeground(SwingTools.COLOR_TABLE_REGULAR_FOREGROUND);
+			lbl.setBackground(GuiTools.COLOR_TABLE_NEUTRAL_BACKGROUND);
+			lbl.setForeground(GuiTools.COLOR_TABLE_REGULAR_FOREGROUND);
 			lbl.setOpaque(true);
 			add(lbl,index+line*columns);
 		}
@@ -82,7 +83,7 @@ public class TablePanel extends JPanel
 		// layout
 		SpringLayout layout = new SpringLayout();
 		setLayout(layout);
-		int margin = SwingTools.getSize(SwingTools.GAME_RESULTS_MARGIN_SIZE);
+		int margin = GuiTools.getSize(GuiTools.GAME_RESULTS_MARGIN_SIZE);
 		SpringUtilities.makeCompactGrid(this,lines,columns,margin,margin,margin,margin);
 	}
 	

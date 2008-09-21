@@ -8,7 +8,7 @@ import javax.swing.BoxLayout;
 
 import fr.free.totalboumboum.gui.generic.InnerDataPanel;
 import fr.free.totalboumboum.gui.generic.SplitMenuPanel;
-import fr.free.totalboumboum.gui.tools.SwingTools;
+import fr.free.totalboumboum.gui.tools.GuiTools;
 
 public class TournamentData extends InnerDataPanel
 {	private static final long serialVersionUID = 1L;
@@ -19,8 +19,8 @@ public class TournamentData extends InnerDataPanel
 		BoxLayout layout = new BoxLayout(this,BoxLayout.PAGE_AXIS); 
 		setLayout(layout);
 		// size
-		int height = SwingTools.getSize(SwingTools.VERTICAL_SPLIT_DATA_PANEL_HEIGHT);
-		int width = SwingTools.getSize(SwingTools.VERTICAL_SPLIT_DATA_PANEL_WIDTH);
+		int height = GuiTools.getSize(GuiTools.VERTICAL_SPLIT_DATA_PANEL_HEIGHT);
+		int width = GuiTools.getSize(GuiTools.VERTICAL_SPLIT_DATA_PANEL_WIDTH);
 		setPreferredSize(new Dimension(width,height));
 		// background
 		setBackground(Color.YELLOW);
