@@ -19,12 +19,12 @@ import javax.xml.parsers.ParserConfigurationException;
 import org.xml.sax.SAXException;
 
 import fr.free.totalboumboum.data.profile.Portraits;
-import fr.free.totalboumboum.gui.SwingTools;
 import fr.free.totalboumboum.gui.generic.MenuContainer;
 import fr.free.totalboumboum.gui.generic.MenuPanel;
 import fr.free.totalboumboum.gui.generic.SimpleMenuPanel;
 import fr.free.totalboumboum.gui.menus.options.OptionsMenu;
 import fr.free.totalboumboum.gui.menus.tournament.TournamentMain;
+import fr.free.totalboumboum.gui.tools.SwingTools;
 import fr.free.totalboumboum.tools.FileTools;
 import fr.free.totalboumboum.tools.GuiTools;
 import fr.free.totalboumboum.tools.ImageTools;
