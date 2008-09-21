@@ -625,5 +625,6 @@ public class Launcher
 	 * - pb de dimension de l'image de fond en fonction de la résolution... (zones pas peintes)
 	 * - pour painting, possibilité de définir quelles cases peuvent être repeinte, ce qui permet de poser comme limite un %age de cases repeintes
 	 * - results panel : quand il y a trop de rounds dans un match pour que ça rentre à l'écran, ne pas tout afficher
+	 * - problème d'affichage : le niveau est coupé en fonction du mode d'affichage, mais pas de façon symétrique (le haut n'est pas coupé, seulement le bas)
 	 */
 }
