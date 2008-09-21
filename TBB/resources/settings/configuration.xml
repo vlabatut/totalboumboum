@@ -11,8 +11,11 @@
 	<smoothGraphics value="true" />
 		
 <!-- DISPLAY -->	
+<!-- 	attention : si vous augmentez la résolution graphique, il faut donner plus de mémoire à la java machine
+		par exemple en utilisant l'option d'exécution -xmx128m pour donner 128 Mo au lieu des 64 alloués par défaut -->
 	<panelDimension width="1024" height="768" />
 <!-- 	<panelDimension width="750" height="600" />  -->
+<!-- 	<panelDimension width="1280" height="1024" />  --> 
 	
 <!-- PROFILES -->	
 	<profiles>

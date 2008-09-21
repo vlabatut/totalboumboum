@@ -25,11 +25,13 @@ import fr.free.totalboumboum.data.statistics.Score;
 import fr.free.totalboumboum.data.statistics.StatisticRound;
 import fr.free.totalboumboum.game.point.PlayerPoints;
 import fr.free.totalboumboum.game.round.Round;
+import fr.free.totalboumboum.gui.generic.EntitledDataPanel;
 import fr.free.totalboumboum.gui.generic.InnerDataPanel;
 import fr.free.totalboumboum.gui.generic.MenuContainer;
 import fr.free.totalboumboum.gui.generic.MenuPanel;
 import fr.free.totalboumboum.gui.generic.SimpleMenuPanel;
 import fr.free.totalboumboum.gui.generic.SplitMenuPanel;
+import fr.free.totalboumboum.gui.generic.TablePanel;
 import fr.free.totalboumboum.gui.menus.options.OptionsMenu;
 import fr.free.totalboumboum.gui.menus.tournament.TournamentMain;
 import fr.free.totalboumboum.gui.tools.SpringUtilities;
@@ -37,106 +39,37 @@ import fr.free.totalboumboum.gui.tools.GuiTools;
 import fr.free.totalboumboum.tools.ImageTools;
 import fr.free.totalboumboum.tools.StringTools;
 
-public class RoundResults extends InnerDataPanel
+public class RoundResults extends EntitledDataPanel
 {	
 	private static final long serialVersionUID = 1L;
 
-	private JPanel resultsPanel;
+	private TablePanel resultsPanel;
 	
 	public RoundResults(SplitMenuPanel container)
 	{	super(container);
-		// layout
-		{	BoxLayout layout = new BoxLayout(this,BoxLayout.PAGE_AXIS); 
-			setLayout(layout);
-		}
-		// background
-		setBackground(new Color(50,50,50));
-		// size
-		int height = GuiTools.getSize(GuiTools.HORIZONTAL_SPLIT_DATA_PANEL_HEIGHT);
-		int width = GuiTools.getSize(GuiTools.HORIZONTAL_SPLIT_DATA_PANEL_WIDTH);
-		setPreferredSize(new Dimension(width,height));
-		
-		add(Box.createVerticalGlue());
-		
+
 		// title
-		{	String txt = getConfiguration().getLanguage().getText(GuiTools.GAME_ROUND_TITLE_RESULTS);
-			JLabel title = new JLabel(txt);
-			title.setHorizontalAlignment(SwingConstants.CENTER);
-			Font font = getConfiguration().getFont().deriveFont((float)GuiTools.getSize(GuiTools.GAME_TITLE_FONT_SIZE));
-			title.setFont(font);
-			title.setForeground(Color.BLACK);
-			title.setBackground(new Color(255,255,255,128));
-			title.setOpaque(true);
-			title.setAlignmentX(Component.CENTER_ALIGNMENT);
-			Dimension dim = new Dimension(GuiTools.getSize(GuiTools.GAME_DATA_PANEL_WIDTH),GuiTools.getSize(GuiTools.GAME_DATA_LABEL_TITLE_HEIGHT));
-			title.setPreferredSize(dim);
-			title.setMinimumSize(dim);
-			title.setMaximumSize(dim);
-			add(title);
-		}
+		String txt = getConfiguration().getLanguage().getText(GuiTools.GAME_ROUND_TITLE_RESULTS);
+		setTitle(txt);
 		
-		add(Box.createVerticalGlue());
-		
-		// results panel
-		{	Round round = getConfiguration().getCurrentRound();
-			int playerNumber = round.getProfiles().size();
-			playerNumber = 16;
-			int lines = playerNumber+1;
+		// data
+		{	int lines = GuiTools.getSize(GuiTools.GAME_RESULTS_LABEL_LINE_NUMBER)+1;
 			int cols = 2+5+1;			
-			SpringLayout layout = new SpringLayout();			
-			resultsPanel = new JPanel(layout);			
-			resultsPanel.setBackground(new Color(255,255,255,128));
-			Dimension dim = new Dimension(GuiTools.getSize(GuiTools.GAME_DATA_PANEL_WIDTH),GuiTools.getSize(GuiTools.GAME_DATA_PANEL_HEIGHT));
-			resultsPanel.setPreferredSize(dim);
-			resultsPanel.setMinimumSize(dim);
-			resultsPanel.setMaximumSize(dim);
+			int width = GuiTools.getSize(GuiTools.GAME_DATA_PANEL_WIDTH);
+			int height = GuiTools.getSize(GuiTools.GAME_DATA_PANEL_HEIGHT); 
+			resultsPanel = new TablePanel(width,height,cols,lines,getConfiguration());
+
 			// headers
-			{	Font font = getConfiguration().getFont().deriveFont((float)GuiTools.getSize(GuiTools.GAME_RESULTS_HEADER_FONT_SIZE));
-				{	JLabel lbl = new JLabel(" ");
-					lbl.setOpaque(false);
+			{	{	JLabel lbl = resultsPanel.getLabel(0,0);
+					lbl.setText(null);
 					lbl.setPreferredSize(new Dimension(GuiTools.getSize(GuiTools.GAME_RESULTS_LABEL_LINE_HEIGHT),GuiTools.getSize(GuiTools.GAME_RESULTS_LABEL_HEADER_HEIGHT)));
 					lbl.setMaximumSize(new Dimension(GuiTools.getSize(GuiTools.GAME_RESULTS_LABEL_LINE_HEIGHT),GuiTools.getSize(GuiTools.GAME_RESULTS_LABEL_HEADER_HEIGHT)));
 					lbl.setMinimumSize(new Dimension(GuiTools.getSize(GuiTools.GAME_RESULTS_LABEL_LINE_HEIGHT),GuiTools.getSize(GuiTools.GAME_RESULTS_LABEL_HEADER_HEIGHT)));
-					resultsPanel.add(lbl);
-				}
-/*				
-				String hd = "";
-				switch(round.getPlayMode())
-				{	case CROWN:
-						hd = getConfiguration().getLanguage().getText(GuiTools.GAME_ROUND_HEADER_CROWNS);
-						break;
-					case FRAG:
-						hd = getConfiguration().getLanguage().getText(GuiTools.GAME_ROUND_HEADER_FRAGS);
-						break;
-					case PAINT:
-						hd = getConfiguration().getLanguage().getText(GuiTools.GAME_ROUND_HEADER_PAINTINGS);
-						break;
-					case SURVIVAL:
-						hd = getConfiguration().getLanguage().getText(GuiTools.GAME_ROUND_HEADER_TIME);
-						break;
-				}
-				String[] headers = 
-				{	getConfiguration().getLanguage().getText(GuiTools.GAME_ROUND_HEADER_NAME),
-					getConfiguration().getLanguage().getText(GuiTools.GAME_ROUND_HEADER_BOMBS),
-					getConfiguration().getLanguage().getText(GuiTools.GAME_ROUND_HEADER_ITEMS),
-					getConfiguration().getLanguage().getText(GuiTools.GAME_ROUND_HEADER_DEATHS),
-					getConfiguration().getLanguage().getText(GuiTools.GAME_ROUND_HEADER_KILLS),
-					hd,
-					getConfiguration().getLanguage().getText(GuiTools.GAME_ROUND_HEADER_POINTS),
-				};
-				for(int i=0;i<headers.length;i++)
-				{	String txt = headers[i];
-					JLabel lbl = new JLabel(txt);
-					lbl.setFont(font);
-					lbl.setHorizontalAlignment(SwingConstants.CENTER);
-					lbl.setBackground(new Color(0,0,0,128));
-					lbl.setForeground(Color.BLACK);
-					lbl.setOpaque(true);
-					resultsPanel.add(lbl);
-				}
-*/				
+					lbl.setOpaque(false);
+				}				
+				Round round = getConfiguration().getCurrentRound();
 				BufferedImage ic = null;
-				String icTt = "";
+				String icTt = null;
 				switch(round.getPlayMode())
 				{	case CROWN:
 						ic = GuiTools.getIcon(GuiTools.GAME_ROUND_HEADER_CROWNS);
@@ -174,13 +107,9 @@ public class RoundResults extends InnerDataPanel
 					getConfiguration().getLanguage().getText(GuiTools.GAME_ROUND_HEADER_POINTS+"Tooltip")
 				};
 				for(int i=0;i<icons.length;i++)
-				{	JLabel lbl = new JLabel(" ");
-					lbl.setText("");
+				{	JLabel lbl = resultsPanel.getLabel(0,1+i);
+					lbl.setText(null);
 					lbl.setToolTipText(tooltips[i]);
-					lbl.setHorizontalAlignment(SwingConstants.CENTER);
-					lbl.setBackground(new Color(0,0,0,128));
-					lbl.setOpaque(true);
-					resultsPanel.add(lbl);
 					int lineHeight = GuiTools.getSize(GuiTools.GAME_RESULTS_LABEL_HEADER_HEIGHT);
 					double zoom = lineHeight/(double)icons[i].getHeight();
 						icons[i] = ImageTools.resize(icons[i],zoom,true);
@@ -189,48 +118,20 @@ public class RoundResults extends InnerDataPanel
 				}
 			}
 			// data
-			{	Font font = getConfiguration().getFont().deriveFont((float)GuiTools.getSize(GuiTools.GAME_RESULTS_LINE_FONT_SIZE));
-				for(int i=1;i<lines;i++)
-				{	// portrait
-					{	JLabel lbl = new JLabel(" ");
-						lbl.setHorizontalAlignment(SwingConstants.CENTER);
-						lbl.setBackground(new Color(0,0,0,20));
-						lbl.setOpaque(true);
-						resultsPanel.add(lbl);
-					}
-					// name
-					{	JLabel lbl = new JLabel(" ");
-						lbl.setFont(font);
-						lbl.setHorizontalAlignment(SwingConstants.CENTER);
-						lbl.setBackground(new Color(0,0,0,20));
-						lbl.setForeground(Color.BLACK);
-						lbl.setOpaque(true);
+			{	for(int i=1;i<lines;i++)
+				{	// name
+					{	JLabel lbl = resultsPanel.getLabel(i,1);
 						Dimension dimension = new Dimension(Integer.MAX_VALUE,GuiTools.getSize(GuiTools.GAME_RESULTS_LABEL_LINE_HEIGHT));
 						lbl.setMaximumSize(dimension);
 						dimension = new Dimension(GuiTools.getSize(GuiTools.GAME_RESULTS_LABEL_HEADER_HEIGHT),GuiTools.getSize(GuiTools.GAME_RESULTS_LABEL_LINE_HEIGHT));
 						lbl.setMinimumSize(dimension);
-						resultsPanel.add(lbl);
-					}
-					// scores/points
-					for(int j=2;j<cols;j++)
-					{	JLabel lbl = new JLabel(" ");
-						lbl.setFont(font);
-						lbl.setHorizontalAlignment(SwingConstants.CENTER);
-						lbl.setBackground(new Color(0,0,0,20));
-						lbl.setForeground(Color.BLACK);
-						lbl.setOpaque(true);
-						resultsPanel.add(lbl);
 					}
 				}
 			}
 			//
+			setDataPanel(resultsPanel);
 			updateData();
-			int margin = GuiTools.getSize(GuiTools.GAME_RESULTS_MARGIN_SIZE);
-			SpringUtilities.makeCompactGrid(resultsPanel,lines,cols,margin,margin,margin,margin);
-			add(resultsPanel);
 		}
-		
-		add(Box.createVerticalGlue());
 	}
 
 	@Override
@@ -246,18 +147,22 @@ public class RoundResults extends InnerDataPanel
 		ArrayList<Profile> players = round.getProfiles();
 		TreeSet<PlayerPoints> ranking = stats.getOrderedPlayers();
 		float[] points = stats.getPoints();
-		
+
 		// display the ranking
 		Iterator<PlayerPoints> i = ranking.descendingIterator();
-		int k = 2+5+1;
 		int lineHeight = GuiTools.getSize(GuiTools.GAME_RESULTS_LABEL_LINE_HEIGHT);
+		int col = 0;
+		int line = 0;
 		while(i.hasNext())
-		{	PlayerPoints pp = i.next();
+		{	// init
+			col = 0;
+			line++;
+			PlayerPoints pp = i.next();
 			Profile profile = players.get(pp.getIndex());
 			// color
 			Color clr = profile.getSpriteColor().getColor();
 			// portrait
-			{	JLabel portraitLabel = (JLabel)resultsPanel.getComponent(k++);
+			{	JLabel portraitLabel = resultsPanel.getLabel(line, col++);
 				BufferedImage image = profile.getPortraits().getOutgamePortrait(Portraits.OUTGAME_HEAD);
 				double zoom = lineHeight/(double)image.getHeight();
 //				double zoom = portraitLabel.getSize().height/(double)image.getHeight();
@@ -265,15 +170,17 @@ public class RoundResults extends InnerDataPanel
 					image = ImageTools.resize(image,zoom,true);
 				ImageIcon icon = new ImageIcon(image);
 				portraitLabel.setIcon(icon);
-				Color bg = new Color(clr.getRed(),clr.getGreen(),clr.getBlue(),120);
+				int alpha = GuiTools.ALPHA_TABLE_REGULAR_BACKGROUND_LEVEL3;
+				Color bg = new Color(clr.getRed(),clr.getGreen(),clr.getBlue(),alpha);
 				portraitLabel.setBackground(bg);			
 				portraitLabel.setText("");
 			}
 			// name
-			{	JLabel nameLabel = (JLabel)resultsPanel.getComponent(k++);
+			{	JLabel nameLabel = resultsPanel.getLabel(line, col++);
 				nameLabel.setText(pp.getPlayer());
 				nameLabel.setToolTipText(pp.getPlayer());
-				Color bg = new Color(clr.getRed(),clr.getGreen(),clr.getBlue(),120);
+				int alpha = GuiTools.ALPHA_TABLE_REGULAR_BACKGROUND_LEVEL3;
+				Color bg = new Color(clr.getRed(),clr.getGreen(),clr.getBlue(),alpha);
 				nameLabel.setBackground(bg);
 			}
 			// scores
@@ -303,21 +210,23 @@ public class RoundResults extends InnerDataPanel
 					sc
 				};
 				for(int j=0;j<scores.length;j++)
-				{	JLabel pointsLabel = (JLabel)resultsPanel.getComponent(k++);
+				{	JLabel pointsLabel = resultsPanel.getLabel(line, col++);
 					pointsLabel.setText(scores[j]);
-					Color bg = new Color(clr.getRed(),clr.getGreen(),clr.getBlue(),120);
+					int alpha = GuiTools.ALPHA_TABLE_REGULAR_BACKGROUND_LEVEL1;
+					Color bg = new Color(clr.getRed(),clr.getGreen(),clr.getBlue(),alpha);
 					pointsLabel.setBackground(bg);
 				}
 			}			
 			// points
-			{	JLabel pointsLabel = (JLabel)resultsPanel.getComponent(k++);
+			{	JLabel pointsLabel = resultsPanel.getLabel(line, col++);
 				double pts = points[pp.getIndex()];
 				NumberFormat nf = NumberFormat.getInstance();
 				nf.setMaximumFractionDigits(2);
 				nf.setMinimumFractionDigits(0);
 				String txt = nf.format(pts);
 				pointsLabel.setText(txt);
-				Color bg = new Color(clr.getRed(),clr.getGreen(),clr.getBlue(),180);
+				int alpha = GuiTools.ALPHA_TABLE_REGULAR_BACKGROUND_LEVEL3;
+				Color bg = new Color(clr.getRed(),clr.getGreen(),clr.getBlue(),alpha);
 				pointsLabel.setBackground(bg);
 			}
 		}
