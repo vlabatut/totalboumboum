@@ -15,15 +15,19 @@ public class TournamentData extends InnerDataPanel
 	
 	public TournamentData(SplitMenuPanel container)
 	{	super(container);
+		
 		// layout
 		BoxLayout layout = new BoxLayout(this,BoxLayout.PAGE_AXIS); 
 		setLayout(layout);
+		
 		// size
 		int height = GuiTools.getSize(GuiTools.VERTICAL_SPLIT_DATA_PANEL_HEIGHT);
 		int width = GuiTools.getSize(GuiTools.VERTICAL_SPLIT_DATA_PANEL_WIDTH);
 		setPreferredSize(new Dimension(width,height));
+		
 		// background
-		setBackground(Color.YELLOW);
+//		setBackground(Color.YELLOW);
+		setOpaque(false);
 	}
 
 	public void actionPerformed(ActionEvent e)
