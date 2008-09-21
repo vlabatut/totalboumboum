@@ -65,18 +65,13 @@ public class FileTools
 	public static final String FOLDER_EXPLOSIONS = "explosions";
 	public static final String FOLDER_FIRE = "fire";
 	public static final String FOLDER_FIRES = "fires";
-	public static final String FOLDER_FONTS = "fonts";
 	public static final String FOLDER_GAMES = "games";
 	public static final String FOLDER_GRAPHICS = "graphics";
 	public static final String FOLDER_HEROES = "heroes";
-	public static final String FOLDER_ICONS = "icons";
-	public static final String FOLDER_IMAGES = "images";
 	public static final String FOLDER_ITEMS = "items";
 	public static final String FOLDER_INSTANCES = "instances";
-	public static final String FOLDER_LANGUAGES = "languages";
 	public static final String FOLDER_LEVELS = "levels";
 	public static final String FOLDER_MATCHES = "matches";
-	public static final String FOLDER_MISC = "misc";
 	public static final String FOLDER_MINE = "mine";
 	public static final String FOLDER_NORMAL = "normal";
 	public static final String FOLDER_PENETRATION = "penetration";
@@ -107,27 +102,10 @@ public class FileTools
 	
 	public static String getInstancesPath()
 	{	return getResourcesPath()+File.separator+FOLDER_INSTANCES;		
-	}
-	
-	public static String getLanguagesPath()
-	{	return getResourcesPath()+File.separator+FOLDER_LANGUAGES;		
-	}
+	}	
 
 	public static String getLevelsPath()
 	{	return getResourcesPath()+File.separator+FOLDER_LEVELS;		
-	}
-	
-	public static String getMiscPath()
-	{	return getResourcesPath()+File.separator+FOLDER_MISC;		
-	}
-	public static String getFontsPath()
-	{	return getMiscPath()+File.separator+FOLDER_FONTS;		
-	}
-	public static String getIconsPath()
-	{	return getMiscPath()+File.separator+FOLDER_ICONS;		
-	}
-	public static String getImagesPath()
-	{	return getMiscPath()+File.separator+FOLDER_IMAGES;		
 	}
 	
 	public static String getSchemasPath()
