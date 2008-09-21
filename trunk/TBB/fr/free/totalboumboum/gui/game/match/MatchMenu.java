@@ -3,6 +3,7 @@ package fr.free.totalboumboum.gui.game.match;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.Graphics;
 import java.awt.event.ActionEvent;
 import java.io.IOException;
 
@@ -60,7 +61,7 @@ public class MatchMenu extends InnerMenuPanel implements MatchRenderPanel
 		BoxLayout layout = new BoxLayout(this,BoxLayout.LINE_AXIS); 
 		setLayout(layout);
 		// background
-		setBackground(new Color(0,0,0,128));
+		setBackground(GuiTools.COLOR_COMMON_BACKGROUND);
 		// size
 		int height = GuiTools.getSize(GuiTools.HORIZONTAL_SPLIT_MENU_PANEL_HEIGHT);
 		int width = GuiTools.getSize(GuiTools.HORIZONTAL_SPLIT_MENU_PANEL_WIDTH);
@@ -197,4 +198,11 @@ public class MatchMenu extends InnerMenuPanel implements MatchRenderPanel
 			}
 		});	
 	}
+	
+	@Override
+    protected void paintComponent(Graphics g)
+	{	//g.clearRect(0, 0, getWidth(), getHeight());
+//		getParent().paintComponents(g);
+		super.paintComponent(g);
+    }
 }

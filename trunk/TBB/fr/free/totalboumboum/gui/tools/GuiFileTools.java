@@ -28,6 +28,7 @@ public class GuiFileTools
 	public final static String FOLDER_DESCRIPTION = "description";
 	public static final String FOLDER_FONTS = "fonts";
 	public static final String FOLDER_GUI = "gui";
+	public static final String FOLDER_HEADERS = "headers";
 	public final static String FOLDER_HOME = "home";
 	public static final String FOLDER_ICONS = "icons";
 	public static final String FOLDER_IMAGES = "images";
@@ -39,7 +40,6 @@ public class GuiFileTools
 	public final static String FOLDER_RIGHT_BLUE = "right_blue";
 	public final static String FOLDER_RIGHT_RED = "right_red";
 	public final static String FOLDER_STATS = "stats";
-	public static final String FOLDER_TABLE = "languages";
 
 	public static String getGuiPath()
 	{	return fr.free.totalboumboum.tools.FileTools.getResourcesPath()+File.separator+FOLDER_GUI;		

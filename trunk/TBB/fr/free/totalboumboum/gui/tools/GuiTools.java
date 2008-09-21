@@ -138,11 +138,11 @@ public class GuiTools
 	
 	
 	// colors
-	public final static Color COLOR_COMMON_BACKGROUND = new Color(255,255,255,128);
+	public final static Color COLOR_COMMON_BACKGROUND = new Color(255,255,255,150);
 	public final static Color COLOR_TITLE_FOREGROUND = Color.BLACK;
 	public final static Color COLOR_TABLE_NEUTRAL_BACKGROUND = new Color(0,0,0,20);
 	public final static Color COLOR_TABLE_REGULAR_FOREGROUND = Color.BLACK;
-	public final static Color COLOR_TABLE_HEADER_BACKGROUND = new Color(0,0,0,128);
+	public final static Color COLOR_TABLE_HEADER_BACKGROUND = new Color(0,0,0,130);
 	public final static Color COLOR_TABLE_HEADER_FOREGROUND = Color.WHITE;
 	public final static int ALPHA_TABLE_REGULAR_BACKGROUND_LEVEL1 = 80; //scores
 	public final static int ALPHA_TABLE_REGULAR_BACKGROUND_LEVEL2 = 140; // rounds/matches
@@ -290,8 +290,8 @@ public class GuiTools
 					ICON_ROLLOVER,ICON_ROLLOVER_SELECTED,
 					ICON_PRESSED};
 			//
-			String baseFolder = GuiFileTools.getIconsPath()+File.separator+"buttons";
-			{	String folder = baseFolder+File.separator+"description"+File.separator;
+			String baseFolder = GuiFileTools.getIconsPath()+File.separator+GuiFileTools.FOLDER_BUTTONS;
+			{	String folder = baseFolder+File.separator+GuiFileTools.FOLDER_DESCRIPTION+File.separator;
 				for(int i=0;i<buttonStates.length;i++)
 				{	image = loadIcon(folder+buttonStates[i]+".png",absent);
 					icons.put(TOURNAMENT_BUTTON_DESCRIPTION+buttonStates[i],image);
@@ -299,7 +299,7 @@ public class GuiTools
 					icons.put(ROUND_BUTTON_DESCRIPTION+buttonStates[i],image);
 				}
 			}
-			{	String folder = baseFolder+File.separator+"left_blue"+File.separator;
+			{	String folder = baseFolder+File.separator+GuiFileTools.FOLDER_LEFT_BLUE+File.separator;
 				for(int i=0;i<buttonStates.length;i++)
 				{	image = loadIcon(folder+buttonStates[i]+".png",absent);
 					icons.put(TOURNAMENT_BUTTON_MENU+buttonStates[i],image);
@@ -307,7 +307,7 @@ public class GuiTools
 					icons.put(ROUND_BUTTON_CURRENT_MATCH+buttonStates[i],image);
 				}
 			}
-			{	String folder = baseFolder+File.separator+"left_red"+File.separator;
+			{	String folder = baseFolder+File.separator+GuiFileTools.FOLDER_LEFT_RED+File.separator;
 				for(int i=0;i<buttonStates.length;i++)
 				{	image = loadIcon(folder+buttonStates[i]+".png",absent);
 					icons.put(TOURNAMENT_BUTTON_FINISH+buttonStates[i],image);
@@ -315,13 +315,13 @@ public class GuiTools
 					icons.put(ROUND_BUTTON_FINISH+buttonStates[i],image);
 				}
 			}
-			{	String folder = baseFolder+File.separator+"play"+File.separator;
+			{	String folder = baseFolder+File.separator+GuiFileTools.FOLDER_PLAY+File.separator;
 				for(int i=0;i<buttonStates.length;i++)
 				{	image = loadIcon(folder+buttonStates[i]+".png",absent);
 					icons.put(ROUND_BUTTON_PLAY+buttonStates[i],image);
 				}
 			}
-			{	String folder = baseFolder+File.separator+"home"+File.separator;
+			{	String folder = baseFolder+File.separator+GuiFileTools.FOLDER_HOME+File.separator;
 				for(int i=0;i<buttonStates.length;i++)
 				{	image = loadIcon(folder+buttonStates[i]+".png",absent);
 					icons.put(TOURNAMENT_BUTTON_QUIT+buttonStates[i],image);
@@ -329,7 +329,7 @@ public class GuiTools
 					icons.put(ROUND_BUTTON_QUIT+buttonStates[i],image);
 				}
 			}
-			{	String folder = baseFolder+File.separator+"results"+File.separator;
+			{	String folder = baseFolder+File.separator+GuiFileTools.FOLDER_RESULTS+File.separator;
 				for(int i=0;i<buttonStates.length;i++)
 				{	image = loadIcon(folder+buttonStates[i]+".png",absent);
 					icons.put(TOURNAMENT_BUTTON_RESULTS+buttonStates[i],image);
@@ -337,12 +337,12 @@ public class GuiTools
 					icons.put(ROUND_BUTTON_RESULTS+buttonStates[i],image);
 				}
 			}
-			{	String folder = baseFolder+File.separator+"right_blue"+File.separator;
+			{	String folder = baseFolder+File.separator+GuiFileTools.FOLDER_RIGHT_BLUE+File.separator;
 				for(int i=0;i<buttonStates.length;i++)
 				{	image = loadIcon(folder+buttonStates[i]+".png",absent);
 				}
 			}
-			{	String folder = baseFolder+File.separator+"right_red"+File.separator;
+			{	String folder = baseFolder+File.separator+GuiFileTools.FOLDER_RIGHT_RED+File.separator;
 				for(int i=0;i<buttonStates.length;i++)
 				{	image = loadIcon(folder+buttonStates[i]+".png",absent);
 					icons.put(TOURNAMENT_BUTTON_CURRENT_MATCH+buttonStates[i],image);
@@ -351,7 +351,7 @@ public class GuiTools
 					icons.put(MATCH_BUTTON_NEXT_ROUND+buttonStates[i],image);
 				}
 			}
-			{	String folder = baseFolder+File.separator+"stats"+File.separator;
+			{	String folder = baseFolder+File.separator+GuiFileTools.FOLDER_STATS+File.separator;
 				for(int i=0;i<buttonStates.length;i++)
 				{	image = loadIcon(folder+buttonStates[i]+".png",absent);
 					icons.put(TOURNAMENT_BUTTON_STATISTICS+buttonStates[i],image);
@@ -362,54 +362,54 @@ public class GuiTools
 		}
 		
 		// tables
-		{	String folder = GuiFileTools.getIconsPath()+File.separator+"tables"+File.separator;
+		{	String folder = GuiFileTools.getIconsPath()+File.separator+GuiFileTools.FOLDER_HEADERS+File.separator;
 			// bombs
-			image = loadIcon(folder+"bombs.png",absent);
+			image = loadIcon(folder+GuiFileTools.FILE_BOMBS,absent);
 			icons.put(GAME_TOURNAMENT_HEADER_BOMBS,image);
 			icons.put(GAME_MATCH_HEADER_BOMBS,image);
 			icons.put(GAME_ROUND_HEADER_BOMBS,image);
 			// crowns
-			image = loadIcon(folder+"crowns.png",absent);
+			image = loadIcon(folder+GuiFileTools.FILE_CROWNS,absent);
 			icons.put(GAME_ROUND_HEADER_CROWNS,image);
 			// deaths
-			image = loadIcon(folder+"deaths.png",absent);
+			image = loadIcon(folder+GuiFileTools.FILE_DEATHS,absent);
 			icons.put(GAME_TOURNAMENT_HEADER_DEATHS,image);
 			icons.put(GAME_MATCH_HEADER_DEATHS,image);
 			icons.put(GAME_ROUND_HEADER_DEATHS,image);
 			// frags
-			image = loadIcon(folder+"frags.png",absent);
+			image = loadIcon(folder+GuiFileTools.FILE_FRAGS,absent);
 			icons.put(GAME_ROUND_HEADER_FRAGS,image);
 			// items
-			image = loadIcon(folder+"items.png",absent);
+			image = loadIcon(folder+GuiFileTools.FILE_ITEMS,absent);
 			icons.put(GAME_TOURNAMENT_HEADER_ITEMS,image);
 			icons.put(GAME_MATCH_HEADER_ITEMS,image);
 			icons.put(GAME_ROUND_HEADER_ITEMS,image);
 			// kills
-			image = loadIcon(folder+"kills.png",absent);
+			image = loadIcon(folder+GuiFileTools.FILE_KILLS,absent);
 			icons.put(GAME_TOURNAMENT_HEADER_KILLS,image);
 			icons.put(GAME_MATCH_HEADER_KILLS,image);
 			icons.put(GAME_ROUND_HEADER_KILLS,image);
 			// name
-			image = loadIcon(folder+"name.png",absent);
+			image = loadIcon(folder+GuiFileTools.FILE_NAME,absent);
 			icons.put(GAME_TOURNAMENT_HEADER_NAME,image);
 			icons.put(GAME_MATCH_HEADER_NAME,image);
 			icons.put(GAME_ROUND_HEADER_NAME,image);
 			// paintings
-			image = loadIcon(folder+"paintings.png",absent);
+			image = loadIcon(folder+GuiFileTools.FILE_PAINTINGS,absent);
 			icons.put(GAME_ROUND_HEADER_PAINTINGS,image);
 			// points
-			image = loadIcon(folder+"points.png",absent);
+			image = loadIcon(folder+GuiFileTools.FILE_POINTS,absent);
 			icons.put(GAME_TOURNAMENT_HEADER_POINTS,image);
 			icons.put(GAME_MATCH_HEADER_POINTS,image);
 			icons.put(GAME_ROUND_HEADER_POINTS,image);
 			// rank
-			image = loadIcon(folder+"rank.png",absent);
+			image = loadIcon(folder+GuiFileTools.FILE_RANK,absent);
 			icons.put(GAME_MATCH_HEADER_RANK,image);
 			// time
-			image = loadIcon(folder+"time.png",absent);
+			image = loadIcon(folder+GuiFileTools.FILE_TIME,absent);
 			icons.put(GAME_ROUND_HEADER_TIME,image);
 			// total
-			image = loadIcon(folder+"total.png",absent);
+			image = loadIcon(folder+GuiFileTools.FILE_TOTAL,absent);
 			icons.put(GAME_TOURNAMENT_HEADER_TOTAL,image);
 			icons.put(GAME_MATCH_HEADER_TOTAL,image);
 		}			
@@ -528,9 +528,8 @@ public class GuiTools
 			button.setBorderPainted(false);
 			button.setBorder(null);
 			button.setMargin(null);
-//			button.setBackground(new Color(0,0,0,0));
 	        button.setContentAreaFilled(false);
-			
+	        button.setFocusPainted(false);
 		}
 		else
 		{	// text 

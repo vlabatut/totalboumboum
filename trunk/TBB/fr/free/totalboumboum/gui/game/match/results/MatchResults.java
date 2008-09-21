@@ -140,9 +140,14 @@ public class MatchResults extends EntitledDataPanel
 		}
 		
 		// completing missing labels
-		int col = 2+4+rounds.size();
-		while(resultsPanel.getColumnCount()<col)
-			resultsPanel.addColumn(col);
+		int col = 2+4+(rounds.size()-1);
+		int cols = 2+4+rounds.size()+2;
+		if(resultsPanel.getColumnCount()<cols)
+		{	resultsPanel.addColumn(col);
+			JLabel lbl = resultsPanel.getLabel(0,col);
+			String txt = getConfiguration().getLanguage().getText(GuiTools.GAME_MATCH_HEADER_ROUND)+rounds.size();
+			lbl.setText(txt);
+		}
 		
 		// display the ranking
 		Iterator<PlayerPoints> i = ranking.descendingIterator();

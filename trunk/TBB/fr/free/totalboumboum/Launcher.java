@@ -602,12 +602,14 @@ public class Launcher
 	 * - correction du bug qui faisait activer le GC et ramer le jeu au cours du deuxième match.
 	 * - la taille minimale du nom dans les résultats est la largeur de l'icone
 	 * - mutualisation des éléments de la GUI : tableaux, etc
+	 * - réorganisation de la partie language
+	 * - correction d'un bug d'affichage dans le raffraichissement des boutons
+	 * - assombrir l'image de fond quand y a des tables par dessus
 	 * 
 	 * *******************************************************
 	 * *********************** A FAIRE ***********************
 	 * *******************************************************
 	 * - définir les présentations des rounds
-	 * - assombrir l'image de fond quand y a des tables par dessus
 	 * - possibilité de donner des noms aux matches et aux rounds
 	 * - gérer le shrink
 	 * - problème de collisions quand on change la vitesse (surement un problème d'arrondi, ou alors un saut trop grand (en distance), voir si j'avais implémenté la maximalisation du déplacement malgré une éventuelle collision...)
