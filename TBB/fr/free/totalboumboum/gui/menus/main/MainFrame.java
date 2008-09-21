@@ -3,7 +3,9 @@ package fr.free.totalboumboum.gui.menus.main;
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.RepaintManager;
 import javax.swing.SwingUtilities;
+import javax.swing.UIManager;
 import javax.xml.parsers.ParserConfigurationException;
 
 import org.xml.sax.SAXException;
@@ -16,6 +18,7 @@ import fr.free.totalboumboum.gui.data.configuration.GuiConfiguration;
 import fr.free.totalboumboum.gui.data.configuration.GuiConfigurationLoader;
 import fr.free.totalboumboum.gui.generic.MenuContainer;
 import fr.free.totalboumboum.gui.generic.MenuPanel;
+import fr.free.totalboumboum.gui.tools.FullRepaintManager;
 import fr.free.totalboumboum.gui.tools.GuiFileTools;
 import fr.free.totalboumboum.gui.tools.GuiTools;
 import fr.free.totalboumboum.tools.FileTools;
@@ -51,6 +54,10 @@ public class MainFrame extends JFrame implements WindowListener,MenuContainer
 		setPreferredSize(getConfiguration().getGameConfiguration().getPanelDimension());
 		setResizable(false);
 		setVisible(true);
+		//
+		UIManager.put("MenuItemUI","CustomMenuItemUI");
+		RepaintManager.setCurrentManager(new FullRepaintManager());
+
 		//
 		pack();
 

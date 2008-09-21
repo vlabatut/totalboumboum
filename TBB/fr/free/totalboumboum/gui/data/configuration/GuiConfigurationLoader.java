@@ -90,5 +90,6 @@ public class GuiConfigurationLoader
 		double zoomX = dim.getWidth()/(double)image.getWidth();
 		double zoom = Math.max(zoomX,zoomY);
 		image = ImageTools.resize(image,zoom,true);	
+		result.setBackground(image);
 	}
 }

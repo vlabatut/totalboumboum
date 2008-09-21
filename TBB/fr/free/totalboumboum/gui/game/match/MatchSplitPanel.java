@@ -3,6 +3,7 @@ package fr.free.totalboumboum.gui.game.match;
 import java.awt.BorderLayout;
 import java.awt.Graphics;
 import java.awt.image.BufferedImage;
+import java.awt.image.RescaleOp;
 import java.io.File;
 import java.io.IOException;
 
@@ -23,6 +24,10 @@ public class MatchSplitPanel extends SplitMenuPanel
 		setPreferredSize(getConfiguration().getPanelDimension());
 		// background
 		image = getConfiguration().getBackground();
+		float[] scales = { 0.5f, 0.5f, 0.5f, 1f };
+		float[] offsets = new float[4];
+		RescaleOp rop = new RescaleOp(scales, offsets, null);
+	    image = rop.filter(image, null);
 		// panels
 		setMenuPart(new MatchMenu(this,parent));
 	}
