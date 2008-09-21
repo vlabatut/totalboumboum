@@ -600,14 +600,14 @@ public class Launcher
 	 * - pb d'affichage des résultats quand trop de rounds : taille minimale du nom fixée à la taille de l'icone, et tooltip avec le nom complet
 	 * - tout petit pb de synchronisation de l'animation de fin de partie avec la fin effective du panel d'animation
 	 * - correction du bug qui faisait activer le GC et ramer le jeu au cours du deuxième match.
+	 * - la taille minimale du nom dans les résultats est la largeur de l'icone
+	 * - mutualisation des éléments de la GUI : tableaux, etc
 	 * 
 	 * *******************************************************
 	 * *********************** A FAIRE ***********************
 	 * *******************************************************
 	 * - définir les présentations des rounds
 	 * - assombrir l'image de fond quand y a des tables par dessus
-	 * - la taille minimale du nom dans les résultats est la largeur de l'icone
-	 * - mutualisation des éléments de la GUI : tableaux, etc
 	 * - possibilité de donner des noms aux matches et aux rounds
 	 * - gérer le shrink
 	 * - problème de collisions quand on change la vitesse (surement un problème d'arrondi, ou alors un saut trop grand (en distance), voir si j'avais implémenté la maximalisation du déplacement malgré une éventuelle collision...)
