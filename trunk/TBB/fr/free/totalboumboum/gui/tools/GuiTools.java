@@ -19,13 +19,124 @@ import javax.swing.JButton;
 import javax.swing.JToggleButton;
 
 import fr.free.totalboumboum.data.configuration.Configuration;
+import fr.free.totalboumboum.gui.data.configuration.GuiConfiguration;
 import fr.free.totalboumboum.gui.generic.ButtonAware;
 import fr.free.totalboumboum.tools.FileTools;
-import fr.free.totalboumboum.tools.GuiTools;
 import fr.free.totalboumboum.tools.ImageTools;
 
-public class SwingTools
+public class GuiTools
 {	
+	// names
+	// MAIN MENU
+	public static final String MAIN_MENU_BUTTON_HEROES = "MainMenuButtonHeroes";
+	public static final String MAIN_MENU_BUTTON_LEVELS = "MainMenuButtonLevels";
+	public static final String MAIN_MENU_BUTTON_OPTIONS = "MainMenuButtonOptions";
+	public static final String MAIN_MENU_BUTTON_PROFILES = "MainMenuButtonProfiles";
+	public static final String MAIN_MENU_BUTTON_QUICKMATCH = "MainMenuButtonQuickMatch";
+	public static final String MAIN_MENU_BUTTON_STATISTICS = "MainMenuButtonStatistics";
+	public static final String MAIN_MENU_BUTTON_TOURNAMENT = "MainMenuButtonTournament";
+	
+	// OPTIONS MENU
+	public static final String OPTIONS_MENU_BUTTON_BACK = "OptionMenuButtonBack";
+	public static final String OPTIONS_MENU_BUTTON_GAMEPLAY = "OptionMenuButtonGamePlay";
+	public static final String OPTIONS_MENU_BUTTON_VIDEO = "OptionMenuButtonVideo";
+
+	// TOURNAMENT MENU	
+	public static final String TOURNAMENT_MENU_BUTTON_BACK = "TournamentMenuButtonBack";
+	public static final String TOURNAMENT_MENU_BUTTON_CONTINUE = "TournamentMenuButtonContinue";
+	public static final String TOURNAMENT_MENU_BUTTON_LOAD = "TournamentMenuButtonLoad";
+	public static final String TOURNAMENT_MENU_BUTTON_NEW = "TournamentMenuButtonNew";
+	public static final String TOURNAMENT_MENU_BUTTON_PLAYERS = "TournamentMenuButtonPlayers";
+	public static final String TOURNAMENT_MENU_BUTTON_RULES = "TournamentMenuButtonRules";
+	public static final String TOURNAMENT_MENU_BUTTON_SAVE_AS = "TournamentMenuButtonSaveAs";
+	public static final String TOURNAMENT_MENU_BUTTON_START = "TournamentMenuButtonStart";
+
+	// TOURNAMENT PANEL
+	public static final String TOURNAMENT_BUTTON_QUIT = "TournamentButtonQuit";
+	public static final String TOURNAMENT_BUTTON_CURRENT_MATCH = "TournamentButtonCurrentMatch";
+	public static final String TOURNAMENT_BUTTON_DESCRIPTION = "TournamentButtonDescription";
+	public static final String TOURNAMENT_BUTTON_FINISH = "TournamentButtonFinish";
+	public static final String TOURNAMENT_BUTTON_MENU = "TournamentButtonMenu";
+	public static final String TOURNAMENT_BUTTON_NEXT_MATCH = "TournamentButtonNextMatch";
+	public static final String TOURNAMENT_BUTTON_RESULTS = "TournamentButtonResults";
+	public static final String TOURNAMENT_BUTTON_STATISTICS = "TournamentButtonStatistics";
+	
+	// MATCH PANEL
+	public static final String MATCH_BUTTON_QUIT = "MatchButtonQuit";
+	public static final String MATCH_BUTTON_CURRENT_ROUND = "MatchButtonCurrentRound";
+	public static final String MATCH_BUTTON_CURRENT_TOURNAMENT = "MatchButtonCurrentTournament";
+	public static final String MATCH_BUTTON_DESCRIPTION = "MatchButtonDescription";
+	public static final String MATCH_BUTTON_FINISH = "MatchButtonFinish";
+	public static final String MATCH_BUTTON_NEXT_ROUND = "MatchButtonNextRound";
+	public static final String MATCH_BUTTON_RESULTS = "MatchButtonResults";
+	public static final String MATCH_BUTTON_STATISTICS = "MatchButtonStatistics";
+	
+	// ROUND PANEL
+	public static final String ROUND_BUTTON_QUIT = "RoundButtonQuit";
+	public static final String ROUND_BUTTON_CURRENT_MATCH = "RoundButtonCurrentMatch";
+	public static final String ROUND_BUTTON_DESCRIPTION = "RoundButtonDescription";
+	public static final String ROUND_BUTTON_FINISH = "RoundButtonFinish";
+	public static final String ROUND_BUTTON_PLAY = "RoundButtonPlay";
+	public static final String ROUND_BUTTON_RESULTS = "RoundButtonResults";
+	public static final String ROUND_BUTTON_STATISTICS = "RoundButtonStatistics";
+	public static final String ROUND_PROGRESSBAR_BOMBSET = "RoundProgressbarBombset";
+	public static final String ROUND_PROGRESSBAR_COMMON = "RoundProgressbarCommon";
+	public static final String ROUND_PROGRESSBAR_COMPLETE = "RoundProgressbarComplete";
+	public static final String ROUND_PROGRESSBAR_ITEMSET = "RoundProgressbarItemset";
+	public static final String ROUND_PROGRESSBAR_PLAYER = "RoundProgressbarPlayer";
+	public static final String ROUND_PROGRESSBAR_THEME = "RoundProgressbarTheme";
+	public static final String ROUND_PROGRESSBAR_ZONE = "RoundProgressbarZone";
+	
+	// GAME PANEL
+	public static final String GAME_TOURNAMENT_TITLE_DESCRIPTION = "GameTournamentTitleDescription";
+	public static final String GAME_TOURNAMENT_TITLE_RESULTS = "GameTournamentTitleResults";
+	public static final String GAME_TOURNAMENT_TITLE_STATISTICS = "GameTournamentTitleStatistics";
+	public static final String GAME_TOURNAMENT_HEADER_NAME = "GameTournamentHeaderName";
+	public static final String GAME_TOURNAMENT_HEADER_POINTS = "GameTournamentHeaderPoints";
+	public static final String GAME_TOURNAMENT_HEADER_BOMBS = "GameTournamentHeaderBombs";
+	public static final String GAME_TOURNAMENT_HEADER_DEATHS = "GameTournamentHeaderDeaths";
+	public static final String GAME_TOURNAMENT_HEADER_ITEMS = "GameTournamentHeaderItems";
+	public static final String GAME_TOURNAMENT_HEADER_KILLS = "GameTournamentHeaderKills";
+	public static final String GAME_TOURNAMENT_HEADER_TOTAL = "GameTournamentHeaderTotal";
+	public static final String GAME_TOURNAMENT_HEADER_MATCH = "GameTournamentHeaderMatch";
+	public static final String GAME_TOURNAMENT_HEADER_MATCHES = "GameTournamentHeaderMatches";	
+	public static final String GAME_TOURNAMENT_HEADER_LIMITS = "GameTournamentHeaderLimits";	
+	public static final String GAME_TOURNAMENT_HEADER_POINTSPROCESS = "GameTournamentHeaderPointprocess";	
+	
+	public static final String GAME_MATCH_TITLE_DESCRIPTION = "GameMatchTitleDescription";
+	public static final String GAME_MATCH_TITLE_RESULTS = "GameMatchTitleResults";
+	public static final String GAME_MATCH_TITLE_STATISTICS = "GameMatchTitleStatistics";
+	public static final String GAME_MATCH_HEADER_NAME = "GameMatchHeaderName";
+	public static final String GAME_MATCH_HEADER_POINTS = "GameMatchHeaderPoints";
+	public static final String GAME_MATCH_HEADER_BOMBS = "GameMatchHeaderBombs";
+	public static final String GAME_MATCH_HEADER_DEATHS = "GameMatchHeaderDeaths";
+	public static final String GAME_MATCH_HEADER_ITEMS = "GameMatchHeaderItems";
+	public static final String GAME_MATCH_HEADER_KILLS = "GameMatchHeaderKills";
+	public static final String GAME_MATCH_HEADER_RANK = "GameMatchHeaderRank";
+	public static final String GAME_MATCH_HEADER_TOTAL = "GameMatchHeaderTotal";
+	public static final String GAME_MATCH_HEADER_ROUND = "GameMatchHeaderRound";
+	public static final String GAME_MATCH_HEADER_ROUNDS = "GameMatchHeaderRounds";	
+	public static final String GAME_MATCH_HEADER_LIMITS = "GameMatchHeaderLimits";	
+	public static final String GAME_MATCH_HEADER_POINTSPROCESS = "GameMatchHeaderPointprocess";	
+	
+	public static final String GAME_ROUND_TITLE_DESCRIPTION = "GameRoundTitleDescription";
+	public static final String GAME_ROUND_TITLE_RESULTS = "GameRoundTitleResults";
+	public static final String GAME_ROUND_TITLE_STATISTICS = "GameRoundTitleStatistics";
+	public static final String GAME_ROUND_HEADER_NAME = "GameRoundHeaderName";
+	public static final String GAME_ROUND_HEADER_POINTS = "GameRoundHeaderPoints";
+	public static final String GAME_ROUND_HEADER_BOMBS = "GameRoundHeaderBombs";
+	public static final String GAME_ROUND_HEADER_DEATHS = "GameRoundHeaderDeaths";
+	public static final String GAME_ROUND_HEADER_ITEMS = "GameRoundHeaderItems";
+	public static final String GAME_ROUND_HEADER_KILLS = "GameRoundHeaderKills";
+	public static final String GAME_ROUND_HEADER_CROWNS = "GameRoundHeaderCrowns";
+	public static final String GAME_ROUND_HEADER_FRAGS = "GameRoundHeaderFrags";
+	public static final String GAME_ROUND_HEADER_PAINTINGS = "GameRoundHeaderPaintings";
+	public static final String GAME_ROUND_HEADER_TIME = "GameRoundHeaderTime";
+	
+	
+	
+	
+	
 	// colors
 	public final static Color COLOR_COMMON_BACKGROUND = new Color(255,255,255,128);
 	public final static Color COLOR_TITLE_FOREGROUND = Color.BLACK;
@@ -89,7 +200,7 @@ public class SwingTools
 	private static final HashMap<String,BufferedImage> icons = new HashMap<String,BufferedImage>();
 	
 
-	public static void init(Configuration configuration, Graphics g)
+	public static void init(GuiConfiguration configuration, Graphics g)
 	{	// init
 		Dimension panelDimension = configuration.getPanelDimension();
 		int width = panelDimension.width;
@@ -179,51 +290,51 @@ public class SwingTools
 					ICON_ROLLOVER,ICON_ROLLOVER_SELECTED,
 					ICON_PRESSED};
 			//
-			String baseFolder = FileTools.getIconsPath()+File.separator+"buttons";
+			String baseFolder = GuiFileTools.getIconsPath()+File.separator+"buttons";
 			{	String folder = baseFolder+File.separator+"description"+File.separator;
 				for(int i=0;i<buttonStates.length;i++)
 				{	image = loadIcon(folder+buttonStates[i]+".png",absent);
-					icons.put(GuiTools.TOURNAMENT_BUTTON_DESCRIPTION+buttonStates[i],image);
-					icons.put(GuiTools.MATCH_BUTTON_DESCRIPTION+buttonStates[i],image);
-					icons.put(GuiTools.ROUND_BUTTON_DESCRIPTION+buttonStates[i],image);
+					icons.put(TOURNAMENT_BUTTON_DESCRIPTION+buttonStates[i],image);
+					icons.put(MATCH_BUTTON_DESCRIPTION+buttonStates[i],image);
+					icons.put(ROUND_BUTTON_DESCRIPTION+buttonStates[i],image);
 				}
 			}
 			{	String folder = baseFolder+File.separator+"left_blue"+File.separator;
 				for(int i=0;i<buttonStates.length;i++)
 				{	image = loadIcon(folder+buttonStates[i]+".png",absent);
-					icons.put(GuiTools.TOURNAMENT_BUTTON_MENU+buttonStates[i],image);
-					icons.put(GuiTools.MATCH_BUTTON_CURRENT_TOURNAMENT+buttonStates[i],image);
-					icons.put(GuiTools.ROUND_BUTTON_CURRENT_MATCH+buttonStates[i],image);
+					icons.put(TOURNAMENT_BUTTON_MENU+buttonStates[i],image);
+					icons.put(MATCH_BUTTON_CURRENT_TOURNAMENT+buttonStates[i],image);
+					icons.put(ROUND_BUTTON_CURRENT_MATCH+buttonStates[i],image);
 				}
 			}
 			{	String folder = baseFolder+File.separator+"left_red"+File.separator;
 				for(int i=0;i<buttonStates.length;i++)
 				{	image = loadIcon(folder+buttonStates[i]+".png",absent);
-					icons.put(GuiTools.TOURNAMENT_BUTTON_FINISH+buttonStates[i],image);
-					icons.put(GuiTools.MATCH_BUTTON_FINISH+buttonStates[i],image);
-					icons.put(GuiTools.ROUND_BUTTON_FINISH+buttonStates[i],image);
+					icons.put(TOURNAMENT_BUTTON_FINISH+buttonStates[i],image);
+					icons.put(MATCH_BUTTON_FINISH+buttonStates[i],image);
+					icons.put(ROUND_BUTTON_FINISH+buttonStates[i],image);
 				}
 			}
 			{	String folder = baseFolder+File.separator+"play"+File.separator;
 				for(int i=0;i<buttonStates.length;i++)
 				{	image = loadIcon(folder+buttonStates[i]+".png",absent);
-					icons.put(GuiTools.ROUND_BUTTON_PLAY+buttonStates[i],image);
+					icons.put(ROUND_BUTTON_PLAY+buttonStates[i],image);
 				}
 			}
 			{	String folder = baseFolder+File.separator+"home"+File.separator;
 				for(int i=0;i<buttonStates.length;i++)
 				{	image = loadIcon(folder+buttonStates[i]+".png",absent);
-					icons.put(GuiTools.TOURNAMENT_BUTTON_QUIT+buttonStates[i],image);
-					icons.put(GuiTools.MATCH_BUTTON_QUIT+buttonStates[i],image);
-					icons.put(GuiTools.ROUND_BUTTON_QUIT+buttonStates[i],image);
+					icons.put(TOURNAMENT_BUTTON_QUIT+buttonStates[i],image);
+					icons.put(MATCH_BUTTON_QUIT+buttonStates[i],image);
+					icons.put(ROUND_BUTTON_QUIT+buttonStates[i],image);
 				}
 			}
 			{	String folder = baseFolder+File.separator+"results"+File.separator;
 				for(int i=0;i<buttonStates.length;i++)
 				{	image = loadIcon(folder+buttonStates[i]+".png",absent);
-					icons.put(GuiTools.TOURNAMENT_BUTTON_RESULTS+buttonStates[i],image);
-					icons.put(GuiTools.MATCH_BUTTON_RESULTS+buttonStates[i],image);
-					icons.put(GuiTools.ROUND_BUTTON_RESULTS+buttonStates[i],image);
+					icons.put(TOURNAMENT_BUTTON_RESULTS+buttonStates[i],image);
+					icons.put(MATCH_BUTTON_RESULTS+buttonStates[i],image);
+					icons.put(ROUND_BUTTON_RESULTS+buttonStates[i],image);
 				}
 			}
 			{	String folder = baseFolder+File.separator+"right_blue"+File.separator;
@@ -234,73 +345,73 @@ public class SwingTools
 			{	String folder = baseFolder+File.separator+"right_red"+File.separator;
 				for(int i=0;i<buttonStates.length;i++)
 				{	image = loadIcon(folder+buttonStates[i]+".png",absent);
-					icons.put(GuiTools.TOURNAMENT_BUTTON_CURRENT_MATCH+buttonStates[i],image);
-					icons.put(GuiTools.TOURNAMENT_BUTTON_NEXT_MATCH+buttonStates[i],image);
-					icons.put(GuiTools.MATCH_BUTTON_CURRENT_ROUND+buttonStates[i],image);
-					icons.put(GuiTools.MATCH_BUTTON_NEXT_ROUND+buttonStates[i],image);
+					icons.put(TOURNAMENT_BUTTON_CURRENT_MATCH+buttonStates[i],image);
+					icons.put(TOURNAMENT_BUTTON_NEXT_MATCH+buttonStates[i],image);
+					icons.put(MATCH_BUTTON_CURRENT_ROUND+buttonStates[i],image);
+					icons.put(MATCH_BUTTON_NEXT_ROUND+buttonStates[i],image);
 				}
 			}
 			{	String folder = baseFolder+File.separator+"stats"+File.separator;
 				for(int i=0;i<buttonStates.length;i++)
 				{	image = loadIcon(folder+buttonStates[i]+".png",absent);
-					icons.put(GuiTools.TOURNAMENT_BUTTON_STATISTICS+buttonStates[i],image);
-					icons.put(GuiTools.MATCH_BUTTON_STATISTICS+buttonStates[i],image);
-					icons.put(GuiTools.ROUND_BUTTON_STATISTICS+buttonStates[i],image);
+					icons.put(TOURNAMENT_BUTTON_STATISTICS+buttonStates[i],image);
+					icons.put(MATCH_BUTTON_STATISTICS+buttonStates[i],image);
+					icons.put(ROUND_BUTTON_STATISTICS+buttonStates[i],image);
 				}
 			}
 		}
 		
 		// tables
-		{	String folder = FileTools.getIconsPath()+File.separator+"tables"+File.separator;
+		{	String folder = GuiFileTools.getIconsPath()+File.separator+"tables"+File.separator;
 			// bombs
 			image = loadIcon(folder+"bombs.png",absent);
-			icons.put(GuiTools.GAME_TOURNAMENT_HEADER_BOMBS,image);
-			icons.put(GuiTools.GAME_MATCH_HEADER_BOMBS,image);
-			icons.put(GuiTools.GAME_ROUND_HEADER_BOMBS,image);
+			icons.put(GAME_TOURNAMENT_HEADER_BOMBS,image);
+			icons.put(GAME_MATCH_HEADER_BOMBS,image);
+			icons.put(GAME_ROUND_HEADER_BOMBS,image);
 			// crowns
 			image = loadIcon(folder+"crowns.png",absent);
-			icons.put(GuiTools.GAME_ROUND_HEADER_CROWNS,image);
+			icons.put(GAME_ROUND_HEADER_CROWNS,image);
 			// deaths
 			image = loadIcon(folder+"deaths.png",absent);
-			icons.put(GuiTools.GAME_TOURNAMENT_HEADER_DEATHS,image);
-			icons.put(GuiTools.GAME_MATCH_HEADER_DEATHS,image);
-			icons.put(GuiTools.GAME_ROUND_HEADER_DEATHS,image);
+			icons.put(GAME_TOURNAMENT_HEADER_DEATHS,image);
+			icons.put(GAME_MATCH_HEADER_DEATHS,image);
+			icons.put(GAME_ROUND_HEADER_DEATHS,image);
 			// frags
 			image = loadIcon(folder+"frags.png",absent);
-			icons.put(GuiTools.GAME_ROUND_HEADER_FRAGS,image);
+			icons.put(GAME_ROUND_HEADER_FRAGS,image);
 			// items
 			image = loadIcon(folder+"items.png",absent);
-			icons.put(GuiTools.GAME_TOURNAMENT_HEADER_ITEMS,image);
-			icons.put(GuiTools.GAME_MATCH_HEADER_ITEMS,image);
-			icons.put(GuiTools.GAME_ROUND_HEADER_ITEMS,image);
+			icons.put(GAME_TOURNAMENT_HEADER_ITEMS,image);
+			icons.put(GAME_MATCH_HEADER_ITEMS,image);
+			icons.put(GAME_ROUND_HEADER_ITEMS,image);
 			// kills
 			image = loadIcon(folder+"kills.png",absent);
-			icons.put(GuiTools.GAME_TOURNAMENT_HEADER_KILLS,image);
-			icons.put(GuiTools.GAME_MATCH_HEADER_KILLS,image);
-			icons.put(GuiTools.GAME_ROUND_HEADER_KILLS,image);
+			icons.put(GAME_TOURNAMENT_HEADER_KILLS,image);
+			icons.put(GAME_MATCH_HEADER_KILLS,image);
+			icons.put(GAME_ROUND_HEADER_KILLS,image);
 			// name
 			image = loadIcon(folder+"name.png",absent);
-			icons.put(GuiTools.GAME_TOURNAMENT_HEADER_NAME,image);
-			icons.put(GuiTools.GAME_MATCH_HEADER_NAME,image);
-			icons.put(GuiTools.GAME_ROUND_HEADER_NAME,image);
+			icons.put(GAME_TOURNAMENT_HEADER_NAME,image);
+			icons.put(GAME_MATCH_HEADER_NAME,image);
+			icons.put(GAME_ROUND_HEADER_NAME,image);
 			// paintings
 			image = loadIcon(folder+"paintings.png",absent);
-			icons.put(GuiTools.GAME_ROUND_HEADER_PAINTINGS,image);
+			icons.put(GAME_ROUND_HEADER_PAINTINGS,image);
 			// points
 			image = loadIcon(folder+"points.png",absent);
-			icons.put(GuiTools.GAME_TOURNAMENT_HEADER_POINTS,image);
-			icons.put(GuiTools.GAME_MATCH_HEADER_POINTS,image);
-			icons.put(GuiTools.GAME_ROUND_HEADER_POINTS,image);
+			icons.put(GAME_TOURNAMENT_HEADER_POINTS,image);
+			icons.put(GAME_MATCH_HEADER_POINTS,image);
+			icons.put(GAME_ROUND_HEADER_POINTS,image);
 			// rank
 			image = loadIcon(folder+"rank.png",absent);
-			icons.put(GuiTools.GAME_MATCH_HEADER_RANK,image);
+			icons.put(GAME_MATCH_HEADER_RANK,image);
 			// time
 			image = loadIcon(folder+"time.png",absent);
-			icons.put(GuiTools.GAME_ROUND_HEADER_TIME,image);
+			icons.put(GAME_ROUND_HEADER_TIME,image);
 			// total
 			image = loadIcon(folder+"total.png",absent);
-			icons.put(GuiTools.GAME_TOURNAMENT_HEADER_TOTAL,image);
-			icons.put(GuiTools.GAME_MATCH_HEADER_TOTAL,image);
+			icons.put(GAME_TOURNAMENT_HEADER_TOTAL,image);
+			icons.put(GAME_MATCH_HEADER_TOTAL,image);
 		}			
 	}
 	
@@ -321,7 +432,7 @@ public class SwingTools
 			result = temp;
 		return result;
 	}
-	public static int getFontSize(double limit, Configuration configuration, Graphics g)
+	public static int getFontSize(double limit, GuiConfiguration configuration, Graphics g)
 	{	int result = 0;
 		int fheight;
 		do
@@ -360,7 +471,7 @@ public class SwingTools
 	
 
 	
-	public static void setButtonContent(String name, AbstractButton button, Configuration configuration)
+	public static void setButtonContent(String name, AbstractButton button, GuiConfiguration configuration)
 	{	// content
 		if(icons.containsKey(name+ICON_NORMAL))
 		{	// normal icon
@@ -435,7 +546,7 @@ public class SwingTools
 		String text = configuration.getLanguage().getText(toolTip);
 		button.setToolTipText(text);
 	}		
-	public static void initButton(AbstractButton result,String name, int width, int height, ButtonAware panel, Configuration configuration)
+	public static void initButton(AbstractButton result,String name, int width, int height, ButtonAware panel, GuiConfiguration configuration)
 	{	// dimension
 		Dimension dim = new Dimension(width,height);
 		result.setMinimumSize(dim);
@@ -447,7 +558,7 @@ public class SwingTools
 		panel.add(result);
 		result.addActionListener(panel);
 	}
-	public static JButton createPrincipalVerticalMenuButton(String name, ButtonAware panel, Configuration configuration)
+	public static JButton createPrincipalVerticalMenuButton(String name, ButtonAware panel, GuiConfiguration configuration)
 	{	int width = sizes.get(MENU_VERTICAL_PRIMARY_BUTTON_WIDTH);
 		int height = sizes.get(MENU_VERTICAL_BUTTON_HEIGHT);
 		JButton result = new JButton();
@@ -455,7 +566,7 @@ public class SwingTools
 		result.setAlignmentX(Component.CENTER_ALIGNMENT);
 		return result;
 	}
-	public static JButton createSecondaryVerticalMenuButton(String name, ButtonAware panel, Configuration configuration)
+	public static JButton createSecondaryVerticalMenuButton(String name, ButtonAware panel, GuiConfiguration configuration)
 	{	int width = sizes.get(MENU_VERTICAL_SECONDARY_BUTTON_WIDTH);
 		int height = sizes.get(MENU_VERTICAL_BUTTON_HEIGHT);
 		JButton result = new JButton();
@@ -463,7 +574,7 @@ public class SwingTools
 		result.setAlignmentX(Component.CENTER_ALIGNMENT);
 		return result;
 	}	
-	public static JButton createHorizontalMenuButton(String name, ButtonAware panel, Configuration configuration)
+	public static JButton createHorizontalMenuButton(String name, ButtonAware panel, GuiConfiguration configuration)
 	{	int width = sizes.get(MENU_HORIZONTAL_BUTTON_WIDTH);
 		int height = sizes.get(MENU_HORIZONTAL_BUTTON_HEIGHT);
 		JButton result = new JButton();
@@ -471,7 +582,7 @@ public class SwingTools
 		result.setAlignmentY(Component.CENTER_ALIGNMENT);
 		return result;
 	}
-	public static JToggleButton createHorizontalMenuToggleButton(String name, ButtonAware panel, Configuration configuration)
+	public static JToggleButton createHorizontalMenuToggleButton(String name, ButtonAware panel, GuiConfiguration configuration)
 	{	int width = sizes.get(MENU_HORIZONTAL_BUTTON_WIDTH);
 		int height = sizes.get(MENU_HORIZONTAL_BUTTON_HEIGHT);
 		JToggleButton result = new JToggleButton();

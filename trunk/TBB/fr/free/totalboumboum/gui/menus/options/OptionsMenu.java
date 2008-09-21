@@ -2,7 +2,9 @@ package fr.free.totalboumboum.gui.menus.options;
 
 import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.Graphics;
 import java.awt.event.ActionEvent;
+import java.awt.image.BufferedImage;
 
 import javax.swing.Box;
 import javax.swing.BoxLayout;
@@ -11,12 +13,13 @@ import javax.swing.JButton;
 import fr.free.totalboumboum.gui.generic.MenuContainer;
 import fr.free.totalboumboum.gui.generic.MenuPanel;
 import fr.free.totalboumboum.gui.generic.SimpleMenuPanel;
-import fr.free.totalboumboum.gui.tools.SwingTools;
-import fr.free.totalboumboum.tools.GuiTools;
+import fr.free.totalboumboum.gui.tools.GuiTools;
 
 public class OptionsMenu extends SimpleMenuPanel
 {	private static final long serialVersionUID = 1L;
 	
+	private BufferedImage image;
+
 	private JButton buttonGamePlay;
 	private JButton buttonVideo;
 	private JButton buttonBack;
@@ -29,15 +32,20 @@ public class OptionsMenu extends SimpleMenuPanel
 		// size
 		setPreferredSize(getConfiguration().getPanelDimension());
 		// background
-		setBackground(Color.RED);
+		image = getConfiguration().getBackground();
 		
 		// buttons
 		add(Box.createVerticalGlue());
-		buttonGamePlay = SwingTools.createPrincipalVerticalMenuButton(GuiTools.OPTIONS_MENU_BUTTON_GAMEPLAY,this,getConfiguration());
-		buttonVideo = SwingTools.createPrincipalVerticalMenuButton(GuiTools.OPTIONS_MENU_BUTTON_VIDEO,this,getConfiguration());
-		add(Box.createRigidArea(new Dimension(0,SwingTools.getSize(SwingTools.MENU_VERTICAL_BUTTON_SPACE))));
-		buttonBack = SwingTools.createPrincipalVerticalMenuButton(GuiTools.OPTIONS_MENU_BUTTON_BACK,this,getConfiguration());
+		buttonGamePlay = GuiTools.createPrincipalVerticalMenuButton(GuiTools.OPTIONS_MENU_BUTTON_GAMEPLAY,this,getConfiguration());
+		buttonVideo = GuiTools.createPrincipalVerticalMenuButton(GuiTools.OPTIONS_MENU_BUTTON_VIDEO,this,getConfiguration());
+		add(Box.createRigidArea(new Dimension(0,GuiTools.getSize(GuiTools.MENU_VERTICAL_BUTTON_SPACE))));
+		buttonBack = GuiTools.createPrincipalVerticalMenuButton(GuiTools.OPTIONS_MENU_BUTTON_BACK,this,getConfiguration());
 		add(Box.createVerticalGlue());		
+	}
+	
+	@Override
+	public void paintComponent(Graphics g)
+	{	g.drawImage(image, 0, 0, null);
 	}
 	
 	public void actionPerformed(ActionEvent e)

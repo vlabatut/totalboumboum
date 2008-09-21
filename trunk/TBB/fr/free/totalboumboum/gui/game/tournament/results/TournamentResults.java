@@ -37,8 +37,7 @@ import fr.free.totalboumboum.gui.generic.SplitMenuPanel;
 import fr.free.totalboumboum.gui.menus.options.OptionsMenu;
 import fr.free.totalboumboum.gui.menus.tournament.TournamentMain;
 import fr.free.totalboumboum.gui.tools.SpringUtilities;
-import fr.free.totalboumboum.gui.tools.SwingTools;
-import fr.free.totalboumboum.tools.GuiTools;
+import fr.free.totalboumboum.gui.tools.GuiTools;
 import fr.free.totalboumboum.tools.ImageTools;
 
 public class TournamentResults extends InnerDataPanel
@@ -54,8 +53,8 @@ public class TournamentResults extends InnerDataPanel
 			setLayout(layout);
 		}
 		// size
-		int height = SwingTools.getSize(SwingTools.HORIZONTAL_SPLIT_DATA_PANEL_HEIGHT);
-		int width = SwingTools.getSize(SwingTools.HORIZONTAL_SPLIT_DATA_PANEL_WIDTH);
+		int height = GuiTools.getSize(GuiTools.HORIZONTAL_SPLIT_DATA_PANEL_HEIGHT);
+		int width = GuiTools.getSize(GuiTools.HORIZONTAL_SPLIT_DATA_PANEL_WIDTH);
 		setPreferredSize(new Dimension(width,height));
 		// background
 		setBackground(new Color(50,50,50));
@@ -65,14 +64,14 @@ public class TournamentResults extends InnerDataPanel
 		{	String txt = getConfiguration().getLanguage().getText(GuiTools.GAME_TOURNAMENT_TITLE_RESULTS);
 			JLabel title = new JLabel(txt);
 			title.setHorizontalAlignment(SwingConstants.CENTER);
-			Font font = getConfiguration().getFont().deriveFont((float)SwingTools.getSize(SwingTools.GAME_TITLE_FONT_SIZE));
+			Font font = getConfiguration().getFont().deriveFont((float)GuiTools.getSize(GuiTools.GAME_TITLE_FONT_SIZE));
 			title.setForeground(Color.BLACK);
 			title.setBackground(new Color(255,255,255,128));
 			title.setOpaque(true);
 			title.setFont(font);
 			title.setAlignmentX(Component.CENTER_ALIGNMENT);
 			add(title);
-			Dimension dim = new Dimension(SwingTools.getSize(SwingTools.GAME_DATA_PANEL_WIDTH),SwingTools.getSize(SwingTools.GAME_DATA_LABEL_TITLE_HEIGHT));
+			Dimension dim = new Dimension(GuiTools.getSize(GuiTools.GAME_DATA_PANEL_WIDTH),GuiTools.getSize(GuiTools.GAME_DATA_LABEL_TITLE_HEIGHT));
 			title.setPreferredSize(dim);
 			title.setMinimumSize(dim);
 			title.setMaximumSize(dim);
@@ -81,7 +80,7 @@ public class TournamentResults extends InnerDataPanel
 		add(Box.createVerticalGlue());
 		
 		// results panel
-		{	AbstractTournament tournament = getConfiguration().getTournament();
+		{	AbstractTournament tournament = getConfiguration().getCurrentTournament();
 			int playerNumber = tournament.getProfiles().size();
 			playerNumber = 16;
 			int lines = playerNumber+1;
@@ -89,17 +88,17 @@ public class TournamentResults extends InnerDataPanel
 			SpringLayout layout = new SpringLayout();			
 			resultsPanel = new JPanel(layout);
 			resultsPanel.setBackground(new Color(255,255,255,128));
-			Dimension dim = new Dimension(SwingTools.getSize(SwingTools.GAME_DATA_PANEL_WIDTH),SwingTools.getSize(SwingTools.GAME_DATA_PANEL_HEIGHT));
+			Dimension dim = new Dimension(GuiTools.getSize(GuiTools.GAME_DATA_PANEL_WIDTH),GuiTools.getSize(GuiTools.GAME_DATA_PANEL_HEIGHT));
 			resultsPanel.setPreferredSize(dim);
 			resultsPanel.setMinimumSize(dim);
 			resultsPanel.setMaximumSize(dim);
 			// headers
-			{	Font font = getConfiguration().getFont().deriveFont((float)SwingTools.getSize(SwingTools.GAME_RESULTS_HEADER_FONT_SIZE));
+			{	Font font = getConfiguration().getFont().deriveFont((float)GuiTools.getSize(GuiTools.GAME_RESULTS_HEADER_FONT_SIZE));
 				{	JLabel lbl = new JLabel(" ");
 					lbl.setOpaque(false);
-					lbl.setPreferredSize(new Dimension(SwingTools.getSize(SwingTools.GAME_RESULTS_LABEL_LINE_HEIGHT),SwingTools.getSize(SwingTools.GAME_RESULTS_LABEL_HEADER_HEIGHT)));
-					lbl.setMaximumSize(new Dimension(SwingTools.getSize(SwingTools.GAME_RESULTS_LABEL_LINE_HEIGHT),SwingTools.getSize(SwingTools.GAME_RESULTS_LABEL_HEADER_HEIGHT)));
-					lbl.setMinimumSize(new Dimension(SwingTools.getSize(SwingTools.GAME_RESULTS_LABEL_LINE_HEIGHT),SwingTools.getSize(SwingTools.GAME_RESULTS_LABEL_HEADER_HEIGHT)));
+					lbl.setPreferredSize(new Dimension(GuiTools.getSize(GuiTools.GAME_RESULTS_LABEL_LINE_HEIGHT),GuiTools.getSize(GuiTools.GAME_RESULTS_LABEL_HEADER_HEIGHT)));
+					lbl.setMaximumSize(new Dimension(GuiTools.getSize(GuiTools.GAME_RESULTS_LABEL_LINE_HEIGHT),GuiTools.getSize(GuiTools.GAME_RESULTS_LABEL_HEADER_HEIGHT)));
+					lbl.setMinimumSize(new Dimension(GuiTools.getSize(GuiTools.GAME_RESULTS_LABEL_LINE_HEIGHT),GuiTools.getSize(GuiTools.GAME_RESULTS_LABEL_HEADER_HEIGHT)));
 					resultsPanel.add(lbl);
 				}
 /*				
@@ -123,13 +122,13 @@ public class TournamentResults extends InnerDataPanel
 				}
 */				
 				BufferedImage[] icons = 
-				{	SwingTools.getIcon(GuiTools.GAME_TOURNAMENT_HEADER_NAME),
-					SwingTools.getIcon(GuiTools.GAME_TOURNAMENT_HEADER_BOMBS),
-					SwingTools.getIcon(GuiTools.GAME_TOURNAMENT_HEADER_ITEMS),
-					SwingTools.getIcon(GuiTools.GAME_TOURNAMENT_HEADER_DEATHS),
-					SwingTools.getIcon(GuiTools.GAME_TOURNAMENT_HEADER_KILLS),
-					SwingTools.getIcon(GuiTools.GAME_TOURNAMENT_HEADER_TOTAL),
-					SwingTools.getIcon(GuiTools.GAME_TOURNAMENT_HEADER_POINTS)
+				{	GuiTools.getIcon(GuiTools.GAME_TOURNAMENT_HEADER_NAME),
+					GuiTools.getIcon(GuiTools.GAME_TOURNAMENT_HEADER_BOMBS),
+					GuiTools.getIcon(GuiTools.GAME_TOURNAMENT_HEADER_ITEMS),
+					GuiTools.getIcon(GuiTools.GAME_TOURNAMENT_HEADER_DEATHS),
+					GuiTools.getIcon(GuiTools.GAME_TOURNAMENT_HEADER_KILLS),
+					GuiTools.getIcon(GuiTools.GAME_TOURNAMENT_HEADER_TOTAL),
+					GuiTools.getIcon(GuiTools.GAME_TOURNAMENT_HEADER_POINTS)
 				};
 				String[] tooltips = 
 				{	getConfiguration().getLanguage().getText(GuiTools.GAME_TOURNAMENT_HEADER_NAME+"Tooltip"),
@@ -148,7 +147,7 @@ public class TournamentResults extends InnerDataPanel
 					lbl.setBackground(new Color(0,0,0,128));
 					lbl.setOpaque(true);
 					resultsPanel.add(lbl);
-					int lineHeight = SwingTools.getSize(SwingTools.GAME_RESULTS_LABEL_HEADER_HEIGHT);
+					int lineHeight = GuiTools.getSize(GuiTools.GAME_RESULTS_LABEL_HEADER_HEIGHT);
 					double zoom = lineHeight/(double)icons[i].getHeight();
 						icons[i] = ImageTools.resize(icons[i],zoom,true);
 					ImageIcon icon = new ImageIcon(icons[i]);
@@ -156,7 +155,7 @@ public class TournamentResults extends InnerDataPanel
 				}
 			}
 			// data
-			{	Font font = getConfiguration().getFont().deriveFont((float)SwingTools.getSize(SwingTools.GAME_RESULTS_LINE_FONT_SIZE));
+			{	Font font = getConfiguration().getFont().deriveFont((float)GuiTools.getSize(GuiTools.GAME_RESULTS_LINE_FONT_SIZE));
 				for(int i=1;i<lines;i++)
 				{	// portrait
 					{	JLabel lbl = new JLabel(" ");
@@ -172,9 +171,9 @@ public class TournamentResults extends InnerDataPanel
 						lbl.setBackground(new Color(0,0,0,20));
 						lbl.setForeground(Color.BLACK);
 						lbl.setOpaque(true);
-						Dimension dimension = new Dimension(Integer.MAX_VALUE,SwingTools.getSize(SwingTools.GAME_RESULTS_LABEL_LINE_HEIGHT));
+						Dimension dimension = new Dimension(Integer.MAX_VALUE,GuiTools.getSize(GuiTools.GAME_RESULTS_LABEL_LINE_HEIGHT));
 						lbl.setMaximumSize(dimension);
-						dimension = new Dimension(SwingTools.getSize(SwingTools.GAME_RESULTS_LABEL_HEADER_HEIGHT),SwingTools.getSize(SwingTools.GAME_RESULTS_LABEL_LINE_HEIGHT));
+						dimension = new Dimension(GuiTools.getSize(GuiTools.GAME_RESULTS_LABEL_HEADER_HEIGHT),GuiTools.getSize(GuiTools.GAME_RESULTS_LABEL_LINE_HEIGHT));
 						lbl.setMinimumSize(dimension);
 						resultsPanel.add(lbl);
 					}
@@ -192,7 +191,7 @@ public class TournamentResults extends InnerDataPanel
 			}
 			//
 			updateData();
-			int margin = SwingTools.getSize(SwingTools.GAME_RESULTS_MARGIN_SIZE);
+			int margin = GuiTools.getSize(GuiTools.GAME_RESULTS_MARGIN_SIZE);
 			SpringUtilities.makeCompactGrid(resultsPanel,lines,cols,margin,margin,margin,margin);
 			add(resultsPanel);
 		}
@@ -208,7 +207,7 @@ public class TournamentResults extends InnerDataPanel
 	@Override
 	public void updateData()
 	{	// init
-		SequenceTournament tournament = (SequenceTournament)getConfiguration().getTournament();
+		SequenceTournament tournament = (SequenceTournament)getConfiguration().getCurrentTournament();
 		ArrayList<Profile> players = tournament.getProfiles();
 		StatisticTournament stats = tournament.getStats();
 		ArrayList<StatisticMatch> matches = stats.getStatMatches();
@@ -234,7 +233,7 @@ public class TournamentResults extends InnerDataPanel
 				JLabel lbl = new JLabel(txt);
 				txt = getConfiguration().getLanguage().getText(GuiTools.GAME_TOURNAMENT_HEADER_MATCH+"Tooltip")+" "+matches.size();
 				lbl.setToolTipText(txt);
-				Font font = getConfiguration().getFont().deriveFont((float)SwingTools.getSize(SwingTools.GAME_RESULTS_HEADER_FONT_SIZE));
+				Font font = getConfiguration().getFont().deriveFont((float)GuiTools.getSize(GuiTools.GAME_RESULTS_HEADER_FONT_SIZE));
 				lbl.setFont(font);
 				lbl.setHorizontalAlignment(SwingConstants.CENTER);
 				lbl.setBackground(new Color(0,0,0,128));
@@ -245,7 +244,7 @@ public class TournamentResults extends InnerDataPanel
 			// data
 			for(int line=1;line<17;line++)
 			{	JLabel lbl = new JLabel(" ");
-				Font font = getConfiguration().getFont().deriveFont((float)SwingTools.getSize(SwingTools.GAME_RESULTS_LINE_FONT_SIZE));
+				Font font = getConfiguration().getFont().deriveFont((float)GuiTools.getSize(GuiTools.GAME_RESULTS_LINE_FONT_SIZE));
 				lbl.setFont(font);
 				lbl.setHorizontalAlignment(SwingConstants.CENTER);
 				lbl.setBackground(new Color(0,0,0,20));
@@ -256,14 +255,14 @@ public class TournamentResults extends InnerDataPanel
 			// layout
 			SpringLayout layout = new SpringLayout();
 			resultsPanel.setLayout(layout);
-			int margin = SwingTools.getSize(SwingTools.GAME_RESULTS_MARGIN_SIZE);
+			int margin = GuiTools.getSize(GuiTools.GAME_RESULTS_MARGIN_SIZE);
 			SpringUtilities.makeCompactGrid(resultsPanel,lines,cols,margin,margin,margin,margin);
 		}
 		
 		// display the ranking
 		Iterator<PlayerPoints> i = ranking.descendingIterator();
 		int k = cols;
-		int lineHeight = SwingTools.getSize(SwingTools.GAME_RESULTS_LABEL_LINE_HEIGHT);
+		int lineHeight = GuiTools.getSize(GuiTools.GAME_RESULTS_LABEL_LINE_HEIGHT);
 		while(i.hasNext())
 		{	PlayerPoints pp = i.next();
 			Profile profile = players.get(pp.getIndex());

@@ -12,6 +12,12 @@ import javax.xml.parsers.ParserConfigurationException;
 
 import org.xml.sax.SAXException;
 
+import fr.free.totalboumboum.game.match.Match;
+
+import fr.free.totalboumboum.data.configuration.Configuration;
+import fr.free.totalboumboum.engine.content.feature.ability.AbstractAbility;
+import fr.free.totalboumboum.game.round.Round;
+import fr.free.totalboumboum.game.tournament.AbstractTournament;
 import fr.free.totalboumboum.gui.data.language.Language;
 import fr.free.totalboumboum.gui.data.language.LanguageLoader;
 
@@ -24,6 +30,18 @@ public class GuiConfiguration
 		setFont(new Font("Arial",Font.PLAIN,10));
 	}
 	
+	/////////////////////////////////////////////////////////////////
+	// GAME CONFIGURATION	/////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	private Configuration gameConfiguration;
+		
+	public void setGameConfiguration(Configuration configuration)
+	{	this.gameConfiguration = configuration;	
+	}
+	public Configuration getGameConfiguration()
+	{	return gameConfiguration;	
+	}
+		
 	/////////////////////////////////////////////////////////////////
 	// LANGUAGE				/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
@@ -53,10 +71,32 @@ public class GuiConfiguration
 	/////////////////////////////////////////////////////////////////
 	private BufferedImage background;
 	
-	public BufferedImage getBufferedImage()
+	public BufferedImage getBackground()
 	{	return background;	
 	}
-	public void setBufferedImage(BufferedImage background)
+	public void setBackground(BufferedImage background)
 	{	this.background = background;	
+	}
+
+	/////////////////////////////////////////////////////////////////
+	// PANEL			/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	public Dimension getPanelDimension()
+	{	return gameConfiguration.getPanelDimension();	
+	}
+
+	/////////////////////////////////////////////////////////////////
+	// GAME			/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	public AbstractTournament getCurrentTournament()
+	{	return gameConfiguration.getTournament();	
+	}
+
+	public Match getCurrentMatch()
+	{	return gameConfiguration.getTournament().getCurrentMatch();	
+	}
+
+	public Round getCurrentRound()
+	{	return gameConfiguration.getTournament().getCurrentMatch().getCurrentRound();	
 	}
 }

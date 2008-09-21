@@ -45,9 +45,8 @@ import fr.free.totalboumboum.gui.generic.SplitMenuPanel;
 import fr.free.totalboumboum.gui.menus.options.OptionsMenu;
 import fr.free.totalboumboum.gui.menus.tournament.TournamentMain;
 import fr.free.totalboumboum.gui.tools.SpringUtilities;
-import fr.free.totalboumboum.gui.tools.SwingTools;
+import fr.free.totalboumboum.gui.tools.GuiTools;
 import fr.free.totalboumboum.tools.FileTools;
-import fr.free.totalboumboum.tools.GuiTools;
 import fr.free.totalboumboum.tools.ImageTools;
 
 public class MatchDescription extends InnerDataPanel
@@ -61,8 +60,8 @@ public class MatchDescription extends InnerDataPanel
 			setLayout(layout);
 		}
 		// size
-		int height = SwingTools.getSize(SwingTools.HORIZONTAL_SPLIT_DATA_PANEL_HEIGHT);
-		int width = SwingTools.getSize(SwingTools.HORIZONTAL_SPLIT_DATA_PANEL_WIDTH);
+		int height = GuiTools.getSize(GuiTools.HORIZONTAL_SPLIT_DATA_PANEL_HEIGHT);
+		int width = GuiTools.getSize(GuiTools.HORIZONTAL_SPLIT_DATA_PANEL_WIDTH);
 		setPreferredSize(new Dimension(width,height));
 		// background
 //		setBackground(new Color(50,50,50));
@@ -74,13 +73,13 @@ public class MatchDescription extends InnerDataPanel
 		{	String txt = getConfiguration().getLanguage().getText(GuiTools.GAME_MATCH_TITLE_DESCRIPTION);
 			JLabel title = new JLabel(txt);
 			title.setHorizontalAlignment(SwingConstants.CENTER);
-			Font font = getConfiguration().getFont().deriveFont((float)SwingTools.getSize(SwingTools.GAME_TITLE_FONT_SIZE));
+			Font font = getConfiguration().getFont().deriveFont((float)GuiTools.getSize(GuiTools.GAME_TITLE_FONT_SIZE));
 			title.setForeground(Color.BLACK);
 			title.setBackground(new Color(255,255,255,200));
 			title.setOpaque(true);
 			title.setFont(font);
 			title.setAlignmentX(Component.CENTER_ALIGNMENT);
-			Dimension dim = new Dimension(SwingTools.getSize(SwingTools.GAME_DATA_PANEL_WIDTH),SwingTools.getSize(SwingTools.GAME_DATA_LABEL_TITLE_HEIGHT));
+			Dimension dim = new Dimension(GuiTools.getSize(GuiTools.GAME_DATA_PANEL_WIDTH),GuiTools.getSize(GuiTools.GAME_DATA_LABEL_TITLE_HEIGHT));
 			title.setPreferredSize(dim);
 			title.setMinimumSize(dim);
 			title.setMaximumSize(dim);
@@ -90,12 +89,12 @@ public class MatchDescription extends InnerDataPanel
 		add(Box.createVerticalGlue());
 
 		// infos panel
-		{	Match match = getConfiguration().getTournament().getCurrentMatch();
+		{	Match match = getConfiguration().getCurrentMatch();
 			JPanel infoPanel = new JPanel();
 			{	BoxLayout layout = new BoxLayout(infoPanel,BoxLayout.LINE_AXIS); 
 				infoPanel.setLayout(layout);
 			}
-			Dimension dim = new Dimension(SwingTools.getSize(SwingTools.GAME_DATA_PANEL_WIDTH),SwingTools.getSize(SwingTools.GAME_DATA_PANEL_HEIGHT));
+			Dimension dim = new Dimension(GuiTools.getSize(GuiTools.GAME_DATA_PANEL_WIDTH),GuiTools.getSize(GuiTools.GAME_DATA_PANEL_HEIGHT));
 			infoPanel.setPreferredSize(dim);
 			infoPanel.setMinimumSize(dim);
 			infoPanel.setMaximumSize(dim);
@@ -109,22 +108,22 @@ public class MatchDescription extends InnerDataPanel
 				SpringLayout layout = new SpringLayout();			
 				JPanel playersPanel = new JPanel(layout);
 				playersPanel.setBackground(new Color(255,255,255,200));
-				dim = new Dimension(SwingTools.getSize(SwingTools.GAME_DESCRIPTION_PANEL_WIDTH),SwingTools.getSize(SwingTools.GAME_DATA_PANEL_HEIGHT));
+				dim = new Dimension(GuiTools.getSize(GuiTools.GAME_DESCRIPTION_PANEL_WIDTH),GuiTools.getSize(GuiTools.GAME_DATA_PANEL_HEIGHT));
 				playersPanel.setPreferredSize(dim);
 				playersPanel.setMinimumSize(dim);
 				playersPanel.setMaximumSize(dim);
 				// headers
-				{	Font font = getConfiguration().getFont().deriveFont((float)SwingTools.getSize(SwingTools.GAME_RESULTS_HEADER_FONT_SIZE));
+				{	Font font = getConfiguration().getFont().deriveFont((float)GuiTools.getSize(GuiTools.GAME_RESULTS_HEADER_FONT_SIZE));
 					{	JLabel lbl = new JLabel(" ");
 						lbl.setOpaque(false);
-						lbl.setPreferredSize(new Dimension(SwingTools.getSize(SwingTools.GAME_RESULTS_LABEL_LINE_HEIGHT),SwingTools.getSize(SwingTools.GAME_RESULTS_LABEL_HEADER_HEIGHT)));
-						lbl.setMaximumSize(new Dimension(SwingTools.getSize(SwingTools.GAME_RESULTS_LABEL_LINE_HEIGHT),SwingTools.getSize(SwingTools.GAME_RESULTS_LABEL_HEADER_HEIGHT)));
-						lbl.setMinimumSize(new Dimension(SwingTools.getSize(SwingTools.GAME_RESULTS_LABEL_LINE_HEIGHT),SwingTools.getSize(SwingTools.GAME_RESULTS_LABEL_HEADER_HEIGHT)));
+						lbl.setPreferredSize(new Dimension(GuiTools.getSize(GuiTools.GAME_RESULTS_LABEL_LINE_HEIGHT),GuiTools.getSize(GuiTools.GAME_RESULTS_LABEL_HEADER_HEIGHT)));
+						lbl.setMaximumSize(new Dimension(GuiTools.getSize(GuiTools.GAME_RESULTS_LABEL_LINE_HEIGHT),GuiTools.getSize(GuiTools.GAME_RESULTS_LABEL_HEADER_HEIGHT)));
+						lbl.setMinimumSize(new Dimension(GuiTools.getSize(GuiTools.GAME_RESULTS_LABEL_LINE_HEIGHT),GuiTools.getSize(GuiTools.GAME_RESULTS_LABEL_HEADER_HEIGHT)));
 						playersPanel.add(lbl);
 					}
 					BufferedImage[] icons = 
-					{	SwingTools.getIcon(GuiTools.GAME_MATCH_HEADER_NAME),
-						SwingTools.getIcon(GuiTools.GAME_MATCH_HEADER_RANK)
+					{	GuiTools.getIcon(GuiTools.GAME_MATCH_HEADER_NAME),
+						GuiTools.getIcon(GuiTools.GAME_MATCH_HEADER_RANK)
 					};
 					String[] tooltips = 
 					{	getConfiguration().getLanguage().getText(GuiTools.GAME_MATCH_HEADER_NAME+"Tooltip"),
@@ -138,7 +137,7 @@ public class MatchDescription extends InnerDataPanel
 						lbl.setBackground(new Color(0,0,0,128));
 						lbl.setOpaque(true);
 						playersPanel.add(lbl);
-						int lineHeight = SwingTools.getSize(SwingTools.GAME_RESULTS_LABEL_HEADER_HEIGHT);
+						int lineHeight = GuiTools.getSize(GuiTools.GAME_RESULTS_LABEL_HEADER_HEIGHT);
 						double zoom = lineHeight/(double)icons[i].getHeight();
 							icons[i] = ImageTools.resize(icons[i],zoom,true);
 						ImageIcon icon = new ImageIcon(icons[i]);
@@ -146,7 +145,7 @@ public class MatchDescription extends InnerDataPanel
 					}
 				}
 				// empty
-				{	Font font = getConfiguration().getFont().deriveFont((float)SwingTools.getSize(SwingTools.GAME_RESULTS_LINE_FONT_SIZE));
+				{	Font font = getConfiguration().getFont().deriveFont((float)GuiTools.getSize(GuiTools.GAME_RESULTS_LINE_FONT_SIZE));
 					for(int i=1;i<lines;i++)
 					{	// portrait
 						{	JLabel lbl = new JLabel(" ");
@@ -162,9 +161,9 @@ public class MatchDescription extends InnerDataPanel
 							lbl.setBackground(new Color(0,0,0,20));
 							lbl.setForeground(Color.BLACK);
 							lbl.setOpaque(true);
-							Dimension dimension = new Dimension(Integer.MAX_VALUE,SwingTools.getSize(SwingTools.GAME_RESULTS_LABEL_LINE_HEIGHT));
+							Dimension dimension = new Dimension(Integer.MAX_VALUE,GuiTools.getSize(GuiTools.GAME_RESULTS_LABEL_LINE_HEIGHT));
 							lbl.setMaximumSize(dimension);
-							dimension = new Dimension(SwingTools.getSize(SwingTools.GAME_RESULTS_LABEL_HEADER_HEIGHT),SwingTools.getSize(SwingTools.GAME_RESULTS_LABEL_LINE_HEIGHT));
+							dimension = new Dimension(GuiTools.getSize(GuiTools.GAME_RESULTS_LABEL_HEADER_HEIGHT),GuiTools.getSize(GuiTools.GAME_RESULTS_LABEL_LINE_HEIGHT));
 							lbl.setMinimumSize(dimension);
 							playersPanel.add(lbl);
 						}
@@ -184,7 +183,7 @@ public class MatchDescription extends InnerDataPanel
 				ArrayList<Profile> players = match.getProfiles();
 				Iterator<Profile> i = players.iterator();
 				int k = cols;
-				int lineHeight = SwingTools.getSize(SwingTools.GAME_RESULTS_LABEL_LINE_HEIGHT);
+				int lineHeight = GuiTools.getSize(GuiTools.GAME_RESULTS_LABEL_LINE_HEIGHT);
 				while(i.hasNext())
 				{	Profile profile = i.next();
 					// color
@@ -217,7 +216,7 @@ public class MatchDescription extends InnerDataPanel
 					}			
 				}
 				//
-				int margin = SwingTools.getSize(SwingTools.GAME_RESULTS_MARGIN_SIZE);
+				int margin = GuiTools.getSize(GuiTools.GAME_RESULTS_MARGIN_SIZE);
 				SpringUtilities.makeCompactGrid(playersPanel,lines,cols,margin,margin,margin,margin);
 				infoPanel.add(playersPanel);
 			}
@@ -228,7 +227,7 @@ public class MatchDescription extends InnerDataPanel
 					textPanel.setLayout(layout);
 				}
 				textPanel.setOpaque(false);
-				dim = new Dimension(SwingTools.getSize(SwingTools.GAME_DESCRIPTION_PANEL_WIDTH),SwingTools.getSize(SwingTools.GAME_DATA_PANEL_HEIGHT));
+				dim = new Dimension(GuiTools.getSize(GuiTools.GAME_DESCRIPTION_PANEL_WIDTH),GuiTools.getSize(GuiTools.GAME_DATA_PANEL_HEIGHT));
 				textPanel.setPreferredSize(dim);
 				textPanel.setMinimumSize(dim);
 				textPanel.setMaximumSize(dim);
@@ -239,7 +238,7 @@ public class MatchDescription extends InnerDataPanel
 						roundsPanel.setLayout(layout);
 					}
 					roundsPanel.setBackground(new Color(255,255,255,200));
-					dim = new Dimension(SwingTools.getSize(SwingTools.GAME_DESCRIPTION_PANEL_WIDTH),SwingTools.getSize(SwingTools.GAME_DESCRIPTION_PANEL_HEIGHT));
+					dim = new Dimension(GuiTools.getSize(GuiTools.GAME_DESCRIPTION_PANEL_WIDTH),GuiTools.getSize(GuiTools.GAME_DESCRIPTION_PANEL_HEIGHT));
 					roundsPanel.setPreferredSize(dim);
 					roundsPanel.setMinimumSize(dim);
 					roundsPanel.setMaximumSize(dim);
@@ -247,7 +246,7 @@ public class MatchDescription extends InnerDataPanel
 					roundsPanel.add(Box.createVerticalGlue());
 					// title
 					{	JLabel titleLabel = new JLabel(" ");
-						Font font = getConfiguration().getFont().deriveFont((float)SwingTools.getSize(SwingTools.GAME_RESULTS_HEADER_FONT_SIZE));
+						Font font = getConfiguration().getFont().deriveFont((float)GuiTools.getSize(GuiTools.GAME_RESULTS_HEADER_FONT_SIZE));
 						titleLabel.setFont(font);
 						String text = getConfiguration().getLanguage().getText(GuiTools.GAME_MATCH_HEADER_ROUNDS);
 						titleLabel.setText(text);
@@ -257,7 +256,7 @@ public class MatchDescription extends InnerDataPanel
 						titleLabel.setForeground(Color.WHITE);
 						titleLabel.setBackground(new Color(0,0,0,128));
 						titleLabel.setOpaque(true);
-						dim = new Dimension(SwingTools.getSize(SwingTools.GAME_DESCRIPTION_LABEL_LINE_WIDTH),SwingTools.getSize(SwingTools.GAME_RESULTS_LABEL_HEADER_HEIGHT));
+						dim = new Dimension(GuiTools.getSize(GuiTools.GAME_DESCRIPTION_LABEL_LINE_WIDTH),GuiTools.getSize(GuiTools.GAME_RESULTS_LABEL_HEADER_HEIGHT));
 						titleLabel.setPreferredSize(dim);
 						titleLabel.setMinimumSize(dim);
 						titleLabel.setMaximumSize(dim);
@@ -296,7 +295,7 @@ public class MatchDescription extends InnerDataPanel
 */				        
 						SimpleAttributeSet sa = new SimpleAttributeSet();
 						StyleConstants.setAlignment(sa,StyleConstants.ALIGN_JUSTIFIED);
-						Font font = getConfiguration().getFont().deriveFont((float)SwingTools.getSize(SwingTools.GAME_DESCRIPTION_LABEL_TEXT_FONT_SIZE));
+						Font font = getConfiguration().getFont().deriveFont((float)GuiTools.getSize(GuiTools.GAME_DESCRIPTION_LABEL_TEXT_FONT_SIZE));
 						StyleConstants.setFontFamily(sa, font.getFamily());
 						StyleConstants.setFontSize(sa, font.getSize());
 						StyledDocument doc = textPane.getStyledDocument();
@@ -309,7 +308,7 @@ public class MatchDescription extends InnerDataPanel
 						}
 						doc.setParagraphAttributes(0,doc.getLength()-1,sa,true);
 						textPane.setBackground(new Color(0,0,0,20));
-						dim = new Dimension(SwingTools.getSize(SwingTools.GAME_DESCRIPTION_LABEL_LINE_WIDTH),SwingTools.getSize(SwingTools.GAME_DESCRIPTION_LABEL_TEXT_HEIGHT));
+						dim = new Dimension(GuiTools.getSize(GuiTools.GAME_DESCRIPTION_LABEL_LINE_WIDTH),GuiTools.getSize(GuiTools.GAME_DESCRIPTION_LABEL_TEXT_HEIGHT));
 						textPane.setPreferredSize(dim);
 						textPane.setMinimumSize(dim);
 						textPane.setMaximumSize(dim);
@@ -328,7 +327,7 @@ public class MatchDescription extends InnerDataPanel
 						pointsPanel.setLayout(layout);
 					}
 					pointsPanel.setBackground(new Color(255,255,255,200));
-					dim = new Dimension(SwingTools.getSize(SwingTools.GAME_DESCRIPTION_PANEL_WIDTH),SwingTools.getSize(SwingTools.GAME_DESCRIPTION_PANEL_HEIGHT));
+					dim = new Dimension(GuiTools.getSize(GuiTools.GAME_DESCRIPTION_PANEL_WIDTH),GuiTools.getSize(GuiTools.GAME_DESCRIPTION_PANEL_HEIGHT));
 					pointsPanel.setPreferredSize(dim);
 					pointsPanel.setMinimumSize(dim);
 					pointsPanel.setMaximumSize(dim);
@@ -336,7 +335,7 @@ public class MatchDescription extends InnerDataPanel
 					pointsPanel.add(Box.createVerticalGlue());
 					// title
 					{	JLabel titleLabel = new JLabel(" ");
-						Font font = getConfiguration().getFont().deriveFont((float)SwingTools.getSize(SwingTools.GAME_RESULTS_HEADER_FONT_SIZE));
+						Font font = getConfiguration().getFont().deriveFont((float)GuiTools.getSize(GuiTools.GAME_RESULTS_HEADER_FONT_SIZE));
 						titleLabel.setFont(font);
 						String text = getConfiguration().getLanguage().getText(GuiTools.GAME_MATCH_HEADER_POINTSPROCESS);
 						titleLabel.setText(text);
@@ -346,7 +345,7 @@ public class MatchDescription extends InnerDataPanel
 						titleLabel.setForeground(Color.WHITE);
 						titleLabel.setBackground(new Color(0,0,0,128));
 						titleLabel.setOpaque(true);
-						dim = new Dimension(SwingTools.getSize(SwingTools.GAME_DESCRIPTION_LABEL_LINE_WIDTH),SwingTools.getSize(SwingTools.GAME_RESULTS_LABEL_HEADER_HEIGHT));
+						dim = new Dimension(GuiTools.getSize(GuiTools.GAME_DESCRIPTION_LABEL_LINE_WIDTH),GuiTools.getSize(GuiTools.GAME_RESULTS_LABEL_HEADER_HEIGHT));
 						titleLabel.setPreferredSize(dim);
 						titleLabel.setMinimumSize(dim);
 						titleLabel.setMaximumSize(dim);
@@ -362,7 +361,7 @@ public class MatchDescription extends InnerDataPanel
 						textLabel.setHorizontalAlignment(SwingConstants.LEFT);
 						textLabel.setBackground(new Color(0,0,0,20));
 						textLabel.setOpaque(true);
-						dim = new Dimension(SwingTools.getSize(SwingTools.GAME_DESCRIPTION_LABEL_LINE_WIDTH),SwingTools.getSize(SwingTools.GAME_DESCRIPTION_LABEL_TEXT_HEIGHT));
+						dim = new Dimension(GuiTools.getSize(GuiTools.GAME_DESCRIPTION_LABEL_LINE_WIDTH),GuiTools.getSize(GuiTools.GAME_DESCRIPTION_LABEL_TEXT_HEIGHT));
 						textLabel.setPreferredSize(dim);
 						textLabel.setMinimumSize(dim);
 						textLabel.setMaximumSize(dim);
@@ -381,7 +380,7 @@ public class MatchDescription extends InnerDataPanel
 						limitPanel.setLayout(layout);
 					}
 					limitPanel.setBackground(new Color(255,255,255,200));
-					dim = new Dimension(SwingTools.getSize(SwingTools.GAME_DESCRIPTION_PANEL_WIDTH),SwingTools.getSize(SwingTools.GAME_DESCRIPTION_PANEL_HEIGHT));
+					dim = new Dimension(GuiTools.getSize(GuiTools.GAME_DESCRIPTION_PANEL_WIDTH),GuiTools.getSize(GuiTools.GAME_DESCRIPTION_PANEL_HEIGHT));
 					limitPanel.setPreferredSize(dim);
 					limitPanel.setMinimumSize(dim);
 					limitPanel.setMaximumSize(dim);
@@ -389,7 +388,7 @@ public class MatchDescription extends InnerDataPanel
 					limitPanel.add(Box.createVerticalGlue());
 					// title
 					{	JLabel titleLabel = new JLabel(" ");
-						Font font = getConfiguration().getFont().deriveFont((float)SwingTools.getSize(SwingTools.GAME_RESULTS_HEADER_FONT_SIZE));
+						Font font = getConfiguration().getFont().deriveFont((float)GuiTools.getSize(GuiTools.GAME_RESULTS_HEADER_FONT_SIZE));
 						titleLabel.setFont(font);
 						String text = getConfiguration().getLanguage().getText(GuiTools.GAME_MATCH_HEADER_LIMITS);
 						titleLabel.setText(text);
@@ -399,7 +398,7 @@ public class MatchDescription extends InnerDataPanel
 						titleLabel.setForeground(Color.WHITE);
 						titleLabel.setBackground(new Color(0,0,0,128));
 						titleLabel.setOpaque(true);
-						dim = new Dimension(SwingTools.getSize(SwingTools.GAME_DESCRIPTION_LABEL_LINE_WIDTH),SwingTools.getSize(SwingTools.GAME_RESULTS_LABEL_HEADER_HEIGHT));
+						dim = new Dimension(GuiTools.getSize(GuiTools.GAME_DESCRIPTION_LABEL_LINE_WIDTH),GuiTools.getSize(GuiTools.GAME_RESULTS_LABEL_HEADER_HEIGHT));
 						titleLabel.setPreferredSize(dim);
 						titleLabel.setMinimumSize(dim);
 						titleLabel.setMaximumSize(dim);
@@ -415,7 +414,7 @@ public class MatchDescription extends InnerDataPanel
 						textLabel.setHorizontalAlignment(SwingConstants.LEFT);
 						textLabel.setBackground(new Color(0,0,0,20));
 						textLabel.setOpaque(true);
-						dim = new Dimension(SwingTools.getSize(SwingTools.GAME_DESCRIPTION_LABEL_LINE_WIDTH),SwingTools.getSize(SwingTools.GAME_DESCRIPTION_LABEL_TEXT_HEIGHT));
+						dim = new Dimension(GuiTools.getSize(GuiTools.GAME_DESCRIPTION_LABEL_LINE_WIDTH),GuiTools.getSize(GuiTools.GAME_DESCRIPTION_LABEL_TEXT_HEIGHT));
 						textLabel.setPreferredSize(dim);
 						textLabel.setMinimumSize(dim);
 						textLabel.setMaximumSize(dim);

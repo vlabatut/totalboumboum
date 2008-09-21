@@ -14,8 +14,7 @@ import fr.free.totalboumboum.gui.generic.SimpleMenuPanel;
 import fr.free.totalboumboum.gui.generic.SplitMenuPanel;
 import fr.free.totalboumboum.gui.menus.options.OptionsMenu;
 import fr.free.totalboumboum.gui.menus.tournament.TournamentMain;
-import fr.free.totalboumboum.gui.tools.SwingTools;
-import fr.free.totalboumboum.tools.GuiTools;
+import fr.free.totalboumboum.gui.tools.GuiTools;
 
 public abstract class TournamentDescription extends InnerDataPanel
 {	
@@ -24,8 +23,8 @@ public abstract class TournamentDescription extends InnerDataPanel
 	public TournamentDescription(SplitMenuPanel container)
 	{	super(container);
 		// size
-		int height = SwingTools.getSize(SwingTools.HORIZONTAL_SPLIT_DATA_PANEL_HEIGHT);
-		int width = SwingTools.getSize(SwingTools.HORIZONTAL_SPLIT_DATA_PANEL_WIDTH);
+		int height = GuiTools.getSize(GuiTools.HORIZONTAL_SPLIT_DATA_PANEL_HEIGHT);
+		int width = GuiTools.getSize(GuiTools.HORIZONTAL_SPLIT_DATA_PANEL_WIDTH);
 		setPreferredSize(new Dimension(width,height));
 		// background
 		setBackground(Color.BLUE);

@@ -2,19 +2,18 @@ package fr.free.totalboumboum.gui.tools;
 
 import java.io.File;
 
-public class FileTools
+public class GuiFileTools
 {
 	public static final String EXTENSION_SCHEMA = ".xsd";
 	public static final String EXTENSION_DATA = ".xml";
-	public static final String EXTENSION_PNG = ".png";
-	
+
 	// files
 	public final static String FILE_BOMBS = "bombs.png";
-	public final static String FILE_CONFIGURATION = "configuration";
 	public final static String FILE_CROWNS = "crowns.png";
 	public final static String FILE_DEATHS = "deaths.png";
 	public final static String FILE_FRAGS = "frags.png";
 	public final static String FILE_FRAME = "frame.png";
+	public final static String FILE_GUI = "gui";
 	public final static String FILE_ITEMS = "items.png";
 	public final static String FILE_KILLS = "kills.png";
 	public final static String FILE_NAME = "name.png";

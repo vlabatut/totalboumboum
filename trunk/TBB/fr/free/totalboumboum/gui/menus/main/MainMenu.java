@@ -24,9 +24,8 @@ import fr.free.totalboumboum.gui.generic.MenuPanel;
 import fr.free.totalboumboum.gui.generic.SimpleMenuPanel;
 import fr.free.totalboumboum.gui.menus.options.OptionsMenu;
 import fr.free.totalboumboum.gui.menus.tournament.TournamentMain;
-import fr.free.totalboumboum.gui.tools.SwingTools;
+import fr.free.totalboumboum.gui.tools.GuiTools;
 import fr.free.totalboumboum.tools.FileTools;
-import fr.free.totalboumboum.tools.GuiTools;
 import fr.free.totalboumboum.tools.ImageTools;
 
 public class MainMenu extends SimpleMenuPanel
@@ -53,28 +52,22 @@ public class MainMenu extends SimpleMenuPanel
 		// size
 		setPreferredSize(getConfiguration().getPanelDimension());
 		// background
-//		setBackground(Color.GRAY);
-		String imagePath = FileTools.getImagesPath()+File.separator+"background.jpg";
-		image = ImageTools.loadImage(imagePath,null);
-		double zoomY = getPreferredSize().getHeight()/(double)image.getHeight();
-		double zoomX = getPreferredSize().getWidth()/(double)image.getWidth();
-		double zoom = Math.max(zoomX,zoomY);
-		image = ImageTools.resize(image,zoom,true);
+		image = getConfiguration().getBackground();
 		// panels
 		tournamentMainPanel = new TournamentMain(getContainer(),this);
 		optionsMenuPanel = new OptionsMenu(getContainer(),this);
 		
 		// buttons
 		add(Box.createVerticalGlue());
-		buttonOptions = SwingTools.createPrincipalVerticalMenuButton(GuiTools.MAIN_MENU_BUTTON_OPTIONS,this,getConfiguration());
-		add(Box.createRigidArea(new Dimension(0,SwingTools.getSize(SwingTools.MENU_VERTICAL_BUTTON_SPACE))));
-		buttonProfiles = SwingTools.createPrincipalVerticalMenuButton(GuiTools.MAIN_MENU_BUTTON_PROFILES,this,getConfiguration());
-		buttonStats = SwingTools.createPrincipalVerticalMenuButton(GuiTools.MAIN_MENU_BUTTON_STATISTICS,this,getConfiguration());
-		buttonHeroes = SwingTools.createPrincipalVerticalMenuButton(GuiTools.MAIN_MENU_BUTTON_HEROES,this,getConfiguration());
-		buttonLevels = SwingTools.createPrincipalVerticalMenuButton(GuiTools.MAIN_MENU_BUTTON_LEVELS,this,getConfiguration());
-		add(Box.createRigidArea(new Dimension(0,SwingTools.getSize(SwingTools.MENU_VERTICAL_BUTTON_SPACE))));
-		buttonTournament = SwingTools.createPrincipalVerticalMenuButton(GuiTools.MAIN_MENU_BUTTON_TOURNAMENT,this,getConfiguration());
-		buttonQuickMatch = SwingTools.createPrincipalVerticalMenuButton(GuiTools.MAIN_MENU_BUTTON_QUICKMATCH,this,getConfiguration());
+		buttonOptions = GuiTools.createPrincipalVerticalMenuButton(GuiTools.MAIN_MENU_BUTTON_OPTIONS,this,getConfiguration());
+		add(Box.createRigidArea(new Dimension(0,GuiTools.getSize(GuiTools.MENU_VERTICAL_BUTTON_SPACE))));
+		buttonProfiles = GuiTools.createPrincipalVerticalMenuButton(GuiTools.MAIN_MENU_BUTTON_PROFILES,this,getConfiguration());
+		buttonStats = GuiTools.createPrincipalVerticalMenuButton(GuiTools.MAIN_MENU_BUTTON_STATISTICS,this,getConfiguration());
+		buttonHeroes = GuiTools.createPrincipalVerticalMenuButton(GuiTools.MAIN_MENU_BUTTON_HEROES,this,getConfiguration());
+		buttonLevels = GuiTools.createPrincipalVerticalMenuButton(GuiTools.MAIN_MENU_BUTTON_LEVELS,this,getConfiguration());
+		add(Box.createRigidArea(new Dimension(0,GuiTools.getSize(GuiTools.MENU_VERTICAL_BUTTON_SPACE))));
+		buttonTournament = GuiTools.createPrincipalVerticalMenuButton(GuiTools.MAIN_MENU_BUTTON_TOURNAMENT,this,getConfiguration());
+		buttonQuickMatch = GuiTools.createPrincipalVerticalMenuButton(GuiTools.MAIN_MENU_BUTTON_QUICKMATCH,this,getConfiguration());
 		add(Box.createVerticalGlue());		
 	}
 	
