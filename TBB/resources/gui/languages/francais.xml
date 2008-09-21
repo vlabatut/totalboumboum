@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<language
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+	xsi:noNamespaceSchemaLocation="..\xml\schemas\language.xsd">
+	
+	<text name="ButtonBack" value="Retour" />
+	<text name="ButtonEdit" value="Editer" />
+	<text name="ButtonHeroes" value="Heros" />
+	<text name="ButtonLevels" value="Niveaux" />
+	<text name="ButtonLoad" value="Charger" />
+	<text name="ButtonNew" value="Nouveau" />
+	<text name="ButtonOptions" value="Options" />
+	<text name="ButtonPlayers" value="Joueurs" />
+	<text name="ButtonProfiles" value="Profils" />
+	<text name="ButtonQuit" value="Quitter" />
+	<text name="ButtonStart" value="Jouer" />
+	<text name="ButtonTournament" value="Tournoi" />
+	<text name="ButtonVideo" value="Vidéo" />
+	
+</language>
