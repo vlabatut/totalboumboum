@@ -3,9 +3,6 @@
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
 	xsi:noNamespaceSchemaLocation="..\schemas\configuration.xsd">
 	
-<!-- LANGUAGE -->	
-	<language value="english"  />
-	
 <!-- ENGINE -->	
 	<fps value="100" />
 	<speed value="4" />
@@ -13,11 +10,9 @@
 <!-- DISPLAY -->	
 	<smoothGraphics value="true" />
 		
-<!-- GUI -->	
+<!-- DISPLAY -->	
 	<panelDimension width="1024" height="768" />
 <!-- 	<panelDimension width="750" height="600" />  -->
-	<font file="Anime Ace.ttf" />
-<!--	<font file="Anime Ace.ttf" />  -->
 	
 <!-- PROFILES -->	
 	<profiles>
