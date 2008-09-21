@@ -6,9 +6,9 @@ import java.awt.event.ActionEvent;
 
 import javax.swing.BoxLayout;
 
-import fr.free.totalboumboum.gui.SwingTools;
 import fr.free.totalboumboum.gui.generic.InnerDataPanel;
 import fr.free.totalboumboum.gui.generic.SplitMenuPanel;
+import fr.free.totalboumboum.gui.tools.SwingTools;
 
 public class TournamentData extends InnerDataPanel
 {	private static final long serialVersionUID = 1L;

@@ -12,9 +12,9 @@ import fr.free.totalboumboum.data.configuration.Configuration;
 import fr.free.totalboumboum.data.configuration.ConfigurationLoader;
 import fr.free.totalboumboum.data.configuration.ConfigurationSaver;
 import fr.free.totalboumboum.data.configuration.GameConstants;
-import fr.free.totalboumboum.gui.SwingTools;
 import fr.free.totalboumboum.gui.generic.MenuContainer;
 import fr.free.totalboumboum.gui.generic.MenuPanel;
+import fr.free.totalboumboum.gui.tools.SwingTools;
 import fr.free.totalboumboum.tools.FileTools;
 import fr.free.totalboumboum.tools.XmlTools;
 
@@ -45,6 +45,7 @@ public class MainFrame extends JFrame implements WindowListener,MenuContainer
 		Image icon = Toolkit.getDefaultToolkit().getImage(iconPath);
 		setIconImage(icon);
 		// dimensions
+		setPreferredSize(getConfiguration().getPanelDimension());
 		setResizable(false);
 		setVisible(true);
 		//
