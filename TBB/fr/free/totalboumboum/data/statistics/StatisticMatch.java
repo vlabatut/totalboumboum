@@ -104,4 +104,9 @@ public class StatisticMatch implements Serializable, StatisticBase
 	{	int result = rounds.size();
 		return result;
 	}
+	
+	public void setWinner(int index)
+	{	//NOTE pb : comment savoir qui a 'gagné' ?
+		
+	}
 }

@@ -4,5 +4,5 @@ import fr.free.totalboumboum.data.statistics.StatisticBase;
 
 public abstract class Limit
 {
-	public abstract boolean testLimit(StatisticBase stats);
+	public abstract int testLimit(StatisticBase stats);
 }

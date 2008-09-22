@@ -12,6 +12,7 @@ import fr.free.totalboumboum.data.configuration.Configuration;
 import fr.free.totalboumboum.data.profile.Profile;
 import fr.free.totalboumboum.data.statistics.StatisticMatch;
 import fr.free.totalboumboum.data.statistics.StatisticRound;
+import fr.free.totalboumboum.game.limit.Limits;
 import fr.free.totalboumboum.game.point.PointPoints;
 import fr.free.totalboumboum.game.point.PointProcessor;
 import fr.free.totalboumboum.game.round.Round;
@@ -63,23 +64,15 @@ public class Match
 	/////////////////////////////////////////////////////////////////
 	// LIMIT			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	private MatchLimit matchLimit;
-	private int matchLimitValue;
+	private Limits matchLimits;
 
-	public MatchLimit getMatchLimit() {
-		return matchLimit;
+	public Limits getMatchLimits()
+	{	return matchLimits;
 	}
-	public void setMatchLimit(MatchLimit matchLimit)
-	{	this.matchLimit = matchLimit;
+	public void setMatchLimits(Limits matchLimits)
+	{	this.matchLimits = matchLimits;
 	}
-	
-	public int getMatchLimitValue()
-	{	return matchLimitValue;
-	}
-	public void setMatchLimitValue(int matchLimitValue)
-	{	this.matchLimitValue = matchLimitValue;
-	}
-		
+			
 	/////////////////////////////////////////////////////////////////
 	// LEVELS			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
@@ -141,25 +134,12 @@ public class Match
 		stats.addStatisticRound(statsRound);
 		stats.computePoints(pointProcessor);
 		//
-		int played = rounds.size();
-		switch(matchLimit)
-		{	// all levels have to be played
-			case ALL_LEVELS:
-				int levelNbr = levels.size();
-				matchOver = levelNbr == played;
-				break;
-			// a fixed number of rounds have to be played
-			case ROUND_LIMIT:
-				matchOver = played == matchLimitValue;
-				break;
-			// a fixed number of points have to be scored
-			case POINTS_LIMIT:
-				//NOTE à compléter
-				matchOver = played == matchLimitValue;
-				break;
-		}
-		if(matchOver)
-		{	tournament.matchOver();
+		int limit = matchLimits.testLimits(stats);
+		if(limit>=0 || !iterator.hasNext())
+		{	if(limit<profiles.size())
+				stats.setWinner(limit);
+			matchOver = true;
+			tournament.matchOver();
 			panel.matchOver();
 		}
 		else
@@ -174,9 +154,11 @@ public class Match
 		iterator = null;
 		levels.clear();
 		rounds.clear();
+		// match limits
+		matchLimits.finish();
+		matchLimits = null;
 		// misc
 		configuration = null;
-		matchLimit = null;
 		panel = null;
 		pointProcessor = null;
 		profiles.clear();

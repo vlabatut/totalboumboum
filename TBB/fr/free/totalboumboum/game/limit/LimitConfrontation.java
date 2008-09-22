@@ -2,10 +2,14 @@ package fr.free.totalboumboum.game.limit;
 
 import fr.free.totalboumboum.data.statistics.StatisticBase;
 
-public class ConfrontationLimit extends Limit
+public class LimitConfrontation extends Limit
 {
 	private int limit;
 
+	public LimitConfrontation(int limit)
+	{	this.limit = limit;	
+	}
+	
 	public int getLimit()
 	{	return limit;
 	}
@@ -15,10 +19,11 @@ public class ConfrontationLimit extends Limit
 	}
 
 	@Override
-	public boolean testLimit(StatisticBase stats)
-	{	boolean result;
+	public int testLimit(StatisticBase stats)
+	{	int result = -1;
 		int nbr = stats.getConfrontationCount();
-		result = nbr>=limit;
+		if(nbr>=limit)
+			result = stats.getPlayers().size();
 		return result;
 	}
 }

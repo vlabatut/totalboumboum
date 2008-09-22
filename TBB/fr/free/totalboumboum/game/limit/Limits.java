@@ -13,10 +13,10 @@ public class Limits
 	{	limits.add(limit);
 	}
 	
-	public boolean testLimits(StatisticBase stats)
-	{	boolean result = false;
+	public int testLimits(StatisticBase stats)
+	{	int result = -1;
 		Iterator<Limit> i = limits.iterator();
-		while(i.hasNext() && !result)
+		while(i.hasNext() && result<0)
 		{	Limit temp = i.next();
 			result = temp.testLimit(stats);
 		}

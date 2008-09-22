@@ -12,6 +12,10 @@ import org.jdom.Attribute;
 import org.jdom.Element;
 import org.xml.sax.SAXException;
 
+import fr.free.totalboumboum.game.limit.Limit;
+import fr.free.totalboumboum.game.limit.LimitLoader;
+import fr.free.totalboumboum.game.limit.Limits;
+import fr.free.totalboumboum.game.limit.LimitsLoader;
 import fr.free.totalboumboum.game.point.PointProcessor;
 import fr.free.totalboumboum.game.point.PointProcessorLoader;
 import fr.free.totalboumboum.game.round.PlayMode;
@@ -54,16 +58,10 @@ public class MatchLoader
 	}		
 		
     private static void loadOptionsElement(Element root, Match result)
-    {	// init
-    	String str;
-    	// limit
-    	str = root.getAttribute(XmlTools.ATT_MATCH_LIMIT).getValue().toUpperCase();
-    	MatchLimit matchLimit = MatchLimit.getValueFromString(str);
-    	result.setMatchLimit(matchLimit);
-    	// limit value
-    	str = root.getAttribute(XmlTools.ATT_MATCH_LIMIT_VALUE).getValue();
-    	int matchLimitValue = Integer.valueOf(str);
-    	result.setMatchLimitValue(matchLimitValue);
+    {	// limit
+    	Element element = root.getChild(XmlTools.ELT_LIMITS);
+    	Limits matchLimits = LimitsLoader.loadLimitsElement(element);
+    	result.setMatchLimits(matchLimits);
     }
 
     private static void loadLevelsElement(Element root, String folder, Match result) throws ParserConfigurationException, SAXException, IOException

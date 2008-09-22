@@ -47,6 +47,7 @@ public class XmlTools
 	public static final String ELT_COLORS = "colors";
 	public static final String ELT_COLORMAP = "colormap";
 	public static final String ELT_COLORSPRITE = "colorsprite";
+	public static final String ELT_CONFRONTATION = "confrontation";
 	public static final String ELT_CONSTANT = "constant";
 	public static final String ELT_CONTROLS = "controls";
 	public static final String ELT_DIRECTION = "direction";
@@ -114,6 +115,7 @@ public class XmlTools
 	public static final String ELT_PROPERTIES = "properties";
 	public static final String ELT_RANKINGS = "rankings";
 	public static final String ELT_REFERENCE = "reference";
+	public static final String ELT_SCORE = "score";
 	public static final String ELT_SCORES = "scores";
 	public static final String ELT_SETTING = "setting";
 	public static final String ELT_SHADOW = "shadow";
@@ -200,10 +202,12 @@ public class XmlTools
 	public static final String ATT_RED = "red";
 	public static final String ATT_REPEAT = "repeat";
 	public static final String ATT_SCALE = "scale";
+	public static final String ATT_SCORE = "score";
 	public static final String ATT_SHADOW = "shadow";
 	public static final String ATT_SHADOW_XSHIFT = "shadowXShift";
 	public static final String ATT_SHADOW_YSHIFT = "shadowYShift";
 	public static final String ATT_STRENGTH = "strength";
+	public static final String ATT_SUP = "sup";
 	public static final String ATT_TARGET = "target";
 	public static final String ATT_TILE_POSITION = "tilePosition";
 	public static final String ATT_TIME = "time";
@@ -213,6 +217,7 @@ public class XmlTools
 	public static final String ATT_USES = "uses";
 	public static final String ATT_VALUE = "value";
 	public static final String ATT_WIDTH = "width";
+	public static final String ATT_WIN = "win";
 	public static final String ATT_XINTERACTION = "xInteraction";
 	public static final String ATT_XPOSITION = "xPosition";
 	public static final String ATT_XSHIFT = "xShift";
