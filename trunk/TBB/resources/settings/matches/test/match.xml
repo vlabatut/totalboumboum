@@ -3,8 +3,11 @@
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
 	xsi:noNamespaceSchemaLocation="..\..\..\schemas\match.xsd">
 	
- 	<options matchLimit="all-levels" matchLimitValue="4" /> 
- 	<levels randomOrder="false" >
+  	<options>
+ 		<limits />
+ 	</options> 
+
+	<levels randomOrder="false" >
  		<level>
  			<location packname="superbomberman1" name="test3" />
  			<game playMode="survival" timeLimit="60000" />

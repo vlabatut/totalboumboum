@@ -607,6 +607,7 @@ public class Launcher
 	 * - assombrir l'image de fond quand y a des tables par dessus
 	 * 
 	 *   + alpha.41
+	 * - gestion des limites plus détaillée, que ce soir pour le tournoi, le match ou le round
 	 * 
 	 * *******************************************************
 	 * *********************** A FAIRE ***********************

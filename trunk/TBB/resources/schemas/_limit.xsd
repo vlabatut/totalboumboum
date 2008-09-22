@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+<xsd:include schemaLocation="_score.xsd"/>
+
+	<xsd:complexType name="tLimitConfrontation">
+		<xsd:attribute name="value" type="xsd:int" use="required" />
+	</xsd:complexType>
+	
+	<xsd:complexType name="tLimitPoints">
+		<xsd:attribute name="value" type="xsd:float" use="required" />
+	</xsd:complexType>
+	
+	<xsd:complexType name="tLimitScore">
+		<xsd:attribute name="type" type="tScore" use="required" />
+		<xsd:attribute name="value" type="xsd:long" use="required" />
+		<xsd:attribute name="sup" type="xsd:boolean" use="optional"  default="true" />
+		<xsd:attribute name="win" type="xsd:boolean" use="required" />
+	</xsd:complexType>
+	
+	<xsd:group name="gLimit">
+		<xsd:choice>
+			<xsd:element name="confrontation" type="tLimitConfrontation" />
+			<xsd:element name="points" type="tLimitPoints" />
+			<xsd:element name="score" type="tLimitScore" />
+		</xsd:choice>
+	</xsd:group>
+	
+	<xsd:complexType name="tLimits">
+		<xsd:sequence>
+			<xsd:group ref="gLimit"  minOccurs="0" maxOccurs="unbounded"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	
+</xsd:schema>

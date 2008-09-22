@@ -1,33 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema">
-
-	<xsd:simpleType name="tMatchLimit">
-		<xsd:restriction base="xsd:string">
-			<xsd:enumeration value="all-levels" />
-			<xsd:enumeration value="round-limit" />
-			<xsd:enumeration value="points-limit" />
-		</xsd:restriction>
-	</xsd:simpleType>
-
-	<xsd:simpleType name="tMatchLimitValue">
-		<xsd:restriction base="xsd:integer">
-			<xsd:minInclusive value="1" />
-		</xsd:restriction>
-	</xsd:simpleType>
+<xsd:include schemaLocation="_limit.xsd"/>
+<xsd:include schemaLocation="_playmode.xsd"/>
 
 	<xsd:complexType name="tOptions">
-		<xsd:attribute name="matchLimit" type="tMatchLimit" use="required" />
-		<xsd:attribute name="matchLimitValue" type="tMatchLimitValue" use="required" />
+		<xsd:sequence>
+			<xsd:element name="limits" type="tLimits"  />
+		</xsd:sequence>
 	</xsd:complexType>
-
-	<xsd:simpleType name="tPlayMode">
-		<xsd:restriction base="xsd:string">
-			<xsd:enumeration value="survival" />
-			<xsd:enumeration value="crown" />
-			<xsd:enumeration value="paint" />
-			<xsd:enumeration value="frag" />
-		</xsd:restriction>
-	</xsd:simpleType>
 
 	<xsd:complexType name="tLocation">
 		<xsd:attribute name="packname" type="xsd:string" use="required" />
