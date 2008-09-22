@@ -98,4 +98,10 @@ public class StatisticMatch implements Serializable, StatisticBase
 	public ArrayList<StatisticRound> getStatRounds()
 	{	return rounds;
 	}
+
+	@Override
+	public int getConfrontationCount()
+	{	int result = rounds.size();
+		return result;
+	}
 }

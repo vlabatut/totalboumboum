@@ -114,6 +114,12 @@ public class StatisticTournament implements Serializable, StatisticBase
 	public ArrayList<String> getPlayers()
 	{	return players;
 	}
+
+	@Override
+	public int getConfrontationCount()
+	{	int result = matches.size();
+		return result;
+	}
 }
 
 

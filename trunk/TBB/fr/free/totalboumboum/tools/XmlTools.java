@@ -34,6 +34,7 @@ public class XmlTools
 	public static final String ELT_ANIMES = "animes";
 	public static final String ELT_ABILITY = "ability";
 	public static final String ELT_ABILITIES = "abilities";
+	public static final String ELT_ALL_LEVELS = "all-levels";
 	public static final String ELT_BIGWALL = "bigwall";
 	public static final String ELT_BIGWALLS = "bigwalls";
 	public static final String ELT_BLOCK = "block";

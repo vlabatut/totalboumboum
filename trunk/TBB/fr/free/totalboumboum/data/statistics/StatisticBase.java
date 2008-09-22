@@ -8,4 +8,5 @@ public interface StatisticBase
 	public ArrayList<String> getPlayers();
 	public long[] getScores(Score score);
 	public float[] getPartialPoints();
+	public int getConfrontationCount();
 }

@@ -139,4 +139,11 @@ public class StatisticRound implements Serializable, StatisticBase
 				sc[i] = -sc[i];
 		}
 	}
+
+	//useless...
+	@Override
+	public int getConfrontationCount()
+	{	int result = 0;
+		return result;
+	}
 }

@@ -606,6 +606,8 @@ public class Launcher
 	 * - correction d'un bug d'affichage dans le raffraichissement des boutons
 	 * - assombrir l'image de fond quand y a des tables par dessus
 	 * 
+	 *   + alpha.41
+	 * 
 	 * *******************************************************
 	 * *********************** A FAIRE ***********************
 	 * *******************************************************
