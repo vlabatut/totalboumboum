@@ -42,12 +42,12 @@ public class LimitLoader
 		LimitConfrontation result = new LimitConfrontation(value);
 		return result;
 	}
-	private static LimitPoints loadLimitPointsElement(Element root)
+	private static LimitTotal loadLimitPointsElement(Element root)
 	{	// value
 		String str = root.getAttribute(XmlTools.ATT_VALUE).getValue();
 		float value = Float.valueOf(str);
 		// result
-		LimitPoints result = new LimitPoints(value);
+		LimitTotal result = new LimitTotal(value);
 		return result;
 	}
 	
