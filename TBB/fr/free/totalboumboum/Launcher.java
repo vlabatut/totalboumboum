@@ -617,15 +617,14 @@ public class Launcher
 	 * - gérer le shrink
 	 * - problème de collisions quand on change la vitesse (surement un problème d'arrondi, ou alors un saut trop grand (en distance), voir si j'avais implémenté la maximalisation du déplacement malgré une éventuelle collision...)
 	 * - revoir le système des IA
-	 * - considérer qu'une partie peut s'arrêter à cause d'une limite de points ou de score (ex: pr frag, a un goalaverage>10)
 	 * - redescendre les stats dans loop, et gestion de fin de partie et tout ce qui est en fait directement lié au moteur
 	 * - en fait tout le process de points dans les stats est à déplacer dans les rounds/matches, etc 
 	 * - à la fin du round, faire apparaitre les résultats par transparence...ça serait la classe ça !
 	 * - problème de cohérence entre les nombres totaux de kills et de deaths (qui devraient être égaux) : on dirait que ça ne compte pas le dernier tué (qui termine le round), on dirait que ça ne compte pas toujours les suicides comme des kills (juste le côté death)
 	 * - gérer l'apparition comme une action en soit. si pas possible d'apparaître au début de la partie, faire un atterrissage ?
-	 * - problème graphique quand on monte en résolution avec certain thèmes
-	 * - les limites sont gérées au même niveau que les points (car elles leur sont liées), ie: pr round pas dans level,mais dans match
+	 * - problème graphique (contact des ombres, notament) quand on monte en résolution avec certain thèmes
 	 * - pb de dimension de l'image de fond en fonction de la résolution... (zones pas peintes)
+	 * - faut il définir les rounds dans des fichiers à part ? mais on ne sait pas à l'avance cb il en faut...
 	 * - pour painting, possibilité de définir quelles cases peuvent être repeinte, ce qui permet de poser comme limite un %age de cases repeintes
 	 * - results panel : quand il y a trop de rounds dans un match pour que ça rentre à l'écran, ne pas tout afficher
 	 * - problème d'affichage : le niveau est coupé en fonction du mode d'affichage, mais pas de façon symétrique (le haut n'est pas coupé, seulement le bas)
