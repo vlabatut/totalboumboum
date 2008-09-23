@@ -3,6 +3,7 @@ package fr.free.totalboumboum.game.match;
 import java.io.File;
 import java.util.ArrayList;
 
+import fr.free.totalboumboum.game.limit.Limits;
 import fr.free.totalboumboum.game.point.PointProcessor;
 import fr.free.totalboumboum.game.round.PlayMode;
 
@@ -67,5 +68,28 @@ public class LevelDescription
 	}
 	public void setTimeLimit(long timeLimit)
 	{	this.timeLimit = timeLimit;
+	}
+
+	/////////////////////////////////////////////////////////////////
+	// LIMIT			/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	private Limits limits;
+
+	public Limits getLimits()
+	{	return limits;
+	}
+	public void setLimits(Limits limits)
+	{	this.limits = limits;
+	}
+	
+	
+	
+	public void finish()
+	{	// limits
+		limits.finish();
+		limits = null;
+		// misc
+		playMode = null;
+		pointProcessor = null;
 	}
 }

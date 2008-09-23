@@ -64,13 +64,13 @@ public class Match
 	/////////////////////////////////////////////////////////////////
 	// LIMIT			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	private Limits matchLimits;
+	private Limits limits;
 
-	public Limits getMatchLimits()
-	{	return matchLimits;
+	public Limits getLimits()
+	{	return limits;
 	}
-	public void setMatchLimits(Limits matchLimits)
-	{	this.matchLimits = matchLimits;
+	public void setLimits(Limits limits)
+	{	this.limits = limits;
 	}
 			
 	/////////////////////////////////////////////////////////////////
@@ -134,9 +134,9 @@ public class Match
 		stats.addStatisticRound(statsRound);
 		stats.computePoints(pointProcessor);
 		//
-		int limit = matchLimits.testLimits(stats);
+		int limit = limits.testLimits(stats);
 		if(limit>=0 || !iterator.hasNext())
-		{	if(limit<profiles.size())
+		{	if(limit>=0 && limit<profiles.size())
 				stats.setWinner(limit);
 			matchOver = true;
 			tournament.matchOver();
@@ -154,9 +154,9 @@ public class Match
 		iterator = null;
 		levels.clear();
 		rounds.clear();
-		// match limits
-		matchLimits.finish();
-		matchLimits = null;
+		// limits
+		limits.finish();
+		limits = null;
 		// misc
 		configuration = null;
 		panel = null;

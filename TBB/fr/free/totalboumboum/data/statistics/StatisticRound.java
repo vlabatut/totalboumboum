@@ -146,4 +146,9 @@ public class StatisticRound implements Serializable, StatisticBase
 	{	int result = 0;
 		return result;
 	}
+
+	public void setWinner(int index)
+	{	 //cf comment dans StatisticMatch
+		
+	}
 }

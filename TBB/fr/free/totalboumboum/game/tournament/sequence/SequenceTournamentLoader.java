@@ -13,6 +13,8 @@ import org.jdom.Element;
 import org.xml.sax.SAXException;
 
 import fr.free.totalboumboum.data.configuration.Configuration;
+import fr.free.totalboumboum.game.limit.Limits;
+import fr.free.totalboumboum.game.limit.LimitsLoader;
 import fr.free.totalboumboum.game.match.Match;
 import fr.free.totalboumboum.game.match.MatchLoader;
 import fr.free.totalboumboum.game.point.PointProcessor;
@@ -26,14 +28,25 @@ public class SequenceTournamentLoader
 	public static SequenceTournament loadTournamentElement(String folder, Element root, Configuration configuration) throws ParserConfigurationException, SAXException, IOException
 	{	SequenceTournament result = new SequenceTournament(configuration);
 		Element element;
-		// points
-		element = root.getChild(XmlTools.ELT_POINTS);
-		PointProcessor pp = loadPointsElement(element,folder);
-		result.setPointProcessor(pp);
+		// options
+		element = root.getChild(XmlTools.ELT_OPTIONS);
+		loadOptionsElement(element,folder,result);
 		// matches
 		element = root.getChild(XmlTools.ELT_MATCHES);
 		loadMatchesElement(element,folder,result);
 		return result;
+	}
+	
+	private static void loadOptionsElement(Element root, String folder, SequenceTournament result) throws ParserConfigurationException, SAXException, IOException
+	{	Element element;
+		// options
+		element = root.getChild(XmlTools.ELT_POINTS);
+		PointProcessor pp = loadPointsElement(element,folder);
+		result.setPointProcessor(pp);
+		// limits
+    	element = root.getChild(XmlTools.ELT_LIMITS);
+    	Limits matchLimits = LimitsLoader.loadLimitsElement(element,folder);
+    	result.setLimits(matchLimits);
 	}
 	
 	private static void loadMatchesElement(Element root, String folder, SequenceTournament result) throws ParserConfigurationException, SAXException, IOException

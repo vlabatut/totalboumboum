@@ -6,6 +6,13 @@
 	<general name="Tournament-séquence loooong"/>
 
 	<sequence>
+	 	<options>
+	 		<limits>
+	 			<score value="5" type="items" win="false" />
+	 		</limits>
+			<points local="false" name="basicTournament" />
+	 	</options> 
+	 	
 		<matches>
 		
 			<match>
@@ -25,7 +32,6 @@
 			
 		</matches>
 		
-		<points local="false" name="basicTournament" />
 	</sequence>
 		
 		

@@ -14,6 +14,7 @@ import fr.free.totalboumboum.data.statistics.StatisticEvent;
 import fr.free.totalboumboum.data.statistics.StatisticRound;
 import fr.free.totalboumboum.engine.loop.Loop;
 import fr.free.totalboumboum.engine.player.Player;
+import fr.free.totalboumboum.game.limit.Limits;
 import fr.free.totalboumboum.game.match.LevelDescription;
 import fr.free.totalboumboum.game.match.Match;
 import fr.free.totalboumboum.game.point.PlayerPoints;
@@ -26,6 +27,13 @@ public class Round
 		configuration = match.getConfiguration();
 	}
 	
+	/////////////////////////////////////////////////////////////////
+	// LIMIT			/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	public Limits getLimits()
+	{	return levelDescription.getLimits();
+	}
+
 	/////////////////////////////////////////////////////////////////
 	// GAME 			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
@@ -60,6 +68,9 @@ public class Round
 	{	// loop
 		loop.finish();
 		loop = null;
+		// level description
+		levelDescription.finish();
+		levelDescription = null;
 		// misc
 		configuration = null;
 		levelDescription = null;
@@ -138,15 +149,23 @@ public class Round
 		{	remainingPlayers --;
 			playersInGame.set(index,new Boolean(false));
 			if(remainingPlayers<2 /*&& getPlayMode()==PlayMode.SURVIVAL*/)
-				closeGame();
+				closeGame();		
 		}
 	}
 	public void updateTime(long time)
 	{	if(!roundOver)
 		{	stats.updateTime(time);			
 //			if(getTimeLimit()>0 && time>=getTimeLimit()/getConfiguration().getSpeedCoeff())
-			if(getTimeLimit()>0 && time>=getTimeLimit())
-				closeGame();
+			int limit = getLimits().testLimits(stats);
+			if(limit>=0 || (getTimeLimit()>0 && time>=getTimeLimit()))
+			{	// close game
+				roundOver = true;
+				stats.finish(loop.getTotalTime());
+				stats.computePoints(getPointProcessor());
+				if(limit>=0 && limit<getProfiles().size())
+					stats.setWinner(limit);
+				celebrate();		
+			}
 			else
 				stats.computePoints(getPointProcessor());
 		}

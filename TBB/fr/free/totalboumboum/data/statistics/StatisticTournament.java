@@ -120,6 +120,11 @@ public class StatisticTournament implements Serializable, StatisticBase
 	{	int result = matches.size();
 		return result;
 	}
+	
+	public void setWinner(int index)
+	{	 //cf comment dans StatisticMatch
+		
+	}
 }
 
 

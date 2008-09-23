@@ -58,10 +58,10 @@ public class MatchLoader
 	}		
 		
     private static void loadOptionsElement(Element root, String folder, Match result) throws ParserConfigurationException, SAXException, IOException
-    {	// limit
+    {	// limits
     	Element element = root.getChild(XmlTools.ELT_LIMITS);
     	Limits matchLimits = LimitsLoader.loadLimitsElement(element,folder);
-    	result.setMatchLimits(matchLimits);
+    	result.setLimits(matchLimits);
     }
 
     private static void loadLevelsElement(Element root, String folder, Match result) throws ParserConfigurationException, SAXException, IOException
@@ -90,6 +90,10 @@ public class MatchLoader
     	// points
     	element = root.getChild(XmlTools.ELT_POINTS);
     	loadPointsElement(element,folder,levelDescription);
+    	// points
+    	element = root.getChild(XmlTools.ELT_LIMITS);
+    	Limits matchLimits = LimitsLoader.loadLimitsElement(element,folder);
+    	levelDescription.setLimits(matchLimits);
     	// result
     	result.addLevelDescription(levelDescription);
     }
@@ -128,4 +132,5 @@ public class MatchLoader
 			pp = PointProcessorLoader.loadPointProcessorFromName(name);
 		result.setPointProcessor(pp);
 	}
+    
 }
