@@ -29,6 +29,7 @@
 			<xsd:element name="location" type="tLocation" />
 			<xsd:element name="game" type="tGame" />
 			<xsd:element name="points" type="tPointProcessor" />
+			<xsd:element name="limits" type="tLimits"  />
 		</xsd:sequence>
 	</xsd:complexType>
 

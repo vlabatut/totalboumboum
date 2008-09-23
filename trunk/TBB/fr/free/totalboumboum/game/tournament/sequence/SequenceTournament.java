@@ -12,6 +12,7 @@ import fr.free.totalboumboum.data.configuration.Configuration;
 import fr.free.totalboumboum.data.statistics.Score;
 import fr.free.totalboumboum.data.statistics.StatisticMatch;
 import fr.free.totalboumboum.data.statistics.StatisticRound;
+import fr.free.totalboumboum.game.limit.Limits;
 import fr.free.totalboumboum.game.match.Match;
 import fr.free.totalboumboum.game.point.PointProcessor;
 import fr.free.totalboumboum.game.tournament.AbstractTournament;
@@ -24,6 +25,18 @@ public class SequenceTournament extends AbstractTournament
 	{	this.configuration = configuration; 
 	}
 	
+	/////////////////////////////////////////////////////////////////
+	// LIMIT			/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	private Limits limits;
+
+	public Limits getLimits()
+	{	return limits;
+	}
+	public void setLimits(Limits limits)
+	{	this.limits = limits;
+	}
+
 	/////////////////////////////////////////////////////////////////
 	// GAME				/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
@@ -54,6 +67,9 @@ public class SequenceTournament extends AbstractTournament
 	@Override
 	public void finish()
 	{	
+		// limits
+		limits.finish();
+		limits = null;
 	}
 /*
 	@Override
@@ -88,12 +104,16 @@ public class SequenceTournament extends AbstractTournament
 	{	StatisticMatch statsMatch = currentMatch.getStats();
 		stats.addStatisticMatch(statsMatch);
 		stats.computePoints(pointProcessor);
-		panel.matchOver();
 		//
-		if(!iterator.hasNext())
-		{	//stats.computePoints(pointProcessor);
+		int limit = limits.testLimits(stats);
+		if(limit>=0 || !iterator.hasNext())
+		{	if(limit>=0 && limit<profiles.size())
+				stats.setWinner(limit);
 			tournamentOver = true;
 			panel.tournamentOver();
+		}
+		else
+		{	panel.matchOver();		
 		}
 	}
 	
