@@ -2,7 +2,7 @@ package fr.free.totalboumboum.game.limit;
 
 import fr.free.totalboumboum.data.statistics.StatisticBase;
 
-public class LimitPoints extends Limit
+public class LimitTotal extends Limit
 {
 	private float limit;
 
@@ -11,7 +11,7 @@ public class LimitPoints extends Limit
 	 * TODO distinguer TOTAL (useless pr rounds) et points (que l'on peut personnaliser)
 	 */
 	
-	public LimitPoints(float limit)
+	public LimitTotal(float limit)
 	{	this.limit = limit;	
 	}
 	

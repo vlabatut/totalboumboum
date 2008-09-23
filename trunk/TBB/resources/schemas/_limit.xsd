@@ -6,7 +6,15 @@
 		<xsd:attribute name="value" type="xsd:int" use="required" />
 	</xsd:complexType>
 	
+	<xsd:complexType name="tPointProcessor">
+		<xsd:attribute name="name" type="xsd:string" use="required" />
+		<xsd:attribute name="local" type="xsd:boolean" use="optional" default="false" />
+	</xsd:complexType>
+
 	<xsd:complexType name="tLimitPoints">
+		<xsd:sequence>
+			<xsd:element name="points" type="tPointProcessor" />
+		</xsd:sequence>
 		<xsd:attribute name="value" type="xsd:float" use="required" />
 	</xsd:complexType>
 	
@@ -17,11 +25,16 @@
 		<xsd:attribute name="win" type="xsd:boolean" use="required" />
 	</xsd:complexType>
 	
+	<xsd:complexType name="tLimitTotal">
+		<xsd:attribute name="value" type="xsd:float" use="required" />
+	</xsd:complexType>
+	
 	<xsd:group name="gLimit">
 		<xsd:choice>
 			<xsd:element name="confrontation" type="tLimitConfrontation" />
 			<xsd:element name="points" type="tLimitPoints" />
 			<xsd:element name="score" type="tLimitScore" />
+			<xsd:element name="total" type="tLimitTotal" />
 		</xsd:choice>
 	</xsd:group>
 	

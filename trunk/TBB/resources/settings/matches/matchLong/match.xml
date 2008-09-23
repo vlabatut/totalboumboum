@@ -5,7 +5,7 @@
 	
  	<options>
  		<limits>
- 			<points value="100" />
+ 			<total value="100" />
  			<score value="5" type="kills" win="true" />
  		</limits>
  	</options> 

@@ -106,7 +106,14 @@ public class StatisticMatch implements Serializable, StatisticBase
 	}
 	
 	public void setWinner(int index)
-	{	//NOTE pb : comment savoir qui a 'gagné' ?
+	{	 
+		/* NOTE pbs
+		 * comment savoir qui avait 'gagné' ?
+		 * comment savoir cb de pts donner au nouveau gagnant ?
+		 * combien de pts donner aux autres ?
+		 * 
+		 * une solution serait d'utiliser une limite jumelée avec le calcul de points
+		 */
 		
 	}
 }
