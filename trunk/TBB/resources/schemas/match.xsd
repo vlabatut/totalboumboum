@@ -18,12 +18,12 @@
 		<xsd:attribute name="playMode" type="tPlayMode" use="required" />
 		<xsd:attribute name="timeLimit" type="xsd:long" use="required" />
 	</xsd:complexType>
-
+<!-- 
 	<xsd:complexType name="tPointProcessor">
 		<xsd:attribute name="name" type="xsd:string" use="required" />
 		<xsd:attribute name="local" type="xsd:boolean" use="optional" default="false" />
 	</xsd:complexType>
-	
+ -->	
 	<xsd:complexType name="tLevel">
 		<xsd:sequence>
 			<xsd:element name="location" type="tLocation" />

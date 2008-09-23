@@ -113,6 +113,7 @@ public class StatisticMatch implements Serializable, StatisticBase
 		 * combien de pts donner aux autres ?
 		 * 
 		 * une solution serait d'utiliser une limite jumelée avec le calcul de points
+		 * autre solution : on décalle simplement les scores en partant du nouveau gagnant et en remontant vers le premier 
 		 */
 		
 	}

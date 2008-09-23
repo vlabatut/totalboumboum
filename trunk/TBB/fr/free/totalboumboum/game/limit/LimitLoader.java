@@ -13,12 +13,15 @@ import org.jdom.Element;
 import org.xml.sax.SAXException;
 
 import fr.free.totalboumboum.data.statistics.Score;
+import fr.free.totalboumboum.game.match.LevelDescription;
+import fr.free.totalboumboum.game.point.PointProcessor;
+import fr.free.totalboumboum.game.point.PointProcessorLoader;
 import fr.free.totalboumboum.tools.FileTools;
 import fr.free.totalboumboum.tools.XmlTools;
 
 public class LimitLoader
 {
-	public static Limit loadLimitElement(Element root)
+	public static Limit loadLimitElement(Element root, String folder) throws ParserConfigurationException, SAXException, IOException
 	{	Limit result = null;
 		String type = root.getName();
 
@@ -26,10 +29,13 @@ public class LimitLoader
 			result = loadLimitConfrontationElement(root);
 		
 		else if(type.equals(XmlTools.ELT_POINTS))
-			result = loadLimitPointsElement(root);
+			result = loadLimitPointsElement(root,folder);
 		
 		else if(type.equals(XmlTools.ELT_SCORE))
 			result = loadLimitScoreElement(root);
+		
+		else if(type.equals(XmlTools.ELT_TOTAL))
+			result = loadLimitTotalElement(root);
 		
 		return result;
 	}
@@ -42,12 +48,32 @@ public class LimitLoader
 		LimitConfrontation result = new LimitConfrontation(value);
 		return result;
 	}
-	private static LimitTotal loadLimitPointsElement(Element root)
+
+    private static void loadPointsElement(Element root, String folder, LimitPoints result) throws ParserConfigurationException, SAXException, IOException
+	{	PointProcessor pp;
+		// local
+		String localStr = root.getAttribute(XmlTools.ATT_LOCAL).getValue().trim();
+		boolean local = Boolean.valueOf(localStr);
+		// name
+		String name = root.getAttribute(XmlTools.ATT_NAME).getValue();
+		// loading
+		if(local)
+		{	folder = folder+File.separator+name;
+			pp = PointProcessorLoader.loadPointProcessorFromFilePath(folder);
+		}
+		else
+			pp = PointProcessorLoader.loadPointProcessorFromName(name);
+		result.setPointProcessor(pp);
+	}
+	private static LimitPoints loadLimitPointsElement(Element root, String folder) throws ParserConfigurationException, SAXException, IOException
 	{	// value
 		String str = root.getAttribute(XmlTools.ATT_VALUE).getValue();
 		float value = Float.valueOf(str);
 		// result
-		LimitTotal result = new LimitTotal(value);
+		LimitPoints result = new LimitPoints(value);
+		// point processor
+    	Element element = root.getChild(XmlTools.ELT_POINTS);
+		loadPointsElement(element,folder,result);
 		return result;
 	}
 	
@@ -66,6 +92,15 @@ public class LimitLoader
 		boolean win = Boolean.valueOf(str);
 		// result
 		LimitScore result = new LimitScore(value,score,supLimit,win);
+		return result;
+	}
+
+	private static LimitTotal loadLimitTotalElement(Element root)
+	{	// value
+		String str = root.getAttribute(XmlTools.ATT_VALUE).getValue();
+		float value = Float.valueOf(str);
+		// result
+		LimitTotal result = new LimitTotal(value);
 		return result;
 	}
 }

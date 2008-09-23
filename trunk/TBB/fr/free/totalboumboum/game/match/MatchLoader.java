@@ -50,17 +50,17 @@ public class MatchLoader
 		Element element;
 		// options
 		element = root.getChild(XmlTools.ELT_OPTIONS);
-		loadOptionsElement(element,result);
+		loadOptionsElement(element,folderPath,result);
 		// levels
 		element = root.getChild(XmlTools.ELT_LEVELS);
 		loadLevelsElement(element,folderPath,result);
 		return result;
 	}		
 		
-    private static void loadOptionsElement(Element root, Match result)
+    private static void loadOptionsElement(Element root, String folder, Match result) throws ParserConfigurationException, SAXException, IOException
     {	// limit
     	Element element = root.getChild(XmlTools.ELT_LIMITS);
-    	Limits matchLimits = LimitsLoader.loadLimitsElement(element);
+    	Limits matchLimits = LimitsLoader.loadLimitsElement(element,folder);
     	result.setMatchLimits(matchLimits);
     }
 
