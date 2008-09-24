@@ -20,12 +20,14 @@ public class TablePanel extends JPanel
 	private int lines = 0;
 	private Font headerFont;
 	private Font regularFont;
+	private boolean header;
 //	private Configuration configuration;
 	
 
-	public TablePanel(int width, int height, int columns, int lines, GuiConfiguration configuration)
+	public TablePanel(int width, int height, int columns, int lines, boolean header, GuiConfiguration configuration)
 	{	// init
 //		this.configuration = configuration;
+		this.header = header;
 		
 		// background
 		setBackground(GuiTools.COLOR_COMMON_BACKGROUND);
@@ -56,9 +58,12 @@ public class TablePanel extends JPanel
 	
 	public void addColumn(int index)
 	{	columns++;
+		int start = 0;
 	
 		// header
-		{	String txt = null;
+		if(header)
+		{	start = 1;
+			String txt = null;
 			JLabel lbl = new JLabel(txt);
 			lbl.setFont(headerFont);
 			lbl.setHorizontalAlignment(SwingConstants.CENTER);
@@ -69,7 +74,7 @@ public class TablePanel extends JPanel
 		}
 		
 		// data
-		for(int line=1;line<lines;line++)
+		for(int line=0+start;line<lines;line++)
 		{	String txt = null;
 			JLabel lbl = new JLabel(txt);
 			lbl.setFont(regularFont);

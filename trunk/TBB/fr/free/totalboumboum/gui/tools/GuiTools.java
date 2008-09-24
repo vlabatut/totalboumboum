@@ -102,6 +102,13 @@ public class GuiTools
 	public static final String GAME_TOURNAMENT_HEADER_MATCHES = "GameTournamentHeaderMatches";	
 	public static final String GAME_TOURNAMENT_HEADER_LIMITS = "GameTournamentHeaderLimits";	
 	public static final String GAME_TOURNAMENT_HEADER_POINTSPROCESS = "GameTournamentHeaderPointprocess";	
+	public static final String GAME_TOURNAMENT_LIMIT_CONFRONTATIONS = "GameTournamentLimitConfrontations";
+	public static final String GAME_TOURNAMENT_LIMIT_POINTS = "GameTournamentLimitPoints";
+	public static final String GAME_TOURNAMENT_LIMIT_TOTAL = "GameTournamentLimitTotal";
+	public static final String GAME_TOURNAMENT_LIMIT_BOMBS = "GameTournamentLimitBombs";
+	public static final String GAME_TOURNAMENT_LIMIT_DEATHS = "GameTournamentLimitDeaths";
+	public static final String GAME_TOURNAMENT_LIMIT_ITEMS = "GameTournamentLimitItems";
+	public static final String GAME_TOURNAMENT_LIMIT_KILLS = "GameTournamentLimitKills";
 	
 	public static final String GAME_MATCH_TITLE_DESCRIPTION = "GameMatchTitleDescription";
 	public static final String GAME_MATCH_TITLE_RESULTS = "GameMatchTitleResults";
@@ -118,6 +125,13 @@ public class GuiTools
 	public static final String GAME_MATCH_HEADER_ROUNDS = "GameMatchHeaderRounds";	
 	public static final String GAME_MATCH_HEADER_LIMITS = "GameMatchHeaderLimits";	
 	public static final String GAME_MATCH_HEADER_POINTSPROCESS = "GameMatchHeaderPointprocess";	
+	public static final String GAME_MATCH_LIMIT_CONFRONTATIONS = "GameMatchLimitConfrontations";
+	public static final String GAME_MATCH_LIMIT_POINTS = "GameMatchLimitPoints";
+	public static final String GAME_MATCH_LIMIT_TOTAL = "GameMatchLimitTotal";
+	public static final String GAME_MATCH_LIMIT_BOMBS = "GameMatchLimitBombs";
+	public static final String GAME_MATCH_LIMIT_DEATHS = "GameMatchLimitDeaths";
+	public static final String GAME_MATCH_LIMIT_ITEMS = "GameMatchLimitItems";
+	public static final String GAME_MATCH_LIMIT_KILLS = "GameMatchLimitKills";
 	
 	public static final String GAME_ROUND_TITLE_DESCRIPTION = "GameRoundTitleDescription";
 	public static final String GAME_ROUND_TITLE_RESULTS = "GameRoundTitleResults";
@@ -132,6 +146,11 @@ public class GuiTools
 	public static final String GAME_ROUND_HEADER_FRAGS = "GameRoundHeaderFrags";
 	public static final String GAME_ROUND_HEADER_PAINTINGS = "GameRoundHeaderPaintings";
 	public static final String GAME_ROUND_HEADER_TIME = "GameRoundHeaderTime";
+	public static final String GAME_ROUND_LIMIT_POINTS = "GameRoundLimitPoints";
+	public static final String GAME_ROUND_LIMIT_BOMBS = "GameRoundLimitBombs";
+	public static final String GAME_ROUND_LIMIT_DEATHS = "GameRoundLimitDeaths";
+	public static final String GAME_ROUND_LIMIT_ITEMS = "GameRoundLimitItems";
+	public static final String GAME_ROUND_LIMIT_KILLS = "GameRoundLimitKills";
 	
 	
 	
@@ -242,17 +261,17 @@ public class GuiTools
 		int gameTitleFontSize = (int)(menuButtonFontSize*1.3);
 		sizes.put(GAME_TITLE_FONT_SIZE, gameTitleFontSize);
 		// labels
-		int gameLabelTitleHeight;
+		int gameDataLabelTitleHeight;
 		{	Font font = configuration.getFont().deriveFont((float)gameTitleFontSize);
 			g.setFont(font);
 			FontMetrics metrics = g.getFontMetrics(font);
-			gameLabelTitleHeight = (int)(metrics.getHeight()*1.2);
+			gameDataLabelTitleHeight = (int)(metrics.getHeight()*1.2);
 		}
-		sizes.put(GAME_DATA_LABEL_TITLE_HEIGHT, gameLabelTitleHeight);
+		sizes.put(GAME_DATA_LABEL_TITLE_HEIGHT, gameDataLabelTitleHeight);
 		// game panel
 		int gameDataMarginSize = (int)(width*0.025);
 		sizes.put(GAME_DATA_MARGIN_SIZE,gameDataMarginSize);
-		int gameDataPanelHeight = horizontalSplitDataPanelHeight-3*gameDataMarginSize-gameLabelTitleHeight;
+		int gameDataPanelHeight = horizontalSplitDataPanelHeight-3*gameDataMarginSize-gameDataLabelTitleHeight;
 		sizes.put(GAME_DATA_PANEL_HEIGHT,gameDataPanelHeight);
 		int gameDataPanelWidth = horizontalSplitDataPanelWidth-2*gameDataMarginSize;
 		sizes.put(GAME_DATA_PANEL_WIDTH,gameDataPanelWidth);
@@ -368,6 +387,13 @@ public class GuiTools
 			icons.put(GAME_TOURNAMENT_HEADER_BOMBS,image);
 			icons.put(GAME_MATCH_HEADER_BOMBS,image);
 			icons.put(GAME_ROUND_HEADER_BOMBS,image);
+			icons.put(GAME_TOURNAMENT_LIMIT_BOMBS,image);
+			icons.put(GAME_MATCH_LIMIT_BOMBS,image);
+			icons.put(GAME_ROUND_LIMIT_BOMBS,image);
+			// confrontations
+			image = loadIcon(folder+GuiFileTools.FILE_CONFRONTATIONS,absent);
+			icons.put(GAME_TOURNAMENT_LIMIT_CONFRONTATIONS,image);
+			icons.put(GAME_MATCH_LIMIT_CONFRONTATIONS,image);
 			// crowns
 			image = loadIcon(folder+GuiFileTools.FILE_CROWNS,absent);
 			icons.put(GAME_ROUND_HEADER_CROWNS,image);
@@ -376,6 +402,9 @@ public class GuiTools
 			icons.put(GAME_TOURNAMENT_HEADER_DEATHS,image);
 			icons.put(GAME_MATCH_HEADER_DEATHS,image);
 			icons.put(GAME_ROUND_HEADER_DEATHS,image);
+			icons.put(GAME_TOURNAMENT_LIMIT_DEATHS,image);
+			icons.put(GAME_MATCH_LIMIT_DEATHS,image);
+			icons.put(GAME_ROUND_LIMIT_DEATHS,image);
 			// frags
 			image = loadIcon(folder+GuiFileTools.FILE_FRAGS,absent);
 			icons.put(GAME_ROUND_HEADER_FRAGS,image);
@@ -384,11 +413,17 @@ public class GuiTools
 			icons.put(GAME_TOURNAMENT_HEADER_ITEMS,image);
 			icons.put(GAME_MATCH_HEADER_ITEMS,image);
 			icons.put(GAME_ROUND_HEADER_ITEMS,image);
+			icons.put(GAME_TOURNAMENT_LIMIT_ITEMS,image);
+			icons.put(GAME_MATCH_LIMIT_ITEMS,image);
+			icons.put(GAME_ROUND_LIMIT_ITEMS,image);
 			// kills
 			image = loadIcon(folder+GuiFileTools.FILE_KILLS,absent);
 			icons.put(GAME_TOURNAMENT_HEADER_KILLS,image);
 			icons.put(GAME_MATCH_HEADER_KILLS,image);
 			icons.put(GAME_ROUND_HEADER_KILLS,image);
+			icons.put(GAME_TOURNAMENT_LIMIT_KILLS,image);
+			icons.put(GAME_MATCH_LIMIT_KILLS,image);
+			icons.put(GAME_ROUND_LIMIT_KILLS,image);
 			// name
 			image = loadIcon(folder+GuiFileTools.FILE_NAME,absent);
 			icons.put(GAME_TOURNAMENT_HEADER_NAME,image);
@@ -402,6 +437,9 @@ public class GuiTools
 			icons.put(GAME_TOURNAMENT_HEADER_POINTS,image);
 			icons.put(GAME_MATCH_HEADER_POINTS,image);
 			icons.put(GAME_ROUND_HEADER_POINTS,image);
+			icons.put(GAME_TOURNAMENT_LIMIT_POINTS,image);
+			icons.put(GAME_MATCH_LIMIT_POINTS,image);
+			icons.put(GAME_ROUND_LIMIT_POINTS,image);
 			// rank
 			image = loadIcon(folder+GuiFileTools.FILE_RANK,absent);
 			icons.put(GAME_MATCH_HEADER_RANK,image);
@@ -412,6 +450,8 @@ public class GuiTools
 			image = loadIcon(folder+GuiFileTools.FILE_TOTAL,absent);
 			icons.put(GAME_TOURNAMENT_HEADER_TOTAL,image);
 			icons.put(GAME_MATCH_HEADER_TOTAL,image);
+			icons.put(GAME_TOURNAMENT_LIMIT_TOTAL,image);
+			icons.put(GAME_MATCH_LIMIT_TOTAL,image);
 		}			
 	}
 	

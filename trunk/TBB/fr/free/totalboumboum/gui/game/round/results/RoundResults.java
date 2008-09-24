@@ -57,7 +57,7 @@ public class RoundResults extends EntitledDataPanel
 			int cols = 2+5+1;			
 			int width = GuiTools.getSize(GuiTools.GAME_DATA_PANEL_WIDTH);
 			int height = GuiTools.getSize(GuiTools.GAME_DATA_PANEL_HEIGHT); 
-			resultsPanel = new TablePanel(width,height,cols,lines,getConfiguration());
+			resultsPanel = new TablePanel(width,height,cols,lines,true,getConfiguration());
 
 			// headers
 			{	{	JLabel lbl = resultsPanel.getLabel(0,0);
