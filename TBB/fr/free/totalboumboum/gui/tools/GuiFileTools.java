@@ -9,6 +9,7 @@ public class GuiFileTools
 
 	// files
 	public final static String FILE_BOMBS = "bombs.png";
+	public final static String FILE_CONFRONTATIONS = "confrontations.png";
 	public final static String FILE_CROWNS = "crowns.png";
 	public final static String FILE_DEATHS = "deaths.png";
 	public final static String FILE_FRAGS = "frags.png";

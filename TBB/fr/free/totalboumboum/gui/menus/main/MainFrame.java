@@ -42,6 +42,7 @@ public class MainFrame extends JFrame implements WindowListener,MenuContainer
 	public MainFrame() throws ParserConfigurationException, SAXException, IOException, IllegalArgumentException, SecurityException, IllegalAccessException, NoSuchFieldException, ClassNotFoundException
 	{	super("TBB v."+GameConstants.VERSION);
 		// init
+//		System.setProperty("swing.aatext", "true");			
 		XmlTools.init();
 		this.configuration = loadConfiguration();
 		// frame
@@ -51,7 +52,7 @@ public class MainFrame extends JFrame implements WindowListener,MenuContainer
 		Image icon = Toolkit.getDefaultToolkit().getImage(iconPath);
 		setIconImage(icon);
 		// dimensions
-		setPreferredSize(getConfiguration().getGameConfiguration().getPanelDimension());
+		setMinimumSize(getConfiguration().getGameConfiguration().getPanelDimension());
 		setResizable(false);
 		setVisible(true);
 		//

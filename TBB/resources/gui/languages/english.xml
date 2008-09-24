@@ -181,6 +181,27 @@
 	<!--  -->
 	<text name="GameTournamentHeaderPointprocess" value="Points" />
 	<text name="GameTournamentHeaderPointprocessTooltip" value="Information about how points are processed for this tournament" />
+	<!--  -->
+	<text name="GameTournamentLimitConfrontations" value="Matches" />
+	<text name="GameTournamentLimitConfrontationsTooltip" value="Maximal number of matches in this tournament" />
+	<!--  -->
+	<text name="GameTournamentLimitPoints" value="Points" />
+	<text name="GameTournamentLimitPointsTooltip" value="Number of custom points to score in order to stop this tournament" />
+	<!--  -->
+	<text name="GameTournamentLimitTotal" value="Total" />
+	<text name="GameTournamentLimitTotalTooltip" value="Number of points to score during the matches in order to stop this tournament" />
+	<!--  -->
+	<text name="GameTournamentLimitBombs" value="Bombs" />
+	<text name="GameTournamentLimitBombsTooltip" value="Number of bombs to drop in order to stop this tournament" />
+	<!--  -->
+	<text name="GameTournamentLimitDeaths" value="Deaths" />
+	<text name="GameTournamentLimitDeathsTooltip" value="Number of deaths to suffer in order to stop this tournament" />
+	<!--  -->
+	<text name="GameTournamentLimitItems" value="Items" />
+	<text name="GameTournamentLimitItemsTooltip" value="Nomber of items to pick in order to stop this tournament" />
+	<!--  -->
+	<text name="GameTournamentLimitKills" value="Kills" />
+	<text name="GameTournamentLimitKillsTooltip" value="Number of kills to perform in order to stop this tournament" />
 	
 	<text name="GameMatchTitleDescription" value="Match description" />
 	<text name="GameMatchTitleResults" value="Match results" />
@@ -221,6 +242,27 @@
 	<!--  -->
 	<text name="GameMatchHeaderPointprocess" value="Points" />
 	<text name="GameMatchHeaderPointprocessTooltip" value="Information about how points are processed for this match" />
+	<!--  -->
+	<text name="GameMatchLimitConfrontations" value="Rounds" />
+	<text name="GameMatchLimitConfrontationsTooltip" value="Maximal number of rounds in this match" />
+	<!--  -->
+	<text name="GameMatchLimitPoints" value="Points" />
+	<text name="GameMatchLimitPointsTooltip" value="Number of custom points to score in order to stop this match" />
+	<!--  -->
+	<text name="GameMatchLimitTotal" value="Total" />
+	<text name="GameMatchLimitTotalTooltip" value="Number of points to score during the rounds in order to stop this match" />
+	<!--  -->
+	<text name="GameMatchLimitBombs" value="Bombs" />
+	<text name="GameMatchLimitBombsTooltip" value="Number of bombs to drop in order to stop this match" />
+	<!--  -->
+	<text name="GameMatchLimitDeaths" value="Deaths" />
+	<text name="GameMatchLimitDeathsTooltip" value="Number of deaths to suffer in order to stop this match" />
+	<!--  -->
+	<text name="GameMatchLimitItems" value="Items" />
+	<text name="GameMatchLimitItemsTooltip" value="Nomber of items to pick in order to stop this match" />
+	<!--  -->
+	<text name="GameMatchLimitKills" value="Kills" />
+	<text name="GameMatchLimitKillsTooltip" value="Number of kills to perform in order to stop this match" />
 	
 	<text name="GameRoundTitleDescription" value="Round description" />
 	<text name="GameRoundTitleResults" value="Round results" />
@@ -255,5 +297,20 @@
 	<!--  -->
 	<text name="GameRoundHeaderTime" value="Time" />
 	<text name="GameRoundHeaderTimeTooltip" value="Time the player survived in this round" />
+	<!--  -->
+	<text name="GameRoundLimitPoints" value="Points" />
+	<text name="GameRoundLimitPointsTooltip" value="Number of custom points to score in order to stop this round" />
+	<!--  -->
+	<text name="GameRoundLimitBombs" value="Bombs" />
+	<text name="GameRoundLimitBombsTooltip" value="Number of bombs to drop in order to stop this round" />
+	<!--  -->
+	<text name="GameRoundLimitDeaths" value="Deaths" />
+	<text name="GameRoundLimitDeathsTooltip" value="Number of deaths to suffer in order to stop this round" />
+	<!--  -->
+	<text name="GameRoundLimitItems" value="Items" />
+	<text name="GameRoundLimitItemsTooltip" value="Nomber of items to pick in order to stop this round" />
+	<!--  -->
+	<text name="GameRoundLimitKills" value="Kills" />
+	<text name="GameRoundLimitKillsTooltip" value="Number of kills to perform in order to stop this round" />
 	
 </language>
