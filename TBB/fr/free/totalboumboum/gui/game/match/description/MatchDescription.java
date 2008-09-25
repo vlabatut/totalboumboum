@@ -40,6 +40,11 @@ import fr.free.totalboumboum.data.profile.Portraits;
 import fr.free.totalboumboum.data.profile.Profile;
 import fr.free.totalboumboum.data.statistics.Score;
 import fr.free.totalboumboum.data.statistics.StatisticRound;
+import fr.free.totalboumboum.game.limit.Limit;
+import fr.free.totalboumboum.game.limit.LimitConfrontation;
+import fr.free.totalboumboum.game.limit.LimitPoints;
+import fr.free.totalboumboum.game.limit.LimitScore;
+import fr.free.totalboumboum.game.limit.LimitTotal;
 import fr.free.totalboumboum.game.match.Match;
 import fr.free.totalboumboum.game.point.PlayerPoints;
 import fr.free.totalboumboum.gui.data.configuration.GuiConfiguration;
@@ -222,8 +227,8 @@ public class MatchDescription extends EntitledDataPanel
 		int height = GuiTools.getSize(GuiTools.GAME_DESCRIPTION_PANEL_HEIGHT);
 		EntitledSubPanel notesPanel = new EntitledSubPanel(width,height,getConfiguration());
 		// title
-		String text = getConfiguration().getLanguage().getText(GuiTools.GAME_MATCH_HEADER_ROUNDS);
-		String tooltip = getConfiguration().getLanguage().getText(GuiTools.GAME_MATCH_HEADER_ROUNDS+"Tooltip");
+		String text = getConfiguration().getLanguage().getText(GuiTools.GAME_MATCH_HEADER_NOTES);
+		String tooltip = getConfiguration().getLanguage().getText(GuiTools.GAME_MATCH_HEADER_NOTES+"Tooltip");
 		notesPanel.setTitle(text,tooltip);
 		// text panel
 		{	JTextPane textPane = new JTextPane()
@@ -267,7 +272,14 @@ public class MatchDescription extends EntitledDataPanel
 			StyleConstants.setFontFamily(sa, font.getFamily());
 			StyleConstants.setFontSize(sa, font.getSize());
 			StyledDocument doc = textPane.getStyledDocument();
-			text = "Here goes a short description of the different rounds in this match. Blablabla blabla blabla blabla blabla blabla. Blablabla blabla blabla blabla blabla blabla. Blablabla blabla blabla blabla blabla blabla. Blablabla blabla blabla blabla blabla blabla. Blablabla blabla blabla blabla blabla blabla. Blablabla blabla blabla blabla blabla blabla. Blablabla blabla blabla blabla blabla blabla. Blablabla blabla blabla blabla blabla blabla.";
+			Match match = getConfiguration().getCurrentMatch();			
+			text = "";
+			ArrayList<String> list = match.getNotes();
+			Iterator<String> i = list.iterator();
+			while (i.hasNext())
+			{	String temp = i.next();
+				text = text + temp + "\n";
+			}
 			try
 			{	doc.insertString(0,text,sa);
 			}
@@ -355,8 +367,8 @@ public class MatchDescription extends EntitledDataPanel
 			int lines = 4;
 			TablePanel tablePanel = new TablePanel(width,height,columns,lines,false,getConfiguration());
 			tablePanel.setOpaque(false);
-			// data
 			int lineHeight = (height-margin*(lines+1))/columns;
+			// empty
 			for(int line=0;line<lines;line++)
 			{	for(int col=0;col<columns;col=col+2)
 				{	// icon
@@ -370,6 +382,76 @@ public class MatchDescription extends EntitledDataPanel
 					lbl.setText(null);
 					lbl.setMinimumSize(new Dimension(lineHeight,lineHeight));
 					lbl.setMaximumSize(new Dimension(Integer.MAX_VALUE,lineHeight));
+				}
+			}
+			// data
+			{	Match match = getConfiguration().getCurrentMatch();
+				Iterator<Limit> i = match.getLimits().iterator();
+				int k = 0;
+				while(i.hasNext() && k<2*lines)
+				{	// init
+					Limit limit = i.next();
+					String iconName = null;
+					NumberFormat nf = NumberFormat.getInstance();
+					nf.setMinimumFractionDigits(0);
+					String value = null;
+					if(limit instanceof LimitConfrontation)
+					{	LimitConfrontation l = (LimitConfrontation)limit;
+						iconName = GuiTools.GAME_MATCH_LIMIT_CONFRONTATIONS;
+						value = nf.format(l.getLimit());
+					}
+					else if(limit instanceof LimitPoints)
+					{	LimitPoints l = (LimitPoints)limit;
+						iconName = GuiTools.GAME_MATCH_LIMIT_POINTS;
+						value = nf.format(l.getLimit());
+					}
+					else if(limit instanceof LimitTotal)
+					{	LimitTotal l = (LimitTotal)limit;
+						iconName = GuiTools.GAME_MATCH_LIMIT_TOTAL;
+						value = nf.format(l.getLimit());
+					}
+					else if(limit instanceof LimitScore)
+					{	LimitScore l = (LimitScore) limit;
+						switch(l.getScore())
+						{	case BOMBS:
+								iconName = GuiTools.GAME_MATCH_LIMIT_BOMBS;
+								value = nf.format(l.getLimit());
+								break;
+							case DEATHS:
+								iconName = GuiTools.GAME_MATCH_LIMIT_DEATHS;
+								value = nf.format(l.getLimit());
+								break;
+							case ITEMS:
+								iconName = GuiTools.GAME_MATCH_LIMIT_ITEMS;
+								value = nf.format(l.getLimit());
+								break;
+							case KILLS:
+								iconName = GuiTools.GAME_MATCH_LIMIT_KILLS;
+								value = nf.format(l.getLimit());
+								break;
+						}
+					}
+					tooltip = getConfiguration().getLanguage().getText(iconName+"Tooltip");
+					// icon
+					{	BufferedImage icon = GuiTools.getIcon(iconName);
+						JLabel lbl = tablePanel.getLabel(k%lines,(k/lines)*2+0);
+						lbl.setText(null);
+						lbl.setToolTipText(tooltip);
+						double zoom = lineHeight/(double)icon.getHeight();
+						icon = ImageTools.resize(icon,zoom,true);
+						ImageIcon ic = new ImageIcon(icon);
+						lbl.setIcon(ic);
+						Color bg = GuiTools.COLOR_TABLE_HEADER_BACKGROUND;
+						lbl.setBackground(bg);
+					}
+					// value
+					{	JLabel lbl = tablePanel.getLabel(k%lines,(k/lines)*2+1);
+						lbl.setText(value);
+						lbl.setToolTipText(tooltip);
+						Color bg = GuiTools.COLOR_TABLE_REGULAR_BACKGROUND;
+						lbl.setBackground(bg);
+					}	
+					k++;
 				}
 			}
 			limitsPanel.setDataPanel(tablePanel);

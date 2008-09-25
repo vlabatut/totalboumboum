@@ -2,6 +2,7 @@
 <xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema">
 <xsd:include schemaLocation="_limit.xsd"/>
 <xsd:include schemaLocation="_playmode.xsd"/>
+<xsd:include schemaLocation="_notes.xsd"/>
 
 	<xsd:complexType name="tOptions">
 		<xsd:sequence>
@@ -43,6 +44,7 @@
 	<xsd:complexType name="tMatch">
 		<xsd:sequence>
 			<xsd:element name="options" type="tOptions" />
+			<xsd:element name="notes" type="tNotes" />
 			<xsd:element name="levels" type="tLevels" />
 		</xsd:sequence>
 	</xsd:complexType>
