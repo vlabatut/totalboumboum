@@ -15,7 +15,6 @@ import fr.free.totalboumboum.data.statistics.StatisticRound;
 import fr.free.totalboumboum.engine.loop.Loop;
 import fr.free.totalboumboum.engine.player.Player;
 import fr.free.totalboumboum.game.limit.Limits;
-import fr.free.totalboumboum.game.match.LevelDescription;
 import fr.free.totalboumboum.game.match.Match;
 import fr.free.totalboumboum.game.point.PlayerPoints;
 import fr.free.totalboumboum.game.point.PointProcessor;

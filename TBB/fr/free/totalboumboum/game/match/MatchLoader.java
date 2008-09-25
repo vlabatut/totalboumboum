@@ -18,6 +18,7 @@ import fr.free.totalboumboum.game.limit.Limits;
 import fr.free.totalboumboum.game.limit.LimitsLoader;
 import fr.free.totalboumboum.game.point.PointProcessor;
 import fr.free.totalboumboum.game.point.PointProcessorLoader;
+import fr.free.totalboumboum.game.round.LevelDescription;
 import fr.free.totalboumboum.game.round.PlayMode;
 import fr.free.totalboumboum.game.tournament.AbstractTournament;
 import fr.free.totalboumboum.tools.FileTools;

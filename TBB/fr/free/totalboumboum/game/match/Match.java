@@ -15,6 +15,7 @@ import fr.free.totalboumboum.data.statistics.StatisticRound;
 import fr.free.totalboumboum.game.limit.Limits;
 import fr.free.totalboumboum.game.point.PointPoints;
 import fr.free.totalboumboum.game.point.PointProcessor;
+import fr.free.totalboumboum.game.round.LevelDescription;
 import fr.free.totalboumboum.game.round.Round;
 import fr.free.totalboumboum.game.tournament.AbstractTournament;
 
