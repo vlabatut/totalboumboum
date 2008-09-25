@@ -1,11 +1,10 @@
-package fr.free.totalboumboum.game.match;
+package fr.free.totalboumboum.game.round;
 
 import java.io.File;
 import java.util.ArrayList;
 
 import fr.free.totalboumboum.game.limit.Limits;
 import fr.free.totalboumboum.game.point.PointProcessor;
-import fr.free.totalboumboum.game.round.PlayMode;
 
 public class LevelDescription
 {
