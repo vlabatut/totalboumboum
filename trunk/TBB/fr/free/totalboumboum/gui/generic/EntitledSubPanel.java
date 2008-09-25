@@ -42,9 +42,9 @@ public class EntitledSubPanel extends JPanel
 			title = new JLabel(txt);
 			Font font = configuration.getFont().deriveFont((float)GuiTools.getSize(GuiTools.GAME_RESULTS_HEADER_FONT_SIZE));
 			title.setFont(font);
-			String text = configuration.getLanguage().getText(GuiTools.GAME_MATCH_HEADER_ROUNDS);
+			String text = configuration.getLanguage().getText(GuiTools.GAME_MATCH_HEADER_NOTES);
 			title.setText(text);
-			String tooltip = configuration.getLanguage().getText(GuiTools.GAME_MATCH_HEADER_ROUNDS+"Tooltip");
+			String tooltip = configuration.getLanguage().getText(GuiTools.GAME_MATCH_HEADER_NOTES+"Tooltip");
 			title.setToolTipText(tooltip);
 			title.setHorizontalAlignment(SwingConstants.CENTER);
 			title.setForeground(GuiTools.COLOR_TABLE_HEADER_FOREGROUND);

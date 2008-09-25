@@ -22,6 +22,10 @@ public class LimitScore extends Limit
 	public long getLimit()
 	{	return limit;
 	}
+	
+	public Score getScore()
+	{	return score;
+	}
 
 	public void setLimit(int limit)
 	{	this.limit = limit;

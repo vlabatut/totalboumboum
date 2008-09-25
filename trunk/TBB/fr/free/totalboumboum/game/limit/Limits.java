@@ -22,6 +22,10 @@ public class Limits
 		}
 		return result;
 	}
+
+	public Iterator<Limit> iterator()
+	{	return limits.iterator();
+	}
 	
 	public void finish()
 	{	limits.clear();		

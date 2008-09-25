@@ -52,6 +52,10 @@ public class MatchLoader
 		// options
 		element = root.getChild(XmlTools.ELT_OPTIONS);
 		loadOptionsElement(element,folderPath,result);
+		// notes
+		element = root.getChild(XmlTools.ELT_NOTES);
+		ArrayList<String> notes = loadNotesElement(element);
+		result.setNotes(notes);
 		// levels
 		element = root.getChild(XmlTools.ELT_LEVELS);
 		loadLevelsElement(element,folderPath,result);
@@ -134,4 +138,15 @@ public class MatchLoader
 		result.setPointProcessor(pp);
 	}
     
+    public static ArrayList<String> loadNotesElement(Element root)
+    {	ArrayList<String> result = new ArrayList<String>();
+    	List<Element> lines = root.getChildren(XmlTools.ELT_LINE);
+    	Iterator<Element> i = lines.iterator();
+    	while(i.hasNext())
+    	{	Element temp = i.next();
+    		String line = temp.getAttributeValue(XmlTools.ATT_VALUE).trim();
+    		result.add(line);
+    	}
+    	return result;
+    }
 }

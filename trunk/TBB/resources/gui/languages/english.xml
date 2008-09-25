@@ -173,8 +173,8 @@
 	<text name="GameTournamentHeaderMatch" value="M" />
 	<text name="GameTournamentHeaderMatchTooltip" value="Number of points scored for the match number" />
 	<!--  -->
-	<text name="GameTournamentHeaderMatches" value="Matches" />
-	<text name="GameTournamentHeaderMatchesTooltip" value="Information about the matches of this tournament" />
+	<text name="GameTournamentHeaderNotes" value="Notes" />
+	<text name="GameTournamentHeaderNotesTooltip" value="Notes from the designer of this tournament" />
 	<!--  -->
 	<text name="GameTournamentHeaderLimits" value="Limits" />
 	<text name="GameTournamentHeaderLimitsTooltip" value="Information about what may cause the tournament to end" />
@@ -234,8 +234,8 @@
 	<text name="GameMatchHeaderTotal" value="All" />
 	<text name="GameMatchHeaderTotalTooltip" value="Total number of points scored for all the rounds" />
 	<!--  -->
-	<text name="GameMatchHeaderRounds" value="Rounds" />
-	<text name="GameMatchHeaderRoundsTooltip" value="Information about the rounds of this match" />
+	<text name="GameMatchHeaderNotes" value="Notes" />
+	<text name="GameMatchHeaderNotesTooltip" value="Notes from the designer of this match" />
 	<!--  -->
 	<text name="GameMatchHeaderLimits" value="Limits" />
 	<text name="GameMatchHeaderLimitsTooltip" value="Information about what may cause the match to end" />

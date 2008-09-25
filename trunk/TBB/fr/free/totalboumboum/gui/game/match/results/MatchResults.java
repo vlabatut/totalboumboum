@@ -69,33 +69,26 @@ public class MatchResults extends EntitledDataPanel
 					lbl.setMinimumSize(new Dimension(GuiTools.getSize(GuiTools.GAME_RESULTS_LABEL_LINE_HEIGHT),GuiTools.getSize(GuiTools.GAME_RESULTS_LABEL_HEADER_HEIGHT)));
 					lbl.setOpaque(false);
 				}
-				BufferedImage[] icons = 
-				{	GuiTools.getIcon(GuiTools.GAME_MATCH_HEADER_NAME),
-					GuiTools.getIcon(GuiTools.GAME_MATCH_HEADER_BOMBS),
-					GuiTools.getIcon(GuiTools.GAME_MATCH_HEADER_ITEMS),
-					GuiTools.getIcon(GuiTools.GAME_MATCH_HEADER_DEATHS),
-					GuiTools.getIcon(GuiTools.GAME_MATCH_HEADER_KILLS),
-					GuiTools.getIcon(GuiTools.GAME_MATCH_HEADER_TOTAL),
-					GuiTools.getIcon(GuiTools.GAME_MATCH_HEADER_POINTS)
+				String names[] = 
+				{	GuiTools.GAME_MATCH_HEADER_NAME,
+					GuiTools.GAME_MATCH_HEADER_BOMBS,
+					GuiTools.GAME_MATCH_HEADER_ITEMS,
+					GuiTools.GAME_MATCH_HEADER_DEATHS,
+					GuiTools.GAME_MATCH_HEADER_KILLS,
+					GuiTools.GAME_MATCH_HEADER_TOTAL,
+					GuiTools.GAME_MATCH_HEADER_POINTS
 				};
-				String[] tooltips = 
-				{	getConfiguration().getLanguage().getText(GuiTools.GAME_MATCH_HEADER_NAME+"Tooltip"),
-					getConfiguration().getLanguage().getText(GuiTools.GAME_MATCH_HEADER_BOMBS+"Tooltip"),
-					getConfiguration().getLanguage().getText(GuiTools.GAME_MATCH_HEADER_ITEMS+"Tooltip"),
-					getConfiguration().getLanguage().getText(GuiTools.GAME_MATCH_HEADER_DEATHS+"Tooltip"),
-					getConfiguration().getLanguage().getText(GuiTools.GAME_MATCH_HEADER_KILLS+"Tooltip"),
-					getConfiguration().getLanguage().getText(GuiTools.GAME_MATCH_HEADER_TOTAL+"Tooltip"),
-					getConfiguration().getLanguage().getText(GuiTools.GAME_MATCH_HEADER_POINTS+"Tooltip")
-				};
-				for(int i=0;i<icons.length;i++)
-				{	JLabel lbl = resultsPanel.getLabel(0,1+i);
+				for(int i=0;i<names.length;i++)
+				{	BufferedImage icon = GuiTools.getIcon(names[i]);
+					String tooltip = getConfiguration().getLanguage().getText(names[i]+"Tooltip");
+					JLabel lbl = resultsPanel.getLabel(0,1+i);
 					lbl.setText(null);
-					lbl.setToolTipText(tooltips[i]);
+					lbl.setToolTipText(tooltip);
 					int lineHeight = GuiTools.getSize(GuiTools.GAME_RESULTS_LABEL_HEADER_HEIGHT);
-					double zoom = lineHeight/(double)icons[i].getHeight();
-						icons[i] = ImageTools.resize(icons[i],zoom,true);
-					ImageIcon icon = new ImageIcon(icons[i]);
-					lbl.setIcon(icon);
+					double zoom = lineHeight/(double)icon.getHeight();
+						icon = ImageTools.resize(icon,zoom,true);
+					ImageIcon ic = new ImageIcon(icon);
+					lbl.setIcon(ic);
 				}
 			}
 			// data

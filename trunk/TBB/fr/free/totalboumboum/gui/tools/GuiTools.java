@@ -99,7 +99,7 @@ public class GuiTools
 	public static final String GAME_TOURNAMENT_HEADER_KILLS = "GameTournamentHeaderKills";
 	public static final String GAME_TOURNAMENT_HEADER_TOTAL = "GameTournamentHeaderTotal";
 	public static final String GAME_TOURNAMENT_HEADER_MATCH = "GameTournamentHeaderMatch";
-	public static final String GAME_TOURNAMENT_HEADER_MATCHES = "GameTournamentHeaderMatches";	
+	public static final String GAME_TOURNAMENT_HEADER_NOTES = "GameTournamentHeaderNotes";	
 	public static final String GAME_TOURNAMENT_HEADER_LIMITS = "GameTournamentHeaderLimits";	
 	public static final String GAME_TOURNAMENT_HEADER_POINTSPROCESS = "GameTournamentHeaderPointprocess";	
 	public static final String GAME_TOURNAMENT_LIMIT_CONFRONTATIONS = "GameTournamentLimitConfrontations";
@@ -122,7 +122,7 @@ public class GuiTools
 	public static final String GAME_MATCH_HEADER_RANK = "GameMatchHeaderRank";
 	public static final String GAME_MATCH_HEADER_TOTAL = "GameMatchHeaderTotal";
 	public static final String GAME_MATCH_HEADER_ROUND = "GameMatchHeaderRound";
-	public static final String GAME_MATCH_HEADER_ROUNDS = "GameMatchHeaderRounds";	
+	public static final String GAME_MATCH_HEADER_NOTES = "GameMatchHeaderNotes";	
 	public static final String GAME_MATCH_HEADER_LIMITS = "GameMatchHeaderLimits";	
 	public static final String GAME_MATCH_HEADER_POINTSPROCESS = "GameMatchHeaderPointprocess";	
 	public static final String GAME_MATCH_LIMIT_CONFRONTATIONS = "GameMatchLimitConfrontations";
@@ -159,6 +159,7 @@ public class GuiTools
 	// colors
 	public final static Color COLOR_COMMON_BACKGROUND = new Color(255,255,255,150);
 	public final static Color COLOR_TITLE_FOREGROUND = Color.BLACK;
+	public final static Color COLOR_TABLE_REGULAR_BACKGROUND = new Color(0,0,0,80);
 	public final static Color COLOR_TABLE_NEUTRAL_BACKGROUND = new Color(0,0,0,20);
 	public final static Color COLOR_TABLE_REGULAR_FOREGROUND = Color.BLACK;
 	public final static Color COLOR_TABLE_HEADER_BACKGROUND = new Color(0,0,0,130);

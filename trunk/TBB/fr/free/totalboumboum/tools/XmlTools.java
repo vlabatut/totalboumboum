@@ -99,6 +99,7 @@ public class XmlTools
 	public static final String ELT_MODULATION = "modulation";
 	public static final String ELT_MULTIPLICATION = "multiplication";
 	public static final String ELT_NAME = "name";
+	public static final String ELT_NOTES = "notes";
 	public static final String ELT_ON = "on";
 	public static final String ELT_OFF = "off";
 	public static final String ELT_OPTIONS = "options";
