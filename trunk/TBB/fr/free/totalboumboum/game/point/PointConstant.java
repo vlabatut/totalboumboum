@@ -2,7 +2,7 @@ package fr.free.totalboumboum.game.point;
 
 import fr.free.totalboumboum.data.statistics.StatisticBase;
 
-public class PointConstant implements PointProcessor
+public class PointConstant extends PointProcessor
 {	
 	private float value;
 	

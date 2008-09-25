@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 import fr.free.totalboumboum.data.statistics.StatisticBase;
 
-public class PointAddition implements PointProcessor
+public class PointAddition extends PointProcessor
 {
 	private PointProcessor leftSource;
 	private PointProcessor rightSource;

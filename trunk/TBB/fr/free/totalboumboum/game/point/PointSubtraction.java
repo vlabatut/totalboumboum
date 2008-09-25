@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 import fr.free.totalboumboum.data.statistics.StatisticBase;
 
-public class PointSubtraction implements PointProcessor
+public class PointSubtraction extends PointProcessor
 {
 	private PointProcessor leftSource;
 	private PointProcessor rightSource;

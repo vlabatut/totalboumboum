@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema">
 <xsd:include schemaLocation="_limit.xsd"/>
+<xsd:include schemaLocation="_notes.xsd"/>
 
 	<xsd:complexType name="tPoints">
 		<xsd:attribute name="local" type="xsd:boolean" use="optional" default="false" />
@@ -74,6 +75,7 @@
 	<xsd:complexType name="tTournament">
 		<xsd:sequence>
 			<xsd:element name="general" type="tGeneral" />
+			<xsd:element name="notes" type="tNotes" />
 			<xsd:group ref="gTournament" />
 		</xsd:sequence>
 	</xsd:complexType>

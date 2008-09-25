@@ -3,6 +3,8 @@
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
 	xsi:noNamespaceSchemaLocation="..\..\schemas\point.xsd">
 	
+	<notes />
+
 	<subtraction>
 		<scores type="kills"/>
 		<scores type="deaths"/>

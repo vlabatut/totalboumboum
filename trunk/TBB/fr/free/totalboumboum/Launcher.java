@@ -608,6 +608,7 @@ public class Launcher
 	 * 
 	 *   + alpha.41
 	 * - gestion des limites plus détaillée, que ce soir pour le tournoi, le match ou le round
+	 * - correction de quelques bugs d'affichage concernant les thèmes et apparaissant à haute résolution
 	 * 
 	 * *******************************************************
 	 * *********************** A FAIRE ***********************
@@ -619,6 +620,7 @@ public class Launcher
 	 * - faut il définir les rounds dans des fichiers à part ? mais on ne sait pas à l'avance cb il en faut...
 	 * - possibilité de donner des noms aux matches et aux rounds
 	 * - gérer le shrink
+	 * - un bug apparait parfois : le résultat du match ne correspond pas au classement réel, et les temps affichés non plus
 	 * - problème de collisions quand on change la vitesse (surement un problème d'arrondi, ou alors un saut trop grand (en distance), voir si j'avais implémenté la maximalisation du déplacement malgré une éventuelle collision...)
 	 * - revoir le système des IA
 	 * - redescendre les stats dans loop, et gestion de fin de partie et tout ce qui est en fait directement lié au moteur
@@ -631,7 +633,10 @@ public class Launcher
 	 * - pour painting, possibilité de définir quelles cases peuvent être repeinte, ce qui permet de poser comme limite un %age de cases repeintes
 	 * - results panel : quand il y a trop de rounds dans un match pour que ça rentre à l'écran, ne pas tout afficher
 	 * - problème d'affichage : le niveau est coupé en fonction du mode d'affichage, mais pas de façon symétrique (le haut n'est pas coupé, seulement le bas)
+	 * - mode plein écran
+	 * -------------------------------------------------------------------
 	 * - s'occuper de la limite qui fait gagner le joueur qui la franchit : pq pas un simple bonus/malus pour celui qui arrête la partie ?
 	 * - limites exprimées de façon relative (peindre 75% des cases...)
+	 * - normaliser le calcul des points (discrétisation spéciale ou nombre de points direct), ce qui permettra d'en normaliser la représentation graphique dans la GUI
 	 */
 }

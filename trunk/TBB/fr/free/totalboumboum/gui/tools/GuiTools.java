@@ -97,6 +97,7 @@ public class GuiTools
 	public static final String GAME_TOURNAMENT_HEADER_DEATHS = "GameTournamentHeaderDeaths";
 	public static final String GAME_TOURNAMENT_HEADER_ITEMS = "GameTournamentHeaderItems";
 	public static final String GAME_TOURNAMENT_HEADER_KILLS = "GameTournamentHeaderKills";
+	public static final String GAME_TOURNAMENT_HEADER_RANK = "GameTournamentHeaderRank";
 	public static final String GAME_TOURNAMENT_HEADER_TOTAL = "GameTournamentHeaderTotal";
 	public static final String GAME_TOURNAMENT_HEADER_MATCH = "GameTournamentHeaderMatch";
 	public static final String GAME_TOURNAMENT_HEADER_NOTES = "GameTournamentHeaderNotes";	
@@ -142,6 +143,7 @@ public class GuiTools
 	public static final String GAME_ROUND_HEADER_DEATHS = "GameRoundHeaderDeaths";
 	public static final String GAME_ROUND_HEADER_ITEMS = "GameRoundHeaderItems";
 	public static final String GAME_ROUND_HEADER_KILLS = "GameRoundHeaderKills";
+	public static final String GAME_ROUND_HEADER_RANK = "GameRoundHeaderRank";
 	public static final String GAME_ROUND_HEADER_CROWNS = "GameRoundHeaderCrowns";
 	public static final String GAME_ROUND_HEADER_FRAGS = "GameRoundHeaderFrags";
 	public static final String GAME_ROUND_HEADER_PAINTINGS = "GameRoundHeaderPaintings";
@@ -298,7 +300,7 @@ public class GuiTools
 		sizes.put(GAME_DESCRIPTION_LABEL_LINE_WIDTH,gameDescriptionLabelLineWidth);
 		int gameDescriptionLabelTextHeight = gameDescriptionPanelHeight-3*gameResultsMarginSize-gameResultsLabelHeaderHeight;
 		sizes.put(GAME_DESCRIPTION_LABEL_TEXT_HEIGHT,gameDescriptionLabelTextHeight);
-		int gameDescriptionLabelTextFontSize = gameDescriptionLabelTextHeight/10;
+		int gameDescriptionLabelTextFontSize = gameDescriptionLabelTextHeight/7;
 		sizes.put(GAME_DESCRIPTION_LABEL_TEXT_FONT_SIZE,gameDescriptionLabelTextFontSize);
 		
 		// icons
@@ -443,7 +445,9 @@ public class GuiTools
 			icons.put(GAME_ROUND_LIMIT_POINTS,image);
 			// rank
 			image = loadIcon(folder+GuiFileTools.FILE_RANK,absent);
+			icons.put(GAME_TOURNAMENT_HEADER_RANK,image);
 			icons.put(GAME_MATCH_HEADER_RANK,image);
+			icons.put(GAME_ROUND_HEADER_RANK,image);
 			// time
 			image = loadIcon(folder+GuiFileTools.FILE_TIME,absent);
 			icons.put(GAME_ROUND_HEADER_TIME,image);

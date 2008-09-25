@@ -3,7 +3,7 @@ package fr.free.totalboumboum.game.point;
 import fr.free.totalboumboum.data.statistics.Score;
 import fr.free.totalboumboum.data.statistics.StatisticBase;
 
-public class PointScores implements PointProcessor
+public class PointScores extends PointProcessor
 {	
 	private Score score;
 	

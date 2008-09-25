@@ -5,7 +5,7 @@ import java.util.Iterator;
 
 import fr.free.totalboumboum.data.statistics.StatisticBase;
 
-public class PointRankings implements PointProcessor
+public class PointRankings extends PointProcessor
 {
 	private ArrayList<PointProcessor> sources = new ArrayList<PointProcessor>();
 	private boolean inverted;
