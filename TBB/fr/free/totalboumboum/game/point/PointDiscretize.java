@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 import fr.free.totalboumboum.data.statistics.StatisticBase;
 
-public class PointDiscretize implements PointProcessor
+public class PointDiscretize extends PointProcessor
 {
 	private PointProcessor source;
 	/**

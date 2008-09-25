@@ -6,7 +6,7 @@
 		<shadow name="standShadow" file="shadow.png" />
 	</shadows>
 	<gestures>
-		<gesture name="standing" repeat="true" shadow="standShadow" shadowYShift="4">
+		<gesture name="standing" repeat="true" shadow="standShadow" shadowYShift="3">
 			<direction name="none">
 				<step file="standing.gif" />
 			</direction>

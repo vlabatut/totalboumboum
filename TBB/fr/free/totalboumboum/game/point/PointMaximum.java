@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 import fr.free.totalboumboum.data.statistics.StatisticBase;
 
-public class PointMaximum implements PointProcessor
+public class PointMaximum extends PointProcessor
 {
 	private PointProcessor source;
 	

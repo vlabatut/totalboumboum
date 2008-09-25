@@ -5,6 +5,12 @@
 	
 	<general name="Tournament-séquence loooong"/>
 
+ 	<notes>
+ 		<line value="Here goes a short description of the tournament." />
+ 		<line value="Author: Vincent Labatut" />
+ 		<line value="Date: 25-09-2008" />
+ 	</notes>
+ 	
 	<sequence>
 	 	<options>
 	 		<limits />

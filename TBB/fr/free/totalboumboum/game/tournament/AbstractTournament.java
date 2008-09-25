@@ -109,4 +109,16 @@ public abstract class AbstractTournament
 	public TournamentRenderPanel getPanel()
 	{	return panel;	
 	}
+
+	/////////////////////////////////////////////////////////////////
+	// NOTES			/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	private final ArrayList<String> notes = new ArrayList<String>();
+
+	public void setNotes(ArrayList<String> notes)
+	{	this.notes.addAll(notes);
+	}
+	public ArrayList<String> getNotes()
+	{	return notes;
+	}
 }

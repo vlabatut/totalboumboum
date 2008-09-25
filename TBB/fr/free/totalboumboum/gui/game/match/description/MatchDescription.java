@@ -47,6 +47,7 @@ import fr.free.totalboumboum.game.limit.LimitScore;
 import fr.free.totalboumboum.game.limit.LimitTotal;
 import fr.free.totalboumboum.game.match.Match;
 import fr.free.totalboumboum.game.point.PlayerPoints;
+import fr.free.totalboumboum.game.point.PointProcessor;
 import fr.free.totalboumboum.gui.data.configuration.GuiConfiguration;
 import fr.free.totalboumboum.gui.generic.EntitledDataPanel;
 import fr.free.totalboumboum.gui.generic.EntitledSubPanel;
@@ -131,7 +132,6 @@ public class MatchDescription extends EntitledDataPanel
 	public void updateData()
 	{	// nothing to do here
 	}
-
 	
 	private JPanel makePlayersPanel()
 	{	Match match = getConfiguration().getCurrentMatch();
@@ -326,7 +326,14 @@ public class MatchDescription extends EntitledDataPanel
 			StyleConstants.setFontFamily(sa, font.getFamily());
 			StyleConstants.setFontSize(sa, font.getSize());
 			StyledDocument doc = textPane.getStyledDocument();
-			text = "How are the points processed ?";
+			PointProcessor pp = getConfiguration().getCurrentMatch().getPointProcessor();			
+			text = "";
+			ArrayList<String> list = pp.getNotes();
+			Iterator<String> i = list.iterator();
+			while (i.hasNext())
+			{	String temp = i.next();
+				text = text + temp + "\n";
+			}
 			try
 			{	doc.insertString(0,text,sa);
 			}

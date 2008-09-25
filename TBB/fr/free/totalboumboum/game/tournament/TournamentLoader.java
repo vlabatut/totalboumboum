@@ -12,6 +12,7 @@ import org.jdom.Element;
 import org.xml.sax.SAXException;
 
 import fr.free.totalboumboum.data.configuration.Configuration;
+import fr.free.totalboumboum.game.match.MatchLoader;
 import fr.free.totalboumboum.game.tournament.cup.CupTournamentLoader;
 import fr.free.totalboumboum.game.tournament.league.LeagueTournamentLoader;
 import fr.free.totalboumboum.game.tournament.sequence.SequenceTournamentLoader;
@@ -52,7 +53,7 @@ public class TournamentLoader
 		String name = element.getAttribute(XmlTools.ATT_NAME).getValue().trim();
 		// content
 		List<Element> elements = root.getChildren();
-		element = elements.get(1);
+		element = elements.get(2);
 		String type = element.getName();
 		if(type.equalsIgnoreCase(CUP))
 			result = CupTournamentLoader.loadTournamentElement(path,element,configuration);
@@ -62,6 +63,11 @@ public class TournamentLoader
 			result = SequenceTournamentLoader.loadTournamentElement(path,element,configuration);
 		else if(type.equalsIgnoreCase(SINGLE))
 			result = SingleTournamentLoader.loadTournamentElement(path,element,configuration);
+		// notes
+		element = root.getChild(XmlTools.ELT_NOTES);
+		ArrayList<String> notes = MatchLoader.loadNotesElement(element);
+		result.setNotes(notes);
+		//
 		result.setName(name);
 		return result;
 	}

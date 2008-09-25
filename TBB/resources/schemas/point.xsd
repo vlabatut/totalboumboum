@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema">
 <xsd:include schemaLocation="_score.xsd"/>
+<xsd:include schemaLocation="_notes.xsd"/>
 
 	<xsd:complexType name="tPointPoints" />
 	
@@ -115,7 +116,10 @@
 	</xsd:group>
 	
 	<xsd:complexType name="tPoint">
-		<xsd:group ref="gPoint"/>
+		<xsd:sequence>
+			<xsd:element name="notes" type="tNotes" />
+			<xsd:group ref="gPoint"/>
+		</xsd:sequence>
 	</xsd:complexType>	
 	
 	<xsd:element name="point" type="tPoint" />

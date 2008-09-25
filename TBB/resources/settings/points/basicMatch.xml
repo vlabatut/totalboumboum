@@ -3,6 +3,12 @@
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
 	xsi:noNamespaceSchemaLocation="..\..\schemas\point.xsd">
 	
+	<notes>
+		<line value="Players #1,2,3,4+ get 10,6,3,1,0 pts." />
+		<line value="If some players have the same number of points, scores are used: kills, then items, then bombs." />
+		<line value="If there's still a draw, points are shared." />
+	</notes>
+	
 	<discretize exaequoShare="true" >
 		<rankings >
 			<points />

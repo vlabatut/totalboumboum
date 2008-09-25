@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 import fr.free.totalboumboum.data.statistics.StatisticBase;
 
-public class PointTotal implements PointProcessor
+public class PointTotal extends PointProcessor
 {
 	private PointProcessor source;
 	
