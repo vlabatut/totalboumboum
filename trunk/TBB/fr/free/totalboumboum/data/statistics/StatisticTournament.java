@@ -9,7 +9,7 @@ import java.util.HashMap;
 import java.util.Iterator;
 
 import fr.free.totalboumboum.data.profile.Profile;
-import fr.free.totalboumboum.game.point.PointProcessor;
+import fr.free.totalboumboum.game.points.PointProcessor;
 import fr.free.totalboumboum.game.tournament.AbstractTournament;
 
 public class StatisticTournament implements Serializable, StatisticBase
