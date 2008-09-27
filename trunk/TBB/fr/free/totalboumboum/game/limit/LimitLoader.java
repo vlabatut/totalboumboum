@@ -13,8 +13,8 @@ import org.jdom.Element;
 import org.xml.sax.SAXException;
 
 import fr.free.totalboumboum.data.statistics.Score;
-import fr.free.totalboumboum.game.point.PointProcessor;
-import fr.free.totalboumboum.game.point.PointProcessorLoader;
+import fr.free.totalboumboum.game.points.PointProcessor;
+import fr.free.totalboumboum.game.points.PointProcessorLoader;
 import fr.free.totalboumboum.game.round.LevelDescription;
 import fr.free.totalboumboum.tools.FileTools;
 import fr.free.totalboumboum.tools.XmlTools;
