@@ -1,8 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <level 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
 		xsi:noNamespaceSchemaLocation="..\..\..\xml\schemas\levels.xsd" >
+	
 	<theme packname="superbomberman1" name="tunnel"/>
+	
 	<items packname="superbomberman1" name="normal"/>
+	
 	<globalDimension width="15" height="15" />
 	<visibleDimension width="11" height="11" />
 	<visiblePosition leftCol="2" upLine="2" />

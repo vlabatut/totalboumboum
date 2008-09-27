@@ -9,6 +9,7 @@ import org.jdom.Attribute;
 import org.jdom.Element;
 
 import fr.free.totalboumboum.engine.container.level.LevelLoader;
+import fr.free.totalboumboum.engine.container.level.ZoneLoader;
 import fr.free.totalboumboum.tools.XmlTools;
 
 
@@ -35,7 +36,7 @@ public class VariableTilesLoader
     	float sum = 0;
     	while(i.hasNext())
     	{	Element temp = i.next();
-    		String[] elts = LevelLoader.loadBasicTileElement(temp);    	
+    		String[] elts = ZoneLoader.loadBasicTileElement(temp);    	
         	float tProba = Float.valueOf(temp.getAttribute(XmlTools.ATT_PROBA).getValue().trim());
     		ValueTile vt = new ValueTile(elts[0],elts[1],elts[2],tProba);
     		/*

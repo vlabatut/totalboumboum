@@ -19,13 +19,7 @@
 <!--  	bomb-trigger-control --> 
 <!--  	bomb-trigger-timer --> 
 <!--  	bomb-number --> 
-		<ability strength="3" frame="false" time="-1" uses="-1" maxStrength="10" >
-			<name value="bomb-number" />
-		</ability>
 <!--  	bomb-range --> 
-		<ability strength="2" frame="false" time="-1" uses="-1" maxStrength="10" >
-			<name value="bomb-range" />
-		</ability>
 <!--  	hero-celebration-duration --> 
 		<ability strength="6000" frame="false" time="-1" uses="-1">
 			<name value="hero-celebration-duration" />
