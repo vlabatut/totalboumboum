@@ -15,6 +15,7 @@ import fr.free.totalboumboum.engine.content.feature.action.GeneralAction;
 import fr.free.totalboumboum.engine.content.feature.action.SpecificAction;
 import fr.free.totalboumboum.engine.content.feature.anime.AnimeGesture;
 import fr.free.totalboumboum.engine.content.sprite.Sprite;
+import fr.free.totalboumboum.engine.content.sprite.hero.Hero;
 import fr.free.totalboumboum.engine.loop.Loop;
 
 
@@ -100,7 +101,10 @@ public class AbilityManager
 	 *  	- itemAbilities
 	 */
 	public void update()
-	{	currentAbilities.clear();
+	{	
+if(sprite instanceof Hero)
+	System.out.println();
+		currentAbilities.clear();
 		updateAbilities(directAbilities);
 		ArrayList<AbstractAbility> itemAbilities = sprite.getItemAbilities();
 		updateAbilities(itemAbilities);

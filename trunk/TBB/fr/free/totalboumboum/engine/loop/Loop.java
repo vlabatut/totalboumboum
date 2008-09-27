@@ -24,6 +24,7 @@ import fr.free.totalboumboum.data.configuration.Configuration;
 import fr.free.totalboumboum.data.configuration.GameConstants;
 import fr.free.totalboumboum.data.profile.Profile;
 import fr.free.totalboumboum.data.statistics.StatisticEvent;
+import fr.free.totalboumboum.engine.container.itemset.Itemset;
 import fr.free.totalboumboum.engine.container.level.Level;
 import fr.free.totalboumboum.engine.container.level.LevelLoader;
 import fr.free.totalboumboum.engine.content.feature.ability.AbilityLoader;
@@ -36,6 +37,7 @@ import fr.free.totalboumboum.engine.content.feature.trajectory.TrajectoryPack;
 import fr.free.totalboumboum.engine.content.feature.trajectory.TrajectoryPackLoader;
 import fr.free.totalboumboum.engine.content.sprite.Sprite;
 import fr.free.totalboumboum.engine.content.sprite.hero.Hero;
+import fr.free.totalboumboum.engine.content.sprite.item.Item;
 import fr.free.totalboumboum.engine.control.SystemControl;
 import fr.free.totalboumboum.engine.player.Player;
 import fr.free.totalboumboum.engine.player.PlayerLocation;
@@ -76,14 +78,27 @@ public class Loop implements Runnable
 		ArrayList<Profile> profiles = round.getProfiles();
 		int remainingPlayers = profiles.size();
 		PlayerLocation[] initialPositions = level.getPlayersLocations().get(remainingPlayers);
+		ArrayList<String> items = level.getPlayersItems();
+		Itemset itemset = level.getItemset();
 		Iterator<Profile> i = profiles.iterator();
 		int j=0;
 		while(i.hasNext())
-		{	Profile profile = i.next();
-			PlayerLocation pl = initialPositions[j];
+		{	// init
+			Profile profile = i.next();
 			Player player = new Player(profile,level,abilities,permissionPack,trajectoryPack);
 			players.add(player);
-			level.addHero((Hero)player.getSprite(),pl.getLine(),pl.getCol());
+			Hero hero = (Hero)player.getSprite();
+			// location
+			PlayerLocation pl = initialPositions[j];
+			level.addHero(hero,pl.getLine(),pl.getCol());
+			// initial items
+			Iterator<String> it = items.iterator();
+			while(it.hasNext())
+			{	String name = it.next();
+				Item item = itemset.makeItem(name);
+				hero.addItem(item);
+			}
+			// next player...
 			loadStepOver();
 			j++;
 		}	

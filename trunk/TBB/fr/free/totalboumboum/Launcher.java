@@ -615,6 +615,8 @@ public class Launcher
 	 * - dans le round, la limite de temps devient une limite normale
 	 * - dans le tournoi séquence, on gère l'ordre aléatoire de matches
 	 * - dans le match, il faut gérer différemment la limite : 
+	 * - les capacités initiales ont été transformées en items initiaux
+	 * - les levels contiennent maintenant un certain nombre d'items initiaux, donnés à chaque joueur au début du round
 	 * 
 	 * *******************************************************
 	 * *********************** A FAIRE ***********************
@@ -645,11 +647,5 @@ public class Launcher
 	 * - limites exprimées de façon relative (peindre 75% des cases...)
 	 * - normaliser le calcul des points (discrétisation spéciale ou nombre de points direct), ce qui permettra d'en normaliser la représentation graphique dans la GUI
 	 * - pour painting, possibilité de définir quelles cases peuvent être repeinte, ce qui permet de poser comme limite un %age de cases repeintes
-	 */
-	
-	/*
-	 * TODO
-	 * - il faut transformer certaines habiletés initiales en items initiaux
-	 * - il faut rajouter les items initiaux dans les rounds
 	 */
 }

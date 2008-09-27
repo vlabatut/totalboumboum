@@ -32,6 +32,7 @@ import fr.free.totalboumboum.tools.StringTools;
 public class Level
 {	private Loop loop;
 	private HashMap<Integer, PlayerLocation[]> playersLocations;
+	private ArrayList<String> playersItems;
 	private Tile matrix[][];
 	private Theme theme;
 	private Itemset itemset;
@@ -525,6 +526,13 @@ System.out.println("resX:"+result[0]+" resY:"+result[1]);
 	{	this.playersLocations = playersLocations;
 	}
 	
+	public ArrayList<String> getPlayersItems()
+	{	return playersItems;
+	}
+	public void setPlayersItems(ArrayList<String> playersItems)
+	{	this.playersItems = playersItems;
+	}
+	
 	
 	public String getInstancePath() 
 	{	return instancePath;
@@ -563,5 +571,9 @@ System.out.println("resX:"+result[0]+" resY:"+result[1]);
 			// misc
 			playersLocations = null;
 		}
+	}
+	
+	public Itemset getItemset()
+	{	return itemset;	
 	}
 }

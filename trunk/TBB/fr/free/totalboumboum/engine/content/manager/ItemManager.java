@@ -14,6 +14,7 @@ import fr.free.totalboumboum.engine.content.feature.ability.ActionAbility;
 import fr.free.totalboumboum.engine.content.feature.action.GeneralAction;
 import fr.free.totalboumboum.engine.content.feature.anime.AnimeGesture;
 import fr.free.totalboumboum.engine.content.sprite.Sprite;
+import fr.free.totalboumboum.engine.content.sprite.hero.Hero;
 import fr.free.totalboumboum.engine.content.sprite.item.Item;
 
 
@@ -39,7 +40,10 @@ public class ItemManager
 	}
 	
 	public void update()
-	{	abilities = new ArrayList<AbstractAbility>();
+	{	
+if(sprite instanceof Hero)
+	System.out.println();
+		abilities = new ArrayList<AbstractAbility>();
 		// adding the items' abilities
 		Iterator<Item> i = collectedItems.iterator();
 		while(i.hasNext())

@@ -42,6 +42,7 @@ public class XmlTools
 	public static final String ELT_BOMBSET = "bombset";
 	public static final String ELT_BOMB = "bomb";
 	public static final String ELT_BOMBS = "bombs";
+	public static final String ELT_CASE = "case";
 	public static final String ELT_CHARACTER = "character";
 	public static final String ELT_COLOR = "color";
 	public static final String ELT_COLORS = "colors";
@@ -89,6 +90,7 @@ public class XmlTools
 	public static final String ELT_LINE = "line";
 	public static final String ELT_LOCAL = "local";
 	public static final String ELT_LOCATION = "location";
+	public static final String ELT_LOCATIONS = "locations";
 	public static final String ELT_MATCH = "match";
 	public static final String ELT_MATCHES = "matches";
 	public static final String ELT_MATRIX = "matrix";
@@ -195,6 +197,7 @@ public class XmlTools
 	public static final String ATT_MAXPLAYERS = "maxPlayers";
 	public static final String ATT_MAX_STRENGTH = "maxStrength";
 	public static final String ATT_NAME = "name";
+	public static final String ATT_NUMBER = "number";
 	public static final String ATT_ORIENTATION = "orientation";
 	public static final String ATT_PACKNAME = "packname";
 	public static final String ATT_PLAY_MODE = "playMode";
