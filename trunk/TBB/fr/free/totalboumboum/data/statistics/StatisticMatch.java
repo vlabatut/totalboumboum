@@ -117,4 +117,10 @@ public class StatisticMatch implements Serializable, StatisticBase
 		 */
 		
 	}
+
+	@Override
+	public long getTime()
+	{	// useless
+		return 0;
+	}
 }

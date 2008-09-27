@@ -2,7 +2,11 @@ package fr.free.totalboumboum.game.match;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Collections;
+import java.util.GregorianCalendar;
 import java.util.Iterator;
+import java.util.Random;
 
 import javax.xml.parsers.ParserConfigurationException;
 
@@ -13,6 +17,7 @@ import fr.free.totalboumboum.data.profile.Profile;
 import fr.free.totalboumboum.data.statistics.StatisticMatch;
 import fr.free.totalboumboum.data.statistics.StatisticRound;
 import fr.free.totalboumboum.game.limit.Limits;
+import fr.free.totalboumboum.game.limit.MatchLimit;
 import fr.free.totalboumboum.game.point.PointPoints;
 import fr.free.totalboumboum.game.point.PointProcessor;
 import fr.free.totalboumboum.game.round.LevelDescription;
@@ -42,19 +47,27 @@ public class Match
 	private boolean matchOver = false;
 	
 	public void init(ArrayList<Profile> profiles)
-	{	// NOTE vérifier si le nombre de joueurs sélectionnés correspond
+	{	// are rounds in random order ?
+    	if(randomOrder)
+    	{	Calendar cal = new GregorianCalendar();
+			long seed = cal.getTimeInMillis();
+			Random random = new Random(seed);
+			Collections.shuffle(rounds,random);
+    	}
+    	
+		
+		// NOTE vérifier si le nombre de joueurs sélectionnés correspond
 		this.profiles.addAll(profiles); 
-		iterator = levels.iterator();
+		iterator = rounds.iterator();
 		stats.init(this);
 	}
 
 	public void progress() throws IllegalArgumentException, SecurityException, ParserConfigurationException, SAXException, IOException, ClassNotFoundException, IllegalAccessException, NoSuchFieldException
 	{	if(!isOver())
 		{	// init round
-			LevelDescription levelDescription = iterator.next();
-			currentRound = new Round(this);
-			currentRound.init(levelDescription);
-			rounds.add(currentRound);
+			Round round = iterator.next();
+			currentRound = round.copy();
+			currentRound.init();
 		}
 	}
 
@@ -63,22 +76,22 @@ public class Match
 	}
 	
 	/////////////////////////////////////////////////////////////////
-	// LIMIT			/////////////////////////////////////////////
+	// LIMITS			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	private Limits limits;
+	private Limits<MatchLimit> limits;
 
-	public Limits getLimits()
+	public Limits<MatchLimit> getLimits()
 	{	return limits;
 	}
-	public void setLimits(Limits limits)
+	public void setLimits(Limits<MatchLimit> limits)
 	{	this.limits = limits;
 	}
 			
 	/////////////////////////////////////////////////////////////////
-	// LEVELS			/////////////////////////////////////////////
+	// ROUNDS			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	private boolean randomOrder;
-	private ArrayList<LevelDescription> levels = new ArrayList<LevelDescription>();
+	private ArrayList<Round> rounds = new ArrayList<Round>();
 
 	public boolean getRandomOrder()
 	{	return randomOrder;
@@ -87,11 +100,14 @@ public class Match
 	{	this.randomOrder = randomOrder;
 	}
 	
-	public void addLevelDescription(LevelDescription level)
-	{	levels.add(level);		
+	public void addRound(Round level)
+	{	rounds.add(level);		
 	}
-	public ArrayList<LevelDescription> getLevelDescriptions()
-	{	return levels;	
+	public ArrayList<Round> getRound()
+	{	return rounds;	
+	}
+	public void setRounds(ArrayList<Round> rounds)
+	{	this.rounds.addAll(rounds);			
 	}
 
 	/////////////////////////////////////////////////////////////////
@@ -123,20 +139,23 @@ public class Match
 	/////////////////////////////////////////////////////////////////
 	// ROUNDS			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	private ArrayList<Round> rounds = new ArrayList<Round>();
 	private Round currentRound;
-	private Iterator<LevelDescription> iterator;
+	private Iterator<Round> iterator;
 	
 	public Round getCurrentRound()
 	{	return currentRound;	
 	}
 	public void roundOver()
-	{	StatisticRound statsRound = currentRound.getStats();
+	{	// stats
+		StatisticRound statsRound = currentRound.getStats();
 		stats.addStatisticRound(statsRound);
 		stats.computePoints(pointProcessor);
-		//
+		// iterator
+		if(!iterator.hasNext())
+			iterator = rounds.iterator();
+		// limits
 		int limit = limits.testLimits(stats);
-		if(limit>=0 || !iterator.hasNext())
+		if(limit>=0)
 		{	if(limit>=0 && limit<profiles.size())
 				stats.setWinner(limit);
 			matchOver = true;
@@ -153,7 +172,6 @@ public class Match
 	{	// rounds
 		currentRound = null;
 		iterator = null;
-		levels.clear();
 		rounds.clear();
 		// limits
 		limits.finish();
@@ -213,5 +231,15 @@ public class Match
 	}
 	public ArrayList<String> getNotes()
 	{	return notes;
+	}
+	
+	
+	public Match copy()
+	{	Match result = new Match(tournament);
+		result.setNotes(notes);
+		result.setLimits(limits);
+		result.pointProcessor = pointProcessor;
+		result.setRounds(rounds);
+		return result;
 	}
 }

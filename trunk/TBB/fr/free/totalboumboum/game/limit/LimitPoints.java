@@ -3,7 +3,7 @@ package fr.free.totalboumboum.game.limit;
 import fr.free.totalboumboum.data.statistics.StatisticBase;
 import fr.free.totalboumboum.game.point.PointProcessor;
 
-public class LimitPoints extends Limit
+public class LimitPoints implements TournamentLimit, MatchLimit, RoundLimit
 {
 	private float limit;
 	private PointProcessor pointProcessor;
@@ -34,7 +34,7 @@ public class LimitPoints extends Limit
 		int i=0;
 		while(i<points.length && result<0)
 		{	if(points[i]>=limit)
-				result = stats.getPlayers().size();
+				result = i;
 			else
 				i++;
 		}

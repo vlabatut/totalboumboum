@@ -2,7 +2,11 @@ package fr.free.totalboumboum.game.tournament.sequence;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Collections;
+import java.util.GregorianCalendar;
 import java.util.Iterator;
+import java.util.Random;
 
 import javax.xml.parsers.ParserConfigurationException;
 
@@ -13,8 +17,10 @@ import fr.free.totalboumboum.data.statistics.Score;
 import fr.free.totalboumboum.data.statistics.StatisticMatch;
 import fr.free.totalboumboum.data.statistics.StatisticRound;
 import fr.free.totalboumboum.game.limit.Limits;
+import fr.free.totalboumboum.game.limit.TournamentLimit;
 import fr.free.totalboumboum.game.match.Match;
 import fr.free.totalboumboum.game.point.PointProcessor;
+import fr.free.totalboumboum.game.round.Round;
 import fr.free.totalboumboum.game.tournament.AbstractTournament;
 import fr.free.totalboumboum.gui.game.match.statistics.MatchStatistics;
 
@@ -28,12 +34,12 @@ public class SequenceTournament extends AbstractTournament
 	/////////////////////////////////////////////////////////////////
 	// LIMIT			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	private Limits limits;
+	private Limits<TournamentLimit> limits;
 
-	public Limits getLimits()
+	public Limits<TournamentLimit> getLimits()
 	{	return limits;
 	}
-	public void setLimits(Limits limits)
+	public void setLimits(Limits<TournamentLimit> limits)
 	{	this.limits = limits;
 	}
 
@@ -45,6 +51,15 @@ public class SequenceTournament extends AbstractTournament
 	@Override
 	public void init() throws IllegalArgumentException, SecurityException, ParserConfigurationException, SAXException, IOException, IllegalAccessException, NoSuchFieldException, ClassNotFoundException
 	{	begun = true;
+		
+		// are matches in random order ?
+		if(randomOrder)
+		{	Calendar cal = new GregorianCalendar();
+			long seed = cal.getTimeInMillis();
+			Random random = new Random(seed);
+			Collections.shuffle(matches,random);
+		}
+		
 		// NOTE vérifier si le nombre de joueurs sélectionnés correspond
 		setProfiles(getConfiguration().getProfiles());
 		iterator = matches.iterator();
@@ -59,7 +74,9 @@ public class SequenceTournament extends AbstractTournament
 	@Override
 	public void progress()
 	{	if(!isOver())
-		{	currentMatch = iterator.next();
+		{	
+			Match match = iterator.next();
+			currentMatch = match.copy();
 			currentMatch.init(profiles);
 		}
 	}
@@ -87,9 +104,17 @@ public class SequenceTournament extends AbstractTournament
 	/////////////////////////////////////////////////////////////////
 	// MATCH			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
+	private boolean randomOrder;
 	private ArrayList<Match> matches = new ArrayList<Match>();
 	private Match currentMatch;
 	private Iterator<Match> iterator;
+
+	public boolean getRandomOrder()
+	{	return randomOrder;
+	}
+	public void setRandomOrder(boolean randomOrder)
+	{	this.randomOrder = randomOrder;
+	}
 
 	public void addMatch(Match match)
 	{	matches.add(match);
@@ -101,12 +126,16 @@ public class SequenceTournament extends AbstractTournament
 	}
 	@Override
 	public void matchOver()
-	{	StatisticMatch statsMatch = currentMatch.getStats();
+	{	// stats
+		StatisticMatch statsMatch = currentMatch.getStats();
 		stats.addStatisticMatch(statsMatch);
 		stats.computePoints(pointProcessor);
-		//
+		// iterator
+		if(!iterator.hasNext())
+			iterator = matches.iterator();
+		// limits
 		int limit = limits.testLimits(stats);
-		if(limit>=0 || !iterator.hasNext())
+		if(limit>=0)
 		{	if(limit>=0 && limit<profiles.size())
 				stats.setWinner(limit);
 			tournamentOver = true;

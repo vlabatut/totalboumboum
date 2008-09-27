@@ -123,6 +123,10 @@ public class StatisticRound implements Serializable, StatisticBase
 	
 	private long totalTime = 0;
 	
+	public long getTime()
+	{	return totalTime;	
+	}
+	
 	public void updateTime(long time)
 	{	totalTime = time;
 		long[] sc = scores.get(Score.TIME);

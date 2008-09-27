@@ -45,6 +45,7 @@ import fr.free.totalboumboum.game.limit.LimitConfrontation;
 import fr.free.totalboumboum.game.limit.LimitPoints;
 import fr.free.totalboumboum.game.limit.LimitScore;
 import fr.free.totalboumboum.game.limit.LimitTotal;
+import fr.free.totalboumboum.game.limit.MatchLimit;
 import fr.free.totalboumboum.game.match.Match;
 import fr.free.totalboumboum.game.point.PlayerPoints;
 import fr.free.totalboumboum.game.point.PointProcessor;
@@ -393,7 +394,7 @@ public class MatchDescription extends EntitledDataPanel
 			}
 			// data
 			{	Match match = getConfiguration().getCurrentMatch();
-				Iterator<Limit> i = match.getLimits().iterator();
+				Iterator<MatchLimit> i = match.getLimits().iterator();
 				int k = 0;
 				while(i.hasNext() && k<2*lines)
 				{	// init

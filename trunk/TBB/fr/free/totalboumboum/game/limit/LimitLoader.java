@@ -34,6 +34,9 @@ public class LimitLoader
 		else if(type.equals(XmlTools.ELT_SCORE))
 			result = loadLimitScoreElement(root);
 		
+		else if(type.equals(XmlTools.ELT_TIME))
+			result = loadLimitTimeElement(root);
+		
 		else if(type.equals(XmlTools.ELT_TOTAL))
 			result = loadLimitTotalElement(root);
 		
@@ -92,6 +95,15 @@ public class LimitLoader
 		boolean win = Boolean.valueOf(str);
 		// result
 		LimitScore result = new LimitScore(value,score,supLimit,win);
+		return result;
+	}
+
+	private static LimitTime loadLimitTimeElement(Element root)
+	{	// value
+		String str = root.getAttribute(XmlTools.ATT_VALUE).getValue();
+		long value = Long.valueOf(str);
+		// result
+		LimitTime result = new LimitTime(value);
 		return result;
 	}
 
