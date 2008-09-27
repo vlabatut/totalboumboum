@@ -617,16 +617,21 @@ public class Launcher
 	 * - dans le match, il faut gérer différemment la limite : 
 	 * - les capacités initiales ont été transformées en items initiaux
 	 * - les levels contiennent maintenant un certain nombre d'items initiaux, donnés à chaque joueur au début du round
+	 * - modification du système de points, de manière à considérer à part un classement auquel on associe les points finaux
 	 * 
 	 * *******************************************************
 	 * *********************** A FAIRE ***********************
 	 * *******************************************************
 	 * - définir les présentations des rounds
+	 * - pb : les items distribués au début du match ne doivent pas être comptés dans les stats !
+	 * - redistribution des items lors de la mort d'un joueur (option de round?)
 	 * - au moins finir le cycle lors d'une mort, histoire que la différence de timing ne vienne pas juste de l'ordre des joueurs dans la partie 
 	 * - possibilité de choisir entre le fait que le match s'arrête dès que tout le monde est mort sauf 1, ou dernière flamme terminée
 	 * - feature lié au précédent : gagner plus de points si on finit effetivement le jeu que si on a un time out ou un entre-tuage
 	 * - possibilité de donner des noms aux matches et aux rounds
 	 * - gérer le shrink
+	 * - la bombe en panne ne bouge plus !
+	 * - utiliser les tooltips pour afficher les infos trop longues : calcul de points, nombre à virgule dans la colonne des points (décimales cachées), etc.
 	 * - un bug apparait parfois : le résultat du match ne correspond pas au classement réel, et les temps affichés non plus
 	 * - problème de collisions quand on change la vitesse (surement un problème d'arrondi, ou alors un saut trop grand (en distance), voir si j'avais implémenté la maximalisation du déplacement malgré une éventuelle collision...)
 	 * - revoir le système des IA

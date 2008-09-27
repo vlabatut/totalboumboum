@@ -7,20 +7,18 @@ import fr.free.totalboumboum.data.statistics.StatisticBase;
 public class PointsDiscretize extends PointsProcessor
 {
 	private PointsProcessor source;
-	/**
+	/*
 	 * example:
 	 * thresholds:     | 2 | 5 | 12 | 33 |
 	 * values:       | 1 | 2 | 4  |  6 | 10 |
 	 */
 	private float[] thresholds;
 	private float[] values;
-	private boolean exaequoShare;
 	
-	public PointsDiscretize(PointsProcessor source, float[] thresholds, float[] values, boolean exaequoShare)
+	public PointsDiscretize(PointsProcessor source, float[] thresholds, float[] values)
 	{	this.source = source;
 		this.thresholds = thresholds;
 		this.values = values;
-		this.exaequoShare = exaequoShare;
 	}
 	
 	@Override
@@ -29,40 +27,7 @@ public class PointsDiscretize extends PointsProcessor
 		ArrayList<String> players = stats.getPlayers();
 		float[] result = new float[players.size()];
 		float[] temp = source.process(stats);
-		float[] values2 = new float[values.length];
-		// count
-		if(exaequoShare && source instanceof PointsRankings)
-		{	int[] count = new int[values.length];
-			for(int i=0;i<count.length;i++)
-				count[i] = 0;
-			for(int i=0;i<temp.length;i++)
-			{	int j=0;
-				boolean found = false;
-				do
-				{	float threshold = thresholds[j];
-					if(temp[i]<=threshold)
-					{	count[j] = count[j] + 1;
-						found = true;
-					}
-					else
-						j++;
-				}
-				while(!found && j<thresholds.length);
-				if(!found)
-					count[j] = count[j] + 1;
-			}
-			for(int i=0;i<count.length;i++)
-			{	float pts = 0;
-				if(count[i]>0)
-				{	for(int j=0;j<count[i];j++)
-						pts = pts + values[i+j];
-					pts = pts / count[i];
-				}
-				values2[i] = pts;
-			}
-		}
-		else
-			values2 = values;
+		
 		// process
 		for(int i=0;i<temp.length;i++)
 		{	int j=0;
@@ -70,7 +35,7 @@ public class PointsDiscretize extends PointsProcessor
 			do
 			{	float threshold = thresholds[j];
 				if(temp[i]<=threshold)
-				{	result[i] = values2[j];
+				{	result[i] = values[j];
 					found = true;
 				}
 				else
@@ -78,9 +43,9 @@ public class PointsDiscretize extends PointsProcessor
 			}
 			while(!found && j<thresholds.length);
 			if(!found)
-				result[i] = values2[j];
+				result[i] = values[j];
 		}
-		//
+
 		return result;
 	}
 }

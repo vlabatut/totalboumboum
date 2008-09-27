@@ -100,6 +100,8 @@ public class PointsProcessorLoader
 			result = loadRankingsElement(root);
 		else if(type.equals(XmlTools.ELT_DISCRETIZE))
 			result = loadDiscretizeElement(root);
+		else if(type.equals(XmlTools.ELT_RANKPOINTS))
+			result = loadRankpointsElement(root);
 		
 		else if(type.equals(XmlTools.ELT_ADDITION))
 			result = loadAdditionElement(root);
@@ -177,10 +179,7 @@ public class PointsProcessorLoader
 		return result;
 	}
 	private static PointsDiscretize loadDiscretizeElement(Element root)
-	{	// share
-		String str = root.getAttribute(XmlTools.ATT_EXAEQUO_SHARE).getValue();
-		boolean exaequoShare = Boolean.valueOf(str);
-		// source
+	{	// source
 		Element src = (Element) root.getChildren().get(0);
 		PointsProcessor source = loadGeneralPointElement(src);
 		// thresholds
@@ -189,9 +188,40 @@ public class PointsProcessorLoader
 		float thresh[] = new float[thresholds.size()];
 		for(int i=0;i<thresh.length;i++)
 		{	Element temp = thresholds.get(i);
-			str = temp.getAttribute(XmlTools.ATT_VALUE).getValue();
+			String str = temp.getAttribute(XmlTools.ATT_VALUE).getValue();
 			float value = Float.valueOf(str);
 			thresh[i] = value;
+		}
+		// values
+		Element valuesElt = root.getChild(XmlTools.ELT_VALUES);
+		List<Element> values = valuesElt.getChildren(XmlTools.ELT_VALUE);
+		float vals[] = new float[values.size()];
+		for(int i=0;i<vals.length;i++)
+		{	Element temp = values.get(i);
+			String str = temp.getAttribute(XmlTools.ATT_VALUE).getValue();
+			float value = Float.valueOf(str);
+			vals[i] = value;
+		}
+		// result
+		PointsDiscretize result = new PointsDiscretize(source,thresh,vals);
+		return result;
+	}
+	private static PointsRankpoints loadRankpointsElement(Element root)
+	{	// share
+		String str = root.getAttribute(XmlTools.ATT_EXAEQUO_SHARE).getValue();
+		boolean exaequoShare = Boolean.valueOf(str);
+		// invert
+		str = root.getAttribute(XmlTools.ATT_INVERT).getValue();
+		boolean invert = Boolean.valueOf(str);
+		// sources
+		Element rankingsElt = root.getChild(XmlTools.ELT_RANKINGS);
+		ArrayList<PointsProcessor> sources = new ArrayList<PointsProcessor>();
+		List<Element> srcs = rankingsElt.getChildren();
+		Iterator<Element> it = srcs.iterator();
+		while(it.hasNext())
+		{	Element src = it.next();
+			PointsProcessor source = loadGeneralPointElement(src);
+			sources.add(source);
 		}
 		// values
 		Element valuesElt = root.getChild(XmlTools.ELT_VALUES);
@@ -204,7 +234,7 @@ public class PointsProcessorLoader
 			vals[i] = value;
 		}
 		// result
-		PointsDiscretize result = new PointsDiscretize(source,thresh,vals,exaequoShare);
+		PointsRankpoints result = new PointsRankpoints(sources,vals,invert,exaequoShare);
 		return result;
 	}
 	

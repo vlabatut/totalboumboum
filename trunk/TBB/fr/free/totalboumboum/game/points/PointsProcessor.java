@@ -1,7 +1,6 @@
 package fr.free.totalboumboum.game.points;
 
 import java.util.ArrayList;
-import java.util.Iterator;
 
 import fr.free.totalboumboum.data.statistics.StatisticBase;
 

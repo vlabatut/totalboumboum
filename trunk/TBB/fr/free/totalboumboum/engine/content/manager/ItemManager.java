@@ -40,10 +40,7 @@ public class ItemManager
 	}
 	
 	public void update()
-	{	
-if(sprite instanceof Hero)
-	System.out.println();
-		abilities = new ArrayList<AbstractAbility>();
+	{	abilities = new ArrayList<AbstractAbility>();
 		// adding the items' abilities
 		Iterator<Item> i = collectedItems.iterator();
 		while(i.hasNext())
