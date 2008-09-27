@@ -118,6 +118,7 @@ public class XmlTools
 	public static final String ELT_PROFILES = "profiles";
 	public static final String ELT_PROPERTIES = "properties";
 	public static final String ELT_RANKINGS = "rankings";
+	public static final String ELT_RANKPOINTS = "rankpoints";
 	public static final String ELT_REFERENCE = "reference";
 	public static final String ELT_ROUND = "round";
 	public static final String ELT_ROUNDS = "rounds";

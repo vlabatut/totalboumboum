@@ -101,10 +101,7 @@ public class AbilityManager
 	 *  	- itemAbilities
 	 */
 	public void update()
-	{	
-if(sprite instanceof Hero)
-	System.out.println();
-		currentAbilities.clear();
+	{	currentAbilities.clear();
 		updateAbilities(directAbilities);
 		ArrayList<AbstractAbility> itemAbilities = sprite.getItemAbilities();
 		updateAbilities(itemAbilities);

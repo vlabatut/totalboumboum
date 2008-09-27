@@ -1,7 +1,6 @@
 package fr.free.totalboumboum.game.points;
 
 import java.util.ArrayList;
-import java.util.Comparator;
 import java.util.Iterator;
 
 public class PlayerPoints implements Comparable<PlayerPoints>

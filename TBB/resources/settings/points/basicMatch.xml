@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<point
+<points
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
 	xsi:noNamespaceSchemaLocation="..\..\schemas\point.xsd">
 	
@@ -9,7 +9,23 @@
 		<line value="If there's still a draw, points are shared." />
 	</notes>
 	
-	<discretize exaequoShare="true" >
+	<rankpoints invert="false" exaequoShare="true">
+		<rankings>
+			<total />
+			<scores type="kills"/>
+			<scores type="items"/>
+			<scores type="bombs"/>
+		</rankings>	
+		<values>
+			<value value="10" />
+			<value value="6" />
+			<value value="3" />
+			<value value="1" />
+		</values>
+	</rankpoints>
+	
+<!-- 
+	<discretize>
 		<rankings >
 			<total />
 			<scores type="kills"/>
@@ -30,5 +46,6 @@
 			<value value="0" />
 		</values>
 	</discretize>
-		
-</point>
+ -->
+ 		
+</points>

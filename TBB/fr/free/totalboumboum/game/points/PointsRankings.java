@@ -24,11 +24,13 @@ public class PointsRankings extends PointsProcessor
 		{	PointsProcessor source = it.next();
 			values.add(source.process(stats));
 		}
+		
 		// result
 		ArrayList<String> players = stats.getPlayers();
 		float[] result = new float[players.size()];
 		for(int i=0;i<result.length;i++)
 			result[i] = 1;
+		
 		// process		
 		for(int i=0;i<result.length-1;i++)
 		{	for(int j=i+1;j<result.length;j++)
@@ -38,7 +40,8 @@ public class PointsRankings extends PointsProcessor
 				else if(cpr<0)
 					result[j] = result[j] + 1;
 			}
-		}		
+		}	
+		
 		return result;
 	}
 	
