@@ -64,8 +64,7 @@ public class Match
 
 	public void progress() throws IllegalArgumentException, SecurityException, ParserConfigurationException, SAXException, IOException, ClassNotFoundException, IllegalAccessException, NoSuchFieldException
 	{	if(!isOver())
-		{	// init round
-			Round round = iterator.next();
+		{	Round round = iterator.next();
 			currentRound = round.copy();
 			currentRound.init();
 		}
@@ -100,8 +99,8 @@ public class Match
 	{	this.randomOrder = randomOrder;
 	}
 	
-	public void addRound(Round level)
-	{	rounds.add(level);		
+	public void addRound(Round round)
+	{	rounds.add(round);		
 	}
 	public ArrayList<Round> getRound()
 	{	return rounds;	
@@ -236,10 +235,18 @@ public class Match
 	
 	public Match copy()
 	{	Match result = new Match(tournament);
+		// rounds
+		Iterator<Round> i = rounds.iterator();
+		while (i.hasNext())
+		{	Round round = i.next();
+			Round copy = round.copy();
+			copy.setMatch(result);
+			result.addRound(copy);
+		}
+		// misc
 		result.setNotes(notes);
 		result.setLimits(limits);
 		result.pointProcessor = pointProcessor;
-		result.setRounds(rounds);
 		return result;
 	}
 }

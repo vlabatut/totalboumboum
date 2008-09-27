@@ -260,4 +260,8 @@ public class Round
 		result.setLevelDescription(levelDescription);
 		return result;
 	}
+	
+	public void setMatch(Match match)
+	{	this.match = match;	
+	}
 }

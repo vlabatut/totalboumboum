@@ -74,8 +74,7 @@ public class SequenceTournament extends AbstractTournament
 	@Override
 	public void progress()
 	{	if(!isOver())
-		{	
-			Match match = iterator.next();
+		{	Match match = iterator.next();
 			currentMatch = match.copy();
 			currentMatch.init(profiles);
 		}
