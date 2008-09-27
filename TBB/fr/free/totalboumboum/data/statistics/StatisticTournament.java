@@ -9,7 +9,7 @@ import java.util.HashMap;
 import java.util.Iterator;
 
 import fr.free.totalboumboum.data.profile.Profile;
-import fr.free.totalboumboum.game.points.PointProcessor;
+import fr.free.totalboumboum.game.points.PointsProcessor;
 import fr.free.totalboumboum.game.tournament.AbstractTournament;
 
 public class StatisticTournament implements Serializable, StatisticBase
@@ -77,7 +77,7 @@ public class StatisticTournament implements Serializable, StatisticBase
 			partialPoints[i] = partialPoints[i] + matchPoints[i];
 	}
 	
-	public void computePoints(PointProcessor pointProcessor)
+	public void computePoints(PointsProcessor pointProcessor)
 	{	points = pointProcessor.process(this);
 	}
 

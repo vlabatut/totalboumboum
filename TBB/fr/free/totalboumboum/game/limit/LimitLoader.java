@@ -13,8 +13,8 @@ import org.jdom.Element;
 import org.xml.sax.SAXException;
 
 import fr.free.totalboumboum.data.statistics.Score;
-import fr.free.totalboumboum.game.points.PointProcessor;
-import fr.free.totalboumboum.game.points.PointProcessorLoader;
+import fr.free.totalboumboum.game.points.PointsProcessor;
+import fr.free.totalboumboum.game.points.PointsProcessorLoader;
 import fr.free.totalboumboum.game.round.LevelDescription;
 import fr.free.totalboumboum.tools.FileTools;
 import fr.free.totalboumboum.tools.XmlTools;
@@ -53,7 +53,7 @@ public class LimitLoader
 	}
 
     private static void loadPointsElement(Element root, String folder, LimitPoints result) throws ParserConfigurationException, SAXException, IOException
-	{	PointProcessor pp;
+	{	PointsProcessor pp;
 		// local
 		String localStr = root.getAttribute(XmlTools.ATT_LOCAL).getValue().trim();
 		boolean local = Boolean.valueOf(localStr);
@@ -62,10 +62,10 @@ public class LimitLoader
 		// loading
 		if(local)
 		{	folder = folder+File.separator+name;
-			pp = PointProcessorLoader.loadPointProcessorFromFilePath(folder);
+			pp = PointsProcessorLoader.loadPointProcessorFromFilePath(folder);
 		}
 		else
-			pp = PointProcessorLoader.loadPointProcessorFromName(name);
+			pp = PointsProcessorLoader.loadPointProcessorFromName(name);
 		result.setPointProcessor(pp);
 	}
 	private static LimitPoints loadLimitPointsElement(Element root, String folder) throws ParserConfigurationException, SAXException, IOException

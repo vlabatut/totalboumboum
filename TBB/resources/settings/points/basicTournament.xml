@@ -11,7 +11,7 @@
 	
 	<discretize exaequoShare="false">
 		<rankings>
-			<points />
+			<total />
 			<scores type="kills"/>
 			<scores type="items"/>
 			<scores type="bombs"/>

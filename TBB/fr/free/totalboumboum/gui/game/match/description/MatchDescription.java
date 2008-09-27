@@ -48,7 +48,7 @@ import fr.free.totalboumboum.game.limit.LimitTotal;
 import fr.free.totalboumboum.game.limit.MatchLimit;
 import fr.free.totalboumboum.game.match.Match;
 import fr.free.totalboumboum.game.points.PlayerPoints;
-import fr.free.totalboumboum.game.points.PointProcessor;
+import fr.free.totalboumboum.game.points.PointsProcessor;
 import fr.free.totalboumboum.gui.data.configuration.GuiConfiguration;
 import fr.free.totalboumboum.gui.generic.EntitledDataPanel;
 import fr.free.totalboumboum.gui.generic.EntitledSubPanel;
@@ -327,7 +327,7 @@ public class MatchDescription extends EntitledDataPanel
 			StyleConstants.setFontFamily(sa, font.getFamily());
 			StyleConstants.setFontSize(sa, font.getSize());
 			StyledDocument doc = textPane.getStyledDocument();
-			PointProcessor pp = getConfiguration().getCurrentMatch().getPointProcessor();			
+			PointsProcessor pp = getConfiguration().getCurrentMatch().getPointProcessor();			
 			text = "";
 			ArrayList<String> list = pp.getNotes();
 			Iterator<String> i = list.iterator();

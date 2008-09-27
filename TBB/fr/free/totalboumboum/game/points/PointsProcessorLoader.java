@@ -82,8 +82,8 @@ public class PointsProcessorLoader
 	{	PointsProcessor result = null;
 		String type = root.getName();
 
-		if(type.equals(XmlTools.ELT_POINTS))
-			result = loadPointsElement(root);
+		if(type.equals(XmlTools.ELT_TOTAL))
+			result = loadTotalElement(root);
 
 		else if(type.equals(XmlTools.ELT_SCORES))
 			result = loadScoresElement(root);
@@ -94,8 +94,8 @@ public class PointsProcessorLoader
 			result = loadMaximumElement(root);
 		else if(type.equals(XmlTools.ELT_MINIMUM))
 			result = loadMinimumElement(root);		
-		else if(type.equals(XmlTools.ELT_TOTAL))
-			result = loadTotalElement(root);
+		else if(type.equals(XmlTools.ELT_SUMMATION))
+			result = loadSummationElement(root);
 		else if(type.equals(XmlTools.ELT_RANKINGS))
 			result = loadRankingsElement(root);
 		else if(type.equals(XmlTools.ELT_DISCRETIZE))
@@ -113,8 +113,8 @@ public class PointsProcessorLoader
 		return result;
 	}
 
-	private static PointsPoints loadPointsElement(Element root)
-	{	PointsPoints result = new PointsPoints();
+	private static PointsTotal loadTotalElement(Element root)
+	{	PointsTotal result = new PointsTotal();
 		return result;
 	}
 
@@ -151,12 +151,12 @@ public class PointsProcessorLoader
 		PointsMinimum result = new PointsMinimum(source);
 		return result;
 	}
-	private static PointsTotal loadTotalElement(Element root)
+	private static PointsSummation loadSummationElement(Element root)
 	{	// source
 		Element src = (Element) root.getChildren().get(0);
 		PointsProcessor source = loadGeneralPointElement(src);
 		// result
-		PointsTotal result = new PointsTotal(source);
+		PointsSummation result = new PointsSummation(source);
 		return result;
 	}
 	private static PointsRankings loadRankingsElement(Element root)
