@@ -5,12 +5,12 @@ import java.util.Iterator;
 
 import fr.free.totalboumboum.data.statistics.StatisticBase;
 
-public class PointRankings extends PointProcessor
+public class PointsRankings extends PointsProcessor
 {
-	private ArrayList<PointProcessor> sources = new ArrayList<PointProcessor>();
+	private ArrayList<PointsProcessor> sources = new ArrayList<PointsProcessor>();
 	private boolean inverted;
 	
-	public PointRankings(ArrayList<PointProcessor> sources, boolean inverted)
+	public PointsRankings(ArrayList<PointsProcessor> sources, boolean inverted)
 	{	this.sources.addAll(sources);
 		this.inverted = inverted;
 	}
@@ -19,9 +19,9 @@ public class PointRankings extends PointProcessor
 	public float[] process(StatisticBase stats)
 	{	// source
 		ArrayList<float[]> values = new ArrayList<float[]>();
-		Iterator<PointProcessor> it = sources.iterator();
+		Iterator<PointsProcessor> it = sources.iterator();
 		while (it.hasNext())
-		{	PointProcessor source = it.next();
+		{	PointsProcessor source = it.next();
 			values.add(source.process(stats));
 		}
 		// result

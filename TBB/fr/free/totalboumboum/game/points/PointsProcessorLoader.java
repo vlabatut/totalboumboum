@@ -16,11 +16,11 @@ import fr.free.totalboumboum.game.match.MatchLoader;
 import fr.free.totalboumboum.tools.FileTools;
 import fr.free.totalboumboum.tools.XmlTools;
 
-public class PointProcessorLoader
+public class PointsProcessorLoader
 {
 
-    public static PointProcessor loadPointProcessorFromElement(Element root, String folder) throws ParserConfigurationException, SAXException, IOException
-	{	PointProcessor result;
+    public static PointsProcessor loadPointProcessorFromElement(Element root, String folder) throws ParserConfigurationException, SAXException, IOException
+	{	PointsProcessor result;
 		// local
 		String localStr = root.getAttribute(XmlTools.ATT_LOCAL).getValue().trim();
 		boolean local = Boolean.valueOf(localStr);
@@ -36,7 +36,7 @@ public class PointProcessorLoader
 		return result;
 	}
 	
-	public static PointProcessor loadPointProcessorFromFilePath(String folderPath) throws ParserConfigurationException, SAXException, IOException
+	public static PointsProcessor loadPointProcessorFromFilePath(String folderPath) throws ParserConfigurationException, SAXException, IOException
 	{	// init
 		String schemaFolder = FileTools.getSchemasPath();
 		String individualFolder = folderPath;
@@ -45,11 +45,11 @@ public class PointProcessorLoader
 		dataFile = new File(individualFolder+FileTools.EXTENSION_DATA);
 		schemaFile = new File(schemaFolder+File.separator+FileTools.FILE_POINT+FileTools.EXTENSION_SCHEMA);
 		Element root = XmlTools.getRootFromFile(dataFile,schemaFile);
-		PointProcessor result = loadPointProcessorElement(root);
+		PointsProcessor result = loadPointProcessorElement(root);
 		return result;
 	}
 
-	public static PointProcessor loadPointProcessorFromName(String name) throws ParserConfigurationException, SAXException, IOException
+	public static PointsProcessor loadPointProcessorFromName(String name) throws ParserConfigurationException, SAXException, IOException
 	{	// init
 		String schemaFolder = FileTools.getSchemasPath();
 		String individualFolder = FileTools.getPointsPath();
@@ -58,13 +58,13 @@ public class PointProcessorLoader
 		dataFile = new File(individualFolder+File.separator+name+FileTools.EXTENSION_DATA);
 		schemaFile = new File(schemaFolder+File.separator+FileTools.FILE_POINT+FileTools.EXTENSION_SCHEMA);
 		Element root = XmlTools.getRootFromFile(dataFile,schemaFile);
-		PointProcessor result = loadPointProcessorElement(root);
+		PointsProcessor result = loadPointProcessorElement(root);
 		return result;
 	}
 
-    private static PointProcessor loadPointProcessorElement(Element root)
+    private static PointsProcessor loadPointProcessorElement(Element root)
 	{	// init
-    	PointProcessor result;
+    	PointsProcessor result;
     	Element element;
 		// point processor
     	List<Element> elts = root.getChildren(); 
@@ -78,8 +78,8 @@ public class PointProcessorLoader
 		return result;
 	}		
 
-	private static PointProcessor loadGeneralPointElement(Element root)
-	{	PointProcessor result = null;
+	private static PointsProcessor loadGeneralPointElement(Element root)
+	{	PointsProcessor result = null;
 		String type = root.getName();
 
 		if(type.equals(XmlTools.ELT_POINTS))
@@ -113,76 +113,76 @@ public class PointProcessorLoader
 		return result;
 	}
 
-	private static PointPoints loadPointsElement(Element root)
-	{	PointPoints result = new PointPoints();
+	private static PointsPoints loadPointsElement(Element root)
+	{	PointsPoints result = new PointsPoints();
 		return result;
 	}
 
-	private static PointScores loadScoresElement(Element root)
+	private static PointsScores loadScoresElement(Element root)
 	{	// type
 		String str = root.getAttribute(XmlTools.ATT_TYPE).getValue();
 		Score score  = Score.valueOf(str.toUpperCase().trim());
 		// result
-		PointScores result = new PointScores(score);
+		PointsScores result = new PointsScores(score);
 		return result;
 	}
-	private static PointConstant loadConstantElement(Element root)
+	private static PointsConstant loadConstantElement(Element root)
 	{	// value
 		String str = root.getAttribute(XmlTools.ATT_VALUE).getValue();
 		float value = Float.valueOf(str);
 		// result
-		PointConstant result = new PointConstant(value);
+		PointsConstant result = new PointsConstant(value);
 		return result;
 	}
 	
-	private static PointMaximum loadMaximumElement(Element root)
+	private static PointsMaximum loadMaximumElement(Element root)
 	{	// source
 		Element src = (Element) root.getChildren().get(0);
-		PointProcessor source = loadGeneralPointElement(src);
+		PointsProcessor source = loadGeneralPointElement(src);
 		// result
-		PointMaximum result = new PointMaximum(source);
+		PointsMaximum result = new PointsMaximum(source);
 		return result;
 	}
-	private static PointMinimum loadMinimumElement(Element root)
+	private static PointsMinimum loadMinimumElement(Element root)
 	{	// source
 		Element src = (Element) root.getChildren().get(0);
-		PointProcessor source = loadGeneralPointElement(src);
+		PointsProcessor source = loadGeneralPointElement(src);
 		// result
-		PointMinimum result = new PointMinimum(source);
+		PointsMinimum result = new PointsMinimum(source);
 		return result;
 	}
-	private static PointTotal loadTotalElement(Element root)
+	private static PointsTotal loadTotalElement(Element root)
 	{	// source
 		Element src = (Element) root.getChildren().get(0);
-		PointProcessor source = loadGeneralPointElement(src);
+		PointsProcessor source = loadGeneralPointElement(src);
 		// result
-		PointTotal result = new PointTotal(source);
+		PointsTotal result = new PointsTotal(source);
 		return result;
 	}
-	private static PointRankings loadRankingsElement(Element root)
+	private static PointsRankings loadRankingsElement(Element root)
 	{	// invert
 		String str = root.getAttribute(XmlTools.ATT_INVERT).getValue();
 		boolean invert = Boolean.valueOf(str);
 		// sources
-		ArrayList<PointProcessor> sources = new ArrayList<PointProcessor>();
+		ArrayList<PointsProcessor> sources = new ArrayList<PointsProcessor>();
 		List<Element> srcs = root.getChildren();
 		Iterator<Element> it = srcs.iterator();
 		while(it.hasNext())
 		{	Element src = it.next();
-			PointProcessor source = loadGeneralPointElement(src);
+			PointsProcessor source = loadGeneralPointElement(src);
 			sources.add(source);
 		}
 		// result
-		PointRankings result = new PointRankings(sources,invert);
+		PointsRankings result = new PointsRankings(sources,invert);
 		return result;
 	}
-	private static PointDiscretize loadDiscretizeElement(Element root)
+	private static PointsDiscretize loadDiscretizeElement(Element root)
 	{	// share
 		String str = root.getAttribute(XmlTools.ATT_EXAEQUO_SHARE).getValue();
 		boolean exaequoShare = Boolean.valueOf(str);
 		// source
 		Element src = (Element) root.getChildren().get(0);
-		PointProcessor source = loadGeneralPointElement(src);
+		PointsProcessor source = loadGeneralPointElement(src);
 		// thresholds
 		Element thresholdsElt = root.getChild(XmlTools.ELT_THRESHOLDS);
 		List<Element> thresholds = thresholdsElt.getChildren(XmlTools.ELT_THRESHOLD);
@@ -204,56 +204,56 @@ public class PointProcessorLoader
 			vals[i] = value;
 		}
 		// result
-		PointDiscretize result = new PointDiscretize(source,thresh,vals,exaequoShare);
+		PointsDiscretize result = new PointsDiscretize(source,thresh,vals,exaequoShare);
 		return result;
 	}
 	
-	private static PointAddition loadAdditionElement(Element root)
+	private static PointsAddition loadAdditionElement(Element root)
 	{	// left source
 		List<Element> sources = root.getChildren();
 		Element leftSrc = sources.get(0);
-		PointProcessor leftSource = loadGeneralPointElement(leftSrc);
+		PointsProcessor leftSource = loadGeneralPointElement(leftSrc);
 		// right source
 		Element rightSrc = sources.get(1);
-		PointProcessor rightSource = loadGeneralPointElement(rightSrc);
+		PointsProcessor rightSource = loadGeneralPointElement(rightSrc);
 		// result
-		PointAddition result = new PointAddition(leftSource,rightSource);
+		PointsAddition result = new PointsAddition(leftSource,rightSource);
 		return result;
 	}
-	private static PointSubtraction loadSubtractionElement(Element root)
+	private static PointsSubtraction loadSubtractionElement(Element root)
 	{	// left source
 		List<Element> sources = root.getChildren();
 		Element leftSrc = sources.get(0);
-		PointProcessor leftSource = loadGeneralPointElement(leftSrc);
+		PointsProcessor leftSource = loadGeneralPointElement(leftSrc);
 		// right source
 		Element rightSrc = sources.get(1);
-		PointProcessor rightSource = loadGeneralPointElement(rightSrc);
+		PointsProcessor rightSource = loadGeneralPointElement(rightSrc);
 		// result
-		PointSubtraction result = new PointSubtraction(leftSource,rightSource);
+		PointsSubtraction result = new PointsSubtraction(leftSource,rightSource);
 		return result;
 	}
-	private static PointMultiplication loadMultiplicationElement(Element root)
+	private static PointsMultiplication loadMultiplicationElement(Element root)
 	{	// left source
 		List<Element> sources = root.getChildren();
 		Element leftSrc = sources.get(0);
-		PointProcessor leftSource = loadGeneralPointElement(leftSrc);
+		PointsProcessor leftSource = loadGeneralPointElement(leftSrc);
 		// right source
 		Element rightSrc = sources.get(1);
-		PointProcessor rightSource = loadGeneralPointElement(rightSrc);
+		PointsProcessor rightSource = loadGeneralPointElement(rightSrc);
 		// result
-		PointMultiplication result = new PointMultiplication(leftSource,rightSource);
+		PointsMultiplication result = new PointsMultiplication(leftSource,rightSource);
 		return result;
 	}
-	private static PointDivision loadDivisionElement(Element root)
+	private static PointsDivision loadDivisionElement(Element root)
 	{	// left source
 		List<Element> sources = root.getChildren();
 		Element leftSrc = sources.get(0);
-		PointProcessor leftSource = loadGeneralPointElement(leftSrc);
+		PointsProcessor leftSource = loadGeneralPointElement(leftSrc);
 		// right source
 		Element rightSrc = sources.get(1);
-		PointProcessor rightSource = loadGeneralPointElement(rightSrc);
+		PointsProcessor rightSource = loadGeneralPointElement(rightSrc);
 		// result
-		PointDivision result = new PointDivision(leftSource,rightSource);
+		PointsDivision result = new PointsDivision(leftSource,rightSource);
 		return result;
 	}
 }

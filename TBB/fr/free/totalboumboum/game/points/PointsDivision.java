@@ -4,12 +4,12 @@ import java.util.ArrayList;
 
 import fr.free.totalboumboum.data.statistics.StatisticBase;
 
-public class PointMultiplication extends PointProcessor
+public class PointsDivision extends PointsProcessor
 {
-	private PointProcessor leftSource;
-	private PointProcessor rightSource;
+	private PointsProcessor leftSource;
+	private PointsProcessor rightSource;
 	
-	public PointMultiplication(PointProcessor leftSource, PointProcessor rightSource)
+	public PointsDivision(PointsProcessor leftSource, PointsProcessor rightSource)
 	{	this.leftSource = leftSource;
 		this.rightSource = rightSource;
 	}
@@ -23,7 +23,11 @@ public class PointMultiplication extends PointProcessor
 		float[] rightTemp = rightSource.process(stats);
 		// process
 		for(int i=0;i<result.length;i++)
-			result[i] = leftTemp[i] * rightTemp[i];
+		{	if(rightTemp[i]==0) //division by zero
+				result[i] = Float.MAX_VALUE;
+			else
+				result[i] = leftTemp[i] * rightTemp[i];
+		}
 		//
 		return result;
 	}

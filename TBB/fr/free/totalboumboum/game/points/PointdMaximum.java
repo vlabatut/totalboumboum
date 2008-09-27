@@ -4,11 +4,11 @@ import java.util.ArrayList;
 
 import fr.free.totalboumboum.data.statistics.StatisticBase;
 
-public class PointTotal extends PointProcessor
+public class PointdMaximum extends PointsProcessor
 {
-	private PointProcessor source;
+	private PointsProcessor source;
 	
-	public PointTotal(PointProcessor source)
+	public PointdMaximum(PointsProcessor source)
 	{	this.source = source;
 	}
 	
@@ -19,13 +19,14 @@ public class PointTotal extends PointProcessor
 		float[] result = new float[players.size()];
 		float[] temp = source.process(stats);
 		// process
-		float sum = 0;
+		float max = Float.MIN_VALUE;
 		for(int i=0;i<temp.length;i++)
-			sum = sum + temp[i];
+		{	if(temp[i]>max)
+				max = temp[i];
+		}
 		for(int i=0;i<result.length;i++)
-			result[i] = sum;
+			result[i] = max;
 		//
 		return result;
 	}
-	
 }

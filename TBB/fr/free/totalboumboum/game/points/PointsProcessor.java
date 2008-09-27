@@ -5,7 +5,7 @@ import java.util.Iterator;
 
 import fr.free.totalboumboum.data.statistics.StatisticBase;
 
-public abstract class PointProcessor
+public abstract class PointsProcessor
 {	
 	public abstract float[] process(StatisticBase stats);
 	

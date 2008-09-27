@@ -4,9 +4,9 @@ import java.util.ArrayList;
 
 import fr.free.totalboumboum.data.statistics.StatisticBase;
 
-public class PointDiscretize extends PointProcessor
+public class PointsDiscretize extends PointsProcessor
 {
-	private PointProcessor source;
+	private PointsProcessor source;
 	/**
 	 * example:
 	 * thresholds:     | 2 | 5 | 12 | 33 |
@@ -16,7 +16,7 @@ public class PointDiscretize extends PointProcessor
 	private float[] values;
 	private boolean exaequoShare;
 	
-	public PointDiscretize(PointProcessor source, float[] thresholds, float[] values, boolean exaequoShare)
+	public PointsDiscretize(PointsProcessor source, float[] thresholds, float[] values, boolean exaequoShare)
 	{	this.source = source;
 		this.thresholds = thresholds;
 		this.values = values;
@@ -31,7 +31,7 @@ public class PointDiscretize extends PointProcessor
 		float[] temp = source.process(stats);
 		float[] values2 = new float[values.length];
 		// count
-		if(exaequoShare && source instanceof PointRankings)
+		if(exaequoShare && source instanceof PointsRankings)
 		{	int[] count = new int[values.length];
 			for(int i=0;i<count.length;i++)
 				count[i] = 0;
