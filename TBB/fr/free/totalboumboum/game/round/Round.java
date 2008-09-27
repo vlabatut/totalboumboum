@@ -18,8 +18,8 @@ import fr.free.totalboumboum.game.limit.Limits;
 import fr.free.totalboumboum.game.limit.MatchLimit;
 import fr.free.totalboumboum.game.limit.RoundLimit;
 import fr.free.totalboumboum.game.match.Match;
-import fr.free.totalboumboum.game.point.PlayerPoints;
-import fr.free.totalboumboum.game.point.PointProcessor;
+import fr.free.totalboumboum.game.points.PlayerPoints;
+import fr.free.totalboumboum.game.points.PointProcessor;
 
 public class Round
 {

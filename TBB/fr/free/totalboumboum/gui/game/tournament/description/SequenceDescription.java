@@ -32,7 +32,7 @@ import fr.free.totalboumboum.game.limit.LimitPoints;
 import fr.free.totalboumboum.game.limit.LimitScore;
 import fr.free.totalboumboum.game.limit.LimitTotal;
 import fr.free.totalboumboum.game.limit.TournamentLimit;
-import fr.free.totalboumboum.game.point.PointProcessor;
+import fr.free.totalboumboum.game.points.PointProcessor;
 import fr.free.totalboumboum.game.tournament.sequence.SequenceTournament;
 import fr.free.totalboumboum.gui.generic.EntitledSubPanel;
 import fr.free.totalboumboum.gui.generic.InnerDataPanel;

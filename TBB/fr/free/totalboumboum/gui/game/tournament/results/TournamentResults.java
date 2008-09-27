@@ -26,7 +26,7 @@ import fr.free.totalboumboum.data.statistics.StatisticMatch;
 import fr.free.totalboumboum.data.statistics.StatisticRound;
 import fr.free.totalboumboum.data.statistics.StatisticTournament;
 import fr.free.totalboumboum.game.match.Match;
-import fr.free.totalboumboum.game.point.PlayerPoints;
+import fr.free.totalboumboum.game.points.PlayerPoints;
 import fr.free.totalboumboum.game.tournament.AbstractTournament;
 import fr.free.totalboumboum.game.tournament.sequence.SequenceTournament;
 import fr.free.totalboumboum.gui.generic.EntitledDataPanel;
