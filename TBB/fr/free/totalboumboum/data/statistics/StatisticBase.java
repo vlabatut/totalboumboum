@@ -9,4 +9,5 @@ public interface StatisticBase
 	public long[] getScores(Score score);
 	public float[] getPartialPoints();
 	public int getConfrontationCount();
+	public long getTime();
 }

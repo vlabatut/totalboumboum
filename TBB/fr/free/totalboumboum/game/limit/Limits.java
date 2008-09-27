@@ -5,25 +5,25 @@ import java.util.Iterator;
 
 import fr.free.totalboumboum.data.statistics.StatisticBase;
 
-public class Limits
+public class Limits<T extends Limit>
 {
-	ArrayList<Limit> limits = new ArrayList<Limit>();
+	ArrayList<T> limits = new ArrayList<T>();
 	
-	public void addLimit(Limit limit)
+	public void addLimit(T limit)
 	{	limits.add(limit);
 	}
 	
 	public int testLimits(StatisticBase stats)
 	{	int result = -1;
-		Iterator<Limit> i = limits.iterator();
+		Iterator<T> i = limits.iterator();
 		while(i.hasNext() && result<0)
-		{	Limit temp = i.next();
+		{	T temp = i.next();
 			result = temp.testLimit(stats);
 		}
 		return result;
 	}
 
-	public Iterator<Limit> iterator()
+	public Iterator<T> iterator()
 	{	return limits.iterator();
 	}
 	

@@ -8,19 +8,34 @@ import java.util.List;
 
 import javax.xml.parsers.ParserConfigurationException;
 
-import org.jdom.Attribute;
 import org.jdom.Element;
 import org.xml.sax.SAXException;
 
 import fr.free.totalboumboum.data.statistics.Score;
-import fr.free.totalboumboum.game.match.Match;
 import fr.free.totalboumboum.game.match.MatchLoader;
-import fr.free.totalboumboum.game.tournament.AbstractTournament;
 import fr.free.totalboumboum.tools.FileTools;
 import fr.free.totalboumboum.tools.XmlTools;
 
 public class PointProcessorLoader
 {
+
+    public static PointProcessor loadPointProcessorFromElement(Element root, String folder) throws ParserConfigurationException, SAXException, IOException
+	{	PointProcessor result;
+		// local
+		String localStr = root.getAttribute(XmlTools.ATT_LOCAL).getValue().trim();
+		boolean local = Boolean.valueOf(localStr);
+		// name
+		String name = root.getAttribute(XmlTools.ATT_NAME).getValue();
+		// loading
+		if(local)
+		{	folder = folder+File.separator+name;
+			result = loadPointProcessorFromFilePath(folder);
+		}
+		else
+			result = loadPointProcessorFromName(name);
+		return result;
+	}
+	
 	public static PointProcessor loadPointProcessorFromFilePath(String folderPath) throws ParserConfigurationException, SAXException, IOException
 	{	// init
 		String schemaFolder = FileTools.getSchemasPath();

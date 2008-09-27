@@ -2,8 +2,8 @@ package fr.free.totalboumboum.game.limit;
 
 import fr.free.totalboumboum.data.statistics.StatisticBase;
 
-public abstract class Limit
+public interface Limit
 {
-	public abstract int testLimit(StatisticBase stats);
+	public int testLimit(StatisticBase stats);
 	
 }

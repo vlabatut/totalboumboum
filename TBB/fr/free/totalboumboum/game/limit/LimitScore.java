@@ -3,7 +3,7 @@ package fr.free.totalboumboum.game.limit;
 import fr.free.totalboumboum.data.statistics.Score;
 import fr.free.totalboumboum.data.statistics.StatisticBase;
 
-public class LimitScore extends Limit
+public class LimitScore implements TournamentLimit, MatchLimit, RoundLimit
 {
 	private long limit;
 	private Score score;

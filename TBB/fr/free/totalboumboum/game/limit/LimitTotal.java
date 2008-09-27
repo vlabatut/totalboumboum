@@ -2,7 +2,7 @@ package fr.free.totalboumboum.game.limit;
 
 import fr.free.totalboumboum.data.statistics.StatisticBase;
 
-public class LimitTotal extends Limit
+public class LimitTotal implements TournamentLimit, MatchLimit
 {
 	private float limit;
 	
@@ -25,7 +25,7 @@ public class LimitTotal extends Limit
 		int i=0;
 		while(i<points.length && result<0)
 		{	if(points[i]>=limit)
-				result = stats.getPlayers().size();
+				result = i;
 			else
 				i++;
 		}

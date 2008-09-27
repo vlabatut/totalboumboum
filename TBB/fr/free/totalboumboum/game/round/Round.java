@@ -15,6 +15,8 @@ import fr.free.totalboumboum.data.statistics.StatisticRound;
 import fr.free.totalboumboum.engine.loop.Loop;
 import fr.free.totalboumboum.engine.player.Player;
 import fr.free.totalboumboum.game.limit.Limits;
+import fr.free.totalboumboum.game.limit.MatchLimit;
+import fr.free.totalboumboum.game.limit.RoundLimit;
 import fr.free.totalboumboum.game.match.Match;
 import fr.free.totalboumboum.game.point.PlayerPoints;
 import fr.free.totalboumboum.game.point.PointProcessor;
@@ -27,13 +29,6 @@ public class Round
 	}
 	
 	/////////////////////////////////////////////////////////////////
-	// LIMIT			/////////////////////////////////////////////
-	/////////////////////////////////////////////////////////////////
-	public Limits getLimits()
-	{	return levelDescription.getLimits();
-	}
-
-	/////////////////////////////////////////////////////////////////
 	// GAME 			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	private boolean roundOver = false;
@@ -42,9 +37,8 @@ public class Round
 	{	panel.loadStepOver();		
 	}
 	
-	public void init(LevelDescription levelDescription) throws ParserConfigurationException, SAXException, IOException, ClassNotFoundException, IllegalArgumentException, SecurityException, IllegalAccessException, NoSuchFieldException
-	{	this.levelDescription = levelDescription;
-		stats.init(this);
+	public void init() throws ParserConfigurationException, SAXException, IOException, ClassNotFoundException, IllegalArgumentException, SecurityException, IllegalAccessException, NoSuchFieldException
+	{	stats.init(this);
 		remainingPlayers = getProfiles().size();
 		for(int i=0;i<remainingPlayers;i++)
 			playersInGame.add(new Boolean(true));
@@ -106,21 +100,15 @@ public class Round
 	}
 
 	/////////////////////////////////////////////////////////////////
-	// LEVEL DESCRIPTION	/////////////////////////////////////////
+	// PLAY MODE	/////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	private LevelDescription levelDescription;
+	private PlayMode playMode;
 	
-	public PointProcessor getPointProcessor()
-	{	return levelDescription.getPointProcessor();	
-	}
 	public PlayMode getPlayMode()
-	{	return levelDescription.getPlayMode();	
+	{	return playMode;	
 	}
-	public LevelDescription getLevelDescription()
-	{	return levelDescription;	
-	}
-	public long getTimeLimit()
-	{	return levelDescription.getTimeLimit();	
+	public void setPlayMode(PlayMode playMode)
+	{	this.playMode = playMode;	
 	}
 
 	/////////////////////////////////////////////////////////////////
@@ -156,7 +144,7 @@ public class Round
 		{	stats.updateTime(time);			
 //			if(getTimeLimit()>0 && time>=getTimeLimit()/getConfiguration().getSpeedCoeff())
 			int limit = getLimits().testLimits(stats);
-			if(limit>=0 || (getTimeLimit()>0 && time>=getTimeLimit()))
+			if(limit>=0)
 			{	// close game
 				roundOver = true;
 				stats.finish(loop.getTotalTime());
@@ -212,5 +200,64 @@ public class Round
 		{	stats.addEvent(event);
 			//stats.computePoints(getPointProcessor());
 		}
+	}
+
+	/////////////////////////////////////////////////////////////////
+	// NOTES			/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	private final ArrayList<String> notes = new ArrayList<String>();
+
+	public void setNotes(ArrayList<String> notes)
+	{	this.notes.addAll(notes);
+	}
+	public ArrayList<String> getNotes()
+	{	return notes;
+	}
+
+	/////////////////////////////////////////////////////////////////
+	// POINTS			/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	private PointProcessor pointProcessor;
+
+	public void setPointProcessor(PointProcessor pointProcessor)
+	{	this.pointProcessor = pointProcessor;
+	}
+	public PointProcessor getPointProcessor()
+	{	return pointProcessor;
+	}
+
+	/////////////////////////////////////////////////////////////////
+	// LIMIT			/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	private Limits<RoundLimit> limits;
+
+	public Limits<RoundLimit> getLimits()
+	{	return limits;
+	}
+	public void setLimits(Limits<RoundLimit> limits)
+	{	this.limits = limits;
+	}
+			
+	/////////////////////////////////////////////////////////////////
+	// LEVEL DESCRIPTION	/////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	private LevelDescription levelDescription;
+	
+	public LevelDescription getLevelDescription()
+	{	return levelDescription;	
+	}
+	public void setLevelDescription(LevelDescription levelDescription)
+	{	this.levelDescription = levelDescription;	
+	}
+
+	
+	public Round copy()
+	{	Round result = new Round(match);
+		result.setNotes(notes);
+		result.setLimits(limits);
+		result.setPlayMode(playMode);
+		result.pointProcessor = pointProcessor;
+		result.setLevelDescription(levelDescription);
+		return result;
 	}
 }

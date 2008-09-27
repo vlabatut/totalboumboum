@@ -153,6 +153,7 @@ public class GuiTools
 	public static final String GAME_ROUND_LIMIT_DEATHS = "GameRoundLimitDeaths";
 	public static final String GAME_ROUND_LIMIT_ITEMS = "GameRoundLimitItems";
 	public static final String GAME_ROUND_LIMIT_KILLS = "GameRoundLimitKills";
+	public static final String GAME_ROUND_LIMIT_TIME = "GameRoundLimitTime";
 	
 	
 	
@@ -451,6 +452,7 @@ public class GuiTools
 			// time
 			image = loadIcon(folder+GuiFileTools.FILE_TIME,absent);
 			icons.put(GAME_ROUND_HEADER_TIME,image);
+			icons.put(GAME_ROUND_LIMIT_TIME,image);
 			// total
 			image = loadIcon(folder+GuiFileTools.FILE_TOTAL,absent);
 			icons.put(GAME_TOURNAMENT_HEADER_TOTAL,image);

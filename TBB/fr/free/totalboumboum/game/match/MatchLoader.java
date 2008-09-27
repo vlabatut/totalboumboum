@@ -8,18 +8,17 @@ import java.util.List;
 
 import javax.xml.parsers.ParserConfigurationException;
 
-import org.jdom.Attribute;
 import org.jdom.Element;
 import org.xml.sax.SAXException;
 
 import fr.free.totalboumboum.game.limit.Limit;
 import fr.free.totalboumboum.game.limit.LimitLoader;
 import fr.free.totalboumboum.game.limit.Limits;
-import fr.free.totalboumboum.game.limit.LimitsLoader;
+import fr.free.totalboumboum.game.limit.MatchLimit;
 import fr.free.totalboumboum.game.point.PointProcessor;
 import fr.free.totalboumboum.game.point.PointProcessorLoader;
-import fr.free.totalboumboum.game.round.LevelDescription;
-import fr.free.totalboumboum.game.round.PlayMode;
+import fr.free.totalboumboum.game.round.Round;
+import fr.free.totalboumboum.game.round.RoundLoader;
 import fr.free.totalboumboum.game.tournament.AbstractTournament;
 import fr.free.totalboumboum.tools.FileTools;
 import fr.free.totalboumboum.tools.XmlTools;
@@ -49,95 +48,24 @@ public class MatchLoader
 	{	// init
     	Match result = new Match(tournament);
 		Element element;
-		// options
-		element = root.getChild(XmlTools.ELT_OPTIONS);
-		loadOptionsElement(element,folderPath,result);
 		// notes
 		element = root.getChild(XmlTools.ELT_NOTES);
 		ArrayList<String> notes = loadNotesElement(element);
 		result.setNotes(notes);
-		// levels
-		element = root.getChild(XmlTools.ELT_LEVELS);
-		loadLevelsElement(element,folderPath,result);
+		// limits
+		element = root.getChild(XmlTools.ELT_LIMITS);
+		Limits<MatchLimit> limits = loadLimitsElement(element,folderPath);
+		result.setLimits(limits);
+		// points
+		element = root.getChild(XmlTools.ELT_POINTS);
+		PointProcessor pp = PointProcessorLoader.loadPointProcessorFromElement(element,folderPath);
+		result.setPointProcessor(pp);
+		// rounds
+		element = root.getChild(XmlTools.ELT_ROUNDS);
+		loadRoundsElement(element,folderPath,result);
 		return result;
 	}		
 		
-    private static void loadOptionsElement(Element root, String folder, Match result) throws ParserConfigurationException, SAXException, IOException
-    {	// limits
-    	Element element = root.getChild(XmlTools.ELT_LIMITS);
-    	Limits matchLimits = LimitsLoader.loadLimitsElement(element,folder);
-    	result.setLimits(matchLimits);
-    }
-
-    private static void loadLevelsElement(Element root, String folder, Match result) throws ParserConfigurationException, SAXException, IOException
-    {	// level order
-    	String str = root.getAttribute(XmlTools.ATT_RANDOM_ORDER).getValue().trim();
-    	boolean randomOrder = Boolean.valueOf(str);
-    	result.setRandomOrder(randomOrder);
-    	// levels
-		List<Element> elements = root.getChildren(XmlTools.ELT_LEVEL);
-    	Iterator<Element> i = elements.iterator();
-    	while(i.hasNext())
-    	{	Element temp = i.next();
-    		loadLevelElement(temp,folder,result);
-    	}
-    }
-    
-    private static void loadLevelElement(Element root, String folder, Match result) throws ParserConfigurationException, SAXException, IOException
-    {	LevelDescription levelDescription = new LevelDescription();
-    	Element element;
-    	// location
-    	element = root.getChild(XmlTools.ELT_LOCATION);
-    	loadLocationElement(element,levelDescription);
-    	// game
-    	element = root.getChild(XmlTools.ELT_GAME);
-    	loadGameElement(element,levelDescription);
-    	// points
-    	element = root.getChild(XmlTools.ELT_POINTS);
-    	loadPointsElement(element,folder,levelDescription);
-    	// points
-    	element = root.getChild(XmlTools.ELT_LIMITS);
-    	Limits matchLimits = LimitsLoader.loadLimitsElement(element,folder);
-    	levelDescription.setLimits(matchLimits);
-    	// result
-    	result.addLevelDescription(levelDescription);
-    }
-    
-    private static void loadLocationElement(Element root, LevelDescription result)
-    {	String name = root.getAttribute(XmlTools.ATT_NAME).getValue().trim();
-		result.setName(name);
-    	String packname = root.getAttribute(XmlTools.ATT_PACKNAME).getValue().trim();
-    	result.setPackname(packname);
-    }
-    
-    private static void loadGameElement(Element root, LevelDescription result)
-    {	// play mode
-    	String playModeStr = root.getAttribute(XmlTools.ATT_PLAY_MODE).getValue().toUpperCase();
-    	PlayMode playMode = PlayMode.valueOf(playModeStr);
-    	result.setPlayMode(playMode);
-    	// time limit
-    	String timeLimitStr = root.getAttribute(XmlTools.ATT_TIME_LIMIT).getValue(); //time in s
-    	long timeLimit = Integer.valueOf(timeLimitStr);
-    	result.setTimeLimit(timeLimit);
-    }
-    
-    private static void loadPointsElement(Element root, String folder, LevelDescription result) throws ParserConfigurationException, SAXException, IOException
-	{	PointProcessor pp;
-		// local
-		String localStr = root.getAttribute(XmlTools.ATT_LOCAL).getValue().trim();
-		boolean local = Boolean.valueOf(localStr);
-		// name
-		String name = root.getAttribute(XmlTools.ATT_NAME).getValue();
-		// loading
-		if(local)
-		{	folder = folder+File.separator+name;
-			pp = PointProcessorLoader.loadPointProcessorFromFilePath(folder);
-		}
-		else
-			pp = PointProcessorLoader.loadPointProcessorFromName(name);
-		result.setPointProcessor(pp);
-	}
-    
     public static ArrayList<String> loadNotesElement(Element root)
     {	ArrayList<String> result = new ArrayList<String>();
     	List<Element> lines = root.getChildren(XmlTools.ELT_LINE);
@@ -149,4 +77,49 @@ public class MatchLoader
     	}
     	return result;
     }
+
+    private static void loadRoundsElement(Element root, String folder, Match result) throws ParserConfigurationException, SAXException, IOException
+    {	// rounds order
+    	String str = root.getAttribute(XmlTools.ATT_RANDOM_ORDER).getValue().trim();
+    	boolean randomOrder = Boolean.valueOf(str);
+    	result.setRandomOrder(randomOrder);
+    	// rounds
+		List<Element> elements = root.getChildren(XmlTools.ELT_ROUND);
+    	Iterator<Element> i = elements.iterator();
+    	while(i.hasNext())
+    	{	Element temp = i.next();
+    		loadRoundElement(temp,folder,result);
+    	}
+    }
+    
+    private static void loadRoundElement(Element root, String folder, Match result) throws ParserConfigurationException, SAXException, IOException
+	{	Round round;
+		// local
+		String localStr = root.getAttribute(XmlTools.ATT_LOCAL).getValue().trim();
+		boolean local = Boolean.valueOf(localStr);
+		// name
+		String name = root.getAttribute(XmlTools.ATT_NAME).getValue();
+		// loading
+		if(local)
+		{	folder = folder+File.separator+name;
+			round = RoundLoader.loadRoundFromFolderPath(folder,result);
+		}
+		else
+			round = RoundLoader.loadRoundFromName(name,result);
+		result.addRound(round);
+	}
+    
+	public static Limits<MatchLimit> loadLimitsElement(Element root, String folder) throws ParserConfigurationException, SAXException, IOException
+	{	Limits<MatchLimit> result = new Limits<MatchLimit>();
+
+		List<Element> elements = root.getChildren();
+		Iterator<Element> i = elements.iterator();
+		while(i.hasNext())
+		{	Element temp = i.next();
+			MatchLimit limit = (MatchLimit)LimitLoader.loadLimitElement(temp,folder);
+			result.addLimit(limit);
+		}
+		
+		return result;
+	}
 }

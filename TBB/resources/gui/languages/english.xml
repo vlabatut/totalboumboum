@@ -316,7 +316,10 @@
 	<text name="GameRoundLimitKills" value="Kills" />
 	<text name="GameRoundLimitKillsTooltip" value="Number of kills to perform in order to stop this round" />
 	<!--  -->
+	<text name="GameRoundLimitTime" value="Time" />
+	<text name="GameRoundLimitTimeTooltip" value="Maximum length of this round" />
+	<!--  -->
 	<text name="GameRoundHeaderRank" value="#" />
 	<text name="GameRoundHeaderRankTooltip" value="Rank of the player in the match before this round" />
-	
+
 </language>

@@ -125,6 +125,12 @@ public class StatisticTournament implements Serializable, StatisticBase
 	{	 //cf comment dans StatisticMatch
 		
 	}
+
+	@Override
+	public long getTime()
+	{	// useless
+		return 0;
+	}
 }
 
 

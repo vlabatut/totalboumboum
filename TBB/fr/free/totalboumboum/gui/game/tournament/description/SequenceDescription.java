@@ -31,6 +31,7 @@ import fr.free.totalboumboum.game.limit.LimitConfrontation;
 import fr.free.totalboumboum.game.limit.LimitPoints;
 import fr.free.totalboumboum.game.limit.LimitScore;
 import fr.free.totalboumboum.game.limit.LimitTotal;
+import fr.free.totalboumboum.game.limit.TournamentLimit;
 import fr.free.totalboumboum.game.point.PointProcessor;
 import fr.free.totalboumboum.game.tournament.sequence.SequenceTournament;
 import fr.free.totalboumboum.gui.generic.EntitledSubPanel;
@@ -371,7 +372,7 @@ public class SequenceDescription extends TournamentDescription
 			}
 			// data
 			{	SequenceTournament tournament = (SequenceTournament)getConfiguration().getCurrentTournament();
-				Iterator<Limit> i = tournament.getLimits().iterator();
+				Iterator<TournamentLimit> i = tournament.getLimits().iterator();
 				int k = 0;
 				while(i.hasNext() && k<2*lines)
 				{	// init

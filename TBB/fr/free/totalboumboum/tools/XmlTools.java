@@ -65,6 +65,7 @@ public class XmlTools
 	public static final String ELT_FORCE_POSITION = "forcePosition";
 	public static final String ELT_FPS = "fps";
 	public static final String ELT_GAME = "game";
+	public static final String ELT_GAMEPLAY = "gameplay";
 	public static final String ELT_GENERAL = "general";
 	public static final String ELT_GESTURES = "gestures";
 	public static final String ELT_GESTURE = "gesture";
@@ -116,6 +117,8 @@ public class XmlTools
 	public static final String ELT_PROPERTIES = "properties";
 	public static final String ELT_RANKINGS = "rankings";
 	public static final String ELT_REFERENCE = "reference";
+	public static final String ELT_ROUND = "round";
+	public static final String ELT_ROUNDS = "rounds";
 	public static final String ELT_SCORE = "score";
 	public static final String ELT_SCORES = "scores";
 	public static final String ELT_SETTING = "setting";
@@ -141,6 +144,7 @@ public class XmlTools
 	public static final String ELT_THRESHOLD = "threshold";
 	public static final String ELT_THRESHOLDS = "thresholds";
 	public static final String ELT_TILE = "tile";
+	public static final String ELT_TIME = "time";
 	public static final String ELT_TOTAL = "total";
 	public static final String ELT_TOURNAMENT = "tournament";
 	public static final String ELT_TRAJECTORIES = "trajectories";
