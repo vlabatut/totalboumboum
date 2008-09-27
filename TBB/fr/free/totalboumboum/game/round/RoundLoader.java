@@ -40,7 +40,7 @@ public class RoundLoader
     }
     
 	public static Round loadRoundFromName(String name, Match match) throws ParserConfigurationException, SAXException, IOException
-	{	String individualFolder = FileTools.getMatchesPath()+File.separator+name;
+	{	String individualFolder = FileTools.getRoundsPath()+File.separator+name;
 		Round result = loadRoundFromFolderPath(individualFolder,match);
 		return result;
     }

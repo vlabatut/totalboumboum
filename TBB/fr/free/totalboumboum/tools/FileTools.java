@@ -83,6 +83,7 @@ public class FileTools
 	public static final String FOLDER_PORTRAITS = "portraits";
 	public static final String FOLDER_PROFILES = "profiles";
 	public static final String FOLDER_REMOTE = "remote";
+	public static final String FOLDER_ROUNDS = "rounds";
 	public static final String FOLDER_RESOURCES = "resources";
 	public static final String FOLDER_SCHEMAS = "schemas";
 	public static final String FOLDER_SEARCH = "search";
@@ -125,6 +126,9 @@ public class FileTools
 	}
 	public static String getProfilesPath()
 	{	return getSettingsPath()+File.separator+FOLDER_PROFILES;		
+	}
+	public static String getRoundsPath()
+	{	return getSettingsPath()+File.separator+FOLDER_ROUNDS;		
 	}
 	public static String getTournamentsPath()
 	{	return getSettingsPath()+File.separator+FOLDER_TOURNAMENTS;		

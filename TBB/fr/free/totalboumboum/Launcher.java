@@ -607,8 +607,14 @@ public class Launcher
 	 * - assombrir l'image de fond quand y a des tables par dessus
 	 * 
 	 *   + alpha.41
-	 * - gestion des limites plus détaillée, que ce soir pour le tournoi, le match ou le round
 	 * - correction de quelques bugs d'affichage concernant les thèmes et apparaissant à haute résolution
+	 * - gestion des limites plus détaillée, que ce soit pour le tournoi, le match ou le round
+	 * - définition des fichiers rounds séparés
+	 * - lors du match : clonage de round pour pouvoir les réutiliser (si la limite de confrontation est supérieure au nombre de rounds prévus)
+	 * - différenciation des limites de tournoi/match/round : interfaces différentes, types xsd différents
+	 * - dans le round, la limite de temps devient une limite normale
+	 * - dans le tournoi séquence, on gère l'ordre aléatoire de matches
+	 * - dans le match, il faut gérer différemment la limite : 
 	 * 
 	 * *******************************************************
 	 * *********************** A FAIRE ***********************
@@ -643,21 +649,6 @@ public class Launcher
 	
 	/*
 	 * TODO
-	 * - définir des fichiers rounds séparés
-	 * - lors du match, on a le panel de rounds, et on peut en cloner un pour le jouer (ce qui permet de rejouer plusieurs fois le même si besoin est
-	 * - il faut distinguer les limites de tournoi/match/round :
-	 * 		- dans le code : 
-	 * 			- trois interfaces différentes
-	 * 			- une classe Limits générique (paramétrée par une des interfaces
-	 * 			- rajouter une limite de temps pour les rounds
-	 * 		- dans le XML : 
-	 * 			- définir plusieurs types de limites différents dans le xsd 'limites'
-	 * 			- les utiliser dans les xsd de tournoi, match, round
-	 * - dans le match, il faut gérer différemment la limite : 
-	 * 		- elle est obligatoire
-	 * 		- si inférieure au nbre de rounds, ok
-	 * 		- si supérieure : certains rounds seront rejoués
-	 * 		- possibilité d'ordre aléatoire
 	 * - il faut transformer certaines habiletés initiales en items initiaux
 	 * - il faut rajouter les items initiaux dans les rounds
 	 */
