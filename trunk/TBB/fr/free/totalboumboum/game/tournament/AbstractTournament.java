@@ -14,7 +14,7 @@ import fr.free.totalboumboum.data.profile.ProfileLoader;
 import fr.free.totalboumboum.data.statistics.StatisticTournament;
 import fr.free.totalboumboum.game.match.Match;
 import fr.free.totalboumboum.game.match.MatchRenderPanel;
-import fr.free.totalboumboum.game.point.PointProcessor;
+import fr.free.totalboumboum.game.points.PointProcessor;
 
 public abstract class AbstractTournament
 {	

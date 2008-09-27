@@ -4,7 +4,7 @@ import java.io.File;
 import java.util.ArrayList;
 
 import fr.free.totalboumboum.game.limit.Limits;
-import fr.free.totalboumboum.game.point.PointProcessor;
+import fr.free.totalboumboum.game.points.PointProcessor;
 
 public class LevelDescription
 {

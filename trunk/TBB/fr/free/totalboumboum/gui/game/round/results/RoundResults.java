@@ -23,7 +23,7 @@ import fr.free.totalboumboum.data.profile.Portraits;
 import fr.free.totalboumboum.data.profile.Profile;
 import fr.free.totalboumboum.data.statistics.Score;
 import fr.free.totalboumboum.data.statistics.StatisticRound;
-import fr.free.totalboumboum.game.point.PlayerPoints;
+import fr.free.totalboumboum.game.points.PlayerPoints;
 import fr.free.totalboumboum.game.round.Round;
 import fr.free.totalboumboum.gui.generic.EntitledDataPanel;
 import fr.free.totalboumboum.gui.generic.InnerDataPanel;

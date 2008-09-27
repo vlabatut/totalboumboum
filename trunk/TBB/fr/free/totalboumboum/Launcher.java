@@ -609,7 +609,7 @@ public class Launcher
 	 *   + alpha.41
 	 * - correction de quelques bugs d'affichage concernant les thèmes et apparaissant à haute résolution
 	 * - gestion des limites plus détaillée, que ce soit pour le tournoi, le match ou le round
-	 * - définition des fichiers rounds séparés
+	 * - définition des rounds dans des fichiers séparés
 	 * - lors du match : clonage de round pour pouvoir les réutiliser (si la limite de confrontation est supérieure au nombre de rounds prévus)
 	 * - différenciation des limites de tournoi/match/round : interfaces différentes, types xsd différents
 	 * - dans le round, la limite de temps devient une limite normale
@@ -625,7 +625,6 @@ public class Launcher
 	 * - au moins finir le cycle lors d'une mort, histoire que la différence de timing ne vienne pas juste de l'ordre des joueurs dans la partie 
 	 * - possibilité de choisir entre le fait que le match s'arrête dès que tout le monde est mort sauf 1, ou dernière flamme terminée
 	 * - feature lié au précédent : gagner plus de points si on finit effetivement le jeu que si on a un time out ou un entre-tuage
-	 * - faut il définir les rounds dans des fichiers à part ? mais on ne sait pas à l'avance cb il en faut... -> et alors on s'en fout, c'est définit par rapport à un niveau
 	 * - possibilité de donner des noms aux matches et aux rounds
 	 * - gérer le shrink
 	 * - un bug apparait parfois : le résultat du match ne correspond pas au classement réel, et les temps affichés non plus
