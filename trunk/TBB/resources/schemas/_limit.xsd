@@ -25,11 +25,15 @@
 		<xsd:attribute name="win" type="xsd:boolean" use="required" />
 	</xsd:complexType>
 	
+	<xsd:complexType name="tLimitTime">
+		<xsd:attribute name="value" type="xsd:long" use="required" />
+	</xsd:complexType>
+	
 	<xsd:complexType name="tLimitTotal">
 		<xsd:attribute name="value" type="xsd:float" use="required" />
 	</xsd:complexType>
 	
-	<xsd:group name="gLimit">
+	<xsd:group name="gTournamentLimit">
 		<xsd:choice>
 			<xsd:element name="confrontation" type="tLimitConfrontation" />
 			<xsd:element name="points" type="tLimitPoints" />
@@ -38,9 +42,38 @@
 		</xsd:choice>
 	</xsd:group>
 	
-	<xsd:complexType name="tLimits">
+	<xsd:group name="gMatchLimit">
+		<xsd:choice>
+			<xsd:element name="confrontation" type="tLimitConfrontation" />
+			<xsd:element name="points" type="tLimitPoints" />
+			<xsd:element name="score" type="tLimitScore" />
+			<xsd:element name="total" type="tLimitTotal" />
+		</xsd:choice>
+	</xsd:group>
+	
+	<xsd:group name="gRoundLimit">
+		<xsd:choice>
+			<xsd:element name="points" type="tLimitPoints" />
+			<xsd:element name="score" type="tLimitScore" />
+			<xsd:element name="time" type="tLimitTime" />
+		</xsd:choice>
+	</xsd:group>
+	
+	<xsd:complexType name="tTournamentLimits">
 		<xsd:sequence>
-			<xsd:group ref="gLimit"  minOccurs="0" maxOccurs="unbounded"/>
+			<xsd:group ref="gTournamentLimit"  maxOccurs="unbounded"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	
+	<xsd:complexType name="tMatchLimits">
+		<xsd:sequence>
+			<xsd:group ref="gMatchLimit"  maxOccurs="unbounded"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	
+	<xsd:complexType name="tRoundLimits">
+		<xsd:sequence>
+			<xsd:group ref="gRoundLimit"  maxOccurs="unbounded"/>
 		</xsd:sequence>
 	</xsd:complexType>
 	
