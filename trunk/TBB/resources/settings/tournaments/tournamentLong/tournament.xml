@@ -12,30 +12,19 @@
  	</notes>
  	
 	<sequence>
-	 	<options>
-	 		<limits />
-			<points local="false" name="basicTournament" />
-	 	</options> 
+
+ 		<limits>
+ 			<confrontation value="3" />
+ 		</limits>
+
+		<points local="false" name="basicTournament" />
 	 	
-		<matches>
-		
-			<match>
-				<location local="false" name="matchLong" />
-				<points local="false" name="basicMatch" />
-			</match>
-			
-			<match>
-				<location local="false" name="matchLong" />
-				<points local="false" name="basicMatch" />
-			</match>
-			
-			<match>
-				<location local="false" name="matchLong" />
-				<points local="false" name="basicMatch" />
-			</match>
-			
+		<matches randomOrder="false">
+			<match local="false" name="matchLong" />
+			<match local="false" name="matchLong" />
+			<match local="true" name="match03" />
 		</matches>
-		
+
 	</sequence>
 		
 		
