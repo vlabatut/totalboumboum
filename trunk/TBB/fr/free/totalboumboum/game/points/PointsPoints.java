@@ -2,7 +2,7 @@ package fr.free.totalboumboum.game.points;
 
 import fr.free.totalboumboum.data.statistics.StatisticBase;
 
-public class PointPoints extends PointProcessor
+public class PointsPoints extends PointsProcessor
 {	
 	@Override
 	public float[] process(StatisticBase stats)

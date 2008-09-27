@@ -4,12 +4,12 @@ import java.util.ArrayList;
 
 import fr.free.totalboumboum.data.statistics.StatisticBase;
 
-public class PointAddition extends PointProcessor
+public class PointsAddition extends PointsProcessor
 {
-	private PointProcessor leftSource;
-	private PointProcessor rightSource;
+	private PointsProcessor leftSource;
+	private PointsProcessor rightSource;
 	
-	public PointAddition(PointProcessor leftSource, PointProcessor rightSource)
+	public PointsAddition(PointsProcessor leftSource, PointsProcessor rightSource)
 	{	this.leftSource = leftSource;
 		this.rightSource = rightSource;
 	}

@@ -3,11 +3,11 @@ package fr.free.totalboumboum.game.points;
 import fr.free.totalboumboum.data.statistics.Score;
 import fr.free.totalboumboum.data.statistics.StatisticBase;
 
-public class PointScores extends PointProcessor
+public class PointsScores extends PointsProcessor
 {	
 	private Score score;
 	
-	public PointScores(Score score)
+	public PointsScores(Score score)
 	{	this.score = score;	
 	}
 	
