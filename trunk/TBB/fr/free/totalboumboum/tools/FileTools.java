@@ -25,8 +25,6 @@ public class FileTools
 	public static final String FILE_FIRESET = "fireset";
 	public static final String FILE_FIRESETS = "firesets";
 	public static final String FILE_FLOOR = "floor";
-	public static final String FILE_MATCH = "match";
-	public static final String FILE_MATCHES = "matches";
 	public static final String FILE_GESTUREPERMISSIONS = "gesturepermissions";
 	public static final String FILE_HERO = "hero";
 	public static final String FILE_ITEM = "item";
@@ -36,6 +34,8 @@ public class FileTools
 	public static final String FILE_LEVEL = "level";
 	public static final String FILE_LANGUAGE = "language";
 	public static final String FILE_LEVELS = "levels";
+	public static final String FILE_MATCH = "match";
+	public static final String FILE_MATCHES = "matches";
 	public static final String FILE_MATRICES = "matrices";
 	public static final String FILE_MATRIX = "matrix";
 	public static final String FILE_PERMISSIONS = "permissions";
@@ -47,6 +47,8 @@ public class FileTools
 	public static final String FILE_PROFILE = "profile";
 	public static final String FILE_PROFILES = "profiles";
 	public static final String FILE_PROPERTIES = "properties";
+	public static final String FILE_ROUND = "round";
+	public static final String FILE_ROUNDS = "rounds";
 	public static final String FILE_SETTINGS = "settings";
 	public static final String FILE_SPRITE = "sprite";
 	public static final String FILE_SPRITES = "sprites";

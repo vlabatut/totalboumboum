@@ -31,8 +31,8 @@ public class RoundLoader
 		String schemaFolder = FileTools.getSchemasPath();
 		File schemaFile,dataFile;
 		// opening
-		dataFile = new File(folderPath+File.separator+FileTools.FILE_MATCH+FileTools.EXTENSION_DATA);
-		schemaFile = new File(schemaFolder+File.separator+FileTools.FILE_MATCH+FileTools.EXTENSION_SCHEMA);
+		dataFile = new File(folderPath+File.separator+FileTools.FILE_ROUND+FileTools.EXTENSION_DATA);
+		schemaFile = new File(schemaFolder+File.separator+FileTools.FILE_ROUND+FileTools.EXTENSION_SCHEMA);
 		Element root = XmlTools.getRootFromFile(dataFile,schemaFile);
 		// loading
 		Round result = loadRoundElement(root,folderPath,match);
