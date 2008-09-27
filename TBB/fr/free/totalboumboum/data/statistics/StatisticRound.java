@@ -7,8 +7,8 @@ import java.util.Iterator;
 import java.util.TreeSet;
 
 import fr.free.totalboumboum.data.profile.Profile;
-import fr.free.totalboumboum.game.point.PlayerPoints;
-import fr.free.totalboumboum.game.point.PointProcessor;
+import fr.free.totalboumboum.game.points.PlayerPoints;
+import fr.free.totalboumboum.game.points.PointProcessor;
 import fr.free.totalboumboum.game.round.PlayMode;
 import fr.free.totalboumboum.game.round.Round;
 
