@@ -3,37 +3,37 @@
 <xsd:include schemaLocation="_score.xsd"/>
 <xsd:include schemaLocation="_notes.xsd"/>
 
-	<xsd:complexType name="tPointPoints" />
+	<xsd:complexType name="tPointsTotal" />
 	
-	<xsd:complexType name="tPointScores">
+	<xsd:complexType name="tPointsScores">
 		<xsd:attribute name="type" type="tScore" use="required" />
 	</xsd:complexType>
 	
-	<xsd:complexType name="tPointConstant">
+	<xsd:complexType name="tPointsConstant">
 		<xsd:attribute name="value" type="xsd:float" use="required" />
 	</xsd:complexType>
 	
-	<xsd:complexType name="tPointMinimum">
+	<xsd:complexType name="tPointsMinimum">
 		<xsd:sequence>
-			<xsd:group ref="gPoint" />
+			<xsd:group ref="gPoints" />
 		</xsd:sequence>
 	</xsd:complexType>
 	
-	<xsd:complexType name="tPointMaximum">
+	<xsd:complexType name="tPointsMaximum">
 		<xsd:sequence>
-			<xsd:group ref="gPoint" />
+			<xsd:group ref="gPoints" />
 		</xsd:sequence>
 	</xsd:complexType>
 	
-	<xsd:complexType name="tPointTotal">
+	<xsd:complexType name="tPointsSummation">
 		<xsd:sequence>
-			<xsd:group ref="gPoint" />
+			<xsd:group ref="gPoints" />
 		</xsd:sequence>
 	</xsd:complexType>
 	
-	<xsd:complexType name="tPointRankings">
+	<xsd:complexType name="tPointsRankings">
 		<xsd:sequence>
-			<xsd:group ref="gPoint" maxOccurs="unbounded"/>
+			<xsd:group ref="gPoints" maxOccurs="unbounded"/>
 		</xsd:sequence>
 		<xsd:attribute name="invert" type="xsd:boolean" use="optional" default="false" />
 	</xsd:complexType>
@@ -58,70 +58,70 @@
 		</xsd:sequence>
 	</xsd:complexType>
 	
-	<xsd:complexType name="tPointDiscretize">
+	<xsd:complexType name="tPointsDiscretize">
 		<xsd:sequence>
-			<xsd:group ref="gPoint" />
+			<xsd:group ref="gPoints" />
 			<xsd:element name="thresholds" type="tThresholds" />
 			<xsd:element name="values" type="tValues" />
 		</xsd:sequence>
 		<xsd:attribute name="exaequoShare" type="xsd:boolean"  use="optional"/>
 	</xsd:complexType>
 	
-	<xsd:complexType name="tPointAddition">
+	<xsd:complexType name="tPointsAddition">
 		<xsd:sequence>
-			<xsd:group ref="gPoint" />
-			<xsd:group ref="gPoint" />
+			<xsd:group ref="gPoints" />
+			<xsd:group ref="gPoints" />
 		</xsd:sequence>
 	</xsd:complexType>
 	
-	<xsd:complexType name="tPointSubtraction">
+	<xsd:complexType name="tPointsSubtraction">
 		<xsd:sequence>
-			<xsd:group ref="gPoint" />
-			<xsd:group ref="gPoint" />
+			<xsd:group ref="gPoints" />
+			<xsd:group ref="gPoints" />
 		</xsd:sequence>
 	</xsd:complexType>
 	
-	<xsd:complexType name="tPointMultiplication">
+	<xsd:complexType name="tPointsMultiplication">
 		<xsd:sequence>
-			<xsd:group ref="gPoint" />
-			<xsd:group ref="gPoint" />
+			<xsd:group ref="gPoints" />
+			<xsd:group ref="gPoints" />
 		</xsd:sequence>
 	</xsd:complexType>
 	
-	<xsd:complexType name="tPointDivision">
+	<xsd:complexType name="tPointsDivision">
 		<xsd:sequence>
-			<xsd:group ref="gPoint" />
-			<xsd:group ref="gPoint" />
+			<xsd:group ref="gPoints" />
+			<xsd:group ref="gPoints" />
 		</xsd:sequence>
 	</xsd:complexType>
 	
-	<xsd:group name="gPoint">
+	<xsd:group name="gPoints">
 		<xsd:choice>
-			<xsd:element name="points" type="tPointPoints" />
+			<xsd:element name="total" type="tPointsTotal" />
 		
-			<xsd:element name="scores" type="tPointScores" />
-			<xsd:element name="constant" type="tPointConstant" />
+			<xsd:element name="scores" type="tPointsScores" />
+			<xsd:element name="constant" type="tPointsConstant" />
 
-			<xsd:element name="maximum" type="tPointMaximum" />
-			<xsd:element name="minimum" type="tPointMinimum" />
-			<xsd:element name="total" type="tPointTotal" />
-			<xsd:element name="rankings" type="tPointRankings" />
-			<xsd:element name="discretize" type="tPointDiscretize" />
+			<xsd:element name="maximum" type="tPointsMaximum" />
+			<xsd:element name="minimum" type="tPointsMinimum" />
+			<xsd:element name="summation" type="tPointsSummation" />
+			<xsd:element name="rankings" type="tPointsRankings" />
+			<xsd:element name="discretize" type="tPointsDiscretize" />
 
-			<xsd:element name="addition" type="tPointAddition" />
-			<xsd:element name="subtraction" type="tPointSubtraction" />
-			<xsd:element name="multiplication" type="tPointMultiplication" />
-			<xsd:element name="division" type="tPointDivision" />
+			<xsd:element name="addition" type="tPointsAddition" />
+			<xsd:element name="subtraction" type="tPointsSubtraction" />
+			<xsd:element name="multiplication" type="tPointsMultiplication" />
+			<xsd:element name="division" type="tPointsDivision" />
 		</xsd:choice>
 	</xsd:group>
 	
-	<xsd:complexType name="tPoint">
+	<xsd:complexType name="tPoints">
 		<xsd:sequence>
 			<xsd:element name="notes" type="tNotes" />
-			<xsd:group ref="gPoint"/>
+			<xsd:group ref="gPoints"/>
 		</xsd:sequence>
 	</xsd:complexType>	
 	
-	<xsd:element name="point" type="tPoint" />
+	<xsd:element name="points" type="tPoints" />
 	
 </xsd:schema>

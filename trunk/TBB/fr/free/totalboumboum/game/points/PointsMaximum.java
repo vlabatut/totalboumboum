@@ -4,11 +4,11 @@ import java.util.ArrayList;
 
 import fr.free.totalboumboum.data.statistics.StatisticBase;
 
-public class PointdMaximum extends PointsProcessor
+public class PointsMaximum extends PointsProcessor
 {
 	private PointsProcessor source;
 	
-	public PointdMaximum(PointsProcessor source)
+	public PointsMaximum(PointsProcessor source)
 	{	this.source = source;
 	}
 	

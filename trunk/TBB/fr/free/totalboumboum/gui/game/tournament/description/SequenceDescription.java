@@ -32,7 +32,7 @@ import fr.free.totalboumboum.game.limit.LimitPoints;
 import fr.free.totalboumboum.game.limit.LimitScore;
 import fr.free.totalboumboum.game.limit.LimitTotal;
 import fr.free.totalboumboum.game.limit.TournamentLimit;
-import fr.free.totalboumboum.game.points.PointProcessor;
+import fr.free.totalboumboum.game.points.PointsProcessor;
 import fr.free.totalboumboum.game.tournament.sequence.SequenceTournament;
 import fr.free.totalboumboum.gui.generic.EntitledSubPanel;
 import fr.free.totalboumboum.gui.generic.InnerDataPanel;
@@ -305,7 +305,7 @@ public class SequenceDescription extends TournamentDescription
 			StyleConstants.setFontFamily(sa, font.getFamily());
 			StyleConstants.setFontSize(sa, font.getSize());
 			StyledDocument doc = textPane.getStyledDocument();
-			PointProcessor pp = ((SequenceTournament)getConfiguration().getCurrentTournament()).getPointProcessor();			
+			PointsProcessor pp = ((SequenceTournament)getConfiguration().getCurrentTournament()).getPointProcessor();			
 			text = "";
 			ArrayList<String> list = pp.getNotes();
 			Iterator<String> i = list.iterator();

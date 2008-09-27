@@ -8,7 +8,7 @@ import java.util.TreeSet;
 
 import fr.free.totalboumboum.data.profile.Profile;
 import fr.free.totalboumboum.game.points.PlayerPoints;
-import fr.free.totalboumboum.game.points.PointProcessor;
+import fr.free.totalboumboum.game.points.PointsProcessor;
 import fr.free.totalboumboum.game.round.PlayMode;
 import fr.free.totalboumboum.game.round.Round;
 
@@ -68,7 +68,7 @@ public class StatisticRound implements Serializable, StatisticBase
 		}
 	}
 
-	public void computePoints(PointProcessor pointProcessor)
+	public void computePoints(PointsProcessor pointProcessor)
 	{	points = pointProcessor.process(this);
 	}
 

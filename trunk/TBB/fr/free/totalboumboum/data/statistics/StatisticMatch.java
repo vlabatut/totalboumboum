@@ -7,7 +7,7 @@ import java.util.Iterator;
 
 import fr.free.totalboumboum.data.profile.Profile;
 import fr.free.totalboumboum.game.match.Match;
-import fr.free.totalboumboum.game.points.PointProcessor;
+import fr.free.totalboumboum.game.points.PointsProcessor;
 
 public class StatisticMatch implements Serializable, StatisticBase
 {
@@ -68,7 +68,7 @@ public class StatisticMatch implements Serializable, StatisticBase
 			partialPoints[i] = partialPoints[i] + roundPoints[i];
 	}
 	
-	public void computePoints(PointProcessor pointProcessor)
+	public void computePoints(PointsProcessor pointProcessor)
 	{	points = pointProcessor.process(this);
 	}
 	

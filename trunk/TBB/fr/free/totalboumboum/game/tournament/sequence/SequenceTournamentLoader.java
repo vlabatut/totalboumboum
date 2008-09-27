@@ -19,8 +19,8 @@ import fr.free.totalboumboum.game.limit.RoundLimit;
 import fr.free.totalboumboum.game.limit.TournamentLimit;
 import fr.free.totalboumboum.game.match.Match;
 import fr.free.totalboumboum.game.match.MatchLoader;
-import fr.free.totalboumboum.game.points.PointProcessor;
-import fr.free.totalboumboum.game.points.PointProcessorLoader;
+import fr.free.totalboumboum.game.points.PointsProcessor;
+import fr.free.totalboumboum.game.points.PointsProcessorLoader;
 import fr.free.totalboumboum.game.round.Round;
 import fr.free.totalboumboum.game.round.RoundLoader;
 import fr.free.totalboumboum.tools.XmlTools;
@@ -38,7 +38,7 @@ public class SequenceTournamentLoader
 		result.setLimits(limits);
 		// points
 		element = root.getChild(XmlTools.ELT_POINTS);
-		PointProcessor pp = PointProcessorLoader.loadPointProcessorFromElement(element,folder);
+		PointsProcessor pp = PointsProcessorLoader.loadPointProcessorFromElement(element,folder);
 		result.setPointProcessor(pp);
 		// matches
 		element = root.getChild(XmlTools.ELT_MATCHES);

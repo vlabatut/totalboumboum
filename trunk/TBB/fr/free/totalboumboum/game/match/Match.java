@@ -18,8 +18,8 @@ import fr.free.totalboumboum.data.statistics.StatisticMatch;
 import fr.free.totalboumboum.data.statistics.StatisticRound;
 import fr.free.totalboumboum.game.limit.Limits;
 import fr.free.totalboumboum.game.limit.MatchLimit;
-import fr.free.totalboumboum.game.points.PointPoints;
-import fr.free.totalboumboum.game.points.PointProcessor;
+import fr.free.totalboumboum.game.points.PointsTotal;
+import fr.free.totalboumboum.game.points.PointsProcessor;
 import fr.free.totalboumboum.game.round.LevelDescription;
 import fr.free.totalboumboum.game.round.Round;
 import fr.free.totalboumboum.game.tournament.AbstractTournament;
@@ -190,12 +190,12 @@ public class Match
 	/////////////////////////////////////////////////////////////////
 	// POINTS			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	private PointProcessor pointProcessor;
+	private PointsProcessor pointProcessor;
 
-	public void setPointProcessor(PointProcessor pointProcessor)
+	public void setPointProcessor(PointsProcessor pointProcessor)
 	{	this.pointProcessor = pointProcessor;
 	}
-	public PointProcessor getPointProcessor()
+	public PointsProcessor getPointProcessor()
 	{	return pointProcessor;
 	}
 

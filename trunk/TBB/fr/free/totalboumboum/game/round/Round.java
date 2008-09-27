@@ -19,7 +19,7 @@ import fr.free.totalboumboum.game.limit.MatchLimit;
 import fr.free.totalboumboum.game.limit.RoundLimit;
 import fr.free.totalboumboum.game.match.Match;
 import fr.free.totalboumboum.game.points.PlayerPoints;
-import fr.free.totalboumboum.game.points.PointProcessor;
+import fr.free.totalboumboum.game.points.PointsProcessor;
 
 public class Round
 {
@@ -217,12 +217,12 @@ public class Round
 	/////////////////////////////////////////////////////////////////
 	// POINTS			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	private PointProcessor pointProcessor;
+	private PointsProcessor pointProcessor;
 
-	public void setPointProcessor(PointProcessor pointProcessor)
+	public void setPointProcessor(PointsProcessor pointProcessor)
 	{	this.pointProcessor = pointProcessor;
 	}
-	public PointProcessor getPointProcessor()
+	public PointsProcessor getPointProcessor()
 	{	return pointProcessor;
 	}
 

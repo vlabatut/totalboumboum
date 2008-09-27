@@ -137,6 +137,7 @@ public class XmlTools
 	public static final String ELT_STEP = "step";
 	public static final String ELT_STEPS = "steps";
 	public static final String ELT_SUBTRACTION = "subtraction";
+	public static final String ELT_SUMMATION = "summation";
 	public static final String ELT_TARGET_PERMISSIONS = "target-permissions";
 	public static final String ELT_TARGET_RESTRICTIONS = "target-restrictions";
 	public static final String ELT_TEXT = "text";

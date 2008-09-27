@@ -19,7 +19,7 @@ import fr.free.totalboumboum.data.statistics.StatisticRound;
 import fr.free.totalboumboum.game.limit.Limits;
 import fr.free.totalboumboum.game.limit.TournamentLimit;
 import fr.free.totalboumboum.game.match.Match;
-import fr.free.totalboumboum.game.points.PointProcessor;
+import fr.free.totalboumboum.game.points.PointsProcessor;
 import fr.free.totalboumboum.game.round.Round;
 import fr.free.totalboumboum.game.tournament.AbstractTournament;
 import fr.free.totalboumboum.gui.game.match.statistics.MatchStatistics;
@@ -159,12 +159,12 @@ public class SequenceTournament extends AbstractTournament
 	/////////////////////////////////////////////////////////////////
 	// POINTS			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	private PointProcessor pointProcessor;
+	private PointsProcessor pointProcessor;
 
-	public void setPointProcessor(PointProcessor pointProcessor)
+	public void setPointProcessor(PointsProcessor pointProcessor)
 	{	this.pointProcessor = pointProcessor;
 	}
-	public PointProcessor getPointProcessor()
+	public PointsProcessor getPointProcessor()
 	{	return pointProcessor;
 	}
 
