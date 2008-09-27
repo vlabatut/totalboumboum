@@ -617,7 +617,7 @@ public class Launcher
 	 * - au moins finir le cycle lors d'une mort, histoire que la différence de timing ne vienne pas juste de l'ordre des joueurs dans la partie 
 	 * - possibilité de choisir entre le fait que le match s'arrête dès que tout le monde est mort sauf 1, ou dernière flamme terminée
 	 * - feature lié au précédent : gagner plus de points si on finit effetivement le jeu que si on a un time out ou un entre-tuage
-	 * - faut il définir les rounds dans des fichiers à part ? mais on ne sait pas à l'avance cb il en faut...
+	 * - faut il définir les rounds dans des fichiers à part ? mais on ne sait pas à l'avance cb il en faut... -> et alors on s'en fout, c'est définit par rapport à un niveau
 	 * - possibilité de donner des noms aux matches et aux rounds
 	 * - gérer le shrink
 	 * - un bug apparait parfois : le résultat du match ne correspond pas au classement réel, et les temps affichés non plus
@@ -626,17 +626,39 @@ public class Launcher
 	 * - redescendre les stats dans loop, et gestion de fin de partie et tout ce qui est en fait directement lié au moteur
 	 * - en fait tout le process de points dans les stats est à déplacer dans les rounds/matches, etc 
 	 * - à la fin du round, faire apparaitre les résultats par transparence...ça serait la classe ça !
-	 * - problème de cohérence entre les nombres totaux de kills et de deaths (qui devraient être égaux) : on dirait que ça ne compte pas le dernier tué (qui termine le round), on dirait que ça ne compte pas toujours les suicides comme des kills (juste le côté death)
+	 * - problème de cohérence entre les nombres totaux de kills et de deaths (qui devraient être égaux) : on dirait que ça ne compte pas le dernier tué (qui termine le round), on dirait que ça ne compte pas toujours les suicides comme des kills (juste le côté death), ou alors ça ne compte pas un kill produit par une bombe explosant après la mort du killer ?
 	 * - gérer l'apparition comme une action en soit. si pas possible d'apparaître au début de la partie, faire un atterrissage ?
 	 * - problème graphique (contact des ombres, notament) quand on monte en résolution avec certain thèmes
 	 * - pb de dimension de l'image de fond en fonction de la résolution... (zones pas peintes)
-	 * - pour painting, possibilité de définir quelles cases peuvent être repeinte, ce qui permet de poser comme limite un %age de cases repeintes
 	 * - results panel : quand il y a trop de rounds dans un match pour que ça rentre à l'écran, ne pas tout afficher
 	 * - problème d'affichage : le niveau est coupé en fonction du mode d'affichage, mais pas de façon symétrique (le haut n'est pas coupé, seulement le bas)
 	 * - mode plein écran
+	 * - rétablir frag comme stat ?
 	 * -------------------------------------------------------------------
 	 * - s'occuper de la limite qui fait gagner le joueur qui la franchit : pq pas un simple bonus/malus pour celui qui arrête la partie ?
 	 * - limites exprimées de façon relative (peindre 75% des cases...)
 	 * - normaliser le calcul des points (discrétisation spéciale ou nombre de points direct), ce qui permettra d'en normaliser la représentation graphique dans la GUI
+	 * - pour painting, possibilité de définir quelles cases peuvent être repeinte, ce qui permet de poser comme limite un %age de cases repeintes
+	 */
+	
+	/*
+	 * TODO
+	 * - définir des fichiers rounds séparés
+	 * - lors du match, on a le panel de rounds, et on peut en cloner un pour le jouer (ce qui permet de rejouer plusieurs fois le même si besoin est
+	 * - il faut distinguer les limites de tournoi/match/round :
+	 * 		- dans le code : 
+	 * 			- trois interfaces différentes
+	 * 			- une classe Limits générique (paramétrée par une des interfaces
+	 * 			- rajouter une limite de temps pour les rounds
+	 * 		- dans le XML : 
+	 * 			- définir plusieurs types de limites différents dans le xsd 'limites'
+	 * 			- les utiliser dans les xsd de tournoi, match, round
+	 * - dans le match, il faut gérer différemment la limite : 
+	 * 		- elle est obligatoire
+	 * 		- si inférieure au nbre de rounds, ok
+	 * 		- si supérieure : certains rounds seront rejoués
+	 * 		- possibilité d'ordre aléatoire
+	 * - il faut transformer certaines habiletés initiales en items initiaux
+	 * - il faut rajouter les items initiaux dans les rounds
 	 */
 }
