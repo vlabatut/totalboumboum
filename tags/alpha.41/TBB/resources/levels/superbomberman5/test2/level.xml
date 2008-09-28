@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<level 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+		xsi:noNamespaceSchemaLocation="..\..\..\xml\schemas\levels.xsd" >
+	<theme packname="superbomberman5" name="urbanzone"/>
+<!--  <itemset packname="personnalitenumerique" name="normal"/> -->
+<!--  <itemset packname="superbomberman5" name="normal"/> -->
+	<itemset packname="superbomberman1" name="normal"/>
+	<bombset packname="superbomberman1" name="normal"/>
+	<globalDimension width="17" height="15" />
+	<visibleDimension width="17" height="15" />
+	<visiblePosition leftCol="0" upLine="0" />
+
+</level>
