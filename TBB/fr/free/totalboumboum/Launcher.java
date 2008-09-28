@@ -621,13 +621,18 @@ public class Launcher
 	 * - système permettant d'afficher le calcul des points sous forme textuelle (sera notamment utilisé par la GUI)
 	 * 
 	 * + alpha.42
+	 * - mise en place d'un système de previews pour les Levels et Sprites
+	 * - correction d'un bug qui affectait le décompte de kills et de deaths au cours d'un round
 	 * 
 	 * *******************************************************
 	 * *********************** A FAIRE ***********************
 	 * *******************************************************
 	 * - définir les présentations des rounds
+	 * - faire deux colonnes pour les items initiaux et les limites du round
+	 * - l'emplacement de l'itemset du round doit permettre de contenir des cases carrées sans perte de place
 	 * - pb : les items distribués au début du match ne doivent pas être comptés dans les stats !
 	 * - redistribution des items lors de la mort d'un joueur (option de round?)
+	 * - possibilité de bloquer certains items (on ne les perd pas)
 	 * - au moins finir le cycle lors d'une mort, histoire que la différence de timing ne vienne pas juste de l'ordre des joueurs dans la partie 
 	 * - possibilité de choisir entre le fait que le match s'arrête dès que tout le monde est mort sauf 1, ou dernière flamme terminée
 	 * - feature lié au précédent : gagner plus de points si on finit effetivement le jeu que si on a un time out ou un entre-tuage
@@ -641,14 +646,14 @@ public class Launcher
 	 * - redescendre les stats dans loop, et gestion de fin de partie et tout ce qui est en fait directement lié au moteur
 	 * - en fait tout le process de points dans les stats est à déplacer dans les rounds/matches, etc 
 	 * - à la fin du round, faire apparaitre les résultats par transparence...ça serait la classe ça !
-	 * - problème de cohérence entre les nombres totaux de kills et de deaths (qui devraient être égaux) : on dirait que ça ne compte pas le dernier tué (qui termine le round), on dirait que ça ne compte pas toujours les suicides comme des kills (juste le côté death), ou alors ça ne compte pas un kill produit par une bombe explosant après la mort du killer ?
 	 * - gérer l'apparition comme une action en soit. si pas possible d'apparaître au début de la partie, faire un atterrissage ?
 	 * - problème graphique (contact des ombres, notament) quand on monte en résolution avec certain thèmes
 	 * - pb de dimension de l'image de fond en fonction de la résolution... (zones pas peintes)
 	 * - results panel : quand il y a trop de rounds dans un match pour que ça rentre à l'écran, ne pas tout afficher
 	 * - problème d'affichage : le niveau est coupé en fonction du mode d'affichage, mais pas de façon symétrique (le haut n'est pas coupé, seulement le bas)
 	 * - mode plein écran
-	 * - rétablir frag comme stat ?
+	 * - rétablir frag comme stat ? non ! 
+	 * - vérifier le temps de latence des bombes, ça me parait un peu trop rapide
 	 * -------------------------------------------------------------------
 	 * - s'occuper de la limite qui fait gagner le joueur qui la franchit : pq pas un simple bonus/malus pour celui qui arrête la partie ?
 	 * - limites exprimées de façon relative (peindre 75% des cases...)

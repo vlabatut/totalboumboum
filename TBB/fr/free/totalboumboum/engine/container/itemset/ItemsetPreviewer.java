@@ -63,7 +63,7 @@ public class ItemsetPreviewer
 		// name
 		String name = root.getAttribute(XmlTools.ATT_NAME).getValue().trim();
 		// preview
-		BufferedImage itemPreview = SpriteFactoryLoader.previewSprite(folder);
+		BufferedImage itemPreview = SpriteFactoryLoader.previewSprite(individualFolder);
 		itemPreviews.put(name,itemPreview);
     }     
 }

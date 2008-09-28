@@ -94,25 +94,15 @@ public class PlayersPreviewer
     }
     
     private static void previewItemsElement(Element root, LevelPreview result)
-    {	ArrayList<String> items = new ArrayList<String>();
+    {	HashMap<String,Integer> initialItems = new HashMap<String, Integer>();
     	List<Element> elements = root.getChildren(XmlTools.ELT_ITEM);
 		Iterator<Element> i = elements.iterator();
 		while(i.hasNext())
 		{	Element temp = i.next();
-			PlayersLoader.loadItemElement(temp,items);
-		}
-		//
-		HashMap<String,Integer> initialItems = new HashMap<String, Integer>();
-		Iterator<String> j = items.iterator();
-		while(i.hasNext())
-		{	String temp = j.next();
-			if(initialItems.containsKey(temp))
-			{	int nbr = initialItems.get(temp);
-				nbr ++;
-				initialItems.put(temp,nbr);
-			}
-			else
-				initialItems.put(temp,1);
+			String str = temp.getAttribute(XmlTools.ATT_NAME).getValue().trim();
+			String nbrStr = temp.getAttribute(XmlTools.ATT_NUMBER).getValue().trim();
+			int number = Integer.valueOf(nbrStr);
+			initialItems.put(str,number);
 		}
 		result.setInitialItems(initialItems);
     }
