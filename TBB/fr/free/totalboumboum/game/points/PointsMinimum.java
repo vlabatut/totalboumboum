@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 import fr.free.totalboumboum.data.statistics.StatisticBase;
 
-public class PointsMinimum extends PointsProcessor
+public class PointsMinimum extends PointsProcessor implements PPFunction
 {
 	private PointsProcessor source;
 	
@@ -28,5 +28,19 @@ public class PointsMinimum extends PointsProcessor
 			result[i] = min;
 		//
 		return result;
+	}
+
+	@Override
+	public String toString()
+	{	// init
+		StringBuffer result = new StringBuffer();
+		// function
+		result.append("Min");
+		// argument
+		result.append("(");
+		result.append(source.toString());
+		result.append(")");
+		// result
+		return result.toString();
 	}
 }

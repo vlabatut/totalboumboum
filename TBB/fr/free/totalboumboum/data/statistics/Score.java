@@ -135,4 +135,13 @@ public enum Score
 		}
 		return result;
 	}
+	
+	public String stringFormat()
+	{	StringBuffer result = new StringBuffer();
+		String raw = this.toString(); 
+		result.append(raw.substring(0,1));
+		raw = raw.toLowerCase();
+		result.append(raw.substring(1,raw.length()));
+		return result.toString();
+	}
 }

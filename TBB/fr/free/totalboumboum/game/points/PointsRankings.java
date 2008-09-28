@@ -3,9 +3,11 @@ package fr.free.totalboumboum.game.points;
 import java.util.ArrayList;
 import java.util.Iterator;
 
+import sun.font.EAttribute;
+
 import fr.free.totalboumboum.data.statistics.StatisticBase;
 
-public class PointsRankings extends PointsProcessor
+public class PointsRankings extends PointsProcessor implements PPFunction
 {
 	private ArrayList<PointsProcessor> sources = new ArrayList<PointsProcessor>();
 	private boolean inverted;
@@ -13,6 +15,13 @@ public class PointsRankings extends PointsProcessor
 	public PointsRankings(ArrayList<PointsProcessor> sources, boolean inverted)
 	{	this.sources.addAll(sources);
 		this.inverted = inverted;
+	}
+	
+	public boolean isInverted()
+	{	return inverted;	
+	}
+	public ArrayList<PointsProcessor> getSources()
+	{	return sources;		
 	}
 	
 	@Override
@@ -68,4 +77,29 @@ public class PointsRankings extends PointsProcessor
 		}
 		return result;
 	}		
+
+	@Override
+	public String toString()
+	{	// init
+		StringBuffer result = new StringBuffer();
+		// function
+		result.append("Ranks");
+		result.append("(");
+		// inverted
+		if(inverted)
+			result.append("<inverted> ; ");
+		// argument
+		result.append("<");
+		Iterator<PointsProcessor> i = sources.iterator();
+		while (i.hasNext())
+		{	PointsProcessor temp = i.next();
+			result.append(temp.toString());
+			result.append(";");
+		}
+		result.deleteCharAt(result.length()-1);
+		result.append(">");
+		// result
+		result.append(")");
+		return result.toString();
+	}
 }

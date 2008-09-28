@@ -1,10 +1,12 @@
 package fr.free.totalboumboum.game.points;
 
+import java.text.NumberFormat;
 import java.util.ArrayList;
+import java.util.Iterator;
 
 import fr.free.totalboumboum.data.statistics.StatisticBase;
 
-public class PointsRankpoints extends PointsProcessor
+public class PointsRankpoints extends PointsProcessor implements PPFunction
 {
 	/*
 	 * Ranks according to the sources and gives points :
@@ -66,5 +68,46 @@ public class PointsRankpoints extends PointsProcessor
 		}
 
 		return result;
+	}
+
+	@Override
+	public String toString()
+	{	// init
+		StringBuffer result = new StringBuffer();
+		// function
+		result.append("Rankpoints");
+		result.append("(");
+		// parameters
+		result.append("<");
+		if(source.isInverted())
+			result.append("inverted;");
+		if(exaequoShare)
+			result.append("share");
+		result.append("> ; ");
+		// values
+		result.append("<");
+		NumberFormat nf = NumberFormat.getInstance();
+		nf.setMaximumFractionDigits(2);
+		nf.setMinimumFractionDigits(2);
+		for(int i=0;i<values.length;i++)
+		{	result.append("#"+(i+1)+"->");
+			result.append(values[i]);
+			result.append(";");
+		}
+		result.deleteCharAt(result.length()-1);
+		result.append("> ; ");
+		// arguments
+		result.append("<");
+		Iterator<PointsProcessor> i = source.getSources().iterator();
+		while (i.hasNext())
+		{	PointsProcessor temp = i.next();
+			result.append(temp.toString());
+			result.append(";");
+		}
+		result.deleteCharAt(result.length()-1);
+		result.append(">");
+		// result
+		result.append(")");
+		return result.toString();
 	}
 }
