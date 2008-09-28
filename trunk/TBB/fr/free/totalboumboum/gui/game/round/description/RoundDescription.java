@@ -6,6 +6,7 @@ import java.awt.Dimension;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.text.NumberFormat;
+import java.util.HashMap;
 import java.util.Iterator;
 
 import javax.swing.Box;
@@ -17,6 +18,8 @@ import javax.swing.SwingConstants;
 import javax.xml.parsers.ParserConfigurationException;
 
 import org.xml.sax.SAXException;
+
+import java.util.Map.Entry;
 
 import fr.free.totalboumboum.engine.container.level.LevelDescription;
 import fr.free.totalboumboum.engine.container.level.LevelLoader;
@@ -144,9 +147,9 @@ public class RoundDescription extends EntitledDataPanel
 						upPanel.add(miscPanel);
 					}
 					upPanel.add(Box.createHorizontalGlue());
-					// items panel
-					{	JPanel itemsPanel = makeItemsPanel(innerWidth,upHeight);
-						upPanel.add(itemsPanel);
+					// initial items panel
+					{	JPanel initialItemsPanel = makeInitialItemsPanel(innerWidth,upHeight,preview);
+						upPanel.add(initialItemsPanel);
 					}
 					rightPanel.add(upPanel);
 				}
@@ -229,7 +232,7 @@ public class RoundDescription extends EntitledDataPanel
 		return result;
 	}
 
-	private JPanel makeItemsPanel(int width, int height)
+	private JPanel makeInitialItemsPanel(int width, int height, LevelPreview levelPreview)
 	{	// init
 		EntitledSubPanel itemsPanel = new EntitledSubPanel(width,height,getConfiguration());
 		// title
@@ -263,68 +266,31 @@ public class RoundDescription extends EntitledDataPanel
 				lbl.setMaximumSize(new Dimension(Integer.MAX_VALUE,lineHeight));
 			}
 			// data
-			{	Match match = getConfiguration().getCurrentMatch();
-				Iterator<MatchLimit> i = match.getLimits().iterator();
+			{	HashMap<String,BufferedImage> itemsetPreview = levelPreview.getItemsetPreview();
+				HashMap<String,Integer> initialItems = levelPreview.getInitialItems();
+				Iterator<Entry<String,Integer>> i = initialItems.entrySet().iterator();
 				int k = 0;
 				while(i.hasNext() && k<lines)
 				{	// init
-					Limit limit = i.next();
-					String iconName = null;
-					NumberFormat nf = NumberFormat.getInstance();
-					nf.setMinimumFractionDigits(0);
-					String value = null;
-					if(limit instanceof LimitConfrontation)
-					{	LimitConfrontation l = (LimitConfrontation)limit;
-						iconName = GuiTools.GAME_MATCH_LIMIT_CONFRONTATIONS;
-						value = nf.format(l.getLimit());
-					}
-					else if(limit instanceof LimitPoints)
-					{	LimitPoints l = (LimitPoints)limit;
-						iconName = GuiTools.GAME_MATCH_LIMIT_POINTS;
-						value = nf.format(l.getLimit());
-					}
-					else if(limit instanceof LimitTotal)
-					{	LimitTotal l = (LimitTotal)limit;
-						iconName = GuiTools.GAME_MATCH_LIMIT_TOTAL;
-						value = nf.format(l.getLimit());
-					}
-					else if(limit instanceof LimitScore)
-					{	LimitScore l = (LimitScore) limit;
-						switch(l.getScore())
-						{	case BOMBS:
-								iconName = GuiTools.GAME_MATCH_LIMIT_BOMBS;
-								value = nf.format(l.getLimit());
-								break;
-							case DEATHS:
-								iconName = GuiTools.GAME_MATCH_LIMIT_DEATHS;
-								value = nf.format(l.getLimit());
-								break;
-							case ITEMS:
-								iconName = GuiTools.GAME_MATCH_LIMIT_ITEMS;
-								value = nf.format(l.getLimit());
-								break;
-							case KILLS:
-								iconName = GuiTools.GAME_MATCH_LIMIT_KILLS;
-								value = nf.format(l.getLimit());
-								break;
-						}
-					}
-					tooltip = getConfiguration().getLanguage().getText(iconName+"Tooltip");
+					Entry<String,Integer> temp = i.next();
+					String name = temp.getKey();
+					int number = temp.getValue();
+					BufferedImage image = itemsetPreview.get(name);
+					tooltip = name+": "+number;
 					// icon
-					{	BufferedImage icon = GuiTools.getIcon(iconName);
-						JLabel lbl = tablePanel.getLabel(k,0);
+					{	JLabel lbl = tablePanel.getLabel(k,0);
 						lbl.setText(null);
 						lbl.setToolTipText(tooltip);
-						double zoom = lineHeight/(double)icon.getHeight();
-						icon = ImageTools.resize(icon,zoom,true);
-						ImageIcon ic = new ImageIcon(icon);
+						double zoom = lineHeight/(double)image.getHeight();
+						image = ImageTools.resize(image,zoom,true);
+						ImageIcon ic = new ImageIcon(image);
 						lbl.setIcon(ic);
 						Color bg = GuiTools.COLOR_TABLE_HEADER_BACKGROUND;
 						lbl.setBackground(bg);
 					}
 					// value
 					{	JLabel lbl = tablePanel.getLabel(k,1);
-						lbl.setText(value);
+						lbl.setText(Integer.toString(number));
 						lbl.setToolTipText(tooltip);
 						Color bg = GuiTools.COLOR_TABLE_REGULAR_BACKGROUND;
 						lbl.setBackground(bg);

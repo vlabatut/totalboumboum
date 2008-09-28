@@ -61,8 +61,8 @@ public class ExplosionManager
 			owner = sprite;
 		else
 			owner = sprite.getOwner();
-		fire.initGesture();
 		fire.setOwner(owner);
+		fire.initGesture();
 		tile.addSprite(fire);
 		fire.setCurrentPosX(tile.getPosX());
 		fire.setCurrentPosY(tile.getPosY());
@@ -96,7 +96,12 @@ public class ExplosionManager
 				fire.consumeTile(tileTemp);
 			else
 			{	fire.initGesture();
-				fire.setOwner(sprite.getOwner());
+				Sprite owner;
+				if(sprite.getOwner()==null)
+					owner = sprite;
+				else
+					owner = sprite.getOwner();
+				fire.setOwner(owner);
 				tileTemp.addSprite(fire);
 				fire.setCurrentPosX(tileTemp.getPosX());
 				fire.setCurrentPosY(tileTemp.getPosY());

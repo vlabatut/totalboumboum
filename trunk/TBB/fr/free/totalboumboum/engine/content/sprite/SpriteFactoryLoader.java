@@ -50,7 +50,7 @@ public abstract class SpriteFactoryLoader
 	public static BufferedImage previewSprite(String folder) throws ParserConfigurationException, SAXException, IOException, ClassNotFoundException
 	{	Element element = SpriteFactoryLoader.openFile(folder);
 		Element prev = element.getChild(XmlTools.ELT_PREVIEW);
-		String filePath = folder+File.separator+element.getAttribute(XmlTools.ATT_FILE).getValue().trim();
+		String filePath = folder+File.separator+prev.getAttribute(XmlTools.ATT_FILE).getValue().trim();
 		BufferedImage result = ImageTools.loadImage(filePath,null);
 		return result;
 	}

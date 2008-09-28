@@ -16,19 +16,10 @@ import fr.free.totalboumboum.engine.loop.Loop;
 
 
 public class Fire extends Sprite
-{	protected Sprite owner;
-
-	public Fire(Level level)
+{	public Fire(Level level)
 	{	super(level);
 	}	
 
-	public Sprite getOwner()
-	{	return owner;
-	}
-	public void setOwner(Sprite owner)
-	{	this.owner = owner;
-	}
-	
 	public void consumeTile(Tile tile)
 	{	ArrayList<Sprite> sprites = tile.getSprites();
 		Iterator<Sprite> i = sprites.iterator();

@@ -49,7 +49,7 @@ public class LevelPreviewer
 		String instanceFolder = FileTools.getInstancesPath()+File.separator+instanceName;
 
 		// players locations
-		PlayersPreviewer.previewPlayers(instanceFolder,result);
+		PlayersPreviewer.previewPlayers(folder,result);
 
 		// itemset
 		String itemFolder = instanceFolder + File.separator+FileTools.FOLDER_ITEMS;

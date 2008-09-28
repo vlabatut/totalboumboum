@@ -97,6 +97,8 @@ public class HeroEventManager extends EventManager
 				{	Hero temp = (Hero)spr;
 					killedBy = temp.getPlayer().getName();
 				}
+if(killedBy==null)
+	System.out.println();
 			}
 			// stats
 			StatisticAction statAction = StatisticAction.KILL_PLAYER;
