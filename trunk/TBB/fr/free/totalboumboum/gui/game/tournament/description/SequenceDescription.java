@@ -353,7 +353,7 @@ public class SequenceDescription extends TournamentDescription
 			int lines = 4;
 			TablePanel tablePanel = new TablePanel(width,height,columns,lines,false,getConfiguration());
 			tablePanel.setOpaque(false);
-			int lineHeight = (height-margin*(lines+1))/columns;
+			int lineHeight = (height-margin*(lines+1))/lines;
 			// empty
 			for(int line=0;line<lines;line++)
 			{	for(int col=0;col<columns;col=col+2)

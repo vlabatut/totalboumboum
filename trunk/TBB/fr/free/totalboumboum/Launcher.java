@@ -655,4 +655,15 @@ public class Launcher
 	 * - normaliser le calcul des points (discrétisation spéciale ou nombre de points direct), ce qui permettra d'en normaliser la représentation graphique dans la GUI
 	 * - pour painting, possibilité de définir quelles cases peuvent être repeinte, ce qui permet de poser comme limite un %age de cases repeintes
 	 */
+	
+	/*
+	 * reformater les modes de jeu :
+	 * 	- virer les modes de jeu, car ils sont inutiles à part pour paint
+	 * 	- pour paint il suffit de définir des bombes spéciales qui peignent le sol
+	 *  - pour les autres, tout peut se faire avec le système de limites de match
+	 *  - pour survival, il suffit d'utiliser une limite de type last-standing
+	 *  - on rajoute également le système de bonus pour une limite donnée
+	 *  - intérêt : tout ça permet d'implémenter le bonus à celui qui tue tout le monde en survival, par opposition à une victoire temporelle qui rapporterait donc moins de points
+	 *  - LA NOTION DE PLAYMODE EST A SUPPRIMER 
+	 */
 }

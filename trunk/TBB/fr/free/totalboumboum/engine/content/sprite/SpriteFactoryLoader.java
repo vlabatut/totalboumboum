@@ -1,5 +1,6 @@
 package fr.free.totalboumboum.engine.content.sprite;
 
+import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 
@@ -15,13 +16,14 @@ import fr.free.totalboumboum.engine.content.feature.explosion.Explosion;
 import fr.free.totalboumboum.engine.content.feature.explosion.ExplosionLoader;
 import fr.free.totalboumboum.engine.loop.Loop;
 import fr.free.totalboumboum.tools.FileTools;
+import fr.free.totalboumboum.tools.ImageTools;
 import fr.free.totalboumboum.tools.XmlTools;
 
 
 
 public abstract class SpriteFactoryLoader
 {	
-	protected static Element openFile(String folderPath) throws ParserConfigurationException, SAXException, IOException, ClassNotFoundException
+	public static Element openFile(String folderPath) throws ParserConfigurationException, SAXException, IOException, ClassNotFoundException
 	{	// init
 		String schemaFolder = FileTools.getSchemasPath();
 		File schemaFile,dataFile;
@@ -44,10 +46,12 @@ public abstract class SpriteFactoryLoader
 		}
 		result.setExplosion(explosion);
 	}
+	
+	public static BufferedImage previewSprite(String folder) throws ParserConfigurationException, SAXException, IOException, ClassNotFoundException
+	{	Element element = SpriteFactoryLoader.openFile(folder);
+		Element prev = element.getChild(XmlTools.ELT_PREVIEW);
+		String filePath = folder+File.separator+element.getAttribute(XmlTools.ATT_FILE).getValue().trim();
+		BufferedImage result = ImageTools.loadImage(filePath,null);
+		return result;
+	}
 }
-
-/**
- * TODO 
- * pb : besoin d'identifier l'instance, mais le level (thème?) n'a pas encore été affecté à la loop...
- * solution : initialiser l'instance en premier ? 
- */

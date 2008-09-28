@@ -36,21 +36,26 @@ public class EntitledSubPanel extends JPanel
 		setMaximumSize(dim);
 
 		// content
+		int margin = GuiTools.getSize(GuiTools.GAME_RESULTS_MARGIN_SIZE);
+		int contentWidth = width - 2*margin;
+		int titleHeight = GuiTools.getSize(GuiTools.GAME_RESULTS_LABEL_HEADER_HEIGHT);
+		int dataHeight = height - 3*margin - titleHeight;
+		
 		add(Box.createVerticalGlue());
 		// title
 		{	String txt = null;
 			title = new JLabel(txt);
 			Font font = configuration.getFont().deriveFont((float)GuiTools.getSize(GuiTools.GAME_RESULTS_HEADER_FONT_SIZE));
 			title.setFont(font);
-			String text = configuration.getLanguage().getText(GuiTools.GAME_MATCH_HEADER_NOTES);
+			String text = null;
 			title.setText(text);
-			String tooltip = configuration.getLanguage().getText(GuiTools.GAME_MATCH_HEADER_NOTES+"Tooltip");
+			String tooltip = null;
 			title.setToolTipText(tooltip);
 			title.setHorizontalAlignment(SwingConstants.CENTER);
 			title.setForeground(GuiTools.COLOR_TABLE_HEADER_FOREGROUND);
 			title.setBackground(GuiTools.COLOR_TABLE_HEADER_BACKGROUND);
 			title.setOpaque(true);
-			dim = new Dimension(GuiTools.getSize(GuiTools.GAME_DESCRIPTION_LABEL_LINE_WIDTH),GuiTools.getSize(GuiTools.GAME_RESULTS_LABEL_HEADER_HEIGHT));
+			dim = new Dimension(contentWidth,titleHeight);
 			title.setPreferredSize(dim);
 			title.setMinimumSize(dim);
 			title.setMaximumSize(dim);
@@ -62,7 +67,7 @@ public class EntitledSubPanel extends JPanel
 		// data
 		{	data = new JPanel();
 			data.setBackground(GuiTools.COLOR_TABLE_NEUTRAL_BACKGROUND);
-			dim = new Dimension(GuiTools.getSize(GuiTools.GAME_DESCRIPTION_LABEL_LINE_WIDTH),GuiTools.getSize(GuiTools.GAME_DESCRIPTION_LABEL_TEXT_HEIGHT));
+			dim = new Dimension(contentWidth,dataHeight);
 			data.setPreferredSize(dim);
 			data.setMinimumSize(dim);
 			data.setMaximumSize(dim);

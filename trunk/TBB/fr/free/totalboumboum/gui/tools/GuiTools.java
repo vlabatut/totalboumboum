@@ -148,12 +148,14 @@ public class GuiTools
 	public static final String GAME_ROUND_HEADER_FRAGS = "GameRoundHeaderFrags";
 	public static final String GAME_ROUND_HEADER_PAINTINGS = "GameRoundHeaderPaintings";
 	public static final String GAME_ROUND_HEADER_TIME = "GameRoundHeaderTime";
+	public static final String GAME_ROUND_HEADER_LIMITS = "GameRoundHeaderLimits";	
 	public static final String GAME_ROUND_LIMIT_POINTS = "GameRoundLimitPoints";
 	public static final String GAME_ROUND_LIMIT_BOMBS = "GameRoundLimitBombs";
 	public static final String GAME_ROUND_LIMIT_DEATHS = "GameRoundLimitDeaths";
 	public static final String GAME_ROUND_LIMIT_ITEMS = "GameRoundLimitItems";
 	public static final String GAME_ROUND_LIMIT_KILLS = "GameRoundLimitKills";
 	public static final String GAME_ROUND_LIMIT_TIME = "GameRoundLimitTime";
+	public static final String GAME_ROUND_HEADER_INITIAL_ITEMS = "GameRoundHeaderInitialItems";	
 	
 	
 	

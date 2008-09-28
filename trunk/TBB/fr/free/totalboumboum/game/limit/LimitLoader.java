@@ -13,9 +13,9 @@ import org.jdom.Element;
 import org.xml.sax.SAXException;
 
 import fr.free.totalboumboum.data.statistics.Score;
+import fr.free.totalboumboum.engine.container.level.LevelDescription;
 import fr.free.totalboumboum.game.points.PointsProcessor;
 import fr.free.totalboumboum.game.points.PointsProcessorLoader;
-import fr.free.totalboumboum.game.round.LevelDescription;
 import fr.free.totalboumboum.tools.FileTools;
 import fr.free.totalboumboum.tools.XmlTools;
 

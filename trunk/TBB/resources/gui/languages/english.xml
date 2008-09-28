@@ -321,5 +321,11 @@
 	<!--  -->
 	<text name="GameRoundHeaderRank" value="#" />
 	<text name="GameRoundHeaderRankTooltip" value="Rank of the player in the match before this round" />
+	<!--  -->
+	<text name="GameRoundHeaderLimits" value="Limits" />
+	<text name="GameRoundHeaderLimitsTooltip" value="Information about what may cause the round to end" />
+	<!--  -->
+	<text name="GameRoundHeaderInitialItems" value="Items" />
+	<text name="GameRoundHeaderInitialItemsTooltip" value="Items given to each player at the begining of this round" />
 
 </language>
