@@ -20,6 +20,7 @@ import org.xml.sax.SAXException;
 
 import fr.free.totalboumboum.engine.container.level.LevelDescription;
 import fr.free.totalboumboum.engine.container.level.LevelLoader;
+import fr.free.totalboumboum.engine.container.level.LevelPreview;
 import fr.free.totalboumboum.engine.container.level.LevelPreviewer;
 import fr.free.totalboumboum.game.limit.Limit;
 import fr.free.totalboumboum.game.limit.LimitConfrontation;
@@ -54,7 +55,25 @@ public class RoundDescription extends EntitledDataPanel
 		setTitle(txt);
 	
 		// data
-		{	JPanel infoPanel = new JPanel();
+		{	Round round = getConfiguration().getCurrentRound();
+			LevelDescription levelDescription = round.getLevelDescription();
+			LevelPreview preview = null;
+			try
+			{	preview = LevelPreviewer.previewLevel(levelDescription.getPath());
+			}
+			catch (ParserConfigurationException e)
+			{	e.printStackTrace();
+			}
+			catch (SAXException e)
+			{	e.printStackTrace();
+			}
+			catch (IOException e)
+			{	e.printStackTrace();
+			}
+			catch (ClassNotFoundException e)
+			{	e.printStackTrace();
+			}
+			JPanel infoPanel = new JPanel();
 			{	BoxLayout layout = new BoxLayout(infoPanel,BoxLayout.LINE_AXIS); 
 				infoPanel.setLayout(layout);
 			}
@@ -80,7 +99,7 @@ public class RoundDescription extends EntitledDataPanel
 				leftPanel.setMaximumSize(dim);
 				// preview label
 				{	int innerHeight = leftWidth;
-					JLabel previewLabel = makePreviewLabel(leftWidth,innerHeight);
+					JLabel previewLabel = makePreviewLabel(leftWidth,innerHeight,preview);
 					previewLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
 					leftPanel.add(previewLabel);
 				}
@@ -163,7 +182,7 @@ public class RoundDescription extends EntitledDataPanel
 		}
 	}
 
-	private JLabel makePreviewLabel(int width, int height)
+	private JLabel makePreviewLabel(int width, int height, LevelPreview preview)
 	{	// init
 		String txt = "No preview";
 		JLabel result = new JLabel(txt);
@@ -178,21 +197,7 @@ public class RoundDescription extends EntitledDataPanel
 		result.setForeground(GuiTools.COLOR_TABLE_HEADER_FOREGROUND);
 		result.setOpaque(true);
 		// image
-		Round round = getConfiguration().getCurrentRound();
-		LevelDescription levelDescription = round.getLevelDescription();
-		BufferedImage img = null;
-		try
-		{	img = LevelPreviewer.previewLevel(levelDescription.getPath());
-		}
-		catch (ParserConfigurationException e)
-		{	//e.printStackTrace();
-		}
-		catch (SAXException e)
-		{	//e.printStackTrace();
-		}
-		catch (IOException e)
-		{	//e.printStackTrace();
-		}
+		BufferedImage img = preview.getVisualPreview(); 
 		if(img!=null)
 		{	float zoomX = width/(float)img.getWidth();
 			float zoomY = height/(float)img.getHeight();
