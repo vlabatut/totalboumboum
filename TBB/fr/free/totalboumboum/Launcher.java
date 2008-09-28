@@ -618,6 +618,9 @@ public class Launcher
 	 * - les capacités initiales ont été transformées en items initiaux
 	 * - les levels contiennent maintenant un certain nombre d'items initiaux, donnés à chaque joueur au début du round
 	 * - modification du système de points, de manière à considérer à part un classement auquel on associe les points finaux
+	 * - système permettant d'afficher le calcul des points sous forme textuelle (sera notamment utilisé par la GUI)
+	 * 
+	 * + alpha.42
 	 * 
 	 * *******************************************************
 	 * *********************** A FAIRE ***********************
