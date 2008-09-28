@@ -1,21 +1,46 @@
 package fr.free.totalboumboum.gui.game.round.description;
 
 import java.awt.Color;
+import java.awt.Component;
 import java.awt.Dimension;
+import java.awt.image.BufferedImage;
+import java.io.IOException;
+import java.text.NumberFormat;
+import java.util.Iterator;
 
 import javax.swing.Box;
 import javax.swing.BoxLayout;
+import javax.swing.ImageIcon;
 import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.SwingConstants;
+import javax.xml.parsers.ParserConfigurationException;
 
+import org.xml.sax.SAXException;
+
+import fr.free.totalboumboum.engine.container.level.LevelDescription;
+import fr.free.totalboumboum.engine.container.level.LevelLoader;
+import fr.free.totalboumboum.engine.container.level.LevelPreviewer;
+import fr.free.totalboumboum.game.limit.Limit;
+import fr.free.totalboumboum.game.limit.LimitConfrontation;
+import fr.free.totalboumboum.game.limit.LimitPoints;
+import fr.free.totalboumboum.game.limit.LimitScore;
+import fr.free.totalboumboum.game.limit.LimitTotal;
+import fr.free.totalboumboum.game.limit.MatchLimit;
+import fr.free.totalboumboum.game.match.Match;
+import fr.free.totalboumboum.game.round.Round;
 import fr.free.totalboumboum.gui.generic.EntitledDataPanel;
+import fr.free.totalboumboum.gui.generic.EntitledSubPanel;
 import fr.free.totalboumboum.gui.generic.InnerDataPanel;
 import fr.free.totalboumboum.gui.generic.MenuContainer;
 import fr.free.totalboumboum.gui.generic.MenuPanel;
 import fr.free.totalboumboum.gui.generic.SimpleMenuPanel;
 import fr.free.totalboumboum.gui.generic.SplitMenuPanel;
+import fr.free.totalboumboum.gui.generic.TablePanel;
 import fr.free.totalboumboum.gui.menus.options.OptionsMenu;
 import fr.free.totalboumboum.gui.menus.tournament.TournamentMain;
 import fr.free.totalboumboum.gui.tools.GuiTools;
+import fr.free.totalboumboum.tools.ImageTools;
 
 public class RoundDescription extends EntitledDataPanel
 {	
@@ -28,6 +53,400 @@ public class RoundDescription extends EntitledDataPanel
 		String txt = getConfiguration().getLanguage().getText(GuiTools.GAME_ROUND_TITLE_DESCRIPTION);
 		setTitle(txt);
 	
+		// data
+		{	JPanel infoPanel = new JPanel();
+			{	BoxLayout layout = new BoxLayout(infoPanel,BoxLayout.LINE_AXIS); 
+				infoPanel.setLayout(layout);
+			}
+			int width = GuiTools.getSize(GuiTools.GAME_DATA_PANEL_WIDTH);
+			int height = GuiTools.getSize(GuiTools.GAME_DATA_PANEL_HEIGHT);
+			int margin = GuiTools.getSize(GuiTools.GAME_DATA_MARGIN_SIZE);
+			int leftWidth = (int)(width*0.4); 
+			int rightWidth = width - leftWidth - margin; 
+			Dimension dim = new Dimension(width,height);
+			infoPanel.setPreferredSize(dim);
+			infoPanel.setMinimumSize(dim);
+			infoPanel.setMaximumSize(dim);
+			infoPanel.setOpaque(false);
+			// left panel
+			{	JPanel leftPanel = new JPanel();
+				{	BoxLayout layout = new BoxLayout(leftPanel,BoxLayout.PAGE_AXIS); 
+					leftPanel.setLayout(layout);
+				}
+				leftPanel.setOpaque(false);
+				dim = new Dimension(leftWidth,height);
+				leftPanel.setPreferredSize(dim);
+				leftPanel.setMinimumSize(dim);
+				leftPanel.setMaximumSize(dim);
+				// preview label
+				{	int innerHeight = leftWidth;
+					JLabel previewLabel = makePreviewLabel(leftWidth,innerHeight);
+					previewLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
+					leftPanel.add(previewLabel);
+				}
+				//
+				leftPanel.add(Box.createVerticalGlue());
+				// itemset panel
+				{	int innerHeight = height - leftWidth - margin;
+					JPanel itemsetPanel = makeItemsetPanel(leftWidth,innerHeight);
+					itemsetPanel.setAlignmentX(Component.CENTER_ALIGNMENT);
+					leftPanel.add(itemsetPanel);
+				}
+				//
+				infoPanel.add(leftPanel);
+			}
+			//
+			infoPanel.add(Box.createHorizontalGlue());
+			// right panel
+			{	JPanel rightPanel = new JPanel();
+				{	BoxLayout layout = new BoxLayout(rightPanel,BoxLayout.PAGE_AXIS); 
+					rightPanel.setLayout(layout);
+				}
+				rightPanel.setOpaque(false);
+				dim = new Dimension(rightWidth,height);
+				rightPanel.setPreferredSize(dim);
+				rightPanel.setMinimumSize(dim);
+				rightPanel.setMaximumSize(dim);
+				int upHeight = (height - margin)/2;
+				int downHeight = height - upHeight - margin;
+				// up panel
+				{	JPanel upPanel = new JPanel();
+					{	BoxLayout layout = new BoxLayout(upPanel,BoxLayout.LINE_AXIS); 
+						upPanel.setLayout(layout);
+					}
+					upPanel.setOpaque(false);
+					dim = new Dimension(rightWidth,upHeight);
+					upPanel.setPreferredSize(dim);
+					upPanel.setMinimumSize(dim);
+					upPanel.setMaximumSize(dim);
+					int innerWidth = (rightWidth - margin)/2;
+					// misc panel
+					{	JPanel miscPanel = makeMiscPanel(innerWidth,upHeight);
+						upPanel.add(miscPanel);
+					}
+					upPanel.add(Box.createHorizontalGlue());
+					// items panel
+					{	JPanel itemsPanel = makeItemsPanel(innerWidth,upHeight);
+						upPanel.add(itemsPanel);
+					}
+					rightPanel.add(upPanel);
+				}
+				//
+				rightPanel.add(Box.createVerticalGlue());
+				// down panel
+				{	JPanel downPanel = new JPanel();
+					{	BoxLayout layout = new BoxLayout(downPanel,BoxLayout.LINE_AXIS); 
+						downPanel.setLayout(layout);
+					}
+					downPanel.setOpaque(false);
+					dim = new Dimension(rightWidth,upHeight);
+					downPanel.setPreferredSize(dim);
+					downPanel.setMinimumSize(dim);
+					downPanel.setMaximumSize(dim);
+					int innerWidth = (rightWidth - margin)/2;
+					// points panel
+					{	JPanel pointsPanel = makePointsPanel(innerWidth,downHeight);
+						downPanel.add(pointsPanel);
+					}
+					downPanel.add(Box.createHorizontalGlue());
+					// limits panel
+					{	JPanel limitsPanel = makeLimitsPanel(innerWidth,downHeight);
+						downPanel.add(limitsPanel);
+					}
+					rightPanel.add(downPanel);
+				}
+				//
+				infoPanel.add(rightPanel);
+			}
+			//
+			setDataPanel(infoPanel);
+		}
+	}
+
+	private JLabel makePreviewLabel(int width, int height)
+	{	// init
+		String txt = "No preview";
+		JLabel result = new JLabel(txt);
+		Dimension dim = new Dimension(width,height);
+		result.setPreferredSize(dim);
+		result.setMinimumSize(dim);
+		result.setMaximumSize(dim);
+		result.setHorizontalAlignment(SwingConstants.CENTER);
+		result.setVerticalAlignment(SwingConstants.CENTER);
+		result.setFont(getConfiguration().getFont().deriveFont((float)GuiTools.getSize(GuiTools.GAME_RESULTS_HEADER_FONT_SIZE)));
+		result.setBackground(GuiTools.COLOR_TABLE_HEADER_BACKGROUND);
+		result.setForeground(GuiTools.COLOR_TABLE_HEADER_FOREGROUND);
+		result.setOpaque(true);
+		// image
+		Round round = getConfiguration().getCurrentRound();
+		LevelDescription levelDescription = round.getLevelDescription();
+		BufferedImage img = null;
+		try
+		{	img = LevelPreviewer.previewLevel(levelDescription.getPath());
+		}
+		catch (ParserConfigurationException e)
+		{	//e.printStackTrace();
+		}
+		catch (SAXException e)
+		{	//e.printStackTrace();
+		}
+		catch (IOException e)
+		{	//e.printStackTrace();
+		}
+		if(img!=null)
+		{	float zoomX = width/(float)img.getWidth();
+			float zoomY = height/(float)img.getHeight();
+			float zoom = Math.min(zoomX,zoomY);
+			img = ImageTools.resize(img,zoom,true);
+			ImageIcon icon = new ImageIcon(img);
+			result.setIcon(icon);
+			result.setText(null);
+		}
+		//
+		return result;
+	}
+	
+	private JPanel makeItemsetPanel(int width, int height)
+	{	JPanel result = new JPanel();
+		Dimension dim = new Dimension(width,height);
+		result.setPreferredSize(dim);
+		result.setMinimumSize(dim);
+		result.setMaximumSize(dim);
+		return result;
+	}
+
+	private JPanel makeMiscPanel(int width, int height)
+	{	JPanel result = new JPanel();
+		Dimension dim = new Dimension(width,height);
+		result.setPreferredSize(dim);
+		result.setMinimumSize(dim);
+		result.setMaximumSize(dim);
+		return result;
+	}
+
+	private JPanel makeItemsPanel(int width, int height)
+	{	// init
+		EntitledSubPanel itemsPanel = new EntitledSubPanel(width,height,getConfiguration());
+		// title
+		String text = getConfiguration().getLanguage().getText(GuiTools.GAME_ROUND_HEADER_INITIAL_ITEMS);
+		String tooltip = getConfiguration().getLanguage().getText(GuiTools.GAME_ROUND_HEADER_INITIAL_ITEMS+"Tooltip");
+		itemsPanel.setTitle(text,tooltip);
+		// table
+		{	// init
+			int margin = GuiTools.getSize(GuiTools.GAME_RESULTS_MARGIN_SIZE);
+			itemsPanel.remove(0);
+			itemsPanel.add(Box.createRigidArea(new Dimension(margin,margin)),0);
+			int titleHeight = itemsPanel.getComponent(1).getPreferredSize().height;
+			height = height-margin-titleHeight;
+			int columns = 2;
+			int lines = 8;
+			TablePanel tablePanel = new TablePanel(width,height,columns,lines,false,getConfiguration());
+			tablePanel.setOpaque(false);
+			int lineHeight = (height-margin*(lines+1))/lines;
+			// empty
+			for(int line=0;line<lines;line++)
+			{	// icon
+				JLabel lbl = tablePanel.getLabel(line,0);
+				lbl.setText(null);
+				lbl.setPreferredSize(new Dimension(lineHeight,lineHeight));
+				lbl.setMaximumSize(new Dimension(lineHeight,lineHeight));
+				lbl.setMinimumSize(new Dimension(lineHeight,lineHeight));
+				// text
+				lbl = tablePanel.getLabel(line,1);
+				lbl.setText(null);
+				lbl.setMinimumSize(new Dimension(lineHeight,lineHeight));
+				lbl.setMaximumSize(new Dimension(Integer.MAX_VALUE,lineHeight));
+			}
+			// data
+			{	Match match = getConfiguration().getCurrentMatch();
+				Iterator<MatchLimit> i = match.getLimits().iterator();
+				int k = 0;
+				while(i.hasNext() && k<lines)
+				{	// init
+					Limit limit = i.next();
+					String iconName = null;
+					NumberFormat nf = NumberFormat.getInstance();
+					nf.setMinimumFractionDigits(0);
+					String value = null;
+					if(limit instanceof LimitConfrontation)
+					{	LimitConfrontation l = (LimitConfrontation)limit;
+						iconName = GuiTools.GAME_MATCH_LIMIT_CONFRONTATIONS;
+						value = nf.format(l.getLimit());
+					}
+					else if(limit instanceof LimitPoints)
+					{	LimitPoints l = (LimitPoints)limit;
+						iconName = GuiTools.GAME_MATCH_LIMIT_POINTS;
+						value = nf.format(l.getLimit());
+					}
+					else if(limit instanceof LimitTotal)
+					{	LimitTotal l = (LimitTotal)limit;
+						iconName = GuiTools.GAME_MATCH_LIMIT_TOTAL;
+						value = nf.format(l.getLimit());
+					}
+					else if(limit instanceof LimitScore)
+					{	LimitScore l = (LimitScore) limit;
+						switch(l.getScore())
+						{	case BOMBS:
+								iconName = GuiTools.GAME_MATCH_LIMIT_BOMBS;
+								value = nf.format(l.getLimit());
+								break;
+							case DEATHS:
+								iconName = GuiTools.GAME_MATCH_LIMIT_DEATHS;
+								value = nf.format(l.getLimit());
+								break;
+							case ITEMS:
+								iconName = GuiTools.GAME_MATCH_LIMIT_ITEMS;
+								value = nf.format(l.getLimit());
+								break;
+							case KILLS:
+								iconName = GuiTools.GAME_MATCH_LIMIT_KILLS;
+								value = nf.format(l.getLimit());
+								break;
+						}
+					}
+					tooltip = getConfiguration().getLanguage().getText(iconName+"Tooltip");
+					// icon
+					{	BufferedImage icon = GuiTools.getIcon(iconName);
+						JLabel lbl = tablePanel.getLabel(k,0);
+						lbl.setText(null);
+						lbl.setToolTipText(tooltip);
+						double zoom = lineHeight/(double)icon.getHeight();
+						icon = ImageTools.resize(icon,zoom,true);
+						ImageIcon ic = new ImageIcon(icon);
+						lbl.setIcon(ic);
+						Color bg = GuiTools.COLOR_TABLE_HEADER_BACKGROUND;
+						lbl.setBackground(bg);
+					}
+					// value
+					{	JLabel lbl = tablePanel.getLabel(k,1);
+						lbl.setText(value);
+						lbl.setToolTipText(tooltip);
+						Color bg = GuiTools.COLOR_TABLE_REGULAR_BACKGROUND;
+						lbl.setBackground(bg);
+					}	
+					k++;
+				}
+			}
+			itemsPanel.setDataPanel(tablePanel);
+		}
+		return itemsPanel;
+	}
+
+	private JPanel makePointsPanel(int width, int height)
+	{	JPanel result = new JPanel();
+		Dimension dim = new Dimension(width,height);
+		result.setPreferredSize(dim);
+		result.setMinimumSize(dim);
+		result.setMaximumSize(dim);
+		return result;
+	}
+
+	private JPanel makeLimitsPanel(int width, int height)
+	{	// init
+		EntitledSubPanel limitsPanel = new EntitledSubPanel(width,height,getConfiguration());
+		// title
+		String text = getConfiguration().getLanguage().getText(GuiTools.GAME_ROUND_HEADER_LIMITS);
+		String tooltip = getConfiguration().getLanguage().getText(GuiTools.GAME_ROUND_HEADER_LIMITS+"Tooltip");
+		limitsPanel.setTitle(text,tooltip);
+		// table
+		{	// init
+			int margin = GuiTools.getSize(GuiTools.GAME_RESULTS_MARGIN_SIZE);
+			limitsPanel.remove(0);
+			limitsPanel.add(Box.createRigidArea(new Dimension(margin,margin)),0);
+			int titleHeight = limitsPanel.getComponent(1).getPreferredSize().height;
+			height = height-margin-titleHeight;
+			int columns = 2;
+			int lines = 8;
+			TablePanel tablePanel = new TablePanel(width,height,columns,lines,false,getConfiguration());
+			tablePanel.setOpaque(false);
+			int lineHeight = (height-margin*(lines+1))/lines;
+			// empty
+			for(int line=0;line<lines;line++)
+			{	// icon
+				JLabel lbl = tablePanel.getLabel(line,0);
+				lbl.setText(null);
+				lbl.setPreferredSize(new Dimension(lineHeight,lineHeight));
+				lbl.setMaximumSize(new Dimension(lineHeight,lineHeight));
+				lbl.setMinimumSize(new Dimension(lineHeight,lineHeight));
+				// text
+				lbl = tablePanel.getLabel(line,1);
+				lbl.setText(null);
+				lbl.setMinimumSize(new Dimension(lineHeight,lineHeight));
+				lbl.setMaximumSize(new Dimension(Integer.MAX_VALUE,lineHeight));
+			}
+			// data
+			{	Match match = getConfiguration().getCurrentMatch();
+				Iterator<MatchLimit> i = match.getLimits().iterator();
+				int k = 0;
+				while(i.hasNext() && k<lines)
+				{	// init
+					Limit limit = i.next();
+					String iconName = null;
+					NumberFormat nf = NumberFormat.getInstance();
+					nf.setMinimumFractionDigits(0);
+					String value = null;
+					if(limit instanceof LimitConfrontation)
+					{	LimitConfrontation l = (LimitConfrontation)limit;
+						iconName = GuiTools.GAME_MATCH_LIMIT_CONFRONTATIONS;
+						value = nf.format(l.getLimit());
+					}
+					else if(limit instanceof LimitPoints)
+					{	LimitPoints l = (LimitPoints)limit;
+						iconName = GuiTools.GAME_MATCH_LIMIT_POINTS;
+						value = nf.format(l.getLimit());
+					}
+					else if(limit instanceof LimitTotal)
+					{	LimitTotal l = (LimitTotal)limit;
+						iconName = GuiTools.GAME_MATCH_LIMIT_TOTAL;
+						value = nf.format(l.getLimit());
+					}
+					else if(limit instanceof LimitScore)
+					{	LimitScore l = (LimitScore) limit;
+						switch(l.getScore())
+						{	case BOMBS:
+								iconName = GuiTools.GAME_MATCH_LIMIT_BOMBS;
+								value = nf.format(l.getLimit());
+								break;
+							case DEATHS:
+								iconName = GuiTools.GAME_MATCH_LIMIT_DEATHS;
+								value = nf.format(l.getLimit());
+								break;
+							case ITEMS:
+								iconName = GuiTools.GAME_MATCH_LIMIT_ITEMS;
+								value = nf.format(l.getLimit());
+								break;
+							case KILLS:
+								iconName = GuiTools.GAME_MATCH_LIMIT_KILLS;
+								value = nf.format(l.getLimit());
+								break;
+						}
+					}
+					tooltip = getConfiguration().getLanguage().getText(iconName+"Tooltip");
+					// icon
+					{	BufferedImage icon = GuiTools.getIcon(iconName);
+						JLabel lbl = tablePanel.getLabel(k,0);
+						lbl.setText(null);
+						lbl.setToolTipText(tooltip);
+						double zoom = lineHeight/(double)icon.getHeight();
+						icon = ImageTools.resize(icon,zoom,true);
+						ImageIcon ic = new ImageIcon(icon);
+						lbl.setIcon(ic);
+						Color bg = GuiTools.COLOR_TABLE_HEADER_BACKGROUND;
+						lbl.setBackground(bg);
+					}
+					// value
+					{	JLabel lbl = tablePanel.getLabel(k,1);
+						lbl.setText(value);
+						lbl.setToolTipText(tooltip);
+						Color bg = GuiTools.COLOR_TABLE_REGULAR_BACKGROUND;
+						lbl.setBackground(bg);
+					}	
+					k++;
+				}
+			}
+			limitsPanel.setDataPanel(tablePanel);
+		}
+		return limitsPanel;
 	}
 
 	@Override

@@ -1,6 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema">
 
+	<xsd:complexType name="tPreview">
+		<xsd:attribute name="file" type="xsd:string" use="required" />
+	</xsd:complexType>
+
 	<xsd:complexType name="tDisplay">
 		<xsd:attribute name="forceAll" type="xsd:boolean" use="required" />
 		<xsd:attribute name="maximize" type="xsd:boolean" use="required" />
@@ -31,6 +35,7 @@
 
 	<xsd:complexType name="tLevel">
 		<xsd:sequence>
+			<xsd:element name="preview" type="tPreview" />
 			<xsd:element name="instance" type="tInstance" />
 			<xsd:element name="theme" type="tTheme" />
 			<xsd:element name="globalDimension" type="tGlobalDimension" />

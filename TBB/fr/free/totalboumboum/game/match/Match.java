@@ -16,11 +16,11 @@ import fr.free.totalboumboum.data.configuration.Configuration;
 import fr.free.totalboumboum.data.profile.Profile;
 import fr.free.totalboumboum.data.statistics.StatisticMatch;
 import fr.free.totalboumboum.data.statistics.StatisticRound;
+import fr.free.totalboumboum.engine.container.level.LevelDescription;
 import fr.free.totalboumboum.game.limit.Limits;
 import fr.free.totalboumboum.game.limit.MatchLimit;
 import fr.free.totalboumboum.game.points.PointsTotal;
 import fr.free.totalboumboum.game.points.PointsProcessor;
-import fr.free.totalboumboum.game.round.LevelDescription;
 import fr.free.totalboumboum.game.round.Round;
 import fr.free.totalboumboum.game.tournament.AbstractTournament;
 

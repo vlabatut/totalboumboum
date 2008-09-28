@@ -114,6 +114,7 @@ public class XmlTools
 	public static final String ELT_POINT = "point";
 	public static final String ELT_POINTS = "points";
 	public static final String ELT_PORTRAIT = "portrait";
+	public static final String ELT_PREVIEW = "preview";
 	public static final String ELT_PROFILE = "profile";
 	public static final String ELT_PROFILES = "profiles";
 	public static final String ELT_PROPERTIES = "properties";
