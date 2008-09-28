@@ -69,24 +69,10 @@ import fr.free.totalboumboum.tools.XmlTools;
 
 
 
-public class PlayersLoader
+public class PlayersPreviewer
 {	
-    public static void loadPlayers(String folder, Level result) throws ParserConfigurationException, SAXException, IOException
-	{	
-    	/* 
-		 * NOTE tester ici si le level est suffisamment grand
-		 * NOTE faut qu'il y ait au moins une config, à définir dans XSD
-		 * attention, le numéro des joueurs ne doit pas dépasser maxPlayer-1
-		 * NOTE il faut tester qu'il y a bien autant de locations de que de players indiqué dans la situation
-		 */
-
-		/*
-		 * si le level ne supporte pas explicitement le nbre n de joueurs voulu,
-		 * on prend la config pour la taille au dessus, et on utilise les n premières
-		 * positions définies
-		 */
-
-    	// init
+    public static void previewPlayers(String folder, LevelPreview result) throws ParserConfigurationException, SAXException, IOException
+	{	// init
 		Element root;
 		String schemaFolder = FileTools.getSchemasPath();
 		String individualFolder = folder;
@@ -96,77 +82,38 @@ public class PlayersLoader
 		schemaFile = new File(schemaFolder+File.separator+FileTools.FILE_PLAYERS+FileTools.EXTENSION_SCHEMA);
 		root = XmlTools.getRootFromFile(dataFile,schemaFile);
 		// reading
-		loadPlayersElement(root,result);
+		previewPlayersElement(root,result);
     }
     
-    private static void loadPlayersElement(Element root, Level result)
+    private static void previewPlayersElement(Element root, LevelPreview result)
     {	// init
     	Element element;
-    	// locations
-    	element = root.getChild(XmlTools.ELT_LOCATIONS);
-    	loadLocationsElement(element,result);
     	// items
     	element = root.getChild(XmlTools.ELT_ITEMS);
-    	loadItemsElement(element,result);
+    	previewItemsElement(element,result);
     }
     
-    private static void loadLocationsElement(Element root, Level result)
-    {	HashMap<Integer, PlayerLocation[]> locations = new HashMap<Integer, PlayerLocation[]>();
-		List<Element> elements = root.getChildren(XmlTools.ELT_CASE);
-		Iterator<Element> i = elements.iterator();
-		while(i.hasNext())
-		{	Element temp = i.next();
-			loadCaseElement(temp,locations);
-		}
-		result.setPlayersLocations(locations);
-    }
-    
-    private static void loadCaseElement(Element root, HashMap<Integer,PlayerLocation[]> result)
-    {	String valStr = root.getAttribute(XmlTools.ATT_PLAYERS).getValue().trim();
-		int value = Integer.valueOf(valStr);
-		PlayerLocation[] locations = new PlayerLocation[value];
-		List<Element> elements = root.getChildren(XmlTools.ELT_LOCATION);
-		Iterator<Element> i = elements.iterator();
-		int index = 0;
-		while(i.hasNext())
-		{	Element temp = i.next();
-			PlayerLocation pl = new PlayerLocation();
-			loadLocationElement(temp,pl);
-			locations[index] = pl;
-			index++;
-		}
-		result.put(value,locations);
-    }
-    	
-    private static void loadLocationElement(Element root, PlayerLocation result)
-    {	String str = root.getAttribute(XmlTools.ATT_PLAYER).getValue().trim();
-		int number = Integer.valueOf(str);
-		result.setNumber(number);
-		str = root.getAttribute(XmlTools.ATT_COL).getValue().trim();
-		int col = Integer.valueOf(str);
-		result.setCol(col);
-		str = root.getAttribute(XmlTools.ATT_LINE).getValue().trim();
-		int line = Integer.valueOf(str);
-		result.setLine(line);
-    }
-    
-    private static void loadItemsElement(Element root, Level result)
+    private static void previewItemsElement(Element root, LevelPreview result)
     {	ArrayList<String> items = new ArrayList<String>();
     	List<Element> elements = root.getChildren(XmlTools.ELT_ITEM);
 		Iterator<Element> i = elements.iterator();
 		while(i.hasNext())
 		{	Element temp = i.next();
-			loadItemElement(temp,items);
+			PlayersLoader.loadItemElement(temp,items);
 		}
-		result.setPlayersItems(items);
+		//
+		HashMap<String,Integer> initialItems = new HashMap<String, Integer>();
+		Iterator<String> j = items.iterator();
+		while(i.hasNext())
+		{	String temp = j.next();
+			if(initialItems.containsKey(temp))
+			{	int nbr = initialItems.get(temp);
+				nbr ++;
+				initialItems.put(temp,nbr);
+			}
+			else
+				initialItems.put(temp,1);
+		}
+		result.setInitialItems(initialItems);
     }
-    
-    protected static void loadItemElement(Element root, ArrayList<String> items)
-    {	String str = root.getAttribute(XmlTools.ATT_NAME).getValue().trim();
-    	String nbrStr = root.getAttribute(XmlTools.ATT_NUMBER).getValue().trim();
-    	int number = Integer.valueOf(nbrStr);
-    	for(int i=0;i<number;i++)
-    		items.add(str);
-    }
-    
 }

@@ -12,36 +12,14 @@ import fr.free.totalboumboum.engine.container.itemset.ItemsetPreviewer;
 
 public class LevelPreview
 {
-
-	public LevelPreview(LevelDescription levelDescription)
-	{	// init
-		String folder = levelDescription.getPath();
-		// level preview
-		try
-		{	levelPreview = LevelPreviewer.previewLevel(folder);
-		}
-		catch (ParserConfigurationException e)
-		{	e.printStackTrace();
-		}
-		catch (SAXException e)
-		{	e.printStackTrace();
-		}
-		catch (IOException e)
-		{	e.printStackTrace();
-		}
-		// itemset preview
-		itemsetPreview = ItemsetPreviewer.previewItemset(folderPath);
-		// initial items preview
-		
-	}
 	
-	private BufferedImage levelPreview = null;
+	private BufferedImage visualPreview = null;
 	
-	public BufferedImage getLevelPreview()
-	{	return levelPreview;
+	public BufferedImage getVisualPreview()
+	{	return visualPreview;
 	}
-	public void setLevelPreview(BufferedImage levelPreview)
-	{	this.levelPreview = levelPreview;
+	public void setVisualPreview(BufferedImage visualPreview)
+	{	this.visualPreview = visualPreview;
 	}
 	
 	private HashMap<String,BufferedImage> itemsetPreview;
