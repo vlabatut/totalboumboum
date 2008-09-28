@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 import fr.free.totalboumboum.data.statistics.StatisticBase;
 
-public class PointsAddition extends PointsProcessor
+public class PointsAddition extends PointsProcessor implements PPSecondaryOperator
 {
 	private PointsProcessor leftSource;
 	private PointsProcessor rightSource;
@@ -26,5 +26,19 @@ public class PointsAddition extends PointsProcessor
 			result[i] = leftTemp[i] + rightTemp[i];
 		//
 		return result;
+	}
+	
+	@Override
+	public String toString()
+	{	// init
+		StringBuffer result = new StringBuffer();
+		// left operand
+		result.append(leftSource.toString());
+		// operator
+		result.append(new Character('\u002B').toString());
+		// right operand
+		result.append(rightSource.toString());
+		// result
+		return result.toString();
 	}
 }

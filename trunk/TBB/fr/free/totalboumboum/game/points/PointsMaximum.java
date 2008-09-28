@@ -1,10 +1,11 @@
 package fr.free.totalboumboum.game.points;
 
+import java.text.NumberFormat;
 import java.util.ArrayList;
 
 import fr.free.totalboumboum.data.statistics.StatisticBase;
 
-public class PointsMaximum extends PointsProcessor
+public class PointsMaximum extends PointsProcessor implements PPFunction
 {
 	private PointsProcessor source;
 	
@@ -28,5 +29,19 @@ public class PointsMaximum extends PointsProcessor
 			result[i] = max;
 		//
 		return result;
+	}
+
+	@Override
+	public String toString()
+	{	// init
+		StringBuffer result = new StringBuffer();
+		// function
+		result.append("Max");
+		// argument
+		result.append("(");
+		result.append(source.toString());
+		result.append(")");
+		// result
+		return result.toString();
 	}
 }

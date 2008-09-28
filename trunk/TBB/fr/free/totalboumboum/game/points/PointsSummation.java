@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 import fr.free.totalboumboum.data.statistics.StatisticBase;
 
-public class PointsSummation extends PointsProcessor
+public class PointsSummation extends PointsProcessor implements PPFunction
 {
 	private PointsProcessor source;
 	
@@ -28,4 +28,17 @@ public class PointsSummation extends PointsProcessor
 		return result;
 	}
 	
+	@Override
+	public String toString()
+	{	// init
+		StringBuffer result = new StringBuffer();
+		// function
+		result.append("Sum");
+		// argument
+		result.append("(");
+		result.append(source.toString());
+		result.append(")");
+		// result
+		return result.toString();
+	}
 }

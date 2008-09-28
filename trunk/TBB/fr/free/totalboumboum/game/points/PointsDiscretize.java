@@ -1,10 +1,11 @@
 package fr.free.totalboumboum.game.points;
 
+import java.text.NumberFormat;
 import java.util.ArrayList;
 
 import fr.free.totalboumboum.data.statistics.StatisticBase;
 
-public class PointsDiscretize extends PointsProcessor
+public class PointsDiscretize extends PointsProcessor implements PPFunction
 {
 	private PointsProcessor source;
 	/*
@@ -47,5 +48,42 @@ public class PointsDiscretize extends PointsProcessor
 		}
 
 		return result;
+	}
+
+	@Override
+	public String toString()
+	{	// init
+		StringBuffer result = new StringBuffer();
+		// function
+		result.append("Discretize");
+		result.append("(");
+		// values
+		result.append("<"); 
+		NumberFormat nf = NumberFormat.getInstance();
+		nf.setMaximumFractionDigits(2);
+		nf.setMinimumFractionDigits(2);
+		String thresholds2[] = new String[thresholds.length+2];
+		thresholds2[0] = new Character('\u2212').toString()+new Character('\u221E').toString();
+		for(int i=0;i<thresholds.length;i++)
+			thresholds2[i+1] = nf.format(thresholds[i]);
+		thresholds2[thresholds2.length-1] = new Character('\u002B').toString()+new Character('\u221E').toString();
+		for(int i=0;i<values.length;i++)
+		{	result.append("]");
+			result.append(thresholds2[i]);
+			result.append(";");
+			result.append(thresholds2[i+1]);
+			result.append("]->");
+			result.append(nf.format(values[i]));
+			result.append("; "); 
+		}
+		result.deleteCharAt(result.length()-1);
+		result.append("> ; "); 
+		// argument
+		result.append("<"); 
+		result.append(source.toString());
+		result.append(">"); 
+		// result
+		result.append(")");
+		return result.toString();
 	}
 }

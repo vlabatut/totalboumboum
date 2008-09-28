@@ -309,6 +309,8 @@ public class MatchDescription extends EntitledDataPanel
 		// title
 		String text = getConfiguration().getLanguage().getText(GuiTools.GAME_MATCH_HEADER_POINTSPROCESS);
 		String tooltip = getConfiguration().getLanguage().getText(GuiTools.GAME_MATCH_HEADER_POINTSPROCESS+"Tooltip");
+Match match = getConfiguration().getCurrentMatch();
+tooltip = match.getPointProcessor().toString();
 		pointsPanel.setTitle(text,tooltip);
 		// text panel
 		{	JTextPane textPane = new JTextPane()
