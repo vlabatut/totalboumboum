@@ -1,4 +1,4 @@
-package fr.free.totalboumboum.game.round;
+package fr.free.totalboumboum.engine.container.level;
 
 import java.awt.image.BufferedImage;
 import java.io.IOException;
@@ -9,13 +9,11 @@ import javax.xml.parsers.ParserConfigurationException;
 import org.xml.sax.SAXException;
 
 import fr.free.totalboumboum.engine.container.itemset.ItemsetPreviewer;
-import fr.free.totalboumboum.engine.container.level.LevelDescription;
-import fr.free.totalboumboum.engine.container.level.LevelPreviewer;
 
-public class RoundPreview
+public class LevelPreview
 {
 
-	public RoundPreview(LevelDescription levelDescription)
+	public LevelPreview(LevelDescription levelDescription)
 	{	// init
 		String folder = levelDescription.getPath();
 		// level preview
