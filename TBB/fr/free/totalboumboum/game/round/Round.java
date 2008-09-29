@@ -45,6 +45,7 @@ public class Round
 		remainingPlayers = getProfiles().size();
 		for(int i=0;i<remainingPlayers;i++)
 			playersInGame.add(new Boolean(true));
+		hollowLevel.getZone().makeMatrix();
 	}
 	
 	public boolean isOver()
