@@ -64,6 +64,9 @@ public class Loop implements Runnable
 
 		// load level
 		level = LevelLoader.loadLevel(round.getLevelDescription().getPath(),this);
+		// zone (preloaded)
+		level.setZone(round.getZone());
+		loadStepOver();
 
 		// load players : common stuff
 		String baseFolder = level.getInstancePath()+File.separator+FileTools.FOLDER_HEROES;
@@ -160,6 +163,7 @@ public class Loop implements Runnable
 	private int showSpritesPositions = 0;
 	private boolean showSpeed = false;
 	private boolean showTime = false;
+	private boolean showBorders = false;
 	private Lock debugLock = new ReentrantLock();
 
 	public void setShowGrid(boolean showGrid)
@@ -171,6 +175,19 @@ public class Loop implements Runnable
 	{	boolean result;
 		debugLock.lock();
 		result = showGrid;
+		debugLock.unlock();
+		return result;
+	}
+
+	public void setShowBorders(boolean showBorders)
+	{	debugLock.lock();
+		this.showBorders = showBorders;
+		debugLock.unlock();
+	}
+	public boolean getShowBorders()
+	{	boolean result;
+		debugLock.lock();
+		result = showBorders;
 		debugLock.unlock();
 		return result;
 	}

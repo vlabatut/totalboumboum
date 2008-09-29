@@ -370,7 +370,8 @@ public class RoundDescription extends EntitledDataPanel
 					lbl = tablePanel.getLabel(line,col+1);
 					lbl.setText(null);
 					lbl.setMinimumSize(new Dimension(lineHeight,lineHeight));
-					lbl.setMaximumSize(new Dimension(Integer.MAX_VALUE,lineHeight));
+					int maxWidth = (width - margin*(columns+1) - columnGroups*lineHeight)/columnGroups;
+					lbl.setMaximumSize(new Dimension(maxWidth,lineHeight));
 				}
 			}
 			// data

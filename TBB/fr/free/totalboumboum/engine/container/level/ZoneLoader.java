@@ -71,7 +71,7 @@ import fr.free.totalboumboum.tools.XmlTools;
 
 public class ZoneLoader
 {	    
-    public static void loadZone(String folder, int globalHeight, int globalWidth, Level result) throws ParserConfigurationException, SAXException, IOException
+    public static Zone loadZone(String folder, int globalHeight, int globalWidth) throws ParserConfigurationException, SAXException, IOException
     {	// init
 		Element root;
 		String schemaFolder = FileTools.getSchemasPath();
@@ -86,11 +86,13 @@ public class ZoneLoader
 		HashMap<String,VariableTile> variableTiles = VariableTilesLoader.loadVariableTilesElement(variables);
 		// matrix
 		Element matrx = root.getChild(XmlTools.ELT_MATRIX);
-		loadMatrixElement(matrx, globalHeight, globalWidth, variableTiles, result);
+		Zone result = loadMatrixElement(matrx, globalHeight, globalWidth, variableTiles);
+		return result;
     }
         
-    private static void loadMatrixElement(Element root, int globalHeight, int globalWidth, HashMap<String,VariableTile> variableTiles, Level result)
+    private static Zone loadMatrixElement(Element root, int globalHeight, int globalWidth, HashMap<String,VariableTile> variableTiles)
     {	// init
+    	Zone result = new Zone();
     	String[][] floors = new String[globalHeight][globalWidth];
     	String[][] blocks = new String[globalHeight][globalWidth];
     	String[][] items = new String[globalHeight][globalWidth];
@@ -153,8 +155,11 @@ public class ZoneLoader
         		}
         	}
     	}
-    	// level
-		result.setMatrix(floors, blocks, items);
+    	// result
+    	result.setFloorMatrix(floors);
+    	result.setBlockMatrix(blocks);
+    	result.setItemMatrix(items);
+    	return result;
     }
     
     public static String[] loadBasicTileElement(Element root)

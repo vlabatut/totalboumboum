@@ -40,30 +40,15 @@ package fr.free.totalboumboum.engine.container.level;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 
 import javax.xml.parsers.ParserConfigurationException;
 
-import org.jdom.Attribute;
 import org.jdom.Element;
 import org.xml.sax.SAXException;
 
-import fr.free.totalboumboum.data.configuration.Configuration;
-import fr.free.totalboumboum.engine.container.bombset.Bombset;
-import fr.free.totalboumboum.engine.container.bombset.BombsetLoader;
-import fr.free.totalboumboum.engine.container.itemset.Itemset;
-import fr.free.totalboumboum.engine.container.itemset.ItemsetLoader;
-import fr.free.totalboumboum.engine.container.theme.Theme;
-import fr.free.totalboumboum.engine.container.theme.ThemeLoader;
-import fr.free.totalboumboum.engine.container.tile.ValueTile;
-import fr.free.totalboumboum.engine.container.tile.VariableTile;
-import fr.free.totalboumboum.engine.container.tile.VariableTilesLoader;
-import fr.free.totalboumboum.engine.loop.Loop;
 import fr.free.totalboumboum.engine.player.PlayerLocation;
-import fr.free.totalboumboum.game.round.Round;
 import fr.free.totalboumboum.tools.FileTools;
 import fr.free.totalboumboum.tools.XmlTools;
 
@@ -71,7 +56,7 @@ import fr.free.totalboumboum.tools.XmlTools;
 
 public class PlayersLoader
 {	
-    public static void loadPlayers(String folder, Level result) throws ParserConfigurationException, SAXException, IOException
+    public static Players loadPlayers(String folder) throws ParserConfigurationException, SAXException, IOException
 	{	
     	/* 
 		 * NOTE tester ici si le level est suffisamment grand
@@ -96,11 +81,13 @@ public class PlayersLoader
 		schemaFile = new File(schemaFolder+File.separator+FileTools.FILE_PLAYERS+FileTools.EXTENSION_SCHEMA);
 		root = XmlTools.getRootFromFile(dataFile,schemaFile);
 		// reading
-		loadPlayersElement(root,result);
+		Players result = loadPlayersElement(root);
+		return result;
     }
     
-    private static void loadPlayersElement(Element root, Level result)
+    private static Players loadPlayersElement(Element root)
     {	// init
+    	Players result = new Players();
     	Element element;
     	// locations
     	element = root.getChild(XmlTools.ELT_LOCATIONS);
@@ -108,20 +95,20 @@ public class PlayersLoader
     	// items
     	element = root.getChild(XmlTools.ELT_ITEMS);
     	loadItemsElement(element,result);
+    	// result
+    	return result;
     }
     
-    private static void loadLocationsElement(Element root, Level result)
-    {	HashMap<Integer, PlayerLocation[]> locations = new HashMap<Integer, PlayerLocation[]>();
-		List<Element> elements = root.getChildren(XmlTools.ELT_CASE);
+    private static void loadLocationsElement(Element root, Players result)
+    {	List<Element> elements = root.getChildren(XmlTools.ELT_CASE);
 		Iterator<Element> i = elements.iterator();
 		while(i.hasNext())
 		{	Element temp = i.next();
-			loadCaseElement(temp,locations);
+			loadCaseElement(temp,result);
 		}
-		result.setPlayersLocations(locations);
     }
     
-    private static void loadCaseElement(Element root, HashMap<Integer,PlayerLocation[]> result)
+    private static void loadCaseElement(Element root, Players result)
     {	String valStr = root.getAttribute(XmlTools.ATT_PLAYERS).getValue().trim();
 		int value = Integer.valueOf(valStr);
 		PlayerLocation[] locations = new PlayerLocation[value];
@@ -135,7 +122,7 @@ public class PlayersLoader
 			locations[index] = pl;
 			index++;
 		}
-		result.put(value,locations);
+		result.addLocation(value,locations);
     }
     	
     private static void loadLocationElement(Element root, PlayerLocation result)
@@ -150,23 +137,21 @@ public class PlayersLoader
 		result.setLine(line);
     }
     
-    private static void loadItemsElement(Element root, Level result)
-    {	ArrayList<String> items = new ArrayList<String>();
-    	List<Element> elements = root.getChildren(XmlTools.ELT_ITEM);
+    private static void loadItemsElement(Element root, Players result)
+    {	List<Element> elements = root.getChildren(XmlTools.ELT_ITEM);
 		Iterator<Element> i = elements.iterator();
 		while(i.hasNext())
 		{	Element temp = i.next();
-			loadItemElement(temp,items);
+			loadItemElement(temp,result);
 		}
-		result.setPlayersItems(items);
     }
     
-    protected static void loadItemElement(Element root, ArrayList<String> items)
+    private static void loadItemElement(Element root, Players result)
     {	String str = root.getAttribute(XmlTools.ATT_NAME).getValue().trim();
     	String nbrStr = root.getAttribute(XmlTools.ATT_NUMBER).getValue().trim();
     	int number = Integer.valueOf(nbrStr);
     	for(int i=0;i<number;i++)
-    		items.add(str);
+    		result.addInitialItem(str);
     }
     
 }
