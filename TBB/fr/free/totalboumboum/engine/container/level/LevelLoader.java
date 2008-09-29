@@ -114,10 +114,10 @@ public class LevelLoader
 		element = root.getChild(XmlTools.ELT_INSTANCE);
 		String instanceName = element.getAttribute(XmlTools.ATT_NAME).getValue().trim();
 		String instanceFolder = FileTools.getInstancesPath()+File.separator+instanceName;
-		result.setInstancePath(instanceFolder);
+//		result.setInstancePath(instanceFolder);
 
 		// players locations
-		PlayersLoader.loadPlayers(folder,result);
+//		PlayersLoader.loadPlayers(folder,result);
 
 		// bombset
 		String bombsetFolder = instanceFolder + File.separator+FileTools.FOLDER_BOMBS;
@@ -141,8 +141,9 @@ public class LevelLoader
 		loop.loadStepOver();
 
 		// zone
-		ZoneLoader.loadZone(folder,globalHeight,globalWidth,result);
-		loop.loadStepOver();
+//		Zone zone = ZoneLoader.loadZone(folder,globalHeight,globalWidth);
+//		result.setZone(zone);
+//		loop.loadStepOver();
 
 		return result;
 	}
