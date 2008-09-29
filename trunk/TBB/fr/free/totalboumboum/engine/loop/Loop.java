@@ -113,7 +113,7 @@ public class Loop implements Runnable
 			// next player...
 			loadStepOver();
 			j++;
-		}	
+		}
 	}
 	
 	public void loadStepOver()
@@ -264,7 +264,7 @@ public class Loop implements Runnable
 		// graphics
 		BufferedImage image = panel.getBackgroundImage();
 		graphics = image.getGraphics();
-		((Graphics2D)graphics).setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER,1f));
+//		((Graphics2D)graphics).setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER,1f));
 		// system listener
 		panel.addKeyListener(systemControl);
 		// players listeners
@@ -296,6 +296,24 @@ public class Loop implements Runnable
 	 */ 
 	private static int MAX_FRAME_SKIPS = 5;
 	/** used to stop the animation thread */
+    /** number of FPS values stored to get an average */
+	private static int NUM_FPS = 10;   
+	// used for gathering statistics
+	private static long MAX_STATS_INTERVAL = 1000000000L;
+	private long statsInterval = 0L;    // in ns
+	private long prevStatsTime;   
+	private long totalElapsedTime = 0L;
+	private long gameStartTime;
+	private int timeSpentInGame = 0;    // in seconds
+	private long frameCount = 0;
+	private long statsCount = 0;
+	private double averageFPS = 0.0;
+	private double averageUPS = 0.0;
+	private long framesSkipped = 0L;
+	private long totalFramesSkipped = 0L;
+	private double fpsStore[] = new double[NUM_FPS];
+	private double upsStore[] = new double[NUM_FPS];
+	private long nanoPeriod;
 	private boolean isPaused = false;
 	private Lock loopLock = new ReentrantLock();
 	private boolean isCanceled = false;
@@ -386,46 +404,67 @@ public class Loop implements Runnable
 	}
 	
 	public void process()
-	{	long beforeTime, afterTime, timeDiff, sleepTime;
+	{	long beforeTime,afterTime,timeDiff,sleepTime;
 		long overSleepTime = 0L;
 		int noDelays = 0;
 		long excess = 0L;
 
-		beforeTime = System.nanoTime();
+		for(int k=0;k<NUM_FPS;k++)
+		{	fpsStore[k] = 0;
+	        upsStore[k] = 0;
+		}		
+		
+		nanoPeriod = getConfiguration().getNanoPeriod();
+		
+		gameStartTime = System.nanoTime();
+		prevStatsTime = gameStartTime;
+		beforeTime = gameStartTime;
 		totalTime = 0;
 
 //		setLooping(true);
-		// The frames of the animation are drawn inside the while loop
 		while(/*isLooping() && */!isOver())
-		{	update();
+		{	// cycle
+long a = System.nanoTime();
+			update();
+long b = System.nanoTime();
 			getLevel().draw(graphics);
+long c = System.nanoTime();
 			panel.paintScreen();
-
+long d = System.nanoTime();
+System.out.println((b-a)/1000000);
+System.out.println((c-b)/1000000);
+System.out.println((d-c)/1000000);
+System.out.println("---------------");
+System.out.println((d-a)/1000000);
+System.out.println("\t"+a);
+System.out.println("\t"+b);
+System.out.println("\t"+c);
+System.out.println("\t"+d);
+System.out.println();
+			// time process
 			afterTime = System.nanoTime();
 			timeDiff = afterTime - beforeTime;
-			if(!isPaused)
-			{	totalTime = totalTime + (timeDiff/1000000);
-				round.updateTime(totalTime);				
-			}
-			sleepTime = (getConfiguration().getNanoPeriod() - timeDiff) - overSleepTime;
+			sleepTime = nanoPeriod - timeDiff - overSleepTime;
 
-			if (sleepTime > 0)
-			{	// some time left in this cycle
-				try
-				{	Thread.sleep(sleepTime / 1000000L); // nano -> ms
+			// some time left in this cycle
+			if(sleepTime>0)
+			{	try
+				{	Thread.sleep(sleepTime/1000000L); // nano -> ms
 				}
 				catch (InterruptedException ex)
 				{	//ex.printStackTrace();
 				}
-				overSleepTime = (System.nanoTime() - afterTime) - sleepTime;
+				overSleepTime = System.nanoTime() - afterTime - sleepTime;
 			}
+			// the frame took longer than the period (sleepTime<=0)
 			else
-			{	// sleepTime <= 0; the frame took longer than the period
-				excess -= sleepTime; // store excess time value
+			{	// store excess time value
+				excess = excess - sleepTime;
 				overSleepTime = 0L;
-
-				if(++noDelays >= NO_DELAYS_PER_YIELD)
-				{	Thread.yield(); // give another thread a chance to run
+				// give another thread a chance to run
+				noDelays++;
+				if(noDelays>=NO_DELAYS_PER_YIELD)
+				{	Thread.yield(); 
 					noDelays = 0;
 				}
 			}
@@ -433,20 +472,22 @@ public class Loop implements Runnable
 			beforeTime = System.nanoTime();
 
 			/* If frame animation is taking too long, update the game state
-			   without rendering it, to get the updates/sec nearer to
-			   the required FPS. */
+			   without rendering it, to get the updates/sec nearer to the required FPS. */
 			int skips = 0;
-			while ((excess > getConfiguration().getNanoPeriod()) && (skips < MAX_FRAME_SKIPS))
-			{	excess -= getConfiguration().getNanoPeriod();
+			while (excess>nanoPeriod && skips<MAX_FRAME_SKIPS)
+			{	excess = excess - nanoPeriod;
 				update(); // update state but don't render
 				skips++;
-			}	
-/*			
-playerOut(players.get(0));
-playerOut(players.get(1));
-playerOut(players.get(2));
-loopOver = true;
-*/		
+			}
+//System.out.println(skips);
+			framesSkipped = framesSkipped + skips;
+			storeStats( );
+			
+			if(!isPaused)
+			{	totalTime = totalTime + (timeDiff/1000000L);
+				round.updateTime(totalTime);				
+			}
+			
 			if(isCanceled())
 			{	round.closeGame();
 				setCanceled(false);
@@ -475,7 +516,65 @@ loopOver = true;
 		}
 	}
 	
-	
+	private void storeStats( )
+    {	frameCount++;
+      	statsInterval = statsInterval + nanoPeriod;
+
+      	if (statsInterval>=MAX_STATS_INTERVAL)
+      	{	long timeNow = System.nanoTime();
+      		timeSpentInGame = (int)((timeNow - gameStartTime)/1000000000L);  // ns-->secs
+
+      		long realElapsedTime = timeNow - prevStatsTime;
+      		// time since last stats collection
+      		totalElapsedTime = totalElapsedTime + realElapsedTime;
+
+      		double timingError = ((double)(realElapsedTime - statsInterval) / statsInterval) * 100.0;
+
+      		totalFramesSkipped += framesSkipped;
+
+      		double actualFPS = 0;     // calculate the latest FPS and UPS
+      		double actualUPS = 0;
+      		if(totalElapsedTime>0)
+      		{	actualFPS = (((double)frameCount / totalElapsedTime) * 1000000000L);
+      			actualUPS = (((double)(frameCount + totalFramesSkipped) / totalElapsedTime) * 1000000000L);
+      		}
+
+      		// store the latest FPS and UPS
+      		fpsStore[(int)statsCount%NUM_FPS] = actualFPS;
+      		upsStore[(int)statsCount%NUM_FPS] = actualUPS;
+      		statsCount = statsCount+1;
+
+      		double totalFPS = 0.0;     // total the stored FPSs and UPSs
+      		double totalUPS = 0.0;
+      		for(int i=0;i<NUM_FPS;i++)
+      		{	totalFPS += fpsStore[i];
+      			totalUPS += upsStore[i];
+      		}
+
+      		if (statsCount < NUM_FPS)
+      		{	// obtain the average FPS and UPS 
+      			averageFPS = totalFPS/statsCount;
+      			averageUPS = totalUPS/statsCount;
+      		}
+      		else
+      		{	averageFPS = totalFPS/NUM_FPS;
+      		averageUPS = totalUPS/NUM_FPS;
+      		}
+/*
+			System.out.println(
+			timedf.format( (double) statsInterval/1000000000L) + " " +
+			timedf.format((double) realElapsedTime/1000000000L)+"s "+
+			df.format(timingError) + "% " +
+			frameCount + "c " +
+			framesSkipped + "/" + totalFramesSkipped + " skip; " +
+			df.format(actualFPS) + " " + df.format(averageFPS)+" afps; " +
+			df.format(actualUPS) + " " + df.format(averageUPS)+" aups" );
+*/
+      		framesSkipped = 0;
+      		prevStatsTime = timeNow;
+      		statsInterval = 0L;   // reset
+      	}
+    }
 	
 	/////////////////////////////////////////////////////////////////
 	// LOOP END		/////////////////////////////////////////////

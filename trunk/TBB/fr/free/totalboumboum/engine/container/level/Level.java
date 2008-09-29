@@ -278,8 +278,14 @@ public class Level
 	/////////////////////////////////////////////////////////////////
 	// IN GAME METHODS		/////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
+	private long time = 0;
+	private long startTime = -1;
+	
 	public void update()
-	{	for(int line=0;line<globalHeight;line++)
+	{	
+time = time + getConfiguration().getMilliPeriod();
+if(startTime<0) startTime = System.currentTimeMillis();
+		for(int line=0;line<globalHeight;line++)
 			for(int col=0;col<globalWidth;col++)
 				matrix[line][col].update();		
 	}
@@ -295,7 +301,10 @@ public class Level
 		if(loop.getShowSpeed())
 			drawSpeed(g);
 		if(loop.getShowTime())
-			drawTime(g);
+		{	drawTime(g);
+			drawInnerTime(g);
+			drawActualTime(g);
+		}
 	}
 
 	//NOTE optimisation : à effectuer seulement pour les tiles visibles
@@ -439,6 +448,31 @@ public class Level
 		g.drawString(text, x, y);
 	}
 	
+	private void drawInnerTime(Graphics g)
+	{	g.setColor(Color.GREEN);
+		Font font = new Font("Dialog", Font.PLAIN, 18);
+		g.setFont(font);
+		FontMetrics metrics = g.getFontMetrics(font);
+		String text = "Time: "+StringTools.formatTimeWithHours(time);
+		Rectangle2D box = metrics.getStringBounds(text, g);
+		int x = 10;
+		int y = (int)Math.round(50+box.getHeight()/2);
+		g.drawString(text, x, y);
+	}
+
+	private void drawActualTime(Graphics g)
+	{	g.setColor(Color.CYAN);
+		Font font = new Font("Dialog", Font.PLAIN, 18);
+		g.setFont(font);
+		FontMetrics metrics = g.getFontMetrics(font);
+		long time = System.currentTimeMillis()-startTime;
+		String text = "Time: "+StringTools.formatTimeWithHours(time);
+		Rectangle2D box = metrics.getStringBounds(text, g);
+		int x = 10;
+		int y = (int)Math.round(70+box.getHeight()/2);
+		g.drawString(text, x, y);
+	}
+
 	/////////////////////////////////////////////////////////////////
 	// FINISHED				/////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
