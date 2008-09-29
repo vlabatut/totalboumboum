@@ -168,9 +168,9 @@ public class HollowLevel
 		
 		// zoom factor
 		double standardTileDimension = GameConstants.STANDARD_TILE_DIMENSION;
-		double trueRatioX = sizeX/visibleWidth/standardTileDimension;
-		double trueRatioY = sizeY/visibleHeight/standardTileDimension;
-		double trueZoom = Math.min(trueRatioX,trueRatioY);
+//		double trueRatioX = sizeX/visibleWidth/standardTileDimension;
+//		double trueRatioY = sizeY/visibleHeight/standardTileDimension;
+//		double trueZoom = Math.min(trueRatioX,trueRatioY);
 		double ratioX = (int)(sizeX/visibleWidth)/standardTileDimension;
 		double ratioY = (int)(sizeY/visibleHeight)/standardTileDimension;
 		double zoomFactor = Math.min(ratioX,ratioY);

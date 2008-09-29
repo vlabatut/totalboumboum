@@ -622,13 +622,15 @@ public class Launcher
 	 * 
 	 * + alpha.42
 	 * - mise en place d'un système de previews pour les Levels et Sprites
+	 * - refonte du chargement de niveau pour l'adapter au système de preview
 	 * - correction d'un bug qui affectait le décompte de kills et de deaths au cours d'un round
+	 * - correction d'un problème d'affichage (je sais pas trop comment, d'ailleurs...) : le niveau est coupé en fonction du mode d'affichage, mais pas de façon symétrique (le haut n'est pas coupé, seulement le bas)
+	 * - mise en place du fond d'écran du jeu à la place des bordures unies lors des parties
 	 * 
 	 * *******************************************************
 	 * *********************** A FAIRE ***********************
 	 * *******************************************************
 	 * - définir les présentations des rounds
-	 * - l'emplacement de l'itemset du round doit permettre de contenir des cases carrées sans perte de place
 	 * - pb : les items distribués au début du match ne doivent pas être comptés dans les stats !
 	 * - redistribution des items lors de la mort d'un joueur (option de round?)
 	 * - possibilité de bloquer certains items (on ne les perd pas)
@@ -646,10 +648,8 @@ public class Launcher
 	 * - en fait tout le process de points dans les stats est à déplacer dans les rounds/matches, etc 
 	 * - à la fin du round, faire apparaitre les résultats par transparence...ça serait la classe ça !
 	 * - gérer l'apparition comme une action en soit. si pas possible d'apparaître au début de la partie, faire un atterrissage ?
-	 * - problème graphique (contact des ombres, notament) quand on monte en résolution avec certain thèmes
 	 * - pb de dimension de l'image de fond en fonction de la résolution... (zones pas peintes)
 	 * - results panel : quand il y a trop de rounds dans un match pour que ça rentre à l'écran, ne pas tout afficher
-	 * - problème d'affichage : le niveau est coupé en fonction du mode d'affichage, mais pas de façon symétrique (le haut n'est pas coupé, seulement le bas)
 	 * - mode plein écran
 	 * - rétablir frag comme stat ? non ! 
 	 * - vérifier le temps de latence des bombes, ça me parait un peu trop rapide

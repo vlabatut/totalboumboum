@@ -165,18 +165,5 @@ public class MainFrame extends JFrame implements WindowListener,MenuContainer
 	public void setMainMenuPanel()
 	{	setMenuPanel(mainMenuPanel);	
 	}
-
-	
-	
-	
-	public Image getImage()
-	{	int width = getPreferredSize().width;
-		int height = getPreferredSize().height;
-		Image result = createImage(width,height);
-		return result;
-	}
-	
-
-		
 }
 

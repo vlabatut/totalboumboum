@@ -1,9 +1,12 @@
 package fr.free.totalboumboum.engine.loop;
 
+import java.awt.AlphaComposite;
 import java.awt.Dimension;
 import java.awt.Graphics;
+import java.awt.Graphics2D;
 import java.awt.Image;
 import java.awt.Toolkit;
+import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -58,9 +61,7 @@ public class Loop implements Runnable
 	private Condition cond = loadLock.newCondition();
 	
 	public void init() throws ParserConfigurationException, SAXException, IOException, ClassNotFoundException, IllegalArgumentException, SecurityException, IllegalAccessException, NoSuchFieldException
-	{	// init
-		image = round.getPanel().getImage();
-		graphics = image.getGraphics();
+	{	// control
 		systemControl = new SystemControl(this);
 
 		// load level
@@ -138,7 +139,6 @@ public class Loop implements Runnable
 //			panel.finish();
 			panel = null;
 			graphics = null;
-			image = null;
 			// level
 			level.finish();
 			level = null;
@@ -257,12 +257,14 @@ public class Loop implements Runnable
 	/////////////////////////////////////////////////////////////////
 	private Graphics graphics;
 	private LoopRenderPanel panel;
-	private Image image = null;
 
 	public void setPanel(LoopRenderPanel panel)
 	{	loadLock.lock();
-		// panel
 		this.panel = panel;
+		// graphics
+		BufferedImage image = panel.getBackgroundImage();
+		graphics = image.getGraphics();
+		((Graphics2D)graphics).setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER,1f));
 		// system listener
 		panel.addKeyListener(systemControl);
 		// players listeners
@@ -279,10 +281,6 @@ public class Loop implements Runnable
 	{	return panel;
 	}
 
-	public Image getImage()
-	{	return image;		
-	}
-	
 	/////////////////////////////////////////////////////////////////
 	// ENGINE			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////

@@ -205,11 +205,6 @@ public class RoundMenu extends InnerMenuPanel implements RoundRenderPanel
 	} 
 
 	@Override
-	public Image getImage()
-	{	return getFrame().getImage();
-	}
-
-	@Override
 	public void roundOver()
 	{	SwingUtilities.invokeLater(new Runnable()
 		{	public void run()

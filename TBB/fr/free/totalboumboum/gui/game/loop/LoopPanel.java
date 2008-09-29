@@ -1,11 +1,17 @@
 package fr.free.totalboumboum.gui.game.loop;
 
+import java.awt.AlphaComposite;
 import java.awt.Color;
 import java.awt.Component;
 import java.awt.Graphics;
+import java.awt.Graphics2D;
 import java.awt.Image;
+import java.awt.RenderingHints;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
+import java.awt.geom.AffineTransform;
+import java.awt.image.BufferedImage;
+import java.awt.image.RescaleOp;
 import java.io.IOException;
 
 import javax.swing.JPanel;
@@ -26,13 +32,22 @@ import fr.free.totalboumboum.gui.generic.SimpleMenuPanel;
 public class LoopPanel extends SimpleMenuPanel implements LoopRenderPanel
 {	private static final long serialVersionUID = 1L;
 	private Loop loop;
+	private BufferedImage image;
 	
 	public LoopPanel(MenuContainer container, MenuPanel parent)
 	{	super(container,parent);
-		loop = getConfiguration().getCurrentRound().getLoop();
+		// image
+		image = getConfiguration().getBackground();
+		float[] scales = { 0.5f, 0.5f, 0.5f, 1f };
+		float[] offsets = new float[4];
+		RescaleOp rop = new RescaleOp(scales, offsets, null);
+	    image = rop.filter(image, null);
+		
+	    loop = getConfiguration().getCurrentRound().getLoop();
 		setPreferredSize(getConfiguration().getPanelDimension());
 		setDoubleBuffered(false);
-		setBackground(Color.lightGray);
+//		setBackground(Color.lightGray);
+		setOpaque(false);
 		setFocusable(true);
 		// the JPanel now has focus, so receives key events
 		// NOTE : surement à modifier, car un peu cra-cra (focus à donner à partir de l'extérieur)
@@ -45,39 +60,28 @@ public class LoopPanel extends SimpleMenuPanel implements LoopRenderPanel
 	{	requestFocus();					
 		loop.setPanel(this);
 	}
-	
-	// ----------------------------------------------
+
+	public BufferedImage getBackgroundImage()
+	{	return image;
+	}
 
 	// use active rendering to put the buffered image on-screen
 	@Override
 	public void paintScreen()
 	{	Graphics g;
 		try
-		{	Image dbImage = loop.getImage();
-			g = this.getGraphics();
-			if ((g != null) && (dbImage != null))
-				g.drawImage(dbImage, 0, 0, null);
-			// Sync the display on some systems.
-			// (on Linux, this fixes event queue problems)
+		{	g = this.getGraphics();
+			if ((g != null) && (image != null))
+			{	g.drawImage(image, 0, 0, null);
+			}
+			// Sync the display on some systems (on Linux, this fixes event queue problems)
 			Toolkit.getDefaultToolkit().sync();
-
+			//
 			g.dispose();
 		}
 		catch (Exception e)
-		{	System.out.println("Graphics context error: " + e);
+		{	e.printStackTrace();
 		}
-	}
-
-	@Override
-	public Image getImage()
-	{	
-/*		
-		int width = getPreferredSize().width;
-		int height = getPreferredSize().height;
-		Image result = createImage(width,height);
-		return result;
-*/
-		return getFrame().getImage();
 	}
 
 	@Override

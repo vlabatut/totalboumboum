@@ -19,7 +19,7 @@ public class Configuration
 		setFps(100);
 		setSpeedCoeff(1);
 		// display
-		setBorderColor(Color.PINK);
+		setBorderColor(Color.BLACK);
 		setSmoothGraphics(true);
 		// panel
 		setPanelDimension(750,600);
