@@ -631,6 +631,8 @@ public class Launcher
 	 * *********************** A FAIRE ***********************
 	 * *******************************************************
 	 * - définir les présentations des rounds
+	 * - y a visiblement un problème d'horloge : le temps passe moins vite que ce qu'il devrait
+	 * 		- ca serait du à l'utilisation de system.nano sur un multicoeur : windows arrête pas de switcher entre les coeurs, chaque coeur a sa propre horloge, d'où des voyages dans le temps...
 	 * - pb : les items distribués au début du match ne doivent pas être comptés dans les stats !
 	 * - redistribution des items lors de la mort d'un joueur (option de round?)
 	 * - possibilité de bloquer certains items (on ne les perd pas)
