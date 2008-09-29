@@ -30,4 +30,8 @@ public class Limits<T extends Limit>
 	public void finish()
 	{	limits.clear();		
 	}
+	
+	public int size()
+	{	return limits.size();	
+	}
 }
