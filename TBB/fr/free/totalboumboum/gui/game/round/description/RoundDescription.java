@@ -21,8 +21,7 @@ import org.xml.sax.SAXException;
 
 import java.util.Map.Entry;
 
-import fr.free.totalboumboum.engine.container.level.LevelDescription;
-import fr.free.totalboumboum.engine.container.level.LevelLoader;
+import fr.free.totalboumboum.engine.container.level.HollowLevel;
 import fr.free.totalboumboum.engine.container.level.LevelPreview;
 import fr.free.totalboumboum.engine.container.level.LevelPreviewer;
 import fr.free.totalboumboum.game.limit.Limit;
@@ -60,10 +59,10 @@ public class RoundDescription extends EntitledDataPanel
 	
 		// data
 		{	Round round = getConfiguration().getCurrentRound();
-			LevelDescription levelDescription = round.getLevelDescription();
+			HollowLevel hollowLevel = round.getHollowLevel();
 			LevelPreview preview = null;
 			try
-			{	preview = LevelPreviewer.previewLevel(levelDescription.getPath());
+			{	preview = LevelPreviewer.previewLevel(hollowLevel.getLevelFolder());
 			}
 			catch (ParserConfigurationException e)
 			{	e.printStackTrace();

@@ -27,7 +27,7 @@ public class TournamentLoader
 	private static final String SEQUENCE = "sequence";
 	private static final String SINGLE = "single";
 
-	public static AbstractTournament loadTournamentFromFolderPath(String folderPath, Configuration configuration) throws ParserConfigurationException, SAXException, IOException
+	public static AbstractTournament loadTournamentFromFolderPath(String folderPath, Configuration configuration) throws ParserConfigurationException, SAXException, IOException, ClassNotFoundException
 	{	// init
 		String schemaFolder = FileTools.getSchemasPath();
 		File schemaFile,dataFile;
@@ -44,7 +44,7 @@ public class TournamentLoader
 		return result;
     }
 	
-	private static AbstractTournament loadTournamentElement(String path, Element root, Configuration configuration) throws ParserConfigurationException, SAXException, IOException
+	private static AbstractTournament loadTournamentElement(String path, Element root, Configuration configuration) throws ParserConfigurationException, SAXException, IOException, ClassNotFoundException
 	{	// init
 		AbstractTournament result = null;
 		Element element;

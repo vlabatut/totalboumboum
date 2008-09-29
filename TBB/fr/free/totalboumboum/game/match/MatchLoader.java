@@ -25,7 +25,7 @@ import fr.free.totalboumboum.tools.XmlTools;
 
 public class MatchLoader
 {	
-	public static Match loadMatchFromFolderPath(String folderPath, AbstractTournament tournament) throws ParserConfigurationException, SAXException, IOException
+	public static Match loadMatchFromFolderPath(String folderPath, AbstractTournament tournament) throws ParserConfigurationException, SAXException, IOException, ClassNotFoundException
 	{	// init
 		String schemaFolder = FileTools.getSchemasPath();
 		File schemaFile,dataFile;
@@ -38,13 +38,13 @@ public class MatchLoader
 		return result;
     }
     
-	public static Match loadMatchFromName(String name, AbstractTournament tournament) throws ParserConfigurationException, SAXException, IOException
+	public static Match loadMatchFromName(String name, AbstractTournament tournament) throws ParserConfigurationException, SAXException, IOException, ClassNotFoundException
 	{	String individualFolder = FileTools.getMatchesPath()+File.separator+name;
 		Match result = loadMatchFromFolderPath(individualFolder,tournament);
 		return result;
     }
 
-    private static Match loadMatchElement(Element root, String folderPath, AbstractTournament tournament) throws ParserConfigurationException, SAXException, IOException
+    private static Match loadMatchElement(Element root, String folderPath, AbstractTournament tournament) throws ParserConfigurationException, SAXException, IOException, ClassNotFoundException
 	{	// init
     	Match result = new Match(tournament);
 		Element element;
@@ -78,7 +78,7 @@ public class MatchLoader
     	return result;
     }
 
-    private static void loadRoundsElement(Element root, String folder, Match result) throws ParserConfigurationException, SAXException, IOException
+    private static void loadRoundsElement(Element root, String folder, Match result) throws ParserConfigurationException, SAXException, IOException, ClassNotFoundException
     {	// rounds order
     	String str = root.getAttribute(XmlTools.ATT_RANDOM_ORDER).getValue().trim();
     	boolean randomOrder = Boolean.valueOf(str);
@@ -92,7 +92,7 @@ public class MatchLoader
     	}
     }
     
-    private static void loadRoundElement(Element root, String folder, Match result) throws ParserConfigurationException, SAXException, IOException
+    private static void loadRoundElement(Element root, String folder, Match result) throws ParserConfigurationException, SAXException, IOException, ClassNotFoundException
 	{	Round round;
 		// local
 		String localStr = root.getAttribute(XmlTools.ATT_LOCAL).getValue().trim();
