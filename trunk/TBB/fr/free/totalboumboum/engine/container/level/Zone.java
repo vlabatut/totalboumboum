@@ -1,40 +1,114 @@
 package fr.free.totalboumboum.engine.container.level;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Iterator;
+
+
+import fr.free.totalboumboum.engine.container.tile.ValueTile;
+import fr.free.totalboumboum.engine.container.tile.VariableTile;
+import fr.free.totalboumboum.engine.container.tile.ZoneTile;
+
 public class Zone
 {
-	/////////////////////////////////////////////////////////////////
-	// BLOCKS			/////////////////////////////////////////////
-	/////////////////////////////////////////////////////////////////
-	private String[][] blocks;
+	private int globalWidth;
+	private int globalHeight;
 	
-	public String[][] getBlockMatrix()
-	{	return blocks;
+	public Zone(int globalWidth, int globalHeight)
+	{	this.globalWidth = globalWidth;
+		this.globalHeight = globalHeight;
 	}
-	public void setBlockMatrix(String[][] blocks)
-	{	this.blocks = blocks;
+	
+	/////////////////////////////////////////////////////////////////
+	// VARIABLES		/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	private HashMap<String,VariableTile> variableTiles;
+	
+	public void setVariableTiles(HashMap<String,VariableTile> variables)
+	{	this.variableTiles = variables;		
 	}
+	
+	/////////////////////////////////////////////////////////////////
+	// MATRIX		/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	private ArrayList<ZoneTile> tiles = new ArrayList<ZoneTile>();
+	
+	public void addTile(ZoneTile tile)
+	{	tiles.add(tile);
+	}	
+	
+	/////////////////////////////////////////////////////////////////
+	// ZONE			/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	private ArrayList<String[][]> matrices;
+	
+	public ArrayList<String[][]> getMatrices()
+	{	return matrices;		
+	}
+	public void makeMatrix()
+	{	// init
+		matrices = new ArrayList<String[][]>();
+		String[][] floors = new String[globalHeight][globalWidth];
+		String[][] blocks = new String[globalHeight][globalWidth];
+		String[][] items = new String[globalHeight][globalWidth];
+		for(int i=0;i<globalHeight;i++)
+		{	for(int j=0;j<globalWidth;j++)
+			{	floors[i][j] = null;
+	        	blocks[i][j] = null;
+	        	items[i][j] = null;
+			}
+		}
 
-	/////////////////////////////////////////////////////////////////
-	// FLOORS			/////////////////////////////////////////////
-	/////////////////////////////////////////////////////////////////
-	private String[][] floors;
-	
-	public String[][] getFloorMatrix()
-	{	return floors;
-	}
-	public void setFloorMatrix(String[][] floors)
-	{	this.floors = floors;
-	}
-
-	/////////////////////////////////////////////////////////////////
-	// ITEMS			/////////////////////////////////////////////
-	/////////////////////////////////////////////////////////////////
-	private String[][] items;
-	
-	public String[][] getItemMatrix()
-	{	return items;
-	}
-	public void setItemMatrix(String[][] items)
-	{	this.items = items;
+		// matrix
+    	Iterator<ZoneTile> it = tiles.iterator();
+    	while(it.hasNext())
+    	{	String[] content = {null,null,null};
+    		ZoneTile tile = it.next();
+    		int col = tile.getCol();
+    		int line = tile.getLine();
+    		// variable tile
+    		String name = tile.getVariable();
+    		if(name!=null)
+    		{	VariableTile vt = variableTiles.get(name);
+				boolean found = false;
+				double proba = Math.random();
+				float p = 0;
+				ArrayList<ValueTile> valueTiles = vt.getValues();
+				Iterator<ValueTile> j = valueTiles.iterator();
+				while(j.hasNext() && !found)
+				{	ValueTile vit = j.next();
+					Float f = vit.getProba();
+					String itm = vit.getItem();
+					String blck = vit.getBlock();
+					String flr = vit.getFloor();
+					p = p + f;
+					if(proba<=p)
+					{	found = true;
+						content[0] = flr;
+						content[1] = blck;
+						content[2] = itm;
+					}    
+				}
+    		}
+    		// constant tile
+    		else
+    		{	content[0] = tile.getFloor();
+    			content[1] = tile.getBlock();
+    			content[2] = tile.getItem();     			
+    		}
+    		// values
+			{	// floor
+				floors[line][col] = content[0];
+				// block
+				blocks[line][col] = content[1];
+				// item
+				items[line][col] = content[2];
+    		}
+    	}
+		
+		// result
+    	matrices.add(floors);
+    	matrices.add(blocks);
+    	matrices.add(items);
 	}
 }

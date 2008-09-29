@@ -3,6 +3,7 @@ package fr.free.totalboumboum.engine.container.level;
 import java.awt.Dimension;
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 
 import javax.xml.parsers.ParserConfigurationException;
 
@@ -146,6 +147,10 @@ public class HollowLevel
     public String getLevelFolder()
     {	return levelFolder;
     }
+    
+    public Zone getZone()
+    {	return zone;
+    }
 
     public void initLevel(Loop loop)
 	{	// init
@@ -246,9 +251,10 @@ public class HollowLevel
 		double globalLeftX = level.getGlobalLeftX();
 		double globalUpY = level.getGlobalUpY();
 		double tileDimension = level.getTileDimension();
-    	String[][] mFloors = zone.getFloorMatrix();
-		String[][] mBlocks = zone.getBlockMatrix();
-		String[][] mItems = zone.getItemMatrix();
+		ArrayList<String[][]> matrices = zone.getMatrices();
+    	String[][] mFloors = matrices.get(0);
+		String[][] mBlocks = matrices.get(1);
+		String[][] mItems = matrices.get(2);
 		// init tiles
 		for(int line=0;line<globalHeight;line++)
 		{	for(int col=0;col<globalWidth;col++)

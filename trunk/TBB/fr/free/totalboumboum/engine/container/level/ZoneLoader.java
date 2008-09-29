@@ -40,7 +40,6 @@ package fr.free.totalboumboum.engine.container.level;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
@@ -51,29 +50,19 @@ import org.jdom.Attribute;
 import org.jdom.Element;
 import org.xml.sax.SAXException;
 
-import fr.free.totalboumboum.data.configuration.Configuration;
-import fr.free.totalboumboum.engine.container.bombset.Bombset;
-import fr.free.totalboumboum.engine.container.bombset.BombsetLoader;
-import fr.free.totalboumboum.engine.container.itemset.Itemset;
-import fr.free.totalboumboum.engine.container.itemset.ItemsetLoader;
 import fr.free.totalboumboum.engine.container.theme.Theme;
-import fr.free.totalboumboum.engine.container.theme.ThemeLoader;
-import fr.free.totalboumboum.engine.container.tile.ValueTile;
 import fr.free.totalboumboum.engine.container.tile.VariableTile;
 import fr.free.totalboumboum.engine.container.tile.VariableTilesLoader;
-import fr.free.totalboumboum.engine.loop.Loop;
-import fr.free.totalboumboum.engine.player.PlayerLocation;
-import fr.free.totalboumboum.game.round.Round;
+import fr.free.totalboumboum.engine.container.tile.ZoneTile;
 import fr.free.totalboumboum.tools.FileTools;
 import fr.free.totalboumboum.tools.XmlTools;
-
-
 
 public class ZoneLoader
 {	    
     public static Zone loadZone(String folder, int globalHeight, int globalWidth) throws ParserConfigurationException, SAXException, IOException
     {	// init
-		Element root;
+    	Zone result = new Zone(globalWidth,globalHeight);
+    	Element root;
 		String schemaFolder = FileTools.getSchemasPath();
 		String individualFolder = folder;
 		File schemaFile,dataFile;
@@ -84,27 +73,15 @@ public class ZoneLoader
 		// tiles random variable
 		Element variables = root.getChild(XmlTools.ELT_VARIABLE_TILES);
 		HashMap<String,VariableTile> variableTiles = VariableTilesLoader.loadVariableTilesElement(variables);
+		result.setVariableTiles(variableTiles);
 		// matrix
 		Element matrx = root.getChild(XmlTools.ELT_MATRIX);
-		Zone result = loadMatrixElement(matrx, globalHeight, globalWidth, variableTiles);
+		loadMatrixElement(matrx,globalHeight,globalWidth,result);
 		return result;
     }
         
-    private static Zone loadMatrixElement(Element root, int globalHeight, int globalWidth, HashMap<String,VariableTile> variableTiles)
-    {	// init
-    	Zone result = new Zone();
-    	String[][] floors = new String[globalHeight][globalWidth];
-    	String[][] blocks = new String[globalHeight][globalWidth];
-    	String[][] items = new String[globalHeight][globalWidth];
-    	for(int i=0;i<globalHeight;i++)
-    	{	for(int j=0;j<globalWidth;j++)
-    		{	floors[i][j] = null;
-	        	blocks[i][j] = null;
-	        	items[i][j] = null;
-    		}
-    	}
-
-    	// matrix
+    private static void loadMatrixElement(Element root, int globalHeight, int globalWidth, Zone result)
+    {	// matrix
     	List<Element> elements = root.getChildren(XmlTools.ELT_LINE);
     	Iterator<Element> i = elements.iterator();
     	while(i.hasNext())
@@ -116,50 +93,29 @@ public class ZoneLoader
         	{	String[] content = {null,null,null};
         		Element tile = iL.next();
         		int posT = Integer.parseInt(tile.getAttribute(XmlTools.ATT_POSITION).getValue().trim());
+        		ZoneTile zt = new ZoneTile(posL,posT);
         		// variable tile
         		Element elt = tile.getChild(XmlTools.ELT_REFERENCE);
         		if(elt!=null)
         		{	String name = elt.getAttribute(XmlTools.ATT_NAME).getValue();
-        			VariableTile vt = variableTiles.get(name);
-					boolean found = false;
-					double proba = Math.random();
-					float p = 0;
-					ArrayList<ValueTile> valueTiles = vt.getValues();
-					Iterator<ValueTile> j = valueTiles.iterator();
-					while(j.hasNext() && !found)
-					{	ValueTile vit = j.next();
-						Float f = vit.getProba();
-						String itm = vit.getItem();
-						String blck = vit.getBlock();
-						String flr = vit.getFloor();
-						p = p + f;
-						if(proba<=p)
-						{	found = true;
-							content[0] = flr;
-							content[1] = blck;
-							content[2] = itm;
-						}    
-					}
+        			zt.setVariable(name);
         		}
         		// constant tile
         		else
-        		{	content = loadBasicTileElement(tile);     			
+        		{	content = loadBasicTileElement(tile);
+        			// floor
+        			if(content[0]!=null)
+        				zt.setFloor(content[0]);
+        			// blocks
+        			if(content[1]!=null)
+        				zt.setBlock(content[1]);
+        			// items
+        			if(content[2]!=null)
+        				zt.setItem(content[2]);
         		}
-        		// values
-    			{	// floor
-    				floors[posL][posT] = content[0];
-    				// block
-    				blocks[posL][posT] = content[1];
-    				// item
-    				items[posL][posT] = content[2];
-        		}
+        		result.addTile(zt);
         	}
     	}
-    	// result
-    	result.setFloorMatrix(floors);
-    	result.setBlockMatrix(blocks);
-    	result.setItemMatrix(items);
-    	return result;
     }
     
     public static String[] loadBasicTileElement(Element root)
