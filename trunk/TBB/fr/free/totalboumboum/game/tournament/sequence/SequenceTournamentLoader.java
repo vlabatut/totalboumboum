@@ -29,7 +29,7 @@ import fr.free.totalboumboum.tools.XmlTools;
 
 public class SequenceTournamentLoader
 {	
-	public static SequenceTournament loadTournamentElement(String folder, Element root, Configuration configuration) throws ParserConfigurationException, SAXException, IOException
+	public static SequenceTournament loadTournamentElement(String folder, Element root, Configuration configuration) throws ParserConfigurationException, SAXException, IOException, ClassNotFoundException
 	{	SequenceTournament result = new SequenceTournament(configuration);
 		Element element;
 		// limits
@@ -46,7 +46,7 @@ public class SequenceTournamentLoader
 		return result;
 	}
 	
-	private static void loadMatchesElement(Element root, String folder, SequenceTournament result) throws ParserConfigurationException, SAXException, IOException
+	private static void loadMatchesElement(Element root, String folder, SequenceTournament result) throws ParserConfigurationException, SAXException, IOException, ClassNotFoundException
 	{	// matches order
     	String str = root.getAttribute(XmlTools.ATT_RANDOM_ORDER).getValue().trim();
     	boolean randomOrder = Boolean.valueOf(str);
@@ -60,7 +60,7 @@ public class SequenceTournamentLoader
 		}
 	}
 		
-	private static void loadMatchElement(Element root, String folder, SequenceTournament result) throws ParserConfigurationException, SAXException, IOException
+	private static void loadMatchElement(Element root, String folder, SequenceTournament result) throws ParserConfigurationException, SAXException, IOException, ClassNotFoundException
 	{	Match match;
 		// local
 		String localStr = root.getAttribute(XmlTools.ATT_LOCAL).getValue().trim();

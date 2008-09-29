@@ -12,8 +12,7 @@ import fr.free.totalboumboum.data.configuration.Configuration;
 import fr.free.totalboumboum.data.profile.Profile;
 import fr.free.totalboumboum.data.statistics.StatisticEvent;
 import fr.free.totalboumboum.data.statistics.StatisticRound;
-import fr.free.totalboumboum.engine.container.level.LevelDescription;
-import fr.free.totalboumboum.engine.container.level.LevelLoader;
+import fr.free.totalboumboum.engine.container.level.HollowLevel;
 import fr.free.totalboumboum.engine.container.level.Zone;
 import fr.free.totalboumboum.engine.container.level.ZoneLoader;
 import fr.free.totalboumboum.engine.loop.Loop;
@@ -46,7 +45,6 @@ public class Round
 		remainingPlayers = getProfiles().size();
 		for(int i=0;i<remainingPlayers;i++)
 			playersInGame.add(new Boolean(true));
-		zone = ZoneLoader.loadZone(getLevelDescription().getPath(),this);
 	}
 	
 	public boolean isOver()
@@ -67,35 +65,19 @@ public class Round
 		loop.finish();
 		loop = null;
 		// level description
-		levelDescription.finish();
-		levelDescription = null;
+		hollowLevel.finish();
+		hollowLevel = null;
 		// misc
 		configuration = null;
-		levelDescription = null;
 		match = null;
 		panel = null;
 		playersInGame.clear();
 		stats = null;
-		zone = null;
 		// garbage collect
 		Runtime rt = Runtime.getRuntime();
 		rt.gc(); 
 	}
 
-	/////////////////////////////////////////////////////////////////
-	// ZONE 			/////////////////////////////////////////////
-	/////////////////////////////////////////////////////////////////
-	private Zone zone = null;
-	
-	public void setZone(Zone zone)
-	{	this.zone = zone;		
-	}
-	public Zone getZone()
-	{	return zone;	
-	}
-	
-	
-	
 	/////////////////////////////////////////////////////////////////
 	// LOOP 			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
@@ -259,15 +241,15 @@ public class Round
 	}
 			
 	/////////////////////////////////////////////////////////////////
-	// LEVEL DESCRIPTION	/////////////////////////////////////////
+	// HOLLOW LEVEL			/////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	private LevelDescription levelDescription;
+	private HollowLevel hollowLevel;
 	
-	public LevelDescription getLevelDescription()
-	{	return levelDescription;	
+	public HollowLevel getHollowLevel()
+	{	return hollowLevel;	
 	}
-	public void setLevelDescription(LevelDescription levelDescription)
-	{	this.levelDescription = levelDescription;	
+	public void setHollowLevel(HollowLevel hollowLevel)
+	{	this.hollowLevel = hollowLevel;	
 	}
 
 	
@@ -277,7 +259,7 @@ public class Round
 		result.setLimits(limits);
 		result.setPlayMode(playMode);
 		result.pointProcessor = pointProcessor;
-		result.setLevelDescription(levelDescription);
+		result.setHollowLevel(hollowLevel.copy());
 		return result;
 	}
 	

@@ -11,10 +11,9 @@ import javax.xml.parsers.ParserConfigurationException;
 import org.jdom.Element;
 import org.xml.sax.SAXException;
 
-import fr.free.totalboumboum.engine.container.level.LevelDescription;
+import fr.free.totalboumboum.engine.container.level.HollowLevel;
 import fr.free.totalboumboum.game.limit.LimitLoader;
 import fr.free.totalboumboum.game.limit.Limits;
-import fr.free.totalboumboum.game.limit.MatchLimit;
 import fr.free.totalboumboum.game.limit.RoundLimit;
 import fr.free.totalboumboum.game.match.Match;
 import fr.free.totalboumboum.game.match.MatchLoader;
@@ -26,7 +25,7 @@ import fr.free.totalboumboum.tools.XmlTools;
 
 public class RoundLoader
 {	
-	public static Round loadRoundFromFolderPath(String folderPath, Match match) throws ParserConfigurationException, SAXException, IOException
+	public static Round loadRoundFromFolderPath(String folderPath, Match match) throws ParserConfigurationException, SAXException, IOException, ClassNotFoundException
 	{	// init
 		String schemaFolder = FileTools.getSchemasPath();
 		File schemaFile,dataFile;
@@ -39,13 +38,13 @@ public class RoundLoader
 		return result;
     }
     
-	public static Round loadRoundFromName(String name, Match match) throws ParserConfigurationException, SAXException, IOException
+	public static Round loadRoundFromName(String name, Match match) throws ParserConfigurationException, SAXException, IOException, ClassNotFoundException
 	{	String individualFolder = FileTools.getRoundsPath()+File.separator+name;
 		Round result = loadRoundFromFolderPath(individualFolder,match);
 		return result;
     }
 
-    private static Round loadRoundElement(Element root, String folderPath, Match match) throws ParserConfigurationException, SAXException, IOException
+    private static Round loadRoundElement(Element root, String folderPath, Match match) throws ParserConfigurationException, SAXException, IOException, ClassNotFoundException
 	{	// init
     	Round result = new Round(match);
 		Element element;
@@ -71,13 +70,12 @@ public class RoundLoader
 		return result;
 	}		
 		
-    private static void loadLevelElement(Element root, Round result)
-    {	LevelDescription level = new LevelDescription();
-    	String name = root.getAttribute(XmlTools.ATT_NAME).getValue().trim();
-    	level.setName(name);
+    private static void loadLevelElement(Element root, Round result) throws ParserConfigurationException, SAXException, IOException, ClassNotFoundException
+    {	String name = root.getAttribute(XmlTools.ATT_NAME).getValue().trim();
     	String packname = root.getAttribute(XmlTools.ATT_PACKNAME).getValue().trim();
-    	level.setPackname(packname);
-    	result.setLevelDescription(level);
+    	String folder = packname+File.separator+name;
+    	HollowLevel hollowLevel = new HollowLevel(folder); 
+    	result.setHollowLevel(hollowLevel);
     }
     
     private static void loadGameplayElement(Element root, Round result)

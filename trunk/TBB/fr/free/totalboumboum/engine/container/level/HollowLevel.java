@@ -25,7 +25,8 @@ import fr.free.totalboumboum.tools.XmlTools;
 public class HollowLevel
 {
     private Level level;
-
+    private String levelFolder;
+    
     private boolean displayForceAll;
 	private boolean displayMaximize;
 	private int globalHeight;
@@ -41,16 +42,13 @@ public class HollowLevel
 	private String bombsetPath;
 	private Players players;
 	
-/*	
-	public String getInstancePath() 
-	{	return instancePath;
+	private HollowLevel()
+	{		
 	}
-	public void setInstancePath(String instancePath)
-	{	this.instancePath = instancePath;
-	}
-*/	
+
 	public HollowLevel(String folder) throws ParserConfigurationException, SAXException, IOException, ClassNotFoundException
 	{	// init
+		levelFolder = folder;
 		String schemaFolder = FileTools.getSchemasPath();
 		String individualFolder = FileTools.getLevelsPath()+File.separator+folder;
 		File schemaFile,dataFile;
@@ -117,6 +115,27 @@ public class HollowLevel
 		zone = ZoneLoader.loadZone(folder,globalHeight,globalWidth);
 	}
     
+    public HollowLevel copy()
+    {	HollowLevel result = new HollowLevel();
+    	result.displayForceAll = displayForceAll;
+    	result.displayMaximize = displayMaximize;
+    	result.globalHeight = globalHeight;
+    	result.globalWidth = globalWidth;
+    	result.visibleHeight = visibleHeight;
+    	result.visibleWidth = visibleWidth;
+    	result.visibleUpLine = visibleUpLine;
+    	result.visibleLeftCol = visibleLeftCol;
+    	result.zone = zone;
+    	result.instancePath = instancePath;
+    	result.themePath = themePath;
+    	result.itemPath = itemPath;
+    	result.bombsetPath = bombsetPath;
+    	result.players = players;
+    	result.levelFolder = levelFolder;
+    	//
+    	return result;
+    }
+    
     public Players getPlayers()
     {	return players;    	
     }
@@ -124,10 +143,14 @@ public class HollowLevel
     {	return instancePath;
     }
     
-    private void initLevel(Loop loop)
+    public String getLevelFolder()
+    {	return levelFolder;
+    }
+
+    public void initLevel(Loop loop)
 	{	// init
     	level = new Level(loop);
-//level.setInstancePath(instancePath);
+    	level.setInstancePath(instancePath);
 		Dimension panelDim = level.getConfiguration().getPanelDimension();
     	double sizeX = panelDim.width;
     	double sizeY = panelDim.height;
@@ -217,7 +240,7 @@ public class HollowLevel
     {	// theme
     	Theme theme = ThemeLoader.loadTheme(themePath,level);
 		level.setTheme(theme);
-		// zone
+		// init zone
 		Tile[][] matrix = level.getMatrix();
 		Itemset itemset = level.getItemset();
 		double globalLeftX = level.getGlobalLeftX();
@@ -226,7 +249,7 @@ public class HollowLevel
     	String[][] mFloors = zone.getFloorMatrix();
 		String[][] mBlocks = zone.getBlockMatrix();
 		String[][] mItems = zone.getItemMatrix();
-		// tiles
+		// init tiles
 		for(int line=0;line<globalHeight;line++)
 		{	for(int col=0;col<globalWidth;col++)
 			{	double x = globalLeftX + tileDimension/2 + col*tileDimension;
@@ -249,4 +272,20 @@ public class HollowLevel
 			}
 		}
 	}
+    
+    public Level getLevel()
+    {	return level;    
+    }
+    
+    public void finish()
+    {	// misc
+    	bombsetPath = null;
+    	instancePath = null;
+    	itemPath = null;
+    	level = null;
+    	players = null;
+    	themePath = null;
+    	zone = null;
+    	levelFolder = null;
+    }
 }

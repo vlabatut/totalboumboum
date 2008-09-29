@@ -25,8 +25,9 @@ import fr.free.totalboumboum.data.configuration.GameConstants;
 import fr.free.totalboumboum.data.profile.Profile;
 import fr.free.totalboumboum.data.statistics.StatisticEvent;
 import fr.free.totalboumboum.engine.container.itemset.Itemset;
+import fr.free.totalboumboum.engine.container.level.HollowLevel;
 import fr.free.totalboumboum.engine.container.level.Level;
-import fr.free.totalboumboum.engine.container.level.LevelLoader;
+import fr.free.totalboumboum.engine.container.level.Players;
 import fr.free.totalboumboum.engine.content.feature.ability.AbilityLoader;
 import fr.free.totalboumboum.engine.content.feature.ability.AbstractAbility;
 import fr.free.totalboumboum.engine.content.feature.ability.StateAbility;
@@ -63,10 +64,16 @@ public class Loop implements Runnable
 		systemControl = new SystemControl(this);
 
 		// load level
-		level = LevelLoader.loadLevel(round.getLevelDescription().getPath(),this);
-		// zone (preloaded)
-		level.setZone(round.getZone());
+		HollowLevel hollowLevel = round.getHollowLevel();
+		hollowLevel.initLevel(this);
+		hollowLevel.loadBombset();
 		loadStepOver();
+		hollowLevel.loadItemset();
+		loadStepOver();
+		hollowLevel.loadTheme();
+		loadStepOver();
+		loadStepOver();
+		level = hollowLevel.getLevel();
 
 		// load players : common stuff
 		String baseFolder = level.getInstancePath()+File.separator+FileTools.FOLDER_HEROES;
@@ -80,8 +87,9 @@ public class Loop implements Runnable
 		// load players : individual stuff
 		ArrayList<Profile> profiles = round.getProfiles();
 		int remainingPlayers = profiles.size();
-		PlayerLocation[] initialPositions = level.getPlayersLocations().get(remainingPlayers);
-		ArrayList<String> items = level.getPlayersItems();
+		Players plyrs = hollowLevel.getPlayers();
+		PlayerLocation[] initialPositions = plyrs.getLocations().get(remainingPlayers);
+		ArrayList<String> items = plyrs.getInitialItems();
 		Itemset itemset = level.getItemset();
 		Iterator<Profile> i = profiles.iterator();
 		int j=0;

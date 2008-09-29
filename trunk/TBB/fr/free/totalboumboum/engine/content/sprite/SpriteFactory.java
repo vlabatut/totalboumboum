@@ -5,6 +5,7 @@ import java.util.Iterator;
 
 import fr.free.totalboumboum.data.configuration.Configuration;
 import fr.free.totalboumboum.engine.container.bombset.Bombset;
+import fr.free.totalboumboum.engine.container.level.HollowLevel;
 import fr.free.totalboumboum.engine.container.level.Level;
 import fr.free.totalboumboum.engine.content.feature.ability.AbstractAbility;
 import fr.free.totalboumboum.engine.content.feature.anime.AnimePack;
@@ -122,10 +123,6 @@ public abstract class SpriteFactory<T extends Sprite>
 	{	this.abilities = abilities;
 	}
 
-	public Loop getLoop()
-	{	return level.getLoop();
-	}
-	
 	public Level getLevel()
 	{	return level;	
 	}
