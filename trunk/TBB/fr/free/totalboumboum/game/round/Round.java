@@ -13,6 +13,9 @@ import fr.free.totalboumboum.data.profile.Profile;
 import fr.free.totalboumboum.data.statistics.StatisticEvent;
 import fr.free.totalboumboum.data.statistics.StatisticRound;
 import fr.free.totalboumboum.engine.container.level.LevelDescription;
+import fr.free.totalboumboum.engine.container.level.LevelLoader;
+import fr.free.totalboumboum.engine.container.level.Zone;
+import fr.free.totalboumboum.engine.container.level.ZoneLoader;
 import fr.free.totalboumboum.engine.loop.Loop;
 import fr.free.totalboumboum.engine.player.Player;
 import fr.free.totalboumboum.game.limit.Limits;
@@ -43,6 +46,7 @@ public class Round
 		remainingPlayers = getProfiles().size();
 		for(int i=0;i<remainingPlayers;i++)
 			playersInGame.add(new Boolean(true));
+		zone = ZoneLoader.loadZone(getLevelDescription().getPath(),this);
 	}
 	
 	public boolean isOver()
@@ -72,11 +76,26 @@ public class Round
 		panel = null;
 		playersInGame.clear();
 		stats = null;
+		zone = null;
 		// garbage collect
 		Runtime rt = Runtime.getRuntime();
 		rt.gc(); 
 	}
 
+	/////////////////////////////////////////////////////////////////
+	// ZONE 			/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	private Zone zone = null;
+	
+	public void setZone(Zone zone)
+	{	this.zone = zone;		
+	}
+	public Zone getZone()
+	{	return zone;	
+	}
+	
+	
+	
 	/////////////////////////////////////////////////////////////////
 	// LOOP 			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////

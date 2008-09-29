@@ -13,6 +13,10 @@ import fr.free.totalboumboum.engine.container.itemset.ItemsetPreviewer;
 public class LevelPreview
 {
 	
+	/////////////////////////////////////////////////////////////////
+	// VISUAL PREVIEW	/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+
 	private BufferedImage visualPreview = null;
 	
 	public BufferedImage getVisualPreview()
@@ -22,6 +26,10 @@ public class LevelPreview
 	{	this.visualPreview = visualPreview;
 	}
 	
+	/////////////////////////////////////////////////////////////////
+	// ITEMSET PREVIEW	/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+
 	private HashMap<String,BufferedImage> itemsetPreview;
 
 	public HashMap<String, BufferedImage> getItemsetPreview()
@@ -30,6 +38,10 @@ public class LevelPreview
 	public void setItemsetPreview(HashMap<String, BufferedImage> itemsetPreview)
 	{	this.itemsetPreview = itemsetPreview;
 	}
+
+	/////////////////////////////////////////////////////////////////
+	// INITIAL ITEMS	/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
 
 	private HashMap<String,Integer> initialItems;
 
@@ -40,5 +52,16 @@ public class LevelPreview
 	{	this.initialItems = initialItems;
 	}
 	
+	/////////////////////////////////////////////////////////////////
+	// LEVEL ITEMS	/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
 
+	private HashMap<String,Integer> levelItems;
+
+	public HashMap<String, Integer> getLevelItems()
+	{	return levelItems;
+	}
+	public void setLevelItems(HashMap<String, Integer> levelItems)
+	{	this.levelItems = levelItems;
+	}
 }

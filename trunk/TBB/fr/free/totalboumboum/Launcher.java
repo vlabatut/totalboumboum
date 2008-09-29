@@ -628,7 +628,6 @@ public class Launcher
 	 * *********************** A FAIRE ***********************
 	 * *******************************************************
 	 * - définir les présentations des rounds
-	 * - faire deux colonnes pour les items initiaux et les limites du round
 	 * - l'emplacement de l'itemset du round doit permettre de contenir des cases carrées sans perte de place
 	 * - pb : les items distribués au début du match ne doivent pas être comptés dans les stats !
 	 * - redistribution des items lors de la mort d'un joueur (option de round?)
@@ -672,5 +671,10 @@ public class Launcher
 	 *  - on rajoute également le système de bonus pour une limite donnée
 	 *  - intérêt : tout ça permet d'implémenter le bonus à celui qui tue tout le monde en survival, par opposition à une victoire temporelle qui rapporterait donc moins de points
 	 *  - LA NOTION DE PLAYMODE EST A SUPPRIMER 
+	 */
+	
+	/*
+	 * 1) construire la matrice avec seulement les noms, lors du chargement du round
+	 * 2) la matrice est instanciée lors du chargement effectif du level 
 	 */
 }

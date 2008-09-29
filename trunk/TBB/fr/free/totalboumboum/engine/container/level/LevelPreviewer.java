@@ -48,8 +48,16 @@ public class LevelPreviewer
 		String instanceName = element.getAttribute(XmlTools.ATT_NAME).getValue().trim();
 		String instanceFolder = FileTools.getInstancesPath()+File.separator+instanceName;
 
-		// players locations
+		// players stuff preview
 		PlayersPreviewer.previewPlayers(folder,result);
+
+		// zone stuff preview
+		element = root.getChild(XmlTools.ELT_GLOBAL_DIMENSION);
+		String globalHeightStr = element.getAttribute(XmlTools.ATT_HEIGHT).getValue().trim();
+		int globalHeight = Integer.parseInt(globalHeightStr);
+		String globalWidthStr = element.getAttribute(XmlTools.ATT_WIDTH).getValue().trim();
+		int globalWidth = Integer.parseInt(globalWidthStr);
+		Zone zone = ZoneLoader.loadZone(folder,globalHeight,globalWidth);
 
 		// itemset
 		String itemFolder = instanceFolder + File.separator+FileTools.FOLDER_ITEMS;

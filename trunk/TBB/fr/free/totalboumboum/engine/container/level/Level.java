@@ -30,37 +30,214 @@ import fr.free.totalboumboum.tools.StringTools;
 
 
 public class Level
-{	private Loop loop;
-	private HashMap<Integer, PlayerLocation[]> playersLocations;
-	private ArrayList<String> playersItems;
-	private Tile matrix[][];
-	private Theme theme;
-	private Itemset itemset;
-	private Bombset bombset;
-	private ArrayList<Sprite> sprites = new ArrayList<Sprite>();;
-	private String instancePath;
+{	
+	public Level(Loop loop)				
+	{	this.loop = loop;
+		configuration = loop.getConfiguration();
+	}
 	
-	private double sizeX;
-	private double sizeY;
-	private double trueZoom;
+	/////////////////////////////////////////////////////////////////
+	// LOOP		/////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	private Loop loop;
 
-	// position et taille du niveau
-	private double posX;
-	private double posY;
+	public Loop getLoop()
+	{	return loop;	
+	}
+	
+    /////////////////////////////////////////////////////////////////
+	// THEME		/////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	private Theme theme;
+
+	public void setTheme(Theme theme)
+	{	this.theme = theme;
+	}
+	public Theme getTheme()
+	{	return theme;
+	}
+
+    /////////////////////////////////////////////////////////////////
+	// CONFIGURATION		/////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+    private Configuration configuration;
+
+    public Configuration getConfiguration()
+	{	return configuration;		
+	}
+
+	/////////////////////////////////////////////////////////////////
+	// SIZE & LOCATION in TILES		/////////////////////////////////
+	/////////////////////////////////////////////////////////////////
 	private int globalWidth;
 	private int globalHeight;
 	private double globalLeftX; // pas central
 	private double globalUpY; // pas central
 
-	// partie visible
-	private int visibleWidth;
-	private int visibleHeight;
-	private int visibleLeftCol;
-	private int visibleUpLine;
-	private double visibleLeftX;
-	private double visibleUpY;
+	public void setTilePositions(int globalWidth, int globalHeight, double globalLeftX, double globalUpY)
+	{	this.globalWidth = globalWidth;
+		this.globalHeight = globalHeight;
+		this.globalLeftX = globalLeftX;
+		this.globalUpY = globalUpY;
+	}
+	public double getGlobalLeftX()
+	{	return globalLeftX;
+	}
+	public double getGlobalUpY()
+	{	return globalUpY;
+	}
+
+	/////////////////////////////////////////////////////////////////
+	// TILES MATRIX		/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	private Tile matrix[][];
+
+	public Tile[][] getMatrix()
+	{	return matrix;
+	}
+	public void setMatrix(Tile matrix[][])
+	{	this.matrix = matrix;
+	}
+	public double getTileDimension()
+	{	return loop.getScaledTileDimension();	
+	}
+	public Tile getTile(int l, int c)
+	{	return matrix[l][c];	
+	}
 	
-	// borders
+    /////////////////////////////////////////////////////////////////
+	// BOMBSET				/////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	private Bombset bombset;
+
+	public Bombset getBombset()
+	{	return bombset;		
+	}
+	public void setBombset(Bombset bombset)
+	{	this.bombset = bombset;
+	}
+	
+	/////////////////////////////////////////////////////////////////
+	// ITEMSET				/////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	private Itemset itemset;
+
+	public Itemset getItemset()
+	{	return itemset;	
+	}
+	public void setItemset(Itemset itemset)
+	{	this.itemset = itemset;
+	}
+	
+	/////////////////////////////////////////////////////////////////
+	// SPRITES				/////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	private ArrayList<Sprite> sprites = new ArrayList<Sprite>();;
+
+	public void addSprite(Sprite sprite)
+	{	sprites.add(sprite);
+	}
+	public void removeSprite(Sprite sprite)
+	{	sprites.remove(sprite);
+	}
+	public void addHero(Hero hero, int line, int col)
+	{	matrix[line][col].addSprite(hero);
+		hero.setCurrentPosX(matrix[line][col].getPosX());
+		hero.setCurrentPosY(matrix[line][col].getPosY());
+	}
+
+	/////////////////////////////////////////////////////////////////
+	// TILE LOCATION	/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	public Tile getTile(double x, double y)
+	{	x = CalculusTools.round(x,loop);
+		y = CalculusTools.round(y,loop);
+		double difX = x-globalLeftX;
+		double difY = y-globalUpY;
+		double rX = difX/getTileDimension();
+		double rY = difY/getTileDimension();
+		int rdX = (int)rX;//(int)Math.round(rX);
+		int rdY = (int)rY;//(int)Math.round(rY);
+		int c = rdX%globalWidth;
+		int l = rdY%globalHeight;
+		return matrix[l][c];
+	}	
+	public Tile getNeighbourTile(int line, int col, Direction direction)
+	{	Tile result;
+		int c,l;
+		Direction p[] = direction.getPrimaries(); 
+		//
+		if(p[0]==Direction.LEFT)
+			c = (col+globalWidth-1)%globalWidth;
+		else if(p[0]==Direction.RIGHT)
+			c = (col+1)%globalWidth;
+		else
+			c = col;
+		//
+		if(p[1]==Direction.UP)
+			l = (line+globalHeight-1)%globalHeight;
+		else if(p[1]==Direction.DOWN)
+			l = (line+1)%globalHeight;
+		else
+			l = line;
+		//
+		result = matrix[l][c];
+		return result;
+	}
+	public ArrayList<Tile> getNeighbourTiles(int line, int col)
+	{	ArrayList<Tile> resultat = new ArrayList<Tile>();
+		resultat.add(getNeighbourTile(line, col, Direction.LEFT));
+		resultat.add(getNeighbourTile(line, col, Direction.DOWNLEFT));
+		resultat.add(getNeighbourTile(line, col, Direction.DOWN));
+		resultat.add(getNeighbourTile(line, col, Direction.DOWNRIGHT));
+		resultat.add(getNeighbourTile(line, col, Direction.RIGHT));
+		resultat.add(getNeighbourTile(line, col, Direction.UPRIGHT));
+		resultat.add(getNeighbourTile(line, col, Direction.UPLEFT));
+		resultat.add(getNeighbourTile(line, col, Direction.UP));		
+		return resultat;
+	}	
+	
+	/////////////////////////////////////////////////////////////////
+	// PIXEL LOCATION	/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	public double[] normalizePosition(double x, double y)
+	{	double result[] = new double[2];
+		result[0] = normalizePositionX(x);
+		result[1] = normalizePositionY(y);
+		//
+		return result;
+	}
+	public double normalizePositionX(double x)
+	{	double result = x;
+		while(result<globalLeftX)
+			result = result + globalWidth*getTileDimension();
+		while(result>globalLeftX+globalWidth*getTileDimension())
+			result = result - globalWidth*getTileDimension();
+		return result;
+	}
+	public double normalizePositionY(double y)
+	{	double result = y;
+		while(result<globalUpY)
+			result = result + globalHeight*getTileDimension();
+		while(result>globalUpY+globalHeight*getTileDimension())
+			result = result - globalHeight*getTileDimension();
+		return result;
+	}
+	public boolean isInsidePosition(double x, double y)
+	{	return isInsidePositionX(x) && isInsidePositionY(y);		
+	}
+	public boolean isInsidePositionX(double x)
+	{	//NOTE comparaison relative?
+		return x>=globalLeftX && x<=globalLeftX+globalWidth*getTileDimension();
+	}
+	public boolean isInsidePositionY(double y)
+	{	//NOTE comparaison relative?
+		return y>=globalUpY && y<=globalUpY+globalHeight*getTileDimension();
+	}
+	
+	/////////////////////////////////////////////////////////////////
+	// BORDERS				/////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
 	private double horizontalBorderX;
 	private double upBorderY;
 	private double downBorderY;
@@ -72,143 +249,46 @@ public class Level
 	private double verticalBorderHeight;
 	private double verticalBorderWidth;
 	
-	
-	public Level(Loop loop)				
-	{	this.loop = loop;
-		configuration = loop.getConfiguration();
-		// dimension
-		Dimension dim = configuration.getPanelDimension();
-		this.sizeX = dim.getWidth();
-		this.sizeY = dim.getHeight();
-			
-	}
-	
-	public void setMatrixDimension(int globalWidth, int globalHeight, int visibleWidth, int visibleHeight, int visibleLeftCol, int visibleUpLine)
-	{	// matrix
-		this.globalWidth = globalWidth;
-		this.globalHeight = globalHeight;
-		matrix = new Tile[globalHeight][globalWidth];
-		
-		// visible part
-		if(displayForceAll)
-		{	visibleWidth = globalWidth;
-			visibleHeight = globalHeight;
-			this.visibleLeftCol = 0;
-			this.visibleUpLine = 0;
-		}
-		else
-		{	this.visibleWidth = visibleWidth;
-			this.visibleHeight = visibleHeight;
-			this.visibleLeftCol = visibleLeftCol;
-			this.visibleUpLine = visibleUpLine;
-		}
-		
-		// zoom factor
-		double standardTileDimension = GameConstants.STANDARD_TILE_DIMENSION;
-		double trueRatioX = sizeX/visibleWidth/standardTileDimension;
-		double trueRatioY = sizeY/visibleHeight/standardTileDimension;
-		trueZoom = Math.min(trueRatioX,trueRatioY);
-		double ratioX = (int)(sizeX/visibleWidth)/standardTileDimension;
-		double ratioY = (int)(sizeY/visibleHeight)/standardTileDimension;
-		double zoomFactor = Math.min(ratioX,ratioY);
-		loop.setZoomFactor(zoomFactor);
-//configuration.setZoomFactor(1.0f);
-		// position
-		posX = sizeX/2;
-		posY = sizeY/2;
-		visibleLeftX = posX - visibleWidth*getTileDimension()/2/* + getTileDimension()/2*/;
-		visibleUpY = posY - visibleHeight*getTileDimension()/2 /*+ getTileDimension()/2*/;
-		globalLeftX = posX - globalWidth*getTileDimension()/2;
-		globalUpY = posY - globalHeight*getTileDimension()/2;
-//NOTE il y a une ligne horizontale dans les borders au dessus du niveau (forcer le zoomFactor à 1 pour la faire apparaitre)		
-		// border
-		horizontalBorderX = 0;
-		upBorderY = 0;
-		horizontalBorderWidth = sizeX;
-		if(displayMaximize)
-		{	downBorderY = globalUpY+globalHeight*getTileDimension()+1;
-			if(globalUpY>0)
-				horizontalBorderHeight = globalUpY;
-			else
-				horizontalBorderHeight = 0;
-			verticalBorderY = horizontalBorderHeight+1;
-			rightBorderX = globalLeftX+globalWidth*getTileDimension()+1;
-			if(globalLeftX>0)
-				verticalBorderWidth = globalLeftX;
-			else
-				verticalBorderWidth = 0;
-			verticalBorderHeight = sizeY-2*horizontalBorderHeight+1;
-		}
-		else
-		{	downBorderY = visibleUpY+visibleHeight*getTileDimension()+1;
-			horizontalBorderHeight = visibleUpY;
-			verticalBorderY = visibleUpY;
-			rightBorderX = visibleLeftX+visibleWidth*getTileDimension()+1;
-			verticalBorderWidth = visibleLeftX;
-			verticalBorderHeight = sizeY-2*horizontalBorderHeight+1;
-		}
-		leftBorderX = 0;
-		
-	}
-	public void setItemset(Itemset itemset)
-	{	this.itemset = itemset;
-	}
-	public void setBombset(Bombset bombset)
-	{	this.bombset = bombset;
-	}
-	public void setTheme(Theme theme)
-	{	// theme
-		this.theme = theme;
-	}
-	public void setMatrix(String[][] mFloors, String[][] mBlocks, String[][] mItems)
-	{	// tiles
-		for(int line=0;line<globalHeight;line++)
-		{	for(int col=0;col<globalWidth;col++)
-			{	double x = globalLeftX + getTileDimension()/2 + col*getTileDimension();
-				double y = globalUpY + getTileDimension()/2 + line*getTileDimension();
-				if(mFloors[line][col]==null)
-					matrix[line][col] = new Tile(this,line,col,x,y,theme.makeFloor());
-				else
-					matrix[line][col] = new Tile(this,line,col,x,y,theme.makeFloor(mFloors[line][col]));
-				if(mBlocks[line][col]!=null)
-					matrix[line][col].addSprite(theme.makeBlock(mBlocks[line][col]));
-				if(mItems[line][col]!=null)
-				{	Item item = itemset.makeItem(mItems[line][col]);
-					if(matrix[line][col].hasBlock())
-						matrix[line][col].getBlock().setHiddenSprite(item);
-					else
-					{	matrix[line][col].addSprite(item);
-						item.initGesture();
-					}
-				}
-			}
-		}
+	public void setBorders(double values[])
+	{	int i = 0;
+		horizontalBorderX = values[i++];
+		upBorderY = values[i++];
+		downBorderY = values[i++];
+		horizontalBorderHeight = values[i++];
+		horizontalBorderWidth = values[i++];
+		verticalBorderY = values[i++];
+		leftBorderX = values[i++];
+		rightBorderX = values[i++];
+		verticalBorderHeight = values[i++];
+		verticalBorderWidth = values[i++];
 	}
 
-	public void addHero(Hero hero, int line, int col)
-	{	matrix[line][col].addSprite(hero);
-		hero.setCurrentPosX(matrix[line][col].getPosX());
-		hero.setCurrentPosY(matrix[line][col].getPosY());
-	}
-/*	
-	public void setBlock(AbstractBlock block, int line, int col)
-	{	matrix[line][col].setBlock(block);		
-	}
-*/
-	public Tile[][] getMatrix()
-	{	return matrix;
-	}
-	
+	/////////////////////////////////////////////////////////////////
+	// IN GAME METHODS		/////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
 	public void update()
 	{	for(int line=0;line<globalHeight;line++)
 			for(int col=0;col<globalWidth;col++)
 				matrix[line][col].update();		
 	}
 
-	//NOTE à effectuer seulement pour les tiles visibles
 	public void draw(Graphics g)
-	{	
-		// only the on-ground flat sprites (they don't have shadow)
+	{	drawLevel(g);
+		if(loop.getShowBorders())
+			drawBorders(g);
+		if(loop.getShowGrid())
+			drawGrid(g);
+		if(loop.getShowTilesPositions()>0)
+			drawTilesPositions(g);
+		if(loop.getShowSpeed())
+			drawSpeed(g);
+		if(loop.getShowTime())
+			drawTime(g);
+	}
+
+	//NOTE optimisation : à effectuer seulement pour les tiles visibles
+	private void drawLevel(Graphics g)
+	{	// only the on-ground flat sprites (they don't have shadow)
 		for(int line=0;line<globalHeight;line++)
 			for(int col=0;col<globalWidth;col++)
 				matrix[line][col].drawSelection(g,true,true,false);
@@ -248,8 +328,10 @@ public class Level
 			for(int col=0;col<globalWidth;col++)
 				matrix[line][col].drawSelection(g,false,false,false);
 		}
-		// contours
-		if(horizontalBorderHeight>0)
+	}
+	
+	private void drawBorders(Graphics g)
+	{	if(horizontalBorderHeight>0)
 		{	Color temp = g.getColor();
 			g.setColor(configuration.getBorderColor());
 			g.fillRect((int)horizontalBorderX, (int)upBorderY, (int)horizontalBorderWidth, (int)horizontalBorderHeight);
@@ -263,22 +345,26 @@ public class Level
 			g.fillRect((int)rightBorderX, (int)verticalBorderY, (int)verticalBorderWidth, (int)verticalBorderHeight);
 			g.setColor(temp);
 		}
-		if(loop.getShowGrid())
-		{	g.setColor(Color.CYAN);
-			// croix					
-//			g.drawLine((int)posX, 0, (int)posX, configuration.getPanelDimensionY());
-//			g.drawLine(0,(int)posY, configuration.getPanelDimensionX(), (int)posY);
-			// grille
-			for(int line=0;line<globalHeight;line++)
-				for(int col=0;col<globalWidth;col++)
-				{	Tile temp = matrix[line][col];
-					g.drawLine((int)temp.getPosX(), (int)temp.getPosY(), (int)temp.getPosX(), (int)temp.getPosY());
-					g.drawRect((int)(temp.getPosX()-getTileDimension()/2), (int)(temp.getPosY()-getTileDimension()/2), (int)getTileDimension(), (int)getTileDimension());
-				}
-		}
+	}
+	
+	private void drawGrid(Graphics g)
+	{	g.setColor(Color.CYAN);
+		// croix					
+//		g.drawLine((int)posX, 0, (int)posX, configuration.getPanelDimensionY());
+//		g.drawLine(0,(int)posY, configuration.getPanelDimensionX(), (int)posY);
+		// grille
+		for(int line=0;line<globalHeight;line++)
+			for(int col=0;col<globalWidth;col++)
+			{	Tile temp = matrix[line][col];
+				g.drawLine((int)temp.getPosX(), (int)temp.getPosY(), (int)temp.getPosX(), (int)temp.getPosY());
+				g.drawRect((int)(temp.getPosX()-getTileDimension()/2), (int)(temp.getPosY()-getTileDimension()/2), (int)getTileDimension(), (int)getTileDimension());
+			}
+	}
+
+	private void drawTilesPositions(Graphics g)
+	{	// expressed in tiles
 		if(loop.getShowTilesPositions()==1)
-		{	// coordonnées
-			g.setColor(Color.CYAN);
+		{	g.setColor(Color.CYAN);
 			Font font = new Font("Dialog", Font.PLAIN, 12);
 			g.setFont(font);
 			FontMetrics metrics = g.getFontMetrics(font);
@@ -292,6 +378,7 @@ public class Level
 					g.drawString(text, x, y);
 				}
 		}
+		// expressed in pixels
 		else if(loop.getShowTilesPositions()==2)
 		{	// coordonnées
 			g.setColor(Color.CYAN);
@@ -312,235 +399,37 @@ public class Level
 					y = (int)Math.round(temp.getPosY()+boxY.getHeight());
 					g.drawString(textY, x, y);
 				}
-		}		
-		// vitesse
-		if(loop.getShowSpeed())
-		{	g.setColor(Color.MAGENTA);
-			Font font = new Font("Dialog", Font.PLAIN, 18);
-			g.setFont(font);
-			FontMetrics metrics = g.getFontMetrics(font);
-			String text = "Speed: "+configuration.getSpeedCoeff();
-			Rectangle2D box = metrics.getStringBounds(text, g);
-			int x = 10;
-			int y = (int)Math.round(10+box.getHeight()/2);
-			g.drawString(text, x, y);
-		}
-		// temps écoulé
-		if(loop.getShowTime())
-		{	g.setColor(Color.MAGENTA);
-			Font font = new Font("Dialog", Font.PLAIN, 18);
-			g.setFont(font);
-			FontMetrics metrics = g.getFontMetrics(font);
-			long time = loop.getTotalTime();
-			String text = "Time: "+StringTools.formatTimeWithHours(time);
-			Rectangle2D box = metrics.getStringBounds(text, g);
-			int x = 10;
-			int y = (int)Math.round(30+box.getHeight()/2);
-			g.drawString(text, x, y);
 		}
 	}
-
-	public int getVisibleLeftCol()
-	{	return visibleLeftCol;
-	}
-	public int getVisibleUpLine()
-	{	return visibleUpLine;
-	}
-	public int getVisibleWidth()
-	{	return visibleWidth;
-	}
-	public int getVisibleHeight()
-	{	return visibleHeight;
-	}
-
-	public int getGlobalWidth()
-	{	return globalWidth;
-	}
-	public int getGlobalHeight()
-	{	return globalHeight;
-	}
-
-	public Tile getTile(int l, int c)
-	{	return matrix[l][c];	
+		
+	private void drawSpeed(Graphics g)
+	{	g.setColor(Color.MAGENTA);
+		Font font = new Font("Dialog", Font.PLAIN, 18);
+		g.setFont(font);
+		FontMetrics metrics = g.getFontMetrics(font);
+		String text = "Speed: "+configuration.getSpeedCoeff();
+		Rectangle2D box = metrics.getStringBounds(text, g);
+		int x = 10;
+		int y = (int)Math.round(10+box.getHeight()/2);
+		g.drawString(text, x, y);
 	}
 	
-	public Tile getTile(double x, double y)
-	{	
-//System.out.println();		
-//System.out.println("getTile>"+"globalPosition:"+globalLeftX+","+globalUpY);		
-//System.out.println("getTile>"+"originalPos:"+x+","+y);		
-		x = CalculusTools.round(x,loop);
-		y = CalculusTools.round(y,loop);
-//System.out.println("getTile>"+"rounded:"+x+","+y);		
-		double difX = x-globalLeftX;
-		double difY = y-globalUpY;
-//System.out.println("getTile>"+"dif:"+difX+","+difY);		
-		double rX = difX/getTileDimension();
-		double rY = difY/getTileDimension();
-//System.out.println("getTile>"+"rapport:"+rX+","+rY);		
-		int rdX = (int)rX;//(int)Math.round(rX);
-		int rdY = (int)rY;//(int)Math.round(rY);
-//System.out.println("getTile>"+"round:"+rdX+","+rdY);		
-//System.out.println("getTile>"+"globalSize:"+globalWidth+","+globalHeight);		
-		int c = rdX%globalWidth;
-		int l = rdY%globalHeight;
-//System.out.println("getTile>"+"finalPos:"+l+","+c);		
-		return matrix[l][c];
+	private void drawTime(Graphics g)
+	{	g.setColor(Color.MAGENTA);
+		Font font = new Font("Dialog", Font.PLAIN, 18);
+		g.setFont(font);
+		FontMetrics metrics = g.getFontMetrics(font);
+		long time = loop.getTotalTime();
+		String text = "Time: "+StringTools.formatTimeWithHours(time);
+		Rectangle2D box = metrics.getStringBounds(text, g);
+		int x = 10;
+		int y = (int)Math.round(30+box.getHeight()/2);
+		g.drawString(text, x, y);
 	}
 	
-	public Tile getNeighbourTile(int line, int col, Direction direction)
-	{	Tile result;
-		int c,l;
-		Direction p[] = direction.getPrimaries(); 
-		//
-		if(p[0]==Direction.LEFT)
-			c = (col+globalWidth-1)%globalWidth;
-		else if(p[0]==Direction.RIGHT)
-			c = (col+1)%globalWidth;
-		else
-			c = col;
-		//
-		if(p[1]==Direction.UP)
-			l = (line+globalHeight-1)%globalHeight;
-		else if(p[1]==Direction.DOWN)
-			l = (line+1)%globalHeight;
-		else
-			l = line;
-		//
-		result = matrix[l][c];
-		return result;
-	}
-
-	public ArrayList<Tile> getNeighbourTiles(int line, int col)
-	{	ArrayList<Tile> resultat = new ArrayList<Tile>();
-		resultat.add(getNeighbourTile(line, col, Direction.LEFT));
-		resultat.add(getNeighbourTile(line, col, Direction.DOWNLEFT));
-		resultat.add(getNeighbourTile(line, col, Direction.DOWN));
-		resultat.add(getNeighbourTile(line, col, Direction.DOWNRIGHT));
-		resultat.add(getNeighbourTile(line, col, Direction.RIGHT));
-		resultat.add(getNeighbourTile(line, col, Direction.UPRIGHT));
-		resultat.add(getNeighbourTile(line, col, Direction.UPLEFT));
-		resultat.add(getNeighbourTile(line, col, Direction.UP));		
-		return resultat;
-	}
-	
-//les limites ne doivent pas être les centres, ce qui simplifiera les calculs et 
-//améliorera la lisibilité	
-	
-	public double[] normalizePosition(double x, double y)
-	{	double result[] = new double[2];
-		result[0] = normalizePositionX(x);
-		result[1] = normalizePositionY(y);
-		//
-if(x!=result[0]){		
-System.out.println("globalHeight:"+globalHeight+" globalWidth:"+globalWidth);		
-System.out.println("globalLeftX:"+globalLeftX+" globalUpY:"+globalUpY);		
-System.out.println("x:"+x+" y:"+y);		
-System.out.println("resX:"+result[0]+" resY:"+result[1]);	
-}	
-		return result;
-	}
-	public double normalizePositionX(double x)
-	{	double result = x;
-		while(result<globalLeftX)
-			result = result + globalWidth*getTileDimension();
-		while(result>globalLeftX+globalWidth*getTileDimension())
-			result = result - globalWidth*getTileDimension();
-		return result;
-	}
-	public double normalizePositionY(double y)
-	{	double result = y;
-		while(result<globalUpY)
-			result = result + globalHeight*getTileDimension();
-		while(result>globalUpY+globalHeight*getTileDimension())
-			result = result - globalHeight*getTileDimension();
-		return result;
-	}	
-	
-	public boolean isInsidePosition(double x, double y)
-	{	return isInsidePositionX(x) && isInsidePositionY(y);		
-	}
-	public boolean isInsidePositionX(double x)
-	{	//NOTE comparaison relative?
-		return x>=globalLeftX && x<=globalLeftX+globalWidth*getTileDimension();
-	}
-	public boolean isInsidePositionY(double y)
-	{	//NOTE comparaison relative?
-//System.out.println("y:"+y+" debut:"+globalUpY+" fin:"+(globalUpY+globalHeight*getTileDimension())+" résultat:"+(y>=globalUpY && y<=globalUpY+globalHeight*getTileDimension()));		
-		return y>=globalUpY && y<=globalUpY+globalHeight*getTileDimension();
-	}
-
-	public double getTileDimension()
-	{	return loop.getScaledTileDimension();	
-	}
-	
-	public Loop getLoop()
-	{	return loop;	
-	}
-	
-    private Configuration configuration;
-
-    public Configuration getConfiguration()
-	{	return configuration;		
-	}
-	
-	public void addSprite(Sprite sprite)
-	{	sprites.add(sprite);
-	}
-	public void removeSprite(Sprite sprite)
-	{	sprites.remove(sprite);
-	}
-	
-	public Bombset getBombset()
-	{	return bombset;		
-	}
-
 	/////////////////////////////////////////////////////////////////
-	// DISPLAY			/////////////////////////////////////////////
+	// FINISHED				/////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-
-	private boolean displayForceAll;
-	private boolean displayMaximize;
-
-	public boolean getDisplayForceAll()
-	{	return displayForceAll;
-	}
-	public void setDisplayForceAll(boolean displayForceAll)
-	{	this.displayForceAll = displayForceAll;
-	}
-	
-	public boolean getDisplayMaximize()
-	{	return displayMaximize;
-	}
-	public void setDisplayMaximize(boolean displayMaximize)
-	{	this.displayMaximize = displayMaximize;
-	}
-	
-	
-	
-	
-	public HashMap<Integer, PlayerLocation[]> getPlayersLocations()
-	{	return playersLocations;
-	}
-	public void setPlayersLocations(HashMap<Integer, PlayerLocation[]> playersLocations)
-	{	this.playersLocations = playersLocations;
-	}
-	
-	public ArrayList<String> getPlayersItems()
-	{	return playersItems;
-	}
-	public void setPlayersItems(ArrayList<String> playersItems)
-	{	this.playersItems = playersItems;
-	}
-	
-	
-	public String getInstancePath() 
-	{	return instancePath;
-	}
-	public void setInstancePath(String instancePath)
-	{	this.instancePath = instancePath;
-	}
-	
 	private boolean finished = false;
 	
 	public void finish()
@@ -554,10 +443,11 @@ System.out.println("resX:"+result[0]+" resY:"+result[1]);
 			itemset = null;
 			// matrix
 			for(int line=0;line<globalHeight;line++)
-				for(int col=0;col<globalWidth;col++)
+			{	for(int col=0;col<globalWidth;col++)
 				{	matrix[line][col].finish();
 					matrix[line][col] = null;
 				}
+			}
 			// sprites
 			Iterator<Sprite> it = sprites.iterator();
 			while(it.hasNext())
@@ -568,12 +458,6 @@ System.out.println("resX:"+result[0]+" resY:"+result[1]);
 			// theme
 			theme.finish();
 			theme = null;
-			// misc
-			playersLocations = null;
 		}
-	}
-	
-	public Itemset getItemset()
-	{	return itemset;	
 	}
 }
