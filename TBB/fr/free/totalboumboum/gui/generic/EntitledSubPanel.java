@@ -3,9 +3,11 @@ package fr.free.totalboumboum.gui.generic;
 import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.Font;
+import java.awt.image.BufferedImage;
 
 import javax.swing.Box;
 import javax.swing.BoxLayout;
+import javax.swing.ImageIcon;
 import javax.swing.JComponent;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -13,6 +15,7 @@ import javax.swing.SwingConstants;
 
 import fr.free.totalboumboum.gui.data.configuration.GuiConfiguration;
 import fr.free.totalboumboum.gui.tools.GuiTools;
+import fr.free.totalboumboum.tools.ImageTools;
 
 public class EntitledSubPanel extends JPanel
 {	private static final long serialVersionUID = 1L;
@@ -78,6 +81,15 @@ public class EntitledSubPanel extends JPanel
 	
 	public void setTitle(String text, String tooltip)
 	{	title.setText(text);
+		title.setToolTipText(tooltip);
+	}
+	public void setTitle(BufferedImage icon, String tooltip)
+	{	int titleHeight = GuiTools.getSize(GuiTools.GAME_RESULTS_LABEL_HEADER_HEIGHT);
+		double zoom = titleHeight/(double)icon.getHeight();
+		icon = ImageTools.resize(icon,zoom,true);
+		ImageIcon icn = new ImageIcon(icon);
+		title.setText(null);
+		title.setIcon(icn);		
 		title.setToolTipText(tooltip);
 	}
 	

@@ -15,8 +15,11 @@ public class GuiFileTools
 	public final static String FILE_FRAGS = "frags.png";
 	public final static String FILE_FRAME = "frame.png";
 	public final static String FILE_GUI = "gui";
+	public final static String FILE_INITIAL = "initial.png";
 	public final static String FILE_ITEMS = "items.png";
 	public final static String FILE_KILLS = "kills.png";
+	public final static String FILE_LIMITS = "limits.png";
+	public final static String FILE_MISC = "misc.png";
 	public final static String FILE_NAME = "name.png";
 	public final static String FILE_PAINTINGS = "paintings.png";
 	public final static String FILE_POINTS = "points.png";

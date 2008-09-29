@@ -145,6 +145,7 @@
 
 <!-- GAME PANEL -->
 
+<!-- TOURNAMENT GAME PANEL -->
 	<text name="GameTournamentTitleDescription" value="Tournament description" />
 	<text name="GameTournamentTitleResults" value="Tournament results" />
 	<text name="GameTournamentTitleStatistics" value="Tournament statistics" />
@@ -185,6 +186,9 @@
 	<text name="GameTournamentHeaderRank" value="#" />
 	<text name="GameTournamentHeaderRankTooltip" value="Rank of the player in the general statistics before this tournament" />
 	<!--  -->
+	<text name="GameTournamentHeaderMisc" value="Misc" />
+	<text name="GameTournamentHeaderMiscTooltip" value="Various informations about this tournament" />
+	<!--  -->
 	<text name="GameTournamentLimitConfrontations" value="Matches" />
 	<text name="GameTournamentLimitConfrontationsTooltip" value="Maximal number of matches in this tournament" />
 	<!--  -->
@@ -205,7 +209,17 @@
 	<!--  -->
 	<text name="GameTournamentLimitKills" value="Kills" />
 	<text name="GameTournamentLimitKillsTooltip" value="Number of kills to perform in order to stop this tournament" />
+	<!--  -->
+	<text name="GameTournamentLimitTime" value="Time" />
+	<text name="GameTournamentLimitTimeTooltip" value="Maximum duration of this tournament" />
+	<!--  -->
+	<text name="GameTournamentLimitCrowns" value="Crowns" />
+	<text name="GameTournamentLimitCrownsTooltip" value="Number of crowns to pick in order to stop this tournament" />
+	<!--  -->
+	<text name="GameTournamentLimitPaintings" value="Kills" />
+	<text name="GameTournamentLimitPaintingsTooltip" value="Number of tiles to paint in order to stop this tournament" />
 	
+<!-- MATCH GAME PANEL -->
 	<text name="GameMatchTitleDescription" value="Match description" />
 	<text name="GameMatchTitleResults" value="Match results" />
 	<text name="GameMatchTitleStatistics" value="Match statistics" />
@@ -246,6 +260,9 @@
 	<text name="GameMatchHeaderPointprocess" value="Points" />
 	<text name="GameMatchHeaderPointprocessTooltip" value="Information about how points are processed for this match" />
 	<!--  -->
+	<text name="GameMatchHeaderMisc" value="Misc" />
+	<text name="GameMatchHeaderMiscTooltip" value="Various informations about this match" />
+	<!--  -->
 	<text name="GameMatchLimitConfrontations" value="Rounds" />
 	<text name="GameMatchLimitConfrontationsTooltip" value="Maximal number of rounds in this match" />
 	<!--  -->
@@ -266,7 +283,17 @@
 	<!--  -->
 	<text name="GameMatchLimitKills" value="Kills" />
 	<text name="GameMatchLimitKillsTooltip" value="Number of kills to perform in order to stop this match" />
+	<!--  -->
+	<text name="GameMatchLimitTime" value="Time" />
+	<text name="GameMatchLimitTimeTooltip" value="Maximum duration of this match" />
+	<!--  -->
+	<text name="GameMatchLimitCrowns" value="Crowns" />
+	<text name="GameMatchLimitCrownsTooltip" value="Number of crowns to pick in order to stop this match" />
+	<!--  -->
+	<text name="GameMatchLimitPaintings" value="Kills" />
+	<text name="GameMatchLimitPaintingsTooltip" value="Number of tiles to paint in order to stop this match" />
 	
+<!-- ROUND GAME PANEL -->
 	<text name="GameRoundTitleDescription" value="Round description" />
 	<text name="GameRoundTitleResults" value="Round results" />
 	<text name="GameRoundTitleStatistics" value="Round statistics" />
@@ -301,6 +328,24 @@
 	<text name="GameRoundHeaderTime" value="Time" />
 	<text name="GameRoundHeaderTimeTooltip" value="Time the player survived in this round" />
 	<!--  -->
+	<text name="GameRoundHeaderRank" value="#" />
+	<text name="GameRoundHeaderRankTooltip" value="Rank of the player in the match before this round" />
+	<!--  -->
+	<text name="GameRoundHeaderLimits" value="Limits" />
+	<text name="GameRoundHeaderLimitsTooltip" value="Information about what may cause the round to end" />
+	<!--  -->
+	<text name="GameRoundHeaderInitialItems" value="Items" />
+	<text name="GameRoundHeaderInitialItemsTooltip" value="Items given to each player at the begining of this round" />
+	<!--  -->
+	<text name="GameRoundHeaderMisc" value="Misc" />
+	<text name="GameRoundHeaderMiscTooltip" value="Various informations about this round" />
+	<!--  -->
+	<text name="GameRoundHeaderPointprocess" value="Points" />
+	<text name="GameRoundHeaderPointprocessTooltip" value="Information about how points are processed for this round" />
+	<!--  -->
+	<text name="GameRoundHeaderItemset" value="Itemset" />
+	<text name="GameRoundHeaderItemsetTooltip" value="Items available during  this round" />
+	<!--  -->
 	<text name="GameRoundLimitPoints" value="Points" />
 	<text name="GameRoundLimitPointsTooltip" value="Number of custom points to score in order to stop this round" />
 	<!--  -->
@@ -317,15 +362,12 @@
 	<text name="GameRoundLimitKillsTooltip" value="Number of kills to perform in order to stop this round" />
 	<!--  -->
 	<text name="GameRoundLimitTime" value="Time" />
-	<text name="GameRoundLimitTimeTooltip" value="Maximum length of this round" />
+	<text name="GameRoundLimitTimeTooltip" value="Maximum duration of this round" />
 	<!--  -->
-	<text name="GameRoundHeaderRank" value="#" />
-	<text name="GameRoundHeaderRankTooltip" value="Rank of the player in the match before this round" />
+	<text name="GameRoundLimitCrowns" value="Crowns" />
+	<text name="GameRoundLimitCrownsTooltip" value="Number of crowns to pick in order to stop this round" />
 	<!--  -->
-	<text name="GameRoundHeaderLimits" value="Limits" />
-	<text name="GameRoundHeaderLimitsTooltip" value="Information about what may cause the round to end" />
-	<!--  -->
-	<text name="GameRoundHeaderInitialItems" value="Items" />
-	<text name="GameRoundHeaderInitialItemsTooltip" value="Items given to each player at the begining of this round" />
+	<text name="GameRoundLimitPaintings" value="Kills" />
+	<text name="GameRoundLimitPaintingsTooltip" value="Number of tiles to paint in order to stop this round" />
 
 </language>

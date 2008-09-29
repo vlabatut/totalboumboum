@@ -30,6 +30,7 @@ import fr.free.totalboumboum.game.limit.LimitConfrontation;
 import fr.free.totalboumboum.game.limit.LimitPoints;
 import fr.free.totalboumboum.game.limit.LimitScore;
 import fr.free.totalboumboum.game.limit.LimitTotal;
+import fr.free.totalboumboum.game.limit.Limits;
 import fr.free.totalboumboum.game.limit.MatchLimit;
 import fr.free.totalboumboum.game.match.Match;
 import fr.free.totalboumboum.game.round.Round;
@@ -235,10 +236,14 @@ public class RoundDescription extends EntitledDataPanel
 	private JPanel makeInitialItemsPanel(int width, int height, LevelPreview levelPreview)
 	{	// init
 		EntitledSubPanel itemsPanel = new EntitledSubPanel(width,height,getConfiguration());
+		HashMap<String,BufferedImage> itemsetPreview = levelPreview.getItemsetPreview();
+		HashMap<String,Integer> initialItems = levelPreview.getInitialItems();
 		// title
-		String text = getConfiguration().getLanguage().getText(GuiTools.GAME_ROUND_HEADER_INITIAL_ITEMS);
+//		String text = getConfiguration().getLanguage().getText(GuiTools.GAME_ROUND_HEADER_INITIAL_ITEMS);
 		String tooltip = getConfiguration().getLanguage().getText(GuiTools.GAME_ROUND_HEADER_INITIAL_ITEMS+"Tooltip");
-		itemsPanel.setTitle(text,tooltip);
+//		itemsPanel.setTitle(text,tooltip);
+		BufferedImage hd = GuiTools.getIcon(GuiTools.GAME_ROUND_HEADER_INITIAL_ITEMS);
+		itemsPanel.setTitle(hd, tooltip);
 		// table
 		{	// init
 			int margin = GuiTools.getSize(GuiTools.GAME_RESULTS_MARGIN_SIZE);
@@ -246,42 +251,53 @@ public class RoundDescription extends EntitledDataPanel
 			itemsPanel.add(Box.createRigidArea(new Dimension(margin,margin)),0);
 			int titleHeight = itemsPanel.getComponent(1).getPreferredSize().height;
 			height = height-margin-titleHeight;
-			int columns = 2;
-			int lines = 8;
+			int columnGroups = 2;
+			int lines = 4;
+			if(initialItems.size()>columnGroups*lines)
+			{	lines = 8;
+				columnGroups = 4;
+			}
+			int subColumns = 2;
+			int columns = columnGroups*subColumns;
 			TablePanel tablePanel = new TablePanel(width,height,columns,lines,false,getConfiguration());
 			tablePanel.setOpaque(false);
 			int lineHeight = (height-margin*(lines+1))/lines;
 			// empty
 			for(int line=0;line<lines;line++)
-			{	// icon
-				JLabel lbl = tablePanel.getLabel(line,0);
-				lbl.setText(null);
-				lbl.setPreferredSize(new Dimension(lineHeight,lineHeight));
-				lbl.setMaximumSize(new Dimension(lineHeight,lineHeight));
-				lbl.setMinimumSize(new Dimension(lineHeight,lineHeight));
-				// text
-				lbl = tablePanel.getLabel(line,1);
-				lbl.setText(null);
-				lbl.setMinimumSize(new Dimension(lineHeight,lineHeight));
-				lbl.setMaximumSize(new Dimension(Integer.MAX_VALUE,lineHeight));
+			{	for(int col=0;col<columns;col=col+subColumns)
+				{	// icon
+					JLabel lbl = tablePanel.getLabel(line,col+0);
+					lbl.setText(null);
+					lbl.setPreferredSize(new Dimension(lineHeight,lineHeight));
+					lbl.setMaximumSize(new Dimension(lineHeight,lineHeight));
+					lbl.setMinimumSize(new Dimension(lineHeight,lineHeight));
+					// text
+					lbl = tablePanel.getLabel(line,col+1);
+					lbl.setText(null);
+					lbl.setMinimumSize(new Dimension(lineHeight,lineHeight));
+					int maxWidth = (width - margin*(columns+1) - columnGroups*lineHeight)/columnGroups;
+					lbl.setMaximumSize(new Dimension(maxWidth,lineHeight));
+				}
 			}
 			// data
-			{	HashMap<String,BufferedImage> itemsetPreview = levelPreview.getItemsetPreview();
-				HashMap<String,Integer> initialItems = levelPreview.getInitialItems();
-				Iterator<Entry<String,Integer>> i = initialItems.entrySet().iterator();
+			{	Iterator<Entry<String,Integer>> i = initialItems.entrySet().iterator();
 				int k = 0;
-				while(i.hasNext() && k<lines)
+				while(i.hasNext() && k<columnGroups*lines)
 				{	// init
 					Entry<String,Integer> temp = i.next();
 					String name = temp.getKey();
 					int number = temp.getValue();
 					BufferedImage image = itemsetPreview.get(name);
 					tooltip = name+": "+number;
+					int baseCol = (k/lines)*subColumns;
+					int baseLine = k%lines;
 					// icon
-					{	JLabel lbl = tablePanel.getLabel(k,0);
+					{	JLabel lbl = tablePanel.getLabel(baseLine,baseCol+0);
 						lbl.setText(null);
 						lbl.setToolTipText(tooltip);
-						double zoom = lineHeight/(double)image.getHeight();
+						float zoomX = lineHeight/(float)image.getWidth();
+						float zoomY = lineHeight/(float)image.getHeight();
+						float zoom = Math.min(zoomX,zoomY);
 						image = ImageTools.resize(image,zoom,true);
 						ImageIcon ic = new ImageIcon(image);
 						lbl.setIcon(ic);
@@ -289,7 +305,7 @@ public class RoundDescription extends EntitledDataPanel
 						lbl.setBackground(bg);
 					}
 					// value
-					{	JLabel lbl = tablePanel.getLabel(k,1);
+					{	JLabel lbl = tablePanel.getLabel(baseLine,baseCol+1);
 						lbl.setText(Integer.toString(number));
 						lbl.setToolTipText(tooltip);
 						Color bg = GuiTools.COLOR_TABLE_REGULAR_BACKGROUND;
@@ -316,42 +332,55 @@ public class RoundDescription extends EntitledDataPanel
 	{	// init
 		EntitledSubPanel limitsPanel = new EntitledSubPanel(width,height,getConfiguration());
 		// title
-		String text = getConfiguration().getLanguage().getText(GuiTools.GAME_ROUND_HEADER_LIMITS);
+//		String text = getConfiguration().getLanguage().getText(GuiTools.GAME_ROUND_HEADER_LIMITS);
 		String tooltip = getConfiguration().getLanguage().getText(GuiTools.GAME_ROUND_HEADER_LIMITS+"Tooltip");
-		limitsPanel.setTitle(text,tooltip);
+//		limitsPanel.setTitle(text,tooltip);
+		BufferedImage hd = GuiTools.getIcon(GuiTools.GAME_ROUND_HEADER_LIMITS);
+		limitsPanel.setTitle(hd,tooltip);
 		// table
 		{	// init
+			Match match = getConfiguration().getCurrentMatch();
+			Limits<MatchLimit> limitsList = match.getLimits();
 			int margin = GuiTools.getSize(GuiTools.GAME_RESULTS_MARGIN_SIZE);
 			limitsPanel.remove(0);
 			limitsPanel.add(Box.createRigidArea(new Dimension(margin,margin)),0);
 			int titleHeight = limitsPanel.getComponent(1).getPreferredSize().height;
 			height = height-margin-titleHeight;
-			int columns = 2;
-			int lines = 8;
+			int columnGroups = 2;
+			int lines = 4;
+			if(limitsList.size()>columnGroups*lines)
+			{	lines = 8;
+				columnGroups = 4;
+			}
+			int subColumns = 2;
+			int columns = columnGroups*subColumns;
 			TablePanel tablePanel = new TablePanel(width,height,columns,lines,false,getConfiguration());
 			tablePanel.setOpaque(false);
 			int lineHeight = (height-margin*(lines+1))/lines;
 			// empty
 			for(int line=0;line<lines;line++)
-			{	// icon
-				JLabel lbl = tablePanel.getLabel(line,0);
-				lbl.setText(null);
-				lbl.setPreferredSize(new Dimension(lineHeight,lineHeight));
-				lbl.setMaximumSize(new Dimension(lineHeight,lineHeight));
-				lbl.setMinimumSize(new Dimension(lineHeight,lineHeight));
-				// text
-				lbl = tablePanel.getLabel(line,1);
-				lbl.setText(null);
-				lbl.setMinimumSize(new Dimension(lineHeight,lineHeight));
-				lbl.setMaximumSize(new Dimension(Integer.MAX_VALUE,lineHeight));
+			{	for(int col=0;col<columns;col=col+subColumns)
+				{	// icon
+					JLabel lbl = tablePanel.getLabel(line,col+0);
+					lbl.setText(null);
+					lbl.setPreferredSize(new Dimension(lineHeight,lineHeight));
+					lbl.setMaximumSize(new Dimension(lineHeight,lineHeight));
+					lbl.setMinimumSize(new Dimension(lineHeight,lineHeight));
+					// text
+					lbl = tablePanel.getLabel(line,col+1);
+					lbl.setText(null);
+					lbl.setMinimumSize(new Dimension(lineHeight,lineHeight));
+					lbl.setMaximumSize(new Dimension(Integer.MAX_VALUE,lineHeight));
+				}
 			}
 			// data
-			{	Match match = getConfiguration().getCurrentMatch();
-				Iterator<MatchLimit> i = match.getLimits().iterator();
+			{	Iterator<MatchLimit> i = limitsList.iterator();
 				int k = 0;
-				while(i.hasNext() && k<lines)
+				while(i.hasNext() && k<columnGroups*lines)
 				{	// init
 					Limit limit = i.next();
+					int baseCol = (k/lines)*subColumns;
+					int baseLine = k%lines;
 					String iconName = null;
 					NumberFormat nf = NumberFormat.getInstance();
 					nf.setMinimumFractionDigits(0);
@@ -378,6 +407,10 @@ public class RoundDescription extends EntitledDataPanel
 								iconName = GuiTools.GAME_MATCH_LIMIT_BOMBS;
 								value = nf.format(l.getLimit());
 								break;
+							case CROWNS:
+								iconName = GuiTools.GAME_MATCH_LIMIT_CROWNS;
+								value = nf.format(l.getLimit());
+								break;
 							case DEATHS:
 								iconName = GuiTools.GAME_MATCH_LIMIT_DEATHS;
 								value = nf.format(l.getLimit());
@@ -390,12 +423,20 @@ public class RoundDescription extends EntitledDataPanel
 								iconName = GuiTools.GAME_MATCH_LIMIT_KILLS;
 								value = nf.format(l.getLimit());
 								break;
+							case PAINTINGS:
+								iconName = GuiTools.GAME_MATCH_LIMIT_PAINTINGS;
+								value = nf.format(l.getLimit());
+								break;
+							case TIME:
+								iconName = GuiTools.GAME_MATCH_LIMIT_TIME;
+								value = nf.format(l.getLimit());
+								break;
 						}
 					}
 					tooltip = getConfiguration().getLanguage().getText(iconName+"Tooltip");
 					// icon
 					{	BufferedImage icon = GuiTools.getIcon(iconName);
-						JLabel lbl = tablePanel.getLabel(k,0);
+						JLabel lbl = tablePanel.getLabel(baseLine,baseCol+0);
 						lbl.setText(null);
 						lbl.setToolTipText(tooltip);
 						double zoom = lineHeight/(double)icon.getHeight();
@@ -406,7 +447,7 @@ public class RoundDescription extends EntitledDataPanel
 						lbl.setBackground(bg);
 					}
 					// value
-					{	JLabel lbl = tablePanel.getLabel(k,1);
+					{	JLabel lbl = tablePanel.getLabel(baseLine,baseCol+1);
 						lbl.setText(value);
 						lbl.setToolTipText(tooltip);
 						Color bg = GuiTools.COLOR_TABLE_REGULAR_BACKGROUND;
