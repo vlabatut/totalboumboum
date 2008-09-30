@@ -446,7 +446,7 @@ totalLevelDrawTime = totalLevelDrawTime+levelDrawTime;
 totalPanelPaintTime = totalPanelPaintTime+panelPaintTime;
 totalTtime = totalTtime+ttime; 
 nbrUpdates++;
-/*
+
 System.out.println(updateTime+"("+(totalUpdateTime/nbrUpdates)+")");
 System.out.println(levelDrawTime+"("+(totalLevelDrawTime/nbrUpdates)+")");
 System.out.println(panelPaintTime+"("+(totalPanelPaintTime/nbrUpdates)+")");
@@ -457,7 +457,7 @@ System.out.println("\t"+b);
 System.out.println("\t"+c);
 System.out.println("\t"+d);
 System.out.println();
-*/
+
 			// time process
 //			afterTime = System.nanoTime();
 			afterTime = System.currentTimeMillis();
