@@ -390,7 +390,7 @@ long totalTtime=0;
 float nbrUpdates=0;
 	
 	public void process()
-	{	long beforeTime,afterTime,timeDiff,sleepTime;
+	{	long beforeTime,afterTime,timeDiff,sleepTime,lastTime;
 		long overSleepTime = 0L;
 		int noDelays = 0;
 		long excess = 0L;
@@ -400,13 +400,12 @@ float nbrUpdates=0;
 	        upsStore[k] = 0;
 		}		
 		
-//		nanoPeriod = getConfiguration().getNanoPeriod();
 		milliPeriod = getConfiguration().getMilliPeriod();
 		
-//		gameStartTime = System.nanoTime();
 		gameStartTime = System.currentTimeMillis();
 		prevStatsTime = gameStartTime;
 		beforeTime = gameStartTime;
+		afterTime = gameStartTime;
 		totalTime = 0;
 
 //		setLooping(true);
@@ -418,23 +417,19 @@ long b = System.currentTimeMillis();
 			panel.paintScreen();
 long c = System.currentTimeMillis();
 			// time process
-//			afterTime = System.nanoTime();
+			lastTime = afterTime;
 			afterTime = System.currentTimeMillis();
 			timeDiff = afterTime - beforeTime;
-//			sleepTime = nanoPeriod - timeDiff - overSleepTime;
 			sleepTime = milliPeriod - timeDiff - overSleepTime;
 
 			// some time left in this cycle
 			if(sleepTime>0)
 			{	try
-				{	
-//					Thread.sleep(sleepTime/1000000L); // nano -> ms
-					Thread.sleep(sleepTime);
+				{	Thread.sleep(sleepTime);
 				}
 				catch (InterruptedException ex)
 				{	//ex.printStackTrace();
 				}
-//				overSleepTime = System.nanoTime() - afterTime - sleepTime;
 				overSleepTime = System.currentTimeMillis() - afterTime - sleepTime;
 			}
 			// the frame took longer than the period (sleepTime<=0)
@@ -450,20 +445,17 @@ long c = System.currentTimeMillis();
 				}
 			}
 
-//			beforeTime = System.nanoTime();
 			beforeTime = System.currentTimeMillis();
 
 			/* If frame animation is taking too long, update the game state
 			   without rendering it, to get the updates/sec nearer to the required FPS. */
 			int skips = 0;
-//			while (excess>nanoPeriod && skips<MAX_FRAME_SKIPS)
 			while (excess>milliPeriod 
 //					&& skips<MAX_FRAME_SKIPS
 					)
-			{	
-//				excess = excess - nanoPeriod;
-				excess = excess - milliPeriod;
-				update(); // update state but don't render
+			{	excess = excess - milliPeriod;
+				// update state but don't render
+				update(); 
 				skips++;
 			}
 //System.out.println(skips);
@@ -497,9 +489,7 @@ System.out.println();
 			
 			
 			if(!isPaused)
-			{	
-//				totalTime = totalTime + (timeDiff/1000000L);
-				totalTime = totalTime + timeDiff;
+			{	totalTime = totalTime + (afterTime-lastTime);
 				round.updateTime(totalTime);				
 			}
 			
