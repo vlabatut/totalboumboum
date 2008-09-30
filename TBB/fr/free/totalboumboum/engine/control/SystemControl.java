@@ -66,12 +66,16 @@ public class SystemControl implements KeyListener
 			else if ((keyCode == KeyEvent.VK_F3))
 			{	loop.setShowSpritesPositions((loop.getShowSpritesPositions()+1)%3);
 			}
-			// debug : speed coeff
+			// debug : FPS/UPS
 			else if ((keyCode == KeyEvent.VK_F4))
+			{	loop.setShowFPS(!loop.getShowFPS());
+			}
+			// debug : speed coeff
+			else if ((keyCode == KeyEvent.VK_F5))
 			{	loop.setShowSpeed(!loop.getShowSpeed());
 			}
 			// debug : time
-			else if ((keyCode == KeyEvent.VK_F5))
+			else if ((keyCode == KeyEvent.VK_F6))
 			{	loop.setShowTime(!loop.getShowTime());
 			}
 		}

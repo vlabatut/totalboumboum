@@ -14,6 +14,7 @@ import java.util.Iterator;
 
 import fr.free.totalboumboum.data.configuration.Configuration;
 import fr.free.totalboumboum.data.configuration.GameConstants;
+import fr.free.totalboumboum.data.statistics.Score;
 import fr.free.totalboumboum.engine.container.bombset.Bombset;
 import fr.free.totalboumboum.engine.container.itemset.Itemset;
 import fr.free.totalboumboum.engine.container.theme.Theme;
@@ -292,8 +293,6 @@ if(startTime<0) startTime = System.currentTimeMillis();
 
 	public void draw(Graphics g)
 	{	drawLevel(g);
-		if(loop.getShowBorders())
-			drawBorders(g);
 		if(loop.getShowGrid())
 			drawGrid(g);
 		if(loop.getShowTilesPositions()>0)
@@ -301,10 +300,9 @@ if(startTime<0) startTime = System.currentTimeMillis();
 		if(loop.getShowSpeed())
 			drawSpeed(g);
 		if(loop.getShowTime())
-		{	drawTime(g);
-			drawInnerTime(g);
-			drawActualTime(g);
-		}
+			drawTime(g);
+		if(loop.getShowFPS())
+			drawFPS(g);
 	}
 
 	//NOTE optimisation : à effectuer seulement pour les tiles visibles
@@ -350,7 +348,7 @@ if(startTime<0) startTime = System.currentTimeMillis();
 				matrix[line][col].drawSelection(g,false,false,false);
 		}
 	}
-	
+/*	
 	private void drawBorders(Graphics g)
 	{	if(horizontalBorderHeight>0)
 		{	Color temp = g.getColor();
@@ -367,7 +365,7 @@ if(startTime<0) startTime = System.currentTimeMillis();
 			g.setColor(temp);
 		}
 	}
-	
+*/
 	private void drawGrid(Graphics g)
 	{	g.setColor(Color.CYAN);
 		// croix					
@@ -436,40 +434,56 @@ if(startTime<0) startTime = System.currentTimeMillis();
 	}
 	
 	private void drawTime(Graphics g)
+	{	{	g.setColor(Color.MAGENTA);
+			Font font = new Font("Dialog", Font.PLAIN, 18);
+			g.setFont(font);
+			FontMetrics metrics = g.getFontMetrics(font);
+			long time = loop.getTotalTime();
+			String text = "Time: "+StringTools.formatTimeWithHours(time);
+			Rectangle2D box = metrics.getStringBounds(text, g);
+			int x = 10;
+			int y = (int)Math.round(30+box.getHeight()/2);
+			g.drawString(text, x, y);
+		}
+		{	g.setColor(Color.GREEN);
+			Font font = new Font("Dialog", Font.PLAIN, 18);
+			g.setFont(font);
+			FontMetrics metrics = g.getFontMetrics(font);
+			String text = "Time: "+StringTools.formatTimeWithHours(time);
+			Rectangle2D box = metrics.getStringBounds(text, g);
+			int x = 10;
+			int y = (int)Math.round(50+box.getHeight()/2);
+			g.drawString(text, x, y);
+		}
+		{	g.setColor(Color.CYAN);
+			Font font = new Font("Dialog", Font.PLAIN, 18);
+			g.setFont(font);
+			FontMetrics metrics = g.getFontMetrics(font);
+			long time = System.currentTimeMillis()-startTime;
+			String text = "Time: "+StringTools.formatTimeWithHours(time);
+			Rectangle2D box = metrics.getStringBounds(text, g);
+			int x = 10;
+			int y = (int)Math.round(70+box.getHeight()/2);
+			g.drawString(text, x, y);
+		}
+	}
+
+	private void drawFPS(Graphics g)
 	{	g.setColor(Color.MAGENTA);
 		Font font = new Font("Dialog", Font.PLAIN, 18);
 		g.setFont(font);
 		FontMetrics metrics = g.getFontMetrics(font);
-		long time = loop.getTotalTime();
-		String text = "Time: "+StringTools.formatTimeWithHours(time);
+		NumberFormat nf = NumberFormat.getInstance();
+		nf.setMaximumFractionDigits(2);
+		nf.setMinimumFractionDigits(2);
+		double fps = loop.getAverageFPS();
+		String fpsStr = nf.format(fps); 
+		double ups = loop.getAverageUPS();
+		String upsStr = nf.format(ups); 
+		String text = "FPS/UPS: "+fpsStr+"/"+upsStr;
 		Rectangle2D box = metrics.getStringBounds(text, g);
 		int x = 10;
-		int y = (int)Math.round(30+box.getHeight()/2);
-		g.drawString(text, x, y);
-	}
-	
-	private void drawInnerTime(Graphics g)
-	{	g.setColor(Color.GREEN);
-		Font font = new Font("Dialog", Font.PLAIN, 18);
-		g.setFont(font);
-		FontMetrics metrics = g.getFontMetrics(font);
-		String text = "Time: "+StringTools.formatTimeWithHours(time);
-		Rectangle2D box = metrics.getStringBounds(text, g);
-		int x = 10;
-		int y = (int)Math.round(50+box.getHeight()/2);
-		g.drawString(text, x, y);
-	}
-
-	private void drawActualTime(Graphics g)
-	{	g.setColor(Color.CYAN);
-		Font font = new Font("Dialog", Font.PLAIN, 18);
-		g.setFont(font);
-		FontMetrics metrics = g.getFontMetrics(font);
-		long time = System.currentTimeMillis()-startTime;
-		String text = "Time: "+StringTools.formatTimeWithHours(time);
-		Rectangle2D box = metrics.getStringBounds(text, g);
-		int x = 10;
-		int y = (int)Math.round(70+box.getHeight()/2);
+		int y = (int)Math.round(90+box.getHeight()/2);
 		g.drawString(text, x, y);
 	}
 

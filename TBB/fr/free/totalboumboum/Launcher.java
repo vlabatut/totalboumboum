@@ -626,8 +626,10 @@ public class Launcher
 	 * - correction d'un bug qui affectait le décompte de kills et de deaths au cours d'un round
 	 * - correction d'un problème d'affichage (je sais pas trop comment, d'ailleurs...) : le niveau est coupé en fonction du mode d'affichage, mais pas de façon symétrique (le haut n'est pas coupé, seulement le bas)
 	 * - mise en place du fond d'écran du jeu à la place des bordures unies lors des parties
-	 * - correction d'un bug d'optimisation : le format des images n'était pas compatible avec l'environnement graphique, ce qui ralentissait le raffraichissement graphique
+	 * - correction d'un bug d'optimisation : le format des images n'était pas compatible avec l'environnement graphique, ce qui ralentissait le raffraichissement
 	 * - correction d'un bug : nanoTime est buggé quand on utilise des systèmes multicoeurs : j'ai utilisé currentTimeMillis à la place
+	 * - mise en place de l'accélération graphique avec l'utilisation d'une VolatileImage pour le panel
+	 * - mise en place d'un compteur FPS/UPS
 	 * 
 	 * *******************************************************
 	 * *********************** A FAIRE ***********************
@@ -659,9 +661,6 @@ public class Launcher
 	 * - vérifier le temps de latence des bombes, ça me parait un peu trop rapide
 	 * - décomposer le fichier de langue en plusieurs sections plus lisibles
 	 * -------------------------------------------------------------------
-	 * - optimisations :
-	 * 		- dessiner les floors une seule fois (mais peuvent être animés !)
-	 * 		- ne pas solliciter l'IA à chaque itération ? (pb avec le controle par touche enfoncée...)
 	 * - s'occuper de la limite qui fait gagner le joueur qui la franchit : pq pas un simple bonus/malus pour celui qui arrête la partie ?
 	 * - limites exprimées de façon relative (peindre 75% des cases...)
 	 * - normaliser le calcul des points (discrétisation spéciale ou nombre de points direct), ce qui permettra d'en normaliser la représentation graphique dans la GUI

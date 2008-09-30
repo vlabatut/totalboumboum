@@ -4,9 +4,12 @@ import java.awt.AlphaComposite;
 import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
+import java.awt.GraphicsConfiguration;
+import java.awt.GraphicsEnvironment;
 import java.awt.Image;
 import java.awt.Toolkit;
 import java.awt.image.BufferedImage;
+import java.awt.image.VolatileImage;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -138,7 +141,6 @@ public class Loop implements Runnable
 			// panel
 //			panel.finish();
 			panel = null;
-			graphics = null;
 			// level
 			level.finish();
 			level = null;
@@ -171,7 +173,7 @@ public class Loop implements Runnable
 	private int showSpritesPositions = 0;
 	private boolean showSpeed = false;
 	private boolean showTime = false;
-	private boolean showBorders = false;
+	private boolean showFPS = false;
 	private Lock debugLock = new ReentrantLock();
 
 	public void setShowGrid(boolean showGrid)
@@ -187,15 +189,15 @@ public class Loop implements Runnable
 		return result;
 	}
 
-	public void setShowBorders(boolean showBorders)
+	public void setShowFPS(boolean showFPS)
 	{	debugLock.lock();
-		this.showBorders = showBorders;
+		this.showFPS = showFPS;
 		debugLock.unlock();
 	}
-	public boolean getShowBorders()
+	public boolean getShowFPS()
 	{	boolean result;
 		debugLock.lock();
-		result = showBorders;
+		result = showFPS;
 		debugLock.unlock();
 		return result;
 	}
@@ -255,15 +257,11 @@ public class Loop implements Runnable
 	/////////////////////////////////////////////////////////////////
 	// GRAPHICS			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	private Graphics graphics;
 	private LoopRenderPanel panel;
 
 	public void setPanel(LoopRenderPanel panel)
 	{	loadLock.lock();
 		this.panel = panel;
-		// graphics
-		Image image = panel.getBackgroundImage();
-		graphics = image.getGraphics();
 		// system listener
 		panel.addKeyListener(systemControl);
 		// players listeners
@@ -294,25 +292,6 @@ public class Loop implements Runnable
 	 * i.e the games state is updated but not rendered
 	 */ 
 	private static int MAX_FRAME_SKIPS = 5;
-	/** used to stop the animation thread */
-    /** number of FPS values stored to get an average */
-	private static int NUM_FPS = 10;   
-	// used for gathering statistics
-//	private static long MAX_STATS_INTERVAL = 1000000000L;
-	private static long MAX_STATS_INTERVAL = 1000L;
-	private long statsInterval = 0L;    // in ns
-	private long prevStatsTime;   
-	private long totalElapsedTime = 0L;
-	private long gameStartTime;
-	private int timeSpentInGame = 0;    // in seconds
-	private long frameCount = 0;
-	private long statsCount = 0;
-	private double averageFPS = 0.0;
-	private double averageUPS = 0.0;
-	private long framesSkipped = 0L;
-	private long totalFramesSkipped = 0L;
-	private double fpsStore[] = new double[NUM_FPS];
-	private double upsStore[] = new double[NUM_FPS];
 	private long milliPeriod;
 //	private long nanoPeriod;
 	private boolean isPaused = false;
@@ -404,7 +383,10 @@ public class Loop implements Runnable
 		}
 	}
 	
-long totalUpdateTime=0,totalLevelDrawTime=0,totalPanelPaintTime=0,totalTtime=0;
+long totalUpdateTime=0;
+long totalDrawTime=0;
+long totalMakeupTime=0;
+long totalTtime=0;
 float nbrUpdates=0;
 	
 	public void process()
@@ -433,31 +415,8 @@ float nbrUpdates=0;
 long a = System.currentTimeMillis();
 			update();
 long b = System.currentTimeMillis();
-			getLevel().draw(graphics);
-long c = System.currentTimeMillis();
 			panel.paintScreen();
-long d = System.currentTimeMillis();
-long updateTime = b-a;
-long levelDrawTime = c-b;
-long panelPaintTime = d-c;
-long ttime = d-a;
-totalUpdateTime = totalUpdateTime+updateTime; 
-totalLevelDrawTime = totalLevelDrawTime+levelDrawTime; 
-totalPanelPaintTime = totalPanelPaintTime+panelPaintTime;
-totalTtime = totalTtime+ttime; 
-nbrUpdates++;
-
-System.out.println(updateTime+"("+(totalUpdateTime/nbrUpdates)+")");
-System.out.println(levelDrawTime+"("+(totalLevelDrawTime/nbrUpdates)+")");
-System.out.println(panelPaintTime+"("+(totalPanelPaintTime/nbrUpdates)+")");
-System.out.println("---------------");
-System.out.println(ttime+"("+(totalTtime/nbrUpdates)+")");
-System.out.println("\t"+a);
-System.out.println("\t"+b);
-System.out.println("\t"+c);
-System.out.println("\t"+d);
-System.out.println();
-
+long c = System.currentTimeMillis();
 			// time process
 //			afterTime = System.nanoTime();
 			afterTime = System.currentTimeMillis();
@@ -498,7 +457,9 @@ System.out.println();
 			   without rendering it, to get the updates/sec nearer to the required FPS. */
 			int skips = 0;
 //			while (excess>nanoPeriod && skips<MAX_FRAME_SKIPS)
-			while (excess>milliPeriod && skips<MAX_FRAME_SKIPS)
+			while (excess>milliPeriod 
+//					&& skips<MAX_FRAME_SKIPS
+					)
 			{	
 //				excess = excess - nanoPeriod;
 				excess = excess - milliPeriod;
@@ -508,6 +469,32 @@ System.out.println();
 //System.out.println(skips);
 			framesSkipped = framesSkipped + skips;
 			storeStats( );
+			
+long d = System.currentTimeMillis();
+			
+long updateTime = b-a;
+long drawTime = c-b;
+long makeupTime = d-c;
+long ttime = d-a;
+totalUpdateTime = totalUpdateTime+updateTime; 
+totalDrawTime = totalDrawTime+drawTime; 
+totalMakeupTime = totalMakeupTime+makeupTime; 
+totalTtime = totalTtime+ttime; 
+nbrUpdates++;
+/*
+System.out.println("update: "+updateTime+"("+(totalUpdateTime/nbrUpdates)+")");
+System.out.println("draw: "+drawTime+"("+(totalDrawTime/nbrUpdates)+")");
+System.out.println("makeup: "+makeupTime+"("+(totalMakeupTime/nbrUpdates)+")");
+System.out.println("---------------");
+System.out.println("total: "+ttime+"("+(totalTtime/nbrUpdates)+")");
+//System.out.println("\t"+a);
+//System.out.println("\t"+b);
+//System.out.println("\t"+c);
+//System.out.println("\t"+d);
+System.out.println();
+*/
+
+			
 			
 			if(!isPaused)
 			{	
@@ -543,73 +530,71 @@ System.out.println();
 			}
 		}
 	}
+
+	public void drawLevel(Graphics g)
+	{	level.draw(g);
+	}
 	
+	public double getAverageFPS()
+	{	return averageFPS;	
+	}
+	public double getAverageUPS()
+	{	return averageUPS;	
+	}
+	
+	// used for gathering statistics
+    /** number of FPS values stored to get an average */
+	private static int NUM_FPS = 10;   
+	private static long MAX_STATS_INTERVAL = 1000L;
+	private long prevStatsTime;   
+	private long gameStartTime;
+	private long frameCount = 0;
+	private long framesSkipped = 0L;
+	private long statsCount = 0;
+	private double averageFPS = 0.0;
+	private double averageUPS = 0.0;
+	private double fpsStore[] = new double[NUM_FPS];
+	private double upsStore[] = new double[NUM_FPS];
+
 	private void storeStats( )
     {	frameCount++;
-//	  	statsInterval = statsInterval + nanoPeriod;
-	  	statsInterval = statsInterval + milliPeriod;
+    	long timeNow = System.currentTimeMillis();
+//System.out.println("stat time: "+(timeNow-prevStatsTime));    	
+  		long elapsedTime = timeNow - prevStatsTime;
 
-      	if (statsInterval>=MAX_STATS_INTERVAL)
-      	{	
-//      		long timeNow = System.nanoTime();
-      		long timeNow = System.currentTimeMillis();
-//  			timeSpentInGame = (int)((timeNow - gameStartTime)/1000000000L);  // ns-->secs
-  			timeSpentInGame = (int)((timeNow - gameStartTime)/1000L);  // ns-->secs
-
-      		long realElapsedTime = timeNow - prevStatsTime;
-      		// time since last stats collection
-      		totalElapsedTime = totalElapsedTime + realElapsedTime;
-
-      		double timingError = ((double)(realElapsedTime - statsInterval) / statsInterval) * 100.0;
-
-      		totalFramesSkipped += framesSkipped;
-
-      		double actualFPS = 0;     // calculate the latest FPS and UPS
+      	if (elapsedTime>=MAX_STATS_INTERVAL)
+      	{	// calculate the latest FPS and UPS
+      		double actualFPS = 0;     
       		double actualUPS = 0;
-      		if(totalElapsedTime>0)
-      		{	
-//      			actualFPS = (((double)frameCount / totalElapsedTime) * 1000000000L);
-      			actualFPS = (((double)frameCount / totalElapsedTime) * 1000L);
-//      			actualUPS = (((double)(frameCount + totalFramesSkipped) / totalElapsedTime) * 1000000000L);
-      			actualUPS = (((double)(frameCount + totalFramesSkipped) / totalElapsedTime) * 1000L);
-      		}
+      		actualFPS = ((frameCount / (double)elapsedTime) * 1000L);
+      		actualUPS = (((frameCount+framesSkipped) / (double)elapsedTime) * 1000L);
 
       		// store the latest FPS and UPS
       		fpsStore[(int)statsCount%NUM_FPS] = actualFPS;
       		upsStore[(int)statsCount%NUM_FPS] = actualUPS;
-      		statsCount = statsCount+1;
+      		statsCount ++;
 
-      		double totalFPS = 0.0;     // total the stored FPSs and UPSs
+      		// total the stored FPSs and UPSs
+      		double totalFPS = 0.0;     
       		double totalUPS = 0.0;
       		for(int i=0;i<NUM_FPS;i++)
-      		{	totalFPS += fpsStore[i];
-      			totalUPS += upsStore[i];
+      		{	totalFPS = totalFPS + fpsStore[i];
+      			totalUPS = totalUPS + upsStore[i];
       		}
 
-      		if (statsCount < NUM_FPS)
+      		if(statsCount<NUM_FPS)
       		{	// obtain the average FPS and UPS 
       			averageFPS = totalFPS/statsCount;
       			averageUPS = totalUPS/statsCount;
       		}
       		else
       		{	averageFPS = totalFPS/NUM_FPS;
-      		averageUPS = totalUPS/NUM_FPS;
+      			averageUPS = totalUPS/NUM_FPS;
       		}
-/*
-			System.out.println(
-//			timedf.format((double) statsInterval/1000000000L) + " " +
-			timedf.format((double) statsInterval/1000L) + " " +
-			timedf.format((double) realElapsedTime/1000000000L)+"s "+
-//			timedf.format((double) realElapsedTime/1000L)+"s "+
-			df.format(timingError) + "% " +
-			frameCount + "c " +
-			framesSkipped + "/" + totalFramesSkipped + " skip; " +
-			df.format(actualFPS) + " " + df.format(averageFPS)+" afps; " +
-			df.format(actualUPS) + " " + df.format(averageUPS)+" aups" );
-*/
+
+      		frameCount = 0;
       		framesSkipped = 0;
       		prevStatsTime = timeNow;
-      		statsInterval = 0L;   // reset
       	}
     }
 	
