@@ -626,6 +626,8 @@ public class Launcher
 	 * - correction d'un bug qui affectait le décompte de kills et de deaths au cours d'un round
 	 * - correction d'un problème d'affichage (je sais pas trop comment, d'ailleurs...) : le niveau est coupé en fonction du mode d'affichage, mais pas de façon symétrique (le haut n'est pas coupé, seulement le bas)
 	 * - mise en place du fond d'écran du jeu à la place des bordures unies lors des parties
+	 * - correction d'un bug d'optimisation : le format des images n'était pas compatible avec l'environnement graphique, ce qui ralentissait le raffraichissement graphique
+	 * - correction d'un bug : nanoTime est buggé quand on utilise des systèmes multicoeurs : j'ai utilisé currentTimeMillis à la place
 	 * 
 	 * *******************************************************
 	 * *********************** A FAIRE ***********************
