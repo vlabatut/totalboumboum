@@ -13,7 +13,6 @@ import fr.free.totalboumboum.data.configuration.Configuration;
 import fr.free.totalboumboum.gui.menus.main.MainFrame;
 import fr.free.totalboumboum.tools.CalculusTools;
 
-
 public class Launcher
 {	
 
@@ -630,6 +629,7 @@ public class Launcher
 	 * - correction d'un bug : nanoTime est buggé quand on utilise des systèmes multicoeurs : j'ai utilisé currentTimeMillis à la place
 	 * - mise en place de l'accélération graphique avec l'utilisation d'une VolatileImage pour le panel
 	 * - mise en place d'un compteur FPS/UPS
+	 * - correction d'un bug dans le décompte du temps effectué dans la boucle principale
 	 * 
 	 * *******************************************************
 	 * *********************** A FAIRE ***********************

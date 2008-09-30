@@ -434,7 +434,8 @@ if(startTime<0) startTime = System.currentTimeMillis();
 	}
 	
 	private void drawTime(Graphics g)
-	{	{	g.setColor(Color.MAGENTA);
+	{	// loop time
+		{	g.setColor(Color.MAGENTA);
 			Font font = new Font("Dialog", Font.PLAIN, 18);
 			g.setFont(font);
 			FontMetrics metrics = g.getFontMetrics(font);
@@ -445,6 +446,7 @@ if(startTime<0) startTime = System.currentTimeMillis();
 			int y = (int)Math.round(30+box.getHeight()/2);
 			g.drawString(text, x, y);
 		}
+		// level time
 		{	g.setColor(Color.GREEN);
 			Font font = new Font("Dialog", Font.PLAIN, 18);
 			g.setFont(font);
@@ -455,6 +457,7 @@ if(startTime<0) startTime = System.currentTimeMillis();
 			int y = (int)Math.round(50+box.getHeight()/2);
 			g.drawString(text, x, y);
 		}
+		// actual time
 		{	g.setColor(Color.CYAN);
 			Font font = new Font("Dialog", Font.PLAIN, 18);
 			g.setFont(font);
