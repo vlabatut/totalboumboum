@@ -25,10 +25,10 @@ public class RoundSplitPanel extends SplitMenuPanel
 		
 		// background
 		image = getConfiguration().getBackground();
-		float[] scales = { 0.5f, 0.5f, 0.5f, 1f };
-		float[] offsets = new float[4];
-		RescaleOp rop = new RescaleOp(scales, offsets, null);
-	    image = rop.filter(image, null);
+//		float[] scales = { 0.5f, 0.5f, 0.5f, 1f };
+//		float[] offsets = new float[4];
+//		RescaleOp rop = new RescaleOp(scales, offsets, null);
+//	    image = rop.filter(image, null);
 		
 		// panels
 		setMenuPart(new RoundMenu(this,parent));

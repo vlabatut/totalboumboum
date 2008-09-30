@@ -92,8 +92,7 @@ public class ImageTools
     */
 	
     public static BufferedImage loadImage(String path, Colormap colormap) throws IOException
-    {	boolean debug = false;
-    	BufferedImage image = ImageIO.read(new File(path));
+    {	BufferedImage image = ImageIO.read(new File(path));
     	if(colormap!=null)
     	{	ColorModel colorModel = image.getColorModel();
     		if(colorModel instanceof IndexColorModel)
@@ -107,23 +106,6 @@ public class ImageTools
 	    		cm.getReds(reds);
 	    		cm.getGreens(greens);
 	    		cm.getBlues(blues);
-	    		//
-	    		if(debug)
-	    		{	System.out.println(path);
-					System.out.print("R{ ");
-					for(int i=0;i<size;i++)
-						System.out.printf("%3d ",(reds[i]>=0)?reds[i]:256+reds[i]);
-					System.out.println("}");
-					System.out.print("G{ ");
-					for(int i=0;i<size;i++)
-						System.out.printf("%3d ",(greens[i]>=0)?greens[i]:256+greens[i]);
-					System.out.println("}");
-					System.out.print("B{ ");
-					for(int i=0;i<size;i++)
-						System.out.printf("%3d ",(blues[i]>=0)?blues[i]:256+blues[i]);
-					System.out.println("}");
-					System.out.println();
-	    		}
 	    		// changing the values    		
     			Iterator<Entry<Integer,byte[]>> i = colormap.entrySet().iterator();
     			while(i.hasNext())
@@ -134,22 +116,6 @@ public class ImageTools
     				greens[index] = tab[1];
     				blues[index] = tab[2];
     			}
-    			//
-	    		if(debug)
-	    		{	System.out.print("R{ ");
-					for(int j=0;j<size;j++)
-						System.out.printf("%3d ",(reds[j]>=0)?reds[j]:256+reds[j]);
-					System.out.println("}");
-					System.out.print("G{ ");
-					for(int j=0;j<size;j++)
-						System.out.printf("%3d ",(greens[j]>=0)?greens[j]:256+greens[j]);
-					System.out.println("}");
-					System.out.print("B{ ");
-					for(int j=0;j<size;j++)
-						System.out.printf("%3d ",(blues[j]>=0)?blues[j]:256+blues[j]);
-					System.out.println("}");
-					System.out.println();
-	    		}
     			// creating the new model
 	    		int trans = cm.getTransparentPixel();
 	    		IndexColorModel newCm;
@@ -168,33 +134,32 @@ public class ImageTools
 	    		}
 	    		WritableRaster raster = image.copyData(null);
 	    		BufferedImage copy = new BufferedImage(newCm,raster,image.isAlphaPremultiplied(),props);
-	    		
-//	    		BufferedImage copy = new BufferedImage(image.getWidth(),image.getHeight(),image.getType(),newCm);
-//   	  		Graphics2D g2d = copy.createGraphics();
-//    	  		g2d.drawImage(image,0,0,null);
-//   	  		g2d.dispose();
     	  		image = copy;  	  		
     		}
     	}
     	
-    	// optimizing  	
-    	GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
-		GraphicsConfiguration gc = ge.getDefaultScreenDevice().getDefaultConfiguration();
-		ColorModel cm = image.getColorModel();			
-		int transparency = cm.getTransparency();
-		BufferedImage result =  gc.createCompatibleImage(image.getWidth(), image.getHeight(),transparency);
-		// create a graphics context
-		Graphics2D g2d = result.createGraphics();
-		// copy image
-		g2d.drawImage(image,0,0,null);
-		g2d.dispose();
-		result = image;
-		//
+    	// optimizing : using a model adapted to the graphical environment
+    	BufferedImage result =  getCompatibleImage(image);
     	return result;
     }
 
-
-
+    public static BufferedImage getCompatibleImage(BufferedImage image)
+    {	// get the graphical environment
+    	GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
+		GraphicsConfiguration gc = ge.getDefaultScreenDevice().getDefaultConfiguration();
+		// get original the color model
+		ColorModel cm = image.getColorModel();			
+		int transparency = cm.getTransparency();
+		// create a new image compatible with both the environment and the original model
+		BufferedImage result =  gc.createCompatibleImage(image.getWidth(),image.getHeight(),transparency);
+		// copy image
+		Graphics2D g2d = result.createGraphics();
+		g2d.drawImage(image,0,0,null);
+		g2d.dispose();
+		// result
+    	return result;
+    }
+    
     public static Object loadColorsElement(Element root, String individualFolder, PredefinedColor color) throws IOException, ParserConfigurationException, SAXException
     {	Object result=null;
     	// folder
@@ -237,16 +202,14 @@ public class ImageTools
     {	// folder
     	String colorFolder = root.getAttribute(XmlTools.ATT_FOLDER).getValue().trim();
     	return colorFolder;
-    }
-    
-    
+    } 
     
     public static BufferedImage resize(BufferedImage imgOld, double zoom, boolean smooth)
     {	int xDim = (int)(imgOld.getWidth()*zoom);
 		int yDim = (int)(imgOld.getHeight()*zoom);
 //		double actualZoom = xDim/imgOld.getWidth();
-		BufferedImage result = new BufferedImage(xDim, yDim, BufferedImage.TYPE_INT_ARGB);
-		Graphics2D g = result.createGraphics();
+		BufferedImage imgNew = new BufferedImage(xDim, yDim, BufferedImage.TYPE_INT_ARGB);
+		Graphics2D g = imgNew.createGraphics();
 		g.setComposite(AlphaComposite.Src);
 		if(smooth)
 		{	g.setRenderingHint(RenderingHints.KEY_INTERPOLATION, RenderingHints.VALUE_INTERPOLATION_BICUBIC);
@@ -264,6 +227,8 @@ public class ImageTools
 		g.drawRenderedImage(imgOld, xform);
 		g.dispose();
 		//
+    	// optimizing : using a model adapted to the graphical environment
+		BufferedImage result =  getCompatibleImage(imgNew);
     	return result; 
     }
     
