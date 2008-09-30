@@ -111,4 +111,24 @@ public class Zone
     	matrices.add(blocks);
     	matrices.add(items);
 	}
+	
+	public HashMap<String,Integer> getItemCount()
+	{	HashMap<String,Integer> result = new HashMap<String,Integer>();
+		String[][] matrix = matrices.get(2);
+		for(int i=0;i<globalHeight;i++)
+		{	for(int j=0;j<globalWidth;j++)
+			{	if(matrix[i][j]!=null)
+				{	int value;
+					if(result.containsKey(matrix[i][j]))
+					{	value = result.get(matrix[i][j]);
+						value ++;
+					}
+					else
+						value = 0;
+					result.put(matrix[i][j],value);
+				}
+			}
+		}
+		return result;
+	}
 }

@@ -680,7 +680,7 @@ public class Launcher
 	 */
 	
 	/*
-	 * 1) construire la matrice avec seulement les noms, lors du chargement du round
-	 * 2) la matrice est instanciée lors du chargement effectif du level 
+	 * lors de la génération, utiliser les classes définies pour compter les occurrences
+	 * dès que ça diverge de 1 de la distribution attendue, ne pas laisser la main au hasard 
 	 */
 }

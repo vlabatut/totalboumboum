@@ -422,7 +422,7 @@ if(startTime<0) startTime = System.currentTimeMillis();
 	}
 		
 	private void drawSpeed(Graphics g)
-	{	g.setColor(Color.MAGENTA);
+	{	g.setColor(Color.CYAN);
 		Font font = new Font("Dialog", Font.PLAIN, 18);
 		g.setFont(font);
 		FontMetrics metrics = g.getFontMetrics(font);
@@ -435,7 +435,7 @@ if(startTime<0) startTime = System.currentTimeMillis();
 	
 	private void drawTime(Graphics g)
 	{	// loop time
-		{	g.setColor(Color.MAGENTA);
+		{	g.setColor(Color.CYAN);
 			Font font = new Font("Dialog", Font.PLAIN, 18);
 			g.setFont(font);
 			FontMetrics metrics = g.getFontMetrics(font);
@@ -458,7 +458,7 @@ if(startTime<0) startTime = System.currentTimeMillis();
 			g.drawString(text, x, y);
 		}
 		// actual time
-		{	g.setColor(Color.CYAN);
+		{	g.setColor(Color.MAGENTA);
 			Font font = new Font("Dialog", Font.PLAIN, 18);
 			g.setFont(font);
 			FontMetrics metrics = g.getFontMetrics(font);
@@ -472,7 +472,7 @@ if(startTime<0) startTime = System.currentTimeMillis();
 	}
 
 	private void drawFPS(Graphics g)
-	{	g.setColor(Color.MAGENTA);
+	{	g.setColor(Color.CYAN);
 		Font font = new Font("Dialog", Font.PLAIN, 18);
 		g.setFont(font);
 		FontMetrics metrics = g.getFontMetrics(font);
@@ -486,7 +486,7 @@ if(startTime<0) startTime = System.currentTimeMillis();
 		String text = "FPS/UPS: "+fpsStr+"/"+upsStr;
 		Rectangle2D box = metrics.getStringBounds(text, g);
 		int x = 10;
-		int y = (int)Math.round(90+box.getHeight()/2);
+		int y = (int)Math.round(50+box.getHeight()/2);
 		g.drawString(text, x, y);
 	}
 

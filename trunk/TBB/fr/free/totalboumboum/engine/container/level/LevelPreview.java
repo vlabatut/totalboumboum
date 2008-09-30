@@ -51,7 +51,7 @@ public class LevelPreview
 	public void setInitialItems(HashMap<String, Integer> initialItems)
 	{	this.initialItems = initialItems;
 	}
-	
+/*	
 	/////////////////////////////////////////////////////////////////
 	// LEVEL ITEMS	/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
@@ -64,4 +64,5 @@ public class LevelPreview
 	public void setLevelItems(HashMap<String, Integer> levelItems)
 	{	this.levelItems = levelItems;
 	}
+*/	
 }
