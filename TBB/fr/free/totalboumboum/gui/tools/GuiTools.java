@@ -175,7 +175,7 @@ public class GuiTools
 	
 	
 	// colors
-	public final static Color COLOR_COMMON_BACKGROUND = new Color(255,255,255,150);
+	public final static Color COLOR_COMMON_BACKGROUND = new Color(255,255,255,200);
 	public final static Color COLOR_TITLE_FOREGROUND = Color.BLACK;
 	public final static Color COLOR_TABLE_REGULAR_BACKGROUND = new Color(0,0,0,80);
 	public final static Color COLOR_TABLE_NEUTRAL_BACKGROUND = new Color(0,0,0,20);

@@ -3,6 +3,7 @@ package fr.free.totalboumboum.gui.game.loop;
 import java.awt.AlphaComposite;
 import java.awt.Color;
 import java.awt.Component;
+import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Image;
@@ -32,28 +33,25 @@ import fr.free.totalboumboum.gui.generic.SimpleMenuPanel;
 public class LoopPanel extends SimpleMenuPanel implements LoopRenderPanel
 {	private static final long serialVersionUID = 1L;
 	private Loop loop;
-	private BufferedImage image;
+	private Image image;
 	
 	public LoopPanel(MenuContainer container, MenuPanel parent)
 	{	super(container,parent);
+/*		
 		// image
 		image = getConfiguration().getBackground();
 		float[] scales = { 0.5f, 0.5f, 0.5f, 1f };
 		float[] offsets = new float[4];
 		RescaleOp rop = new RescaleOp(scales, offsets, null);
-	    image = rop.filter(image, null);
-		
+	    image = rop.filter((BufferedImage)image, null);
+*/	    
 	    loop = getConfiguration().getCurrentRound().getLoop();
-		setPreferredSize(getConfiguration().getPanelDimension());
+	    Dimension dim = getConfiguration().getPanelDimension();
+		setPreferredSize(dim);
 		setDoubleBuffered(false);
-//		setBackground(Color.lightGray);
-		setOpaque(false);
+		setBackground(Color.RED);
+//		setOpaque(false);
 		setFocusable(true);
-		// the JPanel now has focus, so receives key events
-		// NOTE : surement à modifier, car un peu cra-cra (focus à donner à partir de l'extérieur)
-		// thread
-//		Thread animator = new Thread(loop);
-//		animator.start();
 	}
 
 	public void start()
@@ -61,11 +59,23 @@ public class LoopPanel extends SimpleMenuPanel implements LoopRenderPanel
 		loop.setPanel(this);
 	}
 
-	public BufferedImage getBackgroundImage()
-	{	return image;
+	public Image getBackgroundImage()
+	{	
+		int width = getPreferredSize().width;
+		int height = getPreferredSize().height;
+		image = createImage(width,height);
+		
+		Graphics g = image.getGraphics();
+		BufferedImage backgroundImage = getConfiguration().getBackground();
+//		float[] scales = { 0.5f, 0.5f, 0.5f, 1f };
+//		float[] offsets = new float[4];
+//		RescaleOp rop = new RescaleOp(scales, offsets, null);
+//		backgroundImage = rop.filter(backgroundImage, null);
+		g.drawImage(backgroundImage, 0, 0, null);	
+		
+		return image;
 	}
 
-	// use active rendering to put the buffered image on-screen
 	@Override
 	public void paintScreen()
 	{	Graphics g;
@@ -101,19 +111,17 @@ public class LoopPanel extends SimpleMenuPanel implements LoopRenderPanel
 	
 	@Override
 	public void refresh()
-	{
-		// TODO Auto-generated method stub
-		
+	{	
 	}
 
 	@Override
 	public void actionPerformed(ActionEvent arg0)
-	{	// TODO Auto-generated method stub
+	{	
 	}
 
 	@Override
 	public void playerOut(int index)
-	{	// TODO Auto-generated method stub		
-System.out.println("the player n°"+index+" is out !");		
+	{			
+//System.out.println("the player n°"+index+" is out !");		
 	}
 }

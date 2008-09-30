@@ -657,6 +657,9 @@ public class Launcher
 	 * - vérifier le temps de latence des bombes, ça me parait un peu trop rapide
 	 * - décomposer le fichier de langue en plusieurs sections plus lisibles
 	 * -------------------------------------------------------------------
+	 * - optimisations :
+	 * 		- dessiner les floors une seule fois (mais peuvent être animés !)
+	 * 		- ne pas solliciter l'IA à chaque itération ? (pb avec le controle par touche enfoncée...)
 	 * - s'occuper de la limite qui fait gagner le joueur qui la franchit : pq pas un simple bonus/malus pour celui qui arrête la partie ?
 	 * - limites exprimées de façon relative (peindre 75% des cases...)
 	 * - normaliser le calcul des points (discrétisation spéciale ou nombre de points direct), ce qui permettra d'en normaliser la représentation graphique dans la GUI

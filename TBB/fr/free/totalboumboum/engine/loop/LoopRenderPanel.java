@@ -7,7 +7,7 @@ import java.awt.image.BufferedImage;
 public interface LoopRenderPanel
 {
 	public void paintScreen();
-	public BufferedImage getBackgroundImage();
+	public Image getBackgroundImage();
 	public void addKeyListener(KeyListener listener);
 	public void removeKeyListener(KeyListener listener);
 	public void loopOver();
