@@ -7,7 +7,7 @@ import java.util.Iterator;
 
 import fr.free.totalboumboum.engine.container.tile.ValueTile;
 import fr.free.totalboumboum.engine.container.tile.VariableTile;
-import fr.free.totalboumboum.engine.container.tile.ZoneTile;
+import fr.free.totalboumboum.engine.container.zone.ZoneTile;
 
 public class Zone
 {

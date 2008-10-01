@@ -53,7 +53,7 @@ import org.xml.sax.SAXException;
 import fr.free.totalboumboum.engine.container.theme.Theme;
 import fr.free.totalboumboum.engine.container.tile.VariableTile;
 import fr.free.totalboumboum.engine.container.tile.VariableTilesLoader;
-import fr.free.totalboumboum.engine.container.tile.ZoneTile;
+import fr.free.totalboumboum.engine.container.zone.ZoneTile;
 import fr.free.totalboumboum.tools.FileTools;
 import fr.free.totalboumboum.tools.XmlTools;
 
