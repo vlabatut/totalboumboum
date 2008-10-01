@@ -1,4 +1,4 @@
-package fr.free.totalboumboum.engine.container.level;
+package fr.free.totalboumboum.engine.container.zone;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -7,7 +7,6 @@ import java.util.Iterator;
 
 import fr.free.totalboumboum.engine.container.tile.ValueTile;
 import fr.free.totalboumboum.engine.container.tile.VariableTile;
-import fr.free.totalboumboum.engine.container.zone.ZoneTile;
 
 public class Zone
 {

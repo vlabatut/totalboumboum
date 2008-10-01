@@ -291,7 +291,7 @@ if(fires.size()>0)
 	{	if(block!=null)
 		{	AbstractAbility temp = block.getAbility(StateAbility.SPRITE_FLAT);
 			if(block!=null && ((temp!=null && temp.isActive()) == flat) && (block.isOnGround() == onGround))
-				if(shadow)
+				if(shadow && line!=level.getGlobalHeight()-1) //NOTE a préciser : permet d'éviter que l'ombre de la dernière ligne de blocs soit portée sur la première
 					drawShadow(g,block);
 				else
 					drawSprite(g, block);

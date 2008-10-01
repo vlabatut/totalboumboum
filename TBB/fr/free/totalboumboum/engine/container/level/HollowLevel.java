@@ -18,6 +18,8 @@ import fr.free.totalboumboum.engine.container.itemset.ItemsetLoader;
 import fr.free.totalboumboum.engine.container.theme.Theme;
 import fr.free.totalboumboum.engine.container.theme.ThemeLoader;
 import fr.free.totalboumboum.engine.container.tile.Tile;
+import fr.free.totalboumboum.engine.container.zone.Zone;
+import fr.free.totalboumboum.engine.container.zone.ZoneLoader;
 import fr.free.totalboumboum.engine.content.sprite.item.Item;
 import fr.free.totalboumboum.engine.loop.Loop;
 import fr.free.totalboumboum.tools.FileTools;

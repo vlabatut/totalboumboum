@@ -1,4 +1,4 @@
-package fr.free.totalboumboum.engine.container.level;
+package fr.free.totalboumboum.engine.container.zone;
 
 //ImagesLoader.java
 //Andrew Davison, April 2005, ad@fivedots.coe.psu.ac.th
@@ -53,7 +53,6 @@ import org.xml.sax.SAXException;
 import fr.free.totalboumboum.engine.container.theme.Theme;
 import fr.free.totalboumboum.engine.container.tile.VariableTile;
 import fr.free.totalboumboum.engine.container.tile.VariableTilesLoader;
-import fr.free.totalboumboum.engine.container.zone.ZoneTile;
 import fr.free.totalboumboum.tools.FileTools;
 import fr.free.totalboumboum.tools.XmlTools;
 
