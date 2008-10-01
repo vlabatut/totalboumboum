@@ -346,6 +346,27 @@
 	<text name="GameRoundHeaderItemset" value="Itemset" />
 	<text name="GameRoundHeaderItemsetTooltip" value="Items available during  this round" />
 	<!--  -->
+	<text name="GameRoundHeaderTitle" value="Title" />
+	<text name="GameRoundHeaderTitleTooltip" value="Title of the level" />
+	<!--  -->
+	<text name="GameRoundHeaderAuthor" value="Author" />
+	<text name="GameRoundHeaderAuthorTooltip" value="Author/ripper of the level" />
+	<!--  -->
+	<text name="GameRoundHeaderPack" value="Pack" />
+	<text name="GameRoundHeaderPackTooltip" value="Pack containing the level" />
+	<!--  -->
+	<text name="GameRoundHeaderInstance" value="Instance" />
+	<text name="GameRoundHeaderInstanceTooltip" value="Instance used in the level" />
+	<!--  -->
+	<text name="GameRoundHeaderTheme" value="Theme" />
+	<text name="GameRoundHeaderThemeTooltip" value="Theme used in the level" />
+	<!--  -->
+	<text name="GameRoundHeaderDimension" value="Dimension" />
+	<text name="GameRoundHeaderDimensionTooltip" value="Dimension of the visible play zone" />
+	<!--  -->
+	<text name="GameRoundHeaderSource" value="Source" />
+	<text name="GameRoundHeaderSourceTooltip" value="Source of the level (original work or ripped from some existing game)" />
+	<!--  -->
 	<text name="GameRoundLimitPoints" value="Points" />
 	<text name="GameRoundLimitPointsTooltip" value="Number of custom points to score in order to stop this round" />
 	<!--  -->

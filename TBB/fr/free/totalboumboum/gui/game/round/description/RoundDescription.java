@@ -3,6 +3,7 @@ package fr.free.totalboumboum.gui.game.round.description;
 import java.awt.Color;
 import java.awt.Component;
 import java.awt.Dimension;
+import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.color.ColorSpace;
@@ -151,7 +152,7 @@ public class RoundDescription extends EntitledDataPanel
 					upPanel.setMaximumSize(dim);
 					int innerWidth = (rightWidth - margin)/2;
 					// misc panel
-					{	JPanel miscPanel = makeMiscPanel(innerWidth,upHeight);
+					{	JPanel miscPanel = makeMiscPanel(innerWidth,upHeight,preview);
 						upPanel.add(miscPanel);
 					}
 					upPanel.add(Box.createHorizontalGlue());
@@ -278,13 +279,52 @@ public class RoundDescription extends EntitledDataPanel
 		return itemsetPanel;
 	}
 
-	private JPanel makeMiscPanel(int width, int height)
-	{	JPanel result = new JPanel();
-		Dimension dim = new Dimension(width,height);
-		result.setPreferredSize(dim);
-		result.setMinimumSize(dim);
-		result.setMaximumSize(dim);
-		return result;
+	private JPanel makeMiscPanel(int width, int height, LevelPreview preview)
+	{	// init
+		String id = GuiTools.GAME_ROUND_HEADER_MISC;
+		int colGrps[] = {1};
+		int lns[] = {8};
+		ArrayList<ArrayList<Object>> data = new ArrayList<ArrayList<Object>>();
+		ArrayList<ArrayList<String>> tooltips = new ArrayList<ArrayList<String>>();
+		
+		// data
+		String names[] = 
+		{	GuiTools.GAME_ROUND_HEADER_PACK,
+			GuiTools.GAME_ROUND_HEADER_TITLE,
+			GuiTools.GAME_ROUND_HEADER_SOURCE,
+			GuiTools.GAME_ROUND_HEADER_AUTHOR,
+			GuiTools.GAME_ROUND_HEADER_INSTANCE,
+			GuiTools.GAME_ROUND_HEADER_THEME,
+			GuiTools.GAME_ROUND_HEADER_DIMENSION
+		};
+		Round round = getConfiguration().getCurrentRound();
+		HollowLevel hollowLevel = round.getHollowLevel();
+		String texts[] = 
+		{	hollowLevel.getPackName(),
+			preview.getTitle(),
+			preview.getSource(),
+			preview.getAuthor(),
+			hollowLevel.getInstanceName(),
+			hollowLevel.getThemeName(),
+			Integer.toString(hollowLevel.getVisibleHeight())+new Character('\u00D7').toString()+Integer.toString(hollowLevel.getVisibleHeight())
+		};
+		for(int i=0;i<names.length;i++)
+		{	// lists
+			ArrayList<Object> dt = new ArrayList<Object>();
+			data.add(dt);
+			ArrayList<String> tt = new ArrayList<String>();
+			tooltips.add(tt);
+			// data
+			BufferedImage image = GuiTools.getIcon(names[i]);
+			dt.add(image);
+			String tooltip = getConfiguration().getLanguage().getText(names[i]+"Tooltip");
+			tt.add(tooltip);
+			dt.add(texts[i]);
+			tt.add(texts[i]);
+		}		
+		
+		EntitledSubPanel miscPanel = makeSubTable(width,height,id,colGrps,lns,data,tooltips);
+		return miscPanel;
 	}
 
 	private JPanel makeInitialItemsPanel(int width, int height, LevelPreview levelPreview)
@@ -479,18 +519,23 @@ public class RoundDescription extends EntitledDataPanel
 		TablePanel tablePanel = new TablePanel(width,height,columns,lines,false,getConfiguration());
 		tablePanel.setOpaque(false);
 		int lineHeight = (height-margin*(lines+1))/lines;
+		Graphics g = getFrame().getGraphics();
+		float fontSize = GuiTools.getFontSize(lineHeight*0.8, getConfiguration(),g);
+		Font regularFont = getConfiguration().getFont().deriveFont((float)fontSize);
 		
 		// empty
 		for(int line=0;line<lines;line++)
 		{	for(int col=0;col<columns;col=col+subColumns)
 			{	// icon
 				JLabel lbl = tablePanel.getLabel(line,col+0);
+				lbl.setFont(regularFont);
 				lbl.setText(null);
 				lbl.setPreferredSize(new Dimension(lineHeight,lineHeight));
 				lbl.setMaximumSize(new Dimension(lineHeight,lineHeight));
 				lbl.setMinimumSize(new Dimension(lineHeight,lineHeight));
 				// text
 				lbl = tablePanel.getLabel(line,col+1);
+				lbl.setFont(regularFont);
 				lbl.setText(null);
 				lbl.setMinimumSize(new Dimension(lineHeight,lineHeight));
 				int maxWidth = (width - margin*(columns+1) - columnGroups*lineHeight)/columnGroups;

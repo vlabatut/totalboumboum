@@ -14,6 +14,34 @@ public class LevelPreview
 {
 	
 	/////////////////////////////////////////////////////////////////
+	// MISC 			/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	private String author;
+	private String title;
+	private String source;
+	
+	public String getAuthor()
+	{	return author;
+	}
+	public void setAuthor(String author)
+	{	this.author = author;
+	}
+	
+	public String getTitle()
+	{	return title;
+	}
+	public void setTitle(String title)
+	{	this.title = title;
+	}
+	
+	public String getSource()
+	{	return source;
+	}
+	public void setSource(String source)
+	{	this.source = source;
+	}
+	
+	/////////////////////////////////////////////////////////////////
 	// VISUAL PREVIEW	/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 

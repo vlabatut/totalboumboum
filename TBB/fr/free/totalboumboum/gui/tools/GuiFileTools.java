@@ -8,23 +8,30 @@ public class GuiFileTools
 	public static final String EXTENSION_DATA = ".xml";
 
 	// files
+	public final static String FILE_AUTHOR = "author.png";
 	public final static String FILE_BOMBS = "bombs.png";
 	public final static String FILE_CONFRONTATIONS = "confrontations.png";
 	public final static String FILE_CROWNS = "crowns.png";
 	public final static String FILE_DEATHS = "deaths.png";
+	public final static String FILE_DIMENSION = "dimension.png";
 	public final static String FILE_FRAGS = "frags.png";
 	public final static String FILE_FRAME = "frame.png";
 	public final static String FILE_GUI = "gui";
 	public final static String FILE_INITIAL = "initial.png";
+	public final static String FILE_INSTANCE = "instance.png";
 	public final static String FILE_ITEMS = "items.png";
 	public final static String FILE_KILLS = "kills.png";
 	public final static String FILE_LIMITS = "limits.png";
 	public final static String FILE_MISC = "misc.png";
 	public final static String FILE_NAME = "name.png";
+	public final static String FILE_PACK = "pack.png";
 	public final static String FILE_PAINTINGS = "paintings.png";
 	public final static String FILE_POINTS = "points.png";
 	public final static String FILE_RANK = "rank.png";
+	public final static String FILE_SOURCE = "source.png";
+	public final static String FILE_THEME = "theme.png";
 	public final static String FILE_TIME = "time.png";
+	public final static String FILE_TITLE = "title.png";
 	public final static String FILE_TOTAL = "total.png";
 
 	// folders
