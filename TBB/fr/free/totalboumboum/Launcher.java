@@ -632,32 +632,35 @@ public class Launcher
 	 * - correction d'un bug dans le décompte du temps effectué dans la boucle principale
 	 * - correction d'un bug : les items distribués au début du match étaient comptés dans les stats
 	 * - définition du paneau de présentation pour les rounds
+	 * - modification de la police pour y faire apparaître les caractères manquants (essentiellement des opérateurs mathématiques)
+	 * - correction d'un bug graphique qui faisait apparaître l'ombre de la dernière ligne de blocs par dessus la première
+	 * - correction d'un bug XML dans le thème superbomberman1.duel
 	 * 
 	 * *******************************************************
 	 * *********************** A FAIRE ***********************
 	 * *******************************************************
+	 * - améliorer le système aléatoire de génération des niveaux
 	 * - redistribution des items lors de la mort d'un joueur (option de round?)
 	 * - possibilité de bloquer certains items (on ne les perd pas lorsqu'on meurt)
 	 * - au moins finir le cycle lors d'une mort, histoire que la différence de timing ne vienne pas juste de l'ordre des joueurs dans la partie 
 	 * - possibilité de choisir entre le fait que le match s'arrête dès que tout le monde est mort sauf 1, ou dernière flamme terminée
 	 * - feature lié au précédent : gagner plus de points si on finit effetivement le jeu que si on a un time out ou un entre-tuage
 	 * - possibilité de donner des noms aux matches et aux rounds
-	 * - gérer le shrink
 	 * - la bombe en panne ne doit plus bouger !
 	 * - utiliser les tooltips pour afficher les infos trop longues : calcul de points, nombre à virgule dans la colonne des points (décimales cachées), etc.
 	 * - un bug apparait parfois : le résultat du match ne correspond pas au classement réel, et les temps affichés non plus
 	 * - problème de collisions quand on change la vitesse (surement un problème d'arrondi, ou alors un saut trop grand (en distance), voir si j'avais implémenté la maximalisation du déplacement malgré une éventuelle collision...)
 	 * - revoir le système des IA
 	 * - redescendre les stats dans loop, et gestion de fin de partie et tout ce qui est en fait directement lié au moteur
-	 * - en fait tout le process de points dans les stats est à déplacer dans les rounds/matches, etc 
+	 * - en fait tout le calcul de points dans les stats est à déplacer dans les rounds/matches, etc 
 	 * - pb de dimension de l'image de fond en fonction de la résolution... (zones pas peintes)
 	 * - results panel : quand il y a trop de rounds dans un match pour que ça rentre à l'écran, ne pas tout afficher
 	 * - vérifier le temps de latence des bombes, ça me parait un peu trop rapide
 	 * - décomposer le fichier de langue en plusieurs sections plus lisibles
-	 * - modification de la police pour y faire apparaître les caractères manquants (essentiellement des opérateurs mathématiques)
-	 * - correction d'un bug graphique qui faisait apparaître l'ombre de la dernière ligne de blocs par dessus la première
-	 * - correction d'un bug XML dans le thème superbomberman1.duel
+	 * - faire un paramètre dans les rounds qui permet de déterminer s'ils sont compatible avec le tournoi 2007-08
+	 * - tournoi : 1) on choisit les paramètres 2) on choisit les joueurs, le jeu restreint leur nombre pr qu'il soit compatible avec le tournoi, et restreint aussi les IA pour les mêmes raisons
 	 * -------------------------------------------------------------------
+	 * - gérer le shrink
 	 * - mode plein écran
 	 * - gérer l'apparition comme une action en soit. si pas possible d'apparaître au début de la partie, faire un atterrissage ?
 	 * - à la fin du round, faire apparaitre les résultats par transparence...ça serait la classe ça !
