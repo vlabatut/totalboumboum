@@ -99,6 +99,12 @@ public class Level
 	public double getGlobalUpY()
 	{	return globalUpY;
 	}
+	public double getGlobalWidth()
+	{	return globalWidth;
+	}
+	public double getGlobalHeight()
+	{	return globalHeight;
+	}
 
 	/////////////////////////////////////////////////////////////////
 	// TILES MATRIX		/////////////////////////////////////////////

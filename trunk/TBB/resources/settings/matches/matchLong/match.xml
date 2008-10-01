@@ -11,7 +11,7 @@
  	
 	<limits>
 
-		<confrontation value="5" />
+		<confrontation value="10" />
 	
  <!-- 		
 		<points value="5" >

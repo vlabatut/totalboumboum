@@ -32,14 +32,16 @@ import java.util.Map.Entry;
 import fr.free.totalboumboum.engine.container.level.HollowLevel;
 import fr.free.totalboumboum.engine.container.level.LevelPreview;
 import fr.free.totalboumboum.engine.container.level.LevelPreviewer;
-import fr.free.totalboumboum.engine.container.level.Zone;
+import fr.free.totalboumboum.engine.container.zone.Zone;
 import fr.free.totalboumboum.game.limit.Limit;
 import fr.free.totalboumboum.game.limit.LimitConfrontation;
 import fr.free.totalboumboum.game.limit.LimitPoints;
 import fr.free.totalboumboum.game.limit.LimitScore;
+import fr.free.totalboumboum.game.limit.LimitTime;
 import fr.free.totalboumboum.game.limit.LimitTotal;
 import fr.free.totalboumboum.game.limit.Limits;
 import fr.free.totalboumboum.game.limit.MatchLimit;
+import fr.free.totalboumboum.game.limit.RoundLimit;
 import fr.free.totalboumboum.game.match.Match;
 import fr.free.totalboumboum.game.round.Round;
 import fr.free.totalboumboum.gui.generic.EntitledDataPanel;
@@ -54,6 +56,7 @@ import fr.free.totalboumboum.gui.menus.options.OptionsMenu;
 import fr.free.totalboumboum.gui.menus.tournament.TournamentMain;
 import fr.free.totalboumboum.gui.tools.GuiTools;
 import fr.free.totalboumboum.tools.ImageTools;
+import fr.free.totalboumboum.tools.StringTools;
 
 public class RoundDescription extends EntitledDataPanel
 {	
@@ -388,17 +391,17 @@ public class RoundDescription extends EntitledDataPanel
 	private JPanel makeLimitsPanel(int width, int height)
 	{	// init
 		String id = GuiTools.GAME_ROUND_HEADER_LIMITS;
-		int colGrps[] = {2, 4};
-		int lns[] = {4, 8};
+		int colGrps[] = {1,2};
+		int lns[] = {8, 8};
 		ArrayList<ArrayList<Object>> data = new ArrayList<ArrayList<Object>>();
 		ArrayList<ArrayList<String>> tooltips = new ArrayList<ArrayList<String>>();
 		
 		// data
 		NumberFormat nf = NumberFormat.getInstance();
 		nf.setMinimumFractionDigits(0);
-		Match match = getConfiguration().getCurrentMatch();
-		Limits<MatchLimit> limitsList = match.getLimits();
-		Iterator<MatchLimit> i = limitsList.iterator();
+		Round round = getConfiguration().getCurrentRound();
+		Limits<RoundLimit> limitsList = round.getLimits();
+		Iterator<RoundLimit> i = limitsList.iterator();
 		if(!i.hasNext())
 		{	ArrayList<?> dt = new ArrayList<Object>();
 			ArrayList<String> tt = new ArrayList<String>();
@@ -414,50 +417,45 @@ public class RoundDescription extends EntitledDataPanel
 			Limit limit = i.next();
 			String iconName = null;
 			String value = null;
-			if(limit instanceof LimitConfrontation)
-			{	LimitConfrontation l = (LimitConfrontation)limit;
-				iconName = GuiTools.GAME_MATCH_LIMIT_CONFRONTATIONS;
-				value = nf.format(l.getLimit());
+			if(limit instanceof LimitTime)
+			{	LimitTime l = (LimitTime)limit;
+				iconName = GuiTools.GAME_ROUND_LIMIT_TIME;
+				value = StringTools.formatTimeWithSeconds(l.getLimit());
 			}
 			else if(limit instanceof LimitPoints)
 			{	LimitPoints l = (LimitPoints)limit;
-				iconName = GuiTools.GAME_MATCH_LIMIT_POINTS;
-				value = nf.format(l.getLimit());
-			}
-			else if(limit instanceof LimitTotal)
-			{	LimitTotal l = (LimitTotal)limit;
-				iconName = GuiTools.GAME_MATCH_LIMIT_TOTAL;
+				iconName = GuiTools.GAME_ROUND_LIMIT_POINTS;
 				value = nf.format(l.getLimit());
 			}
 			else if(limit instanceof LimitScore)
 			{	LimitScore l = (LimitScore) limit;
 				switch(l.getScore())
 				{	case BOMBS:
-						iconName = GuiTools.GAME_MATCH_LIMIT_BOMBS;
+						iconName = GuiTools.GAME_ROUND_LIMIT_BOMBS;
 						value = nf.format(l.getLimit());
 						break;
 					case CROWNS:
-						iconName = GuiTools.GAME_MATCH_LIMIT_CROWNS;
+						iconName = GuiTools.GAME_ROUND_LIMIT_CROWNS;
 						value = nf.format(l.getLimit());
 						break;
 					case DEATHS:
-						iconName = GuiTools.GAME_MATCH_LIMIT_DEATHS;
+						iconName = GuiTools.GAME_ROUND_LIMIT_DEATHS;
 						value = nf.format(l.getLimit());
 						break;
 					case ITEMS:
-						iconName = GuiTools.GAME_MATCH_LIMIT_ITEMS;
+						iconName = GuiTools.GAME_ROUND_LIMIT_ITEMS;
 						value = nf.format(l.getLimit());
 						break;
 					case KILLS:
-						iconName = GuiTools.GAME_MATCH_LIMIT_KILLS;
+						iconName = GuiTools.GAME_ROUND_LIMIT_KILLS;
 						value = nf.format(l.getLimit());
 						break;
 					case PAINTINGS:
-						iconName = GuiTools.GAME_MATCH_LIMIT_PAINTINGS;
+						iconName = GuiTools.GAME_ROUND_LIMIT_PAINTINGS;
 						value = nf.format(l.getLimit());
 						break;
 					case TIME:
-						iconName = GuiTools.GAME_MATCH_LIMIT_TIME;
+						iconName = GuiTools.GAME_ROUND_LIMIT_TIME;
 						value = nf.format(l.getLimit());
 						break;
 				}
@@ -473,7 +471,7 @@ public class RoundDescription extends EntitledDataPanel
 			dt.add(icon);
 			tt.add(tooltip);
 			dt.add(value);
-			tt.add(tooltip);			
+			tt.add(value);			
 		}			
 			
 		// result

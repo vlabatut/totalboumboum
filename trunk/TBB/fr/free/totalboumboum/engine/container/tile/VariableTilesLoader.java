@@ -8,7 +8,7 @@ import java.util.List;
 import org.jdom.Attribute;
 import org.jdom.Element;
 
-import fr.free.totalboumboum.engine.container.level.ZoneLoader;
+import fr.free.totalboumboum.engine.container.zone.ZoneLoader;
 import fr.free.totalboumboum.tools.XmlTools;
 
 

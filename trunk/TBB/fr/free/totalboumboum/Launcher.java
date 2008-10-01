@@ -655,6 +655,8 @@ public class Launcher
 	 * - vérifier le temps de latence des bombes, ça me parait un peu trop rapide
 	 * - décomposer le fichier de langue en plusieurs sections plus lisibles
 	 * - modification de la police pour y faire apparaître les caractères manquants (essentiellement des opérateurs mathématiques)
+	 * - correction d'un bug graphique qui faisait apparaître l'ombre de la dernière ligne de blocs par dessus la première
+	 * - correction d'un bug XML dans le thème superbomberman1.duel
 	 * -------------------------------------------------------------------
 	 * - mode plein écran
 	 * - gérer l'apparition comme une action en soit. si pas possible d'apparaître au début de la partie, faire un atterrissage ?
