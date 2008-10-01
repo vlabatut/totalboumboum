@@ -43,6 +43,10 @@ import fr.free.totalboumboum.game.limit.Limits;
 import fr.free.totalboumboum.game.limit.MatchLimit;
 import fr.free.totalboumboum.game.limit.RoundLimit;
 import fr.free.totalboumboum.game.match.Match;
+import fr.free.totalboumboum.game.points.PointsDiscretize;
+import fr.free.totalboumboum.game.points.PointsProcessor;
+import fr.free.totalboumboum.game.points.PointsRankings;
+import fr.free.totalboumboum.game.points.PointsRankpoints;
 import fr.free.totalboumboum.game.round.Round;
 import fr.free.totalboumboum.gui.generic.EntitledDataPanel;
 import fr.free.totalboumboum.gui.generic.EntitledSubPanel;
@@ -380,14 +384,171 @@ public class RoundDescription extends EntitledDataPanel
 	}
 
 	private JPanel makePointsPanel(int width, int height)
-	{	JPanel result = new JPanel();
-		Dimension dim = new Dimension(width,height);
-		result.setPreferredSize(dim);
-		result.setMinimumSize(dim);
-		result.setMaximumSize(dim);
-		return result;
-	}
+	{	// init
+		String id = GuiTools.GAME_ROUND_HEADER_POINTSPROCESS;
+		int colGrps[] = {1, 1};
+		int lns[] = {8, 12};
+		ArrayList<ArrayList<Object>> data = new ArrayList<ArrayList<Object>>();
+		ArrayList<ArrayList<String>> tooltips = new ArrayList<ArrayList<String>>();
+		
+		// data
+		Round round = getConfiguration().getCurrentRound();
+		PointsProcessor mainPP = round.getPointProcessor();
+		makePointsPanelRec(mainPP,data,tooltips);
 
+		EntitledSubPanel pointsPanel = makeSubTable(width,height,id,colGrps,lns,data,tooltips);
+		return pointsPanel;
+	}
+	public void makePointsPanelRec(PointsProcessor pp, ArrayList<ArrayList<Object>> data, ArrayList<ArrayList<String>> tooltips)
+	{	// format
+		NumberFormat nf = NumberFormat.getInstance();
+		nf.setMaximumFractionDigits(2);
+		nf.setMinimumFractionDigits(0);
+		
+		// rankpoints
+		if(pp instanceof PointsRankpoints)
+		{	PointsRankpoints pr = (PointsRankpoints) pp;
+			// this pp
+			{	ArrayList<Object> dt = new ArrayList<Object>();
+				ArrayList<String> tt = new ArrayList<String>();
+				data.add(dt);
+				tooltips.add(tt);
+				String text = "Rp";
+				String tooltip = "Rankpoints: calculates points according to a ranking";
+				dt.add(text);
+				tt.add(tooltip);
+				boolean exaequoShare = pr.getExaequoShare();
+				if(exaequoShare)
+				{	text = "share";
+					tooltip = "In case of tie, points are shared";
+				}
+				else
+				{	text = "don't share";
+					tooltip = "In case of tie, points are not shared";
+				}
+				dt.add(text);
+				tt.add(tooltip);
+			}
+			// source
+			{	PointsRankings prk = pr.getSource();
+				ArrayList<PointsProcessor> sources = prk.getSources();
+				Iterator<PointsProcessor> i = sources.iterator();
+				while(i.hasNext())
+				{	PointsProcessor source = i.next();
+					makePointsPanelRec(source,data,tooltips);
+				}
+			}
+			// values
+			{	float[] values = pr.getValues();
+				for(int i=0;i<values.length;i++)
+				{	String nbr = "#"+(i+1); 
+					String value = nf.format(values[i]);
+					String tooltip = nbr+new Character('\u2192').toString()+value;
+					ArrayList<Object> dt = new ArrayList<Object>();
+					ArrayList<String> tt = new ArrayList<String>();
+					data.add(dt);
+					tooltips.add(tt);
+					dt.add(nbr);
+					tt.add(tooltip);
+					dt.add(value);
+					tt.add(tooltip);			
+				}
+			}
+		}
+		// discretize
+		else if(pp instanceof PointsDiscretize)
+		{	PointsDiscretize pd = (PointsDiscretize) pp;
+			// this pp
+			{	ArrayList<Object> dt = new ArrayList<Object>();
+				ArrayList<String> tt = new ArrayList<String>();
+				data.add(dt);
+				tooltips.add(tt);
+				String text = "D";
+				String tooltip = "Discretize: calculates points according to some intervals";
+				dt.add(text);
+				tt.add(tooltip);				
+				text = "";
+				dt.add(text);
+				tt.add(tooltip);				
+			}
+			// source
+			{	PointsProcessor source = pd.getSource();
+				makePointsPanelRec(source,data,tooltips);
+			}
+			// values & thresholds
+			{	float[] values = pd.getValues();
+				float[] thresholds = pd.getThresholds();
+				String previousThreshold;
+				String threshold = new Character('\u2212').toString()+new Character('\u221E').toString();
+				for(int i=0;i<values.length;i++)
+				{	String value = nf.format(values[i]);
+					previousThreshold = threshold; 
+					threshold = nf.format(thresholds[i]);
+					String interval;
+					interval = "]"+previousThreshold+";"+threshold+"]";
+					String tooltip = interval+"->"+value;
+					ArrayList<Object> dt = new ArrayList<Object>();
+					ArrayList<String> tt = new ArrayList<String>();
+					data.add(dt);
+					tooltips.add(tt);
+					dt.add(interval);
+					tt.add(tooltip);
+					dt.add(value);
+					tt.add(tooltip);			
+				}
+			}
+		}
+		// rankings
+		else if(pp instanceof PointsRankings)
+		{	PointsRankings pr = (PointsRankings) pp;
+			// this PP
+			{	boolean inverted = pr.isInverted();
+				ArrayList<Object> dt = new ArrayList<Object>();
+				ArrayList<String> tt = new ArrayList<String>();
+				data.add(dt);
+				tooltips.add(tt);
+				dt.add("Rk");
+				tt.add("Rankings: caculates a ranking according to one or several points");
+				String value,tooltip;
+				if(inverted)
+				{	value = "inverted";
+					tooltip = "inverted order";
+				}
+				else
+				{	value = "regular";
+					tooltip = "regular order";
+				}
+				dt.add(value);
+				tt.add(tooltip);
+			}
+			// sources
+			{	ArrayList<PointsProcessor> sources = pr.getSources();
+				Iterator<PointsProcessor> i = sources.iterator();
+				while(i.hasNext())
+				{	PointsProcessor source = i.next();
+					makePointsPanelRec(source,data,tooltips);
+				}
+			}
+		}
+		// others
+		else
+		{	ArrayList<Object> dt = new ArrayList<Object>();
+			ArrayList<String> tt = new ArrayList<String>();
+			data.add(dt);
+			tooltips.add(tt);
+			// icon
+			//BufferedImage icon = GuiTools.getIcon(GuiTools.GAME_ROUND_HEADER_PARTIAL);
+			String icon = "-";
+			String tooltip = getConfiguration().getLanguage().getText(GuiTools.GAME_ROUND_HEADER_PARTIAL+"Tooltip");
+			dt.add(icon);
+			tt.add(tooltip);
+			// text
+			String text = pp.toString();
+			dt.add(text);
+			tt.add(text);
+		}
+	}
+	
 	private JPanel makeLimitsPanel(int width, int height)
 	{	// init
 		String id = GuiTools.GAME_ROUND_HEADER_LIMITS;
@@ -520,7 +681,9 @@ public class RoundDescription extends EntitledDataPanel
 		Graphics g = getFrame().getGraphics();
 		float fontSize = GuiTools.getFontSize(lineHeight*0.8, getConfiguration(),g);
 		Font regularFont = getConfiguration().getFont().deriveFont((float)fontSize);
+		boolean firstIcon = data.get(0).get(0) instanceof BufferedImage;
 		
+		int maxWidth = (width - margin*(columns+1) - columnGroups*lineHeight)/columnGroups;
 		// empty
 		for(int line=0;line<lines;line++)
 		{	for(int col=0;col<columns;col=col+subColumns)
@@ -528,16 +691,19 @@ public class RoundDescription extends EntitledDataPanel
 				JLabel lbl = tablePanel.getLabel(line,col+0);
 				lbl.setFont(regularFont);
 				lbl.setText(null);
-				lbl.setPreferredSize(new Dimension(lineHeight,lineHeight));
-				lbl.setMaximumSize(new Dimension(lineHeight,lineHeight));
+				if(firstIcon)
+				{	lbl.setPreferredSize(new Dimension(lineHeight,lineHeight));
+					lbl.setMaximumSize(new Dimension(lineHeight,lineHeight));
+				}
+				else
+					lbl.setMaximumSize(new Dimension(maxWidth,lineHeight));
 				lbl.setMinimumSize(new Dimension(lineHeight,lineHeight));
 				// text
 				lbl = tablePanel.getLabel(line,col+1);
 				lbl.setFont(regularFont);
 				lbl.setText(null);
-				lbl.setMinimumSize(new Dimension(lineHeight,lineHeight));
-				int maxWidth = (width - margin*(columns+1) - columnGroups*lineHeight)/columnGroups;
 				lbl.setMaximumSize(new Dimension(maxWidth,lineHeight));
+				lbl.setMinimumSize(new Dimension(lineHeight,lineHeight));
 			}
 		}
 		

@@ -189,6 +189,9 @@
 	<text name="GameTournamentHeaderMisc" value="Misc" />
 	<text name="GameTournamentHeaderMiscTooltip" value="Various informations about this tournament" />
 	<!--  -->
+	<text name="GameTournamentHeaderPartial" value="Partial" />
+	<text name="GameTournamentHeaderPartialTooltip" value="Partial result of the points processing for this tournament" />
+	<!--  -->
 	<text name="GameTournamentLimitConfrontations" value="Matches" />
 	<text name="GameTournamentLimitConfrontationsTooltip" value="Maximal number of matches in this tournament" />
 	<!--  -->
@@ -262,6 +265,9 @@
 	<!--  -->
 	<text name="GameMatchHeaderMisc" value="Misc" />
 	<text name="GameMatchHeaderMiscTooltip" value="Various informations about this match" />
+	<!--  -->
+	<text name="GameMatchHeaderPartial" value="Partial" />
+	<text name="GameMatchHeaderPartialTooltip" value="Partial result of the points processing for this match" />
 	<!--  -->
 	<text name="GameMatchLimitConfrontations" value="Rounds" />
 	<text name="GameMatchLimitConfrontationsTooltip" value="Maximal number of rounds in this match" />
@@ -366,6 +372,9 @@
 	<!--  -->
 	<text name="GameRoundHeaderSource" value="Source" />
 	<text name="GameRoundHeaderSourceTooltip" value="Source of the level (original work or ripped from some existing game)" />
+	<!--  -->
+	<text name="GameRoundHeaderPartial" value="Partial" />
+	<text name="GameRoundHeaderPartialTooltip" value="Partial result of the points processing for this round" />
 	<!--  -->
 	<text name="GameRoundLimitPoints" value="Points" />
 	<text name="GameRoundLimitPointsTooltip" value="Number of custom points to score in order to stop this round" />

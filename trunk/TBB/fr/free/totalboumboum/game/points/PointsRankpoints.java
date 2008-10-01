@@ -22,6 +22,16 @@ public class PointsRankpoints extends PointsProcessor implements PPFunction
 		this.exaequoShare = exaequoShare;
 	}
 	
+	public PointsRankings getSource()
+	{	return source;	
+	}
+	public float[] getValues()
+	{	return values;	
+	}
+	public boolean getExaequoShare()
+	{	return exaequoShare;	
+	}
+	
 	@Override
 	public float[] process(StatisticBase stats)
 	{	// init

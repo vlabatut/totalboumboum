@@ -104,6 +104,7 @@ public class GuiTools
 	public static final String GAME_TOURNAMENT_HEADER_LIMITS = "GameTournamentHeaderLimits";	
 	public static final String GAME_TOURNAMENT_HEADER_POINTSPROCESS = "GameTournamentHeaderPointprocess";	
 	public static final String GAME_TOURNAMENT_HEADER_MISC = "GameTournamentHeaderMisc";	
+	public static final String GAME_TOURNAMENT_HEADER_PARTIAL = "GameTournamentHeaderPartial";
 	public static final String GAME_TOURNAMENT_LIMIT_CONFRONTATIONS = "GameTournamentLimitConfrontations";
 	public static final String GAME_TOURNAMENT_LIMIT_POINTS = "GameTournamentLimitPoints";
 	public static final String GAME_TOURNAMENT_LIMIT_TOTAL = "GameTournamentLimitTotal";
@@ -131,6 +132,7 @@ public class GuiTools
 	public static final String GAME_MATCH_HEADER_LIMITS = "GameMatchHeaderLimits";	
 	public static final String GAME_MATCH_HEADER_POINTSPROCESS = "GameMatchHeaderPointprocess";	
 	public static final String GAME_MATCH_HEADER_MISC = "GameMatchHeaderMisc";	
+	public static final String GAME_MATCH_HEADER_PARTIAL = "GameMatchHeaderPartial";
 	public static final String GAME_MATCH_LIMIT_CONFRONTATIONS = "GameMatchLimitConfrontations";
 	public static final String GAME_MATCH_LIMIT_POINTS = "GameMatchLimitPoints";
 	public static final String GAME_MATCH_LIMIT_TOTAL = "GameMatchLimitTotal";
@@ -168,6 +170,7 @@ public class GuiTools
 	public static final String GAME_ROUND_HEADER_THEME = "GameRoundHeaderTheme";
 	public static final String GAME_ROUND_HEADER_DIMENSION = "GameRoundHeaderDimension";
 	public static final String GAME_ROUND_HEADER_SOURCE = "GameRoundHeaderSource";
+	public static final String GAME_ROUND_HEADER_PARTIAL = "GameRoundHeaderPartial";
 	public static final String GAME_ROUND_LIMIT_POINTS = "GameRoundLimitPoints";
 	public static final String GAME_ROUND_LIMIT_BOMBS = "GameRoundLimitBombs";
 	public static final String GAME_ROUND_LIMIT_DEATHS = "GameRoundLimitDeaths";
@@ -490,6 +493,11 @@ public class GuiTools
 			icons.put(GAME_TOURNAMENT_LIMIT_PAINTINGS,image);
 			icons.put(GAME_MATCH_LIMIT_PAINTINGS,image);
 			icons.put(GAME_ROUND_LIMIT_PAINTINGS,image);
+			// partial
+			image = loadIcon(folder+GuiFileTools.FILE_PARTIAL,absent);
+			icons.put(GAME_TOURNAMENT_HEADER_PARTIAL,image);
+			icons.put(GAME_MATCH_HEADER_PARTIAL,image);
+			icons.put(GAME_ROUND_HEADER_PARTIAL,image);
 			// points
 			image = loadIcon(folder+GuiFileTools.FILE_POINTS,absent);
 			icons.put(GAME_TOURNAMENT_HEADER_POINTS,image);
