@@ -11,6 +11,10 @@ public class PointsScores extends PointsProcessor implements PPConstant
 	{	this.score = score;	
 	}
 	
+	public Score getScore()
+	{	return score;	
+	}
+	
 	@Override
 	public float[] process(StatisticBase stats)
 	{	long[] temp = stats.getScores(score);

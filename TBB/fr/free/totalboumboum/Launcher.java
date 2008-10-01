@@ -631,11 +631,11 @@ public class Launcher
 	 * - mise en place d'un compteur FPS/UPS
 	 * - correction d'un bug dans le décompte du temps effectué dans la boucle principale
 	 * - correction d'un bug : les items distribués au début du match étaient comptés dans les stats
+	 * - définition du paneau de présentation pour les rounds
 	 * 
 	 * *******************************************************
 	 * *********************** A FAIRE ***********************
 	 * *******************************************************
-	 * - définir les présentations des rounds
 	 * - redistribution des items lors de la mort d'un joueur (option de round?)
 	 * - possibilité de bloquer certains items (on ne les perd pas lorsqu'on meurt)
 	 * - au moins finir le cycle lors d'une mort, histoire que la différence de timing ne vienne pas juste de l'ordre des joueurs dans la partie 
@@ -667,6 +667,7 @@ public class Launcher
 	 * - définir des noms "human readable" pour les items, histoire de ne pas afficher ces codes internes dans la GUI, en profiter pour introduire une decription, le tout en plusieurs langues. utiliser le code ISO comme paramètre de langue, et l'introduire dans le fichier de langue
 	 * - possibilité de définir un nom pour tournament/match/round, qui sera affiche en titre de présentation/stats etc. si pas de nom, utilisation d'un nom générique (Round 1 - Prensentation) etc
 	 * - faire un chargement ad hoc des matches, rounds, etc ? fusionner du coup HollowLevel et LevelPreview ? (voir si les objets de ces deux classes sont créés au même moment)
+	 * - ergonomie : faire le chargement du round dès qu'on clique sur "next" dans le match, et attendre ensuite que le joueur valide le début du match !
 	 */
 	
 	/*
