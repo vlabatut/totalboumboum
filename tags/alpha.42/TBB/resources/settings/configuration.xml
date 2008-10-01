@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+	xsi:noNamespaceSchemaLocation="..\schemas\configuration.xsd">
+	
+<!-- ENGINE -->	
+	<fps value="100" />
+	<speed value="4" />
+
+<!-- DISPLAY -->	
+	<smoothGraphics value="true" />
+		
+<!-- DISPLAY -->	
+<!-- 	attention : si vous augmentez la résolution graphique, il faut donner plus de mémoire à la java machine
+		par exemple en utilisant l'option d'exécution -xmx128m pour donner 128 Mo au lieu des 64 alloués par défaut -->
+	<panelDimension width="1024" height="768" />
+<!-- 	<panelDimension width="750" height="600" />  -->
+<!-- 	<panelDimension width="1280" height="1024" />  --> 
+	
+<!-- PROFILES -->	
+	<profiles>
+		<profile value="DoganDemirkol" /> <!-- white -->
+		<profile value="BingolKetenci" /> <!-- blue -->
+<!-- 		<profile value="OkanYuksel" /> BUGGÉ --> <!-- black -->   
+<!--		<profile value="GokselMenges" /> --> <!-- green --> 
+		<profile value="KilicPala" /> <!-- red -->
+<!--		<profile value="CaglayanElmas" BUGGÉ /> --> <!-- orange -->
+<!--		<profile value="GoksayKose" /> --> <!-- pink -->
+ 		<profile value="BasmanSandalli" /> <!-- brown -->
+		<profile value="manual" />  <!-- cyan -->
+
+	</profiles>
+
+<!-- TOURNAMENT -->	
+<!-- 	<tournament value="tournamentTest" /> -->
+	<tournament value="tournamentLong" />
+	
+</configuration>

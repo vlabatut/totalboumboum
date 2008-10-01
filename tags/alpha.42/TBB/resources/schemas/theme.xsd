@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+
+	<xsd:complexType name="tComponent">
+		<xsd:attribute name="folder" type="xsd:string" use="optional" />
+		<xsd:attribute name="name" type="xsd:string" use="required" />
+	</xsd:complexType>
+
+	<xsd:complexType name="tFloors">
+		<xsd:sequence>
+			<xsd:element name="floor" type="tComponent" maxOccurs="unbounded" />
+		</xsd:sequence>
+		<xsd:attribute name="folder" type="xsd:string" use="optional" />
+	</xsd:complexType>
+
+	<xsd:simpleType name="tGroupName">
+		<xsd:restriction base="xsd:string">
+			<xsd:pattern value="(default){0,0}" />
+		</xsd:restriction>
+	</xsd:simpleType>
+
+	<xsd:complexType name="tGroup">
+		<xsd:sequence>
+			<xsd:element name="block" type="tComponent" minOccurs="0" maxOccurs="unbounded" />
+		</xsd:sequence>
+<!-- !!!!!!!!!!!!!!		<xsd:attribute name="name" type="tGroupName" use="required" />  à voir : supposé interdire le nom 'default'-->
+		<xsd:attribute name="name" type="xsd:string" use="required" />
+		<xsd:attribute name="folder" type="xsd:string" use="optional" />
+	</xsd:complexType>
+
+	<xsd:complexType name="tBlocks">
+		<xsd:sequence>
+			<xsd:choice maxOccurs="unbounded" >
+				<xsd:element name="block" type="tComponent" minOccurs="0" />
+				<xsd:element name="group" type="tGroup" minOccurs="0" />
+			</xsd:choice>
+		</xsd:sequence>
+		<xsd:attribute name="folder" type="xsd:string" use="optional" />
+	</xsd:complexType>
+
+	<xsd:complexType name="tTheme">
+		<xsd:sequence>
+			<xsd:element name="floors" type="tFloors" />
+			<xsd:element name="blocks" type="tBlocks" minOccurs="0" />
+		</xsd:sequence>
+		<xsd:attribute name="folder" type="xsd:string" use="optional" />
+	</xsd:complexType>
+
+	<xsd:element name="theme" type="tTheme" />
+
+</xsd:schema>
