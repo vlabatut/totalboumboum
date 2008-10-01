@@ -1,8 +1,10 @@
 package fr.free.totalboumboum.engine.container.zone;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.Iterator;
+import java.util.Map.Entry;
 
 
 import fr.free.totalboumboum.engine.container.tile.ValueTile;
@@ -25,6 +27,9 @@ public class Zone
 	
 	public void setVariableTiles(HashMap<String,VariableTile> variables)
 	{	this.variableTiles = variables;		
+	}
+	public HashMap<String,VariableTile> getVariableTiles()
+	{	return variableTiles;		
 	}
 	
 	/////////////////////////////////////////////////////////////////
@@ -57,7 +62,14 @@ public class Zone
 	        	items[i][j] = null;
 			}
 		}
-
+		
+		Iterator<Entry<String,VariableTile>> iter = variableTiles.entrySet().iterator();
+		while(iter.hasNext())
+		{	Entry<String,VariableTile> temp = iter.next();
+			VariableTile value = temp.getValue();
+			value.init();
+		}
+		
 		// matrix
     	Iterator<ZoneTile> it = tiles.iterator();
     	while(it.hasNext())
@@ -69,25 +81,13 @@ public class Zone
     		String name = tile.getVariable();
     		if(name!=null)
     		{	VariableTile vt = variableTiles.get(name);
-				boolean found = false;
-				double proba = Math.random();
-				float p = 0;
-				ArrayList<ValueTile> valueTiles = vt.getValues();
-				Iterator<ValueTile> j = valueTiles.iterator();
-				while(j.hasNext() && !found)
-				{	ValueTile vit = j.next();
-					Float f = vit.getProba();
-					String itm = vit.getItem();
-					String blck = vit.getBlock();
-					String flr = vit.getFloor();
-					p = p + f;
-					if(proba<=p)
-					{	found = true;
-						content[0] = flr;
-						content[1] = blck;
-						content[2] = itm;
-					}    
-				}
+    			ValueTile vit = vt.getNext();
+    			String itm = vit.getItem();
+				String blck = vit.getBlock();
+				String flr = vit.getFloor();
+				content[0] = flr;
+				content[1] = blck;
+				content[2] = itm;
     		}
     		// constant tile
     		else
