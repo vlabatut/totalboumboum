@@ -69,6 +69,10 @@ public class ItemManager
 	 */
 	
 	public void addItem(Item item)
+	{	addItem(item,false);
+		
+	}
+	public void addItem(Item item, boolean initial)
 	{	collectedItems.offer(item);
 		item.setToBeRemovedFromTile(true);
 		ArrayList<AbstractAbility> ab = item.getItemAbilities();
@@ -80,13 +84,19 @@ public class ItemManager
 				action.setActor(sprite.getClass());
 			}
 		}
-		// stats
-		StatisticAction statAction = StatisticAction.GATHER_ITEM;
-		long statTime = sprite.getLoopTime();
-		String statActor = sprite.getPlayer().getName();
-		String statTarget = item.getItemName();
-		StatisticEvent statEvent = new StatisticEvent(statActor,statAction,statTarget,statTime);
-		sprite.addStatisticEvent(statEvent);
+		// stats (doesn't count initial items)
+		if(!initial)
+		{	StatisticAction statAction = StatisticAction.GATHER_ITEM;
+			long statTime = sprite.getLoopTime();
+			String statActor = sprite.getPlayer().getName();
+			String statTarget = item.getItemName();
+			StatisticEvent statEvent = new StatisticEvent(statActor,statAction,statTarget,statTime);
+			sprite.addStatisticEvent(statEvent);
+		}
+	}
+	
+	public void addInitialItem(Item item)
+	{	addItem(item,true);
 	}
 	
 	public Item dropItem()

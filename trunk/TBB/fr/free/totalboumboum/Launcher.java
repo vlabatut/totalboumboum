@@ -630,37 +630,35 @@ public class Launcher
 	 * - mise en place de l'accélération graphique avec l'utilisation d'une VolatileImage pour le panel
 	 * - mise en place d'un compteur FPS/UPS
 	 * - correction d'un bug dans le décompte du temps effectué dans la boucle principale
+	 * - correction d'un bug : les items distribués au début du match étaient comptés dans les stats
 	 * 
 	 * *******************************************************
 	 * *********************** A FAIRE ***********************
 	 * *******************************************************
 	 * - définir les présentations des rounds
-	 * - y a visiblement un problème d'horloge : le temps passe moins vite que ce qu'il devrait
-	 * 		- ca serait du à l'utilisation de system.nano sur un multicoeur : windows arrête pas de switcher entre les coeurs, chaque coeur a sa propre horloge, d'où des voyages dans le temps...
-	 * - pb : les items distribués au début du match ne doivent pas être comptés dans les stats !
 	 * - redistribution des items lors de la mort d'un joueur (option de round?)
-	 * - possibilité de bloquer certains items (on ne les perd pas)
+	 * - possibilité de bloquer certains items (on ne les perd pas lorsqu'on meurt)
 	 * - au moins finir le cycle lors d'une mort, histoire que la différence de timing ne vienne pas juste de l'ordre des joueurs dans la partie 
 	 * - possibilité de choisir entre le fait que le match s'arrête dès que tout le monde est mort sauf 1, ou dernière flamme terminée
 	 * - feature lié au précédent : gagner plus de points si on finit effetivement le jeu que si on a un time out ou un entre-tuage
 	 * - possibilité de donner des noms aux matches et aux rounds
 	 * - gérer le shrink
-	 * - la bombe en panne ne bouge plus !
+	 * - la bombe en panne ne doit plus bouger !
 	 * - utiliser les tooltips pour afficher les infos trop longues : calcul de points, nombre à virgule dans la colonne des points (décimales cachées), etc.
 	 * - un bug apparait parfois : le résultat du match ne correspond pas au classement réel, et les temps affichés non plus
 	 * - problème de collisions quand on change la vitesse (surement un problème d'arrondi, ou alors un saut trop grand (en distance), voir si j'avais implémenté la maximalisation du déplacement malgré une éventuelle collision...)
 	 * - revoir le système des IA
 	 * - redescendre les stats dans loop, et gestion de fin de partie et tout ce qui est en fait directement lié au moteur
 	 * - en fait tout le process de points dans les stats est à déplacer dans les rounds/matches, etc 
-	 * - à la fin du round, faire apparaitre les résultats par transparence...ça serait la classe ça !
-	 * - gérer l'apparition comme une action en soit. si pas possible d'apparaître au début de la partie, faire un atterrissage ?
 	 * - pb de dimension de l'image de fond en fonction de la résolution... (zones pas peintes)
 	 * - results panel : quand il y a trop de rounds dans un match pour que ça rentre à l'écran, ne pas tout afficher
-	 * - mode plein écran
-	 * - rétablir frag comme stat ? non ! 
 	 * - vérifier le temps de latence des bombes, ça me parait un peu trop rapide
 	 * - décomposer le fichier de langue en plusieurs sections plus lisibles
+	 * - modification de la police pour y faire apparaître les caractères manquants (essentiellement des opérateurs mathématiques)
 	 * -------------------------------------------------------------------
+	 * - mode plein écran
+	 * - gérer l'apparition comme une action en soit. si pas possible d'apparaître au début de la partie, faire un atterrissage ?
+	 * - à la fin du round, faire apparaitre les résultats par transparence...ça serait la classe ça !
 	 * - s'occuper de la limite qui fait gagner le joueur qui la franchit : pq pas un simple bonus/malus pour celui qui arrête la partie ?
 	 * - limites exprimées de façon relative (peindre 75% des cases...)
 	 * - pour painting, possibilité de définir quelles cases peuvent être repeinte, ce qui permet de poser comme limite un %age de cases repeintes

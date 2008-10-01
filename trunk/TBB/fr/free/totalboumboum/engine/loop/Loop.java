@@ -111,7 +111,7 @@ public class Loop implements Runnable
 			while(it.hasNext())
 			{	String name = it.next();
 				Item item = itemset.makeItem(name);
-				hero.addItem(item);
+				hero.addInitialItem(item);
 			}
 			// next player...
 			loadStepOver();

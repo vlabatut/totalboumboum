@@ -442,6 +442,9 @@ public abstract class Sprite
 	public void addItem(Item item)
 	{	itemManager.addItem(item);	
 	}
+	public void addInitialItem(Item item)
+	{	itemManager.addInitialItem(item);	
+	}
 	public Item dropRandomItem()
 	{	return itemManager.dropRandomItem();	
 	}
