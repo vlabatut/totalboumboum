@@ -81,6 +81,7 @@ public class ZoneLoader
         
     private static void loadMatrixElement(Element root, int globalHeight, int globalWidth, Zone result)
     {	// matrix
+    	HashMap<String,VariableTile> variableTiles = result.getVariableTiles();
     	List<Element> elements = root.getChildren(XmlTools.ELT_LINE);
     	Iterator<Element> i = elements.iterator();
     	while(i.hasNext())
@@ -98,6 +99,8 @@ public class ZoneLoader
         		if(elt!=null)
         		{	String name = elt.getAttribute(XmlTools.ATT_NAME).getValue();
         			zt.setVariable(name);
+        			VariableTile vt = variableTiles.get(name);
+        			vt.incrementOccurrencesCount();
         		}
         		// constant tile
         		else
