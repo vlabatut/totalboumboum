@@ -44,14 +44,20 @@ import fr.free.totalboumboum.game.limit.Limit;
 import fr.free.totalboumboum.game.limit.LimitConfrontation;
 import fr.free.totalboumboum.game.limit.LimitPoints;
 import fr.free.totalboumboum.game.limit.LimitScore;
+import fr.free.totalboumboum.game.limit.LimitTime;
 import fr.free.totalboumboum.game.limit.LimitTotal;
+import fr.free.totalboumboum.game.limit.Limits;
 import fr.free.totalboumboum.game.limit.MatchLimit;
+import fr.free.totalboumboum.game.limit.RoundLimit;
 import fr.free.totalboumboum.game.match.Match;
 import fr.free.totalboumboum.game.points.PlayerPoints;
 import fr.free.totalboumboum.game.points.PointsProcessor;
+import fr.free.totalboumboum.game.round.Round;
 import fr.free.totalboumboum.gui.data.configuration.GuiConfiguration;
+import fr.free.totalboumboum.gui.game.round.description.RoundDescription;
 import fr.free.totalboumboum.gui.generic.EntitledDataPanel;
 import fr.free.totalboumboum.gui.generic.EntitledSubPanel;
+import fr.free.totalboumboum.gui.generic.EntitledSubPanelTable;
 import fr.free.totalboumboum.gui.generic.InnerDataPanel;
 import fr.free.totalboumboum.gui.generic.MenuContainer;
 import fr.free.totalboumboum.gui.generic.MenuPanel;
@@ -64,6 +70,7 @@ import fr.free.totalboumboum.gui.tools.SpringUtilities;
 import fr.free.totalboumboum.gui.tools.GuiTools;
 import fr.free.totalboumboum.tools.FileTools;
 import fr.free.totalboumboum.tools.ImageTools;
+import fr.free.totalboumboum.tools.StringTools;
 
 public class MatchDescription extends EntitledDataPanel
 {	
@@ -80,13 +87,20 @@ public class MatchDescription extends EntitledDataPanel
 			{	BoxLayout layout = new BoxLayout(infoPanel,BoxLayout.LINE_AXIS); 
 				infoPanel.setLayout(layout);
 			}
-			Dimension dim = new Dimension(GuiTools.getSize(GuiTools.GAME_DATA_PANEL_WIDTH),GuiTools.getSize(GuiTools.GAME_DATA_PANEL_HEIGHT));
+			int width = GuiTools.getSize(GuiTools.GAME_DATA_PANEL_WIDTH);
+			int height = GuiTools.getSize(GuiTools.GAME_DATA_PANEL_HEIGHT);
+			int margin = GuiTools.getSize(GuiTools.GAME_DATA_MARGIN_SIZE);
+			int leftWidth = (int)(width*0.6); 
+			int rightWidth = width - leftWidth - margin; 
+
+
+			Dimension dim = new Dimension(width,height);
 			infoPanel.setPreferredSize(dim);
 			infoPanel.setMinimumSize(dim);
 			infoPanel.setMaximumSize(dim);
 			infoPanel.setOpaque(false);
 			// players panel
-			{	JPanel playersPanel = makePlayersPanel();
+			{	JPanel playersPanel = makePlayersPanel(leftWidth,height);
 				infoPanel.add(playersPanel);
 			}
 			infoPanel.add(Box.createHorizontalGlue());
@@ -96,24 +110,20 @@ public class MatchDescription extends EntitledDataPanel
 					rightPanel.setLayout(layout);
 				}
 				rightPanel.setOpaque(false);
-				dim = new Dimension(GuiTools.getSize(GuiTools.GAME_DESCRIPTION_PANEL_WIDTH),GuiTools.getSize(GuiTools.GAME_DATA_PANEL_HEIGHT));
+				dim = new Dimension(rightWidth,height);
 				rightPanel.setPreferredSize(dim);
 				rightPanel.setMinimumSize(dim);
 				rightPanel.setMaximumSize(dim);
-				// notes panel
-				{	JPanel notesPanel = makeNotesPanel();
-					rightPanel.add(notesPanel);
-				}
-				//
-				rightPanel.add(Box.createVerticalGlue());
-				// notes panel
-				{	JPanel pointsPanel = makePointsPanel();
+				int upHeight = (height - margin)/2;
+				int downHeight = height - upHeight - margin;
+				// points panel
+				{	JPanel pointsPanel = makePointsPanel(rightWidth,upHeight);
 					rightPanel.add(pointsPanel);
 				}
 				//
 				rightPanel.add(Box.createVerticalGlue());
 				// limit panel
-				{	JPanel limitsPanel = makeLimitsPanel();
+				{	JPanel limitsPanel = makeLimitsPanel(rightWidth,downHeight);
 					rightPanel.add(limitsPanel);
 				}
 				//
@@ -134,12 +144,10 @@ public class MatchDescription extends EntitledDataPanel
 	{	// nothing to do here
 	}
 	
-	private JPanel makePlayersPanel()
+	private JPanel makePlayersPanel(int width, int height)
 	{	Match match = getConfiguration().getCurrentMatch();
 		int lines = GuiTools.getSize(GuiTools.GAME_RESULTS_LABEL_LINE_NUMBER)+1;
 		int cols = 2+1;
-		int width = GuiTools.getSize(GuiTools.GAME_DESCRIPTION_PANEL_WIDTH);
-		int height = GuiTools.getSize(GuiTools.GAME_DATA_PANEL_HEIGHT); 
 		TablePanel playersPanel = new TablePanel(width,height,cols,lines,true,getConfiguration());
 		// headers
 		{	{	JLabel lbl = playersPanel.getLabel(0,0);
@@ -221,7 +229,7 @@ public class MatchDescription extends EntitledDataPanel
 		}
 		return playersPanel;		
 	}
-	
+/*	
 	private JPanel makeNotesPanel()
 	{	// init
 		int width = GuiTools.getSize(GuiTools.GAME_DESCRIPTION_PANEL_WIDTH);
@@ -246,27 +254,27 @@ public class MatchDescription extends EntitledDataPanel
 //			textPane.setSelectedTextColor(null);
 //			textPane.setEnabled(false);
 //			textPane.setDisabledTextColor(Color.BLACK);
-/*
-			textPane.setCaret(new Caret()
-	        {	public void install(JTextComponent c){}
-	            public void deinstall(JTextComponent c){}
-	            public void paint(Graphics g){}
-	            public void addChangeListener(ChangeListener l){}
-	            public void removeChangeListener(ChangeListener l){}
-	            public boolean isVisible(){return false;}
-	            public void setVisible(boolean v){}
-	            public boolean isSelectionVisible(){return false;}
-	            public void setSelectionVisible(boolean v){}
-	            public void setMagicCaretPosition(Point p){}
-	            public Point getMagicCaretPosition(){return new Point(0,0);}
-	            public void setBlinkRate(int rate){}
-	            public int getBlinkRate(){return 10000;}
-	            public int getDot(){return 0;}
-	            public int getMark(){return 0;}
-	            public void setDot(int dot){}
-	            public void moveDot(int dot){}
-	        });
-*/				        
+
+//			textPane.setCaret(new Caret()
+//	        {	public void install(JTextComponent c){}
+//	            public void deinstall(JTextComponent c){}
+//	            public void paint(Graphics g){}
+//	            public void addChangeListener(ChangeListener l){}
+//	            public void removeChangeListener(ChangeListener l){}
+//	            public boolean isVisible(){return false;}
+//	            public void setVisible(boolean v){}
+//	            public boolean isSelectionVisible(){return false;}
+//	            public void setSelectionVisible(boolean v){}
+//	            public void setMagicCaretPosition(Point p){}
+//	            public Point getMagicCaretPosition(){return new Point(0,0);}
+//	            public void setBlinkRate(int rate){}
+//	            public int getBlinkRate(){return 10000;}
+//	            public int getDot(){return 0;}
+//	            public int getMark(){return 0;}
+//	            public void setDot(int dot){}
+//	            public void moveDot(int dot){}
+//	        });
+				        
 			SimpleAttributeSet sa = new SimpleAttributeSet();
 			StyleConstants.setAlignment(sa,StyleConstants.ALIGN_JUSTIFIED);
 			Font font = getConfiguration().getFont().deriveFont((float)GuiTools.getSize(GuiTools.GAME_DESCRIPTION_LABEL_TEXT_FONT_SIZE));
@@ -300,172 +308,126 @@ public class MatchDescription extends EntitledDataPanel
 		}
 		return notesPanel;		
 	}
+*/	
 	
-	private JPanel makePointsPanel()
+	private JPanel makePointsPanel(int width, int height)
 	{	// init
-		int width = GuiTools.getSize(GuiTools.GAME_DESCRIPTION_PANEL_WIDTH);
-		int height = GuiTools.getSize(GuiTools.GAME_DESCRIPTION_PANEL_HEIGHT);
-		EntitledSubPanel pointsPanel = new EntitledSubPanel(width,height,getConfiguration());
-		// title
-		String text = getConfiguration().getLanguage().getText(GuiTools.GAME_MATCH_HEADER_POINTSPROCESS);
-		String tooltip = getConfiguration().getLanguage().getText(GuiTools.GAME_MATCH_HEADER_POINTSPROCESS+"Tooltip");
-Match match = getConfiguration().getCurrentMatch();
-tooltip = match.getPointProcessor().toString();
-		pointsPanel.setTitle(text,tooltip);
-		// text panel
-		{	JTextPane textPane = new JTextPane()
-			{	public void paintComponent(Graphics g)
-			    {	Graphics2D g2 = (Graphics2D) g;
-		        	g2.setRenderingHint(RenderingHints.KEY_TEXT_ANTIALIASING,RenderingHints.VALUE_TEXT_ANTIALIAS_ON);
-		        	g2.setRenderingHint(RenderingHints.KEY_RENDERING,RenderingHints.VALUE_RENDER_QUALITY);
-		        	super.paintComponent(g2);
-			    }			
-			};
-			textPane.setEditable(false);
-			textPane.setHighlighter(null);
-			SimpleAttributeSet sa = new SimpleAttributeSet();
-			StyleConstants.setAlignment(sa,StyleConstants.ALIGN_JUSTIFIED);
-			Font font = getConfiguration().getFont().deriveFont((float)GuiTools.getSize(GuiTools.GAME_DESCRIPTION_LABEL_TEXT_FONT_SIZE));
-			StyleConstants.setFontFamily(sa, font.getFamily());
-			StyleConstants.setFontSize(sa, font.getSize());
-			StyledDocument doc = textPane.getStyledDocument();
-			PointsProcessor pp = getConfiguration().getCurrentMatch().getPointProcessor();			
-			text = "";
-			ArrayList<String> list = pp.getNotes();
-			Iterator<String> i = list.iterator();
-			while (i.hasNext())
-			{	String temp = i.next();
-				text = text + temp + "\n";
-			}
-			try
-			{	doc.insertString(0,text,sa);
-			}
-			catch (BadLocationException e)
-			{	e.printStackTrace();
-			}
-			doc.setParagraphAttributes(0,doc.getLength()-1,sa,true);
-			//
-			JComponent dataComp = pointsPanel.getDataPanel();
-			textPane.setBackground(dataComp.getBackground());
-			Dimension dim = dataComp.getPreferredSize();
-			textPane.setPreferredSize(dim);
-			textPane.setMinimumSize(dim);
-			textPane.setMaximumSize(dim);
-			textPane.setAlignmentX(Component.CENTER_ALIGNMENT);
-			pointsPanel.setDataPanel(textPane);
-		}
-		return pointsPanel;		
+		String id = GuiTools.GAME_MATCH_HEADER_POINTSPROCESS;
+		ArrayList<ArrayList<Object>> data = new ArrayList<ArrayList<Object>>();
+		ArrayList<ArrayList<String>> tooltips = new ArrayList<ArrayList<String>>();
+		
+		// data
+		Match match = getConfiguration().getCurrentMatch();
+		PointsProcessor mainPP = match.getPointProcessor();
+		RoundDescription.makePointsPanelRec(mainPP,data,tooltips,getConfiguration());
+
+		int n = 6;
+		if(data.size()<6)
+			n = 6;
+		else if(data.size()<10)
+			n = data.size();
+		else
+			n = 10;
+		int colGrps[] = {1};
+		int lns[] = {n};
+
+		EntitledSubPanelTable pointsPanel = new EntitledSubPanelTable(width,height,id,colGrps,lns,data,tooltips,getConfiguration());
+		return pointsPanel;
 	}
 	
-	private JPanel makeLimitsPanel()
+	private JPanel makeLimitsPanel(int width, int height)
 	{	// init
-		int width = GuiTools.getSize(GuiTools.GAME_DESCRIPTION_PANEL_WIDTH);
-		int height = GuiTools.getSize(GuiTools.GAME_DESCRIPTION_PANEL_HEIGHT);
-		EntitledSubPanel limitsPanel = new EntitledSubPanel(width,height,getConfiguration());
-		// title
-		String text = getConfiguration().getLanguage().getText(GuiTools.GAME_MATCH_HEADER_LIMITS);
-		String tooltip = getConfiguration().getLanguage().getText(GuiTools.GAME_MATCH_HEADER_LIMITS+"Tooltip");
-		limitsPanel.setTitle(text,tooltip);
-		// table
-		{	// init
-			int margin = GuiTools.getSize(GuiTools.GAME_RESULTS_MARGIN_SIZE);
-			limitsPanel.remove(0);
-			limitsPanel.add(Box.createRigidArea(new Dimension(margin,margin)),0);
-			int titleHeight = limitsPanel.getComponent(1).getPreferredSize().height;
-			height = height-margin-titleHeight;
-			int columns = 4;
-			int lines = 4;
-			TablePanel tablePanel = new TablePanel(width,height,columns,lines,false,getConfiguration());
-			tablePanel.setOpaque(false);
-			int lineHeight = (height-margin*(lines+1))/lines;
-			// empty
-			for(int line=0;line<lines;line++)
-			{	for(int col=0;col<columns;col=col+2)
-				{	// icon
-					JLabel lbl = tablePanel.getLabel(line,col);
-					lbl.setText(null);
-					lbl.setPreferredSize(new Dimension(lineHeight,lineHeight));
-					lbl.setMaximumSize(new Dimension(lineHeight,lineHeight));
-					lbl.setMinimumSize(new Dimension(lineHeight,lineHeight));
-					// text
-					lbl = tablePanel.getLabel(line,col+1);
-					lbl.setText(null);
-					lbl.setMinimumSize(new Dimension(lineHeight,lineHeight));
-					lbl.setMaximumSize(new Dimension(Integer.MAX_VALUE,lineHeight));
-				}
-			}
-			// data
-			{	Match match = getConfiguration().getCurrentMatch();
-				Iterator<MatchLimit> i = match.getLimits().iterator();
-				int k = 0;
-				while(i.hasNext() && k<2*lines)
-				{	// init
-					Limit limit = i.next();
-					String iconName = null;
-					NumberFormat nf = NumberFormat.getInstance();
-					nf.setMinimumFractionDigits(0);
-					String value = null;
-					if(limit instanceof LimitConfrontation)
-					{	LimitConfrontation l = (LimitConfrontation)limit;
-						iconName = GuiTools.GAME_MATCH_LIMIT_CONFRONTATIONS;
-						value = nf.format(l.getLimit());
-					}
-					else if(limit instanceof LimitPoints)
-					{	LimitPoints l = (LimitPoints)limit;
-						iconName = GuiTools.GAME_MATCH_LIMIT_POINTS;
-						value = nf.format(l.getLimit());
-					}
-					else if(limit instanceof LimitTotal)
-					{	LimitTotal l = (LimitTotal)limit;
-						iconName = GuiTools.GAME_MATCH_LIMIT_TOTAL;
-						value = nf.format(l.getLimit());
-					}
-					else if(limit instanceof LimitScore)
-					{	LimitScore l = (LimitScore) limit;
-						switch(l.getScore())
-						{	case BOMBS:
-								iconName = GuiTools.GAME_MATCH_LIMIT_BOMBS;
-								value = nf.format(l.getLimit());
-								break;
-							case DEATHS:
-								iconName = GuiTools.GAME_MATCH_LIMIT_DEATHS;
-								value = nf.format(l.getLimit());
-								break;
-							case ITEMS:
-								iconName = GuiTools.GAME_MATCH_LIMIT_ITEMS;
-								value = nf.format(l.getLimit());
-								break;
-							case KILLS:
-								iconName = GuiTools.GAME_MATCH_LIMIT_KILLS;
-								value = nf.format(l.getLimit());
-								break;
-						}
-					}
-					tooltip = getConfiguration().getLanguage().getText(iconName+"Tooltip");
-					// icon
-					{	BufferedImage icon = GuiTools.getIcon(iconName);
-						JLabel lbl = tablePanel.getLabel(k%lines,(k/lines)*2+0);
-						lbl.setText(null);
-						lbl.setToolTipText(tooltip);
-						double zoom = lineHeight/(double)icon.getHeight();
-						icon = ImageTools.resize(icon,zoom,true);
-						ImageIcon ic = new ImageIcon(icon);
-						lbl.setIcon(ic);
-						Color bg = GuiTools.COLOR_TABLE_HEADER_BACKGROUND;
-						lbl.setBackground(bg);
-					}
-					// value
-					{	JLabel lbl = tablePanel.getLabel(k%lines,(k/lines)*2+1);
-						lbl.setText(value);
-						lbl.setToolTipText(tooltip);
-						Color bg = GuiTools.COLOR_TABLE_REGULAR_BACKGROUND;
-						lbl.setBackground(bg);
-					}	
-					k++;
-				}
-			}
-			limitsPanel.setDataPanel(tablePanel);
+		String id = GuiTools.GAME_MATCH_HEADER_LIMITS;
+		int colGrps[] = {1,2};
+		int lns[] = {8, 8};
+		ArrayList<ArrayList<Object>> data = new ArrayList<ArrayList<Object>>();
+		ArrayList<ArrayList<String>> tooltips = new ArrayList<ArrayList<String>>();
+		
+		// data
+		NumberFormat nf = NumberFormat.getInstance();
+		nf.setMinimumFractionDigits(0);
+		Match match = getConfiguration().getCurrentMatch();
+		Limits<MatchLimit> limitsList = match.getLimits();
+		Iterator<MatchLimit> i = limitsList.iterator();
+		if(!i.hasNext())
+		{	ArrayList<?> dt = new ArrayList<Object>();
+			ArrayList<String> tt = new ArrayList<String>();
+			// icon
+			dt.add(null);
+			tt.add(null);
+			// value
+			dt.add(null);
+			tt.add(null);
 		}
+		while(i.hasNext())
+		{	// init
+			Limit limit = i.next();
+			String iconName = null;
+			String value = null;
+			if(limit instanceof LimitConfrontation)
+			{	LimitConfrontation l = (LimitConfrontation)limit;
+				iconName = GuiTools.GAME_MATCH_LIMIT_CONFRONTATIONS;
+				value = nf.format(l.getLimit());
+			}
+			else if(limit instanceof LimitPoints)
+			{	LimitPoints l = (LimitPoints)limit;
+				iconName = GuiTools.GAME_MATCH_LIMIT_POINTS;
+				value = nf.format(l.getLimit());
+			}
+			else if(limit instanceof LimitTotal)
+			{	LimitTotal l = (LimitTotal)limit;
+				iconName = GuiTools.GAME_MATCH_LIMIT_TOTAL;
+				value = nf.format(l.getLimit());
+			}
+			else if(limit instanceof LimitScore)
+			{	LimitScore l = (LimitScore) limit;
+				switch(l.getScore())
+				{	case BOMBS:
+						iconName = GuiTools.GAME_MATCH_LIMIT_BOMBS;
+						value = nf.format(l.getLimit());
+						break;
+					case CROWNS:
+						iconName = GuiTools.GAME_MATCH_LIMIT_CROWNS;
+						value = nf.format(l.getLimit());
+						break;
+					case DEATHS:
+						iconName = GuiTools.GAME_MATCH_LIMIT_DEATHS;
+						value = nf.format(l.getLimit());
+						break;
+					case ITEMS:
+						iconName = GuiTools.GAME_MATCH_LIMIT_ITEMS;
+						value = nf.format(l.getLimit());
+						break;
+					case KILLS:
+						iconName = GuiTools.GAME_MATCH_LIMIT_KILLS;
+						value = nf.format(l.getLimit());
+						break;
+					case PAINTINGS:
+						iconName = GuiTools.GAME_MATCH_LIMIT_PAINTINGS;
+						value = nf.format(l.getLimit());
+						break;
+					case TIME:
+						iconName = GuiTools.GAME_MATCH_LIMIT_TIME;
+						value = nf.format(l.getLimit());
+						break;
+				}
+			}
+			// lists
+			String tooltip = getConfiguration().getLanguage().getText(iconName+"Tooltip");
+			ArrayList<Object> dt = new ArrayList<Object>();
+			data.add(dt);
+			ArrayList<String> tt = new ArrayList<String>();
+			tooltips.add(tt);
+			// data
+			BufferedImage icon = GuiTools.getIcon(iconName);
+			dt.add(icon);
+			tt.add(tooltip);
+			dt.add(value);
+			tt.add(value);			
+		}			
+			
+		// result
+		EntitledSubPanelTable limitsPanel = new EntitledSubPanelTable(width,height,id,colGrps,lns,data,tooltips,getConfiguration());
 		return limitsPanel;
 	}
 }

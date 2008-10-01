@@ -247,12 +247,14 @@ public class GuiTools
 	public static final String ICON_PRESSED = "pressed";
 	private static final HashMap<String,BufferedImage> icons = new HashMap<String,BufferedImage>();
 	
+	private static Graphics graphics;
 
 	public static void init(GuiConfiguration configuration, Graphics g)
 	{	// init
 		Dimension panelDimension = configuration.getPanelDimension();
 		int width = panelDimension.width;
 		int height = panelDimension.height;
+		graphics = g;
 		
 		// buttons
 		int verticalMenuButtonHeight = (int)(height*0.05);
@@ -262,7 +264,7 @@ public class GuiTools
 		int horizontalMenuButtonWidth = horizontalMenuButtonHeight;
 		sizes.put(MENU_HORIZONTAL_BUTTON_WIDTH,horizontalMenuButtonWidth);
 		sizes.put(MENU_HORIZONTAL_BUTTON_SPACE,(int)(width*0.025));
-		int gameProgressbarFontSize = getFontSize(horizontalMenuButtonHeight*0.6, configuration, g); 
+		int gameProgressbarFontSize = getFontSize(horizontalMenuButtonHeight*0.6, configuration); 
 		sizes.put(GAME_PROGRESSBAR_FONT_SIZE,gameProgressbarFontSize);
 		sizes.put(MENU_VERTICAL_PRIMARY_BUTTON_WIDTH,(int)(width*0.33));
 		int secondaryVerticalMenuButtonWIdth = (int)(width*0.25);
@@ -283,7 +285,7 @@ public class GuiTools
 		sizes.put(VERTICAL_SPLIT_DATA_PANEL_HEIGHT,height);
 		sizes.put(VERTICAL_SPLIT_DATA_PANEL_WIDTH,width-verticalSplitMenuPanelWidth);
 		// font
-		int menuButtonFontSize = getFontSize(verticalMenuButtonHeight*0.9,configuration,g);
+		int menuButtonFontSize = getFontSize(verticalMenuButtonHeight*0.9,configuration);
 		sizes.put(MENU_ALL_BUTTON_FONT_SIZE, menuButtonFontSize);
 		
 		// font
@@ -310,13 +312,13 @@ public class GuiTools
 		sizes.put(GAME_RESULTS_LABEL_LINE_NUMBER,gameResultsLabelLineNumber);
 		int gameResultsLabelLineHeight = (gameDataPanelHeight-gameResultsLabelLineNumber*gameResultsMarginSize)/17;
 		sizes.put(GAME_RESULTS_LABEL_LINE_HEIGHT,gameResultsLabelLineHeight);
-		int gameResultLineFontSize = getFontSize(gameResultsLabelLineHeight*0.9, configuration, g);
+		int gameResultLineFontSize = getFontSize(gameResultsLabelLineHeight*0.9, configuration);
 		sizes.put(GAME_RESULTS_LINE_FONT_SIZE,gameResultLineFontSize);
 		int gameResultLabelNameWidth = (int)(gameDataPanelWidth/3);
 		sizes.put(GAME_RESULTS_LABEL_NAME_WIDTH,gameResultLabelNameWidth);
 		int gameResultsLabelHeaderHeight = gameDataPanelHeight-16*gameResultsMarginSize-16*gameResultsLabelLineHeight;
 		sizes.put(GAME_RESULTS_LABEL_HEADER_HEIGHT,gameResultsLabelHeaderHeight);
-		int gameResultHeaderFontSize = getFontSize(gameResultsLabelHeaderHeight*0.9, configuration, g);
+		int gameResultHeaderFontSize = getFontSize(gameResultsLabelHeaderHeight*0.9, configuration);
 		sizes.put(GAME_RESULTS_HEADER_FONT_SIZE,gameResultHeaderFontSize);
 		int gameDescriptionPanelWidth = (gameDataPanelWidth-gameDataMarginSize)/2;
 		sizes.put(GAME_DESCRIPTION_PANEL_WIDTH,gameDescriptionPanelWidth);
@@ -555,14 +557,14 @@ public class GuiTools
 			result = temp;
 		return result;
 	}
-	public static int getFontSize(double limit, GuiConfiguration configuration, Graphics g)
+	public static int getFontSize(double limit, GuiConfiguration configuration)
 	{	int result = 0;
 		int fheight;
 		do
 		{	result++;
 			Font font = configuration.getFont().deriveFont((float)result);
-			g.setFont(font);
-			FontMetrics metrics = g.getFontMetrics(font);
+			graphics.setFont(font);
+			FontMetrics metrics = graphics.getFontMetrics(font);
 			fheight = metrics.getHeight();
 		}
 		while(fheight<limit);
