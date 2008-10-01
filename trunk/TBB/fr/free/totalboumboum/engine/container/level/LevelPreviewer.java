@@ -37,6 +37,17 @@ public class LevelPreviewer
 		Element element;
 		LevelPreview result = new LevelPreview();
 		
+		// misc
+		element = root.getChild(XmlTools.ELT_TITLE);
+		String title = element.getAttribute(XmlTools.ATT_VALUE).getValue().trim();
+		result.setTitle(title);
+		element = root.getChild(XmlTools.ELT_AUTHOR);
+		String author = element.getAttribute(XmlTools.ATT_VALUE).getValue().trim();
+		result.setAuthor(author);
+		element = root.getChild(XmlTools.ELT_SOURCE);
+		String source = element.getAttribute(XmlTools.ATT_VALUE).getValue().trim();
+		result.setSource(source);
+		
 		// visual preview
 		element = root.getChild(XmlTools.ELT_PREVIEW);
 		String filePath = folder+File.separator+element.getAttribute(XmlTools.ATT_FILE).getValue().trim();
@@ -50,7 +61,7 @@ public class LevelPreviewer
 
 		// players stuff preview
 		PlayersPreviewer.previewPlayers(folder,result);
-
+/*
 		// zone stuff preview
 		element = root.getChild(XmlTools.ELT_GLOBAL_DIMENSION);
 		String globalHeightStr = element.getAttribute(XmlTools.ATT_HEIGHT).getValue().trim();
@@ -58,7 +69,7 @@ public class LevelPreviewer
 		String globalWidthStr = element.getAttribute(XmlTools.ATT_WIDTH).getValue().trim();
 		int globalWidth = Integer.parseInt(globalWidthStr);
 		Zone zone = ZoneLoader.loadZone(folder,globalHeight,globalWidth);
-
+*/
 		// itemset
 		String itemFolder = instanceFolder + File.separator+FileTools.FOLDER_ITEMS;
 		HashMap<String,BufferedImage> itemsetPreview = ItemsetPreviewer.previewItemset(itemFolder);

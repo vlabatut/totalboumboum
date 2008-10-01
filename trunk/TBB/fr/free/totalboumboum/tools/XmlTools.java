@@ -35,6 +35,7 @@ public class XmlTools
 	public static final String ELT_ABILITY = "ability";
 	public static final String ELT_ABILITIES = "abilities";
 	public static final String ELT_ALL_LEVELS = "all-levels";
+	public static final String ELT_AUTHOR = "author";
 	public static final String ELT_BIGWALL = "bigwall";
 	public static final String ELT_BIGWALLS = "bigwalls";
 	public static final String ELT_BLOCK = "block";
@@ -132,6 +133,7 @@ public class XmlTools
 	public static final String ELT_SMOOTH_GRAPHICS = "smoothGraphics";
 	public static final String ELT_SOFTWALL = "softwall";
 	public static final String ELT_SOFTWALLS = "softwalls";
+	public static final String ELT_SOURCE = "source";
 	public static final String ELT_SPEED = "speed";
 	public static final String ELT_SPRITE = "sprite";
 	public static final String ELT_START = "start";
@@ -150,6 +152,7 @@ public class XmlTools
 	public static final String ELT_THRESHOLDS = "thresholds";
 	public static final String ELT_TILE = "tile";
 	public static final String ELT_TIME = "time";
+	public static final String ELT_TITLE = "title";
 	public static final String ELT_TOTAL = "total";
 	public static final String ELT_TOURNAMENT = "tournament";
 	public static final String ELT_TRAJECTORIES = "trajectories";

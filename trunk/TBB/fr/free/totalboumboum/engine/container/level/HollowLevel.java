@@ -42,13 +42,18 @@ public class HollowLevel
 	private String itemPath;
 	private String bombsetPath;
 	private Players players;
-	
+
+	private String instanceName;
+	private String themeName;
+	private String packName;
+
 	private HollowLevel()
 	{		
 	}
 
 	public HollowLevel(String folder) throws ParserConfigurationException, SAXException, IOException, ClassNotFoundException
 	{	// init
+		packName = folder.substring(0,folder.indexOf(File.separator));
 		levelFolder = folder;
 		String schemaFolder = FileTools.getSchemasPath();
 		String individualFolder = FileTools.getLevelsPath()+File.separator+folder;
@@ -94,7 +99,7 @@ public class HollowLevel
 		
 		// instance
 		element = root.getChild(XmlTools.ELT_INSTANCE);
-		String instanceName = element.getAttribute(XmlTools.ATT_NAME).getValue().trim();
+		instanceName = element.getAttribute(XmlTools.ATT_NAME).getValue().trim();
 		instancePath = FileTools.getInstancesPath()+File.separator+instanceName;
 
 		// players locations
@@ -108,7 +113,7 @@ public class HollowLevel
 
 		// theme
 		element = root.getChild(XmlTools.ELT_THEME);
-		String themeName = element.getAttribute(XmlTools.ATT_NAME).getValue().trim();
+		themeName = element.getAttribute(XmlTools.ATT_NAME).getValue().trim();
 		String themeFolder = instancePath + File.separator + FileTools.FOLDER_THEMES;
 		themePath = themeFolder + File.separator+themeName;
 
@@ -133,6 +138,10 @@ public class HollowLevel
     	result.bombsetPath = bombsetPath;
     	result.players = players;
     	result.levelFolder = levelFolder;
+    	result.levelFolder = levelFolder;
+    	result.instanceName = instanceName;
+    	result.themeName = themeName;
+    	result.packName = packName;
     	//
     	return result;
     }
@@ -152,6 +161,22 @@ public class HollowLevel
     {	return zone;
     }
 
+    public String getInstanceName()
+    {	return instanceName;
+    }
+    public String getThemeName()
+    {	return themeName;
+    }
+    public String getPackName()
+    {	return packName;
+    }
+    public int getVisibleHeight()
+    {	return visibleHeight;
+    }
+    public int getVisibleWidth()
+    {	return visibleWidth;
+    }
+   
     public void initLevel(Loop loop)
 	{	// init
     	level = new Level(loop);

@@ -2,6 +2,9 @@
 <level 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
 		xsi:noNamespaceSchemaLocation="..\..\..\schemas\level.xsd" >
 
+	<title value="Basic test #B" />
+	<author value="Vincent Labatut" />
+	<source value="Original" />
 	<preview file="preview.jpg" />
 
 	<instance name="superbomberman1" />

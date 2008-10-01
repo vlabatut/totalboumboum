@@ -160,7 +160,14 @@ public class GuiTools
 	public static final String GAME_ROUND_HEADER_INITIAL_ITEMS = "GameRoundHeaderInitialItems";	
 	public static final String GAME_ROUND_HEADER_MISC = "GameRoundHeaderMisc";	
 	public static final String GAME_ROUND_HEADER_POINTSPROCESS = "GameRoundHeaderPointprocess";	
-	public static final String GAME_ROUND_HEADER_ITEMSET = "GameRoundHeaderItemset";	
+	public static final String GAME_ROUND_HEADER_ITEMSET = "GameRoundHeaderItemset";
+	public static final String GAME_ROUND_HEADER_TITLE = "GameRoundHeaderTitle";
+	public static final String GAME_ROUND_HEADER_AUTHOR = "GameRoundHeaderAuthor";
+	public static final String GAME_ROUND_HEADER_PACK = "GameRoundHeaderPack";
+	public static final String GAME_ROUND_HEADER_INSTANCE = "GameRoundHeaderInstance";
+	public static final String GAME_ROUND_HEADER_THEME = "GameRoundHeaderTheme";
+	public static final String GAME_ROUND_HEADER_DIMENSION = "GameRoundHeaderDimension";
+	public static final String GAME_ROUND_HEADER_SOURCE = "GameRoundHeaderSource";
 	public static final String GAME_ROUND_LIMIT_POINTS = "GameRoundLimitPoints";
 	public static final String GAME_ROUND_LIMIT_BOMBS = "GameRoundLimitBombs";
 	public static final String GAME_ROUND_LIMIT_DEATHS = "GameRoundLimitDeaths";
@@ -401,6 +408,9 @@ public class GuiTools
 		
 		// tables
 		{	String folder = GuiFileTools.getIconsPath()+File.separator+GuiFileTools.FOLDER_HEADERS+File.separator;
+			// author
+			image = loadIcon(folder+GuiFileTools.FILE_AUTHOR,absent);
+			icons.put(GAME_ROUND_HEADER_AUTHOR,image);
 			// bombs
 			image = loadIcon(folder+GuiFileTools.FILE_BOMBS,absent);
 			icons.put(GAME_TOURNAMENT_HEADER_BOMBS,image);
@@ -427,12 +437,18 @@ public class GuiTools
 			icons.put(GAME_TOURNAMENT_LIMIT_DEATHS,image);
 			icons.put(GAME_MATCH_LIMIT_DEATHS,image);
 			icons.put(GAME_ROUND_LIMIT_DEATHS,image);
+			// dimension
+			image = loadIcon(folder+GuiFileTools.FILE_DIMENSION,absent);
+			icons.put(GAME_ROUND_HEADER_DIMENSION,image);
 			// frags
 			image = loadIcon(folder+GuiFileTools.FILE_FRAGS,absent);
 			icons.put(GAME_ROUND_HEADER_FRAGS,image);
 			// initial
 			image = loadIcon(folder+GuiFileTools.FILE_INITIAL,absent);
 			icons.put(GAME_ROUND_HEADER_INITIAL_ITEMS,image);
+			// instance
+			image = loadIcon(folder+GuiFileTools.FILE_INSTANCE,absent);
+			icons.put(GAME_ROUND_HEADER_INSTANCE,image);
 			// items
 			image = loadIcon(folder+GuiFileTools.FILE_ITEMS,absent);
 			icons.put(GAME_TOURNAMENT_HEADER_ITEMS,image);
@@ -465,6 +481,9 @@ public class GuiTools
 			icons.put(GAME_TOURNAMENT_HEADER_NAME,image);
 			icons.put(GAME_MATCH_HEADER_NAME,image);
 			icons.put(GAME_ROUND_HEADER_NAME,image);
+			// pack
+			image = loadIcon(folder+GuiFileTools.FILE_PACK,absent);
+			icons.put(GAME_ROUND_HEADER_PACK,image);
 			// paintings
 			image = loadIcon(folder+GuiFileTools.FILE_PAINTINGS,absent);
 			icons.put(GAME_ROUND_HEADER_PAINTINGS,image);
@@ -487,12 +506,21 @@ public class GuiTools
 			icons.put(GAME_TOURNAMENT_HEADER_RANK,image);
 			icons.put(GAME_MATCH_HEADER_RANK,image);
 			icons.put(GAME_ROUND_HEADER_RANK,image);
+			// source
+			image = loadIcon(folder+GuiFileTools.FILE_SOURCE,absent);
+			icons.put(GAME_ROUND_HEADER_SOURCE,image);
+			// theme
+			image = loadIcon(folder+GuiFileTools.FILE_THEME,absent);
+			icons.put(GAME_ROUND_HEADER_THEME,image);
 			// time
 			image = loadIcon(folder+GuiFileTools.FILE_TIME,absent);
 			icons.put(GAME_ROUND_HEADER_TIME,image);
 			icons.put(GAME_TOURNAMENT_LIMIT_TIME,image);
 			icons.put(GAME_MATCH_LIMIT_TIME,image);
 			icons.put(GAME_ROUND_LIMIT_TIME,image);
+			// title
+			image = loadIcon(folder+GuiFileTools.FILE_TITLE,absent);
+			icons.put(GAME_ROUND_HEADER_TITLE,image);
 			// total
 			image = loadIcon(folder+GuiFileTools.FILE_TOTAL,absent);
 			icons.put(GAME_TOURNAMENT_HEADER_TOTAL,image);
