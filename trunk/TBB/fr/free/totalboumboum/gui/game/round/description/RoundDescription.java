@@ -29,6 +29,7 @@ import org.xml.sax.SAXException;
 
 import java.util.Map.Entry;
 
+import fr.free.totalboumboum.data.statistics.Score;
 import fr.free.totalboumboum.engine.container.level.HollowLevel;
 import fr.free.totalboumboum.engine.container.level.LevelPreview;
 import fr.free.totalboumboum.engine.container.level.LevelPreviewer;
@@ -43,10 +44,13 @@ import fr.free.totalboumboum.game.limit.Limits;
 import fr.free.totalboumboum.game.limit.MatchLimit;
 import fr.free.totalboumboum.game.limit.RoundLimit;
 import fr.free.totalboumboum.game.match.Match;
+import fr.free.totalboumboum.game.points.PointsConstant;
 import fr.free.totalboumboum.game.points.PointsDiscretize;
 import fr.free.totalboumboum.game.points.PointsProcessor;
 import fr.free.totalboumboum.game.points.PointsRankings;
 import fr.free.totalboumboum.game.points.PointsRankpoints;
+import fr.free.totalboumboum.game.points.PointsScores;
+import fr.free.totalboumboum.game.points.PointsTotal;
 import fr.free.totalboumboum.game.round.Round;
 import fr.free.totalboumboum.gui.generic.EntitledDataPanel;
 import fr.free.totalboumboum.gui.generic.EntitledSubPanel;
@@ -386,8 +390,6 @@ public class RoundDescription extends EntitledDataPanel
 	private JPanel makePointsPanel(int width, int height)
 	{	// init
 		String id = GuiTools.GAME_ROUND_HEADER_POINTSPROCESS;
-		int colGrps[] = {1, 1};
-		int lns[] = {8, 12};
 		ArrayList<ArrayList<Object>> data = new ArrayList<ArrayList<Object>>();
 		ArrayList<ArrayList<String>> tooltips = new ArrayList<ArrayList<String>>();
 		
@@ -395,6 +397,16 @@ public class RoundDescription extends EntitledDataPanel
 		Round round = getConfiguration().getCurrentRound();
 		PointsProcessor mainPP = round.getPointProcessor();
 		makePointsPanelRec(mainPP,data,tooltips);
+
+		int n = 6;
+		if(data.size()<6)
+			n = 6;
+		else if(data.size()<10)
+			n = data.size();
+		else
+			n = 10;
+		int colGrps[] = {1};
+		int lns[] = {n};
 
 		EntitledSubPanel pointsPanel = makeSubTable(width,height,id,colGrps,lns,data,tooltips);
 		return pointsPanel;
@@ -529,6 +541,74 @@ public class RoundDescription extends EntitledDataPanel
 					makePointsPanelRec(source,data,tooltips);
 				}
 			}
+		}
+		// constant
+		else if(pp instanceof PointsConstant)
+		{	PointsConstant pc = (PointsConstant) pp;
+			float value = pc.getValue();
+			ArrayList<Object> dt = new ArrayList<Object>();
+			ArrayList<String> tt = new ArrayList<String>();
+			data.add(dt);
+			tooltips.add(tt);
+			dt.add("Cst");
+			tt.add("Constant: a constant real value");
+			String text = nf.format(value);
+			dt.add(text);
+			tt.add(text);
+		}
+		// total
+		else if(pp instanceof PointsTotal)
+		{	PointsTotal pt = (PointsTotal) pp;
+			ArrayList<Object> dt = new ArrayList<Object>();
+			ArrayList<String> tt = new ArrayList<String>();
+			data.add(dt);
+			tooltips.add(tt);
+			String text = "T";
+			dt.add(text);
+			String tooltip = "Total: total number of points scored in each confrontation"; 
+			tt.add(tooltip);
+			text = "";
+			dt.add(text);
+			tt.add(tooltip);
+		}
+		// scores
+		else if(pp instanceof PointsScores)
+		{	PointsScores ps = (PointsScores) pp;
+			Score score = ps.getScore();
+			ArrayList<Object> dt = new ArrayList<Object>();
+			ArrayList<String> tt = new ArrayList<String>();
+			data.add(dt);
+			tooltips.add(tt);
+			dt.add("Sc");
+			tt.add("Score: scores from all the players");
+			String name = null;
+			switch(score)
+			{	case BOMBS:
+					name = GuiTools.GAME_ROUND_HEADER_BOMBS;
+					break;
+				case CROWNS:
+					name = GuiTools.GAME_ROUND_HEADER_CROWNS;
+					break;					
+				case DEATHS:
+					name = GuiTools.GAME_ROUND_HEADER_DEATHS;
+					break;					
+				case ITEMS:
+					name = GuiTools.GAME_ROUND_HEADER_ITEMS;
+					break;					
+				case KILLS:
+					name = GuiTools.GAME_ROUND_HEADER_KILLS;
+					break;					
+				case PAINTINGS:
+					name = GuiTools.GAME_ROUND_HEADER_PAINTINGS;
+					break;					
+				case TIME:
+					name = GuiTools.GAME_ROUND_HEADER_TIME;
+					break;					
+			}
+			BufferedImage icon = GuiTools.getIcon(name);
+			String tooltip = getConfiguration().getLanguage().getText(name+"Tooltip");
+			dt.add(icon);
+			tt.add(tooltip);
 		}
 		// others
 		else

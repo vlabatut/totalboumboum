@@ -13,6 +13,10 @@ public class PointsConstant extends PointsProcessor implements PPConstant
 	{	this.value = value;	
 	}
 	
+	public float getValue()
+	{	return value;	
+	}
+	
 	@Override
 	public float[] process(StatisticBase stats)
 	{	int nbr = stats.getPlayers().size();
