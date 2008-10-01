@@ -22,6 +22,16 @@ public class PointsDiscretize extends PointsProcessor implements PPFunction
 		this.values = values;
 	}
 	
+	public PointsProcessor getSource()
+	{	return source;	
+	}
+	public float[] getValues()
+	{	return values;	
+	}
+	public float[] getThresholds()
+	{	return thresholds;	
+	}
+	
 	@Override
 	public float[] process(StatisticBase stats)
 	{	// init
