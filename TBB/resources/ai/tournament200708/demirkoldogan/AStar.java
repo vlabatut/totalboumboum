@@ -4,7 +4,7 @@ import java.util.Iterator;
 import java.util.PriorityQueue;
 import java.util.Vector;
 
-import tournament200708.ArtificialIntelligence;
+import tournament200708.InterfaceArtificialIntelligence;
 
 
 
@@ -161,14 +161,14 @@ public class AStar {
 	{	int[][] matrix = this.matrix;
 		boolean result = false;
 		// bombes
-		result = result || matrix[x][y]==ArtificialIntelligence.AI_BLOCK_BOMB;
+		result = result || matrix[x][y]==InterfaceArtificialIntelligence.AI_BLOCK_BOMB;
 		// feu
-		result = result || matrix[x][y]==ArtificialIntelligence.AI_BLOCK_FIRE;
+		result = result || matrix[x][y]==InterfaceArtificialIntelligence.AI_BLOCK_FIRE;
 		// murs
-		result = result || matrix[x][y]==ArtificialIntelligence.AI_BLOCK_WALL_HARD;
-		result = result || matrix[x][y]==ArtificialIntelligence.AI_BLOCK_WALL_SOFT;
+		result = result || matrix[x][y]==InterfaceArtificialIntelligence.AI_BLOCK_WALL_HARD;
+		result = result || matrix[x][y]==InterfaceArtificialIntelligence.AI_BLOCK_WALL_SOFT;
 		// on ne sait pas quoi
-		result = result || matrix[x][y]==ArtificialIntelligence.AI_BLOCK_UNKNOWN;
+		result = result || matrix[x][y]==InterfaceArtificialIntelligence.AI_BLOCK_UNKNOWN;
 		return result;
 	}
 	

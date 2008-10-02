@@ -4,7 +4,7 @@ package tournament200708.ciritmutlu;
 import java.util.LinkedList;
 import java.util.Vector;
 
-import tournament200708.ArtificialIntelligence;
+import tournament200708.InterfaceArtificialIntelligence;
 import tournament200708.ciritmutlu.exceptions.AbsentNodeException;
 import tournament200708.ciritmutlu.exceptions.ImpossibleActionException;
 import tournament200708.ciritmutlu.problem.Problem;
@@ -15,7 +15,7 @@ import tournament200708.ciritmutlu.tree.SearchTree;
 
 //import src.ai.old200708.ciritmutlu.tree.SearchLink;
 
-public class CiritMutlu extends ArtificialIntelligence {
+public class CiritMutlu extends InterfaceArtificialIntelligence {
 	private SearchTree tree;	// arbre de recherche a construire
 	private State tempState;	// etat temporaire qui va etre utilise pour l'action suvante
 	private Problem problem;	// le probleme a traiter lors de la construction de l'arbre
@@ -75,7 +75,7 @@ public class CiritMutlu extends ArtificialIntelligence {
 		SearchNode sn = tree.getRoot();
 		frange.offer(sn);
 		State currentState=sn.getState();
-		for(int action=ArtificialIntelligence.AI_ACTION_GO_UP;action<=ArtificialIntelligence.AI_ACTION_PUT_BOMB;action++){
+		for(int action=InterfaceArtificialIntelligence.AI_ACTION_GO_UP;action<=InterfaceArtificialIntelligence.AI_ACTION_PUT_BOMB;action++){
 			if(isPossibleAction(x, y, action)){
 				State targetState=apply(currentState, x, y, action);
 //				sl=tree.developNode(targetState, sn);
@@ -114,19 +114,19 @@ public class CiritMutlu extends ArtificialIntelligence {
 	*/
 	public boolean lastPositionComparator(int x, int y,int targetAction){
 		switch(targetAction)
-			{	case ArtificialIntelligence.AI_ACTION_GO_UP:	
+			{	case InterfaceArtificialIntelligence.AI_ACTION_GO_UP:	
 					// la prochaine action est d'aller vers le haut
 					y=y-1;
 					break;
-				case ArtificialIntelligence.AI_ACTION_GO_DOWN:
+				case InterfaceArtificialIntelligence.AI_ACTION_GO_DOWN:
 					// la prochaine action est d'aller vers le bas
 					y=y+1;
 					break;
-				case ArtificialIntelligence.AI_ACTION_GO_LEFT:
+				case InterfaceArtificialIntelligence.AI_ACTION_GO_LEFT:
 					// la prochaine action est d'aller vers gauche
 					x=x-1;
 					break;
-				case ArtificialIntelligence.AI_ACTION_GO_RIGHT:
+				case InterfaceArtificialIntelligence.AI_ACTION_GO_RIGHT:
 					// la prochaine action est d'aller vers droit
 					x=x+1;
 					break;
@@ -145,20 +145,20 @@ public class CiritMutlu extends ArtificialIntelligence {
 	 */
 	public boolean isPossibleAction(int x, int y,int action){
 		boolean done=false;
-	    if(ArtificialIntelligence.AI_ACTION_GO_DOWN==action && isMovePossible(x,y,action)){
+	    if(InterfaceArtificialIntelligence.AI_ACTION_GO_DOWN==action && isMovePossible(x,y,action)){
 			done=true;
 	    }
-	    if(ArtificialIntelligence.AI_ACTION_GO_LEFT==action && isMovePossible(x,y,action)){
+	    if(InterfaceArtificialIntelligence.AI_ACTION_GO_LEFT==action && isMovePossible(x,y,action)){
 			done=true;
 	    }
-	    if(ArtificialIntelligence.AI_ACTION_GO_RIGHT==action  && isMovePossible(x,y,action)){
+	    if(InterfaceArtificialIntelligence.AI_ACTION_GO_RIGHT==action  && isMovePossible(x,y,action)){
 	    	done=true;
 	    }
-	    if(ArtificialIntelligence.AI_ACTION_GO_UP==action && isMovePossible(x,y,action)){
+	    if(InterfaceArtificialIntelligence.AI_ACTION_GO_UP==action && isMovePossible(x,y,action)){
 			done=true;
 	    }
 		
-	    if(ArtificialIntelligence.AI_ACTION_PUT_BOMB==action && isThereWallSoft(x, y))
+	    if(InterfaceArtificialIntelligence.AI_ACTION_PUT_BOMB==action && isThereWallSoft(x, y))
 			done=true;
 	    return done;
 	}
@@ -177,26 +177,26 @@ public class CiritMutlu extends ArtificialIntelligence {
 		// Cout de l'action
 		int cost=0;
 		
-		if(action==ArtificialIntelligence.AI_ACTION_DO_NOTHING)
+		if(action==InterfaceArtificialIntelligence.AI_ACTION_DO_NOTHING)
 			cost+=1000;
-		else if(action==ArtificialIntelligence.AI_ACTION_PUT_BOMB)
+		else if(action==InterfaceArtificialIntelligence.AI_ACTION_PUT_BOMB)
 			cost+=3000;
 		else if(distance(x, y, 0,0 )<8){ 
-			if(action==ArtificialIntelligence.AI_ACTION_GO_RIGHT || action==ArtificialIntelligence.AI_ACTION_GO_DOWN)
+			if(action==InterfaceArtificialIntelligence.AI_ACTION_GO_RIGHT || action==InterfaceArtificialIntelligence.AI_ACTION_GO_DOWN)
 				cost+=1000;
 		}else if(distance(x,y,16,0)<8){
-			if(action==ArtificialIntelligence.AI_ACTION_GO_LEFT || action==ArtificialIntelligence.AI_ACTION_GO_DOWN)
+			if(action==InterfaceArtificialIntelligence.AI_ACTION_GO_LEFT || action==InterfaceArtificialIntelligence.AI_ACTION_GO_DOWN)
 				cost+=1000;
 		}else if(distance(x,y,0,14)<8){
-			if(action==ArtificialIntelligence.AI_ACTION_GO_RIGHT || action==ArtificialIntelligence.AI_ACTION_GO_UP)
+			if(action==InterfaceArtificialIntelligence.AI_ACTION_GO_RIGHT || action==InterfaceArtificialIntelligence.AI_ACTION_GO_UP)
 				cost+=1000;
 		}else if(distance(x,y,16,14)<8){
-			if(action==ArtificialIntelligence.AI_ACTION_GO_LEFT || action==ArtificialIntelligence.AI_ACTION_GO_UP)
+			if(action==InterfaceArtificialIntelligence.AI_ACTION_GO_LEFT || action==InterfaceArtificialIntelligence.AI_ACTION_GO_UP)
 				cost+=1000;
 		}
-		if(lastAction.size()>=2 && lastAction.lastElement()==ArtificialIntelligence.AI_ACTION_PUT_BOMB ){
+		if(lastAction.size()>=2 && lastAction.lastElement()==InterfaceArtificialIntelligence.AI_ACTION_PUT_BOMB ){
 			for(int i=1; i<=4;i++){
-				if(lastAction.get(lastAction.size()-1)==ArtificialIntelligence.AI_ACTION_GO_UP){
+				if(lastAction.get(lastAction.size()-1)==InterfaceArtificialIntelligence.AI_ACTION_GO_UP){
 					boolean move;
 					if( i!=1){
 						move=isMovePossible(x, y, i) && !isMovePossible(x, y, 1);
@@ -209,7 +209,7 @@ public class CiritMutlu extends ArtificialIntelligence {
 						}
 					}
 				}
-				if(lastAction.get(lastAction.size()-1)==ArtificialIntelligence.AI_ACTION_GO_DOWN){
+				if(lastAction.get(lastAction.size()-1)==InterfaceArtificialIntelligence.AI_ACTION_GO_DOWN){
 					boolean move;
 					if( i!=2){
 						move=isMovePossible(x, y, i) && !isMovePossible(x, y, 2);
@@ -222,7 +222,7 @@ public class CiritMutlu extends ArtificialIntelligence {
 						}
 					}
 				}
-				if(lastAction.get(lastAction.size()-1)==ArtificialIntelligence.AI_ACTION_GO_LEFT){
+				if(lastAction.get(lastAction.size()-1)==InterfaceArtificialIntelligence.AI_ACTION_GO_LEFT){
 					boolean move;
 					if( i!=3){
 						move=isMovePossible(x, y, i) && !isMovePossible(x, y, 3);
@@ -235,7 +235,7 @@ public class CiritMutlu extends ArtificialIntelligence {
 						}
 					}
 				}
-				if(lastAction.get(lastAction.size()-1)==ArtificialIntelligence.AI_ACTION_GO_RIGHT){
+				if(lastAction.get(lastAction.size()-1)==InterfaceArtificialIntelligence.AI_ACTION_GO_RIGHT){
 					boolean move;
 					if( i!=4){
 						move=isMovePossible(x, y, i) && !isMovePossible(x, y, 4);
@@ -264,16 +264,16 @@ public class CiritMutlu extends ArtificialIntelligence {
 		boolean result;
 		int matrix[][]=getZoneMatrix();
 		switch(action)
-		{	case ArtificialIntelligence.AI_ACTION_GO_UP:
-				result = y>0 && (!isObstacleWall(x,y-1) && !(matrix[x][y-1]==ArtificialIntelligence.AI_BLOCK_BOMB) && !(matrix[x][y-1]==ArtificialIntelligence.AI_BLOCK_FIRE) && (isObstacleEmpty(x, y-1) || isObstacleBonus(x, y-1))); //!isObstacleBombFire(x, y-1, move) && (isObstacleEmpty(x, y-1) || isObstacleBonus(x, y-1)));
+		{	case InterfaceArtificialIntelligence.AI_ACTION_GO_UP:
+				result = y>0 && (!isObstacleWall(x,y-1) && !(matrix[x][y-1]==InterfaceArtificialIntelligence.AI_BLOCK_BOMB) && !(matrix[x][y-1]==InterfaceArtificialIntelligence.AI_BLOCK_FIRE) && (isObstacleEmpty(x, y-1) || isObstacleBonus(x, y-1))); //!isObstacleBombFire(x, y-1, move) && (isObstacleEmpty(x, y-1) || isObstacleBonus(x, y-1)));
 				break;
-			case ArtificialIntelligence.AI_ACTION_GO_DOWN:
+			case InterfaceArtificialIntelligence.AI_ACTION_GO_DOWN:
 				result = y<(getZoneMatrixDimY()-1) && (!isObstacleWall(x,y+1) && !(isObstacleBombFire(x, y+1, action)) && (isObstacleEmpty(x, y+1) || isObstacleBonus(x,y+1)));
 				break;
-			case ArtificialIntelligence.AI_ACTION_GO_LEFT:
+			case InterfaceArtificialIntelligence.AI_ACTION_GO_LEFT:
 				result = x>0 && (!isObstacleWall(x-1,y) && (!isObstacleBombFire(x-1, y, action)) && (isObstacleEmpty(x-1, y)||isObstacleBonus(x-1,y)));
 				break;
-			case ArtificialIntelligence.AI_ACTION_GO_RIGHT:
+			case InterfaceArtificialIntelligence.AI_ACTION_GO_RIGHT:
 				result = x<(getZoneMatrixDimX()-1) && (!isObstacleWall(x+1,y) && (!isObstacleBombFire(x+1, y, action)) && (isObstacleEmpty(x+1, y)||isObstacleBonus(x+1,y)));
 				break;
 			default:
@@ -295,17 +295,17 @@ public class CiritMutlu extends ArtificialIntelligence {
 		boolean result = false;
 		if(bombPower!=-1){
 			for(int i=1;i<=bombPower;i++){
-				result = result || matrix[x][y]==ArtificialIntelligence.AI_BLOCK_BOMB;
-				if(action==ArtificialIntelligence.AI_ACTION_GO_UP){
+				result = result || matrix[x][y]==InterfaceArtificialIntelligence.AI_BLOCK_BOMB;
+				if(action==InterfaceArtificialIntelligence.AI_ACTION_GO_UP){
 					result = result || matrix[x][y-i]==7;//ArtificialIntelligence.AI_BLOCK_FIRE;
 				}
-				if(action==ArtificialIntelligence.AI_ACTION_GO_LEFT){
+				if(action==InterfaceArtificialIntelligence.AI_ACTION_GO_LEFT){
 					result = result || matrix[x-i][y]==7;//ArtificialIntelligence.AI_BLOCK_FIRE;
 				}
-				if(action==ArtificialIntelligence.AI_ACTION_GO_DOWN){
+				if(action==InterfaceArtificialIntelligence.AI_ACTION_GO_DOWN){
 					result = result || matrix[x][y+i]==7;//ArtificialIntelligence.AI_BLOCK_FIRE;
 				}
-				if(action==ArtificialIntelligence.AI_ACTION_GO_RIGHT){
+				if(action==InterfaceArtificialIntelligence.AI_ACTION_GO_RIGHT){
 					result = result || matrix[x+i][y]==7;//ArtificialIntelligence.AI_BLOCK_FIRE;
 				}
 			}
@@ -326,10 +326,10 @@ public class CiritMutlu extends ArtificialIntelligence {
 		int[][] matrix = getZoneMatrix();
 		boolean result = false;
 		// murs
-		result = result || matrix[x][y]==ArtificialIntelligence.AI_BLOCK_WALL_HARD;
-		result = result || matrix[x][y]==ArtificialIntelligence.AI_BLOCK_WALL_SOFT;
+		result = result || matrix[x][y]==InterfaceArtificialIntelligence.AI_BLOCK_WALL_HARD;
+		result = result || matrix[x][y]==InterfaceArtificialIntelligence.AI_BLOCK_WALL_SOFT;
 		// on ne sait pas quoi
-		result = result || matrix[x][y]==ArtificialIntelligence.AI_BLOCK_UNKNOWN;
+		result = result || matrix[x][y]==InterfaceArtificialIntelligence.AI_BLOCK_UNKNOWN;
 		// shrink
 		if(getTimeBeforeShrink()<=11){
 			result = result || (x==getNextShrinkPosition()[0] && y==getNextShrinkPosition()[1]);
@@ -348,7 +348,7 @@ public class CiritMutlu extends ArtificialIntelligence {
 		int[][] matrix = getZoneMatrix();
 		boolean result = false;
 		// libre
-		result = result || matrix[x][y]==ArtificialIntelligence.AI_BLOCK_EMPTY;
+		result = result || matrix[x][y]==InterfaceArtificialIntelligence.AI_BLOCK_EMPTY;
 		return result;
 	}
 	/**
@@ -362,8 +362,8 @@ public class CiritMutlu extends ArtificialIntelligence {
 		int[][] matrix = getZoneMatrix();
 		boolean result = false;
 		// libre
-		result = result || matrix[x][y]==ArtificialIntelligence.AI_BLOCK_ITEM_BOMB;
-		result = result || matrix[x][y]==ArtificialIntelligence.AI_BLOCK_ITEM_FIRE;
+		result = result || matrix[x][y]==InterfaceArtificialIntelligence.AI_BLOCK_ITEM_BOMB;
+		result = result || matrix[x][y]==InterfaceArtificialIntelligence.AI_BLOCK_ITEM_FIRE;
 		return result;
 	}
 	
@@ -380,7 +380,7 @@ public class CiritMutlu extends ArtificialIntelligence {
 		int[][] matrix = getZoneMatrix();
 		boolean result = false;
 		// murs
-		result = result || matrix[x][y-1]==ArtificialIntelligence.AI_BLOCK_WALL_SOFT;
+		result = result || matrix[x][y-1]==InterfaceArtificialIntelligence.AI_BLOCK_WALL_SOFT;
 		if(result){
 			for(int i=1; i<=4;i++){
 				if( i!=1){
@@ -392,7 +392,7 @@ public class CiritMutlu extends ArtificialIntelligence {
 				}
 			}
 		}
-		result = result || matrix[x][y+1]==ArtificialIntelligence.AI_BLOCK_WALL_SOFT;
+		result = result || matrix[x][y+1]==InterfaceArtificialIntelligence.AI_BLOCK_WALL_SOFT;
 		if(result){
 			for(int i=1; i<=4;i++){
 				if(i!=2){
@@ -404,7 +404,7 @@ public class CiritMutlu extends ArtificialIntelligence {
 				}
 			}
 		}
-		result = result || matrix[x-1][y]==ArtificialIntelligence.AI_BLOCK_WALL_SOFT;
+		result = result || matrix[x-1][y]==InterfaceArtificialIntelligence.AI_BLOCK_WALL_SOFT;
 		if(result){
 			for(int i=1; i<=4;i++){
 				if(i!=3){
@@ -416,7 +416,7 @@ public class CiritMutlu extends ArtificialIntelligence {
 				}
 			}
 		}
-		result = result || matrix[x+1][y]==ArtificialIntelligence.AI_BLOCK_WALL_SOFT;
+		result = result || matrix[x+1][y]==InterfaceArtificialIntelligence.AI_BLOCK_WALL_SOFT;
 		if(result){
 			for(int i=1; i<=4;i++){
 				if(i!=4){
@@ -613,11 +613,11 @@ public class CiritMutlu extends ArtificialIntelligence {
 	public boolean isPlayerCloseBomb(int action,State state,int x,int y) {
 		int matrix[][]=getZoneMatrix();
 		boolean result=false;
-		int dangerPos[] = getPlayerMatrix(x,y,ArtificialIntelligence.AI_BLOCK_BOMB);
+		int dangerPos[] = getPlayerMatrix(x,y,InterfaceArtificialIntelligence.AI_BLOCK_BOMB);
 		if(dangerPos[0]!=-1){
 			int bombPower=getBombPowerAt(dangerPos[0],dangerPos[1]);
 			for(int i=1;i<=bombPower;i++){
-				result = result || matrix[x][y]==ArtificialIntelligence.AI_BLOCK_BOMB;
+				result = result || matrix[x][y]==InterfaceArtificialIntelligence.AI_BLOCK_BOMB;
 				int x1=x-i;
 				int x2=x+i;
 				int y1=y-i;
@@ -632,17 +632,17 @@ public class CiritMutlu extends ArtificialIntelligence {
 				if(y2>=getZoneMatrixDimY())
 					y2=getZoneMatrixDimY()-1;
 				
-				if(action==ArtificialIntelligence.AI_ACTION_GO_UP){
-					result = result || matrix[x][y1]==ArtificialIntelligence.AI_BLOCK_FIRE;
+				if(action==InterfaceArtificialIntelligence.AI_ACTION_GO_UP){
+					result = result || matrix[x][y1]==InterfaceArtificialIntelligence.AI_BLOCK_FIRE;
 				}
-				if(action==ArtificialIntelligence.AI_ACTION_GO_LEFT){
-					result = result || matrix[x1][y]==ArtificialIntelligence.AI_BLOCK_FIRE;
+				if(action==InterfaceArtificialIntelligence.AI_ACTION_GO_LEFT){
+					result = result || matrix[x1][y]==InterfaceArtificialIntelligence.AI_BLOCK_FIRE;
 				}
-				if(action==ArtificialIntelligence.AI_ACTION_GO_DOWN){
-					result = result || matrix[x][y2]==ArtificialIntelligence.AI_BLOCK_FIRE;
+				if(action==InterfaceArtificialIntelligence.AI_ACTION_GO_DOWN){
+					result = result || matrix[x][y2]==InterfaceArtificialIntelligence.AI_BLOCK_FIRE;
 				}
-				if(action==ArtificialIntelligence.AI_ACTION_GO_RIGHT){
-					result = result || matrix[x2][y]==ArtificialIntelligence.AI_BLOCK_FIRE;
+				if(action==InterfaceArtificialIntelligence.AI_ACTION_GO_RIGHT){
+					result = result || matrix[x2][y]==InterfaceArtificialIntelligence.AI_BLOCK_FIRE;
 				}
 			}
 			state.setPlayerCloseBomb(result);
@@ -682,7 +682,7 @@ public class CiritMutlu extends ArtificialIntelligence {
 	 */
 	public boolean isBlockEmpty(State state,int x,int y) {
 		boolean result=false;
-		int dangerPos[] = getClosestBlockPosition(x,y,ArtificialIntelligence.AI_BLOCK_EMPTY);
+		int dangerPos[] = getClosestBlockPosition(x,y,InterfaceArtificialIntelligence.AI_BLOCK_EMPTY);
 		// si case vide
 		if(dangerPos[0]!=-1)
 			result=true;
@@ -699,7 +699,7 @@ public class CiritMutlu extends ArtificialIntelligence {
 	 */
 	public boolean isBlockSoft(State state,int x,int y) {
 		boolean result=false;
-		int dangerPos[] = getClosestBlockPosition(x,y,ArtificialIntelligence.AI_BLOCK_WALL_SOFT);
+		int dangerPos[] = getClosestBlockPosition(x,y,InterfaceArtificialIntelligence.AI_BLOCK_WALL_SOFT);
 		// si mur destructible
 		if(dangerPos[0]!=-1)
 			result=true;
@@ -716,7 +716,7 @@ public class CiritMutlu extends ArtificialIntelligence {
 	 */
 	public boolean isBlockHard(State state,int x,int y) {
 		boolean result=false;
-		int dangerPos[] = getClosestBlockPosition(x,y,ArtificialIntelligence.AI_BLOCK_WALL_HARD);
+		int dangerPos[] = getClosestBlockPosition(x,y,InterfaceArtificialIntelligence.AI_BLOCK_WALL_HARD);
 		// si mur indestructible
 		if(dangerPos[0]!=-1)
 			result=true;
@@ -778,10 +778,10 @@ public class CiritMutlu extends ArtificialIntelligence {
 	{
 		boolean playerFarDanger;
 //		 on determine ou est le feu le plus proche
-		int dangerPos[] = getPlayerMatrix(x,y,ArtificialIntelligence.AI_BLOCK_FIRE);
+		int dangerPos[] = getPlayerMatrix(x,y,InterfaceArtificialIntelligence.AI_BLOCK_FIRE);
 		// si aucun feu, on determine ou est la bombe la plus proche
 		if(dangerPos[0]==-1)
-			dangerPos = getPlayerMatrix(x,y,ArtificialIntelligence.AI_BLOCK_BOMB);
+			dangerPos = getPlayerMatrix(x,y,InterfaceArtificialIntelligence.AI_BLOCK_BOMB);
 		if(dangerPos[0]==-1){
 			playerFarDanger=true;
 			state.setPlayerFarBomb(playerFarDanger);
@@ -822,10 +822,10 @@ public class CiritMutlu extends ArtificialIntelligence {
 	public boolean isBonusClose(State state,int x,int y) {
 		boolean bonusClose;
 		//on determine ou est la bombe bonus le plus proche
-		int bonusPos[] = getClosestBlockPosition(x,y,ArtificialIntelligence.AI_BLOCK_ITEM_BOMB);
+		int bonusPos[] = getClosestBlockPosition(x,y,InterfaceArtificialIntelligence.AI_BLOCK_ITEM_BOMB);
 		// si aucun feu, on determine bonus fire plus proche
 		if(bonusPos[0]==-1)
-			bonusPos = getClosestBlockPosition(x,y,ArtificialIntelligence.AI_BLOCK_ITEM_FIRE);
+			bonusPos = getClosestBlockPosition(x,y,InterfaceArtificialIntelligence.AI_BLOCK_ITEM_FIRE);
 		// si aucune bombe, on determine oe est le joueur le plus proche
 		if(bonusPos[0]!=-1){
 			bonusClose=true;
@@ -925,22 +925,22 @@ public class CiritMutlu extends ArtificialIntelligence {
 		State stateResult;
 //		int result = -1;
 //		int move = -1;
-	    if(ArtificialIntelligence.AI_ACTION_GO_DOWN==action){
+	    if(InterfaceArtificialIntelligence.AI_ACTION_GO_DOWN==action){
 //			move=ArtificialIntelligence.AI_DIR_DOWN;
 //			result=move;
 			y=y+1;
 	    }
-	    if(ArtificialIntelligence.AI_ACTION_GO_LEFT==action){
+	    if(InterfaceArtificialIntelligence.AI_ACTION_GO_LEFT==action){
 //			move=ArtificialIntelligence.AI_DIR_LEFT;
 //			result=move;
 			x=x-1;
 	    }
-	    if(ArtificialIntelligence.AI_ACTION_GO_RIGHT==action){
+	    if(InterfaceArtificialIntelligence.AI_ACTION_GO_RIGHT==action){
 //			move=ArtificialIntelligence.AI_DIR_RIGHT;
 //			result=move;
 			x=x+1;
 	    }
-	    if(ArtificialIntelligence.AI_ACTION_GO_UP==action){
+	    if(InterfaceArtificialIntelligence.AI_ACTION_GO_UP==action){
 //			move=ArtificialIntelligence.AI_DIR_UP;
 //			result=move;
 			y=y-1;

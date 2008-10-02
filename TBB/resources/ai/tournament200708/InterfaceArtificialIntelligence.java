@@ -5,7 +5,7 @@ import java.util.Iterator;
 import java.util.Vector;
 import java.util.concurrent.Callable;
 
-public abstract class ArtificialIntelligence implements Callable<Integer>, Serializable
+public abstract class InterfaceArtificialIntelligence implements Callable<Integer>, Serializable
 {	// constantes de sens de déplacement
 	/** constante représentant la direction : sur-place (pas de déplacement)*/ 
 	public final static int AI_DIR_NONE = 0;
@@ -84,7 +84,7 @@ public abstract class ArtificialIntelligence implements Callable<Integer>, Seria
 	 * Constructeur. 
 	 * @param name	nom de la classe
 	 */
-	public ArtificialIntelligence(String name)
+	public InterfaceArtificialIntelligence(String name)
 	{	if(name.length()>10)
 			this.name = name.substring(0, 10);
 		else

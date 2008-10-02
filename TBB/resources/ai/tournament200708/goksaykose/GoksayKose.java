@@ -1,12 +1,12 @@
 package tournament200708.goksaykose;
 import java.util.Vector;
 
-import tournament200708.ArtificialIntelligence;
+import tournament200708.InterfaceArtificialIntelligence;
 
 
 
 
-public class GoksayKose extends ArtificialIntelligence{
+public class GoksayKose extends InterfaceArtificialIntelligence{
 	private static final long serialVersionUID = 1L;
 	/**true si la case est occupé par un bombe**/ 
 	private boolean Flag;
@@ -19,7 +19,7 @@ public class GoksayKose extends ArtificialIntelligence{
 			}
 	public Integer call() throws Exception {
 		
-		Integer result = ArtificialIntelligence.AI_ACTION_DO_NOTHING;
+		Integer result = InterfaceArtificialIntelligence.AI_ACTION_DO_NOTHING;
 		// position du personnage
 		int x = getOwnPosition()[0];
 		int y = getOwnPosition()[1];
@@ -77,20 +77,20 @@ public class GoksayKose extends ArtificialIntelligence{
 	public int mouvementCoinDessusGauche(int x, int y)
 	{
 		
-			int result = ArtificialIntelligence.AI_ACTION_DO_NOTHING;
+			int result = InterfaceArtificialIntelligence.AI_ACTION_DO_NOTHING;
 			Vector<Integer> vektor =getPossibleMoves(x, y);
 			if(x==7){
 				
-				if(vektor.contains(ArtificialIntelligence.AI_ACTION_GO_DOWN))
-						result = ArtificialIntelligence.AI_ACTION_GO_DOWN;
+				if(vektor.contains(InterfaceArtificialIntelligence.AI_ACTION_GO_DOWN))
+						result = InterfaceArtificialIntelligence.AI_ACTION_GO_DOWN;
 					else
 						result=metBombeFuir(x,y);
 				}
 
 			else
 			{
-				if(vektor.contains(ArtificialIntelligence.AI_ACTION_GO_RIGHT))
-					result = ArtificialIntelligence.AI_ACTION_GO_RIGHT;
+				if(vektor.contains(InterfaceArtificialIntelligence.AI_ACTION_GO_RIGHT))
+					result = InterfaceArtificialIntelligence.AI_ACTION_GO_RIGHT;
 				else
 					result=metBombeFuir(x,y);
 		
@@ -121,19 +121,19 @@ public class GoksayKose extends ArtificialIntelligence{
 	
 	public int mouvementCoinDessusDroit(int x, int y)
 	{
-		int result = ArtificialIntelligence.AI_ACTION_DO_NOTHING;
+		int result = InterfaceArtificialIntelligence.AI_ACTION_DO_NOTHING;
 		Vector<Integer> vektor =getPossibleMoves(x, y);
 		if(x==7){
 			
-			if(vektor.contains(ArtificialIntelligence.AI_ACTION_GO_DOWN))
-					result = ArtificialIntelligence.AI_ACTION_GO_DOWN;
+			if(vektor.contains(InterfaceArtificialIntelligence.AI_ACTION_GO_DOWN))
+					result = InterfaceArtificialIntelligence.AI_ACTION_GO_DOWN;
 				else
 					result=metBombeFuir(x,y);
 			}
 		else
 		{
-			if(vektor.contains(ArtificialIntelligence.AI_ACTION_GO_LEFT))
-		    result = ArtificialIntelligence.AI_ACTION_GO_LEFT;
+			if(vektor.contains(InterfaceArtificialIntelligence.AI_ACTION_GO_LEFT))
+		    result = InterfaceArtificialIntelligence.AI_ACTION_GO_LEFT;
 			else 
 		    result=metBombeFuir(x,y);
 		
@@ -161,19 +161,19 @@ public class GoksayKose extends ArtificialIntelligence{
 	
 	public int mouvementCoinDessousGauche(int x, int y)
 	{
-		int result = ArtificialIntelligence.AI_ACTION_DO_NOTHING;
+		int result = InterfaceArtificialIntelligence.AI_ACTION_DO_NOTHING;
 		Vector<Integer> vektor =getPossibleMoves(x, y);
 		if(x==7){
 			
-			if(vektor.contains(ArtificialIntelligence.AI_ACTION_GO_UP))
-					result = ArtificialIntelligence.AI_ACTION_GO_UP;
+			if(vektor.contains(InterfaceArtificialIntelligence.AI_ACTION_GO_UP))
+					result = InterfaceArtificialIntelligence.AI_ACTION_GO_UP;
 				else
 					result=metBombeFuir(x,y);
 			}
 		else
 		{
-			if(vektor.contains(ArtificialIntelligence.AI_ACTION_GO_RIGHT))
-		    result = ArtificialIntelligence.AI_ACTION_GO_RIGHT;
+			if(vektor.contains(InterfaceArtificialIntelligence.AI_ACTION_GO_RIGHT))
+		    result = InterfaceArtificialIntelligence.AI_ACTION_GO_RIGHT;
 			else 
 		    result=metBombeFuir(x,y);
 		
@@ -202,19 +202,19 @@ public class GoksayKose extends ArtificialIntelligence{
 	
 	public int mouvementCoinDessousDroit(int x, int y)
 	{
-		int result = ArtificialIntelligence.AI_ACTION_DO_NOTHING;
+		int result = InterfaceArtificialIntelligence.AI_ACTION_DO_NOTHING;
 		Vector<Integer> vektor =getPossibleMoves(x, y);
 		if(x==7){
 			
-			if(vektor.contains(ArtificialIntelligence.AI_ACTION_GO_UP))
-					result = ArtificialIntelligence.AI_ACTION_GO_UP;
+			if(vektor.contains(InterfaceArtificialIntelligence.AI_ACTION_GO_UP))
+					result = InterfaceArtificialIntelligence.AI_ACTION_GO_UP;
 				else
 					result=metBombeFuir(x,y);
 			}
 		else
 		{
-			if(vektor.contains(ArtificialIntelligence.AI_ACTION_GO_LEFT))
-		    result = ArtificialIntelligence.AI_ACTION_GO_LEFT;
+			if(vektor.contains(InterfaceArtificialIntelligence.AI_ACTION_GO_LEFT))
+		    result = InterfaceArtificialIntelligence.AI_ACTION_GO_LEFT;
 			else 
 		    result=metBombeFuir(x,y);
 		
@@ -229,7 +229,7 @@ public class GoksayKose extends ArtificialIntelligence{
 	 */
 	private int metBombeFuir(int x,int y) {
     	
-    	int action=ArtificialIntelligence.AI_ACTION_PUT_BOMB;
+    	int action=InterfaceArtificialIntelligence.AI_ACTION_PUT_BOMB;
     	Flag=true;
     	if(Flag) {
 			action = fuir(x, y);
@@ -246,8 +246,8 @@ public class GoksayKose extends ArtificialIntelligence{
 	 * @return l'action qui sera effectué 
 	 */
 			private int fuir(int x,int y) {
-				int result=ArtificialIntelligence.AI_ACTION_DO_NOTHING;
-				int bomb[] = getClosestBlockPosition(x, y, ArtificialIntelligence.AI_BLOCK_BOMB);
+				int result=InterfaceArtificialIntelligence.AI_ACTION_DO_NOTHING;
+				int bomb[] = getClosestBlockPosition(x, y, InterfaceArtificialIntelligence.AI_BLOCK_BOMB);
 				int portee=0;
 			    //prend en parametre l'abscisse et l'ordonné du bombe et retourne la portée du bombe
 				portee = getBombPowerAt(bomb[0], bomb[1]);
@@ -255,7 +255,7 @@ public class GoksayKose extends ArtificialIntelligence{
 				if(x<bomb[0]+portee||x>bomb[0]-portee&&y<bomb[1]+portee&&y>bomb[1]-portee) {
 					int directions[] = getDirectionPreferences(x, y, bomb[0], bomb[1]);
 					int i=0;
-					while(i<directions.length && result==ArtificialIntelligence.AI_ACTION_DO_NOTHING)
+					while(i<directions.length && result==InterfaceArtificialIntelligence.AI_ACTION_DO_NOTHING)
 					{	if(isMovePossible(x, y, directions[i]))
 							result = directions[i];
 						else
@@ -316,10 +316,10 @@ public class GoksayKose extends ArtificialIntelligence{
 				indexDn = 1;
 			}
 		}
-		result[indexUp] = new Integer(ArtificialIntelligence.AI_ACTION_GO_UP);
-		result[indexDn] = new Integer(ArtificialIntelligence.AI_ACTION_GO_DOWN);
-		result[indexLt] = new Integer(ArtificialIntelligence.AI_ACTION_GO_LEFT);
-		result[indexRt] = new Integer(ArtificialIntelligence.AI_ACTION_GO_RIGHT);
+		result[indexUp] = new Integer(InterfaceArtificialIntelligence.AI_ACTION_GO_UP);
+		result[indexDn] = new Integer(InterfaceArtificialIntelligence.AI_ACTION_GO_DOWN);
+		result[indexLt] = new Integer(InterfaceArtificialIntelligence.AI_ACTION_GO_LEFT);
+		result[indexRt] = new Integer(InterfaceArtificialIntelligence.AI_ACTION_GO_RIGHT);
 		return result;
 	}
 	/**
@@ -333,14 +333,14 @@ public class GoksayKose extends ArtificialIntelligence{
 	{	int[][] matrix = getZoneMatrix();
 		boolean result = false;
 		// bombes
-		result = result || matrix[x][y]==ArtificialIntelligence.AI_BLOCK_BOMB;
+		result = result || matrix[x][y]==InterfaceArtificialIntelligence.AI_BLOCK_BOMB;
 		// feu
-		result = result || matrix[x][y]==ArtificialIntelligence.AI_BLOCK_FIRE;
+		result = result || matrix[x][y]==InterfaceArtificialIntelligence.AI_BLOCK_FIRE;
 		// murs
-		result = result || matrix[x][y]==ArtificialIntelligence.AI_BLOCK_WALL_HARD;
-		result = result || matrix[x][y]==ArtificialIntelligence.AI_BLOCK_WALL_SOFT;
+		result = result || matrix[x][y]==InterfaceArtificialIntelligence.AI_BLOCK_WALL_HARD;
+		result = result || matrix[x][y]==InterfaceArtificialIntelligence.AI_BLOCK_WALL_SOFT;
 		// on ne sait pas quoi
-		result = result || matrix[x][y]==ArtificialIntelligence.AI_BLOCK_UNKNOWN;
+		result = result || matrix[x][y]==InterfaceArtificialIntelligence.AI_BLOCK_UNKNOWN;
 		// shrink
 		result = result || (x==getNextShrinkPosition()[0] && y==getNextShrinkPosition()[1]);
 		return result;
@@ -374,16 +374,16 @@ public class GoksayKose extends ArtificialIntelligence{
 	{	boolean result;
 		// calcum
 		switch(move)
-		{	case ArtificialIntelligence.AI_ACTION_GO_UP:
+		{	case InterfaceArtificialIntelligence.AI_ACTION_GO_UP:
 				result = y>0 && !isObstacle(x,y-1);
 				break;
-			case ArtificialIntelligence.AI_ACTION_GO_DOWN:
+			case InterfaceArtificialIntelligence.AI_ACTION_GO_DOWN:
 				result = y<(getZoneMatrixDimY()-1) && !isObstacle(x,y+1);
 				break;
-			case ArtificialIntelligence.AI_ACTION_GO_LEFT:
+			case InterfaceArtificialIntelligence.AI_ACTION_GO_LEFT:
 				result = x>0 && !isObstacle(x-1,y);
 				break;
-			case ArtificialIntelligence.AI_ACTION_GO_RIGHT:
+			case InterfaceArtificialIntelligence.AI_ACTION_GO_RIGHT:
 				result = x<(getZoneMatrixDimX()-1) && !isObstacle(x+1,y);
 				break;
 			default:
