@@ -3,7 +3,8 @@
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
 	xsi:noNamespaceSchemaLocation="..\..\xml\schemas\profiles.xsd">
 	
- 	<general name="Goksel+Menges" ai="gokselmenges.GokselMenges" /> 
+ 	<general name="Goksel+Menges" /> 
+ 	<ai name="gokselmenges" pack="tournament200708" />
  	<character name="shirobon" packname="superbomberman1" color="green" />     
 <!-- 	<character name="prognathe" packname="totalboumboum" color="green" />   -->
 	

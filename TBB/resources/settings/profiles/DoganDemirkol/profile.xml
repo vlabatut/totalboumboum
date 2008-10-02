@@ -3,7 +3,8 @@
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
 	xsi:noNamespaceSchemaLocation="..\..\xml\schemas\profiles.xsd">
 	
- 	<general name="Dogan+Demirkol" ai="dogandemirkol.DoganDemirkol" /> 
+ 	<general name="Dogan+Demirkol" /> 
+ 	<ai name="dogandemirkol" pack="tournament200708" />
  	<character name="shirobon" packname="superbomberman1" color="white" />     
 <!-- 	<character name="prognathe" packname="totalboumboum" color="white" />   -->
 	
