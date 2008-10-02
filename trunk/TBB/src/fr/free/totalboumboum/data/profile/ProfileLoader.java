@@ -59,7 +59,7 @@ public class ProfileLoader
     	String name = root.getAttribute(XmlTools.ATT_NAME).getValue();
     	result.setAiName(name.trim());
     	// pack
-    	String packname = root.getAttribute(XmlTools.ATT_NAME).getValue();
+    	String packname = root.getAttribute(XmlTools.ATT_PACK).getValue();
     	result.setAiPackname(packname.trim());
     }
     

@@ -13,7 +13,7 @@ public class FileTools
 	public static final String EXTENSION_CLASS = ".class";
 	//
 	public static final String FILE_ABILITIES = "abilities";
-	public static final String FILE_AI = "ArtificialIntelligence";
+	public static final String FILE_AI = "AiMain";
 	public static final String FILE_ANIMES = "animes";
 	public static final String FILE_BLOCK = "block";
 	public static final String FILE_BOMB = "bomb";
@@ -105,7 +105,7 @@ public class FileTools
 	}
 	
 	public static String getAiPath()
-	{	return FOLDER_AI;		
+	{	return getResourcesPath()+File.separator+FOLDER_AI;		
 	}
 	
 	public static String getHeroesPath()

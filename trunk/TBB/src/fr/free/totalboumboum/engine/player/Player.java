@@ -9,30 +9,22 @@ import javax.xml.parsers.ParserConfigurationException;
 
 import org.xml.sax.SAXException;
 
-import tournament200708.Adapter;
-
 import fr.free.totalboumboum.ai.AiLoader;
 import fr.free.totalboumboum.ai.InterfaceAi;
 import fr.free.totalboumboum.data.configuration.Configuration;
 import fr.free.totalboumboum.data.profile.ControlSettings;
 import fr.free.totalboumboum.data.profile.PredefinedColor;
 import fr.free.totalboumboum.data.profile.Profile;
-import fr.free.totalboumboum.data.profile.ProfileLoader;
-import fr.free.totalboumboum.data.statistics.StatisticMatch;
-import fr.free.totalboumboum.engine.container.bombset.Bombset;
 import fr.free.totalboumboum.engine.container.level.Level;
 import fr.free.totalboumboum.engine.content.feature.ability.AbstractAbility;
 import fr.free.totalboumboum.engine.content.feature.permission.PermissionPack;
 import fr.free.totalboumboum.engine.content.feature.trajectory.TrajectoryPack;
 import fr.free.totalboumboum.engine.content.sprite.Sprite;
-import fr.free.totalboumboum.engine.content.sprite.hero.Hero;
 import fr.free.totalboumboum.engine.content.sprite.hero.HeroFactory;
 import fr.free.totalboumboum.engine.content.sprite.hero.HeroFactoryLoader;
 import fr.free.totalboumboum.engine.control.PlayerControl;
 import fr.free.totalboumboum.engine.loop.Loop;
-import fr.free.totalboumboum.game.round.Round;
 import fr.free.totalboumboum.tools.FileTools;
-import fr.free.totalboumboum.tools.XmlTools;
 
 
 public class Player
