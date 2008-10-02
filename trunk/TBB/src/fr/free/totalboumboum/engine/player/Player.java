@@ -8,8 +8,9 @@ import javax.xml.parsers.ParserConfigurationException;
 
 import org.xml.sax.SAXException;
 
+import tournament200708.Adapter;
+
 import fr.free.totalboumboum.ai.InterfaceAI;
-import fr.free.totalboumboum.ai.old200708.Adapter;
 import fr.free.totalboumboum.data.configuration.Configuration;
 import fr.free.totalboumboum.data.profile.ControlSettings;
 import fr.free.totalboumboum.data.profile.PredefinedColor;

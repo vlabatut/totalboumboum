@@ -2,7 +2,8 @@ package tournament200708.hancitoprak;
 
 import java.util.Vector;
 
-import fr.free.totalboumboum.ai.old200708.ArtificialIntelligence;
+import tournament200708.ArtificialIntelligence;
+
 
 
 public class HanciToprak extends ArtificialIntelligence {

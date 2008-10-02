@@ -2,7 +2,8 @@ package tournament200708.kurtulusozsoy;
 import java.util.Random;
 import java.util.Vector;
 
-import fr.free.totalboumboum.ai.old200708.ArtificialIntelligence;
+import tournament200708.ArtificialIntelligence;
+
 
 
 public class KurtulusOzsoy extends ArtificialIntelligence{

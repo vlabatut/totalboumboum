@@ -3,7 +3,8 @@ package tournament200708.demirkoldogan;
 import java.util.Iterator;
 import java.util.Vector;
 
-import fr.free.totalboumboum.ai.old200708.ArtificialIntelligence;
+import tournament200708.ArtificialIntelligence;
+
 
 
 public class DoganDemirkol extends ArtificialIntelligence{

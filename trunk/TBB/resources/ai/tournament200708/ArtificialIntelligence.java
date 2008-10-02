@@ -1,4 +1,4 @@
-package fr.free.totalboumboum.ai.old200708;
+package tournament200708;
 
 import java.io.Serializable;
 import java.util.Iterator;

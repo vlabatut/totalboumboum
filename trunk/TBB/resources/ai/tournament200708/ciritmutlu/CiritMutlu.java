@@ -4,6 +4,7 @@ package tournament200708.ciritmutlu;
 import java.util.LinkedList;
 import java.util.Vector;
 
+import tournament200708.ArtificialIntelligence;
 import tournament200708.ciritmutlu.exceptions.AbsentNodeException;
 import tournament200708.ciritmutlu.exceptions.ImpossibleActionException;
 import tournament200708.ciritmutlu.problem.Problem;
@@ -11,7 +12,6 @@ import tournament200708.ciritmutlu.problem.State;
 import tournament200708.ciritmutlu.tree.SearchNode;
 import tournament200708.ciritmutlu.tree.SearchTree;
 
-import fr.free.totalboumboum.ai.old200708.ArtificialIntelligence;
 
 //import src.ai.old200708.ciritmutlu.tree.SearchLink;
 
