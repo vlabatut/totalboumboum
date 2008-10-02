@@ -415,10 +415,17 @@ if(fires.size()>0)
 		hero.setTile(this);
 		level.addSprite(hero);
 	}
+	public ArrayList<Hero> getHeroes()
+	{	return heroes;
+	}
+
 	private void addBomb(Bomb bomb)
 	{	bombs.add(bomb);		
 		bomb.setTile(this);
 		level.addSprite(bomb);
+	}
+	public ArrayList<Bomb> getBombs()
+	{	return bombs;
 	}
 	
 	private void addFire(Fire fire)
@@ -470,9 +477,6 @@ if(fires.size()>0)
 //		level.addSprite(floor);
 	}
 	
-	public ArrayList<Bomb> getBombs()
-	{	return bombs;
-	}
 
 	public ArrayList<Sprite> getSprites()
 	{	ArrayList<Sprite> result = new ArrayList<Sprite>();

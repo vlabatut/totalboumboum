@@ -1,16 +1,8 @@
 package fr.free.totalboumboum.data.profile;
 
-import java.awt.BasicStroke;
-import java.awt.Color;
-import java.awt.Font;
-import java.awt.FontMetrics;
-import java.awt.Graphics;
-import java.awt.Graphics2D;
-import java.awt.geom.Rectangle2D;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
@@ -19,8 +11,6 @@ import javax.xml.parsers.ParserConfigurationException;
 import org.jdom.Attribute;
 import org.jdom.Element;
 import org.xml.sax.SAXException;
-
-import com.sun.xml.internal.ws.wsdl.writer.document.Port;
 
 import fr.free.totalboumboum.engine.content.feature.anime.Colormap;
 import fr.free.totalboumboum.tools.FileTools;

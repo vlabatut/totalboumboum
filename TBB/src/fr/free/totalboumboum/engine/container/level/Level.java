@@ -99,10 +99,10 @@ public class Level
 	public double getGlobalUpY()
 	{	return globalUpY;
 	}
-	public double getGlobalWidth()
+	public int getGlobalWidth()
 	{	return globalWidth;
 	}
-	public double getGlobalHeight()
+	public int getGlobalHeight()
 	{	return globalHeight;
 	}
 
@@ -452,7 +452,8 @@ if(startTime<0) startTime = System.currentTimeMillis();
 			int y = (int)Math.round(30+box.getHeight()/2);
 			g.drawString(text, x, y);
 		}
-		// level time
+/*		
+		// engine time
 		{	g.setColor(Color.GREEN);
 			Font font = new Font("Dialog", Font.PLAIN, 18);
 			g.setFont(font);
@@ -475,6 +476,7 @@ if(startTime<0) startTime = System.currentTimeMillis();
 			int y = (int)Math.round(70+box.getHeight()/2);
 			g.drawString(text, x, y);
 		}
+*/		
 	}
 
 	private void drawFPS(Graphics g)

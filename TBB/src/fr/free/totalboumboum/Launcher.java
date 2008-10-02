@@ -618,11 +618,17 @@ public class Launcher
 	 * 
 	 * + alpha.43
 	 * - Modification: amélioration du système aléatoire de génération des niveaux (les distributions doivent être contrôlées car les séries générées sont trop courtes pour que les distributions soient respectées)
+	 * - Modification: réorganisation du projet Eclipse de manière à placer les classes d'ia dans le dossier resources
+	 * - Modification: révision du système d'adaptateur pour les IA de 2007-08
 	 * 
 	 * *******************************************************
 	 * *********************** A FAIRE ***********************
 	 * *******************************************************
-	 * - revoir le système des IA
+	 * - revoir le système des IA:
+	 * 		- crééer les classes représentant les données asynchrones
+	 * 		- écrire l'adaptateur pour 2008-09
+	 * 		- écrire une IA d'exemple
+	 * 		- centraliser les données : c'est les mêmes pour toutes les IA (données doivent être finales)
 	 * - redistribution des items lors de la mort d'un joueur (option de round?)
 	 * - possibilité de bloquer certains items (on ne les perd pas lorsqu'on meurt)
 	 * 

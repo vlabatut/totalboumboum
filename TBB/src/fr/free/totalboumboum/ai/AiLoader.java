@@ -12,15 +12,14 @@ public class AiLoader
 	{	InterfaceAi result;
 		
 		// check the file
-		String packageFolder = FileTools.getResourcesPath()+File.separator+FileTools.getAiPath()
-			+File.separator+packname+File.separator+name;
+		String packageFolder = FileTools.getAiPath()+File.separator+packname+File.separator+name;
 		String classFile = packageFolder+File.separator+FileTools.FILE_AI+FileTools.EXTENSION_CLASS;
 		File file = new File(classFile);
 		if(!file.exists())
 			throw new FileNotFoundException(classFile);
 		
 		// load the class
-		String packageName = FileTools.getAiPath()+FileTools.CLASS_SEPARATOR+packname+FileTools.CLASS_SEPARATOR+name;
+		String packageName = packname+FileTools.CLASS_SEPARATOR+name;
 		String classQualifiedName = packageName+FileTools.CLASS_SEPARATOR+FileTools.FILE_AI;
 		Class<?> tempClass = Class.forName(classQualifiedName);
 		if(!InterfaceAi.class.isAssignableFrom(tempClass))
