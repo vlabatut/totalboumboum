@@ -19,7 +19,7 @@
 	
 <!-- PROFILES -->	
 	<profiles>
-		<profile value="DoganDemirkol" /> <!-- white -->
+		<profile value="DemirkolDogan" /> <!-- white -->
 		<profile value="BingolKetenci" /> <!-- blue -->
 <!-- 		<profile value="OkanYuksel" /> BUGGÉ --> <!-- black -->   
 <!--		<profile value="GokselMenges" /> --> <!-- green --> 

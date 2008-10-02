@@ -27,13 +27,14 @@ import org.xml.sax.SAXParseException;
 
 public class XmlTools
 {	// Elements names
+	public static final String ELT_ABILITY = "ability";
+	public static final String ELT_ABILITIES = "abilities";
 	public static final String ELT_ACTION = "action";
 	public static final String ELT_ACTOR_PERMISSIONS = "actor-permissions";
 	public static final String ELT_ACTOR_RESTRICTIONS = "actor-restrictions";
 	public static final String ELT_ADDITION = "addition";
 	public static final String ELT_ANIMES = "animes";
-	public static final String ELT_ABILITY = "ability";
-	public static final String ELT_ABILITIES = "abilities";
+	public static final String ELT_AI = "ai";
 	public static final String ELT_ALL_LEVELS = "all-levels";
 	public static final String ELT_AUTHOR = "author";
 	public static final String ELT_BIGWALL = "bigwall";
@@ -205,6 +206,7 @@ public class XmlTools
 	public static final String ATT_NAME = "name";
 	public static final String ATT_NUMBER = "number";
 	public static final String ATT_ORIENTATION = "orientation";
+	public static final String ATT_PACK = "pack";
 	public static final String ATT_PACKNAME = "packname";
 	public static final String ATT_PLAY_MODE = "playMode";
 	public static final String ATT_PLAYER = "player";
