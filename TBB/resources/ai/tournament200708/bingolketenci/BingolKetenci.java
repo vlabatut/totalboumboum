@@ -2,7 +2,7 @@ package tournament200708.bingolketenci;
 import java.util.LinkedList;
 import java.util.PriorityQueue;
 
-import tournament200708.InterfaceArtificialIntelligence;
+import tournament200708.ArtificialIntelligence;
 
 
 
@@ -14,7 +14,7 @@ import tournament200708.InterfaceArtificialIntelligence;
  * il controle tout d'abord s'il y a un danger pour lui.S'il y en a,il bouge
  * seulement pour se sauver.
  */
-public class BingolKetenci extends InterfaceArtificialIntelligence {
+public class BingolKetenci extends ArtificialIntelligence {
 	private static final long serialVersionUID = 1L;
 	/** position de la derniere bombe qui est mis par AI. */
 	private int lastBombPos[];
@@ -831,17 +831,17 @@ public class BingolKetenci extends InterfaceArtificialIntelligence {
 		boolean result = false;
 		// bombes
 
-		result = result || matrix[x][y] == InterfaceArtificialIntelligence.AI_BLOCK_BOMB;
+		result = result || matrix[x][y] == ArtificialIntelligence.AI_BLOCK_BOMB;
 		// feu
-		result = result || matrix[x][y] == InterfaceArtificialIntelligence.AI_BLOCK_FIRE;
+		result = result || matrix[x][y] == ArtificialIntelligence.AI_BLOCK_FIRE;
 		// murs
 		result = result
-				|| matrix[x][y] == InterfaceArtificialIntelligence.AI_BLOCK_WALL_HARD;
+				|| matrix[x][y] == ArtificialIntelligence.AI_BLOCK_WALL_HARD;
 		result = result
-				|| matrix[x][y] == InterfaceArtificialIntelligence.AI_BLOCK_WALL_SOFT;
+				|| matrix[x][y] == ArtificialIntelligence.AI_BLOCK_WALL_SOFT;
 		// on ne sait pas quoi
 		result = result
-				|| matrix[x][y] == InterfaceArtificialIntelligence.AI_BLOCK_UNKNOWN;
+				|| matrix[x][y] == ArtificialIntelligence.AI_BLOCK_UNKNOWN;
 		// shrink
 		result = result
 				|| (getTimeBeforeShrink() == -1
@@ -865,14 +865,14 @@ public class BingolKetenci extends InterfaceArtificialIntelligence {
 	{	
 		boolean result = false;
 		
-		result = result || matrix[x][y]==InterfaceArtificialIntelligence.AI_BLOCK_BOMB;
+		result = result || matrix[x][y]==ArtificialIntelligence.AI_BLOCK_BOMB;
 		// feu
-		result = result || matrix[x][y]==InterfaceArtificialIntelligence.AI_BLOCK_FIRE;
+		result = result || matrix[x][y]==ArtificialIntelligence.AI_BLOCK_FIRE;
 		// murs
-		result = result || matrix[x][y]==InterfaceArtificialIntelligence.AI_BLOCK_WALL_HARD;
-		result = result || matrix[x][y]==InterfaceArtificialIntelligence.AI_BLOCK_WALL_SOFT;
+		result = result || matrix[x][y]==ArtificialIntelligence.AI_BLOCK_WALL_HARD;
+		result = result || matrix[x][y]==ArtificialIntelligence.AI_BLOCK_WALL_SOFT;
 		// on ne sait pas quoi
-		result = result || matrix[x][y]==InterfaceArtificialIntelligence.AI_BLOCK_UNKNOWN;
+		result = result || matrix[x][y]==ArtificialIntelligence.AI_BLOCK_UNKNOWN;
 		// shrink
 		result = result || (getTimeBeforeShrink()==-1 && x==getNextShrinkPosition()[0] && y==getNextShrinkPosition()[1]);
 		
@@ -896,16 +896,16 @@ public class BingolKetenci extends InterfaceArtificialIntelligence {
 		boolean result;
 		// calcum
 		switch (move) {
-		case InterfaceArtificialIntelligence.AI_ACTION_GO_UP:
+		case ArtificialIntelligence.AI_ACTION_GO_UP:
 			result = y > 0 && !isObstacle(x, y - 1);
 			break;
-		case InterfaceArtificialIntelligence.AI_ACTION_GO_DOWN:
+		case ArtificialIntelligence.AI_ACTION_GO_DOWN:
 			result = y < (getZoneMatrixDimY() - 1) && !isObstacle(x, y + 1);
 			break;
-		case InterfaceArtificialIntelligence.AI_ACTION_GO_LEFT:
+		case ArtificialIntelligence.AI_ACTION_GO_LEFT:
 			result = x > 0 && !isObstacle(x - 1, y);
 			break;
-		case InterfaceArtificialIntelligence.AI_ACTION_GO_RIGHT:
+		case ArtificialIntelligence.AI_ACTION_GO_RIGHT:
 			result = x < (getZoneMatrixDimX() - 1) && !isObstacle(x + 1, y);
 			break;
 		default:

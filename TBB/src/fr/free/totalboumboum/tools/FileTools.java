@@ -6,10 +6,14 @@ import java.io.File;
 
 public class FileTools
 {
+	public static final String CLASS_SEPARATOR = ".";
+
 	public static final String EXTENSION_SCHEMA = ".xsd";
 	public static final String EXTENSION_DATA = ".xml";
+	public static final String EXTENSION_CLASS = ".class";
 	//
 	public static final String FILE_ABILITIES = "abilities";
+	public static final String FILE_AI = "ArtificialIntelligence";
 	public static final String FILE_ANIMES = "animes";
 	public static final String FILE_BLOCK = "block";
 	public static final String FILE_BOMB = "bomb";
@@ -61,6 +65,7 @@ public class FileTools
 	public static final String FILE_ZONES = "zones";
 	//
 	public static final String FOLDER_ABILITIES = "abilities";
+	public static final String FOLDER_AI = "ai";
 	public static final String FOLDER_BOMBS = "bombs";
 	public static final String FOLDER_CHARACTERS = "characters";
 	public static final String FOLDER_DATA = "data";
@@ -97,6 +102,10 @@ public class FileTools
 	
 	public static String getResourcesPath()
 	{	return FOLDER_RESOURCES;		
+	}
+	
+	public static String getAiPath()
+	{	return FOLDER_AI;		
 	}
 	
 	public static String getHeroesPath()

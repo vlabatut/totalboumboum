@@ -12,6 +12,7 @@ import java.awt.image.BufferedImage;
 import java.awt.image.VolatileImage;
 import java.io.File;
 import java.io.IOException;
+import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.concurrent.locks.Condition;
@@ -25,7 +26,7 @@ import org.xml.sax.SAXException;
 
 import sun.awt.image.OffScreenImage;
 
-import fr.free.totalboumboum.ai.InterfaceAI;
+import fr.free.totalboumboum.ai.InterfaceAi;
 import fr.free.totalboumboum.data.configuration.Configuration;
 import fr.free.totalboumboum.data.configuration.GameConstants;
 import fr.free.totalboumboum.data.profile.Profile;
@@ -63,7 +64,7 @@ public class Loop implements Runnable
 	private Lock loadLock = new ReentrantLock();
 	private Condition cond = loadLock.newCondition();
 	
-	public void init() throws ParserConfigurationException, SAXException, IOException, ClassNotFoundException, IllegalArgumentException, SecurityException, IllegalAccessException, NoSuchFieldException
+	public void init() throws ParserConfigurationException, SAXException, IOException, ClassNotFoundException, IllegalArgumentException, SecurityException, IllegalAccessException, NoSuchFieldException, InstantiationException, InvocationTargetException, NoSuchMethodException
 	{	// control
 		systemControl = new SystemControl(this);
 
@@ -379,6 +380,15 @@ public class Loop implements Runnable
 		{	e.printStackTrace();
 		}
 		catch (InterruptedException e)
+		{	e.printStackTrace();
+		}
+		catch (InstantiationException e)
+		{	e.printStackTrace();
+		}
+		catch (InvocationTargetException e)
+		{	e.printStackTrace();
+		}
+		catch (NoSuchMethodException e)
 		{	e.printStackTrace();
 		}
 	}

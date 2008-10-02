@@ -2,10 +2,10 @@ package tournament200708.basmansandalli;
 
 import java.util.ArrayList;
 
-import tournament200708.InterfaceArtificialIntelligence;
+import tournament200708.ArtificialIntelligence;
 
 
-public class BasmanSandalli extends InterfaceArtificialIntelligence {
+public class BasmanSandalli extends ArtificialIntelligence {
 	private static final long serialVersionUID = 1L;
 	
 	/**
@@ -21,7 +21,7 @@ public class BasmanSandalli extends InterfaceArtificialIntelligence {
 	/**
 	 * Le dernier déplacement effectué
 	 */
-	private int lastMove=InterfaceArtificialIntelligence.AI_ACTION_DO_NOTHING;
+	private int lastMove=ArtificialIntelligence.AI_ACTION_DO_NOTHING;
 	
 	/**
 	 * Compteur gardant le nombre de répétition d'un mouvement tant que le personnage reste à la même place
@@ -44,7 +44,7 @@ public class BasmanSandalli extends InterfaceArtificialIntelligence {
 	public Integer call() throws Exception
 	{ 
 		
-		Integer result=InterfaceArtificialIntelligence.AI_ACTION_DO_NOTHING ;
+		Integer result=ArtificialIntelligence.AI_ACTION_DO_NOTHING ;
 		
 		int x = getOwnPosition()[0];
 		int y = getOwnPosition()[1];	
@@ -63,18 +63,18 @@ public class BasmanSandalli extends InterfaceArtificialIntelligence {
 		{
 			for(int j=0;j<getZoneMatrixDimY();j++)
 			{
-				if(matrix[i][j] ==InterfaceArtificialIntelligence.AI_BLOCK_EMPTY)
+				if(matrix[i][j] ==ArtificialIntelligence.AI_BLOCK_EMPTY)
 					{
 						if(lastSafetyState==true)
 							hr[i][j][0]=100;
 						else
 							hr[i][j][0]=1000;
 					}
-				else if (matrix[i][j] ==InterfaceArtificialIntelligence.AI_BLOCK_WALL_HARD)
+				else if (matrix[i][j] ==ArtificialIntelligence.AI_BLOCK_WALL_HARD)
 					hr[i][j][0]=1;
-				else if(matrix[i][j] ==InterfaceArtificialIntelligence.AI_BLOCK_WALL_SOFT)
+				else if(matrix[i][j] ==ArtificialIntelligence.AI_BLOCK_WALL_SOFT)
 				{
-					if(getTimeBeforeShrink()>4000 && matrix[bombPosition[0]][bombPosition[1]]!=InterfaceArtificialIntelligence.AI_BLOCK_BOMB)
+					if(getTimeBeforeShrink()>4000 && matrix[bombPosition[0]][bombPosition[1]]!=ArtificialIntelligence.AI_BLOCK_BOMB)
 					{ 
 						hr[i][j][0]=300;
 					}
@@ -82,9 +82,9 @@ public class BasmanSandalli extends InterfaceArtificialIntelligence {
 						hr[i][j][0]=30;
 					}
 				}
-				else if(matrix[i][j] ==InterfaceArtificialIntelligence.AI_BLOCK_BOMB)
+				else if(matrix[i][j] ==ArtificialIntelligence.AI_BLOCK_BOMB)
 					hr[i][j][0]=100;
-				else if(matrix[i][j] ==InterfaceArtificialIntelligence.AI_BLOCK_ITEM_BOMB || matrix[i][j]==InterfaceArtificialIntelligence.AI_BLOCK_ITEM_FIRE )	
+				else if(matrix[i][j] ==ArtificialIntelligence.AI_BLOCK_ITEM_BOMB || matrix[i][j]==ArtificialIntelligence.AI_BLOCK_ITEM_FIRE )	
 				{
 					if(getTimeBeforeShrink()>4000)
 					{ 
@@ -95,7 +95,7 @@ public class BasmanSandalli extends InterfaceArtificialIntelligence {
 						hr[i][j][0]=100;
 					}	
 				}
-				else if(matrix[i][j] == InterfaceArtificialIntelligence.AI_BLOCK_FIRE)
+				else if(matrix[i][j] == ArtificialIntelligence.AI_BLOCK_FIRE)
 				{
 					if(getTimeBeforeShrink()>4000)
 						hr[i][j][0]=1;
@@ -140,13 +140,13 @@ public class BasmanSandalli extends InterfaceArtificialIntelligence {
 			}
 		
 		//calcul du coefficient indiquant le choix d'aller vers la droite à partir des valeurs de priorités gardées	dans la matrice hr
-		if(matrix[x+1][y] !=InterfaceArtificialIntelligence.AI_BLOCK_WALL_HARD && matrix[x+1][y] !=InterfaceArtificialIntelligence.AI_BLOCK_UNKNOWN )
+		if(matrix[x+1][y] !=ArtificialIntelligence.AI_BLOCK_WALL_HARD && matrix[x+1][y] !=ArtificialIntelligence.AI_BLOCK_UNKNOWN )
 		{//s'il est possible d'effectuer un mouvement vers la droite	
 			int i=x+1;
 			cons=1;
 			while(i<getZoneMatrixDimX())
 			{
-				if(matrix[i][y]==InterfaceArtificialIntelligence.AI_BLOCK_EMPTY)//on privilège des blocs vides consécutifs
+				if(matrix[i][y]==ArtificialIntelligence.AI_BLOCK_EMPTY)//on privilège des blocs vides consécutifs
 				{
 					cons=cons+50;//on privilège des blocs vides consécutifs
 					moveRight = moveRight+hr[i][y][0]+cons;
@@ -167,14 +167,14 @@ public class BasmanSandalli extends InterfaceArtificialIntelligence {
 		}
 		
 		//calcul du coefficient indiquant le choix d'aller vers la gauche à partir des valeurs de priorités gardées	dans la matrice hr
-		if(matrix[x-1][y] !=InterfaceArtificialIntelligence.AI_BLOCK_WALL_HARD && matrix[x-1][y] !=InterfaceArtificialIntelligence.AI_BLOCK_UNKNOWN  ){//s'il est possible d'effectuer un mouvement vers la gauche	
+		if(matrix[x-1][y] !=ArtificialIntelligence.AI_BLOCK_WALL_HARD && matrix[x-1][y] !=ArtificialIntelligence.AI_BLOCK_UNKNOWN  ){//s'il est possible d'effectuer un mouvement vers la gauche	
 			
 			cons=1;
 			int i=x-1;
 			
 			while( i>0 )
 			{
-				if(matrix[i][y]==InterfaceArtificialIntelligence.AI_BLOCK_EMPTY)//on privilège des blocs vides consécutifs
+				if(matrix[i][y]==ArtificialIntelligence.AI_BLOCK_EMPTY)//on privilège des blocs vides consécutifs
 				{
 					cons=cons+50;//on privilège des blocs vides consécutifs
 					moveLeft = moveLeft+hr[i][y][0]+cons;
@@ -195,13 +195,13 @@ public class BasmanSandalli extends InterfaceArtificialIntelligence {
 		}
 		
 		//calcul du coefficient indiquant le choix d'aller vers le bas à partir des valeurs de priorités gardée dans la matrice hr
-		if(matrix[x][y+1] !=InterfaceArtificialIntelligence.AI_BLOCK_WALL_HARD && matrix[x][y+1] !=InterfaceArtificialIntelligence.AI_BLOCK_UNKNOWN ){//s'il est possible d'effectuer un mouvement vers le bas
+		if(matrix[x][y+1] !=ArtificialIntelligence.AI_BLOCK_WALL_HARD && matrix[x][y+1] !=ArtificialIntelligence.AI_BLOCK_UNKNOWN ){//s'il est possible d'effectuer un mouvement vers le bas
 			
 			cons=1;
 			int i=y+1;
 			while(i<getZoneMatrixDimY())
 			{
-				if(matrix[x][i]==InterfaceArtificialIntelligence.AI_BLOCK_EMPTY)//on privilège des blocs vides consécutifs
+				if(matrix[x][i]==ArtificialIntelligence.AI_BLOCK_EMPTY)//on privilège des blocs vides consécutifs
 				{
 					cons=cons+50;//on privilège des blocs vides consécutifs
 					moveDown = moveDown+hr[x][i][0]+cons;
@@ -222,13 +222,13 @@ public class BasmanSandalli extends InterfaceArtificialIntelligence {
 		}
 		
 		//calcul du coefficient indiquant le choix d'aller vers le haut à partir des valeurs de priorités gardées dans la matrice hr
-		if(matrix[x][y-1] !=InterfaceArtificialIntelligence.AI_BLOCK_WALL_HARD && matrix[x][y-1] !=InterfaceArtificialIntelligence.AI_BLOCK_UNKNOWN )
+		if(matrix[x][y-1] !=ArtificialIntelligence.AI_BLOCK_WALL_HARD && matrix[x][y-1] !=ArtificialIntelligence.AI_BLOCK_UNKNOWN )
 		{//s'il est possible d'effectuer un mouvement vers le haut	
 			cons=1;
 			int i=y-1;
 			while(i>0)
 			{
-				if(matrix[x][i]==InterfaceArtificialIntelligence.AI_BLOCK_EMPTY)//on privilège des blocs vides consécutifs
+				if(matrix[x][i]==ArtificialIntelligence.AI_BLOCK_EMPTY)//on privilège des blocs vides consécutifs
 				{
 					cons=cons+50;
 					moveUp = moveUp+hr[x][i][0]+cons;
@@ -254,7 +254,7 @@ public class BasmanSandalli extends InterfaceArtificialIntelligence {
 			lastSafetyState=true;
 			
 			//pour que le personnage ne se dirige pas vers le danger on multiplie par -1 les directions qui l'emporte au danger pour les éliminer
-			if(matrix[bombPosition[0]][bombPosition[1]] == InterfaceArtificialIntelligence.AI_BLOCK_BOMB || matrix[bombPosition[0]][bombPosition[1]]== InterfaceArtificialIntelligence.AI_BLOCK_FIRE )
+			if(matrix[bombPosition[0]][bombPosition[1]] == ArtificialIntelligence.AI_BLOCK_BOMB || matrix[bombPosition[0]][bombPosition[1]]== ArtificialIntelligence.AI_BLOCK_FIRE )
 			{
 				if(x-bombPosition[0]<0)
 				{
@@ -279,91 +279,91 @@ public class BasmanSandalli extends InterfaceArtificialIntelligence {
 			int choice =Math.max(Math.max(Math.max(moveRight, moveLeft), moveUp), moveDown);
 				
 			if(choice==moveRight){//si le choix est d'aller vers la droite
-				result=InterfaceArtificialIntelligence.AI_ACTION_GO_RIGHT;//par défaut on admet le choix	
+				result=ArtificialIntelligence.AI_ACTION_GO_RIGHT;//par défaut on admet le choix	
 				//s'il existe un mur destructible en direction de choix en va le détruire
-				if(matrix[x+1][y]==InterfaceArtificialIntelligence.AI_BLOCK_WALL_SOFT)
+				if(matrix[x+1][y]==ArtificialIntelligence.AI_BLOCK_WALL_SOFT)
 					{
-						if(matrix[bombPosition[0]][bombPosition[1]]!= InterfaceArtificialIntelligence.AI_BLOCK_BOMB)//Si la bombe par laquelle le personnage s'est enfuite a explosé
+						if(matrix[bombPosition[0]][bombPosition[1]]!= ArtificialIntelligence.AI_BLOCK_BOMB)//Si la bombe par laquelle le personnage s'est enfuite a explosé
 						{	
-							result=InterfaceArtificialIntelligence.AI_ACTION_PUT_BOMB;
+							result=ArtificialIntelligence.AI_ACTION_PUT_BOMB;
 						}
 						else
 						{
 							if(getTimeBeforeShrink()<0)//si le shrink a commencé  
-								result=InterfaceArtificialIntelligence.AI_ACTION_DO_NOTHING;
+								result=ArtificialIntelligence.AI_ACTION_DO_NOTHING;
 						}
 					
 						Thread.sleep(200);
 					}
 				//s'il existe une bombe à un temps prés au shrink le personnage ne fera rien car il est en sécurité
-				if(getTimeBeforeShrink()<4000 && matrix[bombPosition[0]][bombPosition[1]]== InterfaceArtificialIntelligence.AI_BLOCK_BOMB )
-					result=InterfaceArtificialIntelligence.AI_ACTION_DO_NOTHING;
+				if(getTimeBeforeShrink()<4000 && matrix[bombPosition[0]][bombPosition[1]]== ArtificialIntelligence.AI_BLOCK_BOMB )
+					result=ArtificialIntelligence.AI_ACTION_DO_NOTHING;
 				//attaque: s'il existe un joeur dans une position agrèable pour pièger on pose une bombe
 				if((anyPlayerExists(x+1,y) && isTrap(matrix,x+1,y,x,y)) || (anyPlayerExists(x-1,y) && isTrap(matrix,x-1,y,x,y)) || (anyPlayerExists(x,y-1) && isTrap(matrix,x,y-1,x,y)) || (anyPlayerExists(x,y+1) && isTrap(matrix,x,y+1,x,y)))
 					
 				{
 						if(getOwnBombCount()>0 && getTimeBeforeShrink()>0)
 						{
-							result=InterfaceArtificialIntelligence.AI_ACTION_PUT_BOMB;
+							result=ArtificialIntelligence.AI_ACTION_PUT_BOMB;
 						}
 				}
 			}
 				
 			else if(choice==moveLeft){//si le choix est d'aller vers la gauche
 				
-				result=InterfaceArtificialIntelligence.AI_ACTION_GO_LEFT;//par défaut on admet le choix	
+				result=ArtificialIntelligence.AI_ACTION_GO_LEFT;//par défaut on admet le choix	
 				//s'il existe un mur destructible en direction de choix en va le détruire
-				if(matrix[x-1][y]==InterfaceArtificialIntelligence.AI_BLOCK_WALL_SOFT)
+				if(matrix[x-1][y]==ArtificialIntelligence.AI_BLOCK_WALL_SOFT)
 					{
-					if(matrix[bombPosition[0]][bombPosition[1]]!= InterfaceArtificialIntelligence.AI_BLOCK_BOMB )
+					if(matrix[bombPosition[0]][bombPosition[1]]!= ArtificialIntelligence.AI_BLOCK_BOMB )
 					{		
-						result=InterfaceArtificialIntelligence.AI_ACTION_PUT_BOMB;
+						result=ArtificialIntelligence.AI_ACTION_PUT_BOMB;
 					}
 					else
 					{
 						if(getTimeBeforeShrink()<0)
-							result=InterfaceArtificialIntelligence.AI_ACTION_DO_NOTHING;
+							result=ArtificialIntelligence.AI_ACTION_DO_NOTHING;
 					}
 				
 					Thread.sleep(200);
 				}
-				if(getTimeBeforeShrink()<4000 && matrix[bombPosition[0]][bombPosition[1]]== InterfaceArtificialIntelligence.AI_BLOCK_BOMB )
-					result=InterfaceArtificialIntelligence.AI_ACTION_DO_NOTHING;
+				if(getTimeBeforeShrink()<4000 && matrix[bombPosition[0]][bombPosition[1]]== ArtificialIntelligence.AI_BLOCK_BOMB )
+					result=ArtificialIntelligence.AI_ACTION_DO_NOTHING;
 				//attaque: s'il existe un joeur dans une position agrèable pour pièger on pose une bombe
 				if((anyPlayerExists(x+1,y) && isTrap(matrix,x+1,y,x,y)) || (anyPlayerExists(x-1,y) && isTrap(matrix,x-1,y,x,y)) || (anyPlayerExists(x,y-1) && isTrap(matrix,x,y-1,x,y)) || (anyPlayerExists(x,y+1)&& isTrap(matrix,x,y+1,x,y)))
 				{	
 					if(getOwnBombCount()>0 && getTimeBeforeShrink()>0)
 					{		
-						result=InterfaceArtificialIntelligence.AI_ACTION_PUT_BOMB;		
+						result=ArtificialIntelligence.AI_ACTION_PUT_BOMB;		
 					}
 				}
 			
 			}
 				
 			else if(choice==moveDown){//si le choix est d'aller vers le bas
-				result=InterfaceArtificialIntelligence.AI_ACTION_GO_DOWN;//par défaut on admet le choix	
+				result=ArtificialIntelligence.AI_ACTION_GO_DOWN;//par défaut on admet le choix	
 				//s'il existe un mur destructible en direction de choix en va le détruire
-				if(matrix[x][y+1]==InterfaceArtificialIntelligence.AI_BLOCK_WALL_SOFT)
+				if(matrix[x][y+1]==ArtificialIntelligence.AI_BLOCK_WALL_SOFT)
 					{
-					if(matrix[bombPosition[0]][bombPosition[1]]!= InterfaceArtificialIntelligence.AI_BLOCK_BOMB   ){	
+					if(matrix[bombPosition[0]][bombPosition[1]]!= ArtificialIntelligence.AI_BLOCK_BOMB   ){	
 						
-						result=InterfaceArtificialIntelligence.AI_ACTION_PUT_BOMB;	
+						result=ArtificialIntelligence.AI_ACTION_PUT_BOMB;	
 					}
 					else
 					{
 						if(getTimeBeforeShrink()<0)
-						result=InterfaceArtificialIntelligence.AI_ACTION_DO_NOTHING;
+						result=ArtificialIntelligence.AI_ACTION_DO_NOTHING;
 					}
 					Thread.sleep(200);
 					}
-				if(getTimeBeforeShrink()<4000 && matrix[bombPosition[0]][bombPosition[1]]== InterfaceArtificialIntelligence.AI_BLOCK_BOMB )
-					result=InterfaceArtificialIntelligence.AI_ACTION_DO_NOTHING;
+				if(getTimeBeforeShrink()<4000 && matrix[bombPosition[0]][bombPosition[1]]== ArtificialIntelligence.AI_BLOCK_BOMB )
+					result=ArtificialIntelligence.AI_ACTION_DO_NOTHING;
 				//attaque: s'il existe un joeur dans une position agrèable pour pièger on pose une bombe
 			    if((anyPlayerExists(x+1,y) && isTrap(matrix,x+1,y,x,y)) || (anyPlayerExists(x-1,y) && isTrap(matrix,x-1,y,x,y)) || (anyPlayerExists(x,y-1) && isTrap(matrix,x,y-1,x,y)) || (anyPlayerExists(x,y+1)&& isTrap(matrix,x,y+1,x,y)))
 				{
 			    	if(getOwnBombCount()>0 && getTimeBeforeShrink()>0)
 			    	{
-						result=InterfaceArtificialIntelligence.AI_ACTION_PUT_BOMB;
+						result=ArtificialIntelligence.AI_ACTION_PUT_BOMB;
 			    	}
 				}
 				
@@ -371,30 +371,30 @@ public class BasmanSandalli extends InterfaceArtificialIntelligence {
 				
 			else{//le choix est d'aller vers le haut
 				
-				result=InterfaceArtificialIntelligence.AI_ACTION_GO_UP;//par défaut on admet le choix	
+				result=ArtificialIntelligence.AI_ACTION_GO_UP;//par défaut on admet le choix	
 				//s'il existe un mur destructible en direction de choix en va le détruire
-				if(matrix[x][y-1]==InterfaceArtificialIntelligence.AI_BLOCK_WALL_SOFT)
+				if(matrix[x][y-1]==ArtificialIntelligence.AI_BLOCK_WALL_SOFT)
 					{
-					if(matrix[bombPosition[0]][bombPosition[1]]!= InterfaceArtificialIntelligence.AI_BLOCK_BOMB   )
+					if(matrix[bombPosition[0]][bombPosition[1]]!= ArtificialIntelligence.AI_BLOCK_BOMB   )
 					{		
-						result=InterfaceArtificialIntelligence.AI_ACTION_PUT_BOMB;
+						result=ArtificialIntelligence.AI_ACTION_PUT_BOMB;
 					}
 					else
 					{
 						if(getTimeBeforeShrink()<0)
-							result=InterfaceArtificialIntelligence.AI_ACTION_DO_NOTHING;
+							result=ArtificialIntelligence.AI_ACTION_DO_NOTHING;
 					}
 				
 					Thread.sleep(200);
 					}
-				if(getTimeBeforeShrink()<4000 && matrix[bombPosition[0]][bombPosition[1]]== InterfaceArtificialIntelligence.AI_BLOCK_BOMB )
-					result=InterfaceArtificialIntelligence.AI_ACTION_DO_NOTHING;
+				if(getTimeBeforeShrink()<4000 && matrix[bombPosition[0]][bombPosition[1]]== ArtificialIntelligence.AI_BLOCK_BOMB )
+					result=ArtificialIntelligence.AI_ACTION_DO_NOTHING;
 				//attaque: s'il existe un joeur dans une position agrèable pour pièger on pose une bombe
 				if((anyPlayerExists(x+1,y) && isTrap(matrix,x+1,y,x,y)) || (anyPlayerExists(x-1,y) && isTrap(matrix,x-1,y,x,y)) || (anyPlayerExists(x,y-1) && isTrap(matrix,x,y-1,x,y)) || (anyPlayerExists(x,y+1)&& isTrap(matrix,x,y+1,x,y)))
 				{
 					if(getOwnBombCount()>0 && getTimeBeforeShrink()>0)
 					{
-						result=InterfaceArtificialIntelligence.AI_ACTION_PUT_BOMB;
+						result=ArtificialIntelligence.AI_ACTION_PUT_BOMB;
 					}
 					
 				}
@@ -402,41 +402,41 @@ public class BasmanSandalli extends InterfaceArtificialIntelligence {
 			}
 			
 				//prédiction du danger: si le mouvement choisi emportera le personnage à une case dangereuse, il attend pour que ce danger dépasse
-				if(result==InterfaceArtificialIntelligence.AI_ACTION_GO_RIGHT)//si le mouvement choisi est vers la droite
+				if(result==ArtificialIntelligence.AI_ACTION_GO_RIGHT)//si le mouvement choisi est vers la droite
 				{
-					if(!isSafe(matrix,x+1,y) || matrix[x+1][y]==InterfaceArtificialIntelligence.AI_BLOCK_FIRE)//s'il est dangereux de faire ce mouvement
+					if(!isSafe(matrix,x+1,y) || matrix[x+1][y]==ArtificialIntelligence.AI_BLOCK_FIRE)//s'il est dangereux de faire ce mouvement
 					{
-						result=InterfaceArtificialIntelligence.AI_ACTION_DO_NOTHING;
+						result=ArtificialIntelligence.AI_ACTION_DO_NOTHING;
 						Thread.sleep(200);
 					}
 					
 					
 				}
-				else if(result==InterfaceArtificialIntelligence.AI_ACTION_GO_LEFT)//si le mouvement choisi est vers la gauche
+				else if(result==ArtificialIntelligence.AI_ACTION_GO_LEFT)//si le mouvement choisi est vers la gauche
 				{
-					if(!isSafe(matrix,x-1,y)|| matrix[x-1][y]==InterfaceArtificialIntelligence.AI_BLOCK_FIRE )//s'il est dangereux de faire ce mouvement
+					if(!isSafe(matrix,x-1,y)|| matrix[x-1][y]==ArtificialIntelligence.AI_BLOCK_FIRE )//s'il est dangereux de faire ce mouvement
 					{
-						result=InterfaceArtificialIntelligence.AI_ACTION_DO_NOTHING;
+						result=ArtificialIntelligence.AI_ACTION_DO_NOTHING;
 						Thread.sleep(200);
 					}
 					
 					
 				}
-				else if(result==InterfaceArtificialIntelligence.AI_ACTION_GO_DOWN)//si le mouvement choisi est vers le bas
+				else if(result==ArtificialIntelligence.AI_ACTION_GO_DOWN)//si le mouvement choisi est vers le bas
 				{
-					if(!isSafe(matrix,x,y+1) || matrix[x][y+1]==InterfaceArtificialIntelligence.AI_BLOCK_FIRE)//s'il est dangereux de faire ce mouvement
+					if(!isSafe(matrix,x,y+1) || matrix[x][y+1]==ArtificialIntelligence.AI_BLOCK_FIRE)//s'il est dangereux de faire ce mouvement
 					{
-						result=InterfaceArtificialIntelligence.AI_ACTION_DO_NOTHING;
+						result=ArtificialIntelligence.AI_ACTION_DO_NOTHING;
 						Thread.sleep(200);
 					}
 			
 				
 				}
-				else if(result==InterfaceArtificialIntelligence.AI_ACTION_GO_UP)//si le mouvement choisi est vers le haut
+				else if(result==ArtificialIntelligence.AI_ACTION_GO_UP)//si le mouvement choisi est vers le haut
 				{
-					if(!isSafe(matrix,x,y-1) || matrix[x][y-1]==InterfaceArtificialIntelligence.AI_BLOCK_FIRE)//s'il est dangereux de faire ce mouvement
+					if(!isSafe(matrix,x,y-1) || matrix[x][y-1]==ArtificialIntelligence.AI_BLOCK_FIRE)//s'il est dangereux de faire ce mouvement
 					{
-						result=InterfaceArtificialIntelligence.AI_ACTION_DO_NOTHING;
+						result=ArtificialIntelligence.AI_ACTION_DO_NOTHING;
 						Thread.sleep(200);
 					}	
 				}
@@ -455,41 +455,41 @@ public class BasmanSandalli extends InterfaceArtificialIntelligence {
 			{
 				// pour tomber en piège plus rarement, le personnage préfére d'abord de s'enfuir linéarement si la portée de la bombe est suffisement petite
 				if(x+power<getZoneMatrixDimX() && possibleRightX(bombX,y,power+1) && getBombPowerAt(bombX,bombY)<3 ) 
-					result=InterfaceArtificialIntelligence.AI_ACTION_GO_RIGHT;
+					result=ArtificialIntelligence.AI_ACTION_GO_RIGHT;
 				else//il est impossible de s'enfuir linéarement
 				{
 					/*à chaque fois pour s'enfuir facilement on cherche d'abord les mouvements perpendiculaires à la direction du personnage 
 					 * par rapport à la bombe(haut et bas pour la bombe située à gauche ici) en choissisant la direction possédant la plus grande constante*/
-					if(moveUp>=moveDown && (isMovePossible(x,y,InterfaceArtificialIntelligence.AI_ACTION_GO_UP) || isMovePossible(x,y,InterfaceArtificialIntelligence.AI_ACTION_GO_DOWN)))
+					if(moveUp>=moveDown && (isMovePossible(x,y,ArtificialIntelligence.AI_ACTION_GO_UP) || isMovePossible(x,y,ArtificialIntelligence.AI_ACTION_GO_DOWN)))
 					{
-						if(isMovePossible(x,y,InterfaceArtificialIntelligence.AI_ACTION_GO_UP) && isSafe(matrix,x,y-1) )
+						if(isMovePossible(x,y,ArtificialIntelligence.AI_ACTION_GO_UP) && isSafe(matrix,x,y-1) )
 						{
-							result=InterfaceArtificialIntelligence.AI_ACTION_GO_UP;
+							result=ArtificialIntelligence.AI_ACTION_GO_UP;
 						}
-						else if(isMovePossible(x,y,InterfaceArtificialIntelligence.AI_ACTION_GO_DOWN)  && isSafe(matrix,x,y+1))
+						else if(isMovePossible(x,y,ArtificialIntelligence.AI_ACTION_GO_DOWN)  && isSafe(matrix,x,y+1))
 						{
-							result=InterfaceArtificialIntelligence.AI_ACTION_GO_DOWN;
+							result=ArtificialIntelligence.AI_ACTION_GO_DOWN;
 						}
 					
 					}
-					else if(moveUp<=moveDown && (isMovePossible(x,y,InterfaceArtificialIntelligence.AI_ACTION_GO_UP) || isMovePossible(x,y,InterfaceArtificialIntelligence.AI_ACTION_GO_DOWN)))
+					else if(moveUp<=moveDown && (isMovePossible(x,y,ArtificialIntelligence.AI_ACTION_GO_UP) || isMovePossible(x,y,ArtificialIntelligence.AI_ACTION_GO_DOWN)))
 					{
-						if(isMovePossible(x,y,InterfaceArtificialIntelligence.AI_ACTION_GO_DOWN)  && isSafe(matrix,x,y+1))
+						if(isMovePossible(x,y,ArtificialIntelligence.AI_ACTION_GO_DOWN)  && isSafe(matrix,x,y+1))
 						{
-							result=InterfaceArtificialIntelligence.AI_ACTION_GO_DOWN;
+							result=ArtificialIntelligence.AI_ACTION_GO_DOWN;
 						}
-						else if(isMovePossible(x,y,InterfaceArtificialIntelligence.AI_ACTION_GO_UP)  && isSafe(matrix,x,y-1))
+						else if(isMovePossible(x,y,ArtificialIntelligence.AI_ACTION_GO_UP)  && isSafe(matrix,x,y-1))
 						{
-							result=InterfaceArtificialIntelligence.AI_ACTION_GO_UP;
+							result=ArtificialIntelligence.AI_ACTION_GO_UP;
 						}
 					}
-					else if(matrix[x+1][y]==InterfaceArtificialIntelligence.AI_BLOCK_EMPTY || matrix[x+1][y]==InterfaceArtificialIntelligence.AI_BLOCK_ITEM_BOMB || matrix[x+1][y]==InterfaceArtificialIntelligence.AI_BLOCK_ITEM_FIRE)
+					else if(matrix[x+1][y]==ArtificialIntelligence.AI_BLOCK_EMPTY || matrix[x+1][y]==ArtificialIntelligence.AI_BLOCK_ITEM_BOMB || matrix[x+1][y]==ArtificialIntelligence.AI_BLOCK_ITEM_FIRE)
 							{
-								result=InterfaceArtificialIntelligence.AI_ACTION_GO_RIGHT;
+								result=ArtificialIntelligence.AI_ACTION_GO_RIGHT;
 							}
 					else//la bombe est à gauche donc aller vers la gauche est le dernier choix
 					{
-						result=InterfaceArtificialIntelligence.AI_ACTION_GO_LEFT;
+						result=ArtificialIntelligence.AI_ACTION_GO_LEFT;
 					}
 				}
 			}
@@ -498,41 +498,41 @@ public class BasmanSandalli extends InterfaceArtificialIntelligence {
 			{
 				// pour tomber en piège plus rarement, le personnage préfére d'abord de s'enfuir linéarement si la portée de la bombe est suffisement petite
 				if(x-power>0 && possibleLeftX(bombX,y,power+1) && getBombPowerAt(bombX,bombY)<3 ) 
-					result=InterfaceArtificialIntelligence.AI_ACTION_GO_LEFT;
+					result=ArtificialIntelligence.AI_ACTION_GO_LEFT;
 				else//il est impossible de s'enfuir linéarement
 				{
 					/*à chaque fois pour s'enfuir facilement on cherche d'abord les mouvements perpendiculaires à la direction du personnage 
 					 * par rapport à la bombe(haut et bas pour la bombe située à droite ici) en choissisant la direction possédant la plus grande constante*/
-					if(moveUp>=moveDown  && (isMovePossible(x,y,InterfaceArtificialIntelligence.AI_ACTION_GO_UP) || isMovePossible(x,y,InterfaceArtificialIntelligence.AI_ACTION_GO_DOWN)))
+					if(moveUp>=moveDown  && (isMovePossible(x,y,ArtificialIntelligence.AI_ACTION_GO_UP) || isMovePossible(x,y,ArtificialIntelligence.AI_ACTION_GO_DOWN)))
 					{
-						if(isMovePossible(x,y,InterfaceArtificialIntelligence.AI_ACTION_GO_UP) && isSafe(matrix,x,y-1) )
+						if(isMovePossible(x,y,ArtificialIntelligence.AI_ACTION_GO_UP) && isSafe(matrix,x,y-1) )
 						{
-							result=InterfaceArtificialIntelligence.AI_ACTION_GO_UP;
+							result=ArtificialIntelligence.AI_ACTION_GO_UP;
 						}
-						else if(isMovePossible(x,y,InterfaceArtificialIntelligence.AI_ACTION_GO_DOWN)  && isSafe(matrix,x,y+1))
+						else if(isMovePossible(x,y,ArtificialIntelligence.AI_ACTION_GO_DOWN)  && isSafe(matrix,x,y+1))
 						{
-							result=InterfaceArtificialIntelligence.AI_ACTION_GO_DOWN;
+							result=ArtificialIntelligence.AI_ACTION_GO_DOWN;
 						}
 					
 					}
-					else if(moveUp<=moveDown && (isMovePossible(x,y,InterfaceArtificialIntelligence.AI_ACTION_GO_UP) || isMovePossible(x,y,InterfaceArtificialIntelligence.AI_ACTION_GO_DOWN)))
+					else if(moveUp<=moveDown && (isMovePossible(x,y,ArtificialIntelligence.AI_ACTION_GO_UP) || isMovePossible(x,y,ArtificialIntelligence.AI_ACTION_GO_DOWN)))
 					{
-						if(isMovePossible(x,y,InterfaceArtificialIntelligence.AI_ACTION_GO_DOWN)  && isSafe(matrix,x,y+1))
+						if(isMovePossible(x,y,ArtificialIntelligence.AI_ACTION_GO_DOWN)  && isSafe(matrix,x,y+1))
 						{
-							result=InterfaceArtificialIntelligence.AI_ACTION_GO_DOWN;
+							result=ArtificialIntelligence.AI_ACTION_GO_DOWN;
 						}
-						else if(isMovePossible(x,y,InterfaceArtificialIntelligence.AI_ACTION_GO_UP)  && isSafe(matrix,x,y-1))
+						else if(isMovePossible(x,y,ArtificialIntelligence.AI_ACTION_GO_UP)  && isSafe(matrix,x,y-1))
 						{
-							result=InterfaceArtificialIntelligence.AI_ACTION_GO_UP;
+							result=ArtificialIntelligence.AI_ACTION_GO_UP;
 						}
 					}
-					else if(matrix[x-1][y]==InterfaceArtificialIntelligence.AI_BLOCK_EMPTY || matrix[x-1][y]==InterfaceArtificialIntelligence.AI_BLOCK_ITEM_BOMB || matrix[x-1][y]==InterfaceArtificialIntelligence.AI_BLOCK_ITEM_FIRE  )
+					else if(matrix[x-1][y]==ArtificialIntelligence.AI_BLOCK_EMPTY || matrix[x-1][y]==ArtificialIntelligence.AI_BLOCK_ITEM_BOMB || matrix[x-1][y]==ArtificialIntelligence.AI_BLOCK_ITEM_FIRE  )
 						{
-							result=InterfaceArtificialIntelligence.AI_ACTION_GO_LEFT;
+							result=ArtificialIntelligence.AI_ACTION_GO_LEFT;
 						}
 					else//la bombe est à droite donc aller vers la gauche est le dernier choix
 					{
-						result=InterfaceArtificialIntelligence.AI_ACTION_GO_RIGHT;	
+						result=ArtificialIntelligence.AI_ACTION_GO_RIGHT;	
 					}
 				
 				}	
@@ -542,41 +542,41 @@ public class BasmanSandalli extends InterfaceArtificialIntelligence {
 			{
 				// pour tomber en piège plus rarement, le personnage préfére d'abord de s'enfuir linéarement si la portée de la bombe est suffisement petite 
 				if(y+power<getZoneMatrixDimY() && possibleDownY(x,bombY,power+1) && getBombPowerAt(bombX,bombY)<3 )
-					result=InterfaceArtificialIntelligence.AI_ACTION_GO_DOWN;
+					result=ArtificialIntelligence.AI_ACTION_GO_DOWN;
 				else//il est impossible de s'enfuir linéarement
 				{
 					/*à chaque fois pour s'enfuir facilement on cherche d'abord les mouvements perpendiculaires à la direction du personnage 
 					 * par rapport à la bombe(gauche et droite pour la bombe située en haut ici) en choissisant la direction possédant la plus grande constante*/
-					if(moveRight>=moveLeft  && (isMovePossible(x,y,InterfaceArtificialIntelligence.AI_ACTION_GO_RIGHT) || isMovePossible(x,y,InterfaceArtificialIntelligence.AI_ACTION_GO_LEFT)))
+					if(moveRight>=moveLeft  && (isMovePossible(x,y,ArtificialIntelligence.AI_ACTION_GO_RIGHT) || isMovePossible(x,y,ArtificialIntelligence.AI_ACTION_GO_LEFT)))
 					{
-						if(isMovePossible(x,y,InterfaceArtificialIntelligence.AI_ACTION_GO_RIGHT) && isSafe(matrix,x+1,y))
+						if(isMovePossible(x,y,ArtificialIntelligence.AI_ACTION_GO_RIGHT) && isSafe(matrix,x+1,y))
 						{
-							result=InterfaceArtificialIntelligence.AI_ACTION_GO_RIGHT;
+							result=ArtificialIntelligence.AI_ACTION_GO_RIGHT;
 						}
-						else if(isMovePossible(x,y,InterfaceArtificialIntelligence.AI_ACTION_GO_LEFT)&& isSafe(matrix,x-1,y))
+						else if(isMovePossible(x,y,ArtificialIntelligence.AI_ACTION_GO_LEFT)&& isSafe(matrix,x-1,y))
 						{
-							result=InterfaceArtificialIntelligence.AI_ACTION_GO_LEFT;
+							result=ArtificialIntelligence.AI_ACTION_GO_LEFT;
 						}
 					
 					}
-					else if(moveRight<=moveLeft && (isMovePossible(x,y,InterfaceArtificialIntelligence.AI_ACTION_GO_RIGHT) || isMovePossible(x,y,InterfaceArtificialIntelligence.AI_ACTION_GO_LEFT)))
+					else if(moveRight<=moveLeft && (isMovePossible(x,y,ArtificialIntelligence.AI_ACTION_GO_RIGHT) || isMovePossible(x,y,ArtificialIntelligence.AI_ACTION_GO_LEFT)))
 					{
-						if(isMovePossible(x,y,InterfaceArtificialIntelligence.AI_ACTION_GO_LEFT)&& isSafe(matrix,x-1,y))
+						if(isMovePossible(x,y,ArtificialIntelligence.AI_ACTION_GO_LEFT)&& isSafe(matrix,x-1,y))
 						{
-							result=InterfaceArtificialIntelligence.AI_ACTION_GO_LEFT;
+							result=ArtificialIntelligence.AI_ACTION_GO_LEFT;
 						}
-						else if(isMovePossible(x,y,InterfaceArtificialIntelligence.AI_ACTION_GO_RIGHT)&& isSafe(matrix,x+1,y))
+						else if(isMovePossible(x,y,ArtificialIntelligence.AI_ACTION_GO_RIGHT)&& isSafe(matrix,x+1,y))
 						{
-							result=InterfaceArtificialIntelligence.AI_ACTION_GO_RIGHT;
+							result=ArtificialIntelligence.AI_ACTION_GO_RIGHT;
 						}
 					}
-					else if(matrix[x][y+1]==InterfaceArtificialIntelligence.AI_BLOCK_EMPTY || matrix[x][y+1]==InterfaceArtificialIntelligence.AI_BLOCK_ITEM_BOMB || matrix[x][y+1]==InterfaceArtificialIntelligence.AI_BLOCK_ITEM_FIRE)
+					else if(matrix[x][y+1]==ArtificialIntelligence.AI_BLOCK_EMPTY || matrix[x][y+1]==ArtificialIntelligence.AI_BLOCK_ITEM_BOMB || matrix[x][y+1]==ArtificialIntelligence.AI_BLOCK_ITEM_FIRE)
 							{
-								result=InterfaceArtificialIntelligence.AI_ACTION_GO_DOWN;
+								result=ArtificialIntelligence.AI_ACTION_GO_DOWN;
 							}
 					else//la bombe est en haut donc aller vers la gauche est le dernier choix
 					{
-						result=InterfaceArtificialIntelligence.AI_ACTION_GO_UP;
+						result=ArtificialIntelligence.AI_ACTION_GO_UP;
 					}
 				}	
 			}
@@ -585,41 +585,41 @@ public class BasmanSandalli extends InterfaceArtificialIntelligence {
 			{
 				// pour tomber en piège plus rarement, le personnage préfére d'abord de s'enfuir linéarement si la portée de la bombe est suffisement petite
 				if(y-power>0 && possibleUpY(x,bombY,power+1) && getBombPowerAt(bombX,bombY)<3 ) 
-					result=InterfaceArtificialIntelligence.AI_ACTION_GO_UP;
+					result=ArtificialIntelligence.AI_ACTION_GO_UP;
 				else//il est impossible de s'enfuir linéarement
 				{
 					/*à chaque fois pour s'enfuir facilement on cherche d'abord les mouvements perpendiculaires à la direction du personnage 
 					 * par rapport à la bombe(droite et gauche pour la bombe située en bas ici) en choissisant la direction possédant la plus grande constante*/
-					if(moveRight>=moveLeft  && (isMovePossible(x,y,InterfaceArtificialIntelligence.AI_ACTION_GO_RIGHT) || isMovePossible(x,y,InterfaceArtificialIntelligence.AI_ACTION_GO_LEFT)))
+					if(moveRight>=moveLeft  && (isMovePossible(x,y,ArtificialIntelligence.AI_ACTION_GO_RIGHT) || isMovePossible(x,y,ArtificialIntelligence.AI_ACTION_GO_LEFT)))
 					{
-						if(isMovePossible(x,y,InterfaceArtificialIntelligence.AI_ACTION_GO_RIGHT)&& isSafe(matrix,x+1,y) )
+						if(isMovePossible(x,y,ArtificialIntelligence.AI_ACTION_GO_RIGHT)&& isSafe(matrix,x+1,y) )
 						{
-							result=InterfaceArtificialIntelligence.AI_ACTION_GO_RIGHT;
+							result=ArtificialIntelligence.AI_ACTION_GO_RIGHT;
 						}
-						else if(isMovePossible(x,y,InterfaceArtificialIntelligence.AI_ACTION_GO_LEFT)&& isSafe(matrix,x-1,y))
+						else if(isMovePossible(x,y,ArtificialIntelligence.AI_ACTION_GO_LEFT)&& isSafe(matrix,x-1,y))
 						{
-							result=InterfaceArtificialIntelligence.AI_ACTION_GO_LEFT;
+							result=ArtificialIntelligence.AI_ACTION_GO_LEFT;
 						}
 					
 					}
-					else if(moveRight<=moveLeft && (isMovePossible(x,y,InterfaceArtificialIntelligence.AI_ACTION_GO_RIGHT) || isMovePossible(x,y,InterfaceArtificialIntelligence.AI_ACTION_GO_LEFT)))
+					else if(moveRight<=moveLeft && (isMovePossible(x,y,ArtificialIntelligence.AI_ACTION_GO_RIGHT) || isMovePossible(x,y,ArtificialIntelligence.AI_ACTION_GO_LEFT)))
 					{
-						if(isMovePossible(x,y,InterfaceArtificialIntelligence.AI_ACTION_GO_LEFT)&& isSafe(matrix,x-1,y))
+						if(isMovePossible(x,y,ArtificialIntelligence.AI_ACTION_GO_LEFT)&& isSafe(matrix,x-1,y))
 						{
-							result=InterfaceArtificialIntelligence.AI_ACTION_GO_LEFT;
+							result=ArtificialIntelligence.AI_ACTION_GO_LEFT;
 						}
-						else if(isMovePossible(x,y,InterfaceArtificialIntelligence.AI_ACTION_GO_RIGHT)&& isSafe(matrix,x+1,y))
+						else if(isMovePossible(x,y,ArtificialIntelligence.AI_ACTION_GO_RIGHT)&& isSafe(matrix,x+1,y))
 						{
-							result=InterfaceArtificialIntelligence.AI_ACTION_GO_RIGHT;
+							result=ArtificialIntelligence.AI_ACTION_GO_RIGHT;
 						}
 					}
-					else if(matrix[x][y-1]==InterfaceArtificialIntelligence.AI_BLOCK_EMPTY || matrix[x][y-1]==InterfaceArtificialIntelligence.AI_BLOCK_ITEM_BOMB || matrix[x][y-1]==InterfaceArtificialIntelligence.AI_BLOCK_ITEM_FIRE )
+					else if(matrix[x][y-1]==ArtificialIntelligence.AI_BLOCK_EMPTY || matrix[x][y-1]==ArtificialIntelligence.AI_BLOCK_ITEM_BOMB || matrix[x][y-1]==ArtificialIntelligence.AI_BLOCK_ITEM_FIRE )
 							{
-								result=InterfaceArtificialIntelligence.AI_ACTION_GO_UP;
+								result=ArtificialIntelligence.AI_ACTION_GO_UP;
 							}
 					else//la bombe est en bas donc aller vers la gauche est le dernier choix
 					{
-						result=InterfaceArtificialIntelligence.AI_ACTION_GO_DOWN;
+						result=ArtificialIntelligence.AI_ACTION_GO_DOWN;
 					}
 				}
 			}
@@ -627,74 +627,74 @@ public class BasmanSandalli extends InterfaceArtificialIntelligence {
 			{   
 				/*théoriquement dans les pluparts des cas le personnage peut tomber en piège s'il retourne par la direction parlaqulle il est venu,
 				donc on essaie dernièrement de s'enfuir par cette direction gardée dans le champs "lastMove"*/
-				if(lastMove==InterfaceArtificialIntelligence.AI_ACTION_GO_LEFT)
+				if(lastMove==ArtificialIntelligence.AI_ACTION_GO_LEFT)
 				{
 					
-					 if(!isTrap(matrix,x,y-1,bombPosition[0],bombPosition[1]) && (isMovePossible(x,y,InterfaceArtificialIntelligence.AI_ACTION_GO_UP) || anyPlayerExists(x,y-1)))
+					 if(!isTrap(matrix,x,y-1,bombPosition[0],bombPosition[1]) && (isMovePossible(x,y,ArtificialIntelligence.AI_ACTION_GO_UP) || anyPlayerExists(x,y-1)))
 					{
-						result=InterfaceArtificialIntelligence.AI_ACTION_GO_UP;
+						result=ArtificialIntelligence.AI_ACTION_GO_UP;
 					}
 					else
 					{
-						if(isMovePossible(x,y,InterfaceArtificialIntelligence.AI_ACTION_GO_DOWN) && !isTrap(matrix,x,y+1,bombPosition[0],bombPosition[1]))
-							result=InterfaceArtificialIntelligence.AI_ACTION_GO_DOWN;
-						else if(isMovePossible(x,y,InterfaceArtificialIntelligence.AI_ACTION_GO_LEFT) && !isTrap(matrix,x-1,y,bombPosition[0],bombPosition[1]))
-							result=InterfaceArtificialIntelligence.AI_ACTION_GO_LEFT;
+						if(isMovePossible(x,y,ArtificialIntelligence.AI_ACTION_GO_DOWN) && !isTrap(matrix,x,y+1,bombPosition[0],bombPosition[1]))
+							result=ArtificialIntelligence.AI_ACTION_GO_DOWN;
+						else if(isMovePossible(x,y,ArtificialIntelligence.AI_ACTION_GO_LEFT) && !isTrap(matrix,x-1,y,bombPosition[0],bombPosition[1]))
+							result=ArtificialIntelligence.AI_ACTION_GO_LEFT;
 						else
-							result=InterfaceArtificialIntelligence.AI_ACTION_GO_RIGHT;
+							result=ArtificialIntelligence.AI_ACTION_GO_RIGHT;
 					}
 				}
 					
-				else if(lastMove==InterfaceArtificialIntelligence.AI_ACTION_GO_RIGHT)
+				else if(lastMove==ArtificialIntelligence.AI_ACTION_GO_RIGHT)
 				{
 					
-					 if(!isTrap(matrix,x,y-1,bombPosition[0],bombPosition[1]) && (isMovePossible(x,y,InterfaceArtificialIntelligence.AI_ACTION_GO_UP) || anyPlayerExists(x,y-1)))
+					 if(!isTrap(matrix,x,y-1,bombPosition[0],bombPosition[1]) && (isMovePossible(x,y,ArtificialIntelligence.AI_ACTION_GO_UP) || anyPlayerExists(x,y-1)))
 					{
-						result=InterfaceArtificialIntelligence.AI_ACTION_GO_UP;
+						result=ArtificialIntelligence.AI_ACTION_GO_UP;
 					}
 					else
 					{
-						if(isMovePossible(x,y,InterfaceArtificialIntelligence.AI_ACTION_GO_DOWN) && !isTrap(matrix,x,y+1,bombPosition[0],bombPosition[1]))
-							result=InterfaceArtificialIntelligence.AI_ACTION_GO_DOWN;
-						else if(isMovePossible(x,y,InterfaceArtificialIntelligence.AI_ACTION_GO_RIGHT) && !isTrap(matrix,x+1,y,bombPosition[0],bombPosition[1]))
-							result=InterfaceArtificialIntelligence.AI_ACTION_GO_RIGHT;
+						if(isMovePossible(x,y,ArtificialIntelligence.AI_ACTION_GO_DOWN) && !isTrap(matrix,x,y+1,bombPosition[0],bombPosition[1]))
+							result=ArtificialIntelligence.AI_ACTION_GO_DOWN;
+						else if(isMovePossible(x,y,ArtificialIntelligence.AI_ACTION_GO_RIGHT) && !isTrap(matrix,x+1,y,bombPosition[0],bombPosition[1]))
+							result=ArtificialIntelligence.AI_ACTION_GO_RIGHT;
 						else
-							result=InterfaceArtificialIntelligence.AI_ACTION_GO_LEFT;
+							result=ArtificialIntelligence.AI_ACTION_GO_LEFT;
 					}
 					
 				}
-				else if(lastMove==InterfaceArtificialIntelligence.AI_ACTION_GO_UP)
+				else if(lastMove==ArtificialIntelligence.AI_ACTION_GO_UP)
 				{
 					
-					 if(!isTrap(matrix,x+1,y,bombPosition[0],bombPosition[1]) && (isMovePossible(x,y,InterfaceArtificialIntelligence.AI_ACTION_GO_RIGHT) || anyPlayerExists(x+1,y) ))
+					 if(!isTrap(matrix,x+1,y,bombPosition[0],bombPosition[1]) && (isMovePossible(x,y,ArtificialIntelligence.AI_ACTION_GO_RIGHT) || anyPlayerExists(x+1,y) ))
 					{
-						result=InterfaceArtificialIntelligence.AI_ACTION_GO_RIGHT;
+						result=ArtificialIntelligence.AI_ACTION_GO_RIGHT;
 					}
 					else
 					{
-						if(isMovePossible(x,y,InterfaceArtificialIntelligence.AI_ACTION_GO_LEFT) && !isTrap(matrix,x-1,y,bombPosition[0],bombPosition[1]))
-							result=InterfaceArtificialIntelligence.AI_ACTION_GO_LEFT;
-						else if(isMovePossible(x,y,InterfaceArtificialIntelligence.AI_ACTION_GO_UP) && !isTrap(matrix,x,y-1,bombPosition[0],bombPosition[1]))
-							result=InterfaceArtificialIntelligence.AI_ACTION_GO_UP;
+						if(isMovePossible(x,y,ArtificialIntelligence.AI_ACTION_GO_LEFT) && !isTrap(matrix,x-1,y,bombPosition[0],bombPosition[1]))
+							result=ArtificialIntelligence.AI_ACTION_GO_LEFT;
+						else if(isMovePossible(x,y,ArtificialIntelligence.AI_ACTION_GO_UP) && !isTrap(matrix,x,y-1,bombPosition[0],bombPosition[1]))
+							result=ArtificialIntelligence.AI_ACTION_GO_UP;
 						else
-							result=InterfaceArtificialIntelligence.AI_ACTION_GO_DOWN;
+							result=ArtificialIntelligence.AI_ACTION_GO_DOWN;
 					}
 					}
-				else if(lastMove==InterfaceArtificialIntelligence.AI_ACTION_GO_DOWN)
+				else if(lastMove==ArtificialIntelligence.AI_ACTION_GO_DOWN)
 				{
 					
-					 if(!isTrap(matrix,x+1,y,bombPosition[0],bombPosition[1]) && (isMovePossible(x,y,InterfaceArtificialIntelligence.AI_ACTION_GO_RIGHT)  || anyPlayerExists(x+1,y)))
+					 if(!isTrap(matrix,x+1,y,bombPosition[0],bombPosition[1]) && (isMovePossible(x,y,ArtificialIntelligence.AI_ACTION_GO_RIGHT)  || anyPlayerExists(x+1,y)))
 					{
-						result=InterfaceArtificialIntelligence.AI_ACTION_GO_RIGHT;
+						result=ArtificialIntelligence.AI_ACTION_GO_RIGHT;
 					}
 					else
 					{
-						if(isMovePossible(x,y,InterfaceArtificialIntelligence.AI_ACTION_GO_LEFT) && !isTrap(matrix,x-1,y,bombPosition[0],bombPosition[1]))
-							result=InterfaceArtificialIntelligence.AI_ACTION_GO_LEFT;
-						else if(isMovePossible(x,y,InterfaceArtificialIntelligence.AI_ACTION_GO_DOWN) && !isTrap(matrix,x,y+1,bombPosition[0],bombPosition[1]))
-							result=InterfaceArtificialIntelligence.AI_ACTION_GO_DOWN;
+						if(isMovePossible(x,y,ArtificialIntelligence.AI_ACTION_GO_LEFT) && !isTrap(matrix,x-1,y,bombPosition[0],bombPosition[1]))
+							result=ArtificialIntelligence.AI_ACTION_GO_LEFT;
+						else if(isMovePossible(x,y,ArtificialIntelligence.AI_ACTION_GO_DOWN) && !isTrap(matrix,x,y+1,bombPosition[0],bombPosition[1]))
+							result=ArtificialIntelligence.AI_ACTION_GO_DOWN;
 						else
-							result=InterfaceArtificialIntelligence.AI_ACTION_GO_UP;
+							result=ArtificialIntelligence.AI_ACTION_GO_UP;
 					}
 				}
 				
@@ -710,49 +710,49 @@ public class BasmanSandalli extends InterfaceArtificialIntelligence {
 				//si compteur de répétition a une grande valeur donc le personnage s'est attaché vraiment à une bombe et on doit le sauver
 				if(repetitionCounter>21)
 				{
-					if(result==InterfaceArtificialIntelligence.AI_ACTION_GO_DOWN)
+					if(result==ArtificialIntelligence.AI_ACTION_GO_DOWN)
 					{
 						if(!isTrap(matrix,x,y-1,x,y))
-							result=InterfaceArtificialIntelligence.AI_ACTION_GO_UP;
-						else if(isSafe(matrix,x+1,y) && isMovePossible(x,y,InterfaceArtificialIntelligence.AI_ACTION_GO_RIGHT) )
-							result=InterfaceArtificialIntelligence.AI_ACTION_GO_RIGHT;
-						else if(isMovePossible(x,y,InterfaceArtificialIntelligence.AI_ACTION_GO_LEFT))
-							result=InterfaceArtificialIntelligence.AI_ACTION_GO_LEFT;
+							result=ArtificialIntelligence.AI_ACTION_GO_UP;
+						else if(isSafe(matrix,x+1,y) && isMovePossible(x,y,ArtificialIntelligence.AI_ACTION_GO_RIGHT) )
+							result=ArtificialIntelligence.AI_ACTION_GO_RIGHT;
+						else if(isMovePossible(x,y,ArtificialIntelligence.AI_ACTION_GO_LEFT))
+							result=ArtificialIntelligence.AI_ACTION_GO_LEFT;
 						else
-							result=InterfaceArtificialIntelligence.AI_ACTION_GO_UP;
+							result=ArtificialIntelligence.AI_ACTION_GO_UP;
 					}	
-					else if(result==InterfaceArtificialIntelligence.AI_ACTION_GO_UP)
+					else if(result==ArtificialIntelligence.AI_ACTION_GO_UP)
 					{
 						if(!isTrap(matrix,x,y+1,x,y))
-							result=InterfaceArtificialIntelligence.AI_ACTION_GO_DOWN;
-						else if(isSafe(matrix,x+1,y) && isMovePossible(x,y,InterfaceArtificialIntelligence.AI_ACTION_GO_RIGHT) )
-							result=InterfaceArtificialIntelligence.AI_ACTION_GO_RIGHT;
-						else if(isMovePossible(x,y,InterfaceArtificialIntelligence.AI_ACTION_GO_LEFT))
-							result=InterfaceArtificialIntelligence.AI_ACTION_GO_LEFT;
+							result=ArtificialIntelligence.AI_ACTION_GO_DOWN;
+						else if(isSafe(matrix,x+1,y) && isMovePossible(x,y,ArtificialIntelligence.AI_ACTION_GO_RIGHT) )
+							result=ArtificialIntelligence.AI_ACTION_GO_RIGHT;
+						else if(isMovePossible(x,y,ArtificialIntelligence.AI_ACTION_GO_LEFT))
+							result=ArtificialIntelligence.AI_ACTION_GO_LEFT;
 						else
-							result=InterfaceArtificialIntelligence.AI_ACTION_GO_DOWN;
+							result=ArtificialIntelligence.AI_ACTION_GO_DOWN;
 					}
-					else if(result==InterfaceArtificialIntelligence.AI_ACTION_GO_RIGHT)
+					else if(result==ArtificialIntelligence.AI_ACTION_GO_RIGHT)
 					{
 						if(!isTrap(matrix,x-1,y,x,y))
-							result=InterfaceArtificialIntelligence.AI_ACTION_GO_LEFT;
-						else if(isSafe(matrix,x,y+1) && isMovePossible(x,y,InterfaceArtificialIntelligence.AI_ACTION_GO_DOWN))
-							result=InterfaceArtificialIntelligence.AI_ACTION_GO_DOWN;
-						else if ( isMovePossible(x,y,InterfaceArtificialIntelligence.AI_ACTION_GO_UP))
-							result=InterfaceArtificialIntelligence.AI_ACTION_GO_UP;
+							result=ArtificialIntelligence.AI_ACTION_GO_LEFT;
+						else if(isSafe(matrix,x,y+1) && isMovePossible(x,y,ArtificialIntelligence.AI_ACTION_GO_DOWN))
+							result=ArtificialIntelligence.AI_ACTION_GO_DOWN;
+						else if ( isMovePossible(x,y,ArtificialIntelligence.AI_ACTION_GO_UP))
+							result=ArtificialIntelligence.AI_ACTION_GO_UP;
 						else
-							result=InterfaceArtificialIntelligence.AI_ACTION_GO_LEFT;
+							result=ArtificialIntelligence.AI_ACTION_GO_LEFT;
 					}
-					else if(result==InterfaceArtificialIntelligence.AI_ACTION_GO_LEFT)
+					else if(result==ArtificialIntelligence.AI_ACTION_GO_LEFT)
 					{
 						if(!isTrap(matrix,x+1,y,x,y))
-							result=InterfaceArtificialIntelligence.AI_ACTION_GO_RIGHT;
-						else if(isSafe(matrix,x,y+1)&& isMovePossible(x,y,InterfaceArtificialIntelligence.AI_ACTION_GO_DOWN) )
-							result=InterfaceArtificialIntelligence.AI_ACTION_GO_DOWN;
-						else if(isMovePossible(x,y,InterfaceArtificialIntelligence.AI_ACTION_GO_UP))
-							result=InterfaceArtificialIntelligence.AI_ACTION_GO_UP;
+							result=ArtificialIntelligence.AI_ACTION_GO_RIGHT;
+						else if(isSafe(matrix,x,y+1)&& isMovePossible(x,y,ArtificialIntelligence.AI_ACTION_GO_DOWN) )
+							result=ArtificialIntelligence.AI_ACTION_GO_DOWN;
+						else if(isMovePossible(x,y,ArtificialIntelligence.AI_ACTION_GO_UP))
+							result=ArtificialIntelligence.AI_ACTION_GO_UP;
 						else
-							result=InterfaceArtificialIntelligence.AI_ACTION_GO_RIGHT;
+							result=ArtificialIntelligence.AI_ACTION_GO_RIGHT;
 					}
 				}
 			}
@@ -760,9 +760,9 @@ public class BasmanSandalli extends InterfaceArtificialIntelligence {
 		}
 			
 		//si le mouvement choisi changera la direction du personnage et la position changait
-		if(result != InterfaceArtificialIntelligence.AI_ACTION_PUT_BOMB  && (lastPosition[0]!=x || lastPosition[1]!=y  ))
+		if(result != ArtificialIntelligence.AI_ACTION_PUT_BOMB  && (lastPosition[0]!=x || lastPosition[1]!=y  ))
 		{
-			if( result != InterfaceArtificialIntelligence.AI_ACTION_DO_NOTHING )
+			if( result != ArtificialIntelligence.AI_ACTION_DO_NOTHING )
 			{
 				lastMove=result;// enregistrement du dernier mouvement
 				repetitionCounter=1;// on remet le compteur en 1
@@ -797,7 +797,7 @@ public class BasmanSandalli extends InterfaceArtificialIntelligence {
 		if(x-bombX>0){//si la bombe est à gauche
 			int i = 1;
 			//s'il est impossible de faire un mouvement vers la droite, vers le haut ou vers le bas c'est une piège
-			if(!isMovePossible(x,y,InterfaceArtificialIntelligence.AI_ACTION_GO_RIGHT) && !isMovePossible(x,y,InterfaceArtificialIntelligence.AI_ACTION_GO_UP) && !isMovePossible(x,y,InterfaceArtificialIntelligence.AI_ACTION_GO_DOWN))
+			if(!isMovePossible(x,y,ArtificialIntelligence.AI_ACTION_GO_RIGHT) && !isMovePossible(x,y,ArtificialIntelligence.AI_ACTION_GO_UP) && !isMovePossible(x,y,ArtificialIntelligence.AI_ACTION_GO_DOWN))
 			{
 				result=true;
 			}
@@ -810,7 +810,7 @@ public class BasmanSandalli extends InterfaceArtificialIntelligence {
 						if(possibleRightX(x,y,i))//s'il est possible d'aller vers la droite pour la distance i
 						{
 							//s'il est impossible de trouver une place à se cacher en se déplacant pour une distance i
-							if(!isMovePossible(x+i,y,InterfaceArtificialIntelligence.AI_ACTION_GO_UP) && !isMovePossible(x+i,y,InterfaceArtificialIntelligence.AI_ACTION_GO_DOWN) )
+							if(!isMovePossible(x+i,y,ArtificialIntelligence.AI_ACTION_GO_UP) && !isMovePossible(x+i,y,ArtificialIntelligence.AI_ACTION_GO_DOWN) )
 							{
 								result=true;
 							}
@@ -835,7 +835,7 @@ public class BasmanSandalli extends InterfaceArtificialIntelligence {
 		{
 			int i = 1;
 			//s'il est impossible de faire un mouvement vers la gauche, vers le haut ou vers le bas c'est une piège
-			if(!isMovePossible(x,y,InterfaceArtificialIntelligence.AI_ACTION_GO_LEFT) && !isMovePossible(x,y,InterfaceArtificialIntelligence.AI_ACTION_GO_UP) && !isMovePossible(x,y,InterfaceArtificialIntelligence.AI_ACTION_GO_DOWN))
+			if(!isMovePossible(x,y,ArtificialIntelligence.AI_ACTION_GO_LEFT) && !isMovePossible(x,y,ArtificialIntelligence.AI_ACTION_GO_UP) && !isMovePossible(x,y,ArtificialIntelligence.AI_ACTION_GO_DOWN))
 			{
 				result=true;
 			}
@@ -847,7 +847,7 @@ public class BasmanSandalli extends InterfaceArtificialIntelligence {
 					{
 						if(possibleLeftX(x,y,i))
 						{
-							if(!isMovePossible(x-i,y,InterfaceArtificialIntelligence.AI_ACTION_GO_UP) && !isMovePossible(x-i,y,InterfaceArtificialIntelligence.AI_ACTION_GO_DOWN) )
+							if(!isMovePossible(x-i,y,ArtificialIntelligence.AI_ACTION_GO_UP) && !isMovePossible(x-i,y,ArtificialIntelligence.AI_ACTION_GO_DOWN) )
 							{
 								result=true;
 							}
@@ -872,7 +872,7 @@ public class BasmanSandalli extends InterfaceArtificialIntelligence {
 		if(y-bombY>0){//si la bombe est en haut
 			int i = 1;
 			//s'il est impossible de faire un mouvement vers la droite, vers la gauche ou vers le bas c'est une piège
-			if(!isMovePossible(x,y,InterfaceArtificialIntelligence.AI_ACTION_GO_LEFT) && !isMovePossible(x,y,InterfaceArtificialIntelligence.AI_ACTION_GO_RIGHT) && !isMovePossible(x,y,InterfaceArtificialIntelligence.AI_ACTION_GO_DOWN))
+			if(!isMovePossible(x,y,ArtificialIntelligence.AI_ACTION_GO_LEFT) && !isMovePossible(x,y,ArtificialIntelligence.AI_ACTION_GO_RIGHT) && !isMovePossible(x,y,ArtificialIntelligence.AI_ACTION_GO_DOWN))
 			{
 				result=true;
 			}
@@ -884,7 +884,7 @@ public class BasmanSandalli extends InterfaceArtificialIntelligence {
 					{
 						if(possibleDownY(x,y,i))
 						{
-							if(!isMovePossible(x,y+i,InterfaceArtificialIntelligence.AI_ACTION_GO_LEFT) && !isMovePossible(x,y+i,InterfaceArtificialIntelligence.AI_ACTION_GO_RIGHT) )
+							if(!isMovePossible(x,y+i,ArtificialIntelligence.AI_ACTION_GO_LEFT) && !isMovePossible(x,y+i,ArtificialIntelligence.AI_ACTION_GO_RIGHT) )
 							{
 								result=true;
 							}
@@ -909,7 +909,7 @@ public class BasmanSandalli extends InterfaceArtificialIntelligence {
 		if(y-bombY<0){//si la bombe est en bas
 			int i = 1;
 			//s'il est impossible de faire un mouvement vers la droite, vers le haut ou vers la gauche c'est une piège
-			if(!isMovePossible(x,y,InterfaceArtificialIntelligence.AI_ACTION_GO_LEFT) && !isMovePossible(x,y,InterfaceArtificialIntelligence.AI_ACTION_GO_RIGHT) && !isMovePossible(x,y,InterfaceArtificialIntelligence.AI_ACTION_GO_UP))
+			if(!isMovePossible(x,y,ArtificialIntelligence.AI_ACTION_GO_LEFT) && !isMovePossible(x,y,ArtificialIntelligence.AI_ACTION_GO_RIGHT) && !isMovePossible(x,y,ArtificialIntelligence.AI_ACTION_GO_UP))
 			{
 				result=true;
 			}
@@ -921,7 +921,7 @@ public class BasmanSandalli extends InterfaceArtificialIntelligence {
 					{
 						if(possibleUpY(x,y,i))
 						{
-							if(!isMovePossible(x,y-i,InterfaceArtificialIntelligence.AI_ACTION_GO_LEFT) && !isMovePossible(x,y-i,InterfaceArtificialIntelligence.AI_ACTION_GO_RIGHT) )
+							if(!isMovePossible(x,y-i,ArtificialIntelligence.AI_ACTION_GO_LEFT) && !isMovePossible(x,y-i,ArtificialIntelligence.AI_ACTION_GO_RIGHT) )
 							{
 								result=true;
 							}
@@ -978,7 +978,7 @@ public class BasmanSandalli extends InterfaceArtificialIntelligence {
 		{
 			for(int j=0;j<getZoneMatrixDimY();j++)
 			{
-				if(matrix[i][j]==InterfaceArtificialIntelligence.AI_BLOCK_BOMB);
+				if(matrix[i][j]==ArtificialIntelligence.AI_BLOCK_BOMB);
 					{
 						int[] bombCoordonnees=new int[2];
 						bombCoordonnees[0]=i;
@@ -1000,7 +1000,7 @@ public class BasmanSandalli extends InterfaceArtificialIntelligence {
 					{
 						for(int l=1;l<power+1;l++)//On part par notre côté droite pour une distance relative à la portée de la bombe
 						{
-							if(matrix[x+l][y]==InterfaceArtificialIntelligence.AI_BLOCK_WALL_HARD || matrix[x+l][y]==InterfaceArtificialIntelligence.AI_BLOCK_WALL_SOFT)// s’il existe une bloc entre la bombe et le personnage il est en sécurité
+							if(matrix[x+l][y]==ArtificialIntelligence.AI_BLOCK_WALL_HARD || matrix[x+l][y]==ArtificialIntelligence.AI_BLOCK_WALL_SOFT)// s’il existe une bloc entre la bombe et le personnage il est en sécurité
 							{
 								result =true;// personnage est en sécurité
 								break;//pas besoin de continuer à contrôler car il existe un bloc entre la bombe et le personnage
@@ -1016,7 +1016,7 @@ public class BasmanSandalli extends InterfaceArtificialIntelligence {
 					{
 						for(int l=1;l<power+1;l++)
 						{
-							if(matrix[x-l][y]==InterfaceArtificialIntelligence.AI_BLOCK_WALL_HARD || matrix[x-l][y]==InterfaceArtificialIntelligence.AI_BLOCK_WALL_SOFT)
+							if(matrix[x-l][y]==ArtificialIntelligence.AI_BLOCK_WALL_HARD || matrix[x-l][y]==ArtificialIntelligence.AI_BLOCK_WALL_SOFT)
 							{
 									result =true;
 									break;
@@ -1033,7 +1033,7 @@ public class BasmanSandalli extends InterfaceArtificialIntelligence {
 						
 						for(int l=1;l<power+1;l++)
 						{
-							if(matrix[x][y-l]==InterfaceArtificialIntelligence.AI_BLOCK_WALL_HARD || matrix[x][y-l]==InterfaceArtificialIntelligence.AI_BLOCK_WALL_SOFT)
+							if(matrix[x][y-l]==ArtificialIntelligence.AI_BLOCK_WALL_HARD || matrix[x][y-l]==ArtificialIntelligence.AI_BLOCK_WALL_SOFT)
 							{
 								result =true;
 								break;
@@ -1049,7 +1049,7 @@ public class BasmanSandalli extends InterfaceArtificialIntelligence {
 					{
 						for(int l=1;l<power+1;l++)
 						{
-							if(matrix[x][y+1]==InterfaceArtificialIntelligence.AI_BLOCK_WALL_HARD || matrix[x][y+1]==InterfaceArtificialIntelligence.AI_BLOCK_WALL_SOFT)
+							if(matrix[x][y+1]==ArtificialIntelligence.AI_BLOCK_WALL_HARD || matrix[x][y+1]==ArtificialIntelligence.AI_BLOCK_WALL_SOFT)
 							{
 								result =true;
 								break;
@@ -1072,7 +1072,7 @@ public class BasmanSandalli extends InterfaceArtificialIntelligence {
 				i++;
 		}
 		
-		if(matrix[x][y]==InterfaceArtificialIntelligence.AI_BLOCK_BOMB)//si la bombe est sur le personnage il est bien en danger
+		if(matrix[x][y]==ArtificialIntelligence.AI_BLOCK_BOMB)//si la bombe est sur le personnage il est bien en danger
 		{
 			bombPosition[0]=x;
 			bombPosition[1]=y;
@@ -1112,16 +1112,16 @@ public class BasmanSandalli extends InterfaceArtificialIntelligence {
 	{	boolean result;
 		// calcum
 		switch(move)
-		{	case InterfaceArtificialIntelligence.AI_ACTION_GO_UP:
+		{	case ArtificialIntelligence.AI_ACTION_GO_UP:
 				result = y>0 && !isObstacle(x,y-1);
 				break;
-			case InterfaceArtificialIntelligence.AI_ACTION_GO_DOWN:
+			case ArtificialIntelligence.AI_ACTION_GO_DOWN:
 				result = y<(getZoneMatrixDimY()-1) && !isObstacle(x,y+1);
 				break;
-			case InterfaceArtificialIntelligence.AI_ACTION_GO_LEFT:
+			case ArtificialIntelligence.AI_ACTION_GO_LEFT:
 				result = x>0 && !isObstacle(x-1,y);
 				break;
-			case InterfaceArtificialIntelligence.AI_ACTION_GO_RIGHT:
+			case ArtificialIntelligence.AI_ACTION_GO_RIGHT:
 				result = x<(getZoneMatrixDimX()-1) && !isObstacle(x+1,y);
 				break;
 			default:
@@ -1141,14 +1141,14 @@ public class BasmanSandalli extends InterfaceArtificialIntelligence {
 	{	int[][] matrix = getZoneMatrix();
 		boolean result = false;
 		// bombes
-		result = result || matrix[x][y]==InterfaceArtificialIntelligence.AI_BLOCK_BOMB;
+		result = result || matrix[x][y]==ArtificialIntelligence.AI_BLOCK_BOMB;
 		// feu
-		result = result || matrix[x][y]==InterfaceArtificialIntelligence.AI_BLOCK_FIRE;
+		result = result || matrix[x][y]==ArtificialIntelligence.AI_BLOCK_FIRE;
 		// murs
-		result = result || matrix[x][y]==InterfaceArtificialIntelligence.AI_BLOCK_WALL_HARD;
-		result = result || matrix[x][y]==InterfaceArtificialIntelligence.AI_BLOCK_WALL_SOFT;
+		result = result || matrix[x][y]==ArtificialIntelligence.AI_BLOCK_WALL_HARD;
+		result = result || matrix[x][y]==ArtificialIntelligence.AI_BLOCK_WALL_SOFT;
 		// on ne sait pas quoi
-		result = result || matrix[x][y]==InterfaceArtificialIntelligence.AI_BLOCK_UNKNOWN;
+		result = result || matrix[x][y]==ArtificialIntelligence.AI_BLOCK_UNKNOWN;
 		// shrink
 		result = result || (x==getNextShrinkPosition()[0] && y==getNextShrinkPosition()[1]);
 		return result;

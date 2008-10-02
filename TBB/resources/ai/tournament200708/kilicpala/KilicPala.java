@@ -3,12 +3,12 @@ package tournament200708.kilicpala;
 
 import java.util.Vector;
 
-import tournament200708.InterfaceArtificialIntelligence;
+import tournament200708.ArtificialIntelligence;
 
 
 
 
-public class KilicPala extends InterfaceArtificialIntelligence
+public class KilicPala extends ArtificialIntelligence
 {	private static final long serialVersionUID = 1L;
 	/** le dernier déplacement effectué */
 	private Integer lastMove;
@@ -18,12 +18,12 @@ public class KilicPala extends InterfaceArtificialIntelligence
 	 */
 	public KilicPala()
 	{	super("KilicPala");	 
-	    lastMove = InterfaceArtificialIntelligence.AI_ACTION_DO_NOTHING;
+	    lastMove = ArtificialIntelligence.AI_ACTION_DO_NOTHING;
 	  
 	}
 	
 	public synchronized Integer call() throws Exception
-	{	Integer result = InterfaceArtificialIntelligence.AI_ACTION_DO_NOTHING;
+	{	Integer result = ArtificialIntelligence.AI_ACTION_DO_NOTHING;
 		int matrix[][]=getZoneMatrix();
 		int x = getOwnPosition()[0];
 		int y = getOwnPosition()[1];
@@ -370,14 +370,14 @@ public class KilicPala extends InterfaceArtificialIntelligence
 		boolean result = false;
 			
 		// bombes
-		result = result || matrix[x][y]==InterfaceArtificialIntelligence.AI_BLOCK_BOMB;
+		result = result || matrix[x][y]==ArtificialIntelligence.AI_BLOCK_BOMB;
 		// feu
-		result = result || matrix[x][y]==InterfaceArtificialIntelligence.AI_BLOCK_FIRE;
+		result = result || matrix[x][y]==ArtificialIntelligence.AI_BLOCK_FIRE;
 		// murs
-		result = result || matrix[x][y]==InterfaceArtificialIntelligence.AI_BLOCK_WALL_HARD;
-		result = result || matrix[x][y]==InterfaceArtificialIntelligence.AI_BLOCK_WALL_SOFT;
+		result = result || matrix[x][y]==ArtificialIntelligence.AI_BLOCK_WALL_HARD;
+		result = result || matrix[x][y]==ArtificialIntelligence.AI_BLOCK_WALL_SOFT;
 		// on ne sait pas quoi
-		result = result || matrix[x][y]==InterfaceArtificialIntelligence.AI_BLOCK_UNKNOWN;
+		result = result || matrix[x][y]==ArtificialIntelligence.AI_BLOCK_UNKNOWN;
 		// shrink
 		if(getTimeBeforeShrink()<=0)
 		result = result || (x==getNextShrinkPosition()[0] && y==getNextShrinkPosition()[1]);
@@ -396,16 +396,16 @@ public class KilicPala extends InterfaceArtificialIntelligence
 	{	boolean result;
 		// calcum
 		switch(move)
-		{	case InterfaceArtificialIntelligence.AI_ACTION_GO_UP:
+		{	case ArtificialIntelligence.AI_ACTION_GO_UP:
 				result = y>0 && !isObstacle(x,y-1);
 				break;
-			case InterfaceArtificialIntelligence.AI_ACTION_GO_DOWN:
+			case ArtificialIntelligence.AI_ACTION_GO_DOWN:
 				result = y<(getZoneMatrixDimY()-1) && !isObstacle(x,y+1);
 				break;
-			case InterfaceArtificialIntelligence.AI_ACTION_GO_LEFT:
+			case ArtificialIntelligence.AI_ACTION_GO_LEFT:
 				result = x>0 && !isObstacle(x-1,y);
 				break;
-			case InterfaceArtificialIntelligence.AI_ACTION_GO_RIGHT:
+			case ArtificialIntelligence.AI_ACTION_GO_RIGHT:
 				result = x<(getZoneMatrixDimX()-1) && !isObstacle(x+1,y);
 				break;
 			default:

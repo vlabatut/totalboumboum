@@ -74,7 +74,7 @@ public class Profile
 	public void setAiName(String aiName)
 	{	this.aiName = aiName;
 	}
-	public String getAiPackame()
+	public String getAiPackname()
 	{	return aiPackname;
 	}
 	public void setAiPackname(String aiPackname)
