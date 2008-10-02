@@ -2,6 +2,7 @@ package fr.free.totalboumboum.engine.player;
 
 import java.io.File;
 import java.io.IOException;
+import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 
 import javax.xml.parsers.ParserConfigurationException;
@@ -10,7 +11,8 @@ import org.xml.sax.SAXException;
 
 import tournament200708.Adapter;
 
-import fr.free.totalboumboum.ai.InterfaceAI;
+import fr.free.totalboumboum.ai.AiLoader;
+import fr.free.totalboumboum.ai.InterfaceAi;
 import fr.free.totalboumboum.data.configuration.Configuration;
 import fr.free.totalboumboum.data.profile.ControlSettings;
 import fr.free.totalboumboum.data.profile.PredefinedColor;
@@ -41,13 +43,13 @@ public class Player
 	/** round */
 	private Level level;
 	/** artificial intelligence */
-	private InterfaceAI ai = null;
+	private InterfaceAi ai = null;
 	/** control */
 	private PlayerControl spriteControl;
 	/** current color */
 	private PredefinedColor color;
 	
-	public Player(Profile profile, Level level, ArrayList<AbstractAbility> ablts, PermissionPack permissions, TrajectoryPack trajectories) throws IllegalArgumentException, SecurityException, ParserConfigurationException, SAXException, IOException, IllegalAccessException, NoSuchFieldException, ClassNotFoundException
+	public Player(Profile profile, Level level, ArrayList<AbstractAbility> ablts, PermissionPack permissions, TrajectoryPack trajectories) throws IllegalArgumentException, SecurityException, ParserConfigurationException, SAXException, IOException, IllegalAccessException, NoSuchFieldException, ClassNotFoundException, InstantiationException, InvocationTargetException, NoSuchMethodException
 	{	this.level = level;
 		configuration = level.getConfiguration();
 		this.profile = profile;
@@ -62,9 +64,8 @@ public class Player
 		spriteControl = new PlayerControl(this);
 		// artificial intelligence
     	if(this.profile.getAiName() != null)
-    	{	ai = new Adapter();
-    		ai.setClass(this.profile.getAi());
-			ai.setPlayer(this);
+    	{	ai = AiLoader.loadAi(profile.getAiName(), profile.getAiPackname());
+    		ai.setPlayer(this);
     	}
 	}
 
@@ -96,7 +97,7 @@ public class Player
 	{	return spriteControl;
 	}
 
-	public InterfaceAI getArtificialIntelligence()
+	public InterfaceAi getArtificialIntelligence()
 	{	return ai;
 	}
 

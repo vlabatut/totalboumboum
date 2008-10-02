@@ -12,12 +12,12 @@ package tournament200708.okanyuksel;
 
 import java.util.LinkedList;
 
-import tournament200708.InterfaceArtificialIntelligence;
+import tournament200708.ArtificialIntelligence;
 
 
 
 
-public class OkanYuksel extends InterfaceArtificialIntelligence
+public class OkanYuksel extends ArtificialIntelligence
 {
 	private static final long serialVersionUID = 1L;
 

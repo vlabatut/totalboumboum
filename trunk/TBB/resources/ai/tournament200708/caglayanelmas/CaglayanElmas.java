@@ -3,7 +3,7 @@ package tournament200708.caglayanelmas;
 import java.util.Iterator;
 import java.util.Vector;
 
-import tournament200708.InterfaceArtificialIntelligence;
+import tournament200708.ArtificialIntelligence;
 
 
 
@@ -12,7 +12,7 @@ import tournament200708.InterfaceArtificialIntelligence;
  * Equipe : CAGLAYAN Ozan, ELMAS Can
  */
 
-public class CaglayanElmas extends InterfaceArtificialIntelligence
+public class CaglayanElmas extends ArtificialIntelligence
 {
 	private static final long serialVersionUID = 1L;
 	
@@ -749,16 +749,16 @@ public class CaglayanElmas extends InterfaceArtificialIntelligence
 		boolean result;
 		switch(move)
 		{	
-			case InterfaceArtificialIntelligence.AI_ACTION_GO_UP:
+			case ArtificialIntelligence.AI_ACTION_GO_UP:
 				result = y > 0 && !isObstacle(x, y-1);
 				break;
-			case InterfaceArtificialIntelligence.AI_ACTION_GO_DOWN:
+			case ArtificialIntelligence.AI_ACTION_GO_DOWN:
 				result = y < (getZoneMatrixDimY()-1) && !isObstacle(x, y+1);
 				break;
-			case InterfaceArtificialIntelligence.AI_ACTION_GO_LEFT:
+			case ArtificialIntelligence.AI_ACTION_GO_LEFT:
 				result = x > 0 && !isObstacle(x-1, y);
 				break;
-			case InterfaceArtificialIntelligence.AI_ACTION_GO_RIGHT:
+			case ArtificialIntelligence.AI_ACTION_GO_RIGHT:
 				result = x < (getZoneMatrixDimX()-1) && !isObstacle(x+1, y);
 				break;
 			default:

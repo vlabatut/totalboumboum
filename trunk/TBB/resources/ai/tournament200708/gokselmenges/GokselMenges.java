@@ -3,7 +3,7 @@ package tournament200708.gokselmenges;
 import java.awt.Point;
 import java.util.Vector;
 
-import tournament200708.InterfaceArtificialIntelligence;
+import tournament200708.ArtificialIntelligence;
 
 
 
@@ -12,7 +12,7 @@ import tournament200708.InterfaceArtificialIntelligence;
 
 
 
-public class GokselMenges  extends InterfaceArtificialIntelligence
+public class GokselMenges  extends ArtificialIntelligence
 {
 
 	private static final long serialVersionUID = 7954120902478357292L;

@@ -4,7 +4,7 @@ import java.util.Iterator;
 import java.util.PriorityQueue;
 import java.util.Vector;
 
-import tournament200708.InterfaceArtificialIntelligence;
+import tournament200708.ArtificialIntelligence;
 import tournament200708.caglayanelmas.SearchLink;
 import tournament200708.caglayanelmas.SearchNode;
 
@@ -64,7 +64,7 @@ public class PathFinder
 	{	
 		Vector<Integer> result = new Vector<Integer>();
 		
-		for(int move = InterfaceArtificialIntelligence.AI_ACTION_GO_UP; move <= InterfaceArtificialIntelligence.AI_ACTION_GO_RIGHT; move++)
+		for(int move = ArtificialIntelligence.AI_ACTION_GO_UP; move <= ArtificialIntelligence.AI_ACTION_GO_RIGHT; move++)
 			if(ai.isMovePossible(x, y, move))
 				result.add(move);
 		return result;

@@ -2,11 +2,11 @@ package tournament200708.keceryaman;
 
 import java.util.ArrayList;
 
-import tournament200708.InterfaceArtificialIntelligence;
+import tournament200708.ArtificialIntelligence;
 
 
 
-public class KecerYaman extends InterfaceArtificialIntelligence {
+public class KecerYaman extends ArtificialIntelligence {
 	/********************************************************************************/
 	private static final long serialVersionUID = 1L;
 	

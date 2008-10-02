@@ -2,7 +2,7 @@ package tournament200708.camasdemirbas;
 
 import java.util.Vector;
 
-import tournament200708.InterfaceArtificialIntelligence;
+import tournament200708.ArtificialIntelligence;
 
 
 
@@ -10,7 +10,7 @@ import tournament200708.InterfaceArtificialIntelligence;
  * @author Gokhan Camas -- Irem Demirbas
  */
 
-public class CamasDemirbas extends InterfaceArtificialIntelligence
+public class CamasDemirbas extends ArtificialIntelligence
 {	private static final long serialVersionUID = 1L;
 	//si le mouvement suivant est AI_ACTION_PUT_BOMB, il est true
 	boolean bombFlag;
@@ -44,18 +44,18 @@ public class CamasDemirbas extends InterfaceArtificialIntelligence
 		bombFlag=false;
 		pathFlag=false;
 		pathIndex=0;
-		previousMove = InterfaceArtificialIntelligence.AI_ACTION_DO_NOTHING;
-		nextMove = InterfaceArtificialIntelligence.AI_ACTION_DO_NOTHING;
+		previousMove = ArtificialIntelligence.AI_ACTION_DO_NOTHING;
+		nextMove = ArtificialIntelligence.AI_ACTION_DO_NOTHING;
 		pathMoves = new Vector<Integer>();
 	}
 
 	public Integer call() throws Exception
-	{Integer result = InterfaceArtificialIntelligence.AI_ACTION_DO_NOTHING;
+	{Integer result = ArtificialIntelligence.AI_ACTION_DO_NOTHING;
 	x = getOwnPosition()[0];
 	y = getOwnPosition()[1];
 	int x2=newPosition[0];
 	int y2=newPosition[1];
-	int bomb[] = getClosestBlockPosition(x, y, InterfaceArtificialIntelligence.AI_BLOCK_BOMB);
+	int bomb[] = getClosestBlockPosition(x, y, ArtificialIntelligence.AI_BLOCK_BOMB);
 	if(newPosition[0] !=-1 && (x!=x2 || y!=y2)) {
 		result = previousMove;
 	}
@@ -86,10 +86,10 @@ public class CamasDemirbas extends InterfaceArtificialIntelligence
 		else {
 			Thread.sleep(10);
 			if(x==MIDDLEX && y==MIDDLEY) {
-				result = InterfaceArtificialIntelligence.AI_ACTION_DO_NOTHING;					
+				result = ArtificialIntelligence.AI_ACTION_DO_NOTHING;					
 			}
 			else {
-				int[] bonus = getClosestBlockPosition(x, y, InterfaceArtificialIntelligence.AI_BLOCK_ITEM_FIRE);
+				int[] bonus = getClosestBlockPosition(x, y, ArtificialIntelligence.AI_BLOCK_ITEM_FIRE);
 				map = new GameMap(getZoneMatrix());
 				finder = new AStarPathFinder(map,MAXSEARCHDISTANCE,false,false);
 				if(bonus[0]!=-1) {
@@ -129,13 +129,13 @@ public class CamasDemirbas extends InterfaceArtificialIntelligence
 					
 					if(possibleMoves2.size()==0) {
 						result = getShortestMoveToMiddle(x,y,possibleMoves3);
-						nextMove = InterfaceArtificialIntelligence.AI_ACTION_PUT_BOMB;
+						nextMove = ArtificialIntelligence.AI_ACTION_PUT_BOMB;
 						bombFlag = true;
 					}
 					else {
 						result = getShortestMoveToMiddle(x,y,possibleMoves2);
 						if(result == inverse(previousMove)) {
-							result = InterfaceArtificialIntelligence.AI_ACTION_PUT_BOMB;					
+							result = ArtificialIntelligence.AI_ACTION_PUT_BOMB;					
 						}
 					}				
 				}
@@ -161,11 +161,11 @@ public class CamasDemirbas extends InterfaceArtificialIntelligence
 				return pathMoves.get(0);
 			}
 			else {
-				return InterfaceArtificialIntelligence.AI_ACTION_DO_NOTHING;
+				return ArtificialIntelligence.AI_ACTION_DO_NOTHING;
 			}							
 		}
 		else {
-			return InterfaceArtificialIntelligence.AI_ACTION_DO_NOTHING;
+			return ArtificialIntelligence.AI_ACTION_DO_NOTHING;
 		}
 		
 	}
@@ -245,15 +245,15 @@ public class CamasDemirbas extends InterfaceArtificialIntelligence
 	}
 
 	private Integer getMove(int[] position, int[] nextPosition) {
-		Integer result = InterfaceArtificialIntelligence.AI_ACTION_DO_NOTHING;
+		Integer result = ArtificialIntelligence.AI_ACTION_DO_NOTHING;
 		if(position[0]>nextPosition[0])
-			result = InterfaceArtificialIntelligence.AI_ACTION_GO_LEFT;
+			result = ArtificialIntelligence.AI_ACTION_GO_LEFT;
 		else if(position[0]<nextPosition[0])
-			result = InterfaceArtificialIntelligence.AI_ACTION_GO_RIGHT;
+			result = ArtificialIntelligence.AI_ACTION_GO_RIGHT;
 		else if(position[1]>nextPosition[1])
-			result = InterfaceArtificialIntelligence.AI_ACTION_GO_UP;
+			result = ArtificialIntelligence.AI_ACTION_GO_UP;
 		else if(position[1]<nextPosition[1])
-			result = InterfaceArtificialIntelligence.AI_ACTION_GO_DOWN;			
+			result = ArtificialIntelligence.AI_ACTION_GO_DOWN;			
 		return result;
 	}
 
@@ -312,16 +312,16 @@ public class CamasDemirbas extends InterfaceArtificialIntelligence
 	{	boolean result;
 		// calcum
 		switch(move)
-		{	case InterfaceArtificialIntelligence.AI_ACTION_GO_UP:
+		{	case ArtificialIntelligence.AI_ACTION_GO_UP:
 				result = y>0 && !isObstacle(x,y-1);
 				break;
-			case InterfaceArtificialIntelligence.AI_ACTION_GO_DOWN:
+			case ArtificialIntelligence.AI_ACTION_GO_DOWN:
 				result = y<(getZoneMatrixDimY()-1) && !isObstacle(x,y+1);
 				break;
-			case InterfaceArtificialIntelligence.AI_ACTION_GO_LEFT:
+			case ArtificialIntelligence.AI_ACTION_GO_LEFT:
 				result = x>0 && !isObstacle(x-1,y);
 				break;
-			case InterfaceArtificialIntelligence.AI_ACTION_GO_RIGHT:
+			case ArtificialIntelligence.AI_ACTION_GO_RIGHT:
 				result = x<(getZoneMatrixDimX()-1) && !isObstacle(x+1,y);
 				break;
 			default:
@@ -340,14 +340,14 @@ public class CamasDemirbas extends InterfaceArtificialIntelligence
 	{	int[][] matrix = getZoneMatrix();
 		boolean result = false;
 		// bombes
-		result = result || matrix[x][y]==InterfaceArtificialIntelligence.AI_BLOCK_BOMB;
+		result = result || matrix[x][y]==ArtificialIntelligence.AI_BLOCK_BOMB;
 		// feu
-		result = result || matrix[x][y]==InterfaceArtificialIntelligence.AI_BLOCK_FIRE;
+		result = result || matrix[x][y]==ArtificialIntelligence.AI_BLOCK_FIRE;
 		// murs
-		result = result || matrix[x][y]==InterfaceArtificialIntelligence.AI_BLOCK_WALL_HARD;
-		result = result || matrix[x][y]==InterfaceArtificialIntelligence.AI_BLOCK_WALL_SOFT;
+		result = result || matrix[x][y]==ArtificialIntelligence.AI_BLOCK_WALL_HARD;
+		result = result || matrix[x][y]==ArtificialIntelligence.AI_BLOCK_WALL_SOFT;
 		// on ne sait pas quoi
-		result = result || matrix[x][y]==InterfaceArtificialIntelligence.AI_BLOCK_UNKNOWN;
+		result = result || matrix[x][y]==ArtificialIntelligence.AI_BLOCK_UNKNOWN;
 		// shrink
 		result = result || (x==getNextShrinkPosition()[0] && y==getNextShrinkPosition()[1]);
 		return result;
@@ -360,7 +360,7 @@ public class CamasDemirbas extends InterfaceArtificialIntelligence
 	 */
 	private Vector<Integer> getPossibleMoves(int x, int y)
 	{	Vector<Integer> result = new Vector<Integer>();
-		for(int move=InterfaceArtificialIntelligence.AI_ACTION_GO_UP;move<=InterfaceArtificialIntelligence.AI_ACTION_GO_RIGHT;move++)
+		for(int move=ArtificialIntelligence.AI_ACTION_GO_UP;move<=ArtificialIntelligence.AI_ACTION_GO_RIGHT;move++)
 			if(isMovePossible(x,y,move))
 				result.add(move);
 		return result;
@@ -375,19 +375,19 @@ public class CamasDemirbas extends InterfaceArtificialIntelligence
 	private int[] positionAfterMove(int x, int y, int move) {
 		int[] result= {-1,-1};
 		switch(move)
-		{	case InterfaceArtificialIntelligence.AI_ACTION_GO_UP:
+		{	case ArtificialIntelligence.AI_ACTION_GO_UP:
 				result [0]=x;
 				result [1]=y-1;
 				break;
-			case InterfaceArtificialIntelligence.AI_ACTION_GO_DOWN:
+			case ArtificialIntelligence.AI_ACTION_GO_DOWN:
 				result [0]=x;
 				result [1]=y+1;
 				break;
-			case InterfaceArtificialIntelligence.AI_ACTION_GO_LEFT:
+			case ArtificialIntelligence.AI_ACTION_GO_LEFT:
 				result [0]=x-1;
 				result [1]=y;
 				break;
-			case InterfaceArtificialIntelligence.AI_ACTION_GO_RIGHT:
+			case ArtificialIntelligence.AI_ACTION_GO_RIGHT:
 				result [0]=x+1;
 				result [1]=y;
 				break;
@@ -428,17 +428,17 @@ public class CamasDemirbas extends InterfaceArtificialIntelligence
 	private Integer inverse(Integer integer) {
 		Integer result = 0;
 		switch(integer)
-		{	case InterfaceArtificialIntelligence.AI_ACTION_GO_UP:
-				result= InterfaceArtificialIntelligence.AI_ACTION_GO_DOWN;
+		{	case ArtificialIntelligence.AI_ACTION_GO_UP:
+				result= ArtificialIntelligence.AI_ACTION_GO_DOWN;
 				break;
-			case InterfaceArtificialIntelligence.AI_ACTION_GO_DOWN:
-				result= InterfaceArtificialIntelligence.AI_ACTION_GO_UP;
+			case ArtificialIntelligence.AI_ACTION_GO_DOWN:
+				result= ArtificialIntelligence.AI_ACTION_GO_UP;
 				break;
-			case InterfaceArtificialIntelligence.AI_ACTION_GO_LEFT:
-				result= InterfaceArtificialIntelligence.AI_ACTION_GO_RIGHT;
+			case ArtificialIntelligence.AI_ACTION_GO_LEFT:
+				result= ArtificialIntelligence.AI_ACTION_GO_RIGHT;
 				break;
-			case InterfaceArtificialIntelligence.AI_ACTION_GO_RIGHT:
-				result= InterfaceArtificialIntelligence.AI_ACTION_GO_LEFT;
+			case ArtificialIntelligence.AI_ACTION_GO_RIGHT:
+				result= ArtificialIntelligence.AI_ACTION_GO_LEFT;
 				break;
 			default:
 				result = 0;
