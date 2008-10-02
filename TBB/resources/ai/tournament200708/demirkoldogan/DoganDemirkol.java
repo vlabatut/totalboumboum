@@ -1,4 +1,4 @@
-package tournament200708.dogandemirkol;
+package tournament200708.demirkoldogan;
 
 import java.util.Iterator;
 import java.util.Vector;

@@ -1,4 +1,4 @@
-package tournament200708.dogandemirkol;
+package tournament200708.demirkoldogan;
 
 // un structure qui contient les propriétés nécessaire d'un case de zone.
 public class Block {
