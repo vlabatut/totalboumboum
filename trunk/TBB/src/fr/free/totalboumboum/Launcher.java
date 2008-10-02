@@ -376,19 +376,6 @@ public class Launcher
 	 * possibiliter de la paramétrer en fonction du nombre de joueurs ?
 	 */
 	
-	/*
-	 * TODO
-	 * pb avec le thème des fleurs : y a une barre d'ombre de 8 pixels de haut
-	 * qui s'affiche en haut du niveau (up border)
-	 * >>>>en fait c'est partout, et c'est seulement l'ombre des blocs de la ligne d'en bas.
-	 * solution : ne pas afficher l'ombre spécifiquement pour les blocs de la dernière ligne
-	 */	
-	
-	/*
-	 * TODO améliorer la génération aléatoire de niveau, de manière à ce que ça
-	 * soit moins approximatif (utiliser la classe variableTile pour faire le décompte)
-	 */
-	
 // **********************************************************
 // ANIMES
 // **********************************************************
@@ -499,7 +486,6 @@ public class Launcher
 	 *  - l'item kick ne marche pas
 	 *  - quand un mur est détruit (définitivement) par une penetration bomb, l'item n'apparait pas car
 	 *  la flamme de la bombe dure plus longtemps que l'explosion du mur, et empêche l'item d'apparaître
-	 *  - quand des flammes se croisent, il y a des bugs d'affichage (p-ê un pb d'autorisation pour faire entrer une flamme dans la case concernée)
 	 */
 	
 	
@@ -539,13 +525,7 @@ public class Launcher
 	 */
 	
 	/*
-	 * TODO tournoi séquence
-	 * ça pourrait aussi être un match prédéfini unique, qui se répèterait jusqu'à atteindre une précondition donnée
-	 * voire un tirage au sort entre plusieurs matches, comme pour les rounds...
-	 */
-	
-	/*
-	 * TODO une fois qu'on a déterminer les nombres de joueurs, y a moyen de gérer les threads de meilleure manière en :
+	 * TODO une fois qu'on a déterminé les nombres de joueurs, y a moyen de gérer les threads de meilleure manière en :
 	 * 		- créant un executor au niveau du tournoi
 	 * 		- il doit contenir un pool de (nbre d'IA max pvant jouer à la fois)+1(pr loop)
 	 * 		- par la suite, au lieu de créer un thread pour chaque ia ou pour le chargement/loop, on en demande un à l'executor
@@ -642,6 +622,7 @@ public class Launcher
 	 * *******************************************************
 	 * *********************** A FAIRE ***********************
 	 * *******************************************************
+	 * - revoir le système des IA
 	 * - redistribution des items lors de la mort d'un joueur (option de round?)
 	 * - possibilité de bloquer certains items (on ne les perd pas lorsqu'on meurt)
 	 * 
@@ -653,7 +634,6 @@ public class Launcher
 	 * - la bombe en panne ne doit plus bouger !
 	 * - utiliser les tooltips pour afficher les infos trop longues : calcul de points, nombre à virgule dans la colonne des points (décimales cachées), etc.
 	 * - problème de collisions quand on change la vitesse (surement un problème d'arrondi, ou alors un saut trop grand (en distance), voir si j'avais implémenté la maximalisation du déplacement malgré une éventuelle collision...)
-	 * - revoir le système des IA
 	 * - redescendre les stats dans loop, et gestion de fin de partie et tout ce qui est en fait directement lié au moteur
 	 * - en fait tout le calcul de points dans les stats est à déplacer dans les rounds/matches, etc 
 	 * - pb de dimension de l'image de fond en fonction de la résolution... (zones pas peintes)
