@@ -6,7 +6,8 @@ import java.util.PriorityQueue;
 import java.util.Vector;
 import java.util.Iterator;
 
-import fr.free.totalboumboum.ai.old200708.ArtificialIntelligence;
+import tournament200708.ArtificialIntelligence;
+
 
 
 public class SahinYildirim extends ArtificialIntelligence {

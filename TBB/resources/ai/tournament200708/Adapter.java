@@ -1,4 +1,4 @@
-package fr.free.totalboumboum.ai.old200708;
+package tournament200708;
 
 import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
@@ -8,6 +8,7 @@ import java.util.concurrent.ExecutionException;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
+
 
 import fr.free.totalboumboum.ai.InterfaceAI;
 import fr.free.totalboumboum.data.configuration.Configuration;

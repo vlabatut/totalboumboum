@@ -12,7 +12,8 @@ package tournament200708.okanyuksel;
 
 import java.util.LinkedList;
 
-import fr.free.totalboumboum.ai.old200708.ArtificialIntelligence;
+import tournament200708.ArtificialIntelligence;
+
 
 
 

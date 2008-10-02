@@ -2,7 +2,8 @@ package tournament200708.basmansandalli;
 
 import java.util.ArrayList;
 
-import fr.free.totalboumboum.ai.old200708.ArtificialIntelligence;
+import tournament200708.ArtificialIntelligence;
+
 
 public class BasmanSandalli extends ArtificialIntelligence {
 	private static final long serialVersionUID = 1L;
