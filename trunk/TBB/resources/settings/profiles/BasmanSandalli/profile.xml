@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <profile
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
-	xsi:noNamespaceSchemaLocation="..\..\xml\schemas\profiles.xsd">
+	xsi:noNamespaceSchemaLocation="..\..\..\schemas\profile.xsd">
 	
- 	<general name="Basman+Sandalli" ai="basmansandalli.BasmanSandalli" /> 
+ 	<general name="Basman+Sandalli"  />
+ 	<ai name="basmansandalli.BasmanSandalli" pack="tournament200708" />
  	<character name="shirobon" packname="superbomberman1" color="brown" />     
 <!-- 	<character name="prognathe" packname="totalboumboum" color="brown" />   -->
 	
