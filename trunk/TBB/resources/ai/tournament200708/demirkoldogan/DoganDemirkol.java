@@ -3,11 +3,11 @@ package tournament200708.demirkoldogan;
 import java.util.Iterator;
 import java.util.Vector;
 
-import tournament200708.ArtificialIntelligence;
+import tournament200708.InterfaceArtificialIntelligence;
 
 
 
-public class DoganDemirkol extends ArtificialIntelligence{
+public class DoganDemirkol extends InterfaceArtificialIntelligence{
 
 	
 	//FIELDS
@@ -392,10 +392,10 @@ public class DoganDemirkol extends ArtificialIntelligence{
 	{	int[][] matrix = getZoneMatrix();
 		boolean result = false;
 		// murs
-		result = result || matrix[x][y]==ArtificialIntelligence.AI_BLOCK_WALL_HARD;
-		result = result || matrix[x][y]==ArtificialIntelligence.AI_BLOCK_WALL_SOFT;
+		result = result || matrix[x][y]==InterfaceArtificialIntelligence.AI_BLOCK_WALL_HARD;
+		result = result || matrix[x][y]==InterfaceArtificialIntelligence.AI_BLOCK_WALL_SOFT;
 		// on ne sait pas quoi
-		result = result || matrix[x][y]==ArtificialIntelligence.AI_BLOCK_UNKNOWN;
+		result = result || matrix[x][y]==InterfaceArtificialIntelligence.AI_BLOCK_UNKNOWN;
 		// shrink
 		result = result || (getTimeBeforeShrink()==-1 && x==getNextShrinkPosition()[0] && y==getNextShrinkPosition()[1]);
 		return result;

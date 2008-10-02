@@ -3,12 +3,12 @@ package tournament200708.gokceeren;
 import java.util.Vector;
 import java.util.concurrent.ExecutionException;
 
-import tournament200708.ArtificialIntelligence;
+import tournament200708.InterfaceArtificialIntelligence;
 
 
 
 
-public class GokceEren extends ArtificialIntelligence {
+public class GokceEren extends InterfaceArtificialIntelligence {
 
 	/**
 	 * 
@@ -172,14 +172,14 @@ public class GokceEren extends ArtificialIntelligence {
 	{	int[][] matrix = getZoneMatrix();
 		boolean result = false;
 		// bombes
-		result = result || matrix[x][y]==ArtificialIntelligence.AI_BLOCK_BOMB;
+		result = result || matrix[x][y]==InterfaceArtificialIntelligence.AI_BLOCK_BOMB;
 		// feu
-		result = result || matrix[x][y]==ArtificialIntelligence.AI_BLOCK_FIRE;
+		result = result || matrix[x][y]==InterfaceArtificialIntelligence.AI_BLOCK_FIRE;
 		// murs
-		result = result || matrix[x][y]==ArtificialIntelligence.AI_BLOCK_WALL_HARD;
-		result = result || matrix[x][y]==ArtificialIntelligence.AI_BLOCK_WALL_SOFT;
+		result = result || matrix[x][y]==InterfaceArtificialIntelligence.AI_BLOCK_WALL_HARD;
+		result = result || matrix[x][y]==InterfaceArtificialIntelligence.AI_BLOCK_WALL_SOFT;
 		// on ne sait pas quoi
-		result = result || matrix[x][y]==ArtificialIntelligence.AI_BLOCK_UNKNOWN;
+		result = result || matrix[x][y]==InterfaceArtificialIntelligence.AI_BLOCK_UNKNOWN;
 		// shrink
 		result = result || (x==getNextShrinkPosition()[0] && y==getNextShrinkPosition()[1]);
 		return result;
@@ -189,16 +189,16 @@ public class GokceEren extends ArtificialIntelligence {
 	{	boolean result;
 		// calcum
 		switch(move)
-		{	case ArtificialIntelligence.AI_ACTION_GO_UP:
+		{	case InterfaceArtificialIntelligence.AI_ACTION_GO_UP:
 				result = y>0 && !isObstacle(x,y-1);
 				break;
-			case ArtificialIntelligence.AI_ACTION_GO_DOWN:
+			case InterfaceArtificialIntelligence.AI_ACTION_GO_DOWN:
 				result = y<(getZoneMatrixDimY()-1) && !isObstacle(x,y+1);
 				break;
-			case ArtificialIntelligence.AI_ACTION_GO_LEFT:
+			case InterfaceArtificialIntelligence.AI_ACTION_GO_LEFT:
 				result = x>0 && !isObstacle(x-1,y);
 				break;
-			case ArtificialIntelligence.AI_ACTION_GO_RIGHT:
+			case InterfaceArtificialIntelligence.AI_ACTION_GO_RIGHT:
 				result = x<(getZoneMatrixDimX()-1) && !isObstacle(x+1,y);
 				break;
 			default:

@@ -3,7 +3,7 @@ package tournament200708.baydarcamci;
 import java.util.ArrayList;
 import java.util.Vector;
 
-import tournament200708.ArtificialIntelligence;
+import tournament200708.InterfaceArtificialIntelligence;
 
 
 
@@ -13,7 +13,7 @@ import tournament200708.ArtificialIntelligence;
  * possible des dangers existants, i.e. par ordre de dangerosité
  * croissante : le feu, les bombes, les autres joueurs. 
  */
-public class BaydarCamci extends ArtificialIntelligence
+public class BaydarCamci extends InterfaceArtificialIntelligence
 {
 		private static final long serialVersionUID = 1L;
    
@@ -42,7 +42,7 @@ public class BaydarCamci extends ArtificialIntelligence
 	public Integer call() throws Exception
 	{	
 		
-		Integer result = ArtificialIntelligence.AI_ACTION_DO_NOTHING;
+		Integer result = InterfaceArtificialIntelligence.AI_ACTION_DO_NOTHING;
 		int x = getOwnPosition()[0];
 		int y = getOwnPosition()[1];
 		int dangerPos[] = getClosestBlockPosition(x,y,AI_BLOCK_FIRE);
@@ -181,16 +181,16 @@ public class BaydarCamci extends ArtificialIntelligence
 	{	boolean result;
 		// calcum
 		switch(move)
-		{	case ArtificialIntelligence.AI_ACTION_GO_UP:
+		{	case InterfaceArtificialIntelligence.AI_ACTION_GO_UP:
 				result = y>0 && !isObstacle(x,y-1);
 				break;
-			case ArtificialIntelligence.AI_ACTION_GO_DOWN:
+			case InterfaceArtificialIntelligence.AI_ACTION_GO_DOWN:
 				result = y<(getZoneMatrixDimY()-1) && !isObstacle(x,y+1);
 				break;
-			case ArtificialIntelligence.AI_ACTION_GO_LEFT:
+			case InterfaceArtificialIntelligence.AI_ACTION_GO_LEFT:
 				result = x>0 && !isObstacle(x-1,y);
 				break;
-			case ArtificialIntelligence.AI_ACTION_GO_RIGHT:
+			case InterfaceArtificialIntelligence.AI_ACTION_GO_RIGHT:
 				result = x<(getZoneMatrixDimX()-1) && !isObstacle(x+1,y);
 				break;
 			default:
@@ -211,14 +211,14 @@ public class BaydarCamci extends ArtificialIntelligence
 	{	int[][] matrix = getZoneMatrix();
 		boolean result = false;
 		// bombes
-		result = result || matrix[x][y]==ArtificialIntelligence.AI_BLOCK_BOMB;
+		result = result || matrix[x][y]==InterfaceArtificialIntelligence.AI_BLOCK_BOMB;
 		// feu
-		result = result || matrix[x][y]==ArtificialIntelligence.AI_BLOCK_FIRE;
+		result = result || matrix[x][y]==InterfaceArtificialIntelligence.AI_BLOCK_FIRE;
 		// murs
-		result = result || matrix[x][y]==ArtificialIntelligence.AI_BLOCK_WALL_HARD;
-		result = result || matrix[x][y]==ArtificialIntelligence.AI_BLOCK_WALL_SOFT;
+		result = result || matrix[x][y]==InterfaceArtificialIntelligence.AI_BLOCK_WALL_HARD;
+		result = result || matrix[x][y]==InterfaceArtificialIntelligence.AI_BLOCK_WALL_SOFT;
 		// on ne sait pas quoi
-		result = result || matrix[x][y]==ArtificialIntelligence.AI_BLOCK_UNKNOWN;
+		result = result || matrix[x][y]==InterfaceArtificialIntelligence.AI_BLOCK_UNKNOWN;
 		// shrink
 		result = result || (x==getNextShrinkPosition()[0] && y==getNextShrinkPosition()[1]);
 		return result;
@@ -244,7 +244,7 @@ public class BaydarCamci extends ArtificialIntelligence
 
 	public Integer dummyMethod(int x , int y)
 	{
-		Integer result = ArtificialIntelligence.AI_ACTION_DO_NOTHING;
+		Integer result = InterfaceArtificialIntelligence.AI_ACTION_DO_NOTHING;
 		//les locations du personnage au debut du jeu
 		if(x<=8 && y<=7)
 			result= solUstKose(x,y);
@@ -269,55 +269,55 @@ public class BaydarCamci extends ArtificialIntelligence
 	 */
 	public Integer onBomb(int x, int y)
 	{
-		if(getBombPosition() == ArtificialIntelligence.AI_DIR_DOWN)
+		if(getBombPosition() == InterfaceArtificialIntelligence.AI_DIR_DOWN)
 		{
-			if(isMovePossible(x,y,ArtificialIntelligence.AI_ACTION_GO_UP) == true)
-				return ArtificialIntelligence.AI_ACTION_GO_UP;
-		    else if(isMovePossible(x,y,ArtificialIntelligence.AI_ACTION_GO_RIGHT)==true)	
-			    return ArtificialIntelligence.AI_ACTION_GO_RIGHT;
+			if(isMovePossible(x,y,InterfaceArtificialIntelligence.AI_ACTION_GO_UP) == true)
+				return InterfaceArtificialIntelligence.AI_ACTION_GO_UP;
+		    else if(isMovePossible(x,y,InterfaceArtificialIntelligence.AI_ACTION_GO_RIGHT)==true)	
+			    return InterfaceArtificialIntelligence.AI_ACTION_GO_RIGHT;
 		    else 
-				return ArtificialIntelligence.AI_ACTION_GO_LEFT;
+				return InterfaceArtificialIntelligence.AI_ACTION_GO_LEFT;
 		   
 		}
-		if(getBombPosition() == ArtificialIntelligence.AI_DIR_UP)
-		{	if(isMovePossible(x,y,ArtificialIntelligence.AI_ACTION_GO_DOWN) == true)
-				return ArtificialIntelligence.AI_ACTION_GO_DOWN;
-		    else if(isMovePossible(x,y,ArtificialIntelligence.AI_ACTION_GO_RIGHT)==true)	
-			    return ArtificialIntelligence.AI_ACTION_GO_RIGHT;
+		if(getBombPosition() == InterfaceArtificialIntelligence.AI_DIR_UP)
+		{	if(isMovePossible(x,y,InterfaceArtificialIntelligence.AI_ACTION_GO_DOWN) == true)
+				return InterfaceArtificialIntelligence.AI_ACTION_GO_DOWN;
+		    else if(isMovePossible(x,y,InterfaceArtificialIntelligence.AI_ACTION_GO_RIGHT)==true)	
+			    return InterfaceArtificialIntelligence.AI_ACTION_GO_RIGHT;
 		    else 
-				return ArtificialIntelligence.AI_ACTION_GO_LEFT;
+				return InterfaceArtificialIntelligence.AI_ACTION_GO_LEFT;
 		    
 		}	
-		if(getBombPosition() == ArtificialIntelligence.AI_DIR_LEFT)
-		{	if(isMovePossible(x,y,ArtificialIntelligence.AI_ACTION_GO_RIGHT) == true)
-				return ArtificialIntelligence.AI_ACTION_GO_RIGHT;
-		    else if(isMovePossible(x,y,ArtificialIntelligence.AI_ACTION_GO_UP)==true)	
-			    return ArtificialIntelligence.AI_ACTION_GO_UP;
+		if(getBombPosition() == InterfaceArtificialIntelligence.AI_DIR_LEFT)
+		{	if(isMovePossible(x,y,InterfaceArtificialIntelligence.AI_ACTION_GO_RIGHT) == true)
+				return InterfaceArtificialIntelligence.AI_ACTION_GO_RIGHT;
+		    else if(isMovePossible(x,y,InterfaceArtificialIntelligence.AI_ACTION_GO_UP)==true)	
+			    return InterfaceArtificialIntelligence.AI_ACTION_GO_UP;
 		    else
-				return ArtificialIntelligence.AI_ACTION_GO_DOWN;
+				return InterfaceArtificialIntelligence.AI_ACTION_GO_DOWN;
 		    
 		}
-		if(getBombPosition() == ArtificialIntelligence.AI_DIR_RIGHT)
-		{	if(isMovePossible(x,y,ArtificialIntelligence.AI_ACTION_GO_LEFT) == true)
-				return ArtificialIntelligence.AI_ACTION_GO_LEFT;
-		    else if(isMovePossible(x,y,ArtificialIntelligence.AI_ACTION_GO_UP)==true)	
-			    return ArtificialIntelligence.AI_ACTION_GO_UP;
+		if(getBombPosition() == InterfaceArtificialIntelligence.AI_DIR_RIGHT)
+		{	if(isMovePossible(x,y,InterfaceArtificialIntelligence.AI_ACTION_GO_LEFT) == true)
+				return InterfaceArtificialIntelligence.AI_ACTION_GO_LEFT;
+		    else if(isMovePossible(x,y,InterfaceArtificialIntelligence.AI_ACTION_GO_UP)==true)	
+			    return InterfaceArtificialIntelligence.AI_ACTION_GO_UP;
 		    else
-				return ArtificialIntelligence.AI_ACTION_GO_DOWN;
+				return InterfaceArtificialIntelligence.AI_ACTION_GO_DOWN;
 		}	
-		if(getBombPosition()== ArtificialIntelligence.AI_DIR_NONE)
+		if(getBombPosition()== InterfaceArtificialIntelligence.AI_DIR_NONE)
 		{	
-			if(isMovePossible(x,y,ArtificialIntelligence.AI_ACTION_GO_UP) == true)
-				return ArtificialIntelligence.AI_ACTION_GO_UP;
-			else if(isMovePossible(x,y,ArtificialIntelligence.AI_ACTION_GO_LEFT)==true)
-					return ArtificialIntelligence.AI_ACTION_GO_LEFT;
-			else if(isMovePossible(x,y,ArtificialIntelligence.AI_ACTION_GO_DOWN)==true)
-					return  ArtificialIntelligence.AI_ACTION_GO_DOWN;
-			else if(isMovePossible(x,y,ArtificialIntelligence.AI_ACTION_GO_RIGHT)==true)	
-				    return ArtificialIntelligence.AI_ACTION_GO_RIGHT;
+			if(isMovePossible(x,y,InterfaceArtificialIntelligence.AI_ACTION_GO_UP) == true)
+				return InterfaceArtificialIntelligence.AI_ACTION_GO_UP;
+			else if(isMovePossible(x,y,InterfaceArtificialIntelligence.AI_ACTION_GO_LEFT)==true)
+					return InterfaceArtificialIntelligence.AI_ACTION_GO_LEFT;
+			else if(isMovePossible(x,y,InterfaceArtificialIntelligence.AI_ACTION_GO_DOWN)==true)
+					return  InterfaceArtificialIntelligence.AI_ACTION_GO_DOWN;
+			else if(isMovePossible(x,y,InterfaceArtificialIntelligence.AI_ACTION_GO_RIGHT)==true)	
+				    return InterfaceArtificialIntelligence.AI_ACTION_GO_RIGHT;
 		}
 		
-		return  ArtificialIntelligence.AI_ACTION_DO_NOTHING;
+		return  InterfaceArtificialIntelligence.AI_ACTION_DO_NOTHING;
 			
 	
 	
@@ -393,18 +393,18 @@ public class BaydarCamci extends ArtificialIntelligence
 		if( dangerPos[0] == -1)
 			dangerPos = getClosestBlockPosition(x,y,AI_BLOCK_BOMB);
 		
-		if(lastMove== ArtificialIntelligence.AI_ACTION_PUT_BOMB)
+		if(lastMove== InterfaceArtificialIntelligence.AI_ACTION_PUT_BOMB)
 		{
-			if(lastPreMove == ArtificialIntelligence.AI_ACTION_GO_UP)
-				return ArtificialIntelligence.AI_ACTION_GO_DOWN;
-			if(lastPreMove == ArtificialIntelligence.AI_ACTION_GO_DOWN)
-				return ArtificialIntelligence.AI_ACTION_GO_UP;
-			if(lastPreMove == ArtificialIntelligence.AI_ACTION_GO_LEFT)
-				return ArtificialIntelligence.AI_ACTION_GO_RIGHT;
-			if(lastPreMove == ArtificialIntelligence.AI_ACTION_GO_RIGHT)
-				return ArtificialIntelligence.AI_ACTION_GO_LEFT;
-			lastMove= ArtificialIntelligence.AI_ACTION_DO_NOTHING;
-			lastPreMove= ArtificialIntelligence.AI_ACTION_DO_NOTHING;
+			if(lastPreMove == InterfaceArtificialIntelligence.AI_ACTION_GO_UP)
+				return InterfaceArtificialIntelligence.AI_ACTION_GO_DOWN;
+			if(lastPreMove == InterfaceArtificialIntelligence.AI_ACTION_GO_DOWN)
+				return InterfaceArtificialIntelligence.AI_ACTION_GO_UP;
+			if(lastPreMove == InterfaceArtificialIntelligence.AI_ACTION_GO_LEFT)
+				return InterfaceArtificialIntelligence.AI_ACTION_GO_RIGHT;
+			if(lastPreMove == InterfaceArtificialIntelligence.AI_ACTION_GO_RIGHT)
+				return InterfaceArtificialIntelligence.AI_ACTION_GO_LEFT;
+			lastMove= InterfaceArtificialIntelligence.AI_ACTION_DO_NOTHING;
+			lastPreMove= InterfaceArtificialIntelligence.AI_ACTION_DO_NOTHING;
 		}
 		
 		if(dangerPos[0]== -1)
@@ -413,17 +413,17 @@ public class BaydarCamci extends ArtificialIntelligence
 			bombPower = getBombPowerAt(dangerPos[0],dangerPos[1]);
 		}
 		
-		if(dangerPos[0] == -1 && dangerPos[0]==-1 && result ==ArtificialIntelligence.AI_ACTION_DO_NOTHING)
+		if(dangerPos[0] == -1 && dangerPos[0]==-1 && result ==InterfaceArtificialIntelligence.AI_ACTION_DO_NOTHING)
 		{   
 			//aucune danger. putBomb:
 			thePutBomb = getOwnPosition();
 			lastPreMove = lastMove;
-			result= ArtificialIntelligence.AI_ACTION_PUT_BOMB;
+			result= InterfaceArtificialIntelligence.AI_ACTION_PUT_BOMB;
 			
 			
 		}
 		
-		else if(result ==ArtificialIntelligence.AI_ACTION_DO_NOTHING)
+		else if(result ==InterfaceArtificialIntelligence.AI_ACTION_DO_NOTHING)
 		{
 			//il y une danger. choisir votre deplacement:
 			int bombDir = bombaNerde(x,y,dangerPos[0],dangerPos[1]);
@@ -444,7 +444,7 @@ public class BaydarCamci extends ArtificialIntelligence
 	//moi est au milieu de la zone.
 	public Integer merkez(int x, int y)
 	{
-		Integer result = ArtificialIntelligence.AI_ACTION_DO_NOTHING;
+		Integer result = InterfaceArtificialIntelligence.AI_ACTION_DO_NOTHING;
 		if(getTimeBeforeShrink() == -1) 
 		{
 			// on détermine les déplacements possibles
@@ -456,8 +456,8 @@ public class BaydarCamci extends ArtificialIntelligence
 			else if(possibleMoves.size()>0)
 			{	// on peut poser une bombe si on est à la fois dans un cul de sac 
 				// (1 seul déplacement possible) et sur une case vide
-				if(possibleMoves.size()<2 && getZoneMatrix()[x][y]==ArtificialIntelligence.AI_BLOCK_EMPTY)
-					possibleMoves.add(ArtificialIntelligence.AI_ACTION_PUT_BOMB);
+				if(possibleMoves.size()<2 && getZoneMatrix()[x][y]==InterfaceArtificialIntelligence.AI_BLOCK_EMPTY)
+					possibleMoves.add(InterfaceArtificialIntelligence.AI_ACTION_PUT_BOMB);
 				// on détermine aléatoirement l'action qui va être effectuée
 				int index;
 				do
@@ -477,15 +477,15 @@ public class BaydarCamci extends ArtificialIntelligence
 	public Integer solUstKoseHareketleri(int x, int y)
 	{
 		
-	    Integer result = ArtificialIntelligence.AI_ACTION_DO_NOTHING;
+	    Integer result = InterfaceArtificialIntelligence.AI_ACTION_DO_NOTHING;
 		if(thePutBomb[0] == -1 )
 		{
 			if(x==7 && y==7)
-				return result = ArtificialIntelligence.AI_ACTION_GO_RIGHT;
-			if(isMovePossible(x,y,ArtificialIntelligence.AI_ACTION_GO_RIGHT))
-				result = ArtificialIntelligence.AI_ACTION_GO_RIGHT;
-			else if(isMovePossible(x,y,ArtificialIntelligence.AI_ACTION_GO_DOWN))
-				result = ArtificialIntelligence.AI_ACTION_GO_DOWN;
+				return result = InterfaceArtificialIntelligence.AI_ACTION_GO_RIGHT;
+			if(isMovePossible(x,y,InterfaceArtificialIntelligence.AI_ACTION_GO_RIGHT))
+				result = InterfaceArtificialIntelligence.AI_ACTION_GO_RIGHT;
+			else if(isMovePossible(x,y,InterfaceArtificialIntelligence.AI_ACTION_GO_DOWN))
+				result = InterfaceArtificialIntelligence.AI_ACTION_GO_DOWN;
 		}
 		else 
 		{
@@ -501,13 +501,13 @@ public class BaydarCamci extends ArtificialIntelligence
 	//la mouvement du personnage s'il commence au jeu au haut droit de la zone
 	public Integer sagUstKoseHareketleri(int x, int y)
 	{
-		Integer result = ArtificialIntelligence.AI_ACTION_DO_NOTHING;
+		Integer result = InterfaceArtificialIntelligence.AI_ACTION_DO_NOTHING;
 		if(thePutBomb[0] == -1 )
 		{
-			if(isMovePossible(x,y,ArtificialIntelligence.AI_ACTION_GO_LEFT))
-				result = ArtificialIntelligence.AI_ACTION_GO_LEFT;
-			else if(isMovePossible(x,y,ArtificialIntelligence.AI_ACTION_GO_DOWN))
-				result = ArtificialIntelligence.AI_ACTION_GO_DOWN;
+			if(isMovePossible(x,y,InterfaceArtificialIntelligence.AI_ACTION_GO_LEFT))
+				result = InterfaceArtificialIntelligence.AI_ACTION_GO_LEFT;
+			else if(isMovePossible(x,y,InterfaceArtificialIntelligence.AI_ACTION_GO_DOWN))
+				result = InterfaceArtificialIntelligence.AI_ACTION_GO_DOWN;
 		}
 		/*else
 		{
@@ -523,13 +523,13 @@ public class BaydarCamci extends ArtificialIntelligence
 	//la mouvement du personnage s'il commence au jeu au bas gauche de la zone
 	public Integer solAltKoseHareketleri(int x, int y)
 	{
-		Integer result = ArtificialIntelligence.AI_ACTION_DO_NOTHING;
+		Integer result = InterfaceArtificialIntelligence.AI_ACTION_DO_NOTHING;
 		if(thePutBomb[0] == -1 )
 		{
-			if(isMovePossible(x,y,ArtificialIntelligence.AI_ACTION_GO_RIGHT))
-				result = ArtificialIntelligence.AI_ACTION_GO_RIGHT;
-			else if(isMovePossible(x,y,ArtificialIntelligence.AI_ACTION_GO_UP))
-				result = ArtificialIntelligence.AI_ACTION_GO_UP;
+			if(isMovePossible(x,y,InterfaceArtificialIntelligence.AI_ACTION_GO_RIGHT))
+				result = InterfaceArtificialIntelligence.AI_ACTION_GO_RIGHT;
+			else if(isMovePossible(x,y,InterfaceArtificialIntelligence.AI_ACTION_GO_UP))
+				result = InterfaceArtificialIntelligence.AI_ACTION_GO_UP;
 		} 
 		else
 		{
@@ -545,13 +545,13 @@ public class BaydarCamci extends ArtificialIntelligence
 	//la mouvement du personnage s'il commence au jeu au bas droit de la zone
 	public Integer sagAltKoseHareketleri(int x, int y)
 	{
-		Integer result = ArtificialIntelligence.AI_ACTION_DO_NOTHING;
+		Integer result = InterfaceArtificialIntelligence.AI_ACTION_DO_NOTHING;
 		if(thePutBomb[0] == -1 )
 		{
-			if(isMovePossible(x,y,ArtificialIntelligence.AI_ACTION_GO_LEFT))
-				result = ArtificialIntelligence.AI_ACTION_GO_LEFT;
-			else if(isMovePossible(x,y,ArtificialIntelligence.AI_ACTION_GO_UP))
-				result = ArtificialIntelligence.AI_ACTION_GO_UP;
+			if(isMovePossible(x,y,InterfaceArtificialIntelligence.AI_ACTION_GO_LEFT))
+				result = InterfaceArtificialIntelligence.AI_ACTION_GO_LEFT;
+			else if(isMovePossible(x,y,InterfaceArtificialIntelligence.AI_ACTION_GO_UP))
+				result = InterfaceArtificialIntelligence.AI_ACTION_GO_UP;
 		}
 		else
 		{
@@ -594,12 +594,12 @@ public class BaydarCamci extends ArtificialIntelligence
 	 */
 	public Integer rightBomb(int x,int y)
 	{
-		if(isMovePossible(x,y,ArtificialIntelligence.AI_ACTION_GO_DOWN))
-			return ArtificialIntelligence.AI_ACTION_GO_DOWN;
-		else if(isMovePossible(x,y,ArtificialIntelligence.AI_ACTION_GO_UP))
-			return ArtificialIntelligence.AI_ACTION_GO_UP;
+		if(isMovePossible(x,y,InterfaceArtificialIntelligence.AI_ACTION_GO_DOWN))
+			return InterfaceArtificialIntelligence.AI_ACTION_GO_DOWN;
+		else if(isMovePossible(x,y,InterfaceArtificialIntelligence.AI_ACTION_GO_UP))
+			return InterfaceArtificialIntelligence.AI_ACTION_GO_UP;
 		else
-			return  ArtificialIntelligence.AI_ACTION_GO_LEFT;
+			return  InterfaceArtificialIntelligence.AI_ACTION_GO_LEFT;
 	}
 	/**
 	 * bombe se situe au gauche
@@ -609,12 +609,12 @@ public class BaydarCamci extends ArtificialIntelligence
 	 */
 	public Integer leftBomb(int x,int y)
 	{
-		if(isMovePossible(x,y,ArtificialIntelligence.AI_ACTION_GO_DOWN))
-			return ArtificialIntelligence.AI_ACTION_GO_DOWN;
-		else if(isMovePossible(x,y,ArtificialIntelligence.AI_ACTION_GO_UP))
-			return ArtificialIntelligence.AI_ACTION_GO_UP;
+		if(isMovePossible(x,y,InterfaceArtificialIntelligence.AI_ACTION_GO_DOWN))
+			return InterfaceArtificialIntelligence.AI_ACTION_GO_DOWN;
+		else if(isMovePossible(x,y,InterfaceArtificialIntelligence.AI_ACTION_GO_UP))
+			return InterfaceArtificialIntelligence.AI_ACTION_GO_UP;
 		else
-			return  ArtificialIntelligence.AI_ACTION_GO_RIGHT;
+			return  InterfaceArtificialIntelligence.AI_ACTION_GO_RIGHT;
 	}
 	
 	/**
@@ -625,12 +625,12 @@ public class BaydarCamci extends ArtificialIntelligence
 	 */
 	public Integer downBomb(int x,int y)
 	{
-		if(isMovePossible(x,y,ArtificialIntelligence.AI_ACTION_GO_RIGHT))
-			return ArtificialIntelligence.AI_ACTION_GO_RIGHT;
-		else if(isMovePossible(x,y,ArtificialIntelligence.AI_ACTION_GO_LEFT))
-			return ArtificialIntelligence.AI_ACTION_GO_LEFT;
+		if(isMovePossible(x,y,InterfaceArtificialIntelligence.AI_ACTION_GO_RIGHT))
+			return InterfaceArtificialIntelligence.AI_ACTION_GO_RIGHT;
+		else if(isMovePossible(x,y,InterfaceArtificialIntelligence.AI_ACTION_GO_LEFT))
+			return InterfaceArtificialIntelligence.AI_ACTION_GO_LEFT;
 		else
-			return  ArtificialIntelligence.AI_ACTION_GO_UP;
+			return  InterfaceArtificialIntelligence.AI_ACTION_GO_UP;
 	}
 	/**
 	 * bombe est au dessus de moi
@@ -640,12 +640,12 @@ public class BaydarCamci extends ArtificialIntelligence
 	 */
 	public Integer upBomb(int x,int y)
 	{
-		if(isMovePossible(x,y,ArtificialIntelligence.AI_ACTION_GO_RIGHT))
-			return ArtificialIntelligence.AI_ACTION_GO_RIGHT;
-		else if(isMovePossible(x,y,ArtificialIntelligence.AI_ACTION_GO_LEFT))
-			return ArtificialIntelligence.AI_ACTION_GO_LEFT;
+		if(isMovePossible(x,y,InterfaceArtificialIntelligence.AI_ACTION_GO_RIGHT))
+			return InterfaceArtificialIntelligence.AI_ACTION_GO_RIGHT;
+		else if(isMovePossible(x,y,InterfaceArtificialIntelligence.AI_ACTION_GO_LEFT))
+			return InterfaceArtificialIntelligence.AI_ACTION_GO_LEFT;
 		else
-			return  ArtificialIntelligence.AI_ACTION_GO_DOWN;
+			return  InterfaceArtificialIntelligence.AI_ACTION_GO_DOWN;
 	}
 	
 
@@ -657,15 +657,15 @@ public class BaydarCamci extends ArtificialIntelligence
 	//se deplace au case de bombe
 	public Integer getPutBombPosition(int x, int y)
 	{
-		if(lastPreMove == ArtificialIntelligence.AI_ACTION_GO_DOWN)
-			return ArtificialIntelligence.AI_ACTION_GO_UP;
-		if(lastPreMove == ArtificialIntelligence.AI_ACTION_GO_UP)
-			return ArtificialIntelligence.AI_ACTION_GO_DOWN;
-		if(lastPreMove == ArtificialIntelligence.AI_ACTION_GO_LEFT)
-			return ArtificialIntelligence.AI_ACTION_GO_RIGHT;
-		if(lastPreMove == ArtificialIntelligence.AI_ACTION_GO_RIGHT)
-			return ArtificialIntelligence.AI_ACTION_GO_LEFT;
-		return ArtificialIntelligence.AI_ACTION_DO_NOTHING;
+		if(lastPreMove == InterfaceArtificialIntelligence.AI_ACTION_GO_DOWN)
+			return InterfaceArtificialIntelligence.AI_ACTION_GO_UP;
+		if(lastPreMove == InterfaceArtificialIntelligence.AI_ACTION_GO_UP)
+			return InterfaceArtificialIntelligence.AI_ACTION_GO_DOWN;
+		if(lastPreMove == InterfaceArtificialIntelligence.AI_ACTION_GO_LEFT)
+			return InterfaceArtificialIntelligence.AI_ACTION_GO_RIGHT;
+		if(lastPreMove == InterfaceArtificialIntelligence.AI_ACTION_GO_RIGHT)
+			return InterfaceArtificialIntelligence.AI_ACTION_GO_LEFT;
+		return InterfaceArtificialIntelligence.AI_ACTION_DO_NOTHING;
 		
 	}
 	

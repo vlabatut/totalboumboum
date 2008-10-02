@@ -2,11 +2,11 @@ package tournament200708.kurtulusozsoy;
 import java.util.Random;
 import java.util.Vector;
 
-import tournament200708.ArtificialIntelligence;
+import tournament200708.InterfaceArtificialIntelligence;
 
 
 
-public class KurtulusOzsoy extends ArtificialIntelligence{
+public class KurtulusOzsoy extends InterfaceArtificialIntelligence{
 	
 
 	
@@ -28,12 +28,12 @@ public class KurtulusOzsoy extends ArtificialIntelligence{
 		
 		public KurtulusOzsoy()
 		{	super("KurtlsOzsy");
-			lastMove = ArtificialIntelligence.AI_ACTION_GO_LEFT;
+			lastMove = InterfaceArtificialIntelligence.AI_ACTION_GO_LEFT;
 			
 		}
 		
 		public Integer call() throws Exception
-		{	Integer result = ArtificialIntelligence.AI_ACTION_DO_NOTHING;
+		{	Integer result = InterfaceArtificialIntelligence.AI_ACTION_DO_NOTHING;
 			int x = getOwnPosition()[0];
 			int y = getOwnPosition()[1];
 			posit=getClosestPlayerPosition(x, y);
@@ -43,7 +43,7 @@ public class KurtulusOzsoy extends ArtificialIntelligence{
 				int temp[] = getDirectionPreferences(x, y, posit[0],posit[1]);
 			// on sélectionne une direction possible
 			int i=0;
-			while(i<temp.length && result==ArtificialIntelligence.AI_ACTION_DO_NOTHING)
+			while(i<temp.length && result==InterfaceArtificialIntelligence.AI_ACTION_DO_NOTHING)
 			{	if(isMovePossible(x, y, temp[i]))
 			          result = temp[i];
 			          
@@ -67,7 +67,7 @@ public class KurtulusOzsoy extends ArtificialIntelligence{
 				int temp[] = getDirectionPreferences(x, y, dangerPos[0], dangerPos[1]);
 				// on sélectionne une direction possible
 				int i=0;
-				while(i<temp.length && result==ArtificialIntelligence.AI_ACTION_DO_NOTHING)
+				while(i<temp.length && result==InterfaceArtificialIntelligence.AI_ACTION_DO_NOTHING)
 				{	if(isMovePossible(x, y, temp[i]))
 				          result = temp[i];
 				          
@@ -113,18 +113,18 @@ public class KurtulusOzsoy extends ArtificialIntelligence{
 			boolean result = false;
 			// bombes
 			result = result ||
-	 matrix[x][y]==ArtificialIntelligence.AI_BLOCK_BOMB;
+	 matrix[x][y]==InterfaceArtificialIntelligence.AI_BLOCK_BOMB;
 			// feu
 			result = result ||
-	 matrix[x][y]==ArtificialIntelligence.AI_BLOCK_FIRE;
+	 matrix[x][y]==InterfaceArtificialIntelligence.AI_BLOCK_FIRE;
 			// murs
 			result = result ||
-	 matrix[x][y]==ArtificialIntelligence.AI_BLOCK_WALL_HARD;
+	 matrix[x][y]==InterfaceArtificialIntelligence.AI_BLOCK_WALL_HARD;
 			result = result ||
-	 matrix[x][y]==ArtificialIntelligence.AI_BLOCK_WALL_SOFT;
+	 matrix[x][y]==InterfaceArtificialIntelligence.AI_BLOCK_WALL_SOFT;
 			// on ne sait pas quoi
 			result = result ||
-	 matrix[x][y]==ArtificialIntelligence.AI_BLOCK_UNKNOWN;
+	 matrix[x][y]==InterfaceArtificialIntelligence.AI_BLOCK_UNKNOWN;
 			// shrink
 			result = result || (x==getNextShrinkPosition()[0] &&
 	 y==getNextShrinkPosition()[1]);
@@ -143,16 +143,16 @@ public class KurtulusOzsoy extends ArtificialIntelligence{
 		{	boolean result;
 			// calcum
 			switch(move)
-			{	case ArtificialIntelligence.AI_ACTION_GO_UP:
+			{	case InterfaceArtificialIntelligence.AI_ACTION_GO_UP:
 					result = y>0 && !isObstacle(x,y-1);
 					break;
-				case ArtificialIntelligence.AI_ACTION_GO_DOWN:
+				case InterfaceArtificialIntelligence.AI_ACTION_GO_DOWN:
 					result = y<(getZoneMatrixDimY()-1) && !isObstacle(x,y+1);
 					break;
-				case ArtificialIntelligence.AI_ACTION_GO_LEFT:
+				case InterfaceArtificialIntelligence.AI_ACTION_GO_LEFT:
 					result = x>0 && !isObstacle(x-1,y);
 					break;
-				case ArtificialIntelligence.AI_ACTION_GO_RIGHT:
+				case InterfaceArtificialIntelligence.AI_ACTION_GO_RIGHT:
 					result = x<(getZoneMatrixDimX()-1) && !isObstacle(x+1,y);
 					break;
 				default:
@@ -257,13 +257,13 @@ public class KurtulusOzsoy extends ArtificialIntelligence{
 				}
 			}
 			result[indexUp] = new
-	        Integer(ArtificialIntelligence.AI_ACTION_GO_UP);
+	        Integer(InterfaceArtificialIntelligence.AI_ACTION_GO_UP);
 			result[indexDn] = new
-	        Integer(ArtificialIntelligence.AI_ACTION_GO_DOWN);
+	        Integer(InterfaceArtificialIntelligence.AI_ACTION_GO_DOWN);
 			result[indexLt] = new
-	        Integer(ArtificialIntelligence.AI_ACTION_GO_LEFT);
+	        Integer(InterfaceArtificialIntelligence.AI_ACTION_GO_LEFT);
 			result[indexRt] = new
-	        Integer(ArtificialIntelligence.AI_ACTION_GO_RIGHT);
+	        Integer(InterfaceArtificialIntelligence.AI_ACTION_GO_RIGHT);
 			return result;
 		}
 		else {int result[] = new int[1];
@@ -380,8 +380,8 @@ public class KurtulusOzsoy extends ArtificialIntelligence{
 		{	// on peut poser une bombe si on est à la fois dans un cul de sac 
 			// (1 seul déplacement possible) et sur une case vide
 			result=AI_ACTION_DO_NOTHING;
-			if(possibleMoves.size()<2 && getZoneMatrix()[x][y]==ArtificialIntelligence.AI_BLOCK_EMPTY)
-				possibleMoves.add(ArtificialIntelligence.AI_ACTION_PUT_BOMB);
+			if(possibleMoves.size()<2 && getZoneMatrix()[x][y]==InterfaceArtificialIntelligence.AI_BLOCK_EMPTY)
+				possibleMoves.add(InterfaceArtificialIntelligence.AI_ACTION_PUT_BOMB);
 		
 			Random rand = new Random();
 			// on détermine aléatoirement l'action qui va être effectuée

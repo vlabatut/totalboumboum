@@ -2,11 +2,11 @@ package tournament200708.hancitoprak;
 
 import java.util.Vector;
 
-import tournament200708.ArtificialIntelligence;
+import tournament200708.InterfaceArtificialIntelligence;
 
 
 
-public class HanciToprak extends ArtificialIntelligence {
+public class HanciToprak extends InterfaceArtificialIntelligence {
 	private static final long serialVersionUID = 1L;
 	/** le dernier déplacement effectué */
 	private Integer lastMove = null;
@@ -52,7 +52,7 @@ public class HanciToprak extends ArtificialIntelligence {
 		index = 0;
 
 		// on détermine la position actuelle
-		Integer result = ArtificialIntelligence.AI_ACTION_DO_NOTHING;
+		Integer result = InterfaceArtificialIntelligence.AI_ACTION_DO_NOTHING;
 		int x = getOwnPosition()[0];
 		int y = getOwnPosition()[1];
 		
@@ -73,7 +73,7 @@ public class HanciToprak extends ArtificialIntelligence {
 				lastMove = result;
 			}
 
-			else if (lastMove == ArtificialIntelligence.AI_ACTION_PUT_BOMB
+			else if (lastMove == InterfaceArtificialIntelligence.AI_ACTION_PUT_BOMB
 					|| (temp_putbomb > 0 && temp_putbomb < 8)) {
 
 				
@@ -129,7 +129,7 @@ public class HanciToprak extends ArtificialIntelligence {
 						}
 						if(danger==0){
 							
-							result = ArtificialIntelligence.AI_ACTION_PUT_BOMB;
+							result = InterfaceArtificialIntelligence.AI_ACTION_PUT_BOMB;
 							lastMove_ = lastMove;
 							lastMove = result;
 						}
@@ -144,7 +144,7 @@ public class HanciToprak extends ArtificialIntelligence {
 						
 					} 
 					else if(tampon.size()==0){
-						result = ArtificialIntelligence.AI_ACTION_DO_NOTHING;
+						result = InterfaceArtificialIntelligence.AI_ACTION_DO_NOTHING;
 						hasno_bomb = 1;
 					}
 					else {
@@ -157,7 +157,7 @@ public class HanciToprak extends ArtificialIntelligence {
 						}
 						
 						else{
-							result = ArtificialIntelligence.AI_ACTION_DO_NOTHING;
+							result = InterfaceArtificialIntelligence.AI_ACTION_DO_NOTHING;
 							//si result est do_nothing,on ne doit pas considerer le mouvement plusieurs fois d'un case a un case 
 							hasno_bomb = 1;
 							
@@ -171,7 +171,7 @@ public class HanciToprak extends ArtificialIntelligence {
 					possibleMoves = escapeFromBombPower(x, y, possibleMoves);
 					if (possibleMoves.size() == 0) {
 						
-						result = ArtificialIntelligence.AI_ACTION_DO_NOTHING;
+						result = InterfaceArtificialIntelligence.AI_ACTION_DO_NOTHING;
 						hasno_bomb = 1;
 						//lastMove = result;
 					} 
@@ -189,7 +189,7 @@ public class HanciToprak extends ArtificialIntelligence {
 							else{
 								Vector<Integer> tampon =escapeFromBombPower(x, y,possibleMoves);
 								if(tampon.size()==0){
-									result = ArtificialIntelligence.AI_ACTION_DO_NOTHING;
+									result = InterfaceArtificialIntelligence.AI_ACTION_DO_NOTHING;
 									hasno_bomb = 1;
 									
 								}else{
@@ -231,7 +231,7 @@ public class HanciToprak extends ArtificialIntelligence {
 			
 
 		}
-		if (lastMove == ArtificialIntelligence.AI_ACTION_PUT_BOMB
+		if (lastMove == InterfaceArtificialIntelligence.AI_ACTION_PUT_BOMB
 				|| hasno_bomb == 1) {
 			
 			hasno_bomb = 0;
@@ -267,7 +267,7 @@ public class HanciToprak extends ArtificialIntelligence {
 				
 				Vector<Integer> pm = getPossibleMoves(x, y);
 				if(pm.size()==0)
-					result=ArtificialIntelligence.AI_ACTION_DO_NOTHING;
+					result=InterfaceArtificialIntelligence.AI_ACTION_DO_NOTHING;
 				else{
 					index = (int) (Math.random() * (pm.size()));				
 					result = pm.get(index);
@@ -365,7 +365,7 @@ public class HanciToprak extends ArtificialIntelligence {
 	private Integer escapeFromBomb(int x, int y, Vector<Integer> temp)
 			throws Exception {
 	
-		Integer result = ArtificialIntelligence.AI_ACTION_DO_NOTHING;
+		Integer result = InterfaceArtificialIntelligence.AI_ACTION_DO_NOTHING;
 //		yy = 0;
 		Integer lastMove_ters = null;
 		lastMove_ters = opposite_dirextion(lastMove_);
@@ -459,16 +459,16 @@ public class HanciToprak extends ArtificialIntelligence {
 		boolean result;		
 		// calcum
 		switch (move) {
-		case ArtificialIntelligence.AI_ACTION_GO_UP:
+		case InterfaceArtificialIntelligence.AI_ACTION_GO_UP:
 			result = y > 0 && !isObstacle(x, y - 1);
 			break;
-		case ArtificialIntelligence.AI_ACTION_GO_DOWN:
+		case InterfaceArtificialIntelligence.AI_ACTION_GO_DOWN:
 			result = y < (getZoneMatrixDimY() - 1) && !isObstacle(x, y + 1);
 			break;
-		case ArtificialIntelligence.AI_ACTION_GO_LEFT:
+		case InterfaceArtificialIntelligence.AI_ACTION_GO_LEFT:
 			result = x > 0 && !isObstacle(x - 1, y);
 			break;
-		case ArtificialIntelligence.AI_ACTION_GO_RIGHT:
+		case InterfaceArtificialIntelligence.AI_ACTION_GO_RIGHT:
 			result = x < (getZoneMatrixDimX() - 1) && !isObstacle(x + 1, y);
 			break;
 		default:
@@ -489,17 +489,17 @@ public class HanciToprak extends ArtificialIntelligence {
 		int[][] matrix = getZoneMatrix();
 		boolean result = false;
 		// bombes
-		result = result || matrix[x][y] == ArtificialIntelligence.AI_BLOCK_BOMB;
+		result = result || matrix[x][y] == InterfaceArtificialIntelligence.AI_BLOCK_BOMB;
 		// feu
-		result = result || matrix[x][y] == ArtificialIntelligence.AI_BLOCK_FIRE;
+		result = result || matrix[x][y] == InterfaceArtificialIntelligence.AI_BLOCK_FIRE;
 		// murs
 		result = result
-				|| matrix[x][y] == ArtificialIntelligence.AI_BLOCK_WALL_HARD;
+				|| matrix[x][y] == InterfaceArtificialIntelligence.AI_BLOCK_WALL_HARD;
 		result = result
-				|| matrix[x][y] == ArtificialIntelligence.AI_BLOCK_WALL_SOFT;
+				|| matrix[x][y] == InterfaceArtificialIntelligence.AI_BLOCK_WALL_SOFT;
 		// on ne sait pas quoi
 		result = result
-				|| matrix[x][y] == ArtificialIntelligence.AI_BLOCK_UNKNOWN;
+				|| matrix[x][y] == InterfaceArtificialIntelligence.AI_BLOCK_UNKNOWN;
 		// shrink
 		if(getTimeBeforeShrink()<10000)//on ne controle pas le shrink avant 10 seconds de son commencement
 			result = result

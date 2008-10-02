@@ -6,11 +6,11 @@ import java.util.PriorityQueue;
 import java.util.Vector;
 import java.util.Iterator;
 
-import tournament200708.ArtificialIntelligence;
+import tournament200708.InterfaceArtificialIntelligence;
 
 
 
-public class SahinYildirim extends ArtificialIntelligence {
+public class SahinYildirim extends InterfaceArtificialIntelligence {
 
 	Runtime r = Runtime.getRuntime();
 	private static final long serialVersionUID = 1L;	
@@ -23,7 +23,7 @@ public class SahinYildirim extends ArtificialIntelligence {
 	private Vector<ParentChild> perler = new Vector<ParentChild>();
    
 	int pathtoFait = 0;
-	int nextMove = ArtificialIntelligence.AI_ACTION_DO_NOTHING;
+	int nextMove = InterfaceArtificialIntelligence.AI_ACTION_DO_NOTHING;
 	boolean lastMoveFromPutbomb = false;
 
 	Point lastPoint;
@@ -41,12 +41,12 @@ public class SahinYildirim extends ArtificialIntelligence {
 	 */
 	public SahinYildirim() {
 		super("SahnYildrm");
-		lastMove = ArtificialIntelligence.AI_ACTION_GO_UP;
+		lastMove = InterfaceArtificialIntelligence.AI_ACTION_GO_UP;
 	}
 
 	public Integer call() throws Exception {
 		Point pointMe;
-		int result = ArtificialIntelligence.AI_ACTION_DO_NOTHING;
+		int result = InterfaceArtificialIntelligence.AI_ACTION_DO_NOTHING;
 
 		// get own position
 		int x = getOwnPosition()[0];
@@ -54,9 +54,9 @@ public class SahinYildirim extends ArtificialIntelligence {
 
 		pointMe = new Point(x, y);
 
-		if (getZoneMatrix()[x][y] == ArtificialIntelligence.AI_BLOCK_ITEM_BOMB)
+		if (getZoneMatrix()[x][y] == InterfaceArtificialIntelligence.AI_BLOCK_ITEM_BOMB)
 			bonusBomb++;
-		if (getZoneMatrix()[x][y] == ArtificialIntelligence.AI_BLOCK_ITEM_FIRE)
+		if (getZoneMatrix()[x][y] == InterfaceArtificialIntelligence.AI_BLOCK_ITEM_FIRE)
 			bonusFire++;
 		
 		//  possible moves
@@ -64,7 +64,7 @@ public class SahinYildirim extends ArtificialIntelligence {
 		
 		// listes des bombes qui sont proches
 		ArrayList<Integer> bombPositions = getClosestBlockPosition(x, y,
-				ArtificialIntelligence.AI_BLOCK_BOMB);
+				InterfaceArtificialIntelligence.AI_BLOCK_BOMB);
 				
 		// si il y a des bombs alors defence()
 		  if(bombPositions.size()>0) {	  
@@ -77,12 +77,12 @@ public class SahinYildirim extends ArtificialIntelligence {
 		  
 		 //si il ya au moins un wallSoft alors on peut poser une bombe
 		 if(possibleMoves.size()<2 &&
-		  getZoneMatrix()[x][y]==ArtificialIntelligence.AI_BLOCK_EMPTY) {
-		  if(getZoneMatrix()[x+1][y]==ArtificialIntelligence.AI_BLOCK_WALL_SOFT ||
-		  getZoneMatrix()[x-1][y]==ArtificialIntelligence.AI_BLOCK_WALL_SOFT ||
-		  getZoneMatrix()[x][y+1]== ArtificialIntelligence.AI_BLOCK_WALL_SOFT ||
-		  getZoneMatrix()[x][y-1]== ArtificialIntelligence.AI_BLOCK_WALL_SOFT)
-		  possibleMoves.add(ArtificialIntelligence.AI_ACTION_PUT_BOMB); } }
+		  getZoneMatrix()[x][y]==InterfaceArtificialIntelligence.AI_BLOCK_EMPTY) {
+		  if(getZoneMatrix()[x+1][y]==InterfaceArtificialIntelligence.AI_BLOCK_WALL_SOFT ||
+		  getZoneMatrix()[x-1][y]==InterfaceArtificialIntelligence.AI_BLOCK_WALL_SOFT ||
+		  getZoneMatrix()[x][y+1]== InterfaceArtificialIntelligence.AI_BLOCK_WALL_SOFT ||
+		  getZoneMatrix()[x][y-1]== InterfaceArtificialIntelligence.AI_BLOCK_WALL_SOFT)
+		  possibleMoves.add(InterfaceArtificialIntelligence.AI_ACTION_PUT_BOMB); } }
 		 
 		  
 		  if(possibleMoves.contains(lastMove)) 
@@ -119,7 +119,7 @@ public class SahinYildirim extends ArtificialIntelligence {
 				bombVar = false;
 		
 				result = path.get(0);
-				if (path.get(0) == ArtificialIntelligence.AI_ACTION_PUT_BOMB)
+				if (path.get(0) == InterfaceArtificialIntelligence.AI_ACTION_PUT_BOMB)
 					path.remove(0);
 				else {
 					if (pathtoFait % 8 == 0) {
@@ -150,10 +150,10 @@ public class SahinYildirim extends ArtificialIntelligence {
 			result = nextMove;
 		
 		lastMoveFromPutbomb = false;
-		nextMove = ArtificialIntelligence.AI_ACTION_DO_NOTHING;
+		nextMove = InterfaceArtificialIntelligence.AI_ACTION_DO_NOTHING;
 		if(putBomb(x, y)){
 			
-			result = ArtificialIntelligence.AI_ACTION_PUT_BOMB;
+			result = InterfaceArtificialIntelligence.AI_ACTION_PUT_BOMB;
 			
 		}
 		
@@ -175,18 +175,18 @@ public class SahinYildirim extends ArtificialIntelligence {
 	{	
 		
 		
-		if((getZoneMatrix()[x][y+1]== ArtificialIntelligence.AI_BLOCK_ITEM_BOMB
-				|| getZoneMatrix()[x][y+1]==ArtificialIntelligence.AI_BLOCK_ITEM_FIRE))
-			result =  ArtificialIntelligence.AI_ACTION_GO_DOWN;
-		else if((getZoneMatrix()[x][y-1]== ArtificialIntelligence.AI_BLOCK_ITEM_BOMB
-				|| getZoneMatrix()[x][y-1]==ArtificialIntelligence.AI_BLOCK_ITEM_FIRE))
-			result =  ArtificialIntelligence.AI_ACTION_GO_UP;
-		else if((getZoneMatrix()[x+1][y]== ArtificialIntelligence.AI_BLOCK_ITEM_BOMB
-				|| getZoneMatrix()[x+1][y]==ArtificialIntelligence.AI_BLOCK_ITEM_FIRE))
-			result = ArtificialIntelligence.AI_ACTION_GO_RIGHT;
-		else if((getZoneMatrix()[x-1][y]== ArtificialIntelligence.AI_BLOCK_ITEM_BOMB
-				|| getZoneMatrix()[x-1][y]==ArtificialIntelligence.AI_BLOCK_ITEM_FIRE))
-			result = ArtificialIntelligence.AI_ACTION_GO_LEFT;
+		if((getZoneMatrix()[x][y+1]== InterfaceArtificialIntelligence.AI_BLOCK_ITEM_BOMB
+				|| getZoneMatrix()[x][y+1]==InterfaceArtificialIntelligence.AI_BLOCK_ITEM_FIRE))
+			result =  InterfaceArtificialIntelligence.AI_ACTION_GO_DOWN;
+		else if((getZoneMatrix()[x][y-1]== InterfaceArtificialIntelligence.AI_BLOCK_ITEM_BOMB
+				|| getZoneMatrix()[x][y-1]==InterfaceArtificialIntelligence.AI_BLOCK_ITEM_FIRE))
+			result =  InterfaceArtificialIntelligence.AI_ACTION_GO_UP;
+		else if((getZoneMatrix()[x+1][y]== InterfaceArtificialIntelligence.AI_BLOCK_ITEM_BOMB
+				|| getZoneMatrix()[x+1][y]==InterfaceArtificialIntelligence.AI_BLOCK_ITEM_FIRE))
+			result = InterfaceArtificialIntelligence.AI_ACTION_GO_RIGHT;
+		else if((getZoneMatrix()[x-1][y]== InterfaceArtificialIntelligence.AI_BLOCK_ITEM_BOMB
+				|| getZoneMatrix()[x-1][y]==InterfaceArtificialIntelligence.AI_BLOCK_ITEM_FIRE))
+			result = InterfaceArtificialIntelligence.AI_ACTION_GO_LEFT;
 	
 		return result;
 		
@@ -211,29 +211,29 @@ public class SahinYildirim extends ArtificialIntelligence {
 			if(bonusFire >= Math.abs(x-playerPos.get(j)) && 
 					bonusFire >= Math.abs(y-playerPos.get(j+1)))
 			{	
-				if(monIndex == ArtificialIntelligence.AI_ACTION_GO_DOWN){
-					if(isMovePossible(x, y, ArtificialIntelligence.AI_ACTION_GO_UP))
-					nextMove = ArtificialIntelligence.AI_ACTION_GO_UP;
+				if(monIndex == InterfaceArtificialIntelligence.AI_ACTION_GO_DOWN){
+					if(isMovePossible(x, y, InterfaceArtificialIntelligence.AI_ACTION_GO_UP))
+					nextMove = InterfaceArtificialIntelligence.AI_ACTION_GO_UP;
 					else
-						nextMove = ArtificialIntelligence.AI_ACTION_GO_DOWN;
+						nextMove = InterfaceArtificialIntelligence.AI_ACTION_GO_DOWN;
 				}
-				if(monIndex == ArtificialIntelligence.AI_ACTION_GO_UP){
-					if(isMovePossible(x, y, ArtificialIntelligence.AI_ACTION_GO_DOWN))
-					nextMove = ArtificialIntelligence.AI_ACTION_GO_DOWN;
+				if(monIndex == InterfaceArtificialIntelligence.AI_ACTION_GO_UP){
+					if(isMovePossible(x, y, InterfaceArtificialIntelligence.AI_ACTION_GO_DOWN))
+					nextMove = InterfaceArtificialIntelligence.AI_ACTION_GO_DOWN;
 					else
-						nextMove = ArtificialIntelligence.AI_ACTION_GO_UP;
+						nextMove = InterfaceArtificialIntelligence.AI_ACTION_GO_UP;
 				}
-				if(monIndex == ArtificialIntelligence.AI_ACTION_GO_LEFT){
-					if(isMovePossible(x, y, ArtificialIntelligence.AI_ACTION_GO_RIGHT))
-					nextMove = ArtificialIntelligence.AI_ACTION_GO_RIGHT;
+				if(monIndex == InterfaceArtificialIntelligence.AI_ACTION_GO_LEFT){
+					if(isMovePossible(x, y, InterfaceArtificialIntelligence.AI_ACTION_GO_RIGHT))
+					nextMove = InterfaceArtificialIntelligence.AI_ACTION_GO_RIGHT;
 					else
-						nextMove = ArtificialIntelligence.AI_ACTION_GO_LEFT;
+						nextMove = InterfaceArtificialIntelligence.AI_ACTION_GO_LEFT;
 				}
-				if(monIndex == ArtificialIntelligence.AI_ACTION_GO_RIGHT){
-					if(isMovePossible(x, y, ArtificialIntelligence.AI_ACTION_GO_LEFT))
-					nextMove = ArtificialIntelligence.AI_ACTION_GO_LEFT;
+				if(monIndex == InterfaceArtificialIntelligence.AI_ACTION_GO_RIGHT){
+					if(isMovePossible(x, y, InterfaceArtificialIntelligence.AI_ACTION_GO_LEFT))
+					nextMove = InterfaceArtificialIntelligence.AI_ACTION_GO_LEFT;
 					else
-						nextMove = ArtificialIntelligence.AI_ACTION_GO_RIGHT;
+						nextMove = InterfaceArtificialIntelligence.AI_ACTION_GO_RIGHT;
 				}
 				
 				
@@ -318,7 +318,7 @@ public class SahinYildirim extends ArtificialIntelligence {
 							count++;
 							path.add(addToPath(prqFils.peek(), node));
 							count++;
-							path.add(ArtificialIntelligence.AI_ACTION_PUT_BOMB);
+							path.add(InterfaceArtificialIntelligence.AI_ACTION_PUT_BOMB);
 							solution = pointFind;
 						} else {
 							if(prqFils.peek().equals(pointFind))
@@ -363,7 +363,7 @@ public class SahinYildirim extends ArtificialIntelligence {
 										.get(0).getPere()));
 								count++;
 								path
-										.add(ArtificialIntelligence.AI_ACTION_PUT_BOMB);
+										.add(InterfaceArtificialIntelligence.AI_ACTION_PUT_BOMB);
 								solution = pointFind;
 							} else {
 								if (lastPoint
@@ -401,7 +401,7 @@ public class SahinYildirim extends ArtificialIntelligence {
 										.get(1).getPere()));
 
 								path
-										.add(ArtificialIntelligence.AI_ACTION_PUT_BOMB);
+										.add(InterfaceArtificialIntelligence.AI_ACTION_PUT_BOMB);
 								solution = pointFind;
 							} else {
 								if (lastPoint
@@ -437,7 +437,7 @@ public class SahinYildirim extends ArtificialIntelligence {
 					if (prqFils.peek().isPointMure()) {
 						path.add(addToPath(prqFils.peek(), node));
 						count++;
-						path.add(ArtificialIntelligence.AI_ACTION_PUT_BOMB);
+						path.add(InterfaceArtificialIntelligence.AI_ACTION_PUT_BOMB);
 						solution = pointFind;
 					} else {
 						if (!node.equals(pointMeRoot)) {
@@ -493,14 +493,14 @@ public class SahinYildirim extends ArtificialIntelligence {
 		int result;
 		if (pointChild.getRootPoint().x == pointPere.getRootPoint().x) {
 			if (pointChild.getRootPoint().y < pointPere.getRootPoint().y)
-				result = ArtificialIntelligence.AI_ACTION_GO_UP;
+				result = InterfaceArtificialIntelligence.AI_ACTION_GO_UP;
 			else
-				result = ArtificialIntelligence.AI_ACTION_GO_DOWN;
+				result = InterfaceArtificialIntelligence.AI_ACTION_GO_DOWN;
 
 		} else if (pointChild.getRootPoint().x > pointPere.getRootPoint().x)
-			result = ArtificialIntelligence.AI_ACTION_GO_RIGHT;
+			result = InterfaceArtificialIntelligence.AI_ACTION_GO_RIGHT;
 		else
-			result = ArtificialIntelligence.AI_ACTION_GO_LEFT;
+			result = InterfaceArtificialIntelligence.AI_ACTION_GO_LEFT;
 
 		return result;
 
@@ -525,57 +525,57 @@ public class SahinYildirim extends ArtificialIntelligence {
 			Vector<Integer> possibleMoves = possibleAStarMoves(x, y);
 
 			for (int j = 0; j < possibleMoves.size(); j++) {
-				if (possibleMoves.get(j) == ArtificialIntelligence.AI_ACTION_GO_DOWN) {
+				if (possibleMoves.get(j) == InterfaceArtificialIntelligence.AI_ACTION_GO_DOWN) {
 					boolean isBlockMure = false;
 					Point pointToBeAdded = new Point(x, y + 1);
 
-					if (getZoneMatrix()[x][y + 1] == ArtificialIntelligence.AI_BLOCK_WALL_SOFT)
+					if (getZoneMatrix()[x][y + 1] == InterfaceArtificialIntelligence.AI_BLOCK_WALL_SOFT)
 						isBlockMure = true;
 
 					PointFind pointFindAdd = new PointFind(pointToBeAdded,
 							getCost(x, y,
-									ArtificialIntelligence.AI_ACTION_GO_DOWN,
+									InterfaceArtificialIntelligence.AI_ACTION_GO_DOWN,
 									pointDev.getCost()), isBlockMure);
 					// on ajoute le fils dans le vector du pere
 					pere.addChild(pointFindAdd);
 
-				} else if (possibleMoves.get(j) == ArtificialIntelligence.AI_ACTION_GO_UP) {
+				} else if (possibleMoves.get(j) == InterfaceArtificialIntelligence.AI_ACTION_GO_UP) {
 					boolean isBlockMure = false;
 
 					Point pointToBeAdded = new Point(x, y - 1);
-					if (getZoneMatrix()[x][y - 1] == ArtificialIntelligence.AI_BLOCK_WALL_SOFT)
+					if (getZoneMatrix()[x][y - 1] == InterfaceArtificialIntelligence.AI_BLOCK_WALL_SOFT)
 						isBlockMure = true;
 
 					PointFind pointFindAdd = new PointFind(pointToBeAdded,
 							getCost(x, y,
-									ArtificialIntelligence.AI_ACTION_GO_UP,
+									InterfaceArtificialIntelligence.AI_ACTION_GO_UP,
 									pointDev.getCost()), isBlockMure);
 					// on ajoute le fils dans le vector du pere
 					pere.addChild(pointFindAdd);
 
-				} else if (possibleMoves.get(j) == ArtificialIntelligence.AI_ACTION_GO_LEFT) {
+				} else if (possibleMoves.get(j) == InterfaceArtificialIntelligence.AI_ACTION_GO_LEFT) {
 					boolean isBlockMure = false;
 					Point pointToBeAdded = new Point(x - 1, y);
 
-					if (getZoneMatrix()[x-1][y ] == ArtificialIntelligence.AI_BLOCK_WALL_SOFT)
+					if (getZoneMatrix()[x-1][y ] == InterfaceArtificialIntelligence.AI_BLOCK_WALL_SOFT)
 						isBlockMure = true;
 
 					PointFind pointFindAdd = new PointFind(pointToBeAdded,
 							getCost(x, y,
-									ArtificialIntelligence.AI_ACTION_GO_LEFT,
+									InterfaceArtificialIntelligence.AI_ACTION_GO_LEFT,
 									pointDev.getCost()), isBlockMure);
 					// on ajoute le fils dans le vector du pere
 					pere.addChild(pointFindAdd);
 
-				} else if (possibleMoves.get(j) == ArtificialIntelligence.AI_ACTION_GO_RIGHT) {
+				} else if (possibleMoves.get(j) == InterfaceArtificialIntelligence.AI_ACTION_GO_RIGHT) {
 					boolean isBlockMure = false;
 					Point pointToBeAdded = new Point(x + 1, y);
-					if (getZoneMatrix()[x+1][y ] == ArtificialIntelligence.AI_BLOCK_WALL_SOFT)
+					if (getZoneMatrix()[x+1][y ] == InterfaceArtificialIntelligence.AI_BLOCK_WALL_SOFT)
 						isBlockMure = true;
 
 					PointFind pointFindAdd = new PointFind(pointToBeAdded,
 							getCost(x, y,
-									ArtificialIntelligence.AI_ACTION_GO_RIGHT,
+									InterfaceArtificialIntelligence.AI_ACTION_GO_RIGHT,
 									pointDev.getCost()), isBlockMure);
 					// on ajoute le fils dans le vector du pere
 					pere.addChild(pointFindAdd);
@@ -605,47 +605,47 @@ public class SahinYildirim extends ArtificialIntelligence {
 
 		System.out.print("ilk Cost = " + cost);
 		int differnce;//la distance de cette point au point target
-		if (move == ArtificialIntelligence.AI_ACTION_GO_DOWN) {
+		if (move == InterfaceArtificialIntelligence.AI_ACTION_GO_DOWN) {
 			differnce = getDistance(x, y + 1, pointFind.getRootPoint().x,
 					pointFind.getRootPoint().y);
 			System.out.print(" DownCostDifference = " + differnce);
 
 			cost = cost + differnce;
 
-			if (getZoneMatrix()[x][y + 1] == ArtificialIntelligence.AI_BLOCK_WALL_SOFT)
+			if (getZoneMatrix()[x][y + 1] == InterfaceArtificialIntelligence.AI_BLOCK_WALL_SOFT)
 				cost = cost + 10;
-			if (getZoneMatrix()[x][y + 1] == ArtificialIntelligence.AI_BLOCK_EMPTY)
+			if (getZoneMatrix()[x][y + 1] == InterfaceArtificialIntelligence.AI_BLOCK_EMPTY)
 				cost = cost + 1;
 
-		} else if (move == ArtificialIntelligence.AI_ACTION_GO_UP) {
+		} else if (move == InterfaceArtificialIntelligence.AI_ACTION_GO_UP) {
 			differnce = getDistance(x, y - 1, pointFind.getRootPoint().x,
 					pointFind.getRootPoint().y);
 			System.out.print(" UPCostDifference = " + differnce);
 			cost = cost + differnce;
-			if (getZoneMatrix()[x][y - 1] == ArtificialIntelligence.AI_BLOCK_WALL_SOFT)
+			if (getZoneMatrix()[x][y - 1] == InterfaceArtificialIntelligence.AI_BLOCK_WALL_SOFT)
 				cost = cost + 10;
 
-			if (getZoneMatrix()[x][y - 1] == ArtificialIntelligence.AI_BLOCK_EMPTY)
+			if (getZoneMatrix()[x][y - 1] == InterfaceArtificialIntelligence.AI_BLOCK_EMPTY)
 				cost = cost + 1;
 
-		} else if (move == ArtificialIntelligence.AI_ACTION_GO_LEFT) {
+		} else if (move == InterfaceArtificialIntelligence.AI_ACTION_GO_LEFT) {
 			differnce = getDistance(x - 1, y, pointFind.getRootPoint().x,
 					pointFind.getRootPoint().y);
 			System.out.print(" LeftCostDifference = " + differnce);
 			cost = cost + differnce;
-			if (getZoneMatrix()[x - 1][y] == ArtificialIntelligence.AI_BLOCK_WALL_SOFT)
+			if (getZoneMatrix()[x - 1][y] == InterfaceArtificialIntelligence.AI_BLOCK_WALL_SOFT)
 				cost = cost + 10;
-			if (getZoneMatrix()[x - 1][y] == ArtificialIntelligence.AI_BLOCK_EMPTY)
+			if (getZoneMatrix()[x - 1][y] == InterfaceArtificialIntelligence.AI_BLOCK_EMPTY)
 				cost = cost + 1;
 
-		} else if (move == ArtificialIntelligence.AI_ACTION_GO_RIGHT) {
+		} else if (move == InterfaceArtificialIntelligence.AI_ACTION_GO_RIGHT) {
 			differnce = getDistance(x + 1, y, pointFind.getRootPoint().x,
 					pointFind.getRootPoint().y);
 			System.out.print(" RightCostDifference = " + differnce);
 			cost = cost + differnce;
-			if (getZoneMatrix()[x + 1][y] == ArtificialIntelligence.AI_BLOCK_WALL_SOFT)
+			if (getZoneMatrix()[x + 1][y] == InterfaceArtificialIntelligence.AI_BLOCK_WALL_SOFT)
 				cost = cost + 10;
-			if (getZoneMatrix()[x + 1][y] == ArtificialIntelligence.AI_BLOCK_EMPTY)
+			if (getZoneMatrix()[x + 1][y] == InterfaceArtificialIntelligence.AI_BLOCK_EMPTY)
 				cost = cost + 1;
 
 		}
@@ -691,62 +691,62 @@ public class SahinYildirim extends ArtificialIntelligence {
 					if (x == xB) {
 
 						if (isMovePossible(x, y,
-								ArtificialIntelligence.AI_ACTION_GO_DOWN))
+								InterfaceArtificialIntelligence.AI_ACTION_GO_DOWN))
 							if (isMovePossible(x, y + 1,
-									ArtificialIntelligence.AI_ACTION_GO_DOWN)
+									InterfaceArtificialIntelligence.AI_ACTION_GO_DOWN)
 									|| isMovePossible(
 											x,
 											y + 1,
-											ArtificialIntelligence.AI_ACTION_GO_LEFT)
+											InterfaceArtificialIntelligence.AI_ACTION_GO_LEFT)
 									|| isMovePossible(
 											x,
 											y + 1,
-											ArtificialIntelligence.AI_ACTION_GO_RIGHT))
+											InterfaceArtificialIntelligence.AI_ACTION_GO_RIGHT))
 
 								possibleDown++;
 
 						if (isMovePossible(x, y,
-								ArtificialIntelligence.AI_ACTION_GO_LEFT))
+								InterfaceArtificialIntelligence.AI_ACTION_GO_LEFT))
 							if (isMovePossible(x - 1, y,
-									ArtificialIntelligence.AI_ACTION_GO_LEFT)
+									InterfaceArtificialIntelligence.AI_ACTION_GO_LEFT)
 									|| isMovePossible(
 											x - 1,
 											y,
-											ArtificialIntelligence.AI_ACTION_GO_DOWN)
+											InterfaceArtificialIntelligence.AI_ACTION_GO_DOWN)
 									|| isMovePossible(
 											x - 1,
 											y,
-											ArtificialIntelligence.AI_ACTION_GO_UP))
+											InterfaceArtificialIntelligence.AI_ACTION_GO_UP))
 
 								possibleLeft++;
 
 						if (isMovePossible(x, y,
-								ArtificialIntelligence.AI_ACTION_GO_RIGHT))
+								InterfaceArtificialIntelligence.AI_ACTION_GO_RIGHT))
 							if (isMovePossible(x + 1, y,
-									ArtificialIntelligence.AI_ACTION_GO_RIGHT)
+									InterfaceArtificialIntelligence.AI_ACTION_GO_RIGHT)
 									|| isMovePossible(
 											x + 1,
 											y,
-											ArtificialIntelligence.AI_ACTION_GO_DOWN)
+											InterfaceArtificialIntelligence.AI_ACTION_GO_DOWN)
 									|| isMovePossible(
 											x + 1,
 											y,
-											ArtificialIntelligence.AI_ACTION_GO_UP))
+											InterfaceArtificialIntelligence.AI_ACTION_GO_UP))
 
 								possibleRight++;
 
 						if (isMovePossible(x, y,
-								ArtificialIntelligence.AI_ACTION_GO_UP))
+								InterfaceArtificialIntelligence.AI_ACTION_GO_UP))
 							if (isMovePossible(x, y - 1,
-									ArtificialIntelligence.AI_ACTION_GO_UP)
+									InterfaceArtificialIntelligence.AI_ACTION_GO_UP)
 									|| isMovePossible(
 											x,
 											y - 1,
-											ArtificialIntelligence.AI_ACTION_GO_LEFT)
+											InterfaceArtificialIntelligence.AI_ACTION_GO_LEFT)
 									|| isMovePossible(
 											x,
 											y - 1,
-											ArtificialIntelligence.AI_ACTION_GO_RIGHT))
+											InterfaceArtificialIntelligence.AI_ACTION_GO_RIGHT))
 
 								possibleUp++;
 
@@ -754,38 +754,38 @@ public class SahinYildirim extends ArtificialIntelligence {
 					{
 
 						if (isMovePossible(x, y,
-								ArtificialIntelligence.AI_ACTION_GO_DOWN))
+								InterfaceArtificialIntelligence.AI_ACTION_GO_DOWN))
 							possibleDown++;
 						if (isMovePossible(x, y,
-								ArtificialIntelligence.AI_ACTION_GO_UP))
+								InterfaceArtificialIntelligence.AI_ACTION_GO_UP))
 							possibleUp++;
 
 						if (x + 1 < xB - bombPower[numBomb])
 							if (isMovePossible(x, y,
-									ArtificialIntelligence.AI_ACTION_GO_RIGHT))
+									InterfaceArtificialIntelligence.AI_ACTION_GO_RIGHT))
 								possibleRight++;
 						if (possibleDown != ((j + 2) / 2)
 								&& possibleUp != ((j + 2) / 2))
 							if (isMovePossible(x, y,
-									ArtificialIntelligence.AI_ACTION_GO_LEFT))
+									InterfaceArtificialIntelligence.AI_ACTION_GO_LEFT))
 								possibleLeft++;
 					} else if (xB < x)// si elle est a gauche
 					{
 						if (isMovePossible(x, y,
-								ArtificialIntelligence.AI_ACTION_GO_DOWN))
+								InterfaceArtificialIntelligence.AI_ACTION_GO_DOWN))
 							possibleDown++;
 						if (isMovePossible(x, y,
-								ArtificialIntelligence.AI_ACTION_GO_UP))
+								InterfaceArtificialIntelligence.AI_ACTION_GO_UP))
 							possibleUp++;
 
 						if (x - 1 > xB + bombPower[numBomb])
 							if (isMovePossible(x, y,
-									ArtificialIntelligence.AI_ACTION_GO_LEFT))
+									InterfaceArtificialIntelligence.AI_ACTION_GO_LEFT))
 								possibleLeft++;
 						if (possibleDown != ((j + 2) / 2)
 								&& possibleUp != ((j + 2) / 2))
 							if (isMovePossible(x, y,
-									ArtificialIntelligence.AI_ACTION_GO_RIGHT))
+									InterfaceArtificialIntelligence.AI_ACTION_GO_RIGHT))
 								possibleRight++;
 					}
 				}
@@ -795,58 +795,58 @@ public class SahinYildirim extends ArtificialIntelligence {
 					{
 						if ((x + 1) == xB) {
 							if ((y < yB - bombPower[numBomb])
-									|| (getZoneMatrix()[x + 1][y + 1] == ArtificialIntelligence.AI_BLOCK_WALL_HARD)
-									|| (getZoneMatrix()[x + 1][y + 1] == ArtificialIntelligence.AI_BLOCK_WALL_SOFT))
+									|| (getZoneMatrix()[x + 1][y + 1] == InterfaceArtificialIntelligence.AI_BLOCK_WALL_HARD)
+									|| (getZoneMatrix()[x + 1][y + 1] == InterfaceArtificialIntelligence.AI_BLOCK_WALL_SOFT))
 								if (isMovePossible(
 										x,
 										y,
-										ArtificialIntelligence.AI_ACTION_GO_RIGHT))
+										InterfaceArtificialIntelligence.AI_ACTION_GO_RIGHT))
 									possibleRight++;
 
 						} else if ((x + 1) < xB) {
 							if (isMovePossible(x, y,
-									ArtificialIntelligence.AI_ACTION_GO_RIGHT))
+									InterfaceArtificialIntelligence.AI_ACTION_GO_RIGHT))
 								possibleRight++;
 						}
 						if ((y + 1) == yB) {
 							if ((x < xB - bombPower[numBomb])
-									|| getZoneMatrix()[x + 1][y + 1] == ArtificialIntelligence.AI_BLOCK_WALL_HARD
-									|| getZoneMatrix()[x + 1][y + 1] == ArtificialIntelligence.AI_BLOCK_WALL_SOFT)
+									|| getZoneMatrix()[x + 1][y + 1] == InterfaceArtificialIntelligence.AI_BLOCK_WALL_HARD
+									|| getZoneMatrix()[x + 1][y + 1] == InterfaceArtificialIntelligence.AI_BLOCK_WALL_SOFT)
 								if (isMovePossible(
 										x,
 										y,
-										ArtificialIntelligence.AI_ACTION_GO_DOWN))
+										InterfaceArtificialIntelligence.AI_ACTION_GO_DOWN))
 									possibleDown++;
 
 						} else if ((y + 1) < yB) {
 							if (isMovePossible(x, y,
-									ArtificialIntelligence.AI_ACTION_GO_DOWN))
+									InterfaceArtificialIntelligence.AI_ACTION_GO_DOWN))
 								possibleDown++;
 
 						}
 
 						if (isMovePossible(x, y,
-								ArtificialIntelligence.AI_ACTION_GO_UP))
+								InterfaceArtificialIntelligence.AI_ACTION_GO_UP))
 							possibleUp++;
 						if (isMovePossible(x, y,
-								ArtificialIntelligence.AI_ACTION_GO_LEFT))
+								InterfaceArtificialIntelligence.AI_ACTION_GO_LEFT))
 							possibleLeft++;
 
 					} else// si elle est au dessous a gauche
 					{
 						if ((x - 1) == xB) {
 							if ((y < yB - bombPower[numBomb])
-									|| getZoneMatrix()[x - 1][y + 1] == ArtificialIntelligence.AI_BLOCK_WALL_HARD
-									|| getZoneMatrix()[x - 1][y + 1] == ArtificialIntelligence.AI_BLOCK_WALL_SOFT)
+									|| getZoneMatrix()[x - 1][y + 1] == InterfaceArtificialIntelligence.AI_BLOCK_WALL_HARD
+									|| getZoneMatrix()[x - 1][y + 1] == InterfaceArtificialIntelligence.AI_BLOCK_WALL_SOFT)
 								if (isMovePossible(
 										x,
 										y,
-										ArtificialIntelligence.AI_ACTION_GO_LEFT))
+										InterfaceArtificialIntelligence.AI_ACTION_GO_LEFT))
 									possibleLeft++;
 
 						} else if ((x - 1) > xB) {
 							if (isMovePossible(x, y,
-									ArtificialIntelligence.AI_ACTION_GO_LEFT))
+									InterfaceArtificialIntelligence.AI_ACTION_GO_LEFT))
 								possibleRight++;
 
 						}
@@ -855,24 +855,24 @@ public class SahinYildirim extends ArtificialIntelligence {
 
 						{
 							if ((xB + bombPower[numBomb] < x)
-									|| getZoneMatrix()[x - 1][y + 1] == ArtificialIntelligence.AI_BLOCK_WALL_HARD
-									|| getZoneMatrix()[x - 1][y + 1] == ArtificialIntelligence.AI_BLOCK_WALL_SOFT)
+									|| getZoneMatrix()[x - 1][y + 1] == InterfaceArtificialIntelligence.AI_BLOCK_WALL_HARD
+									|| getZoneMatrix()[x - 1][y + 1] == InterfaceArtificialIntelligence.AI_BLOCK_WALL_SOFT)
 								if (isMovePossible(
 										x,
 										y,
-										ArtificialIntelligence.AI_ACTION_GO_DOWN))
+										InterfaceArtificialIntelligence.AI_ACTION_GO_DOWN))
 									possibleDown++;
 
 						} else if ((y + 1) < yB)
 							if (isMovePossible(x, y,
-									ArtificialIntelligence.AI_ACTION_GO_DOWN))
+									InterfaceArtificialIntelligence.AI_ACTION_GO_DOWN))
 								possibleDown++;
 
 						if (isMovePossible(x, y,
-								ArtificialIntelligence.AI_ACTION_GO_UP))
+								InterfaceArtificialIntelligence.AI_ACTION_GO_UP))
 							possibleUp++;
 						if (isMovePossible(x, y,
-								ArtificialIntelligence.AI_ACTION_GO_RIGHT))
+								InterfaceArtificialIntelligence.AI_ACTION_GO_RIGHT))
 							possibleRight++;
 
 					}
@@ -882,73 +882,73 @@ public class SahinYildirim extends ArtificialIntelligence {
 					{
 						if ((x + 1) == xB) {
 							if (y > yB + bombPower[numBomb]
-									|| getZoneMatrix()[x + 1][y - 1] == ArtificialIntelligence.AI_BLOCK_WALL_HARD
-									|| getZoneMatrix()[x + 1][y - 1] == ArtificialIntelligence.AI_BLOCK_WALL_SOFT)
+									|| getZoneMatrix()[x + 1][y - 1] == InterfaceArtificialIntelligence.AI_BLOCK_WALL_HARD
+									|| getZoneMatrix()[x + 1][y - 1] == InterfaceArtificialIntelligence.AI_BLOCK_WALL_SOFT)
 								if (isMovePossible(
 										x,
 										y,
-										ArtificialIntelligence.AI_ACTION_GO_RIGHT))
+										InterfaceArtificialIntelligence.AI_ACTION_GO_RIGHT))
 									possibleRight++;
 
 						} else if (x + 1 < xB)
 							if (isMovePossible(x, y,
-									ArtificialIntelligence.AI_ACTION_GO_RIGHT))
+									InterfaceArtificialIntelligence.AI_ACTION_GO_RIGHT))
 								possibleRight++;
 						if ((y - 1) == yB) {
 							if (x < xB - bombPower[numBomb]
-									|| getZoneMatrix()[x + 1][y - 1] == ArtificialIntelligence.AI_BLOCK_WALL_HARD
-									|| getZoneMatrix()[x + 1][y - 1] == ArtificialIntelligence.AI_BLOCK_WALL_SOFT)
+									|| getZoneMatrix()[x + 1][y - 1] == InterfaceArtificialIntelligence.AI_BLOCK_WALL_HARD
+									|| getZoneMatrix()[x + 1][y - 1] == InterfaceArtificialIntelligence.AI_BLOCK_WALL_SOFT)
 								if (isMovePossible(x, y,
-										ArtificialIntelligence.AI_ACTION_GO_UP))
+										InterfaceArtificialIntelligence.AI_ACTION_GO_UP))
 									possibleUp++;
 
 						} else if (y - 1 > yB)
 							if (isMovePossible(x, y,
-									ArtificialIntelligence.AI_ACTION_GO_UP))
+									InterfaceArtificialIntelligence.AI_ACTION_GO_UP))
 								possibleUp++;
 
 						if (isMovePossible(x, y,
-								ArtificialIntelligence.AI_ACTION_GO_DOWN))
+								InterfaceArtificialIntelligence.AI_ACTION_GO_DOWN))
 							possibleDown++;
 						if (isMovePossible(x, y,
-								ArtificialIntelligence.AI_ACTION_GO_LEFT))
+								InterfaceArtificialIntelligence.AI_ACTION_GO_LEFT))
 							possibleLeft++;
 
 					} else// si elle est au dessus a gauche
 					{
 						if ((y - 1) == yB) {
 							if (x > xB + bombPower[numBomb]
-									|| getZoneMatrix()[x - 1][y - 1] == ArtificialIntelligence.AI_BLOCK_WALL_HARD
-									|| getZoneMatrix()[x - 1][y - 1] == ArtificialIntelligence.AI_BLOCK_WALL_SOFT)
+									|| getZoneMatrix()[x - 1][y - 1] == InterfaceArtificialIntelligence.AI_BLOCK_WALL_HARD
+									|| getZoneMatrix()[x - 1][y - 1] == InterfaceArtificialIntelligence.AI_BLOCK_WALL_SOFT)
 								if (isMovePossible(x, y,
-										ArtificialIntelligence.AI_ACTION_GO_UP))
+										InterfaceArtificialIntelligence.AI_ACTION_GO_UP))
 									possibleUp++;
 
 						} else if (y - 1 > yB)
 							if (isMovePossible(x, y,
-									ArtificialIntelligence.AI_ACTION_GO_UP))
+									InterfaceArtificialIntelligence.AI_ACTION_GO_UP))
 								possibleUp++;
 
 						if ((x - 1) == xB) {
 							if (y > yB + bombPower[numBomb]
-									|| getZoneMatrix()[x - 1][y - 1] == ArtificialIntelligence.AI_BLOCK_WALL_HARD
-									|| getZoneMatrix()[x - 1][y - 1] == ArtificialIntelligence.AI_BLOCK_WALL_SOFT)
+									|| getZoneMatrix()[x - 1][y - 1] == InterfaceArtificialIntelligence.AI_BLOCK_WALL_HARD
+									|| getZoneMatrix()[x - 1][y - 1] == InterfaceArtificialIntelligence.AI_BLOCK_WALL_SOFT)
 								if (isMovePossible(
 										x,
 										y,
-										ArtificialIntelligence.AI_ACTION_GO_LEFT))
+										InterfaceArtificialIntelligence.AI_ACTION_GO_LEFT))
 									possibleLeft++;
 
 						} else if (x - 1 > xB)
 							if (isMovePossible(x, y,
-									ArtificialIntelligence.AI_ACTION_GO_LEFT))
+									InterfaceArtificialIntelligence.AI_ACTION_GO_LEFT))
 								possibleLeft++;
 
 						if (isMovePossible(x, y,
-								ArtificialIntelligence.AI_ACTION_GO_DOWN))
+								InterfaceArtificialIntelligence.AI_ACTION_GO_DOWN))
 							possibleDown++;
 						if (isMovePossible(x, y,
-								ArtificialIntelligence.AI_ACTION_GO_RIGHT))
+								InterfaceArtificialIntelligence.AI_ACTION_GO_RIGHT))
 							possibleRight++;
 					}
 
@@ -960,32 +960,32 @@ public class SahinYildirim extends ArtificialIntelligence {
 				if (x == xB)//si les abscisses sont egales
 				{
 					if (isMovePossible(x, y,
-							ArtificialIntelligence.AI_ACTION_GO_LEFT))
+							InterfaceArtificialIntelligence.AI_ACTION_GO_LEFT))
 						possibleLeft++;
 					if (isMovePossible(x, y,
-							ArtificialIntelligence.AI_ACTION_GO_RIGHT))
+							InterfaceArtificialIntelligence.AI_ACTION_GO_RIGHT))
 						possibleRight++;
 					if (y < yB)// si elle est au dessous
 					{
 						if (y + 1 < yB - bombPower[numBomb])
 							if (isMovePossible(x, y,
-									ArtificialIntelligence.AI_ACTION_GO_DOWN))
+									InterfaceArtificialIntelligence.AI_ACTION_GO_DOWN))
 								possibleDown++;
 						if (possibleLeft != ((j + 2) / 2)
 								&& possibleRight != ((j + 2) / 2))
 							if (isMovePossible(x, y,
-									ArtificialIntelligence.AI_ACTION_GO_UP))
+									InterfaceArtificialIntelligence.AI_ACTION_GO_UP))
 								possibleUp++;
 					} else // si elle est au dessus
 					{
 						if (y - 1 > yB + bombPower[numBomb])
 							if (isMovePossible(x, y,
-									ArtificialIntelligence.AI_ACTION_GO_UP))
+									InterfaceArtificialIntelligence.AI_ACTION_GO_UP))
 								possibleUp++;
 						if (possibleLeft != ((j + 2) / 2)
 								&& possibleRight != ((j + 2) / 2))
 							if (isMovePossible(x, y,
-									ArtificialIntelligence.AI_ACTION_GO_DOWN))
+									InterfaceArtificialIntelligence.AI_ACTION_GO_DOWN))
 								possibleDown++;
 					}
 				} else if (x < xB) {
@@ -993,74 +993,74 @@ public class SahinYildirim extends ArtificialIntelligence {
 					{
 						if ((x + 1) == xB) {
 							if (y < yB - bombPower[numBomb]
-									|| getZoneMatrix()[x + 1][y + 1] == ArtificialIntelligence.AI_BLOCK_WALL_HARD
-									|| getZoneMatrix()[x + 1][y + 1] == ArtificialIntelligence.AI_BLOCK_WALL_SOFT)
+									|| getZoneMatrix()[x + 1][y + 1] == InterfaceArtificialIntelligence.AI_BLOCK_WALL_HARD
+									|| getZoneMatrix()[x + 1][y + 1] == InterfaceArtificialIntelligence.AI_BLOCK_WALL_SOFT)
 								if (isMovePossible(
 										x,
 										y,
-										ArtificialIntelligence.AI_ACTION_GO_RIGHT))
+										InterfaceArtificialIntelligence.AI_ACTION_GO_RIGHT))
 									possibleRight++;
 
 						} else if (x + 1 < xB)
 							if (isMovePossible(x, y,
-									ArtificialIntelligence.AI_ACTION_GO_RIGHT))
+									InterfaceArtificialIntelligence.AI_ACTION_GO_RIGHT))
 								possibleRight++;
 
 						if ((y + 1) == yB) {
 							if (x < xB - bombPower[numBomb]
-									|| getZoneMatrix()[x + 1][y + 1] == ArtificialIntelligence.AI_BLOCK_WALL_HARD
-									|| getZoneMatrix()[x + 1][y + 1] == ArtificialIntelligence.AI_BLOCK_WALL_SOFT)
+									|| getZoneMatrix()[x + 1][y + 1] == InterfaceArtificialIntelligence.AI_BLOCK_WALL_HARD
+									|| getZoneMatrix()[x + 1][y + 1] == InterfaceArtificialIntelligence.AI_BLOCK_WALL_SOFT)
 								if (isMovePossible(
 										x,
 										y,
-										ArtificialIntelligence.AI_ACTION_GO_DOWN))
+										InterfaceArtificialIntelligence.AI_ACTION_GO_DOWN))
 									possibleDown++;
 
 						} else if (y + 1 < yB)
 							if (isMovePossible(x, y,
-									ArtificialIntelligence.AI_ACTION_GO_DOWN))
+									InterfaceArtificialIntelligence.AI_ACTION_GO_DOWN))
 								possibleDown++;
 
 						if (isMovePossible(x, y,
-								ArtificialIntelligence.AI_ACTION_GO_UP))
+								InterfaceArtificialIntelligence.AI_ACTION_GO_UP))
 							possibleUp++;
 						if (isMovePossible(x, y,
-								ArtificialIntelligence.AI_ACTION_GO_LEFT))
+								InterfaceArtificialIntelligence.AI_ACTION_GO_LEFT))
 							possibleLeft++;
 					} else// si elle est au dessus a droite
 					{
 						if ((y - 1) == yB) {
 							if (x < xB - bombPower[numBomb]
-									|| getZoneMatrix()[x + 1][y - 1] == ArtificialIntelligence.AI_BLOCK_WALL_HARD
-									|| getZoneMatrix()[x + 1][y - 1] == ArtificialIntelligence.AI_BLOCK_WALL_SOFT)
+									|| getZoneMatrix()[x + 1][y - 1] == InterfaceArtificialIntelligence.AI_BLOCK_WALL_HARD
+									|| getZoneMatrix()[x + 1][y - 1] == InterfaceArtificialIntelligence.AI_BLOCK_WALL_SOFT)
 								if (isMovePossible(x, y,
-										ArtificialIntelligence.AI_ACTION_GO_UP))
+										InterfaceArtificialIntelligence.AI_ACTION_GO_UP))
 									possibleUp++;
 
 						} else if (y - 1 > yB)
 							if (isMovePossible(x, y,
-									ArtificialIntelligence.AI_ACTION_GO_UP))
+									InterfaceArtificialIntelligence.AI_ACTION_GO_UP))
 								possibleUp++;
 						if ((x + 1) == xB) {
 							if (y - 1 > yB + bombPower[numBomb]
-									|| getZoneMatrix()[x + 1][y - 1] == ArtificialIntelligence.AI_BLOCK_WALL_HARD
-									|| getZoneMatrix()[x + 1][y - 1] == ArtificialIntelligence.AI_BLOCK_WALL_SOFT)
+									|| getZoneMatrix()[x + 1][y - 1] == InterfaceArtificialIntelligence.AI_BLOCK_WALL_HARD
+									|| getZoneMatrix()[x + 1][y - 1] == InterfaceArtificialIntelligence.AI_BLOCK_WALL_SOFT)
 								if (isMovePossible(
 										x,
 										y,
-										ArtificialIntelligence.AI_ACTION_GO_RIGHT))
+										InterfaceArtificialIntelligence.AI_ACTION_GO_RIGHT))
 									possibleRight++;
 
 						} else if (x + 1 < xB)
 							if (isMovePossible(x, y,
-									ArtificialIntelligence.AI_ACTION_GO_RIGHT))
+									InterfaceArtificialIntelligence.AI_ACTION_GO_RIGHT))
 								possibleRight++;
 
 						if (isMovePossible(x, y,
-								ArtificialIntelligence.AI_ACTION_GO_DOWN))
+								InterfaceArtificialIntelligence.AI_ACTION_GO_DOWN))
 							possibleDown++;
 						if (isMovePossible(x, y,
-								ArtificialIntelligence.AI_ACTION_GO_LEFT))
+								InterfaceArtificialIntelligence.AI_ACTION_GO_LEFT))
 							possibleLeft++;
 
 					}
@@ -1070,74 +1070,74 @@ public class SahinYildirim extends ArtificialIntelligence {
 					{
 						if ((x - 1) == xB) {
 							if (y < yB - bombPower[numBomb]
-									|| getZoneMatrix()[x - 1][y + 1] == ArtificialIntelligence.AI_BLOCK_WALL_HARD
-									|| getZoneMatrix()[x - 1][y + 1] == ArtificialIntelligence.AI_BLOCK_WALL_SOFT)
+									|| getZoneMatrix()[x - 1][y + 1] == InterfaceArtificialIntelligence.AI_BLOCK_WALL_HARD
+									|| getZoneMatrix()[x - 1][y + 1] == InterfaceArtificialIntelligence.AI_BLOCK_WALL_SOFT)
 								if (isMovePossible(
 										x,
 										y,
-										ArtificialIntelligence.AI_ACTION_GO_LEFT))
+										InterfaceArtificialIntelligence.AI_ACTION_GO_LEFT))
 									possibleLeft++;
 
 						} else if (x - 1 > xB)
 							if (isMovePossible(x, y,
-									ArtificialIntelligence.AI_ACTION_GO_LEFT))
+									InterfaceArtificialIntelligence.AI_ACTION_GO_LEFT))
 								possibleLeft++;
 						if ((y + 1) == yB) {
 							if (x > xB + bombPower[numBomb]
-									|| getZoneMatrix()[x - 1][y + 1] == ArtificialIntelligence.AI_BLOCK_WALL_HARD
-									|| getZoneMatrix()[x - 1][y + 1] == ArtificialIntelligence.AI_BLOCK_WALL_SOFT)
+									|| getZoneMatrix()[x - 1][y + 1] == InterfaceArtificialIntelligence.AI_BLOCK_WALL_HARD
+									|| getZoneMatrix()[x - 1][y + 1] == InterfaceArtificialIntelligence.AI_BLOCK_WALL_SOFT)
 								if (isMovePossible(
 										x,
 										y,
-										ArtificialIntelligence.AI_ACTION_GO_DOWN))
+										InterfaceArtificialIntelligence.AI_ACTION_GO_DOWN))
 									possibleDown++;
 
 						} else if (y + 1 < yB)
 							if (isMovePossible(x, y,
-									ArtificialIntelligence.AI_ACTION_GO_DOWN))
+									InterfaceArtificialIntelligence.AI_ACTION_GO_DOWN))
 								possibleDown++;
 
 						if (isMovePossible(x, y,
-								ArtificialIntelligence.AI_ACTION_GO_UP))
+								InterfaceArtificialIntelligence.AI_ACTION_GO_UP))
 							possibleUp++;
 						if (isMovePossible(x, y,
-								ArtificialIntelligence.AI_ACTION_GO_RIGHT))
+								InterfaceArtificialIntelligence.AI_ACTION_GO_RIGHT))
 							possibleRight++;
 					} else// si elle est au dessus a gauche
 					{
 						if ((x - 1) == xB) {
 							if (y > yB + bombPower[numBomb]
-									|| getZoneMatrix()[x - 1][y - 1] == ArtificialIntelligence.AI_BLOCK_WALL_HARD
-									|| getZoneMatrix()[x - 1][y - 1] == ArtificialIntelligence.AI_BLOCK_WALL_SOFT)
+									|| getZoneMatrix()[x - 1][y - 1] == InterfaceArtificialIntelligence.AI_BLOCK_WALL_HARD
+									|| getZoneMatrix()[x - 1][y - 1] == InterfaceArtificialIntelligence.AI_BLOCK_WALL_SOFT)
 								if (isMovePossible(
 										x,
 										y,
-										ArtificialIntelligence.AI_ACTION_GO_LEFT))
+										InterfaceArtificialIntelligence.AI_ACTION_GO_LEFT))
 									possibleLeft++;
 
 						} else if (x - 1 > xB)
 							if (isMovePossible(x, y,
-									ArtificialIntelligence.AI_ACTION_GO_LEFT))
+									InterfaceArtificialIntelligence.AI_ACTION_GO_LEFT))
 								possibleLeft++;
 
 						if ((y - 1) == yB) {
 							if (x > xB + bombPower[numBomb]
-									|| getZoneMatrix()[x - 1][y - 1] == ArtificialIntelligence.AI_BLOCK_WALL_HARD
-									|| getZoneMatrix()[x - 1][y - 1] == ArtificialIntelligence.AI_BLOCK_WALL_SOFT)
+									|| getZoneMatrix()[x - 1][y - 1] == InterfaceArtificialIntelligence.AI_BLOCK_WALL_HARD
+									|| getZoneMatrix()[x - 1][y - 1] == InterfaceArtificialIntelligence.AI_BLOCK_WALL_SOFT)
 								if (isMovePossible(x, y,
-										ArtificialIntelligence.AI_ACTION_GO_UP))
+										InterfaceArtificialIntelligence.AI_ACTION_GO_UP))
 									possibleUp++;
 
 						} else if (y - 1 > yB)
 							if (isMovePossible(x, y,
-									ArtificialIntelligence.AI_ACTION_GO_UP))
+									InterfaceArtificialIntelligence.AI_ACTION_GO_UP))
 								possibleUp++;
 
 						if (isMovePossible(x, y,
-								ArtificialIntelligence.AI_ACTION_GO_DOWN))
+								InterfaceArtificialIntelligence.AI_ACTION_GO_DOWN))
 							possibleDown++;
 						if (isMovePossible(x, y,
-								ArtificialIntelligence.AI_ACTION_GO_RIGHT))
+								InterfaceArtificialIntelligence.AI_ACTION_GO_RIGHT))
 							possibleRight++;
 
 					}
@@ -1150,20 +1150,20 @@ public class SahinYildirim extends ArtificialIntelligence {
 		}
 		// t = nombre des bombes
 		if (possibleDown == t)
-			possibleMoves.add(ArtificialIntelligence.AI_ACTION_GO_DOWN);
+			possibleMoves.add(InterfaceArtificialIntelligence.AI_ACTION_GO_DOWN);
 		
 		if (possibleLeft == t)
-			possibleMoves.add(ArtificialIntelligence.AI_ACTION_GO_LEFT);
+			possibleMoves.add(InterfaceArtificialIntelligence.AI_ACTION_GO_LEFT);
 		
 		if (possibleRight == t)
-			possibleMoves.add(ArtificialIntelligence.AI_ACTION_GO_RIGHT);
+			possibleMoves.add(InterfaceArtificialIntelligence.AI_ACTION_GO_RIGHT);
 		
 		if (possibleUp == t)
-			possibleMoves.add(ArtificialIntelligence.AI_ACTION_GO_UP);
+			possibleMoves.add(InterfaceArtificialIntelligence.AI_ACTION_GO_UP);
 		
 		//si aucun  mouvements  alors on ne fait rien
 		if (possibleMoves.size() == 0)
-			possibleMoves.add(ArtificialIntelligence.AI_ACTION_DO_NOTHING);
+			possibleMoves.add(InterfaceArtificialIntelligence.AI_ACTION_DO_NOTHING);
 
 		return possibleMoves;
 
@@ -1183,12 +1183,12 @@ public class SahinYildirim extends ArtificialIntelligence {
 		boolean result = false;
 
 		result = result
-				|| matrix[x][y] == ArtificialIntelligence.AI_BLOCK_WALL_HARD;
+				|| matrix[x][y] == InterfaceArtificialIntelligence.AI_BLOCK_WALL_HARD;
 
 		//result = result
 			//	|| matrix[x][y] == ArtificialIntelligence.AI_BLOCK_UNKNOWN;
-		result = result || matrix[x][y] == ArtificialIntelligence.AI_BLOCK_FIRE;
-		result = result || matrix[x][y] == ArtificialIntelligence.AI_BLOCK_BOMB;
+		result = result || matrix[x][y] == InterfaceArtificialIntelligence.AI_BLOCK_FIRE;
+		result = result || matrix[x][y] == InterfaceArtificialIntelligence.AI_BLOCK_BOMB;
 
 		
 		result = result || (x==getNextShrinkPosition()[0] &&
@@ -1213,17 +1213,17 @@ public class SahinYildirim extends ArtificialIntelligence {
 		boolean result;
 		// calcum
 		switch (move) {
-		case ArtificialIntelligence.AI_ACTION_GO_UP:
+		case InterfaceArtificialIntelligence.AI_ACTION_GO_UP:
 			result = y > 0 && !isObstacleAStar(x, y - 1);
 			break;
-		case ArtificialIntelligence.AI_ACTION_GO_DOWN:
+		case InterfaceArtificialIntelligence.AI_ACTION_GO_DOWN:
 			result = y < (getZoneMatrixDimY() - 1)
 					&& !isObstacleAStar(x, y + 1);
 			break;
-		case ArtificialIntelligence.AI_ACTION_GO_LEFT:
+		case InterfaceArtificialIntelligence.AI_ACTION_GO_LEFT:
 			result = x > 0 && !isObstacleAStar(x - 1, y);
 			break;
-		case ArtificialIntelligence.AI_ACTION_GO_RIGHT:
+		case InterfaceArtificialIntelligence.AI_ACTION_GO_RIGHT:
 			result = x < (getZoneMatrixDimX() - 1)
 					&& !isObstacleAStar(x + 1, y);
 			break;
@@ -1266,17 +1266,17 @@ public class SahinYildirim extends ArtificialIntelligence {
 		
 		boolean result = false;
 		// bombes
-		result = result || matrix[x][y] == ArtificialIntelligence.AI_BLOCK_BOMB;
+		result = result || matrix[x][y] == InterfaceArtificialIntelligence.AI_BLOCK_BOMB;
 		// feu
-		result = result || matrix[x][y] == ArtificialIntelligence.AI_BLOCK_FIRE;
+		result = result || matrix[x][y] == InterfaceArtificialIntelligence.AI_BLOCK_FIRE;
 		// murs
 		result = result
-				|| matrix[x][y] == ArtificialIntelligence.AI_BLOCK_WALL_HARD;
+				|| matrix[x][y] == InterfaceArtificialIntelligence.AI_BLOCK_WALL_HARD;
 		result = result
-				|| matrix[x][y] == ArtificialIntelligence.AI_BLOCK_WALL_SOFT;
+				|| matrix[x][y] == InterfaceArtificialIntelligence.AI_BLOCK_WALL_SOFT;
 		// on ne sait pas quoi
 		result = result
-				|| matrix[x][y] == ArtificialIntelligence.AI_BLOCK_UNKNOWN;
+				|| matrix[x][y] == InterfaceArtificialIntelligence.AI_BLOCK_UNKNOWN;
 		// shrink
 		if(getTimeBeforeShrink()<=3)
 			result = result || (x==getNextShrinkPosition()[0] &&
@@ -1300,16 +1300,16 @@ public class SahinYildirim extends ArtificialIntelligence {
 		boolean result;
 		// calcum
 		switch (move) {
-		case ArtificialIntelligence.AI_ACTION_GO_UP:
+		case InterfaceArtificialIntelligence.AI_ACTION_GO_UP:
 			result = y > 0 && !isObstacle(x, y - 1);
 			break;
-		case ArtificialIntelligence.AI_ACTION_GO_DOWN:
+		case InterfaceArtificialIntelligence.AI_ACTION_GO_DOWN:
 			result = y < (getZoneMatrixDimY() - 1) && !isObstacle(x, y + 1);
 			break;
-		case ArtificialIntelligence.AI_ACTION_GO_LEFT:
+		case InterfaceArtificialIntelligence.AI_ACTION_GO_LEFT:
 			result = x > 0 && !isObstacle(x - 1, y);
 			break;
-		case ArtificialIntelligence.AI_ACTION_GO_RIGHT:
+		case InterfaceArtificialIntelligence.AI_ACTION_GO_RIGHT:
 			result = x < (getZoneMatrixDimX() - 1) && !isObstacle(x + 1, y);
 			break;
 		default:
