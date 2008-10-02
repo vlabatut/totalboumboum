@@ -16,7 +16,8 @@ public class Profile
 	private PredefinedColor spriteColor;
 	/** artificial intelligence */
 //NOTE ça serait intéressant de charger l'IA une fois pour toutes au début du tournoi, et non pas avant chaque round
-	private String ai;
+	private String aiName;
+	private String aiPackname;
 	//
 	private Portraits portraits;
 	
@@ -28,7 +29,8 @@ public class Profile
 		spritePack = null;
 		spriteName = null;
 		spriteColor = null;
-		ai = null;
+		aiName = null;
+		aiPackname = null;
 	}
 
 	public String getName()
@@ -66,11 +68,17 @@ public class Profile
 	{	this.spriteColor = spriteColor;
 	}
 
-	public String getAi()
-	{	return ai;
+	public String getAiName()
+	{	return aiName;
 	}
-	public void setAi(String ai)
-	{	this.ai = ai;
+	public void setAiName(String aiName)
+	{	this.aiName = aiName;
+	}
+	public String getAiPackame()
+	{	return aiPackname;
+	}
+	public void setAiPackname(String aiPackname)
+	{	this.aiPackname = aiPackname;
 	}
 
 	public PlayerControl getSpriteControl()

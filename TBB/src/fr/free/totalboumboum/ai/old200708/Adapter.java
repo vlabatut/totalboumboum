@@ -29,7 +29,6 @@ import fr.free.totalboumboum.engine.content.sprite.bomb.Bomb;
 import fr.free.totalboumboum.engine.content.sprite.fire.Fire;
 import fr.free.totalboumboum.engine.loop.Loop;
 import fr.free.totalboumboum.engine.player.Player;
-import fr.free.totalboumboum.game.round.Round;
 
 
 public class Adapter implements InterfaceAI
@@ -233,7 +232,7 @@ public class Adapter implements InterfaceAI
 	    			if(!found)
 	    			{	Iterator<AbstractAbility> j = itemAbilities.iterator();
 		    			while(j.hasNext() && !found)
-		    			{	AbstractAbility a = j.next();
+		    			{	//AbstractAbility a = j.next();
 		    				// to avoid blocking situations, any other item is seen as a bomb extra range 
 		    				//if(a.getName().equals(StateAbility.BOMB_RANGE))
 		    				{	found = true;
@@ -510,7 +509,7 @@ public class Adapter implements InterfaceAI
 							{	if(debug)
 				    				System.out.print("x ");
 							}
-							getSprite().putControlEvent(new ControlEvent(ControlEvent.UP,false)); //NOTE sorti du 'if' suivant 
+							getSprite().putControlEvent(new ControlEvent(ControlEvent.UP,false)); 
 							if(controlKeys.contains(ArtificialIntelligence.AI_ACTION_GO_UP))
 							{	controlKeys.remove((Object)ArtificialIntelligence.AI_ACTION_GO_UP);
 								if(debug)
@@ -571,7 +570,7 @@ public class Adapter implements InterfaceAI
 							getSprite().putControlEvent(new ControlEvent(ControlEvent.DROPBOMB,true));
 							getSprite().putControlEvent(new ControlEvent(ControlEvent.DROPBOMB,false));
 							if(controlKeys.contains(ArtificialIntelligence.AI_ACTION_GO_DOWN))
-							{	getSprite().putControlEvent(new ControlEvent(ControlEvent.DOWN,true)); //NOTE largement modifié
+							{	getSprite().putControlEvent(new ControlEvent(ControlEvent.DOWN,true));
 								if(debug)
 				    				System.out.print("^ ");
 							}

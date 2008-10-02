@@ -9,12 +9,17 @@
 
 	<xsd:complexType name="tGeneral">
 		<xsd:attribute name="name" type="xsd:string" use="required" />
-		<xsd:attribute name="ai" type="xsd:string" use="optional" />
+	</xsd:complexType>
+
+	<xsd:complexType name="tArtificialIntelligence">
+		<xsd:attribute name="name" type="xsd:string" use="required" />
+		<xsd:attribute name="pack" type="xsd:string" use="required" />
 	</xsd:complexType>
 
 	<xsd:complexType name="tProfile">
 		<xsd:sequence>
 			<xsd:element name="general" type="tGeneral" />
+			<xsd:element name="ai" type="tArtificialIntelligence"  minOccurs="0"/>
 			<xsd:element name="character" type="tCharacter" />
 		</xsd:sequence>
 	</xsd:complexType>

@@ -33,6 +33,10 @@ public class ProfileLoader
     	// general properties
     	Element general = root.getChild(XmlTools.ELT_GENERAL);
 		loadGeneralElement(general,result);
+		// artificial intelligence
+		Element ai = root.getChild(XmlTools.ELT_AI);
+		if(ai!=null)
+			loadAiElement(ai,result);
 		// sprite info
 		Element character = root.getChild(XmlTools.ELT_CHARACTER);
 		loadSpriteElement(character,result);
@@ -48,12 +52,15 @@ public class ProfileLoader
     {	// name
     	String name = root.getAttribute(XmlTools.ATT_NAME).getValue();
     	result.setName(name);
-    	// artificial intelligence
-    	String ai = null;
-    	Attribute attribute = root.getAttribute(XmlTools.ATT_AI);
-    	if(attribute!=null)
-	    	ai =  attribute.getValue().trim();
-    	result.setAi(ai);
+    }
+    
+    private static void loadAiElement(Element root, Profile result)
+    {	// name
+    	String name = root.getAttribute(XmlTools.ATT_NAME).getValue();
+    	result.setAiName(name.trim());
+    	// pack
+    	String packname = root.getAttribute(XmlTools.ATT_NAME).getValue();
+    	result.setAiPackname(packname.trim());
     }
     
     private static void loadSpriteElement(Element root, Profile result) throws ParserConfigurationException, SAXException, IOException, ClassNotFoundException

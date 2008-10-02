@@ -60,7 +60,7 @@ public class Player
 		sprite.setPlayer(this);
 		spriteControl = new PlayerControl(this);
 		// artificial intelligence
-    	if(this.profile.getAi() != null)
+    	if(this.profile.getAiName() != null)
     	{	ai = new Adapter();
     		ai.setClass(this.profile.getAi());
 			ai.setPlayer(this);
