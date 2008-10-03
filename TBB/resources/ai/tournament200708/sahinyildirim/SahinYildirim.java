@@ -6,7 +6,8 @@ import java.util.PriorityQueue;
 import java.util.Vector;
 import java.util.Iterator;
 
-import tournament200708.ArtificialIntelligence;
+import fr.free.totalboumboum.ai.adapter200708.ArtificialIntelligence;
+
 
 
 

@@ -3,7 +3,8 @@ package tournament200708.gokceeren;
 import java.util.Vector;
 import java.util.concurrent.ExecutionException;
 
-import tournament200708.ArtificialIntelligence;
+import fr.free.totalboumboum.ai.adapter200708.ArtificialIntelligence;
+
 
 
 

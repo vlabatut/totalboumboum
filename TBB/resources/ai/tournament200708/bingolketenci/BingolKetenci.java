@@ -2,7 +2,8 @@ package tournament200708.bingolketenci;
 import java.util.LinkedList;
 import java.util.PriorityQueue;
 
-import tournament200708.ArtificialIntelligence;
+import fr.free.totalboumboum.ai.adapter200708.ArtificialIntelligence;
+
 
 
 

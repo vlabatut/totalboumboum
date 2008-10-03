@@ -2,7 +2,8 @@ package tournament200708.keceryaman;
 
 import java.util.ArrayList;
 
-import tournament200708.ArtificialIntelligence;
+import fr.free.totalboumboum.ai.adapter200708.ArtificialIntelligence;
+
 
 
 

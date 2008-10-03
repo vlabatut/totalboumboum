@@ -3,7 +3,8 @@ package tournament200708.caglayanelmas;
 import java.util.Iterator;
 import java.util.Vector;
 
-import tournament200708.ArtificialIntelligence;
+import fr.free.totalboumboum.ai.adapter200708.ArtificialIntelligence;
+
 
 
 
