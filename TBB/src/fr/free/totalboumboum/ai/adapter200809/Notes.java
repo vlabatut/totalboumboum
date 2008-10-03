@@ -30,13 +30,6 @@ public abstract class Notes implements Callable<Integer>, Serializable
 	/** poser une bombe*/ 
 	public final static int AI_ACTION_PUT_BOMB = 5;	
 	
-	// champs généraux
-	private String name;
-	
-	// champs représentant le percept
-	/** matrice correspondant au percept de l'agent */
-	private int zoneMatrix[][];
-	/** liste des bombes avec leur position et leur puissance */
 	private Vector<int[]> bombs;
 	/** liste des joueurs avec leur position et leur sens de déplacement */
 	private Vector<int[]> players;
