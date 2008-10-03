@@ -81,8 +81,6 @@ public abstract class Sprite
 	//
 	protected double speedCoeff = 1;
 	
-	protected String color;
-	
 	
 	public Sprite(Level level)
 	{	ended = false;
@@ -93,10 +91,9 @@ public abstract class Sprite
 		boundToSprite = null;
 		this.level = level;
 		configuration = level.getConfiguration();
-		color = null;
 		currentGesture = null;
 	}
-
+	
 	public String toString()
 	{	String result;
 		result = getClass().getSimpleName();

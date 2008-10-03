@@ -26,7 +26,6 @@ import fr.free.totalboumboum.engine.control.PlayerControl;
 import fr.free.totalboumboum.engine.loop.Loop;
 import fr.free.totalboumboum.tools.FileTools;
 
-
 public class Player
 {	
 	private Profile profile;
@@ -46,9 +45,10 @@ public class Player
 		configuration = level.getConfiguration();
 		this.profile = profile;
 		// sprite
+		color = this.profile.getSpriteColor();
 		String folder = FileTools.getHeroesPath()+File.separator+this.profile.getSpritePack();
 		folder = folder + File.separator+this.profile.getSpriteName();
-		HeroFactory tempHeroFactory = HeroFactoryLoader.loadHeroFactory(folder,level,this.profile.getSpriteColor(),ablts,permissions,trajectories);
+		HeroFactory tempHeroFactory = HeroFactoryLoader.loadHeroFactory(folder,level,color,ablts,permissions,trajectories);
 		sprite = tempHeroFactory.makeSprite();
 		sprite.initGesture();
 		sprite.setControlSettings(this.profile.getControlSettings());
@@ -95,6 +95,9 @@ public class Player
 
 	public Sprite getSprite()
 	{	return sprite;
+	}
+	public PredefinedColor getColor()
+	{	return color;
 	}
 	
 	private boolean playerOut = false;
