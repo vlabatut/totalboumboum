@@ -16,7 +16,7 @@ public class Configuration
 {	
 	public Configuration() throws ParserConfigurationException, SAXException, IOException
 	{	// engine
-		setFps(100);
+		setFps(50);
 		setSpeedCoeff(1);
 		// display
 		setBorderColor(Color.BLACK);

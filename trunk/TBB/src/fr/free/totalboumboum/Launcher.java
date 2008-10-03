@@ -617,20 +617,20 @@ public class Launcher
 	 * - correction d'un bug XML dans le thème superbomberman1.duel
 	 * 
 	 * + alpha.43
-	 * - Modification: amélioration du système aléatoire de génération des niveaux (les distributions doivent être contrôlées car les séries générées sont trop courtes pour que les distributions soient respectées)
-	 * - Modification: réorganisation du projet Eclipse de manière à placer les classes d'ia dans le dossier resources
-	 * - Modification: révision du système d'adaptateur pour les IA de 2007-08
+	 * - Modification	: amélioration du système aléatoire de génération des niveaux (les distributions doivent être contrôlées car les séries générées sont trop courtes pour que les distributions soient respectées)
+	 * - Modification	: réorganisation du projet Eclipse de manière à placer les classes d'ia dans le dossier resources
+	 * - Modification	: révision du système d'adaptateur pour les IA de 2007-08
+	 * - Modification	: FPS baissé de 100 à 50, afin d'économiser les ressources et d'éviter que ça rame trop sur des petites machines (ou pas accélérées)
+	 * - Nouveauté		: adaptateur spécial pour les IA 2008-09
+	 * - Correction 	: petit bug dans la GUI, les dimensions des niveaux étaient fausses
 	 * 
 	 * *******************************************************
 	 * *********************** A FAIRE ***********************
 	 * *******************************************************
-	 * - revoir le système des IA:
-	 * 		- crééer les classes représentant les données asynchrones
-	 * 		- écrire l'adaptateur pour 2008-09
-	 * 		- écrire une IA d'exemple
-	 * 		- centraliser les données : c'est les mêmes pour toutes les IA (données doivent être finales)
+	 * - écrire une IA d'exemple
 	 * - redistribution des items lors de la mort d'un joueur (option de round?)
 	 * - possibilité de bloquer certains items (on ne les perd pas lorsqu'on meurt)
+	 * - y a toujours un bug avec le décompte des kills/death, faut trouver d'où ça vient
 	 * 
 	 * - au moins finir le cycle lors d'une mort, histoire que la différence de timing ne vienne pas juste de l'ordre des joueurs dans la partie 
 	 * - possibilité de choisir entre le fait que le match s'arrête dès que tout le monde est mort sauf 1, ou dernière flamme terminée
@@ -648,6 +648,7 @@ public class Launcher
 	 * - décomposer le fichier de langue en plusieurs sections plus lisibles
 	 * - faire un paramètre dans les rounds qui permet de déterminer s'ils sont compatibles avec le tournoi 2007-08
 	 * - tournoi : 1) on choisit les paramètres 2) on choisit les joueurs, le jeu restreint leur nombre pr qu'il soit compatible avec le tournoi, et restreint aussi les IA pour les mêmes raisons
+	 * - mettre une icone spéciale pour différencier les humains et les IA 
 	 * 
 	 * - dans les résultats :
 	 * 		- afficher par défaut les 4 scores de bases

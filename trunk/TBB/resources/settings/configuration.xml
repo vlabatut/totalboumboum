@@ -4,8 +4,8 @@
 	xsi:noNamespaceSchemaLocation="..\schemas\configuration.xsd">
 	
 <!-- ENGINE -->	
-	<fps value="100" />
-	<speed value="4" />
+	<fps value="50" />
+	<speed value="1" />
 
 <!-- DISPLAY -->	
 	<smoothGraphics value="true" />
