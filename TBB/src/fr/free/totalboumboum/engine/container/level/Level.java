@@ -27,6 +27,7 @@ import fr.free.totalboumboum.engine.loop.Loop;
 import fr.free.totalboumboum.engine.player.PlayerLocation;
 import fr.free.totalboumboum.game.round.Round;
 import fr.free.totalboumboum.tools.CalculusTools;
+import fr.free.totalboumboum.tools.FileTools;
 import fr.free.totalboumboum.tools.StringTools;
 
 
@@ -40,13 +41,17 @@ public class Level
     /////////////////////////////////////////////////////////////////
 	// INSTANCE PATH		/////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	private String instancePath;
+	private String instance;
 	
-    public String getInstancePath()
-    {	return instancePath;
+    public String getInstance()
+    {	return instance;
     }
-    public void setInstancePath(String instancePath)
-    {	this.instancePath = instancePath;
+    public String getInstancePath()
+    {	String result = FileTools.getInstancesPath()+File.separator+instance;
+    	return result;
+    }
+    public void setInstancePath(String instance)
+    {	this.instance = instance;
     }
 
     /////////////////////////////////////////////////////////////////
