@@ -60,8 +60,6 @@ public abstract class AiManager extends AbstractAiManager<Integer>
     private Vector<Integer> firePowers;
     /** percept à envoyer à l'IA : le nombre total de bombes */
     private Vector<Integer> bombCounts;
-    /** simulates control keys */
-    private ArrayList<Integer> controlKeys;
 
 	@Override
 	public void setPercepts()
@@ -273,6 +271,8 @@ public abstract class AiManager extends AbstractAiManager<Integer>
     /////////////////////////////////////////////////////////////////
 	// REACTION			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
+    /** simulates control keys */
+    private ArrayList<Integer> controlKeys;
 
 	@Override
 	public ArrayList<ControlEvent> convertReaction(Integer value)

@@ -9,6 +9,7 @@ public class AiHero extends AiSprite
 	public AiHero(AiTile tile, Hero sprite)
 	{	super(tile,sprite);
 		initColor(sprite);
+		initBombParam(sprite);
 	}
 	
 	/////////////////////////////////////////////////////////////////
