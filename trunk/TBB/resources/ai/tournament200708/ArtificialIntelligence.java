@@ -6,7 +6,8 @@ import java.util.Vector;
 import java.util.concurrent.Callable;
 
 public abstract class ArtificialIntelligence implements Callable<Integer>, Serializable
-{	// constantes de sens de déplacement
+{	private static final long serialVersionUID = 1L;
+	// constantes de sens de déplacement
 	/** constante représentant la direction : sur-place (pas de déplacement)*/ 
 	public final static int AI_DIR_NONE = 0;
 	/** constante représentant la direction : vers le haut*/ 
@@ -324,5 +325,20 @@ public abstract class ArtificialIntelligence implements Callable<Integer>, Seria
 				System.out.print(zoneMatrix[i2][i1]+" ");
 			System.out.println();
 		}
+	}
+	
+	/**
+	 * libère les ressources occupées par l'IA
+	 */
+	public void finish()
+	{	bombCounts = null;
+		bombs = null;
+		firePowers = null;
+		name = null;
+		nextShrinkPosition = null;
+		ownPosition = null;
+		players = null;
+		playersStates = null;
+		zoneMatrix = null;
 	}
 }

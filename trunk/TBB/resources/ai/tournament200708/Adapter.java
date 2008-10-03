@@ -39,9 +39,9 @@ public class Adapter implements InterfaceAi
     /** objet implémentant l'IA */
     private ArtificialIntelligence ai;
     /** gestionnaire de threads pour exécuter l'IA */
-    transient private ExecutorService executorAI = null;
+    transient private ExecutorService executorAi = null;
     /** future utilisé pour récupérer le résultat de l'IA */
-    transient private Future<Integer> futureAI;
+    transient private Future<Integer> futureAi;
     /** percept à envoyer à l'IA : matrice représentant la zone de jeu */
     private int[][] zoneMatrix;;
     /** percept à envoyer à l'IA : liste des bombes */
@@ -76,7 +76,7 @@ public class Adapter implements InterfaceAi
     
     private Configuration configuration;
     
-	public void setPlayer(Player player)
+	public void init(String instance, Player player)
 	{	this.player = player;
 		configuration = player.getConfiguration();
 	}
@@ -301,17 +301,17 @@ public class Adapter implements InterfaceAi
      */
     public void update()
     {	// s'il s'agit du premier appel
-    	if(executorAI == null)
-    	{	executorAI = Executors.newSingleThreadExecutor();
+    	if(executorAi == null)
+    	{	executorAi = Executors.newSingleThreadExecutor();
     		makeCall();
     	}
     	// sinon : un appel avait déjà été effectué
     	else
     	{	// si cet appel est fini :  
-    		if(futureAI.isDone())
+    		if(futureAi.isDone())
     		{	// on met à jour le joueur
     			try
-    			{	int value = futureAI.get().intValue();
+    			{	int value = futureAi.get().intValue();
     				if(debug)
     					System.out.print("action:");
     				switch(value)
@@ -606,17 +606,33 @@ public class Adapter implements InterfaceAi
     	ai.setPercepts(zoneMatrix, bombs, players, playersStates, 
     			ownPosition, timeBeforeShrink, nextShrinkPosition, bombPosition, 
     			ownFirePower, ownBombCount, firePowers, bombCounts);
-    	futureAI = executorAI.submit(ai);
+    	futureAi = executorAi.submit(ai);
     }
     
     /**
      * tente de terminer le thread exécutant l'IA
      */
     public void finish()
-    {	boolean result = futureAI.isDone(); 
+    {	boolean result = futureAi.isDone(); 
     	if(!result) 
-    		result = futureAI.cancel(true);
-    	/*List<Runnable> list = */executorAI.shutdownNow();
+    		result = futureAi.cancel(true);
+    	/*List<Runnable> list = */executorAi.shutdownNow();
+    	// ai
+    	ai.finish();
+    	ai = null;
+    	futureAi = null;
+    	executorAi = null;
+    	// misc
+    	bombCounts = null;
+    	bombs = null;
+    	configuration = null;
+    	controlKeys = null;
+    	firePowers = null;
+    	nextShrinkPosition = null;
+    	ownPosition = null;
+    	players = null;
+    	playersStates = null;
+    	zoneMatrix = null;
     }
     
 	public ArtificialIntelligence getAi()

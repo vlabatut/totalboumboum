@@ -28,8 +28,7 @@ public abstract class Notes implements Callable<Integer>, Serializable
 	/** aller vers la droite*/ 
 	public final static int AI_ACTION_GO_RIGHT = 4;
 	/** poser une bombe*/ 
-	public final static int AI_ACTION_PUT_BOMB = 5;
-	
+	public final static int AI_ACTION_PUT_BOMB = 5;	
 	
 	// champs généraux
 	private String name;
