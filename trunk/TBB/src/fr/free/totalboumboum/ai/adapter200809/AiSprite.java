@@ -12,7 +12,7 @@ public abstract class AiSprite
 	public AiSprite(AiTile tile, Sprite sprite)
 	{	this.tile = tile;
 		initLocation(sprite);
-		
+		initState(sprite);
 	}
 
 	/** 
@@ -31,6 +31,26 @@ public abstract class AiSprite
 		else if(sprite instanceof Hero)
 			result = new AiHero(tile,(Hero)sprite);
 		return result;
+	}
+	
+	/////////////////////////////////////////////////////////////////
+	// STATE			/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	/** état dans lequel se trouve ce sprite */
+	private AiState state;
+	
+	/** 
+	 * renvoie l'état dans lequel se trouve ce sprite
+	 * (ie: quelle action il est en train d'effectuer ou de subir)
+	 */
+	public AiState getState()
+	{	return state;
+	}
+	/** 
+	 * initialise l'état dans lequel se trouve ce sprite
+	 */
+	private void initState(Sprite sprite)
+	{	state = new AiState(sprite);
 	}
 	
 	/////////////////////////////////////////////////////////////////

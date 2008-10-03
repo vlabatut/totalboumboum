@@ -6,6 +6,7 @@ import java.util.Collections;
 import java.util.Iterator;
 
 import fr.free.totalboumboum.engine.container.tile.Tile;
+import fr.free.totalboumboum.engine.content.feature.GestureConstants;
 import fr.free.totalboumboum.engine.content.sprite.block.Block;
 import fr.free.totalboumboum.engine.content.sprite.bomb.Bomb;
 import fr.free.totalboumboum.engine.content.sprite.fire.Fire;
@@ -81,7 +82,7 @@ public class AiTile
 	{	return bombs;	
 	}
 	/** 
-	 * renvoie la liste des deux contenus dans cette case 
+	 * renvoie la liste des feux contenus dans cette case 
 	 * (la liste peut être vide)
 	 */
 	public Collection<AiFire> getFires()
@@ -115,7 +116,8 @@ public class AiTile
 	private void initSPrites(Tile tile)
 	{	// block
 		{	Block b = tile.getBlock();
-			if(b!=null)
+			String gesture = b.getCurrentGesture();
+			if(b!=null && !gesture.equalsIgnoreCase(GestureConstants.NONE) && !gesture.equalsIgnoreCase(GestureConstants.ENDED))
 				block = new AiBlock(this,b);
 			else
 				block = null;
@@ -125,8 +127,11 @@ public class AiTile
 			Iterator<Bomb> i = tile.getBombs().iterator();
 			while(i.hasNext())
 			{	Bomb bomb = i.next();
-				AiBomb tempBomb = new AiBomb(this,bomb);
-				tempBombs.add(tempBomb);
+				String gesture = bomb.getCurrentGesture();
+				if(!gesture.equalsIgnoreCase(GestureConstants.NONE) && !gesture.equalsIgnoreCase(GestureConstants.ENDED))
+				{	AiBomb tempBomb = new AiBomb(this,bomb);
+					tempBombs.add(tempBomb);
+				}
 			}
 			bombs = Collections.unmodifiableCollection(tempBombs);
 		}
@@ -135,14 +140,18 @@ public class AiTile
 			Iterator<Fire> i = tile.getFires().iterator();
 			while(i.hasNext())
 			{	Fire fire = i.next();
-				AiFire tempFire = new AiFire(this,fire);
-				tempFires.add(tempFire);
+				String gesture = fire.getCurrentGesture();
+				if(!gesture.equalsIgnoreCase(GestureConstants.NONE) && !gesture.equalsIgnoreCase(GestureConstants.ENDED))
+				{	AiFire tempFire = new AiFire(this,fire);
+					tempFires.add(tempFire);
+				}
 			}
 			fires = Collections.unmodifiableCollection(tempFires);
 		}
 		// floor
 		{	Floor f = tile.getFloor();
-			if(f!=null)
+			String gesture = f.getCurrentGesture();
+			if(f!=null && !gesture.equalsIgnoreCase(GestureConstants.NONE) && !gesture.equalsIgnoreCase(GestureConstants.ENDED))
 				floor = new AiFloor(this,f);
 			else
 				floor = null;
@@ -152,14 +161,18 @@ public class AiTile
 			Iterator<Hero> i = tile.getHeroes().iterator();
 			while(i.hasNext())
 			{	Hero hero = i.next();
-				AiHero tempHero = new AiHero(this,hero);
-				tempHeroes.add(tempHero);
+				String gesture = hero.getCurrentGesture();
+				if(!gesture.equalsIgnoreCase(GestureConstants.NONE) && !gesture.equalsIgnoreCase(GestureConstants.ENDED))
+				{	AiHero tempHero = new AiHero(this,hero);
+					tempHeroes.add(tempHero);
+				}
 			}
 			heroes = Collections.unmodifiableCollection(tempHeroes);
 		}
 		// item
 		{	Item i = tile.getItem();
-			if(i!=null)
+			String gesture = i.getCurrentGesture();
+			if(i!=null && !gesture.equalsIgnoreCase(GestureConstants.NONE) && !gesture.equalsIgnoreCase(GestureConstants.ENDED))
 				item = new AiItem(this,i);
 			else
 				item = null;
