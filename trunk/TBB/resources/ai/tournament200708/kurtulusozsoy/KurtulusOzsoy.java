@@ -2,7 +2,8 @@ package tournament200708.kurtulusozsoy;
 import java.util.Random;
 import java.util.Vector;
 
-import tournament200708.ArtificialIntelligence;
+import fr.free.totalboumboum.ai.adapter200708.ArtificialIntelligence;
+
 
 
 
