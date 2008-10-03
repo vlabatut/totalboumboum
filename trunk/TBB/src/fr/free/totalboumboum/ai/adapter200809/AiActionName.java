@@ -6,5 +6,5 @@ package fr.free.totalboumboum.ai.adapter200809;
  */
 public enum AiActionName
 {
-	NONE,MOVE,DROP_BOMB,PUNCH;	
+	DROP_BOMB,MOVE,NONE,PUNCH;	
 }

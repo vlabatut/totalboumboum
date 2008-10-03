@@ -16,11 +16,11 @@ public class AiState
 	/////////////////////////////////////////////////////////////////
 	// NAME				/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	/** nom associé à l'action */
+	/** nom associé à l'état */
 	private AiStateName name;
 	
 	/**
-	 * renvoie le nom associé à l'action
+	 * renvoie le nom associé à l'état
 	 */
 	public AiStateName getName()
 	{	return name;
@@ -29,12 +29,12 @@ public class AiState
 	/////////////////////////////////////////////////////////////////
 	// DIRECTION		/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	/** direction associée à l'action (peut être NONE, c'est à dire : l'action n'est pas orientée) */
+	/** direction associée à l'état (peut être NONE, c'est à dire : l'état n'est pas orienté) */
 	private Direction direction;
 	
 	/**
-	 * renvoie la direction associée à l'action,
-	 * qui peut être NONE, c'est à dire : l'action n'est pas orientée
+	 * renvoie la direction associée à l'état,
+	 * qui peut être NONE, c'est à dire : l'état n'est pas orienté
 	 */
 	public Direction getDirection()
 	{	return direction;
