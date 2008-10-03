@@ -681,7 +681,11 @@ public class Launcher
 	 */
 	
 	/*
-	 * lors de la génération, utiliser les classes définies pour compter les occurrences
-	 * dès que ça diverge de 1 de la distribution attendue, ne pas laisser la main au hasard 
+	 * IA : 
+	 * 	- externaliser la gestion des threads des adapaters, car ça doit être commun à tout le monde
+	 * 	- (InterfaceAi devient AiManager)
+	 * 	- les adapteurs doivent s'occuper seulement de la gestion des percepts
+	 * 	- du coup ça permet de virer la classe AiMain de chaque IA
+	 * 	- et également de renommer la classe principale de chaque IA en AiMain
 	 */
 }
