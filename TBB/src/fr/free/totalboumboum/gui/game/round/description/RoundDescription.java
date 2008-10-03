@@ -319,7 +319,7 @@ public class RoundDescription extends EntitledDataPanel
 			preview.getAuthor(),
 			hollowLevel.getInstanceName(),
 			hollowLevel.getThemeName(),
-			Integer.toString(hollowLevel.getVisibleHeight())+new Character('\u00D7').toString()+Integer.toString(hollowLevel.getVisibleHeight())
+			Integer.toString(hollowLevel.getVisibleHeight())+new Character('\u00D7').toString()+Integer.toString(hollowLevel.getVisibleWidth())
 		};
 		for(int i=0;i<names.length;i++)
 		{	// lists

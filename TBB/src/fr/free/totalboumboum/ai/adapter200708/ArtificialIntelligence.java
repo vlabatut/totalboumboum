@@ -1,13 +1,11 @@
 package fr.free.totalboumboum.ai.adapter200708;
 
-import java.io.Serializable;
 import java.util.Iterator;
 import java.util.Vector;
 import java.util.concurrent.Callable;
 
-public abstract class ArtificialIntelligence implements Callable<Integer>, Serializable
-{	private static final long serialVersionUID = 1L;
-	// constantes de sens de déplacement
+public abstract class ArtificialIntelligence implements Callable<Integer>
+{	// constantes de sens de déplacement
 	/** constante représentant la direction : sur-place (pas de déplacement)*/ 
 	public final static int AI_DIR_NONE = 0;
 	/** constante représentant la direction : vers le haut*/ 

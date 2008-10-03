@@ -9,6 +9,7 @@ import javax.xml.parsers.ParserConfigurationException;
 
 import org.xml.sax.SAXException;
 
+import fr.free.totalboumboum.ai.AbstractAiManager;
 import fr.free.totalboumboum.ai.AiLoader;
 import fr.free.totalboumboum.ai.InterfaceAi;
 import fr.free.totalboumboum.data.configuration.Configuration;
@@ -34,7 +35,7 @@ public class Player
 	/** round */
 	private Level level;
 	/** artificial intelligence */
-	private InterfaceAi ai = null;
+	private AbstractAiManager<?> ai = null;
 	/** control */
 	private PlayerControl spriteControl;
 	/** current color */
@@ -89,7 +90,7 @@ public class Player
 	{	return spriteControl;
 	}
 
-	public InterfaceAi getArtificialIntelligence()
+	public AbstractAiManager<?> getArtificialIntelligence()
 	{	return ai;
 	}
 

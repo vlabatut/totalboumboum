@@ -8,8 +8,8 @@ import fr.free.totalboumboum.tools.FileTools;
 
 public class AiLoader
 {
-	public static InterfaceAi loadAi(String name, String packname) throws FileNotFoundException, ClassNotFoundException, IllegalArgumentException, SecurityException, InstantiationException, IllegalAccessException, InvocationTargetException, NoSuchMethodException 
-	{	InterfaceAi result;
+	public static AbstractAiManager<?> loadAi(String name, String packname) throws FileNotFoundException, ClassNotFoundException, IllegalArgumentException, SecurityException, InstantiationException, IllegalAccessException, InvocationTargetException, NoSuchMethodException 
+	{	AbstractAiManager<?> result;
 		
 		// check the file
 		String packageFolder = FileTools.getAiPath()+File.separator+packname+File.separator+name;
@@ -22,11 +22,11 @@ public class AiLoader
 		String packageName = packname+FileTools.CLASS_SEPARATOR+name;
 		String classQualifiedName = packageName+FileTools.CLASS_SEPARATOR+FileTools.FILE_AI;
 		Class<?> tempClass = Class.forName(classQualifiedName);
-		if(!InterfaceAi.class.isAssignableFrom(tempClass))
+		if(!AbstractAiManager.class.isAssignableFrom(tempClass))
 			throw new ClassCastException(classQualifiedName);
 		
 		// build an instance
-		result = (InterfaceAi)tempClass.getConstructor().newInstance();
+		result = (AbstractAiManager<?>)tempClass.getConstructor().newInstance();
 		return result;
 	}
 }
