@@ -5,18 +5,21 @@ import java.util.Collection;
 import java.util.Collections;
 import java.util.Iterator;
 
+import fr.free.totalboumboum.data.profile.PredefinedColor;
 import fr.free.totalboumboum.engine.container.level.Level;
 import fr.free.totalboumboum.engine.container.tile.Tile;
 import fr.free.totalboumboum.engine.loop.Loop;
+import fr.free.totalboumboum.engine.player.Player;
 
 public class AiZone
 {
 	
-	public AiZone(Loop loop)
+	public AiZone(Loop loop, Player player)
 	{	// zone
 		Level level = loop.getLevel();
 		initZone(level);
 		initSprites();
+		initOwnHero(player);
 	}
 	
 	/////////////////////////////////////////////////////////////////
@@ -125,8 +128,6 @@ public class AiZone
 	private Collection<AiHero> heroes;
 	/** liste des items contenus dans cette zone */
 	private Collection<AiItem> items;
-	/** le personnage représentant cette IA */
-	private AiHero ownHero;
 	
 	/** 
 	 * renvoie la liste des blocks contenues dans cette zone
@@ -168,12 +169,6 @@ public class AiZone
 	 */
 	public Collection<AiItem> getItems()
 	{	return items;	
-	}
-	/** 
-	 * renvoie le personnage qui est contrôlé par l'IA
-	 */
-	public AiHero getOwnHero()
-	{	return ownHero;	
 	}
 	/**
 	 * initialise la liste de sprites pour la zone entière
@@ -225,6 +220,32 @@ public class AiZone
 		heroes = Collections.unmodifiableCollection(heroes);
 		items = Collections.unmodifiableCollection(items);
 	}
-	
-	
+
+	/////////////////////////////////////////////////////////////////
+	// OWN HERO			/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	/** le personnage contrôlé par l'IA */
+	private AiHero ownHero;
+
+	/** 
+	 * renvoie le personnage qui est contrôlé par l'IA
+	 */
+	public AiHero getOwnHero()
+	{	return ownHero;	
+	}
+	/**
+	 * initialise le personnage qui est contrôlé par l'IA
+	 */
+	private void initOwnHero(Player player)
+	{	PredefinedColor color = player.getColor(); 
+		Iterator<AiHero> i = heroes.iterator();
+		boolean found = false;
+		while(i.hasNext() && !found)
+		{	AiHero temp = i.next();
+			if(temp.getColor()==color)
+			{	ownHero = temp;
+				found = true;
+			}
+		}
+	}
 }

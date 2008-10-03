@@ -1,5 +1,6 @@
 package fr.free.totalboumboum.ai.adapter200809;
 
+import fr.free.totalboumboum.data.profile.PredefinedColor;
 import fr.free.totalboumboum.engine.content.feature.GestureConstants;
 import fr.free.totalboumboum.engine.content.sprite.bomb.Bomb;
 
@@ -10,6 +11,7 @@ public class AiBomb extends AiSprite
 		initType(sprite);
 		initRange(sprite);
 		initWorking(sprite);
+		initColor(sprite);
 	}
 
 	/////////////////////////////////////////////////////////////////
@@ -52,5 +54,17 @@ public class AiBomb extends AiSprite
 		else
 			working = true;
 		
+	}
+
+	/////////////////////////////////////////////////////////////////
+	// COLOR			/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	private PredefinedColor color;
+	
+	public PredefinedColor getColor()
+	{	return color;	
+	}
+	private void initColor(Bomb sprite)
+	{	sprite.getColor();	
 	}
 }

@@ -38,9 +38,9 @@ public class Adapter implements InterfaceAi
     /** objet implémentant l'IA */
     private ArtificialIntelligence ai;
     /** gestionnaire de threads pour exécuter l'IA */
-    transient private ExecutorService executorAi = null;
+    private ExecutorService executorAi = null;
     /** future utilisé pour récupérer le résultat de l'IA */
-    transient private Future<Integer> futureAi;
+    private Future<Integer> futureAi;
 	
 	
 	

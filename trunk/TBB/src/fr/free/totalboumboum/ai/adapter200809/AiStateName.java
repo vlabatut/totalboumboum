@@ -10,14 +10,14 @@ public enum AiStateName
 	// equivalent gesture: BOUNCING, JUMPING, LANDING, PUNCHED
 	/** le sprite est en l'air (en train de sauter ou de rebondir sur les murs) */
 	FLYING,
-	// equivalent gesture: APPEARING, CRYING, EXULTING, HIDING, OSCILLATING, OSCILLATING_FAILING, PUNCHING, SPAWNING, STANDING, STANDING_FAILING, WAITING
+	// equivalent gesture: APPEARING, CRYING, EXULTING, OSCILLATING, OSCILLATING_FAILING, PUNCHING, SPAWNING, STANDING, STANDING_FAILING, WAITING
 	/** le sprite ne fait rien ou bien réalise une action qui ne nécessite pas de déplacement */ 
 	STANDING,
 	// equivalent gesture: PUSHING, SLIDING, SLIDING_FAILING, WALKING
 	/** le sprite se déplace sur le sol */
 	MOVING;
 	
-	// unused gestures: NONE,ENDED
+	// unused gestures: NONE, ENDED, HIDING
 	
 	public static AiStateName makeNameFromGesture(String gesture)
 	{	AiStateName result = null;
@@ -31,7 +31,6 @@ public enum AiStateName
 		else if(gesture.equalsIgnoreCase(GestureConstants.APPEARING)
 				|| gesture.equalsIgnoreCase(GestureConstants.CRYING)
 				|| gesture.equalsIgnoreCase(GestureConstants.EXULTING)
-				|| gesture.equalsIgnoreCase(GestureConstants.HIDING)
 				|| gesture.equalsIgnoreCase(GestureConstants.OSCILLATING)
 				|| gesture.equalsIgnoreCase(GestureConstants.OSCILLATING_FAILING)
 				|| gesture.equalsIgnoreCase(GestureConstants.PUNCHING)

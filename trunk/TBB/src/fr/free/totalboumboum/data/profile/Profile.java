@@ -15,7 +15,6 @@ public class Profile
 	private String spriteName;
 	private PredefinedColor spriteColor;
 	/** artificial intelligence */
-//NOTE ça serait intéressant de charger l'IA une fois pour toutes au début du tournoi, et non pas avant chaque round
 	private String aiName;
 	private String aiPackname;
 	//
