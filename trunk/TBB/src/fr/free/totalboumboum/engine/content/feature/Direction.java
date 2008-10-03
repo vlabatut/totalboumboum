@@ -1,5 +1,7 @@
 package fr.free.totalboumboum.engine.content.feature;
 
+import java.util.ArrayList;
+
 import fr.free.totalboumboum.engine.content.sprite.Sprite;
 
 public enum Direction
@@ -163,6 +165,15 @@ public enum Direction
 			result = NONE;
 		else
 			result = getPrevious();
+		return result;
+	}
+	
+	public static ArrayList<Direction> getAllPrimaries()
+	{	ArrayList<Direction> result = new ArrayList<Direction>();
+		result.add(DOWN);
+		result.add(LEFT);
+		result.add(RIGHT);
+		result.add(UP);
 		return result;
 	}
 
@@ -379,5 +390,5 @@ public enum Direction
 				i++;
 		return result;
 	}
-*/	
+*/
 }

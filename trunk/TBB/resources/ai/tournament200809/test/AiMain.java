@@ -1,9 +1,8 @@
 package tournament200809.test;
 
-import fr.free.totalboumboum.ai.adapter200809.Adapter;
-import fr.free.totalboumboum.ai.adapter200809.ArtificialIntelligence;
+import fr.free.totalboumboum.ai.adapter200809.AiManager;
 
-public class AiMain extends Adapter
+public class AiMain extends AiManager
 {
 
 	public AiMain()

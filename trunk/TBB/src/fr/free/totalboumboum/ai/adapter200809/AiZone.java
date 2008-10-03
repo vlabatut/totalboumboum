@@ -8,15 +8,13 @@ import java.util.Iterator;
 import fr.free.totalboumboum.data.profile.PredefinedColor;
 import fr.free.totalboumboum.engine.container.level.Level;
 import fr.free.totalboumboum.engine.container.tile.Tile;
-import fr.free.totalboumboum.engine.loop.Loop;
 import fr.free.totalboumboum.engine.player.Player;
 
 public class AiZone
 {
 	
-	public AiZone(Loop loop, Player player)
+	public AiZone(Level level, Player player)
 	{	// zone
-		Level level = loop.getLevel();
 		initZone(level);
 		initSprites();
 		initOwnHero(player);

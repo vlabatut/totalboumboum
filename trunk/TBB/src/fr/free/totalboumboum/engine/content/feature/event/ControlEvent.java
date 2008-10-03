@@ -1,5 +1,7 @@
 package fr.free.totalboumboum.engine.content.feature.event;
 
+import fr.free.totalboumboum.engine.content.feature.Direction;
+
 public class ControlEvent extends AbstractEvent
 {	// directions
 	public static final String DOWN = "DOWN";
@@ -59,5 +61,24 @@ public class ControlEvent extends AbstractEvent
 	{	if(!finished)
 		{	super.finish();
 		}
+	}
+	
+	public static String getCodeFromDirection(Direction direction)
+	{	String result = null;
+		switch(direction)
+		{	case DOWN:
+				result = DOWN;
+				break;
+			case LEFT:
+				result = LEFT;
+				break;
+			case RIGHT:
+				result = RIGHT;
+				break;
+			case UP:
+				result = UP;
+				break;
+		}
+		return result;
 	}
 }
