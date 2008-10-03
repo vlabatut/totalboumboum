@@ -57,7 +57,7 @@ public class Player
 		// artificial intelligence
     	if(this.profile.getAiName() != null)
     	{	ai = AiLoader.loadAi(profile.getAiName(), profile.getAiPackname());
-    		ai.setPlayer(this);
+    		ai.init(level.getInstance(),this);
     	}
 	}
 

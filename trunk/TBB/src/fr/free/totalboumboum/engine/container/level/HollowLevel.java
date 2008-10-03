@@ -182,7 +182,7 @@ public class HollowLevel
     public void initLevel(Loop loop)
 	{	// init
     	level = new Level(loop);
-    	level.setInstancePath(instancePath);
+    	level.setInstancePath(instanceName);
 		Dimension panelDim = level.getConfiguration().getPanelDimension();
     	double sizeX = panelDim.width;
     	double sizeY = panelDim.height;
