@@ -5,7 +5,7 @@ import java.util.Iterator;
 import java.util.Vector;
 import java.util.concurrent.Callable;
 
-public abstract class Notes implements Callable<Integer>, Serializable
+public abstract class Notes
 {	
 	/** bloc occupé par un mur destructible*/ 
 	public final static int AI_BLOCK_WALL_SOFT = 1;
@@ -30,171 +30,20 @@ public abstract class Notes implements Callable<Integer>, Serializable
 	/** poser une bombe*/ 
 	public final static int AI_ACTION_PUT_BOMB = 5;	
 	
-	private Vector<int[]> bombs;
-	/** liste des joueurs avec leur position et leur sens de déplacement */
-	private Vector<int[]> players;
-	/** liste des joueurs avec leur état : vrai pour vivant */
-	private Vector<Boolean> playersStates;
 	/** position du personnage de l'IA */
 	private int[] ownPosition;
+	
 	/** temps restant avant le shrink (-1 si le shrink a déjà commencé) */
 	private long timeBeforeShrink;
 	/** position du prochain shrink */
 	private int nextShrinkPosition[];
-	/** position relative de la bombe  */
-	private int bombPosition;
+	
 	/** portée des bombes du personnage contrôlé par l'IA */
 	private int ownFirePower;
 	/** nombre de bombes que le personnage contrôlé par l'IA peut encore poser */
 	private int ownBombCount;
-	/** portée des bombes des personnages autres que celui contrôlé par l'IA */
-	private Vector<Integer> firePowers;
 	/** nombre de bombes que les personnages autres que celui contrôlé par l'IA peuvent encore poser */
 	private Vector<Integer> bombCounts;
-	
-	/**
-	 * Constructeur. 
-	 * @param name	nom de la classe
-	 */
-	public Notes(String name)
-	{	if(name.length()>10)
-			this.name = name.substring(0, 10);
-		else
-			this.name = name;
-	}
-	
-	/**
-	 * Renvoie le nom attributé à cette IA
-	 * (en général : le nom de la classe elle-même)
-	 * @return	le nom de l'IA
-	 */
-	public String getName()
-	{	return name;
-	}
-	
-	/**
-	 * Renvoie le percept du personnage sous la forme d'une matrice d'entiers.
-	 * Chaque entier est un code représentant la case correspondante en utilisant
-	 * les constantes AI_BLOCK_XXXXX.
-	 * @return	la matrice représentant la zone de jeu
-	 */
-	protected int[][] getZoneMatrix()
-	{	return zoneMatrix;
-	}
-
-	/**
-	 * Renvoie la largeur de la zone de jeu 
-	 * @return	la largeur de la matrice
-	 */
-	protected int getZoneMatrixDimX()
-	{	return zoneMatrix.length;
-	}
-
-	/**
-	 * Renvoie la hauteur de la zone de jeu 
-	 * @return	la hauteur de la matrice
-	 */
-	protected int getZoneMatrixDimY()
-	{	return zoneMatrix[0].length;
-	}
-
-	/**
-	 * Renvoie la portée de la bombe située à la position passée en paramètres.
-	 * S'il n'y a pas de bombe à cette position, la valeur -1 est renvoyée.
-	 * @param	x	position de la bombe
-	 * @param	y	position de la bombe
-	 * @return	la portée de la bombe
-	 */
-	protected int getBombPowerAt(int x, int y)
-	{	int result = -1;
-		Iterator<int[]> i = bombs.iterator();
-		while(i.hasNext() && result==-1)
-		{	int[] temp = i.next();
-			if(temp[0]==x && temp[1]==y)
-				result = temp[2];
-		}
-		return result;
-	}
-	
-	/**
-	 * Renvoie le nombre de joueurs participant à la partie, en plus
-	 * de celui dirigé par cette IA. 
-	 * @return	le nombre de joueurs.
-	 */
-	protected int getPlayerCount()
-	{	return players.size();
-	}
-	
-	/**
-	 * Renvoie la position du personnage dont l'index est passé
-	 * en paramètre. S'il n'y a pas de personnage ayant cet index, la valeur 
-	 * {-1,-1} est renvoyée. Attention, le personnage dirigé par cette IA n'est 
-	 * jamais considéré. 
-	 * @param index	numéro du personnage
-	 * @return	position du personnage 
-	 */
-	protected int[] getPlayerPosition(int index)
-	{	int result[] = new int[2];
-		if(index<players.size())
-		{	result[0] = players.get(index)[0];
-			result[1] = players.get(index)[1];
-		}
-		else
-		{	result[0] = -1;
-			result[1] = -1;
-		}
-		return result;
-	}
-	
-	/**
-	 * Renvoie le sens de déplacement du personnage dont l'index est passé
-	 * en paramètre. S'il n'y a pas de personnage ayant cet index, la valeur 
-	 * -1 est renvoyée. Sinon, il s'agit d'un entier AI_DIR_NONE, AI_DIR_UP, AI_DIR_DOWN, 
-	 * AI_DIR_RIGHT ou AI_DIR_LEFT. Attention, le personnage dirigé par cette IA n'est 
-	 * jamais considéré.
-	 * @param index	numéro du personnage
-	 * @return	le sens de déplacement du personnage 
-	 */
-	protected int getPlayerDirection(int index)
-	{	if(index<players.size())
-			return players.get(index)[2];
-		else
-			return -1;
-	}
-
-	/**
-	 * Renvoie vrai si la personnage dont l'index est passé
-	 * en paramètre est vivant. Si le personnage est mort ou en train de mourir,
-	 * ou bien s'il n'y a pas de personnage ayant cet index, la valeur 
-	 * faux est renvoyée. Attention, le personnage dirigé par cette IA n'est 
-	 * jamais considéré.
-	 * @param index	numéro du personnage
-	 * @return	un booléan représentant l'état du personnage 
-	 */
-	protected boolean isPlayerAlive(int index)
-	{	if(index<playersStates.size())
-			return playersStates.get(index);
-		else
-			return false;
-	}
-	
-	/**
-	 * Renvoie le temps restant avant le début du shrink (la valeur
-	 * est négative si le shrink a déjà commencé).
-	 * @return	temps avant le shrink en millisecondes
-	 */
-	protected long getTimeBeforeShrink()
-	{	return timeBeforeShrink;	
-	}
-	
-	/**
-	 * Renvoie la position du bloc qui sera le prochain à se faire écraser
-	 * par un bloc lors du shrink.
-	 * @return	un tableau de deux entiers représentant la position du prochain bloc du shrink
-	 */
-	protected int[] getNextShrinkPosition()
-	{	return nextShrinkPosition;
-	}
 	
 	/**
 	 * Renvoie la position du personnage de l'IA.
@@ -204,18 +53,6 @@ public abstract class Notes implements Callable<Integer>, Serializable
 	{	return ownPosition;
 	}
 
-	/**
-	 * Renvoie la position de la bombe relativement au personnage de l'IA,
-	 * dans le cas où une bombe occupe la même case. Une constante de 
-	 * la forme AI_DIR_XXXX est renvoyée. La constante AI_DIR_NONE est renvoyée
-	 * s'il n'y a pas de bombe dans la case, ou bien si la bombe et le joueur sont placés
-	 * au même endroit.
-	 * @return	la position relative de la bombe
-	 */
-	protected int getBombPosition()
-	{	return bombPosition;
-	}
-	
 	/**
 	 * Renvoie la portée des bombes du joueur contrôlé par l'IA.
 	 * @return	puissance des bombes (longueur de la flamme exprimée en nombre de cases)

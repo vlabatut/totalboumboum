@@ -7,10 +7,6 @@ import java.util.Iterator;
 
 import fr.free.totalboumboum.engine.container.level.Level;
 import fr.free.totalboumboum.engine.container.tile.Tile;
-import fr.free.totalboumboum.engine.content.sprite.bomb.Bomb;
-import fr.free.totalboumboum.engine.content.sprite.fire.Fire;
-import fr.free.totalboumboum.engine.content.sprite.hero.Hero;
-import fr.free.totalboumboum.engine.content.sprite.item.Item;
 import fr.free.totalboumboum.engine.loop.Loop;
 
 public class AiZone
@@ -21,7 +17,6 @@ public class AiZone
 		Level level = loop.getLevel();
 		initZone(level);
 		initSprites();
-		// players
 	}
 	
 	/////////////////////////////////////////////////////////////////
@@ -130,7 +125,56 @@ public class AiZone
 	private Collection<AiHero> heroes;
 	/** liste des items contenus dans cette zone */
 	private Collection<AiItem> items;
+	/** le personnage représentant cette IA */
+	private AiHero ownHero;
 	
+	/** 
+	 * renvoie la liste des blocks contenues dans cette zone
+	 * (la liste peut être vide)
+	 */
+	public Collection<AiBlock> getBlocks()
+	{	return blocks;	
+	}
+	/** 
+	 * renvoie la liste des bombes contenues dans cette zone 
+	 * (la liste peut être vide)
+	 */
+	public Collection<AiBomb> getBombs()
+	{	return bombs;	
+	}
+	/** 
+	 * renvoie la liste des feux contenus dans cette zone 
+	 * (la liste peut être vide)
+	 */
+	public Collection<AiFire> getFires()
+	{	return fires;	
+	}
+	/** 
+	 * renvoie la liste des sols contenus dans cette zone 
+	 */
+	public Collection<AiFloor> getFloors()
+	{	return floors;	
+	}
+	/** 
+	 * renvoie la liste des personnages contenus dans cette zone 
+	 * (les joueurs éliminés n'apparaissent plus dans cette liste ni dans cette représentation de la zone)
+	 */
+	public Collection<AiHero> getHeroes()
+	{	return heroes;	
+	}
+	/** 
+	 * renvoie la liste des items apparents contenus dans cette zone 
+	 * (la liste peut être vide)
+	 */
+	public Collection<AiItem> getItems()
+	{	return items;	
+	}
+	/** 
+	 * renvoie le personnage qui est contrôlé par l'IA
+	 */
+	public AiHero getOwnHero()
+	{	return ownHero;	
+	}
 	/**
 	 * initialise la liste de sprites pour la zone entière
 	 * (à partir des listes de sprites de chaque case de cette zone)
