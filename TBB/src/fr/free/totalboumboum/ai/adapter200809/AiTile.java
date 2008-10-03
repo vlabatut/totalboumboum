@@ -116,11 +116,13 @@ public class AiTile
 	private void initSprites(Tile tile)
 	{	// block
 		{	Block b = tile.getBlock();
-			String gesture = b.getCurrentGesture();
-			if(b!=null && !(gesture.equalsIgnoreCase(GestureConstants.NONE) 
+			if(b!=null)
+			{	String gesture = b.getCurrentGesture();
+				if(!(gesture.equalsIgnoreCase(GestureConstants.NONE) 
 							|| gesture.equalsIgnoreCase(GestureConstants.HIDING)
 							|| gesture.equalsIgnoreCase(GestureConstants.ENDED)))
 				block = new AiBlock(this,b);
+			}
 			else
 				block = null;
 		}
@@ -156,11 +158,13 @@ public class AiTile
 		}
 		// floor
 		{	Floor f = tile.getFloor();
-			String gesture = f.getCurrentGesture();
-			if(f!=null && !(gesture.equalsIgnoreCase(GestureConstants.NONE) 
+			if(f!=null)
+			{	String gesture = f.getCurrentGesture();
+				if(!(gesture.equalsIgnoreCase(GestureConstants.NONE) 
 							|| gesture.equalsIgnoreCase(GestureConstants.HIDING)
 							|| gesture.equalsIgnoreCase(GestureConstants.ENDED)))
 				floor = new AiFloor(this,f);
+			}
 			else
 				floor = null;
 		}
@@ -181,11 +185,13 @@ public class AiTile
 		}
 		// item
 		{	Item i = tile.getItem();
-			String gesture = i.getCurrentGesture();
-			if(i!=null && !(gesture.equalsIgnoreCase(GestureConstants.NONE) 
+			if(i!=null)
+			{	String gesture = i.getCurrentGesture();
+				if(!(gesture.equalsIgnoreCase(GestureConstants.NONE) 
 							|| gesture.equalsIgnoreCase(GestureConstants.HIDING)
 							|| gesture.equalsIgnoreCase(GestureConstants.ENDED)))
 				item = new AiItem(this,i);
+			}
 			else
 				item = null;
 		}
