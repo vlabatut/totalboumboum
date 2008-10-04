@@ -1,6 +1,7 @@
 package fr.free.totalboumboum.engine.player;
 
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
@@ -41,7 +42,7 @@ public class Player
 	/** current color */
 	private PredefinedColor color;
 	
-	public Player(Profile profile, Level level, ArrayList<AbstractAbility> ablts, PermissionPack permissions, TrajectoryPack trajectories) throws IllegalArgumentException, SecurityException, ParserConfigurationException, SAXException, IOException, IllegalAccessException, NoSuchFieldException, ClassNotFoundException, InstantiationException, InvocationTargetException, NoSuchMethodException
+	public Player(Profile profile, Level level, ArrayList<AbstractAbility> ablts, PermissionPack permissions, TrajectoryPack trajectories) throws ParserConfigurationException, SAXException, IOException, ClassNotFoundException
 	{	this.level = level;
 		configuration = level.getConfiguration();
 		this.profile = profile;
@@ -55,13 +56,16 @@ public class Player
 		sprite.setControlSettings(this.profile.getControlSettings());
 		sprite.setPlayer(this);
 		spriteControl = new PlayerControl(this);
-		// artificial intelligence
+	}
+
+	public void initAi() throws FileNotFoundException, IllegalArgumentException, SecurityException, ClassNotFoundException, InstantiationException, IllegalAccessException, InvocationTargetException, NoSuchMethodException
+	{	// artificial intelligence
     	if(this.profile.getAiName() != null)
     	{	ai = AiLoader.loadAi(profile.getAiName(), profile.getAiPackname());
     		ai.init(level.getInstance(),this);
     	}
 	}
-
+	
     private Configuration configuration;
 	public Configuration getConfiguration()
 	{	return configuration;

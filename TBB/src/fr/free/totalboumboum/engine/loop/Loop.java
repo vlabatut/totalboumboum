@@ -35,6 +35,8 @@ import fr.free.totalboumboum.engine.container.itemset.Itemset;
 import fr.free.totalboumboum.engine.container.level.HollowLevel;
 import fr.free.totalboumboum.engine.container.level.Level;
 import fr.free.totalboumboum.engine.container.level.Players;
+import fr.free.totalboumboum.engine.content.feature.Direction;
+import fr.free.totalboumboum.engine.content.feature.GestureConstants;
 import fr.free.totalboumboum.engine.content.feature.ability.AbilityLoader;
 import fr.free.totalboumboum.engine.content.feature.ability.AbstractAbility;
 import fr.free.totalboumboum.engine.content.feature.ability.StateAbility;
@@ -114,10 +116,14 @@ public class Loop implements Runnable
 				Item item = itemset.makeItem(name);
 				hero.addInitialItem(item);
 			}
+			// ai
+			player.initAi();
 			// next player...
 			loadStepOver();
 			j++;
 		}
+		
+		initEntryDelay();
 	}
 	
 	public void loadStepOver()
@@ -519,11 +525,16 @@ System.out.println();
 			{	celebrationDelay = celebrationDelay - (getConfiguration().getMilliPeriod()*getConfiguration().getSpeedCoeff());
 				if(celebrationDelay<=0)
 					setOver(true);
-			}		
+			}
+			
+			// entry ?
+			if(entryDelay>=0)
+				entryDelay = entryDelay - (getConfiguration().getMilliPeriod()*getConfiguration().getSpeedCoeff());
+					
 			// normal update (level and AI)
 			getLevel().update();
 			Iterator<Player> i = players.iterator();
-			while(i.hasNext())
+			while(i.hasNext() && entryDelay<0)
 			{	Player temp = i.next();
 				if(!temp.isOut())
 					temp.update();
@@ -677,7 +688,16 @@ System.out.println();
 	}
 	
 	double celebrationDelay = -1;
+	double entryDelay = -1;
 
+	public void initEntryDelay()
+	{	if(players.size()>0)
+		{	Player player = players.get(0);
+			Sprite sprite = player.getSprite();
+			StateAbility ability = sprite.computeAbility(StateAbility.HERO_ENTRY_DURATION);
+			entryDelay = ability.getStrength();
+		}
+	}
 	public void initCelebrationDelay()
 	{	Player player = players.get(0);
 		Sprite sprite = player.getSprite();

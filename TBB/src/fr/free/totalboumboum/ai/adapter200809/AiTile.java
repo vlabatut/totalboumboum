@@ -23,6 +23,7 @@ public class AiTile
 	{	this.zone = zone;
 		this.tile = tile;
 		initLocation(line,col);
+		updateSprites();
 	}
 	
 	void update()
@@ -206,8 +207,8 @@ public class AiTile
 			if(f!=null)
 			{	String gesture = f.getCurrentGesture();
 				if(!(gesture.equalsIgnoreCase(GestureConstants.NONE) 
-							|| gesture.equalsIgnoreCase(GestureConstants.HIDING)
-							|| gesture.equalsIgnoreCase(GestureConstants.ENDED)))
+					|| gesture.equalsIgnoreCase(GestureConstants.HIDING)
+					|| gesture.equalsIgnoreCase(GestureConstants.ENDED)))
 				{	floor = zone.getFloor(f);
 					if(floor==null)
 					{	floor = new AiFloor(this,f);
@@ -226,8 +227,8 @@ public class AiTile
 			{	Hero h = i.next();
 				String gesture = h.getCurrentGesture();
 				if(!(gesture.equalsIgnoreCase(GestureConstants.NONE) 
-					|| !gesture.equalsIgnoreCase(GestureConstants.HIDING)
-					|| !gesture.equalsIgnoreCase(GestureConstants.ENDED)))
+					|| gesture.equalsIgnoreCase(GestureConstants.HIDING)
+					|| gesture.equalsIgnoreCase(GestureConstants.ENDED)))
 				{	AiHero hero = zone.getHero(h);
 					if(hero==null)
 					{	hero = new AiHero(this,h);
@@ -243,8 +244,8 @@ public class AiTile
 			if(i!=null)
 			{	String gesture = i.getCurrentGesture();
 				if(!(gesture.equalsIgnoreCase(GestureConstants.NONE) 
-							|| gesture.equalsIgnoreCase(GestureConstants.HIDING)
-							|| gesture.equalsIgnoreCase(GestureConstants.ENDED)))
+					|| gesture.equalsIgnoreCase(GestureConstants.HIDING)
+					|| gesture.equalsIgnoreCase(GestureConstants.ENDED)))
 				{	item = zone.getItem(i);
 					if(item==null)
 					{	item = new AiItem(this,i);

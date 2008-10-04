@@ -10,6 +10,12 @@ public abstract class AiSprite<T extends Sprite>
 		state = new AiState(sprite);
 	}
 	
+	void update()
+	{	updateLocation();
+		updateState();
+		checked = true;
+	}
+
 	void finish()
 	{	// state
 		state.finish();
@@ -36,11 +42,11 @@ public abstract class AiSprite<T extends Sprite>
 	void uncheck()
 	{	checked = false; 
 	}
-	void update()
-	{	updateLocation();
-		updateState();
-	}
 
+	T getSprite()
+	{	return sprite;	
+	}
+	
 	/////////////////////////////////////////////////////////////////
 	// STATE			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////

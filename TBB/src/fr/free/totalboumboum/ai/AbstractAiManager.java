@@ -83,7 +83,7 @@ public abstract class AbstractAiManager<V>
      * Réalise l'appel à la classe qui implémente l'IA
      */
     private final void makeCall()
-    {	setPercepts();
+    {	updatePercepts();
     	futureAi = executorAi.submit(ai);
     }
     
@@ -122,7 +122,7 @@ public abstract class AbstractAiManager<V>
 	 * Cette méthode doit être surchargée de manière à adapter la structure
 	 * des données à l'IA qui va les traiter
 	 */
-	public abstract void setPercepts();
+	public abstract void updatePercepts();
 	
 	/**
 	 * méthode utilisée pour convertir la valeur renvoyée par l'ia 

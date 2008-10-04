@@ -7,4 +7,14 @@ public class AiFire extends AiSprite<Fire>
 	public AiFire(AiTile tile, Fire sprite)
 	{	super(tile,sprite);		
 	}
+
+	@Override
+	void update()
+	{	super.update();
+	}
+
+	@Override
+	void finish()
+	{	super.finish();
+	}
 }

@@ -27,14 +27,14 @@ public abstract class AiManager extends AbstractAiManager<AiAction>
 	{	super.init(instance,player);
 		loop = player.getLoop();
 		level = loop.getLevel();
-		percepts = new AiZone(level,player);		
+		percepts = new AiZone(level,player);
+		ArtificialIntelligence ai = ((ArtificialIntelligence)getAi());
+		ai.setPercepts(percepts);
 	}
 
 	@Override
-	public void setPercepts()
-	{	ArtificialIntelligence ai = ((ArtificialIntelligence)getAi());
-		percepts.update();
-		ai.setPercepts(percepts);
+	public void updatePercepts()
+	{	percepts.update();
 	}
 	
 	@Override
@@ -42,6 +42,8 @@ public abstract class AiManager extends AbstractAiManager<AiAction>
 	{	// percepts
 		percepts.finish();
 		percepts = null;
+		ArtificialIntelligence ai = ((ArtificialIntelligence)getAi());
+		ai.finish();
 		// misc
 		loop = null;
 		level = null;

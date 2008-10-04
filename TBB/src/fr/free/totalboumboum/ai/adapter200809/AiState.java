@@ -8,7 +8,7 @@ public class AiState
 	private Sprite sprite;
 	
 	public AiState(Sprite sprite)
-	{	this.sprite = sprite;		
+	{	this.sprite = sprite;
 	}
 	
 	void update()
