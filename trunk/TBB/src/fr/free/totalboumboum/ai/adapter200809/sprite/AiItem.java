@@ -1,5 +1,6 @@
-package fr.free.totalboumboum.ai.adapter200809;
+package fr.free.totalboumboum.ai.adapter200809.sprite;
 
+import fr.free.totalboumboum.ai.adapter200809.AiTile;
 import fr.free.totalboumboum.engine.content.sprite.item.Item;
 
 public class AiItem extends AiSprite<Item>

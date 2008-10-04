@@ -1,5 +1,6 @@
-package fr.free.totalboumboum.ai.adapter200809;
+package fr.free.totalboumboum.ai.adapter200809.sprite;
 
+import fr.free.totalboumboum.ai.adapter200809.AiTile;
 import fr.free.totalboumboum.data.profile.PredefinedColor;
 import fr.free.totalboumboum.engine.content.feature.ability.StateAbility;
 import fr.free.totalboumboum.engine.content.sprite.hero.Hero;

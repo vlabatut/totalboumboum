@@ -1,5 +1,6 @@
-package fr.free.totalboumboum.ai.adapter200809;
+package fr.free.totalboumboum.ai.adapter200809.sprite;
 
+import fr.free.totalboumboum.ai.adapter200809.AiTile;
 import fr.free.totalboumboum.engine.content.sprite.fire.Fire;
 
 public class AiFire extends AiSprite<Fire>
