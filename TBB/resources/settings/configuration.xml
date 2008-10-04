@@ -19,24 +19,24 @@
 	<profiles>
 <!-- brown -->			<!-- 5 -->			<!-- DÉGRADÉ -->			<!--		<profile value="BasmanSandalli" />			 -->	
 <!-- grass -->				<!-- 8 -->			<!-- IDENTIQUE  -->		<!--		<profile value="BaydarCamci" />				 -->
-<!-- blue -->				<!-- 1 -->			<!-- IDENTIQUE  -->		<!--		<profile value="BingolKetenci" />				 -->
+<!-- blue -->				<!-- 1 -->			<!-- IDENTIQUE  -->				<profile value="BingolKetenci" />				 
 <!-- orange -->			<!-- 9 -->			<!-- DÉGRADÉ  -->			<!--		<profile value="CaglayanElmas"/>				 -->
 <!-- cyan -->				<!--11-->			<!-- IDENTIQUE  -->		<!--		<profile value="CamasDemirbas" />			 -->
 <!-- grey -->				<!--14-->			<!-- IDENTIQUE  -->		<!--		<profile value="CiritMutlu" />						 -->
-<!-- white -->				<!-- 4 -->			<!-- DÉGRADÉ -->			<!--		<profile value="DemirkolDogan" />			 -->
+<!-- white -->				<!-- 4 -->			<!-- DÉGRADÉ -->					<profile value="DemirkolDogan" />			 
 <!-- indigo -->				<!--10-->			<!-- IDENTIQUE  -->		<!--		<profile value="GokceEren" /> 					 -->						
 <!-- pink -->				<!--14-->			<!-- IDENTIQUE  -->		<!--		<profile value="GoksayKose" />  				 -->
 <!-- green --> 			<!-- 6 -->			<!-- DÉGRADÉ -->			<!--		<profile value="GokselMenges" />				 -->
 <!-- purple -->			<!--13-->			<!-- IDENTIQUE  -->		<!--		<profile value="HanciToprak" /> 				 -->
 <!-- rust -->				<!--14-->			<!-- IDENTIQUE  -->		<!--		<profile value="KecerYaman" /> 				 -->
-<!-- red -->					<!-- 3 -->			<!-- IDENTIQUE  -->		<!--		<profile value="KilicPala" /> 						 -->
+<!-- red -->					<!-- 3 -->			<!-- IDENTIQUE  -->				<profile value="KilicPala" /> 						 
 <!-- ultramarine -->	<!--11-->			<!-- IDENTIQUE  -->		<!--		<profile value="KurtulusOzsoy" /> 			 -->
-<!-- black --> 				<!-- 2 -->			<!-- DÉGRADÉ -->  			<!--		<profile value="OkanYuksel" />					 -->
+<!-- black --> 				<!-- 2 -->			<!-- BUGUÉ -->	  			<!--		<profile value="OkanYuksel" />					 -->
 <!-- yellow -->			<!-- 7 -->			<!-- IDENTIQUE  -->		<!--		<profile value="SahinYildirim" /> 				 -->
 
  
-<!--		<profile value="test" />  					 -->											<!-- orange -->
-		<profile value="manual" />  															<!-- cyan -->
+<!-- orange -->		<profile value="test" />  					 											
+<!-- cyan -->			<profile value="manual" />  															
 
 	</profiles>
 
