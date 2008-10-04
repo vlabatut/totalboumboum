@@ -10,7 +10,7 @@ import fr.free.totalboumboum.engine.content.feature.permission.TargetPermission;
 import fr.free.totalboumboum.engine.content.sprite.block.Block;
 import fr.free.totalboumboum.engine.content.sprite.fire.Fire;
 
-public class AiBlock extends AiSprite
+public class AiBlock extends AiSprite<Block>
 {
 	public AiBlock(AiTile tile, Block sprite)
 	{	super(tile,sprite);

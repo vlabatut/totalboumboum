@@ -2,10 +2,10 @@ package fr.free.totalboumboum.ai.adapter200809;
 
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.Collections;
 import java.util.Iterator;
 
 import fr.free.totalboumboum.engine.container.tile.Tile;
+import fr.free.totalboumboum.engine.content.feature.Direction;
 import fr.free.totalboumboum.engine.content.feature.GestureConstants;
 import fr.free.totalboumboum.engine.content.sprite.block.Block;
 import fr.free.totalboumboum.engine.content.sprite.bomb.Bomb;
@@ -16,10 +16,41 @@ import fr.free.totalboumboum.engine.content.sprite.item.Item;
 
 public class AiTile
 {
+	private AiZone zone;
+	private Tile tile;
 	
-	public AiTile(int line, int col, Tile tile)
-	{	initLocation(line,col);
-		initSprites(tile);
+	public AiTile(int line, int col, Tile tile, AiZone zone)
+	{	this.zone = zone;
+		this.tile = tile;
+		initLocation(line,col);
+	}
+	
+	void update()
+	{	updateSprites();		
+	}
+	
+	void finish()
+	{	// block
+		if(block!=null)
+		{	block.finish();	
+			block = null;
+		}
+		// bombs
+		finishSprites(bombs);
+		// fires
+		finishSprites(fires);
+		// floor
+		if(floor!=null)
+		{	floor.finish();	
+			floor = null;
+		}
+		// heroes
+		finishSprites(heroes);
+		// item
+		if(item!=null)
+		{	item.finish();	
+			item = null;
+		}	
 	}
 	
 	/////////////////////////////////////////////////////////////////
@@ -55,17 +86,17 @@ public class AiTile
 	// SPRITES			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	/** block contenu dans cette case */
-	private AiBlock block;
+	private AiBlock block = null;
 	/** liste des bombes contenues dans cette case */
-	private Collection<AiBomb> bombs;
+	private final ArrayList<AiBomb> bombs = new ArrayList<AiBomb>();
 	/** liste des feux contenus dans cette case */
-	private Collection<AiFire> fires;
+	private final ArrayList<AiFire> fires = new ArrayList<AiFire>();
 	/** sol de cette case */
-	private AiFloor floor;
+	private AiFloor floor = null;
 	/** liste des personnages contenus dans cette case */
-	private Collection<AiHero> heroes;
+	private final ArrayList<AiHero> heroes = new ArrayList<AiHero>();
 	/** item contenu dans cette case */
-	private AiItem item;
+	private AiItem item = null;
 
 	/** 
 	 * renvoie le block contenu dans cette case 
@@ -111,9 +142,9 @@ public class AiTile
 	}
 	
 	/** 
-	 * initialise les représentations des sprites contenus dans cette case
+	 * met à jour les représentations des sprites contenus dans cette case
 	 */
-	private void initSprites(Tile tile)
+	private void updateSprites()
 	{	// block
 		{	Block b = tile.getBlock();
 			if(b!=null)
@@ -121,40 +152,54 @@ public class AiTile
 				if(!(gesture.equalsIgnoreCase(GestureConstants.NONE) 
 							|| gesture.equalsIgnoreCase(GestureConstants.HIDING)
 							|| gesture.equalsIgnoreCase(GestureConstants.ENDED)))
-				block = new AiBlock(this,b);
+				{	block = zone.getBlock(b);
+					if(block==null)
+					{	block = new AiBlock(this,b);
+						zone.addBlock(block);
+					}
+					block.update();
+				}
 			}
 			else
 				block = null;
 		}
 		// bombs
-		{	ArrayList<AiBomb> tempBombs = new ArrayList<AiBomb>();
+		{	bombs.clear();
 			Iterator<Bomb> i = tile.getBombs().iterator();
 			while(i.hasNext())
-			{	Bomb bomb = i.next();
-				String gesture = bomb.getCurrentGesture();
+			{	Bomb b = i.next();
+				String gesture = b.getCurrentGesture();
 				if(!(gesture.equalsIgnoreCase(GestureConstants.NONE) 
 					|| !gesture.equalsIgnoreCase(GestureConstants.HIDING)
 					|| !gesture.equalsIgnoreCase(GestureConstants.ENDED)))
-				{	AiBomb tempBomb = new AiBomb(this,bomb);
-					tempBombs.add(tempBomb);
+				{	AiBomb bomb = zone.getBomb(b);
+					if(bomb==null)
+					{	bomb = new AiBomb(this,b);
+						zone.addBomb(bomb);
+					}
+					bomb.update();
+					bombs.add(bomb);
 				}
 			}
-			bombs = Collections.unmodifiableCollection(tempBombs);
 		}
 		// fires
-		{	ArrayList<AiFire> tempFires = new ArrayList<AiFire>();
+		{	fires.clear();
 			Iterator<Fire> i = tile.getFires().iterator();
 			while(i.hasNext())
-			{	Fire fire = i.next();
-				String gesture = fire.getCurrentGesture();
+			{	Fire f = i.next();
+				String gesture = f.getCurrentGesture();
 				if(!(gesture.equalsIgnoreCase(GestureConstants.NONE) 
 					|| !gesture.equalsIgnoreCase(GestureConstants.HIDING)
 					|| !gesture.equalsIgnoreCase(GestureConstants.ENDED)))
-				{	AiFire tempFire = new AiFire(this,fire);
-					tempFires.add(tempFire);
+				{	AiFire fire = zone.getFire(f);
+					if(fire==null)
+					{	fire = new AiFire(this,f);
+						zone.addFire(fire);
+					}
+					fire.update();
+					fires.add(fire);
 				}
 			}
-			fires = Collections.unmodifiableCollection(tempFires);
 		}
 		// floor
 		{	Floor f = tile.getFloor();
@@ -163,25 +208,35 @@ public class AiTile
 				if(!(gesture.equalsIgnoreCase(GestureConstants.NONE) 
 							|| gesture.equalsIgnoreCase(GestureConstants.HIDING)
 							|| gesture.equalsIgnoreCase(GestureConstants.ENDED)))
-				floor = new AiFloor(this,f);
+				{	floor = zone.getFloor(f);
+					if(floor==null)
+					{	floor = new AiFloor(this,f);
+						zone.addFloor(floor);
+					}
+					floor.update();
+				}
 			}
 			else
 				floor = null;
 		}
 		// heroes
-		{	ArrayList<AiHero> tempHeroes = new ArrayList<AiHero>();
+		{	heroes.clear();
 			Iterator<Hero> i = tile.getHeroes().iterator();
 			while(i.hasNext())
-			{	Hero hero = i.next();
-				String gesture = hero.getCurrentGesture();
+			{	Hero h = i.next();
+				String gesture = h.getCurrentGesture();
 				if(!(gesture.equalsIgnoreCase(GestureConstants.NONE) 
 					|| !gesture.equalsIgnoreCase(GestureConstants.HIDING)
 					|| !gesture.equalsIgnoreCase(GestureConstants.ENDED)))
-				{	AiHero tempHero = new AiHero(this,hero);
-					tempHeroes.add(tempHero);
+				{	AiHero hero = zone.getHero(h);
+					if(hero==null)
+					{	hero = new AiHero(this,h);
+						zone.addHero(hero);
+					}
+					hero.update();
+					heroes.add(hero);
 				}
 			}
-			heroes = Collections.unmodifiableCollection(tempHeroes);
 		}
 		// item
 		{	Item i = tile.getItem();
@@ -190,10 +245,47 @@ public class AiTile
 				if(!(gesture.equalsIgnoreCase(GestureConstants.NONE) 
 							|| gesture.equalsIgnoreCase(GestureConstants.HIDING)
 							|| gesture.equalsIgnoreCase(GestureConstants.ENDED)))
-				item = new AiItem(this,i);
+				{	item = zone.getItem(i);
+					if(item==null)
+					{	item = new AiItem(this,i);
+						zone.addItem(item);
+					}
+					item.update();
+				}
 			}
 			else
 				item = null;
 		}
 	}
+	private <T extends AiSprite<?>> void finishSprites(ArrayList<T> list)
+	{	Iterator<T> it = list.iterator();
+		while(it.hasNext())
+		{	T temp = it.next();
+			temp.finish();
+		}
+		list.clear();
+	}
+
+	/////////////////////////////////////////////////////////////////
+	// TILES			/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+
+	/**
+	 * renvoie le voisin de cette case passée en paramètre, situé dans la direction
+	 * passée en paramètre.
+	 * ATTENTION : les niveaux sont circulaires, ce qui signifie que le voisin
+	 * d'une case située au bord du niveau est une case située sur l'autre bord.
+	 * Par exemple, dans un niveau contenant width colonnes, pour une case située
+	 * à la position (ligne,0), le voisin de gauche est la case située à la position
+	 * (ligne,width-1). Même chose pour les bordures haut et bas.
+	 * 
+	 * @param direction	direction dans laquelle le voisin se trouve
+	 * @return	le voisin de cette case, situé dans la direction indiquée
+	 */
+	public AiTile getNeighbour(Direction direction)
+	{	AiTile result;
+		result = zone.getNeighbourTile(line,col,direction);
+		return result;
+	}
+	
 }

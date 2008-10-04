@@ -624,10 +624,16 @@ public class Launcher
 	 * - Nouveauté		: adaptateur spécial pour les IA 2008-09
 	 * - Correction 	: petit bug dans la GUI, les dimensions des niveaux étaient fausses
 	 * 
+	 * + alpha.44
+	 * - Modification	: amélioration de la structure de données destinées aux IA 2008-09 et représentant la zone et son contenu
+	 * - Nouveauté 		: IA d'exemple pour le package 2008-09
+	 * 
+	 * 
 	 * *******************************************************
 	 * *********************** A FAIRE ***********************
 	 * *******************************************************
-	 * - écrire une IA d'exemple
+	 * - scripts de lancement/compilation pour Linux
+	 * - commentaires des classes d'IA
 	 * - redistribution des items lors de la mort d'un joueur (option de round?)
 	 * - possibilité de bloquer certains items (on ne les perd pas lorsqu'on meurt)
 	 * - y a toujours un bug avec le décompte des kills/death, faut trouver d'où ça vient

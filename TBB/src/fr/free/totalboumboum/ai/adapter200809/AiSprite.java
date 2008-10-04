@@ -2,12 +2,43 @@ package fr.free.totalboumboum.ai.adapter200809;
 
 import fr.free.totalboumboum.engine.content.sprite.Sprite;
 
-public abstract class AiSprite
-{
-	public AiSprite(AiTile tile, Sprite sprite)
+public abstract class AiSprite<T extends Sprite>
+{	
+	public AiSprite(AiTile tile, T sprite)
 	{	this.tile = tile;
-		initLocation(sprite);
-		initState(sprite);
+		this.sprite = sprite;
+		state = new AiState(sprite);
+	}
+	
+	void finish()
+	{	// state
+		state.finish();
+		state = null;
+		// misc
+		tile = null;
+		sprite = null;
+		
+	}
+
+	/////////////////////////////////////////////////////////////////
+	// SPRITE			/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	private T sprite;
+	private boolean checked;
+	
+	boolean isSprite(T sprite)
+	{	return this.sprite == sprite;
+	}
+	
+	boolean isChecked()
+	{	return checked;	
+	}
+	void uncheck()
+	{	checked = false; 
+	}
+	void update()
+	{	updateLocation();
+		updateState();
 	}
 
 	/////////////////////////////////////////////////////////////////
@@ -26,8 +57,8 @@ public abstract class AiSprite
 	/** 
 	 * initialise l'état dans lequel se trouve ce sprite
 	 */
-	private void initState(Sprite sprite)
-	{	state = new AiState(sprite);
+	private void updateState()
+	{	state.update();
 	}
 	
 	/////////////////////////////////////////////////////////////////
@@ -86,7 +117,7 @@ public abstract class AiSprite
 	/** 
 	 * initialise les positions de ce sprite en pixels 
 	 */
-	private void initLocation(Sprite sprite)
+	private void updateLocation()
 	{	posX = sprite.getCurrentPosX();
 		posY = sprite.getCurrentPosY();
 		posZ = sprite.getCurrentPosZ();		

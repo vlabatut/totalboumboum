@@ -1,4 +1,4 @@
-package fr.free.totalboumboum.ai.adapter200809;
+package fr.free.totalboumboum.ai.adapter200809.action;
 
 /**
  * action qu'une IA peut effectuer : NONE (ne rien faire), MOVE (se déplacer, 
