@@ -1,4 +1,4 @@
-package fr.free.totalboumboum.ai.adapter200809;
+package fr.free.totalboumboum.ai.adapter200809.state;
 
 import fr.free.totalboumboum.engine.content.feature.GestureConstants;
 
