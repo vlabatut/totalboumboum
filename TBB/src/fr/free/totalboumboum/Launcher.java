@@ -633,12 +633,18 @@ public class Launcher
 	 * *******************************************************
 	 * *********************** A FAIRE ***********************
 	 * *******************************************************
-	 * - scripts de lancement/compilation pour Linux
+	 * - système pour controler que le ps n'est pas en boucle infinite (+ tester sur okanyuksel
 	 * - plutot qu'une méthode par propriété spéciale d'un sprite, plutot une méthode générale prenant un code en paramètre ? plus flexible ? et pareil pour type d'item et de bombe ?
 	 * - commentaires des classes d'IA
+	 * 
+	 * - scripts de lancement/compilation pour Linux
+	 * 
 	 * - redistribution des items lors de la mort d'un joueur (option de round?)
 	 * - possibilité de bloquer certains items (on ne les perd pas lorsqu'on meurt)
+	 * 
 	 * - splash screen+centrer frame
+	 * 
+	 * - tournoi simple
 	 * 
 	 * - au moins finir le cycle lors d'une mort, histoire que la différence de timing ne vienne pas juste de l'ordre des joueurs dans la partie 
 	 * - possibilité de choisir entre le fait que le match s'arrête dès que tout le monde est mort sauf 1, ou dernière flamme terminée
@@ -656,7 +662,7 @@ public class Launcher
 	 * - décomposer le fichier de langue en plusieurs sections plus lisibles
 	 * - faire un paramètre dans les rounds qui permet de déterminer s'ils sont compatibles avec le tournoi 2007-08
 	 * - tournoi : 1) on choisit les paramètres 2) on choisit les joueurs, le jeu restreint leur nombre pr qu'il soit compatible avec le tournoi, et restreint aussi les IA pour les mêmes raisons
-	 * - mettre une icone spéciale pour différencier les humains et les IA 
+	 * - mettre une icone spéciale pour différencier les humains et les IA, ds présentation et résultats
 	 * 
 	 * - dans les résultats :
 	 * 		- afficher par défaut les 4 scores de bases
@@ -664,7 +670,6 @@ public class Launcher
 	 * 		- si les limites utilisent des points custom, les afficher aussi
 	 * 		- utiliser l'icone calculatrice pour les points normaux et le boulier pour les custom
 	 * -------------------------------------------------------------------
-	 * - un bug apparait parfois : le résultat du match ne correspond pas au classement réel, et les temps affichés non plus
 	 * - gérer le shrink
 	 * - mode plein écran
 	 * - gérer l'apparition comme une action en soit. si pas possible d'apparaître au début de la partie, faire un atterrissage ?

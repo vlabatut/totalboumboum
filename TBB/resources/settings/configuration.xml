@@ -14,21 +14,29 @@
 <!-- 	attention : si vous augmentez la résolution graphique, il faut donner plus de mémoire à la java machine
 		par exemple en utilisant l'option d'exécution -xmx128m pour donner 128 Mo au lieu des 64 alloués par défaut -->
 	<panelDimension width="1024" height="768" />
-<!-- 	<panelDimension width="750" height="600" />  -->
-<!-- 	<panelDimension width="1280" height="1024" />  --> 
 	
 <!-- PROFILES -->	
 	<profiles>
-		<profile value="DemirkolDogan" /> <!-- white -->
-		<profile value="BingolKetenci" /> <!-- blue -->
-<!-- 		<profile value="OkanYuksel" /> BUGGÉ --> <!-- black -->   
-<!--		<profile value="GokselMenges" /> --> <!-- green --> 
-		<profile value="KilicPala" /> <!-- red -->
-<!--		<profile value="CaglayanElmas" BUGGÉ /> --> <!-- orange -->
-<!--		<profile value="GoksayKose" /> --> <!-- pink -->
-<!--  		<profile value="BasmanSandalli" />  --> <!-- brown -->
-		<profile value="test" />  <!-- orange -->
-		<profile value="manual" />  <!-- cyan -->
+<!-- brown -->			<!-- 5 -->			<!-- DÉGRADÉ -->			<!--		<profile value="BasmanSandalli" />			 -->	
+<!-- grass -->				<!-- 8 -->			<!-- IDENTIQUE  -->		<!--		<profile value="BaydarCamci" />				 -->
+<!-- blue -->				<!-- 1 -->			<!-- IDENTIQUE  -->		<!--		<profile value="BingolKetenci" />				 -->
+<!-- orange -->			<!-- 9 -->			<!-- DÉGRADÉ  -->			<!--		<profile value="CaglayanElmas"/>				 -->
+<!-- cyan -->				<!--11-->			<!-- IDENTIQUE  -->		<!--		<profile value="CamasDemirbas" />			 -->
+<!-- grey -->				<!--14-->			<!-- IDENTIQUE  -->		<!--		<profile value="CiritMutlu" />						 -->
+<!-- white -->				<!-- 4 -->			<!-- DÉGRADÉ -->			<!--		<profile value="DemirkolDogan" />			 -->
+<!-- indigo -->				<!--10-->			<!-- IDENTIQUE  -->		<!--		<profile value="GokceEren" /> 					 -->						
+<!-- pink -->				<!--14-->			<!-- IDENTIQUE  -->		<!--		<profile value="GoksayKose" />  				 -->
+<!-- green --> 			<!-- 6 -->			<!-- DÉGRADÉ -->			<!--		<profile value="GokselMenges" />				 -->
+<!-- purple -->			<!--13-->			<!-- IDENTIQUE  -->		<!--		<profile value="HanciToprak" /> 				 -->
+<!-- rust -->				<!--14-->			<!-- IDENTIQUE  -->		<!--		<profile value="KecerYaman" /> 				 -->
+<!-- red -->					<!-- 3 -->			<!-- IDENTIQUE  -->		<!--		<profile value="KilicPala" /> 						 -->
+<!-- ultramarine -->	<!--11-->			<!-- IDENTIQUE  -->		<!--		<profile value="KurtulusOzsoy" /> 			 -->
+<!-- black --> 				<!-- 2 -->			<!-- DÉGRADÉ -->  			<!--		<profile value="OkanYuksel" />					 -->
+<!-- yellow -->			<!-- 7 -->			<!-- IDENTIQUE  -->		<!--		<profile value="SahinYildirim" /> 				 -->
+
+ 
+<!--		<profile value="test" />  					 -->											<!-- orange -->
+		<profile value="manual" />  															<!-- cyan -->
 
 	</profiles>
 
