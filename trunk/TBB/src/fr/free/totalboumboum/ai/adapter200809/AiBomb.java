@@ -4,7 +4,7 @@ import fr.free.totalboumboum.data.profile.PredefinedColor;
 import fr.free.totalboumboum.engine.content.feature.GestureConstants;
 import fr.free.totalboumboum.engine.content.sprite.bomb.Bomb;
 
-public class AiBomb extends AiSprite
+public class AiBomb extends AiSprite<Bomb>
 {
 	public AiBomb(AiTile tile, Bomb sprite)
 	{	super(tile,sprite);

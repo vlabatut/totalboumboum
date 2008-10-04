@@ -2,7 +2,6 @@ package fr.free.totalboumboum.ai;
 
 import java.util.ArrayList;
 import java.util.Iterator;
-import java.util.Vector;
 import java.util.concurrent.Callable;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.ExecutorService;
@@ -11,26 +10,7 @@ import java.util.concurrent.Future;
 
 
 
-import fr.free.totalboumboum.ai.InterfaceAi;
-import fr.free.totalboumboum.ai.adapter200708.ArtificialIntelligence;
-import fr.free.totalboumboum.data.configuration.Configuration;
-import fr.free.totalboumboum.engine.container.level.Level;
-import fr.free.totalboumboum.engine.container.tile.Tile;
-import fr.free.totalboumboum.engine.content.feature.Contact;
-import fr.free.totalboumboum.engine.content.feature.Direction;
-import fr.free.totalboumboum.engine.content.feature.Orientation;
-import fr.free.totalboumboum.engine.content.feature.TilePosition;
-import fr.free.totalboumboum.engine.content.feature.ability.AbstractAbility;
-import fr.free.totalboumboum.engine.content.feature.ability.StateAbility;
-import fr.free.totalboumboum.engine.content.feature.action.AbstractAction;
-import fr.free.totalboumboum.engine.content.feature.action.SpecificAction;
 import fr.free.totalboumboum.engine.content.feature.event.ControlEvent;
-import fr.free.totalboumboum.engine.content.feature.permission.TargetPermission;
-import fr.free.totalboumboum.engine.content.sprite.Sprite;
-import fr.free.totalboumboum.engine.content.sprite.block.Block;
-import fr.free.totalboumboum.engine.content.sprite.bomb.Bomb;
-import fr.free.totalboumboum.engine.content.sprite.fire.Fire;
-import fr.free.totalboumboum.engine.loop.Loop;
 import fr.free.totalboumboum.engine.player.Player;
 
 public abstract class AbstractAiManager<V>
@@ -63,7 +43,7 @@ public abstract class AbstractAiManager<V>
      * Utilise la classe d'IA associée à ce personnage pour mettre à jour les variables
      * qui permettront au moteur du jeu de déplacer le personnage.
      */
-    public void update()
+    public final void update()
     {	// s'il s'agit du premier appel
     	if(executorAi == null)
     	{	executorAi = Executors.newSingleThreadExecutor();
@@ -102,7 +82,7 @@ public abstract class AbstractAiManager<V>
     /**
      * Réalise l'appel à la classe qui implémente l'IA
      */
-    private void makeCall()
+    private final void makeCall()
     {	setPercepts();
     	futureAi = executorAi.submit(ai);
     }
@@ -110,17 +90,21 @@ public abstract class AbstractAiManager<V>
     /**
      * tente de terminer le thread exécutant l'IA
      */
-    public void finish()
+    public final void finish()
     {	boolean result = futureAi.isDone(); 
     	if(!result) 
     		result = futureAi.cancel(true);
     	/*List<Runnable> list = */executorAi.shutdownNow();
     	
-    	//NOTE finaliser les objects inutilisés
+    	finishPercepts();
+    	ai = null;
+    	executorAi = null;
+    	futureAi = null;
+    	player = null;
     }
 
     /////////////////////////////////////////////////////////////////
-	// DATA				/////////////////////////////////////////////
+	// PERCEPTS			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
     private Player player;
    
@@ -148,4 +132,5 @@ public abstract class AbstractAiManager<V>
 	 */
 	public abstract ArrayList<ControlEvent> convertReaction(V value);
    
+	public abstract void finishPercepts();
 }

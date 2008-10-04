@@ -4,7 +4,7 @@ import fr.free.totalboumboum.data.profile.PredefinedColor;
 import fr.free.totalboumboum.engine.content.feature.ability.StateAbility;
 import fr.free.totalboumboum.engine.content.sprite.hero.Hero;
 
-public class AiHero extends AiSprite
+public class AiHero extends AiSprite<Hero>
 {
 	public AiHero(AiTile tile, Hero sprite)
 	{	super(tile,sprite);

@@ -3,6 +3,8 @@ package fr.free.totalboumboum.ai.adapter200809;
 import java.util.ArrayList;
 
 import fr.free.totalboumboum.ai.AbstractAiManager;
+import fr.free.totalboumboum.ai.adapter200809.action.AiAction;
+import fr.free.totalboumboum.ai.adapter200809.action.AiActionName;
 import fr.free.totalboumboum.engine.container.level.Level;
 import fr.free.totalboumboum.engine.content.feature.Direction;
 import fr.free.totalboumboum.engine.content.feature.event.ControlEvent;
@@ -18,13 +20,33 @@ public abstract class AiManager extends AbstractAiManager<AiAction>
     /////////////////////////////////////////////////////////////////
 	// PERCEPTS			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
+	private AiZone percepts;
+	private Loop loop;
+	private Level level;
+	
+	@Override
+	public void init(String instance, Player player)
+	{	super.init(instance,player);
+		loop = player.getLoop();
+		level = loop.getLevel();
+		percepts = new AiZone(level,player);		
+	}
+
 	@Override
 	public void setPercepts()
-	{	Player player = getPlayer(); 
-		Loop loop = player.getLoop();
-		Level level = loop.getLevel();
-		AiZone percepts = new AiZone(level,player);
-		((ArtificialIntelligence)getAi()).setPercepts(percepts);
+	{	ArtificialIntelligence ai = ((ArtificialIntelligence)getAi());
+		percepts.update();
+		ai.setPercepts(percepts);
+	}
+	
+	@Override
+	public void finishPercepts()
+	{	// percepts
+		percepts.finish();
+		percepts = null;
+		// misc
+		loop = null;
+		level = null;
 	}
 
     /////////////////////////////////////////////////////////////////
