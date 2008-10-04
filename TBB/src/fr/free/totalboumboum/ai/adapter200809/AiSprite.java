@@ -4,14 +4,15 @@ import fr.free.totalboumboum.engine.content.sprite.Sprite;
 
 public abstract class AiSprite<T extends Sprite>
 {	
-	public AiSprite(AiTile tile, T sprite)
+	AiSprite(AiTile tile, T sprite)
 	{	this.tile = tile;
 		this.sprite = sprite;
 		state = new AiState(sprite);
 	}
 	
-	void update()
-	{	updateLocation();
+	void update(AiTile tile)
+	{	this.tile = tile;
+		updateLocation();
 		updateState();
 		checked = true;
 	}
@@ -24,6 +25,18 @@ public abstract class AiSprite<T extends Sprite>
 		tile = null;
 		sprite = null;
 		
+	}
+
+	@Override
+	public boolean equals(Object o)
+	{	boolean result = false;
+		if(o instanceof AiSprite)
+		{	
+//			AiSprite<?> s = (AiSprite<?>)o;	
+//			result = sprite==s.sprite;
+			result = this==o;
+		}
+		return result;
 	}
 
 	/////////////////////////////////////////////////////////////////

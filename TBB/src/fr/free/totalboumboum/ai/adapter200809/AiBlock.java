@@ -12,14 +12,14 @@ import fr.free.totalboumboum.engine.content.sprite.fire.Fire;
 
 public class AiBlock extends AiSprite<Block>
 {
-	public AiBlock(AiTile tile, Block sprite)
+	AiBlock(AiTile tile, Block sprite)
 	{	super(tile,sprite);
 		updateDestructible();
 	}	
 	
 	@Override
-	void update()
-	{	super.update();
+	void update(AiTile tile)
+	{	super.update(tile);
 		updateDestructible();
 	}
 

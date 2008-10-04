@@ -84,6 +84,12 @@ public class ExplosionManager
 				fire = explosion.makeFire("outside");
 			else
 				fire = explosion.makeFire("inside");
+			Sprite owner;
+			if(sprite.getOwner()==null)
+				owner = sprite;
+			else
+				owner = sprite.getOwner();
+			fire.setOwner(owner);
 			specificAction = new SpecificAction(AbstractAction.APPEAR,fire,tileTemp.getFloor(),Direction.NONE);
 			ability = fire.computeAbility(specificAction);
 			blocking = !ability.isActive();
@@ -91,12 +97,6 @@ public class ExplosionManager
 				fire.consumeTile(tileTemp);
 			else
 			{	fire.initGesture();
-				Sprite owner;
-				if(sprite.getOwner()==null)
-					owner = sprite;
-				else
-					owner = sprite.getOwner();
-				fire.setOwner(owner);
 				tileTemp.addSprite(fire);
 				fire.setCurrentPosX(tileTemp.getPosX());
 				fire.setCurrentPosY(tileTemp.getPosY());

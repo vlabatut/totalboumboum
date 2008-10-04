@@ -627,7 +627,8 @@ public class Launcher
 	 * + alpha.44
 	 * - Modification	: amélioration de la structure de données destinées aux IA 2008-09 et représentant la zone et son contenu
 	 * - Nouveauté 		: IA d'exemple pour le package 2008-09
-	 * 
+	 * - Correction		: bug qui empêchait un bon décompte des kills/deaths (différent du premier!)
+	 * - Nouveauté		: niveau plus petit pour tester la nouvelle IA
 	 * 
 	 * *******************************************************
 	 * *********************** A FAIRE ***********************
@@ -637,7 +638,6 @@ public class Launcher
 	 * - commentaires des classes d'IA
 	 * - redistribution des items lors de la mort d'un joueur (option de round?)
 	 * - possibilité de bloquer certains items (on ne les perd pas lorsqu'on meurt)
-	 * - y a toujours un bug avec le décompte des kills/death, faut trouver d'où ça vient
 	 * - splash screen+centrer frame
 	 * 
 	 * - au moins finir le cycle lors d'une mort, histoire que la différence de timing ne vienne pas juste de l'ordre des joueurs dans la partie 
@@ -687,14 +687,5 @@ public class Launcher
 	 *  - on rajoute également le système de bonus pour une limite donnée
 	 *  - intérêt : tout ça permet d'implémenter le bonus à celui qui tue tout le monde en survival, par opposition à une victoire temporelle qui rapporterait donc moins de points
 	 *  - LA NOTION DE PLAYMODE EST A SUPPRIMER 
-	 */
-	
-	/*
-	 * IA : 
-	 * 	- externaliser la gestion des threads des adapaters, car ça doit être commun à tout le monde
-	 * 	- (InterfaceAi devient AiManager)
-	 * 	- les adapteurs doivent s'occuper seulement de la gestion des percepts
-	 * 	- du coup ça permet de virer la classe AiMain de chaque IA
-	 * 	- et également de renommer la classe principale de chaque IA en AiMain
 	 */
 }

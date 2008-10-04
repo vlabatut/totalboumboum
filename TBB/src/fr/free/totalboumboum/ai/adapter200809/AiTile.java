@@ -2,6 +2,7 @@ package fr.free.totalboumboum.ai.adapter200809;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Collections;
 import java.util.Iterator;
 
 import fr.free.totalboumboum.engine.container.tile.Tile;
@@ -19,7 +20,7 @@ public class AiTile
 	private AiZone zone;
 	private Tile tile;
 	
-	public AiTile(int line, int col, Tile tile, AiZone zone)
+	AiTile(int line, int col, Tile tile, AiZone zone)
 	{	this.zone = zone;
 		this.tile = tile;
 		initLocation(line,col);
@@ -52,6 +53,25 @@ public class AiTile
 		{	item.finish();	
 			item = null;
 		}	
+	}
+	
+	@Override
+	public boolean equals(Object o)
+	{	boolean result = false;
+		if(o instanceof AiTile)
+		{	
+//			AiTile t = (AiTile)o;	
+//			result = tile==t.tile && zone==t.zone;
+			result = this==o;
+		}
+		return result;
+	}
+	
+	@Override
+	public String toString()
+	{	StringBuffer result = new StringBuffer();
+		result.append("("+col+";"+line+")");
+		return result.toString();
 	}
 	
 	/////////////////////////////////////////////////////////////////
@@ -111,14 +131,16 @@ public class AiTile
 	 * (la liste peut être vide)
 	 */
 	public Collection<AiBomb> getBombs()
-	{	return bombs;	
+	{	Collection<AiBomb> result = Collections.unmodifiableCollection(bombs);
+		return result;	
 	}
 	/** 
 	 * renvoie la liste des feux contenus dans cette case 
 	 * (la liste peut être vide)
 	 */
 	public Collection<AiFire> getFires()
-	{	return fires;	
+	{	Collection<AiFire> result = Collections.unmodifiableCollection(fires);
+		return result;	
 	}
 	/** 
 	 * renvoie le sol de cette case 
@@ -132,7 +154,8 @@ public class AiTile
 	 * (la liste peut être vide)
 	 */
 	public Collection<AiHero> getHeroes()
-	{	return heroes;	
+	{	Collection<AiHero> result = Collections.unmodifiableCollection(heroes);
+		return result;	
 	}
 	/** 
 	 * renvoie l'item (apparent) contenu dans cette case 
@@ -151,14 +174,14 @@ public class AiTile
 			if(b!=null)
 			{	String gesture = b.getCurrentGesture();
 				if(!(gesture.equalsIgnoreCase(GestureConstants.NONE) 
-							|| gesture.equalsIgnoreCase(GestureConstants.HIDING)
-							|| gesture.equalsIgnoreCase(GestureConstants.ENDED)))
+					|| gesture.equalsIgnoreCase(GestureConstants.HIDING)
+					|| gesture.equalsIgnoreCase(GestureConstants.ENDED)))
 				{	block = zone.getBlock(b);
 					if(block==null)
 					{	block = new AiBlock(this,b);
 						zone.addBlock(block);
 					}
-					block.update();
+					block.update(this);
 				}
 			}
 			else
@@ -171,14 +194,14 @@ public class AiTile
 			{	Bomb b = i.next();
 				String gesture = b.getCurrentGesture();
 				if(!(gesture.equalsIgnoreCase(GestureConstants.NONE) 
-					|| !gesture.equalsIgnoreCase(GestureConstants.HIDING)
-					|| !gesture.equalsIgnoreCase(GestureConstants.ENDED)))
+					|| gesture.equalsIgnoreCase(GestureConstants.HIDING)
+					|| gesture.equalsIgnoreCase(GestureConstants.ENDED)))
 				{	AiBomb bomb = zone.getBomb(b);
 					if(bomb==null)
 					{	bomb = new AiBomb(this,b);
 						zone.addBomb(bomb);
 					}
-					bomb.update();
+					bomb.update(this);
 					bombs.add(bomb);
 				}
 			}
@@ -190,14 +213,14 @@ public class AiTile
 			{	Fire f = i.next();
 				String gesture = f.getCurrentGesture();
 				if(!(gesture.equalsIgnoreCase(GestureConstants.NONE) 
-					|| !gesture.equalsIgnoreCase(GestureConstants.HIDING)
-					|| !gesture.equalsIgnoreCase(GestureConstants.ENDED)))
+					|| gesture.equalsIgnoreCase(GestureConstants.HIDING)
+					|| gesture.equalsIgnoreCase(GestureConstants.ENDED)))
 				{	AiFire fire = zone.getFire(f);
 					if(fire==null)
 					{	fire = new AiFire(this,f);
 						zone.addFire(fire);
 					}
-					fire.update();
+					fire.update(this);
 					fires.add(fire);
 				}
 			}
@@ -214,7 +237,7 @@ public class AiTile
 					{	floor = new AiFloor(this,f);
 						zone.addFloor(floor);
 					}
-					floor.update();
+					floor.update(this);
 				}
 			}
 			else
@@ -234,7 +257,7 @@ public class AiTile
 					{	hero = new AiHero(this,h);
 						zone.addHero(hero);
 					}
-					hero.update();
+					hero.update(this);
 					heroes.add(hero);
 				}
 			}
@@ -251,7 +274,7 @@ public class AiTile
 					{	item = new AiItem(this,i);
 						zone.addItem(item);
 					}
-					item.update();
+					item.update(this);
 				}
 			}
 			else
@@ -285,7 +308,7 @@ public class AiTile
 	 */
 	public AiTile getNeighbour(Direction direction)
 	{	AiTile result;
-		result = zone.getNeighbourTile(line,col,direction);
+		result = zone.getNeighbourTile(this,direction);
 		return result;
 	}
 	
