@@ -8,10 +8,21 @@ public class AiHero extends AiSprite<Hero>
 {
 	public AiHero(AiTile tile, Hero sprite)
 	{	super(tile,sprite);
-		initColor(sprite);
-		initBombParam(sprite);
+		initColor();
+		updateBombParam();
 	}
 	
+	@Override
+	void update()
+	{	super.update();
+		updateBombParam();
+	}
+
+	@Override
+	void finish()
+	{	super.finish();
+	}
+
 	/////////////////////////////////////////////////////////////////
 	// BOMB PARAM		/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
@@ -29,8 +40,9 @@ public class AiHero extends AiSprite<Hero>
 	{	return bombCount;
 	}
 	
-	private void initBombParam(Hero sprite)
-	{	// bomb range
+	private void updateBombParam()
+	{	Hero sprite = getSprite();
+		// bomb range
 		StateAbility ab = sprite.computeCapacity(StateAbility.BOMB_RANGE);
         bombRange = (int)ab.getStrength();
 		// max number of simultaneous bombs
@@ -48,7 +60,8 @@ public class AiHero extends AiSprite<Hero>
 	public PredefinedColor getColor()
 	{	return color;	
 	}
-	private void initColor(Hero sprite)
-	{	sprite.getColor();	
+	private void initColor()
+	{	Hero sprite = getSprite();
+		color = sprite.getColor();	
 	}
 }

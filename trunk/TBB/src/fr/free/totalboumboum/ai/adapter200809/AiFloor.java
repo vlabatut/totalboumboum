@@ -7,4 +7,14 @@ public class AiFloor extends AiSprite<Floor>
 	public AiFloor(AiTile tile, Floor sprite)
 	{	super(tile,sprite);		
 	}
+
+	@Override
+	void update()
+	{	super.update();
+	}
+
+	@Override
+	void finish()
+	{	super.finish();
+	}
 }

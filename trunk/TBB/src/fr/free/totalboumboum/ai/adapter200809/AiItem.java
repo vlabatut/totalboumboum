@@ -6,7 +6,17 @@ public class AiItem extends AiSprite<Item>
 {
 	public AiItem(AiTile tile, Item sprite)
 	{	super(tile,sprite);
-		initType(sprite);
+		initType();
+	}
+
+	@Override
+	void update()
+	{	super.update();
+	}
+
+	@Override
+	void finish()
+	{	super.finish();
 	}
 
 	/////////////////////////////////////////////////////////////////
@@ -17,8 +27,9 @@ public class AiItem extends AiSprite<Item>
 	public String getType()
 	{	return type;	
 	}
-	private void initType(Item item)
-	{	type = item.getItemName();		
+	private void initType()
+	{	Item item = getSprite();
+		type = item.getItemName();		
 	}
 	
 }

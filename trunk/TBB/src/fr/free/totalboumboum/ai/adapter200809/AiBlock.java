@@ -14,9 +14,20 @@ public class AiBlock extends AiSprite<Block>
 {
 	public AiBlock(AiTile tile, Block sprite)
 	{	super(tile,sprite);
-		initDestructible(sprite);
+		updateDestructible();
 	}	
 	
+	@Override
+	void update()
+	{	super.update();
+		updateDestructible();
+	}
+
+	@Override
+	void finish()
+	{	super.finish();
+	}
+
 	/////////////////////////////////////////////////////////////////
 	// DESTRUCTIBLE		/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
@@ -26,8 +37,9 @@ public class AiBlock extends AiSprite<Block>
 	/** 
 	 * initialise l'indicateur de destructibilité de ce bloc 
 	 */
-	private void initDestructible(Block sprite)
-	{	SpecificAction action = new SpecificAction(AbstractAction.CONSUME,new Fire(sprite.getLevel()),sprite,Direction.NONE,Contact.COLLISION,TilePosition.SAME,Orientation.SAME);
+	private void updateDestructible()
+	{	Block sprite = getSprite();
+		SpecificAction action = new SpecificAction(AbstractAction.CONSUME,new Fire(sprite.getLevel()),sprite,Direction.NONE,Contact.COLLISION,TilePosition.SAME,Orientation.SAME);
 		TargetPermission perm = sprite.getTargetPermission(action);
 		destructible = perm!=null;
 	}	

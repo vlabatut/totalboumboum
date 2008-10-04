@@ -8,10 +8,21 @@ public class AiBomb extends AiSprite<Bomb>
 {
 	public AiBomb(AiTile tile, Bomb sprite)
 	{	super(tile,sprite);
-		initType(sprite);
-		initRange(sprite);
-		initWorking(sprite);
-		initColor(sprite);
+		initType();
+		initRange();
+		updateWorking();
+		initColor();
+	}
+
+	@Override
+	void update()
+	{	super.update();
+		updateWorking();
+	}
+
+	@Override
+	void finish()
+	{	super.finish();
 	}
 
 	/////////////////////////////////////////////////////////////////
@@ -22,8 +33,9 @@ public class AiBomb extends AiSprite<Bomb>
 	public String getType()
 	{	return type;	
 	}
-	private void initType(Bomb bomb)
-	{	type = bomb.getBombName();		
+	private void initType()
+	{	Bomb bomb = getSprite();
+		type = bomb.getBombName();		
 	}
 	
 	/////////////////////////////////////////////////////////////////
@@ -34,8 +46,9 @@ public class AiBomb extends AiSprite<Bomb>
 	public int getRange()
 	{	return range;	
 	}
-	private void initRange(Bomb bomb)
-	{	range = bomb.getFlameRange();
+	private void initRange()
+	{	Bomb bomb = getSprite();
+		range = bomb.getFlameRange();
 	}
 	
 	/////////////////////////////////////////////////////////////////
@@ -46,8 +59,9 @@ public class AiBomb extends AiSprite<Bomb>
 	public boolean isWorking()
 	{	return working;	
 	}
-	private void initWorking(Bomb sprite)
-	{	String gesture = sprite.getCurrentGesture();
+	private void updateWorking()
+	{	Bomb sprite = getSprite();
+		String gesture = sprite.getCurrentGesture();
 		if(gesture.equalsIgnoreCase(GestureConstants.OSCILLATING_FAILING)
 			|| gesture.equalsIgnoreCase(GestureConstants.STANDING_FAILING))
 			working = false;
@@ -64,7 +78,8 @@ public class AiBomb extends AiSprite<Bomb>
 	public PredefinedColor getColor()
 	{	return color;	
 	}
-	private void initColor(Bomb sprite)
-	{	sprite.getColor();	
+	private void initColor()
+	{	Bomb sprite = getSprite();
+		color = sprite.getColor();	
 	}
 }

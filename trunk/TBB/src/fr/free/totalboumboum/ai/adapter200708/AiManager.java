@@ -62,7 +62,7 @@ public abstract class AiManager extends AbstractAiManager<Integer>
     private Vector<Integer> bombCounts;
 
 	@Override
-	public void setPercepts()
+	public void updatePercepts()
 	{	// compute all the percepts
     	Player player = getPlayer(); 
     	Loop loop = player.getLoop();
@@ -268,6 +268,19 @@ public abstract class AiManager extends AbstractAiManager<Integer>
 			ownFirePower, ownBombCount, firePowers, bombCounts);
 	}
 
+	@Override
+	public void finishPercepts()
+	{	bombCounts.clear();
+		bombs.clear();
+		controlKeys.clear();
+		firePowers.clear();
+		nextShrinkPosition = null;
+		ownPosition = null;
+		players.clear();
+		playersStates.clear();
+		zoneMatrix = null;
+	}
+	
     /////////////////////////////////////////////////////////////////
 	// REACTION			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////

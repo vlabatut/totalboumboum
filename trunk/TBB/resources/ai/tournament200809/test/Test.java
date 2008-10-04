@@ -3,12 +3,12 @@ package tournament200809.test;
 import java.util.ArrayList;
 import java.util.Iterator;
 
+import fr.free.totalboumboum.ai.adapter200809.AiAction;
+import fr.free.totalboumboum.ai.adapter200809.AiActionName;
+import fr.free.totalboumboum.ai.adapter200809.AiHero;
 import fr.free.totalboumboum.ai.adapter200809.AiTile;
 import fr.free.totalboumboum.ai.adapter200809.AiZone;
 import fr.free.totalboumboum.ai.adapter200809.ArtificialIntelligence;
-import fr.free.totalboumboum.ai.adapter200809.action.AiAction;
-import fr.free.totalboumboum.ai.adapter200809.action.AiActionName;
-import fr.free.totalboumboum.ai.adapter200809.sprite.AiHero;
 import fr.free.totalboumboum.engine.content.feature.Direction;
 
 public class Test extends ArtificialIntelligence
@@ -34,7 +34,7 @@ public class Test extends ArtificialIntelligence
 			pickNextTile();
 
 		// on avance vers la destination
-		Direction direction = getNextDirection();
+		Direction direction = Direction.UP;//getNextDirection();
 
 		// on renvoie le résultat
 		AiActionName name = AiActionName.MOVE;
@@ -65,7 +65,7 @@ public class Test extends ArtificialIntelligence
 		Iterator<Direction> d = directions.iterator();
 		while(d.hasNext())
 		{	Direction temp = d.next();
-			AiTile tile = 
+//			AiTile tile = 
 		}
 		
 		

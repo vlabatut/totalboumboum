@@ -24,7 +24,7 @@ public class AiZone
 	}
 	
 	void update()
-	{	updateMatrix();		
+	{	updateMatrix();
 	}
 	
 	void finish()

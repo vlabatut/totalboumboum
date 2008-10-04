@@ -6,7 +6,7 @@ import java.util.concurrent.Callable;
 public abstract class ArtificialIntelligence implements Callable<AiAction>
 {	
 	/////////////////////////////////////////////////////////////////
-	// TYPE				/////////////////////////////////////////////
+	// PERCEPTS			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	private AiZone percepts;
 	
@@ -15,5 +15,9 @@ public abstract class ArtificialIntelligence implements Callable<AiAction>
 	}
 	public void setPercepts(AiZone percepts)
 	{	this.percepts = percepts;
+	}
+	
+	void finish()
+	{	percepts = null;
 	}
 }
