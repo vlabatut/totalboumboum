@@ -91,17 +91,19 @@ public abstract class AbstractAiManager<V>
      * tente de terminer le thread exécutant l'IA
      */
     public final void finish()
-    {	boolean result = futureAi.isDone(); 
+    {	finishAi();
+		boolean result = futureAi.isDone(); 
     	if(!result) 
     		result = futureAi.cancel(true);
-    	/*List<Runnable> list = */executorAi.shutdownNow();
-    	
+		/*List<Runnable> list = */executorAi.shutdownNow();
     	finishPercepts();
     	ai = null;
     	executorAi = null;
     	futureAi = null;
     	player = null;
     }
+    
+    public abstract void finishAi();
 
     /////////////////////////////////////////////////////////////////
 	// PERCEPTS			/////////////////////////////////////////////

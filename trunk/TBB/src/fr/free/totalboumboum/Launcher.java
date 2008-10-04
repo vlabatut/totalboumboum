@@ -637,6 +637,8 @@ public class Launcher
 	 * - plutot qu'une méthode par propriété spéciale d'un sprite, plutot une méthode générale prenant un code en paramètre ? plus flexible ? et pareil pour type d'item et de bombe ?
 	 * - commentaires des classes d'IA
 	 * 
+	 * - faire terminer les processus dès la fin du match, et pas au début du suivant (méthode finish)
+	 * 
 	 * - scripts de lancement/compilation pour Linux
 	 * 
 	 * - redistribution des items lors de la mort d'un joueur (option de round?)
@@ -645,6 +647,8 @@ public class Launcher
 	 * - splash screen+centrer frame
 	 * 
 	 * - tournoi simple
+	 * 
+	 * - pb de collision quand la bombe atterit dans une flamme (à re-tester ?)
 	 * 
 	 * - au moins finir le cycle lors d'une mort, histoire que la différence de timing ne vienne pas juste de l'ordre des joueurs dans la partie 
 	 * - possibilité de choisir entre le fait que le match s'arrête dès que tout le monde est mort sauf 1, ou dernière flamme terminée

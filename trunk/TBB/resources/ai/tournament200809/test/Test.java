@@ -13,6 +13,7 @@ import fr.free.totalboumboum.ai.adapter200809.AiHero;
 import fr.free.totalboumboum.ai.adapter200809.AiTile;
 import fr.free.totalboumboum.ai.adapter200809.AiZone;
 import fr.free.totalboumboum.ai.adapter200809.ArtificialIntelligence;
+import fr.free.totalboumboum.ai.adapter200809.StopRequestException;
 import fr.free.totalboumboum.engine.content.feature.Direction;
 
 public class Test extends ArtificialIntelligence
@@ -21,9 +22,10 @@ public class Test extends ArtificialIntelligence
 	private AiTile nextTile = null;
 	private AiTile previousTile = null;
 	
-	@Override
-	public AiAction call() throws Exception
-	{	AiZone zone = getPercepts();
+	public AiAction processAction() throws StopRequestException
+	{	checkInterruption();
+		
+		AiZone zone = getPercepts();
 		AiHero ownHero = zone.getOwnHero();
 		AiAction result = new AiAction(AiActionName.NONE);
 		// si ownHero est null, c'est que l'IA est morte : inutile de continuer
@@ -53,12 +55,15 @@ public class Test extends ArtificialIntelligence
 			// on calcule l'action
 			if(direction!=Direction.NONE)
 				result = new AiAction(AiActionName.MOVE,direction);
+			
 		}
 		return result;
 	}
 
-	private void init()
-	{	nextTile = currentTile;		
+	private void init() throws StopRequestException
+	{	checkInterruption();
+		
+		nextTile = currentTile;		
 		previousTile = currentTile;		
 	}
 	
@@ -66,9 +71,12 @@ public class Test extends ArtificialIntelligence
 	 * Choisit comme destination une case voisine de la case actuellement occupée par l'IA.
 	 * Cette case doit être accessible (pas de mur ou de bombe ou autre obstacle) et doit
 	 * être différente de la case précédemment occupée
+	 * @throws StopRequestException 
 	 */
-	private void pickNextTile()
-	{	// liste des cases voisines accessibles	
+	private void pickNextTile() throws StopRequestException
+	{	checkInterruption();
+	
+		// liste des cases voisines accessibles	
 		ArrayList<AiTile> tiles = getClearNeighbours(currentTile);
 		// on sort de la liste la case d'où l'on vient (pour éviter de repasser au même endroit)
 		boolean canGoBack = false;
@@ -80,15 +88,12 @@ public class Test extends ArtificialIntelligence
 		if(tiles.size()>0)
 		{	// si la liste contient la case située dans la direction déplacement précedente,
 			// on évite de l'utiliser (on veut avancer en zig-zag et non pas en ligne droite)
-			boolean canGoStraight = false;
 			AiTile tempTile = null;
 			Direction dir = getPercepts().getDirection(previousTile,currentTile);
 			if(dir!=Direction.NONE)
 			{	tempTile =  getPercepts().getNeighbourTile(currentTile, dir);
 				if(tiles.contains(tempTile))
-				{	tiles.remove(tempTile);
-					canGoStraight = true;
-				}
+					tiles.remove(tempTile);
 			}
 			// s'il reste des cases dans la liste
 			if(tiles.size()>0)
@@ -114,22 +119,28 @@ public class Test extends ArtificialIntelligence
 		}
 	}
 	
-	private ArrayList<AiTile> getClearNeighbours(AiTile tile)
-	{	// liste des cases autour de la case de référence
+	private ArrayList<AiTile> getClearNeighbours(AiTile tile) throws StopRequestException
+	{	checkInterruption();
+	
+		// liste des cases autour de la case de référence
 		Collection<AiTile> neighbours = getPercepts().getNeighbourTiles(tile);
 		// on garde les cases sans bloc ni bombe ni feu
 		ArrayList<AiTile> result = new ArrayList<AiTile>();
 		Iterator<AiTile> it = neighbours.iterator();
 		while(it.hasNext())
-		{	AiTile t = it.next();
+		{	checkInterruption();
+		
+			AiTile t = it.next();
 			if(isClear(t))
 				result.add(t);
 		}
 		return result;
 	}
 	
-	private boolean isClear(AiTile tile)
-	{	boolean result;
+	private boolean isClear(AiTile tile) throws StopRequestException
+	{	checkInterruption();
+	
+		boolean result;
 		AiBlock block = tile.getBlock();
 		Collection<AiBomb> bombs = tile.getBombs();
 		Collection<AiFire> fires = tile.getFires();
@@ -137,8 +148,10 @@ public class Test extends ArtificialIntelligence
 		return result;
 	}
 	
-	private void checkNextTile()
-	{	// si un obstacle est apparu sur la case destination, il faut changer de destination
+	private void checkNextTile() throws StopRequestException
+	{	checkInterruption();
+	
+		// si un obstacle est apparu sur la case destination, il faut changer de destination
 		if(!isClear(nextTile))
 		{	// liste des cases voisines accessibles	
 			ArrayList<AiTile> tiles = getClearNeighbours(currentTile);
