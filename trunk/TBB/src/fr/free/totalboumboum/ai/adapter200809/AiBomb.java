@@ -6,7 +6,7 @@ import fr.free.totalboumboum.engine.content.sprite.bomb.Bomb;
 
 public class AiBomb extends AiSprite<Bomb>
 {
-	public AiBomb(AiTile tile, Bomb sprite)
+	AiBomb(AiTile tile, Bomb sprite)
 	{	super(tile,sprite);
 		initType();
 		initRange();
@@ -15,8 +15,8 @@ public class AiBomb extends AiSprite<Bomb>
 	}
 
 	@Override
-	void update()
-	{	super.update();
+	void update(AiTile tile)
+	{	super.update(tile);
 		updateWorking();
 	}
 

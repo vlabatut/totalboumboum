@@ -6,15 +6,15 @@ import fr.free.totalboumboum.engine.content.sprite.hero.Hero;
 
 public class AiHero extends AiSprite<Hero>
 {
-	public AiHero(AiTile tile, Hero sprite)
+	AiHero(AiTile tile, Hero sprite)
 	{	super(tile,sprite);
 		initColor();
 		updateBombParam();
 	}
 	
 	@Override
-	void update()
-	{	super.update();
+	void update(AiTile tile)
+	{	super.update(tile);
 		updateBombParam();
 	}
 

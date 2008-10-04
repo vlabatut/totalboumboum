@@ -4,14 +4,14 @@ import fr.free.totalboumboum.engine.content.sprite.item.Item;
 
 public class AiItem extends AiSprite<Item>
 {
-	public AiItem(AiTile tile, Item sprite)
+	AiItem(AiTile tile, Item sprite)
 	{	super(tile,sprite);
 		initType();
 	}
 
 	@Override
-	void update()
-	{	super.update();
+	void update(AiTile tile)
+	{	super.update(tile);
 	}
 
 	@Override

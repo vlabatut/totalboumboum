@@ -4,13 +4,13 @@ import fr.free.totalboumboum.engine.content.sprite.fire.Fire;
 
 public class AiFire extends AiSprite<Fire>
 {
-	public AiFire(AiTile tile, Fire sprite)
+	AiFire(AiTile tile, Fire sprite)
 	{	super(tile,sprite);		
 	}
 
 	@Override
-	void update()
-	{	super.update();
+	void update(AiTile tile)
+	{	super.update(tile);
 	}
 
 	@Override

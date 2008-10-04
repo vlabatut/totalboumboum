@@ -4,13 +4,13 @@ import fr.free.totalboumboum.engine.content.sprite.floor.Floor;
 
 public class AiFloor extends AiSprite<Floor>
 {
-	public AiFloor(AiTile tile, Floor sprite)
+	AiFloor(AiTile tile, Floor sprite)
 	{	super(tile,sprite);		
 	}
 
 	@Override
-	void update()
-	{	super.update();
+	void update(AiTile tile)
+	{	super.update(tile);
 	}
 
 	@Override

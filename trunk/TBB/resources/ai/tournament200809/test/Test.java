@@ -1,10 +1,14 @@
 package tournament200809.test;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Iterator;
 
 import fr.free.totalboumboum.ai.adapter200809.AiAction;
 import fr.free.totalboumboum.ai.adapter200809.AiActionName;
+import fr.free.totalboumboum.ai.adapter200809.AiBlock;
+import fr.free.totalboumboum.ai.adapter200809.AiBomb;
+import fr.free.totalboumboum.ai.adapter200809.AiFire;
 import fr.free.totalboumboum.ai.adapter200809.AiHero;
 import fr.free.totalboumboum.ai.adapter200809.AiTile;
 import fr.free.totalboumboum.ai.adapter200809.AiZone;
@@ -13,44 +17,49 @@ import fr.free.totalboumboum.engine.content.feature.Direction;
 
 public class Test extends ArtificialIntelligence
 {
-	private int[] currentTile = new int[2];
-	private int[] nextTile = null;
-	private int[] previousTile = null;
+	private AiTile currentTile;
+	private AiTile nextTile = null;
+	private AiTile previousTile = null;
 	
 	@Override
 	public AiAction call() throws Exception
-	{	// on met à jour la position de l'ia dans la zone
-		AiZone zone = getPercepts();
+	{	AiZone zone = getPercepts();
 		AiHero ownHero = zone.getOwnHero();
-		currentTile[0] = ownHero.getLine();
-		currentTile[1] = ownHero.getCol();
-		
-		// premier appel : on initialise l'IA
-		if(nextTile == null)
-			init();
-		
-		// arrivé à destination : on choisit une nouvelle destination
-		if(currentTile[0]==nextTile[0] && currentTile[1]==nextTile[1])
-			pickNextTile();
-
-		// on avance vers la destination
-		Direction direction = Direction.UP;//getNextDirection();
-
-		// on renvoie le résultat
-		AiActionName name = AiActionName.MOVE;
-		AiAction result = new AiAction(name,direction);
+		AiAction result = new AiAction(AiActionName.NONE);
+		// si ownHero est null, c'est que l'IA est morte : inutile de continuer
+		if(ownHero!=null)
+		{	// on met à jour la position de l'ia dans la zone
+			currentTile = ownHero.getTile();
+			
+			// premier appel : on initialise l'IA
+			if(nextTile == null)
+				init();
+			
+			// arrivé à destination : on choisit une nouvelle destination
+			if(currentTile==nextTile)
+				pickNextTile();
+			// au cas ou quelqu'un prendrait le contrôle manuel du personnage
+			else if(previousTile!=currentTile)
+			{	previousTile = currentTile;
+				pickNextTile();			
+			}
+			// sinon (on garde la même direction) on vérifie qu'un obstacle (ex: bombe) n'est pas apparu dans la case
+			else
+				checkNextTile();
+			
+			// on calcule la direction à prendre
+			Direction direction = getPercepts().getDirection(currentTile,nextTile);
+	
+			// on calcule l'action
+			if(direction!=Direction.NONE)
+				result = new AiAction(AiActionName.MOVE,direction);
+		}
 		return result;
 	}
 
 	private void init()
-	{	// prochaine destination
-		nextTile = new int[2];
-		nextTile[0] = currentTile[0];
-		nextTile[1] = currentTile[1];		
-		// ancienne destination
-		previousTile = new int[2];
-		previousTile[0] = currentTile[0];
-		previousTile[1] = currentTile[1];		
+	{	nextTile = currentTile;		
+		previousTile = currentTile;		
 	}
 	
 	/**
@@ -59,18 +68,90 @@ public class Test extends ArtificialIntelligence
 	 * être différente de la case précédemment occupée
 	 */
 	private void pickNextTile()
-	{	// liste des cases autour de la case actuelle
-		ArrayList<AiTile> neighbours = new ArrayList<AiTile>();
-		ArrayList<Direction> directions = Direction.getAllPrimaries(); // cette fonction renvoie la liste des directions primaires : haut, bas, droite, gauche
-		Iterator<Direction> d = directions.iterator();
-		while(d.hasNext())
-		{	Direction temp = d.next();
-//			AiTile tile = 
+	{	// liste des cases voisines accessibles	
+		ArrayList<AiTile> tiles = getClearNeighbours(currentTile);
+		// on sort de la liste la case d'où l'on vient (pour éviter de repasser au même endroit)
+		boolean canGoBack = false;
+		if(tiles.contains(previousTile))
+		{	tiles.remove(previousTile);
+			canGoBack = true;
 		}
-		
-		
-		int temp[] = new int[2];
-		
-		
+		// s'il reste des cases dans la liste
+		if(tiles.size()>0)
+		{	// si la liste contient la case située dans la direction déplacement précedente,
+			// on évite de l'utiliser (on veut avancer en zig-zag et non pas en ligne droite)
+			boolean canGoStraight = false;
+			AiTile tempTile = null;
+			Direction dir = getPercepts().getDirection(previousTile,currentTile);
+			if(dir!=Direction.NONE)
+			{	tempTile =  getPercepts().getNeighbourTile(currentTile, dir);
+				if(tiles.contains(tempTile))
+				{	tiles.remove(tempTile);
+					canGoStraight = true;
+				}
+			}
+			// s'il reste des cases dans la liste
+			if(tiles.size()>0)
+			{	// on en tire une au hasard
+				double p = Math.random()*tiles.size();
+				int index = (int)p;
+				nextTile = tiles.get(index);
+				previousTile = currentTile;
+			}
+			// sinon (pas le choix) on continue dans la même direction
+			else
+			{	nextTile = tempTile;
+				previousTile = currentTile;
+			}
+		}
+		// sinon (pas le choix) on tente de revenir en arrière
+		else
+		{	if(canGoBack)
+			{	nextTile = previousTile;
+				previousTile = currentTile;
+			}
+			// et sinon on ne peut pas bouger, donc on ne fait rien du tout
+		}
+	}
+	
+	private ArrayList<AiTile> getClearNeighbours(AiTile tile)
+	{	// liste des cases autour de la case de référence
+		Collection<AiTile> neighbours = getPercepts().getNeighbourTiles(tile);
+		// on garde les cases sans bloc ni bombe ni feu
+		ArrayList<AiTile> result = new ArrayList<AiTile>();
+		Iterator<AiTile> it = neighbours.iterator();
+		while(it.hasNext())
+		{	AiTile t = it.next();
+			if(isClear(t))
+				result.add(t);
+		}
+		return result;
+	}
+	
+	private boolean isClear(AiTile tile)
+	{	boolean result;
+		AiBlock block = tile.getBlock();
+		Collection<AiBomb> bombs = tile.getBombs();
+		Collection<AiFire> fires = tile.getFires();
+		result = block==null && bombs.size()==0 && fires.size()==0;
+		return result;
+	}
+	
+	private void checkNextTile()
+	{	// si un obstacle est apparu sur la case destination, il faut changer de destination
+		if(!isClear(nextTile))
+		{	// liste des cases voisines accessibles	
+			ArrayList<AiTile> tiles = getClearNeighbours(currentTile);
+			// on sort de la liste l'ancienne destination, qui est maintenant bloquée
+			if(tiles.contains(nextTile))
+				tiles.remove(nextTile);
+			// s'il reste des cases dans la liste, on en tire une au hasard
+			if(tiles.size()>0)
+			{	double p = Math.random()*tiles.size();
+				int index = (int)p;
+				nextTile = tiles.get(index);
+				previousTile = currentTile;
+			}
+		}
 	}
 }

@@ -69,10 +69,12 @@ public abstract class AiManager extends AbstractAiManager<AiAction>
 			case MOVE:
 				if(lastMove!=direction)
 					reactionStop(result);
-				code = ControlEvent.getCodeFromDirection(direction);
-				event = new ControlEvent(code,true);
-				result.add(event);
-				lastMove = direction;
+				if(direction!=Direction.NONE)
+				{	code = ControlEvent.getCodeFromDirection(direction);
+					event = new ControlEvent(code,true);
+					result.add(event);
+					lastMove = direction;
+				}
 				break;
 			case DROP_BOMB :
 			{	reactionStop(result);

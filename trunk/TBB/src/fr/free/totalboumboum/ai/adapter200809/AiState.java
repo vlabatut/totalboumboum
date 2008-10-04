@@ -7,7 +7,7 @@ public class AiState
 {
 	private Sprite sprite;
 	
-	public AiState(Sprite sprite)
+	AiState(Sprite sprite)
 	{	this.sprite = sprite;
 	}
 	
@@ -25,6 +25,18 @@ public class AiState
 		name = null;		
 	}
 	
+	@Override
+	public boolean equals(Object o)
+	{	boolean result = false;
+		if(o instanceof AiState)
+		{	
+//			AiState s = (AiState)o;	
+//			result = name==s.name && direction==s.direction;
+			result = this==o;
+		}
+		return result;
+	}
+
 	/////////////////////////////////////////////////////////////////
 	// NAME				/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////

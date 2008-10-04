@@ -1,6 +1,8 @@
 package fr.free.totalboumboum.ai.adapter200809;
 
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
 import java.util.Iterator;
 
 import fr.free.totalboumboum.data.profile.PredefinedColor;
@@ -17,10 +19,15 @@ import fr.free.totalboumboum.engine.player.Player;
 
 public class AiZone
 {
-	public AiZone(Level level, Player player)
-	{	initMatrix(level);
+	private Level level;
+	private Player player;
+	
+	AiZone(Level level, Player player)
+	{	this.level = level;
+		this.player = player;
+		initMatrix();
 		updateMatrix();
-		initOwnHero(player);
+		initOwnHero();
 	}
 	
 	void update()
@@ -49,6 +56,18 @@ public class AiZone
 		ownHero = null;
 	}
 	
+	@Override
+	public boolean equals(Object o)
+	{	boolean result = false;
+		if(o instanceof AiZone)
+		{	
+//			AiZone zone = (AiZone)o;	
+//			result = level==zone.level && player==zone.player;
+			result = this==o;
+		}
+		return result;
+	}
+	
 	/////////////////////////////////////////////////////////////////
 	// MATRIX			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
@@ -62,7 +81,7 @@ public class AiZone
 	/** 
 	 * initialise cette représentation de la zone en fonction du niveau passé en paramètre
 	 */
-	private void initMatrix(Level level)
+	private void initMatrix()
 	{	Tile[][] matrix = level.getMatrix();
 		height = level.getGlobalHeight();
 		width = level.getGlobalWidth();
@@ -101,6 +120,8 @@ public class AiZone
 		removeUnchecked(floors);
 		removeUnchecked(heroes);
 		removeUnchecked(items);
+		if(ownHero!=null && !ownHero.isChecked())
+			ownHero = null;
 	}
 	/** 
 	 * renvoie la hauteur totale (y compris les éventuelles cases situées hors de l'écran)
@@ -128,7 +149,7 @@ public class AiZone
 	 */
 	public AiTile getTile(int line, int col)
 	{	AiTile result = null;
-		ArrayList<AiTile> collec = getLine(line);
+		ArrayList<AiTile> collec = lines.get(line);
 		result = collec.get(col);
 		return result;
 	}
@@ -142,15 +163,24 @@ public class AiZone
 	 * il sera plus efficace et surtout plus rapide d'utiliser directement un Iterator 
 	 * obtenu avec la méthode getLines, plutôt que de faire de nombreux appels à getLine.
 	 */
-	public ArrayList<AiTile> getLine(int line)
-	{	return lines.get(line);
+	public Collection<AiTile> getLine(int line)
+	{	Collection<AiTile> result = Collections.unmodifiableCollection(lines.get(line));
+		return result;	
 	}
 	/**
 	 * renvoie la liste des lignes composant la zone de jeu. Chaque ligne
 	 * est elle même une liste de cases.
 	 */
-	public ArrayList<ArrayList<AiTile>> getLines()
-	{	return lines;
+	public Collection<Collection<AiTile>> getLines()
+	{	Collection<Collection<AiTile>> result = new ArrayList<Collection<AiTile>>();
+		Iterator<ArrayList<AiTile>> it = lines.iterator();
+		while(it.hasNext())
+		{	Collection<AiTile> line = it.next();
+			line = Collections.unmodifiableCollection(line);
+			result.add(line);
+		}
+		result = Collections.unmodifiableCollection(result);
+		return result;
 	}
 
 	/**
@@ -167,9 +197,10 @@ public class AiZone
 	 * @param direction	direction dans laquelle le voisin se trouve
 	 * @return	le voisin de la case située à la position (line,col) et situé dans la direction indiquée
 	 */
-	public AiTile getNeighbourTile(int line, int col, Direction direction)
+	public AiTile getNeighbourTile(AiTile tile, Direction direction)
 	{	AiTile result = null;
-		int c,l;
+		int c,col=tile.getCol();
+		int l,line=tile.getLine();
 		Direction p[] = direction.getPrimaries(); 
 		//
 		if(p[0]==Direction.LEFT)
@@ -187,6 +218,42 @@ public class AiZone
 			l = line;
 		//
 		result = getTile(l,c);
+		return result;
+	}
+	
+	/**
+	 * renvoie le voisin de la case passée en paramètre, situé dans la direction
+	 * passée en paramètre.
+	 * ATTENTION : les niveaux sont circulaires, ce qui signifie que le voisin
+	 * d'une case située au bord du niveau est une case située sur l'autre bord.
+	 * Par exemple, dans un niveau contenant width colonnes, pour une case située
+	 * à la position (ligne,0), le voisin de gauche est la case située à la position
+	 * (ligne,width-1). Même chose pour les bordures haut et bas.
+	 * 
+	 * @param line	ligne de la case dont on veut le voisin
+	 * @param col	colonne de la case dont on veut le voisin
+	 * @param direction	direction dans laquelle le voisin se trouve
+	 * @return	le voisin de la case située à la position (line,col) et situé dans la direction indiquée
+	 */
+	public Collection<AiTile> getNeighbourTiles(AiTile tile)
+	{	Collection<AiTile> result = new ArrayList<AiTile>();
+		ArrayList<Direction> directions = Direction.getAllPrimaries();
+		Iterator<Direction> d = directions.iterator();
+		while(d.hasNext())
+		{	Direction dir = d.next();
+			AiTile neighbour = getNeighbourTile(tile, dir);
+			result.add(neighbour);
+		}
+		result = Collections.unmodifiableCollection(result);
+		return result;
+	}
+	
+	public Direction getDirection(AiTile source, AiTile target)
+	{	int dx = target.getCol()-source.getCol();
+		int dy = target.getLine()-source.getLine();
+		Direction result = Direction.getCompositeFromDouble(dx,dy);
+if(result.isComposite())
+	System.out.println();
 		return result;
 	}
 	
@@ -210,8 +277,9 @@ public class AiZone
 	 * renvoie la liste des blocks contenues dans cette zone
 	 * (la liste peut être vide)
 	 */
-	public ArrayList<AiBlock> getBlocks()
-	{	return blocks;	
+	public Collection<AiBlock> getBlocks()
+	{	Collection<AiBlock> result = Collections.unmodifiableCollection(blocks);
+		return result;	
 	}
 	AiBlock getBlock(Block block)
 	{	AiBlock result = null;
@@ -230,8 +298,9 @@ public class AiZone
 	 * renvoie la liste des bombes contenues dans cette zone 
 	 * (la liste peut être vide)
 	 */
-	public ArrayList<AiBomb> getBombs()
-	{	return bombs;	
+	public Collection<AiBomb> getBombs()
+	{	Collection<AiBomb> result = Collections.unmodifiableCollection(bombs);
+		return result;	
 	}
 	AiBomb getBomb(Bomb bomb)
 	{	AiBomb result = null;
@@ -250,8 +319,9 @@ public class AiZone
 	 * renvoie la liste des feux contenus dans cette zone 
 	 * (la liste peut être vide)
 	 */
-	public ArrayList<AiFire> getFires()
-	{	return fires;	
+	public Collection<AiFire> getFires()
+	{	Collection<AiFire> result = Collections.unmodifiableCollection(fires);
+		return result;	
 	}
 	AiFire getFire(Fire fire)
 	{	AiFire result = null;
@@ -269,8 +339,9 @@ public class AiZone
 	/** 
 	 * renvoie la liste des sols contenus dans cette zone 
 	 */
-	public ArrayList<AiFloor> getFloors()
-	{	return floors;	
+	public Collection<AiFloor> getFloors()
+	{	Collection<AiFloor> result = Collections.unmodifiableCollection(floors);
+		return result;	
 	}
 	AiFloor getFloor(Floor floor)
 	{	AiFloor result = null;
@@ -289,8 +360,9 @@ public class AiZone
 	 * renvoie la liste des personnages contenus dans cette zone 
 	 * (les joueurs éliminés n'apparaissent plus dans cette liste ni dans cette représentation de la zone)
 	 */
-	public ArrayList<AiHero> getHeroes()
-	{	return heroes;	
+	public Collection<AiHero> getHeroes()
+	{	Collection<AiHero> result = Collections.unmodifiableCollection(heroes);
+		return result;	
 	}
 	AiHero getHero(Hero hero)
 	{	AiHero result = null;
@@ -309,8 +381,9 @@ public class AiZone
 	 * renvoie la liste des items apparents contenus dans cette zone 
 	 * (la liste peut être vide)
 	 */
-	public ArrayList<AiItem> getItems()
-	{	return items;	
+	public Collection<AiItem> getItems()
+	{	Collection<AiItem> result = Collections.unmodifiableCollection(items);
+		return result;	
 	}
 	AiItem getItem(Item item)
 	{	AiItem result = null;
@@ -340,8 +413,6 @@ public class AiZone
 				it.remove();
 		}
 	}
-	
-//		blocks = Collections.unmodifiableCollection(blocks);
 
 	/////////////////////////////////////////////////////////////////
 	// OWN HERO			/////////////////////////////////////////////
@@ -358,7 +429,7 @@ public class AiZone
 	/**
 	 * initialise le personnage qui est contrôlé par l'IA
 	 */
-	private void initOwnHero(Player player)
+	private void initOwnHero()
 	{	PredefinedColor color = player.getColor(); 
 		Iterator<AiHero> i = heroes.iterator();
 		boolean found = false;
