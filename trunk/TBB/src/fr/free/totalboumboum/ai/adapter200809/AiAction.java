@@ -1,4 +1,4 @@
-package fr.free.totalboumboum.ai.adapter200809.action;
+package fr.free.totalboumboum.ai.adapter200809;
 
 import fr.free.totalboumboum.engine.content.feature.Direction;
 

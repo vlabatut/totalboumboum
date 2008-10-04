@@ -1,6 +1,5 @@
-package fr.free.totalboumboum.ai.adapter200809.sprite;
+package fr.free.totalboumboum.ai.adapter200809;
 
-import fr.free.totalboumboum.ai.adapter200809.AiTile;
 import fr.free.totalboumboum.engine.content.sprite.floor.Floor;
 
 public class AiFloor extends AiSprite<Floor>
