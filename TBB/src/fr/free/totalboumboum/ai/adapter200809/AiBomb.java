@@ -1,6 +1,5 @@
-package fr.free.totalboumboum.ai.adapter200809.sprite;
+package fr.free.totalboumboum.ai.adapter200809;
 
-import fr.free.totalboumboum.ai.adapter200809.AiTile;
 import fr.free.totalboumboum.data.profile.PredefinedColor;
 import fr.free.totalboumboum.engine.content.feature.GestureConstants;
 import fr.free.totalboumboum.engine.content.sprite.bomb.Bomb;

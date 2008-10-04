@@ -3,13 +3,6 @@ package fr.free.totalboumboum.ai.adapter200809;
 import java.util.ArrayList;
 import java.util.Iterator;
 
-import fr.free.totalboumboum.ai.adapter200809.sprite.AiBlock;
-import fr.free.totalboumboum.ai.adapter200809.sprite.AiBomb;
-import fr.free.totalboumboum.ai.adapter200809.sprite.AiFire;
-import fr.free.totalboumboum.ai.adapter200809.sprite.AiFloor;
-import fr.free.totalboumboum.ai.adapter200809.sprite.AiHero;
-import fr.free.totalboumboum.ai.adapter200809.sprite.AiItem;
-import fr.free.totalboumboum.ai.adapter200809.sprite.AiSprite;
 import fr.free.totalboumboum.data.profile.PredefinedColor;
 import fr.free.totalboumboum.engine.container.level.Level;
 import fr.free.totalboumboum.engine.container.tile.Tile;

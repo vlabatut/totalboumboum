@@ -3,8 +3,6 @@ package fr.free.totalboumboum.ai.adapter200809;
 import java.util.ArrayList;
 
 import fr.free.totalboumboum.ai.AbstractAiManager;
-import fr.free.totalboumboum.ai.adapter200809.action.AiAction;
-import fr.free.totalboumboum.ai.adapter200809.action.AiActionName;
 import fr.free.totalboumboum.engine.container.level.Level;
 import fr.free.totalboumboum.engine.content.feature.Direction;
 import fr.free.totalboumboum.engine.content.feature.event.ControlEvent;
