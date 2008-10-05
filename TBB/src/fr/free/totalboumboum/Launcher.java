@@ -1,17 +1,12 @@
- package fr.free.totalboumboum;
+package fr.free.totalboumboum;
 
-import java.awt.Color;
-import java.io.File;
 import java.io.IOException;
 
-import javax.swing.SwingUtilities;
 import javax.xml.parsers.ParserConfigurationException;
 
 import org.xml.sax.SAXException;
 
-import fr.free.totalboumboum.data.configuration.Configuration;
 import fr.free.totalboumboum.gui.menus.main.MainFrame;
-import fr.free.totalboumboum.tools.CalculusTools;
 
 public class Launcher
 {	
@@ -636,7 +631,6 @@ public class Launcher
 	 * - système pour controler que le ps n'est pas en boucle infinite (+ tester sur okanyuksel
 	 * - plutot qu'une méthode par propriété spéciale d'un sprite, plutot une méthode générale prenant un code en paramètre ? plus flexible ? et pareil pour type d'item et de bombe ?
 	 * - commentaires des classes d'IA
-	 * 
 	 * - faire terminer les processus dès la fin du match, et pas au début du suivant (méthode finish)
 	 * 
 	 * - scripts de lancement/compilation pour Linux
