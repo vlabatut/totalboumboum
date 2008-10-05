@@ -8,10 +8,10 @@ import java.awt.image.RescaleOp;
 
 import fr.free.totalboumboum.game.round.Round;
 import fr.free.totalboumboum.game.round.RoundRenderPanel;
+import fr.free.totalboumboum.gui.common.MenuContainer;
+import fr.free.totalboumboum.gui.common.MenuPanel;
+import fr.free.totalboumboum.gui.common.SplitMenuPanel;
 import fr.free.totalboumboum.gui.game.tournament.description.TournamentDescription;
-import fr.free.totalboumboum.gui.generic.MenuContainer;
-import fr.free.totalboumboum.gui.generic.MenuPanel;
-import fr.free.totalboumboum.gui.generic.SplitMenuPanel;
 
 public class RoundSplitPanel extends SplitMenuPanel
 {	

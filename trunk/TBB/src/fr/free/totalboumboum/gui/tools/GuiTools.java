@@ -19,8 +19,8 @@ import javax.swing.JButton;
 import javax.swing.JToggleButton;
 
 import fr.free.totalboumboum.data.configuration.Configuration;
+import fr.free.totalboumboum.gui.common.ButtonAware;
 import fr.free.totalboumboum.gui.data.configuration.GuiConfiguration;
-import fr.free.totalboumboum.gui.generic.ButtonAware;
 import fr.free.totalboumboum.tools.FileTools;
 import fr.free.totalboumboum.tools.ImageTools;
 

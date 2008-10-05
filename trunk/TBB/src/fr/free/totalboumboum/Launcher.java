@@ -34,15 +34,15 @@ public class Launcher
 		Graphics2D g = (Graphics2D)splash.createGraphics();
 		
 		// init
-		updateSplash(splash,"Loading XML schemas");
+		updateSplash(splash,"[Loading XML schemas]");
 		XmlTools.init();
-		updateSplash(splash,"Loading configuration");
+		updateSplash(splash,"[Loading configuration]");
 		Configuration config = ConfigurationLoader.loadConfiguration();
-		updateSplash(splash,"Loading GUI");
+		updateSplash(splash,"[Loading GUI]");
 		final GuiConfiguration configuration = GuiConfigurationLoader.loadConfiguration(config);
-		updateSplash(splash,"Initializing GUI");
+		updateSplash(splash,"[Initializing GUI]");
 		GuiTools.init(configuration,g);
-		updateSplash(splash,"Done");
+		updateSplash(splash,"[Done]");
 		
 		// create GUI
 		SwingUtilities.invokeLater(new Runnable()
