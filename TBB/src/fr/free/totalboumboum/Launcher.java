@@ -625,6 +625,7 @@ public class Launcher
 	 * - Correction		: bug qui empêchait un bon décompte des kills/deaths (différent du premier!)
 	 * - Nouveauté		: niveau plus petit pour tester la nouvelle IA
 	 * - Nouveauté		: système pour controler que le thread d'une IA ne reste pas bloqué dans une bloucle infinite (ou autre)
+	 * - Modification	: plus d'icones dans la GUI notamment pour les points processors
 	 * - Nouveauté		: splash screen
 	 * 
 	 * *******************************************************

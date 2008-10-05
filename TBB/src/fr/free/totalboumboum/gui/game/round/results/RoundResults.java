@@ -49,7 +49,7 @@ public class RoundResults extends EntitledDataPanel
 	{	super(container);
 
 		// title
-		String txt = getConfiguration().getLanguage().getText(GuiTools.GAME_ROUND_TITLE_RESULTS);
+		String txt = getConfiguration().getLanguage().getText(GuiTools.GAME_ROUND_RESULTS_TITLE);
 		setTitle(txt);
 		
 		// data
@@ -68,52 +68,37 @@ public class RoundResults extends EntitledDataPanel
 					lbl.setOpaque(false);
 				}				
 				Round round = getConfiguration().getCurrentRound();
-				BufferedImage ic = null;
-				String icTt = null;
+				String sc = null;
 				switch(round.getPlayMode())
 				{	case CROWN:
-						ic = GuiTools.getIcon(GuiTools.GAME_ROUND_HEADER_CROWNS);
-						icTt = getConfiguration().getLanguage().getText(GuiTools.GAME_ROUND_HEADER_CROWNS+"Tooltip");
-						break;
-					case FRAG:
-						ic = GuiTools.getIcon(GuiTools.GAME_ROUND_HEADER_FRAGS);
-						icTt = getConfiguration().getLanguage().getText(GuiTools.GAME_ROUND_HEADER_FRAGS+"Tooltip");
+						sc = GuiTools.GAME_ROUND_RESULTS_HEADER_CROWNS;
 						break;
 					case PAINT:
-						ic = GuiTools.getIcon(GuiTools.GAME_ROUND_HEADER_PAINTINGS);
-						icTt = getConfiguration().getLanguage().getText(GuiTools.GAME_ROUND_HEADER_PAINTINGS+"Tooltip");
+						sc = GuiTools.GAME_ROUND_RESULTS_HEADER_PAINTINGS;
 						break;
 					case SURVIVAL:
-						ic = GuiTools.getIcon(GuiTools.GAME_ROUND_HEADER_TIME);
-						icTt = getConfiguration().getLanguage().getText(GuiTools.GAME_ROUND_HEADER_TIME+"Tooltip");
+						sc = GuiTools.GAME_ROUND_RESULTS_HEADER_TIME;
 						break;
 				}
-				BufferedImage[] icons = 
-				{	GuiTools.getIcon(GuiTools.GAME_ROUND_HEADER_NAME),
-					GuiTools.getIcon(GuiTools.GAME_ROUND_HEADER_BOMBS),
-					GuiTools.getIcon(GuiTools.GAME_ROUND_HEADER_ITEMS),
-					GuiTools.getIcon(GuiTools.GAME_ROUND_HEADER_DEATHS),
-					GuiTools.getIcon(GuiTools.GAME_ROUND_HEADER_KILLS),
-					ic,
-					GuiTools.getIcon(GuiTools.GAME_ROUND_HEADER_POINTS),
+				String names[] = 
+				{	GuiTools.GAME_ROUND_RESULTS_HEADER_NAME,
+					GuiTools.GAME_ROUND_RESULTS_HEADER_BOMBS,
+					GuiTools.GAME_ROUND_RESULTS_HEADER_ITEMS,
+					GuiTools.GAME_ROUND_RESULTS_HEADER_DEATHS,
+					GuiTools.GAME_ROUND_RESULTS_HEADER_KILLS,
+					sc,
+					GuiTools.GAME_ROUND_RESULTS_HEADER_POINTS
 				};
-				String[] tooltips = 
-				{	getConfiguration().getLanguage().getText(GuiTools.GAME_ROUND_HEADER_NAME+"Tooltip"),
-					getConfiguration().getLanguage().getText(GuiTools.GAME_ROUND_HEADER_BOMBS+"Tooltip"),
-					getConfiguration().getLanguage().getText(GuiTools.GAME_ROUND_HEADER_ITEMS+"Tooltip"),
-					getConfiguration().getLanguage().getText(GuiTools.GAME_ROUND_HEADER_DEATHS+"Tooltip"),
-					getConfiguration().getLanguage().getText(GuiTools.GAME_ROUND_HEADER_KILLS+"Tooltip"),
-					icTt,
-					getConfiguration().getLanguage().getText(GuiTools.GAME_ROUND_HEADER_POINTS+"Tooltip")
-				};
-				for(int i=0;i<icons.length;i++)
-				{	JLabel lbl = resultsPanel.getLabel(0,1+i);
+				for(int i=0;i<names.length;i++)
+				{	BufferedImage image = GuiTools.getIcon(names[i]); 
+					String tooltip = getConfiguration().getLanguage().getText(names[i]+GuiTools.TOOLTIP); 
+					JLabel lbl = resultsPanel.getLabel(0,1+i);
 					lbl.setText(null);
-					lbl.setToolTipText(tooltips[i]);
+					lbl.setToolTipText(tooltip);
 					int lineHeight = GuiTools.getSize(GuiTools.GAME_RESULTS_LABEL_HEADER_HEIGHT);
-					double zoom = lineHeight/(double)icons[i].getHeight();
-						icons[i] = ImageTools.resize(icons[i],zoom,true);
-					ImageIcon icon = new ImageIcon(icons[i]);
+					double zoom = lineHeight/(double)image.getHeight();
+					image = ImageTools.resize(image,zoom,true);
+					ImageIcon icon = new ImageIcon(image);
 					lbl.setIcon(icon);
 				}
 			}
@@ -191,9 +176,6 @@ public class RoundResults extends EntitledDataPanel
 				switch(round.getPlayMode())
 				{	case CROWN:
 						sc = nf.format(stats.getScores(Score.CROWNS)[pp.getIndex()]);
-						break;
-					case FRAG:
-						sc = nf.format(stats.getScores(Score.KILLS)[pp.getIndex()] - stats.getScores(Score.DEATHS)[pp.getIndex()]);
 						break;
 					case PAINT:
 						sc = nf.format(stats.getScores(Score.PAINTINGS)[pp.getIndex()]);

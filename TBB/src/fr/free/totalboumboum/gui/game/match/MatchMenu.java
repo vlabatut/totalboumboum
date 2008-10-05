@@ -71,20 +71,20 @@ public class MatchMenu extends InnerMenuPanel implements MatchRenderPanel
 		setPreferredSize(new Dimension(width,height));
 		
 		// buttons
-		buttonQuit = GuiTools.createHorizontalMenuButton(GuiTools.MATCH_BUTTON_QUIT,this,getConfiguration());
+		buttonQuit = GuiTools.createHorizontalMenuButton(GuiTools.GAME_MATCH_BUTTON_QUIT,this,getConfiguration());
 		add(Box.createHorizontalGlue());
-		buttonTournament = GuiTools.createHorizontalMenuButton(GuiTools.MATCH_BUTTON_CURRENT_TOURNAMENT,this,getConfiguration());
+		buttonTournament = GuiTools.createHorizontalMenuButton(GuiTools.GAME_MATCH_BUTTON_CURRENT_TOURNAMENT,this,getConfiguration());
 		add(Box.createRigidArea(new Dimension(GuiTools.getSize(GuiTools.MENU_HORIZONTAL_BUTTON_SPACE),0)));
 	    ButtonGroup group = new ButtonGroup();
-		buttonDescription = GuiTools.createHorizontalMenuToggleButton(GuiTools.MATCH_BUTTON_DESCRIPTION,this,getConfiguration());
+		buttonDescription = GuiTools.createHorizontalMenuToggleButton(GuiTools.GAME_MATCH_BUTTON_DESCRIPTION,this,getConfiguration());
 		buttonDescription.setSelected(true);
 	    group.add(buttonDescription);
-		buttonResults = GuiTools.createHorizontalMenuToggleButton(GuiTools.MATCH_BUTTON_RESULTS,this,getConfiguration());
+		buttonResults = GuiTools.createHorizontalMenuToggleButton(GuiTools.GAME_MATCH_BUTTON_RESULTS,this,getConfiguration());
 	    group.add(buttonResults);
-		buttonStatistics = GuiTools.createHorizontalMenuToggleButton(GuiTools.MATCH_BUTTON_STATISTICS,this,getConfiguration());
+		buttonStatistics = GuiTools.createHorizontalMenuToggleButton(GuiTools.GAME_MATCH_BUTTON_STATISTICS,this,getConfiguration());
 	    group.add(buttonStatistics);
 		add(Box.createRigidArea(new Dimension(GuiTools.getSize(GuiTools.MENU_HORIZONTAL_BUTTON_SPACE),0)));
-		buttonRound = GuiTools.createHorizontalMenuButton(GuiTools.MATCH_BUTTON_NEXT_ROUND,this,getConfiguration());
+		buttonRound = GuiTools.createHorizontalMenuButton(GuiTools.GAME_MATCH_BUTTON_NEXT_ROUND,this,getConfiguration());
 		
 		// panels
 		matchDescription = new MatchDescription(container);
@@ -100,33 +100,33 @@ public class MatchMenu extends InnerMenuPanel implements MatchRenderPanel
 	
 	public void actionPerformed(ActionEvent e)
 	{	System.out.println(e.getActionCommand());
-		if(e.getActionCommand().equals(GuiTools.MATCH_BUTTON_QUIT))
+		if(e.getActionCommand().equals(GuiTools.GAME_MATCH_BUTTON_QUIT))
 		{	getFrame().setMainMenuPanel();
 	    }
-		else if(e.getActionCommand().equals(GuiTools.MATCH_BUTTON_CURRENT_TOURNAMENT))				
+		else if(e.getActionCommand().equals(GuiTools.GAME_MATCH_BUTTON_CURRENT_TOURNAMENT))				
 		{	replaceWith(parent);
 	    }
-		else if(e.getActionCommand().equals(GuiTools.MATCH_BUTTON_FINISH))
+		else if(e.getActionCommand().equals(GuiTools.GAME_MATCH_BUTTON_FINISH))
 		{	Match match = getConfiguration().getCurrentMatch();
 			match.finish();
 			replaceWith(parent);
 	    }
-		else if(e.getActionCommand().equals(GuiTools.MATCH_BUTTON_DESCRIPTION))
+		else if(e.getActionCommand().equals(GuiTools.GAME_MATCH_BUTTON_DESCRIPTION))
 		{	container.setDataPart(matchDescription);
 			dataPart = matchDescription;
 	    }
-		else if(e.getActionCommand().equals(GuiTools.MATCH_BUTTON_RESULTS))
+		else if(e.getActionCommand().equals(GuiTools.GAME_MATCH_BUTTON_RESULTS))
 		{	container.setDataPart(matchResults);
 			dataPart = matchResults;
 	    }
-		else if(e.getActionCommand().equals(GuiTools.MATCH_BUTTON_STATISTICS))
+		else if(e.getActionCommand().equals(GuiTools.GAME_MATCH_BUTTON_STATISTICS))
 		{	container.setDataPart(matchStatistics);
 			dataPart = matchStatistics;
 	    }
-		else if(e.getActionCommand().equals(GuiTools.MATCH_BUTTON_CURRENT_ROUND))
+		else if(e.getActionCommand().equals(GuiTools.GAME_MATCH_BUTTON_CURRENT_ROUND))
 		{	replaceWith(roundPanel);
 	    }
-		else if(e.getActionCommand().equals(GuiTools.MATCH_BUTTON_NEXT_ROUND))
+		else if(e.getActionCommand().equals(GuiTools.GAME_MATCH_BUTTON_NEXT_ROUND))
 		{	try
 			{	getConfiguration().getCurrentMatch().progress();
 			}
@@ -166,18 +166,18 @@ public class MatchMenu extends InnerMenuPanel implements MatchRenderPanel
 		{	// Round
 			buttonRound.setEnabled(false);
 			// Finish
-			GuiTools.setButtonContent(GuiTools.MATCH_BUTTON_FINISH, buttonTournament, getConfiguration());
+			GuiTools.setButtonContent(GuiTools.GAME_MATCH_BUTTON_FINISH, buttonTournament, getConfiguration());
 		}
 		else
 		{	// Round
 			buttonRound.setEnabled(true);
 			Round round = match.getCurrentRound();
 			if(round==null || round.isOver())
-				GuiTools.setButtonContent(GuiTools.MATCH_BUTTON_NEXT_ROUND, buttonRound, getConfiguration());
+				GuiTools.setButtonContent(GuiTools.GAME_MATCH_BUTTON_NEXT_ROUND, buttonRound, getConfiguration());
 			else
-				GuiTools.setButtonContent(GuiTools.MATCH_BUTTON_CURRENT_ROUND, buttonRound, getConfiguration());
+				GuiTools.setButtonContent(GuiTools.GAME_MATCH_BUTTON_CURRENT_ROUND, buttonRound, getConfiguration());
 			// Tournament
-			GuiTools.setButtonContent(GuiTools.MATCH_BUTTON_CURRENT_TOURNAMENT, buttonTournament, getConfiguration());
+			GuiTools.setButtonContent(GuiTools.GAME_MATCH_BUTTON_CURRENT_TOURNAMENT, buttonTournament, getConfiguration());
 		}
 	}
 

@@ -36,10 +36,10 @@ public class OptionsMenu extends SimpleMenuPanel
 		
 		// buttons
 		add(Box.createVerticalGlue());
-		buttonGamePlay = GuiTools.createPrincipalVerticalMenuButton(GuiTools.OPTIONS_MENU_BUTTON_GAMEPLAY,this,getConfiguration());
-		buttonVideo = GuiTools.createPrincipalVerticalMenuButton(GuiTools.OPTIONS_MENU_BUTTON_VIDEO,this,getConfiguration());
+		buttonGamePlay = GuiTools.createPrincipalVerticalMenuButton(GuiTools.MENU_OPTIONS_BUTTON_GAMEPLAY,this,getConfiguration());
+		buttonVideo = GuiTools.createPrincipalVerticalMenuButton(GuiTools.MENU_OPTIONS_BUTTON_VIDEO,this,getConfiguration());
 		add(Box.createRigidArea(new Dimension(0,GuiTools.getSize(GuiTools.MENU_VERTICAL_BUTTON_SPACE))));
-		buttonBack = GuiTools.createPrincipalVerticalMenuButton(GuiTools.OPTIONS_MENU_BUTTON_BACK,this,getConfiguration());
+		buttonBack = GuiTools.createPrincipalVerticalMenuButton(GuiTools.MENU_OPTIONS_BUTTON_BACK,this,getConfiguration());
 		add(Box.createVerticalGlue());		
 	}
 	
@@ -50,13 +50,13 @@ public class OptionsMenu extends SimpleMenuPanel
 	
 	public void actionPerformed(ActionEvent e)
 	{	System.out.println(e.getActionCommand());
-		if(e.getActionCommand().equals(GuiTools.OPTIONS_MENU_BUTTON_VIDEO))
+		if(e.getActionCommand().equals(GuiTools.MENU_OPTIONS_BUTTON_VIDEO))
 		{	
 	    }
-		else if(e.getActionCommand().equals(GuiTools.OPTIONS_MENU_BUTTON_GAMEPLAY))
+		else if(e.getActionCommand().equals(GuiTools.MENU_OPTIONS_BUTTON_GAMEPLAY))
 		{	
 	    }
-		else if(e.getActionCommand().equals(GuiTools.OPTIONS_MENU_BUTTON_BACK))
+		else if(e.getActionCommand().equals(GuiTools.MENU_OPTIONS_BUTTON_BACK))
 		{	replaceWith(parent);
 	    }
 	} 

@@ -68,20 +68,20 @@ public class TournamentMenu extends InnerMenuPanel implements TournamentRenderPa
 		setPreferredSize(new Dimension(width,height));
 		
 		// buttons
-		buttonQuit = GuiTools.createHorizontalMenuButton(GuiTools.TOURNAMENT_BUTTON_QUIT,this,getConfiguration());
+		buttonQuit = GuiTools.createHorizontalMenuButton(GuiTools.GAME_TOURNAMENT_BUTTON_QUIT,this,getConfiguration());
 		add(Box.createHorizontalGlue());
-		buttonMenu = GuiTools.createHorizontalMenuButton(GuiTools.TOURNAMENT_BUTTON_MENU,this,getConfiguration());
+		buttonMenu = GuiTools.createHorizontalMenuButton(GuiTools.GAME_TOURNAMENT_BUTTON_MENU,this,getConfiguration());
 		add(Box.createRigidArea(new Dimension(GuiTools.getSize(GuiTools.MENU_HORIZONTAL_BUTTON_SPACE),0)));
 	    ButtonGroup group = new ButtonGroup();
-		buttonDescription = GuiTools.createHorizontalMenuToggleButton(GuiTools.TOURNAMENT_BUTTON_DESCRIPTION,this,getConfiguration());
+		buttonDescription = GuiTools.createHorizontalMenuToggleButton(GuiTools.GAME_TOURNAMENT_BUTTON_DESCRIPTION,this,getConfiguration());
 		buttonDescription.setSelected(true);
 	    group.add(buttonDescription);
-		buttonResults = GuiTools.createHorizontalMenuToggleButton(GuiTools.TOURNAMENT_BUTTON_RESULTS,this,getConfiguration());
+		buttonResults = GuiTools.createHorizontalMenuToggleButton(GuiTools.GAME_TOURNAMENT_BUTTON_RESULTS,this,getConfiguration());
 	    group.add(buttonResults);
-		buttonStatistics = GuiTools.createHorizontalMenuToggleButton(GuiTools.TOURNAMENT_BUTTON_STATISTICS,this,getConfiguration());
+		buttonStatistics = GuiTools.createHorizontalMenuToggleButton(GuiTools.GAME_TOURNAMENT_BUTTON_STATISTICS,this,getConfiguration());
 	    group.add(buttonStatistics);
 		add(Box.createRigidArea(new Dimension(GuiTools.getSize(GuiTools.MENU_HORIZONTAL_BUTTON_SPACE),0)));
-		buttonMatch = GuiTools.createHorizontalMenuButton(GuiTools.TOURNAMENT_BUTTON_NEXT_MATCH,this,getConfiguration());
+		buttonMatch = GuiTools.createHorizontalMenuButton(GuiTools.GAME_TOURNAMENT_BUTTON_NEXT_MATCH,this,getConfiguration());
 		
 		// panels
 		tournamentDescription = null;
@@ -110,33 +110,33 @@ public class TournamentMenu extends InnerMenuPanel implements TournamentRenderPa
 	
 	public void actionPerformed(ActionEvent e)
 	{	System.out.println(e.getActionCommand());
-		if(e.getActionCommand().equals(GuiTools.TOURNAMENT_BUTTON_QUIT))
+		if(e.getActionCommand().equals(GuiTools.GAME_TOURNAMENT_BUTTON_QUIT))
 		{	getFrame().setMainMenuPanel();
 	    }
-		else if(e.getActionCommand().equals(GuiTools.TOURNAMENT_BUTTON_MENU))
+		else if(e.getActionCommand().equals(GuiTools.GAME_TOURNAMENT_BUTTON_MENU))
 		{	replaceWith(parent);
 	    }
-		else if(e.getActionCommand().equals(GuiTools.TOURNAMENT_BUTTON_FINISH))
+		else if(e.getActionCommand().equals(GuiTools.GAME_TOURNAMENT_BUTTON_FINISH))
 		{	AbstractTournament tournament = getConfiguration().getCurrentTournament();
 			tournament.finish();
 			replaceWith(parent);
 	    }
-		else if(e.getActionCommand().equals(GuiTools.TOURNAMENT_BUTTON_DESCRIPTION))
+		else if(e.getActionCommand().equals(GuiTools.GAME_TOURNAMENT_BUTTON_DESCRIPTION))
 		{	container.setDataPart(tournamentDescription);
 			dataPart = tournamentDescription;
 	    }
-		else if(e.getActionCommand().equals(GuiTools.TOURNAMENT_BUTTON_RESULTS))
+		else if(e.getActionCommand().equals(GuiTools.GAME_TOURNAMENT_BUTTON_RESULTS))
 		{	container.setDataPart(tournamentResults);
 			dataPart = tournamentResults;
 	    }
-		else if(e.getActionCommand().equals(GuiTools.TOURNAMENT_BUTTON_STATISTICS))
+		else if(e.getActionCommand().equals(GuiTools.GAME_TOURNAMENT_BUTTON_STATISTICS))
 		{	container.setDataPart(tournamentStatistics);
 			dataPart = tournamentStatistics;
 	    }
-		else if(e.getActionCommand().equals(GuiTools.TOURNAMENT_BUTTON_CURRENT_MATCH))
+		else if(e.getActionCommand().equals(GuiTools.GAME_TOURNAMENT_BUTTON_CURRENT_MATCH))
 		{	replaceWith(matchPanel);
 	    }
-		else if(e.getActionCommand().equals(GuiTools.TOURNAMENT_BUTTON_NEXT_MATCH))
+		else if(e.getActionCommand().equals(GuiTools.GAME_TOURNAMENT_BUTTON_NEXT_MATCH))
 		{	AbstractTournament tournament = getConfiguration().getCurrentTournament();
 			tournament.progress();
 			matchPanel = new MatchSplitPanel(container.getContainer(),container);
@@ -151,18 +151,18 @@ public class TournamentMenu extends InnerMenuPanel implements TournamentRenderPa
 		{	// match
 			buttonMatch.setEnabled(false);
 			// finish
-			GuiTools.setButtonContent(GuiTools.TOURNAMENT_BUTTON_FINISH, buttonMenu, getConfiguration());
+			GuiTools.setButtonContent(GuiTools.GAME_TOURNAMENT_BUTTON_FINISH, buttonMenu, getConfiguration());
 		}
 		else
 		{	// match
 			buttonMatch.setEnabled(true);
 			Match match = tournament.getCurrentMatch();
 			if(match==null || match.isOver())
-				GuiTools.setButtonContent(GuiTools.TOURNAMENT_BUTTON_NEXT_MATCH, buttonMatch, getConfiguration());
+				GuiTools.setButtonContent(GuiTools.GAME_TOURNAMENT_BUTTON_NEXT_MATCH, buttonMatch, getConfiguration());
 			else
-				GuiTools.setButtonContent(GuiTools.TOURNAMENT_BUTTON_CURRENT_MATCH, buttonMatch, getConfiguration());
+				GuiTools.setButtonContent(GuiTools.GAME_TOURNAMENT_BUTTON_CURRENT_MATCH, buttonMatch, getConfiguration());
 			// menu
-			GuiTools.setButtonContent(GuiTools.TOURNAMENT_BUTTON_MENU, buttonMenu, getConfiguration());
+			GuiTools.setButtonContent(GuiTools.GAME_TOURNAMENT_BUTTON_MENU, buttonMenu, getConfiguration());
 		}
 	}
 

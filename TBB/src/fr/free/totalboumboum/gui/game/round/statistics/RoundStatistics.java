@@ -25,7 +25,7 @@ public class RoundStatistics extends EntitledDataPanel
 	{	super(container);
 
 		// title
-		String txt = getConfiguration().getLanguage().getText(GuiTools.GAME_ROUND_TITLE_STATISTICS);
+		String txt = getConfiguration().getLanguage().getText(GuiTools.GAME_ROUND_STATISTICS_TITLE);
 		setTitle(txt);
 	
 	}

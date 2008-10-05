@@ -58,7 +58,7 @@ public class MatchResults extends EntitledDataPanel
 	{	super(container);
 
 		// title
-		String txt = getConfiguration().getLanguage().getText(GuiTools.GAME_MATCH_TITLE_RESULTS);
+		String txt = getConfiguration().getLanguage().getText(GuiTools.GAME_MATCH_RESULTS_TITLE);
 		setTitle(txt);
 		
 		// data
@@ -77,17 +77,17 @@ public class MatchResults extends EntitledDataPanel
 					lbl.setOpaque(false);
 				}
 				String names[] = 
-				{	GuiTools.GAME_MATCH_HEADER_NAME,
-					GuiTools.GAME_MATCH_HEADER_BOMBS,
-					GuiTools.GAME_MATCH_HEADER_ITEMS,
-					GuiTools.GAME_MATCH_HEADER_DEATHS,
-					GuiTools.GAME_MATCH_HEADER_KILLS,
-					GuiTools.GAME_MATCH_HEADER_TOTAL,
-					GuiTools.GAME_MATCH_HEADER_POINTS
+				{	GuiTools.GAME_MATCH_RESULTS_HEADER_NAME,
+					GuiTools.GAME_MATCH_RESULTS_HEADER_BOMBS,
+					GuiTools.GAME_MATCH_RESULTS_HEADER_ITEMS,
+					GuiTools.GAME_MATCH_RESULTS_HEADER_DEATHS,
+					GuiTools.GAME_MATCH_RESULTS_HEADER_KILLS,
+					GuiTools.GAME_MATCH_RESULTS_HEADER_TOTAL,
+					GuiTools.GAME_MATCH_RESULTS_HEADER_POINTS
 				};
 				for(int i=0;i<names.length;i++)
 				{	BufferedImage icon = GuiTools.getIcon(names[i]);
-					String tooltip = getConfiguration().getLanguage().getText(names[i]+"Tooltip");
+					String tooltip = getConfiguration().getLanguage().getText(names[i]+GuiTools.TOOLTIP);
 					JLabel lbl = resultsPanel.getLabel(0,1+i);
 					lbl.setText(null);
 					lbl.setToolTipText(tooltip);
@@ -145,7 +145,7 @@ public class MatchResults extends EntitledDataPanel
 		if(resultsPanel.getColumnCount()<cols)
 		{	resultsPanel.addColumn(col);
 			JLabel lbl = resultsPanel.getLabel(0,col);
-			String txt = getConfiguration().getLanguage().getText(GuiTools.GAME_MATCH_HEADER_ROUND)+rounds.size();
+			String txt = getConfiguration().getLanguage().getText(GuiTools.GAME_MATCH_RESULTS_HEADER_ROUND)+rounds.size();
 			lbl.setText(txt);
 		}
 		

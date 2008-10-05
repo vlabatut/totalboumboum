@@ -76,7 +76,7 @@ public class RoundDescription extends EntitledDataPanel
 	{	super(container);
 	
 		// title
-		String txt = getConfiguration().getLanguage().getText(GuiTools.GAME_ROUND_TITLE_DESCRIPTION);
+		String txt = getConfiguration().getLanguage().getText(GuiTools.GAME_ROUND_DESCRIPTION_TITLE);
 		setTitle(txt);
 	
 		// data
@@ -238,7 +238,7 @@ public class RoundDescription extends EntitledDataPanel
 	
 	private JPanel makeItemsetPanel(int width, int height, LevelPreview levelPreview)
 	{	// init
-		String id = GuiTools.GAME_ROUND_HEADER_ITEMSET;
+		String id = GuiTools.GAME_ROUND_DESCRIPTION_ITEMSET_TITLE;
 		int colGrps[] = {5, 6};
 		int lns[] = {4, 5};
 		ArrayList<ArrayList<Object>> data = new ArrayList<ArrayList<Object>>();
@@ -294,7 +294,7 @@ public class RoundDescription extends EntitledDataPanel
 
 	private JPanel makeMiscPanel(int width, int height, LevelPreview preview)
 	{	// init
-		String id = GuiTools.GAME_ROUND_HEADER_MISC;
+		String id = GuiTools.GAME_ROUND_DESCRIPTION_MISC_TITLE;
 		int colGrps[] = {1};
 		int lns[] = {8};
 		ArrayList<ArrayList<Object>> data = new ArrayList<ArrayList<Object>>();
@@ -302,13 +302,13 @@ public class RoundDescription extends EntitledDataPanel
 		
 		// data
 		String names[] = 
-		{	GuiTools.GAME_ROUND_HEADER_PACK,
-			GuiTools.GAME_ROUND_HEADER_TITLE,
-			GuiTools.GAME_ROUND_HEADER_SOURCE,
-			GuiTools.GAME_ROUND_HEADER_AUTHOR,
-			GuiTools.GAME_ROUND_HEADER_INSTANCE,
-			GuiTools.GAME_ROUND_HEADER_THEME,
-			GuiTools.GAME_ROUND_HEADER_DIMENSION
+		{	GuiTools.GAME_ROUND_DESCRIPTION_MISC_HEADER_PACK,
+			GuiTools.GAME_ROUND_DESCRIPTION_MISC_HEADER_TITLE,
+			GuiTools.GAME_ROUND_DESCRIPTION_MISC_HEADER_SOURCE,
+			GuiTools.GAME_ROUND_DESCRIPTION_MISC_HEADER_AUTHOR,
+			GuiTools.GAME_ROUND_DESCRIPTION_MISC_HEADER_INSTANCE,
+			GuiTools.GAME_ROUND_DESCRIPTION_MISC_HEADER_THEME,
+			GuiTools.GAME_ROUND_DESCRIPTION_MISC_HEADER_DIMENSION
 		};
 		Round round = getConfiguration().getCurrentRound();
 		HollowLevel hollowLevel = round.getHollowLevel();
@@ -330,7 +330,7 @@ public class RoundDescription extends EntitledDataPanel
 			// data
 			BufferedImage image = GuiTools.getIcon(names[i]);
 			dt.add(image);
-			String tooltip = getConfiguration().getLanguage().getText(names[i]+"Tooltip");
+			String tooltip = getConfiguration().getLanguage().getText(names[i]+GuiTools.TOOLTIP);
 			tt.add(tooltip);
 			dt.add(texts[i]);
 			tt.add(texts[i]);
@@ -342,7 +342,7 @@ public class RoundDescription extends EntitledDataPanel
 
 	private JPanel makeInitialItemsPanel(int width, int height, LevelPreview levelPreview)
 	{	// init
-		String id = GuiTools.GAME_ROUND_HEADER_INITIAL_ITEMS;
+		String id = GuiTools.GAME_ROUND_DESCRIPTION_INITIALITEMS_TITLE;
 		int colGrps[] = {2, 4};
 		int lns[] = {4, 8};
 		ArrayList<ArrayList<Object>> data = new ArrayList<ArrayList<Object>>();
@@ -391,7 +391,7 @@ public class RoundDescription extends EntitledDataPanel
 
 	private JPanel makePointsPanel(int width, int height)
 	{	// init
-		String id = GuiTools.GAME_ROUND_HEADER_POINTSPROCESS;
+		String id = GuiTools.GAME_ROUND_DESCRIPTION_POINTS_TITLE;
 		ArrayList<ArrayList<Object>> data = new ArrayList<ArrayList<Object>>();
 		ArrayList<ArrayList<String>> tooltips = new ArrayList<ArrayList<String>>();
 		
@@ -427,20 +427,19 @@ public class RoundDescription extends EntitledDataPanel
 				ArrayList<String> tt = new ArrayList<String>();
 				data.add(dt);
 				tooltips.add(tt);
-				String text = "Rp";
-				String tooltip = "Rankpoints: calculates points according to a ranking";
-				dt.add(text);
+				String name = GuiTools.GAME_ROUND_DESCRIPTION_POINTS_HEADER_RANKPOINTS;
+				BufferedImage image = GuiTools.getIcon(name);
+				String tooltip = configuration.getLanguage().getText(name+GuiTools.TOOLTIP);
+				dt.add(image);
 				tt.add(tooltip);
 				boolean exaequoShare = pr.getExaequoShare();
 				if(exaequoShare)
-				{	text = "share";
-					tooltip = "In case of tie, points are shared";
-				}
+					name = GuiTools.GAME_ROUND_DESCRIPTION_POINTS_DATA_SHARE;
 				else
-				{	text = "don't share";
-					tooltip = "In case of tie, points are not shared";
-				}
-				dt.add(text);
+					name = GuiTools.GAME_ROUND_DESCRIPTION_POINTS_DATA_NOSHARE;
+				image = GuiTools.getIcon(name);
+				tooltip = configuration.getLanguage().getText(name+GuiTools.TOOLTIP);
+				dt.add(image);
 				tt.add(tooltip);
 			}
 			// source
@@ -477,11 +476,12 @@ public class RoundDescription extends EntitledDataPanel
 				ArrayList<String> tt = new ArrayList<String>();
 				data.add(dt);
 				tooltips.add(tt);
-				String text = "D";
-				String tooltip = "Discretize: calculates points according to some intervals";
-				dt.add(text);
+				String name = GuiTools.GAME_ROUND_DESCRIPTION_POINTS_HEADER_DISCRETIZE;
+				BufferedImage image = GuiTools.getIcon(name);
+				String tooltip = configuration.getLanguage().getText(name+GuiTools.TOOLTIP);
+				dt.add(image);
 				tt.add(tooltip);				
-				text = "";
+				String text = "";
 				dt.add(text);
 				tt.add(tooltip);				
 			}
@@ -500,7 +500,7 @@ public class RoundDescription extends EntitledDataPanel
 					threshold = nf.format(thresholds[i]);
 					String interval;
 					interval = "]"+previousThreshold+";"+threshold+"]";
-					String tooltip = interval+"->"+value;
+					String tooltip = interval+new Character('\u2192').toString()+value;
 					ArrayList<Object> dt = new ArrayList<Object>();
 					ArrayList<String> tt = new ArrayList<String>();
 					data.add(dt);
@@ -521,18 +521,14 @@ public class RoundDescription extends EntitledDataPanel
 				ArrayList<String> tt = new ArrayList<String>();
 				data.add(dt);
 				tooltips.add(tt);
-				dt.add("Rk");
-				tt.add("Rankings: caculates a ranking according to one or several points");
-				String value,tooltip;
+				String name = GuiTools.GAME_ROUND_DESCRIPTION_POINTS_HEADER_RANKINGS;
+				BufferedImage image = GuiTools.getIcon(name);
+				String tooltip = configuration.getLanguage().getText(name+GuiTools.TOOLTIP);
 				if(inverted)
-				{	value = "inverted";
-					tooltip = "inverted order";
-				}
+					name = GuiTools.GAME_ROUND_DESCRIPTION_POINTS_DATA_INVERTED;
 				else
-				{	value = "regular";
-					tooltip = "regular order";
-				}
-				dt.add(value);
+					name = GuiTools.GAME_ROUND_DESCRIPTION_POINTS_DATA_REGULAR;
+				dt.add(image);
 				tt.add(tooltip);
 			}
 			// sources
@@ -552,8 +548,11 @@ public class RoundDescription extends EntitledDataPanel
 			ArrayList<String> tt = new ArrayList<String>();
 			data.add(dt);
 			tooltips.add(tt);
-			dt.add("Cst");
-			tt.add("Constant: a constant real value");
+			String name = GuiTools.GAME_ROUND_DESCRIPTION_POINTS_HEADER_CONSTANT;
+			BufferedImage image = GuiTools.getIcon(name);
+			String tooltip = configuration.getLanguage().getText(name+GuiTools.TOOLTIP);
+			dt.add(image);
+			tt.add(tooltip);
 			String text = nf.format(value);
 			dt.add(text);
 			tt.add(text);
@@ -565,11 +564,12 @@ public class RoundDescription extends EntitledDataPanel
 			ArrayList<String> tt = new ArrayList<String>();
 			data.add(dt);
 			tooltips.add(tt);
-			String text = "T";
-			dt.add(text);
-			String tooltip = "Total: total number of points scored in each confrontation"; 
+			String name = GuiTools.GAME_MATCH_DESCRIPTION_POINTS_HEADER_TOTAL;
+			BufferedImage image = GuiTools.getIcon(name);
+			String tooltip = configuration.getLanguage().getText(name+GuiTools.TOOLTIP);
+			dt.add(image);
 			tt.add(tooltip);
-			text = "";
+			String text = "";
 			dt.add(text);
 			tt.add(tooltip);
 		}
@@ -581,35 +581,38 @@ public class RoundDescription extends EntitledDataPanel
 			ArrayList<String> tt = new ArrayList<String>();
 			data.add(dt);
 			tooltips.add(tt);
-			dt.add("Sc");
-			tt.add("Score: scores from all the players");
-			String name = null;
+			String name = GuiTools.GAME_ROUND_DESCRIPTION_POINTS_HEADER_SCORE;
+			BufferedImage image = GuiTools.getIcon(name);
+			String tooltip = configuration.getLanguage().getText(name+GuiTools.TOOLTIP);
+			dt.add(image);
+			tt.add(tooltip);
+			name = null;
 			switch(score)
 			{	case BOMBS:
-					name = GuiTools.GAME_ROUND_HEADER_BOMBS;
+					name = GuiTools.GAME_ROUND_DESCRIPTION_POINTS_DATA_BOMBS;
 					break;
 				case CROWNS:
-					name = GuiTools.GAME_ROUND_HEADER_CROWNS;
+					name = GuiTools.GAME_ROUND_DESCRIPTION_POINTS_DATA_CROWNS;
 					break;					
 				case DEATHS:
-					name = GuiTools.GAME_ROUND_HEADER_DEATHS;
+					name = GuiTools.GAME_ROUND_DESCRIPTION_POINTS_DATA_DEATHS;
 					break;					
 				case ITEMS:
-					name = GuiTools.GAME_ROUND_HEADER_ITEMS;
+					name = GuiTools.GAME_ROUND_DESCRIPTION_POINTS_DATA_ITEMS;
 					break;					
 				case KILLS:
-					name = GuiTools.GAME_ROUND_HEADER_KILLS;
+					name = GuiTools.GAME_ROUND_DESCRIPTION_POINTS_DATA_KILLS;
 					break;					
 				case PAINTINGS:
-					name = GuiTools.GAME_ROUND_HEADER_PAINTINGS;
+					name = GuiTools.GAME_ROUND_DESCRIPTION_POINTS_DATA_PAINTINGS;
 					break;					
 				case TIME:
-					name = GuiTools.GAME_ROUND_HEADER_TIME;
+					name = GuiTools.GAME_ROUND_DESCRIPTION_POINTS_DATA_TIME;
 					break;					
 			}
-			BufferedImage icon = GuiTools.getIcon(name);
-			String tooltip = configuration.getLanguage().getText(name+"Tooltip");
-			dt.add(icon);
+			image = GuiTools.getIcon(name);
+			tooltip = configuration.getLanguage().getText(name+GuiTools.TOOLTIP);
+			dt.add(image);
 			tt.add(tooltip);
 		}
 		// others
@@ -621,7 +624,7 @@ public class RoundDescription extends EntitledDataPanel
 			// icon
 			//BufferedImage icon = GuiTools.getIcon(GuiTools.GAME_ROUND_HEADER_PARTIAL);
 			String icon = "-";
-			String tooltip = configuration.getLanguage().getText(GuiTools.GAME_ROUND_HEADER_PARTIAL+"Tooltip");
+			String tooltip = configuration.getLanguage().getText(GuiTools.GAME_ROUND_DESCRIPTION_POINTS_DATA_PARTIAL+GuiTools.TOOLTIP);
 			dt.add(icon);
 			tt.add(tooltip);
 			// text
@@ -633,7 +636,7 @@ public class RoundDescription extends EntitledDataPanel
 	
 	private JPanel makeLimitsPanel(int width, int height)
 	{	// init
-		String id = GuiTools.GAME_ROUND_HEADER_LIMITS;
+		String id = GuiTools.GAME_ROUND_DESCRIPTION_LIMIT_TITLE;
 		int colGrps[] = {1,2};
 		int lns[] = {8, 8};
 		ArrayList<ArrayList<Object>> data = new ArrayList<ArrayList<Object>>();
@@ -662,49 +665,49 @@ public class RoundDescription extends EntitledDataPanel
 			String value = null;
 			if(limit instanceof LimitTime)
 			{	LimitTime l = (LimitTime)limit;
-				iconName = GuiTools.GAME_ROUND_LIMIT_TIME;
+				iconName = GuiTools.GAME_ROUND_DESCRIPTION_LIMIT_HEADER_TIME;
 				value = StringTools.formatTimeWithSeconds(l.getLimit());
 			}
 			else if(limit instanceof LimitPoints)
 			{	LimitPoints l = (LimitPoints)limit;
-				iconName = GuiTools.GAME_ROUND_LIMIT_POINTS;
+				iconName = GuiTools.GAME_ROUND_DESCRIPTION_LIMIT_HEADER_CUSTOM;
 				value = nf.format(l.getLimit());
 			}
 			else if(limit instanceof LimitScore)
 			{	LimitScore l = (LimitScore) limit;
 				switch(l.getScore())
 				{	case BOMBS:
-						iconName = GuiTools.GAME_ROUND_LIMIT_BOMBS;
+						iconName = GuiTools.GAME_ROUND_DESCRIPTION_LIMIT_HEADER_BOMBS;
 						value = nf.format(l.getLimit());
 						break;
 					case CROWNS:
-						iconName = GuiTools.GAME_ROUND_LIMIT_CROWNS;
+						iconName = GuiTools.GAME_ROUND_DESCRIPTION_LIMIT_HEADER_CROWNS;
 						value = nf.format(l.getLimit());
 						break;
 					case DEATHS:
-						iconName = GuiTools.GAME_ROUND_LIMIT_DEATHS;
+						iconName = GuiTools.GAME_ROUND_DESCRIPTION_LIMIT_HEADER_DEATHS;
 						value = nf.format(l.getLimit());
 						break;
 					case ITEMS:
-						iconName = GuiTools.GAME_ROUND_LIMIT_ITEMS;
+						iconName = GuiTools.GAME_ROUND_DESCRIPTION_LIMIT_HEADER_ITEMS;
 						value = nf.format(l.getLimit());
 						break;
 					case KILLS:
-						iconName = GuiTools.GAME_ROUND_LIMIT_KILLS;
+						iconName = GuiTools.GAME_ROUND_DESCRIPTION_LIMIT_HEADER_KILLS;
 						value = nf.format(l.getLimit());
 						break;
 					case PAINTINGS:
-						iconName = GuiTools.GAME_ROUND_LIMIT_PAINTINGS;
+						iconName = GuiTools.GAME_ROUND_DESCRIPTION_LIMIT_HEADER_PAINTINGS;
 						value = nf.format(l.getLimit());
 						break;
 					case TIME:
-						iconName = GuiTools.GAME_ROUND_LIMIT_TIME;
+						iconName = GuiTools.GAME_ROUND_DESCRIPTION_LIMIT_HEADER_TIME;
 						value = nf.format(l.getLimit());
 						break;
 				}
 			}
 			// lists
-			String tooltip = getConfiguration().getLanguage().getText(iconName+"Tooltip");
+			String tooltip = getConfiguration().getLanguage().getText(iconName+GuiTools.TOOLTIP);
 			ArrayList<Object> dt = new ArrayList<Object>();
 			data.add(dt);
 			ArrayList<String> tt = new ArrayList<String>();

@@ -59,15 +59,15 @@ public class MainMenu extends SimpleMenuPanel
 		
 		// buttons
 		add(Box.createVerticalGlue());
-		buttonOptions = GuiTools.createPrincipalVerticalMenuButton(GuiTools.MAIN_MENU_BUTTON_OPTIONS,this,getConfiguration());
+		buttonOptions = GuiTools.createPrincipalVerticalMenuButton(GuiTools.MENU_MAIN_BUTTON_OPTIONS,this,getConfiguration());
 		add(Box.createRigidArea(new Dimension(0,GuiTools.getSize(GuiTools.MENU_VERTICAL_BUTTON_SPACE))));
-		buttonProfiles = GuiTools.createPrincipalVerticalMenuButton(GuiTools.MAIN_MENU_BUTTON_PROFILES,this,getConfiguration());
-		buttonStats = GuiTools.createPrincipalVerticalMenuButton(GuiTools.MAIN_MENU_BUTTON_STATISTICS,this,getConfiguration());
-		buttonHeroes = GuiTools.createPrincipalVerticalMenuButton(GuiTools.MAIN_MENU_BUTTON_HEROES,this,getConfiguration());
-		buttonLevels = GuiTools.createPrincipalVerticalMenuButton(GuiTools.MAIN_MENU_BUTTON_LEVELS,this,getConfiguration());
+		buttonProfiles = GuiTools.createPrincipalVerticalMenuButton(GuiTools.MENU_MAIN_BUTTON_PROFILES,this,getConfiguration());
+		buttonStats = GuiTools.createPrincipalVerticalMenuButton(GuiTools.MENU_MAIN_BUTTON_STATISTICS,this,getConfiguration());
+		buttonHeroes = GuiTools.createPrincipalVerticalMenuButton(GuiTools.MENU_MAIN_BUTTON_HEROES,this,getConfiguration());
+		buttonLevels = GuiTools.createPrincipalVerticalMenuButton(GuiTools.MENU_MAIN_BUTTON_LEVELS,this,getConfiguration());
 		add(Box.createRigidArea(new Dimension(0,GuiTools.getSize(GuiTools.MENU_VERTICAL_BUTTON_SPACE))));
 		buttonTournament = GuiTools.createPrincipalVerticalMenuButton(GuiTools.MAIN_MENU_BUTTON_TOURNAMENT,this,getConfiguration());
-		buttonQuickMatch = GuiTools.createPrincipalVerticalMenuButton(GuiTools.MAIN_MENU_BUTTON_QUICKMATCH,this,getConfiguration());
+		buttonQuickMatch = GuiTools.createPrincipalVerticalMenuButton(GuiTools.MENU_MAIN_BUTTON_QUICKMATCH,this,getConfiguration());
 		add(Box.createVerticalGlue());		
 	}
 	
@@ -78,25 +78,25 @@ public class MainMenu extends SimpleMenuPanel
 	
 	public void actionPerformed(ActionEvent e)
 	{	System.out.println(e.getActionCommand());
-		if(e.getActionCommand().equals(GuiTools.MAIN_MENU_BUTTON_OPTIONS))
+		if(e.getActionCommand().equals(GuiTools.MENU_MAIN_BUTTON_OPTIONS))
 		{	replaceWith(optionsMenuPanel);
 	    }
-		else if(e.getActionCommand().equals(GuiTools.MAIN_MENU_BUTTON_PROFILES))
+		else if(e.getActionCommand().equals(GuiTools.MENU_MAIN_BUTTON_PROFILES))
 		{	
 	    }
-		else if(e.getActionCommand().equals(GuiTools.MAIN_MENU_BUTTON_STATISTICS))
+		else if(e.getActionCommand().equals(GuiTools.MENU_MAIN_BUTTON_STATISTICS))
 		{	
 	    }
-		else if(e.getActionCommand().equals(GuiTools.MAIN_MENU_BUTTON_HEROES))
+		else if(e.getActionCommand().equals(GuiTools.MENU_MAIN_BUTTON_HEROES))
 		{	
 	    }
-		else if(e.getActionCommand().equals(GuiTools.MAIN_MENU_BUTTON_LEVELS))
+		else if(e.getActionCommand().equals(GuiTools.MENU_MAIN_BUTTON_LEVELS))
 		{	
 	    }
 		else if(e.getActionCommand().equals(GuiTools.MAIN_MENU_BUTTON_TOURNAMENT))
 		{	replaceWith(tournamentMainPanel);
 	    }
-		else if(e.getActionCommand().equals(GuiTools.MAIN_MENU_BUTTON_QUICKMATCH))
+		else if(e.getActionCommand().equals(GuiTools.MENU_MAIN_BUTTON_QUICKMATCH))
 		{	
 	    }
 	}

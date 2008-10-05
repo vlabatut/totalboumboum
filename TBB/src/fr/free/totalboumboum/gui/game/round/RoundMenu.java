@@ -79,20 +79,20 @@ public class RoundMenu extends InnerMenuPanel implements RoundRenderPanel
 		setPreferredSize(new Dimension(width,height));
 		
 		// buttons
-		buttonQuit = GuiTools.createHorizontalMenuButton(GuiTools.ROUND_BUTTON_QUIT,this,getConfiguration());
+		buttonQuit = GuiTools.createHorizontalMenuButton(GuiTools.GAME_ROUND_BUTTON_QUIT,this,getConfiguration());
 		add(Box.createHorizontalGlue());
-		buttonMatch = GuiTools.createHorizontalMenuButton(GuiTools.ROUND_BUTTON_CURRENT_MATCH,this,getConfiguration());
+		buttonMatch = GuiTools.createHorizontalMenuButton(GuiTools.GAME_ROUND_BUTTON_CURRENT_MATCH,this,getConfiguration());
 		add(Box.createRigidArea(new Dimension(GuiTools.getSize(GuiTools.MENU_HORIZONTAL_BUTTON_SPACE),0)));
 	    ButtonGroup group = new ButtonGroup();
-		buttonDescription = GuiTools.createHorizontalMenuToggleButton(GuiTools.ROUND_BUTTON_DESCRIPTION,this,getConfiguration());
+		buttonDescription = GuiTools.createHorizontalMenuToggleButton(GuiTools.GAME_ROUND_BUTTON_DESCRIPTION,this,getConfiguration());
 		buttonDescription.setSelected(true);
 	    group.add(buttonDescription);
-		buttonResults = GuiTools.createHorizontalMenuToggleButton(GuiTools.ROUND_BUTTON_RESULTS,this,getConfiguration());
+		buttonResults = GuiTools.createHorizontalMenuToggleButton(GuiTools.GAME_ROUND_BUTTON_RESULTS,this,getConfiguration());
 	    group.add(buttonResults);
-		buttonStatistics = GuiTools.createHorizontalMenuToggleButton(GuiTools.ROUND_BUTTON_STATISTICS,this,getConfiguration());
+		buttonStatistics = GuiTools.createHorizontalMenuToggleButton(GuiTools.GAME_ROUND_BUTTON_STATISTICS,this,getConfiguration());
 	    group.add(buttonStatistics);
 		add(Box.createRigidArea(new Dimension(GuiTools.getSize(GuiTools.MENU_HORIZONTAL_BUTTON_SPACE),0)));
-		buttonPlay = GuiTools.createHorizontalMenuButton(GuiTools.ROUND_BUTTON_PLAY,this,getConfiguration());
+		buttonPlay = GuiTools.createHorizontalMenuButton(GuiTools.GAME_ROUND_BUTTON_PLAY,this,getConfiguration());
 		
 		// panels
 		roundDescription = null;
@@ -110,30 +110,30 @@ public class RoundMenu extends InnerMenuPanel implements RoundRenderPanel
 	
 	public void actionPerformed(ActionEvent e)
 	{	System.out.println(e.getActionCommand());
-		if(e.getActionCommand().equals(GuiTools.ROUND_BUTTON_QUIT))
+		if(e.getActionCommand().equals(GuiTools.GAME_ROUND_BUTTON_QUIT))
 		{	getFrame().setMainMenuPanel();
 	    }
-		else if(e.getActionCommand().equals(GuiTools.ROUND_BUTTON_CURRENT_MATCH))
+		else if(e.getActionCommand().equals(GuiTools.GAME_ROUND_BUTTON_CURRENT_MATCH))
 		{	replaceWith(parent);
 	    }
-		else if(e.getActionCommand().equals(GuiTools.ROUND_BUTTON_FINISH))
+		else if(e.getActionCommand().equals(GuiTools.GAME_ROUND_BUTTON_FINISH))
 		{	Round round = getConfiguration().getCurrentRound();
 			round.finish();
 			replaceWith(parent);
 	    }
-		else if(e.getActionCommand().equals(GuiTools.ROUND_BUTTON_DESCRIPTION))
+		else if(e.getActionCommand().equals(GuiTools.GAME_ROUND_BUTTON_DESCRIPTION))
 		{	container.setDataPart(roundDescription);
 			dataPart = roundDescription;
 	    }
-		else if(e.getActionCommand().equals(GuiTools.ROUND_BUTTON_RESULTS))
+		else if(e.getActionCommand().equals(GuiTools.GAME_ROUND_BUTTON_RESULTS))
 		{	container.setDataPart(roundResults);
 			dataPart = roundResults;
 	    }
-		else if(e.getActionCommand().equals(GuiTools.ROUND_BUTTON_STATISTICS))
+		else if(e.getActionCommand().equals(GuiTools.GAME_ROUND_BUTTON_STATISTICS))
 		{	container.setDataPart(roundStatistics);
 			dataPart = roundStatistics;
 	    }
-		else if(e.getActionCommand().equals(GuiTools.ROUND_BUTTON_PLAY))
+		else if(e.getActionCommand().equals(GuiTools.GAME_ROUND_BUTTON_PLAY))
 		{	buttonPlay.setEnabled(false);
 			buttonQuit.setEnabled(false);
 			buttonMatch.setEnabled(false);
@@ -143,7 +143,7 @@ public class RoundMenu extends InnerMenuPanel implements RoundRenderPanel
 			Font font = getConfiguration().getFont().deriveFont((float)GuiTools.getSize(GuiTools.GAME_PROGRESSBAR_FONT_SIZE));
 			loadProgressBar.setFont(font);
 			loadProgressBar.setStringPainted(true); 
-			String text = getConfiguration().getLanguage().getText(GuiTools.ROUND_PROGRESSBAR_BOMBSET);
+			String text = getConfiguration().getLanguage().getText(GuiTools.GAME_ROUND_PROGRESSBAR_BOMBSET);
 			loadProgressBar.setString(text);
 			int width = Integer.MAX_VALUE;
 			int height = GuiTools.getSize(GuiTools.MENU_HORIZONTAL_BUTTON_HEIGHT);
@@ -194,13 +194,13 @@ public class RoundMenu extends InnerMenuPanel implements RoundRenderPanel
 		{	// play
 			buttonPlay.setEnabled(false);
 			// finish
-			GuiTools.setButtonContent(GuiTools.ROUND_BUTTON_FINISH, buttonMatch, getConfiguration());
+			GuiTools.setButtonContent(GuiTools.GAME_ROUND_BUTTON_FINISH, buttonMatch, getConfiguration());
 		}
 		else
 		{	// play
 			buttonPlay.setEnabled(true);
 			// match
-			GuiTools.setButtonContent(GuiTools.ROUND_BUTTON_CURRENT_MATCH, buttonMatch, getConfiguration());
+			GuiTools.setButtonContent(GuiTools.GAME_ROUND_BUTTON_CURRENT_MATCH, buttonMatch, getConfiguration());
 		}
 	} 
 
@@ -228,19 +228,19 @@ public class RoundMenu extends InnerMenuPanel implements RoundRenderPanel
 		switch(val)
 		{	// itemset
 			case 0:
-				text = getConfiguration().getLanguage().getText(GuiTools.ROUND_PROGRESSBAR_ITEMSET);
+				text = getConfiguration().getLanguage().getText(GuiTools.GAME_ROUND_PROGRESSBAR_ITEMSET);
 				loadProgressBar.setString(text);
 				loadProgressBar.repaint();
 				break;
 			// theme
 			case 1:
-				text = getConfiguration().getLanguage().getText(GuiTools.ROUND_PROGRESSBAR_THEME);
+				text = getConfiguration().getLanguage().getText(GuiTools.GAME_ROUND_PROGRESSBAR_THEME);
 				loadProgressBar.setString(text);
 				loadProgressBar.repaint();
 				break;
 			// zone
 			case 2:
-				text = getConfiguration().getLanguage().getText(GuiTools.ROUND_PROGRESSBAR_ZONE);
+				text = getConfiguration().getLanguage().getText(GuiTools.GAME_ROUND_PROGRESSBAR_ZONE);
 				loadProgressBar.setString(text);
 				loadProgressBar.repaint();
 				break;
@@ -248,7 +248,7 @@ public class RoundMenu extends InnerMenuPanel implements RoundRenderPanel
 			default:
 				Round round = getConfiguration().getCurrentRound();
 				if(val==round.getProfiles().size()+3)
-				{	text = getConfiguration().getLanguage().getText(GuiTools.ROUND_PROGRESSBAR_COMPLETE);
+				{	text = getConfiguration().getLanguage().getText(GuiTools.GAME_ROUND_PROGRESSBAR_COMPLETE);
 					loadProgressBar.setString(text);
 					loadProgressBar.repaint();
 					loopPanel = new LoopPanel(container.getContainer(),container);
@@ -256,7 +256,7 @@ public class RoundMenu extends InnerMenuPanel implements RoundRenderPanel
 					loopPanel.start();
 				}
 				else
-				{	text = getConfiguration().getLanguage().getText(GuiTools.ROUND_PROGRESSBAR_PLAYER)+" "+(val-2);
+				{	text = getConfiguration().getLanguage().getText(GuiTools.GAME_ROUND_PROGRESSBAR_PLAYER)+" "+(val-2);
 					loadProgressBar.setString(text);
 					loadProgressBar.repaint();
 				}
