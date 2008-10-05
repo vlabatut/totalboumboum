@@ -98,7 +98,7 @@ public class EntitledSubPanelTable extends EntitledSubPanel
 						fg = GuiTools.COLOR_TABLE_HEADER_FOREGROUND;
 					}
 					else
-					{	bg = GuiTools.COLOR_TABLE_NEUTRAL_BACKGROUND;
+					{	bg = GuiTools.COLOR_TABLE_REGULAR_BACKGROUND;
 						fg = GuiTools.COLOR_TABLE_REGULAR_FOREGROUND;
 					}
 					lbl.setBackground(bg);
