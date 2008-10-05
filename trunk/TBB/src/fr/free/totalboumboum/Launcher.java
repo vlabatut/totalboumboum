@@ -706,6 +706,8 @@ public class Launcher
 	 * - Modification	: changement d'icône pour les points, les stats et les points custom
 	 * - Modification	: centrage de la fenêtre principale à la création
 	 * 
+	 * + alpha.45
+	 * 
 	 * *******************************************************
 	 * *********************** A FAIRE ***********************
 	 * *******************************************************
