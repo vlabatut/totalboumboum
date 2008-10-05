@@ -1,18 +1,93 @@
 package fr.free.totalboumboum;
 
+import java.awt.AlphaComposite;
+import java.awt.BorderLayout;
+import java.awt.Color;
+import java.awt.Dimension;
+import java.awt.Font;
+import java.awt.Graphics;
+import java.awt.Graphics2D;
+import java.awt.Rectangle;
+import java.awt.SplashScreen;
 import java.io.IOException;
 
+import javax.swing.SwingUtilities;
 import javax.xml.parsers.ParserConfigurationException;
 
 import org.xml.sax.SAXException;
 
+import fr.free.totalboumboum.data.configuration.Configuration;
+import fr.free.totalboumboum.data.configuration.ConfigurationLoader;
+import fr.free.totalboumboum.gui.data.configuration.GuiConfiguration;
+import fr.free.totalboumboum.gui.data.configuration.GuiConfigurationLoader;
 import fr.free.totalboumboum.gui.menus.main.MainFrame;
+import fr.free.totalboumboum.gui.tools.GuiTools;
+import fr.free.totalboumboum.tools.XmlTools;
 
 public class Launcher
 {	
 
 	public static void main(String args[]) throws ParserConfigurationException, SAXException, IOException, IllegalArgumentException, SecurityException, IllegalAccessException, NoSuchFieldException, ClassNotFoundException
-	{	new MainFrame();
+	{	
+		// splashscreen
+		SplashScreen splash = SplashScreen.getSplashScreen();
+		Graphics2D g = (Graphics2D)splash.createGraphics();
+		
+		// init
+		updateSplash(splash,"Loading XML schemas");
+		XmlTools.init();
+		updateSplash(splash,"Loading configuration");
+		Configuration config = ConfigurationLoader.loadConfiguration();
+		updateSplash(splash,"Loading GUI");
+		final GuiConfiguration configuration = GuiConfigurationLoader.loadConfiguration(config);
+		updateSplash(splash,"Initializing GUI");
+		GuiTools.init(configuration,g);
+		updateSplash(splash,"Done");
+		
+		// create GUI
+		SwingUtilities.invokeLater(new Runnable()
+		{	public void run()
+			{	try
+				{	new MainFrame(configuration);
+				}
+				catch (IllegalArgumentException e)
+				{	e.printStackTrace();
+				}
+				catch (SecurityException e)
+				{	e.printStackTrace();
+				}
+				catch (ParserConfigurationException e)
+				{	e.printStackTrace();
+				}
+				catch (SAXException e)
+				{	e.printStackTrace();
+				}
+				catch (IOException e)
+				{	e.printStackTrace();
+				}
+				catch (IllegalAccessException e)
+				{	e.printStackTrace();
+				}
+				catch (NoSuchFieldException e)
+				{	e.printStackTrace();
+				}
+				catch (ClassNotFoundException e)
+				{	e.printStackTrace();
+				}
+			}
+		});		
+	}
+	
+	private static void updateSplash(SplashScreen splash, String msg)
+	{	Graphics2D g = (Graphics2D)splash.createGraphics();
+		Rectangle size = splash.getBounds();
+		g.setComposite(AlphaComposite.Clear);
+		g.fillRect(0,0,size.width,size.height);
+		g.setPaintMode();
+		g.setColor(new Color(204,18,128));
+		g.setFont(new Font("Arial",Font.PLAIN,10));
+        g.drawString(msg,70,315);
+        splash.update();
 	}
 	
 // **********************************************************
@@ -626,7 +701,10 @@ public class Launcher
 	 * - Nouveauté		: niveau plus petit pour tester la nouvelle IA
 	 * - Nouveauté		: système pour controler que le thread d'une IA ne reste pas bloqué dans une bloucle infinite (ou autre)
 	 * - Modification	: plus d'icones dans la GUI notamment pour les points processors
-	 * - Nouveauté		: splash screen
+	 * - Nouveauté		: création d'un splash screen, qui énumére les étapes d'initialisation et permet d'avoir un Graphics pour l'init de la GUI avant de faire apparaître le frame
+	 * - Modification	: meilleure décomposition du fichier de langue, en plusieurs sections plus lisibles
+	 * - Modification	: changement d'icône pour les points, les stats et les points custom
+	 * - Modification	: centrage de la fenêtre principale à la création
 	 * 
 	 * *******************************************************
 	 * *********************** A FAIRE ***********************
@@ -640,7 +718,6 @@ public class Launcher
 	 * - redistribution des items lors de la mort d'un joueur (option de round?)
 	 * - possibilité de bloquer certains items (on ne les perd pas lorsqu'on meurt)
 	 * 
-	 * - centrer frame
 	 * 
 	 * - tournoi simple
 	 * 
@@ -650,16 +727,16 @@ public class Launcher
 	 * - possibilité de choisir entre le fait que le match s'arrête dès que tout le monde est mort sauf 1, ou dernière flamme terminée
 	 * - feature lié au précédent : gagner plus de points si on finit effetivement le jeu que si on a un time out ou un entre-tuage
 	 * 
+	 * - redescendre les stats dans loop, et gestion de fin de partie et tout ce qui est en fait directement lié au moteur
+	 * - en fait tout le calcul de points dans les stats est à déplacer dans les rounds/matches, etc 
+	 * 
 	 * - possibilité de donner des noms aux matches et aux rounds
 	 * - la bombe en panne ne doit plus bouger !
 	 * - utiliser les tooltips pour afficher les infos trop longues : calcul de points, nombre à virgule dans la colonne des points (décimales cachées), etc.
 	 * - problème de collisions quand on change la vitesse (surement un problème d'arrondi, ou alors un saut trop grand (en distance), voir si j'avais implémenté la maximalisation du déplacement malgré une éventuelle collision...)
-	 * - redescendre les stats dans loop, et gestion de fin de partie et tout ce qui est en fait directement lié au moteur
-	 * - en fait tout le calcul de points dans les stats est à déplacer dans les rounds/matches, etc 
 	 * - pb de dimension de l'image de fond en fonction de la résolution... (zones pas peintes)
 	 * - results panel : quand il y a trop de rounds dans un match pour que ça rentre à l'écran, ne pas tout afficher
 	 * - vérifier le temps de latence des bombes, ça me parait un peu trop rapide
-	 * - décomposer le fichier de langue en plusieurs sections plus lisibles
 	 * - faire un paramètre dans les rounds qui permet de déterminer s'ils sont compatibles avec le tournoi 2007-08
 	 * - tournoi : 1) on choisit les paramètres 2) on choisit les joueurs, le jeu restreint leur nombre pr qu'il soit compatible avec le tournoi, et restreint aussi les IA pour les mêmes raisons
 	 * - mettre une icone spéciale pour différencier les humains et les IA, ds présentation et résultats
@@ -668,7 +745,6 @@ public class Launcher
 	 * 		- afficher par défaut les 4 scores de bases
 	 * 		- plus les scores utilisés dans les points et/ou les limites
 	 * 		- si les limites utilisent des points custom, les afficher aussi
-	 * 		- utiliser l'icone calculatrice pour les points normaux et le boulier pour les custom
 	 * -------------------------------------------------------------------
 	 * - gérer le shrink
 	 * - mode plein écran

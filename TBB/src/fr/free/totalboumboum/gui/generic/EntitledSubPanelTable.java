@@ -18,7 +18,7 @@ import fr.free.totalboumboum.tools.ImageTools;
 public class EntitledSubPanelTable extends EntitledSubPanel
 {	private static final long serialVersionUID = 1L;
 
-	public EntitledSubPanelTable(int width, int height, String id, int colGrps[], int lns[], ArrayList<ArrayList<Object>> data, ArrayList<ArrayList<String>> tooltips, GuiConfiguration configuration)
+	public EntitledSubPanelTable(int width, int height, String id, int colGrps[], int lns[], ArrayList<ArrayList<Object>> data, ArrayList<ArrayList<String>> tooltips, GuiConfiguration configuration, boolean firstColIsDark, boolean firstColIsSquared)
 	{	super(width,height,configuration);
 
 		// title
@@ -48,7 +48,6 @@ public class EntitledSubPanelTable extends EntitledSubPanel
 		int lineHeight = (height-margin*(lines+1))/lines;
 		float fontSize = GuiTools.getFontSize(lineHeight*0.8, configuration);
 		Font regularFont = configuration.getFont().deriveFont((float)fontSize);
-		boolean firstIcon = data.get(0).get(0) instanceof BufferedImage;
 		
 		int maxWidth = (width - margin*(columns+1) - columnGroups*lineHeight)/columnGroups;
 		// empty
@@ -58,7 +57,7 @@ public class EntitledSubPanelTable extends EntitledSubPanel
 				JLabel lbl = tablePanel.getLabel(line,col+0);
 				lbl.setFont(regularFont);
 				lbl.setText(null);
-				if(firstIcon)
+				if(firstColIsSquared)
 				{	lbl.setPreferredSize(new Dimension(lineHeight,lineHeight));
 					lbl.setMaximumSize(new Dimension(lineHeight,lineHeight));
 				}
@@ -66,11 +65,13 @@ public class EntitledSubPanelTable extends EntitledSubPanel
 					lbl.setMaximumSize(new Dimension(maxWidth,lineHeight));
 				lbl.setMinimumSize(new Dimension(lineHeight,lineHeight));
 				// text
-				lbl = tablePanel.getLabel(line,col+1);
-				lbl.setFont(regularFont);
-				lbl.setText(null);
-				lbl.setMaximumSize(new Dimension(maxWidth,lineHeight));
-				lbl.setMinimumSize(new Dimension(lineHeight,lineHeight));
+				for(int i=1;i<subColumns;i++)
+				{	lbl = tablePanel.getLabel(line,col+i);
+					lbl.setFont(regularFont);
+					lbl.setText(null);
+					lbl.setMaximumSize(new Dimension(maxWidth,lineHeight));
+					lbl.setMinimumSize(new Dimension(lineHeight,lineHeight));
+				}
 			}
 		}
 		
@@ -91,6 +92,17 @@ public class EntitledSubPanelTable extends EntitledSubPanel
 				int c = 0;
 				while(i2.hasNext())
 				{	JLabel lbl = tablePanel.getLabel(baseLine,baseCol+c);
+					Color bg,fg;
+					if(firstColIsDark && c==0)
+					{	bg = GuiTools.COLOR_TABLE_HEADER_BACKGROUND;
+						fg = GuiTools.COLOR_TABLE_HEADER_FOREGROUND;
+					}
+					else
+					{	bg = GuiTools.COLOR_TABLE_NEUTRAL_BACKGROUND;
+						fg = GuiTools.COLOR_TABLE_REGULAR_FOREGROUND;
+					}
+					lbl.setBackground(bg);
+					lbl.setForeground(fg);
 					c++;
 					Object o = i2.next();
 					tooltip = j2.next();
@@ -106,15 +118,11 @@ public class EntitledSubPanelTable extends EntitledSubPanel
 						image = ImageTools.resize(image,zoom,true);
 						ImageIcon ic = new ImageIcon(image);
 						lbl.setIcon(ic);
-						Color bg = GuiTools.COLOR_TABLE_HEADER_BACKGROUND;
-						lbl.setBackground(bg);
 					}
 					else
 					// value
 					{	String txt = (String)o;
 						lbl.setText(txt);
-						Color bg = GuiTools.COLOR_TABLE_REGULAR_BACKGROUND;
-						lbl.setBackground(bg);
 					}	
 				}
 			}

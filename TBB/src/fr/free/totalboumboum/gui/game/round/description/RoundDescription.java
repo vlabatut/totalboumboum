@@ -288,7 +288,7 @@ public class RoundDescription extends EntitledDataPanel
 			tt.add(tooltip);			
 		}			
 
-		EntitledSubPanel itemsetPanel = new EntitledSubPanelTable(width,height,id,colGrps,lns,data,tooltips,getConfiguration());
+		EntitledSubPanel itemsetPanel = new EntitledSubPanelTable(width,height,id,colGrps,lns,data,tooltips,getConfiguration(),true,true);
 		return itemsetPanel;
 	}
 
@@ -336,7 +336,7 @@ public class RoundDescription extends EntitledDataPanel
 			tt.add(texts[i]);
 		}		
 		
-		EntitledSubPanelTable miscPanel = new EntitledSubPanelTable(width,height,id,colGrps,lns,data,tooltips,getConfiguration());
+		EntitledSubPanelTable miscPanel = new EntitledSubPanelTable(width,height,id,colGrps,lns,data,tooltips,getConfiguration(),true,true);
 		return miscPanel;
 	}
 
@@ -385,7 +385,7 @@ public class RoundDescription extends EntitledDataPanel
 		}			
 		
 		// result
-		EntitledSubPanelTable itemsPanel = new EntitledSubPanelTable(width,height,id,colGrps,lns,data,tooltips,getConfiguration());
+		EntitledSubPanelTable itemsPanel = new EntitledSubPanelTable(width,height,id,colGrps,lns,data,tooltips,getConfiguration(),true,true);
 		return itemsPanel;
 	}
 
@@ -410,7 +410,7 @@ public class RoundDescription extends EntitledDataPanel
 		int colGrps[] = {1};
 		int lns[] = {n};
 
-		EntitledSubPanelTable pointsPanel = new EntitledSubPanelTable(width,height,id,colGrps,lns,data,tooltips,getConfiguration());
+		EntitledSubPanelTable pointsPanel = new EntitledSubPanelTable(width,height,id,colGrps,lns,data,tooltips,getConfiguration(),true,false);
 		return pointsPanel;
 	}
 	public static void makePointsPanelRec(PointsProcessor pp, ArrayList<ArrayList<Object>> data, ArrayList<ArrayList<String>> tooltips, GuiConfiguration configuration)
@@ -456,7 +456,7 @@ public class RoundDescription extends EntitledDataPanel
 				for(int i=0;i<values.length;i++)
 				{	String nbr = "#"+(i+1); 
 					String value = nf.format(values[i]);
-					String tooltip = nbr+new Character('\u2192').toString()+value;
+					String tooltip = nbr+new Character('\u2192').toString()+value+"pts";
 					ArrayList<Object> dt = new ArrayList<Object>();
 					ArrayList<String> tt = new ArrayList<String>();
 					data.add(dt);
@@ -721,7 +721,7 @@ public class RoundDescription extends EntitledDataPanel
 		}			
 			
 		// result
-		EntitledSubPanelTable limitsPanel = new EntitledSubPanelTable(width,height,id,colGrps,lns,data,tooltips,getConfiguration());
+		EntitledSubPanelTable limitsPanel = new EntitledSubPanelTable(width,height,id,colGrps,lns,data,tooltips,getConfiguration(),true,true);
 		return limitsPanel;
 	}
 

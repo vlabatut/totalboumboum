@@ -225,7 +225,7 @@ public class SequenceDescription extends TournamentDescription
 		int colGrps[] = {1};
 		int lns[] = {n};
 
-		EntitledSubPanelTable pointsPanel = new EntitledSubPanelTable(width,height,id,colGrps,lns,data,tooltips,getConfiguration());
+		EntitledSubPanelTable pointsPanel = new EntitledSubPanelTable(width,height,id,colGrps,lns,data,tooltips,getConfiguration(),true,false);
 		return pointsPanel;
 	}
 	
@@ -321,7 +321,7 @@ public class SequenceDescription extends TournamentDescription
 		}			
 			
 		// result
-		EntitledSubPanelTable limitsPanel = new EntitledSubPanelTable(width,height,id,colGrps,lns,data,tooltips,getConfiguration());
+		EntitledSubPanelTable limitsPanel = new EntitledSubPanelTable(width,height,id,colGrps,lns,data,tooltips,getConfiguration(),true,true);
 		return limitsPanel;
 	}
 }

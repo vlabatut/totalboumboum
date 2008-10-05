@@ -27,6 +27,7 @@ import fr.free.totalboumboum.tools.XmlTools;
 
 import java.awt.BorderLayout;
 import java.awt.Container;
+import java.awt.Dimension;
 import java.awt.Image;
 import java.awt.Toolkit;
 import java.awt.event.WindowEvent;
@@ -39,46 +40,37 @@ public class MainFrame extends JFrame implements WindowListener,MenuContainer
 
 	private MainMenu mainMenuPanel;
 
-	public MainFrame() throws ParserConfigurationException, SAXException, IOException, IllegalArgumentException, SecurityException, IllegalAccessException, NoSuchFieldException, ClassNotFoundException
-	{	super("TBB v."+GameConstants.VERSION);
-		// init
-//		System.setProperty("swing.aatext", "true");			
-		XmlTools.init();
-		this.configuration = loadConfiguration();
-		// frame
+	public MainFrame(GuiConfiguration configuration) throws ParserConfigurationException, SAXException, IOException, IllegalArgumentException, SecurityException, IllegalAccessException, NoSuchFieldException, ClassNotFoundException
+	{	// init
+		super("TBB v."+GameConstants.VERSION);
+		this.configuration = configuration;
+		// listener
 		addWindowListener(this);
-		// icon
+		// set icon
 		String iconPath = GuiFileTools.getIconsPath()+File.separator+GuiFileTools.FILE_FRAME;
 		Image icon = Toolkit.getDefaultToolkit().getImage(iconPath);
 		setIconImage(icon);
-		// dimensions
+		// set dimensions
 		setMinimumSize(getConfiguration().getGameConfiguration().getPanelDimension());
 		setResizable(false);
-		setVisible(true);
 		//
 		UIManager.put("MenuItemUI","CustomMenuItemUI");
 		RepaintManager.setCurrentManager(new FullRepaintManager());
-
-		//
+		// put panel
+		mainMenuPanel = new MainMenu(this,null);
+		currentPanel = mainMenuPanel;
+		getContentPane().add(mainMenuPanel, BorderLayout.CENTER);
+		// size the frame
 		pack();
-
-		final MainFrame f = this;
-		SwingUtilities.invokeLater(new Runnable()
-		{	public void run()
-			{	// end init
-				GuiTools.init(configuration,getGraphics());
-				// panel
-				try
-				{	mainMenuPanel = new MainMenu(f,null);
-				}
-				catch (Exception e)
-				{	e.printStackTrace();
-				}
-				currentPanel = mainMenuPanel;
-				getContentPane().add(mainMenuPanel, BorderLayout.CENTER);
-				pack();
-			}
-		});		
+		// center the frame
+	    Toolkit tk = Toolkit.getDefaultToolkit();
+	    Dimension screenSize = tk.getScreenSize();
+	    int screenHeight = screenSize.height;
+	    int screenWidth = screenSize.width;
+	    setLocation((screenWidth-getSize().width)/2,(screenHeight-getSize().height)/2);
+		// show the frame
+		setVisible(true);
+        toFront();
 	}
 
 	// ----------------- window listener methods -------------
@@ -129,11 +121,6 @@ public class MainFrame extends JFrame implements WindowListener,MenuContainer
 	{	return configuration;
 	}
 
-	private GuiConfiguration loadConfiguration() throws IllegalArgumentException, SecurityException, ParserConfigurationException, SAXException, IOException, IllegalAccessException, NoSuchFieldException, ClassNotFoundException
-	{	GuiConfiguration result = GuiConfigurationLoader.loadConfiguration();
-		return result;
-	}
-	
 	private void saveConfiguration()
 	{	ConfigurationSaver.saveConfiguration();
 	}
