@@ -25,7 +25,7 @@ public class MatchStatistics extends EntitledDataPanel
 	{	super(container);
 
 		// title
-		String txt = getConfiguration().getLanguage().getText(GuiTools.GAME_MATCH_TITLE_STATISTICS);
+		String txt = getConfiguration().getLanguage().getText(GuiTools.GAME_MATCH_STATISTICS_TITLE);
 		setTitle(txt);
 
 	}

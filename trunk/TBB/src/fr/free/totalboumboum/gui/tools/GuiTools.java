@@ -26,159 +26,295 @@ import fr.free.totalboumboum.tools.ImageTools;
 
 public class GuiTools
 {	
-	// names
-	// MAIN MENU
-	public static final String MAIN_MENU_BUTTON_HEROES = "MainMenuButtonHeroes";
-	public static final String MAIN_MENU_BUTTON_LEVELS = "MainMenuButtonLevels";
-	public static final String MAIN_MENU_BUTTON_OPTIONS = "MainMenuButtonOptions";
-	public static final String MAIN_MENU_BUTTON_PROFILES = "MainMenuButtonProfiles";
-	public static final String MAIN_MENU_BUTTON_QUICKMATCH = "MainMenuButtonQuickMatch";
-	public static final String MAIN_MENU_BUTTON_STATISTICS = "MainMenuButtonStatistics";
-	public static final String MAIN_MENU_BUTTON_TOURNAMENT = "MainMenuButtonTournament";
+	public static final String TOOLTIP = "Tooltip";
 	
-	// OPTIONS MENU
-	public static final String OPTIONS_MENU_BUTTON_BACK = "OptionMenuButtonBack";
-	public static final String OPTIONS_MENU_BUTTON_GAMEPLAY = "OptionMenuButtonGamePlay";
-	public static final String OPTIONS_MENU_BUTTON_VIDEO = "OptionMenuButtonVideo";
+	/////////////////////////////////////////////////////////////////
+	// MENUS			/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	/* MAIN */ 
+	public static final String MENU_MAIN_BUTTON_HEROES = "MenuMainButtonHeroes";
+	public static final String MENU_MAIN_BUTTON_LEVELS = "MenuMainButtonLevels";
+	public static final String MENU_MAIN_BUTTON_OPTIONS = "MenuMainButtonOptions";
+	public static final String MENU_MAIN_BUTTON_PROFILES = "MenuMainButtonProfiles";
+	public static final String MENU_MAIN_BUTTON_QUICKMATCH = "MenuMainButtonQuickMatch";
+	public static final String MENU_MAIN_BUTTON_STATISTICS = "MenuMainButtonStatistics";
+	public static final String MAIN_MENU_BUTTON_TOURNAMENT = "MenuMainButtonTournament";
+	/* OPTIONS */
+	public static final String MENU_OPTIONS_BUTTON_BACK = "MenuOptionsButtonBack";
+	public static final String MENU_OPTIONS_BUTTON_GAMEPLAY = "MenuOptionsButtonGamePlay";
+	public static final String MENU_OPTIONS_BUTTON_VIDEO = "MenuOptionsButtonVideo";
+	/* TOURNAMENT */	
+	public static final String MENU_TOURNAMENT_BUTTON_BACK = "MenuTournamentButtonBack";
+	public static final String MENU_TOURNAMENT_BUTTON_CONTINUE = "MenuTournamentButtonContinue";
+	public static final String MENU_TOURNAMENT_BUTTON_LOAD = "MenuTournamentButtonLoad";
+	public static final String MENU_TOURNAMENT_BUTTON_NEW = "MenuTournamentButtonNew";
+	public static final String MENU_TOURNAMENT_BUTTON_PLAYERS = "MenuTournamentButtonPlayers";
+	public static final String MENU_TOURNAMENT_BUTTON_RULES = "MenuTournamentButtonRules";
+	public static final String MENU_TOURNAMENT_BUTTON_SAVE_AS = "MenuTournamentButtonSaveAs";
+	public static final String MENU_TOURNAMENT_BUTTON_START = "MenuTournamentButtonStart";
 
-	// TOURNAMENT MENU	
-	public static final String TOURNAMENT_MENU_BUTTON_BACK = "TournamentMenuButtonBack";
-	public static final String TOURNAMENT_MENU_BUTTON_CONTINUE = "TournamentMenuButtonContinue";
-	public static final String TOURNAMENT_MENU_BUTTON_LOAD = "TournamentMenuButtonLoad";
-	public static final String TOURNAMENT_MENU_BUTTON_NEW = "TournamentMenuButtonNew";
-	public static final String TOURNAMENT_MENU_BUTTON_PLAYERS = "TournamentMenuButtonPlayers";
-	public static final String TOURNAMENT_MENU_BUTTON_RULES = "TournamentMenuButtonRules";
-	public static final String TOURNAMENT_MENU_BUTTON_SAVE_AS = "TournamentMenuButtonSaveAs";
-	public static final String TOURNAMENT_MENU_BUTTON_START = "TournamentMenuButtonStart";
-
-	// TOURNAMENT PANEL
-	public static final String TOURNAMENT_BUTTON_QUIT = "TournamentButtonQuit";
-	public static final String TOURNAMENT_BUTTON_CURRENT_MATCH = "TournamentButtonCurrentMatch";
-	public static final String TOURNAMENT_BUTTON_DESCRIPTION = "TournamentButtonDescription";
-	public static final String TOURNAMENT_BUTTON_FINISH = "TournamentButtonFinish";
-	public static final String TOURNAMENT_BUTTON_MENU = "TournamentButtonMenu";
-	public static final String TOURNAMENT_BUTTON_NEXT_MATCH = "TournamentButtonNextMatch";
-	public static final String TOURNAMENT_BUTTON_RESULTS = "TournamentButtonResults";
-	public static final String TOURNAMENT_BUTTON_STATISTICS = "TournamentButtonStatistics";
+	/////////////////////////////////////////////////////////////////
+	// GAME TOURNAMENT	/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	/* BUTTONS */	
+	public static final String GAME_TOURNAMENT_BUTTON_QUIT = "GameTournamentButtonQuit";
+	public static final String GAME_TOURNAMENT_BUTTON_CURRENT_MATCH = "GameTournamentButtonCurrentMatch";
+	public static final String GAME_TOURNAMENT_BUTTON_DESCRIPTION = "GameTournamentButtonDescription";
+	public static final String GAME_TOURNAMENT_BUTTON_FINISH = "GameTournamentButtonFinish";
+	public static final String GAME_TOURNAMENT_BUTTON_MENU = "GameTournamentButtonMenu";
+	public static final String GAME_TOURNAMENT_BUTTON_NEXT_MATCH = "GameTournamentButtonNextMatch";
+	public static final String GAME_TOURNAMENT_BUTTON_RESULTS = "GameTournamentButtonResults";
+	public static final String GAME_TOURNAMENT_BUTTON_STATISTICS = "GameTournamentButtonStatistics";
+	/* DESCRIPTION */
+	public static final String GAME_TOURNAMENT_DESCRIPTION_TITLE = "GameTournamentDescriptionTitle";
+		/* LIMIT */
+		public static final String GAME_TOURNAMENT_DESCRIPTION_LIMIT_TITLE = "GameTournamentDescriptionLimitTitle";
+			/* HEADER */
+			public static final String GAME_TOURNAMENT_DESCRIPTION_LIMIT_HEADER_BOMBS = "GameTournamentDescriptionLimitHeaderBombs";
+			public static final String GAME_TOURNAMENT_DESCRIPTION_LIMIT_HEADER_CONFRONTATIONS = "GameTournamentDescriptionLimitHeaderConfrontations";
+			public static final String GAME_TOURNAMENT_DESCRIPTION_LIMIT_HEADER_CROWNS = "GameTournamentDescriptionLimitHeaderCrowns";
+			public static final String GAME_TOURNAMENT_DESCRIPTION_LIMIT_HEADER_CUSTOM = "GameTournamentDescriptionLimitHeaderCustom";
+			public static final String GAME_TOURNAMENT_DESCRIPTION_LIMIT_HEADER_DEATHS = "GameTournamentDescriptionLimitHeaderDeaths";
+			public static final String GAME_TOURNAMENT_DESCRIPTION_LIMIT_HEADER_ITEMS = "GameTournamentDescriptionLimitHeaderItems";
+			public static final String GAME_TOURNAMENT_DESCRIPTION_LIMIT_HEADER_KILLS = "GameTournamentDescriptionLimitHeaderKills";
+			public static final String GAME_TOURNAMENT_DESCRIPTION_LIMIT_HEADER_PAINTINGS = "GameTournamentDescriptionLimitHeaderPaintings";
+			public static final String GAME_TOURNAMENT_DESCRIPTION_LIMIT_HEADER_TIME = "GameTournamentDescriptionLimitHeaderTime";
+			public static final String GAME_TOURNAMENT_DESCRIPTION_LIMIT_HEADER_TOTAL = "GameTournamentDescriptionLimitHeaderTotal";
+		/* MISC */
+		public static final String GAME_TOURNAMENT_DESCRIPTION_MISC_TITLE = "GameTournamentDescriptionMiscTitle";
+		/* NOTES */
+		public static final String GAME_TOURNAMENT_DESCRIPTION_NOTES_TITLE = "GameTournamentDescriptionNotesTitle";
+		/* PLAYERS */
+			/* HEADER */
+			public static final String GAME_TOURNAMENT_DESCRIPTION_PLAYERS_HEADER_NAME = "GameTournamentDescriptionPlayersHeaderName";
+			public static final String GAME_TOURNAMENT_DESCRIPTION_PLAYERS_HEADER_RANK = "GameTournamentDescriptionPlayersHeaderRank";
+			/* DATA */
+			public static final String GAME_TOURNAMENT_DESCRIPTION_PLAYERS_DATA_COMPUTER = "GameTournamentDescriptionPlayersDataComputer";
+			public static final String GAME_TOURNAMENT_DESCRIPTION_PLAYERS_DATA_HUMAN = "GameTournamentDescriptionPlayersDataHuman";
+		/* POINTS */
+		public static final String GAME_TOURNAMENT_DESCRIPTION_POINTS_TITLE = "GameTournamentDescriptionPointsTitle";
+			/* HEADER */
+			public static final String GAME_TOURNAMENT_DESCRIPTION_POINTS_HEADER_CONSTANT = "GameTournamentDescriptionPointsHeaderConstant";
+			public static final String GAME_TOURNAMENT_DESCRIPTION_POINTS_HEADER_DISCRETIZE = "GameTournamentDescriptionPointsHeaderDiscretize";
+			public static final String GAME_TOURNAMENT_DESCRIPTION_POINTS_HEADER_PARTIAL = "GameTournamentDescriptionPointsHeaderPartial";
+			public static final String GAME_TOURNAMENT_DESCRIPTION_POINTS_HEADER_RANKINGS = "GameTournamentDescriptionPointsHeaderRankings";
+			public static final String GAME_TOURNAMENT_DESCRIPTION_POINTS_HEADER_RANKPOINTS = "GameTournamentDescriptionPointsHeaderRankpoints";
+			public static final String GAME_TOURNAMENT_DESCRIPTION_POINTS_HEADER_SCORE = "GameTournamentDescriptionPointsHeaderScore";
+			public static final String GAME_TOURNAMENT_DESCRIPTION_POINTS_HEADER_TOTAL = "GameTournamentDescriptionPointsHeaderTotal";
+			/* DATA */
+			public static final String GAME_TOURNAMENT_DESCRIPTION_POINTS_DATA_BOMBS = "GameTournamentDescriptionPointsDataBombs";
+			public static final String GAME_TOURNAMENT_DESCRIPTION_POINTS_DATA_CROWNS = "GameTournamentDescriptionPointsDataCrowns";
+			public static final String GAME_TOURNAMENT_DESCRIPTION_POINTS_DATA_DEATHS = "GameTournamentDescriptionPointsDataDeaths";
+			public static final String GAME_TOURNAMENT_DESCRIPTION_POINTS_DATA_INVERTED = "GameTournamentDescriptionPointsDataInverted";
+			public static final String GAME_TOURNAMENT_DESCRIPTION_POINTS_DATA_ITEMS = "GameTournamentDescriptionPointsDataItems";
+			public static final String GAME_TOURNAMENT_DESCRIPTION_POINTS_DATA_KILLS = "GameTournamentDescriptionPointsDataKills";
+			public static final String GAME_TOURNAMENT_DESCRIPTION_POINTS_DATA_NOSHARE = "GameTournamentDescriptionPointsDataNoshare";
+			public static final String GAME_TOURNAMENT_DESCRIPTION_POINTS_DATA_PAINTINGS = "GameTournamentDescriptionPointsDataPaintings";
+			public static final String GAME_TOURNAMENT_DESCRIPTION_POINTS_DATA_PARTIAL = "GameTournamentDescriptionPointsDataPartial";
+			public static final String GAME_TOURNAMENT_DESCRIPTION_POINTS_DATA_REGULAR = "GameTournamentDescriptionPointsDataRegular";
+			public static final String GAME_TOURNAMENT_DESCRIPTION_POINTS_DATA_SHARE = "GameTournamentDescriptionPointsDataShare";
+			public static final String GAME_TOURNAMENT_DESCRIPTION_POINTS_DATA_TIME = "GameTournamentDescriptionPointsDataTime";
+	/* RESULTS */
+	public static final String GAME_TOURNAMENT_RESULTS_TITLE = "GameTournamentResultsTitle";
+		/* HEADER */
+		public static final String GAME_TOURNAMENT_RESULTS_HEADER_BOMBS = "GameTournamentResultsHeaderBombs";
+		public static final String GAME_TOURNAMENT_RESULTS_HEADER_CROWNS = "GameTournamentResultsHeaderCrowns";
+		public static final String GAME_TOURNAMENT_RESULTS_HEADER_CUSTOM_LIMIT = "GameTournamentResultsHeaderCustomLimit";
+		public static final String GAME_TOURNAMENT_RESULTS_HEADER_CUSTOM_POINTS = "GameTournamentResultsHeaderCustomPoints";
+		public static final String GAME_TOURNAMENT_RESULTS_HEADER_DEATHS = "GameTournamentResultsHeaderDeaths";
+		public static final String GAME_TOURNAMENT_RESULTS_HEADER_ITEMS = "GameTournamentResultsHeaderItems";
+		public static final String GAME_TOURNAMENT_RESULTS_HEADER_KILLS = "GameTournamentResultsHeaderKills";
+		public static final String GAME_TOURNAMENT_RESULTS_HEADER_MATCH = "GameTournamentResultsHeaderMatch";
+		public static final String GAME_TOURNAMENT_RESULTS_HEADER_NAME = "GameTournamentResultsHeaderName";
+		public static final String GAME_TOURNAMENT_RESULTS_HEADER_PAINTINGS = "GameTournamentResultsHeaderPaintings";
+		public static final String GAME_TOURNAMENT_RESULTS_HEADER_POINTS = "GameTournamentResultsHeaderPoints";
+		public static final String GAME_TOURNAMENT_RESULTS_HEADER_TIME = "GameTournamentResultsHeaderTime";
+		public static final String GAME_TOURNAMENT_RESULTS_HEADER_TOTAL = "GameTournamentResultsHeaderTotal";
+		/* DATA */
+		public static final String GAME_TOURNAMENT_RESULTS_DATA_COMPUTER = "GameTournamentResultsDataComputer";
+		public static final String GAME_TOURNAMENT_RESULTS_DATA_HUMAN = "GameTournamentResultsDataHuman";
+	/* STATISTICS */
+	public static final String GAME_TOURNAMENT_STATISTICS_TITLE = "GameTournamentStatisticsTitle";
+		/* HEADER */
+		public static final String GAME_TOURNAMENT_STATISTICS_HEADER_NAME = "GameTournamentStatisticsHeaderName";
 	
-	// MATCH PANEL
-	public static final String MATCH_BUTTON_QUIT = "MatchButtonQuit";
-	public static final String MATCH_BUTTON_CURRENT_ROUND = "MatchButtonCurrentRound";
-	public static final String MATCH_BUTTON_CURRENT_TOURNAMENT = "MatchButtonCurrentTournament";
-	public static final String MATCH_BUTTON_DESCRIPTION = "MatchButtonDescription";
-	public static final String MATCH_BUTTON_FINISH = "MatchButtonFinish";
-	public static final String MATCH_BUTTON_NEXT_ROUND = "MatchButtonNextRound";
-	public static final String MATCH_BUTTON_RESULTS = "MatchButtonResults";
-	public static final String MATCH_BUTTON_STATISTICS = "MatchButtonStatistics";
+	/////////////////////////////////////////////////////////////////
+	// GAME MATCH		/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	/* BUTTONS */	
+	public static final String GAME_MATCH_BUTTON_QUIT = "GameMatchButtonQuit";
+	public static final String GAME_MATCH_BUTTON_CURRENT_ROUND = "GameMatchButtonCurrentRound";
+	public static final String GAME_MATCH_BUTTON_CURRENT_TOURNAMENT = "GameMatchButtonCurrentTournament";
+	public static final String GAME_MATCH_BUTTON_DESCRIPTION = "GameMatchButtonDescription";
+	public static final String GAME_MATCH_BUTTON_FINISH = "GameMatchButtonFinish";
+	public static final String GAME_MATCH_BUTTON_NEXT_ROUND = "GameMatchButtonNextRound";
+	public static final String GAME_MATCH_BUTTON_RESULTS = "GameMatchButtonResults";
+	public static final String GAME_MATCH_BUTTON_STATISTICS = "GameMatchButtonStatistics";
+	/* DESCRIPTION */
+	public static final String GAME_MATCH_DESCRIPTION_TITLE = "GameMatchDescriptionTitle";
+		/* LIMIT */
+		public static final String GAME_MATCH_DESCRIPTION_LIMIT_TITLE = "GameMatchDescriptionLimitTitle";
+			/* HEADER */
+			public static final String GAME_MATCH_DESCRIPTION_LIMIT_HEADER_BOMBS = "GameMatchDescriptionLimitHeaderBombs";
+			public static final String GAME_MATCH_DESCRIPTION_LIMIT_HEADER_CONFRONTATIONS = "GameMatchDescriptionLimitHeaderConfrontations";
+			public static final String GAME_MATCH_DESCRIPTION_LIMIT_HEADER_CROWNS = "GameMatchDescriptionLimitHeaderCrowns";
+			public static final String GAME_MATCH_DESCRIPTION_LIMIT_HEADER_CUSTOM = "GameMatchDescriptionLimitHeaderCustom";
+			public static final String GAME_MATCH_DESCRIPTION_LIMIT_HEADER_DEATHS = "GameMatchDescriptionLimitHeaderDeaths";
+			public static final String GAME_MATCH_DESCRIPTION_LIMIT_HEADER_ITEMS = "GameMatchDescriptionLimitHeaderItems";
+			public static final String GAME_MATCH_DESCRIPTION_LIMIT_HEADER_KILLS = "GameMatchDescriptionLimitHeaderKills";
+			public static final String GAME_MATCH_DESCRIPTION_LIMIT_HEADER_PAINTINGS = "GameMatchDescriptionLimitHeaderPaintings";
+			public static final String GAME_MATCH_DESCRIPTION_LIMIT_HEADER_TIME = "GameMatchDescriptionLimitHeaderTime";
+			public static final String GAME_MATCH_DESCRIPTION_LIMIT_HEADER_TOTAL = "GameMatchDescriptionLimitHeaderTotal";
+		/* MISC */
+		public static final String GAME_MATCH_DESCRIPTION_MISC_TITLE = "GameMatchDescriptionMiscTitle";
+		/* NOTES */
+		public static final String GAME_MATCH_DESCRIPTION_NOTES_TITLE = "GameMatchDescriptionNotesTitle";
+		/* PLAYERS */
+			/* HEADER */
+			public static final String GAME_MATCH_DESCRIPTION_PLAYERS_HEADER_NAME = "GameMatchDescriptionPlayersHeaderName";
+			public static final String GAME_MATCH_DESCRIPTION_PLAYERS_HEADER_RANK = "GameMatchDescriptionPlayersHeaderRank";
+			/* DATA */
+			public static final String GAME_MATCH_DESCRIPTION_PLAYERS_DATA_COMPUTER = "GameMatchDescriptionPlayersDataComputer";
+			public static final String GAME_MATCH_DESCRIPTION_PLAYERS_DATA_HUMAN = "GameMatchDescriptionPlayersDataHuman";
+		/* POINTS */
+		public static final String GAME_MATCH_DESCRIPTION_POINTS_TITLE = "GameMatchDescriptionPointsTitle";
+			/* HEADER */
+			public static final String GAME_MATCH_DESCRIPTION_POINTS_HEADER_CONSTANT = "GameMatchDescriptionPointsHeaderConstant";
+			public static final String GAME_MATCH_DESCRIPTION_POINTS_HEADER_DISCRETIZE = "GameMatchDescriptionPointsHeaderDiscretize";
+			public static final String GAME_MATCH_DESCRIPTION_POINTS_HEADER_PARTIAL = "GameMatchDescriptionPointsHeaderPartial";
+			public static final String GAME_MATCH_DESCRIPTION_POINTS_HEADER_RANKINGS = "GameMatchDescriptionPointsHeaderRankings";
+			public static final String GAME_MATCH_DESCRIPTION_POINTS_HEADER_RANKPOINTS = "GameMatchDescriptionPointsHeaderRankpoints";
+			public static final String GAME_MATCH_DESCRIPTION_POINTS_HEADER_SCORE = "GameMatchDescriptionPointsHeaderScore";
+			public static final String GAME_MATCH_DESCRIPTION_POINTS_HEADER_TOTAL = "GameMatchDescriptionPointsHeaderTotal";
+			/* DATA */
+			public static final String GAME_MATCH_DESCRIPTION_POINTS_DATA_BOMBS = "GameMatchDescriptionPointsDataBombs";
+			public static final String GAME_MATCH_DESCRIPTION_POINTS_DATA_CROWNS = "GameMatchDescriptionPointsDataCrowns";
+			public static final String GAME_MATCH_DESCRIPTION_POINTS_DATA_DEATHS = "GameMatchDescriptionPointsDataDeaths";
+			public static final String GAME_MATCH_DESCRIPTION_POINTS_DATA_INVERTED = "GameMatchDescriptionPointsDataInverted";
+			public static final String GAME_MATCH_DESCRIPTION_POINTS_DATA_ITEMS = "GameMatchDescriptionPointsDataItems";
+			public static final String GAME_MATCH_DESCRIPTION_POINTS_DATA_KILLS = "GameMatchDescriptionPointsDataKills";
+			public static final String GAME_MATCH_DESCRIPTION_POINTS_DATA_NOSHARE = "GameMatchDescriptionPointsDataNoshare";
+			public static final String GAME_MATCH_DESCRIPTION_POINTS_DATA_PAINTINGS = "GameMatchDescriptionPointsDataPaintings";
+			public static final String GAME_MATCH_DESCRIPTION_POINTS_DATA_PARTIAL = "GameMatchDescriptionPointsDataPartial";
+			public static final String GAME_MATCH_DESCRIPTION_POINTS_DATA_REGULAR = "GameMatchDescriptionPointsDataRegular";
+			public static final String GAME_MATCH_DESCRIPTION_POINTS_DATA_SHARE = "GameMatchDescriptionPointsDataShare";
+			public static final String GAME_MATCH_DESCRIPTION_POINTS_DATA_TIME = "GameMatchDescriptionPointsDataTime";
+	/* RESULTS */
+	public static final String GAME_MATCH_RESULTS_TITLE = "GameMatchResultsTitle";
+		/* HEADER */
+		public static final String GAME_MATCH_RESULTS_HEADER_BOMBS = "GameMatchResultsHeaderBombs";
+		public static final String GAME_MATCH_RESULTS_HEADER_CROWNS = "GameMatchResultsHeaderCrowns";
+		public static final String GAME_MATCH_RESULTS_HEADER_CUSTOM_LIMIT = "GameMatchResultsHeaderCustomLimit";
+		public static final String GAME_MATCH_RESULTS_HEADER_CUSTOM_POINTS = "GameMatchResultsHeaderCustomPoints";
+		public static final String GAME_MATCH_RESULTS_HEADER_DEATHS = "GameMatchResultsHeaderDeaths";
+		public static final String GAME_MATCH_RESULTS_HEADER_ITEMS = "GameMatchResultsHeaderItems";
+		public static final String GAME_MATCH_RESULTS_HEADER_KILLS = "GameMatchResultsHeaderKills";
+		public static final String GAME_MATCH_RESULTS_HEADER_NAME = "GameMatchResultsHeaderName";
+		public static final String GAME_MATCH_RESULTS_HEADER_PAINTINGS = "GameMatchResultsHeaderPaintings";
+		public static final String GAME_MATCH_RESULTS_HEADER_POINTS = "GameMatchResultsHeaderPoints";
+		public static final String GAME_MATCH_RESULTS_HEADER_ROUND = "GameMatchResultsHeaderRound";
+		public static final String GAME_MATCH_RESULTS_HEADER_TIME = "GameMatchResultsHeaderTime";
+		public static final String GAME_MATCH_RESULTS_HEADER_TOTAL = "GameMatchResultsHeaderTotal";
+		/* DATA */
+		public static final String GAME_MATCH_RESULTS_DATA_COMPUTER = "GameMatchResultsDataComputer";
+		public static final String GAME_MATCH_RESULTS_DATA_HUMAN = "GameMatchResultsDataHuman";
+	/* STATISTICS */
+	public static final String GAME_MATCH_STATISTICS_TITLE = "GameMatchStatisticsTitle";
+		/* HEADER */
+		public static final String GAME_MATCH_STATISTICS_HEADER_NAME = "GameMatchStatisticsHeaderName";
 	
-	// ROUND PANEL
-	public static final String ROUND_BUTTON_QUIT = "RoundButtonQuit";
-	public static final String ROUND_BUTTON_CURRENT_MATCH = "RoundButtonCurrentMatch";
-	public static final String ROUND_BUTTON_DESCRIPTION = "RoundButtonDescription";
-	public static final String ROUND_BUTTON_FINISH = "RoundButtonFinish";
-	public static final String ROUND_BUTTON_PLAY = "RoundButtonPlay";
-	public static final String ROUND_BUTTON_RESULTS = "RoundButtonResults";
-	public static final String ROUND_BUTTON_STATISTICS = "RoundButtonStatistics";
-	public static final String ROUND_PROGRESSBAR_BOMBSET = "RoundProgressbarBombset";
-	public static final String ROUND_PROGRESSBAR_COMMON = "RoundProgressbarCommon";
-	public static final String ROUND_PROGRESSBAR_COMPLETE = "RoundProgressbarComplete";
-	public static final String ROUND_PROGRESSBAR_ITEMSET = "RoundProgressbarItemset";
-	public static final String ROUND_PROGRESSBAR_PLAYER = "RoundProgressbarPlayer";
-	public static final String ROUND_PROGRESSBAR_THEME = "RoundProgressbarTheme";
-	public static final String ROUND_PROGRESSBAR_ZONE = "RoundProgressbarZone";
+	/////////////////////////////////////////////////////////////////
+	// GAME ROUND		/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	/* BUTTONS */	
+	public static final String GAME_ROUND_BUTTON_QUIT = "GameRoundButtonQuit";
+	public static final String GAME_ROUND_BUTTON_CURRENT_MATCH = "GameRoundButtonCurrentMatch";
+	public static final String GAME_ROUND_BUTTON_DESCRIPTION = "GameRoundButtonDescription";
+	public static final String GAME_ROUND_BUTTON_FINISH = "GameRoundButtonFinish";
+	public static final String GAME_ROUND_BUTTON_PLAY = "GameRoundButtonPlay";
+	public static final String GAME_ROUND_BUTTON_RESULTS = "GameRoundButtonResults";
+	public static final String GAME_ROUND_BUTTON_STATISTICS = "GameRoundButtonStatistics";
+	/* PROGRESS BAR */	
+	public static final String GAME_ROUND_PROGRESSBAR_BOMBSET = "GameRoundProgressbarBombset";
+	public static final String GAME_ROUND_PROGRESSBAR_COMMON = "GameRoundProgressbarCommon";
+	public static final String GAME_ROUND_PROGRESSBAR_COMPLETE = "GameRoundProgressbarComplete";
+	public static final String GAME_ROUND_PROGRESSBAR_ITEMSET = "GameRoundProgressbarItemset";
+	public static final String GAME_ROUND_PROGRESSBAR_PLAYER = "GameRoundProgressbarPlayer";
+	public static final String GAME_ROUND_PROGRESSBAR_THEME = "GameRoundProgressbarTheme";
+	public static final String GAME_ROUND_PROGRESSBAR_ZONE = "GameRoundProgressbarZone";
+	/* DESCRIPTION */
+	public static final String GAME_ROUND_DESCRIPTION_TITLE = "GameRoundDescriptionTitle";
+		/* INITIAL ITEMS */
+		public static final String GAME_ROUND_DESCRIPTION_INITIALITEMS_TITLE = "GameRoundDescriptionInitialItemsTitle";
+		/* ITEMSET */
+		public static final String GAME_ROUND_DESCRIPTION_ITEMSET_TITLE = "GameRoundDescriptionItemset";
+		/* LIMIT */
+		public static final String GAME_ROUND_DESCRIPTION_LIMIT_TITLE = "GameRoundDescriptionLimitTitle";
+			/* HEADER */
+			public static final String GAME_ROUND_DESCRIPTION_LIMIT_HEADER_BOMBS = "GameRoundDescriptionLimitHeaderBombs";
+			public static final String GAME_ROUND_DESCRIPTION_LIMIT_HEADER_CROWNS = "GameRoundDescriptionLimitHeaderCrowns";
+			public static final String GAME_ROUND_DESCRIPTION_LIMIT_HEADER_CUSTOM = "GameRoundDescriptionLimitHeaderCustom";
+			public static final String GAME_ROUND_DESCRIPTION_LIMIT_HEADER_DEATHS = "GameRoundDescriptionLimitHeaderDeaths";
+			public static final String GAME_ROUND_DESCRIPTION_LIMIT_HEADER_ITEMS = "GameRoundDescriptionLimitHeaderItems";
+			public static final String GAME_ROUND_DESCRIPTION_LIMIT_HEADER_KILLS = "GameRoundDescriptionLimitHeaderKills";
+			public static final String GAME_ROUND_DESCRIPTION_LIMIT_HEADER_PAINTINGS = "GameRoundDescriptionLimitHeaderPaintings";
+			public static final String GAME_ROUND_DESCRIPTION_LIMIT_HEADER_TIME = "GameRoundDescriptionLimitHeaderTime";
+		/* MISC */
+		public static final String GAME_ROUND_DESCRIPTION_MISC_TITLE = "GameRoundDescriptionMiscTitle";
+			/* HEADER */
+			public static final String GAME_ROUND_DESCRIPTION_MISC_HEADER_AUTHOR = "GameRoundDescriptionMiscHeaderAuthor";
+			public static final String GAME_ROUND_DESCRIPTION_MISC_HEADER_DIMENSION = "GameRoundDescriptionMiscHeaderDimension";
+			public static final String GAME_ROUND_DESCRIPTION_MISC_HEADER_INSTANCE = "GameRoundDescriptionMiscHeaderInstance";
+			public static final String GAME_ROUND_DESCRIPTION_MISC_HEADER_PACK = "GameRoundDescriptionMiscHeaderPack";
+			public static final String GAME_ROUND_DESCRIPTION_MISC_HEADER_SOURCE = "GameRoundDescriptionMiscHeaderSource";
+			public static final String GAME_ROUND_DESCRIPTION_MISC_HEADER_THEME = "GameRoundDescriptionMiscHeaderTheme";
+			public static final String GAME_ROUND_DESCRIPTION_MISC_HEADER_TITLE = "GameRoundDescriptionMiscHeaderTitle";
+		/* NOTES */
+		public static final String GAME_ROUND_DESCRIPTION_NOTES_TITLE = "GameRoundDescriptionNotesTitle";
+		/* POINTS */
+		public static final String GAME_ROUND_DESCRIPTION_POINTS_TITLE = "GameRoundDescriptionPointsTitle";
+			/* HEADER */
+			public static final String GAME_ROUND_DESCRIPTION_POINTS_HEADER_CONSTANT = "GameRoundDescriptionPointsHeaderConstant";
+			public static final String GAME_ROUND_DESCRIPTION_POINTS_HEADER_DISCRETIZE = "GameRoundDescriptionPointsHeaderDiscretize";
+			public static final String GAME_ROUND_DESCRIPTION_POINTS_HEADER_PARTIAL = "GameRoundDescriptionPointsHeaderPartial";
+			public static final String GAME_ROUND_DESCRIPTION_POINTS_HEADER_RANKINGS = "GameRoundDescriptionPointsHeaderRankings";
+			public static final String GAME_ROUND_DESCRIPTION_POINTS_HEADER_RANKPOINTS = "GameRoundDescriptionPointsHeaderRankpoints";
+			public static final String GAME_ROUND_DESCRIPTION_POINTS_HEADER_SCORE = "GameRoundDescriptionPointsHeaderScore";
+			/* DATA */
+			public static final String GAME_ROUND_DESCRIPTION_POINTS_DATA_BOMBS = "GameRoundDescriptionPointsDataBombs";
+			public static final String GAME_ROUND_DESCRIPTION_POINTS_DATA_CROWNS = "GameRoundDescriptionPointsDataCrowns";
+			public static final String GAME_ROUND_DESCRIPTION_POINTS_DATA_DEATHS = "GameRoundDescriptionPointsDataDeaths";
+			public static final String GAME_ROUND_DESCRIPTION_POINTS_DATA_INVERTED = "GameRoundDescriptionPointsDataInverted";
+			public static final String GAME_ROUND_DESCRIPTION_POINTS_DATA_ITEMS = "GameRoundDescriptionPointsDataItems";
+			public static final String GAME_ROUND_DESCRIPTION_POINTS_DATA_KILLS = "GameRoundDescriptionPointsDataKills";
+			public static final String GAME_ROUND_DESCRIPTION_POINTS_DATA_NOSHARE = "GameRoundDescriptionPointsDataNoshare";
+			public static final String GAME_ROUND_DESCRIPTION_POINTS_DATA_PAINTINGS = "GameRoundDescriptionPointsDataPaintings";
+			public static final String GAME_ROUND_DESCRIPTION_POINTS_DATA_PARTIAL = "GameRoundDescriptionPointsDataPartial";
+			public static final String GAME_ROUND_DESCRIPTION_POINTS_DATA_REGULAR = "GameRoundDescriptionPointsDataRegular";
+			public static final String GAME_ROUND_DESCRIPTION_POINTS_DATA_SHARE = "GameRoundDescriptionPointsDataShare";
+			public static final String GAME_ROUND_DESCRIPTION_POINTS_DATA_TIME = "GameRoundDescriptionPointsDataTime";
+	/* RESULTS */
+	public static final String GAME_ROUND_RESULTS_TITLE = "GameRoundResultsTitle";
+		/* HEADER */
+		public static final String GAME_ROUND_RESULTS_HEADER_BOMBS = "GameRoundResultsHeaderBombs";
+		public static final String GAME_ROUND_RESULTS_HEADER_CROWNS = "GameRoundResultsHeaderCrowns";
+		public static final String GAME_ROUND_RESULTS_HEADER_CUSTOM_LIMIT = "GameRoundResultsHeaderCustomLimit";
+		public static final String GAME_ROUND_RESULTS_HEADER_CUSTOM_POINTS = "GameRoundResultsHeaderCustomPoints";
+		public static final String GAME_ROUND_RESULTS_HEADER_DEATHS = "GameRoundResultsHeaderDeaths";
+		public static final String GAME_ROUND_RESULTS_HEADER_ITEMS = "GameRoundResultsHeaderItems";
+		public static final String GAME_ROUND_RESULTS_HEADER_KILLS = "GameRoundResultsHeaderKills";
+		public static final String GAME_ROUND_RESULTS_HEADER_NAME = "GameRoundResultsHeaderName";
+		public static final String GAME_ROUND_RESULTS_HEADER_PAINTINGS = "GameRoundResultsHeaderPaintings";
+		public static final String GAME_ROUND_RESULTS_HEADER_POINTS = "GameRoundResultsHeaderPoints";
+		public static final String GAME_ROUND_RESULTS_HEADER_TIME = "GameRoundResultsHeaderTime";
+		/* DATA */
+		public static final String GAME_ROUND_RESULTS_DATA_COMPUTER = "GameRoundResultsDataComputer";
+		public static final String GAME_ROUND_RESULTS_DATA_HUMAN = "GameRoundResultsDataHuman";
+	/* STATISTICS */
+	public static final String GAME_ROUND_STATISTICS_TITLE = "GameRoundStatisticsTitle";
+		/* HEADER */
+		public static final String GAME_ROUND_STATISTICS_HEADER_NAME = "GameRoundStatisticsHeaderName";
 	
-	// GAME PANEL
-	public static final String GAME_TOURNAMENT_TITLE_DESCRIPTION = "GameTournamentTitleDescription";
-	public static final String GAME_TOURNAMENT_TITLE_RESULTS = "GameTournamentTitleResults";
-	public static final String GAME_TOURNAMENT_TITLE_STATISTICS = "GameTournamentTitleStatistics";
-	public static final String GAME_TOURNAMENT_HEADER_NAME = "GameTournamentHeaderName";
-	public static final String GAME_TOURNAMENT_HEADER_POINTS = "GameTournamentHeaderPoints";
-	public static final String GAME_TOURNAMENT_HEADER_BOMBS = "GameTournamentHeaderBombs";
-	public static final String GAME_TOURNAMENT_HEADER_DEATHS = "GameTournamentHeaderDeaths";
-	public static final String GAME_TOURNAMENT_HEADER_ITEMS = "GameTournamentHeaderItems";
-	public static final String GAME_TOURNAMENT_HEADER_KILLS = "GameTournamentHeaderKills";
-	public static final String GAME_TOURNAMENT_HEADER_RANK = "GameTournamentHeaderRank";
-	public static final String GAME_TOURNAMENT_HEADER_TOTAL = "GameTournamentHeaderTotal";
-	public static final String GAME_TOURNAMENT_HEADER_MATCH = "GameTournamentHeaderMatch";
-	public static final String GAME_TOURNAMENT_HEADER_NOTES = "GameTournamentHeaderNotes";	
-	public static final String GAME_TOURNAMENT_HEADER_LIMITS = "GameTournamentHeaderLimits";	
-	public static final String GAME_TOURNAMENT_HEADER_POINTSPROCESS = "GameTournamentHeaderPointprocess";	
-	public static final String GAME_TOURNAMENT_HEADER_MISC = "GameTournamentHeaderMisc";	
-	public static final String GAME_TOURNAMENT_HEADER_PARTIAL = "GameTournamentHeaderPartial";
-	public static final String GAME_TOURNAMENT_LIMIT_CONFRONTATIONS = "GameTournamentLimitConfrontations";
-	public static final String GAME_TOURNAMENT_LIMIT_POINTS = "GameTournamentLimitPoints";
-	public static final String GAME_TOURNAMENT_LIMIT_TOTAL = "GameTournamentLimitTotal";
-	public static final String GAME_TOURNAMENT_LIMIT_BOMBS = "GameTournamentLimitBombs";
-	public static final String GAME_TOURNAMENT_LIMIT_DEATHS = "GameTournamentLimitDeaths";
-	public static final String GAME_TOURNAMENT_LIMIT_ITEMS = "GameTournamentLimitItems";
-	public static final String GAME_TOURNAMENT_LIMIT_KILLS = "GameTournamentLimitKills";
-	public static final String GAME_TOURNAMENT_LIMIT_TIME = "GameTournamentLimitTime";
-	public static final String GAME_TOURNAMENT_LIMIT_CROWNS = "GameTournamentLimitCrowns";
-	public static final String GAME_TOURNAMENT_LIMIT_PAINTINGS = "GameTournamentLimitPaintings";
-	
-	public static final String GAME_MATCH_TITLE_DESCRIPTION = "GameMatchTitleDescription";
-	public static final String GAME_MATCH_TITLE_RESULTS = "GameMatchTitleResults";
-	public static final String GAME_MATCH_TITLE_STATISTICS = "GameMatchTitleStatistics";
-	public static final String GAME_MATCH_HEADER_NAME = "GameMatchHeaderName";
-	public static final String GAME_MATCH_HEADER_POINTS = "GameMatchHeaderPoints";
-	public static final String GAME_MATCH_HEADER_BOMBS = "GameMatchHeaderBombs";
-	public static final String GAME_MATCH_HEADER_DEATHS = "GameMatchHeaderDeaths";
-	public static final String GAME_MATCH_HEADER_ITEMS = "GameMatchHeaderItems";
-	public static final String GAME_MATCH_HEADER_KILLS = "GameMatchHeaderKills";
-	public static final String GAME_MATCH_HEADER_RANK = "GameMatchHeaderRank";
-	public static final String GAME_MATCH_HEADER_TOTAL = "GameMatchHeaderTotal";
-	public static final String GAME_MATCH_HEADER_ROUND = "GameMatchHeaderRound";
-	public static final String GAME_MATCH_HEADER_NOTES = "GameMatchHeaderNotes";	
-	public static final String GAME_MATCH_HEADER_LIMITS = "GameMatchHeaderLimits";	
-	public static final String GAME_MATCH_HEADER_POINTSPROCESS = "GameMatchHeaderPointprocess";	
-	public static final String GAME_MATCH_HEADER_MISC = "GameMatchHeaderMisc";	
-	public static final String GAME_MATCH_HEADER_PARTIAL = "GameMatchHeaderPartial";
-	public static final String GAME_MATCH_LIMIT_CONFRONTATIONS = "GameMatchLimitConfrontations";
-	public static final String GAME_MATCH_LIMIT_POINTS = "GameMatchLimitPoints";
-	public static final String GAME_MATCH_LIMIT_TOTAL = "GameMatchLimitTotal";
-	public static final String GAME_MATCH_LIMIT_BOMBS = "GameMatchLimitBombs";
-	public static final String GAME_MATCH_LIMIT_DEATHS = "GameMatchLimitDeaths";
-	public static final String GAME_MATCH_LIMIT_ITEMS = "GameMatchLimitItems";
-	public static final String GAME_MATCH_LIMIT_KILLS = "GameMatchLimitKills";
-	public static final String GAME_MATCH_LIMIT_TIME = "GameMatchLimitTime";
-	public static final String GAME_MATCH_LIMIT_CROWNS = "GameMatchLimitCrowns";
-	public static final String GAME_MATCH_LIMIT_PAINTINGS = "GameMatchLimitPaintings";
-	
-	public static final String GAME_ROUND_TITLE_DESCRIPTION = "GameRoundTitleDescription";
-	public static final String GAME_ROUND_TITLE_RESULTS = "GameRoundTitleResults";
-	public static final String GAME_ROUND_TITLE_STATISTICS = "GameRoundTitleStatistics";
-	public static final String GAME_ROUND_HEADER_NAME = "GameRoundHeaderName";
-	public static final String GAME_ROUND_HEADER_POINTS = "GameRoundHeaderPoints";
-	public static final String GAME_ROUND_HEADER_BOMBS = "GameRoundHeaderBombs";
-	public static final String GAME_ROUND_HEADER_DEATHS = "GameRoundHeaderDeaths";
-	public static final String GAME_ROUND_HEADER_ITEMS = "GameRoundHeaderItems";
-	public static final String GAME_ROUND_HEADER_KILLS = "GameRoundHeaderKills";
-	public static final String GAME_ROUND_HEADER_RANK = "GameRoundHeaderRank";
-	public static final String GAME_ROUND_HEADER_CROWNS = "GameRoundHeaderCrowns";
-	public static final String GAME_ROUND_HEADER_FRAGS = "GameRoundHeaderFrags";
-	public static final String GAME_ROUND_HEADER_PAINTINGS = "GameRoundHeaderPaintings";
-	public static final String GAME_ROUND_HEADER_TIME = "GameRoundHeaderTime";
-	public static final String GAME_ROUND_HEADER_LIMITS = "GameRoundHeaderLimits";	
-	public static final String GAME_ROUND_HEADER_INITIAL_ITEMS = "GameRoundHeaderInitialItems";	
-	public static final String GAME_ROUND_HEADER_MISC = "GameRoundHeaderMisc";	
-	public static final String GAME_ROUND_HEADER_POINTSPROCESS = "GameRoundHeaderPointprocess";	
-	public static final String GAME_ROUND_HEADER_ITEMSET = "GameRoundHeaderItemset";
-	public static final String GAME_ROUND_HEADER_TITLE = "GameRoundHeaderTitle";
-	public static final String GAME_ROUND_HEADER_AUTHOR = "GameRoundHeaderAuthor";
-	public static final String GAME_ROUND_HEADER_PACK = "GameRoundHeaderPack";
-	public static final String GAME_ROUND_HEADER_INSTANCE = "GameRoundHeaderInstance";
-	public static final String GAME_ROUND_HEADER_THEME = "GameRoundHeaderTheme";
-	public static final String GAME_ROUND_HEADER_DIMENSION = "GameRoundHeaderDimension";
-	public static final String GAME_ROUND_HEADER_SOURCE = "GameRoundHeaderSource";
-	public static final String GAME_ROUND_HEADER_PARTIAL = "GameRoundHeaderPartial";
-	public static final String GAME_ROUND_LIMIT_POINTS = "GameRoundLimitPoints";
-	public static final String GAME_ROUND_LIMIT_BOMBS = "GameRoundLimitBombs";
-	public static final String GAME_ROUND_LIMIT_DEATHS = "GameRoundLimitDeaths";
-	public static final String GAME_ROUND_LIMIT_ITEMS = "GameRoundLimitItems";
-	public static final String GAME_ROUND_LIMIT_KILLS = "GameRoundLimitKills";
-	public static final String GAME_ROUND_LIMIT_TIME = "GameRoundLimitTime";
-	public static final String GAME_ROUND_LIMIT_CROWNS = "GameRoundLimitCrowns";
-	public static final String GAME_ROUND_LIMIT_PAINTINGS = "GameRoundLimitPaintings";
 	
 	
 	
@@ -331,7 +467,7 @@ public class GuiTools
 		int gameDescriptionLabelTextFontSize = gameDescriptionLabelTextHeight/7;
 		sizes.put(GAME_DESCRIPTION_LABEL_TEXT_FONT_SIZE,gameDescriptionLabelTextFontSize);
 		
-		// icons
+		// images
 		BufferedImage absent = ImageTools.getAbsentImage(64,64);
 		BufferedImage image;
 		// buttons
@@ -340,204 +476,319 @@ public class GuiTools
 					ICON_ROLLOVER,ICON_ROLLOVER_SELECTED,
 					ICON_PRESSED};
 			//
-			String baseFolder = GuiFileTools.getIconsPath()+File.separator+GuiFileTools.FOLDER_BUTTONS;
-			{	String folder = baseFolder+File.separator+GuiFileTools.FOLDER_DESCRIPTION+File.separator;
+			String baseFolder = GuiFileTools.getButtonsPath()+File.separator;
+			{	String folder = baseFolder+GuiFileTools.FOLDER_DESCRIPTION+File.separator;
 				for(int i=0;i<buttonStates.length;i++)
 				{	image = loadIcon(folder+buttonStates[i]+".png",absent);
-					icons.put(TOURNAMENT_BUTTON_DESCRIPTION+buttonStates[i],image);
-					icons.put(MATCH_BUTTON_DESCRIPTION+buttonStates[i],image);
-					icons.put(ROUND_BUTTON_DESCRIPTION+buttonStates[i],image);
+					icons.put(GAME_TOURNAMENT_BUTTON_DESCRIPTION+buttonStates[i],image);
+					icons.put(GAME_MATCH_BUTTON_DESCRIPTION+buttonStates[i],image);
+					icons.put(GAME_ROUND_BUTTON_DESCRIPTION+buttonStates[i],image);
 				}
 			}
-			{	String folder = baseFolder+File.separator+GuiFileTools.FOLDER_LEFT_BLUE+File.separator;
+			{	String folder = baseFolder+GuiFileTools.FOLDER_LEFT_BLUE+File.separator;
 				for(int i=0;i<buttonStates.length;i++)
 				{	image = loadIcon(folder+buttonStates[i]+".png",absent);
-					icons.put(TOURNAMENT_BUTTON_MENU+buttonStates[i],image);
-					icons.put(MATCH_BUTTON_CURRENT_TOURNAMENT+buttonStates[i],image);
-					icons.put(ROUND_BUTTON_CURRENT_MATCH+buttonStates[i],image);
+					icons.put(GAME_TOURNAMENT_BUTTON_MENU+buttonStates[i],image);
+					icons.put(GAME_MATCH_BUTTON_CURRENT_TOURNAMENT+buttonStates[i],image);
+					icons.put(GAME_ROUND_BUTTON_CURRENT_MATCH+buttonStates[i],image);
 				}
 			}
-			{	String folder = baseFolder+File.separator+GuiFileTools.FOLDER_LEFT_RED+File.separator;
+			{	String folder = baseFolder+GuiFileTools.FOLDER_LEFT_RED+File.separator;
 				for(int i=0;i<buttonStates.length;i++)
 				{	image = loadIcon(folder+buttonStates[i]+".png",absent);
-					icons.put(TOURNAMENT_BUTTON_FINISH+buttonStates[i],image);
-					icons.put(MATCH_BUTTON_FINISH+buttonStates[i],image);
-					icons.put(ROUND_BUTTON_FINISH+buttonStates[i],image);
+					icons.put(GAME_TOURNAMENT_BUTTON_FINISH+buttonStates[i],image);
+					icons.put(GAME_MATCH_BUTTON_FINISH+buttonStates[i],image);
+					icons.put(GAME_ROUND_BUTTON_FINISH+buttonStates[i],image);
 				}
 			}
-			{	String folder = baseFolder+File.separator+GuiFileTools.FOLDER_PLAY+File.separator;
+			{	String folder = baseFolder+GuiFileTools.FOLDER_PLAY+File.separator;
 				for(int i=0;i<buttonStates.length;i++)
 				{	image = loadIcon(folder+buttonStates[i]+".png",absent);
-					icons.put(ROUND_BUTTON_PLAY+buttonStates[i],image);
+					icons.put(GAME_ROUND_BUTTON_PLAY+buttonStates[i],image);
 				}
 			}
-			{	String folder = baseFolder+File.separator+GuiFileTools.FOLDER_HOME+File.separator;
+			{	String folder = baseFolder+GuiFileTools.FOLDER_HOME+File.separator;
 				for(int i=0;i<buttonStates.length;i++)
 				{	image = loadIcon(folder+buttonStates[i]+".png",absent);
-					icons.put(TOURNAMENT_BUTTON_QUIT+buttonStates[i],image);
-					icons.put(MATCH_BUTTON_QUIT+buttonStates[i],image);
-					icons.put(ROUND_BUTTON_QUIT+buttonStates[i],image);
+					icons.put(GAME_TOURNAMENT_BUTTON_QUIT+buttonStates[i],image);
+					icons.put(GAME_MATCH_BUTTON_QUIT+buttonStates[i],image);
+					icons.put(GAME_ROUND_BUTTON_QUIT+buttonStates[i],image);
 				}
 			}
-			{	String folder = baseFolder+File.separator+GuiFileTools.FOLDER_RESULTS+File.separator;
+			{	String folder = baseFolder+GuiFileTools.FOLDER_RESULTS+File.separator;
 				for(int i=0;i<buttonStates.length;i++)
 				{	image = loadIcon(folder+buttonStates[i]+".png",absent);
-					icons.put(TOURNAMENT_BUTTON_RESULTS+buttonStates[i],image);
-					icons.put(MATCH_BUTTON_RESULTS+buttonStates[i],image);
-					icons.put(ROUND_BUTTON_RESULTS+buttonStates[i],image);
+					icons.put(GAME_TOURNAMENT_BUTTON_RESULTS+buttonStates[i],image);
+					icons.put(GAME_MATCH_BUTTON_RESULTS+buttonStates[i],image);
+					icons.put(GAME_ROUND_BUTTON_RESULTS+buttonStates[i],image);
 				}
 			}
-			{	String folder = baseFolder+File.separator+GuiFileTools.FOLDER_RIGHT_BLUE+File.separator;
+			{	String folder = baseFolder+GuiFileTools.FOLDER_RIGHT_BLUE+File.separator;
 				for(int i=0;i<buttonStates.length;i++)
 				{	image = loadIcon(folder+buttonStates[i]+".png",absent);
 				}
 			}
-			{	String folder = baseFolder+File.separator+GuiFileTools.FOLDER_RIGHT_RED+File.separator;
+			{	String folder = baseFolder+GuiFileTools.FOLDER_RIGHT_RED+File.separator;
 				for(int i=0;i<buttonStates.length;i++)
 				{	image = loadIcon(folder+buttonStates[i]+".png",absent);
-					icons.put(TOURNAMENT_BUTTON_CURRENT_MATCH+buttonStates[i],image);
-					icons.put(TOURNAMENT_BUTTON_NEXT_MATCH+buttonStates[i],image);
-					icons.put(MATCH_BUTTON_CURRENT_ROUND+buttonStates[i],image);
-					icons.put(MATCH_BUTTON_NEXT_ROUND+buttonStates[i],image);
+					icons.put(GAME_TOURNAMENT_BUTTON_CURRENT_MATCH+buttonStates[i],image);
+					icons.put(GAME_TOURNAMENT_BUTTON_NEXT_MATCH+buttonStates[i],image);
+					icons.put(GAME_MATCH_BUTTON_CURRENT_ROUND+buttonStates[i],image);
+					icons.put(GAME_MATCH_BUTTON_NEXT_ROUND+buttonStates[i],image);
 				}
 			}
-			{	String folder = baseFolder+File.separator+GuiFileTools.FOLDER_STATS+File.separator;
+			{	String folder = baseFolder+GuiFileTools.FOLDER_STATS+File.separator;
 				for(int i=0;i<buttonStates.length;i++)
 				{	image = loadIcon(folder+buttonStates[i]+".png",absent);
-					icons.put(TOURNAMENT_BUTTON_STATISTICS+buttonStates[i],image);
-					icons.put(MATCH_BUTTON_STATISTICS+buttonStates[i],image);
-					icons.put(ROUND_BUTTON_STATISTICS+buttonStates[i],image);
+					icons.put(GAME_TOURNAMENT_BUTTON_STATISTICS+buttonStates[i],image);
+					icons.put(GAME_MATCH_BUTTON_STATISTICS+buttonStates[i],image);
+					icons.put(GAME_ROUND_BUTTON_STATISTICS+buttonStates[i],image);
 				}
 			}
 		}
 		
-		// tables
-		{	String folder = GuiFileTools.getIconsPath()+File.separator+GuiFileTools.FOLDER_HEADERS+File.separator;
+		// header icons
+		{	String folder = GuiFileTools.getHeadersPath()+File.separator;
 			// author
 			image = loadIcon(folder+GuiFileTools.FILE_AUTHOR,absent);
-			icons.put(GAME_ROUND_HEADER_AUTHOR,image);
+			icons.put(GAME_ROUND_DESCRIPTION_MISC_HEADER_AUTHOR,image);
 			// bombs
 			image = loadIcon(folder+GuiFileTools.FILE_BOMBS,absent);
-			icons.put(GAME_TOURNAMENT_HEADER_BOMBS,image);
-			icons.put(GAME_MATCH_HEADER_BOMBS,image);
-			icons.put(GAME_ROUND_HEADER_BOMBS,image);
-			icons.put(GAME_TOURNAMENT_LIMIT_BOMBS,image);
-			icons.put(GAME_MATCH_LIMIT_BOMBS,image);
-			icons.put(GAME_ROUND_LIMIT_BOMBS,image);
+			icons.put(GAME_TOURNAMENT_RESULTS_HEADER_BOMBS,image);
+			icons.put(GAME_MATCH_RESULTS_HEADER_BOMBS,image);
+			icons.put(GAME_ROUND_RESULTS_HEADER_BOMBS,image);
+			icons.put(GAME_TOURNAMENT_DESCRIPTION_LIMIT_HEADER_BOMBS,image);
+			icons.put(GAME_MATCH_DESCRIPTION_LIMIT_HEADER_BOMBS,image);
+			icons.put(GAME_ROUND_DESCRIPTION_LIMIT_HEADER_BOMBS,image);
 			// confrontations
 			image = loadIcon(folder+GuiFileTools.FILE_CONFRONTATIONS,absent);
-			icons.put(GAME_TOURNAMENT_LIMIT_CONFRONTATIONS,image);
-			icons.put(GAME_MATCH_LIMIT_CONFRONTATIONS,image);
+			icons.put(GAME_TOURNAMENT_DESCRIPTION_LIMIT_HEADER_CONFRONTATIONS,image);
+			icons.put(GAME_MATCH_DESCRIPTION_LIMIT_HEADER_CONFRONTATIONS,image);
+			// constant
+			image = loadIcon(folder+GuiFileTools.FILE_CONSTANT,absent);
+			icons.put(GAME_TOURNAMENT_DESCRIPTION_POINTS_HEADER_CONSTANT,image);
+			icons.put(GAME_MATCH_DESCRIPTION_POINTS_HEADER_CONSTANT,image);
+			icons.put(GAME_ROUND_DESCRIPTION_POINTS_HEADER_CONSTANT,image);
 			// crowns
 			image = loadIcon(folder+GuiFileTools.FILE_CROWNS,absent);
-			icons.put(GAME_ROUND_HEADER_CROWNS,image);
-			icons.put(GAME_TOURNAMENT_LIMIT_CROWNS,image);
-			icons.put(GAME_MATCH_LIMIT_CROWNS,image);
-			icons.put(GAME_ROUND_LIMIT_CROWNS,image);
+			icons.put(GAME_TOURNAMENT_RESULTS_HEADER_CROWNS,image);
+			icons.put(GAME_MATCH_RESULTS_HEADER_CROWNS,image);
+			icons.put(GAME_ROUND_RESULTS_HEADER_CROWNS,image);
+			icons.put(GAME_TOURNAMENT_DESCRIPTION_LIMIT_HEADER_CROWNS,image);
+			icons.put(GAME_MATCH_DESCRIPTION_LIMIT_HEADER_CROWNS,image);
+			icons.put(GAME_ROUND_DESCRIPTION_LIMIT_HEADER_CROWNS,image);
+			// custom points
+			image = loadIcon(folder+GuiFileTools.FILE_CONFRONTATIONS,absent);
+			icons.put(GAME_TOURNAMENT_DESCRIPTION_LIMIT_HEADER_CUSTOM,image);
+			icons.put(GAME_MATCH_DESCRIPTION_LIMIT_HEADER_CUSTOM,image);
+			icons.put(GAME_ROUND_DESCRIPTION_LIMIT_HEADER_CUSTOM,image);
+			icons.put(GAME_TOURNAMENT_RESULTS_HEADER_CUSTOM_LIMIT,image);
+			icons.put(GAME_MATCH_RESULTS_HEADER_CUSTOM_LIMIT,image);
+			icons.put(GAME_ROUND_RESULTS_HEADER_CUSTOM_LIMIT,image);
+			icons.put(GAME_TOURNAMENT_RESULTS_HEADER_CUSTOM_POINTS,image);
+			icons.put(GAME_MATCH_RESULTS_HEADER_CUSTOM_POINTS,image);
+			icons.put(GAME_ROUND_RESULTS_HEADER_CUSTOM_POINTS,image);
 			// deaths
 			image = loadIcon(folder+GuiFileTools.FILE_DEATHS,absent);
-			icons.put(GAME_TOURNAMENT_HEADER_DEATHS,image);
-			icons.put(GAME_MATCH_HEADER_DEATHS,image);
-			icons.put(GAME_ROUND_HEADER_DEATHS,image);
-			icons.put(GAME_TOURNAMENT_LIMIT_DEATHS,image);
-			icons.put(GAME_MATCH_LIMIT_DEATHS,image);
-			icons.put(GAME_ROUND_LIMIT_DEATHS,image);
+			icons.put(GAME_TOURNAMENT_RESULTS_HEADER_DEATHS,image);
+			icons.put(GAME_MATCH_RESULTS_HEADER_DEATHS,image);
+			icons.put(GAME_ROUND_RESULTS_HEADER_DEATHS,image);
+			icons.put(GAME_TOURNAMENT_DESCRIPTION_LIMIT_HEADER_DEATHS,image);
+			icons.put(GAME_MATCH_DESCRIPTION_LIMIT_HEADER_DEATHS,image);
+			icons.put(GAME_ROUND_DESCRIPTION_LIMIT_HEADER_DEATHS,image);
 			// dimension
 			image = loadIcon(folder+GuiFileTools.FILE_DIMENSION,absent);
-			icons.put(GAME_ROUND_HEADER_DIMENSION,image);
-			// frags
-			image = loadIcon(folder+GuiFileTools.FILE_FRAGS,absent);
-			icons.put(GAME_ROUND_HEADER_FRAGS,image);
+			icons.put(GAME_ROUND_DESCRIPTION_MISC_HEADER_DIMENSION,image);
+			// constant
+			image = loadIcon(folder+GuiFileTools.FILE_DISCRETIZE,absent);
+			icons.put(GAME_TOURNAMENT_DESCRIPTION_POINTS_HEADER_DISCRETIZE,image);
+			icons.put(GAME_MATCH_DESCRIPTION_POINTS_HEADER_DISCRETIZE,image);
+			icons.put(GAME_ROUND_DESCRIPTION_POINTS_HEADER_DISCRETIZE,image);
 			// initial
 			image = loadIcon(folder+GuiFileTools.FILE_INITIAL,absent);
-			icons.put(GAME_ROUND_HEADER_INITIAL_ITEMS,image);
+			icons.put(GAME_ROUND_DESCRIPTION_INITIALITEMS_TITLE,image);
 			// instance
 			image = loadIcon(folder+GuiFileTools.FILE_INSTANCE,absent);
-			icons.put(GAME_ROUND_HEADER_INSTANCE,image);
+			icons.put(GAME_ROUND_DESCRIPTION_MISC_HEADER_INSTANCE,image);
 			// items
 			image = loadIcon(folder+GuiFileTools.FILE_ITEMS,absent);
-			icons.put(GAME_TOURNAMENT_HEADER_ITEMS,image);
-			icons.put(GAME_MATCH_HEADER_ITEMS,image);
-			icons.put(GAME_ROUND_HEADER_ITEMS,image);
-			icons.put(GAME_TOURNAMENT_LIMIT_ITEMS,image);
-			icons.put(GAME_MATCH_LIMIT_ITEMS,image);
-			icons.put(GAME_ROUND_LIMIT_ITEMS,image);
-			icons.put(GAME_ROUND_HEADER_ITEMSET,image);
+			icons.put(GAME_TOURNAMENT_RESULTS_HEADER_ITEMS,image);
+			icons.put(GAME_MATCH_RESULTS_HEADER_ITEMS,image);
+			icons.put(GAME_ROUND_RESULTS_HEADER_ITEMS,image);
+			icons.put(GAME_TOURNAMENT_DESCRIPTION_LIMIT_HEADER_ITEMS,image);
+			icons.put(GAME_MATCH_DESCRIPTION_LIMIT_HEADER_ITEMS,image);
+			icons.put(GAME_ROUND_DESCRIPTION_LIMIT_HEADER_ITEMS,image);
+			icons.put(GAME_ROUND_DESCRIPTION_ITEMSET_TITLE,image);
 			// kills
 			image = loadIcon(folder+GuiFileTools.FILE_KILLS,absent);
-			icons.put(GAME_TOURNAMENT_HEADER_KILLS,image);
-			icons.put(GAME_MATCH_HEADER_KILLS,image);
-			icons.put(GAME_ROUND_HEADER_KILLS,image);
-			icons.put(GAME_TOURNAMENT_LIMIT_KILLS,image);
-			icons.put(GAME_MATCH_LIMIT_KILLS,image);
-			icons.put(GAME_ROUND_LIMIT_KILLS,image);
+			icons.put(GAME_TOURNAMENT_RESULTS_HEADER_KILLS,image);
+			icons.put(GAME_MATCH_RESULTS_HEADER_KILLS,image);
+			icons.put(GAME_ROUND_RESULTS_HEADER_KILLS,image);
+			icons.put(GAME_TOURNAMENT_DESCRIPTION_LIMIT_HEADER_KILLS,image);
+			icons.put(GAME_MATCH_DESCRIPTION_LIMIT_HEADER_KILLS,image);
+			icons.put(GAME_ROUND_DESCRIPTION_LIMIT_HEADER_KILLS,image);
 			// limits
 			image = loadIcon(folder+GuiFileTools.FILE_LIMITS,absent);
-			icons.put(GAME_TOURNAMENT_HEADER_LIMITS,image);
-			icons.put(GAME_MATCH_HEADER_LIMITS,image);
-			icons.put(GAME_ROUND_HEADER_LIMITS,image);
+			icons.put(GAME_TOURNAMENT_DESCRIPTION_LIMIT_TITLE,image);
+			icons.put(GAME_MATCH_DESCRIPTION_LIMIT_TITLE,image);
+			icons.put(GAME_ROUND_DESCRIPTION_LIMIT_TITLE,image);
 			// misc
 			image = loadIcon(folder+GuiFileTools.FILE_MISC,absent);
-			icons.put(GAME_TOURNAMENT_HEADER_MISC,image);
-			icons.put(GAME_MATCH_HEADER_MISC,image);
-			icons.put(GAME_ROUND_HEADER_MISC,image);
+			icons.put(GAME_TOURNAMENT_DESCRIPTION_MISC_TITLE,image);
+			icons.put(GAME_MATCH_DESCRIPTION_MISC_TITLE,image);
+			icons.put(GAME_ROUND_DESCRIPTION_MISC_TITLE,image);
 			// name
 			image = loadIcon(folder+GuiFileTools.FILE_NAME,absent);
-			icons.put(GAME_TOURNAMENT_HEADER_NAME,image);
-			icons.put(GAME_MATCH_HEADER_NAME,image);
-			icons.put(GAME_ROUND_HEADER_NAME,image);
+			icons.put(GAME_TOURNAMENT_DESCRIPTION_PLAYERS_HEADER_NAME,image);
+			icons.put(GAME_MATCH_DESCRIPTION_PLAYERS_HEADER_NAME,image);
+			icons.put(GAME_TOURNAMENT_RESULTS_HEADER_NAME,image);
+			icons.put(GAME_MATCH_RESULTS_HEADER_NAME,image);
+			icons.put(GAME_ROUND_RESULTS_HEADER_NAME,image);
+			icons.put(GAME_TOURNAMENT_STATISTICS_HEADER_NAME,image);
+			icons.put(GAME_MATCH_STATISTICS_HEADER_NAME,image);
+			icons.put(GAME_ROUND_STATISTICS_HEADER_NAME,image);
 			// pack
 			image = loadIcon(folder+GuiFileTools.FILE_PACK,absent);
-			icons.put(GAME_ROUND_HEADER_PACK,image);
+			icons.put(GAME_ROUND_DESCRIPTION_MISC_HEADER_PACK,image);
 			// paintings
 			image = loadIcon(folder+GuiFileTools.FILE_PAINTINGS,absent);
-			icons.put(GAME_ROUND_HEADER_PAINTINGS,image);
-			icons.put(GAME_TOURNAMENT_LIMIT_PAINTINGS,image);
-			icons.put(GAME_MATCH_LIMIT_PAINTINGS,image);
-			icons.put(GAME_ROUND_LIMIT_PAINTINGS,image);
+			icons.put(GAME_TOURNAMENT_RESULTS_HEADER_PAINTINGS,image);
+			icons.put(GAME_MATCH_RESULTS_HEADER_PAINTINGS,image);
+			icons.put(GAME_ROUND_RESULTS_HEADER_PAINTINGS,image);
+			icons.put(GAME_TOURNAMENT_DESCRIPTION_LIMIT_HEADER_PAINTINGS,image);
+			icons.put(GAME_MATCH_DESCRIPTION_LIMIT_HEADER_PAINTINGS,image);
+			icons.put(GAME_ROUND_DESCRIPTION_LIMIT_HEADER_PAINTINGS,image);
 			// partial
 			image = loadIcon(folder+GuiFileTools.FILE_PARTIAL,absent);
-			icons.put(GAME_TOURNAMENT_HEADER_PARTIAL,image);
-			icons.put(GAME_MATCH_HEADER_PARTIAL,image);
-			icons.put(GAME_ROUND_HEADER_PARTIAL,image);
+			icons.put(GAME_TOURNAMENT_DESCRIPTION_POINTS_HEADER_PARTIAL,image);
+			icons.put(GAME_MATCH_DESCRIPTION_POINTS_HEADER_PARTIAL,image);
+			icons.put(GAME_ROUND_DESCRIPTION_POINTS_HEADER_PARTIAL,image);
 			// points
 			image = loadIcon(folder+GuiFileTools.FILE_POINTS,absent);
-			icons.put(GAME_TOURNAMENT_HEADER_POINTS,image);
-			icons.put(GAME_MATCH_HEADER_POINTS,image);
-			icons.put(GAME_ROUND_HEADER_POINTS,image);
-			icons.put(GAME_TOURNAMENT_LIMIT_POINTS,image);
-			icons.put(GAME_MATCH_LIMIT_POINTS,image);
-			icons.put(GAME_ROUND_LIMIT_POINTS,image);
-			icons.put(GAME_TOURNAMENT_HEADER_POINTSPROCESS,image);
-			icons.put(GAME_MATCH_HEADER_POINTSPROCESS,image);
-			icons.put(GAME_ROUND_HEADER_POINTSPROCESS,image);
+			icons.put(GAME_TOURNAMENT_RESULTS_HEADER_POINTS,image);
+			icons.put(GAME_MATCH_RESULTS_HEADER_POINTS,image);
+			icons.put(GAME_ROUND_RESULTS_HEADER_POINTS,image);
+			icons.put(GAME_TOURNAMENT_DESCRIPTION_POINTS_TITLE,image);
+			icons.put(GAME_MATCH_DESCRIPTION_POINTS_TITLE,image);
+			icons.put(GAME_ROUND_DESCRIPTION_POINTS_TITLE,image);
 			// rank
 			image = loadIcon(folder+GuiFileTools.FILE_RANK,absent);
-			icons.put(GAME_TOURNAMENT_HEADER_RANK,image);
-			icons.put(GAME_MATCH_HEADER_RANK,image);
-			icons.put(GAME_ROUND_HEADER_RANK,image);
+			icons.put(GAME_TOURNAMENT_DESCRIPTION_PLAYERS_HEADER_RANK,image);
+			icons.put(GAME_MATCH_DESCRIPTION_PLAYERS_HEADER_RANK,image);
+			icons.put(GAME_TOURNAMENT_DESCRIPTION_POINTS_HEADER_RANKINGS,image);
+			icons.put(GAME_MATCH_DESCRIPTION_POINTS_HEADER_RANKINGS,image);
+			icons.put(GAME_ROUND_DESCRIPTION_POINTS_HEADER_RANKINGS,image);
+			icons.put(GAME_TOURNAMENT_DESCRIPTION_POINTS_HEADER_RANKPOINTS,image);
+			icons.put(GAME_MATCH_DESCRIPTION_POINTS_HEADER_RANKPOINTS,image);
+			icons.put(GAME_ROUND_DESCRIPTION_POINTS_HEADER_RANKPOINTS,image);
+			// score
+			image = loadIcon(folder+GuiFileTools.FILE_SCORE,absent);
+			icons.put(GAME_TOURNAMENT_DESCRIPTION_POINTS_HEADER_SCORE,image);
+			icons.put(GAME_MATCH_DESCRIPTION_POINTS_HEADER_SCORE,image);
+			icons.put(GAME_ROUND_DESCRIPTION_POINTS_HEADER_SCORE,image);
 			// source
 			image = loadIcon(folder+GuiFileTools.FILE_SOURCE,absent);
-			icons.put(GAME_ROUND_HEADER_SOURCE,image);
+			icons.put(GAME_ROUND_DESCRIPTION_MISC_HEADER_SOURCE,image);
 			// theme
 			image = loadIcon(folder+GuiFileTools.FILE_THEME,absent);
-			icons.put(GAME_ROUND_HEADER_THEME,image);
+			icons.put(GAME_ROUND_DESCRIPTION_MISC_HEADER_THEME,image);
 			// time
 			image = loadIcon(folder+GuiFileTools.FILE_TIME,absent);
-			icons.put(GAME_ROUND_HEADER_TIME,image);
-			icons.put(GAME_TOURNAMENT_LIMIT_TIME,image);
-			icons.put(GAME_MATCH_LIMIT_TIME,image);
-			icons.put(GAME_ROUND_LIMIT_TIME,image);
+			icons.put(GAME_TOURNAMENT_RESULTS_HEADER_TIME,image);
+			icons.put(GAME_MATCH_RESULTS_HEADER_TIME,image);
+			icons.put(GAME_ROUND_RESULTS_HEADER_TIME,image);
+			icons.put(GAME_TOURNAMENT_DESCRIPTION_LIMIT_HEADER_TIME,image);
+			icons.put(GAME_MATCH_DESCRIPTION_LIMIT_HEADER_TIME,image);
+			icons.put(GAME_ROUND_DESCRIPTION_LIMIT_HEADER_TIME,image);
 			// title
 			image = loadIcon(folder+GuiFileTools.FILE_TITLE,absent);
-			icons.put(GAME_ROUND_HEADER_TITLE,image);
+			icons.put(GAME_ROUND_DESCRIPTION_MISC_HEADER_TITLE,image);
 			// total
 			image = loadIcon(folder+GuiFileTools.FILE_TOTAL,absent);
-			icons.put(GAME_TOURNAMENT_HEADER_TOTAL,image);
-			icons.put(GAME_MATCH_HEADER_TOTAL,image);
-			icons.put(GAME_TOURNAMENT_LIMIT_TOTAL,image);
-			icons.put(GAME_MATCH_LIMIT_TOTAL,image);
+			icons.put(GAME_TOURNAMENT_RESULTS_HEADER_TOTAL,image);
+			icons.put(GAME_MATCH_RESULTS_HEADER_TOTAL,image);
+			icons.put(GAME_TOURNAMENT_DESCRIPTION_LIMIT_HEADER_TOTAL,image);
+			icons.put(GAME_MATCH_DESCRIPTION_LIMIT_HEADER_TOTAL,image);
+			icons.put(GAME_TOURNAMENT_DESCRIPTION_POINTS_HEADER_TOTAL,image);
+			icons.put(GAME_MATCH_DESCRIPTION_POINTS_HEADER_TOTAL,image);
 		}			
+		// data icons
+		{	String folder = GuiFileTools.getDataPath()+File.separator;
+			// bombs
+			image = loadIcon(folder+GuiFileTools.FILE_BOMBS,absent);
+			icons.put(GAME_TOURNAMENT_DESCRIPTION_POINTS_DATA_BOMBS,image);
+			icons.put(GAME_MATCH_DESCRIPTION_POINTS_DATA_BOMBS,image);
+			icons.put(GAME_ROUND_DESCRIPTION_POINTS_DATA_BOMBS,image);
+			// computer
+			image = loadIcon(folder+GuiFileTools.FILE_COMPUTER,absent);
+			icons.put(GAME_TOURNAMENT_DESCRIPTION_PLAYERS_DATA_COMPUTER,image);
+			icons.put(GAME_MATCH_DESCRIPTION_PLAYERS_DATA_COMPUTER,image);
+			icons.put(GAME_TOURNAMENT_RESULTS_DATA_COMPUTER,image);
+			icons.put(GAME_MATCH_RESULTS_DATA_COMPUTER,image);
+			icons.put(GAME_ROUND_RESULTS_DATA_COMPUTER,image);
+			// crowns
+			image = loadIcon(folder+GuiFileTools.FILE_CROWNS,absent);
+			icons.put(GAME_TOURNAMENT_DESCRIPTION_POINTS_DATA_CROWNS,image);
+			icons.put(GAME_MATCH_DESCRIPTION_POINTS_DATA_CROWNS,image);
+			icons.put(GAME_ROUND_DESCRIPTION_POINTS_DATA_CROWNS,image);
+			// deaths
+			image = loadIcon(folder+GuiFileTools.FILE_DEATHS,absent);
+			icons.put(GAME_TOURNAMENT_DESCRIPTION_POINTS_DATA_DEATHS,image);
+			icons.put(GAME_MATCH_DESCRIPTION_POINTS_DATA_DEATHS,image);
+			icons.put(GAME_ROUND_DESCRIPTION_POINTS_DATA_DEATHS,image);
+			// human
+			image = loadIcon(folder+GuiFileTools.FILE_HUMAN,absent);
+			icons.put(GAME_TOURNAMENT_DESCRIPTION_PLAYERS_DATA_HUMAN,image);
+			icons.put(GAME_MATCH_DESCRIPTION_PLAYERS_DATA_HUMAN,image);
+			icons.put(GAME_TOURNAMENT_RESULTS_DATA_HUMAN,image);
+			icons.put(GAME_MATCH_RESULTS_DATA_HUMAN,image);
+			icons.put(GAME_ROUND_RESULTS_DATA_HUMAN,image);
+			// inverted order
+			image = loadIcon(folder+GuiFileTools.FILE_INVERTED,absent);
+			icons.put(GAME_TOURNAMENT_DESCRIPTION_POINTS_DATA_INVERTED,image);
+			icons.put(GAME_MATCH_DESCRIPTION_POINTS_DATA_INVERTED,image);
+			icons.put(GAME_ROUND_DESCRIPTION_POINTS_DATA_INVERTED,image);
+			// items
+			image = loadIcon(folder+GuiFileTools.FILE_ITEMS,absent);
+			icons.put(GAME_TOURNAMENT_DESCRIPTION_POINTS_DATA_ITEMS,image);
+			icons.put(GAME_MATCH_DESCRIPTION_POINTS_DATA_ITEMS,image);
+			icons.put(GAME_ROUND_DESCRIPTION_POINTS_DATA_ITEMS,image);
+			// kills
+			image = loadIcon(folder+GuiFileTools.FILE_KILLS,absent);
+			icons.put(GAME_TOURNAMENT_DESCRIPTION_POINTS_DATA_KILLS,image);
+			icons.put(GAME_MATCH_DESCRIPTION_POINTS_DATA_KILLS,image);
+			icons.put(GAME_ROUND_DESCRIPTION_POINTS_DATA_KILLS,image);
+			// no share
+			image = loadIcon(folder+GuiFileTools.FILE_NOSHARE,absent);
+			icons.put(GAME_TOURNAMENT_DESCRIPTION_POINTS_DATA_NOSHARE,image);
+			icons.put(GAME_MATCH_DESCRIPTION_POINTS_DATA_NOSHARE,image);
+			icons.put(GAME_ROUND_DESCRIPTION_POINTS_DATA_NOSHARE,image);
+			// paintings
+			image = loadIcon(folder+GuiFileTools.FILE_PAINTINGS,absent);
+			icons.put(GAME_TOURNAMENT_DESCRIPTION_POINTS_DATA_PAINTINGS,image);
+			icons.put(GAME_MATCH_DESCRIPTION_POINTS_DATA_PAINTINGS,image);
+			icons.put(GAME_ROUND_DESCRIPTION_POINTS_DATA_PAINTINGS,image);
+			// partial
+			image = loadIcon(folder+GuiFileTools.FILE_PARTIAL,absent);
+			icons.put(GAME_TOURNAMENT_DESCRIPTION_POINTS_DATA_PARTIAL,image);
+			icons.put(GAME_MATCH_DESCRIPTION_POINTS_DATA_PARTIAL,image);
+			icons.put(GAME_ROUND_DESCRIPTION_POINTS_DATA_PARTIAL,image);
+			// regular order
+			image = loadIcon(folder+GuiFileTools.FILE_REGULAR,absent);
+			icons.put(GAME_TOURNAMENT_DESCRIPTION_POINTS_DATA_REGULAR,image);
+			icons.put(GAME_MATCH_DESCRIPTION_POINTS_DATA_REGULAR,image);
+			icons.put(GAME_ROUND_DESCRIPTION_POINTS_DATA_REGULAR,image);
+			// share
+			image = loadIcon(folder+GuiFileTools.FILE_SHARE,absent);
+			icons.put(GAME_TOURNAMENT_DESCRIPTION_POINTS_DATA_SHARE,image);
+			icons.put(GAME_MATCH_DESCRIPTION_POINTS_DATA_SHARE,image);
+			icons.put(GAME_ROUND_DESCRIPTION_POINTS_DATA_SHARE,image);
+			// time
+			image = loadIcon(folder+GuiFileTools.FILE_TIME,absent);
+			icons.put(GAME_TOURNAMENT_DESCRIPTION_POINTS_DATA_TIME,image);
+			icons.put(GAME_MATCH_DESCRIPTION_POINTS_DATA_TIME,image);
+			icons.put(GAME_ROUND_DESCRIPTION_POINTS_DATA_TIME,image);
+		}
 	}
 	
 	
@@ -666,7 +917,7 @@ public class GuiTools
 		// action command
 		button.setActionCommand(name);
 		// tooltip
-		String toolTip = name+"Tooltip";
+		String toolTip = name+GuiTools.TOOLTIP;
 		String text = configuration.getLanguage().getText(toolTip);
 		button.setToolTipText(text);
 	}		

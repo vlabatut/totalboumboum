@@ -90,16 +90,16 @@ public class TournamentMenu extends InnerMenuPanel
 		
 		// buttons
 		add(Box.createVerticalGlue());
-		buttonNew = GuiTools.createSecondaryVerticalMenuButton(GuiTools.TOURNAMENT_MENU_BUTTON_NEW,this,getConfiguration());
-		buttonLoad = GuiTools.createSecondaryVerticalMenuButton(GuiTools.TOURNAMENT_MENU_BUTTON_LOAD,this,getConfiguration());
-		buttonSaveAs = GuiTools.createSecondaryVerticalMenuButton(GuiTools.TOURNAMENT_MENU_BUTTON_SAVE_AS,this,getConfiguration());
+		buttonNew = GuiTools.createSecondaryVerticalMenuButton(GuiTools.MENU_TOURNAMENT_BUTTON_NEW,this,getConfiguration());
+		buttonLoad = GuiTools.createSecondaryVerticalMenuButton(GuiTools.MENU_TOURNAMENT_BUTTON_LOAD,this,getConfiguration());
+		buttonSaveAs = GuiTools.createSecondaryVerticalMenuButton(GuiTools.MENU_TOURNAMENT_BUTTON_SAVE_AS,this,getConfiguration());
 		add(Box.createRigidArea(new Dimension(0,GuiTools.getSize(GuiTools.MENU_VERTICAL_BUTTON_SPACE))));
-		buttonRules = GuiTools.createSecondaryVerticalMenuButton(GuiTools.TOURNAMENT_MENU_BUTTON_RULES,this,getConfiguration());
-		buttonPlayers = GuiTools.createSecondaryVerticalMenuButton(GuiTools.TOURNAMENT_MENU_BUTTON_PLAYERS,this,getConfiguration());
+		buttonRules = GuiTools.createSecondaryVerticalMenuButton(GuiTools.MENU_TOURNAMENT_BUTTON_RULES,this,getConfiguration());
+		buttonPlayers = GuiTools.createSecondaryVerticalMenuButton(GuiTools.MENU_TOURNAMENT_BUTTON_PLAYERS,this,getConfiguration());
 		add(Box.createRigidArea(new Dimension(0,GuiTools.getSize(GuiTools.MENU_VERTICAL_BUTTON_SPACE))));
-		buttonPlay = GuiTools.createSecondaryVerticalMenuButton(GuiTools.TOURNAMENT_MENU_BUTTON_START,this,getConfiguration());
+		buttonPlay = GuiTools.createSecondaryVerticalMenuButton(GuiTools.MENU_TOURNAMENT_BUTTON_START,this,getConfiguration());
 		add(Box.createRigidArea(new Dimension(0,GuiTools.getSize(GuiTools.MENU_VERTICAL_BUTTON_SPACE))));
-		buttonBack = GuiTools.createSecondaryVerticalMenuButton(GuiTools.TOURNAMENT_MENU_BUTTON_BACK,this,getConfiguration());
+		buttonBack = GuiTools.createSecondaryVerticalMenuButton(GuiTools.MENU_TOURNAMENT_BUTTON_BACK,this,getConfiguration());
 		add(Box.createVerticalGlue());
 		
 		// panels
@@ -110,22 +110,22 @@ public class TournamentMenu extends InnerMenuPanel
 	
 	public void actionPerformed(ActionEvent e)
 	{	System.out.println(e.getActionCommand());
-		if(e.getActionCommand().equals(GuiTools.TOURNAMENT_MENU_BUTTON_NEW))
+		if(e.getActionCommand().equals(GuiTools.MENU_TOURNAMENT_BUTTON_NEW))
 		{	
 	    }
-		else if(e.getActionCommand().equals(GuiTools.TOURNAMENT_MENU_BUTTON_LOAD))
+		else if(e.getActionCommand().equals(GuiTools.MENU_TOURNAMENT_BUTTON_LOAD))
 		{	
 	    }
-		else if(e.getActionCommand().equals(GuiTools.TOURNAMENT_MENU_BUTTON_SAVE_AS))
+		else if(e.getActionCommand().equals(GuiTools.MENU_TOURNAMENT_BUTTON_SAVE_AS))
 		{	
 	    }
-		else if(e.getActionCommand().equals(GuiTools.TOURNAMENT_MENU_BUTTON_RULES))
+		else if(e.getActionCommand().equals(GuiTools.MENU_TOURNAMENT_BUTTON_RULES))
 		{	
 	    }
-		else if(e.getActionCommand().equals(GuiTools.TOURNAMENT_MENU_BUTTON_PLAYERS))
+		else if(e.getActionCommand().equals(GuiTools.MENU_TOURNAMENT_BUTTON_PLAYERS))
 		{	
 	    }
-		else if(e.getActionCommand().equals(GuiTools.TOURNAMENT_MENU_BUTTON_START))
+		else if(e.getActionCommand().equals(GuiTools.MENU_TOURNAMENT_BUTTON_START))
 		{	//NOTE c icite qu'il faut tester que les profils sont OK
 			AbstractTournament tournament = getConfiguration().getCurrentTournament();
 			try
@@ -158,10 +158,10 @@ public class TournamentMenu extends InnerMenuPanel
 			}
 			replaceWith(tournamentGamePanel);
 	    }
-		else if(e.getActionCommand().equals(GuiTools.TOURNAMENT_MENU_BUTTON_CONTINUE))
+		else if(e.getActionCommand().equals(GuiTools.MENU_TOURNAMENT_BUTTON_CONTINUE))
 		{	replaceWith(tournamentGamePanel);
 	    }
-		else if(e.getActionCommand().equals(GuiTools.TOURNAMENT_MENU_BUTTON_BACK))
+		else if(e.getActionCommand().equals(GuiTools.MENU_TOURNAMENT_BUTTON_BACK))
 		{	replaceWith(parent);
 	    }
 	} 
@@ -181,12 +181,12 @@ public class TournamentMenu extends InnerMenuPanel
 		{	buttonSaveAs.setEnabled(true);
 			buttonPlay.setEnabled(true);
 			if(tournament.hasBegun())
-			{	GuiTools.setButtonContent(GuiTools.TOURNAMENT_MENU_BUTTON_CONTINUE,buttonPlay,getConfiguration());
+			{	GuiTools.setButtonContent(GuiTools.MENU_TOURNAMENT_BUTTON_CONTINUE,buttonPlay,getConfiguration());
 				buttonPlayers.setEnabled(false);
 				buttonRules.setEnabled(false);
 			}
 			else
-			{	GuiTools.setButtonContent(GuiTools.TOURNAMENT_MENU_BUTTON_START,buttonPlay,getConfiguration());
+			{	GuiTools.setButtonContent(GuiTools.MENU_TOURNAMENT_BUTTON_START,buttonPlay,getConfiguration());
 				buttonPlayers.setEnabled(true);
 				buttonRules.setEnabled(true);
 			}

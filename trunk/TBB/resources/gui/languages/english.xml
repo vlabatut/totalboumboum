@@ -1,403 +1,396 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <language
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
-	xsi:noNamespaceSchemaLocation="..\xml\schemas\language.xsd">
+	xsi:noNamespaceSchemaLocation="..\..\schemas\language.xsd">
 	
+	<group name="Menu" >
 <!-- MAIN MENU -->
-	
-	<text name="MainMenuButtonHeroes" value="Heroes" />
-	<text name="MainMenuButtonHeroesTooltip" value="Show the available controlable characters" />
-	
-	<text name="MainMenuButtonLevels" value="Levels" />
-	<text name="MainMenuButtonLevelsTooltip" value="Show the available levels" />
+		<group name="Main">
+			<group name="Button">
+				<text name="Heroes" value="Heroes" tooltip="Show the available controlable characters" />
+				<text name="Levels" value="Levels" tooltip="Show the available levels" />
+				<text name="Options" value="Options" tooltip="Access the game options" />
+				<text name="Profiles" value="Profiles" tooltip="Edit the players' profiles" />
+				<text name="QuickMatch" value="Quick match" tooltip="Play only one match" />
+				<text name="Statistics" value="Statistics" tooltip="See the player's statistics" />
+				<text name="Tournament" value="Tournament" tooltip="Select and play a tournament" />
+			</group>
+		</group>
 
-	<text name="MainMenuButtonOptions" value="Options" />
-	<text name="MainMenuButtonOptionsTooltip" value="Access the game options" />
-	
-	<text name="MainMenuButtonProfiles" value="Profiles" />
-	<text name="MainMenuButtonProfilesTooltip" value="Edit the players' profiles" />
-	
-	<text name="MainMenuButtonQuickMatch" value="Quick match" />
-	<text name="MainMenuButtonQuickMatchTooltip" value="Play only one match" />
-	
-	<text name="MainMenuButtonStatistics" value="Statistics" />
-	<text name="MainMenuButtonStatisticsTooltip" value="See the player's statistics" />
-
-	<text name="MainMenuButtonTournament" value="Tournament" />
-	<text name="MainMenuButtonTournamentTooltip" value="Select and play a tournament" />
-	
 <!-- OPTIONS MENU -->
-	
-	<text name="OptionMenuButtonBack" value="Back" />
-	<text name="OptionMenuButtonBackTooltip" value="Go back to the main menu" />
-	
-	<text name="OptionMenuButtonGamePlay" value="Gameplay" />
-	<text name="OptionMenuButtonGamePlayTooltip" value="Modify the way of playing" />
-
-	<text name="OptionMenuButtonVideo" value="Video" />
-	<text name="OptionMenuButtonVideoTooltip" value="Access the video settings" />
+		<group name="Options">
+			<group name="Button">
+				<text name="Back" value="Back" tooltip="Go back to the main menu" />
+				<text name="GamePlay" value="Gameplay" tooltip="Modify the way of playing" />
+				<text name="Video" value="Video" tooltip="Access the video settings" />
+			</group>
+		</group>	
 
 <!-- TOURNAMENT MENU -->	
-	
-	<text name="TournamentMenuButtonBack" value="Back" />
-	<text name="TournamentMenuButtonBackTooltip" value="Go to back the main menu" />
-	
-	<text name="TournamentMenuButtonContinue" value="Continue" />
-	<text name="TournamentMenuButtonContinueTooltip" value="Continue with the current tournament" />
-	
-	<text name="TournamentMenuButtonLoad" value="Load" />
-	<text name="TournamentMenuButtonLoadTooltip" value="Load an existing tournament" />
-	
-	<text name="TournamentMenuButtonNew" value="New" />
-	<text name="TournamentMenuButtonNewTooltip" value="Start a new tournament" />
-	
-	<text name="TournamentMenuButtonPlayers" value="Players" />
-	<text name="TournamentMenuButtonPlayersTooltip" value="Select the players" />
-	
-	<text name="TournamentMenuButtonRules" value="Rules" />
-	<text name="TournamentMenuButtonRulesTooltip" value="See the parameters of the tournament" />
-	
-	<text name="TournamentMenuButtonSaveAs" value="Save as..." />
-	<text name="TournamentMenuButtonSaveAsTooltip" value="Save the current tournament in a different file than the default one" />
-	
-	<text name="TournamentMenuButtonStart" value="Start" />
-	<text name="TournamentMenuButtonStartTooltip" value="Start the tournament" />
+		<group name="Tournament">
+			<group name="Button">
+				<text name="Back" value="Back" tooltip="Go to back the main menu" />
+				<text name="Continue" value="Continue" tooltip="Continue with the current tournament" />
+				<text name="Load" value="Load" tooltip="Load an existing tournament" />
+				<text name="New" value="New" tooltip="Start a new tournament" />
+				<text name="Players" value="Players" tooltip="Select the players" />
+				<text name="Rules" value="Rules" tooltip="See the parameters of the tournament" />
+				<text name="SaveAs" value="Save as..." tooltip="Save the current tournament in a different file than the default one" />
+				<text name="Start" value="Start" tooltip="Start the tournament" />
+			</group>
+		</group>	
+		
+	</group>
+
+	<group name="Game" >
 
 <!-- TOURNAMENT PANEL -->
-	<text name="TournamentButtonCurrentMatch" value="Current match" />
-	<text name="TournamentButtonCurrentMatchTooltip" value="Go to the current match" />
+		<group name="Tournament">
+			<group name="Button">
+				<text name="CurrentMatch" value="Current match" tooltip="Go to the current match" />
+				<text name="Description" value="Description" tooltip="See the description of the current tournament" />
+				<text name="Finish" value="Finish" tooltip="Finish the current tournament and go back to the tournament menu" />
+				<text name="Menu" value="Menu" tooltip="Go back to the tournament menu" />
+				<text name="NextMatch" value="Next match" tooltip="Go to the next match" />
+				<text name="Quit" value="Quit" tooltip="Go back to the main menu" />
+				<text name="Results" value="Results" tooltip="See the current results of this tournament" />
+				<text name="Statistics" value="Statistics" tooltip="See the detailed statistics of the current tournament" />
+			</group>
 
-	<text name="TournamentButtonDescription" value="Description" />
-	<text name="TournamentButtonDescriptionTooltip" value="See the description of the current tournament" />
+			<group name="Description">
+				<text name="Title" value="Tournament description"  tooltip="Tournament description" />
 
-	<text name="TournamentButtonFinish" value="Finish" />
-	<text name="TournamentButtonFinishTooltip" value="Finish the current tournament and go back to the tournament menu" />
+				<group name="Limit">
+					<text name="Title" value="Limits"  tooltip="Information about what may cause the tournament to end" />
+					<group name="Header">
+						<text name="Bombs" value="Bombs"  tooltip="Number of bombs to drop in order to stop this tournament" />
+						<text name="Confrontations" value="Matches"  tooltip="Maximal number of matches in this tournament" />
+						<text name="Crowns" value="Crowns"  tooltip="Number of crowns to pick in order to stop this tournament" />
+						<text name="Custom" value="Custom points"  tooltip="Number of custom points to score in order to stop this tournament" />
+						<text name="Deaths" value="Deaths"  tooltip="Number of deaths to suffer in order to stop this tournament" />
+						<text name="Items" value="Items"  tooltip="Number of items to pick in order to stop this tournament" />
+						<text name="Kills" value="Kills"  tooltip="Number of kills to perform in order to stop this tournament" />
+						<text name="Paintings" value="Paintings"  tooltip="Number of tiles to paint in order to stop this tournament" />
+						<text name="Time" value="Time"  tooltip="Maximum duration of this tournament" />
+						<text name="Total" value="Total"  tooltip="Total number of points to score during the matches in order to stop this tournament" />
+					</group>
+				</group>
+				
+				<group name="Misc">
+					<text name="Title" value="Misc"  tooltip="Various informations about this tournament" />
+				</group>
+				
+				<group name="Notes">
+					<text name="Title" value="Notes"  tooltip="Notes from the designer of this tournament" />
+				</group>
+				
+				<group name="Players">
+					<group name="Header">
+						<text name="Name" value="Name"  tooltip="Name of the player" />
+						<text name="Rank" value="#"  tooltip="Rank of the player in the general statistics before this tournament" />
+					</group>
+					<group name="Data">
+						<text name="Computer" value="Computer"  tooltip="This player is computer-controlled" />
+						<text name="Human" value="Human"  tooltip="This player is human-controlled" />
+					</group>
+				</group>
 
-	<text name="TournamentButtonMenu" value="Menu" />
-	<text name="TournamentButtonMenuTooltip" value="Go back to the tournament menu" />
+				<group name="Points">
+					<text name="Title" value="Points"  tooltip="Information about how points are processed for this tournament" />
+					<group name="Header">
+						<text name="Constant" value="Constant"  tooltip="Constant value" />
+						<text name="Discretize" value="Discretize"  tooltip="Calculates points according to some intervals" />
+						<text name="Partial" value="Partial"  tooltip="Partial result of custom points processing" />
+						<text name="Rankings" value="Rankings"  tooltip="Caculates a ranking according to one or several points" />
+						<text name="Rankpoints" value="Rankpoints"  tooltip="Calculates points according to a ranking" />
+						<text name="Score" value="Score"  tooltip="scores from all the players in this tournament" />
+						<text name="Total" value="Total" tooltip="Total number of points scored in each confrontation" />
+					</group>
+					<group name="Data">
+						<text name="Bombs" value="Bombs"  tooltip="Uses the total number of bombs dropped during the tournament" />
+						<text name="Crowns" value="Crowns"  tooltip="Uses the total number of crowns picked during the tournament" />
+						<text name="Deaths" value="Deaths"  tooltip="Uses the total number of deaths suffered during the tournament" />
+						<text name="Inverted" value="Inverted"  tooltip="Inverted order" />
+						<text name="Items" value="Items"  tooltip="Uses the total number of items picked during the tournament" />
+						<text name="Kills" value="Kills"  tooltip="Uses the total number of players killed during the tournament" />
+						<text name="Noshare" value="No share"  tooltip="In case of tie, points are not shared" />
+						<text name="Paintings" value="Paintings"  tooltip="Uses total the number of tiles painted during the tournament" />
+						<text name="Partial" value="Partial"  tooltip="Uses a previous partial result of custom point procesing" />
+						<text name="Regular" value="Regular"  tooltip="Regular order" />
+						<text name="Share" value="Share"  tooltip="In case of tie, points are shared" />
+						<text name="Time" value="Time"  tooltip="Uses the total amount of time played during the tournament" />
+					</group>
+				</group>
+				
+			</group>
 
-	<text name="TournamentButtonNextMatch" value="Next match" />
-	<text name="TournamentButtonNextMatchTooltip" value="Go to the next match" />
+			<group name="Results">
+				<text name="Title" value="Tournament results"  tooltip="Tournament results" />
+				<group name="Header">
+					<text name="Bombs" value="Bombs"  tooltip="Total number of bombs dropped in this tournament" />
+					<text name="Crowns" value="Crowns"  tooltip="Total number of crowns picked in this tournament" />
+					<text name="CustomLimit" value="Custom"  tooltip="Custom points used as a limit criterion" />
+					<text name="CustomPoints" value="Custom"  tooltip="Custom points used to compute the overall points" />
+					<text name="Deaths" value="Deaths"  tooltip="Total number of times the player was killed in this tournament" />
+					<text name="Items" value="Items"  tooltip="Total number of items picked in this tournament" />
+					<text name="Kills" value="Kills"  tooltip="Total number of players killed in this tournament" />
+					<text name="Match" value="M"  tooltip="Number of points scored for the match number" />
+					<text name="Name" value="Name"  tooltip="Name of the player" />
+					<text name="Paintings" value="Paintings"  tooltip="Total number of tiles painted in this match" />
+					<text name="Points" value="Points"  tooltip="Number of points scored for this tournament" />
+					<text name="Time" value="Time"  tooltip="Total time spend in the tournament" />
+					<text name="Total" value="Total"  tooltip="Total number of points scored for all the matches" />
+				</group>
+				<group name="Data">
+						<text name="Computer" value="Computer"  tooltip="Computer-controlled player" />
+						<text name="Human" value="Human"  tooltip="Human-controlled player" />
+				</group>
+			</group>
 
-	<text name="TournamentButtonQuit" value="Quit" />
-	<text name="TournamentButtonQuitTooltip" value="Go back to the main menu" />
+			<group name="Statistics">
+				<text name="Title" value="Tournament statistics"  tooltip="Tournament statistics" />
+				<group name="Header">
+					<text name="Name" value="Name"  tooltip="Name of the player" />
+				</group>
+			</group>
+		</group>
+
 	
-	<text name="TournamentButtonResults" value="Results" />
-	<text name="TournamentButtonResultsTooltip" value="See the current results of this tournament" />
 
-	<text name="TournamentButtonStatistics" value="Statistics" />
-	<text name="TournamentButtonStatisticsTooltip" value="See the detailed statistics of the current tournament" />
-	
 <!-- MATCH PANEL -->
-	<text name="MatchButtonCurrentRound" value="Current round" />
-	<text name="MatchButtonCurrentRoundTooltip" value="Go to the current round" />
-
-	<text name="MatchButtonCurrentTournament" value="Current tournament" />
-	<text name="MatchButtonCurrentTournamentTooltip" value="Go to the current tournament" />
-
-	<text name="MatchButtonDescription" value="Description" />
-	<text name="MatchButtonDescriptionTooltip" value="See the description of the current match" />
-
-	<text name="MatchButtonQuit" value="Quit" />
-	<text name="MatchButtonQuitTooltip" value="Quit the current tournament" />
-
-	<text name="MatchButtonFinish" value="Finish the current match" />
-	<text name="MatchButtonFinishTooltip" value="Finish this match and back to the tournament" />
-
-	<text name="MatchButtonNextRound" value="Next Round" />
-	<text name="MatchButtonNextRoundTooltip" value="Go to the next round" />
-
-	<text name="MatchButtonResults" value="Results" />
-	<text name="MatchButtonResultsTooltip" value="See the current results of this match" />
-
-	<text name="MatchButtonStatistics" value="Statistics" />
-	<text name="MatchButtonStatisticsTooltip" value="See the detailed statistics of the current match" />
-	
+		<group name="Match">
+			<group name="Button">
+				<text name="CurrentRound" value="Current round" tooltip="Go to the current round" />
+				<text name="CurrentTournament" value="Current tournament" tooltip="Go to the current tournament" />
+				<text name="Description" value="Description" tooltip="See the description of the current match" />
+				<text name="Quit" value="Quit" tooltip="Quit the current tournament" />
+				<text name="Finish" value="Finish the current match" tooltip="Finish this match and back to the tournament" />
+				<text name="NextRound" value="Next Round" tooltip="Go to the next round" />
+				<text name="Results" value="Results" tooltip="See the current results of this match" />
+				<text name="Statistics" value="Statistics" tooltip="See the detailed statistics of the current match" />
+			</group>
+		
+			<group name="Description">
+				<text name="Title" value="Match description"  tooltip="Match description" />
+				
+				<group name="Limit">
+					<text name="Title" value="Limits"  tooltip="Information about what may cause the match to end" />
+					<group name="Header">
+						<text name="Bombs" value="Bombs"  tooltip="Number of bombs to drop in order to stop this match" />
+						<text name="Confrontations" value="Rounds"  tooltip="Maximal number of rounds in this match" />
+						<text name="Crowns" value="Crowns"  tooltip="Number of crowns to pick in order to stop this match" />
+						<text name="Custom" value="Custom"  tooltip="Number of custom points to score in order to stop this match" />
+						<text name="Deaths" value="Deaths"  tooltip="Number of deaths to suffer in order to stop this match" />
+						<text name="Items" value="Items"  tooltip="Number of items to pick in order to stop this match" />
+						<text name="Kills" value="Kills"  tooltip="Number of kills to perform in order to stop this match" />
+						<text name="Paintings" value="Paintings"  tooltip="Number of tiles to paint in order to stop this match" />
+						<text name="Time" value="Time"  tooltip="Maximum duration of this match" />
+						<text name="Total" value="Total"  tooltip="Total number of points to score during the rounds in order to stop this match" />
+					</group>
+				</group>
+								
+				<group name="Misc">
+					<text name="Title" value="Misc"  tooltip="Various informations about this match" />
+				</group>
+				
+				<group name="Notes">
+					<text name="Title" value="Notes"  tooltip="Notes from the designer of this match" />
+				</group>
+				
+				<group name="Players">
+					<group name="Header">
+						<text name="Name" value="Name"  tooltip="Name of the player" />
+						<text name="Rank" value="#"  tooltip="Rank of the player in the tournament before this match" />
+					</group>
+					<group name="Data">
+						<text name="Computer" value="Computer"  tooltip="This player is computer-controlled" />
+						<text name="Human" value="Human"  tooltip="This player is human-controlled" />
+					</group>
+				</group>
+				
+				<group name="Points">
+					<text name="Title" value="Points"  tooltip="Information about how points are processed for this match" />
+					<group name="Header">
+						<text name="Constant" value="Constant"  tooltip="Constant value" />
+						<text name="Discretize" value="Discretize"  tooltip="Calculates points according to some intervals" />
+						<text name="Partial" value="Partial"  tooltip="Partial result of custom points processing" />
+						<text name="Rankings" value="Rankings"  tooltip="Caculates a ranking according to one or several points" />
+						<text name="Rankpoints" value="Rankpoints"  tooltip="Calculates points according to a ranking" />
+						<text name="Score" value="Score"  tooltip="scores from all the players in this match" />
+						<text name="Total" value="Total" tooltip="Total number of points scored in each confrontation" />
+					</group>
+					<group name="Data">
+						<text name="Bombs" value="Bombs"  tooltip="Uses the total number of bombs dropped during the match" />
+						<text name="Crowns" value="Crowns"  tooltip="Uses the total number of crowns picked during the match" />
+						<text name="Deaths" value="Deaths"  tooltip="Uses the total number of deaths suffered during the match" />
+						<text name="Inverted" value="Inverted"  tooltip="Inverted order" />
+						<text name="Items" value="Items"  tooltip="Uses the total number of items picked during the match" />
+						<text name="Kills" value="Kills"  tooltip="Uses the total number of players killed during the match" />
+						<text name="Noshare" value="No share"  tooltip="In case of tie, points are not shared" />
+						<text name="Paintings" value="Paintings"  tooltip="Uses total the number of tiles painted during the match" />
+						<text name="Partial" value="Partial"  tooltip="Uses a previous partial result of custom point procesing" />
+						<text name="Regular" value="Regular"  tooltip="Regular order" />
+						<text name="Share" value="Share"  tooltip="In case of tie, points are shared" />
+						<text name="Time" value="Time"  tooltip="Uses the total amount of time played during the match" />
+					</group>
+				</group>
+				
+			</group>
+				
+			<group name="Results">
+				<text name="Title" value="Match results"  tooltip="Match results" />
+				<group name="Header">
+					<text name="Bombs" value="Bombs"  tooltip="Total number of bombs dropped in this match" />
+					<text name="Crowns" value="Crowns"  tooltip="Total number of crowns picked in this match" />
+					<text name="CustomLimit" value="Custom"  tooltip="Custom points used as a limit criterion" />
+					<text name="CustomPoints" value="Custom"  tooltip="Custom points used to compute the overall points" />
+					<text name="Deaths" value="Deaths"  tooltip="Total number of times the player was killed in this match" />
+					<text name="Items" value="Items"  tooltip="Total number of items picked in this match" />
+					<text name="Kills" value="Kills"  tooltip="Total number of players killed in this match" />
+					<text name="Name" value="Name"  tooltip="Name of the player" />
+					<text name="Paintings" value="Paintings"  tooltip="Total number of tiles painted in this match" />
+					<text name="Points" value="Points"  tooltip="Number of points scored for this match" />
+					<text name="Round" value="R"  tooltip="Number of points scored for the round number" />
+					<text name="Time" value="Time"  tooltip="Total time spend in the match" />
+					<text name="Total" value="Total"  tooltip="Total number of points scored for all the rounds" />
+				</group>
+				<group name="Data">
+					<text name="Computer" value="Computer"  tooltip="Computer-controlled player" />
+					<text name="Human" value="Human"  tooltip="Human-controlled player" />
+				</group>
+			</group>
+				
+			<group name="Statistics">
+				<text name="Title" value="Match statistics"  tooltip="Match statistics" />
+				<group name="Header">
+					<text name="Name" value="Name"  tooltip="Name of the player" />
+				</group>
+			</group>
+		
+		</group>
+		
 <!-- ROUND PANEL -->
-	<text name="RoundButtonCurrentMatch" value="Current match" />
-	<text name="RoundButtonCurrentMatchTooltip" value="Go to the current match" />
+		<group name="Round">
+			<group name="Button">
+				<text name="CurrentMatch" value="Current match" tooltip="Go to the current match" />
+				<text name="Description" value="Description" tooltip="See the description of the current round" />
+				<text name="Finish" value="Finish the current round" tooltip="Finish this round and back to the match" />
+				<text name="Play" value="Play" tooltip="Start to play" />
+				<text name="Quit" value="Quit" tooltip="Quit the current tournament" />
+				<text name="Results" value="Results" tooltip="See the results of the current round" />
+				<text name="Statistics" value="Statistics" tooltip="See the detailed statistics of the current round" />
+			</group>
 
-	<text name="RoundButtonDescription" value="Description" />
-	<text name="RoundButtonDescriptionTooltip" value="See the description of the current round" />
-	
-	<text name="RoundButtonFinish" value="Finish the current round" />
-	<text name="RoundButtonFinishTooltip" value="Finish this round and back to the match" />
-
-	<text name="RoundButtonPlay" value="Play" />
-	<text name="RoundButtonPlayTooltip" value="Start to play" />
-
-	<text name="RoundButtonQuit" value="Quit" />
-	<text name="RoundButtonQuitTooltip" value="Quit the current tournament" />
-
-	<text name="RoundButtonResults" value="Results" />
-	<text name="RoundButtonResultsTooltip" value="See the results of the current round" />
-
-	<text name="RoundButtonStatistics" value="Statistics" />
-	<text name="RoundButtonStatisticsTooltip" value="See the detailed statistics of the current round" />
-
-	<text name="RoundProgressbarBombset" value="Loading bombs" />
-	<text name="RoundProgressbarCommon" value="Loading common player data" />
-	<text name="RoundProgressbarComplete" value="Loading complete" />
-	<text name="RoundProgressbarItemset" value="Loading items" />
-	<text name="RoundProgressbarPlayer" value="Loading player" />
-	<text name="RoundProgressbarTheme" value="Loading theme" />
-	<text name="RoundProgressbarZone" value="Loading zone" />
-
-<!-- GAME PANEL -->
-
-<!-- TOURNAMENT GAME PANEL -->
-	<text name="GameTournamentTitleDescription" value="Tournament description" />
-	<text name="GameTournamentTitleResults" value="Tournament results" />
-	<text name="GameTournamentTitleStatistics" value="Tournament statistics" />
-	<!--  -->
-	<text name="GameTournamentHeaderName" value="Name" />
-	<text name="GameTournamentHeaderNameTooltip" value="Name of the player" />
-	<!--  -->
-	<text name="GameTournamentHeaderBombs" value="Bombs" />
-	<text name="GameTournamentHeaderBombsTooltip" value="Number of bombs dropped in this tournament" />
-	<!--  -->
-	<text name="GameTournamentHeaderDeaths" value="Deaths" />
-	<text name="GameTournamentHeaderDeathsTooltip" value="Number of times the player was killed in this tournament" />
-	<!--  -->
-	<text name="GameTournamentHeaderItems" value="Items" />
-	<text name="GameTournamentHeaderItemsTooltip" value="Number of items picked in this tournament" />
-	<!--  -->
-	<text name="GameTournamentHeaderKills" value="Kills" />
-	<text name="GameTournamentHeaderKillsTooltip" value="Number of players killed in this tournament" />
-	<!--  -->
-	<text name="GameTournamentHeaderTotal" value="Pts" />
-	<text name="GameTournamentHeaderPointsTooltip" value="Number of points scored for this tournament" />
-	<!--  -->
-	<text name="GameTournamentHeaderTotal" value="All" />
-	<text name="GameTournamentHeaderTotalTooltip" value="Total number of points scored for all the matches" />
-	<!--  -->
-	<text name="GameTournamentHeaderMatch" value="M" />
-	<text name="GameTournamentHeaderMatchTooltip" value="Number of points scored for the match number" />
-	<!--  -->
-	<text name="GameTournamentHeaderNotes" value="Notes" />
-	<text name="GameTournamentHeaderNotesTooltip" value="Notes from the designer of this tournament" />
-	<!--  -->
-	<text name="GameTournamentHeaderLimits" value="Limits" />
-	<text name="GameTournamentHeaderLimitsTooltip" value="Information about what may cause the tournament to end" />
-	<!--  -->
-	<text name="GameTournamentHeaderPointprocess" value="Points" />
-	<text name="GameTournamentHeaderPointprocessTooltip" value="Information about how points are processed for this tournament" />
-	<!--  -->
-	<text name="GameTournamentHeaderRank" value="#" />
-	<text name="GameTournamentHeaderRankTooltip" value="Rank of the player in the general statistics before this tournament" />
-	<!--  -->
-	<text name="GameTournamentHeaderMisc" value="Misc" />
-	<text name="GameTournamentHeaderMiscTooltip" value="Various informations about this tournament" />
-	<!--  -->
-	<text name="GameTournamentHeaderPartial" value="Partial" />
-	<text name="GameTournamentHeaderPartialTooltip" value="Partial result of the points processing for this tournament" />
-	<!--  -->
-	<text name="GameTournamentLimitConfrontations" value="Matches" />
-	<text name="GameTournamentLimitConfrontationsTooltip" value="Maximal number of matches in this tournament" />
-	<!--  -->
-	<text name="GameTournamentLimitPoints" value="Points" />
-	<text name="GameTournamentLimitPointsTooltip" value="Number of custom points to score in order to stop this tournament" />
-	<!--  -->
-	<text name="GameTournamentLimitTotal" value="Total" />
-	<text name="GameTournamentLimitTotalTooltip" value="Number of points to score during the matches in order to stop this tournament" />
-	<!--  -->
-	<text name="GameTournamentLimitBombs" value="Bombs" />
-	<text name="GameTournamentLimitBombsTooltip" value="Number of bombs to drop in order to stop this tournament" />
-	<!--  -->
-	<text name="GameTournamentLimitDeaths" value="Deaths" />
-	<text name="GameTournamentLimitDeathsTooltip" value="Number of deaths to suffer in order to stop this tournament" />
-	<!--  -->
-	<text name="GameTournamentLimitItems" value="Items" />
-	<text name="GameTournamentLimitItemsTooltip" value="Number of items to pick in order to stop this tournament" />
-	<!--  -->
-	<text name="GameTournamentLimitKills" value="Kills" />
-	<text name="GameTournamentLimitKillsTooltip" value="Number of kills to perform in order to stop this tournament" />
-	<!--  -->
-	<text name="GameTournamentLimitTime" value="Time" />
-	<text name="GameTournamentLimitTimeTooltip" value="Maximum duration of this tournament" />
-	<!--  -->
-	<text name="GameTournamentLimitCrowns" value="Crowns" />
-	<text name="GameTournamentLimitCrownsTooltip" value="Number of crowns to pick in order to stop this tournament" />
-	<!--  -->
-	<text name="GameTournamentLimitPaintings" value="Kills" />
-	<text name="GameTournamentLimitPaintingsTooltip" value="Number of tiles to paint in order to stop this tournament" />
-	
-<!-- MATCH GAME PANEL -->
-	<text name="GameMatchTitleDescription" value="Match description" />
-	<text name="GameMatchTitleResults" value="Match results" />
-	<text name="GameMatchTitleStatistics" value="Match statistics" />
-	<!--  -->
-	<text name="GameMatchHeaderName" value="Name" />
-	<text name="GameMatchHeaderNameTooltip" value="Name of the player" />
-	<!--  -->
-	<text name="GameMatchHeaderBombs" value="Bombs" />
-	<text name="GameMatchHeaderBombsTooltip" value="Number of bombs dropped in this match" />
-	<!--  -->
-	<text name="GameMatchHeaderDeaths" value="Deaths" />
-	<text name="GameMatchHeaderDeathsTooltip" value="Number of times the player was killed in this match" />
-	<!--  -->
-	<text name="GameMatchHeaderItems" value="Items" />
-	<text name="GameMatchHeaderItemsTooltip" value="Number of items picked in this match" />
-	<!--  -->
-	<text name="GameMatchHeaderKills" value="Kills" />
-	<text name="GameMatchHeaderKillsTooltip" value="Number of players killed in this match" />
-	<!--  -->
-	<text name="GameMatchHeaderPoints" value="Pts" />
-	<text name="GameMatchHeaderPointsTooltip" value="Number of points scored for this match" />
-	<!--  -->
-	<text name="GameMatchHeaderRank" value="#" />
-	<text name="GameMatchHeaderRankTooltip" value="Rank of the player in the tournament before this match" />
-	<!--  -->
-	<text name="GameMatchHeaderRound" value="R" />
-	<text name="GameMatchHeaderRoundTooltip" value="Number of points scored for the round number" />
-	<!--  -->
-	<text name="GameMatchHeaderTotal" value="All" />
-	<text name="GameMatchHeaderTotalTooltip" value="Total number of points scored for all the rounds" />
-	<!--  -->
-	<text name="GameMatchHeaderNotes" value="Notes" />
-	<text name="GameMatchHeaderNotesTooltip" value="Notes from the designer of this match" />
-	<!--  -->
-	<text name="GameMatchHeaderLimits" value="Limits" />
-	<text name="GameMatchHeaderLimitsTooltip" value="Information about what may cause the match to end" />
-	<!--  -->
-	<text name="GameMatchHeaderPointprocess" value="Points" />
-	<text name="GameMatchHeaderPointprocessTooltip" value="Information about how points are processed for this match" />
-	<!--  -->
-	<text name="GameMatchHeaderMisc" value="Misc" />
-	<text name="GameMatchHeaderMiscTooltip" value="Various informations about this match" />
-	<!--  -->
-	<text name="GameMatchHeaderPartial" value="Partial" />
-	<text name="GameMatchHeaderPartialTooltip" value="Partial result of the points processing for this match" />
-	<!--  -->
-	<text name="GameMatchLimitConfrontations" value="Rounds" />
-	<text name="GameMatchLimitConfrontationsTooltip" value="Maximal number of rounds in this match" />
-	<!--  -->
-	<text name="GameMatchLimitPoints" value="Points" />
-	<text name="GameMatchLimitPointsTooltip" value="Number of custom points to score in order to stop this match" />
-	<!--  -->
-	<text name="GameMatchLimitTotal" value="Total" />
-	<text name="GameMatchLimitTotalTooltip" value="Number of points to score during the rounds in order to stop this match" />
-	<!--  -->
-	<text name="GameMatchLimitBombs" value="Bombs" />
-	<text name="GameMatchLimitBombsTooltip" value="Number of bombs to drop in order to stop this match" />
-	<!--  -->
-	<text name="GameMatchLimitDeaths" value="Deaths" />
-	<text name="GameMatchLimitDeathsTooltip" value="Number of deaths to suffer in order to stop this match" />
-	<!--  -->
-	<text name="GameMatchLimitItems" value="Items" />
-	<text name="GameMatchLimitItemsTooltip" value="Number of items to pick in order to stop this match" />
-	<!--  -->
-	<text name="GameMatchLimitKills" value="Kills" />
-	<text name="GameMatchLimitKillsTooltip" value="Number of kills to perform in order to stop this match" />
-	<!--  -->
-	<text name="GameMatchLimitTime" value="Time" />
-	<text name="GameMatchLimitTimeTooltip" value="Maximum duration of this match" />
-	<!--  -->
-	<text name="GameMatchLimitCrowns" value="Crowns" />
-	<text name="GameMatchLimitCrownsTooltip" value="Number of crowns to pick in order to stop this match" />
-	<!--  -->
-	<text name="GameMatchLimitPaintings" value="Kills" />
-	<text name="GameMatchLimitPaintingsTooltip" value="Number of tiles to paint in order to stop this match" />
-	
-<!-- ROUND GAME PANEL -->
-	<text name="GameRoundTitleDescription" value="Round description" />
-	<text name="GameRoundTitleResults" value="Round results" />
-	<text name="GameRoundTitleStatistics" value="Round statistics" />
-	<!--  -->
-	<text name="GameRoundHeaderName" value="Name" />
-	<text name="GameRoundHeaderNameTooltip" value="Name of the player" />
-	<!--  -->
-	<text name="GameRoundHeaderPoints" value="Pts" />
-	<text name="GameRoundHeaderPointsTooltip" value="Number of points scored for this round" />
-	<!--  -->
-	<text name="GameRoundHeaderBombs" value="Bombs" />
-	<text name="GameRoundHeaderBombsTooltip" value="Number of bombs dropped in this round" />
-	<!--  -->
-	<text name="GameRoundHeaderDeaths" value="Deaths" />
-	<text name="GameRoundHeaderDeathsTooltip" value="Number of times the player was killed in this round" />
-	<!--  -->
-	<text name="GameRoundHeaderItems" value="Items" />
-	<text name="GameRoundHeaderItemsTooltip" value="Number of items picked in this round" />
-	<!--  -->
-	<text name="GameRoundHeaderKills" value="Kills" />
-	<text name="GameRoundHeaderKillsTooltip" value="Number of players killed in this round" />
-	<!--  -->
-	<text name="GameRoundHeaderCrowns" value="Crowns" />
-	<text name="GameRoundHeaderCrownsTooltip" value="Number of crowns owned at the end of this round" />
-	<!--  -->
-	<text name="GameRoundHeaderFrags" value="Frags" />
-	<text name="GameRoundHeaderFragsTooltip" value="Difference between the number of kills and deaths in this round" />
-	<!--  -->
-	<text name="GameRoundHeaderPaintings" value="Paints" />
-	<text name="GameRoundHeaderPaintingsTooltip" value="Number of tiles painted in this round" />
-	<!--  -->
-	<text name="GameRoundHeaderTime" value="Time" />
-	<text name="GameRoundHeaderTimeTooltip" value="Time the player survived in this round" />
-	<!--  -->
-	<text name="GameRoundHeaderRank" value="#" />
-	<text name="GameRoundHeaderRankTooltip" value="Rank of the player in the match before this round" />
-	<!--  -->
-	<text name="GameRoundHeaderLimits" value="Limits" />
-	<text name="GameRoundHeaderLimitsTooltip" value="Information about what may cause the round to end" />
-	<!--  -->
-	<text name="GameRoundHeaderInitialItems" value="Items" />
-	<text name="GameRoundHeaderInitialItemsTooltip" value="Items given to each player at the begining of this round" />
-	<!--  -->
-	<text name="GameRoundHeaderMisc" value="Misc" />
-	<text name="GameRoundHeaderMiscTooltip" value="Various informations about this round" />
-	<!--  -->
-	<text name="GameRoundHeaderPointprocess" value="Points" />
-	<text name="GameRoundHeaderPointprocessTooltip" value="Information about how points are processed for this round" />
-	<!--  -->
-	<text name="GameRoundHeaderItemset" value="Itemset" />
-	<text name="GameRoundHeaderItemsetTooltip" value="Items available during  this round" />
-	<!--  -->
-	<text name="GameRoundHeaderTitle" value="Title" />
-	<text name="GameRoundHeaderTitleTooltip" value="Title of the level" />
-	<!--  -->
-	<text name="GameRoundHeaderAuthor" value="Author" />
-	<text name="GameRoundHeaderAuthorTooltip" value="Author/ripper of the level" />
-	<!--  -->
-	<text name="GameRoundHeaderPack" value="Pack" />
-	<text name="GameRoundHeaderPackTooltip" value="Pack containing the level" />
-	<!--  -->
-	<text name="GameRoundHeaderInstance" value="Instance" />
-	<text name="GameRoundHeaderInstanceTooltip" value="Instance used in the level" />
-	<!--  -->
-	<text name="GameRoundHeaderTheme" value="Theme" />
-	<text name="GameRoundHeaderThemeTooltip" value="Theme used in the level" />
-	<!--  -->
-	<text name="GameRoundHeaderDimension" value="Dimension" />
-	<text name="GameRoundHeaderDimensionTooltip" value="Dimension of the visible play zone" />
-	<!--  -->
-	<text name="GameRoundHeaderSource" value="Source" />
-	<text name="GameRoundHeaderSourceTooltip" value="Source of the level (original work or ripped from some existing game)" />
-	<!--  -->
-	<text name="GameRoundHeaderPartial" value="Partial" />
-	<text name="GameRoundHeaderPartialTooltip" value="Partial result of the points processing for this round" />
-	<!--  -->
-	<text name="GameRoundLimitPoints" value="Points" />
-	<text name="GameRoundLimitPointsTooltip" value="Number of custom points to score in order to stop this round" />
-	<!--  -->
-	<text name="GameRoundLimitBombs" value="Bombs" />
-	<text name="GameRoundLimitBombsTooltip" value="Number of bombs to drop in order to stop this round" />
-	<!--  -->
-	<text name="GameRoundLimitDeaths" value="Deaths" />
-	<text name="GameRoundLimitDeathsTooltip" value="Number of deaths to suffer in order to stop this round" />
-	<!--  -->
-	<text name="GameRoundLimitItems" value="Items" />
-	<text name="GameRoundLimitItemsTooltip" value="Number of items to pick in order to stop this round" />
-	<!--  -->
-	<text name="GameRoundLimitKills" value="Kills" />
-	<text name="GameRoundLimitKillsTooltip" value="Number of kills to perform in order to stop this round" />
-	<!--  -->
-	<text name="GameRoundLimitTime" value="Time" />
-	<text name="GameRoundLimitTimeTooltip" value="Maximum duration of this round" />
-	<!--  -->
-	<text name="GameRoundLimitCrowns" value="Crowns" />
-	<text name="GameRoundLimitCrownsTooltip" value="Number of crowns to pick in order to stop this round" />
-	<!--  -->
-	<text name="GameRoundLimitPaintings" value="Kills" />
-	<text name="GameRoundLimitPaintingsTooltip" value="Number of tiles to paint in order to stop this round" />
+			<group name="Progressbar">
+				<text name="Bombset" value="Loading bombs"  />
+				<text name="Common" value="Loading common player data"  />
+				<text name="Complete" value="Loading complete"  />
+				<text name="Itemset" value="Loading items"  />
+				<text name="Player" value="Loading player"  />
+				<text name="Theme" value="Loading theme"  />
+				<text name="Zone" value="Loading zone"  />
+			</group>
+			
+			<group name="Description">
+				<text name="Title" value="Round description"  tooltip="Round description" />
+								
+				<group name="InitialItems">
+					<text name="Title" value="Items"  tooltip="Items given to each player at the begining of this round" />
+				</group>
+				
+				<group name="Itemset">
+					<text name="Title" value="Itemset"  tooltip="Items available during  this round" />
+				</group>
+				
+				<group name="Limit">
+					<text name="Title" value="Limits"  tooltip="Information about what may cause the round to end" />
+					<group name="Header">
+						<text name="Bombs" value="Bombs"  tooltip="Number of bombs to drop in order to stop this round" />
+						<text name="Crowns" value="Crowns"  tooltip="Number of crowns to pick in order to stop this round" />
+						<text name="Custom" value="Custom"  tooltip="Number of custom points to score in order to stop this round" />
+						<text name="Deaths" value="Deaths"  tooltip="Number of deaths to suffer in order to stop this round" />
+						<text name="Items" value="Items"  tooltip="Number of items to pick in order to stop this round" />
+						<text name="Kills" value="Kills"  tooltip="Number of kills to perform in order to stop this round" />
+						<text name="Paintings" value="Paintings"  tooltip="Number of tiles to paint in order to stop this round" />
+						<text name="Time" value="Time"  tooltip="Maximum duration of this round" />
+					</group>
+				</group>
+								
+				<group name="Misc">
+					<text name="Title" value="Misc"  tooltip="Various informations about this round" />
+					<group name="Header">
+						<text name="Author" value="Author"  tooltip="Author/ripper of the level" />
+						<text name="Dimension" value="Dimension"  tooltip="Dimension of the visible play zone" />
+						<text name="Instance" value="Instance"  tooltip="Instance used in the level" />
+						<text name="Pack" value="Pack"  tooltip="Pack containing the level" />
+						<text name="Source" value="Source"  tooltip="Source of the level (original work or ripped from some existing game)" />
+						<text name="Theme" value="Theme"  tooltip="Theme used in the level" />
+						<text name="Title" value="Title"  tooltip="Title of the level" />
+					</group>
+				</group>
+								
+				<group name="Notes">
+					<text name="Title" value="Notes"  tooltip="Notes from the designer of this rpi,d" />
+				</group>
+				
+				<group name="Points">
+					<text name="Title" value="Points"  tooltip="Information about how points are processed for this round" />
+					<group name="Header">
+						<text name="Constant" value="Constant"  tooltip="Constant value" />
+						<text name="Discretize" value="Discretize"  tooltip="Calculates points according to some intervals" />
+						<text name="Partial" value="Partial"  tooltip="Partial result of custom points processing" />
+						<text name="Rankings" value="Rankings"  tooltip="Caculates a ranking according to one or several points" />
+						<text name="Rankpoints" value="Rankpoints"  tooltip="Calculates points according to a ranking" />
+						<text name="Score" value="Score"  tooltip="scores from all the players in this round" />
+					</group>
+					<group name="Data">
+						<text name="Bombs" value="Bombs"  tooltip="Uses the number of bombs dropped during the round" />
+						<text name="Crowns" value="Crowns"  tooltip="Uses the number of crowns picked during the round" />
+						<text name="Deaths" value="Deaths"  tooltip="Uses the number of deaths suffered during the round" />
+						<text name="Inverted" value="Inverted"  tooltip="Inverted order" />
+						<text name="Items" value="Items"  tooltip="Uses the number of items picked during the round" />
+						<text name="Kills" value="Kills"  tooltip="Uses the number of players killed during the round" />
+						<text name="Noshare" value="No share"  tooltip="In case of tie, points are not shared" />
+						<text name="Paintings" value="Paintings"  tooltip="Uses the number of tiles painted during the round" />
+						<text name="Partial" value="Partial"  tooltip="Uses a previous partial result of custom point procesing" />
+						<text name="Regular" value="Regular"  tooltip="Regular order" />
+						<text name="Share" value="Share"  tooltip="In case of tie, points are shared" />
+						<text name="Time" value="Time"  tooltip="Uses the amount of time played during the round" />
+					</group>
+				</group>
+				
+			</group>
+								
+			<group name="Results">
+				<text name="Title" value="Round results"  tooltip="Round results" />
+				<group name="Header">
+					<text name="Bombs" value="Bombs"  tooltip="Total number of bombs dropped in this round" />
+					<text name="Crowns" value="Crowns"  tooltip="Number of crowns picked in this round" />
+					<text name="CustomLimit" value="Custom"  tooltip="Custom points used as a limit criterion" />
+					<text name="CustomPoints" value="Custom"  tooltip="Custom points used to compute the overall points" />
+					<text name="Deaths" value="Deaths"  tooltip="Number of times the player was killed in this round" />
+					<text name="Items" value="Items"  tooltip="Number of items picked in this round" />
+					<text name="Kills" value="Kills"  tooltip="Number of players killed in this round" />
+					<text name="Name" value="Name"  tooltip="Name of the player" />
+					<text name="Paintings" value="Paintings"  tooltip="Number of tiles painted in this round" />
+					<text name="Points" value="Points"  tooltip="Number of points scored for this round" />
+					<text name="Time" value="Time"  tooltip="Time spend in the round" />
+				</group>
+				<group name="Data">
+					<text name="Computer" value="Computer"  tooltip="Computer-controlled player" />
+					<text name="Human" value="Human"  tooltip="Human-controlled player" />
+				</group>
+			</group>
+				
+			<group name="Statistics">
+				<text name="Title" value="Round statistics"  tooltip="Round statistics" />
+				<group name="Header">
+					<text name="Name" value="Name"  tooltip="Name of the player" />
+				</group>
+			</group>
+			
+		</group>
+		
+	</group>
 
 </language>

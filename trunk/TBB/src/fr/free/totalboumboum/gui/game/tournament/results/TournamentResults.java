@@ -52,7 +52,7 @@ public class TournamentResults extends EntitledDataPanel
 	{	super(container);
 		
 		// title
-		String txt = getConfiguration().getLanguage().getText(GuiTools.GAME_TOURNAMENT_TITLE_RESULTS);
+		String txt = getConfiguration().getLanguage().getText(GuiTools.GAME_TOURNAMENT_RESULTS_TITLE);
 		setTitle(txt);
 		
 		// data
@@ -70,32 +70,25 @@ public class TournamentResults extends EntitledDataPanel
 					lbl.setMinimumSize(new Dimension(GuiTools.getSize(GuiTools.GAME_RESULTS_LABEL_LINE_HEIGHT),GuiTools.getSize(GuiTools.GAME_RESULTS_LABEL_HEADER_HEIGHT)));
 					lbl.setOpaque(false);
 				}
-				BufferedImage[] icons = 
-				{	GuiTools.getIcon(GuiTools.GAME_TOURNAMENT_HEADER_NAME),
-					GuiTools.getIcon(GuiTools.GAME_TOURNAMENT_HEADER_BOMBS),
-					GuiTools.getIcon(GuiTools.GAME_TOURNAMENT_HEADER_ITEMS),
-					GuiTools.getIcon(GuiTools.GAME_TOURNAMENT_HEADER_DEATHS),
-					GuiTools.getIcon(GuiTools.GAME_TOURNAMENT_HEADER_KILLS),
-					GuiTools.getIcon(GuiTools.GAME_TOURNAMENT_HEADER_TOTAL),
-					GuiTools.getIcon(GuiTools.GAME_TOURNAMENT_HEADER_POINTS)
+				String[] names = 
+				{	GuiTools.GAME_TOURNAMENT_RESULTS_HEADER_NAME,
+					GuiTools.GAME_TOURNAMENT_RESULTS_HEADER_BOMBS,
+					GuiTools.GAME_TOURNAMENT_RESULTS_HEADER_ITEMS,
+					GuiTools.GAME_TOURNAMENT_RESULTS_HEADER_DEATHS,
+					GuiTools.GAME_TOURNAMENT_RESULTS_HEADER_KILLS,
+					GuiTools.GAME_TOURNAMENT_RESULTS_HEADER_TOTAL,
+					GuiTools.GAME_TOURNAMENT_RESULTS_HEADER_POINTS
 				};
-				String[] tooltips = 
-				{	getConfiguration().getLanguage().getText(GuiTools.GAME_TOURNAMENT_HEADER_NAME+"Tooltip"),
-					getConfiguration().getLanguage().getText(GuiTools.GAME_TOURNAMENT_HEADER_BOMBS+"Tooltip"),
-					getConfiguration().getLanguage().getText(GuiTools.GAME_TOURNAMENT_HEADER_ITEMS+"Tooltip"),
-					getConfiguration().getLanguage().getText(GuiTools.GAME_TOURNAMENT_HEADER_DEATHS+"Tooltip"),
-					getConfiguration().getLanguage().getText(GuiTools.GAME_TOURNAMENT_HEADER_KILLS+"Tooltip"),
-					getConfiguration().getLanguage().getText(GuiTools.GAME_TOURNAMENT_HEADER_TOTAL+"Tooltip"),
-					getConfiguration().getLanguage().getText(GuiTools.GAME_TOURNAMENT_HEADER_POINTS+"Tooltip")
-				};
-				for(int i=0;i<icons.length;i++)
-				{	JLabel lbl = resultsPanel.getLabel(0,1+i);
+				for(int i=0;i<names.length;i++)
+				{	BufferedImage image = GuiTools.getIcon(names[i]);
+					String tooltip = getConfiguration().getLanguage().getText(names[i]+GuiTools.TOOLTIP);
+					JLabel lbl = resultsPanel.getLabel(0,1+i);
 					lbl.setText(null);
-					lbl.setToolTipText(tooltips[i]);
+					lbl.setToolTipText(tooltip);
 					int lineHeight = GuiTools.getSize(GuiTools.GAME_RESULTS_LABEL_HEADER_HEIGHT);
-					double zoom = lineHeight/(double)icons[i].getHeight();
-						icons[i] = ImageTools.resize(icons[i],zoom,true);
-					ImageIcon icon = new ImageIcon(icons[i]);
+					double zoom = lineHeight/(double)image.getHeight();
+					image = ImageTools.resize(image,zoom,true);
+					ImageIcon icon = new ImageIcon(image);
 					lbl.setIcon(icon);
 				}
 			}
@@ -146,7 +139,7 @@ public class TournamentResults extends EntitledDataPanel
 		if(resultsPanel.getColumnCount()<cols)
 		{	resultsPanel.addColumn(col);
 			JLabel lbl = resultsPanel.getLabel(0,col);
-			String txt = getConfiguration().getLanguage().getText(GuiTools.GAME_TOURNAMENT_HEADER_MATCH)+matches.size();
+			String txt = getConfiguration().getLanguage().getText(GuiTools.GAME_TOURNAMENT_RESULTS_HEADER_MATCH)+matches.size();
 			lbl.setText(txt);
 		}
 		

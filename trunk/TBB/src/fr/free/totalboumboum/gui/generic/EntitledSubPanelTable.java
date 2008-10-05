@@ -22,7 +22,7 @@ public class EntitledSubPanelTable extends EntitledSubPanel
 	{	super(width,height,configuration);
 
 		// title
-		String tooltip = configuration.getLanguage().getText(id+"Tooltip");
+		String tooltip = configuration.getLanguage().getText(id+GuiTools.TOOLTIP);
 		BufferedImage hd = GuiTools.getIcon(id);
 		setTitle(hd, tooltip);
 		
