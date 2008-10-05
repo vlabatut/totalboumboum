@@ -624,11 +624,12 @@ public class Launcher
 	 * - Nouveauté 		: IA d'exemple pour le package 2008-09
 	 * - Correction		: bug qui empêchait un bon décompte des kills/deaths (différent du premier!)
 	 * - Nouveauté		: niveau plus petit pour tester la nouvelle IA
+	 * - Nouveauté		: système pour controler que le thread d'une IA ne reste pas bloqué dans une bloucle infinite (ou autre)
+	 * - Nouveauté		: splash screen
 	 * 
 	 * *******************************************************
 	 * *********************** A FAIRE ***********************
 	 * *******************************************************
-	 * - système pour controler que le ps n'est pas en boucle infinite (+ tester sur okanyuksel
 	 * - plutot qu'une méthode par propriété spéciale d'un sprite, plutot une méthode générale prenant un code en paramètre ? plus flexible ? et pareil pour type d'item et de bombe ?
 	 * - commentaires des classes d'IA
 	 * - faire terminer les processus dès la fin du match, et pas au début du suivant (méthode finish)
@@ -638,7 +639,7 @@ public class Launcher
 	 * - redistribution des items lors de la mort d'un joueur (option de round?)
 	 * - possibilité de bloquer certains items (on ne les perd pas lorsqu'on meurt)
 	 * 
-	 * - splash screen+centrer frame
+	 * - centrer frame
 	 * 
 	 * - tournoi simple
 	 * 

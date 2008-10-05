@@ -5,6 +5,18 @@
 ::
 :: -------------------------------------------------------------------
 
-java -Xmx128m -classpath .\bin;.\resources\lib\jdom.jar;.\resources\ai fr.free.totalboumboum.Launcher
+Setlocal
+
+:: define path variables
+Set ai=.\resources\ai
+Set bin=.\bin
+Set jdom=.\resources\lib\jdom.jar
+Set cp=%bin%;%jdom%;%ai%
+Set launcher=fr.free.totalboumboum.Launcher
+Set splash=resources\gui\images\splash.jpg
+
+java -Xmx128m -splash:%splash% -classpath %cp% %launcher%
 
 :: pause
+
+Endlocal
