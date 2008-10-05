@@ -329,7 +329,7 @@ public class MatchDescription extends EntitledDataPanel
 		int colGrps[] = {1};
 		int lns[] = {n};
 
-		EntitledSubPanelTable pointsPanel = new EntitledSubPanelTable(width,height,id,colGrps,lns,data,tooltips,getConfiguration());
+		EntitledSubPanelTable pointsPanel = new EntitledSubPanelTable(width,height,id,colGrps,lns,data,tooltips,getConfiguration(),true,false);
 		return pointsPanel;
 	}
 	
@@ -425,7 +425,7 @@ public class MatchDescription extends EntitledDataPanel
 		}			
 			
 		// result
-		EntitledSubPanelTable limitsPanel = new EntitledSubPanelTable(width,height,id,colGrps,lns,data,tooltips,getConfiguration());
+		EntitledSubPanelTable limitsPanel = new EntitledSubPanelTable(width,height,id,colGrps,lns,data,tooltips,getConfiguration(),true,true);
 		return limitsPanel;
 	}
 }

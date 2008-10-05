@@ -32,8 +32,9 @@ import fr.free.totalboumboum.tools.XmlTools;
 
 public class GuiConfigurationLoader
 {	
-	public static GuiConfiguration loadConfiguration() throws ParserConfigurationException, SAXException, IOException, IllegalArgumentException, SecurityException, IllegalAccessException, NoSuchFieldException, ClassNotFoundException
+	public static GuiConfiguration loadConfiguration(Configuration config) throws ParserConfigurationException, SAXException, IOException, IllegalArgumentException, SecurityException, IllegalAccessException, NoSuchFieldException, ClassNotFoundException
 	{	GuiConfiguration result = new GuiConfiguration();
+		result.setGameConfiguration(config);
 		String individualFolder = FileTools.getSettingsPath();
 		File dataFile = new File(individualFolder+File.separator+GuiFileTools.FILE_GUI+GuiFileTools.EXTENSION_DATA);
 		String schemaFolder = FileTools.getSchemasPath();
@@ -45,9 +46,6 @@ public class GuiConfigurationLoader
 
 	private static void loadConfigurationElement(Element root, GuiConfiguration result) throws ParserConfigurationException, SAXException, IOException, IllegalArgumentException, SecurityException, IllegalAccessException, NoSuchFieldException, ClassNotFoundException
 	{	Element element; 
-		// game configuration
-		Configuration configuration = ConfigurationLoader.loadConfiguration();
-		result.setGameConfiguration(configuration);
 		// language
 		element = root.getChild(GuiXmlTools.ELT_LANGUAGE);
 		loadLanguageElement(element,result);
