@@ -13,7 +13,7 @@ Set bin=.\bin
 Set jdom=.\resources\lib\jdom.jar
 Set cp=%bin%;%jdom%;%ai%
 Set launcher=fr.free.totalboumboum.Launcher
-Set splash=resources\gui\images\splash.jpg
+Set splash=resources\gui\images\splash.png
 
 java -Xmx128m -splash:%splash% -classpath %cp% %launcher%
 

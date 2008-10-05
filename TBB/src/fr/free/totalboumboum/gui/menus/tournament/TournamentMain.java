@@ -10,9 +10,9 @@ import javax.xml.parsers.ParserConfigurationException;
 
 import org.xml.sax.SAXException;
 
-import fr.free.totalboumboum.gui.generic.MenuContainer;
-import fr.free.totalboumboum.gui.generic.MenuPanel;
-import fr.free.totalboumboum.gui.generic.SplitMenuPanel;
+import fr.free.totalboumboum.gui.common.MenuContainer;
+import fr.free.totalboumboum.gui.common.MenuPanel;
+import fr.free.totalboumboum.gui.common.SplitMenuPanel;
 
 public class TournamentMain extends SplitMenuPanel
 {	private static final long serialVersionUID = 1L;

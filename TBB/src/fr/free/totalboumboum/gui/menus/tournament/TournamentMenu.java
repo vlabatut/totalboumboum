@@ -51,12 +51,12 @@ import javax.xml.parsers.ParserConfigurationException;
 import org.xml.sax.SAXException;
 
 import fr.free.totalboumboum.game.tournament.AbstractTournament;
+import fr.free.totalboumboum.gui.common.ContentPanel;
+import fr.free.totalboumboum.gui.common.InnerDataPanel;
+import fr.free.totalboumboum.gui.common.InnerMenuPanel;
+import fr.free.totalboumboum.gui.common.MenuPanel;
+import fr.free.totalboumboum.gui.common.SplitMenuPanel;
 import fr.free.totalboumboum.gui.game.tournament.TournamentSplitPanel;
-import fr.free.totalboumboum.gui.generic.ContentPanel;
-import fr.free.totalboumboum.gui.generic.InnerDataPanel;
-import fr.free.totalboumboum.gui.generic.InnerMenuPanel;
-import fr.free.totalboumboum.gui.generic.MenuPanel;
-import fr.free.totalboumboum.gui.generic.SplitMenuPanel;
 import fr.free.totalboumboum.gui.tools.GuiTools;
 
 public class TournamentMenu extends InnerMenuPanel

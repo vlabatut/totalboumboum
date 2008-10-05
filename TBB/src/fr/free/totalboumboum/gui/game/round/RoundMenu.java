@@ -28,6 +28,11 @@ import fr.free.totalboumboum.game.tournament.cup.CupTournament;
 import fr.free.totalboumboum.game.tournament.league.LeagueTournament;
 import fr.free.totalboumboum.game.tournament.sequence.SequenceTournament;
 import fr.free.totalboumboum.game.tournament.single.SingleTournament;
+import fr.free.totalboumboum.gui.common.ContentPanel;
+import fr.free.totalboumboum.gui.common.InnerDataPanel;
+import fr.free.totalboumboum.gui.common.InnerMenuPanel;
+import fr.free.totalboumboum.gui.common.MenuPanel;
+import fr.free.totalboumboum.gui.common.SplitMenuPanel;
 import fr.free.totalboumboum.gui.game.loop.LoopPanel;
 import fr.free.totalboumboum.gui.game.match.description.MatchDescription;
 import fr.free.totalboumboum.gui.game.match.results.MatchResults;
@@ -39,11 +44,6 @@ import fr.free.totalboumboum.gui.game.tournament.description.SequenceDescription
 import fr.free.totalboumboum.gui.game.tournament.description.TournamentDescription;
 import fr.free.totalboumboum.gui.game.tournament.results.TournamentResults;
 import fr.free.totalboumboum.gui.game.tournament.statistics.TournamentStatistics;
-import fr.free.totalboumboum.gui.generic.ContentPanel;
-import fr.free.totalboumboum.gui.generic.InnerDataPanel;
-import fr.free.totalboumboum.gui.generic.InnerMenuPanel;
-import fr.free.totalboumboum.gui.generic.MenuPanel;
-import fr.free.totalboumboum.gui.generic.SplitMenuPanel;
 import fr.free.totalboumboum.gui.tools.GuiTools;
 
 public class RoundMenu extends InnerMenuPanel implements RoundRenderPanel

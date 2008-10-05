@@ -10,9 +10,9 @@ import javax.swing.Box;
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
 
-import fr.free.totalboumboum.gui.generic.MenuContainer;
-import fr.free.totalboumboum.gui.generic.MenuPanel;
-import fr.free.totalboumboum.gui.generic.SimpleMenuPanel;
+import fr.free.totalboumboum.gui.common.MenuContainer;
+import fr.free.totalboumboum.gui.common.MenuPanel;
+import fr.free.totalboumboum.gui.common.SimpleMenuPanel;
 import fr.free.totalboumboum.gui.tools.GuiTools;
 
 public class OptionsMenu extends SimpleMenuPanel
