@@ -31,6 +31,14 @@ import fr.free.totalboumboum.engine.content.feature.permission.TargetPermission;
 import fr.free.totalboumboum.engine.content.sprite.block.Block;
 import fr.free.totalboumboum.engine.content.sprite.fire.Fire;
 
+/**
+ * Représente un bloc du jeu, c'est à dire généralement : un mur. 
+ * 
+ * 
+ * @author Vincent
+ *
+ */
+
 public class AiBlock extends AiSprite<Block>
 {
 	AiBlock(AiTile tile, Block sprite)
