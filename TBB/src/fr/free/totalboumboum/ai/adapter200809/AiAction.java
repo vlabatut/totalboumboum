@@ -23,10 +23,22 @@ package fr.free.totalboumboum.ai.adapter200809;
 
 import fr.free.totalboumboum.engine.content.feature.Direction;
 
+/**
+ * Classe représentant une action qu'un joueur peut effectuer.
+ * Elle est utilisée pour indiquer au jeu quelle est la prochaine
+ * action que l'IA veut réaliser.
+ * <p>
+ * L'action est décrite par un nom et éventuellement une direction.
+ * L'action et la direction sont toutes les deux constantes, respectivement
+ * de classes AiActionName et Direction.
+ * 
+ * @author Vincent
+ *
+ */
 public class AiAction
 {
 	/**
-	 * construit une action non-orientée (DROP_BOMB,NONE,PUNCH)
+	 * construit une action non-orientée (DROP_BOMB,NONE,PUNCH...)
 	 * @param name	le nom de l'action
 	 */
 	public AiAction(AiActionName name)
@@ -34,7 +46,7 @@ public class AiAction
 	}
 	
 	/**
-	 * construit une action orientée (MOVE)
+	 * construit une action orientée (MOVE...)
 	 * @param name	le nom de l'action
 	 * @param direction	la direction de l'action
 	 */

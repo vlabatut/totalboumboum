@@ -23,6 +23,20 @@ package fr.free.totalboumboum.ai.adapter200809;
 
 import fr.free.totalboumboum.engine.content.feature.GestureConstants;
 
+/**
+ * représente un nom associé à un état, c'est à dire : l'action
+ * effectuée par le sprite concerné, ou bien l'action qu'il subit.
+ * Ces actions sont différentes des 'gestes' utilisés dans le jeu,
+ * car elles sont plus simples : une de ces actions peut correspondre à 
+ * plusieurs gestes différents. Par exemple, ce STANDING-ci
+ * peut correspondre à un joueur qui marche (WALKING), ou bien à une bombe 
+ * en train de glisser (SLIDING), ou bien à un joueur en train de pousser 
+ * une bombe (PUSHING), etc.
+ * 
+ * @author Vincent
+ *
+ */
+
 public enum AiStateName
 {
 	// equivalent gesture: BURNING
@@ -40,6 +54,13 @@ public enum AiStateName
 	
 	// unused gestures: NONE, ENDED, HIDING
 	
+	/**
+	 * convertit une chaine de caractères correspondant à un geste du jeu
+	 * en un objet correspondant à une action telle qu'elle est perçue par l'IA.
+	 * 
+	 * @param gesture	geste à convertir
+	 * @return	le symbole de l'action correspondante 
+	 */
 	public static AiStateName makeNameFromGesture(String gesture)
 	{	AiStateName result = null;
 		if(gesture.equalsIgnoreCase(GestureConstants.BURNING))

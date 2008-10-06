@@ -38,11 +38,33 @@ import fr.free.totalboumboum.engine.content.sprite.hero.Hero;
 import fr.free.totalboumboum.engine.content.sprite.item.Item;
 import fr.free.totalboumboum.engine.player.Player;
 
+/**
+ * représente la zone de jeu et tous ces constituants : cases et sprites.
+ * Il s'agit de la classe principale des percepts auxquels l'IA a accès.
+ * <p>
+ * A chaque fois que l'IA est sollicitée par le jeu pour connaître l'action
+ * qu'elle veut effectuer, cette représentation est mise à jour. L'IA ne reçoit
+ * pas une nouvelle AiZone : l'AiZone existante est modifiée en fonction de l'évolution
+ * du jeu. De la même façon, les cases (AiTile) restent les mêmes, ainsi que les sprites et
+ * les autres objets. Si l'IA a besoin d'une trace des états précédents du jeu, son
+ * concepteur doit se charger de l'implémenter lui-même.
+ * 
+ * @author Vincent
+ *
+ */
+
 public class AiZone
-{
+{	/** niveau représenté par cette classe */
 	private Level level;
+	/** joueur contrôlé par l'IA */
 	private Player player;
 	
+	/**
+	 * construit une représentation du niveau passé en paramètre,
+	 * du point de vue du joueur passé en paramètre.
+	 * @param level	niveau à représenter
+	 * @param player	joueur dont le point de vue est à adopter
+	 */
 	AiZone(Level level, Player player)
 	{	this.level = level;
 		this.player = player;
@@ -51,10 +73,16 @@ public class AiZone
 		initOwnHero();
 	}
 	
+	/**
+	 * met à jour cette représentation ainsi que tous ses constituants.
+	 */
 	void update()
 	{	updateMatrix();
 	}
 	
+	/**
+	 * termine proprement cette représentation (une fois que l'IA n'en a plus besoin).
+	 */
 	void finish()
 	{	// matrix
 		Iterator<ArrayList<AiTile>> it1 = lines.iterator();
@@ -110,12 +138,16 @@ public class AiZone
 		{	ArrayList<AiTile> line = new ArrayList<AiTile>();
 			for(int colIndex=0;colIndex<width;colIndex++)
 			{	Tile tile = matrix[lineIndex][colIndex];
-				AiTile aiTile = new AiTile(lineIndex,colIndex,tile,this);
+				AiTile aiTile = new AiTile(tile,this);
 				line.add(aiTile);
 			}
 			lines.add(line);
 		}
 	}
+	
+	/**
+	 * met à jour la matrice en fonction de l'évolution du jeu
+	 */
 	private void updateMatrix()
 	{	// démarque tous les sprites
 		uncheckAll(blocks);
@@ -144,29 +176,41 @@ public class AiZone
 		if(ownHero!=null && !ownHero.isChecked())
 			ownHero = null;
 	}
+	
 	/** 
 	 * renvoie la hauteur totale (y compris les éventuelles cases situées hors de l'écran)
 	 *  de la zone de jeu exprimée en cases (ie: nombre de lignes)
+	 *  
+	 *  @return	hauteur de la zone
 	 */
 	public int getHeigh()
 	{	return height;	
 	}
+	
 	/** 
 	 * renvoie la largeur totale (y compris les éventuelles cases situées hors de l'écran)
 	 *  de la zone de jeu exprimée en cases (ie: nombre de colonnes)
+	 *  
+	 *  @return	largeur de la zone
 	 */
 	public int getWidth()
 	{	return width;	
 	}
+	
 	/**
 	 * renvoie la case située dans la zone à la position passée en paramètre.
 	 * Si la case n'existe pas, la valeur null est renvoyée.
+	 * <p>
 	 * ATTENTION : cette méthode est définie pour un usage ponctuel (accès à
 	 * une seule case). Si vous effectuez un traitement itératif ou récursif sur 
 	 * un grand nombre de cases (par exemple : l'ensemble de la zone), il sera 
 	 * plus efficace et surtout plus rapide d'utiliser directement un Iterator 
 	 * obtenu avec la méthode getLines ou getLine, plutôt que de faire de nombreux 
-	 * appels à getTile.  
+	 * appels à getTile.
+	 *   
+	 *  @param	line	numéro de la ligne contenant la case à renvoyer
+	 *  @param	col	numéro de la colonne contenant la case à renvoyer
+	 *  @return	case située aux coordonnées spécifiées en paramètres
 	 */
 	public AiTile getTile(int line, int col)
 	{	AiTile result = null;
@@ -174,23 +218,31 @@ public class AiZone
 		result = collec.get(col);
 		return result;
 	}
+	
 	/**
 	 * renvoie la ligne de la zone de jeu dont le numéro est passé en paramètre.
 	 * Cette ligne est une liste des cases qui la composent. Si la ligne n'existe pas,
 	 * la valeur null est renvoyée.
+	 * <p>
 	 * ATTENTION: cette méthode est définie pour un usage ponctuel (accès à
 	 * une seule ligne et à ses cases). Si vous effectuez un traitement itératif ou 
 	 * récursif sur un grand nombre de cases (par exemple : l'ensemble de la zone), 
 	 * il sera plus efficace et surtout plus rapide d'utiliser directement un Iterator 
 	 * obtenu avec la méthode getLines, plutôt que de faire de nombreux appels à getLine.
+	 * 
+	 * @param line	numéro de la ligne de cases désirée
+	 * @return	renvoie la ligne demandée
 	 */
 	public Collection<AiTile> getLine(int line)
 	{	Collection<AiTile> result = Collections.unmodifiableCollection(lines.get(line));
 		return result;	
 	}
+	
 	/**
 	 * renvoie la liste des lignes composant la zone de jeu. Chaque ligne
 	 * est elle même une liste de cases.
+	 * 
+	 * @return	renvoie la liste de toutes les lignes de cases constituant la zone
 	 */
 	public Collection<Collection<AiTile>> getLines()
 	{	Collection<Collection<AiTile>> result = new ArrayList<Collection<AiTile>>();
@@ -207,6 +259,7 @@ public class AiZone
 	/**
 	 * renvoie le voisin de la case passée en paramètre, situé dans la direction
 	 * passée en paramètre.
+	 * <p>
 	 * ATTENTION : les niveaux sont circulaires, ce qui signifie que le voisin
 	 * d'une case située au bord du niveau est une case située sur l'autre bord.
 	 * Par exemple, dans un niveau contenant width colonnes, pour une case située
@@ -243,18 +296,17 @@ public class AiZone
 	}
 	
 	/**
-	 * renvoie le voisin de la case passée en paramètre, situé dans la direction
-	 * passée en paramètre.
+	 * renvoie la liste des voisins de la case passée en paramètre.
+	 * Il s'agit des voisins directs situés en haut, à gauche, en bas et à droite.
+	 * <p>
 	 * ATTENTION : les niveaux sont circulaires, ce qui signifie que le voisin
 	 * d'une case située au bord du niveau est une case située sur l'autre bord.
 	 * Par exemple, dans un niveau contenant width colonnes, pour une case située
 	 * à la position (ligne,0), le voisin de gauche est la case située à la position
 	 * (ligne,width-1). Même chose pour les bordures haut et bas.
 	 * 
-	 * @param line	ligne de la case dont on veut le voisin
-	 * @param col	colonne de la case dont on veut le voisin
-	 * @param direction	direction dans laquelle le voisin se trouve
-	 * @return	le voisin de la case située à la position (line,col) et situé dans la direction indiquée
+	 * @param tile	la case dont on veut les voisins
+	 * @return	la liste des voisins situés en haut, à gauche, en bas et à droite de la case passée en paramètre
 	 */
 	public Collection<AiTile> getNeighbourTiles(AiTile tile)
 	{	Collection<AiTile> result = new ArrayList<AiTile>();
@@ -269,12 +321,27 @@ public class AiZone
 		return result;
 	}
 	
+	/**
+	 * renvoie la direction de la case target relativement à la case source.
+	 * Par exemple, la case target de coordonnées (5,5) est à droite de
+	 * la case source de coordonnées (5,6).
+	 * <p>
+	 * Cette fonction peut être utile quand on veut savoir dans quelle direction
+	 * il faut se déplacer pour aller de source à target.
+	 * <p>
+	 * ATTENTION : si les deux cases ne sont pas des voisines directes (ie. ayant un coté commun),
+	 * il est possible que cette méthode renvoie une direction composite,
+	 * c'est à dire : DOWNLEFT, DOWNRIGHT, UPLEFT ou UPRIGHT. Référez-vous à 
+	 * la classe Direction pour plus d'informations sur ces valeurs. 
+	 * 
+	 * @param source	case de référence
+	 * @param target	case dont on veut connaitre la direction
+	 * @return	la direction de target par rapport à source
+	 */
 	public Direction getDirection(AiTile source, AiTile target)
 	{	int dx = target.getCol()-source.getCol();
 		int dy = target.getLine()-source.getLine();
 		Direction result = Direction.getCompositeFromDouble(dx,dy);
-if(result.isComposite())
-	System.out.println();
 		return result;
 	}
 	
@@ -297,11 +364,19 @@ if(result.isComposite())
 	/** 
 	 * renvoie la liste des blocks contenues dans cette zone
 	 * (la liste peut être vide)
+	 * 
+	 * @return	liste de tous les blocs contenus dans cette zone
 	 */
 	public Collection<AiBlock> getBlocks()
 	{	Collection<AiBlock> result = Collections.unmodifiableCollection(blocks);
 		return result;	
 	}
+	
+	/**
+	 * renvoie la représentation du bloc passé en paramètre.
+	 * @param block	le bloc dont on veut la représentation
+	 * @return	le AiBlock correspondant
+	 */
 	AiBlock getBlock(Block block)
 	{	AiBlock result = null;
 		Iterator<AiBlock> it = blocks.iterator();
@@ -312,17 +387,33 @@ if(result.isComposite())
 		}
 		return result;
 	}
+	
+	/**
+	 * ajoute un bloc dans la liste de blocs de cette zone
+	 * (méthode appelée depuis une AiTile)
+	 * 
+	 * @param block	le bloc à rajouter à la liste
+	 */
 	void addBlock(AiBlock block)
 	{	blocks.add(block);	
 	}
+	
 	/** 
 	 * renvoie la liste des bombes contenues dans cette zone 
 	 * (la liste peut être vide)
+	 * 
+	 * @return	liste de toutes les bombes contenues dans cette zone
 	 */
 	public Collection<AiBomb> getBombs()
 	{	Collection<AiBomb> result = Collections.unmodifiableCollection(bombs);
 		return result;	
 	}
+	
+	/**
+	 * renvoie la représentation de la bombe passée en paramètre.
+	 * @param bomb	la bombz dont on veut la représentation
+	 * @return	le AiBomb correspondant
+	 */
 	AiBomb getBomb(Bomb bomb)
 	{	AiBomb result = null;
 		Iterator<AiBomb> it = bombs.iterator();
@@ -333,17 +424,33 @@ if(result.isComposite())
 		}
 		return result;
 	}
+	
+	/**
+	 * ajoute une bombe dans la liste de bombes de cette zone
+	 * (méthode appelée depuis une AiTile)
+	 * 
+	 * @param bomb	la bombe à rajouter à la liste
+	 */
 	void addBomb(AiBomb bomb)
 	{	bombs.add(bomb);	
 	}
+	
 	/** 
 	 * renvoie la liste des feux contenus dans cette zone 
 	 * (la liste peut être vide)
+	 * 
+	 * @return	liste de tous les feux contenus dans cette zone
 	 */
 	public Collection<AiFire> getFires()
 	{	Collection<AiFire> result = Collections.unmodifiableCollection(fires);
 		return result;	
 	}
+	
+	/**
+	 * renvoie la représentation du feu passé en paramètre.
+	 * @param fire	le feu dont on veut la représentation
+	 * @return	le AiFire correspondant
+	 */
 	AiFire getFire(Fire fire)
 	{	AiFire result = null;
 		Iterator<AiFire> it = fires.iterator();
@@ -354,16 +461,32 @@ if(result.isComposite())
 		}
 		return result;
 	}
+	
+	/**
+	 * ajoute un feu dans la liste de feux de cette zone
+	 * (méthode appelée depuis une AiTile)
+	 * 
+	 * @param fire	le feu à rajouter à la liste
+	 */
 	void addFire(AiFire fire)
 	{	fires.add(fire);	
 	}
+	
 	/** 
 	 * renvoie la liste des sols contenus dans cette zone 
+	 * 
+	 * @return	liste de tous les sols contenus dans cette zone
 	 */
 	public Collection<AiFloor> getFloors()
 	{	Collection<AiFloor> result = Collections.unmodifiableCollection(floors);
 		return result;	
 	}
+	
+	/**
+	 * renvoie la représentation du sol passé en paramètre.
+	 * @param floor	le sol dont on veut la représentation
+	 * @return	le AiFloor correspondant
+	 */
 	AiFloor getFloor(Floor floor)
 	{	AiFloor result = null;
 		Iterator<AiFloor> it = floors.iterator();
@@ -374,17 +497,33 @@ if(result.isComposite())
 		}
 		return result;
 	}
+	
+	/**
+	 * ajoute un sol dans la liste de sols de cette zone
+	 * (méthode appelée depuis une AiTile)
+	 * 
+	 * @param floor	le sol à rajouter à la liste
+	 */
 	void addFloor(AiFloor floor)
 	{	floors.add(floor);	
 	}
+	
 	/** 
 	 * renvoie la liste des personnages contenus dans cette zone 
 	 * (les joueurs éliminés n'apparaissent plus dans cette liste ni dans cette représentation de la zone)
+	 * 
+	 * @return	liste de tous les joueurs contenus dans cette zone
 	 */
 	public Collection<AiHero> getHeroes()
 	{	Collection<AiHero> result = Collections.unmodifiableCollection(heroes);
 		return result;	
 	}
+	
+	/**
+	 * renvoie la représentation du personnage passé en paramètre.
+	 * @param hero	le personnage dont on veut la représentation
+	 * @return	le AiHero correspondant
+	 */
 	AiHero getHero(Hero hero)
 	{	AiHero result = null;
 		Iterator<AiHero> it = heroes.iterator();
@@ -395,17 +534,33 @@ if(result.isComposite())
 		}
 		return result;
 	}
+	
+	/**
+	 * ajoute un personnage dans la liste de personnages de cette zone
+	 * (méthode appelée depuis une AiTile)
+	 * 
+	 * @param hero	le personnage à rajouter à la liste
+	 */
 	void addHero(AiHero hero)
 	{	heroes.add(hero);	
 	}
+	
 	/** 
 	 * renvoie la liste des items apparents contenus dans cette zone 
 	 * (la liste peut être vide)
+	 * 
+	 * @return	liste de tous les items contenus dans cette zone
 	 */
 	public Collection<AiItem> getItems()
 	{	Collection<AiItem> result = Collections.unmodifiableCollection(items);
 		return result;	
 	}
+	
+	/**
+	 * renvoie la représentation de l'item passé en paramètre.
+	 * @param item	l'item dont on veut la représentation
+	 * @return	le AiItem correspondant
+	 */
 	AiItem getItem(Item item)
 	{	AiItem result = null;
 		Iterator<AiItem> it = items.iterator();
@@ -416,9 +571,27 @@ if(result.isComposite())
 		}
 		return result;
 	}
+	
+	/**
+	 * ajoute un item dans la liste d'items de cette zone
+	 * (méthode appelée depuis une AiTile)
+	 * 
+	 * @param item	l'item à rajouter à la liste
+	 */
 	void addItem(AiItem item)
 	{	items.add(item);	
 	}
+	
+	/**
+	 * démarque toutes les représentations de sprites d'une liste determinée en fonction du type
+	 * T paramétrant cette méthode. Méthode appelée au début de la mise à jour :
+	 * les représentations de sprites qui n'ont pas été marquées à la fin de la mise à jour
+	 * correspondent à des sprites qui ne font plus partie du jeu, et doivent être
+	 * supprimées de cette représentation.
+	 * 
+	 * @param <T>	type de la liste à traiter
+	 * @param list	liste à traiter
+	 */
 	private <T extends AiSprite<?>> void uncheckAll(ArrayList<T> list)
 	{	Iterator<T> it = list.iterator();
 		while(it.hasNext())
@@ -426,6 +599,13 @@ if(result.isComposite())
 			temp.uncheck();
 		}
 	}
+	/**
+	 * méthode complémentaire de uncheckAll, et chargée de supprimer
+	 * les représentations de sprites non-marquées à la fin de la mise à jour.
+	 * 
+	 * @param <T>	type de la liste à traiter
+	 * @param list	liste à traiter
+	 */
 	private <T extends AiSprite<?>> void removeUnchecked(ArrayList<T> list)
 	{	Iterator<T> it = list.iterator();
 		while(it.hasNext())
@@ -447,6 +627,7 @@ if(result.isComposite())
 	public AiHero getOwnHero()
 	{	return ownHero;	
 	}
+	
 	/**
 	 * initialise le personnage qui est contrôlé par l'IA
 	 */

@@ -36,22 +36,41 @@ import fr.free.totalboumboum.engine.content.sprite.floor.Floor;
 import fr.free.totalboumboum.engine.content.sprite.hero.Hero;
 import fr.free.totalboumboum.engine.content.sprite.item.Item;
 
+/**
+ * représente une case du jeu, avec tous les sprites qu'elle contient.
+ * 
+ * @author Vincent
+ *
+ */
+
 public class AiTile
-{
+{	/** représentation de la zone à laquelle cette case appartient */
 	private AiZone zone;
+	/** case du jeu que cette classe représente */
 	private Tile tile;
 	
-	AiTile(int line, int col, Tile tile, AiZone zone)
+	/**
+	 * construit une représentation de la case passée en paramètre
+	 * @param tile	case représentée
+	 * @param zone	zone contenant la représentation
+	 */
+	AiTile(Tile tile, AiZone zone)
 	{	this.zone = zone;
 		this.tile = tile;
-		initLocation(line,col);
+		initLocation();
 		updateSprites();
 	}
 	
+	/**
+	 * met à jour cette case et son contenu
+	 */
 	void update()
 	{	updateSprites();		
 	}
 	
+	/**
+	 * termine proprement cette case
+	 */
 	void finish()
 	{	// block
 		if(block!=null)
@@ -104,13 +123,17 @@ public class AiTile
 	private int col;
 		
 	/** 
-	 * renvoie le numéro de la ligne contenant cette case 
+	 * renvoie le numéro de la ligne contenant cette case
+	 * 
+	 * @return	la ligne de cette case
 	 */
 	public int getLine()
 	{	return line;	
 	}
 	/** 
-	 * renvoie le numéro de la colonne contenant cette case 
+	 * renvoie le numéro de la colonne contenant cette case
+	 *  
+	 * @return	la colonne de cette case
 	 */
 	public int getCol()
 	{	return col;	
@@ -119,30 +142,32 @@ public class AiTile
 	/** 
 	 * initialise les numéros de ligne et colonne de cette case 
 	 */
-	private void initLocation(int line, int col)
-	{	this.line = line;
-		this.col = col;
+	private void initLocation()
+	{	this.line = tile.getLine();
+		this.col = tile.getCol();
 	}
 
 	/////////////////////////////////////////////////////////////////
 	// SPRITES			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	/** block contenu dans cette case */
+	/** block éventuellement contenu dans cette case */
 	private AiBlock block = null;
-	/** liste des bombes contenues dans cette case */
+	/** liste des bombes éventuellement contenues dans cette case */
 	private final ArrayList<AiBomb> bombs = new ArrayList<AiBomb>();
-	/** liste des feux contenus dans cette case */
+	/** liste des feux éventuellement contenus dans cette case */
 	private final ArrayList<AiFire> fires = new ArrayList<AiFire>();
 	/** sol de cette case */
 	private AiFloor floor = null;
-	/** liste des personnages contenus dans cette case */
+	/** liste des personnages éventuellement contenus dans cette case */
 	private final ArrayList<AiHero> heroes = new ArrayList<AiHero>();
-	/** item contenu dans cette case */
+	/** item éventuellement contenu dans cette case */
 	private AiItem item = null;
 
 	/** 
 	 * renvoie le block contenu dans cette case 
 	 * ou null s'il n'y a pas de block dans cette case
+	 * 
+	 * @return	le bloc éventuellement contenu dans cette case
 	 */
 	public AiBlock getBlock()
 	{	return block;	
@@ -150,6 +175,8 @@ public class AiTile
 	/** 
 	 * renvoie la liste des bombes contenues dans cette case 
 	 * (la liste peut être vide)
+	 * 
+	 * @return	les bombes éventuellement contenues dans cette case
 	 */
 	public Collection<AiBomb> getBombs()
 	{	Collection<AiBomb> result = Collections.unmodifiableCollection(bombs);
@@ -158,6 +185,8 @@ public class AiTile
 	/** 
 	 * renvoie la liste des feux contenus dans cette case 
 	 * (la liste peut être vide)
+	 * 
+	 * @return	les feux éventuellement contenus dans cette case
 	 */
 	public Collection<AiFire> getFires()
 	{	Collection<AiFire> result = Collections.unmodifiableCollection(fires);
@@ -166,6 +195,8 @@ public class AiTile
 	/** 
 	 * renvoie le sol de cette case 
 	 * (il y a forcément un sol)
+	 * 
+	 * @return	le sol contenu dans cette case
 	 */
 	public AiFloor getFloor()
 	{	return floor;	
@@ -173,6 +204,8 @@ public class AiTile
 	/** 
 	 * renvoie la liste des personnages contenus dans cette case 
 	 * (la liste peut être vide)
+	 * 
+	 * @return	les personnages éventuellement contenus dans cette case
 	 */
 	public Collection<AiHero> getHeroes()
 	{	Collection<AiHero> result = Collections.unmodifiableCollection(heroes);
@@ -181,6 +214,8 @@ public class AiTile
 	/** 
 	 * renvoie l'item (apparent) contenu dans cette case 
 	 * ou null s'il n'y a pas d'item apparent dans cette case
+	 * 
+	 * @return	l'item éventuellement contenu dans cette case
 	 */
 	public AiItem getItem()
 	{	return item;	
@@ -302,6 +337,11 @@ public class AiTile
 				item = null;
 		}
 	}
+	/**
+	 * termine les représentations de sprites passées en paramètre
+	 * @param <T>	type de représentation
+	 * @param list	liste de représentations
+	 */
 	private <T extends AiSprite<?>> void finishSprites(ArrayList<T> list)
 	{	Iterator<T> it = list.iterator();
 		while(it.hasNext())

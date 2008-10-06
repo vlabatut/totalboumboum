@@ -33,7 +33,6 @@ import org.xml.sax.SAXException;
 
 import fr.free.totalboumboum.ai.AbstractAiManager;
 import fr.free.totalboumboum.ai.AiLoader;
-import fr.free.totalboumboum.ai.InterfaceAi;
 import fr.free.totalboumboum.data.configuration.Configuration;
 import fr.free.totalboumboum.data.profile.ControlSettings;
 import fr.free.totalboumboum.data.profile.PredefinedColor;
