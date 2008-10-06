@@ -8,19 +8,12 @@
 #
 # define path variables
 	main="./src/fr/free/totalboumboum"
-	echo main=$main	
 	aig=${main}/ai
-	echo aig=$aig	
 	ai="./resources/ai"
-	echo ai=$ai	
 	bin="./bin"
-	echo bin=$bin	
 	jdom="./resources/lib/jdom.jar"
-	echo jdom=$jdom	
 	cp="${bin}:${jdom}"
-	echo cp=$cp
 	sp="./src"
-	echo sp=$sp
 #
 # create directory for .class files
 	mkdir $bin
