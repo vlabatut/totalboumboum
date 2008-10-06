@@ -143,7 +143,7 @@ public class ImageTools
     	return result;
     }
 
-    public static BufferedImage getCompatibleImage(BufferedImage image)
+    private static BufferedImage getCompatibleImage(BufferedImage image)
     {	// get the graphical environment
     	GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
 		GraphicsConfiguration gc = ge.getDefaultScreenDevice().getDefaultConfiguration();
@@ -257,6 +257,20 @@ public class ImageTools
 */
 		g.dispose();
 		return result;
+    }
+    
+    public static BufferedImage getGreyScale(BufferedImage image)
+    {	// new greyscaled image
+    	int width = image.getWidth();
+    	int height = image.getHeight();
+		BufferedImage result = new BufferedImage(width,height,BufferedImage.TYPE_BYTE_GRAY);
+		Graphics g = result.getGraphics();
+		g.drawImage(image,0,0,null);
+		g.dispose();
+		// make it compatible
+		result =  getCompatibleImage(result);
+		//
+    	return result;    	
     }
 }
 
