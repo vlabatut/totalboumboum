@@ -733,7 +733,9 @@ public class Launcher
 	 * 
 	 * + alpha.45
 	 * - Nouveauté		: scripts de lancement/compilation pour Windows et BASH
-	 * - Correction		: utilisation dans la GUI d'une méthode qui provoque une exception sous Linux, quand on essaie de convertir une image en niveaux de gris avec BufferedImageOp. Méthode alternative employée à la place. 
+	 * - Correction		: utilisation dans la GUI d'une méthode qui provoque une exception sous Linux, quand on essaie de convertir une image en niveaux de gris avec BufferedImageOp. Méthode alternative employée à la place.
+	 * - Nouveauté		: documents relatifs à la licence GPL
+	 * - Nouveauté		: fichiers d'information dans la racine du projet  
 	 * 
 	 * *******************************************************
 	 * *********************** A FAIRE ***********************
