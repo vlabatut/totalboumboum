@@ -23,14 +23,36 @@ package fr.free.totalboumboum.ai.adapter200809;
 
 import fr.free.totalboumboum.engine.content.sprite.Sprite;
 
+/**
+ * cette classe permet de représenter les sprites manipulés par le jeu,
+ * et un nombre restreint de leurs propriétés, rendues ainsi accessible à l'IA.
+ * Le paramètre T détermine le type de sprite représenté : bloc, bombe,
+ * feu, sol, personnage ou item. 
+ * 
+ * @author Vincent
+ *
+ * @param <T>	type de sprite représenté
+ */
+
 public abstract class AiSprite<T extends Sprite>
 {	
+	/**
+	 * construit une représentation du sprite passé en paramètre
+	 * 
+	 * @param tile	représentation de la case contenant le sprite
+	 * @param sprite	sprite à représenter
+	 */
 	AiSprite(AiTile tile, T sprite)
 	{	this.tile = tile;
 		this.sprite = sprite;
 		state = new AiState(sprite);
 	}
 	
+	/**
+	 * met à jour cette représentation du sprite
+	 * 
+	 * @param tile	la nouvelle case contenant cette représentation
+	 */
 	void update(AiTile tile)
 	{	this.tile = tile;
 		updateLocation();
@@ -38,6 +60,9 @@ public abstract class AiSprite<T extends Sprite>
 		checked = true;
 	}
 
+	/**
+	 * termine proprement ce sprite et libère les ressources qu'il occupait
+	 */
 	void finish()
 	{	// state
 		state.finish();
@@ -63,22 +88,48 @@ public abstract class AiSprite<T extends Sprite>
 	/////////////////////////////////////////////////////////////////
 	// SPRITE			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
+	/** sprite représenté par cette classe */ 
 	private T sprite;
-	private boolean checked;
-	
+
+	/**
+	 * teste si cette représentation correspond au sprite passé en paramètre
+	 * 
+	 * @param sprite	le sprite dont on veut la représentation
+	 * @return	vrai si cette représentation correspond à ce sprite
+	 */
 	boolean isSprite(T sprite)
 	{	return this.sprite == sprite;
 	}
 	
+	/**
+	 * renvoie le sprite correspondant à cette représentation
+	 * 
+	 * @return	le sprite correspondant à cette représentation
+	 */
+	T getSprite()
+	{	return sprite;	
+	}
+
+	/////////////////////////////////////////////////////////////////
+	// CHECK			/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	/** marquage du sprite (permet de détecter quels sprites ont disparu lors de la mise à jour */
+	private boolean checked;
+
+	/**
+	 * teste si sprite est marqué ou pas
+	 * 
+	 * @return	vrai si ce sprite est marqué
+	 */
 	boolean isChecked()
 	{	return checked;	
 	}
+	
+	/**
+	 * démarque ce sprite (action réalisée avant la mise à jour de la zone)
+	 */
 	void uncheck()
 	{	checked = false; 
-	}
-
-	T getSprite()
-	{	return sprite;	
 	}
 	
 	/////////////////////////////////////////////////////////////////
@@ -90,10 +141,13 @@ public abstract class AiSprite<T extends Sprite>
 	/** 
 	 * renvoie l'état dans lequel se trouve ce sprite
 	 * (ie: quelle action il est en train d'effectuer ou de subir)
+	 * 
+	 * @return	l'état du sprite
 	 */
 	public AiState getState()
 	{	return state;
 	}
+	
 	/** 
 	 * initialise l'état dans lequel se trouve ce sprite
 	 */
@@ -113,14 +167,19 @@ public abstract class AiSprite<T extends Sprite>
 	public AiTile getTile()
 	{	return tile;
 	}
+	
 	/** 
 	 * renvoie le numéro de la ligne contenant ce sprite 
+	 * 
+	 * @return	le numéro de la ligne du sprite
 	 */
 	public int getLine()
 	{	return tile.getLine();	
 	}
 	/** 
 	 * renvoie le numéro de la colonne contenant ce sprite
+	 * 
+	 * @return	le numéro de la colonne du sprite
 	 */
 	public int getCol()
 	{	return tile.getCol();	
@@ -138,24 +197,33 @@ public abstract class AiSprite<T extends Sprite>
 
 	/** 
 	 * renvoie l'abscisse de ce sprite en pixels 
+	 * 
+	 * @return	l'abscisse du sprite
 	 */
 	public double getPosX()
 	{	return posX;
 	}
+	
 	/** 
 	 * renvoie l'ordonnée de ce sprite en pixels 
+	 * 
+	 * @return	l'ordonnée du sprite
 	 */
 	public double getPosY()
 	{	return posY;
 	}
+	
 	/** 
 	 * renvoie l'altitude de ce sprite en pixels 
+	 * 
+	 * @return	l'altitude du sprite
 	 */
 	public double getPosZ()
 	{	return posZ;
 	}
+	
 	/** 
-	 * initialise les positions de ce sprite en pixels 
+	 * initialise les positions (en pixels) de ce sprite 
 	 */
 	private void updateLocation()
 	{	posX = sprite.getCurrentPosX();

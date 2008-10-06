@@ -30,6 +30,7 @@ import fr.free.totalboumboum.data.profile.PredefinedColor;
 import fr.free.totalboumboum.engine.container.level.Level;
 import fr.free.totalboumboum.engine.container.tile.Tile;
 import fr.free.totalboumboum.engine.content.feature.Direction;
+import fr.free.totalboumboum.engine.content.sprite.Sprite;
 import fr.free.totalboumboum.engine.content.sprite.block.Block;
 import fr.free.totalboumboum.engine.content.sprite.bomb.Bomb;
 import fr.free.totalboumboum.engine.content.sprite.fire.Fire;
@@ -611,7 +612,10 @@ public class AiZone
 		while(it.hasNext())
 		{	T temp = it.next();
 			if(!temp.isChecked())
-				it.remove();
+			{	Sprite sprite = temp.getSprite();
+				if(sprite.isEnded())
+					it.remove();
+			}
 		}
 	}
 
