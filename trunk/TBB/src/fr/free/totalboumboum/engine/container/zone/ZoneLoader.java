@@ -1,42 +1,25 @@
 package fr.free.totalboumboum.engine.container.zone;
 
-//ImagesLoader.java
-//Andrew Davison, April 2005, ad@fivedots.coe.psu.ac.th
-
-/* The Imagesfile and images are stored in "Images/"
-   (the IMAGE_DIR constant).
-
-   ImagesFile Formats:
-
-    o <fnm>                     // a single image file
-
-    n <fnm*.ext> <number>       // a series of numbered image files, whose
-                                // filenames use the numbers 0 - <number>-1
-
-    s <fnm> <number>            // a strip file (fnm) containing a single row
-                                // of <number> images
-
-    g <name> <fnm> [ <fnm> ]*   // a group of files with different names;
-                                // they are accessible via  
-                                // <name> and position _or_ <fnm> prefix
-
-    and blank lines and comment lines.
-
-    The numbered image files (n) can be accessed by the <fnm> prefix
-    and <number>. 
-
-    The strip file images can be accessed by the <fnm>
-    prefix and their position inside the file (which is 
-    assumed to hold a single row of images).
-
-    The images in group files can be accessed by the 'g' <name> and the
-    <fnm> prefix of the particular file, or its position in the group.
-
-
-    The images are stored as BufferedImage objects, so they will be 
-    manipulated as 'managed' images by the JVM (when possible).
+/*
+ * Total Boum Boum
+ * Copyright 2008 Vincent Labatut 
+ * 
+ * This file is part of Total Boum Boum.
+ * 
+ * Total Boum Boum is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 2 of the License, or
+ * (at your option) any later version.
+ * 
+ * Total Boum Boum is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ * 
+ * You should have received a copy of the GNU General Public License
+ * along with Total Boum Boum.  If not, see <http://www.gnu.org/licenses/>.
+ * 
  */
-
 
 import java.io.File;
 import java.io.IOException;
