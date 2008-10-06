@@ -9,6 +9,7 @@ import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Rectangle;
 import java.awt.SplashScreen;
+import java.awt.image.BufferedImage;
 import java.io.IOException;
 
 import javax.swing.SwingUtilities;
@@ -31,7 +32,6 @@ public class Launcher
 	{	
 		// splashscreen
 		SplashScreen splash = SplashScreen.getSplashScreen();
-		Graphics2D g = (Graphics2D)splash.createGraphics();
 		
 		// init
 		updateSplash(splash,"[Loading XML schemas]");
@@ -41,6 +41,8 @@ public class Launcher
 		updateSplash(splash,"[Loading GUI]");
 		final GuiConfiguration configuration = GuiConfigurationLoader.loadConfiguration(config);
 		updateSplash(splash,"[Initializing GUI]");
+		BufferedImage img = new BufferedImage(10,10,BufferedImage.TYPE_INT_ARGB);
+		Graphics g = img.getGraphics();
 		GuiTools.init(configuration,g);
 		updateSplash(splash,"[Done]");
 		
@@ -79,15 +81,17 @@ public class Launcher
 	}
 	
 	private static void updateSplash(SplashScreen splash, String msg)
-	{	Graphics2D g = (Graphics2D)splash.createGraphics();
-		Rectangle size = splash.getBounds();
-		g.setComposite(AlphaComposite.Clear);
-		g.fillRect(0,0,size.width,size.height);
-		g.setPaintMode();
-		g.setColor(new Color(204,18,128));
-		g.setFont(new Font("Arial",Font.PLAIN,10));
-        g.drawString(msg,70,315);
-        splash.update();
+	{	if(splash!=null)
+		{	Graphics2D g = (Graphics2D)splash.createGraphics();
+			Rectangle size = splash.getBounds();
+			g.setComposite(AlphaComposite.Clear);
+			g.fillRect(0,0,size.width,size.height);
+			g.setPaintMode();
+			g.setColor(new Color(204,18,128));
+			g.setFont(new Font("Arial",Font.PLAIN,10));
+	        g.drawString(msg,70,315);
+	        splash.update();
+		}
 	}
 	
 // **********************************************************
@@ -707,6 +711,8 @@ public class Launcher
 	 * - Modification	: centrage de la fenêtre principale à la création
 	 * 
 	 * + alpha.45
+	 * - Nouveauté		: scripts de lancement/compilation pour Windows et BASH
+	 * - Correction		: utilisation dans la GUI d'une méthode qui provoque une exception sous Linux, quand on essaie de convertir une image en niveaux de gris avec BufferedImageOp. Méthode alternative employée à la place. 
 	 * 
 	 * *******************************************************
 	 * *********************** A FAIRE ***********************
@@ -715,7 +721,6 @@ public class Launcher
 	 * - commentaires des classes d'IA
 	 * - faire terminer les processus dès la fin du match, et pas au début du suivant (méthode finish)
 	 * 
-	 * - scripts de lancement/compilation pour Linux
 	 * 
 	 * - redistribution des items lors de la mort d'un joueur (option de round?)
 	 * - possibilité de bloquer certains items (on ne les perd pas lorsqu'on meurt)
