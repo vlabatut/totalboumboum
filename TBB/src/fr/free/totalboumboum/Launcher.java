@@ -771,4 +771,12 @@ public class Launcher
 	 *  - intérêt : tout ça permet d'implémenter le bonus à celui qui tue tout le monde en survival, par opposition à une victoire temporelle qui rapporterait donc moins de points
 	 *  - LA NOTION DE PLAYMODE EST A SUPPRIMER 
 	 */
+	
+	/*
+	 * - faire un test de version au début du jeu
+	 * - utiliser BI au lieu de SS pour générer le graphics d'init ?
+	 * CONTROLES:
+	 * 		- dans les options, on peut définir les controle de chaque joueur (max?)
+	 * 		- dans le jeu, à chaque match, chaque joueur doit choisir quels controles il va utiliser (qui est player 1, player 2 etc)
+	 */
 }
