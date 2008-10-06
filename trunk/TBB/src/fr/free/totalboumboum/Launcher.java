@@ -1,5 +1,26 @@
 package fr.free.totalboumboum;
 
+/*
+ * Total Boum Boum
+ * Copyright 2008 Vincent Labatut 
+ * 
+ * This file is part of Total Boum Boum.
+ * 
+ * Total Boum Boum is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 2 of the License, or
+ * (at your option) any later version.
+ * 
+ * Total Boum Boum is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ * 
+ * You should have received a copy of the GNU General Public License
+ * along with Total Boum Boum.  If not, see <http://www.gnu.org/licenses/>.
+ * 
+ */
+
 import java.awt.AlphaComposite;
 import java.awt.BorderLayout;
 import java.awt.Color;
@@ -717,6 +738,10 @@ public class Launcher
 	 * *******************************************************
 	 * *********************** A FAIRE ***********************
 	 * *******************************************************
+	 * CONTROLES:
+	 * 		- dans les options, on peut définir les controle de chaque joueur (max?)
+	 * 		- dans le jeu, à chaque match, chaque joueur doit choisir quels controles il va utiliser (qui est player 1, player 2 etc)
+	 * 
 	 * - plutot qu'une méthode par propriété spéciale d'un sprite, plutot une méthode générale prenant un code en paramètre ? plus flexible ? et pareil pour type d'item et de bombe ?
 	 * - commentaires des classes d'IA
 	 * - faire terminer les processus dès la fin du match, et pas au début du suivant (méthode finish)
@@ -775,13 +800,5 @@ public class Launcher
 	 *  - on rajoute également le système de bonus pour une limite donnée
 	 *  - intérêt : tout ça permet d'implémenter le bonus à celui qui tue tout le monde en survival, par opposition à une victoire temporelle qui rapporterait donc moins de points
 	 *  - LA NOTION DE PLAYMODE EST A SUPPRIMER 
-	 */
-	
-	/*
-	 * - faire un test de version au début du jeu
-	 * - utiliser BI au lieu de SS pour générer le graphics d'init ?
-	 * CONTROLES:
-	 * 		- dans les options, on peut définir les controle de chaque joueur (max?)
-	 * 		- dans le jeu, à chaque match, chaque joueur doit choisir quels controles il va utiliser (qui est player 1, player 2 etc)
 	 */
 }
