@@ -1,0 +1,40 @@
+# -------------------------------------------------------------------
+#
+# This is a BASH (Bourne-Again SHell) script, 
+# it should work on most Linux, Unix, and Mac OS.
+# It (re)compiles the whole TBB game
+#
+# -------------------------------------------------------------------
+#
+# define path variables
+	main="./src/fr/free/totalboumboum"
+	echo main=$main	
+	aig=${main}/ai
+	echo aig=$aig	
+	ai="./resources/ai"
+	echo ai=$ai	
+	bin="./bin"
+	echo bin=$bin	
+	jdom="./resources/lib/jdom.jar"
+	echo jdom=$jdom	
+	cp="${bin}:${jdom}"
+	echo cp=$cp
+	sp="./src"
+	echo sp=$sp
+#
+# create directory for .class files
+	mkdir $bin
+#
+# (re)compile the game
+	javac -sourcepath $sp -classpath $cp ${main}/Launcher.java -d $bin
+# (re)compile the AI classes inside the game
+	for i in $(ls -d ${aig}/*/); do 
+		javac -sourcepath $sp -classpath $cp $i/*.java -d $bin
+	done
+#
+# (re)compile the AI classes located in resources/ai
+	for i in $(ls -d ${ai}/*/); do
+		for j in $(ls -d $i/*/); do
+			javac -sourcepath ${sp}:${ai} -classpath ${cp}:${ai} $j/*.java
+		done
+	done
