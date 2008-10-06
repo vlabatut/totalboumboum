@@ -272,8 +272,7 @@ public class RoundDescription extends EntitledDataPanel
 			String tooltip;
 			tooltip = name+": "+number;				
 			if(number==0)
-			{	BufferedImageOp op = new ColorConvertOp(ColorSpace.getInstance(ColorSpace.CS_GRAY),null); 
-				image = op.filter(image,null);
+			{	image = ImageTools.getGreyScale(image);
 			}
 			// lists
 			ArrayList<Object> dt = new ArrayList<Object>();
