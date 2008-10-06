@@ -1,6 +1,49 @@
 package fr.free.totalboumboum.gui.menus.tournament;
 
 /*
+ * Total Boum Boum
+ * Copyright 2008 Vincent Labatut 
+ * 
+ * This file is part of Total Boum Boum.
+ * 
+ * Total Boum Boum is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 2 of the License, or
+ * (at your option) any later version.
+ * 
+ * Total Boum Boum is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ * 
+ * You should have received a copy of the GNU General Public License
+ * along with Total Boum Boum.  If not, see <http://www.gnu.org/licenses/>.
+ * 
+ */
+
+import java.awt.Color;
+import java.awt.Dimension;
+import java.awt.event.ActionEvent;
+import java.io.IOException;
+
+import javax.swing.Box;
+import javax.swing.BoxLayout;
+import javax.swing.JButton;
+import javax.xml.parsers.ParserConfigurationException;
+
+import org.xml.sax.SAXException;
+
+import fr.free.totalboumboum.game.tournament.AbstractTournament;
+import fr.free.totalboumboum.gui.common.ContentPanel;
+import fr.free.totalboumboum.gui.common.InnerDataPanel;
+import fr.free.totalboumboum.gui.common.InnerMenuPanel;
+import fr.free.totalboumboum.gui.common.MenuPanel;
+import fr.free.totalboumboum.gui.common.SplitMenuPanel;
+import fr.free.totalboumboum.gui.game.tournament.TournamentSplitPanel;
+import fr.free.totalboumboum.gui.tools.GuiTools;
+
+/**
+ * Description :
  * New
  * 		créé une nouvelle partie à partir du modèle courant
  * 		toujours possible, car il doit y avoir toujours un modèle chargé
@@ -35,29 +78,6 @@ package fr.free.totalboumboum.gui.menus.tournament;
  * Back
  * 		revient au menu principal
  */
-
-
-
-import java.awt.Color;
-import java.awt.Dimension;
-import java.awt.event.ActionEvent;
-import java.io.IOException;
-
-import javax.swing.Box;
-import javax.swing.BoxLayout;
-import javax.swing.JButton;
-import javax.xml.parsers.ParserConfigurationException;
-
-import org.xml.sax.SAXException;
-
-import fr.free.totalboumboum.game.tournament.AbstractTournament;
-import fr.free.totalboumboum.gui.common.ContentPanel;
-import fr.free.totalboumboum.gui.common.InnerDataPanel;
-import fr.free.totalboumboum.gui.common.InnerMenuPanel;
-import fr.free.totalboumboum.gui.common.MenuPanel;
-import fr.free.totalboumboum.gui.common.SplitMenuPanel;
-import fr.free.totalboumboum.gui.game.tournament.TournamentSplitPanel;
-import fr.free.totalboumboum.gui.tools.GuiTools;
 
 public class TournamentMenu extends InnerMenuPanel
 {	private static final long serialVersionUID = 1L;
