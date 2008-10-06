@@ -30,15 +30,36 @@ import fr.free.totalboumboum.engine.content.feature.event.ControlEvent;
 import fr.free.totalboumboum.engine.loop.Loop;
 import fr.free.totalboumboum.engine.player.Player;
 
+/**
+ * 
+ * Classe servant de traducteur entre le jeu et l'IA :
+ * 	- elle traduit les données du jeu en percepts traitables par l'IA (données simplifiées).
+ * 	- elle traduit la réponse de l'IA (action) en un évènement compatible avec le jeu.
+ * 
+ * @author Vincent
+ *
+ */
+
 public abstract class AiManager extends AbstractAiManager<AiAction>
 {
-	public AiManager(ArtificialIntelligence ai)
+	/**
+	 * Construit un gestionnaire pour l'IA passée en paramètre.
+	 * Cette méthode doit être appelée par une classe héritant de celle-ci,
+	 * et placée dans le package contenant l'IA. 
+	 * 
+	 * @param ai	l'ia que cette classe doit gérer
+	 */
+	protected AiManager(ArtificialIntelligence ai)
     {	super(ai);
 	}
 
     /////////////////////////////////////////////////////////////////
 	// PERCEPTS			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
+	/**
+	 * termine proprement le gestionnaire de manière à libérer les ressources 
+	 * qu'il occupait.
+	 */
 	public void finishAi()
 	{	ArtificialIntelligence ai = ((ArtificialIntelligence)getAi());
 		ai.stopRequest();
@@ -47,8 +68,11 @@ public abstract class AiManager extends AbstractAiManager<AiAction>
     /////////////////////////////////////////////////////////////////
 	// PERCEPTS			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
+	/** l'ensemble des percepts destinés à l'IA */
 	private AiZone percepts;
+	/** le moteur du jeu */
 	private Loop loop;
+	/** le niveau dans lequel la partie se déroule */
 	private Level level;
 	
 	@Override
@@ -81,7 +105,7 @@ public abstract class AiManager extends AbstractAiManager<AiAction>
     /////////////////////////////////////////////////////////////////
 	// REACTION			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-    /** simulates control keys */
+    /** simule les touches de controle d'un joueur humain */
     private Direction lastMove = Direction.NONE;
 
 	@Override
@@ -122,6 +146,12 @@ public abstract class AiManager extends AbstractAiManager<AiAction>
 		return result;
 	}
 	
+	/**
+	 * active les évènements nécessaires à l'arrêt du personnage.
+	 * Utilisé quand l'IA renvoie l'action "ne rien faire"
+	 * 
+	 * @param result	liste des évènements adaptée à l'action renvoyée par l'IA
+	 */
 	private void reactionStop(ArrayList<ControlEvent> result)
 	{	if(lastMove!=Direction.NONE)
 		{	String code = ControlEvent.getCodeFromDirection(lastMove);

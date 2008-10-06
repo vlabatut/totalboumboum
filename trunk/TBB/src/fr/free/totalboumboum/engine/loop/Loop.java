@@ -47,7 +47,6 @@ import org.xml.sax.SAXException;
 
 import sun.awt.image.OffScreenImage;
 
-import fr.free.totalboumboum.ai.InterfaceAi;
 import fr.free.totalboumboum.data.configuration.Configuration;
 import fr.free.totalboumboum.data.configuration.GameConstants;
 import fr.free.totalboumboum.data.profile.Profile;

@@ -34,6 +34,18 @@ import java.util.concurrent.Future;
 import fr.free.totalboumboum.engine.content.feature.event.ControlEvent;
 import fr.free.totalboumboum.engine.player.Player;
 
+/**
+ * 
+ * Classe servant d'interface entre le jeu et une IA.
+ * Elle doit être surclassée de manière à obtenir un adaptateur pour une famille
+ * d'IA donnée. Puis, chaque IA doit elle même surclasser la classe résultante
+ * (tout ça dans le but de faciliter le chargement de la classe implémentant l'IA).
+ * 
+ * @author Vincent
+ *
+ * @param <V>	le type de donnée renvoyée par l'IA (et devant être traduite par l'adaptateur en un évènement compatible avec le moteur du jeu)
+ */
+
 public abstract class AbstractAiManager<V>
 {
     /**
@@ -56,6 +68,11 @@ public abstract class AbstractAiManager<V>
     /** future utilisé pour récupérer le résultat de l'IA */
     private Future<V> futureAi;
 
+    /**
+     * renvoie l'IA gérée par cette classe.
+     * 
+     * @return	l'IA gérée par cette classe sous la forme d'un Callable
+     */
     public Callable<V> getAi()
     {	return ai;    	
     }
@@ -101,7 +118,8 @@ public abstract class AbstractAiManager<V>
     }
     
     /**
-     * Réalise l'appel à la classe qui implémente l'IA
+     * Réalise l'appel à la classe qui implémente l'IA,
+     * afin que celle ci calcule la prochaine action à effectuer.
      */
     private final void makeCall()
     {	updatePercepts();
@@ -109,7 +127,8 @@ public abstract class AbstractAiManager<V>
     }
     
     /**
-     * tente de terminer le thread exécutant l'IA
+     * terminer ce gestionnaire, et en particulier le thread exécutant l'IA.
+     * Ou plutôt tente de le terminer, car le résultat ne peut être forcé.
      */
     public final void finish()
     {	finishAi();
@@ -124,23 +143,40 @@ public abstract class AbstractAiManager<V>
     	player = null;
     }
     
+    /**
+     * termine cette IA, et en particulier le processus qui l'exécute.
+     * Pour cette raison, l'IA doit implémenter une méthode forçant 
+     * sa terminaison.
+     */
     public abstract void finishAi();
 
     /////////////////////////////////////////////////////////////////
 	// PERCEPTS			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
+    /** le joueur contrôlé par l'IA */
     private Player player;
    
-	public void init(String instance, Player player)
+    /**
+     * initialise le gestionnaire d'IA
+     * 
+     * @param instance	instance utilisée dans ce round
+     * @param player	joueur contrôlé par l'IA
+     */
+    public void init(String instance, Player player)
 	{	this.player = player;
 	}
 		
-	public Player getPlayer()
+	/**
+	 * renvoie le joueur contrôlé par l'IA gérée
+	 * 
+	 * @return	un objet représentant le joueur contrôlé par l'IA
+	 */
+    public Player getPlayer()
 	{	return player;		
 	}
 	
 	/**
-	 * méthode utilisée pour initialiser les percepts de l'ia avant 
+	 * méthode utilisée pour mettre à jour les percepts de l'ia avant 
 	 * que cette dernière ne calcule la prochaine action à effectuer.
 	 * Cette méthode doit être surchargée de manière à adapter la structure
 	 * des données à l'IA qui va les traiter
@@ -150,10 +186,16 @@ public abstract class AbstractAiManager<V>
 	/**
 	 * méthode utilisée pour convertir la valeur renvoyée par l'ia 
 	 * en un évènement standard traitable par le moteur du jeu.
+	 * 
 	 * @param value	la valeur renvoyée par l'ia, qui est à convertir
 	 * @return	le résultat de la conversion sous la forme d'un évènement à envoyer au sprite contrôlé par l'IA
 	 */
 	public abstract ArrayList<ControlEvent> convertReaction(V value);
    
+	/**
+	 * termine proprement les percepts, de manière à libérer les ressources occupées.
+	 * Cette méthode est appelée lorsque la partie est terminée et que les
+	 * percepts deviennent inutiles.
+	 */
 	public abstract void finishPercepts();
 }

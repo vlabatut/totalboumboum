@@ -24,14 +24,34 @@ package fr.free.totalboumboum.ai.adapter200809;
 import fr.free.totalboumboum.engine.content.feature.Direction;
 import fr.free.totalboumboum.engine.content.sprite.Sprite;
 
+/**
+ * Décrit un état dans lequel un sprite peut se trouver, c'est
+ * à dire essentiellement l'action que le sprite réalise ou qu'il subit.
+ * Cet état est décrit par le nom de cette action, et éventuellement la
+ * direction dans laquelle elle est effectuée (pour les actions orientées
+ * comme le déplacement, par exemple).
+ * 
+ * @author Vincent
+ *
+ */
+
 public class AiState 
 {
+	/** sprite dont l'état est représenté */
 	private Sprite sprite;
 	
+	/**
+	 * construit un objet représentant l'état du sprite passé en paramètre
+	 * 
+	 * @param sprite	sprite dont on veut représenter l'état
+	 */
 	AiState(Sprite sprite)
 	{	this.sprite = sprite;
 	}
 	
+	/**
+	 * met à jour cet état en fonction de l'évolution du sprite de référence
+	 */
 	void update()
 	{	// direction
 		this.direction = sprite.getActualDirection();
@@ -40,6 +60,9 @@ public class AiState
 		name = AiStateName.makeNameFromGesture(gesture);		
 	}
 	
+	/**
+	 * termine cet objet et libère les ressources occupées
+	 */
 	void finish()
 	{	sprite = null;
 		direction = null;
@@ -61,11 +84,14 @@ public class AiState
 	/////////////////////////////////////////////////////////////////
 	// NAME				/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	/** nom associé à l'état */
+	/** nom associée à l'état */
 	private AiStateName name;
+	
 	
 	/**
 	 * renvoie le nom associé à l'état
+	 * 
+	 * @return	nom associé à l'état
 	 */
 	public AiStateName getName()
 	{	return name;
@@ -80,6 +106,8 @@ public class AiState
 	/**
 	 * renvoie la direction associée à l'état,
 	 * qui peut être NONE, c'est à dire : l'état n'est pas orienté
+	 * 
+	 * @return	direction associée à l'état
 	 */
 	public Direction getDirection()
 	{	return direction;
