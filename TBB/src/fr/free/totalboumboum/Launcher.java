@@ -157,14 +157,6 @@ public class Launcher
 	 * (cf OkanYuksel qui fait un dépassement de la pile)
 	 */
 	
-	/*
-	 * TODO
-	 * attention dans la représentation du jeu 2008-09 : un sprite qui n'est plus représenté
-	 * est supprimé de la représentation. mais il est possible qu'un sprite disparaisse temporairement
-	 * (par exemple un joueur qui est téléporté, ou bien un joueur qui meurt et qui renait dans certains
-	 * modes de jeu).
-	 */
-	
 // **********************************************************
 // BOMBES
 // **********************************************************
