@@ -21,10 +21,10 @@ mkdir %bin%
 
 :: (re)compile the game
 javac -sourcepath %sp% -classpath %cp% %main%\Launcher.java -d %bin%
-:: (re)compile the AI class inside the game
+:: (re)compile the AI classes inside the game
 For /d %%f In (%aig%\*) Do javac -sourcepath %sp% -classpath %cp% %%f\*.java -d %bin%
 
-:: (re)compile the AIs located in resources\ai
+:: (re)compile the AI classes located in resources\ai
 For /d %%f In (%ai%\*) Do For /d %%g In (%%f\*) Do javac -sourcepath %sp%;%ai% -classpath %cp%;%ai% %%g\*.java
 
 pause
