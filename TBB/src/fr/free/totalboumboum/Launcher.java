@@ -636,7 +636,8 @@ public class Launcher
 	 * - Nouveauté		: scripts de lancement/compilation pour Windows et BASH
 	 * - Correction		: utilisation dans la GUI d'une méthode qui provoque une exception sous Linux, quand on essaie de convertir une image en niveaux de gris avec BufferedImageOp. Méthode alternative employée à la place.
 	 * - Nouveauté		: documents relatifs à la licence GPL
-	 * - Nouveauté		: fichiers d'information dans la racine du projet  
+	 * - Nouveauté		: fichiers d'information dans la racine du projet
+	 * - Nouveauté		: modification de l'API d'IA demanière à refléter les différents types de bombes, items et flammes  
 	 * - Nouveauté		: commentaires complets des classes d'IA
 	 * 
 	 * *******************************************************
