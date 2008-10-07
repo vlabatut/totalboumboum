@@ -23,6 +23,7 @@ package fr.free.totalboumboum.game.tournament.single;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 
 import javax.xml.parsers.ParserConfigurationException;
 
@@ -39,7 +40,7 @@ public class SingleTournamentLoader
 	public static SingleTournament loadTournamentElement(String folder, Element root, Configuration configuration) throws ParserConfigurationException, SAXException, IOException, ClassNotFoundException
 	{	SingleTournament result = new SingleTournament(configuration);
 		Element element;
-		// matche
+		// match
 		element = root.getChild(XmlTools.ELT_MATCH);
 		loadMatchElement(element,folder,result);
 		return result;

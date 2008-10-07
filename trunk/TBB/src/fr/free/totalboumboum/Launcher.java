@@ -639,17 +639,16 @@ public class Launcher
 	 * - Nouveauté		: fichiers d'information dans la racine du projet
 	 * - Nouveauté		: modification de l'API d'IA demanière à refléter les différents types de bombes, items et flammes  
 	 * - Nouveauté		: commentaires complets des classes d'IA
+	 * - Nouveauté		: tournoi simple (ne contenant qu'un seul match)
 	 * 
 	 * *******************************************************
 	 * *********************** A FAIRE ***********************
 	 * *******************************************************
-	 * - tournoi simple
 	 * 
 	 * CONTROLES:
 	 * 		- dans les options, on peut définir les controles de chaque joueur (max?)
 	 * 		- dans le jeu, à chaque match, chaque joueur doit choisir quels controles il va utiliser (qui est player 1, player 2 etc)
 	 * 
-	 * - plutot qu'une méthode par propriété spéciale d'un sprite, plutot une méthode générale prenant un code en paramètre ? plus flexible ? et pareil pour type d'item et de bombe ?
 	 * - faire terminer les processus dès la fin du match, et pas au début du suivant (méthode finish)
 	 * 
 	 * - faire un lancement rapide pour juste un round, sans interface

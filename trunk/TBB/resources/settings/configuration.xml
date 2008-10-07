@@ -42,7 +42,8 @@
 
 <!-- TOURNAMENT -->	
 <!-- 	<tournament value="tournamentTest" /> -->
-	<tournament value="tournamentLong" />
+<!-- 	<tournament value="tournamentLong" />  -->
+	<tournament value="singleTest" />
 	
 	<quickstart value="round01" />
 	

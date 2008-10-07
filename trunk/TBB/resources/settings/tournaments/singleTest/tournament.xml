@@ -11,21 +11,8 @@
  		<line value="Date: 07-10-2008" />
  	</notes>
  	
-	<sequence>
-
- 		<limits>
- 			<confrontation value="3" />
- 		</limits>
-
-		<points local="false" name="basicTournament" />
-	 	
-		<matches randomOrder="false">
-			<match local="false" name="matchLong" />
-			<match local="false" name="matchLong" />
-			<match local="true" name="match03" />
-		</matches>
-
-	</sequence>
-		
+	<single>
+		<match local="false" name="matchLong" />
+	</single>		
 		
 </tournament>
