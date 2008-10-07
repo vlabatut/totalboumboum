@@ -46,8 +46,6 @@ import fr.free.totalboumboum.game.round.Round;
 import fr.free.totalboumboum.game.round.RoundLoader;
 import fr.free.totalboumboum.tools.XmlTools;
 
-
-
 public class SequenceTournamentLoader
 {	
 	public static SequenceTournament loadTournamentElement(String folder, Element root, Configuration configuration) throws ParserConfigurationException, SAXException, IOException, ClassNotFoundException

@@ -47,7 +47,6 @@ import fr.free.totalboumboum.gui.game.match.statistics.MatchStatistics;
 
 public class SequenceTournament extends AbstractTournament
 {
-	
 	public SequenceTournament(Configuration configuration)
 	{	this.configuration = configuration; 
 	}

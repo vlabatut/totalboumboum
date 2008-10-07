@@ -22,68 +22,103 @@ package fr.free.totalboumboum.game.tournament.single;
  */
 
 import java.io.IOException;
-import java.util.ArrayList;
 
 import javax.xml.parsers.ParserConfigurationException;
 
 import org.xml.sax.SAXException;
 
+import fr.free.totalboumboum.data.configuration.Configuration;
+import fr.free.totalboumboum.data.statistics.StatisticMatch;
 import fr.free.totalboumboum.game.match.Match;
 import fr.free.totalboumboum.game.points.PointsProcessor;
+import fr.free.totalboumboum.game.points.PointsTotal;
 import fr.free.totalboumboum.game.tournament.AbstractTournament;
 
 public class SingleTournament extends AbstractTournament
 {
+	public SingleTournament(Configuration configuration)
+	{	this.configuration = configuration; 
+	}
 
+	/////////////////////////////////////////////////////////////////
+	// GAME				/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	private boolean tournamentOver = false;
+	
 	@Override
-	public void matchOver() {
-		// TODO Auto-generated method stub
-		
+	public void init() throws IllegalArgumentException, SecurityException, ParserConfigurationException, SAXException, IOException, IllegalAccessException, NoSuchFieldException, ClassNotFoundException
+	{	begun = true;
+		pointProcessor = new PointsTotal();
+		// NOTE vérifier si le nombre de joueurs sélectionnés correspond
+		setProfiles(getConfiguration().getProfiles());
+		stats.init(this);
 	}
 
 	@Override
-	public void finish() {
-		// TODO Auto-generated method stub
-		
+	public boolean isOver()
+	{	return tournamentOver;
+	}
+	
+	@Override
+	public void progress()
+	{	if(!isOver())
+		{	match.init(profiles);
+		}
 	}
 
 	@Override
-	public Match getCurrentMatch() {
-		// TODO Auto-generated method stub
-		return null;
+	public void finish()
+	{	//NOTE et les matches ? (dans SequenceTournament aussi)
 	}
 
 	@Override
-	public void init() throws IllegalArgumentException, SecurityException,
-			ParserConfigurationException, SAXException, IOException,
-			IllegalAccessException, NoSuchFieldException,
-			ClassNotFoundException {
-		// TODO Auto-generated method stub
-		
+	public boolean isReady()
+	{	boolean result = true;
+		return result;
+	}
+	
+	/////////////////////////////////////////////////////////////////
+	// MATCH			/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	private Match match = null;
+
+	public void setMatch(Match match)
+	{	this.match = match;
 	}
 
 	@Override
-	public boolean isOver() {
-		// TODO Auto-generated method stub
-		return false;
+	public Match getCurrentMatch()
+	{	return match;	
 	}
-
+	
 	@Override
-	public boolean isReady() {
-		// TODO Auto-generated method stub
-		return false;
+	public void matchOver()
+	{	// stats
+		StatisticMatch statsMatch = match.getStats();
+		stats.addStatisticMatch(statsMatch);
+		stats.computePoints(pointProcessor);
+		tournamentOver = true;
+		panel.tournamentOver();
+//NOTE ou bien : panel.matchOver();		
 	}
-
+	
+	/////////////////////////////////////////////////////////////////
+	// PLAYERS			/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	
 	@Override
-	public void progress() {
-		// TODO Auto-generated method stub
-		
+	public void updatePlayerNumber()
+	{	
+		// TODO charger partiellement tous les matches 
+		// pour déterminer le nombre de joueurs nécessaire
 	}
 
-	@Override
-	public void updatePlayerNumber() {
-		// TODO Auto-generated method stub
-		
-	}
+	/////////////////////////////////////////////////////////////////
+	// POINTS			/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	private PointsProcessor pointProcessor;
 
+	public PointsProcessor getPointProcessor()
+	{	return pointProcessor;
+	}
 }

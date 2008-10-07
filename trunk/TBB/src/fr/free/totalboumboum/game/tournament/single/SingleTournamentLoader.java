@@ -21,16 +21,44 @@ package fr.free.totalboumboum.game.tournament.single;
  * 
  */
 
+import java.io.File;
+import java.io.IOException;
+
+import javax.xml.parsers.ParserConfigurationException;
+
 import org.jdom.Element;
+import org.xml.sax.SAXException;
 
 import fr.free.totalboumboum.data.configuration.Configuration;
-import fr.free.totalboumboum.game.tournament.sequence.SequenceTournament;
+import fr.free.totalboumboum.game.match.Match;
+import fr.free.totalboumboum.game.match.MatchLoader;
+import fr.free.totalboumboum.tools.XmlTools;
 
 public class SingleTournamentLoader
 {
-
-	public static SingleTournament loadTournamentElement(String folder, Element root, Configuration configuration)
-	{
-		return null;
+	public static SingleTournament loadTournamentElement(String folder, Element root, Configuration configuration) throws ParserConfigurationException, SAXException, IOException, ClassNotFoundException
+	{	SingleTournament result = new SingleTournament(configuration);
+		Element element;
+		// matche
+		element = root.getChild(XmlTools.ELT_MATCH);
+		loadMatchElement(element,folder,result);
+		return result;
+	}
+	
+	private static void loadMatchElement(Element root, String folder, SingleTournament result) throws ParserConfigurationException, SAXException, IOException, ClassNotFoundException
+	{	Match match;
+		// local
+		String localStr = root.getAttribute(XmlTools.ATT_LOCAL).getValue().trim();
+		boolean local = Boolean.valueOf(localStr);
+		// name
+		String name = root.getAttribute(XmlTools.ATT_NAME).getValue();
+		// loading
+		if(local)
+		{	folder = folder+File.separator+name;
+			match = MatchLoader.loadMatchFromFolderPath(folder,result);
+		}
+		else
+			match = MatchLoader.loadMatchFromName(name,result);
+		result.setMatch(match);
 	}
 }
