@@ -39,6 +39,7 @@
 <!-- SINGLE -->
 	<xsd:complexType name="tSingle">
 		<xsd:sequence>
+			<xsd:element name="match" type="tMatch" />
 		</xsd:sequence>
 	</xsd:complexType>
 
