@@ -34,11 +34,13 @@ import javax.xml.parsers.ParserConfigurationException;
 import org.xml.sax.SAXException;
 
 import fr.free.totalboumboum.game.tournament.AbstractTournament;
+import fr.free.totalboumboum.game.tournament.single.SingleTournament;
 import fr.free.totalboumboum.gui.common.ContentPanel;
 import fr.free.totalboumboum.gui.common.InnerDataPanel;
 import fr.free.totalboumboum.gui.common.InnerMenuPanel;
 import fr.free.totalboumboum.gui.common.MenuPanel;
 import fr.free.totalboumboum.gui.common.SplitMenuPanel;
+import fr.free.totalboumboum.gui.game.match.MatchSplitPanel;
 import fr.free.totalboumboum.gui.game.tournament.TournamentSplitPanel;
 import fr.free.totalboumboum.gui.tools.GuiTools;
 
@@ -150,7 +152,12 @@ public class TournamentMenu extends InnerMenuPanel
 			AbstractTournament tournament = getConfiguration().getCurrentTournament();
 			try
 			{	tournament.init();
-				tournamentGamePanel = new TournamentSplitPanel(container.getContainer(),container);
+				if(tournament instanceof SingleTournament)
+				{	tournament.progress();
+					tournamentGamePanel = new MatchSplitPanel(container.getContainer(),container);					
+				}
+				else
+					tournamentGamePanel = new TournamentSplitPanel(container.getContainer(),container);
 			}
 			catch (IllegalArgumentException e1)
 			{	e1.printStackTrace();

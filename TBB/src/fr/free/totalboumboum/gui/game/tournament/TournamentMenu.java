@@ -54,6 +54,7 @@ import fr.free.totalboumboum.gui.common.SplitMenuPanel;
 import fr.free.totalboumboum.gui.game.match.MatchSplitPanel;
 import fr.free.totalboumboum.gui.game.tournament.description.SequenceDescription;
 import fr.free.totalboumboum.gui.game.tournament.description.TournamentDescription;
+import fr.free.totalboumboum.gui.game.tournament.results.SequenceResults;
 import fr.free.totalboumboum.gui.game.tournament.results.TournamentResults;
 import fr.free.totalboumboum.gui.game.tournament.statistics.TournamentStatistics;
 import fr.free.totalboumboum.gui.tools.GuiTools;
@@ -111,12 +112,8 @@ public class TournamentMenu extends InnerMenuPanel implements TournamentRenderPa
 		{	tournamentDescription = new SequenceDescription(container);
 			container.setDataPart(tournamentDescription);
 			dataPart = tournamentDescription;
-			tournamentResults = new TournamentResults(container);
+			tournamentResults = new SequenceResults(container);
 			tournamentStatistics = new TournamentStatistics(container);		
-		}
-		else if(tournament instanceof SingleTournament)
-		{
-			// NOTE à compléter
 		}
 		else if(tournament instanceof CupTournament)
 		{
