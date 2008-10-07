@@ -495,11 +495,6 @@ long c = System.currentTimeMillis();
 				skips++;
 			}
 //System.out.println(skips);
-			int fps = configuration.getFps();
-			if(averageFPS<24 && averageFPS>0 && fps>24)
-				configuration.setFps(fps-10);
-			else if(averageFPS>(fps-1) && fps<50)
-				configuration.setFps(fps+10);
 			
 			framesSkipped = framesSkipped + skips;
 			storeStats( );
@@ -633,6 +628,15 @@ System.out.println();
       		frameCount = 0;
       		framesSkipped = 0;
       		prevStatsTime = timeNow;
+      		
+      		// adapt the FPS according to the PC power
+			int fps = configuration.getFps();
+			if(averageFPS>0)
+			{	if(averageFPS<30 && fps>30)
+					configuration.setFps(fps-10);
+				else if(averageFPS>(fps-1) && fps<50)
+					configuration.setFps(fps+10);
+			}
       	}
     }
 	
