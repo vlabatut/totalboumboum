@@ -435,8 +435,6 @@ float nbrUpdates=0;
 	        upsStore[k] = 0;
 		}		
 		
-		milliPeriod = getConfiguration().getMilliPeriod();
-		
 		gameStartTime = System.currentTimeMillis();
 		prevStatsTime = gameStartTime;
 		beforeTime = gameStartTime;
@@ -445,7 +443,10 @@ float nbrUpdates=0;
 
 //		setLooping(true);
 		while(/*isLooping() && */!isOver())
-		{	// cycle
+		{	
+			milliPeriod = getConfiguration().getMilliPeriod();
+			
+			// cycle
 long a = System.currentTimeMillis();
 			update();
 long b = System.currentTimeMillis();
@@ -495,10 +496,10 @@ long c = System.currentTimeMillis();
 			}
 //System.out.println(skips);
 			int fps = configuration.getFps();
-			if(averageFPS<24 && averageFPS>0 && fps>10)
+			if(averageFPS<24 && averageFPS>0 && fps>24)
 				configuration.setFps(fps-10);
-//			else if(fps<50)
-//				configuration.setFps(fps+10);
+			else if(averageFPS>(fps-1) && fps<50)
+				configuration.setFps(fps+10);
 			
 			framesSkipped = framesSkipped + skips;
 			storeStats( );
