@@ -298,7 +298,7 @@ public class Loop implements Runnable
 		}
 		// waking the process thread up
 		cond.signal();
-		loadLock.lock();		
+		loadLock.unlock();	//NOTE modif	
 	}
 	public LoopRenderPanel getPanel()
 	{	return panel;
@@ -416,6 +416,7 @@ public class Loop implements Runnable
 		catch (NoSuchMethodException e)
 		{	e.printStackTrace();
 		}
+		loadLock.unlock(); //NOTE modif
 	}
 	
 long totalUpdateTime=0;

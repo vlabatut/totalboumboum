@@ -23,6 +23,7 @@ package fr.free.totalboumboum.data.configuration;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
@@ -31,25 +32,40 @@ import javax.xml.parsers.ParserConfigurationException;
 import org.jdom.Element;
 import org.xml.sax.SAXException;
 
+import fr.free.totalboumboum.game.limit.LimitConfrontation;
+import fr.free.totalboumboum.game.limit.Limits;
+import fr.free.totalboumboum.game.limit.MatchLimit;
+import fr.free.totalboumboum.game.match.Match;
+import fr.free.totalboumboum.game.points.PointsProcessor;
+import fr.free.totalboumboum.game.points.PointsTotal;
+import fr.free.totalboumboum.game.round.Round;
+import fr.free.totalboumboum.game.round.RoundLoader;
 import fr.free.totalboumboum.game.tournament.AbstractTournament;
 import fr.free.totalboumboum.game.tournament.TournamentLoader;
+import fr.free.totalboumboum.game.tournament.single.SingleTournament;
 import fr.free.totalboumboum.tools.FileTools;
 import fr.free.totalboumboum.tools.XmlTools;
 
 public class ConfigurationLoader
 {	
+	public static Configuration quickloadConfiguration() throws ParserConfigurationException, SAXException, IOException, IllegalArgumentException, SecurityException, IllegalAccessException, NoSuchFieldException, ClassNotFoundException
+	{	return loadConfiguration(true);
+	}
 	public static Configuration loadConfiguration() throws ParserConfigurationException, SAXException, IOException, IllegalArgumentException, SecurityException, IllegalAccessException, NoSuchFieldException, ClassNotFoundException
+	{	return loadConfiguration(false);
+	}
+	private static Configuration loadConfiguration(boolean quickStart) throws ParserConfigurationException, SAXException, IOException, IllegalArgumentException, SecurityException, IllegalAccessException, NoSuchFieldException, ClassNotFoundException
 	{	Configuration result = new Configuration();
 		String individualFolder = FileTools.getSettingsPath();
 		File dataFile = new File(individualFolder+File.separator+FileTools.FILE_CONFIGURATION+FileTools.EXTENSION_DATA);
 		String schemaFolder = FileTools.getSchemasPath();
 		File schemaFile = new File(schemaFolder+File.separator+FileTools.FILE_CONFIGURATION+FileTools.EXTENSION_SCHEMA);
 		Element root = XmlTools.getRootFromFile(dataFile,schemaFile);
-		loadConfigurationElement(root,result);
+		loadConfigurationElement(root,result,quickStart);
 		return result;
 	}
 
-	private static void loadConfigurationElement(Element root, Configuration result) throws ParserConfigurationException, SAXException, IOException, IllegalArgumentException, SecurityException, IllegalAccessException, NoSuchFieldException, ClassNotFoundException
+	private static void loadConfigurationElement(Element root, Configuration result, boolean quickStart) throws ParserConfigurationException, SAXException, IOException, IllegalArgumentException, SecurityException, IllegalAccessException, NoSuchFieldException, ClassNotFoundException
 	{	Element element; 
 		// engine
 		element = root.getChild(XmlTools.ELT_FPS);
@@ -65,14 +81,16 @@ public class ConfigurationLoader
 		// profiles
 		element = root.getChild(XmlTools.ELT_PROFILES);
 		loadProfilesElement(element,result);
-		// tournament
-		element = root.getChild(XmlTools.ELT_TOURNAMENT);
-		if(element!=null)
-			loadTournamentElement(element,result);
 		// round for quick start
 		element = root.getChild(XmlTools.ELT_QUICKSTART);
-		if(element!=null)
+		if(quickStart && element!=null)
 			loadQuickstartElement(element,result);
+		else
+		{	// last tournament
+			element = root.getChild(XmlTools.ELT_TOURNAMENT);
+			if(element!=null)
+				loadTournamentElement(element,result);
+		}
 	}
 	
 	private static void loadFpsElement(Element root, Configuration result)
@@ -124,7 +142,30 @@ result.addProfile(value);
 	}
 
 	private static void loadQuickstartElement(Element root, Configuration result) throws IllegalArgumentException, SecurityException, ParserConfigurationException, SAXException, IOException, IllegalAccessException, NoSuchFieldException, ClassNotFoundException
-	{	String value = root.getAttribute(XmlTools.ATT_VALUE).getValue().trim();
-		result.setQuickstart(value);
+	{	// single tournament
+		SingleTournament tournament = new SingleTournament(result);
+		// one round match
+		Match match = new Match(tournament);
+		{	// notes
+			ArrayList<String> notes = new ArrayList<String>();
+			notes.add("auto-generated notes");
+			match.setNotes(notes);
+		}
+		{	// limits
+			Limits<MatchLimit> limits = new Limits<MatchLimit>();
+			MatchLimit limit = new LimitConfrontation(1);
+			limits.addLimit(limit);
+		}
+		{	// points processor
+			PointsProcessor pointProcessor = new PointsTotal();
+			match.setPointProcessor(pointProcessor);
+		}
+		tournament.setMatch(match);
+		// round
+		String name = root.getAttribute(XmlTools.ATT_VALUE).getValue().trim();
+		Round round = RoundLoader.loadRoundFromName(name,match);
+		match.addRound(round);
+		// result
+		result.setTournament(tournament);
 	}
 }

@@ -179,11 +179,13 @@ public class Match
 				stats.setWinner(limit);
 			matchOver = true;
 			tournament.matchOver();
-			panel.matchOver();
+			if(panel!=null)
+				panel.matchOver();
 		}
 		else
 		{	//tournament.roundOver();
-			panel.roundOver();
+			if(panel!=null)
+				panel.roundOver();
 		}
 	}
 	

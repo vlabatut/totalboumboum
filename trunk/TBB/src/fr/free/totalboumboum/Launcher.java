@@ -647,6 +647,7 @@ public class Launcher
 	 * - Nouveauté		: commentaires complets des classes d'IA
 	 * - Nouveauté		: tournoi simple (ne contenant qu'un seul match)
 	 * - Correction		: bug dans la barre de progression lors du chargement du round
+	 * - Nouveauté		: mode quicklaunch pour jouer un round très rapidement (pas de GUI)
 	 * 
 	 * *******************************************************
 	 * *********************** A FAIRE ***********************
