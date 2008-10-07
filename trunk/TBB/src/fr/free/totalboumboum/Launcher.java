@@ -649,6 +649,7 @@ public class Launcher
 	 * - plutot qu'une méthode par propriété spéciale d'un sprite, plutot une méthode générale prenant un code en paramètre ? plus flexible ? et pareil pour type d'item et de bombe ?
 	 * - faire terminer les processus dès la fin du match, et pas au début du suivant (méthode finish)
 	 * 
+	 * - faire un lancement rapide pour juste un round, sans interface
 	 * 
 	 * - redistribution des items lors de la mort d'un joueur (option de round?)
 	 * - possibilité de bloquer certains items (on ne les perd pas lorsqu'on meurt)
