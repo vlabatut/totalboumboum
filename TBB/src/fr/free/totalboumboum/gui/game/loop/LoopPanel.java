@@ -90,7 +90,7 @@ public class LoopPanel extends SimpleMenuPanel implements LoopRenderPanel
 	}
 
 	public void start()
-	{	requestFocus();					
+	{	requestFocus();
 		loop.setPanel(this);
 		if(mode==0)
 		{	int width = getPreferredSize().width;

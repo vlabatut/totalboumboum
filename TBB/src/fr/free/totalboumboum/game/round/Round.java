@@ -58,7 +58,8 @@ public class Round
 	private boolean roundOver = false;
 	
 	public void loadStepOver()
-	{	panel.loadStepOver();		
+	{	if(panel!=null)
+			panel.loadStepOver();		
 	}
 	
 	public void init() throws ParserConfigurationException, SAXException, IOException, ClassNotFoundException, IllegalArgumentException, SecurityException, IllegalAccessException, NoSuchFieldException
@@ -111,7 +112,8 @@ public class Round
 	
 	public void loopOver()
 	{	match.roundOver();
-		panel.roundOver();
+		if(panel!=null)
+			panel.roundOver();
 	}
 	
 	/////////////////////////////////////////////////////////////////

@@ -20,7 +20,7 @@ import fr.free.totalboumboum.data.configuration.ConfigurationLoader;
 import fr.free.totalboumboum.game.tournament.single.SingleTournament;
 import fr.free.totalboumboum.gui.data.configuration.GuiConfiguration;
 import fr.free.totalboumboum.gui.data.configuration.GuiConfigurationLoader;
-import fr.free.totalboumboum.gui.menus.main.MainFrame;
+import fr.free.totalboumboum.gui.quicklaunch.QuickFrame;
 import fr.free.totalboumboum.gui.tools.GuiTools;
 import fr.free.totalboumboum.tools.XmlTools;
 
@@ -31,16 +31,13 @@ public class QuickLauncher
 	{	
 		// init
 		XmlTools.init();
-		Configuration configuration = ConfigurationLoader.loadConfiguration();
-		SingleTournament tournament = new SingleTournament(configuration);
-		
-		
+		final Configuration configuration = ConfigurationLoader.quickloadConfiguration();
 		
 		// create GUI
 		SwingUtilities.invokeLater(new Runnable()
 		{	public void run()
 			{	try
-				{	new MainFrame(configuration);
+				{	new QuickFrame(configuration);
 				}
 				catch (IllegalArgumentException e)
 				{	e.printStackTrace();
