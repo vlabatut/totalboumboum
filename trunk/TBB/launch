@@ -16,3 +16,5 @@
 #
 # launch the game
 	java -Xmx128m -splash:$splash -classpath $cp $launcher
+#
+#
