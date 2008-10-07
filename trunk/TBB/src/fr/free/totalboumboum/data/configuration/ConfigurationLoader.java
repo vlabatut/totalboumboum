@@ -69,6 +69,10 @@ public class ConfigurationLoader
 		element = root.getChild(XmlTools.ELT_TOURNAMENT);
 		if(element!=null)
 			loadTournamentElement(element,result);
+		// round for quick start
+		element = root.getChild(XmlTools.ELT_QUICKSTART);
+		if(element!=null)
+			loadQuickstartElement(element,result);
 	}
 	
 	private static void loadFpsElement(Element root, Configuration result)
@@ -117,5 +121,10 @@ result.addProfile(value);
 	{	String value = root.getAttribute(XmlTools.ATT_VALUE).getValue().trim();
 		AbstractTournament tournament = TournamentLoader.loadTournamentFromName(value,result);			
 		result.setTournament(tournament);
+	}
+
+	private static void loadQuickstartElement(Element root, Configuration result) throws IllegalArgumentException, SecurityException, ParserConfigurationException, SAXException, IOException, IllegalAccessException, NoSuchFieldException, ClassNotFoundException
+	{	String value = root.getAttribute(XmlTools.ATT_VALUE).getValue().trim();
+		result.setQuickstart(value);
 	}
 }

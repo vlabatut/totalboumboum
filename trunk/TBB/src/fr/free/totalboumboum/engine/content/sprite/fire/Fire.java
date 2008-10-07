@@ -37,10 +37,20 @@ import fr.free.totalboumboum.engine.loop.Loop;
 
 
 public class Fire extends Sprite
-{	public Fire(Level level)
+{	
+	private String firesetName;
+	
+	public Fire(Level level)
 	{	super(level);
 	}	
 
+	public String getFiresetName()
+	{	return firesetName;	
+	}
+	public void setFiresetName(String firesetName)
+	{	this.firesetName = firesetName;	
+	}
+	
 	public void consumeTile(Tile tile)
 	{	ArrayList<Sprite> sprites = tile.getSprites();
 		Iterator<Sprite> i = sprites.iterator();

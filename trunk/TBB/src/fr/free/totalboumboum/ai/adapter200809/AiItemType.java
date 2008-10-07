@@ -21,35 +21,37 @@ package fr.free.totalboumboum.ai.adapter200809;
  * 
  */
 
-import fr.free.totalboumboum.engine.content.sprite.floor.Floor;
-
 /**
- * représente un sol du jeu, ie le graphisme affiché en tant que première couche de toute
- * case de la zone (et éventuellement recouvert par les autres types de sprites).
- * 
- * @author Vincent
- *
+ * types d'items reconnus par l'IA.
+ * 	
  */
-public class AiFloor extends AiSprite<Floor>
+public enum AiItemType
 {
+	/** le joueur peut poser une bombe de plus */
+	EXTRA_BOMB,
+	/** les bombes du joueur explosent plus loin */
+	EXTRA_FLAME,
+	/** le joueur peut frapper dans une bombe et ainsi l'envoyer plus loin */
+	PUNCH,
+	/** autre type d'item */
+	OTHER;	
+	
 	/**
-	 * crée une représentation du sol passé en paramètre, et contenue dans 
-	 * la case passée en paramètre.
+	 * calcule l'AiItemType correspondant au nom d'item passé en paramètre
 	 * 
-	 * @param tile	case contenant le sprite
-	 * @param sprite	sprite à représenter
+	 * @param name	nom de l'item à traiter
+	 * @return	symbole représentant ce type d'item
 	 */
-	AiFloor(AiTile tile, Floor sprite)
-	{	super(tile,sprite);		
-	}
-
-	@Override
-	void update(AiTile tile)
-	{	super.update(tile);
-	}
-
-	@Override
-	void finish()
-	{	super.finish();
+	public static AiItemType makeItemType(String name)
+	{	AiItemType result;
+		if(name.equalsIgnoreCase("extrabomb"))
+			result = EXTRA_BOMB;
+		else if(name.equalsIgnoreCase("extraflame"))
+			result = EXTRA_FLAME;
+		else if(name.equalsIgnoreCase("punch"))
+			result = PUNCH;
+		else
+			result = OTHER;
+		return result;
 	}
 }

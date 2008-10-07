@@ -21,10 +21,25 @@ package fr.free.totalboumboum.ai.adapter200809;
  * 
  */
 
+import fr.free.totalboumboum.engine.content.sprite.bomb.Bomb;
 import fr.free.totalboumboum.engine.content.sprite.fire.Fire;
 
+/**
+ * représente un feu du jeu, ie une projection mortelle résultant (généralement) 
+ * de l'explosion d'une bombe. 
+ * 
+ * @author Vincent
+ *
+ */
 public class AiFire extends AiSprite<Fire>
 {
+	/**
+	 * crée une représentation du feu passé en paramètre, et contenue dans 
+	 * la case passée en paramètre.
+	 * 
+	 * @param tile	case contenant le sprite
+	 * @param sprite	sprite à représenter
+	 */
 	AiFire(AiTile tile, Fire sprite)
 	{	super(tile,sprite);		
 	}
@@ -38,4 +53,27 @@ public class AiFire extends AiSprite<Fire>
 	void finish()
 	{	super.finish();
 	}
+
+	/////////////////////////////////////////////////////////////////
+	// FIRE				/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	/** type du feu */
+	private AiFireType type;
+	
+	/**
+	 * renvoie le type du feu
+	 * @return	une valeur de type AiFireType représentant le type de feu
+	 */
+	public AiFireType getType()
+	{	return type;	
+	}
+	
+	/**
+	 * initialise le type du bombe
+	 */
+	private void initType()
+	{	Fire fire = getSprite();
+		type = AiFireType.makeFireType(fire.getFiresetName());		
+	}
+	
 }

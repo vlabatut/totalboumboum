@@ -25,8 +25,23 @@ import fr.free.totalboumboum.data.profile.PredefinedColor;
 import fr.free.totalboumboum.engine.content.feature.GestureConstants;
 import fr.free.totalboumboum.engine.content.sprite.bomb.Bomb;
 
+/**
+ * représente une bombe du jeu, ie un objet que les joueurs peuvent déposer
+ * pour détruire les murs et éliminer les autre joueurs.
+ * 
+ * @author Vincent
+ *
+ */
+
 public class AiBomb extends AiSprite<Bomb>
 {
+	/**
+	 * crée une représentation de la bombe passée en paramètre, et contenue dans 
+	 * la case passée en paramètre.
+	 * 
+	 * @param tile	case contenant le sprite
+	 * @param sprite	sprite à représenter
+	 */
 	AiBomb(AiTile tile, Bomb sprite)
 	{	super(tile,sprite);
 		initType();
@@ -47,26 +62,45 @@ public class AiBomb extends AiSprite<Bomb>
 	}
 
 	/////////////////////////////////////////////////////////////////
-	// TYPE			/////////////////////////////////////////////
+	// TYPE				/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	private String type;
+	/** type de la bombe */
+	private AiBombType type;
 	
-	public String getType()
+	/**
+	 * renvoie le type de la bombe
+	 * @return	une valeur de type AiBombType représentant le type de bombe
+	 */
+	public AiBombType getType()
 	{	return type;	
 	}
+	
+	/**
+	 * initialise le type de la bombe
+	 */
 	private void initType()
 	{	Bomb bomb = getSprite();
-		type = bomb.getBombName();		
+		type = AiBombType.makeBombType(bomb.getBombName());		
 	}
 	
 	/////////////////////////////////////////////////////////////////
 	// RANGE			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
+	/** portée de la bombe, ie. : nombre de cases occupées par sa flamme */
 	private int range;
 	
+	/**
+	 * renvoie la portée de la bombe
+	 * (ie. le nombre de cases occupées par sa flamme)
+	 * @return	portée de la bombe
+	 */
 	public int getRange()
 	{	return range;	
 	}
+	
+	/**
+	 * initialise la portée de la bombe
+	 */
 	private void initRange()
 	{	Bomb bomb = getSprite();
 		range = bomb.getFlameRange();
@@ -75,11 +109,21 @@ public class AiBomb extends AiSprite<Bomb>
 	/////////////////////////////////////////////////////////////////
 	// WORKING			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
+	/** inidique si cette bombe fonctionne normalement (ie si elle n'est pas tombée en panne) */
 	private boolean working;
 	
+	/**
+	 * indique si cette bombe fonctionne normalement (ie si elle n'est pas tombée en panne)
+	 * 
+	 * @return	vrai si cette bombe marche, faux si elle est en panne
+	 */
 	public boolean isWorking()
 	{	return working;	
 	}
+	
+	/**
+	 * met à jour l'indicateur de panne de cette bombe
+	 */
 	private void updateWorking()
 	{	Bomb sprite = getSprite();
 		String gesture = sprite.getCurrentGesture();
@@ -94,11 +138,23 @@ public class AiBomb extends AiSprite<Bomb>
 	/////////////////////////////////////////////////////////////////
 	// COLOR			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
+	/** couleur de la bombe (correspondant à celle du personnage qui l'a posée) */
 	private PredefinedColor color;
 	
+	/**
+	 * renvoie la couleur de cette bombe.
+	 * Cette couleur est null si aucun joueur n'a posé la bombe 
+	 * (pour certains niveaux spéciaux où les blocs peuvent générer des bombes)  
+	 * 
+	 * @return un symbole de type PredefinedColor représentant une couleur
+	 */
 	public PredefinedColor getColor()
 	{	return color;	
 	}
+	
+	/**
+	 * initialise la couleur de la bombe
+	 */
 	private void initColor()
 	{	Bomb sprite = getSprite();
 		color = sprite.getColor();	

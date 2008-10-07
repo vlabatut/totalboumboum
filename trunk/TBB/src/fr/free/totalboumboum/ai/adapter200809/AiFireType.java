@@ -21,35 +21,33 @@ package fr.free.totalboumboum.ai.adapter200809;
  * 
  */
 
-import fr.free.totalboumboum.engine.content.sprite.floor.Floor;
-
 /**
- * représente un sol du jeu, ie le graphisme affiché en tant que première couche de toute
- * case de la zone (et éventuellement recouvert par les autres types de sprites).
- * 
- * @author Vincent
- *
+ * types de feux reconnus par l'IA.
+ * 	
  */
-public class AiFloor extends AiSprite<Floor>
+public enum AiFireType
 {
+	/** feu normal */
+	NORMAL,
+	/** feu pénétrant (pas arrêté par les les objets destructibles) */
+	PENETRATION,
+	/** autre type de feu */
+	OTHER;	
+	
 	/**
-	 * crée une représentation du sol passé en paramètre, et contenue dans 
-	 * la case passée en paramètre.
+	 * calcule l'AiFireType correspondant au nom de feu passé en paramètre
 	 * 
-	 * @param tile	case contenant le sprite
-	 * @param sprite	sprite à représenter
+	 * @param name	nom du feu à traiter
+	 * @return	symbole représentant ce type de feu
 	 */
-	AiFloor(AiTile tile, Floor sprite)
-	{	super(tile,sprite);		
-	}
-
-	@Override
-	void update(AiTile tile)
-	{	super.update(tile);
-	}
-
-	@Override
-	void finish()
-	{	super.finish();
+	public static AiFireType makeFireType(String name)
+	{	AiFireType result;
+		if(name.equalsIgnoreCase("normal"))
+			result = NORMAL;
+		else if(name.equalsIgnoreCase("penetration"))
+			result = PENETRATION;
+		else
+			result = OTHER;
+		return result;
 	}
 }

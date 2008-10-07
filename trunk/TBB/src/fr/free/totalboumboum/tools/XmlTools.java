@@ -136,7 +136,8 @@ public class XmlTools
 	public static final String ELT_PREVIEW = "preview";
 	public static final String ELT_PROFILE = "profile";
 	public static final String ELT_PROFILES = "profiles";
-	public static final String ELT_PROPERTIES = "properties";
+	public static final String ELT_PROPERTIES = "quickstart";
+	public static final String ELT_QUICKSTART = "properties";
 	public static final String ELT_RANKINGS = "rankings";
 	public static final String ELT_RANKPOINTS = "rankpoints";
 	public static final String ELT_REFERENCE = "reference";
