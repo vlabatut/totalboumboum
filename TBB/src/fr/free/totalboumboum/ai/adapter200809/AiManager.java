@@ -33,8 +33,8 @@ import fr.free.totalboumboum.engine.player.Player;
 /**
  * 
  * Classe servant de traducteur entre le jeu et l'IA :
- * 	- elle traduit les données du jeu en percepts traitables par l'IA (données simplifiées).
- * 	- elle traduit la réponse de l'IA (action) en un évènement compatible avec le jeu.
+ * <br>	- elle traduit les données du jeu en percepts traitables par l'IA (données simplifiées).
+ * <br>	- elle traduit la réponse de l'IA (action) en un évènement compatible avec le jeu.
  * 
  * @author Vincent
  *

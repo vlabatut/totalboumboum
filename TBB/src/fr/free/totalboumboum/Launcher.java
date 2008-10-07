@@ -157,6 +157,12 @@ public class Launcher
 	 * (cf OkanYuksel qui fait un dépassement de la pile)
 	 */
 	
+	/*
+	 * TODO il ne faut pas exécuter toutes les IA dans un thread pool, mais au contraire les séparer
+	 * sinon, une seule IA bouclant à l'infini va consommer tous les threads dispo dans le treadpool
+	 * vont être successivement monopolisés par l'IA
+	 */
+	
 // **********************************************************
 // BOMBES
 // **********************************************************
@@ -640,19 +646,18 @@ public class Launcher
 	 * - Nouveauté		: modification de l'API d'IA demanière à refléter les différents types de bombes, items et flammes  
 	 * - Nouveauté		: commentaires complets des classes d'IA
 	 * - Nouveauté		: tournoi simple (ne contenant qu'un seul match)
+	 * - Correction		: bug dans la barre de progression lors du chargement du round
 	 * 
 	 * *******************************************************
 	 * *********************** A FAIRE ***********************
 	 * *******************************************************
 	 * 
+	 * - faire un lancement rapide pour juste un round, sans interface
+	 * - ajustement automatique du FPS
+	 * 
 	 * CONTROLES:
 	 * 		- dans les options, on peut définir les controles de chaque joueur (max?)
 	 * 		- dans le jeu, à chaque match, chaque joueur doit choisir quels controles il va utiliser (qui est player 1, player 2 etc)
-	 * 
-	 * - faire terminer les processus dès la fin du match, et pas au début du suivant (méthode finish)
-	 * 
-	 * - faire un lancement rapide pour juste un round, sans interface
-	 * - ajustement automatique du FPS
 	 * 
 	 * - redistribution des items lors de la mort d'un joueur (option de round?)
 	 * - possibilité de bloquer certains items (on ne les perd pas lorsqu'on meurt)

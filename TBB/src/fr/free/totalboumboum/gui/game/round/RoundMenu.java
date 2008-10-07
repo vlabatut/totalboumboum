@@ -159,7 +159,7 @@ public class RoundMenu extends InnerMenuPanel implements RoundRenderPanel
 			buttonQuit.setEnabled(false);
 			buttonMatch.setEnabled(false);
 			Round round = getConfiguration().getCurrentRound();
-			int limit = round.getProfiles().size()+3;
+			int limit = round.getProfiles().size()+2;
 			loadProgressBar = new JProgressBar(0,limit);
 			Font font = getConfiguration().getFont().deriveFont((float)GuiTools.getSize(GuiTools.GAME_PROGRESSBAR_FONT_SIZE));
 			loadProgressBar.setFont(font);
@@ -259,16 +259,10 @@ public class RoundMenu extends InnerMenuPanel implements RoundRenderPanel
 				loadProgressBar.setString(text);
 				loadProgressBar.repaint();
 				break;
-			// zone
-			case 2:
-				text = getConfiguration().getLanguage().getText(GuiTools.GAME_ROUND_PROGRESSBAR_ZONE);
-				loadProgressBar.setString(text);
-				loadProgressBar.repaint();
-				break;
 			// players
 			default:
 				Round round = getConfiguration().getCurrentRound();
-				if(val==round.getProfiles().size()+3)
+				if(val==round.getProfiles().size()+2)
 				{	text = getConfiguration().getLanguage().getText(GuiTools.GAME_ROUND_PROGRESSBAR_COMPLETE);
 					loadProgressBar.setString(text);
 					loadProgressBar.repaint();
@@ -277,7 +271,7 @@ public class RoundMenu extends InnerMenuPanel implements RoundRenderPanel
 					loopPanel.start();
 				}
 				else
-				{	text = getConfiguration().getLanguage().getText(GuiTools.GAME_ROUND_PROGRESSBAR_PLAYER)+" "+(val-2);
+				{	text = getConfiguration().getLanguage().getText(GuiTools.GAME_ROUND_PROGRESSBAR_PLAYER)+" "+(val-1);
 					loadProgressBar.setString(text);
 					loadProgressBar.repaint();
 				}

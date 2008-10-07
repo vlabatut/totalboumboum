@@ -99,7 +99,6 @@ public class Loop implements Runnable
 		loadStepOver();
 		hollowLevel.loadTheme();
 		loadStepOver();
-		loadStepOver();
 		level = hollowLevel.getLevel();
 
 		// load players : common stuff
@@ -495,6 +494,12 @@ long c = System.currentTimeMillis();
 				skips++;
 			}
 //System.out.println(skips);
+			int fps = configuration.getFps();
+			if(averageFPS<24 && averageFPS>0 && fps>10)
+				configuration.setFps(fps-10);
+//			else if(fps<50)
+//				configuration.setFps(fps+10);
+			
 			framesSkipped = framesSkipped + skips;
 			storeStats( );
 			
@@ -540,16 +545,17 @@ System.out.println();
 
 	private void update()
 	{	if(!isPaused)
-		{	// celebration ?
+		{	long milliPeriod = getConfiguration().getMilliPeriod();
+			// celebration ?
 			if(celebrationDelay>0)
-			{	celebrationDelay = celebrationDelay - (getConfiguration().getMilliPeriod()*getConfiguration().getSpeedCoeff());
+			{	celebrationDelay = celebrationDelay - (milliPeriod*getConfiguration().getSpeedCoeff());
 				if(celebrationDelay<=0)
 					setOver(true);
 			}
 			
 			// entry ?
 			if(entryDelay>=0)
-				entryDelay = entryDelay - (getConfiguration().getMilliPeriod()*getConfiguration().getSpeedCoeff());
+				entryDelay = entryDelay - (milliPeriod*getConfiguration().getSpeedCoeff());
 					
 			// normal update (level and AI)
 			getLevel().update();

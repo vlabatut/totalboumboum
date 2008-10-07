@@ -311,13 +311,13 @@ public class Level
 	/////////////////////////////////////////////////////////////////
 	// IN GAME METHODS		/////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	private long time = 0;
-	private long startTime = -1;
+//	private long time = 0;
+//	private long startTime = -1;
 	
 	public void update()
 	{	
-time = time + getConfiguration().getMilliPeriod();
-if(startTime<0) startTime = System.currentTimeMillis();
+//time = time + getConfiguration().getMilliPeriod();
+//if(startTime<0) startTime = System.currentTimeMillis();
 		for(int line=0;line<globalHeight;line++)
 			for(int col=0;col<globalWidth;col++)
 				matrix[line][col].update();		
@@ -516,8 +516,9 @@ if(startTime<0) startTime = System.currentTimeMillis();
 		double fps = loop.getAverageFPS();
 		String fpsStr = nf.format(fps); 
 		double ups = loop.getAverageUPS();
-		String upsStr = nf.format(ups); 
-		String text = "FPS/UPS: "+fpsStr+"/"+upsStr;
+		String upsStr = nf.format(ups);
+		String thFps = Integer.toString(configuration.getFps());
+		String text = "FPS/UPS/Th: "+fpsStr+"/"+upsStr+"/"+thFps;
 		Rectangle2D box = metrics.getStringBounds(text, g);
 		int x = 10;
 		int y = (int)Math.round(50+box.getHeight()/2);
