@@ -32,6 +32,7 @@ import fr.free.totalboumboum.engine.content.sprite.fire.FireFactory;
 
 public class Fireset
 {	private HashMap<String,FireFactory> fireFactories;
+	private String name;
 	
 	public Fireset()
 	{	fireFactories = new HashMap<String,FireFactory>();
@@ -39,6 +40,7 @@ public class Fireset
 	
 	public void addFireFactory(String name, FireFactory fireFactory)
 	{	fireFactories.put(name, fireFactory);
+		fireFactory.setFireset(this);
 	}
 	
 	public Fire makeFire(String name)
@@ -48,6 +50,14 @@ public class Fireset
 		return result;
 	}
 
+	public String getName()
+	{	return name;	
+	}
+	
+	public void setName(String name)
+	{	this.name = name;	
+	}
+	
 	private boolean finished = false;
 	
 	public void finish()

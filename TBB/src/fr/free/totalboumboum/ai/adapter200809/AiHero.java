@@ -25,8 +25,22 @@ import fr.free.totalboumboum.data.profile.PredefinedColor;
 import fr.free.totalboumboum.engine.content.feature.ability.StateAbility;
 import fr.free.totalboumboum.engine.content.sprite.hero.Hero;
 
+/**
+ * représente un personnage du jeu, ie un sprite contrôlé par un joueur
+ * humain ou une IA.
+ * 
+ * @author Vincent
+ *
+ */
 public class AiHero extends AiSprite<Hero>
 {
+	/**
+	 * crée une représentation du joueur passé en paramètre, et contenue dans 
+	 * la case passée en paramètre.
+	 * 
+	 * @param tile	case contenant le sprite
+	 * @param sprite	sprite à représenter
+	 */
 	AiHero(AiTile tile, Hero sprite)
 	{	super(tile,sprite);
 		initColor();
@@ -47,16 +61,37 @@ public class AiHero extends AiSprite<Hero>
 	/////////////////////////////////////////////////////////////////
 	// BOMB PARAM		/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
+	/** portée des bombes du personnage */
 	private int bombRange;
+	/** nombre de bombes que le personnage peut poser simultanément */
 	private int bombNumber;
+	/** nombre de bombes que le personnage a actuellement posées */
 	private int bombCount;
 	
+	/**
+	 * renvoie la portée actuelle des bombes du personnage
+	 * 
+	 * @return	la portée des bombes
+	 */
 	public int getBombRange()
 	{	return bombRange;
 	}
+	
+	/**
+	 * renvoie le nombre de bombes que le personnage peut poser simultanément,
+	 * à ce moment du jeu.
+	 * 
+	 * @return	le nombre de bombes simultanément posables
+	 */
 	public int getBombNumber()
 	{	return bombNumber;
 	}
+	
+	/**
+	 * renvoie le nombre de bombes posées par le personnage à ce moment-là
+	 * 
+	 * @return	nombre de bombes posées
+	 */
 	public int getBombCount()
 	{	return bombCount;
 	}
@@ -76,11 +111,21 @@ public class AiHero extends AiSprite<Hero>
 	/////////////////////////////////////////////////////////////////
 	// COLOR			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
+	/** couleur du personnage (et de ses bombes) */
 	private PredefinedColor color;
 	
+	/**
+	 * renvoie la couleur de ce personnage (et de ses bombes)
+	 * 
+	 * @return un symbole de type PredefinedColor représentant une couleur
+	 */
 	public PredefinedColor getColor()
 	{	return color;	
 	}
+	
+	/**
+	 * initialise la couleur du personnage
+	 */
 	private void initColor()
 	{	Hero sprite = getSprite();
 		color = sprite.getColor();	

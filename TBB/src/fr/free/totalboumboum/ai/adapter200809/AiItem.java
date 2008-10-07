@@ -23,8 +23,23 @@ package fr.free.totalboumboum.ai.adapter200809;
 
 import fr.free.totalboumboum.engine.content.sprite.item.Item;
 
+/**
+ * représente un item du jeu, ie un bonus ou un malus que le joueur peut ramasser.
+ * un item est caractérisé par son type, représentant le pouvoir apporté (ou enlevé)
+ * par l'item. Ce type est représentée par une valeur de type AiItemType.
+ * 
+ * @author Vincent
+ *
+ */
 public class AiItem extends AiSprite<Item>
-{
+{	
+	/**
+	 * crée une représentation de l'item passé en paramètre, et contenue dans 
+	 * la case passée en paramètre.
+	 * 
+	 * @param tile	case contenant le sprite
+	 * @param sprite	sprite à représenter
+	 */
 	AiItem(AiTile tile, Item sprite)
 	{	super(tile,sprite);
 		initType();
@@ -43,14 +58,24 @@ public class AiItem extends AiSprite<Item>
 	/////////////////////////////////////////////////////////////////
 	// TYPE				/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	private String type;
+	/** type d'item représenté */
+	private AiItemType type;
 	
-	public String getType()
+	/**
+	 * renvoie le type de l'item représenté
+	 * 
+	 * @return	le type de l'item
+	 */
+	public AiItemType getType()
 	{	return type;	
 	}
+	
+	/**
+	 * initialise le type de l'item représenté
+	 */
 	private void initType()
 	{	Item item = getSprite();
-		type = item.getItemName();		
+		type = AiItemType.makeItemType(item.getItemName());		
 	}
 	
 }

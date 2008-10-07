@@ -642,6 +642,8 @@ public class Launcher
 	 * *******************************************************
 	 * *********************** A FAIRE ***********************
 	 * *******************************************************
+	 * - tournoi simple
+	 * 
 	 * CONTROLES:
 	 * 		- dans les options, on peut définir les controles de chaque joueur (max?)
 	 * 		- dans le jeu, à chaque match, chaque joueur doit choisir quels controles il va utiliser (qui est player 1, player 2 etc)
@@ -650,12 +652,11 @@ public class Launcher
 	 * - faire terminer les processus dès la fin du match, et pas au début du suivant (méthode finish)
 	 * 
 	 * - faire un lancement rapide pour juste un round, sans interface
+	 * - ajustement automatique du FPS
 	 * 
 	 * - redistribution des items lors de la mort d'un joueur (option de round?)
 	 * - possibilité de bloquer certains items (on ne les perd pas lorsqu'on meurt)
 	 * 
-	 * 
-	 * - tournoi simple
 	 * 
 	 * - pb de collision quand la bombe atterit dans une flamme (à re-tester ?)
 	 * 
@@ -682,6 +683,7 @@ public class Launcher
 	 * 		- plus les scores utilisés dans les points et/ou les limites
 	 * 		- si les limites utilisent des points custom, les afficher aussi
 	 * -------------------------------------------------------------------
+	 * - calcul de points : introduire des variables comme le nombre de joueurs (pour définir un bonus pr le joueur qui fait un perfect en survival)
 	 * - gérer le shrink
 	 * - mode plein écran
 	 * - gérer l'apparition comme une action en soit. si pas possible d'apparaître au début de la partie, faire un atterrissage ?

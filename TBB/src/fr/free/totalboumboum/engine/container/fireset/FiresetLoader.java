@@ -60,6 +60,10 @@ public class FiresetLoader
 	
     private static Fireset loadFiresetElement(String folder, Element root, Level level) throws ParserConfigurationException, SAXException, IOException, ClassNotFoundException
     {	Fireset result = new Fireset();
+		// name
+		String firesetName = root.getAttribute(XmlTools.ATT_NAME).getValue().trim();
+		result.setName(firesetName);
+    	// fires
     	List<Element> elts = root.getChildren(XmlTools.ELT_FIRE);
     	Iterator<Element> i = elts.iterator();
     	while(i.hasNext())

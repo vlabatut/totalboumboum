@@ -136,4 +136,17 @@ public class Configuration
 	public void setTournament(AbstractTournament tournament)
 	{	this.tournament = tournament;
 	}
+	
+	/////////////////////////////////////////////////////////////////
+	// QUICKSTART		/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	private String quickstart = null;
+	
+	public String getQuickstart()
+	{	return quickstart;	
+	}
+	
+	public void setQuickstart(String quickstart)
+	{	this.quickstart = quickstart;
+	}
 }

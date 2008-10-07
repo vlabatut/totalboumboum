@@ -32,8 +32,8 @@ import fr.free.totalboumboum.engine.content.sprite.block.Block;
 import fr.free.totalboumboum.engine.content.sprite.fire.Fire;
 
 /**
- * Représente un bloc du jeu, c'est à dire généralement : un mur. 
- * 
+ * Représente un bloc du jeu, c'est à dire généralement un mur
+ * (pouvant être détruit ou pas). 
  * 
  * @author Vincent
  *
@@ -41,6 +41,13 @@ import fr.free.totalboumboum.engine.content.sprite.fire.Fire;
 
 public class AiBlock extends AiSprite<Block>
 {
+	/**
+	 * crée une représentation du bloc passé en paramètre, et contenue dans 
+	 * la case passée en paramètre.
+	 * 
+	 * @param tile	case contenant le sprite
+	 * @param sprite	sprite à représenter
+	 */
 	AiBlock(AiTile tile, Block sprite)
 	{	super(tile,sprite);
 		updateDestructible();
@@ -72,8 +79,11 @@ public class AiBlock extends AiSprite<Block>
 		TargetPermission perm = sprite.getTargetPermission(action);
 		destructible = perm!=null;
 	}	
-	/** 
-	 * renvoie vrai si ce bloc peut être détruit par une bombe, et faux sinon 
+
+	/**
+	 * renvoie vrai si ce bloc peut être détruit par une bombe, et faux sinon
+	 * 
+	 * @return	l'indicateur de destructibilité du mur
 	 */
 	public boolean isDestructible()
 	{	return destructible;		

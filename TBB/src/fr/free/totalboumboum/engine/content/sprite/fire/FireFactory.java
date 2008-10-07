@@ -25,6 +25,7 @@ import java.util.ArrayList;
 
 import fr.free.totalboumboum.data.configuration.Configuration;
 import fr.free.totalboumboum.engine.container.bombset.Bombset;
+import fr.free.totalboumboum.engine.container.fireset.Fireset;
 import fr.free.totalboumboum.engine.container.level.Level;
 import fr.free.totalboumboum.engine.content.feature.ability.AbstractAbility;
 import fr.free.totalboumboum.engine.content.feature.anime.AnimePack;
@@ -38,6 +39,8 @@ import fr.free.totalboumboum.engine.loop.Loop;
 
 public class FireFactory extends SpriteFactory<Fire>
 {	
+	private Fireset fireset;
+	
 	public FireFactory(Level level)
 	{	super(level);
 	}	
@@ -53,15 +56,26 @@ public class FireFactory extends SpriteFactory<Fire>
 		// event
 		EventManager eventManager = new FireEventManager(result);
 		result.setEventManager(eventManager);
+		// fireset name
+		result.setFiresetName(fireset.getName());
 		
 		// result
 //		result.initGesture();
 		return result;
 	}
 
+	public void setFireset(Fireset fireset)
+	{	this.fireset = fireset;	
+	}
+	
+	public Fireset getFireset()
+	{	return fireset;			
+	}
+	
 	public void finish()
 	{	if(!finished)
 		{	super.finish();
+			fireset = null;
 		}
 	}
 }
