@@ -692,6 +692,7 @@ public class Launcher
 	 * - possibilité de définir un nom pour tournament/match/round, qui sera affiche en titre de présentation/stats etc. si pas de nom, utilisation d'un nom générique (Round 1 - Prensentation) etc
 	 * - faire un chargement ad hoc des matches, rounds, etc ? fusionner du coup HollowLevel et LevelPreview ? (voir si les objets de ces deux classes sont créés au même moment)
 	 * - ergonomie : faire le chargement du round dès qu'on clique sur "next" dans le match, et attendre ensuite que le joueur valide le début du match !
+	 * - items: 1 item arrêtant la partie, 1 item faisant diminuer le temps restant (anti-temps)
 	 */
 	
 	/*
