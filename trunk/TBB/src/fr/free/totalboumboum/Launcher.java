@@ -650,6 +650,7 @@ public class Launcher
 	 * - Nouveauté		: mode quicklaunch pour jouer un round très rapidement (pas de GUI)
 	 * - Nouveauté		: affichage du score dans le QuickLaunch
 	 * - Nouveauté		: ajustement automatique du FPS en fonction de la machine
+	 * - Correction		: problème de collision quand on change de vitesse ou quand on baisse trop l'UPS
 	 * 
 	 * *******************************************************
 	 * *********************** A FAIRE ***********************
