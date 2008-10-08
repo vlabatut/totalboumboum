@@ -21,6 +21,7 @@ package fr.free.totalboumboum.gui.quicklaunch;
  * 
  */
 
+import javax.swing.BoxLayout;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JProgressBar;
@@ -41,11 +42,13 @@ import fr.free.totalboumboum.game.match.Match;
 import fr.free.totalboumboum.game.round.Round;
 import fr.free.totalboumboum.game.round.RoundRenderPanel;
 import fr.free.totalboumboum.game.tournament.AbstractTournament;
+import fr.free.totalboumboum.gui.common.InnerDataPanel;
 import fr.free.totalboumboum.gui.common.MenuContainer;
 import fr.free.totalboumboum.gui.common.MenuPanel;
 import fr.free.totalboumboum.gui.data.configuration.GuiConfiguration;
 import fr.free.totalboumboum.gui.data.configuration.GuiConfigurationLoader;
 import fr.free.totalboumboum.gui.game.loop.LoopPanel;
+import fr.free.totalboumboum.gui.game.round.results.RoundResults;
 import fr.free.totalboumboum.gui.tools.FullRepaintManager;
 import fr.free.totalboumboum.gui.tools.GuiFileTools;
 import fr.free.totalboumboum.gui.tools.GuiTools;
@@ -230,7 +233,13 @@ public class QuickFrame extends JFrame implements WindowListener,LoopRenderPanel
 
 	@Override
 	public void roundOver()
-	{	System.out.println("FINI, afficher les résultats");
+	{	Container contentPane = getContentPane();
+		Dimension dim = contentPane.getPreferredSize();
+		QuickResults roundResults = new QuickResults(dim,configuration);
+		contentPane.add(roundResults);
+//		contentPane.setLayout(layout);
+		validate();
+		repaint();
 	}
 }
 

@@ -1,4 +1,5 @@
-﻿Total Boum Boum version Beta 1
+﻿Total Boum Boum version 1 Beta
+----------------------------------------------------------
 Copyright 2008 Vincent Labatut
 http:\\totalboumboum.free.fr
 vincent.labatut@free.fr
