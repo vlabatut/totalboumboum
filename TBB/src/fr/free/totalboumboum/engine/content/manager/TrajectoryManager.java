@@ -1055,6 +1055,7 @@ if(sprite instanceof Hero && tempSprite instanceof Bomb && sprite.getTile()==tem
 			System.out.println("nbre sprites:"+sprites.size());		
 			System.out.println("oldDir:"+oldDir);
 		}
+		double scaledTileDim = getLoop().getScaledTileDimension();
 		// tant que tous les déplacements n'ont pas été interdits, on passe les obstacles en revue
 		while(iter.hasNext() && goOn)
 		{	Sprite temp = iter.next();
@@ -1077,13 +1078,13 @@ if(sprite instanceof Hero && tempSprite instanceof Bomb && sprite.getTile()==tem
 				else
 				{	delta1 = previousPosY-temp.getCurrentPosY();
 					tempDir = Direction.getVerticalFromDouble(delta1);
-					delta2 = previousPosX-temp.getCurrentPosX(); //NOTE ça devrait pas être une valeur absolue?
+					delta2 = previousPosX-temp.getCurrentPosX();
 					result[0] = temp;
 				}
 				// si possible, on bouge au maximum le sprite dans l'ancienne direction
-				if(Math.abs(delta2)>getLoop().getScaledTileDimension())
+				if(Math.abs(delta2)>scaledTileDim)
 				{	double dir = delta2/Math.abs(delta2);
-					double d = dir*getLoop().getScaledTileDimension();
+					double d = dir*scaledTileDim;
 					if(oldDir.isVertical())
 						newPosY = temp.getCurrentPosY()+d;
 					else 
@@ -1093,7 +1094,7 @@ if(sprite instanceof Hero && tempSprite instanceof Bomb && sprite.getTile()==tem
 				/* NOTE l'aide à la navigation est ici. à ne réserver qu'aux sprites heros ? (pas bombes et autres)... 
 				 * de toute façon, ils ne devraient jamais en avoir besoin, car ils sont censés être parfaitement centrés 
 				 */
-				if(Math.abs(delta1)>getLoop().getScaledTileDimension()/4)
+				if(Math.abs(delta1)>scaledTileDim/4)
 				{	//de plus, il faut que le passage dans la nouvelle direction soit dégagé, sinon c'est pas la peine de bouger
 					double dir = delta1/Math.abs(delta1);
 					// on vérifie donc qu'aucun des autres sprites obstacles ne sont situés dans l'alignement de l'obstacle courant
@@ -1115,7 +1116,7 @@ if(sprite instanceof Hero && tempSprite instanceof Bomb && sprite.getTile()==tem
 								test = tp.getCurrentPosX()==temp.getCurrentPosX();
 //								indx = 1;
 							}
-							if(d>=0 && d<=getLoop().getScaledTileDimension() && test)
+							if(d>=0 && d<=scaledTileDim && test)
 							{	found = true;
 //								result[indx] = tp;
 							}
@@ -1126,10 +1127,15 @@ if(sprite instanceof Hero && tempSprite instanceof Bomb && sprite.getTile()==tem
 					{	if(oldDir.isVertical())
 						{	double d = Math.abs(currentPosY - previousPosY)*dir;
 							newPosX = previousPosX + d;
+//TODO faire la même chose dans la version composite de cette méthode							
+							if(Math.abs(newPosX-temp.getCurrentPosX())>scaledTileDim) 
+								newPosX = temp.getCurrentPosX() + dir*scaledTileDim;
 						}
 						else
 						{	double d = Math.abs(currentPosX - previousPosX)*dir;
 							newPosY = previousPosY + d;
+							if(Math.abs(newPosY-temp.getCurrentPosY())>scaledTileDim) 
+								newPosY = temp.getCurrentPosY() + dir*scaledTileDim;
 						}
 						newDir = tempDir;							
 					}
