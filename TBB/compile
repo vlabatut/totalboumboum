@@ -20,16 +20,16 @@
 	mkdir $bin
 #
 # (re)compile the game
-	javac -sourcepath $sp -classpath $cp ${main}/Launcher.java -d $bin
+	javac -nowarn -sourcepath $sp -classpath $cp ${main}/Launcher.java ${main}/QuickLauncher.java -d $bin
 # (re)compile the AI classes inside the game
 	for i in $(ls -d ${aig}/*/); do 
-		javac -sourcepath $sp -classpath $cp $i/*.java -d $bin
+		javac -nowarn -sourcepath $sp -classpath $cp $i/*.java -d $bin
 	done
 #
 # (re)compile the AI classes located in resources/ai
 	for i in $(ls -d ${ai}/*/); do
 		for j in $(ls -d $i/*/); do
-			javac -sourcepath ${sp}:${ai} -classpath ${cp}:${ai} $j/*.java
+			javac -nowarn -sourcepath ${sp}:${ai} -classpath ${cp}:${ai} $j/*.java
 		done
 	done
 #
