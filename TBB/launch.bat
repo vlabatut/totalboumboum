@@ -5,18 +5,19 @@
 ::
 :: -------------------------------------------------------------------
 
-Setlocal
+	Setlocal
 
 :: define path variables
-Set ai=.\resources\ai
-Set bin=.\bin
-Set jdom=.\resources\lib\jdom.jar
-Set cp=%bin%;%jdom%;%ai%
-Set launcher=fr.free.totalboumboum.Launcher
-Set splash=.\resources\gui\images\splash.png
+	Set ai=.\resources\ai
+	Set bin=.\bin
+	Set jdom=.\resources\lib\jdom.jar
+	Set cp=%bin%;%jdom%;%ai%
+	Set launcher=fr.free.totalboumboum.Launcher
+	Set splash=.\resources\gui\images\splash.png
 
-java -Xmx128m -splash:%splash% -classpath %cp% %launcher%
+:: launch the game
+	java -Xmx128m -splash:%splash% -classpath %cp% %launcher%
 
-:: pause
+:: 	pause
 
-Endlocal
+	Endlocal

@@ -648,17 +648,26 @@ public class Launcher
 	 * - Nouveauté		: tournoi simple (ne contenant qu'un seul match)
 	 * - Correction		: bug dans la barre de progression lors du chargement du round
 	 * - Nouveauté		: mode quicklaunch pour jouer un round très rapidement (pas de GUI)
+	 * - Nouveauté		: affichage du score dans le QuickLaunch
+	 * - Nouveauté		: ajustement automatique du FPS en fonction de la machine
 	 * 
 	 * *******************************************************
 	 * *********************** A FAIRE ***********************
 	 * *******************************************************
 	 * 
-	 * - faire un lancement rapide pour juste un round, sans interface
-	 * - ajustement automatique du FPS
+	 * - au moins finir le cycle lors d'une mort, histoire que la différence de timing ne vienne pas juste de l'ordre des joueurs dans la partie 
+	 * - possibilité de choisir entre le fait que le match s'arrête dès que tout le monde est mort sauf 1, ou dernière flamme terminée
+	 * - feature lié au précédent : gagner plus de points si on finit effetivement le jeu que si on a un time out ou un entre-tuage
+	 * 
+	 * - la bombe en panne ne doit plus bouger !
+	 * 
+	 * - problème de collisions quand on change la vitesse (surement un problème d'arrondi, ou alors un saut trop grand (en distance), voir si j'avais implémenté la maximalisation du déplacement malgré une éventuelle collision...)
 	 * 
 	 * CONTROLES:
 	 * 		- dans les options, on peut définir les controles de chaque joueur (max?)
 	 * 		- dans le jeu, à chaque match, chaque joueur doit choisir quels controles il va utiliser (qui est player 1, player 2 etc)
+	 * 
+	 * - l'affichage est coupé dans le mode quicklaunch
 	 * 
 	 * - redistribution des items lors de la mort d'un joueur (option de round?)
 	 * - possibilité de bloquer certains items (on ne les perd pas lorsqu'on meurt)
@@ -666,17 +675,11 @@ public class Launcher
 	 * 
 	 * - pb de collision quand la bombe atterit dans une flamme (à re-tester ?)
 	 * 
-	 * - au moins finir le cycle lors d'une mort, histoire que la différence de timing ne vienne pas juste de l'ordre des joueurs dans la partie 
-	 * - possibilité de choisir entre le fait que le match s'arrête dès que tout le monde est mort sauf 1, ou dernière flamme terminée
-	 * - feature lié au précédent : gagner plus de points si on finit effetivement le jeu que si on a un time out ou un entre-tuage
-	 * 
 	 * - redescendre les stats dans loop, et gestion de fin de partie et tout ce qui est en fait directement lié au moteur
 	 * - en fait tout le calcul de points dans les stats est à déplacer dans les rounds/matches, etc 
 	 * 
 	 * - possibilité de donner des noms aux matches et aux rounds
-	 * - la bombe en panne ne doit plus bouger !
 	 * - utiliser les tooltips pour afficher les infos trop longues : calcul de points, nombre à virgule dans la colonne des points (décimales cachées), etc.
-	 * - problème de collisions quand on change la vitesse (surement un problème d'arrondi, ou alors un saut trop grand (en distance), voir si j'avais implémenté la maximalisation du déplacement malgré une éventuelle collision...)
 	 * - pb de dimension de l'image de fond en fonction de la résolution... (zones pas peintes)
 	 * - results panel : quand il y a trop de rounds dans un match pour que ça rentre à l'écran, ne pas tout afficher
 	 * - vérifier le temps de latence des bombes, ça me parait un peu trop rapide

@@ -67,7 +67,7 @@ public class EntitledSubPanelTable extends EntitledSubPanel
 		TablePanel tablePanel = new TablePanel(width,height,columns,lines,false,configuration);
 		tablePanel.setOpaque(false);
 		int lineHeight = (height-margin*(lines+1))/lines;
-		float fontSize = GuiTools.getFontSize(lineHeight*0.8, configuration);
+		float fontSize = GuiTools.getFontSize(lineHeight*0.8);
 		Font regularFont = configuration.getFont().deriveFont((float)fontSize);
 		
 		int maxWidth = (width - margin*(columns+1) - columnGroups*lineHeight)/columnGroups;

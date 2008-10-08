@@ -5,17 +5,18 @@
 ::
 :: -------------------------------------------------------------------
 
-Setlocal
+	Setlocal
 
 :: define path variables
-Set ai=.\resources\ai
-Set bin=.\bin
-Set jdom=.\resources\lib\jdom.jar
-Set cp=%bin%;%jdom%;%ai%
-Set launcher=fr.free.totalboumboum.QuickLauncher
+	Set ai=.\resources\ai
+	Set bin=.\bin
+	Set jdom=.\resources\lib\jdom.jar
+	Set cp=%bin%;%jdom%;%ai%
+	Set launcher=fr.free.totalboumboum.QuickLauncher
 
-java -Xmx128m -classpath %cp% %launcher%
+:: launch the game
+	java -Xmx128m -classpath %cp% %launcher%
 
-:: pause
+::	pause
 
-Endlocal
+	Endlocal
