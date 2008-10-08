@@ -1041,13 +1041,13 @@ if(sprite instanceof Hero && tempSprite instanceof Bomb && sprite.getTile()==tem
 	
 	private Sprite[] testCollisionsSimple(ArrayList<Sprite> sprites, Direction moveDir)
 	{	Sprite result[] = new Sprite[2];
-		boolean debug = false;
+		boolean debug = true;
 		Direction oldDir = moveDir.getHorizontalPrimary();
 		if(oldDir == Direction.NONE)
 			oldDir = moveDir.getVerticalPrimary();
 		Direction newDir = null; 
 		boolean goOn = true;
-		double newPosX = previousPosX, newPosY=previousPosY;
+		double newPosX=previousPosX, newPosY=previousPosY;
 		Iterator<Sprite> iter = sprites.iterator();
 		if(debug)
 		{	System.out.println("previousPos:"+previousPosX+";"+previousPosY);		
@@ -1077,7 +1077,7 @@ if(sprite instanceof Hero && tempSprite instanceof Bomb && sprite.getTile()==tem
 				else
 				{	delta1 = previousPosY-temp.getCurrentPosY();
 					tempDir = Direction.getVerticalFromDouble(delta1);
-					delta2 = previousPosX-temp.getCurrentPosX();
+					delta2 = previousPosX-temp.getCurrentPosX(); //NOTE ça devrait pas être une valeur absolue?
 					result[0] = temp;
 				}
 				// si possible, on bouge au maximum le sprite dans l'ancienne direction
