@@ -661,6 +661,8 @@ public class Launcher
 	 * 
 	 * - la bombe en panne ne doit plus bouger !
 	 * 
+	 * - traduction du fichier de langue
+	 * 
 	 * - problème de collisions quand on change la vitesse (surement un problème d'arrondi, ou alors un saut trop grand (en distance), voir si j'avais implémenté la maximalisation du déplacement malgré une éventuelle collision...)
 	 * 
 	 * CONTROLES:
