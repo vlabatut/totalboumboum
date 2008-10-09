@@ -62,10 +62,10 @@
 		
 		<gesture name="sliding-failing" repeat="true" shadow="shadow">
 			<direction name="none">
-				<step duration="300" file="2.gif" />
 				<step duration="300" file="3.gif" />
-				<step duration="300" file="2.gif" />
-				<step duration="300" file="1.gif" />
+				<step duration="300" file="3.gif" />
+				<step duration="300" file="3.gif" />
+				<step duration="300" file="3.gif" />
 			</direction>
 		</gesture>
 		
@@ -80,10 +80,10 @@
 		
 		<gesture name="standing-failing" repeat="true" shadow="shadow">
 			<direction name="none">
-				<step duration="300" file="2.gif" />
 				<step duration="300" file="3.gif" />
-				<step duration="300" file="2.gif" />
-				<step duration="300" file="1.gif" />
+				<step duration="300" file="3.gif" />
+				<step duration="300" file="3.gif" />
+				<step duration="300" file="3.gif" />
 			</direction>
 		</gesture>
 		
