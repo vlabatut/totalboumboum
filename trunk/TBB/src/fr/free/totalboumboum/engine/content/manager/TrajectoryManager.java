@@ -988,10 +988,17 @@ if(sprite instanceof Hero && tempSprite instanceof Bomb && sprite.getTile()==tem
 	 */
 	private Sprite[] testCollisionsComposite(ArrayList<Sprite> sprites, Direction moveDir)
 	{	Sprite result[] = new Sprite[2];
+		boolean debug = true;
 		Direction hDir = moveDir.getHorizontalPrimary();
 		Direction vDir = moveDir.getVerticalPrimary();
 		double newPosX = previousPosX;
 		double newPosY = previousPosY;
+		if(debug)
+		{	System.out.println("previousPos:"+previousPosX+";"+previousPosY);		
+			System.out.println("currentPos:"+currentPosX+";"+currentPosY);		
+			System.out.println("nbre sprites:"+sprites.size());		
+			System.out.println("moveDir:"+moveDir);
+		}
 		Iterator<Sprite> iter = sprites.iterator();
 		// tant que tous les déplacements n'ont pas été interdits, on passe les obstacles en revue
 		while(iter.hasNext() && (hDir!=Direction.NONE || vDir!=Direction.NONE))
@@ -1002,6 +1009,11 @@ if(sprite instanceof Hero && tempSprite instanceof Bomb && sprite.getTile()==tem
 			// on calcule les distances entre l'obstacle et la position potentielle du sprite
 			double distXC = Math.abs(temp.getCurrentPosX()-currentPosX);
 			double distYC = Math.abs(temp.getCurrentPosY()-currentPosY);
+			if(debug)
+			{	System.out.println("obstacle:"+temp.getCurrentPosX()+","+temp.getCurrentPosY());			
+				System.out.println("dist obstacle/previous:"+distXP+","+distYP);			
+				System.out.println("dist obstacle/potential:"+distXC+","+distYC);			
+			}
 			// pour chacune des deux directions : le fait de ne pas la désactiver provoque-t-il la collision ?
 			// pour chacune des deux directions : le fait de ne pas la désactiver fait-il diminuer la distance ?
 //if(vDir!=Direction.NONE && isClose(distXP,true) && isClose(distYC,true) && distYC<distYP)
@@ -1011,8 +1023,14 @@ if(sprite instanceof Hero && tempSprite instanceof Bomb && sprite.getTile()==tem
 				vDir = Direction.NONE;
 				// on calcule le déplacement maximal
 				double tempPosY = temp.getCurrentPosY()-dir*getLoop().getScaledTileDimension();
-				if(isClose(distXP,true) && isClose(distYP,true))
-					tempPosY = previousPosY;
+				if(debug)
+				{	System.out.println("tempPosY:"+tempPosY);			
+				}
+//				if(isClose(distXP,true) && isClose(distYP,true))
+//					tempPosY = previousPosY;
+				if(debug)
+				{	System.out.println("tempPosY:"+tempPosY);			
+				}
 				// on met à jour la nouvelle position seulement si cet obstacle est plus contraignant 
 //				if(Math.abs(tempPosY-currentPosY)<Math.abs(newPosY-currentPosY))
 				{	newPosY = tempPosY;
@@ -1024,8 +1042,14 @@ if(sprite instanceof Hero && tempSprite instanceof Bomb && sprite.getTile()==tem
 			{	int dir = hDir.getIntFromDirection()[0];
 				hDir = Direction.NONE;
 				double tempPosX = temp.getCurrentPosX()-dir*getLoop().getScaledTileDimension();
-				if(isClose(distXP,true) && isClose(distYP,true))
-					tempPosX = previousPosX;
+				if(debug)
+				{	System.out.println("tempPosX:"+tempPosX);			
+				}
+//				if(isClose(distXP,true) && isClose(distYP,true))
+//					tempPosX = previousPosX;
+				if(debug)
+				{	System.out.println("tempPosX:"+tempPosX);			
+				}
 //				if(Math.abs(tempPosX-currentPosY)<Math.abs(newPosY-currentPosY))
 				{	newPosX = tempPosX;
 					result[0] = temp;
@@ -1036,25 +1060,29 @@ if(sprite instanceof Hero && tempSprite instanceof Bomb && sprite.getTile()==tem
 			currentPosX = newPosX;
 		if(vDir == Direction.NONE)
 			currentPosY = newPosY;
+		if(debug)
+		{	System.out.println("currentPos:"+currentPosX+","+currentPosY);			
+			System.out.println();
+		}
 		return result;
 	}
 	
 	private Sprite[] testCollisionsSimple(ArrayList<Sprite> sprites, Direction moveDir)
 	{	Sprite result[] = new Sprite[2];
-		boolean debug = true;
+		boolean debug = false;
 		Direction oldDir = moveDir.getHorizontalPrimary();
 		if(oldDir == Direction.NONE)
 			oldDir = moveDir.getVerticalPrimary();
 		Direction newDir = null; 
 		boolean goOn = true;
 		double newPosX=previousPosX, newPosY=previousPosY;
-		Iterator<Sprite> iter = sprites.iterator();
 		if(debug)
 		{	System.out.println("previousPos:"+previousPosX+";"+previousPosY);		
 			System.out.println("currentPos:"+currentPosX+";"+currentPosY);		
 			System.out.println("nbre sprites:"+sprites.size());		
 			System.out.println("oldDir:"+oldDir);
 		}
+		Iterator<Sprite> iter = sprites.iterator();
 		double scaledTileDim = getLoop().getScaledTileDimension();
 		// tant que tous les déplacements n'ont pas été interdits, on passe les obstacles en revue
 		while(iter.hasNext() && goOn)
@@ -1127,7 +1155,6 @@ if(sprite instanceof Hero && tempSprite instanceof Bomb && sprite.getTile()==tem
 					{	if(oldDir.isVertical())
 						{	double d = Math.abs(currentPosY - previousPosY)*dir;
 							newPosX = previousPosX + d;
-//TODO faire la même chose dans la version composite de cette méthode							
 							if(Math.abs(newPosX-temp.getCurrentPosX())>scaledTileDim) 
 								newPosX = temp.getCurrentPosX() + dir*scaledTileDim;
 						}

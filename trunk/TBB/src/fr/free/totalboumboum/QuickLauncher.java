@@ -1,13 +1,5 @@
 package fr.free.totalboumboum;
 
-import java.awt.AlphaComposite;
-import java.awt.Color;
-import java.awt.Font;
-import java.awt.Graphics;
-import java.awt.Graphics2D;
-import java.awt.Rectangle;
-import java.awt.SplashScreen;
-import java.awt.image.BufferedImage;
 import java.io.IOException;
 
 import javax.swing.SwingUtilities;
@@ -17,11 +9,7 @@ import org.xml.sax.SAXException;
 
 import fr.free.totalboumboum.data.configuration.Configuration;
 import fr.free.totalboumboum.data.configuration.ConfigurationLoader;
-import fr.free.totalboumboum.game.tournament.single.SingleTournament;
-import fr.free.totalboumboum.gui.data.configuration.GuiConfiguration;
-import fr.free.totalboumboum.gui.data.configuration.GuiConfigurationLoader;
 import fr.free.totalboumboum.gui.quicklaunch.QuickFrame;
-import fr.free.totalboumboum.gui.tools.GuiTools;
 import fr.free.totalboumboum.tools.XmlTools;
 
 public class QuickLauncher

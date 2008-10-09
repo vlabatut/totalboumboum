@@ -22,9 +22,7 @@ package fr.free.totalboumboum;
  */
 
 import java.awt.AlphaComposite;
-import java.awt.BorderLayout;
 import java.awt.Color;
-import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
@@ -651,6 +649,7 @@ public class Launcher
 	 * - Nouveauté		: affichage du score dans le QuickLaunch
 	 * - Nouveauté		: ajustement automatique du FPS en fonction de la machine
 	 * - Correction		: problème de collision quand on change de vitesse ou quand on baisse trop l'UPS
+	 * - Correction		: bug graphique : une bombe en panne ne doit plus être animée dans l'instance SBM1
 	 * 
 	 * *******************************************************
 	 * *********************** A FAIRE ***********************
@@ -660,11 +659,7 @@ public class Launcher
 	 * - possibilité de choisir entre le fait que le match s'arrête dès que tout le monde est mort sauf 1, ou dernière flamme terminée
 	 * - feature lié au précédent : gagner plus de points si on finit effetivement le jeu que si on a un time out ou un entre-tuage
 	 * 
-	 * - la bombe en panne ne doit plus bouger !
-	 * 
 	 * - traduction du fichier de langue
-	 * 
-	 * - problème de collisions quand on change la vitesse (surement un problème d'arrondi, ou alors un saut trop grand (en distance), voir si j'avais implémenté la maximalisation du déplacement malgré une éventuelle collision...)
 	 * 
 	 * CONTROLES:
 	 * 		- dans les options, on peut définir les controles de chaque joueur (max?)
@@ -674,7 +669,6 @@ public class Launcher
 	 * 
 	 * - redistribution des items lors de la mort d'un joueur (option de round?)
 	 * - possibilité de bloquer certains items (on ne les perd pas lorsqu'on meurt)
-	 * 
 	 * 
 	 * - pb de collision quand la bombe atterit dans une flamme (à re-tester ?)
 	 * 
