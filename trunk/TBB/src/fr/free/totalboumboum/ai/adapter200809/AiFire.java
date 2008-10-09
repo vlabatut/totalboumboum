@@ -21,7 +21,6 @@ package fr.free.totalboumboum.ai.adapter200809;
  * 
  */
 
-import fr.free.totalboumboum.engine.content.sprite.bomb.Bomb;
 import fr.free.totalboumboum.engine.content.sprite.fire.Fire;
 
 /**
@@ -41,7 +40,8 @@ public class AiFire extends AiSprite<Fire>
 	 * @param sprite	sprite à représenter
 	 */
 	AiFire(AiTile tile, Fire sprite)
-	{	super(tile,sprite);		
+	{	super(tile,sprite);
+		initType();
 	}
 
 	@Override

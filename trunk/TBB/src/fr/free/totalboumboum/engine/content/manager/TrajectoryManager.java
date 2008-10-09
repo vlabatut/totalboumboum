@@ -488,7 +488,7 @@ if(sprite instanceof Hero)
 			
 			
 			
-			
+//TODO faire une décomposition de la composite en deux simples ?			
 			
 			
 			
@@ -822,11 +822,15 @@ if(sprite instanceof Hero)
 	private ArrayList<Sprite>  getObstacleSprites(ArrayList<Sprite> sprites)
 	{	ArrayList<Sprite> result = new ArrayList<Sprite>();
 		Iterator<Sprite> iter = sprites.iterator();
+if(previousPosX>=514f && previousPosX<515f && previousPosY>=384f && previousPosY<385f)
+System.out.println();
 		while(iter.hasNext())
 		{	Sprite tempSprite = iter.next();
-			if(tempSprite!=sprite && isClose(tempSprite,true) && isOnTheWay(tempSprite) && isObstacle(tempSprite))
+			if(tempSprite!=sprite 
+					&& isInCloseArea(tempSprite) 
+					&& isOnTheWay(tempSprite)
+					&& isObstacle(tempSprite))
 			{	result.add(tempSprite);
-boolean ichqqqq = isClose(tempSprite,true) && isOnTheWay(tempSprite) && isObstacle(tempSprite);			
 			}
 		}
 		// on trie la liste passée en paramètre (ou ce qu'il en reste) par distance
@@ -885,6 +889,46 @@ boolean ichqqqq = isClose(tempSprite,true) && isOnTheWay(tempSprite) && isObstac
 		double distX = Math.abs(tempSprite.getCurrentPosX()-currentPosX);
 		double distY = Math.abs(tempSprite.getCurrentPosY()-currentPosY);
 		result = distX+distY;
+		return result;
+	}
+	/**
+	 * détermine si le sprite passé en paramètre est proche d'un des points du segment
+	 * délimité par la position courante et l'ancienne position de ce sprite.
+	 * 
+	 * @param tempSprite	le sprite à tester
+	 * @return
+	 */
+	private boolean isInCloseArea(Sprite tempSprite)
+	{	boolean result;
+		double interX=0;
+		double interY=0;
+		// déplacement horizontal
+		if(currentPosY==previousPosY)
+		{	interX = tempSprite.getCurrentPosX();
+			interY = currentPosY;
+		}
+		// déplacement vertical
+		else if(currentPosX==previousPosX)
+		{	interX = currentPosX;
+			interY = tempSprite.getCurrentPosY();
+		}
+		else
+		// cas général
+		{	// droite entre currentPos et previousPos
+			double a = (currentPosY-previousPosY)/(currentPosX-previousPosX);
+			double b = currentPosY - a*currentPosX;
+			// perpendiculaire passant par tempSprite
+			double ap = -1/a;
+			double bp = tempSprite.getCurrentPosY() - ap*tempSprite.getCurrentPosX();
+			// point d'intersection
+			interX = (bp-b)/(a-ap);
+			interY = a*interX + b;
+		}
+		// distances entre tempSprite et le point d'intersection
+		double distX = Math.abs(tempSprite.getCurrentPosX()-interX);
+		double distY = Math.abs(tempSprite.getCurrentPosY()-interY);
+		//
+		result = isClose(distX,true) && isClose(distY,true);
 		return result;
 	}
 		

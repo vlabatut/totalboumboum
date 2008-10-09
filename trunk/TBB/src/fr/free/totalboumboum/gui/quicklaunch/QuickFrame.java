@@ -59,6 +59,7 @@ import fr.free.totalboumboum.tools.XmlTools;
 import java.awt.BorderLayout;
 import java.awt.Container;
 import java.awt.Dimension;
+import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.GraphicsConfiguration;
 import java.awt.Image;
@@ -122,6 +123,8 @@ public class QuickFrame extends JFrame implements WindowListener,LoopRenderPanel
 	    round.setPanel(this);
 		int limit = round.getProfiles().size()+2;
 		loadProgressBar = new JProgressBar(0,limit);
+		loadProgressBar.setStringPainted(true);
+		loadProgressBar.setFont(new Font("Arial",Font.PLAIN,dim.height/2));
 		getContentPane().add(loadProgressBar);
 		validate();
 		repaint();
