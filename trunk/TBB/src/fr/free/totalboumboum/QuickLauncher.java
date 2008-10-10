@@ -1,5 +1,8 @@
 package fr.free.totalboumboum;
 
+import java.awt.GraphicsConfiguration;
+import java.awt.GraphicsDevice;
+import java.awt.GraphicsEnvironment;
 import java.io.IOException;
 
 import javax.swing.SwingUtilities;
@@ -20,12 +23,16 @@ public class QuickLauncher
 		// init
 		XmlTools.init();
 		final Configuration configuration = ConfigurationLoader.quickloadConfiguration();
+		// graphic conf
+		GraphicsEnvironment graphEnv = GraphicsEnvironment.getLocalGraphicsEnvironment();
+		GraphicsDevice graphDevice = graphEnv.getDefaultScreenDevice();
+		final GraphicsConfiguration graphicConf = graphDevice.getDefaultConfiguration();		
 		
 		// create GUI
 		SwingUtilities.invokeLater(new Runnable()
 		{	public void run()
 			{	try
-				{	new QuickFrame(configuration);
+				{	new QuickFrame(configuration,graphicConf);
 				}
 				catch (IllegalArgumentException e)
 				{	e.printStackTrace();

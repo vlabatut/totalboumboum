@@ -415,7 +415,7 @@ public class TrajectoryManager
 	 * donc si on veut un cycle parfait, il faut rajouter un dernier point ramenant ou premier 
 	 */
 	public void update()
-	{
+	{	
 /*	
 if(sprite instanceof Bomb)
 if(previousPosX != currentPosX || previousPosY != currentPosY || previousPosZ != currentPosZ)
@@ -460,6 +460,11 @@ if(previousPosX != currentPosX || previousPosY != currentPosY || previousPosZ !=
 			double dx = currentPosX-previousPosX;
 			double dy = currentPosY-previousPosY;
 			Direction moveDir = Direction.getCompositeFromDouble(dx, dy);
+if(moveDir!=Direction.NONE)			
+	{	
+	
+
+			
 			// récupération des cases voisines, y compris la case courante
 			Tile tile = sprite.getTile();
 			ArrayList<Tile> neighbourTiles = sprite.getLevel().getNeighbourTiles(tile.getLine(),tile.getCol());
@@ -467,28 +472,23 @@ if(previousPosX != currentPosX || previousPosY != currentPosY || previousPosZ !=
 			// récupération des sprites situés dans ces cases
 			ArrayList<Sprite> neighbourSprites = getNeighbourSprites(neighbourTiles);
 			// filtrage des sprites : distance critique, situé sur le chemin et refusant la pénétration
-/*			
-if(sprite instanceof Hero)
-	System.out.println();
-*/	
 			ArrayList<Sprite> obstacleSprites = getObstacleSprites(neighbourSprites);
 			// modification de la position de ce sprite
 			Sprite newCollidedSprites[] = new Sprite[2];
 			if(obstacleSprites.size()>0)
 			{	if(moveDir.isPrimary())
-					newCollidedSprites = testCollisionsSimple(obstacleSprites,moveDir);
+					testCollisionsSimple(obstacleSprites,moveDir,newCollidedSprites,true);
 				else if(moveDir.isComposite())
-					newCollidedSprites = testCollisionsComposite(obstacleSprites,moveDir);
+					testCollisionsComposite(obstacleSprites,moveDir,newCollidedSprites);
 			}
 			updateCollidedSprites(newCollidedSprites);
 			// on détermine quels sprites sont intersected
 			ArrayList<Sprite> newIntersectedSprites = getIntersectedSprites(neighbourSprites);
 			// mise à jour des sprites intersected
 			updateIntersectedSprites(newIntersectedSprites);
+	
 			
-			
-			
-//TODO faire une décomposition de la composite en deux simples ?			
+	}
 			
 			
 			
@@ -599,6 +599,8 @@ if(sprite instanceof Hero)
 			}
 */
 		}
+		
+		
 		// normalizing an absolute position (if not bound)
 			//NOTE à placer avant, non ?
 		if(!isBoundToSprite())
@@ -822,12 +824,12 @@ if(sprite instanceof Hero)
 	private ArrayList<Sprite>  getObstacleSprites(ArrayList<Sprite> sprites)
 	{	ArrayList<Sprite> result = new ArrayList<Sprite>();
 		Iterator<Sprite> iter = sprites.iterator();
-if(previousPosX>=514f && previousPosX<515f && previousPosY>=384f && previousPosY<385f)
-System.out.println();
+//if(previousPosX>=514f && previousPosX<515f && previousPosY>=384f && previousPosY<385f)
+//System.out.println();
 		while(iter.hasNext())
 		{	Sprite tempSprite = iter.next();
 			if(tempSprite!=sprite 
-					&& isInCloseArea(tempSprite) 
+					&& isClose(tempSprite, true) //isInCloseArea(tempSprite) 
 					&& isOnTheWay(tempSprite)
 					&& isObstacle(tempSprite))
 			{	result.add(tempSprite);
@@ -1030,8 +1032,29 @@ if(sprite instanceof Hero && tempSprite instanceof Bomb && sprite.getTile()==tem
 	 * blocages détectés.
 	 * la fonction renvoie le(s) obstacle(s) rencontré(s).
 	 */
-	private Sprite[] testCollisionsComposite(ArrayList<Sprite> sprites, Direction moveDir)
-	{	Sprite result[] = new Sprite[2];
+	private void testCollisionsComposite(ArrayList<Sprite> sprites, Direction moveDir, Sprite newCollidedSprites[])
+	{	
+		
+/*
+ * TODO very ugly workaround 
+ * problem description : 
+ * 		in some fancy graphical definitions and/or speeds, 
+ * 		player gets blocked at crossroads when moving in a composite direction
+ * cause :
+ * 		the sprite doesn't pass by central the location of the tile
+ * workaround :
+ * 		if this center is on the sprite trajectory, its location is rounded to this center 		
+ */
+double tileX = sprite.getTile().getPosX();
+double tileY = sprite.getTile().getPosY();
+if((moveDir.getHorizontalPrimary()==Direction.RIGHT && tileX>previousPosX && tileX<currentPosX)
+		|| (moveDir.getHorizontalPrimary()==Direction.LEFT && tileX<previousPosX && tileX>currentPosX))
+	currentPosX = tileX;
+if((moveDir.getVerticalPrimary()==Direction.DOWN && tileY>previousPosY && tileY<currentPosY)
+		|| (moveDir.getVerticalPrimary()==Direction.UP && tileY<previousPosY && tileY>currentPosY))
+	currentPosY = tileY;
+		
+		
 		boolean debug = true;
 		Direction hDir = moveDir.getHorizontalPrimary();
 		Direction vDir = moveDir.getVerticalPrimary();
@@ -1078,7 +1101,7 @@ if(sprite instanceof Hero && tempSprite instanceof Bomb && sprite.getTile()==tem
 				// on met à jour la nouvelle position seulement si cet obstacle est plus contraignant 
 //				if(Math.abs(tempPosY-currentPosY)<Math.abs(newPosY-currentPosY))
 				{	newPosY = tempPosY;
-					result[1] = temp;
+					newCollidedSprites[1] = temp;
 				}
 			}
 			//NOTE faudrait p-ê un else ici ? ou pas, pr le cas où on est dans un obstacle
@@ -1096,7 +1119,7 @@ if(sprite instanceof Hero && tempSprite instanceof Bomb && sprite.getTile()==tem
 				}
 //				if(Math.abs(tempPosX-currentPosY)<Math.abs(newPosY-currentPosY))
 				{	newPosX = tempPosX;
-					result[0] = temp;
+					newCollidedSprites[0] = temp;
 				}
 			}
 		}
@@ -1108,12 +1131,10 @@ if(sprite instanceof Hero && tempSprite instanceof Bomb && sprite.getTile()==tem
 		{	System.out.println("currentPos:"+currentPosX+","+currentPosY);			
 			System.out.println();
 		}
-		return result;
 	}
-	
-	private Sprite[] testCollisionsSimple(ArrayList<Sprite> sprites, Direction moveDir)
-	{	Sprite result[] = new Sprite[2];
-		boolean debug = false;
+
+	private void testCollisionsSimple(ArrayList<Sprite> sprites, Direction moveDir, Sprite[] newCollidedSprites, boolean help)
+	{	boolean debug = false;
 		Direction oldDir = moveDir.getHorizontalPrimary();
 		if(oldDir == Direction.NONE)
 			oldDir = moveDir.getVerticalPrimary();
@@ -1145,13 +1166,13 @@ if(sprite instanceof Hero && tempSprite instanceof Bomb && sprite.getTile()==tem
 				{	delta1 = previousPosX-temp.getCurrentPosX();
 					tempDir = Direction.getHorizontalFromDouble(delta1);
 					delta2 = previousPosY-temp.getCurrentPosY();
-					result[1] = temp;
+					newCollidedSprites[1] = temp;
 				}
 				else
 				{	delta1 = previousPosY-temp.getCurrentPosY();
 					tempDir = Direction.getVerticalFromDouble(delta1);
 					delta2 = previousPosX-temp.getCurrentPosX();
-					result[0] = temp;
+					newCollidedSprites[0] = temp;
 				}
 				// si possible, on bouge au maximum le sprite dans l'ancienne direction
 				if(Math.abs(delta2)>scaledTileDim)
@@ -1166,7 +1187,7 @@ if(sprite instanceof Hero && tempSprite instanceof Bomb && sprite.getTile()==tem
 				/* NOTE l'aide à la navigation est ici. à ne réserver qu'aux sprites heros ? (pas bombes et autres)... 
 				 * de toute façon, ils ne devraient jamais en avoir besoin, car ils sont censés être parfaitement centrés 
 				 */
-				if(Math.abs(delta1)>scaledTileDim/4)
+				if(Math.abs(delta1)>scaledTileDim/4 && help)
 				{	//de plus, il faut que le passage dans la nouvelle direction soit dégagé, sinon c'est pas la peine de bouger
 					double dir = delta1/Math.abs(delta1);
 					// on vérifie donc qu'aucun des autres sprites obstacles ne sont situés dans l'alignement de l'obstacle courant
@@ -1231,12 +1252,13 @@ if(sprite instanceof Hero && tempSprite instanceof Bomb && sprite.getTile()==tem
 				if(isClose(dist,true))
 				{	goOn = false;
 					newDir = Direction.NONE;
-					result[indx] = temp;
+					newCollidedSprites[indx] = temp;
 				}			
 			}
 		}
 		if(debug)
 			System.out.println("newDir:"+newDir);					
+		//NOTE if & else sont pareils ?
 		if(newDir == Direction.NONE)
 		{	currentPosX = newPosX;
 			currentPosY = newPosY;
@@ -1247,7 +1269,6 @@ if(sprite instanceof Hero && tempSprite instanceof Bomb && sprite.getTile()==tem
 		}
 		if(debug)
 			System.out.println();	
-		return result;
 	}
 	
 	private void updateIntersectedSprites(ArrayList<Sprite> newIntersectedSprites)
