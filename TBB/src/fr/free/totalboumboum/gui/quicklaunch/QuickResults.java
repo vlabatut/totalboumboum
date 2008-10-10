@@ -41,8 +41,6 @@ import javax.swing.JPanel;
 import javax.swing.SpringLayout;
 import javax.swing.SwingConstants;
 
-import com.sun.xml.internal.ws.api.server.Container;
-
 import fr.free.totalboumboum.data.configuration.Configuration;
 import fr.free.totalboumboum.data.profile.Portraits;
 import fr.free.totalboumboum.data.profile.Profile;
