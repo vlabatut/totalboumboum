@@ -651,6 +651,7 @@ public class Launcher
 	 * - Correction		: problème de collision quand on change de vitesse ou quand on baisse trop l'UPS : partiellement résolu (direction simple), partiellement contourné (direction composée)
 	 * - Correction		: bug graphique : une bombe en panne ne doit plus être animée dans l'instance SBM1
 	 * - Correction		: bug de GUI : dans le mode quicklaunch, le niveau était coupé verticalement car affiché derrière la barre de titre de la fenêtre
+	 * - Nouveauté		: traduction du fichier de langue en français
 	 * 
 	 * *******************************************************
 	 * *********************** A FAIRE ***********************
@@ -661,8 +662,6 @@ public class Launcher
 	 * - au moins finir le cycle lors d'une mort, histoire que la différence de timing ne vienne pas juste de l'ordre des joueurs dans la partie 
 	 * - possibilité de choisir entre le fait que le match s'arrête dès que tout le monde est mort sauf 1, ou dernière flamme terminée
 	 * - feature lié au précédent : gagner plus de points si on finit effetivement le jeu que si on a un time out ou un entre-tuage
-	 * 
-	 * - traduction du fichier de langue
 	 * 
 	 * CONTROLES:
 	 * 		- dans les options, on peut définir les controles de chaque joueur (max?)
