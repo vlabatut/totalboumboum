@@ -103,8 +103,8 @@
 						<text name="Partial" value="Partial"  tooltip="Partial result of custom points processing" />
 						<text name="Rankings" value="Rankings"  tooltip="Caculates a ranking according to one or several points" />
 						<text name="Rankpoints" value="Rankpoints"  tooltip="Calculates points according to a ranking" />
-						<text name="Score" value="Score"  tooltip="scores from all the players in this tournament" />
-						<text name="Total" value="Total" tooltip="Total number of points scored in each confrontation" />
+						<text name="Score" value="Score"  tooltip="Scores from all the players in this tournament" />
+						<text name="Total" value="Total" tooltip="Total number of points scored in each match" />
 					</group>
 					<group name="Data">
 						<text name="Bombs" value="Bombs"  tooltip="Uses the total number of bombs dropped during the tournament" />
@@ -136,7 +136,7 @@
 					<text name="Kills" value="Kills"  tooltip="Total number of players killed in this tournament" />
 					<text name="Match" value="M"  tooltip="Number of points scored for the match number" />
 					<text name="Name" value="Name"  tooltip="Name of the player" />
-					<text name="Paintings" value="Paintings"  tooltip="Total number of tiles painted in this match" />
+					<text name="Paintings" value="Paintings"  tooltip="Total number of tiles painted in this tournament" />
 					<text name="Points" value="Points"  tooltip="Number of points scored for this tournament" />
 					<text name="Time" value="Time"  tooltip="Total time spend in the tournament" />
 					<text name="Total" value="Total"  tooltip="Total number of points scored for all the matches" />
@@ -217,7 +217,7 @@
 						<text name="Rankings" value="Rankings"  tooltip="Caculates a ranking according to one or several points" />
 						<text name="Rankpoints" value="Rankpoints"  tooltip="Calculates points according to a ranking" />
 						<text name="Score" value="Score"  tooltip="scores from all the players in this match" />
-						<text name="Total" value="Total" tooltip="Total number of points scored in each confrontation" />
+						<text name="Total" value="Total" tooltip="Total number of points scored in each round" />
 					</group>
 					<group name="Data">
 						<text name="Bombs" value="Bombs"  tooltip="Uses the total number of bombs dropped during the match" />
