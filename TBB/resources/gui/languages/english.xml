@@ -77,7 +77,7 @@
 				</group>
 				
 				<group name="Misc">
-					<text name="Title" value="Misc"  tooltip="Various informations about this tournament" />
+					<text name="Title" value="Misc"  tooltip="Various information about this tournament" />
 				</group>
 				
 				<group name="Notes">
@@ -190,7 +190,7 @@
 				</group>
 								
 				<group name="Misc">
-					<text name="Title" value="Misc"  tooltip="Various informations about this match" />
+					<text name="Title" value="Misc"  tooltip="Various information about this match" />
 				</group>
 				
 				<group name="Notes">
@@ -216,7 +216,7 @@
 						<text name="Partial" value="Partial"  tooltip="Partial result of custom points processing" />
 						<text name="Rankings" value="Rankings"  tooltip="Caculates a ranking according to one or several points" />
 						<text name="Rankpoints" value="Rankpoints"  tooltip="Calculates points according to a ranking" />
-						<text name="Score" value="Score"  tooltip="scores from all the players in this match" />
+						<text name="Score" value="Score"  tooltip="Scores from all the players in this match" />
 						<text name="Total" value="Total" tooltip="Total number of points scored in each round" />
 					</group>
 					<group name="Data">
@@ -317,7 +317,7 @@
 				</group>
 								
 				<group name="Misc">
-					<text name="Title" value="Misc"  tooltip="Various informations about this round" />
+					<text name="Title" value="Misc"  tooltip="Various information about this round" />
 					<group name="Header">
 						<text name="Author" value="Author"  tooltip="Author/ripper of the level" />
 						<text name="Dimension" value="Dimension"  tooltip="Dimension of the visible play zone" />
@@ -330,7 +330,7 @@
 				</group>
 								
 				<group name="Notes">
-					<text name="Title" value="Notes"  tooltip="Notes from the designer of this rpi,d" />
+					<text name="Title" value="Notes"  tooltip="Notes from the designer of this round" />
 				</group>
 				
 				<group name="Points">
@@ -341,7 +341,7 @@
 						<text name="Partial" value="Partial"  tooltip="Partial result of custom points processing" />
 						<text name="Rankings" value="Rankings"  tooltip="Caculates a ranking according to one or several points" />
 						<text name="Rankpoints" value="Rankpoints"  tooltip="Calculates points according to a ranking" />
-						<text name="Score" value="Score"  tooltip="scores from all the players in this round" />
+						<text name="Score" value="Score"  tooltip="Scores from all the players in this round" />
 					</group>
 					<group name="Data">
 						<text name="Bombs" value="Bombs"  tooltip="Uses the number of bombs dropped during the round" />
