@@ -1055,7 +1055,7 @@ if((moveDir.getVerticalPrimary()==Direction.DOWN && tileY>previousPosY && tileY<
 	currentPosY = tileY;
 		
 		
-		boolean debug = true;
+		boolean debug = false;
 		Direction hDir = moveDir.getHorizontalPrimary();
 		Direction vDir = moveDir.getVerticalPrimary();
 		double newPosX = previousPosX;
