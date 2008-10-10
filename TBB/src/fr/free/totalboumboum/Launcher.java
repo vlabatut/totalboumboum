@@ -648,12 +648,15 @@ public class Launcher
 	 * - Nouveauté		: mode quicklaunch pour jouer un round très rapidement (pas de GUI)
 	 * - Nouveauté		: affichage du score dans le QuickLaunch
 	 * - Nouveauté		: ajustement automatique du FPS en fonction de la machine
-	 * - Correction		: problème de collision quand on change de vitesse ou quand on baisse trop l'UPS
+	 * - Correction		: problème de collision quand on change de vitesse ou quand on baisse trop l'UPS : partiellement résolu (direction simple), partiellement contourné (direction composée)
 	 * - Correction		: bug graphique : une bombe en panne ne doit plus être animée dans l'instance SBM1
+	 * - Correction		: bug de GUI : dans le mode quicklaunch, le niveau était coupé verticalement car affiché derrière la barre de titre de la fenêtre
 	 * 
 	 * *******************************************************
 	 * *********************** A FAIRE ***********************
 	 * *******************************************************
+	 * 
+	 * - bug lors du décompte des items au début du round (cd petit niveau) 
 	 * 
 	 * - au moins finir le cycle lors d'une mort, histoire que la différence de timing ne vienne pas juste de l'ordre des joueurs dans la partie 
 	 * - possibilité de choisir entre le fait que le match s'arrête dès que tout le monde est mort sauf 1, ou dernière flamme terminée
@@ -665,12 +668,10 @@ public class Launcher
 	 * 		- dans les options, on peut définir les controles de chaque joueur (max?)
 	 * 		- dans le jeu, à chaque match, chaque joueur doit choisir quels controles il va utiliser (qui est player 1, player 2 etc)
 	 * 
-	 * - l'affichage est coupé dans le mode quicklaunch
+	 * - pb de collision quand la bombe atterit dans une flamme (à re-tester ?)
 	 * 
 	 * - redistribution des items lors de la mort d'un joueur (option de round?)
 	 * - possibilité de bloquer certains items (on ne les perd pas lorsqu'on meurt)
-	 * 
-	 * - pb de collision quand la bombe atterit dans une flamme (à re-tester ?)
 	 * 
 	 * - redescendre les stats dans loop, et gestion de fin de partie et tout ce qui est en fait directement lié au moteur
 	 * - en fait tout le calcul de points dans les stats est à déplacer dans les rounds/matches, etc 

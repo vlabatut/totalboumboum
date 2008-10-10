@@ -57,6 +57,7 @@ import fr.free.totalboumboum.tools.XmlTools;
 
 
 import java.awt.BorderLayout;
+import java.awt.Canvas;
 import java.awt.Container;
 import java.awt.Dimension;
 import java.awt.Font;
@@ -79,25 +80,36 @@ public class QuickFrame extends JFrame implements WindowListener,LoopRenderPanel
 	private Configuration configuration;
 	private Loop loop;
 	private JProgressBar loadProgressBar;
+	private Canvas canvas;
 
-	public QuickFrame(Configuration configuration) throws IllegalArgumentException, SecurityException, ParserConfigurationException, SAXException, IOException, IllegalAccessException, NoSuchFieldException, ClassNotFoundException
+	public QuickFrame(Configuration configuration, GraphicsConfiguration gconf) throws IllegalArgumentException, SecurityException, ParserConfigurationException, SAXException, IOException, IllegalAccessException, NoSuchFieldException, ClassNotFoundException
 	{	// init
-		super("TBB v."+GameConstants.VERSION);
+		super("TBB v."+GameConstants.VERSION,gconf);
 		this.configuration = configuration;
+		
 		// listener
 		addWindowListener(this);
+		setFocusable(true);
+		
 		// set icon
 		String iconPath = GuiFileTools.getIconsPath()+File.separator+GuiFileTools.FILE_FRAME;
 		Image icon = Toolkit.getDefaultToolkit().getImage(iconPath);
 		setIconImage(icon);
+		
 		// set dimensions
-		Container contentPane = getContentPane();
 		Dimension dim = configuration.getPanelDimension();
-		contentPane.setPreferredSize(dim);
 		setResizable(false);
-		setFocusable(true);
+		
+	    // create canvas
+	    canvas = new Canvas();
+	    canvas.setIgnoreRepaint( true );
+	    canvas.setSize(dim);
+	    add(canvas);
+		canvas.setIgnoreRepaint(true);
+		
 		// size the frame
 		pack();
+		
 		// center the frame
 	    Toolkit tk = Toolkit.getDefaultToolkit();
 	    Dimension screenSize = tk.getScreenSize();
@@ -125,6 +137,7 @@ public class QuickFrame extends JFrame implements WindowListener,LoopRenderPanel
 		loadProgressBar = new JProgressBar(0,limit);
 		loadProgressBar.setStringPainted(true);
 		loadProgressBar.setFont(new Font("Arial",Font.PLAIN,dim.height/2));
+		remove(canvas);
 		getContentPane().add(loadProgressBar);
 		validate();
 		repaint();
@@ -217,6 +230,7 @@ public class QuickFrame extends JFrame implements WindowListener,LoopRenderPanel
 				{	// progress bar
 					loadProgressBar.repaint();
 					getContentPane().remove(loadProgressBar);
+				    add(canvas);
 					validate();
 					repaint();
 				    // loop
@@ -224,8 +238,8 @@ public class QuickFrame extends JFrame implements WindowListener,LoopRenderPanel
 				    loop = round.getLoop();
 				    loop.setPanel(this);
 					// init the BufferStrategy
-					createBufferStrategy(2);
-					bufferStrategy = getBufferStrategy();
+					canvas.createBufferStrategy(2);
+					bufferStrategy = canvas.getBufferStrategy();
 				}
 				else
 				{	loadProgressBar.repaint();
@@ -236,8 +250,9 @@ public class QuickFrame extends JFrame implements WindowListener,LoopRenderPanel
 
 	@Override
 	public void roundOver()
-	{	Container contentPane = getContentPane();
-		Dimension dim = contentPane.getPreferredSize();
+	{	remove(canvas);
+		Container contentPane = getContentPane();
+		Dimension dim = configuration.getPanelDimension();
 		QuickResults roundResults = new QuickResults(dim,configuration);
 		contentPane.add(roundResults);
 //		contentPane.setLayout(layout);
