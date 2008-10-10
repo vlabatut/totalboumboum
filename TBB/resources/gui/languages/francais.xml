@@ -238,7 +238,7 @@
 			</group>
 				
 			<group name="Results">
-				<text name="Title" value="Resultats de la rencontre"  tooltip="Résultats de la rencontre" />
+				<text name="Title" value="Résultats de la rencontre"  tooltip="Résultats de la rencontre" />
 				<group name="Header">
 					<text name="Bombs" value="Bombes"  tooltip="Nombre total de bombes posées au cours de cette rencontre" />
 					<text name="Crowns" value="Couronnes"  tooltip="Nombre total de couronnes ramassées au cours de cette rencontre" />

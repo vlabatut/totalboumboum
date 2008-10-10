@@ -144,7 +144,7 @@ public class Zone
 						value ++;
 					}
 					else
-						value = 0;
+						value = 1;
 					result.put(matrix[i][j],value);
 				}
 			}
