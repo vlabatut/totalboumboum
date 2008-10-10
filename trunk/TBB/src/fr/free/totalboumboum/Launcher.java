@@ -627,11 +627,6 @@ public class Launcher
 	 * http://java.sun.com/docs/books/tutorial/essential/concurrency/pools.html
 	 * http://java.sun.com/docs/books/tutorial/essential/concurrency/interrupt.html
 	 */
-
-	/*
-	 * TODO vérifier qu'il n'y a pas d'interférences entre une fin de partie par manque de joueur,
-	 * puis la fin temporelle se produit pendant les célébrations
-	 */
 	
 	/*
 	 * TODO
@@ -652,12 +647,12 @@ public class Launcher
 	 * - Correction		: bug graphique : une bombe en panne ne doit plus être animée dans l'instance SBM1
 	 * - Correction		: bug de GUI : dans le mode quicklaunch, le niveau était coupé verticalement car affiché derrière la barre de titre de la fenêtre
 	 * - Nouveauté		: traduction du fichier de langue en français
+	 * - Modification	: ajout dans la police de caractères des voyelles accentuées, cédille et autres
+	 * - Correction		: bug lors du décompte des items au début du round 
 	 * 
 	 * *******************************************************
 	 * *********************** A FAIRE ***********************
 	 * *******************************************************
-	 * 
-	 * - bug lors du décompte des items au début du round (cd petit niveau) 
 	 * 
 	 * - au moins finir le cycle lors d'une mort, histoire que la différence de timing ne vienne pas juste de l'ordre des joueurs dans la partie 
 	 * - possibilité de choisir entre le fait que le match s'arrête dès que tout le monde est mort sauf 1, ou dernière flamme terminée
