@@ -262,6 +262,11 @@ public class RoundDescription extends EntitledDataPanel
 		String id = GuiTools.GAME_ROUND_DESCRIPTION_ITEMSET_TITLE;
 		int colGrps[] = {5, 6};
 		int lns[] = {4, 5};
+		int margin = GuiTools.getSize(GuiTools.GAME_RESULTS_MARGIN_SIZE);
+		for(int i=0;i<lns.length;i++)
+		{	float line = (int)((height-margin*(lns[i]+1))/lns[i]);
+			colGrps[i] = (int)(width/line/2);
+		}
 		ArrayList<ArrayList<Object>> data = new ArrayList<ArrayList<Object>>();
 		ArrayList<ArrayList<String>> tooltips = new ArrayList<ArrayList<String>>();
 		
@@ -365,6 +370,11 @@ public class RoundDescription extends EntitledDataPanel
 		String id = GuiTools.GAME_ROUND_DESCRIPTION_INITIALITEMS_TITLE;
 		int colGrps[] = {2, 4};
 		int lns[] = {4, 8};
+		int margin = GuiTools.getSize(GuiTools.GAME_RESULTS_MARGIN_SIZE);
+		for(int i=0;i<lns.length;i++)
+		{	float line = (int)((height-margin*(lns[i]+1))/lns[i]);
+			colGrps[i] = (int)(width/line/2);
+		}
 		ArrayList<ArrayList<Object>> data = new ArrayList<ArrayList<Object>>();
 		ArrayList<ArrayList<String>> tooltips = new ArrayList<ArrayList<String>>();
 		

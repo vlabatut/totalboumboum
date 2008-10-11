@@ -633,12 +633,13 @@ public class Launcher
 	 * TODO
 	 * 
 	 * + alpha.46
+	 * - correction	: bug dans la GUI lorsqu'on utilise une résolution carrée : les itemset et initialitem dans la présentation des rounds sont coupés (certains items sont hors-écran)
 	 * 
 	 * *******************************************************
 	 * *********************** A FAIRE ***********************
 	 * *******************************************************
 	 * 
-	 * - bug graphique dans présentation ds petite résolution
+	 * - bug graphique : les textes des boutons sont coupés
 	 * 
 	 * CONTROLES:
 	 * 		- dans les options, on peut définir les controles de chaque joueur (max?)

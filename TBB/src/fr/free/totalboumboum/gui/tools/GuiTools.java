@@ -28,10 +28,15 @@ import java.awt.Font;
 import java.awt.FontMetrics;
 import java.awt.Graphics;
 import java.awt.Toolkit;
+import java.awt.font.LineMetrics;
+import java.awt.geom.Rectangle2D;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Iterator;
+import java.util.Map.Entry;
 
 import javax.swing.AbstractButton;
 import javax.swing.Icon;
@@ -356,7 +361,8 @@ public class GuiTools
 	// menus
 	public static final String MENU_HORIZONTAL_BUTTON_HEIGHT = "MENU_HORIZONTAL_BUTTON_HEIGHT";
 	public static final String MENU_VERTICAL_BUTTON_HEIGHT = "MENU_VERTICAL_BUTTON_HEIGHT";
-	public static final String MENU_ALL_BUTTON_FONT_SIZE = "MENU_ALL_BUTTON_FONT_SIZE";
+	public static final String MENU_VERTICAL_PRIMARY_BUTTON_FONT_SIZE = "MENU_VERTICAL_PRIMARY_BUTTON_FONT_SIZE";
+	public static final String MENU_VERTICAL_SECONDARY_BUTTON_FONT_SIZE = "MENU_VERTICAL_SECONDARY_BUTTON_FONT_SIZE";
 	public static final String MENU_HORIZONTAL_BUTTON_WIDTH = "MENU_HORIZONTAL_BUTTON_WIDTH";
 	public static final String MENU_VERTICAL_PRIMARY_BUTTON_WIDTH = "MENU_VERTICAL_PRIMARY_BUTTON_WIDTH";
 	public static final String MENU_VERTICAL_SECONDARY_BUTTON_WIDTH = "MENU_VERTICAL_SECONDARY_BUTTON_WIDTH";
@@ -419,22 +425,25 @@ public class GuiTools
 		setGameFont(configuration.getFont());
 		
 		// buttons
-		int verticalMenuButtonHeight = (int)(height*0.05);
-		sizes.put(MENU_VERTICAL_BUTTON_HEIGHT,verticalMenuButtonHeight);
-		int horizontalMenuButtonHeight = (int)(height*0.07);
-		sizes.put(MENU_HORIZONTAL_BUTTON_HEIGHT,horizontalMenuButtonHeight);
-		int horizontalMenuButtonWidth = horizontalMenuButtonHeight;
-		sizes.put(MENU_HORIZONTAL_BUTTON_WIDTH,horizontalMenuButtonWidth);
-		sizes.put(MENU_HORIZONTAL_BUTTON_SPACE,(int)(width*0.025));
-		int gameProgressbarFontSize = getFontSize(horizontalMenuButtonHeight*0.6); 
+		int menuVerticalButtonHeight = (int)(height*0.05);
+		sizes.put(MENU_VERTICAL_BUTTON_HEIGHT,menuVerticalButtonHeight);
+		int menuHorizontalButtonHeight = (int)(height*0.07);
+		sizes.put(MENU_HORIZONTAL_BUTTON_HEIGHT,menuHorizontalButtonHeight);
+		int menuHorizontalButtonWidth = menuHorizontalButtonHeight;
+		sizes.put(MENU_HORIZONTAL_BUTTON_WIDTH,menuHorizontalButtonWidth);
+		int menuHorizontalButtonSpace = (int)(width*0.025);
+		sizes.put(MENU_HORIZONTAL_BUTTON_SPACE,menuHorizontalButtonSpace);
+		int gameProgressbarFontSize = getFontSize(menuHorizontalButtonHeight*0.6); 
 		sizes.put(GAME_PROGRESSBAR_FONT_SIZE,gameProgressbarFontSize);
-		sizes.put(MENU_VERTICAL_PRIMARY_BUTTON_WIDTH,(int)(width*0.33));
-		int secondaryVerticalMenuButtonWIdth = (int)(width*0.25);
-		sizes.put(MENU_VERTICAL_SECONDARY_BUTTON_WIDTH,secondaryVerticalMenuButtonWIdth);
-		sizes.put(MENU_VERTICAL_BUTTON_SPACE,(int)(height*0.025));
+		int menuVerticalPrimaryButtonWidth = (int)(width*0.33);
+		sizes.put(MENU_VERTICAL_PRIMARY_BUTTON_WIDTH,menuVerticalPrimaryButtonWidth);
+		int menuVerticalSecondaryButtonWidth = (int)(width*0.25);
+		sizes.put(MENU_VERTICAL_SECONDARY_BUTTON_WIDTH,menuVerticalSecondaryButtonWidth);
+		int menuVerticalSecondaryButtonSpace = (int)(height*0.025);
+		sizes.put(MENU_VERTICAL_BUTTON_SPACE,menuVerticalSecondaryButtonSpace);
 		
 		// menu panels
-		int horizontalSplitMenuPanelHeight = horizontalMenuButtonHeight; 
+		int horizontalSplitMenuPanelHeight = menuHorizontalButtonHeight; 
 		sizes.put(HORIZONTAL_SPLIT_MENU_PANEL_HEIGHT,horizontalSplitMenuPanelHeight);
 		sizes.put(HORIZONTAL_SPLIT_MENU_PANEL_WIDTH,width);
 		int horizontalSplitDataPanelHeight = height-horizontalSplitMenuPanelHeight; 
@@ -442,17 +451,47 @@ public class GuiTools
 		int horizontalSplitDataPanelWidth = width; 
 		sizes.put(HORIZONTAL_SPLIT_DATA_PANEL_WIDTH,horizontalSplitDataPanelHeight);
 		sizes.put(VERTICAL_SPLIT_MENU_PANEL_HEIGHT,height);
-		int verticalSplitMenuPanelWidth = secondaryVerticalMenuButtonWIdth;
+		int verticalSplitMenuPanelWidth = menuVerticalSecondaryButtonWidth;
 		sizes.put(VERTICAL_SPLIT_MENU_PANEL_WIDTH,verticalSplitMenuPanelWidth);
 		sizes.put(VERTICAL_SPLIT_DATA_PANEL_HEIGHT,height);
 		sizes.put(VERTICAL_SPLIT_DATA_PANEL_WIDTH,width-verticalSplitMenuPanelWidth);
-		// font
-		int menuButtonFontSize = getFontSize(verticalMenuButtonHeight*0.9);
-		sizes.put(MENU_ALL_BUTTON_FONT_SIZE, menuButtonFontSize);
 		
-		// font
-		int gameTitleFontSize = (int)(menuButtonFontSize*1.3);
+		// fonts
+		int menuVerticalPrimaryButtonFontSize;
+		{	Iterator<Entry<String,String>> it = configuration.getLanguage().getTexts().entrySet().iterator();
+			String longest = "";
+			while(it.hasNext())
+			{	Entry<String,String> temp = it.next();
+				String key = temp.getKey();
+				String value = temp.getValue();
+				if(!key.endsWith("Tooltip") && (key.startsWith("MenuMainButton") || key.startsWith("MenuOptionsButton")))
+				{	if(value.length()>longest.length())
+						longest = value;
+				}
+			}
+			menuVerticalPrimaryButtonFontSize = getFontSize(menuVerticalPrimaryButtonWidth*0.9,menuVerticalButtonHeight*0.9,longest);
+		}
+		sizes.put(MENU_VERTICAL_PRIMARY_BUTTON_FONT_SIZE, menuVerticalPrimaryButtonFontSize);
+		//
+		int menuVerticalSecondaryButtonFontSize;
+		{	Iterator<Entry<String,String>> it = configuration.getLanguage().getTexts().entrySet().iterator();
+			String longest = "";
+			while(it.hasNext())
+			{	Entry<String,String> temp = it.next();
+				String key = temp.getKey();
+				String value = temp.getValue();
+				if(!key.endsWith("Tooltip") && key.startsWith("MenuTournamentButton"))
+				{	if(value.length()>longest.length())
+						longest = value;
+				}
+			}
+			menuVerticalSecondaryButtonFontSize = getFontSize(menuVerticalSecondaryButtonWidth*0.9,menuVerticalButtonHeight*0.9,longest);
+		}
+		sizes.put(MENU_VERTICAL_SECONDARY_BUTTON_FONT_SIZE, menuVerticalSecondaryButtonFontSize);
+		//
+		int gameTitleFontSize = (int)(menuVerticalPrimaryButtonFontSize*1.3);
 		sizes.put(GAME_TITLE_FONT_SIZE, gameTitleFontSize);
+
 		// labels
 		int gameDataLabelTitleHeight;
 		{	Font font = configuration.getFont().deriveFont((float)gameTitleFontSize);
@@ -854,6 +893,21 @@ public class GuiTools
 		while(fheight<limit);
 		return result;
 	}
+	public static int getFontSize(double width, double height, String text)
+	{	int result = 0;
+		int fheight,fwidth;
+		do
+		{	result++;
+			Font font = gameFont.deriveFont((float)result);
+			graphics.setFont(font);
+			FontMetrics metrics = graphics.getFontMetrics(font);
+			fheight = metrics.getHeight();
+			Rectangle2D bounds = metrics.getStringBounds(text,graphics);
+			fwidth = (int)bounds.getWidth();
+		}
+		while(fheight<height && fwidth<width);
+		return result-1;
+	}
 	public static BufferedImage loadIcon(String path, BufferedImage absent)
 	{	BufferedImage image;
 		try
@@ -943,8 +997,6 @@ public class GuiTools
 		else
 		{	// text 
 			String text = configuration.getLanguage().getText(name);
-			Font font = configuration.getFont().deriveFont((float)sizes.get(MENU_ALL_BUTTON_FONT_SIZE));
-			button.setFont(font);
 			button.setText(text);
 		}		
 		// action command
@@ -972,6 +1024,11 @@ public class GuiTools
 		JButton result = new JButton();
 		initButton(result,name,width,height,panel,configuration);
 		result.setAlignmentX(Component.CENTER_ALIGNMENT);
+		// font
+		int fontSize = sizes.get(MENU_VERTICAL_PRIMARY_BUTTON_FONT_SIZE);
+		Font font = configuration.getFont().deriveFont((float)fontSize);
+		result.setFont(font);
+		//
 		return result;
 	}
 	public static JButton createSecondaryVerticalMenuButton(String name, ButtonAware panel, GuiConfiguration configuration)
@@ -980,6 +1037,11 @@ public class GuiTools
 		JButton result = new JButton();
 		initButton(result,name,width,height,panel,configuration);
 		result.setAlignmentX(Component.CENTER_ALIGNMENT);
+		// font
+		int fontSize = sizes.get(MENU_VERTICAL_SECONDARY_BUTTON_FONT_SIZE);
+		Font font = configuration.getFont().deriveFont((float)fontSize);
+		result.setFont(font);
+		//
 		return result;
 	}	
 	public static JButton createHorizontalMenuButton(String name, ButtonAware panel, GuiConfiguration configuration)
