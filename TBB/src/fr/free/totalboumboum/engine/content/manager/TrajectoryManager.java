@@ -618,13 +618,16 @@ if(moveDir!=Direction.NONE)
 		{	/* FIXME grosssssse bidouille:
 			 * avec les calculs il arrive que le z ne revienne pas à zéro après un saut.
 			 */
-			if(currentPosZ>-1 && currentPosZ<1) //NOTE utiliser CalculusTools
+			if(CalculusTools.isRelativelyEqualTo(currentPosZ,0,sprite.getLoop()))
 				currentPosZ = 0;
 			//
 			if(hasFlied && currentPosZ==0)
-			{	EngineEvent e = new EngineEvent(EngineEvent.TOUCH_GROUND,sprite,null,getActualDirection());
+			{	sprite.processEvent(new EngineEvent(EngineEvent.TRAJECTORY_OVER));
+				EngineEvent e = new EngineEvent(EngineEvent.TOUCH_GROUND,sprite,null,getActualDirection());
 				sprite.getTile().spreadEvent(e);
 			}
+			else
+				sprite.processEvent(new EngineEvent(EngineEvent.TRAJECTORY_OVER));
 		}
 	}
 	
@@ -654,7 +657,6 @@ if(moveDir!=Direction.NONE)
 				relativePosY = currentY;
 				relativePosZ = currentZ;
 				isTerminated = true;
-				sprite.processEvent(new EngineEvent(EngineEvent.TRAJECTORY_OVER));
 			}
 		}	
 	}
