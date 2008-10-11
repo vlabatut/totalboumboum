@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+
+	<xsd:simpleType name="tRole">
+		<xsd:restriction base="xsd:string">
+			<xsd:enumeration value="block" />
+			<xsd:enumeration value="bomb" />
+			<xsd:enumeration value="fire" />
+			<xsd:enumeration value="floor" />
+			<xsd:enumeration value="hero" />
+			<xsd:enumeration value="item" />
+			<xsd:enumeration value="none" />
+			<xsd:enumeration value="all" />
+		</xsd:restriction>
+	</xsd:simpleType>
+
+</xsd:schema>
+		
