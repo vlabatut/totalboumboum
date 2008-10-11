@@ -11,7 +11,7 @@
 				<text name="Levels" value="Niveaux" tooltip="Voir les niveaux disponibles" />
 				<text name="Options" value="Options" tooltip="Accéder aux options générales du jeu" />
 				<text name="Profiles" value="Profils" tooltip="Éditer les profils des joueurs" />
-				<text name="QuickMatch" value="Partie rapie" tooltip="Commencer une partie rapide" />
+				<text name="QuickMatch" value="Partie rapide" tooltip="Commencer une partie rapide" />
 				<text name="Statistics" value="Statistiques" tooltip="Voir les statistiques des joueurs" />
 				<text name="Tournament" value="Tournoi" tooltip="Commencer un tournoi" />
 			</group>
