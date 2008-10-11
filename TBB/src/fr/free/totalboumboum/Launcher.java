@@ -626,6 +626,7 @@ public class Launcher
 	 * http://java.sun.com/javase/6/docs/api/java/util/concurrent/ExecutorService.html
 	 * http://java.sun.com/docs/books/tutorial/essential/concurrency/pools.html
 	 * http://java.sun.com/docs/books/tutorial/essential/concurrency/interrupt.html
+	 * >>> pb: si un thread entre en boucle infinie, il ne sera jamais terminé, donc l'executor devra créer/gérer un thread de plus
 	 */
 	
 	/*
