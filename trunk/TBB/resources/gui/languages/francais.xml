@@ -21,7 +21,7 @@
 		<group name="Options">
 			<group name="Button">
 				<text name="Back" value="Retour" tooltip="Revenir au menu principal" />
-				<text name="GamePlay" value="Jouabilité" tooltip="Modifier les paramètre de jouabilité" />
+				<text name="GamePlay" value="Jeu" tooltip="Modifier les paramètre de jouabilité" />
 				<text name="Video" value="Vidéo" tooltip="Modifier les paramètres graphiques" />
 			</group>
 		</group>	

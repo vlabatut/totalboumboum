@@ -45,4 +45,8 @@ public class Language
 			result = "N/A";
 		return result;
 	}
+	
+	public HashMap<String, String> getTexts()
+	{	return texts;
+	}
 }
