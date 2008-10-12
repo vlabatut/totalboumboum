@@ -636,6 +636,7 @@ public class Launcher
 	 * - correction	: bug dans la GUI lorsqu'on utilise une résolution carrée : les itemset et initialitem dans la présentation des rounds sont coupés (certains items sont hors-écran)
 	 * - correction	: bug graphique >> les textes des boutons sont coupés
 	 * - correction : bug de gameplay dans SBM1 : le temps de latence des bombes était deux fois trop court
+	 * - modification : dans la GUI, les boutons pas encore implémentés sont désactivés
 	 * 
 	 * *******************************************************
 	 * *********************** A FAIRE ***********************

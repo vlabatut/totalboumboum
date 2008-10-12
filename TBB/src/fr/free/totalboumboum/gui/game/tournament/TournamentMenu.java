@@ -101,6 +101,7 @@ public class TournamentMenu extends InnerMenuPanel implements TournamentRenderPa
 		buttonResults = GuiTools.createHorizontalMenuToggleButton(GuiTools.GAME_TOURNAMENT_BUTTON_RESULTS,this,getConfiguration());
 	    group.add(buttonResults);
 		buttonStatistics = GuiTools.createHorizontalMenuToggleButton(GuiTools.GAME_TOURNAMENT_BUTTON_STATISTICS,this,getConfiguration());
+buttonStatistics.setEnabled(false);		
 	    group.add(buttonStatistics);
 		add(Box.createRigidArea(new Dimension(GuiTools.getSize(GuiTools.MENU_HORIZONTAL_BUTTON_SPACE),0)));
 		buttonMatch = GuiTools.createHorizontalMenuButton(GuiTools.GAME_TOURNAMENT_BUTTON_NEXT_MATCH,this,getConfiguration());

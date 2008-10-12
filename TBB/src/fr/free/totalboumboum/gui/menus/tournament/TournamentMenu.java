@@ -113,11 +113,16 @@ public class TournamentMenu extends InnerMenuPanel
 		// buttons
 		add(Box.createVerticalGlue());
 		buttonNew = GuiTools.createSecondaryVerticalMenuButton(GuiTools.MENU_TOURNAMENT_BUTTON_NEW,this,getConfiguration());
+buttonNew.setEnabled(false);
 		buttonLoad = GuiTools.createSecondaryVerticalMenuButton(GuiTools.MENU_TOURNAMENT_BUTTON_LOAD,this,getConfiguration());
+buttonLoad.setEnabled(false);
 		buttonSaveAs = GuiTools.createSecondaryVerticalMenuButton(GuiTools.MENU_TOURNAMENT_BUTTON_SAVE_AS,this,getConfiguration());
+buttonSaveAs.setEnabled(false);
 		add(Box.createRigidArea(new Dimension(0,GuiTools.getSize(GuiTools.MENU_VERTICAL_BUTTON_SPACE))));
 		buttonRules = GuiTools.createSecondaryVerticalMenuButton(GuiTools.MENU_TOURNAMENT_BUTTON_RULES,this,getConfiguration());
+buttonSaveAs.setEnabled(false);
 		buttonPlayers = GuiTools.createSecondaryVerticalMenuButton(GuiTools.MENU_TOURNAMENT_BUTTON_PLAYERS,this,getConfiguration());
+buttonPlayers.setEnabled(false);
 		add(Box.createRigidArea(new Dimension(0,GuiTools.getSize(GuiTools.MENU_VERTICAL_BUTTON_SPACE))));
 		buttonPlay = GuiTools.createSecondaryVerticalMenuButton(GuiTools.MENU_TOURNAMENT_BUTTON_START,this,getConfiguration());
 		add(Box.createRigidArea(new Dimension(0,GuiTools.getSize(GuiTools.MENU_VERTICAL_BUTTON_SPACE))));
@@ -206,6 +211,7 @@ public class TournamentMenu extends InnerMenuPanel
 		// Play: tournament must be ready
 		if(tournament.isReady())
 		{	buttonSaveAs.setEnabled(true);
+buttonSaveAs.setEnabled(false);		
 			buttonPlay.setEnabled(true);
 			if(tournament.hasBegun())
 			{	GuiTools.setButtonContent(GuiTools.MENU_TOURNAMENT_BUTTON_CONTINUE,buttonPlay,getConfiguration());
@@ -215,7 +221,9 @@ public class TournamentMenu extends InnerMenuPanel
 			else
 			{	GuiTools.setButtonContent(GuiTools.MENU_TOURNAMENT_BUTTON_START,buttonPlay,getConfiguration());
 				buttonPlayers.setEnabled(true);
+buttonPlayers.setEnabled(false);		
 				buttonRules.setEnabled(true);
+buttonRules.setEnabled(false);		
 			}
 		}
 	}
