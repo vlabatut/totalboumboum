@@ -21,7 +21,6 @@ package fr.free.totalboumboum.gui.common;
  * 
  */
 
-import java.awt.Color;
 import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.Font;
@@ -40,7 +39,7 @@ public abstract class EntitledDataPanel extends InnerDataPanel
 	private JLabel title;
 	private JPanel data;
 	
-	public EntitledDataPanel(SplitMenuPanel container)
+	public EntitledDataPanel(SplitMenuPanel container, int width, int height)
 	{	super(container);
 
 		// layout
@@ -52,23 +51,26 @@ public abstract class EntitledDataPanel extends InnerDataPanel
 		setOpaque(false);
 		
 		// size
-		int height = GuiTools.getSize(GuiTools.HORIZONTAL_SPLIT_DATA_PANEL_HEIGHT);
-		int width = GuiTools.getSize(GuiTools.HORIZONTAL_SPLIT_DATA_PANEL_WIDTH);
 		setPreferredSize(new Dimension(width,height));
-		
+		float titleFontSize = GuiTools.getSize(GuiTools.GAME_TITLE_FONT_SIZE);
+		int titleHeight = GuiTools.getPixelHeight(titleFontSize);
+		int margin = (int)(width*0.025);
+		int dataHeight = height-3*margin-titleHeight;
+		int dataWidth = width-2*margin;
+			
 		add(Box.createVerticalGlue());
 	
 		// title label
 		{	String text = "N/A";
 			title = new JLabel(text);
 			title.setHorizontalAlignment(SwingConstants.CENTER);
-			Font font = getConfiguration().getFont().deriveFont((float)GuiTools.getSize(GuiTools.GAME_TITLE_FONT_SIZE));
+			Font font = getConfiguration().getFont().deriveFont(titleFontSize);
 			title.setForeground(GuiTools.COLOR_TITLE_FOREGROUND);
 			title.setBackground(GuiTools.COLOR_COMMON_BACKGROUND);
 			title.setOpaque(true);
 			title.setFont(font);
 			title.setAlignmentX(Component.CENTER_ALIGNMENT);
-			Dimension dim = new Dimension(GuiTools.getSize(GuiTools.GAME_DATA_PANEL_WIDTH),GuiTools.getSize(GuiTools.GAME_DATA_LABEL_TITLE_HEIGHT));
+			Dimension dim = new Dimension(dataWidth,titleHeight);
 			title.setPreferredSize(dim);
 			title.setMinimumSize(dim);
 			title.setMaximumSize(dim);
@@ -80,7 +82,7 @@ public abstract class EntitledDataPanel extends InnerDataPanel
 		// data panel
 		{	data = new JPanel();
 			data.setBackground(GuiTools.COLOR_COMMON_BACKGROUND);
-			Dimension dim = new Dimension(GuiTools.getSize(GuiTools.GAME_DATA_PANEL_WIDTH),GuiTools.getSize(GuiTools.GAME_DATA_PANEL_HEIGHT));
+			Dimension dim = new Dimension(dataWidth,dataHeight);
 			data.setPreferredSize(dim);
 			data.setMinimumSize(dim);
 			data.setMaximumSize(dim);

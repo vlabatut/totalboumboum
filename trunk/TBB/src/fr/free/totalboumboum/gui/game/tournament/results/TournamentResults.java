@@ -69,8 +69,8 @@ public abstract class TournamentResults extends EntitledDataPanel
 
 	private TablePanel resultsPanel;
 	
-	public TournamentResults(SplitMenuPanel container)
-	{	super(container);
+	public TournamentResults(SplitMenuPanel container, int w, int h)
+	{	super(container,w,h);
 		
 		// title
 		String txt = getConfiguration().getLanguage().getText(GuiTools.GAME_TOURNAMENT_RESULTS_TITLE);

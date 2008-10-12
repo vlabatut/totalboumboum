@@ -42,8 +42,8 @@ public class TournamentStatistics extends EntitledDataPanel
 {	
 	private static final long serialVersionUID = 1L;
 
-	public TournamentStatistics(SplitMenuPanel container)
-	{	super(container);
+	public TournamentStatistics(SplitMenuPanel container, int w, int h)
+	{	super(container,w,h);
 
 		// title
 		String txt = getConfiguration().getLanguage().getText(GuiTools.GAME_TOURNAMENT_STATISTICS_TITLE);

@@ -75,8 +75,8 @@ public class MatchResults extends EntitledDataPanel
 
 	private TablePanel resultsPanel;
 	
-	public MatchResults(SplitMenuPanel container)
-	{	super(container);
+	public MatchResults(SplitMenuPanel container, int w, int h)
+	{	super(container,w,h);
 
 		// title
 		String txt = getConfiguration().getLanguage().getText(GuiTools.GAME_MATCH_RESULTS_TITLE);

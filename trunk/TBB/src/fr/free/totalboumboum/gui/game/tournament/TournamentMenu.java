@@ -110,11 +110,13 @@ buttonStatistics.setEnabled(false);
 		tournamentDescription = null;
 		AbstractTournament tournament = getConfiguration().getCurrentTournament();
 		if(tournament instanceof SequenceTournament)
-		{	tournamentDescription = new SequenceDescription(container);
+		{	int h = GuiTools.getSize(GuiTools.HORIZONTAL_SPLIT_DATA_PANEL_HEIGHT);
+			int w = GuiTools.getSize(GuiTools.HORIZONTAL_SPLIT_DATA_PANEL_WIDTH);
+			tournamentDescription = new SequenceDescription(container,w,h);
 			container.setDataPart(tournamentDescription);
 			dataPart = tournamentDescription;
-			tournamentResults = new SequenceResults(container);
-			tournamentStatistics = new TournamentStatistics(container);		
+			tournamentResults = new SequenceResults(container,w,h);
+			tournamentStatistics = new TournamentStatistics(container,w,h);		
 		}
 		else if(tournament instanceof CupTournament)
 		{
