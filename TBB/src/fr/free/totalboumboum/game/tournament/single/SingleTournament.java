@@ -98,7 +98,8 @@ public class SingleTournament extends AbstractTournament
 		stats.addStatisticMatch(statsMatch);
 		stats.computePoints(pointProcessor);
 		tournamentOver = true;
-		panel.tournamentOver();
+		if(panel!=null)
+			panel.tournamentOver();
 //NOTE ou bien : panel.matchOver();		
 	}
 	

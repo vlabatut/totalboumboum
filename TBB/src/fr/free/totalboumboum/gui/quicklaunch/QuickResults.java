@@ -127,10 +127,10 @@ public class QuickResults extends JPanel
 		{	String sc = null;
 			switch(round.getPlayMode())
 			{	case CROWN:
-					sc = "Crw";
+					sc = "Crowns";
 					break;
 				case PAINT:
-					sc = "Pnt";
+					sc = "Paints";
 					break;
 				case SURVIVAL:
 					sc = "Time";
@@ -138,12 +138,12 @@ public class QuickResults extends JPanel
 			}
 			String names[] = 
 			{	"Player",
-				"B",
-				"I",
-				"D",
-				"K",
+				"Bombs",
+				"Items",
+				"Deaths",
+				"Kills",
 				sc,
-				"Pts"
+				"Points"
 			};
 			for(int i=0;i<names.length;i++)
 			{	String text = names[i]; 

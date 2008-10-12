@@ -39,10 +39,14 @@ import javax.xml.parsers.ParserConfigurationException;
 
 import org.xml.sax.SAXException;
 
+import fr.free.totalboumboum.data.configuration.Configuration;
 import fr.free.totalboumboum.data.profile.Portraits;
+import fr.free.totalboumboum.game.tournament.AbstractTournament;
+import fr.free.totalboumboum.game.tournament.single.SingleTournament;
 import fr.free.totalboumboum.gui.common.MenuContainer;
 import fr.free.totalboumboum.gui.common.MenuPanel;
 import fr.free.totalboumboum.gui.common.SimpleMenuPanel;
+import fr.free.totalboumboum.gui.game.match.MatchSplitPanel;
 import fr.free.totalboumboum.gui.menus.tournament.TournamentMain;
 import fr.free.totalboumboum.gui.options.OptionsMenu;
 import fr.free.totalboumboum.gui.tools.GuiTools;
@@ -56,6 +60,7 @@ public class MainMenu extends SimpleMenuPanel
 
 	private MenuPanel tournamentMainPanel;
 	private MenuPanel optionsMenuPanel;
+	private MenuPanel quickmatchGamePanel;
 	
 	private JButton buttonOptions;
 	private JButton buttonProfiles;
@@ -65,7 +70,7 @@ public class MainMenu extends SimpleMenuPanel
 	private JButton buttonTournament;
 	private JButton buttonQuickMatch;
 	
-	public MainMenu(MenuContainer container, MenuPanel parent) throws IllegalArgumentException, SecurityException, ParserConfigurationException, SAXException, IOException, IllegalAccessException, NoSuchFieldException
+	public MainMenu(MenuContainer container, MenuPanel parent) throws IllegalArgumentException, SecurityException, ParserConfigurationException, SAXException, IOException, IllegalAccessException, NoSuchFieldException, ClassNotFoundException
 	{	super(container, parent);
 		// layout
 		BoxLayout layout = new BoxLayout(this,BoxLayout.PAGE_AXIS); 
@@ -75,7 +80,6 @@ public class MainMenu extends SimpleMenuPanel
 		// background
 		image = getConfiguration().getBackground();
 		// panels
-		tournamentMainPanel = new TournamentMain(getContainer(),this);
 		optionsMenuPanel = new OptionsMenu(getContainer(),this);
 		
 		// buttons
@@ -119,14 +123,82 @@ buttonLevels.setEnabled(false);
 		{	
 	    }
 		else if(e.getActionCommand().equals(GuiTools.MAIN_MENU_BUTTON_TOURNAMENT))
-		{	replaceWith(tournamentMainPanel);
+		{	if(tournamentMainPanel==null)
+			{	try
+				{	Configuration config = getConfiguration().getGameConfiguration();
+					config.loadLastTournament();
+					tournamentMainPanel = new TournamentMain(getContainer(),this);
+				}
+				catch (ParserConfigurationException e1)
+				{	e1.printStackTrace();
+				}
+				catch (SAXException e1)
+				{	e1.printStackTrace();
+				}
+				catch (IOException e1)
+				{	e1.printStackTrace();
+				}
+				catch (ClassNotFoundException e1)
+				{	e1.printStackTrace();
+				}
+				catch (IllegalArgumentException e1)
+				{	e1.printStackTrace();
+				}
+				catch (SecurityException e1)
+				{	e1.printStackTrace();
+				}
+				catch (IllegalAccessException e1)
+				{	e1.printStackTrace();
+				}
+				catch (NoSuchFieldException e1)
+				{	e1.printStackTrace();
+				}
+			}
+			replaceWith(tournamentMainPanel);
 	    }
 		else if(e.getActionCommand().equals(GuiTools.MENU_MAIN_BUTTON_QUICKMATCH))
-		{	
+		{	if(quickmatchGamePanel==null)
+			{	Configuration config = getConfiguration().getGameConfiguration();
+				try
+				{	config.loadQuickmatch();
+					AbstractTournament tournament = config.getTournament();
+					tournament.init();
+					tournament.progress();
+				}
+				catch (ParserConfigurationException e1)
+				{	e1.printStackTrace();
+				}
+				catch (SAXException e1)
+				{	e1.printStackTrace();
+				}
+				catch (IOException e1)
+				{	e1.printStackTrace();
+				}
+				catch (ClassNotFoundException e1)
+				{	e1.printStackTrace();
+				}
+				catch (IllegalArgumentException e1)
+				{	e1.printStackTrace();
+				}
+				catch (SecurityException e1)
+				{	e1.printStackTrace();
+				}
+				catch (IllegalAccessException e1)
+				{	e1.printStackTrace();
+				}
+				catch (NoSuchFieldException e1)
+				{	e1.printStackTrace();
+				}
+				quickmatchGamePanel = new MatchSplitPanel(getContainer(),this);
+			}			
+			replaceWith(quickmatchGamePanel);
 	    }
 	}
 	
 	public void refresh()
-	{	// nothing to do here
+	{	if(tournamentMainPanel!=null)
+			buttonQuickMatch.setEnabled(false);
+		if(quickmatchGamePanel!=null)
+			buttonTournament.setEnabled(false);
 	}
 }
