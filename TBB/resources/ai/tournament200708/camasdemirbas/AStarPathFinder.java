@@ -5,8 +5,6 @@ import java.util.Collections;
 
 import tournament200708.camasdemirbas.ManhattanHeuristic;
 
-
-
 /**
  * Une implémentation de viseur de chemin 
  * qui utilise l'AStar l'algorithme basé heuristique déterminer un chemin. 
@@ -267,7 +265,6 @@ public class AStarPathFinder implements PathFinder {
 	 */
 	private class SortedList {
 		/** La liste d'éléments */
-		@SuppressWarnings("unchecked")
 		private ArrayList list = new ArrayList();
 		
 		/**
