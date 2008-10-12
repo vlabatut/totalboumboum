@@ -21,17 +21,14 @@ package fr.free.totalboumboum.engine.container.theme;
  * 
  */
 
-import java.awt.image.BufferedImage;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map.Entry;
 
-import fr.free.totalboumboum.engine.content.feature.anime.AnimeGesture;
 import fr.free.totalboumboum.engine.content.sprite.block.Block;
 import fr.free.totalboumboum.engine.content.sprite.block.BlockFactory;
 import fr.free.totalboumboum.engine.content.sprite.floor.Floor;
 import fr.free.totalboumboum.engine.content.sprite.floor.FloorFactory;
-
 
 public class Theme
 {	
@@ -63,7 +60,6 @@ public class Theme
 	
 	public Block makeBlock(String name)
 	{	Block result = blocks.get(name).makeSprite();
-//NOTE dans ce type de méthode, il faut tester si le nom passé en paramètre a bien été trouvé !	
 		result.initGesture();
 		return result;
 	}

@@ -65,7 +65,7 @@ public class KilicPala extends ArtificialIntelligence
 					}
 				}
 				catch (Exception e) {
-					// TODO: handle exception
+					
 				}
 			}
 			//si shrink est en haut et en droite
@@ -94,7 +94,7 @@ public class KilicPala extends ArtificialIntelligence
 					}
 				}
 				catch (Exception e) {
-					// TODO: handle exception
+					
 				}
 			}
 			//si shrink est en bas et a droite
@@ -123,7 +123,7 @@ public class KilicPala extends ArtificialIntelligence
 					}
 				}
 				catch (Exception e) {
-					// TODO: handle exception
+					
 				}
 			}
 			//si shrink est en bas et a gauche
@@ -152,7 +152,7 @@ public class KilicPala extends ArtificialIntelligence
 					}
 				}
 				catch (Exception e) {
-					// TODO: handle exception
+					
 				}
 			}
 			//comportement au hasard
@@ -279,7 +279,7 @@ public class KilicPala extends ArtificialIntelligence
 					}
 				}
 				catch (Exception e) {
-					// TODO: handle exception
+					
 				}
 			}
 			//si je suis proche de deux bombes
@@ -305,7 +305,7 @@ public class KilicPala extends ArtificialIntelligence
 					}	
 				}
 				catch (Exception e) {
-					// TODO: handle exception
+					
 				}
 			}
 			else try
@@ -333,7 +333,7 @@ public class KilicPala extends ArtificialIntelligence
 				}
 			}
 			catch (Exception e) {
-				// TODO: handle exception
+				
 			}
 		}
 		//si je suis a cote de softwall
@@ -708,7 +708,7 @@ public class KilicPala extends ArtificialIntelligence
 					result++;
 				}
 				catch (Exception e) {
-					// TODO: handle exception
+					
 				}
 			}
 		

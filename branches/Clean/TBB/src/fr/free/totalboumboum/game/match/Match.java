@@ -39,7 +39,6 @@ import fr.free.totalboumboum.data.statistics.StatisticMatch;
 import fr.free.totalboumboum.data.statistics.StatisticRound;
 import fr.free.totalboumboum.game.limit.Limits;
 import fr.free.totalboumboum.game.limit.MatchLimit;
-import fr.free.totalboumboum.game.points.PointsTotal;
 import fr.free.totalboumboum.game.points.PointsProcessor;
 import fr.free.totalboumboum.game.round.Round;
 import fr.free.totalboumboum.game.tournament.AbstractTournament;
@@ -76,7 +75,7 @@ public class Match
     	}
     	
 		
-		// NOTE vérifier si le nombre de joueurs sélectionnés correspond
+		// 
 		this.profiles.addAll(profiles); 
 		iterator = rounds.iterator();
 		stats.init(this);
@@ -145,8 +144,6 @@ public class Match
 	
 	public void updateMinPlayerNumber()
 	{	
-		// TODO charger partiellement tous les matches 
-		// pour déterminer le nombre de joueurs nécessaire
 	}
 	public int getMinPlayerNumber()
 	{	return minPlayerNumber;			

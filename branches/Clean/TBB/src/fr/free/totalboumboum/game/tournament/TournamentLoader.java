@@ -28,7 +28,6 @@ import java.util.List;
 
 import javax.xml.parsers.ParserConfigurationException;
 
-import org.jdom.Attribute;
 import org.jdom.Element;
 import org.xml.sax.SAXException;
 
@@ -65,6 +64,7 @@ public class TournamentLoader
 		return result;
     }
 	
+	@SuppressWarnings("unchecked")
 	private static AbstractTournament loadTournamentElement(String path, Element root, Configuration configuration) throws ParserConfigurationException, SAXException, IOException, ClassNotFoundException
 	{	// init
 		AbstractTournament result = null;

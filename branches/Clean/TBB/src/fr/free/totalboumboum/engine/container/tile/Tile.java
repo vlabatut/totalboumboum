@@ -30,18 +30,13 @@ import java.awt.image.BufferedImage;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.Iterator;
-import java.util.Map.Entry;
 
 import fr.free.totalboumboum.data.configuration.Configuration;
 import fr.free.totalboumboum.engine.container.level.Level;
 import fr.free.totalboumboum.engine.content.feature.Direction;
 import fr.free.totalboumboum.engine.content.feature.ability.AbstractAbility;
-import fr.free.totalboumboum.engine.content.feature.ability.ActionAbility;
 import fr.free.totalboumboum.engine.content.feature.ability.StateAbility;
-import fr.free.totalboumboum.engine.content.feature.action.GeneralAction;
-import fr.free.totalboumboum.engine.content.feature.anime.AnimeGesture;
 import fr.free.totalboumboum.engine.content.feature.event.AbstractEvent;
-import fr.free.totalboumboum.engine.content.feature.permission.ThirdPermission;
 import fr.free.totalboumboum.engine.content.sprite.Sprite;
 import fr.free.totalboumboum.engine.content.sprite.block.Block;
 import fr.free.totalboumboum.engine.content.sprite.bomb.Bomb;
@@ -49,8 +44,6 @@ import fr.free.totalboumboum.engine.content.sprite.fire.Fire;
 import fr.free.totalboumboum.engine.content.sprite.floor.Floor;
 import fr.free.totalboumboum.engine.content.sprite.hero.Hero;
 import fr.free.totalboumboum.engine.content.sprite.item.Item;
-
-
 
 public class Tile
 {	private int line,col;
@@ -99,15 +92,15 @@ result = level.getTile(x, y)==this;
 		{	int i=0;
 			while(i<heroes.size())
 			{	Hero temp = heroes.get(i);
-				double prevPosX = temp.getCurrentPosX();
-				double prevPosY = temp.getCurrentPosY();
+				//double prevPosX = temp.getCurrentPosX();
+				//double prevPosY = temp.getCurrentPosY();
 				temp.update();
 				double tempPosX = temp.getCurrentPosX();
 				double tempPosY = temp.getCurrentPosY();
 				if(temp.isToBeRemovedFromTile())
 				{	heroes.remove(i);
 					level.removeSprite(temp);
-					//NOTE à compléter (défaite)
+					//
 				}
 				else if(!containsPoint(tempPosX, tempPosY))
 				{	Tile newTile = level.getTile(tempPosX,tempPosY);
@@ -125,15 +118,14 @@ result = level.getTile(x, y)==this;
 		{	int i=0;
 			while(i<bombs.size())
 			{	Bomb temp = bombs.get(i);
-				double prevPosX = temp.getCurrentPosX();
-				double prevPosY = temp.getCurrentPosY();
+				//double prevPosX = temp.getCurrentPosX();
+				//double prevPosY = temp.getCurrentPosY();
 				temp.update();
 				double tempPosX = temp.getCurrentPosX();
 				double tempPosY = temp.getCurrentPosY();
 				if(temp.isToBeRemovedFromTile())
 				{	bombs.remove(i);
 					level.removeSprite(temp);
-					//NOTE à compléter (?)
 				}
 				else if(!containsPoint(tempPosX, tempPosY))
 				{	Tile newTile = level.getTile(tempPosX,tempPosY);
@@ -155,7 +147,6 @@ result = level.getTile(x, y)==this;
 				if(temp.isToBeRemovedFromTile())
 				{	fires.remove(i);
 					level.removeSprite(temp);
-					//NOTE à compléter (?)
 				}
 				i++;
 			}
@@ -166,7 +157,7 @@ result = level.getTile(x, y)==this;
 			if(block.isToBeRemovedFromTile())
 			{	block = null;
 				level.removeSprite(block);
-			//NOTE à compléter (?)
+			//
 			}
 		}		
 		// item
@@ -175,7 +166,7 @@ result = level.getTile(x, y)==this;
 			if(item.isToBeRemovedFromTile())
 			{	item = null;
 				level.removeSprite(item);
-			//NOTE à compléter (?)
+			//
 			}
 		}		
 	}
@@ -312,7 +303,7 @@ if(fires.size()>0)
 	{	if(block!=null)
 		{	AbstractAbility temp = block.getAbility(StateAbility.SPRITE_FLAT);
 			if(block!=null && ((temp!=null && temp.isActive()) == flat) && (block.isOnGround() == onGround))
-				if(shadow && line!=level.getGlobalHeight()-1) //NOTE a préciser : permet d'éviter que l'ombre de la dernière ligne de blocs soit portée sur la première
+				if(shadow && line!=level.getGlobalHeight()-1) //
 					drawShadow(g,block);
 				else
 					drawSprite(g, block);

@@ -142,13 +142,11 @@ public enum Score
 		return result;
 	}
 
-//TODO trouver un moyen de gérer TIME en temps réel...
 	public long[] processTime(StatisticRound stats, StatisticEvent event)
 	{	// init
 		ArrayList<String> players = stats.getPlayers();
 		long result[] = stats.getScores(this);
 		// processing
-		//NOTE pour les differents playModes, il faudra surement distinguer mort du joueur (burn, shrink ou autre) et élimination définitive (plus aucun controle ou vengence)
 		if(event.getAction() == StatisticAction.KILL_PLAYER)
 		{	int index = players.indexOf(event.getTarget());
 			long time = event.getTime();

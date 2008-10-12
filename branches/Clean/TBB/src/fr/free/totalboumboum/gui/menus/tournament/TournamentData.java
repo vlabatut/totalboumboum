@@ -73,7 +73,7 @@ public class TournamentData extends InnerDataPanel
 	}
 
 	public void refresh()
-	{	// NOTE à compléter
+	{	// 
 	}
 
 	@Override

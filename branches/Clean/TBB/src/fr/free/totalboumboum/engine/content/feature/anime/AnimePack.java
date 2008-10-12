@@ -29,10 +29,7 @@ import java.util.Map.Entry;
 
 import fr.free.totalboumboum.data.profile.PredefinedColor;
 import fr.free.totalboumboum.engine.content.feature.Direction;
-import fr.free.totalboumboum.engine.content.feature.ability.AbstractAbility;
 import fr.free.totalboumboum.engine.content.feature.anime.AnimeDirection;
-
-
 
 public class AnimePack
 {	private HashMap<String,AnimeGesture> gestures;
@@ -125,7 +122,8 @@ public class AnimePack
 			// images
 			{	Iterator<BufferedImage> it = images.iterator();
 				while(it.hasNext())
-				{	BufferedImage temp = it.next();
+				{	@SuppressWarnings("unused")
+				BufferedImage temp = it.next();
 					it.remove();
 				}
 			}

@@ -21,16 +21,7 @@ package fr.free.totalboumboum.engine.loop;
  * 
  */
 
-import java.awt.AlphaComposite;
-import java.awt.Dimension;
 import java.awt.Graphics;
-import java.awt.Graphics2D;
-import java.awt.GraphicsConfiguration;
-import java.awt.GraphicsEnvironment;
-import java.awt.Image;
-import java.awt.Toolkit;
-import java.awt.image.BufferedImage;
-import java.awt.image.VolatileImage;
 import java.io.File;
 import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
@@ -40,12 +31,9 @@ import java.util.concurrent.locks.Condition;
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
 
-import javax.swing.SwingUtilities;
 import javax.xml.parsers.ParserConfigurationException;
 
 import org.xml.sax.SAXException;
-
-import sun.awt.image.OffScreenImage;
 
 import fr.free.totalboumboum.data.configuration.Configuration;
 import fr.free.totalboumboum.data.configuration.GameConstants;
@@ -55,8 +43,6 @@ import fr.free.totalboumboum.engine.container.itemset.Itemset;
 import fr.free.totalboumboum.engine.container.level.HollowLevel;
 import fr.free.totalboumboum.engine.container.level.Level;
 import fr.free.totalboumboum.engine.container.level.Players;
-import fr.free.totalboumboum.engine.content.feature.Direction;
-import fr.free.totalboumboum.engine.content.feature.GestureConstants;
 import fr.free.totalboumboum.engine.content.feature.ability.AbilityLoader;
 import fr.free.totalboumboum.engine.content.feature.ability.AbstractAbility;
 import fr.free.totalboumboum.engine.content.feature.ability.StateAbility;
@@ -298,7 +284,7 @@ public class Loop implements Runnable
 		}
 		// waking the process thread up
 		cond.signal();
-		loadLock.unlock();	//NOTE modif	
+		loadLock.unlock();	//	
 	}
 	public LoopRenderPanel getPanel()
 	{	return panel;
@@ -317,6 +303,7 @@ public class Loop implements Runnable
 	 * no. of frames that can be skipped in any one animation loop
 	 * i.e the games state is updated but not rendered
 	 */ 
+	@SuppressWarnings("unused")
 	private static int MAX_FRAME_SKIPS = 5;
 	private long milliPeriod;
 //	private long nanoPeriod;
@@ -416,7 +403,7 @@ public class Loop implements Runnable
 		catch (NoSuchMethodException e)
 		{	e.printStackTrace();
 		}
-		loadLock.unlock(); //NOTE modif
+		loadLock.unlock(); //
 	}
 	
 long totalUpdateTime=0;

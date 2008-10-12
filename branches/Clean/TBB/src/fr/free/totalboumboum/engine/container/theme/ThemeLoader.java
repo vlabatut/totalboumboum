@@ -23,7 +23,6 @@ package fr.free.totalboumboum.engine.container.theme;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
@@ -41,7 +40,6 @@ import fr.free.totalboumboum.engine.content.sprite.floor.FloorFactory;
 import fr.free.totalboumboum.engine.content.sprite.floor.FloorFactoryLoader;
 import fr.free.totalboumboum.tools.FileTools;
 import fr.free.totalboumboum.tools.XmlTools;
-
 
 public class ThemeLoader
 {	
@@ -78,7 +76,8 @@ public class ThemeLoader
 		return result;
 	}
 
-    private static HashMap<String,BlockFactory> loadBlocksElement(Element root, String individualFolder, Level level) throws IOException, ParserConfigurationException, SAXException, ClassNotFoundException
+    @SuppressWarnings("unchecked")
+	private static HashMap<String,BlockFactory> loadBlocksElement(Element root, String individualFolder, Level level) throws IOException, ParserConfigurationException, SAXException, ClassNotFoundException
     {	HashMap<String,BlockFactory> result = new HashMap<String,BlockFactory>();
     	// folder
     	String localFilePath = individualFolder;
@@ -105,7 +104,8 @@ public class ThemeLoader
 		return result;
     }
     
-    private static HashMap<String,BlockFactory> loadGroupElement(Element root, String individualFolder, Level level) throws IOException, ParserConfigurationException, SAXException, ClassNotFoundException
+    @SuppressWarnings("unchecked")
+	private static HashMap<String,BlockFactory> loadGroupElement(Element root, String individualFolder, Level level) throws IOException, ParserConfigurationException, SAXException, ClassNotFoundException
     {	HashMap<String,BlockFactory> result = new HashMap<String,BlockFactory>();
 		// folder
     	String localFilePath = individualFolder;
@@ -139,7 +139,8 @@ public class ThemeLoader
 		blockFactories.put(name,blockFactory);
     }
 
-    private static HashMap<String,FloorFactory> loadFloorsElement(Element root, String individualFolder, Level level) throws IOException, ParserConfigurationException, SAXException, ClassNotFoundException
+    @SuppressWarnings("unchecked")
+	private static HashMap<String,FloorFactory> loadFloorsElement(Element root, String individualFolder, Level level) throws IOException, ParserConfigurationException, SAXException, ClassNotFoundException
     {	HashMap<String,FloorFactory> result = new HashMap<String,FloorFactory>();
 		// folder
     	String localFilePath = individualFolder;

@@ -23,7 +23,6 @@ package fr.free.totalboumboum.game.points;
 
 import java.text.NumberFormat;
 
-import fr.free.totalboumboum.data.statistics.Score;
 import fr.free.totalboumboum.data.statistics.StatisticBase;
 
 public class PointsConstant extends PointsProcessor implements PPConstant

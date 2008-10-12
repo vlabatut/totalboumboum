@@ -62,7 +62,8 @@ public class ZoneLoader
 		return result;
     }
         
-    private static void loadMatrixElement(Element root, int globalHeight, int globalWidth, Zone result)
+    @SuppressWarnings("unchecked")
+	private static void loadMatrixElement(Element root, int globalHeight, int globalWidth, Zone result)
     {	// matrix
     	HashMap<String,VariableTile> variableTiles = result.getVariableTiles();
     	List<Element> elements = root.getChildren(XmlTools.ELT_LINE);
@@ -103,7 +104,8 @@ public class ZoneLoader
     	}
     }
     
-    public static String[] loadBasicTileElement(Element root)
+    @SuppressWarnings("unchecked")
+	public static String[] loadBasicTileElement(Element root)
     {	String[] result = new String[3];
 		// floor
 		List<Element> elementsT = root.getChildren(XmlTools.ELT_FLOOR);

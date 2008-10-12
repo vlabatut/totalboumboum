@@ -24,7 +24,6 @@ package fr.free.totalboumboum.engine.container.itemset;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
@@ -35,17 +34,9 @@ import org.jdom.Attribute;
 import org.jdom.Element;
 import org.xml.sax.SAXException;
 
-import fr.free.totalboumboum.engine.container.level.Level;
-import fr.free.totalboumboum.engine.content.feature.ability.AbilityLoader;
-import fr.free.totalboumboum.engine.content.feature.ability.AbstractAbility;
 import fr.free.totalboumboum.engine.content.sprite.SpriteFactoryLoader;
-import fr.free.totalboumboum.engine.content.sprite.item.ItemFactory;
-import fr.free.totalboumboum.engine.content.sprite.item.ItemFactoryLoader;
-import fr.free.totalboumboum.engine.loop.Loop;
 import fr.free.totalboumboum.tools.FileTools;
-import fr.free.totalboumboum.tools.ImageTools;
 import fr.free.totalboumboum.tools.XmlTools;
-
 
 public class ItemsetPreviewer
 {	
@@ -63,7 +54,8 @@ public class ItemsetPreviewer
 		return result;
     }
     
-    private static HashMap<String,BufferedImage> previewItemsetElement(Element root, String folder) throws IOException, ParserConfigurationException, SAXException, ClassNotFoundException
+    @SuppressWarnings("unchecked")
+	private static HashMap<String,BufferedImage> previewItemsetElement(Element root, String folder) throws IOException, ParserConfigurationException, SAXException, ClassNotFoundException
 	{	HashMap<String,BufferedImage> result = new HashMap<String,BufferedImage>();
     	String individualFolder = folder;
 		List<Element> items = root.getChildren(XmlTools.ELT_ITEM);	

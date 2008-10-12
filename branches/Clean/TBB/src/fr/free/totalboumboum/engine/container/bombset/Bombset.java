@@ -28,8 +28,6 @@ import fr.free.totalboumboum.engine.content.feature.ability.StateAbility;
 import fr.free.totalboumboum.engine.content.sprite.Sprite;
 import fr.free.totalboumboum.engine.content.sprite.bomb.Bomb;
 import fr.free.totalboumboum.engine.content.sprite.bomb.BombFactory;
-import fr.free.totalboumboum.engine.content.sprite.hero.Hero;
-
 
 public class Bombset
 {	private ArrayList<BombFactory> bombFactories;
@@ -40,9 +38,11 @@ public class Bombset
 		requiredAbilities = new ArrayList<ArrayList<StateAbility>>();
 	}
 	
+	@SuppressWarnings("unused")
 	private void setBombFactories(ArrayList<BombFactory> bombFactories)
 	{	this.bombFactories = bombFactories;
 	}
+	@SuppressWarnings("unused")
 	private void setRequiredAbilities(ArrayList<ArrayList<StateAbility>> requiredAbilities)
 	{	this.requiredAbilities = requiredAbilities;
 	}

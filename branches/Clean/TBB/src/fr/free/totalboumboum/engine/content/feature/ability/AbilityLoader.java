@@ -33,14 +33,11 @@ import org.jdom.Attribute;
 import org.jdom.Element;
 import org.xml.sax.SAXException;
 
-import fr.free.totalboumboum.data.configuration.Configuration;
 import fr.free.totalboumboum.engine.container.level.Level;
 import fr.free.totalboumboum.engine.content.feature.action.GeneralAction;
 import fr.free.totalboumboum.engine.content.feature.action.GeneralActionLoader;
-import fr.free.totalboumboum.engine.loop.Loop;
 import fr.free.totalboumboum.tools.FileTools;
 import fr.free.totalboumboum.tools.XmlTools;
-
 
 public class AbilityLoader
 {	
@@ -56,7 +53,7 @@ public class AbilityLoader
 		String strengthStr = root.getAttribute(XmlTools.ATT_STRENGTH).getValue().trim();
 		float strength;
 		if(strengthStr.equals(AbstractAbility.MAXIMUM_VALUE))
-			strength = Float.MAX_VALUE; //NOTE format de données à inclure dans le XSD
+			strength = Float.MAX_VALUE; //
 		else
 			strength = Float.parseFloat(strengthStr);
     	// frame
@@ -88,7 +85,8 @@ public class AbilityLoader
 		return result;
     }
     
-    public static ArrayList<AbstractAbility> loadAbilitiesElement(Element root, Level level) throws ClassNotFoundException
+    @SuppressWarnings("unchecked")
+	public static ArrayList<AbstractAbility> loadAbilitiesElement(Element root, Level level) throws ClassNotFoundException
     {	ArrayList<AbstractAbility> result = new ArrayList<AbstractAbility>();
     	List<Element> abilitiesElts = root.getChildren(XmlTools.ELT_ABILITY);
 		Iterator<Element> i = abilitiesElts.iterator();

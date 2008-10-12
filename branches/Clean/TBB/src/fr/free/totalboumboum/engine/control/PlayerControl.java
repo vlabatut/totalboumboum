@@ -30,9 +30,6 @@ import fr.free.totalboumboum.data.profile.ControlSettings;
 import fr.free.totalboumboum.engine.content.sprite.Sprite;
 import fr.free.totalboumboum.engine.loop.Loop;
 import fr.free.totalboumboum.engine.player.Player;
-import fr.free.totalboumboum.game.round.Round;
-
-
 
 public class PlayerControl implements KeyListener
 {	
@@ -85,7 +82,7 @@ public class PlayerControl implements KeyListener
 
 	@Override
 	public void keyTyped(KeyEvent arg0)
-	{	// NOTE a priori inutile ici
+	{	// 
 	}
 	
 	private boolean finished = false;

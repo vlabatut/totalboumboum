@@ -24,8 +24,6 @@ package fr.free.totalboumboum.game.points;
 import java.util.ArrayList;
 import java.util.Iterator;
 
-import sun.font.EAttribute;
-
 import fr.free.totalboumboum.data.statistics.StatisticBase;
 
 public class PointsRankings extends PointsProcessor implements PPFunction

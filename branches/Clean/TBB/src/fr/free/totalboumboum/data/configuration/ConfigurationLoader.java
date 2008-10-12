@@ -23,7 +23,6 @@ package fr.free.totalboumboum.data.configuration;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
@@ -32,18 +31,6 @@ import javax.xml.parsers.ParserConfigurationException;
 import org.jdom.Element;
 import org.xml.sax.SAXException;
 
-import fr.free.totalboumboum.game.limit.LimitConfrontation;
-import fr.free.totalboumboum.game.limit.Limits;
-import fr.free.totalboumboum.game.limit.MatchLimit;
-import fr.free.totalboumboum.game.match.Match;
-import fr.free.totalboumboum.game.match.MatchLoader;
-import fr.free.totalboumboum.game.points.PointsProcessor;
-import fr.free.totalboumboum.game.points.PointsTotal;
-import fr.free.totalboumboum.game.round.Round;
-import fr.free.totalboumboum.game.round.RoundLoader;
-import fr.free.totalboumboum.game.tournament.AbstractTournament;
-import fr.free.totalboumboum.game.tournament.TournamentLoader;
-import fr.free.totalboumboum.game.tournament.single.SingleTournament;
 import fr.free.totalboumboum.tools.FileTools;
 import fr.free.totalboumboum.tools.XmlTools;
 
@@ -124,6 +111,7 @@ public class ConfigurationLoader
 		result.setPanelDimension(width, height);
 	}
 	
+	@SuppressWarnings("unchecked")
 	private static void loadProfilesElement(Element root, Configuration result) throws IllegalArgumentException, SecurityException, ParserConfigurationException, SAXException, IOException, IllegalAccessException, NoSuchFieldException
 	{	List<Element> elements = root.getChildren(XmlTools.ELT_PROFILE);
 		Iterator<Element> i = elements.iterator();

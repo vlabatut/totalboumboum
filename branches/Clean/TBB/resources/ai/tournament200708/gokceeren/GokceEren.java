@@ -34,7 +34,6 @@ public class GokceEren extends ArtificialIntelligence {
 	int i=0;
 	public GokceEren() {
 			super("GokceEren");
-		// TODO Auto-generated constructor stub
 	}
 
 	@Override

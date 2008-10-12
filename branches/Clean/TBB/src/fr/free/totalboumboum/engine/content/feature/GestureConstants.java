@@ -53,5 +53,5 @@ public class GestureConstants
 //	public static final String THROWN = "thrown";
 	public static final String WAITING = "waiting";
 	public static final String WALKING = "walking";
-	//TODO synchroniser avec les AIStateName
+	//
 }

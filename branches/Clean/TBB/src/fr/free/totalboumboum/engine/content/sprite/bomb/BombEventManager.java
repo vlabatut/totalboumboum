@@ -21,7 +21,6 @@ package fr.free.totalboumboum.engine.content.sprite.bomb;
  * 
  */
 
-import java.awt.image.BufferedImage;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.TreeSet;
@@ -33,14 +32,12 @@ import fr.free.totalboumboum.engine.content.feature.ability.ActionAbility;
 import fr.free.totalboumboum.engine.content.feature.ability.StateAbility;
 import fr.free.totalboumboum.engine.content.feature.action.AbstractAction;
 import fr.free.totalboumboum.engine.content.feature.action.SpecificAction;
-import fr.free.totalboumboum.engine.content.feature.anime.AnimeGesture;
 import fr.free.totalboumboum.engine.content.feature.event.ActionEvent;
 import fr.free.totalboumboum.engine.content.feature.event.ControlEvent;
 import fr.free.totalboumboum.engine.content.feature.event.EngineEvent;
 import fr.free.totalboumboum.engine.content.manager.DelayManager;
 import fr.free.totalboumboum.engine.content.manager.EventManager;
 import fr.free.totalboumboum.engine.content.sprite.Sprite;
-
 
 public class BombEventManager extends EventManager
 {	
@@ -318,8 +315,6 @@ public class BombEventManager extends EventManager
 			}
 			else
 			{
-				//NOTE prévoir le cas où la bombe ne peut pas péter, il faut le remettre au prochain instant
-				// sauf que certains états prévoient une réinit du timer au changement d'état (ex : bouncing)
 			}
 		}
 		// explosion-caused explosion

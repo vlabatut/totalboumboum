@@ -21,12 +21,6 @@ package fr.free.totalboumboum.engine.content.feature.permission;
  * 
  */
 
-import java.awt.image.BufferedImage;
-import java.util.Iterator;
-import java.util.Map.Entry;
-
-import fr.free.totalboumboum.engine.content.feature.anime.AnimeGesture;
-
 public abstract class AbstractPermission
 {	
 	protected String gestureName; //debug

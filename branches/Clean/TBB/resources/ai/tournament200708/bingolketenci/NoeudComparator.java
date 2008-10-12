@@ -32,7 +32,6 @@ public class NoeudComparator implements Comparator<Noeud> {
 	 */
 	@Override
 	public int compare(Noeud noeud1, Noeud noeud2) {
-		// TODO Auto-generated method stub
 		int resultat;
 	//somme de l'heuristique et du cout pour chaque noeud
 	//on va utiliser pour l'algorithme de A_étoile

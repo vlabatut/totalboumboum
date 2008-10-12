@@ -23,7 +23,6 @@ package fr.free.totalboumboum.game.tournament.single;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.ArrayList;
 
 import javax.xml.parsers.ParserConfigurationException;
 

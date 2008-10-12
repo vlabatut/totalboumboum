@@ -21,10 +21,8 @@ package fr.free.totalboumboum.engine.content.feature.ability;
  * 
  */
 
-import fr.free.totalboumboum.data.configuration.Configuration;
 import fr.free.totalboumboum.engine.container.level.Level;
 import fr.free.totalboumboum.engine.content.feature.action.GeneralAction;
-import fr.free.totalboumboum.engine.loop.Loop;
 
 public class ActionAbility extends AbstractAbility
 {	
@@ -55,7 +53,7 @@ public class ActionAbility extends AbstractAbility
 */	
 	public AbstractAbility copy()
 	{	ActionAbility result;
-		GeneralAction a = action; //NOTE à copier ? (non)
+		GeneralAction a = action; //
 		result = new ActionAbility(a,level);
 		result.setStrength(strength);
 		result.setUses(uses);

@@ -28,27 +28,21 @@ import java.util.ArrayList;
 import javax.xml.parsers.ParserConfigurationException;
 
 
-import org.jdom.Attribute;
 import org.jdom.Element;
 import org.xml.sax.SAXException;
 
-import fr.free.totalboumboum.data.configuration.Configuration;
 import fr.free.totalboumboum.engine.container.bombset.Bombset;
 import fr.free.totalboumboum.engine.container.level.Level;
 import fr.free.totalboumboum.engine.content.feature.ability.AbilityLoader;
 import fr.free.totalboumboum.engine.content.feature.ability.AbstractAbility;
 import fr.free.totalboumboum.engine.content.feature.anime.AnimePack;
 import fr.free.totalboumboum.engine.content.feature.anime.AnimePackLoader;
-import fr.free.totalboumboum.engine.content.feature.explosion.Explosion;
 import fr.free.totalboumboum.engine.content.feature.permission.PermissionPack;
 import fr.free.totalboumboum.engine.content.feature.permission.PermissionPackLoader;
 import fr.free.totalboumboum.engine.content.feature.trajectory.TrajectoryPack;
 import fr.free.totalboumboum.engine.content.feature.trajectory.TrajectoryPackLoader;
 import fr.free.totalboumboum.engine.content.sprite.SpriteFactoryLoader;
-import fr.free.totalboumboum.engine.content.sprite.fire.FireFactory;
-import fr.free.totalboumboum.engine.loop.Loop;
 import fr.free.totalboumboum.tools.FileTools;
-
 
 public class FloorFactoryLoader extends SpriteFactoryLoader
 {	

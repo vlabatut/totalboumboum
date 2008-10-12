@@ -23,34 +23,17 @@ package fr.free.totalboumboum.engine.container.level;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 
 import javax.xml.parsers.ParserConfigurationException;
 
-import org.jdom.Attribute;
 import org.jdom.Element;
 import org.xml.sax.SAXException;
 
-import fr.free.totalboumboum.data.configuration.Configuration;
-import fr.free.totalboumboum.engine.container.bombset.Bombset;
-import fr.free.totalboumboum.engine.container.bombset.BombsetLoader;
-import fr.free.totalboumboum.engine.container.itemset.Itemset;
-import fr.free.totalboumboum.engine.container.itemset.ItemsetLoader;
-import fr.free.totalboumboum.engine.container.theme.Theme;
-import fr.free.totalboumboum.engine.container.theme.ThemeLoader;
-import fr.free.totalboumboum.engine.container.tile.ValueTile;
-import fr.free.totalboumboum.engine.container.tile.VariableTile;
-import fr.free.totalboumboum.engine.container.tile.VariableTilesLoader;
-import fr.free.totalboumboum.engine.loop.Loop;
-import fr.free.totalboumboum.engine.player.PlayerLocation;
-import fr.free.totalboumboum.game.round.Round;
 import fr.free.totalboumboum.tools.FileTools;
 import fr.free.totalboumboum.tools.XmlTools;
-
-
 
 public class PlayersPreviewer
 {	
@@ -76,7 +59,8 @@ public class PlayersPreviewer
     	previewItemsElement(element,result);
     }
     
-    private static void previewItemsElement(Element root, LevelPreview result)
+    @SuppressWarnings("unchecked")
+	private static void previewItemsElement(Element root, LevelPreview result)
     {	HashMap<String,Integer> initialItems = new HashMap<String, Integer>();
     	List<Element> elements = root.getChildren(XmlTools.ELT_ITEM);
 		Iterator<Element> i = elements.iterator();

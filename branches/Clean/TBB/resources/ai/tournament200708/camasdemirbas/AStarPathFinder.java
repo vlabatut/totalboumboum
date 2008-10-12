@@ -267,7 +267,6 @@ public class AStarPathFinder implements PathFinder {
 	 */
 	private class SortedList {
 		/** La liste d'éléments */
-		@SuppressWarnings("unchecked")
 		private ArrayList list = new ArrayList();
 		
 		/**

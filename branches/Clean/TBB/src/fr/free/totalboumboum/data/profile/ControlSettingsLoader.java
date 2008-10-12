@@ -24,13 +24,10 @@ package fr.free.totalboumboum.data.profile;
 import java.awt.event.KeyEvent;
 import java.io.File;
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.xml.parsers.ParserConfigurationException;
 
-
-import org.jdom.Attribute;
 import org.jdom.Element;
 import org.xml.sax.SAXException;
 
@@ -49,7 +46,8 @@ public class ControlSettingsLoader
 		return result;
 	}
 	
-    private static ControlSettings loadControlsElement(Element root) throws IllegalArgumentException, SecurityException, IllegalAccessException, NoSuchFieldException
+    @SuppressWarnings("unchecked")
+	private static ControlSettings loadControlsElement(Element root) throws IllegalArgumentException, SecurityException, IllegalAccessException, NoSuchFieldException
 	{	ControlSettings result = new ControlSettings();
     	List<Element> eventsList = root.getChildren(XmlTools.ELT_EVENT);
 		for(int i=0;i<eventsList.size();i++)

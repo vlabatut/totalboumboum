@@ -173,7 +173,7 @@ public class QuickFrame extends JFrame implements WindowListener,LoopRenderPanel
 	public void paintScreen()
 	{	Graphics g = bufferStrategy.getDrawGraphics();
 		// draw stuff in the buffer
-//NOTE: draw background?	
+//	
 		loop.drawLevel(g);
 		g.dispose();
 		// copy the buffer on the panel

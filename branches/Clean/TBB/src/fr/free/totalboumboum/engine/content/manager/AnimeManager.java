@@ -24,11 +24,8 @@ package fr.free.totalboumboum.engine.content.manager;
 import java.awt.image.BufferedImage;
 import java.util.Iterator;
 
-import fr.free.totalboumboum.data.configuration.Configuration;
 import fr.free.totalboumboum.data.profile.PredefinedColor;
 import fr.free.totalboumboum.engine.content.feature.Direction;
-import fr.free.totalboumboum.engine.content.feature.GestureConstants;
-import fr.free.totalboumboum.engine.content.feature.ability.AbstractAbility;
 import fr.free.totalboumboum.engine.content.feature.anime.AnimeDirection;
 import fr.free.totalboumboum.engine.content.feature.anime.AnimePack;
 import fr.free.totalboumboum.engine.content.feature.anime.AnimeStep;
@@ -46,6 +43,7 @@ public class AnimeManager
 	/** pas courrant */
 	private AnimeStep currentStep;
 	/** indique que l'animation est finie (on reste sur la dernière image) */
+	@SuppressWarnings("unused")
 	private boolean isTerminated;
 	/** temps total écoulé de puis le début de l'animation */
 	private double currentTime;

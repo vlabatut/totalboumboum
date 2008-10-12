@@ -21,15 +21,11 @@ package fr.free.totalboumboum.engine.content.feature.trajectory;
  * 
  */
 
-import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 import java.util.Iterator;
-import java.util.Map.Entry;
 
 import fr.free.totalboumboum.engine.content.feature.Direction;
-import fr.free.totalboumboum.engine.content.feature.anime.AnimeGesture;
 import fr.free.totalboumboum.engine.content.sprite.Sprite;
-
 
 public class TrajectoryDirection
 {

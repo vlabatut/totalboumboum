@@ -24,7 +24,6 @@ package fr.free.totalboumboum.engine.content.feature.action;
 import org.jdom.Attribute;
 import org.jdom.Element;
 
-import fr.free.totalboumboum.data.configuration.Configuration;
 import fr.free.totalboumboum.engine.content.feature.Contact;
 import fr.free.totalboumboum.engine.content.feature.Direction;
 import fr.free.totalboumboum.engine.content.feature.Orientation;
@@ -35,10 +34,8 @@ import fr.free.totalboumboum.engine.content.sprite.fire.Fire;
 import fr.free.totalboumboum.engine.content.sprite.floor.Floor;
 import fr.free.totalboumboum.engine.content.sprite.hero.Hero;
 import fr.free.totalboumboum.engine.content.sprite.item.Item;
-import fr.free.totalboumboum.engine.loop.Loop;
 import fr.free.totalboumboum.tools.ClassTools;
 import fr.free.totalboumboum.tools.XmlTools;
-
 
 public class GeneralActionLoader
 {	

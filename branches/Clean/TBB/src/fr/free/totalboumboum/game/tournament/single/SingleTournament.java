@@ -49,7 +49,7 @@ public class SingleTournament extends AbstractTournament
 	public void init() throws IllegalArgumentException, SecurityException, ParserConfigurationException, SAXException, IOException, IllegalAccessException, NoSuchFieldException, ClassNotFoundException
 	{	begun = true;
 		pointProcessor = new PointsTotal();
-		// NOTE vérifier si le nombre de joueurs sélectionnés correspond
+		// 
 		setProfiles(getConfiguration().getProfiles());
 		stats.init(this);
 	}
@@ -68,7 +68,7 @@ public class SingleTournament extends AbstractTournament
 
 	@Override
 	public void finish()
-	{	//NOTE et les matches ? (dans SequenceTournament aussi)
+	{	//
 	}
 
 	@Override
@@ -100,7 +100,7 @@ public class SingleTournament extends AbstractTournament
 		tournamentOver = true;
 		if(panel!=null)
 			panel.tournamentOver();
-//NOTE ou bien : panel.matchOver();		
+//		
 	}
 	
 	/////////////////////////////////////////////////////////////////
@@ -110,8 +110,6 @@ public class SingleTournament extends AbstractTournament
 	@Override
 	public void updatePlayerNumber()
 	{	
-		// TODO charger partiellement tous les matches 
-		// pour déterminer le nombre de joueurs nécessaire
 	}
 
 	/////////////////////////////////////////////////////////////////

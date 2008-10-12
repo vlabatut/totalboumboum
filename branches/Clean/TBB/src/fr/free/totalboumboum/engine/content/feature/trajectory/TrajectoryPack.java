@@ -21,15 +21,12 @@ package fr.free.totalboumboum.engine.content.feature.trajectory;
  * 
  */
 
-import java.awt.image.BufferedImage;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map.Entry;
 
 import fr.free.totalboumboum.engine.content.feature.Direction;
-import fr.free.totalboumboum.engine.content.feature.anime.AnimeGesture;
 import fr.free.totalboumboum.engine.content.feature.trajectory.TrajectoryDirection;
-
 
 public class TrajectoryPack
 {	private HashMap<String,TrajectoryGesture> gestures;

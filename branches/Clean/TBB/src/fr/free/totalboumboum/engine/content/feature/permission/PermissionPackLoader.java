@@ -30,20 +30,16 @@ import java.util.List;
 import javax.xml.parsers.ParserConfigurationException;
 
 
-import org.jdom.Attribute;
 import org.jdom.Element;
 import org.xml.sax.SAXException;
 
-import fr.free.totalboumboum.data.configuration.Configuration;
 import fr.free.totalboumboum.engine.container.level.Level;
 import fr.free.totalboumboum.engine.content.feature.ability.AbilityLoader;
 import fr.free.totalboumboum.engine.content.feature.ability.AbstractAbility;
 import fr.free.totalboumboum.engine.content.feature.action.GeneralAction;
 import fr.free.totalboumboum.engine.content.feature.action.GeneralActionLoader;
-import fr.free.totalboumboum.engine.loop.Loop;
 import fr.free.totalboumboum.tools.FileTools;
 import fr.free.totalboumboum.tools.XmlTools;
-
 
 public class PermissionPackLoader
 {	
@@ -66,7 +62,8 @@ public class PermissionPackLoader
 		return result;
 	}
 	
-    private static void loadPermissionsElement(Element root, String individualFolder, Level level, PermissionPack result) throws IOException, ParserConfigurationException, SAXException, ClassNotFoundException
+    @SuppressWarnings("unchecked")
+	private static void loadPermissionsElement(Element root, String individualFolder, Level level, PermissionPack result) throws IOException, ParserConfigurationException, SAXException, ClassNotFoundException
 	{	List<Element> gesturesList = root.getChildren(XmlTools.ELT_GESTURE);
 		Iterator<Element> i = gesturesList.iterator();
 		while(i.hasNext())
@@ -112,7 +109,8 @@ public class PermissionPackLoader
 		return result;
     }
     
-    private static void loadPermissionsElement(Element root, String type, String gestureName, Level level, PermissionGesture permissionGesture) throws IOException, ClassNotFoundException
+    @SuppressWarnings("unchecked")
+	private static void loadPermissionsElement(Element root, String type, String gestureName, Level level, PermissionGesture permissionGesture) throws IOException, ClassNotFoundException
     {	List<Element> permissionsList = root.getChildren(XmlTools.ELT_PERMISSION);
 		Iterator<Element> i = permissionsList.iterator();
 		while(i.hasNext())
@@ -122,7 +120,8 @@ public class PermissionPackLoader
 		}
     }
     
-    private static void loadModulationsElement(Element root, String gestureName, Level level, PermissionGesture permissionGesture) throws IOException, ClassNotFoundException
+    @SuppressWarnings("unchecked")
+	private static void loadModulationsElement(Element root, String gestureName, Level level, PermissionGesture permissionGesture) throws IOException, ClassNotFoundException
     {	List<Element> modulationsList = root.getChildren(XmlTools.ELT_MODULATION);
 		Iterator<Element> i = modulationsList.iterator();
 		while(i.hasNext())

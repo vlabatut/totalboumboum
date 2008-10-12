@@ -34,8 +34,6 @@ import fr.free.totalboumboum.data.profile.Profile;
 import fr.free.totalboumboum.data.profile.ProfileLoader;
 import fr.free.totalboumboum.data.statistics.StatisticTournament;
 import fr.free.totalboumboum.game.match.Match;
-import fr.free.totalboumboum.game.match.MatchRenderPanel;
-import fr.free.totalboumboum.game.points.PointsProcessor;
 
 public abstract class AbstractTournament
 {	
@@ -64,7 +62,7 @@ public abstract class AbstractTournament
 	/////////////////////////////////////////////////////////////////
 	// CONFIGURATION	/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	protected Configuration configuration; //NOTE a virer quand on aura mis une référence vers de la GUI (?)
+	protected Configuration configuration; //
 	
 	public Configuration getConfiguration()
 	{	return configuration;	

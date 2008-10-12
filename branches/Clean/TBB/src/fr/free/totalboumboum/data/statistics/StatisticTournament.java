@@ -46,7 +46,6 @@ public class StatisticTournament implements Serializable, StatisticBase
 	private float[] points;
 	private float[] partialPoints;
 	
-	//NOTE à généraliser à matches et round, puisqu'on peut sauver pour reprendre plus tard...
 	public StatisticTournament()
 	{	Calendar cal = new GregorianCalendar();
 		date = cal.getTime();

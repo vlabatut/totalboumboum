@@ -27,8 +27,6 @@ import java.util.HashMap;
 
 import fr.free.totalboumboum.data.configuration.Configuration;
 import fr.free.totalboumboum.engine.loop.Loop;
-import fr.free.totalboumboum.game.round.Round;
-
 
 public class SystemControl implements KeyListener
 {	private Loop loop;
@@ -63,7 +61,7 @@ public class SystemControl implements KeyListener
 			
 			// faire renaitre le bonhomme
 			else if ((keyCode == KeyEvent.VK_1))
-			{	//TODO à adapter car ça peut être intéressant pour le débug
+			{	//
 				//loop.rebirth();
 			}
 
@@ -110,7 +108,7 @@ public class SystemControl implements KeyListener
 
 	@Override
 	public void keyTyped(KeyEvent arg0)
-	{	// NOTE a priori inutile ici
+	{	// 
 	}
 	
 	private boolean finished = false;

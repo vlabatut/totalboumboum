@@ -23,13 +23,11 @@ package fr.free.totalboumboum.data.configuration;
 
 import java.awt.Color;
 import java.awt.Dimension;
-import java.awt.Font;
 import java.io.IOException;
 import java.util.ArrayList;
 
 import javax.xml.parsers.ParserConfigurationException;
 
-import org.jdom.Element;
 import org.xml.sax.SAXException;
 
 import fr.free.totalboumboum.game.limit.LimitConfrontation;
@@ -44,7 +42,6 @@ import fr.free.totalboumboum.game.round.RoundLoader;
 import fr.free.totalboumboum.game.tournament.AbstractTournament;
 import fr.free.totalboumboum.game.tournament.TournamentLoader;
 import fr.free.totalboumboum.game.tournament.single.SingleTournament;
-import fr.free.totalboumboum.tools.XmlTools;
 
 public class Configuration
 {	
@@ -66,7 +63,6 @@ public class Configuration
 	private int fps;
 	private long milliPeriod;
 	private long nanoPeriod;
-	//NOTE speedcoeff à descendre au niveau de loop, car il peut dépendre du level
 	private double speedCoeff;
 
 	public void setFps(int fps)

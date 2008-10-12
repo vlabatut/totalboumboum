@@ -21,16 +21,13 @@ package fr.free.totalboumboum.engine.content.feature.permission;
  * 
  */
 
-import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map.Entry;
 
 import fr.free.totalboumboum.engine.content.feature.action.SpecificAction;
-import fr.free.totalboumboum.engine.content.feature.anime.AnimeGesture;
 import fr.free.totalboumboum.engine.content.sprite.Sprite;
-
 
 public class PermissionPack
 {	private HashMap<String,PermissionGesture> gestures;

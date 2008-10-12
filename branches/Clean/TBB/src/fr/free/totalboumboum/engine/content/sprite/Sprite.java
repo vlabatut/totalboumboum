@@ -25,12 +25,10 @@ import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.LinkedList;
-import java.util.Map.Entry;
 
 import fr.free.totalboumboum.data.configuration.Configuration;
 import fr.free.totalboumboum.data.profile.ControlSettings;
 import fr.free.totalboumboum.data.profile.PredefinedColor;
-import fr.free.totalboumboum.data.statistics.StatisticAction;
 import fr.free.totalboumboum.data.statistics.StatisticEvent;
 import fr.free.totalboumboum.engine.container.level.Level;
 import fr.free.totalboumboum.engine.container.tile.Tile;
@@ -40,13 +38,11 @@ import fr.free.totalboumboum.engine.content.feature.ability.ActionAbility;
 import fr.free.totalboumboum.engine.content.feature.ability.StateAbility;
 import fr.free.totalboumboum.engine.content.feature.action.AbstractAction;
 import fr.free.totalboumboum.engine.content.feature.action.SpecificAction;
-import fr.free.totalboumboum.engine.content.feature.anime.AnimeGesture;
 import fr.free.totalboumboum.engine.content.feature.event.AbstractEvent;
 import fr.free.totalboumboum.engine.content.feature.event.ActionEvent;
 import fr.free.totalboumboum.engine.content.feature.event.ControlEvent;
 import fr.free.totalboumboum.engine.content.feature.event.EngineEvent;
 import fr.free.totalboumboum.engine.content.feature.permission.ActorPermission;
-import fr.free.totalboumboum.engine.content.feature.permission.PermissionPack;
 import fr.free.totalboumboum.engine.content.feature.permission.StateModulation;
 import fr.free.totalboumboum.engine.content.feature.permission.TargetPermission;
 import fr.free.totalboumboum.engine.content.feature.permission.ThirdPermission;
@@ -65,8 +61,6 @@ import fr.free.totalboumboum.engine.content.sprite.item.Item;
 import fr.free.totalboumboum.engine.control.ControlCode;
 import fr.free.totalboumboum.engine.loop.Loop;
 import fr.free.totalboumboum.engine.player.Player;
-
-
 
 /* 
  * Sprite possédant un status :
@@ -126,7 +120,7 @@ public abstract class Sprite
 	
 	public Sprite getOwner()
 	{	return owner;
-		//NOTE à modifier pour recherche récursivement l'owner final (mais peut être est-ce déjà fait ailleurs)
+		//
 	}
 	public void setOwner(Sprite owner)
 	{	this.owner = owner;
@@ -225,11 +219,6 @@ public abstract class Sprite
 			itemManager.update();
 			animeManager.update();
 			trajectoryManager.update();
-			/*
-			 * NOTE : il est important que le trajectoryManager soit updaté en dernier
-			 * comme ça, un changement de case arrive après avoir traité tous les évènements
-			 * (raisons de synchro)
-			 */
 //System.out.println("sx,sy:"+getPositionX()+";"+getPositionY()+" - tx,ty:"+tile.getLine()+";"+tile.getCol());
 			Iterator<Sprite> i = boundSprites.iterator();
 			while(i.hasNext())

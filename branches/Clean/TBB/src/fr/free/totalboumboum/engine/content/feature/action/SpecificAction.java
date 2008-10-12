@@ -60,6 +60,7 @@ public class SpecificAction extends AbstractAction
 	 */
 	private GeneralAction generalAction;
 
+	@SuppressWarnings("unused")
 	private SpecificAction(String name)
 	{	super(name);
 		actor = null;
@@ -146,7 +147,7 @@ public class SpecificAction extends AbstractAction
 	}
 	
 	private void updateGeneralAction()
-	{	//NOTE à virer car remplacé par allowAction dans permission ?
+	{	//
 		generalAction = new GeneralAction(name);
 		generalAction.addActor(actor.getClass());
 		generalAction.addDirection(direction);
@@ -192,6 +193,7 @@ public class SpecificAction extends AbstractAction
 	public Sprite getActor()
 	{	return actor;
 	}
+	@SuppressWarnings("unused")
 	private void setActor(Sprite actor)
 	{	this.actor = actor;		
 	}
@@ -199,6 +201,7 @@ public class SpecificAction extends AbstractAction
 	public Sprite getTarget()
 	{	return target;
 	}
+	@SuppressWarnings("unused")
 	private void setTarget(Sprite target)
 	{	this.target = target;		
 	}

@@ -151,7 +151,7 @@ buttonPlayers.setEnabled(false);
 		{	
 	    }
 		else if(e.getActionCommand().equals(GuiTools.MENU_TOURNAMENT_BUTTON_START))
-		{	//NOTE c icite qu'il faut tester que les profils sont OK
+		{	//
 			try
 			{	AbstractTournament tournament = getConfiguration().getCurrentTournament();
 				tournament.init();
