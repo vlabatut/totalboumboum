@@ -21,7 +21,8 @@
 		<group name="Options">
 			<group name="Button">
 				<text name="Back" value="Back" tooltip="Go back to the main menu" />
-				<text name="GamePlay" value="Gameplay" tooltip="Modify the way of playing" />
+				<text name="Controls" value="Controls" tooltip="Modify the in game control keys" />
+				<text name="Gameplay" value="Gameplay" tooltip="Modify the way of playing" />
 				<text name="Video" value="Video" tooltip="Access the video settings" />
 			</group>
 		</group>	

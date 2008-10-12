@@ -67,7 +67,8 @@ public class GuiTools
 	public static final String MAIN_MENU_BUTTON_TOURNAMENT = "MenuMainButtonTournament";
 	/* OPTIONS */
 	public static final String MENU_OPTIONS_BUTTON_BACK = "MenuOptionsButtonBack";
-	public static final String MENU_OPTIONS_BUTTON_GAMEPLAY = "MenuOptionsButtonGamePlay";
+	public static final String MENU_OPTIONS_BUTTON_CONTROLS = "MenuOptionsButtonControls";
+	public static final String MENU_OPTIONS_BUTTON_GAMEPLAY = "MenuOptionsButtonGameplay";
 	public static final String MENU_OPTIONS_BUTTON_VIDEO = "MenuOptionsButtonVideo";
 	/* TOURNAMENT */	
 	public static final String MENU_TOURNAMENT_BUTTON_BACK = "MenuTournamentButtonBack";

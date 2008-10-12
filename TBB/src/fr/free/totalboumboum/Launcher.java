@@ -637,12 +637,11 @@ public class Launcher
 	 * - correction	: bug graphique >> les textes des boutons sont coupés
 	 * - correction : bug de gameplay dans SBM1 : le temps de latence des bombes était deux fois trop court
 	 * - modification : dans la GUI, les boutons pas encore implémentés sont désactivés
+	 * - nouvauté : activation et implémentation de l'option quickmatch dans le menu principal, gestion de la cohérence avec l'option tournament
 	 * 
 	 * *******************************************************
 	 * *********************** A FAIRE ***********************
 	 * *******************************************************
-	 * 
-	 * - quickmatch
 	 * 
 	 * CONTROLES:
 	 * 		- dans les options, on peut définir les controles de chaque joueur (max?)

@@ -137,8 +137,7 @@ buttonPlayers.setEnabled(false);
 	}
 	
 	public void actionPerformed(ActionEvent e)
-	{	System.out.println(e.getActionCommand());
-		if(e.getActionCommand().equals(GuiTools.MENU_TOURNAMENT_BUTTON_NEW))
+	{	if(e.getActionCommand().equals(GuiTools.MENU_TOURNAMENT_BUTTON_NEW))
 		{	
 	    }
 		else if(e.getActionCommand().equals(GuiTools.MENU_TOURNAMENT_BUTTON_LOAD))

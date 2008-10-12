@@ -41,7 +41,8 @@ public class OptionsMenu extends SimpleMenuPanel
 	
 	private BufferedImage image;
 
-	private JButton buttonGamePlay;
+	private JButton buttonControls;
+	private JButton buttonGameplay;
 	private JButton buttonVideo;
 	private JButton buttonBack;
 	
@@ -57,7 +58,9 @@ public class OptionsMenu extends SimpleMenuPanel
 		
 		// buttons
 		add(Box.createVerticalGlue());
-		buttonGamePlay = GuiTools.createPrincipalVerticalMenuButton(GuiTools.MENU_OPTIONS_BUTTON_GAMEPLAY,this,getConfiguration());
+		buttonControls = GuiTools.createPrincipalVerticalMenuButton(GuiTools.MENU_OPTIONS_BUTTON_CONTROLS,this,getConfiguration());
+		buttonGameplay = GuiTools.createPrincipalVerticalMenuButton(GuiTools.MENU_OPTIONS_BUTTON_GAMEPLAY,this,getConfiguration());
+buttonGameplay.setEnabled(false);
 		buttonVideo = GuiTools.createPrincipalVerticalMenuButton(GuiTools.MENU_OPTIONS_BUTTON_VIDEO,this,getConfiguration());
 		add(Box.createRigidArea(new Dimension(0,GuiTools.getSize(GuiTools.MENU_VERTICAL_BUTTON_SPACE))));
 		buttonBack = GuiTools.createPrincipalVerticalMenuButton(GuiTools.MENU_OPTIONS_BUTTON_BACK,this,getConfiguration());
@@ -70,8 +73,7 @@ public class OptionsMenu extends SimpleMenuPanel
 	}
 	
 	public void actionPerformed(ActionEvent e)
-	{	System.out.println(e.getActionCommand());
-		if(e.getActionCommand().equals(GuiTools.MENU_OPTIONS_BUTTON_VIDEO))
+	{	if(e.getActionCommand().equals(GuiTools.MENU_OPTIONS_BUTTON_VIDEO))
 		{	
 	    }
 		else if(e.getActionCommand().equals(GuiTools.MENU_OPTIONS_BUTTON_GAMEPLAY))
