@@ -34,8 +34,8 @@ import fr.free.totalboumboum.gui.common.MenuContainer;
 import fr.free.totalboumboum.gui.common.MenuPanel;
 import fr.free.totalboumboum.gui.common.SimpleMenuPanel;
 import fr.free.totalboumboum.gui.common.SplitMenuPanel;
-import fr.free.totalboumboum.gui.menus.options.OptionsMenu;
 import fr.free.totalboumboum.gui.menus.tournament.TournamentMain;
+import fr.free.totalboumboum.gui.options.OptionsMenu;
 import fr.free.totalboumboum.gui.tools.GuiTools;
 
 public class TournamentStatistics extends EntitledDataPanel
