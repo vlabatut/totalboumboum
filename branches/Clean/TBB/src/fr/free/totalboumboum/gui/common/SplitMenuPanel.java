@@ -24,7 +24,7 @@ package fr.free.totalboumboum.gui.common;
 import java.awt.BorderLayout;
 
 public abstract class SplitMenuPanel extends MenuPanel implements MenuContainer
-{
+{	private static final long serialVersionUID = 1L;
 	protected String menuLocation;
 	
 	public SplitMenuPanel(MenuContainer container, MenuPanel parent, String menuLocation)

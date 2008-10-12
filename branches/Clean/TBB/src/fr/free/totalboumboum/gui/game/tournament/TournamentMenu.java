@@ -21,8 +21,6 @@ package fr.free.totalboumboum.gui.game.tournament;
  * 
  */
 
-import java.awt.BorderLayout;
-import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.io.IOException;
@@ -31,7 +29,6 @@ import javax.swing.Box;
 import javax.swing.BoxLayout;
 import javax.swing.ButtonGroup;
 import javax.swing.JButton;
-import javax.swing.JLabel;
 import javax.swing.JToggleButton;
 import javax.swing.SwingUtilities;
 import javax.xml.parsers.ParserConfigurationException;
@@ -39,23 +36,18 @@ import javax.xml.parsers.ParserConfigurationException;
 import org.xml.sax.SAXException;
 
 import fr.free.totalboumboum.game.match.Match;
-import fr.free.totalboumboum.game.round.Round;
 import fr.free.totalboumboum.game.tournament.AbstractTournament;
 import fr.free.totalboumboum.game.tournament.TournamentRenderPanel;
 import fr.free.totalboumboum.game.tournament.cup.CupTournament;
 import fr.free.totalboumboum.game.tournament.league.LeagueTournament;
 import fr.free.totalboumboum.game.tournament.sequence.SequenceTournament;
-import fr.free.totalboumboum.game.tournament.single.SingleTournament;
-import fr.free.totalboumboum.gui.common.ContentPanel;
 import fr.free.totalboumboum.gui.common.InnerDataPanel;
 import fr.free.totalboumboum.gui.common.InnerMenuPanel;
 import fr.free.totalboumboum.gui.common.MenuPanel;
 import fr.free.totalboumboum.gui.common.SplitMenuPanel;
 import fr.free.totalboumboum.gui.game.match.MatchSplitPanel;
 import fr.free.totalboumboum.gui.game.tournament.description.SequenceDescription;
-import fr.free.totalboumboum.gui.game.tournament.description.TournamentDescription;
 import fr.free.totalboumboum.gui.game.tournament.results.SequenceResults;
-import fr.free.totalboumboum.gui.game.tournament.results.TournamentResults;
 import fr.free.totalboumboum.gui.game.tournament.statistics.TournamentStatistics;
 import fr.free.totalboumboum.gui.tools.GuiTools;
 
@@ -67,6 +59,7 @@ public class TournamentMenu extends InnerMenuPanel implements TournamentRenderPa
 	private InnerDataPanel tournamentResults;
 	private InnerDataPanel tournamentStatistics;
 		
+	@SuppressWarnings("unused")
 	private JButton buttonQuit;
 	private JButton buttonMenu;
 	private JToggleButton buttonDescription;

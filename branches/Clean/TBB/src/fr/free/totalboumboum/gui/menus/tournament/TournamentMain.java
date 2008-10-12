@@ -24,7 +24,6 @@ package fr.free.totalboumboum.gui.menus.tournament;
 import java.awt.BorderLayout;
 import java.awt.Graphics;
 import java.awt.image.BufferedImage;
-import java.awt.image.RescaleOp;
 import java.io.IOException;
 
 import javax.xml.parsers.ParserConfigurationException;

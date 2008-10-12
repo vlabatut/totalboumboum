@@ -23,12 +23,12 @@ package fr.free.totalboumboum.gui.common;
 
 import javax.swing.JPanel;
 
-import fr.free.totalboumboum.data.configuration.Configuration;
 import fr.free.totalboumboum.gui.data.configuration.GuiConfiguration;
 import fr.free.totalboumboum.gui.menus.main.MainFrame;
 
 public abstract class InnerMenuPanel extends JPanel implements ButtonAware
-{
+{	private static final long serialVersionUID = 1L;
+
 	public InnerMenuPanel(SplitMenuPanel container, MenuPanel parent)
 	{	this.container = container;
 		this.parent = parent;

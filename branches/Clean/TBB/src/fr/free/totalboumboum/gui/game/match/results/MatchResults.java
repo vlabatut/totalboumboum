@@ -22,52 +22,28 @@ package fr.free.totalboumboum.gui.game.match.results;
  */
 
 import java.awt.Color;
-import java.awt.Component;
 import java.awt.Dimension;
-import java.awt.Font;
-import java.awt.GridLayout;
 import java.awt.image.BufferedImage;
 import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.TreeSet;
 
-import javax.swing.Box;
-import javax.swing.BoxLayout;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
-import javax.swing.JPanel;
-import javax.swing.SpringLayout;
-import javax.swing.SwingConstants;
 
 import fr.free.totalboumboum.data.profile.Portraits;
 import fr.free.totalboumboum.data.profile.Profile;
 import fr.free.totalboumboum.data.statistics.Score;
 import fr.free.totalboumboum.data.statistics.StatisticMatch;
 import fr.free.totalboumboum.data.statistics.StatisticRound;
-import fr.free.totalboumboum.game.limit.Limit;
-import fr.free.totalboumboum.game.limit.LimitPoints;
-import fr.free.totalboumboum.game.limit.LimitScore;
-import fr.free.totalboumboum.game.limit.LimitTime;
-import fr.free.totalboumboum.game.limit.Limits;
-import fr.free.totalboumboum.game.limit.RoundLimit;
 import fr.free.totalboumboum.game.match.Match;
 import fr.free.totalboumboum.game.points.PlayerPoints;
-import fr.free.totalboumboum.game.round.Round;
 import fr.free.totalboumboum.gui.common.EntitledDataPanel;
-import fr.free.totalboumboum.gui.common.EntitledSubPanelTable;
-import fr.free.totalboumboum.gui.common.InnerDataPanel;
-import fr.free.totalboumboum.gui.common.MenuContainer;
-import fr.free.totalboumboum.gui.common.MenuPanel;
-import fr.free.totalboumboum.gui.common.SimpleMenuPanel;
 import fr.free.totalboumboum.gui.common.SplitMenuPanel;
 import fr.free.totalboumboum.gui.common.TablePanel;
-import fr.free.totalboumboum.gui.menus.tournament.TournamentMain;
-import fr.free.totalboumboum.gui.options.OptionsMenu;
-import fr.free.totalboumboum.gui.tools.SpringUtilities;
 import fr.free.totalboumboum.gui.tools.GuiTools;
 import fr.free.totalboumboum.tools.ImageTools;
-import fr.free.totalboumboum.tools.StringTools;
 
 public class MatchResults extends EntitledDataPanel
 {	

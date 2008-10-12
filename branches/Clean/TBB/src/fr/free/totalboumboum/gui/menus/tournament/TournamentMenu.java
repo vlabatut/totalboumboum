@@ -21,7 +21,6 @@ package fr.free.totalboumboum.gui.menus.tournament;
  * 
  */
 
-import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.io.IOException;
@@ -33,10 +32,8 @@ import javax.xml.parsers.ParserConfigurationException;
 
 import org.xml.sax.SAXException;
 
-import fr.free.totalboumboum.data.configuration.Configuration;
 import fr.free.totalboumboum.game.tournament.AbstractTournament;
 import fr.free.totalboumboum.game.tournament.single.SingleTournament;
-import fr.free.totalboumboum.gui.common.ContentPanel;
 import fr.free.totalboumboum.gui.common.InnerDataPanel;
 import fr.free.totalboumboum.gui.common.InnerMenuPanel;
 import fr.free.totalboumboum.gui.common.MenuPanel;
@@ -94,6 +91,7 @@ public class TournamentMenu extends InnerMenuPanel
 	private JButton buttonRules;
 	private JButton buttonPlayers;
 	private JButton buttonPlay;
+	@SuppressWarnings("unused")
 	private JButton buttonBack;
 	
 	public TournamentMenu(SplitMenuPanel container, MenuPanel parent) throws IllegalArgumentException, SecurityException, ParserConfigurationException, SAXException, IOException, IllegalAccessException, NoSuchFieldException

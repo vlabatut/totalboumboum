@@ -23,19 +23,15 @@ package fr.free.totalboumboum.gui.game.round;
 
 import java.awt.BorderLayout;
 import java.awt.Graphics;
-import java.awt.Image;
 import java.awt.image.BufferedImage;
-import java.awt.image.RescaleOp;
 
-import fr.free.totalboumboum.game.round.Round;
-import fr.free.totalboumboum.game.round.RoundRenderPanel;
 import fr.free.totalboumboum.gui.common.MenuContainer;
 import fr.free.totalboumboum.gui.common.MenuPanel;
 import fr.free.totalboumboum.gui.common.SplitMenuPanel;
-import fr.free.totalboumboum.gui.game.tournament.description.TournamentDescription;
 
 public class RoundSplitPanel extends SplitMenuPanel
-{	
+{	private static final long serialVersionUID = 1L;
+
 	private BufferedImage image;
 
 	public RoundSplitPanel(MenuContainer container, MenuPanel parent)

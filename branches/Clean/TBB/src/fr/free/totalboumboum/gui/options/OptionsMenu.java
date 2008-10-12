@@ -21,7 +21,6 @@ package fr.free.totalboumboum.gui.options;
  * 
  */
 
-import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.event.ActionEvent;
@@ -41,9 +40,11 @@ public class OptionsMenu extends SimpleMenuPanel
 	
 	private BufferedImage image;
 
+	@SuppressWarnings("unused")
 	private JButton buttonControls;
 	private JButton buttonGameplay;
 	private JButton buttonVideo;
+	@SuppressWarnings("unused")
 	private JButton buttonBack;
 	
 	public OptionsMenu(MenuContainer container, MenuPanel parent)

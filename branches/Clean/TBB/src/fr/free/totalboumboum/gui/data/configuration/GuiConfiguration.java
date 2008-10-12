@@ -21,13 +21,10 @@ package fr.free.totalboumboum.gui.data.configuration;
  * 
  */
 
-import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
-import java.awt.Toolkit;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
-import java.util.ArrayList;
 
 import javax.xml.parsers.ParserConfigurationException;
 
@@ -36,7 +33,6 @@ import org.xml.sax.SAXException;
 import fr.free.totalboumboum.game.match.Match;
 
 import fr.free.totalboumboum.data.configuration.Configuration;
-import fr.free.totalboumboum.engine.content.feature.ability.AbstractAbility;
 import fr.free.totalboumboum.game.round.Round;
 import fr.free.totalboumboum.game.tournament.AbstractTournament;
 import fr.free.totalboumboum.gui.data.language.Language;

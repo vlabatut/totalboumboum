@@ -21,7 +21,6 @@ package fr.free.totalboumboum.gui.menus.tournament;
  * 
  */
 
-import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 

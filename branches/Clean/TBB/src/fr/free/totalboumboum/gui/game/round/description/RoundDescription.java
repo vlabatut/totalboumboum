@@ -21,17 +21,9 @@ package fr.free.totalboumboum.gui.game.round.description;
  * 
  */
 
-import java.awt.Color;
 import java.awt.Component;
 import java.awt.Dimension;
-import java.awt.Font;
-import java.awt.Graphics;
-import java.awt.Image;
-import java.awt.color.ColorSpace;
 import java.awt.image.BufferedImage;
-import java.awt.image.BufferedImageOp;
-import java.awt.image.ColorConvertOp;
-import java.awt.image.RescaleOp;
 import java.io.IOException;
 import java.text.NumberFormat;
 import java.util.ArrayList;
@@ -56,15 +48,11 @@ import fr.free.totalboumboum.engine.container.level.LevelPreview;
 import fr.free.totalboumboum.engine.container.level.LevelPreviewer;
 import fr.free.totalboumboum.engine.container.zone.Zone;
 import fr.free.totalboumboum.game.limit.Limit;
-import fr.free.totalboumboum.game.limit.LimitConfrontation;
 import fr.free.totalboumboum.game.limit.LimitPoints;
 import fr.free.totalboumboum.game.limit.LimitScore;
 import fr.free.totalboumboum.game.limit.LimitTime;
-import fr.free.totalboumboum.game.limit.LimitTotal;
 import fr.free.totalboumboum.game.limit.Limits;
-import fr.free.totalboumboum.game.limit.MatchLimit;
 import fr.free.totalboumboum.game.limit.RoundLimit;
-import fr.free.totalboumboum.game.match.Match;
 import fr.free.totalboumboum.game.points.PointsConstant;
 import fr.free.totalboumboum.game.points.PointsDiscretize;
 import fr.free.totalboumboum.game.points.PointsProcessor;
@@ -76,15 +64,8 @@ import fr.free.totalboumboum.game.round.Round;
 import fr.free.totalboumboum.gui.common.EntitledDataPanel;
 import fr.free.totalboumboum.gui.common.EntitledSubPanel;
 import fr.free.totalboumboum.gui.common.EntitledSubPanelTable;
-import fr.free.totalboumboum.gui.common.InnerDataPanel;
-import fr.free.totalboumboum.gui.common.MenuContainer;
-import fr.free.totalboumboum.gui.common.MenuPanel;
-import fr.free.totalboumboum.gui.common.SimpleMenuPanel;
 import fr.free.totalboumboum.gui.common.SplitMenuPanel;
-import fr.free.totalboumboum.gui.common.TablePanel;
 import fr.free.totalboumboum.gui.data.configuration.GuiConfiguration;
-import fr.free.totalboumboum.gui.menus.tournament.TournamentMain;
-import fr.free.totalboumboum.gui.options.OptionsMenu;
 import fr.free.totalboumboum.gui.tools.GuiTools;
 import fr.free.totalboumboum.tools.ImageTools;
 import fr.free.totalboumboum.tools.StringTools;
@@ -589,7 +570,7 @@ public class RoundDescription extends EntitledDataPanel
 		}
 		// total
 		else if(pp instanceof PointsTotal)
-		{	PointsTotal pt = (PointsTotal) pp;
+		{	//PointsTotal pt = (PointsTotal) pp;
 			ArrayList<Object> dt = new ArrayList<Object>();
 			ArrayList<String> tt = new ArrayList<String>();
 			data.add(dt);

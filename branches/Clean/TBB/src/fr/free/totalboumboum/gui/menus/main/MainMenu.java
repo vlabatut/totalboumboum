@@ -21,28 +21,21 @@ package fr.free.totalboumboum.gui.menus.main;
  * 
  */
 
-import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
-import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.image.BufferedImage;
-import java.io.File;
 import java.io.IOException;
 
 import javax.swing.Box;
 import javax.swing.BoxLayout;
-import javax.swing.ImageIcon;
 import javax.swing.JButton;
-import javax.swing.JLabel;
 import javax.xml.parsers.ParserConfigurationException;
 
 import org.xml.sax.SAXException;
 
 import fr.free.totalboumboum.data.configuration.Configuration;
-import fr.free.totalboumboum.data.profile.Portraits;
 import fr.free.totalboumboum.game.tournament.AbstractTournament;
-import fr.free.totalboumboum.game.tournament.single.SingleTournament;
 import fr.free.totalboumboum.gui.common.MenuContainer;
 import fr.free.totalboumboum.gui.common.MenuPanel;
 import fr.free.totalboumboum.gui.common.SimpleMenuPanel;
@@ -50,8 +43,6 @@ import fr.free.totalboumboum.gui.game.match.MatchSplitPanel;
 import fr.free.totalboumboum.gui.menus.tournament.TournamentMain;
 import fr.free.totalboumboum.gui.options.OptionsMenu;
 import fr.free.totalboumboum.gui.tools.GuiTools;
-import fr.free.totalboumboum.tools.FileTools;
-import fr.free.totalboumboum.tools.ImageTools;
 
 public class MainMenu extends SimpleMenuPanel
 {	private static final long serialVersionUID = 1L;
@@ -62,6 +53,7 @@ public class MainMenu extends SimpleMenuPanel
 	private MenuPanel optionsMenuPanel;
 	private MenuPanel quickmatchGamePanel;
 	
+	@SuppressWarnings("unused")
 	private JButton buttonOptions;
 	private JButton buttonProfiles;
 	private JButton buttonStats;

@@ -22,7 +22,8 @@ package fr.free.totalboumboum.gui.common;
  */
 
 public abstract class SimpleMenuPanel extends MenuPanel implements ButtonAware
-{
+{	private static final long serialVersionUID = 1L;
+
 	public SimpleMenuPanel(MenuContainer container, MenuPanel parent)
 	{	this.container = container;
 		this.parent = parent;

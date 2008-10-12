@@ -24,22 +24,18 @@ package fr.free.totalboumboum.tools;
 import java.awt.AlphaComposite;
 import java.awt.BasicStroke;
 import java.awt.Color;
-import java.awt.Font;
-import java.awt.FontMetrics;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.GraphicsConfiguration;
 import java.awt.GraphicsEnvironment;
 import java.awt.RenderingHints;
 import java.awt.geom.AffineTransform;
-import java.awt.geom.Rectangle2D;
 import java.awt.image.BufferedImage;
 import java.awt.image.ColorModel;
 import java.awt.image.IndexColorModel;
 import java.awt.image.WritableRaster;
 import java.io.File;
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.Hashtable;
 import java.util.Iterator;
 import java.util.List;
@@ -181,7 +177,8 @@ public class ImageTools
     	return result;
     }
     
-    public static Object loadColorsElement(Element root, String individualFolder, PredefinedColor color) throws IOException, ParserConfigurationException, SAXException
+    @SuppressWarnings("unchecked")
+	public static Object loadColorsElement(Element root, String individualFolder, PredefinedColor color) throws IOException, ParserConfigurationException, SAXException
     {	Object result=null;
     	// folder
     	String localFilePath = individualFolder;
