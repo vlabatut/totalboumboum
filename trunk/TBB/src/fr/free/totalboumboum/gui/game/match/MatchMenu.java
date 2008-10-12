@@ -103,6 +103,7 @@ public class MatchMenu extends InnerMenuPanel implements MatchRenderPanel
 		buttonResults = GuiTools.createHorizontalMenuToggleButton(GuiTools.GAME_MATCH_BUTTON_RESULTS,this,getConfiguration());
 	    group.add(buttonResults);
 		buttonStatistics = GuiTools.createHorizontalMenuToggleButton(GuiTools.GAME_MATCH_BUTTON_STATISTICS,this,getConfiguration());
+buttonStatistics.setEnabled(false);		
 	    group.add(buttonStatistics);
 		add(Box.createRigidArea(new Dimension(GuiTools.getSize(GuiTools.MENU_HORIZONTAL_BUTTON_SPACE),0)));
 		buttonRound = GuiTools.createHorizontalMenuButton(GuiTools.GAME_MATCH_BUTTON_NEXT_ROUND,this,getConfiguration());
