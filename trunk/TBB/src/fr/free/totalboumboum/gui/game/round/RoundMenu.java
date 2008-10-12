@@ -131,8 +131,7 @@ buttonStatistics.setEnabled(false);
 	}
 	
 	public void actionPerformed(ActionEvent e)
-	{	System.out.println(e.getActionCommand());
-		if(e.getActionCommand().equals(GuiTools.GAME_ROUND_BUTTON_QUIT))
+	{	if(e.getActionCommand().equals(GuiTools.GAME_ROUND_BUTTON_QUIT))
 		{	getFrame().setMainMenuPanel();
 	    }
 		else if(e.getActionCommand().equals(GuiTools.GAME_ROUND_BUTTON_CURRENT_MATCH))

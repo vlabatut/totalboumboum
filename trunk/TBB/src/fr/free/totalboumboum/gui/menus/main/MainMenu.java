@@ -106,8 +106,7 @@ buttonLevels.setEnabled(false);
 	}
 	
 	public void actionPerformed(ActionEvent e)
-	{	System.out.println(e.getActionCommand());
-		if(e.getActionCommand().equals(GuiTools.MENU_MAIN_BUTTON_OPTIONS))
+	{	if(e.getActionCommand().equals(GuiTools.MENU_MAIN_BUTTON_OPTIONS))
 		{	replaceWith(optionsMenuPanel);
 	    }
 		else if(e.getActionCommand().equals(GuiTools.MENU_MAIN_BUTTON_PROFILES))
