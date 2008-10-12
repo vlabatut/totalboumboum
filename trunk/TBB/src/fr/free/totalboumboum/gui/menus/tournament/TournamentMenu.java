@@ -33,6 +33,7 @@ import javax.xml.parsers.ParserConfigurationException;
 
 import org.xml.sax.SAXException;
 
+import fr.free.totalboumboum.data.configuration.Configuration;
 import fr.free.totalboumboum.game.tournament.AbstractTournament;
 import fr.free.totalboumboum.game.tournament.single.SingleTournament;
 import fr.free.totalboumboum.gui.common.ContentPanel;
@@ -154,9 +155,9 @@ buttonPlayers.setEnabled(false);
 	    }
 		else if(e.getActionCommand().equals(GuiTools.MENU_TOURNAMENT_BUTTON_START))
 		{	//NOTE c icite qu'il faut tester que les profils sont OK
-			AbstractTournament tournament = getConfiguration().getCurrentTournament();
 			try
-			{	tournament.init();
+			{	AbstractTournament tournament = getConfiguration().getCurrentTournament();
+				tournament.init();
 				if(tournament instanceof SingleTournament)
 				{	tournament.progress();
 					tournamentGamePanel = new MatchSplitPanel(container.getContainer(),container);					

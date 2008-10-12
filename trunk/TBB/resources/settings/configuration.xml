@@ -45,6 +45,7 @@
 <!-- 	<tournament value="tournamentLong" />  -->
 	<tournament value="singleTest" />
 	
+	<quickmatch value="matchLong" />
 	<quickstart value="round01" />
 	
 </configuration>

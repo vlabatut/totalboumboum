@@ -119,6 +119,7 @@ public class QuickFrame extends JFrame implements WindowListener,LoopRenderPanel
 	   
 	    // init the game
 	 // tournament
+	    configuration.loadQuickstart();
 		AbstractTournament tournament = configuration.getTournament();  
 	    tournament.init();
 	    tournament.progress();

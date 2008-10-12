@@ -36,6 +36,7 @@ import fr.free.totalboumboum.game.limit.LimitConfrontation;
 import fr.free.totalboumboum.game.limit.Limits;
 import fr.free.totalboumboum.game.limit.MatchLimit;
 import fr.free.totalboumboum.game.match.Match;
+import fr.free.totalboumboum.game.match.MatchLoader;
 import fr.free.totalboumboum.game.points.PointsProcessor;
 import fr.free.totalboumboum.game.points.PointsTotal;
 import fr.free.totalboumboum.game.round.Round;
@@ -90,6 +91,10 @@ public class ConfigurationLoader
 			element = root.getChild(XmlTools.ELT_TOURNAMENT);
 			if(element!=null)
 				loadTournamentElement(element,result);
+			// quick match
+			element = root.getChild(XmlTools.ELT_QUICKMATCH);
+			if(element!=null)
+				loadQuickmatchElement(element,result);
 		}
 	}
 	
@@ -136,36 +141,17 @@ result.addProfile(value);
 	}
 
 	private static void loadTournamentElement(Element root, Configuration result) throws IllegalArgumentException, SecurityException, ParserConfigurationException, SAXException, IOException, IllegalAccessException, NoSuchFieldException, ClassNotFoundException
-	{	String value = root.getAttribute(XmlTools.ATT_VALUE).getValue().trim();
-		AbstractTournament tournament = TournamentLoader.loadTournamentFromName(value,result);			
-		result.setTournament(tournament);
+	{	String name = root.getAttribute(XmlTools.ATT_VALUE).getValue().trim();
+		result.setLastTournamentName(name);
+	}
+
+	private static void loadQuickmatchElement(Element root, Configuration result) throws IllegalArgumentException, SecurityException, ParserConfigurationException, SAXException, IOException, IllegalAccessException, NoSuchFieldException, ClassNotFoundException
+	{	String quickmatchName = root.getAttribute(XmlTools.ATT_VALUE).getValue().trim();
+		result.setQuickmatchName(quickmatchName);
 	}
 
 	private static void loadQuickstartElement(Element root, Configuration result) throws IllegalArgumentException, SecurityException, ParserConfigurationException, SAXException, IOException, IllegalAccessException, NoSuchFieldException, ClassNotFoundException
-	{	// single tournament
-		SingleTournament tournament = new SingleTournament(result);
-		// one round match
-		Match match = new Match(tournament);
-		{	// notes
-			ArrayList<String> notes = new ArrayList<String>();
-			notes.add("auto-generated notes");
-			match.setNotes(notes);
-		}
-		{	// limits
-			Limits<MatchLimit> limits = new Limits<MatchLimit>();
-			MatchLimit limit = new LimitConfrontation(1);
-			limits.addLimit(limit);
-		}
-		{	// points processor
-			PointsProcessor pointProcessor = new PointsTotal();
-			match.setPointProcessor(pointProcessor);
-		}
-		tournament.setMatch(match);
-		// round
-		String name = root.getAttribute(XmlTools.ATT_VALUE).getValue().trim();
-		Round round = RoundLoader.loadRoundFromName(name,match);
-		match.addRound(round);
-		// result
-		result.setTournament(tournament);
+	{	String quickstartName = root.getAttribute(XmlTools.ATT_VALUE).getValue().trim();
+		result.setQuickstartName(quickstartName);
 	}
 }
