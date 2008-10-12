@@ -634,16 +634,23 @@ public class Launcher
 	 * 
 	 * + alpha.46
 	 * - correction	: bug dans la GUI lorsqu'on utilise une résolution carrée : les itemset et initialitem dans la présentation des rounds sont coupés (certains items sont hors-écran)
+	 * - correction	: bug graphique >> les textes des boutons sont coupés
+	 * - correction : bug de gameplay dans SBM1 : le temps de latence des bombes était deux fois trop court
 	 * 
 	 * *******************************************************
 	 * *********************** A FAIRE ***********************
 	 * *******************************************************
 	 * 
-	 * - bug graphique : les textes des boutons sont coupés
+	 * - quickmatch
 	 * 
 	 * CONTROLES:
 	 * 		- dans les options, on peut définir les controles de chaque joueur (max?)
 	 * 		- dans le jeu, à chaque match, chaque joueur doit choisir quels controles il va utiliser (qui est player 1, player 2 etc)
+	 * 
+	 * - utiliser les tooltips pour afficher les infos trop longues : calcul de points, nombre à virgule dans la colonne des points (décimales cachées), etc.
+	 * - pb de dimension de l'image de fond en fonction de la résolution... (zones pas peintes)
+	 * - results panel : quand il y a trop de rounds dans un match pour que ça rentre à l'écran, ne pas tout afficher
+	 * - possibilité de donner des noms aux matches et aux rounds
 	 * 
 	 * - redistribution des items lors de la mort d'un joueur (option de round?)
 	 * - possibilité de bloquer certains items (on ne les perd pas lorsqu'on meurt)
@@ -651,11 +658,6 @@ public class Launcher
 	 * - redescendre les stats dans loop, et gestion de fin de partie et tout ce qui est en fait directement lié au moteur
 	 * - en fait tout le calcul de points dans les stats est à déplacer dans les rounds/matches, etc 
 	 * 
-	 * - possibilité de donner des noms aux matches et aux rounds
-	 * - utiliser les tooltips pour afficher les infos trop longues : calcul de points, nombre à virgule dans la colonne des points (décimales cachées), etc.
-	 * - pb de dimension de l'image de fond en fonction de la résolution... (zones pas peintes)
-	 * - results panel : quand il y a trop de rounds dans un match pour que ça rentre à l'écran, ne pas tout afficher
-	 * - vérifier le temps de latence des bombes, ça me parait un peu trop rapide
 	 * - faire un paramètre dans les rounds qui permet de déterminer s'ils sont compatibles avec le tournoi 2007-08
 	 * - tournoi : 1) on choisit les paramètres 2) on choisit les joueurs, le jeu restreint leur nombre pr qu'il soit compatible avec le tournoi, et restreint aussi les IA pour les mêmes raisons
 	 * - mettre une icone spéciale pour différencier les humains et les IA, ds présentation et résultats
@@ -670,18 +672,17 @@ public class Launcher
 	 * - mode plein écran
 	 * - gérer l'apparition comme une action en soit. si pas possible d'apparaître au début de la partie, faire un atterrissage ?
 	 * - à la fin du round, faire apparaitre les résultats par transparence...ça serait la classe ça !
-	 * - s'occuper de la limite qui fait gagner le joueur qui la franchit : pq pas un simple bonus/malus pour celui qui arrête la partie ?
-	 * - limites exprimées de façon relative (peindre 75% des cases...)
+	 * 
 	 * - pour painting, possibilité de définir quelles cases peuvent être repeinte, ce qui permet de poser comme limite un %age de cases repeintes
 	 * - définir des noms "human readable" pour les items, histoire de ne pas afficher ces codes internes dans la GUI, en profiter pour introduire une decription, le tout en plusieurs langues. utiliser le code ISO comme paramètre de langue, et l'introduire dans le fichier de langue
 	 * - possibilité de définir un nom pour tournament/match/round, qui sera affiche en titre de présentation/stats etc. si pas de nom, utilisation d'un nom générique (Round 1 - Prensentation) etc
 	 * - faire un chargement ad hoc des matches, rounds, etc ? fusionner du coup HollowLevel et LevelPreview ? (voir si les objets de ces deux classes sont créés au même moment)
 	 * - ergonomie : faire le chargement du round dès qu'on clique sur "next" dans le match, et attendre ensuite que le joueur valide le début du match !
-	 * - items: 1 item arrêtant la partie, 1 item faisant diminuer le temps restant (anti-temps)
-	 */
-	
-	/* MODES DE JEU
 	 * 
+	 * LIMITES & MODES de jeu :
+	 * - s'occuper de la limite qui fait gagner le joueur qui la franchit : pq pas un simple bonus/malus pour celui qui arrête la partie ?
+	 * - limites exprimées de façon relative (peindre 75% des cases...)
+	 * - items: 1 item arrêtant la partie, 1 item faisant diminuer le temps restant (anti-temps)
 	 * - au moins finir le cycle lors d'une mort, histoire que la différence de timing ne vienne pas juste de l'ordre des joueurs dans la partie 
 	 * - possibilité de choisir entre le fait que le match s'arrête dès que tout le monde est mort sauf 1, ou dernière flamme terminée
 	 * - feature lié au précédent : gagner plus de points si on finit effetivement le jeu que si on a un time out ou un entre-tuage

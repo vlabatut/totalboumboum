@@ -469,7 +469,7 @@ public class GuiTools
 						longest = value;
 				}
 			}
-			menuVerticalPrimaryButtonFontSize = getFontSize(menuVerticalPrimaryButtonWidth*0.9,menuVerticalButtonHeight*0.9,longest);
+			menuVerticalPrimaryButtonFontSize = getFontSize(menuVerticalPrimaryButtonWidth*0.8,menuVerticalButtonHeight*0.9,longest);
 		}
 		sizes.put(MENU_VERTICAL_PRIMARY_BUTTON_FONT_SIZE, menuVerticalPrimaryButtonFontSize);
 		//
@@ -485,7 +485,7 @@ public class GuiTools
 						longest = value;
 				}
 			}
-			menuVerticalSecondaryButtonFontSize = getFontSize(menuVerticalSecondaryButtonWidth*0.9,menuVerticalButtonHeight*0.9,longest);
+			menuVerticalSecondaryButtonFontSize = getFontSize(menuVerticalSecondaryButtonWidth*0.8,menuVerticalButtonHeight*0.9,longest);
 		}
 		sizes.put(MENU_VERTICAL_SECONDARY_BUTTON_FONT_SIZE, menuVerticalSecondaryButtonFontSize);
 		//
