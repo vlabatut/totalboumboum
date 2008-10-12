@@ -25,6 +25,19 @@
 				<text name="Gameplay" value="Gameplay" tooltip="Modify the way of playing" />
 				<text name="Video" value="Video" tooltip="Access the video settings" />
 			</group>
+			
+			<group name="Controls">
+				<text name="Title" value="Controls" tooltip="Modify ingame control keys" />
+			</group>
+
+			<group name="Gameplay">
+				<text name="Title" value="Gameplay" tooltip="Modify gameplay settings" />
+			</group>
+
+			<group name="Video">
+				<text name="Title" value="Video" tooltip="Modify video settings" />
+			</group>
+			
 		</group>	
 
 <!-- TOURNAMENT MENU -->	

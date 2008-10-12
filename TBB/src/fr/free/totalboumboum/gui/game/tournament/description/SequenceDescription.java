@@ -76,8 +76,8 @@ public class SequenceDescription extends TournamentDescription
 {	
 	private static final long serialVersionUID = 1L;
 
-	public SequenceDescription(SplitMenuPanel container)
-	{	super(container);
+	public SequenceDescription(SplitMenuPanel container, int w, int h)
+	{	super(container,w,h);
 		
 		// data
 		{	JPanel infoPanel = new JPanel();

@@ -109,11 +109,13 @@ buttonStatistics.setEnabled(false);
 		buttonRound = GuiTools.createHorizontalMenuButton(GuiTools.GAME_MATCH_BUTTON_NEXT_ROUND,this,getConfiguration());
 		
 		// panels
-		matchDescription = new MatchDescription(container);
+		int h = GuiTools.getSize(GuiTools.HORIZONTAL_SPLIT_DATA_PANEL_HEIGHT);
+		int w = GuiTools.getSize(GuiTools.HORIZONTAL_SPLIT_DATA_PANEL_WIDTH);
+		matchDescription = new MatchDescription(container,w,h);
 		container.setDataPart(matchDescription);
 		dataPart = matchDescription;
-		matchResults = new MatchResults(container);
-		matchStatistics = new MatchStatistics(container);		
+		matchResults = new MatchResults(container,w,h);
+		matchStatistics = new MatchStatistics(container,w,h);		
 //		match.init();
 		
 		Match match = getConfiguration().getCurrentMatch();

@@ -97,8 +97,8 @@ public class MatchDescription extends EntitledDataPanel
 {	
 	private static final long serialVersionUID = 1L;
 
-	public MatchDescription(SplitMenuPanel container)
-	{	super(container);
+	public MatchDescription(SplitMenuPanel container, int w, int h)
+	{	super(container,w,h);
 		// title
 		String txt = getConfiguration().getLanguage().getText(GuiTools.GAME_MATCH_DESCRIPTION_TITLE);
 		setTitle(txt);

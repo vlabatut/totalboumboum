@@ -66,8 +66,8 @@ public class RoundResults extends EntitledDataPanel
 
 	private TablePanel resultsPanel;
 	
-	public RoundResults(SplitMenuPanel container)
-	{	super(container);
+	public RoundResults(SplitMenuPanel container, int w, int h)
+	{	super(container,w,h);
 
 		// title
 		String txt = getConfiguration().getLanguage().getText(GuiTools.GAME_ROUND_RESULTS_TITLE);

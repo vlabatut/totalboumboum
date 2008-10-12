@@ -32,6 +32,7 @@ import java.awt.image.BufferedImage;
 import java.io.IOException;
 
 import javax.swing.SwingUtilities;
+import javax.swing.ToolTipManager;
 import javax.xml.parsers.ParserConfigurationException;
 
 import org.xml.sax.SAXException;
@@ -63,6 +64,7 @@ public class Launcher
 		BufferedImage img = new BufferedImage(10,10,BufferedImage.TYPE_INT_ARGB);
 		Graphics g = img.getGraphics();
 		GuiTools.init(configuration,g);
+		ToolTipManager.sharedInstance().setInitialDelay(200);
 		updateSplash(splash,"[Done]");
 		
 		// create GUI
@@ -638,6 +640,8 @@ public class Launcher
 	 * - correction : bug de gameplay dans SBM1 : le temps de latence des bombes était deux fois trop court
 	 * - modification : dans la GUI, les boutons pas encore implémentés sont désactivés
 	 * - nouvauté : activation et implémentation de l'option quickmatch dans le menu principal, gestion de la cohérence avec l'option tournament
+	 * - correction : quelques bugs concernant la taille des différents éléments graphiques dans la GUI
+	 * - nouveauté : les tooltips apparaissent plus rapidement (200 ms)
 	 * 
 	 * *******************************************************
 	 * *********************** A FAIRE ***********************

@@ -66,10 +66,17 @@ public class GuiTools
 	public static final String MENU_MAIN_BUTTON_STATISTICS = "MenuMainButtonStatistics";
 	public static final String MAIN_MENU_BUTTON_TOURNAMENT = "MenuMainButtonTournament";
 	/* OPTIONS */
-	public static final String MENU_OPTIONS_BUTTON_BACK = "MenuOptionsButtonBack";
-	public static final String MENU_OPTIONS_BUTTON_CONTROLS = "MenuOptionsButtonControls";
-	public static final String MENU_OPTIONS_BUTTON_GAMEPLAY = "MenuOptionsButtonGameplay";
-	public static final String MENU_OPTIONS_BUTTON_VIDEO = "MenuOptionsButtonVideo";
+		/* BUTTON */
+		public static final String MENU_OPTIONS_BUTTON_BACK = "MenuOptionsButtonBack";
+		public static final String MENU_OPTIONS_BUTTON_CONTROLS = "MenuOptionsButtonControls";
+		public static final String MENU_OPTIONS_BUTTON_GAMEPLAY = "MenuOptionsButtonGameplay";
+		public static final String MENU_OPTIONS_BUTTON_VIDEO = "MenuOptionsButtonVideo";
+		/* CONTROLS */
+		public static final String MENU_OPTIONS_CONTROLS_TITLE = "MenuOptionsControlsTitle";
+		/* GAMEPLAY */
+		public static final String MENU_OPTIONS_GAMEPLAY_TITLE = "MenuOptionsGameplayTitle";
+		/* VIDEO */
+		public static final String MENU_OPTIONS_VIDEO_TITLE = "MenuOptionsVideoTitle";
 	/* TOURNAMENT */	
 	public static final String MENU_TOURNAMENT_BUTTON_BACK = "MenuTournamentButtonBack";
 	public static final String MENU_TOURNAMENT_BUTTON_CONTINUE = "MenuTournamentButtonContinue";
@@ -450,7 +457,7 @@ public class GuiTools
 		int horizontalSplitDataPanelHeight = height-horizontalSplitMenuPanelHeight; 
 		sizes.put(HORIZONTAL_SPLIT_DATA_PANEL_HEIGHT,horizontalSplitDataPanelHeight);
 		int horizontalSplitDataPanelWidth = width; 
-		sizes.put(HORIZONTAL_SPLIT_DATA_PANEL_WIDTH,horizontalSplitDataPanelHeight);
+		sizes.put(HORIZONTAL_SPLIT_DATA_PANEL_WIDTH,horizontalSplitDataPanelWidth);
 		sizes.put(VERTICAL_SPLIT_MENU_PANEL_HEIGHT,height);
 		int verticalSplitMenuPanelWidth = menuVerticalSecondaryButtonWidth;
 		sizes.put(VERTICAL_SPLIT_MENU_PANEL_WIDTH,verticalSplitMenuPanelWidth);
@@ -494,12 +501,7 @@ public class GuiTools
 		sizes.put(GAME_TITLE_FONT_SIZE, gameTitleFontSize);
 
 		// labels
-		int gameDataLabelTitleHeight;
-		{	Font font = configuration.getFont().deriveFont((float)gameTitleFontSize);
-			g.setFont(font);
-			FontMetrics metrics = g.getFontMetrics(font);
-			gameDataLabelTitleHeight = (int)(metrics.getHeight()*1.2);
-		}
+		int gameDataLabelTitleHeight = getPixelHeight((float)gameTitleFontSize);
 		sizes.put(GAME_DATA_LABEL_TITLE_HEIGHT, gameDataLabelTitleHeight);
 		// game panel
 		int gameDataMarginSize = (int)(width*0.025);
@@ -909,6 +911,15 @@ public class GuiTools
 		while(fheight<height && fwidth<width);
 		return result-1;
 	}
+	public static int getPixelHeight(float fontSize)
+	{	int result;
+		Font font = gameFont.deriveFont(fontSize);
+		graphics.setFont(font);
+		FontMetrics metrics = graphics.getFontMetrics(font);
+		result = (int)(metrics.getHeight()*1.2);
+		return result;
+	}
+
 	public static BufferedImage loadIcon(String path, BufferedImage absent)
 	{	BufferedImage image;
 		try

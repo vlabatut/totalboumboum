@@ -1,4 +1,4 @@
-package fr.free.totalboumboum.gui.game.tournament.description;
+package fr.free.totalboumboum.gui.options.controls;
 
 /*
  * Total Boum Boum
@@ -38,16 +38,26 @@ import fr.free.totalboumboum.gui.menus.tournament.TournamentMain;
 import fr.free.totalboumboum.gui.options.OptionsMenu;
 import fr.free.totalboumboum.gui.tools.GuiTools;
 
-public abstract class TournamentDescription extends EntitledDataPanel
+public class OptionsControls extends EntitledDataPanel
 {	
 	private static final long serialVersionUID = 1L;
 
-	public TournamentDescription(SplitMenuPanel container, int w, int h)
-	{	super(container,w,h);
-		
+	public OptionsControls(SplitMenuPanel container, int width, int height)
+	{	super(container,width,height);
+
 		// title
-		String txt = getConfiguration().getLanguage().getText(GuiTools.GAME_TOURNAMENT_DESCRIPTION_TITLE);
+		String txt = getConfiguration().getLanguage().getText(GuiTools.MENU_OPTIONS_CONTROLS_TITLE);
 		setTitle(txt);
 	
+	}
+
+	@Override
+	public void refresh()
+	{	// nothing to do here
+	}
+
+	@Override
+	public void updateData()
+	{	// nothing to do here
 	}
 }

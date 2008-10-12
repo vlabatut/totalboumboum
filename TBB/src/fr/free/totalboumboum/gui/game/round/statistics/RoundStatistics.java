@@ -42,8 +42,8 @@ public class RoundStatistics extends EntitledDataPanel
 {	
 	private static final long serialVersionUID = 1L;
 
-	public RoundStatistics(SplitMenuPanel container)
-	{	super(container);
+	public RoundStatistics(SplitMenuPanel container, int width, int height)
+	{	super(container,width,height);
 
 		// title
 		String txt = getConfiguration().getLanguage().getText(GuiTools.GAME_ROUND_STATISTICS_TITLE);

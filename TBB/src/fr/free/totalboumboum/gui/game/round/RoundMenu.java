@@ -117,12 +117,14 @@ buttonStatistics.setEnabled(false);
 		buttonPlay = GuiTools.createHorizontalMenuButton(GuiTools.GAME_ROUND_BUTTON_PLAY,this,getConfiguration());
 		
 		// panels
+		int h = GuiTools.getSize(GuiTools.HORIZONTAL_SPLIT_DATA_PANEL_HEIGHT);
+		int w = GuiTools.getSize(GuiTools.HORIZONTAL_SPLIT_DATA_PANEL_WIDTH);
 		roundDescription = null;
-		roundDescription = new RoundDescription(container);
+		roundDescription = new RoundDescription(container,w,h);
 		container.setDataPart(roundDescription);
 		dataPart = roundDescription;
-		roundResults = new RoundResults(container);
-		roundStatistics = new RoundStatistics(container);		
+		roundResults = new RoundResults(container,w,h);
+		roundStatistics = new RoundStatistics(container,w,h);		
 		
 		// round
 		Round round = getConfiguration().getCurrentRound();

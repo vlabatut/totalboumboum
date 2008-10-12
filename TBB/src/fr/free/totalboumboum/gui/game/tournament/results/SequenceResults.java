@@ -69,8 +69,8 @@ public class SequenceResults extends TournamentResults
 
 	private TablePanel resultsPanel;
 	
-	public SequenceResults(SplitMenuPanel container)
-	{	super(container);
+	public SequenceResults(SplitMenuPanel container, int w, int h)
+	{	super(container,w,h);
 		
 		// title
 		String txt = getConfiguration().getLanguage().getText(GuiTools.GAME_TOURNAMENT_RESULTS_TITLE);

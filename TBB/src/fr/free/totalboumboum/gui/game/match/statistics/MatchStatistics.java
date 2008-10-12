@@ -42,8 +42,8 @@ public class MatchStatistics extends EntitledDataPanel
 {	
 	private static final long serialVersionUID = 1L;
 
-	public MatchStatistics(SplitMenuPanel container)
-	{	super(container);
+	public MatchStatistics(SplitMenuPanel container, int w, int h)
+	{	super(container,w,h);
 
 		// title
 		String txt = getConfiguration().getLanguage().getText(GuiTools.GAME_MATCH_STATISTICS_TITLE);

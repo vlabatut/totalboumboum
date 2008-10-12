@@ -93,8 +93,8 @@ public class RoundDescription extends EntitledDataPanel
 {	
 	private static final long serialVersionUID = 1L;
 
-	public RoundDescription(SplitMenuPanel container)
-	{	super(container);
+	public RoundDescription(SplitMenuPanel container, int w, int h)
+	{	super(container,w,h);
 	
 		// title
 		String txt = getConfiguration().getLanguage().getText(GuiTools.GAME_ROUND_DESCRIPTION_TITLE);
