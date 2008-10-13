@@ -30,7 +30,9 @@ public class GuiFileTools
 
 	// files
 	public final static String FILE_AUTHOR = "author.png";
+	public final static String FILE_AUTOFIRE = "autofire.png";
 	public final static String FILE_BOMBS = "bombs.png";
+	public final static String FILE_COMMAND = "command.png";
 	public final static String FILE_COMPUTER = "computer.png";
 	public final static String FILE_CONFRONTATIONS = "confrontations.png";
 	public final static String FILE_CONSTANT = "constant.png";
@@ -47,6 +49,7 @@ public class GuiFileTools
 	public final static String FILE_INSTANCE = "instance.png";
 	public final static String FILE_INVERTED = "inverted.png";
 	public final static String FILE_ITEMS = "items.png";
+	public final static String FILE_KEY = "key.png";
 	public final static String FILE_KILLS = "kills.png";
 	public final static String FILE_LIMITS = "limits.png";
 	public final static String FILE_MISC = "misc.png";

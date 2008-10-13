@@ -628,6 +628,9 @@ public class GuiTools
 			// author
 			image = loadIcon(folder+GuiFileTools.FILE_AUTHOR,absent);
 			icons.put(GAME_ROUND_DESCRIPTION_MISC_HEADER_AUTHOR,image);
+			// autofire
+			image = loadIcon(folder+GuiFileTools.FILE_AUTOFIRE,absent);
+			icons.put(MENU_OPTIONS_CONTROLS_HEADER_AUTO,image);
 			// bombs
 			image = loadIcon(folder+GuiFileTools.FILE_BOMBS,absent);
 			icons.put(GAME_TOURNAMENT_RESULTS_HEADER_BOMBS,image);
@@ -636,6 +639,9 @@ public class GuiTools
 			icons.put(GAME_TOURNAMENT_DESCRIPTION_LIMIT_HEADER_BOMBS,image);
 			icons.put(GAME_MATCH_DESCRIPTION_LIMIT_HEADER_BOMBS,image);
 			icons.put(GAME_ROUND_DESCRIPTION_LIMIT_HEADER_BOMBS,image);
+			// command
+			image = loadIcon(folder+GuiFileTools.FILE_COMMAND,absent);
+			icons.put(MENU_OPTIONS_CONTROLS_HEADER_COMMAND,image);
 			// confrontations
 			image = loadIcon(folder+GuiFileTools.FILE_CONFRONTATIONS,absent);
 			icons.put(GAME_TOURNAMENT_DESCRIPTION_LIMIT_HEADER_CONFRONTATIONS,image);
@@ -695,6 +701,9 @@ public class GuiTools
 			icons.put(GAME_MATCH_DESCRIPTION_LIMIT_HEADER_ITEMS,image);
 			icons.put(GAME_ROUND_DESCRIPTION_LIMIT_HEADER_ITEMS,image);
 			icons.put(GAME_ROUND_DESCRIPTION_ITEMSET_TITLE,image);
+			// key
+			image = loadIcon(folder+GuiFileTools.FILE_KEY,absent);
+			icons.put(MENU_OPTIONS_CONTROLS_HEADER_KEY,image);
 			// kills
 			image = loadIcon(folder+GuiFileTools.FILE_KILLS,absent);
 			icons.put(GAME_TOURNAMENT_RESULTS_HEADER_KILLS,image);

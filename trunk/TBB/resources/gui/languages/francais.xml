@@ -33,9 +33,9 @@
 			<group name="Controls">
 				<text name="Title" value="Commandes" tooltip="Modifier les touches commandant les personnages" />
 				<group name="Header">
-					<text name="Auto" value="Auto" tooltip="Action répétée quand laisse la touche appuyée" />
+					<text name="Auto" value="Auto" tooltip="Action répétée quand on laisse la touche appuyée" />
 					<text name="Command" value="Commande" tooltip="Commande associée à une touche" />
-					<text name="Key" value="Touche" tooltip="Touche associée à une commande" />
+					<text name="Key" value="Touche" tooltip="Touche à presser pour déclencher la commande correspondante" />
 				</group>
 			</group>
 
