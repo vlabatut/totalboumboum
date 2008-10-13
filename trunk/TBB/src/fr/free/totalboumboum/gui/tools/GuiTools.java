@@ -72,9 +72,15 @@ public class GuiTools
 		public static final String MENU_OPTIONS_BUTTON_CONFIRM = "MenuOptionsButtonConfirm";
 		public static final String MENU_OPTIONS_BUTTON_CONTROLS = "MenuOptionsButtonControls";
 		public static final String MENU_OPTIONS_BUTTON_GAMEPLAY = "MenuOptionsButtonGameplay";
+		public static final String MENU_OPTIONS_BUTTON_NEXT = "MenuOptionsButtonNext";
+		public static final String MENU_OPTIONS_BUTTON_PREVIOUS = "MenuOptionsButtonPrevious";
 		public static final String MENU_OPTIONS_BUTTON_VIDEO = "MenuOptionsButtonVideo";
 		/* CONTROLS */
 		public static final String MENU_OPTIONS_CONTROLS_TITLE = "MenuOptionsControlsTitle";
+			/* HEADER */
+			public static final String MENU_OPTIONS_CONTROLS_HEADER_KEY = "MenuOptionsControlsHeaderKey";
+			public static final String MENU_OPTIONS_CONTROLS_HEADER_COMMAND = "MenuOptionsControlsHeaderCommand";
+			public static final String MENU_OPTIONS_CONTROLS_HEADER_AUTO = "MenuOptionsControlsHeaderAuto";
 		/* GAMEPLAY */
 		public static final String MENU_OPTIONS_GAMEPLAY_TITLE = "MenuOptionsGameplayTitle";
 		/* VIDEO */

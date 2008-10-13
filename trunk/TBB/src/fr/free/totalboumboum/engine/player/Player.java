@@ -61,6 +61,8 @@ public class Player
 	private PlayerControl spriteControl;
 	/** current color */
 	private PredefinedColor color;
+	/** current controls */
+	private ControlSettings controlSettings;
 	
 	public Player(Profile profile, Level level, ArrayList<AbstractAbility> ablts, PermissionPack permissions, TrajectoryPack trajectories) throws ParserConfigurationException, SAXException, IOException, ClassNotFoundException
 	{	this.level = level;
@@ -73,7 +75,13 @@ public class Player
 		HeroFactory tempHeroFactory = HeroFactoryLoader.loadHeroFactory(folder,level,color,ablts,permissions,trajectories);
 		sprite = tempHeroFactory.makeSprite();
 		sprite.initGesture();
-		sprite.setControlSettings(this.profile.getControlSettings());
+		// control settings
+		int indexCtrSet = profile.getControlSettingsIndex();
+		controlSettings = getConfiguration().getControlSettings().get(indexCtrSet);
+		if(controlSettings == null)
+			controlSettings = new ControlSettings();
+		sprite.setControlSettings(controlSettings);
+		//
 		sprite.setPlayer(this);
 		spriteControl = new PlayerControl(this);
 	}
@@ -108,7 +116,7 @@ public class Player
 	{	return profile.getName();
 	}
 	public ControlSettings getControlSettings()
-	{	return profile.getControlSettings();
+	{	return controlSettings;
 	}
 	public PlayerControl getSpriteControl()
 	{	return spriteControl;
@@ -149,6 +157,7 @@ public class Player
 				ai = null;
 			}
 			// misc
+			controlSettings = null;
 			color = null;
 			level = null;
 			profile = null;

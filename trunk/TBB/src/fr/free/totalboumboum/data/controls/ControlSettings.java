@@ -23,6 +23,8 @@ package fr.free.totalboumboum.data.controls;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Iterator;
+import java.util.Map.Entry;
 
 public class ControlSettings
 {
@@ -41,6 +43,18 @@ public class ControlSettings
 	}
 	public void addOnKey(int key, String event)
 	{	onKeys.put(key,event);		
+	}
+	public int getKeyFromEvent(String event)
+	{	int result = -1;
+		Iterator<Entry<Integer,String>> it = onKeys.entrySet().iterator();
+		while(it.hasNext() && result<0)
+		{	Entry<Integer,String> entry = it.next();
+			int key = entry.getKey();
+			String value = entry.getValue();
+			if(value.equalsIgnoreCase(event))
+				result = key;
+		}
+		return result;
 	}
 	public String getEventFromKey(int keyCode)
 	{	String result = onKeys.get(keyCode);

@@ -73,12 +73,24 @@ public class Match
 			long seed = cal.getTimeInMillis();
 			Random random = new Random(seed);
 			Collections.shuffle(rounds,random);
-    	}
-    	
-		
+    	}	
 		// NOTE vérifier si le nombre de joueurs sélectionnés correspond
-		this.profiles.addAll(profiles); 
+		// profiles
+    	int i = 1;
+    	this.profiles.addAll(profiles);
+		Iterator<Profile> it = this.profiles.iterator();
+		while(it.hasNext())
+		{	Profile p = it.next();
+			if(p.isAi())
+				p.setControlSettingsIndex(0);
+			else
+			{	p.setControlSettingsIndex(i);
+				i++;
+			}
+		}
+		// rounds
 		iterator = rounds.iterator();
+		// stats
 		stats.init(this);
 	}
 

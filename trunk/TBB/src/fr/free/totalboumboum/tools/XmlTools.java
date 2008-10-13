@@ -69,6 +69,7 @@ public class XmlTools
 	public static final String ELT_COLORSPRITE = "colorsprite";
 	public static final String ELT_CONFRONTATION = "confrontation";
 	public static final String ELT_CONSTANT = "constant";
+	public static final String ELT_CONTROL = "control";
 	public static final String ELT_CONTROLS = "controls";
 	public static final String ELT_DIRECTION = "direction";
 	public static final String ELT_DISCRETIZE = "discretize";

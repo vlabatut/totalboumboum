@@ -23,32 +23,112 @@ package fr.free.totalboumboum.gui.options.controls;
 
 import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.image.BufferedImage;
 
 import javax.swing.Box;
 import javax.swing.BoxLayout;
+import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 
+import fr.free.totalboumboum.data.controls.ControlSettings;
+import fr.free.totalboumboum.engine.content.feature.event.ControlEvent;
 import fr.free.totalboumboum.gui.common.EntitledDataPanel;
 import fr.free.totalboumboum.gui.common.InnerDataPanel;
 import fr.free.totalboumboum.gui.common.MenuContainer;
 import fr.free.totalboumboum.gui.common.MenuPanel;
 import fr.free.totalboumboum.gui.common.SimpleMenuPanel;
 import fr.free.totalboumboum.gui.common.SplitMenuPanel;
+import fr.free.totalboumboum.gui.common.TablePanel;
 import fr.free.totalboumboum.gui.menus.tournament.TournamentSplitPanel;
 import fr.free.totalboumboum.gui.options.OptionsMenu;
 import fr.free.totalboumboum.gui.tools.GuiTools;
+import fr.free.totalboumboum.tools.ImageTools;
 
 public class ControlsData extends EntitledDataPanel
 {	
 	private static final long serialVersionUID = 1L;
 
-	public ControlsData(SplitMenuPanel container, int width, int height)
+	private TablePanel keysPanel;
+
+	public ControlsData(SplitMenuPanel container, int width, int height, int index)
 	{	super(container,width,height);
 
 		// title
-		String txt = getConfiguration().getLanguage().getText(GuiTools.MENU_OPTIONS_CONTROLS_TITLE);
+		String txt = getConfiguration().getLanguage().getText(GuiTools.MENU_OPTIONS_CONTROLS_TITLE)+" "+index;
 		setTitle(txt);
 	
+		// data
+		{	String actions[] = 
+			{	ControlEvent.UP,
+				ControlEvent.RIGHT,
+				ControlEvent.DOWN,
+				ControlEvent.LEFT,
+				ControlEvent.DROPBOMB,
+				ControlEvent.PUNCHBOMB
+			};
+			String head[] = 
+			{	getConfiguration().getLanguage().getText(GuiTools.MENU_OPTIONS_CONTROLS_HEADER_COMMAND),
+				getConfiguration().getLanguage().getText(GuiTools.MENU_OPTIONS_CONTROLS_HEADER_KEY),
+				getConfiguration().getLanguage().getText(GuiTools.MENU_OPTIONS_CONTROLS_HEADER_AUTO)
+			};
+			int lines = 16;
+			int cols = head.length;
+			keysPanel = new TablePanel(width,height,cols,lines,true,getConfiguration());
+
+			// headers
+			{	for(int col=0;col<head.length;col++)
+				{	
+//					BufferedImage image = GuiTools.getIcon(names[col]);
+					String tooltip = getConfiguration().getLanguage().getText(head[col]+GuiTools.TOOLTIP);
+					JLabel lbl = keysPanel.getLabel(0,col);
+//					lbl.setText(null);
+lbl.setText(head[col]);					
+					lbl.setToolTipText(tooltip);
+//					int lineHeight = GuiTools.getSize(GuiTools.GAME_RESULTS_LABEL_HEADER_HEIGHT);
+//					double zoom = lineHeight/(double)image.getHeight();
+//					image = ImageTools.resize(image,zoom,true);
+//					ImageIcon icon = new ImageIcon(image);
+//					lbl.setIcon(icon);
+				}
+			}
+			// data
+			{	ControlSettings controlSettings = getConfiguration().getGameConfiguration().getControlSettings().get(index);
+				for(int line=1;line<actions.length;line++)
+				{	int col = 0;
+					// command
+					{	JLabel commandLabel = keysPanel.getLabel(line, col++);
+						commandLabel.setText(actions[line-1]);
+						commandLabel.setToolTipText(actions[line-1]);
+						Color bg = GuiTools.COLOR_TABLE_REGULAR_BACKGROUND;
+						commandLabel.setBackground(bg);
+					}
+					// key
+					{	JLabel keyLabel = keysPanel.getLabel(line, col++);
+						int key = controlSettings.getKeyFromEvent(actions[line-1]);
+						String text;
+						if(key<0)
+							text = null;
+						else
+							text = Integer.toString(key);
+						keyLabel.setText(text);
+						keyLabel.setToolTipText(text);
+						Color bg = GuiTools.COLOR_TABLE_REGULAR_BACKGROUND;
+						keyLabel.setBackground(bg);
+					}
+					{	JLabel autoLabel = keysPanel.getLabel(line, col++);
+						boolean auto = controlSettings.isAutofire(actions[line-1]);
+						String text = Boolean.toString(auto);
+						autoLabel.setText(text);
+						autoLabel.setToolTipText(text);
+						Color bg = GuiTools.COLOR_TABLE_REGULAR_BACKGROUND;
+						autoLabel.setBackground(bg);
+					}
+				}
+			}
+			//
+			setDataPanel(keysPanel);
+//			updateData();
+		}
 	}
 
 	@Override

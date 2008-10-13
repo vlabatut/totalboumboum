@@ -25,11 +25,18 @@
 				<text name="Confirm" value="Confirm" tooltip="Confirm the last modifications and go back to the options menu" />
 				<text name="Controls" value="Controls" tooltip="Modify the in game control keys" />
 				<text name="Gameplay" value="Gameplay" tooltip="Modify the way of playing" />
+				<text name="Next" value="Next" tooltip="Next settings" />
+				<text name="Previous" value="Previous" tooltip="Previous settings" />
 				<text name="Video" value="Video" tooltip="Access the video settings" />
 			</group>
 			
 			<group name="Controls">
 				<text name="Title" value="Controls" tooltip="Modify ingame control keys" />
+				<group name="Header">
+					<text name="Auto" value="Auto" tooltip="Autofire (command repeated as long as the key stays pressed)" />
+					<text name="Command" value="Command" tooltip="Command executed when the key is pressed" />
+					<text name="Key" value="Key" tooltip="Key associated to a command" />
+				</group>
 			</group>
 
 			<group name="Gameplay">
