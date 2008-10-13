@@ -32,6 +32,8 @@ import javax.xml.parsers.ParserConfigurationException;
 import org.jdom.Element;
 import org.xml.sax.SAXException;
 
+import fr.free.totalboumboum.data.controls.ControlSettings;
+import fr.free.totalboumboum.data.controls.ControlSettingsLoader;
 import fr.free.totalboumboum.game.limit.LimitConfrontation;
 import fr.free.totalboumboum.game.limit.Limits;
 import fr.free.totalboumboum.game.limit.MatchLimit;
@@ -82,6 +84,9 @@ public class ConfigurationLoader
 		// profiles
 		element = root.getChild(XmlTools.ELT_PROFILES);
 		loadProfilesElement(element,result);
+		// controls
+		element = root.getChild(XmlTools.ELT_CONTROLS);
+		loadControlsElement(element,result);
 		// round for quick start
 		element = root.getChild(XmlTools.ELT_QUICKSTART);
 		if(quickStart && element!=null)
@@ -153,5 +158,23 @@ result.addProfile(value);
 	private static void loadQuickstartElement(Element root, Configuration result) throws IllegalArgumentException, SecurityException, ParserConfigurationException, SAXException, IOException, IllegalAccessException, NoSuchFieldException, ClassNotFoundException
 	{	String quickstartName = root.getAttribute(XmlTools.ATT_VALUE).getValue().trim();
 		result.setQuickstartName(quickstartName);
+	}
+	
+	private static void loadControlsElement(Element root, Configuration result) throws IllegalArgumentException, SecurityException, ParserConfigurationException, SAXException, IOException, IllegalAccessException, NoSuchFieldException
+	{	List<Element> elements = root.getChildren(XmlTools.ELT_PLAYER);
+		Iterator<Element> i = elements.iterator();
+		while(i.hasNext())
+		{	Element temp = i.next();
+			loadControlElement(temp,result);
+		}
+	}
+	
+	private static void loadControlElement(Element root, Configuration result) throws IllegalArgumentException, SecurityException, ParserConfigurationException, SAXException, IOException, IllegalAccessException, NoSuchFieldException
+	{	String indexStr = root.getAttribute(XmlTools.ATT_NUMBER).getValue().trim();
+		int index = Integer.parseInt(indexStr);
+		String fileName = root.getAttribute(XmlTools.ATT_NAME).getValue().trim();
+		String controlFile = FileTools.getControlsPath()+File.separator+fileName+FileTools.EXTENSION_DATA;
+		ControlSettings controlSettings = ControlSettingsLoader.loadControlSettings(controlFile);
+		result.addControlSettings(index,controlSettings);
 	}
 }

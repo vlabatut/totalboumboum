@@ -1,4 +1,4 @@
-package fr.free.totalboumboum.gui.options;
+package fr.free.totalboumboum.gui.options.controls;
 
 /*
  * Total Boum Boum
@@ -26,14 +26,10 @@ import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.event.ActionEvent;
 import java.awt.image.BufferedImage;
-import java.io.IOException;
 
 import javax.swing.Box;
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
-import javax.xml.parsers.ParserConfigurationException;
-
-import org.xml.sax.SAXException;
 
 import fr.free.totalboumboum.gui.common.InnerDataPanel;
 import fr.free.totalboumboum.gui.common.InnerMenuPanel;
@@ -43,20 +39,17 @@ import fr.free.totalboumboum.gui.common.SimpleMenuPanel;
 import fr.free.totalboumboum.gui.common.SplitMenuPanel;
 import fr.free.totalboumboum.gui.menus.tournament.TournamentData;
 import fr.free.totalboumboum.gui.options.controls.ControlsData;
-import fr.free.totalboumboum.gui.options.controls.ControlsSplitPanel;
 import fr.free.totalboumboum.gui.tools.GuiTools;
 
-public class OptionsMenu extends InnerMenuPanel
+public class ControlsMenu extends InnerMenuPanel
 {	private static final long serialVersionUID = 1L;
 	
-	private JButton buttonControls;
-	private JButton buttonGameplay;
-	private JButton buttonVideo;
-	private JButton buttonBack;
+	private JButton buttonConfirm;
+	private JButton buttonCancel;
 
-	private InnerDataPanel optionsData;
+	private ControlsData controlsData;
 
-	public OptionsMenu(SplitMenuPanel container, MenuPanel parent)
+	public ControlsMenu(SplitMenuPanel container, MenuPanel parent)
 	{	super(container, parent);
 
 		// layout
@@ -73,57 +66,24 @@ public class OptionsMenu extends InnerMenuPanel
 		
 		// buttons
 		add(Box.createVerticalGlue());
-		buttonControls = GuiTools.createSecondaryVerticalMenuButton(GuiTools.MENU_OPTIONS_BUTTON_CONTROLS,this,getConfiguration());
-		buttonGameplay = GuiTools.createSecondaryVerticalMenuButton(GuiTools.MENU_OPTIONS_BUTTON_GAMEPLAY,this,getConfiguration());
-buttonGameplay.setEnabled(false);
-		buttonVideo = GuiTools.createSecondaryVerticalMenuButton(GuiTools.MENU_OPTIONS_BUTTON_VIDEO,this,getConfiguration());
-buttonVideo.setEnabled(false);
+		buttonConfirm = GuiTools.createSecondaryVerticalMenuButton(GuiTools.MENU_OPTIONS_BUTTON_CONFIRM,this,getConfiguration());
 		add(Box.createRigidArea(new Dimension(0,GuiTools.getSize(GuiTools.MENU_VERTICAL_BUTTON_SPACE))));
-		buttonBack = GuiTools.createSecondaryVerticalMenuButton(GuiTools.MENU_OPTIONS_BUTTON_BACK,this,getConfiguration());
+		buttonCancel = GuiTools.createSecondaryVerticalMenuButton(GuiTools.MENU_OPTIONS_BUTTON_CANCEL,this,getConfiguration());
 		add(Box.createVerticalGlue());		
 
 		// panels
-		optionsData = new OptionsData(container);
-		container.setDataPart(optionsData);
-		dataPart = optionsData;
+		int h = GuiTools.getSize(GuiTools.VERTICAL_SPLIT_DATA_PANEL_HEIGHT);
+		int w = GuiTools.getSize(GuiTools.VERTICAL_SPLIT_DATA_PANEL_WIDTH);
+		InnerDataPanel controlsPanel = new ControlsData(container,w,h);
+		container.setDataPart(controlsPanel);
+		dataPart = controlsPanel;
 }
 	
 	public void actionPerformed(ActionEvent e)
-	{	if(e.getActionCommand().equals(GuiTools.MENU_OPTIONS_BUTTON_VIDEO))
-		{	
+	{	if(e.getActionCommand().equals(GuiTools.MENU_OPTIONS_BUTTON_CONFIRM))
+		{	//TODO modifications à implémenter
 	    }
-		else if(e.getActionCommand().equals(GuiTools.MENU_OPTIONS_BUTTON_GAMEPLAY))
-		{	
-	    }
-		else if(e.getActionCommand().equals(GuiTools.MENU_OPTIONS_BUTTON_CONTROLS))
-		{	ControlsSplitPanel controlsPanel;
-			try
-			{	controlsPanel = new ControlsSplitPanel(container.getContainer(),container);
-				replaceWith(controlsPanel);
-			}
-			catch (IllegalArgumentException e1)
-			{	e1.printStackTrace();
-			}
-			catch (SecurityException e1)
-			{	e1.printStackTrace();
-			}
-			catch (ParserConfigurationException e1)
-			{	e1.printStackTrace();
-			}
-			catch (SAXException e1)
-			{	e1.printStackTrace();
-			}
-			catch (IOException e1)
-			{	e1.printStackTrace();
-			}
-			catch (IllegalAccessException e1)
-			{	e1.printStackTrace();
-			}
-			catch (NoSuchFieldException e1)
-			{	e1.printStackTrace();
-			} 
-	    }
-		else if(e.getActionCommand().equals(GuiTools.MENU_OPTIONS_BUTTON_BACK))
+		else if(e.getActionCommand().equals(GuiTools.MENU_OPTIONS_BUTTON_CANCEL))
 		{	replaceWith(parent);
 	    }
 	} 

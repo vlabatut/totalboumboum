@@ -91,12 +91,20 @@ public class GuiConfiguration
 	// BACKGROUND		/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	private BufferedImage background;
+	private BufferedImage darkBackground;
 	
 	public BufferedImage getBackground()
 	{	return background;	
 	}
 	public void setBackground(BufferedImage background)
 	{	this.background = background;	
+	}
+
+	public BufferedImage getDarkBackground()
+	{	return darkBackground;	
+	}
+	public void setDarkBackground(BufferedImage darkBackground)
+	{	this.darkBackground = darkBackground;	
 	}
 
 	/////////////////////////////////////////////////////////////////

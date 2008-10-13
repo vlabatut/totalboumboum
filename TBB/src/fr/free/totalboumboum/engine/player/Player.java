@@ -34,7 +34,7 @@ import org.xml.sax.SAXException;
 import fr.free.totalboumboum.ai.AbstractAiManager;
 import fr.free.totalboumboum.ai.AiLoader;
 import fr.free.totalboumboum.data.configuration.Configuration;
-import fr.free.totalboumboum.data.profile.ControlSettings;
+import fr.free.totalboumboum.data.controls.ControlSettings;
 import fr.free.totalboumboum.data.profile.PredefinedColor;
 import fr.free.totalboumboum.data.profile.Profile;
 import fr.free.totalboumboum.engine.container.level.Level;

@@ -109,3 +109,12 @@
 - Modification	: ajout dans la police de caractères des voyelles accentuées, cédille et autres
 - Correction		: bug lors du décompte des items au début du round
 - Correction		: bug dans le TrajectoryMgr qui empêchait une bombe atterrissant dans des flammes d'exploser normalement  
+
++ beta.001
+- correction	: bug dans la GUI lorsqu'on utilise une résolution carrée : les itemset et initialitem dans la présentation des rounds sont coupés (certains items sont hors-écran)
+- correction	: bug graphique >> les textes des boutons sont coupés
+- correction : bug de gameplay dans SBM1 : le temps de latence des bombes était deux fois trop court
+- modification : dans la GUI, les boutons pas encore implémentés sont désactivés
+- nouvauté : activation et implémentation de l'option quickmatch dans le menu principal, gestion de la cohérence avec l'option tournament
+- correction : quelques bugs concernant la taille des différents éléments graphiques dans la GUI
+- nouveauté : les tooltips apparaissent plus rapidement (200 ms)

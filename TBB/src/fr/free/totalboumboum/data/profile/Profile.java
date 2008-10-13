@@ -29,8 +29,6 @@ public class Profile
 {
 	/** name */
 	private String name;
-	/** controls */
-	private ControlSettings controlSettings;
 	/** sprite */
 	private String spritePack;
 	private String spriteName;
@@ -45,7 +43,6 @@ public class Profile
 	
 	public Profile()
 	{	name = null;
-		controlSettings = new ControlSettings();
 		spritePack = null;
 		spriteName = null;
 		spriteColor = null;
@@ -58,13 +55,6 @@ public class Profile
 	}
 	public void setName(String name)
 	{	this.name = name;
-	}
-
-	public ControlSettings getControlSettings()
-	{	return controlSettings;
-	}
-	public void setControlSettings(ControlSettings controlSettings)
-	{	this.controlSettings = controlSettings;
 	}
 
 	public String getSpritePack()

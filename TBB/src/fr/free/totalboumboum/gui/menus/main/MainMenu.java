@@ -47,8 +47,9 @@ import fr.free.totalboumboum.gui.common.MenuContainer;
 import fr.free.totalboumboum.gui.common.MenuPanel;
 import fr.free.totalboumboum.gui.common.SimpleMenuPanel;
 import fr.free.totalboumboum.gui.game.match.MatchSplitPanel;
-import fr.free.totalboumboum.gui.menus.tournament.TournamentMain;
+import fr.free.totalboumboum.gui.menus.tournament.TournamentSplitPanel;
 import fr.free.totalboumboum.gui.options.OptionsMenu;
+import fr.free.totalboumboum.gui.options.OptionsSplitPanel;
 import fr.free.totalboumboum.gui.tools.GuiTools;
 import fr.free.totalboumboum.tools.FileTools;
 import fr.free.totalboumboum.tools.ImageTools;
@@ -79,8 +80,6 @@ public class MainMenu extends SimpleMenuPanel
 		setPreferredSize(getConfiguration().getPanelDimension());
 		// background
 		image = getConfiguration().getBackground();
-		// panels
-		optionsMenuPanel = new OptionsMenu(getContainer(),this);
 		
 		// buttons
 		add(Box.createVerticalGlue());
@@ -107,7 +106,33 @@ buttonLevels.setEnabled(false);
 	
 	public void actionPerformed(ActionEvent e)
 	{	if(e.getActionCommand().equals(GuiTools.MENU_MAIN_BUTTON_OPTIONS))
-		{	replaceWith(optionsMenuPanel);
+		{	if(optionsMenuPanel==null)
+			{	try
+				{	optionsMenuPanel = new OptionsSplitPanel(getContainer(),this);
+				}
+				catch (IllegalArgumentException e1)
+				{	e1.printStackTrace();
+				}
+				catch (SecurityException e1)
+				{	e1.printStackTrace();
+				} 
+				catch (ParserConfigurationException e1)
+				{	e1.printStackTrace();
+				} 
+				catch (SAXException e1)
+				{	e1.printStackTrace();
+				} 
+				catch (IOException e1)
+				{	e1.printStackTrace();
+				} 
+				catch (IllegalAccessException e1)
+				{	e1.printStackTrace();
+				}
+				catch (NoSuchFieldException e1)
+				{	e1.printStackTrace();
+				}			
+			}
+			replaceWith(optionsMenuPanel);
 	    }
 		else if(e.getActionCommand().equals(GuiTools.MENU_MAIN_BUTTON_PROFILES))
 		{	
@@ -126,7 +151,7 @@ buttonLevels.setEnabled(false);
 			{	try
 				{	Configuration config = getConfiguration().getGameConfiguration();
 					config.loadLastTournament();
-					tournamentMainPanel = new TournamentMain(getContainer(),this);
+					tournamentMainPanel = new TournamentSplitPanel(getContainer(),this);
 				}
 				catch (ParserConfigurationException e1)
 				{	e1.printStackTrace();

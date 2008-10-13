@@ -130,6 +130,7 @@ public class XmlTools
 	public static final String ELT_PANEL_DIMENSION = "panelDimension";
 	public static final String ELT_PERMISSION = "permission";
 	public static final String ELT_PERMISSIONS = "permissions";
+	public static final String ELT_PLAYER = "player";
 	public static final String ELT_POINT = "point";
 	public static final String ELT_POINTS = "points";
 	public static final String ELT_PORTRAIT = "portrait";

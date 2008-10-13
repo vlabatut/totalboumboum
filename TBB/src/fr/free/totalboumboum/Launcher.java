@@ -634,14 +634,9 @@ public class Launcher
 	/*
 	 * TODO
 	 * 
-	 * + alpha.46
-	 * - correction	: bug dans la GUI lorsqu'on utilise une résolution carrée : les itemset et initialitem dans la présentation des rounds sont coupés (certains items sont hors-écran)
-	 * - correction	: bug graphique >> les textes des boutons sont coupés
-	 * - correction : bug de gameplay dans SBM1 : le temps de latence des bombes était deux fois trop court
-	 * - modification : dans la GUI, les boutons pas encore implémentés sont désactivés
-	 * - nouvauté : activation et implémentation de l'option quickmatch dans le menu principal, gestion de la cohérence avec l'option tournament
-	 * - correction : quelques bugs concernant la taille des différents éléments graphiques dans la GUI
-	 * - nouveauté : les tooltips apparaissent plus rapidement (200 ms)
+	 * + beta.002
+	 * - modification : utilisation d'une image plus foncée pour les fonds de tous les menus sauf le principal
+	 * - 
 	 * 
 	 * *******************************************************
 	 * *********************** A FAIRE ***********************

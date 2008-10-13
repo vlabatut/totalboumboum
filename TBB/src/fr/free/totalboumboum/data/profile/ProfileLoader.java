@@ -61,10 +61,6 @@ public class ProfileLoader
 		// sprite info
 		Element character = root.getChild(XmlTools.ELT_CHARACTER);
 		loadSpriteElement(character,result);
-		// controls file
-		String controlFile = individualFolder+File.separator+FileTools.FILE_CONTROLS+FileTools.EXTENSION_DATA;
-		ControlSettings controlSettings = ControlSettingsLoader.loadControlSettings(controlFile);
-		result.setControlSettings(controlSettings);
 		//
 		return result;
 	}

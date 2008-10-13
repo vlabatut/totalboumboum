@@ -28,7 +28,7 @@ import java.util.LinkedList;
 import java.util.Map.Entry;
 
 import fr.free.totalboumboum.data.configuration.Configuration;
-import fr.free.totalboumboum.data.profile.ControlSettings;
+import fr.free.totalboumboum.data.controls.ControlSettings;
 import fr.free.totalboumboum.data.profile.PredefinedColor;
 import fr.free.totalboumboum.data.statistics.StatisticAction;
 import fr.free.totalboumboum.data.statistics.StatisticEvent;
