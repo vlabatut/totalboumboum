@@ -21,9 +21,14 @@ package fr.free.totalboumboum.gui.data.configuration;
  * 
  */
 
+import java.awt.AlphaComposite;
+import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
+import java.awt.Graphics;
+import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
+import java.awt.image.RescaleOp;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
@@ -100,15 +105,27 @@ public class GuiConfigurationLoader
 	}
 	
 	public static void loadBackgroundElement(Element root, GuiConfiguration result) throws IOException
-	{	String filename = root.getAttribute(GuiXmlTools.ATT_FILE).getValue().trim();
+	{	// folder
+		String filename = root.getAttribute(GuiXmlTools.ATT_FILE).getValue().trim();
 		String path = GuiFileTools.getImagesPath()+File.separator+filename;
+		// image
 		BufferedImage image = ImageTools.loadImage(path,null);
+		// resize
 		Configuration configuration = result.getGameConfiguration();
 		Dimension dim = configuration.getPanelDimension();
 		double zoomY = dim.getHeight()/(double)image.getHeight();
 		double zoomX = dim.getWidth()/(double)image.getWidth();
 		double zoom = Math.max(zoomX,zoomY);
-		image = ImageTools.resize(image,zoom,true);	
+		image = ImageTools.resize(image,zoom,true);
 		result.setBackground(image);
+		// dark image		
+		BufferedImage darkImage = ImageTools.copyBufferedImage(image);
+		Graphics2D g = (Graphics2D)darkImage.getGraphics();
+		g.setComposite(AlphaComposite.Clear);
+		g.setPaintMode();
+		g.setColor(new Color(0,0,0,100));
+		g.fillRect(0,0,darkImage.getWidth(),darkImage.getHeight());
+		g.dispose();
+		result.setDarkBackground(darkImage);
 	}
 }

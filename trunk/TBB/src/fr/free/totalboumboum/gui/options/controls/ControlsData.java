@@ -34,15 +34,15 @@ import fr.free.totalboumboum.gui.common.MenuContainer;
 import fr.free.totalboumboum.gui.common.MenuPanel;
 import fr.free.totalboumboum.gui.common.SimpleMenuPanel;
 import fr.free.totalboumboum.gui.common.SplitMenuPanel;
-import fr.free.totalboumboum.gui.menus.tournament.TournamentMain;
+import fr.free.totalboumboum.gui.menus.tournament.TournamentSplitPanel;
 import fr.free.totalboumboum.gui.options.OptionsMenu;
 import fr.free.totalboumboum.gui.tools.GuiTools;
 
-public class OptionsControls extends EntitledDataPanel
+public class ControlsData extends EntitledDataPanel
 {	
 	private static final long serialVersionUID = 1L;
 
-	public OptionsControls(SplitMenuPanel container, int width, int height)
+	public ControlsData(SplitMenuPanel container, int width, int height)
 	{	super(container,width,height);
 
 		// title

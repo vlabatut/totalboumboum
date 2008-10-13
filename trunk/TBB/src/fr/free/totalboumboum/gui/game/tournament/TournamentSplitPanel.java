@@ -47,7 +47,7 @@ public class TournamentSplitPanel extends SplitMenuPanel
 		setPreferredSize(getConfiguration().getPanelDimension());
 		
 		// background
-		image = getConfiguration().getBackground();
+		image = getConfiguration().getDarkBackground();
 //		float[] scales = { 0.5f, 0.5f, 0.5f, 1f };
 //		float[] offsets = new float[4];
 //		RescaleOp rop = new RescaleOp(scales, offsets, null);

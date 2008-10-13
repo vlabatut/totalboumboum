@@ -68,6 +68,8 @@ public class GuiTools
 	/* OPTIONS */
 		/* BUTTON */
 		public static final String MENU_OPTIONS_BUTTON_BACK = "MenuOptionsButtonBack";
+		public static final String MENU_OPTIONS_BUTTON_CANCEL = "MenuOptionsButtonCancel";
+		public static final String MENU_OPTIONS_BUTTON_CONFIRM = "MenuOptionsButtonConfirm";
 		public static final String MENU_OPTIONS_BUTTON_CONTROLS = "MenuOptionsButtonControls";
 		public static final String MENU_OPTIONS_BUTTON_GAMEPLAY = "MenuOptionsButtonGameplay";
 		public static final String MENU_OPTIONS_BUTTON_VIDEO = "MenuOptionsButtonVideo";
@@ -355,7 +357,7 @@ public class GuiTools
 	
 	
 	// colors
-	public final static Color COLOR_COMMON_BACKGROUND = new Color(255,255,255,200);
+	public final static Color COLOR_COMMON_BACKGROUND = new Color(255,255,255,150);
 	public final static Color COLOR_TITLE_FOREGROUND = Color.BLACK;
 	public final static Color COLOR_TABLE_REGULAR_BACKGROUND = new Color(0,0,0,80);
 	public final static Color COLOR_TABLE_NEUTRAL_BACKGROUND = new Color(0,0,0,20);

@@ -85,7 +85,7 @@ import fr.free.totalboumboum.gui.common.SplitMenuPanel;
 import fr.free.totalboumboum.gui.common.TablePanel;
 import fr.free.totalboumboum.gui.data.configuration.GuiConfiguration;
 import fr.free.totalboumboum.gui.game.round.description.RoundDescription;
-import fr.free.totalboumboum.gui.menus.tournament.TournamentMain;
+import fr.free.totalboumboum.gui.menus.tournament.TournamentSplitPanel;
 import fr.free.totalboumboum.gui.options.OptionsMenu;
 import fr.free.totalboumboum.gui.tools.SpringUtilities;
 import fr.free.totalboumboum.gui.tools.GuiTools;

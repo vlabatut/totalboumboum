@@ -26,12 +26,14 @@ import java.awt.Dimension;
 import java.awt.Font;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import javax.xml.parsers.ParserConfigurationException;
 
 import org.jdom.Element;
 import org.xml.sax.SAXException;
 
+import fr.free.totalboumboum.data.controls.ControlSettings;
 import fr.free.totalboumboum.game.limit.LimitConfrontation;
 import fr.free.totalboumboum.game.limit.Limits;
 import fr.free.totalboumboum.game.limit.MatchLimit;
@@ -137,6 +139,18 @@ public class Configuration
 			profiles.add(profile);
 	}
 
+	/////////////////////////////////////////////////////////////////
+	// CONTROLS			/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	private HashMap<Integer,ControlSettings> controlSettings = new HashMap<Integer,ControlSettings>();
+	
+	public HashMap<Integer,ControlSettings> getControlSettings()
+	{	return controlSettings;	
+	}
+	
+	public void addControlSettings(int index, ControlSettings controlSetting)
+	{	controlSettings.put(index,controlSetting);
+	}
 	
 	/////////////////////////////////////////////////////////////////
 	// CURRENT TOURNAMENT	/////////////////////////////////////////

@@ -1,4 +1,4 @@
-package fr.free.totalboumboum.gui.game.round;
+package fr.free.totalboumboum.gui.options;
 
 /*
  * Total Boum Boum
@@ -23,36 +23,36 @@ package fr.free.totalboumboum.gui.game.round;
 
 import java.awt.BorderLayout;
 import java.awt.Graphics;
-import java.awt.Image;
 import java.awt.image.BufferedImage;
 import java.awt.image.RescaleOp;
+import java.io.IOException;
 
-import fr.free.totalboumboum.game.round.Round;
-import fr.free.totalboumboum.game.round.RoundRenderPanel;
+import javax.xml.parsers.ParserConfigurationException;
+
+import org.xml.sax.SAXException;
+
 import fr.free.totalboumboum.gui.common.MenuContainer;
 import fr.free.totalboumboum.gui.common.MenuPanel;
 import fr.free.totalboumboum.gui.common.SplitMenuPanel;
 import fr.free.totalboumboum.gui.game.tournament.description.TournamentDescription;
 
-public class RoundSplitPanel extends SplitMenuPanel
-{	
+public class OptionsSplitPanel extends SplitMenuPanel
+{	private static final long serialVersionUID = 1L;
+
 	private BufferedImage image;
 
-	public RoundSplitPanel(MenuContainer container, MenuPanel parent)
-	{	super(container,parent,BorderLayout.PAGE_END);
+	public OptionsSplitPanel(MenuContainer container, MenuPanel parent) throws IllegalArgumentException, SecurityException, ParserConfigurationException, SAXException, IOException, IllegalAccessException, NoSuchFieldException
+	{	super(container,parent,BorderLayout.LINE_START);
 	
 		// size
 		setPreferredSize(getConfiguration().getPanelDimension());
 		
 		// background
 		image = getConfiguration().getDarkBackground();
-//		float[] scales = { 0.5f, 0.5f, 0.5f, 1f };
-//		float[] offsets = new float[4];
-//		RescaleOp rop = new RescaleOp(scales, offsets, null);
-//	    image = rop.filter(image, null);
 		
 		// panels
-		setMenuPart(new RoundMenu(this,parent));
+//		setDataPart(new TournamentDescription(this));
+		setMenuPart(new OptionsMenu(this,parent));
 	}
 	
 	@Override

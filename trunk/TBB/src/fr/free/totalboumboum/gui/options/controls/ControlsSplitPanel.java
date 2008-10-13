@@ -1,4 +1,4 @@
-package fr.free.totalboumboum.gui.menus.tournament;
+package fr.free.totalboumboum.gui.options.controls;
 
 /*
  * Total Boum Boum
@@ -34,34 +34,29 @@ import org.xml.sax.SAXException;
 import fr.free.totalboumboum.gui.common.MenuContainer;
 import fr.free.totalboumboum.gui.common.MenuPanel;
 import fr.free.totalboumboum.gui.common.SplitMenuPanel;
+import fr.free.totalboumboum.gui.game.tournament.description.TournamentDescription;
 
-public class TournamentMain extends SplitMenuPanel
+public class ControlsSplitPanel extends SplitMenuPanel
 {	private static final long serialVersionUID = 1L;
 
 	private BufferedImage image;
 
-	public TournamentMain(MenuContainer container, MenuPanel parent) throws IllegalArgumentException, SecurityException, ParserConfigurationException, SAXException, IOException, IllegalAccessException, NoSuchFieldException
+	public ControlsSplitPanel(MenuContainer container, MenuPanel parent) throws IllegalArgumentException, SecurityException, ParserConfigurationException, SAXException, IOException, IllegalAccessException, NoSuchFieldException
 	{	super(container,parent,BorderLayout.LINE_START);
-		
+	
 		// size
-		setPreferredSize(getConfiguration().getPanelDimension());		
+		setPreferredSize(getConfiguration().getPanelDimension());
 		
 		// background
-		image = getConfiguration().getBackground();
-//		float[] scales = { 0.5f, 0.5f, 0.5f, 1f };
-//		float[] offsets = new float[4];
-//		RescaleOp rop = new RescaleOp(scales, offsets, null);
-//	    image = rop.filter(image, null);
+		image = getConfiguration().getDarkBackground();
 		
 		// panels
-//		setDataPart(new TournamentData(this));
-		setMenuPart(new TournamentMenu(this,parent));
+//		setDataPart(new TournamentDescription(this));
+		setMenuPart(new ControlsMenu(this,parent));
 	}
-
 	
 	@Override
 	public void paintComponent(Graphics g)
 	{	g.drawImage(image, 0, 0, null);
 	}
-	
 }

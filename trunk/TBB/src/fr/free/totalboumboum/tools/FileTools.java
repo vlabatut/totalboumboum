@@ -89,6 +89,7 @@ public class FileTools
 	public static final String FOLDER_AI = "ai";
 	public static final String FOLDER_BOMBS = "bombs";
 	public static final String FOLDER_CHARACTERS = "characters";
+	public static final String FOLDER_CONTROLS = "controls";
 	public static final String FOLDER_DATA = "data";
 	public static final String FOLDER_EXPLOSIONS = "explosions";
 	public static final String FOLDER_FIRE = "fire";
@@ -147,6 +148,9 @@ public class FileTools
 	
 	public static String getSettingsPath()
 	{	return getResourcesPath()+File.separator+FOLDER_SETTINGS;		
+	}
+	public static String getControlsPath()
+	{	return getSettingsPath()+File.separator+FOLDER_CONTROLS;		
 	}
 	public static String getMatchesPath()
 	{	return getSettingsPath()+File.separator+FOLDER_MATCHES;		
