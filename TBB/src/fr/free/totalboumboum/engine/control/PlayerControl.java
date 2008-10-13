@@ -32,8 +32,6 @@ import fr.free.totalboumboum.engine.loop.Loop;
 import fr.free.totalboumboum.engine.player.Player;
 import fr.free.totalboumboum.game.round.Round;
 
-
-
 public class PlayerControl implements KeyListener
 {	
 	private Player player;

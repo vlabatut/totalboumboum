@@ -161,7 +161,7 @@ result.addProfile(value);
 	}
 	
 	private static void loadControlsElement(Element root, Configuration result) throws IllegalArgumentException, SecurityException, ParserConfigurationException, SAXException, IOException, IllegalAccessException, NoSuchFieldException
-	{	List<Element> elements = root.getChildren(XmlTools.ELT_PLAYER);
+	{	List<Element> elements = root.getChildren(XmlTools.ELT_CONTROL);
 		Iterator<Element> i = elements.iterator();
 		while(i.hasNext())
 		{	Element temp = i.next();
@@ -172,7 +172,7 @@ result.addProfile(value);
 	private static void loadControlElement(Element root, Configuration result) throws IllegalArgumentException, SecurityException, ParserConfigurationException, SAXException, IOException, IllegalAccessException, NoSuchFieldException
 	{	String indexStr = root.getAttribute(XmlTools.ATT_NUMBER).getValue().trim();
 		int index = Integer.parseInt(indexStr);
-		String fileName = root.getAttribute(XmlTools.ATT_NAME).getValue().trim();
+		String fileName = root.getAttribute(XmlTools.ATT_FILE).getValue().trim();
 		String controlFile = FileTools.getControlsPath()+File.separator+fileName+FileTools.EXTENSION_DATA;
 		ControlSettings controlSettings = ControlSettingsLoader.loadControlSettings(controlFile);
 		result.addControlSettings(index,controlSettings);

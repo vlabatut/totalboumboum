@@ -30,9 +30,6 @@ import fr.free.totalboumboum.engine.content.feature.anime.AnimeGesture;
 
 public class ActionEvent extends AbstractEvent
 {	
-	
-	
-	
 	public static final String ENV_COMBUSTION = "ENV_COMBUSTION";
 	public static final String ENV_ITEM_ENCOUNTERED = "ENV_ITEM_ENCOUNTERED";
 //	public static final String ENV_TERMINATED_BOMB = "ENV_TERMINATED_BOMB";

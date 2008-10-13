@@ -23,6 +23,7 @@ package fr.free.totalboumboum.data.profile;
 
 import com.sun.org.apache.xpath.internal.operations.Equals;
 
+import fr.free.totalboumboum.data.controls.ControlSettings;
 import fr.free.totalboumboum.engine.control.PlayerControl;
 
 public class Profile
@@ -40,6 +41,7 @@ public class Profile
 	private Portraits portraits;
 	
 	private PlayerControl spriteControl;
+	private int controlSettingsIndex;
 	
 	public Profile()
 	{	name = null;
@@ -112,5 +114,16 @@ public class Profile
 	}
 	public void setPortraits(Portraits portraits)
 	{	this.portraits = portraits;
+	}
+
+	public int getControlSettingsIndex()
+	{	return controlSettingsIndex;
+	}
+	public void setControlSettingsIndex(int controlSettings)
+	{	this.controlSettingsIndex = controlSettings;
+	}
+	
+	public boolean isAi()
+	{	return aiName!=null;	
 	}
 }

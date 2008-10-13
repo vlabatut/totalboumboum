@@ -44,14 +44,19 @@ import fr.free.totalboumboum.gui.tools.GuiTools;
 public class ControlsMenu extends InnerMenuPanel
 {	private static final long serialVersionUID = 1L;
 	
+	private JButton buttonPrevious;
+	private JButton buttonNext;
+	
 	private JButton buttonConfirm;
 	private JButton buttonCancel;
 
-	private ControlsData controlsData;
+	private ControlsData controlsData[] = new ControlsData[5];
+	
+	private int selected = 0;
 
 	public ControlsMenu(SplitMenuPanel container, MenuPanel parent)
 	{	super(container, parent);
-
+		
 		// layout
 		BoxLayout layout = new BoxLayout(this,BoxLayout.PAGE_AXIS); 
 		setLayout(layout);
@@ -66,6 +71,9 @@ public class ControlsMenu extends InnerMenuPanel
 		
 		// buttons
 		add(Box.createVerticalGlue());
+		buttonPrevious = GuiTools.createSecondaryVerticalMenuButton(GuiTools.MENU_OPTIONS_BUTTON_PREVIOUS,this,getConfiguration());
+		buttonNext = GuiTools.createSecondaryVerticalMenuButton(GuiTools.MENU_OPTIONS_BUTTON_NEXT,this,getConfiguration());
+		add(Box.createRigidArea(new Dimension(0,GuiTools.getSize(GuiTools.MENU_VERTICAL_BUTTON_SPACE))));
 		buttonConfirm = GuiTools.createSecondaryVerticalMenuButton(GuiTools.MENU_OPTIONS_BUTTON_CONFIRM,this,getConfiguration());
 		add(Box.createRigidArea(new Dimension(0,GuiTools.getSize(GuiTools.MENU_VERTICAL_BUTTON_SPACE))));
 		buttonCancel = GuiTools.createSecondaryVerticalMenuButton(GuiTools.MENU_OPTIONS_BUTTON_CANCEL,this,getConfiguration());
@@ -74,14 +82,26 @@ public class ControlsMenu extends InnerMenuPanel
 		// panels
 		int h = GuiTools.getSize(GuiTools.VERTICAL_SPLIT_DATA_PANEL_HEIGHT);
 		int w = GuiTools.getSize(GuiTools.VERTICAL_SPLIT_DATA_PANEL_WIDTH);
-		InnerDataPanel controlsPanel = new ControlsData(container,w,h);
-		container.setDataPart(controlsPanel);
-		dataPart = controlsPanel;
+		for(int i=0;i<controlsData.length;i++)
+			controlsData[i] = new ControlsData(container,w,h,i+1);
+		container.setDataPart(controlsData[0]);
+		dataPart = controlsData[0];
 }
 	
 	public void actionPerformed(ActionEvent e)
-	{	if(e.getActionCommand().equals(GuiTools.MENU_OPTIONS_BUTTON_CONFIRM))
-		{	//TODO modifications à implémenter
+	{	if(e.getActionCommand().equals(GuiTools.MENU_OPTIONS_BUTTON_NEXT))
+		{	selected = (selected + 1) % controlsData.length;
+			container.setDataPart(controlsData[selected]);
+			dataPart = controlsData[selected];
+	    }
+		else if(e.getActionCommand().equals(GuiTools.MENU_OPTIONS_BUTTON_PREVIOUS))
+		{	selected = (selected + controlsData.length - 1) % controlsData.length;
+			container.setDataPart(controlsData[selected]);
+			dataPart = controlsData[selected];
+	    }
+		else if(e.getActionCommand().equals(GuiTools.MENU_OPTIONS_BUTTON_CONFIRM))
+		{	//TODO modifications à enregistrer
+			replaceWith(parent);
 	    }
 		else if(e.getActionCommand().equals(GuiTools.MENU_OPTIONS_BUTTON_CANCEL))
 		{	replaceWith(parent);

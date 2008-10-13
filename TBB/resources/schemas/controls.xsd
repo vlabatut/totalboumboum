@@ -16,7 +16,7 @@
 
 	<xsd:complexType name="tControls">
 		<xsd:sequence>
-			<xsd:element name="event" type="tEvent" maxOccurs="unbounded"/>
+			<xsd:element name="event" type="tEvent" minOccurs="0" maxOccurs="unbounded"/>
 		</xsd:sequence>
 	</xsd:complexType>
 

@@ -17,13 +17,13 @@
 
 <!-- DISPLAY -->	
 	<controls>
-		<control number="1" file="P1" />
-		<control number="2" file="P2" />
-		<control number="3" file="P2" />
-		<control number="4" file="P2" />
-		<control number="5" file="P2" />
+		<control number="1" file="01" />
+		<control number="2" file="02" />
+		<control number="3" file="03" />
+		<control number="4" file="04" />
+		<control number="5" file="05" />
 	</controls>
-	
+
 <!-- PROFILES -->	
 	<profiles>
 <!-- brown -->			<!-- 5 -->			<!-- DÉGRADÉ -->			<!--		<profile value="BasmanSandalli" />			 -->	
