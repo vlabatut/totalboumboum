@@ -18,6 +18,17 @@
 		<xsd:attribute name="width" type="xsd:integer" use="required" />
 	</xsd:complexType>
 
+	<xsd:complexType name="tControl">
+		<xsd:attribute name="number" type="xsd:integer" use="required" />
+		<xsd:attribute name="file" type="xsd:string" use="required" />
+	</xsd:complexType>
+
+	<xsd:complexType name="tControls">
+		<xsd:sequence>
+			<xsd:element name="control" type="tControl" maxOccurs="unbounded"/>
+		</xsd:sequence>
+	</xsd:complexType>
+
 	<xsd:complexType name="tProfile">
 		<xsd:attribute name="value" type="xsd:string" use="required" />
 	</xsd:complexType>
@@ -46,6 +57,7 @@
 			<xsd:element name="speed" type="tSpeed" />
 			<xsd:element name="smoothGraphics" type="tSmoothGraphics" />
 			<xsd:element name="panelDimension" type="tDimension" />
+			<xsd:element name="controls" type="tControls" />
 			<xsd:element name="profiles" type="tProfiles" />
 			<xsd:element name="tournament" type="tTournament" minOccurs="0"/>
 			<xsd:element name="quickmatch" type="tQuickmatch" minOccurs="0"/>
