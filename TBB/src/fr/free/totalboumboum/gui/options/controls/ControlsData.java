@@ -67,40 +67,44 @@ public class ControlsData extends EntitledDataPanel
 				ControlEvent.PUNCHBOMB
 			};
 			String head[] = 
-			{	getConfiguration().getLanguage().getText(GuiTools.MENU_OPTIONS_CONTROLS_HEADER_COMMAND),
-				getConfiguration().getLanguage().getText(GuiTools.MENU_OPTIONS_CONTROLS_HEADER_KEY),
-				getConfiguration().getLanguage().getText(GuiTools.MENU_OPTIONS_CONTROLS_HEADER_AUTO)
+			{	GuiTools.MENU_OPTIONS_CONTROLS_HEADER_COMMAND,
+				GuiTools.MENU_OPTIONS_CONTROLS_HEADER_KEY,
+				GuiTools.MENU_OPTIONS_CONTROLS_HEADER_AUTO
 			};
 			int lines = 16;
 			int cols = head.length;
-			keysPanel = new TablePanel(width,height,cols,lines,true,getConfiguration());
+			int w = (int) getDataPanel().getPreferredSize().getWidth();
+			int h = (int) getDataPanel().getPreferredSize().getHeight();
+			keysPanel = new TablePanel(w,h,cols,lines,true,getConfiguration());
 
 			// headers
 			{	for(int col=0;col<head.length;col++)
 				{	
-//					BufferedImage image = GuiTools.getIcon(names[col]);
+					BufferedImage image = GuiTools.getIcon(head[col]);
 					String tooltip = getConfiguration().getLanguage().getText(head[col]+GuiTools.TOOLTIP);
 					JLabel lbl = keysPanel.getLabel(0,col);
-//					lbl.setText(null);
-lbl.setText(head[col]);					
+					lbl.setText(null);
+//lbl.setText(head[col]);					
 					lbl.setToolTipText(tooltip);
-//					int lineHeight = GuiTools.getSize(GuiTools.GAME_RESULTS_LABEL_HEADER_HEIGHT);
-//					double zoom = lineHeight/(double)image.getHeight();
-//					image = ImageTools.resize(image,zoom,true);
-//					ImageIcon icon = new ImageIcon(image);
-//					lbl.setIcon(icon);
+					int lineHeight = GuiTools.getSize(GuiTools.GAME_RESULTS_LABEL_HEADER_HEIGHT);
+					double zoom = lineHeight/(double)image.getHeight();
+					image = ImageTools.resize(image,zoom,true);
+					ImageIcon icon = new ImageIcon(image);
+					lbl.setIcon(icon);
 				}
 			}
 			// data
 			{	ControlSettings controlSettings = getConfiguration().getGameConfiguration().getControlSettings().get(index);
 				for(int line=1;line<actions.length;line++)
 				{	int col = 0;
+					int lineHeight = GuiTools.getSize(GuiTools.GAME_RESULTS_LABEL_LINE_HEIGHT);
 					// command
 					{	JLabel commandLabel = keysPanel.getLabel(line, col++);
 						commandLabel.setText(actions[line-1]);
 						commandLabel.setToolTipText(actions[line-1]);
 						Color bg = GuiTools.COLOR_TABLE_REGULAR_BACKGROUND;
 						commandLabel.setBackground(bg);
+						commandLabel.setMaximumSize(new Dimension(Integer.MAX_VALUE,lineHeight));
 					}
 					// key
 					{	JLabel keyLabel = keysPanel.getLabel(line, col++);
@@ -114,6 +118,7 @@ lbl.setText(head[col]);
 						keyLabel.setToolTipText(text);
 						Color bg = GuiTools.COLOR_TABLE_REGULAR_BACKGROUND;
 						keyLabel.setBackground(bg);
+						keyLabel.setMaximumSize(new Dimension(Integer.MAX_VALUE,lineHeight));
 					}
 					{	JLabel autoLabel = keysPanel.getLabel(line, col++);
 						boolean auto = controlSettings.isAutofire(actions[line-1]);
@@ -122,6 +127,7 @@ lbl.setText(head[col]);
 						autoLabel.setToolTipText(text);
 						Color bg = GuiTools.COLOR_TABLE_REGULAR_BACKGROUND;
 						autoLabel.setBackground(bg);
+						autoLabel.setMaximumSize(new Dimension(Integer.MAX_VALUE,lineHeight));
 					}
 				}
 			}
