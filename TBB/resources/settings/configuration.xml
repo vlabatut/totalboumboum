@@ -14,6 +14,15 @@
 <!-- 	attention : si vous augmentez la résolution graphique, il faut donner plus de mémoire à la java machine
 		par exemple en utilisant l'option d'exécution -xmx128m pour donner 128 Mo au lieu des 64 alloués par défaut -->
 	<panelDimension width="1024" height="768" />
+
+<!-- DISPLAY -->	
+	<controls>
+		<control number="1" file="P1" />
+		<control number="2" file="P2" />
+		<control number="3" file="P2" />
+		<control number="4" file="P2" />
+		<control number="5" file="P2" />
+	</controls>
 	
 <!-- PROFILES -->	
 	<profiles>
@@ -35,8 +44,8 @@
 <!-- yellow -->			<!-- 7 -->			<!-- IDENTIQUE  -->		<!--		<profile value="SahinYildirim" /> 				 -->
 
  
-<!-- orange -->																						<profile value="test" />  					 											
-<!-- cyan -->																							<profile value="manual" />	
+<!-- orange -->																						<profile value="Test" />  					 											
+<!-- cyan -->																							<profile value="Human" />	
 
 	</profiles>
 
