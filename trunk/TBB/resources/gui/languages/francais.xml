@@ -37,6 +37,22 @@
 					<text name="Command" value="Commande" tooltip="Commande associée à une touche" />
 					<text name="Key" value="Touche" tooltip="Touche à presser pour déclencher la commande correspondante" />
 				</group>
+
+				<group name="Line">
+					<group name="Command" >
+						<text name="Up" value="Haut" tooltip="Aller vers le haut" />
+						<text name="Right" value="Droite" tooltip="Aller vers la droite" />
+						<text name="Down" value="Bas" tooltip="Aller vers le bas" />
+						<text name="Left" value="Gauche" tooltip="Aller vers la gauche" />
+						<text name="Dropbomb" value="Poser" tooltip="Poser une bombe" />
+						<text name="Punchbomb" value="Frapper" tooltip="Frapper une bombe" />
+					</group>
+
+					<group name="Auto" >
+						<text name="False" value="Désactivé" tooltip="Sans déclenchement automatique" />
+						<text name="True" value="Activé" tooltip="Avec déclenchement automatique" />
+					</group>
+				</group>
 			</group>
 
 			<group name="Gameplay">

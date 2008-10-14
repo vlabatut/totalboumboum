@@ -23,7 +23,9 @@ package fr.free.totalboumboum.tools;
 
 import java.io.File;
 import java.io.FileInputStream;
+import java.lang.reflect.Field;
 import java.lang.reflect.Modifier;
+import java.lang.reflect.Type;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.jar.JarEntry;
@@ -139,5 +141,24 @@ public class ClassTools
 		else if(name.equalsIgnoreCase("item"))
 			result = Item.class;
 		return result;
-	}	
+	}
+	
+	public static Field getFieldFromValue(int value, Class<?> cls) throws IllegalArgumentException, IllegalAccessException
+	{	Field result = null;
+		Field[] fields = cls.getFields();
+		int i = 0;
+		while(i<fields.length && result==null)
+		{	Type type = fields[i].getType();
+			if(type.equals(int.class))
+			{	int mod = fields[i].getModifiers();
+				if(Modifier.isFinal(mod) && Modifier.isPublic(mod) && Modifier.isStatic(mod))
+				{	int v = fields[i].getInt(cls);
+					if(value==v)
+						result = fields[i];				
+				}
+			}
+			i++;
+		}
+		return result;
+	}
 }

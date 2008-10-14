@@ -90,6 +90,7 @@ public class TablePanel extends JPanel
 			lbl.setBackground(GuiTools.COLOR_TABLE_HEADER_BACKGROUND);
 			lbl.setForeground(GuiTools.COLOR_TABLE_HEADER_FOREGROUND);
 			lbl.setOpaque(true);
+//setMaximumSize(new Dimension(Integer.MAX_VALUE,GuiTools.getSize(GuiTools.GAME_RESULTS_LABEL_HEADER_HEIGHT)));
 			add(lbl,index);		
 		}
 		
@@ -102,6 +103,7 @@ public class TablePanel extends JPanel
 			lbl.setBackground(GuiTools.COLOR_TABLE_NEUTRAL_BACKGROUND);
 			lbl.setForeground(GuiTools.COLOR_TABLE_REGULAR_FOREGROUND);
 			lbl.setOpaque(true);
+//setMaximumSize(new Dimension(Integer.MAX_VALUE,GuiTools.getSize(GuiTools.GAME_RESULTS_LABEL_LINE_HEIGHT)));
 			add(lbl,index+line*columns);
 		}
 		

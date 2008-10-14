@@ -37,6 +37,22 @@
 					<text name="Command" value="Command" tooltip="Command executed when the key is pressed" />
 					<text name="Key" value="Key" tooltip="Key associated to a command" />
 				</group>
+				
+				<group name="Line">
+					<group name="Command" >
+						<text name="Up" value="Up" tooltip="Go up" />
+						<text name="Right" value="Right" tooltip="Go right" />
+						<text name="Down" value="Down" tooltip="Go down" />
+						<text name="Left" value="Left" tooltip="Go left" />
+						<text name="Dropbomb" value="Drop" tooltip="Drop a bomb" />
+						<text name="Punchbomb" value="Punch" tooltip="Punch  a bomb" />
+					</group>
+
+					<group name="Auto" >
+						<text name="False" value="Disabled" tooltip="No automatic fire" />
+						<text name="True" value="Enabled" tooltip="Automatic fire" />
+					</group>
+				</group>
 			</group>
 
 			<group name="Gameplay">
