@@ -23,7 +23,12 @@ package fr.free.totalboumboum.gui.options.controls;
 
 import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.event.KeyEvent;
 import java.awt.image.BufferedImage;
+import java.lang.reflect.Field;
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.Map.Entry;
 
 import javax.swing.Box;
 import javax.swing.BoxLayout;
@@ -42,6 +47,7 @@ import fr.free.totalboumboum.gui.common.TablePanel;
 import fr.free.totalboumboum.gui.menus.tournament.TournamentSplitPanel;
 import fr.free.totalboumboum.gui.options.OptionsMenu;
 import fr.free.totalboumboum.gui.tools.GuiTools;
+import fr.free.totalboumboum.tools.ClassTools;
 import fr.free.totalboumboum.tools.ImageTools;
 
 public class ControlsData extends EntitledDataPanel
@@ -58,7 +64,8 @@ public class ControlsData extends EntitledDataPanel
 		setTitle(txt);
 	
 		// data
-		{	String actions[] = 
+		{	
+			String actions[] = 
 			{	ControlEvent.UP,
 				ControlEvent.RIGHT,
 				ControlEvent.DOWN,
@@ -79,12 +86,10 @@ public class ControlsData extends EntitledDataPanel
 
 			// headers
 			{	for(int col=0;col<head.length;col++)
-				{	
-					BufferedImage image = GuiTools.getIcon(head[col]);
+				{	BufferedImage image = GuiTools.getIcon(head[col]);
 					String tooltip = getConfiguration().getLanguage().getText(head[col]+GuiTools.TOOLTIP);
 					JLabel lbl = keysPanel.getLabel(0,col);
 					lbl.setText(null);
-//lbl.setText(head[col]);					
 					lbl.setToolTipText(tooltip);
 					int lineHeight = GuiTools.getSize(GuiTools.GAME_RESULTS_LABEL_HEADER_HEIGHT);
 					double zoom = lineHeight/(double)image.getHeight();
@@ -95,30 +100,43 @@ public class ControlsData extends EntitledDataPanel
 			}
 			// data
 			{	ControlSettings controlSettings = getConfiguration().getGameConfiguration().getControlSettings().get(index);
-				for(int line=1;line<actions.length;line++)
+				for(int line=1;line<actions.length+1;line++)
 				{	int col = 0;
 					int lineHeight = GuiTools.getSize(GuiTools.GAME_RESULTS_LABEL_LINE_HEIGHT);
 					// command
 					{	JLabel commandLabel = keysPanel.getLabel(line, col++);
-						commandLabel.setText(actions[line-1]);
-						commandLabel.setToolTipText(actions[line-1]);
+						String name = actions[line-1].toUpperCase().substring(0,1);
+						name = name + actions[line-1].toLowerCase().substring(1,actions[line-1].length());
+						name = "MenuOptionsControlsLineCommand"+name;
+						String text = getConfiguration().getLanguage().getText(name);
+						commandLabel.setText(text);
+						String tooltip = getConfiguration().getLanguage().getText(name+GuiTools.TOOLTIP);
+						commandLabel.setToolTipText(tooltip);
 						Color bg = GuiTools.COLOR_TABLE_REGULAR_BACKGROUND;
 						commandLabel.setBackground(bg);
-						commandLabel.setMaximumSize(new Dimension(Integer.MAX_VALUE,lineHeight));
+//						commandLabel.setMaximumSize(new Dimension(Integer.MAX_VALUE,lineHeight));
 					}
 					// key
 					{	JLabel keyLabel = keysPanel.getLabel(line, col++);
 						int key = controlSettings.getKeyFromEvent(actions[line-1]);
-						String text;
-						if(key<0)
-							text = null;
-						else
-							text = Integer.toString(key);
+						String text = null;
+						if(key>=0)
+						{	try
+							{	Field field = ClassTools.getFieldFromValue(key,KeyEvent.class);
+								text = field.getName();
+							}
+							catch (IllegalArgumentException e)
+							{	e.printStackTrace();
+							}
+							catch (IllegalAccessException e)
+							{	e.printStackTrace();
+							}
+						}
 						keyLabel.setText(text);
 						keyLabel.setToolTipText(text);
 						Color bg = GuiTools.COLOR_TABLE_REGULAR_BACKGROUND;
 						keyLabel.setBackground(bg);
-						keyLabel.setMaximumSize(new Dimension(Integer.MAX_VALUE,lineHeight));
+//						keyLabel.setMaximumSize(new Dimension(Integer.MAX_VALUE,lineHeight));
 					}
 					{	JLabel autoLabel = keysPanel.getLabel(line, col++);
 						boolean auto = controlSettings.isAutofire(actions[line-1]);
@@ -127,7 +145,7 @@ public class ControlsData extends EntitledDataPanel
 						autoLabel.setToolTipText(text);
 						Color bg = GuiTools.COLOR_TABLE_REGULAR_BACKGROUND;
 						autoLabel.setBackground(bg);
-						autoLabel.setMaximumSize(new Dimension(Integer.MAX_VALUE,lineHeight));
+//						autoLabel.setMaximumSize(new Dimension(Integer.MAX_VALUE,lineHeight));
 					}
 				}
 			}
