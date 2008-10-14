@@ -82,7 +82,7 @@ import fr.free.totalboumboum.gui.common.MenuContainer;
 import fr.free.totalboumboum.gui.common.MenuPanel;
 import fr.free.totalboumboum.gui.common.SimpleMenuPanel;
 import fr.free.totalboumboum.gui.common.SplitMenuPanel;
-import fr.free.totalboumboum.gui.common.TablePanel;
+import fr.free.totalboumboum.gui.common.UntitledSubPanelTable;
 import fr.free.totalboumboum.gui.data.configuration.GuiConfiguration;
 import fr.free.totalboumboum.gui.game.round.description.RoundDescription;
 import fr.free.totalboumboum.gui.menus.tournament.TournamentSplitPanel;
@@ -169,7 +169,7 @@ public class MatchDescription extends EntitledDataPanel
 	{	Match match = getConfiguration().getCurrentMatch();
 		int lines = GuiTools.getSize(GuiTools.GAME_RESULTS_LABEL_LINE_NUMBER)+1;
 		int cols = 2+1;
-		TablePanel playersPanel = new TablePanel(width,height,cols,lines,true,getConfiguration());
+		UntitledSubPanelTable playersPanel = new UntitledSubPanelTable(width,height,cols,lines,true,getConfiguration());
 		// headers
 		{	{	JLabel lbl = playersPanel.getLabel(0,0);
 				lbl.setText(null);

@@ -38,7 +38,7 @@ import fr.free.totalboumboum.gui.data.configuration.GuiConfiguration;
 import fr.free.totalboumboum.gui.tools.GuiTools;
 import fr.free.totalboumboum.tools.ImageTools;
 
-public class EntitledSubPanel extends JPanel
+public class EntitledSubPanel extends SubPanel
 {	private static final long serialVersionUID = 1L;
 
 	private JLabel title;

@@ -43,7 +43,7 @@ import fr.free.totalboumboum.gui.common.MenuContainer;
 import fr.free.totalboumboum.gui.common.MenuPanel;
 import fr.free.totalboumboum.gui.common.SimpleMenuPanel;
 import fr.free.totalboumboum.gui.common.SplitMenuPanel;
-import fr.free.totalboumboum.gui.common.TablePanel;
+import fr.free.totalboumboum.gui.common.UntitledSubPanelTable;
 import fr.free.totalboumboum.gui.menus.tournament.TournamentSplitPanel;
 import fr.free.totalboumboum.gui.options.OptionsMenu;
 import fr.free.totalboumboum.gui.tools.GuiTools;
@@ -54,7 +54,7 @@ public class ControlsData extends EntitledDataPanel
 {	
 	private static final long serialVersionUID = 1L;
 
-	private TablePanel keysPanel;
+	private UntitledSubPanelTable keysPanel;
 
 	public ControlsData(SplitMenuPanel container, int width, int height, int index)
 	{	super(container,width,height);
@@ -82,7 +82,7 @@ public class ControlsData extends EntitledDataPanel
 			int cols = head.length;
 			int w = (int) getDataPanel().getPreferredSize().getWidth();
 			int h = (int) getDataPanel().getPreferredSize().getHeight();
-			keysPanel = new TablePanel(w,h,cols,lines,true,getConfiguration());
+			keysPanel = new UntitledSubPanelTable(w,h,cols,lines,true,getConfiguration());
 
 			// headers
 			{	for(int col=0;col<head.length;col++)

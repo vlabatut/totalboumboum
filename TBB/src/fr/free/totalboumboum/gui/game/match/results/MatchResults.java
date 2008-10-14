@@ -61,7 +61,7 @@ import fr.free.totalboumboum.gui.common.MenuContainer;
 import fr.free.totalboumboum.gui.common.MenuPanel;
 import fr.free.totalboumboum.gui.common.SimpleMenuPanel;
 import fr.free.totalboumboum.gui.common.SplitMenuPanel;
-import fr.free.totalboumboum.gui.common.TablePanel;
+import fr.free.totalboumboum.gui.common.UntitledSubPanelTable;
 import fr.free.totalboumboum.gui.menus.tournament.TournamentSplitPanel;
 import fr.free.totalboumboum.gui.options.OptionsMenu;
 import fr.free.totalboumboum.gui.tools.SpringUtilities;
@@ -73,7 +73,7 @@ public class MatchResults extends EntitledDataPanel
 {	
 	private static final long serialVersionUID = 1L;
 
-	private TablePanel resultsPanel;
+	private UntitledSubPanelTable resultsPanel;
 	
 	public MatchResults(SplitMenuPanel container, int w, int h)
 	{	super(container,w,h);
@@ -87,7 +87,7 @@ public class MatchResults extends EntitledDataPanel
 			int cols = 2+4+2;
 			int width = GuiTools.getSize(GuiTools.GAME_DATA_PANEL_WIDTH);
 			int height = GuiTools.getSize(GuiTools.GAME_DATA_PANEL_HEIGHT); 
-			resultsPanel = new TablePanel(width,height,cols,lines,true,getConfiguration());
+			resultsPanel = new UntitledSubPanelTable(width,height,cols,lines,true,getConfiguration());
 			
 			// headers
 			{	{	JLabel lbl = resultsPanel.getLabel(0,0);
