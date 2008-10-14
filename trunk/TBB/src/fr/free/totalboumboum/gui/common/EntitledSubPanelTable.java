@@ -64,7 +64,7 @@ public class EntitledSubPanelTable extends EntitledSubPanel
 		while(data.size()>columnGroups*lines && k<lns.length);
 		int subColumns = data.get(0).size();
 		int columns = columnGroups*subColumns;
-		TablePanel tablePanel = new TablePanel(width,height,columns,lines,false,configuration);
+		UntitledSubPanelTable tablePanel = new UntitledSubPanelTable(width,height,columns,lines,false,configuration);
 		tablePanel.setOpaque(false);
 		int lineHeight = (height-margin*(lines+1))/lines;
 		float fontSize = GuiTools.getFontSize(lineHeight*0.8);

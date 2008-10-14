@@ -21,9 +21,10 @@ package fr.free.totalboumboum.gui.common;
  * 
  */
 
+import java.awt.Dimension;
+
 import javax.swing.JPanel;
 
-import fr.free.totalboumboum.data.configuration.Configuration;
 import fr.free.totalboumboum.gui.data.configuration.GuiConfiguration;
 import fr.free.totalboumboum.gui.menus.main.MainFrame;
 
@@ -31,8 +32,33 @@ public abstract class ContentPanel extends JPanel
 {
 	protected static final long serialVersionUID = 1L;
 	
+	public ContentPanel(int width, int height)
+	{	setDim(width,height);
+	}
+	
 	public abstract void refresh();
 
+	/////////////////////////////////////////////////////////////////
+	// DIMENSION		/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	protected int width;
+	protected int height;
+	
+	public int getWidth()
+	{	return width;
+	}
+	public int getHeight()
+	{	return height;
+	}
+	public void setDim(int width, int height)
+	{	this.width = width;
+		this.height = height;
+		Dimension dim = new Dimension(width,height);
+		setPreferredSize(dim);
+		setMaximumSize(dim);
+		setMinimumSize(dim);
+	}
+	
 	/////////////////////////////////////////////////////////////////
 	// FRAME			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////

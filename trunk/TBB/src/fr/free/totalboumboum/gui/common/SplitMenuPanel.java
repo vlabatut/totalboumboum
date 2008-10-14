@@ -22,13 +22,16 @@ package fr.free.totalboumboum.gui.common;
  */
 
 import java.awt.BorderLayout;
+import java.awt.Dimension;
 
 public abstract class SplitMenuPanel extends MenuPanel implements MenuContainer
 {
 	protected String menuLocation;
 	
-	public SplitMenuPanel(MenuContainer container, MenuPanel parent, String menuLocation)
-	{	// fields
+	public SplitMenuPanel(MenuContainer container, MenuPanel parent, String menuLocation, int width, int height, float split)
+	{	super(width,height);
+		
+		// fields
 		this.container = container;
 		this.parent = parent;
 		this.menuLocation = menuLocation;
@@ -46,12 +49,15 @@ public abstract class SplitMenuPanel extends MenuPanel implements MenuContainer
 	// MENU PART		/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	protected InnerMenuPanel menuPart;
+	protected int menuHeight;
+	protected int menuWidth;
 	
 	public void setMenuPart(InnerMenuPanel menuPart)
 	{	if(this.menuPart!=null)
 			remove(this.menuPart);
 		this.menuPart = menuPart;
 		this.menuPart.refresh();
+		menuPart.setDim(menuWidth,menuHeight);
 		add(menuPart, menuLocation);
 		validate();
 		repaint();		
@@ -61,6 +67,8 @@ public abstract class SplitMenuPanel extends MenuPanel implements MenuContainer
 	// DATA PART		/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	protected ContentPanel dataPart;
+	protected int dataHeight;
+	protected int dataWidth;
 
 	public void setDataPart(ContentPanel dataPart)
 	{	if(this.dataPart!=null)

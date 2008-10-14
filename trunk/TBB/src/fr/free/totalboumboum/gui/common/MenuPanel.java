@@ -25,7 +25,11 @@ import fr.free.totalboumboum.gui.menus.main.MainFrame;
 
 
 public abstract class MenuPanel extends ContentPanel
-{
+{	private static final long serialVersionUID = 1L;
+
+	public MenuPanel(int width, int height)
+	{	super(width,height);		
+	}
 	
 	/////////////////////////////////////////////////////////////////
 	// CONTAINER		/////////////////////////////////////////////

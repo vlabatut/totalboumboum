@@ -33,7 +33,7 @@ import fr.free.totalboumboum.gui.data.configuration.GuiConfiguration;
 import fr.free.totalboumboum.gui.tools.SpringUtilities;
 import fr.free.totalboumboum.gui.tools.GuiTools;
 
-public class TablePanel extends JPanel
+public class UntitledSubPanelTable extends SubPanel
 {	private static final long serialVersionUID = 1L;
 
 	private int columns = 0;
@@ -44,7 +44,7 @@ public class TablePanel extends JPanel
 //	private Configuration configuration;
 	
 
-	public TablePanel(int width, int height, int columns, int lines, boolean header, GuiConfiguration configuration)
+	public UntitledSubPanelTable(int width, int height, int columns, int lines, boolean header, GuiConfiguration configuration)
 	{	// init
 //		this.configuration = configuration;
 		this.header = header;
