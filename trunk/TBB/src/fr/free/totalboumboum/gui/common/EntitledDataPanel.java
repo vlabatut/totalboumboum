@@ -33,25 +33,14 @@ import javax.swing.SwingConstants;
 
 import fr.free.totalboumboum.gui.tools.GuiTools;
 
-
-
-/*
- * TODO
- * les frames sont vides de tout panel
- * il n'y a pas de resize, ce n'est pas fait pour ça : 
- * 	- le subpanel est créé à la bonne taille direct
- * 	- il est affecté au frame sans resize
- */
-
-
 public abstract class EntitledDataPanel extends InnerDataPanel
 {	private static final long serialVersionUID = 1L;
 
 	private JLabel title;
 	private SubPanel data;
 	
-	public EntitledDataPanel(SplitMenuPanel container, int width, int height)
-	{	super(container,width,height);
+	public EntitledDataPanel(SplitMenuPanel container)
+	{	super(container);
 
 		// layout
 		BoxLayout layout = new BoxLayout(this,BoxLayout.PAGE_AXIS); 
@@ -91,12 +80,8 @@ public abstract class EntitledDataPanel extends InnerDataPanel
 		add(Box.createVerticalGlue());
 		
 		// data panel
-		{	data = new JPanel();
+		{	data = new SubPanel(dataWidth,dataHeight);
 			data.setBackground(GuiTools.COLOR_COMMON_BACKGROUND);
-			Dimension dim = new Dimension(dataWidth,dataHeight);
-			data.setPreferredSize(dim);
-			data.setMinimumSize(dim);
-			data.setMaximumSize(dim);
 			add(data);
 		}
 		
@@ -109,7 +94,7 @@ public abstract class EntitledDataPanel extends InnerDataPanel
 //		repaint();
 	}
 	
-	public void setDataPanel(JPanel panel)
+	public void setDataPanel(SubPanel panel)
 	{	remove(data);
 		data = panel;	
 		add(data,3);

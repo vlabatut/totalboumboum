@@ -44,7 +44,7 @@ public class UntitledSubPanelTable extends SubPanel
 //	private Configuration configuration;
 	
 
-	public UntitledSubPanelTable(int width, int height, int columns, int lines, boolean header, GuiConfiguration configuration)
+	public UntitledSubPanelTable(int width, int height, int columns, int lines, boolean header)
 	{	// init
 //		this.configuration = configuration;
 		this.header = header;

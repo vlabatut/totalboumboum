@@ -33,7 +33,12 @@ public abstract class ContentPanel extends JPanel
 	protected static final long serialVersionUID = 1L;
 	
 	public ContentPanel(int width, int height)
-	{	setDim(width,height);
+	{	this.width = width;
+		this.height = height;
+		Dimension dim = new Dimension(width,height);
+		setPreferredSize(dim);
+		setMaximumSize(dim);
+		setMinimumSize(dim);
 	}
 	
 	public abstract void refresh();
@@ -49,14 +54,6 @@ public abstract class ContentPanel extends JPanel
 	}
 	public int getHeight()
 	{	return height;
-	}
-	public void setDim(int width, int height)
-	{	this.width = width;
-		this.height = height;
-		Dimension dim = new Dimension(width,height);
-		setPreferredSize(dim);
-		setMaximumSize(dim);
-		setMinimumSize(dim);
 	}
 	
 	/////////////////////////////////////////////////////////////////
