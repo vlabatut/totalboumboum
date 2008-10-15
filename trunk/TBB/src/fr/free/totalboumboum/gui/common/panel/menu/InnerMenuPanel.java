@@ -30,8 +30,8 @@ import fr.free.totalboumboum.gui.menus.main.MainFrame;
 public abstract class InnerMenuPanel extends ContentPanel implements ButtonAware
 {	private static final long serialVersionUID = 1L;
 
-	public InnerMenuPanel(SplitMenuPanel container, MenuPanel parent, int width, int height)
-	{	super(width,height);
+	public InnerMenuPanel(SplitMenuPanel container, MenuPanel parent)
+	{	super(container.getMenuWidth(),container.getMenuHeight());
 		this.container = container;
 		this.parent = parent;
 	}	
