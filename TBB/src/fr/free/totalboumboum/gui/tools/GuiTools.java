@@ -371,6 +371,10 @@ public class GuiTools
 	
 	
 	
+	public final static int PANEL_MARGIN = 12; //(int)(width*0.025)
+	public final static int SUBPANEL_MARGIN = 12;
+	public final static float FONT_RATIO = 0.8f;
+	
 	
 	
 	// colors
@@ -909,6 +913,9 @@ public class GuiTools
 	
 	public static void setGameFont(Font gameFont)
 	{	GuiTools.gameFont = gameFont;	
+	}
+	public static Font getGameFont()
+	{	return gameFont;	
 	}
 	
 	public static int getFontSize(double limit)
