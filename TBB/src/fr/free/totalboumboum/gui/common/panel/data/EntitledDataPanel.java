@@ -28,7 +28,6 @@ import java.awt.Font;
 import javax.swing.Box;
 import javax.swing.BoxLayout;
 import javax.swing.JLabel;
-import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 
 import fr.free.totalboumboum.gui.common.panel.SplitMenuPanel;
@@ -38,8 +37,6 @@ import fr.free.totalboumboum.gui.tools.GuiTools;
 public abstract class EntitledDataPanel extends InnerDataPanel
 {	private static final long serialVersionUID = 1L;
 
-	private JLabel title;
-	private SubPanel data;
 	
 	public EntitledDataPanel(SplitMenuPanel container)
 	{	super(container);
@@ -53,13 +50,11 @@ public abstract class EntitledDataPanel extends InnerDataPanel
 		setOpaque(false);
 		
 		// size
-		setPreferredSize(new Dimension(width,height));
-		float titleFontSize = GuiTools.getSize(GuiTools.GAME_TITLE_FONT_SIZE);
-		int titleHeight = GuiTools.getPixelHeight(titleFontSize);
-		int margin = (int)(width*0.025);
-		int dataHeight = height-3*margin-titleHeight;
-		int dataWidth = width-2*margin;
-			
+		titleHeight = 2*GuiTools.PANEL_MARGIN;
+		titleFontSize = GuiTools.getFontSize(titleHeight*GuiTools.FONT_RATIO);
+		dataHeight = height-3*GuiTools.PANEL_MARGIN-titleHeight;
+		dataWidth = width-2*GuiTools.PANEL_MARGIN;
+		
 		add(Box.createVerticalGlue());
 	
 		// title label
@@ -82,27 +77,50 @@ public abstract class EntitledDataPanel extends InnerDataPanel
 		add(Box.createVerticalGlue());
 		
 		// data panel
-		{	data = new SubPanel(dataWidth,dataHeight);
-			data.setBackground(GuiTools.COLOR_COMMON_BACKGROUND);
-			add(data);
+		{	dataPart = new SubPanel(dataWidth,dataHeight);
+			dataPart.setBackground(GuiTools.COLOR_COMMON_BACKGROUND);
+			add(dataPart);
 		}
 		
 		add(Box.createVerticalGlue());
 	}	
 
+	
+	/////////////////////////////////////////////////////////////////
+	// TITLE			/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	private JLabel title;
+	private float titleFontSize;
+	private int titleHeight;
+
+	public int getTitleHeight()
+	{	return titleHeight;	
+	}
 	public void setTitle(String text)
 	{	title.setText(text);
 //		revalidate();
 //		repaint();
 	}
-	
-	public void setDataPanel(SubPanel panel)
-	{	remove(data);
-		data = panel;	
-		add(data,3);
+
+	/////////////////////////////////////////////////////////////////
+	// DATA PART		/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	protected SubPanel dataPart;
+	protected int dataHeight;
+	protected int dataWidth;
+
+	public void setDataPart(SubPanel dataPart)
+	{	if(this.dataPart!=null)
+			remove(this.dataPart);
+		this.dataPart = dataPart;
+		add(dataPart,3);
+		validate();
+		repaint();		
 	}
-	
-	public JPanel getDataPanel()
-	{	return data;	
+	public int getDataHeight()
+	{	return dataHeight;	
+	}
+	public int getDataWidth()
+	{	return dataWidth;	
 	}
 }

@@ -22,16 +22,14 @@ package fr.free.totalboumboum.gui.common.panel;
  */
 
 import java.awt.BorderLayout;
-import java.awt.Dimension;
 
 import fr.free.totalboumboum.gui.common.MenuContainer;
 import fr.free.totalboumboum.gui.common.panel.menu.InnerMenuPanel;
 import fr.free.totalboumboum.gui.common.panel.menu.MenuPanel;
 
 public abstract class SplitMenuPanel extends MenuPanel implements MenuContainer
-{
-	protected String menuLocation;
-	
+{	private static final long serialVersionUID = 1L;
+
 	public SplitMenuPanel(MenuContainer container, MenuPanel parent, String menuLocation, int width, int height, float split)
 	{	super(width,height);
 		
@@ -39,9 +37,24 @@ public abstract class SplitMenuPanel extends MenuPanel implements MenuContainer
 		this.container = container;
 		this.parent = parent;
 		this.menuLocation = menuLocation;
+		
 		// layout
 		BorderLayout layout = new BorderLayout(); 
 		setLayout(layout);
+		
+		// size
+		if(menuLocation.equals(BorderLayout.LINE_START) || menuLocation.equals(BorderLayout.LINE_END))
+		{	menuWidth = (int)split*width;
+			dataWidth = width - menuWidth;
+			menuHeight = height;
+			dataHeight = height;			
+		}
+		else if(menuLocation.equals(BorderLayout.PAGE_START) || menuLocation.equals(BorderLayout.PAGE_END))
+		{	menuHeight = (int)split*height;
+			dataHeight = height - menuHeight;
+			menuWidth= width;
+			dataWidth = width;			
+		}
 	}	
 	
 	public void refresh()
@@ -55,7 +68,8 @@ public abstract class SplitMenuPanel extends MenuPanel implements MenuContainer
 	protected InnerMenuPanel menuPart;
 	protected int menuHeight;
 	protected int menuWidth;
-	
+	protected String menuLocation;
+		
 	public void setMenuPart(InnerMenuPanel menuPart)
 	{	if(this.menuPart!=null)
 			remove(this.menuPart);
