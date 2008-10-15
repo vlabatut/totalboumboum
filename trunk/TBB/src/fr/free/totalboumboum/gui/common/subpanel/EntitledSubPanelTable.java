@@ -39,14 +39,11 @@ import fr.free.totalboumboum.tools.ImageTools;
 public class EntitledSubPanelTable extends EntitledSubPanel
 {	private static final long serialVersionUID = 1L;
 
-	public EntitledSubPanelTable(int width, int height, String id, int colGrps[], int lns[], ArrayList<ArrayList<Object>> data, ArrayList<ArrayList<String>> tooltips, GuiConfiguration configuration, boolean firstColIsDark, boolean firstColIsSquared)
-	{	super(width,height,configuration);
+	public EntitledSubPanelTable(int width, int height, boolean firstColIsDark, boolean firstColIsSquared)
+	{	super(width,height);
 
-		// title
-		String tooltip = configuration.getLanguage().getText(id+GuiTools.TOOLTIP);
-		BufferedImage hd = GuiTools.getIcon(id);
-		setTitle(hd, tooltip);
-		
+	//ArrayList<ArrayList<Object>> data, ArrayList<ArrayList<String>> tooltips, 
+	
 		// init table
 		int margin = GuiTools.getSize(GuiTools.GAME_RESULTS_MARGIN_SIZE);
 		remove(0);

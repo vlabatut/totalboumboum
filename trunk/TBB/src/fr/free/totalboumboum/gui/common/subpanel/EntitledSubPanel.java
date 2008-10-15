@@ -95,16 +95,23 @@ public class EntitledSubPanel extends SubPanel
 	private int titleWidth;
 	private int titleFontSize;
 
-	public void setTitle(String text, String tooltip)
-	{	title.setText(text);
-		title.setToolTipText(tooltip);
-	}
-	public void setTitle(BufferedImage icon, String tooltip)
-	{	double zoom = titleHeight/(double)icon.getHeight();
-		icon = ImageTools.resize(icon,zoom,true);
-		ImageIcon icn = new ImageIcon(icon);
-		title.setText(null);
-		title.setIcon(icn);		
+	public void setTitle(String key)
+	{	// is there an available icon ?
+		if(GuiTools.hasIcon(key))
+		{	BufferedImage icon = GuiTools.getIcon(key);
+			double zoom = titleHeight/(double)icon.getHeight();
+			icon = ImageTools.resize(icon,zoom,true);
+			ImageIcon icn = new ImageIcon(icon);
+			title.setText(null);
+			title.setIcon(icn);					
+		}
+		// if not : use text
+		else
+		{	String text = GuiTools.getText(key);
+			title.setText(text);
+		}
+		// put the tooltip
+		String tooltip = GuiTools.getText(key+GuiTools.TOOLTIP);
 		title.setToolTipText(tooltip);
 	}
 	
