@@ -31,12 +31,12 @@ import javax.swing.Box;
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
 
-import fr.free.totalboumboum.gui.common.InnerDataPanel;
-import fr.free.totalboumboum.gui.common.InnerMenuPanel;
 import fr.free.totalboumboum.gui.common.MenuContainer;
-import fr.free.totalboumboum.gui.common.MenuPanel;
-import fr.free.totalboumboum.gui.common.SimpleMenuPanel;
-import fr.free.totalboumboum.gui.common.SplitMenuPanel;
+import fr.free.totalboumboum.gui.common.panel.SplitMenuPanel;
+import fr.free.totalboumboum.gui.common.panel.data.InnerDataPanel;
+import fr.free.totalboumboum.gui.common.panel.menu.InnerMenuPanel;
+import fr.free.totalboumboum.gui.common.panel.menu.MenuPanel;
+import fr.free.totalboumboum.gui.common.panel.menu.SimpleMenuPanel;
 import fr.free.totalboumboum.gui.menus.tournament.TournamentData;
 import fr.free.totalboumboum.gui.options.controls.ControlsData;
 import fr.free.totalboumboum.gui.tools.GuiTools;

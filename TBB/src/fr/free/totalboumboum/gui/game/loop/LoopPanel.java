@@ -55,8 +55,8 @@ import fr.free.totalboumboum.engine.loop.LoopRenderPanel;
 import fr.free.totalboumboum.game.match.Match;
 import fr.free.totalboumboum.game.round.Round;
 import fr.free.totalboumboum.gui.common.MenuContainer;
-import fr.free.totalboumboum.gui.common.MenuPanel;
-import fr.free.totalboumboum.gui.common.SimpleMenuPanel;
+import fr.free.totalboumboum.gui.common.panel.menu.MenuPanel;
+import fr.free.totalboumboum.gui.common.panel.menu.SimpleMenuPanel;
 
 
 public class LoopPanel extends SimpleMenuPanel implements LoopRenderPanel

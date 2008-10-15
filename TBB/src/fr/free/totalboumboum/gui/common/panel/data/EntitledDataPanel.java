@@ -1,4 +1,4 @@
-package fr.free.totalboumboum.gui.common.panel;
+package fr.free.totalboumboum.gui.common.panel.data;
 
 /*
  * Total Boum Boum
@@ -31,6 +31,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 
+import fr.free.totalboumboum.gui.common.panel.SplitMenuPanel;
 import fr.free.totalboumboum.gui.common.subpanel.SubPanel;
 import fr.free.totalboumboum.gui.tools.GuiTools;
 

@@ -1,4 +1,4 @@
-package fr.free.totalboumboum.gui.common.panel;
+package fr.free.totalboumboum.gui.common.panel.menu;
 
 /*
  * Total Boum Boum
@@ -21,28 +21,44 @@ package fr.free.totalboumboum.gui.common.panel;
  * 
  */
 
+import fr.free.totalboumboum.gui.common.MenuContainer;
+import fr.free.totalboumboum.gui.common.panel.ContentPanel;
 import fr.free.totalboumboum.gui.menus.main.MainFrame;
 
-public abstract class InnerDataPanel extends ContentPanel
-{	
-	private static final long serialVersionUID = 1L;
-	
-	public InnerDataPanel(SplitMenuPanel container)
-	{	super(container.getDataWidth(),container.getDataHeight());
-		this.container = container;
-	}	
 
-	public abstract void updateData();
+public abstract class MenuPanel extends ContentPanel
+{	private static final long serialVersionUID = 1L;
+
+	public MenuPanel(int width, int height)
+	{	super(width,height);		
+	}
 	
 	/////////////////////////////////////////////////////////////////
 	// CONTAINER		/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	protected SplitMenuPanel container;
+	protected MenuContainer container;
 	
-	public SplitMenuPanel getContainer()
+	public MenuContainer getContainer()
 	{	return container;
 	}
+	
+	public void replaceWith(MenuPanel newPanel)
+	{	container.setMenuPanel(newPanel);
+	}
+	
+	/////////////////////////////////////////////////////////////////
+	// PARENT			/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	protected MenuPanel parent;
+	
+	public MenuPanel getMenuParent()
+	{	return parent;
+	}
 
+	public void setMenuParent(MenuPanel parent)
+	{	this.parent = parent;
+	}
+	
 	/////////////////////////////////////////////////////////////////
 	// FRAME			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
