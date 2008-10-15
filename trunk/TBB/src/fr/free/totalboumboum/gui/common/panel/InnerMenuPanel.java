@@ -1,4 +1,4 @@
-package fr.free.totalboumboum.gui.common;
+package fr.free.totalboumboum.gui.common.panel;
 
 /*
  * Total Boum Boum
@@ -21,6 +21,8 @@ package fr.free.totalboumboum.gui.common;
  * 
  */
 
+import fr.free.totalboumboum.gui.common.ButtonAware;
+import fr.free.totalboumboum.gui.common.MenuPanel;
 import fr.free.totalboumboum.gui.data.configuration.GuiConfiguration;
 import fr.free.totalboumboum.gui.menus.main.MainFrame;
 

@@ -1,4 +1,4 @@
-package fr.free.totalboumboum.gui.common;
+package fr.free.totalboumboum.gui.common.subpanel;
 
 /*
  * Total Boum Boum
