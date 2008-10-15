@@ -27,8 +27,8 @@ public abstract class InnerDataPanel extends ContentPanel
 {	
 	private static final long serialVersionUID = 1L;
 	
-	public InnerDataPanel(SplitMenuPanel container, int width, int height)
-	{	super(width,height);
+	public InnerDataPanel(SplitMenuPanel container)
+	{	super(container.getDataWidth(),container.getDataHeight());
 		this.container = container;
 	}	
 
