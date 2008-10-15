@@ -21,6 +21,7 @@ package fr.free.totalboumboum.gui.common;
  * 
  */
 
+import fr.free.totalboumboum.gui.common.panel.ContentPanel;
 import fr.free.totalboumboum.gui.menus.main.MainFrame;
 
 

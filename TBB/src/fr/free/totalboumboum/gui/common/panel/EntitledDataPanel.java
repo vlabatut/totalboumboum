@@ -1,4 +1,4 @@
-package fr.free.totalboumboum.gui.common;
+package fr.free.totalboumboum.gui.common.panel;
 
 /*
  * Total Boum Boum
@@ -31,6 +31,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 
+import fr.free.totalboumboum.gui.common.subpanel.SubPanel;
 import fr.free.totalboumboum.gui.tools.GuiTools;
 
 public abstract class EntitledDataPanel extends InnerDataPanel

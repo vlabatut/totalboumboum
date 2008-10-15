@@ -1,4 +1,8 @@
-package fr.free.totalboumboum.gui.common;
+package fr.free.totalboumboum.gui.common.panel;
+
+import fr.free.totalboumboum.gui.common.ButtonAware;
+import fr.free.totalboumboum.gui.common.MenuContainer;
+import fr.free.totalboumboum.gui.common.MenuPanel;
 
 /*
  * Total Boum Boum
