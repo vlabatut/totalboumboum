@@ -29,23 +29,18 @@ import java.awt.image.BufferedImage;
 import javax.swing.Box;
 import javax.swing.BoxLayout;
 import javax.swing.ImageIcon;
-import javax.swing.JComponent;
 import javax.swing.JLabel;
-import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 
-import fr.free.totalboumboum.gui.data.configuration.GuiConfiguration;
 import fr.free.totalboumboum.gui.tools.GuiTools;
 import fr.free.totalboumboum.tools.ImageTools;
 
 public class EntitledSubPanel extends SubPanel
 {	private static final long serialVersionUID = 1L;
 
-	private JLabel title;
-	private JComponent data;
-
-	public EntitledSubPanel(int width, int height, GuiConfiguration configuration)
-	{	
+	public EntitledSubPanel(int width, int height)
+	{	super(width,height);
+		
 		// background
 		setBackground(GuiTools.COLOR_COMMON_BACKGROUND);
 		
@@ -54,59 +49,58 @@ public class EntitledSubPanel extends SubPanel
 		setLayout(layout);
 
 		// size
-		Dimension dim = new Dimension(width,height);
-		setPreferredSize(dim);
-		setMinimumSize(dim);
-		setMaximumSize(dim);
-
-		// content
-		int margin = GuiTools.getSize(GuiTools.GAME_RESULTS_MARGIN_SIZE);
-		int contentWidth = width - 2*margin;
-		int titleHeight = GuiTools.getSize(GuiTools.GAME_RESULTS_LABEL_HEADER_HEIGHT);
-		int dataHeight = height - 3*margin - titleHeight;
+		titleHeight = (int)(1.8*GuiTools.PANEL_MARGIN);
+		titleWidth = width - 2*GuiTools.PANEL_MARGIN;
+		titleFontSize = GuiTools.getFontSize(titleHeight*GuiTools.FONT_RATIO);
+		dataWidth = titleWidth;
+		dataHeight = height - 3*GuiTools.PANEL_MARGIN - titleHeight;
 		
 		add(Box.createVerticalGlue());
+		
 		// title
-		{	String txt = null;
-			title = new JLabel(txt);
-			Font font = configuration.getFont().deriveFont((float)GuiTools.getSize(GuiTools.GAME_RESULTS_HEADER_FONT_SIZE));
+		{	String text = null;
+			title = new JLabel(text);
+			Font font = GuiTools.getGameFont().deriveFont(titleFontSize);
 			title.setFont(font);
-			String text = null;
-			title.setText(text);
 			String tooltip = null;
 			title.setToolTipText(tooltip);
 			title.setHorizontalAlignment(SwingConstants.CENTER);
 			title.setForeground(GuiTools.COLOR_TABLE_HEADER_FOREGROUND);
 			title.setBackground(GuiTools.COLOR_TABLE_HEADER_BACKGROUND);
 			title.setOpaque(true);
-			dim = new Dimension(contentWidth,titleHeight);
+			Dimension dim = new Dimension(titleWidth,titleHeight);
 			title.setPreferredSize(dim);
 			title.setMinimumSize(dim);
 			title.setMaximumSize(dim);
 			title.setAlignmentX(Component.CENTER_ALIGNMENT);
 			add(title);
 		}
-		//
+
 		add(Box.createVerticalGlue());
+		
 		// data
-		{	data = new JPanel();
+		{	data = new SubPanel(dataWidth,dataHeight);
 			data.setBackground(GuiTools.COLOR_TABLE_NEUTRAL_BACKGROUND);
-			dim = new Dimension(contentWidth,dataHeight);
-			data.setPreferredSize(dim);
-			data.setMinimumSize(dim);
-			data.setMaximumSize(dim);
 			add(data);
 		}
+		
 		add(Box.createVerticalGlue());	
 	}
 	
+	/////////////////////////////////////////////////////////////////
+	// TITLE			/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	private JLabel title;
+	private int titleHeight;
+	private int titleWidth;
+	private int titleFontSize;
+
 	public void setTitle(String text, String tooltip)
 	{	title.setText(text);
 		title.setToolTipText(tooltip);
 	}
 	public void setTitle(BufferedImage icon, String tooltip)
-	{	int titleHeight = GuiTools.getSize(GuiTools.GAME_RESULTS_LABEL_HEADER_HEIGHT);
-		double zoom = titleHeight/(double)icon.getHeight();
+	{	double zoom = titleHeight/(double)icon.getHeight();
 		icon = ImageTools.resize(icon,zoom,true);
 		ImageIcon icn = new ImageIcon(icon);
 		title.setText(null);
@@ -114,13 +108,20 @@ public class EntitledSubPanel extends SubPanel
 		title.setToolTipText(tooltip);
 	}
 	
-	public void setDataPanel(JComponent panel)
+	/////////////////////////////////////////////////////////////////
+	// DATA PART		/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	private SubPanel data;
+	private int dataHeight;
+	private int dataWidth;
+
+	public void setDataPanel(SubPanel panel)
 	{	remove(data);
 		data = panel;	
 		add(data,3);
 	}
 	
-	public JComponent getDataPanel()
+	public SubPanel getDataPanel()
 	{	return data;	
 	}
 	
