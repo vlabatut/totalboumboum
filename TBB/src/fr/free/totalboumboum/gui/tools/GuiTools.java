@@ -47,6 +47,7 @@ import javax.swing.JToggleButton;
 import fr.free.totalboumboum.data.configuration.Configuration;
 import fr.free.totalboumboum.gui.common.ButtonAware;
 import fr.free.totalboumboum.gui.data.configuration.GuiConfiguration;
+import fr.free.totalboumboum.gui.data.language.Language;
 import fr.free.totalboumboum.tools.FileTools;
 import fr.free.totalboumboum.tools.ImageTools;
 
@@ -454,6 +455,7 @@ public class GuiTools
 		int height = panelDimension.height;
 		setGraphics(g);
 		setGameFont(configuration.getFont());
+		setLanguage(configuration.getLanguage());
 		
 		// buttons
 		int menuVerticalButtonHeight = (int)(height*0.05);
@@ -908,6 +910,9 @@ public class GuiTools
 			result = temp;
 		return result;
 	}
+	public static boolean hasIcon(String key)
+	{	return icons.containsKey(key);		
+	}
 	
 	public static Font gameFont;
 	
@@ -917,6 +922,15 @@ public class GuiTools
 	public static Font getGameFont()
 	{	return gameFont;	
 	}
+	public static String getText(String key)
+	{	return language.getText(key);		
+	}
+	public static void setLanguage(Language language)
+	{	GuiTools.language = language;	
+	}
+	
+	private static Language language;
+	
 	
 	public static int getFontSize(double limit)
 	{	int result = 0;

@@ -21,15 +21,13 @@ package fr.free.totalboumboum.gui.common.subpanel;
  * 
  */
 
-import java.awt.Dimension;
+import java.awt.Component;
 import java.awt.Font;
 
 import javax.swing.JLabel;
-import javax.swing.JPanel;
 import javax.swing.SpringLayout;
 import javax.swing.SwingConstants;
 
-import fr.free.totalboumboum.gui.data.configuration.GuiConfiguration;
 import fr.free.totalboumboum.gui.tools.SpringUtilities;
 import fr.free.totalboumboum.gui.tools.GuiTools;
 
@@ -39,14 +37,19 @@ public class UntitledSubPanelTable extends SubPanel
 	private int columns = 0;
 	private int lines = 0;
 	private Font headerFont;
-	private Font regularFont;
+	private Font lineFont;
 	private boolean header;
-//	private Configuration configuration;
+	
+	private int headerHeight;
+	private int lineHeight;
+	private int lineFontSize;
+	private int headerFontSize;
 	
 
 	public UntitledSubPanelTable(int width, int height, int columns, int lines, boolean header)
-	{	// init
-//		this.configuration = configuration;
+	{	super(width,height);
+		
+		// init
 		this.header = header;
 		
 		// background
@@ -57,14 +60,14 @@ public class UntitledSubPanelTable extends SubPanel
 		setLayout(layout);
 		
 		// size
-		Dimension dim = new Dimension(width,height);
-		setPreferredSize(dim);
-		setMinimumSize(dim);
-		setMaximumSize(dim);
+		lineHeight = (int)((height - (lines+1)*GuiTools.SUBPANEL_MARGIN)/(lines+0.5));
+		lineFontSize = GuiTools.getFontSize(lineHeight*GuiTools.FONT_RATIO);
+		headerHeight = height - lineHeight*(lines-1);
+		headerFontSize = GuiTools.getFontSize(headerHeight*GuiTools.FONT_RATIO);
 		
 		// fonts
-		headerFont = configuration.getFont().deriveFont((float)GuiTools.getSize(GuiTools.GAME_RESULTS_HEADER_FONT_SIZE));
-		regularFont = configuration.getFont().deriveFont((float)GuiTools.getSize(GuiTools.GAME_RESULTS_LINE_FONT_SIZE));
+		headerFont = GuiTools.getGameFont().deriveFont(headerFontSize);
+		lineFont = GuiTools.getGameFont().deriveFont(lineFontSize);
 
 		// table
 		this.lines = lines;
@@ -98,7 +101,7 @@ public class UntitledSubPanelTable extends SubPanel
 		for(int line=0+start;line<lines;line++)
 		{	String txt = null;
 			JLabel lbl = new JLabel(txt);
-			lbl.setFont(regularFont);
+			lbl.setFont(lineFont);
 			lbl.setHorizontalAlignment(SwingConstants.CENTER);
 			lbl.setBackground(GuiTools.COLOR_TABLE_NEUTRAL_BACKGROUND);
 			lbl.setForeground(GuiTools.COLOR_TABLE_REGULAR_FOREGROUND);
@@ -114,8 +117,8 @@ public class UntitledSubPanelTable extends SubPanel
 		SpringUtilities.makeCompactGrid(this,lines,columns,margin,margin,margin,margin);
 	}
 	
-	public JLabel getLabel(int line, int col)
-	{	JLabel result = (JLabel)getComponent(col+line*columns);;
+	public Component getComponent(int line, int col)
+	{	Component result = getComponent(col+line*columns);;
 		return result;
 	}
 }
