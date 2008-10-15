@@ -28,12 +28,12 @@ import javax.swing.Box;
 import javax.swing.BoxLayout;
 import javax.swing.JLabel;
 
-import fr.free.totalboumboum.gui.common.EntitledDataPanel;
-import fr.free.totalboumboum.gui.common.InnerDataPanel;
 import fr.free.totalboumboum.gui.common.MenuContainer;
-import fr.free.totalboumboum.gui.common.MenuPanel;
-import fr.free.totalboumboum.gui.common.SimpleMenuPanel;
-import fr.free.totalboumboum.gui.common.SplitMenuPanel;
+import fr.free.totalboumboum.gui.common.panel.SplitMenuPanel;
+import fr.free.totalboumboum.gui.common.panel.data.EntitledDataPanel;
+import fr.free.totalboumboum.gui.common.panel.data.InnerDataPanel;
+import fr.free.totalboumboum.gui.common.panel.menu.MenuPanel;
+import fr.free.totalboumboum.gui.common.panel.menu.SimpleMenuPanel;
 import fr.free.totalboumboum.gui.menus.tournament.TournamentSplitPanel;
 import fr.free.totalboumboum.gui.options.OptionsMenu;
 import fr.free.totalboumboum.gui.tools.GuiTools;

@@ -27,8 +27,8 @@ import java.awt.event.ActionEvent;
 
 import javax.swing.BoxLayout;
 
-import fr.free.totalboumboum.gui.common.InnerDataPanel;
-import fr.free.totalboumboum.gui.common.SplitMenuPanel;
+import fr.free.totalboumboum.gui.common.panel.SplitMenuPanel;
+import fr.free.totalboumboum.gui.common.panel.data.InnerDataPanel;
 import fr.free.totalboumboum.gui.tools.GuiTools;
 
 public class TournamentData extends InnerDataPanel

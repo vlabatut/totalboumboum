@@ -32,8 +32,8 @@ import javax.xml.parsers.ParserConfigurationException;
 import org.xml.sax.SAXException;
 
 import fr.free.totalboumboum.gui.common.MenuContainer;
-import fr.free.totalboumboum.gui.common.MenuPanel;
-import fr.free.totalboumboum.gui.common.SplitMenuPanel;
+import fr.free.totalboumboum.gui.common.panel.SplitMenuPanel;
+import fr.free.totalboumboum.gui.common.panel.menu.MenuPanel;
 import fr.free.totalboumboum.gui.game.tournament.description.TournamentDescription;
 
 public class OptionsSplitPanel extends SplitMenuPanel
