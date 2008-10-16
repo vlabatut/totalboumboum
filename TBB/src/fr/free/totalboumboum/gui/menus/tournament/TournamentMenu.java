@@ -85,7 +85,7 @@ public class TournamentMenu extends InnerMenuPanel
 	private MenuPanel tournamentGamePanel;
 	private InnerDataPanel tournamentData;
 	
-	private JButton buttonNew;
+	private JButton buttonNew; 
 	private JButton buttonLoad;
 	private JButton buttonSaveAs;
 	private JButton buttonRules;
@@ -102,11 +102,6 @@ public class TournamentMenu extends InnerMenuPanel
 		
 		// background
 		setBackground(GuiTools.COLOR_COMMON_BACKGROUND);
-		
-		// size
-		int height = GuiTools.getSize(GuiTools.VERTICAL_SPLIT_MENU_PANEL_HEIGHT);
-		int width = GuiTools.getSize(GuiTools.VERTICAL_SPLIT_MENU_PANEL_WIDTH);
-		setPreferredSize(new Dimension(width,height));
 		
 		// buttons
 		add(Box.createVerticalGlue());
@@ -130,7 +125,6 @@ buttonPlayers.setEnabled(false);
 		// panels
 		tournamentData = new TournamentData(container);
 		container.setDataPart(tournamentData);
-		dataPart = tournamentData;
 	}
 	
 	public void actionPerformed(ActionEvent e)

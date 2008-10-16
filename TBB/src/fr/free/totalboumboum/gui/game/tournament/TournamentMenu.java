@@ -143,15 +143,12 @@ buttonStatistics.setEnabled(false);
 	    }
 		else if(e.getActionCommand().equals(GuiTools.GAME_TOURNAMENT_BUTTON_DESCRIPTION))
 		{	container.setDataPart(tournamentDescription);
-			dataPart = tournamentDescription;
 	    }
 		else if(e.getActionCommand().equals(GuiTools.GAME_TOURNAMENT_BUTTON_RESULTS))
 		{	container.setDataPart(tournamentResults);
-			dataPart = tournamentResults;
 	    }
 		else if(e.getActionCommand().equals(GuiTools.GAME_TOURNAMENT_BUTTON_STATISTICS))
 		{	container.setDataPart(tournamentStatistics);
-			dataPart = tournamentStatistics;
 	    }
 		else if(e.getActionCommand().equals(GuiTools.GAME_TOURNAMENT_BUTTON_CURRENT_MATCH))
 		{	replaceWith(matchPanel);

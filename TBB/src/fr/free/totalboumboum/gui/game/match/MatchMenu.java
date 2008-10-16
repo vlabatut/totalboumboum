@@ -113,7 +113,6 @@ buttonStatistics.setEnabled(false);
 		int w = GuiTools.getSize(GuiTools.HORIZONTAL_SPLIT_DATA_PANEL_WIDTH);
 		matchDescription = new MatchDescription(container,w,h);
 		container.setDataPart(matchDescription);
-		dataPart = matchDescription;
 		matchResults = new MatchResults(container,w,h);
 		matchStatistics = new MatchStatistics(container,w,h);		
 //		match.init();
@@ -136,15 +135,12 @@ buttonStatistics.setEnabled(false);
 	    }
 		else if(e.getActionCommand().equals(GuiTools.GAME_MATCH_BUTTON_DESCRIPTION))
 		{	container.setDataPart(matchDescription);
-			dataPart = matchDescription;
 	    }
 		else if(e.getActionCommand().equals(GuiTools.GAME_MATCH_BUTTON_RESULTS))
 		{	container.setDataPart(matchResults);
-			dataPart = matchResults;
 	    }
 		else if(e.getActionCommand().equals(GuiTools.GAME_MATCH_BUTTON_STATISTICS))
 		{	container.setDataPart(matchStatistics);
-			dataPart = matchStatistics;
 	    }
 		else if(e.getActionCommand().equals(GuiTools.GAME_MATCH_BUTTON_CURRENT_ROUND))
 		{	replaceWith(roundPanel);
