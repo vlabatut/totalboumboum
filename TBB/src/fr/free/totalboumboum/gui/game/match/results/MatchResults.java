@@ -22,52 +22,25 @@ package fr.free.totalboumboum.gui.game.match.results;
  */
 
 import java.awt.Color;
-import java.awt.Component;
-import java.awt.Dimension;
-import java.awt.Font;
-import java.awt.GridLayout;
 import java.awt.image.BufferedImage;
 import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.TreeSet;
 
-import javax.swing.Box;
-import javax.swing.BoxLayout;
-import javax.swing.ImageIcon;
 import javax.swing.JLabel;
-import javax.swing.JPanel;
-import javax.swing.SpringLayout;
-import javax.swing.SwingConstants;
 
 import fr.free.totalboumboum.data.profile.Portraits;
 import fr.free.totalboumboum.data.profile.Profile;
 import fr.free.totalboumboum.data.statistics.Score;
 import fr.free.totalboumboum.data.statistics.StatisticMatch;
 import fr.free.totalboumboum.data.statistics.StatisticRound;
-import fr.free.totalboumboum.game.limit.Limit;
-import fr.free.totalboumboum.game.limit.LimitPoints;
-import fr.free.totalboumboum.game.limit.LimitScore;
-import fr.free.totalboumboum.game.limit.LimitTime;
-import fr.free.totalboumboum.game.limit.Limits;
-import fr.free.totalboumboum.game.limit.RoundLimit;
 import fr.free.totalboumboum.game.match.Match;
 import fr.free.totalboumboum.game.points.PlayerPoints;
-import fr.free.totalboumboum.game.round.Round;
-import fr.free.totalboumboum.gui.common.MenuContainer;
 import fr.free.totalboumboum.gui.common.panel.SplitMenuPanel;
 import fr.free.totalboumboum.gui.common.panel.data.EntitledDataPanel;
-import fr.free.totalboumboum.gui.common.panel.data.InnerDataPanel;
-import fr.free.totalboumboum.gui.common.panel.menu.MenuPanel;
-import fr.free.totalboumboum.gui.common.panel.menu.SimpleMenuPanel;
-import fr.free.totalboumboum.gui.common.subpanel.EntitledSubPanelTable;
 import fr.free.totalboumboum.gui.common.subpanel.UntitledSubPanelTable;
-import fr.free.totalboumboum.gui.menus.tournament.TournamentSplitPanel;
-import fr.free.totalboumboum.gui.options.OptionsMenu;
-import fr.free.totalboumboum.gui.tools.SpringUtilities;
 import fr.free.totalboumboum.gui.tools.GuiTools;
-import fr.free.totalboumboum.tools.ImageTools;
-import fr.free.totalboumboum.tools.StringTools;
 
 public class MatchResults extends EntitledDataPanel
 {	
@@ -75,29 +48,23 @@ public class MatchResults extends EntitledDataPanel
 
 	private UntitledSubPanelTable resultsPanel;
 	
-	public MatchResults(SplitMenuPanel container, int w, int h)
-	{	super(container,w,h);
+	public MatchResults(SplitMenuPanel container)
+	{	super(container);
 
 		// title
-		String txt = getConfiguration().getLanguage().getText(GuiTools.GAME_MATCH_RESULTS_TITLE);
-		setTitle(txt);
+		String key = getConfiguration().getLanguage().getText(GuiTools.GAME_MATCH_RESULTS_TITLE);
+		setTitleKey(key);
 		
 		// data
-		{	int lines = GuiTools.getSize(GuiTools.GAME_RESULTS_LABEL_LINE_NUMBER)+1;
+		{	int lines = 16+1;
 			int cols = 2+4+2;
-			int width = GuiTools.getSize(GuiTools.GAME_DATA_PANEL_WIDTH);
-			int height = GuiTools.getSize(GuiTools.GAME_DATA_PANEL_HEIGHT); 
-			resultsPanel = new UntitledSubPanelTable(width,height,cols,lines,true,getConfiguration());
+			resultsPanel = new UntitledSubPanelTable(dataWidth,dataHeight,cols,lines,true);
 			
 			// headers
 			{	{	JLabel lbl = resultsPanel.getLabel(0,0);
-					lbl.setText(null);
-					lbl.setPreferredSize(new Dimension(GuiTools.getSize(GuiTools.GAME_RESULTS_LABEL_LINE_HEIGHT),GuiTools.getSize(GuiTools.GAME_RESULTS_LABEL_HEADER_HEIGHT)));
-					lbl.setMaximumSize(new Dimension(GuiTools.getSize(GuiTools.GAME_RESULTS_LABEL_LINE_HEIGHT),GuiTools.getSize(GuiTools.GAME_RESULTS_LABEL_HEADER_HEIGHT)));
-					lbl.setMinimumSize(new Dimension(GuiTools.getSize(GuiTools.GAME_RESULTS_LABEL_LINE_HEIGHT),GuiTools.getSize(GuiTools.GAME_RESULTS_LABEL_HEADER_HEIGHT)));
 					lbl.setOpaque(false);
 				}
-				String names[] = 
+				String keys[] = 
 				{	GuiTools.GAME_MATCH_RESULTS_HEADER_NAME,
 					GuiTools.GAME_MATCH_RESULTS_HEADER_BOMBS,
 					GuiTools.GAME_MATCH_RESULTS_HEADER_ITEMS,
@@ -106,32 +73,18 @@ public class MatchResults extends EntitledDataPanel
 					GuiTools.GAME_MATCH_RESULTS_HEADER_TOTAL,
 					GuiTools.GAME_MATCH_RESULTS_HEADER_POINTS
 				};
-				for(int i=0;i<names.length;i++)
-				{	BufferedImage icon = GuiTools.getIcon(names[i]);
-					String tooltip = getConfiguration().getLanguage().getText(names[i]+GuiTools.TOOLTIP);
-					JLabel lbl = resultsPanel.getLabel(0,1+i);
-					lbl.setText(null);
-					lbl.setToolTipText(tooltip);
-					int lineHeight = GuiTools.getSize(GuiTools.GAME_RESULTS_LABEL_HEADER_HEIGHT);
-					double zoom = lineHeight/(double)icon.getHeight();
-						icon = ImageTools.resize(icon,zoom,true);
-					ImageIcon ic = new ImageIcon(icon);
-					lbl.setIcon(ic);
-				}
+				for(int col=1;col<keys.length;col++)
+					resultsPanel.setLabelKey(0,col,keys[col-1],true);
 			}
 			// data
-			{	for(int i=1;i<lines;i++)
+			{	for(int line=1;line<lines;line++)
 				{	// name
-					{	JLabel lbl = resultsPanel.getLabel(i,1);
-						Dimension dimension = new Dimension(Integer.MAX_VALUE,GuiTools.getSize(GuiTools.GAME_RESULTS_LABEL_LINE_HEIGHT));
-						lbl.setMaximumSize(dimension);
-						dimension = new Dimension(GuiTools.getSize(GuiTools.GAME_RESULTS_LABEL_HEADER_HEIGHT),GuiTools.getSize(GuiTools.GAME_RESULTS_LABEL_LINE_HEIGHT));
-						lbl.setMinimumSize(dimension);
+					{	resultsPanel.setColumnWidth(1,Integer.MAX_VALUE);
 					}
 				}
 			}
 			//
-			setDataPanel(resultsPanel);
+			setDataPart(resultsPanel);
 			updateData();
 		}
 	}
@@ -165,14 +118,13 @@ public class MatchResults extends EntitledDataPanel
 		int cols = 2+4+rounds.size()+2;
 		if(resultsPanel.getColumnCount()<cols)
 		{	resultsPanel.addColumn(col);
-			JLabel lbl = resultsPanel.getLabel(0,col);
-			String txt = getConfiguration().getLanguage().getText(GuiTools.GAME_MATCH_RESULTS_HEADER_ROUND)+rounds.size();
-			lbl.setText(txt);
+			String text = getConfiguration().getLanguage().getText(GuiTools.GAME_MATCH_RESULTS_HEADER_ROUND)+rounds.size();
+			String tooltip = getConfiguration().getLanguage().getText(GuiTools.GAME_MATCH_RESULTS_HEADER_ROUND+GuiTools.TOOLTIP)+rounds.size();
+			resultsPanel.setLabelText(0,col,text,tooltip);
 		}
 		
 		// display the ranking
 		Iterator<PlayerPoints> i = ranking.descendingIterator();
-		int lineHeight = GuiTools.getSize(GuiTools.GAME_RESULTS_LABEL_LINE_HEIGHT);
 		int line = 0;
 		while(i.hasNext())
 		{	// init
@@ -183,24 +135,23 @@ public class MatchResults extends EntitledDataPanel
 			// color
 			Color clr = players.get(pp.getIndex()).getSpriteColor().getColor();
 			// portrait
-			{	JLabel portraitLabel = resultsPanel.getLabel(line, col++);
-				BufferedImage image = profile.getPortraits().getOutgamePortrait(Portraits.OUTGAME_HEAD);
-				double zoom = lineHeight/(double)image.getHeight();
-				image = ImageTools.resize(image,zoom,true);
-				ImageIcon icon = new ImageIcon(image);
-				portraitLabel.setIcon(icon);
+			{	BufferedImage image = profile.getPortraits().getOutgamePortrait(Portraits.OUTGAME_HEAD);
+				String tooltip = pp.getPlayer();
+				resultsPanel.setLabelIcon(line,col,image,tooltip);
+				JLabel portraitLabel = resultsPanel.getLabel(line, col);
 				int alpha = GuiTools.ALPHA_TABLE_REGULAR_BACKGROUND_LEVEL3;
 				Color bg = new Color(clr.getRed(),clr.getGreen(),clr.getBlue(),alpha);
-				portraitLabel.setBackground(bg);			
-				portraitLabel.setText("");
+				portraitLabel.setBackground(bg);
+				col++;
 			}
 			// name
-			{	JLabel nameLabel = resultsPanel.getLabel(line, col++);
-				nameLabel.setText(pp.getPlayer());
-				nameLabel.setToolTipText(pp.getPlayer());
+			{	String text = pp.getPlayer();
+				String tooltip = pp.getPlayer();
+				resultsPanel.setLabelText(line,col,text,tooltip);
 				int alpha = GuiTools.ALPHA_TABLE_REGULAR_BACKGROUND_LEVEL3;
 				Color bg = new Color(clr.getRed(),clr.getGreen(),clr.getBlue(),alpha);
-				nameLabel.setBackground(bg);
+				resultsPanel.setLabelBackground(line,col,bg);			
+				col++;
 			}
 			// scores
 			{	NumberFormat nf = NumberFormat.getInstance();
@@ -213,54 +164,60 @@ public class MatchResults extends EntitledDataPanel
 					nf.format(stats.getScores(Score.KILLS)[pp.getIndex()]),
 				};
 				for(int j=0;j<scores.length;j++)
-				{	JLabel pointsLabel = resultsPanel.getLabel(line, col++);
-					pointsLabel.setText(scores[j]);
+				{	String text = scores[j];
+					String tooltip = scores[j];
+					resultsPanel.setLabelText(line,col,text,tooltip);
 					int alpha = GuiTools.ALPHA_TABLE_REGULAR_BACKGROUND_LEVEL1;
 					Color bg = new Color(clr.getRed(),clr.getGreen(),clr.getBlue(),alpha);
-					pointsLabel.setBackground(bg);
+					resultsPanel.setLabelBackground(line,col,bg);			
+					col++;
 				}
 			}			
 			// rounds
 			Iterator<StatisticRound> r = rounds.iterator();
 			while(r.hasNext())
-			{	JLabel rndLabel = resultsPanel.getLabel(line, col++);
-				StatisticRound statRound = r.next();
+			{	StatisticRound statRound = r.next();
 				float pts = statRound.getPoints()[pp.getIndex()];
 				NumberFormat nf = NumberFormat.getInstance();
 				nf.setMaximumFractionDigits(2);
 				nf.setMinimumFractionDigits(0);
-				String txt = nf.format(pts);
-				rndLabel.setText(txt);
+				String text = nf.format(pts);
+				String tooltip = nf.format(pts);
+				resultsPanel.setLabelText(line,col,text,tooltip);
 				int alpha = GuiTools.ALPHA_TABLE_REGULAR_BACKGROUND_LEVEL2;
 				Color bg = new Color(clr.getRed(),clr.getGreen(),clr.getBlue(),alpha);
-				rndLabel.setBackground(bg);
+				resultsPanel.setLabelBackground(line,col,bg);			
+				col++;
 			}
 			// total
-			{	JLabel totalLabel = resultsPanel.getLabel(line, col++);
-				float pts = partialPoints[pp.getIndex()];
+			{	float pts = partialPoints[pp.getIndex()];
 				NumberFormat nf = NumberFormat.getInstance();
 				nf.setMaximumFractionDigits(2);
 				nf.setMinimumFractionDigits(0);
-				String txt = nf.format(pts);
-				totalLabel.setText(txt);
+				String text = nf.format(pts);
+				String tooltip = nf.format(pts);
+				resultsPanel.setLabelText(line,col,text,tooltip);
 				int alpha = GuiTools.ALPHA_TABLE_REGULAR_BACKGROUND_LEVEL3;
 				Color bg = new Color(clr.getRed(),clr.getGreen(),clr.getBlue(),alpha);
-				totalLabel.setBackground(bg);
+				resultsPanel.setLabelBackground(line,col,bg);			
+				col++;
 			}
 			// points
-			{	JLabel totalLabel = resultsPanel.getLabel(line, col++);
-				String txt = "-";
+			{	String text = "-";
+				String tooltip = "-";
 				NumberFormat nf = NumberFormat.getInstance();
 				nf.setMaximumFractionDigits(2);
 				nf.setMinimumFractionDigits(0);
 				if(match.isOver())	
 				{	float pts = points[pp.getIndex()];
-					txt = nf.format(pts);
+					text = nf.format(pts);
+					tooltip = nf.format(pts);					
 				}
-				totalLabel.setText(txt);
+				resultsPanel.setLabelText(line,col,text,tooltip);
 				int alpha = GuiTools.ALPHA_TABLE_REGULAR_BACKGROUND_LEVEL3;
 				Color bg = new Color(clr.getRed(),clr.getGreen(),clr.getBlue(),alpha);
-				totalLabel.setBackground(bg);
+				resultsPanel.setLabelBackground(line,col,bg);			
+				col++;
 			}
 		}
 	}

@@ -21,6 +21,7 @@ package fr.free.totalboumboum.gui.common.subpanel;
  * 
  */
 
+import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.image.BufferedImage;
@@ -223,7 +224,27 @@ public class UntitledSubPanelTable extends SubPanel
 			line++;
 		}			
 	}
-		
+
+	public void setColumnBackground(int col, Color bg)
+	{	setColumnBackground(0,col,bg);
+	}
+	public void setColumnBackground(int colGroup, int colSub, Color bg)
+	{	for(int line=0;line<lines;line++)
+		{	JLabel label = getLabel(line,colGroup,colSub);
+			label.setBackground(bg);
+		}
+	}
+
+	public void setColumnForeground(int col, Color fg)
+	{	setColumnForeground(0,col,fg);
+	}
+	public void setColumnForeground(int colGroup, int colSub, Color fg)
+	{	for(int line=0;line<lines;line++)
+		{	JLabel label = getLabel(line,colGroup,colSub);
+			label.setForeground(fg);
+		}
+	}
+
 	/////////////////////////////////////////////////////////////////
 	// LINES			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
@@ -335,6 +356,22 @@ public class UntitledSubPanelTable extends SubPanel
 		}
 	}
 
+	public void setLineBackground(int line, Color bg)
+	{	for(int grp=0;grp<colGroups;grp++)
+			for(int sub=0;sub<colSubs;sub++)
+			{	JLabel label = getLabel(line,grp,sub);
+				label.setBackground(bg);
+			}
+	}
+
+	public void setLineForeground(int line, Color fg)
+	{	for(int grp=0;grp<colGroups;grp++)
+			for(int sub=0;sub<colSubs;sub++)
+			{	JLabel label = getLabel(line,grp,sub);
+				label.setForeground(fg);
+			}
+	}
+
 	/////////////////////////////////////////////////////////////////
 	// LABELS			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
@@ -392,4 +429,19 @@ public class UntitledSubPanelTable extends SubPanel
 		label.setToolTipText(tooltip);
 	}
 	
+	public void setLabelBackground(int line, int col, Color bg)
+	{	setLabelBackground(line,0,col,bg);
+	}
+	public void setLabelBackground(int line, int colGroup, int colSub, Color bg)
+	{	JLabel label = getLabel(line, colGroup, colSub);
+		label.setBackground(bg);
+	}
+	
+	public void setLabelForeground(int line, int col, Color fg)
+	{	setLabelForeground(line,0,col,fg);
+	}
+	public void setLabelForeground(int line, int colGroup, int colSub, Color fg)
+	{	JLabel label = getLabel(line, colGroup, colSub);
+		label.setForeground(fg);
+	}
 }

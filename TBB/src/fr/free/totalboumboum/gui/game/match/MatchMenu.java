@@ -74,11 +74,6 @@ public class MatchMenu extends InnerMenuPanel implements MatchRenderPanel
 		// background
 		setBackground(GuiTools.COLOR_COMMON_BACKGROUND);
 		
-		// size
-		int height = GuiTools.getSize(GuiTools.HORIZONTAL_SPLIT_MENU_PANEL_HEIGHT);
-		int width = GuiTools.getSize(GuiTools.HORIZONTAL_SPLIT_MENU_PANEL_WIDTH);
-		setPreferredSize(new Dimension(width,height));
-		
 		// buttons
 		buttonQuit = GuiTools.createHorizontalMenuButton(GuiTools.GAME_MATCH_BUTTON_QUIT,this,getConfiguration());
 		add(Box.createHorizontalGlue());
@@ -97,13 +92,11 @@ buttonStatistics.setEnabled(false);
 		buttonRound = GuiTools.createHorizontalMenuButton(GuiTools.GAME_MATCH_BUTTON_NEXT_ROUND,this,getConfiguration());
 		
 		// panels
-		int h = GuiTools.getSize(GuiTools.HORIZONTAL_SPLIT_DATA_PANEL_HEIGHT);
-		int w = GuiTools.getSize(GuiTools.HORIZONTAL_SPLIT_DATA_PANEL_WIDTH);
-		matchDescription = new MatchDescription(container,w,h);
-		container.setDataPart(matchDescription);
-		matchResults = new MatchResults(container,w,h);
-		matchStatistics = new MatchStatistics(container,w,h);		
-//		match.init();
+		{	matchDescription = new MatchDescription(container);
+			container.setDataPart(matchDescription);
+			matchResults = new MatchResults(container);
+			matchStatistics = new MatchStatistics(container);		
+		}
 		
 		Match match = getConfiguration().getCurrentMatch();
 		match.setPanel(this);

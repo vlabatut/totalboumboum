@@ -21,33 +21,20 @@ package fr.free.totalboumboum.gui.game.match.statistics;
  * 
  */
 
-import java.awt.Color;
-import java.awt.Dimension;
-
-import javax.swing.Box;
-import javax.swing.BoxLayout;
-import javax.swing.JLabel;
-
-import fr.free.totalboumboum.gui.common.MenuContainer;
 import fr.free.totalboumboum.gui.common.panel.SplitMenuPanel;
 import fr.free.totalboumboum.gui.common.panel.data.EntitledDataPanel;
-import fr.free.totalboumboum.gui.common.panel.data.InnerDataPanel;
-import fr.free.totalboumboum.gui.common.panel.menu.MenuPanel;
-import fr.free.totalboumboum.gui.common.panel.menu.SimpleMenuPanel;
-import fr.free.totalboumboum.gui.menus.tournament.TournamentSplitPanel;
-import fr.free.totalboumboum.gui.options.OptionsMenu;
 import fr.free.totalboumboum.gui.tools.GuiTools;
 
 public class MatchStatistics extends EntitledDataPanel
 {	
 	private static final long serialVersionUID = 1L;
 
-	public MatchStatistics(SplitMenuPanel container, int w, int h)
-	{	super(container,w,h);
+	public MatchStatistics(SplitMenuPanel container)
+	{	super(container);
 
 		// title
-		String txt = getConfiguration().getLanguage().getText(GuiTools.GAME_MATCH_STATISTICS_TITLE);
-		setTitle(txt);
+		String key = getConfiguration().getLanguage().getText(GuiTools.GAME_MATCH_STATISTICS_TITLE);
+		setTitleKey(key);
 
 	}
 

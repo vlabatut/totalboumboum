@@ -76,11 +76,6 @@ public class TournamentMenu extends InnerMenuPanel implements TournamentRenderPa
 		// background
 		setBackground(GuiTools.COLOR_COMMON_BACKGROUND);
 		
-		// size
-		int height = GuiTools.getSize(GuiTools.HORIZONTAL_SPLIT_MENU_PANEL_HEIGHT);
-		int width = GuiTools.getSize(GuiTools.HORIZONTAL_SPLIT_MENU_PANEL_WIDTH);
-		setPreferredSize(new Dimension(width,height));
-		
 		// buttons
 		buttonQuit = GuiTools.createHorizontalMenuButton(GuiTools.GAME_TOURNAMENT_BUTTON_QUIT,this,getConfiguration());
 		add(Box.createHorizontalGlue());
@@ -102,12 +97,10 @@ buttonStatistics.setEnabled(false);
 		tournamentDescription = null;
 		AbstractTournament tournament = getConfiguration().getCurrentTournament();
 		if(tournament instanceof SequenceTournament)
-		{	int h = GuiTools.getSize(GuiTools.HORIZONTAL_SPLIT_DATA_PANEL_HEIGHT);
-			int w = GuiTools.getSize(GuiTools.HORIZONTAL_SPLIT_DATA_PANEL_WIDTH);
-			tournamentDescription = new SequenceDescription(container,w,h);
+		{	tournamentDescription = new SequenceDescription(container);
 			container.setDataPart(tournamentDescription);
-			tournamentResults = new SequenceResults(container,w,h);
-			tournamentStatistics = new TournamentStatistics(container,w,h);		
+			tournamentResults = new SequenceResults(container);
+			tournamentStatistics = new TournamentStatistics(container);		
 		}
 		else if(tournament instanceof CupTournament)
 		{

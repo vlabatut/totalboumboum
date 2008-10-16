@@ -76,11 +76,6 @@ public class RoundMenu extends InnerMenuPanel implements RoundRenderPanel
 		// background
 		setBackground(GuiTools.COLOR_COMMON_BACKGROUND);
 		
-		// size
-		int height = GuiTools.getSize(GuiTools.HORIZONTAL_SPLIT_MENU_PANEL_HEIGHT);
-		int width = GuiTools.getSize(GuiTools.HORIZONTAL_SPLIT_MENU_PANEL_WIDTH);
-		setPreferredSize(new Dimension(width,height));
-		
 		// buttons
 		buttonQuit = GuiTools.createHorizontalMenuButton(GuiTools.GAME_ROUND_BUTTON_QUIT,this,getConfiguration());
 		add(Box.createHorizontalGlue());
@@ -99,18 +94,16 @@ buttonStatistics.setEnabled(false);
 		buttonPlay = GuiTools.createHorizontalMenuButton(GuiTools.GAME_ROUND_BUTTON_PLAY,this,getConfiguration());
 		
 		// panels
-		int h = GuiTools.getSize(GuiTools.HORIZONTAL_SPLIT_DATA_PANEL_HEIGHT);
-		int w = GuiTools.getSize(GuiTools.HORIZONTAL_SPLIT_DATA_PANEL_WIDTH);
-		roundDescription = null;
-		roundDescription = new RoundDescription(container,w,h);
-		container.setDataPart(roundDescription);
-		roundResults = new RoundResults(container,w,h);
-		roundStatistics = new RoundStatistics(container,w,h);		
+		{	roundDescription = null;
+			roundDescription = new RoundDescription(container);
+			container.setDataPart(roundDescription);
+			roundResults = new RoundResults(container);
+			roundStatistics = new RoundStatistics(container);
+		}
 		
 		// round
 		Round round = getConfiguration().getCurrentRound();
 		round.setPanel(this);
-//		round.init();
 	}
 	
 	public void actionPerformed(ActionEvent e)
@@ -150,7 +143,6 @@ buttonStatistics.setEnabled(false);
 			int height = GuiTools.getSize(GuiTools.MENU_HORIZONTAL_BUTTON_HEIGHT);
 			Dimension dim = new Dimension(width,height);
 			loadProgressBar.setMaximumSize(dim);
-//			loadProgressBar.setPreferredSize(dim);
 			remove(1);
 			add(loadProgressBar,1);
 			validate();
@@ -183,8 +175,6 @@ buttonStatistics.setEnabled(false);
 			catch (NoSuchFieldException e1)
 			{	e1.printStackTrace();
 			}
-//			Thread t = new Thread(new RoundThreadLoader(round));
-//			t.start();				
 	    }
 	} 
 

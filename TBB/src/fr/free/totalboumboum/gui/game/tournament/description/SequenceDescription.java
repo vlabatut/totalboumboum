@@ -65,6 +65,7 @@ import fr.free.totalboumboum.gui.common.panel.menu.MenuPanel;
 import fr.free.totalboumboum.gui.common.panel.menu.SimpleMenuPanel;
 import fr.free.totalboumboum.gui.common.subpanel.EntitledSubPanel;
 import fr.free.totalboumboum.gui.common.subpanel.EntitledSubPanelTable;
+import fr.free.totalboumboum.gui.common.subpanel.SubPanel;
 import fr.free.totalboumboum.gui.common.subpanel.UntitledSubPanelTable;
 import fr.free.totalboumboum.gui.game.round.description.RoundDescription;
 import fr.free.totalboumboum.gui.menus.tournament.TournamentSplitPanel;
@@ -75,57 +76,57 @@ import fr.free.totalboumboum.tools.ImageTools;
 public class SequenceDescription extends TournamentDescription
 {	
 	private static final long serialVersionUID = 1L;
+	private static final float SPLIT_RATIO = 0.6f;
 
-	public SequenceDescription(SplitMenuPanel container, int w, int h)
-	{	super(container,w,h);
+	public SequenceDescription(SplitMenuPanel container)
+	{	super(container);
 		
 		// data
-		{	JPanel infoPanel = new JPanel();
+		{	SubPanel infoPanel = new SubPanel(dataWidth,dataHeight);
 			{	BoxLayout layout = new BoxLayout(infoPanel,BoxLayout.LINE_AXIS); 
 				infoPanel.setLayout(layout);
 			}
-			int width = GuiTools.getSize(GuiTools.GAME_DATA_PANEL_WIDTH);
-			int height = GuiTools.getSize(GuiTools.GAME_DATA_PANEL_HEIGHT);
+
 			int margin = GuiTools.getSize(GuiTools.GAME_DATA_MARGIN_SIZE);
-			int leftWidth = (int)(width*0.6); 
-			int rightWidth = width - leftWidth - margin; 
-			Dimension dim = new Dimension(width,height);
-			infoPanel.setPreferredSize(dim);
-			infoPanel.setMinimumSize(dim);
-			infoPanel.setMaximumSize(dim);
+			int leftWidth = (int)(dataWidth*SPLIT_RATIO); 
+			int rightWidth = dataWidth - leftWidth - margin; 
 			infoPanel.setOpaque(false);
+			
 			// players panel
-			{	JPanel playersPanel = makePlayersPanel(leftWidth,height);
+			{	JPanel playersPanel = makePlayersPanel(leftWidth,dataHeight);
 				infoPanel.add(playersPanel);
 			}
+			
 			infoPanel.add(Box.createHorizontalGlue());
+			
 			// right panel
 			{	JPanel rightPanel = new JPanel();
 				{	BoxLayout layout = new BoxLayout(rightPanel,BoxLayout.PAGE_AXIS); 
 					rightPanel.setLayout(layout);
 				}
 				rightPanel.setOpaque(false);
-				dim = new Dimension(rightWidth,height);
+				Dimension dim = new Dimension(rightWidth,dataHeight);
 				rightPanel.setPreferredSize(dim);
 				rightPanel.setMinimumSize(dim);
 				rightPanel.setMaximumSize(dim);
-				int upHeight = (height - margin)/2;
-				int downHeight = height - upHeight - margin;
+				int upHeight = (dataHeight - margin)/2;
+				int downHeight = dataHeight - upHeight - margin;
+				
 				// points panel
 				{	JPanel pointsPanel = makePointsPanel(rightWidth,upHeight);
 					rightPanel.add(pointsPanel);
 				}
-				//
+
 				rightPanel.add(Box.createVerticalGlue());
+				
 				// limit panel
 				{	JPanel limitsPanel = makeLimitsPanel(rightWidth,downHeight);
 					rightPanel.add(limitsPanel);
 				}
-				//
 				infoPanel.add(rightPanel);
 			}
-			//
-			setDataPanel(infoPanel);
+
+			setDataPart(infoPanel);
 		}
 	}
 
