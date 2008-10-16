@@ -24,7 +24,6 @@ package fr.free.totalboumboum.gui.menus.tournament;
 import java.awt.BorderLayout;
 import java.awt.Graphics;
 import java.awt.image.BufferedImage;
-import java.awt.image.RescaleOp;
 import java.io.IOException;
 
 import javax.xml.parsers.ParserConfigurationException;
@@ -34,6 +33,7 @@ import org.xml.sax.SAXException;
 import fr.free.totalboumboum.gui.common.MenuContainer;
 import fr.free.totalboumboum.gui.common.panel.SplitMenuPanel;
 import fr.free.totalboumboum.gui.common.panel.menu.MenuPanel;
+import fr.free.totalboumboum.gui.tools.GuiTools;
 
 public class TournamentSplitPanel extends SplitMenuPanel
 {	private static final long serialVersionUID = 1L;
@@ -41,7 +41,7 @@ public class TournamentSplitPanel extends SplitMenuPanel
 	private BufferedImage image;
 
 	public TournamentSplitPanel(MenuContainer container, MenuPanel parent) throws IllegalArgumentException, SecurityException, ParserConfigurationException, SAXException, IOException, IllegalAccessException, NoSuchFieldException
-	{	super(container,parent,BorderLayout.LINE_START);
+	{	super(container,parent,BorderLayout.LINE_START,GuiTools.VERTICAL_SPLIT_RATIO);
 		
 		// size
 		setPreferredSize(getConfiguration().getPanelDimension());		

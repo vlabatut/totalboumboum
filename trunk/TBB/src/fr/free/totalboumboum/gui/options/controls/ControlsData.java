@@ -22,30 +22,18 @@ package fr.free.totalboumboum.gui.options.controls;
  */
 
 import java.awt.Color;
-import java.awt.Dimension;
 import java.awt.event.KeyEvent;
 import java.awt.image.BufferedImage;
 import java.lang.reflect.Field;
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.Map.Entry;
 
-import javax.swing.Box;
-import javax.swing.BoxLayout;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 
 import fr.free.totalboumboum.data.controls.ControlSettings;
 import fr.free.totalboumboum.engine.content.feature.event.ControlEvent;
-import fr.free.totalboumboum.gui.common.MenuContainer;
 import fr.free.totalboumboum.gui.common.panel.SplitMenuPanel;
 import fr.free.totalboumboum.gui.common.panel.data.EntitledDataPanel;
-import fr.free.totalboumboum.gui.common.panel.data.InnerDataPanel;
-import fr.free.totalboumboum.gui.common.panel.menu.MenuPanel;
-import fr.free.totalboumboum.gui.common.panel.menu.SimpleMenuPanel;
 import fr.free.totalboumboum.gui.common.subpanel.UntitledSubPanelTable;
-import fr.free.totalboumboum.gui.menus.tournament.TournamentSplitPanel;
-import fr.free.totalboumboum.gui.options.OptionsMenu;
 import fr.free.totalboumboum.gui.tools.GuiTools;
 import fr.free.totalboumboum.tools.ClassTools;
 import fr.free.totalboumboum.tools.ImageTools;
@@ -56,8 +44,8 @@ public class ControlsData extends EntitledDataPanel
 
 	private UntitledSubPanelTable keysPanel;
 
-	public ControlsData(SplitMenuPanel container, int width, int height, int index)
-	{	super(container,width,height);
+	public ControlsData(SplitMenuPanel container, int index)
+	{	super(container);
 
 		// title
 		String txt = getConfiguration().getLanguage().getText(GuiTools.MENU_OPTIONS_CONTROLS_TITLE)+" "+index;
@@ -80,9 +68,9 @@ public class ControlsData extends EntitledDataPanel
 			};
 			int lines = 16;
 			int cols = head.length;
-			int w = (int) getDataPanel().getPreferredSize().getWidth();
-			int h = (int) getDataPanel().getPreferredSize().getHeight();
-			keysPanel = new UntitledSubPanelTable(w,h,cols,lines,true,getConfiguration());
+			int w = (int) getDataWidth();
+			int h = (int) getDataHeight();
+			keysPanel = new UntitledSubPanelTable(w,h,cols,lines,true);
 
 			// headers
 			{	for(int col=0;col<head.length;col++)
@@ -150,7 +138,7 @@ public class ControlsData extends EntitledDataPanel
 				}
 			}
 			//
-			setDataPanel(keysPanel);
+			setDataPart(keysPanel);
 //			updateData();
 		}
 	}

@@ -375,6 +375,8 @@ public class GuiTools
 	public final static int PANEL_MARGIN = 12; //(int)(width*0.025)
 	public final static int SUBPANEL_MARGIN = 12;
 	public final static float FONT_RATIO = 0.8f;
+	public final static float VERTICAL_SPLIT_RATIO = 0.25f;
+	public final static float HORIZONTAL_SPLIT_RATIO = 0.07f;
 	
 	
 	
