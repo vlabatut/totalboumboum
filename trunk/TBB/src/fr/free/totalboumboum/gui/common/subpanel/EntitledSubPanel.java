@@ -49,11 +49,11 @@ public class EntitledSubPanel extends SubPanel
 		setLayout(layout);
 
 		// size
-		titleHeight = (int)(1.8*GuiTools.PANEL_MARGIN);
-		titleWidth = width - 2*GuiTools.PANEL_MARGIN;
+		titleHeight = (int)(1.8*GuiTools.panelMargin);
+		titleWidth = width - 2*GuiTools.panelMargin;
 		titleFontSize = GuiTools.getFontSize(titleHeight*GuiTools.FONT_RATIO);
 		dataWidth = titleWidth;
-		dataHeight = height - 3*GuiTools.PANEL_MARGIN - titleHeight;
+		dataHeight = height - 3*GuiTools.panelMargin - titleHeight;
 		
 		add(Box.createVerticalGlue());
 		

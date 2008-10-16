@@ -50,10 +50,10 @@ public abstract class EntitledDataPanel extends InnerDataPanel
 		setOpaque(false);
 		
 		// size
-		titleHeight = 2*GuiTools.PANEL_MARGIN;
+		titleHeight = 2*GuiTools.panelMargin;
 		titleFontSize = GuiTools.getFontSize(titleHeight*GuiTools.FONT_RATIO);
-		dataHeight = height-3*GuiTools.PANEL_MARGIN-titleHeight;
-		dataWidth = width-2*GuiTools.PANEL_MARGIN;
+		dataHeight = height-3*GuiTools.panelMargin-titleHeight;
+		dataWidth = width-2*GuiTools.panelMargin;
 		
 		add(Box.createVerticalGlue());
 	
@@ -96,10 +96,16 @@ public abstract class EntitledDataPanel extends InnerDataPanel
 	public int getTitleHeight()
 	{	return titleHeight;	
 	}
-	public void setTitle(String text)
+	public void setTitleText(String text, String tooltip)
 	{	title.setText(text);
+		title.setToolTipText(tooltip);
 //		revalidate();
 //		repaint();
+	}
+	public void setTitleKey(String key)
+	{	String text = getConfiguration().getLanguage().getText(GuiTools.MENU_OPTIONS_CONTROLS_TITLE);
+		String tooltip = getConfiguration().getLanguage().getText(GuiTools.MENU_OPTIONS_CONTROLS_TITLE+GuiTools.TOOLTIP);
+		setTitleText(text,tooltip);
 	}
 
 	/////////////////////////////////////////////////////////////////

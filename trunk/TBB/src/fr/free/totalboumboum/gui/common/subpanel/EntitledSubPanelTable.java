@@ -36,7 +36,7 @@ public class EntitledSubPanelTable extends EntitledSubPanel
 	{	super(width,height);
 
 		// init table
-		int margin = GuiTools.SUBPANEL_MARGIN;
+		int margin = GuiTools.subPanelMargin;
 		remove(0);
 		add(Box.createRigidArea(new Dimension(margin,margin)),0);
 		remove(0);

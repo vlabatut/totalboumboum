@@ -57,11 +57,6 @@ public class ControlsMenu extends InnerMenuPanel
 		// background
 		setBackground(GuiTools.COLOR_COMMON_BACKGROUND);
 
-		// size
-		int height = GuiTools.getSize(GuiTools.VERTICAL_SPLIT_MENU_PANEL_HEIGHT);
-		int width = GuiTools.getSize(GuiTools.VERTICAL_SPLIT_MENU_PANEL_WIDTH);
-		setPreferredSize(new Dimension(width,height));
-		
 		// buttons
 		add(Box.createVerticalGlue());
 		buttonPrevious = GuiTools.createSecondaryVerticalMenuButton(GuiTools.MENU_OPTIONS_BUTTON_PREVIOUS,this,getConfiguration());
@@ -73,24 +68,19 @@ public class ControlsMenu extends InnerMenuPanel
 		add(Box.createVerticalGlue());		
 
 		// panels
-		int h = GuiTools.getSize(GuiTools.VERTICAL_SPLIT_DATA_PANEL_HEIGHT);
-		int w = GuiTools.getSize(GuiTools.VERTICAL_SPLIT_DATA_PANEL_WIDTH);
 		for(int i=0;i<controlsData.length;i++)
 			controlsData[i] = new ControlsData(container,i+1);
 		container.setDataPart(controlsData[0]);
-		dataPart = controlsData[0];
-}
+	}
 	
 	public void actionPerformed(ActionEvent e)
 	{	if(e.getActionCommand().equals(GuiTools.MENU_OPTIONS_BUTTON_NEXT))
 		{	selected = (selected + 1) % controlsData.length;
 			container.setDataPart(controlsData[selected]);
-			dataPart = controlsData[selected];
 	    }
 		else if(e.getActionCommand().equals(GuiTools.MENU_OPTIONS_BUTTON_PREVIOUS))
 		{	selected = (selected + controlsData.length - 1) % controlsData.length;
 			container.setDataPart(controlsData[selected]);
-			dataPart = controlsData[selected];
 	    }
 		else if(e.getActionCommand().equals(GuiTools.MENU_OPTIONS_BUTTON_CONFIRM))
 		{	//TODO modifications à enregistrer
