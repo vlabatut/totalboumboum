@@ -21,8 +21,6 @@ package fr.free.totalboumboum.gui.game.tournament;
  * 
  */
 
-import java.awt.BorderLayout;
-import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.io.IOException;
@@ -31,7 +29,6 @@ import javax.swing.Box;
 import javax.swing.BoxLayout;
 import javax.swing.ButtonGroup;
 import javax.swing.JButton;
-import javax.swing.JLabel;
 import javax.swing.JToggleButton;
 import javax.swing.SwingUtilities;
 import javax.xml.parsers.ParserConfigurationException;
@@ -39,23 +36,18 @@ import javax.xml.parsers.ParserConfigurationException;
 import org.xml.sax.SAXException;
 
 import fr.free.totalboumboum.game.match.Match;
-import fr.free.totalboumboum.game.round.Round;
 import fr.free.totalboumboum.game.tournament.AbstractTournament;
 import fr.free.totalboumboum.game.tournament.TournamentRenderPanel;
 import fr.free.totalboumboum.game.tournament.cup.CupTournament;
 import fr.free.totalboumboum.game.tournament.league.LeagueTournament;
 import fr.free.totalboumboum.game.tournament.sequence.SequenceTournament;
-import fr.free.totalboumboum.game.tournament.single.SingleTournament;
-import fr.free.totalboumboum.gui.common.panel.ContentPanel;
 import fr.free.totalboumboum.gui.common.panel.SplitMenuPanel;
 import fr.free.totalboumboum.gui.common.panel.data.InnerDataPanel;
 import fr.free.totalboumboum.gui.common.panel.menu.InnerMenuPanel;
 import fr.free.totalboumboum.gui.common.panel.menu.MenuPanel;
 import fr.free.totalboumboum.gui.game.match.MatchSplitPanel;
 import fr.free.totalboumboum.gui.game.tournament.description.SequenceDescription;
-import fr.free.totalboumboum.gui.game.tournament.description.TournamentDescription;
 import fr.free.totalboumboum.gui.game.tournament.results.SequenceResults;
-import fr.free.totalboumboum.gui.game.tournament.results.TournamentResults;
 import fr.free.totalboumboum.gui.game.tournament.statistics.TournamentStatistics;
 import fr.free.totalboumboum.gui.tools.GuiTools;
 
@@ -114,7 +106,6 @@ buttonStatistics.setEnabled(false);
 			int w = GuiTools.getSize(GuiTools.HORIZONTAL_SPLIT_DATA_PANEL_WIDTH);
 			tournamentDescription = new SequenceDescription(container,w,h);
 			container.setDataPart(tournamentDescription);
-			dataPart = tournamentDescription;
 			tournamentResults = new SequenceResults(container,w,h);
 			tournamentStatistics = new TournamentStatistics(container,w,h);		
 		}

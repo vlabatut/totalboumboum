@@ -21,6 +21,7 @@ package fr.free.totalboumboum.gui.common.subpanel;
  * 
  */
 
+import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
@@ -69,34 +70,73 @@ public class UntitledSubPanelTable extends SubPanel
 		setLayout(layout);
 		
 		// size
-		lineHeight = (int)((height - (lines+1)*GuiTools.SUBPANEL_MARGIN)/(lines+0.5));
+		lineHeight = (int)((height - (lines+1)*GuiTools.subPanelMargin)/(lines+0.5));
 		lineFontSize = GuiTools.getFontSize(lineHeight*GuiTools.FONT_RATIO);
-		headerHeight = height - lineHeight*(lines-1);
+		headerHeight = height - lineHeight*(lines-1) - (lines+1)*GuiTools.subPanelMargin;
 		headerFontSize = GuiTools.getFontSize(headerHeight*GuiTools.FONT_RATIO);
 		
 		// fonts
-		headerFont = GuiTools.getGameFont().deriveFont(headerFontSize);
-		lineFont = GuiTools.getGameFont().deriveFont(lineFontSize);
+		headerFont = GuiTools.getGameFont().deriveFont((float)headerFontSize);
+		lineFont = GuiTools.getGameFont().deriveFont((float)lineFontSize);
 
 		// table
 		this.colGroups = colGroups;
-		this.colSubs = colSubs;
-		int columns = getColumnCount();
 		this.lines = lines;
-		for(int col=0;col<columns;col++)
+		for(int col=0;col<colSubs;col++)
 			addColumn(col);
 	}
 	
 	private void updateLayout()
 	{	SpringLayout layout = new SpringLayout();
 		setLayout(layout);
-		int margin = GuiTools.SUBPANEL_MARGIN;
+		int margin = GuiTools.subPanelMargin;
 		SpringUtilities.makeCompactGrid(this,lines,getColumnCount(),margin,margin,margin,margin);		
 	}
 	
 	/////////////////////////////////////////////////////////////////
 	// COLUMNS			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
+	
+	public void setColumnWidth(int col, int width)
+	{	setColumnWidth(0,col,width);
+	}
+	public void setColumnWidth(int colGroup, int colSub, int width)
+	{	int start = 0;
+		if(header)
+		{	start = 1;
+			Dimension dim = new Dimension(width,headerHeight);
+			JLabel label = getLabel(0,colGroup,colSub);
+			label.setMaximumSize(dim);
+		}
+		for(int line=start;line<lines;line++)
+		{	Dimension dim = new Dimension(width,lineHeight);
+			JLabel label = getLabel(line,colGroup,colSub);
+			label.setMaximumSize(dim);
+		}
+	}
+	
+	public void unsetColumnWidth(int col)
+	{	unsetColumnWidth(0,col);
+	}
+	public void unsetColumnWidth(int colGroup, int colSub)
+	{	for(int line=0;line<lines;line++)
+		{	JLabel label = getLabel(line,colGroup,colSub);
+			label.setMaximumSize(null);
+		}
+	}
+	
+	public ArrayList<JLabel> getSubColumn(int col)
+	{	return getSubColumn(0,col);		
+	}
+	public ArrayList<JLabel> getSubColumn(int colGroup, int colSub)
+	{	ArrayList<JLabel> result = new ArrayList<JLabel>();
+		for(int line=0;line<lines;line++)
+		{	JLabel label = getLabel(line,colGroup,colSub);
+			result.add(label);
+		}
+		return result;
+	}
+
 	public int getColumnCount()
 	{	return colGroups*colSubs;
 	}
@@ -187,6 +227,16 @@ public class UntitledSubPanelTable extends SubPanel
 	/////////////////////////////////////////////////////////////////
 	// LINES			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
+
+	public ArrayList<JLabel> getLine(int index)
+	{	ArrayList<JLabel> result = new ArrayList<JLabel>();
+		for(int grp=0;grp<colGroups;grp++)
+			for(int sub=0;sub<colSubs;sub++)
+			{	JLabel label = getLabel(index,grp,sub);
+				result.add(label);
+			}
+		return result;
+	}
 	
 	public void addLine(int index)
 	{	int cols = getColumnCount();
@@ -211,9 +261,9 @@ public class UntitledSubPanelTable extends SubPanel
 		newFlags.add(imageFlags);
 		setLineKeys(line,newKeys,newFlags);
 	}
-	public void setLineKeys(int line, ArrayList<ArrayList<String>> keys, ArrayList<ArrayList<Boolean>> imageFlag)
+	public void setLineKeys(int line, ArrayList<ArrayList<String>> keys, ArrayList<ArrayList<Boolean>> imageFlags)
 	{	Iterator<ArrayList<String>> groupKeys = keys.iterator();
-		Iterator<ArrayList<Boolean>> groupFlags = imageFlag.iterator();
+		Iterator<ArrayList<Boolean>> groupFlags = imageFlags.iterator();
 		int colGroup = 0;
 		while(groupKeys.hasNext())
 		{	int colSub = 0;
@@ -333,7 +383,7 @@ public class UntitledSubPanelTable extends SubPanel
 	}
 
 	public void setLabelText(int line, int col, String text, String tooltip)
-	{	setLabelText(line,col,text,tooltip);
+	{	setLabelText(line,0,col,text,tooltip);
 	}
 	public void setLabelText(int line, int colGroup, int colSub, String text, String tooltip)
 	{	JLabel label = getLabel(line,colGroup,colSub);

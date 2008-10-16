@@ -21,11 +21,8 @@ package fr.free.totalboumboum.gui.game.round;
  * 
  */
 
-import java.awt.BorderLayout;
-import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
-import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.io.IOException;
 
@@ -40,31 +37,16 @@ import javax.xml.parsers.ParserConfigurationException;
 
 import org.xml.sax.SAXException;
 
-import fr.free.totalboumboum.engine.loop.Loop;
-import fr.free.totalboumboum.game.match.Match;
 import fr.free.totalboumboum.game.round.Round;
 import fr.free.totalboumboum.game.round.RoundRenderPanel;
-import fr.free.totalboumboum.game.tournament.AbstractTournament;
-import fr.free.totalboumboum.game.tournament.cup.CupTournament;
-import fr.free.totalboumboum.game.tournament.league.LeagueTournament;
-import fr.free.totalboumboum.game.tournament.sequence.SequenceTournament;
-import fr.free.totalboumboum.game.tournament.single.SingleTournament;
-import fr.free.totalboumboum.gui.common.panel.ContentPanel;
 import fr.free.totalboumboum.gui.common.panel.SplitMenuPanel;
 import fr.free.totalboumboum.gui.common.panel.data.InnerDataPanel;
 import fr.free.totalboumboum.gui.common.panel.menu.InnerMenuPanel;
 import fr.free.totalboumboum.gui.common.panel.menu.MenuPanel;
 import fr.free.totalboumboum.gui.game.loop.LoopPanel;
-import fr.free.totalboumboum.gui.game.match.description.MatchDescription;
-import fr.free.totalboumboum.gui.game.match.results.MatchResults;
-import fr.free.totalboumboum.gui.game.match.statistics.MatchStatistics;
 import fr.free.totalboumboum.gui.game.round.description.RoundDescription;
 import fr.free.totalboumboum.gui.game.round.results.RoundResults;
 import fr.free.totalboumboum.gui.game.round.statistics.RoundStatistics;
-import fr.free.totalboumboum.gui.game.tournament.description.SequenceDescription;
-import fr.free.totalboumboum.gui.game.tournament.description.TournamentDescription;
-import fr.free.totalboumboum.gui.game.tournament.results.TournamentResults;
-import fr.free.totalboumboum.gui.game.tournament.statistics.TournamentStatistics;
 import fr.free.totalboumboum.gui.tools.GuiTools;
 
 public class RoundMenu extends InnerMenuPanel implements RoundRenderPanel

@@ -41,6 +41,7 @@ public class GuiFileTools
 	public final static String FILE_DEATHS = "deaths.png";
 	public final static String FILE_DIMENSION = "dimension.png";
 	public final static String FILE_DISCRETIZE = "discretize.png";
+	public final static String FILE_FALSE = "false.png";
 	public final static String FILE_FRAGS = "frags.png";
 	public final static String FILE_FRAME = "frame.png";
 	public final static String FILE_GUI = "gui";
@@ -68,6 +69,7 @@ public class GuiFileTools
 	public final static String FILE_TIME = "time.png";
 	public final static String FILE_TITLE = "title.png";
 	public final static String FILE_TOTAL = "total.png";
+	public final static String FILE_TRUE = "true.png";
 
 	// folders
 	public static final String FOLDER_BUTTONS = "buttons";

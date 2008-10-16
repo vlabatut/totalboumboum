@@ -27,28 +27,22 @@ import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.FontMetrics;
 import java.awt.Graphics;
-import java.awt.Toolkit;
-import java.awt.font.LineMetrics;
 import java.awt.geom.Rectangle2D;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map.Entry;
 
 import javax.swing.AbstractButton;
-import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JToggleButton;
 
-import fr.free.totalboumboum.data.configuration.Configuration;
 import fr.free.totalboumboum.gui.common.ButtonAware;
 import fr.free.totalboumboum.gui.data.configuration.GuiConfiguration;
 import fr.free.totalboumboum.gui.data.language.Language;
-import fr.free.totalboumboum.tools.FileTools;
 import fr.free.totalboumboum.tools.ImageTools;
 
 public class GuiTools
@@ -372,12 +366,16 @@ public class GuiTools
 	
 	
 	
-	public final static int PANEL_MARGIN = 12; //(int)(width*0.025)
-	public final static int SUBPANEL_MARGIN = 12;
+	public static int panelMargin;
+	public static int subPanelMargin;
 	public final static float FONT_RATIO = 0.8f;
 	public final static float VERTICAL_SPLIT_RATIO = 0.25f;
 	public final static float HORIZONTAL_SPLIT_RATIO = 0.07f;
 	
+	private static void setMargins(int width, int height)
+	{	GuiTools.panelMargin = (int)(width*0.025);
+		GuiTools.subPanelMargin = (int)(height*0.005);
+	}
 	
 	
 	// colors
@@ -458,6 +456,10 @@ public class GuiTools
 		setGraphics(g);
 		setGameFont(configuration.getFont());
 		setLanguage(configuration.getLanguage());
+		setMargins(width,height);
+		
+		
+		
 		
 		// buttons
 		int menuVerticalButtonHeight = (int)(height*0.05);
@@ -840,6 +842,9 @@ public class GuiTools
 			icons.put(GAME_TOURNAMENT_DESCRIPTION_POINTS_DATA_DEATHS,image);
 			icons.put(GAME_MATCH_DESCRIPTION_POINTS_DATA_DEATHS,image);
 			icons.put(GAME_ROUND_DESCRIPTION_POINTS_DATA_DEATHS,image);
+			// false
+			image = loadIcon(folder+GuiFileTools.FILE_FALSE,absent);
+			icons.put(MENU_OPTIONS_CONTROLS_LINE_AUTO_FALSE,image);
 			// human
 			image = loadIcon(folder+GuiFileTools.FILE_HUMAN,absent);
 			icons.put(GAME_TOURNAMENT_DESCRIPTION_PLAYERS_DATA_HUMAN,image);
@@ -892,6 +897,9 @@ public class GuiTools
 			icons.put(GAME_TOURNAMENT_DESCRIPTION_POINTS_DATA_TIME,image);
 			icons.put(GAME_MATCH_DESCRIPTION_POINTS_DATA_TIME,image);
 			icons.put(GAME_ROUND_DESCRIPTION_POINTS_DATA_TIME,image);
+			// true
+			image = loadIcon(folder+GuiFileTools.FILE_TRUE,absent);
+			icons.put(MENU_OPTIONS_CONTROLS_LINE_AUTO_TRUE,image);
 		}
 	}
 	

@@ -93,6 +93,10 @@ public abstract class SplitMenuPanel extends MenuPanel implements MenuContainer
 	protected int dataHeight;
 	protected int dataWidth;
 
+	public ContentPanel getDataPart()
+	{	return dataPart;
+	}
+	
 	public void setDataPart(ContentPanel dataPart)
 	{	if(this.dataPart!=null)
 			remove(this.dataPart);

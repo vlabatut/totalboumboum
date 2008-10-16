@@ -21,8 +21,6 @@ package fr.free.totalboumboum.gui.game.match;
  * 
  */
 
-import java.awt.BorderLayout;
-import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.event.ActionEvent;
@@ -41,12 +39,6 @@ import org.xml.sax.SAXException;
 import fr.free.totalboumboum.game.match.Match;
 import fr.free.totalboumboum.game.match.MatchRenderPanel;
 import fr.free.totalboumboum.game.round.Round;
-import fr.free.totalboumboum.game.tournament.AbstractTournament;
-import fr.free.totalboumboum.game.tournament.cup.CupTournament;
-import fr.free.totalboumboum.game.tournament.league.LeagueTournament;
-import fr.free.totalboumboum.game.tournament.sequence.SequenceTournament;
-import fr.free.totalboumboum.game.tournament.single.SingleTournament;
-import fr.free.totalboumboum.gui.common.panel.ContentPanel;
 import fr.free.totalboumboum.gui.common.panel.SplitMenuPanel;
 import fr.free.totalboumboum.gui.common.panel.data.InnerDataPanel;
 import fr.free.totalboumboum.gui.common.panel.menu.InnerMenuPanel;
@@ -55,10 +47,6 @@ import fr.free.totalboumboum.gui.game.match.description.MatchDescription;
 import fr.free.totalboumboum.gui.game.match.results.MatchResults;
 import fr.free.totalboumboum.gui.game.match.statistics.MatchStatistics;
 import fr.free.totalboumboum.gui.game.round.RoundSplitPanel;
-import fr.free.totalboumboum.gui.game.tournament.description.SequenceDescription;
-import fr.free.totalboumboum.gui.game.tournament.description.TournamentDescription;
-import fr.free.totalboumboum.gui.game.tournament.results.TournamentResults;
-import fr.free.totalboumboum.gui.game.tournament.statistics.TournamentStatistics;
 import fr.free.totalboumboum.gui.tools.GuiTools;
 
 public class MatchMenu extends InnerMenuPanel implements MatchRenderPanel

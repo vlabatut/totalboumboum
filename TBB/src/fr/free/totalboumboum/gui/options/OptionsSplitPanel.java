@@ -43,15 +43,12 @@ public class OptionsSplitPanel extends SplitMenuPanel
 	public OptionsSplitPanel(MenuContainer container, MenuPanel parent) throws IllegalArgumentException, SecurityException, ParserConfigurationException, SAXException, IOException, IllegalAccessException, NoSuchFieldException
 	{	super(container,parent,BorderLayout.LINE_START,GuiTools.VERTICAL_SPLIT_RATIO);
 	
-		// size
-		setPreferredSize(getConfiguration().getPanelDimension());
-		
 		// background
 		image = getConfiguration().getDarkBackground();
 		
 		// panels
-//		setDataPart(new TournamentDescription(this));
-		setMenuPart(new OptionsMenu(this,parent));
+		OptionsMenu menu = new OptionsMenu(this,parent);
+		setMenuPart(menu);
 	}
 	
 	@Override

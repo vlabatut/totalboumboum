@@ -59,11 +59,6 @@ public class OptionsMenu extends InnerMenuPanel
 		// background
 		setBackground(GuiTools.COLOR_COMMON_BACKGROUND);
 
-		// size
-		int height = GuiTools.getSize(GuiTools.VERTICAL_SPLIT_MENU_PANEL_HEIGHT);
-		int width = GuiTools.getSize(GuiTools.VERTICAL_SPLIT_MENU_PANEL_WIDTH);
-		setPreferredSize(new Dimension(width,height));
-		
 		// buttons
 		add(Box.createVerticalGlue());
 		buttonControls = GuiTools.createSecondaryVerticalMenuButton(GuiTools.MENU_OPTIONS_BUTTON_CONTROLS,this,getConfiguration());
@@ -78,7 +73,6 @@ buttonVideo.setEnabled(false);
 		// panels
 		optionsData = new OptionsData(container);
 		container.setDataPart(optionsData);
-		dataPart = optionsData;
 }
 	
 	public void actionPerformed(ActionEvent e)
