@@ -21,33 +21,20 @@ package fr.free.totalboumboum.gui.game.tournament.description;
  * 
  */
 
-import java.awt.Color;
-import java.awt.Dimension;
-
-import javax.swing.Box;
-import javax.swing.BoxLayout;
-import javax.swing.JLabel;
-
-import fr.free.totalboumboum.gui.common.MenuContainer;
 import fr.free.totalboumboum.gui.common.panel.SplitMenuPanel;
 import fr.free.totalboumboum.gui.common.panel.data.EntitledDataPanel;
-import fr.free.totalboumboum.gui.common.panel.data.InnerDataPanel;
-import fr.free.totalboumboum.gui.common.panel.menu.MenuPanel;
-import fr.free.totalboumboum.gui.common.panel.menu.SimpleMenuPanel;
-import fr.free.totalboumboum.gui.menus.tournament.TournamentSplitPanel;
-import fr.free.totalboumboum.gui.options.OptionsMenu;
 import fr.free.totalboumboum.gui.tools.GuiTools;
 
 public abstract class TournamentDescription extends EntitledDataPanel
 {	
 	private static final long serialVersionUID = 1L;
 
-	public TournamentDescription(SplitMenuPanel container, int w, int h)
-	{	super(container,w,h);
+	public TournamentDescription(SplitMenuPanel container)
+	{	super(container);
 		
 		// title
-		String txt = getConfiguration().getLanguage().getText(GuiTools.GAME_TOURNAMENT_DESCRIPTION_TITLE);
-		setTitle(txt);
+		String key = getConfiguration().getLanguage().getText(GuiTools.GAME_TOURNAMENT_DESCRIPTION_TITLE);
+		setTitleKey(key);
 	
 	}
 }

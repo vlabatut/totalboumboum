@@ -81,6 +81,7 @@ import fr.free.totalboumboum.gui.common.panel.menu.MenuPanel;
 import fr.free.totalboumboum.gui.common.panel.menu.SimpleMenuPanel;
 import fr.free.totalboumboum.gui.common.subpanel.EntitledSubPanel;
 import fr.free.totalboumboum.gui.common.subpanel.EntitledSubPanelTable;
+import fr.free.totalboumboum.gui.common.subpanel.SubPanel;
 import fr.free.totalboumboum.gui.common.subpanel.UntitledSubPanelTable;
 import fr.free.totalboumboum.gui.data.configuration.GuiConfiguration;
 import fr.free.totalboumboum.gui.menus.tournament.TournamentSplitPanel;
@@ -92,13 +93,14 @@ import fr.free.totalboumboum.tools.StringTools;
 public class RoundDescription extends EntitledDataPanel
 {	
 	private static final long serialVersionUID = 1L;
+	private static final float SPLIT_RATIO = 0.4f;
 
-	public RoundDescription(SplitMenuPanel container, int w, int h)
-	{	super(container,w,h);
+	public RoundDescription(SplitMenuPanel container)
+	{	super(container);
 	
 		// title
-		String txt = getConfiguration().getLanguage().getText(GuiTools.GAME_ROUND_DESCRIPTION_TITLE);
-		setTitle(txt);
+		String key = getConfiguration().getLanguage().getText(GuiTools.GAME_ROUND_DESCRIPTION_TITLE);
+		setTitleKey(key);
 	
 		// data
 		{	Round round = getConfiguration().getCurrentRound();
@@ -119,40 +121,38 @@ public class RoundDescription extends EntitledDataPanel
 			catch (ClassNotFoundException e)
 			{	e.printStackTrace();
 			}
-			JPanel infoPanel = new JPanel();
+			SubPanel infoPanel = new SubPanel(dataWidth,dataHeight);
 			{	BoxLayout layout = new BoxLayout(infoPanel,BoxLayout.LINE_AXIS); 
 				infoPanel.setLayout(layout);
 			}
-			int width = GuiTools.getSize(GuiTools.GAME_DATA_PANEL_WIDTH);
-			int height = GuiTools.getSize(GuiTools.GAME_DATA_PANEL_HEIGHT);
+
 			int margin = GuiTools.getSize(GuiTools.GAME_DATA_MARGIN_SIZE);
-			int leftWidth = (int)(width*0.4); 
-			int rightWidth = width - leftWidth - margin; 
-			Dimension dim = new Dimension(width,height);
-			infoPanel.setPreferredSize(dim);
-			infoPanel.setMinimumSize(dim);
-			infoPanel.setMaximumSize(dim);
+			int leftWidth = (int)(dataWidth*SPLIT_RATIO); 
+			int rightWidth = dataWidth - leftWidth - margin; 
 			infoPanel.setOpaque(false);
+			
 			// left panel
 			{	JPanel leftPanel = new JPanel();
 				{	BoxLayout layout = new BoxLayout(leftPanel,BoxLayout.PAGE_AXIS); 
 					leftPanel.setLayout(layout);
 				}
 				leftPanel.setOpaque(false);
-				dim = new Dimension(leftWidth,height);
+				Dimension dim = new Dimension(leftWidth,dataHeight);
 				leftPanel.setPreferredSize(dim);
 				leftPanel.setMinimumSize(dim);
 				leftPanel.setMaximumSize(dim);
+				
 				// preview label
 				{	int innerHeight = leftWidth;
 					JLabel previewLabel = makePreviewLabel(leftWidth,innerHeight,preview);
 					previewLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
 					leftPanel.add(previewLabel);
 				}
-				//
+
 				leftPanel.add(Box.createVerticalGlue());
+				
 				// itemset panel
-				{	int innerHeight = height - leftWidth - margin;
+				{	int innerHeight = dataHeight - leftWidth - margin;
 					JPanel itemsetPanel = makeItemsetPanel(leftWidth,innerHeight,preview);
 					itemsetPanel.setAlignmentX(Component.CENTER_ALIGNMENT);
 					leftPanel.add(itemsetPanel);
@@ -160,20 +160,22 @@ public class RoundDescription extends EntitledDataPanel
 				//
 				infoPanel.add(leftPanel);
 			}
-			//
+
 			infoPanel.add(Box.createHorizontalGlue());
+			
 			// right panel
 			{	JPanel rightPanel = new JPanel();
 				{	BoxLayout layout = new BoxLayout(rightPanel,BoxLayout.PAGE_AXIS); 
 					rightPanel.setLayout(layout);
 				}
 				rightPanel.setOpaque(false);
-				dim = new Dimension(rightWidth,height);
+				Dimension dim = new Dimension(rightWidth,dataHeight);
 				rightPanel.setPreferredSize(dim);
 				rightPanel.setMinimumSize(dim);
 				rightPanel.setMaximumSize(dim);
-				int upHeight = (height - margin)/2;
-				int downHeight = height - upHeight - margin;
+				int upHeight = (dataHeight - margin)/2;
+				int downHeight = dataHeight - upHeight - margin;
+				
 				// up panel
 				{	JPanel upPanel = new JPanel();
 					{	BoxLayout layout = new BoxLayout(upPanel,BoxLayout.LINE_AXIS); 
@@ -185,19 +187,23 @@ public class RoundDescription extends EntitledDataPanel
 					upPanel.setMinimumSize(dim);
 					upPanel.setMaximumSize(dim);
 					int innerWidth = (rightWidth - margin)/2;
+					
 					// misc panel
 					{	JPanel miscPanel = makeMiscPanel(innerWidth,upHeight,preview);
 						upPanel.add(miscPanel);
 					}
+					
 					upPanel.add(Box.createHorizontalGlue());
+					
 					// initial items panel
 					{	JPanel initialItemsPanel = makeInitialItemsPanel(innerWidth,upHeight,preview);
 						upPanel.add(initialItemsPanel);
 					}
 					rightPanel.add(upPanel);
 				}
-				//
+
 				rightPanel.add(Box.createVerticalGlue());
+				
 				// down panel
 				{	JPanel downPanel = new JPanel();
 					{	BoxLayout layout = new BoxLayout(downPanel,BoxLayout.LINE_AXIS); 
@@ -209,22 +215,24 @@ public class RoundDescription extends EntitledDataPanel
 					downPanel.setMinimumSize(dim);
 					downPanel.setMaximumSize(dim);
 					int innerWidth = (rightWidth - margin)/2;
+					
 					// points panel
 					{	JPanel pointsPanel = makePointsPanel(innerWidth,downHeight);
 						downPanel.add(pointsPanel);
 					}
+					
 					downPanel.add(Box.createHorizontalGlue());
+					
 					// limits panel
 					{	JPanel limitsPanel = makeLimitsPanel(innerWidth,downHeight);
 						downPanel.add(limitsPanel);
 					}
 					rightPanel.add(downPanel);
 				}
-				//
 				infoPanel.add(rightPanel);
 			}
-			//
-			setDataPanel(infoPanel);
+
+			setDataPart(infoPanel);
 		}
 	}
 

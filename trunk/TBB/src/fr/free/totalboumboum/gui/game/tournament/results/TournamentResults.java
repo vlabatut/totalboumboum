@@ -21,47 +21,10 @@ package fr.free.totalboumboum.gui.game.tournament.results;
  * 
  */
 
-import java.awt.Color;
-import java.awt.Component;
-import java.awt.Dimension;
-import java.awt.Font;
-import java.awt.GridLayout;
-import java.awt.image.BufferedImage;
-import java.text.NumberFormat;
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.TreeSet;
-
-import javax.swing.Box;
-import javax.swing.BoxLayout;
-import javax.swing.ImageIcon;
-import javax.swing.JLabel;
-import javax.swing.JPanel;
-import javax.swing.SpringLayout;
-import javax.swing.SwingConstants;
-
-import fr.free.totalboumboum.data.profile.Portraits;
-import fr.free.totalboumboum.data.profile.Profile;
-import fr.free.totalboumboum.data.statistics.Score;
-import fr.free.totalboumboum.data.statistics.StatisticMatch;
-import fr.free.totalboumboum.data.statistics.StatisticRound;
-import fr.free.totalboumboum.data.statistics.StatisticTournament;
-import fr.free.totalboumboum.game.match.Match;
-import fr.free.totalboumboum.game.points.PlayerPoints;
-import fr.free.totalboumboum.game.tournament.AbstractTournament;
-import fr.free.totalboumboum.game.tournament.sequence.SequenceTournament;
-import fr.free.totalboumboum.gui.common.MenuContainer;
 import fr.free.totalboumboum.gui.common.panel.SplitMenuPanel;
 import fr.free.totalboumboum.gui.common.panel.data.EntitledDataPanel;
-import fr.free.totalboumboum.gui.common.panel.data.InnerDataPanel;
-import fr.free.totalboumboum.gui.common.panel.menu.MenuPanel;
-import fr.free.totalboumboum.gui.common.panel.menu.SimpleMenuPanel;
 import fr.free.totalboumboum.gui.common.subpanel.UntitledSubPanelTable;
-import fr.free.totalboumboum.gui.menus.tournament.TournamentSplitPanel;
-import fr.free.totalboumboum.gui.options.OptionsMenu;
-import fr.free.totalboumboum.gui.tools.SpringUtilities;
 import fr.free.totalboumboum.gui.tools.GuiTools;
-import fr.free.totalboumboum.tools.ImageTools;
 
 public abstract class TournamentResults extends EntitledDataPanel
 {	
@@ -69,12 +32,12 @@ public abstract class TournamentResults extends EntitledDataPanel
 
 	private UntitledSubPanelTable resultsPanel;
 	
-	public TournamentResults(SplitMenuPanel container, int w, int h)
-	{	super(container,w,h);
+	public TournamentResults(SplitMenuPanel container)
+	{	super(container);
 		
 		// title
-		String txt = getConfiguration().getLanguage().getText(GuiTools.GAME_TOURNAMENT_RESULTS_TITLE);
-		setTitle(txt);
+		String key = getConfiguration().getLanguage().getText(GuiTools.GAME_TOURNAMENT_RESULTS_TITLE);
+		setTitleKey(key);
 		
 	}
 }
