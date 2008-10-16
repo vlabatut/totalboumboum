@@ -224,7 +224,7 @@ public class RoundDescription extends EntitledDataPanel
 					downPanel.add(Box.createHorizontalGlue());
 					
 					// limits panel
-					{	JPanel limitsPanel = makeLimitsPanel(innerWidth,downHeight);
+					{	SubPanel limitsPanel = makeLimitsPanel(innerWidth,downHeight,round.getLimits(),"Round");
 						downPanel.add(limitsPanel);
 					}
 					rightPanel.add(downPanel);
@@ -238,15 +238,20 @@ public class RoundDescription extends EntitledDataPanel
 
 	private JLabel makePreviewLabel(int width, int height, LevelPreview levelPreview)
 	{	// init
-		String txt = "No preview";
-		JLabel result = new JLabel(txt);
+		JLabel result = new JLabel();
+		String text = "No preview";
+		String tooltip = "Zone preview";
+		result.setText(text);
+		result.setToolTipText(tooltip);
 		Dimension dim = new Dimension(width,height);
 		result.setPreferredSize(dim);
 		result.setMinimumSize(dim);
 		result.setMaximumSize(dim);
 		result.setHorizontalAlignment(SwingConstants.CENTER);
 		result.setVerticalAlignment(SwingConstants.CENTER);
-		result.setFont(getConfiguration().getFont().deriveFont((float)GuiTools.getSize(GuiTools.GAME_RESULTS_HEADER_FONT_SIZE)));
+		int fontSize = GuiTools.getFontSize(width, height, text);
+		Font font = getConfiguration().getFont().deriveFont((float)fontSize);
+		result.setFont(font);
 		result.setBackground(GuiTools.COLOR_TABLE_HEADER_BACKGROUND);
 		result.setForeground(GuiTools.COLOR_TABLE_HEADER_FOREGROUND);
 		result.setOpaque(true);
@@ -672,94 +677,106 @@ public class RoundDescription extends EntitledDataPanel
 		}
 	}
 	
-	private JPanel makeLimitsPanel(int width, int height)
+	public static <T extends Limit>SubPanel makeLimitsPanel(int width, int height, Limits<T> limits, String prefix)
 	{	// init
-		String id = GuiTools.GAME_ROUND_DESCRIPTION_LIMIT_TITLE;
-		int colGrps[] = {1,2};
-		int lns[] = {8, 8};
-		ArrayList<ArrayList<Object>> data = new ArrayList<ArrayList<Object>>();
-		ArrayList<ArrayList<String>> tooltips = new ArrayList<ArrayList<String>>();
+		prefix = "Game"+prefix+"DescriptionLimit";
+		int lines = 8;
+		int colSubs = 2;
+		int colGroups = 1;
+		if(limits.size()>lines*colGroups)
+			colGroups = 2;
+		
+		EntitledSubPanelTable limitsPanel = new EntitledSubPanelTable(width,height,colGroups,colSubs,lines);
+		String titleKey = prefix+"Title";
+		limitsPanel.setTitleKey(titleKey,true);
+		for(int colGroup=0;colGroup<colGroups;colGroup++)
+			limitsPanel.getTable().setColumnWidth(colGroup,1,Integer.MAX_VALUE);
 		
 		// data
 		NumberFormat nf = NumberFormat.getInstance();
 		nf.setMinimumFractionDigits(0);
-		Round round = getConfiguration().getCurrentRound();
-		Limits<RoundLimit> limitsList = round.getLimits();
-		Iterator<RoundLimit> i = limitsList.iterator();
-		if(!i.hasNext())
-		{	ArrayList<?> dt = new ArrayList<Object>();
-			ArrayList<String> tt = new ArrayList<String>();
-			// icon
-			dt.add(null);
-			tt.add(null);
-			// value
-			dt.add(null);
-			tt.add(null);
-		}
-		while(i.hasNext())
-		{	// init
-			Limit limit = i.next();
+		Iterator<T> i = limits.iterator();
+		prefix = prefix+"Header";
+		int line = 0;
+		int colGroup = 0;
+		while(i.hasNext() && colGroup<colGroups)
+		{	Limit limit = i.next();
 			String iconName = null;
 			String value = null;
-			if(limit instanceof LimitTime)
+			if(limit instanceof LimitConfrontation)
+			{	LimitConfrontation l = (LimitConfrontation)limit;
+				iconName = prefix+"Confrontations";
+				value = nf.format(l.getLimit());
+			}
+			else if(limit instanceof LimitTime)
 			{	LimitTime l = (LimitTime)limit;
-				iconName = GuiTools.GAME_ROUND_DESCRIPTION_LIMIT_HEADER_TIME;
+				iconName = prefix+"Time";
 				value = StringTools.formatTimeWithSeconds(l.getLimit());
 			}
 			else if(limit instanceof LimitPoints)
 			{	LimitPoints l = (LimitPoints)limit;
-				iconName = GuiTools.GAME_ROUND_DESCRIPTION_LIMIT_HEADER_CUSTOM;
+				iconName = prefix+"Custom";
+				value = nf.format(l.getLimit());
+			}
+			else if(limit instanceof LimitTotal)
+			{	LimitTotal l = (LimitTotal)limit;
+				iconName = prefix+"Total";
 				value = nf.format(l.getLimit());
 			}
 			else if(limit instanceof LimitScore)
 			{	LimitScore l = (LimitScore) limit;
 				switch(l.getScore())
 				{	case BOMBS:
-						iconName = GuiTools.GAME_ROUND_DESCRIPTION_LIMIT_HEADER_BOMBS;
+						iconName = prefix+"Bombs";
 						value = nf.format(l.getLimit());
 						break;
 					case CROWNS:
-						iconName = GuiTools.GAME_ROUND_DESCRIPTION_LIMIT_HEADER_CROWNS;
+						iconName = prefix+"Crowns";
 						value = nf.format(l.getLimit());
 						break;
 					case DEATHS:
-						iconName = GuiTools.GAME_ROUND_DESCRIPTION_LIMIT_HEADER_DEATHS;
+						iconName = prefix+"Deaths";
 						value = nf.format(l.getLimit());
 						break;
 					case ITEMS:
-						iconName = GuiTools.GAME_ROUND_DESCRIPTION_LIMIT_HEADER_ITEMS;
+						iconName = prefix+"Items";
 						value = nf.format(l.getLimit());
 						break;
 					case KILLS:
-						iconName = GuiTools.GAME_ROUND_DESCRIPTION_LIMIT_HEADER_KILLS;
+						iconName = prefix+"Kills";
 						value = nf.format(l.getLimit());
 						break;
 					case PAINTINGS:
-						iconName = GuiTools.GAME_ROUND_DESCRIPTION_LIMIT_HEADER_PAINTINGS;
+						iconName = prefix+"Paintings";
 						value = nf.format(l.getLimit());
 						break;
 					case TIME:
-						iconName = GuiTools.GAME_ROUND_DESCRIPTION_LIMIT_HEADER_TIME;
+						iconName = prefix+"Time";
 						value = nf.format(l.getLimit());
 						break;
 				}
 			}
-			// lists
-			String tooltip = getConfiguration().getLanguage().getText(iconName+GuiTools.TOOLTIP);
-			ArrayList<Object> dt = new ArrayList<Object>();
-			data.add(dt);
-			ArrayList<String> tt = new ArrayList<String>();
-			tooltips.add(tt);
-			// data
-			BufferedImage icon = GuiTools.getIcon(iconName);
-			dt.add(icon);
-			tt.add(tooltip);
-			dt.add(value);
-			tt.add(value);			
+			//
+			int colSub = 0;
+			{	limitsPanel.getTable().setLabelKey(line,colGroup,colSub,iconName,true);
+				Color fg = GuiTools.COLOR_TABLE_HEADER_FOREGROUND;
+				limitsPanel.getTable().setLabelForeground(line,colGroup,colSub,fg);
+				Color bg = GuiTools.COLOR_TABLE_HEADER_BACKGROUND;
+				limitsPanel.getTable().setLabelBackground(line,colGroup,colSub,bg);
+				colSub++;
+			}
+			{	String text = value;
+				String tooltip = value;
+				limitsPanel.getTable().setLabelText(line,colGroup,colSub,text,tooltip);
+				colSub++;
+			}
+			line++;
+			if(line==lines)
+			{	line = 0;
+				colGroup++;
+			}
 		}			
-			
-		// result
-		EntitledSubPanelTable limitsPanel = new EntitledSubPanelTable(width,height,id,colGrps,lns,data,tooltips,getConfiguration(),true,true);
+
 		return limitsPanel;
 	}
 

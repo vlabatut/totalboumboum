@@ -444,4 +444,158 @@ public class UntitledSubPanelTable extends SubPanel
 	{	JLabel label = getLabel(line, colGroup, colSub);
 		label.setForeground(fg);
 	}
+
+	/////////////////////////////////////////////////////////////////
+	// CONTENT			/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	
+	public void setContentBySubLineKeys(ArrayList<ArrayList<String>> keys, ArrayList<ArrayList<Boolean>> imageFlags, boolean wholeLine)
+	{	if(wholeLine)
+		{	Iterator<ArrayList<String>> keysIt = keys.iterator();
+			Iterator<ArrayList<Boolean>> flagsIt = imageFlags.iterator();
+			int line = 0;
+			if(header)
+				line = 1;
+			while(keysIt.hasNext() && line<lines)
+			{	int colGroup=0;
+				while(keysIt.hasNext() && colGroup<colGroups)
+				{	ArrayList<String> tempKeys = keysIt.next();
+					ArrayList<Boolean> tempFlags = flagsIt.next();
+					Iterator<String> keyIt = tempKeys.iterator();
+					Iterator<Boolean> flagIt = tempFlags.iterator();
+					for(int colSub=0;colSub<colSubs;colSub++)
+					{	String key = keyIt.next();
+						Boolean flag = flagIt.next();
+						setLabelKey(line,colGroup,colSub,key,flag);					
+					}
+					colGroup++;
+				}
+				line++;
+			}
+		}
+		else
+		{	Iterator<ArrayList<String>> keysIt = keys.iterator();
+			Iterator<ArrayList<Boolean>> flagsIt = imageFlags.iterator();
+			int start = 0;
+			if(header)
+				start = 1;
+			int colGroup = 0;
+			while(keysIt.hasNext() && colGroup<colGroups)
+			{	int line=start;
+				while(keysIt.hasNext() && line<lines)
+				{	ArrayList<String> tempKeys = keysIt.next();
+					ArrayList<Boolean> tempFlags = flagsIt.next();
+					Iterator<String> keyIt = tempKeys.iterator();
+					Iterator<Boolean> flagIt = tempFlags.iterator();
+					for(int colSub=0;colSub<colSubs;colSub++)
+					{	String key = keyIt.next();
+						Boolean flag = flagIt.next();
+						setLabelKey(line,colGroup,colSub,key,flag);					
+					}
+					line++;
+				}
+				colGroup++;
+			}
+		}
+	}
+	
+	public void setContentBySubLineIcon(ArrayList<ArrayList<BufferedImage>> icons, ArrayList<ArrayList<String>> tooltips, boolean wholeLine)
+	{	if(wholeLine)
+		{	Iterator<ArrayList<BufferedImage>> iconsIt = icons.iterator();
+			Iterator<ArrayList<String>> tooltipsIt = tooltips.iterator();
+			int line = 0;
+			if(header)
+				line = 1;
+			while(iconsIt.hasNext() && line<lines)
+			{	int colGroup=0;
+				while(iconsIt.hasNext() && colGroup<colGroups)
+				{	ArrayList<BufferedImage> tempIcons = iconsIt.next();
+					ArrayList<String> tempTooltips = tooltipsIt.next();
+					Iterator<BufferedImage> iconIt = tempIcons.iterator();
+					Iterator<String> tooltipIt = tempTooltips.iterator();
+					for(int colSub=0;colSub<colSubs;colSub++)
+					{	BufferedImage icon = iconIt.next();
+						String tooltip = tooltipIt.next();
+						setLabelIcon(line,colGroup,colSub,icon,tooltip);					
+					}
+					colGroup++;
+				}
+				line++;
+			}
+		}
+		else
+		{	Iterator<ArrayList<BufferedImage>> iconsIt = icons.iterator();
+			Iterator<ArrayList<String>> tooltipsIt = tooltips.iterator();
+			int start = 0;
+			if(header)
+				start = 1;
+			int colGroup = 0;
+			while(iconsIt.hasNext() && colGroup<colGroups)
+			{	int line=start;
+				while(iconsIt.hasNext() && line<lines)
+				{	ArrayList<BufferedImage> tempIcons = iconsIt.next();
+					ArrayList<String> tempTooltips = tooltipsIt.next();
+					Iterator<BufferedImage> iconIt = tempIcons.iterator();
+					Iterator<String> tooltipIt = tempTooltips.iterator();
+					for(int colSub=0;colSub<colSubs;colSub++)
+					{	BufferedImage icon = iconIt.next();
+						String tooltip = tooltipIt.next();
+						setLabelIcon(line,colGroup,colSub,icon,tooltip);					
+					}
+					line++;
+				}
+				colGroup++;
+			}
+		}
+	}
+	
+	public void setContentBySubLineText(ArrayList<ArrayList<String>> texts, ArrayList<ArrayList<String>> tooltips, boolean wholeLine)
+	{	if(wholeLine)
+		{	Iterator<ArrayList<String>> textsIt = texts.iterator();
+			Iterator<ArrayList<String>> tooltipsIt = tooltips.iterator();
+			int line = 0;
+			if(header)
+				line = 1;
+			while(textsIt.hasNext() && line<lines)
+			{	int colGroup=0;
+				while(textsIt.hasNext() && colGroup<colGroups)
+				{	ArrayList<String> tempTexts = textsIt.next();
+					ArrayList<String> tempTooltips = tooltipsIt.next();
+					Iterator<String> textIt = tempTexts.iterator();
+					Iterator<String> tooltipIt = tempTooltips.iterator();
+					for(int colSub=0;colSub<colSubs;colSub++)
+					{	String text = textIt.next();
+						String tooltip = tooltipIt.next();
+						setLabelText(line,colGroup,colSub,text,tooltip);					
+					}
+					colGroup++;
+				}
+				line++;
+			}
+		}
+		else
+		{	Iterator<ArrayList<String>> textsIt = texts.iterator();
+			Iterator<ArrayList<String>> tooltipsIt = tooltips.iterator();
+			int start = 0;
+			if(header)
+				start = 1;
+			int colGroup = 0;
+			while(textsIt.hasNext() && colGroup<colGroups)
+			{	int line=start;
+				while(textsIt.hasNext() && line<lines)
+				{	ArrayList<String> tempTexts = textsIt.next();
+					ArrayList<String> tempTooltips = tooltipsIt.next();
+					Iterator<String> textIt = tempTexts.iterator();
+					Iterator<String> tooltipIt = tempTooltips.iterator();
+					for(int colSub=0;colSub<colSubs;colSub++)
+					{	String text = textIt.next();
+						String tooltip = tooltipIt.next();
+						setLabelText(line,colGroup,colSub,text,tooltip);					
+					}
+					line++;
+				}
+				colGroup++;
+			}
+		}
+	}
 }
