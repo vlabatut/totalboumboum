@@ -43,15 +43,12 @@ public class TournamentSplitPanel extends SplitMenuPanel
 	public TournamentSplitPanel(MenuContainer container, MenuPanel parent) throws IllegalArgumentException, SecurityException, ParserConfigurationException, SAXException, IOException, IllegalAccessException, NoSuchFieldException
 	{	super(container,parent,BorderLayout.LINE_START,GuiTools.VERTICAL_SPLIT_RATIO);
 		
-		// size
-		setPreferredSize(getConfiguration().getPanelDimension());		
-		
 		// background
 		image = getConfiguration().getDarkBackground();
 		
 		// panels
-//		setDataPart(new TournamentData(this));
-		setMenuPart(new TournamentMenu(this,parent));
+		TournamentMenu menu = new TournamentMenu(this,parent);
+		setMenuPart(menu);
 	}
 
 	
@@ -59,5 +56,4 @@ public class TournamentSplitPanel extends SplitMenuPanel
 	public void paintComponent(Graphics g)
 	{	g.drawImage(image, 0, 0, null);
 	}
-	
 }

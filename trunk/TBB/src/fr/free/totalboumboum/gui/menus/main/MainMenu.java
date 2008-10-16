@@ -66,8 +66,7 @@ public class MainMenu extends SimpleMenuPanel
 		// layout
 		BoxLayout layout = new BoxLayout(this,BoxLayout.PAGE_AXIS); 
 		setLayout(layout);
-		// size
-		setPreferredSize(getConfiguration().getPanelDimension());
+
 		// background
 		image = getConfiguration().getBackground();
 		

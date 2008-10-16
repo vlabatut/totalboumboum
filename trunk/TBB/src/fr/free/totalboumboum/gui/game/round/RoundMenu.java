@@ -122,7 +122,6 @@ buttonStatistics.setEnabled(false);
 		roundDescription = null;
 		roundDescription = new RoundDescription(container,w,h);
 		container.setDataPart(roundDescription);
-		dataPart = roundDescription;
 		roundResults = new RoundResults(container,w,h);
 		roundStatistics = new RoundStatistics(container,w,h);		
 		
@@ -146,15 +145,12 @@ buttonStatistics.setEnabled(false);
 	    }
 		else if(e.getActionCommand().equals(GuiTools.GAME_ROUND_BUTTON_DESCRIPTION))
 		{	container.setDataPart(roundDescription);
-			dataPart = roundDescription;
 	    }
 		else if(e.getActionCommand().equals(GuiTools.GAME_ROUND_BUTTON_RESULTS))
 		{	container.setDataPart(roundResults);
-			dataPart = roundResults;
 	    }
 		else if(e.getActionCommand().equals(GuiTools.GAME_ROUND_BUTTON_STATISTICS))
 		{	container.setDataPart(roundStatistics);
-			dataPart = roundStatistics;
 	    }
 		else if(e.getActionCommand().equals(GuiTools.GAME_ROUND_BUTTON_PLAY))
 		{	buttonPlay.setEnabled(false);

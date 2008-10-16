@@ -44,7 +44,7 @@ public abstract class SplitMenuPanel extends MenuPanel implements MenuContainer
 		
 		// size
 		if(menuLocation.equals(BorderLayout.LINE_START) || menuLocation.equals(BorderLayout.LINE_END))
-		{	menuWidth = (int)split*width;
+		{	menuWidth = (int)(split*width);
 			dataWidth = width - menuWidth;
 			menuHeight = height;
 			dataHeight = height;			
