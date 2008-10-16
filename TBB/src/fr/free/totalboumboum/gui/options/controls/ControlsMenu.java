@@ -21,23 +21,16 @@ package fr.free.totalboumboum.gui.options.controls;
  * 
  */
 
-import java.awt.Color;
 import java.awt.Dimension;
-import java.awt.Graphics;
 import java.awt.event.ActionEvent;
-import java.awt.image.BufferedImage;
 
 import javax.swing.Box;
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
 
-import fr.free.totalboumboum.gui.common.MenuContainer;
 import fr.free.totalboumboum.gui.common.panel.SplitMenuPanel;
-import fr.free.totalboumboum.gui.common.panel.data.InnerDataPanel;
 import fr.free.totalboumboum.gui.common.panel.menu.InnerMenuPanel;
 import fr.free.totalboumboum.gui.common.panel.menu.MenuPanel;
-import fr.free.totalboumboum.gui.common.panel.menu.SimpleMenuPanel;
-import fr.free.totalboumboum.gui.menus.tournament.TournamentData;
 import fr.free.totalboumboum.gui.options.controls.ControlsData;
 import fr.free.totalboumboum.gui.tools.GuiTools;
 
@@ -83,7 +76,7 @@ public class ControlsMenu extends InnerMenuPanel
 		int h = GuiTools.getSize(GuiTools.VERTICAL_SPLIT_DATA_PANEL_HEIGHT);
 		int w = GuiTools.getSize(GuiTools.VERTICAL_SPLIT_DATA_PANEL_WIDTH);
 		for(int i=0;i<controlsData.length;i++)
-			controlsData[i] = new ControlsData(container,w,h,i+1);
+			controlsData[i] = new ControlsData(container,i+1);
 		container.setDataPart(controlsData[0]);
 		dataPart = controlsData[0];
 }

@@ -21,7 +21,6 @@ package fr.free.totalboumboum.gui.menus.tournament;
  * 
  */
 
-import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.io.IOException;
@@ -33,10 +32,8 @@ import javax.xml.parsers.ParserConfigurationException;
 
 import org.xml.sax.SAXException;
 
-import fr.free.totalboumboum.data.configuration.Configuration;
 import fr.free.totalboumboum.game.tournament.AbstractTournament;
 import fr.free.totalboumboum.game.tournament.single.SingleTournament;
-import fr.free.totalboumboum.gui.common.panel.ContentPanel;
 import fr.free.totalboumboum.gui.common.panel.SplitMenuPanel;
 import fr.free.totalboumboum.gui.common.panel.data.InnerDataPanel;
 import fr.free.totalboumboum.gui.common.panel.menu.InnerMenuPanel;

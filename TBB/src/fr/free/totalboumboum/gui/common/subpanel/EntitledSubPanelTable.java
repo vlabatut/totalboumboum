@@ -21,20 +21,11 @@ package fr.free.totalboumboum.gui.common.subpanel;
  * 
  */
 
-import java.awt.Color;
 import java.awt.Dimension;
-import java.awt.Font;
-import java.awt.image.BufferedImage;
-import java.util.ArrayList;
-import java.util.Iterator;
 
 import javax.swing.Box;
-import javax.swing.ImageIcon;
-import javax.swing.JLabel;
 
-import fr.free.totalboumboum.gui.data.configuration.GuiConfiguration;
 import fr.free.totalboumboum.gui.tools.GuiTools;
-import fr.free.totalboumboum.tools.ImageTools;
 
 public class EntitledSubPanelTable extends EntitledSubPanel
 {	private static final long serialVersionUID = 1L;
@@ -57,7 +48,7 @@ public class EntitledSubPanelTable extends EntitledSubPanel
 		setDataPanel(tablePanel);
 		remove(4); 	// remove glue
 		remove(2); 	// remove glue
-		
+/*		
 		// empty
 		for(int line=0;line<lines;line++)
 		{	for(int col=0;col<columns;col=col+subColumns)
@@ -135,5 +126,6 @@ public class EntitledSubPanelTable extends EntitledSubPanel
 				}
 			}
 		}		
+*/	
 	}
 }

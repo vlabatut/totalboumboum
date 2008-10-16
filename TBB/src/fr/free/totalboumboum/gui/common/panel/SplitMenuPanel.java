@@ -30,8 +30,8 @@ import fr.free.totalboumboum.gui.common.panel.menu.MenuPanel;
 public abstract class SplitMenuPanel extends MenuPanel implements MenuContainer
 {	private static final long serialVersionUID = 1L;
 
-	public SplitMenuPanel(MenuContainer container, MenuPanel parent, String menuLocation, int width, int height, float split)
-	{	super(width,height);
+	public SplitMenuPanel(MenuContainer container, MenuPanel parent, String menuLocation, float split)
+	{	super(container.getMenuWidth(),container.getMenuHeight());
 		
 		// fields
 		this.container = container;

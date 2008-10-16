@@ -25,10 +25,10 @@ import fr.free.totalboumboum.gui.common.MenuContainer;
  */
 
 public abstract class SimpleMenuPanel extends MenuPanel implements ButtonAware
-{	private static final long serialVersionUID = 1L;
+{	private static final long serialVersionUID = 1L; 
 
-	public SimpleMenuPanel(MenuContainer container, MenuPanel parent, int width, int height)
-	{	super(width,height);
+	public SimpleMenuPanel(MenuContainer container, MenuPanel parent)
+	{	super(container.getMenuWidth(),container.getMenuHeight());
 		this.container = container;
 		this.parent = parent;
 	}	

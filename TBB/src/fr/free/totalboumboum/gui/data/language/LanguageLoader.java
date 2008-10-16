@@ -51,6 +51,7 @@ public class LanguageLoader
 		return result;
 	}
 
+	@SuppressWarnings("unchecked")
 	private static void loadLanguageElement(Element root, Language result)
 	{	List<Element> elements = root.getChildren(GuiXmlTools.ELT_GROUP);
 		Iterator<Element> i = elements.iterator();
@@ -60,6 +61,7 @@ public class LanguageLoader
 		}
 	}
 
+	@SuppressWarnings("unchecked")
 	private static void loadGroupElement(Element root, String name, Language result)
 	{	String key = root.getAttribute(GuiXmlTools.ATT_NAME).getValue().trim();
 		String newName = name+key;

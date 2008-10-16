@@ -21,11 +21,8 @@ package fr.free.totalboumboum.gui.options;
  * 
  */
 
-import java.awt.Color;
 import java.awt.Dimension;
-import java.awt.Graphics;
 import java.awt.event.ActionEvent;
-import java.awt.image.BufferedImage;
 import java.io.IOException;
 
 import javax.swing.Box;
@@ -35,14 +32,10 @@ import javax.xml.parsers.ParserConfigurationException;
 
 import org.xml.sax.SAXException;
 
-import fr.free.totalboumboum.gui.common.MenuContainer;
 import fr.free.totalboumboum.gui.common.panel.SplitMenuPanel;
 import fr.free.totalboumboum.gui.common.panel.data.InnerDataPanel;
 import fr.free.totalboumboum.gui.common.panel.menu.InnerMenuPanel;
 import fr.free.totalboumboum.gui.common.panel.menu.MenuPanel;
-import fr.free.totalboumboum.gui.common.panel.menu.SimpleMenuPanel;
-import fr.free.totalboumboum.gui.menus.tournament.TournamentData;
-import fr.free.totalboumboum.gui.options.controls.ControlsData;
 import fr.free.totalboumboum.gui.options.controls.ControlsSplitPanel;
 import fr.free.totalboumboum.gui.tools.GuiTools;
 
