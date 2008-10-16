@@ -25,12 +25,12 @@ import java.awt.Dimension;
 
 import javax.swing.Box;
 
+import com.sun.media.sound.DataPusher;
+
 import fr.free.totalboumboum.gui.tools.GuiTools;
 
 public class EntitledSubPanelTable extends EntitledSubPanel
 {	private static final long serialVersionUID = 1L;
-
-//ArrayList<ArrayList<Object>> data, ArrayList<ArrayList<String>> tooltips, 
 
 	public EntitledSubPanelTable(int width, int height, int colGroups, int colSubs, int lines)
 	{	super(width,height);
@@ -127,5 +127,9 @@ public class EntitledSubPanelTable extends EntitledSubPanel
 			}
 		}		
 */	
+	}
+	
+	public UntitledSubPanelTable getTable()
+	{	return (UntitledSubPanelTable)getDataPanel();
 	}
 }
