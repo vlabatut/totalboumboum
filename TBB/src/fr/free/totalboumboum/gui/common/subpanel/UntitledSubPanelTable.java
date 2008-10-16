@@ -21,20 +21,25 @@ package fr.free.totalboumboum.gui.common.subpanel;
  * 
  */
 
-import java.awt.Component;
 import java.awt.Font;
+import java.awt.image.BufferedImage;
+import java.util.ArrayList;
+import java.util.Iterator;
 
+import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.SpringLayout;
 import javax.swing.SwingConstants;
 
 import fr.free.totalboumboum.gui.tools.SpringUtilities;
 import fr.free.totalboumboum.gui.tools.GuiTools;
+import fr.free.totalboumboum.tools.ImageTools;
 
 public class UntitledSubPanelTable extends SubPanel
 {	private static final long serialVersionUID = 1L;
 
-	private int columns = 0;
+	private int colGroups = 0;
+	private int colSubs = 0;
 	private int lines = 0;
 	private Font headerFont;
 	private Font lineFont;
@@ -47,6 +52,10 @@ public class UntitledSubPanelTable extends SubPanel
 	
 
 	public UntitledSubPanelTable(int width, int height, int columns, int lines, boolean header)
+	{	this(width,height,1,columns,lines,header);
+	}
+
+	public UntitledSubPanelTable(int width, int height, int colGroups, int colSubs, int lines, boolean header)
 	{	super(width,height);
 		
 		// init
@@ -70,35 +79,119 @@ public class UntitledSubPanelTable extends SubPanel
 		lineFont = GuiTools.getGameFont().deriveFont(lineFontSize);
 
 		// table
+		this.colGroups = colGroups;
+		this.colSubs = colSubs;
+		int columns = getColumnCount();
 		this.lines = lines;
 		for(int col=0;col<columns;col++)
 			addColumn(col);
 	}
 	
+	private void updateLayout()
+	{	SpringLayout layout = new SpringLayout();
+		setLayout(layout);
+		int margin = GuiTools.SUBPANEL_MARGIN;
+		SpringUtilities.makeCompactGrid(this,lines,getColumnCount(),margin,margin,margin,margin);		
+	}
+	
+	/////////////////////////////////////////////////////////////////
+	// COLUMNS			/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
 	public int getColumnCount()
-	{	return columns;		
+	{	return colGroups*colSubs;
 	}
 	
 	public void addColumn(int index)
-	{	columns++;
+	{	addSubColumn(index);
+	}
+
+	public void addSubColumn(int subIndex)
+	{	colSubs++;
 		int start = 0;
 	
-		// header
-		if(header)
-		{	start = 1;
-			String txt = null;
-			JLabel lbl = new JLabel(txt);
-			lbl.setFont(headerFont);
-			lbl.setHorizontalAlignment(SwingConstants.CENTER);
-			lbl.setBackground(GuiTools.COLOR_TABLE_HEADER_BACKGROUND);
-			lbl.setForeground(GuiTools.COLOR_TABLE_HEADER_FOREGROUND);
-			lbl.setOpaque(true);
-//setMaximumSize(new Dimension(Integer.MAX_VALUE,GuiTools.getSize(GuiTools.GAME_RESULTS_LABEL_HEADER_HEIGHT)));
-			add(lbl,index);		
+		for(int grp=0;grp<colGroups;grp++)
+		{	int index = subIndex+grp*colSubs;
+			// header
+			if(header)
+			{	start = 1;
+				String txt = null;
+				JLabel lbl = new JLabel(txt);
+				lbl.setFont(headerFont);
+				lbl.setHorizontalAlignment(SwingConstants.CENTER);
+				lbl.setBackground(GuiTools.COLOR_TABLE_HEADER_BACKGROUND);
+				lbl.setForeground(GuiTools.COLOR_TABLE_HEADER_FOREGROUND);
+				lbl.setOpaque(true);
+				add(lbl,index);		
+			}
+			
+			// data
+			for(int line=0+start;line<lines;line++)
+			{	String txt = null;
+				JLabel lbl = new JLabel(txt);
+				lbl.setFont(lineFont);
+				lbl.setHorizontalAlignment(SwingConstants.CENTER);
+				lbl.setBackground(GuiTools.COLOR_TABLE_NEUTRAL_BACKGROUND);
+				lbl.setForeground(GuiTools.COLOR_TABLE_REGULAR_FOREGROUND);
+				lbl.setOpaque(true);
+				add(lbl,index+line*getColumnCount());
+			}
 		}
+		updateLayout();
+	}
+	
+	public void setColumnKeys(int col, ArrayList<String> keys, ArrayList<Boolean> imageFlags)
+	{	setColumnKeys(0,col,keys,imageFlags);
+	}
+	public void setColumnKeys(int colGroup, int colSub, ArrayList<String> keys, ArrayList<Boolean> imageFlags)
+	{	Iterator<String> lineKeys = keys.iterator();
+		Iterator<Boolean> lineFlags = imageFlags.iterator();
+		int line = 0;
+		while(lineKeys.hasNext())
+		{	String key = lineKeys.next();
+			Boolean flag = lineFlags.next();
+			setLabelKey(line,colGroup,colSub,key,flag);
+			line++;
+		}			
+	}
+	
+	public void setColumnIcons(int col, ArrayList<BufferedImage> icons, ArrayList<String> tooltips)
+	{	setColumnIcons(0,col,icons,tooltips);
+	}
+	public void setColumnIcons(int colGroup, int colSub, ArrayList<BufferedImage> icons, ArrayList<String> tooltips)
+	{	Iterator<BufferedImage> lineIcons = icons.iterator();
+		Iterator<String> lineTooltips = tooltips.iterator();
+		int line = 0;
+		while(lineIcons.hasNext())
+		{	BufferedImage icon = lineIcons.next();
+			String tooltip = lineTooltips.next();
+			setLabelIcon(line,colGroup,colSub,icon,tooltip);
+			line++;
+		}			
+	}
+	
+	public void setColumnTexts(int col, ArrayList<String> texts, ArrayList<String> tooltips)
+	{	setColumnTexts(0,col,texts,tooltips);
+	}
+	public void setColumnTexts(int colGroup, int colSub, ArrayList<String> texts, ArrayList<String> tooltips)
+	{	Iterator<String> lineTexts = texts.iterator();
+		Iterator<String> lineTooltips = tooltips.iterator();
+		int line = 0;
+		while(lineTexts.hasNext())
+		{	String text = lineTexts.next();
+			String tooltip = lineTooltips.next();
+			setLabelText(line,colGroup,colSub,text,tooltip);
+			line++;
+		}			
+	}
 		
-		// data
-		for(int line=0+start;line<lines;line++)
+	/////////////////////////////////////////////////////////////////
+	// LINES			/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	
+	public void addLine(int index)
+	{	int cols = getColumnCount();
+		int line = index*cols;
+		for(int col=0;col<cols;col++)
 		{	String txt = null;
 			JLabel lbl = new JLabel(txt);
 			lbl.setFont(lineFont);
@@ -106,19 +199,147 @@ public class UntitledSubPanelTable extends SubPanel
 			lbl.setBackground(GuiTools.COLOR_TABLE_NEUTRAL_BACKGROUND);
 			lbl.setForeground(GuiTools.COLOR_TABLE_REGULAR_FOREGROUND);
 			lbl.setOpaque(true);
-//setMaximumSize(new Dimension(Integer.MAX_VALUE,GuiTools.getSize(GuiTools.GAME_RESULTS_LABEL_LINE_HEIGHT)));
-			add(lbl,index+line*columns);
+			add(lbl,line);
 		}
-		
-		// layout
-		SpringLayout layout = new SpringLayout();
-		setLayout(layout);
-		int margin = GuiTools.getSize(GuiTools.GAME_RESULTS_MARGIN_SIZE);
-		SpringUtilities.makeCompactGrid(this,lines,columns,margin,margin,margin,margin);
+		updateLayout();
+	}
+
+	public void setLineKeysSimple(int line, ArrayList<String> keys, ArrayList<Boolean> imageFlags)
+	{	ArrayList<ArrayList<String>> newKeys = new ArrayList<ArrayList<String>>();
+		newKeys.add(keys);
+		ArrayList<ArrayList<Boolean>> newFlags = new ArrayList<ArrayList<Boolean>>();
+		newFlags.add(imageFlags);
+		setLineKeys(line,newKeys,newFlags);
+	}
+	public void setLineKeys(int line, ArrayList<ArrayList<String>> keys, ArrayList<ArrayList<Boolean>> imageFlag)
+	{	Iterator<ArrayList<String>> groupKeys = keys.iterator();
+		Iterator<ArrayList<Boolean>> groupFlags = imageFlag.iterator();
+		int colGroup = 0;
+		while(groupKeys.hasNext())
+		{	int colSub = 0;
+			ArrayList<String> tempKeys = groupKeys.next();
+			ArrayList<Boolean> tempFlags = groupFlags.next();
+			Iterator<String> colKeys = tempKeys.iterator();
+			Iterator<Boolean> colFlags = tempFlags.iterator();
+			while(colKeys.hasNext())
+			{	String key = colKeys.next();
+				Boolean flag = colFlags.next();
+				setLabelKey(line,colGroup,colSub,key,flag); 
+				colSub++;
+			}			
+			colGroup++;
+		}
 	}
 	
-	public Component getComponent(int line, int col)
-	{	Component result = getComponent(col+line*columns);;
+	public void setLineIconsSimple(int line, ArrayList<BufferedImage> icons, ArrayList<String> tooltips)
+	{	ArrayList<ArrayList<BufferedImage>> newIcons = new ArrayList<ArrayList<BufferedImage>>();
+		newIcons.add(icons);
+		ArrayList<ArrayList<String>> newTooltips = new ArrayList<ArrayList<String>>();
+		newTooltips.add(tooltips);
+		setLineIcons(line,newIcons,newTooltips);
+	}
+	public void setLineIcons(int line, ArrayList<ArrayList<BufferedImage>> icons, ArrayList<ArrayList<String>> tooltips)
+	{	Iterator<ArrayList<BufferedImage>> groupIcons = icons.iterator();
+		Iterator<ArrayList<String>> groupTooltips = tooltips.iterator();
+		int colGroup = 0;
+		while(groupIcons.hasNext())
+		{	int colSub = 0;
+			ArrayList<BufferedImage> tempIcons = groupIcons.next();
+			ArrayList<String> tempTooltips = groupTooltips.next();
+			Iterator<BufferedImage> colIcons = tempIcons.iterator();
+			Iterator<String> colTooltips = tempTooltips.iterator();
+			while(colIcons.hasNext())
+			{	BufferedImage icon = colIcons.next();
+				String tooltip = colTooltips.next();
+				setLabelIcon(line,colGroup,colSub,icon,tooltip); 
+				colSub++;
+			}			
+			colGroup++;
+		}
+	}
+	
+	public void setLineTextsSimple(int line, ArrayList<String> texts, ArrayList<String> tooltips)
+	{	ArrayList<ArrayList<String>> newTexts = new ArrayList<ArrayList<String>>();
+		newTexts.add(texts);
+		ArrayList<ArrayList<String>> newTooltips = new ArrayList<ArrayList<String>>();
+		newTooltips.add(tooltips);
+		setLineTexts(line,newTexts,newTooltips);
+	}
+	public void setLineTexts(int line, ArrayList<ArrayList<String>> texts, ArrayList<ArrayList<String>> tooltips)
+	{	Iterator<ArrayList<String>> groupTexts = texts.iterator();
+		Iterator<ArrayList<String>> groupTooltips = tooltips.iterator();
+		int colGroup = 0;
+		while(groupTexts.hasNext())
+		{	int colSub = 0;
+			ArrayList<String> tempTexts = groupTexts.next();
+			ArrayList<String> tempTooltips = groupTooltips.next();
+			Iterator<String> colTexts = tempTexts.iterator();
+			Iterator<String> colTooltips = tempTooltips.iterator();
+			while(colTexts.hasNext())
+			{	String text = colTexts.next();
+				String tooltip = colTooltips.next();
+				setLabelText(line,colGroup,colSub,text,tooltip); 
+				colSub++;
+			}			
+			colGroup++;
+		}
+	}
+
+	/////////////////////////////////////////////////////////////////
+	// LABELS			/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	
+	public JLabel getLabel(int line, int col)
+	{	return getLabel(line,0,col);
+	}
+	public JLabel getLabel(int line, int colGroup, int colSub)
+	{	JLabel result = (JLabel)getComponent(colSub+colGroup*colSubs+line*getColumnCount());;
 		return result;
 	}
+	
+	public void setLabelKey(int line, int col, String key, boolean imageFlag)
+	{	setLabelKey(line,0,col,key,imageFlag);
+	}
+	public void setLabelKey(int line, int colGroup, int colSub, String key, boolean imageFlag)
+	{	String tooltip = GuiTools.getText(key+GuiTools.TOOLTIP);
+		// is there an available icon ?
+		if(imageFlag)
+		{	BufferedImage icon = GuiTools.getIcon(key);
+			setLabelIcon(line,colGroup,colSub,icon,tooltip);		
+		}
+		// if not : use text
+		else
+		{	String text = GuiTools.getText(key);
+			setLabelText(line,colGroup,colSub,text,tooltip);
+		}
+	}
+
+	public void setLabelIcon(int line, int col, BufferedImage icon, String tooltip)
+	{	setLabelIcon(line,0,col,icon,tooltip);
+	}
+	public void setLabelIcon(int line, int colGroup, int colSub, BufferedImage icon, String tooltip)
+	{	JLabel label = getLabel(line,colGroup,colSub);
+		int h;
+		if(line==0)
+			h = headerHeight;
+		else
+			h = lineHeight;
+		double zoom = h/(double)icon.getHeight();
+		icon = ImageTools.resize(icon,zoom,true);
+		ImageIcon icn = new ImageIcon(icon);
+		label.setText(null);
+		label.setIcon(icn);
+		label.setToolTipText(tooltip);
+	}
+
+	public void setLabelText(int line, int col, String text, String tooltip)
+	{	setLabelText(line,col,text,tooltip);
+	}
+	public void setLabelText(int line, int colGroup, int colSub, String text, String tooltip)
+	{	JLabel label = getLabel(line,colGroup,colSub);
+		label.setIcon(null);
+		label.setText(text);
+		label.setToolTipText(tooltip);
+	}
+	
 }

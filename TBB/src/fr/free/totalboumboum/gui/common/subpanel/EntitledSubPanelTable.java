@@ -39,35 +39,25 @@ import fr.free.totalboumboum.tools.ImageTools;
 public class EntitledSubPanelTable extends EntitledSubPanel
 {	private static final long serialVersionUID = 1L;
 
-	public EntitledSubPanelTable(int width, int height, boolean firstColIsDark, boolean firstColIsSquared)
+//ArrayList<ArrayList<Object>> data, ArrayList<ArrayList<String>> tooltips, 
+
+	public EntitledSubPanelTable(int width, int height, int colGroups, int colSubs, int lines)
 	{	super(width,height);
 
-	//ArrayList<ArrayList<Object>> data, ArrayList<ArrayList<String>> tooltips, 
-	
 		// init table
-		int margin = GuiTools.getSize(GuiTools.GAME_RESULTS_MARGIN_SIZE);
+		int margin = GuiTools.SUBPANEL_MARGIN;
 		remove(0);
 		add(Box.createRigidArea(new Dimension(margin,margin)),0);
-		int titleHeight = getComponent(1).getPreferredSize().height;
-		height = height-margin-titleHeight;
-		int columnGroups;
-		int lines;
-		int k = 0;
-		do
-		{	columnGroups = colGrps[k];
-			lines = lns[k];
-			k++;			
-		}
-		while(data.size()>columnGroups*lines && k<lns.length);
-		int subColumns = data.get(0).size();
-		int columns = columnGroups*subColumns;
-		UntitledSubPanelTable tablePanel = new UntitledSubPanelTable(width,height,columns,lines,false,configuration);
+		remove(0);
+
+		int tableHeight = height - getTitleHeight() - margin;
+		int tableWidth = width;
+		UntitledSubPanelTable tablePanel = new UntitledSubPanelTable(tableWidth,tableHeight,colGroups,colSubs,lines,false);
 		tablePanel.setOpaque(false);
-		int lineHeight = (height-margin*(lines+1))/lines;
-		float fontSize = GuiTools.getFontSize(lineHeight*0.8);
-		Font regularFont = configuration.getFont().deriveFont((float)fontSize);
+		setDataPanel(tablePanel);
+		remove(4); 	// remove glue
+		remove(2); 	// remove glue
 		
-		int maxWidth = (width - margin*(columns+1) - columnGroups*lineHeight)/columnGroups;
 		// empty
 		for(int line=0;line<lines;line++)
 		{	for(int col=0;col<columns;col=col+subColumns)
@@ -144,7 +134,6 @@ public class EntitledSubPanelTable extends EntitledSubPanel
 					}	
 				}
 			}
-		}
-		setDataPanel(tablePanel);	
+		}		
 	}
 }

@@ -95,24 +95,42 @@ public class EntitledSubPanel extends SubPanel
 	private int titleWidth;
 	private int titleFontSize;
 
-	public void setTitle(String key)
-	{	// is there an available icon ?
-		if(GuiTools.hasIcon(key))
+	public void setTitleKey(String key, boolean imageFlag)
+	{	String tooltip = GuiTools.getText(key+GuiTools.TOOLTIP);
+		// is there an available icon ?
+		if(imageFlag)
 		{	BufferedImage icon = GuiTools.getIcon(key);
-			double zoom = titleHeight/(double)icon.getHeight();
-			icon = ImageTools.resize(icon,zoom,true);
-			ImageIcon icn = new ImageIcon(icon);
-			title.setText(null);
-			title.setIcon(icn);					
+			setTitleIcon(icon,tooltip);				
 		}
 		// if not : use text
 		else
 		{	String text = GuiTools.getText(key);
-			title.setText(text);
+			setTitleText(text,tooltip);
 		}
-		// put the tooltip
-		String tooltip = GuiTools.getText(key+GuiTools.TOOLTIP);
+	}
+
+	public void setTitleIcon(BufferedImage icon, String tooltip)
+	{	double zoom = titleHeight/(double)icon.getHeight();
+		icon = ImageTools.resize(icon,zoom,true);
+		ImageIcon icn = new ImageIcon(icon);
+		title.setText(null);
+		title.setIcon(icn);					
 		title.setToolTipText(tooltip);
+	}
+
+	public void setTitleText(String text, String tooltip)
+	{	title.setText(text);
+		title.setToolTipText(tooltip);
+	}
+
+	public int getTitleHeight()
+	{	return titleHeight;
+	}
+	public int getTitleWidth()
+	{	return titleWidth;
+	}
+	public int getTitleFontSize()
+	{	return titleFontSize;
 	}
 	
 	/////////////////////////////////////////////////////////////////
