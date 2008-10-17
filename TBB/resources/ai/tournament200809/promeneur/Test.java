@@ -1,4 +1,4 @@
-package tournament200809.test;
+package tournament200809.promeneur;
 
 import java.util.ArrayList;
 import java.util.Collection;
