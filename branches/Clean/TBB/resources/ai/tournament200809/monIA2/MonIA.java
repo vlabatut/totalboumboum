@@ -1,4 +1,4 @@
-package tournament200809.monIA;
+package tournament200809.monIA2;
 
 import fr.free.totalboumboum.ai.adapter200809.AiAction;
 import fr.free.totalboumboum.ai.adapter200809.AiActionName;
