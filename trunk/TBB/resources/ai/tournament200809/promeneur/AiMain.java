@@ -1,4 +1,4 @@
-package tournament200809.test;
+package tournament200809.promeneur;
 
 import fr.free.totalboumboum.ai.adapter200809.AiManager;
 
