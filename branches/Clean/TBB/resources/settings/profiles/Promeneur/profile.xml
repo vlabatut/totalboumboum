@@ -4,7 +4,7 @@
 	xsi:noNamespaceSchemaLocation="..\..\..\schemas\profile.xsd">
 	
  	<general name="Promeneur"  /> 
- 	<ai name="test" pack="tournament200809" />
+ 	<ai name="promeneur" pack="tournament200809" />
  	<character name="shirobon" packname="superbomberman1" color="orange" />     
 <!-- 	<character name="prognathe" packname="totalboumboum" color="orange" />   -->
 	
