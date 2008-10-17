@@ -50,10 +50,12 @@
 	</profiles>
 
 <!-- TOURNAMENT -->	
-<!-- 	<tournament value="tournamentTest" /> -->
 	<tournament value="tournamentLong" />
 	
+<!-- QUICK MATCH -->	
 	<quickmatch value="matchLong" />
+
+<!-- QUICK LAUNCH -->	
 	<quickstart value="round01" />
 	
 </configuration>
