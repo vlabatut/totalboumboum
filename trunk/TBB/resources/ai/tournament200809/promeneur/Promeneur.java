@@ -16,7 +16,7 @@ import fr.free.totalboumboum.ai.adapter200809.ArtificialIntelligence;
 import fr.free.totalboumboum.ai.adapter200809.StopRequestException;
 import fr.free.totalboumboum.engine.content.feature.Direction;
 
-public class Test extends ArtificialIntelligence
+public class Promeneur extends ArtificialIntelligence
 {
 	private AiTile currentTile;
 	private AiTile nextTile = null;
