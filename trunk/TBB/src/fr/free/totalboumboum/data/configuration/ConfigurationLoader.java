@@ -175,6 +175,6 @@ result.addProfile(value);
 		String fileName = root.getAttribute(XmlTools.ATT_FILE).getValue().trim();
 		String controlFile = FileTools.getControlsPath()+File.separator+fileName+FileTools.EXTENSION_DATA;
 		ControlSettings controlSettings = ControlSettingsLoader.loadControlSettings(controlFile);
-		result.addControlSettings(index,controlSettings);
+		result.putControlSettings(index,controlSettings);
 	}
 }

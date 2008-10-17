@@ -42,7 +42,7 @@ import fr.free.totalboumboum.gui.common.subpanel.UntitledSubPanelTable;
 import fr.free.totalboumboum.gui.game.round.description.RoundDescription;
 import fr.free.totalboumboum.gui.tools.GuiTools;
 
-public class SequenceDescription extends TournamentDescription
+public class SequenceDescription extends TournamentDescription 
 {	
 	private static final long serialVersionUID = 1L;
 	private static final float SPLIT_RATIO = 0.6f;

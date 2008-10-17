@@ -449,6 +449,46 @@ public class UntitledSubPanelTable extends SubPanel
 		label.setForeground(fg);
 	}
 
+	public int[] getLabelPositionSimple(JLabel label)
+	{	int[] result = {-1,-1};
+		int line = 0;
+		while(line<lines && result[0]==-1)
+		{	int col = 0;
+			while(col<getColumnCount() && result[0]==-1)
+			{	JLabel l = getLabel(line,col);
+				if(label == l)
+				{	result[0] = line;
+					result[1] = col;
+				}
+				col++;
+			}
+			line++;
+		}
+		return result;
+	}
+	public int[] getLabelPosition(JLabel label)
+	{	int[] result = {-1,-1,-1};
+		int line = 0;
+		while(line<lines && result[0]==-1)
+		{	int colGroup = 0;
+			while(colGroup<colGroups && result[0]==-1)
+			{	int colSub = 0;
+				while(colSub<colSubs && result[0]==-1)
+				{	JLabel l = getLabel(line,colGroup,colSub);
+					if(label == l)
+					{	result[0] = line;
+						result[1] = colGroup;
+						result[2] = colSub;
+					}
+					colSub++;
+				}
+				colGroup++;
+			}
+			line++;
+		}
+		return result;
+	}
+	
 	/////////////////////////////////////////////////////////////////
 	// CONTENT			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////

@@ -148,7 +148,7 @@ public class Configuration
 	{	return controlSettings;	
 	}
 	
-	public void addControlSettings(int index, ControlSettings controlSetting)
+	public void putControlSettings(int index, ControlSettings controlSetting)
 	{	controlSettings.put(index,controlSetting);
 	}
 	

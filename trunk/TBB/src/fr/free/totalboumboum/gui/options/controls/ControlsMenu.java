@@ -28,6 +28,8 @@ import javax.swing.Box;
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
 
+import fr.free.totalboumboum.data.configuration.ConfigurationSaver;
+import fr.free.totalboumboum.data.controls.ControlSettings;
 import fr.free.totalboumboum.gui.common.panel.SplitMenuPanel;
 import fr.free.totalboumboum.gui.common.panel.menu.InnerMenuPanel;
 import fr.free.totalboumboum.gui.common.panel.menu.MenuPanel;
@@ -87,7 +89,11 @@ public class ControlsMenu extends InnerMenuPanel
 			container.setDataPart(controlsData[selected]);
 	    }
 		else if(e.getActionCommand().equals(GuiTools.MENU_OPTIONS_BUTTON_CONFIRM))
-		{	//TODO modifications à enregistrer
+		{	for(int i=0;i<controlsData.length;i++)
+			{	ControlSettings controlSettings = controlsData[i].getControlSettings();
+				getConfiguration().getGameConfiguration().putControlSettings(i+1,controlSettings);
+			}
+			ConfigurationSaver.saveConfiguration();
 			replaceWith(parent);
 	    }
 		else if(e.getActionCommand().equals(GuiTools.MENU_OPTIONS_BUTTON_CANCEL))
