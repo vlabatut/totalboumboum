@@ -53,6 +53,7 @@ public class MainMenu extends SimpleMenuPanel
 	private MenuPanel optionsMenuPanel;
 	private MenuPanel quickmatchGamePanel;
 	
+	@SuppressWarnings("unused")
 	private JButton buttonOptions;
 	private JButton buttonProfiles;
 	private JButton buttonStats;

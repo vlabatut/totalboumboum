@@ -42,9 +42,11 @@ import fr.free.totalboumboum.gui.tools.GuiTools;
 public class OptionsMenu extends InnerMenuPanel
 {	private static final long serialVersionUID = 1L;
 	
+	@SuppressWarnings("unused")
 	private JButton buttonControls;
 	private JButton buttonGameplay;
 	private JButton buttonVideo;
+	@SuppressWarnings("unused")
 	private JButton buttonBack;
 
 	private InnerDataPanel optionsData;

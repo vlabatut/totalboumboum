@@ -33,7 +33,7 @@ public class RoundStatistics extends EntitledDataPanel
 	{	super(container);
 
 		// title
-		String key = getConfiguration().getLanguage().getText(GuiTools.GAME_ROUND_STATISTICS_TITLE);
+		String key = GuiTools.GAME_ROUND_STATISTICS_TITLE;
 		setTitleKey(key);
 	
 	}

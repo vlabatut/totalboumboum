@@ -30,13 +30,14 @@ public abstract class TournamentResults extends EntitledDataPanel
 {	
 	private static final long serialVersionUID = 1L;
 
+	@SuppressWarnings("unused")
 	private UntitledSubPanelTable resultsPanel;
 	
 	public TournamentResults(SplitMenuPanel container)
 	{	super(container);
 		
 		// title
-		String key = getConfiguration().getLanguage().getText(GuiTools.GAME_TOURNAMENT_RESULTS_TITLE);
+		String key = GuiTools.GAME_TOURNAMENT_RESULTS_TITLE;
 		setTitleKey(key);
 		
 	}

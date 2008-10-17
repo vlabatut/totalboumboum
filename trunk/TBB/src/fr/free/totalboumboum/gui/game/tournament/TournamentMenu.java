@@ -59,6 +59,7 @@ public class TournamentMenu extends InnerMenuPanel implements TournamentRenderPa
 	private InnerDataPanel tournamentResults;
 	private InnerDataPanel tournamentStatistics;
 		
+	@SuppressWarnings("unused")
 	private JButton buttonQuit;
 	private JButton buttonMenu;
 	private JToggleButton buttonDescription;

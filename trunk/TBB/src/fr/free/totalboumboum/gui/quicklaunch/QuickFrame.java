@@ -21,20 +21,14 @@ package fr.free.totalboumboum.gui.quicklaunch;
  * 
  */
 
-import javax.swing.BoxLayout;
 import javax.swing.JFrame;
-import javax.swing.JLabel;
 import javax.swing.JProgressBar;
-import javax.swing.RepaintManager;
 import javax.swing.SwingUtilities;
-import javax.swing.UIManager;
 import javax.xml.parsers.ParserConfigurationException;
 
 import org.xml.sax.SAXException;
 
 import fr.free.totalboumboum.data.configuration.Configuration;
-import fr.free.totalboumboum.data.configuration.ConfigurationLoader;
-import fr.free.totalboumboum.data.configuration.ConfigurationSaver;
 import fr.free.totalboumboum.data.configuration.GameConstants;
 import fr.free.totalboumboum.engine.loop.Loop;
 import fr.free.totalboumboum.engine.loop.LoopRenderPanel;
@@ -42,21 +36,9 @@ import fr.free.totalboumboum.game.match.Match;
 import fr.free.totalboumboum.game.round.Round;
 import fr.free.totalboumboum.game.round.RoundRenderPanel;
 import fr.free.totalboumboum.game.tournament.AbstractTournament;
-import fr.free.totalboumboum.gui.common.MenuContainer;
-import fr.free.totalboumboum.gui.common.panel.data.InnerDataPanel;
-import fr.free.totalboumboum.gui.common.panel.menu.MenuPanel;
-import fr.free.totalboumboum.gui.data.configuration.GuiConfiguration;
-import fr.free.totalboumboum.gui.data.configuration.GuiConfigurationLoader;
-import fr.free.totalboumboum.gui.game.loop.LoopPanel;
-import fr.free.totalboumboum.gui.game.round.results.RoundResults;
-import fr.free.totalboumboum.gui.tools.FullRepaintManager;
 import fr.free.totalboumboum.gui.tools.GuiFileTools;
-import fr.free.totalboumboum.gui.tools.GuiTools;
-import fr.free.totalboumboum.tools.FileTools;
-import fr.free.totalboumboum.tools.XmlTools;
 
 
-import java.awt.BorderLayout;
 import java.awt.Canvas;
 import java.awt.Container;
 import java.awt.Dimension;
@@ -68,8 +50,6 @@ import java.awt.Toolkit;
 import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
 import java.awt.image.BufferStrategy;
-import java.awt.image.BufferedImage;
-import java.awt.image.VolatileImage;
 import java.io.File;
 import java.io.IOException;
 

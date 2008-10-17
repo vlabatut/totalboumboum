@@ -71,13 +71,15 @@ public class UntitledSubPanelTable extends SubPanel
 		setLayout(layout);
 		
 		// size
-		lineHeight = (int)((height - (lines+1)*GuiTools.subPanelMargin)/(lines+0.5));
+		if(header)
+		{	lineHeight = (int)((height - (lines+1)*GuiTools.subPanelMargin)/(lines+GuiTools.TABLE_HEADER_RATIO-1));
+			headerHeight = height - (lines+1)*GuiTools.subPanelMargin - lineHeight*(lines-1);
+			headerFontSize = GuiTools.getFontSize(headerHeight*GuiTools.FONT_RATIO);
+			headerFont = GuiTools.getGameFont().deriveFont((float)headerFontSize);
+		}
+		else
+			lineHeight = (int)((height - (lines+1)*GuiTools.subPanelMargin)/((float)lines));
 		lineFontSize = GuiTools.getFontSize(lineHeight*GuiTools.FONT_RATIO);
-		headerHeight = height - lineHeight*(lines-1) - (lines+1)*GuiTools.subPanelMargin;
-		headerFontSize = GuiTools.getFontSize(headerHeight*GuiTools.FONT_RATIO);
-		
-		// fonts
-		headerFont = GuiTools.getGameFont().deriveFont((float)headerFontSize);
 		lineFont = GuiTools.getGameFont().deriveFont((float)lineFontSize);
 
 		// table
@@ -98,35 +100,32 @@ public class UntitledSubPanelTable extends SubPanel
 	// COLUMNS			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	
-	public void setColumnWidth(int col, int width)
-	{	setColumnWidth(0,col,width);
-	}
-	public void setColumnWidth(int colGroup, int colSub, int width)
+	public void setSubColumnsWidth(int colSub, int width)
 	{	int start = 0;
-		if(header)
-		{	start = 1;
-			Dimension dim = new Dimension(width,headerHeight);
-			JLabel label = getLabel(0,colGroup,colSub);
-			label.setMaximumSize(dim);
-		}
-		for(int line=start;line<lines;line++)
-		{	Dimension dim = new Dimension(width,lineHeight);
-			JLabel label = getLabel(line,colGroup,colSub);
-			label.setMaximumSize(dim);
-		}
-	}
-	
-	public void unsetColumnWidth(int col)
-	{	unsetColumnWidth(0,col);
-	}
-	public void unsetColumnWidth(int colGroup, int colSub)
-	{	for(int line=0;line<lines;line++)
-		{	JLabel label = getLabel(line,colGroup,colSub);
-			label.setMaximumSize(null);
+		for(int colGroup=0;colGroup<colGroups;colGroup++)
+		{	if(header)
+			{	start = 1;
+				Dimension dim = new Dimension(width,headerHeight);
+				JLabel label = getLabel(0,colGroup,colSub);
+				label.setMaximumSize(dim);
+			}
+			for(int line=start;line<lines;line++)
+			{	Dimension dim = new Dimension(width,lineHeight);
+				JLabel label = getLabel(line,colGroup,colSub);
+				label.setMaximumSize(dim);
+			}
 		}
 	}
 	
-	public ArrayList<JLabel> getSubColumn(int col)
+	public void unsetsubColumnsWidth(int colSub)
+	{	for(int colGroup=0;colGroup<colGroups;colGroup++)
+			for(int line=0;line<lines;line++)
+			{	JLabel label = getLabel(line,colGroup,colSub);
+				label.setMaximumSize(null);
+			}
+	}
+	
+	public ArrayList<JLabel> getColumn(int col)
 	{	return getSubColumn(0,col);		
 	}
 	public ArrayList<JLabel> getSubColumn(int colGroup, int colSub)
@@ -150,11 +149,11 @@ public class UntitledSubPanelTable extends SubPanel
 	{	colSubs++;
 		int start = 0;
 	
-		for(int grp=0;grp<colGroups;grp++)
-		{	int index = subIndex+grp*colSubs;
-			// header
-			if(header)
-			{	start = 1;
+		// header
+		if(header)
+		{	start = 1;
+			for(int grp=0;grp<colGroups;grp++)
+			{	int index = subIndex+grp*colSubs;
 				String txt = null;
 				JLabel lbl = new JLabel(txt);
 				lbl.setFont(headerFont);
@@ -162,21 +161,26 @@ public class UntitledSubPanelTable extends SubPanel
 				lbl.setBackground(GuiTools.COLOR_TABLE_HEADER_BACKGROUND);
 				lbl.setForeground(GuiTools.COLOR_TABLE_HEADER_FOREGROUND);
 				lbl.setOpaque(true);
-				add(lbl,index);		
+				add(lbl,index);
 			}
-			
-			// data
-			for(int line=0+start;line<lines;line++)
-			{	String txt = null;
+		}
+		
+		//data
+		for(int line=start;line<lines;line++)
+		{	for(int grp=0;grp<colGroups;grp++)
+			{	int index = subIndex+grp*colSubs;
+				String txt = null;
 				JLabel lbl = new JLabel(txt);
 				lbl.setFont(lineFont);
 				lbl.setHorizontalAlignment(SwingConstants.CENTER);
 				lbl.setBackground(GuiTools.COLOR_TABLE_NEUTRAL_BACKGROUND);
 				lbl.setForeground(GuiTools.COLOR_TABLE_REGULAR_FOREGROUND);
 				lbl.setOpaque(true);
-				add(lbl,index+line*getColumnCount());
+				int idx = index+line*getColumnCount();
+				add(lbl,idx);
 			}
 		}
+
 		updateLayout();
 	}
 	
@@ -407,7 +411,7 @@ public class UntitledSubPanelTable extends SubPanel
 	public void setLabelIcon(int line, int colGroup, int colSub, BufferedImage icon, String tooltip)
 	{	JLabel label = getLabel(line,colGroup,colSub);
 		int h;
-		if(line==0)
+		if(line==0 && header)
 			h = headerHeight;
 		else
 			h = lineHeight;

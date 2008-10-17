@@ -25,8 +25,6 @@ import java.awt.Dimension;
 
 import javax.swing.Box;
 
-import com.sun.media.sound.DataPusher;
-
 import fr.free.totalboumboum.gui.tools.GuiTools;
 
 public class EntitledSubPanelTable extends EntitledSubPanel
@@ -39,7 +37,6 @@ public class EntitledSubPanelTable extends EntitledSubPanel
 		int margin = GuiTools.subPanelMargin;
 		remove(0);
 		add(Box.createRigidArea(new Dimension(margin,margin)),0);
-		remove(0);
 
 		int tableHeight = height - getTitleHeight() - margin;
 		int tableWidth = width;
@@ -48,85 +45,6 @@ public class EntitledSubPanelTable extends EntitledSubPanel
 		setDataPanel(tablePanel);
 		remove(4); 	// remove glue
 		remove(2); 	// remove glue
-/*		
-		// empty
-		for(int line=0;line<lines;line++)
-		{	for(int col=0;col<columns;col=col+subColumns)
-			{	// icon
-				JLabel lbl = tablePanel.getLabel(line,col+0);
-				lbl.setFont(regularFont);
-				lbl.setText(null);
-				if(firstColIsSquared)
-				{	lbl.setPreferredSize(new Dimension(lineHeight,lineHeight));
-					lbl.setMaximumSize(new Dimension(lineHeight,lineHeight));
-				}
-				else
-					lbl.setMaximumSize(new Dimension(maxWidth,lineHeight));
-				lbl.setMinimumSize(new Dimension(lineHeight,lineHeight));
-				// text
-				for(int i=1;i<subColumns;i++)
-				{	lbl = tablePanel.getLabel(line,col+i);
-					lbl.setFont(regularFont);
-					lbl.setText(null);
-					lbl.setMaximumSize(new Dimension(maxWidth,lineHeight));
-					lbl.setMinimumSize(new Dimension(lineHeight,lineHeight));
-				}
-			}
-		}
-		
-		// data
-		{	Iterator<ArrayList<Object>> i = data.iterator();
-			Iterator<ArrayList<String>> j = tooltips.iterator();
-			k = 0;
-			while(i.hasNext() && k<columnGroups*lines)
-			{	// init
-				ArrayList<Object> dat = i.next();
-				ArrayList<String> tt = j.next();
-				int baseCol = (k/lines)*subColumns;
-				int baseLine = k%lines;
-				k++;
-				//
-				Iterator<?> i2 = dat.iterator();
-				Iterator<String> j2 = tt.iterator();
-				int c = 0;
-				while(i2.hasNext())
-				{	JLabel lbl = tablePanel.getLabel(baseLine,baseCol+c);
-					Color bg,fg;
-					if(firstColIsDark && c==0)
-					{	bg = GuiTools.COLOR_TABLE_HEADER_BACKGROUND;
-						fg = GuiTools.COLOR_TABLE_HEADER_FOREGROUND;
-					}
-					else
-					{	bg = GuiTools.COLOR_TABLE_REGULAR_BACKGROUND;
-						fg = GuiTools.COLOR_TABLE_REGULAR_FOREGROUND;
-					}
-					lbl.setBackground(bg);
-					lbl.setForeground(fg);
-					c++;
-					Object o = i2.next();
-					tooltip = j2.next();
-					if(tooltip!=null)
-						lbl.setToolTipText(tooltip);
-					// icon
-					if(o instanceof BufferedImage)
-					{	BufferedImage image = (BufferedImage)o;
-						lbl.setText(null);
-						float zoomX = lineHeight/(float)image.getWidth();
-						float zoomY = lineHeight/(float)image.getHeight();
-						float zoom = Math.min(zoomX,zoomY);
-						image = ImageTools.resize(image,zoom,true);
-						ImageIcon ic = new ImageIcon(image);
-						lbl.setIcon(ic);
-					}
-					else
-					// value
-					{	String txt = (String)o;
-						lbl.setText(txt);
-					}	
-				}
-			}
-		}		
-*/	
 	}
 	
 	public UntitledSubPanelTable getTable()

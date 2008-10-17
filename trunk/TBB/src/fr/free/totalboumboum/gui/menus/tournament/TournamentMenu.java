@@ -91,6 +91,7 @@ public class TournamentMenu extends InnerMenuPanel
 	private JButton buttonRules;
 	private JButton buttonPlayers;
 	private JButton buttonPlay;
+	@SuppressWarnings("unused")
 	private JButton buttonBack;
 	
 	public TournamentMenu(SplitMenuPanel container, MenuPanel parent) throws IllegalArgumentException, SecurityException, ParserConfigurationException, SAXException, IOException, IllegalAccessException, NoSuchFieldException

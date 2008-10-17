@@ -37,10 +37,14 @@ import fr.free.totalboumboum.gui.tools.GuiTools;
 public class ControlsMenu extends InnerMenuPanel
 {	private static final long serialVersionUID = 1L;
 	
+	@SuppressWarnings("unused")
 	private JButton buttonPrevious;
+	@SuppressWarnings("unused")
 	private JButton buttonNext;
 	
+	@SuppressWarnings("unused")
 	private JButton buttonConfirm;
+	@SuppressWarnings("unused")
 	private JButton buttonCancel;
 
 	private ControlsData controlsData[] = new ControlsData[5];

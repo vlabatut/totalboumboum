@@ -103,8 +103,8 @@ public abstract class EntitledDataPanel extends InnerDataPanel
 //		repaint();
 	}
 	public void setTitleKey(String key)
-	{	String text = getConfiguration().getLanguage().getText(GuiTools.MENU_OPTIONS_CONTROLS_TITLE);
-		String tooltip = getConfiguration().getLanguage().getText(GuiTools.MENU_OPTIONS_CONTROLS_TITLE+GuiTools.TOOLTIP);
+	{	String text = getConfiguration().getLanguage().getText(key);
+		String tooltip = getConfiguration().getLanguage().getText(key+GuiTools.TOOLTIP);
 		setTitleText(text,tooltip);
 	}
 

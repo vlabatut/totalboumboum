@@ -22,77 +22,25 @@ package fr.free.totalboumboum.gui.game.match.description;
  */
 
 import java.awt.Color;
-import java.awt.Component;
-import java.awt.Dimension;
-import java.awt.Font;
-import java.awt.Graphics;
-import java.awt.Graphics2D;
-import java.awt.LayoutManager;
-import java.awt.Point;
-import java.awt.RenderingHints;
 import java.awt.image.BufferedImage;
-import java.io.File;
-import java.io.IOException;
 import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.Iterator;
 
-import javax.security.auth.callback.TextOutputCallback;
 import javax.swing.Box;
 import javax.swing.BoxLayout;
-import javax.swing.ImageIcon;
-import javax.swing.JComponent;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.JTextPane;
-import javax.swing.SpringLayout;
-import javax.swing.SwingConstants;
-import javax.swing.event.ChangeListener;
-import javax.swing.text.BadLocationException;
-import javax.swing.text.Caret;
-import javax.swing.text.JTextComponent;
-import javax.swing.text.SimpleAttributeSet;
-import javax.swing.text.StyleConstants;
-import javax.swing.text.StyledDocument;
-
-import sun.swing.SwingUtilities2;
 
 import fr.free.totalboumboum.data.profile.Portraits;
 import fr.free.totalboumboum.data.profile.Profile;
-import fr.free.totalboumboum.data.statistics.Score;
-import fr.free.totalboumboum.data.statistics.StatisticRound;
-import fr.free.totalboumboum.game.limit.Limit;
-import fr.free.totalboumboum.game.limit.LimitConfrontation;
-import fr.free.totalboumboum.game.limit.LimitPoints;
-import fr.free.totalboumboum.game.limit.LimitScore;
-import fr.free.totalboumboum.game.limit.LimitTime;
-import fr.free.totalboumboum.game.limit.LimitTotal;
-import fr.free.totalboumboum.game.limit.Limits;
-import fr.free.totalboumboum.game.limit.MatchLimit;
-import fr.free.totalboumboum.game.limit.RoundLimit;
 import fr.free.totalboumboum.game.match.Match;
-import fr.free.totalboumboum.game.points.PlayerPoints;
-import fr.free.totalboumboum.game.points.PointsProcessor;
-import fr.free.totalboumboum.game.round.Round;
-import fr.free.totalboumboum.gui.common.MenuContainer;
 import fr.free.totalboumboum.gui.common.panel.SplitMenuPanel;
 import fr.free.totalboumboum.gui.common.panel.data.EntitledDataPanel;
-import fr.free.totalboumboum.gui.common.panel.data.InnerDataPanel;
-import fr.free.totalboumboum.gui.common.panel.menu.MenuPanel;
-import fr.free.totalboumboum.gui.common.panel.menu.SimpleMenuPanel;
-import fr.free.totalboumboum.gui.common.subpanel.EntitledSubPanel;
-import fr.free.totalboumboum.gui.common.subpanel.EntitledSubPanelTable;
 import fr.free.totalboumboum.gui.common.subpanel.SubPanel;
 import fr.free.totalboumboum.gui.common.subpanel.UntitledSubPanelTable;
-import fr.free.totalboumboum.gui.data.configuration.GuiConfiguration;
 import fr.free.totalboumboum.gui.game.round.description.RoundDescription;
-import fr.free.totalboumboum.gui.menus.tournament.TournamentSplitPanel;
-import fr.free.totalboumboum.gui.options.OptionsMenu;
-import fr.free.totalboumboum.gui.tools.SpringUtilities;
 import fr.free.totalboumboum.gui.tools.GuiTools;
-import fr.free.totalboumboum.tools.FileTools;
-import fr.free.totalboumboum.tools.ImageTools;
-import fr.free.totalboumboum.tools.StringTools;
 
 public class MatchDescription extends EntitledDataPanel
 {	
@@ -103,7 +51,7 @@ public class MatchDescription extends EntitledDataPanel
 	{	super(container);
 	
 		// title
-		String key = getConfiguration().getLanguage().getText(GuiTools.GAME_MATCH_DESCRIPTION_TITLE);
+		String key = GuiTools.GAME_MATCH_DESCRIPTION_TITLE;
 		setTitleKey(key);
 		
 		// data
@@ -115,7 +63,7 @@ public class MatchDescription extends EntitledDataPanel
 			int margin = GuiTools.panelMargin;
 			int leftWidth = (int)(dataWidth*SPLIT_RATIO); 
 			int rightWidth = dataWidth - leftWidth - margin; 
-
+			Match match = getConfiguration().getCurrentMatch();			
 			infoPanel.setOpaque(false);
 			
 			// players panel
@@ -135,15 +83,14 @@ public class MatchDescription extends EntitledDataPanel
 				int downHeight = dataHeight - upHeight - margin;
 				
 				// points panel
-				{	JPanel pointsPanel = makePointsPanel(rightWidth,upHeight);
+				{	SubPanel pointsPanel = RoundDescription.makePointsPanel(rightWidth,downHeight,match.getPointProcessor(),"Match");
 					rightPanel.add(pointsPanel);
 				}
 
 				rightPanel.add(Box.createVerticalGlue());
 				
 				// limit panel
-				{	Match match = getConfiguration().getCurrentMatch();
-					SubPanel limitsPanel = RoundDescription.makeLimitsPanel(rightWidth,downHeight,match.getLimits(),"Match");
+				{	SubPanel limitsPanel = RoundDescription.makeLimitsPanel(rightWidth,downHeight,match.getLimits(),"Match");
 					rightPanel.add(limitsPanel);
 				}
 				infoPanel.add(rightPanel);
@@ -163,7 +110,7 @@ public class MatchDescription extends EntitledDataPanel
 	{	// nothing to do here
 	}
 	
-	private JPanel makePlayersPanel(int width, int height)
+	private SubPanel makePlayersPanel(int width, int height)
 	{	Match match = getConfiguration().getCurrentMatch();
 		int lines = 16+1;
 		int cols = 2+1;
@@ -176,11 +123,11 @@ public class MatchDescription extends EntitledDataPanel
 			{	GuiTools.GAME_MATCH_DESCRIPTION_PLAYERS_HEADER_NAME,
 				GuiTools.GAME_MATCH_DESCRIPTION_PLAYERS_HEADER_RANK
 			};
-			for(int i=1;i<keys.length;i++)
-				playersPanel.setLabelKey(0,i,keys[i],true);
+			for(int i=1;i<keys.length+1;i++)
+				playersPanel.setLabelKey(0,i,keys[i-1],true);
 		}
 		// empty
-		{	playersPanel.setColumnWidth(1,Integer.MAX_VALUE);
+		{	playersPanel.setSubColumnsWidth(1,Integer.MAX_VALUE);
 		}
 		// data
 		{	ArrayList<Profile> players = match.getProfiles();
@@ -300,29 +247,5 @@ public class MatchDescription extends EntitledDataPanel
 		return notesPanel;		
 	}
 */	
-	
-	private JPanel makePointsPanel(int width, int height)
-	{	// init
-		String id = GuiTools.GAME_MATCH_DESCRIPTION_POINTS_TITLE;
-		ArrayList<ArrayList<Object>> data = new ArrayList<ArrayList<Object>>();
-		ArrayList<ArrayList<String>> tooltips = new ArrayList<ArrayList<String>>();
-		
-		// data
-		Match match = getConfiguration().getCurrentMatch();
-		PointsProcessor mainPP = match.getPointProcessor();
-		RoundDescription.makePointsPanelRec(mainPP,data,tooltips,getConfiguration());
 
-		int n = 6;
-		if(data.size()<6)
-			n = 6;
-		else if(data.size()<10)
-			n = data.size();
-		else
-			n = 10;
-		int colGrps[] = {1};
-		int lns[] = {n};
-
-		EntitledSubPanelTable pointsPanel = new EntitledSubPanelTable(width,height,id,colGrps,lns,data,tooltips,getConfiguration(),true,false);
-		return pointsPanel;
-	}	
 }
