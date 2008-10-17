@@ -11,8 +11,6 @@
 	<smoothGraphics value="true" />
 		
 <!-- DISPLAY -->	
-<!-- 	attention : si vous augmentez la résolution graphique, il faut donner plus de mémoire à la java machine
-		par exemple en utilisant l'option d'exécution -xmx128m pour donner 128 Mo au lieu des 64 alloués par défaut -->
 	<panelDimension width="800" height="600" />
 	
 <!-- PROFILES -->	
@@ -41,10 +39,12 @@
 	</profiles>
 
 <!-- TOURNAMENT -->	
-<!-- 	<tournament value="tournamentTest" /> -->
 	<tournament value="tournamentLong" />
 	
+<!-- QUICK MATCH -->	
 	<quickmatch value="matchLong" />
+	
+<!-- QUICK LAUNCH -->	
 	<quickstart value="round01" />
 	
 </configuration>
