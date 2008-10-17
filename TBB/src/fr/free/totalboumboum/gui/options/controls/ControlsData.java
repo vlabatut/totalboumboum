@@ -21,14 +21,9 @@ package fr.free.totalboumboum.gui.options.controls;
  * 
  */
 
-import java.awt.Color;
 import java.awt.event.KeyEvent;
-import java.awt.image.BufferedImage;
 import java.lang.reflect.Field;
 import java.util.ArrayList;
-
-import javax.swing.ImageIcon;
-import javax.swing.JLabel;
 
 import fr.free.totalboumboum.data.controls.ControlSettings;
 import fr.free.totalboumboum.engine.content.feature.event.ControlEvent;
@@ -37,7 +32,6 @@ import fr.free.totalboumboum.gui.common.panel.data.EntitledDataPanel;
 import fr.free.totalboumboum.gui.common.subpanel.UntitledSubPanelTable;
 import fr.free.totalboumboum.gui.tools.GuiTools;
 import fr.free.totalboumboum.tools.ClassTools;
-import fr.free.totalboumboum.tools.ImageTools;
 
 public class ControlsData extends EntitledDataPanel
 {	
@@ -84,7 +78,7 @@ public class ControlsData extends EntitledDataPanel
 				}
 				keysPanel.setLineKeysSimple(0, keys, imageFlags);
 				//keysPanel.setColumnWidth(0,Integer.MAX_VALUE);
-				keysPanel.setColumnWidth(1,Integer.MAX_VALUE);
+				keysPanel.setSubColumnsWidth(1,Integer.MAX_VALUE);
 			}			
 			
 			// data

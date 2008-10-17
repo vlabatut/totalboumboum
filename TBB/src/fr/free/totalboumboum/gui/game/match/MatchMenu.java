@@ -57,6 +57,7 @@ public class MatchMenu extends InnerMenuPanel implements MatchRenderPanel
 	private InnerDataPanel matchResults;
 	private InnerDataPanel matchStatistics;
 		
+	@SuppressWarnings("unused")
 	private JButton buttonQuit;
 	private JButton buttonTournament;
 	private JToggleButton buttonDescription;

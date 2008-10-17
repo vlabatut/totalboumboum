@@ -22,12 +22,7 @@ package fr.free.totalboumboum.gui.game.tournament.description;
  */
 
 import java.awt.Color;
-import java.awt.Component;
 import java.awt.Dimension;
-import java.awt.Font;
-import java.awt.Graphics;
-import java.awt.Graphics2D;
-import java.awt.RenderingHints;
 import java.awt.image.BufferedImage;
 import java.text.NumberFormat;
 import java.util.ArrayList;
@@ -35,45 +30,17 @@ import java.util.Iterator;
 
 import javax.swing.Box;
 import javax.swing.BoxLayout;
-import javax.swing.ImageIcon;
-import javax.swing.JComponent;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.JTextPane;
-import javax.swing.text.BadLocationException;
-import javax.swing.text.SimpleAttributeSet;
-import javax.swing.text.StyleConstants;
-import javax.swing.text.StyledDocument;
 
 import fr.free.totalboumboum.data.profile.Portraits;
 import fr.free.totalboumboum.data.profile.Profile;
-import fr.free.totalboumboum.game.limit.Limit;
-import fr.free.totalboumboum.game.limit.LimitConfrontation;
-import fr.free.totalboumboum.game.limit.LimitPoints;
-import fr.free.totalboumboum.game.limit.LimitScore;
-import fr.free.totalboumboum.game.limit.LimitTotal;
-import fr.free.totalboumboum.game.limit.Limits;
-import fr.free.totalboumboum.game.limit.RoundLimit;
-import fr.free.totalboumboum.game.limit.TournamentLimit;
-import fr.free.totalboumboum.game.match.Match;
-import fr.free.totalboumboum.game.points.PointsProcessor;
-import fr.free.totalboumboum.game.round.Round;
-import fr.free.totalboumboum.game.tournament.AbstractTournament;
 import fr.free.totalboumboum.game.tournament.sequence.SequenceTournament;
-import fr.free.totalboumboum.gui.common.MenuContainer;
 import fr.free.totalboumboum.gui.common.panel.SplitMenuPanel;
-import fr.free.totalboumboum.gui.common.panel.data.InnerDataPanel;
-import fr.free.totalboumboum.gui.common.panel.menu.MenuPanel;
-import fr.free.totalboumboum.gui.common.panel.menu.SimpleMenuPanel;
-import fr.free.totalboumboum.gui.common.subpanel.EntitledSubPanel;
-import fr.free.totalboumboum.gui.common.subpanel.EntitledSubPanelTable;
 import fr.free.totalboumboum.gui.common.subpanel.SubPanel;
 import fr.free.totalboumboum.gui.common.subpanel.UntitledSubPanelTable;
 import fr.free.totalboumboum.gui.game.round.description.RoundDescription;
-import fr.free.totalboumboum.gui.menus.tournament.TournamentSplitPanel;
-import fr.free.totalboumboum.gui.options.OptionsMenu;
 import fr.free.totalboumboum.gui.tools.GuiTools;
-import fr.free.totalboumboum.tools.ImageTools;
 
 public class SequenceDescription extends TournamentDescription
 {	
@@ -93,6 +60,7 @@ public class SequenceDescription extends TournamentDescription
 			int leftWidth = (int)(dataWidth*SPLIT_RATIO); 
 			int rightWidth = dataWidth - leftWidth - margin; 
 			infoPanel.setOpaque(false);
+			SequenceTournament tournament = (SequenceTournament)getConfiguration().getCurrentTournament();
 			
 			// players panel
 			{	JPanel playersPanel = makePlayersPanel(leftWidth,dataHeight);
@@ -115,15 +83,14 @@ public class SequenceDescription extends TournamentDescription
 				int downHeight = dataHeight - upHeight - margin;
 				
 				// points panel
-				{	JPanel pointsPanel = makePointsPanel(rightWidth,upHeight);
+				{	SubPanel pointsPanel = RoundDescription.makePointsPanel(rightWidth,downHeight,tournament.getPointProcessor(),"Tournament");
 					rightPanel.add(pointsPanel);
 				}
 
 				rightPanel.add(Box.createVerticalGlue());
 				
 				// limit panel
-				{	SequenceTournament tournament = (SequenceTournament)getConfiguration().getCurrentTournament();
-					SubPanel limitsPanel = RoundDescription.makeLimitsPanel(rightWidth,downHeight,tournament.getLimits(),"Tournament");
+				{	SubPanel limitsPanel = RoundDescription.makeLimitsPanel(rightWidth,downHeight,tournament.getLimits(),"Tournament");
 					rightPanel.add(limitsPanel);
 				}
 				infoPanel.add(rightPanel);
@@ -143,7 +110,7 @@ public class SequenceDescription extends TournamentDescription
 	{	// nothing to do here
 	}
 
-	private JPanel makePlayersPanel(int width, int height)
+	private SubPanel makePlayersPanel(int width, int height)
 	{	SequenceTournament tournament = (SequenceTournament)getConfiguration().getCurrentTournament();
 		int lines = 16+1;
 		int cols = 2+1;
@@ -156,11 +123,11 @@ public class SequenceDescription extends TournamentDescription
 			{	GuiTools.GAME_TOURNAMENT_DESCRIPTION_PLAYERS_HEADER_NAME,
 				GuiTools.GAME_TOURNAMENT_DESCRIPTION_PLAYERS_HEADER_RANK
 			};
-			for(int i=1;i<keys.length;i++)
-				playersPanel.setLabelKey(0,i,keys[i],true);
+			for(int i=1;i<keys.length+1;i++)
+				playersPanel.setLabelKey(0,i,keys[i-1],true);
 		}
 		// empty
-		{	playersPanel.setColumnWidth(1,Integer.MAX_VALUE);
+		{	playersPanel.setSubColumnsWidth(1,Integer.MAX_VALUE);
 		}
 		// data
 		{	ArrayList<Profile> players = tournament.getProfiles();
@@ -199,30 +166,5 @@ public class SequenceDescription extends TournamentDescription
 			}
 		}
 		return playersPanel;		
-	}
-	
-	private JPanel makePointsPanel(int width, int height)
-	{	// init
-		String id = GuiTools.GAME_TOURNAMENT_DESCRIPTION_POINTS_TITLE;
-		ArrayList<ArrayList<Object>> data = new ArrayList<ArrayList<Object>>();
-		ArrayList<ArrayList<String>> tooltips = new ArrayList<ArrayList<String>>();
-		
-		// data
-		SequenceTournament tournament = (SequenceTournament)getConfiguration().getCurrentTournament();
-		PointsProcessor mainPP = tournament.getPointProcessor();
-		RoundDescription.makePointsPanelRec(mainPP,data,tooltips,getConfiguration());
-
-		int n = 6;
-		if(data.size()<6)
-			n = 6;
-		else if(data.size()<10)
-			n = data.size();
-		else
-			n = 10;
-		int colGrps[] = {1};
-		int lns[] = {n};
-
-		EntitledSubPanelTable pointsPanel = new EntitledSubPanelTable(width,height,id,colGrps,lns,data,tooltips,getConfiguration(),true,false);
-		return pointsPanel;
 	}
 }

@@ -50,10 +50,6 @@ public class SequenceResults extends TournamentResults
 	public SequenceResults(SplitMenuPanel container)
 	{	super(container);
 		
-		// title
-		String key = getConfiguration().getLanguage().getText(GuiTools.GAME_TOURNAMENT_RESULTS_TITLE);
-		setTitleKey(key);
-		
 		// data
 		{	int lines = 16+1;
 			int cols = 2+4+2;
@@ -72,11 +68,11 @@ public class SequenceResults extends TournamentResults
 					GuiTools.GAME_TOURNAMENT_RESULTS_HEADER_TOTAL,
 					GuiTools.GAME_TOURNAMENT_RESULTS_HEADER_POINTS
 				};
-				for(int col=1;col<keys.length;col++)
+				for(int col=1;col<keys.length+1;col++)
 					resultsPanel.setLabelKey(0,col,keys[col-1],true);
 			}
 			// data
-			{	resultsPanel.setColumnWidth(1,Integer.MAX_VALUE);
+			{	resultsPanel.setSubColumnsWidth(1,Integer.MAX_VALUE);
 			}
 			//
 			setDataPart(resultsPanel);

@@ -33,8 +33,7 @@ public abstract class TournamentDescription extends EntitledDataPanel
 	{	super(container);
 		
 		// title
-		String key = getConfiguration().getLanguage().getText(GuiTools.GAME_TOURNAMENT_DESCRIPTION_TITLE);
+		String key = GuiTools.GAME_TOURNAMENT_DESCRIPTION_TITLE;
 		setTitleKey(key);
-	
 	}
 }
