@@ -23,7 +23,7 @@ public class Promeneur extends ArtificialIntelligence
 	private AiTile previousTile = null;
 	
 	public AiAction processAction() throws StopRequestException
-	{	checkInterruption();
+	{	checkInterruption(); //APPEL OBLIGATOIRE
 		
 		AiZone zone = getPercepts();
 		AiHero ownHero = zone.getOwnHero();
@@ -61,7 +61,7 @@ public class Promeneur extends ArtificialIntelligence
 	}
 
 	private void init() throws StopRequestException
-	{	checkInterruption();
+	{	checkInterruption(); //APPEL OBLIGATOIRE
 		
 		nextTile = currentTile;		
 		previousTile = currentTile;		
@@ -74,7 +74,7 @@ public class Promeneur extends ArtificialIntelligence
 	 * @throws StopRequestException 
 	 */
 	private void pickNextTile() throws StopRequestException
-	{	checkInterruption();
+	{	checkInterruption(); //APPEL OBLIGATOIRE
 	
 		// liste des cases voisines accessibles	
 		ArrayList<AiTile> tiles = getClearNeighbours(currentTile);
@@ -120,7 +120,7 @@ public class Promeneur extends ArtificialIntelligence
 	}
 	
 	private ArrayList<AiTile> getClearNeighbours(AiTile tile) throws StopRequestException
-	{	checkInterruption();
+	{	checkInterruption(); //APPEL OBLIGATOIRE
 	
 		// liste des cases autour de la case de référence
 		Collection<AiTile> neighbours = getPercepts().getNeighbourTiles(tile);
@@ -128,7 +128,7 @@ public class Promeneur extends ArtificialIntelligence
 		ArrayList<AiTile> result = new ArrayList<AiTile>();
 		Iterator<AiTile> it = neighbours.iterator();
 		while(it.hasNext())
-		{	checkInterruption();
+		{	checkInterruption(); //APPEL OBLIGATOIRE
 		
 			AiTile t = it.next();
 			if(isClear(t))
@@ -138,7 +138,7 @@ public class Promeneur extends ArtificialIntelligence
 	}
 	
 	private boolean isClear(AiTile tile) throws StopRequestException
-	{	checkInterruption();
+	{	checkInterruption(); //APPEL OBLIGATOIRE
 	
 		boolean result;
 		AiBlock block = tile.getBlock();
@@ -149,7 +149,7 @@ public class Promeneur extends ArtificialIntelligence
 	}
 	
 	private void checkNextTile() throws StopRequestException
-	{	checkInterruption();
+	{	checkInterruption(); //APPEL OBLIGATOIRE
 	
 		// si un obstacle est apparu sur la case destination, il faut changer de destination
 		if(!isClear(nextTile))

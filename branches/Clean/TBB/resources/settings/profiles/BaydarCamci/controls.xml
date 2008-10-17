@@ -26,17 +26,9 @@
 		<on key="VK_NUMPAD7" />
 		<off key="VK_NUMPAD7" />
 	</event>
-	<event name="JUMP" autofire="true">
-		<on key="VK_NUMPAD2" />
-		<off key="VK_NUMPAD2" />
-	</event>
 	<event name="PUNCHBOMB" autofire="false">
 		<on key="VK_NUMPAD9" />
 		<off key="VK_NUMPAD9" />
-	</event>
-	<event name="TRIGGERBOMB" autofire="false">
-		<on key="VK_NUMPAD3" />
-		<off key="VK_NUMPAD3" />
 	</event>
 	
 </controls>

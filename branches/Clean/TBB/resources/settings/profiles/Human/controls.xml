@@ -26,17 +26,20 @@
 		<on key="VK_Q" />
 		<off key="VK_Q" />
 	</event>
+<!-- 	
 	<event name="JUMP" autofire="true">
 		<on key="VK_J" />
 		<off key="VK_J" />
 	</event>
+ -->	
 	<event name="PUNCHBOMB" autofire="false">
 		<on key="VK_X" />
 		<off key="VK_X" />
 	</event>
+	<!-- 
 	<event name="TRIGGERBOMB" autofire="false">
 		<on key="VK_S" />
 		<off key="VK_S" />
 	</event>
-	
+ -->	
 </controls>
