@@ -60,6 +60,7 @@ public class OptionsMenu extends SimpleMenuPanel
 		// buttons
 		add(Box.createVerticalGlue());
 		buttonControls = GuiTools.createPrincipalVerticalMenuButton(GuiTools.MENU_OPTIONS_BUTTON_CONTROLS,this,getConfiguration());
+buttonControls.setEnabled(false);
 		buttonGameplay = GuiTools.createPrincipalVerticalMenuButton(GuiTools.MENU_OPTIONS_BUTTON_GAMEPLAY,this,getConfiguration());
 buttonGameplay.setEnabled(false);
 		buttonVideo = GuiTools.createPrincipalVerticalMenuButton(GuiTools.MENU_OPTIONS_BUTTON_VIDEO,this,getConfiguration());

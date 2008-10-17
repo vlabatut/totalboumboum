@@ -3,7 +3,7 @@
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
 	xsi:noNamespaceSchemaLocation="..\..\xml\schemas\profiles.xsd">
 	
-	<general name="Vincent" />
+	<general name="Joueur humain" />
  	<character name="shirobon" packname="superbomberman1" color="cyan" />     
 <!-- 	<character name="prognathe" packname="totalboumboum" color="cyan" />   -->
 	
