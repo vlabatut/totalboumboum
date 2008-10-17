@@ -6,7 +6,7 @@ public class AiMain extends AiManager
 {
 
 	public AiMain()
-	{	super(new Test());		
+	{	super(new Promeneur());		
 	}
-	
+
 }
