@@ -64,7 +64,7 @@ public abstract class ArtificialIntelligence implements Callable<AiAction>
 	 * et forcera la terminaison de l'IA. Cette exception ne doit surtout pas être
 	 * interceptée localement par un try/catch. 
 	 */
-	protected synchronized void checkInterruption() throws StopRequestException
+	public synchronized void checkInterruption() throws StopRequestException
 	{	if(stopRequest)
 			throw new StopRequestException();
 	}
