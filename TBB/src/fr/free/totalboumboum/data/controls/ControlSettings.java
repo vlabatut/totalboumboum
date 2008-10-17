@@ -28,15 +28,9 @@ import java.util.Map.Entry;
 
 public class ControlSettings
 {
-	private HashMap<Integer,String> onKeys;
-	private HashMap<Integer,String> offKeys;
-	private ArrayList<String> autofires;
-	
-	public ControlSettings()
-	{	onKeys = new HashMap<Integer,String>();
-		offKeys = new HashMap<Integer,String>();
-		autofires = new ArrayList<String>(); 
-	}
+	private final HashMap<Integer,String> onKeys = new HashMap<Integer,String>();
+	private final HashMap<Integer,String> offKeys = new HashMap<Integer,String>();
+	private final ArrayList<String> autofires = new ArrayList<String>();
 	
 	public boolean containsOnKey(int key)
 	{	return onKeys.containsKey(key);
@@ -75,5 +69,38 @@ public class ControlSettings
 	}
 	public void addAutofire(String event)
 	{	autofires.add(event);		
+	}
+	public void removeAutofire(String event)
+	{	autofires.remove(event);		
+	}
+	
+	public ControlSettings copy()
+	{	ControlSettings result = new ControlSettings();
+		// on keys
+		{	Iterator<Entry<Integer,String>> it = onKeys.entrySet().iterator();
+			while(it.hasNext())
+			{	Entry<Integer,String> entry = it.next();
+				Integer key = entry.getKey();
+				String value = entry.getValue();
+				result.addOnKey(key,value);
+			}
+		}
+		// off keys
+		{	Iterator<Entry<Integer,String>> it = offKeys.entrySet().iterator();
+			while(it.hasNext())
+			{	Entry<Integer,String> entry = it.next();
+				Integer key = entry.getKey();
+				String value = entry.getValue();
+				result.addOffKey(key,value);
+			}
+		}
+		// autofires
+		{	Iterator<String> it = autofires.iterator();
+			while(it.hasNext())
+			{	String value = it.next();
+				result.addAutofire(value);
+			}
+		}
+		return result;
 	}
 }

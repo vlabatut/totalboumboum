@@ -72,7 +72,7 @@ import fr.free.totalboumboum.gui.tools.GuiTools;
 import fr.free.totalboumboum.tools.ImageTools;
 import fr.free.totalboumboum.tools.StringTools;
 
-public class RoundDescription extends EntitledDataPanel
+public class RoundDescription extends EntitledDataPanel 
 {	
 	private static final long serialVersionUID = 1L;
 	private static final float SPLIT_RATIO = 0.4f;
