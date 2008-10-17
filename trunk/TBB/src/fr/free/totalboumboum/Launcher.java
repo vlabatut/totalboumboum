@@ -163,6 +163,11 @@ public class Launcher
 	 * vont être successivement monopolisés par l'IA
 	 */
 	
+	/*
+	 * TODO dans l'API il faut généraliser (tout en simplifiant) les propriétés des sprites, plutot que 
+	 * de définir des fonctions spécifiques à chaque fois.
+	 */
+	
 // **********************************************************
 // BOMBES
 // **********************************************************
