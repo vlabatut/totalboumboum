@@ -21,9 +21,6 @@ package fr.free.totalboumboum.data.profile;
  * 
  */
 
-import com.sun.org.apache.xpath.internal.operations.Equals;
-
-import fr.free.totalboumboum.data.controls.ControlSettings;
 import fr.free.totalboumboum.engine.control.PlayerControl;
 
 public class Profile

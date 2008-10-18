@@ -29,6 +29,7 @@ import javax.swing.BoxLayout;
 import javax.swing.JButton;
 
 import fr.free.totalboumboum.data.configuration.ConfigurationSaver;
+import fr.free.totalboumboum.data.configuration.GameConstants;
 import fr.free.totalboumboum.data.controls.ControlSettings;
 import fr.free.totalboumboum.gui.common.panel.SplitMenuPanel;
 import fr.free.totalboumboum.gui.common.panel.menu.InnerMenuPanel;
@@ -49,7 +50,7 @@ public class ControlsMenu extends InnerMenuPanel
 	@SuppressWarnings("unused")
 	private JButton buttonCancel;
 
-	private ControlsData controlsData[] = new ControlsData[5];
+	private ControlsData controlsData[] = new ControlsData[GameConstants.CONTROL_COUNT];
 	
 	private int selected = 0;
 
@@ -93,7 +94,8 @@ public class ControlsMenu extends InnerMenuPanel
 			{	ControlSettings controlSettings = controlsData[i].getControlSettings();
 				getConfiguration().getGameConfiguration().putControlSettings(i+1,controlSettings);
 			}
-			ConfigurationSaver.saveConfiguration();
+			ConfigurationSaver.saveControlsSettings();
+			//TODO propager éventuellement au round
 			replaceWith(parent);
 	    }
 		else if(e.getActionCommand().equals(GuiTools.MENU_OPTIONS_BUTTON_CANCEL))

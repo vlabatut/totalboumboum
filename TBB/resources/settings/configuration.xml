@@ -15,15 +15,6 @@
 		par exemple en utilisant l'option d'exécution -xmx128m pour donner 128 Mo au lieu des 64 alloués par défaut -->
 	<panelDimension width="1024" height="768" />
 
-<!-- DISPLAY -->	
-	<controls>
-		<control number="1" file="01" />
-		<control number="2" file="02" />
-		<control number="3" file="03" />
-		<control number="4" file="04" />
-		<control number="5" file="05" />
-	</controls>
-
 <!-- PROFILES -->	
 	<profiles>
 <!-- brown -->			<!-- 5 -->			<!-- DÉGRADÉ -->			<!--		<profile value="BasmanSandalli" />			 -->	
@@ -44,7 +35,7 @@
 <!-- yellow -->			<!-- 7 -->			<!-- IDENTIQUE  -->		<!--		<profile value="SahinYildirim" /> 				 -->
 
  
-<!-- orange -->																						<profile value="Promeneur" />  					 											
+<!-- orange -->																						<profile value="Promeneur" />
 <!-- cyan -->																							<profile value="Human" />	
 
 	</profiles>
