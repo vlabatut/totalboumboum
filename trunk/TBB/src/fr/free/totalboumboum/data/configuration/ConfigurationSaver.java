@@ -21,11 +21,40 @@ package fr.free.totalboumboum.data.configuration;
  * 
  */
 
+import java.io.IOException;
+import java.text.NumberFormat;
+import java.util.HashMap;
+import java.util.Iterator;
+
+import javax.xml.parsers.ParserConfigurationException;
+
+import org.xml.sax.SAXException;
+
+import java.util.Map.Entry;
+
+import fr.free.totalboumboum.data.controls.ControlSettings;
+import fr.free.totalboumboum.data.controls.ControlSettingsLoader;
+import fr.free.totalboumboum.data.controls.ControlSettingsSaver;
+
 public class ConfigurationSaver
 {
 	public static void saveConfiguration()
 	{
 		
 	}
-	
+
+	public static void saveControlSettings(Configuration configuration)
+	{	NumberFormat nf = NumberFormat.getInstance();
+		nf.setMinimumIntegerDigits(2);
+		HashMap<Integer,ControlSettings> controlSettings = configuration.getControlSettings();
+		Iterator<Entry<Integer,ControlSettings>> it = controlSettings.entrySet().iterator();
+		while(it.hasNext())
+		{	Entry<Integer,ControlSettings> entry = it.next();
+			Integer index = entry.getKey();
+			ControlSettings value = entry.getValue();
+			String fileName = nf.format(index);
+			ControlSettingsSaver.saveControlSettings(fileName,value);
+		}
+	}
+
 }

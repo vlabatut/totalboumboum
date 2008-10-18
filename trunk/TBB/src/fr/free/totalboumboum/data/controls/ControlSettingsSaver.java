@@ -24,41 +24,67 @@ package fr.free.totalboumboum.data.controls;
 import java.awt.event.KeyEvent;
 import java.io.File;
 import java.io.IOException;
+import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
+import java.util.Map.Entry;
 
 import javax.xml.parsers.ParserConfigurationException;
 
+import org.jdom.Document;
 import org.jdom.Element;
 import org.xml.sax.SAXException;
 
 import fr.free.totalboumboum.tools.FileTools;
 import fr.free.totalboumboum.tools.XmlTools;
 
-public class ControlSettingsLoader
+public class ControlSettingsSaver
 {	
-	public static ControlSettings loadControlSettings(String fileName) throws ParserConfigurationException, SAXException, IOException, IllegalArgumentException, SecurityException, IllegalAccessException, NoSuchFieldException
-	{	ControlSettings result;
+	public static void saveControlSettings(String fileName, ControlSettings controlSettings) throws ParserConfigurationException, SAXException, IOException, IllegalArgumentException, SecurityException, IllegalAccessException, NoSuchFieldException
+	{	// build document
+		Element root = saveControlElement(controlSettings);	
+		// save file
 		String controlFile = FileTools.getControlsPath()+File.separator+fileName+FileTools.EXTENSION_DATA;
 		File dataFile = new File(controlFile);
 		String schemaFolder = FileTools.getSchemasPath();
 		File schemaFile = new File(schemaFolder+File.separator+FileTools.FILE_CONTROLS+FileTools.EXTENSION_SCHEMA);
-		Element root = XmlTools.getRootFromFile(dataFile,schemaFile);
-		result = loadControlsElement(root);
-		return result;
+		XmlTools.makeFileFromRoot(dataFile,schemaFile,root);
 	}
-	
-    @SuppressWarnings("unchecked")
-	private static ControlSettings loadControlsElement(Element root) throws IllegalArgumentException, SecurityException, IllegalAccessException, NoSuchFieldException
-	{	ControlSettings result = new ControlSettings();
-    	List<Element> eventsList = root.getChildren(XmlTools.ELT_EVENT);
-		for(int i=0;i<eventsList.size();i++)
-			loadEventElement(eventsList.get(i),result);
+//TODO décomposer en plusieurs fonctions comme avant ?	
+	private static Element saveControlElement(ControlSettings controlSettings)
+	{	Element result = new Element(XmlTools.ELT_CONTROLS);
+		HashMap<String,Integer> onEvents = controlSettings.getOnEvents();
+		Iterator<Entry<String,Integer>> onIt = onEvents.entrySet().iterator();
+		while(onIt.hasNext())
+		{	// data
+			Entry<String,Integer> onEntry = onIt.next();
+			String event = onEntry.getKey();
+			int onKey = onEntry.getValue();
+			int offKey = controlSettings.getOffKeyFromEvent(event);
+			boolean autofire = controlSettings.isAutofire(event);
+			// main element
+			{	String autofireText = Boolean.toString(autofire);
+				Element eventElement = new Element(XmlTools.ELT_EVENT);
+				eventElement.setAttribute(XmlTools.ATT_NAME,event);
+				eventElement.setAttribute(XmlTools.ATT_AUTOFIRE,autofireText);
+			}
+			// on element
+			{	String onText = ;
+				Element onElement = new Element(XmlTools.ELT_ON);
+				onElement.setAttribute(XmlTools.ATT_KEY,onText);
+			}
+			// off element
+			{	String offText = ;
+				Element offElement = new Element(XmlTools.ELT_OFF);
+				offElement.setAttribute(XmlTools.ATT_KEY,offText);
+			}
+		}
 		return result;
 	}
     
     private static void loadEventElement(Element root, ControlSettings result) throws IllegalArgumentException, SecurityException, IllegalAccessException, NoSuchFieldException
     {	// name
-    	String name = root.getAttribute(XmlTools.ATT_NAME).getValue();
+    	String name = root.getAttribute().getValue();
     	// autofire
 		String autofStr = root.getAttribute(XmlTools.ATT_AUTOFIRE).getValue();
 		boolean autofire = Boolean.parseBoolean(autofStr);

@@ -108,7 +108,7 @@ public class Launcher
 			g.setComposite(AlphaComposite.Clear);
 			g.fillRect(0,0,size.width,size.height);
 			g.setPaintMode();
-			g.setColor(new Color(204,18,128));
+			g.setColor(GuiTools.COLOR_SPLASHSCREEN_TEXT);
 			g.setFont(new Font("Arial",Font.PLAIN,10));
 	        g.drawString(msg,70,315);
 	        splash.update();
@@ -641,7 +641,9 @@ public class Launcher
 	 * 
 	 * + beta.002
 	 * - modification : utilisation d'une image plus foncée pour les fonds de tous les menus sauf le principal
-	 * - 
+	 * - modification : correction de quelques bugs dans l'API des IA
+	 * - modification : réorganisation de la gestion des controles
+	 * - nouveauté : écran de configuration des controles
 	 * 
 	 * *******************************************************
 	 * *********************** A FAIRE ***********************
@@ -699,4 +701,14 @@ public class Launcher
 	 *  - intérêt : tout ça permet d'implémenter le bonus à celui qui tue tout le monde en survival, par opposition à une victoire temporelle qui rapporterait donc moins de points
 	 *  - LA NOTION DE PLAYMODE EST A SUPPRIMER 
 	 */
+	
+	/**
+	 * TODO API IA
+	 * utiliser une matrice innacessible dans la zone
+	 * donner seulement une méthode permettant d'accéder à une case à la fois
+	 * vérifier que les listes ne sont pas recréées à chaque màj, mais seulement modifiées
+	 * (elles doivent être final, histoire d'être sur)
+	 */
+	
+
 }

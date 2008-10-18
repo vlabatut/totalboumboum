@@ -82,6 +82,7 @@ public class PortraitsLoader
 		loadOutgameElement(outgame,localFilePath,colormap,result);
 	}
 	
+	@SuppressWarnings("unchecked")
 	private static void loadIngameElement(Element root, String folderPath, Colormap colormap, Portraits result) throws IOException, ParserConfigurationException, SAXException
 	{	// folder
 		String folder = folderPath;
@@ -103,6 +104,7 @@ public class PortraitsLoader
 		}
 	}
 
+	@SuppressWarnings("unchecked")
 	private static void loadOutgameElement(Element root, String folderPath, Colormap colormap, Portraits result) throws IOException, ParserConfigurationException, SAXException
 	{	// folder
 		String folder = folderPath;

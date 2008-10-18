@@ -22,6 +22,7 @@ package fr.free.totalboumboum.gui.options.controls;
  */
 
 import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.lang.reflect.Field;
@@ -37,7 +38,7 @@ import fr.free.totalboumboum.gui.common.subpanel.UntitledSubPanelTable;
 import fr.free.totalboumboum.gui.tools.GuiTools;
 import fr.free.totalboumboum.tools.ClassTools;
 
-public class ControlsData extends EntitledDataPanel implements MouseListener
+public class ControlsData extends EntitledDataPanel implements MouseListener,KeyListener
 {	
 	private static final long serialVersionUID = 1L;
 
@@ -51,7 +52,7 @@ public class ControlsData extends EntitledDataPanel implements MouseListener
 		ControlEvent.DROPBOMB,
 		ControlEvent.PUNCHBOMB
 	};
-		 
+	private int selectedRow = -1;
 	
 	public ControlsData(SplitMenuPanel container, int index)
 	{	super(container);
@@ -99,21 +100,10 @@ public class ControlsData extends EntitledDataPanel implements MouseListener
 						col++;
 					}
 					// key
-					{	int key = controlSettings.getKeyFromEvent(actions[line-1]);
-						String text = null;
-						if(key>=0)
-						{	try
-							{	Field field = ClassTools.getFieldFromValue(key,KeyEvent.class);
-								text = field.getName();
-							}
-							catch (IllegalArgumentException e)
-							{	e.printStackTrace();
-							}
-							catch (IllegalAccessException e)
-							{	e.printStackTrace();
-							}
-						}
-						keysPanel.setLabelText(line,col,text,text);
+					{	int key = controlSettings.getOnKeyFromEvent(actions[line-1]);
+						setKey(line,col,key);
+						JLabel label = keysPanel.getLabel(line,col);
+						label.addMouseListener(this);
 						col++;
 					}
 					// autofire
@@ -127,6 +117,7 @@ public class ControlsData extends EntitledDataPanel implements MouseListener
 			}
 			
 			setDataPart(keysPanel);
+			keysPanel.addKeyListener(this);
 		}
 	}
 	
@@ -139,6 +130,25 @@ public class ControlsData extends EntitledDataPanel implements MouseListener
 		keysPanel.setLabelKey(line,col,key,true);
 	}
 
+	private void setKey(int line, int col, int key)
+	{	String text = null;
+		if(key>=0)
+		{	try
+			{	Field field = ClassTools.getFieldFromValue(key,KeyEvent.class);
+				text = field.getName();
+				text = text.substring(3,text.length());
+			}
+			catch (IllegalArgumentException e)
+			{	e.printStackTrace();
+			}
+			catch (IllegalAccessException e)
+			{	e.printStackTrace();
+			}
+		}
+		keysPanel.setLabelText(line,col,text,text);
+		keysPanel.setFocusable(true);
+	}
+	
 	@Override
 	public void refresh()
 	{	// nothing to do here
@@ -153,6 +163,10 @@ public class ControlsData extends EntitledDataPanel implements MouseListener
 	{	return controlSettings;
 	}	
 	
+	/////////////////////////////////////////////////////////////////
+	// MOUSE LISTENER	/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+
 	@Override
 	public void mouseClicked(MouseEvent e)
 	{	
@@ -169,6 +183,12 @@ public class ControlsData extends EntitledDataPanel implements MouseListener
 	public void mousePressed(MouseEvent e)
 	{	JLabel label = (JLabel)e.getComponent();
 		int[] pos = keysPanel.getLabelPositionSimple(label);
+		// key
+		if(pos[1]==1)
+		{	selectedRow = pos[0];
+			keysPanel.setLabelBackground(pos[0],pos[1],GuiTools.COLOR_TABLE_SELECTED_BACKGROUND);
+			keysPanel.requestFocusInWindow();
+		}
 		// autofire
 		if(pos[1]==2)
 		{	String action = actions[pos[0]-1];
@@ -182,6 +202,37 @@ public class ControlsData extends EntitledDataPanel implements MouseListener
 	}
 	@Override
 	public void mouseReleased(MouseEvent e)
+	{	
+	}
+
+	/////////////////////////////////////////////////////////////////
+	// KEY LISTENER		/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+
+	@Override
+	public void keyPressed(KeyEvent e)
+	{	if(selectedRow!=-1)
+		{	// init
+			int keyCode = e.getKeyCode();
+			String action = actions[selectedRow-1];
+			// update control settings
+			controlSettings.addOnKey(keyCode,action);
+			controlSettings.addOffKey(keyCode,action);
+			// 	update panel
+			setKey(selectedRow,1,keyCode);
+			keysPanel.setLabelBackground(selectedRow,1,GuiTools.COLOR_TABLE_NEUTRAL_BACKGROUND);
+			//
+			selectedRow = -1;
+		}
+	}
+
+	@Override
+	public void keyReleased(KeyEvent e)
+	{	
+	}
+
+	@Override
+	public void keyTyped(KeyEvent e)
 	{	
 	}
 }

@@ -28,70 +28,183 @@ import java.util.Map.Entry;
 
 public class ControlSettings
 {
-	private final HashMap<Integer,String> onKeys = new HashMap<Integer,String>();
-	private final HashMap<Integer,String> offKeys = new HashMap<Integer,String>();
-	private final ArrayList<String> autofires = new ArrayList<String>();
+	
+	/////////////////////////////////////////////////////////////////
+	// KEYS				/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+
+	private void addKey(int key, String event, boolean on)
+	{	// init
+		HashMap<Integer,ArrayList<String>> keys;
+		HashMap<String,Integer> events;
+		if(on)
+		{	keys = onKeys;
+			events = onEvents;
+		}
+		else
+		{	keys = offKeys;
+			events = offEvents;
+		}
+		// remove previous value
+		removeEvent(event,on);
+		// put new value
+		if(keys.containsKey(key))
+		{	ArrayList<String> evts = keys.get(key);
+			evts.add(event);
+		}
+		else
+		{	ArrayList<String> evts = new ArrayList<String>();
+			evts.add(event);
+			keys.put(key,evts);		
+		}
+		events.put(event,key);
+	}
+	
+	private int getKeyFromEvent(String event, boolean on)
+	{	Integer result;
+		if(on)
+			result = onEvents.get(event);
+		else
+			result = offEvents.get(event);
+		if(result==null)
+			result = -1;
+		return result;
+	}
+	
+	private ArrayList<String> getEventsFromKey(int keyCode, boolean on)
+	{	ArrayList<String> result;
+		if(on)
+			result = onKeys.get(keyCode);
+		else
+			result = offKeys.get(keyCode);
+		if(result==null)
+			result = new ArrayList<String>();
+		return result;
+	}
+	
+	private void removeEvent(String event, boolean on)
+	{	// init
+		HashMap<Integer,ArrayList<String>> keys;
+		HashMap<String,Integer> events;
+		if(on)
+		{	keys = onKeys;
+			events = onEvents;
+		}
+		else
+		{	keys = offKeys;
+			events = offEvents;
+		}
+		int oldKey = getKeyFromEvent(event, on);
+		if(oldKey!=-1)
+		{	// keys
+			ArrayList<String> list = keys.get(oldKey);
+			list.remove(event);
+			if(list.size()==0)
+				keys.remove(oldKey);
+			// events
+			events.remove(events);
+		}				
+	}
+
+	/////////////////////////////////////////////////////////////////
+	// ON				/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	private final HashMap<Integer,ArrayList<String>> onKeys = new HashMap<Integer,ArrayList<String>>();
+	private final HashMap<String,Integer> onEvents = new HashMap<String,Integer>();
 	
 	public boolean containsOnKey(int key)
 	{	return onKeys.containsKey(key);
 	}
+	
 	public void addOnKey(int key, String event)
-	{	onKeys.put(key,event);		
-	}
-	public int getKeyFromEvent(String event)
-	{	int result = -1;
-		Iterator<Entry<Integer,String>> it = onKeys.entrySet().iterator();
-		while(it.hasNext() && result<0)
-		{	Entry<Integer,String> entry = it.next();
-			int key = entry.getKey();
-			String value = entry.getValue();
-			if(value.equalsIgnoreCase(event))
-				result = key;
-		}
-		return result;
-	}
-	public String getEventFromKey(int keyCode)
-	{	String result = onKeys.get(keyCode);
-		if(result==null)
-			result = offKeys.get(keyCode);
-		return result;
+	{	addKey(key,event,true);
 	}
 	
+	public int getOnKeyFromEvent(String event)
+	{	return getKeyFromEvent(event,true);
+	}
+	
+	public ArrayList<String> getEventsFromOnKey(int keyCode)
+	{	return getEventsFromKey(keyCode,true);
+	}
+	
+	public HashMap<String,Integer> getOnEvents()
+	{	return onEvents;	
+	}
+	
+	/////////////////////////////////////////////////////////////////
+	// OFF				/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	private final HashMap<Integer,ArrayList<String>> offKeys = new HashMap<Integer,ArrayList<String>>();
+	private final HashMap<String,Integer> offEvents = new HashMap<String,Integer>();
+
 	public boolean containsOffKey(int key)
 	{	return offKeys.containsKey(key);
 	}
+	
 	public void addOffKey(int key, String event)
-	{	offKeys.put(key,event);		
+	{	addKey(key,event,false);
 	}
 	
+	public int getOffKeyFromEvent(String event)
+	{	return getKeyFromEvent(event,false);
+	}
+	
+	public ArrayList<String> getEventsFromOffKey(int keyCode)
+	{	return getEventsFromKey(keyCode,false);
+	}
+
+	public HashMap<String,Integer> getOffEvents()
+	{	return offEvents;	
+	}
+	
+	/////////////////////////////////////////////////////////////////
+	// AUTOFIRE			/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	private final ArrayList<String> autofires = new ArrayList<String>();
+
 	public boolean isAutofire(String event)
 	{	return autofires.contains(event);		
 	}
+	
 	public void addAutofire(String event)
 	{	autofires.add(event);		
 	}
+	
 	public void removeAutofire(String event)
 	{	autofires.remove(event);		
 	}
-	
+
+	/////////////////////////////////////////////////////////////////
+	// MISC				/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+
 	public ControlSettings copy()
 	{	ControlSettings result = new ControlSettings();
 		// on keys
-		{	Iterator<Entry<Integer,String>> it = onKeys.entrySet().iterator();
+		{	Iterator<Entry<Integer,ArrayList<String>>> it = onKeys.entrySet().iterator();
 			while(it.hasNext())
-			{	Entry<Integer,String> entry = it.next();
+			{	Entry<Integer,ArrayList<String>> entry = it.next();
 				Integer key = entry.getKey();
-				String value = entry.getValue();
-				result.addOnKey(key,value);
+				ArrayList<String> values = entry.getValue();
+				Iterator<String> it2 = values.iterator();
+				while(it2.hasNext())
+				{	String temp = it2.next();
+					result.addOnKey(key,temp);
+				}
 			}
 		}
 		// off keys
-		{	Iterator<Entry<Integer,String>> it = offKeys.entrySet().iterator();
+		{	Iterator<Entry<Integer,ArrayList<String>>> it = offKeys.entrySet().iterator();
 			while(it.hasNext())
-			{	Entry<Integer,String> entry = it.next();
+			{	Entry<Integer,ArrayList<String>> entry = it.next();
 				Integer key = entry.getKey();
-				String value = entry.getValue();
-				result.addOffKey(key,value);
+				ArrayList<String> values = entry.getValue();
+				Iterator<String> it2 = values.iterator();
+				while(it2.hasNext())
+				{	String temp = it2.next();
+					result.addOffKey(key,temp);
+				}
 			}
 		}
 		// autofires

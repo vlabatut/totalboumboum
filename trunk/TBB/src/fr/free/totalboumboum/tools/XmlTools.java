@@ -22,22 +22,22 @@ package fr.free.totalboumboum.tools;
  */
 
 import java.io.File;
+import java.io.FileOutputStream;
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.HashMap;
 
 import javax.xml.XMLConstants;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
-import javax.xml.parsers.SAXParser;
-import javax.xml.parsers.SAXParserFactory;
 import javax.xml.validation.Schema;
 import javax.xml.validation.SchemaFactory;
 
 import org.jdom.Document;
 import org.jdom.Element;
 import org.jdom.input.DOMBuilder;
+import org.jdom.output.Format;
+import org.jdom.output.XMLOutputter;
 import org.xml.sax.ErrorHandler;
 import org.xml.sax.SAXException;
 import org.xml.sax.SAXParseException;
@@ -321,5 +321,23 @@ public class XmlTools
 		// root
 		Element result = document.getRootElement();
 		return result;
+	}
+
+	public static void makeFileFromRoot(File dataFile, File schemaFile, Element root) throws IOException
+	{	
+dataFile = new File("text.xml");		
+		// open file stream
+		FileOutputStream out = new FileOutputStream(dataFile);
+		// create document
+		Document document = new Document(root); 		
+		// define output format
+		Format format = Format.getPrettyFormat();
+		format.setIndent("\t");
+		// create outputter
+		XMLOutputter outputter = new XMLOutputter(format);
+		// write in the stream
+	    outputter.output(document,out);       
+	    // close the stream
+	    out.close();
 	}
 }

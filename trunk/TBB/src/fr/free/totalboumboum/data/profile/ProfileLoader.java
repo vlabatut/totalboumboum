@@ -26,8 +26,6 @@ import java.io.IOException;
 
 import javax.xml.parsers.ParserConfigurationException;
 
-
-import org.jdom.Attribute;
 import org.jdom.Element;
 import org.xml.sax.SAXException;
 

@@ -23,14 +23,12 @@ package fr.free.totalboumboum.data.configuration;
 
 import java.awt.Color;
 import java.awt.Dimension;
-import java.awt.Font;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 
 import javax.xml.parsers.ParserConfigurationException;
 
-import org.jdom.Element;
 import org.xml.sax.SAXException;
 
 import fr.free.totalboumboum.data.controls.ControlSettings;
@@ -46,7 +44,6 @@ import fr.free.totalboumboum.game.round.RoundLoader;
 import fr.free.totalboumboum.game.tournament.AbstractTournament;
 import fr.free.totalboumboum.game.tournament.TournamentLoader;
 import fr.free.totalboumboum.game.tournament.single.SingleTournament;
-import fr.free.totalboumboum.tools.XmlTools;
 
 public class Configuration
 {	
