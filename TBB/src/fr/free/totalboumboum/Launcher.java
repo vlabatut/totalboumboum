@@ -639,7 +639,7 @@ public class Launcher
 	/*
 	 * TODO
 	 * 
-	 * + beta.002
+	 * + beta.004
 	 * - modification : utilisation d'une image plus foncée pour les fonds de tous les menus sauf le principal
 	 * - modification : correction de quelques bugs dans l'API des IA
 	 * - modification : réorganisation de la gestion des controles
@@ -658,6 +658,8 @@ public class Launcher
 	 * - pb de dimension de l'image de fond en fonction de la résolution... (zones pas peintes)
 	 * - results panel : quand il y a trop de rounds dans un match pour que ça rentre à l'écran, ne pas tout afficher
 	 * - possibilité de donner des noms aux matches et aux rounds
+	 * 
+	 * - bug de déplacement quand on bouge en diagonale en posant plein de bombes dans un espace dégagé, on se retrouve téléporté sur une case voisine
 	 * 
 	 * - redistribution des items lors de la mort d'un joueur (option de round?)
 	 * - possibilité de bloquer certains items (on ne les perd pas lorsqu'on meurt)

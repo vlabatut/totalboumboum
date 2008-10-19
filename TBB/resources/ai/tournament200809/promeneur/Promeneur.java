@@ -1,5 +1,26 @@
 package tournament200809.promeneur;
 
+/*
+ * Total Boum Boum
+ * Copyright 2008 Vincent Labatut 
+ * 
+ * This file is part of Total Boum Boum.
+ * 
+ * Total Boum Boum is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 2 of the License, or
+ * (at your option) any later version.
+ * 
+ * Total Boum Boum is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ * 
+ * You should have received a copy of the GNU General Public License
+ * along with Total Boum Boum.  If not, see <http://www.gnu.org/licenses/>.
+ * 
+ */
+
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Iterator;
@@ -16,10 +37,13 @@ import fr.free.totalboumboum.ai.adapter200809.ArtificialIntelligence;
 import fr.free.totalboumboum.ai.adapter200809.StopRequestException;
 import fr.free.totalboumboum.engine.content.feature.Direction;
 
-public class Promeneur extends ArtificialIntelligence
+public class Promeneur extends ArtificialIntelligence 
 {
+	/** la case occupée actuellement par le personnage*/
 	private AiTile currentTile;
+	/** la case sur laquelle on veut aller */
 	private AiTile nextTile = null;
+	/** la dernière case par laquelle on est passé */ 
 	private AiTile previousTile = null;
 	
 	public AiAction processAction() throws StopRequestException
@@ -87,7 +111,7 @@ public class Promeneur extends ArtificialIntelligence
 		// s'il reste des cases dans la liste
 		if(tiles.size()>0)
 		{	// si la liste contient la case située dans la direction déplacement précedente,
-			// on évite de l'utiliser (on veut avancer en zig-zag et non pas en ligne droite)
+			// on évite de l'utiliser (je veux avancer en zig-zag et non pas en ligne droite)
 			AiTile tempTile = null;
 			Direction dir = getPercepts().getDirection(previousTile,currentTile);
 			if(dir!=Direction.NONE)
@@ -151,14 +175,14 @@ public class Promeneur extends ArtificialIntelligence
 	private void checkNextTile() throws StopRequestException
 	{	checkInterruption(); //APPEL OBLIGATOIRE
 	
-		// si un obstacle est apparu sur la case destination, il faut changer de destination
+		// si un obstacle est apparu sur la case destination, on change de destination
 		if(!isClear(nextTile))
 		{	// liste des cases voisines accessibles	
 			ArrayList<AiTile> tiles = getClearNeighbours(currentTile);
-			// on sort de la liste l'ancienne destination, qui est maintenant bloquée
+			// on sort l'ancienne destination (qui est maintenant bloquée) de la liste
 			if(tiles.contains(nextTile))
 				tiles.remove(nextTile);
-			// s'il reste des cases dans la liste, on en tire une au hasard
+			// s'il reste des cases dans la liste : on en tire une au hasard
 			if(tiles.size()>0)
 			{	double p = Math.random()*tiles.size();
 				int index = (int)p;
