@@ -126,6 +126,7 @@
 				<group name="Players">
 					<group name="Header">
 						<text name="Name" value="Name"  tooltip="Name of the player" />
+						<text name="Profile" value="Human/Computer"  tooltip="Human or computer-controlled player" />
 						<text name="Rank" value="#"  tooltip="Rank of the player in the general statistics before this tournament" />
 					</group>
 					<group name="Data">
@@ -177,6 +178,7 @@
 					<text name="Name" value="Name"  tooltip="Name of the player" />
 					<text name="Paintings" value="Paintings"  tooltip="Total number of tiles painted in this tournament" />
 					<text name="Points" value="Points"  tooltip="Number of points scored for this tournament" />
+					<text name="Profile" value="Human/Computer"  tooltip="Human or computer-controlled player" />
 					<text name="Time" value="Time"  tooltip="Total time spend in the tournament" />
 					<text name="Total" value="Total"  tooltip="Total number of points scored for all the matches" />
 				</group>
@@ -239,11 +241,15 @@
 				<group name="Players">
 					<group name="Header">
 						<text name="Name" value="Name"  tooltip="Name of the player" />
+						<text name="Controls" value="Controls"  tooltip="Controls of the player" />
+						<text name="Profile" value="Human/Computer"  tooltip="Human or computer-controlled player" />
 						<text name="Rank" value="#"  tooltip="Rank of the player in the tournament before this match" />
 					</group>
 					<group name="Data">
 						<text name="Computer" value="Computer"  tooltip="This player is computer-controlled" />
+						<text name="Controls" value="#"  tooltip="The player uses the commands number" />
 						<text name="Human" value="Human"  tooltip="This player is human-controlled" />
+						<text name="Nocontrols" value="-"  tooltip="This player does not use any commands" />
 					</group>
 				</group>
 				
@@ -289,6 +295,7 @@
 					<text name="Name" value="Name"  tooltip="Name of the player" />
 					<text name="Paintings" value="Paintings"  tooltip="Total number of tiles painted in this match" />
 					<text name="Points" value="Points"  tooltip="Number of points scored for this match" />
+					<text name="Profile" value="Human/Computer"  tooltip="Human or computer-controlled player" />
 					<text name="Round" value="R"  tooltip="Number of points scored for the round number" />
 					<text name="Time" value="Time"  tooltip="Total time spend in the match" />
 					<text name="Total" value="Total"  tooltip="Total number of points scored for all the rounds" />
@@ -413,6 +420,7 @@
 					<text name="Name" value="Name"  tooltip="Name of the player" />
 					<text name="Paintings" value="Paintings"  tooltip="Number of tiles painted in this round" />
 					<text name="Points" value="Points"  tooltip="Number of points scored for this round" />
+					<text name="Profile" value="Human/Computer"  tooltip="Human or computer-controlled player" />
 					<text name="Time" value="Time"  tooltip="Time spend in the round" />
 				</group>
 				<group name="Data">

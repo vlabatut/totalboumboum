@@ -135,6 +135,7 @@ public class GuiTools
 		/* PLAYERS */
 			/* HEADER */
 			public static final String GAME_TOURNAMENT_DESCRIPTION_PLAYERS_HEADER_NAME = "GameTournamentDescriptionPlayersHeaderName";
+			public static final String GAME_TOURNAMENT_DESCRIPTION_PLAYERS_HEADER_PROFILE = "GameTournamentDescriptionPlayersHeaderProfile";
 			public static final String GAME_TOURNAMENT_DESCRIPTION_PLAYERS_HEADER_RANK = "GameTournamentDescriptionPlayersHeaderRank";
 			/* DATA */
 			public static final String GAME_TOURNAMENT_DESCRIPTION_PLAYERS_DATA_COMPUTER = "GameTournamentDescriptionPlayersDataComputer";
@@ -175,6 +176,7 @@ public class GuiTools
 		public static final String GAME_TOURNAMENT_RESULTS_HEADER_MATCH = "GameTournamentResultsHeaderMatch";
 		public static final String GAME_TOURNAMENT_RESULTS_HEADER_NAME = "GameTournamentResultsHeaderName";
 		public static final String GAME_TOURNAMENT_RESULTS_HEADER_PAINTINGS = "GameTournamentResultsHeaderPaintings";
+		public static final String GAME_TOURNAMENT_RESULTS_HEADER_PROFILE = "GameTournamentResultsHeaderProfile";
 		public static final String GAME_TOURNAMENT_RESULTS_HEADER_POINTS = "GameTournamentResultsHeaderPoints";
 		public static final String GAME_TOURNAMENT_RESULTS_HEADER_TIME = "GameTournamentResultsHeaderTime";
 		public static final String GAME_TOURNAMENT_RESULTS_HEADER_TOTAL = "GameTournamentResultsHeaderTotal";
@@ -219,11 +221,15 @@ public class GuiTools
 		public static final String GAME_MATCH_DESCRIPTION_NOTES_TITLE = "GameMatchDescriptionNotesTitle";
 		/* PLAYERS */
 			/* HEADER */
+			public static final String GAME_MATCH_DESCRIPTION_PLAYERS_HEADER_CONTROLS = "GameMatchDescriptionPlayersHeaderControls";
 			public static final String GAME_MATCH_DESCRIPTION_PLAYERS_HEADER_NAME = "GameMatchDescriptionPlayersHeaderName";
+			public static final String GAME_MATCH_DESCRIPTION_PLAYERS_HEADER_PROFILE = "GameMatchDescriptionPlayersHeaderProfile";
 			public static final String GAME_MATCH_DESCRIPTION_PLAYERS_HEADER_RANK = "GameMatchDescriptionPlayersHeaderRank";
 			/* DATA */
 			public static final String GAME_MATCH_DESCRIPTION_PLAYERS_DATA_COMPUTER = "GameMatchDescriptionPlayersDataComputer";
+			public static final String GAME_MATCH_DESCRIPTION_PLAYERS_DATA_CONTROLS = "GameMatchDescriptionPlayersDataControls";
 			public static final String GAME_MATCH_DESCRIPTION_PLAYERS_DATA_HUMAN = "GameMatchDescriptionPlayersDataHuman";
+			public static final String GAME_MATCH_DESCRIPTION_PLAYERS_DATA_NOCONTROLS = "GameMatchDescriptionPlayersDataNocontrols";
 		/* POINTS */
 		public static final String GAME_MATCH_DESCRIPTION_POINTS_TITLE = "GameMatchDescriptionPointsTitle";
 			/* HEADER */
@@ -260,6 +266,7 @@ public class GuiTools
 		public static final String GAME_MATCH_RESULTS_HEADER_NAME = "GameMatchResultsHeaderName";
 		public static final String GAME_MATCH_RESULTS_HEADER_PAINTINGS = "GameMatchResultsHeaderPaintings";
 		public static final String GAME_MATCH_RESULTS_HEADER_POINTS = "GameMatchResultsHeaderPoints";
+		public static final String GAME_MATCH_RESULTS_HEADER_PROFILE = "GameMatchResultsHeaderProfile";
 		public static final String GAME_MATCH_RESULTS_HEADER_ROUND = "GameMatchResultsHeaderRound";
 		public static final String GAME_MATCH_RESULTS_HEADER_TIME = "GameMatchResultsHeaderTime";
 		public static final String GAME_MATCH_RESULTS_HEADER_TOTAL = "GameMatchResultsHeaderTotal";
@@ -353,6 +360,7 @@ public class GuiTools
 		public static final String GAME_ROUND_RESULTS_HEADER_KILLS = "GameRoundResultsHeaderKills";
 		public static final String GAME_ROUND_RESULTS_HEADER_NAME = "GameRoundResultsHeaderName";
 		public static final String GAME_ROUND_RESULTS_HEADER_PAINTINGS = "GameRoundResultsHeaderPaintings";
+		public static final String GAME_ROUND_RESULTS_HEADER_PROFILE = "GameRoundResultsHeaderProfile";
 		public static final String GAME_ROUND_RESULTS_HEADER_POINTS = "GameRoundResultsHeaderPoints";
 		public static final String GAME_ROUND_RESULTS_HEADER_TIME = "GameRoundResultsHeaderTime";
 		/* DATA */
@@ -729,6 +737,7 @@ public class GuiTools
 			// key
 			image = loadIcon(folder+GuiFileTools.FILE_KEY,absent);
 			icons.put(MENU_OPTIONS_CONTROLS_HEADER_KEY,image);
+			icons.put(GAME_MATCH_DESCRIPTION_PLAYERS_HEADER_CONTROLS,image);
 			// kills
 			image = loadIcon(folder+GuiFileTools.FILE_KILLS,absent);
 			icons.put(GAME_TOURNAMENT_RESULTS_HEADER_KILLS,image);
@@ -781,6 +790,13 @@ public class GuiTools
 			icons.put(GAME_TOURNAMENT_DESCRIPTION_POINTS_TITLE,image);
 			icons.put(GAME_MATCH_DESCRIPTION_POINTS_TITLE,image);
 			icons.put(GAME_ROUND_DESCRIPTION_POINTS_TITLE,image);
+			// profile
+			image = loadIcon(folder+GuiFileTools.FILE_PROFILE,absent);
+			icons.put(GAME_TOURNAMENT_DESCRIPTION_PLAYERS_HEADER_PROFILE,image);
+			icons.put(GAME_MATCH_DESCRIPTION_PLAYERS_HEADER_PROFILE,image);
+			icons.put(GAME_TOURNAMENT_RESULTS_HEADER_PROFILE,image);
+			icons.put(GAME_MATCH_RESULTS_HEADER_PROFILE,image);
+			icons.put(GAME_ROUND_RESULTS_HEADER_PROFILE,image);
 			// rank
 			image = loadIcon(folder+GuiFileTools.FILE_RANK,absent);
 			icons.put(GAME_TOURNAMENT_DESCRIPTION_PLAYERS_HEADER_RANK,image);
@@ -980,6 +996,15 @@ public class GuiTools
 		graphics.setFont(font);
 		FontMetrics metrics = graphics.getFontMetrics(font);
 		result = (int)(metrics.getHeight()*1.2);
+		return result;
+	}
+	public static int getPixelWidth(float fontSize, String text)
+	{	int result;
+		Font font = gameFont.deriveFont(fontSize);
+		graphics.setFont(font);
+		FontMetrics metrics = graphics.getFontMetrics(font);
+		Rectangle2D bounds = metrics.getStringBounds(text,graphics);
+		result = (int)bounds.getWidth();
 		return result;
 	}
 

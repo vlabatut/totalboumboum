@@ -38,7 +38,7 @@ public class Profile
 	private Portraits portraits;
 	
 	private PlayerControl spriteControl;
-	private int controlSettingsIndex;
+	private int controlSettingsIndex = 0;
 	
 	public Profile()
 	{	name = null;
@@ -77,6 +77,9 @@ public class Profile
 	{	this.spriteColor = spriteColor;
 	}
 
+	public boolean hasAi()
+	{	return aiName != null;		
+	}
 	public String getAiName()
 	{	return aiName;
 	}

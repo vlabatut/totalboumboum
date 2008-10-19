@@ -60,6 +60,7 @@ public class GuiFileTools
 	public final static String FILE_PAINTINGS = "paintings.png";
 	public final static String FILE_PARTIAL = "partial.png";
 	public final static String FILE_POINTS = "points.png";
+	public final static String FILE_PROFILE = "profile.png";
 	public final static String FILE_RANK = "rank.png";
 	public final static String FILE_REGULAR = "regular.png";
 	public final static String FILE_SCORE = "score.png";

@@ -90,7 +90,7 @@ public class RoundResults extends EntitledDataPanel
 					resultsPanel.setLabelKey(0,col,keys[col-1],true);
 			}
 			// data
-			{	resultsPanel.setSubColumnsWidth(1,Integer.MAX_VALUE);
+			{	resultsPanel.setSubColumnsMaxWidth(1,Integer.MAX_VALUE);
 			}
 			//
 			setDataPart(resultsPanel);

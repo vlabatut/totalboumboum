@@ -22,6 +22,8 @@ package fr.free.totalboumboum.gui.game.match.description;
  */
 
 import java.awt.Color;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.awt.image.BufferedImage;
 import java.text.NumberFormat;
 import java.util.ArrayList;
@@ -32,6 +34,7 @@ import javax.swing.BoxLayout;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
+import fr.free.totalboumboum.data.configuration.GameConstants;
 import fr.free.totalboumboum.data.profile.Portraits;
 import fr.free.totalboumboum.data.profile.Profile;
 import fr.free.totalboumboum.game.match.Match;
@@ -42,11 +45,14 @@ import fr.free.totalboumboum.gui.common.subpanel.UntitledSubPanelTable;
 import fr.free.totalboumboum.gui.game.round.description.RoundDescription;
 import fr.free.totalboumboum.gui.tools.GuiTools;
 
-public class MatchDescription extends EntitledDataPanel 
+public class MatchDescription extends EntitledDataPanel implements MouseListener
 {	
 	private static final long serialVersionUID = 1L;
 	private static final float SPLIT_RATIO = 0.6f;
-
+	private UntitledSubPanelTable playersPanel;
+	private ArrayList<String> controlTexts = new ArrayList<String>();
+	private ArrayList<String> controlTooltips = new ArrayList<String>();
+	
 	public MatchDescription(SplitMenuPanel container)
 	{	super(container);
 	
@@ -67,7 +73,7 @@ public class MatchDescription extends EntitledDataPanel
 			infoPanel.setOpaque(false);
 			
 			// players panel
-			{	JPanel playersPanel = makePlayersPanel(leftWidth,dataHeight);
+			{	playersPanel = makePlayersPanel(leftWidth,dataHeight);
 				infoPanel.add(playersPanel);
 			}
 			
@@ -110,24 +116,28 @@ public class MatchDescription extends EntitledDataPanel
 	{	// nothing to do here
 	}
 	
-	private SubPanel makePlayersPanel(int width, int height)
+	private UntitledSubPanelTable makePlayersPanel(int width, int height)
 	{	Match match = getConfiguration().getCurrentMatch();
 		int lines = 16+1;
-		int cols = 2+1;
+		int cols = 4+1;
 		UntitledSubPanelTable playersPanel = new UntitledSubPanelTable(width,height,cols,lines,true);
+		int ctrlColWidth = initControlsTexts(playersPanel);
 		// headers
 		{	{	JLabel lbl = playersPanel.getLabel(0,0);
 				lbl.setOpaque(false);
 			}
 			String keys[] = 
-			{	GuiTools.GAME_MATCH_DESCRIPTION_PLAYERS_HEADER_NAME,
+			{	GuiTools.GAME_MATCH_DESCRIPTION_PLAYERS_HEADER_PROFILE,
+				GuiTools.GAME_MATCH_DESCRIPTION_PLAYERS_HEADER_CONTROLS,
+				GuiTools.GAME_MATCH_DESCRIPTION_PLAYERS_HEADER_NAME,
 				GuiTools.GAME_MATCH_DESCRIPTION_PLAYERS_HEADER_RANK
 			};
 			for(int i=1;i<keys.length+1;i++)
 				playersPanel.setLabelKey(0,i,keys[i-1],true);
 		}
 		// empty
-		{	playersPanel.setSubColumnsWidth(1,Integer.MAX_VALUE);
+		{	playersPanel.setSubColumnsPreferredWidth(2,ctrlColWidth);
+			playersPanel.setSubColumnsMaxWidth(3,Integer.MAX_VALUE);		
 		}
 		// data
 		{	ArrayList<Profile> players = match.getProfiles();
@@ -145,6 +155,23 @@ public class MatchDescription extends EntitledDataPanel
 				{	BufferedImage image = profile.getPortraits().getOutgamePortrait(Portraits.OUTGAME_HEAD);
 					String tooltip = profile.getName();
 					playersPanel.setLabelIcon(line,col,image,tooltip);
+					col++;
+				}
+				// profile type
+				{	String aiName = profile.getAiName();
+					String key;
+					if(aiName==null)
+						key = GuiTools.GAME_TOURNAMENT_DESCRIPTION_PLAYERS_DATA_HUMAN;
+					else
+						key = GuiTools.GAME_TOURNAMENT_DESCRIPTION_PLAYERS_DATA_COMPUTER;
+					playersPanel.setLabelKey(line,col,key,true);
+					col++;
+				}
+				// controls
+				{	int index = profile.getControlSettingsIndex();
+					playersPanel.setLabelText(line,col,controlTexts.get(index),controlTooltips.get(index));
+					JLabel label = playersPanel.getLabel(line,col);
+					label.addMouseListener(this);
 					col++;
 				}
 				// name
@@ -167,6 +194,37 @@ public class MatchDescription extends EntitledDataPanel
 		}
 		return playersPanel;		
 	}
+	
+	public int initControlsTexts(UntitledSubPanelTable playersPanel)
+	{	int result = 0;
+		// no control
+		{	// text
+			String text = getConfiguration().getLanguage().getText(GuiTools.GAME_MATCH_DESCRIPTION_PLAYERS_DATA_NOCONTROLS);
+			controlTexts.add(text);
+			// tooltip
+			String tooltip = getConfiguration().getLanguage().getText(GuiTools.GAME_MATCH_DESCRIPTION_PLAYERS_DATA_NOCONTROLS+GuiTools.TOOLTIP);
+			controlTooltips.add(tooltip);
+			// width
+			result = GuiTools.getPixelWidth(playersPanel.getLineFontSize(),text);
+		}
+		// control number X
+		for(int index=1;index<=GameConstants.CONTROL_COUNT;index++)
+		{	// text
+			String text = getConfiguration().getLanguage().getText(GuiTools.GAME_MATCH_DESCRIPTION_PLAYERS_DATA_CONTROLS)+index;
+			controlTexts.add(text);
+			// tooltip
+			String tooltip = getConfiguration().getLanguage().getText(GuiTools.GAME_MATCH_DESCRIPTION_PLAYERS_DATA_CONTROLS+GuiTools.TOOLTIP)+" "+index;
+			controlTooltips.add(tooltip);
+			// width
+			int temp = GuiTools.getPixelWidth(playersPanel.getLineFontSize(),text);
+			if(temp>result)
+				result = temp;
+		}
+		//
+		return result;
+	}
+	
+	
 /*	
 	private JPanel makeNotesPanel()
 	{	// init
@@ -247,5 +305,80 @@ public class MatchDescription extends EntitledDataPanel
 		return notesPanel;		
 	}
 */	
+
+	/////////////////////////////////////////////////////////////////
+	// MOUSE LISTENER	/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+
+	@Override
+	public void mouseClicked(MouseEvent e)
+	{	
+	}
+	@Override
+	public void mouseEntered(MouseEvent e)
+	{	
+	}
+	@Override
+	public void mouseExited(MouseEvent e)
+	{	
+	}
+	@Override
+	public void mousePressed(MouseEvent e)
+	{	JLabel label = (JLabel)e.getComponent();
+		int[] pos = playersPanel.getLabelPositionSimple(label);
+		// controls
+		if(pos[1]==2)
+		{	ArrayList<Profile> profiles = getConfiguration().getCurrentMatch().getProfiles();
+			Profile profile = profiles.get(pos[0]-1);
+			int index = profile.getControlSettingsIndex();
+			if(profile.hasAi())
+			{	if(index==GameConstants.CONTROL_COUNT)
+					index = 0;
+				else
+					index = getNextFreeControls(profiles,index,false);
+			}
+			else
+				index = getNextFreeControls(profiles,index,true);
+			profile.setControlSettingsIndex(index);
+			playersPanel.setLabelText(pos[0],pos[1],controlTexts.get(index),controlTooltips.get(index));
+		}
+	}
+	@Override
+	public void mouseReleased(MouseEvent e)
+	{	
+	}
+
+
+	public int getNextFreeControls(ArrayList<Profile> profiles, int start, boolean noZero)
+	{	/// init
+		Iterator<Profile> it = profiles.iterator();
+		ArrayList<Integer> occupied = new ArrayList<Integer>();
+		while(it.hasNext())
+		{	Profile profile = it.next();
+			int index = profile.getControlSettingsIndex();
+			if(index>0)
+				occupied.add(index);
+		}
+		// next free index
+		boolean found = false;
+		int result = 0;
+		int test = 1;
+		while(!found && test<=GameConstants.CONTROL_COUNT)
+		{	int temp = (start+test)%(GameConstants.CONTROL_COUNT+1);
+			if(temp==0 && noZero)
+				test++;
+			else
+			{	if(occupied.contains(temp))
+					test++;
+				else
+				{	result = temp;
+					found = true;
+				}
+			}
+		}
+		if(!found)
+			result = start;
+		return result;
+	}
 
 }

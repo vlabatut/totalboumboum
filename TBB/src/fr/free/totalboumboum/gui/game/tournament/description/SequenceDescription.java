@@ -113,21 +113,22 @@ public class SequenceDescription extends TournamentDescription
 	private SubPanel makePlayersPanel(int width, int height)
 	{	SequenceTournament tournament = (SequenceTournament)getConfiguration().getCurrentTournament();
 		int lines = 16+1;
-		int cols = 2+1;
+		int cols = 3+1;
 		UntitledSubPanelTable playersPanel = new UntitledSubPanelTable(width,height,cols,lines,true);
 		// headers
 		{	{	JLabel lbl = playersPanel.getLabel(0,0);
 				lbl.setOpaque(false);
 			}
 			String keys[] = 
-			{	GuiTools.GAME_TOURNAMENT_DESCRIPTION_PLAYERS_HEADER_NAME,
+			{	GuiTools.GAME_TOURNAMENT_DESCRIPTION_PLAYERS_HEADER_PROFILE,
+				GuiTools.GAME_TOURNAMENT_DESCRIPTION_PLAYERS_HEADER_NAME,
 				GuiTools.GAME_TOURNAMENT_DESCRIPTION_PLAYERS_HEADER_RANK
 			};
 			for(int i=1;i<keys.length+1;i++)
 				playersPanel.setLabelKey(0,i,keys[i-1],true);
 		}
 		// empty
-		{	playersPanel.setSubColumnsWidth(1,Integer.MAX_VALUE);
+		{	playersPanel.setSubColumnsMaxWidth(2,Integer.MAX_VALUE);
 		}
 		// data
 		{	ArrayList<Profile> players = tournament.getProfiles();
@@ -145,6 +146,16 @@ public class SequenceDescription extends TournamentDescription
 				{	BufferedImage image = profile.getPortraits().getOutgamePortrait(Portraits.OUTGAME_HEAD);
 					String tooltip = profile.getName();
 					playersPanel.setLabelIcon(line,col,image,tooltip);
+					col++;
+				}
+				// profile type
+				{	String aiName = profile.getAiName();
+					String key;
+					if(aiName==null)
+						key = GuiTools.GAME_TOURNAMENT_DESCRIPTION_PLAYERS_DATA_HUMAN;
+					else
+						key = GuiTools.GAME_TOURNAMENT_DESCRIPTION_PLAYERS_DATA_COMPUTER;
+					playersPanel.setLabelKey(line,col,key,true);
 					col++;
 				}
 				// name
