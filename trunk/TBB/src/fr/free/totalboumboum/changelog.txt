@@ -111,10 +111,19 @@
 - Correction		: bug dans le TrajectoryMgr qui empêchait une bombe atterrissant dans des flammes d'exploser normalement  
 
 + beta.001
+- modification : jeu nettoyé de toutes les ressources qui ne sont pas encore utilisées
 - correction	: bug dans la GUI lorsqu'on utilise une résolution carrée : les itemset et initialitem dans la présentation des rounds sont coupés (certains items sont hors-écran)
 - correction	: bug graphique >> les textes des boutons sont coupés
 - correction : bug de gameplay dans SBM1 : le temps de latence des bombes était deux fois trop court
 - modification : dans la GUI, les boutons pas encore implémentés sont désactivés
-- nouvauté : activation et implémentation de l'option quickmatch dans le menu principal, gestion de la cohérence avec l'option tournament
+- nouveauté : activation et implémentation de l'option quickmatch dans le menu principal, gestion de la cohérence avec l'option tournament
 - correction : quelques bugs concernant la taille des différents éléments graphiques dans la GUI
 - nouveauté : les tooltips apparaissent plus rapidement (200 ms)
+
++ beta.002
+- modification : noms des joueurs
+- nouveauté : IA vierge à compléter par les étudiants
+
++ beta.003
+- modification : représentation de la zone de jeu par une matrice dans l'API d'IA (au lieu d'une liste de listes).
+

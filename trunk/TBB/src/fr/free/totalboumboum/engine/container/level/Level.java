@@ -22,7 +22,6 @@ package fr.free.totalboumboum.engine.container.level;
  */
 
 import java.awt.Color;
-import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.FontMetrics;
 import java.awt.Graphics;
@@ -30,12 +29,9 @@ import java.awt.geom.Rectangle2D;
 import java.io.File;
 import java.text.NumberFormat;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.Iterator;
 
 import fr.free.totalboumboum.data.configuration.Configuration;
-import fr.free.totalboumboum.data.configuration.GameConstants;
-import fr.free.totalboumboum.data.statistics.Score;
 import fr.free.totalboumboum.engine.container.bombset.Bombset;
 import fr.free.totalboumboum.engine.container.itemset.Itemset;
 import fr.free.totalboumboum.engine.container.theme.Theme;
@@ -43,14 +39,10 @@ import fr.free.totalboumboum.engine.container.tile.Tile;
 import fr.free.totalboumboum.engine.content.feature.Direction;
 import fr.free.totalboumboum.engine.content.sprite.Sprite;
 import fr.free.totalboumboum.engine.content.sprite.hero.Hero;
-import fr.free.totalboumboum.engine.content.sprite.item.Item;
 import fr.free.totalboumboum.engine.loop.Loop;
-import fr.free.totalboumboum.engine.player.PlayerLocation;
-import fr.free.totalboumboum.game.round.Round;
 import fr.free.totalboumboum.tools.CalculusTools;
 import fr.free.totalboumboum.tools.FileTools;
 import fr.free.totalboumboum.tools.StringTools;
-
 
 public class Level
 {	
@@ -283,15 +275,25 @@ public class Level
 	/////////////////////////////////////////////////////////////////
 	// BORDERS				/////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
+	@SuppressWarnings("unused")
 	private double horizontalBorderX;
+	@SuppressWarnings("unused")
 	private double upBorderY;
+	@SuppressWarnings("unused")
 	private double downBorderY;
+	@SuppressWarnings("unused")
 	private double horizontalBorderHeight;
+	@SuppressWarnings("unused")
 	private double horizontalBorderWidth;
+	@SuppressWarnings("unused")
 	private double verticalBorderY;
+	@SuppressWarnings("unused")
 	private double leftBorderX;
+	@SuppressWarnings("unused")
 	private double rightBorderX;
+	@SuppressWarnings("unused")
 	private double verticalBorderHeight;
+	@SuppressWarnings("unused")
 	private double verticalBorderWidth;
 	
 	public void setBorders(double values[])
