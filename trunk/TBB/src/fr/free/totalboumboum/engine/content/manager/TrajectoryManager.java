@@ -21,21 +21,17 @@ package fr.free.totalboumboum.engine.content.manager;
  * 
  */
 
-import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.Iterator;
-import java.util.Map.Entry;
 
 import fr.free.totalboumboum.data.configuration.Configuration;
 import fr.free.totalboumboum.engine.container.tile.Tile;
 import fr.free.totalboumboum.engine.content.feature.Direction;
 import fr.free.totalboumboum.engine.content.feature.GestureConstants;
 import fr.free.totalboumboum.engine.content.feature.action.AbstractAction;
-import fr.free.totalboumboum.engine.content.feature.action.GeneralAction;
 import fr.free.totalboumboum.engine.content.feature.action.SpecificAction;
-import fr.free.totalboumboum.engine.content.feature.anime.AnimeGesture;
 import fr.free.totalboumboum.engine.content.feature.event.EngineEvent;
 import fr.free.totalboumboum.engine.content.feature.permission.ThirdPermission;
 import fr.free.totalboumboum.engine.content.feature.trajectory.TrajectoryDirection;
@@ -46,8 +42,6 @@ import fr.free.totalboumboum.engine.content.sprite.bomb.Bomb;
 import fr.free.totalboumboum.engine.content.sprite.hero.Hero;
 import fr.free.totalboumboum.engine.loop.Loop;
 import fr.free.totalboumboum.tools.CalculusTools;
-
-
 
 public class TrajectoryManager
 {	// divers

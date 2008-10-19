@@ -21,18 +21,13 @@ package fr.free.totalboumboum.engine.content.manager;
  * 
  */
 
-import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map.Entry;
 
-import fr.free.totalboumboum.engine.content.feature.anime.AnimeGesture;
 import fr.free.totalboumboum.engine.content.feature.event.EngineEvent;
 import fr.free.totalboumboum.engine.content.sprite.Sprite;
-import fr.free.totalboumboum.engine.content.sprite.bomb.Bomb;
-
-
 
 public class DelayManager
 {	public static final String DL_EXPLOSION = "DL_EXPLOSION";

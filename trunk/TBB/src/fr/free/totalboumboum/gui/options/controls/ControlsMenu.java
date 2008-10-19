@@ -23,10 +23,14 @@ package fr.free.totalboumboum.gui.options.controls;
 
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
+import java.io.IOException;
 
 import javax.swing.Box;
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
+import javax.xml.parsers.ParserConfigurationException;
+
+import org.xml.sax.SAXException;
 
 import fr.free.totalboumboum.data.configuration.ConfigurationSaver;
 import fr.free.totalboumboum.data.configuration.GameConstants;
@@ -94,8 +98,31 @@ public class ControlsMenu extends InnerMenuPanel
 			{	ControlSettings controlSettings = controlsData[i].getControlSettings();
 				getConfiguration().getGameConfiguration().putControlSettings(i+1,controlSettings);
 			}
-			ConfigurationSaver.saveControlsSettings();
-			//TODO propager éventuellement au round
+			try
+			{	ConfigurationSaver.saveControlSettings(getConfiguration().getGameConfiguration());
+			}
+			catch (IllegalArgumentException e1)
+			{	e1.printStackTrace();
+			}
+			catch (SecurityException e1)
+			{	e1.printStackTrace();
+			}
+			catch (ParserConfigurationException e1)
+			{	e1.printStackTrace();
+			}
+			catch (SAXException e1)
+			{	e1.printStackTrace();
+			}
+			catch (IOException e1)
+			{	e1.printStackTrace();
+			}
+			catch (IllegalAccessException e1)
+			{	e1.printStackTrace();
+			}
+			catch (NoSuchFieldException e1)
+			{	e1.printStackTrace();
+			}
+//TODO propager éventuellement au round (car il n'y a pas modification mais remplacement, donc si c déjà affecté à un player..
 			replaceWith(parent);
 	    }
 		else if(e.getActionCommand().equals(GuiTools.MENU_OPTIONS_BUTTON_CANCEL))

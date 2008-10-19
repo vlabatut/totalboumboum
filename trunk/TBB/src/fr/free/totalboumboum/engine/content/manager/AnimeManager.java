@@ -24,11 +24,8 @@ package fr.free.totalboumboum.engine.content.manager;
 import java.awt.image.BufferedImage;
 import java.util.Iterator;
 
-import fr.free.totalboumboum.data.configuration.Configuration;
 import fr.free.totalboumboum.data.profile.PredefinedColor;
 import fr.free.totalboumboum.engine.content.feature.Direction;
-import fr.free.totalboumboum.engine.content.feature.GestureConstants;
-import fr.free.totalboumboum.engine.content.feature.ability.AbstractAbility;
 import fr.free.totalboumboum.engine.content.feature.anime.AnimeDirection;
 import fr.free.totalboumboum.engine.content.feature.anime.AnimePack;
 import fr.free.totalboumboum.engine.content.feature.anime.AnimeStep;

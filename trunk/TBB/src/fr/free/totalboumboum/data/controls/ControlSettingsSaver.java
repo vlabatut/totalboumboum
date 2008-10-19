@@ -24,17 +24,17 @@ package fr.free.totalboumboum.data.controls;
 import java.awt.event.KeyEvent;
 import java.io.File;
 import java.io.IOException;
+import java.lang.reflect.Field;
 import java.util.HashMap;
 import java.util.Iterator;
-import java.util.List;
 import java.util.Map.Entry;
 
 import javax.xml.parsers.ParserConfigurationException;
 
-import org.jdom.Document;
 import org.jdom.Element;
 import org.xml.sax.SAXException;
 
+import fr.free.totalboumboum.tools.ClassTools;
 import fr.free.totalboumboum.tools.FileTools;
 import fr.free.totalboumboum.tools.XmlTools;
 
@@ -50,7 +50,7 @@ public class ControlSettingsSaver
 		File schemaFile = new File(schemaFolder+File.separator+FileTools.FILE_CONTROLS+FileTools.EXTENSION_SCHEMA);
 		XmlTools.makeFileFromRoot(dataFile,schemaFile,root);
 	}
-//TODO décomposer en plusieurs fonctions comme avant ?	
+
 	private static Element saveControlElement(ControlSettings controlSettings)
 	{	Element result = new Element(XmlTools.ELT_CONTROLS);
 		HashMap<String,Integer> onEvents = controlSettings.getOnEvents();
@@ -63,53 +63,41 @@ public class ControlSettingsSaver
 			int offKey = controlSettings.getOffKeyFromEvent(event);
 			boolean autofire = controlSettings.isAutofire(event);
 			// main element
+			Element eventElement;
 			{	String autofireText = Boolean.toString(autofire);
-				Element eventElement = new Element(XmlTools.ELT_EVENT);
+				eventElement = new Element(XmlTools.ELT_EVENT);
 				eventElement.setAttribute(XmlTools.ATT_NAME,event);
 				eventElement.setAttribute(XmlTools.ATT_AUTOFIRE,autofireText);
+				result.addContent(eventElement);
 			}
 			// on element
-			{	String onText = ;
+			{	String onText = getKeyName(onKey);
 				Element onElement = new Element(XmlTools.ELT_ON);
 				onElement.setAttribute(XmlTools.ATT_KEY,onText);
+				eventElement.addContent(onElement);
 			}
 			// off element
-			{	String offText = ;
+			{	String offText = getKeyName(offKey);
 				Element offElement = new Element(XmlTools.ELT_OFF);
 				offElement.setAttribute(XmlTools.ATT_KEY,offText);
+				eventElement.addContent(offElement);
 			}
 		}
 		return result;
 	}
     
-    private static void loadEventElement(Element root, ControlSettings result) throws IllegalArgumentException, SecurityException, IllegalAccessException, NoSuchFieldException
-    {	// name
-    	String name = root.getAttribute().getValue();
-    	// autofire
-		String autofStr = root.getAttribute(XmlTools.ATT_AUTOFIRE).getValue();
-		boolean autofire = Boolean.parseBoolean(autofStr);
-		if(autofire)
-			result.addAutofire(name);
-		// on key
-		Element onElt = root.getChild(XmlTools.ELT_ON);
-		if(onElt!=null)
-			loadKeyElement(onElt,name,true,result);
-		// off key
-		Element offElt = root.getChild(XmlTools.ELT_OFF);
-		if(offElt!=null)
-			loadKeyElement(offElt,name,false,result);
-    }	
-    
-    /**
-     * mode : true pour ON et false pour OFF
-     */
-    private static void loadKeyElement(Element root, String name, boolean mode, ControlSettings result) throws IllegalArgumentException, SecurityException, IllegalAccessException, NoSuchFieldException
-    {	// value
-    	String cst = root.getAttribute(XmlTools.ATT_KEY).getValue();
-    	int value = KeyEvent.class.getField(cst).getInt(KeyEvent.class);
-    	if(mode)
-    		result.addOnKey(value, name);
-    	else
-    		result.addOffKey(value, name);
-    }	
+	private static String getKeyName(int key)
+	{	String result = null;
+		try
+		{	Field field = ClassTools.getFieldFromValue(key,KeyEvent.class);
+			result = field.getName();
+		}
+		catch (IllegalArgumentException e)
+		{	e.printStackTrace();
+		}
+		catch (IllegalAccessException e)
+		{	e.printStackTrace();
+		}
+		return result;
+	}
 }

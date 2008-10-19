@@ -33,7 +33,6 @@ import org.xml.sax.SAXException;
 import java.util.Map.Entry;
 
 import fr.free.totalboumboum.data.controls.ControlSettings;
-import fr.free.totalboumboum.data.controls.ControlSettingsLoader;
 import fr.free.totalboumboum.data.controls.ControlSettingsSaver;
 
 public class ConfigurationSaver
@@ -43,7 +42,7 @@ public class ConfigurationSaver
 		
 	}
 
-	public static void saveControlSettings(Configuration configuration)
+	public static void saveControlSettings(Configuration configuration) throws IllegalArgumentException, SecurityException, ParserConfigurationException, SAXException, IOException, IllegalAccessException, NoSuchFieldException
 	{	NumberFormat nf = NumberFormat.getInstance();
 		nf.setMinimumIntegerDigits(2);
 		HashMap<Integer,ControlSettings> controlSettings = configuration.getControlSettings();

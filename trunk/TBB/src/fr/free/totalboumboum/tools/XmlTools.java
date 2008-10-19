@@ -35,6 +35,7 @@ import javax.xml.validation.SchemaFactory;
 
 import org.jdom.Document;
 import org.jdom.Element;
+import org.jdom.Namespace;
 import org.jdom.input.DOMBuilder;
 import org.jdom.output.Format;
 import org.jdom.output.XMLOutputter;
@@ -324,12 +325,21 @@ public class XmlTools
 	}
 
 	public static void makeFileFromRoot(File dataFile, File schemaFile, Element root) throws IOException
-	{	
-dataFile = new File("text.xml");		
-		// open file stream
+	{	// open file stream
 		FileOutputStream out = new FileOutputStream(dataFile);
 		// create document
-		Document document = new Document(root); 		
+		Document document = new Document(root);
+		// schema
+		String schemaPath = schemaFile.getPath();
+		File racine = new File(FileTools.getResourcesPath());
+		File tempFile = new File(dataFile.getPath());
+		while(!tempFile.equals(racine))
+		{	tempFile = tempFile.getParentFile();
+			schemaPath = ".."+File.separator+schemaPath;
+		}
+		Namespace sch = Namespace.getNamespace("xsi","http://www.w3.org/2001/XMLSchema-instance");
+		root.addNamespaceDeclaration(sch);
+		root.setAttribute("noNamespaceSchemaLocation",schemaPath,sch);
 		// define output format
 		Format format = Format.getPrettyFormat();
 		format.setIndent("\t");

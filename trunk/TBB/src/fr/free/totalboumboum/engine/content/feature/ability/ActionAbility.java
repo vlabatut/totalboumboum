@@ -21,10 +21,8 @@ package fr.free.totalboumboum.engine.content.feature.ability;
  * 
  */
 
-import fr.free.totalboumboum.data.configuration.Configuration;
 import fr.free.totalboumboum.engine.container.level.Level;
 import fr.free.totalboumboum.engine.content.feature.action.GeneralAction;
-import fr.free.totalboumboum.engine.loop.Loop;
 
 public class ActionAbility extends AbstractAbility
 {	

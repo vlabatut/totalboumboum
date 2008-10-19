@@ -21,10 +21,8 @@ package fr.free.totalboumboum.engine.content.manager;
  * 
  */
 
-import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 import java.util.Iterator;
-import java.util.Map.Entry;
 
 import fr.free.totalboumboum.data.configuration.Configuration;
 import fr.free.totalboumboum.engine.container.level.Level;
@@ -37,16 +35,12 @@ import fr.free.totalboumboum.engine.content.feature.ability.StateAbility;
 import fr.free.totalboumboum.engine.content.feature.action.AbstractAction;
 import fr.free.totalboumboum.engine.content.feature.action.GeneralAction;
 import fr.free.totalboumboum.engine.content.feature.action.SpecificAction;
-import fr.free.totalboumboum.engine.content.feature.anime.AnimeGesture;
 import fr.free.totalboumboum.engine.content.feature.permission.ActorPermission;
 import fr.free.totalboumboum.engine.content.feature.permission.PermissionPack;
 import fr.free.totalboumboum.engine.content.feature.permission.StateModulation;
 import fr.free.totalboumboum.engine.content.feature.permission.TargetPermission;
 import fr.free.totalboumboum.engine.content.feature.permission.ThirdPermission;
 import fr.free.totalboumboum.engine.content.sprite.Sprite;
-import fr.free.totalboumboum.engine.content.sprite.item.Item;
-import fr.free.totalboumboum.engine.loop.Loop;
-
 
 public class PermissionManager
 {	private Sprite sprite;
