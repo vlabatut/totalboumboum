@@ -33,14 +33,11 @@ import org.jdom.Attribute;
 import org.jdom.Element;
 import org.xml.sax.SAXException;
 
-import fr.free.totalboumboum.data.configuration.Configuration;
 import fr.free.totalboumboum.engine.container.level.Level;
 import fr.free.totalboumboum.engine.content.feature.action.GeneralAction;
 import fr.free.totalboumboum.engine.content.feature.action.GeneralActionLoader;
-import fr.free.totalboumboum.engine.loop.Loop;
 import fr.free.totalboumboum.tools.FileTools;
 import fr.free.totalboumboum.tools.XmlTools;
-
 
 public class AbilityLoader
 {	

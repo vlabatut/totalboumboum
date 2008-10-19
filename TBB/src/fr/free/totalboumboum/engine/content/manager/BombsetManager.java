@@ -21,12 +21,9 @@ package fr.free.totalboumboum.engine.content.manager;
  * 
  */
 
-import java.awt.image.BufferedImage;
 import java.util.Iterator;
 import java.util.LinkedList;
-import java.util.Map.Entry;
 
-import fr.free.totalboumboum.data.configuration.Configuration;
 import fr.free.totalboumboum.data.statistics.StatisticAction;
 import fr.free.totalboumboum.data.statistics.StatisticEvent;
 import fr.free.totalboumboum.engine.container.bombset.Bombset;
@@ -35,14 +32,11 @@ import fr.free.totalboumboum.engine.content.feature.Direction;
 import fr.free.totalboumboum.engine.content.feature.ability.ActionAbility;
 import fr.free.totalboumboum.engine.content.feature.ability.StateAbility;
 import fr.free.totalboumboum.engine.content.feature.action.AbstractAction;
-import fr.free.totalboumboum.engine.content.feature.action.GeneralAction;
 import fr.free.totalboumboum.engine.content.feature.action.SpecificAction;
-import fr.free.totalboumboum.engine.content.feature.anime.AnimeGesture;
 import fr.free.totalboumboum.engine.content.feature.event.ActionEvent;
 import fr.free.totalboumboum.engine.content.sprite.Sprite;
 import fr.free.totalboumboum.engine.content.sprite.bomb.Bomb;
 import fr.free.totalboumboum.engine.loop.Loop;
-
 
 public class BombsetManager
 {	protected Bombset bombset;

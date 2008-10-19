@@ -21,20 +21,15 @@ package fr.free.totalboumboum.engine.content.manager;
  * 
  */
 
-import java.awt.image.BufferedImage;
+import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.LinkedList;
-import java.util.Map.Entry;
 
-import fr.free.totalboumboum.data.configuration.Configuration;
 import fr.free.totalboumboum.data.controls.ControlSettings;
-import fr.free.totalboumboum.engine.content.feature.anime.AnimeGesture;
 import fr.free.totalboumboum.engine.content.feature.event.ControlEvent;
 import fr.free.totalboumboum.engine.content.sprite.Sprite;
 import fr.free.totalboumboum.engine.control.ControlCode;
 import fr.free.totalboumboum.engine.loop.Loop;
-
-
 
 public class ControlManager
 {	/** managed sprite  */
@@ -120,10 +115,14 @@ public class ControlManager
 		LinkedList<ControlEvent> eventsList = new LinkedList<ControlEvent>();
 		for(int j=currentControls.size()-1;j>=0;j--)
 		{	int keyCode = currentControls.get(j);
-			String eventName = controlSettings.getEventFromKey(keyCode);
-			if(controlSettings.isAutofire(eventName))
-			{	ControlEvent event = new ControlEvent(eventName,true);
-				eventsList.offer(event);
+			ArrayList<String> eventNames = controlSettings.getEventsFromOnKey(keyCode);
+			Iterator<String> it = eventNames.iterator();
+			while(it.hasNext())
+			{	String eventName = it.next();
+				if(controlSettings.isAutofire(eventName))
+				{	ControlEvent event = new ControlEvent(eventName,true);
+					eventsList.offer(event);
+				}
 			}
 		}
 		
@@ -131,22 +130,31 @@ public class ControlManager
 		while(controlCodes.size()>0)
 		{	ControlCode cc = controlCodes.poll();
 			int keyCode = cc.getKeyCode();
-			String eventName = controlSettings.getEventFromKey(keyCode);
 			// if a key is pressed : new control in currentControls & new event in eventsList
 			if(cc.getMode())
-			{	if(!currentControls.contains(keyCode))
+			{	ArrayList<String> eventNames = controlSettings.getEventsFromOnKey(keyCode);
+				if(!currentControls.contains(keyCode))
 					currentControls.offer(keyCode);
-				ControlEvent event = new ControlEvent(eventName,true);
-				eventsList.offer(event);
+				Iterator<String> it = eventNames.iterator();
+				while(it.hasNext())
+				{	String eventName = it.next();
+					ControlEvent event = new ControlEvent(eventName,true);
+					eventsList.offer(event);
+				}
 			}
 			// if a key is released : control removed from currentControls & new event in eventsList
 			else
-			{	if(currentControls.contains(keyCode))
+			{	ArrayList<String> eventNames = controlSettings.getEventsFromOffKey(keyCode);
+				if(currentControls.contains(keyCode))
 					currentControls.remove(new Integer(keyCode));
-				ControlEvent event = new ControlEvent(eventName,true);
-				removeEvent(eventsList,event);
-				event = new ControlEvent(eventName,false);
-				eventsList.offer(event);
+				Iterator<String> it = eventNames.iterator();
+				while(it.hasNext())
+				{	String eventName = it.next();
+					ControlEvent event = new ControlEvent(eventName,true);
+					removeEvent(eventsList,event);
+					event = new ControlEvent(eventName,false);
+					eventsList.offer(event);
+				}
 			}		
 		}
 		

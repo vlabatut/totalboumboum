@@ -644,6 +644,7 @@ public class Launcher
 	 * - modification : correction de quelques bugs dans l'API des IA
 	 * - modification : réorganisation de la gestion des controles
 	 * - nouveauté : écran de configuration des controles
+	 * - nouveauté : enregistrement de la modification des controles
 	 * 
 	 * *******************************************************
 	 * *********************** A FAIRE ***********************
