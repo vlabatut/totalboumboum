@@ -40,19 +40,6 @@ import fr.free.totalboumboum.tools.ImageTools;
 public class UntitledSubPanelTable extends SubPanel
 {	private static final long serialVersionUID = 1L;
 
-	private int colGroups = 0;
-	private int colSubs = 0;
-	private int lines = 0;
-	private Font headerFont;
-	private Font lineFont;
-	private boolean header;
-	
-	private int headerHeight;
-	private int lineHeight;
-	private int lineFontSize;
-	private int headerFontSize;
-	
-
 	public UntitledSubPanelTable(int width, int height, int columns, int lines, boolean header)
 	{	this(width,height,1,columns,lines,header);
 	}
@@ -95,36 +82,104 @@ public class UntitledSubPanelTable extends SubPanel
 		int margin = GuiTools.subPanelMargin;
 		SpringUtilities.makeCompactGrid(this,lines,getColumnCount(),margin,margin,margin,margin);		
 	}
+
+	/////////////////////////////////////////////////////////////////
+	// SIZE				/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	private Font headerFont;
+	private Font lineFont;
+	private boolean header;
+	private int headerHeight;
+	private int lineHeight;
+	private int lineFontSize;
+	private int headerFontSize;
+
+	public int getLineFontSize()
+	{	return lineFontSize;	
+	}
+	public int getHeaderFontSize()
+	{	return headerFontSize;	
+	}
 	
 	/////////////////////////////////////////////////////////////////
 	// COLUMNS			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
+	private int colGroups = 0;
+	private int colSubs = 0;
 	
-	public void setSubColumnsWidth(int colSub, int width)
-	{	int start = 0;
+	public void setSubColumnsMinWidth(int colSub, int width)
+	{	setSubColumnsWidth(colSub,width,0);		
+	}
+	public void setSubColumnsPreferredWidth(int colSub, int width)
+	{	setSubColumnsWidth(colSub,width,1);		
+	}
+	public void setSubColumnsMaxWidth(int colSub, int width)
+	{	setSubColumnsWidth(colSub,width,2);		
+	}
+	private void setSubColumnsWidth(int colSub, int width, int mode)
+	{	Dimension headerDim = new Dimension(width,headerHeight);
+		Dimension lineDim = new Dimension(width,lineHeight);
+		int start = 0;
 		for(int colGroup=0;colGroup<colGroups;colGroup++)
 		{	if(header)
 			{	start = 1;
-				Dimension dim = new Dimension(width,headerHeight);
 				JLabel label = getLabel(0,colGroup,colSub);
-				label.setMaximumSize(dim);
+				switch(mode)
+				{	case 0:
+						label.setMinimumSize(headerDim);
+						break;
+					case 1:
+						label.setPreferredSize(headerDim);
+						break;
+					case 2:
+						label.setMaximumSize(headerDim);
+						break;
+				}
 			}
 			for(int line=start;line<lines;line++)
-			{	Dimension dim = new Dimension(width,lineHeight);
-				JLabel label = getLabel(line,colGroup,colSub);
-				label.setMaximumSize(dim);
+			{	JLabel label = getLabel(line,colGroup,colSub);
+				switch(mode)
+				{	case 0:
+						label.setMinimumSize(lineDim);
+						break;
+					case 1:
+						label.setPreferredSize(lineDim);
+						break;
+					case 2:
+						label.setMaximumSize(lineDim);
+						break;
+				}
 			}
 		}
+	}	
+
+	public void unsetSubColumnsMinWidth(int colSub)
+	{	unsetSubColumnsWidth(colSub,0);		
 	}
-	
-	public void unsetsubColumnsWidth(int colSub)
+	public void unsetSubColumnsPreferredWidth(int colSub)
+	{	unsetSubColumnsWidth(colSub,1);		
+	}
+	public void unsetSubColumnsMaxWidth(int colSub)
+	{	unsetSubColumnsWidth(colSub,2);		
+	}
+	private void unsetSubColumnsWidth(int colSub, int mode)
 	{	for(int colGroup=0;colGroup<colGroups;colGroup++)
 			for(int line=0;line<lines;line++)
 			{	JLabel label = getLabel(line,colGroup,colSub);
-				label.setMaximumSize(null);
+				switch(mode)
+				{	case 0:
+						label.setMinimumSize(null);
+						break;
+					case 1:
+						label.setPreferredSize(null);
+						break;
+					case 2:
+						label.setMaximumSize(null);
+						break;
+				}
 			}
 	}
-	
+
 	public ArrayList<JLabel> getColumn(int col)
 	{	return getSubColumn(0,col);		
 	}
@@ -252,6 +307,7 @@ public class UntitledSubPanelTable extends SubPanel
 	/////////////////////////////////////////////////////////////////
 	// LINES			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
+	private int lines = 0;
 
 	public ArrayList<JLabel> getLine(int index)
 	{	ArrayList<JLabel> result = new ArrayList<JLabel>();

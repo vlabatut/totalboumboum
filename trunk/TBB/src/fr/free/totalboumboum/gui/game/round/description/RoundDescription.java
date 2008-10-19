@@ -265,7 +265,7 @@ public class RoundDescription extends EntitledDataPanel
 		EntitledSubPanelTable itemsetPanel = new EntitledSubPanelTable(width,height,colGroups,colSubs,lines);
 		String titleKey = GuiTools.GAME_ROUND_DESCRIPTION_ITEMSET_TITLE;
 		itemsetPanel.setTitleKey(titleKey,true);
-		itemsetPanel.getTable().setSubColumnsWidth(1,Integer.MAX_VALUE);
+		itemsetPanel.getTable().setSubColumnsMaxWidth(1,Integer.MAX_VALUE);
 		
 		// data
 		NumberFormat nf = NumberFormat.getInstance();
@@ -324,7 +324,7 @@ public class RoundDescription extends EntitledDataPanel
 		EntitledSubPanelTable miscPanel = new EntitledSubPanelTable(width,height,colGroups,colSubs,lines);
 		String titleKey = GuiTools.GAME_ROUND_DESCRIPTION_MISC_TITLE;
 		miscPanel.setTitleKey(titleKey,true);
-		miscPanel.getTable().setSubColumnsWidth(1,Integer.MAX_VALUE);
+		miscPanel.getTable().setSubColumnsMaxWidth(1,Integer.MAX_VALUE);
 		
 		// data
 		String keys[] = 
@@ -388,7 +388,7 @@ public class RoundDescription extends EntitledDataPanel
 		EntitledSubPanelTable itemsPanel = new EntitledSubPanelTable(width,height,colGroups,colSubs,lines);
 		String titleKey = GuiTools.GAME_ROUND_DESCRIPTION_INITIALITEMS_TITLE;
 		itemsPanel.setTitleKey(titleKey,true);
-		itemsPanel.getTable().setSubColumnsWidth(1,Integer.MAX_VALUE);
+		itemsPanel.getTable().setSubColumnsMaxWidth(1,Integer.MAX_VALUE);
 		
 		// data
 		NumberFormat nf = NumberFormat.getInstance();
@@ -446,7 +446,7 @@ public class RoundDescription extends EntitledDataPanel
 		EntitledSubPanelTable pointsPanel = new EntitledSubPanelTable(width,height,colGroups,colSubs,lines);
 		String titleKey = prefix+"Title";
 		pointsPanel.setTitleKey(titleKey,true);
-		pointsPanel.getTable().setSubColumnsWidth(1,Integer.MAX_VALUE);
+		pointsPanel.getTable().setSubColumnsMaxWidth(1,Integer.MAX_VALUE);
 		
 		Iterator<ArrayList<Object>> dt = data.iterator();
 		Iterator<ArrayList<String>> tt = tooltips.iterator();
@@ -729,7 +729,7 @@ public class RoundDescription extends EntitledDataPanel
 		EntitledSubPanelTable limitsPanel = new EntitledSubPanelTable(width,height,colGroups,colSubs,lines);
 		String titleKey = prefix+"Title";
 		limitsPanel.setTitleKey(titleKey,true);
-		limitsPanel.getTable().setSubColumnsWidth(1,Integer.MAX_VALUE);
+		limitsPanel.getTable().setSubColumnsMaxWidth(1,Integer.MAX_VALUE);
 		
 		// data
 		NumberFormat nf = NumberFormat.getInstance();

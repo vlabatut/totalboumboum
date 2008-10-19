@@ -22,7 +22,6 @@ package fr.free.totalboumboum;
  */
 
 import java.awt.AlphaComposite;
-import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
@@ -645,14 +644,13 @@ public class Launcher
 	 * - modification : réorganisation de la gestion des controles
 	 * - nouveauté : écran de configuration des controles
 	 * - nouveauté : enregistrement de la modification des controles
+	 * - modification : mise à jour de la police de caractères du jeu
+	 * - nouveauté : affichage du type de joueur dans la présentation des tournois et matches
+	 * - nouveauté : possibilité de choisir les commandes des joueurs dans la présentation des matches
 	 * 
 	 * *******************************************************
 	 * *********************** A FAIRE ***********************
 	 * *******************************************************
-	 * 
-	 * CONTROLES:
-	 * 		- dans les options, on peut définir les controles de chaque joueur (max?)
-	 * 		- dans le jeu, à chaque match, chaque joueur doit choisir quels controles il va utiliser (qui est player 1, player 2 etc)
 	 * 
 	 * - utiliser les tooltips pour afficher les infos trop longues : calcul de points, nombre à virgule dans la colonne des points (décimales cachées), etc.
 	 * - pb de dimension de l'image de fond en fonction de la résolution... (zones pas peintes)
@@ -704,14 +702,4 @@ public class Launcher
 	 *  - intérêt : tout ça permet d'implémenter le bonus à celui qui tue tout le monde en survival, par opposition à une victoire temporelle qui rapporterait donc moins de points
 	 *  - LA NOTION DE PLAYMODE EST A SUPPRIMER 
 	 */
-	
-	/**
-	 * TODO API IA
-	 * utiliser une matrice innacessible dans la zone
-	 * donner seulement une méthode permettant d'accéder à une case à la fois
-	 * vérifier que les listes ne sont pas recréées à chaque màj, mais seulement modifiées
-	 * (elles doivent être final, histoire d'être sur)
-	 */
-	
-
 }

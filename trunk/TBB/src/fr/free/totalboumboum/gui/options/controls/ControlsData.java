@@ -85,7 +85,7 @@ public class ControlsData extends EntitledDataPanel implements MouseListener,Key
 				}
 				keysPanel.setLineKeysSimple(0, keys, imageFlags);
 				//keysPanel.setColumnWidth(0,Integer.MAX_VALUE);
-				keysPanel.setSubColumnsWidth(1,Integer.MAX_VALUE);
+				keysPanel.setSubColumnsMaxWidth(1,Integer.MAX_VALUE);
 			}			
 			
 			// data
@@ -185,7 +185,9 @@ public class ControlsData extends EntitledDataPanel implements MouseListener,Key
 		int[] pos = keysPanel.getLabelPositionSimple(label);
 		// key
 		if(pos[1]==1)
-		{	selectedRow = pos[0];
+		{	if(selectedRow!=-1)
+				keysPanel.setLabelBackground(selectedRow,1,GuiTools.COLOR_TABLE_NEUTRAL_BACKGROUND);
+			selectedRow = pos[0];
 			keysPanel.setLabelBackground(pos[0],pos[1],GuiTools.COLOR_TABLE_SELECTED_BACKGROUND);
 			keysPanel.requestFocusInWindow();
 		}

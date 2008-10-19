@@ -126,6 +126,7 @@
 				<group name="Players">
 					<group name="Header">
 						<text name="Name" value="Nom"  tooltip="Nom du joueur" />
+						<text name="Profile" value="Humain/Ordinateur"  tooltip="Joueur controlé par un humain ou un ordinateur" />
 						<text name="Rank" value="n°"  tooltip="Classement du joueur dans les statistiques générales du jeu (avant ce tournoi)" />
 					</group>
 					<group name="Data">
@@ -177,6 +178,7 @@
 					<text name="Name" value="Nom"  tooltip="Nom du joueur" />
 					<text name="Paintings" value="Peinture"  tooltip="Nombre total de cases peintes au cours du tournoi" />
 					<text name="Points" value="Points"  tooltip="Nombre de points marqués pour ce tournoi" />
+					<text name="Profile" value="Humain/Ordinateur"  tooltip="Joueur controlé par un humain ou un ordinateur" />
 					<text name="Time" value="Temps"  tooltip="Nombre total cumulé au cours du tournoi" />
 					<text name="Total" value="Total"  tooltip="Nombre total de points marqués au cours des rencontres" />
 				</group>
@@ -193,8 +195,6 @@
 				</group>
 			</group>
 		</group>
-
-	
 
 <!-- MATCH PANEL -->
 		<group name="Match">
@@ -238,12 +238,16 @@
 				
 				<group name="Players">
 					<group name="Header">
-						<text name="Name" value="Nom"  tooltip="Name of the player" />
+						<text name="Controls" value="Commandes"  tooltip="Commandes du joueur" />
+						<text name="Name" value="Nom"  tooltip="Nom du joueur" />
+						<text name="Profile" value="Humain/Ordinateur"  tooltip="Joueur controlé par un humain ou un ordinateur" />
 						<text name="Rank" value="n°"  tooltip="Classement du joueur dans le tournoi, avant ce match" />
 					</group>
 					<group name="Data">
 						<text name="Computer" value="Ordinateur"  tooltip="Joueur contrôlé par l'ordinateur" />
+						<text name="Controls" value="n°"  tooltip="Le joueur utilise les commandes numéro" />
 						<text name="Human" value="Humain"  tooltip="Joueur contrôlé par un être humain" />
+						<text name="Nocontrols" value="-"  tooltip="Le joueur n'utilise pas de commandes" />
 					</group>
 				</group>
 				
@@ -289,6 +293,7 @@
 					<text name="Name" value="Nom"  tooltip="Nom du joueur" />
 					<text name="Paintings" value="Peinture"  tooltip="Nombre total de cases peintes au cours de cette rencontre" />
 					<text name="Points" value="Points"  tooltip="Nombre total de points marqués pour cette rencontre" />
+					<text name="Profile" value="Humain/Ordinateur"  tooltip="Joueur controlé par un humain ou un ordinateur" />
 					<text name="Round" value="M"  tooltip="Nombre de points marqués pour la manche numéro " />
 					<text name="Time" value="Temps"  tooltip="Temps total cumulé pour cette rencontre" />
 					<text name="Total" value="Total"  tooltip="Nombre total de points marqués pour toutes les manches de cette rencontre" />
@@ -413,6 +418,7 @@
 					<text name="Name" value="Nom"  tooltip="Nom du joueur" />
 					<text name="Paintings" value="Peinture"  tooltip="Nombre total de cases peintes au cours de cette manche" />
 					<text name="Points" value="Points"  tooltip="Nombre de points marqués pour cette manche" />
+					<text name="Profile" value="Humain/Ordinateur"  tooltip="Joueur controlé par un humain ou un ordinateur" />
 					<text name="Time" value="Temps"  tooltip="Temps de jeu pour cette manche" />
 				</group>
 				<group name="Data">
