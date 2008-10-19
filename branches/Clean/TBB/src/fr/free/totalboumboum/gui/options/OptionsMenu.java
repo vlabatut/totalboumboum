@@ -40,7 +40,6 @@ public class OptionsMenu extends SimpleMenuPanel
 	
 	private BufferedImage image;
 
-	@SuppressWarnings("unused")
 	private JButton buttonControls;
 	private JButton buttonGameplay;
 	private JButton buttonVideo;

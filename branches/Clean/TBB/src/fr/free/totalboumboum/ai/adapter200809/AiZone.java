@@ -86,16 +86,9 @@ public class AiZone
 	 */
 	void finish()
 	{	// matrix
-		Iterator<ArrayList<AiTile>> it1 = lines.iterator();
-		while(it1.hasNext())
-		{	ArrayList<AiTile> temp1 = it1.next();
-			Iterator<AiTile> it2 = temp1.iterator();
-			while(it2.hasNext())
-			{	AiTile temp2 = it2.next();
-				temp2.finish();
-			}
-		}
-		lines.clear();
+		for(int line=0;line<height;line++)
+			for(int col=0;col<width;col++)
+				matrix[line][col].finish();
 		// sprites
 		blocks.clear();
 		bombs.clear();
@@ -122,7 +115,7 @@ public class AiZone
 	// MATRIX			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	/** matrice représentant la zone et tous les sprites qu'elle contient */
-	private final ArrayList<ArrayList<AiTile>> lines = new ArrayList<ArrayList<AiTile>>();
+	private AiTile[][] matrix;
 	/** hauteur totale de la zone de jeu exprimée en cases (ie: nombre de lignes) */
 	private int height;
 	/** largeur totale de la zone de jeu exprimée en cases (ie: nombre de colonnes) */
@@ -132,17 +125,16 @@ public class AiZone
 	 * initialise cette représentation de la zone en fonction du niveau passé en paramètre
 	 */
 	private void initMatrix()
-	{	Tile[][] matrix = level.getMatrix();
+	{	Tile[][] m = level.getMatrix();
 		height = level.getGlobalHeight();
 		width = level.getGlobalWidth();
+		matrix = new AiTile[height][width];
 		for(int lineIndex=0;lineIndex<height;lineIndex++)
-		{	ArrayList<AiTile> line = new ArrayList<AiTile>();
-			for(int colIndex=0;colIndex<width;colIndex++)
-			{	Tile tile = matrix[lineIndex][colIndex];
+		{	for(int colIndex=0;colIndex<width;colIndex++)
+			{	Tile tile = m[lineIndex][colIndex];
 				AiTile aiTile = new AiTile(tile,this);
-				line.add(aiTile);
+				matrix[lineIndex][colIndex] = aiTile;
 			}
-			lines.add(line);
 		}
 	}
 	
@@ -158,15 +150,9 @@ public class AiZone
 		uncheckAll(heroes);
 		uncheckAll(items);
 		// met à jour chaque case et sprite 
-		Iterator<ArrayList<AiTile>> it1 = lines.iterator();
-		while(it1.hasNext())
-		{	ArrayList<AiTile> temp1 = it1.next();
-			Iterator<AiTile> it2 = temp1.iterator();
-			while(it2.hasNext())
-			{	AiTile temp2 = it2.next();
-				temp2.update();
-			}
-		}
+		for(int line=0;line<height;line++)
+			for(int col=0;col<width;col++)
+				matrix[line][col].update();
 		// supprime les sprites non-marqués
 		removeUnchecked(blocks);
 		removeUnchecked(bombs);
@@ -200,63 +186,15 @@ public class AiZone
 	
 	/**
 	 * renvoie la case située dans la zone à la position passée en paramètre.
-	 * Si la case n'existe pas, la valeur null est renvoyée.
-	 * <p>
-	 * ATTENTION : cette méthode est définie pour un usage ponctuel (accès à
-	 * une seule case). Si vous effectuez un traitement itératif ou récursif sur 
-	 * un grand nombre de cases (par exemple : l'ensemble de la zone), il sera 
-	 * plus efficace et surtout plus rapide d'utiliser directement un Iterator 
-	 * obtenu avec la méthode getLines ou getLine, plutôt que de faire de nombreux 
-	 * appels à getTile.
 	 *   
 	 *  @param	line	numéro de la ligne contenant la case à renvoyer
 	 *  @param	col	numéro de la colonne contenant la case à renvoyer
 	 *  @return	case située aux coordonnées spécifiées en paramètres
 	 */
 	public AiTile getTile(int line, int col)
-	{	AiTile result = null;
-		ArrayList<AiTile> collec = lines.get(line);
-		result = collec.get(col);
-		return result;
+	{	return matrix[line][col];
 	}
 	
-	/**
-	 * renvoie la ligne de la zone de jeu dont le numéro est passé en paramètre.
-	 * Cette ligne est une liste des cases qui la composent. Si la ligne n'existe pas,
-	 * la valeur null est renvoyée.
-	 * <p>
-	 * ATTENTION: cette méthode est définie pour un usage ponctuel (accès à
-	 * une seule ligne et à ses cases). Si vous effectuez un traitement itératif ou 
-	 * récursif sur un grand nombre de cases (par exemple : l'ensemble de la zone), 
-	 * il sera plus efficace et surtout plus rapide d'utiliser directement un Iterator 
-	 * obtenu avec la méthode getLines, plutôt que de faire de nombreux appels à getLine.
-	 * 
-	 * @param line	numéro de la ligne de cases désirée
-	 * @return	renvoie la ligne demandée
-	 */
-	public Collection<AiTile> getLine(int line)
-	{	Collection<AiTile> result = Collections.unmodifiableCollection(lines.get(line));
-		return result;	
-	}
-	
-	/**
-	 * renvoie la liste des lignes composant la zone de jeu. Chaque ligne
-	 * est elle même une liste de cases.
-	 * 
-	 * @return	renvoie la liste de toutes les lignes de cases constituant la zone
-	 */
-	public Collection<Collection<AiTile>> getLines()
-	{	Collection<Collection<AiTile>> result = new ArrayList<Collection<AiTile>>();
-		Iterator<ArrayList<AiTile>> it = lines.iterator();
-		while(it.hasNext())
-		{	Collection<AiTile> line = it.next();
-			line = Collections.unmodifiableCollection(line);
-			result.add(line);
-		}
-		result = Collections.unmodifiableCollection(result);
-		return result;
-	}
-
 	/**
 	 * renvoie le voisin de la case passée en paramètre, situé dans la direction
 	 * passée en paramètre.
