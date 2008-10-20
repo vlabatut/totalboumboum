@@ -1,4 +1,4 @@
-package fr.free.totalboumboum.data.controls;
+package fr.free.totalboumboum.data.configuration.controls;
 
 import java.util.HashMap;
 

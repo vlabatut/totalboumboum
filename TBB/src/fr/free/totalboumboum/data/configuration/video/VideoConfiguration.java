@@ -1,4 +1,4 @@
-package fr.free.totalboumboum.data.video;
+package fr.free.totalboumboum.data.configuration.video;
 
 import java.awt.Color;
 import java.awt.Dimension;

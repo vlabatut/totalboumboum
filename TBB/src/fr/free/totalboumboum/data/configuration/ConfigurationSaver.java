@@ -32,8 +32,8 @@ import org.xml.sax.SAXException;
 
 import java.util.Map.Entry;
 
-import fr.free.totalboumboum.data.controls.ControlSettings;
-import fr.free.totalboumboum.data.controls.ControlSettingsSaver;
+import fr.free.totalboumboum.data.configuration.controls.ControlSettings;
+import fr.free.totalboumboum.data.configuration.controls.ControlSettingsSaver;
 
 public class ConfigurationSaver
 {

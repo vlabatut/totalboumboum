@@ -32,8 +32,8 @@ import javax.xml.parsers.ParserConfigurationException;
 import org.jdom.Element;
 import org.xml.sax.SAXException;
 
-import fr.free.totalboumboum.data.controls.ControlSettings;
-import fr.free.totalboumboum.data.controls.ControlSettingsLoader;
+import fr.free.totalboumboum.data.configuration.controls.ControlSettings;
+import fr.free.totalboumboum.data.configuration.controls.ControlSettingsLoader;
 import fr.free.totalboumboum.tools.FileTools;
 import fr.free.totalboumboum.tools.XmlTools;
 
