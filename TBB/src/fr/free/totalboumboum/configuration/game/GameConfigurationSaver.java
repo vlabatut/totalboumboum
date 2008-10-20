@@ -34,7 +34,7 @@ import fr.free.totalboumboum.tools.XmlTools;
 
 public class GameConfigurationSaver
 {	
-	public static void saveEngineConfiguration(GameConfiguration gameConfiguration) throws ParserConfigurationException, SAXException, IOException
+	public static void saveGameConfiguration(GameConfiguration gameConfiguration) throws ParserConfigurationException, SAXException, IOException
 	{	// build document
 		Element root = saveGameElement(gameConfiguration);	
 		// save file
