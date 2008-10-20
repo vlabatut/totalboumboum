@@ -35,8 +35,6 @@ import fr.free.totalboumboum.engine.player.PlayerLocation;
 import fr.free.totalboumboum.tools.FileTools;
 import fr.free.totalboumboum.tools.XmlTools;
 
-
-
 public class PlayersLoader
 {	
     public static Players loadPlayers(String folder) throws ParserConfigurationException, SAXException, IOException
@@ -82,7 +80,8 @@ public class PlayersLoader
     	return result;
     }
     
-    private static void loadLocationsElement(Element root, Players result)
+    @SuppressWarnings("unchecked")
+	private static void loadLocationsElement(Element root, Players result)
     {	List<Element> elements = root.getChildren(XmlTools.ELT_CASE);
 		Iterator<Element> i = elements.iterator();
 		while(i.hasNext())
@@ -91,6 +90,7 @@ public class PlayersLoader
 		}
     }
     
+    @SuppressWarnings("unchecked")
     private static void loadCaseElement(Element root, Players result)
     {	String valStr = root.getAttribute(XmlTools.ATT_PLAYERS).getValue().trim();
 		int value = Integer.valueOf(valStr);
@@ -120,6 +120,7 @@ public class PlayersLoader
 		result.setLine(line);
     }
     
+    @SuppressWarnings("unchecked")
     private static void loadItemsElement(Element root, Players result)
     {	List<Element> elements = root.getChildren(XmlTools.ELT_ITEM);
 		Iterator<Element> i = elements.iterator();

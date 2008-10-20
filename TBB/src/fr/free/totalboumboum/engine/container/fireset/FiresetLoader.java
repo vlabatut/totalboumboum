@@ -23,7 +23,6 @@ package fr.free.totalboumboum.engine.container.fireset;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
@@ -33,14 +32,11 @@ import org.jdom.Attribute;
 import org.jdom.Element;
 import org.xml.sax.SAXException;
 
-import fr.free.totalboumboum.data.configuration.Configuration;
 import fr.free.totalboumboum.engine.container.level.Level;
 import fr.free.totalboumboum.engine.content.sprite.fire.FireFactory;
 import fr.free.totalboumboum.engine.content.sprite.fire.FireFactoryLoader;
-import fr.free.totalboumboum.engine.loop.Loop;
 import fr.free.totalboumboum.tools.FileTools;
 import fr.free.totalboumboum.tools.XmlTools;
-
 
 public class FiresetLoader
 {	
@@ -58,6 +54,7 @@ public class FiresetLoader
 		return result;
 	}
 	
+    @SuppressWarnings("unchecked")
     private static Fireset loadFiresetElement(String folder, Element root, Level level) throws ParserConfigurationException, SAXException, IOException, ClassNotFoundException
     {	Fireset result = new Fireset();
 		// name

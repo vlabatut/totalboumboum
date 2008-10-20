@@ -28,8 +28,6 @@ import fr.free.totalboumboum.engine.content.feature.ability.StateAbility;
 import fr.free.totalboumboum.engine.content.sprite.Sprite;
 import fr.free.totalboumboum.engine.content.sprite.bomb.Bomb;
 import fr.free.totalboumboum.engine.content.sprite.bomb.BombFactory;
-import fr.free.totalboumboum.engine.content.sprite.hero.Hero;
-
 
 public class Bombset
 {	private ArrayList<BombFactory> bombFactories;

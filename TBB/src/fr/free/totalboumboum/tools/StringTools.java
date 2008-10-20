@@ -21,10 +21,6 @@ package fr.free.totalboumboum.tools;
  * 
  */
 
-import java.awt.Color;
-import java.awt.Font;
-import java.awt.FontMetrics;
-import java.awt.geom.Rectangle2D;
 import java.text.NumberFormat;
 
 public class StringTools

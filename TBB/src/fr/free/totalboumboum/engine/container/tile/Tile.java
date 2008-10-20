@@ -30,18 +30,13 @@ import java.awt.image.BufferedImage;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.Iterator;
-import java.util.Map.Entry;
 
 import fr.free.totalboumboum.data.configuration.Configuration;
 import fr.free.totalboumboum.engine.container.level.Level;
 import fr.free.totalboumboum.engine.content.feature.Direction;
 import fr.free.totalboumboum.engine.content.feature.ability.AbstractAbility;
-import fr.free.totalboumboum.engine.content.feature.ability.ActionAbility;
 import fr.free.totalboumboum.engine.content.feature.ability.StateAbility;
-import fr.free.totalboumboum.engine.content.feature.action.GeneralAction;
-import fr.free.totalboumboum.engine.content.feature.anime.AnimeGesture;
 import fr.free.totalboumboum.engine.content.feature.event.AbstractEvent;
-import fr.free.totalboumboum.engine.content.feature.permission.ThirdPermission;
 import fr.free.totalboumboum.engine.content.sprite.Sprite;
 import fr.free.totalboumboum.engine.content.sprite.block.Block;
 import fr.free.totalboumboum.engine.content.sprite.bomb.Bomb;
@@ -49,8 +44,6 @@ import fr.free.totalboumboum.engine.content.sprite.fire.Fire;
 import fr.free.totalboumboum.engine.content.sprite.floor.Floor;
 import fr.free.totalboumboum.engine.content.sprite.hero.Hero;
 import fr.free.totalboumboum.engine.content.sprite.item.Item;
-
-
 
 public class Tile
 {	private int line,col;

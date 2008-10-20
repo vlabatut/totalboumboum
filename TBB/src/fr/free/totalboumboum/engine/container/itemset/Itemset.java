@@ -22,7 +22,6 @@ package fr.free.totalboumboum.engine.container.itemset;
  */
 
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map.Entry;
@@ -31,9 +30,6 @@ import javax.xml.parsers.ParserConfigurationException;
 
 import org.xml.sax.SAXException;
 
-import fr.free.totalboumboum.engine.content.feature.ability.StateAbility;
-import fr.free.totalboumboum.engine.content.feature.anime.AnimeGesture;
-import fr.free.totalboumboum.engine.content.sprite.bomb.BombFactory;
 import fr.free.totalboumboum.engine.content.sprite.item.Item;
 import fr.free.totalboumboum.engine.content.sprite.item.ItemFactory;
 

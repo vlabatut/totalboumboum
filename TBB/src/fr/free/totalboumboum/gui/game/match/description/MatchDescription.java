@@ -335,10 +335,10 @@ public class MatchDescription extends EntitledDataPanel implements MouseListener
 			{	if(index==GameConstants.CONTROL_COUNT)
 					index = 0;
 				else
-					index = getNextFreeControls(profiles,index,false);
+					index = getNextFreeControls(profiles,index);
 			}
 			else
-				index = getNextFreeControls(profiles,index,true);
+				index = getNextFreeControls(profiles,index);
 			profile.setControlSettingsIndex(index);
 			playersPanel.setLabelText(pos[0],pos[1],controlTexts.get(index),controlTooltips.get(index));
 		}
@@ -349,7 +349,7 @@ public class MatchDescription extends EntitledDataPanel implements MouseListener
 	}
 
 
-	public int getNextFreeControls(ArrayList<Profile> profiles, int start, boolean noZero)
+	public int getNextFreeControls(ArrayList<Profile> profiles, int start)
 	{	/// init
 		Iterator<Profile> it = profiles.iterator();
 		ArrayList<Integer> occupied = new ArrayList<Integer>();
@@ -365,15 +365,11 @@ public class MatchDescription extends EntitledDataPanel implements MouseListener
 		int test = 1;
 		while(!found && test<=GameConstants.CONTROL_COUNT)
 		{	int temp = (start+test)%(GameConstants.CONTROL_COUNT+1);
-			if(temp==0 && noZero)
+			if(occupied.contains(temp))
 				test++;
 			else
-			{	if(occupied.contains(temp))
-					test++;
-				else
-				{	result = temp;
-					found = true;
-				}
+			{	result = temp;
+				found = true;
 			}
 		}
 		if(!found)
