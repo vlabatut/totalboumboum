@@ -1,5 +1,27 @@
 package fr.free.totalboumboum.configuration.game;
 
+/*
+ * Total Boum Boum
+ * Copyright 2008 Vincent Labatut 
+ * 
+ * This file is part of Total Boum Boum.
+ * 
+ * Total Boum Boum is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 2 of the License, or
+ * (at your option) any later version.
+ * 
+ * Total Boum Boum is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ * 
+ * You should have received a copy of the GNU General Public License
+ * along with Total Boum Boum.  If not, see <http://www.gnu.org/licenses/>.
+ * 
+ */
+
+import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 
@@ -19,36 +41,24 @@ import fr.free.totalboumboum.game.round.RoundLoader;
 import fr.free.totalboumboum.game.tournament.AbstractTournament;
 import fr.free.totalboumboum.game.tournament.TournamentLoader;
 import fr.free.totalboumboum.game.tournament.single.SingleTournament;
+import fr.free.totalboumboum.tools.FileTools;
 
 public class GameConfiguration
 {
-
 	/////////////////////////////////////////////////////////////////
 	// CURRENT TOURNAMENT	/////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	private AbstractTournament tournament = null;
 
+	public void loadLastTournament() throws ParserConfigurationException, SAXException, IOException, ClassNotFoundException
+	{	String folderPath = FileTools.getConfigurationPath()+File.separator+FileTools.FILE_TOURNAMENT;
+		tournament = TournamentLoader.loadTournamentFromFolderPath(folderPath);			
+	}
+
 	public AbstractTournament getTournament()
 	{	return tournament;	
 	}
-	
-	/////////////////////////////////////////////////////////////////
-	// LAST TOURNAMENT		/////////////////////////////////////////
-	/////////////////////////////////////////////////////////////////
-	private String lastTournamentName = null;
-	
-	public String getLastTournamentName()
-	{	return lastTournamentName;	
-	}
-	
-	public void setLastTournamentName(String lastTournamentName)
-	{	this.lastTournamentName = lastTournamentName;
-	}
-	
-	public void loadLastTournament() throws ParserConfigurationException, SAXException, IOException, ClassNotFoundException
-	{	tournament = TournamentLoader.loadTournamentFromName(lastTournamentName,this);			
-	}
-	
+
 	/////////////////////////////////////////////////////////////////
 	// QUICKMATCH		/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
@@ -63,7 +73,7 @@ public class GameConfiguration
 	
 	public void loadQuickmatch() throws ParserConfigurationException, SAXException, IOException, ClassNotFoundException
 	{	// single tournament
-		SingleTournament quickmatch = new SingleTournament(this);
+		SingleTournament quickmatch = new SingleTournament();
 		// load match
 		Match match = MatchLoader.loadMatchFromName(quickmatchName,quickmatch);
 		quickmatch.setMatch(match);
@@ -85,7 +95,7 @@ public class GameConfiguration
 	
 	public void loadQuickstart() throws ParserConfigurationException, SAXException, IOException, ClassNotFoundException
 	{	// single tournament
-		SingleTournament quickstart = new SingleTournament(this);
+		SingleTournament quickstart = new SingleTournament();
 		// one round match
 		Match match = new Match(quickstart);
 		{	// notes
@@ -110,5 +120,4 @@ public class GameConfiguration
 		// 
 		tournament = quickstart;
 	}
-
 }
