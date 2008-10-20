@@ -31,7 +31,7 @@ import javax.xml.parsers.ParserConfigurationException;
 
 import org.xml.sax.SAXException;
 
-import fr.free.totalboumboum.data.controls.ControlSettings;
+import fr.free.totalboumboum.data.configuration.controls.ControlSettings;
 import fr.free.totalboumboum.game.limit.LimitConfrontation;
 import fr.free.totalboumboum.game.limit.Limits;
 import fr.free.totalboumboum.game.limit.MatchLimit;

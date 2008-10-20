@@ -1,4 +1,4 @@
-package fr.free.totalboumboum.data.game;
+package fr.free.totalboumboum.data.configuration.game;
 
 import java.io.IOException;
 import java.util.ArrayList;
