@@ -39,10 +39,8 @@ import fr.free.totalboumboum.engine.content.feature.ability.AbilityLoader;
 import fr.free.totalboumboum.engine.content.feature.ability.AbstractAbility;
 import fr.free.totalboumboum.engine.content.sprite.item.ItemFactory;
 import fr.free.totalboumboum.engine.content.sprite.item.ItemFactoryLoader;
-import fr.free.totalboumboum.engine.loop.Loop;
 import fr.free.totalboumboum.tools.FileTools;
 import fr.free.totalboumboum.tools.XmlTools;
-
 
 public class ItemsetLoader
 {	
@@ -61,6 +59,7 @@ public class ItemsetLoader
 		return result;
     }
     
+    @SuppressWarnings("unchecked")
     private static HashMap<String,ItemFactory> loadItemsetElement(Element root, String folder, Level level) throws IOException, ParserConfigurationException, SAXException, ClassNotFoundException
 	{	HashMap<String,ItemFactory> result = new HashMap<String,ItemFactory>();
     	String individualFolder = folder;

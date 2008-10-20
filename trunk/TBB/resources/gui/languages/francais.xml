@@ -24,7 +24,7 @@
 				<text name="Cancel" value="Annuler" tooltip="Annuler les dernières modifications et revenir au menu des options" />
 				<text name="Confirm" value="Confirmer" tooltip="Confirmer les dernières modifications et revenir au menu des options" />
 				<text name="Controls" value="Commandes" tooltip="Modifier les touches commandant les personnages" />
-				<text name="Gameplay" value="Jeu" tooltip="Modifier les paramètre de jouabilité" />
+				<text name="Gameplay" value="Jeu" tooltip="Modifier les paramètres de jouabilité" />
 				<text name="Next" value="Suivant" tooltip="Accéder aux réglages suivants" />
 				<text name="Previous" value="Précédent" tooltip="Accéder aux réglages précédents" />
 				<text name="Video" value="Vidéo" tooltip="Modifier les paramètres graphiques" />

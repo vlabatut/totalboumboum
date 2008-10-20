@@ -22,14 +22,7 @@ package fr.free.totalboumboum.engine.container.level;
  */
 
 import java.awt.image.BufferedImage;
-import java.io.IOException;
 import java.util.HashMap;
-
-import javax.xml.parsers.ParserConfigurationException;
-
-import org.xml.sax.SAXException;
-
-import fr.free.totalboumboum.engine.container.itemset.ItemsetPreviewer;
 
 public class LevelPreview
 {

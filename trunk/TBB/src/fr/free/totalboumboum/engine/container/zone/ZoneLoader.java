@@ -62,6 +62,7 @@ public class ZoneLoader
 		return result;
     }
         
+    @SuppressWarnings("unchecked")
     private static void loadMatrixElement(Element root, int globalHeight, int globalWidth, Zone result)
     {	// matrix
     	HashMap<String,VariableTile> variableTiles = result.getVariableTiles();
@@ -103,6 +104,7 @@ public class ZoneLoader
     	}
     }
     
+    @SuppressWarnings("unchecked")
     public static String[] loadBasicTileElement(Element root)
     {	String[] result = new String[3];
 		// floor

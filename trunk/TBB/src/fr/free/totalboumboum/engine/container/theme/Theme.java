@@ -21,17 +21,14 @@ package fr.free.totalboumboum.engine.container.theme;
  * 
  */
 
-import java.awt.image.BufferedImage;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map.Entry;
 
-import fr.free.totalboumboum.engine.content.feature.anime.AnimeGesture;
 import fr.free.totalboumboum.engine.content.sprite.block.Block;
 import fr.free.totalboumboum.engine.content.sprite.block.BlockFactory;
 import fr.free.totalboumboum.engine.content.sprite.floor.Floor;
 import fr.free.totalboumboum.engine.content.sprite.floor.FloorFactory;
-
 
 public class Theme
 {	

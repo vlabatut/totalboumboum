@@ -25,10 +25,8 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map.Entry;
 
-import fr.free.totalboumboum.engine.content.feature.ability.AbstractAbility;
 import fr.free.totalboumboum.engine.content.sprite.fire.Fire;
 import fr.free.totalboumboum.engine.content.sprite.fire.FireFactory;
-
 
 public class Fireset
 {	private HashMap<String,FireFactory> fireFactories;
