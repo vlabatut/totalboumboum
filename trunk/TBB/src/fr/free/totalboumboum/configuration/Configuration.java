@@ -21,220 +21,75 @@ package fr.free.totalboumboum.configuration;
  * 
  */
 
-import java.awt.Color;
-import java.awt.Dimension;
-import java.io.IOException;
 import java.util.ArrayList;
-import java.util.HashMap;
 
-import javax.xml.parsers.ParserConfigurationException;
-
-import org.xml.sax.SAXException;
-
-import fr.free.totalboumboum.configuration.controls.ControlSettings;
-import fr.free.totalboumboum.game.limit.LimitConfrontation;
-import fr.free.totalboumboum.game.limit.Limits;
-import fr.free.totalboumboum.game.limit.MatchLimit;
-import fr.free.totalboumboum.game.match.Match;
-import fr.free.totalboumboum.game.match.MatchLoader;
-import fr.free.totalboumboum.game.points.PointsProcessor;
-import fr.free.totalboumboum.game.points.PointsTotal;
-import fr.free.totalboumboum.game.round.Round;
-import fr.free.totalboumboum.game.round.RoundLoader;
-import fr.free.totalboumboum.game.tournament.AbstractTournament;
-import fr.free.totalboumboum.game.tournament.TournamentLoader;
-import fr.free.totalboumboum.game.tournament.single.SingleTournament;
+import fr.free.totalboumboum.configuration.controls.ControlsConfiguration;
+import fr.free.totalboumboum.configuration.engine.EngineConfiguration;
+import fr.free.totalboumboum.configuration.game.GameConfiguration;
+import fr.free.totalboumboum.configuration.video.VideoConfiguration;
 
 public class Configuration
 {	
-	public Configuration() throws ParserConfigurationException, SAXException, IOException
-	{	// engine
-		setFps(50);
-		setSpeedCoeff(1);
-		// display
-		setBorderColor(Color.BLACK);
-		setSmoothGraphics(true);
-		// panel
-		setPanelDimension(750,600);
-		// profiles
-	}
-	
 	/////////////////////////////////////////////////////////////////
 	// ENGINE			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	private int fps;
-	private long milliPeriod;
-	private long nanoPeriod;
-	//NOTE speedcoeff à descendre au niveau de loop, car il peut dépendre du level
-	private double speedCoeff;
+	private static EngineConfiguration engineConfiguration;
 
-	public void setFps(int fps)
-	{	this.fps = fps;
-		milliPeriod = (long) 1000.0 / fps;
-		nanoPeriod = milliPeriod * 1000000L;
+	public static void setEngineConfiguration(EngineConfiguration engineConfiguration)
+	{	Configuration.engineConfiguration = engineConfiguration;
 	}
-	public int getFps()
-	{	return fps;
-	}
-	public long getMilliPeriod()
-	{	return milliPeriod;
-	}
-	public long getNanoPeriod()
-	{	return nanoPeriod;
-	}
-
-	public double getSpeedCoeff()
-	{	return speedCoeff;
-	}
-	public void setSpeedCoeff(double speedCoeff)
-	{	this.speedCoeff = speedCoeff;
+	public static EngineConfiguration getEngineConfiguration()
+	{	return engineConfiguration;
 	}
 
 	/////////////////////////////////////////////////////////////////
-	// DISPLAY			/////////////////////////////////////////////
+	// VIDEO			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	private Color borderColor;
-	private boolean smoothGraphics;
+	private static VideoConfiguration videoConfiguration;
 
-	public void setSmoothGraphics(boolean smoothGraphics)
-	{	this.smoothGraphics = smoothGraphics;		
+	public static void setVideoConfiguration(VideoConfiguration videoConfiguration)
+	{	Configuration.videoConfiguration = videoConfiguration;
 	}
-	public boolean getSmoothGraphics()
-	{	return smoothGraphics;		
-	}
-	
-	public Color getBorderColor()
-	{	return borderColor;
-	}
-	public void setBorderColor(Color borderColor)
-	{	this.borderColor = borderColor;
-	}
-	
-	/////////////////////////////////////////////////////////////////
-	// PANEL			/////////////////////////////////////////////
-	/////////////////////////////////////////////////////////////////
-	private Dimension panelDimension;
-	
-	public void setPanelDimension(int width, int height)
-	{	panelDimension = new Dimension(width,height);
-	}
-	public Dimension getPanelDimension()
-	{	return panelDimension;	
-	}
-
-	/////////////////////////////////////////////////////////////////
-	// PROFILES			/////////////////////////////////////////////
-	/////////////////////////////////////////////////////////////////
-	private ArrayList<String> profiles = new ArrayList<String>();
-	
-	public ArrayList<String> getProfiles()
-	{	return profiles;	
-	}
-	
-	public void addProfile(String profile)
-	{	if(!profiles.contains(profile))
-			profiles.add(profile);
+	public static VideoConfiguration getVideoConfiguration()
+	{	return videoConfiguration;
 	}
 
 	/////////////////////////////////////////////////////////////////
 	// CONTROLS			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	private HashMap<Integer,ControlSettings> controlSettings = new HashMap<Integer,ControlSettings>();
-	
-	public HashMap<Integer,ControlSettings> getControlSettings()
-	{	return controlSettings;	
-	}
-	
-	public void putControlSettings(int index, ControlSettings controlSetting)
-	{	controlSettings.put(index,controlSetting);
-	}
-	
-	/////////////////////////////////////////////////////////////////
-	// CURRENT TOURNAMENT	/////////////////////////////////////////
-	/////////////////////////////////////////////////////////////////
-	private AbstractTournament tournament = null;
+	private static ControlsConfiguration controlsConfiguration;
 
-	public AbstractTournament getTournament()
-	{	return tournament;	
+	public static void setControlsConfiguration(ControlsConfiguration controlsConfiguration)
+	{	Configuration.controlsConfiguration = controlsConfiguration;
+	}
+	public static ControlsConfiguration getControlsConfiguration()
+	{	return controlsConfiguration;
 	}
 	
 	/////////////////////////////////////////////////////////////////
-	// LAST TOURNAMENT		/////////////////////////////////////////
+	// GAME					/////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	private String lastTournamentName = null;
-	
-	public String getLastTournamentName()
-	{	return lastTournamentName;	
+	private static GameConfiguration gameConfiguration;
+
+	public static void setGameConfiguration(GameConfiguration gameConfiguration)
+	{	Configuration.gameConfiguration = gameConfiguration;
 	}
-	
-	public void setLastTournamentName(String lastTournamentName)
-	{	this.lastTournamentName = lastTournamentName;
+	public static GameConfiguration getGameConfiguration()
+	{	return gameConfiguration;
 	}
-	
-	public void loadLastTournament() throws ParserConfigurationException, SAXException, IOException, ClassNotFoundException
-	{	tournament = TournamentLoader.loadTournamentFromName(lastTournamentName,this);			
-	}
-	
+
 	/////////////////////////////////////////////////////////////////
-	// QUICKMATCH		/////////////////////////////////////////////
+	// PROFILES			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	private String quickmatchName = null;
+	private static ArrayList<String> profiles = new ArrayList<String>();
 	
-	public String getQuickmatchName()
-	{	return quickmatchName;	
-	}
-	public void setQuickmatchName(String quickmatchName)
-	{	this.quickmatchName = quickmatchName;
+	public static ArrayList<String> getProfiles()
+	{	return profiles;	
 	}
 	
-	public void loadQuickmatch() throws ParserConfigurationException, SAXException, IOException, ClassNotFoundException
-	{	// single tournament
-		SingleTournament quickmatch = new SingleTournament(this);
-		// load match
-		Match match = MatchLoader.loadMatchFromName(quickmatchName,quickmatch);
-		quickmatch.setMatch(match);
-		// 
-		tournament = quickmatch;
+	public static void addProfile(String profile)
+	{	if(!profiles.contains(profile))
+			profiles.add(profile);
 	}
-	
-	/////////////////////////////////////////////////////////////////
-	// QUICKSTART		/////////////////////////////////////////////
-	/////////////////////////////////////////////////////////////////
-	private String quickstartName = null;
-	
-	public String getQuickstartName()
-	{	return quickstartName;	
-	}	
-	public void setQuickstartName(String quickstartName)
-	{	this.quickstartName = quickstartName;
-	}
-	
-	public void loadQuickstart() throws ParserConfigurationException, SAXException, IOException, ClassNotFoundException
-	{	// single tournament
-		SingleTournament quickstart = new SingleTournament(this);
-		// one round match
-		Match match = new Match(quickstart);
-		{	// notes
-			ArrayList<String> notes = new ArrayList<String>();
-			notes.add("auto-generated notes");
-			match.setNotes(notes);
-		}
-		{	// limits
-			Limits<MatchLimit> limits = new Limits<MatchLimit>();
-			MatchLimit limit = new LimitConfrontation(1);
-			limits.addLimit(limit);
-			match.setLimits(limits);
-		}
-		{	// points processor
-			PointsProcessor pointProcessor = new PointsTotal();
-			match.setPointProcessor(pointProcessor);
-		}
-		quickstart.setMatch(match);
-		// round
-		Round round = RoundLoader.loadRoundFromName(quickstartName,match);
-		match.addRound(round);
-		// 
-		tournament = quickstart;
-	}
-	
+
 }
