@@ -7,4 +7,6 @@ vincent.labatut@free.fr
 This product includes software developed by:
 	- Chris Adamson & Joshua Marinacci: class fr.free.totalboumboum.gui.tools.FullRepaintManager (Copyright 2005 Chris Adamson & Joshua Marinacci) 
 	- Sun Microsystems Inc: class fr.free.totalboumboum.gui.tools.SpringUtilities (Copyright 1995-2008 Sun Microsystems Inc.)
+	- various students: the ai packages in resources/ai (Copyright their respective authors)
+----------------------------------------------------------
 For source availability and license information see licence.txt.
