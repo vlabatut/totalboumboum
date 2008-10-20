@@ -37,8 +37,8 @@ import fr.free.totalboumboum.tools.XmlTools;
 
 public class SingleTournamentLoader
 {
-	public static SingleTournament loadTournamentElement(String folder, Element root, Configuration configuration) throws ParserConfigurationException, SAXException, IOException, ClassNotFoundException
-	{	SingleTournament result = new SingleTournament(configuration);
+	public static SingleTournament loadTournamentElement(String folder, Element root) throws ParserConfigurationException, SAXException, IOException, ClassNotFoundException
+	{	SingleTournament result = new SingleTournament();
 		Element element;
 		// match
 		element = root.getChild(XmlTools.ELT_MATCH);

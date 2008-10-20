@@ -44,12 +44,14 @@ public class FileTools
 	public static final String FILE_COLORMAPS = "colormaps";
 	public static final String FILE_CONFIGURATION = "configuration";
 	public static final String FILE_CONTROLS = "controls";
+	public static final String FILE_ENGINE = "engine";
 	public static final String FILE_EXPLOSIONS = "explosions";
 	public static final String FILE_EXPLOSION = "explosion";
 	public static final String FILE_FIRE = "fire";
 	public static final String FILE_FIRESET = "fireset";
 	public static final String FILE_FIRESETS = "firesets";
 	public static final String FILE_FLOOR = "floor";
+	public static final String FILE_GAME = "game";
 	public static final String FILE_GESTUREPERMISSIONS = "gesturepermissions";
 	public static final String FILE_HERO = "hero";
 	public static final String FILE_ITEM = "item";
@@ -82,6 +84,7 @@ public class FileTools
 	public static final String FILE_THEME = "theme";
 	public static final String FILE_TOURNAMENT = "tournament";
 	public static final String FILE_TRAJECTORIES = "trajectories";
+	public static final String FILE_VIDEO = "video";
 	public static final String FILE_ZONE = "zone";
 	public static final String FILE_ZONES = "zones";
 	//
@@ -89,6 +92,7 @@ public class FileTools
 	public static final String FOLDER_AI = "ai";
 	public static final String FOLDER_BOMBS = "bombs";
 	public static final String FOLDER_CHARACTERS = "characters";
+	public static final String FOLDER_CONFIGURATION = "configuration";
 	public static final String FOLDER_CONTROLS = "controls";
 	public static final String FOLDER_DATA = "data";
 	public static final String FOLDER_EXPLOSIONS = "explosions";
@@ -148,6 +152,9 @@ public class FileTools
 	
 	public static String getSettingsPath()
 	{	return getResourcesPath()+File.separator+FOLDER_SETTINGS;		
+	}
+	public static String getConfigurationPath()
+	{	return getSettingsPath()+File.separator+FOLDER_CONFIGURATION;		
 	}
 	public static String getControlsPath()
 	{	return getSettingsPath()+File.separator+FOLDER_CONTROLS;		

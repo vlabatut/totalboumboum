@@ -669,6 +669,8 @@ public class Launcher
 	 * - tournoi : 1) on choisit les paramètres 2) on choisit les joueurs, le jeu restreint leur nombre pr qu'il soit compatible avec le tournoi, et restreint aussi les IA pour les mêmes raisons
 	 * - mettre une icone spéciale pour différencier les humains et les IA, ds présentation et résultats
 	 * 
+	 * - besoin d'une méthode permettant d'exporter un tournoi/match/round, ie de l'écrire entièrement en local (pas de référence à des composants existants)
+	 * 
 	 * - dans les résultats :
 	 * 		- afficher par défaut les 4 scores de bases
 	 * 		- plus les scores utilisés dans les points et/ou les limites

@@ -39,12 +39,6 @@ import fr.free.totalboumboum.tools.XmlTools;
 
 public class ConfigurationLoader
 {	
-	public static Configuration quickloadConfiguration() throws ParserConfigurationException, SAXException, IOException, IllegalArgumentException, SecurityException, IllegalAccessException, NoSuchFieldException, ClassNotFoundException
-	{	return loadConfiguration(true);
-	}
-	public static Configuration loadConfiguration() throws ParserConfigurationException, SAXException, IOException, IllegalArgumentException, SecurityException, IllegalAccessException, NoSuchFieldException, ClassNotFoundException
-	{	return loadConfiguration(false);
-	}
 	private static Configuration loadConfiguration(boolean quickStart) throws ParserConfigurationException, SAXException, IOException, IllegalArgumentException, SecurityException, IllegalAccessException, NoSuchFieldException, ClassNotFoundException
 	{	Configuration result = new Configuration();
 		String individualFolder = FileTools.getSettingsPath();
