@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+
+	<xsd:complexType name="tQuickmatch">
+		<xsd:attribute name="value" type="xsd:string" use="required" />
+	</xsd:complexType>
+
+	<xsd:complexType name="tQuickstart">
+		<xsd:attribute name="value" type="xsd:string" use="required" />
+	</xsd:complexType>
+
+	<xsd:complexType name="tGame">
+		<xsd:sequence>
+			<xsd:element name="quickmatch" type="tQuickmatch" minOccurs="0"/>
+			<xsd:element name="quickstart" type="tQuickstart" minOccurs="0"/>
+		</xsd:sequence>
+	</xsd:complexType>
+
+	<xsd:element name="game" type="tGame" />
+
+</xsd:schema>

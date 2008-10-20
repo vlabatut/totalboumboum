@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<video
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+	xsi:noNamespaceSchemaLocation="..\..\schemas\video.xsd">
+	
+	<smoothGraphics value="true" />
+	<panelDimension width="1024" height="768" />
+	
+</video>
