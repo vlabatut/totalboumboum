@@ -21,15 +21,46 @@ package fr.free.totalboumboum.configuration;
  * 
  */
 
+import java.io.IOException;
 import java.util.ArrayList;
 
+import javax.xml.parsers.ParserConfigurationException;
+
+import org.xml.sax.SAXException;
+
 import fr.free.totalboumboum.configuration.controls.ControlsConfiguration;
+import fr.free.totalboumboum.configuration.controls.ControlsConfigurationLoader;
+import fr.free.totalboumboum.configuration.controls.ControlsConfigurationSaver;
 import fr.free.totalboumboum.configuration.engine.EngineConfiguration;
+import fr.free.totalboumboum.configuration.engine.EngineConfigurationLoader;
+import fr.free.totalboumboum.configuration.engine.EngineConfigurationSaver;
 import fr.free.totalboumboum.configuration.game.GameConfiguration;
+import fr.free.totalboumboum.configuration.game.GameConfigurationLoader;
+import fr.free.totalboumboum.configuration.game.GameConfigurationSaver;
 import fr.free.totalboumboum.configuration.video.VideoConfiguration;
+import fr.free.totalboumboum.configuration.video.VideoConfigurationLoader;
+import fr.free.totalboumboum.configuration.video.VideoConfigurationSaver;
 
 public class Configuration
 {	
+
+	/////////////////////////////////////////////////////////////////
+	// FILE ACCESS		/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	public static void loadConfiguration() throws ParserConfigurationException, SAXException, IOException, IllegalArgumentException, SecurityException, IllegalAccessException, NoSuchFieldException, ClassNotFoundException
+	{	controlsConfiguration = ControlsConfigurationLoader.loadControlsConfiguration();
+		engineConfiguration = EngineConfigurationLoader.loadEngineConfiguration();
+		gameConfiguration = GameConfigurationLoader.loadGameConfiguration();
+		videoConfiguration = VideoConfigurationLoader.loadVideoConfiguration();
+	}
+	
+	public static void saveConfiguration() throws IllegalArgumentException, SecurityException, ParserConfigurationException, SAXException, IOException, IllegalAccessException, NoSuchFieldException
+	{	ControlsConfigurationSaver.saveControlsConfiguration(controlsConfiguration);
+		EngineConfigurationSaver.saveEngineConfiguration(engineConfiguration);
+		GameConfigurationSaver.saveGameConfiguration(gameConfiguration);
+		VideoConfigurationSaver.saveVideoConfiguration(videoConfiguration);
+	}
+	
 	/////////////////////////////////////////////////////////////////
 	// ENGINE			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////

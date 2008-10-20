@@ -29,7 +29,7 @@ import fr.free.totalboumboum.game.tournament.sequence.SequenceTournament;
 public class CupTournamentLoader
 {
 
-	public static CupTournament loadTournamentElement(String folder, Element root, Configuration configuration)
+	public static CupTournament loadTournamentElement(String folder, Element root)
 	{
 		return null;
 	}

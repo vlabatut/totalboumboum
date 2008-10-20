@@ -48,8 +48,8 @@ import fr.free.totalboumboum.tools.XmlTools;
 
 public class SequenceTournamentLoader
 {	
-	public static SequenceTournament loadTournamentElement(String folder, Element root, Configuration configuration) throws ParserConfigurationException, SAXException, IOException, ClassNotFoundException
-	{	SequenceTournament result = new SequenceTournament(configuration);
+	public static SequenceTournament loadTournamentElement(String folder, Element root) throws ParserConfigurationException, SAXException, IOException, ClassNotFoundException
+	{	SequenceTournament result = new SequenceTournament();
 		Element element;
 		// limits
 		element = root.getChild(XmlTools.ELT_LIMITS);

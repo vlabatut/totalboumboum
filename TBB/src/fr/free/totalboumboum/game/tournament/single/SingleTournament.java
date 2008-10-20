@@ -36,10 +36,6 @@ import fr.free.totalboumboum.game.tournament.AbstractTournament;
 
 public class SingleTournament extends AbstractTournament
 {
-	public SingleTournament(Configuration configuration)
-	{	this.configuration = configuration; 
-	}
-
 	/////////////////////////////////////////////////////////////////
 	// GAME				/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
@@ -50,7 +46,7 @@ public class SingleTournament extends AbstractTournament
 	{	begun = true;
 		pointProcessor = new PointsTotal();
 		// NOTE vérifier si le nombre de joueurs sélectionnés correspond
-		setProfiles(getConfiguration().getProfiles());
+		setProfiles(Configuration.getProfiles());
 		stats.init(this);
 	}
 

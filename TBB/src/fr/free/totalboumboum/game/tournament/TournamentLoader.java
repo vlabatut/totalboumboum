@@ -33,6 +33,7 @@ import org.jdom.Element;
 import org.xml.sax.SAXException;
 
 import fr.free.totalboumboum.configuration.Configuration;
+import fr.free.totalboumboum.configuration.game.GameConfiguration;
 import fr.free.totalboumboum.game.match.MatchLoader;
 import fr.free.totalboumboum.game.tournament.cup.CupTournamentLoader;
 import fr.free.totalboumboum.game.tournament.league.LeagueTournamentLoader;
@@ -48,7 +49,7 @@ public class TournamentLoader
 	private static final String SEQUENCE = "sequence";
 	private static final String SINGLE = "single";
 
-	public static AbstractTournament loadTournamentFromFolderPath(String folderPath, Configuration configuration) throws ParserConfigurationException, SAXException, IOException, ClassNotFoundException
+	public static AbstractTournament loadTournamentFromFolderPath(String folderPath) throws ParserConfigurationException, SAXException, IOException, ClassNotFoundException
 	{	// init
 		String schemaFolder = FileTools.getSchemasPath();
 		File schemaFile,dataFile;
@@ -56,16 +57,16 @@ public class TournamentLoader
 		dataFile = new File(folderPath+File.separator+FileTools.FILE_TOURNAMENT+FileTools.EXTENSION_DATA);
 		schemaFile = new File(schemaFolder+File.separator+FileTools.FILE_TOURNAMENT+FileTools.EXTENSION_SCHEMA);
 		Element root = XmlTools.getRootFromFile(dataFile,schemaFile);
-		AbstractTournament result = loadTournamentElement(folderPath,root,configuration);
+		AbstractTournament result = loadTournamentElement(folderPath,root);
 		return result;
 	}
-	public static AbstractTournament loadTournamentFromName(String name, Configuration configuration) throws ParserConfigurationException, SAXException, IOException, ClassNotFoundException
+	public static AbstractTournament loadTournamentFromName(String name) throws ParserConfigurationException, SAXException, IOException, ClassNotFoundException
 	{	String individualFolder = FileTools.getTournamentsPath()+File.separator+name;
-		AbstractTournament result = loadTournamentFromFolderPath(individualFolder,configuration);
+		AbstractTournament result = loadTournamentFromFolderPath(individualFolder);
 		return result;
     }
 	
-	private static AbstractTournament loadTournamentElement(String path, Element root, Configuration configuration) throws ParserConfigurationException, SAXException, IOException, ClassNotFoundException
+	private static AbstractTournament loadTournamentElement(String path, Element root) throws ParserConfigurationException, SAXException, IOException, ClassNotFoundException
 	{	// init
 		AbstractTournament result = null;
 		Element element;
@@ -77,13 +78,13 @@ public class TournamentLoader
 		element = elements.get(2);
 		String type = element.getName();
 		if(type.equalsIgnoreCase(CUP))
-			result = CupTournamentLoader.loadTournamentElement(path,element,configuration);
+			result = CupTournamentLoader.loadTournamentElement(path,element);
 		else if(type.equalsIgnoreCase(LEAGUE))
-			result = LeagueTournamentLoader.loadTournamentElement(path,element,configuration);
+			result = LeagueTournamentLoader.loadTournamentElement(path,element);
 		else if(type.equalsIgnoreCase(SEQUENCE))
-			result = SequenceTournamentLoader.loadTournamentElement(path,element,configuration);
+			result = SequenceTournamentLoader.loadTournamentElement(path,element);
 		else if(type.equalsIgnoreCase(SINGLE))
-			result = SingleTournamentLoader.loadTournamentElement(path,element,configuration);
+			result = SingleTournamentLoader.loadTournamentElement(path,element);
 		// notes
 		element = root.getChild(XmlTools.ELT_NOTES);
 		ArrayList<String> notes = MatchLoader.loadNotesElement(element);

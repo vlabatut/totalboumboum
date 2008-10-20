@@ -62,6 +62,7 @@ public class XmlTools
 	public static final String ELT_BOMBSET = "bombset";
 	public static final String ELT_BOMB = "bomb";
 	public static final String ELT_BOMBS = "bombs";
+	public static final String ELT_BORDER = "smoothGraphics";
 	public static final String ELT_CASE = "case";
 	public static final String ELT_CHARACTER = "character";
 	public static final String ELT_COLOR = "color";
@@ -77,6 +78,7 @@ public class XmlTools
 	public static final String ELT_DISPLAY = "display";
 	public static final String ELT_DEFAULT = "default";
 	public static final String ELT_DIVISION = "division";
+	public static final String ELT_ENGINE = "engine";
 	public static final String ELT_EVENT = "event";
 	public static final String ELT_EXPLOSION = "explosion";
 	public static final String ELT_FIRE = "fire";
@@ -186,6 +188,7 @@ public class XmlTools
 	public static final String ELT_VARIABLE_ITEMS = "variable-items";
 	public static final String ELT_VARIABLE_TILE = "variable-tile";
 	public static final String ELT_VARIABLE_TILES = "variable-tiles";
+	public static final String ELT_VIDEO = "video";
 	public static final String ELT_VISIBLE_DIMENSION = "visibleDimension";
 	public static final String ELT_VISIBLE_POSITION = "visiblePosition";
 	// Attributes names
