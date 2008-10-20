@@ -30,7 +30,7 @@ import java.util.ArrayList;
 
 import javax.swing.JLabel;
 
-import fr.free.totalboumboum.data.controls.ControlSettings;
+import fr.free.totalboumboum.configuration.controls.ControlSettings;
 import fr.free.totalboumboum.engine.content.feature.event.ControlEvent;
 import fr.free.totalboumboum.gui.common.panel.SplitMenuPanel;
 import fr.free.totalboumboum.gui.common.panel.data.EntitledDataPanel;

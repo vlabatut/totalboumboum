@@ -26,7 +26,7 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.Iterator;
 
-import fr.free.totalboumboum.data.configuration.Configuration;
+import fr.free.totalboumboum.configuration.Configuration;
 import fr.free.totalboumboum.engine.container.tile.Tile;
 import fr.free.totalboumboum.engine.content.feature.Direction;
 import fr.free.totalboumboum.engine.content.feature.GestureConstants;

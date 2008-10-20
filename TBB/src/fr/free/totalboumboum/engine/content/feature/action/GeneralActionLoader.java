@@ -24,7 +24,7 @@ package fr.free.totalboumboum.engine.content.feature.action;
 import org.jdom.Attribute;
 import org.jdom.Element;
 
-import fr.free.totalboumboum.data.configuration.Configuration;
+import fr.free.totalboumboum.configuration.Configuration;
 import fr.free.totalboumboum.engine.content.feature.Contact;
 import fr.free.totalboumboum.engine.content.feature.Direction;
 import fr.free.totalboumboum.engine.content.feature.Orientation;

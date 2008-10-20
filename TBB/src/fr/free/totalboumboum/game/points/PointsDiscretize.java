@@ -24,7 +24,7 @@ package fr.free.totalboumboum.game.points;
 import java.text.NumberFormat;
 import java.util.ArrayList;
 
-import fr.free.totalboumboum.data.statistics.StatisticBase;
+import fr.free.totalboumboum.game.statistics.StatisticBase;
 
 public class PointsDiscretize extends PointsProcessor implements PPFunction
 {

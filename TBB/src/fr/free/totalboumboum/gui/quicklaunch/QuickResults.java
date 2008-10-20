@@ -36,12 +36,12 @@ import javax.swing.JPanel;
 import javax.swing.SpringLayout;
 import javax.swing.SwingConstants;
 
-import fr.free.totalboumboum.data.configuration.Configuration;
-import fr.free.totalboumboum.data.profile.Profile;
-import fr.free.totalboumboum.data.statistics.Score;
-import fr.free.totalboumboum.data.statistics.StatisticRound;
+import fr.free.totalboumboum.configuration.Configuration;
+import fr.free.totalboumboum.configuration.profile.Profile;
 import fr.free.totalboumboum.game.points.PlayerPoints;
 import fr.free.totalboumboum.game.round.Round;
+import fr.free.totalboumboum.game.statistics.Score;
+import fr.free.totalboumboum.game.statistics.StatisticRound;
 import fr.free.totalboumboum.gui.tools.SpringUtilities;
 import fr.free.totalboumboum.gui.tools.GuiTools;
 import fr.free.totalboumboum.tools.StringTools;

@@ -25,7 +25,7 @@ import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.Iterator;
 
-import fr.free.totalboumboum.data.statistics.StatisticBase;
+import fr.free.totalboumboum.game.statistics.StatisticBase;
 
 public class PointsRankpoints extends PointsProcessor implements PPFunction
 {

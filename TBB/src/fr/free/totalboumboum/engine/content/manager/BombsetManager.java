@@ -24,8 +24,6 @@ package fr.free.totalboumboum.engine.content.manager;
 import java.util.Iterator;
 import java.util.LinkedList;
 
-import fr.free.totalboumboum.data.statistics.StatisticAction;
-import fr.free.totalboumboum.data.statistics.StatisticEvent;
 import fr.free.totalboumboum.engine.container.bombset.Bombset;
 import fr.free.totalboumboum.engine.container.tile.Tile;
 import fr.free.totalboumboum.engine.content.feature.Direction;
@@ -37,6 +35,8 @@ import fr.free.totalboumboum.engine.content.feature.event.ActionEvent;
 import fr.free.totalboumboum.engine.content.sprite.Sprite;
 import fr.free.totalboumboum.engine.content.sprite.bomb.Bomb;
 import fr.free.totalboumboum.engine.loop.Loop;
+import fr.free.totalboumboum.game.statistics.StatisticAction;
+import fr.free.totalboumboum.game.statistics.StatisticEvent;
 
 public class BombsetManager
 {	protected Bombset bombset;

@@ -32,7 +32,7 @@ import org.jdom.Attribute;
 import org.jdom.Element;
 import org.xml.sax.SAXException;
 
-import fr.free.totalboumboum.data.configuration.Configuration;
+import fr.free.totalboumboum.configuration.Configuration;
 import fr.free.totalboumboum.game.match.MatchLoader;
 import fr.free.totalboumboum.game.tournament.cup.CupTournamentLoader;
 import fr.free.totalboumboum.game.tournament.league.LeagueTournamentLoader;

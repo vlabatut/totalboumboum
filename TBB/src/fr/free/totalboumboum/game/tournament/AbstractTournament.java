@@ -29,13 +29,13 @@ import javax.xml.parsers.ParserConfigurationException;
 
 import org.xml.sax.SAXException;
 
-import fr.free.totalboumboum.data.configuration.Configuration;
-import fr.free.totalboumboum.data.profile.Profile;
-import fr.free.totalboumboum.data.profile.ProfileLoader;
-import fr.free.totalboumboum.data.statistics.StatisticTournament;
+import fr.free.totalboumboum.configuration.Configuration;
+import fr.free.totalboumboum.configuration.profile.Profile;
+import fr.free.totalboumboum.configuration.profile.ProfileLoader;
 import fr.free.totalboumboum.game.match.Match;
 import fr.free.totalboumboum.game.match.MatchRenderPanel;
 import fr.free.totalboumboum.game.points.PointsProcessor;
+import fr.free.totalboumboum.game.statistics.StatisticTournament;
 
 public abstract class AbstractTournament
 {	

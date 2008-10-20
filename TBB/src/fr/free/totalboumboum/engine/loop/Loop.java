@@ -47,10 +47,9 @@ import org.xml.sax.SAXException;
 
 import sun.awt.image.OffScreenImage;
 
-import fr.free.totalboumboum.data.configuration.Configuration;
-import fr.free.totalboumboum.data.configuration.GameConstants;
-import fr.free.totalboumboum.data.profile.Profile;
-import fr.free.totalboumboum.data.statistics.StatisticEvent;
+import fr.free.totalboumboum.configuration.Configuration;
+import fr.free.totalboumboum.configuration.GameConstants;
+import fr.free.totalboumboum.configuration.profile.Profile;
 import fr.free.totalboumboum.engine.container.itemset.Itemset;
 import fr.free.totalboumboum.engine.container.level.HollowLevel;
 import fr.free.totalboumboum.engine.container.level.Level;
@@ -73,6 +72,7 @@ import fr.free.totalboumboum.engine.player.Player;
 import fr.free.totalboumboum.engine.player.PlayerLocation;
 import fr.free.totalboumboum.game.round.PlayMode;
 import fr.free.totalboumboum.game.round.Round;
+import fr.free.totalboumboum.game.statistics.StatisticEvent;
 import fr.free.totalboumboum.tools.FileTools;
 
 public class Loop implements Runnable

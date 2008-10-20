@@ -37,7 +37,7 @@ import javax.xml.parsers.ParserConfigurationException;
 import org.jdom.Element;
 import org.xml.sax.SAXException;
 
-import fr.free.totalboumboum.data.configuration.Configuration;
+import fr.free.totalboumboum.configuration.Configuration;
 import fr.free.totalboumboum.gui.data.language.Language;
 import fr.free.totalboumboum.gui.data.language.LanguageLoader;
 import fr.free.totalboumboum.gui.tools.GuiFileTools;

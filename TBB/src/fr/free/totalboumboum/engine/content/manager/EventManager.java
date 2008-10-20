@@ -21,7 +21,7 @@ package fr.free.totalboumboum.engine.content.manager;
  * 
  */
 
-import fr.free.totalboumboum.data.configuration.Configuration;
+import fr.free.totalboumboum.configuration.Configuration;
 import fr.free.totalboumboum.engine.content.feature.Direction;
 import fr.free.totalboumboum.engine.content.feature.GestureConstants;
 import fr.free.totalboumboum.engine.content.feature.event.ActionEvent;

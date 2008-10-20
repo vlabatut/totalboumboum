@@ -26,7 +26,7 @@ import java.util.Iterator;
 
 import sun.font.EAttribute;
 
-import fr.free.totalboumboum.data.statistics.StatisticBase;
+import fr.free.totalboumboum.game.statistics.StatisticBase;
 
 public class PointsRankings extends PointsProcessor implements PPFunction
 {

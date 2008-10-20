@@ -24,7 +24,7 @@ package fr.free.totalboumboum.game.limit;
 import java.util.ArrayList;
 import java.util.Iterator;
 
-import fr.free.totalboumboum.data.statistics.StatisticBase;
+import fr.free.totalboumboum.game.statistics.StatisticBase;
 
 public class Limits<T extends Limit>
 {

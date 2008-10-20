@@ -33,15 +33,15 @@ import javax.xml.parsers.ParserConfigurationException;
 
 import org.xml.sax.SAXException;
 
-import fr.free.totalboumboum.data.configuration.Configuration;
-import fr.free.totalboumboum.data.statistics.Score;
-import fr.free.totalboumboum.data.statistics.StatisticMatch;
-import fr.free.totalboumboum.data.statistics.StatisticRound;
+import fr.free.totalboumboum.configuration.Configuration;
 import fr.free.totalboumboum.game.limit.Limits;
 import fr.free.totalboumboum.game.limit.TournamentLimit;
 import fr.free.totalboumboum.game.match.Match;
 import fr.free.totalboumboum.game.points.PointsProcessor;
 import fr.free.totalboumboum.game.round.Round;
+import fr.free.totalboumboum.game.statistics.Score;
+import fr.free.totalboumboum.game.statistics.StatisticMatch;
+import fr.free.totalboumboum.game.statistics.StatisticRound;
 import fr.free.totalboumboum.game.tournament.AbstractTournament;
 import fr.free.totalboumboum.gui.game.match.statistics.MatchStatistics;
 

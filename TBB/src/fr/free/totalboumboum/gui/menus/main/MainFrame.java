@@ -28,8 +28,8 @@ import javax.xml.parsers.ParserConfigurationException;
 
 import org.xml.sax.SAXException;
 
-import fr.free.totalboumboum.data.configuration.ConfigurationSaver;
-import fr.free.totalboumboum.data.configuration.GameConstants;
+import fr.free.totalboumboum.configuration.ConfigurationSaver;
+import fr.free.totalboumboum.configuration.GameConstants;
 import fr.free.totalboumboum.gui.common.MenuContainer;
 import fr.free.totalboumboum.gui.common.panel.menu.MenuPanel;
 import fr.free.totalboumboum.gui.data.configuration.GuiConfiguration;

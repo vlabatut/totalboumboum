@@ -31,7 +31,7 @@ import javax.xml.parsers.ParserConfigurationException;
 import org.jdom.Element;
 import org.xml.sax.SAXException;
 
-import fr.free.totalboumboum.data.configuration.GameConstants;
+import fr.free.totalboumboum.configuration.GameConstants;
 import fr.free.totalboumboum.engine.container.bombset.Bombset;
 import fr.free.totalboumboum.engine.container.bombset.BombsetLoader;
 import fr.free.totalboumboum.engine.container.itemset.Itemset;

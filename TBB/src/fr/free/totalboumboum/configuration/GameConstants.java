@@ -1,4 +1,4 @@
-package fr.free.totalboumboum.data.configuration;
+package fr.free.totalboumboum.configuration;
 
 /*
  * Total Boum Boum

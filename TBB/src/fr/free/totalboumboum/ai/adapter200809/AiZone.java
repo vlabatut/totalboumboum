@@ -26,7 +26,7 @@ import java.util.Collection;
 import java.util.Collections;
 import java.util.Iterator;
 
-import fr.free.totalboumboum.data.profile.PredefinedColor;
+import fr.free.totalboumboum.configuration.profile.PredefinedColor;
 import fr.free.totalboumboum.engine.container.level.Level;
 import fr.free.totalboumboum.engine.container.tile.Tile;
 import fr.free.totalboumboum.engine.content.feature.Direction;

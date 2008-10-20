@@ -32,7 +32,7 @@ import org.xml.sax.SAXException;
 
 import fr.free.totalboumboum.game.match.Match;
 
-import fr.free.totalboumboum.data.configuration.Configuration;
+import fr.free.totalboumboum.configuration.Configuration;
 import fr.free.totalboumboum.game.round.Round;
 import fr.free.totalboumboum.game.tournament.AbstractTournament;
 import fr.free.totalboumboum.gui.data.language.Language;

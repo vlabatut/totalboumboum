@@ -24,8 +24,6 @@ package fr.free.totalboumboum.engine.content.sprite.hero;
 import java.util.ArrayList;
 import java.util.Iterator;
 
-import fr.free.totalboumboum.data.statistics.StatisticAction;
-import fr.free.totalboumboum.data.statistics.StatisticEvent;
 import fr.free.totalboumboum.engine.container.tile.Tile;
 import fr.free.totalboumboum.engine.content.feature.Contact;
 import fr.free.totalboumboum.engine.content.feature.Direction;
@@ -47,6 +45,8 @@ import fr.free.totalboumboum.engine.content.sprite.fire.Fire;
 import fr.free.totalboumboum.engine.content.sprite.item.Item;
 import fr.free.totalboumboum.engine.player.Player;
 import fr.free.totalboumboum.game.round.PlayMode;
+import fr.free.totalboumboum.game.statistics.StatisticAction;
+import fr.free.totalboumboum.game.statistics.StatisticEvent;
 
 
 public class HeroEventManager extends EventManager

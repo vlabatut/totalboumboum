@@ -28,8 +28,8 @@ import javax.xml.parsers.ParserConfigurationException;
 
 import org.xml.sax.SAXException;
 
-import fr.free.totalboumboum.data.configuration.Configuration;
-import fr.free.totalboumboum.data.configuration.GameConstants;
+import fr.free.totalboumboum.configuration.Configuration;
+import fr.free.totalboumboum.configuration.GameConstants;
 import fr.free.totalboumboum.engine.loop.Loop;
 import fr.free.totalboumboum.engine.loop.LoopRenderPanel;
 import fr.free.totalboumboum.game.match.Match;

@@ -29,10 +29,8 @@ import javax.xml.parsers.ParserConfigurationException;
 
 import org.xml.sax.SAXException;
 
-import fr.free.totalboumboum.data.configuration.Configuration;
-import fr.free.totalboumboum.data.profile.Profile;
-import fr.free.totalboumboum.data.statistics.StatisticEvent;
-import fr.free.totalboumboum.data.statistics.StatisticRound;
+import fr.free.totalboumboum.configuration.Configuration;
+import fr.free.totalboumboum.configuration.profile.Profile;
 import fr.free.totalboumboum.engine.container.level.HollowLevel;
 import fr.free.totalboumboum.engine.container.zone.Zone;
 import fr.free.totalboumboum.engine.container.zone.ZoneLoader;
@@ -44,6 +42,8 @@ import fr.free.totalboumboum.game.limit.RoundLimit;
 import fr.free.totalboumboum.game.match.Match;
 import fr.free.totalboumboum.game.points.PlayerPoints;
 import fr.free.totalboumboum.game.points.PointsProcessor;
+import fr.free.totalboumboum.game.statistics.StatisticEvent;
+import fr.free.totalboumboum.game.statistics.StatisticRound;
 
 public class Round
 {

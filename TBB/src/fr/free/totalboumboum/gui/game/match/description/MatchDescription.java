@@ -34,9 +34,9 @@ import javax.swing.BoxLayout;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
-import fr.free.totalboumboum.data.configuration.GameConstants;
-import fr.free.totalboumboum.data.profile.Portraits;
-import fr.free.totalboumboum.data.profile.Profile;
+import fr.free.totalboumboum.configuration.GameConstants;
+import fr.free.totalboumboum.configuration.profile.Portraits;
+import fr.free.totalboumboum.configuration.profile.Profile;
 import fr.free.totalboumboum.game.match.Match;
 import fr.free.totalboumboum.gui.common.panel.SplitMenuPanel;
 import fr.free.totalboumboum.gui.common.panel.data.EntitledDataPanel;

@@ -23,7 +23,7 @@ package fr.free.totalboumboum.engine.content.sprite.fire;
 
 import java.util.ArrayList;
 
-import fr.free.totalboumboum.data.configuration.Configuration;
+import fr.free.totalboumboum.configuration.Configuration;
 import fr.free.totalboumboum.engine.container.bombset.Bombset;
 import fr.free.totalboumboum.engine.container.fireset.Fireset;
 import fr.free.totalboumboum.engine.container.level.Level;

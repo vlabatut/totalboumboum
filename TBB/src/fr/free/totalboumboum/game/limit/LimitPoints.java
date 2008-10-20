@@ -21,8 +21,8 @@ package fr.free.totalboumboum.game.limit;
  * 
  */
 
-import fr.free.totalboumboum.data.statistics.StatisticBase;
 import fr.free.totalboumboum.game.points.PointsProcessor;
+import fr.free.totalboumboum.game.statistics.StatisticBase;
 
 public class LimitPoints implements TournamentLimit, MatchLimit, RoundLimit
 {
