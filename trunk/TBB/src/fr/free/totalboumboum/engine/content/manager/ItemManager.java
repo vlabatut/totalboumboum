@@ -25,14 +25,14 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.LinkedList;
 
-import fr.free.totalboumboum.data.configuration.Configuration;
-import fr.free.totalboumboum.data.statistics.StatisticAction;
-import fr.free.totalboumboum.data.statistics.StatisticEvent;
+import fr.free.totalboumboum.configuration.Configuration;
 import fr.free.totalboumboum.engine.content.feature.ability.AbstractAbility;
 import fr.free.totalboumboum.engine.content.feature.ability.ActionAbility;
 import fr.free.totalboumboum.engine.content.feature.action.GeneralAction;
 import fr.free.totalboumboum.engine.content.sprite.Sprite;
 import fr.free.totalboumboum.engine.content.sprite.item.Item;
+import fr.free.totalboumboum.game.statistics.StatisticAction;
+import fr.free.totalboumboum.game.statistics.StatisticEvent;
 
 public class ItemManager
 {	private Sprite sprite;

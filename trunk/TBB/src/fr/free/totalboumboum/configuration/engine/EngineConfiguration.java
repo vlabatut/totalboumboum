@@ -1,4 +1,4 @@
-package fr.free.totalboumboum.data.configuration.engine;
+package fr.free.totalboumboum.configuration.engine;
 
 public class EngineConfiguration
 {

@@ -23,7 +23,7 @@ package fr.free.totalboumboum.game.points;
 
 import java.util.ArrayList;
 
-import fr.free.totalboumboum.data.statistics.StatisticBase;
+import fr.free.totalboumboum.game.statistics.StatisticBase;
 
 public class PointsSummation extends PointsProcessor implements PPFunction
 {

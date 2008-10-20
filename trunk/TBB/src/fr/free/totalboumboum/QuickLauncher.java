@@ -31,8 +31,8 @@ import javax.xml.parsers.ParserConfigurationException;
 
 import org.xml.sax.SAXException;
 
-import fr.free.totalboumboum.data.configuration.Configuration;
-import fr.free.totalboumboum.data.configuration.ConfigurationLoader;
+import fr.free.totalboumboum.configuration.Configuration;
+import fr.free.totalboumboum.configuration.ConfigurationLoader;
 import fr.free.totalboumboum.gui.quicklaunch.QuickFrame;
 import fr.free.totalboumboum.tools.XmlTools;
 

@@ -21,7 +21,7 @@ package fr.free.totalboumboum.tools;
  * 
  */
 
-import fr.free.totalboumboum.data.configuration.GameConstants;
+import fr.free.totalboumboum.configuration.GameConstants;
 import fr.free.totalboumboum.engine.loop.Loop;
 
 public class CalculusTools

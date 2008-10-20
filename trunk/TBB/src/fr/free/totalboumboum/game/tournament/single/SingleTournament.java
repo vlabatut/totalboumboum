@@ -27,11 +27,11 @@ import javax.xml.parsers.ParserConfigurationException;
 
 import org.xml.sax.SAXException;
 
-import fr.free.totalboumboum.data.configuration.Configuration;
-import fr.free.totalboumboum.data.statistics.StatisticMatch;
+import fr.free.totalboumboum.configuration.Configuration;
 import fr.free.totalboumboum.game.match.Match;
 import fr.free.totalboumboum.game.points.PointsProcessor;
 import fr.free.totalboumboum.game.points.PointsTotal;
+import fr.free.totalboumboum.game.statistics.StatisticMatch;
 import fr.free.totalboumboum.game.tournament.AbstractTournament;
 
 public class SingleTournament extends AbstractTournament

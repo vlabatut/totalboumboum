@@ -48,7 +48,7 @@ import org.jdom.Attribute;
 import org.jdom.Element;
 import org.xml.sax.SAXException;
 
-import fr.free.totalboumboum.data.profile.PredefinedColor;
+import fr.free.totalboumboum.configuration.profile.PredefinedColor;
 import fr.free.totalboumboum.engine.content.feature.anime.Colormap;
 import fr.free.totalboumboum.engine.content.feature.anime.ColormapLoader;
 

@@ -33,10 +33,10 @@ import org.xml.sax.SAXException;
 
 import fr.free.totalboumboum.ai.AbstractAiManager;
 import fr.free.totalboumboum.ai.AiLoader;
-import fr.free.totalboumboum.data.configuration.Configuration;
-import fr.free.totalboumboum.data.controls.ControlSettings;
-import fr.free.totalboumboum.data.profile.PredefinedColor;
-import fr.free.totalboumboum.data.profile.Profile;
+import fr.free.totalboumboum.configuration.Configuration;
+import fr.free.totalboumboum.configuration.controls.ControlSettings;
+import fr.free.totalboumboum.configuration.profile.PredefinedColor;
+import fr.free.totalboumboum.configuration.profile.Profile;
 import fr.free.totalboumboum.engine.container.level.Level;
 import fr.free.totalboumboum.engine.content.feature.ability.AbstractAbility;
 import fr.free.totalboumboum.engine.content.feature.permission.PermissionPack;

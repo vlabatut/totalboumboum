@@ -44,7 +44,6 @@ import org.xml.sax.SAXException;
 
 import java.util.Map.Entry;
 
-import fr.free.totalboumboum.data.statistics.Score;
 import fr.free.totalboumboum.engine.container.level.HollowLevel;
 import fr.free.totalboumboum.engine.container.level.LevelPreview;
 import fr.free.totalboumboum.engine.container.level.LevelPreviewer;
@@ -64,6 +63,7 @@ import fr.free.totalboumboum.game.points.PointsRankpoints;
 import fr.free.totalboumboum.game.points.PointsScores;
 import fr.free.totalboumboum.game.points.PointsTotal;
 import fr.free.totalboumboum.game.round.Round;
+import fr.free.totalboumboum.game.statistics.Score;
 import fr.free.totalboumboum.gui.common.panel.SplitMenuPanel;
 import fr.free.totalboumboum.gui.common.panel.data.EntitledDataPanel;
 import fr.free.totalboumboum.gui.common.subpanel.EntitledSubPanelTable;

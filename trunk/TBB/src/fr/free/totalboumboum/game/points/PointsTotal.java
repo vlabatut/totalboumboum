@@ -21,7 +21,7 @@ package fr.free.totalboumboum.game.points;
  * 
  */
 
-import fr.free.totalboumboum.data.statistics.StatisticBase;
+import fr.free.totalboumboum.game.statistics.StatisticBase;
 
 public class PointsTotal extends PointsProcessor implements PPConstant
 {	

@@ -30,13 +30,13 @@ import java.util.TreeSet;
 
 import javax.swing.JLabel;
 
-import fr.free.totalboumboum.data.profile.Portraits;
-import fr.free.totalboumboum.data.profile.Profile;
-import fr.free.totalboumboum.data.statistics.Score;
-import fr.free.totalboumboum.data.statistics.StatisticMatch;
-import fr.free.totalboumboum.data.statistics.StatisticRound;
+import fr.free.totalboumboum.configuration.profile.Portraits;
+import fr.free.totalboumboum.configuration.profile.Profile;
 import fr.free.totalboumboum.game.match.Match;
 import fr.free.totalboumboum.game.points.PlayerPoints;
+import fr.free.totalboumboum.game.statistics.Score;
+import fr.free.totalboumboum.game.statistics.StatisticMatch;
+import fr.free.totalboumboum.game.statistics.StatisticRound;
 import fr.free.totalboumboum.gui.common.panel.SplitMenuPanel;
 import fr.free.totalboumboum.gui.common.panel.data.EntitledDataPanel;
 import fr.free.totalboumboum.gui.common.subpanel.UntitledSubPanelTable;

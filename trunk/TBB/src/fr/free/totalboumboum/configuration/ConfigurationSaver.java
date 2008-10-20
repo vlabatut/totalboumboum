@@ -1,4 +1,4 @@
-package fr.free.totalboumboum.data.configuration;
+package fr.free.totalboumboum.configuration;
 
 /*
  * Total Boum Boum
@@ -32,8 +32,8 @@ import org.xml.sax.SAXException;
 
 import java.util.Map.Entry;
 
-import fr.free.totalboumboum.data.configuration.controls.ControlSettings;
-import fr.free.totalboumboum.data.configuration.controls.ControlSettingsSaver;
+import fr.free.totalboumboum.configuration.controls.ControlSettings;
+import fr.free.totalboumboum.configuration.controls.ControlSettingsSaver;
 
 public class ConfigurationSaver
 {

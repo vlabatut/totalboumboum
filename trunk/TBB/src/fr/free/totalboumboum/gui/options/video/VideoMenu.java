@@ -32,9 +32,9 @@ import javax.xml.parsers.ParserConfigurationException;
 
 import org.xml.sax.SAXException;
 
-import fr.free.totalboumboum.data.configuration.ConfigurationSaver;
-import fr.free.totalboumboum.data.configuration.GameConstants;
-import fr.free.totalboumboum.data.controls.ControlSettings;
+import fr.free.totalboumboum.configuration.ConfigurationSaver;
+import fr.free.totalboumboum.configuration.GameConstants;
+import fr.free.totalboumboum.configuration.controls.ControlSettings;
 import fr.free.totalboumboum.gui.common.panel.SplitMenuPanel;
 import fr.free.totalboumboum.gui.common.panel.menu.InnerMenuPanel;
 import fr.free.totalboumboum.gui.common.panel.menu.MenuPanel;

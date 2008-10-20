@@ -27,11 +27,9 @@ import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.Map.Entry;
 
-import fr.free.totalboumboum.data.configuration.Configuration;
-import fr.free.totalboumboum.data.controls.ControlSettings;
-import fr.free.totalboumboum.data.profile.PredefinedColor;
-import fr.free.totalboumboum.data.statistics.StatisticAction;
-import fr.free.totalboumboum.data.statistics.StatisticEvent;
+import fr.free.totalboumboum.configuration.Configuration;
+import fr.free.totalboumboum.configuration.controls.ControlSettings;
+import fr.free.totalboumboum.configuration.profile.PredefinedColor;
 import fr.free.totalboumboum.engine.container.level.Level;
 import fr.free.totalboumboum.engine.container.tile.Tile;
 import fr.free.totalboumboum.engine.content.feature.Direction;
@@ -65,6 +63,8 @@ import fr.free.totalboumboum.engine.content.sprite.item.Item;
 import fr.free.totalboumboum.engine.control.ControlCode;
 import fr.free.totalboumboum.engine.loop.Loop;
 import fr.free.totalboumboum.engine.player.Player;
+import fr.free.totalboumboum.game.statistics.StatisticAction;
+import fr.free.totalboumboum.game.statistics.StatisticEvent;
 
 
 
