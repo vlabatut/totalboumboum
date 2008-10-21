@@ -1,4 +1,4 @@
-package fr.free.totalboumboum.configuration;
+package fr.free.totalboumboum.configuration.profile;
 
 /*
  * Total Boum Boum
@@ -34,40 +34,31 @@ import org.xml.sax.SAXException;
 import fr.free.totalboumboum.tools.FileTools;
 import fr.free.totalboumboum.tools.XmlTools;
 
-public class ConfigurationLoader
+public class ProfilesConfigurationLoader
 {	
-	public static Configuration loadConfiguration() throws IllegalArgumentException, SecurityException, ParserConfigurationException, SAXException, IOException, IllegalAccessException, NoSuchFieldException
-	{	Configuration result = new Configuration();
+	public static ProfilesConfiguration loadProfilesConfiguration() throws ParserConfigurationException, SAXException, IOException, IllegalArgumentException, SecurityException, IllegalAccessException, NoSuchFieldException, ClassNotFoundException
+	{	ProfilesConfiguration result = new ProfilesConfiguration();
 		String individualFolder = FileTools.getConfigurationPath();
-		File dataFile = new File(individualFolder+File.separator+FileTools.FILE_CONFIGURATION+FileTools.EXTENSION_DATA);
+		File dataFile = new File(individualFolder+File.separator+FileTools.FILE_PROFILES+FileTools.EXTENSION_DATA);
 		String schemaFolder = FileTools.getSchemasPath();
-		File schemaFile = new File(schemaFolder+File.separator+FileTools.FILE_CONFIGURATION+FileTools.EXTENSION_SCHEMA);
+		File schemaFile = new File(schemaFolder+File.separator+FileTools.FILE_PROFILES+FileTools.EXTENSION_SCHEMA);
 		Element root = XmlTools.getRootFromFile(dataFile,schemaFile);
-		loadConfigurationElement(root);
+		loadProfilesElement(root,result);
 		return result;
 	}
 
-	private static void loadConfigurationElement(Element root) throws IllegalArgumentException, SecurityException, ParserConfigurationException, SAXException, IOException, IllegalAccessException, NoSuchFieldException
-	{	Element element; 
-		// profiles
-		element = root.getChild(XmlTools.ELT_PROFILES);
-		loadProfilesElement(element);
-	}
-		
 	@SuppressWarnings("unchecked")
-	private static void loadProfilesElement(Element root) throws IllegalArgumentException, SecurityException, ParserConfigurationException, SAXException, IOException, IllegalAccessException, NoSuchFieldException
+	private static void loadProfilesElement(Element root, ProfilesConfiguration result) throws IllegalArgumentException, SecurityException, ParserConfigurationException, SAXException, IOException, IllegalAccessException, NoSuchFieldException
 	{	List<Element> elements = root.getChildren(XmlTools.ELT_PROFILE);
 		Iterator<Element> i = elements.iterator();
 		while(i.hasNext())
 		{	Element temp = i.next();
-			loadProfileElement(temp);
+			loadProfileElement(temp,result);
 		}
 	}
-	
-	private static void loadProfileElement(Element root) throws IllegalArgumentException, SecurityException, ParserConfigurationException, SAXException, IOException, IllegalAccessException, NoSuchFieldException
+		
+	private static void loadProfileElement(Element root, ProfilesConfiguration result) throws IllegalArgumentException, SecurityException, ParserConfigurationException, SAXException, IOException, IllegalAccessException, NoSuchFieldException
 	{	String value = root.getAttribute(XmlTools.ATT_VALUE).getValue().trim();
-//		Profile profile = ProfileLoader.loadProfile(value);			
-//		result.addProfile(profile);
-Configuration.addProfile(value);	
+		result.addProfile(value);	
 	}
 }

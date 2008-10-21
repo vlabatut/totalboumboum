@@ -41,11 +41,11 @@ public class GameConfigurationLoader
 		String schemaFolder = FileTools.getSchemasPath();
 		File schemaFile = new File(schemaFolder+File.separator+FileTools.FILE_GAME+FileTools.EXTENSION_SCHEMA);
 		Element root = XmlTools.getRootFromFile(dataFile,schemaFile);
-		loadConfigurationElement(root,result);
+		loadGameElement(root,result);
 		return result;
 	}
 
-	private static void loadConfigurationElement(Element root, GameConfiguration result) throws ParserConfigurationException, SAXException, IOException, IllegalArgumentException, SecurityException, IllegalAccessException, NoSuchFieldException, ClassNotFoundException
+	private static void loadGameElement(Element root, GameConfiguration result) throws ParserConfigurationException, SAXException, IOException, IllegalArgumentException, SecurityException, IllegalAccessException, NoSuchFieldException, ClassNotFoundException
 	{	Element element; 
 		// round for quick start
 		element = root.getChild(XmlTools.ELT_QUICKSTART);
