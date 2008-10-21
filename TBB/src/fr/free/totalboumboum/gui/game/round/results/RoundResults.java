@@ -92,6 +92,8 @@ public class RoundResults extends EntitledDataPanel
 			}
 			// data
 			{	resultsPanel.setSubColumnsMaxWidth(1,Integer.MAX_VALUE);
+				int w = resultsPanel.getHeaderHeight();
+				resultsPanel.setSubColumnsPreferredWidth(1,w);
 			}
 			//
 			setDataPart(resultsPanel);

@@ -22,7 +22,6 @@ package fr.free.totalboumboum.configuration;
  */
 
 import java.io.IOException;
-import java.util.ArrayList;
 
 import javax.xml.parsers.ParserConfigurationException;
 

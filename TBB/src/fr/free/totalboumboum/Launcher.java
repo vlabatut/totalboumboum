@@ -641,6 +641,7 @@ public class Launcher
 	 * - modification : mise à jour de la police de caractères du jeu
 	 * - nouveauté : affichage du type de joueur dans la présentation des tournois et matches
 	 * - nouveauté : possibilité de choisir les commandes des joueurs dans la présentation des matches
+	 * - modification : découpage modulaire de la configuration
 	 * 
 	 * *******************************************************
 	 * *********************** A FAIRE ***********************
@@ -664,6 +665,8 @@ public class Launcher
 	 * - mettre une icone spéciale pour différencier les humains et les IA, ds présentation et résultats
 	 * 
 	 * - besoin d'une méthode permettant d'exporter un tournoi/match/round, ie de l'écrire entièrement en local (pas de référence à des composants existants)
+	 * 
+	 * - bug d'animation : quand le bonhomme va à droite et qu'on appuie sur gauche, y a une espèce de passage droite-gauche très rapide au niveau de l'animation, insuportable
 	 * 
 	 * - dans les résultats :
 	 * 		- afficher par défaut les 4 scores de bases

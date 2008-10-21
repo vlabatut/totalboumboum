@@ -62,7 +62,7 @@ public class XmlTools
 	public static final String ELT_BOMBSET = "bombset";
 	public static final String ELT_BOMB = "bomb";
 	public static final String ELT_BOMBS = "bombs";
-	public static final String ELT_BORDER = "smoothGraphics";
+	public static final String ELT_BORDER = "border";
 	public static final String ELT_CASE = "case";
 	public static final String ELT_CHARACTER = "character";
 	public static final String ELT_COLOR = "color";

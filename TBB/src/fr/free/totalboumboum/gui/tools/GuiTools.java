@@ -43,7 +43,6 @@ import javax.swing.JToggleButton;
 import fr.free.totalboumboum.configuration.Configuration;
 import fr.free.totalboumboum.gui.common.ButtonAware;
 import fr.free.totalboumboum.gui.data.configuration.GuiConfiguration;
-import fr.free.totalboumboum.gui.data.language.Language;
 import fr.free.totalboumboum.tools.ImageTools;
 
 public class GuiTools
@@ -945,30 +944,12 @@ public class GuiTools
 	{	return icons.containsKey(key);		
 	}
 	
-	public static Font gameFont;
-	
-	public static void setGameFont(Font gameFont)
-	{	GuiTools.gameFont = gameFont;	
-	}
-	public static Font getGameFont()
-	{	return gameFont;	
-	}
-	public static String getText(String key)
-	{	return language.getText(key);		
-	}
-	public static void setLanguage(Language language)
-	{	GuiTools.language = language;	
-	}
-	
-	private static Language language;
-	
-	
 	public static int getFontSize(double limit)
 	{	int result = 0;
 		int fheight;
 		do
 		{	result++;
-			Font font = gameFont.deriveFont((float)result);
+			Font font = GuiConfiguration.getFont().deriveFont((float)result);
 			graphics.setFont(font);
 			FontMetrics metrics = graphics.getFontMetrics(font);
 			fheight = metrics.getHeight();
@@ -981,7 +962,7 @@ public class GuiTools
 		int fheight,fwidth;
 		do
 		{	result++;
-			Font font = gameFont.deriveFont((float)result);
+			Font font = GuiConfiguration.getFont().deriveFont((float)result);
 			graphics.setFont(font);
 			FontMetrics metrics = graphics.getFontMetrics(font);
 			fheight = metrics.getHeight();
@@ -993,7 +974,7 @@ public class GuiTools
 	}
 	public static int getPixelHeight(float fontSize)
 	{	int result;
-		Font font = gameFont.deriveFont(fontSize);
+		Font font = GuiConfiguration.getFont().deriveFont(fontSize);
 		graphics.setFont(font);
 		FontMetrics metrics = graphics.getFontMetrics(font);
 		result = (int)(metrics.getHeight()*1.2);
@@ -1001,7 +982,7 @@ public class GuiTools
 	}
 	public static int getPixelWidth(float fontSize, String text)
 	{	int result;
-		Font font = gameFont.deriveFont(fontSize);
+		Font font = GuiConfiguration.getFont().deriveFont(fontSize);
 		graphics.setFont(font);
 		FontMetrics metrics = graphics.getFontMetrics(font);
 		Rectangle2D bounds = metrics.getStringBounds(text,graphics);

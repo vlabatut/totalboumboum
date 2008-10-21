@@ -42,6 +42,7 @@ import fr.free.totalboumboum.game.points.PlayerPoints;
 import fr.free.totalboumboum.game.round.Round;
 import fr.free.totalboumboum.game.statistics.Score;
 import fr.free.totalboumboum.game.statistics.StatisticRound;
+import fr.free.totalboumboum.gui.data.configuration.GuiConfiguration;
 import fr.free.totalboumboum.gui.tools.SpringUtilities;
 import fr.free.totalboumboum.gui.tools.GuiTools;
 import fr.free.totalboumboum.tools.StringTools;
@@ -96,7 +97,7 @@ public class QuickResults extends JPanel
 		BufferedImage bi = new BufferedImage(10,10,BufferedImage.TYPE_INT_ARGB);
 		Graphics g = bi.getGraphics();
 		GuiTools.setGraphics(g);
-		GuiTools.setGameFont(new Font("Arial",Font.PLAIN,10));
+		GuiConfiguration.setFont(new Font("Arial",Font.PLAIN,10));
 		int headerHeight = (int)(1.5*pHeight/17.5);
 		int headerSize = GuiTools.getFontSize(headerHeight);
 		headerFont = new Font("Arial",Font.PLAIN,headerSize); 

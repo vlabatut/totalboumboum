@@ -22,7 +22,7 @@
 		<matches randomOrder="false">
 			<match local="false" name="matchLong" />
 			<match local="false" name="matchLong" />
-			<match local="true" name="matchLong" />
+			<match local="false" name="matchLong" />
 		</matches>
 
 	</sequence>

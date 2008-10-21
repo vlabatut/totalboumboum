@@ -99,6 +99,9 @@ public class GuiConfiguration
 	public static Font getFont()
 	{	return font;	
 	}
+	public static void setFont(Font font)
+	{	GuiConfiguration.font = font;	
+	}
 	public static void loadFontElement(Element root)
 	{	String filename = root.getAttribute(GuiXmlTools.ATT_FILE).getValue().trim();
 		String path = GuiFileTools.getFontsPath()+File.separator+filename;
