@@ -31,6 +31,7 @@ public class LimitScore implements TournamentLimit, MatchLimit, RoundLimit
 	// is the limit a superior limit (or an inferior)
 	private boolean supLimit;
 	// if the limit is crossed, does the player win ?
+	@SuppressWarnings("unused")
 	private boolean win;
 
 	public LimitScore(long limit, Score score, boolean supLimit, boolean win)

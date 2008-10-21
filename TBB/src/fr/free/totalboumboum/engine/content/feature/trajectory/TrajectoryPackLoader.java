@@ -23,7 +23,6 @@ package fr.free.totalboumboum.engine.content.feature.trajectory;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
@@ -34,14 +33,11 @@ import org.jdom.Attribute;
 import org.jdom.Element;
 import org.xml.sax.SAXException;
 
-import fr.free.totalboumboum.configuration.Configuration;
 import fr.free.totalboumboum.engine.container.level.Level;
 import fr.free.totalboumboum.engine.content.feature.Direction;
 import fr.free.totalboumboum.engine.content.feature.ImageShift;
-import fr.free.totalboumboum.engine.loop.Loop;
 import fr.free.totalboumboum.tools.FileTools;
 import fr.free.totalboumboum.tools.XmlTools;
-
 
 public class TrajectoryPackLoader
 {	
@@ -63,7 +59,8 @@ public class TrajectoryPackLoader
 		return result;
 	}
 	
-    private static void loadTrajectories(Element root, Level level, TrajectoryPack result) throws IOException
+    @SuppressWarnings("unchecked")
+	private static void loadTrajectories(Element root, Level level, TrajectoryPack result) throws IOException
 	{	List<Element> gesturesList = root.getChildren();
 		Iterator<Element> i = gesturesList.iterator();
 		while(i.hasNext())
@@ -76,7 +73,8 @@ public class TrajectoryPackLoader
     /**
      * load a gesture (and if required all the associated directions) 
      */
-    private static TrajectoryGesture loadGestureElement(Element root, Level level) throws IOException
+    @SuppressWarnings("unchecked")
+	private static TrajectoryGesture loadGestureElement(Element root, Level level) throws IOException
     {	TrajectoryGesture result = new TrajectoryGesture();
     	double zoomFactor = level.getLoop().getZoomFactor();
     	// name
@@ -120,7 +118,8 @@ public class TrajectoryPackLoader
     /**
      * load a direction for a given gesture
      */
-    private static TrajectoryDirection loadDirectionElement(String gestureName, Element root,double zoomFactor,
+    @SuppressWarnings("unchecked")
+	private static TrajectoryDirection loadDirectionElement(String gestureName, Element root,double zoomFactor,
     		boolean repeat, double xInteraction, double yInteraction, boolean proportional) throws IOException
     {	TrajectoryDirection result = new TrajectoryDirection();
     	result.setRepeat(repeat);

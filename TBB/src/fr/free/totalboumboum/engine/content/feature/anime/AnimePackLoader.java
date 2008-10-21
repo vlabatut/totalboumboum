@@ -21,14 +21,9 @@ package fr.free.totalboumboum.engine.content.feature.anime;
  * 
  */
 
-import java.awt.AlphaComposite;
-import java.awt.Graphics2D;
-import java.awt.RenderingHints;
-import java.awt.geom.AffineTransform;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
@@ -46,11 +41,9 @@ import fr.free.totalboumboum.configuration.profile.PredefinedColor;
 import fr.free.totalboumboum.engine.container.level.Level;
 import fr.free.totalboumboum.engine.content.feature.Direction;
 import fr.free.totalboumboum.engine.content.feature.ImageShift;
-import fr.free.totalboumboum.engine.loop.Loop;
 import fr.free.totalboumboum.tools.FileTools;
 import fr.free.totalboumboum.tools.ImageTools;
 import fr.free.totalboumboum.tools.XmlTools;
-
 
 public class AnimePackLoader
 {	
@@ -133,7 +126,8 @@ public class AnimePackLoader
 		}
 	}
     
-    private static void loadShadowsElement(Element root, String individualFolder,
+    @SuppressWarnings("unchecked")
+	private static void loadShadowsElement(Element root, String individualFolder,
     		Level level,
     		HashMap<String,BufferedImage> images, HashMap<String,BufferedImage> shadows, Colormap colormap,
     		double zoomFactor, double scale) throws IOException
@@ -165,7 +159,8 @@ public class AnimePackLoader
     	shadows.put(name,shadow);
     }
     
-    private static void loadGesturesElement(Element root, double boundHeight, String filePath, AnimePack animePack,
+    @SuppressWarnings("unchecked")
+	private static void loadGesturesElement(Element root, double boundHeight, String filePath, AnimePack animePack,
     		Level level,
     		HashMap<String,BufferedImage> images, HashMap<String,BufferedImage> shadows, Colormap colormap,
     		double zoomFactor, double scale) throws IOException
@@ -187,7 +182,8 @@ public class AnimePackLoader
     /**
      * load a gesture (and if required all the associated directions) 
      */
-    private static AnimeGesture loadGestureElement(Element root, double boundHeight, String filePath,
+    @SuppressWarnings("unchecked")
+	private static AnimeGesture loadGestureElement(Element root, double boundHeight, String filePath,
     		Level level,
     		HashMap<String,BufferedImage> images, HashMap<String,BufferedImage> shadows, Colormap colormap,
     		double zoomFactor, double scale) throws IOException
@@ -270,7 +266,8 @@ public class AnimePackLoader
     /**
      * load a direction for a given gesture
      */
-    private static AnimeDirection loadDirectionElement(String gestureName, double boundHeight, boolean repeat, boolean proportional, 
+    @SuppressWarnings("unchecked")
+	private static AnimeDirection loadDirectionElement(String gestureName, double boundHeight, boolean repeat, boolean proportional, 
     		Element root, String filePath, 
     		double xShift, double yShift, 
     		BufferedImage shadow, double shadowXShift, double shadowYShift, ImageShift boundYShift,
@@ -422,7 +419,7 @@ public class AnimePackLoader
     	else
     	{	BufferedImage imgOld = ImageTools.loadImage(imgPath,colormap);
     	 	double zoom = zoomFactor/scale;
-			result = ImageTools.resize(imgOld,zoom,level.getConfiguration().getSmoothGraphics());
+			result = ImageTools.resize(imgOld,zoom,Configuration.getVideoConfiguration().getSmoothGraphics());
 			images.put(imgPath,result);
     	}
     	return result;

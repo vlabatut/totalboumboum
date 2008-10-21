@@ -21,25 +21,14 @@ package fr.free.totalboumboum.engine.content.sprite.item;
  * 
  */
 
-import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 import java.util.Iterator;
 
-import fr.free.totalboumboum.configuration.Configuration;
-import fr.free.totalboumboum.engine.container.bombset.Bombset;
 import fr.free.totalboumboum.engine.container.level.Level;
-import fr.free.totalboumboum.engine.content.feature.Direction;
-import fr.free.totalboumboum.engine.content.feature.GestureConstants;
 import fr.free.totalboumboum.engine.content.feature.ability.AbstractAbility;
-import fr.free.totalboumboum.engine.content.feature.anime.AnimePack;
-import fr.free.totalboumboum.engine.content.feature.explosion.Explosion;
-import fr.free.totalboumboum.engine.content.feature.permission.PermissionPack;
-import fr.free.totalboumboum.engine.content.feature.trajectory.TrajectoryPack;
 import fr.free.totalboumboum.engine.content.manager.EventManager;
 import fr.free.totalboumboum.engine.content.sprite.SpriteFactory;
 import fr.free.totalboumboum.engine.content.sprite.item.ItemEventManager;
-import fr.free.totalboumboum.engine.loop.Loop;
-
 
 public class ItemFactory extends SpriteFactory<Item>
 {	

@@ -29,15 +29,10 @@ import javax.xml.parsers.ParserConfigurationException;
 
 import org.xml.sax.SAXException;
 
-import fr.free.totalboumboum.configuration.Configuration;
 import fr.free.totalboumboum.configuration.profile.Profile;
 import fr.free.totalboumboum.engine.container.level.HollowLevel;
-import fr.free.totalboumboum.engine.container.zone.Zone;
-import fr.free.totalboumboum.engine.container.zone.ZoneLoader;
 import fr.free.totalboumboum.engine.loop.Loop;
-import fr.free.totalboumboum.engine.player.Player;
 import fr.free.totalboumboum.game.limit.Limits;
-import fr.free.totalboumboum.game.limit.MatchLimit;
 import fr.free.totalboumboum.game.limit.RoundLimit;
 import fr.free.totalboumboum.game.match.Match;
 import fr.free.totalboumboum.game.points.PlayerPoints;
@@ -49,7 +44,6 @@ public class Round
 {
 	public Round(Match match)
 	{	this.match = match;
-		configuration = match.getConfiguration();
 	}
 	
 	/////////////////////////////////////////////////////////////////
@@ -91,7 +85,6 @@ public class Round
 		hollowLevel.finish();
 		hollowLevel = null;
 		// misc
-		configuration = null;
 		match = null;
 		panel = null;
 		playersInGame.clear();
@@ -142,11 +135,6 @@ public class Round
 	/////////////////////////////////////////////////////////////////
 	private Match match;
 	
-    private Configuration configuration;
-	public Configuration getConfiguration()
-	{	return configuration;	
-	}
-
 	/////////////////////////////////////////////////////////////////
 	// PLAYERS			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////

@@ -77,11 +77,4 @@ public abstract class InnerMenuPanel extends ContentPanel implements ButtonAware
 	public MainFrame getFrame()
 	{	return container.getFrame();
 	}
-	
-	/////////////////////////////////////////////////////////////////
-	// CONFIGURATION	/////////////////////////////////////////////
-	/////////////////////////////////////////////////////////////////
-	public GuiConfiguration getConfiguration()
-	{	return getFrame().getConfiguration();
-	}
 }

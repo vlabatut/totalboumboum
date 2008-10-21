@@ -83,7 +83,8 @@ public class PointsProcessorLoader
 		return result;
 	}
 
-    private static PointsProcessor loadPointProcessorElement(Element root)
+    @SuppressWarnings("unchecked")
+	private static PointsProcessor loadPointProcessorElement(Element root)
 	{	// init
     	PointsProcessor result;
     	Element element;
@@ -182,6 +183,7 @@ public class PointsProcessorLoader
 		PointsSummation result = new PointsSummation(source);
 		return result;
 	}
+	@SuppressWarnings("unchecked")
 	private static PointsRankings loadRankingsElement(Element root)
 	{	// invert
 		String str = root.getAttribute(XmlTools.ATT_INVERT).getValue();
@@ -199,6 +201,7 @@ public class PointsProcessorLoader
 		PointsRankings result = new PointsRankings(sources,invert);
 		return result;
 	}
+	@SuppressWarnings("unchecked")
 	private static PointsDiscretize loadDiscretizeElement(Element root)
 	{	// source
 		Element src = (Element) root.getChildren().get(0);
@@ -227,6 +230,7 @@ public class PointsProcessorLoader
 		PointsDiscretize result = new PointsDiscretize(source,thresh,vals);
 		return result;
 	}
+	@SuppressWarnings("unchecked")
 	private static PointsRankpoints loadRankpointsElement(Element root)
 	{	// share
 		String str = root.getAttribute(XmlTools.ATT_EXAEQUO_SHARE).getValue();
@@ -259,6 +263,7 @@ public class PointsProcessorLoader
 		return result;
 	}
 	
+	@SuppressWarnings("unchecked")
 	private static PointsAddition loadAdditionElement(Element root)
 	{	// left source
 		List<Element> sources = root.getChildren();
@@ -271,6 +276,7 @@ public class PointsProcessorLoader
 		PointsAddition result = new PointsAddition(leftSource,rightSource);
 		return result;
 	}
+	@SuppressWarnings("unchecked")
 	private static PointsSubtraction loadSubtractionElement(Element root)
 	{	// left source
 		List<Element> sources = root.getChildren();
@@ -283,6 +289,7 @@ public class PointsProcessorLoader
 		PointsSubtraction result = new PointsSubtraction(leftSource,rightSource);
 		return result;
 	}
+	@SuppressWarnings("unchecked")
 	private static PointsMultiplication loadMultiplicationElement(Element root)
 	{	// left source
 		List<Element> sources = root.getChildren();
@@ -295,6 +302,7 @@ public class PointsProcessorLoader
 		PointsMultiplication result = new PointsMultiplication(leftSource,rightSource);
 		return result;
 	}
+	@SuppressWarnings("unchecked")
 	private static PointsDivision loadDivisionElement(Element root)
 	{	// left source
 		List<Element> sources = root.getChildren();

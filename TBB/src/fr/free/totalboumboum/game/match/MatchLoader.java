@@ -32,7 +32,6 @@ import javax.xml.parsers.ParserConfigurationException;
 import org.jdom.Element;
 import org.xml.sax.SAXException;
 
-import fr.free.totalboumboum.game.limit.Limit;
 import fr.free.totalboumboum.game.limit.LimitLoader;
 import fr.free.totalboumboum.game.limit.Limits;
 import fr.free.totalboumboum.game.limit.MatchLimit;
@@ -87,7 +86,8 @@ public class MatchLoader
 		return result;
 	}		
 		
-    public static ArrayList<String> loadNotesElement(Element root)
+    @SuppressWarnings("unchecked")
+	public static ArrayList<String> loadNotesElement(Element root)
     {	ArrayList<String> result = new ArrayList<String>();
     	List<Element> lines = root.getChildren(XmlTools.ELT_LINE);
     	Iterator<Element> i = lines.iterator();
@@ -99,7 +99,8 @@ public class MatchLoader
     	return result;
     }
 
-    private static void loadRoundsElement(Element root, String folder, Match result) throws ParserConfigurationException, SAXException, IOException, ClassNotFoundException
+    @SuppressWarnings("unchecked")
+	private static void loadRoundsElement(Element root, String folder, Match result) throws ParserConfigurationException, SAXException, IOException, ClassNotFoundException
     {	// rounds order
     	String str = root.getAttribute(XmlTools.ATT_RANDOM_ORDER).getValue().trim();
     	boolean randomOrder = Boolean.valueOf(str);
@@ -130,6 +131,7 @@ public class MatchLoader
 		result.addRound(round);
 	}
     
+	@SuppressWarnings("unchecked")
 	public static Limits<MatchLimit> loadLimitsElement(Element root, String folder) throws ParserConfigurationException, SAXException, IOException
 	{	Limits<MatchLimit> result = new Limits<MatchLimit>();
 

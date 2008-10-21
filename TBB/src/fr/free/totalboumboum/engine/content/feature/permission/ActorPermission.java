@@ -21,7 +21,6 @@ package fr.free.totalboumboum.engine.content.feature.permission;
  * 
  */
 
-import java.util.ArrayList;
 import java.util.Iterator;
 
 import fr.free.totalboumboum.engine.content.feature.ability.AbstractAbility;

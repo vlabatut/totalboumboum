@@ -24,6 +24,7 @@ package fr.free.totalboumboum.engine.content.manager;
 import java.awt.image.BufferedImage;
 import java.util.Iterator;
 
+import fr.free.totalboumboum.configuration.Configuration;
 import fr.free.totalboumboum.configuration.profile.PredefinedColor;
 import fr.free.totalboumboum.engine.content.feature.Direction;
 import fr.free.totalboumboum.engine.content.feature.anime.AnimeDirection;
@@ -43,6 +44,7 @@ public class AnimeManager
 	/** pas courrant */
 	private AnimeStep currentStep;
 	/** indique que l'animation est finie (on reste sur la dernière image) */
+	@SuppressWarnings("unused")
 	private boolean isTerminated;
 	/** temps total écoulé de puis le début de l'animation */
 	private double currentTime;
@@ -169,7 +171,7 @@ public class AnimeManager
 	
 	public void updateTime()
 	{	// update current time
-		double milliPeriod = sprite.getConfiguration().getMilliPeriod();
+		double milliPeriod = Configuration.getEngineConfiguration().getMilliPeriod();
 		double delta = milliPeriod*forcedDurationCoeff*sprite.getSpeedCoeff();	
 		currentTime = currentTime + delta;
 		animeTime = animeTime + delta;

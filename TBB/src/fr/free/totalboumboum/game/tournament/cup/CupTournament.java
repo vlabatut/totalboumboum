@@ -22,16 +22,13 @@ package fr.free.totalboumboum.game.tournament.cup;
  */
 
 import java.io.IOException;
-import java.util.ArrayList;
 
 import javax.xml.parsers.ParserConfigurationException;
 
 import org.xml.sax.SAXException;
 
 import fr.free.totalboumboum.game.match.Match;
-import fr.free.totalboumboum.game.points.PointsProcessor;
 import fr.free.totalboumboum.game.tournament.AbstractTournament;
-
 
 public class CupTournament extends AbstractTournament
 {

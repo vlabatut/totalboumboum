@@ -33,11 +33,9 @@ import javax.xml.parsers.ParserConfigurationException;
 
 import org.xml.sax.SAXException;
 
-import fr.free.totalboumboum.configuration.Configuration;
 import fr.free.totalboumboum.configuration.profile.Profile;
 import fr.free.totalboumboum.game.limit.Limits;
 import fr.free.totalboumboum.game.limit.MatchLimit;
-import fr.free.totalboumboum.game.points.PointsTotal;
 import fr.free.totalboumboum.game.points.PointsProcessor;
 import fr.free.totalboumboum.game.round.Round;
 import fr.free.totalboumboum.game.statistics.StatisticMatch;
@@ -48,18 +46,12 @@ public class Match
 {	
 	public Match(AbstractTournament tournament)
 	{	this.tournament = tournament;
-		configuration = tournament.getConfiguration();
 	}
 	
 	/////////////////////////////////////////////////////////////////
 	// TOURNAMENT		/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	private AbstractTournament tournament;
-	
-    private Configuration configuration;
-	public Configuration getConfiguration()
-	{	return configuration;
-	}
 	
 	/////////////////////////////////////////////////////////////////
 	// GAME				/////////////////////////////////////////////
@@ -210,7 +202,6 @@ public class Match
 		limits.finish();
 		limits = null;
 		// misc
-		configuration = null;
 		panel = null;
 		pointProcessor = null;
 		profiles.clear();

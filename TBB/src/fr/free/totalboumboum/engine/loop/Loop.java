@@ -21,16 +21,7 @@ package fr.free.totalboumboum.engine.loop;
  * 
  */
 
-import java.awt.AlphaComposite;
-import java.awt.Dimension;
 import java.awt.Graphics;
-import java.awt.Graphics2D;
-import java.awt.GraphicsConfiguration;
-import java.awt.GraphicsEnvironment;
-import java.awt.Image;
-import java.awt.Toolkit;
-import java.awt.image.BufferedImage;
-import java.awt.image.VolatileImage;
 import java.io.File;
 import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
@@ -40,12 +31,9 @@ import java.util.concurrent.locks.Condition;
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
 
-import javax.swing.SwingUtilities;
 import javax.xml.parsers.ParserConfigurationException;
 
 import org.xml.sax.SAXException;
-
-import sun.awt.image.OffScreenImage;
 
 import fr.free.totalboumboum.configuration.Configuration;
 import fr.free.totalboumboum.configuration.GameConstants;
@@ -54,8 +42,6 @@ import fr.free.totalboumboum.engine.container.itemset.Itemset;
 import fr.free.totalboumboum.engine.container.level.HollowLevel;
 import fr.free.totalboumboum.engine.container.level.Level;
 import fr.free.totalboumboum.engine.container.level.Players;
-import fr.free.totalboumboum.engine.content.feature.Direction;
-import fr.free.totalboumboum.engine.content.feature.GestureConstants;
 import fr.free.totalboumboum.engine.content.feature.ability.AbilityLoader;
 import fr.free.totalboumboum.engine.content.feature.ability.AbstractAbility;
 import fr.free.totalboumboum.engine.content.feature.ability.StateAbility;
@@ -80,7 +66,6 @@ public class Loop implements Runnable
 	
 	public Loop(Round round)
 	{	this.round = round;
-		configuration = round.getConfiguration();
 	}	
 	
 	private Lock loadLock = new ReentrantLock();
@@ -181,10 +166,6 @@ public class Loop implements Runnable
 	/////////////////////////////////////////////////////////////////
 	// ROUND			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-    private Configuration configuration;
-	public Configuration getConfiguration()
-	{	return configuration;	
-	}
 	
 	/////////////////////////////////////////////////////////////////
 	// CONTROL			/////////////////////////////////////////////
@@ -317,6 +298,7 @@ public class Loop implements Runnable
 	 * no. of frames that can be skipped in any one animation loop
 	 * i.e the games state is updated but not rendered
 	 */ 
+	@SuppressWarnings("unused")
 	private static int MAX_FRAME_SKIPS = 5;
 	private long milliPeriod;
 //	private long nanoPeriod;
@@ -445,7 +427,7 @@ float nbrUpdates=0;
 //		setLooping(true);
 		while(/*isLooping() && */!isOver())
 		{	
-			milliPeriod = getConfiguration().getMilliPeriod();
+			milliPeriod = Configuration.getEngineConfiguration().getMilliPeriod();
 			
 			// cycle
 long a = System.currentTimeMillis();
@@ -542,17 +524,17 @@ System.out.println();
 
 	private void update()
 	{	if(!isPaused)
-		{	long milliPeriod = getConfiguration().getMilliPeriod();
+		{	long milliPeriod = Configuration.getEngineConfiguration().getMilliPeriod();
 			// celebration ?
 			if(celebrationDelay>0)
-			{	celebrationDelay = celebrationDelay - (milliPeriod*getConfiguration().getSpeedCoeff());
+			{	celebrationDelay = celebrationDelay - (milliPeriod*Configuration.getEngineConfiguration().getSpeedCoeff());
 				if(celebrationDelay<=0)
 					setOver(true);
 			}
 			
 			// entry ?
 			if(entryDelay>=0)
-				entryDelay = entryDelay - (milliPeriod*getConfiguration().getSpeedCoeff());
+				entryDelay = entryDelay - (milliPeriod*Configuration.getEngineConfiguration().getSpeedCoeff());
 					
 			// normal update (level and AI)
 			getLevel().update();
@@ -631,12 +613,12 @@ System.out.println();
       		prevStatsTime = timeNow;
       		
       		// adapt the FPS according to the PC power
-			int fps = configuration.getFps();
+			int fps = Configuration.getEngineConfiguration().getFps();
 			if(averageFPS>0)
 			{	if(averageFPS<30 && fps>30)
-					configuration.setFps(fps-10);
+				Configuration.getEngineConfiguration().setFps(fps-10);
 				else if(averageFPS>(fps-1) && fps<50)
-					configuration.setFps(fps+10);
+					Configuration.getEngineConfiguration().setFps(fps+10);
 			}
       	}
     }

@@ -24,7 +24,6 @@ package fr.free.totalboumboum.engine.content.manager;
 import java.util.ArrayList;
 import java.util.Iterator;
 
-import fr.free.totalboumboum.configuration.Configuration;
 import fr.free.totalboumboum.engine.container.level.Level;
 import fr.free.totalboumboum.engine.container.tile.Tile;
 import fr.free.totalboumboum.engine.content.feature.Direction;
@@ -45,22 +44,17 @@ import fr.free.totalboumboum.engine.content.sprite.Sprite;
 public class PermissionManager
 {	private Sprite sprite;
 	private String currentGesture;
+	@SuppressWarnings("unused")
 	private Direction currentDirection;
 	private PermissionPack permissions;
 	private ArrayList<AbstractAbility> modulationAbilities;
 	
 	public PermissionManager(Sprite sprite)
 	{	this.sprite = sprite;
-		configuration = sprite.getConfiguration();
 		permissions = new PermissionPack();
 		currentGesture = GestureConstants.NONE;
 		currentDirection = Direction.NONE;
 		modulationAbilities = new ArrayList<AbstractAbility>();
-	}
-	
-    private Configuration configuration;
-	public Configuration getConfiguration()
-	{	return configuration;	
 	}
 	
 	public Level getLevel()

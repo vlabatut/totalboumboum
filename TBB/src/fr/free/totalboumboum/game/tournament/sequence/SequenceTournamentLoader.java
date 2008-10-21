@@ -23,27 +23,21 @@ package fr.free.totalboumboum.game.tournament.sequence;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
 import javax.xml.parsers.ParserConfigurationException;
 
-import org.jdom.Attribute;
 import org.jdom.Element;
 import org.xml.sax.SAXException;
 
-import fr.free.totalboumboum.configuration.Configuration;
 import fr.free.totalboumboum.game.limit.LimitLoader;
 import fr.free.totalboumboum.game.limit.Limits;
-import fr.free.totalboumboum.game.limit.RoundLimit;
 import fr.free.totalboumboum.game.limit.TournamentLimit;
 import fr.free.totalboumboum.game.match.Match;
 import fr.free.totalboumboum.game.match.MatchLoader;
 import fr.free.totalboumboum.game.points.PointsProcessor;
 import fr.free.totalboumboum.game.points.PointsProcessorLoader;
-import fr.free.totalboumboum.game.round.Round;
-import fr.free.totalboumboum.game.round.RoundLoader;
 import fr.free.totalboumboum.tools.XmlTools;
 
 public class SequenceTournamentLoader
@@ -65,6 +59,7 @@ public class SequenceTournamentLoader
 		return result;
 	}
 	
+	@SuppressWarnings("unchecked")
 	private static void loadMatchesElement(Element root, String folder, SequenceTournament result) throws ParserConfigurationException, SAXException, IOException, ClassNotFoundException
 	{	// matches order
     	String str = root.getAttribute(XmlTools.ATT_RANDOM_ORDER).getValue().trim();
@@ -96,6 +91,7 @@ public class SequenceTournamentLoader
 		result.addMatch(match);
 	}
 
+	@SuppressWarnings("unchecked")
 	public static Limits<TournamentLimit> loadLimitsElement(Element root, String folder) throws ParserConfigurationException, SAXException, IOException
 	{	Limits<TournamentLimit> result = new Limits<TournamentLimit>();
 

@@ -25,7 +25,6 @@ import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.LinkedList;
-import java.util.Map.Entry;
 
 import fr.free.totalboumboum.configuration.Configuration;
 import fr.free.totalboumboum.configuration.controls.ControlSettings;
@@ -38,13 +37,11 @@ import fr.free.totalboumboum.engine.content.feature.ability.ActionAbility;
 import fr.free.totalboumboum.engine.content.feature.ability.StateAbility;
 import fr.free.totalboumboum.engine.content.feature.action.AbstractAction;
 import fr.free.totalboumboum.engine.content.feature.action.SpecificAction;
-import fr.free.totalboumboum.engine.content.feature.anime.AnimeGesture;
 import fr.free.totalboumboum.engine.content.feature.event.AbstractEvent;
 import fr.free.totalboumboum.engine.content.feature.event.ActionEvent;
 import fr.free.totalboumboum.engine.content.feature.event.ControlEvent;
 import fr.free.totalboumboum.engine.content.feature.event.EngineEvent;
 import fr.free.totalboumboum.engine.content.feature.permission.ActorPermission;
-import fr.free.totalboumboum.engine.content.feature.permission.PermissionPack;
 import fr.free.totalboumboum.engine.content.feature.permission.StateModulation;
 import fr.free.totalboumboum.engine.content.feature.permission.TargetPermission;
 import fr.free.totalboumboum.engine.content.feature.permission.ThirdPermission;
@@ -63,10 +60,7 @@ import fr.free.totalboumboum.engine.content.sprite.item.Item;
 import fr.free.totalboumboum.engine.control.ControlCode;
 import fr.free.totalboumboum.engine.loop.Loop;
 import fr.free.totalboumboum.engine.player.Player;
-import fr.free.totalboumboum.game.statistics.StatisticAction;
 import fr.free.totalboumboum.game.statistics.StatisticEvent;
-
-
 
 /* 
  * Sprite possédant un status :
@@ -111,7 +105,6 @@ public abstract class Sprite
 		toBeRemovedFromSprite = null;
 		boundToSprite = null;
 		this.level = level;
-		configuration = level.getConfiguration();
 		currentGesture = null;
 	}
 	
@@ -301,7 +294,7 @@ public abstract class Sprite
 	public double getSpeedCoeff()
 	{	double result;
 		if(boundToSprite==null)
-			result = speedCoeff*getConfiguration().getSpeedCoeff();
+			result = speedCoeff*Configuration.getEngineConfiguration().getSpeedCoeff();
 		else
 			result = boundToSprite.getSpeedCoeff();
 		return result;
@@ -566,13 +559,6 @@ public abstract class Sprite
 		setCurrentPosX(posX);
 		setCurrentPosY(posY);
 	}
-	
-    private Configuration configuration;
-	public Configuration getConfiguration()
-	{	return configuration;		
-	}
-	
-	
 	
 	// PLAYER	/////////////////////////////////////////////
 	private Player player;

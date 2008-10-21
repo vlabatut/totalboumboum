@@ -23,18 +23,15 @@ package fr.free.totalboumboum.engine.content.feature.anime;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.xml.parsers.ParserConfigurationException;
 
-import org.jdom.Attribute;
 import org.jdom.Element;
 import org.xml.sax.SAXException;
 
 import fr.free.totalboumboum.tools.FileTools;
 import fr.free.totalboumboum.tools.XmlTools;
-
 
 public class ColormapLoader
 {
@@ -50,7 +47,8 @@ public class ColormapLoader
 		return result;
 	}
     
-    private static void loadColorsElement(Element root, Colormap colormap) throws IOException
+    @SuppressWarnings("unchecked")
+	private static void loadColorsElement(Element root, Colormap colormap) throws IOException
     {	// colors
     	List<Element> colorsList = root.getChildren(XmlTools.ELT_COLOR);
 		for(int i=0;i<colorsList.size();i++)

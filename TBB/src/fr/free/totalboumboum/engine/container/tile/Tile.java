@@ -31,7 +31,6 @@ import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.Iterator;
 
-import fr.free.totalboumboum.configuration.Configuration;
 import fr.free.totalboumboum.engine.container.level.Level;
 import fr.free.totalboumboum.engine.content.feature.Direction;
 import fr.free.totalboumboum.engine.content.feature.ability.AbstractAbility;
@@ -59,7 +58,6 @@ public class Tile
 	
 	public Tile(Level level,int line, int col, double posX, double posY, Floor floor)
 	{	this.level = level;
-		configuration = level.getConfiguration();
 		this.posX = posX;
 		this.posY = posY;
 		this.line = line;
@@ -92,7 +90,9 @@ result = level.getTile(x, y)==this;
 		{	int i=0;
 			while(i<heroes.size())
 			{	Hero temp = heroes.get(i);
+				@SuppressWarnings("unused")
 				double prevPosX = temp.getCurrentPosX();
+				@SuppressWarnings("unused")
 				double prevPosY = temp.getCurrentPosY();
 				temp.update();
 				double tempPosX = temp.getCurrentPosX();
@@ -118,7 +118,9 @@ result = level.getTile(x, y)==this;
 		{	int i=0;
 			while(i<bombs.size())
 			{	Bomb temp = bombs.get(i);
+				@SuppressWarnings("unused")
 				double prevPosX = temp.getCurrentPosX();
+				@SuppressWarnings("unused")
 				double prevPosY = temp.getCurrentPosY();
 				temp.update();
 				double tempPosX = temp.getCurrentPosX();
@@ -566,11 +568,6 @@ if(fires.size()>0)
 	{	return level.getTileDimension();		
 	}
 		
-    private Configuration configuration;
-	public Configuration getConfiguration()
-	{	return configuration;		
-	}
-	
 	public String toString()
 	{	String result;
 		result = getClass().getSimpleName();

@@ -23,9 +23,6 @@ package fr.free.totalboumboum.game.tournament.league;
 
 import org.jdom.Element;
 
-import fr.free.totalboumboum.configuration.Configuration;
-import fr.free.totalboumboum.game.tournament.sequence.SequenceTournament;
-
 public class LeagueTournamentLoader
 {
 

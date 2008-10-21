@@ -24,6 +24,7 @@ package fr.free.totalboumboum.engine.content.manager;
 import java.util.ArrayList;
 import java.util.Iterator;
 
+import fr.free.totalboumboum.configuration.Configuration;
 import fr.free.totalboumboum.engine.container.level.Level;
 import fr.free.totalboumboum.engine.content.feature.ability.AbstractAbility;
 import fr.free.totalboumboum.engine.content.feature.ability.ActionAbility;
@@ -139,7 +140,7 @@ if(modulationAbilities.size()>0)
 	
 	private void updateAbilities(ArrayList<AbstractAbility> abilities)
 	{	// init time values
-		double milliPeriod = sprite.getConfiguration().getMilliPeriod();
+		double milliPeriod = Configuration.getEngineConfiguration().getMilliPeriod();
 		double timeDelta = milliPeriod*sprite.getSpeedCoeff();
 		// 
 		Iterator<AbstractAbility> i = abilities.iterator();

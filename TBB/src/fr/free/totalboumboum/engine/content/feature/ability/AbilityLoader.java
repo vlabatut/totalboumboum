@@ -85,7 +85,8 @@ public class AbilityLoader
 		return result;
     }
     
-    public static ArrayList<AbstractAbility> loadAbilitiesElement(Element root, Level level) throws ClassNotFoundException
+    @SuppressWarnings("unchecked")
+	public static ArrayList<AbstractAbility> loadAbilitiesElement(Element root, Level level) throws ClassNotFoundException
     {	ArrayList<AbstractAbility> result = new ArrayList<AbstractAbility>();
     	List<Element> abilitiesElts = root.getChildren(XmlTools.ELT_ABILITY);
 		Iterator<Element> i = abilitiesElts.iterator();

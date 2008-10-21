@@ -31,6 +31,7 @@ import javax.xml.parsers.ParserConfigurationException;
 import org.jdom.Element;
 import org.xml.sax.SAXException;
 
+import fr.free.totalboumboum.configuration.Configuration;
 import fr.free.totalboumboum.configuration.GameConstants;
 import fr.free.totalboumboum.engine.container.bombset.Bombset;
 import fr.free.totalboumboum.engine.container.bombset.BombsetLoader;
@@ -204,7 +205,7 @@ public class HollowLevel
 	{	// init
     	level = new Level(loop);
     	level.setInstancePath(instanceName);
-		Dimension panelDim = level.getConfiguration().getPanelDimension();
+		Dimension panelDim = Configuration.getVideoConfiguration().getPanelDimension();
     	double sizeX = panelDim.width;
     	double sizeY = panelDim.height;
 		// matrix
