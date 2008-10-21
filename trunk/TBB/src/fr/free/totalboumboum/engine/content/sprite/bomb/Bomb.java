@@ -21,10 +21,8 @@ package fr.free.totalboumboum.engine.content.sprite.bomb;
  * 
  */
 
-import fr.free.totalboumboum.configuration.Configuration;
 import fr.free.totalboumboum.engine.container.level.Level;
 import fr.free.totalboumboum.engine.content.sprite.Sprite;
-import fr.free.totalboumboum.engine.loop.Loop;
 
 public class Bomb extends Sprite
 {	private String bombName;

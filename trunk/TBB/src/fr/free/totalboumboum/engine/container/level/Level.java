@@ -48,7 +48,6 @@ public class Level
 {	
 	public Level(Loop loop)				
 	{	this.loop = loop;
-		configuration = loop.getConfiguration();
 	}
 	
     /////////////////////////////////////////////////////////////////
@@ -86,15 +85,6 @@ public class Level
 	}
 	public Theme getTheme()
 	{	return theme;
-	}
-
-    /////////////////////////////////////////////////////////////////
-	// CONFIGURATION		/////////////////////////////////////////
-	/////////////////////////////////////////////////////////////////
-    private Configuration configuration;
-
-    public Configuration getConfiguration()
-	{	return configuration;		
 	}
 
 	/////////////////////////////////////////////////////////////////
@@ -460,7 +450,7 @@ public class Level
 		Font font = new Font("Dialog", Font.PLAIN, 18);
 		g.setFont(font);
 		FontMetrics metrics = g.getFontMetrics(font);
-		String text = "Speed: "+configuration.getSpeedCoeff();
+		String text = "Speed: "+Configuration.getEngineConfiguration().getSpeedCoeff();
 		Rectangle2D box = metrics.getStringBounds(text, g);
 		int x = 10;
 		int y = (int)Math.round(10+box.getHeight()/2);
@@ -519,7 +509,7 @@ public class Level
 		String fpsStr = nf.format(fps); 
 		double ups = loop.getAverageUPS();
 		String upsStr = nf.format(ups);
-		String thFps = Integer.toString(configuration.getFps());
+		String thFps = Integer.toString(Configuration.getEngineConfiguration().getFps());
 		String text = "FPS/UPS/Th: "+fpsStr+"/"+upsStr+"/"+thFps;
 		Rectangle2D box = metrics.getStringBounds(text, g);
 		int x = 10;

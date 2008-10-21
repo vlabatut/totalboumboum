@@ -126,13 +126,6 @@ public class MainFrame extends JFrame implements WindowListener,MenuContainer
 	/////////////////////////////////////////////////////////////////
 	// CONFIGURATION	/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	private GuiConfiguration configuration;
-
-	@Override
-	public GuiConfiguration getConfiguration()
-	{	return configuration;
-	}
-
 	private void saveConfiguration()
 	{	ConfigurationSaver.saveConfiguration();
 	}

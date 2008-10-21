@@ -24,9 +24,7 @@ package fr.free.totalboumboum.engine.content.sprite;
 import java.util.ArrayList;
 import java.util.Iterator;
 
-import fr.free.totalboumboum.configuration.Configuration;
 import fr.free.totalboumboum.engine.container.bombset.Bombset;
-import fr.free.totalboumboum.engine.container.level.HollowLevel;
 import fr.free.totalboumboum.engine.container.level.Level;
 import fr.free.totalboumboum.engine.content.feature.ability.AbstractAbility;
 import fr.free.totalboumboum.engine.content.feature.anime.AnimePack;
@@ -42,9 +40,6 @@ import fr.free.totalboumboum.engine.content.manager.ExplosionManager;
 import fr.free.totalboumboum.engine.content.manager.ItemManager;
 import fr.free.totalboumboum.engine.content.manager.PermissionManager;
 import fr.free.totalboumboum.engine.content.manager.TrajectoryManager;
-import fr.free.totalboumboum.engine.content.sprite.bomb.BombFactory;
-import fr.free.totalboumboum.engine.loop.Loop;
-
 
 public abstract class SpriteFactory<T extends Sprite>
 {

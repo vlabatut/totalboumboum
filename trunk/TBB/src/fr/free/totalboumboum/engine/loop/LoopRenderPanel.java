@@ -21,12 +21,7 @@ package fr.free.totalboumboum.engine.loop;
  * 
  */
 
-import java.awt.Graphics;
-import java.awt.GraphicsConfiguration;
-import java.awt.Image;
 import java.awt.event.KeyListener;
-import java.awt.image.BufferedImage;
-import java.awt.image.VolatileImage;
 
 public interface LoopRenderPanel
 {

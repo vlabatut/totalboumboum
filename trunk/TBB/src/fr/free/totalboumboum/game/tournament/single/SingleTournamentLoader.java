@@ -23,14 +23,12 @@ package fr.free.totalboumboum.game.tournament.single;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.ArrayList;
 
 import javax.xml.parsers.ParserConfigurationException;
 
 import org.jdom.Element;
 import org.xml.sax.SAXException;
 
-import fr.free.totalboumboum.configuration.Configuration;
 import fr.free.totalboumboum.game.match.Match;
 import fr.free.totalboumboum.game.match.MatchLoader;
 import fr.free.totalboumboum.tools.XmlTools;

@@ -66,7 +66,6 @@ public class Player
 	
 	public Player(Profile profile, Level level, ArrayList<AbstractAbility> ablts, PermissionPack permissions, TrajectoryPack trajectories) throws ParserConfigurationException, SAXException, IOException, ClassNotFoundException
 	{	this.level = level;
-		configuration = level.getConfiguration();
 		this.profile = profile;
 		// sprite
 		color = this.profile.getSpriteColor();
@@ -77,7 +76,7 @@ public class Player
 		sprite.initGesture();
 		// control settings
 		int indexCtrSet = profile.getControlSettingsIndex();
-		controlSettings = getConfiguration().getControlSettings().get(indexCtrSet);
+		controlSettings = Configuration.getControlsConfiguration().getControlSettings().get(indexCtrSet);
 		if(controlSettings == null)
 			controlSettings = new ControlSettings();
 		sprite.setControlSettings(controlSettings);
@@ -94,11 +93,6 @@ public class Player
     	}
 	}
 	
-    private Configuration configuration;
-	public Configuration getConfiguration()
-	{	return configuration;
-	}
-
 	public Loop getLoop()
 	{	return level.getLoop();	
 	}

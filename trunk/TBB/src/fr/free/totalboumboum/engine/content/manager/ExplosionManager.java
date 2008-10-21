@@ -21,7 +21,6 @@ package fr.free.totalboumboum.engine.content.manager;
  * 
  */
 
-import fr.free.totalboumboum.configuration.Configuration;
 import fr.free.totalboumboum.engine.container.tile.Tile;
 import fr.free.totalboumboum.engine.content.feature.Direction;
 import fr.free.totalboumboum.engine.content.feature.GestureConstants;
@@ -39,13 +38,7 @@ public class ExplosionManager
 	
 	public ExplosionManager(Sprite sprite)
 	{	this.sprite = sprite;
-		configuration = sprite.getConfiguration();
 		explosion = null;
-	}
-	
-    private Configuration configuration;
-	public Configuration getConfiguration()
-	{	return configuration;		
 	}
 	
 	public int getFlameRange()

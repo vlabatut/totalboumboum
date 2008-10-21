@@ -23,10 +23,8 @@ package fr.free.totalboumboum.engine.content.feature.anime;
 
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
-import java.util.Iterator;
 
 import fr.free.totalboumboum.engine.content.feature.ImageShift;
-
 
 public class AnimeStep
 {

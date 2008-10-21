@@ -55,7 +55,8 @@ public class Configuration
 	}
 	
 	public static void saveConfiguration() throws IllegalArgumentException, SecurityException, ParserConfigurationException, SAXException, IOException, IllegalAccessException, NoSuchFieldException
-	{	ControlsConfigurationSaver.saveControlsConfiguration(controlsConfiguration);
+	{	ConfigurationLoader.loadConfiguration();
+		ControlsConfigurationSaver.saveControlsConfiguration(controlsConfiguration);
 		EngineConfigurationSaver.saveEngineConfiguration(engineConfiguration);
 		GameConfigurationSaver.saveGameConfiguration(gameConfiguration);
 		VideoConfigurationSaver.saveVideoConfiguration(videoConfiguration);

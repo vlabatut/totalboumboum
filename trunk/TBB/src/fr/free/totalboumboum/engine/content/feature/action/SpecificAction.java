@@ -21,7 +21,6 @@ package fr.free.totalboumboum.engine.content.feature.action;
  * 
  */
 
-import fr.free.totalboumboum.configuration.Configuration;
 import fr.free.totalboumboum.engine.container.tile.Tile;
 import fr.free.totalboumboum.engine.content.feature.Contact;
 import fr.free.totalboumboum.engine.content.feature.Direction;
@@ -60,6 +59,7 @@ public class SpecificAction extends AbstractAction
 	 */
 	private GeneralAction generalAction;
 
+	@SuppressWarnings("unused")
 	private SpecificAction(String name)
 	{	super(name);
 		actor = null;
@@ -157,10 +157,6 @@ public class SpecificAction extends AbstractAction
 			generalAction.addTarget(target.getClass());
 	}
 	
-	public Configuration getConfiguration()
-	{	return actor.getConfiguration();
-	}
-
 	public Direction getDirection()
 	{	return direction;
 	}
@@ -192,6 +188,7 @@ public class SpecificAction extends AbstractAction
 	public Sprite getActor()
 	{	return actor;
 	}
+	@SuppressWarnings("unused")
 	private void setActor(Sprite actor)
 	{	this.actor = actor;		
 	}
@@ -199,6 +196,7 @@ public class SpecificAction extends AbstractAction
 	public Sprite getTarget()
 	{	return target;
 	}
+	@SuppressWarnings("unused")
 	private void setTarget(Sprite target)
 	{	this.target = target;		
 	}

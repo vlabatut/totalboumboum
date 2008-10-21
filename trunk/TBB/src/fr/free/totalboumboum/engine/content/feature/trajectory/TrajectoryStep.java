@@ -21,8 +21,6 @@ package fr.free.totalboumboum.engine.content.feature.trajectory;
  * 
  */
 
-import java.util.Iterator;
-
 import fr.free.totalboumboum.engine.content.feature.ImageShift;
 import fr.free.totalboumboum.engine.content.sprite.Sprite;
 

@@ -21,9 +21,6 @@ package fr.free.totalboumboum.engine.control;
  * 
  */
 
-import java.util.Iterator;
-
-import fr.free.totalboumboum.engine.content.feature.event.ControlEvent;
 
 public class ControlCode
 {	private int keyCode;

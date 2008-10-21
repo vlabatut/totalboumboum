@@ -25,7 +25,6 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.LinkedList;
 
-import fr.free.totalboumboum.configuration.Configuration;
 import fr.free.totalboumboum.engine.content.feature.ability.AbstractAbility;
 import fr.free.totalboumboum.engine.content.feature.ability.ActionAbility;
 import fr.free.totalboumboum.engine.content.feature.action.GeneralAction;
@@ -41,16 +40,10 @@ public class ItemManager
 	
 	public ItemManager(Sprite sprite)
 	{	this.sprite = sprite;
-		configuration = sprite.getConfiguration();
 		collectedItems = new LinkedList<Item>();
 		abilities = new ArrayList<AbstractAbility>();
 	}
 
-    private Configuration configuration;
-	public Configuration getConfiguration()
-	{	return configuration;		
-	}
-	
 	public ArrayList<AbstractAbility> getItemAbilities()
 	{	return abilities;
 	}

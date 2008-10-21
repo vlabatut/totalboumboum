@@ -106,6 +106,7 @@ public class RoundLoader
     	result.setPlayMode(playMode);
     }
     
+	@SuppressWarnings("unchecked")
 	public static Limits<RoundLimit> loadLimitsElement(Element root, String folder) throws ParserConfigurationException, SAXException, IOException
 	{	Limits<RoundLimit> result = new Limits<RoundLimit>();
 

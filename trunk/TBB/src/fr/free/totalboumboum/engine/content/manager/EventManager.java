@@ -21,7 +21,6 @@ package fr.free.totalboumboum.engine.content.manager;
  * 
  */
 
-import fr.free.totalboumboum.configuration.Configuration;
 import fr.free.totalboumboum.engine.content.feature.Direction;
 import fr.free.totalboumboum.engine.content.feature.GestureConstants;
 import fr.free.totalboumboum.engine.content.feature.event.ActionEvent;
@@ -40,7 +39,6 @@ public abstract class EventManager
 	
 	public EventManager(Sprite sprite)
 	{	this.sprite = sprite;
-		configuration = sprite.getConfiguration();
 		gesture = GestureConstants.NONE;
 		spriteDirection = Direction.NONE;
 	}	
@@ -71,11 +69,6 @@ public abstract class EventManager
 	}
 	public void setSpriteDirection(Direction spriteDirection)
 	{	this.spriteDirection = spriteDirection;
-	}
-	
-    private Configuration configuration;
-	public Configuration getConfiguration()
-	{	return configuration;	
 	}
 	
 	public abstract void processEvent(ActionEvent event);

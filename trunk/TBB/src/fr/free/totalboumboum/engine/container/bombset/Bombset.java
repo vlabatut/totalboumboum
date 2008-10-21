@@ -38,9 +38,11 @@ public class Bombset
 		requiredAbilities = new ArrayList<ArrayList<StateAbility>>();
 	}
 	
+	@SuppressWarnings("unused")
 	private void setBombFactories(ArrayList<BombFactory> bombFactories)
 	{	this.bombFactories = bombFactories;
 	}
+	@SuppressWarnings("unused")
 	private void setRequiredAbilities(ArrayList<ArrayList<StateAbility>> requiredAbilities)
 	{	this.requiredAbilities = requiredAbilities;
 	}

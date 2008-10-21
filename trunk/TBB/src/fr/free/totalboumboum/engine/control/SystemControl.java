@@ -27,8 +27,6 @@ import java.util.HashMap;
 
 import fr.free.totalboumboum.configuration.Configuration;
 import fr.free.totalboumboum.engine.loop.Loop;
-import fr.free.totalboumboum.game.round.Round;
-
 
 public class SystemControl implements KeyListener
 {	private Loop loop;
@@ -37,15 +35,9 @@ public class SystemControl implements KeyListener
 	
 	public SystemControl(Loop loop)
 	{	this.loop = loop;
-		configuration = loop.getConfiguration();
 		keysPressed = new HashMap<Integer,Boolean>();
 	}
 
-    private Configuration configuration;
-	public Configuration getConfiguration()
-	{	return configuration;	
-	}
-	
 	// handles termination and game-play keys
 	@Override
 	public void keyPressed(KeyEvent e)
@@ -69,10 +61,10 @@ public class SystemControl implements KeyListener
 
 			// debug : modifier la vitesse
 			else if ((keyCode == KeyEvent.VK_PAGE_UP))
-			{	getConfiguration().setSpeedCoeff(getConfiguration().getSpeedCoeff()*2);
+			{	Configuration.getEngineConfiguration().setSpeedCoeff(Configuration.getEngineConfiguration().getSpeedCoeff()*2);
 			}
 			else if ((keyCode == KeyEvent.VK_PAGE_DOWN))
-			{	getConfiguration().setSpeedCoeff(getConfiguration().getSpeedCoeff()/2);
+			{	Configuration.getEngineConfiguration().setSpeedCoeff(Configuration.getEngineConfiguration().getSpeedCoeff()/2);
 			}
 
 			// debug : grille

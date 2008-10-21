@@ -21,10 +21,7 @@ package fr.free.totalboumboum.engine.content.feature.anime;
  * 
  */
 
-import java.awt.image.BufferedImage;
 import java.util.HashMap;
-import java.util.Iterator;
-import java.util.Map.Entry;
 
 public class Colormap extends HashMap<Integer,byte[]>
 {	private static final long serialVersionUID = 1L;	

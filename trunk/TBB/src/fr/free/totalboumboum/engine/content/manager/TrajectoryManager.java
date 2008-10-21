@@ -60,6 +60,7 @@ public class TrajectoryManager
 	/** coefficient de mofication du temps dû au délai imposé */
 	private double forcedDurationCoeff;
 	/** nom du geste courant */
+	@SuppressWarnings("unused")
 	private String currentGestureName;
 	/** modification de position X (utilisée lors de la mise à jour de la position) */
 	double shiftX;
@@ -86,6 +87,7 @@ public class TrajectoryManager
 	/** position Y précédente (absolue) */
 	private double previousPosY;
 	/** position Z précédente (absolue) */
+	@SuppressWarnings("unused")
 	private double previousPosZ;
 	/** direction de déplacement courante */
 	private Direction currentDirection;
@@ -131,7 +133,6 @@ public class TrajectoryManager
 		xMove = 0;
 		yMove = 0;
 		this.sprite = sprite;
-		configuration = sprite.getConfiguration();
 		forcedDurationCoeff = 1;
 		totalDuration = 0;
 		forcedTotalXShift = 0;
@@ -164,6 +165,7 @@ public class TrajectoryManager
 	public void setGesture(String gesture, Direction spriteDirection, Direction controlDirection, boolean reinit, double forcedDuration)
 	{	currentGestureName = gesture;
 		hasFlied = getCurrentPosZ()>0;
+		@SuppressWarnings("unused")
 		Direction previousDirection = currentDirection;
 		currentDirection = controlDirection;
 		setInteractiveMove(controlDirection);
@@ -424,7 +426,7 @@ if(previousPosX != currentPosX || previousPosY != currentPosY || previousPosZ !=
 		previousPosY = currentPosY;
 		previousPosZ = currentPosZ;
 		// process the interactive (control) shift
-		long milliPeriod = getConfiguration().getMilliPeriod();
+		long milliPeriod = Configuration.getEngineConfiguration().getMilliPeriod();
 		double speedCoeff = sprite.getSpeedCoeff();
 		shiftX = xMove*currentTrajectory.getXInteraction()*milliPeriod*speedCoeff/1000;
 		shiftY = yMove*currentTrajectory.getYInteraction()*milliPeriod*speedCoeff/1000;
@@ -626,7 +628,7 @@ if(moveDir!=Direction.NONE)
 	}
 	
 	private void updateTime()
-	{	double milliPeriod = getConfiguration().getMilliPeriod();
+	{	double milliPeriod = Configuration.getEngineConfiguration().getMilliPeriod();
 		double delta = milliPeriod*forcedDurationCoeff*sprite.getSpeedCoeff();	
 		currentTime = currentTime + delta;
 		if(currentTime > totalDuration)
@@ -773,11 +775,6 @@ if(moveDir!=Direction.NONE)
 		return result;
 	}
 
-    private Configuration configuration;
-	public Configuration getConfiguration()
-	{	return configuration;	
-	}
-	
 /* ********************************
  * BOUND
  * ********************************
@@ -896,6 +893,7 @@ if(moveDir!=Direction.NONE)
 	 * @param tempSprite	le sprite à tester
 	 * @return
 	 */
+	@SuppressWarnings("unused")
 	private boolean isInCloseArea(Sprite tempSprite)
 	{	boolean result;
 		double interX=0;
@@ -986,6 +984,7 @@ if(sprite instanceof Hero && tempSprite instanceof Bomb && sprite.getTile()==tem
 	 * en supposant que ce sprite et le paramètre sont en contact (pas de recouvrement toutefois)
 	 * cette fonction détermine si leurs déplacements éventuels vont les faire se rencontrer (et vraisemblablement provoquer une collision)
 	 */
+	@SuppressWarnings("unused")
 	private boolean areConverging(Sprite tempSprite)
 	{	boolean result;
 		boolean test1=false,test2=false;
@@ -1444,7 +1443,8 @@ if(sprite instanceof Hero)
 			// intersected sprites
 			{	Iterator<Sprite> it = intersectedSprites.iterator();
 				while(it.hasNext())
-				{	Sprite temp = it.next();
+				{	@SuppressWarnings("unused")
+					Sprite temp = it.next();
 					//temp.finish();
 					it.remove();
 				}

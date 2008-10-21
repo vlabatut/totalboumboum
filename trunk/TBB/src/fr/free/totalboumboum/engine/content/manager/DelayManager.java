@@ -26,6 +26,7 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map.Entry;
 
+import fr.free.totalboumboum.configuration.Configuration;
 import fr.free.totalboumboum.engine.content.feature.event.EngineEvent;
 import fr.free.totalboumboum.engine.content.sprite.Sprite;
 
@@ -78,8 +79,8 @@ public class DelayManager
 			{	Entry<String,Double> temp = i.next();
 				String name = temp.getKey();
 				double duration = temp.getValue();
-				double period = sprite.getConfiguration().getMilliPeriod();
-				double speedCoeff = sprite.getConfiguration().getSpeedCoeff();
+				double period = Configuration.getEngineConfiguration().getMilliPeriod();
+				double speedCoeff = Configuration.getEngineConfiguration().getSpeedCoeff();
 				duration = duration - period*speedCoeff;
 				if(duration<=0)
 				{	i.remove();
@@ -123,7 +124,8 @@ public class DelayManager
 			// delays
 			{	Iterator<Entry<String,Double>> it = delays.entrySet().iterator();
 				while(it.hasNext())
-				{	Entry<String,Double> t = it.next();
+				{	@SuppressWarnings("unused")
+				Entry<String,Double> t = it.next();
 					it.remove();
 				}
 			}
