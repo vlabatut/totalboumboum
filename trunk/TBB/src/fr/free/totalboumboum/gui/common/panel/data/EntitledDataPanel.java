@@ -32,6 +32,7 @@ import javax.swing.SwingConstants;
 
 import fr.free.totalboumboum.gui.common.panel.SplitMenuPanel;
 import fr.free.totalboumboum.gui.common.subpanel.SubPanel;
+import fr.free.totalboumboum.gui.data.configuration.GuiConfiguration;
 import fr.free.totalboumboum.gui.tools.GuiTools;
 
 public abstract class EntitledDataPanel extends InnerDataPanel
@@ -61,7 +62,7 @@ public abstract class EntitledDataPanel extends InnerDataPanel
 		{	String text = "N/A";
 			title = new JLabel(text);
 			title.setHorizontalAlignment(SwingConstants.CENTER);
-			Font font = getConfiguration().getFont().deriveFont(titleFontSize);
+			Font font = GuiConfiguration.getFont().deriveFont(titleFontSize);
 			title.setForeground(GuiTools.COLOR_TITLE_FOREGROUND);
 			title.setBackground(GuiTools.COLOR_COMMON_BACKGROUND);
 			title.setOpaque(true);
@@ -103,8 +104,8 @@ public abstract class EntitledDataPanel extends InnerDataPanel
 //		repaint();
 	}
 	public void setTitleKey(String key)
-	{	String text = getConfiguration().getLanguage().getText(key);
-		String tooltip = getConfiguration().getLanguage().getText(key+GuiTools.TOOLTIP);
+	{	String text = GuiConfiguration.getLanguage().getText(key);
+		String tooltip = GuiConfiguration.getLanguage().getText(key+GuiTools.TOOLTIP);
 		setTitleText(text,tooltip);
 	}
 

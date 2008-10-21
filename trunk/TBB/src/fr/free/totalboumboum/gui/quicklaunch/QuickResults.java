@@ -58,7 +58,7 @@ public class QuickResults extends JPanel
 	private int lines = 0;
 	private int tableMargin;
 	
-	public QuickResults(Dimension dimen, Configuration configuration)
+	public QuickResults(Dimension dimen)
 	{	super();
 		
 		// init
@@ -66,7 +66,7 @@ public class QuickResults extends JPanel
 		int cols = 1+5+1;			
 		int width = dimen.width;
 		int height = dimen.height;
-		Round round = configuration.getTournament().getCurrentMatch().getCurrentRound();
+		Round round = Configuration.getGameConfiguration().getTournament().getCurrentMatch().getCurrentRound();
 		StatisticRound stats = round.getStats();
 		ArrayList<Profile> players = round.getProfiles();
 		TreeSet<PlayerPoints> ranking = stats.getOrderedPlayers();

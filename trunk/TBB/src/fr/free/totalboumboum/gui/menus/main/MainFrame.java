@@ -28,11 +28,10 @@ import javax.xml.parsers.ParserConfigurationException;
 
 import org.xml.sax.SAXException;
 
-import fr.free.totalboumboum.configuration.ConfigurationSaver;
+import fr.free.totalboumboum.configuration.Configuration;
 import fr.free.totalboumboum.configuration.GameConstants;
 import fr.free.totalboumboum.gui.common.MenuContainer;
 import fr.free.totalboumboum.gui.common.panel.menu.MenuPanel;
-import fr.free.totalboumboum.gui.data.configuration.GuiConfiguration;
 import fr.free.totalboumboum.gui.tools.FullRepaintManager;
 import fr.free.totalboumboum.gui.tools.GuiFileTools;
 
@@ -52,10 +51,9 @@ public class MainFrame extends JFrame implements WindowListener,MenuContainer
 
 	private MainMenu mainMenuPanel;
 
-	public MainFrame(GuiConfiguration configuration) throws ParserConfigurationException, SAXException, IOException, IllegalArgumentException, SecurityException, IllegalAccessException, NoSuchFieldException, ClassNotFoundException
+	public MainFrame() throws ParserConfigurationException, SAXException, IOException, IllegalArgumentException, SecurityException, IllegalAccessException, NoSuchFieldException, ClassNotFoundException
 	{	// init
 		super("TBB v."+GameConstants.VERSION);
-		this.configuration = configuration;
 		// listener
 		addWindowListener(this);
 		// set icon
@@ -63,7 +61,7 @@ public class MainFrame extends JFrame implements WindowListener,MenuContainer
 		Image icon = Toolkit.getDefaultToolkit().getImage(iconPath);
 		setIconImage(icon);
 		// set dimensions
-		setMinimumSize(getConfiguration().getGameConfiguration().getPanelDimension());
+		setMinimumSize(Configuration.getVideoConfiguration().getPanelDimension());
 		setResizable(false);
 		//
 		UIManager.put("MenuItemUI","CustomMenuItemUI");
@@ -127,7 +125,30 @@ public class MainFrame extends JFrame implements WindowListener,MenuContainer
 	// CONFIGURATION	/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	private void saveConfiguration()
-	{	ConfigurationSaver.saveConfiguration();
+	{	try
+		{	Configuration.saveConfiguration();
+		}
+		catch (IllegalArgumentException e)
+		{	e.printStackTrace();
+		}
+		catch (SecurityException e)
+		{	e.printStackTrace();
+		}
+		catch (ParserConfigurationException e)
+		{	e.printStackTrace();
+		}
+		catch (SAXException e)
+		{	e.printStackTrace();
+		}
+		catch (IOException e)
+		{	e.printStackTrace();
+		}
+		catch (IllegalAccessException e)
+		{	e.printStackTrace();
+		}
+		catch (NoSuchFieldException e) 
+		{	e.printStackTrace();
+		}
 	}
 
 	/////////////////////////////////////////////////////////////////
@@ -160,12 +181,12 @@ public class MainFrame extends JFrame implements WindowListener,MenuContainer
 
 	@Override
 	public int getMenuHeight()
-	{	return getConfiguration().getGameConfiguration().getPanelDimension().height;
+	{	return Configuration.getVideoConfiguration().getPanelDimension().height;
 	}
 
 	@Override
 	public int getMenuWidth()
-	{	return getConfiguration().getGameConfiguration().getPanelDimension().width;
+	{	return Configuration.getVideoConfiguration().getPanelDimension().width;
 	}
 }
 

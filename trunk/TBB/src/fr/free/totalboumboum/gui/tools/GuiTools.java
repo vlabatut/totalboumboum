@@ -40,6 +40,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JToggleButton;
 
+import fr.free.totalboumboum.configuration.Configuration;
 import fr.free.totalboumboum.gui.common.ButtonAware;
 import fr.free.totalboumboum.gui.data.configuration.GuiConfiguration;
 import fr.free.totalboumboum.gui.data.language.Language;
@@ -460,14 +461,14 @@ public class GuiTools
 	{	graphics = g;	
 	}
 
-	public static void init(GuiConfiguration configuration, Graphics g)
+	public static void init()
 	{	// init
-		Dimension panelDimension = configuration.getPanelDimension();
+		Dimension panelDimension = Configuration.getVideoConfiguration().getPanelDimension();
 		int width = panelDimension.width;
 		int height = panelDimension.height;
+		BufferedImage img = new BufferedImage(10,10,BufferedImage.TYPE_INT_ARGB);
+		Graphics g = img.getGraphics();
 		setGraphics(g);
-		setGameFont(configuration.getFont());
-		setLanguage(configuration.getLanguage());
 		setMargins(width,height);
 		
 		
@@ -507,7 +508,7 @@ public class GuiTools
 		
 		// fonts
 		int menuVerticalPrimaryButtonFontSize;
-		{	Iterator<Entry<String,String>> it = configuration.getLanguage().getTexts().entrySet().iterator();
+		{	Iterator<Entry<String,String>> it = GuiConfiguration.getLanguage().getTexts().entrySet().iterator();
 			String longest = "";
 			while(it.hasNext())
 			{	Entry<String,String> temp = it.next();
@@ -523,7 +524,7 @@ public class GuiTools
 		sizes.put(MENU_VERTICAL_PRIMARY_BUTTON_FONT_SIZE, menuVerticalPrimaryButtonFontSize);
 		//
 		int menuVerticalSecondaryButtonFontSize;
-		{	Iterator<Entry<String,String>> it = configuration.getLanguage().getTexts().entrySet().iterator();
+		{	Iterator<Entry<String,String>> it = GuiConfiguration.getLanguage().getTexts().entrySet().iterator();
 			String longest = "";
 			while(it.hasNext())
 			{	Entry<String,String> temp = it.next();
@@ -1034,7 +1035,7 @@ public class GuiTools
 	
 
 	
-	public static void setButtonContent(String name, AbstractButton button, GuiConfiguration configuration)
+	public static void setButtonContent(String name, AbstractButton button)
 	{	// content
 		if(icons.containsKey(name+ICON_NORMAL))
 		{	// normal icon
@@ -1096,67 +1097,67 @@ public class GuiTools
 		}
 		else
 		{	// text 
-			String text = configuration.getLanguage().getText(name);
+			String text = GuiConfiguration.getLanguage().getText(name);
 			button.setText(text);
 		}		
 		// action command
 		button.setActionCommand(name);
 		// tooltip
 		String toolTip = name+GuiTools.TOOLTIP;
-		String text = configuration.getLanguage().getText(toolTip);
+		String text = GuiConfiguration.getLanguage().getText(toolTip);
 		button.setToolTipText(text);
 	}		
-	public static void initButton(AbstractButton result,String name, int width, int height, ButtonAware panel, GuiConfiguration configuration)
+	public static void initButton(AbstractButton result,String name, int width, int height, ButtonAware panel)
 	{	// dimension
 		Dimension dim = new Dimension(width,height);
 		result.setMinimumSize(dim);
 		result.setMaximumSize(dim);
 		result.setPreferredSize(dim);
 		// set text
-		setButtonContent(name,result,configuration);
+		setButtonContent(name,result);
 		// add to panel
 		panel.add(result);
 		result.addActionListener(panel);
 	}
-	public static JButton createPrincipalVerticalMenuButton(String name, ButtonAware panel, GuiConfiguration configuration)
+	public static JButton createPrincipalVerticalMenuButton(String name, ButtonAware panel)
 	{	int width = sizes.get(MENU_VERTICAL_PRIMARY_BUTTON_WIDTH);
 		int height = sizes.get(MENU_VERTICAL_BUTTON_HEIGHT);
 		JButton result = new JButton();
-		initButton(result,name,width,height,panel,configuration);
+		initButton(result,name,width,height,panel);
 		result.setAlignmentX(Component.CENTER_ALIGNMENT);
 		// font
 		int fontSize = sizes.get(MENU_VERTICAL_PRIMARY_BUTTON_FONT_SIZE);
-		Font font = configuration.getFont().deriveFont((float)fontSize);
+		Font font = GuiConfiguration.getFont().deriveFont((float)fontSize);
 		result.setFont(font);
 		//
 		return result;
 	}
-	public static JButton createSecondaryVerticalMenuButton(String name, ButtonAware panel, GuiConfiguration configuration)
+	public static JButton createSecondaryVerticalMenuButton(String name, ButtonAware panel)
 	{	int width = sizes.get(MENU_VERTICAL_SECONDARY_BUTTON_WIDTH);
 		int height = sizes.get(MENU_VERTICAL_BUTTON_HEIGHT);
 		JButton result = new JButton();
-		initButton(result,name,width,height,panel,configuration);
+		initButton(result,name,width,height,panel);
 		result.setAlignmentX(Component.CENTER_ALIGNMENT);
 		// font
 		int fontSize = sizes.get(MENU_VERTICAL_SECONDARY_BUTTON_FONT_SIZE);
-		Font font = configuration.getFont().deriveFont((float)fontSize);
+		Font font = GuiConfiguration.getFont().deriveFont((float)fontSize);
 		result.setFont(font);
 		//
 		return result;
 	}	
-	public static JButton createHorizontalMenuButton(String name, ButtonAware panel, GuiConfiguration configuration)
+	public static JButton createHorizontalMenuButton(String name, ButtonAware panel)
 	{	int width = sizes.get(MENU_HORIZONTAL_BUTTON_WIDTH);
 		int height = sizes.get(MENU_HORIZONTAL_BUTTON_HEIGHT);
 		JButton result = new JButton();
-		initButton(result,name,width,height,panel,configuration);
+		initButton(result,name,width,height,panel);
 		result.setAlignmentY(Component.CENTER_ALIGNMENT);
 		return result;
 	}
-	public static JToggleButton createHorizontalMenuToggleButton(String name, ButtonAware panel, GuiConfiguration configuration)
+	public static JToggleButton createHorizontalMenuToggleButton(String name, ButtonAware panel)
 	{	int width = sizes.get(MENU_HORIZONTAL_BUTTON_WIDTH);
 		int height = sizes.get(MENU_HORIZONTAL_BUTTON_HEIGHT);
 		JToggleButton result = new JToggleButton();
-		initButton(result,name,width,height,panel,configuration);
+		initButton(result,name,width,height,panel);
 		result.setAlignmentY(Component.CENTER_ALIGNMENT);
 		return result;
 	}

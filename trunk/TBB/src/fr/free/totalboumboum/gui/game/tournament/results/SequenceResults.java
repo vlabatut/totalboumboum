@@ -30,6 +30,7 @@ import java.util.TreeSet;
 
 import javax.swing.JLabel;
 
+import fr.free.totalboumboum.configuration.Configuration;
 import fr.free.totalboumboum.configuration.profile.Portraits;
 import fr.free.totalboumboum.configuration.profile.Profile;
 import fr.free.totalboumboum.game.points.PlayerPoints;
@@ -39,6 +40,7 @@ import fr.free.totalboumboum.game.statistics.StatisticTournament;
 import fr.free.totalboumboum.game.tournament.sequence.SequenceTournament;
 import fr.free.totalboumboum.gui.common.panel.SplitMenuPanel;
 import fr.free.totalboumboum.gui.common.subpanel.UntitledSubPanelTable;
+import fr.free.totalboumboum.gui.data.configuration.GuiConfiguration;
 import fr.free.totalboumboum.gui.tools.GuiTools;
 
 public class SequenceResults extends TournamentResults
@@ -88,7 +90,7 @@ public class SequenceResults extends TournamentResults
 	@Override
 	public void updateData()
 	{	// init
-		SequenceTournament tournament = (SequenceTournament)getConfiguration().getCurrentTournament();
+		SequenceTournament tournament = (SequenceTournament)Configuration.getGameConfiguration().getTournament();
 		ArrayList<Profile> players = tournament.getProfiles();
 		StatisticTournament stats = tournament.getStats();
 		ArrayList<StatisticMatch> matches = stats.getStatMatches();
@@ -109,8 +111,8 @@ public class SequenceResults extends TournamentResults
 		int cols = 2+4+matches.size()+2;
 		if(resultsPanel.getColumnCount()<cols)
 		{	resultsPanel.addColumn(col);
-			String text = getConfiguration().getLanguage().getText(GuiTools.GAME_TOURNAMENT_RESULTS_HEADER_MATCH)+matches.size();
-			String tooltip = getConfiguration().getLanguage().getText(GuiTools.GAME_TOURNAMENT_RESULTS_HEADER_MATCH+GuiTools.TOOLTIP)+matches.size();
+			String text = GuiConfiguration.getLanguage().getText(GuiTools.GAME_TOURNAMENT_RESULTS_HEADER_MATCH)+matches.size();
+			String tooltip = GuiConfiguration.getLanguage().getText(GuiTools.GAME_TOURNAMENT_RESULTS_HEADER_MATCH+GuiTools.TOOLTIP)+matches.size();
 			resultsPanel.setLabelText(0,col,text,tooltip);
 		}
 		

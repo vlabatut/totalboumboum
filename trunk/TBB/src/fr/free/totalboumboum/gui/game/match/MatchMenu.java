@@ -36,6 +36,7 @@ import javax.xml.parsers.ParserConfigurationException;
 
 import org.xml.sax.SAXException;
 
+import fr.free.totalboumboum.configuration.Configuration;
 import fr.free.totalboumboum.game.match.Match;
 import fr.free.totalboumboum.game.match.MatchRenderPanel;
 import fr.free.totalboumboum.game.round.Round;
@@ -76,21 +77,21 @@ public class MatchMenu extends InnerMenuPanel implements MatchRenderPanel
 		setBackground(GuiTools.COLOR_COMMON_BACKGROUND);
 		
 		// buttons
-		buttonQuit = GuiTools.createHorizontalMenuButton(GuiTools.GAME_MATCH_BUTTON_QUIT,this,getConfiguration());
+		buttonQuit = GuiTools.createHorizontalMenuButton(GuiTools.GAME_MATCH_BUTTON_QUIT,this);
 		add(Box.createHorizontalGlue());
-		buttonTournament = GuiTools.createHorizontalMenuButton(GuiTools.GAME_MATCH_BUTTON_CURRENT_TOURNAMENT,this,getConfiguration());
+		buttonTournament = GuiTools.createHorizontalMenuButton(GuiTools.GAME_MATCH_BUTTON_CURRENT_TOURNAMENT,this);
 		add(Box.createRigidArea(new Dimension(GuiTools.getSize(GuiTools.MENU_HORIZONTAL_BUTTON_SPACE),0)));
 	    ButtonGroup group = new ButtonGroup();
-		buttonDescription = GuiTools.createHorizontalMenuToggleButton(GuiTools.GAME_MATCH_BUTTON_DESCRIPTION,this,getConfiguration());
+		buttonDescription = GuiTools.createHorizontalMenuToggleButton(GuiTools.GAME_MATCH_BUTTON_DESCRIPTION,this);
 		buttonDescription.setSelected(true);
 	    group.add(buttonDescription);
-		buttonResults = GuiTools.createHorizontalMenuToggleButton(GuiTools.GAME_MATCH_BUTTON_RESULTS,this,getConfiguration());
+		buttonResults = GuiTools.createHorizontalMenuToggleButton(GuiTools.GAME_MATCH_BUTTON_RESULTS,this);
 	    group.add(buttonResults);
-		buttonStatistics = GuiTools.createHorizontalMenuToggleButton(GuiTools.GAME_MATCH_BUTTON_STATISTICS,this,getConfiguration());
+		buttonStatistics = GuiTools.createHorizontalMenuToggleButton(GuiTools.GAME_MATCH_BUTTON_STATISTICS,this);
 buttonStatistics.setEnabled(false);		
 	    group.add(buttonStatistics);
 		add(Box.createRigidArea(new Dimension(GuiTools.getSize(GuiTools.MENU_HORIZONTAL_BUTTON_SPACE),0)));
-		buttonRound = GuiTools.createHorizontalMenuButton(GuiTools.GAME_MATCH_BUTTON_NEXT_ROUND,this,getConfiguration());
+		buttonRound = GuiTools.createHorizontalMenuButton(GuiTools.GAME_MATCH_BUTTON_NEXT_ROUND,this);
 		
 		// panels
 		{	matchDescription = new MatchDescription(container);
@@ -99,7 +100,7 @@ buttonStatistics.setEnabled(false);
 			matchStatistics = new MatchStatistics(container);		
 		}
 		
-		Match match = getConfiguration().getCurrentMatch();
+		Match match = Configuration.getGameConfiguration().getTournament().getCurrentMatch();
 		match.setPanel(this);
 	}
 	
@@ -111,7 +112,7 @@ buttonStatistics.setEnabled(false);
 		{	replaceWith(parent);
 	    }
 		else if(e.getActionCommand().equals(GuiTools.GAME_MATCH_BUTTON_FINISH))
-		{	Match match = getConfiguration().getCurrentMatch();
+		{	Match match = Configuration.getGameConfiguration().getTournament().getCurrentMatch();
 			match.finish();
 			replaceWith(parent);
 	    }
@@ -129,7 +130,7 @@ buttonStatistics.setEnabled(false);
 	    }
 		else if(e.getActionCommand().equals(GuiTools.GAME_MATCH_BUTTON_NEXT_ROUND))
 		{	try
-			{	getConfiguration().getCurrentMatch().progress();
+			{	Configuration.getGameConfiguration().getTournament().getCurrentMatch().progress();
 			}
 			catch (IllegalArgumentException e1)
 			{	e1.printStackTrace();
@@ -162,23 +163,23 @@ buttonStatistics.setEnabled(false);
 
 	@Override
 	public void refresh()
-	{	Match match = getConfiguration().getCurrentMatch(); 
+	{	Match match = Configuration.getGameConfiguration().getTournament().getCurrentMatch(); 
 		if(match.isOver())
 		{	// Round
 			buttonRound.setEnabled(false);
 			// Finish
-			GuiTools.setButtonContent(GuiTools.GAME_MATCH_BUTTON_FINISH, buttonTournament, getConfiguration());
+			GuiTools.setButtonContent(GuiTools.GAME_MATCH_BUTTON_FINISH, buttonTournament);
 		}
 		else
 		{	// Round
 			buttonRound.setEnabled(true);
 			Round round = match.getCurrentRound();
 			if(round==null || round.isOver())
-				GuiTools.setButtonContent(GuiTools.GAME_MATCH_BUTTON_NEXT_ROUND, buttonRound, getConfiguration());
+				GuiTools.setButtonContent(GuiTools.GAME_MATCH_BUTTON_NEXT_ROUND, buttonRound);
 			else
-				GuiTools.setButtonContent(GuiTools.GAME_MATCH_BUTTON_CURRENT_ROUND, buttonRound, getConfiguration());
+				GuiTools.setButtonContent(GuiTools.GAME_MATCH_BUTTON_CURRENT_ROUND, buttonRound);
 			// Tournament
-			GuiTools.setButtonContent(GuiTools.GAME_MATCH_BUTTON_CURRENT_TOURNAMENT, buttonTournament, getConfiguration());
+			GuiTools.setButtonContent(GuiTools.GAME_MATCH_BUTTON_CURRENT_TOURNAMENT, buttonTournament);
 		}
 	}
 

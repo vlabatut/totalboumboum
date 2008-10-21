@@ -33,6 +33,7 @@ import javax.swing.BoxLayout;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
+import fr.free.totalboumboum.configuration.Configuration;
 import fr.free.totalboumboum.configuration.profile.Portraits;
 import fr.free.totalboumboum.configuration.profile.Profile;
 import fr.free.totalboumboum.game.tournament.sequence.SequenceTournament;
@@ -60,7 +61,7 @@ public class SequenceDescription extends TournamentDescription
 			int leftWidth = (int)(dataWidth*SPLIT_RATIO); 
 			int rightWidth = dataWidth - leftWidth - margin; 
 			infoPanel.setOpaque(false);
-			SequenceTournament tournament = (SequenceTournament)getConfiguration().getCurrentTournament();
+			SequenceTournament tournament = (SequenceTournament)Configuration.getGameConfiguration().getTournament();
 			
 			// players panel
 			{	JPanel playersPanel = makePlayersPanel(leftWidth,dataHeight);
@@ -111,7 +112,7 @@ public class SequenceDescription extends TournamentDescription
 	}
 
 	private SubPanel makePlayersPanel(int width, int height)
-	{	SequenceTournament tournament = (SequenceTournament)getConfiguration().getCurrentTournament();
+	{	SequenceTournament tournament = (SequenceTournament)Configuration.getGameConfiguration().getTournament();
 		int lines = 16+1;
 		int cols = 3+1;
 		UntitledSubPanelTable playersPanel = new UntitledSubPanelTable(width,height,cols,lines,true);

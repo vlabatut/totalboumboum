@@ -33,6 +33,7 @@ import org.xml.sax.SAXException;
 import fr.free.totalboumboum.gui.common.MenuContainer;
 import fr.free.totalboumboum.gui.common.panel.SplitMenuPanel;
 import fr.free.totalboumboum.gui.common.panel.menu.MenuPanel;
+import fr.free.totalboumboum.gui.data.configuration.GuiConfiguration;
 import fr.free.totalboumboum.gui.tools.GuiTools;
 
 public class OptionsSplitPanel extends SplitMenuPanel
@@ -44,7 +45,7 @@ public class OptionsSplitPanel extends SplitMenuPanel
 	{	super(container,parent,BorderLayout.LINE_START,GuiTools.VERTICAL_SPLIT_RATIO);
 	
 		// background
-		image = getConfiguration().getDarkBackground();
+		image = GuiConfiguration.getDarkBackground();
 		
 		// panels
 		OptionsMenu menu = new OptionsMenu(this,parent);

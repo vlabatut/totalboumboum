@@ -28,6 +28,7 @@ import java.awt.image.BufferedImage;
 import fr.free.totalboumboum.gui.common.MenuContainer;
 import fr.free.totalboumboum.gui.common.panel.SplitMenuPanel;
 import fr.free.totalboumboum.gui.common.panel.menu.MenuPanel;
+import fr.free.totalboumboum.gui.data.configuration.GuiConfiguration;
 import fr.free.totalboumboum.gui.tools.GuiTools;
 
 public class MatchSplitPanel extends SplitMenuPanel
@@ -39,7 +40,7 @@ public class MatchSplitPanel extends SplitMenuPanel
 	{	super(container,parent,BorderLayout.PAGE_END,GuiTools.HORIZONTAL_SPLIT_RATIO);
 	
 		// background
-		image = getConfiguration().getDarkBackground();
+		image = GuiConfiguration.getDarkBackground();
 	    
 		// panels
 		MatchMenu menu = new MatchMenu(this,parent);

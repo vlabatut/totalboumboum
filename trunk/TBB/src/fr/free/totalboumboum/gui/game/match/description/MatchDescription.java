@@ -34,6 +34,7 @@ import javax.swing.BoxLayout;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
+import fr.free.totalboumboum.configuration.Configuration;
 import fr.free.totalboumboum.configuration.GameConstants;
 import fr.free.totalboumboum.configuration.profile.Portraits;
 import fr.free.totalboumboum.configuration.profile.Profile;
@@ -42,6 +43,7 @@ import fr.free.totalboumboum.gui.common.panel.SplitMenuPanel;
 import fr.free.totalboumboum.gui.common.panel.data.EntitledDataPanel;
 import fr.free.totalboumboum.gui.common.subpanel.SubPanel;
 import fr.free.totalboumboum.gui.common.subpanel.UntitledSubPanelTable;
+import fr.free.totalboumboum.gui.data.configuration.GuiConfiguration;
 import fr.free.totalboumboum.gui.game.round.description.RoundDescription;
 import fr.free.totalboumboum.gui.tools.GuiTools;
 
@@ -69,7 +71,7 @@ public class MatchDescription extends EntitledDataPanel implements MouseListener
 			int margin = GuiTools.panelMargin;
 			int leftWidth = (int)(dataWidth*SPLIT_RATIO); 
 			int rightWidth = dataWidth - leftWidth - margin; 
-			Match match = getConfiguration().getCurrentMatch();			
+			Match match = Configuration.getGameConfiguration().getTournament().getCurrentMatch();			
 			infoPanel.setOpaque(false);
 			
 			// players panel
@@ -117,7 +119,7 @@ public class MatchDescription extends EntitledDataPanel implements MouseListener
 	}
 	
 	private UntitledSubPanelTable makePlayersPanel(int width, int height)
-	{	Match match = getConfiguration().getCurrentMatch();
+	{	Match match = Configuration.getGameConfiguration().getTournament().getCurrentMatch();
 		int lines = 16+1;
 		int cols = 4+1;
 		UntitledSubPanelTable playersPanel = new UntitledSubPanelTable(width,height,cols,lines,true);
@@ -199,10 +201,10 @@ public class MatchDescription extends EntitledDataPanel implements MouseListener
 	{	int result = 0;
 		// no control
 		{	// text
-			String text = getConfiguration().getLanguage().getText(GuiTools.GAME_MATCH_DESCRIPTION_PLAYERS_DATA_NOCONTROLS);
+			String text = GuiConfiguration.getLanguage().getText(GuiTools.GAME_MATCH_DESCRIPTION_PLAYERS_DATA_NOCONTROLS);
 			controlTexts.add(text);
 			// tooltip
-			String tooltip = getConfiguration().getLanguage().getText(GuiTools.GAME_MATCH_DESCRIPTION_PLAYERS_DATA_NOCONTROLS+GuiTools.TOOLTIP);
+			String tooltip = GuiConfiguration.getLanguage().getText(GuiTools.GAME_MATCH_DESCRIPTION_PLAYERS_DATA_NOCONTROLS+GuiTools.TOOLTIP);
 			controlTooltips.add(tooltip);
 			// width
 			result = GuiTools.getPixelWidth(playersPanel.getLineFontSize(),text);
@@ -210,10 +212,10 @@ public class MatchDescription extends EntitledDataPanel implements MouseListener
 		// control number X
 		for(int index=1;index<=GameConstants.CONTROL_COUNT;index++)
 		{	// text
-			String text = getConfiguration().getLanguage().getText(GuiTools.GAME_MATCH_DESCRIPTION_PLAYERS_DATA_CONTROLS)+index;
+			String text = GuiConfiguration.getLanguage().getText(GuiTools.GAME_MATCH_DESCRIPTION_PLAYERS_DATA_CONTROLS)+index;
 			controlTexts.add(text);
 			// tooltip
-			String tooltip = getConfiguration().getLanguage().getText(GuiTools.GAME_MATCH_DESCRIPTION_PLAYERS_DATA_CONTROLS+GuiTools.TOOLTIP)+" "+index;
+			String tooltip = GuiConfiguration.getLanguage().getText(GuiTools.GAME_MATCH_DESCRIPTION_PLAYERS_DATA_CONTROLS+GuiTools.TOOLTIP)+" "+index;
 			controlTooltips.add(tooltip);
 			// width
 			int temp = GuiTools.getPixelWidth(playersPanel.getLineFontSize(),text);
@@ -328,7 +330,7 @@ public class MatchDescription extends EntitledDataPanel implements MouseListener
 		int[] pos = playersPanel.getLabelPositionSimple(label);
 		// controls
 		if(pos[1]==2)
-		{	ArrayList<Profile> profiles = getConfiguration().getCurrentMatch().getProfiles();
+		{	ArrayList<Profile> profiles = Configuration.getGameConfiguration().getTournament().getCurrentMatch().getProfiles();
 			Profile profile = profiles.get(pos[0]-1);
 			int index = profile.getControlSettingsIndex();
 			if(profile.hasAi())
