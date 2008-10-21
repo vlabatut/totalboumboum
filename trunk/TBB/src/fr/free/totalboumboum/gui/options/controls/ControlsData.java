@@ -132,6 +132,13 @@ public class ControlsData extends EntitledDataPanel implements MouseListener,Key
 		keysPanel.setLabelKey(line,col,key,true);
 	}
 
+	public void deselect()
+	{	if(selectedRow!=-1)
+		{	keysPanel.setLabelBackground(selectedRow,1,GuiTools.COLOR_TABLE_NEUTRAL_BACKGROUND);
+			selectedRow = -1;		
+		}		
+	}
+	
 	private void setKey(int line, int col, int key)
 	{	String text = null;
 		if(key>=0)

@@ -87,11 +87,13 @@ public class ControlsMenu extends InnerMenuPanel
 	
 	public void actionPerformed(ActionEvent e)
 	{	if(e.getActionCommand().equals(GuiTools.MENU_OPTIONS_BUTTON_NEXT))
-		{	selected = (selected + 1) % controlsData.length;
+		{	controlsData[selected].deselect();
+			selected = (selected + 1) % controlsData.length;
 			container.setDataPart(controlsData[selected]);
 	    }
 		else if(e.getActionCommand().equals(GuiTools.MENU_OPTIONS_BUTTON_PREVIOUS))
-		{	selected = (selected + controlsData.length - 1) % controlsData.length;
+		{	controlsData[selected].deselect();
+			selected = (selected + controlsData.length - 1) % controlsData.length;
 			container.setDataPart(controlsData[selected]);
 	    }
 		else if(e.getActionCommand().equals(GuiTools.MENU_OPTIONS_BUTTON_CONFIRM))
