@@ -103,7 +103,7 @@
 					<text name="Title" value="Limites"  tooltip="Informations sur les critères de fin de tournoi" />
 					<group name="Header">
 						<text name="Bombs" value="Bombes"  tooltip="Nombre de bombes devant être posées pour finir le tournoi" />
-						<text name="Confrontations" value="Rencontres"  tooltip="Nombre maximal de rencontres dans le tournio" />
+						<text name="Confrontations" value="Rencontres"  tooltip="Nombre maximal de rencontres dans le tournoi" />
 						<text name="Crowns" value="Couronnes"  tooltip="Nombre de couronnes devant être ramassées pour finir le tournoi" />
 						<text name="Custom" value="Points personnalisés"  tooltip="Nombre de points personnalisés à marquer pour finir le tournoi" />
 						<text name="Deaths" value="Décès"  tooltip="Nombre de décès devant être subis pour finir le tournoi" />

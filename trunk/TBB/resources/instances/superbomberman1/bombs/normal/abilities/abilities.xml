@@ -22,7 +22,7 @@
 			<name value="bomb-failure-minduration" />
 		</ability>
 <!--  	bomb-failure-probability --> 
-		<ability strength="10" frame="false" time="-1" uses="-1">
+		<ability strength="5" frame="false" time="-1" uses="-1">
 			<name value="bomb-failure-probability" />
 		</ability>
 <!--  	bomb-push-latency --> 
