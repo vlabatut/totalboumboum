@@ -37,6 +37,9 @@ import fr.free.totalboumboum.configuration.engine.EngineConfigurationSaver;
 import fr.free.totalboumboum.configuration.game.GameConfiguration;
 import fr.free.totalboumboum.configuration.game.GameConfigurationLoader;
 import fr.free.totalboumboum.configuration.game.GameConfigurationSaver;
+import fr.free.totalboumboum.configuration.profile.ProfilesConfiguration;
+import fr.free.totalboumboum.configuration.profile.ProfilesConfigurationLoader;
+import fr.free.totalboumboum.configuration.profile.ProfilesConfigurationSaver;
 import fr.free.totalboumboum.configuration.video.VideoConfiguration;
 import fr.free.totalboumboum.configuration.video.VideoConfigurationLoader;
 import fr.free.totalboumboum.configuration.video.VideoConfigurationSaver;
@@ -48,18 +51,18 @@ public class Configuration
 	// FILE ACCESS		/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	public static void loadConfiguration() throws ParserConfigurationException, SAXException, IOException, IllegalArgumentException, SecurityException, IllegalAccessException, NoSuchFieldException, ClassNotFoundException
-	{	ConfigurationLoader.loadConfiguration();
-		controlsConfiguration = ControlsConfigurationLoader.loadControlsConfiguration();
+	{	controlsConfiguration = ControlsConfigurationLoader.loadControlsConfiguration();
 		engineConfiguration = EngineConfigurationLoader.loadEngineConfiguration();
 		gameConfiguration = GameConfigurationLoader.loadGameConfiguration();
+		profilesConfiguration = ProfilesConfigurationLoader.loadProfilesConfiguration();
 		videoConfiguration = VideoConfigurationLoader.loadVideoConfiguration();
 	}
 	
 	public static void saveConfiguration() throws IllegalArgumentException, SecurityException, ParserConfigurationException, SAXException, IOException, IllegalAccessException, NoSuchFieldException
-	{	ConfigurationSaver.saveConfiguration();
-		ControlsConfigurationSaver.saveControlsConfiguration(controlsConfiguration);
+	{	ControlsConfigurationSaver.saveControlsConfiguration(controlsConfiguration);
 		EngineConfigurationSaver.saveEngineConfiguration(engineConfiguration);
 		GameConfigurationSaver.saveGameConfiguration(gameConfiguration);
+		ProfilesConfigurationSaver.saveProfilesConfiguration(profilesConfiguration);
 		VideoConfigurationSaver.saveVideoConfiguration(videoConfiguration);
 	}
 	
@@ -114,15 +117,13 @@ public class Configuration
 	/////////////////////////////////////////////////////////////////
 	// PROFILES			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	private static ArrayList<String> profiles = new ArrayList<String>();
-	
-	public static ArrayList<String> getProfiles()
-	{	return profiles;	
+	private static ProfilesConfiguration profilesConfiguration;
+
+	public static void setProfilesConfiguration(ProfilesConfiguration profilesConfiguration)
+	{	Configuration.profilesConfiguration = profilesConfiguration;
 	}
-	
-	public static void addProfile(String profile)
-	{	if(!profiles.contains(profile))
-			profiles.add(profile);
+	public static ProfilesConfiguration getProfilesConfiguration()
+	{	return profilesConfiguration;
 	}
 
 }

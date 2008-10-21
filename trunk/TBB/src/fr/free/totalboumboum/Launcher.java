@@ -34,7 +34,7 @@ import javax.xml.parsers.ParserConfigurationException;
 
 import org.xml.sax.SAXException;
 
-import fr.free.totalboumboum.configuration.ConfigurationLoader;
+import fr.free.totalboumboum.configuration.Configuration;
 import fr.free.totalboumboum.gui.data.configuration.GuiConfiguration;
 import fr.free.totalboumboum.gui.menus.main.MainFrame;
 import fr.free.totalboumboum.gui.tools.GuiTools;
@@ -52,7 +52,7 @@ public class Launcher
 		updateSplash(splash,"[Loading XML schemas]");
 		XmlTools.init();
 		updateSplash(splash,"[Loading configuration]");
-		ConfigurationLoader.loadConfiguration();
+		Configuration.loadConfiguration();
 		updateSplash(splash,"[Loading GUI]");
 		GuiConfiguration.loadConfiguration();
 		updateSplash(splash,"[Initializing GUI]");
