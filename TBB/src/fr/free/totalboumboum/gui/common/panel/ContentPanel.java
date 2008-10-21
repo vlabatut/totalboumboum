@@ -25,7 +25,6 @@ import java.awt.Dimension;
 
 import javax.swing.JPanel;
 
-import fr.free.totalboumboum.gui.data.configuration.GuiConfiguration;
 import fr.free.totalboumboum.gui.menus.main.MainFrame;
 
 public abstract class ContentPanel extends JPanel

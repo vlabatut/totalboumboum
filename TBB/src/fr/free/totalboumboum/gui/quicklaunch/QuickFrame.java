@@ -57,15 +57,13 @@ public class QuickFrame extends JFrame implements WindowListener,LoopRenderPanel
 {	private static final long serialVersionUID = 1L;
 
 	private BufferStrategy bufferStrategy;
-	private Configuration configuration;
 	private Loop loop;
 	private JProgressBar loadProgressBar;
 	private Canvas canvas;
 
-	public QuickFrame(Configuration configuration, GraphicsConfiguration gconf) throws IllegalArgumentException, SecurityException, ParserConfigurationException, SAXException, IOException, IllegalAccessException, NoSuchFieldException, ClassNotFoundException
+	public QuickFrame(GraphicsConfiguration gconf) throws IllegalArgumentException, SecurityException, ParserConfigurationException, SAXException, IOException, IllegalAccessException, NoSuchFieldException, ClassNotFoundException
 	{	// init
 		super("TBB v."+GameConstants.VERSION,gconf);
-		this.configuration = configuration;
 		
 		// listener
 		addWindowListener(this);
@@ -77,7 +75,7 @@ public class QuickFrame extends JFrame implements WindowListener,LoopRenderPanel
 		setIconImage(icon);
 		
 		// set dimensions
-		Dimension dim = configuration.getPanelDimension();
+		Dimension dim = Configuration.getVideoConfiguration().getPanelDimension();
 		setResizable(false);
 		
 	    // create canvas
@@ -99,8 +97,8 @@ public class QuickFrame extends JFrame implements WindowListener,LoopRenderPanel
 	   
 	    // init the game
 	 // tournament
-	    configuration.loadQuickstart();
-		AbstractTournament tournament = configuration.getTournament();  
+	    Configuration.getGameConfiguration().loadQuickstart();
+		AbstractTournament tournament = Configuration.getGameConfiguration().getTournament();  
 	    tournament.init();
 	    tournament.progress();
 	    // match
@@ -206,7 +204,7 @@ public class QuickFrame extends JFrame implements WindowListener,LoopRenderPanel
 				break;
 			// players
 			default:
-				Round round = configuration.getTournament().getCurrentMatch().getCurrentRound();
+				Round round = Configuration.getGameConfiguration().getTournament().getCurrentMatch().getCurrentRound();
 				if(val==round.getProfiles().size()+2)
 				{	// progress bar
 					loadProgressBar.repaint();
@@ -233,8 +231,8 @@ public class QuickFrame extends JFrame implements WindowListener,LoopRenderPanel
 	public void roundOver()
 	{	remove(canvas);
 		Container contentPane = getContentPane();
-		Dimension dim = configuration.getPanelDimension();
-		QuickResults roundResults = new QuickResults(dim,configuration);
+		Dimension dim = Configuration.getVideoConfiguration().getPanelDimension();
+		QuickResults roundResults = new QuickResults(dim);
 		contentPane.add(roundResults);
 //		contentPane.setLayout(layout);
 		validate();

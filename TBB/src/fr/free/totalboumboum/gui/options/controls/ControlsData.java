@@ -30,11 +30,13 @@ import java.util.ArrayList;
 
 import javax.swing.JLabel;
 
+import fr.free.totalboumboum.configuration.Configuration;
 import fr.free.totalboumboum.configuration.controls.ControlSettings;
 import fr.free.totalboumboum.engine.content.feature.event.ControlEvent;
 import fr.free.totalboumboum.gui.common.panel.SplitMenuPanel;
 import fr.free.totalboumboum.gui.common.panel.data.EntitledDataPanel;
 import fr.free.totalboumboum.gui.common.subpanel.UntitledSubPanelTable;
+import fr.free.totalboumboum.gui.data.configuration.GuiConfiguration;
 import fr.free.totalboumboum.gui.tools.GuiTools;
 import fr.free.totalboumboum.tools.ClassTools;
 
@@ -58,8 +60,8 @@ public class ControlsData extends EntitledDataPanel implements MouseListener,Key
 	{	super(container);
 
 		// title
-		{	String text = getConfiguration().getLanguage().getText(GuiTools.MENU_OPTIONS_CONTROLS_TITLE)+" "+index;
-			String tooltip = getConfiguration().getLanguage().getText(GuiTools.MENU_OPTIONS_CONTROLS_TITLE+GuiTools.TOOLTIP);
+		{	String text = GuiConfiguration.getLanguage().getText(GuiTools.MENU_OPTIONS_CONTROLS_TITLE)+" "+index;
+			String tooltip = GuiConfiguration.getLanguage().getText(GuiTools.MENU_OPTIONS_CONTROLS_TITLE+GuiTools.TOOLTIP);
 			setTitleText(text,tooltip);
 		}
 	
@@ -89,7 +91,7 @@ public class ControlsData extends EntitledDataPanel implements MouseListener,Key
 			}			
 			
 			// data
-			{	controlSettings = getConfiguration().getGameConfiguration().getControlSettings().get(index).copy();;
+			{	controlSettings = Configuration.getControlsConfiguration().getControlSettings().get(index).copy();;
 				for(int line=1;line<actions.length+1;line++)
 				{	int col = 0;
 					// command

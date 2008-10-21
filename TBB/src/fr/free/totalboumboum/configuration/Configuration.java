@@ -48,14 +48,15 @@ public class Configuration
 	// FILE ACCESS		/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	public static void loadConfiguration() throws ParserConfigurationException, SAXException, IOException, IllegalArgumentException, SecurityException, IllegalAccessException, NoSuchFieldException, ClassNotFoundException
-	{	controlsConfiguration = ControlsConfigurationLoader.loadControlsConfiguration();
+	{	ConfigurationLoader.loadConfiguration();
+		controlsConfiguration = ControlsConfigurationLoader.loadControlsConfiguration();
 		engineConfiguration = EngineConfigurationLoader.loadEngineConfiguration();
 		gameConfiguration = GameConfigurationLoader.loadGameConfiguration();
 		videoConfiguration = VideoConfigurationLoader.loadVideoConfiguration();
 	}
 	
 	public static void saveConfiguration() throws IllegalArgumentException, SecurityException, ParserConfigurationException, SAXException, IOException, IllegalAccessException, NoSuchFieldException
-	{	ConfigurationLoader.loadConfiguration();
+	{	ConfigurationSaver.saveConfiguration();
 		ControlsConfigurationSaver.saveControlsConfiguration(controlsConfiguration);
 		EngineConfigurationSaver.saveEngineConfiguration(engineConfiguration);
 		GameConfigurationSaver.saveGameConfiguration(gameConfiguration);

@@ -21,107 +21,131 @@ package fr.free.totalboumboum.gui.data.configuration;
  * 
  */
 
+import java.awt.AlphaComposite;
+import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
+import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.FileInputStream;
 import java.io.IOException;
+import java.io.InputStream;
 
 import javax.xml.parsers.ParserConfigurationException;
 
+import org.jdom.Element;
 import org.xml.sax.SAXException;
 
-import fr.free.totalboumboum.game.match.Match;
-
 import fr.free.totalboumboum.configuration.Configuration;
-import fr.free.totalboumboum.game.round.Round;
-import fr.free.totalboumboum.game.tournament.AbstractTournament;
 import fr.free.totalboumboum.gui.data.language.Language;
 import fr.free.totalboumboum.gui.data.language.LanguageLoader;
+import fr.free.totalboumboum.gui.tools.GuiFileTools;
+import fr.free.totalboumboum.gui.tools.GuiXmlTools;
+import fr.free.totalboumboum.tools.FileTools;
+import fr.free.totalboumboum.tools.ImageTools;
+import fr.free.totalboumboum.tools.XmlTools;
 
 public class GuiConfiguration
 {	
-	public GuiConfiguration() throws ParserConfigurationException, SAXException, IOException
-	{	// language
-		setLanguage(LanguageLoader.loadLanguage("english"));
+	/////////////////////////////////////////////////////////////////
+	// FILE ACCESS		/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	public static void loadConfiguration() throws ParserConfigurationException, SAXException, IOException, IllegalArgumentException, SecurityException, IllegalAccessException, NoSuchFieldException, ClassNotFoundException
+	{	// file
+		String individualFolder = FileTools.getConfigurationPath();
+		File dataFile = new File(individualFolder+File.separator+GuiFileTools.FILE_GUI+GuiFileTools.EXTENSION_DATA);
+		String schemaFolder = FileTools.getSchemasPath();
+		File schemaFile = new File(schemaFolder+File.separator+GuiFileTools.FILE_GUI+GuiFileTools.EXTENSION_SCHEMA);
+		Element root = XmlTools.getRootFromFile(dataFile,schemaFile);
+		// language
+		{	Element element = root.getChild(GuiXmlTools.ELT_LANGUAGE);
+			loadLanguageElement(element);
+		}
 		// font
-		setFont(new Font("Arial",Font.PLAIN,10));
+		{	Element element = root.getChild(GuiXmlTools.ELT_FONT);
+			loadFontElement(element);
+		}
+		// background
+		{	Element element = root.getChild(GuiXmlTools.ELT_BACKGROUND);
+			loadBackgroundElement(element);
+		}
+	}
+
+	public static void saveConfiguration() throws IllegalArgumentException, SecurityException, ParserConfigurationException, SAXException, IOException, IllegalAccessException, NoSuchFieldException
+	{	
 	}
 	
 	/////////////////////////////////////////////////////////////////
-	// GAME CONFIGURATION	/////////////////////////////////////////
-	/////////////////////////////////////////////////////////////////
-	private Configuration gameConfiguration;
-		
-	public void setGameConfiguration(Configuration configuration)
-	{	this.gameConfiguration = configuration;	
-	}
-	public Configuration getGameConfiguration()
-	{	return gameConfiguration;	
-	}
-		
-	/////////////////////////////////////////////////////////////////
 	// LANGUAGE				/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	private Language language;
+	private static Language language;
 		
-	public void setLanguage(Language language)
-	{	this.language = language;	
+	public static void loadLanguageElement(Element root) throws ParserConfigurationException, SAXException, IOException
+	{	String value = root.getAttribute(GuiXmlTools.ATT_VALUE).getValue().trim();
+		Language language;
+		language = LanguageLoader.loadLanguage(value);			
+		GuiConfiguration.language = language;
 	}
-	public Language getLanguage()
+	public static Language getLanguage()
 	{	return language;	
 	}
 		
 	/////////////////////////////////////////////////////////////////
 	// FONT		/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	private Font font;
+	private static Font font;
 	
-	public Font getFont()
+	public static Font getFont()
 	{	return font;	
 	}
-	public void setFont(Font font)
-	{	this.font = font;	
+	public static void loadFontElement(Element root)
+	{	String filename = root.getAttribute(GuiXmlTools.ATT_FILE).getValue().trim();
+		String path = GuiFileTools.getFontsPath()+File.separator+filename;
+		Font font;
+		try
+		{	InputStream is = new FileInputStream(path);
+			font = Font.createFont(Font.TRUETYPE_FONT,is);
+		}
+		catch (Exception ex)
+		{	font = new Font("serif",Font.PLAIN,1);
+		}		
+		GuiConfiguration.font = font;
 	}
 
 	/////////////////////////////////////////////////////////////////
 	// BACKGROUND		/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	private BufferedImage background;
-	private BufferedImage darkBackground;
+	private static BufferedImage background;
+	private static BufferedImage darkBackground;
 	
-	public BufferedImage getBackground()
+	public static void loadBackgroundElement(Element root) throws IOException
+	{	// folder
+		String filename = root.getAttribute(GuiXmlTools.ATT_FILE).getValue().trim();
+		String path = GuiFileTools.getImagesPath()+File.separator+filename;
+		// image
+		BufferedImage image = ImageTools.loadImage(path,null);
+		// resize
+		Dimension dim = Configuration.getVideoConfiguration().getPanelDimension();
+		double zoomY = dim.getHeight()/(double)image.getHeight();
+		double zoomX = dim.getWidth()/(double)image.getWidth();
+		double zoom = Math.max(zoomX,zoomY);
+		image = ImageTools.resize(image,zoom,true);
+		GuiConfiguration.background = image;
+		// dark image		
+		BufferedImage darkImage = ImageTools.copyBufferedImage(image);
+		Graphics2D g = (Graphics2D)darkImage.getGraphics();
+		g.setComposite(AlphaComposite.Clear);
+		g.setPaintMode();
+		g.setColor(new Color(0,0,0,100));
+		g.fillRect(0,0,darkImage.getWidth(),darkImage.getHeight());
+		g.dispose();
+		GuiConfiguration.darkBackground = darkImage;
+	}
+	public static BufferedImage getBackground()
 	{	return background;	
 	}
-	public void setBackground(BufferedImage background)
-	{	this.background = background;	
-	}
-
-	public BufferedImage getDarkBackground()
+	public static BufferedImage getDarkBackground()
 	{	return darkBackground;	
-	}
-	public void setDarkBackground(BufferedImage darkBackground)
-	{	this.darkBackground = darkBackground;	
-	}
-
-	/////////////////////////////////////////////////////////////////
-	// PANEL			/////////////////////////////////////////////
-	/////////////////////////////////////////////////////////////////
-	public Dimension getPanelDimension()
-	{	return gameConfiguration.getPanelDimension();	
-	}
-
-	/////////////////////////////////////////////////////////////////
-	// GAME			/////////////////////////////////////////////
-	/////////////////////////////////////////////////////////////////
-	public AbstractTournament getCurrentTournament()
-	{	return gameConfiguration.getTournament();	
-	}
-
-	public Match getCurrentMatch()
-	{	return gameConfiguration.getTournament().getCurrentMatch();	
-	}
-
-	public Round getCurrentRound()
-	{	return gameConfiguration.getTournament().getCurrentMatch().getCurrentRound();	
 	}
 }

@@ -35,11 +35,13 @@ import java.awt.image.VolatileImage;
 
 import javax.swing.SwingUtilities;
 
+import fr.free.totalboumboum.configuration.Configuration;
 import fr.free.totalboumboum.engine.loop.Loop;
 import fr.free.totalboumboum.engine.loop.LoopRenderPanel;
 import fr.free.totalboumboum.gui.common.MenuContainer;
 import fr.free.totalboumboum.gui.common.panel.menu.MenuPanel;
 import fr.free.totalboumboum.gui.common.panel.menu.SimpleMenuPanel;
+import fr.free.totalboumboum.gui.data.configuration.GuiConfiguration;
 
 public class LoopPanel extends SimpleMenuPanel implements LoopRenderPanel
 {	private static final long serialVersionUID = 1L;
@@ -56,15 +58,15 @@ public class LoopPanel extends SimpleMenuPanel implements LoopRenderPanel
     	setIgnoreRepaint(true);
 
 		// background image
-		backgroundImage = getConfiguration().getDarkBackground();	
+		backgroundImage = GuiConfiguration.getDarkBackground();	
 /*
 		float[] scales = { 0.5f, 0.5f, 0.5f, 1f };
 		float[] offsets = new float[4];
 		RescaleOp rop = new RescaleOp(scales, offsets, null);
 	    image = rop.filter((BufferedImage)image, null);
 */
-	    loop = getConfiguration().getCurrentRound().getLoop();
-	    Dimension dim = getConfiguration().getPanelDimension();
+	    loop = Configuration.getGameConfiguration().getTournament().getCurrentMatch().getCurrentRound().getLoop();
+	    Dimension dim = Configuration.getVideoConfiguration().getPanelDimension();
 		setPreferredSize(dim);
 		setDoubleBuffered(false);
 //		setBackground(Color.RED);

@@ -32,6 +32,7 @@ import javax.xml.parsers.ParserConfigurationException;
 
 import org.xml.sax.SAXException;
 
+import fr.free.totalboumboum.configuration.Configuration;
 import fr.free.totalboumboum.game.tournament.AbstractTournament;
 import fr.free.totalboumboum.game.tournament.single.SingleTournament;
 import fr.free.totalboumboum.gui.common.panel.SplitMenuPanel;
@@ -106,21 +107,21 @@ public class TournamentMenu extends InnerMenuPanel
 		
 		// buttons
 		add(Box.createVerticalGlue());
-		buttonNew = GuiTools.createSecondaryVerticalMenuButton(GuiTools.MENU_TOURNAMENT_BUTTON_NEW,this,getConfiguration());
+		buttonNew = GuiTools.createSecondaryVerticalMenuButton(GuiTools.MENU_TOURNAMENT_BUTTON_NEW,this);
 buttonNew.setEnabled(false);
-		buttonLoad = GuiTools.createSecondaryVerticalMenuButton(GuiTools.MENU_TOURNAMENT_BUTTON_LOAD,this,getConfiguration());
+		buttonLoad = GuiTools.createSecondaryVerticalMenuButton(GuiTools.MENU_TOURNAMENT_BUTTON_LOAD,this);
 buttonLoad.setEnabled(false);
-		buttonSaveAs = GuiTools.createSecondaryVerticalMenuButton(GuiTools.MENU_TOURNAMENT_BUTTON_SAVE_AS,this,getConfiguration());
+		buttonSaveAs = GuiTools.createSecondaryVerticalMenuButton(GuiTools.MENU_TOURNAMENT_BUTTON_SAVE_AS,this);
 buttonSaveAs.setEnabled(false);
 		add(Box.createRigidArea(new Dimension(0,GuiTools.getSize(GuiTools.MENU_VERTICAL_BUTTON_SPACE))));
-		buttonRules = GuiTools.createSecondaryVerticalMenuButton(GuiTools.MENU_TOURNAMENT_BUTTON_RULES,this,getConfiguration());
+		buttonRules = GuiTools.createSecondaryVerticalMenuButton(GuiTools.MENU_TOURNAMENT_BUTTON_RULES,this);
 buttonSaveAs.setEnabled(false);
-		buttonPlayers = GuiTools.createSecondaryVerticalMenuButton(GuiTools.MENU_TOURNAMENT_BUTTON_PLAYERS,this,getConfiguration());
+		buttonPlayers = GuiTools.createSecondaryVerticalMenuButton(GuiTools.MENU_TOURNAMENT_BUTTON_PLAYERS,this);
 buttonPlayers.setEnabled(false);
 		add(Box.createRigidArea(new Dimension(0,GuiTools.getSize(GuiTools.MENU_VERTICAL_BUTTON_SPACE))));
-		buttonPlay = GuiTools.createSecondaryVerticalMenuButton(GuiTools.MENU_TOURNAMENT_BUTTON_START,this,getConfiguration());
+		buttonPlay = GuiTools.createSecondaryVerticalMenuButton(GuiTools.MENU_TOURNAMENT_BUTTON_START,this);
 		add(Box.createRigidArea(new Dimension(0,GuiTools.getSize(GuiTools.MENU_VERTICAL_BUTTON_SPACE))));
-		buttonBack = GuiTools.createSecondaryVerticalMenuButton(GuiTools.MENU_TOURNAMENT_BUTTON_BACK,this,getConfiguration());
+		buttonBack = GuiTools.createSecondaryVerticalMenuButton(GuiTools.MENU_TOURNAMENT_BUTTON_BACK,this);
 		add(Box.createVerticalGlue());
 		
 		// panels
@@ -147,7 +148,7 @@ buttonPlayers.setEnabled(false);
 		else if(e.getActionCommand().equals(GuiTools.MENU_TOURNAMENT_BUTTON_START))
 		{	//NOTE c icite qu'il faut tester que les profils sont OK
 			try
-			{	AbstractTournament tournament = getConfiguration().getCurrentTournament();
+			{	AbstractTournament tournament = Configuration.getGameConfiguration().getTournament();
 				tournament.init();
 				if(tournament instanceof SingleTournament)
 				{	tournament.progress();
@@ -191,7 +192,7 @@ buttonPlayers.setEnabled(false);
 	} 
 
 	public void refresh()
-	{	AbstractTournament tournament = getConfiguration().getCurrentTournament();
+	{	AbstractTournament tournament = Configuration.getGameConfiguration().getTournament();
 	
 		// New: always possible
 		// Load: always possible
@@ -206,12 +207,12 @@ buttonPlayers.setEnabled(false);
 buttonSaveAs.setEnabled(false);		
 			buttonPlay.setEnabled(true);
 			if(tournament.hasBegun())
-			{	GuiTools.setButtonContent(GuiTools.MENU_TOURNAMENT_BUTTON_CONTINUE,buttonPlay,getConfiguration());
+			{	GuiTools.setButtonContent(GuiTools.MENU_TOURNAMENT_BUTTON_CONTINUE,buttonPlay);
 				buttonPlayers.setEnabled(false);
 				buttonRules.setEnabled(false);
 			}
 			else
-			{	GuiTools.setButtonContent(GuiTools.MENU_TOURNAMENT_BUTTON_START,buttonPlay,getConfiguration());
+			{	GuiTools.setButtonContent(GuiTools.MENU_TOURNAMENT_BUTTON_START,buttonPlay);
 				buttonPlayers.setEnabled(true);
 buttonPlayers.setEnabled(false);		
 				buttonRules.setEnabled(true);

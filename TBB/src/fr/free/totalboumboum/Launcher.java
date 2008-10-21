@@ -23,11 +23,9 @@ package fr.free.totalboumboum;
 
 import java.awt.AlphaComposite;
 import java.awt.Font;
-import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Rectangle;
 import java.awt.SplashScreen;
-import java.awt.image.BufferedImage;
 import java.io.IOException;
 
 import javax.swing.SwingUtilities;
@@ -36,10 +34,8 @@ import javax.xml.parsers.ParserConfigurationException;
 
 import org.xml.sax.SAXException;
 
-import fr.free.totalboumboum.configuration.Configuration;
 import fr.free.totalboumboum.configuration.ConfigurationLoader;
 import fr.free.totalboumboum.gui.data.configuration.GuiConfiguration;
-import fr.free.totalboumboum.gui.data.configuration.GuiConfigurationLoader;
 import fr.free.totalboumboum.gui.menus.main.MainFrame;
 import fr.free.totalboumboum.gui.tools.GuiTools;
 import fr.free.totalboumboum.tools.XmlTools;
@@ -56,13 +52,11 @@ public class Launcher
 		updateSplash(splash,"[Loading XML schemas]");
 		XmlTools.init();
 		updateSplash(splash,"[Loading configuration]");
-		Configuration config = ConfigurationLoader.loadConfiguration();
+		ConfigurationLoader.loadConfiguration();
 		updateSplash(splash,"[Loading GUI]");
-		final GuiConfiguration configuration = GuiConfigurationLoader.loadConfiguration(config);
+		GuiConfiguration.loadConfiguration();
 		updateSplash(splash,"[Initializing GUI]");
-		BufferedImage img = new BufferedImage(10,10,BufferedImage.TYPE_INT_ARGB);
-		Graphics g = img.getGraphics();
-		GuiTools.init(configuration,g);
+		GuiTools.init();
 		ToolTipManager.sharedInstance().setInitialDelay(200);
 		updateSplash(splash,"[Done]");
 		
@@ -70,7 +64,7 @@ public class Launcher
 		SwingUtilities.invokeLater(new Runnable()
 		{	public void run()
 			{	try
-				{	new MainFrame(configuration);
+				{	new MainFrame();
 				}
 				catch (IllegalArgumentException e)
 				{	e.printStackTrace();

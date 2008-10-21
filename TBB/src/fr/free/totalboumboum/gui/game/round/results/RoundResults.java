@@ -30,6 +30,7 @@ import java.util.TreeSet;
 
 import javax.swing.JLabel;
 
+import fr.free.totalboumboum.configuration.Configuration;
 import fr.free.totalboumboum.configuration.profile.Portraits;
 import fr.free.totalboumboum.configuration.profile.Profile;
 import fr.free.totalboumboum.game.points.PlayerPoints;
@@ -64,7 +65,7 @@ public class RoundResults extends EntitledDataPanel
 			{	{	JLabel lbl = resultsPanel.getLabel(0,0);
 					lbl.setOpaque(false);
 				}				
-				Round round = getConfiguration().getCurrentRound();
+				Round round = Configuration.getGameConfiguration().getTournament().getCurrentMatch().getCurrentRound();
 				String sc = null;
 				switch(round.getPlayMode())
 				{	case CROWN:
@@ -106,7 +107,7 @@ public class RoundResults extends EntitledDataPanel
 	@Override
 	public void updateData()
 	{	// init
-		Round round = getConfiguration().getCurrentRound();
+		Round round = Configuration.getGameConfiguration().getTournament().getCurrentMatch().getCurrentRound();
 		StatisticRound stats = round.getStats();
 		ArrayList<Profile> players = round.getProfiles();
 		TreeSet<PlayerPoints> ranking = stats.getOrderedPlayers();

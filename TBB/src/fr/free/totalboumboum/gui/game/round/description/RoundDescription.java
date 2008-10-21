@@ -44,6 +44,7 @@ import org.xml.sax.SAXException;
 
 import java.util.Map.Entry;
 
+import fr.free.totalboumboum.configuration.Configuration;
 import fr.free.totalboumboum.engine.container.level.HollowLevel;
 import fr.free.totalboumboum.engine.container.level.LevelPreview;
 import fr.free.totalboumboum.engine.container.level.LevelPreviewer;
@@ -68,6 +69,7 @@ import fr.free.totalboumboum.gui.common.panel.SplitMenuPanel;
 import fr.free.totalboumboum.gui.common.panel.data.EntitledDataPanel;
 import fr.free.totalboumboum.gui.common.subpanel.EntitledSubPanelTable;
 import fr.free.totalboumboum.gui.common.subpanel.SubPanel;
+import fr.free.totalboumboum.gui.data.configuration.GuiConfiguration;
 import fr.free.totalboumboum.gui.tools.GuiTools;
 import fr.free.totalboumboum.tools.ImageTools;
 import fr.free.totalboumboum.tools.StringTools;
@@ -85,7 +87,7 @@ public class RoundDescription extends EntitledDataPanel
 		setTitleKey(key);
 	
 		// data
-		{	Round round = getConfiguration().getCurrentRound();
+		{	Round round = Configuration.getGameConfiguration().getTournament().getCurrentMatch().getCurrentRound();
 			HollowLevel hollowLevel = round.getHollowLevel();
 			LevelPreview preview = null;
 			try
@@ -232,7 +234,7 @@ public class RoundDescription extends EntitledDataPanel
 		result.setHorizontalAlignment(SwingConstants.CENTER);
 		result.setVerticalAlignment(SwingConstants.CENTER);
 		int fontSize = GuiTools.getFontSize(width, height, text);
-		Font font = getConfiguration().getFont().deriveFont((float)fontSize);
+		Font font = GuiConfiguration.getFont().deriveFont((float)fontSize);
 		result.setFont(font);
 		result.setBackground(GuiTools.COLOR_TABLE_HEADER_BACKGROUND);
 		result.setForeground(GuiTools.COLOR_TABLE_HEADER_FOREGROUND);
@@ -271,7 +273,7 @@ public class RoundDescription extends EntitledDataPanel
 		NumberFormat nf = NumberFormat.getInstance();
 		nf.setMinimumFractionDigits(0);
 		HashMap<String,BufferedImage> itemsetPreview = levelPreview.getItemsetPreview();
-		Zone zone = getConfiguration().getCurrentRound().getHollowLevel().getZone();
+		Zone zone = Configuration.getGameConfiguration().getTournament().getCurrentMatch().getCurrentRound().getHollowLevel().getZone();
 		HashMap<String,Integer> itemList = zone.getItemCount();
 		Iterator<Entry<String,BufferedImage>> i = itemsetPreview.entrySet().iterator();
 		int line = 0;
@@ -336,7 +338,7 @@ public class RoundDescription extends EntitledDataPanel
 			GuiTools.GAME_ROUND_DESCRIPTION_MISC_HEADER_THEME,
 			GuiTools.GAME_ROUND_DESCRIPTION_MISC_HEADER_DIMENSION
 		};
-		Round round = getConfiguration().getCurrentRound();
+		Round round = Configuration.getGameConfiguration().getTournament().getCurrentMatch().getCurrentRound();
 		HollowLevel hollowLevel = round.getHollowLevel();
 		String texts[] = 
 		{	hollowLevel.getPackName(),
