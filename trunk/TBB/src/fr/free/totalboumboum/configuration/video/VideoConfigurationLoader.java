@@ -37,10 +37,10 @@ public class VideoConfigurationLoader
 {	
 	public static VideoConfiguration loadVideoConfiguration() throws ParserConfigurationException, SAXException, IOException, IllegalArgumentException, SecurityException, IllegalAccessException, NoSuchFieldException, ClassNotFoundException
 	{	VideoConfiguration result = new VideoConfiguration();
-		String individualFolder = FileTools.getSettingsPath();
-		File dataFile = new File(individualFolder+File.separator+FileTools.FILE_CONFIGURATION+FileTools.EXTENSION_DATA);
+		String individualFolder = FileTools.getConfigurationPath();
+		File dataFile = new File(individualFolder+File.separator+FileTools.FILE_VIDEO+FileTools.EXTENSION_DATA);
 		String schemaFolder = FileTools.getSchemasPath();
-		File schemaFile = new File(schemaFolder+File.separator+FileTools.FILE_CONFIGURATION+FileTools.EXTENSION_SCHEMA);
+		File schemaFile = new File(schemaFolder+File.separator+FileTools.FILE_VIDEO+FileTools.EXTENSION_SCHEMA);
 		Element root = XmlTools.getRootFromFile(dataFile,schemaFile);
 		loadVideoElement(root,result);
 		return result;
@@ -73,8 +73,6 @@ public class VideoConfigurationLoader
 		value = root.getAttribute(XmlTools.ATT_BLUE).getValue().trim();
 		int blue = Integer.parseInt(value);
 		Color borderColor = new Color(red,green,blue);
-		if(borderColor==null)
-			borderColor = Color.BLACK;
 		result.setBorderColor(borderColor);
 	}
 	

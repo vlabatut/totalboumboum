@@ -46,7 +46,7 @@ public class GameConfigurationSaver
 	}
 
 	private static Element saveGameElement(GameConfiguration gameConfiguration)
-	{	Element result = new Element(XmlTools.ELT_ENGINE); 
+	{	Element result = new Element(XmlTools.ELT_GAME); 
 		// quick match
 		Element matchElement = saveQuickmatchElement(gameConfiguration);
 		result.addContent(matchElement);

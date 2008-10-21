@@ -48,16 +48,16 @@ public class VideoConfigurationSaver
 	}
 
 	private static Element saveVideoElement(VideoConfiguration videoConfiguration)
-	{	Element result = new Element(XmlTools.ELT_ENGINE); 
+	{	Element result = new Element(XmlTools.ELT_VIDEO); 
 		// smoothing
 		Element smoothingElement = saveSmoothGraphicsElement(videoConfiguration);
 		result.addContent(smoothingElement);
-		// border color
-		Element borderElement = saveBorderElement(videoConfiguration);
-		result.addContent(borderElement);
 		// parnel dimension
 		Element panelElement = savePanelDimensionElement(videoConfiguration);
 		result.addContent(panelElement);
+		// border color
+		Element borderElement = saveBorderElement(videoConfiguration);
+		result.addContent(borderElement);
 		//
 		return result;
 	}

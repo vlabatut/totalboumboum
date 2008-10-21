@@ -54,7 +54,7 @@ public class ProfilesConfigurationSaver
 		while(it.hasNext())
 		{	String profile = it.next();
 			Element element = new Element(XmlTools.ELT_PROFILE);
-			result.setAttribute(XmlTools.ATT_VALUE,profile);
+			element.setAttribute(XmlTools.ATT_VALUE,profile);
 			result.addContent(element);
 		}
 		return result;

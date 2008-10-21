@@ -10,10 +10,17 @@
 		<xsd:attribute name="width" type="xsd:integer" use="required" />
 	</xsd:complexType>
 
+	<xsd:complexType name="tColor">
+		<xsd:attribute name="red" type="xsd:integer" use="required" />
+		<xsd:attribute name="green" type="xsd:integer" use="required" />
+		<xsd:attribute name="blue" type="xsd:integer" use="required" />
+	</xsd:complexType>
+
 	<xsd:complexType name="tVideo">
 		<xsd:sequence>
 			<xsd:element name="smoothGraphics" type="tSmoothGraphics" />
 			<xsd:element name="panelDimension" type="tDimension" />
+			<xsd:element name="border" type="tColor" />
 		</xsd:sequence>
 	</xsd:complexType>
 

@@ -33,6 +33,7 @@ import javax.swing.JLabel;
 import javax.swing.SpringLayout;
 import javax.swing.SwingConstants;
 
+import fr.free.totalboumboum.gui.data.configuration.GuiConfiguration;
 import fr.free.totalboumboum.gui.tools.SpringUtilities;
 import fr.free.totalboumboum.gui.tools.GuiTools;
 import fr.free.totalboumboum.tools.ImageTools;
@@ -62,12 +63,12 @@ public class UntitledSubPanelTable extends SubPanel
 		{	lineHeight = (int)((height - (lines+1)*GuiTools.subPanelMargin)/(lines+GuiTools.TABLE_HEADER_RATIO-1));
 			headerHeight = height - (lines+1)*GuiTools.subPanelMargin - lineHeight*(lines-1);
 			headerFontSize = GuiTools.getFontSize(headerHeight*GuiTools.FONT_RATIO);
-			headerFont = GuiTools.getGameFont().deriveFont((float)headerFontSize);
+			headerFont = GuiConfiguration.getFont().deriveFont((float)headerFontSize);
 		}
 		else
 			lineHeight = (int)((height - (lines+1)*GuiTools.subPanelMargin)/((float)lines));
 		lineFontSize = GuiTools.getFontSize(lineHeight*GuiTools.FONT_RATIO);
-		lineFont = GuiTools.getGameFont().deriveFont((float)lineFontSize);
+		lineFont = GuiConfiguration.getFont().deriveFont((float)lineFontSize);
 
 		// table
 		this.colGroups = colGroups;
@@ -99,6 +100,12 @@ public class UntitledSubPanelTable extends SubPanel
 	}
 	public int getHeaderFontSize()
 	{	return headerFontSize;	
+	}
+	public int getHeaderHeight()
+	{	return headerHeight;	
+	}
+	public int getLineHeight()
+	{	return lineHeight;	
 	}
 	
 	/////////////////////////////////////////////////////////////////
@@ -448,7 +455,7 @@ public class UntitledSubPanelTable extends SubPanel
 	{	setLabelKey(line,0,col,key,imageFlag);
 	}
 	public void setLabelKey(int line, int colGroup, int colSub, String key, boolean imageFlag)
-	{	String tooltip = GuiTools.getText(key+GuiTools.TOOLTIP);
+	{	String tooltip = GuiConfiguration.getLanguage().getText(key+GuiTools.TOOLTIP);
 		// is there an available icon ?
 		if(imageFlag)
 		{	BufferedImage icon = GuiTools.getIcon(key);
@@ -456,7 +463,7 @@ public class UntitledSubPanelTable extends SubPanel
 		}
 		// if not : use text
 		else
-		{	String text = GuiTools.getText(key);
+		{	String text = GuiConfiguration.getLanguage().getText(key);
 			setLabelText(line,colGroup,colSub,text,tooltip);
 		}
 	}

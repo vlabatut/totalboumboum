@@ -1,9 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<engine
-	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
-	xsi:noNamespaceSchemaLocation="..\..\schemas\engine.xsd">
-	
+<engine xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="..\..\..\resources\schemas\engine.xsd">
 	<fps value="50" />
-	<speed value="1" />
-	
+	<speed value="1.0" />
 </engine>
+
