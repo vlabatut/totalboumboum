@@ -61,6 +61,15 @@
 
 			<group name="Video">
 				<text name="Title" value="Vidéo" tooltip="Modifier les paramètres graphiques" />
+				<group name="Line">
+					<text name="BorderColor" value="Couleur de la bordure" tooltip="Couleur de la bordure durant le jeu" />
+					<text name="Disabled" value="Désactivé" tooltip="Lissage désactivé" />
+					<text name="Enabled" value="Activé" tooltip="Lissage activé" />
+					<text name="Minus" value="Moins" tooltip="Diminuer la taille de la fenêtre" />
+					<text name="PanelDimension" value="Taille de la fenêtre" tooltip="Taille de la fenêtre de TBB" />
+					<text name="Plus" value="Plus" tooltip="Augmenter la taille de la fenêtre" />
+					<text name="SmoothGraphics" value="Lissage" tooltip="Lissage des graphismes du jeu" />
+				</group>
 			</group>
 			
 		</group>	

@@ -91,6 +91,14 @@ public class GuiTools
 		public static final String MENU_OPTIONS_GAMEPLAY_TITLE = "MenuOptionsGameplayTitle";
 		/* VIDEO */
 		public static final String MENU_OPTIONS_VIDEO_TITLE = "MenuOptionsVideoTitle";
+			/* LINE */
+			public static final String MENU_OPTIONS_VIDEO_LINE_BORDER_COLOR = "MenuOptionsVideoLineBorderColor";
+			public static final String MENU_OPTIONS_VIDEO_LINE_DISABLED = "MenuOptionsVideoLineDisabled";
+			public static final String MENU_OPTIONS_VIDEO_LINE_ENABLED = "MenuOptionsVideoLineEnabled";
+			public static final String MENU_OPTIONS_VIDEO_LINE_MINUS = "MenuOptionsVideoLineMinus";
+			public static final String MENU_OPTIONS_VIDEO_LINE_PANEL_DIMENSION = "MenuOptionsVideoLinePanelDimension";
+			public static final String MENU_OPTIONS_VIDEO_LINE_PLUS = "MenuOptionsVideoLinePlus";
+			public static final String MENU_OPTIONS_VIDEO_LINE_SMOOTH_GRAPHICS = "MenuOptionsVideoLineSmoothGraphics";
 	/* TOURNAMENT */	
 	public static final String MENU_TOURNAMENT_BUTTON_BACK = "MenuTournamentButtonBack";
 	public static final String MENU_TOURNAMENT_BUTTON_CONTINUE = "MenuTournamentButtonContinue";
@@ -865,6 +873,7 @@ public class GuiTools
 			// false
 			image = loadIcon(folder+GuiFileTools.FILE_FALSE,absent);
 			icons.put(MENU_OPTIONS_CONTROLS_LINE_AUTO_FALSE,image);
+			icons.put(MENU_OPTIONS_VIDEO_LINE_DISABLED,image);
 			// human
 			image = loadIcon(folder+GuiFileTools.FILE_HUMAN,absent);
 			icons.put(GAME_TOURNAMENT_DESCRIPTION_PLAYERS_DATA_HUMAN,image);
@@ -887,6 +896,9 @@ public class GuiTools
 			icons.put(GAME_TOURNAMENT_DESCRIPTION_POINTS_DATA_KILLS,image);
 			icons.put(GAME_MATCH_DESCRIPTION_POINTS_DATA_KILLS,image);
 			icons.put(GAME_ROUND_DESCRIPTION_POINTS_DATA_KILLS,image);
+			// minus
+			image = loadIcon(folder+GuiFileTools.FILE_MINUS,absent);
+			icons.put(MENU_OPTIONS_VIDEO_LINE_MINUS,image);
 			// no share
 			image = loadIcon(folder+GuiFileTools.FILE_NOSHARE,absent);
 			icons.put(GAME_TOURNAMENT_DESCRIPTION_POINTS_DATA_NOSHARE,image);
@@ -902,6 +914,9 @@ public class GuiTools
 			icons.put(GAME_TOURNAMENT_DESCRIPTION_POINTS_DATA_PARTIAL,image);
 			icons.put(GAME_MATCH_DESCRIPTION_POINTS_DATA_PARTIAL,image);
 			icons.put(GAME_ROUND_DESCRIPTION_POINTS_DATA_PARTIAL,image);
+			// plus
+			image = loadIcon(folder+GuiFileTools.FILE_PLUS,absent);
+			icons.put(MENU_OPTIONS_VIDEO_LINE_PLUS,image);
 			// regular order
 			image = loadIcon(folder+GuiFileTools.FILE_REGULAR,absent);
 			icons.put(GAME_TOURNAMENT_DESCRIPTION_POINTS_DATA_REGULAR,image);
@@ -920,6 +935,7 @@ public class GuiTools
 			// true
 			image = loadIcon(folder+GuiFileTools.FILE_TRUE,absent);
 			icons.put(MENU_OPTIONS_CONTROLS_LINE_AUTO_TRUE,image);
+			icons.put(MENU_OPTIONS_VIDEO_LINE_ENABLED,image);
 		}
 	}
 	

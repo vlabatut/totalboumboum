@@ -23,12 +23,16 @@ package fr.free.totalboumboum.gui.common.subpanel;
 
 import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.Font;
 import java.awt.image.BufferedImage;
+import java.util.ArrayList;
+import java.util.Iterator;
 
 import javax.swing.Box;
 import javax.swing.BoxLayout;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
+import javax.swing.SwingConstants;
 
 import fr.free.totalboumboum.gui.data.configuration.GuiConfiguration;
 import fr.free.totalboumboum.gui.tools.GuiTools;
@@ -37,7 +41,6 @@ import fr.free.totalboumboum.tools.ImageTools;
 public class Line extends SubPanel
 {	
 	private static final long serialVersionUID = 1L;
-	private int lineFontSize;
 	private int columns = 0;
 	
 	public Line(int width, int height, int cols)
@@ -52,20 +55,71 @@ public class Line extends SubPanel
 		
 		// font
 		lineFontSize = GuiTools.getFontSize(lineFontSize*GuiTools.FONT_RATIO);
+		lineFont = GuiConfiguration.getFont().deriveFont((float)lineFontSize);
 		
 		// columns
+		add(Box.createHorizontalGlue());
+		add(Box.createHorizontalGlue());
 		for(int col=0;col<cols;col++)
-			addColumn();
+			addLabel(col);
 	}
 
-	public void addColumn()
-	{	if(columns>0)
-			add(Box.createRigidArea(new Dimension(GuiTools.subPanelMargin,GuiTools.subPanelMargin)));
-		JLabel label = new JLabel();
-		add(label);
-		columns++;
+	/////////////////////////////////////////////////////////////////
+	// LINES			/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	private int lineFontSize;
+	private Font lineFont;
+	
+	public int getLineFontSize()
+	{	return lineFontSize;	
 	}
 	
+	public void setKeys(ArrayList<String> keys, ArrayList<Boolean> imageFlags)
+	{	Iterator<String> lineKeys = keys.iterator();
+		Iterator<Boolean> lineFlags = imageFlags.iterator();
+		int col = 0;
+		while(lineKeys.hasNext())
+		{	String key = lineKeys.next();
+			Boolean flag = lineFlags.next();
+			setLabelKey(col,key,flag);
+			col++;
+		}			
+	}
+
+	public void setIcons(ArrayList<BufferedImage> icons, ArrayList<String> tooltips)
+	{	Iterator<BufferedImage> lineIcons = icons.iterator();
+		Iterator<String> lineTooltips = tooltips.iterator();
+		int col = 0;
+		while(lineIcons.hasNext())
+		{	BufferedImage icon = lineIcons.next();
+			String tooltip = lineTooltips.next();
+			setLabelIcon(col,icon,tooltip);
+			col++;
+		}			
+	}
+
+	public void setTexts(ArrayList<String> texts, ArrayList<String> tooltips)
+	{	Iterator<String> lineTexts = texts.iterator();
+		Iterator<String> lineTooltips = tooltips.iterator();
+		int col = 0;
+		while(lineTexts.hasNext())
+		{	String text = lineTexts.next();
+			String tooltip = lineTooltips.next();
+			setLabelText(col,text,tooltip);
+			col++;
+		}			
+	}
+
+	public void setBackgroundColor(Color color)
+	{	for(int col=0;col<columns;col++)
+			setLabelBackground(col,color);
+	}
+
+	public void setForegroundColor(Color color)
+	{	for(int col=0;col<columns;col++)
+			setLabelForeground(col,color);
+	}
+		
 	/////////////////////////////////////////////////////////////////
 	// LABELS			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
@@ -74,6 +128,22 @@ public class Line extends SubPanel
 	{	return (JLabel)getComponent(col*2+1);
 	}
 	
+	public void addLabel(int col)
+	{	if(col>0)
+			add(Box.createRigidArea(new Dimension(GuiTools.subPanelMargin,GuiTools.subPanelMargin)),2*col);
+		else if(columns>0)
+			add(Box.createRigidArea(new Dimension(GuiTools.subPanelMargin,GuiTools.subPanelMargin)),2*col+1);
+		String txt = null;
+		JLabel lbl = new JLabel(txt);
+		lbl.setFont(lineFont);
+		lbl.setHorizontalAlignment(SwingConstants.CENTER);
+		lbl.setBackground(GuiTools.COLOR_TABLE_NEUTRAL_BACKGROUND);
+		lbl.setForeground(GuiTools.COLOR_TABLE_REGULAR_FOREGROUND);
+		lbl.setOpaque(true);
+		add(lbl,2*col+1);
+		columns++;
+	}
+
 	public void setLabelKey(int col, String key, boolean imageFlag)
 	{	String tooltip = GuiConfiguration.getLanguage().getText(key+GuiTools.TOOLTIP);
 		// is there an available icon ?
@@ -126,5 +196,54 @@ public class Line extends SubPanel
 				col++;
 		}
 		return result;
+	}
+	
+	public void setLabelMinWidth(int col, int width)
+	{	setLabelWidth(col,width,0);		
+	}
+	public void setLabelPreferredWidth(int col, int width)
+	{	setLabelWidth(col,width,1);		
+	}
+	public void setLabelMaxWidth(int col, int width)
+	{	setLabelWidth(col,width,2);		
+	}
+	private void setLabelWidth(int line, int width, int mode)
+	{	Dimension lineDim = new Dimension(width,height);
+		JLabel label = getLabel(line);
+		switch(mode)
+		{	case 0:
+				label.setMinimumSize(lineDim);
+				break;
+			case 1:
+				label.setPreferredSize(lineDim);
+				break;
+			case 2:
+				label.setMaximumSize(lineDim);
+				break;
+		}
+	}	
+
+	public void unsetLabelMinWidth(int colSub)
+	{	unsetLabelWidth(colSub,0);		
+	}
+	public void unsetLabelPreferredWidth(int colSub)
+	{	unsetLabelWidth(colSub,1);		
+	}
+	public void unsetLabelMaxWidth(int colSub)
+	{	unsetLabelWidth(colSub,2);		
+	}
+	private void unsetLabelWidth(int line, int mode)
+	{	JLabel label = getLabel(line);
+		switch(mode)
+		{	case 0:
+				label.setMinimumSize(null);
+				break;
+			case 1:
+				label.setPreferredSize(null);
+				break;
+			case 2:
+				label.setMaximumSize(null);
+				break;
+		}
 	}
 }

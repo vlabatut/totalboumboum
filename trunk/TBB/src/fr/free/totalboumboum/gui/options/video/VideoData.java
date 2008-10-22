@@ -32,123 +32,148 @@ import javax.swing.JLabel;
 
 import fr.free.totalboumboum.configuration.Configuration;
 import fr.free.totalboumboum.configuration.controls.ControlSettings;
+import fr.free.totalboumboum.configuration.video.VideoConfiguration;
 import fr.free.totalboumboum.engine.content.feature.event.ControlEvent;
 import fr.free.totalboumboum.gui.common.panel.SplitMenuPanel;
 import fr.free.totalboumboum.gui.common.panel.data.EntitledDataPanel;
+import fr.free.totalboumboum.gui.common.subpanel.Line;
+import fr.free.totalboumboum.gui.common.subpanel.UntitledSubPanelLines;
 import fr.free.totalboumboum.gui.common.subpanel.UntitledSubPanelTable;
 import fr.free.totalboumboum.gui.data.configuration.GuiConfiguration;
 import fr.free.totalboumboum.gui.tools.GuiTools;
 import fr.free.totalboumboum.tools.ClassTools;
 
-public class VideoData extends EntitledDataPanel implements MouseListener,KeyListener
+public class VideoData extends EntitledDataPanel implements MouseListener
 {	
 	private static final long serialVersionUID = 1L;
 
-	private UntitledSubPanelTable keysPanel;
-	private ControlSettings controlSettings;
-	private String actions[] = 
-	{	ControlEvent.UP,
-		ControlEvent.RIGHT,
-		ControlEvent.DOWN,
-		ControlEvent.LEFT,
-		ControlEvent.DROPBOMB,
-		ControlEvent.PUNCHBOMB
-	};
+	private UntitledSubPanelLines optionsPanel;
+	private VideoConfiguration videoConfiguration;
 	private int selectedRow = -1;
 	
-	public VideoData(SplitMenuPanel container, int index)
+	private int[] resolutionWidths = 
+	{	640,
+		800,
+		1024,
+		1280,
+		1600
+	};
+	private int[] resolutionHeights = 
+	{	480,
+		600,
+		768,
+		1024,
+		1200
+	};
+	
+	public VideoData(SplitMenuPanel container)
 	{	super(container);
 
 		// title
-		{	String text = GuiConfiguration.getLanguage().getText(GuiTools.MENU_OPTIONS_CONTROLS_TITLE)+" "+index;
-			String tooltip = GuiConfiguration.getLanguage().getText(GuiTools.MENU_OPTIONS_CONTROLS_TITLE+GuiTools.TOOLTIP);
-			setTitleText(text,tooltip);
+		{	setTitleKey(GuiTools.MENU_OPTIONS_VIDEO_TITLE);
 		}
 	
 		// data
-		{	
-			String head[] = 
-			{	GuiTools.MENU_OPTIONS_CONTROLS_HEADER_COMMAND,
-				GuiTools.MENU_OPTIONS_CONTROLS_HEADER_KEY,
-				GuiTools.MENU_OPTIONS_CONTROLS_HEADER_AUTO
-			};
-			int lines = 20;
-			int cols = head.length;
+		{	int lines = 20;
 			int w = getDataWidth();
 			int h = getDataHeight();
-			keysPanel = new UntitledSubPanelTable(w,h,cols,lines,true);
-
-			// headers
-			{	ArrayList<String> keys = new ArrayList<String>();
-				ArrayList<Boolean> imageFlags = new ArrayList<Boolean>();
-				for(int i=0;i<head.length;i++)
-				{	keys.add(head[i]);
-					imageFlags.add(true);
-				}
-				keysPanel.setLineKeysSimple(0, keys, imageFlags);
-				//keysPanel.setColumnWidth(0,Integer.MAX_VALUE);
-				keysPanel.setSubColumnsMaxWidth(1,Integer.MAX_VALUE);
-			}			
+			optionsPanel = new UntitledSubPanelLines(w,h,lines,false);
+			int line = 0;
 			
 			// data
-			{	controlSettings = Configuration.getControlsConfiguration().getControlSettings().get(index).copy();;
-				for(int line=1;line<actions.length+1;line++)
-				{	int col = 0;
-					// command
-					{	String name = actions[line-1].toUpperCase().substring(0,1);
-						name = name + actions[line-1].toLowerCase().substring(1,actions[line-1].length());
-						String key = "MenuOptionsControlsLineCommand"+name;
-						keysPanel.setLabelKey(line,col,key,false);
+			{	videoConfiguration = Configuration.getVideoConfiguration().copy();;
+				
+				// #0 panel dimension
+				{	Line ln = optionsPanel.getLine(line);
+					ln.setBackgroundColor(GuiTools.COLOR_TABLE_REGULAR_BACKGROUND);
+					ln.addLabel(0);
+					ln.addLabel(0);
+					ln.addLabel(0);
+					int col = 0;
+					// name
+					{	ln.setLabelMaxWidth(col,Integer.MAX_VALUE);
+						ln.setLabelKey(col,GuiTools.MENU_OPTIONS_VIDEO_LINE_PANEL_DIMENSION,false);
 						col++;
 					}
-					// key
-					{	int key = controlSettings.getOnKeyFromEvent(actions[line-1]);
-						setKey(line,col,key);
-						JLabel label = keysPanel.getLabel(line,col);
-						label.addMouseListener(this);
+					// plus button
+					{	ln.setLabelMaxWidth(col,ln.getHeight());
+						ln.setLabelKey(col,GuiTools.MENU_OPTIONS_VIDEO_LINE_PLUS,true);
 						col++;
 					}
-					// autofire
-					{	boolean auto = controlSettings.isAutofire(actions[line-1]);
-						setAuto(line,col,auto);
-						JLabel label = keysPanel.getLabel(line,col);
-						label.addMouseListener(this);
+					// value
+					{	int panelWidth = videoConfiguration.getPanelDimension().width;
+						int panelHeight = videoConfiguration.getPanelDimension().height;
+						String text = Integer.toString(width)+new Character('\u00D7').toString()+Integer.toString(height);
+						int maxWidth = GuiTools.getPixelWidth(ln.getLineFontSize(),text);
+						for(int i=0;i<resolutionHeights.length;i++)
+						{	String txt = Integer.toString(resolutionWidths[i])+new Character('\u00D7').toString()+Integer.toString(resolutionHeights[i]);
+							int txtWidth = GuiTools.getPixelWidth(ln.getLineFontSize(),txt);
+							if(txtWidth>maxWidth)
+								maxWidth = txtWidth;
+						}
+						ln.setLabelMaxWidth(col,maxWidth);
+						ln.setLabelPreferredWidth(col,maxWidth);
+						String tooltip = GuiConfiguration.getLanguage().getText(GuiTools.MENU_OPTIONS_VIDEO_LINE_PANEL_DIMENSION+GuiTools.TOOLTIP); 
+						ln.setLabelText(col,text,tooltip);
 						col++;
 					}
+					// minus button
+					{	ln.setLabelMaxWidth(col,ln.getHeight());
+						ln.setLabelKey(col,GuiTools.MENU_OPTIONS_VIDEO_LINE_MINUS,true);
+						col++;
+					}
+					line++;
+				}
+				
+				// #1 border color
+				{	Line ln = optionsPanel.getLine(line);
+					ln.setBackgroundColor(GuiTools.COLOR_TABLE_REGULAR_BACKGROUND);
+					ln.addLabel(0);
+					int col = 0;
+					// name
+					{	ln.setLabelMaxWidth(col,Integer.MAX_VALUE);
+						ln.setLabelKey(col,GuiTools.MENU_OPTIONS_VIDEO_LINE_BORDER_COLOR,false);
+						col++;
+					}
+					// value
+					{	String text = "blablabla";
+						String tooltip = GuiConfiguration.getLanguage().getText(GuiTools.MENU_OPTIONS_VIDEO_LINE_BORDER_COLOR+GuiTools.TOOLTIP); 
+						ln.setLabelText(col,text,tooltip);
+						col++;
+					}
+					line++;
+				}
+				
+				// #2 smooth graphics
+				{	Line ln = optionsPanel.getLine(line);
+					ln.setBackgroundColor(GuiTools.COLOR_TABLE_REGULAR_BACKGROUND);
+					ln.addLabel(0);
+					int col = 0;
+					// name
+					{	ln.setLabelMaxWidth(col,Integer.MAX_VALUE);
+						ln.setLabelKey(col,GuiTools.MENU_OPTIONS_VIDEO_LINE_SMOOTH_GRAPHICS,false);
+						col++;
+					}
+					// value
+					{	ln.setLabelPreferredWidth(col,ln.getHeight());
+						setSmoothGraphics(videoConfiguration.getSmoothGraphics());
+						col++;
+					}
+					line++;
 				}
 			}
 			
-			setDataPart(keysPanel);
-			keysPanel.addKeyListener(this);
+			setDataPart(optionsPanel);
 		}
 	}
 	
-	private void setAuto(int line, int col, boolean auto)
+	private void setSmoothGraphics(boolean smooth)
 	{	String key;
-		if(auto)
-			key = GuiTools.MENU_OPTIONS_CONTROLS_LINE_AUTO_TRUE;
+		if(smooth)
+			key = GuiTools.MENU_OPTIONS_VIDEO_LINE_ENABLED;
 		else
-			key = GuiTools.MENU_OPTIONS_CONTROLS_LINE_AUTO_FALSE;
-		keysPanel.setLabelKey(line,col,key,true);
-	}
-
-	private void setKey(int line, int col, int key)
-	{	String text = null;
-		if(key>=0)
-		{	try
-			{	Field field = ClassTools.getFieldFromValue(key,KeyEvent.class);
-				text = field.getName();
-				text = text.substring(3,text.length());
-			}
-			catch (IllegalArgumentException e)
-			{	e.printStackTrace();
-			}
-			catch (IllegalAccessException e)
-			{	e.printStackTrace();
-			}
-		}
-		keysPanel.setLabelText(line,col,text,text);
-		keysPanel.setFocusable(true);
+			key = GuiTools.MENU_OPTIONS_VIDEO_LINE_DISABLED;
+		optionsPanel.getLine(2).setLabelKey(1,key,true);
 	}
 	
 	@Override
@@ -161,8 +186,8 @@ public class VideoData extends EntitledDataPanel implements MouseListener,KeyLis
 	{	// nothing to do here
 	}
 
-	public ControlSettings getControlSettings()
-	{	return controlSettings;
+	public VideoConfiguration getVideoConfiguration()
+	{	return videoConfiguration;
 	}	
 	
 	/////////////////////////////////////////////////////////////////
@@ -183,7 +208,9 @@ public class VideoData extends EntitledDataPanel implements MouseListener,KeyLis
 	}
 	@Override
 	public void mousePressed(MouseEvent e)
-	{	JLabel label = (JLabel)e.getComponent();
+	{	
+/*		
+		JLabel label = (JLabel)e.getComponent();
 		int[] pos = keysPanel.getLabelPositionSimple(label);
 		// key
 		if(pos[1]==1)
@@ -203,40 +230,10 @@ public class VideoData extends EntitledDataPanel implements MouseListener,KeyLis
 				controlSettings.removeAutofire(action);
 			setAuto(pos[0],2,auto);
 		}
+*/		
 	}
 	@Override
 	public void mouseReleased(MouseEvent e)
-	{	
-	}
-
-	/////////////////////////////////////////////////////////////////
-	// KEY LISTENER		/////////////////////////////////////////////
-	/////////////////////////////////////////////////////////////////
-
-	@Override
-	public void keyPressed(KeyEvent e)
-	{	if(selectedRow!=-1)
-		{	// init
-			int keyCode = e.getKeyCode();
-			String action = actions[selectedRow-1];
-			// update control settings
-			controlSettings.addOnKey(keyCode,action);
-			controlSettings.addOffKey(keyCode,action);
-			// 	update panel
-			setKey(selectedRow,1,keyCode);
-			keysPanel.setLabelBackground(selectedRow,1,GuiTools.COLOR_TABLE_NEUTRAL_BACKGROUND);
-			//
-			selectedRow = -1;
-		}
-	}
-
-	@Override
-	public void keyReleased(KeyEvent e)
-	{	
-	}
-
-	@Override
-	public void keyTyped(KeyEvent e)
 	{	
 	}
 }
