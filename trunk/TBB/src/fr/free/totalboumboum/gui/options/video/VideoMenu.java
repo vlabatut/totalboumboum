@@ -36,6 +36,8 @@ import fr.free.totalboumboum.configuration.Configuration;
 import fr.free.totalboumboum.configuration.GameConstants;
 import fr.free.totalboumboum.configuration.controls.ControlSettings;
 import fr.free.totalboumboum.configuration.controls.ControlsConfigurationSaver;
+import fr.free.totalboumboum.configuration.video.VideoConfiguration;
+import fr.free.totalboumboum.configuration.video.VideoConfigurationSaver;
 import fr.free.totalboumboum.gui.common.panel.SplitMenuPanel;
 import fr.free.totalboumboum.gui.common.panel.menu.InnerMenuPanel;
 import fr.free.totalboumboum.gui.common.panel.menu.MenuPanel;
@@ -50,9 +52,7 @@ public class VideoMenu extends InnerMenuPanel
 	@SuppressWarnings("unused")
 	private JButton buttonCancel;
 
-	private ControlsData controlsData[] = new ControlsData[GameConstants.CONTROL_COUNT];
-	
-	private int selected = 0;
+	private VideoData videoData;
 
 	public VideoMenu(SplitMenuPanel container, MenuPanel parent)
 	{	super(container, parent);
@@ -72,27 +72,16 @@ public class VideoMenu extends InnerMenuPanel
 		add(Box.createVerticalGlue());		
 
 		// panels
-		for(int i=0;i<controlsData.length;i++)
-			controlsData[i] = new ControlsData(container,i+1);
-		container.setDataPart(controlsData[0]);
+		videoData = new VideoData();
+		container.setDataPart(videoData);
 	}
 	
 	public void actionPerformed(ActionEvent e)
-	{	if(e.getActionCommand().equals(GuiTools.MENU_OPTIONS_BUTTON_NEXT))
-		{	selected = (selected + 1) % controlsData.length;
-			container.setDataPart(controlsData[selected]);
-	    }
-		else if(e.getActionCommand().equals(GuiTools.MENU_OPTIONS_BUTTON_PREVIOUS))
-		{	selected = (selected + controlsData.length - 1) % controlsData.length;
-			container.setDataPart(controlsData[selected]);
-	    }
-		else if(e.getActionCommand().equals(GuiTools.MENU_OPTIONS_BUTTON_CONFIRM))
-		{	for(int i=0;i<controlsData.length;i++)
-			{	ControlSettings controlSettings = controlsData[i].getControlSettings();
-				Configuration.getControlsConfiguration().putControlSettings(i+1,controlSettings);
-			}
+	{	if(e.getActionCommand().equals(GuiTools.MENU_OPTIONS_BUTTON_CONFIRM))
+		{	VideoConfiguration videoConfiguration = videoData.getVideoConfiguration();
+			Configuration.setVideoConfiguration(videoConfiguration);
 			try
-			{	ControlsConfigurationSaver.saveControlsConfiguration(Configuration.getControlsConfiguration());
+			{	VideoConfigurationSaver.saveVideoConfiguration(Configuration.getVideoConfiguration());
 			}
 			catch (IllegalArgumentException e1)
 			{	e1.printStackTrace();
