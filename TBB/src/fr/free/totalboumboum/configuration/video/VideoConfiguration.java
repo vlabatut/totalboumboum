@@ -26,6 +26,14 @@ import java.awt.Dimension;
 
 public class VideoConfiguration
 {
+	public VideoConfiguration copy()
+	{	VideoConfiguration result = new VideoConfiguration();
+		result.smoothGraphics = smoothGraphics; 
+		result.borderColor = borderColor;
+		result.panelDimension = (Dimension)panelDimension.clone();
+		return result;
+	}
+	
 	/////////////////////////////////////////////////////////////////
 	// SMOOTHING		/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////

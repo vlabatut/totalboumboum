@@ -33,15 +33,11 @@ import javax.xml.parsers.ParserConfigurationException;
 import org.xml.sax.SAXException;
 
 import fr.free.totalboumboum.configuration.Configuration;
-import fr.free.totalboumboum.configuration.GameConstants;
-import fr.free.totalboumboum.configuration.controls.ControlSettings;
-import fr.free.totalboumboum.configuration.controls.ControlsConfigurationSaver;
 import fr.free.totalboumboum.configuration.video.VideoConfiguration;
 import fr.free.totalboumboum.configuration.video.VideoConfigurationSaver;
 import fr.free.totalboumboum.gui.common.panel.SplitMenuPanel;
 import fr.free.totalboumboum.gui.common.panel.menu.InnerMenuPanel;
 import fr.free.totalboumboum.gui.common.panel.menu.MenuPanel;
-import fr.free.totalboumboum.gui.options.controls.ControlsData;
 import fr.free.totalboumboum.gui.tools.GuiTools;
 
 public class VideoMenu extends InnerMenuPanel
@@ -72,7 +68,7 @@ public class VideoMenu extends InnerMenuPanel
 		add(Box.createVerticalGlue());		
 
 		// panels
-		videoData = new VideoData();
+		videoData = new VideoData(container);
 		container.setDataPart(videoData);
 	}
 	
@@ -96,12 +92,6 @@ public class VideoMenu extends InnerMenuPanel
 			{	e1.printStackTrace();
 			}
 			catch (IOException e1)
-			{	e1.printStackTrace();
-			}
-			catch (IllegalAccessException e1)
-			{	e1.printStackTrace();
-			}
-			catch (NoSuchFieldException e1)
 			{	e1.printStackTrace();
 			}
 //TODO propager éventuellement au round (car il n'y a pas modification mais remplacement, donc si c déjà affecté à un player..

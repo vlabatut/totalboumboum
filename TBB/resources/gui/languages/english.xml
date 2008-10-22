@@ -61,6 +61,15 @@
 
 			<group name="Video">
 				<text name="Title" value="Video" tooltip="Modify video settings" />
+				<group name="Line">
+					<text name="BorderColor" value="Border color" tooltip="Color of the ingame border" />
+					<text name="Disabled" value="Disabled" tooltip="Smoothing is disabled" />
+					<text name="Enabled" value="Enabled" tooltip="Smoothing is enabled" />
+					<text name="Minus" value="Minus" tooltip="Get a smaller window" />
+					<text name="PanelDimension" value="Window size" tooltip="Size of TBB windows" />
+					<text name="Plus" value="Plus" tooltip="Get a bigger window" />
+					<text name="SmoothGraphics" value="Smooth graphics" tooltip="Smoothing on game graphics" />
+				</group>
 			</group>
 			
 		</group>	
