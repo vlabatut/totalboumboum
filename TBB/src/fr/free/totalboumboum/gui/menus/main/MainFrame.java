@@ -115,7 +115,7 @@ public class MainFrame extends JFrame implements WindowListener,MenuContainer
 	}
 	
 	public void exit()
-	{	saveConfiguration();
+	{	//saveConfiguration();
 		System.exit(0);		
 	}
 	
@@ -124,6 +124,7 @@ public class MainFrame extends JFrame implements WindowListener,MenuContainer
 	/////////////////////////////////////////////////////////////////
 	// CONFIGURATION	/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
+	@SuppressWarnings("unused")
 	private void saveConfiguration()
 	{	try
 		{	Configuration.saveConfiguration();
