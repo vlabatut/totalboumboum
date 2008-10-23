@@ -79,42 +79,22 @@ public class VideoData extends EntitledDataPanel implements MouseListener
 			int h = getDataHeight();
 			optionsPanel = new UntitledSubPanelLines(w,h,lines,false);
 			int line = 0;
+			int tWidth = (int)(w*0.7);
 			
 			// data
 			{	videoConfiguration = Configuration.getVideoConfiguration().copy();;
 				
 				// #0 panel dimension
 				{	Line ln = optionsPanel.getLine(line);
-					ln.setBackgroundColor(GuiTools.COLOR_TABLE_REGULAR_BACKGROUND);
+//					ln.setBackgroundColor(GuiTools.COLOR_TABLE_REGULAR_BACKGROUND);
 					ln.addLabel(0);
 					ln.addLabel(0);
 					ln.addLabel(0);
 					int col = 0;
 					// name
-					{	ln.setLabelMaxWidth(col,Integer.MAX_VALUE);
+					{	ln.setLabelMaxWidth(col,tWidth);
+						ln.setLabelPreferredWidth(col,tWidth);
 						ln.setLabelKey(col,GuiTools.MENU_OPTIONS_VIDEO_LINE_PANEL_DIMENSION,false);
-						col++;
-					}
-					// plus button
-					{	ln.setLabelMaxWidth(col,ln.getHeight());
-						ln.setLabelKey(col,GuiTools.MENU_OPTIONS_VIDEO_LINE_PLUS,true);
-						col++;
-					}
-					// value
-					{	int panelWidth = videoConfiguration.getPanelDimension().width;
-						int panelHeight = videoConfiguration.getPanelDimension().height;
-						String text = Integer.toString(width)+new Character('\u00D7').toString()+Integer.toString(height);
-						int maxWidth = GuiTools.getPixelWidth(ln.getLineFontSize(),text);
-						for(int i=0;i<resolutionHeights.length;i++)
-						{	String txt = Integer.toString(resolutionWidths[i])+new Character('\u00D7').toString()+Integer.toString(resolutionHeights[i]);
-							int txtWidth = GuiTools.getPixelWidth(ln.getLineFontSize(),txt);
-							if(txtWidth>maxWidth)
-								maxWidth = txtWidth;
-						}
-						ln.setLabelMaxWidth(col,maxWidth);
-						ln.setLabelPreferredWidth(col,maxWidth);
-						String tooltip = GuiConfiguration.getLanguage().getText(GuiTools.MENU_OPTIONS_VIDEO_LINE_PANEL_DIMENSION+GuiTools.TOOLTIP); 
-						ln.setLabelText(col,text,tooltip);
 						col++;
 					}
 					// minus button
@@ -122,22 +102,49 @@ public class VideoData extends EntitledDataPanel implements MouseListener
 						ln.setLabelKey(col,GuiTools.MENU_OPTIONS_VIDEO_LINE_MINUS,true);
 						col++;
 					}
+					// value
+					{	int panelWidth = videoConfiguration.getPanelDimension().width;
+						int panelHeight = videoConfiguration.getPanelDimension().height;
+						String text = Integer.toString(panelWidth)+new Character('\u00D7').toString()+Integer.toString(panelHeight);
+//						int maxWidth = GuiTools.getPixelWidth(ln.getLineFontSize(),text);
+//						for(int i=0;i<resolutionHeights.length;i++)
+//						{	String txt = Integer.toString(resolutionWidths[i])+new Character('\u00D7').toString()+Integer.toString(resolutionHeights[i]);
+//							int txtWidth = GuiTools.getPixelWidth(ln.getLineFontSize(),txt);
+//							if(txtWidth>maxWidth)
+//								maxWidth = txtWidth;
+//						}
+//						ln.setLabelMaxWidth(col,maxWidth);
+//						ln.setLabelPreferredWidth(col,maxWidth);
+						ln.setLabelMaxWidth(col,Integer.MAX_VALUE);
+						String tooltip = GuiConfiguration.getLanguage().getText(GuiTools.MENU_OPTIONS_VIDEO_LINE_PANEL_DIMENSION+GuiTools.TOOLTIP); 
+						ln.setLabelText(col,text,tooltip);
+						col++;
+					}
+					// plus button
+					{	ln.setLabelMaxWidth(col,ln.getHeight());
+						ln.setLabelKey(col,GuiTools.MENU_OPTIONS_VIDEO_LINE_PLUS,true);
+						col++;
+					}
 					line++;
 				}
 				
 				// #1 border color
 				{	Line ln = optionsPanel.getLine(line);
-					ln.setBackgroundColor(GuiTools.COLOR_TABLE_REGULAR_BACKGROUND);
+//					ln.setBackgroundColor(GuiTools.COLOR_TABLE_REGULAR_BACKGROUND);
 					ln.addLabel(0);
 					int col = 0;
 					// name
-					{	ln.setLabelMaxWidth(col,Integer.MAX_VALUE);
+					{	ln.setLabelMaxWidth(col,tWidth);
+						ln.setLabelPreferredWidth(col,tWidth);
 						ln.setLabelKey(col,GuiTools.MENU_OPTIONS_VIDEO_LINE_BORDER_COLOR,false);
 						col++;
 					}
 					// value
-					{	String text = "blablabla";
+					{	String text = "Black";
+//						int txtWidth = GuiTools.getPixelWidth(ln.getLineFontSize(),text);
 						String tooltip = GuiConfiguration.getLanguage().getText(GuiTools.MENU_OPTIONS_VIDEO_LINE_BORDER_COLOR+GuiTools.TOOLTIP); 
+//						ln.setLabelMaxWidth(col,txtWidth);
+						ln.setLabelMaxWidth(col,Integer.MAX_VALUE);
 						ln.setLabelText(col,text,tooltip);
 						col++;
 					}
@@ -146,16 +153,17 @@ public class VideoData extends EntitledDataPanel implements MouseListener
 				
 				// #2 smooth graphics
 				{	Line ln = optionsPanel.getLine(line);
-					ln.setBackgroundColor(GuiTools.COLOR_TABLE_REGULAR_BACKGROUND);
+//					ln.setBackgroundColor(GuiTools.COLOR_TABLE_REGULAR_BACKGROUND);
 					ln.addLabel(0);
 					int col = 0;
 					// name
-					{	ln.setLabelMaxWidth(col,Integer.MAX_VALUE);
+					{	ln.setLabelMaxWidth(col,tWidth);
+						ln.setLabelPreferredWidth(col,tWidth);
 						ln.setLabelKey(col,GuiTools.MENU_OPTIONS_VIDEO_LINE_SMOOTH_GRAPHICS,false);
 						col++;
 					}
 					// value
-					{	ln.setLabelPreferredWidth(col,ln.getHeight());
+					{	ln.setLabelMaxWidth(col,Integer.MAX_VALUE);
 						setSmoothGraphics(videoConfiguration.getSmoothGraphics());
 						col++;
 					}

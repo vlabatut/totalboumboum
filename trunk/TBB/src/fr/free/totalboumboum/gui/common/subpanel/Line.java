@@ -54,7 +54,7 @@ public class Line extends SubPanel
 		setLayout(layout);
 		
 		// font
-		lineFontSize = GuiTools.getFontSize(lineFontSize*GuiTools.FONT_RATIO);
+		lineFontSize = GuiTools.getFontSize(height*GuiTools.FONT_RATIO);
 		lineFont = GuiConfiguration.getFont().deriveFont((float)lineFontSize);
 		
 		// columns
@@ -140,6 +140,8 @@ public class Line extends SubPanel
 		lbl.setBackground(GuiTools.COLOR_TABLE_NEUTRAL_BACKGROUND);
 		lbl.setForeground(GuiTools.COLOR_TABLE_REGULAR_FOREGROUND);
 		lbl.setOpaque(true);
+//		Dimension dim = new Dimension(height,height);
+//		lbl.setPreferredSize(dim);
 		add(lbl,2*col+1);
 		columns++;
 	}
