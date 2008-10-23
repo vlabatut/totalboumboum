@@ -22,45 +22,42 @@ package fr.free.totalboumboum.gui.options.video;
  */
 
 import java.awt.Dimension;
-import java.awt.event.KeyEvent;
-import java.awt.event.KeyListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
-import java.lang.reflect.Field;
-import java.util.ArrayList;
 
 import javax.swing.JLabel;
 
 import fr.free.totalboumboum.configuration.Configuration;
-import fr.free.totalboumboum.configuration.controls.ControlSettings;
 import fr.free.totalboumboum.configuration.video.VideoConfiguration;
-import fr.free.totalboumboum.engine.content.feature.event.ControlEvent;
 import fr.free.totalboumboum.gui.common.panel.SplitMenuPanel;
 import fr.free.totalboumboum.gui.common.panel.data.EntitledDataPanel;
 import fr.free.totalboumboum.gui.common.subpanel.Line;
 import fr.free.totalboumboum.gui.common.subpanel.UntitledSubPanelLines;
-import fr.free.totalboumboum.gui.common.subpanel.UntitledSubPanelTable;
 import fr.free.totalboumboum.gui.data.configuration.GuiConfiguration;
 import fr.free.totalboumboum.gui.tools.GuiTools;
-import fr.free.totalboumboum.tools.ClassTools;
 
 public class VideoData extends EntitledDataPanel implements MouseListener
 {	
 	private static final long serialVersionUID = 1L;
+	private static final int LINE_PANELDIM = 0;
+	private static final int LINE_BORDER = 1;
+	private static final int LINE_SMOOTH = 2;
 
 	private UntitledSubPanelLines optionsPanel;
 	private VideoConfiguration videoConfiguration;
-	private int selectedRow = -1;
+	private Dimension dimChanged = null;
 	
 	private int[] resolutionWidths = 
-	{	640,
+	{	500,
+		640,
 		800,
 		1024,
 		1280,
 		1600
 	};
 	private int[] resolutionHeights = 
-	{	480,
+	{	375,
+		480,
 		600,
 		768,
 		1024,
@@ -80,7 +77,7 @@ public class VideoData extends EntitledDataPanel implements MouseListener
 			int h = getDataHeight();
 			optionsPanel = new UntitledSubPanelLines(w,h,lines,false);
 			int line = 0;
-			int tWidth = (int)(w*0.7);
+			int tWidth = (int)(w*0.66);
 			
 			// data
 			{	videoConfiguration = Configuration.getVideoConfiguration().copy();;
@@ -186,7 +183,7 @@ public class VideoData extends EntitledDataPanel implements MouseListener
 			key = GuiTools.MENU_OPTIONS_VIDEO_LINE_ENABLED;
 		else
 			key = GuiTools.MENU_OPTIONS_VIDEO_LINE_DISABLED;
-		optionsPanel.getLine(2).setLabelKey(1,key,true);
+		optionsPanel.getLine(LINE_SMOOTH).setLabelKey(1,key,true);
 	}
 	
 	private void setPanelDimension()
@@ -194,7 +191,7 @@ public class VideoData extends EntitledDataPanel implements MouseListener
 		int panelHeight = videoConfiguration.getPanelDimension().height;
 		String text = Integer.toString(panelWidth)+new Character('\u00D7').toString()+Integer.toString(panelHeight);
 		String tooltip = GuiConfiguration.getLanguage().getText(GuiTools.MENU_OPTIONS_VIDEO_LINE_PANEL_DIMENSION+GuiTools.TOOLTIP); 
-		optionsPanel.getLine(0).setLabelText(2,text,tooltip);
+		optionsPanel.getLine(LINE_PANELDIM).setLabelText(2,text,tooltip);
 		
 	}
 	
@@ -211,6 +208,10 @@ public class VideoData extends EntitledDataPanel implements MouseListener
 	public VideoConfiguration getVideoConfiguration()
 	{	return videoConfiguration;
 	}	
+	
+	public boolean hasDimChanged()
+	{	return dimChanged!=null;	
+	}
 	
 	/////////////////////////////////////////////////////////////////
 	// MOUSE LISTENER	/////////////////////////////////////////////
@@ -232,39 +233,46 @@ public class VideoData extends EntitledDataPanel implements MouseListener
 	public void mousePressed(MouseEvent e)
 	{	JLabel label = (JLabel)e.getComponent();
 		int[] pos = optionsPanel.getLabelPosition(label);
-		switch(pos[1])
+		switch(pos[0])
 		{	// panel dimension
-			case 0:
+			case LINE_PANELDIM:
 				Dimension dim = videoConfiguration.getPanelDimension();
+				int index;
 				int pw = dim.width;
 				// minus
 				if(pos[1]==1)
-				{	int index = 0;
-					while(resolutionWidths[index]<=pw && index<resolutionWidths.length)
+				{	index = 0;
+					while(resolutionWidths[index]<pw && index<resolutionWidths.length)
 						index++;
-					if(index>1)
+					if(index>0)
 						index --;
-					dim.height = resolutionHeights[index];
-					dim.width= resolutionWidths[index];
-					setPanelDimension();
 				}
 				// plus
-				else if(pos[1]==3)
-				{	int index = resolutionWidths.length-1;
-					while(resolutionWidths[index]>=pw && index>=0)
+				else //if(pos[1]==3)
+				{	index = resolutionWidths.length-1;
+					while(resolutionWidths[index]>pw && index>=0)
 						index--;
 					if(index<resolutionWidths.length-1)
 						index ++;
-					dim.height = resolutionHeights[index];
-					dim.width= resolutionWidths[index];
-					setPanelDimension();
 				}
+				// common
+				Dimension newDim = new Dimension(resolutionWidths[index],resolutionHeights[index]);
+				if(dimChanged == null)
+					dimChanged = dim;
+				else
+				{	if(dimChanged.equals(newDim))
+						dimChanged = null;
+					else
+						dimChanged = dim;
+				}
+				videoConfiguration.setPanelDimension(newDim.width,newDim.height);
+				setPanelDimension();
 				break;
 			// border
-			case 1:
+			case LINE_BORDER:
 				break;
 			// smooth graphics
-			case 2:
+			case LINE_SMOOTH:
 				boolean smooth = !videoConfiguration.getSmoothGraphics();
 				videoConfiguration.setSmoothGraphics(smooth);
 				setSmoothGraphics();
