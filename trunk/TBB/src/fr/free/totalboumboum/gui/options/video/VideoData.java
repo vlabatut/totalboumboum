@@ -21,6 +21,7 @@ package fr.free.totalboumboum.gui.options.video;
  * 
  */
 
+import java.awt.Dimension;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.awt.event.MouseEvent;
@@ -100,12 +101,14 @@ public class VideoData extends EntitledDataPanel implements MouseListener
 					// minus button
 					{	ln.setLabelMaxWidth(col,ln.getHeight());
 						ln.setLabelKey(col,GuiTools.MENU_OPTIONS_VIDEO_LINE_MINUS,true);
+						ln.getLabel(col).addMouseListener(this);
 						col++;
 					}
 					// value
-					{	int panelWidth = videoConfiguration.getPanelDimension().width;
-						int panelHeight = videoConfiguration.getPanelDimension().height;
-						String text = Integer.toString(panelWidth)+new Character('\u00D7').toString()+Integer.toString(panelHeight);
+					{	
+//						int panelWidth = videoConfiguration.getPanelDimension().width;
+//						int panelHeight = videoConfiguration.getPanelDimension().height;
+//						String text = Integer.toString(panelWidth)+new Character('\u00D7').toString()+Integer.toString(panelHeight);
 //						int maxWidth = GuiTools.getPixelWidth(ln.getLineFontSize(),text);
 //						for(int i=0;i<resolutionHeights.length;i++)
 //						{	String txt = Integer.toString(resolutionWidths[i])+new Character('\u00D7').toString()+Integer.toString(resolutionHeights[i]);
@@ -116,13 +119,13 @@ public class VideoData extends EntitledDataPanel implements MouseListener
 //						ln.setLabelMaxWidth(col,maxWidth);
 //						ln.setLabelPreferredWidth(col,maxWidth);
 						ln.setLabelMaxWidth(col,Integer.MAX_VALUE);
-						String tooltip = GuiConfiguration.getLanguage().getText(GuiTools.MENU_OPTIONS_VIDEO_LINE_PANEL_DIMENSION+GuiTools.TOOLTIP); 
-						ln.setLabelText(col,text,tooltip);
+						setPanelDimension();
 						col++;
 					}
 					// plus button
 					{	ln.setLabelMaxWidth(col,ln.getHeight());
 						ln.setLabelKey(col,GuiTools.MENU_OPTIONS_VIDEO_LINE_PLUS,true);
+						ln.getLabel(col).addMouseListener(this);
 						col++;
 					}
 					line++;
@@ -164,7 +167,8 @@ public class VideoData extends EntitledDataPanel implements MouseListener
 					}
 					// value
 					{	ln.setLabelMaxWidth(col,Integer.MAX_VALUE);
-						setSmoothGraphics(videoConfiguration.getSmoothGraphics());
+						setSmoothGraphics();
+						ln.getLabel(col).addMouseListener(this);
 						col++;
 					}
 					line++;
@@ -175,13 +179,23 @@ public class VideoData extends EntitledDataPanel implements MouseListener
 		}
 	}
 	
-	private void setSmoothGraphics(boolean smooth)
-	{	String key;
+	private void setSmoothGraphics()
+	{	boolean smooth = videoConfiguration.getSmoothGraphics();
+		String key;
 		if(smooth)
 			key = GuiTools.MENU_OPTIONS_VIDEO_LINE_ENABLED;
 		else
 			key = GuiTools.MENU_OPTIONS_VIDEO_LINE_DISABLED;
 		optionsPanel.getLine(2).setLabelKey(1,key,true);
+	}
+	
+	private void setPanelDimension()
+	{	int panelWidth = videoConfiguration.getPanelDimension().width;
+		int panelHeight = videoConfiguration.getPanelDimension().height;
+		String text = Integer.toString(panelWidth)+new Character('\u00D7').toString()+Integer.toString(panelHeight);
+		String tooltip = GuiConfiguration.getLanguage().getText(GuiTools.MENU_OPTIONS_VIDEO_LINE_PANEL_DIMENSION+GuiTools.TOOLTIP); 
+		optionsPanel.getLine(0).setLabelText(2,text,tooltip);
+		
 	}
 	
 	@Override
@@ -216,29 +230,47 @@ public class VideoData extends EntitledDataPanel implements MouseListener
 	}
 	@Override
 	public void mousePressed(MouseEvent e)
-	{	
-/*		
-		JLabel label = (JLabel)e.getComponent();
-		int[] pos = keysPanel.getLabelPositionSimple(label);
-		// key
-		if(pos[1]==1)
-		{	if(selectedRow!=-1)
-				keysPanel.setLabelBackground(selectedRow,1,GuiTools.COLOR_TABLE_NEUTRAL_BACKGROUND);
-			selectedRow = pos[0];
-			keysPanel.setLabelBackground(pos[0],pos[1],GuiTools.COLOR_TABLE_SELECTED_BACKGROUND);
-			keysPanel.requestFocusInWindow();
+	{	JLabel label = (JLabel)e.getComponent();
+		int[] pos = optionsPanel.getLabelPosition(label);
+		switch(pos[1])
+		{	// panel dimension
+			case 0:
+				Dimension dim = videoConfiguration.getPanelDimension();
+				int pw = dim.width;
+				// minus
+				if(pos[1]==1)
+				{	int index = 0;
+					while(resolutionWidths[index]<=pw && index<resolutionWidths.length)
+						index++;
+					if(index>1)
+						index --;
+					dim.height = resolutionHeights[index];
+					dim.width= resolutionWidths[index];
+					setPanelDimension();
+				}
+				// plus
+				else if(pos[1]==3)
+				{	int index = resolutionWidths.length-1;
+					while(resolutionWidths[index]>=pw && index>=0)
+						index--;
+					if(index<resolutionWidths.length-1)
+						index ++;
+					dim.height = resolutionHeights[index];
+					dim.width= resolutionWidths[index];
+					setPanelDimension();
+				}
+				break;
+			// border
+			case 1:
+				break;
+			// smooth graphics
+			case 2:
+				boolean smooth = !videoConfiguration.getSmoothGraphics();
+				videoConfiguration.setSmoothGraphics(smooth);
+				setSmoothGraphics();
+				break;
 		}
-		// autofire
-		if(pos[1]==2)
-		{	String action = actions[pos[0]-1];
-			boolean auto = !controlSettings.isAutofire(action);
-			if(auto)
-				controlSettings.addAutofire(action);
-			else
-				controlSettings.removeAutofire(action);
-			setAuto(pos[0],2,auto);
-		}
-*/		
+
 	}
 	@Override
 	public void mouseReleased(MouseEvent e)
