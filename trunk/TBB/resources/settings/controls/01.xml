@@ -4,7 +4,7 @@
 		<on key="VK_Q" />
 		<off key="VK_Q" />
 	</event>
-	<event name="PUNCHBOMB" autofire="false">
+	<event name="PUNCHBOMB" autofire="true">
 		<on key="VK_X" />
 		<off key="VK_X" />
 	</event>

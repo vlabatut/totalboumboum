@@ -116,7 +116,7 @@ public class MainFrame extends JFrame implements WindowListener,MenuContainer
 	
 	public void exit()
 	{	//saveConfiguration();
-		System.exit(0);		
+		System.exit(0);
 	}
 	
 
@@ -188,6 +188,24 @@ public class MainFrame extends JFrame implements WindowListener,MenuContainer
 	@Override
 	public int getMenuWidth()
 	{	return Configuration.getVideoConfiguration().getPanelDimension().width;
+	}
+	
+	public void restart()
+	{
+		String ai = "."+File.separator+"resources"+File.separator+"ai";
+		String bin = "."+File.separator+"bin";
+		String jdom = "."+File.separator+"resources"+File.separator+"lib"+File.separator+"jdom.jar";
+		String cp = bin+File.pathSeparator+jdom+File.pathSeparator+ai;
+		String launcher = "fr.free.totalboumboum.Launcher";
+		String splash = "."+File.separator+"resources"+File.separator+"gui"+File.separator+"images"+File.separator+"splash.png";
+		Runtime runtime = Runtime.getRuntime();
+		try
+		{	runtime.exec("java -Xmx128m -splash:"+splash+" -classpath "+cp+" "+launcher);
+		}
+		catch (IOException e)
+		{	e.printStackTrace();
+		}
+		exit();
 	}
 }
 

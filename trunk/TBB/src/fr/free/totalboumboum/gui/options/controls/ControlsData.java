@@ -44,6 +44,10 @@ public class ControlsData extends EntitledDataPanel implements MouseListener,Key
 {	
 	private static final long serialVersionUID = 1L;
 
+	private static final int COL_COMMAND = 0;
+	private static final int COL_KEY = 1;
+	private static final int COL_AUTO = 2;
+	
 	private UntitledSubPanelTable keysPanel;
 	private ControlSettings controlSettings;
 	private String actions[] = 
@@ -93,27 +97,23 @@ public class ControlsData extends EntitledDataPanel implements MouseListener,Key
 			// data
 			{	controlSettings = Configuration.getControlsConfiguration().getControlSettings().get(index).copy();;
 				for(int line=1;line<actions.length+1;line++)
-				{	int col = 0;
-					// command
+				{	// command
 					{	String name = actions[line-1].toUpperCase().substring(0,1);
 						name = name + actions[line-1].toLowerCase().substring(1,actions[line-1].length());
 						String key = "MenuOptionsControlsLineCommand"+name;
-						keysPanel.setLabelKey(line,col,key,false);
-						col++;
+						keysPanel.setLabelKey(line,COL_COMMAND,key,false);
 					}
 					// key
 					{	int key = controlSettings.getOnKeyFromEvent(actions[line-1]);
-						setKey(line,col,key);
-						JLabel label = keysPanel.getLabel(line,col);
+						setKey(line,COL_KEY,key);
+						JLabel label = keysPanel.getLabel(line,COL_KEY);
 						label.addMouseListener(this);
-						col++;
 					}
 					// autofire
 					{	boolean auto = controlSettings.isAutofire(actions[line-1]);
-						setAuto(line,col,auto);
-						JLabel label = keysPanel.getLabel(line,col);
+						setAuto(line,COL_AUTO,auto);
+						JLabel label = keysPanel.getLabel(line,COL_AUTO);
 						label.addMouseListener(this);
-						col++;
 					}
 				}
 			}
@@ -192,23 +192,25 @@ public class ControlsData extends EntitledDataPanel implements MouseListener,Key
 	public void mousePressed(MouseEvent e)
 	{	JLabel label = (JLabel)e.getComponent();
 		int[] pos = keysPanel.getLabelPositionSimple(label);
-		// key
-		if(pos[1]==1)
-		{	if(selectedRow!=-1)
-				keysPanel.setLabelBackground(selectedRow,1,GuiTools.COLOR_TABLE_NEUTRAL_BACKGROUND);
-			selectedRow = pos[0];
-			keysPanel.setLabelBackground(pos[0],pos[1],GuiTools.COLOR_TABLE_SELECTED_BACKGROUND);
-			keysPanel.requestFocusInWindow();
-		}
-		// autofire
-		if(pos[1]==2)
-		{	String action = actions[pos[0]-1];
-			boolean auto = !controlSettings.isAutofire(action);
-			if(auto)
-				controlSettings.addAutofire(action);
-			else
-				controlSettings.removeAutofire(action);
-			setAuto(pos[0],2,auto);
+		switch(pos[1])
+		{	// key
+			case COL_KEY:
+				if(selectedRow!=-1)
+					keysPanel.setLabelBackground(selectedRow,1,GuiTools.COLOR_TABLE_NEUTRAL_BACKGROUND);
+				selectedRow = pos[0];
+				keysPanel.setLabelBackground(pos[0],pos[1],GuiTools.COLOR_TABLE_SELECTED_BACKGROUND);
+				keysPanel.requestFocusInWindow();
+				break;
+			// autofire
+			case COL_AUTO:
+				String action = actions[pos[0]-1];
+				boolean auto = !controlSettings.isAutofire(action);
+				if(auto)
+					controlSettings.addAutofire(action);
+				else
+					controlSettings.removeAutofire(action);
+				setAuto(pos[0],2,auto);
+				break;
 		}
 	}
 	@Override

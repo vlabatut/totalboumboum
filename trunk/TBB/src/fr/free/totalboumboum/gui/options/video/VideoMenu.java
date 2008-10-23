@@ -94,8 +94,11 @@ public class VideoMenu extends InnerMenuPanel
 			catch (IOException e1)
 			{	e1.printStackTrace();
 			}
+			if(videoData.hasDimChanged())
+				getFrame().restart();
 //TODO propager éventuellement au round (car il n'y a pas modification mais remplacement, donc si c déjà affecté à un player..
-			replaceWith(parent);
+			else
+				replaceWith(parent);
 	    }
 		else if(e.getActionCommand().equals(GuiTools.MENU_OPTIONS_BUTTON_CANCEL))
 		{	replaceWith(parent);

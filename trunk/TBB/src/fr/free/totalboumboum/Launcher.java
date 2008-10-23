@@ -42,7 +42,6 @@ import fr.free.totalboumboum.tools.XmlTools;
 
 public class Launcher
 {	
-
 	public static void main(String args[]) throws ParserConfigurationException, SAXException, IOException, IllegalArgumentException, SecurityException, IllegalAccessException, NoSuchFieldException, ClassNotFoundException
 	{	
 		// splashscreen
@@ -642,6 +641,8 @@ public class Launcher
 	 * - nouveauté : affichage du type de joueur dans la présentation des tournois et matches
 	 * - nouveauté : possibilité de choisir les commandes des joueurs dans la présentation des matches
 	 * - modification : découpage modulaire de la configuration
+	 * - nouveauté : possibilité de configurer les options graphiques depuis la GUI
+	 * - nouveauté : redémarrage de l'application quand on modifie la résolution
 	 * 
 	 * *******************************************************
 	 * *********************** A FAIRE ***********************
