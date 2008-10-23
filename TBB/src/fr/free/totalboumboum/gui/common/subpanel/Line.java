@@ -248,4 +248,18 @@ public class Line extends SubPanel
 				break;
 		}
 	}
+	
+	public int getLabelPosition(JLabel label)
+	{	int result = -1;
+		int col = 0;
+		while(col<columns && result==-1)
+		{	JLabel l = getLabel(col);
+			if(l==label)
+				result = col;
+			else
+				col++;
+		}
+		return result;
+	}
+
 }

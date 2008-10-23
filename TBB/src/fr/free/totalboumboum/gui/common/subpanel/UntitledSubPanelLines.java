@@ -28,6 +28,7 @@ import java.util.ArrayList;
 
 import javax.swing.Box;
 import javax.swing.BoxLayout;
+import javax.swing.JLabel;
 
 import fr.free.totalboumboum.gui.tools.GuiTools;
 
@@ -148,5 +149,25 @@ public class UntitledSubPanelLines extends SubPanel
 	public void setLineForeground(int line, Color fg)
 	{	Line l = getLine(line);
 		l.setForegroundColor(fg);
+	}
+	
+	/////////////////////////////////////////////////////////////////
+	// CONTENT			/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	public int[] getLabelPosition(JLabel label)
+	{	int result[] = null;
+		int line = 0;
+		while(line<lines && result==null)
+		{	Line l = getLine(line);
+			int col = l.getLabelPosition(label);
+			if(col!=-1)
+			{	result = new int[2];
+				result[0] = line;
+				result[1] = col;
+			}
+			else	
+				line++;
+		}
+		return result;
 	}
 }
