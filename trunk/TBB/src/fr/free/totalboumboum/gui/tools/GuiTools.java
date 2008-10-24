@@ -62,14 +62,31 @@ public class GuiTools
 	public static final String MAIN_MENU_BUTTON_TOURNAMENT = "MenuMainButtonTournament";
 	/* OPTIONS */
 		/* BUTTON */
+		public static final String MENU_OPTIONS_BUTTON_ADVANCED = "MenuOptionsButtonAdvanced";
 		public static final String MENU_OPTIONS_BUTTON_BACK = "MenuOptionsButtonBack";
 		public static final String MENU_OPTIONS_BUTTON_CANCEL = "MenuOptionsButtonCancel";
 		public static final String MENU_OPTIONS_BUTTON_CONFIRM = "MenuOptionsButtonConfirm";
 		public static final String MENU_OPTIONS_BUTTON_CONTROLS = "MenuOptionsButtonControls";
 		public static final String MENU_OPTIONS_BUTTON_GAMEPLAY = "MenuOptionsButtonGameplay";
+		public static final String MENU_OPTIONS_BUTTON_GUI = "MenuOptionsButtonGui";
 		public static final String MENU_OPTIONS_BUTTON_NEXT = "MenuOptionsButtonNext";
 		public static final String MENU_OPTIONS_BUTTON_PREVIOUS = "MenuOptionsButtonPrevious";
 		public static final String MENU_OPTIONS_BUTTON_VIDEO = "MenuOptionsButtonVideo";
+		/* ADVANCED */
+		public static final String MENU_OPTIONS_ADVANCED_TITLE = "MenuOptionsAdvancedTitle";
+			/* LINE */
+				/* ADJUST FPS */
+				public static final String MENU_OPTIONS_ADVANCED_LINE_ADJUST_TITLE = "MenuOptionsAdvancedLineAdjustTitle";
+				public static final String MENU_OPTIONS_ADVANCED_LINE_ADJUST_DISABLED = "MenuOptionsAdvancedLineAdjustDisabled";
+				public static final String MENU_OPTIONS_ADVANCED_LINE_ADJUST_ENABLED = "MenuOptionsAdvancedLineAdjustEnabled";
+				/* FPS */
+				public static final String MENU_OPTIONS_ADVANCED_LINE_FPS_TITLE = "MenuOptionsAdvancedLineFpsTitle";
+				public static final String MENU_OPTIONS_ADVANCED_LINE_FPS_MINUS = "MenuOptionsAdvancedLineFpsMinus";
+				public static final String MENU_OPTIONS_ADVANCED_LINE_FPS_PLUS = "MenuOptionsAdvancedLineFpsPlus";
+				/* SPEED */
+				public static final String MENU_OPTIONS_ADVANCED_LINE_SPEED_TITLE = "MenuOptionsAdvancedLineSpeedTitle";
+				public static final String MENU_OPTIONS_ADVANCED_LINE_SPEED_MINUS = "MenuOptionsAdvancedLineSpeedMinus";
+				public static final String MENU_OPTIONS_ADVANCED_LINE_SPEED_PLUS = "MenuOptionsAdvancedLineSpeedPlus";
 		/* CONTROLS */
 		public static final String MENU_OPTIONS_CONTROLS_TITLE = "MenuOptionsControlsTitle";
 			/* HEADER */
@@ -874,6 +891,7 @@ public class GuiTools
 			image = loadIcon(folder+GuiFileTools.FILE_FALSE,absent);
 			icons.put(MENU_OPTIONS_CONTROLS_LINE_AUTO_FALSE,image);
 			icons.put(MENU_OPTIONS_VIDEO_LINE_DISABLED,image);
+			icons.put(MENU_OPTIONS_ADVANCED_LINE_ADJUST_DISABLED,image);
 			// human
 			image = loadIcon(folder+GuiFileTools.FILE_HUMAN,absent);
 			icons.put(GAME_TOURNAMENT_DESCRIPTION_PLAYERS_DATA_HUMAN,image);
@@ -899,6 +917,8 @@ public class GuiTools
 			// minus
 			image = loadIcon(folder+GuiFileTools.FILE_MINUS,absent);
 			icons.put(MENU_OPTIONS_VIDEO_LINE_MINUS,image);
+			icons.put(MENU_OPTIONS_ADVANCED_LINE_FPS_MINUS,image);
+			icons.put(MENU_OPTIONS_ADVANCED_LINE_SPEED_MINUS,image);
 			// no share
 			image = loadIcon(folder+GuiFileTools.FILE_NOSHARE,absent);
 			icons.put(GAME_TOURNAMENT_DESCRIPTION_POINTS_DATA_NOSHARE,image);
@@ -917,6 +937,8 @@ public class GuiTools
 			// plus
 			image = loadIcon(folder+GuiFileTools.FILE_PLUS,absent);
 			icons.put(MENU_OPTIONS_VIDEO_LINE_PLUS,image);
+			icons.put(MENU_OPTIONS_ADVANCED_LINE_FPS_PLUS,image);
+			icons.put(MENU_OPTIONS_ADVANCED_LINE_SPEED_PLUS,image);
 			// regular order
 			image = loadIcon(folder+GuiFileTools.FILE_REGULAR,absent);
 			icons.put(GAME_TOURNAMENT_DESCRIPTION_POINTS_DATA_REGULAR,image);
@@ -936,6 +958,7 @@ public class GuiTools
 			image = loadIcon(folder+GuiFileTools.FILE_TRUE,absent);
 			icons.put(MENU_OPTIONS_CONTROLS_LINE_AUTO_TRUE,image);
 			icons.put(MENU_OPTIONS_VIDEO_LINE_ENABLED,image);
+			icons.put(MENU_OPTIONS_ADVANCED_LINE_ADJUST_ENABLED,image);
 		}
 	}
 	

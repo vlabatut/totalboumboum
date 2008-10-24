@@ -47,6 +47,9 @@ public class EngineConfigurationSaver
 
 	private static Element saveEngineElement(EngineConfiguration engineConfiguration)
 	{	Element result = new Element(XmlTools.ELT_ENGINE); 
+		// adjust
+		Element adjustElement = saveAdjustElement(engineConfiguration);
+		result.addContent(adjustElement);
 		// fps
 		Element fpsElement = saveFpsElement(engineConfiguration);
 		result.addContent(fpsElement);
@@ -54,6 +57,13 @@ public class EngineConfigurationSaver
 		Element speedElement = saveSpeedElement(engineConfiguration);
 		result.addContent(speedElement);
 		//
+		return result;
+	}
+	
+	private static Element saveAdjustElement(EngineConfiguration engineConfiguration)
+	{	Element result = new Element(XmlTools.ELT_ADJUST);
+		String fps = Boolean.toString(engineConfiguration.getAutoFps());
+		result.setAttribute(XmlTools.ATT_VALUE,fps);
 		return result;
 	}
 	

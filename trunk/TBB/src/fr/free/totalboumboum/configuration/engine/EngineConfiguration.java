@@ -23,15 +23,32 @@ package fr.free.totalboumboum.configuration.engine;
 
 public class EngineConfiguration
 {
+
+	public EngineConfiguration copy()
+	{	EngineConfiguration result = new EngineConfiguration();
+		result.setAutoFps(autoFps);
+		result.setSpeedCoeff(speedCoeff);
+		result.setFps(fps); 
+		return result;
+	}
+
 	/////////////////////////////////////////////////////////////////
 	// TIMING			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
+	private boolean autoFps;
 	private int fps;
 	private long milliPeriod;
 	private long nanoPeriod;
 	//NOTE speedcoeff à descendre au niveau de loop, car il peut dépendre du level
 	private double speedCoeff;
 
+	public void setAutoFps(boolean autoFps)
+	{	this.autoFps = autoFps;		
+	}
+	public boolean getAutoFps()
+	{	return autoFps;		
+	}
+	
 	public void setFps(int fps)
 	{	this.fps = fps;
 		milliPeriod = (long) 1000.0 / fps;
