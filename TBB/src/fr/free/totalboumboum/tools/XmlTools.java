@@ -51,6 +51,7 @@ public class XmlTools
 	public static final String ELT_ACTOR_PERMISSIONS = "actor-permissions";
 	public static final String ELT_ACTOR_RESTRICTIONS = "actor-restrictions";
 	public static final String ELT_ADDITION = "addition";
+	public static final String ELT_ADJUST = "adjust";
 	public static final String ELT_ANIMES = "animes";
 	public static final String ELT_AI = "ai";
 	public static final String ELT_ALL_LEVELS = "all-levels";

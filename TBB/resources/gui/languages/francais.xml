@@ -20,14 +20,37 @@
 <!-- OPTIONS MENU -->
 		<group name="Options">
 			<group name="Button">
+				<text name="Advanced" value="Avancé" tooltip="Options avancées" />
 				<text name="Back" value="Retour" tooltip="Revenir au menu principal" />
 				<text name="Cancel" value="Annuler" tooltip="Annuler les dernières modifications et revenir au menu des options" />
 				<text name="Confirm" value="Confirmer" tooltip="Confirmer les dernières modifications et revenir au menu des options" />
 				<text name="Controls" value="Commandes" tooltip="Modifier les touches commandant les personnages" />
 				<text name="Gameplay" value="Jeu" tooltip="Modifier les paramètres de jouabilité" />
+				<text name="Gui" value="Interface" tooltip="Modifier les paramètres de l'interface graphique" />
 				<text name="Next" value="Suivant" tooltip="Accéder aux réglages suivants" />
 				<text name="Previous" value="Précédent" tooltip="Accéder aux réglages précédents" />
 				<text name="Video" value="Vidéo" tooltip="Modifier les paramètres graphiques" />
+			</group>
+			
+			<group name="Advanced">
+				<text name="Title" value="Avancé" tooltip="Modifier les paramètres avancés" />
+				<group name="Line">
+					<group name="Adjust">
+						<text name="Title" value="auto FPS" tooltip="Ajuste automatiquement le nombre d'images par secondes (recommandé)" />
+						<text name="Disabled" value="Désactivé" tooltip="Ajustement automatique du FPS désactivé" />
+						<text name="Enabled" value="Activé" tooltip="Ajustement automatique du FPS activé" />
+					</group>
+					<group name="Fps">
+						<text name="Title" value="FPS" tooltip="Nombre d'images par secondes" />
+						<text name="Plus" value="Plus" tooltip="Augmenter le nombre d'images par secondes" />
+						<text name="Minus" value="Moins" tooltip="Diminuer le nombre d'images par secondes" />
+					</group>
+					<group name="Speed">
+						<text name="Title" value="Vitesse" tooltip="Vitesse du jeu" />
+						<text name="Plus" value="Plus" tooltip="Augmenter la vitesse du jeu" />
+						<text name="Minus" value="Moins" tooltip="Diminuer la vitesse du jeu" />
+					</group>
+				</group>
 			</group>
 			
 			<group name="Controls">

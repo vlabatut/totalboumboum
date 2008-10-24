@@ -643,6 +643,7 @@ public class Launcher
 	 * - modification : découpage modulaire de la configuration
 	 * - nouveauté : possibilité de configurer les options graphiques depuis la GUI
 	 * - nouveauté : redémarrage de l'application quand on modifie la résolution
+	 * - nouveauté : configuration des paramètres avancés
 	 * 
 	 * *******************************************************
 	 * *********************** A FAIRE ***********************

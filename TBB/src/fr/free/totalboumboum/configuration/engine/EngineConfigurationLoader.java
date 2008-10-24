@@ -47,12 +47,21 @@ public class EngineConfigurationLoader
 
 	private static void loadEngineElement(Element root, EngineConfiguration result)
 	{	Element element; 
+		// auto fps
+		element = root.getChild(XmlTools.ELT_ADJUST);
+		loadAdjustElement(element,result);
 		// fps
 		element = root.getChild(XmlTools.ELT_FPS);
 		loadFpsElement(element,result);
 		// speed
 		element = root.getChild(XmlTools.ELT_SPEED);
 		loadSpeedElement(element,result);
+	}
+	
+	private static void loadAdjustElement(Element root, EngineConfiguration result)
+	{	String value = root.getAttribute(XmlTools.ATT_VALUE).getValue().trim();
+		boolean autoFps = Boolean.valueOf(value);
+		result.setAutoFps(autoFps);
 	}
 	
 	private static void loadFpsElement(Element root, EngineConfiguration result)

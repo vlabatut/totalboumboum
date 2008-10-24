@@ -76,14 +76,13 @@ public class VideoData extends EntitledDataPanel implements MouseListener
 			int w = getDataWidth();
 			int h = getDataHeight();
 			optionsPanel = new UntitledSubPanelLines(w,h,lines,false);
-			int line = 0;
 			int tWidth = (int)(w*0.66);
 			
 			// data
 			{	videoConfiguration = Configuration.getVideoConfiguration().copy();;
 				
 				// #0 panel dimension
-				{	Line ln = optionsPanel.getLine(line);
+				{	Line ln = optionsPanel.getLine(LINE_PANELDIM);
 //					ln.setBackgroundColor(GuiTools.COLOR_TABLE_REGULAR_BACKGROUND);
 					ln.addLabel(0);
 					ln.addLabel(0);
@@ -125,11 +124,10 @@ public class VideoData extends EntitledDataPanel implements MouseListener
 						ln.getLabel(col).addMouseListener(this);
 						col++;
 					}
-					line++;
 				}
 				
 				// #1 border color
-				{	Line ln = optionsPanel.getLine(line);
+				{	Line ln = optionsPanel.getLine(LINE_BORDER);
 //					ln.setBackgroundColor(GuiTools.COLOR_TABLE_REGULAR_BACKGROUND);
 					ln.addLabel(0);
 					int col = 0;
@@ -148,11 +146,10 @@ public class VideoData extends EntitledDataPanel implements MouseListener
 						ln.setLabelText(col,text,tooltip);
 						col++;
 					}
-					line++;
 				}
 				
 				// #2 smooth graphics
-				{	Line ln = optionsPanel.getLine(line);
+				{	Line ln = optionsPanel.getLine(LINE_SMOOTH);
 //					ln.setBackgroundColor(GuiTools.COLOR_TABLE_REGULAR_BACKGROUND);
 					ln.addLabel(0);
 					int col = 0;
@@ -168,7 +165,6 @@ public class VideoData extends EntitledDataPanel implements MouseListener
 						ln.getLabel(col).addMouseListener(this);
 						col++;
 					}
-					line++;
 				}
 			}
 			

@@ -614,7 +614,8 @@ System.out.println();
       		
       		// adapt the FPS according to the PC power
 			int fps = Configuration.getEngineConfiguration().getFps();
-			if(averageFPS>0)
+			boolean adjust = Configuration.getEngineConfiguration().getAutoFps();
+			if(averageFPS>0 && adjust)
 			{	if(averageFPS<30 && fps>30)
 				Configuration.getEngineConfiguration().setFps(fps-10);
 				else if(averageFPS>(fps-1) && fps<50)

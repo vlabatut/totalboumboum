@@ -36,6 +36,7 @@ import fr.free.totalboumboum.gui.common.panel.SplitMenuPanel;
 import fr.free.totalboumboum.gui.common.panel.data.InnerDataPanel;
 import fr.free.totalboumboum.gui.common.panel.menu.InnerMenuPanel;
 import fr.free.totalboumboum.gui.common.panel.menu.MenuPanel;
+import fr.free.totalboumboum.gui.options.advanced.AdvancedSplitPanel;
 import fr.free.totalboumboum.gui.options.controls.ControlsSplitPanel;
 import fr.free.totalboumboum.gui.options.video.VideoSplitPanel;
 import fr.free.totalboumboum.gui.tools.GuiTools;
@@ -44,12 +45,16 @@ public class OptionsMenu extends InnerMenuPanel
 {	private static final long serialVersionUID = 1L;
 	
 	@SuppressWarnings("unused")
+	private JButton buttonAdvanced;
+	@SuppressWarnings("unused")
 	private JButton buttonControls;
 	private JButton buttonGameplay;
 	@SuppressWarnings("unused")
 	private JButton buttonVideo;
 	@SuppressWarnings("unused")
 	private JButton buttonBack;
+	@SuppressWarnings("unused")
+	private JButton buttonGui;
 
 	private InnerDataPanel optionsData;
 
@@ -69,6 +74,8 @@ public class OptionsMenu extends InnerMenuPanel
 		buttonGameplay = GuiTools.createSecondaryVerticalMenuButton(GuiTools.MENU_OPTIONS_BUTTON_GAMEPLAY,this);
 buttonGameplay.setEnabled(false);
 		buttonVideo = GuiTools.createSecondaryVerticalMenuButton(GuiTools.MENU_OPTIONS_BUTTON_VIDEO,this);
+		buttonGui = GuiTools.createSecondaryVerticalMenuButton(GuiTools.MENU_OPTIONS_BUTTON_GUI,this);
+		buttonAdvanced = GuiTools.createSecondaryVerticalMenuButton(GuiTools.MENU_OPTIONS_BUTTON_ADVANCED,this);
 		add(Box.createRigidArea(new Dimension(0,GuiTools.getSize(GuiTools.MENU_VERTICAL_BUTTON_SPACE))));
 		buttonBack = GuiTools.createSecondaryVerticalMenuButton(GuiTools.MENU_OPTIONS_BUTTON_BACK,this);
 		add(Box.createVerticalGlue());		
@@ -79,7 +86,34 @@ buttonGameplay.setEnabled(false);
 }
 	
 	public void actionPerformed(ActionEvent e)
-	{	if(e.getActionCommand().equals(GuiTools.MENU_OPTIONS_BUTTON_VIDEO))
+	{	if(e.getActionCommand().equals(GuiTools.MENU_OPTIONS_BUTTON_ADVANCED))
+		{	try
+			{	AdvancedSplitPanel advancedPanel = new AdvancedSplitPanel(container.getContainer(),container);
+				replaceWith(advancedPanel);
+			}
+			catch (IllegalArgumentException e1)
+			{	e1.printStackTrace();
+			}
+			catch (SecurityException e1)
+			{	e1.printStackTrace();
+			}
+			catch (ParserConfigurationException e1)
+			{	e1.printStackTrace();
+			}
+			catch (SAXException e1)
+			{	e1.printStackTrace();
+			}
+			catch (IOException e1)
+			{	e1.printStackTrace();
+			}
+			catch (IllegalAccessException e1)
+			{	e1.printStackTrace();
+			}
+			catch (NoSuchFieldException e1)
+			{	e1.printStackTrace();
+			}
+		}
+		else if(e.getActionCommand().equals(GuiTools.MENU_OPTIONS_BUTTON_VIDEO))
 		{	try
 			{	VideoSplitPanel videoPanel = new VideoSplitPanel(container.getContainer(),container);
 				replaceWith(videoPanel);
