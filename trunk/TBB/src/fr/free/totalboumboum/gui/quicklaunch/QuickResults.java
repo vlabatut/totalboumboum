@@ -97,7 +97,7 @@ public class QuickResults extends JPanel
 		BufferedImage bi = new BufferedImage(10,10,BufferedImage.TYPE_INT_ARGB);
 		Graphics g = bi.getGraphics();
 		GuiTools.setGraphics(g);
-		GuiConfiguration.setFont(new Font("Arial",Font.PLAIN,10));
+		GuiConfiguration.getMiscConfiguration().setFont(null,new Font("Arial",Font.PLAIN,10));
 		int headerHeight = (int)(1.5*pHeight/17.5);
 		int headerSize = GuiTools.getFontSize(headerHeight);
 		headerFont = new Font("Arial",Font.PLAIN,headerSize); 

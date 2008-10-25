@@ -38,6 +38,7 @@ import fr.free.totalboumboum.gui.common.panel.menu.InnerMenuPanel;
 import fr.free.totalboumboum.gui.common.panel.menu.MenuPanel;
 import fr.free.totalboumboum.gui.options.advanced.AdvancedSplitPanel;
 import fr.free.totalboumboum.gui.options.controls.ControlsSplitPanel;
+import fr.free.totalboumboum.gui.options.gui.GuiSplitPanel;
 import fr.free.totalboumboum.gui.options.video.VideoSplitPanel;
 import fr.free.totalboumboum.gui.tools.GuiTools;
 
@@ -90,6 +91,33 @@ buttonGameplay.setEnabled(false);
 		{	try
 			{	AdvancedSplitPanel advancedPanel = new AdvancedSplitPanel(container.getContainer(),container);
 				replaceWith(advancedPanel);
+			}
+			catch (IllegalArgumentException e1)
+			{	e1.printStackTrace();
+			}
+			catch (SecurityException e1)
+			{	e1.printStackTrace();
+			}
+			catch (ParserConfigurationException e1)
+			{	e1.printStackTrace();
+			}
+			catch (SAXException e1)
+			{	e1.printStackTrace();
+			}
+			catch (IOException e1)
+			{	e1.printStackTrace();
+			}
+			catch (IllegalAccessException e1)
+			{	e1.printStackTrace();
+			}
+			catch (NoSuchFieldException e1)
+			{	e1.printStackTrace();
+			}
+		}
+	else if(e.getActionCommand().equals(GuiTools.MENU_OPTIONS_BUTTON_GUI))
+		{	try
+			{	GuiSplitPanel guiPanel = new GuiSplitPanel(container.getContainer(),container);
+				replaceWith(guiPanel);
 			}
 			catch (IllegalArgumentException e1)
 			{	e1.printStackTrace();

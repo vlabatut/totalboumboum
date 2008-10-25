@@ -55,7 +55,7 @@ public class Line extends SubPanel
 		
 		// font
 		lineFontSize = GuiTools.getFontSize(height*GuiTools.FONT_RATIO);
-		lineFont = GuiConfiguration.getFont().deriveFont((float)lineFontSize);
+		lineFont = GuiConfiguration.getMiscConfiguration().getFont().deriveFont((float)lineFontSize);
 		
 		// columns
 		add(Box.createHorizontalGlue());
@@ -147,7 +147,7 @@ public class Line extends SubPanel
 	}
 
 	public void setLabelKey(int col, String key, boolean imageFlag)
-	{	String tooltip = GuiConfiguration.getLanguage().getText(key+GuiTools.TOOLTIP);
+	{	String tooltip = GuiConfiguration.getMiscConfiguration().getLanguage().getText(key+GuiTools.TOOLTIP);
 		// is there an available icon ?
 		if(imageFlag)
 		{	BufferedImage icon = GuiTools.getIcon(key);
@@ -155,7 +155,7 @@ public class Line extends SubPanel
 		}
 		// if not : use text
 		else
-		{	String text = GuiConfiguration.getLanguage().getText(key);
+		{	String text = GuiConfiguration.getMiscConfiguration().getLanguage().getText(key);
 			setLabelText(col,text,tooltip);
 		}
 	}

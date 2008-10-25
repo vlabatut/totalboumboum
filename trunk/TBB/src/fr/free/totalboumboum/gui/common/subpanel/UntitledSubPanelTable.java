@@ -63,12 +63,12 @@ public class UntitledSubPanelTable extends SubPanel
 		{	lineHeight = (int)((height - (lines+1)*GuiTools.subPanelMargin)/(lines+GuiTools.TABLE_HEADER_RATIO-1));
 			headerHeight = height - (lines+1)*GuiTools.subPanelMargin - lineHeight*(lines-1);
 			headerFontSize = GuiTools.getFontSize(headerHeight*GuiTools.FONT_RATIO);
-			headerFont = GuiConfiguration.getFont().deriveFont((float)headerFontSize);
+			headerFont = GuiConfiguration.getMiscConfiguration().getFont().deriveFont((float)headerFontSize);
 		}
 		else
 			lineHeight = (int)((height - (lines+1)*GuiTools.subPanelMargin)/((float)lines));
 		lineFontSize = GuiTools.getFontSize(lineHeight*GuiTools.FONT_RATIO);
-		lineFont = GuiConfiguration.getFont().deriveFont((float)lineFontSize);
+		lineFont = GuiConfiguration.getMiscConfiguration().getFont().deriveFont((float)lineFontSize);
 
 		// table
 		this.colGroups = colGroups;
@@ -455,7 +455,7 @@ public class UntitledSubPanelTable extends SubPanel
 	{	setLabelKey(line,0,col,key,imageFlag);
 	}
 	public void setLabelKey(int line, int colGroup, int colSub, String key, boolean imageFlag)
-	{	String tooltip = GuiConfiguration.getLanguage().getText(key+GuiTools.TOOLTIP);
+	{	String tooltip = GuiConfiguration.getMiscConfiguration().getLanguage().getText(key+GuiTools.TOOLTIP);
 		// is there an available icon ?
 		if(imageFlag)
 		{	BufferedImage icon = GuiTools.getIcon(key);
@@ -463,7 +463,7 @@ public class UntitledSubPanelTable extends SubPanel
 		}
 		// if not : use text
 		else
-		{	String text = GuiConfiguration.getLanguage().getText(key);
+		{	String text = GuiConfiguration.getMiscConfiguration().getLanguage().getText(key);
 			setLabelText(line,colGroup,colSub,text,tooltip);
 		}
 	}

@@ -180,7 +180,7 @@ public class AdvancedData extends EntitledDataPanel implements MouseListener
 	private void setFps()
 	{	int fps = engineConfiguration.getFps();
 		String text = Integer.toString(fps);
-		String tooltip = GuiConfiguration.getLanguage().getText(GuiTools.MENU_OPTIONS_ADVANCED_LINE_FPS_TITLE+GuiTools.TOOLTIP); 
+		String tooltip = GuiConfiguration.getMiscConfiguration().getLanguage().getText(GuiTools.MENU_OPTIONS_ADVANCED_LINE_FPS_TITLE+GuiTools.TOOLTIP); 
 		optionsPanel.getLine(LINE_FPS).setLabelText(2,text,tooltip);
 	}
 	
@@ -200,7 +200,7 @@ public class AdvancedData extends EntitledDataPanel implements MouseListener
 			nf.setMinimumFractionDigits(2);
 			text = nf.format(speed);
 		}
-		String tooltip = GuiConfiguration.getLanguage().getText(GuiTools.MENU_OPTIONS_ADVANCED_LINE_SPEED_TITLE+GuiTools.TOOLTIP); 
+		String tooltip = GuiConfiguration.getMiscConfiguration().getLanguage().getText(GuiTools.MENU_OPTIONS_ADVANCED_LINE_SPEED_TITLE+GuiTools.TOOLTIP); 
 		optionsPanel.getLine(LINE_SPEED).setLabelText(2,text,tooltip);
 	}
 	

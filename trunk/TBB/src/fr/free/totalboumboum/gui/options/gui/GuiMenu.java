@@ -1,4 +1,4 @@
-package fr.free.totalboumboum.gui.options.video;
+package fr.free.totalboumboum.gui.options.gui;
 
 /*
  * Total Boum Boum
@@ -32,15 +32,15 @@ import javax.xml.parsers.ParserConfigurationException;
 
 import org.xml.sax.SAXException;
 
-import fr.free.totalboumboum.configuration.Configuration;
-import fr.free.totalboumboum.configuration.video.VideoConfiguration;
-import fr.free.totalboumboum.configuration.video.VideoConfigurationSaver;
 import fr.free.totalboumboum.gui.common.panel.SplitMenuPanel;
 import fr.free.totalboumboum.gui.common.panel.menu.InnerMenuPanel;
 import fr.free.totalboumboum.gui.common.panel.menu.MenuPanel;
+import fr.free.totalboumboum.gui.data.configuration.GuiConfiguration;
+import fr.free.totalboumboum.gui.data.configuration.misc.MiscConfiguration;
+import fr.free.totalboumboum.gui.data.configuration.misc.MiscConfigurationSaver;
 import fr.free.totalboumboum.gui.tools.GuiTools;
 
-public class VideoMenu extends InnerMenuPanel
+public class GuiMenu extends InnerMenuPanel
 {	private static final long serialVersionUID = 1L;
 	
 	@SuppressWarnings("unused")
@@ -48,9 +48,9 @@ public class VideoMenu extends InnerMenuPanel
 	@SuppressWarnings("unused")
 	private JButton buttonCancel;
 
-	private VideoData videoData;
+	private GuiData guiData;
 
-	public VideoMenu(SplitMenuPanel container, MenuPanel parent)
+	public GuiMenu(SplitMenuPanel container, MenuPanel parent)
 	{	super(container, parent);
 		
 		// layout
@@ -68,19 +68,23 @@ public class VideoMenu extends InnerMenuPanel
 		add(Box.createVerticalGlue());		
 
 		// panels
-		videoData = new VideoData(container);
-		container.setDataPart(videoData);
+		guiData = new GuiData(container);
+		container.setDataPart(guiData);
 	}
 	
 	public void actionPerformed(ActionEvent e)
 	{	if(e.getActionCommand().equals(GuiTools.MENU_OPTIONS_BUTTON_CONFIRM))
-		{	VideoConfiguration videoConfiguration = videoData.getVideoConfiguration();
+		{	MiscConfiguration miscConfiguration = guiData.getMiscConfiguration();
 			boolean restart = false;
-			if(!videoConfiguration.getPanelDimension().equals(Configuration.getVideoConfiguration().getPanelDimension()))
+			if(!miscConfiguration.getLanguageName().equals(GuiConfiguration.getMiscConfiguration().getLanguageName()))
 				restart = true;
-			Configuration.setVideoConfiguration(videoConfiguration);
+			else if(!miscConfiguration.getFontName().equals(GuiConfiguration.getMiscConfiguration().getFontName()))
+				restart = true;
+			else if(!miscConfiguration.getBackgroundName().equals(GuiConfiguration.getMiscConfiguration().getBackgroundName()))
+				restart = true;
+			GuiConfiguration.setMiscConfiguration(miscConfiguration);
 			try
-			{	VideoConfigurationSaver.saveVideoConfiguration(Configuration.getVideoConfiguration());
+			{	MiscConfigurationSaver.saveMiscConfiguration(GuiConfiguration.getMiscConfiguration());
 			}
 			catch (IllegalArgumentException e1)
 			{	e1.printStackTrace();

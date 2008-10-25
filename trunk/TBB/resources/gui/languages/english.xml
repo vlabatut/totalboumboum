@@ -82,6 +82,27 @@
 				<text name="Title" value="Gameplay" tooltip="Modify gameplay settings" />
 			</group>
 
+			<group name="Gui">
+				<text name="Title" value="Graphical interface" tooltip="Modify the graphical interface settings" />
+				<group name="Line">
+					<group name="Language">
+						<text name="Title" value="Language" tooltip="GUI language (any change will cause TBB to restart)" />
+						<text name="Next" value="Next" tooltip="Next language" />
+						<text name="Previous" value="Previous" tooltip="Previous language" />
+					</group>
+					<group name="Font">
+						<text name="Title" value="Font" tooltip="GUI font (any change will cause TBB to restart)" />
+						<text name="Next" value="Next" tooltip="Next font" />
+						<text name="Previous" value="Previous" tooltip="Previous font" />
+					</group>
+					<group name="Background">
+						<text name="Title" value="Background" tooltip="GUI background (any change will cause TBB to restart)" />
+						<text name="Next" value="Next" tooltip="Next background" />
+						<text name="Previous" value="Previous" tooltip="Previous background" />
+					</group>
+				</group>
+			</group>
+			
 			<group name="Video">
 				<text name="Title" value="Video" tooltip="Modify video settings" />
 				<group name="Line">
@@ -89,7 +110,7 @@
 					<text name="Disabled" value="Disabled" tooltip="Smoothing is disabled" />
 					<text name="Enabled" value="Enabled" tooltip="Smoothing is enabled" />
 					<text name="Minus" value="Minus" tooltip="Get a smaller window" />
-					<text name="PanelDimension" value="Window size" tooltip="Size of TBB windows" />
+					<text name="PanelDimension" value="Window size" tooltip="Size of TBB windows (any change will cause TBB to restart)" />
 					<text name="Plus" value="Plus" tooltip="Get a bigger window" />
 					<text name="SmoothGraphics" value="Smooth graphics" tooltip="Smoothing on game graphics" />
 				</group>

@@ -234,7 +234,7 @@ public class RoundDescription extends EntitledDataPanel
 		result.setHorizontalAlignment(SwingConstants.CENTER);
 		result.setVerticalAlignment(SwingConstants.CENTER);
 		int fontSize = GuiTools.getFontSize(width, height, text);
-		Font font = GuiConfiguration.getFont().deriveFont((float)fontSize);
+		Font font = GuiConfiguration.getMiscConfiguration().getFont().deriveFont((float)fontSize);
 		result.setFont(font);
 		result.setBackground(GuiTools.COLOR_TABLE_HEADER_BACKGROUND);
 		result.setForeground(GuiTools.COLOR_TABLE_HEADER_FOREGROUND);
@@ -514,7 +514,7 @@ public class RoundDescription extends EntitledDataPanel
 				tooltips.add(tt);
 				String name = prefix+"Header"+"Rankpoints";
 				BufferedImage image = GuiTools.getIcon(name);
-				String tooltip = GuiConfiguration.getLanguage().getText(name+GuiTools.TOOLTIP);
+				String tooltip = GuiConfiguration.getMiscConfiguration().getLanguage().getText(name+GuiTools.TOOLTIP);
 				dt.add(image);
 				tt.add(tooltip);
 				boolean exaequoShare = pr.getExaequoShare();
@@ -523,7 +523,7 @@ public class RoundDescription extends EntitledDataPanel
 				else
 					name = prefix+"Data"+"Noshare";
 				image = GuiTools.getIcon(name);
-				tooltip = GuiConfiguration.getLanguage().getText(name+GuiTools.TOOLTIP);
+				tooltip = GuiConfiguration.getMiscConfiguration().getLanguage().getText(name+GuiTools.TOOLTIP);
 				dt.add(image);
 				tt.add(tooltip);
 			}
@@ -563,7 +563,7 @@ public class RoundDescription extends EntitledDataPanel
 				tooltips.add(tt);
 				String name = prefix+"Header"+"Discretize";
 				BufferedImage image = GuiTools.getIcon(name);
-				String tooltip = GuiConfiguration.getLanguage().getText(name+GuiTools.TOOLTIP);
+				String tooltip = GuiConfiguration.getMiscConfiguration().getLanguage().getText(name+GuiTools.TOOLTIP);
 				dt.add(image);
 				tt.add(tooltip);				
 				String text = "";
@@ -608,7 +608,7 @@ public class RoundDescription extends EntitledDataPanel
 				tooltips.add(tt);
 				String name = prefix+"Header"+"Rankings";
 				BufferedImage image = GuiTools.getIcon(name);
-				String tooltip = GuiConfiguration.getLanguage().getText(name+GuiTools.TOOLTIP);
+				String tooltip = GuiConfiguration.getMiscConfiguration().getLanguage().getText(name+GuiTools.TOOLTIP);
 				if(inverted)
 					name = prefix+"Data"+"Inverted";
 				else
@@ -635,7 +635,7 @@ public class RoundDescription extends EntitledDataPanel
 			tooltips.add(tt);
 			String name = prefix+"Header"+"Constant";
 			BufferedImage image = GuiTools.getIcon(name);
-			String tooltip = GuiConfiguration.getLanguage().getText(name+GuiTools.TOOLTIP);
+			String tooltip = GuiConfiguration.getMiscConfiguration().getLanguage().getText(name+GuiTools.TOOLTIP);
 			dt.add(image);
 			tt.add(tooltip);
 			String text = nf.format(value);
@@ -651,7 +651,7 @@ public class RoundDescription extends EntitledDataPanel
 			tooltips.add(tt);
 			String name = prefix+"Header"+"Total";
 			BufferedImage image = GuiTools.getIcon(name);
-			String tooltip = GuiConfiguration.getLanguage().getText(name+GuiTools.TOOLTIP);
+			String tooltip = GuiConfiguration.getMiscConfiguration().getLanguage().getText(name+GuiTools.TOOLTIP);
 			dt.add(image);
 			tt.add(tooltip);
 			String text = "";
@@ -668,7 +668,7 @@ public class RoundDescription extends EntitledDataPanel
 			tooltips.add(tt);
 			String name = prefix+"Header"+"Score";
 			BufferedImage image = GuiTools.getIcon(name);
-			String tooltip = GuiConfiguration.getLanguage().getText(name+GuiTools.TOOLTIP);
+			String tooltip = GuiConfiguration.getMiscConfiguration().getLanguage().getText(name+GuiTools.TOOLTIP);
 			dt.add(image);
 			tt.add(tooltip);
 			name = null;
@@ -696,7 +696,7 @@ public class RoundDescription extends EntitledDataPanel
 					break;					
 			}
 			image = GuiTools.getIcon(name);
-			tooltip = GuiConfiguration.getLanguage().getText(name+GuiTools.TOOLTIP);
+			tooltip = GuiConfiguration.getMiscConfiguration().getLanguage().getText(name+GuiTools.TOOLTIP);
 			dt.add(image);
 			tt.add(tooltip);
 		}
@@ -709,7 +709,7 @@ public class RoundDescription extends EntitledDataPanel
 			// icon
 			//BufferedImage icon = GuiTools.getIcon(GuiTools.GAME_ROUND_HEADER_PARTIAL);
 			String icon = "-";
-			String tooltip = GuiConfiguration.getLanguage().getText(prefix+"Data"+"Partial"+GuiTools.TOOLTIP);
+			String tooltip = GuiConfiguration.getMiscConfiguration().getLanguage().getText(prefix+"Data"+"Partial"+GuiTools.TOOLTIP);
 			dt.add(icon);
 			tt.add(tooltip);
 			// text

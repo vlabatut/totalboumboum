@@ -45,7 +45,7 @@ public class OptionsSplitPanel extends SplitMenuPanel
 	{	super(container,parent,BorderLayout.LINE_START,GuiTools.VERTICAL_SPLIT_RATIO);
 	
 		// background
-		image = GuiConfiguration.getDarkBackground();
+		image = GuiConfiguration.getMiscConfiguration().getDarkBackground();
 		
 		// panels
 		OptionsMenu menu = new OptionsMenu(this,parent);

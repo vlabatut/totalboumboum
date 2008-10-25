@@ -25,6 +25,7 @@ public class GuiXmlTools
 {
 	// Elements names
 	public static final String ELT_BACKGROUND = "background";
+	public static final String ELT_CONFIGURATION = "configuration";
 	public static final String ELT_FONT = "font";
 	public static final String ELT_GROUP = "group";
 	public static final String ELT_LANGUAGE = "language";
