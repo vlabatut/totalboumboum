@@ -61,7 +61,7 @@ public class GuiData extends EntitledDataPanel implements MouseListener
 	{	super(container);
 
 		// title
-		{	setTitleKey(GuiTools.MENU_OPTIONS_ADVANCED_TITLE);
+		{	setTitleKey(GuiTools.MENU_OPTIONS_GUI_TITLE);
 		}
 	
 		// data
