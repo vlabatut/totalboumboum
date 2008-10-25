@@ -27,6 +27,7 @@ import java.awt.event.MouseListener;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.FileFilter;
+import java.util.Iterator;
 import java.util.TreeSet;
 
 import javax.swing.JLabel;
@@ -68,7 +69,7 @@ public class GuiData extends EntitledDataPanel implements MouseListener
 			int w = getDataWidth();
 			int h = getDataHeight();
 			optionsPanel = new UntitledSubPanelLines(w,h,lines,false);
-			int tWidth = (int)(w*0.66);
+			int tWidth = (int)(w*0.5);
 			
 			initLanguages();
 			initFonts();
@@ -176,21 +177,21 @@ public class GuiData extends EntitledDataPanel implements MouseListener
 	}
 	
 	private void setLanguage()
-	{	String text = GuiConfiguration.getMiscConfiguration().getLanguageName();
+	{	String text = miscConfiguration.getLanguageName();
 		text = text.toUpperCase().substring(0,1)+text.toLowerCase().substring(1,text.length());
 		String tooltip = GuiConfiguration.getMiscConfiguration().getLanguage().getText(GuiTools.MENU_OPTIONS_GUI_LINE_LANGUAGE_TITLE+GuiTools.TOOLTIP); 
 		optionsPanel.getLine(LINE_LANGUAGE).setLabelText(2,text,tooltip);
 	}
 	
 	private void setFont()
-	{	String text = GuiConfiguration.getMiscConfiguration().getFontName();
+	{	String text = miscConfiguration.getFontName();
 		text = text.toUpperCase().substring(0,1)+text.toLowerCase().substring(1,text.length());
 		String tooltip = GuiConfiguration.getMiscConfiguration().getLanguage().getText(GuiTools.MENU_OPTIONS_GUI_LINE_FONT_TITLE+GuiTools.TOOLTIP); 
 		optionsPanel.getLine(LINE_FONT).setLabelText(2,text,tooltip);
 	}
 	
 	private void setBackground()
-	{	String text = GuiConfiguration.getMiscConfiguration().getBackgroundName();
+	{	String text = miscConfiguration.getBackgroundName();
 		String tooltip = GuiConfiguration.getMiscConfiguration().getLanguage().getText(GuiTools.MENU_OPTIONS_GUI_LINE_BACKGROUND_TITLE+GuiTools.TOOLTIP); 
 		optionsPanel.getLine(LINE_BACKGROUND).setLabelText(2,text,tooltip);
 	}
@@ -319,7 +320,7 @@ public class GuiData extends EntitledDataPanel implements MouseListener
 			{	boolean result;
 				String name = pathname.getName();
 				int beginIndex = name.length()-FileTools.EXTENSION_FONT.length();
-				result = name.substring(beginIndex,name.length()).equals(FileTools.EXTENSION_FONT);
+				result = name.substring(beginIndex,name.length()).equalsIgnoreCase(FileTools.EXTENSION_FONT);
 				return result;
 			}
 			
@@ -330,7 +331,14 @@ public class GuiData extends EntitledDataPanel implements MouseListener
 		{	String name = files[i].getName();
 			temp.add(name.substring(0,name.length()-FileTools.EXTENSION_FONT.length()));
 		}
-		fonts = (String[])temp.toArray();
+		fonts = new String[files.length];
+		Iterator<String> it = temp.iterator();
+		int i =0;
+		while (it.hasNext())
+		{	String str = it.next();
+			fonts[i] = str;
+			i++;
+		}
 	}
 
 	private void initLanguages()
@@ -341,7 +349,7 @@ public class GuiData extends EntitledDataPanel implements MouseListener
 			{	boolean result;
 				String name = pathname.getName();
 				int beginIndex = name.length()-FileTools.EXTENSION_DATA.length();
-				result = name.substring(beginIndex,name.length()).equals(FileTools.EXTENSION_DATA);
+				result = name.substring(beginIndex,name.length()).equalsIgnoreCase(FileTools.EXTENSION_DATA);
 				return result;
 			}
 			
@@ -352,15 +360,46 @@ public class GuiData extends EntitledDataPanel implements MouseListener
 		{	String name = files[i].getName();
 			temp.add(name.substring(0,name.length()-FileTools.EXTENSION_DATA.length()));
 		}
-		languages = (String[])temp.toArray();
+		languages = new String[files.length];
+		Iterator<String> it = temp.iterator();
+		int i =0;
+		while (it.hasNext())
+		{	String str = it.next();
+			languages[i] = str;
+			i++;
+		}
 	}
 
 	private void initBackgrounds()
 	{	File folder = new File(GuiFileTools.getBackgroundsPath());
-		File[] files = folder.listFiles();
+		FileFilter filter = new FileFilter()
+		{	@Override
+			public boolean accept(File pathname)
+			{	boolean result = false;
+				String name = pathname.getName();
+				String extensions[] = {".jpg", ".jpeg", ".png"};
+				int i = 0;
+				while(i<extensions.length && !result)
+				{	String ext = extensions[i];
+					int beginIndex = name.length()-ext.length();
+					result = beginIndex>0 && name.substring(beginIndex,name.length()).equalsIgnoreCase(ext);
+					i++;
+				}
+				return result;
+			}
+			
+		};
+		File[] files = folder.listFiles(filter);
 		TreeSet<String> temp = new TreeSet<String>();
 		for(int i=0;i<files.length;i++)
 			temp.add(files[i].getName());
-		backgrounds = (String[])temp.toArray();
+		backgrounds = new String[files.length];
+		Iterator<String> it = temp.iterator();
+		int i =0;
+		while (it.hasNext())
+		{	String str = it.next();
+			backgrounds[i] = str;
+			i++;
+		}
 	}
 }

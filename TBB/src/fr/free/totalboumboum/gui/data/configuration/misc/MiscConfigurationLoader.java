@@ -79,7 +79,7 @@ public class MiscConfigurationLoader
 	}
 
 	public static void loadFontElement(Element root, MiscConfiguration result)
-	{	String filename = root.getAttribute(GuiXmlTools.ATT_FILE).getValue().trim();
+	{	String filename = root.getAttribute(GuiXmlTools.ATT_VALUE).getValue().trim();
 		String path = GuiFileTools.getFontsPath()+File.separator+filename+FileTools.EXTENSION_FONT;
 		Font font;
 		try

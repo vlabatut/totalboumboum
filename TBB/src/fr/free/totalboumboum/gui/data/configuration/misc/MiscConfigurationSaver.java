@@ -79,7 +79,7 @@ public class MiscConfigurationSaver
 	private static Element saveBackgroundElement(MiscConfiguration miscConfiguration)
 	{	Element result = new Element(GuiXmlTools.ELT_BACKGROUND);
 		String background = miscConfiguration.getBackgroundName();
-		result.setAttribute(XmlTools.ATT_VALUE,background);
+		result.setAttribute(XmlTools.ATT_FILE,background);
 		return result;
 	}
 }

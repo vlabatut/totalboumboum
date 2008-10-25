@@ -934,6 +934,11 @@ public class GuiTools
 			icons.put(MENU_OPTIONS_VIDEO_LINE_MINUS,image);
 			icons.put(MENU_OPTIONS_ADVANCED_LINE_FPS_MINUS,image);
 			icons.put(MENU_OPTIONS_ADVANCED_LINE_SPEED_MINUS,image);
+			// next
+			image = loadIcon(folder+GuiFileTools.FILE_NEXT,absent);
+			icons.put(MENU_OPTIONS_GUI_LINE_LANGUAGE_NEXT,image);
+			icons.put(MENU_OPTIONS_GUI_LINE_FONT_NEXT,image);
+			icons.put(MENU_OPTIONS_GUI_LINE_BACKGROUND_NEXT,image);
 			// no share
 			image = loadIcon(folder+GuiFileTools.FILE_NOSHARE,absent);
 			icons.put(GAME_TOURNAMENT_DESCRIPTION_POINTS_DATA_NOSHARE,image);
@@ -954,6 +959,11 @@ public class GuiTools
 			icons.put(MENU_OPTIONS_VIDEO_LINE_PLUS,image);
 			icons.put(MENU_OPTIONS_ADVANCED_LINE_FPS_PLUS,image);
 			icons.put(MENU_OPTIONS_ADVANCED_LINE_SPEED_PLUS,image);
+			// previous
+			image = loadIcon(folder+GuiFileTools.FILE_PREVIOUS,absent);
+			icons.put(MENU_OPTIONS_GUI_LINE_LANGUAGE_PREVIOUS,image);
+			icons.put(MENU_OPTIONS_GUI_LINE_FONT_PREVIOUS,image);
+			icons.put(MENU_OPTIONS_GUI_LINE_BACKGROUND_PREVIOUS,image);
 			// regular order
 			image = loadIcon(folder+GuiFileTools.FILE_REGULAR,absent);
 			icons.put(GAME_TOURNAMENT_DESCRIPTION_POINTS_DATA_REGULAR,image);
