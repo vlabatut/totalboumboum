@@ -33,7 +33,7 @@
 			</group>
 			
 			<group name="Advanced">
-				<text name="Title" value="Advanced" tooltip="Modify advanced settings" />
+				<text name="Title" value="Advanced settings" tooltip="Modify advanced settings" />
 				<group name="Line">
 					<group name="Adjust">
 						<text name="Title" value="auto FPS" tooltip="Automatically adjust the frames per second rate (recommended)" />

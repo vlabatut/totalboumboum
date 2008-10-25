@@ -33,7 +33,7 @@
 			</group>
 			
 			<group name="Advanced">
-				<text name="Title" value="Avancé" tooltip="Modifier les paramètres avancés" />
+				<text name="Title" value="Options avancées" tooltip="Modifier les paramètres avancés" />
 				<group name="Line">
 					<group name="Adjust">
 						<text name="Title" value="auto FPS" tooltip="Ajuste automatiquement le nombre d'images par secondes (recommandé)" />

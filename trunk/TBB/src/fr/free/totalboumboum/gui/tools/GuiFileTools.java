@@ -56,12 +56,14 @@ public class GuiFileTools
 	public final static String FILE_MINUS = "minus.png";
 	public final static String FILE_MISC = "misc.png";
 	public final static String FILE_NAME = "name.png";
+	public final static String FILE_NEXT = "next.png";
 	public final static String FILE_NOSHARE = "noshare.png";
 	public final static String FILE_PACK = "pack.png";
 	public final static String FILE_PAINTINGS = "paintings.png";
 	public final static String FILE_PARTIAL = "partial.png";
 	public final static String FILE_PLUS = "plus.png";
 	public final static String FILE_POINTS = "points.png";
+	public final static String FILE_PREVIOUS = "previous.png";
 	public final static String FILE_PROFILE = "profile.png";
 	public final static String FILE_RANK = "rank.png";
 	public final static String FILE_REGULAR = "regular.png";
