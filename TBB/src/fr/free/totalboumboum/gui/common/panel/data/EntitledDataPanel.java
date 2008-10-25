@@ -62,7 +62,7 @@ public abstract class EntitledDataPanel extends InnerDataPanel
 		{	String text = "N/A";
 			title = new JLabel(text);
 			title.setHorizontalAlignment(SwingConstants.CENTER);
-			Font font = GuiConfiguration.getFont().deriveFont(titleFontSize);
+			Font font = GuiConfiguration.getMiscConfiguration().getFont().deriveFont(titleFontSize);
 			title.setForeground(GuiTools.COLOR_TITLE_FOREGROUND);
 			title.setBackground(GuiTools.COLOR_COMMON_BACKGROUND);
 			title.setOpaque(true);
@@ -104,8 +104,8 @@ public abstract class EntitledDataPanel extends InnerDataPanel
 //		repaint();
 	}
 	public void setTitleKey(String key)
-	{	String text = GuiConfiguration.getLanguage().getText(key);
-		String tooltip = GuiConfiguration.getLanguage().getText(key+GuiTools.TOOLTIP);
+	{	String text = GuiConfiguration.getMiscConfiguration().getLanguage().getText(key);
+		String tooltip = GuiConfiguration.getMiscConfiguration().getLanguage().getText(key+GuiTools.TOOLTIP);
 		setTitleText(text,tooltip);
 	}
 

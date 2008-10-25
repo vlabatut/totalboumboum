@@ -111,8 +111,8 @@ public class SequenceResults extends TournamentResults
 		int cols = 2+4+matches.size()+2;
 		if(resultsPanel.getColumnCount()<cols)
 		{	resultsPanel.addColumn(col);
-			String text = GuiConfiguration.getLanguage().getText(GuiTools.GAME_TOURNAMENT_RESULTS_HEADER_MATCH)+matches.size();
-			String tooltip = GuiConfiguration.getLanguage().getText(GuiTools.GAME_TOURNAMENT_RESULTS_HEADER_MATCH+GuiTools.TOOLTIP)+matches.size();
+			String text = GuiConfiguration.getMiscConfiguration().getLanguage().getText(GuiTools.GAME_TOURNAMENT_RESULTS_HEADER_MATCH)+matches.size();
+			String tooltip = GuiConfiguration.getMiscConfiguration().getLanguage().getText(GuiTools.GAME_TOURNAMENT_RESULTS_HEADER_MATCH+GuiTools.TOOLTIP)+matches.size();
 			resultsPanel.setLabelText(0,col,text,tooltip);
 		}
 		

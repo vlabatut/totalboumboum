@@ -64,8 +64,8 @@ public class ControlsData extends EntitledDataPanel implements MouseListener,Key
 	{	super(container);
 
 		// title
-		{	String text = GuiConfiguration.getLanguage().getText(GuiTools.MENU_OPTIONS_CONTROLS_TITLE)+" "+index;
-			String tooltip = GuiConfiguration.getLanguage().getText(GuiTools.MENU_OPTIONS_CONTROLS_TITLE+GuiTools.TOOLTIP);
+		{	String text = GuiConfiguration.getMiscConfiguration().getLanguage().getText(GuiTools.MENU_OPTIONS_CONTROLS_TITLE)+" "+index;
+			String tooltip = GuiConfiguration.getMiscConfiguration().getLanguage().getText(GuiTools.MENU_OPTIONS_CONTROLS_TITLE+GuiTools.TOOLTIP);
 			setTitleText(text,tooltip);
 		}
 	

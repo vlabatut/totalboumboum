@@ -45,7 +45,7 @@ public class AdvancedSplitPanel extends SplitMenuPanel
 	{	super(container,parent,BorderLayout.LINE_START,GuiTools.VERTICAL_SPLIT_RATIO);
 	
 		// background
-		image = GuiConfiguration.getDarkBackground();
+		image = GuiConfiguration.getMiscConfiguration().getDarkBackground();
 		
 		// panels
 		setMenuPart(new AdvancedMenu(this,parent));

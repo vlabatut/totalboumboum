@@ -1,4 +1,4 @@
-package fr.free.totalboumboum.gui.menus.tournament;
+package fr.free.totalboumboum.gui.options.gui;
 
 /*
  * Total Boum Boum
@@ -36,22 +36,20 @@ import fr.free.totalboumboum.gui.common.panel.menu.MenuPanel;
 import fr.free.totalboumboum.gui.data.configuration.GuiConfiguration;
 import fr.free.totalboumboum.gui.tools.GuiTools;
 
-public class TournamentSplitPanel extends SplitMenuPanel
-{	private static final long serialVersionUID = 1L;
-	
+public class GuiSplitPanel extends SplitMenuPanel
+{	private static final long serialVersionUID = 1L; 
+
 	private BufferedImage image;
 
-	public TournamentSplitPanel(MenuContainer container, MenuPanel parent) throws IllegalArgumentException, SecurityException, ParserConfigurationException, SAXException, IOException, IllegalAccessException, NoSuchFieldException
+	public GuiSplitPanel(MenuContainer container, MenuPanel parent) throws IllegalArgumentException, SecurityException, ParserConfigurationException, SAXException, IOException, IllegalAccessException, NoSuchFieldException
 	{	super(container,parent,BorderLayout.LINE_START,GuiTools.VERTICAL_SPLIT_RATIO);
-		
+	
 		// background
 		image = GuiConfiguration.getMiscConfiguration().getDarkBackground();
 		
 		// panels
-		TournamentMenu menu = new TournamentMenu(this,parent);
-		setMenuPart(menu);
+		setMenuPart(new GuiMenu(this,parent));
 	}
-
 	
 	@Override
 	public void paintComponent(Graphics g)

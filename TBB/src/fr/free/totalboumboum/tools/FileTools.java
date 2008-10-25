@@ -29,9 +29,10 @@ public class FileTools
 {
 	public static final String CLASS_SEPARATOR = ".";
 
-	public static final String EXTENSION_SCHEMA = ".xsd";
 	public static final String EXTENSION_DATA = ".xml";
 	public static final String EXTENSION_CLASS = ".class";
+	public static final String EXTENSION_FONT = ".ttf";
+	public static final String EXTENSION_SCHEMA = ".xsd";
 	//
 	public static final String FILE_ABILITIES = "abilities";
 	public static final String FILE_AI = "AiMain";

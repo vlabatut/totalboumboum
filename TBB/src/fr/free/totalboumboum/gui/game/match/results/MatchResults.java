@@ -116,8 +116,8 @@ public class MatchResults extends EntitledDataPanel
 		int cols = 2+4+rounds.size()+2;
 		if(resultsPanel.getColumnCount()<cols)
 		{	resultsPanel.addColumn(col);
-			String text = GuiConfiguration.getLanguage().getText(GuiTools.GAME_MATCH_RESULTS_HEADER_ROUND)+rounds.size();
-			String tooltip = GuiConfiguration.getLanguage().getText(GuiTools.GAME_MATCH_RESULTS_HEADER_ROUND+GuiTools.TOOLTIP)+rounds.size();
+			String text = GuiConfiguration.getMiscConfiguration().getLanguage().getText(GuiTools.GAME_MATCH_RESULTS_HEADER_ROUND)+rounds.size();
+			String tooltip = GuiConfiguration.getMiscConfiguration().getLanguage().getText(GuiTools.GAME_MATCH_RESULTS_HEADER_ROUND+GuiTools.TOOLTIP)+rounds.size();
 			resultsPanel.setLabelText(0,col,text,tooltip);
 		}
 		

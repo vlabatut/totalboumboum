@@ -45,7 +45,6 @@ public class VideoData extends EntitledDataPanel implements MouseListener
 
 	private UntitledSubPanelLines optionsPanel;
 	private VideoConfiguration videoConfiguration;
-	private Dimension dimChanged = null;
 	
 	private int[] resolutionWidths = 
 	{	500,
@@ -140,7 +139,7 @@ public class VideoData extends EntitledDataPanel implements MouseListener
 					// value
 					{	String text = "Black";
 //						int txtWidth = GuiTools.getPixelWidth(ln.getLineFontSize(),text);
-						String tooltip = GuiConfiguration.getLanguage().getText(GuiTools.MENU_OPTIONS_VIDEO_LINE_BORDER_COLOR+GuiTools.TOOLTIP); 
+						String tooltip = GuiConfiguration.getMiscConfiguration().getLanguage().getText(GuiTools.MENU_OPTIONS_VIDEO_LINE_BORDER_COLOR+GuiTools.TOOLTIP); 
 //						ln.setLabelMaxWidth(col,txtWidth);
 						ln.setLabelMaxWidth(col,Integer.MAX_VALUE);
 						ln.setLabelText(col,text,tooltip);
@@ -186,7 +185,7 @@ public class VideoData extends EntitledDataPanel implements MouseListener
 	{	int panelWidth = videoConfiguration.getPanelDimension().width;
 		int panelHeight = videoConfiguration.getPanelDimension().height;
 		String text = Integer.toString(panelWidth)+new Character('\u00D7').toString()+Integer.toString(panelHeight);
-		String tooltip = GuiConfiguration.getLanguage().getText(GuiTools.MENU_OPTIONS_VIDEO_LINE_PANEL_DIMENSION+GuiTools.TOOLTIP); 
+		String tooltip = GuiConfiguration.getMiscConfiguration().getLanguage().getText(GuiTools.MENU_OPTIONS_VIDEO_LINE_PANEL_DIMENSION+GuiTools.TOOLTIP); 
 		optionsPanel.getLine(LINE_PANELDIM).setLabelText(2,text,tooltip);
 		
 	}
@@ -204,10 +203,6 @@ public class VideoData extends EntitledDataPanel implements MouseListener
 	public VideoConfiguration getVideoConfiguration()
 	{	return videoConfiguration;
 	}	
-	
-	public boolean hasDimChanged()
-	{	return dimChanged!=null;	
-	}
 	
 	/////////////////////////////////////////////////////////////////
 	// MOUSE LISTENER	/////////////////////////////////////////////
@@ -253,14 +248,6 @@ public class VideoData extends EntitledDataPanel implements MouseListener
 				}
 				// common
 				Dimension newDim = new Dimension(resolutionWidths[index],resolutionHeights[index]);
-				if(dimChanged == null)
-					dimChanged = dim;
-				else
-				{	if(dimChanged.equals(newDim))
-						dimChanged = null;
-					else
-						dimChanged = dim;
-				}
 				videoConfiguration.setPanelDimension(newDim.width,newDim.height);
 				setPanelDimension();
 				break;

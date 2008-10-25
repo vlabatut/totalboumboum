@@ -106,6 +106,21 @@ public class GuiTools
 				public static final String MENU_OPTIONS_CONTROLS_LINE_AUTO_FALSE = "MenuOptionsControlsLineAutoFalse";
 		/* GAMEPLAY */
 		public static final String MENU_OPTIONS_GAMEPLAY_TITLE = "MenuOptionsGameplayTitle";
+		/* GUI */
+		public static final String MENU_OPTIONS_GUI_TITLE = "MenuOptionsGuiTitle";
+			/* LINE */
+				/* LANGUAGE */
+				public static final String MENU_OPTIONS_GUI_LINE_LANGUAGE_TITLE = "MenuOptionsGuiLineLanguageTitle";
+				public static final String MENU_OPTIONS_GUI_LINE_LANGUAGE_NEXT = "MenuOptionsGuiLineLanguageNext";
+				public static final String MENU_OPTIONS_GUI_LINE_LANGUAGE_PREVIOUS = "MenuOptionsGuiLineLanguagePrevious";
+				/* FONT */
+				public static final String MENU_OPTIONS_GUI_LINE_FONT_TITLE = "MenuOptionsGuiLineFontTitle";
+				public static final String MENU_OPTIONS_GUI_LINE_FONT_NEXT = "MenuOptionsGuiLineFontNext";
+				public static final String MENU_OPTIONS_GUI_LINE_FONT_PREVIOUS = "MenuOptionsGuiLineFontPrevious";
+				/* BACKGROUND */
+				public static final String MENU_OPTIONS_GUI_LINE_BACKGROUND_TITLE = "MenuOptionsGuiLineBackgroundTitle";
+				public static final String MENU_OPTIONS_GUI_LINE_BACKGROUND_NEXT = "MenuOptionsGuiLineBackgroundNext";
+				public static final String MENU_OPTIONS_GUI_LINE_BACKGROUND_PREVIOUS = "MenuOptionsGuiLineBackgroundPrevious";
 		/* VIDEO */
 		public static final String MENU_OPTIONS_VIDEO_TITLE = "MenuOptionsVideoTitle";
 			/* LINE */
@@ -532,7 +547,7 @@ public class GuiTools
 		
 		// fonts
 		int menuVerticalPrimaryButtonFontSize;
-		{	Iterator<Entry<String,String>> it = GuiConfiguration.getLanguage().getTexts().entrySet().iterator();
+		{	Iterator<Entry<String,String>> it = GuiConfiguration.getMiscConfiguration().getLanguage().getTexts().entrySet().iterator();
 			String longest = "";
 			while(it.hasNext())
 			{	Entry<String,String> temp = it.next();
@@ -548,7 +563,7 @@ public class GuiTools
 		sizes.put(MENU_VERTICAL_PRIMARY_BUTTON_FONT_SIZE, menuVerticalPrimaryButtonFontSize);
 		//
 		int menuVerticalSecondaryButtonFontSize;
-		{	Iterator<Entry<String,String>> it = GuiConfiguration.getLanguage().getTexts().entrySet().iterator();
+		{	Iterator<Entry<String,String>> it = GuiConfiguration.getMiscConfiguration().getLanguage().getTexts().entrySet().iterator();
 			String longest = "";
 			while(it.hasNext())
 			{	Entry<String,String> temp = it.next();
@@ -988,7 +1003,7 @@ public class GuiTools
 		int fheight;
 		do
 		{	result++;
-			Font font = GuiConfiguration.getFont().deriveFont((float)result);
+			Font font = GuiConfiguration.getMiscConfiguration().getFont().deriveFont((float)result);
 			graphics.setFont(font);
 			FontMetrics metrics = graphics.getFontMetrics(font);
 			fheight = metrics.getHeight();
@@ -1001,7 +1016,7 @@ public class GuiTools
 		int fheight,fwidth;
 		do
 		{	result++;
-			Font font = GuiConfiguration.getFont().deriveFont((float)result);
+			Font font = GuiConfiguration.getMiscConfiguration().getFont().deriveFont((float)result);
 			graphics.setFont(font);
 			FontMetrics metrics = graphics.getFontMetrics(font);
 			fheight = metrics.getHeight();
@@ -1013,7 +1028,7 @@ public class GuiTools
 	}
 	public static int getPixelHeight(float fontSize)
 	{	int result;
-		Font font = GuiConfiguration.getFont().deriveFont(fontSize);
+		Font font = GuiConfiguration.getMiscConfiguration().getFont().deriveFont(fontSize);
 		graphics.setFont(font);
 		FontMetrics metrics = graphics.getFontMetrics(font);
 		result = (int)(metrics.getHeight()*1.2);
@@ -1021,7 +1036,7 @@ public class GuiTools
 	}
 	public static int getPixelWidth(float fontSize, String text)
 	{	int result;
-		Font font = GuiConfiguration.getFont().deriveFont(fontSize);
+		Font font = GuiConfiguration.getMiscConfiguration().getFont().deriveFont(fontSize);
 		graphics.setFont(font);
 		FontMetrics metrics = graphics.getFontMetrics(font);
 		Rectangle2D bounds = metrics.getStringBounds(text,graphics);
@@ -1117,14 +1132,14 @@ public class GuiTools
 		}
 		else
 		{	// text 
-			String text = GuiConfiguration.getLanguage().getText(name);
+			String text = GuiConfiguration.getMiscConfiguration().getLanguage().getText(name);
 			button.setText(text);
 		}		
 		// action command
 		button.setActionCommand(name);
 		// tooltip
 		String toolTip = name+GuiTools.TOOLTIP;
-		String text = GuiConfiguration.getLanguage().getText(toolTip);
+		String text = GuiConfiguration.getMiscConfiguration().getLanguage().getText(toolTip);
 		button.setToolTipText(text);
 	}		
 	public static void initButton(AbstractButton result,String name, int width, int height, ButtonAware panel)
@@ -1147,7 +1162,7 @@ public class GuiTools
 		result.setAlignmentX(Component.CENTER_ALIGNMENT);
 		// font
 		int fontSize = sizes.get(MENU_VERTICAL_PRIMARY_BUTTON_FONT_SIZE);
-		Font font = GuiConfiguration.getFont().deriveFont((float)fontSize);
+		Font font = GuiConfiguration.getMiscConfiguration().getFont().deriveFont((float)fontSize);
 		result.setFont(font);
 		//
 		return result;
@@ -1160,7 +1175,7 @@ public class GuiTools
 		result.setAlignmentX(Component.CENTER_ALIGNMENT);
 		// font
 		int fontSize = sizes.get(MENU_VERTICAL_SECONDARY_BUTTON_FONT_SIZE);
-		Font font = GuiConfiguration.getFont().deriveFont((float)fontSize);
+		Font font = GuiConfiguration.getMiscConfiguration().getFont().deriveFont((float)fontSize);
 		result.setFont(font);
 		//
 		return result;

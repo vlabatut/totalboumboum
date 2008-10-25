@@ -75,6 +75,7 @@ public class GuiFileTools
 	public final static String FILE_TRUE = "true.png";
 
 	// folders
+	public static final String FOLDER_BACKGROUNDS = "backgrounds";
 	public static final String FOLDER_BUTTONS = "buttons";
 	public final static String FOLDER_DATA = "data";
 	public final static String FOLDER_DESCRIPTION = "description";
@@ -117,6 +118,9 @@ public class GuiFileTools
 
 	public static String getImagesPath()
 	{	return getGuiPath()+File.separator+FOLDER_IMAGES;		
+	}
+	public static String getBackgroundsPath()
+	{	return getImagesPath()+File.separator+FOLDER_BACKGROUNDS;		
 	}
 	
 	public static String getLanguagesPath()

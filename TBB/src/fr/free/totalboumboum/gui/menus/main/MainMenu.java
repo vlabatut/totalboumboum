@@ -70,7 +70,7 @@ public class MainMenu extends SimpleMenuPanel
 		setLayout(layout);
 
 		// background
-		image = GuiConfiguration.getBackground();
+		image = GuiConfiguration.getMiscConfiguration().getBackground();
 		
 		// buttons
 		add(Box.createVerticalGlue());

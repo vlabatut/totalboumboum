@@ -136,10 +136,10 @@ buttonStatistics.setEnabled(false);
 			Round round = Configuration.getGameConfiguration().getTournament().getCurrentMatch().getCurrentRound();
 			int limit = round.getProfiles().size()+2;
 			loadProgressBar = new JProgressBar(0,limit);
-			Font font = GuiConfiguration.getFont().deriveFont((float)GuiTools.getSize(GuiTools.GAME_PROGRESSBAR_FONT_SIZE));
+			Font font = GuiConfiguration.getMiscConfiguration().getFont().deriveFont((float)GuiTools.getSize(GuiTools.GAME_PROGRESSBAR_FONT_SIZE));
 			loadProgressBar.setFont(font);
 			loadProgressBar.setStringPainted(true); 
-			String text = GuiConfiguration.getLanguage().getText(GuiTools.GAME_ROUND_PROGRESSBAR_BOMBSET);
+			String text = GuiConfiguration.getMiscConfiguration().getLanguage().getText(GuiTools.GAME_ROUND_PROGRESSBAR_BOMBSET);
 			loadProgressBar.setString(text);
 			int width = Integer.MAX_VALUE;
 			int height = GuiTools.getSize(GuiTools.MENU_HORIZONTAL_BUTTON_HEIGHT);
@@ -221,13 +221,13 @@ buttonStatistics.setEnabled(false);
 		switch(val)
 		{	// itemset
 			case 0:
-				text = GuiConfiguration.getLanguage().getText(GuiTools.GAME_ROUND_PROGRESSBAR_ITEMSET);
+				text = GuiConfiguration.getMiscConfiguration().getLanguage().getText(GuiTools.GAME_ROUND_PROGRESSBAR_ITEMSET);
 				loadProgressBar.setString(text);
 				loadProgressBar.repaint();
 				break;
 			// theme
 			case 1:
-				text = GuiConfiguration.getLanguage().getText(GuiTools.GAME_ROUND_PROGRESSBAR_THEME);
+				text = GuiConfiguration.getMiscConfiguration().getLanguage().getText(GuiTools.GAME_ROUND_PROGRESSBAR_THEME);
 				loadProgressBar.setString(text);
 				loadProgressBar.repaint();
 				break;
@@ -235,7 +235,7 @@ buttonStatistics.setEnabled(false);
 			default:
 				Round round = Configuration.getGameConfiguration().getTournament().getCurrentMatch().getCurrentRound();
 				if(val==round.getProfiles().size()+2)
-				{	text = GuiConfiguration.getLanguage().getText(GuiTools.GAME_ROUND_PROGRESSBAR_COMPLETE);
+				{	text = GuiConfiguration.getMiscConfiguration().getLanguage().getText(GuiTools.GAME_ROUND_PROGRESSBAR_COMPLETE);
 					loadProgressBar.setString(text);
 					loadProgressBar.repaint();
 					loopPanel = new LoopPanel(container.getContainer(),container);
@@ -243,7 +243,7 @@ buttonStatistics.setEnabled(false);
 					loopPanel.start();
 				}
 				else
-				{	text = GuiConfiguration.getLanguage().getText(GuiTools.GAME_ROUND_PROGRESSBAR_PLAYER)+" "+(val-1);
+				{	text = GuiConfiguration.getMiscConfiguration().getLanguage().getText(GuiTools.GAME_ROUND_PROGRESSBAR_PLAYER)+" "+(val-1);
 					loadProgressBar.setString(text);
 					loadProgressBar.repaint();
 				}

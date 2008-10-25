@@ -22,6 +22,8 @@ package fr.free.totalboumboum.gui.data.language;
  */
 
 import java.util.HashMap;
+import java.util.Iterator;
+import java.util.Map.Entry;
 
 public class Language
 {	
@@ -48,5 +50,18 @@ public class Language
 	
 	public HashMap<String, String> getTexts()
 	{	return texts;
+	}
+	
+	public Language copy()
+	{	Language result = new Language();
+		result.setName(name);
+		Iterator<Entry<String,String>> it = texts.entrySet().iterator();
+		while(it.hasNext())
+		{	Entry<String,String> temp = it.next();
+			String key = temp.getKey();
+			String value = temp.getValue();
+			result.addText(key,value);
+		}
+		return result;
 	}
 }

@@ -82,6 +82,27 @@
 				<text name="Title" value="Jeu" tooltip="Modifier les paramètres de jouabilité" />
 			</group>
 
+			<group name="Gui">
+				<text name="Title" value="Interface graphique" tooltip="Modifier les paramètres de l'interface graphique" />
+				<group name="Line">
+					<group name="Language">
+						<text name="Title" value="Langue" tooltip="Langue de l'interface graphique (toute modification entraîne un redémarrage du jeu)" />
+						<text name="Next" value="Suivante" tooltip="Langue suivante" />
+						<text name="Previous" value="Précédente" tooltip="Langue précédente" />
+					</group>
+					<group name="Font">
+						<text name="Title" value="Police de caractères" tooltip="Police de caractères de l'interface graphique (toute modification entraîne un redémarrage du jeu)" />
+						<text name="Next" value="Suivante" tooltip="Police suivante" />
+						<text name="Previous" value="Précédente" tooltip="Police précédente" />
+					</group>
+					<group name="Background">
+						<text name="Title" value="Fond d'écran" tooltip="Fond d'écran de l'interface graphique (toute modification entraîne un redémarrage du jeu)" />
+						<text name="Next" value="Suivant" tooltip="Fond suivant" />
+						<text name="Previous" value="Précédent" tooltip="Fond précédent" />
+					</group>
+				</group>
+			</group>
+			
 			<group name="Video">
 				<text name="Title" value="Vidéo" tooltip="Modifier les paramètres graphiques" />
 				<group name="Line">
@@ -89,7 +110,7 @@
 					<text name="Disabled" value="Désactivé" tooltip="Lissage désactivé" />
 					<text name="Enabled" value="Activé" tooltip="Lissage activé" />
 					<text name="Minus" value="Moins" tooltip="Diminuer la taille de la fenêtre" />
-					<text name="PanelDimension" value="Taille de la fenêtre" tooltip="Taille de la fenêtre de TBB" />
+					<text name="PanelDimension" value="Taille de la fenêtre" tooltip="Taille de la fenêtre de TBB (toute modification entraîne un redémarrage du jeu)" />
 					<text name="Plus" value="Plus" tooltip="Augmenter la taille de la fenêtre" />
 					<text name="SmoothGraphics" value="Lissage" tooltip="Lissage des graphismes du jeu" />
 				</group>

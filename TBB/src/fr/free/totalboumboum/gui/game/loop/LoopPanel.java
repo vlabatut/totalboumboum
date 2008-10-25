@@ -58,7 +58,7 @@ public class LoopPanel extends SimpleMenuPanel implements LoopRenderPanel
     	setIgnoreRepaint(true);
 
 		// background image
-		backgroundImage = GuiConfiguration.getDarkBackground();	
+		backgroundImage = GuiConfiguration.getMiscConfiguration().getDarkBackground();	
 /*
 		float[] scales = { 0.5f, 0.5f, 0.5f, 1f };
 		float[] offsets = new float[4];

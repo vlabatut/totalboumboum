@@ -45,7 +45,7 @@ public class TournamentSplitPanel extends SplitMenuPanel
 	{	super(container,parent,BorderLayout.PAGE_END,GuiTools.HORIZONTAL_SPLIT_RATIO);
 	
 		// background
-		image = GuiConfiguration.getDarkBackground();
+		image = GuiConfiguration.getMiscConfiguration().getDarkBackground();
 		
 		// panels
 		TournamentMenu menu = new TournamentMenu(this,parent);

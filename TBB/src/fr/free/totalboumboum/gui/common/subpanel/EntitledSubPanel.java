@@ -61,7 +61,7 @@ public class EntitledSubPanel extends SubPanel
 		// title
 		{	String text = null;
 			title = new JLabel(text);
-			Font font = GuiConfiguration.getFont().deriveFont(titleFontSize);
+			Font font = GuiConfiguration.getMiscConfiguration().getFont().deriveFont(titleFontSize);
 			title.setFont(font);
 			String tooltip = null;
 			title.setToolTipText(tooltip);
@@ -97,7 +97,7 @@ public class EntitledSubPanel extends SubPanel
 	private int titleFontSize;
 
 	public void setTitleKey(String key, boolean imageFlag)
-	{	String tooltip = GuiConfiguration.getLanguage().getText(key+GuiTools.TOOLTIP);
+	{	String tooltip = GuiConfiguration.getMiscConfiguration().getLanguage().getText(key+GuiTools.TOOLTIP);
 		// is there an available icon ?
 		if(imageFlag)
 		{	BufferedImage icon = GuiTools.getIcon(key);
@@ -105,7 +105,7 @@ public class EntitledSubPanel extends SubPanel
 		}
 		// if not : use text
 		else
-		{	String text = GuiConfiguration.getLanguage().getText(key);
+		{	String text = GuiConfiguration.getMiscConfiguration().getLanguage().getText(key);
 			setTitleText(text,tooltip);
 		}
 	}
