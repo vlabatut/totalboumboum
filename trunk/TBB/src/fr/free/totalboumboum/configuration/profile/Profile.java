@@ -71,6 +71,9 @@ public class Profile
 	{	this.spriteName = spriteName;
 	}
 
+	public PredefinedColor[] getSpriteColors()
+	{	return spriteColors;
+	}
 	public PredefinedColor getSpriteColor()
 	{	return spriteColors[0];
 	}
