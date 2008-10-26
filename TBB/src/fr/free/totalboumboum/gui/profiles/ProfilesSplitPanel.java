@@ -24,11 +24,6 @@ package fr.free.totalboumboum.gui.profiles;
 import java.awt.BorderLayout;
 import java.awt.Graphics;
 import java.awt.image.BufferedImage;
-import java.io.IOException;
-
-import javax.xml.parsers.ParserConfigurationException;
-
-import org.xml.sax.SAXException;
 
 import fr.free.totalboumboum.gui.common.MenuContainer;
 import fr.free.totalboumboum.gui.common.panel.SplitMenuPanel;
@@ -41,7 +36,7 @@ public class ProfilesSplitPanel extends SplitMenuPanel
 
 	private BufferedImage image;
 
-	public ProfilesSplitPanel(MenuContainer container, MenuPanel parent) throws IllegalArgumentException, SecurityException, ParserConfigurationException, SAXException, IOException, IllegalAccessException, NoSuchFieldException
+	public ProfilesSplitPanel(MenuContainer container, MenuPanel parent)
 	{	super(container,parent,BorderLayout.LINE_START,GuiTools.VERTICAL_SPLIT_RATIO);
 	
 		// background

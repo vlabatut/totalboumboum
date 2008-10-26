@@ -21,6 +21,7 @@ package fr.free.totalboumboum.configuration.profile;
  * 
  */
 
+import fr.free.totalboumboum.configuration.GameConstants;
 import fr.free.totalboumboum.engine.control.PlayerControl;
 
 public class Profile
@@ -30,7 +31,7 @@ public class Profile
 	/** sprite */
 	private String spritePack;
 	private String spriteName;
-	private PredefinedColor spriteColor;
+	private PredefinedColor[] spriteColors;
 	/** artificial intelligence */
 	private String aiName;
 	private String aiPackname;
@@ -44,7 +45,7 @@ public class Profile
 	{	name = null;
 		spritePack = null;
 		spriteName = null;
-		spriteColor = null;
+		spriteColors = new PredefinedColor[GameConstants.MAX_PROFILES_COUNT];
 		aiName = null;
 		aiPackname = null;
 	}
@@ -71,10 +72,10 @@ public class Profile
 	}
 
 	public PredefinedColor getSpriteColor()
-	{	return spriteColor;
+	{	return spriteColors[0];
 	}
 	public void setSpriteColor(PredefinedColor spriteColor)
-	{	this.spriteColor = spriteColor;
+	{	this.spriteColors[0] = spriteColor;
 	}
 
 	public boolean hasAi()

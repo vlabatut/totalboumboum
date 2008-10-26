@@ -22,20 +22,33 @@ package fr.free.totalboumboum.configuration.profile;
  */
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 public class ProfilesConfiguration
 {
 	/////////////////////////////////////////////////////////////////
 	// PROFILES				/////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	private ArrayList<String> profiles = new ArrayList<String>();
+	private HashMap<String,String> profiles = new HashMap<String,String>();
 	
-	public ArrayList<String> getProfiles()
+	public HashMap<String,String> getProfiles()
 	{	return profiles;	
 	}
 	
-	public void addProfile(String profile)
-	{	if(!profiles.contains(profile))
-			profiles.add(profile);
+	public void addProfile(String file, String name)
+	{	profiles.put(file,name);
+	}
+
+	/////////////////////////////////////////////////////////////////
+	// SELECTED				/////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	private final ArrayList<String> selected = new ArrayList<String>();
+	
+	public ArrayList<String> getSelected()
+	{	return selected;	
+	}
+	
+	public void addSelected(String file)
+	{	selected.add(file);		
 	}
 }

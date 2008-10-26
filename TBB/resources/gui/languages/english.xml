@@ -118,6 +118,26 @@
 			
 		</group>	
 
+<!-- PROFILES MENU -->	
+		<group name="Profiles">
+			<group name="Button">
+				<text name="Back" value="Back" tooltip="Go back to the main menu" />
+				<text name="Cancel" value="Cancel" tooltip="Cancel any modification and go back to the profile selection menu" />
+				<text name="Confirm" value="Confirm" tooltip="Confirm all the modifications and go back to the profile selection menu" />
+				<text name="Delete" value="Delete" tooltip="Delete the selected profile" />
+				<text name="Modify" value="Modify" tooltip="Edit the selected profile" />
+				<text name="New" value="New" tooltip="Create a new profile" />
+			</group>
+			
+			<group name="List">
+				<text name="Title" value="Profiles list" tooltip="List of all the existing profiles" />
+			</group>
+			
+			<group name="Edit">
+				<text name="Title" value="Edit a profile" tooltip="Modification of a profile" />
+			</group>
+		</group>	
+
 <!-- TOURNAMENT MENU -->	
 		<group name="Tournament">
 			<group name="Button">

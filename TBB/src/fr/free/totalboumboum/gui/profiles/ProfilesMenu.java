@@ -23,18 +23,11 @@ package fr.free.totalboumboum.gui.profiles;
 
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
-import java.io.IOException;
 
 import javax.swing.Box;
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
-import javax.xml.parsers.ParserConfigurationException;
 
-import org.xml.sax.SAXException;
-
-import fr.free.totalboumboum.configuration.Configuration;
-import fr.free.totalboumboum.configuration.engine.EngineConfiguration;
-import fr.free.totalboumboum.configuration.engine.EngineConfigurationSaver;
 import fr.free.totalboumboum.gui.common.panel.SplitMenuPanel;
 import fr.free.totalboumboum.gui.common.panel.menu.InnerMenuPanel;
 import fr.free.totalboumboum.gui.common.panel.menu.MenuPanel;
@@ -44,9 +37,13 @@ public class ProfilesMenu extends InnerMenuPanel
 {	private static final long serialVersionUID = 1L;
 	
 	@SuppressWarnings("unused")
-	private JButton buttonConfirm;
+	private JButton buttonBack;
 	@SuppressWarnings("unused")
-	private JButton buttonCancel;
+	private JButton buttonNew;
+	@SuppressWarnings("unused")
+	private JButton buttonModify;
+	@SuppressWarnings("unused")
+	private JButton buttonDelete;
 
 	private ProfilesData advancedData;
 
@@ -62,9 +59,11 @@ public class ProfilesMenu extends InnerMenuPanel
 
 		// buttons
 		add(Box.createVerticalGlue());
-		buttonConfirm = GuiTools.createSecondaryVerticalMenuButton(GuiTools.MENU_OPTIONS_BUTTON_CONFIRM,this);
+		buttonNew = GuiTools.createSecondaryVerticalMenuButton(GuiTools.MENU_PROFILES_BUTTON_NEW,this);
+		buttonModify = GuiTools.createSecondaryVerticalMenuButton(GuiTools.MENU_PROFILES_BUTTON_MODIFY,this);
+		buttonDelete = GuiTools.createSecondaryVerticalMenuButton(GuiTools.MENU_PROFILES_BUTTON_DELETE,this);
 		add(Box.createRigidArea(new Dimension(0,GuiTools.getSize(GuiTools.MENU_VERTICAL_BUTTON_SPACE))));
-		buttonCancel = GuiTools.createSecondaryVerticalMenuButton(GuiTools.MENU_OPTIONS_BUTTON_CANCEL,this);
+		buttonBack = GuiTools.createSecondaryVerticalMenuButton(GuiTools.MENU_PROFILES_BUTTON_BACK,this);
 		add(Box.createVerticalGlue());		
 
 		// panels
@@ -73,32 +72,17 @@ public class ProfilesMenu extends InnerMenuPanel
 	}
 	
 	public void actionPerformed(ActionEvent e)
-	{	if(e.getActionCommand().equals(GuiTools.MENU_OPTIONS_BUTTON_CONFIRM))
-		{	EngineConfiguration engineConfiguration = advancedData.getEngineConfiguration();
-			Configuration.setEngineConfiguration(engineConfiguration);
-			try
-			{	EngineConfigurationSaver.saveEngineConfiguration(Configuration.getEngineConfiguration());
-			}
-			catch (IllegalArgumentException e1)
-			{	e1.printStackTrace();
-			}
-			catch (SecurityException e1)
-			{	e1.printStackTrace();
-			}
-			catch (ParserConfigurationException e1)
-			{	e1.printStackTrace();
-			}
-			catch (SAXException e1)
-			{	e1.printStackTrace();
-			}
-			catch (IOException e1)
-			{	e1.printStackTrace();
-			}
-//TODO propager éventuellement au round (car il n'y a pas modification mais remplacement, donc si c déjà affecté à un player..
-			replaceWith(parent);
-	    }
-		else if(e.getActionCommand().equals(GuiTools.MENU_OPTIONS_BUTTON_CANCEL))
+	{	if(e.getActionCommand().equals(GuiTools.MENU_PROFILES_BUTTON_BACK))
 		{	replaceWith(parent);
+	    }
+		else if(e.getActionCommand().equals(GuiTools.MENU_PROFILES_BUTTON_NEW))
+		{	//TODO
+	    }
+		else if(e.getActionCommand().equals(GuiTools.MENU_PROFILES_BUTTON_MODIFY))
+		{	//TODO
+	    }
+		else if(e.getActionCommand().equals(GuiTools.MENU_PROFILES_BUTTON_DELETE))
+		{	//TODO
 	    }
 	} 
 	

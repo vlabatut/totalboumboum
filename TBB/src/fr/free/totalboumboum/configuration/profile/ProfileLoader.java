@@ -38,16 +38,15 @@ public class ProfileLoader
 	public static Profile loadProfile(String name) throws ParserConfigurationException, SAXException, IOException, IllegalArgumentException, SecurityException, IllegalAccessException, NoSuchFieldException, ClassNotFoundException
 	{	Profile result;
 		String profilesFolder = FileTools.getProfilesPath();
-		String individualFolder = profilesFolder+File.separator+name;
-		File dataFile = new File(individualFolder+File.separator+FileTools.FILE_PROFILE+FileTools.EXTENSION_DATA);
+		File dataFile = new File(profilesFolder+File.separator+name+FileTools.EXTENSION_DATA);
 		String schemaFolder = FileTools.getSchemasPath();
 		File schemaFile = new File(schemaFolder+File.separator+FileTools.FILE_PROFILE+FileTools.EXTENSION_SCHEMA);
 		Element root = XmlTools.getRootFromFile(dataFile,schemaFile);
-		result = loadProfileElement(root,individualFolder);
+		result = loadProfileElement(root);
 		return result;
 	}
 	
-	private static Profile loadProfileElement(Element root,String individualFolder) throws IllegalArgumentException, SecurityException, ParserConfigurationException, SAXException, IOException, IllegalAccessException, NoSuchFieldException, ClassNotFoundException
+	private static Profile loadProfileElement(Element root) throws IllegalArgumentException, SecurityException, ParserConfigurationException, SAXException, IOException, IllegalAccessException, NoSuchFieldException, ClassNotFoundException
 	{	Profile result = new Profile();
     	// general properties
     	Element general = root.getChild(XmlTools.ELT_GENERAL);

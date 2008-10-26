@@ -74,7 +74,7 @@ public class SequenceTournament extends AbstractTournament
 		}
 		
 		// NOTE vérifier si le nombre de joueurs sélectionnés correspond
-		setProfiles(Configuration.getProfilesConfiguration().getProfiles());
+		setProfiles(Configuration.getProfilesConfiguration().getSelected());
 		iterator = matches.iterator();
 		stats.init(this);
 	}

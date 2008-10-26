@@ -23,8 +23,9 @@ package fr.free.totalboumboum.configuration.profile;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Iterator;
+import java.util.Map.Entry;
 
 import javax.xml.parsers.ParserConfigurationException;
 
@@ -49,12 +50,15 @@ public class ProfilesConfigurationSaver
 
 	private static Element saveProfilesElement(ProfilesConfiguration profilesConfiguration)
 	{	Element result = new Element(XmlTools.ELT_PROFILES); 
-		ArrayList<String> profiles = profilesConfiguration.getProfiles();
-		Iterator<String> it = profiles.iterator();
+		HashMap<String,String> profiles = profilesConfiguration.getProfiles();
+		Iterator<Entry<String,String>> it = profiles.entrySet().iterator();
 		while(it.hasNext())
-		{	String profile = it.next();
+		{	Entry<String,String> entry = it.next();
+			String file = entry.getKey();
+			String name = entry.getValue();
 			Element element = new Element(XmlTools.ELT_PROFILE);
-			element.setAttribute(XmlTools.ATT_VALUE,profile);
+			element.setAttribute(XmlTools.ATT_FILE,file);
+			element.setAttribute(XmlTools.ATT_NAME,name);
 			result.addContent(element);
 		}
 		return result;

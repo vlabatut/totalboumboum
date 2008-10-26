@@ -131,6 +131,18 @@ public class GuiTools
 			public static final String MENU_OPTIONS_VIDEO_LINE_PANEL_DIMENSION = "MenuOptionsVideoLinePanelDimension";
 			public static final String MENU_OPTIONS_VIDEO_LINE_PLUS = "MenuOptionsVideoLinePlus";
 			public static final String MENU_OPTIONS_VIDEO_LINE_SMOOTH_GRAPHICS = "MenuOptionsVideoLineSmoothGraphics";
+	/* OPTIONS */
+		/* BUTTON */
+		public static final String MENU_PROFILES_BUTTON_BACK = "MenuProfilesButtonBack";
+		public static final String MENU_PROFILES_BUTTON_CANCEL = "MenuProfilesButtonCancel";
+		public static final String MENU_PROFILES_BUTTON_CONFIRM = "MenuProfilesButtonConfirm";
+		public static final String MENU_PROFILES_BUTTON_DELETE = "MenuProfilesButtonDelete";
+		public static final String MENU_PROFILES_BUTTON_MODIFY = "MenuProfilesButtonModify";
+		public static final String MENU_PROFILES_BUTTON_NEW = "MenuProfilesButtonNew";
+		/* LIST */
+		public static final String MENU_PROFILES_LIST_TITLE = "MenuProfilesListTitle";
+		/* EDIT */
+		public static final String MENU_PROFILES_EDIT_TITLE = "MenuProfilesEditTitle";		
 	/* TOURNAMENT */	
 	public static final String MENU_TOURNAMENT_BUTTON_BACK = "MenuTournamentButtonBack";
 	public static final String MENU_TOURNAMENT_BUTTON_CONTINUE = "MenuTournamentButtonContinue";

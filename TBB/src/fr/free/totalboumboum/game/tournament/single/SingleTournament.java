@@ -46,7 +46,7 @@ public class SingleTournament extends AbstractTournament
 	{	begun = true;
 		pointProcessor = new PointsTotal();
 		// NOTE vérifier si le nombre de joueurs sélectionnés correspond
-		setProfiles(Configuration.getProfilesConfiguration().getProfiles());
+		setProfiles(Configuration.getProfilesConfiguration().getSelected());
 		stats.init(this);
 	}
 
