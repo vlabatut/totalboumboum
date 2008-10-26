@@ -129,15 +129,25 @@
 				<text name="New" value="New" tooltip="Create a new profile" />
 			</group>
 			
+			<group name="Edit">
+				<text name="Title" value="Edit a profile" tooltip="Modification of a profile" />
+			</group>
+
 			<group name="List">
 				<text name="Title" value="Profiles list" tooltip="List of all the existing profiles" />
 				<text name="PageDown" value="Page down" tooltip="Go to the next profiles page" />
 				<text name="PageUp" value="Page up" tooltip="Go back to the previous profiles page" />
 			</group>
 			
-			<group name="Edit">
-				<text name="Title" value="Edit a profile" tooltip="Modification of a profile" />
+			<group name="Preview" >
+				<text name="AiName" value="AI name" tooltip="Name of the artificial intelligence" />
+				<text name="AiPack" value="AI package" tooltip="Name of the artificial intelligence package" />
+				<text name="Color" value="Color" tooltip="Color of the character" />
+				<text name="HeroName" value="Hero name" tooltip="Name of the character" />
+				<text name="HeroPack" value="Hero package" tooltip="Name of the character package" />
+				<text name="Name" value="Player name" tooltip="Name of the player" />
 			</group>
+
 		</group>	
 
 <!-- TOURNAMENT MENU -->	
