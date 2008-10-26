@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <profiles xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="..\..\..\resources\schemas\profiles.xsd">
+
 	<profile name="Human" file="1"/>
 
 	<profile name="Basman+Sandalli"  file="2"/>
@@ -20,5 +21,6 @@
 	<profile name="Sahin+Yildirim" file="17" />
 
 	<profile name="Promeneur" file="18"/>
+	<profile name="Ne sert à rien" file="19"/>
 </profiles>
 

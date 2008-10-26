@@ -129,14 +129,23 @@
 				<text name="New" value="Nouveau" tooltip="Créer un nouveau profil" />
 			</group>
 			
+			<group name="Edit">
+				<text name="Title" value="Éditer un profil" tooltip="Modification d'un profil" />
+			</group>
+
 			<group name="List">
 				<text name="Title" value="Liste des profils" tooltip="Liste de tous les profils existants" />
 				<text name="PageDown" value="Descendre" tooltip="Revenir à la page de profils suivante" />
 				<text name="PageUp" value="Monter" tooltip="Aller à la page de profils précédente" />
 			</group>
 			
-			<group name="Edit">
-				<text name="Title" value="Éditer un profil" tooltip="Modification d'un profil" />
+			<group name="Preview" >
+				<text name="AiName" value="Nom de l'IA" tooltip="Nom de l'intelligence artificielle" />
+				<text name="AiPack" value="Paquet de l'IA" tooltip="Nom du paquet contenant l'intelligence artificielle" />
+				<text name="Color" value="Couleur" tooltip="Couleur du personnage" />
+				<text name="HeroName" value="Nom du personnage" tooltip="Nom du personnage contrôlé par le joueur" />
+				<text name="HeroPack" value="Paquet du personnage" tooltip="Nom du paquet contenant le personnage contrôlé par le joueur" />
+				<text name="Name" value="Nom du joueur" tooltip="Nom du joueur correspondant à ce profil" />
 			</group>
 			
 		</group>	

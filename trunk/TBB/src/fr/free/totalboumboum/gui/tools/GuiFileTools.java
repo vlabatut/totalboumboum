@@ -32,6 +32,7 @@ public class GuiFileTools
 	public final static String FILE_AUTHOR = "author.png";
 	public final static String FILE_AUTOFIRE = "autofire.png";
 	public final static String FILE_BOMBS = "bombs.png";
+	public final static String FILE_COLOR = "color.png";
 	public final static String FILE_COMMAND = "command.png";
 	public final static String FILE_COMPUTER = "computer.png";
 	public final static String FILE_CONFRONTATIONS = "confrontations.png";
@@ -45,6 +46,7 @@ public class GuiFileTools
 	public final static String FILE_FRAGS = "frags.png";
 	public final static String FILE_FRAME = "frame.png";
 	public final static String FILE_GUI = "gui";
+	public final static String FILE_HERO = "hero.png";
 	public final static String FILE_HUMAN = "human.png";
 	public final static String FILE_INITIAL = "initial.png";
 	public final static String FILE_INSTANCE = "instance.png";

@@ -44,10 +44,13 @@ import fr.free.totalboumboum.configuration.engine.EngineConfiguration;
 import fr.free.totalboumboum.configuration.profile.Portraits;
 import fr.free.totalboumboum.configuration.profile.Profile;
 import fr.free.totalboumboum.configuration.profile.ProfilesConfiguration;
+import fr.free.totalboumboum.engine.container.level.HollowLevel;
 import fr.free.totalboumboum.engine.content.sprite.Sprite;
 import fr.free.totalboumboum.game.match.Match;
+import fr.free.totalboumboum.game.round.Round;
 import fr.free.totalboumboum.gui.common.panel.SplitMenuPanel;
 import fr.free.totalboumboum.gui.common.panel.data.EntitledDataPanel;
+import fr.free.totalboumboum.gui.common.subpanel.EntitledSubPanelTable;
 import fr.free.totalboumboum.gui.common.subpanel.Line;
 import fr.free.totalboumboum.gui.common.subpanel.SubPanel;
 import fr.free.totalboumboum.gui.common.subpanel.UntitledSubPanelLines;
@@ -83,11 +86,16 @@ public class ProfilesData extends EntitledDataPanel implements MouseListener
 	private static final int VIEW_LINE_COLOR15 = 17;
 	private static final int VIEW_LINE_COLOR16 = 18;
 
+	private static final int LIST_PANEL_INDEX = 0;
+	private static final int PREVIEW_PANEL_INDEX = 2;
+	
+	private ArrayList<UntitledSubPanelTable> listPanels;
 	private int currentPage = 0;
+	private int selectedRow = -1;
 	
 	private ProfilesConfiguration profilesConfiguration;
-	private UntitledSubPanelTable listPanel;
-	private SubPanel previewPanel;
+	private SubPanel mainPanel;
+	private UntitledSubPanelTable previewPanel;
 	private ArrayList<Entry<String,String>> profiles;
 	
 	public ProfilesData(SplitMenuPanel container)
@@ -97,31 +105,31 @@ public class ProfilesData extends EntitledDataPanel implements MouseListener
 		setTitleKey(GuiTools.MENU_PROFILES_LIST_TITLE);
 	
 		// data
-		{	SubPanel infoPanel = new SubPanel(dataWidth,dataHeight);
-			{	BoxLayout layout = new BoxLayout(infoPanel,BoxLayout.LINE_AXIS); 
-				infoPanel.setLayout(layout);
+		{	mainPanel = new SubPanel(dataWidth,dataHeight);
+			{	BoxLayout layout = new BoxLayout(mainPanel,BoxLayout.LINE_AXIS); 
+				mainPanel.setLayout(layout);
 			}
 			
 			int margin = GuiTools.panelMargin;
 			int leftWidth = (int)(dataWidth*SPLIT_RATIO); 
 			int rightWidth = dataWidth - leftWidth - margin; 
-			infoPanel.setOpaque(false);
+			mainPanel.setOpaque(false);
 			profilesConfiguration = Configuration.getProfilesConfiguration().copy();
 			initProfiles();
 			
 			// list panel
-			{	makeListPanel(leftWidth,dataHeight);
-				infoPanel.add(listPanel);
+			{	makeListPanels(leftWidth,dataHeight);
+				mainPanel.add(listPanels.get(currentPage));
 			}
 			
-			infoPanel.add(Box.createHorizontalGlue());
+			mainPanel.add(Box.createHorizontalGlue());
 			
 			// preview panel
 			{	makePreviewPanel(rightWidth,dataHeight);
-				infoPanel.add(previewPanel);
+				mainPanel.add(previewPanel);
 			}
 			
-			setDataPart(infoPanel);
+			setDataPart(mainPanel);
 			
 		}
 	}
@@ -140,145 +148,101 @@ public class ProfilesData extends EntitledDataPanel implements MouseListener
 		});
 	}
 	
-	public void makeListPanel(int width, int height)
+	public void makeListPanels(int width, int height)
 	{	int lines = LIST_LINE_COUNT;
 		int cols = 1;
-		listPanel = new UntitledSubPanelTable(width,height,cols,lines,false);
-		listPanel.setSubColumnsMaxWidth(0,Integer.MAX_VALUE);
+		listPanels = new ArrayList<UntitledSubPanelTable>();
 		
-		// data
-		for(int line=1;line<LIST_LINE_COUNT-1;line++)
-		{	Color bg = GuiTools.COLOR_TABLE_REGULAR_BACKGROUND;
-			Entry<String,String> profile = profiles.get((line-1)+currentPage*(LIST_LINE_COUNT-2));
-			String name = profile.getValue();
-			listPanel.setLabelBackground(line,0,bg);
-			listPanel.setLabelText(line,0,name,name);
-			JLabel label = listPanel.getLabel(line,0);
-			label.addMouseListener(this);
-		}
+		for(int panelIndex=0;panelIndex<getPageCount();panelIndex++)
+		{	UntitledSubPanelTable listPanel = new UntitledSubPanelTable(width,height,cols,lines,false);
+			listPanel.setSubColumnsMaxWidth(0,Integer.MAX_VALUE);
 		
-		// page up
-		{	Color bg = GuiTools.COLOR_TABLE_HEADER_BACKGROUND;
-			listPanel.setLabelBackground(LIST_LINE_PREVIOUS,0,bg);
-			String key = GuiTools.MENU_PROFILES_LIST_PAGEUP;
-			listPanel.setLabelKey(LIST_LINE_PREVIOUS,0,key,true);
-			JLabel label = listPanel.getLabel(LIST_LINE_PREVIOUS,0);
-			label.addMouseListener(this);
-		}
-		{	Color bg = GuiTools.COLOR_TABLE_HEADER_BACKGROUND;
-			listPanel.setLabelBackground(LIST_LINE_NEXT,0,bg);
-			String key = GuiTools.MENU_PROFILES_LIST_PAGEDOWN;
-			listPanel.setLabelKey(LIST_LINE_NEXT,0,key,true);
-			JLabel label = listPanel.getLabel(LIST_LINE_NEXT,0);
-			label.addMouseListener(this);
+			// data
+			int line = 1;
+			int profileIndex = panelIndex*(LIST_LINE_COUNT-2);
+			while(line<LIST_LINE_NEXT && profileIndex<profiles.size())
+			{	Color bg = GuiTools.COLOR_TABLE_REGULAR_BACKGROUND;
+				Entry<String,String> profile = profiles.get(profileIndex);
+				String name = profile.getValue();
+				listPanel.setLabelBackground(line,0,bg);
+				listPanel.setLabelText(line,0,name,name);
+				JLabel label = listPanel.getLabel(line,0);
+				label.addMouseListener(this);
+				profileIndex++;
+				line++;
+			}			
+			// page up
+			{	Color bg = GuiTools.COLOR_TABLE_HEADER_BACKGROUND;
+				listPanel.setLabelBackground(LIST_LINE_PREVIOUS,0,bg);
+				String key = GuiTools.MENU_PROFILES_LIST_PAGEUP;
+				listPanel.setLabelKey(LIST_LINE_PREVIOUS,0,key,true);
+				JLabel label = listPanel.getLabel(LIST_LINE_PREVIOUS,0);
+				label.addMouseListener(this);
+			}
+			// page down
+			{	Color bg = GuiTools.COLOR_TABLE_HEADER_BACKGROUND;
+				listPanel.setLabelBackground(LIST_LINE_NEXT,0,bg);
+				String key = GuiTools.MENU_PROFILES_LIST_PAGEDOWN;
+				listPanel.setLabelKey(LIST_LINE_NEXT,0,key,true);
+				JLabel label = listPanel.getLabel(LIST_LINE_NEXT,0);
+				label.addMouseListener(this);
+			}
+			listPanels.add(listPanel);
 		}
 	}
 	
 	public void makePreviewPanel(int width, int height)
-	{	int lines = LIST_LINE_COUNT;
-		previewPanel = new UntitledSubPanelLines(width,height,lines,false);
+	{	int lines = 21;
+		int colSubs = 2;
+		int colGroups = 1;
+		previewPanel = new UntitledSubPanelTable(width,height,colGroups,colSubs,lines,true);
 		
 		// data
-		
-	}
-	
-/*			
-			
-			
-			int lines = 20;
-			int w = getDataWidth();
-			int h = getDataHeight();
-			optionsPanel = new UntitledSubPanelLines(w,h,lines,false);
-			int tWidth = (int)(w*0.66);
-			
-			// data
-			{	engineConfiguration = Configuration.getEngineConfiguration().copy();;
-				
-				// #0 FPS
-				{	Line ln = optionsPanel.getLine(LINE_FPS);
-					ln.addLabel(0);
-					ln.addLabel(0);
-					ln.addLabel(0);
-					int col = 0;
-					// name
-					{	ln.setLabelMaxWidth(col,tWidth);
-						ln.setLabelPreferredWidth(col,tWidth);
-						ln.setLabelKey(col,GuiTools.MENU_OPTIONS_ADVANCED_LINE_FPS_TITLE,false);
-						col++;
-					}
-					// minus button
-					{	ln.setLabelMaxWidth(col,ln.getHeight());
-						ln.setLabelKey(col,GuiTools.MENU_OPTIONS_ADVANCED_LINE_FPS_MINUS,true);
-						ln.getLabel(col).addMouseListener(this);
-						col++;
-					}
-					// value
-					{	ln.setLabelMaxWidth(col,Integer.MAX_VALUE);
-						setFps();
-						col++;
-					}
-					// plus button
-					{	ln.setLabelMaxWidth(col,ln.getHeight());
-						ln.setLabelKey(col,GuiTools.MENU_OPTIONS_ADVANCED_LINE_FPS_PLUS,true);
-						ln.getLabel(col).addMouseListener(this);
-						col++;
-					}
-				}
-				
-				// #1 AUTO ADJUST
-				{	Line ln = optionsPanel.getLine(LINE_ADJUST);
-					ln.addLabel(0);
-					int col = 0;
-					// name
-					{	ln.setLabelMaxWidth(col,tWidth);
-						ln.setLabelPreferredWidth(col,tWidth);
-						ln.setLabelKey(col,GuiTools.MENU_OPTIONS_ADVANCED_LINE_ADJUST_TITLE,false);
-						col++;
-					}
-					// value
-					{	ln.setLabelMaxWidth(col,Integer.MAX_VALUE);
-						setAdjust();
-						ln.getLabel(col).addMouseListener(this);
-						col++;
-					}
-				}
-				
-				// #2 GAME SPEED
-				{	Line ln = optionsPanel.getLine(LINE_SPEED);
-					ln.addLabel(0);
-					ln.addLabel(0);
-					ln.addLabel(0);
-					int col = 0;
-					// name
-					{	ln.setLabelMaxWidth(col,tWidth);
-						ln.setLabelPreferredWidth(col,tWidth);
-						ln.setLabelKey(col,GuiTools.MENU_OPTIONS_ADVANCED_LINE_SPEED_TITLE,false);
-						col++;
-					}
-					// minus button
-					{	ln.setLabelMaxWidth(col,ln.getHeight());
-						ln.setLabelKey(col,GuiTools.MENU_OPTIONS_ADVANCED_LINE_SPEED_MINUS,true);
-						ln.getLabel(col).addMouseListener(this);
-						col++;
-					}
-					// value
-					{	ln.setLabelMaxWidth(col,Integer.MAX_VALUE);
-						setGameSpeed();
-						col++;
-					}
-					// plus button
-					{	ln.setLabelMaxWidth(col,ln.getHeight());
-						ln.setLabelKey(col,GuiTools.MENU_OPTIONS_ADVANCED_LINE_SPEED_PLUS,true);
-						ln.getLabel(col).addMouseListener(this);
-						col++;
-					}
-				}
+		String keys[] = 
+		{	GuiTools.MENU_PROFILES_PREVIEW_NAME,
+			GuiTools.MENU_PROFILES_PREVIEW_AINAME,
+			GuiTools.MENU_PROFILES_PREVIEW_AIPACK,
+			GuiTools.MENU_PROFILES_PREVIEW_HERONAME,
+			GuiTools.MENU_PROFILES_PREVIEW_HEROPACK,
+			GuiTools.MENU_PROFILES_PREVIEW_COLOR,			
+			GuiTools.MENU_PROFILES_PREVIEW_COLOR,			
+			GuiTools.MENU_PROFILES_PREVIEW_COLOR,			
+			GuiTools.MENU_PROFILES_PREVIEW_COLOR,			
+			GuiTools.MENU_PROFILES_PREVIEW_COLOR,			
+			GuiTools.MENU_PROFILES_PREVIEW_COLOR,			
+			GuiTools.MENU_PROFILES_PREVIEW_COLOR,			
+			GuiTools.MENU_PROFILES_PREVIEW_COLOR,			
+			GuiTools.MENU_PROFILES_PREVIEW_COLOR,			
+			GuiTools.MENU_PROFILES_PREVIEW_COLOR,			
+			GuiTools.MENU_PROFILES_PREVIEW_COLOR,			
+			GuiTools.MENU_PROFILES_PREVIEW_COLOR,			
+			GuiTools.MENU_PROFILES_PREVIEW_COLOR,			
+			GuiTools.MENU_PROFILES_PREVIEW_COLOR,			
+			GuiTools.MENU_PROFILES_PREVIEW_COLOR,			
+			GuiTools.MENU_PROFILES_PREVIEW_COLOR			
+		};
+		for(int line=0;line<keys.length;line++)
+		{	int colSub = 0;
+			{	previewPanel.setLabelKey(line,colSub,keys[line],true);
+				Color fg = GuiTools.COLOR_TABLE_HEADER_FOREGROUND;
+				previewPanel.setLabelForeground(line,0,fg);
+				Color bg = GuiTools.COLOR_TABLE_HEADER_BACKGROUND;
+				previewPanel.setLabelBackground(line,colSub,bg);
+				colSub++;
 			}
-			
-			setDataPart(optionsPanel);
-		}
+			{	String text = null;
+				String tooltip = GuiConfiguration.getMiscConfiguration().getLanguage().getText(keys[line]+GuiTools.TOOLTIP);
+				previewPanel.setLabelText(line,colSub,text,tooltip);
+				if(line>0)
+				{	Color bg = GuiTools.COLOR_TABLE_REGULAR_BACKGROUND;
+					previewPanel.setLabelBackground(line,colSub,bg);
+				}
+				colSub++;
+			}
+		}		
+		previewPanel.setSubColumnsMaxWidth(1,Integer.MAX_VALUE);
 	}
-	
+/*		
 	private void setAdjust()
 	{	boolean adjust = engineConfiguration.getAutoFps();
 		String key;
@@ -348,63 +312,65 @@ public class ProfilesData extends EntitledDataPanel implements MouseListener
 	}
 	@Override
 	public void mousePressed(MouseEvent e)
-	{	
-/*		
-		JLabel label = (JLabel)e.getComponent();
-		int[] pos = optionsPanel.getLabelPosition(label);
+	{	JLabel label = (JLabel)e.getComponent();
+		int[] pos = listPanels.get(currentPage).getLabelPosition(label);
 		switch(pos[0])
-		{	// panel dimension
-			case LINE_FPS:
-				int fps = engineConfiguration.getFps();
-				// minus
-				if(pos[1]==1)
-				{	if(fps>=35)
-						fps = fps-5;
+		{	// previous page
+			case LIST_LINE_PREVIOUS:
+				if(currentPage>0)
+				{	unselectList();
+					currentPage--;
+					refreshList();
 				}
-				// plus
-				else //if(pos[1]==3)
-				{	if(fps<=95)
-						fps = fps + 5;
-				}
-				// common
-				fps = 5*(fps/5);
-				engineConfiguration.setFps(fps);
-				setFps();
 				break;
-			// border
-			case LINE_ADJUST:
-				boolean adjust = !engineConfiguration.getAutoFps();
-				engineConfiguration.setAutoFps(adjust);
-				setAdjust();
+			// next page
+			case LIST_LINE_NEXT:
+				if(currentPage<getPageCount()-1)
+				{	unselectList();
+					currentPage++;
+					refreshList();
+				}
 				break;
-			// smooth graphics
-			case LINE_SPEED:
-				double speed = engineConfiguration.getSpeedCoeff();
-				int index;
-				// minus
-				if(pos[1]==1)
-				{	index = 0;
-					while(speedValues[index]<speed && index<speedValues.length)
-						index++;
-					if(index>0)
-						index --;
-				}
-				// plus
-				else //if(pos[1]==3)
-				{	index = speedValues.length-1;
-					while(speedValues[index]>speed && index>=0)
-						index--;
-					if(index<speedValues.length-1)
-						index ++;
-				}
-				// common
-				engineConfiguration.setSpeedCoeff(speedValues[index]);
-				setGameSpeed();
+			// profile selected
+			default:
+				unselectList();
+				selectedRow = pos[0];
+				listPanels.get(currentPage).setLabelBackground(selectedRow,0,GuiTools.COLOR_TABLE_SELECTED_BACKGROUND);
+				refreshPreview();
 		}
-*/
 	}
 	@Override
 	public void mouseReleased(MouseEvent e)
 	{	
+	}
+	
+	private int getPageCount()
+	{	int result = profiles.size()/(LIST_LINE_COUNT-2);
+		if(profiles.size()%(LIST_LINE_COUNT-2)>0)
+			result++;
+		else if(result==0)
+			result = 1;
+		return result;
+	}
+	
+	private void unselectList()
+	{	if(selectedRow!=-1)
+		{	listPanels.get(currentPage).setLabelBackground(selectedRow,0,GuiTools.COLOR_TABLE_REGULAR_BACKGROUND);
+			selectedRow = -1;
+		}		
+	}
+	
+	private void refreshList()
+	{	
+System.out.println("sdfsdfsdfsdfsdf");		
+		mainPanel.remove(LIST_PANEL_INDEX);
+		mainPanel.add(listPanels.get(currentPage),LIST_PANEL_INDEX);
+		mainPanel.validate();
+		mainPanel.repaint();
+	}
+	
+	private void refreshPreview()
+	{
+		
 	}
 }
