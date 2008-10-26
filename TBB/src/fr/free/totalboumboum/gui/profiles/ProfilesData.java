@@ -25,6 +25,7 @@ import java.awt.Color;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.image.BufferedImage;
+import java.io.IOException;
 import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -38,11 +39,16 @@ import java.util.Map.Entry;
 import javax.swing.Box;
 import javax.swing.BoxLayout;
 import javax.swing.JLabel;
+import javax.xml.parsers.ParserConfigurationException;
+
+import org.xml.sax.SAXException;
 
 import fr.free.totalboumboum.configuration.Configuration;
 import fr.free.totalboumboum.configuration.engine.EngineConfiguration;
 import fr.free.totalboumboum.configuration.profile.Portraits;
+import fr.free.totalboumboum.configuration.profile.PredefinedColor;
 import fr.free.totalboumboum.configuration.profile.Profile;
+import fr.free.totalboumboum.configuration.profile.ProfileLoader;
 import fr.free.totalboumboum.configuration.profile.ProfilesConfiguration;
 import fr.free.totalboumboum.engine.container.level.HollowLevel;
 import fr.free.totalboumboum.engine.content.sprite.Sprite;
@@ -66,25 +72,13 @@ public class ProfilesData extends EntitledDataPanel implements MouseListener
 	private static final int LIST_LINE_COUNT = 20;
 	private static final int LIST_LINE_PREVIOUS = 0;
 	private static final int LIST_LINE_NEXT = LIST_LINE_COUNT-1;
-	private static final int VIEW_LINE_HERO = 0;
-	private static final int VIEW_LINE_NAME = 1;
-	private static final int VIEW_LINE_AI = 2;
-	private static final int VIEW_LINE_COLOR01 = 3;
-	private static final int VIEW_LINE_COLOR02 = 4;
-	private static final int VIEW_LINE_COLOR03 = 5;
-	private static final int VIEW_LINE_COLOR04 = 6;
-	private static final int VIEW_LINE_COLOR05 = 7;
-	private static final int VIEW_LINE_COLOR06 = 8;
-	private static final int VIEW_LINE_COLOR07 = 9;
-	private static final int VIEW_LINE_COLOR08 = 10;
-	private static final int VIEW_LINE_COLOR09 = 11;
-	private static final int VIEW_LINE_COLOR10 = 12;
-	private static final int VIEW_LINE_COLOR11 = 13;
-	private static final int VIEW_LINE_COLOR12 = 14;
-	private static final int VIEW_LINE_COLOR13 = 15;
-	private static final int VIEW_LINE_COLOR14 = 16;
-	private static final int VIEW_LINE_COLOR15 = 17;
-	private static final int VIEW_LINE_COLOR16 = 18;
+
+	private static final int VIEW_LINE_NAME = 0;
+	private static final int VIEW_LINE_AI_NAME = 1;
+	private static final int VIEW_LINE_AI_PACK = 2;
+	private static final int VIEW_LINE_HERO_NAME = 3;
+	private static final int VIEW_LINE_HERO_PACK = 4;
+	private static final int VIEW_LINE_COLOR = 5;
 
 	private static final int LIST_PANEL_INDEX = 0;
 	private static final int PREVIEW_PANEL_INDEX = 2;
@@ -239,8 +233,73 @@ public class ProfilesData extends EntitledDataPanel implements MouseListener
 				}
 				colSub++;
 			}
+		}
+		int maxWidth = width-3*GuiTools.subPanelMargin-previewPanel.getHeaderHeight();
+		previewPanel.setSubColumnsMaxWidth(1,maxWidth);
+		previewPanel.setSubColumnsPreferredWidth(1,maxWidth);
+	}
+	
+	private void refreshPreview()
+	{	String values[] = new String[21];
+		// no player selected
+		if(selectedRow<0)
+		{	for(int i=0;i<values.length;i++)
+				values[i] = null;			
+		}
+		// one player selected
+		else
+		{	Entry<String,String> entry = profiles.get((selectedRow-1)+currentPage*(LIST_LINE_COUNT-2));
+			Profile profile = null;
+			try
+			{	profile = ProfileLoader.loadProfile(entry.getKey());
+			}
+			catch (IllegalArgumentException e)
+			{	e.printStackTrace();
+			}
+			catch (SecurityException e)
+			{	e.printStackTrace();
+			}
+			catch (ParserConfigurationException e)
+			{	e.printStackTrace();
+			}
+			catch (SAXException e)
+			{	e.printStackTrace();
+			}
+			catch (IOException e)
+			{	e.printStackTrace();
+			} 
+			catch (IllegalAccessException e)
+			{	e.printStackTrace();
+			}
+			catch (NoSuchFieldException e)
+			{	e.printStackTrace();
+			}
+			catch (ClassNotFoundException e)
+			{	e.printStackTrace();
+			}
+			values[VIEW_LINE_NAME] = profile.getName();
+			values[VIEW_LINE_AI_NAME]= profile.getAiName();
+			values[VIEW_LINE_AI_PACK] = profile.getAiPackname();
+			values[VIEW_LINE_HERO_NAME] = profile.getSpriteName();
+			values[VIEW_LINE_HERO_PACK] = profile.getSpritePack();
+			PredefinedColor[] colors = profile.getSpriteColors();
+			for(int i=0;i<colors.length;i++)
+			{	if(colors[i]!=null)
+					values[VIEW_LINE_COLOR+i] = colors[i].toString();
+				else
+					values[VIEW_LINE_COLOR+i] = null;
+			}
+		}
+		// common
+		for(int line=0;line<values.length;line++)
+		{	int colSub = 1;
+			String text = values[line];
+			String tooltip = text;
+			previewPanel.setLabelText(line,colSub,text,tooltip);
 		}		
-		previewPanel.setSubColumnsMaxWidth(1,Integer.MAX_VALUE);
+		
+//		mainPanel.validate();
+//		mainPanel.repaint();
 	}
 /*		
 	private void setAdjust()
@@ -357,20 +416,15 @@ public class ProfilesData extends EntitledDataPanel implements MouseListener
 	{	if(selectedRow!=-1)
 		{	listPanels.get(currentPage).setLabelBackground(selectedRow,0,GuiTools.COLOR_TABLE_REGULAR_BACKGROUND);
 			selectedRow = -1;
+			refreshPreview();
 		}		
 	}
 	
 	private void refreshList()
-	{	
-System.out.println("sdfsdfsdfsdfsdf");		
-		mainPanel.remove(LIST_PANEL_INDEX);
+	{	mainPanel.remove(LIST_PANEL_INDEX);
 		mainPanel.add(listPanels.get(currentPage),LIST_PANEL_INDEX);
 		mainPanel.validate();
 		mainPanel.repaint();
 	}
 	
-	private void refreshPreview()
-	{
-		
-	}
 }
