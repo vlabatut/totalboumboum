@@ -118,6 +118,27 @@
 			
 		</group>	
 
+<!-- PROFILES MENU -->	
+		<group name="Profiles">
+			<group name="Button">
+				<text name="Back" value="Retour" tooltip="Revenir au menu principal" />
+				<text name="Cancel" value="Annuler" tooltip="Annuler les modifications apportées à ce profil" />
+				<text name="Confirm" value="Confirmer" tooltip="Valider les modifications apportées à ce profil" />
+				<text name="Delete" value="Supprimer" tooltip="Supprimer le profil sélectionné" />
+				<text name="Modify" value="Modifier" tooltip="Éditer le profil sélectionné" />
+				<text name="New" value="Nouveau" tooltip="Créer un nouveau profil" />
+			</group>
+			
+			<group name="List">
+				<text name="Title" value="Liste des profils" tooltip="Liste de tous les profils existants" />
+			</group>
+			
+			<group name="Edit">
+				<text name="Title" value="Éditer un profil" tooltip="Modification d'un profil" />
+			</group>
+			
+		</group>	
+
 <!-- TOURNAMENT MENU -->	
 		<group name="Tournament">
 			<group name="Button">
@@ -131,8 +152,9 @@
 				<text name="Start" value="Commencer" tooltip="Commencer le tournoi" />
 			</group>
 		</group>	
-		
+
 	</group>
+
 
 	<group name="Game" >
 

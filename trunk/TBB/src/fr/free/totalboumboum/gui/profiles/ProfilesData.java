@@ -39,9 +39,29 @@ import fr.free.totalboumboum.gui.tools.GuiTools;
 public class ProfilesData extends EntitledDataPanel implements MouseListener
 {	
 	private static final long serialVersionUID = 1L;
-	private static final int LINE_FPS = 0;
-	private static final int LINE_ADJUST = 1;
-	private static final int LINE_SPEED = 2;
+	
+	private static final int LIST_LINE_COUNT = 20;
+	private static final int LIST_LINE_PREVIOUS = 0;
+	private static final int LIST_LINE_NEXT = LIST_LINE_COUNT-1;
+	private static final int VIEW_LINE_HERO = 0;
+	private static final int VIEW_LINE_NAME = 1;
+	private static final int VIEW_LINE_AI = 2;
+	private static final int VIEW_LINE_COLOR01 = 3;
+	private static final int VIEW_LINE_COLOR02 = 4;
+	private static final int VIEW_LINE_COLOR03 = 5;
+	private static final int VIEW_LINE_COLOR04 = 6;
+	private static final int VIEW_LINE_COLOR05 = 7;
+	private static final int VIEW_LINE_COLOR06 = 8;
+	private static final int VIEW_LINE_COLOR07 = 9;
+	private static final int VIEW_LINE_COLOR08 = 10;
+	private static final int VIEW_LINE_COLOR09 = 11;
+	private static final int VIEW_LINE_COLOR10 = 12;
+	private static final int VIEW_LINE_COLOR11 = 13;
+	private static final int VIEW_LINE_COLOR12 = 14;
+	private static final int VIEW_LINE_COLOR13 = 15;
+	private static final int VIEW_LINE_COLOR14 = 16;
+	private static final int VIEW_LINE_COLOR15 = 17;
+	private static final int VIEW_LINE_COLOR16 = 18;
 
 	private UntitledSubPanelLines optionsPanel;
 	private EngineConfiguration engineConfiguration;
@@ -69,7 +89,7 @@ public class ProfilesData extends EntitledDataPanel implements MouseListener
 	{	super(container);
 
 		// title
-		{	setTitleKey(GuiTools.MENU_OPTIONS_ADVANCED_TITLE);
+		{	setTitleKey(GuiTools.MENU_PROFILES_LIST_TITLE);
 		}
 	
 		// data

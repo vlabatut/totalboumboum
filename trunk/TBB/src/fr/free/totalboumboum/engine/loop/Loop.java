@@ -714,10 +714,14 @@ System.out.println();
 		}
 	}
 	public void initCelebrationDelay()
-	{	Player player = players.get(0);
-		Sprite sprite = player.getSprite();
-		StateAbility ability = sprite.computeAbility(StateAbility.HERO_CELEBRATION_DURATION);
-		celebrationDelay = ability.getStrength();
+	{	if(players.size()>0)
+		{	Player player = players.get(0);
+			Sprite sprite = player.getSprite();
+			StateAbility ability = sprite.computeAbility(StateAbility.HERO_CELEBRATION_DURATION);
+			celebrationDelay = ability.getStrength();
+		}
+		else
+			celebrationDelay = 1;
 	}
 	
 	public void reportVictory(int index)

@@ -43,6 +43,7 @@ import fr.free.totalboumboum.gui.data.configuration.GuiConfiguration;
 import fr.free.totalboumboum.gui.game.match.MatchSplitPanel;
 import fr.free.totalboumboum.gui.menus.tournament.TournamentSplitPanel;
 import fr.free.totalboumboum.gui.options.OptionsSplitPanel;
+import fr.free.totalboumboum.gui.profiles.ProfilesSplitPanel;
 import fr.free.totalboumboum.gui.tools.GuiTools;
 
 public class MainMenu extends SimpleMenuPanel
@@ -51,11 +52,11 @@ public class MainMenu extends SimpleMenuPanel
 	private BufferedImage image;
 
 	private MenuPanel tournamentMainPanel;
-	private MenuPanel optionsMenuPanel;
 	private MenuPanel quickmatchGamePanel;
 	
 	@SuppressWarnings("unused")
 	private JButton buttonOptions;
+	@SuppressWarnings("unused")
 	private JButton buttonProfiles;
 	private JButton buttonStats;
 	private JButton buttonHeroes;
@@ -77,7 +78,6 @@ public class MainMenu extends SimpleMenuPanel
 		buttonOptions = GuiTools.createPrincipalVerticalMenuButton(GuiTools.MENU_MAIN_BUTTON_OPTIONS,this);
 		add(Box.createRigidArea(new Dimension(0,GuiTools.getSize(GuiTools.MENU_VERTICAL_BUTTON_SPACE))));
 		buttonProfiles = GuiTools.createPrincipalVerticalMenuButton(GuiTools.MENU_MAIN_BUTTON_PROFILES,this);
-buttonProfiles.setEnabled(false);
 		buttonStats = GuiTools.createPrincipalVerticalMenuButton(GuiTools.MENU_MAIN_BUTTON_STATISTICS,this);
 buttonStats.setEnabled(false);
 		buttonHeroes = GuiTools.createPrincipalVerticalMenuButton(GuiTools.MENU_MAIN_BUTTON_HEROES,this);
@@ -97,36 +97,12 @@ buttonLevels.setEnabled(false);
 	
 	public void actionPerformed(ActionEvent e)
 	{	if(e.getActionCommand().equals(GuiTools.MENU_MAIN_BUTTON_OPTIONS))
-		{	if(optionsMenuPanel==null)
-			{	try
-				{	optionsMenuPanel = new OptionsSplitPanel(getContainer(),this);
-				}
-				catch (IllegalArgumentException e1)
-				{	e1.printStackTrace();
-				}
-				catch (SecurityException e1)
-				{	e1.printStackTrace();
-				} 
-				catch (ParserConfigurationException e1)
-				{	e1.printStackTrace();
-				} 
-				catch (SAXException e1)
-				{	e1.printStackTrace();
-				} 
-				catch (IOException e1)
-				{	e1.printStackTrace();
-				} 
-				catch (IllegalAccessException e1)
-				{	e1.printStackTrace();
-				}
-				catch (NoSuchFieldException e1)
-				{	e1.printStackTrace();
-				}			
-			}
+		{	OptionsSplitPanel optionsMenuPanel = new OptionsSplitPanel(getContainer(),this);
 			replaceWith(optionsMenuPanel);
 	    }
 		else if(e.getActionCommand().equals(GuiTools.MENU_MAIN_BUTTON_PROFILES))
-		{	
+		{	ProfilesSplitPanel profilesMenuPanel = new ProfilesSplitPanel(getContainer(),this);
+			replaceWith(profilesMenuPanel);
 	    }
 		else if(e.getActionCommand().equals(GuiTools.MENU_MAIN_BUTTON_STATISTICS))
 		{	
