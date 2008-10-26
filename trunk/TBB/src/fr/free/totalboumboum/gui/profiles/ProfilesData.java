@@ -21,24 +21,44 @@ package fr.free.totalboumboum.gui.profiles;
  * 
  */
 
+import java.awt.Color;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.awt.image.BufferedImage;
 import java.text.NumberFormat;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.Set;
+import java.util.TreeSet;
+import java.util.Map.Entry;
 
+import javax.swing.Box;
+import javax.swing.BoxLayout;
 import javax.swing.JLabel;
 
 import fr.free.totalboumboum.configuration.Configuration;
 import fr.free.totalboumboum.configuration.engine.EngineConfiguration;
+import fr.free.totalboumboum.configuration.profile.Portraits;
+import fr.free.totalboumboum.configuration.profile.Profile;
+import fr.free.totalboumboum.configuration.profile.ProfilesConfiguration;
+import fr.free.totalboumboum.engine.content.sprite.Sprite;
+import fr.free.totalboumboum.game.match.Match;
 import fr.free.totalboumboum.gui.common.panel.SplitMenuPanel;
 import fr.free.totalboumboum.gui.common.panel.data.EntitledDataPanel;
 import fr.free.totalboumboum.gui.common.subpanel.Line;
+import fr.free.totalboumboum.gui.common.subpanel.SubPanel;
 import fr.free.totalboumboum.gui.common.subpanel.UntitledSubPanelLines;
+import fr.free.totalboumboum.gui.common.subpanel.UntitledSubPanelTable;
 import fr.free.totalboumboum.gui.data.configuration.GuiConfiguration;
 import fr.free.totalboumboum.gui.tools.GuiTools;
 
 public class ProfilesData extends EntitledDataPanel implements MouseListener
 {	
 	private static final long serialVersionUID = 1L;
+	private static final float SPLIT_RATIO = 0.5f;
 	
 	private static final int LIST_LINE_COUNT = 20;
 	private static final int LIST_LINE_PREVIOUS = 0;
@@ -63,37 +83,109 @@ public class ProfilesData extends EntitledDataPanel implements MouseListener
 	private static final int VIEW_LINE_COLOR15 = 17;
 	private static final int VIEW_LINE_COLOR16 = 18;
 
-	private UntitledSubPanelLines optionsPanel;
-	private EngineConfiguration engineConfiguration;
+	private int currentPage = 0;
 	
-	private String[] speedTexts = 
-	{	"/4",
-		"/3",
-		"/2",
-		new Character('\u00D7').toString()+"1",
-		new Character('\u00D7').toString()+"2",
-		new Character('\u00D7').toString()+"3",
-		new Character('\u00D7').toString()+"4"
-	};
-	private double[] speedValues = 
-	{	0.25,
-		0.33,
-		0.5,
-		1,
-		2,
-		3,
-		4
-	};
+	private ProfilesConfiguration profilesConfiguration;
+	private UntitledSubPanelTable listPanel;
+	private SubPanel previewPanel;
+	private ArrayList<Entry<String,String>> profiles;
 	
 	public ProfilesData(SplitMenuPanel container)
 	{	super(container);
 
 		// title
-		{	setTitleKey(GuiTools.MENU_PROFILES_LIST_TITLE);
-		}
+		setTitleKey(GuiTools.MENU_PROFILES_LIST_TITLE);
 	
 		// data
-		{	int lines = 20;
+		{	SubPanel infoPanel = new SubPanel(dataWidth,dataHeight);
+			{	BoxLayout layout = new BoxLayout(infoPanel,BoxLayout.LINE_AXIS); 
+				infoPanel.setLayout(layout);
+			}
+			
+			int margin = GuiTools.panelMargin;
+			int leftWidth = (int)(dataWidth*SPLIT_RATIO); 
+			int rightWidth = dataWidth - leftWidth - margin; 
+			infoPanel.setOpaque(false);
+			profilesConfiguration = Configuration.getProfilesConfiguration().copy();
+			initProfiles();
+			
+			// list panel
+			{	makeListPanel(leftWidth,dataHeight);
+				infoPanel.add(listPanel);
+			}
+			
+			infoPanel.add(Box.createHorizontalGlue());
+			
+			// preview panel
+			{	makePreviewPanel(rightWidth,dataHeight);
+				infoPanel.add(previewPanel);
+			}
+			
+			setDataPart(infoPanel);
+			
+		}
+	}
+		
+	private void initProfiles()
+	{	profiles = new ArrayList<Entry<String,String>>(profilesConfiguration.getProfiles().entrySet());
+		Collections.sort(profiles,new Comparator<Entry<String,String>>()
+		{	@Override
+			public int compare(Entry<String,String> arg0, Entry<String,String> arg1)
+			{	int result;
+				String name0 = arg0.getValue();
+				String name1 = arg1.getValue();
+				result = name0.compareTo(name1);
+				return result;
+			}
+		});
+	}
+	
+	public void makeListPanel(int width, int height)
+	{	int lines = LIST_LINE_COUNT;
+		int cols = 1;
+		listPanel = new UntitledSubPanelTable(width,height,cols,lines,false);
+		listPanel.setSubColumnsMaxWidth(0,Integer.MAX_VALUE);
+		
+		// data
+		for(int line=1;line<LIST_LINE_COUNT-1;line++)
+		{	Color bg = GuiTools.COLOR_TABLE_REGULAR_BACKGROUND;
+			Entry<String,String> profile = profiles.get((line-1)+currentPage*(LIST_LINE_COUNT-2));
+			String name = profile.getValue();
+			listPanel.setLabelBackground(line,0,bg);
+			listPanel.setLabelText(line,0,name,name);
+			JLabel label = listPanel.getLabel(line,0);
+			label.addMouseListener(this);
+		}
+		
+		// page up
+		{	Color bg = GuiTools.COLOR_TABLE_HEADER_BACKGROUND;
+			listPanel.setLabelBackground(LIST_LINE_PREVIOUS,0,bg);
+			String key = GuiTools.MENU_PROFILES_LIST_PAGEUP;
+			listPanel.setLabelKey(LIST_LINE_PREVIOUS,0,key,true);
+			JLabel label = listPanel.getLabel(LIST_LINE_PREVIOUS,0);
+			label.addMouseListener(this);
+		}
+		{	Color bg = GuiTools.COLOR_TABLE_HEADER_BACKGROUND;
+			listPanel.setLabelBackground(LIST_LINE_NEXT,0,bg);
+			String key = GuiTools.MENU_PROFILES_LIST_PAGEDOWN;
+			listPanel.setLabelKey(LIST_LINE_NEXT,0,key,true);
+			JLabel label = listPanel.getLabel(LIST_LINE_NEXT,0);
+			label.addMouseListener(this);
+		}
+	}
+	
+	public void makePreviewPanel(int width, int height)
+	{	int lines = LIST_LINE_COUNT;
+		previewPanel = new UntitledSubPanelLines(width,height,lines,false);
+		
+		// data
+		
+	}
+	
+/*			
+			
+			
+			int lines = 20;
 			int w = getDataWidth();
 			int h = getDataHeight();
 			optionsPanel = new UntitledSubPanelLines(w,h,lines,false);
@@ -223,7 +315,7 @@ public class ProfilesData extends EntitledDataPanel implements MouseListener
 		String tooltip = GuiConfiguration.getMiscConfiguration().getLanguage().getText(GuiTools.MENU_OPTIONS_ADVANCED_LINE_SPEED_TITLE+GuiTools.TOOLTIP); 
 		optionsPanel.getLine(LINE_SPEED).setLabelText(2,text,tooltip);
 	}
-	
+*/	
 	@Override
 	public void refresh()
 	{	// nothing to do here
@@ -234,8 +326,8 @@ public class ProfilesData extends EntitledDataPanel implements MouseListener
 	{	// nothing to do here
 	}
 
-	public EngineConfiguration getEngineConfiguration()
-	{	return engineConfiguration;
+	public ProfilesConfiguration getProfilesConfiguration()
+	{	return profilesConfiguration;
 	}	
 	
 	/////////////////////////////////////////////////////////////////
@@ -256,7 +348,9 @@ public class ProfilesData extends EntitledDataPanel implements MouseListener
 	}
 	@Override
 	public void mousePressed(MouseEvent e)
-	{	JLabel label = (JLabel)e.getComponent();
+	{	
+/*		
+		JLabel label = (JLabel)e.getComponent();
 		int[] pos = optionsPanel.getLabelPosition(label);
 		switch(pos[0])
 		{	// panel dimension
@@ -307,7 +401,7 @@ public class ProfilesData extends EntitledDataPanel implements MouseListener
 				engineConfiguration.setSpeedCoeff(speedValues[index]);
 				setGameSpeed();
 		}
-
+*/
 	}
 	@Override
 	public void mouseReleased(MouseEvent e)

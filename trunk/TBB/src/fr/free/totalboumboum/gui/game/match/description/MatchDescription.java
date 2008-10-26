@@ -139,7 +139,7 @@ public class MatchDescription extends EntitledDataPanel implements MouseListener
 		}
 		// empty
 		{	playersPanel.setSubColumnsPreferredWidth(2,ctrlColWidth);
-			playersPanel.setSubColumnsMaxWidth(3,Integer.MAX_VALUE);		
+			playersPanel.setSubColumnsMaxWidth(3,Integer.MAX_VALUE);
 		}
 		// data
 		{	ArrayList<Profile> players = match.getProfiles();

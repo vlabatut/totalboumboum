@@ -23,9 +23,32 @@ package fr.free.totalboumboum.configuration.profile;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Iterator;
+import java.util.Map.Entry;
 
 public class ProfilesConfiguration
 {
+	public ProfilesConfiguration copy()
+	{	ProfilesConfiguration result = new ProfilesConfiguration();
+		// profiles
+		{	Iterator<Entry<String,String>> it = profiles.entrySet().iterator();
+			while(it.hasNext())
+			{	Entry<String,String> entry = it.next();
+				String value = entry.getValue();
+				String key = entry.getKey();
+				result.addProfile(key,value);			
+			}
+		}
+		// selected
+		{	Iterator<String> it = selected.iterator();
+			while(it.hasNext())
+			{	String temp = it.next();
+				result.addSelected(temp);			
+			}
+		}
+		return result;
+	}
+	
 	/////////////////////////////////////////////////////////////////
 	// PROFILES				/////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////

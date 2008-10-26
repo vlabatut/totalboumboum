@@ -141,6 +141,8 @@ public class GuiTools
 		public static final String MENU_PROFILES_BUTTON_NEW = "MenuProfilesButtonNew";
 		/* LIST */
 		public static final String MENU_PROFILES_LIST_TITLE = "MenuProfilesListTitle";
+		public static final String MENU_PROFILES_LIST_PAGEDOWN = "MenuProfilesListPageDown";
+		public static final String MENU_PROFILES_LIST_PAGEUP = "MenuProfilesListPageUp";
 		/* EDIT */
 		public static final String MENU_PROFILES_EDIT_TITLE = "MenuProfilesEditTitle";		
 	/* TOURNAMENT */	
@@ -956,6 +958,12 @@ public class GuiTools
 			icons.put(GAME_TOURNAMENT_DESCRIPTION_POINTS_DATA_NOSHARE,image);
 			icons.put(GAME_MATCH_DESCRIPTION_POINTS_DATA_NOSHARE,image);
 			icons.put(GAME_ROUND_DESCRIPTION_POINTS_DATA_NOSHARE,image);
+			// page down
+			image = loadIcon(folder+GuiFileTools.FILE_PAGE_DOWN,absent);
+			icons.put(MENU_PROFILES_LIST_PAGEDOWN,image);
+			// page up
+			image = loadIcon(folder+GuiFileTools.FILE_PAGE_UP,absent);
+			icons.put(MENU_PROFILES_LIST_PAGEUP,image);
 			// paintings
 			image = loadIcon(folder+GuiFileTools.FILE_PAINTINGS,absent);
 			icons.put(GAME_TOURNAMENT_DESCRIPTION_POINTS_DATA_PAINTINGS,image);
