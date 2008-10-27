@@ -49,7 +49,7 @@ import fr.free.totalboumboum.gui.common.subpanel.UntitledSubPanelTable;
 import fr.free.totalboumboum.gui.data.configuration.GuiConfiguration;
 import fr.free.totalboumboum.gui.tools.GuiTools;
 
-public class ProfilesData extends EntitledDataPanel implements MouseListener
+public class SelectedProfileData extends EntitledDataPanel implements MouseListener
 {	
 	private static final long serialVersionUID = 1L;
 	private static final float SPLIT_RATIO = 0.5f;
@@ -78,7 +78,7 @@ public class ProfilesData extends EntitledDataPanel implements MouseListener
 	private UntitledSubPanelTable previewPanel;
 	private ArrayList<Entry<String,String>> profiles;
 	
-	public ProfilesData(SplitMenuPanel container)
+	public SelectedProfileData(SplitMenuPanel container)
 	{	super(container);
 
 		// title

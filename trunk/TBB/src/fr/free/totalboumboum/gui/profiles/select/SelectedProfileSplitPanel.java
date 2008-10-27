@@ -31,19 +31,19 @@ import fr.free.totalboumboum.gui.common.panel.menu.MenuPanel;
 import fr.free.totalboumboum.gui.data.configuration.GuiConfiguration;
 import fr.free.totalboumboum.gui.tools.GuiTools;
 
-public class ProfilesSplitPanel extends SplitMenuPanel
+public class SelectedProfileSplitPanel extends SplitMenuPanel
 {	private static final long serialVersionUID = 1L; 
 
 	private BufferedImage image;
 
-	public ProfilesSplitPanel(MenuContainer container, MenuPanel parent)
+	public SelectedProfileSplitPanel(MenuContainer container, MenuPanel parent)
 	{	super(container,parent,BorderLayout.LINE_START,GuiTools.VERTICAL_SPLIT_RATIO);
 	
 		// background
 		image = GuiConfiguration.getMiscConfiguration().getDarkBackground();
 		
 		// panels
-		setMenuPart(new ProfilesMenu(this,parent));
+		setMenuPart(new SelectedProfileMenu(this,parent));
 	}
 	
 	@Override

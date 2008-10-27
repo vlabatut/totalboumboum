@@ -43,7 +43,7 @@ import fr.free.totalboumboum.gui.data.configuration.GuiConfiguration;
 import fr.free.totalboumboum.gui.game.match.MatchSplitPanel;
 import fr.free.totalboumboum.gui.menus.tournament.TournamentSplitPanel;
 import fr.free.totalboumboum.gui.options.OptionsSplitPanel;
-import fr.free.totalboumboum.gui.profiles.select.ProfilesSplitPanel;
+import fr.free.totalboumboum.gui.profiles.select.SelectedProfileSplitPanel;
 import fr.free.totalboumboum.gui.tools.GuiTools;
 
 public class MainMenu extends SimpleMenuPanel
@@ -101,7 +101,7 @@ buttonLevels.setEnabled(false);
 			replaceWith(optionsMenuPanel);
 	    }
 		else if(e.getActionCommand().equals(GuiTools.MENU_MAIN_BUTTON_PROFILES))
-		{	ProfilesSplitPanel profilesMenuPanel = new ProfilesSplitPanel(getContainer(),this);
+		{	SelectedProfileSplitPanel profilesMenuPanel = new SelectedProfileSplitPanel(getContainer(),this);
 			replaceWith(profilesMenuPanel);
 	    }
 		else if(e.getActionCommand().equals(GuiTools.MENU_MAIN_BUTTON_STATISTICS))
