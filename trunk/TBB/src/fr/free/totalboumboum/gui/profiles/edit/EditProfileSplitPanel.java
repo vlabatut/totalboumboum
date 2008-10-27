@@ -25,6 +25,7 @@ import java.awt.BorderLayout;
 import java.awt.Graphics;
 import java.awt.image.BufferedImage;
 
+import fr.free.totalboumboum.configuration.profile.Profile;
 import fr.free.totalboumboum.gui.common.MenuContainer;
 import fr.free.totalboumboum.gui.common.panel.SplitMenuPanel;
 import fr.free.totalboumboum.gui.common.panel.menu.MenuPanel;
@@ -36,14 +37,14 @@ public class EditProfileSplitPanel extends SplitMenuPanel
 
 	private BufferedImage image;
 
-	public EditProfileSplitPanel(MenuContainer container, MenuPanel parent)
+	public EditProfileSplitPanel(MenuContainer container, MenuPanel parent, Profile profile, String profileFile)
 	{	super(container,parent,BorderLayout.LINE_START,GuiTools.VERTICAL_SPLIT_RATIO);
 	
 		// background
 		image = GuiConfiguration.getMiscConfiguration().getDarkBackground();
 		
 		// panels
-		setMenuPart(new EditProfileMenu(this,parent));
+		setMenuPart(new EditProfileMenu(this,parent,profile,profileFile));
 	}
 	
 	@Override

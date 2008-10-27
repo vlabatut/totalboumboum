@@ -78,6 +78,7 @@ public class SelectedProfileData extends EntitledDataPanel implements MouseListe
 	private UntitledSubPanelTable previewPanel;
 	private ArrayList<Entry<String,String>> profiles;
 	private Profile selectedProfile = null;
+	private String selectedProfileFile = null;
 	
 	public SelectedProfileData(SplitMenuPanel container)
 	{	super(container);
@@ -233,12 +234,14 @@ public class SelectedProfileData extends EntitledDataPanel implements MouseListe
 		{	for(int i=0;i<values.length;i++)
 				values[i] = null;	
 			selectedProfile = null;
+			selectedProfileFile = null;
 		}
 		// one player selected
 		else
 		{	Entry<String,String> entry = profiles.get((selectedRow-1)+currentPage*(LIST_LINE_COUNT-2));
 			try
-			{	selectedProfile = ProfileLoader.loadProfile(entry.getKey());
+			{	selectedProfileFile = entry.getKey();
+				selectedProfile = ProfileLoader.loadProfile(selectedProfileFile);			
 			}
 			catch (IllegalArgumentException e)
 			{	e.printStackTrace();
@@ -288,44 +291,7 @@ public class SelectedProfileData extends EntitledDataPanel implements MouseListe
 //		mainPanel.validate();
 //		mainPanel.repaint();
 	}
-/*		
-	private void setAdjust()
-	{	boolean adjust = engineConfiguration.getAutoFps();
-		String key;
-		if(adjust)
-			key = GuiTools.MENU_OPTIONS_ADVANCED_LINE_ADJUST_ENABLED;
-		else
-			key = GuiTools.MENU_OPTIONS_ADVANCED_LINE_ADJUST_DISABLED;
-		optionsPanel.getLine(LINE_ADJUST).setLabelKey(1,key,true);
-	}
-	
-	private void setFps()
-	{	int fps = engineConfiguration.getFps();
-		String text = Integer.toString(fps);
-		String tooltip = GuiConfiguration.getMiscConfiguration().getLanguage().getText(GuiTools.MENU_OPTIONS_ADVANCED_LINE_FPS_TITLE+GuiTools.TOOLTIP); 
-		optionsPanel.getLine(LINE_FPS).setLabelText(2,text,tooltip);
-	}
-	
-	private void setGameSpeed()
-	{	double speed = engineConfiguration.getSpeedCoeff();
-		String text = null;
-		int i = 0;
-		while(i<speedValues.length && text==null)
-		{	if(speedValues[i]==speed)
-				text = speedTexts[i];
-			else
-				i++;
-		}
-		if(text==null)
-		{	NumberFormat nf = NumberFormat.getInstance();
-			nf.setMaximumFractionDigits(2);
-			nf.setMinimumFractionDigits(2);
-			text = nf.format(speed);
-		}
-		String tooltip = GuiConfiguration.getMiscConfiguration().getLanguage().getText(GuiTools.MENU_OPTIONS_ADVANCED_LINE_SPEED_TITLE+GuiTools.TOOLTIP); 
-		optionsPanel.getLine(LINE_SPEED).setLabelText(2,text,tooltip);
-	}
-*/	
+
 	@Override
 	public void refresh()
 	{	// nothing to do here
@@ -414,4 +380,10 @@ public class SelectedProfileData extends EntitledDataPanel implements MouseListe
 		mainPanel.repaint();
 	}
 	
+	public Profile getSelectedProfile()
+	{	return selectedProfile;
+	}
+	public String getSelectedProfileFile()
+	{	return selectedProfileFile;
+	}
 }

@@ -23,6 +23,7 @@ package fr.free.totalboumboum.gui.profiles.edit;
 
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
+import java.io.IOException;
 
 import javax.swing.Box;
 import javax.swing.BoxLayout;
@@ -47,7 +48,7 @@ public class EditProfileMenu extends InnerMenuPanel
 	private Profile profile;
 	private String profileFile;
 
-	public EditProfileMenu(SplitMenuPanel container, MenuPanel parent, String profileFile, Profile profile)
+	public EditProfileMenu(SplitMenuPanel container, MenuPanel parent, Profile profile, String profileFile)
 	{	super(container, parent);
 		this.profile = profile;
 		this.profileFile = profileFile;
@@ -72,9 +73,21 @@ public class EditProfileMenu extends InnerMenuPanel
 	
 	public void actionPerformed(ActionEvent e)
 	{	if(e.getActionCommand().equals(GuiTools.MENU_PROFILES_BUTTON_CONFIRM))
-		{	
+		{	Profile newProfile = profileData.getProfile();
+			boolean hasChanged = !profile.getAiName().equals(newProfile.getAiName())
+				|| profile.getAiPackname().equals(newProfile.getAiPackname())
+				|| profile.getName().equals(newProfile.getName())
+				|| profile.getSpriteColor().equals(newProfile.getSpriteColor())
+				|| profile.getSpriteName().equals(newProfile.getSpriteName())
+				|| profile.getSpritePack().equals(newProfile.getSpritePack());
 			if(hasChanged)
-				ProfileSaver.saveProfile(profile,profileFile);
+			{	try
+				{	ProfileSaver.saveProfile(newProfile,profileFile);
+				}
+				catch (IOException e1)
+				{	e1.printStackTrace();
+				}
+			}
 			replaceWith(parent);
 	    }
 		else if(e.getActionCommand().equals(GuiTools.MENU_PROFILES_BUTTON_CANCEL))

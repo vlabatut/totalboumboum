@@ -130,4 +130,18 @@ public class Profile
 	public boolean isAi()
 	{	return aiName!=null;	
 	}
+	
+	public Profile copy()
+	{	Profile result = new Profile();
+		result.aiName = aiName;
+		result.aiPackname = aiPackname;
+		result.controlSettingsIndex = controlSettingsIndex;
+		result.name = name;
+		result.portraits = portraits; //TODO copy
+		result.spriteColors = spriteColors.clone();
+		result.spriteControl = spriteControl;//TODO copy
+		result.spriteName = spriteName;
+		result.spritePack = spritePack;
+		return result;
+	}
 }

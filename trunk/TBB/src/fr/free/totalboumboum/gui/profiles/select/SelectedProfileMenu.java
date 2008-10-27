@@ -28,9 +28,11 @@ import javax.swing.Box;
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
 
+import fr.free.totalboumboum.configuration.profile.Profile;
 import fr.free.totalboumboum.gui.common.panel.SplitMenuPanel;
 import fr.free.totalboumboum.gui.common.panel.menu.InnerMenuPanel;
 import fr.free.totalboumboum.gui.common.panel.menu.MenuPanel;
+import fr.free.totalboumboum.gui.profiles.edit.EditProfileSplitPanel;
 import fr.free.totalboumboum.gui.tools.GuiTools;
 
 public class SelectedProfileMenu extends InnerMenuPanel
@@ -79,7 +81,12 @@ public class SelectedProfileMenu extends InnerMenuPanel
 		{	//TODO
 	    }
 		else if(e.getActionCommand().equals(GuiTools.MENU_PROFILES_BUTTON_MODIFY))
-		{	//TODO
+		{	Profile profile = profileData.getSelectedProfile();
+			if(profile!=null)
+			{	String profileFile = profileData.getSelectedProfileFile();
+				EditProfileSplitPanel editPanel = new EditProfileSplitPanel(container.getContainer(),container,profile,profileFile);
+				replaceWith(editPanel);
+			}
 	    }
 		else if(e.getActionCommand().equals(GuiTools.MENU_PROFILES_BUTTON_DELETE))
 		{	//TODO

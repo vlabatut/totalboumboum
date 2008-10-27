@@ -44,7 +44,9 @@ import fr.free.totalboumboum.configuration.profile.ProfileLoader;
 import fr.free.totalboumboum.configuration.profile.ProfilesConfiguration;
 import fr.free.totalboumboum.gui.common.panel.SplitMenuPanel;
 import fr.free.totalboumboum.gui.common.panel.data.EntitledDataPanel;
+import fr.free.totalboumboum.gui.common.subpanel.Line;
 import fr.free.totalboumboum.gui.common.subpanel.SubPanel;
+import fr.free.totalboumboum.gui.common.subpanel.UntitledSubPanelLines;
 import fr.free.totalboumboum.gui.common.subpanel.UntitledSubPanelTable;
 import fr.free.totalboumboum.gui.data.configuration.GuiConfiguration;
 import fr.free.totalboumboum.gui.tools.GuiTools;
@@ -52,40 +54,54 @@ import fr.free.totalboumboum.gui.tools.GuiTools;
 public class EditProfileData extends EntitledDataPanel implements MouseListener
 {	
 	private static final long serialVersionUID = 1L;
-	private static final float SPLIT_RATIO = 0.5f;
 	
-	private static final int LIST_LINE_COUNT = 20;
-	private static final int LIST_LINE_PREVIOUS = 0;
-	private static final int LIST_LINE_NEXT = LIST_LINE_COUNT-1;
+	private static final int LINE_COUNT = 21;
 
-	private static final int VIEW_LINE_NAME = 0;
-	private static final int VIEW_LINE_AI_NAME = 1;
-	private static final int VIEW_LINE_AI_PACK = 2;
-	private static final int VIEW_LINE_HERO_NAME = 3;
-	private static final int VIEW_LINE_HERO_PACK = 4;
-	private static final int VIEW_LINE_COLOR = 5;
+	private static final int LINE_NAME = 0;
+	private static final int LINE_AI_NAME = 1;
+	private static final int LINE_AI_PACK = 2;
+	private static final int LINE_HERO_NAME = 3;
+	private static final int LINE_HERO_PACK = 4;
+	private static final int LINE_COLOR = 5;
 
-	private static final int LIST_PANEL_INDEX = 0;
-	@SuppressWarnings("unused")
-	private static final int PREVIEW_PANEL_INDEX = 2;
-	
-	private ArrayList<UntitledSubPanelTable> listPanels;
-	private int currentPage = 0;
-	private int selectedRow = -1;
-	
-	private ProfilesConfiguration profilesConfiguration;
-	private SubPanel mainPanel;
-	private UntitledSubPanelTable previewPanel;
-	private ArrayList<Entry<String,String>> profiles;
+	private Profile profile;
+	private UntitledSubPanelLines editPanel;
 	
 	public EditProfileData(SplitMenuPanel container, Profile profile)
 	{	super(container);
-
+		this.profile = profile.copy();
+		
 		// title
-		setTitleKey(GuiTools.MENU_PROFILES_LIST_TITLE);
+		setTitleKey(GuiTools.MENU_PROFILES_EDIT_TITLE);
 	
 		// data
-		{	mainPanel = new SubPanel(dataWidth,dataHeight);
+		{	int w = getDataWidth();
+			int h = getDataHeight();
+			editPanel = new UntitledSubPanelLines(w,h,LINE_COUNT,true);
+		
+			// NAME
+			{	Line ln = editPanel.getLine(LINE_NAME);
+				ln.addLabel(0);
+				ln.addLabel(0);
+				int col = 0;
+				// icon
+				{	ln.setLabelKey(col,GuiTools.MENU_PROFILES_PREVIEW_NAME,true);
+					col++;
+				}
+				// value
+				{	ln.setLabelMaxWidth(col,Integer.MAX_VALUE);
+					String text = profile.getName();
+					String tooltip = text;
+					ln.setLabelText(col,text,tooltip);
+					col++;
+				}
+			}
+			
+			
+			
+			
+			
+			mainPanel = new SubPanel(dataWidth,dataHeight);
 			{	BoxLayout layout = new BoxLayout(mainPanel,BoxLayout.LINE_AXIS); 
 				mainPanel.setLayout(layout);
 			}
@@ -413,4 +429,12 @@ public class EditProfileData extends EntitledDataPanel implements MouseListener
 		mainPanel.repaint();
 	}
 	
+	
+	
+	
+	
+	
+	public Profile getProfile()
+	{	return profile;	
+	}
 }
