@@ -1,4 +1,4 @@
-package fr.free.totalboumboum.gui.profiles;
+package fr.free.totalboumboum.gui.profiles.select;
 
 /*
  * Total Boum Boum
@@ -24,16 +24,10 @@ package fr.free.totalboumboum.gui.profiles;
 import java.awt.Color;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
-import java.awt.image.BufferedImage;
 import java.io.IOException;
-import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.Set;
-import java.util.TreeSet;
 import java.util.Map.Entry;
 
 import javax.swing.Box;
@@ -44,22 +38,13 @@ import javax.xml.parsers.ParserConfigurationException;
 import org.xml.sax.SAXException;
 
 import fr.free.totalboumboum.configuration.Configuration;
-import fr.free.totalboumboum.configuration.engine.EngineConfiguration;
-import fr.free.totalboumboum.configuration.profile.Portraits;
 import fr.free.totalboumboum.configuration.profile.PredefinedColor;
 import fr.free.totalboumboum.configuration.profile.Profile;
 import fr.free.totalboumboum.configuration.profile.ProfileLoader;
 import fr.free.totalboumboum.configuration.profile.ProfilesConfiguration;
-import fr.free.totalboumboum.engine.container.level.HollowLevel;
-import fr.free.totalboumboum.engine.content.sprite.Sprite;
-import fr.free.totalboumboum.game.match.Match;
-import fr.free.totalboumboum.game.round.Round;
 import fr.free.totalboumboum.gui.common.panel.SplitMenuPanel;
 import fr.free.totalboumboum.gui.common.panel.data.EntitledDataPanel;
-import fr.free.totalboumboum.gui.common.subpanel.EntitledSubPanelTable;
-import fr.free.totalboumboum.gui.common.subpanel.Line;
 import fr.free.totalboumboum.gui.common.subpanel.SubPanel;
-import fr.free.totalboumboum.gui.common.subpanel.UntitledSubPanelLines;
 import fr.free.totalboumboum.gui.common.subpanel.UntitledSubPanelTable;
 import fr.free.totalboumboum.gui.data.configuration.GuiConfiguration;
 import fr.free.totalboumboum.gui.tools.GuiTools;
@@ -81,6 +66,7 @@ public class ProfilesData extends EntitledDataPanel implements MouseListener
 	private static final int VIEW_LINE_COLOR = 5;
 
 	private static final int LIST_PANEL_INDEX = 0;
+	@SuppressWarnings("unused")
 	private static final int PREVIEW_PANEL_INDEX = 2;
 	
 	private ArrayList<UntitledSubPanelTable> listPanels;

@@ -43,7 +43,7 @@ import fr.free.totalboumboum.gui.data.configuration.GuiConfiguration;
 import fr.free.totalboumboum.gui.game.match.MatchSplitPanel;
 import fr.free.totalboumboum.gui.menus.tournament.TournamentSplitPanel;
 import fr.free.totalboumboum.gui.options.OptionsSplitPanel;
-import fr.free.totalboumboum.gui.profiles.ProfilesSplitPanel;
+import fr.free.totalboumboum.gui.profiles.select.ProfilesSplitPanel;
 import fr.free.totalboumboum.gui.tools.GuiTools;
 
 public class MainMenu extends SimpleMenuPanel
