@@ -45,7 +45,7 @@ public class SelectedProfileMenu extends InnerMenuPanel
 	@SuppressWarnings("unused")
 	private JButton buttonDelete;
 
-	private SelectedProfileData advancedData;
+	private SelectedProfileData profileData;
 
 	public SelectedProfileMenu(SplitMenuPanel container, MenuPanel parent)
 	{	super(container, parent);
@@ -67,8 +67,8 @@ public class SelectedProfileMenu extends InnerMenuPanel
 		add(Box.createVerticalGlue());		
 
 		// panels
-		advancedData = new SelectedProfileData(container);
-		container.setDataPart(advancedData);
+		profileData = new SelectedProfileData(container);
+		container.setDataPart(profileData);
 	}
 	
 	public void actionPerformed(ActionEvent e)

@@ -78,7 +78,7 @@ public class EditProfileData extends EntitledDataPanel implements MouseListener
 	private UntitledSubPanelTable previewPanel;
 	private ArrayList<Entry<String,String>> profiles;
 	
-	public EditProfileData(SplitMenuPanel container)
+	public EditProfileData(SplitMenuPanel container, Profile profile)
 	{	super(container);
 
 		// title

@@ -77,6 +77,7 @@ public class SelectedProfileData extends EntitledDataPanel implements MouseListe
 	private SubPanel mainPanel;
 	private UntitledSubPanelTable previewPanel;
 	private ArrayList<Entry<String,String>> profiles;
+	private Profile selectedProfile = null;
 	
 	public SelectedProfileData(SplitMenuPanel container)
 	{	super(container);
@@ -230,14 +231,14 @@ public class SelectedProfileData extends EntitledDataPanel implements MouseListe
 		// no player selected
 		if(selectedRow<0)
 		{	for(int i=0;i<values.length;i++)
-				values[i] = null;			
+				values[i] = null;	
+			selectedProfile = null;
 		}
 		// one player selected
 		else
 		{	Entry<String,String> entry = profiles.get((selectedRow-1)+currentPage*(LIST_LINE_COUNT-2));
-			Profile profile = null;
 			try
-			{	profile = ProfileLoader.loadProfile(entry.getKey());
+			{	selectedProfile = ProfileLoader.loadProfile(entry.getKey());
 			}
 			catch (IllegalArgumentException e)
 			{	e.printStackTrace();
@@ -263,12 +264,12 @@ public class SelectedProfileData extends EntitledDataPanel implements MouseListe
 			catch (ClassNotFoundException e)
 			{	e.printStackTrace();
 			}
-			values[VIEW_LINE_NAME] = profile.getName();
-			values[VIEW_LINE_AI_NAME]= profile.getAiName();
-			values[VIEW_LINE_AI_PACK] = profile.getAiPackname();
-			values[VIEW_LINE_HERO_NAME] = profile.getSpriteName();
-			values[VIEW_LINE_HERO_PACK] = profile.getSpritePack();
-			PredefinedColor[] colors = profile.getSpriteColors();
+			values[VIEW_LINE_NAME] = selectedProfile.getName();
+			values[VIEW_LINE_AI_NAME]= selectedProfile.getAiName();
+			values[VIEW_LINE_AI_PACK] = selectedProfile.getAiPackname();
+			values[VIEW_LINE_HERO_NAME] = selectedProfile.getSpriteName();
+			values[VIEW_LINE_HERO_PACK] = selectedProfile.getSpritePack();
+			PredefinedColor[] colors = selectedProfile.getSpriteColors();
 			for(int i=0;i<colors.length;i++)
 			{	if(colors[i]!=null)
 					values[VIEW_LINE_COLOR+i] = colors[i].toString();

@@ -28,6 +28,8 @@ import javax.swing.Box;
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
 
+import fr.free.totalboumboum.configuration.profile.Profile;
+import fr.free.totalboumboum.configuration.profile.ProfileSaver;
 import fr.free.totalboumboum.gui.common.panel.SplitMenuPanel;
 import fr.free.totalboumboum.gui.common.panel.menu.InnerMenuPanel;
 import fr.free.totalboumboum.gui.common.panel.menu.MenuPanel;
@@ -37,19 +39,19 @@ public class EditProfileMenu extends InnerMenuPanel
 {	private static final long serialVersionUID = 1L;
 	
 	@SuppressWarnings("unused")
-	private JButton buttonBack;
+	private JButton buttonConfirm;
 	@SuppressWarnings("unused")
-	private JButton buttonNew;
-	@SuppressWarnings("unused")
-	private JButton buttonModify;
-	@SuppressWarnings("unused")
-	private JButton buttonDelete;
+	private JButton buttonCancel;
 
-	private EditProfileData advancedData;
+	private EditProfileData profileData;
+	private Profile profile;
+	private String profileFile;
 
-	public EditProfileMenu(SplitMenuPanel container, MenuPanel parent)
+	public EditProfileMenu(SplitMenuPanel container, MenuPanel parent, String profileFile, Profile profile)
 	{	super(container, parent);
-		
+		this.profile = profile;
+		this.profileFile = profileFile;
+	
 		// layout
 		BoxLayout layout = new BoxLayout(this,BoxLayout.PAGE_AXIS); 
 		setLayout(layout);
@@ -59,30 +61,24 @@ public class EditProfileMenu extends InnerMenuPanel
 
 		// buttons
 		add(Box.createVerticalGlue());
-		buttonNew = GuiTools.createSecondaryVerticalMenuButton(GuiTools.MENU_PROFILES_BUTTON_NEW,this);
-		buttonModify = GuiTools.createSecondaryVerticalMenuButton(GuiTools.MENU_PROFILES_BUTTON_MODIFY,this);
-		buttonDelete = GuiTools.createSecondaryVerticalMenuButton(GuiTools.MENU_PROFILES_BUTTON_DELETE,this);
-		add(Box.createRigidArea(new Dimension(0,GuiTools.getSize(GuiTools.MENU_VERTICAL_BUTTON_SPACE))));
-		buttonBack = GuiTools.createSecondaryVerticalMenuButton(GuiTools.MENU_PROFILES_BUTTON_BACK,this);
+		buttonConfirm = GuiTools.createSecondaryVerticalMenuButton(GuiTools.MENU_PROFILES_BUTTON_CONFIRM,this);
+		buttonCancel = GuiTools.createSecondaryVerticalMenuButton(GuiTools.MENU_PROFILES_BUTTON_CANCEL,this);
 		add(Box.createVerticalGlue());		
 
 		// panels
-		advancedData = new EditProfileData(container);
-		container.setDataPart(advancedData);
+		profileData = new EditProfileData(container,profile);
+		container.setDataPart(profileData);
 	}
 	
 	public void actionPerformed(ActionEvent e)
-	{	if(e.getActionCommand().equals(GuiTools.MENU_PROFILES_BUTTON_BACK))
+	{	if(e.getActionCommand().equals(GuiTools.MENU_PROFILES_BUTTON_CONFIRM))
+		{	
+			if(hasChanged)
+				ProfileSaver.saveProfile(profile,profileFile);
+			replaceWith(parent);
+	    }
+		else if(e.getActionCommand().equals(GuiTools.MENU_PROFILES_BUTTON_CANCEL))
 		{	replaceWith(parent);
-	    }
-		else if(e.getActionCommand().equals(GuiTools.MENU_PROFILES_BUTTON_NEW))
-		{	//TODO
-	    }
-		else if(e.getActionCommand().equals(GuiTools.MENU_PROFILES_BUTTON_MODIFY))
-		{	//TODO
-	    }
-		else if(e.getActionCommand().equals(GuiTools.MENU_PROFILES_BUTTON_DELETE))
-		{	//TODO
 	    }
 	} 
 	
