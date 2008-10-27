@@ -1,4 +1,4 @@
-package fr.free.totalboumboum.gui.profiles;
+package fr.free.totalboumboum.gui.profiles.edit;
 
 /*
  * Total Boum Boum
@@ -31,19 +31,19 @@ import fr.free.totalboumboum.gui.common.panel.menu.MenuPanel;
 import fr.free.totalboumboum.gui.data.configuration.GuiConfiguration;
 import fr.free.totalboumboum.gui.tools.GuiTools;
 
-public class ProfilesSplitPanel extends SplitMenuPanel
+public class EditProfileSplitPanel extends SplitMenuPanel
 {	private static final long serialVersionUID = 1L; 
 
 	private BufferedImage image;
 
-	public ProfilesSplitPanel(MenuContainer container, MenuPanel parent)
+	public EditProfileSplitPanel(MenuContainer container, MenuPanel parent)
 	{	super(container,parent,BorderLayout.LINE_START,GuiTools.VERTICAL_SPLIT_RATIO);
 	
 		// background
 		image = GuiConfiguration.getMiscConfiguration().getDarkBackground();
 		
 		// panels
-		setMenuPart(new ProfilesMenu(this,parent));
+		setMenuPart(new EditProfileMenu(this,parent));
 	}
 	
 	@Override

@@ -1,4 +1,4 @@
-package fr.free.totalboumboum.gui.profiles;
+package fr.free.totalboumboum.gui.profiles.edit;
 
 /*
  * Total Boum Boum
@@ -33,7 +33,7 @@ import fr.free.totalboumboum.gui.common.panel.menu.InnerMenuPanel;
 import fr.free.totalboumboum.gui.common.panel.menu.MenuPanel;
 import fr.free.totalboumboum.gui.tools.GuiTools;
 
-public class ProfilesMenu extends InnerMenuPanel
+public class EditProfileMenu extends InnerMenuPanel
 {	private static final long serialVersionUID = 1L;
 	
 	@SuppressWarnings("unused")
@@ -45,9 +45,9 @@ public class ProfilesMenu extends InnerMenuPanel
 	@SuppressWarnings("unused")
 	private JButton buttonDelete;
 
-	private ProfilesData advancedData;
+	private EditProfileData advancedData;
 
-	public ProfilesMenu(SplitMenuPanel container, MenuPanel parent)
+	public EditProfileMenu(SplitMenuPanel container, MenuPanel parent)
 	{	super(container, parent);
 		
 		// layout
@@ -67,7 +67,7 @@ public class ProfilesMenu extends InnerMenuPanel
 		add(Box.createVerticalGlue());		
 
 		// panels
-		advancedData = new ProfilesData(container);
+		advancedData = new EditProfileData(container);
 		container.setDataPart(advancedData);
 	}
 	
