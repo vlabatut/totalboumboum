@@ -33,7 +33,7 @@ import fr.free.totalboumboum.gui.common.panel.menu.InnerMenuPanel;
 import fr.free.totalboumboum.gui.common.panel.menu.MenuPanel;
 import fr.free.totalboumboum.gui.tools.GuiTools;
 
-public class ProfilesMenu extends InnerMenuPanel
+public class SelectedProfileMenu extends InnerMenuPanel
 {	private static final long serialVersionUID = 1L;
 	
 	@SuppressWarnings("unused")
@@ -45,9 +45,9 @@ public class ProfilesMenu extends InnerMenuPanel
 	@SuppressWarnings("unused")
 	private JButton buttonDelete;
 
-	private ProfilesData advancedData;
+	private SelectedProfileData advancedData;
 
-	public ProfilesMenu(SplitMenuPanel container, MenuPanel parent)
+	public SelectedProfileMenu(SplitMenuPanel container, MenuPanel parent)
 	{	super(container, parent);
 		
 		// layout
@@ -67,7 +67,7 @@ public class ProfilesMenu extends InnerMenuPanel
 		add(Box.createVerticalGlue());		
 
 		// panels
-		advancedData = new ProfilesData(container);
+		advancedData = new SelectedProfileData(container);
 		container.setDataPart(advancedData);
 	}
 	
