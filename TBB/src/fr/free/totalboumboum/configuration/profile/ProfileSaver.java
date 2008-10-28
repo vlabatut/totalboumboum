@@ -43,7 +43,7 @@ public class ProfileSaver
 	}
 
 	private static Element saveProfileElement(Profile profile)
-	{	Element result = new Element(XmlTools.ELT_PROFILES);
+	{	Element result = new Element(XmlTools.ELT_PROFILE);
 		// general properties
 		Element generalElement = saveGeneralElement(profile);
 		result.addContent(generalElement);

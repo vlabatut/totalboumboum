@@ -133,7 +133,7 @@
 				<text name="Title" value="Éditer un profil" tooltip="Modification d'un profil" />
 				<text name="Ai" value="Intelligence artificielle" tooltip="Nom de l'intelligence artificielle" />
 				<text name="AiChange" value="Sélectionner l'IA" tooltip="Sélectionner une autre intelligence artificielle" />
-				<text name="Color" value="Couleur" tooltip="Couleur du personnage" />
+				<text name="Color" value="Couleur" tooltip="Couleur n°" />
 				<text name="ColorNext" value="Suivante" tooltip="Couleur suivante" />
 				<text name="ColorPrevious" value="Précédente" tooltip="Couleur précédente" />
 				<text name="Hero" value="Personnage" tooltip="Personnage contrôlé par le joueur" />
@@ -151,7 +151,7 @@
 			<group name="Preview" >
 				<text name="AiName" value="Nom de l'IA" tooltip="Nom de l'intelligence artificielle" />
 				<text name="AiPack" value="Paquet de l'IA" tooltip="Nom du paquet contenant l'intelligence artificielle" />
-				<text name="Color" value="Couleur" tooltip="Couleur du personnage" />
+				<text name="Color" value="Couleur" tooltip="Couleur principale du personnage" />
 				<text name="HeroName" value="Nom du personnage" tooltip="Nom du personnage contrôlé par le joueur" />
 				<text name="HeroPack" value="Paquet du personnage" tooltip="Nom du paquet contenant le personnage contrôlé par le joueur" />
 				<text name="Name" value="Nom du joueur" tooltip="Nom du joueur correspondant à ce profil" />

@@ -152,7 +152,7 @@ public class UntitledSubPanelLines extends SubPanel
 	}
 	
 	/////////////////////////////////////////////////////////////////
-	// CONTENT			/////////////////////////////////////////////
+	// LABELS			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	public int[] getLabelPosition(JLabel label)
 	{	int result[] = null;
@@ -169,5 +169,73 @@ public class UntitledSubPanelLines extends SubPanel
 				line++;
 		}
 		return result;
+	}
+	
+	public JLabel getLabel(int line, int col)
+	{	Line l = getLine(line);
+		return l.getLabel(col);
+	}
+	
+	public void addLabel(int line, int col)
+	{	Line l = getLine(line);
+		l.addLabel(col);
+	}
+
+	public void setLabelKey(int line, int col, String key, boolean imageFlag)
+	{	Line l = getLine(line);
+		l.setLabelKey(col,key,imageFlag);
+	}
+
+	public void setLabelIcon(int line, int col, BufferedImage icon, String tooltip)
+	{	Line l = getLine(line);
+		l.setLabelIcon(col,icon,tooltip);
+	}
+
+	public void setLabelText(int line, int col, String text, String tooltip)
+	{	Line l = getLine(line);
+		l.setLabelText(col,text,tooltip);
+	}
+	
+	public void setLabelBackground(int line, int col, Color bg)
+	{	Line l = getLine(line);
+		l.setLabelBackground(col,bg);
+	}
+	
+	public void setLabelForeground(int line, int col, Color fg)
+	{	Line l = getLine(line);
+		l.setLabelForeground(col,fg);
+	}
+
+	public int getLabelColumn(int line, JLabel label)
+	{	int result = -1;
+		Line l = getLine(line);
+		result = l.getLabelColumn(label);
+		return result;
+	}
+	
+	public void setLabelMinWidth(int line, int col, int width)
+	{	Line l = getLine(line);
+		l.setLabelMinWidth(col,width);
+	}
+	public void setLabelPreferredWidth(int line, int col, int width)
+	{	Line l = getLine(line);
+		l.setLabelPreferredWidth(col,width);
+	}
+	public void setLabelMaxWidth(int line, int col, int width)
+	{	Line l = getLine(line);
+		l.setLabelMaxWidth(col,width);
+	}
+	
+	public void unsetLabelMinWidth(int line, int colSub)
+	{	Line l = getLine(line);
+		l.unsetLabelMinWidth(colSub);
+	}
+	public void unsetLabelPreferredWidth(int line, int colSub)
+	{	Line l = getLine(line);
+		l.unsetLabelPreferredWidth(colSub);
+	}
+	public void unsetLabelMaxWidth(int line, int colSub)
+	{	Line l = getLine(line);
+		l.unsetLabelMaxWidth(colSub);
 	}
 }

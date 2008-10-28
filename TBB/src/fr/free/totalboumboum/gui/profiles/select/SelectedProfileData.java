@@ -38,7 +38,6 @@ import javax.xml.parsers.ParserConfigurationException;
 import org.xml.sax.SAXException;
 
 import fr.free.totalboumboum.configuration.Configuration;
-import fr.free.totalboumboum.configuration.profile.PredefinedColor;
 import fr.free.totalboumboum.configuration.profile.Profile;
 import fr.free.totalboumboum.configuration.profile.ProfileLoader;
 import fr.free.totalboumboum.configuration.profile.ProfilesConfiguration;
@@ -186,21 +185,6 @@ public class SelectedProfileData extends EntitledDataPanel implements MouseListe
 			GuiTools.MENU_PROFILES_PREVIEW_AIPACK,
 			GuiTools.MENU_PROFILES_PREVIEW_HERONAME,
 			GuiTools.MENU_PROFILES_PREVIEW_HEROPACK,
-			GuiTools.MENU_PROFILES_PREVIEW_COLOR,			
-			GuiTools.MENU_PROFILES_PREVIEW_COLOR,			
-			GuiTools.MENU_PROFILES_PREVIEW_COLOR,			
-			GuiTools.MENU_PROFILES_PREVIEW_COLOR,			
-			GuiTools.MENU_PROFILES_PREVIEW_COLOR,			
-			GuiTools.MENU_PROFILES_PREVIEW_COLOR,			
-			GuiTools.MENU_PROFILES_PREVIEW_COLOR,			
-			GuiTools.MENU_PROFILES_PREVIEW_COLOR,			
-			GuiTools.MENU_PROFILES_PREVIEW_COLOR,			
-			GuiTools.MENU_PROFILES_PREVIEW_COLOR,			
-			GuiTools.MENU_PROFILES_PREVIEW_COLOR,			
-			GuiTools.MENU_PROFILES_PREVIEW_COLOR,			
-			GuiTools.MENU_PROFILES_PREVIEW_COLOR,			
-			GuiTools.MENU_PROFILES_PREVIEW_COLOR,			
-			GuiTools.MENU_PROFILES_PREVIEW_COLOR,			
 			GuiTools.MENU_PROFILES_PREVIEW_COLOR			
 		};
 		for(int line=0;line<keys.length;line++)
@@ -233,6 +217,8 @@ public class SelectedProfileData extends EntitledDataPanel implements MouseListe
 		if(selectedRow<0)
 		{	for(int i=0;i<values.length;i++)
 				values[i] = null;	
+			Color bg = GuiTools.COLOR_TABLE_REGULAR_BACKGROUND;
+			previewPanel.setLabelBackground(VIEW_LINE_COLOR,1,bg);
 			selectedProfile = null;
 			selectedProfileFile = null;
 		}
@@ -272,13 +258,11 @@ public class SelectedProfileData extends EntitledDataPanel implements MouseListe
 			values[VIEW_LINE_AI_PACK] = selectedProfile.getAiPackname();
 			values[VIEW_LINE_HERO_NAME] = selectedProfile.getSpriteName();
 			values[VIEW_LINE_HERO_PACK] = selectedProfile.getSpritePack();
-			PredefinedColor[] colors = selectedProfile.getSpriteColors();
-			for(int i=0;i<colors.length;i++)
-			{	if(colors[i]!=null)
-					values[VIEW_LINE_COLOR+i] = colors[i].toString();
-				else
-					values[VIEW_LINE_COLOR+i] = null;
-			}
+			values[VIEW_LINE_COLOR] = selectedProfile.getSpriteColor().toString();
+			Color clr = selectedProfile.getSpriteColor().getColor();
+			int alpha = GuiTools.ALPHA_TABLE_REGULAR_BACKGROUND_LEVEL3;
+			Color bg = new Color(clr.getRed(),clr.getGreen(),clr.getBlue(),alpha);
+			previewPanel.setLabelBackground(VIEW_LINE_COLOR,1,bg);
 		}
 		// common
 		for(int line=0;line<values.length;line++)
@@ -286,7 +270,7 @@ public class SelectedProfileData extends EntitledDataPanel implements MouseListe
 			String text = values[line];
 			String tooltip = text;
 			previewPanel.setLabelText(line,colSub,text,tooltip);
-		}		
+		}
 		
 //		mainPanel.validate();
 //		mainPanel.repaint();
@@ -365,7 +349,7 @@ public class SelectedProfileData extends EntitledDataPanel implements MouseListe
 		return result;
 	}
 	
-	private void unselectList()
+	public void unselectList()
 	{	if(selectedRow!=-1)
 		{	listPanels.get(currentPage).setLabelBackground(selectedRow,0,GuiTools.COLOR_TABLE_REGULAR_BACKGROUND);
 			selectedRow = -1;

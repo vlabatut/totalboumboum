@@ -644,6 +644,7 @@ public class Launcher
 	 * - nouveauté : possibilité de configurer les options graphiques depuis la GUI
 	 * - nouveauté : redémarrage de l'application quand on modifie la résolution
 	 * - nouveauté : configuration des paramètres avancés
+	 * - nouveauté : visualisation et édition des profils
 	 * 
 	 * *******************************************************
 	 * *********************** A FAIRE ***********************

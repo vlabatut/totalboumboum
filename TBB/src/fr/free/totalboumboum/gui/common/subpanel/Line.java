@@ -209,9 +209,9 @@ public class Line extends SubPanel
 	public void setLabelMaxWidth(int col, int width)
 	{	setLabelWidth(col,width,2);		
 	}
-	private void setLabelWidth(int line, int width, int mode)
+	private void setLabelWidth(int col, int width, int mode)
 	{	Dimension lineDim = new Dimension(width,height);
-		JLabel label = getLabel(line);
+		JLabel label = getLabel(col);
 		switch(mode)
 		{	case 0:
 				label.setMinimumSize(lineDim);
@@ -234,8 +234,8 @@ public class Line extends SubPanel
 	public void unsetLabelMaxWidth(int colSub)
 	{	unsetLabelWidth(colSub,2);		
 	}
-	private void unsetLabelWidth(int line, int mode)
-	{	JLabel label = getLabel(line);
+	private void unsetLabelWidth(int col, int mode)
+	{	JLabel label = getLabel(col);
 		switch(mode)
 		{	case 0:
 				label.setMinimumSize(null);
