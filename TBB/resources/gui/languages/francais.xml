@@ -7,6 +7,7 @@
 <!-- MAIN MENU -->
 		<group name="Main">
 			<group name="Button">
+				<text name="About" value="À propos" tooltip="À propos de Total Boum Boum" />
 				<text name="Heroes" value="Personnages" tooltip="Voir les personnages disponibles" />
 				<text name="Levels" value="Niveaux" tooltip="Voir les niveaux disponibles" />
 				<text name="Options" value="Options" tooltip="Accéder aux options générales du jeu" />

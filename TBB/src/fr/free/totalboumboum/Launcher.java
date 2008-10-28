@@ -22,6 +22,7 @@ package fr.free.totalboumboum;
  */
 
 import java.awt.AlphaComposite;
+import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics2D;
 import java.awt.Rectangle;
@@ -35,6 +36,7 @@ import javax.xml.parsers.ParserConfigurationException;
 import org.xml.sax.SAXException;
 
 import fr.free.totalboumboum.configuration.Configuration;
+import fr.free.totalboumboum.configuration.GameConstants;
 import fr.free.totalboumboum.gui.data.configuration.GuiConfiguration;
 import fr.free.totalboumboum.gui.menus.main.MainFrame;
 import fr.free.totalboumboum.gui.tools.GuiTools;
@@ -100,8 +102,12 @@ public class Launcher
 			g.setComposite(AlphaComposite.Clear);
 			g.fillRect(0,0,size.width,size.height);
 			g.setPaintMode();
-			g.setColor(GuiTools.COLOR_SPLASHSCREEN_TEXT);
 			g.setFont(new Font("Arial",Font.PLAIN,10));
+			g.setColor(new Color(0,0,0,100));
+		    g.drawString("Total Boum Boum version "+GameConstants.VERSION,70,90);
+		    g.drawString(new Character('\u00A9').toString()+" 2008 Vincent Labatut",70,100);
+		    g.drawString("Licensed under the GPL v2",70,110);
+			g.setColor(GuiTools.COLOR_SPLASHSCREEN_TEXT);
 	        g.drawString(msg,70,315);
 	        splash.update();
 		}
@@ -645,6 +651,7 @@ public class Launcher
 	 * - nouveauté : redémarrage de l'application quand on modifie la résolution
 	 * - nouveauté : configuration des paramètres avancés
 	 * - nouveauté : visualisation et édition des profils
+	 * - modification : informations légales dans le splashscreen
 	 * 
 	 * *******************************************************
 	 * *********************** A FAIRE ***********************

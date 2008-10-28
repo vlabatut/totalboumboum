@@ -53,6 +53,7 @@ public class GuiTools
 	// MENUS			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	/* MAIN */ 
+	public static final String MENU_MAIN_BUTTON_ABOUT = "MenuMainButtonAbout";
 	public static final String MENU_MAIN_BUTTON_HEROES = "MenuMainButtonHeroes";
 	public static final String MENU_MAIN_BUTTON_LEVELS = "MenuMainButtonLevels";
 	public static final String MENU_MAIN_BUTTON_OPTIONS = "MenuMainButtonOptions";
