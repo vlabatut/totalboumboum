@@ -131,6 +131,15 @@
 			
 			<group name="Edit">
 				<text name="Title" value="Éditer un profil" tooltip="Modification d'un profil" />
+				<text name="Ai" value="Intelligence artificielle" tooltip="Nom de l'intelligence artificielle" />
+				<text name="AiChange" value="Sélectionner l'IA" tooltip="Sélectionner une autre intelligence artificielle" />
+				<text name="Color" value="Couleur" tooltip="Couleur du personnage" />
+				<text name="ColorNext" value="Suivante" tooltip="Couleur suivante" />
+				<text name="ColorPrevious" value="Précédente" tooltip="Couleur précédente" />
+				<text name="Hero" value="Personnage" tooltip="Personnage contrôlé par le joueur" />
+				<text name="HeroChange" value="Sélectionner le personnage" tooltip="Sélectionner un autre personnage" />
+				<text name="Name" value="Nom" tooltip="Nom du profil" />
+				<text name="NameChange" value="Modifier le nom" tooltip="Modifier le nom du profil" />
 			</group>
 
 			<group name="List">

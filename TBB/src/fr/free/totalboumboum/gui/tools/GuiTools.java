@@ -141,6 +141,15 @@ public class GuiTools
 		public static final String MENU_PROFILES_BUTTON_NEW = "MenuProfilesButtonNew";
 		/* EDIT */
 		public static final String MENU_PROFILES_EDIT_TITLE = "MenuProfilesEditTitle";		
+		public static final String MENU_PROFILES_EDIT_AI = "MenuProfilesEditAi";
+		public static final String MENU_PROFILES_EDIT_AI_CHANGE = "MenuProfilesEditAiChange";
+		public static final String MENU_PROFILES_EDIT_COLOR = "MenuProfilesEditColor";
+		public static final String MENU_PROFILES_EDIT_COLOR_NEXT = "MenuProfilesEditColorNext";
+		public static final String MENU_PROFILES_EDIT_COLOR_PREVIOUS = "MenuProfilesEditColorPrevious";
+		public static final String MENU_PROFILES_EDIT_HERO = "MenuProfilesEditHero";
+		public static final String MENU_PROFILES_EDIT_HERO_CHANGE = "MenuProfilesEditHeroChange";
+		public static final String MENU_PROFILES_EDIT_NAME = "MenuProfilesEditName";
+		public static final String MENU_PROFILES_EDIT_NAME_CHANGE = "MenuProfilesEditNameChange";
 		/* LIST */
 		public static final String MENU_PROFILES_LIST_TITLE = "MenuProfilesListTitle";
 		public static final String MENU_PROFILES_LIST_PAGEDOWN = "MenuProfilesListPageDown";
@@ -736,12 +745,14 @@ public class GuiTools
 			// color
 			image = loadIcon(folder+GuiFileTools.FILE_COLOR,absent);
 			icons.put(MENU_PROFILES_PREVIEW_COLOR,image);
+			icons.put(MENU_PROFILES_EDIT_COLOR,image);
 			// command
 			image = loadIcon(folder+GuiFileTools.FILE_COMMAND,absent);
 			icons.put(MENU_OPTIONS_CONTROLS_HEADER_COMMAND,image);
 			// computer
 			image = loadIcon(folder+GuiFileTools.FILE_COMPUTER,absent);
 			icons.put(MENU_PROFILES_PREVIEW_AINAME,image);
+			icons.put(MENU_PROFILES_EDIT_AI,image);
 			// confrontations
 			image = loadIcon(folder+GuiFileTools.FILE_CONFRONTATIONS,absent);
 			icons.put(GAME_TOURNAMENT_DESCRIPTION_LIMIT_HEADER_CONFRONTATIONS,image);
@@ -789,6 +800,7 @@ public class GuiTools
 			// hero
 			image = loadIcon(folder+GuiFileTools.FILE_HERO,absent);
 			icons.put(MENU_PROFILES_PREVIEW_HERONAME,image);
+			icons.put(MENU_PROFILES_EDIT_HERO,image);
 			// initial
 			image = loadIcon(folder+GuiFileTools.FILE_INITIAL,absent);
 			icons.put(GAME_ROUND_DESCRIPTION_INITIALITEMS_TITLE,image);
@@ -837,6 +849,7 @@ public class GuiTools
 			icons.put(GAME_MATCH_STATISTICS_HEADER_NAME,image);
 			icons.put(GAME_ROUND_STATISTICS_HEADER_NAME,image);
 			icons.put(MENU_PROFILES_PREVIEW_NAME,image);
+			icons.put(MENU_PROFILES_EDIT_NAME,image);
 			// pack
 			image = loadIcon(folder+GuiFileTools.FILE_PACK,absent);
 			icons.put(GAME_ROUND_DESCRIPTION_MISC_HEADER_PACK,image);
@@ -935,6 +948,11 @@ public class GuiTools
 			icons.put(GAME_TOURNAMENT_DESCRIPTION_POINTS_DATA_DEATHS,image);
 			icons.put(GAME_MATCH_DESCRIPTION_POINTS_DATA_DEATHS,image);
 			icons.put(GAME_ROUND_DESCRIPTION_POINTS_DATA_DEATHS,image);
+			// edit
+			image = loadIcon(folder+GuiFileTools.FILE_EDIT,absent);
+			icons.put(MENU_PROFILES_EDIT_AI_CHANGE,image);
+			icons.put(MENU_PROFILES_EDIT_HERO_CHANGE,image);
+			icons.put(MENU_PROFILES_EDIT_NAME_CHANGE,image);
 			// false
 			image = loadIcon(folder+GuiFileTools.FILE_FALSE,absent);
 			icons.put(MENU_OPTIONS_CONTROLS_LINE_AUTO_FALSE,image);
@@ -972,6 +990,7 @@ public class GuiTools
 			icons.put(MENU_OPTIONS_GUI_LINE_LANGUAGE_NEXT,image);
 			icons.put(MENU_OPTIONS_GUI_LINE_FONT_NEXT,image);
 			icons.put(MENU_OPTIONS_GUI_LINE_BACKGROUND_NEXT,image);
+			icons.put(MENU_PROFILES_EDIT_COLOR_NEXT,image);
 			// no share
 			image = loadIcon(folder+GuiFileTools.FILE_NOSHARE,absent);
 			icons.put(GAME_TOURNAMENT_DESCRIPTION_POINTS_DATA_NOSHARE,image);
@@ -1003,6 +1022,7 @@ public class GuiTools
 			icons.put(MENU_OPTIONS_GUI_LINE_LANGUAGE_PREVIOUS,image);
 			icons.put(MENU_OPTIONS_GUI_LINE_FONT_PREVIOUS,image);
 			icons.put(MENU_OPTIONS_GUI_LINE_BACKGROUND_PREVIOUS,image);
+			icons.put(MENU_PROFILES_EDIT_COLOR_PREVIOUS,image);
 			// regular order
 			image = loadIcon(folder+GuiFileTools.FILE_REGULAR,absent);
 			icons.put(GAME_TOURNAMENT_DESCRIPTION_POINTS_DATA_REGULAR,image);
