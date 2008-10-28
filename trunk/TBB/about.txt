@@ -22,6 +22,6 @@ This product uses fonts designed by:
 		- web site: www.blambot.com
 		- resources/fonts/Anime Ace.ttf - Copyright 2001 Nate Piekos
 		- resources/fonts/Badaboom.ttf - Copyright 2003 Nate Piekos
-These fonts were completed by Vincent Labatut (mainly accents and various signs). 
+These fonts were completed by Vincent Labatut (mainly accents, and various signs). 
 ----------------------------------------------------------
 For source availability and license information see licence.txt.

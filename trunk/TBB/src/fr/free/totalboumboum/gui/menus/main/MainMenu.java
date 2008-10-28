@@ -61,6 +61,7 @@ public class MainMenu extends SimpleMenuPanel
 	private JButton buttonStats;
 	private JButton buttonHeroes;
 	private JButton buttonLevels;
+	private JButton buttonAbout;
 	private JButton buttonTournament;
 	private JButton buttonQuickMatch;
 	
@@ -84,6 +85,8 @@ buttonStats.setEnabled(false);
 buttonHeroes.setEnabled(false);
 		buttonLevels = GuiTools.createPrincipalVerticalMenuButton(GuiTools.MENU_MAIN_BUTTON_LEVELS,this);
 buttonLevels.setEnabled(false);
+		buttonAbout = GuiTools.createPrincipalVerticalMenuButton(GuiTools.MENU_MAIN_BUTTON_ABOUT,this);
+buttonAbout.setEnabled(false);
 		add(Box.createRigidArea(new Dimension(0,GuiTools.getSize(GuiTools.MENU_VERTICAL_BUTTON_SPACE))));
 		buttonTournament = GuiTools.createPrincipalVerticalMenuButton(GuiTools.MAIN_MENU_BUTTON_TOURNAMENT,this);
 		buttonQuickMatch = GuiTools.createPrincipalVerticalMenuButton(GuiTools.MENU_MAIN_BUTTON_QUICKMATCH,this);
