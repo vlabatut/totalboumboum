@@ -130,7 +130,7 @@ public class SelectedProfileData extends EntitledDataPanel implements MouseListe
 		});
 	}
 	
-	public void makeListPanels(int width, int height)
+	private void makeListPanels(int width, int height)
 	{	int lines = LIST_LINE_COUNT;
 		int cols = 1;
 		listPanels = new ArrayList<UntitledSubPanelTable>();
@@ -173,7 +173,7 @@ public class SelectedProfileData extends EntitledDataPanel implements MouseListe
 		}
 	}
 	
-	public void makePreviewPanel(int width, int height)
+	private void makePreviewPanel(int width, int height)
 	{	int lines = 21;
 		int colSubs = 2;
 		int colGroups = 1;

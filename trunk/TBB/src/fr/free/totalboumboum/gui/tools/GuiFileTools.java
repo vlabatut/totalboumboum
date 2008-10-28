@@ -42,6 +42,7 @@ public class GuiFileTools
 	public final static String FILE_DEATHS = "deaths.png";
 	public final static String FILE_DIMENSION = "dimension.png";
 	public final static String FILE_DISCRETIZE = "discretize.png";
+	public final static String FILE_EDIT = "edit.png";
 	public final static String FILE_FALSE = "false.png";
 	public final static String FILE_FRAGS = "frags.png";
 	public final static String FILE_FRAME = "frame.png";

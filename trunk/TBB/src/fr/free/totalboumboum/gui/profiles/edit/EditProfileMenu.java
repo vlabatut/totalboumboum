@@ -21,7 +21,6 @@ package fr.free.totalboumboum.gui.profiles.edit;
  * 
  */
 
-import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.io.IOException;
 
