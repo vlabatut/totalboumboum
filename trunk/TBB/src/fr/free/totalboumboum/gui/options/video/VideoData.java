@@ -39,6 +39,9 @@ import fr.free.totalboumboum.gui.tools.GuiTools;
 public class VideoData extends EntitledDataPanel implements MouseListener
 {	
 	private static final long serialVersionUID = 1L;
+	
+	private static final int LINE_COUNT = 20;
+
 	private static final int LINE_PANELDIM = 0;
 	private static final int LINE_BORDER = 1;
 	private static final int LINE_SMOOTH = 2;
@@ -71,10 +74,9 @@ public class VideoData extends EntitledDataPanel implements MouseListener
 		}
 	
 		// data
-		{	int lines = 20;
-			int w = getDataWidth();
+		{	int w = getDataWidth();
 			int h = getDataHeight();
-			optionsPanel = new UntitledSubPanelLines(w,h,lines,false);
+			optionsPanel = new UntitledSubPanelLines(w,h,LINE_COUNT,false);
 			int tWidth = (int)(w*0.66);
 			
 			// data
