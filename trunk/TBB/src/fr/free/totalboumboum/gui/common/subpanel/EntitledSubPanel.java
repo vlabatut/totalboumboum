@@ -151,4 +151,11 @@ public class EntitledSubPanel extends SubPanel
 	{	return data;	
 	}
 	
+	public int getDataWidth()
+	{	return dataWidth;	
+	}
+	public int getDataHeight()
+	{	return dataHeight;	
+	}
+	
 }
