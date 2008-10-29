@@ -36,6 +36,7 @@ import org.xml.sax.SAXException;
 
 import fr.free.totalboumboum.configuration.Configuration;
 import fr.free.totalboumboum.game.tournament.AbstractTournament;
+import fr.free.totalboumboum.gui.ai.select.SelectedAiSplitPanel;
 import fr.free.totalboumboum.gui.common.MenuContainer;
 import fr.free.totalboumboum.gui.common.panel.menu.MenuPanel;
 import fr.free.totalboumboum.gui.common.panel.menu.SimpleMenuPanel;
@@ -59,6 +60,8 @@ public class MainMenu extends SimpleMenuPanel
 	@SuppressWarnings("unused")
 	private JButton buttonProfiles;
 	private JButton buttonStats;
+	@SuppressWarnings("unused")
+	private JButton buttonAi;
 	private JButton buttonHeroes;
 	private JButton buttonLevels;
 	private JButton buttonAbout;
@@ -83,12 +86,13 @@ public class MainMenu extends SimpleMenuPanel
 buttonStats.setEnabled(false);
 		buttonHeroes = GuiTools.createPrincipalVerticalMenuButton(GuiTools.MENU_MAIN_BUTTON_HEROES,this);
 buttonHeroes.setEnabled(false);
+		buttonAi = GuiTools.createPrincipalVerticalMenuButton(GuiTools.MENU_MAIN_BUTTON_AI,this);
 		buttonLevels = GuiTools.createPrincipalVerticalMenuButton(GuiTools.MENU_MAIN_BUTTON_LEVELS,this);
 buttonLevels.setEnabled(false);
 		buttonAbout = GuiTools.createPrincipalVerticalMenuButton(GuiTools.MENU_MAIN_BUTTON_ABOUT,this);
 buttonAbout.setEnabled(false);
 		add(Box.createRigidArea(new Dimension(0,GuiTools.getSize(GuiTools.MENU_VERTICAL_BUTTON_SPACE))));
-		buttonTournament = GuiTools.createPrincipalVerticalMenuButton(GuiTools.MAIN_MENU_BUTTON_TOURNAMENT,this);
+		buttonTournament = GuiTools.createPrincipalVerticalMenuButton(GuiTools.MENU_MAIN_BUTTON_TOURNAMENT,this);
 		buttonQuickMatch = GuiTools.createPrincipalVerticalMenuButton(GuiTools.MENU_MAIN_BUTTON_QUICKMATCH,this);
 		add(Box.createVerticalGlue());		
 	}
@@ -107,6 +111,10 @@ buttonAbout.setEnabled(false);
 		{	SelectedProfileSplitPanel profilesMenuPanel = new SelectedProfileSplitPanel(getContainer(),this);
 			replaceWith(profilesMenuPanel);
 	    }
+		else if(e.getActionCommand().equals(GuiTools.MENU_MAIN_BUTTON_AI))
+		{	SelectedAiSplitPanel aiMenuPanel = new SelectedAiSplitPanel(getContainer(),this);
+			replaceWith(aiMenuPanel);
+	    }
 		else if(e.getActionCommand().equals(GuiTools.MENU_MAIN_BUTTON_STATISTICS))
 		{	
 	    }
@@ -116,7 +124,7 @@ buttonAbout.setEnabled(false);
 		else if(e.getActionCommand().equals(GuiTools.MENU_MAIN_BUTTON_LEVELS))
 		{	
 	    }
-		else if(e.getActionCommand().equals(GuiTools.MAIN_MENU_BUTTON_TOURNAMENT))
+		else if(e.getActionCommand().equals(GuiTools.MENU_MAIN_BUTTON_TOURNAMENT))
 		{	if(tournamentMainPanel==null)
 			{	try
 				{	Configuration.getGameConfiguration().loadLastTournament();

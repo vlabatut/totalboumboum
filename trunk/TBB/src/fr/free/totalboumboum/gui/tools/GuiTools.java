@@ -54,13 +54,19 @@ public class GuiTools
 	/////////////////////////////////////////////////////////////////
 	/* MAIN */ 
 	public static final String MENU_MAIN_BUTTON_ABOUT = "MenuMainButtonAbout";
+	public static final String MENU_MAIN_BUTTON_AI = "MenuMainButtonAi";
 	public static final String MENU_MAIN_BUTTON_HEROES = "MenuMainButtonHeroes";
 	public static final String MENU_MAIN_BUTTON_LEVELS = "MenuMainButtonLevels";
 	public static final String MENU_MAIN_BUTTON_OPTIONS = "MenuMainButtonOptions";
 	public static final String MENU_MAIN_BUTTON_PROFILES = "MenuMainButtonProfiles";
 	public static final String MENU_MAIN_BUTTON_QUICKMATCH = "MenuMainButtonQuickMatch";
 	public static final String MENU_MAIN_BUTTON_STATISTICS = "MenuMainButtonStatistics";
-	public static final String MAIN_MENU_BUTTON_TOURNAMENT = "MenuMainButtonTournament";
+	public static final String MENU_MAIN_BUTTON_TOURNAMENT = "MenuMainButtonTournament";
+	/* AI */
+		/* BUTTON */
+		public static final String MENU_AI_BUTTON_BACK = "MenuAiButtonBack";	
+		/* SELECT */
+		public static final String MENU_AI_SELECT_TITLE = "MenuAiSelectTitle";
 	/* OPTIONS */
 		/* BUTTON */
 		public static final String MENU_OPTIONS_BUTTON_ADVANCED = "MenuOptionsButtonAdvanced";

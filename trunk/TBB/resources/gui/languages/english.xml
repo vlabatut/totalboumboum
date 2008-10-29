@@ -8,6 +8,7 @@
 		<group name="Main">
 			<group name="Button">
 				<text name="About" value="About" tooltip="About Total Boum Boum" />
+				<text name="Ai" value="AIs" tooltip="Show the available artificial intelligences" />
 				<text name="Heroes" value="Heroes" tooltip="Show the available controlable characters" />
 				<text name="Levels" value="Levels" tooltip="Show the available levels" />
 				<text name="Options" value="Options" tooltip="Access the game options" />
@@ -15,6 +16,16 @@
 				<text name="QuickMatch" value="Quick match" tooltip="Play only one match" />
 				<text name="Statistics" value="Statistics" tooltip="See the player's statistics" />
 				<text name="Tournament" value="Tournament" tooltip="Select and play a tournament" />
+			</group>
+		</group>
+
+<!-- AI MENU -->	
+		<group name="Ai">
+			<group name="Button">
+				<text name="Back" value="Back" tooltip="Go back to the main menu" />
+			</group>
+			<group name="Select">
+				<text name="Title" value="AIs list" tooltip="List of all available artificial intelligences" />
 			</group>
 		</group>
 
@@ -163,7 +174,7 @@
 <!-- TOURNAMENT MENU -->	
 		<group name="Tournament">
 			<group name="Button">
-				<text name="Back" value="Back" tooltip="Go to back the main menu" />
+				<text name="Back" value="Back" tooltip="Go back to the main menu" />
 				<text name="Continue" value="Continue" tooltip="Continue with the current tournament" />
 				<text name="Load" value="Load" tooltip="Load an existing tournament" />
 				<text name="New" value="New" tooltip="Start a new tournament" />

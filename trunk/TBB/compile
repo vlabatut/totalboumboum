@@ -3,7 +3,7 @@
 #
 # This is a BASH (Bourne-Again SHell) script, 
 # it should work on most Linux, Unix, and Mac OS.
-# It (re)compiles the whole TBB game
+# It (re)compiles the whole TBB game and the dependant AI classes
 #
 # -------------------------------------------------------------------
 #

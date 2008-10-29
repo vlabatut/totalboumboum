@@ -8,6 +8,7 @@
 		<group name="Main">
 			<group name="Button">
 				<text name="About" value="À propos" tooltip="À propos de Total Boum Boum" />
+				<text name="Ai" value="IA" tooltip="Voir les intelligences artificielles disponibles" />
 				<text name="Heroes" value="Personnages" tooltip="Voir les personnages disponibles" />
 				<text name="Levels" value="Niveaux" tooltip="Voir les niveaux disponibles" />
 				<text name="Options" value="Options" tooltip="Accéder aux options générales du jeu" />
@@ -17,6 +18,16 @@
 				<text name="Tournament" value="Tournoi" tooltip="Commencer un tournoi" />
 			</group>
 		</group>
+
+<!-- AI MENU -->	
+		<group name="Ai">
+			<group name="Button">
+				<text name="Back" value="Retour" tooltip="Revenir au menu principal" />
+			</group>		
+			<group name="Select">
+				<text name="Title" value="Liste des IA" tooltip="Liste des intelligences artificielles disponibles" />
+			</group>
+		</group>	
 
 <!-- OPTIONS MENU -->
 		<group name="Options">
