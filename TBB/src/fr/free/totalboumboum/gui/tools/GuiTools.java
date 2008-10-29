@@ -67,6 +67,17 @@ public class GuiTools
 		public static final String MENU_AI_BUTTON_BACK = "MenuAiButtonBack";	
 		/* SELECT */
 		public static final String MENU_AI_SELECT_TITLE = "MenuAiSelectTitle";
+			/* CLASS */
+			public static final String MENU_AI_SELECT_CLASS_PAGEDOWN = "MenuAiSelectClassPageDown";
+			public static final String MENU_AI_SELECT_CLASS_PAGEUP = "MenuAiSelectClassPageUp";
+			/* PACKAGES */
+			public static final String MENU_AI_SELECT_PACKAGE_PAGEDOWN = "MenuAiSelectPackagePageDown";
+			public static final String MENU_AI_SELECT_PACKAGE_PAGEUP = "MenuAiSelectPackagePageUp";
+			/* PREVIEW */
+			public static final String MENU_AI_SELECT_PREVIEW_AUTHOR = "MenuAiSelectPreviewAuthor";
+			public static final String MENU_AI_SELECT_PREVIEW_NAME = "MenuAiSelectPreviewName";
+			public static final String MENU_AI_SELECT_PREVIEW_NOTES = "MenuAiSelectPreviewNotes";
+			public static final String MENU_AI_SELECT_PREVIEW_PACKAGE = "MenuAiSelectPreviewPackage";
 	/* OPTIONS */
 		/* BUTTON */
 		public static final String MENU_OPTIONS_BUTTON_ADVANCED = "MenuOptionsButtonAdvanced";
@@ -738,6 +749,7 @@ public class GuiTools
 			// author
 			image = loadIcon(folder+GuiFileTools.FILE_AUTHOR,absent);
 			icons.put(GAME_ROUND_DESCRIPTION_MISC_HEADER_AUTHOR,image);
+			icons.put(MENU_AI_SELECT_PREVIEW_AUTHOR,image);
 			// autofire
 			image = loadIcon(folder+GuiFileTools.FILE_AUTOFIRE,absent);
 			icons.put(MENU_OPTIONS_CONTROLS_HEADER_AUTO,image);
@@ -845,6 +857,7 @@ public class GuiTools
 			icons.put(GAME_TOURNAMENT_DESCRIPTION_MISC_TITLE,image);
 			icons.put(GAME_MATCH_DESCRIPTION_MISC_TITLE,image);
 			icons.put(GAME_ROUND_DESCRIPTION_MISC_TITLE,image);
+			icons.put(MENU_AI_SELECT_PREVIEW_NOTES,image);
 			// name
 			image = loadIcon(folder+GuiFileTools.FILE_NAME,absent);
 			icons.put(GAME_TOURNAMENT_DESCRIPTION_PLAYERS_HEADER_NAME,image);
@@ -857,11 +870,13 @@ public class GuiTools
 			icons.put(GAME_ROUND_STATISTICS_HEADER_NAME,image);
 			icons.put(MENU_PROFILES_PREVIEW_NAME,image);
 			icons.put(MENU_PROFILES_EDIT_NAME,image);
+			icons.put(MENU_AI_SELECT_PREVIEW_NAME,image);
 			// pack
 			image = loadIcon(folder+GuiFileTools.FILE_PACK,absent);
 			icons.put(GAME_ROUND_DESCRIPTION_MISC_HEADER_PACK,image);
 			icons.put(MENU_PROFILES_PREVIEW_AIPACK,image);
 			icons.put(MENU_PROFILES_PREVIEW_HEROPACK,image);
+			icons.put(MENU_AI_SELECT_PREVIEW_PACKAGE,image);
 			// paintings
 			image = loadIcon(folder+GuiFileTools.FILE_PAINTINGS,absent);
 			icons.put(GAME_TOURNAMENT_RESULTS_HEADER_PAINTINGS,image);
@@ -1006,9 +1021,13 @@ public class GuiTools
 			// page down
 			image = loadIcon(folder+GuiFileTools.FILE_PAGE_DOWN,absent);
 			icons.put(MENU_PROFILES_LIST_PAGEDOWN,image);
+			icons.put(MENU_AI_SELECT_CLASS_PAGEDOWN,image);
+			icons.put(MENU_AI_SELECT_PACKAGE_PAGEDOWN,image);
 			// page up
 			image = loadIcon(folder+GuiFileTools.FILE_PAGE_UP,absent);
 			icons.put(MENU_PROFILES_LIST_PAGEUP,image);
+			icons.put(MENU_AI_SELECT_CLASS_PAGEUP,image);
+			icons.put(MENU_AI_SELECT_PACKAGE_PAGEUP,image);
 			// paintings
 			image = loadIcon(folder+GuiFileTools.FILE_PAINTINGS,absent);
 			icons.put(GAME_TOURNAMENT_DESCRIPTION_POINTS_DATA_PAINTINGS,image);

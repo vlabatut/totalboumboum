@@ -35,6 +35,7 @@ import fr.free.totalboumboum.gui.common.panel.data.EntitledDataPanel;
 import fr.free.totalboumboum.gui.common.subpanel.Line;
 import fr.free.totalboumboum.gui.common.subpanel.UntitledSubPanelLines;
 import fr.free.totalboumboum.gui.data.configuration.GuiConfiguration;
+import fr.free.totalboumboum.gui.profiles.ai.SelectedAiSplitPanel;
 import fr.free.totalboumboum.gui.tools.GuiTools;
 
 public class EditProfileData extends EntitledDataPanel implements MouseListener
@@ -91,6 +92,8 @@ public class EditProfileData extends EntitledDataPanel implements MouseListener
 					ln.setLabelKey(col,GuiTools.MENU_PROFILES_EDIT_NAME_CHANGE,true);
 					Color bg = GuiTools.COLOR_TABLE_REGULAR_BACKGROUND;
 					ln.setLabelBackground(col,bg);
+					JLabel label = editPanel.getLabel(LINE_NAME,col);
+					label.addMouseListener(this);
 					col++;
 				}
 			}
@@ -133,6 +136,8 @@ public class EditProfileData extends EntitledDataPanel implements MouseListener
 					ln.setLabelKey(col,GuiTools.MENU_PROFILES_EDIT_AI_CHANGE,true);
 					Color bg = GuiTools.COLOR_TABLE_REGULAR_BACKGROUND;
 					ln.setLabelBackground(col,bg);
+					JLabel label = editPanel.getLabel(LINE_AI,col);
+					label.addMouseListener(this);
 					col++;
 				}
 			}
@@ -175,6 +180,8 @@ public class EditProfileData extends EntitledDataPanel implements MouseListener
 					ln.setLabelKey(col,GuiTools.MENU_PROFILES_EDIT_HERO_CHANGE,true);
 					Color bg = GuiTools.COLOR_TABLE_REGULAR_BACKGROUND;
 					ln.setLabelBackground(col,bg);
+					JLabel label = editPanel.getLabel(LINE_HERO,col);
+					label.addMouseListener(this);
 					col++;
 				}
 			}
@@ -301,6 +308,8 @@ public class EditProfileData extends EntitledDataPanel implements MouseListener
 				break;
 			// AI
 			case LINE_AI:
+				SelectedAiSplitPanel aiPanel = new SelectedAiSplitPanel(container.getContainer(),container);
+				getContainer().replaceWith(aiPanel);
 				break;
 			// HERO
 			case LINE_HERO:

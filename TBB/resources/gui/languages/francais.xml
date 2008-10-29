@@ -26,6 +26,20 @@
 			</group>		
 			<group name="Select">
 				<text name="Title" value="Liste des IA" tooltip="Liste des intelligences artificielles disponibles" />
+				<group name="Class">
+					<text name="PageDown" value="Descendre" tooltip="Revenir à la page d'IA suivante" />
+					<text name="PageUp" value="Monter" tooltip="Aller à la page d'IA précédente" />
+				</group>
+				<group name="Package">
+					<text name="PageDown" value="Descendre" tooltip="Revenir à la page de paquets suivante" />
+					<text name="PageUp" value="Monter" tooltip="Aller à la page de paquets précédente" />
+				</group>
+				<group name="Preview">
+					<text name="Author" value="Auteur" tooltip="Auteur de l'intelligence artificielle" />
+					<text name="Name" value="Nom" tooltip="Nom de l'intelligence artificielle" />
+					<text name="Notes" value="Notes" tooltip="Notes de l'auteur de l'intelligence artificielle" />
+					<text name="Package" value="Paquet" tooltip="Paquet contenant l'intelligence artificielle" />
+				</group>
 			</group>
 		</group>	
 

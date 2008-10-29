@@ -26,6 +26,20 @@
 			</group>
 			<group name="Select">
 				<text name="Title" value="AIs list" tooltip="List of all available artificial intelligences" />
+				<group name="Class">
+					<text name="PageDown" value="Page down" tooltip="Go to the next AIs page" />
+					<text name="PageUp" value="Page up" tooltip="Go back to the previous AIs page" />
+				</group>
+				<group name="Package">
+					<text name="PageDown" value="Page down" tooltip="Go to the next packages page" />
+					<text name="PageUp" value="Page up" tooltip="Go back to the previous packages page" />
+				</group>
+				<group name="Preview">
+					<text name="Author" value="Author" tooltip="Author of the artificial intelligence" />
+					<text name="Name" value="Name" tooltip="Name of the artificial intelligence" />
+					<text name="Notes" value="Notes" tooltip="Comments from the author" />
+					<text name="Package" value="Package" tooltip="Package containing the artificial intelligence" />
+				</group>
 			</group>
 		</group>
 
