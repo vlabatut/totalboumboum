@@ -13,15 +13,20 @@ This product includes software developed by:
 	- Sun Microsystems Inc: 
 		- web site: http://www.sun.com
 		- class fr.free.totalboumboum.gui.tools.SpringUtilities - Copyright 1995-2008 Sun Microsystems Inc.
-	- various AI students from Galatasaray University, Istanbul, Turkey:
+	- Various AI students from Galatasaray University, Istanbul, Turkey:
 		- web site: http://gsu.edu.tr 
 		- the ai packages in resources/ai - Copyright 2007-2008 their respective authors (see the classes for details)
 ----------------------------------------------------------
 This product uses fonts designed by:
 	- Nate Piekos for Blambot Fonts:
-		- web site: www.blambot.com
+		- web site: http://www.blambot.com
 		- resources/fonts/Anime Ace.ttf - Copyright 2001 Nate Piekos
 		- resources/fonts/Badaboom.ttf - Copyright 2003 Nate Piekos
 These fonts were completed by Vincent Labatut (mainly accents, and various signs). 
+----------------------------------------------------------
+This product uses icons designed by:
+	- Everaldo Coelho for Crystal Project Icons:
+		- web site: http://www.everaldo.com/crystal
+		- see resources/gui/buttons/license for details
 ----------------------------------------------------------
 For source availability and license information see licence.txt.
