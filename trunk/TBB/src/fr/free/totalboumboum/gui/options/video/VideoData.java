@@ -21,6 +21,7 @@ package fr.free.totalboumboum.gui.options.video;
  * 
  */
 
+import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
@@ -125,6 +126,8 @@ public class VideoData extends EntitledDataPanel implements MouseListener
 						ln.getLabel(col).addMouseListener(this);
 						col++;
 					}
+					Color bg = GuiTools.COLOR_TABLE_REGULAR_BACKGROUND;
+					ln.setBackgroundColor(bg);
 				}
 				
 				// #1 border color
@@ -147,6 +150,8 @@ public class VideoData extends EntitledDataPanel implements MouseListener
 						ln.setLabelText(col,text,tooltip);
 						col++;
 					}
+					Color bg = GuiTools.COLOR_TABLE_REGULAR_BACKGROUND;
+					ln.setBackgroundColor(bg);
 				}
 				
 				// #2 smooth graphics
@@ -164,6 +169,20 @@ public class VideoData extends EntitledDataPanel implements MouseListener
 					{	ln.setLabelMaxWidth(col,Integer.MAX_VALUE);
 						setSmoothGraphics();
 						ln.getLabel(col).addMouseListener(this);
+						col++;
+					}
+					Color bg = GuiTools.COLOR_TABLE_REGULAR_BACKGROUND;
+					ln.setBackgroundColor(bg);
+				}
+
+				// EMPTY
+				{	for(int line=LINE_SMOOTH+1;line<LINE_COUNT;line++)
+					{	Line ln = optionsPanel.getLine(line);
+						int col = 0;
+						int mw = ln.getWidth();
+						ln.setLabelMinWidth(col,mw);
+						ln.setLabelPreferredWidth(col,mw);
+						ln.setLabelMaxWidth(col,mw);
 						col++;
 					}
 				}

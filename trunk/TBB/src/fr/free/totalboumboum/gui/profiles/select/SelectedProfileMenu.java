@@ -85,7 +85,6 @@ public class SelectedProfileMenu extends InnerMenuPanel
 			if(profile!=null)
 			{	String profileFile = profileData.getSelectedProfileFile();
 				EditProfileSplitPanel editPanel = new EditProfileSplitPanel(container.getContainer(),container,profile,profileFile);
-				profileData.unselectList(); // NOTE sinon faut gérer un éventuel retour d'une modification, nécessitant un raffraichissement
 				replaceWith(editPanel);
 			}
 	    }

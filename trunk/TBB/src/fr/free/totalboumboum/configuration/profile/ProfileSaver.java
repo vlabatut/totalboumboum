@@ -48,8 +48,10 @@ public class ProfileSaver
 		Element generalElement = saveGeneralElement(profile);
 		result.addContent(generalElement);
 		// artificial intelligence
-		Element aiElement = saveAiElement(profile);
-		result.addContent(aiElement);
+		if(profile.hasAi())
+		{	Element aiElement = saveAiElement(profile);
+			result.addContent(aiElement);
+		}
 		// sprite info
 		Element characterElement = saveCharacterElement(profile);
 		result.addContent(characterElement);
