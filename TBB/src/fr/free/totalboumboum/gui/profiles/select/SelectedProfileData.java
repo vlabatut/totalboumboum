@@ -278,7 +278,7 @@ public class SelectedProfileData extends EntitledDataPanel implements MouseListe
 
 	@Override
 	public void refresh()
-	{	// nothing to do here
+	{	refreshPreview();
 	}
 
 	@Override

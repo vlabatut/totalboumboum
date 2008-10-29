@@ -21,6 +21,7 @@ package fr.free.totalboumboum.gui.options.controls;
  * 
  */
 
+import java.awt.Color;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.awt.event.MouseEvent;
@@ -97,7 +98,10 @@ public class ControlsData extends EntitledDataPanel implements MouseListener,Key
 			// data
 			{	controlSettings = Configuration.getControlsConfiguration().getControlSettings().get(index).copy();;
 				for(int line=1;line<actions.length+1;line++)
-				{	// command
+				{	Color bg = GuiTools.COLOR_TABLE_REGULAR_BACKGROUND;
+					keysPanel.setLineBackground(line, bg);
+
+					// command
 					{	String name = actions[line-1].toUpperCase().substring(0,1);
 						name = name + actions[line-1].toLowerCase().substring(1,actions[line-1].length());
 						String key = "MenuOptionsControlsLineCommand"+name;
@@ -134,7 +138,7 @@ public class ControlsData extends EntitledDataPanel implements MouseListener,Key
 
 	public void deselect()
 	{	if(selectedRow!=-1)
-		{	keysPanel.setLabelBackground(selectedRow,1,GuiTools.COLOR_TABLE_NEUTRAL_BACKGROUND);
+		{	keysPanel.setLabelBackground(selectedRow,1,GuiTools.COLOR_TABLE_REGULAR_BACKGROUND);
 			selectedRow = -1;		
 		}		
 	}
@@ -195,8 +199,7 @@ public class ControlsData extends EntitledDataPanel implements MouseListener,Key
 		switch(pos[1])
 		{	// key
 			case COL_KEY:
-				if(selectedRow!=-1)
-					keysPanel.setLabelBackground(selectedRow,1,GuiTools.COLOR_TABLE_NEUTRAL_BACKGROUND);
+				deselect();
 				selectedRow = pos[0];
 				keysPanel.setLabelBackground(pos[0],pos[1],GuiTools.COLOR_TABLE_SELECTED_BACKGROUND);
 				keysPanel.requestFocusInWindow();
@@ -233,9 +236,7 @@ public class ControlsData extends EntitledDataPanel implements MouseListener,Key
 			controlSettings.addOffKey(keyCode,action);
 			// 	update panel
 			setKey(selectedRow,1,keyCode);
-			keysPanel.setLabelBackground(selectedRow,1,GuiTools.COLOR_TABLE_NEUTRAL_BACKGROUND);
-			//
-			selectedRow = -1;
+			deselect();
 		}
 	}
 

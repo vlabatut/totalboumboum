@@ -21,6 +21,7 @@ package fr.free.totalboumboum.gui.options.gui;
  * 
  */
 
+import java.awt.Color;
 import java.awt.Font;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
@@ -46,6 +47,8 @@ import fr.free.totalboumboum.tools.FileTools;
 public class GuiData extends EntitledDataPanel implements MouseListener
 {	
 	private static final long serialVersionUID = 1L;
+
+	private static final int LINE_COUNT = 20;
 	private static final int LINE_LANGUAGE = 0;
 	private static final int LINE_FONT = 1;
 	private static final int LINE_BACKGROUND = 2;
@@ -65,10 +68,9 @@ public class GuiData extends EntitledDataPanel implements MouseListener
 		}
 	
 		// data
-		{	int lines = 20;
-			int w = getDataWidth();
+		{	int w = getDataWidth();
 			int h = getDataHeight();
-			optionsPanel = new UntitledSubPanelLines(w,h,lines,false);
+			optionsPanel = new UntitledSubPanelLines(w,h,LINE_COUNT,false);
 			int tWidth = (int)(w*0.5);
 			
 			initLanguages();
@@ -107,6 +109,8 @@ public class GuiData extends EntitledDataPanel implements MouseListener
 						ln.getLabel(col).addMouseListener(this);
 						col++;
 					}
+					Color bg = GuiTools.COLOR_TABLE_REGULAR_BACKGROUND;
+					ln.setBackgroundColor(bg);
 				}
 				
 				// #1 FONT
@@ -138,6 +142,8 @@ public class GuiData extends EntitledDataPanel implements MouseListener
 						ln.getLabel(col).addMouseListener(this);
 						col++;
 					}
+					Color bg = GuiTools.COLOR_TABLE_REGULAR_BACKGROUND;
+					ln.setBackgroundColor(bg);
 				}
 				
 				// #2 BACKGROUND
@@ -167,6 +173,20 @@ public class GuiData extends EntitledDataPanel implements MouseListener
 					{	ln.setLabelMaxWidth(col,ln.getHeight());
 						ln.setLabelKey(col,GuiTools.MENU_OPTIONS_GUI_LINE_BACKGROUND_NEXT,true);
 						ln.getLabel(col).addMouseListener(this);
+						col++;
+					}
+					Color bg = GuiTools.COLOR_TABLE_REGULAR_BACKGROUND;
+					ln.setBackgroundColor(bg);
+				}
+
+				// EMPTY
+				{	for(int line=LINE_BACKGROUND+1;line<LINE_COUNT;line++)
+					{	Line ln = optionsPanel.getLine(line);
+						int col = 0;
+						int mw = ln.getWidth();
+						ln.setLabelMinWidth(col,mw);
+						ln.setLabelPreferredWidth(col,mw);
+						ln.setLabelMaxWidth(col,mw);
 						col++;
 					}
 				}

@@ -21,6 +21,7 @@ package fr.free.totalboumboum.gui.options.advanced;
  * 
  */
 
+import java.awt.Color;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.text.NumberFormat;
@@ -39,6 +40,8 @@ import fr.free.totalboumboum.gui.tools.GuiTools;
 public class AdvancedData extends EntitledDataPanel implements MouseListener
 {	
 	private static final long serialVersionUID = 1L;
+	
+	private static final int LINE_COUNT = 20;
 	private static final int LINE_FPS = 0;
 	private static final int LINE_ADJUST = 1;
 	private static final int LINE_SPEED = 2;
@@ -73,10 +76,9 @@ public class AdvancedData extends EntitledDataPanel implements MouseListener
 		}
 	
 		// data
-		{	int lines = 20;
-			int w = getDataWidth();
+		{	int w = getDataWidth();
 			int h = getDataHeight();
-			optionsPanel = new UntitledSubPanelLines(w,h,lines,false);
+			optionsPanel = new UntitledSubPanelLines(w,h,LINE_COUNT,false);
 			int tWidth = (int)(w*0.66);
 			
 			// data
@@ -111,6 +113,8 @@ public class AdvancedData extends EntitledDataPanel implements MouseListener
 						ln.getLabel(col).addMouseListener(this);
 						col++;
 					}
+					Color bg = GuiTools.COLOR_TABLE_REGULAR_BACKGROUND;
+					ln.setBackgroundColor(bg);
 				}
 				
 				// #1 AUTO ADJUST
@@ -129,6 +133,8 @@ public class AdvancedData extends EntitledDataPanel implements MouseListener
 						ln.getLabel(col).addMouseListener(this);
 						col++;
 					}
+					Color bg = GuiTools.COLOR_TABLE_REGULAR_BACKGROUND;
+					ln.setBackgroundColor(bg);
 				}
 				
 				// #2 GAME SPEED
@@ -158,6 +164,20 @@ public class AdvancedData extends EntitledDataPanel implements MouseListener
 					{	ln.setLabelMaxWidth(col,ln.getHeight());
 						ln.setLabelKey(col,GuiTools.MENU_OPTIONS_ADVANCED_LINE_SPEED_PLUS,true);
 						ln.getLabel(col).addMouseListener(this);
+						col++;
+					}
+					Color bg = GuiTools.COLOR_TABLE_REGULAR_BACKGROUND;
+					ln.setBackgroundColor(bg);
+				}
+
+				// EMPTY
+				{	for(int line=LINE_SPEED+1;line<LINE_COUNT;line++)
+					{	Line ln = optionsPanel.getLine(line);
+						int col = 0;
+						int mw = ln.getWidth();
+						ln.setLabelMinWidth(col,mw);
+						ln.setLabelPreferredWidth(col,mw);
+						ln.setLabelMaxWidth(col,mw);
 						col++;
 					}
 				}
