@@ -26,6 +26,7 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.io.File;
 import java.io.FileFilter;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
@@ -34,9 +35,14 @@ import java.util.Iterator;
 import javax.swing.Box;
 import javax.swing.BoxLayout;
 import javax.swing.JLabel;
+import javax.xml.parsers.ParserConfigurationException;
 
+import org.xml.sax.SAXException;
+
+import fr.free.totalboumboum.ai.AbstractAiManager;
 import fr.free.totalboumboum.ai.AiPreview;
 import fr.free.totalboumboum.ai.AiPreviewLoader;
+import fr.free.totalboumboum.ai.AiPreviewSaver;
 import fr.free.totalboumboum.gui.common.panel.SplitMenuPanel;
 import fr.free.totalboumboum.gui.common.panel.data.EntitledDataPanel;
 import fr.free.totalboumboum.gui.common.subpanel.EntitledSubPanel;
@@ -45,6 +51,7 @@ import fr.free.totalboumboum.gui.common.subpanel.SubTextPanel;
 import fr.free.totalboumboum.gui.common.subpanel.UntitledSubPanelTable;
 import fr.free.totalboumboum.gui.data.configuration.GuiConfiguration;
 import fr.free.totalboumboum.gui.tools.GuiTools;
+import fr.free.totalboumboum.tools.ClassTools;
 import fr.free.totalboumboum.tools.FileTools;
 
 public class SelectedAiData extends EntitledDataPanel implements MouseListener
@@ -81,8 +88,8 @@ public class SelectedAiData extends EntitledDataPanel implements MouseListener
 	private ArrayList<UntitledSubPanelTable> listPackagePanels;
 	private int currentPackagePage = 0;
 	private int selectedPackageRow = -1;
-	private ArrayList<String> aiPacks;
-	private ArrayList<ArrayList<File>> aiFiles;
+	private ArrayList<String> aiPackages;
+	private ArrayList<ArrayList<String>> aiFolders;
 
 	private ArrayList<UntitledSubPanelTable> listAiPanels;
 	private int currentAiPage = 0;
@@ -91,6 +98,8 @@ public class SelectedAiData extends EntitledDataPanel implements MouseListener
 		
 	@SuppressWarnings("unused")
 	private boolean packageMode = true; //false if AIs are displayed 
+	@SuppressWarnings("unused")
+	private int lastAuthorNumber = 1;
 	
 	public SelectedAiData(SplitMenuPanel container)
 	{	super(container);
@@ -111,7 +120,7 @@ public class SelectedAiData extends EntitledDataPanel implements MouseListener
 			initPackages();
 			
 			// list panel
-			{	makePackageListPanels(leftWidth,dataHeight);
+			{	makePackagesListPanels(leftWidth,dataHeight);
 				mainPanel.add(listPackagePanels.get(currentPackagePage));
 			}
 			
@@ -142,13 +151,17 @@ public class SelectedAiData extends EntitledDataPanel implements MouseListener
 		}
 	}
 		
+	/**
+	 * builds the list of ai (main) packages and of ai folders (or secondary packages).
+	 * for each folder, tests if an ai.xml file is present. if not, creates this file.
+	 */
 	private void initPackages()
-	{	aiFiles = new ArrayList<ArrayList<File>>();
-		aiPacks = new ArrayList<String>();
+	{	aiPackages = new ArrayList<String>();
+		aiFolders = new ArrayList<ArrayList<String>>();
 		
 		// packages
-		String aiFolder = FileTools.getAiPath();
-		File aiF = new File(aiFolder);
+		String aiMainName = FileTools.getAiPath();
+		File aiMainFile = new File(aiMainName);
 		FileFilter filter = new FileFilter()
 		{	@Override
 			public boolean accept(File pathname)
@@ -156,10 +169,10 @@ public class SelectedAiData extends EntitledDataPanel implements MouseListener
 				return result;
 			}
 		};
-		File aiFs[] = aiF.listFiles(filter);
-		ArrayList<File> aiFolders = new ArrayList<File>();
-		for(int i=0;i<aiFs.length;i++)
-			aiFolders.add(aiFs[i]);
+		File aiPackageFilesTemp[] = aiMainFile.listFiles(filter);
+		ArrayList<File> aiPackageFiles = new ArrayList<File>();
+		for(int i=0;i<aiPackageFilesTemp.length;i++)
+			aiPackageFiles.add(aiPackageFilesTemp[i]);
 		Comparator<File> comparator = new Comparator<File>()
 		{	@Override
 			public int compare(File o1, File o2)
@@ -169,68 +182,113 @@ public class SelectedAiData extends EntitledDataPanel implements MouseListener
 				return result;
 			}			
 		};	
-		Collections.sort(aiFolders,comparator);
-		
+		Collections.sort(aiPackageFiles,comparator);
+
 		// AIs
-		Iterator<File> p = aiFolders.iterator();
+		Iterator<File> p = aiPackageFiles.iterator();
 		while(p.hasNext())
 		{	// get the list of folders in this package
-			File pack = p.next();
-			String packName = pack.getName();
-			File ai[] = pack.listFiles(filter);
-			ArrayList<File> aiPackages = new ArrayList<File>();
-			for(int i=0;i<ai.length;i++)
-				aiPackages.add(ai[i]);
-			Collections.sort(aiPackages,comparator);
-			ArrayList<File> fileList = new ArrayList<File>();
-			Iterator<File> q = aiPackages.iterator();
+			File aiPackageFile = p.next();
+			String packageName = aiPackageFile.getName();
+			File aiFolderFiles[] = aiPackageFile.listFiles(filter);
+			ArrayList<File> aiFiles = new ArrayList<File>();
+			for(int i=0;i<aiFolderFiles.length;i++)
+				aiFiles.add(aiFolderFiles[i]);
+			Collections.sort(aiFiles,comparator);
+			ArrayList<String> aiFoldersTemp = new ArrayList<String>();
+			Iterator<File> q = aiFiles.iterator();
 			while(q.hasNext())
 			{	// find the XML file class
-				File aiPack = q.next();
-				File[] content = aiPack.listFiles();
-				int i = 0;
-				File xmlFile = null;
-				String xmlFileName = FileTools.FILE_PROPERTIES+FileTools.EXTENSION_DATA;
-				while(i<content.length && xmlFile==null)
-				{	if(content[i].getName().equalsIgnoreCase(xmlFileName))
-						xmlFile = content[i];
-					else
-						i++;				
+				File aiFolderFile = q.next();
+				String folderName = aiFolderFile.getName();
+				File[] content = aiFolderFile.listFiles();
+				String classFileName = FileTools.FILE_AI_MAIN_CLASS+FileTools.EXTENSION_CLASS;
+				File classFile = getFile(classFileName,content);
+				if(classFile!=null)
+				{	String pkgName = packageName+ClassTools.CLASS_SEPARATOR+folderName;
+					String classQualifiedName = pkgName+ClassTools.CLASS_SEPARATOR+FileTools.FILE_AI_MAIN_CLASS;
+					try
+					{	Class<?> tempClass = Class.forName(classQualifiedName);
+						if(AbstractAiManager.class.isAssignableFrom(tempClass))
+						{	aiFoldersTemp.add(folderName);
+							String xmlFileName = FileTools.FILE_AI+FileTools.EXTENSION_DATA;
+							File xmlFile = getFile(xmlFileName,content);
+							if(xmlFile == null)
+							{	AiPreview aiPreview = new AiPreview(packageName,folderName);
+								AiPreviewSaver.saveAiPreview(aiPreview);
+							}
+						}
+					}
+					catch (ClassNotFoundException e)
+					{	e.printStackTrace();
+					}
+					catch (ParserConfigurationException e)
+					{	e.printStackTrace();
+					}
+					catch (SAXException e)
+					{	e.printStackTrace();
+					}
+					catch (IOException e)
+					{	e.printStackTrace();
+					}
 				}
-				if(xmlFile!=null)
-					fileList.add(xmlFile);
 			}
 			// add to the list of AIs for this package
-			if(fileList.size()>0)
-			{	aiFiles.add(fileList);
-				aiPacks.add(packName);
+			if(aiFoldersTemp.size()>0)
+			{	aiFolders.add(aiFoldersTemp);
+				aiPackages.add(packageName);
 			}
 		}
+	}
+	
+	private File getFile(String fileName, File[] list)
+	{	File result = null;
+		int i = 0;
+		while(i<list.length && result==null)
+		{	String fName = list[i].getName();
+			if(fName.equalsIgnoreCase(fileName))
+				result = list[i];
+			else
+				i++;				
+		}
+		return result;
 	}
 	
 	@SuppressWarnings("unused")
 	private void initAiPreviews()
 	{	aiPreviews = new ArrayList<AiPreview>();
 		int selectedPackageIndex = currentPackagePage*(LIST_LINE_COUNT-2)+selectedPackageRow;
-		Iterator<File> it = aiFiles.get(selectedPackageIndex).iterator();
+		String packageName = aiPackages.get(selectedPackageIndex);
+		Iterator<String> it = aiFolders.get(selectedPackageIndex).iterator();
 		while(it.hasNext())
-		{	File file = it.next();
-			AiPreview aiPreview = AiPreviewLoader.loadAiPreview(file.getPath());
-			aiPreviews.add(aiPreview);
+		{	String folderName = it.next();
+			try
+			{	AiPreview aiPreview = AiPreviewLoader.loadAiPreview(packageName,folderName);
+				aiPreviews.add(aiPreview);
+			}
+			catch (ParserConfigurationException e)
+			{	e.printStackTrace();
+			}
+			catch (SAXException e)
+			{	e.printStackTrace();
+			}
+			catch (IOException e)
+			{	e.printStackTrace();
+			}
 		}
 	}
 	
-	private void makePackageListPanels(int width, int height)
+	private void makePackagesListPanels(int width, int height)
 	{	int cols = 1;
 		listPackagePanels = new ArrayList<UntitledSubPanelTable>();
 		
-		for(int panelIndex=0;panelIndex<getPackagePageCount();panelIndex++)
+		for(int panelIndex=0;panelIndex<getPackagesPageCount();panelIndex++)
 		{	UntitledSubPanelTable listPanel = new UntitledSubPanelTable(width,height,cols,LIST_LINE_COUNT,false);
 			listPanel.setSubColumnsMaxWidth(0,Integer.MAX_VALUE);
 		
 			// data
 			int line = 1;
-			Iterator<String> it = aiPacks.iterator(); 
+			Iterator<String> it = aiPackages.iterator(); 
 			while(line<LIST_LINE_NEXT && it.hasNext())
 			{	Color bg = GuiTools.COLOR_TABLE_REGULAR_BACKGROUND;
 				String name = it.next();
@@ -261,11 +319,11 @@ public class SelectedAiData extends EntitledDataPanel implements MouseListener
 	}
 
 	@SuppressWarnings("unused")
-	private void makeAiListPanels(int width, int height)
+	private void makeFoldersListPanels(int width, int height)
 	{	int cols = 1;
 		listAiPanels = new ArrayList<UntitledSubPanelTable>();
 		
-		for(int panelIndex=0;panelIndex<getAiPageCount();panelIndex++)
+		for(int panelIndex=0;panelIndex<getFoldersPageCount();panelIndex++)
 		{	UntitledSubPanelTable listPanel = new UntitledSubPanelTable(width,height,cols,LIST_LINE_COUNT,false);
 			listPanel.setSubColumnsMaxWidth(0,Integer.MAX_VALUE);
 		
@@ -347,11 +405,11 @@ public class SelectedAiData extends EntitledDataPanel implements MouseListener
 		int w = notesPanel.getDataWidth();
 		int h = notesPanel.getDataHeight();
 		SubTextPanel textPanel = new SubTextPanel(w,h,fontSize);
+		notesPanel.setDataPanel(textPanel);
 		Color bg = notesPanel.getDataPanel().getBackground();
 		textPanel.setBackground(bg);
 		Color fg = notesPanel.getDataPanel().getForeground();
 		textPanel.setForeground(fg);
-		notesPanel.setDataPanel(textPanel);
 	}
 
 /*	
@@ -500,16 +558,16 @@ public class SelectedAiData extends EntitledDataPanel implements MouseListener
 	{	
 	}
 	
-	private int getPackagePageCount()
-	{	int result = aiPacks.size()/(LIST_LINE_COUNT-2);
-		if(aiPacks.size()%(LIST_LINE_COUNT-2)>0)
+	private int getPackagesPageCount()
+	{	int result = aiPackages.size()/(LIST_LINE_COUNT-2);
+		if(aiPackages.size()%(LIST_LINE_COUNT-2)>0)
 			result++;
 		else if(result==0)
 			result = 1;
 		return result;
 	}
 	
-	private int getAiPageCount()
+	private int getFoldersPageCount()
 	{	int result = aiPreviews.size()/(LIST_LINE_COUNT-2);
 		if(aiPreviews.size()%(LIST_LINE_COUNT-2)>0)
 			result++;

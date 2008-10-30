@@ -25,6 +25,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.lang.reflect.InvocationTargetException;
 
+import fr.free.totalboumboum.tools.ClassTools;
 import fr.free.totalboumboum.tools.FileTools;
 
 public class AiLoader
@@ -40,8 +41,8 @@ public class AiLoader
 			throw new FileNotFoundException(classFile);
 		
 		// load the class
-		String packageName = packname+FileTools.CLASS_SEPARATOR+name;
-		String classQualifiedName = packageName+FileTools.CLASS_SEPARATOR+FileTools.FILE_AI;
+		String packageName = packname+ClassTools.CLASS_SEPARATOR+name;
+		String classQualifiedName = packageName+ClassTools.CLASS_SEPARATOR+FileTools.FILE_AI;
 		Class<?> tempClass = Class.forName(classQualifiedName);
 		if(!AbstractAiManager.class.isAssignableFrom(tempClass))
 			throw new ClassCastException(classQualifiedName);

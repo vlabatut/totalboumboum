@@ -56,6 +56,7 @@ public class XmlTools
 	public static final String ELT_AI = "ai";
 	public static final String ELT_ALL_LEVELS = "all-levels";
 	public static final String ELT_AUTHOR = "author";
+	public static final String ELT_AUTHORS = "authors";
 	public static final String ELT_BIGWALL = "bigwall";
 	public static final String ELT_BIGWALLS = "bigwalls";
 	public static final String ELT_BLOCK = "block";
