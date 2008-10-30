@@ -27,15 +27,15 @@ import java.io.File;
 
 public class FileTools
 {
-	public static final String CLASS_SEPARATOR = ".";
-
 	public static final String EXTENSION_DATA = ".xml";
 	public static final String EXTENSION_CLASS = ".class";
 	public static final String EXTENSION_FONT = ".ttf";
+	public static final String EXTENSION_JAVA = ".java";
 	public static final String EXTENSION_SCHEMA = ".xsd";
 	//
 	public static final String FILE_ABILITIES = "abilities";
-	public static final String FILE_AI = "AiMain";
+	public static final String FILE_AI = "ai";
+	public static final String FILE_AI_MAIN_CLASS = "AiMain";
 	public static final String FILE_ANIMES = "animes";
 	public static final String FILE_BLOCK = "block";
 	public static final String FILE_BOMB = "bomb";
