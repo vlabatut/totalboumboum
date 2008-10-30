@@ -334,7 +334,7 @@ public class SelectedAiData extends EntitledDataPanel implements MouseListener
 			{	Color bg = GuiTools.COLOR_TABLE_REGULAR_BACKGROUND;
 				AiPreview aiPreview = it.next();
 				listPanel.setLabelBackground(line,0,bg);
-				listPanel.setLabelText(line,0,aiPreview.getName(),aiPreview.getName());
+				listPanel.setLabelText(line,0,aiPreview.getFolder(),aiPreview.getFolder());
 				JLabel label = listPanel.getLabel(line,0);
 				label.addMouseListener(this);
 				line++;

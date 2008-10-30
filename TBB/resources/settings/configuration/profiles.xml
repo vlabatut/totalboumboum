@@ -1,24 +1,24 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <profiles xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="..\..\..\resources\schemas\profiles.xsd">
 
-	<profile name="Human" file="1"/>
+	<profile name="Joueur Humain" file="1"/>
 
-	<profile name="Basman+Sandalli"  file="2"/>
-	<profile name="Baydar+Camci"  file="3" />
-	<profile name="Bingol+Ketenci" file="4" />
-	<profile name="Caglayan+Elmas" file="5" />
-	<profile name="Camas+Demirbas" file="6" />
+	<profile name="Başman+Sandallı"  file="2"/>
+	<profile name="Baydar+Camcı"  file="3" />
+	<profile name="Bingöl+Ketenci" file="4" />
+	<profile name="Çağlayan+Elmas" file="5" />
+	<profile name="Çamaş+Demirbaş" file="6" />
 	<profile name="Cirit+Mutlu" file="7" />
-	<profile name="Demirkol+Dogan" file="8" />
-	<profile name="Gokce+Eren" file="9" />
-	<profile name="Goksay+Kose" file="10" />
-	<profile name="GokselMenges" file="11" />
+	<profile name="Demirkol+Doğan" file="8" />
+	<profile name="Eren+Gökçe" file="9" />
+	<profile name="Göksay+Köse" file="10" />
+	<profile name="Göksel+Mengeş" file="11" />
 	<profile name="Hanci+Toprak" file="12" />
-	<profile name="Kecer+Yaman" file="13" />
-	<profile name="Kilic+Pala" file="14" />
-	<profile name="Kurtulus+Ozsoy" file="15" />
-	<profile name="Okan+Yuksel" file="16" />
-	<profile name="Sahin+Yildirim" file="17" />
+	<profile name="Keçer+Yaman" file="13" />
+	<profile name="Kılıç+Pala" file="14" />
+	<profile name="Kurtuluş+Özsoy" file="15" />
+	<profile name="Okan+Yüksel" file="16" />
+	<profile name="Şahin+Yıldırım" file="17" />
 
 	<profile name="Promeneur" file="18"/>
 	<profile name="Ne sert à rien" file="19"/>
