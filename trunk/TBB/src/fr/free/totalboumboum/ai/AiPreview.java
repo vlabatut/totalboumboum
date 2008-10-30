@@ -7,21 +7,6 @@ public class AiPreview
 	public AiPreview(String pack, String folder)
 	{	this.pack = pack;
 		this.folder = folder;
-		name = "Artificial Intelligence";
-		pack = "tournament200809";		
-	}
-	
-	/////////////////////////////////////////////////////////////////
-	// NAME				/////////////////////////////////////////////
-	/////////////////////////////////////////////////////////////////
-	private String name;
-	
-	public String getName()
-	{	return name;
-	}
-	
-	public void setName(String name)
-	{	this.name = name;
 	}
 	
 	/////////////////////////////////////////////////////////////////

@@ -2,10 +2,6 @@
 <xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema">
 <xsd:include schemaLocation="_notes.xsd"/>
 
-	<xsd:complexType name="tGeneral">
-		<xsd:attribute name="name" type="xsd:string" use="required" />
-	</xsd:complexType>
-
 	<xsd:complexType name="tAuthor">
 		<xsd:attribute name="name" type="xsd:string" use="required" />
 	</xsd:complexType>
@@ -20,7 +16,6 @@
 	<xsd:complexType name="tAi">
 		<xsd:sequence>
 			<xsd:element name="notes" type="tNotes" />
-			<xsd:element name="general" type="tGeneral"  />
 			<xsd:element name="authors" type="tAuthors" />
 		</xsd:sequence>
 	</xsd:complexType>

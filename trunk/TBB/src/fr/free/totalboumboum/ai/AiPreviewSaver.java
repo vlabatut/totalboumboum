@@ -52,9 +52,6 @@ public class AiPreviewSaver
 		// notes
 		Element notesElement = saveNotesElement(aiPreview);
 		result.addContent(notesElement);
-		// general
-		Element generalElement = saveGeneralElement(aiPreview);
-		result.addContent(generalElement);
 		// authors
 		Element authorsElement = saveAuthorsElement(aiPreview);
 		result.addContent(authorsElement);
@@ -71,13 +68,6 @@ public class AiPreviewSaver
 			elt.setAttribute(XmlTools.ATT_VALUE,temp);
 			result.addContent(elt);
 		}
-		return result;
-	}
-	
-	private static Element saveGeneralElement(AiPreview aiPreview)
-	{	Element result = new Element(XmlTools.ELT_GENERAL);
-		String name = aiPreview.getName();
-		result.setAttribute(XmlTools.ATT_NAME,name);
 		return result;
 	}
 	

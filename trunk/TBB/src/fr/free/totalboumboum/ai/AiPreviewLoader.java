@@ -34,18 +34,9 @@ public class AiPreviewLoader
 		element = root.getChild(XmlTools.ELT_NOTES);
 		ArrayList<String> notes = MatchLoader.loadNotesElement(root);
 		result.setNotes(notes);
-		// general
-		element = root.getChild(XmlTools.ELT_GENERAL);
-		loadGeneralElement(element,result);
 		// authors
 		element = root.getChild(XmlTools.ELT_AUTHORS);
 		loadAuthorsElement(element,result);
-	}
-	
-	private static void loadGeneralElement(Element root, AiPreview result)
-	{	// name
-		String value = root.getAttribute(XmlTools.ATT_NAME).getValue().trim();
-		result.setName(value);
 	}
 	
 	@SuppressWarnings("unchecked")
