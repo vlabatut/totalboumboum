@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <colormap xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
-		xsi:noNamespaceSchemaLocation="..\..\..\..\xml\schemas\colormap.xsd" >
+		xsi:noNamespaceSchemaLocation="..\..\..\..\..\schemas\colormap.xsd" >
 		
 	<color index="13" red="004" green="019" blue="143" /> <!-- casque normal -->
 	<color index="11" red="248" green="200" blue="144" /> <!-- visage -->

@@ -22,42 +22,21 @@ package fr.free.totalboumboum.gui.ai.select;
  */
 
 import java.awt.Color;
-import java.awt.Component;
-import java.awt.Dimension;
-import java.awt.Font;
-import java.awt.Graphics;
-import java.awt.Graphics2D;
-import java.awt.RenderingHints;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.io.File;
 import java.io.FileFilter;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
-import java.util.HashMap;
 import java.util.Iterator;
-import java.util.Map.Entry;
 
 import javax.swing.Box;
 import javax.swing.BoxLayout;
-import javax.swing.JComponent;
 import javax.swing.JLabel;
-import javax.swing.JTextPane;
-import javax.swing.text.SimpleAttributeSet;
-import javax.swing.text.StyleConstants;
-import javax.swing.text.StyledDocument;
-import javax.xml.parsers.ParserConfigurationException;
-
-import org.xml.sax.SAXException;
 
 import fr.free.totalboumboum.ai.AiPreview;
 import fr.free.totalboumboum.ai.AiPreviewLoader;
-import fr.free.totalboumboum.configuration.Configuration;
-import fr.free.totalboumboum.configuration.profile.Profile;
-import fr.free.totalboumboum.configuration.profile.ProfileLoader;
-import fr.free.totalboumboum.configuration.profile.ProfilesConfiguration;
 import fr.free.totalboumboum.gui.common.panel.SplitMenuPanel;
 import fr.free.totalboumboum.gui.common.panel.data.EntitledDataPanel;
 import fr.free.totalboumboum.gui.common.subpanel.EntitledSubPanel;
@@ -77,15 +56,21 @@ public class SelectedAiData extends EntitledDataPanel implements MouseListener
 	private static final int LIST_LINE_PREVIOUS = 0;
 	private static final int LIST_LINE_NEXT = LIST_LINE_COUNT-1;
 
+	@SuppressWarnings("unused")
 	private static final int VIEW_LINE_NAME = 0;
+	@SuppressWarnings("unused")
 	private static final int VIEW_LINE_PACK = 1;
+	@SuppressWarnings("unused")
 	private static final int VIEW_LINE_AUTHOR = 2;
 
+	@SuppressWarnings("unused")
 	private static final int LIST_PANEL_INDEX = 0;
 	@SuppressWarnings("unused")
 	private static final int PREVIEW_PANEL_INDEX = 2;
 	
+	@SuppressWarnings("unused")
 	private static final int INFOS_PANEL_INDEX = 0;
+	@SuppressWarnings("unused")
 	private static final int NOTES_PANEL_INDEX = 2;
 
 	private SubPanel mainPanel;
@@ -104,6 +89,7 @@ public class SelectedAiData extends EntitledDataPanel implements MouseListener
 	private int selectedAiRow = -1;
 	private ArrayList<AiPreview> aiPreviews;
 		
+	@SuppressWarnings("unused")
 	private boolean packageMode = true; //false if AIs are displayed 
 	
 	public SelectedAiData(SplitMenuPanel container)
@@ -222,6 +208,7 @@ public class SelectedAiData extends EntitledDataPanel implements MouseListener
 		}
 	}
 	
+	@SuppressWarnings("unused")
 	private void initAiPreviews()
 	{	aiPreviews = new ArrayList<AiPreview>();
 		int selectedPackageIndex = currentPackagePage*(LIST_LINE_COUNT-2)+selectedPackageRow;
@@ -273,6 +260,7 @@ public class SelectedAiData extends EntitledDataPanel implements MouseListener
 		}
 	}
 
+	@SuppressWarnings("unused")
 	private void makeAiListPanels(int width, int height)
 	{	int cols = 1;
 		listAiPanels = new ArrayList<UntitledSubPanelTable>();
@@ -541,6 +529,7 @@ public class SelectedAiData extends EntitledDataPanel implements MouseListener
 */		
 	}
 	
+	@SuppressWarnings("unused")
 	private void refreshList()
 	{	
 /*		
