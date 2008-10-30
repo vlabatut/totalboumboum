@@ -9,7 +9,7 @@ import fr.free.totalboumboum.ai.adapter200708.ArtificialIntelligence;
 
 
 
-public class GokceEren extends ArtificialIntelligence {
+public class ErenGokce extends ArtificialIntelligence {
 
 	/**
 	 * 
@@ -32,7 +32,7 @@ public class GokceEren extends ArtificialIntelligence {
 	int[] bombpos=new int[2];
 	int lastmove;
 	int i=0;
-	public GokceEren() {
+	public ErenGokce() {
 			super("GokceEren");
 		// TODO Auto-generated constructor stub
 	}
