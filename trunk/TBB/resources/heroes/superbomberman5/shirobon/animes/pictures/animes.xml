@@ -3,6 +3,10 @@
 		xsi:noNamespaceSchemaLocation="..\..\..\..\schemas\animes.xsd" 
 		scale="1" default="walking" boundHeight="16">
 	
+	<shadows folder="shadow">
+		<shadow name="normal" file="normal.png" />
+	</shadows>
+
 	<colors folder="colormaps" >
 		<colormap name="black" file="black" />
 		<colormap name="blue" file="blue" />
