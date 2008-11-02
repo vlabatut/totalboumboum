@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <permissions xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
-		xsi:noNamespaceSchemaLocation="..\..\..\..\..\xml\schemas\permissions.xsd" >
+		xsi:noNamespaceSchemaLocation="..\..\..\..\..\..\schemas\permissions.xsd" >
 	
 	<gesture name="none" file="none.xml" />
 	<gesture name="ended" file="ended.xml" />
