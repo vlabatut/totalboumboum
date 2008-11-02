@@ -35,14 +35,14 @@ public class AiLoader
 		
 		// check the file
 		String packageFolder = FileTools.getAiPath()+File.separator+packname+File.separator+name;
-		String classFile = packageFolder+File.separator+FileTools.FILE_AI+FileTools.EXTENSION_CLASS;
+		String classFile = packageFolder+File.separator+FileTools.FILE_AI_MAIN_CLASS+FileTools.EXTENSION_CLASS;
 		File file = new File(classFile);
 		if(!file.exists())
 			throw new FileNotFoundException(classFile);
 		
 		// load the class
 		String packageName = packname+ClassTools.CLASS_SEPARATOR+name;
-		String classQualifiedName = packageName+ClassTools.CLASS_SEPARATOR+FileTools.FILE_AI;
+		String classQualifiedName = packageName+ClassTools.CLASS_SEPARATOR+FileTools.FILE_AI_MAIN_CLASS;
 		Class<?> tempClass = Class.forName(classQualifiedName);
 		if(!AbstractAiManager.class.isAssignableFrom(tempClass))
 			throw new ClassCastException(classQualifiedName);

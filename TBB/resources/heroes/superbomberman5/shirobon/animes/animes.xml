@@ -219,21 +219,21 @@
 		</gesture>
 		
 		<gesture name="punching" shadow="normal" folder="punching">
-			<direction name="down">
-				<step duration="50" file="down.gif" />
-				<step duration="100" file="down.gif" />
+			<direction name="down" folder="down">
+				<step duration="50" file="1.gif" />
+				<step duration="100" file="2.gif" />
 			</direction>
-			<direction name="left">
-				<step duration="50" file="left.gif" />
-				<step duration="100" file="left.gif" />
+			<direction name="left" folder="left">
+				<step duration="50" file="1.gif" />
+				<step duration="100" file="2.gif" />
 			</direction>
-			<direction name="right">
-				<step duration="50" file="right.gif" />
-				<step duration="100" file="right.gif"  />
+			<direction name="right" folder="right">
+				<step duration="50" file="1.gif" />
+				<step duration="100" file="2.gif"  />
 			</direction>
-			<direction name="up">
-				<step duration="50" file="up.gif" />
-				<step duration="100" file="up.gif" />
+			<direction name="up" folder="up">
+				<step duration="50" file="1.gif" />
+				<step duration="100" file="2.gif" />
 			</direction>
 		</gesture>
 		
@@ -317,22 +317,22 @@
 		</gesture>
 		
 		<gesture name="throwing" shadow="normal" folder="throwing">
-			<direction name="down">
+			<direction name="down"  folder="down">
 				<step duration="60" file="1.gif"  />
 				<step duration="150" file="2.gif"  />
 				<step duration="70" file="3.gif"  />
 			</direction>
-			<direction name="left" shadow="shadow.png" >
+			<direction name="left" folder="left" >
 				<step duration="60" file="1.gif" />
 				<step duration="150" file="2.gif" />
 				<step duration="70" file="3.gif" />
 			</direction>
-			<direction name="right" shadow="shadow.png">
+			<direction name="right" folder="right">
 				<step duration="60" file="1.gif" />
 				<step duration="150" file="2.gif" />
 				<step duration="70" file="3.gif" />
 			</direction>
-			<direction name="up" >
+			<direction name="up" folder="up">
 				<step duration="60" file="1.gif" />
 				<step duration="150" file="2.gif" />
 				<step duration="70" file="3.gif" />

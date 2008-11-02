@@ -108,7 +108,9 @@ public class ImageTools
     */
 	
     public static BufferedImage loadImage(String path, Colormap colormap) throws IOException
-    {	BufferedImage image = ImageIO.read(new File(path));
+    {	
+System.out.println(path);    	
+    	BufferedImage image = ImageIO.read(new File(path));
     	if(colormap!=null)
     	{	ColorModel colorModel = image.getColorModel();
     		if(colorModel instanceof IndexColorModel)
