@@ -42,6 +42,7 @@
 				<step duration="70" file="10.gif" />
 				<step duration="70" file="11.gif" />
 				<step duration="70" file="12.gif" />
+				<step duration="70" file="13.gif" />
 			</direction>
 		</gesture>
 		
