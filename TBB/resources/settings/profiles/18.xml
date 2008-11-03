@@ -5,7 +5,7 @@
 	
  	<general name="Promeneur"  /> 
  	<ai name="promeneur" pack="tournament200809" />
- 	<character name="shirobon" packname="superbomberman5" color="white" />     
+ 	<character name="shirobon" packname="superbomberman5" color="cyan" />     
 <!-- 	<character name="prognathe" packname="totalboumboum" color="orange" />   -->
 	
 </profile>
