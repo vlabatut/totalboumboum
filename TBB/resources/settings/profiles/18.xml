@@ -1,11 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<profile
-	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
-	xsi:noNamespaceSchemaLocation="..\..\schemas\profile.xsd">
-	
- 	<general name="Promeneur"  /> 
- 	<ai name="promeneur" pack="tournament200809" />
- 	<character name="shirobon" packname="superbomberman5" color="cyan" />     
-<!-- 	<character name="prognathe" packname="totalboumboum" color="orange" />   -->
-	
+<profile xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="..\..\..\resources\schemas\profile.xsd">
+	<general name="Promeneur" />
+	<ai name="promeneur" pack="tournament200809" />
+	<character name="shirobon" packname="superbomberman5" color="orange"/>
 </profile>
+
