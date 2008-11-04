@@ -63,7 +63,7 @@
 		
 		<gesture name="burning" folder="burning" shadow="shadow.png">
 			<direction name="none">
-			<step duration="60" file="1.gif" />
+				<step duration="60" file="1.gif" />
 				<step duration="60" file="2.gif" />
 				<step duration="60" file="3.gif" />
 				<step duration="80" file="4.gif" />
