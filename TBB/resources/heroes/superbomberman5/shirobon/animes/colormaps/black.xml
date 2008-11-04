@@ -2,7 +2,7 @@
 <colormap xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
 		xsi:noNamespaceSchemaLocation="..\..\..\..\..\schemas\colormap.xsd" >
 
-	<color index="00" red="10" green="10" blue="10" /> <!-- contours -->
+	<color index="00" red="010" green="010" blue="010" /> <!-- contours -->
 	<color index="01" red="128" green="032" blue="032" /> <!-- explosion 1 -->
 	<color index="02" red="000" green="000" blue="000" /> <!-- corps sombre -->
 	<color index="03" red="144" green="056" blue="040" /> <!-- explosion 2 -->
