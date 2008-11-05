@@ -26,6 +26,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Locale;
 
 import javax.xml.parsers.ParserConfigurationException;
 
@@ -145,7 +146,7 @@ public class PointsProcessorLoader
 	private static PointsScores loadScoresElement(Element root)
 	{	// type
 		String str = root.getAttribute(XmlTools.ATT_TYPE).getValue();
-		Score score  = Score.valueOf(str.toUpperCase().trim());
+		Score score  = Score.valueOf(str.toUpperCase(Locale.ENGLISH).trim());
 		// result
 		PointsScores result = new PointsScores(score);
 		return result;
