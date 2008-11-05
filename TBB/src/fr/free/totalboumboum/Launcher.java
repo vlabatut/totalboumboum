@@ -678,6 +678,8 @@ public class Launcher
 	 * 
 	 * - bug d'animation : quand le bonhomme va à droite et qu'on appuie sur gauche, y a une espèce de passage droite-gauche très rapide au niveau de l'animation, insuportable
 	 * 
+	 * - possibilité de changer la couleur et le perso ad hoc, comme pour les commandes (?) ou bien avant le tournoi/match
+	 * 
 	 * - dans les résultats :
 	 * 		- afficher par défaut les 4 scores de bases
 	 * 		- plus les scores utilisés dans les points et/ou les limites
