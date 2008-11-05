@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<profile
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+	xsi:noNamespaceSchemaLocation="..\..\..\schemas\profile.xsd">
+	
+ 	<general name="Promeneur"  /> 
+ 	<ai name="promeneur" pack="tournament200809" />
+ 	<character name="shirobon" packname="superbomberman1" color="orange" />     
+<!-- 	<character name="prognathe" packname="totalboumboum" color="orange" />   -->
+	
+</profile>
