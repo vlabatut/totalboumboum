@@ -22,6 +22,7 @@ package fr.free.totalboumboum.engine.content.feature;
  */
 
 import java.util.ArrayList;
+import java.util.Locale;
 
 import fr.free.totalboumboum.engine.content.sprite.Sprite;
 
@@ -217,10 +218,6 @@ public enum Direction
 	{	boolean result;
 		result = this==UPRIGHT || this==DOWNLEFT || this==DOWNRIGHT || this==UPLEFT; 
 		return result;
-	}
-	
-	public String getString()
-	{	return toString().toLowerCase(); 		
 	}
 	
 	public Direction getOpposite()

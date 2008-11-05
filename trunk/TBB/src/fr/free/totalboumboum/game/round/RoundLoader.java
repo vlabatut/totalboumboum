@@ -26,6 +26,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Locale;
 
 import javax.xml.parsers.ParserConfigurationException;
 
@@ -101,7 +102,7 @@ public class RoundLoader
     
     private static void loadGameplayElement(Element root, Round result)
     {	// play mode
-    	String playModeStr = root.getAttribute(XmlTools.ATT_PLAY_MODE).getValue().toUpperCase();
+    	String playModeStr = root.getAttribute(XmlTools.ATT_PLAY_MODE).getValue().toUpperCase(Locale.ENGLISH);
     	PlayMode playMode = PlayMode.valueOf(playModeStr);
     	result.setPlayMode(playMode);
     }

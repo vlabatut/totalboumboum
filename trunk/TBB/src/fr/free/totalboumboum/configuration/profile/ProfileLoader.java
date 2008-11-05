@@ -23,6 +23,7 @@ package fr.free.totalboumboum.configuration.profile;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.Locale;
 
 import javax.xml.parsers.ParserConfigurationException;
 
@@ -85,7 +86,7 @@ public class ProfileLoader
     	String spriteName = root.getAttribute(XmlTools.ATT_NAME).getValue();
     	result.setSpriteName(spriteName);
     	// color
-    	String spriteColorStr = root.getAttribute(XmlTools.ATT_COLOR).getValue().trim().toUpperCase();
+    	String spriteColorStr = root.getAttribute(XmlTools.ATT_COLOR).getValue().trim().toUpperCase(Locale.ENGLISH);
     	PredefinedColor spriteColor = PredefinedColor.valueOf(spriteColorStr);
     	result.setSpriteColor(spriteColor);
     	// portraits

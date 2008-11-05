@@ -25,6 +25,7 @@ import java.io.File;
 import java.io.IOException;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Locale;
 
 import javax.xml.parsers.ParserConfigurationException;
 
@@ -131,7 +132,7 @@ public class TrajectoryPackLoader
     	String strDirection = root.getAttribute(XmlTools.ATT_NAME).getValue().trim();
     	Direction direction = Direction.NONE;
 		if(!strDirection.equals(""))
-			direction = Direction.valueOf(strDirection.toUpperCase());
+			direction = Direction.valueOf(strDirection.toUpperCase(Locale.ENGLISH));
 		result.setDirection(direction);
 		// forced position
 		Element forcePosition = root.getChild(XmlTools.ELT_FORCE_POSITION);
@@ -213,7 +214,7 @@ public class TrajectoryPackLoader
 		ImageShift boundZShift = ImageShift.DOWN;
 		attribute = root.getAttribute(XmlTools.ATT_BOUND_ZSHIFT);
 	    if(attribute!=null)
-			boundZShift = ImageShift.valueOf(attribute.getValue().trim().toUpperCase());
+			boundZShift = ImageShift.valueOf(attribute.getValue().trim().toUpperCase(Locale.ENGLISH));
 	    //
 		result.setDuration(duration);
 		result.setXShift(xShift);

@@ -29,6 +29,7 @@ import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.FileFilter;
 import java.util.Iterator;
+import java.util.Locale;
 import java.util.TreeSet;
 
 import javax.swing.JLabel;
