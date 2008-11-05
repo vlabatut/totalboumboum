@@ -21,6 +21,8 @@ package fr.free.totalboumboum.engine.content.feature.action;
  * 
  */
 
+import java.util.Locale;
+
 import org.jdom.Attribute;
 import org.jdom.Element;
 
@@ -90,7 +92,7 @@ public class GeneralActionLoader
 					result.addDirection(d);
 			}
 			else
-				result.addDirection(Direction.valueOf(directionStr.toUpperCase()));
+				result.addDirection(Direction.valueOf(directionStr.toUpperCase(Locale.ENGLISH)));
 		}
 		
 		// contact
@@ -100,7 +102,7 @@ public class GeneralActionLoader
 					result.addContact(c);
 			}
 			else
-				result.addContact(Contact.valueOf(contactStr.toUpperCase()));
+				result.addContact(Contact.valueOf(contactStr.toUpperCase(Locale.ENGLISH)));
 		}
 		
 		// tilePosition
@@ -110,7 +112,7 @@ public class GeneralActionLoader
 					result.addTilePosition(c);
 			}
 			else
-				result.addTilePosition(TilePosition.valueOf(tilePositionStr.toUpperCase()));
+				result.addTilePosition(TilePosition.valueOf(tilePositionStr.toUpperCase(Locale.ENGLISH)));
 		}
 		
 		// orientation
@@ -120,7 +122,7 @@ public class GeneralActionLoader
 					result.addOrientation(c);
 			}
 			else
-				result.addOrientation(Orientation.valueOf(orientationStr.toUpperCase()));
+				result.addOrientation(Orientation.valueOf(orientationStr.toUpperCase(Locale.ENGLISH)));
 		}
 		
 		// result

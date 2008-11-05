@@ -26,6 +26,7 @@ import java.io.File;
 import java.io.IOException;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Locale;
 
 import javax.xml.parsers.ParserConfigurationException;
 
@@ -96,7 +97,7 @@ public class PortraitsLoader
 		Iterator<Element> i = elements.iterator();
 		while(i.hasNext())
 		{	Element temp = i.next();
-			String name = temp.getAttribute(XmlTools.ATT_NAME).getValue().trim().toUpperCase();
+			String name = temp.getAttribute(XmlTools.ATT_NAME).getValue().trim().toUpperCase(Locale.ENGLISH);
 			String file = temp.getAttribute(XmlTools.ATT_FILE).getValue().trim();
 			String imagePath = folder + File.separator + file;
 			BufferedImage image = ImageTools.loadImage(imagePath,colormap);
@@ -118,7 +119,7 @@ public class PortraitsLoader
 		Iterator<Element> i = elements.iterator();
 		while(i.hasNext())
 		{	Element temp = i.next();
-			String name = temp.getAttribute(XmlTools.ATT_NAME).getValue().trim().toUpperCase();
+			String name = temp.getAttribute(XmlTools.ATT_NAME).getValue().trim().toUpperCase(Locale.ENGLISH);
 			String file = temp.getAttribute(XmlTools.ATT_FILE).getValue().trim();
 			String imagePath = folder + File.separator + file;
 			BufferedImage image = ImageTools.loadImage(imagePath,colormap);
