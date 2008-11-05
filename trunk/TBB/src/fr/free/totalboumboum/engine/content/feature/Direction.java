@@ -22,7 +22,6 @@ package fr.free.totalboumboum.engine.content.feature;
  */
 
 import java.util.ArrayList;
-import java.util.Locale;
 
 import fr.free.totalboumboum.engine.content.sprite.Sprite;
 
