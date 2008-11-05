@@ -127,3 +127,6 @@
 + beta.003
 - modification : représentation de la zone de jeu par une matrice dans l'API d'IA (au lieu d'une liste de listes).
 
++ beta.004
+- correction : bug du au Locale par défaut lors de la transformation d'une chaine de caractères en majuscules, quand la chaine contient des I ou des i et que la langue est le turc.
+
