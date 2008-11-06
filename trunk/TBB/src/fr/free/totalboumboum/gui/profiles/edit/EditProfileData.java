@@ -255,7 +255,10 @@ public class EditProfileData extends EntitledDataPanel implements MouseListener
 		String tooltip = null;
 		Color bg = GuiTools.COLOR_TABLE_REGULAR_BACKGROUND;
 		if(color!=null)
-		{	text = color.toString();
+		{	String colorKey = color.toString();
+			colorKey = colorKey.toUpperCase().substring(0,1)+colorKey.toLowerCase().substring(1,colorKey.length());
+			colorKey = GuiTools.COLOR+colorKey;
+			text = GuiConfiguration.getMiscConfiguration().getLanguage().getText(colorKey); 
 			tooltip = text;
 			Color clr = color.getColor();
 			int alpha = GuiTools.ALPHA_TABLE_REGULAR_BACKGROUND_LEVEL3;

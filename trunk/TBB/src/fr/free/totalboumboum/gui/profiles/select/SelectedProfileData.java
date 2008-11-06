@@ -258,7 +258,10 @@ public class SelectedProfileData extends EntitledDataPanel implements MouseListe
 			values[VIEW_LINE_AI_PACK] = selectedProfile.getAiPackname();
 			values[VIEW_LINE_HERO_NAME] = selectedProfile.getSpriteName();
 			values[VIEW_LINE_HERO_PACK] = selectedProfile.getSpritePack();
-			values[VIEW_LINE_COLOR] = selectedProfile.getSpriteColor().toString();
+			String colorKey = selectedProfile.getSpriteColor().toString();
+			colorKey = colorKey.toUpperCase().substring(0,1)+colorKey.toLowerCase().substring(1,colorKey.length());
+			colorKey = GuiTools.COLOR+colorKey;
+			values[VIEW_LINE_COLOR] = GuiConfiguration.getMiscConfiguration().getLanguage().getText(colorKey); 
 			Color clr = selectedProfile.getSpriteColor().getColor();
 			int alpha = GuiTools.ALPHA_TABLE_REGULAR_BACKGROUND_LEVEL3;
 			Color bg = new Color(clr.getRed(),clr.getGreen(),clr.getBlue(),alpha);

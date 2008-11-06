@@ -473,14 +473,17 @@ public class UntitledSubPanelTable extends SubPanel
 	}
 	public void setLabelIcon(int line, int colGroup, int colSub, BufferedImage icon, String tooltip)
 	{	JLabel label = getLabel(line,colGroup,colSub);
-		int h;
-		if(line==0 && header)
-			h = headerHeight;
-		else
-			h = lineHeight;
-		double zoom = h/(double)icon.getHeight();
-		icon = ImageTools.resize(icon,zoom,true);
-		ImageIcon icn = new ImageIcon(icon);
+		ImageIcon icn = null;
+		if(icon!=null)
+		{	int h;
+			if(line==0 && header)
+				h = headerHeight;
+			else
+				h = lineHeight;
+			double zoom = h/(double)icon.getHeight();
+			icon = ImageTools.resize(icon,zoom,true);
+			icn = new ImageIcon(icon);
+		}
 		label.setText(null);
 		label.setIcon(icn);
 		label.setToolTipText(tooltip);

@@ -29,6 +29,7 @@
 				<group name="Class">
 					<text name="PageDown" value="Descendre" tooltip="Revenir à la page d'IA suivante" />
 					<text name="PageUp" value="Monter" tooltip="Aller à la page d'IA précédente" />
+					<text name="Parent" value=".." tooltip="Revenir à la liste des paquets" />
 				</group>
 				<group name="Package">
 					<text name="PageDown" value="Descendre" tooltip="Revenir à la page de paquets suivante" />
@@ -559,4 +560,23 @@
 		
 	</group>
 
+	<group name="Color">
+		<text name="Black" value="Noir" tooltip="Noir"/>
+		<text name="Blue" value="Bleu" tooltip="Bleu"/>
+		<text name="Brown" value="Marron" tooltip="Marron"/>
+		<text name="Cyan" value="Cyan" tooltip="Cyan"/>
+		<text name="Grass" value="Herbe" tooltip="Herbe"/>
+		<text name="Green" value="Vert" tooltip="Vert"/>
+		<text name="Grey" value="Gris" tooltip="Gris"/>
+		<text name="Indigo" value="Indigo" tooltip="Indigo"/>
+		<text name="Orange" value="Orange" tooltip="Orange"/>
+		<text name="Pink" value="Rose" tooltip="Rose"/>
+		<text name="Purple" value="Violet" tooltip="Violet"/>
+		<text name="Red" value="Rouge" tooltip="Rouge"/>
+		<text name="Rust" value="Rouille" tooltip="Rouille"/>
+		<text name="Ultramarine" value="Outremer" tooltip="Outremer"/>
+		<text name="White" value="Blanc" tooltip="Blanc"/>
+		<text name="Yellow" value="Jaune" tooltip="Jaune"/>
+	</group>
+	
 </language>

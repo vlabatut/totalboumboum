@@ -652,6 +652,10 @@ public class Launcher
 	 * - nouveauté : configuration des paramètres avancés
 	 * - nouveauté : visualisation et édition des profils
 	 * - modification : informations légales dans le splashscreen
+	 * - nouveauté : personnage : shirobon de SBM5
+	 * - nouveauté : personnage : assistant pirate de SBM5
+	 * - nouveauté : traduction des couleurs
+	 * - nouveauté : visualisation des IA
 	 * 
 	 * *******************************************************
 	 * *********************** A FAIRE ***********************
@@ -712,5 +716,13 @@ public class Launcher
 	 *  - on rajoute également le système de bonus pour une limite donnée
 	 *  - intérêt : tout ça permet d'implémenter le bonus à celui qui tue tout le monde en survival, par opposition à une victoire temporelle qui rapporterait donc moins de points
 	 *  - LA NOTION DE PLAYMODE EST A SUPPRIMER 
+	 */
+	
+	
+	/**
+	 * DANS visu IA :
+	 * - afficher les notes
+	 * - retour d'interfaçage avec le profil
+	 * 
 	 */
 }

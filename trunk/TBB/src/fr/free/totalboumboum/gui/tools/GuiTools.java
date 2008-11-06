@@ -70,6 +70,7 @@ public class GuiTools
 			/* CLASS */
 			public static final String MENU_AI_SELECT_CLASS_PAGEDOWN = "MenuAiSelectClassPageDown";
 			public static final String MENU_AI_SELECT_CLASS_PAGEUP = "MenuAiSelectClassPageUp";
+			public static final String MENU_AI_SELECT_CLASS_PARENT = "MenuAiSelectClassParent";
 			/* PACKAGES */
 			public static final String MENU_AI_SELECT_PACKAGE_PAGEDOWN = "MenuAiSelectPackagePageDown";
 			public static final String MENU_AI_SELECT_PACKAGE_PAGEUP = "MenuAiSelectPackagePageUp";
@@ -188,7 +189,25 @@ public class GuiTools
 	public static final String MENU_TOURNAMENT_BUTTON_RULES = "MenuTournamentButtonRules";
 	public static final String MENU_TOURNAMENT_BUTTON_SAVE_AS = "MenuTournamentButtonSaveAs";
 	public static final String MENU_TOURNAMENT_BUTTON_START = "MenuTournamentButtonStart";
-
+	/* COLORS */
+	public static final String COLOR = "Color";
+	public static final String COLOR_BLACK = COLOR+"Black";
+	public static final String COLOR_BLUE = COLOR+"Blue";
+	public static final String COLOR_BROWN = COLOR+"Brown";
+	public static final String COLOR_CYAN = COLOR+"Cyan";
+	public static final String COLOR_GRASS = COLOR+"Grass";
+	public static final String COLOR_GREEN = COLOR+"Green";
+	public static final String COLOR_GREY = COLOR+"Grey";
+	public static final String COLOR_INDIGO = COLOR+"Indigo";
+	public static final String COLOR_ORANGE = COLOR+"Orange";
+	public static final String COLOR_PINK = COLOR+"Pink";
+	public static final String COLOR_PURPLE = COLOR+"Purple";
+	public static final String COLOR_RED = COLOR+"Red";
+	public static final String COLOR_RUST = COLOR+"Rust";
+	public static final String COLOR_ULTRAMARINE = COLOR+"Ultramarine";
+	public static final String COLOR_WHITE = COLOR+"White";
+	public static final String COLOR_YELLOW = COLOR+"Yellow";
+	
 	/////////////////////////////////////////////////////////////////
 	// GAME TOURNAMENT	/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////

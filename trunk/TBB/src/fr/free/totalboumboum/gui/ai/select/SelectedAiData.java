@@ -61,13 +61,11 @@ public class SelectedAiData extends EntitledDataPanel implements MouseListener
 	
 	private static final int LIST_LINE_COUNT = 20;
 	private static final int LIST_LINE_PREVIOUS = 0;
+	private static final int LIST_LINE_PARENT = 1;
 	private static final int LIST_LINE_NEXT = LIST_LINE_COUNT-1;
 
-	@SuppressWarnings("unused")
 	private static final int VIEW_LINE_NAME = 0;
-	@SuppressWarnings("unused")
 	private static final int VIEW_LINE_PACK = 1;
-	@SuppressWarnings("unused")
 	private static final int VIEW_LINE_AUTHOR = 2;
 
 	@SuppressWarnings("unused")
@@ -84,6 +82,8 @@ public class SelectedAiData extends EntitledDataPanel implements MouseListener
 	private SubPanel previewPanel;
 	private UntitledSubPanelTable infosPanel;
 	private EntitledSubPanel notesPanel;
+	private int listWidth;
+	private int listHeight;
 	
 	private ArrayList<UntitledSubPanelTable> listPackagePanels;
 	private int currentPackagePage = 0;
@@ -96,7 +96,6 @@ public class SelectedAiData extends EntitledDataPanel implements MouseListener
 	private int selectedAiRow = -1;
 	private ArrayList<AiPreview> aiPreviews;
 		
-	@SuppressWarnings("unused")
 	private boolean packageMode = true; //false if AIs are displayed 
 	@SuppressWarnings("unused")
 	private int lastAuthorNumber = 1;
@@ -120,7 +119,9 @@ public class SelectedAiData extends EntitledDataPanel implements MouseListener
 			initPackages();
 			
 			// list panel
-			{	makePackagesListPanels(leftWidth,dataHeight);
+			{	listWidth = leftWidth;
+				listHeight = dataHeight;
+				makePackagesListPanels(leftWidth,dataHeight);
 				mainPanel.add(listPackagePanels.get(currentPackagePage));
 			}
 			
@@ -254,10 +255,9 @@ public class SelectedAiData extends EntitledDataPanel implements MouseListener
 		return result;
 	}
 	
-	@SuppressWarnings("unused")
 	private void initAiPreviews()
 	{	aiPreviews = new ArrayList<AiPreview>();
-		int selectedPackageIndex = currentPackagePage*(LIST_LINE_COUNT-2)+selectedPackageRow;
+		int selectedPackageIndex = currentPackagePage*(LIST_LINE_COUNT-2)+(selectedPackageRow-1);
 		String packageName = aiPackages.get(selectedPackageIndex);
 		Iterator<String> it = aiFolders.get(selectedPackageIndex).iterator();
 		while(it.hasNext())
@@ -280,15 +280,14 @@ public class SelectedAiData extends EntitledDataPanel implements MouseListener
 	
 	private void makePackagesListPanels(int width, int height)
 	{	int cols = 1;
-		listPackagePanels = new ArrayList<UntitledSubPanelTable>();
-		
+		listPackagePanels = new ArrayList<UntitledSubPanelTable>();		
+		Iterator<String> it = aiPackages.iterator(); 
 		for(int panelIndex=0;panelIndex<getPackagesPageCount();panelIndex++)
 		{	UntitledSubPanelTable listPanel = new UntitledSubPanelTable(width,height,cols,LIST_LINE_COUNT,false);
 			listPanel.setSubColumnsMaxWidth(0,Integer.MAX_VALUE);
 		
 			// data
-			int line = 1;
-			Iterator<String> it = aiPackages.iterator(); 
+			int line = LIST_LINE_PREVIOUS+1;
 			while(line<LIST_LINE_NEXT && it.hasNext())
 			{	Color bg = GuiTools.COLOR_TABLE_REGULAR_BACKGROUND;
 				String name = it.next();
@@ -318,18 +317,16 @@ public class SelectedAiData extends EntitledDataPanel implements MouseListener
 		}
 	}
 
-	@SuppressWarnings("unused")
 	private void makeFoldersListPanels(int width, int height)
 	{	int cols = 1;
 		listAiPanels = new ArrayList<UntitledSubPanelTable>();
-		
+		Iterator<AiPreview> it = aiPreviews.iterator(); 
 		for(int panelIndex=0;panelIndex<getFoldersPageCount();panelIndex++)
 		{	UntitledSubPanelTable listPanel = new UntitledSubPanelTable(width,height,cols,LIST_LINE_COUNT,false);
 			listPanel.setSubColumnsMaxWidth(0,Integer.MAX_VALUE);
 		
 			// data
-			int line = 1;
-			Iterator<AiPreview> it = aiPreviews.iterator(); 
+			int line = LIST_LINE_PARENT+1;
 			while(line<LIST_LINE_NEXT && it.hasNext())
 			{	Color bg = GuiTools.COLOR_TABLE_REGULAR_BACKGROUND;
 				AiPreview aiPreview = it.next();
@@ -345,6 +342,14 @@ public class SelectedAiData extends EntitledDataPanel implements MouseListener
 				String key = GuiTools.MENU_AI_SELECT_CLASS_PAGEUP;
 				listPanel.setLabelKey(LIST_LINE_PREVIOUS,0,key,true);
 				JLabel label = listPanel.getLabel(LIST_LINE_PREVIOUS,0);
+				label.addMouseListener(this);
+			}
+			// parent
+			{	Color bg = GuiTools.COLOR_TABLE_HEADER_BACKGROUND;
+				listPanel.setLabelBackground(LIST_LINE_PARENT,0,bg);
+				String key = GuiTools.MENU_AI_SELECT_CLASS_PARENT;
+				listPanel.setLabelKey(LIST_LINE_PARENT,0,key,false);
+				JLabel label = listPanel.getLabel(LIST_LINE_PARENT,0);
 				label.addMouseListener(this);
 			}
 			// page down
@@ -430,68 +435,50 @@ public class SelectedAiData extends EntitledDataPanel implements MouseListener
 */
 	
 	private void refreshPreview()
-	{	
-/*		
-		String values[] = new String[21];
+	{	String values[] = new String[10];
 		// no player selected
-		if(selectedRow<0)
+		if(packageMode || selectedAiRow<0)
 		{	for(int i=0;i<values.length;i++)
-				values[i] = null;	
-			Color bg = GuiTools.COLOR_TABLE_REGULAR_BACKGROUND;
-			previewPanel.setLabelBackground(VIEW_LINE_COLOR,1,bg);
-			selectedProfile = null;
-			selectedProfileFile = null;
+				values[i] = null;
+			for(int i=VIEW_LINE_AUTHOR+1;i<values.length;i++)
+			{	infosPanel.setLabelIcon(i,0,null,null);
+				Color bg = GuiTools.COLOR_TABLE_NEUTRAL_BACKGROUND;
+				infosPanel.setLabelBackground(i,0,bg);	
+				infosPanel.setLabelBackground(i,1,bg);	
+			}
 		}
 		// one player selected
 		else
-		{	Entry<String,String> entry = profiles.get((selectedRow-1)+currentPackagePage*(LIST_LINE_COUNT-2));
-			try
-			{	selectedProfileFile = entry.getKey();
-				selectedProfile = ProfileLoader.loadProfile(selectedProfileFile);			
+		{	int index = (selectedAiRow-2)+currentAiPage*(LIST_LINE_COUNT-3);
+			AiPreview aiPreview = aiPreviews.get(index);
+			values[VIEW_LINE_NAME] = aiPreview.getFolder();
+			values[VIEW_LINE_PACK]= aiPreview.getPack();
+			ArrayList<String> authors = aiPreview.getAuthors();
+			Iterator<String> it = authors.iterator();
+			index = 0;
+			while(it.hasNext())
+			{	String author = it.next();	
+				values[VIEW_LINE_AUTHOR+index] = author;
+				index++;
 			}
-			catch (IllegalArgumentException e)
-			{	e.printStackTrace();
+			for(int i=1;i<index;i++)
+			{	int line = VIEW_LINE_AUTHOR+i;
+				infosPanel.setLabelKey(line,0,GuiTools.MENU_AI_SELECT_PREVIEW_AUTHOR,true);
+				Color fg = GuiTools.COLOR_TABLE_HEADER_FOREGROUND;
+				infosPanel.setLabelForeground(line,0,fg);
+				Color bg = GuiTools.COLOR_TABLE_HEADER_BACKGROUND;
+				infosPanel.setLabelBackground(line,0,bg);
+				bg = GuiTools.COLOR_TABLE_REGULAR_BACKGROUND;
+				infosPanel.setLabelBackground(line,1,bg);
 			}
-			catch (SecurityException e)
-			{	e.printStackTrace();
-			}
-			catch (ParserConfigurationException e)
-			{	e.printStackTrace();
-			}
-			catch (SAXException e)
-			{	e.printStackTrace();
-			}
-			catch (IOException e)
-			{	e.printStackTrace();
-			} 
-			catch (IllegalAccessException e)
-			{	e.printStackTrace();
-			}
-			catch (NoSuchFieldException e)
-			{	e.printStackTrace();
-			}
-			catch (ClassNotFoundException e)
-			{	e.printStackTrace();
-			}
-			values[VIEW_LINE_NAME] = selectedProfile.getName();
-			values[VIEW_LINE_AI_NAME]= selectedProfile.getAiName();
-			values[VIEW_LINE_AI_PACK] = selectedProfile.getAiPackname();
-			values[VIEW_LINE_HERO_NAME] = selectedProfile.getSpriteName();
-			values[VIEW_LINE_HERO_PACK] = selectedProfile.getSpritePack();
-			values[VIEW_LINE_COLOR] = selectedProfile.getSpriteColor().toString();
-			Color clr = selectedProfile.getSpriteColor().getColor();
-			int alpha = GuiTools.ALPHA_TABLE_REGULAR_BACKGROUND_LEVEL3;
-			Color bg = new Color(clr.getRed(),clr.getGreen(),clr.getBlue(),alpha);
-			previewPanel.setLabelBackground(VIEW_LINE_COLOR,1,bg);
 		}
 		// common
 		for(int line=0;line<values.length;line++)
 		{	int colSub = 1;
 			String text = values[line];
 			String tooltip = text;
-			previewPanel.setLabelText(line,colSub,text,tooltip);
+			infosPanel.setLabelText(line,colSub,text,tooltip);
 		}
-*/		
 	}
 
 	@Override
@@ -522,36 +509,76 @@ public class SelectedAiData extends EntitledDataPanel implements MouseListener
 	}
 	@Override
 	public void mousePressed(MouseEvent e)
-	{	
-/*		
-		JLabel label = (JLabel)e.getComponent();
-		int[] pos = listPanels.get(currentPackagePage).getLabelPosition(label);
-		switch(pos[0])
-		{	// previous page
-			case LIST_LINE_PREVIOUS:
-				if(currentPackagePage>0)
-				{	unselectList();
-					currentPackagePage--;
+	{	JLabel label = (JLabel)e.getComponent();
+		// list = packages
+		if(packageMode)
+		{	int[] pos = listPackagePanels.get(currentPackagePage).getLabelPosition(label);
+			switch(pos[0])
+			{	// previous page
+				case LIST_LINE_PREVIOUS:
+					if(currentPackagePage>0)
+					{	unselectList();
+						currentPackagePage--;
+						refreshList();
+					}
+					break;
+				// next page
+				case LIST_LINE_NEXT:
+					if(currentPackagePage<getPackagesPageCount()-1)
+					{	unselectList();
+						currentPackagePage++;
+						refreshList();
+					}
+					break;
+				// package selected
+				default:
+					unselectList();
+					selectedPackageRow = pos[0];
+					listPackagePanels.get(currentPackagePage).setLabelBackground(selectedPackageRow,0,GuiTools.COLOR_TABLE_SELECTED_BACKGROUND);
+					initAiPreviews();
+					makeFoldersListPanels(listWidth,listHeight);
+					packageMode = false;
+					currentAiPage = 0;
 					refreshList();
-				}
-				break;
-			// next page
-			case LIST_LINE_NEXT:
-				if(currentPackagePage<getPageCount()-1)
-				{	unselectList();
-					currentPackagePage++;
-					refreshList();
-				}
-				break;
-			// profile selected
-			default:
-				unselectList();
-				selectedRow = pos[0];
-				listPanels.get(currentPackagePage).setLabelBackground(selectedRow,0,GuiTools.COLOR_TABLE_SELECTED_BACKGROUND);
-				refreshPreview();
+			}
 		}
-		
-*/		
+		// list = ai
+		else
+		{	int[] pos = listAiPanels.get(currentAiPage).getLabelPosition(label);
+			switch(pos[0])
+			{	// previous page
+				case LIST_LINE_PREVIOUS:
+					if(currentAiPage>0)
+					{	unselectList();
+						currentAiPage--;
+						refreshList();
+					}
+					break;
+				// go to package
+				case LIST_LINE_PARENT:
+					unselectList();
+					packageMode = true;
+					refreshPreview();
+					unselectList();
+					refreshList();
+					break;
+				// next page
+				case LIST_LINE_NEXT:
+					if(currentAiPage<getFoldersPageCount()-1)
+					{	unselectList();
+						currentAiPage++;
+						refreshList();
+					}
+					break;
+				// ai selected
+				default:
+					unselectList();
+					selectedAiRow = pos[0];
+					//refreshList();
+					listAiPanels.get(currentAiPage).setLabelBackground(selectedAiRow,0,GuiTools.COLOR_TABLE_SELECTED_BACKGROUND);
+					refreshPreview();
+			}
+		}
 	}
 	@Override
 	public void mouseReleased(MouseEvent e)
@@ -577,25 +604,34 @@ public class SelectedAiData extends EntitledDataPanel implements MouseListener
 	}
 	
 	public void unselectList()
-	{	
-/*		
-		if(selectedRow!=-1)
-		{	listPanels.get(currentPackagePage).setLabelBackground(selectedRow,0,GuiTools.COLOR_TABLE_REGULAR_BACKGROUND);
-			selectedRow = -1;
+	{	// packages displayed
+		if(packageMode && selectedPackageRow!=-1)
+		{	listPackagePanels.get(currentPackagePage).setLabelBackground(selectedPackageRow,0,GuiTools.COLOR_TABLE_REGULAR_BACKGROUND);
+			selectedPackageRow = -1;
+			//refreshPreview();
+		}
+		// ai displayed
+		else if(!packageMode && selectedAiRow!=-1)
+		{	listAiPanels.get(currentAiPage).setLabelBackground(selectedAiRow,0,GuiTools.COLOR_TABLE_REGULAR_BACKGROUND);
+			selectedAiRow = -1;
 			refreshPreview();
 		}
-*/		
 	}
 	
-	@SuppressWarnings("unused")
 	private void refreshList()
-	{	
-/*		
-		mainPanel.remove(LIST_PANEL_INDEX);
-		mainPanel.add(listPanels.get(currentPackagePage),LIST_PANEL_INDEX);
+	{	// packages displayed
+		if(packageMode)
+		{	mainPanel.remove(LIST_PANEL_INDEX);
+			mainPanel.add(listPackagePanels.get(currentPackagePage),LIST_PANEL_INDEX);
+		}
+		// ai displayed
+		else
+		{	mainPanel.remove(LIST_PANEL_INDEX);
+			mainPanel.add(listAiPanels.get(currentAiPage),LIST_PANEL_INDEX);
+		}
+		// common
 		mainPanel.validate();
 		mainPanel.repaint();
-*/		
 	}
 	
 	public AiPreview getSelectedAiPreview()
