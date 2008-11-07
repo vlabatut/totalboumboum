@@ -68,7 +68,6 @@ public class SelectedAiData extends EntitledDataPanel implements MouseListener
 	private static final int VIEW_LINE_PACK = 1;
 	private static final int VIEW_LINE_AUTHOR = 2;
 
-	@SuppressWarnings("unused")
 	private static final int LIST_PANEL_INDEX = 0;
 	@SuppressWarnings("unused")
 	private static final int PREVIEW_PANEL_INDEX = 2;
@@ -406,41 +405,27 @@ public class SelectedAiData extends EntitledDataPanel implements MouseListener
 		String key = GuiTools.MENU_AI_SELECT_PREVIEW_NOTES;
 		notesPanel.setTitleKey(key,true);
 		
-		float fontSize = notesPanel.getTitleFontSize()/3;
+		float fontSize = notesPanel.getTitleFontSize()/2;
 		int w = notesPanel.getDataWidth();
 		int h = notesPanel.getDataHeight();
 		SubTextPanel textPanel = new SubTextPanel(w,h,fontSize);
 		notesPanel.setDataPanel(textPanel);
-		Color bg = notesPanel.getDataPanel().getBackground();
-		textPanel.setBackground(bg);
-		Color fg = notesPanel.getDataPanel().getForeground();
-		textPanel.setForeground(fg);
+		textPanel.setBackground(GuiTools.COLOR_TABLE_NEUTRAL_BACKGROUND);
 	}
-
-/*	
-			text = "";
-			ArrayList<String> list = match.getNotes();
-			Iterator<String> i = list.iterator();
-			while (i.hasNext())
-			{	String temp = i.next();
-				text = text + temp + "\n";
-			}
-			try
-			{	doc.insertString(0,text,sa);
-			}
-			catch (BadLocationException e)
-			{	e.printStackTrace();
-			}
-			doc.setParagraphAttributes(0,doc.getLength()-1,sa,true);
-*/
 	
 	private void refreshPreview()
-	{	String values[] = new String[10];
+	{	String infosValues[] = new String[10];
+		ArrayList<String> notesValues;
+		SubTextPanel textPanel = (SubTextPanel)notesPanel.getDataPanel();
 		// no player selected
 		if(packageMode || selectedAiRow<0)
-		{	for(int i=0;i<values.length;i++)
-				values[i] = null;
-			for(int i=VIEW_LINE_AUTHOR+1;i<values.length;i++)
+		{	// notes
+			notesValues = new ArrayList<String>();
+			textPanel.setBackground(GuiTools.COLOR_TABLE_NEUTRAL_BACKGROUND);
+			// infos
+			for(int i=0;i<infosValues.length;i++)
+				infosValues[i] = null;
+			for(int i=VIEW_LINE_AUTHOR+1;i<infosValues.length;i++)
 			{	infosPanel.setLabelIcon(i,0,null,null);
 				Color bg = GuiTools.COLOR_TABLE_NEUTRAL_BACKGROUND;
 				infosPanel.setLabelBackground(i,0,bg);	
@@ -451,14 +436,18 @@ public class SelectedAiData extends EntitledDataPanel implements MouseListener
 		else
 		{	int index = (selectedAiRow-2)+currentAiPage*(LIST_LINE_COUNT-3);
 			AiPreview aiPreview = aiPreviews.get(index);
-			values[VIEW_LINE_NAME] = aiPreview.getFolder();
-			values[VIEW_LINE_PACK]= aiPreview.getPack();
+			// notes
+			notesValues = aiPreview.getNotes();
+			textPanel.setBackground(GuiTools.COLOR_TABLE_REGULAR_BACKGROUND);
+			// infos
+			infosValues[VIEW_LINE_NAME] = aiPreview.getFolder();
+			infosValues[VIEW_LINE_PACK]= aiPreview.getPack();
 			ArrayList<String> authors = aiPreview.getAuthors();
 			Iterator<String> it = authors.iterator();
 			index = 0;
 			while(it.hasNext())
 			{	String author = it.next();	
-				values[VIEW_LINE_AUTHOR+index] = author;
+				infosValues[VIEW_LINE_AUTHOR+index] = author;
 				index++;
 			}
 			for(int i=1;i<index;i++)
@@ -472,13 +461,21 @@ public class SelectedAiData extends EntitledDataPanel implements MouseListener
 				infosPanel.setLabelBackground(line,1,bg);
 			}
 		}
-		// common
-		for(int line=0;line<values.length;line++)
+		// infos
+		for(int line=0;line<infosValues.length;line++)
 		{	int colSub = 1;
-			String text = values[line];
+			String text = infosValues[line];
 			String tooltip = text;
 			infosPanel.setLabelText(line,colSub,text,tooltip);
 		}
+		// notes
+		String text = "";
+		Iterator<String> i = notesValues.iterator();
+		while (i.hasNext())
+		{	String temp = i.next();
+			text = text + temp + "\n";
+		}
+		textPanel.setText(text);
 	}
 
 	@Override
@@ -635,7 +632,7 @@ public class SelectedAiData extends EntitledDataPanel implements MouseListener
 	}
 	
 	public AiPreview getSelectedAiPreview()
-	{	int index = currentAiPage*(LIST_LINE_COUNT-2)+selectedAiRow;
+	{	int index = currentAiPage*(LIST_LINE_COUNT-2)+(selectedAiRow-2);
 		return aiPreviews.get(index);
 	}
 

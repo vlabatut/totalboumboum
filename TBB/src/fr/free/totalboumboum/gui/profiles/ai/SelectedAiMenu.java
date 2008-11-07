@@ -28,6 +28,8 @@ import javax.swing.Box;
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
 
+import fr.free.totalboumboum.ai.AiPreview;
+import fr.free.totalboumboum.configuration.profile.Profile;
 import fr.free.totalboumboum.gui.ai.select.SelectedAiData;
 import fr.free.totalboumboum.gui.common.panel.SplitMenuPanel;
 import fr.free.totalboumboum.gui.common.panel.menu.InnerMenuPanel;
@@ -43,10 +45,12 @@ public class SelectedAiMenu extends InnerMenuPanel
 	private JButton buttonConfirm;
 
 	private SelectedAiData aiData;
+	private Profile profile;
 
-	public SelectedAiMenu(SplitMenuPanel container, MenuPanel parent)
+	public SelectedAiMenu(SplitMenuPanel container, MenuPanel parent, Profile profile)
 	{	super(container, parent);
-		
+		this.profile = profile;
+	
 		// layout
 		BoxLayout layout = new BoxLayout(this,BoxLayout.PAGE_AXIS); 
 		setLayout(layout);
@@ -71,7 +75,9 @@ public class SelectedAiMenu extends InnerMenuPanel
 		{	replaceWith(parent);
 	    }
 		else if(e.getActionCommand().equals(GuiTools.MENU_PROFILES_BUTTON_CONFIRM))
-		{	//TODO
+		{	AiPreview aiPreview = aiData.getSelectedAiPreview();
+			profile.setAiName(aiPreview.getFolder());
+			profile.setAiPackname(aiPreview.getPack());
 			replaceWith(parent);
 	    }
 	} 

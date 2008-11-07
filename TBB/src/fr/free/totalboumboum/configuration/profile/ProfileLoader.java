@@ -23,6 +23,8 @@ package fr.free.totalboumboum.configuration.profile;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.Iterator;
+import java.util.List;
 import java.util.Locale;
 
 import javax.xml.parsers.ParserConfigurationException;
@@ -56,6 +58,9 @@ public class ProfileLoader
 		Element ai = root.getChild(XmlTools.ELT_AI);
 		if(ai!=null)
 			loadAiElement(ai,result);
+		// colors
+		Element colors = root.getChild(XmlTools.ELT_COLORS);
+		loadColorsElement(colors,result);
 		// sprite info
 		Element character = root.getChild(XmlTools.ELT_CHARACTER);
 		loadSpriteElement(character,result);
@@ -85,14 +90,28 @@ public class ProfileLoader
     	// name
     	String spriteName = root.getAttribute(XmlTools.ATT_NAME).getValue();
     	result.setSpriteName(spriteName);
-    	// color
-    	String spriteColorStr = root.getAttribute(XmlTools.ATT_COLOR).getValue().trim().toUpperCase(Locale.ENGLISH);
-    	PredefinedColor spriteColor = PredefinedColor.valueOf(spriteColorStr);
-    	result.setSpriteColor(spriteColor);
     	// portraits
+    	PredefinedColor spriteColor = result.getSpriteColor();
     	String folder = FileTools.getHeroesPath() + File.separator + spritePackname;
     	folder = folder + File.separator + spriteName;
     	Portraits portraits = PortraitsLoader.loadPortraits(folder,spriteColor);
     	result.setPortraits(portraits);
+    }	        
+
+    @SuppressWarnings("unchecked")
+	private static void loadColorsElement(Element root, Profile result) throws ParserConfigurationException, SAXException, IOException, ClassNotFoundException
+    {	List<Element> elements = root.getChildren(XmlTools.ATT_COLOR);
+    	Iterator<Element> it = elements.iterator();
+    	while(it.hasNext())
+    	{	Element tempElt = it.next();
+	    	// rank
+    		String rankStr = tempElt.getAttributeValue(XmlTools.ATT_RANK);
+    		int rank = Integer.parseInt(rankStr);
+    		// color
+    		String spriteColorStr = tempElt.getAttribute(XmlTools.ATT_NAME).getValue().trim().toUpperCase(Locale.ENGLISH);
+	    	PredefinedColor spriteColor = PredefinedColor.valueOf(spriteColorStr);
+	    	// add to profile
+	    	result.setSpriteColor(spriteColor,rank);
+    	}
     }	        
 }

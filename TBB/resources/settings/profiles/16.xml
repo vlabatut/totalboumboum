@@ -5,7 +5,9 @@
 	
  	<general name="Okan+Yüksel" /> 
 	<ai name="okanyuksel" pack="tournament200708" />
- 	<character name="shirobon" packname="superbomberman1" color="black" />     
-<!-- 	<character name="prognathe" packname="totalboumboum" color="black" />   -->
+	<colors>
+		<color rank="0" name="black" />
+	</colors>
+ 	<character name="shirobon" packname="superbomberman1"  />     
 	
 </profile>

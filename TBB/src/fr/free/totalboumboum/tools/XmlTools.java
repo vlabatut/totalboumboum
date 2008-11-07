@@ -242,6 +242,7 @@ public class XmlTools
 	public static final String ATT_PROBA = "proba";
 	public static final String ATT_PROPORTIONAL = "proportional";
 	public static final String ATT_RANDOM_ORDER = "randomOrder";
+	public static final String ATT_RANK = "rank";
 	public static final String ATT_RED = "red";
 	public static final String ATT_REPEAT = "repeat";
 	public static final String ATT_SCALE = "scale";

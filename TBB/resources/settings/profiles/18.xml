@@ -2,6 +2,9 @@
 <profile xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="..\..\..\resources\schemas\profile.xsd">
 	<general name="Promeneur" />
 	<ai name="promeneur" pack="tournament200809" />
-	<character name="shirobon" packname="superbomberman5" color="orange"/>
+	<colors>
+		<color rank="0" name="orange" />
+	</colors>
+ 	<character name="shirobon" packname="superbomberman5"  />     
 </profile>
 
