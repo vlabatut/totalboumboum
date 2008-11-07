@@ -40,6 +40,8 @@ public class SubTextPanel extends SubPanel
 {	private static final long serialVersionUID = 1L;
 	private float fontSize;
 	private JTextPane textPane;
+	private StyledDocument doc;
+	private SimpleAttributeSet sa;
 	
 	public SubTextPanel(int width, int height, float fontSize)
 	{	super(width, height);
@@ -57,12 +59,22 @@ public class SubTextPanel extends SubPanel
 		};
 		textPane.setEditable(false);
 		textPane.setHighlighter(null);
+		textPane.setOpaque(false);
 
 		Dimension dim = new Dimension(width,height);
 		textPane.setPreferredSize(dim);
 		textPane.setMinimumSize(dim);
 		textPane.setMaximumSize(dim);
 		textPane.setAlignmentX(Component.CENTER_ALIGNMENT);
+		
+		sa = new SimpleAttributeSet();
+		StyleConstants.setAlignment(sa,StyleConstants.ALIGN_LEFT/*JUSTIFIED*/);
+		Font font = GuiConfiguration.getMiscConfiguration().getFont().deriveFont(fontSize);
+		StyleConstants.setFontFamily(sa,font.getFamily());
+		StyleConstants.setFontSize(sa,font.getSize());
+		doc = textPane.getStyledDocument();
+//		doc.setParagraphAttributes(0,doc.getLength()-1,sa,true);		
+		doc.setCharacterAttributes(0,doc.getLength()+1,sa,true);
 		
 		add(textPane);
 	}
@@ -72,20 +84,17 @@ public class SubTextPanel extends SubPanel
 	/////////////////////////////////////////////////////////////////
 	
 	public void setText(String text)
-	{	// init
-		SimpleAttributeSet sa = new SimpleAttributeSet();
-		StyleConstants.setAlignment(sa,StyleConstants.ALIGN_JUSTIFIED);
-		Font font = GuiConfiguration.getMiscConfiguration().getFont().deriveFont(fontSize);
-		StyleConstants.setFontFamily(sa, font.getFamily());
-		StyleConstants.setFontSize(sa, font.getSize());
-		StyledDocument doc = textPane.getStyledDocument();
-		// set text
+	{	// set text
 		try
-		{	doc.insertString(0,text,sa);
+		{	doc.remove(0,doc.getLength());
+			doc.insertString(0,text,sa);
 		}
 		catch (BadLocationException e)
 		{	e.printStackTrace();
 		}
-		doc.setParagraphAttributes(0,doc.getLength()-1,sa,true);		
+	}
+	
+	public float getFontSize()
+	{	return fontSize;
 	}
 }

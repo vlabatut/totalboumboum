@@ -5,7 +5,9 @@
 	
  	<general name="Demirkol+Doğan" /> 
  	<ai name="demirkoldogan" pack="tournament200708" />
- 	<character name="shirobon" packname="superbomberman1" color="white" />     
-<!-- 	<character name="prognathe" packname="totalboumboum" color="white" />   -->
+	<colors>
+		<color rank="0" name="white" />
+	</colors>
+ 	<character name="shirobon" packname="superbomberman1" />     
 	
 </profile>

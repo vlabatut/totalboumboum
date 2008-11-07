@@ -5,7 +5,9 @@
 	
  	<general name="Bingöl+Ketenci" />
  	<ai name="bingolketenci" pack="tournament200708" />
- 	<character name="shirobon" packname="superbomberman1" color="blue" />     
-<!-- 	<character name="prognathe" packname="totalboumboum" color="blue" />   -->
+	<colors>
+		<color rank="0" name="blue" />
+	</colors>
+ 	<character name="shirobon" packname="superbomberman1"  />     
 	
 </profile>

@@ -32,7 +32,7 @@ public class AiPreviewLoader
 	{	Element element; 
 		// notes
 		element = root.getChild(XmlTools.ELT_NOTES);
-		ArrayList<String> notes = MatchLoader.loadNotesElement(root);
+		ArrayList<String> notes = MatchLoader.loadNotesElement(element);
 		result.setNotes(notes);
 		// authors
 		element = root.getChild(XmlTools.ELT_AUTHORS);

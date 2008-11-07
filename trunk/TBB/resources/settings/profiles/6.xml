@@ -5,7 +5,9 @@
 	
  	<general name="Çamaş+Demirbaş"  /> 
  	<ai name="camasdemirbas" pack="tournament200708" />
- 	<character name="shirobon" packname="superbomberman1" color="cyan" />     
-<!-- 	<character name="prognathe" packname="totalboumboum" color="cyan" />   -->
+	<colors>
+		<color rank="0" name="cyan" />
+	</colors>
+ 	<character name="shirobon" packname="superbomberman1" />     
 	
 </profile>

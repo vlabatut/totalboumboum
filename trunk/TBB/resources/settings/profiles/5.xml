@@ -5,7 +5,9 @@
 	
  	<general name="Çağlayan+Elmas"  /> 
  	<ai name="caglayanelmas" pack="tournament200708" />
- 	<character name="shirobon" packname="superbomberman1" color="orange" />     
-<!-- 	<character name="prognathe" packname="totalboumboum" color="orange" />   -->
+	<colors>
+		<color rank="0" name="orange" />
+	</colors>
+ 	<character name="shirobon" packname="superbomberman1"  />     
 	
 </profile>

@@ -79,9 +79,6 @@ public class EditProfileData extends EntitledDataPanel implements MouseListener
 				}
 				// value
 				{	ln.setLabelMaxWidth(col,Integer.MAX_VALUE);
-					String text = profile.getName();
-					String tooltip = text;
-					ln.setLabelText(col,text,tooltip);
 					Color bg = GuiTools.COLOR_TABLE_REGULAR_BACKGROUND;
 					ln.setLabelBackground(col,bg);
 					col++;
@@ -114,18 +111,12 @@ public class EditProfileData extends EntitledDataPanel implements MouseListener
 				}
 				// pack
 				{	ln.setLabelMaxWidth(col,Integer.MAX_VALUE);
-					String text = profile.getAiPackname();
-					String tooltip = text;
-					ln.setLabelText(col,text,tooltip);
 					Color bg = GuiTools.COLOR_TABLE_REGULAR_BACKGROUND;
 					ln.setLabelBackground(col,bg);
 					col++;
 				}
 				// name
 				{	ln.setLabelMaxWidth(col,Integer.MAX_VALUE);
-					String text = profile.getAiName();
-					String tooltip = text;
-					ln.setLabelText(col,text,tooltip);
 					Color bg = GuiTools.COLOR_TABLE_REGULAR_BACKGROUND;
 					ln.setLabelBackground(col,bg);
 					col++;
@@ -158,18 +149,12 @@ public class EditProfileData extends EntitledDataPanel implements MouseListener
 				}
 				// pack
 				{	ln.setLabelMaxWidth(col,Integer.MAX_VALUE);
-					String text = profile.getSpritePack();
-					String tooltip = text;
-					ln.setLabelText(col,text,tooltip);
 					Color bg = GuiTools.COLOR_TABLE_REGULAR_BACKGROUND;
 					ln.setLabelBackground(col,bg);
 					col++;
 				}
-				// value
+				// name
 				{	ln.setLabelMaxWidth(col,Integer.MAX_VALUE);
-					String text = profile.getSpriteName();
-					String tooltip = text;
-					ln.setLabelText(col,text,tooltip);
 					Color bg = GuiTools.COLOR_TABLE_REGULAR_BACKGROUND;
 					ln.setLabelBackground(col,bg);
 					col++;
@@ -206,7 +191,6 @@ public class EditProfileData extends EntitledDataPanel implements MouseListener
 					}
 					// value
 					{	ln.setLabelMaxWidth(col,Integer.MAX_VALUE);
-						refreshColor(i);
 						col++;
 					}
 					// previous
@@ -243,6 +227,8 @@ public class EditProfileData extends EntitledDataPanel implements MouseListener
 					col++;
 				}
 			}
+			
+			refreshData();
 		}
 		
 		setDataPart(editPanel);
@@ -273,7 +259,7 @@ public class EditProfileData extends EntitledDataPanel implements MouseListener
 	
 	@Override
 	public void refresh()
-	{	// nothing to do here
+	{	refreshData();
 	}
 
 	@Override
@@ -311,7 +297,7 @@ public class EditProfileData extends EntitledDataPanel implements MouseListener
 				break;
 			// AI
 			case LINE_AI:
-				SelectedAiSplitPanel aiPanel = new SelectedAiSplitPanel(container.getContainer(),container);
+				SelectedAiSplitPanel aiPanel = new SelectedAiSplitPanel(container.getContainer(),container,profile);
 				getContainer().replaceWith(aiPanel);
 				break;
 			// HERO
@@ -378,4 +364,62 @@ public class EditProfileData extends EntitledDataPanel implements MouseListener
 	public void mouseReleased(MouseEvent e)
 	{	
 	}	
+	
+	private void refreshData()
+	{	refreshName();
+		refreshAi();
+		refreshHero();
+		refreshColors();
+	}
+	
+	private void refreshName()
+	{	// init
+		Line ln = editPanel.getLine(LINE_NAME);
+		int col = 1;
+		// name
+		String text = profile.getName();
+		String tooltip = text;
+		ln.setLabelText(col,text,tooltip);				
+	}
+	
+	private void refreshAi()
+	{	// init
+		Line ln = editPanel.getLine(LINE_AI);
+		int col = 1;		
+		// pack
+		{	String text = profile.getAiPackname();
+			String tooltip = text;
+			ln.setLabelText(col,text,tooltip);
+			col++;
+		}		
+		// name
+		{	String text = profile.getAiName();
+			String tooltip = text;
+			ln.setLabelText(col,text,tooltip);
+			col++;
+		}
+	}
+	
+	private void refreshColors()
+	{	for(int i=0;i<profile.getSpriteColors().length;i++)
+			refreshColor(i);
+	}
+	
+	private void refreshHero()
+	{	// init
+		Line ln = editPanel.getLine(LINE_HERO);
+		int col = 1;		
+		// pack
+		{	String text = profile.getSpritePack();
+			String tooltip = text;
+			ln.setLabelText(col,text,tooltip);
+			col++;
+		}		
+		// name
+		{	String text = profile.getSpriteName();
+			String tooltip = text;
+			ln.setLabelText(col,text,tooltip);
+			col++;
+		}
+	}
 }

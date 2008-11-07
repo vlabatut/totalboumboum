@@ -5,7 +5,9 @@
 	
  	<general name="Kılıç+Pala" /> 
  	<ai name="kilicpala" pack="tournament200708" />
- 	<character name="shirobon" packname="superbomberman1" color="red" />     
-<!-- 	<character name="prognathe" packname="totalboumboum" color="red" />   -->
+	<colors>
+		<color rank="0" name="red" />
+	</colors>
+ 	<character name="shirobon" packname="superbomberman1"  />     
 	
 </profile>

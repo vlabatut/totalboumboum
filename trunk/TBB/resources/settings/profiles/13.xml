@@ -5,7 +5,9 @@
 	
  	<general name="Keçer+Yaman" /> 
  	<ai name="keceryaman" pack="tournament200708" />
- 	<character name="shirobon" packname="superbomberman1" color="rust" />     
-<!-- 	<character name="prognathe" packname="totalboumboum" color="rust" />   -->
+	<colors>
+		<color rank="0" name="rust" />
+	</colors>
+ 	<character name="shirobon" packname="superbomberman1"  />     
 	
 </profile>

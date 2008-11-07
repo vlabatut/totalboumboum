@@ -25,6 +25,7 @@ import java.awt.BorderLayout;
 import java.awt.Graphics;
 import java.awt.image.BufferedImage;
 
+import fr.free.totalboumboum.configuration.profile.Profile;
 import fr.free.totalboumboum.gui.common.MenuContainer;
 import fr.free.totalboumboum.gui.common.panel.SplitMenuPanel;
 import fr.free.totalboumboum.gui.common.panel.menu.MenuPanel;
@@ -36,14 +37,14 @@ public class SelectedAiSplitPanel extends SplitMenuPanel
 
 	private BufferedImage image;
 
-	public SelectedAiSplitPanel(MenuContainer container, MenuPanel parent)
+	public SelectedAiSplitPanel(MenuContainer container, MenuPanel parent, Profile profile)
 	{	super(container,parent,BorderLayout.LINE_START,GuiTools.VERTICAL_SPLIT_RATIO);
 	
 		// background
 		image = GuiConfiguration.getMiscConfiguration().getDarkBackground();
 		
 		// panels
-		setMenuPart(new SelectedAiMenu(this,parent));
+		setMenuPart(new SelectedAiMenu(this,parent,profile));
 	}
 	
 	@Override

@@ -75,10 +75,18 @@ public class Profile
 	{	return spriteColors;
 	}
 	public PredefinedColor getSpriteColor()
-	{	return spriteColors[0];
+	{	PredefinedColor result = null;
+		int i = 0;
+		while(result==null && i<spriteColors.length)
+		{	if(spriteColors[i]!=null)
+				result = spriteColors[i];
+			else
+				i++;
+		}
+		return result;
 	}
-	public void setSpriteColor(PredefinedColor spriteColor)
-	{	this.spriteColors[0] = spriteColor;
+	public void setSpriteColor(PredefinedColor spriteColor, int index)
+	{	this.spriteColors[index] = spriteColor;
 	}
 
 	public boolean hasAi()
