@@ -668,6 +668,7 @@ public class Launcher
 	 * - possibilité de donner des noms aux matches et aux rounds
 	 * 
 	 * - bug de déplacement quand on bouge en diagonale en posant plein de bombes dans un espace dégagé, on se retrouve téléporté sur une case voisine
+	 * - bug d'animation/collision : push ne se déclenche pas
 	 * 
 	 * - redistribution des items lors de la mort d'un joueur (option de round?)
 	 * - possibilité de bloquer certains items (on ne les perd pas lorsqu'on meurt)
@@ -677,7 +678,6 @@ public class Launcher
 	 * 
 	 * - faire un paramètre dans les rounds qui permet de déterminer s'ils sont compatibles avec le tournoi 2007-08
 	 * - tournoi : 1) on choisit les paramètres 2) on choisit les joueurs, le jeu restreint leur nombre pr qu'il soit compatible avec le tournoi, et restreint aussi les IA pour les mêmes raisons
-	 * - mettre une icone spéciale pour différencier les humains et les IA, ds présentation et résultats
 	 * 
 	 * - besoin d'une méthode permettant d'exporter un tournoi/match/round, ie de l'écrire entièrement en local (pas de référence à des composants existants)
 	 * 
@@ -695,7 +695,7 @@ public class Launcher
 	 * - calcul de points : introduire des variables comme le nombre de joueurs (pour définir un bonus pr le joueur qui fait un perfect en survival)
 	 * - gérer le shrink
 	 * - mode plein écran
-	 * - gérer l'apparition comme une action en soit. si pas possible d'apparaître au début de la partie, faire un atterrissage ?
+	 * - dans les autorisations, gérer l'apparition comme une action en soit. si pas possible d'apparaître au début de la partie, faire un atterrissage ?
 	 * - à la fin du round, faire apparaitre les résultats par transparence...ça serait la classe ça !
 	 * 
 	 * - pour painting, possibilité de définir quelles cases peuvent être repeinte, ce qui permet de poser comme limite un %age de cases repeintes
