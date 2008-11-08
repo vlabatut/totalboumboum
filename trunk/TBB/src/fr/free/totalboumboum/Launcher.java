@@ -720,4 +720,9 @@ public class Launcher
 	 *  - intérêt : tout ça permet d'implémenter le bonus à celui qui tue tout le monde en survival, par opposition à une victoire temporelle qui rapporterait donc moins de points
 	 *  - LA NOTION DE PLAYMODE EST A SUPPRIMER 
 	 */
+	
+	/*
+	 * adapter itemset pr différencier le nom et le folder des items
+	 * et faire pareil dans les autres structures (fire?...)
+	 */
 }
