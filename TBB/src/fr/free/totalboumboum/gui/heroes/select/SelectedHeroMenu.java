@@ -1,4 +1,4 @@
-package fr.free.totalboumboum.gui.profiles.ai;
+package fr.free.totalboumboum.gui.heroes.select;
 
 /*
  * Total Boum Boum
@@ -21,36 +21,28 @@ package fr.free.totalboumboum.gui.profiles.ai;
  * 
  */
 
-import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 
 import javax.swing.Box;
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
 
-import fr.free.totalboumboum.ai.AiPreview;
-import fr.free.totalboumboum.configuration.profile.Profile;
-import fr.free.totalboumboum.gui.ais.select.SelectedAiData;
 import fr.free.totalboumboum.gui.common.panel.SplitMenuPanel;
 import fr.free.totalboumboum.gui.common.panel.menu.InnerMenuPanel;
 import fr.free.totalboumboum.gui.common.panel.menu.MenuPanel;
 import fr.free.totalboumboum.gui.tools.GuiTools;
 
-public class SelectedAiMenu extends InnerMenuPanel
+public class SelectedHeroMenu extends InnerMenuPanel
 {	private static final long serialVersionUID = 1L;
 	
 	@SuppressWarnings("unused")
-	private JButton buttonCancel;
-	@SuppressWarnings("unused")
-	private JButton buttonConfirm;
+	private JButton buttonBack;
 
-	private SelectedAiData aiData;
-	private Profile profile;
+	private SelectedHeroData aiData;
 
-	public SelectedAiMenu(SplitMenuPanel container, MenuPanel parent, Profile profile)
+	public SelectedHeroMenu(SplitMenuPanel container, MenuPanel parent)
 	{	super(container, parent);
-		this.profile = profile;
-	
+		
 		// layout
 		BoxLayout layout = new BoxLayout(this,BoxLayout.PAGE_AXIS); 
 		setLayout(layout);
@@ -60,25 +52,17 @@ public class SelectedAiMenu extends InnerMenuPanel
 
 		// buttons
 		add(Box.createVerticalGlue());
-		buttonConfirm = GuiTools.createSecondaryVerticalMenuButton(GuiTools.MENU_PROFILES_BUTTON_CONFIRM,this);
-		add(Box.createRigidArea(new Dimension(0,GuiTools.getSize(GuiTools.MENU_VERTICAL_BUTTON_SPACE))));
-		buttonCancel = GuiTools.createSecondaryVerticalMenuButton(GuiTools.MENU_PROFILES_BUTTON_CANCEL,this);
+		buttonBack = GuiTools.createSecondaryVerticalMenuButton(GuiTools.MENU_AI_BUTTON_BACK,this);
 		add(Box.createVerticalGlue());		
 
 		// panels
-		aiData = new SelectedAiData(container);
+		aiData = new SelectedHeroData(container);
 		container.setDataPart(aiData);
 	}
 	
 	public void actionPerformed(ActionEvent e)
-	{	if(e.getActionCommand().equals(GuiTools.MENU_PROFILES_BUTTON_CANCEL))
+	{	if(e.getActionCommand().equals(GuiTools.MENU_AI_BUTTON_BACK))
 		{	replaceWith(parent);
-	    }
-		else if(e.getActionCommand().equals(GuiTools.MENU_PROFILES_BUTTON_CONFIRM))
-		{	AiPreview aiPreview = aiData.getSelectedAiPreview();
-			profile.setAiName(aiPreview.getFolder());
-			profile.setAiPackname(aiPreview.getPack());
-			replaceWith(parent);
 	    }
 	} 
 	
