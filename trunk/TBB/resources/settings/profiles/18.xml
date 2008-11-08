@@ -3,8 +3,8 @@
 	<general name="Promeneur" />
 	<ai name="promeneur" pack="tournament200809" />
 	<colors>
-		<color rank="0" name="orange" />
+		<color rank="0" name="ORANGE" />
 	</colors>
- 	<character name="shirobon" packname="superbomberman5"  />     
+	<character name="shirobon" packname="superbomberman5" />
 </profile>
 

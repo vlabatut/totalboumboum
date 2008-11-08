@@ -160,6 +160,7 @@
 				<text name="Title" value="Edit a profile" tooltip="Modification of a profile" />
 				<text name="Ai" value="Artificial intelligence" tooltip="Name of the artificial intelligence" />
 				<text name="AiChange" value="Select the AI" tooltip="Select another artificial intelligence" />
+				<text name="AiReset" value="Reset" tooltip="Delete the previously selected artificial intelligence" />
 				<text name="Color" value="Color #" tooltip="Color of the character" />
 				<text name="ColorNext" value="Next" tooltip="Next color" />
 				<text name="ColorPrevious" value="Previous" tooltip="Previous color" />
