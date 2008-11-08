@@ -1,4 +1,4 @@
-package fr.free.totalboumboum.gui.ai.select;
+package fr.free.totalboumboum.gui.ais.select;
 
 /*
  * Total Boum Boum

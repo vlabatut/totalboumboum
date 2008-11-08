@@ -100,6 +100,7 @@ public class EditProfileData extends EntitledDataPanel implements MouseListener
 				ln.addLabel(0);
 				ln.addLabel(0);
 				ln.addLabel(0);
+				ln.addLabel(0);
 				int col = 0;
 				// icon
 				{	ln.setLabelMinWidth(col,ln.getHeight());
@@ -119,6 +120,16 @@ public class EditProfileData extends EntitledDataPanel implements MouseListener
 				{	ln.setLabelMaxWidth(col,Integer.MAX_VALUE);
 					Color bg = GuiTools.COLOR_TABLE_REGULAR_BACKGROUND;
 					ln.setLabelBackground(col,bg);
+					col++;
+				}
+				// reset
+				{	ln.setLabelMinWidth(col,ln.getHeight());
+					ln.setLabelMaxWidth(col,ln.getHeight());
+					ln.setLabelKey(col,GuiTools.MENU_PROFILES_EDIT_AI_RESET,true);
+					Color bg = GuiTools.COLOR_TABLE_REGULAR_BACKGROUND;
+					ln.setLabelBackground(col,bg);
+					JLabel label = editPanel.getLabel(LINE_AI,col);
+					label.addMouseListener(this);
 					col++;
 				}
 				// change
@@ -297,8 +308,15 @@ public class EditProfileData extends EntitledDataPanel implements MouseListener
 				break;
 			// AI
 			case LINE_AI:
-				SelectedAiSplitPanel aiPanel = new SelectedAiSplitPanel(container.getContainer(),container,profile);
-				getContainer().replaceWith(aiPanel);
+				if(pos[1]==3)
+				{	profile.setAiName(null);
+					profile.setAiPackname(null);
+					refreshAi();
+				}
+				else if(pos[1]==4)
+				{	SelectedAiSplitPanel aiPanel = new SelectedAiSplitPanel(container.getContainer(),container,profile);
+					getContainer().replaceWith(aiPanel);
+				}
 				break;
 			// HERO
 			case LINE_HERO:

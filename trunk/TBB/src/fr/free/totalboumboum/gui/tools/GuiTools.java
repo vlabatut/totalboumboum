@@ -162,6 +162,7 @@ public class GuiTools
 		public static final String MENU_PROFILES_EDIT_TITLE = "MenuProfilesEditTitle";		
 		public static final String MENU_PROFILES_EDIT_AI = "MenuProfilesEditAi";
 		public static final String MENU_PROFILES_EDIT_AI_CHANGE = "MenuProfilesEditAiChange";
+		public static final String MENU_PROFILES_EDIT_AI_RESET = "MenuProfilesEditAiReset";
 		public static final String MENU_PROFILES_EDIT_COLOR = "MenuProfilesEditColor";
 		public static final String MENU_PROFILES_EDIT_COLOR_NEXT = "MenuProfilesEditColorNext";
 		public static final String MENU_PROFILES_EDIT_COLOR_PREVIOUS = "MenuProfilesEditColorPrevious";
@@ -999,6 +1000,7 @@ public class GuiTools
 			icons.put(MENU_OPTIONS_CONTROLS_LINE_AUTO_FALSE,image);
 			icons.put(MENU_OPTIONS_VIDEO_LINE_DISABLED,image);
 			icons.put(MENU_OPTIONS_ADVANCED_LINE_ADJUST_DISABLED,image);
+			icons.put(MENU_PROFILES_EDIT_AI_RESET,image);
 			// human
 			image = loadIcon(folder+GuiFileTools.FILE_HUMAN,absent);
 			icons.put(GAME_TOURNAMENT_DESCRIPTION_PLAYERS_DATA_HUMAN,image);
