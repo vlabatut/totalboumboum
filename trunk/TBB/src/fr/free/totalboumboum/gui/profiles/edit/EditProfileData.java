@@ -36,6 +36,7 @@ import fr.free.totalboumboum.gui.common.subpanel.Line;
 import fr.free.totalboumboum.gui.common.subpanel.UntitledSubPanelLines;
 import fr.free.totalboumboum.gui.data.configuration.GuiConfiguration;
 import fr.free.totalboumboum.gui.profiles.ais.SelectedAiSplitPanel;
+import fr.free.totalboumboum.gui.profiles.heroes.SelectedHeroSplitPanel;
 import fr.free.totalboumboum.gui.tools.GuiTools;
 
 public class EditProfileData extends EntitledDataPanel implements MouseListener
@@ -320,6 +321,8 @@ public class EditProfileData extends EntitledDataPanel implements MouseListener
 				break;
 			// HERO
 			case LINE_HERO:
+				SelectedHeroSplitPanel heroPanel = new SelectedHeroSplitPanel(container.getContainer(),container,profile);
+				getContainer().replaceWith(heroPanel);
 				break;
 			// COLOR
 			default:
