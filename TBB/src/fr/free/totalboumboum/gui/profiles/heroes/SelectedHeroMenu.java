@@ -36,7 +36,7 @@ import fr.free.totalboumboum.gui.common.panel.menu.MenuPanel;
 import fr.free.totalboumboum.gui.heroes.select.SelectedHeroData;
 import fr.free.totalboumboum.gui.tools.GuiTools;
 
-public class SelectedHeroesMenu extends InnerMenuPanel
+public class SelectedHeroMenu extends InnerMenuPanel
 {	private static final long serialVersionUID = 1L;
 	
 	@SuppressWarnings("unused")
@@ -47,7 +47,7 @@ public class SelectedHeroesMenu extends InnerMenuPanel
 	private SelectedHeroData heroData;
 	private Profile profile;
 
-	public SelectedHeroesMenu(SplitMenuPanel container, MenuPanel parent, Profile profile)
+	public SelectedHeroMenu(SplitMenuPanel container, MenuPanel parent, Profile profile)
 	{	super(container, parent);
 		this.profile = profile;
 	

@@ -32,19 +32,19 @@ import fr.free.totalboumboum.gui.common.panel.menu.MenuPanel;
 import fr.free.totalboumboum.gui.data.configuration.GuiConfiguration;
 import fr.free.totalboumboum.gui.tools.GuiTools;
 
-public class SelectedHeroesSplitPanel extends SplitMenuPanel
+public class SelectedHeroSplitPanel extends SplitMenuPanel
 {	private static final long serialVersionUID = 1L; 
 
 	private BufferedImage image;
 
-	public SelectedHeroesSplitPanel(MenuContainer container, MenuPanel parent, Profile profile)
+	public SelectedHeroSplitPanel(MenuContainer container, MenuPanel parent, Profile profile)
 	{	super(container,parent,BorderLayout.LINE_START,GuiTools.VERTICAL_SPLIT_RATIO);
 	
 		// background
 		image = GuiConfiguration.getMiscConfiguration().getDarkBackground();
 		
 		// panels
-		setMenuPart(new SelectedHeroesMenu(this,parent,profile));
+		setMenuPart(new SelectedHeroMenu(this,parent,profile));
 	}
 	
 	@Override
