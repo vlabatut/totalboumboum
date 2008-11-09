@@ -5,6 +5,14 @@
 		<xsd:attribute name="name" type="xsd:string" use="required" />
 	</xsd:complexType>
 
+	<xsd:complexType name="tAuthor">
+		<xsd:attribute name="value" type="xsd:string" use="required" />
+	</xsd:complexType>
+
+	<xsd:complexType name="tSource">
+		<xsd:attribute name="value" type="xsd:string" use="required" />
+	</xsd:complexType>
+
 	<xsd:complexType name="tPreview">
 		<xsd:attribute name="file" type="xsd:string" use="required" />
 	</xsd:complexType>
@@ -16,6 +24,8 @@
 	<xsd:complexType name="tSprite">
 		<xsd:sequence>
 			<xsd:element name="general" type="tGeneral" />
+			<xsd:element name="author" type="tAuthor"  minOccurs="0"/>
+			<xsd:element name="source" type="tSource" minOccurs="0"/>
 			<xsd:element name="preview" type="tPreview" />
 			<xsd:element name="explosion" type="tExplosion" minOccurs="0" />
 		</xsd:sequence>

@@ -25,7 +25,7 @@
 				<text name="Back" value="Back" tooltip="Go back to the main menu" />
 			</group>
 			<group name="Select">
-				<text name="Title" value="AIs list" tooltip="List of all available artificial intelligences" />
+				<text name="Title" value="List of AIs" tooltip="List of all available artificial intelligences" />
 				<group name="Class">
 					<text name="PageDown" value="Page down" tooltip="Go to the next AIs page" />
 					<text name="PageUp" value="Page up" tooltip="Go back to the previous AIs page" />
@@ -43,6 +43,32 @@
 				</group>
 			</group>
 		</group>
+
+<!-- HERO MENU -->	
+		<group name="Hero">
+			<group name="Button">
+				<text name="Back" value="Back" tooltip="Go back to the main menu" />
+			</group>		
+			<group name="Select">
+				<text name="Title" value="List of characters" tooltip="List of all available characters" />
+				<group name="Class">
+					<text name="PageDown" value="Page down" tooltip="Go to the next characters page" />
+					<text name="PageUp" value="Page up" tooltip="Go back to the previous characters page" />
+					<text name="Parent" value=".." tooltip="Go back to the packages list" />
+				</group>
+				<group name="Package">
+					<text name="PageDown" value="Page down" tooltip="Go to the next packages page" />
+					<text name="PageUp" value="Page up" tooltip="Go back to the previous packages page" />
+				</group>
+				<group name="Preview">
+					<text name="Author" value="Author" tooltip="Author of the character" />
+					<text name="Colors" value="Colors"  tooltip="Available colors for this character" />
+					<text name="Name" value="Name" tooltip="Name of the character" />
+					<text name="Package" value="Package" tooltip="Package containing the character" />
+					<text name="Source" value="Source"  tooltip="Source of the character (original work or ripped from some existing game)" />
+				</group>
+			</group>
+		</group>	
 
 <!-- OPTIONS MENU -->
 		<group name="Options">

@@ -38,7 +38,7 @@ public class SelectedHeroMenu extends InnerMenuPanel
 	@SuppressWarnings("unused")
 	private JButton buttonBack;
 
-	private SelectedHeroData aiData;
+	private SelectedHeroData heroData;
 
 	public SelectedHeroMenu(SplitMenuPanel container, MenuPanel parent)
 	{	super(container, parent);
@@ -52,16 +52,16 @@ public class SelectedHeroMenu extends InnerMenuPanel
 
 		// buttons
 		add(Box.createVerticalGlue());
-		buttonBack = GuiTools.createSecondaryVerticalMenuButton(GuiTools.MENU_AI_BUTTON_BACK,this);
+		buttonBack = GuiTools.createSecondaryVerticalMenuButton(GuiTools.MENU_HERO_BUTTON_BACK,this);
 		add(Box.createVerticalGlue());		
 
 		// panels
-		aiData = new SelectedHeroData(container);
-		container.setDataPart(aiData);
+		heroData = new SelectedHeroData(container);
+		container.setDataPart(heroData);
 	}
 	
 	public void actionPerformed(ActionEvent e)
-	{	if(e.getActionCommand().equals(GuiTools.MENU_AI_BUTTON_BACK))
+	{	if(e.getActionCommand().equals(GuiTools.MENU_HERO_BUTTON_BACK))
 		{	replaceWith(parent);
 	    }
 	} 
