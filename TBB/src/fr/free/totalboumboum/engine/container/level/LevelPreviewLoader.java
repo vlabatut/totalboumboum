@@ -24,19 +24,19 @@ package fr.free.totalboumboum.engine.container.level;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
-import java.util.HashMap;
 
 import javax.xml.parsers.ParserConfigurationException;
 
 import org.jdom.Element;
 import org.xml.sax.SAXException;
 
-import fr.free.totalboumboum.engine.container.itemset.ItemsetPreviewer;
+import fr.free.totalboumboum.engine.container.itemset.ItemsetPreview;
+import fr.free.totalboumboum.engine.container.itemset.ItemsetPreviewLoader;
 import fr.free.totalboumboum.tools.FileTools;
 import fr.free.totalboumboum.tools.ImageTools;
 import fr.free.totalboumboum.tools.XmlTools;
 
-public class LevelPreviewer
+public class LevelPreviewLoader
 {
 
     public static LevelPreview previewLevel(String folder) throws ParserConfigurationException, SAXException, IOException, ClassNotFoundException    
@@ -93,7 +93,7 @@ public class LevelPreviewer
 */
 		// itemset
 		String itemFolder = instanceFolder + File.separator+FileTools.FOLDER_ITEMS;
-		HashMap<String,BufferedImage> itemsetPreview = ItemsetPreviewer.previewItemset(itemFolder);
+		ItemsetPreview itemsetPreview = ItemsetPreviewLoader.loadItemsetPreview(itemFolder);
 		result.setItemsetPreview(itemsetPreview);
 
 		return result;

@@ -654,9 +654,10 @@ public class Launcher
 	 * - modification : informations légales dans le splashscreen
 	 * - nouveauté : personnage : shirobon de SBM5
 	 * - nouveauté : personnage : assistant pirate de SBM5
-	 * - nouveauté : traduction des couleurs
+	 * - nouveauté : traduction des couleurs dans l'interface
 	 * - nouveauté : visualisation des IA
 	 * - nouveauté : possibilité de ranger les 16 couleurs par ordre de préférence (au lieu de définir une seule couleur dans son profil)
+	 * - nouveauté : preview intégrée dans chaque sprite
 	 * 
 	 * *******************************************************
 	 * *********************** A FAIRE ***********************
@@ -690,7 +691,9 @@ public class Launcher
 	 * 		- plus les scores utilisés dans les points et/ou les limites
 	 * 		- si les limites utilisent des points custom, les afficher aussi
 	 * 
-	 * - bug d'affichage dans les notes d'IA, les accents sont affichés avec la police par défaut 
+	 * - bug d'affichage dans les notes d'IA, les accents sont affichés avec la police par défaut
+	 * 
+	 * - bug de gameplay : quand deux persos meurent dans le même cycle, le moteur considère une précédence temporelle alors qu'il n'y en a pas
 	 * -------------------------------------------------------------------
 	 * - calcul de points : introduire des variables comme le nombre de joueurs (pour définir un bonus pr le joueur qui fait un perfect en survival)
 	 * - gérer le shrink
@@ -719,10 +722,5 @@ public class Launcher
 	 *  - on rajoute également le système de bonus pour une limite donnée
 	 *  - intérêt : tout ça permet d'implémenter le bonus à celui qui tue tout le monde en survival, par opposition à une victoire temporelle qui rapporterait donc moins de points
 	 *  - LA NOTION DE PLAYMODE EST A SUPPRIMER 
-	 */
-	
-	/*
-	 * adapter itemset pr différencier le nom et le folder des items
-	 * et faire pareil dans les autres structures (fire?...)
 	 */
 }

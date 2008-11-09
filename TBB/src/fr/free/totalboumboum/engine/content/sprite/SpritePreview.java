@@ -21,21 +21,32 @@ package fr.free.totalboumboum.engine.content.sprite;
  * 
  */
 
-public class SpriteId
+import java.awt.image.BufferedImage;
+
+public class SpritePreview
 {
+	/////////////////////////////////////////////////////////////////
+	// NAME			/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
 	private String name;
-	private String packname;
-	
-	public SpriteId(String packname, String name)
-	{	this.name = name;
-		this.packname = packname;
-	}
 	
 	public String getName()
-	{	return name;	
+	{	return name;
 	}
 	
-	public String getPackName()
-	{	return packname;	
+	public void setName(String name)
+	{	this.name = name;
+	}
+	
+	/////////////////////////////////////////////////////////////////
+	// IMAGE			/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	private BufferedImage image;
+
+	public BufferedImage getImage()
+	{	return image;
+	}
+	public void setImage(BufferedImage image)
+	{	this.image = image;
 	}
 }

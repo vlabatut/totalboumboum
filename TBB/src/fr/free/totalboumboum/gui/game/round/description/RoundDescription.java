@@ -45,10 +45,12 @@ import org.xml.sax.SAXException;
 import java.util.Map.Entry;
 
 import fr.free.totalboumboum.configuration.Configuration;
+import fr.free.totalboumboum.engine.container.itemset.ItemsetPreview;
 import fr.free.totalboumboum.engine.container.level.HollowLevel;
 import fr.free.totalboumboum.engine.container.level.LevelPreview;
-import fr.free.totalboumboum.engine.container.level.LevelPreviewer;
+import fr.free.totalboumboum.engine.container.level.LevelPreviewLoader;
 import fr.free.totalboumboum.engine.container.zone.Zone;
+import fr.free.totalboumboum.engine.content.sprite.SpritePreview;
 import fr.free.totalboumboum.game.limit.Limit;
 import fr.free.totalboumboum.game.limit.LimitConfrontation;
 import fr.free.totalboumboum.game.limit.LimitPoints;
@@ -91,7 +93,7 @@ public class RoundDescription extends EntitledDataPanel
 			HollowLevel hollowLevel = round.getHollowLevel();
 			LevelPreview preview = null;
 			try
-			{	preview = LevelPreviewer.previewLevel(hollowLevel.getLevelFolder());
+			{	preview = LevelPreviewLoader.previewLevel(hollowLevel.getLevelFolder());
 			}
 			catch (ParserConfigurationException e)
 			{	e.printStackTrace();
@@ -272,20 +274,22 @@ public class RoundDescription extends EntitledDataPanel
 		// data
 		NumberFormat nf = NumberFormat.getInstance();
 		nf.setMinimumFractionDigits(0);
-		HashMap<String,BufferedImage> itemsetPreview = levelPreview.getItemsetPreview();
+		ItemsetPreview itemsetPreview = levelPreview.getItemsetPreview();
 		Zone zone = Configuration.getGameConfiguration().getTournament().getCurrentMatch().getCurrentRound().getHollowLevel().getZone();
 		HashMap<String,Integer> itemList = zone.getItemCount();
-		Iterator<Entry<String,BufferedImage>> i = itemsetPreview.entrySet().iterator();
+		Iterator<Entry<String,SpritePreview>> i = itemsetPreview.getItemPreviews().entrySet().iterator();
 		int line = 0;
 		int colGroup = 0;
 		while(i.hasNext())
 		{	// init
-			Entry<String,BufferedImage> temp = i.next();
-			String name = temp.getKey();
-			BufferedImage image = temp.getValue();
+			Entry<String,SpritePreview> temp = i.next();
+			String itemName = temp.getKey();
+			SpritePreview spritePreview = temp.getValue();
+			String name = spritePreview.getName();
+			BufferedImage image = spritePreview.getImage();
 			int number = 0;
-			if(itemList.containsKey(name))
-				number = itemList.get(name);
+			if(itemList.containsKey(itemName))
+				number = itemList.get(itemName);
 			String tooltip;
 			tooltip = name+": "+number;				
 			if(number==0)
@@ -395,7 +399,7 @@ public class RoundDescription extends EntitledDataPanel
 		// data
 		NumberFormat nf = NumberFormat.getInstance();
 		nf.setMinimumFractionDigits(0);
-		HashMap<String,BufferedImage> itemsetPreview = levelPreview.getItemsetPreview();
+		ItemsetPreview itemsetPreview = levelPreview.getItemsetPreview();
 		HashMap<String,Integer> initialItems = levelPreview.getInitialItems();
 		Iterator<Entry<String,Integer>> i = initialItems.entrySet().iterator();
 		int line = 0;
@@ -403,9 +407,11 @@ public class RoundDescription extends EntitledDataPanel
 		while(i.hasNext())
 		{	// init
 			Entry<String,Integer> temp = i.next();
-			String name = temp.getKey();
+			String itemName = temp.getKey();
 			int number = temp.getValue();
-			BufferedImage image = itemsetPreview.get(name);
+			SpritePreview spritePreview = itemsetPreview.getItemPreview(itemName);
+			String name = spritePreview.getName();
+			BufferedImage image = spritePreview.getImage();
 			String tooltip = name+": "+number;
 			String value = Integer.toString(number);
 			//
