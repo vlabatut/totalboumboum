@@ -32,9 +32,10 @@ import javax.xml.parsers.ParserConfigurationException;
 import org.jdom.Element;
 import org.xml.sax.SAXException;
 
+import fr.free.totalboumboum.engine.content.sprite.SpritePreview;
+import fr.free.totalboumboum.engine.content.sprite.SpritePreviewLoader;
 import fr.free.totalboumboum.tools.FileTools;
 import fr.free.totalboumboum.tools.XmlTools;
-
 
 public class ProfileLoader
 {	
@@ -51,20 +52,24 @@ public class ProfileLoader
 	
 	private static Profile loadProfileElement(Element root) throws IllegalArgumentException, SecurityException, ParserConfigurationException, SAXException, IOException, IllegalAccessException, NoSuchFieldException, ClassNotFoundException
 	{	Profile result = new Profile();
-    	// general properties
+    	
+		// general properties
     	Element general = root.getChild(XmlTools.ELT_GENERAL);
 		loadGeneralElement(general,result);
+		
 		// artificial intelligence
 		Element ai = root.getChild(XmlTools.ELT_AI);
 		if(ai!=null)
 			loadAiElement(ai,result);
+		
 		// colors
 		Element colors = root.getChild(XmlTools.ELT_COLORS);
 		loadColorsElement(colors,result);
+		
 		// sprite info
 		Element character = root.getChild(XmlTools.ELT_CHARACTER);
 		loadSpriteElement(character,result);
-		//
+
 		return result;
 	}
     
@@ -78,6 +83,7 @@ public class ProfileLoader
     {	// name
     	String name = root.getAttribute(XmlTools.ATT_NAME).getValue();
     	result.setAiName(name.trim());
+    	
     	// pack
     	String packname = root.getAttribute(XmlTools.ATT_PACK).getValue();
     	result.setAiPackname(packname.trim());
@@ -87,13 +93,21 @@ public class ProfileLoader
     {	// packname
     	String spritePackname = root.getAttribute(XmlTools.ATT_PACKNAME).getValue();
     	result.setSpritePack(spritePackname);
+    	
+    	// folder
+    	String spriteFolder = root.getAttribute(XmlTools.ATT_NAME).getValue();
+    	result.setSpriteFolder(spriteFolder);
+    	
     	// name
-    	String spriteName = root.getAttribute(XmlTools.ATT_NAME).getValue();
-    	result.setSpriteName(spriteName);
+    	SpritePreview heroPreview = new SpritePreview();
+		heroPreview = SpritePreviewLoader.loadHeroPreview(spritePackname,spriteFolder);
+		String spriteName = heroPreview.getName();
+		result.setSpriteName(spriteName);
+    	
     	// portraits
     	PredefinedColor spriteColor = result.getSpriteColor();
     	String folder = FileTools.getHeroesPath() + File.separator + spritePackname;
-    	folder = folder + File.separator + spriteName;
+    	folder = folder + File.separator + spriteFolder;
     	Portraits portraits = PortraitsLoader.loadPortraits(folder,spriteColor);
     	result.setPortraits(portraits);
     }	        

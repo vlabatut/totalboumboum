@@ -73,7 +73,7 @@ public class Match
 		Iterator<Profile> it = this.profiles.iterator();
 		while(it.hasNext())
 		{	Profile p = it.next();
-			if(p.isAi())
+			if(p.hasAi())
 				p.setControlSettingsIndex(0);
 			else
 			{	p.setControlSettingsIndex(i);

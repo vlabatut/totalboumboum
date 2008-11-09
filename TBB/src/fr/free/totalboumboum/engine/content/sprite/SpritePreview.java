@@ -22,6 +22,9 @@ package fr.free.totalboumboum.engine.content.sprite;
  */
 
 import java.awt.image.BufferedImage;
+import java.util.TreeSet;
+
+import fr.free.totalboumboum.configuration.profile.PredefinedColor;
 
 public class SpritePreview
 {
@@ -74,5 +77,44 @@ public class SpritePreview
 	}
 	public void setImage(BufferedImage image)
 	{	this.image = image;
+	}
+
+	/////////////////////////////////////////////////////////////////
+	// PACKAGE			/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	private String pack;
+	
+	public String getPack()
+	{	return pack;
+	}
+	
+	public void setPack(String pack)
+	{	this.pack = pack;
+	}
+	
+	/////////////////////////////////////////////////////////////////
+	// FOLDER			/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	private String folder;
+	
+	public String getFolder()
+	{	return folder;
+	}
+	
+	public void setFolder(String folder)
+	{	this.folder = folder;
+	}
+	
+	/////////////////////////////////////////////////////////////////
+	// COLORS			/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	private TreeSet<PredefinedColor> colors = new TreeSet<PredefinedColor>();
+	
+	public void addColor(PredefinedColor color)
+	{	colors.add(color);		
+	}
+	
+	public boolean hasColor(PredefinedColor color)
+	{	return colors.contains(color);		
 	}
 }

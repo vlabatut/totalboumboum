@@ -26,54 +26,64 @@ import fr.free.totalboumboum.engine.control.PlayerControl;
 
 public class Profile
 {
-	/** name */
-	private String name;
-	/** sprite */
-	private String spritePack;
-	private String spriteName;
-	private PredefinedColor[] spriteColors;
-	/** artificial intelligence */
-	private String aiName;
-	private String aiPackname;
-	//
-	private Portraits portraits;
-	
-	private PlayerControl spriteControl;
-	private int controlSettingsIndex = 0;
-	
 	public Profile()
 	{	name = null;
 		spritePack = null;
-		spriteName = null;
+		spriteFolder = null;
 		spriteColors = new PredefinedColor[GameConstants.MAX_PROFILES_COUNT];
 		aiName = null;
 		aiPackname = null;
 	}
 
+	/////////////////////////////////////////////////////////////////
+	// NAME				/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	private String name;
+
 	public String getName()
 	{	return name;
 	}
+	
 	public void setName(String name)
 	{	this.name = name;
 	}
 
+	/////////////////////////////////////////////////////////////////
+	// SPRITE			/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	private String spritePack;
+	private String spriteFolder;
+	private String spriteName;
+	private PredefinedColor[] spriteColors;
+
 	public String getSpritePack()
 	{	return spritePack;
 	}
+	
 	public void setSpritePack(String spritePack)
 	{	this.spritePack = spritePack;
 	}
 
-	public String getSpriteName()
-	{	return spriteName;
+	public String getSpriteFolder()
+	{	return spriteFolder;
 	}
-	public void setSpriteName(String spriteName)
-	{	this.spriteName = spriteName;
+	
+	public void setSpriteFolder(String spriteFolder)
+	{	this.spriteFolder = spriteFolder;
 	}
 
 	public PredefinedColor[] getSpriteColors()
 	{	return spriteColors;
 	}
+	
+	public String getSpriteName()
+	{	return spriteName;
+	}
+	
+	public void setSpriteName(String spriteName)
+	{	this.spriteName = spriteName;
+	}
+
 	public PredefinedColor getSpriteColor()
 	{	PredefinedColor result = null;
 		int i = 0;
@@ -85,9 +95,16 @@ public class Profile
 		}
 		return result;
 	}
+	
 	public void setSpriteColor(PredefinedColor spriteColor, int index)
 	{	this.spriteColors[index] = spriteColor;
 	}
+
+	/////////////////////////////////////////////////////////////////
+	// AI				/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	private String aiName;
+	private String aiPackname;
 
 	public boolean hasAi()
 	{	return aiName != null;		
@@ -105,11 +122,57 @@ public class Profile
 	{	this.aiPackname = aiPackname;
 	}
 
+	/////////////////////////////////////////////////////////////////
+	// PORTRAITS		/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	private Portraits portraits;
+
+	public Portraits getPortraits()
+	{	return portraits;
+	}
+	
+	public void setPortraits(Portraits portraits)
+	{	this.portraits = portraits;
+	}
+
+	/////////////////////////////////////////////////////////////////
+	// CONTROLS			/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	private PlayerControl spriteControl;
+	private int controlSettingsIndex = 0;
+
+	public int getControlSettingsIndex()
+	{	return controlSettingsIndex;
+	}
+	
+	public void setControlSettingsIndex(int controlSettings)
+	{	this.controlSettingsIndex = controlSettings;
+	}
+	
 	public PlayerControl getSpriteControl()
 	{	return spriteControl;
 	}
+	
 	public void setSpriteControl(PlayerControl spriteControl)
 	{	this.spriteControl = spriteControl;
+	}
+
+	/////////////////////////////////////////////////////////////////
+	// MISC				/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	public Profile copy()
+	{	Profile result = new Profile();
+		result.aiName = aiName;
+		result.aiPackname = aiPackname;
+		result.controlSettingsIndex = controlSettingsIndex;
+		result.name = name;
+		result.portraits = portraits; //TODO copy
+		result.spriteColors = spriteColors.clone();
+		result.spriteControl = spriteControl;//TODO copy
+		result.spriteFolder = spriteFolder;
+		result.spritePack = spritePack;
+		result.spriteName = spriteName;
+		return result;
 	}
 
 	public boolean equals(Object o)
@@ -121,35 +184,4 @@ public class Profile
 		return result;
 	}
 
-	public Portraits getPortraits()
-	{	return portraits;
-	}
-	public void setPortraits(Portraits portraits)
-	{	this.portraits = portraits;
-	}
-
-	public int getControlSettingsIndex()
-	{	return controlSettingsIndex;
-	}
-	public void setControlSettingsIndex(int controlSettings)
-	{	this.controlSettingsIndex = controlSettings;
-	}
-	
-	public boolean isAi()
-	{	return aiName!=null;	
-	}
-	
-	public Profile copy()
-	{	Profile result = new Profile();
-		result.aiName = aiName;
-		result.aiPackname = aiPackname;
-		result.controlSettingsIndex = controlSettingsIndex;
-		result.name = name;
-		result.portraits = portraits; //TODO copy
-		result.spriteColors = spriteColors.clone();
-		result.spriteControl = spriteControl;//TODO copy
-		result.spriteName = spriteName;
-		result.spritePack = spritePack;
-		return result;
-	}
 }

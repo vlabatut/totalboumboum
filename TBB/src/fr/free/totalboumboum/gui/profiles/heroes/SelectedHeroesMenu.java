@@ -1,4 +1,4 @@
-package fr.free.totalboumboum.gui.profiles.edit;
+package fr.free.totalboumboum.gui.profiles.heroes;
 
 /*
  * Total Boum Boum
@@ -23,35 +23,33 @@ package fr.free.totalboumboum.gui.profiles.edit;
 
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
-import java.io.IOException;
 
 import javax.swing.Box;
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
 
 import fr.free.totalboumboum.configuration.profile.Profile;
-import fr.free.totalboumboum.configuration.profile.ProfileSaver;
+import fr.free.totalboumboum.engine.content.sprite.SpritePreview;
 import fr.free.totalboumboum.gui.common.panel.SplitMenuPanel;
 import fr.free.totalboumboum.gui.common.panel.menu.InnerMenuPanel;
 import fr.free.totalboumboum.gui.common.panel.menu.MenuPanel;
+import fr.free.totalboumboum.gui.heroes.select.SelectedHeroData;
 import fr.free.totalboumboum.gui.tools.GuiTools;
 
-public class EditProfileMenu extends InnerMenuPanel
+public class SelectedHeroesMenu extends InnerMenuPanel
 {	private static final long serialVersionUID = 1L;
 	
 	@SuppressWarnings("unused")
-	private JButton buttonConfirm;
-	@SuppressWarnings("unused")
 	private JButton buttonCancel;
+	@SuppressWarnings("unused")
+	private JButton buttonConfirm;
 
-	private EditProfileData profileData;
+	private SelectedHeroData heroData;
 	private Profile profile;
-	private String profileFile;
 
-	public EditProfileMenu(SplitMenuPanel container, MenuPanel parent, Profile profile, String profileFile)
+	public SelectedHeroesMenu(SplitMenuPanel container, MenuPanel parent, Profile profile)
 	{	super(container, parent);
 		this.profile = profile;
-		this.profileFile = profileFile;
 	
 		// layout
 		BoxLayout layout = new BoxLayout(this,BoxLayout.PAGE_AXIS); 
@@ -68,32 +66,21 @@ public class EditProfileMenu extends InnerMenuPanel
 		add(Box.createVerticalGlue());		
 
 		// panels
-		profileData = new EditProfileData(container,profile);
-		container.setDataPart(profileData);
+		heroData = new SelectedHeroData(container);
+		container.setDataPart(heroData);
 	}
 	
 	public void actionPerformed(ActionEvent e)
-	{	if(e.getActionCommand().equals(GuiTools.MENU_PROFILES_BUTTON_CONFIRM))
-		{	Profile newProfile = profileData.getProfile();
-			boolean hasChanged = 
-				profile.hasAi() && (!profile.getAiName().equals(newProfile.getAiName())
-						|| profile.getAiPackname().equals(newProfile.getAiPackname()))
-				|| profile.getName().equals(newProfile.getName())
-				|| profile.getSpriteColor().equals(newProfile.getSpriteColor())
-				|| profile.getSpriteFolder().equals(newProfile.getSpriteFolder())
-				|| profile.getSpritePack().equals(newProfile.getSpritePack());
-			if(hasChanged)
-			{	try
-				{	ProfileSaver.saveProfile(newProfile,profileFile);
-				}
-				catch (IOException e1)
-				{	e1.printStackTrace();
-				}
+	{	if(e.getActionCommand().equals(GuiTools.MENU_PROFILES_BUTTON_CANCEL))
+		{	replaceWith(parent);
+	    }
+		else if(e.getActionCommand().equals(GuiTools.MENU_PROFILES_BUTTON_CONFIRM))
+		{	SpritePreview heroPreview = heroData.getSelectedHeroPreview();
+			if(heroPreview!=null)
+			{	profile.setSpriteFolder(heroPreview.getFolder());
+				profile.setSpritePack(heroPreview.getPack());
 			}
 			replaceWith(parent);
-	    }
-		else if(e.getActionCommand().equals(GuiTools.MENU_PROFILES_BUTTON_CANCEL))
-		{	replaceWith(parent);
 	    }
 	} 
 	

@@ -61,11 +61,12 @@
 					<text name="PageUp" value="Monter" tooltip="Aller à la page de paquets précédente" />
 				</group>
 				<group name="Preview">
-					<text name="Author" value="Auteur" tooltip="Auteur du personnage" />
+					<text name="Author" value="Auteur"  tooltip="Auteur/ripper de ce personnage" />
 					<text name="Colors" value="Couleurs"  tooltip="Couleurs disponibles pour ce personnage" />
-					<text name="Name" value="Nom" tooltip="Nom de l'intelligence artificielle" />
-					<text name="Package" value="Paquet" tooltip="Paquet contenant l'intelligence artificielle" />
-					<text name="Source" value="Source"  tooltip="Source du personnage (oeuvre originale ou extrait d'un jeu existant)" />
+					<text name="Image" value="Prévisualisation" tooltip="Prévisualisation de ce personnage" />
+					<text name="Name" value="Nom" tooltip="Nom de ce personnage" />
+					<text name="Package" value="Paquet" tooltip="Paquet contenant ce personnage" />
+					<text name="Source" value="Source"  tooltip="Source de ce personnage (oeuvre originale ou extrait d'un jeu existant)" />
 				</group>
 			</group>
 		</group>	

@@ -81,7 +81,7 @@ public class GuiTools
 			public static final String MENU_AI_SELECT_PREVIEW_PACKAGE = "MenuAiSelectPreviewPackage";
 	/* HERO */
 		/* BUTTON */
-		public static final String MENU_HERO_BUTTON_BACK = "MenuHEROButtonBack";	
+		public static final String MENU_HERO_BUTTON_BACK = "MenuHeroButtonBack";	
 		/* SELECT */
 		public static final String MENU_HERO_SELECT_TITLE = "MenuHeroSelectTitle";
 			/* CLASS */
@@ -94,6 +94,7 @@ public class GuiTools
 			/* PREVIEW */
 			public static final String MENU_HERO_SELECT_PREVIEW_AUTHOR = "MenuHeroSelectPreviewAuthor";
 			public static final String MENU_HERO_SELECT_PREVIEW_COLORS = "MenuHeroSelectPreviewColors";
+			public static final String MENU_HERO_SELECT_PREVIEW_IMAGE = "MenuHeroSelectPreviewImage";
 			public static final String MENU_HERO_SELECT_PREVIEW_NAME = "MenuHeroSelectPreviewName";
 			public static final String MENU_HERO_SELECT_PREVIEW_PACKAGE = "MenuHeroSelectPreviewPackage";
 			public static final String MENU_HERO_SELECT_PREVIEW_SOURCE = "MenuHeroSelectPreviewSource";
@@ -860,6 +861,7 @@ public class GuiTools
 			image = loadIcon(folder+GuiFileTools.FILE_HERO,absent);
 			icons.put(MENU_PROFILES_PREVIEW_HERONAME,image);
 			icons.put(MENU_PROFILES_EDIT_HERO,image);
+			icons.put(MENU_HERO_SELECT_PREVIEW_IMAGE,image);			
 			// initial
 			image = loadIcon(folder+GuiFileTools.FILE_INITIAL,absent);
 			icons.put(GAME_ROUND_DESCRIPTION_INITIALITEMS_TITLE,image);
