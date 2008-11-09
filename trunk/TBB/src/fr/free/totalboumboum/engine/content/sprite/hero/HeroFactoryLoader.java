@@ -52,6 +52,9 @@ public class HeroFactoryLoader extends SpriteFactoryLoader
 		Element root = SpriteFactoryLoader.openFile(folderPath);
 		String folder;
 		
+		// GENERAL
+		loadGeneralElement(root,result);
+		
 		// ABILITIES
 //		folder = level.getInstancePath()+File.separator+FileTools.FOLDER_HEROES;
 //		folder = folder + File.separator+FileTools.FOLDER_ABILITIES;
@@ -70,7 +73,7 @@ public class HeroFactoryLoader extends SpriteFactoryLoader
 		result.setAnimePack(animePack);
 		
 		//EXPLOSION
-		loadExplosion(root,level,result);
+		loadExplosionElement(root,level,result);
 		
 		//PERMISSIONS
 //		folder = level.getInstancePath()+File.separator+FileTools.FOLDER_HEROES;

@@ -95,7 +95,8 @@ public abstract class Sprite
 	protected ArrayList<Sprite> boundSprites;
 	//
 	protected double speedCoeff = 1;
-	
+	// 
+	private String name;
 	
 	public Sprite(Level level)
 	{	ended = false;
@@ -629,6 +630,14 @@ public abstract class Sprite
 			owner = null;
 			player = null;
 			level = null;
+			name = null;
 		}
+	}
+	
+	public void setName(String name)
+	{	this.name = name; 	
+	}
+	public String getName()
+	{	return name;	
 	}
 }

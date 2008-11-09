@@ -21,10 +21,8 @@ package fr.free.totalboumboum.engine.container.itemset;
  * 
  */
 
-import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
-import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 
@@ -34,13 +32,14 @@ import org.jdom.Attribute;
 import org.jdom.Element;
 import org.xml.sax.SAXException;
 
-import fr.free.totalboumboum.engine.content.sprite.SpriteFactoryLoader;
+import fr.free.totalboumboum.engine.content.sprite.SpritePreview;
+import fr.free.totalboumboum.engine.content.sprite.SpritePreviewLoader;
 import fr.free.totalboumboum.tools.FileTools;
 import fr.free.totalboumboum.tools.XmlTools;
 
-public class ItemsetPreviewer
+public class ItemsetPreviewLoader
 {	
-	public static HashMap<String,BufferedImage> previewItemset(String folderPath) throws ParserConfigurationException, SAXException, IOException, ClassNotFoundException
+	public static ItemsetPreview loadItemsetPreview(String folderPath) throws ParserConfigurationException, SAXException, IOException, ClassNotFoundException
 	{	// init
 		String schemaFolder = FileTools.getSchemasPath();
 		String individualFolder = folderPath;
@@ -50,24 +49,24 @@ public class ItemsetPreviewer
 		schemaFile = new File(schemaFolder+File.separator+FileTools.FILE_ITEMSET+FileTools.EXTENSION_SCHEMA);
 		Element root = XmlTools.getRootFromFile(dataFile,schemaFile);
 		// loading
-		HashMap<String,BufferedImage> result = previewItemsetElement(root,individualFolder);
+		ItemsetPreview result = loadItemsetElement(root,individualFolder);
 		return result;
     }
     
     @SuppressWarnings("unchecked")
-    private static HashMap<String,BufferedImage> previewItemsetElement(Element root, String folder) throws IOException, ParserConfigurationException, SAXException, ClassNotFoundException
-	{	HashMap<String,BufferedImage> result = new HashMap<String,BufferedImage>();
+    private static ItemsetPreview loadItemsetElement(Element root, String folder) throws IOException, ParserConfigurationException, SAXException, ClassNotFoundException
+	{	ItemsetPreview result = new ItemsetPreview();
     	String individualFolder = folder;
 		List<Element> items = root.getChildren(XmlTools.ELT_ITEM);	
 		Iterator<Element> i = items.iterator();
 		while(i.hasNext())
 		{	Element temp = i.next();
-			previewItemElement(temp,individualFolder,result);
+			loadItemElement(temp,individualFolder,result);
 		}
 		return result;
 	}
     
-    private static void previewItemElement(Element root, String folder, HashMap<String,BufferedImage> itemPreviews) throws ParserConfigurationException, SAXException, IOException, ClassNotFoundException
+    private static void loadItemElement(Element root, String folder, ItemsetPreview result) throws ParserConfigurationException, SAXException, IOException, ClassNotFoundException
     {	// folder
     	String individualFolder = folder;
 		Attribute attribute = root.getAttribute(XmlTools.ATT_FOLDER);
@@ -76,7 +75,7 @@ public class ItemsetPreviewer
 		// name
 		String name = root.getAttribute(XmlTools.ATT_NAME).getValue().trim();
 		// preview
-		BufferedImage itemPreview = SpriteFactoryLoader.previewSprite(individualFolder);
-		itemPreviews.put(name,itemPreview);
+		SpritePreview itemPreview = SpritePreviewLoader.loadSpritePreview(individualFolder);
+		result.putItemPreview(name,itemPreview);
     }     
 }

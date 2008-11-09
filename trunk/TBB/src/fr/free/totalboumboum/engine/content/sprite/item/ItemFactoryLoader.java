@@ -52,6 +52,9 @@ public class ItemFactoryLoader extends SpriteFactoryLoader
 		Element root = SpriteFactoryLoader.openFile(folderPath);
 		String folder;
 		
+		// GENERAL
+		loadGeneralElement(root,result);
+		
 		// ABILITIES
 		folder = folderPath+File.separator+FileTools.FILE_ABILITIES;
 		ArrayList<AbstractAbility> abilities = AbilityLoader.loadAbilityPack(folder,level);
@@ -63,7 +66,7 @@ public class ItemFactoryLoader extends SpriteFactoryLoader
 		result.setAnimePack(animePack);
 		
 		//EXPLOSION
-		loadExplosion(root,level,result);
+		loadExplosionElement(root,level,result);
 		
 		//PERMISSIONS
 		folder = folderPath+File.separator+FileTools.FILE_PERMISSIONS;

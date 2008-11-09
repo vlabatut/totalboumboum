@@ -52,6 +52,7 @@ public abstract class SpriteFactory<T extends Sprite>
 	protected ArrayList<AbstractAbility> abilities;
 	//
 	protected Level level;
+	protected String name;
 	
 	public SpriteFactory(Level level)
 	{	this.level = level;
@@ -59,36 +60,47 @@ public abstract class SpriteFactory<T extends Sprite>
 	
 	
 	protected void setCommonManager(Sprite sprite)
-	{	// anime
+	{	// name
+		sprite.setName(name);
+		
+		// anime
 		AnimeManager animeManager = new AnimeManager(sprite);
 		animeManager.setAnimePack(animePack);
 		sprite.setAnimeManager(animeManager);
+		
 		// trajectory
 		TrajectoryManager trajectoryManager = new TrajectoryManager(sprite);
 		trajectoryManager.setTrajectoryPack(trajectoryPack);
 		sprite.setTrajectoryManager(trajectoryManager);
+		
 		// bombset
 		BombsetManager bombsetManager = new BombsetManager(sprite);
 		bombsetManager.setBombset(bombset);
 		sprite.setBombsetManager(bombsetManager);
+		
 		// explosion
 		ExplosionManager explosionManager = new ExplosionManager(sprite);
 		explosionManager.setExplosion(explosion);
 		sprite.setExplosionManager(explosionManager);
+		
 		// permission
 		PermissionManager permissionManager = new PermissionManager(sprite);
 		permissionManager.setPermissionPack(permissionPack);
 		sprite.setPermissionManager(permissionManager);
+		
 		// item
 		ItemManager itemManager = new ItemManager(sprite);
 		sprite.setItemManager(itemManager);
+		
 		// ability
 		AbilityManager abilityManager = new AbilityManager(sprite);
 		abilityManager.addDirectAbilities(abilities);
 		sprite.setAbilityManager(abilityManager);
+		
 		// delay
 		DelayManager delayManager = new DelayManager(sprite);
 		sprite.setDelayManager(delayManager);
+		
 		// control
 		ControlManager controlManager = new ControlManager(sprite);
 		sprite.setControlManager(controlManager);
@@ -167,7 +179,14 @@ public abstract class SpriteFactory<T extends Sprite>
 			trajectoryPack = null;
 			// misc
 			level = null;
-			
+			name = null;
 		}
+	}
+
+	public String getName()
+	{	return name;
+	}
+	public void setName(String name)
+	{	this.name = name;
 	}
 }

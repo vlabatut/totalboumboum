@@ -24,6 +24,8 @@ package fr.free.totalboumboum.engine.container.level;
 import java.awt.image.BufferedImage;
 import java.util.HashMap;
 
+import fr.free.totalboumboum.engine.container.itemset.ItemsetPreview;
+
 public class LevelPreview
 {
 	
@@ -72,12 +74,12 @@ public class LevelPreview
 	// ITEMSET PREVIEW	/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 
-	private HashMap<String,BufferedImage> itemsetPreview;
+	private ItemsetPreview itemsetPreview;
 
-	public HashMap<String, BufferedImage> getItemsetPreview()
+	public ItemsetPreview getItemsetPreview()
 	{	return itemsetPreview;
 	}
-	public void setItemsetPreview(HashMap<String, BufferedImage> itemsetPreview)
+	public void setItemsetPreview(ItemsetPreview itemsetPreview)
 	{	this.itemsetPreview = itemsetPreview;
 	}
 
