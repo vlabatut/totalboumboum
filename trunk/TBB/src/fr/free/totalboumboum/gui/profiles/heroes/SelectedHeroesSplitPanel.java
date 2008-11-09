@@ -1,4 +1,4 @@
-package fr.free.totalboumboum.gui.profiles.ai;
+package fr.free.totalboumboum.gui.profiles.heroes;
 
 /*
  * Total Boum Boum
@@ -32,19 +32,19 @@ import fr.free.totalboumboum.gui.common.panel.menu.MenuPanel;
 import fr.free.totalboumboum.gui.data.configuration.GuiConfiguration;
 import fr.free.totalboumboum.gui.tools.GuiTools;
 
-public class SelectedAiSplitPanel extends SplitMenuPanel
+public class SelectedHeroesSplitPanel extends SplitMenuPanel
 {	private static final long serialVersionUID = 1L; 
 
 	private BufferedImage image;
 
-	public SelectedAiSplitPanel(MenuContainer container, MenuPanel parent, Profile profile)
+	public SelectedHeroesSplitPanel(MenuContainer container, MenuPanel parent, Profile profile)
 	{	super(container,parent,BorderLayout.LINE_START,GuiTools.VERTICAL_SPLIT_RATIO);
 	
 		// background
 		image = GuiConfiguration.getMiscConfiguration().getDarkBackground();
 		
 		// panels
-		setMenuPart(new SelectedAiMenu(this,parent,profile));
+		setMenuPart(new SelectedHeroesMenu(this,parent,profile));
 	}
 	
 	@Override

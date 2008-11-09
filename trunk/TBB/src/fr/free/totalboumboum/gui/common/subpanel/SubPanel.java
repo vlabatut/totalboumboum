@@ -46,6 +46,15 @@ public class SubPanel extends JPanel
 	public int getWidth()
 	{	return width;
 	}
+	
+	public void setWidth(int width)
+	{	this.width = width;
+		Dimension dim = new Dimension(width,height);
+		setPreferredSize(dim);
+		setMaximumSize(dim);
+		setMinimumSize(dim);
+	}
+
 	public int getHeight()
 	{	return height;
 	}

@@ -102,7 +102,7 @@ public class ProfileSaver
 	private static Element saveCharacterElement(Profile profile)
 	{	Element result = new Element(XmlTools.ELT_CHARACTER);
 		// name
-		String name = profile.getSpriteName();
+		String name = profile.getSpriteFolder();
 		result.setAttribute(XmlTools.ATT_NAME,name);
 		// pack
 		String packname = profile.getSpritePack();

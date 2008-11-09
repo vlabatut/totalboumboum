@@ -42,6 +42,7 @@ import fr.free.totalboumboum.gui.common.panel.menu.MenuPanel;
 import fr.free.totalboumboum.gui.common.panel.menu.SimpleMenuPanel;
 import fr.free.totalboumboum.gui.data.configuration.GuiConfiguration;
 import fr.free.totalboumboum.gui.game.match.MatchSplitPanel;
+import fr.free.totalboumboum.gui.heroes.select.SelectedHeroSplitPanel;
 import fr.free.totalboumboum.gui.menus.tournament.TournamentSplitPanel;
 import fr.free.totalboumboum.gui.options.OptionsSplitPanel;
 import fr.free.totalboumboum.gui.profiles.select.SelectedProfileSplitPanel;
@@ -62,6 +63,7 @@ public class MainMenu extends SimpleMenuPanel
 	private JButton buttonStats;
 	@SuppressWarnings("unused")
 	private JButton buttonAi;
+	@SuppressWarnings("unused")
 	private JButton buttonHeroes;
 	private JButton buttonLevels;
 	private JButton buttonAbout;
@@ -85,7 +87,6 @@ public class MainMenu extends SimpleMenuPanel
 		buttonStats = GuiTools.createPrincipalVerticalMenuButton(GuiTools.MENU_MAIN_BUTTON_STATISTICS,this);
 buttonStats.setEnabled(false);
 		buttonHeroes = GuiTools.createPrincipalVerticalMenuButton(GuiTools.MENU_MAIN_BUTTON_HEROES,this);
-buttonHeroes.setEnabled(false);
 		buttonAi = GuiTools.createPrincipalVerticalMenuButton(GuiTools.MENU_MAIN_BUTTON_AI,this);
 		buttonLevels = GuiTools.createPrincipalVerticalMenuButton(GuiTools.MENU_MAIN_BUTTON_LEVELS,this);
 buttonLevels.setEnabled(false);
@@ -119,7 +120,8 @@ buttonAbout.setEnabled(false);
 		{	
 	    }
 		else if(e.getActionCommand().equals(GuiTools.MENU_MAIN_BUTTON_HEROES))
-		{	
+		{	SelectedHeroSplitPanel heroMenuPanel = new SelectedHeroSplitPanel(getContainer(),this);
+			replaceWith(heroMenuPanel);
 	    }
 		else if(e.getActionCommand().equals(GuiTools.MENU_MAIN_BUTTON_LEVELS))
 		{	

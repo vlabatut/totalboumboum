@@ -203,7 +203,7 @@ public class SelectedAiData extends EntitledDataPanel implements MouseListener
 				String folderName = aiFolderFile.getName();
 				File[] content = aiFolderFile.listFiles();
 				String classFileName = FileTools.FILE_AI_MAIN_CLASS+FileTools.EXTENSION_CLASS;
-				File classFile = getFile(classFileName,content);
+				File classFile = FileTools.getFile(classFileName,content);
 				if(classFile!=null)
 				{	String pkgName = packageName+ClassTools.CLASS_SEPARATOR+folderName;
 					String classQualifiedName = pkgName+ClassTools.CLASS_SEPARATOR+FileTools.FILE_AI_MAIN_CLASS;
@@ -212,7 +212,7 @@ public class SelectedAiData extends EntitledDataPanel implements MouseListener
 						if(AbstractAiManager.class.isAssignableFrom(tempClass))
 						{	aiFoldersTemp.add(folderName);
 							String xmlFileName = FileTools.FILE_AI+FileTools.EXTENSION_DATA;
-							File xmlFile = getFile(xmlFileName,content);
+							File xmlFile = FileTools.getFile(xmlFileName,content);
 							if(xmlFile == null)
 							{	AiPreview aiPreview = new AiPreview(packageName,folderName);
 								AiPreviewSaver.saveAiPreview(aiPreview);
@@ -239,19 +239,6 @@ public class SelectedAiData extends EntitledDataPanel implements MouseListener
 				aiPackages.add(packageName);
 			}
 		}
-	}
-	
-	private File getFile(String fileName, File[] list)
-	{	File result = null;
-		int i = 0;
-		while(i<list.length && result==null)
-		{	String fName = list[i].getName();
-			if(fName.equalsIgnoreCase(fileName))
-				result = list[i];
-			else
-				i++;				
-		}
-		return result;
 	}
 	
 	private void initAiPreviews()

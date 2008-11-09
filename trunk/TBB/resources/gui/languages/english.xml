@@ -61,11 +61,12 @@
 					<text name="PageUp" value="Page up" tooltip="Go back to the previous packages page" />
 				</group>
 				<group name="Preview">
-					<text name="Author" value="Author" tooltip="Author of the character" />
+					<text name="Author" value="Author"  tooltip="Author/ripper of this character" />
 					<text name="Colors" value="Colors"  tooltip="Available colors for this character" />
-					<text name="Name" value="Name" tooltip="Name of the character" />
-					<text name="Package" value="Package" tooltip="Package containing the character" />
-					<text name="Source" value="Source"  tooltip="Source of the character (original work or ripped from some existing game)" />
+					<text name="Image" value="Preview" tooltip="Preview of this character" />
+					<text name="Name" value="Name" tooltip="Name of this character" />
+					<text name="Package" value="Package" tooltip="Package containing this character" />
+					<text name="Source" value="Source"  tooltip="Source of this character (original work or ripped from some existing game)" />
 				</group>
 			</group>
 		</group>	

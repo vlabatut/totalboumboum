@@ -22,8 +22,10 @@ package fr.free.totalboumboum.gui.heroes.select;
  */
 
 import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.FileFilter;
 import java.io.IOException;
@@ -34,25 +36,25 @@ import java.util.Iterator;
 
 import javax.swing.Box;
 import javax.swing.BoxLayout;
+import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.xml.parsers.ParserConfigurationException;
 
 import org.xml.sax.SAXException;
 
-import fr.free.totalboumboum.ai.AbstractAiManager;
-import fr.free.totalboumboum.ai.AiPreview;
-import fr.free.totalboumboum.ai.AiPreviewLoader;
-import fr.free.totalboumboum.ai.AiPreviewSaver;
+import fr.free.totalboumboum.configuration.profile.PredefinedColor;
+import fr.free.totalboumboum.engine.content.sprite.SpritePreview;
+import fr.free.totalboumboum.engine.content.sprite.SpritePreviewLoader;
 import fr.free.totalboumboum.gui.common.panel.SplitMenuPanel;
 import fr.free.totalboumboum.gui.common.panel.data.EntitledDataPanel;
-import fr.free.totalboumboum.gui.common.subpanel.EntitledSubPanel;
+import fr.free.totalboumboum.gui.common.subpanel.Column;
 import fr.free.totalboumboum.gui.common.subpanel.SubPanel;
-import fr.free.totalboumboum.gui.common.subpanel.SubTextPanel;
+import fr.free.totalboumboum.gui.common.subpanel.UntitledSubPanelColumns;
 import fr.free.totalboumboum.gui.common.subpanel.UntitledSubPanelTable;
 import fr.free.totalboumboum.gui.data.configuration.GuiConfiguration;
 import fr.free.totalboumboum.gui.tools.GuiTools;
-import fr.free.totalboumboum.tools.ClassTools;
 import fr.free.totalboumboum.tools.FileTools;
+import fr.free.totalboumboum.tools.ImageTools;
 
 public class SelectedHeroData extends EntitledDataPanel implements MouseListener
 {	
@@ -67,6 +69,7 @@ public class SelectedHeroData extends EntitledDataPanel implements MouseListener
 	private static final int VIEW_LINE_NAME = 0;
 	private static final int VIEW_LINE_PACK = 1;
 	private static final int VIEW_LINE_AUTHOR = 2;
+	private static final int VIEW_LINE_SOURCE = 3;
 
 	private static final int LIST_PANEL_INDEX = 0;
 	@SuppressWarnings("unused")
@@ -75,35 +78,33 @@ public class SelectedHeroData extends EntitledDataPanel implements MouseListener
 	@SuppressWarnings("unused")
 	private static final int INFOS_PANEL_INDEX = 0;
 	@SuppressWarnings("unused")
-	private static final int NOTES_PANEL_INDEX = 2;
+	private static final int IMAGE_PANEL_INDEX = 2;
 
 	private SubPanel mainPanel;
 	private SubPanel previewPanel;
 	private UntitledSubPanelTable infosPanel;
-	private EntitledSubPanel notesPanel;
+	private UntitledSubPanelColumns imagePanel;
 	private int listWidth;
 	private int listHeight;
 	
 	private ArrayList<UntitledSubPanelTable> listPackagePanels;
 	private int currentPackagePage = 0;
 	private int selectedPackageRow = -1;
-	private ArrayList<String> aiPackages;
-	private ArrayList<ArrayList<String>> aiFolders;
+	private ArrayList<String> heroPackages;
+	private ArrayList<ArrayList<String>> heroFolders;
 
-	private ArrayList<UntitledSubPanelTable> listAiPanels;
-	private int currentAiPage = 0;
-	private int selectedAiRow = -1;
-	private ArrayList<AiPreview> aiPreviews;
+	private ArrayList<UntitledSubPanelTable> listHeroPanels;
+	private int currentHeroPage = 0;
+	private int selectedHeroRow = -1;
+	private ArrayList<SpritePreview> heroPreviews;
 		
-	private boolean packageMode = true; //false if AIs are displayed 
-	@SuppressWarnings("unused")
-	private int lastAuthorNumber = 1;
+	private boolean packageMode = true; //false if heroes are displayed 
 	
 	public SelectedHeroData(SplitMenuPanel container)
 	{	super(container);
 
 		// title
-		setTitleKey(GuiTools.MENU_AI_SELECT_TITLE);
+		setTitleKey(GuiTools.MENU_HERO_SELECT_TITLE);
 	
 		// data
 		{	mainPanel = new SubPanel(dataWidth,dataHeight);
@@ -141,8 +142,8 @@ public class SelectedHeroData extends EntitledDataPanel implements MouseListener
 
 				previewPanel.add(Box.createVerticalGlue());
 
-				makeNotesPanel(rightWidth,downHeight);
-				previewPanel.add(notesPanel);
+				makeImagePanel(rightWidth,downHeight);
+				previewPanel.add(imagePanel);
 				
 				mainPanel.add(previewPanel);
 			}
@@ -152,16 +153,16 @@ public class SelectedHeroData extends EntitledDataPanel implements MouseListener
 	}
 		
 	/**
-	 * builds the list of ai (main) packages and of ai folders (or secondary packages).
-	 * for each folder, tests if an ai.xml file is present. if not, creates this file.
+	 * builds the list of heroes (main) packages and of heroes folders (or secondary packages).
+	 * for each folder, tests if a sprite.xml file is present.
 	 */
 	private void initPackages()
-	{	aiPackages = new ArrayList<String>();
-		aiFolders = new ArrayList<ArrayList<String>>();
+	{	heroPackages = new ArrayList<String>();
+		heroFolders = new ArrayList<ArrayList<String>>();
 		
 		// packages
-		String aiMainName = FileTools.getAiPath();
-		File aiMainFile = new File(aiMainName);
+		String heroMainName = FileTools.getHeroesPath();
+		File heroMainFile = new File(heroMainName);
 		FileFilter filter = new FileFilter()
 		{	@Override
 			public boolean accept(File pathname)
@@ -169,10 +170,10 @@ public class SelectedHeroData extends EntitledDataPanel implements MouseListener
 				return result;
 			}
 		};
-		File aiPackageFilesTemp[] = aiMainFile.listFiles(filter);
-		ArrayList<File> aiPackageFiles = new ArrayList<File>();
-		for(int i=0;i<aiPackageFilesTemp.length;i++)
-			aiPackageFiles.add(aiPackageFilesTemp[i]);
+		File heroPackageFilesTemp[] = heroMainFile.listFiles(filter);
+		ArrayList<File> heroPackageFiles = new ArrayList<File>();
+		for(int i=0;i<heroPackageFilesTemp.length;i++)
+			heroPackageFiles.add(heroPackageFilesTemp[i]);
 		Comparator<File> comparator = new Comparator<File>()
 		{	@Override
 			public int compare(File o1, File o2)
@@ -182,88 +183,49 @@ public class SelectedHeroData extends EntitledDataPanel implements MouseListener
 				return result;
 			}			
 		};	
-		Collections.sort(aiPackageFiles,comparator);
+		Collections.sort(heroPackageFiles,comparator);
 
-		// AIs
-		Iterator<File> p = aiPackageFiles.iterator();
+		// Heroes
+		Iterator<File> p = heroPackageFiles.iterator();
 		while(p.hasNext())
 		{	// get the list of folders in this package
-			File aiPackageFile = p.next();
-			String packageName = aiPackageFile.getName();
-			File aiFolderFiles[] = aiPackageFile.listFiles(filter);
-			ArrayList<File> aiFiles = new ArrayList<File>();
-			for(int i=0;i<aiFolderFiles.length;i++)
-				aiFiles.add(aiFolderFiles[i]);
-			Collections.sort(aiFiles,comparator);
-			ArrayList<String> aiFoldersTemp = new ArrayList<String>();
-			Iterator<File> q = aiFiles.iterator();
+			File heroPackageFile = p.next();
+			String packageName = heroPackageFile.getName();
+			File heroFolderFiles[] = heroPackageFile.listFiles(filter);
+			ArrayList<File> heroFiles = new ArrayList<File>();
+			for(int i=0;i<heroFolderFiles.length;i++)
+				heroFiles.add(heroFolderFiles[i]);
+			Collections.sort(heroFiles,comparator);
+			ArrayList<String> heroFoldersTemp = new ArrayList<String>();
+			Iterator<File> q = heroFiles.iterator();
 			while(q.hasNext())
-			{	// find the XML file class
-				File aiFolderFile = q.next();
-				String folderName = aiFolderFile.getName();
-				File[] content = aiFolderFile.listFiles();
-				String classFileName = FileTools.FILE_AI_MAIN_CLASS+FileTools.EXTENSION_CLASS;
-				File classFile = getFile(classFileName,content);
-				if(classFile!=null)
-				{	String pkgName = packageName+ClassTools.CLASS_SEPARATOR+folderName;
-					String classQualifiedName = pkgName+ClassTools.CLASS_SEPARATOR+FileTools.FILE_AI_MAIN_CLASS;
-					try
-					{	Class<?> tempClass = Class.forName(classQualifiedName);
-						if(AbstractAiManager.class.isAssignableFrom(tempClass))
-						{	aiFoldersTemp.add(folderName);
-							String xmlFileName = FileTools.FILE_AI+FileTools.EXTENSION_DATA;
-							File xmlFile = getFile(xmlFileName,content);
-							if(xmlFile == null)
-							{	AiPreview aiPreview = new AiPreview(packageName,folderName);
-								AiPreviewSaver.saveAiPreview(aiPreview);
-							}
-						}
-					}
-					catch (ClassNotFoundException e)
-					{	e.printStackTrace();
-					}
-					catch (ParserConfigurationException e)
-					{	e.printStackTrace();
-					}
-					catch (SAXException e)
-					{	e.printStackTrace();
-					}
-					catch (IOException e)
-					{	e.printStackTrace();
-					}
-				}
+			{	// find the XML file
+				File heroFolderFile = q.next();
+				String folderName = heroFolderFile.getName();
+				File[] content = heroFolderFile.listFiles();
+				String xmlFileName = FileTools.FILE_SPRITE+FileTools.EXTENSION_DATA;
+				File xmlFile = FileTools.getFile(xmlFileName,content);
+				if(xmlFile!=null)
+					heroFoldersTemp.add(folderName);
 			}
-			// add to the list of AIs for this package
-			if(aiFoldersTemp.size()>0)
-			{	aiFolders.add(aiFoldersTemp);
-				aiPackages.add(packageName);
+			// add to the list of heroes for this package
+			if(heroFoldersTemp.size()>0)
+			{	heroFolders.add(heroFoldersTemp);
+				heroPackages.add(packageName);
 			}
 		}
 	}
 	
-	private File getFile(String fileName, File[] list)
-	{	File result = null;
-		int i = 0;
-		while(i<list.length && result==null)
-		{	String fName = list[i].getName();
-			if(fName.equalsIgnoreCase(fileName))
-				result = list[i];
-			else
-				i++;				
-		}
-		return result;
-	}
-	
-	private void initAiPreviews()
-	{	aiPreviews = new ArrayList<AiPreview>();
+	private void initHeroPreviews()
+	{	heroPreviews = new ArrayList<SpritePreview>();
 		int selectedPackageIndex = currentPackagePage*(LIST_LINE_COUNT-2)+(selectedPackageRow-1);
-		String packageName = aiPackages.get(selectedPackageIndex);
-		Iterator<String> it = aiFolders.get(selectedPackageIndex).iterator();
+		String packageName = heroPackages.get(selectedPackageIndex);
+		Iterator<String> it = heroFolders.get(selectedPackageIndex).iterator();
 		while(it.hasNext())
 		{	String folderName = it.next();
 			try
-			{	AiPreview aiPreview = AiPreviewLoader.loadAiPreview(packageName,folderName);
-				aiPreviews.add(aiPreview);
+			{	SpritePreview heroPreview = SpritePreviewLoader.loadHeroPreview(packageName,folderName);
+				heroPreviews.add(heroPreview);
 			}
 			catch (ParserConfigurationException e)
 			{	e.printStackTrace();
@@ -274,13 +236,16 @@ public class SelectedHeroData extends EntitledDataPanel implements MouseListener
 			catch (IOException e)
 			{	e.printStackTrace();
 			}
+			catch (ClassNotFoundException e)
+			{	e.printStackTrace();
+			}
 		}
 	}
 	
 	private void makePackagesListPanels(int width, int height)
 	{	int cols = 1;
 		listPackagePanels = new ArrayList<UntitledSubPanelTable>();		
-		Iterator<String> it = aiPackages.iterator(); 
+		Iterator<String> it = heroPackages.iterator(); 
 		for(int panelIndex=0;panelIndex<getPackagesPageCount();panelIndex++)
 		{	UntitledSubPanelTable listPanel = new UntitledSubPanelTable(width,height,cols,LIST_LINE_COUNT,false);
 			listPanel.setSubColumnsMaxWidth(0,Integer.MAX_VALUE);
@@ -299,7 +264,7 @@ public class SelectedHeroData extends EntitledDataPanel implements MouseListener
 			// page up
 			{	Color bg = GuiTools.COLOR_TABLE_HEADER_BACKGROUND;
 				listPanel.setLabelBackground(LIST_LINE_PREVIOUS,0,bg);
-				String key = GuiTools.MENU_AI_SELECT_PACKAGE_PAGEUP;
+				String key = GuiTools.MENU_HERO_SELECT_PACKAGE_PAGEUP;
 				listPanel.setLabelKey(LIST_LINE_PREVIOUS,0,key,true);
 				JLabel label = listPanel.getLabel(LIST_LINE_PREVIOUS,0);
 				label.addMouseListener(this);
@@ -307,7 +272,7 @@ public class SelectedHeroData extends EntitledDataPanel implements MouseListener
 			// page down
 			{	Color bg = GuiTools.COLOR_TABLE_HEADER_BACKGROUND;
 				listPanel.setLabelBackground(LIST_LINE_NEXT,0,bg);
-				String key = GuiTools.MENU_AI_SELECT_PACKAGE_PAGEDOWN;
+				String key = GuiTools.MENU_HERO_SELECT_PACKAGE_PAGEDOWN;
 				listPanel.setLabelKey(LIST_LINE_NEXT,0,key,true);
 				JLabel label = listPanel.getLabel(LIST_LINE_NEXT,0);
 				label.addMouseListener(this);
@@ -318,8 +283,8 @@ public class SelectedHeroData extends EntitledDataPanel implements MouseListener
 
 	private void makeFoldersListPanels(int width, int height)
 	{	int cols = 1;
-		listAiPanels = new ArrayList<UntitledSubPanelTable>();
-		Iterator<AiPreview> it = aiPreviews.iterator(); 
+		listHeroPanels = new ArrayList<UntitledSubPanelTable>();
+		Iterator<SpritePreview> it = heroPreviews.iterator(); 
 		for(int panelIndex=0;panelIndex<getFoldersPageCount();panelIndex++)
 		{	UntitledSubPanelTable listPanel = new UntitledSubPanelTable(width,height,cols,LIST_LINE_COUNT,false);
 			listPanel.setSubColumnsMaxWidth(0,Integer.MAX_VALUE);
@@ -328,9 +293,9 @@ public class SelectedHeroData extends EntitledDataPanel implements MouseListener
 			int line = LIST_LINE_PARENT+1;
 			while(line<LIST_LINE_NEXT && it.hasNext())
 			{	Color bg = GuiTools.COLOR_TABLE_REGULAR_BACKGROUND;
-				AiPreview aiPreview = it.next();
+				SpritePreview heroPreview = it.next();
 				listPanel.setLabelBackground(line,0,bg);
-				listPanel.setLabelText(line,0,aiPreview.getFolder(),aiPreview.getFolder());
+				listPanel.setLabelText(line,0,heroPreview.getFolder(),heroPreview.getFolder());
 				JLabel label = listPanel.getLabel(line,0);
 				label.addMouseListener(this);
 				line++;
@@ -338,7 +303,7 @@ public class SelectedHeroData extends EntitledDataPanel implements MouseListener
 			// page up
 			{	Color bg = GuiTools.COLOR_TABLE_HEADER_BACKGROUND;
 				listPanel.setLabelBackground(LIST_LINE_PREVIOUS,0,bg);
-				String key = GuiTools.MENU_AI_SELECT_CLASS_PAGEUP;
+				String key = GuiTools.MENU_HERO_SELECT_CLASS_PAGEUP;
 				listPanel.setLabelKey(LIST_LINE_PREVIOUS,0,key,true);
 				JLabel label = listPanel.getLabel(LIST_LINE_PREVIOUS,0);
 				label.addMouseListener(this);
@@ -346,7 +311,7 @@ public class SelectedHeroData extends EntitledDataPanel implements MouseListener
 			// parent
 			{	Color bg = GuiTools.COLOR_TABLE_HEADER_BACKGROUND;
 				listPanel.setLabelBackground(LIST_LINE_PARENT,0,bg);
-				String key = GuiTools.MENU_AI_SELECT_CLASS_PARENT;
+				String key = GuiTools.MENU_HERO_SELECT_CLASS_PARENT;
 				listPanel.setLabelKey(LIST_LINE_PARENT,0,key,false);
 				JLabel label = listPanel.getLabel(LIST_LINE_PARENT,0);
 				label.addMouseListener(this);
@@ -354,12 +319,12 @@ public class SelectedHeroData extends EntitledDataPanel implements MouseListener
 			// page down
 			{	Color bg = GuiTools.COLOR_TABLE_HEADER_BACKGROUND;
 				listPanel.setLabelBackground(LIST_LINE_NEXT,0,bg);
-				String key = GuiTools.MENU_AI_SELECT_CLASS_PAGEDOWN;
+				String key = GuiTools.MENU_HERO_SELECT_CLASS_PAGEDOWN;
 				listPanel.setLabelKey(LIST_LINE_NEXT,0,key,true);
 				JLabel label = listPanel.getLabel(LIST_LINE_NEXT,0);
 				label.addMouseListener(this);
 			}
-			listAiPanels.add(listPanel);
+			listHeroPanels.add(listPanel);
 		}
 	}
 
@@ -371,9 +336,10 @@ public class SelectedHeroData extends EntitledDataPanel implements MouseListener
 		
 		// data
 		String keys[] = 
-		{	GuiTools.MENU_AI_SELECT_PREVIEW_NAME,
-			GuiTools.MENU_AI_SELECT_PREVIEW_PACKAGE,
-			GuiTools.MENU_AI_SELECT_PREVIEW_AUTHOR
+		{	GuiTools.MENU_HERO_SELECT_PREVIEW_NAME,
+			GuiTools.MENU_HERO_SELECT_PREVIEW_PACKAGE,
+			GuiTools.MENU_HERO_SELECT_PREVIEW_AUTHOR,
+			GuiTools.MENU_HERO_SELECT_PREVIEW_SOURCE
 		};
 		for(int line=0;line<keys.length;line++)
 		{	int colSub = 0;
@@ -389,7 +355,7 @@ public class SelectedHeroData extends EntitledDataPanel implements MouseListener
 				infosPanel.setLabelText(line,colSub,text,tooltip);
 				if(line>0)
 				{	Color bg = GuiTools.COLOR_TABLE_REGULAR_BACKGROUND;
-				infosPanel.setLabelBackground(line,colSub,bg);
+					infosPanel.setLabelBackground(line,colSub,bg);
 				}
 				colSub++;
 			}
@@ -399,67 +365,96 @@ public class SelectedHeroData extends EntitledDataPanel implements MouseListener
 		infosPanel.setSubColumnsPreferredWidth(1,maxWidth);
 	}
 	
-	private void makeNotesPanel(int width, int height)
-	{	notesPanel = new EntitledSubPanel(width,height);
+	private void makeImagePanel(int width, int height)
+	{	int cols = 3;
+		imagePanel = new UntitledSubPanelColumns(width,height,cols);
+		PredefinedColor[] colors = PredefinedColor.values();
+		int lines = colors.length/2;
+		int margin = GuiTools.subPanelMargin;
+		if(colors.length%2 > 0)
+			lines++;
+		int lineHeight = (height - (lines-1)*margin)/lines;
+		int rightWidth = width - 2*lineHeight - 5*margin;
+
+		int col = 0;
+
+		// colors 0
+		{	Column cl = imagePanel.getColumn(col);
+			cl.setWidth(lineHeight);
+			for(int i=1;i<lines;i++)
+				cl.addLabel(0);
+			for(int line=0;line<lines;line++)
+			{	cl.setLabelMinHeight(line,lineHeight);
+				cl.setLabelPreferredHeight(line,lineHeight);
+				cl.setLabelMaxHeight(line,lineHeight);
+//				cl.getLabel(col).addMouseListener(this);
+//				cl.setLabelText(line,""+col,""+col);
+			}
+			Color bg = GuiTools.COLOR_TABLE_NEUTRAL_BACKGROUND;
+			cl.setBackgroundColor(bg);
+			col++;
+		}
 		
-		String key = GuiTools.MENU_AI_SELECT_PREVIEW_NOTES;
-		notesPanel.setTitleKey(key,true);
+		// colors 1
+		{	Column cl = imagePanel.getColumn(col);
+			cl.setWidth(lineHeight);
+			for(int i=1;i<lines;i++)
+				cl.addLabel(0);
+			for(int line=0;line<lines;line++)
+			{	cl.setLabelMinHeight(line,lineHeight);
+				cl.setLabelPreferredHeight(line,lineHeight);
+				cl.setLabelMaxHeight(line,lineHeight);
+//				cl.getLabel(col).addMouseListener(this);
+//				cl.setLabelText(line,""+col,""+col);
+			}
+			Color bg = GuiTools.COLOR_TABLE_NEUTRAL_BACKGROUND;
+			cl.setBackgroundColor(bg);
+			col++;
+		}
 		
-		float fontSize = notesPanel.getTitleFontSize()/2;
-		int w = notesPanel.getDataWidth();
-		int h = notesPanel.getDataHeight();
-		SubTextPanel textPanel = new SubTextPanel(w,h,fontSize);
-		notesPanel.setDataPanel(textPanel);
-		textPanel.setBackground(GuiTools.COLOR_TABLE_NEUTRAL_BACKGROUND);
+		// image
+		{	Column cl = imagePanel.getColumn(col);
+			cl.setWidth(rightWidth);
+			int line = 0;
+			cl.setLabelMinHeight(line,height);
+			cl.setLabelPreferredHeight(line,height);
+			cl.setLabelMaxHeight(line,height);
+			Color bg = GuiTools.COLOR_TABLE_NEUTRAL_BACKGROUND;
+			cl.setBackgroundColor(bg);
+//			cl.setLabelText(line,""+col,""+col);
+			col++;
+		}
 	}
 	
 	private void refreshPreview()
 	{	String infosValues[] = new String[10];
-		ArrayList<String> notesValues;
-		SubTextPanel textPanel = (SubTextPanel)notesPanel.getDataPanel();
+		BufferedImage image;
+		PredefinedColor colorValues[] = PredefinedColor.values();
+		boolean colors[] = new boolean[PredefinedColor.values().length];
 		// no player selected
-		if(packageMode || selectedAiRow<0)
+		if(packageMode || selectedHeroRow<0)
 		{	// notes
-			notesValues = new ArrayList<String>();
-			textPanel.setBackground(GuiTools.COLOR_TABLE_NEUTRAL_BACKGROUND);
+			image = null;
+			for(int i=0;i<colors.length;i++)
+				colors[i] = false;
 			// infos
 			for(int i=0;i<infosValues.length;i++)
 				infosValues[i] = null;
-			for(int i=VIEW_LINE_AUTHOR+1;i<infosValues.length;i++)
-			{	infosPanel.setLabelIcon(i,0,null,null);
-				Color bg = GuiTools.COLOR_TABLE_NEUTRAL_BACKGROUND;
-				infosPanel.setLabelBackground(i,0,bg);	
-				infosPanel.setLabelBackground(i,1,bg);	
-			}
 		}
 		// one player selected
 		else
-		{	int index = (selectedAiRow-2)+currentAiPage*(LIST_LINE_COUNT-3);
-			AiPreview aiPreview = aiPreviews.get(index);
-			// notes
-			notesValues = aiPreview.getNotes();
-			textPanel.setBackground(GuiTools.COLOR_TABLE_REGULAR_BACKGROUND);
+		{	int index = (selectedHeroRow-2)+currentHeroPage*(LIST_LINE_COUNT-3);
+			SpritePreview heroPreview = heroPreviews.get(index);
+			// image
+			image = heroPreview.getImage();
+			for(int i=0;i<colors.length;i++)
+				if(heroPreview.hasColor(colorValues[i]))
+					colors[i] = true;
 			// infos
-			infosValues[VIEW_LINE_NAME] = aiPreview.getFolder();
-			infosValues[VIEW_LINE_PACK]= aiPreview.getPack();
-			ArrayList<String> authors = aiPreview.getAuthors();
-			Iterator<String> it = authors.iterator();
-			index = 0;
-			while(it.hasNext())
-			{	String author = it.next();	
-				infosValues[VIEW_LINE_AUTHOR+index] = author;
-				index++;
-			}
-			for(int i=1;i<index;i++)
-			{	int line = VIEW_LINE_AUTHOR+i;
-				infosPanel.setLabelKey(line,0,GuiTools.MENU_AI_SELECT_PREVIEW_AUTHOR,true);
-				Color fg = GuiTools.COLOR_TABLE_HEADER_FOREGROUND;
-				infosPanel.setLabelForeground(line,0,fg);
-				Color bg = GuiTools.COLOR_TABLE_HEADER_BACKGROUND;
-				infosPanel.setLabelBackground(line,0,bg);
-				bg = GuiTools.COLOR_TABLE_REGULAR_BACKGROUND;
-				infosPanel.setLabelBackground(line,1,bg);
-			}
+			infosValues[VIEW_LINE_NAME] = heroPreview.getName();
+			infosValues[VIEW_LINE_PACK]= heroPreview.getPack();
+			infosValues[VIEW_LINE_AUTHOR] = heroPreview.getAuthor();
+			infosValues[VIEW_LINE_SOURCE] = heroPreview.getSource();
 		}
 		// infos
 		for(int line=0;line<infosValues.length;line++)
@@ -468,14 +463,57 @@ public class SelectedHeroData extends EntitledDataPanel implements MouseListener
 			String tooltip = text;
 			infosPanel.setLabelText(line,colSub,text,tooltip);
 		}
-		// notes
-		String text = "";
-		Iterator<String> i = notesValues.iterator();
-		while (i.hasNext())
-		{	String temp = i.next();
-			text = text + temp + "\n";
+		// image
+		int line = 0;
+		int col = 0;
+		int cols = 2;
+//		int lines = imagePanel.getColumn(0).getLineCount();
+		for(int i=0;i<colors.length;i++)
+		{	// colors
+			String text = null;
+			String tooltip = null;
+			Color bg = GuiTools.COLOR_TABLE_NEUTRAL_BACKGROUND;
+			if(colors[i])
+			{	String colorKey = colorValues[i].toString();
+				colorKey = colorKey.toUpperCase().substring(0,1)+colorKey.toLowerCase().substring(1,colorKey.length());
+				colorKey = GuiTools.COLOR+colorKey;
+				text = GuiConfiguration.getMiscConfiguration().getLanguage().getText(colorKey); 
+				tooltip = text;
+				Color clr = colorValues[i].getColor();
+				int alpha = GuiTools.ALPHA_TABLE_REGULAR_BACKGROUND_LEVEL3;
+				bg = new Color(clr.getRed(),clr.getGreen(),clr.getBlue(),alpha);
+			}
+			imagePanel.setLabelBackground(line,col,bg);
+			imagePanel.setLabelText(line,col,text,tooltip);
+			// index
+			col++;
+			if(col==cols)
+			{	col=0;
+				line++;
+			}
 		}
-		textPanel.setText(text);
+		JLabel label = imagePanel.getLabel(0,2);
+		Dimension prefDim = label.getPreferredSize();
+		int imgWidth = (int)(prefDim.width*0.9);
+		int imgHeight = (int)(prefDim.height*0.9);
+		if(image!=null)
+		{	float zoomX = imgWidth/(float)image.getWidth();
+			float zoomY = imgHeight/(float)image.getHeight();
+			float zoom = Math.min(zoomX,zoomY);
+			image = ImageTools.resize(image,zoom,true);
+			ImageIcon icon = new ImageIcon(image);
+			label.setIcon(icon);
+			label.setText(null);
+			Color bg = GuiTools.COLOR_TABLE_REGULAR_BACKGROUND;
+			label.setBackground(bg);
+		}
+		else
+		{	label.setIcon(null);
+			label.setText(null);
+			Color bg = GuiTools.COLOR_TABLE_NEUTRAL_BACKGROUND;
+			label.setBackground(bg);
+		}
+		
 	}
 
 	@Override
@@ -532,22 +570,22 @@ public class SelectedHeroData extends EntitledDataPanel implements MouseListener
 					unselectList();
 					selectedPackageRow = pos[0];
 					listPackagePanels.get(currentPackagePage).setLabelBackground(selectedPackageRow,0,GuiTools.COLOR_TABLE_SELECTED_BACKGROUND);
-					initAiPreviews();
+					initHeroPreviews();
 					makeFoldersListPanels(listWidth,listHeight);
 					packageMode = false;
-					currentAiPage = 0;
+					currentHeroPage = 0;
 					refreshList();
 			}
 		}
 		// list = ai
 		else
-		{	int[] pos = listAiPanels.get(currentAiPage).getLabelPosition(label);
+		{	int[] pos = listHeroPanels.get(currentHeroPage).getLabelPosition(label);
 			switch(pos[0])
 			{	// previous page
 				case LIST_LINE_PREVIOUS:
-					if(currentAiPage>0)
+					if(currentHeroPage>0)
 					{	unselectList();
-						currentAiPage--;
+						currentHeroPage--;
 						refreshList();
 					}
 					break;
@@ -561,18 +599,18 @@ public class SelectedHeroData extends EntitledDataPanel implements MouseListener
 					break;
 				// next page
 				case LIST_LINE_NEXT:
-					if(currentAiPage<getFoldersPageCount()-1)
+					if(currentHeroPage<getFoldersPageCount()-1)
 					{	unselectList();
-						currentAiPage++;
+						currentHeroPage++;
 						refreshList();
 					}
 					break;
-				// ai selected
+				// hero selected
 				default:
 					unselectList();
-					selectedAiRow = pos[0];
+					selectedHeroRow = pos[0];
 					//refreshList();
-					listAiPanels.get(currentAiPage).setLabelBackground(selectedAiRow,0,GuiTools.COLOR_TABLE_SELECTED_BACKGROUND);
+					listHeroPanels.get(currentHeroPage).setLabelBackground(selectedHeroRow,0,GuiTools.COLOR_TABLE_SELECTED_BACKGROUND);
 					refreshPreview();
 			}
 		}
@@ -583,8 +621,8 @@ public class SelectedHeroData extends EntitledDataPanel implements MouseListener
 	}
 	
 	private int getPackagesPageCount()
-	{	int result = aiPackages.size()/(LIST_LINE_COUNT-2);
-		if(aiPackages.size()%(LIST_LINE_COUNT-2)>0)
+	{	int result = heroPackages.size()/(LIST_LINE_COUNT-2);
+		if(heroPackages.size()%(LIST_LINE_COUNT-2)>0)
 			result++;
 		else if(result==0)
 			result = 1;
@@ -592,8 +630,8 @@ public class SelectedHeroData extends EntitledDataPanel implements MouseListener
 	}
 	
 	private int getFoldersPageCount()
-	{	int result = aiPreviews.size()/(LIST_LINE_COUNT-2);
-		if(aiPreviews.size()%(LIST_LINE_COUNT-2)>0)
+	{	int result = heroPreviews.size()/(LIST_LINE_COUNT-2);
+		if(heroPreviews.size()%(LIST_LINE_COUNT-2)>0)
 			result++;
 		else if(result==0)
 			result = 1;
@@ -607,10 +645,10 @@ public class SelectedHeroData extends EntitledDataPanel implements MouseListener
 			selectedPackageRow = -1;
 			//refreshPreview();
 		}
-		// ai displayed
-		else if(!packageMode && selectedAiRow!=-1)
-		{	listAiPanels.get(currentAiPage).setLabelBackground(selectedAiRow,0,GuiTools.COLOR_TABLE_REGULAR_BACKGROUND);
-			selectedAiRow = -1;
+		// hero displayed
+		else if(!packageMode && selectedHeroRow!=-1)
+		{	listHeroPanels.get(currentHeroPage).setLabelBackground(selectedHeroRow,0,GuiTools.COLOR_TABLE_REGULAR_BACKGROUND);
+			selectedHeroRow = -1;
 			refreshPreview();
 		}
 	}
@@ -621,19 +659,19 @@ public class SelectedHeroData extends EntitledDataPanel implements MouseListener
 		{	mainPanel.remove(LIST_PANEL_INDEX);
 			mainPanel.add(listPackagePanels.get(currentPackagePage),LIST_PANEL_INDEX);
 		}
-		// ai displayed
+		// hero displayed
 		else
 		{	mainPanel.remove(LIST_PANEL_INDEX);
-			mainPanel.add(listAiPanels.get(currentAiPage),LIST_PANEL_INDEX);
+			mainPanel.add(listHeroPanels.get(currentHeroPage),LIST_PANEL_INDEX);
 		}
 		// common
 		mainPanel.validate();
 		mainPanel.repaint();
 	}
 	
-	public AiPreview getSelectedAiPreview()
-	{	int index = currentAiPage*(LIST_LINE_COUNT-2)+(selectedAiRow-2);
-		return aiPreviews.get(index);
+	public SpritePreview getSelectedHeroPreview()
+	{	int index = currentHeroPage*(LIST_LINE_COUNT-2)+(selectedHeroRow-2);
+		return heroPreviews.get(index);
 	}
 
 }

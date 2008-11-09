@@ -179,4 +179,23 @@ public class FileTools
 	public static String getStatisticsPath()
 	{	return getResourcesPath()+File.separator+FOLDER_STATISTICS;		
 	}
+
+
+
+
+
+
+
+	public static File getFile(String fileName, File[] list)
+	{	File result = null;
+		int i = 0;
+		while(i<list.length && result==null)
+		{	String fName = list[i].getName();
+			if(fName.equalsIgnoreCase(fileName))
+				result = list[i];
+			else
+				i++;				
+		}
+		return result;
+	}
 }

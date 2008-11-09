@@ -1,4 +1,4 @@
-package fr.free.totalboumboum.gui.profiles.ai;
+package fr.free.totalboumboum.gui.profiles.ais;
 
 /*
  * Total Boum Boum
@@ -76,8 +76,10 @@ public class SelectedAiMenu extends InnerMenuPanel
 	    }
 		else if(e.getActionCommand().equals(GuiTools.MENU_PROFILES_BUTTON_CONFIRM))
 		{	AiPreview aiPreview = aiData.getSelectedAiPreview();
-			profile.setAiName(aiPreview.getFolder());
-			profile.setAiPackname(aiPreview.getPack());
+			if(aiPreview!=null)
+			{	profile.setAiName(aiPreview.getFolder());
+				profile.setAiPackname(aiPreview.getPack());
+			}
 			replaceWith(parent);
 	    }
 	} 

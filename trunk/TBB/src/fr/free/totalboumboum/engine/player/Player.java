@@ -70,7 +70,7 @@ public class Player
 		// sprite
 		color = this.profile.getSpriteColor();
 		String folder = FileTools.getHeroesPath()+File.separator+this.profile.getSpritePack();
-		folder = folder + File.separator+this.profile.getSpriteName();
+		folder = folder + File.separator+this.profile.getSpriteFolder();
 		HeroFactory tempHeroFactory = HeroFactoryLoader.loadHeroFactory(folder,level,color,ablts,permissions,trajectories);
 		sprite = tempHeroFactory.makeSprite();
 		sprite.initGesture();

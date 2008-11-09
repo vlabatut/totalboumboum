@@ -107,8 +107,10 @@ public class UntitledSubPanelLines extends SubPanel
 	public void addLine(int index)
 	{	if(index>0)
 			add(Box.createRigidArea(new Dimension(GuiTools.subPanelMargin,GuiTools.subPanelMargin)),2*index);
+//			add(Box.createVerticalGlue(),2*index);
 		else if(lines>0)
 			add(Box.createRigidArea(new Dimension(GuiTools.subPanelMargin,GuiTools.subPanelMargin)),2*index+1);
+//			add(Box.createVerticalGlue(),2*index+1);
 			
 		lines++;
 		Line line;
