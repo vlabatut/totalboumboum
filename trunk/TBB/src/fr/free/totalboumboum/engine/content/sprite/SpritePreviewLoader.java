@@ -18,6 +18,8 @@ public class SpritePreviewLoader
 	{	Element root = SpriteFactoryLoader.openFile(folder);
 		SpritePreview result = new SpritePreview();
 		loadNameElement(root,result);
+		loadAuthorElement(root, result);
+		loadSourceElement(root, result);
 		loadPreviewElement(root,folder,result);
 		return result;
 	}
@@ -26,6 +28,22 @@ public class SpritePreviewLoader
 	{	Element elt = root.getChild(XmlTools.ELT_GENERAL);
 		String name = elt.getAttribute(XmlTools.ATT_NAME).getValue().trim();
 		result.setName(name);		
+	}
+	
+	private static void loadAuthorElement(Element root, SpritePreview result)
+	{	Element elt = root.getChild(XmlTools.ELT_AUTHOR);
+		String name = "N/A"; 
+		if(elt!=null)
+			name = elt.getAttribute(XmlTools.ATT_VALUE).getValue().trim();
+		result.setAuthor(name);		
+	}
+	
+	private static void loadSourceElement(Element root, SpritePreview result)
+	{	Element elt = root.getChild(XmlTools.ELT_SOURCE);
+		String name = "N/A"; 
+		if(elt!=null)
+			name = elt.getAttribute(XmlTools.ATT_VALUE).getValue().trim();
+		result.setSource(name);		
 	}
 	
 	private static void loadPreviewElement(Element root, String folder, SpritePreview result) throws IOException

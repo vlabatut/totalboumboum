@@ -4,6 +4,8 @@
 	xsi:noNamespaceSchemaLocation="..\..\..\schemas\sprite.xsd">
 
 	<general name="Shirobon SBM1" />
+	<author value="Vincent Labatut" />
+	<source value="Super Bomberman 1" />
 
 	<preview file="preview.gif" />
 

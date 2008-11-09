@@ -4,6 +4,7 @@
 	xsi:noNamespaceSchemaLocation="..\..\..\schemas\sprite.xsd">
 
 	<general name="Assistant pirate" />
+	<source value="Super Bomberman 5" />
 
 	<preview file="preview.gif" />
 

@@ -44,6 +44,32 @@
 			</group>
 		</group>	
 
+<!-- HERO MENU -->	
+		<group name="Hero">
+			<group name="Button">
+				<text name="Back" value="Retour" tooltip="Revenir au menu principal" />
+			</group>		
+			<group name="Select">
+				<text name="Title" value="Liste des personnages" tooltip="Liste des personnages disponibles" />
+				<group name="Class">
+					<text name="PageDown" value="Descendre" tooltip="Revenir à la page de personnages suivante" />
+					<text name="PageUp" value="Monter" tooltip="Aller à la page de personnages précédente" />
+					<text name="Parent" value=".." tooltip="Revenir à la liste des paquets" />
+				</group>
+				<group name="Package">
+					<text name="PageDown" value="Descendre" tooltip="Revenir à la page de paquets suivante" />
+					<text name="PageUp" value="Monter" tooltip="Aller à la page de paquets précédente" />
+				</group>
+				<group name="Preview">
+					<text name="Author" value="Auteur" tooltip="Auteur du personnage" />
+					<text name="Colors" value="Couleurs"  tooltip="Couleurs disponibles pour ce personnage" />
+					<text name="Name" value="Nom" tooltip="Nom de l'intelligence artificielle" />
+					<text name="Package" value="Paquet" tooltip="Paquet contenant l'intelligence artificielle" />
+					<text name="Source" value="Source"  tooltip="Source du personnage (oeuvre originale ou extrait d'un jeu existant)" />
+				</group>
+			</group>
+		</group>	
+
 <!-- OPTIONS MENU -->
 		<group name="Options">
 			<group name="Button">
