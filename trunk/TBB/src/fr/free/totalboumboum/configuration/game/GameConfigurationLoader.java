@@ -53,6 +53,9 @@ public class GameConfigurationLoader
 		// quick match
 		element = root.getChild(XmlTools.ELT_QUICKMATCH);
 		loadQuickmatchElement(element,result);
+		// profiles
+		element = root.getChild(XmlTools.ELT_PROFILES);
+		loadProfilesElement(element,result);
 	}
 	
 	private static void loadQuickmatchElement(Element root, GameConfiguration result) throws IllegalArgumentException, SecurityException, ParserConfigurationException, SAXException, IOException, IllegalAccessException, NoSuchFieldException, ClassNotFoundException
@@ -63,5 +66,11 @@ public class GameConfigurationLoader
 	private static void loadQuickstartElement(Element root, GameConfiguration result) throws IllegalArgumentException, SecurityException, ParserConfigurationException, SAXException, IOException, IllegalAccessException, NoSuchFieldException, ClassNotFoundException
 	{	String quickstartName = root.getAttribute(XmlTools.ATT_VALUE).getValue().trim();
 		result.setQuickstartName(quickstartName);
+	}
+
+	private static void loadProfilesElement(Element root, GameConfiguration result)
+	{	String lastProfileStr = root.getAttribute(XmlTools.ATT_LAST).getValue().trim();
+		int lastProfile = Integer.parseInt(lastProfileStr);
+		result.setLastProfile(lastProfile);
 	}
 }

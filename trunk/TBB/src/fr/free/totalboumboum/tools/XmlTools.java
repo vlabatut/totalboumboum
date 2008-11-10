@@ -220,6 +220,7 @@ public class XmlTools
 	public static final String ATT_INVERT = "invert";
 	public static final String ATT_KEY = "key";
 	public static final String ATT_KIND = "kind";
+	public static final String ATT_LAST = "last";
 	public static final String ATT_LEFTCOL = "leftCol";
 	public static final String ATT_LEVEL_ORDER = "levelOrder";
 	public static final String ATT_LINE = "line";
