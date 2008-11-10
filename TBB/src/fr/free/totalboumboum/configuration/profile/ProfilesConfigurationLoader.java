@@ -47,8 +47,17 @@ public class ProfilesConfigurationLoader
 		return result;
 	}
 
-	@SuppressWarnings("unchecked")
 	private static void loadProfilesElement(Element root, ProfilesConfiguration result) throws IllegalArgumentException, SecurityException, ParserConfigurationException, SAXException, IOException, IllegalAccessException, NoSuchFieldException
+	{	// general
+		Element generalElement = root.getChild(XmlTools.ELT_GENERAL);
+		loadGeneralElement(generalElement,result);
+		// list
+		Element listElement = root.getChild(XmlTools.ELT_LIST);
+		loadListElement(listElement,result);
+	}
+
+	@SuppressWarnings("unchecked")
+	private static void loadListElement(Element root, ProfilesConfiguration result) throws IllegalArgumentException, SecurityException, ParserConfigurationException, SAXException, IOException, IllegalAccessException, NoSuchFieldException
 	{	List<Element> elements = root.getChildren(XmlTools.ELT_PROFILE);
 		Iterator<Element> i = elements.iterator();
 		while(i.hasNext())
@@ -66,5 +75,11 @@ result.addSelected("1");
 	{	String file = root.getAttribute(XmlTools.ATT_FILE).getValue().trim();
 		String name = root.getAttribute(XmlTools.ATT_NAME).getValue().trim();
 		result.addProfile(file,name);	
+	}
+
+	private static void loadGeneralElement(Element root, ProfilesConfiguration result)
+	{	String lastProfileStr = root.getAttribute(XmlTools.ATT_LAST).getValue().trim();
+		int lastProfile = Integer.parseInt(lastProfileStr);
+		result.setLastProfile(lastProfile);
 	}
 }

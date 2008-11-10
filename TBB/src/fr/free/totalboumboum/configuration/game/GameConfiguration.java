@@ -120,17 +120,4 @@ public class GameConfiguration
 		// 
 		tournament = quickstart;
 	}
-	
-	/////////////////////////////////////////////////////////////////
-	// PROFILES			/////////////////////////////////////////////
-	/////////////////////////////////////////////////////////////////
-	private int lastProfile = 0;
-
-	public int getLastProfile()
-	{	return lastProfile;
-	}
-
-	public void setLastProfile(int lastProfile)
-	{	this.lastProfile = lastProfile;
-	}
 }

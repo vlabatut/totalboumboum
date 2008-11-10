@@ -49,7 +49,19 @@ public class ProfilesConfigurationSaver
 	}
 
 	private static Element saveProfilesElement(ProfilesConfiguration profilesConfiguration)
-	{	Element result = new Element(XmlTools.ELT_PROFILES); 
+	{	Element result = new Element(XmlTools.ELT_PROFILES);
+		// general
+		Element generalElement = saveGeneralElement(profilesConfiguration);
+		result.addContent(generalElement);
+		// list
+		Element listElement = saveListElement(profilesConfiguration);
+		result.addContent(listElement);
+		//
+		return result;		
+	}
+	
+	private static Element saveListElement(ProfilesConfiguration profilesConfiguration)
+	{	Element result = new Element(XmlTools.ELT_LIST);
 		HashMap<String,String> profiles = profilesConfiguration.getProfiles();
 		Iterator<Entry<String,String>> it = profiles.entrySet().iterator();
 		while(it.hasNext())
@@ -63,4 +75,11 @@ public class ProfilesConfigurationSaver
 		}
 		return result;
 	}	
+
+	private static Element saveGeneralElement(ProfilesConfiguration profilesConfiguration)
+	{	Element result = new Element(XmlTools.ELT_GENERAL);
+		String lastProfile = Integer.toString(profilesConfiguration.getLastProfile());
+		result.setAttribute(XmlTools.ATT_LAST,lastProfile);
+		return result;
+	}
 }

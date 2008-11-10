@@ -23,6 +23,7 @@ package fr.free.totalboumboum.gui.profiles.select;
 
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
+import java.io.File;
 import java.io.IOException;
 
 import javax.swing.Box;
@@ -33,11 +34,11 @@ import javax.xml.parsers.ParserConfigurationException;
 import org.xml.sax.SAXException;
 
 import fr.free.totalboumboum.configuration.Configuration;
-import fr.free.totalboumboum.configuration.game.GameConfiguration;
-import fr.free.totalboumboum.configuration.game.GameConfigurationSaver;
 import fr.free.totalboumboum.configuration.profile.PredefinedColor;
 import fr.free.totalboumboum.configuration.profile.Profile;
 import fr.free.totalboumboum.configuration.profile.ProfileSaver;
+import fr.free.totalboumboum.configuration.profile.ProfilesConfiguration;
+import fr.free.totalboumboum.configuration.profile.ProfilesConfigurationSaver;
 import fr.free.totalboumboum.gui.common.panel.SplitMenuPanel;
 import fr.free.totalboumboum.gui.common.panel.menu.InnerMenuPanel;
 import fr.free.totalboumboum.gui.common.panel.menu.MenuPanel;
@@ -90,11 +91,12 @@ public class SelectedProfileMenu extends InnerMenuPanel
 	    }
 		else if(e.getActionCommand().equals(GuiTools.MENU_PROFILES_BUTTON_NEW))
 		{	try
-			{	GameConfiguration gameConfig = Configuration.getGameConfiguration();
-				int lastProfile = gameConfig.getLastProfile();
+			{	// refresh counter
+				ProfilesConfiguration profilesConfig = Configuration.getProfilesConfiguration();
+				int lastProfile = profilesConfig.getLastProfile();
 				int nextProfile = lastProfile+1;
-				gameConfig.setLastProfile(nextProfile);
-				GameConfigurationSaver.saveGameConfiguration(gameConfig);
+				profilesConfig.setLastProfile(nextProfile);
+				// create profile
 				Profile newProfile = new Profile();
 				String key = GuiTools.MENU_PROFILES_LIST_NEW_PROFILE;
 				String name = GuiConfiguration.getMiscConfiguration().getLanguage().getText(key);
@@ -105,8 +107,15 @@ public class SelectedProfileMenu extends InnerMenuPanel
 				newProfile.setSpriteFolder(spriteFolder);
 				PredefinedColor spriteColor = PredefinedColor.WHITE;
 				newProfile.setSpriteColor(spriteColor,0);
-				String fileName = nextProfile+FileTools.EXTENSION_DATA;			
+				// create file
+				String fileName = Integer.toString(nextProfile)/*+FileTools.EXTENSION_DATA*/;			
 				ProfileSaver.saveProfile(newProfile, fileName);
+				// add in config
+				profilesConfig.addProfile(fileName, name);
+				ProfilesConfigurationSaver.saveProfilesConfiguration(profilesConfig);
+				// rebuild panel
+				profileData = new SelectedProfileData(container);
+				container.setDataPart(profileData);
 			}
 			catch (ParserConfigurationException e1)
 			{	e1.printStackTrace();
@@ -117,13 +126,6 @@ public class SelectedProfileMenu extends InnerMenuPanel
 			catch (IOException e1)
 			{	e1.printStackTrace();
 			}
-
-			
-//TODO j'en suis là			
-			
-			
-			
-			getDataPart().refresh();
 	    }
 		else if(e.getActionCommand().equals(GuiTools.MENU_PROFILES_BUTTON_MODIFY))
 		{	Profile profile = profileData.getSelectedProfile();
@@ -134,7 +136,20 @@ public class SelectedProfileMenu extends InnerMenuPanel
 			}
 	    }
 		else if(e.getActionCommand().equals(GuiTools.MENU_PROFILES_BUTTON_DELETE))
-		{	//TODO
+		{	Profile profile = profileData.getSelectedProfile();
+			if(profile!=null)
+			{	String profileFile = profileData.getSelectedProfileFile();
+				// delete file
+				String path = FileTools.getProfilesPath()+File.separator+profileFile+FileTools.EXTENSION_DATA;
+				File file = new File(path);
+				file.delete();
+				// delete entry in config
+				ProfilesConfiguration profilesConfig = Configuration.getProfilesConfiguration();
+				profilesConfig.removeProfile(profileFile);
+				// rebuild panel
+				profileData = new SelectedProfileData(container);
+				container.setDataPart(profileData);
+			}
 	    }
 	} 
 	

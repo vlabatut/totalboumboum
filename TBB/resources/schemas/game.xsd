@@ -9,15 +9,10 @@
 		<xsd:attribute name="value" type="xsd:string" use="required" />
 	</xsd:complexType>
 
-	<xsd:complexType name="tProfiles">
-		<xsd:attribute name="last" type="xsd:integer" use="required" />
-	</xsd:complexType>
-
 	<xsd:complexType name="tGame">
 		<xsd:sequence>
 			<xsd:element name="quickmatch" type="tQuickmatch" minOccurs="0"/>
 			<xsd:element name="quickstart" type="tQuickstart" minOccurs="0"/>
-			<xsd:element name="profiles" type="tProfiles" />
 		</xsd:sequence>
 	</xsd:complexType>
 

@@ -61,6 +61,10 @@ public class ProfilesConfiguration
 	public void addProfile(String file, String name)
 	{	profiles.put(file,name);
 	}
+	
+	public void removeProfile(String file)
+	{	profiles.remove(file);		
+	}
 
 	/////////////////////////////////////////////////////////////////
 	// SELECTED				/////////////////////////////////////////
@@ -73,5 +77,18 @@ public class ProfilesConfiguration
 	
 	public void addSelected(String file)
 	{	selected.add(file);		
+	}
+
+	/////////////////////////////////////////////////////////////////
+	// PROFILES			/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	private int lastProfile = 0;
+
+	public int getLastProfile()
+	{	return lastProfile;
+	}
+
+	public void setLastProfile(int lastProfile)
+	{	this.lastProfile = lastProfile;
 	}
 }
