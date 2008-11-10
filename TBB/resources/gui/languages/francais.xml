@@ -199,6 +199,7 @@
 
 			<group name="List">
 				<text name="Title" value="Liste des profils" tooltip="Liste de tous les profils existants" />
+				<text name="NewProfile" value="Nouveau profil" tooltip="Nouveau profil" />
 				<text name="PageDown" value="Descendre" tooltip="Revenir à la page de profils suivante" />
 				<text name="PageUp" value="Monter" tooltip="Aller à la page de profils précédente" />
 			</group>

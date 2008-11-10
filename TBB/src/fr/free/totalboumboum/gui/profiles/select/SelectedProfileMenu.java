@@ -23,17 +23,28 @@ package fr.free.totalboumboum.gui.profiles.select;
 
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
+import java.io.IOException;
 
 import javax.swing.Box;
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
+import javax.xml.parsers.ParserConfigurationException;
 
+import org.xml.sax.SAXException;
+
+import fr.free.totalboumboum.configuration.Configuration;
+import fr.free.totalboumboum.configuration.game.GameConfiguration;
+import fr.free.totalboumboum.configuration.game.GameConfigurationSaver;
+import fr.free.totalboumboum.configuration.profile.PredefinedColor;
 import fr.free.totalboumboum.configuration.profile.Profile;
+import fr.free.totalboumboum.configuration.profile.ProfileSaver;
 import fr.free.totalboumboum.gui.common.panel.SplitMenuPanel;
 import fr.free.totalboumboum.gui.common.panel.menu.InnerMenuPanel;
 import fr.free.totalboumboum.gui.common.panel.menu.MenuPanel;
+import fr.free.totalboumboum.gui.data.configuration.GuiConfiguration;
 import fr.free.totalboumboum.gui.profiles.edit.EditProfileSplitPanel;
 import fr.free.totalboumboum.gui.tools.GuiTools;
+import fr.free.totalboumboum.tools.FileTools;
 
 public class SelectedProfileMenu extends InnerMenuPanel
 {	private static final long serialVersionUID = 1L;
@@ -78,7 +89,41 @@ public class SelectedProfileMenu extends InnerMenuPanel
 		{	replaceWith(parent);
 	    }
 		else if(e.getActionCommand().equals(GuiTools.MENU_PROFILES_BUTTON_NEW))
-		{	//TODO
+		{	try
+			{	GameConfiguration gameConfig = Configuration.getGameConfiguration();
+				int lastProfile = gameConfig.getLastProfile();
+				int nextProfile = lastProfile+1;
+				gameConfig.setLastProfile(nextProfile);
+				GameConfigurationSaver.saveGameConfiguration(gameConfig);
+				Profile newProfile = new Profile();
+				String key = GuiTools.MENU_PROFILES_LIST_NEW_PROFILE;
+				String name = GuiConfiguration.getMiscConfiguration().getLanguage().getText(key);
+				newProfile.setName(name);
+				String spritePack = "superbomberman1";
+				newProfile.setSpritePack(spritePack);
+				String spriteFolder = "shirobon";
+				newProfile.setSpriteFolder(spriteFolder);
+				PredefinedColor spriteColor = PredefinedColor.WHITE;
+				newProfile.setSpriteColor(spriteColor,0);
+				String fileName = nextProfile+FileTools.EXTENSION_DATA;			
+				ProfileSaver.saveProfile(newProfile, fileName);
+			}
+			catch (ParserConfigurationException e1)
+			{	e1.printStackTrace();
+			}
+			catch (SAXException e1)
+			{	e1.printStackTrace();
+			}
+			catch (IOException e1)
+			{	e1.printStackTrace();
+			}
+
+			
+//TODO j'en suis là			
+			
+			
+			
+			getDataPart().refresh();
 	    }
 		else if(e.getActionCommand().equals(GuiTools.MENU_PROFILES_BUTTON_MODIFY))
 		{	Profile profile = profileData.getSelectedProfile();
