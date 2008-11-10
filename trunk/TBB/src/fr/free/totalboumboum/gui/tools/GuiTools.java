@@ -193,6 +193,7 @@ public class GuiTools
 		public static final String MENU_PROFILES_LIST_TITLE = "MenuProfilesListTitle";
 		public static final String MENU_PROFILES_LIST_PAGEDOWN = "MenuProfilesListPageDown";
 		public static final String MENU_PROFILES_LIST_PAGEUP = "MenuProfilesListPageUp";
+		public static final String MENU_PROFILES_LIST_NEW_PROFILE = "MenuProfilesListNewProfile";
 		/* PREVIEW */
 		public static final String MENU_PROFILES_PREVIEW_AINAME = "MenuProfilesPreviewAiName";
 		public static final String MENU_PROFILES_PREVIEW_AIPACK = "MenuProfilesPreviewAiPack";
