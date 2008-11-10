@@ -113,6 +113,7 @@ public class XmlTools
 	public static final String ELT_LIMIT = "limit";
 	public static final String ELT_LIMITS = "limits";
 	public static final String ELT_LINE = "line";
+	public static final String ELT_LIST = "list";
 	public static final String ELT_LOCAL = "local";
 	public static final String ELT_LOCATION = "location";
 	public static final String ELT_LOCATIONS = "locations";

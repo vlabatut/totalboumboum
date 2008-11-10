@@ -53,9 +53,6 @@ public class GameConfigurationSaver
 		// quick start round
 		Element roundElement = saveQuickstartElement(gameConfiguration);
 		result.addContent(roundElement);
-		// profiles
-		Element profilesElement = saveProfilesElement(gameConfiguration);
-		result.addContent(profilesElement);
 		//
 		return result;
 	}
@@ -71,13 +68,6 @@ public class GameConfigurationSaver
 	{	Element result = new Element(XmlTools.ELT_QUICKSTART);
 		String quickround = gameConfiguration.getQuickstartName();
 		result.setAttribute(XmlTools.ATT_VALUE,quickround);
-		return result;
-	}
-
-	private static Element saveProfilesElement(GameConfiguration gameConfiguration)
-	{	Element result = new Element(XmlTools.ELT_PROFILES);
-		String lastProfile = Integer.toString(gameConfiguration.getLastProfile());
-		result.setAttribute(XmlTools.ATT_LAST,lastProfile);
 		return result;
 	}
 }

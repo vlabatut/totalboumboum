@@ -2,6 +2,5 @@
 <game xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="..\..\..\resources\schemas\game.xsd">
 	<quickmatch value="matchLong" />
 	<quickstart value="round01" />
-	<profiles last="20" />
 </game>
 
