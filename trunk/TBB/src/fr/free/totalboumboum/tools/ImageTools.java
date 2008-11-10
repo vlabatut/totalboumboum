@@ -110,54 +110,61 @@ public class ImageTools
     public static BufferedImage loadImage(String path, Colormap colormap) throws IOException
     {	BufferedImage image = ImageIO.read(new File(path));
     	if(colormap!=null)
-    	{	ColorModel colorModel = image.getColorModel();
-    		if(colorModel instanceof IndexColorModel)
-    		{	// build the color map
-	    		IndexColorModel cm = (IndexColorModel) colorModel;
-	    		int size = cm.getMapSize();
-	    		int bits = cm.getPixelSize();
-	    		byte reds[] = new byte[size];
-	    		byte greens[] = new byte[size];
-	    		byte blues[] = new byte[size];
-	    		cm.getReds(reds);
-	    		cm.getGreens(greens);
-	    		cm.getBlues(blues);
-	    		// changing the values    		
-    			Iterator<Entry<Integer,byte[]>> i = colormap.entrySet().iterator();
-    			while(i.hasNext())
-    			{	Entry<Integer,byte[]> temp = i.next();
-    				int index = temp.getKey();
-    				byte tab[] = temp.getValue();
-    				reds[index] = tab[0];
-    				greens[index] = tab[1];
-    				blues[index] = tab[2];
-    			}
-    			// creating the new model
-	    		int trans = cm.getTransparentPixel();
-	    		IndexColorModel newCm;
-	    		if(trans<0)
-	    			newCm = new IndexColorModel(bits, size, reds, greens, blues);
-	    		else
-	    			newCm = new IndexColorModel(bits, size, reds, greens, blues, trans);	    		
-	    		// cloning the image, applying the new color model
-	    		String[] names = image.getPropertyNames();
-	    		Hashtable<String,Object> props = new Hashtable<String,Object>();
-	    		if(names!=null)
-	    		{	for(int k=0;k<names.length;k++)
-		    		{	Object prop = image.getProperty(names[k]);
-		    			props.put(names[k], prop);
-		    		}
-	    		}
-	    		WritableRaster raster = image.copyData(null);
-	    		BufferedImage copy = new BufferedImage(newCm,raster,image.isAlphaPremultiplied(),props);
-    	  		image = copy;  	  		
-    		}
+    	{	image = getColoredImage(image,colormap);    	
     	}
-    	
-    	// optimizing : using a model adapted to the graphical environment
-    	BufferedImage result =  getCompatibleImage(image);
-    	return result;
+    	else
+    	{	// optimizing : using a model adapted to the graphical environment
+    		image =  getCompatibleImage(image);
+    	}
+    	return image;
     }
+    
+    public static BufferedImage getColoredImage(BufferedImage image, Colormap colormap)
+   	{	ColorModel colorModel = image.getColorModel();
+		if(colorModel instanceof IndexColorModel)
+		{	// build the color map
+			IndexColorModel cm = (IndexColorModel) colorModel;
+			int size = cm.getMapSize();
+			int bits = cm.getPixelSize();
+			byte reds[] = new byte[size];
+			byte greens[] = new byte[size];
+			byte blues[] = new byte[size];
+			cm.getReds(reds);
+			cm.getGreens(greens);
+			cm.getBlues(blues);
+			// changing the values    		
+			Iterator<Entry<Integer,byte[]>> i = colormap.entrySet().iterator();
+			while(i.hasNext())
+			{	Entry<Integer,byte[]> temp = i.next();
+				int index = temp.getKey();
+				byte tab[] = temp.getValue();
+				reds[index] = tab[0];
+				greens[index] = tab[1];
+				blues[index] = tab[2];
+			}
+			// creating the new model
+			int trans = cm.getTransparentPixel();
+			IndexColorModel newCm;
+			if(trans<0)
+				newCm = new IndexColorModel(bits, size, reds, greens, blues);
+			else
+				newCm = new IndexColorModel(bits, size, reds, greens, blues, trans);	    		
+			// cloning the image, applying the new color model
+			String[] names = image.getPropertyNames();
+			Hashtable<String,Object> props = new Hashtable<String,Object>();
+			if(names!=null)
+			{	for(int k=0;k<names.length;k++)
+	    		{	Object prop = image.getProperty(names[k]);
+	    			props.put(names[k], prop);
+	    		}
+			}
+			WritableRaster raster = image.copyData(null);
+			BufferedImage copy = new BufferedImage(newCm,raster,image.isAlphaPremultiplied(),props);
+	  		image = copy;  	  		
+		}
+		return image;
+	}
+    
 
     private static BufferedImage getCompatibleImage(BufferedImage image)
     {	// get the graphical environment

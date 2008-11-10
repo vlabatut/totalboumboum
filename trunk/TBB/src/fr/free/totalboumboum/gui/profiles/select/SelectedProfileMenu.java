@@ -138,17 +138,30 @@ public class SelectedProfileMenu extends InnerMenuPanel
 		else if(e.getActionCommand().equals(GuiTools.MENU_PROFILES_BUTTON_DELETE))
 		{	Profile profile = profileData.getSelectedProfile();
 			if(profile!=null)
-			{	String profileFile = profileData.getSelectedProfileFile();
-				// delete file
-				String path = FileTools.getProfilesPath()+File.separator+profileFile+FileTools.EXTENSION_DATA;
-				File file = new File(path);
-				file.delete();
-				// delete entry in config
-				ProfilesConfiguration profilesConfig = Configuration.getProfilesConfiguration();
-				profilesConfig.removeProfile(profileFile);
-				// rebuild panel
-				profileData = new SelectedProfileData(container);
-				container.setDataPart(profileData);
+			{	try
+				{	String profileFile = profileData.getSelectedProfileFile();
+					// delete file
+					String path = FileTools.getProfilesPath()+File.separator+profileFile+FileTools.EXTENSION_DATA;
+					File file = new File(path);
+					file.delete();
+					// delete entry in config
+					ProfilesConfiguration profilesConfig = Configuration.getProfilesConfiguration();
+					profilesConfig.removeProfile(profileFile);
+					ProfilesConfigurationSaver.saveProfilesConfiguration(profilesConfig);
+					// rebuild panel
+					profileData = new SelectedProfileData(container);
+					container.setDataPart(profileData);
+				}
+				catch (ParserConfigurationException e1)
+				{	e1.printStackTrace();
+				}
+				catch (SAXException e1)
+				{	e1.printStackTrace();
+				}
+				catch (IOException e1)
+				{	e1.printStackTrace();
+				}
+				
 			}
 	    }
 	} 

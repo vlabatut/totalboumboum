@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <profiles xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="..\..\..\resources\schemas\profiles.xsd">
-	<general last="20" />
+	<general last="21" />
 	<list>
 		<profile file="19" name="Ne sert à rien" />
 		<profile file="17" name="Şahin+Yıldırım" />
@@ -12,7 +12,6 @@
 		<profile file="11" name="Göksel+Mengeş" />
 		<profile file="12" name="Hanci+Toprak" />
 		<profile file="3" name="Baydar+Camcı" />
-		<profile file="20" name="Nouveau profil" />
 		<profile file="2" name="Başman+Sandallı" />
 		<profile file="1" name="Joueur Humain" />
 		<profile file="10" name="Göksay+Köse" />

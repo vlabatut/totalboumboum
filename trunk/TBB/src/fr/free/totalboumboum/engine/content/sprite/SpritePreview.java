@@ -22,7 +22,7 @@ package fr.free.totalboumboum.engine.content.sprite;
  */
 
 import java.awt.image.BufferedImage;
-import java.util.TreeSet;
+import java.util.HashMap;
 
 import fr.free.totalboumboum.configuration.profile.PredefinedColor;
 
@@ -68,15 +68,28 @@ public class SpritePreview
 	}
 	
 	/////////////////////////////////////////////////////////////////
-	// IMAGE			/////////////////////////////////////////////
+	// IMAGES			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	private BufferedImage image;
+	private HashMap<PredefinedColor,BufferedImage> coloredImages = new HashMap<PredefinedColor, BufferedImage>();
+	private BufferedImage normalImage;
 
-	public BufferedImage getImage()
-	{	return image;
+	public BufferedImage getImage(PredefinedColor color)
+	{	BufferedImage result;
+		if(color==null)
+			result = normalImage;
+		else
+			result = coloredImages.get(color);
+		return result;
 	}
-	public void setImage(BufferedImage image)
-	{	this.image = image;
+	public void setImage(PredefinedColor color, BufferedImage image)
+	{	if(color==null)
+			normalImage = image;
+		else
+			coloredImages.put(color,image);
+	}
+
+	public boolean hasColor(PredefinedColor color)
+	{	return coloredImages.containsKey(color);		
 	}
 
 	/////////////////////////////////////////////////////////////////
@@ -105,16 +118,4 @@ public class SpritePreview
 	{	this.folder = folder;
 	}
 	
-	/////////////////////////////////////////////////////////////////
-	// COLORS			/////////////////////////////////////////////
-	/////////////////////////////////////////////////////////////////
-	private TreeSet<PredefinedColor> colors = new TreeSet<PredefinedColor>();
-	
-	public void addColor(PredefinedColor color)
-	{	colors.add(color);		
-	}
-	
-	public boolean hasColor(PredefinedColor color)
-	{	return colors.contains(color);		
-	}
 }
