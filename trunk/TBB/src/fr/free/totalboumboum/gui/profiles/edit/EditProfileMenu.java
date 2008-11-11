@@ -99,7 +99,8 @@ public class EditProfileMenu extends InnerMenuPanel
 						
 /*
  * TODO PB : annuler au niveau du premier menu une action qui a été enregistrée dans un profil au niveau de l'édition de profil
- * >> tout gérer au niveau du premier menu, répertorier les changements ?						
+ * >> tout gérer au niveau du premier menu, répertorier les changements ?	
+ * au lieu d'envoyer le profil original, faut envoyer une copie directe, puis comparer la copie et l'enregistrer si modif					
  */
 						
 						profilesConfiguration.addProfile(profileFile,newProfile.getName());
