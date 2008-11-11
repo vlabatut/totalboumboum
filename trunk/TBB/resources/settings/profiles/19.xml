@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <profile xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="..\..\..\resources\schemas\profile.xsd">
-	<general name="Ne sert à rien" />
+	<general name="Ne sert à rien23" />
 	<ai name="promeneur" pack="tournament200809" />
 	<colors>
 		<color rank="0" name="ORANGE" />

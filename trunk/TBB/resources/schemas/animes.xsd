@@ -78,7 +78,6 @@
 		</xsd:sequence>
 		<xsd:attribute name="scale" type="xsd:integer" use="optional" default="1" />
 		<xsd:attribute name="default" type="xsd:string" use="required" />
-		<xsd:attribute name="folder" type="xsd:string" use="optional" />
 		<xsd:attribute name="boundHeight" type="xsd:integer" use="optional" default="0" />
 	</xsd:complexType>
 

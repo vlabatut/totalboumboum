@@ -22,11 +22,25 @@ package fr.free.totalboumboum.gui.profiles.edit;
  */
 
 import java.awt.Color;
+import java.awt.Component;
+import java.awt.Dimension;
+import java.awt.Font;
+import java.awt.Graphics;
+import java.awt.Graphics2D;
+import java.awt.RenderingHints;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.image.BufferedImage;
 
 import javax.swing.JLabel;
+import javax.swing.JTextPane;
+import javax.swing.event.DocumentEvent;
+import javax.swing.event.DocumentListener;
+import javax.swing.text.BadLocationException;
+import javax.swing.text.Document;
+import javax.swing.text.SimpleAttributeSet;
+import javax.swing.text.StyleConstants;
+import javax.swing.text.StyledDocument;
 
 import fr.free.totalboumboum.configuration.profile.PredefinedColor;
 import fr.free.totalboumboum.configuration.profile.Profile;
@@ -39,7 +53,7 @@ import fr.free.totalboumboum.gui.profiles.ais.SelectedAiSplitPanel;
 import fr.free.totalboumboum.gui.profiles.heroes.SelectedHeroSplitPanel;
 import fr.free.totalboumboum.gui.tools.GuiTools;
 
-public class EditProfileData extends EntitledDataPanel implements MouseListener
+public class EditProfileData extends EntitledDataPanel implements MouseListener, DocumentListener
 {	
 	private static final long serialVersionUID = 1L;
 	
@@ -52,6 +66,9 @@ public class EditProfileData extends EntitledDataPanel implements MouseListener
 
 	private Profile profile;
 	private UntitledSubPanelLines editPanel;
+	private JTextPane textPane;
+	private StyledDocument doc;
+	private SimpleAttributeSet sa;
 	
 	public EditProfileData(SplitMenuPanel container, Profile profile)
 	{	super(container);
@@ -79,12 +96,43 @@ public class EditProfileData extends EntitledDataPanel implements MouseListener
 					col++;
 				}
 				// value
-				{	ln.setLabelMaxWidth(col,Integer.MAX_VALUE);
+				{	textPane = new JTextPane()
+					{	private static final long serialVersionUID = 1L;
+						public void paintComponent(Graphics g)
+					    {	Graphics2D g2 = (Graphics2D) g;
+				        	g2.setRenderingHint(RenderingHints.KEY_TEXT_ANTIALIASING,RenderingHints.VALUE_TEXT_ANTIALIAS_ON);
+				        	g2.setRenderingHint(RenderingHints.KEY_RENDERING,RenderingHints.VALUE_RENDER_QUALITY);
+				        	super.paintComponent(g2);
+					    }			
+					};
+					textPane.setEditable(true);
+					textPane.setOpaque(true);
+					int lnH = ln.getHeight();
+					int lnW = ln.getWidth() - GuiTools.subPanelMargin - ln.getHeight();
+					Dimension dim = new Dimension(lnW,lnH);
+					textPane.setPreferredSize(dim);
+					textPane.setMinimumSize(dim);
+					textPane.setMaximumSize(dim);
+					textPane.setAlignmentX(Component.CENTER_ALIGNMENT);
 					Color bg = GuiTools.COLOR_TABLE_REGULAR_BACKGROUND;
-					ln.setLabelBackground(col,bg);
+					textPane.setBackground(bg);
+					Color fg = GuiTools.COLOR_TABLE_REGULAR_FOREGROUND;
+					textPane.setForeground(fg);
+					sa = new SimpleAttributeSet();
+					StyleConstants.setAlignment(sa,StyleConstants.ALIGN_LEFT/*JUSTIFIED*/);
+					Font font = GuiConfiguration.getMiscConfiguration().getFont().deriveFont((float)(ln.getLineFontSize()));
+					StyleConstants.setFontFamily(sa,font.getFamily());
+					StyleConstants.setFontSize(sa,font.getSize());
+					doc = textPane.getStyledDocument();
+					doc.setCharacterAttributes(0,doc.getLength()+1,sa,true);
+					doc.addDocumentListener(this);
+					int index = col*2+1;
+					ln.remove(index);
+					ln.add(textPane,index);
 					col++;
 				}
-				// change
+/*				
+ 				// change
 				{	ln.setLabelMinWidth(col,ln.getHeight());
 					ln.setLabelMaxWidth(col,ln.getHeight());
 					ln.setLabelKey(col,GuiTools.MENU_PROFILES_EDIT_NAME_CHANGE,true);
@@ -94,6 +142,7 @@ public class EditProfileData extends EntitledDataPanel implements MouseListener
 					label.addMouseListener(this);
 					col++;
 				}
+*/				
 			}
 
 			// AI
@@ -306,6 +355,7 @@ public class EditProfileData extends EntitledDataPanel implements MouseListener
 		switch(pos[0])
 		{	// NAME
 			case LINE_NAME:
+				//en fait, non
 				break;
 			// AI
 			case LINE_AI:
@@ -394,13 +444,17 @@ public class EditProfileData extends EntitledDataPanel implements MouseListener
 	}
 	
 	private void refreshName()
-	{	// init
-		Line ln = editPanel.getLine(LINE_NAME);
-		int col = 1;
-		// name
+	{	// name
 		String text = profile.getName();
 		String tooltip = text;
-		ln.setLabelText(col,text,tooltip);				
+		try
+		{	doc.remove(0,doc.getLength());
+			doc.insertString(0,text,sa);
+		}
+		catch (BadLocationException e)
+		{	e.printStackTrace();
+		}
+		textPane.setToolTipText(tooltip);				
 	}
 	
 	private void refreshAi()
@@ -441,6 +495,38 @@ public class EditProfileData extends EntitledDataPanel implements MouseListener
 			String tooltip = text;
 			ln.setLabelText(col,text,tooltip);
 			col++;
+		}
+	}
+
+	/////////////////////////////////////////////////////////////////
+	// DOCUMENT LISTENER	/////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	@Override
+	public void changedUpdate(DocumentEvent e)
+	{	// not usefull here
+	}
+
+	@Override
+	public void insertUpdate(DocumentEvent e)
+	{	Document document = e.getDocument();
+		try
+		{	String name = document.getText(0,document.getLength());
+			profile.setName(name);
+		}
+		catch (BadLocationException e1)
+		{	e1.printStackTrace();
+		}
+	}
+
+	@Override
+	public void removeUpdate(DocumentEvent e)
+	{	Document document = e.getDocument();
+		try
+		{	String name = document.getText(0,document.getLength());
+			profile.setName(name);
+		}
+		catch (BadLocationException e1)
+		{	e1.printStackTrace();
 		}
 	}
 }

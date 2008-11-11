@@ -14,6 +14,7 @@ import org.jdom.Element;
 import org.xml.sax.SAXException;
 
 import fr.free.totalboumboum.configuration.profile.PredefinedColor;
+import fr.free.totalboumboum.engine.content.feature.Direction;
 import fr.free.totalboumboum.engine.content.feature.anime.Colormap;
 import fr.free.totalboumboum.tools.FileTools;
 import fr.free.totalboumboum.tools.ImageTools;
@@ -43,8 +44,7 @@ public class SpritePreviewLoader
 		loadNameElement(root,result);
 		loadAuthorElement(root, result);
 		loadSourceElement(root, result);
-		loadPreviewElement(root,folder,result);
-		loadColors(folder,result);
+		loadImages(folder,result);
 		return result;
 	}
 	
@@ -70,16 +70,8 @@ public class SpritePreviewLoader
 		result.setSource(name);		
 	}
 	
-	private static void loadPreviewElement(Element root, String folder, SpritePreview result) throws IOException
-	{	// image
-		Element prev = root.getChild(XmlTools.ELT_PREVIEW);
-		String filePath = folder+File.separator+prev.getAttribute(XmlTools.ATT_FILE).getValue().trim();
-		BufferedImage image = ImageTools.loadImage(filePath,null);
-		result.setImage(null,image);
-	}
-	
 	@SuppressWarnings("unchecked")
-	private static void loadColors(String folder, SpritePreview result) throws ParserConfigurationException, SAXException, IOException
+	private static void loadImages(String folder, SpritePreview result) throws ParserConfigurationException, SAXException, IOException
 	{	String folderPath = folder+File.separator+FileTools.FILE_ANIMES;
 		File dataFile = new File(folderPath+File.separator+FileTools.FILE_ANIMES+FileTools.EXTENSION_DATA);
 		if(dataFile.exists())
@@ -87,51 +79,80 @@ public class SpritePreviewLoader
 			String schemaFolder = FileTools.getSchemasPath();
 			File schemaFile = new File(schemaFolder+File.separator+FileTools.FILE_ANIMES+FileTools.EXTENSION_SCHEMA);
 			Element root = XmlTools.getRootFromFile(dataFile,schemaFile);
-			// loading
-	    	Attribute attribute = root.getAttribute(XmlTools.ATT_FOLDER);
-			if(attribute!=null)
-				folderPath = folderPath+File.separator+attribute.getValue();
+			// init
+	    	String defaultGesture = root.getAttributeValue(XmlTools.ATT_DEFAULT);
+	    	Element gesturesElement = root.getChild(XmlTools.ELT_GESTURES);
+	    	Attribute gesturesFolderAtt = gesturesElement.getAttribute(XmlTools.ATT_FOLDER);
+	    	String gesturesFolder = "";
+	    	String gestureFolder = "";
+	    	String directionFolder = "";
+	    	String stepFile = "";
+	    	if(gesturesFolderAtt!=null)
+	    		gesturesFolder = File.separator+gesturesFolderAtt.getValue();
+	    	// look for the gesture
+	    	{	List<Element> gestureList = gesturesElement.getChildren(XmlTools.ELT_GESTURE);
+		    	Iterator<Element> it = gestureList.iterator();
+		    	boolean found = false;
+		    	while(it.hasNext() && !found)
+		    	{	Element gestureElt = it.next();
+		    		String name = gestureElt.getAttributeValue(XmlTools.ATT_NAME);
+		    		if(name.equalsIgnoreCase(defaultGesture))
+		    		{	found = true;
+	    				Attribute f = gestureElt.getAttribute(XmlTools.ATT_FOLDER);
+	    				if(f!=null)
+	    					gestureFolder = File.separator+f.getValue();
+	    				// look for the direction
+		    			List<Element> directionList = gestureElt.getChildren(XmlTools.ELT_DIRECTION);
+		    			String defaultDirection;
+		    			if(directionList.size()==1)
+		    				defaultDirection = Direction.NONE.toString();
+		    			else
+		    				defaultDirection = Direction.DOWN.toString();
+		    			Iterator<Element> it2 = directionList.iterator();
+		    			boolean found2 = false;
+		    			while(it2.hasNext() && !found2)
+		    			{	Element directionElt = it2.next();
+		    				String name2 = directionElt.getAttributeValue(XmlTools.ATT_NAME);
+		    				if(name2.equalsIgnoreCase(defaultDirection))
+		    				{	found2 = true;
+			    				Attribute fold = directionElt.getAttribute(XmlTools.ATT_FOLDER);
+			    				if(fold!=null)
+			    					directionFolder = File.separator+fold.getValue();
+			    				// take the first step
+			    				List<Element> stepList = directionElt.getChildren(XmlTools.ELT_STEP);
+			    				Element stepElt = stepList.get(0);
+				    			stepFile = stepElt.getAttributeValue(XmlTools.ATT_FILE);
+		    				}
+		    			}
+		    		}
+		    	}
+	    	}
+	    	// get the preview picture
+			String imgPath = folderPath+gesturesFolder+gestureFolder+directionFolder+File.separator+stepFile;
+			BufferedImage image = ImageTools.loadImage(imgPath,null);
+			result.setImage(null,image);			
+			// get the colors
 			Element elt = root.getChild(XmlTools.ELT_COLORS);
 			if(elt!=null)
-			{	
-			}
-			
-
-			
-			
-			
-			
-			
-			
-			if(elt!=null)
 			{	List<Element> clrs = elt.getChildren();
-				Iterator<Element> it = clrs.iterator();
-		    	while(it.hasNext())
+				Iterator<Element> iter = clrs.iterator();
+		    	while(iter.hasNext())
 		    	{	BufferedImage img;
-		    		Element temp = it.next();
+		    		Element temp = iter.next();
 		    		String name = temp.getAttribute(XmlTools.ATT_NAME).getValue().trim();
 		    		name = name.toUpperCase(Locale.ENGLISH);
 		    		PredefinedColor color = PredefinedColor.valueOf(name);
 		    		Object obj = ImageTools.loadColorsElement(elt,folderPath,color);
 					if(obj instanceof Colormap)
 					{	Colormap colormap = (Colormap)obj;
-						img = ImageTools.getColoredImage(result.getImage(null),colormap);
+						img = ImageTools.loadImage(imgPath, colormap);
 					}
 					else
-					{	String colorFolder = (String)obj;
-						String localFilePath = folderPath+File.separator+colorFolder;
-						String filePath = folder+File.separator+prev.getAttribute(XmlTools.ATT_FILE).getValue().trim();
-						BufferedImage image = ImageTools.loadImage(filePath,null);
-/**
- * TODO
- * 1) virer les previews de sprites
- * 2) faire un système qui prend automatiquement l'action par défaut, en prenant une direction DOWN
- * >> plus facile pour récupérer les images précolorées						
- */
+					{	String colorFolder = File.separator+(String)obj;
+						String imagePath = folderPath+gesturesFolder+colorFolder+gestureFolder+directionFolder+File.separator+stepFile;
+						img = ImageTools.loadImage(imagePath,null);
 					}
-		    		
-		    		
-		    		result.addColor(color);
+		    		result.setImage(color,img);
 		    	}				
 			}
 		}

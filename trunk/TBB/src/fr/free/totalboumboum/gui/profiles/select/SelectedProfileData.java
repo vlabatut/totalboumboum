@@ -78,6 +78,7 @@ public class SelectedProfileData extends EntitledDataPanel implements MouseListe
 	private ArrayList<Entry<String,String>> profiles;
 	private Profile selectedProfile = null;
 	private String selectedProfileFile = null;
+	private int leftWidth;
 	
 	public SelectedProfileData(SplitMenuPanel container)
 	{	super(container);
@@ -92,7 +93,7 @@ public class SelectedProfileData extends EntitledDataPanel implements MouseListe
 			}
 			
 			int margin = GuiTools.panelMargin;
-			int leftWidth = (int)(dataWidth*SPLIT_RATIO); 
+			leftWidth = (int)(dataWidth*SPLIT_RATIO); 
 			int rightWidth = dataWidth - leftWidth - margin; 
 			mainPanel.setOpaque(false);
 			profilesConfiguration = Configuration.getProfilesConfiguration().copy();
@@ -281,7 +282,12 @@ public class SelectedProfileData extends EntitledDataPanel implements MouseListe
 
 	@Override
 	public void refresh()
-	{	refreshPreview();
+	{	initProfiles();
+		makeListPanels(leftWidth,dataHeight);
+		refreshList();
+		if(selectedRow!=-1)
+			listPanels.get(currentPage).setLabelBackground(selectedRow,0,GuiTools.COLOR_TABLE_SELECTED_BACKGROUND);
+		refreshPreview();
 	}
 
 	@Override
