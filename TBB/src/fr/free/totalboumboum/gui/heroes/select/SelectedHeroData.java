@@ -22,6 +22,7 @@ package fr.free.totalboumboum.gui.heroes.select;
  */
 
 import java.awt.Color;
+import java.awt.Container;
 import java.awt.Dimension;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
@@ -99,6 +100,7 @@ public class SelectedHeroData extends EntitledDataPanel implements MouseListener
 	private ArrayList<SpritePreview> heroPreviews;
 		
 	private boolean packageMode = true; //false if heroes are displayed 
+	private PredefinedColor selectedColor = null;
 	
 	public SelectedHeroData(SplitMenuPanel container)
 	{	super(container);
@@ -387,8 +389,8 @@ public class SelectedHeroData extends EntitledDataPanel implements MouseListener
 			{	cl.setLabelMinHeight(line,lineHeight);
 				cl.setLabelPreferredHeight(line,lineHeight);
 				cl.setLabelMaxHeight(line,lineHeight);
-//				cl.getLabel(col).addMouseListener(this);
-//				cl.setLabelText(line,""+col,""+col);
+				JLabel label = cl.getLabel(line);
+				label.addMouseListener(this);
 			}
 			Color bg = GuiTools.COLOR_TABLE_NEUTRAL_BACKGROUND;
 			cl.setBackgroundColor(bg);
@@ -404,8 +406,8 @@ public class SelectedHeroData extends EntitledDataPanel implements MouseListener
 			{	cl.setLabelMinHeight(line,lineHeight);
 				cl.setLabelPreferredHeight(line,lineHeight);
 				cl.setLabelMaxHeight(line,lineHeight);
-//				cl.getLabel(col).addMouseListener(this);
-//				cl.setLabelText(line,""+col,""+col);
+				JLabel label = cl.getLabel(line);
+				label.addMouseListener(this);
 			}
 			Color bg = GuiTools.COLOR_TABLE_NEUTRAL_BACKGROUND;
 			cl.setBackgroundColor(bg);
@@ -419,9 +421,10 @@ public class SelectedHeroData extends EntitledDataPanel implements MouseListener
 			cl.setLabelMinHeight(line,height);
 			cl.setLabelPreferredHeight(line,height);
 			cl.setLabelMaxHeight(line,height);
+			JLabel label = cl.getLabel(line);
+			label.addMouseListener(this);
 			Color bg = GuiTools.COLOR_TABLE_NEUTRAL_BACKGROUND;
 			cl.setBackgroundColor(bg);
-//			cl.setLabelText(line,""+col,""+col);
 			col++;
 		}
 	}
@@ -446,7 +449,7 @@ public class SelectedHeroData extends EntitledDataPanel implements MouseListener
 		{	int index = (selectedHeroRow-2)+currentHeroPage*(LIST_LINE_COUNT-3);
 			SpritePreview heroPreview = heroPreviews.get(index);
 			// image
-			image = heroPreview.getImage();
+			image = heroPreview.getImage(selectedColor);
 			for(int i=0;i<colors.length;i++)
 				if(heroPreview.hasColor(colorValues[i]))
 					colors[i] = true;
@@ -479,9 +482,7 @@ public class SelectedHeroData extends EntitledDataPanel implements MouseListener
 				colorKey = GuiTools.COLOR+colorKey;
 				text = GuiConfiguration.getMiscConfiguration().getLanguage().getText(colorKey); 
 				tooltip = text;
-				Color clr = colorValues[i].getColor();
-				int alpha = GuiTools.ALPHA_TABLE_REGULAR_BACKGROUND_LEVEL3;
-				bg = new Color(clr.getRed(),clr.getGreen(),clr.getBlue(),alpha);
+				bg = colorValues[i].getColor();
 			}
 			imagePanel.setLabelBackground(line,col,bg);
 			imagePanel.setLabelText(line,col,text,tooltip);
@@ -504,7 +505,15 @@ public class SelectedHeroData extends EntitledDataPanel implements MouseListener
 			ImageIcon icon = new ImageIcon(image);
 			label.setIcon(icon);
 			label.setText(null);
-			Color bg = GuiTools.COLOR_TABLE_REGULAR_BACKGROUND;
+			Color bg;
+			if(selectedColor==null)
+				bg = GuiTools.COLOR_TABLE_REGULAR_BACKGROUND;
+			else
+			{	Color clr = selectedColor.getColor();
+				int alpha = GuiTools.ALPHA_TABLE_REGULAR_BACKGROUND_LEVEL1;
+				bg = new Color(clr.getRed(),clr.getGreen(),clr.getBlue(),alpha);
+				
+			}
 			label.setBackground(bg);
 		}
 		else
@@ -579,39 +588,55 @@ public class SelectedHeroData extends EntitledDataPanel implements MouseListener
 		}
 		// list = ai
 		else
-		{	int[] pos = listHeroPanels.get(currentHeroPage).getLabelPosition(label);
-			switch(pos[0])
-			{	// previous page
-				case LIST_LINE_PREVIOUS:
-					if(currentHeroPage>0)
-					{	unselectList();
-						currentHeroPage--;
+		{	Container cont = label.getParent();
+			// colors
+			if(cont instanceof Column)
+			{	int[] pos = imagePanel.getLabelPosition(label);
+				selectedColor = null;
+				if(pos[1]==0 || pos[1]==1)
+				{	PredefinedColor colors[] = PredefinedColor.values();
+					int index = pos[0]*2+pos[1];
+					selectedColor = colors[index];
+					
+				}
+				refreshPreview();
+			}
+			// list
+			else
+			{	int[] pos = listHeroPanels.get(currentHeroPage).getLabelPosition(label);
+				switch(pos[0])
+				{	// previous page
+					case LIST_LINE_PREVIOUS:
+						if(currentHeroPage>0)
+						{	unselectList();
+							currentHeroPage--;
+							refreshList();
+						}
+						break;
+					// go to package
+					case LIST_LINE_PARENT:
+						unselectList();
+						packageMode = true;
+						refreshPreview();
+						unselectList();
 						refreshList();
-					}
-					break;
-				// go to package
-				case LIST_LINE_PARENT:
-					unselectList();
-					packageMode = true;
-					refreshPreview();
-					unselectList();
-					refreshList();
-					break;
-				// next page
-				case LIST_LINE_NEXT:
-					if(currentHeroPage<getFoldersPageCount()-1)
-					{	unselectList();
-						currentHeroPage++;
-						refreshList();
-					}
-					break;
-				// hero selected
-				default:
-					unselectList();
-					selectedHeroRow = pos[0];
-					//refreshList();
-					listHeroPanels.get(currentHeroPage).setLabelBackground(selectedHeroRow,0,GuiTools.COLOR_TABLE_SELECTED_BACKGROUND);
-					refreshPreview();
+						break;
+					// next page
+					case LIST_LINE_NEXT:
+						if(currentHeroPage<getFoldersPageCount()-1)
+						{	unselectList();
+							currentHeroPage++;
+							refreshList();
+						}
+						break;
+					// hero selected
+					default:
+						unselectList();
+						selectedHeroRow = pos[0];
+						//refreshList();
+						listHeroPanels.get(currentHeroPage).setLabelBackground(selectedHeroRow,0,GuiTools.COLOR_TABLE_SELECTED_BACKGROUND);
+						refreshPreview();
+				}
 			}
 		}
 	}
@@ -649,6 +674,7 @@ public class SelectedHeroData extends EntitledDataPanel implements MouseListener
 		else if(!packageMode && selectedHeroRow!=-1)
 		{	listHeroPanels.get(currentHeroPage).setLabelBackground(selectedHeroRow,0,GuiTools.COLOR_TABLE_REGULAR_BACKGROUND);
 			selectedHeroRow = -1;
+			selectedColor = null;
 			refreshPreview();
 		}
 	}

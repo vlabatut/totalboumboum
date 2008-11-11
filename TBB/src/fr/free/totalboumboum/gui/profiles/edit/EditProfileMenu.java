@@ -28,9 +28,15 @@ import java.io.IOException;
 import javax.swing.Box;
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
+import javax.xml.parsers.ParserConfigurationException;
 
+import org.xml.sax.SAXException;
+
+import fr.free.totalboumboum.configuration.Configuration;
 import fr.free.totalboumboum.configuration.profile.Profile;
 import fr.free.totalboumboum.configuration.profile.ProfileSaver;
+import fr.free.totalboumboum.configuration.profile.ProfilesConfiguration;
+import fr.free.totalboumboum.configuration.profile.ProfilesConfigurationSaver;
 import fr.free.totalboumboum.gui.common.panel.SplitMenuPanel;
 import fr.free.totalboumboum.gui.common.panel.menu.InnerMenuPanel;
 import fr.free.totalboumboum.gui.common.panel.menu.MenuPanel;
@@ -47,11 +53,13 @@ public class EditProfileMenu extends InnerMenuPanel
 	private EditProfileData profileData;
 	private Profile profile;
 	private String profileFile;
+	private ProfilesConfiguration profilesConfiguration;
 
-	public EditProfileMenu(SplitMenuPanel container, MenuPanel parent, Profile profile, String profileFile)
+	public EditProfileMenu(SplitMenuPanel container, MenuPanel parent, Profile profile, String profileFile, ProfilesConfiguration profilesConfiguration)
 	{	super(container, parent);
 		this.profile = profile;
 		this.profileFile = profileFile;
+		this.profilesConfiguration = profilesConfiguration;
 	
 		// layout
 		BoxLayout layout = new BoxLayout(this,BoxLayout.PAGE_AXIS); 
@@ -85,8 +93,26 @@ public class EditProfileMenu extends InnerMenuPanel
 			if(hasChanged)
 			{	try
 				{	ProfileSaver.saveProfile(newProfile,profileFile);
+					if(!profile.getName().equals(newProfile.getName()))
+					{	//ProfilesConfiguration profilesConfiguration = Configuration.getProfilesConfiguration();
+
+						
+/*
+ * TODO PB : annuler au niveau du premier menu une action qui a été enregistrée dans un profil au niveau de l'édition de profil
+ * >> tout gérer au niveau du premier menu, répertorier les changements ?						
+ */
+						
+						profilesConfiguration.addProfile(profileFile,newProfile.getName());
+						ProfilesConfigurationSaver.saveProfilesConfiguration(profilesConfiguration);
+					}
 				}
 				catch (IOException e1)
+				{	e1.printStackTrace();
+				}
+				catch (ParserConfigurationException e1)
+				{	e1.printStackTrace();
+				}
+				catch (SAXException e1)
 				{	e1.printStackTrace();
 				}
 			}

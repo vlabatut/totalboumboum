@@ -2,7 +2,7 @@
 <profiles xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="..\..\..\resources\schemas\profiles.xsd">
 	<general last="21" />
 	<list>
-		<profile file="19" name="Ne sert à rien" />
+		<profile file="19" name="Ne sert à rien23" />
 		<profile file="17" name="Şahin+Yıldırım" />
 		<profile file="18" name="Promeneur" />
 		<profile file="15" name="Kurtuluş+Özsoy" />

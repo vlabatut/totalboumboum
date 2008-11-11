@@ -286,7 +286,7 @@ public class RoundDescription extends EntitledDataPanel
 			String itemName = temp.getKey();
 			SpritePreview spritePreview = temp.getValue();
 			String name = spritePreview.getName();
-			BufferedImage image = spritePreview.getImage();
+			BufferedImage image = spritePreview.getImage(null);
 			int number = 0;
 			if(itemList.containsKey(itemName))
 				number = itemList.get(itemName);
@@ -411,7 +411,7 @@ public class RoundDescription extends EntitledDataPanel
 			int number = temp.getValue();
 			SpritePreview spritePreview = itemsetPreview.getItemPreview(itemName);
 			String name = spritePreview.getName();
-			BufferedImage image = spritePreview.getImage();
+			BufferedImage image = spritePreview.getImage(null);
 			String tooltip = name+": "+number;
 			String value = Integer.toString(number);
 			//
