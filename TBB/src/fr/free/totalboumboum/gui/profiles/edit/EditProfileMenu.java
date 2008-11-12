@@ -53,13 +53,11 @@ public class EditProfileMenu extends InnerMenuPanel
 	private EditProfileData profileData;
 	private Profile profile;
 	private String profileFile;
-	private ProfilesConfiguration profilesConfiguration;
 
-	public EditProfileMenu(SplitMenuPanel container, MenuPanel parent, Profile profile, String profileFile, ProfilesConfiguration profilesConfiguration)
+	public EditProfileMenu(SplitMenuPanel container, MenuPanel parent, Profile profile, String profileFile)
 	{	super(container, parent);
 		this.profile = profile;
 		this.profileFile = profileFile;
-		this.profilesConfiguration = profilesConfiguration;
 	
 		// layout
 		BoxLayout layout = new BoxLayout(this,BoxLayout.PAGE_AXIS); 
@@ -102,7 +100,7 @@ public class EditProfileMenu extends InnerMenuPanel
  * >> tout gérer au niveau du premier menu, répertorier les changements ?	
  * au lieu d'envoyer le profil original, faut envoyer une copie directe, puis comparer la copie et l'enregistrer si modif					
  */
-						
+						ProfilesConfiguration profilesConfiguration = Configuration.getProfilesConfiguration();
 						profilesConfiguration.addProfile(profileFile,newProfile.getName());
 						ProfilesConfigurationSaver.saveProfilesConfiguration(profilesConfiguration);
 					}
