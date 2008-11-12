@@ -1,12 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <profiles xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="..\..\..\resources\schemas\profiles.xsd">
-	<general last="21" />
+	<general last="26" />
 	<list>
-		<profile file="19" name="Ne sert à rien23" />
 		<profile file="17" name="Şahin+Yıldırım" />
 		<profile file="18" name="Promeneur" />
 		<profile file="15" name="Kurtuluş+Özsoy" />
+		<profile file="25" name="ZZZZZZZZZ" />
 		<profile file="16" name="Okan+Yüksel" />
+		<profile file="26" name="AAAAAAAA" />
 		<profile file="13" name="Keçer+Yaman" />
 		<profile file="14" name="Kılıç+Pala" />
 		<profile file="11" name="Göksel+Mengeş" />

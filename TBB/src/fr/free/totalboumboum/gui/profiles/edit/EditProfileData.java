@@ -85,22 +85,24 @@ public class EditProfileData extends EntitledDataPanel implements MouseListener,
 		{	int w = getDataWidth();
 			int margin = GuiTools.subPanelMargin;
 			int lineHeight = (int)((getDataHeight() - ((LINE_COUNT+1)+1)*margin)/((float)(LINE_COUNT+1)));
-			int lineFontSize = GuiTools.getFontSize(height*GuiTools.FONT_RATIO);
+			int lineFontSize = GuiTools.getFontSize(lineHeight*GuiTools.FONT_RATIO);
 			int h = lineHeight*LINE_COUNT+margin*(LINE_COUNT+1);
 			int nameHeight = getDataHeight()-h-margin;
 			editPanel = new UntitledSubPanelLines(w,h,LINE_COUNT,false);
+			editPanel.setOpaque(false);
 
 			// main panel
-			{	BoxLayout layout = new BoxLayout(this,BoxLayout.PAGE_AXIS); 
+			{	BoxLayout layout = new BoxLayout(dataPart,BoxLayout.PAGE_AXIS); 
 				dataPart.setLayout(layout);
 				dataPart.add(Box.createRigidArea(new Dimension(margin,margin)));
 			}
 			
 			// NAME
 			{	JPanel namePanel = new JPanel();
-				{	namePanel.setBackground(GuiTools.COLOR_COMMON_BACKGROUND);
-					BoxLayout layout = new BoxLayout(namePanel,BoxLayout.LINE_AXIS);
+				{	BoxLayout layout = new BoxLayout(namePanel,BoxLayout.LINE_AXIS);
 					namePanel.setLayout(layout);
+					namePanel.setOpaque(false);
+					//namePanel.setBackground(GuiTools.COLOR_COMMON_BACKGROUND);
 					Dimension dim = new Dimension(w,nameHeight);
 					namePanel.setMinimumSize(dim);
 					namePanel.setPreferredSize(dim);
@@ -113,6 +115,7 @@ public class EditProfileData extends EntitledDataPanel implements MouseListener,
 					label.setMinimumSize(dim);
 					label.setPreferredSize(dim);
 					label.setMaximumSize(dim);
+					label.setOpaque(true);
 					Color bg = GuiTools.COLOR_TABLE_HEADER_BACKGROUND;
 					label.setBackground(bg);
 					String key = GuiTools.MENU_PROFILES_EDIT_NAME;
@@ -123,6 +126,7 @@ public class EditProfileData extends EntitledDataPanel implements MouseListener,
 					icon = ImageTools.resize(icon,zoom,true);
 					ImageIcon icn = new ImageIcon(icon);
 					label.setText(null);
+					namePanel.add(label);
 					label.setIcon(icn);		
 				}				
 				namePanel.add(Box.createRigidArea(new Dimension(margin,margin)));
@@ -150,13 +154,15 @@ public class EditProfileData extends EntitledDataPanel implements MouseListener,
 					Color fg = GuiTools.COLOR_TABLE_REGULAR_FOREGROUND;
 					textPane.setForeground(fg);
 					sa = new SimpleAttributeSet();
-					StyleConstants.setAlignment(sa,StyleConstants.ALIGN_LEFT/*JUSTIFIED*/);
+					StyleConstants.setAlignment(sa,StyleConstants.ALIGN_CENTER/*JUSTIFIED*/);
 					Font font = GuiConfiguration.getMiscConfiguration().getFont().deriveFont((float)(lineFontSize));
 					StyleConstants.setFontFamily(sa,font.getFamily());
 					StyleConstants.setFontSize(sa,font.getSize());
+					StyleConstants.setForeground(sa,fg);
 					doc = textPane.getStyledDocument();
-					doc.setCharacterAttributes(0,doc.getLength()+1,sa,true);
+					doc.setParagraphAttributes(0,doc.getLength()+1,sa,true);
 					doc.addDocumentListener(this);
+					namePanel.add(textPane);
 				}
 				namePanel.add(Box.createRigidArea(new Dimension(margin,margin)));
 				dataPart.add(namePanel);
@@ -463,6 +469,7 @@ public class EditProfileData extends EntitledDataPanel implements MouseListener,
 		try
 		{	doc.remove(0,doc.getLength());
 			doc.insertString(0,text,sa);
+			doc.setParagraphAttributes(0,doc.getLength()+1,sa,true);
 		}
 		catch (BadLocationException e)
 		{	e.printStackTrace();
@@ -523,8 +530,10 @@ public class EditProfileData extends EntitledDataPanel implements MouseListener,
 	public void insertUpdate(DocumentEvent e)
 	{	Document document = e.getDocument();
 		try
-		{	String name = document.getText(0,document.getLength());
+		{	//doc.setParagraphAttributes(0,doc.getLength()+1,sa,true);
+			String name = document.getText(0,document.getLength());
 			profile.setName(name);
+			textPane.setToolTipText(name);
 		}
 		catch (BadLocationException e1)
 		{	e1.printStackTrace();
@@ -537,6 +546,7 @@ public class EditProfileData extends EntitledDataPanel implements MouseListener,
 		try
 		{	String name = document.getText(0,document.getLength());
 			profile.setName(name);
+			textPane.setToolTipText(name);
 		}
 		catch (BadLocationException e1)
 		{	e1.printStackTrace();

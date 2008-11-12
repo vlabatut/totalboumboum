@@ -93,13 +93,6 @@ public class EditProfileMenu extends InnerMenuPanel
 				{	ProfileSaver.saveProfile(newProfile,profileFile);
 					if(!profile.getName().equals(newProfile.getName()))
 					{	//ProfilesConfiguration profilesConfiguration = Configuration.getProfilesConfiguration();
-
-						
-/*
- * TODO PB : annuler au niveau du premier menu une action qui a été enregistrée dans un profil au niveau de l'édition de profil
- * >> tout gérer au niveau du premier menu, répertorier les changements ?	
- * au lieu d'envoyer le profil original, faut envoyer une copie directe, puis comparer la copie et l'enregistrer si modif					
- */
 						ProfilesConfiguration profilesConfiguration = Configuration.getProfilesConfiguration();
 						profilesConfiguration.addProfile(profileFile,newProfile.getName());
 						ProfilesConfigurationSaver.saveProfilesConfiguration(profilesConfiguration);

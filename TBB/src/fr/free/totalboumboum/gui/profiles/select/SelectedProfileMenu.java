@@ -116,6 +116,7 @@ public class SelectedProfileMenu extends InnerMenuPanel
 				// rebuild panel
 				profileData = new SelectedProfileData(container);
 				container.setDataPart(profileData);
+				profileData.setSelectedProfile(fileName);
 			}
 			catch (ParserConfigurationException e1)
 			{	e1.printStackTrace();
