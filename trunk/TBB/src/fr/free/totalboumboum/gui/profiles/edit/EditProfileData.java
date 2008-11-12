@@ -32,7 +32,11 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.image.BufferedImage;
 
+import javax.swing.Box;
+import javax.swing.BoxLayout;
+import javax.swing.ImageIcon;
 import javax.swing.JLabel;
+import javax.swing.JPanel;
 import javax.swing.JTextPane;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
@@ -52,17 +56,17 @@ import fr.free.totalboumboum.gui.data.configuration.GuiConfiguration;
 import fr.free.totalboumboum.gui.profiles.ais.SelectedAiSplitPanel;
 import fr.free.totalboumboum.gui.profiles.heroes.SelectedHeroSplitPanel;
 import fr.free.totalboumboum.gui.tools.GuiTools;
+import fr.free.totalboumboum.tools.ImageTools;
 
 public class EditProfileData extends EntitledDataPanel implements MouseListener, DocumentListener
 {	
 	private static final long serialVersionUID = 1L;
 	
-	private static final int LINE_COUNT = 20;
+	private static final int LINE_COUNT = 19;
 
-	private static final int LINE_NAME = 0;
-	private static final int LINE_AI = 1;
-	private static final int LINE_HERO = 2;
-	private static final int LINE_COLOR = 3;
+	private static final int LINE_AI = 0;
+	private static final int LINE_HERO = 1;
+	private static final int LINE_COLOR = 2;
 
 	private Profile profile;
 	private UntitledSubPanelLines editPanel;
@@ -79,23 +83,50 @@ public class EditProfileData extends EntitledDataPanel implements MouseListener,
 	
 		// data
 		{	int w = getDataWidth();
-			int h = getDataHeight();
+			int margin = GuiTools.subPanelMargin;
+			int lineHeight = (int)((getDataHeight() - ((LINE_COUNT+1)+1)*margin)/((float)(LINE_COUNT+1)));
+			int lineFontSize = GuiTools.getFontSize(height*GuiTools.FONT_RATIO);
+			int h = lineHeight*LINE_COUNT+margin*(LINE_COUNT+1);
+			int nameHeight = getDataHeight()-h-margin;
 			editPanel = new UntitledSubPanelLines(w,h,LINE_COUNT,false);
-		
+
+			// main panel
+			{	BoxLayout layout = new BoxLayout(this,BoxLayout.PAGE_AXIS); 
+				dataPart.setLayout(layout);
+				dataPart.add(Box.createRigidArea(new Dimension(margin,margin)));
+			}
+			
 			// NAME
-			{	Line ln = editPanel.getLine(LINE_NAME);
-				ln.addLabel(0);
-				ln.addLabel(0);
-				int col = 0;
-				// icon
-				{	ln.setLabelMinWidth(col,ln.getHeight());
-					ln.setLabelMaxWidth(col,ln.getHeight());
-					ln.setLabelKey(col,GuiTools.MENU_PROFILES_EDIT_NAME,true);
-					Color bg = GuiTools.COLOR_TABLE_HEADER_BACKGROUND;
-					ln.setLabelBackground(col,bg);
-					col++;
+			{	JPanel namePanel = new JPanel();
+				{	namePanel.setBackground(GuiTools.COLOR_COMMON_BACKGROUND);
+					BoxLayout layout = new BoxLayout(namePanel,BoxLayout.LINE_AXIS);
+					namePanel.setLayout(layout);
+					Dimension dim = new Dimension(w,nameHeight);
+					namePanel.setMinimumSize(dim);
+					namePanel.setPreferredSize(dim);
+					namePanel.setMaximumSize(dim);		
 				}
-				// value
+				namePanel.add(Box.createRigidArea(new Dimension(margin,margin)));
+				// icon
+				{	JLabel label = new JLabel();
+					Dimension dim = new Dimension(nameHeight,nameHeight);
+					label.setMinimumSize(dim);
+					label.setPreferredSize(dim);
+					label.setMaximumSize(dim);
+					Color bg = GuiTools.COLOR_TABLE_HEADER_BACKGROUND;
+					label.setBackground(bg);
+					String key = GuiTools.MENU_PROFILES_EDIT_NAME;
+					String tooltip = GuiConfiguration.getMiscConfiguration().getLanguage().getText(key+GuiTools.TOOLTIP);
+					label.setToolTipText(tooltip);
+					BufferedImage icon = GuiTools.getIcon(key);
+					double zoom = nameHeight/(double)icon.getHeight();
+					icon = ImageTools.resize(icon,zoom,true);
+					ImageIcon icn = new ImageIcon(icon);
+					label.setText(null);
+					label.setIcon(icn);		
+				}				
+				namePanel.add(Box.createRigidArea(new Dimension(margin,margin)));
+				// text pane
 				{	textPane = new JTextPane()
 					{	private static final long serialVersionUID = 1L;
 						public void paintComponent(Graphics g)
@@ -107,8 +138,8 @@ public class EditProfileData extends EntitledDataPanel implements MouseListener,
 					};
 					textPane.setEditable(true);
 					textPane.setOpaque(true);
-					int lnH = ln.getHeight();
-					int lnW = ln.getWidth() - GuiTools.subPanelMargin - ln.getHeight();
+					int lnH = nameHeight;
+					int lnW = w - 3*margin - nameHeight;
 					Dimension dim = new Dimension(lnW,lnH);
 					textPane.setPreferredSize(dim);
 					textPane.setMinimumSize(dim);
@@ -120,29 +151,15 @@ public class EditProfileData extends EntitledDataPanel implements MouseListener,
 					textPane.setForeground(fg);
 					sa = new SimpleAttributeSet();
 					StyleConstants.setAlignment(sa,StyleConstants.ALIGN_LEFT/*JUSTIFIED*/);
-					Font font = GuiConfiguration.getMiscConfiguration().getFont().deriveFont((float)(ln.getLineFontSize()));
+					Font font = GuiConfiguration.getMiscConfiguration().getFont().deriveFont((float)(lineFontSize));
 					StyleConstants.setFontFamily(sa,font.getFamily());
 					StyleConstants.setFontSize(sa,font.getSize());
 					doc = textPane.getStyledDocument();
 					doc.setCharacterAttributes(0,doc.getLength()+1,sa,true);
 					doc.addDocumentListener(this);
-					int index = col*2+1;
-					ln.remove(index);
-					ln.add(textPane,index);
-					col++;
 				}
-/*				
- 				// change
-				{	ln.setLabelMinWidth(col,ln.getHeight());
-					ln.setLabelMaxWidth(col,ln.getHeight());
-					ln.setLabelKey(col,GuiTools.MENU_PROFILES_EDIT_NAME_CHANGE,true);
-					Color bg = GuiTools.COLOR_TABLE_REGULAR_BACKGROUND;
-					ln.setLabelBackground(col,bg);
-					JLabel label = editPanel.getLabel(LINE_NAME,col);
-					label.addMouseListener(this);
-					col++;
-				}
-*/				
+				namePanel.add(Box.createRigidArea(new Dimension(margin,margin)));
+				dataPart.add(namePanel);
 			}
 
 			// AI
@@ -292,7 +309,7 @@ public class EditProfileData extends EntitledDataPanel implements MouseListener,
 			refreshData();
 		}
 		
-		setDataPart(editPanel);
+		dataPart.add(editPanel);
 	}
 
 	private void refreshColor(int colorIndex)
@@ -353,11 +370,7 @@ public class EditProfileData extends EntitledDataPanel implements MouseListener,
 	{	JLabel label = (JLabel)e.getComponent();
 		int[] pos = editPanel.getLabelPosition(label);
 		switch(pos[0])
-		{	// NAME
-			case LINE_NAME:
-				//en fait, non
-				break;
-			// AI
+		{	// AI
 			case LINE_AI:
 				if(pos[1]==3)
 				{	profile.setAiName(null);
