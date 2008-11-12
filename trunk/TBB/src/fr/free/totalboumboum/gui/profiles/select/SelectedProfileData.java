@@ -25,9 +25,12 @@ import java.awt.Color;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.io.IOException;
+import java.text.Collator;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.Iterator;
+import java.util.Locale;
 import java.util.Map.Entry;
 
 import javax.swing.Box;
@@ -96,7 +99,7 @@ public class SelectedProfileData extends EntitledDataPanel implements MouseListe
 			leftWidth = (int)(dataWidth*SPLIT_RATIO); 
 			int rightWidth = dataWidth - leftWidth - margin; 
 			mainPanel.setOpaque(false);
-			profilesConfiguration = Configuration.getProfilesConfiguration().copy();
+			profilesConfiguration = Configuration.getProfilesConfiguration();
 			initProfiles();
 			
 			// list panel
@@ -124,7 +127,8 @@ public class SelectedProfileData extends EntitledDataPanel implements MouseListe
 			{	int result;
 				String name0 = arg0.getValue();
 				String name1 = arg1.getValue();
-				result = name0.compareTo(name1);
+				Collator collator = Collator.getInstance(Locale.ENGLISH);
+				result = collator.compare(name0,name1);
 				return result;
 			}
 		});
@@ -378,5 +382,26 @@ public class SelectedProfileData extends EntitledDataPanel implements MouseListe
 	}
 	public String getSelectedProfileFile()
 	{	return selectedProfileFile;
+	}
+
+	public void setSelectedProfile(String fileName)
+	{	Iterator<Entry<String,String>> it = profiles.iterator();
+		boolean found = false;
+		int index = 0;
+		while(it.hasNext() && !found)
+		{	Entry<String,String> entry = it.next();
+			if(entry.getKey().equalsIgnoreCase(fileName))
+				found = true;
+			else
+				index++;
+		}
+		if(found)
+		{	currentPage = index/(LIST_LINE_COUNT-2);
+			refreshList();
+			unselectList();
+			selectedRow = index%(LIST_LINE_COUNT-2)+1;
+			listPanels.get(currentPage).setLabelBackground(selectedRow,0,GuiTools.COLOR_TABLE_SELECTED_BACKGROUND);
+			refreshPreview();
+		}
 	}
 }
