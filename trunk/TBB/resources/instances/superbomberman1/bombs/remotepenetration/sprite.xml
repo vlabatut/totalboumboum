@@ -5,8 +5,6 @@
 
 	<general name="Remote control penetration bomb" />
 
-	<preview file="preview.gif" />
-
 	<explosion name="penetration" />
 
 </sprite>

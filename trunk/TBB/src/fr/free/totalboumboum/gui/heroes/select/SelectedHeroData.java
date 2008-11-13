@@ -305,7 +305,7 @@ public class SelectedHeroData extends EntitledDataPanel implements MouseListener
 			// page up
 			{	Color bg = GuiTools.COLOR_TABLE_HEADER_BACKGROUND;
 				listPanel.setLabelBackground(LIST_LINE_PREVIOUS,0,bg);
-				String key = GuiTools.MENU_HERO_SELECT_CLASS_PAGEUP;
+				String key = GuiTools.MENU_HERO_SELECT_FOLDER_PAGEUP;
 				listPanel.setLabelKey(LIST_LINE_PREVIOUS,0,key,true);
 				JLabel label = listPanel.getLabel(LIST_LINE_PREVIOUS,0);
 				label.addMouseListener(this);
@@ -313,7 +313,7 @@ public class SelectedHeroData extends EntitledDataPanel implements MouseListener
 			// parent
 			{	Color bg = GuiTools.COLOR_TABLE_HEADER_BACKGROUND;
 				listPanel.setLabelBackground(LIST_LINE_PARENT,0,bg);
-				String key = GuiTools.MENU_HERO_SELECT_CLASS_PARENT;
+				String key = GuiTools.MENU_HERO_SELECT_FOLDER_PARENT;
 				listPanel.setLabelKey(LIST_LINE_PARENT,0,key,false);
 				JLabel label = listPanel.getLabel(LIST_LINE_PARENT,0);
 				label.addMouseListener(this);
@@ -321,7 +321,7 @@ public class SelectedHeroData extends EntitledDataPanel implements MouseListener
 			// page down
 			{	Color bg = GuiTools.COLOR_TABLE_HEADER_BACKGROUND;
 				listPanel.setLabelBackground(LIST_LINE_NEXT,0,bg);
-				String key = GuiTools.MENU_HERO_SELECT_CLASS_PAGEDOWN;
+				String key = GuiTools.MENU_HERO_SELECT_FOLDER_PAGEDOWN;
 				listPanel.setLabelKey(LIST_LINE_NEXT,0,key,true);
 				JLabel label = listPanel.getLabel(LIST_LINE_NEXT,0);
 				label.addMouseListener(this);

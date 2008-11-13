@@ -71,6 +71,35 @@
 			</group>
 		</group>	
 
+<!-- LEVEL MENU -->	
+		<group name="Level">
+			<group name="Button">
+				<text name="Back" value="Retour" tooltip="Revenir au menu principal" />
+			</group>		
+			<group name="Select">
+				<text name="Title" value="Liste des niveaux" tooltip="Liste des niveaux disponibles" />
+				<group name="Folder">
+					<text name="PageDown" value="Descendre" tooltip="Revenir à la page de niveaux suivante" />
+					<text name="PageUp" value="Monter" tooltip="Aller à la page de niveaux précédente" />
+					<text name="Parent" value=".." tooltip="Revenir à la liste des paquets" />
+				</group>
+				<group name="Package">
+					<text name="PageDown" value="Descendre" tooltip="Revenir à la page de paquets suivante" />
+					<text name="PageUp" value="Monter" tooltip="Aller à la page de paquets précédente" />
+				</group>
+				<group name="Preview">
+					<text name="Author" value="Auteur"  tooltip="Auteur/ripper de ce niveau" />
+					<text name="Image" value="Prévisualisation" tooltip="Prévisualisation de ce niveau" />
+					<text name="Instance" value="Instance" tooltip="Instance utilisée dans ce niveau" />
+					<text name="Name" value="Nom" tooltip="Nom de ce niveau" />
+					<text name="Package" value="Paquet" tooltip="Paquet contenant ce niveau" />
+					<text name="Size" value="Dimension"  tooltip="Dimension de la zone de jeu visible" />
+					<text name="Source" value="Source"  tooltip="Source de ce niveau (création originale ou extrait d'un jeu existant)" />
+					<text name="Theme" value="Thème"  tooltip="Thème utilisé dans ce niveau" />
+				</group>
+			</group>
+		</group>	
+
 <!-- OPTIONS MENU -->
 		<group name="Options">
 			<group name="Button">
@@ -553,7 +582,10 @@
 						<text name="Time" value="Temps"  tooltip="Utilise le temps de jeu pour cette manche" />
 					</group>
 				</group>
-				
+
+				<group name="Preview">
+					<text name="Title" value="Aperçu"  tooltip="Aperçu du niveau" />
+				</group>
 			</group>
 								
 			<group name="Results">

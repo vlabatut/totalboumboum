@@ -39,24 +39,26 @@ import fr.free.totalboumboum.tools.XmlTools;
 public class LevelPreviewLoader
 {
 
-    public static LevelPreview previewLevel(String folder) throws ParserConfigurationException, SAXException, IOException, ClassNotFoundException    
+    public static LevelPreview loadLevelPreview(String pack, String folder) throws ParserConfigurationException, SAXException, IOException, ClassNotFoundException    
     {	// init
     	String schemaFolder = FileTools.getSchemasPath();
-		String individualFolder = FileTools.getLevelsPath()+File.separator+folder;
+		String individualFolder = FileTools.getLevelsPath()+File.separator+pack+File.separator+folder;
 		File schemaFile,dataFile;
 		// opening
 		dataFile = new File(individualFolder+File.separator+FileTools.FILE_LEVEL+FileTools.EXTENSION_DATA);
 		schemaFile = new File(schemaFolder+File.separator+FileTools.FILE_LEVEL+FileTools.EXTENSION_SCHEMA);
 		Element root = XmlTools.getRootFromFile(dataFile,schemaFile);
 		// loading
-		LevelPreview result = previewLevelElement(individualFolder,root);
+		LevelPreview result = new LevelPreview();
+		result.setPack(pack);
+		result.setPack(folder);
+		loadLevelElement(individualFolder,root,result);
 		return result;
     }
 
-    private static LevelPreview previewLevelElement(String folder, Element root) throws ParserConfigurationException, SAXException, IOException, ClassNotFoundException
+    private static void loadLevelElement(String folder, Element root, LevelPreview result) throws ParserConfigurationException, SAXException, IOException, ClassNotFoundException
 	{	// init
 		Element element;
-		LevelPreview result = new LevelPreview();
 		
 		// misc
 		element = root.getChild(XmlTools.ELT_TITLE);
@@ -95,7 +97,5 @@ public class LevelPreviewLoader
 		String itemFolder = instanceFolder + File.separator+FileTools.FOLDER_ITEMS;
 		ItemsetPreview itemsetPreview = ItemsetPreviewLoader.loadItemsetPreview(itemFolder);
 		result.setItemsetPreview(itemsetPreview);
-
-		return result;
 	}
 }

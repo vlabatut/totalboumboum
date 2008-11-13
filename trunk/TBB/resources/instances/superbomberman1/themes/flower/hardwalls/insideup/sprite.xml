@@ -4,7 +4,5 @@
 	xsi:noNamespaceSchemaLocation="..\..\..\..\..\..\schemas\sprite.xsd">
 	
 	<general name="Inside up" />
-	
-	<preview file="preview.gif" />
 
 </sprite>

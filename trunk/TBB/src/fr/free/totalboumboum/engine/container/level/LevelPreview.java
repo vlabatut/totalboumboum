@@ -71,9 +71,30 @@ public class LevelPreview
 	}
 	
 	/////////////////////////////////////////////////////////////////
+	// LOCATION			/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	private String folder;
+	private String pack;
+	
+	public String getFolder()
+	{	return folder;
+	}
+	
+	public void setFolder(String folder)
+	{	this.folder = folder;
+	}
+	
+	public String getPack()
+	{	return pack;
+	}
+	
+	public void setPack(String pack)
+	{	this.pack = pack;
+	}
+
+	/////////////////////////////////////////////////////////////////
 	// ITEMSET PREVIEW	/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-
 	private ItemsetPreview itemsetPreview;
 
 	public ItemsetPreview getItemsetPreview()
@@ -95,18 +116,5 @@ public class LevelPreview
 	public void setInitialItems(HashMap<String, Integer> initialItems)
 	{	this.initialItems = initialItems;
 	}
-/*	
-	/////////////////////////////////////////////////////////////////
-	// LEVEL ITEMS	/////////////////////////////////////////////
-	/////////////////////////////////////////////////////////////////
 
-	private HashMap<String,Integer> levelItems;
-
-	public HashMap<String, Integer> getLevelItems()
-	{	return levelItems;
-	}
-	public void setLevelItems(HashMap<String, Integer> levelItems)
-	{	this.levelItems = levelItems;
-	}
-*/	
 }
