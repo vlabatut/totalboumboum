@@ -51,7 +51,7 @@
 			</group>		
 			<group name="Select">
 				<text name="Title" value="List of characters" tooltip="List of all available characters" />
-				<group name="Class">
+				<group name="Folder">
 					<text name="PageDown" value="Page down" tooltip="Go to the next characters page" />
 					<text name="PageUp" value="Page up" tooltip="Go back to the previous characters page" />
 					<text name="Parent" value=".." tooltip="Go back to the packages list" />
@@ -67,6 +67,35 @@
 					<text name="Name" value="Name" tooltip="Name of this character" />
 					<text name="Package" value="Package" tooltip="Package containing this character" />
 					<text name="Source" value="Source"  tooltip="Source of this character (original work or ripped from some existing game)" />
+				</group>
+			</group>
+		</group>	
+
+<!-- LEVEL MENU -->	
+		<group name="Level">
+			<group name="Button">
+				<text name="Back" value="Back" tooltip="Go back to the main menu" />
+			</group>		
+			<group name="Select">
+				<text name="Title" value="List of levels" tooltip="List of all available levels" />
+				<group name="Folder">
+					<text name="PageDown" value="Page down" tooltip="Go to the next levels page" />
+					<text name="PageUp" value="Page up" tooltip="Go back to the previous levels page" />
+					<text name="Parent" value=".." tooltip="Go back to the packages list" />
+				</group>
+				<group name="Package">
+					<text name="PageDown" value="Page down" tooltip="Go to the next packages page" />
+					<text name="PageUp" value="Page up" tooltip="Go back to the previous packages page" />
+				</group>
+				<group name="Preview">
+					<text name="Author" value="Author"  tooltip="Author/ripper of this level" />
+					<text name="Image" value="Preview" tooltip="Preview of this level" />
+					<text name="Instance" value="Instance" tooltip="Instance used in this level" />
+					<text name="Name" value="Name" tooltip="Name of this level" />
+					<text name="Package" value="Package" tooltip="Package containing this level" />
+					<text name="Size" value="Size"  tooltip="Size of the visible play zone" />
+					<text name="Source" value="Source"  tooltip="Source of this level (original work or ripped from some existing game)" />
+					<text name="Theme" value="Theme"  tooltip="Theme used in this level" />
 				</group>
 			</group>
 		</group>	
@@ -555,6 +584,9 @@
 					</group>
 				</group>
 				
+				<group name="Preview">
+					<text name="Title" value="Preview"  tooltip="Level preview" />
+				</group>
 			</group>
 								
 			<group name="Results">

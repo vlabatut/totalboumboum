@@ -5,8 +5,6 @@
 
 	<general name="Normal bomb" />
 
-	<preview file="preview.gif" />
-
 	<explosion name="normal" />
 
 </sprite>

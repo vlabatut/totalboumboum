@@ -50,7 +50,6 @@ import fr.free.totalboumboum.tools.XmlTools;
 public class HollowLevel
 {
     private Level level;
-    private String levelFolder;
     
     private boolean displayForceAll;
 	private boolean displayMaximize;
@@ -70,6 +69,7 @@ public class HollowLevel
 	private String instanceName;
 	private String themeName;
 	private String packName;
+	private String folderName;
 
 	private HollowLevel()
 	{		
@@ -78,7 +78,7 @@ public class HollowLevel
 	public HollowLevel(String folder) throws ParserConfigurationException, SAXException, IOException, ClassNotFoundException
 	{	// init
 		packName = folder.substring(0,folder.indexOf(File.separator));
-		levelFolder = folder;
+		folderName = folder.substring(folder.indexOf(File.separator+1,folder.length()));
 		String schemaFolder = FileTools.getSchemasPath();
 		String individualFolder = FileTools.getLevelsPath()+File.separator+folder;
 		File schemaFile,dataFile;
@@ -161,11 +161,10 @@ public class HollowLevel
     	result.itemPath = itemPath;
     	result.bombsetPath = bombsetPath;
     	result.players = players;
-    	result.levelFolder = levelFolder;
-    	result.levelFolder = levelFolder;
-    	result.instanceName = instanceName;
+      	result.instanceName = instanceName;
     	result.themeName = themeName;
     	result.packName = packName;
+    	result.folderName = folderName;
     	//
     	return result;
     }
@@ -175,10 +174,6 @@ public class HollowLevel
     }
     public String getInstancePath()
     {	return instancePath;
-    }
-    
-    public String getLevelFolder()
-    {	return levelFolder;
     }
     
     public Zone getZone()
@@ -192,6 +187,9 @@ public class HollowLevel
     {	return themeName;
     }
     public String getPackName()
+    {	return packName;
+    }
+    public String getFolderName()
     {	return packName;
     }
     public int getVisibleHeight()
@@ -341,6 +339,5 @@ public class HollowLevel
     	players = null;
     	themePath = null;
     	zone = null;
-    	levelFolder = null;
     }
 }

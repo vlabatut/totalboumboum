@@ -93,7 +93,7 @@ public class RoundDescription extends EntitledDataPanel
 			HollowLevel hollowLevel = round.getHollowLevel();
 			LevelPreview preview = null;
 			try
-			{	preview = LevelPreviewLoader.previewLevel(hollowLevel.getLevelFolder());
+			{	preview = LevelPreviewLoader.loadLevelPreview(hollowLevel.getPackName(),hollowLevel.getFolderName());
 			}
 			catch (ParserConfigurationException e)
 			{	e.printStackTrace();
@@ -225,8 +225,10 @@ public class RoundDescription extends EntitledDataPanel
 	private JLabel makePreviewLabel(int width, int height, LevelPreview levelPreview)
 	{	// init
 		JLabel result = new JLabel();
-		String text = "No preview";
-		String tooltip = "Zone preview";
+		//String text = "No preview";
+		String text = GuiConfiguration.getMiscConfiguration().getLanguage().getText(GuiTools.GAME_ROUND_DESCRIPTION_PREVIEW_TITLE);
+		//String tooltip = "Zone preview";
+		String tooltip = GuiConfiguration.getMiscConfiguration().getLanguage().getText(GuiTools.GAME_ROUND_DESCRIPTION_PREVIEW_TITLE+GuiTools.TOOLTIP);
 		result.setText(text);
 		result.setToolTipText(tooltip);
 		Dimension dim = new Dimension(width,height);
