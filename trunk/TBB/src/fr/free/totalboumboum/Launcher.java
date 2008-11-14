@@ -657,7 +657,8 @@ public class Launcher
 	 * - nouveauté : traduction des couleurs dans l'interface
 	 * - nouveauté : visualisation des IA
 	 * - nouveauté : possibilité de ranger les 16 couleurs par ordre de préférence (au lieu de définir une seule couleur dans son profil)
-	 * - nouveauté : preview intégrée dans chaque sprite
+	 * - nouveauté : visualisation des personnages
+	 * - nouveauté : visualisation des niveaux
 	 * 
 	 * *******************************************************
 	 * *********************** A FAIRE ***********************
