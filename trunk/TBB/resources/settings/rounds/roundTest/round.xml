@@ -17,6 +17,6 @@
 	
 	<points local="false" name="basicSurvival" />
 	
-	<level packname="superbomberman1" name="battle_01" />
+	<level packname="sbm1Official" name="battle_01" />
 
 </round>
