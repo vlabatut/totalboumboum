@@ -701,6 +701,13 @@ public class Launcher
 	 * - bug d'affichage dans les notes d'IA, les accents sont affichés avec la police par défaut
 	 * 
 	 * - bug de gameplay : quand deux persos meurent dans le même cycle, le moteur considère une précédence temporelle alors qu'il n'y en a pas
+	 * 
+	 * - stats : nombre de fois qu'un level a été joué
+	 * 
+	 * - champ en plus dans les profils : le classement du joueur, nbre de rouds gagnés/nbre de rounds joués
+	 * 
+	 * - dans les persos : % de rounds gagnés, ou bien nbre de rounds joués
+	 * 
 	 * -------------------------------------------------------------------
 	 * - calcul de points : introduire des variables comme le nombre de joueurs (pour définir un bonus pr le joueur qui fait un perfect en survival)
 	 * - gérer le shrink
