@@ -1,24 +1,31 @@
 <?xml version="1.0" encoding="utf-8"?>
 <players 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
-		xsi:noNamespaceSchemaLocation="..\..\..\xml\schemas\players.xsd" >
+		xsi:noNamespaceSchemaLocation="..\..\..\schemas\players.xsd" >
 	
-	<situation players="1">
-		<location player="0" col="1" line="1" />
-	</situation>
-	<situation players="2">
-		<location player="0" col="1" line="1" />
-		<location player="1" col="13" line="15" />
-	</situation>
-	<situation players="3">
-		<location player="0" col="1" line="1" />
-		<location player="1" col="13" line="1" />
-		<location player="2" col="1" line="15" />
-	</situation>
-	<situation players="4">
-		<location player="0" col="1" line="1" />
-		<location player="1" col="13" line="1" />
-		<location player="2" col="1" line="15" />
-		<location player="3" col="13" line="15" />
-	</situation>
+	<locations>
+		<case players="1">
+			<location player="0" col="1" line="1" />
+		</case>
+		<case players="2">
+			<location player="0" col="1" line="1" />
+			<location player="1" col="13" line="15" />
+		</case>
+		<case players="3">
+			<location player="0" col="1" line="1" />
+			<location player="1" col="13" line="1" />
+			<location player="2" col="1" line="15" />
+		</case>
+		<case players="4">
+			<location player="0" col="1" line="1" />
+			<location player="1" col="13" line="1" />
+			<location player="2" col="1" line="15" />
+			<location player="3" col="13" line="15" />
+		</case>
+	</locations>
+	
+	<items>
+		<item name="extrabomb" number="3" />
+		<item name="extraflame" number="3" />
+	</items>
 	
 </players>
