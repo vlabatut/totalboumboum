@@ -65,7 +65,7 @@ public class ProfilesConfigurationLoader
 			loadProfileElement(temp,result);
 		}
 result.addSelected("4");
-//result.addSelected("8");		
+result.addSelected("8");		
 result.addSelected("14");		
 result.addSelected("18");		
 result.addSelected("1");		
