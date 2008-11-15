@@ -78,7 +78,7 @@ public class HollowLevel
 	public HollowLevel(String folder) throws ParserConfigurationException, SAXException, IOException, ClassNotFoundException
 	{	// init
 		packName = folder.substring(0,folder.indexOf(File.separator));
-		folderName = folder.substring(folder.indexOf(File.separator+1,folder.length()));
+		folderName = folder.substring(folder.indexOf(File.separator)+1,folder.length());
 		String schemaFolder = FileTools.getSchemasPath();
 		String individualFolder = FileTools.getLevelsPath()+File.separator+folder;
 		File schemaFile,dataFile;
@@ -190,7 +190,7 @@ public class HollowLevel
     {	return packName;
     }
     public String getFolderName()
-    {	return packName;
+    {	return folderName;
     }
     public int getVisibleHeight()
     {	return visibleHeight;

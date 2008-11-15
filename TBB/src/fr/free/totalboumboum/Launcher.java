@@ -664,6 +664,12 @@ public class Launcher
 	 * *********************** A FAIRE ***********************
 	 * *******************************************************
 	 * 
+	 * - faire le classement lexicographique gérant les signes diacritiques partout où c'est nécessaire
+	 * 
+	 * - inutile de maintenir une liste des profils, ça peut se calculer au démarrage du jeu sans aucun problème 
+	 * 
+	 * - modifier le loader d'image de manière à ce qu'une image non-trouvée soit remplacée par la croix rouge
+	 * 
 	 * - utiliser les tooltips pour afficher les infos trop longues : calcul de points, nombre à virgule dans la colonne des points (décimales cachées), etc.
 	 * - pb de dimension de l'image de fond en fonction de la résolution... (zones pas peintes)
 	 * - results panel : quand il y a trop de rounds dans un match pour que ça rentre à l'écran, ne pas tout afficher

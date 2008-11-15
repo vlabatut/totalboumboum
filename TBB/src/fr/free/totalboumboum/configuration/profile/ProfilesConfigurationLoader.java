@@ -64,8 +64,8 @@ public class ProfilesConfigurationLoader
 		{	Element temp = i.next();
 			loadProfileElement(temp,result);
 		}
-result.addSelected("4");		
-result.addSelected("8");		
+result.addSelected("4");
+//result.addSelected("8");		
 result.addSelected("14");		
 result.addSelected("18");		
 result.addSelected("1");		

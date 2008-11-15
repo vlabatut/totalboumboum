@@ -32,6 +32,8 @@
 	<points local="false" name="basicMatch" />
  	
  	<rounds randomOrder="false" >
+  		<round local="false" name="roundTest" />
+
   		<round local="false" name="round00" />
   		<round local="false" name="round01" />
   		<round local="false" name="round02" />
