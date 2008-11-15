@@ -610,14 +610,14 @@
 		
 		<line pos="11">
 			<tile pos="0">
+				<block group="hardwalls" name="border" />
 			</tile>
 			<tile pos="1">
+				<block group="hardwalls" name="regular" />
 			</tile>
 			<tile pos="2">
-				<reference name="tile1" />
 			</tile>
 			<tile pos="3">
-				<reference name="tile1" />
 			</tile>
 			<tile pos="4">
 				<reference name="tile1" />
