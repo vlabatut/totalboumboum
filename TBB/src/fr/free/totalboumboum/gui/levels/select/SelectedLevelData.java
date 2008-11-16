@@ -21,7 +21,6 @@ package fr.free.totalboumboum.gui.levels.select;
  * 
  */
 
-import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Component;
 import java.awt.Dimension;
@@ -90,6 +89,8 @@ public class SelectedLevelData extends EntitledDataPanel implements MouseListene
 	private JLabel previewLabel;
 	private UntitledSubPanelTable infosPanel;
 	private SubPanel imagePanel;
+	private int imageLabelWidth;
+	private int imageLabelHeight;
 	private int listWidth;
 	private int listHeight;
 	
@@ -102,7 +103,7 @@ public class SelectedLevelData extends EntitledDataPanel implements MouseListene
 	private ArrayList<UntitledSubPanelTable> listLevelPanels;
 	private int currentLevelPage = 0;
 	private int selectedLevelRow = -1;
-	private ArrayList<LevelPreview> levelPreviews;
+	private LevelPreview selectedLevelPreview = null;
 		
 	private boolean packageMode = true; //false if levels are displayed 
 	
@@ -191,7 +192,7 @@ public class SelectedLevelData extends EntitledDataPanel implements MouseListene
 		};	
 		Collections.sort(levelPackageFiles,comparator);
 
-		// hevels
+		// levels
 		Iterator<File> p = levelPackageFiles.iterator();
 		while(p.hasNext())
 		{	// get the list of folders in this package
@@ -218,32 +219,6 @@ public class SelectedLevelData extends EntitledDataPanel implements MouseListene
 			if(levelFoldersTemp.size()>0)
 			{	levelFolders.add(levelFoldersTemp);
 				levelPackages.add(packageName);
-			}
-		}
-	}
-	
-	private void initLevelPreviews()
-	{	levelPreviews = new ArrayList<LevelPreview>();
-		int selectedPackageIndex = currentPackagePage*(LIST_LINE_COUNT-2)+(selectedPackageRow-1);
-		String packageName = levelPackages.get(selectedPackageIndex);
-		Iterator<String> it = levelFolders.get(selectedPackageIndex).iterator();
-		while(it.hasNext())
-		{	String folderName = it.next();
-			try
-			{	LevelPreview levelPreview = LevelPreviewLoader.loadLevelPreview(packageName,folderName);
-				levelPreviews.add(levelPreview);
-			}
-			catch (ParserConfigurationException e)
-			{	e.printStackTrace();
-			}
-			catch (SAXException e)
-			{	e.printStackTrace();
-			}
-			catch (IOException e)
-			{	e.printStackTrace();
-			}
-			catch (ClassNotFoundException e)
-			{	e.printStackTrace();
 			}
 		}
 	}
@@ -290,7 +265,8 @@ public class SelectedLevelData extends EntitledDataPanel implements MouseListene
 	private void makeFoldersListPanels(int width, int height)
 	{	int cols = 1;
 		listLevelPanels = new ArrayList<UntitledSubPanelTable>();
-		Iterator<LevelPreview> it = levelPreviews.iterator(); 
+		int selectedPackageIndex = currentPackagePage*(LIST_LINE_COUNT-2)+(selectedPackageRow-1);
+		Iterator<String> it = levelFolders.get(selectedPackageIndex).iterator();
 		for(int panelIndex=0;panelIndex<getFoldersPageCount();panelIndex++)
 		{	UntitledSubPanelTable listPanel = new UntitledSubPanelTable(width,height,cols,LIST_LINE_COUNT,false);
 			listPanel.setSubColumnsMaxWidth(0,Integer.MAX_VALUE);
@@ -299,9 +275,9 @@ public class SelectedLevelData extends EntitledDataPanel implements MouseListene
 			int line = LIST_LINE_PARENT+1;
 			while(line<LIST_LINE_NEXT && it.hasNext())
 			{	Color bg = GuiTools.COLOR_TABLE_REGULAR_BACKGROUND;
-				LevelPreview heroPreview = it.next();
+				String levelFolder = it.next();
 				listPanel.setLabelBackground(line,0,bg);
-				listPanel.setLabelText(line,0,heroPreview.getFolder(),heroPreview.getFolder());
+				listPanel.setLabelText(line,0,levelFolder,levelFolder);
 				JLabel label = listPanel.getLabel(line,0);
 				label.addMouseListener(this);
 				line++;
@@ -377,18 +353,21 @@ public class SelectedLevelData extends EntitledDataPanel implements MouseListene
 	private void makeImagePanel(int width, int height)
 	{	imagePanel = new SubPanel(width,height);
 		int margin = GuiTools.subPanelMargin;
-		
-		//Color bg = GuiTools.COLOR_TABLE_NEUTRAL_BACKGROUND;
-		//cl.setBackgroundColor(bg);
+		imagePanel.setBackground(GuiTools.COLOR_COMMON_BACKGROUND);
+		BoxLayout layout = new BoxLayout(imagePanel,BoxLayout.PAGE_AXIS);
+		imagePanel.setLayout(layout);
 
 		previewLabel = new JLabel();
-		imagePanel.add(previewLabel,BorderLayout.CENTER);
+		imagePanel.add(Box.createVerticalGlue());
+		imagePanel.add(previewLabel);
+		imagePanel.add(Box.createVerticalGlue());
 		previewLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
 		previewLabel.setAlignmentY(Component.CENTER_ALIGNMENT);
 
-		int labelHeight = height - 2*margin;
-		int labelWidth = width - 2*margin;
-		Dimension dim = new Dimension(width,height);
+		imageLabelHeight = height - 2*margin;
+		imageLabelWidth = width - 2*margin;
+		Dimension dim = new Dimension(imageLabelWidth,imageLabelHeight);
+		previewLabel.setMinimumSize(dim);
 		previewLabel.setPreferredSize(dim);
 		previewLabel.setMaximumSize(dim);
 		
@@ -397,10 +376,10 @@ public class SelectedLevelData extends EntitledDataPanel implements MouseListene
 		
 		String text = GuiConfiguration.getMiscConfiguration().getLanguage().getText(GuiTools.MENU_LEVEL_SELECT_PREVIEW_IMAGE);
 		String tooltip = GuiConfiguration.getMiscConfiguration().getLanguage().getText(GuiTools.MENU_LEVEL_SELECT_PREVIEW_IMAGE+GuiTools.TOOLTIP);
-		previewLabel.setText(text);
+		previewLabel.setText(null);
 		previewLabel.setToolTipText(tooltip);
 
-		int fontSize = GuiTools.getFontSize(labelWidth, labelHeight, text);
+		int fontSize = GuiTools.getFontSize(imageLabelWidth, imageLabelHeight, text);
 		Font font = GuiConfiguration.getMiscConfiguration().getFont().deriveFont((float)fontSize);
 		previewLabel.setFont(font);
 		previewLabel.setBackground(GuiTools.COLOR_TABLE_NEUTRAL_BACKGROUND);
@@ -421,17 +400,15 @@ public class SelectedLevelData extends EntitledDataPanel implements MouseListene
 		}
 		// one level selected
 		else
-		{	int index = (selectedLevelRow-2)+currentLevelPage*(LIST_LINE_COUNT-3);
-			LevelPreview levelPreview = levelPreviews.get(index);
-			// image
-			image = levelPreview.getVisualPreview();
+		{	// image
+			image = selectedLevelPreview.getVisualPreview();
 			// infos
 			try
-			{	HollowLevel hollowLevel = new HollowLevel(levelPreview.getPack()+File.separator+levelPreview.getFolder());
-				infosValues[VIEW_LINE_NAME] = levelPreview.getTitle();
-				infosValues[VIEW_LINE_PACK]= levelPreview.getPack();
-				infosValues[VIEW_LINE_AUTHOR] = levelPreview.getAuthor();
-				infosValues[VIEW_LINE_SOURCE] = levelPreview.getSource();
+			{	HollowLevel hollowLevel = new HollowLevel(selectedLevelPreview.getPack()+File.separator+selectedLevelPreview.getFolder());
+				infosValues[VIEW_LINE_NAME] = selectedLevelPreview.getTitle();
+				infosValues[VIEW_LINE_PACK]= selectedLevelPreview.getPack();
+				infosValues[VIEW_LINE_AUTHOR] = selectedLevelPreview.getAuthor();
+				infosValues[VIEW_LINE_SOURCE] = selectedLevelPreview.getSource();
 				infosValues[VIEW_LINE_INSTANCE] = hollowLevel.getInstanceName();
 				infosValues[VIEW_LINE_THEME] = hollowLevel.getThemeName();
 				infosValues[VIEW_LINE_SIZE] = Integer.toString(hollowLevel.getVisibleHeight())+new Character('\u00D7').toString()+Integer.toString(hollowLevel.getVisibleWidth());
@@ -458,8 +435,8 @@ public class SelectedLevelData extends EntitledDataPanel implements MouseListene
 		}
 		// image
 		if(image!=null)
-		{	float zoomX = width/(float)image.getWidth();
-			float zoomY = height/(float)image.getHeight();
+		{	float zoomX = imageLabelWidth/(float)image.getWidth();
+			float zoomY = imageLabelHeight/(float)image.getHeight();
 			float zoom = Math.min(zoomX,zoomY);
 			image = ImageTools.resize(image,zoom,true);
 			ImageIcon icon = new ImageIcon(image);
@@ -469,7 +446,7 @@ public class SelectedLevelData extends EntitledDataPanel implements MouseListene
 			previewLabel.setBackground(bg);
 		}
 		else
-		{	String text = GuiConfiguration.getMiscConfiguration().getLanguage().getText(GuiTools.MENU_LEVEL_SELECT_PREVIEW_IMAGE);
+		{	String text = null;//GuiConfiguration.getMiscConfiguration().getLanguage().getText(GuiTools.MENU_LEVEL_SELECT_PREVIEW_IMAGE);
 			String tooltip = GuiConfiguration.getMiscConfiguration().getLanguage().getText(GuiTools.MENU_LEVEL_SELECT_PREVIEW_IMAGE+GuiTools.TOOLTIP);
 			previewLabel.setText(text);
 			previewLabel.setToolTipText(tooltip);
@@ -533,14 +510,13 @@ public class SelectedLevelData extends EntitledDataPanel implements MouseListene
 					unselectList();
 					selectedPackageRow = pos[0];
 					listPackagePanels.get(currentPackagePage).setLabelBackground(selectedPackageRow,0,GuiTools.COLOR_TABLE_SELECTED_BACKGROUND);
-					initLevelPreviews();
 					makeFoldersListPanels(listWidth,listHeight);
 					packageMode = false;
 					currentLevelPage = 0;
 					refreshList();
 			}
 		}
-		// list = ai
+		// list = level
 		else
 		{	int[] pos = listLevelPanels.get(currentLevelPage).getLabelPosition(label);
 			switch(pos[0])
@@ -572,7 +548,7 @@ public class SelectedLevelData extends EntitledDataPanel implements MouseListene
 				default:
 					unselectList();
 					selectedLevelRow = pos[0];
-					//refreshList();
+					loadSelectedLevelPreview();
 					listLevelPanels.get(currentLevelPage).setLabelBackground(selectedLevelRow,0,GuiTools.COLOR_TABLE_SELECTED_BACKGROUND);
 					refreshPreview();
 			}
@@ -581,6 +557,31 @@ public class SelectedLevelData extends EntitledDataPanel implements MouseListene
 	@Override
 	public void mouseReleased(MouseEvent e)
 	{	
+	}
+	
+	private void loadSelectedLevelPreview()
+	{	// package
+		int selectedPackageIndex = currentPackagePage*(LIST_LINE_COUNT-2)+(selectedPackageRow-1);
+		String packageName = levelPackages.get(selectedPackageIndex);
+		// folder
+		int selectedFolderIndex = currentLevelPage*(LIST_LINE_COUNT-3)+(selectedLevelRow-2);
+		ArrayList<String> levelList = levelFolders.get(selectedPackageIndex);
+		String folderName = levelList.get(selectedFolderIndex);
+		try
+		{	selectedLevelPreview = LevelPreviewLoader.loadLevelPreview(packageName,folderName);
+		}
+		catch (ParserConfigurationException e)
+		{	e.printStackTrace();
+		}
+		catch (SAXException e)
+		{	e.printStackTrace();
+		}
+		catch (IOException e)
+		{	e.printStackTrace();
+		}
+		catch (ClassNotFoundException e)
+		{	e.printStackTrace();
+		}
 	}
 	
 	private int getPackagesPageCount()
@@ -593,8 +594,10 @@ public class SelectedLevelData extends EntitledDataPanel implements MouseListene
 	}
 	
 	private int getFoldersPageCount()
-	{	int result = levelPreviews.size()/(LIST_LINE_COUNT-2);
-		if(levelPreviews.size()%(LIST_LINE_COUNT-2)>0)
+	{	int selectedPackageIndex = currentPackagePage*(LIST_LINE_COUNT-2)+(selectedPackageRow-1);
+		int zize = levelFolders.get(selectedPackageIndex).size();
+		int result = zize/(LIST_LINE_COUNT-2);
+		if(result>0)
 			result++;
 		else if(result==0)
 			result = 1;
@@ -612,6 +615,7 @@ public class SelectedLevelData extends EntitledDataPanel implements MouseListene
 		else if(!packageMode && selectedLevelRow!=-1)
 		{	listLevelPanels.get(currentLevelPage).setLabelBackground(selectedLevelRow,0,GuiTools.COLOR_TABLE_REGULAR_BACKGROUND);
 			selectedLevelRow = -1;
+			selectedLevelPreview = null;
 			refreshPreview();
 		}
 	}
@@ -633,8 +637,7 @@ public class SelectedLevelData extends EntitledDataPanel implements MouseListene
 	}
 	
 	public LevelPreview getSelectedLevelPreview()
-	{	int index = currentLevelPage*(LIST_LINE_COUNT-2)+(selectedLevelRow-2);
-		return levelPreviews.get(index);
+	{	return selectedLevelPreview;
 	}
 
 }

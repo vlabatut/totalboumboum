@@ -51,7 +51,7 @@ public class LevelPreviewLoader
 		// loading
 		LevelPreview result = new LevelPreview();
 		result.setPack(pack);
-		result.setPack(folder);
+		result.setFolder(folder);
 		loadLevelElement(individualFolder,root,result);
 		return result;
     }
