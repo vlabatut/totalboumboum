@@ -25,6 +25,7 @@ import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 
 import javax.swing.Box;
 import javax.swing.BoxLayout;
@@ -72,13 +73,19 @@ public class SelectedProfileMenu extends InnerMenuPanel
 		// background
 		setBackground(GuiTools.COLOR_COMMON_BACKGROUND);
 
+		// sizes
+		int buttonWidth = getWidth();
+		int buttonHeight = GuiTools.buttonTextHeight;
+		ArrayList<String> texts = GuiKeys.getKeysLike(GuiKeys.MENU_TOURNAMENT_BUTTON);
+		int fontSize = GuiTools.getOptimalFontSize(buttonWidth, buttonHeight, texts);
+
 		// buttons
 		add(Box.createVerticalGlue());
-		buttonNew = GuiTools.createSecondaryVerticalMenuButton(GuiKeys.MENU_PROFILES_BUTTON_NEW,this);
-		buttonModify = GuiTools.createSecondaryVerticalMenuButton(GuiKeys.MENU_PROFILES_BUTTON_MODIFY,this);
-		buttonDelete = GuiTools.createSecondaryVerticalMenuButton(GuiKeys.MENU_PROFILES_BUTTON_DELETE,this);
-		add(Box.createRigidArea(new Dimension(0,GuiTools.getSize(GuiTools.MENU_VERTICAL_BUTTON_SPACE))));
-		buttonBack = GuiTools.createSecondaryVerticalMenuButton(GuiKeys.MENU_PROFILES_BUTTON_BACK,this);
+		buttonNew = GuiTools.createButton(GuiKeys.MENU_PROFILES_BUTTON_NEW,buttonWidth,buttonHeight,fontSize,this);
+		buttonModify = GuiTools.createButton(GuiKeys.MENU_PROFILES_BUTTON_MODIFY,buttonWidth,buttonHeight,fontSize,this);
+		buttonDelete = GuiTools.createButton(GuiKeys.MENU_PROFILES_BUTTON_DELETE,buttonWidth,buttonHeight,fontSize,this);
+		add(Box.createRigidArea(new Dimension(0,GuiTools.buttonVerticalSpace)));
+		buttonBack = GuiTools.createButton(GuiKeys.MENU_PROFILES_BUTTON_BACK,buttonWidth,buttonHeight,fontSize,this);
 		add(Box.createVerticalGlue());		
 
 		// panels

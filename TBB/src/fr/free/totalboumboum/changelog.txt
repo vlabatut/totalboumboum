@@ -130,3 +130,6 @@
 + beta.004
 - correction : bug du au Locale par défaut lors de la transformation d'une chaine de caractères en majuscules, quand la chaine contient des I ou des i et que la langue est le turc.
 
++ beta.005
+- modification : round dédié à l'évaluation de la partie 1
+- modification : schéma de zone permettant de ne pas forcément définir de variables de cases, et adaptation en conséquence de la classe chargeant ces variables

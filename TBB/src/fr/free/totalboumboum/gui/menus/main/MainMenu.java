@@ -26,6 +26,7 @@ import java.awt.Graphics;
 import java.awt.event.ActionEvent;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
+import java.util.ArrayList;
 
 import javax.swing.Box;
 import javax.swing.BoxLayout;
@@ -82,21 +83,27 @@ public class MainMenu extends SimpleMenuPanel
 		// background
 		image = GuiConfiguration.getMiscConfiguration().getBackground();
 		
+		// sizes
+		int buttonWidth = GuiTools.buttonTextWidth;
+		int buttonHeight = GuiTools.buttonTextHeight;
+		ArrayList<String> texts = GuiKeys.getKeysLike(GuiKeys.MENU_MAIN_BUTTON);
+		int fontSize = GuiTools.getOptimalFontSize(buttonWidth, buttonHeight, texts);
+		
 		// buttons
 		add(Box.createVerticalGlue());
-		buttonOptions = GuiTools.createPrincipalVerticalMenuButton(GuiKeys.MENU_MAIN_BUTTON_OPTIONS,this);
-		add(Box.createRigidArea(new Dimension(0,GuiTools.getSize(GuiTools.MENU_VERTICAL_BUTTON_SPACE))));
-		buttonProfiles = GuiTools.createPrincipalVerticalMenuButton(GuiKeys.MENU_MAIN_BUTTON_PROFILES,this);
-		buttonStats = GuiTools.createPrincipalVerticalMenuButton(GuiKeys.MENU_MAIN_BUTTON_STATISTICS,this);
+		buttonOptions = GuiTools.createButton(GuiKeys.MENU_MAIN_BUTTON_OPTIONS,buttonWidth,buttonHeight,fontSize,this);
+		add(Box.createRigidArea(new Dimension(0,GuiTools.buttonVerticalSpace)));
+		buttonProfiles = GuiTools.createButton(GuiKeys.MENU_MAIN_BUTTON_PROFILES,buttonWidth,buttonHeight,fontSize,this);
+		buttonStats = GuiTools.createButton(GuiKeys.MENU_MAIN_BUTTON_STATISTICS,buttonWidth,buttonHeight,fontSize,this);
 buttonStats.setEnabled(false);
-		buttonHeroes = GuiTools.createPrincipalVerticalMenuButton(GuiKeys.MENU_MAIN_BUTTON_HEROES,this);
-		buttonAi = GuiTools.createPrincipalVerticalMenuButton(GuiKeys.MENU_MAIN_BUTTON_AI,this);
-		buttonLevels = GuiTools.createPrincipalVerticalMenuButton(GuiKeys.MENU_MAIN_BUTTON_LEVELS,this);
-		buttonAbout = GuiTools.createPrincipalVerticalMenuButton(GuiKeys.MENU_MAIN_BUTTON_ABOUT,this);
+		buttonHeroes = GuiTools.createButton(GuiKeys.MENU_MAIN_BUTTON_HEROES,buttonWidth,buttonHeight,fontSize,this);
+		buttonAi = GuiTools.createButton(GuiKeys.MENU_MAIN_BUTTON_AI,buttonWidth,buttonHeight,fontSize,this);
+		buttonLevels = GuiTools.createButton(GuiKeys.MENU_MAIN_BUTTON_LEVELS,buttonWidth,buttonHeight,fontSize,this);
+		buttonAbout = GuiTools.createButton(GuiKeys.MENU_MAIN_BUTTON_ABOUT,buttonWidth,buttonHeight,fontSize,this);
 buttonAbout.setEnabled(false);
-		add(Box.createRigidArea(new Dimension(0,GuiTools.getSize(GuiTools.MENU_VERTICAL_BUTTON_SPACE))));
-		buttonTournament = GuiTools.createPrincipalVerticalMenuButton(GuiKeys.MENU_MAIN_BUTTON_TOURNAMENT,this);
-		buttonQuickMatch = GuiTools.createPrincipalVerticalMenuButton(GuiKeys.MENU_MAIN_BUTTON_QUICKMATCH,this);
+		add(Box.createRigidArea(new Dimension(0,GuiTools.buttonVerticalSpace)));
+		buttonTournament = GuiTools.createButton(GuiKeys.MENU_MAIN_BUTTON_TOURNAMENT,buttonWidth,buttonHeight,fontSize,this);
+		buttonQuickMatch = GuiTools.createButton(GuiKeys.MENU_MAIN_BUTTON_QUICKMATCH,buttonWidth,buttonHeight,fontSize,this);
 		add(Box.createVerticalGlue());		
 	}
 	

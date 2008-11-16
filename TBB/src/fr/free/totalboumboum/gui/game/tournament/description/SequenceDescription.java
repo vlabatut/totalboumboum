@@ -58,7 +58,7 @@ public class SequenceDescription extends TournamentDescription
 				infoPanel.setLayout(layout);
 			}
 
-			int margin = GuiTools.getSize(GuiTools.GAME_DATA_MARGIN_SIZE);
+			int margin = GuiTools.panelMargin;
 			int leftWidth = (int)(dataWidth*SPLIT_RATIO); 
 			int rightWidth = dataWidth - leftWidth - margin; 
 			infoPanel.setOpaque(false);

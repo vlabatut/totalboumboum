@@ -79,22 +79,28 @@ public class TournamentMenu extends InnerMenuPanel implements TournamentRenderPa
 		// background
 		setBackground(GuiTools.COLOR_COMMON_BACKGROUND);
 		
+		// sizes
+		int buttonWidth = getHeight();
+		int buttonHeight = getHeight();
+//		ArrayList<String> texts = GuiKeys.getKeysLike(GuiKeys.MENU_TOURNAMENT_BUTTON);
+//		int fontSize = GuiTools.getOptimalFontSize(buttonWidth, buttonHeight, texts);
+
 		// buttons
-		buttonQuit = GuiTools.createHorizontalMenuButton(GuiKeys.GAME_TOURNAMENT_BUTTON_QUIT,this);
+		buttonQuit = GuiTools.createButton(GuiKeys.GAME_TOURNAMENT_BUTTON_QUIT,buttonWidth,buttonHeight,1,this);
 		add(Box.createHorizontalGlue());
-		buttonMenu = GuiTools.createHorizontalMenuButton(GuiKeys.GAME_TOURNAMENT_BUTTON_MENU,this);
-		add(Box.createRigidArea(new Dimension(GuiTools.getSize(GuiTools.MENU_HORIZONTAL_BUTTON_SPACE),0)));
+		buttonMenu = GuiTools.createButton(GuiKeys.GAME_TOURNAMENT_BUTTON_MENU,buttonWidth,buttonHeight,1,this);
+		add(Box.createRigidArea(new Dimension(GuiTools.buttonHorizontalSpace,0)));
 	    ButtonGroup group = new ButtonGroup();
-		buttonDescription = GuiTools.createHorizontalMenuToggleButton(GuiKeys.GAME_TOURNAMENT_BUTTON_DESCRIPTION,this);
+	    buttonDescription = GuiTools.createToggleButton(GuiKeys.GAME_TOURNAMENT_BUTTON_DESCRIPTION,buttonWidth,buttonHeight,1,this);
 		buttonDescription.setSelected(true);
 	    group.add(buttonDescription);
-		buttonResults = GuiTools.createHorizontalMenuToggleButton(GuiKeys.GAME_TOURNAMENT_BUTTON_RESULTS,this);
+	    buttonResults = GuiTools.createToggleButton(GuiKeys.GAME_TOURNAMENT_BUTTON_RESULTS,buttonWidth,buttonHeight,1,this);
 	    group.add(buttonResults);
-		buttonStatistics = GuiTools.createHorizontalMenuToggleButton(GuiKeys.GAME_TOURNAMENT_BUTTON_STATISTICS,this);
+	    buttonStatistics = GuiTools.createToggleButton(GuiKeys.GAME_TOURNAMENT_BUTTON_STATISTICS,buttonWidth,buttonHeight,1,this);
 buttonStatistics.setEnabled(false);		
 	    group.add(buttonStatistics);
-		add(Box.createRigidArea(new Dimension(GuiTools.getSize(GuiTools.MENU_HORIZONTAL_BUTTON_SPACE),0)));
-		buttonMatch = GuiTools.createHorizontalMenuButton(GuiKeys.GAME_TOURNAMENT_BUTTON_NEXT_MATCH,this);
+		add(Box.createRigidArea(new Dimension(GuiTools.buttonHorizontalSpace,0)));
+		buttonMatch = GuiTools.createButton(GuiKeys.GAME_TOURNAMENT_BUTTON_NEXT_MATCH,buttonWidth,buttonHeight,1,this);
 		
 		// panels
 		tournamentDescription = null;

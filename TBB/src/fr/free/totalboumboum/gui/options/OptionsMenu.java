@@ -24,6 +24,7 @@ package fr.free.totalboumboum.gui.options;
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.io.IOException;
+import java.util.ArrayList;
 
 import javax.swing.Box;
 import javax.swing.BoxLayout;
@@ -70,16 +71,22 @@ public class OptionsMenu extends InnerMenuPanel
 		// background
 		setBackground(GuiTools.COLOR_COMMON_BACKGROUND);
 
+		// sizes
+		int buttonWidth = getWidth();
+		int buttonHeight = GuiTools.buttonTextHeight;
+		ArrayList<String> texts = GuiKeys.getKeysLike(GuiKeys.MENU_OPTIONS_BUTTON);
+		int fontSize = GuiTools.getOptimalFontSize(buttonWidth, buttonHeight, texts);
+
 		// buttons
 		add(Box.createVerticalGlue());
-		buttonControls = GuiTools.createSecondaryVerticalMenuButton(GuiKeys.MENU_OPTIONS_BUTTON_CONTROLS,this);
-		buttonGameplay = GuiTools.createSecondaryVerticalMenuButton(GuiKeys.MENU_OPTIONS_BUTTON_GAMEPLAY,this);
+		buttonControls = GuiTools.createButton(GuiKeys.MENU_OPTIONS_BUTTON_CONTROLS,buttonWidth,buttonHeight,fontSize,this);
+		buttonGameplay = GuiTools.createButton(GuiKeys.MENU_OPTIONS_BUTTON_GAMEPLAY,buttonWidth,buttonHeight,fontSize,this);
 buttonGameplay.setEnabled(false);
-		buttonVideo = GuiTools.createSecondaryVerticalMenuButton(GuiKeys.MENU_OPTIONS_BUTTON_VIDEO,this);
-		buttonGui = GuiTools.createSecondaryVerticalMenuButton(GuiKeys.MENU_OPTIONS_BUTTON_GUI,this);
-		buttonAdvanced = GuiTools.createSecondaryVerticalMenuButton(GuiKeys.MENU_OPTIONS_BUTTON_ADVANCED,this);
-		add(Box.createRigidArea(new Dimension(0,GuiTools.getSize(GuiTools.MENU_VERTICAL_BUTTON_SPACE))));
-		buttonBack = GuiTools.createSecondaryVerticalMenuButton(GuiKeys.MENU_OPTIONS_BUTTON_BACK,this);
+		buttonVideo = GuiTools.createButton(GuiKeys.MENU_OPTIONS_BUTTON_VIDEO,buttonWidth,buttonHeight,fontSize,this);
+		buttonGui = GuiTools.createButton(GuiKeys.MENU_OPTIONS_BUTTON_GUI,buttonWidth,buttonHeight,fontSize,this);
+		buttonAdvanced = GuiTools.createButton(GuiKeys.MENU_OPTIONS_BUTTON_ADVANCED,buttonWidth,buttonHeight,fontSize,this);
+		add(Box.createRigidArea(new Dimension(0,GuiTools.buttonVerticalSpace)));
+		buttonBack = GuiTools.createButton(GuiKeys.MENU_OPTIONS_BUTTON_BACK,buttonWidth,buttonHeight,fontSize,this);
 		add(Box.createVerticalGlue());		
 
 		// panels

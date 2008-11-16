@@ -23,7 +23,7 @@ package fr.free.totalboumboum.gui.game.tournament.statistics;
 
 import fr.free.totalboumboum.gui.common.panel.SplitMenuPanel;
 import fr.free.totalboumboum.gui.common.panel.data.EntitledDataPanel;
-import fr.free.totalboumboum.gui.tools.GuiTools;
+import fr.free.totalboumboum.gui.tools.GuiKeys;
 
 public class TournamentStatistics extends EntitledDataPanel
 {	

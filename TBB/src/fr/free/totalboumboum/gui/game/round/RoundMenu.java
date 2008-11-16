@@ -79,22 +79,28 @@ public class RoundMenu extends InnerMenuPanel implements RoundRenderPanel
 		// background
 		setBackground(GuiTools.COLOR_COMMON_BACKGROUND);
 		
+		// sizes
+		int buttonWidth = getHeight();
+		int buttonHeight = getHeight();
+//		ArrayList<String> texts = GuiKeys.getKeysLike(GuiKeys.MENU_TOURNAMENT_BUTTON);
+//		int fontSize = GuiTools.getOptimalFontSize(buttonWidth, buttonHeight, texts);
+
 		// buttons
-		buttonQuit = GuiTools.createHorizontalMenuButton(GuiKeys.GAME_ROUND_BUTTON_QUIT,this);
+		buttonQuit = GuiTools.createButton(GuiKeys.GAME_ROUND_BUTTON_QUIT,buttonWidth,buttonHeight,1,this);
 		add(Box.createHorizontalGlue());
-		buttonMatch = GuiTools.createHorizontalMenuButton(GuiKeys.GAME_ROUND_BUTTON_CURRENT_MATCH,this);
-		add(Box.createRigidArea(new Dimension(GuiTools.getSize(GuiTools.MENU_HORIZONTAL_BUTTON_SPACE),0)));
+		buttonMatch = GuiTools.createButton(GuiKeys.GAME_ROUND_BUTTON_CURRENT_MATCH,buttonWidth,buttonHeight,1,this);
+		add(Box.createRigidArea(new Dimension(GuiTools.buttonHorizontalSpace,0)));
 	    ButtonGroup group = new ButtonGroup();
-		buttonDescription = GuiTools.createHorizontalMenuToggleButton(GuiKeys.GAME_ROUND_BUTTON_DESCRIPTION,this);
+	    buttonDescription = GuiTools.createToggleButton(GuiKeys.GAME_ROUND_BUTTON_DESCRIPTION,buttonWidth,buttonHeight,1,this);
 		buttonDescription.setSelected(true);
 	    group.add(buttonDescription);
-		buttonResults = GuiTools.createHorizontalMenuToggleButton(GuiKeys.GAME_ROUND_BUTTON_RESULTS,this);
+	    buttonResults = GuiTools.createToggleButton(GuiKeys.GAME_ROUND_BUTTON_RESULTS,buttonWidth,buttonHeight,1,this);
 	    group.add(buttonResults);
-		buttonStatistics = GuiTools.createHorizontalMenuToggleButton(GuiKeys.GAME_ROUND_BUTTON_STATISTICS,this);
+	    buttonStatistics = GuiTools.createToggleButton(GuiKeys.GAME_ROUND_BUTTON_STATISTICS,buttonWidth,buttonHeight,1,this);
 buttonStatistics.setEnabled(false);		
 	    group.add(buttonStatistics);
-		add(Box.createRigidArea(new Dimension(GuiTools.getSize(GuiTools.MENU_HORIZONTAL_BUTTON_SPACE),0)));
-		buttonPlay = GuiTools.createHorizontalMenuButton(GuiKeys.GAME_ROUND_BUTTON_PLAY,this);
+		add(Box.createRigidArea(new Dimension(GuiTools.buttonHorizontalSpace,0)));
+		buttonPlay = GuiTools.createButton(GuiKeys.GAME_ROUND_BUTTON_PLAY,buttonWidth,buttonHeight,1,this);
 		
 		// panels
 		{	roundDescription = null;
@@ -137,13 +143,14 @@ buttonStatistics.setEnabled(false);
 			Round round = Configuration.getGameConfiguration().getTournament().getCurrentMatch().getCurrentRound();
 			int limit = round.getProfiles().size()+2;
 			loadProgressBar = new JProgressBar(0,limit);
-			Font font = GuiConfiguration.getMiscConfiguration().getFont().deriveFont((float)GuiTools.getSize(GuiTools.GAME_PROGRESSBAR_FONT_SIZE));
+			int fontSize = GuiTools.getFontSize(getHeight()*0.6);
+			Font font = GuiConfiguration.getMiscConfiguration().getFont().deriveFont((float)fontSize);
 			loadProgressBar.setFont(font);
 			loadProgressBar.setStringPainted(true); 
 			String text = GuiConfiguration.getMiscConfiguration().getLanguage().getText(GuiKeys.GAME_ROUND_PROGRESSBAR_BOMBSET);
 			loadProgressBar.setString(text);
 			int width = Integer.MAX_VALUE;
-			int height = GuiTools.getSize(GuiTools.MENU_HORIZONTAL_BUTTON_HEIGHT);
+			int height = getHeight();
 			Dimension dim = new Dimension(width,height);
 			loadProgressBar.setMaximumSize(dim);
 			remove(1);
