@@ -522,24 +522,855 @@ public class GuiTools
 		/* HEADER */
 		public static final String GAME_ROUND_STATISTICS_HEADER_NAME = "GameRoundStatisticsHeaderName";
 	
+	/////////////////////////////////////////////////////////////////
+	// IMAGES			/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	public static BufferedImage absentImage;	
 	
+	/**
+	 * get the image for the specified key	
+	 */
+	public static BufferedImage getIcon(String key)
+	{	BufferedImage result;
+		BufferedImage temp = icons.get(key);
+		if(temp==null)
+			result = ImageTools.getAbsentImage(64,64);
+		else
+			result = temp;
+		return result;
+	}
+
+	/**
+	 * tests if an image is stored for the specified key
+	 * @param key
+	 * @return
+	 */
+	public static boolean hasIcon(String key)
+	{	return icons.containsKey(key);		
+	}
+
+	/**
+	 * loads an image. If the image cannot be loaded, it is replaced by a
+	 * standard image (eg a red cross) 
+	 * @param path
+	 * @param absent
+	 * @return
+	 */
+	public static BufferedImage loadIcon(String path, BufferedImage absent)
+	{	BufferedImage image;
+		try
+		{	image = ImageTools.loadImage(path,null);
+		}
+		catch (IOException e)
+		{	image = absent;
+		}
+		return image;	
+	}
 	
+	public static void initImages()
+	{	// absent
+		absentImage = ImageTools.getAbsentImage(64,64);
+		// init
+		initButtonImages();
+		initHeaderImages();
+		initDataImages();		
+	}
 	
-	public static int panelMargin;
-	public static int subPanelMargin;
-	public final static float FONT_RATIO = 0.8f;
+	private static void loadButtonImages(String[] buttonStates, String folder, String[] uses)
+	{	for(int i=0;i<buttonStates.length;i++)
+		{	BufferedImage image = loadIcon(folder+buttonStates[i]+".png",absentImage);
+			for(int j=0;j<uses.length;j++)
+				icons.put(uses[j]+buttonStates[i],image);
+		}
+	}
+	
+	public static void initButtonImages()
+	{	// init
+		String[] buttonStates = {ICON_NORMAL,ICON_NORMAL_SELECTED,
+			ICON_DISABLED,ICON_DISABLED_SELECTED,
+			ICON_ROLLOVER,ICON_ROLLOVER_SELECTED,
+			ICON_PRESSED};
+		String baseFolder = GuiFileTools.getButtonsPath()+File.separator;
+		// images
+		{	String folder = baseFolder+GuiFileTools.FOLDER_DESCRIPTION+File.separator;
+			String[] uses = 
+			{	GAME_TOURNAMENT_BUTTON_DESCRIPTION,
+				GAME_MATCH_BUTTON_DESCRIPTION,
+				GAME_ROUND_BUTTON_DESCRIPTION
+			};
+			loadButtonImages(buttonStates,folder,uses);
+		}
+		{	String folder = baseFolder+GuiFileTools.FOLDER_LEFT_BLUE+File.separator;
+			String[] uses = 
+			{	GAME_TOURNAMENT_BUTTON_MENU,
+					GAME_MATCH_BUTTON_CURRENT_TOURNAMENT,
+				GAME_ROUND_BUTTON_CURRENT_MATCH
+			};
+			loadButtonImages(buttonStates,folder,uses);
+		}
+		{	String folder = baseFolder+GuiFileTools.FOLDER_LEFT_RED+File.separator;
+			String[] uses = 
+			{	GAME_TOURNAMENT_BUTTON_FINISH,
+				GAME_MATCH_BUTTON_FINISH,
+				GAME_ROUND_BUTTON_FINISH
+			};
+			loadButtonImages(buttonStates,folder,uses);
+		}
+		{	String folder = baseFolder+GuiFileTools.FOLDER_PLAY+File.separator;
+			String[] uses = 
+			{	GAME_ROUND_BUTTON_PLAY
+			};
+			loadButtonImages(buttonStates,folder,uses);
+		}
+		{	String folder = baseFolder+GuiFileTools.FOLDER_HOME+File.separator;
+			String[] uses = 
+			{	GAME_TOURNAMENT_BUTTON_QUIT,
+				GAME_MATCH_BUTTON_QUIT,
+				GAME_ROUND_BUTTON_QUIT
+			};
+			loadButtonImages(buttonStates,folder,uses);
+		}
+		{	String folder = baseFolder+GuiFileTools.FOLDER_RESULTS+File.separator;
+			String[] uses = 
+			{	GAME_TOURNAMENT_BUTTON_RESULTS,
+				GAME_MATCH_BUTTON_RESULTS,
+				GAME_ROUND_BUTTON_RESULTS
+			};
+			loadButtonImages(buttonStates,folder,uses);
+		}
+		{	String folder = baseFolder+GuiFileTools.FOLDER_RIGHT_BLUE+File.separator;
+			String[] uses = 
+			{	
+			};
+			loadButtonImages(buttonStates,folder,uses);
+		}
+		{	String folder = baseFolder+GuiFileTools.FOLDER_RIGHT_RED+File.separator;
+			String[] uses = 
+			{	GAME_TOURNAMENT_BUTTON_CURRENT_MATCH,
+				GAME_TOURNAMENT_BUTTON_NEXT_MATCH,
+				GAME_MATCH_BUTTON_CURRENT_ROUND,
+				GAME_MATCH_BUTTON_NEXT_ROUND
+			};
+			loadButtonImages(buttonStates,folder,uses);
+		}
+		{	String folder = baseFolder+GuiFileTools.FOLDER_STATS+File.separator;
+			String[] uses = 
+			{	GAME_TOURNAMENT_BUTTON_STATISTICS,
+				GAME_MATCH_BUTTON_STATISTICS,
+				GAME_ROUND_BUTTON_STATISTICS
+			};
+			loadButtonImages(buttonStates,folder,uses);
+		}
+	}
+	
+	private static void loadTableImages(String folder, String[] uses)
+	{	BufferedImage image = loadIcon(folder,absentImage);
+		for(int j=0;j<uses.length;j++)
+			icons.put(uses[j],image);
+	}
+	
+	public static void initHeaderImages()
+	{	String baseFolder = GuiFileTools.getHeadersPath()+File.separator;
+		// author
+		{	String folder = baseFolder+GuiFileTools.FILE_AUTHOR;
+			String[] uses =
+			{	GAME_ROUND_DESCRIPTION_MISC_HEADER_AUTHOR,
+				MENU_AI_SELECT_PREVIEW_AUTHOR,
+				MENU_HERO_SELECT_PREVIEW_AUTHOR,
+				MENU_LEVEL_SELECT_PREVIEW_AUTHOR
+			};
+			loadTableImages(folder,uses);
+		}
+		// autofire
+		{	String folder = baseFolder+GuiFileTools.FILE_AUTOFIRE;
+			String[] uses =
+			{	MENU_OPTIONS_CONTROLS_HEADER_AUTO
+			};
+			loadTableImages(folder,uses);
+		}
+		// bombs
+		{	String folder = baseFolder+GuiFileTools.FILE_BOMBS;
+			String[] uses =
+			{	GAME_TOURNAMENT_RESULTS_HEADER_BOMBS,
+				GAME_MATCH_RESULTS_HEADER_BOMBS,
+				GAME_ROUND_RESULTS_HEADER_BOMBS,
+				GAME_TOURNAMENT_DESCRIPTION_LIMIT_HEADER_BOMBS,
+				GAME_MATCH_DESCRIPTION_LIMIT_HEADER_BOMBS,
+				GAME_ROUND_DESCRIPTION_LIMIT_HEADER_BOMBS
+			};
+			loadTableImages(folder,uses);
+		}
+		// color
+		{	String folder = baseFolder+GuiFileTools.FILE_COLOR;
+			String[] uses =
+			{	MENU_PROFILES_PREVIEW_COLOR,
+				MENU_PROFILES_EDIT_COLOR,
+				MENU_HERO_SELECT_PREVIEW_COLORS
+			};
+			loadTableImages(folder,uses);
+		}
+		// command
+		{	String folder = baseFolder+GuiFileTools.FILE_COMMAND;
+			String[] uses =
+			{	MENU_OPTIONS_CONTROLS_HEADER_COMMAND
+			};
+			loadTableImages(folder,uses);
+		}
+		// computer
+		{	String folder = baseFolder+GuiFileTools.FILE_COMPUTER;
+			String[] uses =
+			{	MENU_PROFILES_PREVIEW_AINAME,
+				MENU_PROFILES_EDIT_AI
+			};
+			loadTableImages(folder,uses);
+		}
+		// confrontations
+		{	String folder = baseFolder+GuiFileTools.FILE_CONFRONTATIONS;
+			String[] uses =
+			{	GAME_TOURNAMENT_DESCRIPTION_LIMIT_HEADER_CONFRONTATIONS,
+				GAME_MATCH_DESCRIPTION_LIMIT_HEADER_CONFRONTATIONS
+			};
+			loadTableImages(folder,uses);
+		}
+		// constant
+		{	String folder = baseFolder+GuiFileTools.FILE_CONSTANT;
+			String[] uses =
+			{	GAME_TOURNAMENT_DESCRIPTION_POINTS_HEADER_CONSTANT,
+				GAME_MATCH_DESCRIPTION_POINTS_HEADER_CONSTANT,
+				GAME_ROUND_DESCRIPTION_POINTS_HEADER_CONSTANT
+			};
+			loadTableImages(folder,uses);
+		}
+		// crowns
+		{	String folder = baseFolder+GuiFileTools.FILE_CROWNS;
+			String[] uses =
+			{	GAME_TOURNAMENT_RESULTS_HEADER_CROWNS,
+				GAME_MATCH_RESULTS_HEADER_CROWNS,
+				GAME_ROUND_RESULTS_HEADER_CROWNS,
+				GAME_TOURNAMENT_DESCRIPTION_LIMIT_HEADER_CROWNS,
+				GAME_MATCH_DESCRIPTION_LIMIT_HEADER_CROWNS,
+				GAME_ROUND_DESCRIPTION_LIMIT_HEADER_CROWNS
+			};
+			loadTableImages(folder,uses);
+		}
+		// custom points
+		{	String folder = baseFolder+GuiFileTools.FILE_CUSTOM;
+			String[] uses =
+			{	GAME_TOURNAMENT_DESCRIPTION_LIMIT_HEADER_CUSTOM,
+				GAME_MATCH_DESCRIPTION_LIMIT_HEADER_CUSTOM,
+				GAME_ROUND_DESCRIPTION_LIMIT_HEADER_CUSTOM,
+				GAME_TOURNAMENT_RESULTS_HEADER_CUSTOM_LIMIT,
+				GAME_MATCH_RESULTS_HEADER_CUSTOM_LIMIT,
+				GAME_ROUND_RESULTS_HEADER_CUSTOM_LIMIT,
+				GAME_TOURNAMENT_RESULTS_HEADER_CUSTOM_POINTS,
+				GAME_MATCH_RESULTS_HEADER_CUSTOM_POINTS,
+				GAME_ROUND_RESULTS_HEADER_CUSTOM_POINTS
+			};
+			loadTableImages(folder,uses);
+		}
+		// deaths
+		{	String folder = baseFolder+GuiFileTools.FILE_DEATHS;
+			String[] uses =
+			{	GAME_TOURNAMENT_RESULTS_HEADER_DEATHS,
+				GAME_MATCH_RESULTS_HEADER_DEATHS,
+				GAME_ROUND_RESULTS_HEADER_DEATHS,
+				GAME_TOURNAMENT_DESCRIPTION_LIMIT_HEADER_DEATHS,
+				GAME_MATCH_DESCRIPTION_LIMIT_HEADER_DEATHS,
+				GAME_ROUND_DESCRIPTION_LIMIT_HEADER_DEATHS
+			};
+			loadTableImages(folder,uses);
+		}
+		// dimension
+		{	String folder = baseFolder+GuiFileTools.FILE_DIMENSION;
+			String[] uses =
+			{	GAME_ROUND_DESCRIPTION_MISC_HEADER_DIMENSION,
+				MENU_LEVEL_SELECT_PREVIEW_SIZE
+			};
+			loadTableImages(folder,uses);
+		}
+		// discretize
+		{	String folder = baseFolder+GuiFileTools.FILE_DISCRETIZE;
+			String[] uses =
+			{	GAME_TOURNAMENT_DESCRIPTION_POINTS_HEADER_DISCRETIZE,
+				GAME_MATCH_DESCRIPTION_POINTS_HEADER_DISCRETIZE,
+				GAME_ROUND_DESCRIPTION_POINTS_HEADER_DISCRETIZE
+			};
+			loadTableImages(folder,uses);
+		}
+		// hero
+		{	String folder = baseFolder+GuiFileTools.FILE_HERO;
+			String[] uses =
+			{	MENU_PROFILES_PREVIEW_HERONAME,
+				MENU_PROFILES_EDIT_HERO,
+				MENU_HERO_SELECT_PREVIEW_IMAGE
+			};
+			loadTableImages(folder,uses);
+		}
+		// initial
+		{	String folder = baseFolder+GuiFileTools.FILE_INITIAL;
+			String[] uses =
+			{	GAME_ROUND_DESCRIPTION_INITIALITEMS_TITLE
+			};
+			loadTableImages(folder,uses);
+		}
+		// instance
+		{	String folder = baseFolder+GuiFileTools.FILE_INSTANCE;
+			String[] uses =
+			{	GAME_ROUND_DESCRIPTION_MISC_HEADER_INSTANCE,
+				MENU_LEVEL_SELECT_PREVIEW_INSTANCE
+			};
+			loadTableImages(folder,uses);
+		}
+		// items
+		{	String folder = baseFolder+GuiFileTools.FILE_ITEMS;
+			String[] uses =
+			{	GAME_TOURNAMENT_RESULTS_HEADER_ITEMS,
+				GAME_MATCH_RESULTS_HEADER_ITEMS,
+				GAME_ROUND_RESULTS_HEADER_ITEMS,
+				GAME_TOURNAMENT_DESCRIPTION_LIMIT_HEADER_ITEMS,
+				GAME_MATCH_DESCRIPTION_LIMIT_HEADER_ITEMS,
+				GAME_ROUND_DESCRIPTION_LIMIT_HEADER_ITEMS,
+				GAME_ROUND_DESCRIPTION_ITEMSET_TITLE
+			};
+			loadTableImages(folder,uses);
+		}
+		// key
+		{	String folder = baseFolder+GuiFileTools.FILE_KEY;
+			String[] uses =
+			{	MENU_OPTIONS_CONTROLS_HEADER_KEY,
+				GAME_MATCH_DESCRIPTION_PLAYERS_HEADER_CONTROLS
+			};
+			loadTableImages(folder,uses);
+		}
+		// kills
+		{	String folder = baseFolder+GuiFileTools.FILE_KILLS;
+			String[] uses =
+			{	GAME_TOURNAMENT_RESULTS_HEADER_KILLS,
+				GAME_MATCH_RESULTS_HEADER_KILLS,
+				GAME_ROUND_RESULTS_HEADER_KILLS,
+				GAME_TOURNAMENT_DESCRIPTION_LIMIT_HEADER_KILLS,
+				GAME_MATCH_DESCRIPTION_LIMIT_HEADER_KILLS,
+				GAME_ROUND_DESCRIPTION_LIMIT_HEADER_KILLS
+			};
+			loadTableImages(folder,uses);
+		}
+		// limits
+		{	String folder = baseFolder+GuiFileTools.FILE_LIMITS;
+			String[] uses =
+			{	GAME_TOURNAMENT_DESCRIPTION_LIMIT_TITLE,
+				GAME_MATCH_DESCRIPTION_LIMIT_TITLE,
+				GAME_ROUND_DESCRIPTION_LIMIT_TITLE
+			};
+			loadTableImages(folder,uses);
+		}
+		// misc
+		{	String folder = baseFolder+GuiFileTools.FILE_MISC;
+			String[] uses =
+			{	GAME_TOURNAMENT_DESCRIPTION_MISC_TITLE,
+				GAME_MATCH_DESCRIPTION_MISC_TITLE,
+				GAME_ROUND_DESCRIPTION_MISC_TITLE,
+				MENU_AI_SELECT_PREVIEW_NOTES
+			};
+			loadTableImages(folder,uses);
+		}
+		// name
+		{	String folder = baseFolder+GuiFileTools.FILE_NAME;
+			String[] uses =
+			{	GAME_TOURNAMENT_DESCRIPTION_PLAYERS_HEADER_NAME,
+				GAME_TOURNAMENT_RESULTS_HEADER_NAME,
+				GAME_MATCH_DESCRIPTION_PLAYERS_HEADER_NAME,
+				GAME_MATCH_RESULTS_HEADER_NAME,
+				GAME_ROUND_RESULTS_HEADER_NAME,
+				GAME_TOURNAMENT_STATISTICS_HEADER_NAME,
+				GAME_MATCH_STATISTICS_HEADER_NAME,
+				GAME_ROUND_STATISTICS_HEADER_NAME,
+				MENU_PROFILES_PREVIEW_NAME,
+				MENU_PROFILES_EDIT_NAME
+			};
+			loadTableImages(folder,uses);
+		}
+		// pack
+		{	String folder = baseFolder+GuiFileTools.FILE_PACK;
+			String[] uses =
+			{	GAME_ROUND_DESCRIPTION_MISC_HEADER_PACK,
+				MENU_PROFILES_PREVIEW_AIPACK,
+				MENU_PROFILES_PREVIEW_HEROPACK,
+				MENU_AI_SELECT_PREVIEW_PACKAGE,
+				MENU_LEVEL_SELECT_PREVIEW_PACKAGE
+			};
+			loadTableImages(folder,uses);
+		}
+		// paintings
+		{	String folder = baseFolder+GuiFileTools.FILE_PAINTINGS;
+			String[] uses =
+			{	GAME_TOURNAMENT_RESULTS_HEADER_PAINTINGS,
+				GAME_MATCH_RESULTS_HEADER_PAINTINGS,
+				GAME_ROUND_RESULTS_HEADER_PAINTINGS,
+				GAME_TOURNAMENT_DESCRIPTION_LIMIT_HEADER_PAINTINGS,
+				GAME_MATCH_DESCRIPTION_LIMIT_HEADER_PAINTINGS,
+				GAME_ROUND_DESCRIPTION_LIMIT_HEADER_PAINTINGS
+			};
+			loadTableImages(folder,uses);
+		}
+		// partial
+		{	String folder = baseFolder+GuiFileTools.FILE_PARTIAL;
+			String[] uses =
+			{	GAME_TOURNAMENT_DESCRIPTION_POINTS_HEADER_PARTIAL,
+				GAME_MATCH_DESCRIPTION_POINTS_HEADER_PARTIAL,
+				GAME_ROUND_DESCRIPTION_POINTS_HEADER_PARTIAL
+			};
+			loadTableImages(folder,uses);
+		}
+		// points
+		{	String folder = baseFolder+GuiFileTools.FILE_POINTS;
+			String[] uses =
+			{	GAME_TOURNAMENT_RESULTS_HEADER_POINTS,
+				GAME_MATCH_RESULTS_HEADER_POINTS,
+				GAME_ROUND_RESULTS_HEADER_POINTS,
+				GAME_TOURNAMENT_DESCRIPTION_POINTS_TITLE,
+				GAME_MATCH_DESCRIPTION_POINTS_TITLE,
+				GAME_ROUND_DESCRIPTION_POINTS_TITLE
+			};
+			loadTableImages(folder,uses);
+		}
+		// profile
+		{	String folder = baseFolder+GuiFileTools.FILE_PROFILE;
+			String[] uses =
+			{	GAME_TOURNAMENT_DESCRIPTION_PLAYERS_HEADER_PROFILE,
+				GAME_MATCH_DESCRIPTION_PLAYERS_HEADER_PROFILE,
+				GAME_TOURNAMENT_RESULTS_HEADER_PROFILE,
+				GAME_MATCH_RESULTS_HEADER_PROFILE,
+				GAME_ROUND_RESULTS_HEADER_PROFILE
+			};
+			loadTableImages(folder,uses);
+		}
+		// rank
+		{	String folder = baseFolder+GuiFileTools.FILE_RANK;
+			String[] uses =
+			{	GAME_TOURNAMENT_DESCRIPTION_PLAYERS_HEADER_RANK,
+				GAME_MATCH_DESCRIPTION_PLAYERS_HEADER_RANK,
+				GAME_TOURNAMENT_DESCRIPTION_POINTS_HEADER_RANKINGS,
+				GAME_MATCH_DESCRIPTION_POINTS_HEADER_RANKINGS,
+				GAME_ROUND_DESCRIPTION_POINTS_HEADER_RANKINGS,
+				GAME_TOURNAMENT_DESCRIPTION_POINTS_HEADER_RANKPOINTS,
+				GAME_MATCH_DESCRIPTION_POINTS_HEADER_RANKPOINTS,
+				GAME_ROUND_DESCRIPTION_POINTS_HEADER_RANKPOINTS
+			};
+			loadTableImages(folder,uses);
+		}
+		// score
+		{	String folder = baseFolder+GuiFileTools.FILE_SCORE;
+			String[] uses =
+			{	GAME_TOURNAMENT_DESCRIPTION_POINTS_HEADER_SCORE,
+				GAME_MATCH_DESCRIPTION_POINTS_HEADER_SCORE,
+				GAME_ROUND_DESCRIPTION_POINTS_HEADER_SCORE
+			};
+			loadTableImages(folder,uses);
+		}
+		// source
+		{	String folder = baseFolder+GuiFileTools.FILE_SOURCE;
+			String[] uses =
+			{	GAME_ROUND_DESCRIPTION_MISC_HEADER_SOURCE,
+				MENU_HERO_SELECT_PREVIEW_SOURCE,
+				MENU_LEVEL_SELECT_PREVIEW_SOURCE
+			};
+			loadTableImages(folder,uses);
+		}
+		// theme
+		{	String folder = baseFolder+GuiFileTools.FILE_THEME;
+			String[] uses =
+			{	GAME_ROUND_DESCRIPTION_MISC_HEADER_THEME,
+				MENU_LEVEL_SELECT_PREVIEW_THEME
+			};
+			loadTableImages(folder,uses);
+		}
+		// time
+		{	String folder = baseFolder+GuiFileTools.FILE_TIME;
+			String[] uses =
+			{	GAME_TOURNAMENT_RESULTS_HEADER_TIME,
+				GAME_MATCH_RESULTS_HEADER_TIME,
+				GAME_ROUND_RESULTS_HEADER_TIME,
+				GAME_TOURNAMENT_DESCRIPTION_LIMIT_HEADER_TIME,
+				GAME_MATCH_DESCRIPTION_LIMIT_HEADER_TIME,
+				GAME_ROUND_DESCRIPTION_LIMIT_HEADER_TIME
+			};
+			loadTableImages(folder,uses);
+		}
+		// title
+		{	String folder = baseFolder+GuiFileTools.FILE_TITLE;
+			String[] uses =
+			{	GAME_ROUND_DESCRIPTION_MISC_HEADER_TITLE,
+				MENU_AI_SELECT_PREVIEW_NAME,
+				MENU_HERO_SELECT_PREVIEW_NAME,
+				MENU_LEVEL_SELECT_PREVIEW_NAME
+			};
+			loadTableImages(folder,uses);
+		}
+		// total
+		{	String folder = baseFolder+GuiFileTools.FILE_TOTAL;
+			String[] uses =
+			{	GAME_TOURNAMENT_RESULTS_HEADER_TOTAL,
+				GAME_MATCH_RESULTS_HEADER_TOTAL,
+				GAME_TOURNAMENT_DESCRIPTION_LIMIT_HEADER_TOTAL,
+				GAME_MATCH_DESCRIPTION_LIMIT_HEADER_TOTAL,
+				GAME_TOURNAMENT_DESCRIPTION_POINTS_HEADER_TOTAL,
+				GAME_MATCH_DESCRIPTION_POINTS_HEADER_TOTAL
+			};
+			loadTableImages(folder,uses);
+		}
+	}
+	
+	public static void initDataImages()
+	{	String baseFolder = GuiFileTools.getDataPath()+File.separator;
+		// bombs
+		{	String folder = baseFolder+GuiFileTools.FILE_BOMBS;
+			String[] uses =
+			{	GAME_TOURNAMENT_DESCRIPTION_POINTS_DATA_BOMBS,
+				GAME_MATCH_DESCRIPTION_POINTS_DATA_BOMBS,
+				GAME_ROUND_DESCRIPTION_POINTS_DATA_BOMBS
+			};
+			loadTableImages(folder,uses);
+		}
+		// computer
+		{	String folder = baseFolder+GuiFileTools.FILE_COMPUTER;
+			String[] uses =
+			{	GAME_TOURNAMENT_DESCRIPTION_PLAYERS_DATA_COMPUTER,
+				GAME_MATCH_DESCRIPTION_PLAYERS_DATA_COMPUTER,
+				GAME_TOURNAMENT_RESULTS_DATA_COMPUTER,
+				GAME_MATCH_RESULTS_DATA_COMPUTER,
+				GAME_ROUND_RESULTS_DATA_COMPUTER
+			};
+			loadTableImages(folder,uses);
+		}
+		// crowns
+		{	String folder = baseFolder+GuiFileTools.FILE_CROWNS;
+			String[] uses =
+			{	GAME_TOURNAMENT_DESCRIPTION_POINTS_DATA_CROWNS,
+				GAME_MATCH_DESCRIPTION_POINTS_DATA_CROWNS,
+				GAME_ROUND_DESCRIPTION_POINTS_DATA_CROWNS
+			};
+			loadTableImages(folder,uses);
+		}
+		// deaths
+		{	String folder = baseFolder+GuiFileTools.FILE_DEATHS;
+			String[] uses =
+			{	GAME_TOURNAMENT_DESCRIPTION_POINTS_DATA_DEATHS,
+				GAME_MATCH_DESCRIPTION_POINTS_DATA_DEATHS,
+				GAME_ROUND_DESCRIPTION_POINTS_DATA_DEATHS
+			};
+			loadTableImages(folder,uses);
+		}
+		// edit
+		{	String folder = baseFolder+GuiFileTools.FILE_EDIT;
+			String[] uses =
+			{	MENU_PROFILES_EDIT_AI_CHANGE,
+				MENU_PROFILES_EDIT_HERO_CHANGE,
+				MENU_PROFILES_EDIT_NAME_CHANGE
+			};
+			loadTableImages(folder,uses);
+		}
+		// false
+		{	String folder = baseFolder+GuiFileTools.FILE_FALSE;
+			String[] uses =
+			{	MENU_OPTIONS_CONTROLS_LINE_AUTO_FALSE,
+				MENU_OPTIONS_VIDEO_LINE_DISABLED,
+				MENU_OPTIONS_ADVANCED_LINE_ADJUST_DISABLED,
+				MENU_PROFILES_EDIT_AI_RESET
+			};
+			loadTableImages(folder,uses);
+		}
+		// human
+		{	String folder = baseFolder+GuiFileTools.FILE_HUMAN;
+			String[] uses =
+			{	GAME_TOURNAMENT_DESCRIPTION_PLAYERS_DATA_HUMAN,
+				GAME_MATCH_DESCRIPTION_PLAYERS_DATA_HUMAN,
+				GAME_TOURNAMENT_RESULTS_DATA_HUMAN,
+				GAME_MATCH_RESULTS_DATA_HUMAN,
+				GAME_ROUND_RESULTS_DATA_HUMAN
+			};
+			loadTableImages(folder,uses);
+		}
+		// inverted order
+		{	String folder = baseFolder+GuiFileTools.FILE_INVERTED;
+			String[] uses =
+			{	GAME_TOURNAMENT_DESCRIPTION_POINTS_DATA_INVERTED,
+				GAME_MATCH_DESCRIPTION_POINTS_DATA_INVERTED,
+				GAME_ROUND_DESCRIPTION_POINTS_DATA_INVERTED
+			};
+			loadTableImages(folder,uses);
+		}
+		// items
+		{	String folder = baseFolder+GuiFileTools.FILE_ITEMS;
+			String[] uses =
+			{	GAME_TOURNAMENT_DESCRIPTION_POINTS_DATA_ITEMS,
+				GAME_MATCH_DESCRIPTION_POINTS_DATA_ITEMS,
+				GAME_ROUND_DESCRIPTION_POINTS_DATA_ITEMS
+			};
+			loadTableImages(folder,uses);
+		}
+		// kills
+		{	String folder = baseFolder+GuiFileTools.FILE_KILLS;
+			String[] uses =
+			{	GAME_TOURNAMENT_DESCRIPTION_POINTS_DATA_KILLS,
+				GAME_MATCH_DESCRIPTION_POINTS_DATA_KILLS,
+				GAME_ROUND_DESCRIPTION_POINTS_DATA_KILLS
+			};
+			loadTableImages(folder,uses);
+		}
+		// minus
+		{	String folder = baseFolder+GuiFileTools.FILE_MINUS;
+			String[] uses =
+			{	MENU_OPTIONS_VIDEO_LINE_MINUS,
+				MENU_OPTIONS_ADVANCED_LINE_FPS_MINUS,
+				MENU_OPTIONS_ADVANCED_LINE_SPEED_MINUS
+			};
+			loadTableImages(folder,uses);
+		}
+		// next
+		{	String folder = baseFolder+GuiFileTools.FILE_NEXT;
+			String[] uses =
+			{	MENU_OPTIONS_GUI_LINE_LANGUAGE_NEXT,
+				MENU_OPTIONS_GUI_LINE_FONT_NEXT,
+				MENU_OPTIONS_GUI_LINE_BACKGROUND_NEXT,
+				MENU_PROFILES_EDIT_COLOR_NEXT
+			};
+			loadTableImages(folder,uses);
+		}
+		// no share
+		{	String folder = baseFolder+GuiFileTools.FILE_NOSHARE;
+			String[] uses =
+			{	GAME_TOURNAMENT_DESCRIPTION_POINTS_DATA_NOSHARE,
+				GAME_MATCH_DESCRIPTION_POINTS_DATA_NOSHARE,
+				GAME_ROUND_DESCRIPTION_POINTS_DATA_NOSHARE
+			};
+			loadTableImages(folder,uses);
+		}
+		// page down
+		{	String folder = baseFolder+GuiFileTools.FILE_PAGE_DOWN;
+			String[] uses =
+			{	MENU_PROFILES_LIST_PAGEDOWN,
+				MENU_AI_SELECT_CLASS_PAGEDOWN,
+				MENU_AI_SELECT_PACKAGE_PAGEDOWN,
+				MENU_HERO_SELECT_FOLDER_PAGEDOWN,
+				MENU_HERO_SELECT_PACKAGE_PAGEDOWN,
+				MENU_LEVEL_SELECT_FOLDER_PAGEDOWN,
+				MENU_LEVEL_SELECT_PACKAGE_PAGEDOWN
+			};
+			loadTableImages(folder,uses);
+		}
+		// page up
+		{	String folder = baseFolder+GuiFileTools.FILE_PAGE_UP;
+			String[] uses =
+			{	MENU_PROFILES_LIST_PAGEUP,
+				MENU_AI_SELECT_CLASS_PAGEUP,
+				MENU_AI_SELECT_PACKAGE_PAGEUP,
+				MENU_HERO_SELECT_FOLDER_PAGEUP,
+				MENU_HERO_SELECT_PACKAGE_PAGEUP,
+				MENU_LEVEL_SELECT_FOLDER_PAGEUP,
+				MENU_LEVEL_SELECT_PACKAGE_PAGEUP
+			};
+			loadTableImages(folder,uses);
+		}
+		// paintings
+		{	String folder = baseFolder+GuiFileTools.FILE_PAINTINGS;
+			String[] uses =
+			{	GAME_TOURNAMENT_DESCRIPTION_POINTS_DATA_PAINTINGS,
+				GAME_MATCH_DESCRIPTION_POINTS_DATA_PAINTINGS,
+				GAME_ROUND_DESCRIPTION_POINTS_DATA_PAINTINGS
+			};
+			loadTableImages(folder,uses);
+		}
+		// partial
+		{	String folder = baseFolder+GuiFileTools.FILE_PARTIAL;
+			String[] uses =
+			{	GAME_TOURNAMENT_DESCRIPTION_POINTS_DATA_PARTIAL,
+				GAME_MATCH_DESCRIPTION_POINTS_DATA_PARTIAL,
+				GAME_ROUND_DESCRIPTION_POINTS_DATA_PARTIAL
+			};
+			loadTableImages(folder,uses);
+		}
+		// plus
+		{	String folder = baseFolder+GuiFileTools.FILE_PLUS;
+			String[] uses =
+			{	MENU_OPTIONS_VIDEO_LINE_PLUS,
+				MENU_OPTIONS_ADVANCED_LINE_FPS_PLUS,
+				MENU_OPTIONS_ADVANCED_LINE_SPEED_PLUS
+			};
+			loadTableImages(folder,uses);
+		}
+		// previous
+		{	String folder = baseFolder+GuiFileTools.FILE_PREVIOUS;
+			String[] uses =
+			{	MENU_OPTIONS_GUI_LINE_LANGUAGE_PREVIOUS,
+				MENU_OPTIONS_GUI_LINE_FONT_PREVIOUS,
+				MENU_OPTIONS_GUI_LINE_BACKGROUND_PREVIOUS,
+				MENU_PROFILES_EDIT_COLOR_PREVIOUS
+			};
+			loadTableImages(folder,uses);
+		}
+		// regular order
+		{	String folder = baseFolder+GuiFileTools.FILE_REGULAR;
+			String[] uses =
+			{	GAME_TOURNAMENT_DESCRIPTION_POINTS_DATA_REGULAR,
+				GAME_MATCH_DESCRIPTION_POINTS_DATA_REGULAR,
+				GAME_ROUND_DESCRIPTION_POINTS_DATA_REGULAR
+			};
+			loadTableImages(folder,uses);
+		}
+		// share
+		{	String folder = baseFolder+GuiFileTools.FILE_SHARE;
+			String[] uses =
+			{	GAME_TOURNAMENT_DESCRIPTION_POINTS_DATA_SHARE,
+				GAME_MATCH_DESCRIPTION_POINTS_DATA_SHARE,
+				GAME_ROUND_DESCRIPTION_POINTS_DATA_SHARE
+			};
+			loadTableImages(folder,uses);
+		}
+		// time
+		{	String folder = baseFolder+GuiFileTools.FILE_TIME;
+			String[] uses =
+			{	GAME_TOURNAMENT_DESCRIPTION_POINTS_DATA_TIME,
+				GAME_MATCH_DESCRIPTION_POINTS_DATA_TIME,
+				GAME_ROUND_DESCRIPTION_POINTS_DATA_TIME
+			};
+			loadTableImages(folder,uses);
+		}
+		// true
+		{	String folder = baseFolder+GuiFileTools.FILE_TRUE;
+			String[] uses =
+			{	MENU_OPTIONS_CONTROLS_LINE_AUTO_TRUE,
+				MENU_OPTIONS_VIDEO_LINE_ENABLED,
+				MENU_OPTIONS_ADVANCED_LINE_ADJUST_ENABLED
+			};
+			loadTableImages(folder,uses);
+		}
+	}
+				
+	/////////////////////////////////////////////////////////////////
+	// FONTS			/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	private static Graphics graphics;
+	public final static float FONT_RATIO = 0.8f; // font height relatively to the containing label (or component)
+
+	private static void initGraphics()
+	{	BufferedImage img = new BufferedImage(10,10,BufferedImage.TYPE_INT_ARGB);
+		graphics = img.getGraphics();			
+	}
+	
+	/**
+	 * process the maximal font size for the specified height limit,
+	 * whatever the displayed text will be
+	 * @param limit
+	 * @return
+	 */
+	public static int getFontSize(double limit)
+	{	int result = 0;
+		int fheight;
+		do
+		{	result++;
+			Font font = GuiConfiguration.getMiscConfiguration().getFont().deriveFont((float)result);
+			graphics.setFont(font);
+			FontMetrics metrics = graphics.getFontMetrics(font);
+			fheight = metrics.getHeight();
+		}
+		while(fheight<limit);
+		return result;
+	}
+
+	/**
+	 * process the maximal font size for the specified width and height limits
+	 * and given text.
+	 * @param width
+	 * @param height
+	 * @param text
+	 * @return
+	 */
+	public static int getFontSize(double width, double height, String text)
+	{	int result = 0;
+		int fheight,fwidth;
+		do
+		{	result++;
+			Font font = GuiConfiguration.getMiscConfiguration().getFont().deriveFont((float)result);
+			graphics.setFont(font);
+			FontMetrics metrics = graphics.getFontMetrics(font);
+			fheight = metrics.getHeight();
+			Rectangle2D bounds = metrics.getStringBounds(text,graphics);
+			fwidth = (int)bounds.getWidth();
+		}
+		while(fheight<height && fwidth<width);
+		return result-1;
+	}
+	
+	/**
+	 * process the pixel height corresponding to the specified font size 
+	 * @param fontSize
+	 * @return
+	 */
+	public static int getPixelHeight(float fontSize)
+	{	int result;
+		Font font = GuiConfiguration.getMiscConfiguration().getFont().deriveFont(fontSize);
+		graphics.setFont(font);
+		FontMetrics metrics = graphics.getFontMetrics(font);
+		result = (int)(metrics.getHeight()*1.2);
+		return result;
+	}
+	
+	/**
+	 * process the pixel width corresponding to the specified font size
+	 * @param fontSize
+	 * @param text
+	 * @return
+	 */
+	public static int getPixelWidth(float fontSize, String text)
+	{	int result;
+		Font font = GuiConfiguration.getMiscConfiguration().getFont().deriveFont(fontSize);
+		graphics.setFont(font);
+		FontMetrics metrics = graphics.getFontMetrics(font);
+		Rectangle2D bounds = metrics.getStringBounds(text,graphics);
+		result = (int)bounds.getWidth();
+		return result;
+	}
+
+	/////////////////////////////////////////////////////////////////
+	// SIZE 			/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+
+	// margins
+	public final static float PANEL_MARGIN_RATIO = 0.025f; 
+	public static int panelMargin; // margin between the components of a frame
+	public final static float SUBPANEL_MARGIN_RATIO = 0.005f; 
+	public static int subPanelMargin;// margin between the components of a panel
+
+	// titles
+	public final static float SUBPANEL_TITLE_RATIO = 1.5f; // subpanel title height relatively to panel margin
+	public static int subPanelTitleHeight; // height of a subpanel title bar relatively to the height of a panel title
+	public final static float TABLE_HEADER_RATIO = 1.2f; //header high relatively to line height
+
+	// panel split
 	public final static float VERTICAL_SPLIT_RATIO = 0.25f;
 	public final static float HORIZONTAL_SPLIT_RATIO = 0.07f;
-	public final static float SUBPANEL_TITLE_RATIO = 1.5f;
-	public final static float TABLE_HEADER_RATIO = 1.2f;
+
 	
-	private static void setMargins(int width, int height)
-	{	GuiTools.panelMargin = (int)(width*0.025);
-		GuiTools.subPanelMargin = (int)(height*0.005);
+	private static void initSizes()
+	{	// panel
+		Dimension panelDimension = Configuration.getVideoConfiguration().getPanelDimension();
+		int width = panelDimension.width;
+		int height = panelDimension.height;
+				
+		// margins
+		panelMargin = (int)(width*PANEL_MARGIN_RATIO);
+		subPanelMargin = (int)(height*SUBPANEL_MARGIN_RATIO);
+		
+		// titles
+		subPanelTitleHeight = (int)(panelMargin*SUBPANEL_TITLE_RATIO);
+		subPanelTitleHeight = (int)(panelMargin*SUBPANEL_TITLE_RATIO);
 	}
 	
 	
-	// colors
+	/////////////////////////////////////////////////////////////////
+	// COLORS			/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+
 	public final static Color COLOR_SPLASHSCREEN_TEXT = new Color(204,18,128);
 	public final static Color COLOR_COMMON_BACKGROUND = new Color(255,255,255,150);
 	public final static Color COLOR_TITLE_FOREGROUND = Color.BLACK;
@@ -552,6 +1383,9 @@ public class GuiTools
 	public final static int ALPHA_TABLE_REGULAR_BACKGROUND_LEVEL1 = 80; //scores
 	public final static int ALPHA_TABLE_REGULAR_BACKGROUND_LEVEL2 = 140; // rounds/matches
 	public final static int ALPHA_TABLE_REGULAR_BACKGROUND_LEVEL3 = 200; //portrait/name/total/points
+	
+	
+	
 	
 	// menus
 	public static final String MENU_HORIZONTAL_BUTTON_HEIGHT = "MENU_HORIZONTAL_BUTTON_HEIGHT";
@@ -605,21 +1439,10 @@ public class GuiTools
 	public static final String ICON_PRESSED = "pressed";
 	private static final HashMap<String,BufferedImage> icons = new HashMap<String,BufferedImage>();
 	
-	private static Graphics graphics;
-	
-	public static void setGraphics(Graphics g)
-	{	graphics = g;	
-	}
 
 	public static void init()
-	{	// init
-		Dimension panelDimension = Configuration.getVideoConfiguration().getPanelDimension();
-		int width = panelDimension.width;
-		int height = panelDimension.height;
-		BufferedImage img = new BufferedImage(10,10,BufferedImage.TYPE_INT_ARGB);
-		Graphics g = img.getGraphics();
-		setGraphics(g);
-		setMargins(width,height);
+	{	initGraphics();
+		initSizes();
 		
 		
 		
@@ -727,512 +1550,15 @@ public class GuiTools
 		int gameDescriptionLabelTextFontSize = gameDescriptionLabelTextHeight/7;
 		sizes.put(GAME_DESCRIPTION_LABEL_TEXT_FONT_SIZE,gameDescriptionLabelTextFontSize);
 		
-		// images
-		BufferedImage absent = ImageTools.getAbsentImage(64,64);
-		BufferedImage image;
-		// buttons
-		{	String[] buttonStates = {ICON_NORMAL,ICON_NORMAL_SELECTED,
-					ICON_DISABLED,ICON_DISABLED_SELECTED,
-					ICON_ROLLOVER,ICON_ROLLOVER_SELECTED,
-					ICON_PRESSED};
-			//
-			String baseFolder = GuiFileTools.getButtonsPath()+File.separator;
-			{	String folder = baseFolder+GuiFileTools.FOLDER_DESCRIPTION+File.separator;
-				for(int i=0;i<buttonStates.length;i++)
-				{	image = loadIcon(folder+buttonStates[i]+".png",absent);
-					icons.put(GAME_TOURNAMENT_BUTTON_DESCRIPTION+buttonStates[i],image);
-					icons.put(GAME_MATCH_BUTTON_DESCRIPTION+buttonStates[i],image);
-					icons.put(GAME_ROUND_BUTTON_DESCRIPTION+buttonStates[i],image);
-				}
-			}
-			{	String folder = baseFolder+GuiFileTools.FOLDER_LEFT_BLUE+File.separator;
-				for(int i=0;i<buttonStates.length;i++)
-				{	image = loadIcon(folder+buttonStates[i]+".png",absent);
-					icons.put(GAME_TOURNAMENT_BUTTON_MENU+buttonStates[i],image);
-					icons.put(GAME_MATCH_BUTTON_CURRENT_TOURNAMENT+buttonStates[i],image);
-					icons.put(GAME_ROUND_BUTTON_CURRENT_MATCH+buttonStates[i],image);
-				}
-			}
-			{	String folder = baseFolder+GuiFileTools.FOLDER_LEFT_RED+File.separator;
-				for(int i=0;i<buttonStates.length;i++)
-				{	image = loadIcon(folder+buttonStates[i]+".png",absent);
-					icons.put(GAME_TOURNAMENT_BUTTON_FINISH+buttonStates[i],image);
-					icons.put(GAME_MATCH_BUTTON_FINISH+buttonStates[i],image);
-					icons.put(GAME_ROUND_BUTTON_FINISH+buttonStates[i],image);
-				}
-			}
-			{	String folder = baseFolder+GuiFileTools.FOLDER_PLAY+File.separator;
-				for(int i=0;i<buttonStates.length;i++)
-				{	image = loadIcon(folder+buttonStates[i]+".png",absent);
-					icons.put(GAME_ROUND_BUTTON_PLAY+buttonStates[i],image);
-				}
-			}
-			{	String folder = baseFolder+GuiFileTools.FOLDER_HOME+File.separator;
-				for(int i=0;i<buttonStates.length;i++)
-				{	image = loadIcon(folder+buttonStates[i]+".png",absent);
-					icons.put(GAME_TOURNAMENT_BUTTON_QUIT+buttonStates[i],image);
-					icons.put(GAME_MATCH_BUTTON_QUIT+buttonStates[i],image);
-					icons.put(GAME_ROUND_BUTTON_QUIT+buttonStates[i],image);
-				}
-			}
-			{	String folder = baseFolder+GuiFileTools.FOLDER_RESULTS+File.separator;
-				for(int i=0;i<buttonStates.length;i++)
-				{	image = loadIcon(folder+buttonStates[i]+".png",absent);
-					icons.put(GAME_TOURNAMENT_BUTTON_RESULTS+buttonStates[i],image);
-					icons.put(GAME_MATCH_BUTTON_RESULTS+buttonStates[i],image);
-					icons.put(GAME_ROUND_BUTTON_RESULTS+buttonStates[i],image);
-				}
-			}
-			{	String folder = baseFolder+GuiFileTools.FOLDER_RIGHT_BLUE+File.separator;
-				for(int i=0;i<buttonStates.length;i++)
-				{	image = loadIcon(folder+buttonStates[i]+".png",absent);
-				}
-			}
-			{	String folder = baseFolder+GuiFileTools.FOLDER_RIGHT_RED+File.separator;
-				for(int i=0;i<buttonStates.length;i++)
-				{	image = loadIcon(folder+buttonStates[i]+".png",absent);
-					icons.put(GAME_TOURNAMENT_BUTTON_CURRENT_MATCH+buttonStates[i],image);
-					icons.put(GAME_TOURNAMENT_BUTTON_NEXT_MATCH+buttonStates[i],image);
-					icons.put(GAME_MATCH_BUTTON_CURRENT_ROUND+buttonStates[i],image);
-					icons.put(GAME_MATCH_BUTTON_NEXT_ROUND+buttonStates[i],image);
-				}
-			}
-			{	String folder = baseFolder+GuiFileTools.FOLDER_STATS+File.separator;
-				for(int i=0;i<buttonStates.length;i++)
-				{	image = loadIcon(folder+buttonStates[i]+".png",absent);
-					icons.put(GAME_TOURNAMENT_BUTTON_STATISTICS+buttonStates[i],image);
-					icons.put(GAME_MATCH_BUTTON_STATISTICS+buttonStates[i],image);
-					icons.put(GAME_ROUND_BUTTON_STATISTICS+buttonStates[i],image);
-				}
-			}
-		}
-		
-		// header icons
-		{	String folder = GuiFileTools.getHeadersPath()+File.separator;
-			// author
-			image = loadIcon(folder+GuiFileTools.FILE_AUTHOR,absent);
-			icons.put(GAME_ROUND_DESCRIPTION_MISC_HEADER_AUTHOR,image);
-			icons.put(MENU_AI_SELECT_PREVIEW_AUTHOR,image);
-			icons.put(MENU_HERO_SELECT_PREVIEW_AUTHOR,image);
-			icons.put(MENU_LEVEL_SELECT_PREVIEW_AUTHOR,image);
-			// autofire
-			image = loadIcon(folder+GuiFileTools.FILE_AUTOFIRE,absent);
-			icons.put(MENU_OPTIONS_CONTROLS_HEADER_AUTO,image);
-			// bombs
-			image = loadIcon(folder+GuiFileTools.FILE_BOMBS,absent);
-			icons.put(GAME_TOURNAMENT_RESULTS_HEADER_BOMBS,image);
-			icons.put(GAME_MATCH_RESULTS_HEADER_BOMBS,image);
-			icons.put(GAME_ROUND_RESULTS_HEADER_BOMBS,image);
-			icons.put(GAME_TOURNAMENT_DESCRIPTION_LIMIT_HEADER_BOMBS,image);
-			icons.put(GAME_MATCH_DESCRIPTION_LIMIT_HEADER_BOMBS,image);
-			icons.put(GAME_ROUND_DESCRIPTION_LIMIT_HEADER_BOMBS,image);
-			// color
-			image = loadIcon(folder+GuiFileTools.FILE_COLOR,absent);
-			icons.put(MENU_PROFILES_PREVIEW_COLOR,image);
-			icons.put(MENU_PROFILES_EDIT_COLOR,image);
-			icons.put(MENU_HERO_SELECT_PREVIEW_COLORS,image);
-			// command
-			image = loadIcon(folder+GuiFileTools.FILE_COMMAND,absent);
-			icons.put(MENU_OPTIONS_CONTROLS_HEADER_COMMAND,image);
-			// computer
-			image = loadIcon(folder+GuiFileTools.FILE_COMPUTER,absent);
-			icons.put(MENU_PROFILES_PREVIEW_AINAME,image);
-			icons.put(MENU_PROFILES_EDIT_AI,image);
-			// confrontations
-			image = loadIcon(folder+GuiFileTools.FILE_CONFRONTATIONS,absent);
-			icons.put(GAME_TOURNAMENT_DESCRIPTION_LIMIT_HEADER_CONFRONTATIONS,image);
-			icons.put(GAME_MATCH_DESCRIPTION_LIMIT_HEADER_CONFRONTATIONS,image);
-			// constant
-			image = loadIcon(folder+GuiFileTools.FILE_CONSTANT,absent);
-			icons.put(GAME_TOURNAMENT_DESCRIPTION_POINTS_HEADER_CONSTANT,image);
-			icons.put(GAME_MATCH_DESCRIPTION_POINTS_HEADER_CONSTANT,image);
-			icons.put(GAME_ROUND_DESCRIPTION_POINTS_HEADER_CONSTANT,image);
-			// crowns
-			image = loadIcon(folder+GuiFileTools.FILE_CROWNS,absent);
-			icons.put(GAME_TOURNAMENT_RESULTS_HEADER_CROWNS,image);
-			icons.put(GAME_MATCH_RESULTS_HEADER_CROWNS,image);
-			icons.put(GAME_ROUND_RESULTS_HEADER_CROWNS,image);
-			icons.put(GAME_TOURNAMENT_DESCRIPTION_LIMIT_HEADER_CROWNS,image);
-			icons.put(GAME_MATCH_DESCRIPTION_LIMIT_HEADER_CROWNS,image);
-			icons.put(GAME_ROUND_DESCRIPTION_LIMIT_HEADER_CROWNS,image);
-			// custom points
-			image = loadIcon(folder+GuiFileTools.FILE_CUSTOM,absent);
-			icons.put(GAME_TOURNAMENT_DESCRIPTION_LIMIT_HEADER_CUSTOM,image);
-			icons.put(GAME_MATCH_DESCRIPTION_LIMIT_HEADER_CUSTOM,image);
-			icons.put(GAME_ROUND_DESCRIPTION_LIMIT_HEADER_CUSTOM,image);
-			icons.put(GAME_TOURNAMENT_RESULTS_HEADER_CUSTOM_LIMIT,image);
-			icons.put(GAME_MATCH_RESULTS_HEADER_CUSTOM_LIMIT,image);
-			icons.put(GAME_ROUND_RESULTS_HEADER_CUSTOM_LIMIT,image);
-			icons.put(GAME_TOURNAMENT_RESULTS_HEADER_CUSTOM_POINTS,image);
-			icons.put(GAME_MATCH_RESULTS_HEADER_CUSTOM_POINTS,image);
-			icons.put(GAME_ROUND_RESULTS_HEADER_CUSTOM_POINTS,image);
-			// deaths
-			image = loadIcon(folder+GuiFileTools.FILE_DEATHS,absent);
-			icons.put(GAME_TOURNAMENT_RESULTS_HEADER_DEATHS,image);
-			icons.put(GAME_MATCH_RESULTS_HEADER_DEATHS,image);
-			icons.put(GAME_ROUND_RESULTS_HEADER_DEATHS,image);
-			icons.put(GAME_TOURNAMENT_DESCRIPTION_LIMIT_HEADER_DEATHS,image);
-			icons.put(GAME_MATCH_DESCRIPTION_LIMIT_HEADER_DEATHS,image);
-			icons.put(GAME_ROUND_DESCRIPTION_LIMIT_HEADER_DEATHS,image);
-			// dimension
-			image = loadIcon(folder+GuiFileTools.FILE_DIMENSION,absent);
-			icons.put(GAME_ROUND_DESCRIPTION_MISC_HEADER_DIMENSION,image);
-			icons.put(MENU_LEVEL_SELECT_PREVIEW_SIZE,image);
-			// discretize
-			image = loadIcon(folder+GuiFileTools.FILE_DISCRETIZE,absent);
-			icons.put(GAME_TOURNAMENT_DESCRIPTION_POINTS_HEADER_DISCRETIZE,image);
-			icons.put(GAME_MATCH_DESCRIPTION_POINTS_HEADER_DISCRETIZE,image);
-			icons.put(GAME_ROUND_DESCRIPTION_POINTS_HEADER_DISCRETIZE,image);
-			// hero
-			image = loadIcon(folder+GuiFileTools.FILE_HERO,absent);
-			icons.put(MENU_PROFILES_PREVIEW_HERONAME,image);
-			icons.put(MENU_PROFILES_EDIT_HERO,image);
-			icons.put(MENU_HERO_SELECT_PREVIEW_IMAGE,image);			
-			// initial
-			image = loadIcon(folder+GuiFileTools.FILE_INITIAL,absent);
-			icons.put(GAME_ROUND_DESCRIPTION_INITIALITEMS_TITLE,image);
-			// instance
-			image = loadIcon(folder+GuiFileTools.FILE_INSTANCE,absent);
-			icons.put(GAME_ROUND_DESCRIPTION_MISC_HEADER_INSTANCE,image);
-			icons.put(MENU_LEVEL_SELECT_PREVIEW_INSTANCE,image);
-			// items
-			image = loadIcon(folder+GuiFileTools.FILE_ITEMS,absent);
-			icons.put(GAME_TOURNAMENT_RESULTS_HEADER_ITEMS,image);
-			icons.put(GAME_MATCH_RESULTS_HEADER_ITEMS,image);
-			icons.put(GAME_ROUND_RESULTS_HEADER_ITEMS,image);
-			icons.put(GAME_TOURNAMENT_DESCRIPTION_LIMIT_HEADER_ITEMS,image);
-			icons.put(GAME_MATCH_DESCRIPTION_LIMIT_HEADER_ITEMS,image);
-			icons.put(GAME_ROUND_DESCRIPTION_LIMIT_HEADER_ITEMS,image);
-			icons.put(GAME_ROUND_DESCRIPTION_ITEMSET_TITLE,image);
-			// key
-			image = loadIcon(folder+GuiFileTools.FILE_KEY,absent);
-			icons.put(MENU_OPTIONS_CONTROLS_HEADER_KEY,image);
-			icons.put(GAME_MATCH_DESCRIPTION_PLAYERS_HEADER_CONTROLS,image);
-			// kills
-			image = loadIcon(folder+GuiFileTools.FILE_KILLS,absent);
-			icons.put(GAME_TOURNAMENT_RESULTS_HEADER_KILLS,image);
-			icons.put(GAME_MATCH_RESULTS_HEADER_KILLS,image);
-			icons.put(GAME_ROUND_RESULTS_HEADER_KILLS,image);
-			icons.put(GAME_TOURNAMENT_DESCRIPTION_LIMIT_HEADER_KILLS,image);
-			icons.put(GAME_MATCH_DESCRIPTION_LIMIT_HEADER_KILLS,image);
-			icons.put(GAME_ROUND_DESCRIPTION_LIMIT_HEADER_KILLS,image);
-			// limits
-			image = loadIcon(folder+GuiFileTools.FILE_LIMITS,absent);
-			icons.put(GAME_TOURNAMENT_DESCRIPTION_LIMIT_TITLE,image);
-			icons.put(GAME_MATCH_DESCRIPTION_LIMIT_TITLE,image);
-			icons.put(GAME_ROUND_DESCRIPTION_LIMIT_TITLE,image);
-			// misc
-			image = loadIcon(folder+GuiFileTools.FILE_MISC,absent);
-			icons.put(GAME_TOURNAMENT_DESCRIPTION_MISC_TITLE,image);
-			icons.put(GAME_MATCH_DESCRIPTION_MISC_TITLE,image);
-			icons.put(GAME_ROUND_DESCRIPTION_MISC_TITLE,image);
-			icons.put(MENU_AI_SELECT_PREVIEW_NOTES,image);
-			// name
-			image = loadIcon(folder+GuiFileTools.FILE_NAME,absent);
-			icons.put(GAME_TOURNAMENT_DESCRIPTION_PLAYERS_HEADER_NAME,image);
-			icons.put(GAME_MATCH_DESCRIPTION_PLAYERS_HEADER_NAME,image);
-			icons.put(GAME_TOURNAMENT_RESULTS_HEADER_NAME,image);
-			icons.put(GAME_MATCH_RESULTS_HEADER_NAME,image);
-			icons.put(GAME_ROUND_RESULTS_HEADER_NAME,image);
-			icons.put(GAME_TOURNAMENT_STATISTICS_HEADER_NAME,image);
-			icons.put(GAME_MATCH_STATISTICS_HEADER_NAME,image);
-			icons.put(GAME_ROUND_STATISTICS_HEADER_NAME,image);
-			icons.put(MENU_PROFILES_PREVIEW_NAME,image);
-			icons.put(MENU_PROFILES_EDIT_NAME,image);
-			// pack
-			image = loadIcon(folder+GuiFileTools.FILE_PACK,absent);
-			icons.put(GAME_ROUND_DESCRIPTION_MISC_HEADER_PACK,image);
-			icons.put(MENU_PROFILES_PREVIEW_AIPACK,image);
-			icons.put(MENU_PROFILES_PREVIEW_HEROPACK,image);
-			icons.put(MENU_AI_SELECT_PREVIEW_PACKAGE,image);
-			icons.put(MENU_LEVEL_SELECT_PREVIEW_PACKAGE,image);
-			// paintings
-			image = loadIcon(folder+GuiFileTools.FILE_PAINTINGS,absent);
-			icons.put(GAME_TOURNAMENT_RESULTS_HEADER_PAINTINGS,image);
-			icons.put(GAME_MATCH_RESULTS_HEADER_PAINTINGS,image);
-			icons.put(GAME_ROUND_RESULTS_HEADER_PAINTINGS,image);
-			icons.put(GAME_TOURNAMENT_DESCRIPTION_LIMIT_HEADER_PAINTINGS,image);
-			icons.put(GAME_MATCH_DESCRIPTION_LIMIT_HEADER_PAINTINGS,image);
-			icons.put(GAME_ROUND_DESCRIPTION_LIMIT_HEADER_PAINTINGS,image);
-			// partial
-			image = loadIcon(folder+GuiFileTools.FILE_PARTIAL,absent);
-			icons.put(GAME_TOURNAMENT_DESCRIPTION_POINTS_HEADER_PARTIAL,image);
-			icons.put(GAME_MATCH_DESCRIPTION_POINTS_HEADER_PARTIAL,image);
-			icons.put(GAME_ROUND_DESCRIPTION_POINTS_HEADER_PARTIAL,image);
-			// points
-			image = loadIcon(folder+GuiFileTools.FILE_POINTS,absent);
-			icons.put(GAME_TOURNAMENT_RESULTS_HEADER_POINTS,image);
-			icons.put(GAME_MATCH_RESULTS_HEADER_POINTS,image);
-			icons.put(GAME_ROUND_RESULTS_HEADER_POINTS,image);
-			icons.put(GAME_TOURNAMENT_DESCRIPTION_POINTS_TITLE,image);
-			icons.put(GAME_MATCH_DESCRIPTION_POINTS_TITLE,image);
-			icons.put(GAME_ROUND_DESCRIPTION_POINTS_TITLE,image);
-			// profile
-			image = loadIcon(folder+GuiFileTools.FILE_PROFILE,absent);
-			icons.put(GAME_TOURNAMENT_DESCRIPTION_PLAYERS_HEADER_PROFILE,image);
-			icons.put(GAME_MATCH_DESCRIPTION_PLAYERS_HEADER_PROFILE,image);
-			icons.put(GAME_TOURNAMENT_RESULTS_HEADER_PROFILE,image);
-			icons.put(GAME_MATCH_RESULTS_HEADER_PROFILE,image);
-			icons.put(GAME_ROUND_RESULTS_HEADER_PROFILE,image);
-			// rank
-			image = loadIcon(folder+GuiFileTools.FILE_RANK,absent);
-			icons.put(GAME_TOURNAMENT_DESCRIPTION_PLAYERS_HEADER_RANK,image);
-			icons.put(GAME_MATCH_DESCRIPTION_PLAYERS_HEADER_RANK,image);
-			icons.put(GAME_TOURNAMENT_DESCRIPTION_POINTS_HEADER_RANKINGS,image);
-			icons.put(GAME_MATCH_DESCRIPTION_POINTS_HEADER_RANKINGS,image);
-			icons.put(GAME_ROUND_DESCRIPTION_POINTS_HEADER_RANKINGS,image);
-			icons.put(GAME_TOURNAMENT_DESCRIPTION_POINTS_HEADER_RANKPOINTS,image);
-			icons.put(GAME_MATCH_DESCRIPTION_POINTS_HEADER_RANKPOINTS,image);
-			icons.put(GAME_ROUND_DESCRIPTION_POINTS_HEADER_RANKPOINTS,image);
-			// score
-			image = loadIcon(folder+GuiFileTools.FILE_SCORE,absent);
-			icons.put(GAME_TOURNAMENT_DESCRIPTION_POINTS_HEADER_SCORE,image);
-			icons.put(GAME_MATCH_DESCRIPTION_POINTS_HEADER_SCORE,image);
-			icons.put(GAME_ROUND_DESCRIPTION_POINTS_HEADER_SCORE,image);
-			// source
-			image = loadIcon(folder+GuiFileTools.FILE_SOURCE,absent);
-			icons.put(GAME_ROUND_DESCRIPTION_MISC_HEADER_SOURCE,image);
-			icons.put(MENU_HERO_SELECT_PREVIEW_SOURCE,image);
-			icons.put(MENU_LEVEL_SELECT_PREVIEW_SOURCE,image);
-			// theme
-			image = loadIcon(folder+GuiFileTools.FILE_THEME,absent);
-			icons.put(GAME_ROUND_DESCRIPTION_MISC_HEADER_THEME,image);
-			icons.put(MENU_LEVEL_SELECT_PREVIEW_THEME,image);
-			// time
-			image = loadIcon(folder+GuiFileTools.FILE_TIME,absent);
-			icons.put(GAME_TOURNAMENT_RESULTS_HEADER_TIME,image);
-			icons.put(GAME_MATCH_RESULTS_HEADER_TIME,image);
-			icons.put(GAME_ROUND_RESULTS_HEADER_TIME,image);
-			icons.put(GAME_TOURNAMENT_DESCRIPTION_LIMIT_HEADER_TIME,image);
-			icons.put(GAME_MATCH_DESCRIPTION_LIMIT_HEADER_TIME,image);
-			icons.put(GAME_ROUND_DESCRIPTION_LIMIT_HEADER_TIME,image);
-			// title
-			image = loadIcon(folder+GuiFileTools.FILE_TITLE,absent);
-			icons.put(GAME_ROUND_DESCRIPTION_MISC_HEADER_TITLE,image);
-			icons.put(MENU_AI_SELECT_PREVIEW_NAME,image);
-			icons.put(MENU_HERO_SELECT_PREVIEW_NAME,image);
-			icons.put(MENU_LEVEL_SELECT_PREVIEW_NAME,image);
-			// total
-			image = loadIcon(folder+GuiFileTools.FILE_TOTAL,absent);
-			icons.put(GAME_TOURNAMENT_RESULTS_HEADER_TOTAL,image);
-			icons.put(GAME_MATCH_RESULTS_HEADER_TOTAL,image);
-			icons.put(GAME_TOURNAMENT_DESCRIPTION_LIMIT_HEADER_TOTAL,image);
-			icons.put(GAME_MATCH_DESCRIPTION_LIMIT_HEADER_TOTAL,image);
-			icons.put(GAME_TOURNAMENT_DESCRIPTION_POINTS_HEADER_TOTAL,image);
-			icons.put(GAME_MATCH_DESCRIPTION_POINTS_HEADER_TOTAL,image);
-		}			
-		// data icons
-		{	String folder = GuiFileTools.getDataPath()+File.separator;
-			// bombs
-			image = loadIcon(folder+GuiFileTools.FILE_BOMBS,absent);
-			icons.put(GAME_TOURNAMENT_DESCRIPTION_POINTS_DATA_BOMBS,image);
-			icons.put(GAME_MATCH_DESCRIPTION_POINTS_DATA_BOMBS,image);
-			icons.put(GAME_ROUND_DESCRIPTION_POINTS_DATA_BOMBS,image);
-			// computer
-			image = loadIcon(folder+GuiFileTools.FILE_COMPUTER,absent);
-			icons.put(GAME_TOURNAMENT_DESCRIPTION_PLAYERS_DATA_COMPUTER,image);
-			icons.put(GAME_MATCH_DESCRIPTION_PLAYERS_DATA_COMPUTER,image);
-			icons.put(GAME_TOURNAMENT_RESULTS_DATA_COMPUTER,image);
-			icons.put(GAME_MATCH_RESULTS_DATA_COMPUTER,image);
-			icons.put(GAME_ROUND_RESULTS_DATA_COMPUTER,image);
-			// crowns
-			image = loadIcon(folder+GuiFileTools.FILE_CROWNS,absent);
-			icons.put(GAME_TOURNAMENT_DESCRIPTION_POINTS_DATA_CROWNS,image);
-			icons.put(GAME_MATCH_DESCRIPTION_POINTS_DATA_CROWNS,image);
-			icons.put(GAME_ROUND_DESCRIPTION_POINTS_DATA_CROWNS,image);
-			// deaths
-			image = loadIcon(folder+GuiFileTools.FILE_DEATHS,absent);
-			icons.put(GAME_TOURNAMENT_DESCRIPTION_POINTS_DATA_DEATHS,image);
-			icons.put(GAME_MATCH_DESCRIPTION_POINTS_DATA_DEATHS,image);
-			icons.put(GAME_ROUND_DESCRIPTION_POINTS_DATA_DEATHS,image);
-			// edit
-			image = loadIcon(folder+GuiFileTools.FILE_EDIT,absent);
-			icons.put(MENU_PROFILES_EDIT_AI_CHANGE,image);
-			icons.put(MENU_PROFILES_EDIT_HERO_CHANGE,image);
-			icons.put(MENU_PROFILES_EDIT_NAME_CHANGE,image);
-			// false
-			image = loadIcon(folder+GuiFileTools.FILE_FALSE,absent);
-			icons.put(MENU_OPTIONS_CONTROLS_LINE_AUTO_FALSE,image);
-			icons.put(MENU_OPTIONS_VIDEO_LINE_DISABLED,image);
-			icons.put(MENU_OPTIONS_ADVANCED_LINE_ADJUST_DISABLED,image);
-			icons.put(MENU_PROFILES_EDIT_AI_RESET,image);
-			// human
-			image = loadIcon(folder+GuiFileTools.FILE_HUMAN,absent);
-			icons.put(GAME_TOURNAMENT_DESCRIPTION_PLAYERS_DATA_HUMAN,image);
-			icons.put(GAME_MATCH_DESCRIPTION_PLAYERS_DATA_HUMAN,image);
-			icons.put(GAME_TOURNAMENT_RESULTS_DATA_HUMAN,image);
-			icons.put(GAME_MATCH_RESULTS_DATA_HUMAN,image);
-			icons.put(GAME_ROUND_RESULTS_DATA_HUMAN,image);
-			// inverted order
-			image = loadIcon(folder+GuiFileTools.FILE_INVERTED,absent);
-			icons.put(GAME_TOURNAMENT_DESCRIPTION_POINTS_DATA_INVERTED,image);
-			icons.put(GAME_MATCH_DESCRIPTION_POINTS_DATA_INVERTED,image);
-			icons.put(GAME_ROUND_DESCRIPTION_POINTS_DATA_INVERTED,image);
-			// items
-			image = loadIcon(folder+GuiFileTools.FILE_ITEMS,absent);
-			icons.put(GAME_TOURNAMENT_DESCRIPTION_POINTS_DATA_ITEMS,image);
-			icons.put(GAME_MATCH_DESCRIPTION_POINTS_DATA_ITEMS,image);
-			icons.put(GAME_ROUND_DESCRIPTION_POINTS_DATA_ITEMS,image);
-			// kills
-			image = loadIcon(folder+GuiFileTools.FILE_KILLS,absent);
-			icons.put(GAME_TOURNAMENT_DESCRIPTION_POINTS_DATA_KILLS,image);
-			icons.put(GAME_MATCH_DESCRIPTION_POINTS_DATA_KILLS,image);
-			icons.put(GAME_ROUND_DESCRIPTION_POINTS_DATA_KILLS,image);
-			// minus
-			image = loadIcon(folder+GuiFileTools.FILE_MINUS,absent);
-			icons.put(MENU_OPTIONS_VIDEO_LINE_MINUS,image);
-			icons.put(MENU_OPTIONS_ADVANCED_LINE_FPS_MINUS,image);
-			icons.put(MENU_OPTIONS_ADVANCED_LINE_SPEED_MINUS,image);
-			// next
-			image = loadIcon(folder+GuiFileTools.FILE_NEXT,absent);
-			icons.put(MENU_OPTIONS_GUI_LINE_LANGUAGE_NEXT,image);
-			icons.put(MENU_OPTIONS_GUI_LINE_FONT_NEXT,image);
-			icons.put(MENU_OPTIONS_GUI_LINE_BACKGROUND_NEXT,image);
-			icons.put(MENU_PROFILES_EDIT_COLOR_NEXT,image);
-			// no share
-			image = loadIcon(folder+GuiFileTools.FILE_NOSHARE,absent);
-			icons.put(GAME_TOURNAMENT_DESCRIPTION_POINTS_DATA_NOSHARE,image);
-			icons.put(GAME_MATCH_DESCRIPTION_POINTS_DATA_NOSHARE,image);
-			icons.put(GAME_ROUND_DESCRIPTION_POINTS_DATA_NOSHARE,image);
-			// page down
-			image = loadIcon(folder+GuiFileTools.FILE_PAGE_DOWN,absent);
-			icons.put(MENU_PROFILES_LIST_PAGEDOWN,image);
-			icons.put(MENU_AI_SELECT_CLASS_PAGEDOWN,image);
-			icons.put(MENU_AI_SELECT_PACKAGE_PAGEDOWN,image);
-			icons.put(MENU_HERO_SELECT_FOLDER_PAGEDOWN,image);
-			icons.put(MENU_HERO_SELECT_PACKAGE_PAGEDOWN,image);
-			icons.put(MENU_LEVEL_SELECT_FOLDER_PAGEDOWN,image);
-			icons.put(MENU_LEVEL_SELECT_PACKAGE_PAGEDOWN,image);
-			// page up
-			image = loadIcon(folder+GuiFileTools.FILE_PAGE_UP,absent);
-			icons.put(MENU_PROFILES_LIST_PAGEUP,image);
-			icons.put(MENU_AI_SELECT_CLASS_PAGEUP,image);
-			icons.put(MENU_AI_SELECT_PACKAGE_PAGEUP,image);
-			icons.put(MENU_HERO_SELECT_FOLDER_PAGEUP,image);
-			icons.put(MENU_HERO_SELECT_PACKAGE_PAGEUP,image);
-			icons.put(MENU_LEVEL_SELECT_FOLDER_PAGEUP,image);
-			icons.put(MENU_LEVEL_SELECT_PACKAGE_PAGEUP,image);
-			// paintings
-			image = loadIcon(folder+GuiFileTools.FILE_PAINTINGS,absent);
-			icons.put(GAME_TOURNAMENT_DESCRIPTION_POINTS_DATA_PAINTINGS,image);
-			icons.put(GAME_MATCH_DESCRIPTION_POINTS_DATA_PAINTINGS,image);
-			icons.put(GAME_ROUND_DESCRIPTION_POINTS_DATA_PAINTINGS,image);
-			// partial
-			image = loadIcon(folder+GuiFileTools.FILE_PARTIAL,absent);
-			icons.put(GAME_TOURNAMENT_DESCRIPTION_POINTS_DATA_PARTIAL,image);
-			icons.put(GAME_MATCH_DESCRIPTION_POINTS_DATA_PARTIAL,image);
-			icons.put(GAME_ROUND_DESCRIPTION_POINTS_DATA_PARTIAL,image);
-			// plus
-			image = loadIcon(folder+GuiFileTools.FILE_PLUS,absent);
-			icons.put(MENU_OPTIONS_VIDEO_LINE_PLUS,image);
-			icons.put(MENU_OPTIONS_ADVANCED_LINE_FPS_PLUS,image);
-			icons.put(MENU_OPTIONS_ADVANCED_LINE_SPEED_PLUS,image);
-			// previous
-			image = loadIcon(folder+GuiFileTools.FILE_PREVIOUS,absent);
-			icons.put(MENU_OPTIONS_GUI_LINE_LANGUAGE_PREVIOUS,image);
-			icons.put(MENU_OPTIONS_GUI_LINE_FONT_PREVIOUS,image);
-			icons.put(MENU_OPTIONS_GUI_LINE_BACKGROUND_PREVIOUS,image);
-			icons.put(MENU_PROFILES_EDIT_COLOR_PREVIOUS,image);
-			// regular order
-			image = loadIcon(folder+GuiFileTools.FILE_REGULAR,absent);
-			icons.put(GAME_TOURNAMENT_DESCRIPTION_POINTS_DATA_REGULAR,image);
-			icons.put(GAME_MATCH_DESCRIPTION_POINTS_DATA_REGULAR,image);
-			icons.put(GAME_ROUND_DESCRIPTION_POINTS_DATA_REGULAR,image);
-			// share
-			image = loadIcon(folder+GuiFileTools.FILE_SHARE,absent);
-			icons.put(GAME_TOURNAMENT_DESCRIPTION_POINTS_DATA_SHARE,image);
-			icons.put(GAME_MATCH_DESCRIPTION_POINTS_DATA_SHARE,image);
-			icons.put(GAME_ROUND_DESCRIPTION_POINTS_DATA_SHARE,image);
-			// time
-			image = loadIcon(folder+GuiFileTools.FILE_TIME,absent);
-			icons.put(GAME_TOURNAMENT_DESCRIPTION_POINTS_DATA_TIME,image);
-			icons.put(GAME_MATCH_DESCRIPTION_POINTS_DATA_TIME,image);
-			icons.put(GAME_ROUND_DESCRIPTION_POINTS_DATA_TIME,image);
-			// true
-			image = loadIcon(folder+GuiFileTools.FILE_TRUE,absent);
-			icons.put(MENU_OPTIONS_CONTROLS_LINE_AUTO_TRUE,image);
-			icons.put(MENU_OPTIONS_VIDEO_LINE_ENABLED,image);
-			icons.put(MENU_OPTIONS_ADVANCED_LINE_ADJUST_ENABLED,image);
-		}
 	}
 	
 	
-	public static int getSize(String key)
-	{	int result = -1;
-		Integer temp = sizes.get(key);
-		if(temp!=null)
-			result = temp.intValue();
-		return result;
-	}
-	public static BufferedImage getIcon(String key)
-	{	BufferedImage result;
-		BufferedImage temp = icons.get(key);
-		if(temp==null)
-			result = ImageTools.getAbsentImage(64,64);
-		else
-			result = temp;
-		return result;
-	}
-	public static boolean hasIcon(String key)
-	{	return icons.containsKey(key);		
-	}
-	
-	public static int getFontSize(double limit)
-	{	int result = 0;
-		int fheight;
-		do
-		{	result++;
-			Font font = GuiConfiguration.getMiscConfiguration().getFont().deriveFont((float)result);
-			graphics.setFont(font);
-			FontMetrics metrics = graphics.getFontMetrics(font);
-			fheight = metrics.getHeight();
-		}
-		while(fheight<limit);
-		return result;
-	}
-	public static int getFontSize(double width, double height, String text)
-	{	int result = 0;
-		int fheight,fwidth;
-		do
-		{	result++;
-			Font font = GuiConfiguration.getMiscConfiguration().getFont().deriveFont((float)result);
-			graphics.setFont(font);
-			FontMetrics metrics = graphics.getFontMetrics(font);
-			fheight = metrics.getHeight();
-			Rectangle2D bounds = metrics.getStringBounds(text,graphics);
-			fwidth = (int)bounds.getWidth();
-		}
-		while(fheight<height && fwidth<width);
-		return result-1;
-	}
-	public static int getPixelHeight(float fontSize)
-	{	int result;
-		Font font = GuiConfiguration.getMiscConfiguration().getFont().deriveFont(fontSize);
-		graphics.setFont(font);
-		FontMetrics metrics = graphics.getFontMetrics(font);
-		result = (int)(metrics.getHeight()*1.2);
-		return result;
-	}
-	public static int getPixelWidth(float fontSize, String text)
-	{	int result;
-		Font font = GuiConfiguration.getMiscConfiguration().getFont().deriveFont(fontSize);
-		graphics.setFont(font);
-		FontMetrics metrics = graphics.getFontMetrics(font);
-		Rectangle2D bounds = metrics.getStringBounds(text,graphics);
-		result = (int)bounds.getWidth();
-		return result;
-	}
 
-	public static BufferedImage loadIcon(String path, BufferedImage absent)
-	{	BufferedImage image;
-		try
-		{	image = ImageTools.loadImage(path,null);
-		}
-		catch (IOException e)
-		{	image = absent;
-		}
-		return image;	
-	}
+	
+	
+	
+	
+	
 	
 	
 	
@@ -1317,9 +1643,9 @@ public class GuiTools
 		// action command
 		button.setActionCommand(name);
 		// tooltip
-		String toolTip = name+GuiTools.TOOLTIP;
-		String text = GuiConfiguration.getMiscConfiguration().getLanguage().getText(toolTip);
-		button.setToolTipText(text);
+		String tooltipKey = name+GuiTools.TOOLTIP;
+		String tooltip = GuiConfiguration.getMiscConfiguration().getLanguage().getText(tooltipKey);
+		button.setToolTipText(tooltip);
 	}		
 	public static void initButton(AbstractButton result,String name, int width, int height, ButtonAware panel)
 	{	// dimension
