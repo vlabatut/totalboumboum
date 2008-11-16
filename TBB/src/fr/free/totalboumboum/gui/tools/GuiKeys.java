@@ -210,6 +210,14 @@ public class GuiKeys
 		public static final String MENU_PROFILES_PREVIEW_HERONAME = "MenuProfilesPreviewHeroName";
 		public static final String MENU_PROFILES_PREVIEW_HEROPACK = "MenuProfilesPreviewHeroPack";
 		public static final String MENU_PROFILES_PREVIEW_NAME = "MenuProfilesPreviewName";
+	/* QUICKMATCH */	
+	public static final String MENU_QUICKMATCH_BUTTON = "MenuTournamentButton";
+	public static final String MENU_QUICKMATCH_BUTTON_DESCRIPTION = MENU_QUICKMATCH_BUTTON+"Description";
+	public static final String MENU_QUICKMATCH_BUTTON_NEXT = MENU_QUICKMATCH_BUTTON+"Next";
+	public static final String MENU_QUICKMATCH_BUTTON_PREVIOUS = MENU_QUICKMATCH_BUTTON+"Previous";
+	public static final String MENU_QUICKMATCH_BUTTON_QUIT = MENU_QUICKMATCH_BUTTON+"Quit";
+	public static final String MENU_QUICKMATCH_BUTTON_RESULTS = MENU_QUICKMATCH_BUTTON+"Results";
+	public static final String MENU_QUICKMATCH_BUTTON_STATISTICS = MENU_QUICKMATCH_BUTTON+"Statistics";
 	/* TOURNAMENT */	
 	public static final String MENU_TOURNAMENT_BUTTON = "MenuTournamentButton";
 	public static final String MENU_TOURNAMENT_BUTTON_BACK = MENU_TOURNAMENT_BUTTON+"Back";
@@ -220,6 +228,7 @@ public class GuiKeys
 	public static final String MENU_TOURNAMENT_BUTTON_RULES = MENU_TOURNAMENT_BUTTON+"Rules";
 	public static final String MENU_TOURNAMENT_BUTTON_SAVE_AS = MENU_TOURNAMENT_BUTTON+"SaveAs";
 	public static final String MENU_TOURNAMENT_BUTTON_START = MENU_TOURNAMENT_BUTTON+"Start";
+	
 	/* COLORS */
 	public static final String COLOR = "Color";
 	public static final String COLOR_BLACK = COLOR+"Black";

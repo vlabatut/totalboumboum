@@ -737,4 +737,14 @@ public class Launcher
 	 *  - intérêt : tout ça permet d'implémenter le bonus à celui qui tue tout le monde en survival, par opposition à une victoire temporelle qui rapporterait donc moins de points
 	 *  - LA NOTION DE PLAYMODE EST A SUPPRIMER 
 	 */
+	
+	
+	
+	/*
+	 * NOM : précédent/suivant/naviguer
+	 * TYPE : IA ou HUMAIN
+	 * HERO : précédent/suivant/naviguer
+	 * COULEUR : précédent/suivant
+	 * COMMANDES : précédent/suivant
+	 */
 }
