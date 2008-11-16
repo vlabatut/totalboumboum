@@ -40,6 +40,7 @@ import fr.free.totalboumboum.game.statistics.StatisticRound;
 import fr.free.totalboumboum.gui.common.panel.SplitMenuPanel;
 import fr.free.totalboumboum.gui.common.panel.data.EntitledDataPanel;
 import fr.free.totalboumboum.gui.common.subpanel.UntitledSubPanelTable;
+import fr.free.totalboumboum.gui.tools.GuiKeys;
 import fr.free.totalboumboum.gui.tools.GuiTools;
 import fr.free.totalboumboum.tools.StringTools;
 
@@ -53,7 +54,7 @@ public class RoundResults extends EntitledDataPanel
 	{	super(container);
 
 		// title
-		String key = GuiTools.GAME_ROUND_RESULTS_TITLE;
+		String key = GuiKeys.GAME_ROUND_RESULTS_TITLE;
 		setTitleKey(key);
 		
 		// data
@@ -69,23 +70,23 @@ public class RoundResults extends EntitledDataPanel
 				String sc = null;
 				switch(round.getPlayMode())
 				{	case CROWN:
-						sc = GuiTools.GAME_ROUND_RESULTS_HEADER_CROWNS;
+						sc = GuiKeys.GAME_ROUND_RESULTS_HEADER_CROWNS;
 						break;
 					case PAINT:
-						sc = GuiTools.GAME_ROUND_RESULTS_HEADER_PAINTINGS;
+						sc = GuiKeys.GAME_ROUND_RESULTS_HEADER_PAINTINGS;
 						break;
 					case SURVIVAL:
-						sc = GuiTools.GAME_ROUND_RESULTS_HEADER_TIME;
+						sc = GuiKeys.GAME_ROUND_RESULTS_HEADER_TIME;
 						break;
 				}
 				String keys[] = 
-				{	GuiTools.GAME_ROUND_RESULTS_HEADER_NAME,
-					GuiTools.GAME_ROUND_RESULTS_HEADER_BOMBS,
-					GuiTools.GAME_ROUND_RESULTS_HEADER_ITEMS,
-					GuiTools.GAME_ROUND_RESULTS_HEADER_DEATHS,
-					GuiTools.GAME_ROUND_RESULTS_HEADER_KILLS,
+				{	GuiKeys.GAME_ROUND_RESULTS_HEADER_NAME,
+					GuiKeys.GAME_ROUND_RESULTS_HEADER_BOMBS,
+					GuiKeys.GAME_ROUND_RESULTS_HEADER_ITEMS,
+					GuiKeys.GAME_ROUND_RESULTS_HEADER_DEATHS,
+					GuiKeys.GAME_ROUND_RESULTS_HEADER_KILLS,
 					sc,
-					GuiTools.GAME_ROUND_RESULTS_HEADER_POINTS
+					GuiKeys.GAME_ROUND_RESULTS_HEADER_POINTS
 				};
 				for(int col=1;col<keys.length+1;col++)
 					resultsPanel.setLabelKey(0,col,keys[col-1],true);

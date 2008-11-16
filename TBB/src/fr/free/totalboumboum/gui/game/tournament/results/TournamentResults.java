@@ -37,7 +37,7 @@ public abstract class TournamentResults extends EntitledDataPanel
 	{	super(container);
 		
 		// title
-		String key = GuiTools.GAME_TOURNAMENT_RESULTS_TITLE;
+		String key = GuiKeys.GAME_TOURNAMENT_RESULTS_TITLE;
 		setTitleKey(key);
 		
 	}

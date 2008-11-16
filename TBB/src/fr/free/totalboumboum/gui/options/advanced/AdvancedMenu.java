@@ -38,6 +38,7 @@ import fr.free.totalboumboum.configuration.engine.EngineConfigurationSaver;
 import fr.free.totalboumboum.gui.common.panel.SplitMenuPanel;
 import fr.free.totalboumboum.gui.common.panel.menu.InnerMenuPanel;
 import fr.free.totalboumboum.gui.common.panel.menu.MenuPanel;
+import fr.free.totalboumboum.gui.tools.GuiKeys;
 import fr.free.totalboumboum.gui.tools.GuiTools;
 
 public class AdvancedMenu extends InnerMenuPanel
@@ -62,9 +63,9 @@ public class AdvancedMenu extends InnerMenuPanel
 
 		// buttons
 		add(Box.createVerticalGlue());
-		buttonConfirm = GuiTools.createSecondaryVerticalMenuButton(GuiTools.MENU_OPTIONS_BUTTON_CONFIRM,this);
+		buttonConfirm = GuiTools.createSecondaryVerticalMenuButton(GuiKeys.MENU_OPTIONS_BUTTON_CONFIRM,this);
 		add(Box.createRigidArea(new Dimension(0,GuiTools.getSize(GuiTools.MENU_VERTICAL_BUTTON_SPACE))));
-		buttonCancel = GuiTools.createSecondaryVerticalMenuButton(GuiTools.MENU_OPTIONS_BUTTON_CANCEL,this);
+		buttonCancel = GuiTools.createSecondaryVerticalMenuButton(GuiKeys.MENU_OPTIONS_BUTTON_CANCEL,this);
 		add(Box.createVerticalGlue());		
 
 		// panels
@@ -73,7 +74,7 @@ public class AdvancedMenu extends InnerMenuPanel
 	}
 	
 	public void actionPerformed(ActionEvent e)
-	{	if(e.getActionCommand().equals(GuiTools.MENU_OPTIONS_BUTTON_CONFIRM))
+	{	if(e.getActionCommand().equals(GuiKeys.MENU_OPTIONS_BUTTON_CONFIRM))
 		{	EngineConfiguration engineConfiguration = advancedData.getEngineConfiguration();
 			Configuration.setEngineConfiguration(engineConfiguration);
 			try
@@ -97,7 +98,7 @@ public class AdvancedMenu extends InnerMenuPanel
 //TODO propager éventuellement au round (car il n'y a pas modification mais remplacement, donc si c déjà affecté à un player..
 			replaceWith(parent);
 	    }
-		else if(e.getActionCommand().equals(GuiTools.MENU_OPTIONS_BUTTON_CANCEL))
+		else if(e.getActionCommand().equals(GuiKeys.MENU_OPTIONS_BUTTON_CANCEL))
 		{	replaceWith(parent);
 	    }
 	} 

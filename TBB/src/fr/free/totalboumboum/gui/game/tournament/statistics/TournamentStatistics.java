@@ -33,7 +33,7 @@ public class TournamentStatistics extends EntitledDataPanel
 	{	super(container);
 
 		// title
-		String key = GuiTools.GAME_TOURNAMENT_STATISTICS_TITLE;
+		String key = GuiKeys.GAME_TOURNAMENT_STATISTICS_TITLE;
 		setTitleKey(key);
 	
 	}

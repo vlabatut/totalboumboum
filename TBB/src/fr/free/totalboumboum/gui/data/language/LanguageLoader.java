@@ -33,7 +33,7 @@ import org.jdom.Element;
 import org.xml.sax.SAXException;
 
 import fr.free.totalboumboum.gui.tools.GuiFileTools;
-import fr.free.totalboumboum.gui.tools.GuiTools;
+import fr.free.totalboumboum.gui.tools.GuiKeys;
 import fr.free.totalboumboum.tools.FileTools;
 import fr.free.totalboumboum.tools.XmlTools;
 import fr.free.totalboumboum.gui.tools.GuiXmlTools;
@@ -93,7 +93,7 @@ public class LanguageLoader
 		Attribute att = root.getAttribute(GuiXmlTools.ATT_TOOLTIP);
 		if(att!=null)
 		{	String tooltip = att.getValue().trim();
-			result.addText(newName+GuiTools.TOOLTIP,tooltip);
+			result.addText(newName+GuiKeys.TOOLTIP,tooltip);
 		}
 	}
 }

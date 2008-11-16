@@ -50,6 +50,7 @@ import fr.free.totalboumboum.gui.common.subpanel.SubPanel;
 import fr.free.totalboumboum.gui.common.subpanel.SubTextPanel;
 import fr.free.totalboumboum.gui.common.subpanel.UntitledSubPanelTable;
 import fr.free.totalboumboum.gui.data.configuration.GuiConfiguration;
+import fr.free.totalboumboum.gui.tools.GuiKeys;
 import fr.free.totalboumboum.gui.tools.GuiTools;
 import fr.free.totalboumboum.tools.ClassTools;
 import fr.free.totalboumboum.tools.FileTools;
@@ -103,7 +104,7 @@ public class SelectedAiData extends EntitledDataPanel implements MouseListener
 	{	super(container);
 
 		// title
-		setTitleKey(GuiTools.MENU_AI_SELECT_TITLE);
+		setTitleKey(GuiKeys.MENU_AI_SELECT_TITLE);
 	
 		// data
 		{	mainPanel = new SubPanel(dataWidth,dataHeight);
@@ -286,7 +287,7 @@ public class SelectedAiData extends EntitledDataPanel implements MouseListener
 			// page up
 			{	Color bg = GuiTools.COLOR_TABLE_HEADER_BACKGROUND;
 				listPanel.setLabelBackground(LIST_LINE_PREVIOUS,0,bg);
-				String key = GuiTools.MENU_AI_SELECT_PACKAGE_PAGEUP;
+				String key = GuiKeys.MENU_AI_SELECT_PACKAGE_PAGEUP;
 				listPanel.setLabelKey(LIST_LINE_PREVIOUS,0,key,true);
 				JLabel label = listPanel.getLabel(LIST_LINE_PREVIOUS,0);
 				label.addMouseListener(this);
@@ -294,7 +295,7 @@ public class SelectedAiData extends EntitledDataPanel implements MouseListener
 			// page down
 			{	Color bg = GuiTools.COLOR_TABLE_HEADER_BACKGROUND;
 				listPanel.setLabelBackground(LIST_LINE_NEXT,0,bg);
-				String key = GuiTools.MENU_AI_SELECT_PACKAGE_PAGEDOWN;
+				String key = GuiKeys.MENU_AI_SELECT_PACKAGE_PAGEDOWN;
 				listPanel.setLabelKey(LIST_LINE_NEXT,0,key,true);
 				JLabel label = listPanel.getLabel(LIST_LINE_NEXT,0);
 				label.addMouseListener(this);
@@ -325,7 +326,7 @@ public class SelectedAiData extends EntitledDataPanel implements MouseListener
 			// page up
 			{	Color bg = GuiTools.COLOR_TABLE_HEADER_BACKGROUND;
 				listPanel.setLabelBackground(LIST_LINE_PREVIOUS,0,bg);
-				String key = GuiTools.MENU_AI_SELECT_CLASS_PAGEUP;
+				String key = GuiKeys.MENU_AI_SELECT_CLASS_PAGEUP;
 				listPanel.setLabelKey(LIST_LINE_PREVIOUS,0,key,true);
 				JLabel label = listPanel.getLabel(LIST_LINE_PREVIOUS,0);
 				label.addMouseListener(this);
@@ -333,7 +334,7 @@ public class SelectedAiData extends EntitledDataPanel implements MouseListener
 			// parent
 			{	Color bg = GuiTools.COLOR_TABLE_HEADER_BACKGROUND;
 				listPanel.setLabelBackground(LIST_LINE_PARENT,0,bg);
-				String key = GuiTools.MENU_AI_SELECT_CLASS_PARENT;
+				String key = GuiKeys.MENU_AI_SELECT_CLASS_PARENT;
 				listPanel.setLabelKey(LIST_LINE_PARENT,0,key,false);
 				JLabel label = listPanel.getLabel(LIST_LINE_PARENT,0);
 				label.addMouseListener(this);
@@ -341,7 +342,7 @@ public class SelectedAiData extends EntitledDataPanel implements MouseListener
 			// page down
 			{	Color bg = GuiTools.COLOR_TABLE_HEADER_BACKGROUND;
 				listPanel.setLabelBackground(LIST_LINE_NEXT,0,bg);
-				String key = GuiTools.MENU_AI_SELECT_CLASS_PAGEDOWN;
+				String key = GuiKeys.MENU_AI_SELECT_CLASS_PAGEDOWN;
 				listPanel.setLabelKey(LIST_LINE_NEXT,0,key,true);
 				JLabel label = listPanel.getLabel(LIST_LINE_NEXT,0);
 				label.addMouseListener(this);
@@ -358,9 +359,9 @@ public class SelectedAiData extends EntitledDataPanel implements MouseListener
 		
 		// data
 		String keys[] = 
-		{	GuiTools.MENU_AI_SELECT_PREVIEW_NAME,
-			GuiTools.MENU_AI_SELECT_PREVIEW_PACKAGE,
-			GuiTools.MENU_AI_SELECT_PREVIEW_AUTHOR
+		{	GuiKeys.MENU_AI_SELECT_PREVIEW_NAME,
+			GuiKeys.MENU_AI_SELECT_PREVIEW_PACKAGE,
+			GuiKeys.MENU_AI_SELECT_PREVIEW_AUTHOR
 		};
 		for(int line=0;line<keys.length;line++)
 		{	int colSub = 0;
@@ -372,7 +373,7 @@ public class SelectedAiData extends EntitledDataPanel implements MouseListener
 				colSub++;
 			}
 			{	String text = null;
-				String tooltip = GuiConfiguration.getMiscConfiguration().getLanguage().getText(keys[line]+GuiTools.TOOLTIP);
+				String tooltip = GuiConfiguration.getMiscConfiguration().getLanguage().getText(keys[line]+GuiKeys.TOOLTIP);
 				infosPanel.setLabelText(line,colSub,text,tooltip);
 				if(line>0)
 				{	Color bg = GuiTools.COLOR_TABLE_REGULAR_BACKGROUND;
@@ -389,7 +390,7 @@ public class SelectedAiData extends EntitledDataPanel implements MouseListener
 	private void makeNotesPanel(int width, int height)
 	{	notesPanel = new EntitledSubPanel(width,height);
 		
-		String key = GuiTools.MENU_AI_SELECT_PREVIEW_NOTES;
+		String key = GuiKeys.MENU_AI_SELECT_PREVIEW_NOTES;
 		notesPanel.setTitleKey(key,true);
 		
 		float fontSize = notesPanel.getTitleFontSize()/2;
@@ -439,7 +440,7 @@ public class SelectedAiData extends EntitledDataPanel implements MouseListener
 			}
 			for(int i=1;i<index;i++)
 			{	int line = VIEW_LINE_AUTHOR+i;
-				infosPanel.setLabelKey(line,0,GuiTools.MENU_AI_SELECT_PREVIEW_AUTHOR,true);
+				infosPanel.setLabelKey(line,0,GuiKeys.MENU_AI_SELECT_PREVIEW_AUTHOR,true);
 				Color fg = GuiTools.COLOR_TABLE_HEADER_FOREGROUND;
 				infosPanel.setLabelForeground(line,0,fg);
 				Color bg = GuiTools.COLOR_TABLE_HEADER_BACKGROUND;

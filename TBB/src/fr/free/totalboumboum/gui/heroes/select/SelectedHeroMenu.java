@@ -30,6 +30,7 @@ import javax.swing.JButton;
 import fr.free.totalboumboum.gui.common.panel.SplitMenuPanel;
 import fr.free.totalboumboum.gui.common.panel.menu.InnerMenuPanel;
 import fr.free.totalboumboum.gui.common.panel.menu.MenuPanel;
+import fr.free.totalboumboum.gui.tools.GuiKeys;
 import fr.free.totalboumboum.gui.tools.GuiTools;
 
 public class SelectedHeroMenu extends InnerMenuPanel
@@ -52,7 +53,7 @@ public class SelectedHeroMenu extends InnerMenuPanel
 
 		// buttons
 		add(Box.createVerticalGlue());
-		buttonBack = GuiTools.createSecondaryVerticalMenuButton(GuiTools.MENU_HERO_BUTTON_BACK,this);
+		buttonBack = GuiTools.createSecondaryVerticalMenuButton(GuiKeys.MENU_HERO_BUTTON_BACK,this);
 		add(Box.createVerticalGlue());		
 
 		// panels
@@ -61,7 +62,7 @@ public class SelectedHeroMenu extends InnerMenuPanel
 	}
 	
 	public void actionPerformed(ActionEvent e)
-	{	if(e.getActionCommand().equals(GuiTools.MENU_HERO_BUTTON_BACK))
+	{	if(e.getActionCommand().equals(GuiKeys.MENU_HERO_BUTTON_BACK))
 		{	replaceWith(parent);
 	    }
 	} 

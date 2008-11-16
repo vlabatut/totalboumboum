@@ -40,6 +40,7 @@ import fr.free.totalboumboum.gui.common.panel.SplitMenuPanel;
 import fr.free.totalboumboum.gui.common.panel.menu.InnerMenuPanel;
 import fr.free.totalboumboum.gui.common.panel.menu.MenuPanel;
 import fr.free.totalboumboum.gui.options.controls.ControlsData;
+import fr.free.totalboumboum.gui.tools.GuiKeys;
 import fr.free.totalboumboum.gui.tools.GuiTools;
 
 public class ControlsMenu extends InnerMenuPanel
@@ -71,12 +72,12 @@ public class ControlsMenu extends InnerMenuPanel
 
 		// buttons
 		add(Box.createVerticalGlue());
-		buttonPrevious = GuiTools.createSecondaryVerticalMenuButton(GuiTools.MENU_OPTIONS_BUTTON_PREVIOUS,this);
-		buttonNext = GuiTools.createSecondaryVerticalMenuButton(GuiTools.MENU_OPTIONS_BUTTON_NEXT,this);
+		buttonPrevious = GuiTools.createSecondaryVerticalMenuButton(GuiKeys.MENU_OPTIONS_BUTTON_PREVIOUS,this);
+		buttonNext = GuiTools.createSecondaryVerticalMenuButton(GuiKeys.MENU_OPTIONS_BUTTON_NEXT,this);
 		add(Box.createRigidArea(new Dimension(0,GuiTools.getSize(GuiTools.MENU_VERTICAL_BUTTON_SPACE))));
-		buttonConfirm = GuiTools.createSecondaryVerticalMenuButton(GuiTools.MENU_OPTIONS_BUTTON_CONFIRM,this);
+		buttonConfirm = GuiTools.createSecondaryVerticalMenuButton(GuiKeys.MENU_OPTIONS_BUTTON_CONFIRM,this);
 		add(Box.createRigidArea(new Dimension(0,GuiTools.getSize(GuiTools.MENU_VERTICAL_BUTTON_SPACE))));
-		buttonCancel = GuiTools.createSecondaryVerticalMenuButton(GuiTools.MENU_OPTIONS_BUTTON_CANCEL,this);
+		buttonCancel = GuiTools.createSecondaryVerticalMenuButton(GuiKeys.MENU_OPTIONS_BUTTON_CANCEL,this);
 		add(Box.createVerticalGlue());		
 
 		// panels
@@ -86,17 +87,17 @@ public class ControlsMenu extends InnerMenuPanel
 	}
 	
 	public void actionPerformed(ActionEvent e)
-	{	if(e.getActionCommand().equals(GuiTools.MENU_OPTIONS_BUTTON_NEXT))
+	{	if(e.getActionCommand().equals(GuiKeys.MENU_OPTIONS_BUTTON_NEXT))
 		{	controlsData[selected].deselect();
 			selected = (selected + 1) % controlsData.length;
 			container.setDataPart(controlsData[selected]);
 	    }
-		else if(e.getActionCommand().equals(GuiTools.MENU_OPTIONS_BUTTON_PREVIOUS))
+		else if(e.getActionCommand().equals(GuiKeys.MENU_OPTIONS_BUTTON_PREVIOUS))
 		{	controlsData[selected].deselect();
 			selected = (selected + controlsData.length - 1) % controlsData.length;
 			container.setDataPart(controlsData[selected]);
 	    }
-		else if(e.getActionCommand().equals(GuiTools.MENU_OPTIONS_BUTTON_CONFIRM))
+		else if(e.getActionCommand().equals(GuiKeys.MENU_OPTIONS_BUTTON_CONFIRM))
 		{	for(int i=0;i<controlsData.length;i++)
 			{	ControlSettings controlSettings = controlsData[i].getControlSettings();
 				Configuration.getControlsConfiguration().putControlSettings(i+1,controlSettings);
@@ -128,7 +129,7 @@ public class ControlsMenu extends InnerMenuPanel
 //TODO propager éventuellement au round (car il n'y a pas modification mais remplacement, donc si c déjà affecté à un player..
 			replaceWith(parent);
 	    }
-		else if(e.getActionCommand().equals(GuiTools.MENU_OPTIONS_BUTTON_CANCEL))
+		else if(e.getActionCommand().equals(GuiKeys.MENU_OPTIONS_BUTTON_CANCEL))
 		{	replaceWith(parent);
 	    }
 	} 

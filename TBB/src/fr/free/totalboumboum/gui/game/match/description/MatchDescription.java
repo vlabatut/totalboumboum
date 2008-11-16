@@ -45,6 +45,7 @@ import fr.free.totalboumboum.gui.common.subpanel.SubPanel;
 import fr.free.totalboumboum.gui.common.subpanel.UntitledSubPanelTable;
 import fr.free.totalboumboum.gui.data.configuration.GuiConfiguration;
 import fr.free.totalboumboum.gui.game.round.description.RoundDescription;
+import fr.free.totalboumboum.gui.tools.GuiKeys;
 import fr.free.totalboumboum.gui.tools.GuiTools;
 
 public class MatchDescription extends EntitledDataPanel implements MouseListener
@@ -59,7 +60,7 @@ public class MatchDescription extends EntitledDataPanel implements MouseListener
 	{	super(container);
 	
 		// title
-		String key = GuiTools.GAME_MATCH_DESCRIPTION_TITLE;
+		String key = GuiKeys.GAME_MATCH_DESCRIPTION_TITLE;
 		setTitleKey(key);
 		
 		// data
@@ -129,10 +130,10 @@ public class MatchDescription extends EntitledDataPanel implements MouseListener
 				lbl.setOpaque(false);
 			}
 			String keys[] = 
-			{	GuiTools.GAME_MATCH_DESCRIPTION_PLAYERS_HEADER_PROFILE,
-				GuiTools.GAME_MATCH_DESCRIPTION_PLAYERS_HEADER_CONTROLS,
-				GuiTools.GAME_MATCH_DESCRIPTION_PLAYERS_HEADER_NAME,
-				GuiTools.GAME_MATCH_DESCRIPTION_PLAYERS_HEADER_RANK
+			{	GuiKeys.GAME_MATCH_DESCRIPTION_PLAYERS_HEADER_PROFILE,
+				GuiKeys.GAME_MATCH_DESCRIPTION_PLAYERS_HEADER_CONTROLS,
+				GuiKeys.GAME_MATCH_DESCRIPTION_PLAYERS_HEADER_NAME,
+				GuiKeys.GAME_MATCH_DESCRIPTION_PLAYERS_HEADER_RANK
 			};
 			for(int i=1;i<keys.length+1;i++)
 				playersPanel.setLabelKey(0,i,keys[i-1],true);
@@ -163,9 +164,9 @@ public class MatchDescription extends EntitledDataPanel implements MouseListener
 				{	String aiName = profile.getAiName();
 					String key;
 					if(aiName==null)
-						key = GuiTools.GAME_TOURNAMENT_DESCRIPTION_PLAYERS_DATA_HUMAN;
+						key = GuiKeys.GAME_TOURNAMENT_DESCRIPTION_PLAYERS_DATA_HUMAN;
 					else
-						key = GuiTools.GAME_TOURNAMENT_DESCRIPTION_PLAYERS_DATA_COMPUTER;
+						key = GuiKeys.GAME_TOURNAMENT_DESCRIPTION_PLAYERS_DATA_COMPUTER;
 					playersPanel.setLabelKey(line,col,key,true);
 					col++;
 				}
@@ -201,10 +202,10 @@ public class MatchDescription extends EntitledDataPanel implements MouseListener
 	{	int result = 0;
 		// no control
 		{	// text
-			String text = GuiConfiguration.getMiscConfiguration().getLanguage().getText(GuiTools.GAME_MATCH_DESCRIPTION_PLAYERS_DATA_NOCONTROLS);
+			String text = GuiConfiguration.getMiscConfiguration().getLanguage().getText(GuiKeys.GAME_MATCH_DESCRIPTION_PLAYERS_DATA_NOCONTROLS);
 			controlTexts.add(text);
 			// tooltip
-			String tooltip = GuiConfiguration.getMiscConfiguration().getLanguage().getText(GuiTools.GAME_MATCH_DESCRIPTION_PLAYERS_DATA_NOCONTROLS+GuiTools.TOOLTIP);
+			String tooltip = GuiConfiguration.getMiscConfiguration().getLanguage().getText(GuiKeys.GAME_MATCH_DESCRIPTION_PLAYERS_DATA_NOCONTROLS+GuiKeys.TOOLTIP);
 			controlTooltips.add(tooltip);
 			// width
 			result = GuiTools.getPixelWidth(playersPanel.getLineFontSize(),text);
@@ -212,10 +213,10 @@ public class MatchDescription extends EntitledDataPanel implements MouseListener
 		// control number X
 		for(int index=1;index<=GameConstants.CONTROL_COUNT;index++)
 		{	// text
-			String text = GuiConfiguration.getMiscConfiguration().getLanguage().getText(GuiTools.GAME_MATCH_DESCRIPTION_PLAYERS_DATA_CONTROLS)+index;
+			String text = GuiConfiguration.getMiscConfiguration().getLanguage().getText(GuiKeys.GAME_MATCH_DESCRIPTION_PLAYERS_DATA_CONTROLS)+index;
 			controlTexts.add(text);
 			// tooltip
-			String tooltip = GuiConfiguration.getMiscConfiguration().getLanguage().getText(GuiTools.GAME_MATCH_DESCRIPTION_PLAYERS_DATA_CONTROLS+GuiTools.TOOLTIP)+" "+index;
+			String tooltip = GuiConfiguration.getMiscConfiguration().getLanguage().getText(GuiKeys.GAME_MATCH_DESCRIPTION_PLAYERS_DATA_CONTROLS+GuiKeys.TOOLTIP)+" "+index;
 			controlTooltips.add(tooltip);
 			// width
 			int temp = GuiTools.getPixelWidth(playersPanel.getLineFontSize(),text);
@@ -235,7 +236,7 @@ public class MatchDescription extends EntitledDataPanel implements MouseListener
 		EntitledSubPanel notesPanel = new EntitledSubPanel(width,height,getConfiguration());
 		// title
 		String text = getConfiguration().getLanguage().getText(GuiTools.GAME_MATCH_HEADER_NOTES);
-		String tooltip = getConfiguration().getLanguage().getText(GuiTools.GAME_MATCH_HEADER_NOTES+GuiTools.TOOLTIP);
+		String tooltip = getConfiguration().getLanguage().getText(GuiTools.GAME_MATCH_HEADER_NOTES+GuiKeys.TOOLTIP);
 		notesPanel.setTitle(text,tooltip);
 		// text panel
 		{	JTextPane textPane = new JTextPane()

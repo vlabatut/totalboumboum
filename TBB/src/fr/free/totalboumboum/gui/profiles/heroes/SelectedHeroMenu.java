@@ -34,6 +34,7 @@ import fr.free.totalboumboum.gui.common.panel.SplitMenuPanel;
 import fr.free.totalboumboum.gui.common.panel.menu.InnerMenuPanel;
 import fr.free.totalboumboum.gui.common.panel.menu.MenuPanel;
 import fr.free.totalboumboum.gui.heroes.select.SelectedHeroData;
+import fr.free.totalboumboum.gui.tools.GuiKeys;
 import fr.free.totalboumboum.gui.tools.GuiTools;
 
 public class SelectedHeroMenu extends InnerMenuPanel
@@ -60,9 +61,9 @@ public class SelectedHeroMenu extends InnerMenuPanel
 
 		// buttons
 		add(Box.createVerticalGlue());
-		buttonConfirm = GuiTools.createSecondaryVerticalMenuButton(GuiTools.MENU_PROFILES_BUTTON_CONFIRM,this);
+		buttonConfirm = GuiTools.createSecondaryVerticalMenuButton(GuiKeys.MENU_PROFILES_BUTTON_CONFIRM,this);
 		add(Box.createRigidArea(new Dimension(0,GuiTools.getSize(GuiTools.MENU_VERTICAL_BUTTON_SPACE))));
-		buttonCancel = GuiTools.createSecondaryVerticalMenuButton(GuiTools.MENU_PROFILES_BUTTON_CANCEL,this);
+		buttonCancel = GuiTools.createSecondaryVerticalMenuButton(GuiKeys.MENU_PROFILES_BUTTON_CANCEL,this);
 		add(Box.createVerticalGlue());		
 
 		// panels
@@ -71,10 +72,10 @@ public class SelectedHeroMenu extends InnerMenuPanel
 	}
 	
 	public void actionPerformed(ActionEvent e)
-	{	if(e.getActionCommand().equals(GuiTools.MENU_PROFILES_BUTTON_CANCEL))
+	{	if(e.getActionCommand().equals(GuiKeys.MENU_PROFILES_BUTTON_CANCEL))
 		{	replaceWith(parent);
 	    }
-		else if(e.getActionCommand().equals(GuiTools.MENU_PROFILES_BUTTON_CONFIRM))
+		else if(e.getActionCommand().equals(GuiKeys.MENU_PROFILES_BUTTON_CONFIRM))
 		{	SpritePreview heroPreview = heroData.getSelectedHeroPreview();
 			if(heroPreview!=null)
 			{	profile.setSpriteFolder(heroPreview.getFolder());

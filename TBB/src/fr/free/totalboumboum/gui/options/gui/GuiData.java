@@ -41,6 +41,7 @@ import fr.free.totalboumboum.gui.data.configuration.GuiConfiguration;
 import fr.free.totalboumboum.gui.data.configuration.misc.MiscConfiguration;
 import fr.free.totalboumboum.gui.data.language.Language;
 import fr.free.totalboumboum.gui.tools.GuiFileTools;
+import fr.free.totalboumboum.gui.tools.GuiKeys;
 import fr.free.totalboumboum.gui.tools.GuiTools;
 import fr.free.totalboumboum.tools.FileTools;
 
@@ -64,7 +65,7 @@ public class GuiData extends EntitledDataPanel implements MouseListener
 	{	super(container);
 
 		// title
-		{	setTitleKey(GuiTools.MENU_OPTIONS_GUI_TITLE);
+		{	setTitleKey(GuiKeys.MENU_OPTIONS_GUI_TITLE);
 		}
 	
 		// data
@@ -89,12 +90,12 @@ public class GuiData extends EntitledDataPanel implements MouseListener
 					// name
 					{	ln.setLabelMaxWidth(col,tWidth);
 						ln.setLabelPreferredWidth(col,tWidth);
-						ln.setLabelKey(col,GuiTools.MENU_OPTIONS_GUI_LINE_LANGUAGE_TITLE,false);
+						ln.setLabelKey(col,GuiKeys.MENU_OPTIONS_GUI_LINE_LANGUAGE_TITLE,false);
 						col++;
 					}
 					// previous button
 					{	ln.setLabelMaxWidth(col,ln.getHeight());
-						ln.setLabelKey(col,GuiTools.MENU_OPTIONS_GUI_LINE_LANGUAGE_PREVIOUS,true);
+						ln.setLabelKey(col,GuiKeys.MENU_OPTIONS_GUI_LINE_LANGUAGE_PREVIOUS,true);
 						ln.getLabel(col).addMouseListener(this);
 						col++;
 					}
@@ -105,7 +106,7 @@ public class GuiData extends EntitledDataPanel implements MouseListener
 					}
 					// next button
 					{	ln.setLabelMaxWidth(col,ln.getHeight());
-						ln.setLabelKey(col,GuiTools.MENU_OPTIONS_GUI_LINE_LANGUAGE_NEXT,true);
+						ln.setLabelKey(col,GuiKeys.MENU_OPTIONS_GUI_LINE_LANGUAGE_NEXT,true);
 						ln.getLabel(col).addMouseListener(this);
 						col++;
 					}
@@ -122,12 +123,12 @@ public class GuiData extends EntitledDataPanel implements MouseListener
 					// name
 					{	ln.setLabelMaxWidth(col,tWidth);
 						ln.setLabelPreferredWidth(col,tWidth);
-						ln.setLabelKey(col,GuiTools.MENU_OPTIONS_GUI_LINE_FONT_TITLE,false);
+						ln.setLabelKey(col,GuiKeys.MENU_OPTIONS_GUI_LINE_FONT_TITLE,false);
 						col++;
 					}
 					// previous button
 					{	ln.setLabelMaxWidth(col,ln.getHeight());
-						ln.setLabelKey(col,GuiTools.MENU_OPTIONS_GUI_LINE_FONT_PREVIOUS,true);
+						ln.setLabelKey(col,GuiKeys.MENU_OPTIONS_GUI_LINE_FONT_PREVIOUS,true);
 						ln.getLabel(col).addMouseListener(this);
 						col++;
 					}
@@ -138,7 +139,7 @@ public class GuiData extends EntitledDataPanel implements MouseListener
 					}
 					// next button
 					{	ln.setLabelMaxWidth(col,ln.getHeight());
-						ln.setLabelKey(col,GuiTools.MENU_OPTIONS_GUI_LINE_FONT_NEXT,true);
+						ln.setLabelKey(col,GuiKeys.MENU_OPTIONS_GUI_LINE_FONT_NEXT,true);
 						ln.getLabel(col).addMouseListener(this);
 						col++;
 					}
@@ -155,12 +156,12 @@ public class GuiData extends EntitledDataPanel implements MouseListener
 					// name
 					{	ln.setLabelMaxWidth(col,tWidth);
 						ln.setLabelPreferredWidth(col,tWidth);
-						ln.setLabelKey(col,GuiTools.MENU_OPTIONS_GUI_LINE_BACKGROUND_TITLE,false);
+						ln.setLabelKey(col,GuiKeys.MENU_OPTIONS_GUI_LINE_BACKGROUND_TITLE,false);
 						col++;
 					}
 					// previous button
 					{	ln.setLabelMaxWidth(col,ln.getHeight());
-						ln.setLabelKey(col,GuiTools.MENU_OPTIONS_GUI_LINE_BACKGROUND_PREVIOUS,true);
+						ln.setLabelKey(col,GuiKeys.MENU_OPTIONS_GUI_LINE_BACKGROUND_PREVIOUS,true);
 						ln.getLabel(col).addMouseListener(this);
 						col++;
 					}
@@ -171,7 +172,7 @@ public class GuiData extends EntitledDataPanel implements MouseListener
 					}
 					// next button
 					{	ln.setLabelMaxWidth(col,ln.getHeight());
-						ln.setLabelKey(col,GuiTools.MENU_OPTIONS_GUI_LINE_BACKGROUND_NEXT,true);
+						ln.setLabelKey(col,GuiKeys.MENU_OPTIONS_GUI_LINE_BACKGROUND_NEXT,true);
 						ln.getLabel(col).addMouseListener(this);
 						col++;
 					}
@@ -199,20 +200,20 @@ public class GuiData extends EntitledDataPanel implements MouseListener
 	private void setLanguage()
 	{	String text = miscConfiguration.getLanguageName();
 		text = text.toUpperCase().substring(0,1)+text.toLowerCase().substring(1,text.length());
-		String tooltip = GuiConfiguration.getMiscConfiguration().getLanguage().getText(GuiTools.MENU_OPTIONS_GUI_LINE_LANGUAGE_TITLE+GuiTools.TOOLTIP); 
+		String tooltip = GuiConfiguration.getMiscConfiguration().getLanguage().getText(GuiKeys.MENU_OPTIONS_GUI_LINE_LANGUAGE_TITLE+GuiKeys.TOOLTIP); 
 		optionsPanel.getLine(LINE_LANGUAGE).setLabelText(2,text,tooltip);
 	}
 	
 	private void setFont()
 	{	String text = miscConfiguration.getFontName();
 		text = text.toUpperCase().substring(0,1)+text.toLowerCase().substring(1,text.length());
-		String tooltip = GuiConfiguration.getMiscConfiguration().getLanguage().getText(GuiTools.MENU_OPTIONS_GUI_LINE_FONT_TITLE+GuiTools.TOOLTIP); 
+		String tooltip = GuiConfiguration.getMiscConfiguration().getLanguage().getText(GuiKeys.MENU_OPTIONS_GUI_LINE_FONT_TITLE+GuiKeys.TOOLTIP); 
 		optionsPanel.getLine(LINE_FONT).setLabelText(2,text,tooltip);
 	}
 	
 	private void setBackground()
 	{	String text = miscConfiguration.getBackgroundName();
-		String tooltip = GuiConfiguration.getMiscConfiguration().getLanguage().getText(GuiTools.MENU_OPTIONS_GUI_LINE_BACKGROUND_TITLE+GuiTools.TOOLTIP); 
+		String tooltip = GuiConfiguration.getMiscConfiguration().getLanguage().getText(GuiKeys.MENU_OPTIONS_GUI_LINE_BACKGROUND_TITLE+GuiKeys.TOOLTIP); 
 		optionsPanel.getLine(LINE_BACKGROUND).setLabelText(2,text,tooltip);
 	}
 	

@@ -34,6 +34,7 @@ import javax.swing.SpringLayout;
 import javax.swing.SwingConstants;
 
 import fr.free.totalboumboum.gui.data.configuration.GuiConfiguration;
+import fr.free.totalboumboum.gui.tools.GuiKeys;
 import fr.free.totalboumboum.gui.tools.SpringUtilities;
 import fr.free.totalboumboum.gui.tools.GuiTools;
 import fr.free.totalboumboum.tools.ImageTools;
@@ -455,7 +456,7 @@ public class UntitledSubPanelTable extends SubPanel
 	{	setLabelKey(line,0,col,key,imageFlag);
 	}
 	public void setLabelKey(int line, int colGroup, int colSub, String key, boolean imageFlag)
-	{	String tooltip = GuiConfiguration.getMiscConfiguration().getLanguage().getText(key+GuiTools.TOOLTIP);
+	{	String tooltip = GuiConfiguration.getMiscConfiguration().getLanguage().getText(key+GuiKeys.TOOLTIP);
 		// is there an available icon ?
 		if(imageFlag)
 		{	BufferedImage icon = GuiTools.getIcon(key);

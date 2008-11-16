@@ -38,6 +38,7 @@ import fr.free.totalboumboum.gui.common.panel.SplitMenuPanel;
 import fr.free.totalboumboum.gui.common.panel.data.EntitledDataPanel;
 import fr.free.totalboumboum.gui.common.subpanel.UntitledSubPanelTable;
 import fr.free.totalboumboum.gui.data.configuration.GuiConfiguration;
+import fr.free.totalboumboum.gui.tools.GuiKeys;
 import fr.free.totalboumboum.gui.tools.GuiTools;
 import fr.free.totalboumboum.tools.ClassTools;
 
@@ -65,18 +66,18 @@ public class ControlsData extends EntitledDataPanel implements MouseListener,Key
 	{	super(container);
 
 		// title
-		{	String text = GuiConfiguration.getMiscConfiguration().getLanguage().getText(GuiTools.MENU_OPTIONS_CONTROLS_TITLE)+" "+index;
-			String tooltip = GuiConfiguration.getMiscConfiguration().getLanguage().getText(GuiTools.MENU_OPTIONS_CONTROLS_TITLE+GuiTools.TOOLTIP);
+		{	String text = GuiConfiguration.getMiscConfiguration().getLanguage().getText(GuiKeys.MENU_OPTIONS_CONTROLS_TITLE)+" "+index;
+			String tooltip = GuiConfiguration.getMiscConfiguration().getLanguage().getText(GuiKeys.MENU_OPTIONS_CONTROLS_TITLE+GuiKeys.TOOLTIP);
 			setTitleText(text,tooltip);
 		}
 	
 		// data
 		{	
 			String head[] = 
-			{	GuiTools.MENU_OPTIONS_CONTROLS_HEADER_COMMAND,
-				GuiTools.MENU_OPTIONS_CONTROLS_HEADER_KEY,
-				GuiTools.MENU_OPTIONS_CONTROLS_HEADER_AUTO
-			};
+			{	GuiKeys.MENU_OPTIONS_CONTROLS_HEADER_COMMAND,
+				GuiKeys.MENU_OPTIONS_CONTROLS_HEADER_KEY,
+				GuiKeys.MENU_OPTIONS_CONTROLS_HEADER_AUTO
+		};
 			int lines = 20;
 			int cols = head.length;
 			int w = getDataWidth();
@@ -130,9 +131,9 @@ public class ControlsData extends EntitledDataPanel implements MouseListener,Key
 	private void setAuto(int line, int col, boolean auto)
 	{	String key;
 		if(auto)
-			key = GuiTools.MENU_OPTIONS_CONTROLS_LINE_AUTO_TRUE;
+			key = GuiKeys.MENU_OPTIONS_CONTROLS_LINE_AUTO_TRUE;
 		else
-			key = GuiTools.MENU_OPTIONS_CONTROLS_LINE_AUTO_FALSE;
+			key = GuiKeys.MENU_OPTIONS_CONTROLS_LINE_AUTO_FALSE;
 		keysPanel.setLabelKey(line,col,key,true);
 	}
 

@@ -23,7 +23,7 @@ package fr.free.totalboumboum.gui.game.match.statistics;
 
 import fr.free.totalboumboum.gui.common.panel.SplitMenuPanel;
 import fr.free.totalboumboum.gui.common.panel.data.EntitledDataPanel;
-import fr.free.totalboumboum.gui.tools.GuiTools;
+import fr.free.totalboumboum.gui.tools.GuiKeys;
 
 public class MatchStatistics extends EntitledDataPanel
 {	
@@ -33,7 +33,7 @@ public class MatchStatistics extends EntitledDataPanel
 	{	super(container);
 
 		// title
-		String key = GuiTools.GAME_MATCH_STATISTICS_TITLE;
+		String key = GuiKeys.GAME_MATCH_STATISTICS_TITLE;
 		setTitleKey(key);
 
 	}
