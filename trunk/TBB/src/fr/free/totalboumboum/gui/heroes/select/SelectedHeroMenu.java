@@ -22,6 +22,7 @@ package fr.free.totalboumboum.gui.heroes.select;
  */
 
 import java.awt.event.ActionEvent;
+import java.util.ArrayList;
 
 import javax.swing.Box;
 import javax.swing.BoxLayout;
@@ -51,9 +52,15 @@ public class SelectedHeroMenu extends InnerMenuPanel
 		// background
 		setBackground(GuiTools.COLOR_COMMON_BACKGROUND);
 
+		// sizes
+		int buttonWidth = getWidth();
+		int buttonHeight = GuiTools.buttonTextHeight;
+		ArrayList<String> texts = GuiKeys.getKeysLike(GuiKeys.MENU_HERO_BUTTON);
+		int fontSize = GuiTools.getOptimalFontSize(buttonWidth, buttonHeight, texts);
+
 		// buttons
 		add(Box.createVerticalGlue());
-		buttonBack = GuiTools.createSecondaryVerticalMenuButton(GuiKeys.MENU_HERO_BUTTON_BACK,this);
+		buttonBack = GuiTools.createButton(GuiKeys.MENU_HERO_BUTTON_BACK,buttonWidth,buttonHeight,fontSize,this);
 		add(Box.createVerticalGlue());		
 
 		// panels

@@ -47,7 +47,8 @@ public class GuiKeys
 	public static final String MENU_MAIN_BUTTON_TOURNAMENT = MENU_MAIN_BUTTON+"Tournament";
 	/* AI */
 		/* BUTTON */
-		public static final String MENU_AI_BUTTON_BACK = "MenuAiButtonBack";	
+		public static final String MENU_AI_BUTTON = "MenuAiButton";	
+		public static final String MENU_AI_BUTTON_BACK = MENU_AI_BUTTON+"Back";	
 		/* SELECT */
 		public static final String MENU_AI_SELECT_TITLE = "MenuAiSelectTitle";
 			/* CLASS */
@@ -64,7 +65,8 @@ public class GuiKeys
 			public static final String MENU_AI_SELECT_PREVIEW_PACKAGE = "MenuAiSelectPreviewPackage";
 	/* HERO */
 		/* BUTTON */
-		public static final String MENU_HERO_BUTTON_BACK = "MenuHeroButtonBack";	
+		public static final String MENU_HERO_BUTTON = "MenuHeroButton";	
+		public static final String MENU_HERO_BUTTON_BACK = MENU_HERO_BUTTON+"Back";	
 		/* SELECT */
 		public static final String MENU_HERO_SELECT_TITLE = "MenuHeroSelectTitle";
 			/* FOLDER */
@@ -83,7 +85,8 @@ public class GuiKeys
 			public static final String MENU_HERO_SELECT_PREVIEW_SOURCE = "MenuHeroSelectPreviewSource";
 	/* LEVEL */
 		/* BUTTON */
-		public static final String MENU_LEVEL_BUTTON_BACK = "MenuLevelButtonBack";	
+		public static final String MENU_LEVEL_BUTTON = "MenuLevelButton";	
+		public static final String MENU_LEVEL_BUTTON_BACK = MENU_LEVEL_BUTTON+"Back";	
 		/* SELECT */
 		public static final String MENU_LEVEL_SELECT_TITLE = "MenuLevelSelectTitle";
 			/* FOLDER */
@@ -104,16 +107,17 @@ public class GuiKeys
 			public static final String MENU_LEVEL_SELECT_PREVIEW_THEME = "MenuLevelSelectPreviewTheme";
 	/* OPTIONS */
 		/* BUTTON */
-		public static final String MENU_OPTIONS_BUTTON_ADVANCED = "MenuOptionsButtonAdvanced";
-		public static final String MENU_OPTIONS_BUTTON_BACK = "MenuOptionsButtonBack";
-		public static final String MENU_OPTIONS_BUTTON_CANCEL = "MenuOptionsButtonCancel";
-		public static final String MENU_OPTIONS_BUTTON_CONFIRM = "MenuOptionsButtonConfirm";
-		public static final String MENU_OPTIONS_BUTTON_CONTROLS = "MenuOptionsButtonControls";
-		public static final String MENU_OPTIONS_BUTTON_GAMEPLAY = "MenuOptionsButtonGameplay";
-		public static final String MENU_OPTIONS_BUTTON_GUI = "MenuOptionsButtonGui";
-		public static final String MENU_OPTIONS_BUTTON_NEXT = "MenuOptionsButtonNext";
-		public static final String MENU_OPTIONS_BUTTON_PREVIOUS = "MenuOptionsButtonPrevious";
-		public static final String MENU_OPTIONS_BUTTON_VIDEO = "MenuOptionsButtonVideo";
+		public static final String MENU_OPTIONS_BUTTON = "MenuOptionsButton";
+		public static final String MENU_OPTIONS_BUTTON_ADVANCED = MENU_OPTIONS_BUTTON+"Advanced";
+		public static final String MENU_OPTIONS_BUTTON_BACK = MENU_OPTIONS_BUTTON+"Back";
+		public static final String MENU_OPTIONS_BUTTON_CANCEL = MENU_OPTIONS_BUTTON+"Cancel";
+		public static final String MENU_OPTIONS_BUTTON_CONFIRM = MENU_OPTIONS_BUTTON+"Confirm";
+		public static final String MENU_OPTIONS_BUTTON_CONTROLS = MENU_OPTIONS_BUTTON+"Controls";
+		public static final String MENU_OPTIONS_BUTTON_GAMEPLAY = MENU_OPTIONS_BUTTON+"Gameplay";
+		public static final String MENU_OPTIONS_BUTTON_GUI = MENU_OPTIONS_BUTTON+"Gui";
+		public static final String MENU_OPTIONS_BUTTON_NEXT = MENU_OPTIONS_BUTTON+"Next";
+		public static final String MENU_OPTIONS_BUTTON_PREVIOUS = MENU_OPTIONS_BUTTON+"Previous";
+		public static final String MENU_OPTIONS_BUTTON_VIDEO = MENU_OPTIONS_BUTTON+"Video";
 		/* ADVANCED */
 		public static final String MENU_OPTIONS_ADVANCED_TITLE = "MenuOptionsAdvancedTitle";
 			/* LINE */
@@ -175,7 +179,8 @@ public class GuiKeys
 			public static final String MENU_OPTIONS_VIDEO_LINE_SMOOTH_GRAPHICS = "MenuOptionsVideoLineSmoothGraphics";
 	/* PROFILES */
 		/* BUTTON */
-		public static final String MENU_PROFILES_BUTTON_BACK = "MenuProfilesButtonBack";
+		public static final String MENU_PROFILES_BUTTON = "MenuProfilesButton";
+		public static final String MENU_PROFILES_BUTTON_BACK = MENU_PROFILES_BUTTON+"Back";
 		public static final String MENU_PROFILES_BUTTON_CANCEL = "MenuProfilesButtonCancel";
 		public static final String MENU_PROFILES_BUTTON_CONFIRM = "MenuProfilesButtonConfirm";
 		public static final String MENU_PROFILES_BUTTON_DELETE = "MenuProfilesButtonDelete";
@@ -206,14 +211,15 @@ public class GuiKeys
 		public static final String MENU_PROFILES_PREVIEW_HEROPACK = "MenuProfilesPreviewHeroPack";
 		public static final String MENU_PROFILES_PREVIEW_NAME = "MenuProfilesPreviewName";
 	/* TOURNAMENT */	
-	public static final String MENU_TOURNAMENT_BUTTON_BACK = "MenuTournamentButtonBack";
-	public static final String MENU_TOURNAMENT_BUTTON_CONTINUE = "MenuTournamentButtonContinue";
-	public static final String MENU_TOURNAMENT_BUTTON_LOAD = "MenuTournamentButtonLoad";
-	public static final String MENU_TOURNAMENT_BUTTON_NEW = "MenuTournamentButtonNew";
-	public static final String MENU_TOURNAMENT_BUTTON_PLAYERS = "MenuTournamentButtonPlayers";
-	public static final String MENU_TOURNAMENT_BUTTON_RULES = "MenuTournamentButtonRules";
-	public static final String MENU_TOURNAMENT_BUTTON_SAVE_AS = "MenuTournamentButtonSaveAs";
-	public static final String MENU_TOURNAMENT_BUTTON_START = "MenuTournamentButtonStart";
+	public static final String MENU_TOURNAMENT_BUTTON = "MenuTournamentButton";
+	public static final String MENU_TOURNAMENT_BUTTON_BACK = MENU_TOURNAMENT_BUTTON+"Back";
+	public static final String MENU_TOURNAMENT_BUTTON_CONTINUE = MENU_TOURNAMENT_BUTTON+"Continue";
+	public static final String MENU_TOURNAMENT_BUTTON_LOAD = MENU_TOURNAMENT_BUTTON+"Load";
+	public static final String MENU_TOURNAMENT_BUTTON_NEW = MENU_TOURNAMENT_BUTTON+"New";
+	public static final String MENU_TOURNAMENT_BUTTON_PLAYERS = MENU_TOURNAMENT_BUTTON+"Players";
+	public static final String MENU_TOURNAMENT_BUTTON_RULES = MENU_TOURNAMENT_BUTTON+"Rules";
+	public static final String MENU_TOURNAMENT_BUTTON_SAVE_AS = MENU_TOURNAMENT_BUTTON+"SaveAs";
+	public static final String MENU_TOURNAMENT_BUTTON_START = MENU_TOURNAMENT_BUTTON+"Start";
 	/* COLORS */
 	public static final String COLOR = "Color";
 	public static final String COLOR_BLACK = COLOR+"Black";

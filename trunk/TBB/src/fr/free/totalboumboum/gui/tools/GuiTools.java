@@ -896,13 +896,13 @@ public class GuiTools
 	/////////////////////////////////////////////////////////////////
 
 	// margins
-	public final static float PANEL_MARGIN_RATIO = 0.025f; 
+	private final static float PANEL_MARGIN_RATIO = 0.025f; 
 	public static int panelMargin; // margin between the components of a frame
-	public final static float SUBPANEL_MARGIN_RATIO = 0.005f; 
+	private final static float SUBPANEL_MARGIN_RATIO = 0.005f; 
 	public static int subPanelMargin;// margin between the components of a panel
 
 	// titles
-	public final static float SUBPANEL_TITLE_RATIO = 1.5f; // subpanel title height relatively to panel margin
+	private final static float SUBPANEL_TITLE_RATIO = 1.5f; // subpanel title height relatively to panel margin
 	public static int subPanelTitleHeight; // height of a subpanel title bar relatively to the height of a panel title
 	public final static float TABLE_HEADER_RATIO = 1.2f; //header high relatively to line height
 
@@ -911,15 +911,15 @@ public class GuiTools
 	public final static float HORIZONTAL_SPLIT_RATIO = 0.07f;
 
 	// buttons
-	public final static float BUTTON_TEXT_HEIGHT_RATIO = 0.05f; // height of a button relatively to the panel height
+	private final static float BUTTON_TEXT_HEIGHT_RATIO = 0.05f; // height of a button relatively to the panel height
 	public static int buttonTextHeight;
-	public final static float BUTTON_TEXT_WIDTH_RATIO = 0.33f; // width of a button relatively to the panel width
+	private final static float BUTTON_TEXT_WIDTH_RATIO = 0.33f; // width of a button relatively to the panel width
 	public static int buttonTextWidth;
-//	public final static float BUTTON_ICON_SIZE_RATIO = 0.07f; // height of a button relatively to the panel height
+//	private final static float BUTTON_ICON_SIZE_RATIO = 0.07f; // height of a button relatively to the panel height
 //	public static int buttonIconSize;
-	public final static float BUTTON_HORIZONTAL_SPACE_RATIO = 0.025f; // space between buttons relatively to the panel width
+	private final static float BUTTON_HORIZONTAL_SPACE_RATIO = 0.025f; // space between buttons relatively to the panel width
 	public static int buttonHorizontalSpace;
-	public final static float BUTTON_VERTICAL_SPACE_RATIO = 0.025f; // space between buttons relatively to the panel height
+	private final static float BUTTON_VERTICAL_SPACE_RATIO = 0.025f; // space between buttons relatively to the panel height
 	public static int buttonVerticalSpace;
 	public final static float BUTTON_ICON_MARGIN_RATION = 0.9f;
 	
@@ -972,7 +972,7 @@ public class GuiTools
 	/**
 	 * automatically define the content of a button : images or text
 	 */
-	private static void setButtonContent(String name, AbstractButton button)
+	public static void setButtonContent(String name, AbstractButton button)
 	{	// content
 		if(icons.containsKey(name+ICON_NORMAL))
 		{	// normal icon

@@ -24,7 +24,6 @@ package fr.free.totalboumboum.gui.game.round.statistics;
 import fr.free.totalboumboum.gui.common.panel.SplitMenuPanel;
 import fr.free.totalboumboum.gui.common.panel.data.EntitledDataPanel;
 import fr.free.totalboumboum.gui.tools.GuiKeys;
-import fr.free.totalboumboum.gui.tools.GuiTools;
 
 public class RoundStatistics extends EntitledDataPanel
 {	
