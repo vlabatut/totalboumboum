@@ -87,7 +87,7 @@ public class MainMenu extends SimpleMenuPanel
 		int buttonWidth = GuiTools.buttonTextWidth;
 		int buttonHeight = GuiTools.buttonTextHeight;
 		ArrayList<String> texts = GuiKeys.getKeysLike(GuiKeys.MENU_MAIN_BUTTON);
-		int fontSize = GuiTools.getOptimalFontSize(buttonWidth, buttonHeight, texts);
+		int fontSize = GuiTools.getOptimalFontSize(buttonWidth*0.8, buttonHeight*0.9, texts);
 		
 		// buttons
 		add(Box.createVerticalGlue());

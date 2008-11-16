@@ -878,16 +878,20 @@ public class GuiTools
 	 * @param texts
 	 * @return
 	 */
-	public static int getOptimalFontSize(int width, int height, ArrayList<String> texts)
+	public static int getOptimalFontSize(double width, double height, ArrayList<String> texts)
 	{	int result;
 		Iterator<String> it = texts.iterator();
-		String longest = "";
+		int longest = 0;
+		String longestString = null;
 		while(it.hasNext())
 		{	String text = it.next();
-			if(text.length()>longest.length())
-				longest = text;
+			int length = getPixelWidth(10,text);
+			if(length>longest)
+			{	longest = length;
+				longestString = text;
+			}
 		}
-		result = getFontSize(width,height,longest);
+		result = getFontSize(width,height,longestString);
 		return result;
 	}
 

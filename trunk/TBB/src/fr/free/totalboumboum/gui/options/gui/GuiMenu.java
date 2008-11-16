@@ -66,13 +66,13 @@ public class GuiMenu extends InnerMenuPanel
 		int buttonWidth = getWidth();
 		int buttonHeight = GuiTools.buttonTextHeight;
 		ArrayList<String> texts = GuiKeys.getKeysLike(GuiKeys.MENU_OPTIONS_BUTTON);
-		int fontSize = GuiTools.getOptimalFontSize(buttonWidth, buttonHeight, texts);
+		int fontSize = GuiTools.getOptimalFontSize(buttonWidth*0.8, buttonHeight*0.9, texts);
 
 		// buttons
 		add(Box.createVerticalGlue());
 		buttonConfirm = GuiTools.createButton(GuiKeys.MENU_OPTIONS_BUTTON_CONFIRM,buttonWidth,buttonHeight,fontSize,this);
 		add(Box.createRigidArea(new Dimension(0,GuiTools.buttonVerticalSpace)));
-		buttonCancel = GuiTools.createButton(GuiKeys.MENU_TOURNAMENT_BUTTON_NEW,buttonWidth,buttonHeight,fontSize,this);
+		buttonCancel = GuiTools.createButton(GuiKeys.MENU_OPTIONS_BUTTON_CANCEL,buttonWidth,buttonHeight,fontSize,this);
 		add(Box.createVerticalGlue());		
 
 		// panels

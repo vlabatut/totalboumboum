@@ -66,7 +66,7 @@ public class AdvancedMenu extends InnerMenuPanel
 		int buttonWidth = getWidth();
 		int buttonHeight = GuiTools.buttonTextHeight;
 		ArrayList<String> texts = GuiKeys.getKeysLike(GuiKeys.MENU_OPTIONS_BUTTON);
-		int fontSize = GuiTools.getOptimalFontSize(buttonWidth, buttonHeight, texts);
+		int fontSize = GuiTools.getOptimalFontSize(buttonWidth*0.8, buttonHeight*0.9, texts);
 
 		// buttons
 		add(Box.createVerticalGlue());
