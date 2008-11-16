@@ -37,12 +37,14 @@ public class VariableTilesLoader
     @SuppressWarnings("unchecked")
 	public static HashMap<String,VariableTile> loadVariableTilesElement(Element root)
     {	HashMap<String,VariableTile> result = new HashMap<String, VariableTile>();
-    	List<Element> elements = root.getChildren(XmlTools.ELT_VARIABLE_TILE);
-    	Iterator<Element> i = elements.iterator();
-    	while(i.hasNext())
-    	{	Element temp = i.next();
-    		VariableTile vi = loadVariableTileElement(temp);
-    		result.put(vi.getName(), vi);
+    	if(root!=null)
+    	{	List<Element> elements = root.getChildren(XmlTools.ELT_VARIABLE_TILE);
+	    	Iterator<Element> i = elements.iterator();
+	    	while(i.hasNext())
+	    	{	Element temp = i.next();
+	    		VariableTile vi = loadVariableTileElement(temp);
+	    		result.put(vi.getName(), vi);
+	    	}
     	}
     	return result;
     }

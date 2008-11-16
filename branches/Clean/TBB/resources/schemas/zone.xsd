@@ -70,7 +70,7 @@
 
 	<xsd:complexType name="tZone">
 		<xsd:sequence>
-			<xsd:element name="variable-tiles" type="tVariableTiles" />
+			<xsd:element name="variable-tiles" type="tVariableTiles" minOccurs="0"/>
 			<xsd:element name="matrix" type="tMatrix" />
 		</xsd:sequence>
 	</xsd:complexType>
