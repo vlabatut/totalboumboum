@@ -50,7 +50,7 @@ public class EntitledSubPanel extends SubPanel
 		setLayout(layout);
 
 		// size
-		titleHeight = (int)(GuiTools.SUBPANEL_TITLE_RATIO*GuiTools.panelMargin);
+		titleHeight = GuiTools.subPanelTitleHeight;
 		titleWidth = width - 2*GuiTools.subPanelMargin;
 		titleFontSize = GuiTools.getFontSize(titleHeight*GuiTools.FONT_RATIO);
 		dataWidth = titleWidth;
