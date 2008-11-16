@@ -38,6 +38,7 @@ import fr.free.totalboumboum.gui.common.panel.menu.MenuPanel;
 import fr.free.totalboumboum.gui.data.configuration.GuiConfiguration;
 import fr.free.totalboumboum.gui.data.configuration.misc.MiscConfiguration;
 import fr.free.totalboumboum.gui.data.configuration.misc.MiscConfigurationSaver;
+import fr.free.totalboumboum.gui.tools.GuiKeys;
 import fr.free.totalboumboum.gui.tools.GuiTools;
 
 public class GuiMenu extends InnerMenuPanel
@@ -62,9 +63,9 @@ public class GuiMenu extends InnerMenuPanel
 
 		// buttons
 		add(Box.createVerticalGlue());
-		buttonConfirm = GuiTools.createSecondaryVerticalMenuButton(GuiTools.MENU_OPTIONS_BUTTON_CONFIRM,this);
+		buttonConfirm = GuiTools.createSecondaryVerticalMenuButton(GuiKeys.MENU_OPTIONS_BUTTON_CONFIRM,this);
 		add(Box.createRigidArea(new Dimension(0,GuiTools.getSize(GuiTools.MENU_VERTICAL_BUTTON_SPACE))));
-		buttonCancel = GuiTools.createSecondaryVerticalMenuButton(GuiTools.MENU_OPTIONS_BUTTON_CANCEL,this);
+		buttonCancel = GuiTools.createSecondaryVerticalMenuButton(GuiKeys.MENU_OPTIONS_BUTTON_CANCEL,this);
 		add(Box.createVerticalGlue());		
 
 		// panels
@@ -73,7 +74,7 @@ public class GuiMenu extends InnerMenuPanel
 	}
 	
 	public void actionPerformed(ActionEvent e)
-	{	if(e.getActionCommand().equals(GuiTools.MENU_OPTIONS_BUTTON_CONFIRM))
+	{	if(e.getActionCommand().equals(GuiKeys.MENU_OPTIONS_BUTTON_CONFIRM))
 		{	MiscConfiguration miscConfiguration = guiData.getMiscConfiguration();
 			boolean restart = false;
 			if(!miscConfiguration.getLanguageName().equals(GuiConfiguration.getMiscConfiguration().getLanguageName()))
@@ -107,7 +108,7 @@ public class GuiMenu extends InnerMenuPanel
 			else
 				replaceWith(parent);
 	    }
-		else if(e.getActionCommand().equals(GuiTools.MENU_OPTIONS_BUTTON_CANCEL))
+		else if(e.getActionCommand().equals(GuiKeys.MENU_OPTIONS_BUTTON_CANCEL))
 		{	replaceWith(parent);
 	    }
 	} 

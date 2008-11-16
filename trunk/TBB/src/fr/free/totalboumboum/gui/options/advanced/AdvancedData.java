@@ -35,6 +35,7 @@ import fr.free.totalboumboum.gui.common.panel.data.EntitledDataPanel;
 import fr.free.totalboumboum.gui.common.subpanel.Line;
 import fr.free.totalboumboum.gui.common.subpanel.UntitledSubPanelLines;
 import fr.free.totalboumboum.gui.data.configuration.GuiConfiguration;
+import fr.free.totalboumboum.gui.tools.GuiKeys;
 import fr.free.totalboumboum.gui.tools.GuiTools;
 
 public class AdvancedData extends EntitledDataPanel implements MouseListener
@@ -72,7 +73,7 @@ public class AdvancedData extends EntitledDataPanel implements MouseListener
 	{	super(container);
 
 		// title
-		{	setTitleKey(GuiTools.MENU_OPTIONS_ADVANCED_TITLE);
+		{	setTitleKey(GuiKeys.MENU_OPTIONS_ADVANCED_TITLE);
 		}
 	
 		// data
@@ -93,12 +94,12 @@ public class AdvancedData extends EntitledDataPanel implements MouseListener
 					// name
 					{	ln.setLabelMaxWidth(col,tWidth);
 						ln.setLabelPreferredWidth(col,tWidth);
-						ln.setLabelKey(col,GuiTools.MENU_OPTIONS_ADVANCED_LINE_FPS_TITLE,false);
+						ln.setLabelKey(col,GuiKeys.MENU_OPTIONS_ADVANCED_LINE_FPS_TITLE,false);
 						col++;
 					}
 					// minus button
 					{	ln.setLabelMaxWidth(col,ln.getHeight());
-						ln.setLabelKey(col,GuiTools.MENU_OPTIONS_ADVANCED_LINE_FPS_MINUS,true);
+						ln.setLabelKey(col,GuiKeys.MENU_OPTIONS_ADVANCED_LINE_FPS_MINUS,true);
 						ln.getLabel(col).addMouseListener(this);
 						col++;
 					}
@@ -109,7 +110,7 @@ public class AdvancedData extends EntitledDataPanel implements MouseListener
 					}
 					// plus button
 					{	ln.setLabelMaxWidth(col,ln.getHeight());
-						ln.setLabelKey(col,GuiTools.MENU_OPTIONS_ADVANCED_LINE_FPS_PLUS,true);
+						ln.setLabelKey(col,GuiKeys.MENU_OPTIONS_ADVANCED_LINE_FPS_PLUS,true);
 						ln.getLabel(col).addMouseListener(this);
 						col++;
 					}
@@ -124,7 +125,7 @@ public class AdvancedData extends EntitledDataPanel implements MouseListener
 					// name
 					{	ln.setLabelMaxWidth(col,tWidth);
 						ln.setLabelPreferredWidth(col,tWidth);
-						ln.setLabelKey(col,GuiTools.MENU_OPTIONS_ADVANCED_LINE_ADJUST_TITLE,false);
+						ln.setLabelKey(col,GuiKeys.MENU_OPTIONS_ADVANCED_LINE_ADJUST_TITLE,false);
 						col++;
 					}
 					// value
@@ -146,12 +147,12 @@ public class AdvancedData extends EntitledDataPanel implements MouseListener
 					// name
 					{	ln.setLabelMaxWidth(col,tWidth);
 						ln.setLabelPreferredWidth(col,tWidth);
-						ln.setLabelKey(col,GuiTools.MENU_OPTIONS_ADVANCED_LINE_SPEED_TITLE,false);
+						ln.setLabelKey(col,GuiKeys.MENU_OPTIONS_ADVANCED_LINE_SPEED_TITLE,false);
 						col++;
 					}
 					// minus button
 					{	ln.setLabelMaxWidth(col,ln.getHeight());
-						ln.setLabelKey(col,GuiTools.MENU_OPTIONS_ADVANCED_LINE_SPEED_MINUS,true);
+						ln.setLabelKey(col,GuiKeys.MENU_OPTIONS_ADVANCED_LINE_SPEED_MINUS,true);
 						ln.getLabel(col).addMouseListener(this);
 						col++;
 					}
@@ -162,7 +163,7 @@ public class AdvancedData extends EntitledDataPanel implements MouseListener
 					}
 					// plus button
 					{	ln.setLabelMaxWidth(col,ln.getHeight());
-						ln.setLabelKey(col,GuiTools.MENU_OPTIONS_ADVANCED_LINE_SPEED_PLUS,true);
+						ln.setLabelKey(col,GuiKeys.MENU_OPTIONS_ADVANCED_LINE_SPEED_PLUS,true);
 						ln.getLabel(col).addMouseListener(this);
 						col++;
 					}
@@ -191,16 +192,16 @@ public class AdvancedData extends EntitledDataPanel implements MouseListener
 	{	boolean adjust = engineConfiguration.getAutoFps();
 		String key;
 		if(adjust)
-			key = GuiTools.MENU_OPTIONS_ADVANCED_LINE_ADJUST_ENABLED;
+			key = GuiKeys.MENU_OPTIONS_ADVANCED_LINE_ADJUST_ENABLED;
 		else
-			key = GuiTools.MENU_OPTIONS_ADVANCED_LINE_ADJUST_DISABLED;
+			key = GuiKeys.MENU_OPTIONS_ADVANCED_LINE_ADJUST_DISABLED;
 		optionsPanel.getLine(LINE_ADJUST).setLabelKey(1,key,true);
 	}
 	
 	private void setFps()
 	{	int fps = engineConfiguration.getFps();
 		String text = Integer.toString(fps);
-		String tooltip = GuiConfiguration.getMiscConfiguration().getLanguage().getText(GuiTools.MENU_OPTIONS_ADVANCED_LINE_FPS_TITLE+GuiTools.TOOLTIP); 
+		String tooltip = GuiConfiguration.getMiscConfiguration().getLanguage().getText(GuiKeys.MENU_OPTIONS_ADVANCED_LINE_FPS_TITLE+GuiKeys.TOOLTIP); 
 		optionsPanel.getLine(LINE_FPS).setLabelText(2,text,tooltip);
 	}
 	
@@ -220,7 +221,7 @@ public class AdvancedData extends EntitledDataPanel implements MouseListener
 			nf.setMinimumFractionDigits(2);
 			text = nf.format(speed);
 		}
-		String tooltip = GuiConfiguration.getMiscConfiguration().getLanguage().getText(GuiTools.MENU_OPTIONS_ADVANCED_LINE_SPEED_TITLE+GuiTools.TOOLTIP); 
+		String tooltip = GuiConfiguration.getMiscConfiguration().getLanguage().getText(GuiKeys.MENU_OPTIONS_ADVANCED_LINE_SPEED_TITLE+GuiKeys.TOOLTIP); 
 		optionsPanel.getLine(LINE_SPEED).setLabelText(2,text,tooltip);
 	}
 	

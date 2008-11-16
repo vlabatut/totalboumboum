@@ -35,6 +35,7 @@ import fr.free.totalboumboum.gui.common.panel.data.EntitledDataPanel;
 import fr.free.totalboumboum.gui.common.subpanel.Line;
 import fr.free.totalboumboum.gui.common.subpanel.UntitledSubPanelLines;
 import fr.free.totalboumboum.gui.data.configuration.GuiConfiguration;
+import fr.free.totalboumboum.gui.tools.GuiKeys;
 import fr.free.totalboumboum.gui.tools.GuiTools;
 
 public class VideoData extends EntitledDataPanel implements MouseListener
@@ -71,7 +72,7 @@ public class VideoData extends EntitledDataPanel implements MouseListener
 	{	super(container);
 
 		// title
-		{	setTitleKey(GuiTools.MENU_OPTIONS_VIDEO_TITLE);
+		{	setTitleKey(GuiKeys.MENU_OPTIONS_VIDEO_TITLE);
 		}
 	
 		// data
@@ -93,12 +94,12 @@ public class VideoData extends EntitledDataPanel implements MouseListener
 					// name
 					{	ln.setLabelMaxWidth(col,tWidth);
 						ln.setLabelPreferredWidth(col,tWidth);
-						ln.setLabelKey(col,GuiTools.MENU_OPTIONS_VIDEO_LINE_PANEL_DIMENSION,false);
+						ln.setLabelKey(col,GuiKeys.MENU_OPTIONS_VIDEO_LINE_PANEL_DIMENSION,false);
 						col++;
 					}
 					// minus button
 					{	ln.setLabelMaxWidth(col,ln.getHeight());
-						ln.setLabelKey(col,GuiTools.MENU_OPTIONS_VIDEO_LINE_MINUS,true);
+						ln.setLabelKey(col,GuiKeys.MENU_OPTIONS_VIDEO_LINE_MINUS,true);
 						ln.getLabel(col).addMouseListener(this);
 						col++;
 					}
@@ -122,7 +123,7 @@ public class VideoData extends EntitledDataPanel implements MouseListener
 					}
 					// plus button
 					{	ln.setLabelMaxWidth(col,ln.getHeight());
-						ln.setLabelKey(col,GuiTools.MENU_OPTIONS_VIDEO_LINE_PLUS,true);
+						ln.setLabelKey(col,GuiKeys.MENU_OPTIONS_VIDEO_LINE_PLUS,true);
 						ln.getLabel(col).addMouseListener(this);
 						col++;
 					}
@@ -138,13 +139,13 @@ public class VideoData extends EntitledDataPanel implements MouseListener
 					// name
 					{	ln.setLabelMaxWidth(col,tWidth);
 						ln.setLabelPreferredWidth(col,tWidth);
-						ln.setLabelKey(col,GuiTools.MENU_OPTIONS_VIDEO_LINE_BORDER_COLOR,false);
+						ln.setLabelKey(col,GuiKeys.MENU_OPTIONS_VIDEO_LINE_BORDER_COLOR,false);
 						col++;
 					}
 					// value
 					{	String text = "Black";
 //						int txtWidth = GuiTools.getPixelWidth(ln.getLineFontSize(),text);
-						String tooltip = GuiConfiguration.getMiscConfiguration().getLanguage().getText(GuiTools.MENU_OPTIONS_VIDEO_LINE_BORDER_COLOR+GuiTools.TOOLTIP); 
+						String tooltip = GuiConfiguration.getMiscConfiguration().getLanguage().getText(GuiKeys.MENU_OPTIONS_VIDEO_LINE_BORDER_COLOR+GuiKeys.TOOLTIP); 
 //						ln.setLabelMaxWidth(col,txtWidth);
 						ln.setLabelMaxWidth(col,Integer.MAX_VALUE);
 						ln.setLabelText(col,text,tooltip);
@@ -162,7 +163,7 @@ public class VideoData extends EntitledDataPanel implements MouseListener
 					// name
 					{	ln.setLabelMaxWidth(col,tWidth);
 						ln.setLabelPreferredWidth(col,tWidth);
-						ln.setLabelKey(col,GuiTools.MENU_OPTIONS_VIDEO_LINE_SMOOTH_GRAPHICS,false);
+						ln.setLabelKey(col,GuiKeys.MENU_OPTIONS_VIDEO_LINE_SMOOTH_GRAPHICS,false);
 						col++;
 					}
 					// value
@@ -196,9 +197,9 @@ public class VideoData extends EntitledDataPanel implements MouseListener
 	{	boolean smooth = videoConfiguration.getSmoothGraphics();
 		String key;
 		if(smooth)
-			key = GuiTools.MENU_OPTIONS_VIDEO_LINE_ENABLED;
+			key = GuiKeys.MENU_OPTIONS_VIDEO_LINE_ENABLED;
 		else
-			key = GuiTools.MENU_OPTIONS_VIDEO_LINE_DISABLED;
+			key = GuiKeys.MENU_OPTIONS_VIDEO_LINE_DISABLED;
 		optionsPanel.getLine(LINE_SMOOTH).setLabelKey(1,key,true);
 	}
 	
@@ -206,7 +207,7 @@ public class VideoData extends EntitledDataPanel implements MouseListener
 	{	int panelWidth = videoConfiguration.getPanelDimension().width;
 		int panelHeight = videoConfiguration.getPanelDimension().height;
 		String text = Integer.toString(panelWidth)+new Character('\u00D7').toString()+Integer.toString(panelHeight);
-		String tooltip = GuiConfiguration.getMiscConfiguration().getLanguage().getText(GuiTools.MENU_OPTIONS_VIDEO_LINE_PANEL_DIMENSION+GuiTools.TOOLTIP); 
+		String tooltip = GuiConfiguration.getMiscConfiguration().getLanguage().getText(GuiKeys.MENU_OPTIONS_VIDEO_LINE_PANEL_DIMENSION+GuiKeys.TOOLTIP); 
 		optionsPanel.getLine(LINE_PANELDIM).setLabelText(2,text,tooltip);
 		
 	}

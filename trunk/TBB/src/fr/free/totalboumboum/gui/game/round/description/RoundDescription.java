@@ -72,6 +72,7 @@ import fr.free.totalboumboum.gui.common.panel.data.EntitledDataPanel;
 import fr.free.totalboumboum.gui.common.subpanel.EntitledSubPanelTable;
 import fr.free.totalboumboum.gui.common.subpanel.SubPanel;
 import fr.free.totalboumboum.gui.data.configuration.GuiConfiguration;
+import fr.free.totalboumboum.gui.tools.GuiKeys;
 import fr.free.totalboumboum.gui.tools.GuiTools;
 import fr.free.totalboumboum.tools.ImageTools;
 import fr.free.totalboumboum.tools.StringTools;
@@ -85,7 +86,7 @@ public class RoundDescription extends EntitledDataPanel
 	{	super(container);
 	
 		// title
-		String key = GuiTools.GAME_ROUND_DESCRIPTION_TITLE;
+		String key = GuiKeys.GAME_ROUND_DESCRIPTION_TITLE;
 		setTitleKey(key);
 	
 		// data
@@ -226,9 +227,9 @@ public class RoundDescription extends EntitledDataPanel
 	{	// init
 		JLabel result = new JLabel();
 		//String text = "No preview";
-		String text = GuiConfiguration.getMiscConfiguration().getLanguage().getText(GuiTools.GAME_ROUND_DESCRIPTION_PREVIEW_TITLE);
+		String text = GuiConfiguration.getMiscConfiguration().getLanguage().getText(GuiKeys.GAME_ROUND_DESCRIPTION_PREVIEW_TITLE);
 		//String tooltip = "Zone preview";
-		String tooltip = GuiConfiguration.getMiscConfiguration().getLanguage().getText(GuiTools.GAME_ROUND_DESCRIPTION_PREVIEW_TITLE+GuiTools.TOOLTIP);
+		String tooltip = GuiConfiguration.getMiscConfiguration().getLanguage().getText(GuiKeys.GAME_ROUND_DESCRIPTION_PREVIEW_TITLE+GuiKeys.TOOLTIP);
 		result.setText(text);
 		result.setToolTipText(tooltip);
 		Dimension dim = new Dimension(width,height);
@@ -269,7 +270,7 @@ public class RoundDescription extends EntitledDataPanel
 		}
 
 		EntitledSubPanelTable itemsetPanel = new EntitledSubPanelTable(width,height,colGroups,colSubs,lines);
-		String titleKey = GuiTools.GAME_ROUND_DESCRIPTION_ITEMSET_TITLE;
+		String titleKey = GuiKeys.GAME_ROUND_DESCRIPTION_ITEMSET_TITLE;
 		itemsetPanel.setTitleKey(titleKey,true);
 		itemsetPanel.getTable().setSubColumnsMaxWidth(1,Integer.MAX_VALUE);
 		
@@ -330,19 +331,19 @@ public class RoundDescription extends EntitledDataPanel
 		int colGroups = 1;
 
 		EntitledSubPanelTable miscPanel = new EntitledSubPanelTable(width,height,colGroups,colSubs,lines);
-		String titleKey = GuiTools.GAME_ROUND_DESCRIPTION_MISC_TITLE;
+		String titleKey = GuiKeys.GAME_ROUND_DESCRIPTION_MISC_TITLE;
 		miscPanel.setTitleKey(titleKey,true);
 		miscPanel.getTable().setSubColumnsMaxWidth(1,Integer.MAX_VALUE);
 		
 		// data
 		String keys[] = 
-		{	GuiTools.GAME_ROUND_DESCRIPTION_MISC_HEADER_PACK,
-			GuiTools.GAME_ROUND_DESCRIPTION_MISC_HEADER_TITLE,
-			GuiTools.GAME_ROUND_DESCRIPTION_MISC_HEADER_SOURCE,
-			GuiTools.GAME_ROUND_DESCRIPTION_MISC_HEADER_AUTHOR,
-			GuiTools.GAME_ROUND_DESCRIPTION_MISC_HEADER_INSTANCE,
-			GuiTools.GAME_ROUND_DESCRIPTION_MISC_HEADER_THEME,
-			GuiTools.GAME_ROUND_DESCRIPTION_MISC_HEADER_DIMENSION
+		{	GuiKeys.GAME_ROUND_DESCRIPTION_MISC_HEADER_PACK,
+			GuiKeys.GAME_ROUND_DESCRIPTION_MISC_HEADER_TITLE,
+			GuiKeys.GAME_ROUND_DESCRIPTION_MISC_HEADER_SOURCE,
+			GuiKeys.GAME_ROUND_DESCRIPTION_MISC_HEADER_AUTHOR,
+			GuiKeys.GAME_ROUND_DESCRIPTION_MISC_HEADER_INSTANCE,
+			GuiKeys.GAME_ROUND_DESCRIPTION_MISC_HEADER_THEME,
+			GuiKeys.GAME_ROUND_DESCRIPTION_MISC_HEADER_DIMENSION
 		};
 		Round round = Configuration.getGameConfiguration().getTournament().getCurrentMatch().getCurrentRound();
 		HollowLevel hollowLevel = round.getHollowLevel();
@@ -394,7 +395,7 @@ public class RoundDescription extends EntitledDataPanel
 		}
 	
 		EntitledSubPanelTable itemsPanel = new EntitledSubPanelTable(width,height,colGroups,colSubs,lines);
-		String titleKey = GuiTools.GAME_ROUND_DESCRIPTION_INITIALITEMS_TITLE;
+		String titleKey = GuiKeys.GAME_ROUND_DESCRIPTION_INITIALITEMS_TITLE;
 		itemsPanel.setTitleKey(titleKey,true);
 		itemsPanel.getTable().setSubColumnsMaxWidth(1,Integer.MAX_VALUE);
 		
@@ -522,7 +523,7 @@ public class RoundDescription extends EntitledDataPanel
 				tooltips.add(tt);
 				String name = prefix+"Header"+"Rankpoints";
 				BufferedImage image = GuiTools.getIcon(name);
-				String tooltip = GuiConfiguration.getMiscConfiguration().getLanguage().getText(name+GuiTools.TOOLTIP);
+				String tooltip = GuiConfiguration.getMiscConfiguration().getLanguage().getText(name+GuiKeys.TOOLTIP);
 				dt.add(image);
 				tt.add(tooltip);
 				boolean exaequoShare = pr.getExaequoShare();
@@ -531,7 +532,7 @@ public class RoundDescription extends EntitledDataPanel
 				else
 					name = prefix+"Data"+"Noshare";
 				image = GuiTools.getIcon(name);
-				tooltip = GuiConfiguration.getMiscConfiguration().getLanguage().getText(name+GuiTools.TOOLTIP);
+				tooltip = GuiConfiguration.getMiscConfiguration().getLanguage().getText(name+GuiKeys.TOOLTIP);
 				dt.add(image);
 				tt.add(tooltip);
 			}
@@ -571,7 +572,7 @@ public class RoundDescription extends EntitledDataPanel
 				tooltips.add(tt);
 				String name = prefix+"Header"+"Discretize";
 				BufferedImage image = GuiTools.getIcon(name);
-				String tooltip = GuiConfiguration.getMiscConfiguration().getLanguage().getText(name+GuiTools.TOOLTIP);
+				String tooltip = GuiConfiguration.getMiscConfiguration().getLanguage().getText(name+GuiKeys.TOOLTIP);
 				dt.add(image);
 				tt.add(tooltip);				
 				String text = "";
@@ -616,7 +617,7 @@ public class RoundDescription extends EntitledDataPanel
 				tooltips.add(tt);
 				String name = prefix+"Header"+"Rankings";
 				BufferedImage image = GuiTools.getIcon(name);
-				String tooltip = GuiConfiguration.getMiscConfiguration().getLanguage().getText(name+GuiTools.TOOLTIP);
+				String tooltip = GuiConfiguration.getMiscConfiguration().getLanguage().getText(name+GuiKeys.TOOLTIP);
 				if(inverted)
 					name = prefix+"Data"+"Inverted";
 				else
@@ -643,7 +644,7 @@ public class RoundDescription extends EntitledDataPanel
 			tooltips.add(tt);
 			String name = prefix+"Header"+"Constant";
 			BufferedImage image = GuiTools.getIcon(name);
-			String tooltip = GuiConfiguration.getMiscConfiguration().getLanguage().getText(name+GuiTools.TOOLTIP);
+			String tooltip = GuiConfiguration.getMiscConfiguration().getLanguage().getText(name+GuiKeys.TOOLTIP);
 			dt.add(image);
 			tt.add(tooltip);
 			String text = nf.format(value);
@@ -659,7 +660,7 @@ public class RoundDescription extends EntitledDataPanel
 			tooltips.add(tt);
 			String name = prefix+"Header"+"Total";
 			BufferedImage image = GuiTools.getIcon(name);
-			String tooltip = GuiConfiguration.getMiscConfiguration().getLanguage().getText(name+GuiTools.TOOLTIP);
+			String tooltip = GuiConfiguration.getMiscConfiguration().getLanguage().getText(name+GuiKeys.TOOLTIP);
 			dt.add(image);
 			tt.add(tooltip);
 			String text = "";
@@ -676,7 +677,7 @@ public class RoundDescription extends EntitledDataPanel
 			tooltips.add(tt);
 			String name = prefix+"Header"+"Score";
 			BufferedImage image = GuiTools.getIcon(name);
-			String tooltip = GuiConfiguration.getMiscConfiguration().getLanguage().getText(name+GuiTools.TOOLTIP);
+			String tooltip = GuiConfiguration.getMiscConfiguration().getLanguage().getText(name+GuiKeys.TOOLTIP);
 			dt.add(image);
 			tt.add(tooltip);
 			name = null;
@@ -704,7 +705,7 @@ public class RoundDescription extends EntitledDataPanel
 					break;					
 			}
 			image = GuiTools.getIcon(name);
-			tooltip = GuiConfiguration.getMiscConfiguration().getLanguage().getText(name+GuiTools.TOOLTIP);
+			tooltip = GuiConfiguration.getMiscConfiguration().getLanguage().getText(name+GuiKeys.TOOLTIP);
 			dt.add(image);
 			tt.add(tooltip);
 		}
@@ -717,7 +718,7 @@ public class RoundDescription extends EntitledDataPanel
 			// icon
 			//BufferedImage icon = GuiTools.getIcon(GuiTools.GAME_ROUND_HEADER_PARTIAL);
 			String icon = "-";
-			String tooltip = GuiConfiguration.getMiscConfiguration().getLanguage().getText(prefix+"Data"+"Partial"+GuiTools.TOOLTIP);
+			String tooltip = GuiConfiguration.getMiscConfiguration().getLanguage().getText(prefix+"Data"+"Partial"+GuiKeys.TOOLTIP);
 			dt.add(icon);
 			tt.add(tooltip);
 			// text

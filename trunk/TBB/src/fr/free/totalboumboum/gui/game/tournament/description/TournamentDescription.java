@@ -23,6 +23,7 @@ package fr.free.totalboumboum.gui.game.tournament.description;
 
 import fr.free.totalboumboum.gui.common.panel.SplitMenuPanel;
 import fr.free.totalboumboum.gui.common.panel.data.EntitledDataPanel;
+import fr.free.totalboumboum.gui.tools.GuiKeys;
 import fr.free.totalboumboum.gui.tools.GuiTools;
 
 public abstract class TournamentDescription extends EntitledDataPanel
@@ -33,7 +34,7 @@ public abstract class TournamentDescription extends EntitledDataPanel
 	{	super(container);
 		
 		// title
-		String key = GuiTools.GAME_TOURNAMENT_DESCRIPTION_TITLE;
+		String key = GuiKeys.GAME_TOURNAMENT_DESCRIPTION_TITLE;
 		setTitleKey(key);
 	}
 }

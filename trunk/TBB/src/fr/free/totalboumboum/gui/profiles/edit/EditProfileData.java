@@ -55,6 +55,7 @@ import fr.free.totalboumboum.gui.common.subpanel.UntitledSubPanelLines;
 import fr.free.totalboumboum.gui.data.configuration.GuiConfiguration;
 import fr.free.totalboumboum.gui.profiles.ais.SelectedAiSplitPanel;
 import fr.free.totalboumboum.gui.profiles.heroes.SelectedHeroSplitPanel;
+import fr.free.totalboumboum.gui.tools.GuiKeys;
 import fr.free.totalboumboum.gui.tools.GuiTools;
 import fr.free.totalboumboum.tools.ImageTools;
 
@@ -79,7 +80,7 @@ public class EditProfileData extends EntitledDataPanel implements MouseListener,
 		this.profile = profile.copy();
 		
 		// title
-		setTitleKey(GuiTools.MENU_PROFILES_EDIT_TITLE);
+		setTitleKey(GuiKeys.MENU_PROFILES_EDIT_TITLE);
 	
 		// data
 		{	int w = getDataWidth();
@@ -118,8 +119,8 @@ public class EditProfileData extends EntitledDataPanel implements MouseListener,
 					label.setOpaque(true);
 					Color bg = GuiTools.COLOR_TABLE_HEADER_BACKGROUND;
 					label.setBackground(bg);
-					String key = GuiTools.MENU_PROFILES_EDIT_NAME;
-					String tooltip = GuiConfiguration.getMiscConfiguration().getLanguage().getText(key+GuiTools.TOOLTIP);
+					String key = GuiKeys.MENU_PROFILES_EDIT_NAME;
+					String tooltip = GuiConfiguration.getMiscConfiguration().getLanguage().getText(key+GuiKeys.TOOLTIP);
 					label.setToolTipText(tooltip);
 					BufferedImage icon = GuiTools.getIcon(key);
 					double zoom = nameHeight/(double)icon.getHeight();
@@ -178,7 +179,7 @@ public class EditProfileData extends EntitledDataPanel implements MouseListener,
 				// icon
 				{	ln.setLabelMinWidth(col,ln.getHeight());
 					ln.setLabelMaxWidth(col,ln.getHeight());
-					ln.setLabelKey(col,GuiTools.MENU_PROFILES_EDIT_AI,true);
+					ln.setLabelKey(col,GuiKeys.MENU_PROFILES_EDIT_AI,true);
 					Color bg = GuiTools.COLOR_TABLE_HEADER_BACKGROUND;
 					ln.setLabelBackground(col,bg);
 					col++;
@@ -198,7 +199,7 @@ public class EditProfileData extends EntitledDataPanel implements MouseListener,
 				// reset
 				{	ln.setLabelMinWidth(col,ln.getHeight());
 					ln.setLabelMaxWidth(col,ln.getHeight());
-					ln.setLabelKey(col,GuiTools.MENU_PROFILES_EDIT_AI_RESET,true);
+					ln.setLabelKey(col,GuiKeys.MENU_PROFILES_EDIT_AI_RESET,true);
 					Color bg = GuiTools.COLOR_TABLE_REGULAR_BACKGROUND;
 					ln.setLabelBackground(col,bg);
 					JLabel label = editPanel.getLabel(LINE_AI,col);
@@ -208,7 +209,7 @@ public class EditProfileData extends EntitledDataPanel implements MouseListener,
 				// change
 				{	ln.setLabelMinWidth(col,ln.getHeight());
 					ln.setLabelMaxWidth(col,ln.getHeight());
-					ln.setLabelKey(col,GuiTools.MENU_PROFILES_EDIT_AI_CHANGE,true);
+					ln.setLabelKey(col,GuiKeys.MENU_PROFILES_EDIT_AI_CHANGE,true);
 					Color bg = GuiTools.COLOR_TABLE_REGULAR_BACKGROUND;
 					ln.setLabelBackground(col,bg);
 					JLabel label = editPanel.getLabel(LINE_AI,col);
@@ -226,7 +227,7 @@ public class EditProfileData extends EntitledDataPanel implements MouseListener,
 				// icon
 				{	ln.setLabelMinWidth(col,ln.getHeight());
 					ln.setLabelMaxWidth(col,ln.getHeight());
-					ln.setLabelKey(col,GuiTools.MENU_PROFILES_EDIT_HERO,true);
+					ln.setLabelKey(col,GuiKeys.MENU_PROFILES_EDIT_HERO,true);
 					Color bg = GuiTools.COLOR_TABLE_HEADER_BACKGROUND;
 					ln.setLabelBackground(col,bg);
 					col++;
@@ -246,7 +247,7 @@ public class EditProfileData extends EntitledDataPanel implements MouseListener,
 				// change
 				{	ln.setLabelMinWidth(col,ln.getHeight());
 					ln.setLabelMaxWidth(col,ln.getHeight());
-					ln.setLabelKey(col,GuiTools.MENU_PROFILES_EDIT_HERO_CHANGE,true);
+					ln.setLabelKey(col,GuiKeys.MENU_PROFILES_EDIT_HERO_CHANGE,true);
 					Color bg = GuiTools.COLOR_TABLE_REGULAR_BACKGROUND;
 					ln.setLabelBackground(col,bg);
 					JLabel label = editPanel.getLabel(LINE_HERO,col);
@@ -266,8 +267,8 @@ public class EditProfileData extends EntitledDataPanel implements MouseListener,
 					// icon
 					{	ln.setLabelMinWidth(col,ln.getHeight());
 						ln.setLabelMaxWidth(col,ln.getHeight());
-						BufferedImage image = GuiTools.getIcon(GuiTools.MENU_PROFILES_EDIT_COLOR);
-						String tooltip = GuiConfiguration.getMiscConfiguration().getLanguage().getText(GuiTools.MENU_PROFILES_EDIT_COLOR+GuiTools.TOOLTIP);
+						BufferedImage image = GuiTools.getIcon(GuiKeys.MENU_PROFILES_EDIT_COLOR);
+						String tooltip = GuiConfiguration.getMiscConfiguration().getLanguage().getText(GuiKeys.MENU_PROFILES_EDIT_COLOR+GuiKeys.TOOLTIP);
 						ln.setLabelIcon(col,image,tooltip+" "+(i+1));
 						Color bg = GuiTools.COLOR_TABLE_HEADER_BACKGROUND;
 						ln.setLabelBackground(col,bg);
@@ -280,7 +281,7 @@ public class EditProfileData extends EntitledDataPanel implements MouseListener,
 					// previous
 					{	ln.setLabelMinWidth(col,ln.getHeight());
 						ln.setLabelMaxWidth(col,ln.getHeight());
-						ln.setLabelKey(col,GuiTools.MENU_PROFILES_EDIT_COLOR_PREVIOUS,true);
+						ln.setLabelKey(col,GuiKeys.MENU_PROFILES_EDIT_COLOR_PREVIOUS,true);
 						Color bg = GuiTools.COLOR_TABLE_REGULAR_BACKGROUND;
 						ln.setLabelBackground(col,bg);
 						JLabel label = editPanel.getLabel(line,col);
@@ -290,7 +291,7 @@ public class EditProfileData extends EntitledDataPanel implements MouseListener,
 					// next
 					{	ln.setLabelMinWidth(col,ln.getHeight());
 						ln.setLabelMaxWidth(col,ln.getHeight());
-						ln.setLabelKey(col,GuiTools.MENU_PROFILES_EDIT_COLOR_NEXT,true);
+						ln.setLabelKey(col,GuiKeys.MENU_PROFILES_EDIT_COLOR_NEXT,true);
 						Color bg = GuiTools.COLOR_TABLE_REGULAR_BACKGROUND;
 						ln.setLabelBackground(col,bg);
 						JLabel label = editPanel.getLabel(line,col);
@@ -327,7 +328,7 @@ public class EditProfileData extends EntitledDataPanel implements MouseListener,
 		if(color!=null)
 		{	String colorKey = color.toString();
 			colorKey = colorKey.toUpperCase().substring(0,1)+colorKey.toLowerCase().substring(1,colorKey.length());
-			colorKey = GuiTools.COLOR+colorKey;
+			colorKey = GuiKeys.COLOR+colorKey;
 			text = GuiConfiguration.getMiscConfiguration().getLanguage().getText(colorKey); 
 			tooltip = text;
 			Color clr = color.getColor();

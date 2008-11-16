@@ -24,8 +24,6 @@ package fr.free.totalboumboum.gui.quicklaunch;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
-import java.awt.Graphics;
-import java.awt.image.BufferedImage;
 import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -94,9 +92,9 @@ public class QuickResults extends JPanel
 		setMaximumSize(dim);
 
 		// fonts
-		BufferedImage bi = new BufferedImage(10,10,BufferedImage.TYPE_INT_ARGB);
-		Graphics g = bi.getGraphics();
-		GuiTools.setGraphics(g);
+//		BufferedImage bi = new BufferedImage(10,10,BufferedImage.TYPE_INT_ARGB);
+//		Graphics g = bi.getGraphics();
+//		GuiTools.setGraphics(g);
 		GuiConfiguration.getMiscConfiguration().setFont(null,new Font("Arial",Font.PLAIN,10));
 		int headerHeight = (int)(1.5*pHeight/17.5);
 		int headerSize = GuiTools.getFontSize(headerHeight);

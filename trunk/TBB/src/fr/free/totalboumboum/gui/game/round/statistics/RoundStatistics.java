@@ -23,6 +23,7 @@ package fr.free.totalboumboum.gui.game.round.statistics;
 
 import fr.free.totalboumboum.gui.common.panel.SplitMenuPanel;
 import fr.free.totalboumboum.gui.common.panel.data.EntitledDataPanel;
+import fr.free.totalboumboum.gui.tools.GuiKeys;
 import fr.free.totalboumboum.gui.tools.GuiTools;
 
 public class RoundStatistics extends EntitledDataPanel
@@ -33,7 +34,7 @@ public class RoundStatistics extends EntitledDataPanel
 	{	super(container);
 
 		// title
-		String key = GuiTools.GAME_ROUND_STATISTICS_TITLE;
+		String key = GuiKeys.GAME_ROUND_STATISTICS_TITLE;
 		setTitleKey(key);
 	
 	}

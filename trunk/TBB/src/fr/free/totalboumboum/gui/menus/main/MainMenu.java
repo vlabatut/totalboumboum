@@ -47,6 +47,7 @@ import fr.free.totalboumboum.gui.levels.select.SelectedLevelSplitPanel;
 import fr.free.totalboumboum.gui.menus.tournament.TournamentSplitPanel;
 import fr.free.totalboumboum.gui.options.OptionsSplitPanel;
 import fr.free.totalboumboum.gui.profiles.select.SelectedProfileSplitPanel;
+import fr.free.totalboumboum.gui.tools.GuiKeys;
 import fr.free.totalboumboum.gui.tools.GuiTools;
 
 public class MainMenu extends SimpleMenuPanel
@@ -83,19 +84,19 @@ public class MainMenu extends SimpleMenuPanel
 		
 		// buttons
 		add(Box.createVerticalGlue());
-		buttonOptions = GuiTools.createPrincipalVerticalMenuButton(GuiTools.MENU_MAIN_BUTTON_OPTIONS,this);
+		buttonOptions = GuiTools.createPrincipalVerticalMenuButton(GuiKeys.MENU_MAIN_BUTTON_OPTIONS,this);
 		add(Box.createRigidArea(new Dimension(0,GuiTools.getSize(GuiTools.MENU_VERTICAL_BUTTON_SPACE))));
-		buttonProfiles = GuiTools.createPrincipalVerticalMenuButton(GuiTools.MENU_MAIN_BUTTON_PROFILES,this);
-		buttonStats = GuiTools.createPrincipalVerticalMenuButton(GuiTools.MENU_MAIN_BUTTON_STATISTICS,this);
+		buttonProfiles = GuiTools.createPrincipalVerticalMenuButton(GuiKeys.MENU_MAIN_BUTTON_PROFILES,this);
+		buttonStats = GuiTools.createPrincipalVerticalMenuButton(GuiKeys.MENU_MAIN_BUTTON_STATISTICS,this);
 buttonStats.setEnabled(false);
-		buttonHeroes = GuiTools.createPrincipalVerticalMenuButton(GuiTools.MENU_MAIN_BUTTON_HEROES,this);
-		buttonAi = GuiTools.createPrincipalVerticalMenuButton(GuiTools.MENU_MAIN_BUTTON_AI,this);
-		buttonLevels = GuiTools.createPrincipalVerticalMenuButton(GuiTools.MENU_MAIN_BUTTON_LEVELS,this);
-		buttonAbout = GuiTools.createPrincipalVerticalMenuButton(GuiTools.MENU_MAIN_BUTTON_ABOUT,this);
+		buttonHeroes = GuiTools.createPrincipalVerticalMenuButton(GuiKeys.MENU_MAIN_BUTTON_HEROES,this);
+		buttonAi = GuiTools.createPrincipalVerticalMenuButton(GuiKeys.MENU_MAIN_BUTTON_AI,this);
+		buttonLevels = GuiTools.createPrincipalVerticalMenuButton(GuiKeys.MENU_MAIN_BUTTON_LEVELS,this);
+		buttonAbout = GuiTools.createPrincipalVerticalMenuButton(GuiKeys.MENU_MAIN_BUTTON_ABOUT,this);
 buttonAbout.setEnabled(false);
 		add(Box.createRigidArea(new Dimension(0,GuiTools.getSize(GuiTools.MENU_VERTICAL_BUTTON_SPACE))));
-		buttonTournament = GuiTools.createPrincipalVerticalMenuButton(GuiTools.MENU_MAIN_BUTTON_TOURNAMENT,this);
-		buttonQuickMatch = GuiTools.createPrincipalVerticalMenuButton(GuiTools.MENU_MAIN_BUTTON_QUICKMATCH,this);
+		buttonTournament = GuiTools.createPrincipalVerticalMenuButton(GuiKeys.MENU_MAIN_BUTTON_TOURNAMENT,this);
+		buttonQuickMatch = GuiTools.createPrincipalVerticalMenuButton(GuiKeys.MENU_MAIN_BUTTON_QUICKMATCH,this);
 		add(Box.createVerticalGlue());		
 	}
 	
@@ -105,30 +106,30 @@ buttonAbout.setEnabled(false);
 	}
 	
 	public void actionPerformed(ActionEvent e)
-	{	if(e.getActionCommand().equals(GuiTools.MENU_MAIN_BUTTON_OPTIONS))
+	{	if(e.getActionCommand().equals(GuiKeys.MENU_MAIN_BUTTON_OPTIONS))
 		{	OptionsSplitPanel optionsMenuPanel = new OptionsSplitPanel(getContainer(),this);
 			replaceWith(optionsMenuPanel);
 	    }
-		else if(e.getActionCommand().equals(GuiTools.MENU_MAIN_BUTTON_PROFILES))
+		else if(e.getActionCommand().equals(GuiKeys.MENU_MAIN_BUTTON_PROFILES))
 		{	SelectedProfileSplitPanel profilesMenuPanel = new SelectedProfileSplitPanel(getContainer(),this);
 			replaceWith(profilesMenuPanel);
 	    }
-		else if(e.getActionCommand().equals(GuiTools.MENU_MAIN_BUTTON_AI))
+		else if(e.getActionCommand().equals(GuiKeys.MENU_MAIN_BUTTON_AI))
 		{	SelectedAiSplitPanel aiMenuPanel = new SelectedAiSplitPanel(getContainer(),this);
 			replaceWith(aiMenuPanel);
 	    }
-		else if(e.getActionCommand().equals(GuiTools.MENU_MAIN_BUTTON_STATISTICS))
+		else if(e.getActionCommand().equals(GuiKeys.MENU_MAIN_BUTTON_STATISTICS))
 		{	
 	    }
-		else if(e.getActionCommand().equals(GuiTools.MENU_MAIN_BUTTON_HEROES))
+		else if(e.getActionCommand().equals(GuiKeys.MENU_MAIN_BUTTON_HEROES))
 		{	SelectedHeroSplitPanel heroMenuPanel = new SelectedHeroSplitPanel(getContainer(),this);
 			replaceWith(heroMenuPanel);
 	    }
-		else if(e.getActionCommand().equals(GuiTools.MENU_MAIN_BUTTON_LEVELS))
+		else if(e.getActionCommand().equals(GuiKeys.MENU_MAIN_BUTTON_LEVELS))
 		{	SelectedLevelSplitPanel levelMenuPanel = new SelectedLevelSplitPanel(getContainer(),this);
 			replaceWith(levelMenuPanel);
 	    }
-		else if(e.getActionCommand().equals(GuiTools.MENU_MAIN_BUTTON_TOURNAMENT))
+		else if(e.getActionCommand().equals(GuiKeys.MENU_MAIN_BUTTON_TOURNAMENT))
 		{	if(tournamentMainPanel==null)
 			{	try
 				{	Configuration.getGameConfiguration().loadLastTournament();
@@ -161,7 +162,7 @@ buttonAbout.setEnabled(false);
 			}
 			replaceWith(tournamentMainPanel);
 	    }
-		else if(e.getActionCommand().equals(GuiTools.MENU_MAIN_BUTTON_QUICKMATCH))
+		else if(e.getActionCommand().equals(GuiKeys.MENU_MAIN_BUTTON_QUICKMATCH))
 		{	if(quickmatchGamePanel==null)
 			{	try
 				{	Configuration.getGameConfiguration().loadQuickmatch();

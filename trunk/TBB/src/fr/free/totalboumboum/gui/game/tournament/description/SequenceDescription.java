@@ -41,6 +41,7 @@ import fr.free.totalboumboum.gui.common.panel.SplitMenuPanel;
 import fr.free.totalboumboum.gui.common.subpanel.SubPanel;
 import fr.free.totalboumboum.gui.common.subpanel.UntitledSubPanelTable;
 import fr.free.totalboumboum.gui.game.round.description.RoundDescription;
+import fr.free.totalboumboum.gui.tools.GuiKeys;
 import fr.free.totalboumboum.gui.tools.GuiTools;
 
 public class SequenceDescription extends TournamentDescription 
@@ -121,9 +122,9 @@ public class SequenceDescription extends TournamentDescription
 				lbl.setOpaque(false);
 			}
 			String keys[] = 
-			{	GuiTools.GAME_TOURNAMENT_DESCRIPTION_PLAYERS_HEADER_PROFILE,
-				GuiTools.GAME_TOURNAMENT_DESCRIPTION_PLAYERS_HEADER_NAME,
-				GuiTools.GAME_TOURNAMENT_DESCRIPTION_PLAYERS_HEADER_RANK
+			{	GuiKeys.GAME_TOURNAMENT_DESCRIPTION_PLAYERS_HEADER_PROFILE,
+				GuiKeys.GAME_TOURNAMENT_DESCRIPTION_PLAYERS_HEADER_NAME,
+				GuiKeys.GAME_TOURNAMENT_DESCRIPTION_PLAYERS_HEADER_RANK
 			};
 			for(int i=1;i<keys.length+1;i++)
 				playersPanel.setLabelKey(0,i,keys[i-1],true);
@@ -153,9 +154,9 @@ public class SequenceDescription extends TournamentDescription
 				{	String aiName = profile.getAiName();
 					String key;
 					if(aiName==null)
-						key = GuiTools.GAME_TOURNAMENT_DESCRIPTION_PLAYERS_DATA_HUMAN;
+						key = GuiKeys.GAME_TOURNAMENT_DESCRIPTION_PLAYERS_DATA_HUMAN;
 					else
-						key = GuiTools.GAME_TOURNAMENT_DESCRIPTION_PLAYERS_DATA_COMPUTER;
+						key = GuiKeys.GAME_TOURNAMENT_DESCRIPTION_PLAYERS_DATA_COMPUTER;
 					playersPanel.setLabelKey(line,col,key,true);
 					col++;
 				}

@@ -44,6 +44,7 @@ import fr.free.totalboumboum.gui.common.panel.menu.InnerMenuPanel;
 import fr.free.totalboumboum.gui.common.panel.menu.MenuPanel;
 import fr.free.totalboumboum.gui.data.configuration.GuiConfiguration;
 import fr.free.totalboumboum.gui.profiles.edit.EditProfileSplitPanel;
+import fr.free.totalboumboum.gui.tools.GuiKeys;
 import fr.free.totalboumboum.gui.tools.GuiTools;
 import fr.free.totalboumboum.tools.FileTools;
 
@@ -73,11 +74,11 @@ public class SelectedProfileMenu extends InnerMenuPanel
 
 		// buttons
 		add(Box.createVerticalGlue());
-		buttonNew = GuiTools.createSecondaryVerticalMenuButton(GuiTools.MENU_PROFILES_BUTTON_NEW,this);
-		buttonModify = GuiTools.createSecondaryVerticalMenuButton(GuiTools.MENU_PROFILES_BUTTON_MODIFY,this);
-		buttonDelete = GuiTools.createSecondaryVerticalMenuButton(GuiTools.MENU_PROFILES_BUTTON_DELETE,this);
+		buttonNew = GuiTools.createSecondaryVerticalMenuButton(GuiKeys.MENU_PROFILES_BUTTON_NEW,this);
+		buttonModify = GuiTools.createSecondaryVerticalMenuButton(GuiKeys.MENU_PROFILES_BUTTON_MODIFY,this);
+		buttonDelete = GuiTools.createSecondaryVerticalMenuButton(GuiKeys.MENU_PROFILES_BUTTON_DELETE,this);
 		add(Box.createRigidArea(new Dimension(0,GuiTools.getSize(GuiTools.MENU_VERTICAL_BUTTON_SPACE))));
-		buttonBack = GuiTools.createSecondaryVerticalMenuButton(GuiTools.MENU_PROFILES_BUTTON_BACK,this);
+		buttonBack = GuiTools.createSecondaryVerticalMenuButton(GuiKeys.MENU_PROFILES_BUTTON_BACK,this);
 		add(Box.createVerticalGlue());		
 
 		// panels
@@ -86,10 +87,10 @@ public class SelectedProfileMenu extends InnerMenuPanel
 	}
 	
 	public void actionPerformed(ActionEvent e)
-	{	if(e.getActionCommand().equals(GuiTools.MENU_PROFILES_BUTTON_BACK))
+	{	if(e.getActionCommand().equals(GuiKeys.MENU_PROFILES_BUTTON_BACK))
 		{	replaceWith(parent);
 	    }
-		else if(e.getActionCommand().equals(GuiTools.MENU_PROFILES_BUTTON_NEW))
+		else if(e.getActionCommand().equals(GuiKeys.MENU_PROFILES_BUTTON_NEW))
 		{	try
 			{	// refresh counter
 				ProfilesConfiguration profilesConfig = Configuration.getProfilesConfiguration();
@@ -98,7 +99,7 @@ public class SelectedProfileMenu extends InnerMenuPanel
 				profilesConfig.setLastProfile(nextProfile);
 				// create profile
 				Profile newProfile = new Profile();
-				String key = GuiTools.MENU_PROFILES_LIST_NEW_PROFILE;
+				String key = GuiKeys.MENU_PROFILES_LIST_NEW_PROFILE;
 				String name = GuiConfiguration.getMiscConfiguration().getLanguage().getText(key);
 				newProfile.setName(name);
 				String spritePack = "superbomberman1";
@@ -128,7 +129,7 @@ public class SelectedProfileMenu extends InnerMenuPanel
 			{	e1.printStackTrace();
 			}
 	    }
-		else if(e.getActionCommand().equals(GuiTools.MENU_PROFILES_BUTTON_MODIFY))
+		else if(e.getActionCommand().equals(GuiKeys.MENU_PROFILES_BUTTON_MODIFY))
 		{	Profile profile = profileData.getSelectedProfile();
 			if(profile!=null)
 			{	String profileFile = profileData.getSelectedProfileFile();
@@ -136,7 +137,7 @@ public class SelectedProfileMenu extends InnerMenuPanel
 				replaceWith(editPanel);
 			}
 	    }
-		else if(e.getActionCommand().equals(GuiTools.MENU_PROFILES_BUTTON_DELETE))
+		else if(e.getActionCommand().equals(GuiKeys.MENU_PROFILES_BUTTON_DELETE))
 		{	Profile profile = profileData.getSelectedProfile();
 			if(profile!=null)
 			{	try

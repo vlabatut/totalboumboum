@@ -41,6 +41,7 @@ import fr.free.totalboumboum.game.tournament.sequence.SequenceTournament;
 import fr.free.totalboumboum.gui.common.panel.SplitMenuPanel;
 import fr.free.totalboumboum.gui.common.subpanel.UntitledSubPanelTable;
 import fr.free.totalboumboum.gui.data.configuration.GuiConfiguration;
+import fr.free.totalboumboum.gui.tools.GuiKeys;
 import fr.free.totalboumboum.gui.tools.GuiTools;
 
 public class SequenceResults extends TournamentResults
@@ -62,13 +63,13 @@ public class SequenceResults extends TournamentResults
 					lbl.setOpaque(false);
 				}
 				String[] keys = 
-				{	GuiTools.GAME_TOURNAMENT_RESULTS_HEADER_NAME,
-					GuiTools.GAME_TOURNAMENT_RESULTS_HEADER_BOMBS,
-					GuiTools.GAME_TOURNAMENT_RESULTS_HEADER_ITEMS,
-					GuiTools.GAME_TOURNAMENT_RESULTS_HEADER_DEATHS,
-					GuiTools.GAME_TOURNAMENT_RESULTS_HEADER_KILLS,
-					GuiTools.GAME_TOURNAMENT_RESULTS_HEADER_TOTAL,
-					GuiTools.GAME_TOURNAMENT_RESULTS_HEADER_POINTS
+				{	GuiKeys.GAME_TOURNAMENT_RESULTS_HEADER_NAME,
+					GuiKeys.GAME_TOURNAMENT_RESULTS_HEADER_BOMBS,
+					GuiKeys.GAME_TOURNAMENT_RESULTS_HEADER_ITEMS,
+					GuiKeys.GAME_TOURNAMENT_RESULTS_HEADER_DEATHS,
+					GuiKeys.GAME_TOURNAMENT_RESULTS_HEADER_KILLS,
+					GuiKeys.GAME_TOURNAMENT_RESULTS_HEADER_TOTAL,
+					GuiKeys.GAME_TOURNAMENT_RESULTS_HEADER_POINTS
 				};
 				for(int col=1;col<keys.length+1;col++)
 					resultsPanel.setLabelKey(0,col,keys[col-1],true);
@@ -111,8 +112,8 @@ public class SequenceResults extends TournamentResults
 		int cols = 2+4+matches.size()+2;
 		if(resultsPanel.getColumnCount()<cols)
 		{	resultsPanel.addColumn(col);
-			String text = GuiConfiguration.getMiscConfiguration().getLanguage().getText(GuiTools.GAME_TOURNAMENT_RESULTS_HEADER_MATCH)+matches.size();
-			String tooltip = GuiConfiguration.getMiscConfiguration().getLanguage().getText(GuiTools.GAME_TOURNAMENT_RESULTS_HEADER_MATCH+GuiTools.TOOLTIP)+matches.size();
+			String text = GuiConfiguration.getMiscConfiguration().getLanguage().getText(GuiKeys.GAME_TOURNAMENT_RESULTS_HEADER_MATCH)+matches.size();
+			String tooltip = GuiConfiguration.getMiscConfiguration().getLanguage().getText(GuiKeys.GAME_TOURNAMENT_RESULTS_HEADER_MATCH+GuiKeys.TOOLTIP)+matches.size();
 			resultsPanel.setLabelText(0,col,text,tooltip);
 		}
 		

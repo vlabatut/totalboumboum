@@ -41,6 +41,7 @@ import fr.free.totalboumboum.gui.common.panel.menu.InnerMenuPanel;
 import fr.free.totalboumboum.gui.common.panel.menu.MenuPanel;
 import fr.free.totalboumboum.gui.game.match.MatchSplitPanel;
 import fr.free.totalboumboum.gui.game.tournament.TournamentSplitPanel;
+import fr.free.totalboumboum.gui.tools.GuiKeys;
 import fr.free.totalboumboum.gui.tools.GuiTools;
 
 /**
@@ -107,21 +108,21 @@ public class TournamentMenu extends InnerMenuPanel
 		
 		// buttons
 		add(Box.createVerticalGlue());
-		buttonNew = GuiTools.createSecondaryVerticalMenuButton(GuiTools.MENU_TOURNAMENT_BUTTON_NEW,this);
+		buttonNew = GuiTools.createSecondaryVerticalMenuButton(GuiKeys.MENU_TOURNAMENT_BUTTON_NEW,this);
 buttonNew.setEnabled(false);
-		buttonLoad = GuiTools.createSecondaryVerticalMenuButton(GuiTools.MENU_TOURNAMENT_BUTTON_LOAD,this);
+		buttonLoad = GuiTools.createSecondaryVerticalMenuButton(GuiKeys.MENU_TOURNAMENT_BUTTON_LOAD,this);
 buttonLoad.setEnabled(false);
-		buttonSaveAs = GuiTools.createSecondaryVerticalMenuButton(GuiTools.MENU_TOURNAMENT_BUTTON_SAVE_AS,this);
+		buttonSaveAs = GuiTools.createSecondaryVerticalMenuButton(GuiKeys.MENU_TOURNAMENT_BUTTON_SAVE_AS,this);
 buttonSaveAs.setEnabled(false);
 		add(Box.createRigidArea(new Dimension(0,GuiTools.getSize(GuiTools.MENU_VERTICAL_BUTTON_SPACE))));
-		buttonRules = GuiTools.createSecondaryVerticalMenuButton(GuiTools.MENU_TOURNAMENT_BUTTON_RULES,this);
+		buttonRules = GuiTools.createSecondaryVerticalMenuButton(GuiKeys.MENU_TOURNAMENT_BUTTON_RULES,this);
 buttonSaveAs.setEnabled(false);
-		buttonPlayers = GuiTools.createSecondaryVerticalMenuButton(GuiTools.MENU_TOURNAMENT_BUTTON_PLAYERS,this);
+		buttonPlayers = GuiTools.createSecondaryVerticalMenuButton(GuiKeys.MENU_TOURNAMENT_BUTTON_PLAYERS,this);
 buttonPlayers.setEnabled(false);
 		add(Box.createRigidArea(new Dimension(0,GuiTools.getSize(GuiTools.MENU_VERTICAL_BUTTON_SPACE))));
-		buttonPlay = GuiTools.createSecondaryVerticalMenuButton(GuiTools.MENU_TOURNAMENT_BUTTON_START,this);
+		buttonPlay = GuiTools.createSecondaryVerticalMenuButton(GuiKeys.MENU_TOURNAMENT_BUTTON_START,this);
 		add(Box.createRigidArea(new Dimension(0,GuiTools.getSize(GuiTools.MENU_VERTICAL_BUTTON_SPACE))));
-		buttonBack = GuiTools.createSecondaryVerticalMenuButton(GuiTools.MENU_TOURNAMENT_BUTTON_BACK,this);
+		buttonBack = GuiTools.createSecondaryVerticalMenuButton(GuiKeys.MENU_TOURNAMENT_BUTTON_BACK,this);
 		add(Box.createVerticalGlue());
 		
 		// panels
@@ -130,22 +131,22 @@ buttonPlayers.setEnabled(false);
 	}
 	
 	public void actionPerformed(ActionEvent e)
-	{	if(e.getActionCommand().equals(GuiTools.MENU_TOURNAMENT_BUTTON_NEW))
+	{	if(e.getActionCommand().equals(GuiKeys.MENU_TOURNAMENT_BUTTON_NEW))
 		{	
 	    }
-		else if(e.getActionCommand().equals(GuiTools.MENU_TOURNAMENT_BUTTON_LOAD))
+		else if(e.getActionCommand().equals(GuiKeys.MENU_TOURNAMENT_BUTTON_LOAD))
 		{	
 	    }
-		else if(e.getActionCommand().equals(GuiTools.MENU_TOURNAMENT_BUTTON_SAVE_AS))
+		else if(e.getActionCommand().equals(GuiKeys.MENU_TOURNAMENT_BUTTON_SAVE_AS))
 		{	
 	    }
-		else if(e.getActionCommand().equals(GuiTools.MENU_TOURNAMENT_BUTTON_RULES))
+		else if(e.getActionCommand().equals(GuiKeys.MENU_TOURNAMENT_BUTTON_RULES))
 		{	
 	    }
-		else if(e.getActionCommand().equals(GuiTools.MENU_TOURNAMENT_BUTTON_PLAYERS))
+		else if(e.getActionCommand().equals(GuiKeys.MENU_TOURNAMENT_BUTTON_PLAYERS))
 		{	
 	    }
-		else if(e.getActionCommand().equals(GuiTools.MENU_TOURNAMENT_BUTTON_START))
+		else if(e.getActionCommand().equals(GuiKeys.MENU_TOURNAMENT_BUTTON_START))
 		{	//NOTE c icite qu'il faut tester que les profils sont OK
 			try
 			{	AbstractTournament tournament = Configuration.getGameConfiguration().getTournament();
@@ -183,10 +184,10 @@ buttonPlayers.setEnabled(false);
 			}
 			replaceWith(tournamentGamePanel);
 	    }
-		else if(e.getActionCommand().equals(GuiTools.MENU_TOURNAMENT_BUTTON_CONTINUE))
+		else if(e.getActionCommand().equals(GuiKeys.MENU_TOURNAMENT_BUTTON_CONTINUE))
 		{	replaceWith(tournamentGamePanel);
 	    }
-		else if(e.getActionCommand().equals(GuiTools.MENU_TOURNAMENT_BUTTON_BACK))
+		else if(e.getActionCommand().equals(GuiKeys.MENU_TOURNAMENT_BUTTON_BACK))
 		{	replaceWith(parent);
 	    }
 	} 
@@ -207,12 +208,12 @@ buttonPlayers.setEnabled(false);
 buttonSaveAs.setEnabled(false);		
 			buttonPlay.setEnabled(true);
 			if(tournament.hasBegun())
-			{	GuiTools.setButtonContent(GuiTools.MENU_TOURNAMENT_BUTTON_CONTINUE,buttonPlay);
+			{	GuiTools.setButtonContent(GuiKeys.MENU_TOURNAMENT_BUTTON_CONTINUE,buttonPlay);
 				buttonPlayers.setEnabled(false);
 				buttonRules.setEnabled(false);
 			}
 			else
-			{	GuiTools.setButtonContent(GuiTools.MENU_TOURNAMENT_BUTTON_START,buttonPlay);
+			{	GuiTools.setButtonContent(GuiKeys.MENU_TOURNAMENT_BUTTON_START,buttonPlay);
 				buttonPlayers.setEnabled(true);
 buttonPlayers.setEnabled(false);		
 				buttonRules.setEnabled(true);

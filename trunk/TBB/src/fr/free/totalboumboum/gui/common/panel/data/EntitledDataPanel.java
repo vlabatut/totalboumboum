@@ -33,6 +33,7 @@ import javax.swing.SwingConstants;
 import fr.free.totalboumboum.gui.common.panel.SplitMenuPanel;
 import fr.free.totalboumboum.gui.common.subpanel.SubPanel;
 import fr.free.totalboumboum.gui.data.configuration.GuiConfiguration;
+import fr.free.totalboumboum.gui.tools.GuiKeys;
 import fr.free.totalboumboum.gui.tools.GuiTools;
 
 public abstract class EntitledDataPanel extends InnerDataPanel
@@ -105,7 +106,7 @@ public abstract class EntitledDataPanel extends InnerDataPanel
 	}
 	public void setTitleKey(String key)
 	{	String text = GuiConfiguration.getMiscConfiguration().getLanguage().getText(key);
-		String tooltip = GuiConfiguration.getMiscConfiguration().getLanguage().getText(key+GuiTools.TOOLTIP);
+		String tooltip = GuiConfiguration.getMiscConfiguration().getLanguage().getText(key+GuiKeys.TOOLTIP);
 		setTitleText(text,tooltip);
 	}
 

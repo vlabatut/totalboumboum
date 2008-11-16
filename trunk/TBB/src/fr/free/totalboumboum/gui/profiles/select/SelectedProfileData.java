@@ -49,6 +49,7 @@ import fr.free.totalboumboum.gui.common.panel.data.EntitledDataPanel;
 import fr.free.totalboumboum.gui.common.subpanel.SubPanel;
 import fr.free.totalboumboum.gui.common.subpanel.UntitledSubPanelTable;
 import fr.free.totalboumboum.gui.data.configuration.GuiConfiguration;
+import fr.free.totalboumboum.gui.tools.GuiKeys;
 import fr.free.totalboumboum.gui.tools.GuiTools;
 
 public class SelectedProfileData extends EntitledDataPanel implements MouseListener
@@ -87,7 +88,7 @@ public class SelectedProfileData extends EntitledDataPanel implements MouseListe
 	{	super(container);
 
 		// title
-		setTitleKey(GuiTools.MENU_PROFILES_LIST_TITLE);
+		setTitleKey(GuiKeys.MENU_PROFILES_LIST_TITLE);
 	
 		// data
 		{	mainPanel = new SubPanel(dataWidth,dataHeight);
@@ -160,7 +161,7 @@ public class SelectedProfileData extends EntitledDataPanel implements MouseListe
 			// page up
 			{	Color bg = GuiTools.COLOR_TABLE_HEADER_BACKGROUND;
 				listPanel.setLabelBackground(LIST_LINE_PREVIOUS,0,bg);
-				String key = GuiTools.MENU_PROFILES_LIST_PAGEUP;
+				String key = GuiKeys.MENU_PROFILES_LIST_PAGEUP;
 				listPanel.setLabelKey(LIST_LINE_PREVIOUS,0,key,true);
 				JLabel label = listPanel.getLabel(LIST_LINE_PREVIOUS,0);
 				label.addMouseListener(this);
@@ -168,7 +169,7 @@ public class SelectedProfileData extends EntitledDataPanel implements MouseListe
 			// page down
 			{	Color bg = GuiTools.COLOR_TABLE_HEADER_BACKGROUND;
 				listPanel.setLabelBackground(LIST_LINE_NEXT,0,bg);
-				String key = GuiTools.MENU_PROFILES_LIST_PAGEDOWN;
+				String key = GuiKeys.MENU_PROFILES_LIST_PAGEDOWN;
 				listPanel.setLabelKey(LIST_LINE_NEXT,0,key,true);
 				JLabel label = listPanel.getLabel(LIST_LINE_NEXT,0);
 				label.addMouseListener(this);
@@ -185,12 +186,12 @@ public class SelectedProfileData extends EntitledDataPanel implements MouseListe
 		
 		// data
 		String keys[] = 
-		{	GuiTools.MENU_PROFILES_PREVIEW_NAME,
-			GuiTools.MENU_PROFILES_PREVIEW_AINAME,
-			GuiTools.MENU_PROFILES_PREVIEW_AIPACK,
-			GuiTools.MENU_PROFILES_PREVIEW_HERONAME,
-			GuiTools.MENU_PROFILES_PREVIEW_HEROPACK,
-			GuiTools.MENU_PROFILES_PREVIEW_COLOR			
+		{	GuiKeys.MENU_PROFILES_PREVIEW_NAME,
+			GuiKeys.MENU_PROFILES_PREVIEW_AINAME,
+			GuiKeys.MENU_PROFILES_PREVIEW_AIPACK,
+			GuiKeys.MENU_PROFILES_PREVIEW_HERONAME,
+			GuiKeys.MENU_PROFILES_PREVIEW_HEROPACK,
+			GuiKeys.MENU_PROFILES_PREVIEW_COLOR			
 		};
 		for(int line=0;line<keys.length;line++)
 		{	int colSub = 0;
@@ -202,7 +203,7 @@ public class SelectedProfileData extends EntitledDataPanel implements MouseListe
 				colSub++;
 			}
 			{	String text = null;
-				String tooltip = GuiConfiguration.getMiscConfiguration().getLanguage().getText(keys[line]+GuiTools.TOOLTIP);
+				String tooltip = GuiConfiguration.getMiscConfiguration().getLanguage().getText(keys[line]+GuiKeys.TOOLTIP);
 				previewPanel.setLabelText(line,colSub,text,tooltip);
 				if(line>0)
 				{	Color bg = GuiTools.COLOR_TABLE_REGULAR_BACKGROUND;
@@ -265,7 +266,7 @@ public class SelectedProfileData extends EntitledDataPanel implements MouseListe
 			values[VIEW_LINE_HERO_PACK] = selectedProfile.getSpritePack();
 			String colorKey = selectedProfile.getSpriteColor().toString();
 			colorKey = colorKey.toUpperCase().substring(0,1)+colorKey.toLowerCase().substring(1,colorKey.length());
-			colorKey = GuiTools.COLOR+colorKey;
+			colorKey = GuiKeys.COLOR+colorKey;
 			values[VIEW_LINE_COLOR] = GuiConfiguration.getMiscConfiguration().getLanguage().getText(colorKey); 
 			Color clr = selectedProfile.getSpriteColor().getColor();
 			int alpha = GuiTools.ALPHA_TABLE_REGULAR_BACKGROUND_LEVEL3;

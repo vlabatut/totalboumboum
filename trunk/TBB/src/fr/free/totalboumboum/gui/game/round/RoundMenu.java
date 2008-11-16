@@ -49,6 +49,7 @@ import fr.free.totalboumboum.gui.game.loop.LoopPanel;
 import fr.free.totalboumboum.gui.game.round.description.RoundDescription;
 import fr.free.totalboumboum.gui.game.round.results.RoundResults;
 import fr.free.totalboumboum.gui.game.round.statistics.RoundStatistics;
+import fr.free.totalboumboum.gui.tools.GuiKeys;
 import fr.free.totalboumboum.gui.tools.GuiTools;
 
 public class RoundMenu extends InnerMenuPanel implements RoundRenderPanel
@@ -79,21 +80,21 @@ public class RoundMenu extends InnerMenuPanel implements RoundRenderPanel
 		setBackground(GuiTools.COLOR_COMMON_BACKGROUND);
 		
 		// buttons
-		buttonQuit = GuiTools.createHorizontalMenuButton(GuiTools.GAME_ROUND_BUTTON_QUIT,this);
+		buttonQuit = GuiTools.createHorizontalMenuButton(GuiKeys.GAME_ROUND_BUTTON_QUIT,this);
 		add(Box.createHorizontalGlue());
-		buttonMatch = GuiTools.createHorizontalMenuButton(GuiTools.GAME_ROUND_BUTTON_CURRENT_MATCH,this);
+		buttonMatch = GuiTools.createHorizontalMenuButton(GuiKeys.GAME_ROUND_BUTTON_CURRENT_MATCH,this);
 		add(Box.createRigidArea(new Dimension(GuiTools.getSize(GuiTools.MENU_HORIZONTAL_BUTTON_SPACE),0)));
 	    ButtonGroup group = new ButtonGroup();
-		buttonDescription = GuiTools.createHorizontalMenuToggleButton(GuiTools.GAME_ROUND_BUTTON_DESCRIPTION,this);
+		buttonDescription = GuiTools.createHorizontalMenuToggleButton(GuiKeys.GAME_ROUND_BUTTON_DESCRIPTION,this);
 		buttonDescription.setSelected(true);
 	    group.add(buttonDescription);
-		buttonResults = GuiTools.createHorizontalMenuToggleButton(GuiTools.GAME_ROUND_BUTTON_RESULTS,this);
+		buttonResults = GuiTools.createHorizontalMenuToggleButton(GuiKeys.GAME_ROUND_BUTTON_RESULTS,this);
 	    group.add(buttonResults);
-		buttonStatistics = GuiTools.createHorizontalMenuToggleButton(GuiTools.GAME_ROUND_BUTTON_STATISTICS,this);
+		buttonStatistics = GuiTools.createHorizontalMenuToggleButton(GuiKeys.GAME_ROUND_BUTTON_STATISTICS,this);
 buttonStatistics.setEnabled(false);		
 	    group.add(buttonStatistics);
 		add(Box.createRigidArea(new Dimension(GuiTools.getSize(GuiTools.MENU_HORIZONTAL_BUTTON_SPACE),0)));
-		buttonPlay = GuiTools.createHorizontalMenuButton(GuiTools.GAME_ROUND_BUTTON_PLAY,this);
+		buttonPlay = GuiTools.createHorizontalMenuButton(GuiKeys.GAME_ROUND_BUTTON_PLAY,this);
 		
 		// panels
 		{	roundDescription = null;
@@ -109,27 +110,27 @@ buttonStatistics.setEnabled(false);
 	}
 	
 	public void actionPerformed(ActionEvent e)
-	{	if(e.getActionCommand().equals(GuiTools.GAME_ROUND_BUTTON_QUIT))
+	{	if(e.getActionCommand().equals(GuiKeys.GAME_ROUND_BUTTON_QUIT))
 		{	getFrame().setMainMenuPanel();
 	    }
-		else if(e.getActionCommand().equals(GuiTools.GAME_ROUND_BUTTON_CURRENT_MATCH))
+		else if(e.getActionCommand().equals(GuiKeys.GAME_ROUND_BUTTON_CURRENT_MATCH))
 		{	replaceWith(parent);
 	    }
-		else if(e.getActionCommand().equals(GuiTools.GAME_ROUND_BUTTON_FINISH))
+		else if(e.getActionCommand().equals(GuiKeys.GAME_ROUND_BUTTON_FINISH))
 		{	Round round = Configuration.getGameConfiguration().getTournament().getCurrentMatch().getCurrentRound();
 			round.finish();
 			replaceWith(parent);
 	    }
-		else if(e.getActionCommand().equals(GuiTools.GAME_ROUND_BUTTON_DESCRIPTION))
+		else if(e.getActionCommand().equals(GuiKeys.GAME_ROUND_BUTTON_DESCRIPTION))
 		{	container.setDataPart(roundDescription);
 	    }
-		else if(e.getActionCommand().equals(GuiTools.GAME_ROUND_BUTTON_RESULTS))
+		else if(e.getActionCommand().equals(GuiKeys.GAME_ROUND_BUTTON_RESULTS))
 		{	container.setDataPart(roundResults);
 	    }
-		else if(e.getActionCommand().equals(GuiTools.GAME_ROUND_BUTTON_STATISTICS))
+		else if(e.getActionCommand().equals(GuiKeys.GAME_ROUND_BUTTON_STATISTICS))
 		{	container.setDataPart(roundStatistics);
 	    }
-		else if(e.getActionCommand().equals(GuiTools.GAME_ROUND_BUTTON_PLAY))
+		else if(e.getActionCommand().equals(GuiKeys.GAME_ROUND_BUTTON_PLAY))
 		{	buttonPlay.setEnabled(false);
 			buttonQuit.setEnabled(false);
 			buttonMatch.setEnabled(false);
@@ -139,7 +140,7 @@ buttonStatistics.setEnabled(false);
 			Font font = GuiConfiguration.getMiscConfiguration().getFont().deriveFont((float)GuiTools.getSize(GuiTools.GAME_PROGRESSBAR_FONT_SIZE));
 			loadProgressBar.setFont(font);
 			loadProgressBar.setStringPainted(true); 
-			String text = GuiConfiguration.getMiscConfiguration().getLanguage().getText(GuiTools.GAME_ROUND_PROGRESSBAR_BOMBSET);
+			String text = GuiConfiguration.getMiscConfiguration().getLanguage().getText(GuiKeys.GAME_ROUND_PROGRESSBAR_BOMBSET);
 			loadProgressBar.setString(text);
 			int width = Integer.MAX_VALUE;
 			int height = GuiTools.getSize(GuiTools.MENU_HORIZONTAL_BUTTON_HEIGHT);
@@ -187,13 +188,13 @@ buttonStatistics.setEnabled(false);
 		{	// play
 			buttonPlay.setEnabled(false);
 			// finish
-			GuiTools.setButtonContent(GuiTools.GAME_ROUND_BUTTON_FINISH, buttonMatch);
+			GuiTools.setButtonContent(GuiKeys.GAME_ROUND_BUTTON_FINISH, buttonMatch);
 		}
 		else
 		{	// play
 			buttonPlay.setEnabled(true);
 			// match
-			GuiTools.setButtonContent(GuiTools.GAME_ROUND_BUTTON_CURRENT_MATCH, buttonMatch);
+			GuiTools.setButtonContent(GuiKeys.GAME_ROUND_BUTTON_CURRENT_MATCH, buttonMatch);
 		}
 	} 
 
@@ -221,13 +222,13 @@ buttonStatistics.setEnabled(false);
 		switch(val)
 		{	// itemset
 			case 0:
-				text = GuiConfiguration.getMiscConfiguration().getLanguage().getText(GuiTools.GAME_ROUND_PROGRESSBAR_ITEMSET);
+				text = GuiConfiguration.getMiscConfiguration().getLanguage().getText(GuiKeys.GAME_ROUND_PROGRESSBAR_ITEMSET);
 				loadProgressBar.setString(text);
 				loadProgressBar.repaint();
 				break;
 			// theme
 			case 1:
-				text = GuiConfiguration.getMiscConfiguration().getLanguage().getText(GuiTools.GAME_ROUND_PROGRESSBAR_THEME);
+				text = GuiConfiguration.getMiscConfiguration().getLanguage().getText(GuiKeys.GAME_ROUND_PROGRESSBAR_THEME);
 				loadProgressBar.setString(text);
 				loadProgressBar.repaint();
 				break;
@@ -235,7 +236,7 @@ buttonStatistics.setEnabled(false);
 			default:
 				Round round = Configuration.getGameConfiguration().getTournament().getCurrentMatch().getCurrentRound();
 				if(val==round.getProfiles().size()+2)
-				{	text = GuiConfiguration.getMiscConfiguration().getLanguage().getText(GuiTools.GAME_ROUND_PROGRESSBAR_COMPLETE);
+				{	text = GuiConfiguration.getMiscConfiguration().getLanguage().getText(GuiKeys.GAME_ROUND_PROGRESSBAR_COMPLETE);
 					loadProgressBar.setString(text);
 					loadProgressBar.repaint();
 					loopPanel = new LoopPanel(container.getContainer(),container);
@@ -243,7 +244,7 @@ buttonStatistics.setEnabled(false);
 					loopPanel.start();
 				}
 				else
-				{	text = GuiConfiguration.getMiscConfiguration().getLanguage().getText(GuiTools.GAME_ROUND_PROGRESSBAR_PLAYER)+" "+(val-1);
+				{	text = GuiConfiguration.getMiscConfiguration().getLanguage().getText(GuiKeys.GAME_ROUND_PROGRESSBAR_PLAYER)+" "+(val-1);
 					loadProgressBar.setString(text);
 					loadProgressBar.repaint();
 				}

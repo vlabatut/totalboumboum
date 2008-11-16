@@ -53,6 +53,7 @@ import fr.free.totalboumboum.gui.common.panel.data.EntitledDataPanel;
 import fr.free.totalboumboum.gui.common.subpanel.SubPanel;
 import fr.free.totalboumboum.gui.common.subpanel.UntitledSubPanelTable;
 import fr.free.totalboumboum.gui.data.configuration.GuiConfiguration;
+import fr.free.totalboumboum.gui.tools.GuiKeys;
 import fr.free.totalboumboum.gui.tools.GuiTools;
 import fr.free.totalboumboum.tools.FileTools;
 import fr.free.totalboumboum.tools.ImageTools;
@@ -111,7 +112,7 @@ public class SelectedLevelData extends EntitledDataPanel implements MouseListene
 	{	super(container);
 
 		// title
-		setTitleKey(GuiTools.MENU_LEVEL_SELECT_TITLE);
+		setTitleKey(GuiKeys.MENU_LEVEL_SELECT_TITLE);
 	
 		// data
 		{	mainPanel = new SubPanel(dataWidth,dataHeight);
@@ -245,7 +246,7 @@ public class SelectedLevelData extends EntitledDataPanel implements MouseListene
 			// page up
 			{	Color bg = GuiTools.COLOR_TABLE_HEADER_BACKGROUND;
 				listPanel.setLabelBackground(LIST_LINE_PREVIOUS,0,bg);
-				String key = GuiTools.MENU_LEVEL_SELECT_PACKAGE_PAGEUP;
+				String key = GuiKeys.MENU_LEVEL_SELECT_PACKAGE_PAGEUP;
 				listPanel.setLabelKey(LIST_LINE_PREVIOUS,0,key,true);
 				JLabel label = listPanel.getLabel(LIST_LINE_PREVIOUS,0);
 				label.addMouseListener(this);
@@ -253,7 +254,7 @@ public class SelectedLevelData extends EntitledDataPanel implements MouseListene
 			// page down
 			{	Color bg = GuiTools.COLOR_TABLE_HEADER_BACKGROUND;
 				listPanel.setLabelBackground(LIST_LINE_NEXT,0,bg);
-				String key = GuiTools.MENU_LEVEL_SELECT_PACKAGE_PAGEDOWN;
+				String key = GuiKeys.MENU_LEVEL_SELECT_PACKAGE_PAGEDOWN;
 				listPanel.setLabelKey(LIST_LINE_NEXT,0,key,true);
 				JLabel label = listPanel.getLabel(LIST_LINE_NEXT,0);
 				label.addMouseListener(this);
@@ -285,7 +286,7 @@ public class SelectedLevelData extends EntitledDataPanel implements MouseListene
 			// page up
 			{	Color bg = GuiTools.COLOR_TABLE_HEADER_BACKGROUND;
 				listPanel.setLabelBackground(LIST_LINE_PREVIOUS,0,bg);
-				String key = GuiTools.MENU_LEVEL_SELECT_FOLDER_PAGEUP;
+				String key = GuiKeys.MENU_LEVEL_SELECT_FOLDER_PAGEUP;
 				listPanel.setLabelKey(LIST_LINE_PREVIOUS,0,key,true);
 				JLabel label = listPanel.getLabel(LIST_LINE_PREVIOUS,0);
 				label.addMouseListener(this);
@@ -293,7 +294,7 @@ public class SelectedLevelData extends EntitledDataPanel implements MouseListene
 			// parent
 			{	Color bg = GuiTools.COLOR_TABLE_HEADER_BACKGROUND;
 				listPanel.setLabelBackground(LIST_LINE_PARENT,0,bg);
-				String key = GuiTools.MENU_LEVEL_SELECT_FOLDER_PARENT;
+				String key = GuiKeys.MENU_LEVEL_SELECT_FOLDER_PARENT;
 				listPanel.setLabelKey(LIST_LINE_PARENT,0,key,false);
 				JLabel label = listPanel.getLabel(LIST_LINE_PARENT,0);
 				label.addMouseListener(this);
@@ -301,7 +302,7 @@ public class SelectedLevelData extends EntitledDataPanel implements MouseListene
 			// page down
 			{	Color bg = GuiTools.COLOR_TABLE_HEADER_BACKGROUND;
 				listPanel.setLabelBackground(LIST_LINE_NEXT,0,bg);
-				String key = GuiTools.MENU_LEVEL_SELECT_FOLDER_PAGEDOWN;
+				String key = GuiKeys.MENU_LEVEL_SELECT_FOLDER_PAGEDOWN;
 				listPanel.setLabelKey(LIST_LINE_NEXT,0,key,true);
 				JLabel label = listPanel.getLabel(LIST_LINE_NEXT,0);
 				label.addMouseListener(this);
@@ -318,13 +319,13 @@ public class SelectedLevelData extends EntitledDataPanel implements MouseListene
 		
 		// data
 		String keys[] = 
-		{	GuiTools.MENU_LEVEL_SELECT_PREVIEW_NAME,
-			GuiTools.MENU_LEVEL_SELECT_PREVIEW_PACKAGE,
-			GuiTools.MENU_LEVEL_SELECT_PREVIEW_AUTHOR,
-			GuiTools.MENU_LEVEL_SELECT_PREVIEW_SOURCE,
-			GuiTools.MENU_LEVEL_SELECT_PREVIEW_INSTANCE,
-			GuiTools.MENU_LEVEL_SELECT_PREVIEW_THEME,
-			GuiTools.MENU_LEVEL_SELECT_PREVIEW_SIZE
+		{	GuiKeys.MENU_LEVEL_SELECT_PREVIEW_NAME,
+			GuiKeys.MENU_LEVEL_SELECT_PREVIEW_PACKAGE,
+			GuiKeys.MENU_LEVEL_SELECT_PREVIEW_AUTHOR,
+			GuiKeys.MENU_LEVEL_SELECT_PREVIEW_SOURCE,
+			GuiKeys.MENU_LEVEL_SELECT_PREVIEW_INSTANCE,
+			GuiKeys.MENU_LEVEL_SELECT_PREVIEW_THEME,
+			GuiKeys.MENU_LEVEL_SELECT_PREVIEW_SIZE
 		};
 		for(int line=0;line<keys.length;line++)
 		{	int colSub = 0;
@@ -336,7 +337,7 @@ public class SelectedLevelData extends EntitledDataPanel implements MouseListene
 				colSub++;
 			}
 			{	String text = null;
-				String tooltip = GuiConfiguration.getMiscConfiguration().getLanguage().getText(keys[line]+GuiTools.TOOLTIP);
+				String tooltip = GuiConfiguration.getMiscConfiguration().getLanguage().getText(keys[line]+GuiKeys.TOOLTIP);
 				infosPanel.setLabelText(line,colSub,text,tooltip);
 				if(line>0)
 				{	Color bg = GuiTools.COLOR_TABLE_REGULAR_BACKGROUND;
@@ -374,8 +375,8 @@ public class SelectedLevelData extends EntitledDataPanel implements MouseListene
 		previewLabel.setHorizontalAlignment(SwingConstants.CENTER);
 		previewLabel.setVerticalAlignment(SwingConstants.CENTER);
 		
-		String text = GuiConfiguration.getMiscConfiguration().getLanguage().getText(GuiTools.MENU_LEVEL_SELECT_PREVIEW_IMAGE);
-		String tooltip = GuiConfiguration.getMiscConfiguration().getLanguage().getText(GuiTools.MENU_LEVEL_SELECT_PREVIEW_IMAGE+GuiTools.TOOLTIP);
+		String text = GuiConfiguration.getMiscConfiguration().getLanguage().getText(GuiKeys.MENU_LEVEL_SELECT_PREVIEW_IMAGE);
+		String tooltip = GuiConfiguration.getMiscConfiguration().getLanguage().getText(GuiKeys.MENU_LEVEL_SELECT_PREVIEW_IMAGE+GuiKeys.TOOLTIP);
 		previewLabel.setText(null);
 		previewLabel.setToolTipText(tooltip);
 
@@ -447,7 +448,7 @@ public class SelectedLevelData extends EntitledDataPanel implements MouseListene
 		}
 		else
 		{	String text = null;//GuiConfiguration.getMiscConfiguration().getLanguage().getText(GuiTools.MENU_LEVEL_SELECT_PREVIEW_IMAGE);
-			String tooltip = GuiConfiguration.getMiscConfiguration().getLanguage().getText(GuiTools.MENU_LEVEL_SELECT_PREVIEW_IMAGE+GuiTools.TOOLTIP);
+			String tooltip = GuiConfiguration.getMiscConfiguration().getLanguage().getText(GuiKeys.MENU_LEVEL_SELECT_PREVIEW_IMAGE+GuiKeys.TOOLTIP);
 			previewLabel.setText(text);
 			previewLabel.setToolTipText(tooltip);
 			Color bg = GuiTools.COLOR_TABLE_NEUTRAL_BACKGROUND;

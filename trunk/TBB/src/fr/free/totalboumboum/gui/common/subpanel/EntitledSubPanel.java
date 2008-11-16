@@ -33,6 +33,7 @@ import javax.swing.JLabel;
 import javax.swing.SwingConstants;
 
 import fr.free.totalboumboum.gui.data.configuration.GuiConfiguration;
+import fr.free.totalboumboum.gui.tools.GuiKeys;
 import fr.free.totalboumboum.gui.tools.GuiTools;
 import fr.free.totalboumboum.tools.ImageTools;
 
@@ -97,7 +98,7 @@ public class EntitledSubPanel extends SubPanel
 	private int titleFontSize;
 
 	public void setTitleKey(String key, boolean imageFlag)
-	{	String tooltip = GuiConfiguration.getMiscConfiguration().getLanguage().getText(key+GuiTools.TOOLTIP);
+	{	String tooltip = GuiConfiguration.getMiscConfiguration().getLanguage().getText(key+GuiKeys.TOOLTIP);
 		// is there an available icon ?
 		if(imageFlag)
 		{	BufferedImage icon = GuiTools.getIcon(key);

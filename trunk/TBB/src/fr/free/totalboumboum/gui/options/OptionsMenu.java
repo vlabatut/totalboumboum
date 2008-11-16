@@ -40,6 +40,7 @@ import fr.free.totalboumboum.gui.options.advanced.AdvancedSplitPanel;
 import fr.free.totalboumboum.gui.options.controls.ControlsSplitPanel;
 import fr.free.totalboumboum.gui.options.gui.GuiSplitPanel;
 import fr.free.totalboumboum.gui.options.video.VideoSplitPanel;
+import fr.free.totalboumboum.gui.tools.GuiKeys;
 import fr.free.totalboumboum.gui.tools.GuiTools;
 
 public class OptionsMenu extends InnerMenuPanel
@@ -71,14 +72,14 @@ public class OptionsMenu extends InnerMenuPanel
 
 		// buttons
 		add(Box.createVerticalGlue());
-		buttonControls = GuiTools.createSecondaryVerticalMenuButton(GuiTools.MENU_OPTIONS_BUTTON_CONTROLS,this);
-		buttonGameplay = GuiTools.createSecondaryVerticalMenuButton(GuiTools.MENU_OPTIONS_BUTTON_GAMEPLAY,this);
+		buttonControls = GuiTools.createSecondaryVerticalMenuButton(GuiKeys.MENU_OPTIONS_BUTTON_CONTROLS,this);
+		buttonGameplay = GuiTools.createSecondaryVerticalMenuButton(GuiKeys.MENU_OPTIONS_BUTTON_GAMEPLAY,this);
 buttonGameplay.setEnabled(false);
-		buttonVideo = GuiTools.createSecondaryVerticalMenuButton(GuiTools.MENU_OPTIONS_BUTTON_VIDEO,this);
-		buttonGui = GuiTools.createSecondaryVerticalMenuButton(GuiTools.MENU_OPTIONS_BUTTON_GUI,this);
-		buttonAdvanced = GuiTools.createSecondaryVerticalMenuButton(GuiTools.MENU_OPTIONS_BUTTON_ADVANCED,this);
+		buttonVideo = GuiTools.createSecondaryVerticalMenuButton(GuiKeys.MENU_OPTIONS_BUTTON_VIDEO,this);
+		buttonGui = GuiTools.createSecondaryVerticalMenuButton(GuiKeys.MENU_OPTIONS_BUTTON_GUI,this);
+		buttonAdvanced = GuiTools.createSecondaryVerticalMenuButton(GuiKeys.MENU_OPTIONS_BUTTON_ADVANCED,this);
 		add(Box.createRigidArea(new Dimension(0,GuiTools.getSize(GuiTools.MENU_VERTICAL_BUTTON_SPACE))));
-		buttonBack = GuiTools.createSecondaryVerticalMenuButton(GuiTools.MENU_OPTIONS_BUTTON_BACK,this);
+		buttonBack = GuiTools.createSecondaryVerticalMenuButton(GuiKeys.MENU_OPTIONS_BUTTON_BACK,this);
 		add(Box.createVerticalGlue());		
 
 		// panels
@@ -87,7 +88,7 @@ buttonGameplay.setEnabled(false);
 }
 	
 	public void actionPerformed(ActionEvent e)
-	{	if(e.getActionCommand().equals(GuiTools.MENU_OPTIONS_BUTTON_ADVANCED))
+	{	if(e.getActionCommand().equals(GuiKeys.MENU_OPTIONS_BUTTON_ADVANCED))
 		{	try
 			{	AdvancedSplitPanel advancedPanel = new AdvancedSplitPanel(container.getContainer(),container);
 				replaceWith(advancedPanel);
@@ -114,7 +115,7 @@ buttonGameplay.setEnabled(false);
 			{	e1.printStackTrace();
 			}
 		}
-	else if(e.getActionCommand().equals(GuiTools.MENU_OPTIONS_BUTTON_GUI))
+	else if(e.getActionCommand().equals(GuiKeys.MENU_OPTIONS_BUTTON_GUI))
 		{	try
 			{	GuiSplitPanel guiPanel = new GuiSplitPanel(container.getContainer(),container);
 				replaceWith(guiPanel);
@@ -141,7 +142,7 @@ buttonGameplay.setEnabled(false);
 			{	e1.printStackTrace();
 			}
 		}
-		else if(e.getActionCommand().equals(GuiTools.MENU_OPTIONS_BUTTON_VIDEO))
+		else if(e.getActionCommand().equals(GuiKeys.MENU_OPTIONS_BUTTON_VIDEO))
 		{	try
 			{	VideoSplitPanel videoPanel = new VideoSplitPanel(container.getContainer(),container);
 				replaceWith(videoPanel);
@@ -168,10 +169,10 @@ buttonGameplay.setEnabled(false);
 			{	e1.printStackTrace();
 			}
 	    }
-		else if(e.getActionCommand().equals(GuiTools.MENU_OPTIONS_BUTTON_GAMEPLAY))
+		else if(e.getActionCommand().equals(GuiKeys.MENU_OPTIONS_BUTTON_GAMEPLAY))
 		{	
 	    }
-		else if(e.getActionCommand().equals(GuiTools.MENU_OPTIONS_BUTTON_CONTROLS))
+		else if(e.getActionCommand().equals(GuiKeys.MENU_OPTIONS_BUTTON_CONTROLS))
 		{	try
 			{	ControlsSplitPanel controlsPanel = new ControlsSplitPanel(container.getContainer(),container);
 				replaceWith(controlsPanel);
@@ -198,7 +199,7 @@ buttonGameplay.setEnabled(false);
 			{	e1.printStackTrace();
 			} 
 	    }
-		else if(e.getActionCommand().equals(GuiTools.MENU_OPTIONS_BUTTON_BACK))
+		else if(e.getActionCommand().equals(GuiKeys.MENU_OPTIONS_BUTTON_BACK))
 		{	replaceWith(parent);
 	    }
 	} 
