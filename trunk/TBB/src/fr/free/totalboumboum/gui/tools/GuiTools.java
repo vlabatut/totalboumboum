@@ -136,7 +136,8 @@ public class GuiTools
 			String[] uses = 
 			{	GuiKeys.GAME_TOURNAMENT_BUTTON_DESCRIPTION,
 				GuiKeys.GAME_MATCH_BUTTON_DESCRIPTION,
-				GuiKeys.GAME_ROUND_BUTTON_DESCRIPTION
+				GuiKeys.GAME_ROUND_BUTTON_DESCRIPTION,
+				GuiKeys.MENU_QUICKMATCH_BUTTON_DESCRIPTION
 			};
 			loadButtonImages(buttonStates,folder,uses);
 		}
@@ -144,7 +145,8 @@ public class GuiTools
 			String[] uses = 
 			{	GuiKeys.GAME_TOURNAMENT_BUTTON_MENU,
 				GuiKeys.GAME_MATCH_BUTTON_CURRENT_TOURNAMENT,
-				GuiKeys.GAME_ROUND_BUTTON_CURRENT_MATCH
+				GuiKeys.GAME_ROUND_BUTTON_CURRENT_MATCH,
+				GuiKeys.MENU_QUICKMATCH_BUTTON_PREVIOUS
 			};
 			loadButtonImages(buttonStates,folder,uses);
 		}
@@ -166,7 +168,8 @@ public class GuiTools
 			String[] uses = 
 			{	GuiKeys.GAME_TOURNAMENT_BUTTON_QUIT,
 				GuiKeys.GAME_MATCH_BUTTON_QUIT,
-				GuiKeys.GAME_ROUND_BUTTON_QUIT
+				GuiKeys.GAME_ROUND_BUTTON_QUIT,
+				GuiKeys.MENU_QUICKMATCH_BUTTON_QUIT
 			};
 			loadButtonImages(buttonStates,folder,uses);
 		}
@@ -174,13 +177,14 @@ public class GuiTools
 			String[] uses = 
 			{	GuiKeys.GAME_TOURNAMENT_BUTTON_RESULTS,
 				GuiKeys.GAME_MATCH_BUTTON_RESULTS,
-				GuiKeys.GAME_ROUND_BUTTON_RESULTS
+				GuiKeys.GAME_ROUND_BUTTON_RESULTS,
+				GuiKeys.MENU_QUICKMATCH_BUTTON_RESULTS
 			};
 			loadButtonImages(buttonStates,folder,uses);
 		}
 		{	String folder = baseFolder+GuiFileTools.FOLDER_RIGHT_BLUE+File.separator;
 			String[] uses = 
-			{	
+			{	GuiKeys.MENU_QUICKMATCH_BUTTON_NEXT
 			};
 			loadButtonImages(buttonStates,folder,uses);
 		}
@@ -197,7 +201,8 @@ public class GuiTools
 			String[] uses = 
 			{	GuiKeys.GAME_TOURNAMENT_BUTTON_STATISTICS,
 				GuiKeys.GAME_MATCH_BUTTON_STATISTICS,
-				GuiKeys.GAME_ROUND_BUTTON_STATISTICS
+				GuiKeys.GAME_ROUND_BUTTON_STATISTICS,
+				GuiKeys.MENU_QUICKMATCH_BUTTON_STATISTICS
 			};
 			loadButtonImages(buttonStates,folder,uses);
 		}
@@ -245,7 +250,8 @@ public class GuiTools
 			String[] uses =
 			{	GuiKeys.MENU_PROFILES_PREVIEW_COLOR,
 				GuiKeys.MENU_PROFILES_EDIT_COLOR,
-				GuiKeys.MENU_HERO_SELECT_PREVIEW_COLORS
+				GuiKeys.MENU_HERO_SELECT_PREVIEW_COLORS,
+				GuiKeys.MENU_QUICKMATCH_PROFILES_COLOR_VALUE
 			};
 			loadTableImages(folder,uses);
 		}
@@ -342,7 +348,8 @@ public class GuiTools
 			String[] uses =
 			{	GuiKeys.MENU_PROFILES_PREVIEW_HERONAME,
 				GuiKeys.MENU_PROFILES_EDIT_HERO,
-				GuiKeys.MENU_HERO_SELECT_PREVIEW_IMAGE
+				GuiKeys.MENU_HERO_SELECT_PREVIEW_IMAGE,
+				GuiKeys.MENU_QUICKMATCH_PROFILES_HERO_VALUE
 			};
 			loadTableImages(folder,uses);
 		}
@@ -378,7 +385,8 @@ public class GuiTools
 		{	String folder = baseFolder+GuiFileTools.FILE_KEY;
 			String[] uses =
 			{	GuiKeys.MENU_OPTIONS_CONTROLS_HEADER_KEY,
-				GuiKeys.GAME_MATCH_DESCRIPTION_PLAYERS_HEADER_CONTROLS
+				GuiKeys.GAME_MATCH_DESCRIPTION_PLAYERS_HEADER_CONTROLS,
+				GuiKeys.MENU_QUICKMATCH_PROFILES_CONTROLS_VALUE
 			};
 			loadTableImages(folder,uses);
 		}
@@ -425,7 +433,8 @@ public class GuiTools
 				GuiKeys.GAME_MATCH_STATISTICS_HEADER_NAME,
 				GuiKeys.GAME_ROUND_STATISTICS_HEADER_NAME,
 				GuiKeys.MENU_PROFILES_PREVIEW_NAME,
-				GuiKeys.MENU_PROFILES_EDIT_NAME
+				GuiKeys.MENU_PROFILES_EDIT_NAME,
+				GuiKeys.MENU_QUICKMATCH_PROFILES_PROFILE_VALUE
 			};
 			loadTableImages(folder,uses);
 		}
@@ -480,7 +489,8 @@ public class GuiTools
 				GuiKeys.GAME_MATCH_DESCRIPTION_PLAYERS_HEADER_PROFILE,
 				GuiKeys.GAME_TOURNAMENT_RESULTS_HEADER_PROFILE,
 				GuiKeys.GAME_MATCH_RESULTS_HEADER_PROFILE,
-				GuiKeys.GAME_ROUND_RESULTS_HEADER_PROFILE
+				GuiKeys.GAME_ROUND_RESULTS_HEADER_PROFILE,
+				GuiKeys.MENU_QUICKMATCH_PROFILES_TYPE_VALUE
 			};
 			loadTableImages(folder,uses);
 		}
@@ -605,7 +615,9 @@ public class GuiTools
 			String[] uses =
 			{	GuiKeys.MENU_PROFILES_EDIT_AI_CHANGE,
 				GuiKeys.MENU_PROFILES_EDIT_HERO_CHANGE,
-				GuiKeys.MENU_PROFILES_EDIT_NAME_CHANGE
+				GuiKeys.MENU_PROFILES_EDIT_NAME_CHANGE,
+				GuiKeys.MENU_QUICKMATCH_PROFILES_HERO_BROWSE,
+				GuiKeys.MENU_QUICKMATCH_PROFILES_PROFILE_BROWSE
 			};
 			loadTableImages(folder,uses);
 		}
@@ -672,7 +684,11 @@ public class GuiTools
 			{	GuiKeys.MENU_OPTIONS_GUI_LINE_LANGUAGE_NEXT,
 				GuiKeys.MENU_OPTIONS_GUI_LINE_FONT_NEXT,
 				GuiKeys.MENU_OPTIONS_GUI_LINE_BACKGROUND_NEXT,
-				GuiKeys.MENU_PROFILES_EDIT_COLOR_NEXT
+				GuiKeys.MENU_PROFILES_EDIT_COLOR_NEXT,
+				GuiKeys.MENU_QUICKMATCH_PROFILES_CONTROLS_NEXT,
+				GuiKeys.MENU_QUICKMATCH_PROFILES_COLOR_NEXT,
+				GuiKeys.MENU_QUICKMATCH_PROFILES_HERO_NEXT,
+				GuiKeys.MENU_QUICKMATCH_PROFILES_PROFILE_NEXT
 			};
 			loadTableImages(folder,uses);
 		}
@@ -744,7 +760,11 @@ public class GuiTools
 			{	GuiKeys.MENU_OPTIONS_GUI_LINE_LANGUAGE_PREVIOUS,
 				GuiKeys.MENU_OPTIONS_GUI_LINE_FONT_PREVIOUS,
 				GuiKeys.MENU_OPTIONS_GUI_LINE_BACKGROUND_PREVIOUS,
-				GuiKeys.MENU_PROFILES_EDIT_COLOR_PREVIOUS
+				GuiKeys.MENU_PROFILES_EDIT_COLOR_PREVIOUS,
+				GuiKeys.MENU_QUICKMATCH_PROFILES_CONTROLS_PREVIOUS,
+				GuiKeys.MENU_QUICKMATCH_PROFILES_COLOR_PREVIOUS,
+				GuiKeys.MENU_QUICKMATCH_PROFILES_HERO_PREVIOUS,
+				GuiKeys.MENU_QUICKMATCH_PROFILES_PROFILE_PREVIOUS
 			};
 			loadTableImages(folder,uses);
 		}
@@ -947,8 +967,6 @@ public class GuiTools
 //		buttonIconSize = (int)(height*BUTTON_ICON_SIZE_RATIO);
 		buttonHorizontalSpace = (int)(width*BUTTON_HORIZONTAL_SPACE_RATIO);
 		buttonVerticalSpace = (int)(height*BUTTON_VERTICAL_SPACE_RATIO);
-		
-//TODO progress bar font : 0.6
 	}
 	
 	
