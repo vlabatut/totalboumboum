@@ -77,8 +77,9 @@ public class AiZone
 	/**
 	 * met à jour cette représentation ainsi que tous ses constituants.
 	 */
-	void update()
-	{	updateMatrix();
+	void update(long elapsedTime)
+	{	updateTime(elapsedTime);
+		updateMatrix();
 	}
 	
 	/**
@@ -109,6 +110,28 @@ public class AiZone
 			result = this==o;
 		}
 		return result;
+	}
+	
+	/////////////////////////////////////////////////////////////////
+	// TIME			/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	/** temps écoulé depuis la mise à jour précédente */
+	private long elapsedTime = 0;
+	
+	/**
+	 * renvoie le temps écoulé depuis la mise à jour précédente
+	 * @return	le temps écoulé exprimé en millisecondes
+	 */
+	public long getElapsedTime()
+	{	return elapsedTime;		
+	}
+	
+	/**
+	 * met à jour le temps écoulé depuis la dernière mise à jour
+	 * @param elapsedTime
+	 */
+	private void updateTime(long elapsedTime)
+	{	this.elapsedTime = elapsedTime;		
 	}
 	
 	/////////////////////////////////////////////////////////////////
