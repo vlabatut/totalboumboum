@@ -45,6 +45,7 @@ public class GuiKeys
 	public static final String MENU_MAIN_BUTTON_QUICKMATCH = MENU_MAIN_BUTTON+"QuickMatch";
 	public static final String MENU_MAIN_BUTTON_STATISTICS = MENU_MAIN_BUTTON+"Statistics";
 	public static final String MENU_MAIN_BUTTON_TOURNAMENT = MENU_MAIN_BUTTON+"Tournament";
+	
 	/* AI */
 		/* BUTTON */
 		public static final String MENU_AI_BUTTON = "MenuAiButton";	
@@ -63,6 +64,7 @@ public class GuiKeys
 			public static final String MENU_AI_SELECT_PREVIEW_NAME = "MenuAiSelectPreviewName";
 			public static final String MENU_AI_SELECT_PREVIEW_NOTES = "MenuAiSelectPreviewNotes";
 			public static final String MENU_AI_SELECT_PREVIEW_PACKAGE = "MenuAiSelectPreviewPackage";
+			
 	/* HERO */
 		/* BUTTON */
 		public static final String MENU_HERO_BUTTON = "MenuHeroButton";	
@@ -83,6 +85,7 @@ public class GuiKeys
 			public static final String MENU_HERO_SELECT_PREVIEW_NAME = "MenuHeroSelectPreviewName";
 			public static final String MENU_HERO_SELECT_PREVIEW_PACKAGE = "MenuHeroSelectPreviewPackage";
 			public static final String MENU_HERO_SELECT_PREVIEW_SOURCE = "MenuHeroSelectPreviewSource";
+			
 	/* LEVEL */
 		/* BUTTON */
 		public static final String MENU_LEVEL_BUTTON = "MenuLevelButton";	
@@ -105,6 +108,7 @@ public class GuiKeys
 			public static final String MENU_LEVEL_SELECT_PREVIEW_SIZE = "MenuLevelSelectPreviewSize";
 			public static final String MENU_LEVEL_SELECT_PREVIEW_SOURCE = "MenuLevelSelectPreviewSource";
 			public static final String MENU_LEVEL_SELECT_PREVIEW_THEME = "MenuLevelSelectPreviewTheme";
+			
 	/* OPTIONS */
 		/* BUTTON */
 		public static final String MENU_OPTIONS_BUTTON = "MenuOptionsButton";
@@ -177,6 +181,7 @@ public class GuiKeys
 			public static final String MENU_OPTIONS_VIDEO_LINE_PANEL_DIMENSION = "MenuOptionsVideoLinePanelDimension";
 			public static final String MENU_OPTIONS_VIDEO_LINE_PLUS = "MenuOptionsVideoLinePlus";
 			public static final String MENU_OPTIONS_VIDEO_LINE_SMOOTH_GRAPHICS = "MenuOptionsVideoLineSmoothGraphics";
+			
 	/* PROFILES */
 		/* BUTTON */
 		public static final String MENU_PROFILES_BUTTON = "MenuProfilesButton";
@@ -211,13 +216,39 @@ public class GuiKeys
 		public static final String MENU_PROFILES_PREVIEW_HEROPACK = "MenuProfilesPreviewHeroPack";
 		public static final String MENU_PROFILES_PREVIEW_NAME = "MenuProfilesPreviewName";
 	/* QUICKMATCH */	
-	public static final String MENU_QUICKMATCH_BUTTON = "MenuTournamentButton";
-	public static final String MENU_QUICKMATCH_BUTTON_DESCRIPTION = MENU_QUICKMATCH_BUTTON+"Description";
-	public static final String MENU_QUICKMATCH_BUTTON_NEXT = MENU_QUICKMATCH_BUTTON+"Next";
-	public static final String MENU_QUICKMATCH_BUTTON_PREVIOUS = MENU_QUICKMATCH_BUTTON+"Previous";
-	public static final String MENU_QUICKMATCH_BUTTON_QUIT = MENU_QUICKMATCH_BUTTON+"Quit";
-	public static final String MENU_QUICKMATCH_BUTTON_RESULTS = MENU_QUICKMATCH_BUTTON+"Results";
-	public static final String MENU_QUICKMATCH_BUTTON_STATISTICS = MENU_QUICKMATCH_BUTTON+"Statistics";
+		public static final String MENU_QUICKMATCH = "MenuQuickmatch";
+		/* BUTTON */
+			public static final String MENU_QUICKMATCH_BUTTON = MENU_QUICKMATCH+"Button";
+			public static final String MENU_QUICKMATCH_BUTTON_DESCRIPTION = MENU_QUICKMATCH_BUTTON+"Description";
+			public static final String MENU_QUICKMATCH_BUTTON_NEXT = MENU_QUICKMATCH_BUTTON+"Next";
+			public static final String MENU_QUICKMATCH_BUTTON_PREVIOUS = MENU_QUICKMATCH_BUTTON+"Previous";
+			public static final String MENU_QUICKMATCH_BUTTON_QUIT = MENU_QUICKMATCH_BUTTON+"Quit";
+			public static final String MENU_QUICKMATCH_BUTTON_RESULTS = MENU_QUICKMATCH_BUTTON+"Results";
+			public static final String MENU_QUICKMATCH_BUTTON_STATISTICS = MENU_QUICKMATCH_BUTTON+"Statistics";
+		/* PROFILES */
+			public static final String MENU_QUICKMATCH_PROFILES = MENU_QUICKMATCH+"Profiles";
+			public static final String MENU_QUICKMATCH_TITLE = MENU_QUICKMATCH_PROFILES+"Title";
+			/* CONTROLS */
+			public static final String MENU_QUICKMATCH_PROFILES_CONTROLS_NEXT = MENU_QUICKMATCH_PROFILES+"ControlsNext";
+			public static final String MENU_QUICKMATCH_PROFILES_CONTROLS_PREVIOUS = MENU_QUICKMATCH_PROFILES+"ControlsPrevious";
+			public static final String MENU_QUICKMATCH_PROFILES_CONTROLS_VALUE = MENU_QUICKMATCH_PROFILES+"ControlsValue";
+			/* COLOR */
+			public static final String MENU_QUICKMATCH_PROFILES_COLOR_NEXT = MENU_QUICKMATCH_PROFILES+"ColorNext";
+			public static final String MENU_QUICKMATCH_PROFILES_COLOR_PREVIOUS = MENU_QUICKMATCH_PROFILES+"ColorPrevious";
+			public static final String MENU_QUICKMATCH_PROFILES_COLOR_VALUE = MENU_QUICKMATCH_PROFILES+"ColorValue";
+			/* HERO */
+			public static final String MENU_QUICKMATCH_PROFILES_HERO_BROWSE = MENU_QUICKMATCH_PROFILES+"HeroBrowse";
+			public static final String MENU_QUICKMATCH_PROFILES_HERO_NEXT = MENU_QUICKMATCH_PROFILES+"HeroNext";
+			public static final String MENU_QUICKMATCH_PROFILES_HERO_PREVIOUS = MENU_QUICKMATCH_PROFILES+"HeroPrevious";
+			public static final String MENU_QUICKMATCH_PROFILES_HERO_VALUE = MENU_QUICKMATCH_PROFILES+"HeroValue";
+			/* PROFILE */
+			public static final String MENU_QUICKMATCH_PROFILES_PROFILE_BROWSE = MENU_QUICKMATCH_PROFILES+"ProfileBrowse";
+			public static final String MENU_QUICKMATCH_PROFILES_PROFILE_NEXT = MENU_QUICKMATCH_PROFILES+"ProfileNext";
+			public static final String MENU_QUICKMATCH_PROFILES_PROFILE_PREVIOUS = MENU_QUICKMATCH_PROFILES+"ProfilePrevious";
+			public static final String MENU_QUICKMATCH_PROFILES_PROFILE_VALUE = MENU_QUICKMATCH_PROFILES+"ProfileValue";
+			/* TYPE */
+			public static final String MENU_QUICKMATCH_PROFILES_TYPE_VALUE = MENU_QUICKMATCH_PROFILES+"TypeValue";
+		
 	/* TOURNAMENT */	
 	public static final String MENU_TOURNAMENT_BUTTON = "MenuTournamentButton";
 	public static final String MENU_TOURNAMENT_BUTTON_BACK = MENU_TOURNAMENT_BUTTON+"Back";

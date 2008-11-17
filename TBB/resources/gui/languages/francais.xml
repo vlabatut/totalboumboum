@@ -244,6 +244,52 @@
 			
 		</group>	
 
+<!-- QUICKMATCH MENU -->	
+		<group name="Quickmatch">
+			<group name="Button">
+				<text name="Description" value="Description" tooltip="" />
+				<text name="Next" value="Suivant" tooltip="Aller aux paramètres de la rencontre" />
+				<text name="Previous" value="Précédent" tooltip="Revenir au menu principal" />
+				<text name="Quit" value="Quitter" tooltip="Aller au menu principal" />
+				<text name="Results" value="Resultats" tooltip="" />
+				<text name="Statistics" value="Statistiques" tooltip="" />
+			</group>
+			
+			<group name="Profiles" >
+				<text name="Title" value="Sélection des joueurs" tooltip="Sélection des joueurs participant à la partie rapide" />
+				<group name="Controls" >
+					<text name="Next" value="Suivant" tooltip="Sélectionner les commandes suivantes" />
+					<text name="Previous" value="Précédent" tooltip="Sélectionner les commandes précédentes" />
+					<text name="Value" value="Commandes" tooltip="Commandes sélectionnées" />
+				</group>
+
+				<group name="Color" >
+					<text name="Next" value="Suivant" tooltip="Sélectionner la couleur suivante" />
+					<text name="Previous" value="Précédent" tooltip="Sélectionner la couleur précédente" />
+					<text name="Value" value="Color" tooltip="Couleur sélectionnée" />
+				</group>
+
+				<group name="Hero" >
+					<text name="Browse" value="Browse" tooltip="Sélectionner un personnage" />
+					<text name="Next" value="Suivant" tooltip="Sélectionner le personnage suivant" />
+					<text name="Previous" value="Précédent" tooltip="Sélectionner le personnage précédent" />
+					<text name="Value" value="Hero" tooltip="Personnage sélectionné" />
+				</group>
+
+				<group name="Profile" >
+					<text name="Browse" value="Browse" tooltip="Sélectionner un profil" />
+					<text name="Next" value="Suivant" tooltip="Sélectionner le profil suivant" />
+					<text name="Previous" value="Précédent" tooltip="Sélectionner le profil suivant" />
+					<text name="Value" value="Profile" tooltip="Profil sélectionné" />
+				</group>
+
+				<group name="Type" >
+					<text name="Value" value="Type" tooltip="Type de profil (joueur humain ou IA)" />
+				</group>
+				
+			</group>
+		</group>	
+
 <!-- TOURNAMENT MENU -->	
 		<group name="Tournament">
 			<group name="Button">

@@ -60,7 +60,7 @@ public class ProfilesData extends EntitledDataPanel implements MouseListener
 	{	super(container);
 	
 		// title
-		String key = GuiKeys.GAME_MATCH_DESCRIPTION_TITLE;
+		String key = GuiKeys.MENU_QUICKMATCH_TITLE;
 		setTitleKey(key);
 		
 		// data
@@ -227,88 +227,6 @@ public class ProfilesData extends EntitledDataPanel implements MouseListener
 		return result;
 	}
 	
-	
-/*	
-	private JPanel makeNotesPanel()
-	{	// init
-		int width = GuiTools.getSize(GuiTools.GAME_DESCRIPTION_PANEL_WIDTH);
-		int height = GuiTools.getSize(GuiTools.GAME_DESCRIPTION_PANEL_HEIGHT);
-		EntitledSubPanel notesPanel = new EntitledSubPanel(width,height,getConfiguration());
-		// title
-		String text = getConfiguration().getLanguage().getText(GuiTools.GAME_MATCH_HEADER_NOTES);
-		String tooltip = getConfiguration().getLanguage().getText(GuiTools.GAME_MATCH_HEADER_NOTES+GuiKeys.TOOLTIP);
-		notesPanel.setTitle(text,tooltip);
-		// text panel
-		{	JTextPane textPane = new JTextPane()
-			{	public void paintComponent(Graphics g)
-			    {	Graphics2D g2 = (Graphics2D) g;
-		        	g2.setRenderingHint(RenderingHints.KEY_TEXT_ANTIALIASING,RenderingHints.VALUE_TEXT_ANTIALIAS_ON);
-		        	g2.setRenderingHint(RenderingHints.KEY_RENDERING,RenderingHints.VALUE_RENDER_QUALITY);
-		        	super.paintComponent(g2);
-			    }			
-			};
-			textPane.setEditable(false);
-			textPane.setHighlighter(null);
-//			textPane.putClientProperty(SwingUtilities2.AA_TEXT_PROPERTY_KEY, new Boolean(true));
-//			textPane.setSelectedTextColor(null);
-//			textPane.setEnabled(false);
-//			textPane.setDisabledTextColor(Color.BLACK);
-
-//			textPane.setCaret(new Caret()
-//	        {	public void install(JTextComponent c){}
-//	            public void deinstall(JTextComponent c){}
-//	            public void paint(Graphics g){}
-//	            public void addChangeListener(ChangeListener l){}
-//	            public void removeChangeListener(ChangeListener l){}
-//	            public boolean isVisible(){return false;}
-//	            public void setVisible(boolean v){}
-//	            public boolean isSelectionVisible(){return false;}
-//	            public void setSelectionVisible(boolean v){}
-//	            public void setMagicCaretPosition(Point p){}
-//	            public Point getMagicCaretPosition(){return new Point(0,0);}
-//	            public void setBlinkRate(int rate){}
-//	            public int getBlinkRate(){return 10000;}
-//	            public int getDot(){return 0;}
-//	            public int getMark(){return 0;}
-//	            public void setDot(int dot){}
-//	            public void moveDot(int dot){}
-//	        });
-				        
-			SimpleAttributeSet sa = new SimpleAttributeSet();
-			StyleConstants.setAlignment(sa,StyleConstants.ALIGN_JUSTIFIED);
-			Font font = getConfiguration().getFont().deriveFont((float)GuiTools.getSize(GuiTools.GAME_DESCRIPTION_LABEL_TEXT_FONT_SIZE));
-			StyleConstants.setFontFamily(sa, font.getFamily());
-			StyleConstants.setFontSize(sa, font.getSize());
-			StyledDocument doc = textPane.getStyledDocument();
-			Match match = getConfiguration().getCurrentMatch();			
-			text = "";
-			ArrayList<String> list = match.getNotes();
-			Iterator<String> i = list.iterator();
-			while (i.hasNext())
-			{	String temp = i.next();
-				text = text + temp + "\n";
-			}
-			try
-			{	doc.insertString(0,text,sa);
-			}
-			catch (BadLocationException e)
-			{	e.printStackTrace();
-			}
-			doc.setParagraphAttributes(0,doc.getLength()-1,sa,true);
-			//
-			JComponent dataComp = notesPanel.getDataPanel();
-			textPane.setBackground(dataComp.getBackground());
-			Dimension dim = dataComp.getPreferredSize();
-			textPane.setPreferredSize(dim);
-			textPane.setMinimumSize(dim);
-			textPane.setMaximumSize(dim);
-			textPane.setAlignmentX(Component.CENTER_ALIGNMENT);
-			notesPanel.setDataPanel(textPane);
-		}
-		return notesPanel;		
-	}
-*/	
-
 	/////////////////////////////////////////////////////////////////
 	// MOUSE LISTENER	/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////

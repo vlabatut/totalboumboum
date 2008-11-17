@@ -244,6 +244,52 @@
 
 		</group>	
 
+<!-- QUICKMATCH MENU -->	
+		<group name="Quickmatch">
+			<group name="Button">
+				<text name="Description" value="Description" tooltip="" />
+				<text name="Next" value="Next" tooltip="Go to match parameters" />
+				<text name="Previous" value="Previous" tooltip="Back to main menu" />
+				<text name="Quit" value="Quit" tooltip="Go to main menu" />
+				<text name="Results" value="Results" tooltip="" />
+				<text name="Statistics" value="Statistics" tooltip="" />
+			</group>
+			
+			<group name="Profiles" >
+				<text name="Title" value="Players selection" tooltip="Select players for the incoming game" />
+				<group name="Controls" >
+					<text name="Next" value="Next" tooltip="Set to next available controls" />
+					<text name="Previous" value="Previous" tooltip="Set to previous available controls" />
+					<text name="Value" value="Controls" tooltip="Selected controls" />
+				</group>
+
+				<group name="Color" >
+					<text name="Next" value="Next" tooltip="Set to next available color" />
+					<text name="Previous" value="Previous" tooltip="Set to previous available color" />
+					<text name="Value" value="Color" tooltip="Selected color" />
+				</group>
+
+				<group name="Hero" >
+					<text name="Browse" value="Browse" tooltip="Browse and select a character" />
+					<text name="Next" value="Next" tooltip="Set to next available character" />
+					<text name="Previous" value="Previous" tooltip="Set to previous available character" />
+					<text name="Value" value="Hero" tooltip="Selected character" />
+				</group>
+
+				<group name="Profile" >
+					<text name="Browse" value="Browse" tooltip="Browse and select a profile" />
+					<text name="Next" value="Next" tooltip="Set to next available profile" />
+					<text name="Previous" value="Previous" tooltip="Set to previous available profile" />
+					<text name="Value" value="Profile" tooltip="Selected profile" />
+				</group>
+
+				<group name="Type" >
+					<text name="Value" value="Type" tooltip="Profile type" />
+				</group>
+				
+			</group>
+		</group>	
+
 <!-- TOURNAMENT MENU -->	
 		<group name="Tournament">
 			<group name="Button">
