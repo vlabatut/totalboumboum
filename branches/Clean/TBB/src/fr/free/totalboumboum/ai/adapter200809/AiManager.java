@@ -74,6 +74,8 @@ public abstract class AiManager extends AbstractAiManager<AiAction>
 	private Loop loop;
 	/** le niveau dans lequel la partie se déroule */
 	private Level level;
+	/** date de la dernière mise à jour des percepts */
+	private long lastUpdateTime = 0;
 	
 	@Override
 	public void init(String instance, Player player)
@@ -87,7 +89,10 @@ public abstract class AiManager extends AbstractAiManager<AiAction>
 
 	@Override
 	public void updatePercepts()
-	{	percepts.update();
+	{	long elapsedTime = loop.getTotalTime() - lastUpdateTime;
+		lastUpdateTime = loop.getTotalTime();
+		//System.out.println(elapsedTime);		
+		percepts.update(elapsedTime);
 	}
 	
 	@Override

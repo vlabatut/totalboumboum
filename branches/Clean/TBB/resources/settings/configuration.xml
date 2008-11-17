@@ -17,7 +17,7 @@
 	<profiles>
 <!-- brown -->			<!-- 5 -->			<!-- DÉGRADÉ -->		<!--		<profile value="BasmanSandalli" />			-->	
 <!-- grass -->			<!-- 8 -->			<!-- IDENTIQUE  -->		<!--		<profile value="BaydarCamci" />				-->
-<!-- blue -->			<!-- 1 -->			<!-- IDENTIQUE  -->				<profile value="BingolKetenci" />			
+<!-- blue -->			<!-- 1 -->			<!-- IDENTIQUE  -->		<!--  		<profile value="BingolKetenci" />			-->			
 <!-- orange -->			<!-- 9 -->			<!-- DÉGRADÉ  -->		<!--		<profile value="CaglayanElmas"/>			-->
 <!-- cyan -->			<!--11-->			<!-- IDENTIQUE  -->		<!--		<profile value="CamasDemirbas" />			-->
 <!-- grey -->			<!--14-->			<!-- IDENTIQUE  -->		<!--		<profile value="CiritMutlu" />				-->
@@ -33,6 +33,7 @@
 <!-- yellow -->			<!-- 7 -->			<!-- IDENTIQUE  -->		<!--		<profile value="SahinYildirim" /> 			-->
 
  
+<!-- orange -->																							<profile value="Promeneur" />	
 <!-- cyan -->																							<profile value="Human" />	
 
 	</profiles>
