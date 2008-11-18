@@ -668,6 +668,12 @@ public class Launcher
 	 * 
 	 * - inutile de maintenir une liste des profils, ça peut se calculer au démarrage du jeu sans aucun problème 
 	 * 
+	 * - parties en cours :
+	 * 		- une seule partie en même temps
+	 * 		- cliquer sur exit termine effectivement la partie en cours
+	 * 		- utiliser les flèches par contre, permet d'en sortir avec possibilité d'y revenir, l'autre type de rencontre est bloqué (quickmatch/tournament)
+	 * 		- ou alors le fait de commencer une nouvelle partie provoque l'arrêt de l'ancienne (avec interrogation de l'utilisateur)
+	 * 
 	 * - modifier le loader d'image de manière à ce qu'une image non-trouvée soit remplacée par la croix rouge
 	 * 
 	 * - utiliser les tooltips pour afficher les infos trop longues : calcul de points, nombre à virgule dans la colonne des points (décimales cachées), etc.
@@ -707,6 +713,10 @@ public class Launcher
 	 * - champ en plus dans les profils : le classement du joueur, nbre de rouds gagnés/nbre de rounds joués
 	 * 
 	 * - dans les persos : % de rounds gagnés, ou bien nbre de rounds joués
+	 * 
+	 * - lors de la sélection des commandes :
+	 * 		- cliquer sur le bouton d'action fait réagir quelque chose dans la ligne du joueur correspondant
+	 * 		- permet de vérifier qu'on a pris les bonnes commandes (celles qu'on pensait avoir prises)
 	 * 
 	 * -------------------------------------------------------------------
 	 * - calcul de points : introduire des variables comme le nombre de joueurs (pour définir un bonus pr le joueur qui fait un perfect en survival)

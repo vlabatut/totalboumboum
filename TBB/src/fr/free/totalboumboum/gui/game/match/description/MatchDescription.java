@@ -124,7 +124,7 @@ public class MatchDescription extends EntitledDataPanel implements MouseListener
 		int lines = 16+1;
 		int cols = 4+1;
 		UntitledSubPanelTable playersPanel = new UntitledSubPanelTable(width,height,cols,lines,true);
-		int ctrlColWidth = initControlsTexts(playersPanel);
+		int ctrlColWidth = initControlsTexts(playersPanel.getLineFontSize(),controlTexts,controlTooltips);
 		// headers
 		{	{	JLabel lbl = playersPanel.getLabel(0,0);
 				lbl.setOpaque(false);
@@ -198,7 +198,7 @@ public class MatchDescription extends EntitledDataPanel implements MouseListener
 		return playersPanel;		
 	}
 	
-	public int initControlsTexts(UntitledSubPanelTable playersPanel)
+	public static int initControlsTexts(int fontSize, ArrayList<String> controlTexts, ArrayList<String> controlTooltips)
 	{	int result = 0;
 		// no control
 		{	// text
@@ -208,7 +208,7 @@ public class MatchDescription extends EntitledDataPanel implements MouseListener
 			String tooltip = GuiConfiguration.getMiscConfiguration().getLanguage().getText(GuiKeys.GAME_MATCH_DESCRIPTION_PLAYERS_DATA_NOCONTROLS+GuiKeys.TOOLTIP);
 			controlTooltips.add(tooltip);
 			// width
-			result = GuiTools.getPixelWidth(playersPanel.getLineFontSize(),text);
+			result = GuiTools.getPixelWidth(fontSize,text);
 		}
 		// control number X
 		for(int index=1;index<=GameConstants.CONTROL_COUNT;index++)
@@ -219,7 +219,7 @@ public class MatchDescription extends EntitledDataPanel implements MouseListener
 			String tooltip = GuiConfiguration.getMiscConfiguration().getLanguage().getText(GuiKeys.GAME_MATCH_DESCRIPTION_PLAYERS_DATA_CONTROLS+GuiKeys.TOOLTIP)+" "+index;
 			controlTooltips.add(tooltip);
 			// width
-			int temp = GuiTools.getPixelWidth(playersPanel.getLineFontSize(),text);
+			int temp = GuiTools.getPixelWidth(fontSize,text);
 			if(temp>result)
 				result = temp;
 		}
@@ -352,7 +352,7 @@ public class MatchDescription extends EntitledDataPanel implements MouseListener
 	}
 
 
-	public int getNextFreeControls(ArrayList<Profile> profiles, int start)
+	public static int getNextFreeControls(ArrayList<Profile> profiles, int start)
 	{	/// init
 		Iterator<Profile> it = profiles.iterator();
 		ArrayList<Integer> occupied = new ArrayList<Integer>();

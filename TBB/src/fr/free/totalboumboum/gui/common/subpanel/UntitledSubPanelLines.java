@@ -121,9 +121,9 @@ public class UntitledSubPanelLines extends SubPanel
 			line.setBackgroundColor(GuiTools.COLOR_TABLE_HEADER_BACKGROUND);
 			line.setForegroundColor(GuiTools.COLOR_TABLE_HEADER_FOREGROUND);
 		}
-		
 		//data
-		line = new Line(lineWidth,lineHeight,1);
+		else
+			line = new Line(lineWidth,lineHeight,1);
 
 		add(line,2*index+1);
 	}
