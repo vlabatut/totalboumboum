@@ -45,6 +45,8 @@ import fr.free.totalboumboum.gui.data.configuration.GuiConfiguration;
 import fr.free.totalboumboum.gui.game.match.MatchSplitPanel;
 import fr.free.totalboumboum.gui.heroes.select.SelectedHeroSplitPanel;
 import fr.free.totalboumboum.gui.levels.select.SelectedLevelSplitPanel;
+import fr.free.totalboumboum.gui.menus.quickmatch.profiles.ProfilesMenu;
+import fr.free.totalboumboum.gui.menus.quickmatch.profiles.ProfilesSplitPanel;
 import fr.free.totalboumboum.gui.menus.tournament.TournamentSplitPanel;
 import fr.free.totalboumboum.gui.options.OptionsSplitPanel;
 import fr.free.totalboumboum.gui.profiles.select.SelectedProfileSplitPanel;
@@ -201,7 +203,8 @@ buttonAbout.setEnabled(false);
 				catch (NoSuchFieldException e1)
 				{	e1.printStackTrace();
 				}
-				quickmatchGamePanel = new MatchSplitPanel(getContainer(),this);
+//				quickmatchGamePanel = new MatchSplitPanel(getContainer(),this);
+				quickmatchGamePanel = new ProfilesSplitPanel(getContainer(),this);
 			}			
 			replaceWith(quickmatchGamePanel);
 	    }

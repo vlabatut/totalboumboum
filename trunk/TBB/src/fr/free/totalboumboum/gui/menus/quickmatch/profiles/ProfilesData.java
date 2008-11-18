@@ -37,13 +37,17 @@ import javax.swing.JPanel;
 import fr.free.totalboumboum.configuration.Configuration;
 import fr.free.totalboumboum.configuration.GameConstants;
 import fr.free.totalboumboum.configuration.profile.Portraits;
+import fr.free.totalboumboum.configuration.profile.PredefinedColor;
 import fr.free.totalboumboum.configuration.profile.Profile;
 import fr.free.totalboumboum.game.match.Match;
 import fr.free.totalboumboum.gui.common.panel.SplitMenuPanel;
 import fr.free.totalboumboum.gui.common.panel.data.EntitledDataPanel;
+import fr.free.totalboumboum.gui.common.subpanel.Line;
 import fr.free.totalboumboum.gui.common.subpanel.SubPanel;
+import fr.free.totalboumboum.gui.common.subpanel.UntitledSubPanelLines;
 import fr.free.totalboumboum.gui.common.subpanel.UntitledSubPanelTable;
 import fr.free.totalboumboum.gui.data.configuration.GuiConfiguration;
+import fr.free.totalboumboum.gui.game.match.description.MatchDescription;
 import fr.free.totalboumboum.gui.game.round.description.RoundDescription;
 import fr.free.totalboumboum.gui.tools.GuiKeys;
 import fr.free.totalboumboum.gui.tools.GuiTools;
@@ -53,8 +57,15 @@ public class ProfilesData extends EntitledDataPanel implements MouseListener
 	private static final long serialVersionUID = 1L;
 	private static final float SPLIT_RATIO = 0.6f;
 	private UntitledSubPanelTable playersPanel;
+
+	// controls
 	private ArrayList<String> controlTexts = new ArrayList<String>();
 	private ArrayList<String> controlTooltips = new ArrayList<String>();
+	// colors
+	private ArrayList<String> colorTexts = new ArrayList<String>();
+	private ArrayList<String> colorTooltips = new ArrayList<String>();
+	private ArrayList<Color> colorBackgrounds = new ArrayList<Color>();
+	
 	
 	public ProfilesData(SplitMenuPanel container)
 	{	super(container);
@@ -64,48 +75,8 @@ public class ProfilesData extends EntitledDataPanel implements MouseListener
 		setTitleKey(key);
 		
 		// data
-		{	SubPanel infoPanel = new SubPanel(dataWidth,dataHeight);
-			{	BoxLayout layout = new BoxLayout(infoPanel,BoxLayout.LINE_AXIS); 
-				infoPanel.setLayout(layout);
-			}
-			
-			int margin = GuiTools.panelMargin;
-			int leftWidth = (int)(dataWidth*SPLIT_RATIO); 
-			int rightWidth = dataWidth - leftWidth - margin; 
-			Match match = Configuration.getGameConfiguration().getTournament().getCurrentMatch();			
-			infoPanel.setOpaque(false);
-			
-			// players panel
-			{	playersPanel = makePlayersPanel(leftWidth,dataHeight);
-				infoPanel.add(playersPanel);
-			}
-			
-			infoPanel.add(Box.createHorizontalGlue());
-			
-			// right panel
-			{	JPanel rightPanel = new JPanel();
-				{	BoxLayout layout = new BoxLayout(rightPanel,BoxLayout.PAGE_AXIS); 
-					rightPanel.setLayout(layout);
-				}
-				rightPanel.setOpaque(false);
-				int upHeight = (dataHeight - margin)/2;
-				int downHeight = dataHeight - upHeight - margin;
-				
-				// points panel
-				{	SubPanel pointsPanel = RoundDescription.makePointsPanel(rightWidth,downHeight,match.getPointProcessor(),"Match");
-					rightPanel.add(pointsPanel);
-				}
-
-				rightPanel.add(Box.createVerticalGlue());
-				
-				// limit panel
-				{	SubPanel limitsPanel = RoundDescription.makeLimitsPanel(rightWidth,downHeight,match.getLimits(),"Match");
-					rightPanel.add(limitsPanel);
-				}
-				infoPanel.add(rightPanel);
-			}
-
-			setDataPart(infoPanel);
+		{	UntitledSubPanelLines playersPanel = makePlayersPanel(dataWidth,dataHeight);
+			setDataPart(playersPanel);
 		}
 	}
 
@@ -119,25 +90,126 @@ public class ProfilesData extends EntitledDataPanel implements MouseListener
 	{	// nothing to do here
 	}
 	
-	private UntitledSubPanelTable makePlayersPanel(int width, int height)
-	{	Match match = Configuration.getGameConfiguration().getTournament().getCurrentMatch();
+	private UntitledSubPanelLines makePlayersPanel(int width, int height)
+	{	//Match match = Configuration.getGameConfiguration().getTournament().getCurrentMatch();
+		
 		int lines = 16+1;
-		int cols = 4+1;
-		UntitledSubPanelTable playersPanel = new UntitledSubPanelTable(width,height,cols,lines,true);
-		int ctrlColWidth = initControlsTexts(playersPanel);
+		int headerCols = 6;
+		@SuppressWarnings("unused")
+		int lineCols = 1+4+1+4+3+1;
+		int margin = GuiTools.subPanelMargin;
+		UntitledSubPanelLines playersPanel = new UntitledSubPanelLines(width,height,lines,true);
+		int headerHeight = playersPanel.getHeaderHeight();
+		int lineHeight = playersPanel.getLineHeight();
+		int deleteColWidth = lineHeight;
+		int controlColWidth = MatchDescription.initControlsTexts(playersPanel.getLineFontSize(),controlTexts,controlTooltips);
+		int colorWidth = initColorTexts(playersPanel.getLineFontSize(),colorTexts,colorTooltips,colorBackgrounds);
+		int colorColWidth = colorWidth + 2*margin + 2*lineHeight;
+		int typeColWidth = headerHeight;
+		int fixedSum = margin*(headerCols+1) +deleteColWidth + controlColWidth + colorColWidth + typeColWidth;
+		int heroColWidth = (width - fixedSum)/2;
+		int nameColWidth = width - fixedSum - heroColWidth;
+		int nameWidth = nameColWidth - 3*margin - 3*lineHeight;
+		int heroWidth = heroColWidth - 3*margin - 3*lineHeight;
+		
 		// headers
-		{	{	JLabel lbl = playersPanel.getLabel(0,0);
-				lbl.setOpaque(false);
-			}
-			String keys[] = 
-			{	GuiKeys.GAME_MATCH_DESCRIPTION_PLAYERS_HEADER_PROFILE,
-				GuiKeys.GAME_MATCH_DESCRIPTION_PLAYERS_HEADER_CONTROLS,
-				GuiKeys.GAME_MATCH_DESCRIPTION_PLAYERS_HEADER_NAME,
-				GuiKeys.GAME_MATCH_DESCRIPTION_PLAYERS_HEADER_RANK
+		{	String keys[] = 
+			{	null,
+				GuiKeys.MENU_QUICKMATCH_PROFILES_PROFILE_VALUE,
+				GuiKeys.MENU_QUICKMATCH_PROFILES_TYPE_VALUE,
+				GuiKeys.MENU_QUICKMATCH_PROFILES_HERO_VALUE,
+				GuiKeys.MENU_QUICKMATCH_PROFILES_COLOR_VALUE,
+				GuiKeys.MENU_QUICKMATCH_PROFILES_CONTROLS_VALUE
 			};
-			for(int i=1;i<keys.length+1;i++)
-				playersPanel.setLabelKey(0,i,keys[i-1],true);
+			int sizes[] = 
+			{	deleteColWidth,
+				nameColWidth,
+				typeColWidth,
+				heroColWidth,
+				colorColWidth,
+				controlColWidth
+			};
+			Line ln = playersPanel.getLine(0);
+			for(int i=0;i<keys.length-1;i++)
+				ln.addLabel(0);
+			for(int col=0;col<keys.length;col++)
+			{	ln.setLabelMinWidth(col,sizes[col]);
+				ln.setLabelPreferredWidth(col,sizes[col]);
+				ln.setLabelMaxWidth(col,sizes[col]);
+				if(keys[col]!=null)
+				{	ln.setLabelKey(col,keys[col],true);
+					Color bg = GuiTools.COLOR_TABLE_HEADER_BACKGROUND;
+					ln.setLabelBackground(col,bg);
+				}
+			}
 		}
+		
+		// data
+		for(int line=1;line<lines;line++)
+		{	String keys[] = 
+			{	GuiKeys.MENU_QUICKMATCH_PROFILES_PROFILE_DELETE,
+				GuiKeys.MENU_QUICKMATCH_PROFILES_PROFILE_PREVIOUS,
+				null,
+				GuiKeys.MENU_QUICKMATCH_PROFILES_PROFILE_NEXT,
+				GuiKeys.MENU_QUICKMATCH_PROFILES_PROFILE_BROWSE,
+				null,
+				GuiKeys.MENU_QUICKMATCH_PROFILES_HERO_PREVIOUS,
+				null,
+				GuiKeys.MENU_QUICKMATCH_PROFILES_HERO_NEXT,
+				GuiKeys.MENU_QUICKMATCH_PROFILES_HERO_BROWSE,
+				GuiKeys.MENU_QUICKMATCH_PROFILES_COLOR_PREVIOUS,
+				null,
+				GuiKeys.MENU_QUICKMATCH_PROFILES_COLOR_NEXT,
+				null
+			};
+			int sizes[] = 
+			{	lineHeight,
+				lineHeight,
+				nameWidth,
+				lineHeight,
+				lineHeight,
+				headerHeight,
+				lineHeight,
+				heroWidth,
+				lineHeight,
+				lineHeight,
+				lineHeight,
+				colorWidth,
+				lineHeight,
+				controlColWidth
+			};
+			Line ln = playersPanel.getLine(line);
+			for(int i=0;i<keys.length-1;i++)
+				ln.addLabel(0);
+			for(int col=0;col<keys.length;col++)
+			{	ln.setLabelMinWidth(col,sizes[col]);
+				ln.setLabelPreferredWidth(col,sizes[col]);
+				ln.setLabelMaxWidth(col,sizes[col]);
+				Color bg;
+				if(keys[col]!=null)
+				{	ln.setLabelKey(col,keys[col],true);
+					bg = GuiTools.COLOR_TABLE_REGULAR_BACKGROUND;
+				}
+				else
+					bg = GuiTools.COLOR_TABLE_NEUTRAL_BACKGROUND;
+				ln.setLabelBackground(col,bg);
+			}
+		}
+
+		return playersPanel;	
+		
+		
+		
+		
+//TODO une seule ligne avec les boutons au début, puis faire apparaitre au fur et à mesure		
+		
+		
+		
+		
+		
+	}
+
+/*	
 		// empty
 		{	playersPanel.setSubColumnsPreferredWidth(2,ctrlColWidth);
 			playersPanel.setSubColumnsMaxWidth(3,Integer.MAX_VALUE);
@@ -195,37 +267,7 @@ public class ProfilesData extends EntitledDataPanel implements MouseListener
 				line++;
 			}
 		}
-		return playersPanel;		
-	}
-	
-	public int initControlsTexts(UntitledSubPanelTable playersPanel)
-	{	int result = 0;
-		// no control
-		{	// text
-			String text = GuiConfiguration.getMiscConfiguration().getLanguage().getText(GuiKeys.GAME_MATCH_DESCRIPTION_PLAYERS_DATA_NOCONTROLS);
-			controlTexts.add(text);
-			// tooltip
-			String tooltip = GuiConfiguration.getMiscConfiguration().getLanguage().getText(GuiKeys.GAME_MATCH_DESCRIPTION_PLAYERS_DATA_NOCONTROLS+GuiKeys.TOOLTIP);
-			controlTooltips.add(tooltip);
-			// width
-			result = GuiTools.getPixelWidth(playersPanel.getLineFontSize(),text);
-		}
-		// control number X
-		for(int index=1;index<=GameConstants.CONTROL_COUNT;index++)
-		{	// text
-			String text = GuiConfiguration.getMiscConfiguration().getLanguage().getText(GuiKeys.GAME_MATCH_DESCRIPTION_PLAYERS_DATA_CONTROLS)+index;
-			controlTexts.add(text);
-			// tooltip
-			String tooltip = GuiConfiguration.getMiscConfiguration().getLanguage().getText(GuiKeys.GAME_MATCH_DESCRIPTION_PLAYERS_DATA_CONTROLS+GuiKeys.TOOLTIP)+" "+index;
-			controlTooltips.add(tooltip);
-			// width
-			int temp = GuiTools.getPixelWidth(playersPanel.getLineFontSize(),text);
-			if(temp>result)
-				result = temp;
-		}
-		//
-		return result;
-	}
+ */
 	
 	/////////////////////////////////////////////////////////////////
 	// MOUSE LISTENER	/////////////////////////////////////////////
@@ -256,10 +298,10 @@ public class ProfilesData extends EntitledDataPanel implements MouseListener
 			{	if(index==GameConstants.CONTROL_COUNT)
 					index = 0;
 				else
-					index = getNextFreeControls(profiles,index);
+					index = MatchDescription.getNextFreeControls(profiles,index);
 			}
 			else
-				index = getNextFreeControls(profiles,index);
+				index = MatchDescription.getNextFreeControls(profiles,index);
 			profile.setControlSettingsIndex(index);
 			playersPanel.setLabelText(pos[0],pos[1],controlTexts.get(index),controlTooltips.get(index));
 		}
@@ -269,33 +311,27 @@ public class ProfilesData extends EntitledDataPanel implements MouseListener
 	{	
 	}
 
-
-	public int getNextFreeControls(ArrayList<Profile> profiles, int start)
-	{	/// init
-		Iterator<Profile> it = profiles.iterator();
-		ArrayList<Integer> occupied = new ArrayList<Integer>();
-		while(it.hasNext())
-		{	Profile profile = it.next();
-			int index = profile.getControlSettingsIndex();
-			if(index>0)
-				occupied.add(index);
+	public static int initColorTexts(int fontSize, ArrayList<String> colorTexts, ArrayList<String> colorTooltips, ArrayList<Color> colorBackgrounds)
+	{	int result = 0;
+		for(PredefinedColor color : PredefinedColor.values())
+		{	// text
+			String colorKey = color.toString();
+			colorKey = colorKey.toUpperCase().substring(0,1)+colorKey.toLowerCase().substring(1,colorKey.length());
+			colorKey = GuiKeys.COLOR+colorKey;
+			String text = GuiConfiguration.getMiscConfiguration().getLanguage().getText(colorKey); 
+			String tooltip = text;
+			Color clr = color.getColor();
+			int alpha = GuiTools.ALPHA_TABLE_REGULAR_BACKGROUND_LEVEL3;
+			Color bg = new Color(clr.getRed(),clr.getGreen(),clr.getBlue(),alpha);
+			//
+			colorTexts.add(text);
+			colorTooltips.add(tooltip);
+			colorBackgrounds.add(bg);
+			// width
+			int temp = GuiTools.getPixelWidth(fontSize,text);
+			if(temp>result)
+				result = temp;
 		}
-		// next free index
-		boolean found = false;
-		int result = 0;
-		int test = 1;
-		while(!found && test<=GameConstants.CONTROL_COUNT)
-		{	int temp = (start+test)%(GameConstants.CONTROL_COUNT+1);
-			if(occupied.contains(temp))
-				test++;
-			else
-			{	result = temp;
-				found = true;
-			}
-		}
-		if(!found)
-			result = start;
 		return result;
 	}
-
 }

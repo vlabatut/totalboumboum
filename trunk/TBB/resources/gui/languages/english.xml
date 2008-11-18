@@ -278,6 +278,7 @@
 
 				<group name="Profile" >
 					<text name="Browse" value="Browse" tooltip="Browse and select a profile" />
+					<text name="Delete" value="Unselect" tooltip="Unselect this profile" />
 					<text name="Next" value="Next" tooltip="Set to next available profile" />
 					<text name="Previous" value="Previous" tooltip="Set to previous available profile" />
 					<text name="Value" value="Profile" tooltip="Selected profile" />
