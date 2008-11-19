@@ -140,3 +140,4 @@
 + beta.007
 - modification : accès à la durée normale d'une bombe (avant explosion) depuis la classe AiBomb
 - correction : bug dans l'API d'IA qui faisait un punch juste après chaque drop.
+- modification : l'IA peut demander à se déplacer dans des directions composites et non plus seulement des directions simples
