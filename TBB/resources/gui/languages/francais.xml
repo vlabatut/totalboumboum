@@ -285,6 +285,8 @@
 				</group>
 
 				<group name="Type" >
+					<text name="Computer" value="Ordinateur" tooltip="Intelligence artificielle" />
+					<text name="Human" value="Humain" tooltip="Joueur humain" />
 					<text name="Value" value="Type" tooltip="Type de profil (joueur humain ou IA)" />
 				</group>
 				

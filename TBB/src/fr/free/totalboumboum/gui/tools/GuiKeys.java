@@ -248,6 +248,8 @@ public class GuiKeys
 			public static final String MENU_QUICKMATCH_PROFILES_PROFILE_PREVIOUS = MENU_QUICKMATCH_PROFILES+"ProfilePrevious";
 			public static final String MENU_QUICKMATCH_PROFILES_PROFILE_VALUE = MENU_QUICKMATCH_PROFILES+"ProfileValue";
 			/* TYPE */
+			public static final String MENU_QUICKMATCH_PROFILES_TYPE_COMPUTER = MENU_QUICKMATCH_PROFILES+"TypeComputer";
+			public static final String MENU_QUICKMATCH_PROFILES_TYPE_HUMAN = MENU_QUICKMATCH_PROFILES+"TypeHuman";
 			public static final String MENU_QUICKMATCH_PROFILES_TYPE_VALUE = MENU_QUICKMATCH_PROFILES+"TypeValue";
 		
 	/* TOURNAMENT */	

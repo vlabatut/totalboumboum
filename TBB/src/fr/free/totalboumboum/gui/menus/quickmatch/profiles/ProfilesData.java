@@ -24,14 +24,28 @@ package fr.free.totalboumboum.gui.menus.quickmatch.profiles;
 import java.awt.Color;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.io.IOException;
+import java.text.Collator;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.HashMap;
+import java.util.Locale;
+import java.util.Set;
+import java.util.Map.Entry;
 
 import javax.swing.JLabel;
+import javax.xml.parsers.ParserConfigurationException;
+
+import org.xml.sax.SAXException;
 
 import fr.free.totalboumboum.configuration.Configuration;
 import fr.free.totalboumboum.configuration.GameConstants;
 import fr.free.totalboumboum.configuration.profile.PredefinedColor;
 import fr.free.totalboumboum.configuration.profile.Profile;
+import fr.free.totalboumboum.configuration.profile.ProfileLoader;
+import fr.free.totalboumboum.configuration.profile.ProfilesConfiguration;
+import fr.free.totalboumboum.engine.content.sprite.SpritePreview;
 import fr.free.totalboumboum.gui.common.panel.SplitMenuPanel;
 import fr.free.totalboumboum.gui.common.panel.data.EntitledDataPanel;
 import fr.free.totalboumboum.gui.common.subpanel.Line;
@@ -45,7 +59,10 @@ import fr.free.totalboumboum.gui.tools.GuiTools;
 public class ProfilesData extends EntitledDataPanel implements MouseListener
 {	
 	private static final long serialVersionUID = 1L;
-	private UntitledSubPanelTable playersPanel;
+	
+	private static final int LINE_COUNT = 16+1;
+	
+	private UntitledSubPanelLines playersPanel;
 
 	// controls
 	private ArrayList<String> controlTexts = new ArrayList<String>();
@@ -55,18 +72,25 @@ public class ProfilesData extends EntitledDataPanel implements MouseListener
 	private ArrayList<String> colorTooltips = new ArrayList<String>();
 	private ArrayList<Color> colorBackgrounds = new ArrayList<Color>();
 	
+	// profiles
+	private ArrayList<Profile> profiles;
+	
+	// heroes
+	private ArrayList<SpritePreview> heroesPreviews;
 	
 	public ProfilesData(SplitMenuPanel container)
 	{	super(container);
+		
+		// profiles
+		initProfiles();
 	
 		// title
 		String key = GuiKeys.MENU_QUICKMATCH_TITLE;
 		setTitleKey(key);
 		
 		// data
-		{	UntitledSubPanelLines playersPanel = makePlayersPanel(dataWidth,dataHeight);
-			setDataPart(playersPanel);
-		}
+		playersPanel = makePlayersPanel(dataWidth,dataHeight);
+		setDataPart(playersPanel);
 	}
 
 	@Override
@@ -82,12 +106,11 @@ public class ProfilesData extends EntitledDataPanel implements MouseListener
 	private UntitledSubPanelLines makePlayersPanel(int width, int height)
 	{	//Match match = Configuration.getGameConfiguration().getTournament().getCurrentMatch();
 		
-		int lines = 16+1;
 		int headerCols = 6;
 		@SuppressWarnings("unused")
 		int lineCols = 1+4+1+4+3+1;
 		int margin = GuiTools.subPanelMargin;
-		UntitledSubPanelLines playersPanel = new UntitledSubPanelLines(width,height,lines,true);
+		UntitledSubPanelLines playersPanel = new UntitledSubPanelLines(width,height,LINE_COUNT,true);
 		int headerHeight = playersPanel.getHeaderHeight();
 		int lineHeight = playersPanel.getLineHeight();
 		int deleteColWidth = lineHeight;
@@ -95,11 +118,11 @@ public class ProfilesData extends EntitledDataPanel implements MouseListener
 		int colorWidth = initColorTexts(playersPanel.getLineFontSize(),colorTexts,colorTooltips,colorBackgrounds);
 		int colorColWidth = colorWidth + 2*margin + 2*lineHeight;
 		int typeColWidth = headerHeight;
-		int fixedSum = margin*(headerCols+1) +deleteColWidth + controlColWidth + colorColWidth + typeColWidth;
-		int heroColWidth = (width - fixedSum)/2;
-		int nameColWidth = width - fixedSum - heroColWidth;
+		int heroWidth = lineHeight;
+		int heroColWidth = heroWidth + 3*margin + 3*lineHeight;
+		int fixedSum = margin*(headerCols+1) + deleteColWidth + heroColWidth + controlColWidth + colorColWidth + typeColWidth;
+		int nameColWidth = width - fixedSum;
 		int nameWidth = nameColWidth - 3*margin - 3*lineHeight;
-		int heroWidth = heroColWidth - 3*margin - 3*lineHeight;
 		
 		// headers
 		{	String keys[] = 
@@ -134,7 +157,7 @@ public class ProfilesData extends EntitledDataPanel implements MouseListener
 		}
 		
 		// data
-		for(int line=1;line<lines;line++)
+		for(int line=1;line<LINE_COUNT;line++)
 		{	String keys[] = 
 			{	GuiKeys.MENU_QUICKMATCH_PROFILES_PROFILE_DELETE,
 				GuiKeys.MENU_QUICKMATCH_PROFILES_PROFILE_PREVIOUS,
@@ -157,7 +180,7 @@ public class ProfilesData extends EntitledDataPanel implements MouseListener
 				nameWidth,
 				lineHeight,
 				lineHeight,
-				headerHeight,
+				typeColWidth,
 				lineHeight,
 				heroWidth,
 				lineHeight,
@@ -186,16 +209,85 @@ public class ProfilesData extends EntitledDataPanel implements MouseListener
 		}
 
 		return playersPanel;	
+	}
+	
+	private void refreshPlayers()
+	{	int line = 1;
+		for(Profile profile: profiles)
+		{	Line ln = playersPanel.getLine(line);
+			String profileType;
+			if(profile.hasAi())
+				profileType = GuiKeys.MENU_QUICKMATCH_PROFILES_TYPE_COMPUTER;
+			else
+				profileType = GuiKeys.MENU_QUICKMATCH_PROFILES_TYPE_HUMAN;
+			String keys[] = 
+			{	GuiKeys.MENU_QUICKMATCH_PROFILES_PROFILE_DELETE,
+				GuiKeys.MENU_QUICKMATCH_PROFILES_PROFILE_PREVIOUS,
+				profile.getName(),
+				GuiKeys.MENU_QUICKMATCH_PROFILES_PROFILE_NEXT,
+				GuiKeys.MENU_QUICKMATCH_PROFILES_PROFILE_BROWSE,
+				profileType,
+				GuiKeys.MENU_QUICKMATCH_PROFILES_HERO_PREVIOUS,
+				null,
+				GuiKeys.MENU_QUICKMATCH_PROFILES_HERO_NEXT,
+				GuiKeys.MENU_QUICKMATCH_PROFILES_HERO_BROWSE,
+				GuiKeys.MENU_QUICKMATCH_PROFILES_COLOR_PREVIOUS,
+				null,
+				GuiKeys.MENU_QUICKMATCH_PROFILES_COLOR_NEXT,
+				null
+			};
+			for(int col=0;col<keys.length;col++)
+			{	Color bg;
+				if(keys[col]!=null)
+				{	ln.setLabelKey(col,keys[col],true);
+					bg = GuiTools.COLOR_TABLE_HEADER_BACKGROUND;
+				}
+				else
+					bg = GuiTools.COLOR_TABLE_REGULAR_BACKGROUND;
+				ln.setLabelBackground(col,bg);
+			}
+			
+/* TODO
+ * make : header + lignes sizées REMPLIES puis vides
+ * refresh : non, mais plutot ajouter ou supprimer une ligne
+ */
+			
+			
+			// name
+			// type
+			// hero
+			// color
+			// controls
+			
+			// color
+			String colorKey = profile.getSpriteColor().toString();
+			colorKey = colorKey.toUpperCase().substring(0,1)+colorKey.toLowerCase().substring(1,colorKey.length());
+			colorKey = GuiKeys.COLOR+colorKey;
+			// controls
+			int ctrlIndex = profile.getControlSettingsIndex();
+			String controlText = controlTexts.get(ctrlIndex);
+//			controlTooltips.get(index));
+						
+			heroesPreviews.get(profiles.indexOf(profile)).			
+			
 		
-		
-		
-		
-//TODO une seule ligne avec les boutons au début, puis faire apparaitre au fur et à mesure		
-		
-		
-		
-		
-		
+			
+			line++;
+		}
+		while(line<LINE_COUNT)
+		{	Line ln = playersPanel.getLine(line);
+			int cols = ln.getColumnCount();
+			for(int col=0;col<cols;col++)
+			{	JLabel lbl = ln.getLabel(col);
+				lbl.setText(null);
+				lbl.setToolTipText(null);
+				lbl.setIcon(null);
+				lbl.removeMouseListener(this);
+				Color bg = GuiTools.COLOR_TABLE_NEUTRAL_BACKGROUND;
+				ln.setLabelBackground(col,bg);
+			}
+			line++;
+		}
 	}
 
 /*	
@@ -322,5 +414,50 @@ public class ProfilesData extends EntitledDataPanel implements MouseListener
 				result = temp;
 		}
 		return result;
+	}
+
+	private void initProfiles()
+	{	ProfilesConfiguration profilesConfiguration = Configuration.getProfilesConfiguration();
+		ArrayList<String> selectedProfiles = profilesConfiguration.getSelected();
+		HashMap<String,String> hashProfileFiles = profilesConfiguration.getProfiles();
+		profiles = new ArrayList<Profile>();
+		//TODO à faire en amont, il faudrait avoir une liste de profils courants pré-chargés
+		//ce qui permettrait de sortir et revenir de cet écran sans que les réglages ne soient modifiés
+		for(String profileName : selectedProfiles)
+		{	String fileName = hashProfileFiles.get(profileName);
+			try
+			{	Profile profile = ProfileLoader.loadProfile(fileName);
+				profiles.add(profile);			
+			}
+			catch (IllegalArgumentException e)
+			{	e.printStackTrace();
+			}
+			catch (SecurityException e)
+			{	e.printStackTrace();
+			}
+			catch (ParserConfigurationException e)
+			{	e.printStackTrace();
+			}
+			catch (SAXException e)
+			{	e.printStackTrace();
+			}
+			catch (IOException e)
+			{	e.printStackTrace();
+			}
+			catch (IllegalAccessException e)
+			{	e.printStackTrace();
+			}
+			catch (NoSuchFieldException e)
+			{	e.printStackTrace();
+			}
+			catch (ClassNotFoundException e)
+			{	e.printStackTrace();
+			}
+		}		
+	}
+	
+	private void initHeroes()
+	{	
+		
 	}
 }

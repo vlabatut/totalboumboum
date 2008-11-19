@@ -285,6 +285,8 @@
 				</group>
 
 				<group name="Type" >
+					<text name="Computer" value="Computer" tooltip="Computer-controlled player" />
+					<text name="Human" value="Human" tooltip="Human-controlled player" />
 					<text name="Value" value="Type" tooltip="Profile type" />
 				</group>
 				
