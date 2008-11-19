@@ -134,17 +134,17 @@ public abstract class AiManager extends AbstractAiManager<AiAction>
 				}
 				break;
 			case DROP_BOMB :
-			{	reactionStop(result);
+				reactionStop(result);
 				event = new ControlEvent(ControlEvent.DROPBOMB,true);
 				result.add(event);
 				event = new ControlEvent(ControlEvent.DROPBOMB,false);
-			}
+				break;
 			case PUNCH :
-			{	reactionStop(result);
+				reactionStop(result);
 				event = new ControlEvent(ControlEvent.PUNCHBOMB,true);
 				result.add(event);
 				event = new ControlEvent(ControlEvent.PUNCHBOMB,false);
-			}
+				break;
 		}
 		// 
 		return result;

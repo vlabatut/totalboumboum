@@ -136,3 +136,7 @@
 
 + beta.006
 - modification : méthode permettant d'avoir le temps écoulé entre deux mises à jour de l'IA dans AiZone
+
++ beta.007
+- modification : accès à la durée normale d'une bombe (avant explosion) depuis la classe AiBomb
+- correction : bug dans l'API d'IA qui faisait un punch juste après chaque drop.
