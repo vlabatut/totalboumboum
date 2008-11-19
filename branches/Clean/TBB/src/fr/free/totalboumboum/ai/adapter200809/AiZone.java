@@ -325,7 +325,10 @@ public class AiZone
 	
 	/** 
 	 * renvoie la liste des blocks contenues dans cette zone
-	 * (la liste peut être vide)
+	 * (la liste peut être vide). 
+	 * Cette instance de liste change à chaque appel de l'IA. 
+	 * Il ne faut donc pas réutiliser la même liste, mais redemander la nouvelle
+	 * liste en utilisant cette méthode.
 	 * 
 	 * @return	liste de tous les blocs contenus dans cette zone
 	 */
@@ -363,6 +366,9 @@ public class AiZone
 	/** 
 	 * renvoie la liste des bombes contenues dans cette zone 
 	 * (la liste peut être vide)
+	 * Cette instance de liste change à chaque appel de l'IA. 
+	 * Il ne faut donc pas réutiliser la même liste, mais redemander la nouvelle
+	 * liste en utilisant cette méthode.
 	 * 
 	 * @return	liste de toutes les bombes contenues dans cette zone
 	 */
@@ -400,6 +406,9 @@ public class AiZone
 	/** 
 	 * renvoie la liste des feux contenus dans cette zone 
 	 * (la liste peut être vide)
+	 * Cette instance de liste change à chaque appel de l'IA. 
+	 * Il ne faut donc pas réutiliser la même liste, mais redemander la nouvelle
+	 * liste en utilisant cette méthode.
 	 * 
 	 * @return	liste de tous les feux contenus dans cette zone
 	 */
@@ -436,6 +445,9 @@ public class AiZone
 	
 	/** 
 	 * renvoie la liste des sols contenus dans cette zone 
+	 * Cette instance de liste change à chaque appel de l'IA. 
+	 * Il ne faut donc pas réutiliser la même liste, mais redemander la nouvelle
+	 * liste en utilisant cette méthode.
 	 * 
 	 * @return	liste de tous les sols contenus dans cette zone
 	 */
@@ -473,6 +485,9 @@ public class AiZone
 	/** 
 	 * renvoie la liste des personnages contenus dans cette zone 
 	 * (les joueurs éliminés n'apparaissent plus dans cette liste ni dans cette représentation de la zone)
+	 * Cette instance de liste change à chaque appel de l'IA. 
+	 * Il ne faut donc pas réutiliser la même liste, mais redemander la nouvelle
+	 * liste en utilisant cette méthode.
 	 * 
 	 * @return	liste de tous les joueurs contenus dans cette zone
 	 */
@@ -510,6 +525,9 @@ public class AiZone
 	/** 
 	 * renvoie la liste des items apparents contenus dans cette zone 
 	 * (la liste peut être vide)
+	 * Cette instance de liste change à chaque appel de l'IA. 
+	 * Il ne faut donc pas réutiliser la même liste, mais redemander la nouvelle
+	 * liste en utilisant cette méthode.
 	 * 
 	 * @return	liste de tous les items contenus dans cette zone
 	 */
