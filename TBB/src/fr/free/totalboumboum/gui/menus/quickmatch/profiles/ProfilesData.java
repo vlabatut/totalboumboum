@@ -24,38 +24,27 @@ package fr.free.totalboumboum.gui.menus.quickmatch.profiles;
 import java.awt.Color;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
-import java.awt.image.BufferedImage;
-import java.text.NumberFormat;
 import java.util.ArrayList;
-import java.util.Iterator;
 
-import javax.swing.Box;
-import javax.swing.BoxLayout;
 import javax.swing.JLabel;
-import javax.swing.JPanel;
 
 import fr.free.totalboumboum.configuration.Configuration;
 import fr.free.totalboumboum.configuration.GameConstants;
-import fr.free.totalboumboum.configuration.profile.Portraits;
 import fr.free.totalboumboum.configuration.profile.PredefinedColor;
 import fr.free.totalboumboum.configuration.profile.Profile;
-import fr.free.totalboumboum.game.match.Match;
 import fr.free.totalboumboum.gui.common.panel.SplitMenuPanel;
 import fr.free.totalboumboum.gui.common.panel.data.EntitledDataPanel;
 import fr.free.totalboumboum.gui.common.subpanel.Line;
-import fr.free.totalboumboum.gui.common.subpanel.SubPanel;
 import fr.free.totalboumboum.gui.common.subpanel.UntitledSubPanelLines;
 import fr.free.totalboumboum.gui.common.subpanel.UntitledSubPanelTable;
 import fr.free.totalboumboum.gui.data.configuration.GuiConfiguration;
 import fr.free.totalboumboum.gui.game.match.description.MatchDescription;
-import fr.free.totalboumboum.gui.game.round.description.RoundDescription;
 import fr.free.totalboumboum.gui.tools.GuiKeys;
 import fr.free.totalboumboum.gui.tools.GuiTools;
 
 public class ProfilesData extends EntitledDataPanel implements MouseListener
 {	
 	private static final long serialVersionUID = 1L;
-	private static final float SPLIT_RATIO = 0.6f;
 	private UntitledSubPanelTable playersPanel;
 
 	// controls

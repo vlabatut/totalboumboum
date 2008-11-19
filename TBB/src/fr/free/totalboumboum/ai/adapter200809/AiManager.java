@@ -118,32 +118,26 @@ public abstract class AiManager extends AbstractAiManager<AiAction>
 		AiActionName name = value.getName();
 		Direction direction = value.getDirection();
 		ControlEvent event;
-		String code;
 		switch(name)
 		{	case NONE:
 				reactionStop(result);
 				break;
 			case MOVE:
-				if(lastMove!=direction)
-					reactionStop(result);
-				if(direction!=Direction.NONE)
-				{	code = ControlEvent.getCodeFromDirection(direction);
-					event = new ControlEvent(code,true);
-					result.add(event);
-					lastMove = direction;
-				}
+				updateMove(result,direction);
 				break;
 			case DROP_BOMB :
 				reactionStop(result);
 				event = new ControlEvent(ControlEvent.DROPBOMB,true);
 				result.add(event);
 				event = new ControlEvent(ControlEvent.DROPBOMB,false);
+				result.add(event);
 				break;
 			case PUNCH :
 				reactionStop(result);
 				event = new ControlEvent(ControlEvent.PUNCHBOMB,true);
 				result.add(event);
 				event = new ControlEvent(ControlEvent.PUNCHBOMB,false);
+				result.add(event);
 				break;
 		}
 		// 
@@ -158,10 +152,51 @@ public abstract class AiManager extends AbstractAiManager<AiAction>
 	 */
 	private void reactionStop(ArrayList<ControlEvent> result)
 	{	if(lastMove!=Direction.NONE)
-		{	String code = ControlEvent.getCodeFromDirection(lastMove);
-			ControlEvent event = new ControlEvent(code,false);
-			result.add(event);
+		{	Direction prim[] = lastMove.getPrimaries();
+			for(int i=0;i<prim.length;i++)
+			{	if(prim[i]!=Direction.NONE)
+				{	String code = ControlEvent.getCodeFromPrimaryDirection(prim[i]);
+					ControlEvent event = new ControlEvent(code,false);
+					result.add(event);
+				}
+			}
 			lastMove = Direction.NONE;
 		}
+	}
+	
+	/**
+	 * active les évènements nécessaires à un changement de direction,
+	 * en simulant un joueur humain qui appuierait sur des touches
+	 * @param result
+	 * @param direction
+	 */
+	private void updateMove(ArrayList<ControlEvent> result, Direction direction)
+	{	// init
+		Direction prim1[] = lastMove.getPrimaries();
+		Direction prim2[] = direction.getPrimaries();
+		String code;
+		ControlEvent event;
+		// events
+		for(int i=0;i<prim1.length;i++)
+		{	if(prim1[i]!=prim2[i])
+			{	if(prim1[i]!=Direction.NONE)
+				{	code = ControlEvent.getCodeFromPrimaryDirection(prim1[i]);
+					event = new ControlEvent(code,false);
+					result.add(event);
+				}
+				if(prim2[i]!=Direction.NONE)
+				{	code = ControlEvent.getCodeFromPrimaryDirection(prim2[i]);
+					event = new ControlEvent(code,true);
+					result.add(event);
+				}
+			}
+			else if(prim2[i]!=Direction.NONE)
+			{	code = ControlEvent.getCodeFromPrimaryDirection(prim2[i]);
+				event = new ControlEvent(code,true);
+				result.add(event);
+			}
+		}
+		// new direction
+		lastMove = direction;
 	}
 }

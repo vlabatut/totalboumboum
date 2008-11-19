@@ -84,7 +84,7 @@ public class ControlEvent extends AbstractEvent
 		}
 	}
 	
-	public static String getCodeFromDirection(Direction direction)
+	public static String getCodeFromPrimaryDirection(Direction direction)
 	{	String result = null;
 		switch(direction)
 		{	case DOWN:
