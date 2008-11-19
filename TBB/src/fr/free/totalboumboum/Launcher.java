@@ -637,7 +637,7 @@ public class Launcher
 	/*
 	 * TODO
 	 * 
-	 * + beta.007
+	 * + beta.008
 	 * - modification : utilisation d'une image plus foncée pour les fonds de tous les menus sauf le principal
 	 * - modification : correction de quelques bugs dans l'API des IA
 	 * - modification : réorganisation de la gestion des controles

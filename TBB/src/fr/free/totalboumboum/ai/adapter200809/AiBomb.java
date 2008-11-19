@@ -23,6 +23,7 @@ package fr.free.totalboumboum.ai.adapter200809;
 
 import fr.free.totalboumboum.configuration.profile.PredefinedColor;
 import fr.free.totalboumboum.engine.content.feature.GestureConstants;
+import fr.free.totalboumboum.engine.content.feature.ability.StateAbility;
 import fr.free.totalboumboum.engine.content.sprite.bomb.Bomb;
 
 /**
@@ -46,6 +47,7 @@ public class AiBomb extends AiSprite<Bomb>
 	{	super(tile,sprite);
 		initType();
 		initRange();
+		initFuse();
 		updateWorking();
 		initColor();
 	}
@@ -158,5 +160,32 @@ public class AiBomb extends AiSprite<Bomb>
 	private void initColor()
 	{	Bomb sprite = getSprite();
 		color = sprite.getColor();	
+	}
+
+	/////////////////////////////////////////////////////////////////
+	// FUSE		/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	/** délai normal (ie hors-panne) avant l'explosion de la bombe */
+	private long normalDuration;
+
+	/**
+	 * renvoie le délai normal avant l'explosion de la bombe.
+	 * Ce délai ne tient pas compte des pannes éventuelles.
+	 * Ce délai n'est pas défini pour tous les types de bombes
+	 * 
+	 * @return	le délai normal avant explosion exprimé en millisecondes
+	 */
+	public long getNormalDuration()
+	{	return normalDuration;
+	}
+
+	/**
+	 * initialisation des paramètres liés à l'explosion de la bombe
+	 */
+	private void initFuse()
+	{	// theoretic delay before explosion 
+		{	StateAbility ability = getSprite().computeAbility(StateAbility.BOMB_TRIGGER_TIMER);
+			normalDuration = (long)ability.getStrength();		
+		}
 	}
 }
