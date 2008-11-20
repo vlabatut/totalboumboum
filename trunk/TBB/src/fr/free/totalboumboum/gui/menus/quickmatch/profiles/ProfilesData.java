@@ -471,5 +471,6 @@ public class ProfilesData extends EntitledDataPanel implements MouseListener
 		int index = (currentColorIndex+1) % preferredColors.size();
 		result = preferredColors.get(index);
 		return result;
+//TODO tester la compatibilité avec le perso !		
 	}
 }
