@@ -132,7 +132,7 @@ public class MatchResults extends EntitledDataPanel
 			PlayerPoints pp = i.next();
 			Profile profile = players.get(pp.getIndex());
 			// color
-			Color clr = players.get(pp.getIndex()).getSpriteColor().getColor();
+			Color clr = players.get(pp.getIndex()).getSpriteSelectedColor().getColor();
 			// portrait
 			{	BufferedImage image = profile.getPortraits().getOutgamePortrait(Portraits.OUTGAME_HEAD);
 				String tooltip = pp.getPlayer();

@@ -68,7 +68,7 @@ public class Player
 	{	this.level = level;
 		this.profile = profile;
 		// sprite
-		color = this.profile.getSpriteColor();
+		color = this.profile.getSpriteSelectedColor();
 		String folder = FileTools.getHeroesPath()+File.separator+this.profile.getSpritePack();
 		folder = folder + File.separator+this.profile.getSpriteFolder();
 		HeroFactory tempHeroFactory = HeroFactoryLoader.loadHeroFactory(folder,level,color,ablts,permissions,trajectories);

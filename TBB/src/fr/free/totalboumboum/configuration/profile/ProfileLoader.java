@@ -105,7 +105,7 @@ public class ProfileLoader
 		result.setSpriteName(spriteName);
     	
     	// portraits
-    	PredefinedColor spriteColor = result.getSpriteColor();
+    	PredefinedColor spriteColor = result.getSpriteSelectedColor();
     	String folder = FileTools.getHeroesPath() + File.separator + spritePackname;
     	folder = folder + File.separator + spriteFolder;
     	Portraits portraits = PortraitsLoader.loadPortraits(folder,spriteColor);

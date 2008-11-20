@@ -150,7 +150,7 @@ public class MatchDescription extends EntitledDataPanel implements MouseListener
 			{	int col = 0;
 				Profile profile = i.next();
 				// color
-				Color clr = profile.getSpriteColor().getColor();
+				Color clr = profile.getSpriteSelectedColor().getColor();
 				int alpha = GuiTools.ALPHA_TABLE_REGULAR_BACKGROUND_LEVEL3;
 				Color bg = new Color(clr.getRed(),clr.getGreen(),clr.getBlue(),alpha);
 				playersPanel.setLineBackground(line,bg);

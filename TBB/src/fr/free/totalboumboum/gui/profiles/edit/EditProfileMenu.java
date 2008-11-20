@@ -89,14 +89,7 @@ public class EditProfileMenu extends InnerMenuPanel
 	public void actionPerformed(ActionEvent e)
 	{	if(e.getActionCommand().equals(GuiKeys.MENU_PROFILES_BUTTON_CONFIRM))
 		{	Profile newProfile = profileData.getProfile();
-			boolean hasChanged = 
-				profile.hasAi() && (!profile.getAiName().equals(newProfile.getAiName())
-						|| profile.getAiPackname().equals(newProfile.getAiPackname()))
-				|| profile.getName().equals(newProfile.getName())
-				|| profile.getSpriteColor().equals(newProfile.getSpriteColor())
-				|| profile.getSpriteFolder().equals(newProfile.getSpriteFolder())
-				|| profile.getSpritePack().equals(newProfile.getSpritePack());
-			if(hasChanged)
+			if(!profile.isTheSame(newProfile))
 			{	try
 				{	ProfileSaver.saveProfile(newProfile,profileFile);
 					if(!profile.getName().equals(newProfile.getName()))

@@ -127,7 +127,7 @@ public class RoundResults extends EntitledDataPanel
 			PlayerPoints pp = i.next();
 			Profile profile = players.get(pp.getIndex());
 			// color
-			Color clr = profile.getSpriteColor().getColor();
+			Color clr = profile.getSpriteSelectedColor().getColor();
 			// portrait
 			{	BufferedImage image = profile.getPortraits().getOutgamePortrait(Portraits.OUTGAME_HEAD);
 				String tooltip = pp.getPlayer();
