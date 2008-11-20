@@ -55,6 +55,7 @@ public class Profile
 	private String spriteFolder;
 	private String spriteName;
 	private PredefinedColor[] spriteColors;
+	private PredefinedColor spriteSelectedColor;
 
 	public String getSpritePack()
 	{	return spritePack;
@@ -84,16 +85,26 @@ public class Profile
 	{	this.spriteName = spriteName;
 	}
 
-	public PredefinedColor getSpriteColor()
-	{	PredefinedColor result = null;
-		int i = 0;
-		while(result==null && i<spriteColors.length)
-		{	if(spriteColors[i]!=null)
-				result = spriteColors[i];
-			else
+	public PredefinedColor getSpriteSelectedColor()
+	{	PredefinedColor result = spriteSelectedColor;
+		if(result==null)
+		{	int i = 0;
+			while(spriteColors[i]==null && i<spriteColors.length)
 				i++;
+			if(i<spriteColors.length)
+			{	spriteSelectedColor = spriteColors[i];
+				result = spriteSelectedColor;
+			}
 		}
 		return result;
+	}
+	
+	public void setSpriteSelectedColor(PredefinedColor spriteSelectedColor)
+	{	this.spriteSelectedColor = spriteSelectedColor;		
+	}
+	
+	public void setSpriteName(PredefinedColor spriteSelectedColor)
+	{	this.spriteSelectedColor = spriteSelectedColor;
 	}
 	
 	public void setSpriteColor(PredefinedColor spriteColor, int index)
@@ -184,4 +195,20 @@ public class Profile
 		return result;
 	}
 
+	public boolean isTheSame(Profile profile)
+	{	boolean result = true;
+		result = result && hasAi()==profile.hasAi();
+		if(hasAi())
+		{	result = result && aiName.equals(profile.getAiName());
+			result = result && aiPackname.equals(profile.getAiPackname());
+		}
+		result = result && name.equals(profile.getName());
+		result = result && spriteSelectedColor == profile.getSpriteSelectedColor();
+		for(int i=0;i<spriteColors.length;i++)
+		{	result = result && spriteColors[i]==profile.getSpriteColors()[i];			
+		}
+		result = result && spriteFolder.equals(profile.getSpriteFolder());
+		result = result && spritePack.equals(profile.getSpritePack());
+		return result;
+	}
 }

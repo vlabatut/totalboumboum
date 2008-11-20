@@ -146,7 +146,7 @@ public class QuickResults extends JPanel
 				PlayerPoints pp = i.next();
 				Profile profile = players.get(pp.getIndex());
 				// color
-				Color clr = profile.getSpriteColor().getColor();
+				Color clr = profile.getSpriteSelectedColor().getColor();
 				// name
 				{	JLabel nameLabel = getLabel(line, col++);
 					nameLabel.setText(pp.getPlayer());
