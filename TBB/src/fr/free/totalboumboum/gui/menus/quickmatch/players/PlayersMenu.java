@@ -38,7 +38,7 @@ import fr.free.totalboumboum.gui.menus.quickmatch.match.MatchSplitPanel;
 import fr.free.totalboumboum.gui.tools.GuiKeys;
 import fr.free.totalboumboum.gui.tools.GuiTools;
 
-public class ProfilesMenu extends InnerMenuPanel
+public class PlayersMenu extends InnerMenuPanel
 {	private static final long serialVersionUID = 1L;
 	
 	private MatchSplitPanel matchSplitPanel;
@@ -54,7 +54,7 @@ public class ProfilesMenu extends InnerMenuPanel
 	@SuppressWarnings("unused")
 	private JButton buttonNext;
 	
-	public ProfilesMenu(SplitMenuPanel container, MenuPanel parent)
+	public PlayersMenu(SplitMenuPanel container, MenuPanel parent)
 	{	super(container,parent);
 	
 		// layout
