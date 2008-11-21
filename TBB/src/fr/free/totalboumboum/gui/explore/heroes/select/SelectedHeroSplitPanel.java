@@ -1,4 +1,4 @@
-package fr.free.totalboumboum.gui.ais.select;
+package fr.free.totalboumboum.gui.explore.heroes.select;
 
 /*
  * Total Boum Boum
@@ -31,19 +31,19 @@ import fr.free.totalboumboum.gui.common.panel.menu.MenuPanel;
 import fr.free.totalboumboum.gui.data.configuration.GuiConfiguration;
 import fr.free.totalboumboum.gui.tools.GuiTools;
 
-public class SelectedAiSplitPanel extends SplitMenuPanel
+public class SelectedHeroSplitPanel extends SplitMenuPanel
 {	private static final long serialVersionUID = 1L; 
 
 	private BufferedImage image;
 
-	public SelectedAiSplitPanel(MenuContainer container, MenuPanel parent)
+	public SelectedHeroSplitPanel(MenuContainer container, MenuPanel parent)
 	{	super(container,parent,BorderLayout.LINE_START,GuiTools.VERTICAL_SPLIT_RATIO);
 	
 		// background
 		image = GuiConfiguration.getMiscConfiguration().getDarkBackground();
 		
 		// panels
-		setMenuPart(new SelectedAiMenu(this,parent));
+		setMenuPart(new SelectedHeroMenu(this,parent));
 	}
 	
 	@Override

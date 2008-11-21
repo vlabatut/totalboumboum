@@ -37,13 +37,13 @@ import org.xml.sax.SAXException;
 
 import fr.free.totalboumboum.configuration.Configuration;
 import fr.free.totalboumboum.game.tournament.AbstractTournament;
-import fr.free.totalboumboum.gui.ais.select.SelectedAiSplitPanel;
 import fr.free.totalboumboum.gui.common.MenuContainer;
 import fr.free.totalboumboum.gui.common.panel.menu.MenuPanel;
 import fr.free.totalboumboum.gui.common.panel.menu.SimpleMenuPanel;
 import fr.free.totalboumboum.gui.data.configuration.GuiConfiguration;
-import fr.free.totalboumboum.gui.heroes.select.SelectedHeroSplitPanel;
-import fr.free.totalboumboum.gui.levels.select.SelectedLevelSplitPanel;
+import fr.free.totalboumboum.gui.explore.ais.select.SelectedAiSplitPanel;
+import fr.free.totalboumboum.gui.explore.heroes.select.SelectedHeroSplitPanel;
+import fr.free.totalboumboum.gui.explore.levels.select.SelectedLevelSplitPanel;
 import fr.free.totalboumboum.gui.menus.quickmatch.profiles.ProfilesSplitPanel;
 import fr.free.totalboumboum.gui.menus.tournament.TournamentSplitPanel;
 import fr.free.totalboumboum.gui.options.OptionsSplitPanel;
