@@ -37,77 +37,80 @@ public class GuiKeys
 	/* MAIN */ 
 	public static final String MENU_MAIN_BUTTON = "MenuMainButton";
 	public static final String MENU_MAIN_BUTTON_ABOUT = MENU_MAIN_BUTTON+"About";
-	public static final String MENU_MAIN_BUTTON_AI = MENU_MAIN_BUTTON+"Ai";
-	public static final String MENU_MAIN_BUTTON_HEROES = MENU_MAIN_BUTTON+"Heroes";
-	public static final String MENU_MAIN_BUTTON_LEVELS = MENU_MAIN_BUTTON+"Levels";
 	public static final String MENU_MAIN_BUTTON_OPTIONS = MENU_MAIN_BUTTON+"Options";
 	public static final String MENU_MAIN_BUTTON_PROFILES = MENU_MAIN_BUTTON+"Profiles";
 	public static final String MENU_MAIN_BUTTON_QUICKMATCH = MENU_MAIN_BUTTON+"QuickMatch";
+	public static final String MENU_MAIN_BUTTON_RESOURCES = MENU_MAIN_BUTTON+"Resources";
 	public static final String MENU_MAIN_BUTTON_STATISTICS = MENU_MAIN_BUTTON+"Statistics";
 	public static final String MENU_MAIN_BUTTON_TOURNAMENT = MENU_MAIN_BUTTON+"Tournament";
 	
-	/* AI */
-		/* BUTTON */
-		public static final String MENU_AI_BUTTON = "MenuAiButton";	
-		public static final String MENU_AI_BUTTON_BACK = MENU_AI_BUTTON+"Back";	
-		/* SELECT */
-		public static final String MENU_AI_SELECT_TITLE = "MenuAiSelectTitle";
-			/* CLASS */
-			public static final String MENU_AI_SELECT_CLASS_PAGEDOWN = "MenuAiSelectClassPageDown";
-			public static final String MENU_AI_SELECT_CLASS_PAGEUP = "MenuAiSelectClassPageUp";
-			public static final String MENU_AI_SELECT_CLASS_PARENT = "MenuAiSelectClassParent";
-			/* PACKAGES */
-			public static final String MENU_AI_SELECT_PACKAGE_PAGEDOWN = "MenuAiSelectPackagePageDown";
-			public static final String MENU_AI_SELECT_PACKAGE_PAGEUP = "MenuAiSelectPackagePageUp";
-			/* PREVIEW */
-			public static final String MENU_AI_SELECT_PREVIEW_AUTHOR = "MenuAiSelectPreviewAuthor";
-			public static final String MENU_AI_SELECT_PREVIEW_NAME = "MenuAiSelectPreviewName";
-			public static final String MENU_AI_SELECT_PREVIEW_NOTES = "MenuAiSelectPreviewNotes";
-			public static final String MENU_AI_SELECT_PREVIEW_PACKAGE = "MenuAiSelectPreviewPackage";
-			
-	/* HERO */
-		/* BUTTON */
-		public static final String MENU_HERO_BUTTON = "MenuHeroButton";	
-		public static final String MENU_HERO_BUTTON_BACK = MENU_HERO_BUTTON+"Back";	
-		/* SELECT */
-		public static final String MENU_HERO_SELECT_TITLE = "MenuHeroSelectTitle";
-			/* FOLDER */
-			public static final String MENU_HERO_SELECT_FOLDER_PAGEDOWN = "MenuHeroSelectFolderPageDown";
-			public static final String MENU_HERO_SELECT_FOLDER_PAGEUP = "MenuHeroSelectFolderPageUp";
-			public static final String MENU_HERO_SELECT_FOLDER_PARENT = "MenuHeroSelectFolderParent";
-			/* PACKAGES */
-			public static final String MENU_HERO_SELECT_PACKAGE_PAGEDOWN = "MenuHeroSelectPackagePageDown";
-			public static final String MENU_HERO_SELECT_PACKAGE_PAGEUP = "MenuHeroSelectPackagePageUp";
-			/* PREVIEW */
-			public static final String MENU_HERO_SELECT_PREVIEW_AUTHOR = "MenuHeroSelectPreviewAuthor";
-			public static final String MENU_HERO_SELECT_PREVIEW_COLORS = "MenuHeroSelectPreviewColors";
-			public static final String MENU_HERO_SELECT_PREVIEW_IMAGE = "MenuHeroSelectPreviewImage";
-			public static final String MENU_HERO_SELECT_PREVIEW_NAME = "MenuHeroSelectPreviewName";
-			public static final String MENU_HERO_SELECT_PREVIEW_PACKAGE = "MenuHeroSelectPreviewPackage";
-			public static final String MENU_HERO_SELECT_PREVIEW_SOURCE = "MenuHeroSelectPreviewSource";
-			
-	/* LEVEL */
-		/* BUTTON */
-		public static final String MENU_LEVEL_BUTTON = "MenuLevelButton";	
-		public static final String MENU_LEVEL_BUTTON_BACK = MENU_LEVEL_BUTTON+"Back";	
-		/* SELECT */
-		public static final String MENU_LEVEL_SELECT_TITLE = "MenuLevelSelectTitle";
-			/* FOLDER */
-			public static final String MENU_LEVEL_SELECT_FOLDER_PAGEDOWN = "MenuLevelSelectFolderPageDown";
-			public static final String MENU_LEVEL_SELECT_FOLDER_PAGEUP = "MenuLevelSelectFolderPageUp";
-			public static final String MENU_LEVEL_SELECT_FOLDER_PARENT = "MenuLevelSelectFolderParent";
-			/* PACKAGES */
-			public static final String MENU_LEVEL_SELECT_PACKAGE_PAGEDOWN = "MenuLevelSelectPackagePageDown";
-			public static final String MENU_LEVEL_SELECT_PACKAGE_PAGEUP = "MenuLevelSelectPackagePageUp";
-			/* PREVIEW */
-			public static final String MENU_LEVEL_SELECT_PREVIEW_AUTHOR = "MenuLevelSelectPreviewAuthor";
-			public static final String MENU_LEVEL_SELECT_PREVIEW_IMAGE = "MenuLevelSelectPreviewImage";
-			public static final String MENU_LEVEL_SELECT_PREVIEW_INSTANCE = "MenuLevelSelectPreviewInstance";
-			public static final String MENU_LEVEL_SELECT_PREVIEW_NAME = "MenuLevelSelectPreviewName";
-			public static final String MENU_LEVEL_SELECT_PREVIEW_PACKAGE = "MenuLevelSelectPreviewPackage";
-			public static final String MENU_LEVEL_SELECT_PREVIEW_SIZE = "MenuLevelSelectPreviewSize";
-			public static final String MENU_LEVEL_SELECT_PREVIEW_SOURCE = "MenuLevelSelectPreviewSource";
-			public static final String MENU_LEVEL_SELECT_PREVIEW_THEME = "MenuLevelSelectPreviewTheme";
+	/* RESOURCES */
+	public static final String MENU_RESOURCES_BUTTON = "MenuResourcesButton";
+	public static final String MENU_RESOURCES_BUTTON_AI = MENU_RESOURCES_BUTTON+"Ai";
+	public static final String MENU_RESOURCES_BUTTON_BACK = MENU_RESOURCES_BUTTON+"Back";
+	public static final String MENU_RESOURCES_BUTTON_HEROES = MENU_RESOURCES_BUTTON+"Heroes";
+	public static final String MENU_RESOURCES_BUTTON_INSTANCES = MENU_RESOURCES_BUTTON+"Instances";
+	public static final String MENU_RESOURCES_BUTTON_LEVELS = MENU_RESOURCES_BUTTON+"Levels";
+		/* AI */
+			/* BUTTON */
+			public static final String MENU_RESOURCES_AI_BUTTON = "MenuResourcesAiButton";	
+			public static final String MENU_RESOURCES_AI_BUTTON_BACK = MENU_RESOURCES_AI_BUTTON+"Back";	
+			/* SELECT */
+			public static final String MENU_RESOURCES_AI_SELECT_TITLE = "MenuResourcesAiSelectTitle";
+				/* CLASS */
+				public static final String MENU_RESOURCES_AI_SELECT_CLASS_PAGEDOWN = "MenuResourcesAiSelectClassPageDown";
+				public static final String MENU_RESOURCES_AI_SELECT_CLASS_PAGEUP = "MenuResourcesAiSelectClassPageUp";
+				public static final String MENU_RESOURCES_AI_SELECT_CLASS_PARENT = "MenuResourcesAiSelectClassParent";
+				/* PACKAGES */
+				public static final String MENU_RESOURCES_AI_SELECT_PACKAGE_PAGEDOWN = "MenuResourcesAiSelectPackagePageDown";
+				public static final String MENU_RESOURCES_AI_SELECT_PACKAGE_PAGEUP = "MenuResourcesAiSelectPackagePageUp";
+				/* PREVIEW */
+				public static final String MENU_RESOURCES_AI_SELECT_PREVIEW_AUTHOR = "MenuResourcesAiSelectPreviewAuthor";
+				public static final String MENU_RESOURCES_AI_SELECT_PREVIEW_NAME = "MenuResourcesAiSelectPreviewName";
+				public static final String MENU_RESOURCES_AI_SELECT_PREVIEW_NOTES = "MenuResourcesAiSelectPreviewNotes";
+				public static final String MENU_RESOURCES_AI_SELECT_PREVIEW_PACKAGE = "MenuResourcesAiSelectPreviewPackage";			
+		/* HERO */
+			/* BUTTON */
+			public static final String MENU_RESOURCES_HERO_BUTTON = "MenuResourcesHeroButton";	
+			public static final String MENU_RESOURCES_HERO_BUTTON_BACK = MENU_RESOURCES_HERO_BUTTON+"Back";	
+			/* SELECT */
+			public static final String MENU_RESOURCES_HERO_SELECT_TITLE = "MenuResourcesHeroSelectTitle";
+				/* FOLDER */
+				public static final String MENU_RESOURCES_HERO_SELECT_FOLDER_PAGEDOWN = "MenuResourcesHeroSelectFolderPageDown";
+				public static final String MENU_RESOURCES_HERO_SELECT_FOLDER_PAGEUP = "MenuResourcesHeroSelectFolderPageUp";
+				public static final String MENU_RESOURCES_HERO_SELECT_FOLDER_PARENT = "MenuResourcesHeroSelectFolderParent";
+				/* PACKAGES */
+				public static final String MENU_RESOURCES_HERO_SELECT_PACKAGE_PAGEDOWN = "MenuResourcesHeroSelectPackagePageDown";
+				public static final String MENU_RESOURCES_HERO_SELECT_PACKAGE_PAGEUP = "MenuResourcesHeroSelectPackagePageUp";
+				/* PREVIEW */
+				public static final String MENU_RESOURCES_HERO_SELECT_PREVIEW_AUTHOR = "MenuResourcesHeroSelectPreviewAuthor";
+				public static final String MENU_RESOURCES_HERO_SELECT_PREVIEW_COLORS = "MenuResourcesHeroSelectPreviewColors";
+				public static final String MENU_RESOURCES_HERO_SELECT_PREVIEW_IMAGE = "MenuResourcesHeroSelectPreviewImage";
+				public static final String MENU_RESOURCES_HERO_SELECT_PREVIEW_NAME = "MenuResourcesHeroSelectPreviewName";
+				public static final String MENU_RESOURCES_HERO_SELECT_PREVIEW_PACKAGE = "MenuResourcesHeroSelectPreviewPackage";
+				public static final String MENU_RESOURCES_HERO_SELECT_PREVIEW_SOURCE = "MenuResourcesHeroSelectPreviewSource";				
+		/* LEVEL */
+			/* BUTTON */
+			public static final String MENU_RESOURCES_LEVEL_BUTTON = "MenuResourcesLevelButton";	
+			public static final String MENU_RESOURCES_LEVEL_BUTTON_BACK = MENU_RESOURCES_LEVEL_BUTTON+"Back";	
+			/* SELECT */
+			public static final String MENU_RESOURCES_LEVEL_SELECT_TITLE = "MenuResourcesLevelSelectTitle";
+				/* FOLDER */
+				public static final String MENU_RESOURCES_LEVEL_SELECT_FOLDER_PAGEDOWN = "MenuResourcesLevelSelectFolderPageDown";
+				public static final String MENU_RESOURCES_LEVEL_SELECT_FOLDER_PAGEUP = "MenuResourcesLevelSelectFolderPageUp";
+				public static final String MENU_RESOURCES_LEVEL_SELECT_FOLDER_PARENT = "MenuResourcesLevelSelectFolderParent";
+				/* PACKAGES */
+				public static final String MENU_RESOURCES_LEVEL_SELECT_PACKAGE_PAGEDOWN = "MenuResourcesLevelSelectPackagePageDown";
+				public static final String MENU_RESOURCES_LEVEL_SELECT_PACKAGE_PAGEUP = "MenuResourcesLevelSelectPackagePageUp";
+				/* PREVIEW */
+				public static final String MENU_RESOURCES_LEVEL_SELECT_PREVIEW_AUTHOR = "MenuResourcesLevelSelectPreviewAuthor";
+				public static final String MENU_RESOURCES_LEVEL_SELECT_PREVIEW_IMAGE = "MenuResourcesLevelSelectPreviewImage";
+				public static final String MENU_RESOURCES_LEVEL_SELECT_PREVIEW_INSTANCE = "MenuResourcesLevelSelectPreviewInstance";
+				public static final String MENU_RESOURCES_LEVEL_SELECT_PREVIEW_NAME = "MenuResourcesLevelSelectPreviewName";
+				public static final String MENU_RESOURCES_LEVEL_SELECT_PREVIEW_PACKAGE = "MenuResourcesLevelSelectPreviewPackage";
+				public static final String MENU_RESOURCES_LEVEL_SELECT_PREVIEW_SIZE = "MenuResourcesLevelSelectPreviewSize";
+				public static final String MENU_RESOURCES_LEVEL_SELECT_PREVIEW_SOURCE = "MenuResourcesLevelSelectPreviewSource";
+				public static final String MENU_RESOURCES_LEVEL_SELECT_PREVIEW_THEME = "MenuResourcesLevelSelectPreviewTheme";
 			
 	/* OPTIONS */
 		/* BUTTON */

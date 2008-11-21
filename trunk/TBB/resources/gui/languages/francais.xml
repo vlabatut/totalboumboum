@@ -8,97 +8,103 @@
 		<group name="Main">
 			<group name="Button">
 				<text name="About" value="À propos" tooltip="À propos de Total Boum Boum" />
-				<text name="Ai" value="IA" tooltip="Voir les intelligences artificielles disponibles" />
-				<text name="Heroes" value="Personnages" tooltip="Voir les personnages disponibles" />
-				<text name="Levels" value="Niveaux" tooltip="Voir les niveaux disponibles" />
 				<text name="Options" value="Options" tooltip="Accéder aux options générales du jeu" />
 				<text name="Profiles" value="Profils" tooltip="Éditer les profils des joueurs" />
 				<text name="QuickMatch" value="Partie rapide" tooltip="Commencer une partie rapide" />
+				<text name="Resources" value="Ressources" tooltip="Naviguer parmi les ressources disponibles" />
 				<text name="Statistics" value="Statistiques" tooltip="Voir les statistiques des joueurs" />
 				<text name="Tournament" value="Tournoi" tooltip="Commencer un tournoi" />
 			</group>
 		</group>
 
-<!-- AI MENU -->	
-		<group name="Ai">
+<!-- RESOURCES MENU -->
+		<group name="Resources">
 			<group name="Button">
+				<text name="Ai" value="IA" tooltip="Voir les intelligences artificielles disponibles" />
 				<text name="Back" value="Retour" tooltip="Revenir au menu principal" />
-			</group>		
-			<group name="Select">
-				<text name="Title" value="Liste des IA" tooltip="Liste des intelligences artificielles disponibles" />
-				<group name="Class">
-					<text name="PageDown" value="Descendre" tooltip="Revenir à la page d'IA suivante" />
-					<text name="PageUp" value="Monter" tooltip="Aller à la page d'IA précédente" />
-					<text name="Parent" value=".." tooltip="Revenir à la liste des paquets" />
-				</group>
-				<group name="Package">
-					<text name="PageDown" value="Descendre" tooltip="Revenir à la page de paquets suivante" />
-					<text name="PageUp" value="Monter" tooltip="Aller à la page de paquets précédente" />
-				</group>
-				<group name="Preview">
-					<text name="Author" value="Auteur" tooltip="Auteur de l'intelligence artificielle" />
-					<text name="Name" value="Nom" tooltip="Nom de l'intelligence artificielle" />
-					<text name="Notes" value="Notes" tooltip="Notes de l'auteur de l'intelligence artificielle" />
-					<text name="Package" value="Paquet" tooltip="Paquet contenant l'intelligence artificielle" />
-				</group>
+				<text name="Heroes" value="Personnages" tooltip="Voir les personnages disponibles" />
+				<text name="Instances" value="Instances" tooltip="Voir les instances disponibles" />
+				<text name="Levels" value="Niveaux" tooltip="Voir les niveaux disponibles" />
 			</group>
-		</group>	
 
-<!-- HERO MENU -->	
-		<group name="Hero">
-			<group name="Button">
-				<text name="Back" value="Retour" tooltip="Revenir au menu principal" />
-			</group>		
-			<group name="Select">
-				<text name="Title" value="Liste des personnages" tooltip="Liste des personnages disponibles" />
-				<group name="Class">
-					<text name="PageDown" value="Descendre" tooltip="Revenir à la page de personnages suivante" />
-					<text name="PageUp" value="Monter" tooltip="Aller à la page de personnages précédente" />
-					<text name="Parent" value=".." tooltip="Revenir à la liste des paquets" />
+			<group name="Ai">
+				<group name="Button">
+					<text name="Back" value="Retour" tooltip="Revenir au menu principal" />
+				</group>		
+				<group name="Select">
+					<text name="Title" value="Liste des IA" tooltip="Liste des intelligences artificielles disponibles" />
+					<group name="Class">
+						<text name="PageDown" value="Descendre" tooltip="Revenir à la page d'IA suivante" />
+						<text name="PageUp" value="Monter" tooltip="Aller à la page d'IA précédente" />
+						<text name="Parent" value=".." tooltip="Revenir à la liste des paquets" />
+					</group>
+					<group name="Package">
+						<text name="PageDown" value="Descendre" tooltip="Revenir à la page de paquets suivante" />
+						<text name="PageUp" value="Monter" tooltip="Aller à la page de paquets précédente" />
+					</group>
+					<group name="Preview">
+						<text name="Author" value="Auteur" tooltip="Auteur de l'intelligence artificielle" />
+						<text name="Name" value="Nom" tooltip="Nom de l'intelligence artificielle" />
+						<text name="Notes" value="Notes" tooltip="Notes de l'auteur de l'intelligence artificielle" />
+						<text name="Package" value="Paquet" tooltip="Paquet contenant l'intelligence artificielle" />
+					</group>
 				</group>
-				<group name="Package">
-					<text name="PageDown" value="Descendre" tooltip="Revenir à la page de paquets suivante" />
-					<text name="PageUp" value="Monter" tooltip="Aller à la page de paquets précédente" />
+			</group>	
+	
+			<group name="Hero">
+				<group name="Button">
+					<text name="Back" value="Retour" tooltip="Revenir au menu principal" />
+				</group>		
+				<group name="Select">
+					<text name="Title" value="Liste des personnages" tooltip="Liste des personnages disponibles" />
+					<group name="Folder">
+						<text name="PageDown" value="Descendre" tooltip="Revenir à la page de personnages suivante" />
+						<text name="PageUp" value="Monter" tooltip="Aller à la page de personnages précédente" />
+						<text name="Parent" value=".." tooltip="Revenir à la liste des paquets" />
+					</group>
+					<group name="Package">
+						<text name="PageDown" value="Descendre" tooltip="Revenir à la page de paquets suivante" />
+						<text name="PageUp" value="Monter" tooltip="Aller à la page de paquets précédente" />
+					</group>
+					<group name="Preview">
+						<text name="Author" value="Auteur"  tooltip="Auteur/ripper de ce personnage" />
+						<text name="Colors" value="Couleurs"  tooltip="Couleurs disponibles pour ce personnage" />
+						<text name="Image" value="Prévisualisation" tooltip="Prévisualisation de ce personnage" />
+						<text name="Name" value="Nom" tooltip="Nom de ce personnage" />
+						<text name="Package" value="Paquet" tooltip="Paquet contenant ce personnage" />
+						<text name="Source" value="Source"  tooltip="Source de ce personnage (oeuvre originale ou extrait d'un jeu existant)" />
+					</group>
 				</group>
-				<group name="Preview">
-					<text name="Author" value="Auteur"  tooltip="Auteur/ripper de ce personnage" />
-					<text name="Colors" value="Couleurs"  tooltip="Couleurs disponibles pour ce personnage" />
-					<text name="Image" value="Prévisualisation" tooltip="Prévisualisation de ce personnage" />
-					<text name="Name" value="Nom" tooltip="Nom de ce personnage" />
-					<text name="Package" value="Paquet" tooltip="Paquet contenant ce personnage" />
-					<text name="Source" value="Source"  tooltip="Source de ce personnage (oeuvre originale ou extrait d'un jeu existant)" />
+			</group>	
+	
+			<group name="Level">
+				<group name="Button">
+					<text name="Back" value="Retour" tooltip="Revenir au menu principal" />
+				</group>		
+				<group name="Select">
+					<text name="Title" value="Liste des niveaux" tooltip="Liste des niveaux disponibles" />
+					<group name="Folder">
+						<text name="PageDown" value="Descendre" tooltip="Revenir à la page de niveaux suivante" />
+						<text name="PageUp" value="Monter" tooltip="Aller à la page de niveaux précédente" />
+						<text name="Parent" value=".." tooltip="Revenir à la liste des paquets" />
+					</group>
+					<group name="Package">
+						<text name="PageDown" value="Descendre" tooltip="Revenir à la page de paquets suivante" />
+						<text name="PageUp" value="Monter" tooltip="Aller à la page de paquets précédente" />
+					</group>
+					<group name="Preview">
+						<text name="Author" value="Auteur"  tooltip="Auteur/ripper de ce niveau" />
+						<text name="Image" value="Prévisualisation" tooltip="Prévisualisation de ce niveau" />
+						<text name="Instance" value="Instance" tooltip="Instance utilisée dans ce niveau" />
+						<text name="Name" value="Nom" tooltip="Nom de ce niveau" />
+						<text name="Package" value="Paquet" tooltip="Paquet contenant ce niveau" />
+						<text name="Size" value="Dimension"  tooltip="Dimension de la zone de jeu visible" />
+						<text name="Source" value="Source"  tooltip="Source de ce niveau (création originale ou extrait d'un jeu existant)" />
+						<text name="Theme" value="Thème"  tooltip="Thème utilisé dans ce niveau" />
+					</group>
 				</group>
-			</group>
-		</group>	
-
-<!-- LEVEL MENU -->	
-		<group name="Level">
-			<group name="Button">
-				<text name="Back" value="Retour" tooltip="Revenir au menu principal" />
-			</group>		
-			<group name="Select">
-				<text name="Title" value="Liste des niveaux" tooltip="Liste des niveaux disponibles" />
-				<group name="Folder">
-					<text name="PageDown" value="Descendre" tooltip="Revenir à la page de niveaux suivante" />
-					<text name="PageUp" value="Monter" tooltip="Aller à la page de niveaux précédente" />
-					<text name="Parent" value=".." tooltip="Revenir à la liste des paquets" />
-				</group>
-				<group name="Package">
-					<text name="PageDown" value="Descendre" tooltip="Revenir à la page de paquets suivante" />
-					<text name="PageUp" value="Monter" tooltip="Aller à la page de paquets précédente" />
-				</group>
-				<group name="Preview">
-					<text name="Author" value="Auteur"  tooltip="Auteur/ripper de ce niveau" />
-					<text name="Image" value="Prévisualisation" tooltip="Prévisualisation de ce niveau" />
-					<text name="Instance" value="Instance" tooltip="Instance utilisée dans ce niveau" />
-					<text name="Name" value="Nom" tooltip="Nom de ce niveau" />
-					<text name="Package" value="Paquet" tooltip="Paquet contenant ce niveau" />
-					<text name="Size" value="Dimension"  tooltip="Dimension de la zone de jeu visible" />
-					<text name="Source" value="Source"  tooltip="Source de ce niveau (création originale ou extrait d'un jeu existant)" />
-					<text name="Theme" value="Thème"  tooltip="Thème utilisé dans ce niveau" />
-				</group>
-			</group>
-		</group>	
+			</group>	
+		</group>
 
 <!-- OPTIONS MENU -->
 		<group name="Options">

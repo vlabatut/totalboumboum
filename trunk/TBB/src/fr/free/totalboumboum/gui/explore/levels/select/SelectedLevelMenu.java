@@ -55,12 +55,12 @@ public class SelectedLevelMenu extends InnerMenuPanel
 		// sizes
 		int buttonWidth = getWidth();
 		int buttonHeight = GuiTools.buttonTextHeight;
-		ArrayList<String> texts = GuiKeys.getKeysLike(GuiKeys.MENU_LEVEL_BUTTON);
+		ArrayList<String> texts = GuiKeys.getKeysLike(GuiKeys.MENU_RESOURCES_LEVEL_BUTTON);
 		int fontSize = GuiTools.getOptimalFontSize(buttonWidth*0.8, buttonHeight*0.9, texts);
 
 		// buttons
 		add(Box.createVerticalGlue());
-		buttonBack = GuiTools.createButton(GuiKeys.MENU_LEVEL_BUTTON_BACK,buttonWidth,buttonHeight,fontSize,this);
+		buttonBack = GuiTools.createButton(GuiKeys.MENU_RESOURCES_LEVEL_BUTTON_BACK,buttonWidth,buttonHeight,fontSize,this);
 		add(Box.createVerticalGlue());		
 
 		// panels
@@ -69,7 +69,7 @@ public class SelectedLevelMenu extends InnerMenuPanel
 	}
 	
 	public void actionPerformed(ActionEvent e)
-	{	if(e.getActionCommand().equals(GuiKeys.MENU_LEVEL_BUTTON_BACK))
+	{	if(e.getActionCommand().equals(GuiKeys.MENU_RESOURCES_LEVEL_BUTTON_BACK))
 		{	replaceWith(parent);
 	    }
 	} 

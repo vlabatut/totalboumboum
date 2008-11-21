@@ -41,9 +41,7 @@ import fr.free.totalboumboum.gui.common.MenuContainer;
 import fr.free.totalboumboum.gui.common.panel.menu.MenuPanel;
 import fr.free.totalboumboum.gui.common.panel.menu.SimpleMenuPanel;
 import fr.free.totalboumboum.gui.data.configuration.GuiConfiguration;
-import fr.free.totalboumboum.gui.explore.ais.select.SelectedAiSplitPanel;
-import fr.free.totalboumboum.gui.explore.heroes.select.SelectedHeroSplitPanel;
-import fr.free.totalboumboum.gui.explore.levels.select.SelectedLevelSplitPanel;
+import fr.free.totalboumboum.gui.explore.ExploreSplitPanel;
 import fr.free.totalboumboum.gui.menus.quickmatch.profiles.ProfilesSplitPanel;
 import fr.free.totalboumboum.gui.menus.tournament.TournamentSplitPanel;
 import fr.free.totalboumboum.gui.options.OptionsSplitPanel;
@@ -65,11 +63,7 @@ public class MainMenu extends SimpleMenuPanel
 	private JButton buttonProfiles;
 	private JButton buttonStats;
 	@SuppressWarnings("unused")
-	private JButton buttonAi;
-	@SuppressWarnings("unused")
-	private JButton buttonHeroes;
-	@SuppressWarnings("unused")
-	private JButton buttonLevels;
+	private JButton buttonResources;
 	private JButton buttonAbout;
 	private JButton buttonTournament;
 	private JButton buttonQuickMatch;
@@ -96,9 +90,7 @@ public class MainMenu extends SimpleMenuPanel
 		buttonProfiles = GuiTools.createButton(GuiKeys.MENU_MAIN_BUTTON_PROFILES,buttonWidth,buttonHeight,fontSize,this);
 		buttonStats = GuiTools.createButton(GuiKeys.MENU_MAIN_BUTTON_STATISTICS,buttonWidth,buttonHeight,fontSize,this);
 buttonStats.setEnabled(false);
-		buttonHeroes = GuiTools.createButton(GuiKeys.MENU_MAIN_BUTTON_HEROES,buttonWidth,buttonHeight,fontSize,this);
-		buttonAi = GuiTools.createButton(GuiKeys.MENU_MAIN_BUTTON_AI,buttonWidth,buttonHeight,fontSize,this);
-		buttonLevels = GuiTools.createButton(GuiKeys.MENU_MAIN_BUTTON_LEVELS,buttonWidth,buttonHeight,fontSize,this);
+		buttonResources = GuiTools.createButton(GuiKeys.MENU_MAIN_BUTTON_RESOURCES,buttonWidth,buttonHeight,fontSize,this);
 		buttonAbout = GuiTools.createButton(GuiKeys.MENU_MAIN_BUTTON_ABOUT,buttonWidth,buttonHeight,fontSize,this);
 buttonAbout.setEnabled(false);
 		add(Box.createRigidArea(new Dimension(0,GuiTools.buttonVerticalSpace)));
@@ -121,20 +113,12 @@ buttonAbout.setEnabled(false);
 		{	SelectedProfileSplitPanel profilesMenuPanel = new SelectedProfileSplitPanel(getContainer(),this);
 			replaceWith(profilesMenuPanel);
 	    }
-		else if(e.getActionCommand().equals(GuiKeys.MENU_MAIN_BUTTON_AI))
-		{	SelectedAiSplitPanel aiMenuPanel = new SelectedAiSplitPanel(getContainer(),this);
-			replaceWith(aiMenuPanel);
+		else if(e.getActionCommand().equals(GuiKeys.MENU_MAIN_BUTTON_RESOURCES))
+		{	ExploreSplitPanel exploreMenuPanel = new ExploreSplitPanel(getContainer(),this);
+			replaceWith(exploreMenuPanel);
 	    }
 		else if(e.getActionCommand().equals(GuiKeys.MENU_MAIN_BUTTON_STATISTICS))
 		{	
-	    }
-		else if(e.getActionCommand().equals(GuiKeys.MENU_MAIN_BUTTON_HEROES))
-		{	SelectedHeroSplitPanel heroMenuPanel = new SelectedHeroSplitPanel(getContainer(),this);
-			replaceWith(heroMenuPanel);
-	    }
-		else if(e.getActionCommand().equals(GuiKeys.MENU_MAIN_BUTTON_LEVELS))
-		{	SelectedLevelSplitPanel levelMenuPanel = new SelectedLevelSplitPanel(getContainer(),this);
-			replaceWith(levelMenuPanel);
 	    }
 		else if(e.getActionCommand().equals(GuiKeys.MENU_MAIN_BUTTON_TOURNAMENT))
 		{	if(tournamentMainPanel==null)

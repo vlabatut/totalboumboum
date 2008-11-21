@@ -107,7 +107,7 @@ public class SelectedHeroData extends EntitledDataPanel implements MouseListener
 	{	super(container);
 
 		// title
-		setTitleKey(GuiKeys.MENU_HERO_SELECT_TITLE);
+		setTitleKey(GuiKeys.MENU_RESOURCES_HERO_SELECT_TITLE);
 	
 		// data
 		{	mainPanel = new SubPanel(dataWidth,dataHeight);
@@ -267,7 +267,7 @@ public class SelectedHeroData extends EntitledDataPanel implements MouseListener
 			// page up
 			{	Color bg = GuiTools.COLOR_TABLE_HEADER_BACKGROUND;
 				listPanel.setLabelBackground(LIST_LINE_PREVIOUS,0,bg);
-				String key = GuiKeys.MENU_HERO_SELECT_PACKAGE_PAGEUP;
+				String key = GuiKeys.MENU_RESOURCES_HERO_SELECT_PACKAGE_PAGEUP;
 				listPanel.setLabelKey(LIST_LINE_PREVIOUS,0,key,true);
 				JLabel label = listPanel.getLabel(LIST_LINE_PREVIOUS,0);
 				label.addMouseListener(this);
@@ -275,7 +275,7 @@ public class SelectedHeroData extends EntitledDataPanel implements MouseListener
 			// page down
 			{	Color bg = GuiTools.COLOR_TABLE_HEADER_BACKGROUND;
 				listPanel.setLabelBackground(LIST_LINE_NEXT,0,bg);
-				String key = GuiKeys.MENU_HERO_SELECT_PACKAGE_PAGEDOWN;
+				String key = GuiKeys.MENU_RESOURCES_HERO_SELECT_PACKAGE_PAGEDOWN;
 				listPanel.setLabelKey(LIST_LINE_NEXT,0,key,true);
 				JLabel label = listPanel.getLabel(LIST_LINE_NEXT,0);
 				label.addMouseListener(this);
@@ -306,7 +306,7 @@ public class SelectedHeroData extends EntitledDataPanel implements MouseListener
 			// page up
 			{	Color bg = GuiTools.COLOR_TABLE_HEADER_BACKGROUND;
 				listPanel.setLabelBackground(LIST_LINE_PREVIOUS,0,bg);
-				String key = GuiKeys.MENU_HERO_SELECT_FOLDER_PAGEUP;
+				String key = GuiKeys.MENU_RESOURCES_HERO_SELECT_FOLDER_PAGEUP;
 				listPanel.setLabelKey(LIST_LINE_PREVIOUS,0,key,true);
 				JLabel label = listPanel.getLabel(LIST_LINE_PREVIOUS,0);
 				label.addMouseListener(this);
@@ -314,7 +314,7 @@ public class SelectedHeroData extends EntitledDataPanel implements MouseListener
 			// parent
 			{	Color bg = GuiTools.COLOR_TABLE_HEADER_BACKGROUND;
 				listPanel.setLabelBackground(LIST_LINE_PARENT,0,bg);
-				String key = GuiKeys.MENU_HERO_SELECT_FOLDER_PARENT;
+				String key = GuiKeys.MENU_RESOURCES_HERO_SELECT_FOLDER_PARENT;
 				listPanel.setLabelKey(LIST_LINE_PARENT,0,key,false);
 				JLabel label = listPanel.getLabel(LIST_LINE_PARENT,0);
 				label.addMouseListener(this);
@@ -322,7 +322,7 @@ public class SelectedHeroData extends EntitledDataPanel implements MouseListener
 			// page down
 			{	Color bg = GuiTools.COLOR_TABLE_HEADER_BACKGROUND;
 				listPanel.setLabelBackground(LIST_LINE_NEXT,0,bg);
-				String key = GuiKeys.MENU_HERO_SELECT_FOLDER_PAGEDOWN;
+				String key = GuiKeys.MENU_RESOURCES_HERO_SELECT_FOLDER_PAGEDOWN;
 				listPanel.setLabelKey(LIST_LINE_NEXT,0,key,true);
 				JLabel label = listPanel.getLabel(LIST_LINE_NEXT,0);
 				label.addMouseListener(this);
@@ -339,10 +339,10 @@ public class SelectedHeroData extends EntitledDataPanel implements MouseListener
 		
 		// data
 		String keys[] = 
-		{	GuiKeys.MENU_HERO_SELECT_PREVIEW_NAME,
-			GuiKeys.MENU_HERO_SELECT_PREVIEW_PACKAGE,
-			GuiKeys.MENU_HERO_SELECT_PREVIEW_AUTHOR,
-			GuiKeys.MENU_HERO_SELECT_PREVIEW_SOURCE
+		{	GuiKeys.MENU_RESOURCES_HERO_SELECT_PREVIEW_NAME,
+			GuiKeys.MENU_RESOURCES_HERO_SELECT_PREVIEW_PACKAGE,
+			GuiKeys.MENU_RESOURCES_HERO_SELECT_PREVIEW_AUTHOR,
+			GuiKeys.MENU_RESOURCES_HERO_SELECT_PREVIEW_SOURCE
 		};
 		for(int line=0;line<keys.length;line++)
 		{	int colSub = 0;

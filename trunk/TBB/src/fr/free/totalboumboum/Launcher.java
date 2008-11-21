@@ -664,7 +664,7 @@ public class Launcher
 	 * *********************** A FAIRE ***********************
 	 * *******************************************************
 	 * 
-	 * - IA : il faut gérer les directions composites, sinon c'est la merde.
+	 * - dans l'édition de profil, il faut tester si les couleurs sélectionnées existent pour ce personnage
 	 * 
 	 * - faire le classement lexicographique gérant les signes diacritiques partout où c'est nécessaire
 	 * 

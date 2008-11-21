@@ -26,6 +26,8 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map.Entry;
 
+import fr.free.totalboumboum.configuration.GameConstants;
+
 public class ProfilesConfiguration
 {
 	public ProfilesConfiguration copy()
@@ -90,5 +92,62 @@ public class ProfilesConfiguration
 
 	public void setLastProfile(int lastProfile)
 	{	this.lastProfile = lastProfile;
+	}
+
+	/////////////////////////////////////////////////////////////////
+	// PROCESS			/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	public int getNextFreeControls(ArrayList<Profile> profiles, int start)
+	{	/// init
+		Iterator<Profile> it = profiles.iterator();
+		ArrayList<Integer> occupied = new ArrayList<Integer>();
+		while(it.hasNext())
+		{	Profile profile = it.next();
+			int index = profile.getControlSettingsIndex();
+			if(index>0)
+				occupied.add(index);
+		}
+		// next free index
+		boolean found = false;
+		int result = 0;
+		int test = 1;
+		while(!found && test<=GameConstants.CONTROL_COUNT)
+		{	int temp = (start+test)%(GameConstants.CONTROL_COUNT+1);
+			if(occupied.contains(temp))
+				test++;
+			else
+			{	result = temp;
+				found = true;
+			}
+		}
+		if(!found)
+			result = start;
+		return result;
+	}
+
+	public PredefinedColor getNextFreeColor(ArrayList<Profile> profiles, Profile profile, PredefinedColor color)
+	{	PredefinedColor result = null;
+		// used colors
+		ArrayList<PredefinedColor> usedColors = new ArrayList<PredefinedColor>();
+		for(Profile p: profiles)
+		{	PredefinedColor clr = p.getSpriteSelectedColor();
+			usedColors.add(clr);
+		}
+		// preferred colors
+		ArrayList<PredefinedColor> preferredColors = new ArrayList<PredefinedColor>();
+		for(PredefinedColor c: profile.getSpriteColors())
+		{	if(c!=null && (c==color || !usedColors.contains(c)))
+					preferredColors.add(c);
+		}
+		for(PredefinedColor c: PredefinedColor.values())
+		{	if(c==color || (!usedColors.contains(c) && !preferredColors.contains(c)))
+				preferredColors.add(c);
+		}
+		// select a color
+		int currentColorIndex = preferredColors.indexOf(color);
+		int index = (currentColorIndex+1) % preferredColors.size();
+		if(index<preferredColors.size())
+			result = preferredColors.get(index);
+		return result;
 	}
 }
