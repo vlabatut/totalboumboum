@@ -204,13 +204,19 @@ public class ProfilesData extends EntitledDataPanel implements MouseListener
 	{	int index = line-1;
 		// if there's a player on this line 
 		if(profiles.size()>index)
-		{	Line ln = playersPanel.getLine(line);
+		{	// init
+			Line ln = playersPanel.getLine(line);
 			Profile profile = profiles.get(index);
+			// color
+			PredefinedColor clr = profile.getSpriteSelectedColor();
+			Color color = clr.getColor();
+			// type
 			String profileType;
 			if(profile.hasAi())
 				profileType = GuiKeys.MENU_QUICKMATCH_PROFILES_TYPE_COMPUTER;
 			else
 				profileType = GuiKeys.MENU_QUICKMATCH_PROFILES_TYPE_HUMAN;
+			// keys
 			String keys[] = 
 			{	GuiKeys.MENU_QUICKMATCH_PROFILES_PROFILE_DELETE,
 				null,
@@ -223,10 +229,11 @@ public class ProfilesData extends EntitledDataPanel implements MouseListener
 				GuiKeys.MENU_QUICKMATCH_PROFILES_COLOR_NEXT,
 				null
 			};
+			// icons
 			for(int col=0;col<keys.length;col++)
 			{	if(keys[col]!=null)
 				{	ln.setLabelKey(col,keys[col],true);
-					Color bg = GuiTools.COLOR_TABLE_HEADER_BACKGROUND;
+				Color bg = new Color(color.getRed(),color.getGreen(),color.getBlue(),GuiTools.ALPHA_TABLE_REGULAR_BACKGROUND_LEVEL2);
 					ln.setLabelBackground(col,bg);
 					JLabel lbl = ln.getLabel(col);
 					lbl.removeMouseListener(this); //just in case
@@ -239,12 +246,12 @@ public class ProfilesData extends EntitledDataPanel implements MouseListener
 				String tooltip = profile.getName();
 				ln.setLabelText(COL_PROFILE_VALUE,text,tooltip);
 				// color
-				Color bg = GuiTools.COLOR_TABLE_REGULAR_BACKGROUND;
+				Color bg = new Color(color.getRed(),color.getGreen(),color.getBlue(),GuiTools.ALPHA_TABLE_REGULAR_BACKGROUND_LEVEL1);
 				ln.setLabelBackground(COL_PROFILE_VALUE,bg);
 			}
 			// type
 			{	// color
-				Color bg = GuiTools.COLOR_TABLE_REGULAR_BACKGROUND;
+				Color bg = new Color(color.getRed(),color.getGreen(),color.getBlue(),GuiTools.ALPHA_TABLE_REGULAR_BACKGROUND_LEVEL1);
 				ln.setLabelBackground(COL_TYPE,bg);
 			}
 			// hero
@@ -253,20 +260,16 @@ public class ProfilesData extends EntitledDataPanel implements MouseListener
 				BufferedImage image = profile.getPortraits().getOutgamePortrait(Portraits.OUTGAME_HEAD);
 				ln.setLabelIcon(COL_HERO_VALUE,image,tooltip);
 				// color
-				PredefinedColor clr = profile.getSpriteSelectedColor();
-				Color color = clr.getColor();
-				Color bg = new Color(color.getRed(),color.getGreen(),color.getBlue(),GuiTools.ALPHA_TABLE_REGULAR_BACKGROUND_LEVEL3);
+				Color bg = new Color(color.getRed(),color.getGreen(),color.getBlue(),GuiTools.ALPHA_TABLE_REGULAR_BACKGROUND_LEVEL1);
 				ln.setLabelBackground(COL_HERO_VALUE,bg);
 			}
 			// color
 			{	// content
-				PredefinedColor clr = profile.getSpriteSelectedColor();
 				String colorKey = clr.toString();
 				colorKey = colorKey.toUpperCase().substring(0,1)+colorKey.toLowerCase().substring(1,colorKey.length());
 				colorKey = GuiKeys.COLOR+colorKey;
 				ln.setLabelKey(COL_COLOR_VALUE,colorKey,false);
 				// color
-				Color color = clr.getColor();
 				Color bg = new Color(color.getRed(),color.getGreen(),color.getBlue(),GuiTools.ALPHA_TABLE_REGULAR_BACKGROUND_LEVEL3);
 				ln.setLabelBackground(COL_COLOR_VALUE,bg);
 			}
@@ -277,7 +280,7 @@ public class ProfilesData extends EntitledDataPanel implements MouseListener
 				String tooltip = controlTooltips.get(index);
 				ln.setLabelText(COL_CONTROLS,text, tooltip);
 				// color
-				Color bg = GuiTools.COLOR_TABLE_REGULAR_BACKGROUND;
+				Color bg = new Color(color.getRed(),color.getGreen(),color.getBlue(),GuiTools.ALPHA_TABLE_REGULAR_BACKGROUND_LEVEL2);
 				ln.setLabelBackground(COL_CONTROLS,bg);
 				// mouse listener
 				JLabel lbl = ln.getLabel(COL_CONTROLS);
@@ -396,6 +399,9 @@ public class ProfilesData extends EntitledDataPanel implements MouseListener
 		{	case COL_DELETE:
 				break;
 			case COL_PROFILE_BROWSE:
+				{	
+					
+				}
 				break;
 			case COL_HERO_BROWSE:
 				break;
@@ -404,7 +410,7 @@ public class ProfilesData extends EntitledDataPanel implements MouseListener
 			case COL_COLOR_NEXT:
 				{	Profile profile = profiles.get(pos[0]-1);
 					PredefinedColor color = profile.getSpriteSelectedColor();
-					color = getNextFreeColor(profiles,profile,color);
+					color = Configuration.getProfilesConfiguration().getNextFreeColor(profiles,profile,color);
 					profile.setSpriteSelectedColor(color);
 					playersPanel.setLabelText(pos[0],COL_COLOR_VALUE,color.toString(),color.toString());
 				}
@@ -412,7 +418,7 @@ public class ProfilesData extends EntitledDataPanel implements MouseListener
 			case COL_CONTROLS:
 				{	Profile profile = profiles.get(pos[0]-1);
 					int index = profile.getControlSettingsIndex();
-					index = MatchDescription.getNextFreeControls(profiles,index);
+					index = Configuration.getProfilesConfiguration().getNextFreeControls(profiles,index);
 					profile.setControlSettingsIndex(index);
 					playersPanel.setLabelText(pos[0],pos[1],controlTexts.get(index),controlTooltips.get(index));
 				}
@@ -447,30 +453,8 @@ public class ProfilesData extends EntitledDataPanel implements MouseListener
 		}
 		return result;
 	}
+
+	// TODO lors du chargement de l'aperçu du perso, redemander une couleur si celle ci n'est pas dispo
+	// si aucune couleur n'est possible : prendre un nouveau perso
 	
-	public PredefinedColor getNextFreeColor(ArrayList<Profile> profiles, Profile profile, PredefinedColor color)
-	{	PredefinedColor result = null;
-		// used colors
-		ArrayList<PredefinedColor> usedColors = new ArrayList<PredefinedColor>();
-		for(Profile p: profiles)
-		{	PredefinedColor clr = p.getSpriteSelectedColor();
-			usedColors.add(clr);
-		}
-		// preferred colors
-		ArrayList<PredefinedColor> preferredColors = new ArrayList<PredefinedColor>();
-		for(PredefinedColor c: profile.getSpriteColors())
-		{	if(c!=null && (c==color || !usedColors.contains(c)))
-					preferredColors.add(c);
-		}
-		for(PredefinedColor c: PredefinedColor.values())
-		{	if(c==color || (!usedColors.contains(c) && !preferredColors.contains(c)))
-				preferredColors.add(c);
-		}
-		// select a color
-		int currentColorIndex = preferredColors.indexOf(color);
-		int index = (currentColorIndex+1) % preferredColors.size();
-		result = preferredColors.get(index);
-		return result;
-//TODO tester la compatibilité avec le perso !		
-	}
 }
