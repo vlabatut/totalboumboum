@@ -261,7 +261,7 @@
 				<text name="Statistics" value="Statistics" tooltip="" />
 			</group>
 			
-			<group name="Profiles" >
+			<group name="Players" >
 				<text name="Title" value="Players selection" tooltip="Select players for the incoming game" />
 				<group name="Controls" >
 					<text name="Next" value="Next" tooltip="Set to next available controls" />
@@ -284,6 +284,8 @@
 
 				<group name="Profile" >
 					<text name="Browse" value="Browse" tooltip="Browse and select a profile" />
+					<text name="Cancel" value="Cancel" tooltip="Cancel and come back to the players selection screen" />
+					<text name="Confirm" value="Confirm" tooltip="Confirm and choose the selected profile" />
 					<text name="Delete" value="Unselect" tooltip="Unselect this profile" />
 					<text name="Next" value="Next" tooltip="Set to next available profile" />
 					<text name="Previous" value="Previous" tooltip="Set to previous available profile" />

@@ -1,4 +1,4 @@
-package fr.free.totalboumboum.gui.menus.quickmatch.players;
+package fr.free.totalboumboum.gui.menus.quickmatch.players.profile;
 
 /*
  * Total Boum Boum
@@ -25,26 +25,26 @@ import java.awt.BorderLayout;
 import java.awt.Graphics;
 import java.awt.image.BufferedImage;
 
+import fr.free.totalboumboum.configuration.profile.Profile;
 import fr.free.totalboumboum.gui.common.MenuContainer;
 import fr.free.totalboumboum.gui.common.panel.SplitMenuPanel;
 import fr.free.totalboumboum.gui.common.panel.menu.MenuPanel;
 import fr.free.totalboumboum.gui.data.configuration.GuiConfiguration;
 import fr.free.totalboumboum.gui.tools.GuiTools;
 
-public class ProfilesSplitPanel extends SplitMenuPanel
-{	private static final long serialVersionUID = 1L;
+public class SelectProfileSplitPanel extends SplitMenuPanel
+{	private static final long serialVersionUID = 1L; 
 
 	private BufferedImage image;
 
-	public ProfilesSplitPanel(MenuContainer container, MenuPanel parent)
-	{	super(container,parent,BorderLayout.PAGE_END,GuiTools.HORIZONTAL_SPLIT_RATIO);
+	public SelectProfileSplitPanel(MenuContainer container, MenuPanel parent, Profile profile)
+	{	super(container,parent,BorderLayout.LINE_START,GuiTools.VERTICAL_SPLIT_RATIO);
 	
 		// background
 		image = GuiConfiguration.getMiscConfiguration().getDarkBackground();
-	    
+		
 		// panels
-		ProfilesMenu menu = new ProfilesMenu(this,parent);
-		setMenuPart(menu);
+		setMenuPart(new SelectProfileMenu(this,parent,profile));
 	}
 	
 	@Override

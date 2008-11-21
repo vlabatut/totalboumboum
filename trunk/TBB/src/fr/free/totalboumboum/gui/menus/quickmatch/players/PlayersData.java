@@ -57,11 +57,13 @@ import fr.free.totalboumboum.gui.common.subpanel.UntitledSubPanelLines;
 import fr.free.totalboumboum.gui.common.subpanel.UntitledSubPanelTable;
 import fr.free.totalboumboum.gui.data.configuration.GuiConfiguration;
 import fr.free.totalboumboum.gui.game.match.description.MatchDescription;
+import fr.free.totalboumboum.gui.menus.quickmatch.players.profile.SelectProfileSplitPanel;
+import fr.free.totalboumboum.gui.profiles.ais.SelectedAiSplitPanel;
 import fr.free.totalboumboum.gui.tools.GuiKeys;
 import fr.free.totalboumboum.gui.tools.GuiTools;
 import fr.free.totalboumboum.tools.ImageTools;
 
-public class ProfilesData extends EntitledDataPanel implements MouseListener
+public class PlayersData extends EntitledDataPanel implements MouseListener
 {	
 	private static final long serialVersionUID = 1L;
 	
@@ -90,7 +92,7 @@ public class ProfilesData extends EntitledDataPanel implements MouseListener
 	// profiles
 	private ArrayList<Profile> profiles;
 	
-	public ProfilesData(SplitMenuPanel container)
+	public PlayersData(SplitMenuPanel container)
 	{	super(container);
 		
 		// profiles
@@ -98,7 +100,7 @@ public class ProfilesData extends EntitledDataPanel implements MouseListener
 	profiles = Configuration.getGameConfiguration().getTournament().getProfiles();
 	
 		// title
-		String key = GuiKeys.MENU_QUICKMATCH_TITLE;
+		String key = GuiKeys.MENU_QUICKMATCH_PLAYERS_TITLE;
 		setTitleKey(key);
 		
 		// data
@@ -142,11 +144,11 @@ public class ProfilesData extends EntitledDataPanel implements MouseListener
 		// headers
 		{	String keys[] = 
 			{	null,
-				GuiKeys.MENU_QUICKMATCH_PROFILES_PROFILE_VALUE,
-				GuiKeys.MENU_QUICKMATCH_PROFILES_TYPE_VALUE,
-				GuiKeys.MENU_QUICKMATCH_PROFILES_HERO_VALUE,
-				GuiKeys.MENU_QUICKMATCH_PROFILES_COLOR_VALUE,
-				GuiKeys.MENU_QUICKMATCH_PROFILES_CONTROLS_VALUE
+				GuiKeys.MENU_QUICKMATCH_PLAYERS_PROFILE_VALUE,
+				GuiKeys.MENU_QUICKMATCH_PLAYERS_TYPE_VALUE,
+				GuiKeys.MENU_QUICKMATCH_PLAYERS_HERO_VALUE,
+				GuiKeys.MENU_QUICKMATCH_PLAYERS_COLOR_VALUE,
+				GuiKeys.MENU_QUICKMATCH_PLAYERS_CONTROLS_VALUE
 			};
 			int sizes[] = 
 			{	deleteColWidth,
@@ -213,20 +215,20 @@ public class ProfilesData extends EntitledDataPanel implements MouseListener
 			// type
 			String profileType;
 			if(profile.hasAi())
-				profileType = GuiKeys.MENU_QUICKMATCH_PROFILES_TYPE_COMPUTER;
+				profileType = GuiKeys.MENU_QUICKMATCH_PLAYERS_TYPE_COMPUTER;
 			else
-				profileType = GuiKeys.MENU_QUICKMATCH_PROFILES_TYPE_HUMAN;
+				profileType = GuiKeys.MENU_QUICKMATCH_PLAYERS_TYPE_HUMAN;
 			// keys
 			String keys[] = 
-			{	GuiKeys.MENU_QUICKMATCH_PROFILES_PROFILE_DELETE,
+			{	GuiKeys.MENU_QUICKMATCH_PLAYERS_PROFILE_DELETE,
 				null,
-				GuiKeys.MENU_QUICKMATCH_PROFILES_PROFILE_BROWSE,
+				GuiKeys.MENU_QUICKMATCH_PLAYERS_PROFILE_BROWSE,
 				profileType,
 				null,
-				GuiKeys.MENU_QUICKMATCH_PROFILES_HERO_BROWSE,
-				GuiKeys.MENU_QUICKMATCH_PROFILES_COLOR_PREVIOUS,
+				GuiKeys.MENU_QUICKMATCH_PLAYERS_HERO_BROWSE,
+				GuiKeys.MENU_QUICKMATCH_PLAYERS_COLOR_PREVIOUS,
 				null,
-				GuiKeys.MENU_QUICKMATCH_PROFILES_COLOR_NEXT,
+				GuiKeys.MENU_QUICKMATCH_PLAYERS_COLOR_NEXT,
 				null
 			};
 			// icons
@@ -303,7 +305,7 @@ public class ProfilesData extends EntitledDataPanel implements MouseListener
 			}
 			if(index==profiles.size())
 			{	int col = COL_PROFILE_BROWSE;
-				String key = GuiKeys.MENU_QUICKMATCH_PROFILES_PROFILE_BROWSE;
+				String key = GuiKeys.MENU_QUICKMATCH_PLAYERS_PROFILE_BROWSE;
 				ln.setLabelKey(col,key,true);
 				Color bg = GuiTools.COLOR_TABLE_REGULAR_BACKGROUND;
 				ln.setLabelBackground(col,bg);
@@ -399,8 +401,17 @@ public class ProfilesData extends EntitledDataPanel implements MouseListener
 		{	case COL_DELETE:
 				break;
 			case COL_PROFILE_BROWSE:
-				{	
-					
+				{	int index = pos[0]-1;
+					Profile profile;
+					if(index<profiles.size())
+						profile = profiles.get(index);
+					else
+					{	profile = new Profile();
+//TODO à faire au retour de l'écran de sélection
+//						profiles.add(profile);
+					}
+					SelectProfileSplitPanel selectProfilePanel = new SelectProfileSplitPanel(container.getContainer(),container,profile);
+					getContainer().replaceWith(selectProfilePanel);
 				}
 				break;
 			case COL_HERO_BROWSE:
