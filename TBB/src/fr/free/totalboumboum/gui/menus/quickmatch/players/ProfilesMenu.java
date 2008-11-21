@@ -1,4 +1,4 @@
-package fr.free.totalboumboum.gui.menus.quickmatch.profiles;
+package fr.free.totalboumboum.gui.menus.quickmatch.players;
 
 /*
  * Total Boum Boum
@@ -42,7 +42,7 @@ public class ProfilesMenu extends InnerMenuPanel
 {	private static final long serialVersionUID = 1L;
 	
 	private MatchSplitPanel matchSplitPanel;
-	private ProfilesData profilesData;
+	private PlayersData profilesData;
 		
 	@SuppressWarnings("unused")
 	private JButton buttonQuit;
@@ -88,7 +88,7 @@ public class ProfilesMenu extends InnerMenuPanel
 		add(Box.createRigidArea(new Dimension(GuiTools.buttonHorizontalSpace,0)));
 		buttonNext = GuiTools.createButton(GuiKeys.MENU_QUICKMATCH_BUTTON_NEXT,buttonWidth,buttonHeight,1,this);
 		
-		profilesData = new ProfilesData(container);
+		profilesData = new PlayersData(container);
 		container.setDataPart(profilesData);
 /*		
 		Match match = Configuration.getGameConfiguration().getTournament().getCurrentMatch();

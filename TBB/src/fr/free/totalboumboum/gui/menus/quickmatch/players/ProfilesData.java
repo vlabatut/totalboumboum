@@ -1,4 +1,4 @@
-package fr.free.totalboumboum.gui.menus.quickmatch.profiles;
+package fr.free.totalboumboum.gui.menus.quickmatch.players;
 
 /*
  * Total Boum Boum
