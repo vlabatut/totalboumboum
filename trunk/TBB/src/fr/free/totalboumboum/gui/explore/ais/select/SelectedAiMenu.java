@@ -1,4 +1,4 @@
-package fr.free.totalboumboum.gui.ais.select;
+package fr.free.totalboumboum.gui.explore.ais.select;
 
 /*
  * Total Boum Boum

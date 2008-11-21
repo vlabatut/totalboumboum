@@ -1,4 +1,4 @@
-package fr.free.totalboumboum.gui.heroes.select;
+package fr.free.totalboumboum.gui.explore.heroes.select;
 
 /*
  * Total Boum Boum

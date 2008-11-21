@@ -1,4 +1,4 @@
-package fr.free.totalboumboum.gui.levels.select;
+package fr.free.totalboumboum.gui.explore.levels.select;
 
 /*
  * Total Boum Boum
