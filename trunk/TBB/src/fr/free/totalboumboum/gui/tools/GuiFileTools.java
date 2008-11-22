@@ -66,6 +66,7 @@ public class GuiFileTools
 	public final static String FILE_PARTIAL = "partial.png";
 	public final static String FILE_PAGE_DOWN = "pgdown.png";
 	public final static String FILE_PAGE_UP = "pgup.png";
+	public final static String FILE_PLAYERS = "players.png";
 	public final static String FILE_PLUS = "plus.png";
 	public final static String FILE_POINTS = "points.png";
 	public final static String FILE_PREVIOUS = "previous.png";

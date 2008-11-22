@@ -127,6 +127,7 @@ public class GuiKeys
 				public static final String MENU_RESOURCES_MATCH_SELECT_PREVIEW_AUTHOR = "MenuResourcesMatchSelectPreviewAuthor";
 				public static final String MENU_RESOURCES_MATCH_SELECT_PREVIEW_LIMIT = "MenuResourcesMatchSelectPreviewLimit";
 				public static final String MENU_RESOURCES_MATCH_SELECT_PREVIEW_NAME = "MenuResourcesMatchSelectPreviewName";
+				public static final String MENU_RESOURCES_MATCH_SELECT_PREVIEW_PLAYERS = "MenuResourcesMatchSelectPreviewPlayers";
 				public static final String MENU_RESOURCES_MATCH_SELECT_PREVIEW_POINTS = "MenuResourcesMatchSelectPreviewPoints";
 				public static final String MENU_RESOURCES_MATCH_SELECT_PREVIEW_ROUNDS = "MenuResourcesMatchSelectPreviewRounds";
 			
