@@ -41,11 +41,11 @@ import fr.free.totalboumboum.gui.common.MenuContainer;
 import fr.free.totalboumboum.gui.common.panel.menu.MenuPanel;
 import fr.free.totalboumboum.gui.common.panel.menu.SimpleMenuPanel;
 import fr.free.totalboumboum.gui.data.configuration.GuiConfiguration;
-import fr.free.totalboumboum.gui.explore.ExploreSplitPanel;
+import fr.free.totalboumboum.gui.menus.explore.ExploreSplitPanel;
+import fr.free.totalboumboum.gui.menus.options.OptionsSplitPanel;
+import fr.free.totalboumboum.gui.menus.profiles.select.SelectedProfileSplitPanel;
 import fr.free.totalboumboum.gui.menus.quickmatch.players.PlayersSplitPanel;
 import fr.free.totalboumboum.gui.menus.tournament.TournamentSplitPanel;
-import fr.free.totalboumboum.gui.options.OptionsSplitPanel;
-import fr.free.totalboumboum.gui.profiles.select.SelectedProfileSplitPanel;
 import fr.free.totalboumboum.gui.tools.GuiKeys;
 import fr.free.totalboumboum.gui.tools.GuiTools;
 

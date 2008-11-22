@@ -1,4 +1,4 @@
-package fr.free.totalboumboum.gui.menus.quickmatch.players.profile;
+package fr.free.totalboumboum.gui.menus.options.advanced;
 
 /*
  * Total Boum Boum
@@ -23,38 +23,38 @@ package fr.free.totalboumboum.gui.menus.quickmatch.players.profile;
 
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
+import java.io.IOException;
 import java.util.ArrayList;
 
 import javax.swing.Box;
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
+import javax.xml.parsers.ParserConfigurationException;
 
-import fr.free.totalboumboum.configuration.profile.Profile;
+import org.xml.sax.SAXException;
+
+import fr.free.totalboumboum.configuration.Configuration;
+import fr.free.totalboumboum.configuration.engine.EngineConfiguration;
+import fr.free.totalboumboum.configuration.engine.EngineConfigurationSaver;
 import fr.free.totalboumboum.gui.common.panel.SplitMenuPanel;
 import fr.free.totalboumboum.gui.common.panel.menu.InnerMenuPanel;
 import fr.free.totalboumboum.gui.common.panel.menu.MenuPanel;
-import fr.free.totalboumboum.gui.menus.profiles.select.SelectedProfileData;
 import fr.free.totalboumboum.gui.tools.GuiKeys;
 import fr.free.totalboumboum.gui.tools.GuiTools;
 
-public class SelectProfileMenu extends InnerMenuPanel
+public class AdvancedMenu extends InnerMenuPanel
 {	private static final long serialVersionUID = 1L;
 	
 	@SuppressWarnings("unused")
-	private JButton buttonCancel;
-	@SuppressWarnings("unused")
 	private JButton buttonConfirm;
+	@SuppressWarnings("unused")
+	private JButton buttonCancel;
 
-	private int index;
-	private ArrayList<Profile> profiles;
-	
-	private SelectedProfileData profileData;
+	private AdvancedData advancedData;
 
-	public SelectProfileMenu(SplitMenuPanel container, MenuPanel parent, int index, ArrayList<Profile> profiles)
+	public AdvancedMenu(SplitMenuPanel container, MenuPanel parent)
 	{	super(container, parent);
-		this.index = index;
-		this.profiles = profiles;
-	
+		
 		// layout
 		BoxLayout layout = new BoxLayout(this,BoxLayout.PAGE_AXIS); 
 		setLayout(layout);
@@ -65,34 +65,48 @@ public class SelectProfileMenu extends InnerMenuPanel
 		// sizes
 		int buttonWidth = getWidth();
 		int buttonHeight = GuiTools.buttonTextHeight;
-		ArrayList<String> texts = GuiKeys.getKeysLike(GuiKeys.MENU_PROFILES_BUTTON);
+		ArrayList<String> texts = GuiKeys.getKeysLike(GuiKeys.MENU_OPTIONS_BUTTON);
 		int fontSize = GuiTools.getOptimalFontSize(buttonWidth*0.8, buttonHeight*0.9, texts);
 
 		// buttons
 		add(Box.createVerticalGlue());
-		buttonConfirm = GuiTools.createButton(GuiKeys.MENU_PROFILES_BUTTON_CONFIRM,buttonWidth,buttonHeight,fontSize,this);
+		buttonConfirm = GuiTools.createButton(GuiKeys.MENU_OPTIONS_BUTTON_CONFIRM,buttonWidth,buttonHeight,fontSize,this);
 		add(Box.createRigidArea(new Dimension(0,GuiTools.buttonVerticalSpace)));
-		buttonCancel = GuiTools.createButton(GuiKeys.MENU_PROFILES_BUTTON_CANCEL,buttonWidth,buttonHeight,fontSize,this);
+		buttonCancel = GuiTools.createButton(GuiKeys.MENU_OPTIONS_BUTTON_CANCEL,buttonWidth,buttonHeight,fontSize,this);
 		add(Box.createVerticalGlue());		
 
 		// panels
-		profileData = new SelectedProfileData(container);
-		container.setDataPart(profileData);
+		advancedData = new AdvancedData(container);
+		container.setDataPart(advancedData);
 	}
 	
 	public void actionPerformed(ActionEvent e)
-	{	if(e.getActionCommand().equals(GuiKeys.MENU_PROFILES_BUTTON_CANCEL))
-		{	replaceWith(parent);
-	    }
-		else if(e.getActionCommand().equals(GuiKeys.MENU_PROFILES_BUTTON_CONFIRM))
-		{	Profile profile = profileData.getSelectedProfile();
-			if(profile!=null && !profiles.contains(profile))
-			{	if(index<profiles.size())
-					profiles.set(index,profile);
-				else
-					profiles.add(profile);
+	{	if(e.getActionCommand().equals(GuiKeys.MENU_OPTIONS_BUTTON_CONFIRM))
+		{	EngineConfiguration engineConfiguration = advancedData.getEngineConfiguration();
+			Configuration.setEngineConfiguration(engineConfiguration);
+			try
+			{	EngineConfigurationSaver.saveEngineConfiguration(Configuration.getEngineConfiguration());
 			}
+			catch (IllegalArgumentException e1)
+			{	e1.printStackTrace();
+			}
+			catch (SecurityException e1)
+			{	e1.printStackTrace();
+			}
+			catch (ParserConfigurationException e1)
+			{	e1.printStackTrace();
+			}
+			catch (SAXException e1)
+			{	e1.printStackTrace();
+			}
+			catch (IOException e1)
+			{	e1.printStackTrace();
+			}
+//TODO propager éventuellement au round (car il n'y a pas modification mais remplacement, donc si c déjà affecté à un player..
 			replaceWith(parent);
+	    }
+		else if(e.getActionCommand().equals(GuiKeys.MENU_OPTIONS_BUTTON_CANCEL))
+		{	replaceWith(parent);
 	    }
 	} 
 	

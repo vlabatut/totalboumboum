@@ -25,43 +25,24 @@ import java.awt.Color;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.image.BufferedImage;
-import java.io.IOException;
-import java.text.Collator;
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Locale;
-import java.util.Set;
-import java.util.Map.Entry;
 
 import javax.swing.JLabel;
-import javax.xml.parsers.ParserConfigurationException;
 
-import org.xml.sax.SAXException;
 
 import fr.free.totalboumboum.configuration.Configuration;
-import fr.free.totalboumboum.configuration.GameConstants;
 import fr.free.totalboumboum.configuration.profile.Portraits;
 import fr.free.totalboumboum.configuration.profile.PredefinedColor;
 import fr.free.totalboumboum.configuration.profile.Profile;
-import fr.free.totalboumboum.configuration.profile.ProfileLoader;
-import fr.free.totalboumboum.configuration.profile.ProfilesConfiguration;
-import fr.free.totalboumboum.engine.content.sprite.SpritePreview;
 import fr.free.totalboumboum.gui.common.panel.SplitMenuPanel;
 import fr.free.totalboumboum.gui.common.panel.data.EntitledDataPanel;
 import fr.free.totalboumboum.gui.common.subpanel.Line;
 import fr.free.totalboumboum.gui.common.subpanel.UntitledSubPanelLines;
-import fr.free.totalboumboum.gui.common.subpanel.UntitledSubPanelTable;
 import fr.free.totalboumboum.gui.data.configuration.GuiConfiguration;
 import fr.free.totalboumboum.gui.game.match.description.MatchDescription;
 import fr.free.totalboumboum.gui.menus.quickmatch.players.profile.SelectProfileSplitPanel;
-import fr.free.totalboumboum.gui.profiles.ais.SelectedAiSplitPanel;
 import fr.free.totalboumboum.gui.tools.GuiKeys;
 import fr.free.totalboumboum.gui.tools.GuiTools;
-import fr.free.totalboumboum.tools.ImageTools;
 
 public class PlayersData extends EntitledDataPanel implements MouseListener
 {	
@@ -112,7 +93,8 @@ public class PlayersData extends EntitledDataPanel implements MouseListener
 
 	@Override
 	public void refresh()
-	{	// nothing to do here
+	{	for(int line=1;line<LINE_COUNT;line++)
+			refreshPlayer(line);
 	}
 
 	@Override
@@ -279,7 +261,7 @@ public class PlayersData extends EntitledDataPanel implements MouseListener
 			{	// content
 				int ctrlIndex = profile.getControlSettingsIndex();
 				String text = controlTexts.get(ctrlIndex);
-				String tooltip = controlTooltips.get(index);
+				String tooltip = controlTooltips.get(ctrlIndex);
 				ln.setLabelText(COL_CONTROLS,text, tooltip);
 				// color
 				Color bg = new Color(color.getRed(),color.getGreen(),color.getBlue(),GuiTools.ALPHA_TABLE_REGULAR_BACKGROUND_LEVEL2);
@@ -402,15 +384,7 @@ public class PlayersData extends EntitledDataPanel implements MouseListener
 				break;
 			case COL_PROFILE_BROWSE:
 				{	int index = pos[0]-1;
-					Profile profile;
-					if(index<profiles.size())
-						profile = profiles.get(index);
-					else
-					{	profile = new Profile();
-//TODO à faire au retour de l'écran de sélection
-//						profiles.add(profile);
-					}
-					SelectProfileSplitPanel selectProfilePanel = new SelectProfileSplitPanel(container.getContainer(),container,profile);
+					SelectProfileSplitPanel selectProfilePanel = new SelectProfileSplitPanel(container.getContainer(),container,index,profiles);
 					getContainer().replaceWith(selectProfilePanel);
 				}
 				break;

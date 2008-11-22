@@ -39,21 +39,20 @@ import fr.free.totalboumboum.tools.XmlTools;
 
 public class ProfileLoader
 {	
-	public static Profile loadProfile(String name) throws ParserConfigurationException, SAXException, IOException, IllegalArgumentException, SecurityException, IllegalAccessException, NoSuchFieldException, ClassNotFoundException
-	{	Profile result;
-		String profilesFolder = FileTools.getProfilesPath();
-		File dataFile = new File(profilesFolder+File.separator+name+FileTools.EXTENSION_DATA);
+	public static Profile loadProfile(String fileName) throws ParserConfigurationException, SAXException, IOException, IllegalArgumentException, SecurityException, IllegalAccessException, NoSuchFieldException, ClassNotFoundException
+	{	String profilesFolder = FileTools.getProfilesPath();
+		File dataFile = new File(profilesFolder+File.separator+fileName+FileTools.EXTENSION_DATA);
 		String schemaFolder = FileTools.getSchemasPath();
 		File schemaFile = new File(schemaFolder+File.separator+FileTools.FILE_PROFILE+FileTools.EXTENSION_SCHEMA);
 		Element root = XmlTools.getRootFromFile(dataFile,schemaFile);
-		result = loadProfileElement(root);
+		Profile result = new Profile();
+		result.setFileName(fileName);
+		loadProfileElement(root,result);
 		return result;
 	}
 	
-	private static Profile loadProfileElement(Element root) throws IllegalArgumentException, SecurityException, ParserConfigurationException, SAXException, IOException, IllegalAccessException, NoSuchFieldException, ClassNotFoundException
-	{	Profile result = new Profile();
-    	
-		// general properties
+	private static void loadProfileElement(Element root, Profile result) throws IllegalArgumentException, SecurityException, ParserConfigurationException, SAXException, IOException, IllegalAccessException, NoSuchFieldException, ClassNotFoundException
+	{	// general properties
     	Element general = root.getChild(XmlTools.ELT_GENERAL);
 		loadGeneralElement(general,result);
 		
@@ -69,8 +68,6 @@ public class ProfileLoader
 		// sprite info
 		Element character = root.getChild(XmlTools.ELT_CHARACTER);
 		loadSpriteElement(character,result);
-
-		return result;
 	}
     
     private static void loadGeneralElement(Element root, Profile result)
