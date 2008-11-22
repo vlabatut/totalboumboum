@@ -9,6 +9,8 @@
 		<line value="If there's still a draw, points are shared." />
 	</notes>
 	
+	<author value="Vincent Labatut" />
+
 	<rankpoints invert="false" exaequoShare="true">
 		<rankings>
 			<total />

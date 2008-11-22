@@ -9,6 +9,8 @@
  		<line value="Date: 15-11-2008" />
  	</notes>
 
+	<author value="Vincent Labatut" />
+
 	<limits>
 		<time value="90000"/>
 	</limits>

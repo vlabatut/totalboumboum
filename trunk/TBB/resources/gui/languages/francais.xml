@@ -25,6 +25,9 @@
 				<text name="Heroes" value="Personnages" tooltip="Voir les personnages disponibles" />
 				<text name="Instances" value="Instances" tooltip="Voir les instances disponibles" />
 				<text name="Levels" value="Niveaux" tooltip="Voir les niveaux disponibles" />
+				<text name="Matches" value="Rencontres" tooltip="Voir les rencontres prédéfines" />
+				<text name="Rounds" value="Manches" tooltip="Voir les manches prédéfines" />
+				<text name="Tournaments" value="Tournois" tooltip="Voir les tournois prédéfinis" />
 			</group>
 
 			<group name="Ai">

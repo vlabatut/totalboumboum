@@ -51,6 +51,9 @@ public class GuiKeys
 	public static final String MENU_RESOURCES_BUTTON_HEROES = MENU_RESOURCES_BUTTON+"Heroes";
 	public static final String MENU_RESOURCES_BUTTON_INSTANCES = MENU_RESOURCES_BUTTON+"Instances";
 	public static final String MENU_RESOURCES_BUTTON_LEVELS = MENU_RESOURCES_BUTTON+"Levels";
+	public static final String MENU_RESOURCES_BUTTON_MATCHES = MENU_RESOURCES_BUTTON+"Matches";
+	public static final String MENU_RESOURCES_BUTTON_ROUNDS = MENU_RESOURCES_BUTTON+"Rounds";
+	public static final String MENU_RESOURCES_BUTTON_TOURNAMENTS = MENU_RESOURCES_BUTTON+"Tournaments";
 		/* AI */
 			/* BUTTON */
 			public static final String MENU_RESOURCES_AI_BUTTON = "MenuResourcesAiButton";	
@@ -111,6 +114,21 @@ public class GuiKeys
 				public static final String MENU_RESOURCES_LEVEL_SELECT_PREVIEW_SIZE = "MenuResourcesLevelSelectPreviewSize";
 				public static final String MENU_RESOURCES_LEVEL_SELECT_PREVIEW_SOURCE = "MenuResourcesLevelSelectPreviewSource";
 				public static final String MENU_RESOURCES_LEVEL_SELECT_PREVIEW_THEME = "MenuResourcesLevelSelectPreviewTheme";
+		/* MATCH */
+			/* BUTTON */
+			public static final String MENU_RESOURCES_MATCH_BUTTON = "MenuResourcesMatchButton";	
+			public static final String MENU_RESOURCES_MATCH_BUTTON_BACK = MENU_RESOURCES_MATCH_BUTTON+"Back";	
+			/* SELECT */
+			public static final String MENU_RESOURCES_MATCH_SELECT_TITLE = "MenuResourcesMatchSelectTitle";
+				/* LIST */
+				public static final String MENU_RESOURCES_MATCH_SELECT_LIST_PAGEDOWN = "MenuResourcesMatchSelectListPageDown";
+				public static final String MENU_RESOURCES_MATCH_SELECT_LIST_PAGEUP = "MenuResourcesMatchSelectListPageUp";
+				/* PREVIEW */
+				public static final String MENU_RESOURCES_MATCH_SELECT_PREVIEW_AUTHOR = "MenuResourcesMatchSelectPreviewAuthor";
+				public static final String MENU_RESOURCES_MATCH_SELECT_PREVIEW_LIMIT = "MenuResourcesMatchSelectPreviewLimit";
+				public static final String MENU_RESOURCES_MATCH_SELECT_PREVIEW_NAME = "MenuResourcesMatchSelectPreviewName";
+				public static final String MENU_RESOURCES_MATCH_SELECT_PREVIEW_POINTS = "MenuResourcesMatchSelectPreviewPoints";
+				public static final String MENU_RESOURCES_MATCH_SELECT_PREVIEW_ROUNDS = "MenuResourcesMatchSelectPreviewRounds";
 			
 	/* OPTIONS */
 		/* BUTTON */

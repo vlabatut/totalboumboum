@@ -44,6 +44,10 @@
 	</xsd:complexType>
 
 <!-- COMMON -->
+	<xsd:complexType name="tAuthor">
+		<xsd:attribute name="value" type="xsd:string" use="required" />
+	</xsd:complexType>
+
 	<xsd:group name="gTournament">
 		<xsd:choice>
 			<xsd:element name="cup" type="tCup" />
@@ -61,6 +65,7 @@
 		<xsd:sequence>
 			<xsd:element name="general" type="tGeneral" />
 			<xsd:element name="notes" type="tNotes" />
+			<xsd:element name="author" type="tAuthor"  minOccurs="0"/>
 			<xsd:group ref="gTournament" />
 		</xsd:sequence>
 	</xsd:complexType>
