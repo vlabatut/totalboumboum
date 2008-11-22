@@ -32,18 +32,18 @@
 
 			<group name="Ai">
 				<group name="Button">
-					<text name="Back" value="Retour" tooltip="Revenir au menu principal" />
+					<text name="Back" value="Retour" tooltip="Revenir au menu des ressources" />
 				</group>		
 				<group name="Select">
 					<text name="Title" value="Liste des IA" tooltip="Liste des intelligences artificielles disponibles" />
 					<group name="Class">
-						<text name="PageDown" value="Descendre" tooltip="Revenir à la page d'IA suivante" />
-						<text name="PageUp" value="Monter" tooltip="Aller à la page d'IA précédente" />
+						<text name="PageDown" value="Descendre" tooltip="Aller à la page d'IA suivante" />
+						<text name="PageUp" value="Monter" tooltip="Revenir à la page d'IA précédente" />
 						<text name="Parent" value=".." tooltip="Revenir à la liste des paquets" />
 					</group>
 					<group name="Package">
-						<text name="PageDown" value="Descendre" tooltip="Revenir à la page de paquets suivante" />
-						<text name="PageUp" value="Monter" tooltip="Aller à la page de paquets précédente" />
+						<text name="PageDown" value="Descendre" tooltip="Aller à la page de paquets suivante" />
+						<text name="PageUp" value="Monter" tooltip="Revenir à la page de paquets précédente" />
 					</group>
 					<group name="Preview">
 						<text name="Author" value="Auteur" tooltip="Auteur de l'intelligence artificielle" />
@@ -56,18 +56,18 @@
 	
 			<group name="Hero">
 				<group name="Button">
-					<text name="Back" value="Retour" tooltip="Revenir au menu principal" />
+					<text name="Back" value="Retour" tooltip="Revenir au menu des ressources" />
 				</group>		
 				<group name="Select">
 					<text name="Title" value="Liste des personnages" tooltip="Liste des personnages disponibles" />
 					<group name="Folder">
-						<text name="PageDown" value="Descendre" tooltip="Revenir à la page de personnages suivante" />
-						<text name="PageUp" value="Monter" tooltip="Aller à la page de personnages précédente" />
+						<text name="PageDown" value="Descendre" tooltip="Aller à la page de personnages suivante" />
+						<text name="PageUp" value="Monter" tooltip="Revenir à la page de personnages précédente" />
 						<text name="Parent" value=".." tooltip="Revenir à la liste des paquets" />
 					</group>
 					<group name="Package">
-						<text name="PageDown" value="Descendre" tooltip="Revenir à la page de paquets suivante" />
-						<text name="PageUp" value="Monter" tooltip="Aller à la page de paquets précédente" />
+						<text name="PageDown" value="Descendre" tooltip="Aller à la page de paquets suivante" />
+						<text name="PageUp" value="Monter" tooltip="Revenir à la page de paquets précédente" />
 					</group>
 					<group name="Preview">
 						<text name="Author" value="Auteur"  tooltip="Auteur/ripper de ce personnage" />
@@ -82,18 +82,18 @@
 	
 			<group name="Level">
 				<group name="Button">
-					<text name="Back" value="Retour" tooltip="Revenir au menu principal" />
+					<text name="Back" value="Retour" tooltip="Revenir au menu des ressources" />
 				</group>		
 				<group name="Select">
 					<text name="Title" value="Liste des niveaux" tooltip="Liste des niveaux disponibles" />
 					<group name="Folder">
-						<text name="PageDown" value="Descendre" tooltip="Revenir à la page de niveaux suivante" />
-						<text name="PageUp" value="Monter" tooltip="Aller à la page de niveaux précédente" />
+						<text name="PageDown" value="Descendre" tooltip="Aller à la page de niveaux suivante" />
+						<text name="PageUp" value="Monter" tooltip="Revenir à la page de niveaux précédente" />
 						<text name="Parent" value=".." tooltip="Revenir à la liste des paquets" />
 					</group>
 					<group name="Package">
-						<text name="PageDown" value="Descendre" tooltip="Revenir à la page de paquets suivante" />
-						<text name="PageUp" value="Monter" tooltip="Aller à la page de paquets précédente" />
+						<text name="PageDown" value="Descendre" tooltip="Aller à la page de paquets suivante" />
+						<text name="PageUp" value="Monter" tooltip="Revenir à la page de paquets précédente" />
 					</group>
 					<group name="Preview">
 						<text name="Author" value="Auteur"  tooltip="Auteur/ripper de ce niveau" />
@@ -104,6 +104,27 @@
 						<text name="Size" value="Dimension"  tooltip="Dimension de la zone de jeu visible" />
 						<text name="Source" value="Source"  tooltip="Source de ce niveau (création originale ou extrait d'un jeu existant)" />
 						<text name="Theme" value="Thème"  tooltip="Thème utilisé dans ce niveau" />
+					</group>
+				</group>
+			</group>	
+
+			<group name="Match">
+				<group name="Button">
+					<text name="Back" value="Retour" tooltip="Revenir au menu des ressources" />
+				</group>		
+				<group name="Select">
+					<text name="Title" value="Liste des rencontres" tooltip="Liste des rencontres prédéfinies" />
+					<group name="List">
+						<text name="PageDown" value="Descendre" tooltip="Aller à la page de rencontres suivante" />
+						<text name="PageUp" value="Monter" tooltip="Revenir à la page de rencontres précédente" />
+					</group>
+					<group name="Preview">
+						<text name="Author" value="Auteur"  tooltip="Auteur de cette rencontre" />
+						<text name="Limit" value="Instance" tooltip="Limites cette rencontre" />
+						<text name="Name" value="Nom" tooltip="Nom de cette rencontre" />
+						<text name="Players" value="Joueurs" tooltip="Nombre de joueurs pour cette rencontre" />
+						<text name="Points" value="Points"  tooltip="Calcul des points pour cette rencontre" />
+						<text name="Rounds" value="Manches"  tooltip="Nombre de rounds définis pour cette rencontre" />
 					</group>
 				</group>
 			</group>	

@@ -21,7 +21,7 @@
 		<group name="resources">
 			<group name="Button">
 				<text name="Ai" value="AIs" tooltip="Show the available artificial intelligences" />
-				<text name="Back" value="Retour" tooltip="Revenir au menu principal" />
+				<text name="Back" value="Retour" tooltip="Come back to the main menu" />
 				<text name="Heroes" value="Heroes" tooltip="Show the available controlable characters" />
 				<text name="Instances" value="Instances" tooltip="Show the available instances" />
 				<text name="Levels" value="Levels" tooltip="Show the available levels" />
@@ -32,7 +32,7 @@
 
 			<group name="Ai">
 				<group name="Button">
-					<text name="Back" value="Back" tooltip="Go back to the main menu" />
+					<text name="Back" value="Back" tooltip="Go back to the resources menu" />
 				</group>
 				<group name="Select">
 					<text name="Title" value="List of AIs" tooltip="List of all available artificial intelligences" />
@@ -56,7 +56,7 @@
 	
 			<group name="Hero">
 				<group name="Button">
-					<text name="Back" value="Back" tooltip="Go back to the main menu" />
+					<text name="Back" value="Back" tooltip="Go back to the resources menu" />
 				</group>		
 				<group name="Select">
 					<text name="Title" value="List of characters" tooltip="List of all available characters" />
@@ -82,7 +82,7 @@
 	
 			<group name="Level">
 				<group name="Button">
-					<text name="Back" value="Back" tooltip="Go back to the main menu" />
+					<text name="Back" value="Back" tooltip="Go back to the resources menu" />
 				</group>		
 				<group name="Select">
 					<text name="Title" value="List of levels" tooltip="List of all available levels" />
@@ -104,6 +104,27 @@
 						<text name="Size" value="Size"  tooltip="Size of the visible play zone" />
 						<text name="Source" value="Source"  tooltip="Source of this level (original work or ripped from some existing game)" />
 						<text name="Theme" value="Theme"  tooltip="Theme used in this level" />
+					</group>
+				</group>
+			</group>
+				
+			<group name="Match">
+				<group name="Button">
+					<text name="Back" value="Back" tooltip="Go back to the resources menu" />
+				</group>		
+				<group name="Select">
+					<text name="Title" value="Liste des matches" tooltip="Liste of predefined matches" />
+					<group name="List">
+						<text name="PageDown" value="Page down" tooltip="Go to the next matches page" />
+						<text name="PageUp" value="Page up" tooltip="Go back to the previous matches page" />
+					</group>
+					<group name="Preview">
+						<text name="Author" value="Auteur"  tooltip="Author of this match" />
+						<text name="Limit" value="Instance" tooltip="Limits for this match" />
+						<text name="Name" value="Nom" tooltip="Name of this match" />
+						<text name="Players" value="Joueurs" tooltip="Number of players needed for this match" />
+						<text name="Points" value="Points"  tooltip="Points processing for this match" />
+						<text name="Rounds" value="Manches"  tooltip="Number of rounds defined for this match" />
 					</group>
 				</group>
 			</group>	

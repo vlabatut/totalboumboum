@@ -22,6 +22,7 @@ package fr.free.totalboumboum.gui.menus.explore.matches.select;
  */
 
 import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.io.File;
@@ -60,8 +61,8 @@ public class SelectedMatchData extends EntitledDataPanel implements MouseListene
 {	
 	private static final long serialVersionUID = 1L;
 	private static final float SPLIT_RATIO = 0.5f;
-	private static final int POINTS_PANEL_INDEX = 2;
-	private static final int LIMITS_PANEL_INDEX = 4;
+	private static final int POINTS_PANEL_INDEX = 3;
+	private static final int LIMITS_PANEL_INDEX = 5;
 	
 	private static final int LIST_LINE_COUNT = 20;
 	private static final int LIST_LINE_PREVIOUS = 0;
@@ -125,25 +126,31 @@ public class SelectedMatchData extends EntitledDataPanel implements MouseListene
 				int previewHeight = dataHeight - 2*rightHeight - 2*margin; 
 				
 				rightPanel = new SubPanel(rightWidth,dataHeight);
+				rightPanel.setOpaque(false);
 				mainPanel.add(rightPanel);
 				{	BoxLayout layout = new BoxLayout(rightPanel,BoxLayout.PAGE_AXIS); 
-					mainPanel.setLayout(layout);
+					rightPanel.setLayout(layout);
 				}
 				
+				rightPanel.add(Box.createVerticalGlue());
+
 				{	makePreviewPanel(rightWidth,previewHeight);
 					rightPanel.add(previewPanel);
 				}
 
-				mainPanel.add(Box.createHorizontalGlue());
+				rightPanel.add(Box.createRigidArea(new Dimension(margin,margin)));
 
-				{	makeLimitsPanel(rightWidth,rightHeight);
+				{	limitsPanel = makeLimitsPanel(rightWidth,rightHeight);
 					rightPanel.add(limitsPanel);
 				}
-				mainPanel.add(Box.createHorizontalGlue());
 
-				{	makePointsPanel(rightWidth,previewHeight);
+				rightPanel.add(Box.createRigidArea(new Dimension(margin,margin)));
+
+				{	pointsPanel = makePointsPanel(rightWidth,previewHeight);
 					rightPanel.add(pointsPanel);
 				}
+
+				rightPanel.add(Box.createVerticalGlue());
 			}
 			
 			setDataPart(mainPanel);
@@ -267,7 +274,7 @@ public class SelectedMatchData extends EntitledDataPanel implements MouseListene
 	}
 	
 	private void refreshPreview()
-	{	String values[] = new String[21];
+	{	String values[] = new String[VIEW_LINE_COUNT];
 		// no match selected
 		if(selectedRow<0)
 		{	for(int i=0;i<values.length;i++)
@@ -317,14 +324,14 @@ public class SelectedMatchData extends EntitledDataPanel implements MouseListene
 	private SubPanel makePointsPanel(int width, int height)
 	{	EntitledSubPanel result = new EntitledSubPanel(width,height);
 		String key = GuiKeys.MENU_RESOURCES_MATCH_SELECT_PREVIEW_POINTS;
-		setTitleKey(key);
+		result.setTitleKey(key,true);
 		return result;
 	}
 	
 	private SubPanel makeLimitsPanel(int width, int height)
 	{	EntitledSubPanel result = new EntitledSubPanel(width,height);
 		String key = GuiKeys.MENU_RESOURCES_MATCH_SELECT_PREVIEW_LIMIT;
-		setTitleKey(key);
+		result.setTitleKey(key,true);
 		return result;
 	}
 	
@@ -341,9 +348,9 @@ public class SelectedMatchData extends EntitledDataPanel implements MouseListene
 	{	if(selectedMatch==null)
 			limitsPanel = makeLimitsPanel(rightWidth,rightHeight);
 		else
-			pointsPanel = RoundDescription.makePointsPanel(rightWidth,rightHeight,selectedMatch.getPointProcessor(),"Match");
+			limitsPanel = RoundDescription.makePointsPanel(rightWidth,rightHeight,selectedMatch.getPointProcessor(),"Match");
 		rightPanel.remove(LIMITS_PANEL_INDEX);
-		rightPanel.add(pointsPanel,LIMITS_PANEL_INDEX);
+		rightPanel.add(limitsPanel,LIMITS_PANEL_INDEX);
 	}
 	
 	@Override
