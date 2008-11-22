@@ -33,6 +33,7 @@ import fr.free.totalboumboum.gui.common.panel.menu.InnerMenuPanel;
 import fr.free.totalboumboum.gui.common.panel.menu.MenuPanel;
 import fr.free.totalboumboum.gui.tools.GuiKeys;
 import fr.free.totalboumboum.gui.tools.GuiTools;
+import fr.free.totalboumboum.tools.FileTools;
 
 public class SelectedMatchMenu extends InnerMenuPanel
 {	private static final long serialVersionUID = 1L;
@@ -64,7 +65,7 @@ public class SelectedMatchMenu extends InnerMenuPanel
 		add(Box.createVerticalGlue());		
 
 		// panels
-		levelData = new SelectedMatchData(container);
+		levelData = new SelectedMatchData(container,FileTools.getMatchesPath());
 		container.setDataPart(levelData);
 	}
 	
