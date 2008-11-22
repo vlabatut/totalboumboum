@@ -31,10 +31,13 @@ import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.FileFilter;
 import java.io.IOException;
+import java.text.Collator;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.Iterator;
+import java.util.Locale;
+import java.util.Map.Entry;
 
 import javax.swing.Box;
 import javax.swing.BoxLayout;
@@ -45,6 +48,10 @@ import javax.xml.parsers.ParserConfigurationException;
 
 import org.xml.sax.SAXException;
 
+import fr.free.totalboumboum.configuration.Configuration;
+import fr.free.totalboumboum.configuration.profile.Profile;
+import fr.free.totalboumboum.configuration.profile.ProfileLoader;
+import fr.free.totalboumboum.configuration.profile.ProfilesConfiguration;
 import fr.free.totalboumboum.engine.container.level.HollowLevel;
 import fr.free.totalboumboum.engine.container.level.LevelPreview;
 import fr.free.totalboumboum.engine.container.level.LevelPreviewLoader;
@@ -61,58 +68,40 @@ import fr.free.totalboumboum.tools.ImageTools;
 public class SelectedMatchData extends EntitledDataPanel implements MouseListener
 {	
 	private static final long serialVersionUID = 1L;
-	private static final float SPLIT_RATIO = 0.4f;
+	private static final float SPLIT_RATIO = 0.5f;
 	
 	private static final int LIST_LINE_COUNT = 20;
 	private static final int LIST_LINE_PREVIOUS = 0;
-	private static final int LIST_LINE_PARENT = 1;
 	private static final int LIST_LINE_NEXT = LIST_LINE_COUNT-1;
 
 	private static final int VIEW_LINE_NAME = 0;
-	private static final int VIEW_LINE_PACK = 1;
-	private static final int VIEW_LINE_AUTHOR = 2;
-	private static final int VIEW_LINE_SOURCE = 3;
-	private static final int VIEW_LINE_INSTANCE = 4;
-	private static final int VIEW_LINE_THEME = 5;
-	private static final int VIEW_LINE_SIZE = 6;
+	private static final int VIEW_LINE_AI_NAME = 1;
+	private static final int VIEW_LINE_AI_PACK = 2;
+	private static final int VIEW_LINE_HERO_NAME = 3;
+	private static final int VIEW_LINE_HERO_PACK = 4;
+	private static final int VIEW_LINE_COLOR = 5;
 
 	private static final int LIST_PANEL_INDEX = 0;
 	@SuppressWarnings("unused")
 	private static final int PREVIEW_PANEL_INDEX = 2;
 	
-	@SuppressWarnings("unused")
-	private static final int INFOS_PANEL_INDEX = 0;
-	@SuppressWarnings("unused")
-	private static final int IMAGE_PANEL_INDEX = 2;
-
-	private SubPanel mainPanel;
-	private SubPanel previewPanel;
-	private JLabel previewLabel;
-	private UntitledSubPanelTable infosPanel;
-	private SubPanel imagePanel;
-	private int imageLabelWidth;
-	private int imageLabelHeight;
-	private int listWidth;
-	private int listHeight;
+	private ArrayList<UntitledSubPanelTable> listPanels;
+	private int currentPage = 0;
+	private int selectedRow = -1;
 	
-	private ArrayList<UntitledSubPanelTable> listPackagePanels;
-	private int currentPackagePage = 0;
-	private int selectedPackageRow = -1;
-	private ArrayList<String> levelPackages;
-	private ArrayList<ArrayList<String>> levelFolders;
-
-	private ArrayList<UntitledSubPanelTable> listLevelPanels;
-	private int currentLevelPage = 0;
-	private int selectedLevelRow = -1;
-	private LevelPreview selectedLevelPreview = null;
-		
-	private boolean packageMode = true; //false if levels are displayed 
+	private ProfilesConfiguration profilesConfiguration;
+	private SubPanel mainPanel;
+	private UntitledSubPanelTable previewPanel;
+	private ArrayList<Entry<String,String>> profiles;
+	private Profile selectedProfile = null;
+	private String selectedProfileFile = null;
+	private int leftWidth;
 	
 	public SelectedMatchData(SplitMenuPanel container)
 	{	super(container);
 
 		// title
-		setTitleKey(GuiKeys.MENU_RESOURCES_LEVEL_SELECT_TITLE);
+		setTitleKey(GuiKeys.MENU_PROFILES_LIST_TITLE);
 	
 		// data
 		{	mainPanel = new SubPanel(dataWidth,dataHeight);
@@ -121,132 +110,71 @@ public class SelectedMatchData extends EntitledDataPanel implements MouseListene
 			}
 			
 			int margin = GuiTools.panelMargin;
-			int leftWidth = (int)(dataWidth*SPLIT_RATIO); 
+			leftWidth = (int)(dataWidth*SPLIT_RATIO); 
 			int rightWidth = dataWidth - leftWidth - margin; 
 			mainPanel.setOpaque(false);
-			initPackages();
+			profilesConfiguration = Configuration.getProfilesConfiguration();
+			initProfiles();
 			
 			// list panel
-			{	listWidth = leftWidth;
-				listHeight = dataHeight;
-				makePackagesListPanels(leftWidth,dataHeight);
-				mainPanel.add(listPackagePanels.get(currentPackagePage));
+			{	makeListPanels(leftWidth,dataHeight);
+				mainPanel.add(listPanels.get(currentPage));
 			}
 			
 			mainPanel.add(Box.createHorizontalGlue());
 			
 			// preview panel
-			{	previewPanel = new SubPanel(rightWidth,dataHeight);
-				{	BoxLayout layout = new BoxLayout(previewPanel,BoxLayout.PAGE_AXIS); 
-					previewPanel.setLayout(layout);
-				}
-				previewPanel.setOpaque(false);
-				
-				int upHeight = (int)(dataHeight*0.5); 
-				int downHeight = dataHeight - upHeight - margin; 
-				
-				makeInfosPanel(rightWidth,upHeight);
-				previewPanel.add(infosPanel);
-
-				previewPanel.add(Box.createVerticalGlue());
-
-				makeImagePanel(rightWidth,downHeight);
-				previewPanel.add(imagePanel);
-				
+			{	makePreviewPanel(rightWidth,dataHeight);
 				mainPanel.add(previewPanel);
 			}
 			
 			setDataPart(mainPanel);
+			
 		}
 	}
 		
-	/**
-	 * builds the list of levels (main) packages and of levels folders (or secondary packages).
-	 * for each folder, tests if a level.xml file is present.
-	 */
-	private void initPackages()
-	{	levelPackages = new ArrayList<String>();
-		levelFolders = new ArrayList<ArrayList<String>>();
-		
-		// packages
-		String levelMainName = FileTools.getLevelsPath();
-		File levelMainFile = new File(levelMainName);
-		FileFilter filter = new FileFilter()
+	private void initProfiles()
+	{	profiles = new ArrayList<Entry<String,String>>(profilesConfiguration.getProfiles().entrySet());
+		Collections.sort(profiles,new Comparator<Entry<String,String>>()
 		{	@Override
-			public boolean accept(File pathname)
-			{	boolean result = pathname.exists() && pathname.isDirectory();
+			public int compare(Entry<String,String> arg0, Entry<String,String> arg1)
+			{	int result;
+				String name0 = arg0.getValue();
+				String name1 = arg1.getValue();
+				Collator collator = Collator.getInstance(Locale.ENGLISH);
+				result = collator.compare(name0,name1);
 				return result;
 			}
-		};
-		File levelPackageFilesTemp[] = levelMainFile.listFiles(filter);
-		ArrayList<File> levelPackageFiles = new ArrayList<File>();
-		for(int i=0;i<levelPackageFilesTemp.length;i++)
-			levelPackageFiles.add(levelPackageFilesTemp[i]);
-		Comparator<File> comparator = new Comparator<File>()
-		{	@Override
-			public int compare(File o1, File o2)
-			{	String n1 = o1.getName();
-				String n2 = o2.getName();
-				int result = n1.compareTo(n2);				
-				return result;
-			}			
-		};	
-		Collections.sort(levelPackageFiles,comparator);
-
-		// levels
-		Iterator<File> p = levelPackageFiles.iterator();
-		while(p.hasNext())
-		{	// get the list of folders in this package
-			File levelPackageFile = p.next();
-			String packageName = levelPackageFile.getName();
-			File levelFolderFiles[] = levelPackageFile.listFiles(filter);
-			ArrayList<File> levelFiles = new ArrayList<File>();
-			for(int i=0;i<levelFolderFiles.length;i++)
-				levelFiles.add(levelFolderFiles[i]);
-			Collections.sort(levelFiles,comparator);
-			ArrayList<String> levelFoldersTemp = new ArrayList<String>();
-			Iterator<File> q = levelFiles.iterator();
-			while(q.hasNext())
-			{	// find the XML file
-				File levelFolderFile = q.next();
-				String folderName = levelFolderFile.getName();
-				File[] content = levelFolderFile.listFiles();
-				String xmlFileName = FileTools.FILE_LEVEL+FileTools.EXTENSION_DATA;
-				File xmlFile = FileTools.getFile(xmlFileName,content);
-				if(xmlFile!=null)
-					levelFoldersTemp.add(folderName);
-			}
-			// add to the list of levels for this package
-			if(levelFoldersTemp.size()>0)
-			{	levelFolders.add(levelFoldersTemp);
-				levelPackages.add(packageName);
-			}
-		}
+		});
 	}
 	
-	private void makePackagesListPanels(int width, int height)
-	{	int cols = 1;
-		listPackagePanels = new ArrayList<UntitledSubPanelTable>();		
-		Iterator<String> it = levelPackages.iterator(); 
-		for(int panelIndex=0;panelIndex<getPackagesPageCount();panelIndex++)
-		{	UntitledSubPanelTable listPanel = new UntitledSubPanelTable(width,height,cols,LIST_LINE_COUNT,false);
+	private void makeListPanels(int width, int height)
+	{	int lines = LIST_LINE_COUNT;
+		int cols = 1;
+		listPanels = new ArrayList<UntitledSubPanelTable>();
+		
+		for(int panelIndex=0;panelIndex<getPageCount();panelIndex++)
+		{	UntitledSubPanelTable listPanel = new UntitledSubPanelTable(width,height,cols,lines,false);
 			listPanel.setSubColumnsMaxWidth(0,Integer.MAX_VALUE);
 		
 			// data
-			int line = LIST_LINE_PREVIOUS+1;
-			while(line<LIST_LINE_NEXT && it.hasNext())
+			int line = 1;
+			int profileIndex = panelIndex*(LIST_LINE_COUNT-2);
+			while(line<LIST_LINE_NEXT && profileIndex<profiles.size())
 			{	Color bg = GuiTools.COLOR_TABLE_REGULAR_BACKGROUND;
-				String name = it.next();
+				Entry<String,String> profile = profiles.get(profileIndex);
+				String name = profile.getValue();
 				listPanel.setLabelBackground(line,0,bg);
 				listPanel.setLabelText(line,0,name,name);
 				JLabel label = listPanel.getLabel(line,0);
 				label.addMouseListener(this);
+				profileIndex++;
 				line++;
 			}			
 			// page up
 			{	Color bg = GuiTools.COLOR_TABLE_HEADER_BACKGROUND;
 				listPanel.setLabelBackground(LIST_LINE_PREVIOUS,0,bg);
-				String key = GuiKeys.MENU_RESOURCES_LEVEL_SELECT_PACKAGE_PAGEUP;
+				String key = GuiKeys.MENU_PROFILES_LIST_PAGEUP;
 				listPanel.setLabelKey(LIST_LINE_PREVIOUS,0,key,true);
 				JLabel label = listPanel.getLabel(LIST_LINE_PREVIOUS,0);
 				label.addMouseListener(this);
@@ -254,165 +182,77 @@ public class SelectedMatchData extends EntitledDataPanel implements MouseListene
 			// page down
 			{	Color bg = GuiTools.COLOR_TABLE_HEADER_BACKGROUND;
 				listPanel.setLabelBackground(LIST_LINE_NEXT,0,bg);
-				String key = GuiKeys.MENU_RESOURCES_LEVEL_SELECT_PACKAGE_PAGEDOWN;
+				String key = GuiKeys.MENU_PROFILES_LIST_PAGEDOWN;
 				listPanel.setLabelKey(LIST_LINE_NEXT,0,key,true);
 				JLabel label = listPanel.getLabel(LIST_LINE_NEXT,0);
 				label.addMouseListener(this);
 			}
-			listPackagePanels.add(listPanel);
+			listPanels.add(listPanel);
 		}
 	}
-
-	private void makeFoldersListPanels(int width, int height)
-	{	int cols = 1;
-		listLevelPanels = new ArrayList<UntitledSubPanelTable>();
-		int selectedPackageIndex = currentPackagePage*(LIST_LINE_COUNT-2)+(selectedPackageRow-1);
-		Iterator<String> it = levelFolders.get(selectedPackageIndex).iterator();
-		for(int panelIndex=0;panelIndex<getFoldersPageCount();panelIndex++)
-		{	UntitledSubPanelTable listPanel = new UntitledSubPanelTable(width,height,cols,LIST_LINE_COUNT,false);
-			listPanel.setSubColumnsMaxWidth(0,Integer.MAX_VALUE);
-		
-			// data
-			int line = LIST_LINE_PARENT+1;
-			while(line<LIST_LINE_NEXT && it.hasNext())
-			{	Color bg = GuiTools.COLOR_TABLE_REGULAR_BACKGROUND;
-				String levelFolder = it.next();
-				listPanel.setLabelBackground(line,0,bg);
-				listPanel.setLabelText(line,0,levelFolder,levelFolder);
-				JLabel label = listPanel.getLabel(line,0);
-				label.addMouseListener(this);
-				line++;
-			}			
-			// page up
-			{	Color bg = GuiTools.COLOR_TABLE_HEADER_BACKGROUND;
-				listPanel.setLabelBackground(LIST_LINE_PREVIOUS,0,bg);
-				String key = GuiKeys.MENU_RESOURCES_LEVEL_SELECT_FOLDER_PAGEUP;
-				listPanel.setLabelKey(LIST_LINE_PREVIOUS,0,key,true);
-				JLabel label = listPanel.getLabel(LIST_LINE_PREVIOUS,0);
-				label.addMouseListener(this);
-			}
-			// parent
-			{	Color bg = GuiTools.COLOR_TABLE_HEADER_BACKGROUND;
-				listPanel.setLabelBackground(LIST_LINE_PARENT,0,bg);
-				String key = GuiKeys.MENU_RESOURCES_LEVEL_SELECT_FOLDER_PARENT;
-				listPanel.setLabelKey(LIST_LINE_PARENT,0,key,false);
-				JLabel label = listPanel.getLabel(LIST_LINE_PARENT,0);
-				label.addMouseListener(this);
-			}
-			// page down
-			{	Color bg = GuiTools.COLOR_TABLE_HEADER_BACKGROUND;
-				listPanel.setLabelBackground(LIST_LINE_NEXT,0,bg);
-				String key = GuiKeys.MENU_RESOURCES_LEVEL_SELECT_FOLDER_PAGEDOWN;
-				listPanel.setLabelKey(LIST_LINE_NEXT,0,key,true);
-				JLabel label = listPanel.getLabel(LIST_LINE_NEXT,0);
-				label.addMouseListener(this);
-			}
-			listLevelPanels.add(listPanel);
-		}
-	}
-
-	private void makeInfosPanel(int width, int height)
-	{	int lines = 10;
+	
+	private void makePreviewPanel(int width, int height)
+	{	int lines = 21;
 		int colSubs = 2;
 		int colGroups = 1;
-		infosPanel = new UntitledSubPanelTable(width,height,colGroups,colSubs,lines,true);
+		previewPanel = new UntitledSubPanelTable(width,height,colGroups,colSubs,lines,true);
 		
 		// data
 		String keys[] = 
-		{	GuiKeys.MENU_RESOURCES_LEVEL_SELECT_PREVIEW_NAME,
-			GuiKeys.MENU_RESOURCES_LEVEL_SELECT_PREVIEW_PACKAGE,
-			GuiKeys.MENU_RESOURCES_LEVEL_SELECT_PREVIEW_AUTHOR,
-			GuiKeys.MENU_RESOURCES_LEVEL_SELECT_PREVIEW_SOURCE,
-			GuiKeys.MENU_RESOURCES_LEVEL_SELECT_PREVIEW_INSTANCE,
-			GuiKeys.MENU_RESOURCES_LEVEL_SELECT_PREVIEW_THEME,
-			GuiKeys.MENU_RESOURCES_LEVEL_SELECT_PREVIEW_SIZE
+		{	GuiKeys.MENU_PROFILES_PREVIEW_NAME,
+			GuiKeys.MENU_PROFILES_PREVIEW_AINAME,
+			GuiKeys.MENU_PROFILES_PREVIEW_AIPACK,
+			GuiKeys.MENU_PROFILES_PREVIEW_HERONAME,
+			GuiKeys.MENU_PROFILES_PREVIEW_HEROPACK,
+			GuiKeys.MENU_PROFILES_PREVIEW_COLOR			
 		};
 		for(int line=0;line<keys.length;line++)
 		{	int colSub = 0;
-			{	infosPanel.setLabelKey(line,colSub,keys[line],true);
+			{	previewPanel.setLabelKey(line,colSub,keys[line],true);
 				Color fg = GuiTools.COLOR_TABLE_HEADER_FOREGROUND;
-				infosPanel.setLabelForeground(line,0,fg);
+				previewPanel.setLabelForeground(line,0,fg);
 				Color bg = GuiTools.COLOR_TABLE_HEADER_BACKGROUND;
-				infosPanel.setLabelBackground(line,colSub,bg);
+				previewPanel.setLabelBackground(line,colSub,bg);
 				colSub++;
 			}
 			{	String text = null;
 				String tooltip = GuiConfiguration.getMiscConfiguration().getLanguage().getText(keys[line]+GuiKeys.TOOLTIP);
-				infosPanel.setLabelText(line,colSub,text,tooltip);
+				previewPanel.setLabelText(line,colSub,text,tooltip);
 				if(line>0)
 				{	Color bg = GuiTools.COLOR_TABLE_REGULAR_BACKGROUND;
-					infosPanel.setLabelBackground(line,colSub,bg);
+					previewPanel.setLabelBackground(line,colSub,bg);
 				}
 				colSub++;
 			}
 		}
-		int maxWidth = width-(colGroups*colSubs+1)*GuiTools.subPanelMargin-infosPanel.getHeaderHeight();
-		infosPanel.setSubColumnsMaxWidth(1,maxWidth);
-		infosPanel.setSubColumnsPreferredWidth(1,maxWidth);
-	}
-	
-	private void makeImagePanel(int width, int height)
-	{	imagePanel = new SubPanel(width,height);
-		int margin = GuiTools.subPanelMargin;
-		imagePanel.setBackground(GuiTools.COLOR_COMMON_BACKGROUND);
-		BoxLayout layout = new BoxLayout(imagePanel,BoxLayout.PAGE_AXIS);
-		imagePanel.setLayout(layout);
-
-		previewLabel = new JLabel();
-		imagePanel.add(Box.createVerticalGlue());
-		imagePanel.add(previewLabel);
-		imagePanel.add(Box.createVerticalGlue());
-		previewLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
-		previewLabel.setAlignmentY(Component.CENTER_ALIGNMENT);
-
-		imageLabelHeight = height - 2*margin;
-		imageLabelWidth = width - 2*margin;
-		Dimension dim = new Dimension(imageLabelWidth,imageLabelHeight);
-		previewLabel.setMinimumSize(dim);
-		previewLabel.setPreferredSize(dim);
-		previewLabel.setMaximumSize(dim);
-		
-		previewLabel.setHorizontalAlignment(SwingConstants.CENTER);
-		previewLabel.setVerticalAlignment(SwingConstants.CENTER);
-		
-		String text = GuiConfiguration.getMiscConfiguration().getLanguage().getText(GuiKeys.MENU_RESOURCES_LEVEL_SELECT_PREVIEW_IMAGE);
-		String tooltip = GuiConfiguration.getMiscConfiguration().getLanguage().getText(GuiKeys.MENU_RESOURCES_LEVEL_SELECT_PREVIEW_IMAGE+GuiKeys.TOOLTIP);
-		previewLabel.setText(null);
-		previewLabel.setToolTipText(tooltip);
-
-		int fontSize = GuiTools.getFontSize(imageLabelWidth, imageLabelHeight, text);
-		Font font = GuiConfiguration.getMiscConfiguration().getFont().deriveFont((float)fontSize);
-		previewLabel.setFont(font);
-		previewLabel.setBackground(GuiTools.COLOR_TABLE_NEUTRAL_BACKGROUND);
-		previewLabel.setForeground(GuiTools.COLOR_TABLE_REGULAR_FOREGROUND);
-		previewLabel.setOpaque(true);
+		int maxWidth = width-3*GuiTools.subPanelMargin-previewPanel.getHeaderHeight();
+		previewPanel.setSubColumnsMaxWidth(1,maxWidth);
+		previewPanel.setSubColumnsPreferredWidth(1,maxWidth);
 	}
 	
 	private void refreshPreview()
-	{	String infosValues[] = new String[10];
-		BufferedImage image;
-		// no level selected
-		if(packageMode || selectedLevelRow<0)
-		{	// image
-			image = null;
-			// infos
-			for(int i=0;i<infosValues.length;i++)
-				infosValues[i] = null;
+	{	String values[] = new String[21];
+		// no player selected
+		if(selectedRow<0)
+		{	for(int i=0;i<values.length;i++)
+				values[i] = null;	
+			Color bg = GuiTools.COLOR_TABLE_REGULAR_BACKGROUND;
+			previewPanel.setLabelBackground(VIEW_LINE_COLOR,1,bg);
+			selectedProfile = null;
+			selectedProfileFile = null;
 		}
-		// one level selected
+		// one player selected
 		else
-		{	// image
-			image = selectedLevelPreview.getVisualPreview();
-			// infos
+		{	Entry<String,String> entry = profiles.get((selectedRow-1)+currentPage*(LIST_LINE_COUNT-2));
 			try
-			{	HollowLevel hollowLevel = new HollowLevel(selectedLevelPreview.getPack()+File.separator+selectedLevelPreview.getFolder());
-				infosValues[VIEW_LINE_NAME] = selectedLevelPreview.getTitle();
-				infosValues[VIEW_LINE_PACK]= selectedLevelPreview.getPack();
-				infosValues[VIEW_LINE_AUTHOR] = selectedLevelPreview.getAuthor();
-				infosValues[VIEW_LINE_SOURCE] = selectedLevelPreview.getSource();
-				infosValues[VIEW_LINE_INSTANCE] = hollowLevel.getInstanceName();
-				infosValues[VIEW_LINE_THEME] = hollowLevel.getThemeName();
-				infosValues[VIEW_LINE_SIZE] = Integer.toString(hollowLevel.getVisibleHeight())+new Character('\u00D7').toString()+Integer.toString(hollowLevel.getVisibleWidth());
+			{	selectedProfileFile = entry.getKey();
+				selectedProfile = ProfileLoader.loadProfile(selectedProfileFile);			
+			}
+			catch (IllegalArgumentException e)
+			{	e.printStackTrace();
+			}
+			catch (SecurityException e)
+			{	e.printStackTrace();
 			}
 			catch (ParserConfigurationException e)
 			{	e.printStackTrace();
@@ -422,50 +262,60 @@ public class SelectedMatchData extends EntitledDataPanel implements MouseListene
 			}
 			catch (IOException e)
 			{	e.printStackTrace();
+			} 
+			catch (IllegalAccessException e)
+			{	e.printStackTrace();
+			}
+			catch (NoSuchFieldException e)
+			{	e.printStackTrace();
 			}
 			catch (ClassNotFoundException e)
 			{	e.printStackTrace();
 			}
+			values[VIEW_LINE_NAME] = selectedProfile.getName();
+			values[VIEW_LINE_AI_NAME]= selectedProfile.getAiName();
+			values[VIEW_LINE_AI_PACK] = selectedProfile.getAiPackname();
+			values[VIEW_LINE_HERO_NAME] = selectedProfile.getSpriteName();
+			values[VIEW_LINE_HERO_PACK] = selectedProfile.getSpritePack();
+			String colorKey = selectedProfile.getSpriteSelectedColor().toString();
+			colorKey = colorKey.toUpperCase().substring(0,1)+colorKey.toLowerCase().substring(1,colorKey.length());
+			colorKey = GuiKeys.COLOR+colorKey;
+			values[VIEW_LINE_COLOR] = GuiConfiguration.getMiscConfiguration().getLanguage().getText(colorKey); 
+			Color clr = selectedProfile.getSpriteSelectedColor().getColor();
+			int alpha = GuiTools.ALPHA_TABLE_REGULAR_BACKGROUND_LEVEL3;
+			Color bg = new Color(clr.getRed(),clr.getGreen(),clr.getBlue(),alpha);
+			previewPanel.setLabelBackground(VIEW_LINE_COLOR,1,bg);
 		}
-		// infos
-		for(int line=0;line<infosValues.length;line++)
+		// common
+		for(int line=0;line<values.length;line++)
 		{	int colSub = 1;
-			String text = infosValues[line];
+			String text = values[line];
 			String tooltip = text;
-			infosPanel.setLabelText(line,colSub,text,tooltip);
-		}
-		// image
-		if(image!=null)
-		{	float zoomX = imageLabelWidth/(float)image.getWidth();
-			float zoomY = imageLabelHeight/(float)image.getHeight();
-			float zoom = Math.min(zoomX,zoomY);
-			image = ImageTools.resize(image,zoom,true);
-			ImageIcon icon = new ImageIcon(image);
-			previewLabel.setIcon(icon);
-			previewLabel.setText(null);
-			Color bg = GuiTools.COLOR_TABLE_REGULAR_BACKGROUND;
-			previewLabel.setBackground(bg);
-		}
-		else
-		{	String text = null;//GuiConfiguration.getMiscConfiguration().getLanguage().getText(GuiTools.MENU_LEVEL_SELECT_PREVIEW_IMAGE);
-			String tooltip = GuiConfiguration.getMiscConfiguration().getLanguage().getText(GuiKeys.MENU_RESOURCES_LEVEL_SELECT_PREVIEW_IMAGE+GuiKeys.TOOLTIP);
-			previewLabel.setText(text);
-			previewLabel.setToolTipText(tooltip);
-			Color bg = GuiTools.COLOR_TABLE_NEUTRAL_BACKGROUND;
-			previewLabel.setBackground(bg);
+			previewPanel.setLabelText(line,colSub,text,tooltip);
 		}
 		
+//		mainPanel.validate();
+//		mainPanel.repaint();
 	}
 
 	@Override
 	public void refresh()
-	{	refreshPreview();
+	{	initProfiles();
+		makeListPanels(leftWidth,dataHeight);
+		refreshList();
+		if(selectedRow!=-1)
+			listPanels.get(currentPage).setLabelBackground(selectedRow,0,GuiTools.COLOR_TABLE_SELECTED_BACKGROUND);
+		refreshPreview();
 	}
 
 	@Override
 	public void updateData()
 	{	// nothing to do here
 	}
+
+	public ProfilesConfiguration getProfilesConfiguration()
+	{	return profilesConfiguration;
+	}	
 	
 	/////////////////////////////////////////////////////////////////
 	// MOUSE LISTENER	/////////////////////////////////////////////
@@ -486,73 +336,30 @@ public class SelectedMatchData extends EntitledDataPanel implements MouseListene
 	@Override
 	public void mousePressed(MouseEvent e)
 	{	JLabel label = (JLabel)e.getComponent();
-		// list = packages
-		if(packageMode)
-		{	int[] pos = listPackagePanels.get(currentPackagePage).getLabelPosition(label);
-			switch(pos[0])
-			{	// previous page
-				case LIST_LINE_PREVIOUS:
-					if(currentPackagePage>0)
-					{	unselectList();
-						currentPackagePage--;
-						refreshList();
-					}
-					break;
-				// next page
-				case LIST_LINE_NEXT:
-					if(currentPackagePage<getPackagesPageCount()-1)
-					{	unselectList();
-						currentPackagePage++;
-						refreshList();
-					}
-					break;
-				// package selected
-				default:
-					unselectList();
-					selectedPackageRow = pos[0];
-					listPackagePanels.get(currentPackagePage).setLabelBackground(selectedPackageRow,0,GuiTools.COLOR_TABLE_SELECTED_BACKGROUND);
-					makeFoldersListPanels(listWidth,listHeight);
-					packageMode = false;
-					currentLevelPage = 0;
+		int[] pos = listPanels.get(currentPage).getLabelPosition(label);
+		switch(pos[0])
+		{	// previous page
+			case LIST_LINE_PREVIOUS:
+				if(currentPage>0)
+				{	unselectList();
+					currentPage--;
 					refreshList();
-			}
-		}
-		// list = level
-		else
-		{	int[] pos = listLevelPanels.get(currentLevelPage).getLabelPosition(label);
-			switch(pos[0])
-			{	// previous page
-				case LIST_LINE_PREVIOUS:
-					if(currentLevelPage>0)
-					{	unselectList();
-						currentLevelPage--;
-						refreshList();
-					}
-					break;
-				// go to package
-				case LIST_LINE_PARENT:
-					unselectList();
-					packageMode = true;
-					refreshPreview();
-					unselectList();
+				}
+				break;
+			// next page
+			case LIST_LINE_NEXT:
+				if(currentPage<getPageCount()-1)
+				{	unselectList();
+					currentPage++;
 					refreshList();
-					break;
-				// next page
-				case LIST_LINE_NEXT:
-					if(currentLevelPage<getFoldersPageCount()-1)
-					{	unselectList();
-						currentLevelPage++;
-						refreshList();
-					}
-					break;
-				// level selected
-				default:
-					unselectList();
-					selectedLevelRow = pos[0];
-					loadSelectedLevelPreview();
-					listLevelPanels.get(currentLevelPage).setLabelBackground(selectedLevelRow,0,GuiTools.COLOR_TABLE_SELECTED_BACKGROUND);
-					refreshPreview();
-			}
+				}
+				break;
+			// profile selected
+			default:
+				unselectList();
+				selectedRow = pos[0];
+				listPanels.get(currentPage).setLabelBackground(selectedRow,0,GuiTools.COLOR_TABLE_SELECTED_BACKGROUND);
+				refreshPreview();
 		}
 	}
 	@Override
@@ -560,45 +367,9 @@ public class SelectedMatchData extends EntitledDataPanel implements MouseListene
 	{	
 	}
 	
-	private void loadSelectedLevelPreview()
-	{	// package
-		int selectedPackageIndex = currentPackagePage*(LIST_LINE_COUNT-2)+(selectedPackageRow-1);
-		String packageName = levelPackages.get(selectedPackageIndex);
-		// folder
-		int selectedFolderIndex = currentLevelPage*(LIST_LINE_COUNT-3)+(selectedLevelRow-2);
-		ArrayList<String> levelList = levelFolders.get(selectedPackageIndex);
-		String folderName = levelList.get(selectedFolderIndex);
-		try
-		{	selectedLevelPreview = LevelPreviewLoader.loadLevelPreview(packageName,folderName);
-		}
-		catch (ParserConfigurationException e)
-		{	e.printStackTrace();
-		}
-		catch (SAXException e)
-		{	e.printStackTrace();
-		}
-		catch (IOException e)
-		{	e.printStackTrace();
-		}
-		catch (ClassNotFoundException e)
-		{	e.printStackTrace();
-		}
-	}
-	
-	private int getPackagesPageCount()
-	{	int result = levelPackages.size()/(LIST_LINE_COUNT-2);
-		if(levelPackages.size()%(LIST_LINE_COUNT-2)>0)
-			result++;
-		else if(result==0)
-			result = 1;
-		return result;
-	}
-	
-	private int getFoldersPageCount()
-	{	int selectedPackageIndex = currentPackagePage*(LIST_LINE_COUNT-2)+(selectedPackageRow-1);
-		int zize = levelFolders.get(selectedPackageIndex).size();
-		int result = zize/(LIST_LINE_COUNT-2);
-		if(result>0)
+	private int getPageCount()
+	{	int result = profiles.size()/(LIST_LINE_COUNT-2);
+		if(profiles.size()%(LIST_LINE_COUNT-2)>0)
 			result++;
 		else if(result==0)
 			result = 1;
@@ -606,39 +377,45 @@ public class SelectedMatchData extends EntitledDataPanel implements MouseListene
 	}
 	
 	public void unselectList()
-	{	// packages displayed
-		if(packageMode && selectedPackageRow!=-1)
-		{	listPackagePanels.get(currentPackagePage).setLabelBackground(selectedPackageRow,0,GuiTools.COLOR_TABLE_REGULAR_BACKGROUND);
-			selectedPackageRow = -1;
-			//refreshPreview();
-		}
-		// hero displayed
-		else if(!packageMode && selectedLevelRow!=-1)
-		{	listLevelPanels.get(currentLevelPage).setLabelBackground(selectedLevelRow,0,GuiTools.COLOR_TABLE_REGULAR_BACKGROUND);
-			selectedLevelRow = -1;
-			selectedLevelPreview = null;
+	{	if(selectedRow!=-1)
+		{	listPanels.get(currentPage).setLabelBackground(selectedRow,0,GuiTools.COLOR_TABLE_REGULAR_BACKGROUND);
+			selectedRow = -1;
 			refreshPreview();
-		}
+		}		
 	}
 	
 	private void refreshList()
-	{	// packages displayed
-		if(packageMode)
-		{	mainPanel.remove(LIST_PANEL_INDEX);
-			mainPanel.add(listPackagePanels.get(currentPackagePage),LIST_PANEL_INDEX);
-		}
-		// hero displayed
-		else
-		{	mainPanel.remove(LIST_PANEL_INDEX);
-			mainPanel.add(listLevelPanels.get(currentLevelPage),LIST_PANEL_INDEX);
-		}
-		// common
+	{	mainPanel.remove(LIST_PANEL_INDEX);
+		mainPanel.add(listPanels.get(currentPage),LIST_PANEL_INDEX);
 		mainPanel.validate();
 		mainPanel.repaint();
 	}
 	
-	public LevelPreview getSelectedLevelPreview()
-	{	return selectedLevelPreview;
+	public Profile getSelectedProfile()
+	{	return selectedProfile;
+	}
+	public String getSelectedProfileFile()
+	{	return selectedProfileFile;
 	}
 
+	public void setSelectedProfile(String fileName)
+	{	Iterator<Entry<String,String>> it = profiles.iterator();
+		boolean found = false;
+		int index = 0;
+		while(it.hasNext() && !found)
+		{	Entry<String,String> entry = it.next();
+			if(entry.getKey().equalsIgnoreCase(fileName))
+				found = true;
+			else
+				index++;
+		}
+		if(found)
+		{	currentPage = index/(LIST_LINE_COUNT-2);
+			refreshList();
+			unselectList();
+			selectedRow = index%(LIST_LINE_COUNT-2)+1;
+			listPanels.get(currentPage).setLabelBackground(selectedRow,0,GuiTools.COLOR_TABLE_SELECTED_BACKGROUND);
+			refreshPreview();
+		}
+	}
 }
