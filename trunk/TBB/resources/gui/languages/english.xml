@@ -263,39 +263,28 @@
 			
 			<group name="Players" >
 				<text name="Title" value="Players selection" tooltip="Select players for the incoming game" />
-				<group name="Controls" >
-					<text name="Next" value="Next" tooltip="Set to next available controls" />
-					<text name="Previous" value="Previous" tooltip="Set to previous available controls" />
-					<text name="Value" value="Controls" tooltip="Selected controls" />
-				</group>
-
-				<group name="Color" >
-					<text name="Next" value="Next" tooltip="Set to next available color" />
-					<text name="Previous" value="Previous" tooltip="Set to previous available color" />
-					<text name="Value" value="Color" tooltip="Selected color" />
-				</group>
-
+				<text name="Controls" value="Controls" tooltip="Selected controls" />
+				<text name="Color" value="Color" tooltip="Selected color" />
 				<group name="Hero" >
-					<text name="Browse" value="Browse" tooltip="Browse and select a character" />
-					<text name="Next" value="Next" tooltip="Set to next available character" />
-					<text name="Previous" value="Previous" tooltip="Set to previous available character" />
-					<text name="Value" value="Hero" tooltip="Selected character" />
+					<text name="Header" value="Hero" tooltip="Selected character" />
+					<group name="Button">
+						<text name="Cancel" value="Cancel" tooltip="Cancel and come back to the players selection screen" />
+						<text name="Confirm" value="Confirm" tooltip="Confirm and choose the selected character" />
+					</group>
 				</group>
-
 				<group name="Profile" >
-					<text name="Browse" value="Browse" tooltip="Browse and select a profile" />
-					<text name="Cancel" value="Cancel" tooltip="Cancel and come back to the players selection screen" />
-					<text name="Confirm" value="Confirm" tooltip="Confirm and choose the selected profile" />
+					<text name="Add" value="Add" tooltip="Add a player" />
 					<text name="Delete" value="Unselect" tooltip="Unselect this profile" />
-					<text name="Next" value="Next" tooltip="Set to next available profile" />
-					<text name="Previous" value="Previous" tooltip="Set to previous available profile" />
-					<text name="Value" value="Profile" tooltip="Selected profile" />
+					<text name="Header" value="Profile" tooltip="Selected profile" />
+					<group name="Button">
+						<text name="Cancel" value="Cancel" tooltip="Cancel and come back to the players selection screen" />
+						<text name="Confirm" value="Confirm" tooltip="Confirm and choose the selected profile" />
+					</group>
 				</group>
-
 				<group name="Type" >
 					<text name="Computer" value="Computer" tooltip="Computer-controlled player" />
+					<text name="Header" value="Type" tooltip="Profile type" />
 					<text name="Human" value="Human" tooltip="Human-controlled player" />
-					<text name="Value" value="Type" tooltip="Profile type" />
 				</group>
 				
 			</group>

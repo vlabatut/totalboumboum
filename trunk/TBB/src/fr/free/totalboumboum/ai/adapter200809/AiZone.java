@@ -185,7 +185,6 @@ public class AiZone
 		removeUnchecked(items);
 		if(ownHero!=null && !ownHero.isChecked())
 			ownHero = null;
-System.out.println(bombs.toString());		
 	}
 	
 	/** 

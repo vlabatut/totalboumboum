@@ -659,12 +659,14 @@ public class Launcher
 	 * - nouveauté : possibilité de ranger les 16 couleurs par ordre de préférence (au lieu de définir une seule couleur dans son profil)
 	 * - nouveauté : visualisation des personnages
 	 * - nouveauté : visualisation des niveaux
+	 * - nouveauté : sélection des joueurs avant une partie rapide
 	 * 
 	 * *******************************************************
 	 * *********************** A FAIRE ***********************
 	 * *******************************************************
 	 * 
-	 * - dans l'édition de profil, il faut tester si les couleurs sélectionnées existent pour ce personnage
+	 * - virer la possibilité de définir plusieurs couleurs, ça ne sert à rien
+	 * - un sprite de perso doit être défini dans toutes les 16 couleurs possibles
 	 * 
 	 * - faire le classement lexicographique gérant les signes diacritiques partout où c'est nécessaire
 	 * 
@@ -678,6 +680,8 @@ public class Launcher
 	 * 		+ plus simplement : gérer deux configurations séparées pour le tournoi et le quickmatch
 	 * 
 	 * - modifier le loader d'image de manière à ce qu'une image non-trouvée soit remplacée par la croix rouge
+	 * 
+	 * - calculer en dur les largeurs limites de toutes les colonnes utilisées dans toutes les tables
 	 * 
 	 * - utiliser les tooltips pour afficher les infos trop longues : calcul de points, nombre à virgule dans la colonne des points (décimales cachées), etc.
 	 * - pb de dimension de l'image de fond en fonction de la résolution... (zones pas peintes)

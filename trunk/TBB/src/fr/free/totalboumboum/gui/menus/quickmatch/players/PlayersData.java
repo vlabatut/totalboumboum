@@ -25,21 +25,26 @@ import java.awt.Color;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.image.BufferedImage;
+import java.io.IOException;
 import java.util.ArrayList;
 
 import javax.swing.JLabel;
+import javax.xml.parsers.ParserConfigurationException;
+
+import org.xml.sax.SAXException;
 
 
 import fr.free.totalboumboum.configuration.Configuration;
 import fr.free.totalboumboum.configuration.profile.Portraits;
 import fr.free.totalboumboum.configuration.profile.PredefinedColor;
 import fr.free.totalboumboum.configuration.profile.Profile;
+import fr.free.totalboumboum.configuration.profile.ProfileLoader;
 import fr.free.totalboumboum.gui.common.panel.SplitMenuPanel;
 import fr.free.totalboumboum.gui.common.panel.data.EntitledDataPanel;
-import fr.free.totalboumboum.gui.common.subpanel.Line;
-import fr.free.totalboumboum.gui.common.subpanel.UntitledSubPanelLines;
+import fr.free.totalboumboum.gui.common.subpanel.UntitledSubPanelTable;
 import fr.free.totalboumboum.gui.data.configuration.GuiConfiguration;
 import fr.free.totalboumboum.gui.game.match.description.MatchDescription;
+import fr.free.totalboumboum.gui.menus.quickmatch.players.hero.SelectHeroSplitPanel;
 import fr.free.totalboumboum.gui.menus.quickmatch.players.profile.SelectProfileSplitPanel;
 import fr.free.totalboumboum.gui.tools.GuiKeys;
 import fr.free.totalboumboum.gui.tools.GuiTools;
@@ -49,18 +54,16 @@ public class PlayersData extends EntitledDataPanel implements MouseListener
 	private static final long serialVersionUID = 1L;
 	
 	private static final int LINE_COUNT = 16+1;
+	private static final int COL_COUNT = 6;
+
 	private static final int COL_DELETE = 0;
-	private static final int COL_PROFILE_VALUE = 1;
-	private static final int COL_PROFILE_BROWSE = 2;
-	private static final int COL_TYPE = 3;
-	private static final int COL_HERO_VALUE = 4;
-	private static final int COL_HERO_BROWSE = 5;
-	private static final int COL_COLOR_PREVIOUS = 6;
-	private static final int COL_COLOR_VALUE = 7;
-	private static final int COL_COLOR_NEXT = 8;
-	private static final int COL_CONTROLS = 9;
+	private static final int COL_PROFILE = 1;
+	private static final int COL_TYPE = 2;
+	private static final int COL_HERO = 3;
+	private static final int COL_COLOR = 4;
+	private static final int COL_CONTROLS = 5;
 	
-	private UntitledSubPanelLines playersPanel;
+	private UntitledSubPanelTable playersPanel;
 
 	// controls
 	private ArrayList<String> controlTexts = new ArrayList<String>();
@@ -78,7 +81,7 @@ public class PlayersData extends EntitledDataPanel implements MouseListener
 		
 		// profiles
 		//initProfiles();
-	profiles = Configuration.getGameConfiguration().getTournament().getProfiles();
+profiles = Configuration.getGameConfiguration().getTournament().getProfiles();
 	
 		// title
 		String key = GuiKeys.MENU_QUICKMATCH_PLAYERS_TITLE;
@@ -102,82 +105,54 @@ public class PlayersData extends EntitledDataPanel implements MouseListener
 	{	// nothing to do here
 	}
 	
-	private UntitledSubPanelLines makePlayersPanel(int width, int height)
-	{	//Match match = Configuration.getGameConfiguration().getTournament().getCurrentMatch();
-		
-		int headerCols = 6;
-		@SuppressWarnings("unused")
-		int lineCols = 1+4+1+4+3+1;
+	private UntitledSubPanelTable makePlayersPanel(int width, int height)
+	{	int headerCols = 6;
 		int margin = GuiTools.subPanelMargin;
-		UntitledSubPanelLines playersPanel = new UntitledSubPanelLines(width,height,LINE_COUNT,true);
+		UntitledSubPanelTable playersPanel = new UntitledSubPanelTable(width,height,COL_COUNT,LINE_COUNT,true);
 		int headerHeight = playersPanel.getHeaderHeight();
 		int lineHeight = playersPanel.getLineHeight();
-		int deleteColWidth = lineHeight;
-		int controlColWidth = MatchDescription.initControlsTexts(playersPanel.getLineFontSize(),controlTexts,controlTooltips);
+		int deleteWidth = lineHeight;
+		int controlWidth = MatchDescription.initControlsTexts(playersPanel.getLineFontSize(),controlTexts,controlTooltips);
 		int colorWidth = initColorTexts(playersPanel.getLineFontSize(),colorTexts,colorTooltips,colorBackgrounds);
-		int colorColWidth = colorWidth + 2*margin + 2*lineHeight;
-		int typeColWidth = headerHeight;
-		int heroWidth = lineHeight;
-		int heroColWidth = heroWidth + 1*margin + 1*lineHeight;
-		int fixedSum = margin*(headerCols+1) + deleteColWidth + heroColWidth + controlColWidth + colorColWidth + typeColWidth;
-		int nameColWidth = width - fixedSum;
-		int nameWidth = nameColWidth - 1*margin - 1*lineHeight;
+		int typeWidth = headerHeight;
+		int heroWidth = headerHeight;
+		int fixedSum = margin*(headerCols+1) + deleteWidth + heroWidth + controlWidth + colorWidth + typeWidth;
+		int nameWidth = width - fixedSum;
 		
 		// headers
 		{	String keys[] = 
 			{	null,
-				GuiKeys.MENU_QUICKMATCH_PLAYERS_PROFILE_VALUE,
-				GuiKeys.MENU_QUICKMATCH_PLAYERS_TYPE_VALUE,
-				GuiKeys.MENU_QUICKMATCH_PLAYERS_HERO_VALUE,
-				GuiKeys.MENU_QUICKMATCH_PLAYERS_COLOR_VALUE,
-				GuiKeys.MENU_QUICKMATCH_PLAYERS_CONTROLS_VALUE
+				GuiKeys.MENU_QUICKMATCH_PLAYERS_PROFILE_HEADER,
+				GuiKeys.MENU_QUICKMATCH_PLAYERS_TYPE_HEADER,
+				GuiKeys.MENU_QUICKMATCH_PLAYERS_HERO_HEADER,
+				GuiKeys.MENU_QUICKMATCH_PLAYERS_COLOR,
+				GuiKeys.MENU_QUICKMATCH_PLAYERS_CONTROLS
 			};
 			int sizes[] = 
-			{	deleteColWidth,
-				nameColWidth,
-				typeColWidth,
-				heroColWidth,
-				colorColWidth,
-				controlColWidth
+			{	deleteWidth,
+				nameWidth,
+				typeWidth,
+				heroWidth,
+				colorWidth,
+				controlWidth
 			};
-			Line ln = playersPanel.getLine(0);
-			for(int i=0;i<keys.length-1;i++)
-				ln.addLabel(0);
 			for(int col=0;col<keys.length;col++)
-			{	ln.setLabelMinWidth(col,sizes[col]);
-				ln.setLabelPreferredWidth(col,sizes[col]);
-				ln.setLabelMaxWidth(col,sizes[col]);
+			{	playersPanel.setSubColumnsMinWidth(col,sizes[col]);
+				playersPanel.setSubColumnsPreferredWidth(col,sizes[col]);
+				playersPanel.setSubColumnsMaxWidth(col,sizes[col]);
 				if(keys[col]!=null)
-				{	ln.setLabelKey(col,keys[col],true);
+				{	playersPanel.setLabelKey(0,col,keys[col],true);
 					Color bg = GuiTools.COLOR_TABLE_HEADER_BACKGROUND;
-					ln.setLabelBackground(col,bg);
+					playersPanel.setLabelBackground(0,col,bg);
 				}
 			}
 		}
 		
 		// data
 		for(int line=1;line<LINE_COUNT;line++)
-		{	int sizes[] = 
-			{	lineHeight,
-				nameWidth,
-				lineHeight,
-				typeColWidth,
-				heroWidth,
-				lineHeight,
-				lineHeight,
-				colorWidth,
-				lineHeight,
-				controlColWidth
-			};
-			Line ln = playersPanel.getLine(line);
-			for(int i=1;i<sizes.length;i++)
-				ln.addLabel(0);
-			for(int col=0;col<sizes.length;col++)
-			{	ln.setLabelMinWidth(col,sizes[col]);
-				ln.setLabelPreferredWidth(col,sizes[col]);
-				ln.setLabelMaxWidth(col,sizes[col]);
-				Color bg = GuiTools.COLOR_TABLE_NEUTRAL_BACKGROUND;
-				ln.setLabelBackground(col,bg);
+		{	for(int col=0;col<COL_COUNT;col++)
+			{	Color bg = GuiTools.COLOR_TABLE_NEUTRAL_BACKGROUND;
+				playersPanel.setLabelBackground(line,col,bg);
 			}
 		}
 		
@@ -189,109 +164,105 @@ public class PlayersData extends EntitledDataPanel implements MouseListener
 		// if there's a player on this line 
 		if(profiles.size()>index)
 		{	// init
-			Line ln = playersPanel.getLine(line);
 			Profile profile = profiles.get(index);
-			// color
 			PredefinedColor clr = profile.getSpriteSelectedColor();
 			Color color = clr.getColor();
-			// type
-			String profileType;
-			if(profile.hasAi())
-				profileType = GuiKeys.MENU_QUICKMATCH_PLAYERS_TYPE_COMPUTER;
-			else
-				profileType = GuiKeys.MENU_QUICKMATCH_PLAYERS_TYPE_HUMAN;
-			// keys
-			String keys[] = 
-			{	GuiKeys.MENU_QUICKMATCH_PLAYERS_PROFILE_DELETE,
-				null,
-				GuiKeys.MENU_QUICKMATCH_PLAYERS_PROFILE_BROWSE,
-				profileType,
-				null,
-				GuiKeys.MENU_QUICKMATCH_PLAYERS_HERO_BROWSE,
-				GuiKeys.MENU_QUICKMATCH_PLAYERS_COLOR_PREVIOUS,
-				null,
-				GuiKeys.MENU_QUICKMATCH_PLAYERS_COLOR_NEXT,
-				null
-			};
-			// icons
-			for(int col=0;col<keys.length;col++)
-			{	if(keys[col]!=null)
-				{	ln.setLabelKey(col,keys[col],true);
+			// delete
+			{	// content
+				playersPanel.setLabelKey(line,COL_DELETE,GuiKeys.MENU_QUICKMATCH_PLAYERS_PROFILE_DELETE,true);
+				// color
 				Color bg = new Color(color.getRed(),color.getGreen(),color.getBlue(),GuiTools.ALPHA_TABLE_REGULAR_BACKGROUND_LEVEL2);
-					ln.setLabelBackground(col,bg);
-					JLabel lbl = ln.getLabel(col);
-					lbl.removeMouseListener(this); //just in case
-					lbl.addMouseListener(this);
-				}
+				playersPanel.setLabelBackground(line,COL_DELETE,bg);
+				// listener
+				JLabel lbl = playersPanel.getLabel(line,COL_DELETE);
+				lbl.removeMouseListener(this); //just in case
+				lbl.addMouseListener(this);
 			}
 			// name
 			{	// content
 				String text = profile.getName();
 				String tooltip = profile.getName();
-				ln.setLabelText(COL_PROFILE_VALUE,text,tooltip);
+				playersPanel.setLabelText(line,COL_PROFILE,text,tooltip);
 				// color
 				Color bg = new Color(color.getRed(),color.getGreen(),color.getBlue(),GuiTools.ALPHA_TABLE_REGULAR_BACKGROUND_LEVEL1);
-				ln.setLabelBackground(COL_PROFILE_VALUE,bg);
+				playersPanel.setLabelBackground(line,COL_PROFILE,bg);
+				// mouse listener
+				JLabel lbl = playersPanel.getLabel(line,COL_PROFILE);
+				lbl.removeMouseListener(this); //just in case
+				lbl.addMouseListener(this);
 			}
 			// type
-			{	// color
+			{	// content
+				String profileType;
+				if(profile.hasAi())
+					profileType = GuiKeys.MENU_QUICKMATCH_PLAYERS_TYPE_COMPUTER;
+				else
+					profileType = GuiKeys.MENU_QUICKMATCH_PLAYERS_TYPE_HUMAN;
+				playersPanel.setLabelKey(line,COL_TYPE,profileType,true);
+				// color
 				Color bg = new Color(color.getRed(),color.getGreen(),color.getBlue(),GuiTools.ALPHA_TABLE_REGULAR_BACKGROUND_LEVEL1);
-				ln.setLabelBackground(COL_TYPE,bg);
+				playersPanel.setLabelBackground(line,COL_TYPE,bg);
 			}
 			// hero
 			{	// content
 				String tooltip = profile.getSpriteName();
 				BufferedImage image = profile.getPortraits().getOutgamePortrait(Portraits.OUTGAME_HEAD);
-				ln.setLabelIcon(COL_HERO_VALUE,image,tooltip);
+				playersPanel.setLabelIcon(line,COL_HERO,image,tooltip);
 				// color
 				Color bg = new Color(color.getRed(),color.getGreen(),color.getBlue(),GuiTools.ALPHA_TABLE_REGULAR_BACKGROUND_LEVEL1);
-				ln.setLabelBackground(COL_HERO_VALUE,bg);
+				playersPanel.setLabelBackground(line,COL_HERO,bg);
+				// mouse listener
+				JLabel lbl = playersPanel.getLabel(line,COL_HERO);
+				lbl.removeMouseListener(this); //just in case
+				lbl.addMouseListener(this);
 			}
 			// color
 			{	// content
 				String colorKey = clr.toString();
 				colorKey = colorKey.toUpperCase().substring(0,1)+colorKey.toLowerCase().substring(1,colorKey.length());
 				colorKey = GuiKeys.COLOR+colorKey;
-				ln.setLabelKey(COL_COLOR_VALUE,colorKey,false);
+				playersPanel.setLabelKey(line,COL_COLOR,colorKey,false);
 				// color
 				Color bg = new Color(color.getRed(),color.getGreen(),color.getBlue(),GuiTools.ALPHA_TABLE_REGULAR_BACKGROUND_LEVEL3);
-				ln.setLabelBackground(COL_COLOR_VALUE,bg);
+				playersPanel.setLabelBackground(line,COL_COLOR,bg);
+				// mouse listener
+				JLabel lbl = playersPanel.getLabel(line,COL_COLOR);
+				lbl.removeMouseListener(this); //just in case
+				lbl.addMouseListener(this);
 			}
 			// controls
 			{	// content
 				int ctrlIndex = profile.getControlSettingsIndex();
 				String text = controlTexts.get(ctrlIndex);
 				String tooltip = controlTooltips.get(ctrlIndex);
-				ln.setLabelText(COL_CONTROLS,text, tooltip);
+				playersPanel.setLabelText(line,COL_CONTROLS,text, tooltip);
 				// color
 				Color bg = new Color(color.getRed(),color.getGreen(),color.getBlue(),GuiTools.ALPHA_TABLE_REGULAR_BACKGROUND_LEVEL2);
-				ln.setLabelBackground(COL_CONTROLS,bg);
+				playersPanel.setLabelBackground(line,COL_CONTROLS,bg);
 				// mouse listener
-				JLabel lbl = ln.getLabel(COL_CONTROLS);
+				JLabel lbl = playersPanel.getLabel(line,COL_CONTROLS);
 				lbl.removeMouseListener(this); //just in case
 				lbl.addMouseListener(this);
 			}
 		}
 		// if there's no player on this line
 		else if(line<LINE_COUNT)
-		{	Line ln = playersPanel.getLine(line);
-			int cols = ln.getColumnCount();
-			for(int col=0;col<cols;col++)
-			{	JLabel lbl = ln.getLabel(col);
+		{	for(int col=0;col<COL_COUNT;col++)
+			{	JLabel lbl = playersPanel.getLabel(line,col);
 				lbl.setText(null);
 				lbl.setToolTipText(null);
 				lbl.setIcon(null);
 				lbl.removeMouseListener(this);
 				Color bg = GuiTools.COLOR_TABLE_NEUTRAL_BACKGROUND;
-				ln.setLabelBackground(col,bg);
+				playersPanel.setLabelBackground(line,col,bg);
 			}
 			if(index==profiles.size())
-			{	int col = COL_PROFILE_BROWSE;
-				String key = GuiKeys.MENU_QUICKMATCH_PLAYERS_PROFILE_BROWSE;
-				ln.setLabelKey(col,key,true);
+			{	int col = COL_DELETE;
+				String key = GuiKeys.MENU_QUICKMATCH_PLAYERS_PROFILE_ADD;
+				playersPanel.setLabelKey(line,col,key,true);
 				Color bg = GuiTools.COLOR_TABLE_REGULAR_BACKGROUND;
-				ln.setLabelBackground(col,bg);
-				JLabel lbl = ln.getLabel(col);
+				playersPanel.setLabelBackground(line,col,bg);
+				JLabel lbl = playersPanel.getLabel(line,col);
 				lbl.removeMouseListener(this); //just in case
 				lbl.addMouseListener(this);			
 			}
@@ -378,26 +349,40 @@ public class PlayersData extends EntitledDataPanel implements MouseListener
 	public void mousePressed(MouseEvent e)
 	{	JLabel label = (JLabel)e.getComponent();
 		int[] pos = playersPanel.getLabelPosition(label);
-		Line ln = playersPanel.getLine(pos[0]);
-		switch(pos[1])
+		switch(pos[2])
 		{	case COL_DELETE:
+				{	int index = pos[0]-1;
+					// add a profile
+					if(index==profiles.size())
+					{	SelectProfileSplitPanel selectProfilePanel = new SelectProfileSplitPanel(container.getContainer(),container,index,profiles);
+						getContainer().replaceWith(selectProfilePanel);						
+					}
+					// or remove a profile
+					else if(index<profiles.size())
+					{	profiles.remove(index);
+						refresh();
+					}
+				}
 				break;
-			case COL_PROFILE_BROWSE:
+			case COL_PROFILE:
 				{	int index = pos[0]-1;
 					SelectProfileSplitPanel selectProfilePanel = new SelectProfileSplitPanel(container.getContainer(),container,index,profiles);
 					getContainer().replaceWith(selectProfilePanel);
 				}
 				break;
-			case COL_HERO_BROWSE:
+			case COL_HERO:
+				{	Profile profile = profiles.get(pos[0]-1);
+					SelectHeroSplitPanel selectHeroPanel = new SelectHeroSplitPanel(container.getContainer(),container,profile);
+					getContainer().replaceWith(selectHeroPanel);					
+				}
 				break;
-			case COL_COLOR_PREVIOUS:
-				break;
-			case COL_COLOR_NEXT:
+			case COL_COLOR:
 				{	Profile profile = profiles.get(pos[0]-1);
 					PredefinedColor color = profile.getSpriteSelectedColor();
 					color = Configuration.getProfilesConfiguration().getNextFreeColor(profiles,profile,color);
 					profile.setSpriteSelectedColor(color);
-					playersPanel.setLabelText(pos[0],COL_COLOR_VALUE,color.toString(),color.toString());
+					reloadPortraits(pos[0]);
+					refreshPlayer(pos[0]);
 				}
 				break;
 			case COL_CONTROLS:
@@ -405,7 +390,7 @@ public class PlayersData extends EntitledDataPanel implements MouseListener
 					int index = profile.getControlSettingsIndex();
 					index = Configuration.getProfilesConfiguration().getNextFreeControls(profiles,index);
 					profile.setControlSettingsIndex(index);
-					playersPanel.setLabelText(pos[0],pos[1],controlTexts.get(index),controlTooltips.get(index));
+					playersPanel.setLabelText(pos[0],pos[2],controlTexts.get(index),controlTooltips.get(index));
 				}
 				break;
 		}
@@ -439,7 +424,24 @@ public class PlayersData extends EntitledDataPanel implements MouseListener
 		return result;
 	}
 
-	// TODO lors du chargement de l'aperçu du perso, redemander une couleur si celle ci n'est pas dispo
-	// si aucune couleur n'est possible : prendre un nouveau perso
+	private void reloadPortraits(int line)
+	{	int index = line - 1;
+		Profile profile = profiles.get(index);
+		try
+		{	ProfileLoader.reloadPortraits(profile);
+		}
+		catch (ParserConfigurationException e)
+		{	e.printStackTrace();
+		}
+		catch (SAXException e)
+		{	e.printStackTrace();
+		}
+		catch (IOException e)
+		{	e.printStackTrace();
+		}
+		catch (ClassNotFoundException e)
+		{	e.printStackTrace();
+		}
+	}
 	
 }

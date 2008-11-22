@@ -697,8 +697,11 @@ public class SelectedHeroData extends EntitledDataPanel implements MouseListener
 	}
 	
 	public SpritePreview getSelectedHeroPreview()
-	{	int index = currentHeroPage*(LIST_LINE_COUNT-2)+(selectedHeroRow-2);
-		return heroPreviews.get(index);
+	{	SpritePreview result = null;
+		int index = currentHeroPage*(LIST_LINE_COUNT-2)+(selectedHeroRow-2);
+		if(!packageMode && index<heroPreviews.size())
+			result = heroPreviews.get(index);
+		return result;
 	}
 
 }
