@@ -103,10 +103,7 @@ public class ProfileLoader
     	
     	// portraits
     	PredefinedColor spriteColor = result.getSpriteSelectedColor();
-    	String folder = FileTools.getHeroesPath() + File.separator + spritePackname;
-    	folder = folder + File.separator + spriteFolder;
-    	Portraits portraits = PortraitsLoader.loadPortraits(folder,spriteColor);
-    	result.setPortraits(portraits);
+		loadPortraits(result,spritePackname,spriteFolder,spriteColor);
     }	        
 
     @SuppressWarnings("unchecked")
@@ -124,5 +121,19 @@ public class ProfileLoader
 	    	// add to profile
 	    	result.setSpriteColor(spriteColor,rank);
     	}
-    }	        
+    }
+    
+    public static void reloadPortraits(Profile profile) throws ParserConfigurationException, SAXException, IOException, ClassNotFoundException
+    {	String spritePackname = profile.getSpritePack();
+		String spriteFoldername = profile.getSpriteFolder();
+		PredefinedColor spriteColor = profile.getSpriteSelectedColor();
+		loadPortraits(profile,spritePackname,spriteFoldername,spriteColor);
+    }
+    
+    private static void loadPortraits(Profile profile, String spritePackname, String spriteFoldername, PredefinedColor spriteColor) throws ParserConfigurationException, SAXException, IOException, ClassNotFoundException
+    {	String folder = FileTools.getHeroesPath() + File.separator + spritePackname;
+		folder = folder + File.separator + spriteFoldername;
+		Portraits portraits = PortraitsLoader.loadPortraits(folder,spriteColor);
+		profile.setPortraits(portraits);
+    }
 }

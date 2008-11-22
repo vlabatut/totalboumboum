@@ -150,4 +150,15 @@ public class ProfilesConfiguration
 			result = preferredColors.get(index);
 		return result;
 	}
+
+	public boolean isFreeColor(ArrayList<Profile> profiles, PredefinedColor color)
+	{	// used colors
+		ArrayList<PredefinedColor> usedColors = new ArrayList<PredefinedColor>();
+		for(Profile p: profiles)
+		{	PredefinedColor clr = p.getSpriteSelectedColor();
+			usedColors.add(clr);
+		}
+		boolean result = !usedColors.contains(color);
+		return result;
+	}
 }

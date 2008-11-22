@@ -41,7 +41,7 @@ import fr.free.totalboumboum.tools.XmlTools;
 
 public class PortraitsLoader
 {
-	protected static Portraits loadPortraits(String spriteFolderPath, PredefinedColor color) throws ParserConfigurationException, SAXException, IOException, ClassNotFoundException
+	public static Portraits loadPortraits(String spriteFolderPath, PredefinedColor color) throws ParserConfigurationException, SAXException, IOException, ClassNotFoundException
 	{	// init
 		String schemaFolder = FileTools.getSchemasPath();
 		File schemaFile,dataFile;

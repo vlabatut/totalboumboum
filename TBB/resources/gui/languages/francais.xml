@@ -263,39 +263,28 @@
 			
 			<group name="Players" >
 				<text name="Title" value="Sélection des joueurs" tooltip="Sélection des joueurs participant à la partie rapide" />
-				<group name="Controls" >
-					<text name="Next" value="Suivant" tooltip="Sélectionner les commandes suivantes" />
-					<text name="Previous" value="Précédent" tooltip="Sélectionner les commandes précédentes" />
-					<text name="Value" value="Commandes" tooltip="Commandes sélectionnées" />
-				</group>
-
-				<group name="Color" >
-					<text name="Next" value="Suivant" tooltip="Sélectionner la couleur suivante" />
-					<text name="Previous" value="Précédent" tooltip="Sélectionner la couleur précédente" />
-					<text name="Value" value="Color" tooltip="Couleur sélectionnée" />
-				</group>
-
+				<text name="Controls" value="Commandes" tooltip="Commandes sélectionnées" />
+				<text name="Color" value="Color" tooltip="Couleur sélectionnée" />
 				<group name="Hero" >
-					<text name="Browse" value="Browse" tooltip="Sélectionner un personnage" />
-					<text name="Next" value="Suivant" tooltip="Sélectionner le personnage suivant" />
-					<text name="Previous" value="Précédent" tooltip="Sélectionner le personnage précédent" />
-					<text name="Value" value="Hero" tooltip="Personnage sélectionné" />
+					<text name="Header" value="Hero" tooltip="Personnage sélectionné" />
+					<group name="Button">
+						<text name="Cancel" value="Annuler" tooltip="Annuler et revenir à l'écran de sélection des joueurs" />
+						<text name="Confirm" value="Confirmer" tooltip="Valider le choix du personnage sélectionné" />
+					</group>
 				</group>
-
 				<group name="Profile" >
-					<text name="Browse" value="Browse" tooltip="Sélectionner un profil" />
-					<text name="Cancel" value="Annuler" tooltip="Annuler et revenir à l'écran de sélection des joueurs" />
-					<text name="Confirm" value="Confirmer" tooltip="Valider le choix du profil sélectionné" />
+					<text name="Add" value="Ajoute" tooltip="Sélectionner un autre profil" />
 					<text name="Delete" value="Désélectionne" tooltip="Désélectionne le profil" />
-					<text name="Next" value="Suivant" tooltip="Sélectionner le profil suivant" />
-					<text name="Previous" value="Précédent" tooltip="Sélectionner le profil suivant" />
-					<text name="Value" value="Profile" tooltip="Profil sélectionné" />
+					<text name="Header" value="Profil" tooltip="Profil sélectionné" />
+					<group name="Button">
+						<text name="Cancel" value="Annuler" tooltip="Annuler et revenir à l'écran de sélection des joueurs" />
+						<text name="Confirm" value="Confirmer" tooltip="Valider le choix du profil sélectionné" />
+					</group>
 				</group>
-
 				<group name="Type" >
 					<text name="Computer" value="Ordinateur" tooltip="Intelligence artificielle" />
+					<text name="Header" value="Type" tooltip="Type de profil (joueur humain ou IA)" />
 					<text name="Human" value="Humain" tooltip="Joueur humain" />
-					<text name="Value" value="Type" tooltip="Type de profil (joueur humain ou IA)" />
 				</group>
 				
 			</group>

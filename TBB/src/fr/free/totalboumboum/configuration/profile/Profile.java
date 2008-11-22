@@ -116,10 +116,6 @@ public class Profile
 	{	this.spriteSelectedColor = spriteSelectedColor;		
 	}
 	
-	public void setSpriteName(PredefinedColor spriteSelectedColor)
-	{	this.spriteSelectedColor = spriteSelectedColor;
-	}
-	
 	public void setSpriteColor(PredefinedColor spriteColor, int index)
 	{	this.spriteColors[index] = spriteColor;
 	}

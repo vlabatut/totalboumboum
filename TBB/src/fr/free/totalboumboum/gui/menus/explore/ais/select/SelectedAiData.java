@@ -620,8 +620,11 @@ public class SelectedAiData extends EntitledDataPanel implements MouseListener
 	}
 	
 	public AiPreview getSelectedAiPreview()
-	{	int index = currentAiPage*(LIST_LINE_COUNT-2)+(selectedAiRow-2);
-		return aiPreviews.get(index);
+	{	AiPreview result = null;
+		int index = currentAiPage*(LIST_LINE_COUNT-2)+(selectedAiRow-2);
+		if(!packageMode && index<aiPreviews.size())
+			result = aiPreviews.get(index);
+		return result;
 	}
 
 }
