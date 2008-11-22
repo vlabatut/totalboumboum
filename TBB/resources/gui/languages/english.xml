@@ -25,6 +25,9 @@
 				<text name="Heroes" value="Heroes" tooltip="Show the available controlable characters" />
 				<text name="Instances" value="Instances" tooltip="Show the available instances" />
 				<text name="Levels" value="Levels" tooltip="Show the available levels" />
+				<text name="Matches" value="Matches" tooltip="Show the available predefined matches" />
+				<text name="Rounds" value="Rounds" tooltip="Show the available predefined rounds" />
+				<text name="Tournaments" value="Tournaments" tooltip="Show the available predefined tournaments" />
 			</group>
 
 			<group name="Ai">

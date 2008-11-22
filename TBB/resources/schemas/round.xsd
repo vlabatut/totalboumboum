@@ -4,6 +4,10 @@
 <xsd:include schemaLocation="_playmode.xsd"/>
 <xsd:include schemaLocation="_notes.xsd"/>
 
+	<xsd:complexType name="tAuthor">
+		<xsd:attribute name="value" type="xsd:string" use="required" />
+	</xsd:complexType>
+
 	<xsd:complexType name="tLevel">
 		<xsd:attribute name="packname" type="xsd:string" use="required" />
 		<xsd:attribute name="name" type="xsd:string" use="required" />
@@ -16,6 +20,7 @@
 	<xsd:complexType name="tRound">
 		<xsd:sequence>
 			<xsd:element name="notes" type="tNotes" />
+			<xsd:element name="author" type="tAuthor"  minOccurs="0"/>
 			<xsd:element name="limits" type="tRoundLimits"  />
 			<xsd:element name="gameplay" type="tGame" />
 			<xsd:element name="points" type="tPointProcessor" />

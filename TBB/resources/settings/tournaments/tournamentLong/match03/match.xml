@@ -9,6 +9,8 @@
  		<line value="Date: 28-09-2008" />
  	</notes>
  	
+	<author value="Vincent Labatut" />
+
 	<limits>
 		<confrontation value="3" />
 	</limits>

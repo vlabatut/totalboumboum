@@ -3,6 +3,10 @@
 <xsd:include schemaLocation="_score.xsd"/>
 <xsd:include schemaLocation="_notes.xsd"/>
 
+	<xsd:complexType name="tAuthor">
+		<xsd:attribute name="value" type="xsd:string" use="required" />
+	</xsd:complexType>
+
 	<xsd:complexType name="tPointsTotal" />
 	
 	<xsd:complexType name="tPointsScores">
@@ -133,6 +137,7 @@
 	<xsd:complexType name="tPoints">
 		<xsd:sequence>
 			<xsd:element name="notes" type="tNotes" />
+			<xsd:element name="author" type="tAuthor"  minOccurs="0"/>
 			<xsd:group ref="gPoints"/>
 		</xsd:sequence>
 	</xsd:complexType>	

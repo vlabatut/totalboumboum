@@ -3,6 +3,10 @@
 <xsd:include schemaLocation="_limit.xsd"/>
 <xsd:include schemaLocation="_notes.xsd"/>
 
+	<xsd:complexType name="tAuthor">
+		<xsd:attribute name="value" type="xsd:string" use="required" />
+	</xsd:complexType>
+
 	<xsd:complexType name="tRound">
 		<xsd:attribute name="name" type="xsd:string" use="required" />
 		<xsd:attribute name="local" type="xsd:boolean" use="optional" default="false" />
@@ -18,6 +22,7 @@
 	<xsd:complexType name="tMatch">
 		<xsd:sequence>
 			<xsd:element name="notes" type="tNotes" />
+			<xsd:element name="author" type="tAuthor"  minOccurs="0"/>
 			<xsd:element name="limits" type="tMatchLimits"  />
 			<xsd:element name="points" type="tPointProcessor" />
 			<xsd:element name="rounds" type="tRounds" />

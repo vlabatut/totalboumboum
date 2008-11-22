@@ -337,22 +337,39 @@ public class Launcher
 	 */
 
 // **********************************************************
-// PROFILS
+// JOUEURS
 // **********************************************************
-	
-	/*
-	 * TODO dans un profil, on indique ses couleurs préférées (dans l'ordre) 
-	 */
-	
-	/*
-	 * TODO : désolidariser les définitions de commandes des profils, car ce n'est pas viable pour par ex 16 joueurs.
-	 * à la place : définir un ensemble de controlSets, qui devront être affectés aux différents joueurs.
-	 * du coup, ça va influencer le nbre de joueurs max: les joueurs sans ia qui n'ont pas de commandes ne peuvent pas jouer. 
-	 */
 
 	/*
-	 * TODO il faut rendre unique l'identifiant des joueurs
-	 * ce qui permet de savoir si y a eu un changement de nom quand un tournoi est chargé
+	 * TODO
+	 * il faut faire un système de manière à pouvoir faire varier le nombre
+	 *  de joueurs dans un tournoi sans pour autant tout reconfigurer.
+	 *  ça peut s'estimer automatiquement : 
+	 *  	- pour série/simple : 
+	 *  		- parmi tous les matches, quel est le level acceptant le moins de joueurs
+	 *  		- ->il s'agit du nombre de joueurs max du tournoi
+	 *  	- pour coupe : 
+	 *  		- on définit un match (possiblement différent) par niveau de progression
+	 *  		- donc ce nombre, pour un niveau, indique combien de matches seront nécessaires, et comment répartir les joueurs
+	 *  		- (il n'y a pas de limite théorique au nombre de joueurs)
+	 *  		- le concepteur peut configurer certains paramètres, comme le nombre min/max de joueurs pour chaque niveau de la compète
+	 *  	- pour championnat :
+	 *  		- a priori, il est possible de tout goupiller parfaitement quelles que soient les contraintes de nombre de joueurs
+	 *  
+	 */
+	
+	/*
+	 * TODO au chargement du tournoi, nécessaire de déterminer ce nombre de joueurs max
+	 * de même pour match et round
+	 */	
+	
+// **********************************************************
+// PERSOS
+// **********************************************************
+
+	/* TODO
+	 * 
+	 * un sprite de perso doit être défini dans toutes les 16 couleurs possibles
 	 */
 	
 // **********************************************************
@@ -590,37 +607,8 @@ public class Launcher
 	
 	
 	/*
-	 * TODO
-	 * il faut faire un système de manière à pouvoir faire varier le nombre
-	 *  de joueurs dans un tournoi sans pour autant tout reconfigurer.
-	 *  ça peut s'estimer automatiquement : 
-	 *  	- pour série/simple : 
-	 *  		- parmi tous les matches, quel est le level acceptant le moins de joueurs
-	 *  		- ->il s'agit du nombre de joueurs max du tournoi
-	 *  	- pour coupe : 
-	 *  		- on définit un match (possiblement différent) par niveau de progression
-	 *  		- donc ce nombre, pour un niveau, indique combien de matches seront nécessaires, et comment répartir les joueurs
-	 *  		- (il n'y a pas de limite théorique au nombre de joueurs)
-	 *  		- le concepteur peut configurer certains paramètres, comme le nombre min/max de joueurs pour chaque niveau de la compète
-	 *  	- pour championnat :
-	 *  		- a priori, il est possible de tout goupiller parfaitement quelles que soient les contraintes de nombre de joueurs
-	 *  
-	 */
-	
-	/*
-	 * TODO au chargement du tournoi, nécessaire de déterminer ce nombre de joueurs max
-	 * de même pour match et round
-	 */
-	
-	/*
 	 * TODO il faut appliquer à trajectoryMgr le même principe (durée forcée)
 	 * que pour animeMgr
-	 */
-	
-	/*
-	 * TODO couleurs
-	 * en fait la couleur dans le profil est une couleur préférée par défaut
-	 * mais quand on choisit les joueurs pour un tournoi, ils peuvent changer leur couleur
 	 */
 	
 	/*
@@ -666,7 +654,6 @@ public class Launcher
 	 * *******************************************************
 	 * 
 	 * - virer la possibilité de définir plusieurs couleurs, ça ne sert à rien
-	 * - un sprite de perso doit être défini dans toutes les 16 couleurs possibles
 	 * 
 	 * - faire le classement lexicographique gérant les signes diacritiques partout où c'est nécessaire
 	 * 
@@ -690,9 +677,6 @@ public class Launcher
 	 * 
 	 * - bug de déplacement quand on bouge en diagonale en posant plein de bombes dans un espace dégagé, on se retrouve téléporté sur une case voisine
 	 * - bug d'animation/collision : push ne se déclenche pas
-	 * 
-	 * - redistribution des items lors de la mort d'un joueur (option de round?)
-	 * - possibilité de bloquer certains items (on ne les perd pas lorsqu'on meurt)
 	 * 
 	 * - redescendre les stats dans loop, et gestion de fin de partie et tout ce qui est en fait directement lié au moteur
 	 * - en fait tout le calcul de points dans les stats est à déplacer dans les rounds/matches, etc 
@@ -738,6 +722,9 @@ public class Launcher
 	 * - faire un chargement ad hoc des matches, rounds, etc ? fusionner du coup HollowLevel et LevelPreview ? (voir si les objets de ces deux classes sont créés au même moment)
 	 * - ergonomie : faire le chargement du round dès qu'on clique sur "next" dans le match, et attendre ensuite que le joueur valide le début du match !
 	 * 
+	 * - redistribution des items lors de la mort d'un joueur (option de round?)
+	 * - possibilité de bloquer certains items (on ne les perd pas lorsqu'on meurt)
+	 * 
 	 * LIMITES & MODES de jeu :
 	 * - s'occuper de la limite qui fait gagner le joueur qui la franchit : pq pas un simple bonus/malus pour celui qui arrête la partie ?
 	 * - limites exprimées de façon relative (peindre 75% des cases...)
@@ -753,15 +740,5 @@ public class Launcher
 	 *  - on rajoute également le système de bonus pour une limite donnée
 	 *  - intérêt : tout ça permet d'implémenter le bonus à celui qui tue tout le monde en survival, par opposition à une victoire temporelle qui rapporterait donc moins de points
 	 *  - LA NOTION DE PLAYMODE EST A SUPPRIMER 
-	 */
-	
-	
-	
-	/*
-	 * NOM : précédent/suivant/naviguer
-	 * TYPE : IA ou HUMAIN
-	 * HERO : précédent/suivant/naviguer
-	 * COULEUR : précédent/suivant
-	 * COMMANDES : précédent/suivant
 	 */
 }

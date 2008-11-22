@@ -68,9 +68,11 @@ public class TournamentLoader
 	{	// init
 		AbstractTournament result = null;
 		Element element;
+		
 		// name
 		element = root.getChild(XmlTools.ELT_GENERAL);
 		String name = element.getAttribute(XmlTools.ATT_NAME).getValue().trim();
+		
 		// content
 		List<Element> elements = root.getChildren();
 		element = elements.get(2);
@@ -83,10 +85,17 @@ public class TournamentLoader
 			result = SequenceTournamentLoader.loadTournamentElement(path,element);
 		else if(type.equalsIgnoreCase(SINGLE))
 			result = SingleTournamentLoader.loadTournamentElement(path,element);
+		
 		// notes
 		element = root.getChild(XmlTools.ELT_NOTES);
 		ArrayList<String> notes = MatchLoader.loadNotesElement(element);
 		result.setNotes(notes);
+		
+		// author
+		element = root.getChild(XmlTools.ELT_AUTHOR);
+		String author = element.getAttributeValue(XmlTools.ATT_VALUE);
+		result.setAuthor(author);
+		
 		//
 		result.setName(name);
 		return result;

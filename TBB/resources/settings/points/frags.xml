@@ -5,6 +5,8 @@
 	
 	<notes />
 
+	<author value="Vincent Labatut" />
+
 	<subtraction>
 		<scores type="kills"/>
 		<scores type="deaths"/>

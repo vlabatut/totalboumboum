@@ -74,6 +74,10 @@ public class RoundLoader
 		element = root.getChild(XmlTools.ELT_NOTES);
 		ArrayList<String> notes = MatchLoader.loadNotesElement(element);
 		result.setNotes(notes);
+		// author
+		element = root.getChild(XmlTools.ELT_AUTHOR);
+		String author = element.getAttributeValue(XmlTools.ATT_VALUE);
+		result.setAuthor(author);	
 		// limits
 		element = root.getChild(XmlTools.ELT_LIMITS);
 		Limits<RoundLimit> limits = loadLimitsElement(element,folderPath);

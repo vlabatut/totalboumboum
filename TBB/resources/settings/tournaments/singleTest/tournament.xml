@@ -11,6 +11,8 @@
  		<line value="Date: 07-10-2008" />
  	</notes>
  	
+	<author value="Vincent Labatut" />
+
 	<single>
 		<match local="false" name="matchLong" />
 	</single>		

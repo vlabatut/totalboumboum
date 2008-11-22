@@ -72,6 +72,10 @@ public class MatchLoader
 		element = root.getChild(XmlTools.ELT_NOTES);
 		ArrayList<String> notes = loadNotesElement(element);
 		result.setNotes(notes);
+		// author
+		element = root.getChild(XmlTools.ELT_AUTHOR);
+		String author = element.getAttributeValue(XmlTools.ATT_VALUE);
+		result.setAuthor(author);	
 		// limits
 		element = root.getChild(XmlTools.ELT_LIMITS);
 		Limits<MatchLimit> limits = loadLimitsElement(element,folderPath);
