@@ -1,4 +1,4 @@
-package fr.free.totalboumboum.gui.menus.quickmatch.players.profile;
+package fr.free.totalboumboum.gui.menus.profiles.ais;
 
 /*
  * Total Boum Boum
@@ -29,15 +29,16 @@ import javax.swing.Box;
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
 
+import fr.free.totalboumboum.ai.AiPreview;
 import fr.free.totalboumboum.configuration.profile.Profile;
 import fr.free.totalboumboum.gui.common.panel.SplitMenuPanel;
 import fr.free.totalboumboum.gui.common.panel.menu.InnerMenuPanel;
 import fr.free.totalboumboum.gui.common.panel.menu.MenuPanel;
-import fr.free.totalboumboum.gui.menus.profiles.select.SelectedProfileData;
+import fr.free.totalboumboum.gui.menus.explore.ais.select.SelectedAiData;
 import fr.free.totalboumboum.gui.tools.GuiKeys;
 import fr.free.totalboumboum.gui.tools.GuiTools;
 
-public class SelectProfileMenu extends InnerMenuPanel
+public class SelectedAiMenu extends InnerMenuPanel
 {	private static final long serialVersionUID = 1L;
 	
 	@SuppressWarnings("unused")
@@ -45,15 +46,12 @@ public class SelectProfileMenu extends InnerMenuPanel
 	@SuppressWarnings("unused")
 	private JButton buttonConfirm;
 
-	private int index;
-	private ArrayList<Profile> profiles;
-	
-	private SelectedProfileData profileData;
+	private SelectedAiData aiData;
+	private Profile profile;
 
-	public SelectProfileMenu(SplitMenuPanel container, MenuPanel parent, int index, ArrayList<Profile> profiles)
+	public SelectedAiMenu(SplitMenuPanel container, MenuPanel parent, Profile profile)
 	{	super(container, parent);
-		this.index = index;
-		this.profiles = profiles;
+		this.profile = profile;
 	
 		// layout
 		BoxLayout layout = new BoxLayout(this,BoxLayout.PAGE_AXIS); 
@@ -76,8 +74,8 @@ public class SelectProfileMenu extends InnerMenuPanel
 		add(Box.createVerticalGlue());		
 
 		// panels
-		profileData = new SelectedProfileData(container);
-		container.setDataPart(profileData);
+		aiData = new SelectedAiData(container);
+		container.setDataPart(aiData);
 	}
 	
 	public void actionPerformed(ActionEvent e)
@@ -85,12 +83,10 @@ public class SelectProfileMenu extends InnerMenuPanel
 		{	replaceWith(parent);
 	    }
 		else if(e.getActionCommand().equals(GuiKeys.MENU_PROFILES_BUTTON_CONFIRM))
-		{	Profile profile = profileData.getSelectedProfile();
-			if(profile!=null && !profiles.contains(profile))
-			{	if(index<profiles.size())
-					profiles.set(index,profile);
-				else
-					profiles.add(profile);
+		{	AiPreview aiPreview = aiData.getSelectedAiPreview();
+			if(aiPreview!=null)
+			{	profile.setAiName(aiPreview.getFolder());
+				profile.setAiPackname(aiPreview.getPack());
 			}
 			replaceWith(parent);
 	    }

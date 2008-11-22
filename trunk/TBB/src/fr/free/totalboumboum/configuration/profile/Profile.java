@@ -49,6 +49,19 @@ public class Profile
 	}
 
 	/////////////////////////////////////////////////////////////////
+	// FILE				/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	private String fileName;
+
+	public String getFileName()
+	{	return fileName;
+	}
+	
+	public void setFileName(String fileName)
+	{	this.fileName = fileName;
+	}
+
+	/////////////////////////////////////////////////////////////////
 	// SPRITE			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	private String spritePack;
@@ -190,7 +203,7 @@ public class Profile
 	{	boolean result = false;
 		if(o instanceof Profile)
 		{	Profile temp = (Profile) o;
-			result = temp.getName().equalsIgnoreCase(name);
+			result = temp.getFileName().equalsIgnoreCase(fileName);
 		}
 		return result;
 	}

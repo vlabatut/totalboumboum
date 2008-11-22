@@ -1,4 +1,4 @@
-package fr.free.totalboumboum.gui.menus.quickmatch.players.profile;
+package fr.free.totalboumboum.gui.menus.profiles.edit;
 
 /*
  * Total Boum Boum
@@ -23,37 +23,43 @@ package fr.free.totalboumboum.gui.menus.quickmatch.players.profile;
 
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
+import java.io.IOException;
 import java.util.ArrayList;
 
 import javax.swing.Box;
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
+import javax.xml.parsers.ParserConfigurationException;
 
+import org.xml.sax.SAXException;
+
+import fr.free.totalboumboum.configuration.Configuration;
 import fr.free.totalboumboum.configuration.profile.Profile;
+import fr.free.totalboumboum.configuration.profile.ProfileSaver;
+import fr.free.totalboumboum.configuration.profile.ProfilesConfiguration;
+import fr.free.totalboumboum.configuration.profile.ProfilesConfigurationSaver;
 import fr.free.totalboumboum.gui.common.panel.SplitMenuPanel;
 import fr.free.totalboumboum.gui.common.panel.menu.InnerMenuPanel;
 import fr.free.totalboumboum.gui.common.panel.menu.MenuPanel;
-import fr.free.totalboumboum.gui.menus.profiles.select.SelectedProfileData;
 import fr.free.totalboumboum.gui.tools.GuiKeys;
 import fr.free.totalboumboum.gui.tools.GuiTools;
 
-public class SelectProfileMenu extends InnerMenuPanel
+public class EditProfileMenu extends InnerMenuPanel
 {	private static final long serialVersionUID = 1L;
 	
 	@SuppressWarnings("unused")
-	private JButton buttonCancel;
-	@SuppressWarnings("unused")
 	private JButton buttonConfirm;
+	@SuppressWarnings("unused")
+	private JButton buttonCancel;
 
-	private int index;
-	private ArrayList<Profile> profiles;
-	
-	private SelectedProfileData profileData;
+	private EditProfileData profileData;
+	private Profile profile;
+	private String profileFile;
 
-	public SelectProfileMenu(SplitMenuPanel container, MenuPanel parent, int index, ArrayList<Profile> profiles)
+	public EditProfileMenu(SplitMenuPanel container, MenuPanel parent, Profile profile, String profileFile)
 	{	super(container, parent);
-		this.index = index;
-		this.profiles = profiles;
+		this.profile = profile;
+		this.profileFile = profileFile;
 	
 		// layout
 		BoxLayout layout = new BoxLayout(this,BoxLayout.PAGE_AXIS); 
@@ -76,23 +82,37 @@ public class SelectProfileMenu extends InnerMenuPanel
 		add(Box.createVerticalGlue());		
 
 		// panels
-		profileData = new SelectedProfileData(container);
+		profileData = new EditProfileData(container,profile);
 		container.setDataPart(profileData);
 	}
 	
 	public void actionPerformed(ActionEvent e)
-	{	if(e.getActionCommand().equals(GuiKeys.MENU_PROFILES_BUTTON_CANCEL))
-		{	replaceWith(parent);
-	    }
-		else if(e.getActionCommand().equals(GuiKeys.MENU_PROFILES_BUTTON_CONFIRM))
-		{	Profile profile = profileData.getSelectedProfile();
-			if(profile!=null && !profiles.contains(profile))
-			{	if(index<profiles.size())
-					profiles.set(index,profile);
-				else
-					profiles.add(profile);
+	{	if(e.getActionCommand().equals(GuiKeys.MENU_PROFILES_BUTTON_CONFIRM))
+		{	Profile newProfile = profileData.getProfile();
+			if(!profile.isTheSame(newProfile))
+			{	try
+				{	ProfileSaver.saveProfile(newProfile,profileFile);
+					if(!profile.getName().equals(newProfile.getName()))
+					{	//ProfilesConfiguration profilesConfiguration = Configuration.getProfilesConfiguration();
+						ProfilesConfiguration profilesConfiguration = Configuration.getProfilesConfiguration();
+						profilesConfiguration.addProfile(profileFile,newProfile.getName());
+						ProfilesConfigurationSaver.saveProfilesConfiguration(profilesConfiguration);
+					}
+				}
+				catch (IOException e1)
+				{	e1.printStackTrace();
+				}
+				catch (ParserConfigurationException e1)
+				{	e1.printStackTrace();
+				}
+				catch (SAXException e1)
+				{	e1.printStackTrace();
+				}
 			}
 			replaceWith(parent);
+	    }
+		else if(e.getActionCommand().equals(GuiKeys.MENU_PROFILES_BUTTON_CANCEL))
+		{	replaceWith(parent);
 	    }
 	} 
 	

@@ -1,4 +1,4 @@
-package fr.free.totalboumboum.gui.menus.quickmatch.players.profile;
+package fr.free.totalboumboum.gui.menus.options.gui;
 
 /*
  * Total Boum Boum
@@ -24,28 +24,31 @@ package fr.free.totalboumboum.gui.menus.quickmatch.players.profile;
 import java.awt.BorderLayout;
 import java.awt.Graphics;
 import java.awt.image.BufferedImage;
-import java.util.ArrayList;
+import java.io.IOException;
 
-import fr.free.totalboumboum.configuration.profile.Profile;
+import javax.xml.parsers.ParserConfigurationException;
+
+import org.xml.sax.SAXException;
+
 import fr.free.totalboumboum.gui.common.MenuContainer;
 import fr.free.totalboumboum.gui.common.panel.SplitMenuPanel;
 import fr.free.totalboumboum.gui.common.panel.menu.MenuPanel;
 import fr.free.totalboumboum.gui.data.configuration.GuiConfiguration;
 import fr.free.totalboumboum.gui.tools.GuiTools;
 
-public class SelectProfileSplitPanel extends SplitMenuPanel
+public class GuiSplitPanel extends SplitMenuPanel
 {	private static final long serialVersionUID = 1L; 
 
 	private BufferedImage image;
 
-	public SelectProfileSplitPanel(MenuContainer container, MenuPanel parent, int index, ArrayList<Profile> profiles)
+	public GuiSplitPanel(MenuContainer container, MenuPanel parent) throws IllegalArgumentException, SecurityException, ParserConfigurationException, SAXException, IOException, IllegalAccessException, NoSuchFieldException
 	{	super(container,parent,BorderLayout.LINE_START,GuiTools.VERTICAL_SPLIT_RATIO);
 	
 		// background
 		image = GuiConfiguration.getMiscConfiguration().getDarkBackground();
 		
 		// panels
-		setMenuPart(new SelectProfileMenu(this,parent,index,profiles));
+		setMenuPart(new GuiMenu(this,parent));
 	}
 	
 	@Override

@@ -1,4 +1,4 @@
-package fr.free.totalboumboum.gui.menus.quickmatch.players.profile;
+package fr.free.totalboumboum.gui.menus.explore.ais.select;
 
 /*
  * Total Boum Boum
@@ -21,7 +21,6 @@ package fr.free.totalboumboum.gui.menus.quickmatch.players.profile;
  * 
  */
 
-import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.util.ArrayList;
 
@@ -29,32 +28,23 @@ import javax.swing.Box;
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
 
-import fr.free.totalboumboum.configuration.profile.Profile;
 import fr.free.totalboumboum.gui.common.panel.SplitMenuPanel;
 import fr.free.totalboumboum.gui.common.panel.menu.InnerMenuPanel;
 import fr.free.totalboumboum.gui.common.panel.menu.MenuPanel;
-import fr.free.totalboumboum.gui.menus.profiles.select.SelectedProfileData;
 import fr.free.totalboumboum.gui.tools.GuiKeys;
 import fr.free.totalboumboum.gui.tools.GuiTools;
 
-public class SelectProfileMenu extends InnerMenuPanel
+public class SelectedAiMenu extends InnerMenuPanel
 {	private static final long serialVersionUID = 1L;
 	
 	@SuppressWarnings("unused")
-	private JButton buttonCancel;
-	@SuppressWarnings("unused")
-	private JButton buttonConfirm;
+	private JButton buttonBack;
 
-	private int index;
-	private ArrayList<Profile> profiles;
-	
-	private SelectedProfileData profileData;
+	private SelectedAiData aiData;
 
-	public SelectProfileMenu(SplitMenuPanel container, MenuPanel parent, int index, ArrayList<Profile> profiles)
+	public SelectedAiMenu(SplitMenuPanel container, MenuPanel parent)
 	{	super(container, parent);
-		this.index = index;
-		this.profiles = profiles;
-	
+		
 		// layout
 		BoxLayout layout = new BoxLayout(this,BoxLayout.PAGE_AXIS); 
 		setLayout(layout);
@@ -65,34 +55,22 @@ public class SelectProfileMenu extends InnerMenuPanel
 		// sizes
 		int buttonWidth = getWidth();
 		int buttonHeight = GuiTools.buttonTextHeight;
-		ArrayList<String> texts = GuiKeys.getKeysLike(GuiKeys.MENU_PROFILES_BUTTON);
+		ArrayList<String> texts = GuiKeys.getKeysLike(GuiKeys.MENU_RESOURCES_AI_BUTTON);
 		int fontSize = GuiTools.getOptimalFontSize(buttonWidth*0.8, buttonHeight*0.9, texts);
 
 		// buttons
 		add(Box.createVerticalGlue());
-		buttonConfirm = GuiTools.createButton(GuiKeys.MENU_PROFILES_BUTTON_CONFIRM,buttonWidth,buttonHeight,fontSize,this);
-		add(Box.createRigidArea(new Dimension(0,GuiTools.buttonVerticalSpace)));
-		buttonCancel = GuiTools.createButton(GuiKeys.MENU_PROFILES_BUTTON_CANCEL,buttonWidth,buttonHeight,fontSize,this);
+		buttonBack = GuiTools.createButton(GuiKeys.MENU_RESOURCES_AI_BUTTON_BACK,buttonWidth,buttonHeight,fontSize,this);
 		add(Box.createVerticalGlue());		
 
 		// panels
-		profileData = new SelectedProfileData(container);
-		container.setDataPart(profileData);
+		aiData = new SelectedAiData(container);
+		container.setDataPart(aiData);
 	}
 	
 	public void actionPerformed(ActionEvent e)
-	{	if(e.getActionCommand().equals(GuiKeys.MENU_PROFILES_BUTTON_CANCEL))
+	{	if(e.getActionCommand().equals(GuiKeys.MENU_RESOURCES_AI_BUTTON_BACK))
 		{	replaceWith(parent);
-	    }
-		else if(e.getActionCommand().equals(GuiKeys.MENU_PROFILES_BUTTON_CONFIRM))
-		{	Profile profile = profileData.getSelectedProfile();
-			if(profile!=null && !profiles.contains(profile))
-			{	if(index<profiles.size())
-					profiles.set(index,profile);
-				else
-					profiles.add(profile);
-			}
-			replaceWith(parent);
 	    }
 	} 
 	
