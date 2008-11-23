@@ -35,7 +35,7 @@ import fr.free.totalboumboum.game.match.Match;
 import fr.free.totalboumboum.game.statistics.StatisticHolder;
 import fr.free.totalboumboum.game.statistics.StatisticTournament;
 
-public abstract class AbstractTournament implements StatisticHolder<StatisticTournament>
+public abstract class AbstractTournament implements StatisticHolder
 {	
 	/////////////////////////////////////////////////////////////////
 	// GAME		/////////////////////////////////////////////

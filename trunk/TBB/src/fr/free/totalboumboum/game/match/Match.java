@@ -46,7 +46,7 @@ import fr.free.totalboumboum.game.statistics.StatisticMatch;
 import fr.free.totalboumboum.game.statistics.StatisticRound;
 import fr.free.totalboumboum.game.tournament.AbstractTournament;
 
-public class Match implements StatisticHolder<StatisticMatch>
+public class Match implements StatisticHolder
 {	
 	public Match(AbstractTournament tournament)
 	{	this.tournament = tournament;

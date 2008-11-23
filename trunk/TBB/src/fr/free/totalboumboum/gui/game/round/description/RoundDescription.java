@@ -688,14 +688,14 @@ public class RoundDescription extends EntitledDataPanel
 				case CROWNS:
 					name = prefix+"Data"+"Crowns";
 					break;					
-				case DEATHS:
-					name = prefix+"Data"+"Deaths";
+				case BOMBEDS:
+					name = prefix+"Data"+"Bombeds";
 					break;					
 				case ITEMS:
 					name = prefix+"Data"+"Items";
 					break;					
-				case KILLS:
-					name = prefix+"Data"+"Kills";
+				case BOMBINGS:
+					name = prefix+"Data"+"Bombings";
 					break;					
 				case PAINTINGS:
 					name = prefix+"Data"+"Paintings";
@@ -784,16 +784,16 @@ public class RoundDescription extends EntitledDataPanel
 						iconName = prefix+"Crowns";
 						value = nf.format(l.getThreshold());
 						break;
-					case DEATHS:
-						iconName = prefix+"Deaths";
+					case BOMBEDS:
+						iconName = prefix+"Bombeds";
 						value = nf.format(l.getThreshold());
 						break;
 					case ITEMS:
 						iconName = prefix+"Items";
 						value = nf.format(l.getThreshold());
 						break;
-					case KILLS:
-						iconName = prefix+"Kills";
+					case BOMBINGS:
+						iconName = prefix+"Bombings";
 						value = nf.format(l.getThreshold());
 						break;
 					case PAINTINGS:

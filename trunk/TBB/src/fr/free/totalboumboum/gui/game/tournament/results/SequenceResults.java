@@ -66,8 +66,8 @@ public class SequenceResults extends TournamentResults
 				{	GuiKeys.GAME_TOURNAMENT_RESULTS_HEADER_NAME,
 					GuiKeys.GAME_TOURNAMENT_RESULTS_HEADER_BOMBS,
 					GuiKeys.GAME_TOURNAMENT_RESULTS_HEADER_ITEMS,
-					GuiKeys.GAME_TOURNAMENT_RESULTS_HEADER_DEATHS,
-					GuiKeys.GAME_TOURNAMENT_RESULTS_HEADER_KILLS,
+					GuiKeys.GAME_TOURNAMENT_RESULTS_HEADER_BOMBEDS,
+					GuiKeys.GAME_TOURNAMENT_RESULTS_HEADER_BOMBINGS,
 					GuiKeys.GAME_TOURNAMENT_RESULTS_HEADER_TOTAL,
 					GuiKeys.GAME_TOURNAMENT_RESULTS_HEADER_POINTS
 				};
@@ -153,8 +153,8 @@ public class SequenceResults extends TournamentResults
 				String[] scores = 
 				{	nf.format(stats.getScores(Score.BOMBS)[pp.getIndex()]),
 					nf.format(stats.getScores(Score.ITEMS)[pp.getIndex()]),
-					nf.format(stats.getScores(Score.DEATHS)[pp.getIndex()]),
-					nf.format(stats.getScores(Score.KILLS)[pp.getIndex()]),
+					nf.format(stats.getScores(Score.BOMBEDS)[pp.getIndex()]),
+					nf.format(stats.getScores(Score.BOMBINGS)[pp.getIndex()]),
 				};
 				for(int j=0;j<scores.length;j++)
 				{	String text = scores[j];

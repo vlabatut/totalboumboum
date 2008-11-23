@@ -23,19 +23,18 @@ package fr.free.totalboumboum.game.statistics;
 
 import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Iterator;
-
-import fr.free.totalboumboum.configuration.profile.Profile;
 import fr.free.totalboumboum.game.match.Match;
-import fr.free.totalboumboum.game.points.PointsProcessor;
 
 public class StatisticMatch extends StatisticBase implements Serializable
 {
 	private static final long serialVersionUID = 1L;
 
+	public StatisticMatch(Match match)
+	{	super(match);
+	}
+
 	/////////////////////////////////////////////////////////////////
-	// STATISTIC ROUNDS	/////////////////////////////////////////
+	// STATISTIC ROUNDS		/////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	private final ArrayList<StatisticRound> rounds = new ArrayList<StatisticRound>();
 
@@ -55,56 +54,16 @@ public class StatisticMatch extends StatisticBase implements Serializable
 		}
 		// partial points
 		float[] roundPoints = round.getPoints();
-		for(int i=0;i<players.size();i++)
-			total[i] = total[i] + roundPoints[i];
+		for(int i=0;i<getTotal().length;i++)
+			getTotal()[i] = getTotal()[i] + roundPoints[i];
+		// time
+		long time = getTotalTime() + round.getTotalTime();
+		setTotalTime(time);
 	}
 
 	@Override
 	public int getConfrontationCount()
 	{	int result = rounds.size();
 		return result;
-	}
-	
-	
-	
-	
-	public void init(Match match)
-	{	// players
-		ArrayList<Profile> profiles = match.getProfiles();
-		Iterator<Profile> it = profiles.iterator();
-		while(it.hasNext())
-		{	Profile temp = it.next();
-			String name = temp.getName();
-			players.add(name);
-		}
-		// points
-		points = new float[players.size()];
-		for(int j=0;j<points.length;j++)
-			points[j] = 0;
-		// partial points
-		total = new float[players.size()];
-		for(int j=0;j<total.length;j++)
-			total[j] = 0;
-		// scores
-		for (Score score : Score.values())
-		{	long[] sc = new long[players.size()];
-			for(int i=0;i<sc.length;i++)
-				sc[i] = 0;
-			scores.put(score,sc);
-		}
-	}
-
-	
-	public void computePoints(PointsProcessor pointProcessor)
-	{	points = pointProcessor.process(this);
-	}
-	
-	
-	@Override
-	public long getTotalTime()
-	{	long result = 0;
-		for(StatisticRound r: rounds)
-			result = result + r.getTotalTime();
-		return 0;
 	}
 }

@@ -27,8 +27,8 @@ import fr.free.totalboumboum.game.statistics.StatisticBase;
 import fr.free.totalboumboum.game.statistics.StatisticHolder;
 
 /**
- * this limit is based on a given score (time, kills, items...).
- * for example, a round can be stopped as soon as a player collects 30 items, or has 4 kills
+ * this limit is based on a given score (time, bombings, items...).
+ * for example, a round can be stopped as soon as a player collects 30 items, or has 4 bombings
  * 
  * @author Vincent
  *

@@ -83,8 +83,8 @@ public class RoundResults extends EntitledDataPanel
 				{	GuiKeys.GAME_ROUND_RESULTS_HEADER_NAME,
 					GuiKeys.GAME_ROUND_RESULTS_HEADER_BOMBS,
 					GuiKeys.GAME_ROUND_RESULTS_HEADER_ITEMS,
-					GuiKeys.GAME_ROUND_RESULTS_HEADER_DEATHS,
-					GuiKeys.GAME_ROUND_RESULTS_HEADER_KILLS,
+					GuiKeys.GAME_ROUND_RESULTS_HEADER_BOMBEDS,
+					GuiKeys.GAME_ROUND_RESULTS_HEADER_BOMBINGS,
 					sc,
 					GuiKeys.GAME_ROUND_RESULTS_HEADER_POINTS
 				};
@@ -165,8 +165,8 @@ public class RoundResults extends EntitledDataPanel
 				String[] scores = 
 				{	nf.format(stats.getScores(Score.BOMBS)[pp.getIndex()]),
 					nf.format(stats.getScores(Score.ITEMS)[pp.getIndex()]),
-					nf.format(stats.getScores(Score.DEATHS)[pp.getIndex()]),
-					nf.format(stats.getScores(Score.KILLS)[pp.getIndex()]),
+					nf.format(stats.getScores(Score.BOMBEDS)[pp.getIndex()]),
+					nf.format(stats.getScores(Score.BOMBINGS)[pp.getIndex()]),
 					sc
 				};
 				for(int j=0;j<scores.length;j++)

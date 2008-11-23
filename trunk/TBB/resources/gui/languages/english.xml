@@ -355,9 +355,9 @@
 						<text name="Confrontations" value="Matches"  tooltip="Maximal number of matches in this tournament" />
 						<text name="Crowns" value="Crowns"  tooltip="Number of crowns to pick in order to stop this tournament" />
 						<text name="Custom" value="Custom points"  tooltip="Number of custom points to score in order to stop this tournament" />
-						<text name="Deaths" value="Deaths"  tooltip="Number of deaths to suffer in order to stop this tournament" />
+						<text name="Bombed" value="Bombed"  tooltip="Number of explosions to suffer in order to stop this tournament" />
 						<text name="Items" value="Items"  tooltip="Number of items to pick in order to stop this tournament" />
-						<text name="Kills" value="Kills"  tooltip="Number of kills to perform in order to stop this tournament" />
+						<text name="Bombing" value="Bombing"  tooltip="Number of players to explose in order to stop this tournament" />
 						<text name="Paintings" value="Paintings"  tooltip="Number of tiles to paint in order to stop this tournament" />
 						<text name="Time" value="Time"  tooltip="Maximum duration of this tournament" />
 						<text name="Total" value="Total"  tooltip="Total number of points to score during the matches in order to stop this tournament" />
@@ -398,10 +398,10 @@
 					<group name="Data">
 						<text name="Bombs" value="Bombs"  tooltip="Uses the total number of bombs dropped during the tournament" />
 						<text name="Crowns" value="Crowns"  tooltip="Uses the total number of crowns picked during the tournament" />
-						<text name="Deaths" value="Deaths"  tooltip="Uses the total number of deaths suffered during the tournament" />
+						<text name="Bombed" value="Bombed"  tooltip="Uses the total number of explosions suffered during the tournament" />
 						<text name="Inverted" value="Inverted"  tooltip="Inverted order" />
 						<text name="Items" value="Items"  tooltip="Uses the total number of items picked during the tournament" />
-						<text name="Kills" value="Kills"  tooltip="Uses the total number of players killed during the tournament" />
+						<text name="Bombing" value="Bombing"  tooltip="Uses the total number of players explosed during the tournament" />
 						<text name="Noshare" value="No share"  tooltip="In case of tie, points are not shared" />
 						<text name="Paintings" value="Paintings"  tooltip="Uses total the number of tiles painted during the tournament" />
 						<text name="Partial" value="Partial"  tooltip="Uses a previous partial result of custom point procesing" />
@@ -420,9 +420,9 @@
 					<text name="Crowns" value="Crowns"  tooltip="Total number of crowns picked in this tournament" />
 					<text name="CustomLimit" value="Custom"  tooltip="Custom points used as a limit criterion" />
 					<text name="CustomPoints" value="Custom"  tooltip="Custom points used to compute the overall points" />
-					<text name="Deaths" value="Deaths"  tooltip="Total number of times the player was killed in this tournament" />
+					<text name="Bombed" value="Bombed"  tooltip="Total number of times the player was explosed in this tournament" />
 					<text name="Items" value="Items"  tooltip="Total number of items picked in this tournament" />
-					<text name="Kills" value="Kills"  tooltip="Total number of players killed in this tournament" />
+					<text name="Bombing" value="Bombing"  tooltip="Total number of players explosed in this tournament" />
 					<text name="Match" value="M"  tooltip="Number of points scored for the match number" />
 					<text name="Name" value="Name"  tooltip="Name of the player" />
 					<text name="Paintings" value="Paintings"  tooltip="Total number of tiles painted in this tournament" />
@@ -470,9 +470,9 @@
 						<text name="Confrontations" value="Rounds"  tooltip="Maximal number of rounds in this match" />
 						<text name="Crowns" value="Crowns"  tooltip="Number of crowns to pick in order to stop this match" />
 						<text name="Custom" value="Custom"  tooltip="Number of custom points to score in order to stop this match" />
-						<text name="Deaths" value="Deaths"  tooltip="Number of deaths to suffer in order to stop this match" />
+						<text name="Bombed" value="Bombed"  tooltip="Number of explosions to suffer in order to stop this match" />
 						<text name="Items" value="Items"  tooltip="Number of items to pick in order to stop this match" />
-						<text name="Kills" value="Kills"  tooltip="Number of kills to perform in order to stop this match" />
+						<text name="Bombing" value="Bombing"  tooltip="Number of players to explose in order to stop this match" />
 						<text name="Paintings" value="Paintings"  tooltip="Number of tiles to paint in order to stop this match" />
 						<text name="Time" value="Time"  tooltip="Maximum duration of this match" />
 						<text name="Total" value="Total"  tooltip="Total number of points to score during the rounds in order to stop this match" />
@@ -516,10 +516,10 @@
 					<group name="Data">
 						<text name="Bombs" value="Bombs"  tooltip="Uses the total number of bombs dropped during the match" />
 						<text name="Crowns" value="Crowns"  tooltip="Uses the total number of crowns picked during the match" />
-						<text name="Deaths" value="Deaths"  tooltip="Uses the total number of deaths suffered during the match" />
+						<text name="Bombed" value="Bombed"  tooltip="Uses the total number of explosions suffered during the match" />
 						<text name="Inverted" value="Inverted"  tooltip="Inverted order" />
 						<text name="Items" value="Items"  tooltip="Uses the total number of items picked during the match" />
-						<text name="Kills" value="Kills"  tooltip="Uses the total number of players killed during the match" />
+						<text name="Bombing" value="Bombing"  tooltip="Uses the total number of players explosed during the match" />
 						<text name="Noshare" value="No share"  tooltip="In case of tie, points are not shared" />
 						<text name="Paintings" value="Paintings"  tooltip="Uses total the number of tiles painted during the match" />
 						<text name="Partial" value="Partial"  tooltip="Uses a previous partial result of custom point procesing" />
@@ -538,9 +538,9 @@
 					<text name="Crowns" value="Crowns"  tooltip="Total number of crowns picked in this match" />
 					<text name="CustomLimit" value="Custom"  tooltip="Custom points used as a limit criterion" />
 					<text name="CustomPoints" value="Custom"  tooltip="Custom points used to compute the overall points" />
-					<text name="Deaths" value="Deaths"  tooltip="Total number of times the player was killed in this match" />
+					<text name="Bombed" value="Bombed"  tooltip="Total number of times the player was explosed in this match" />
 					<text name="Items" value="Items"  tooltip="Total number of items picked in this match" />
-					<text name="Kills" value="Kills"  tooltip="Total number of players killed in this match" />
+					<text name="Bombing" value="Bombing"  tooltip="Total number of players explosed in this match" />
 					<text name="Name" value="Name"  tooltip="Name of the player" />
 					<text name="Paintings" value="Paintings"  tooltip="Total number of tiles painted in this match" />
 					<text name="Points" value="Points"  tooltip="Number of points scored for this match" />
@@ -603,9 +603,9 @@
 						<text name="Bombs" value="Bombs"  tooltip="Number of bombs to drop in order to stop this round" />
 						<text name="Crowns" value="Crowns"  tooltip="Number of crowns to pick in order to stop this round" />
 						<text name="Custom" value="Custom"  tooltip="Number of custom points to score in order to stop this round" />
-						<text name="Deaths" value="Deaths"  tooltip="Number of deaths to suffer in order to stop this round" />
+						<text name="Bombed" value="Bombed"  tooltip="Number of explosions to suffer in order to stop this round" />
 						<text name="Items" value="Items"  tooltip="Number of items to pick in order to stop this round" />
-						<text name="Kills" value="Kills"  tooltip="Number of kills to perform in order to stop this round" />
+						<text name="Bombing" value="Bombing"  tooltip="Number of players to explose in order to stop this round" />
 						<text name="Paintings" value="Paintings"  tooltip="Number of tiles to paint in order to stop this round" />
 						<text name="Time" value="Time"  tooltip="Maximum duration of this round" />
 					</group>
@@ -641,10 +641,10 @@
 					<group name="Data">
 						<text name="Bombs" value="Bombs"  tooltip="Uses the number of bombs dropped during the round" />
 						<text name="Crowns" value="Crowns"  tooltip="Uses the number of crowns picked during the round" />
-						<text name="Deaths" value="Deaths"  tooltip="Uses the number of deaths suffered during the round" />
+						<text name="Bombed" value="Bombed"  tooltip="Uses the number of explosions suffered during the round" />
 						<text name="Inverted" value="Inverted"  tooltip="Inverted order" />
 						<text name="Items" value="Items"  tooltip="Uses the number of items picked during the round" />
-						<text name="Kills" value="Kills"  tooltip="Uses the number of players killed during the round" />
+						<text name="Bombing" value="Bombing"  tooltip="Uses the number of players explosed during the round" />
 						<text name="Noshare" value="No share"  tooltip="In case of tie, points are not shared" />
 						<text name="Paintings" value="Paintings"  tooltip="Uses the number of tiles painted during the round" />
 						<text name="Partial" value="Partial"  tooltip="Uses a previous partial result of custom point procesing" />
@@ -666,9 +666,9 @@
 					<text name="Crowns" value="Crowns"  tooltip="Number of crowns picked in this round" />
 					<text name="CustomLimit" value="Custom"  tooltip="Custom points used as a limit criterion" />
 					<text name="CustomPoints" value="Custom"  tooltip="Custom points used to compute the overall points" />
-					<text name="Deaths" value="Deaths"  tooltip="Number of times the player was killed in this round" />
+					<text name="Bombed" value="Bombed"  tooltip="Number of times the player was explosed in this round" />
 					<text name="Items" value="Items"  tooltip="Number of items picked in this round" />
-					<text name="Kills" value="Kills"  tooltip="Number of players killed in this round" />
+					<text name="Bombing" value="Bombing"  tooltip="Number of players explosed in this round" />
 					<text name="Name" value="Name"  tooltip="Name of the player" />
 					<text name="Paintings" value="Paintings"  tooltip="Number of tiles painted in this round" />
 					<text name="Points" value="Points"  tooltip="Number of points scored for this round" />

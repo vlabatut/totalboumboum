@@ -124,8 +124,8 @@ public class QuickResults extends JPanel
 			{	"Player",
 				"Bombs",
 				"Items",
-				"Deaths",
-				"Kills",
+				"Bombeds",
+				"Bombings",
 				sc,
 				"Points"
 			};
@@ -178,8 +178,8 @@ public class QuickResults extends JPanel
 					String[] scores = 
 					{	nf.format(stats.getScores(Score.BOMBS)[pp.getIndex()]),
 						nf.format(stats.getScores(Score.ITEMS)[pp.getIndex()]),
-						nf.format(stats.getScores(Score.DEATHS)[pp.getIndex()]),
-						nf.format(stats.getScores(Score.KILLS)[pp.getIndex()]),
+						nf.format(stats.getScores(Score.BOMBEDS)[pp.getIndex()]),
+						nf.format(stats.getScores(Score.BOMBINGS)[pp.getIndex()]),
 						sc
 					};
 					for(int j=0;j<scores.length;j++)
