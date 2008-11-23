@@ -15,11 +15,14 @@
 
 	<sequence>
 
+
  		<limits>
- 			<confrontation value="3" />
+			<confrontation>
+				<points local="false" name="basicTournament" />
+				<threshold value="3" />
+			</confrontation>
  		</limits>
 
-		<points local="false" name="basicTournament" />
 	 	
 		<matches randomOrder="false">
 			<match local="false" name="matchLong" />

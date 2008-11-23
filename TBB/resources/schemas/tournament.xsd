@@ -31,7 +31,6 @@
 	<xsd:complexType name="tSequence">
 		<xsd:sequence>
 			<xsd:element name="limits" type="tTournamentLimits"  />
-			<xsd:element name="points" type="tPointProcessor" />
 			<xsd:element name="matches" type="tMatches" />
 		</xsd:sequence>
 	</xsd:complexType>

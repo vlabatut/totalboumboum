@@ -108,6 +108,7 @@ public class XmlTools
 	public static final String ELT_ITEMSET = "itemset";
 	public static final String ELT_KEY = "key";
 	public static final String ELT_LANGUAGE = "language";
+	public static final String ELT_LAST_STANDING = "lastStanding";
 	public static final String ELT_LEVEL = "level";
 	public static final String ELT_LEVELS = "levels";
 	public static final String ELT_LIMIT = "limit";
