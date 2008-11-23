@@ -21,8 +21,9 @@ package fr.free.totalboumboum.game.limit;
  * 
  */
 
+import java.util.ArrayList;
+
 import fr.free.totalboumboum.game.points.PointsProcessor;
-import fr.free.totalboumboum.game.statistics.StatisticBase;
 import fr.free.totalboumboum.game.statistics.StatisticHolder;
 
 /**
@@ -34,7 +35,7 @@ import fr.free.totalboumboum.game.statistics.StatisticHolder;
  */
 public class LimitLastStanding implements TournamentLimit, MatchLimit, RoundLimit
 {	
-	public LimitLastStanding(long limit, PointsProcessor pointProcessor)
+	public LimitLastStanding(int limit, PointsProcessor pointProcessor)
 	{	this.threshold = limit;	
 		this.pointProcessor = pointProcessor;
 	}
@@ -42,22 +43,27 @@ public class LimitLastStanding implements TournamentLimit, MatchLimit, RoundLimi
 	/////////////////////////////////////////////////////////////////
 	// THRESHOLD		/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	private long threshold;
+	private int threshold;
 	
-	public long getThreshold()
+	public int getThreshold()
 	{	return threshold;
 	}
 
-	public void setThreshold(long threshold)
+	public void setThreshold(int threshold)
 	{	this.threshold = threshold;
 	}
 
 	@Override
 	public boolean testThreshold(StatisticHolder holder)
-	{	int result = -1;
-		if(stats.getTotalTime()>=threshold)
-			result = stats.getPlayers().size(); 
-//		return result;
+	{	boolean result;
+		ArrayList<Boolean> playersStatus = holder.getPlayersStatus();
+		int count = 0;
+		for(boolean b: playersStatus)
+		{	if(b)
+				count++;
+		}
+		result = count<=threshold;
+		return result;
 	}
 
 	/////////////////////////////////////////////////////////////////
@@ -75,7 +81,6 @@ public class LimitLastStanding implements TournamentLimit, MatchLimit, RoundLimi
 
 	@Override
 	public float[] processPoints(StatisticHolder holder)
-	{	
-		
+	{	return pointProcessor.process(holder);		
 	}
 }

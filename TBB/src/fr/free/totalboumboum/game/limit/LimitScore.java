@@ -72,23 +72,20 @@ public class LimitScore implements TournamentLimit, MatchLimit, RoundLimit
 
 	@Override
 	public boolean testThreshold(StatisticHolder holder)
-	{	int result = -1;
+	{	boolean result = false;
+		StatisticBase stats = holder.getStats();
 		long scores[] = stats.getScores(score);
 		int i=0;
 		if(supLimit)
-		{	while(i<scores.length && result<0)
-			{	if(scores[i]>=threshold)
-					result = i;
-				else
-					i++;
+		{	while(i<scores.length && !result)
+			{	result = scores[i]>=threshold;
+				i++;
 			}
 		}
 		else
-		{	while(i<scores.length && result<0)
-			{	if(scores[i]<=threshold)
-					result = i;
-				else
-					i++;
+		{	while(i<scores.length && !result)
+			{	result = scores[i]<=threshold;
+				i++;
 			}
 		}
 		return result;
@@ -109,7 +106,6 @@ public class LimitScore implements TournamentLimit, MatchLimit, RoundLimit
 
 	@Override
 	public float[] processPoints(StatisticHolder holder)
-	{	
-		
+	{	return pointProcessor.process(holder);		
 	}
 }
