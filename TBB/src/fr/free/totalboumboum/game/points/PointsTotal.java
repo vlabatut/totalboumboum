@@ -22,15 +22,34 @@ package fr.free.totalboumboum.game.points;
  */
 
 import fr.free.totalboumboum.game.statistics.StatisticBase;
+import fr.free.totalboumboum.game.statistics.StatisticHolder;
+
+/**
+ * This PointsProcessor calculates its result by sending back 
+ * the total points for this tournament or match.
+ * 
+ * For example, for a match in which 2 rounds have been played with
+ * {1,0,0,0} and {1,5,0,2} points, the result would be {2,5,0,2}. 
+ * 
+ * @author Vincent
+ *
+ */
 
 public class PointsTotal extends PointsProcessor implements PPConstant
 {	
+	/////////////////////////////////////////////////////////////////
+	// PROCESS			/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
 	@Override
-	public float[] process(StatisticBase stats)
-	{	float result[] = stats.getPartialPoints();
+	public float[] process(StatisticHolder holder)
+	{	StatisticBase stats = holder.getStats();
+		float result[] = stats.getPartialPoints();
 		return result;
 	}
 
+	/////////////////////////////////////////////////////////////////
+	// MISC				/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
 	@Override
 	public String toString()
 	{	// init

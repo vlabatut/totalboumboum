@@ -24,21 +24,39 @@ package fr.free.totalboumboum.game.points;
 import java.util.ArrayList;
 
 import fr.free.totalboumboum.game.statistics.StatisticBase;
+import fr.free.totalboumboum.game.statistics.StatisticHolder;
+
+/**
+ * This PointsProcessor calculate the minimal value
+ * in the results coming from source PointProcessor.
+ * 
+ * For example, if the source was {12,2,5} then the result would be {2,2,2} 
+ * 
+ * @author Vincent
+ *
+ */
 
 public class PointsMinimum extends PointsProcessor implements PPFunction
 {
-	private PointsProcessor source;
-	
 	public PointsMinimum(PointsProcessor source)
 	{	this.source = source;
 	}
 	
+	/////////////////////////////////////////////////////////////////
+	// SOURCES			/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	private PointsProcessor source;
+	
+	/////////////////////////////////////////////////////////////////
+	// PROCESS			/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
 	@Override
-	public float[] process(StatisticBase stats)
+	public float[] process(StatisticHolder holder)
 	{	// init
+		StatisticBase stats = holder.getStats();
 		ArrayList<String> players = stats.getPlayers();
 		float[] result = new float[players.size()];
-		float[] temp = source.process(stats);
+		float[] temp = source.process(holder);
 		// process
 		float min = Float.MAX_VALUE;
 		for(int i=0;i<temp.length;i++)
@@ -51,6 +69,9 @@ public class PointsMinimum extends PointsProcessor implements PPFunction
 		return result;
 	}
 
+	/////////////////////////////////////////////////////////////////
+	// MISC				/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
 	@Override
 	public String toString()
 	{	// init

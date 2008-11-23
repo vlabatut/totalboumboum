@@ -278,7 +278,7 @@ public class PointsProcessorLoader
 		return result;
 	}
 	@SuppressWarnings("unchecked")
-	private static PointsSubtraction loadSubtractionElement(Element root)
+	private static PointsSubstraction loadSubtractionElement(Element root)
 	{	// left source
 		List<Element> sources = root.getChildren();
 		Element leftSrc = sources.get(0);
@@ -287,7 +287,7 @@ public class PointsProcessorLoader
 		Element rightSrc = sources.get(1);
 		PointsProcessor rightSource = loadGeneralPointElement(rightSrc);
 		// result
-		PointsSubtraction result = new PointsSubtraction(leftSource,rightSource);
+		PointsSubstraction result = new PointsSubstraction(leftSource,rightSource);
 		return result;
 	}
 	@SuppressWarnings("unchecked")

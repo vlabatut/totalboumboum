@@ -26,26 +26,40 @@ import java.util.ArrayList;
 import java.util.Iterator;
 
 import fr.free.totalboumboum.game.statistics.StatisticBase;
+import fr.free.totalboumboum.game.statistics.StatisticHolder;
+
+/**
+ * This PointsProcessor process the rankings in function of  the results coming 
+ * from the source PointProcessor, and then gives points according to this
+ * ranking.
+ * 
+ * note: the same result can be obtained by combing a Rankings and a Discretize
+ * PointsProcessor objects, but PointsRankpoints allows to specify a special
+ * behaviour for draws (share points or not).
+ * 
+ * For example, if the source was {12,2,5} and we have the values :
+ * 		- 10 pts for the first place
+ * 		- 5 pts for the second place
+ * then the result would be {10,0,5} 
+ * 
+ * @author Vincent
+ *
+ */
 
 public class PointsRankpoints extends PointsProcessor implements PPFunction
 {
-	/*
-	 * Ranks according to the sources and gives points :
-	 * values = {pts for #1, pts for #2, ...}
-	 */
-	private PointsRankings source;
-	private float[] values;
-	private boolean exaequoShare;
-	
 	public PointsRankpoints(ArrayList<PointsProcessor> sources, float[] values, boolean inverted, boolean exaequoShare)
 	{	this.source = new PointsRankings(sources,inverted);
 		this.values = values;
 		this.exaequoShare = exaequoShare;
 	}
 	
-	public PointsRankings getSource()
-	{	return source;	
-	}
+	/////////////////////////////////////////////////////////////////
+	// PARAMETERS		/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	private float[] values;
+	private boolean exaequoShare;
+
 	public float[] getValues()
 	{	return values;	
 	}
@@ -53,12 +67,25 @@ public class PointsRankpoints extends PointsProcessor implements PPFunction
 	{	return exaequoShare;	
 	}
 	
+	/////////////////////////////////////////////////////////////////
+	// SOURCES			/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	private PointsRankings source;
+	
+	public PointsRankings getSource()
+	{	return source;	
+	}
+	
+	/////////////////////////////////////////////////////////////////
+	// PROCESS			/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
 	@Override
-	public float[] process(StatisticBase stats)
+	public float[] process(StatisticHolder holder)
 	{	// init
+		StatisticBase stats = holder.getStats();
 		ArrayList<String> players = stats.getPlayers();
 		float[] result = new float[players.size()];
-		float[] temp = source.process(stats);
+		float[] temp = source.process(holder);
 		float[] values2 = new float[values.length];
 		
 		// count
@@ -101,6 +128,9 @@ public class PointsRankpoints extends PointsProcessor implements PPFunction
 		return result;
 	}
 
+	/////////////////////////////////////////////////////////////////
+	// MISC				/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
 	@Override
 	public String toString()
 	{	// init

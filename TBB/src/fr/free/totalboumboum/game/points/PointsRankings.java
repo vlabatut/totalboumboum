@@ -25,32 +25,58 @@ import java.util.ArrayList;
 import java.util.Iterator;
 
 import fr.free.totalboumboum.game.statistics.StatisticBase;
+import fr.free.totalboumboum.game.statistics.StatisticHolder;
+
+/**
+ * This PointsProcessor calculates some rankings in function of the results 
+ * coming from the source PointsProcessor objects. The position of the source
+ * in the list determines its priority while evaluating the rankings.
+ * 
+ * For example, if the source was {12,2,5} then the result would be {1,3,2} 
+ * 
+ * Note : the order can be normal (ie. increasing) or inverted (ie. decreasing)
+ * 
+ * @author Vincent
+ *
+ */
 
 public class PointsRankings extends PointsProcessor implements PPFunction
 {
-	private ArrayList<PointsProcessor> sources = new ArrayList<PointsProcessor>();
-	private boolean inverted;
-	
 	public PointsRankings(ArrayList<PointsProcessor> sources, boolean inverted)
 	{	this.sources.addAll(sources);
 		this.inverted = inverted;
 	}
 	
+	/////////////////////////////////////////////////////////////////
+	// PARAMETERS		/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	private boolean inverted;
+	
 	public boolean isInverted()
 	{	return inverted;	
 	}
+	
+	/////////////////////////////////////////////////////////////////
+	// SOURCES			/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	private ArrayList<PointsProcessor> sources = new ArrayList<PointsProcessor>();
+
 	public ArrayList<PointsProcessor> getSources()
 	{	return sources;		
 	}
 	
+	/////////////////////////////////////////////////////////////////
+	// PROCESS			/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
 	@Override
-	public float[] process(StatisticBase stats)
+	public float[] process(StatisticHolder holder)
 	{	// source
+		StatisticBase stats = holder.getStats();
 		ArrayList<float[]> values = new ArrayList<float[]>();
 		Iterator<PointsProcessor> it = sources.iterator();
 		while (it.hasNext())
 		{	PointsProcessor source = it.next();
-			values.add(source.process(stats));
+			values.add(source.process(holder));
 		}
 		
 		// result
@@ -97,6 +123,9 @@ public class PointsRankings extends PointsProcessor implements PPFunction
 		return result;
 	}		
 
+	/////////////////////////////////////////////////////////////////
+	// MISC				/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
 	@Override
 	public String toString()
 	{	// init

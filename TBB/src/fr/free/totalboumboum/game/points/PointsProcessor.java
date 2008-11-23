@@ -23,12 +23,15 @@ package fr.free.totalboumboum.game.points;
 
 import java.util.ArrayList;
 
-import fr.free.totalboumboum.game.statistics.StatisticBase;
+import fr.free.totalboumboum.game.statistics.StatisticHolder;
 
 public abstract class PointsProcessor
 {	
-	public abstract float[] process(StatisticBase stats);
+	public abstract float[] process(StatisticHolder holder);
 	
+	/////////////////////////////////////////////////////////////////
+	// NOTES			/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
 	private final ArrayList<String> notes = new ArrayList<String>();
 
 	public void setNotes(ArrayList<String> notes)
