@@ -22,13 +22,97 @@ package fr.free.totalboumboum.game.statistics;
  */
 
 import java.util.ArrayList;
+import java.util.Date;
+import java.util.HashMap;
 
 
-public interface StatisticBase
+public abstract class StatisticBase
 {
-	public ArrayList<String> getPlayers();
-	public long[] getScores(Score score);
-	public float[] getPartialPoints();
-	public int getConfrontationCount();
-	public long getTime();
+	/////////////////////////////////////////////////////////////////
+	// SCORES			/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	/** the current scores */
+	private final HashMap<Score,long[]> scores = new HashMap<Score,long[]>();
+	/**
+	 * get the current scores
+	 */
+	public long[] getScores(Score score)
+	{	long[] result;
+		result = scores.get(score);
+		return result;	
+	}
+
+	/////////////////////////////////////////////////////////////////
+	// POINTS			/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	private float[] points;
+	private float[] total;
+	
+	/**
+	 * points processed after the end of the confrontation
+	 * (for tournaments, matches and rounds)
+	 * @return
+	 */
+	public float[] getPoints()
+	{	return points;
+	}
+
+	/**
+	 * sum of the points for all sub-confrontations
+	 * (ie matches for a tournament and rounds for a match. 
+	 * should not be used for rounds).
+	 * @return
+	 */
+	public float[] getTotal()
+	{	return total;
+	}
+
+	/////////////////////////////////////////////////////////////////
+	// CONFRONTATIONS	/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	public abstract int getConfrontationCount();
+
+	/////////////////////////////////////////////////////////////////
+	// TIME				/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	private long totalTime;
+
+	public long getTotalTime()
+	{	return totalTime;	
+	}
+
+	/////////////////////////////////////////////////////////////////
+	// DATE				/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	private Date startDate;
+	private Date endDate;
+
+	public Date getStartDate()
+	{	return startDate;
+	}
+	
+	public void setStartDate(Date startDate)
+	{	this.startDate = startDate;
+	}
+	
+	public Date getEndDate()
+	{	return endDate;
+	}
+	
+	public void setEndDate(Date endDate)
+	{	this.endDate = endDate;
+	}
+
+	/////////////////////////////////////////////////////////////////
+	// PLAYERS			/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	private final ArrayList<String> players = new ArrayList<String>();
+
+	public ArrayList<String> getPlayers()
+	{	return players;
+	}
+
+	public void addPlayer(String player)
+	{	players.add(player);
+	}
 }

@@ -226,7 +226,7 @@ public class Round implements StatisticHolder<StatisticRound>
 	
 	public void addStatisticEvent(StatisticEvent event)
 	{	if(!isOver())
-		{	stats.addEvent(event);
+		{	stats.addStatisticEvent(event);
 			//stats.computePoints(getPointProcessor());
 		}
 	}

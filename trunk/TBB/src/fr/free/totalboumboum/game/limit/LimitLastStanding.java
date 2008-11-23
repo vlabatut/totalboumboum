@@ -55,7 +55,7 @@ public class LimitLastStanding implements TournamentLimit, MatchLimit, RoundLimi
 	@Override
 	public boolean testThreshold(StatisticHolder holder)
 	{	int result = -1;
-		if(stats.getTime()>=threshold)
+		if(stats.getTotalTime()>=threshold)
 			result = stats.getPlayers().size(); 
 //		return result;
 	}

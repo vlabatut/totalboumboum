@@ -23,6 +23,7 @@ package fr.free.totalboumboum.game.statistics;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.TreeSet;
@@ -33,52 +34,20 @@ import fr.free.totalboumboum.game.points.PointsProcessor;
 import fr.free.totalboumboum.game.round.PlayMode;
 import fr.free.totalboumboum.game.round.Round;
 
-public class StatisticRound implements Serializable, StatisticBase
+public class StatisticRound extends StatisticBase implements Serializable
 {
 	private static final long serialVersionUID = 1L;
 
-	private final ArrayList<String> players = new ArrayList<String>();
+	/////////////////////////////////////////////////////////////////
+	// STATISTIC EVENTS	/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
 	private final ArrayList<StatisticEvent> events = new ArrayList<StatisticEvent>();
-	private final HashMap<Score,long[]> scores = new HashMap<Score,long[]>();
-	private PlayMode playMode;
-	private float[] points;
 	
-	public void init(Round round)
-	{	// players
-		ArrayList<Profile> profiles = round.getProfiles();
-		Iterator<Profile> it = profiles.iterator();
-		while(it.hasNext())
-		{	Profile temp = it.next();
-			String name = temp.getName();
-			players.add(name);
-		}
-		// play mode
-		playMode = round.getPlayMode();
-		// points
-		points = new float[players.size()];
-		for(int j=0;j<points.length;j++)
-			points[j] = 0;
-		// scores
-		for (Score score : Score.values())
-		{	long[] sc = new long[players.size()];
-			for(int i=0;i<sc.length;i++)
-				sc[i] = 0;
-			scores.put(score,sc);
-		}
+	public ArrayList<StatisticEvent> getStatisticEvents()
+	{	return events;
 	}
-	
-	public PlayMode getPlayMode()
-	{	return playMode;	
-	}
-	
-	public void addPlayer(String player)
-	{	players.add(player);
-	}
-	public ArrayList<String> getPlayers()
-	{	return players;
-	}
-	
-	public void addEvent(StatisticEvent event)
+
+	public void addStatisticEvent(StatisticEvent event)
 	{	// events
 		events.add(event);
 		// scores
@@ -89,34 +58,51 @@ public class StatisticRound implements Serializable, StatisticBase
 		}
 	}
 
+	@Override
+	public int getConfrontationCount()
+	{	// useless for round
+		int result = 0;
+		return result;
+	}
+
+	/////////////////////////////////////////////////////////////////
+	// STATISTIC EVENTS	/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+
+	
+	
+	
+	public void init(Round round)
+	{	totalTime = 0;
+		// players
+		ArrayList<Profile> profiles = round.getProfiles();
+		Iterator<Profile> it = profiles.iterator();
+		while(it.hasNext())
+		{	Profile temp = it.next();
+			String name = temp.getName();
+			players.add(name);
+		}
+		// points
+		points = new float[players.size()];
+		Arrays.fill(points,0);
+		// partial points
+		total = new float[players.size()];
+		Arrays.fill(total,0);
+		// scores
+		for (Score score : Score.values())
+		{	long[] sc = new long[players.size()];
+			for(int i=0;i<sc.length;i++)
+				sc[i] = 0;
+			scores.put(score,sc);
+		}
+	}
+
 	public void computePoints(PointsProcessor pointProcessor)
 	{	points = pointProcessor.process(this);
 	}
 
-	public long[] getScores(Score score)
-	{	long[] result;
-		result = scores.get(score);
-		return result;	
-	}
 
-	public ArrayList<StatisticEvent> getEvents()
-	{	return events;
-	}
-	
-	/** renvoie les points calculés a posteriori pour ce round */
-	public float[] getPoints()
-	{	return points;
-	}
 
-	/** inutile ici (on renvoie zéro) */
-	public float[] getPartialPoints()
-	{	int size = players.size();
-		float[] result = new float[size];
-		for(int i=0;i<size;i++)
-			result[i] = 0;
-		return result; 
-	}
-	
 	public TreeSet<PlayerPoints> getOrderedPlayers()
 	{	TreeSet<PlayerPoints> result = new TreeSet<PlayerPoints>();
 		for(int i=0;i<points.length;i++)
@@ -141,13 +127,7 @@ public class StatisticRound implements Serializable, StatisticBase
 		}
 		return result;
 	}
-	
-	private long totalTime = 0;
-	
-	public long getTime()
-	{	return totalTime;	
-	}
-	
+		
 	public void updateTime(long time)
 	{	totalTime = time;
 		long[] sc = scores.get(Score.TIME);
@@ -165,15 +145,4 @@ public class StatisticRound implements Serializable, StatisticBase
 		}
 	}
 
-	//useless...
-	@Override
-	public int getConfrontationCount()
-	{	int result = 0;
-		return result;
-	}
-
-	public void setWinner(int index)
-	{	 //cf comment dans StatisticMatch
-		
-	}
 }

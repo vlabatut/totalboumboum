@@ -43,7 +43,7 @@ public class PointsTotal extends PointsProcessor implements PPConstant
 	@Override
 	public float[] process(StatisticHolder holder)
 	{	StatisticBase stats = holder.getStats();
-		float result[] = stats.getPartialPoints();
+		float result[] = stats.getTotal();
 		return result;
 	}
 
