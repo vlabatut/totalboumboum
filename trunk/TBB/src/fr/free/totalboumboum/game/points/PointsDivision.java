@@ -24,24 +24,42 @@ package fr.free.totalboumboum.game.points;
 import java.util.ArrayList;
 
 import fr.free.totalboumboum.game.statistics.StatisticBase;
+import fr.free.totalboumboum.game.statistics.StatisticHolder;
+
+/**
+ * This PointsProcessor divides the results coming from two other PointProcessor objects.
+ * 
+ * For example, if the sources were {12,2,5} and {3,2,1}
+ * then the result would be {4,1,5} 
+ * 
+ * @author Vincent
+ *
+ */
 
 public class PointsDivision extends PointsProcessor implements PPPrimaryOperator
 {
-	private PointsProcessor leftSource;
-	private PointsProcessor rightSource;
-	
 	public PointsDivision(PointsProcessor leftSource, PointsProcessor rightSource)
 	{	this.leftSource = leftSource;
 		this.rightSource = rightSource;
 	}
 	
+	/////////////////////////////////////////////////////////////////
+	// SOURCES			/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	private PointsProcessor leftSource;
+	private PointsProcessor rightSource;
+
+	/////////////////////////////////////////////////////////////////
+	// PROCESS			/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
 	@Override
-	public float[] process(StatisticBase stats)
+	public float[] process(StatisticHolder holder)
 	{	// init
+		StatisticBase stats = holder.getStats();
 		ArrayList<String> players = stats.getPlayers();
 		float[] result = new float[players.size()];
-		float[] leftTemp = leftSource.process(stats);
-		float[] rightTemp = rightSource.process(stats);
+		float[] leftTemp = leftSource.process(holder);
+		float[] rightTemp = rightSource.process(holder);
 		// process
 		for(int i=0;i<result.length;i++)
 		{	if(rightTemp[i]==0) //division by zero
@@ -53,6 +71,9 @@ public class PointsDivision extends PointsProcessor implements PPPrimaryOperator
 		return result;
 	}
 	
+	/////////////////////////////////////////////////////////////////
+	// MISC				/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
 	@Override
 	public String toString()
 	{	// init

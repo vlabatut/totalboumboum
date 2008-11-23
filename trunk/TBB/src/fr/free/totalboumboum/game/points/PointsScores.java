@@ -23,28 +23,49 @@ package fr.free.totalboumboum.game.points;
 
 import fr.free.totalboumboum.game.statistics.Score;
 import fr.free.totalboumboum.game.statistics.StatisticBase;
+import fr.free.totalboumboum.game.statistics.StatisticHolder;
+
+/**
+ * This PointsProcessor sends back one score as a result
+ * 
+ * For example, if the first player had picked 15 items, the second none and 
+ * the third 7, and if the items score wass processed, then result would be {15,0,7} 
+ * 
+ * @author Vincent
+ *
+ */
 
 public class PointsScores extends PointsProcessor implements PPConstant
 {	
-	private Score score;
-	
 	public PointsScores(Score score)
 	{	this.score = score;	
 	}
+	
+	/////////////////////////////////////////////////////////////////
+	// PARAMETERS		/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	private Score score;
 	
 	public Score getScore()
 	{	return score;	
 	}
 	
+	/////////////////////////////////////////////////////////////////
+	// PROCESS			/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
 	@Override
-	public float[] process(StatisticBase stats)
-	{	long[] temp = stats.getScores(score);
+	public float[] process(StatisticHolder holder)
+	{	StatisticBase stats = holder.getStats();
+		long[] temp = stats.getScores(score);
 		float result[] = new float[stats.getPlayers().size()];
 		for(int i=0;i<result.length;i++)
 			result[i] = temp[i];
 		return result;
 	}
 
+	/////////////////////////////////////////////////////////////////
+	// MISC				/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
 	@Override
 	public String toString()
 	{	// init

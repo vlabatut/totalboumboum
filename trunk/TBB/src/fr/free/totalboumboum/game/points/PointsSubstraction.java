@@ -24,24 +24,41 @@ package fr.free.totalboumboum.game.points;
 import java.util.ArrayList;
 
 import fr.free.totalboumboum.game.statistics.StatisticBase;
+import fr.free.totalboumboum.game.statistics.StatisticHolder;
 
-public class PointsSubtraction extends PointsProcessor implements PPSecondaryOperator
-{
-	private PointsProcessor leftSource;
-	private PointsProcessor rightSource;
-	
-	public PointsSubtraction(PointsProcessor leftSource, PointsProcessor rightSource)
+/**
+ * This PointsProcessor substracts the results coming from two other PointProcessor objects.
+ * 
+ * For example, for {1,5,0,1} and {1,2,1,0} the result would be {0,3,-1,1}
+ * 
+ * @author Vincent
+ *
+ */
+
+public class PointsSubstraction extends PointsProcessor implements PPSecondaryOperator
+{	
+	public PointsSubstraction(PointsProcessor leftSource, PointsProcessor rightSource)
 	{	this.leftSource = leftSource;
 		this.rightSource = rightSource;
 	}
 	
+	/////////////////////////////////////////////////////////////////
+	// SOURCES			/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	private PointsProcessor leftSource;
+	private PointsProcessor rightSource;
+
+	/////////////////////////////////////////////////////////////////
+	// PROCESS			/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
 	@Override
-	public float[] process(StatisticBase stats)
+	public float[] process(StatisticHolder holder)
 	{	// init
+		StatisticBase stats = holder.getStats();
 		ArrayList<String> players = stats.getPlayers();
 		float[] result = new float[players.size()];
-		float[] leftTemp = leftSource.process(stats);
-		float[] rightTemp = rightSource.process(stats);
+		float[] leftTemp = leftSource.process(holder);
+		float[] rightTemp = rightSource.process(holder);
 		// process
 		for(int i=0;i<result.length;i++)
 			result[i] = leftTemp[i] - rightTemp[i];
@@ -49,6 +66,9 @@ public class PointsSubtraction extends PointsProcessor implements PPSecondaryOpe
 		return result;
 	}
 	
+	/////////////////////////////////////////////////////////////////
+	// MISC				/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
 	@Override
 	public String toString()
 	{	// init

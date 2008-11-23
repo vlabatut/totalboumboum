@@ -24,21 +24,40 @@ package fr.free.totalboumboum.game.points;
 import java.util.ArrayList;
 
 import fr.free.totalboumboum.game.statistics.StatisticBase;
+import fr.free.totalboumboum.game.statistics.StatisticHolder;
+
+/**
+ * This PointsProcessor calculates its result by summing all the 
+ * the results coming from the source PointProcessor.
+ * 
+ * For example, for 5 players and a {1,3,4,0,3} points vector coming
+ * from the source, the result would be {11,11,11,11,11}. 
+ * 
+ * @author Vincent
+ *
+ */
 
 public class PointsSummation extends PointsProcessor implements PPFunction
 {
-	private PointsProcessor source;
-	
 	public PointsSummation(PointsProcessor source)
 	{	this.source = source;
 	}
 	
+	/////////////////////////////////////////////////////////////////
+	// SOURCES			/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	private PointsProcessor source;
+
+	/////////////////////////////////////////////////////////////////
+	// PROCESS			/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
 	@Override
-	public float[] process(StatisticBase stats)
+	public float[] process(StatisticHolder holder)
 	{	// init
+		StatisticBase stats = holder.getStats();
 		ArrayList<String> players = stats.getPlayers();
 		float[] result = new float[players.size()];
-		float[] temp = source.process(stats);
+		float[] temp = source.process(holder);
 		// process
 		float sum = 0;
 		for(int i=0;i<temp.length;i++)
@@ -49,6 +68,9 @@ public class PointsSummation extends PointsProcessor implements PPFunction
 		return result;
 	}
 	
+	/////////////////////////////////////////////////////////////////
+	// MISC				/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
 	@Override
 	public String toString()
 	{	// init

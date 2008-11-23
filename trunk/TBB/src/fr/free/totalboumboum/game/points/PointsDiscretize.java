@@ -25,27 +25,45 @@ import java.text.NumberFormat;
 import java.util.ArrayList;
 
 import fr.free.totalboumboum.game.statistics.StatisticBase;
+import fr.free.totalboumboum.game.statistics.StatisticHolder;
+
+/**
+ * This PointsProcessor discretizes the points definition set and associates 
+ * a given number points to every resulting interval. Points are calculated
+ * form the PointsProcessor source according to the corresponding category.
+ *  
+ * for example, if the source was {3,12,0} and the parameters :
+ * 		thresholds:     | 2 | 5 | 12 | 33 |
+ * 		values:       | 1 | 2 | 4  |  6 | 10 |
+ * the the result would be {2,4,0}
+ * 
+ * @author Vincent
+ *
+ */
 
 public class PointsDiscretize extends PointsProcessor implements PPFunction
 {
-	private PointsProcessor source;
-	/*
-	 * example:
-	 * thresholds:     | 2 | 5 | 12 | 33 |
-	 * values:       | 1 | 2 | 4  |  6 | 10 |
-	 */
-	private float[] thresholds;
-	private float[] values;
-	
 	public PointsDiscretize(PointsProcessor source, float[] thresholds, float[] values)
 	{	this.source = source;
 		this.thresholds = thresholds;
 		this.values = values;
 	}
 	
+	/////////////////////////////////////////////////////////////////
+	// SOURCES			/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	private PointsProcessor source;
+	
 	public PointsProcessor getSource()
 	{	return source;	
 	}
+
+	/////////////////////////////////////////////////////////////////
+	// PARAMETERS		/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	private float[] thresholds;
+	private float[] values;
+	
 	public float[] getValues()
 	{	return values;	
 	}
@@ -53,12 +71,16 @@ public class PointsDiscretize extends PointsProcessor implements PPFunction
 	{	return thresholds;	
 	}
 	
+	/////////////////////////////////////////////////////////////////
+	// PROCESS			/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
 	@Override
-	public float[] process(StatisticBase stats)
+	public float[] process(StatisticHolder holder)
 	{	// init
+		StatisticBase stats = holder.getStats();
 		ArrayList<String> players = stats.getPlayers();
 		float[] result = new float[players.size()];
-		float[] temp = source.process(stats);
+		float[] temp = source.process(holder);
 		
 		// process
 		for(int i=0;i<temp.length;i++)
@@ -81,6 +103,9 @@ public class PointsDiscretize extends PointsProcessor implements PPFunction
 		return result;
 	}
 
+	/////////////////////////////////////////////////////////////////
+	// MISC				/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
 	@Override
 	public String toString()
 	{	// init

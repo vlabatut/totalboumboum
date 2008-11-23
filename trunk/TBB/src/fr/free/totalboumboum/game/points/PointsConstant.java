@@ -24,28 +24,49 @@ package fr.free.totalboumboum.game.points;
 import java.text.NumberFormat;
 
 import fr.free.totalboumboum.game.statistics.StatisticBase;
+import fr.free.totalboumboum.game.statistics.StatisticHolder;
+
+/**
+ * This PointsProcessor always send the same real value as a result
+ * 
+ * For example, if there was 5 players and the parameter was 7 
+ * then the result would be {7,7,7} 
+ * 
+ * @author Vincent
+ *
+ */
 
 public class PointsConstant extends PointsProcessor implements PPConstant
 {	
-	private float value;
-	
 	public PointsConstant(float value)
 	{	this.value = value;	
 	}
+	
+	/////////////////////////////////////////////////////////////////
+	// PARAMETER		/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	private float value;
 	
 	public float getValue()
 	{	return value;	
 	}
 	
+	/////////////////////////////////////////////////////////////////
+	// PROCESS			/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
 	@Override
-	public float[] process(StatisticBase stats)
-	{	int nbr = stats.getPlayers().size();
+	public float[] process(StatisticHolder holder)
+	{	StatisticBase stats = holder.getStats();
+		int nbr = stats.getPlayers().size();
 		float result[] = new float[nbr];
 		for(int i=0;i<nbr;i++)
 			result[i] = value;
 		return result;
 	}
 
+	/////////////////////////////////////////////////////////////////
+	// MISC				/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
 	@Override
 	public String toString()
 	{	// init
