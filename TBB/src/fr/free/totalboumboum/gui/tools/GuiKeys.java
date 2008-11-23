@@ -322,9 +322,9 @@ public class GuiKeys
 			public static final String GAME_TOURNAMENT_DESCRIPTION_LIMIT_HEADER_CONFRONTATIONS = "GameTournamentDescriptionLimitHeaderConfrontations";
 			public static final String GAME_TOURNAMENT_DESCRIPTION_LIMIT_HEADER_CROWNS = "GameTournamentDescriptionLimitHeaderCrowns";
 			public static final String GAME_TOURNAMENT_DESCRIPTION_LIMIT_HEADER_CUSTOM = "GameTournamentDescriptionLimitHeaderCustom";
-			public static final String GAME_TOURNAMENT_DESCRIPTION_LIMIT_HEADER_DEATHS = "GameTournamentDescriptionLimitHeaderDeaths";
+			public static final String GAME_TOURNAMENT_DESCRIPTION_LIMIT_HEADER_BOMBEDS = "GameTournamentDescriptionLimitHeaderBombeds";
 			public static final String GAME_TOURNAMENT_DESCRIPTION_LIMIT_HEADER_ITEMS = "GameTournamentDescriptionLimitHeaderItems";
-			public static final String GAME_TOURNAMENT_DESCRIPTION_LIMIT_HEADER_KILLS = "GameTournamentDescriptionLimitHeaderKills";
+			public static final String GAME_TOURNAMENT_DESCRIPTION_LIMIT_HEADER_BOMBINGS = "GameTournamentDescriptionLimitHeaderBombings";
 			public static final String GAME_TOURNAMENT_DESCRIPTION_LIMIT_HEADER_PAINTINGS = "GameTournamentDescriptionLimitHeaderPaintings";
 			public static final String GAME_TOURNAMENT_DESCRIPTION_LIMIT_HEADER_TIME = "GameTournamentDescriptionLimitHeaderTime";
 			public static final String GAME_TOURNAMENT_DESCRIPTION_LIMIT_HEADER_TOTAL = "GameTournamentDescriptionLimitHeaderTotal";
@@ -353,10 +353,10 @@ public class GuiKeys
 			/* DATA */
 			public static final String GAME_TOURNAMENT_DESCRIPTION_POINTS_DATA_BOMBS = "GameTournamentDescriptionPointsDataBombs";
 			public static final String GAME_TOURNAMENT_DESCRIPTION_POINTS_DATA_CROWNS = "GameTournamentDescriptionPointsDataCrowns";
-			public static final String GAME_TOURNAMENT_DESCRIPTION_POINTS_DATA_DEATHS = "GameTournamentDescriptionPointsDataDeaths";
+			public static final String GAME_TOURNAMENT_DESCRIPTION_POINTS_DATA_BOMBEDS = "GameTournamentDescriptionPointsDataBombeds";
 			public static final String GAME_TOURNAMENT_DESCRIPTION_POINTS_DATA_INVERTED = "GameTournamentDescriptionPointsDataInverted";
 			public static final String GAME_TOURNAMENT_DESCRIPTION_POINTS_DATA_ITEMS = "GameTournamentDescriptionPointsDataItems";
-			public static final String GAME_TOURNAMENT_DESCRIPTION_POINTS_DATA_KILLS = "GameTournamentDescriptionPointsDataKills";
+			public static final String GAME_TOURNAMENT_DESCRIPTION_POINTS_DATA_BOMBINGS = "GameTournamentDescriptionPointsDataBombings";
 			public static final String GAME_TOURNAMENT_DESCRIPTION_POINTS_DATA_NOSHARE = "GameTournamentDescriptionPointsDataNoshare";
 			public static final String GAME_TOURNAMENT_DESCRIPTION_POINTS_DATA_PAINTINGS = "GameTournamentDescriptionPointsDataPaintings";
 			public static final String GAME_TOURNAMENT_DESCRIPTION_POINTS_DATA_PARTIAL = "GameTournamentDescriptionPointsDataPartial";
@@ -370,9 +370,9 @@ public class GuiKeys
 		public static final String GAME_TOURNAMENT_RESULTS_HEADER_CROWNS = "GameTournamentResultsHeaderCrowns";
 		public static final String GAME_TOURNAMENT_RESULTS_HEADER_CUSTOM_LIMIT = "GameTournamentResultsHeaderCustomLimit";
 		public static final String GAME_TOURNAMENT_RESULTS_HEADER_CUSTOM_POINTS = "GameTournamentResultsHeaderCustomPoints";
-		public static final String GAME_TOURNAMENT_RESULTS_HEADER_DEATHS = "GameTournamentResultsHeaderDeaths";
+		public static final String GAME_TOURNAMENT_RESULTS_HEADER_BOMBEDS = "GameTournamentResultsHeaderBombeds";
 		public static final String GAME_TOURNAMENT_RESULTS_HEADER_ITEMS = "GameTournamentResultsHeaderItems";
-		public static final String GAME_TOURNAMENT_RESULTS_HEADER_KILLS = "GameTournamentResultsHeaderKills";
+		public static final String GAME_TOURNAMENT_RESULTS_HEADER_BOMBINGS = "GameTournamentResultsHeaderBombings";
 		public static final String GAME_TOURNAMENT_RESULTS_HEADER_MATCH = "GameTournamentResultsHeaderMatch";
 		public static final String GAME_TOURNAMENT_RESULTS_HEADER_NAME = "GameTournamentResultsHeaderName";
 		public static final String GAME_TOURNAMENT_RESULTS_HEADER_PAINTINGS = "GameTournamentResultsHeaderPaintings";
@@ -409,9 +409,9 @@ public class GuiKeys
 			public static final String GAME_MATCH_DESCRIPTION_LIMIT_HEADER_CONFRONTATIONS = "GameMatchDescriptionLimitHeaderConfrontations";
 			public static final String GAME_MATCH_DESCRIPTION_LIMIT_HEADER_CROWNS = "GameMatchDescriptionLimitHeaderCrowns";
 			public static final String GAME_MATCH_DESCRIPTION_LIMIT_HEADER_CUSTOM = "GameMatchDescriptionLimitHeaderCustom";
-			public static final String GAME_MATCH_DESCRIPTION_LIMIT_HEADER_DEATHS = "GameMatchDescriptionLimitHeaderDeaths";
+			public static final String GAME_MATCH_DESCRIPTION_LIMIT_HEADER_BOMBEDS = "GameMatchDescriptionLimitHeaderBombeds";
 			public static final String GAME_MATCH_DESCRIPTION_LIMIT_HEADER_ITEMS = "GameMatchDescriptionLimitHeaderItems";
-			public static final String GAME_MATCH_DESCRIPTION_LIMIT_HEADER_KILLS = "GameMatchDescriptionLimitHeaderKills";
+			public static final String GAME_MATCH_DESCRIPTION_LIMIT_HEADER_BOMBINGS = "GameMatchDescriptionLimitHeaderBombings";
 			public static final String GAME_MATCH_DESCRIPTION_LIMIT_HEADER_PAINTINGS = "GameMatchDescriptionLimitHeaderPaintings";
 			public static final String GAME_MATCH_DESCRIPTION_LIMIT_HEADER_TIME = "GameMatchDescriptionLimitHeaderTime";
 			public static final String GAME_MATCH_DESCRIPTION_LIMIT_HEADER_TOTAL = "GameMatchDescriptionLimitHeaderTotal";
@@ -443,10 +443,10 @@ public class GuiKeys
 			/* DATA */
 			public static final String GAME_MATCH_DESCRIPTION_POINTS_DATA_BOMBS = "GameMatchDescriptionPointsDataBombs";
 			public static final String GAME_MATCH_DESCRIPTION_POINTS_DATA_CROWNS = "GameMatchDescriptionPointsDataCrowns";
-			public static final String GAME_MATCH_DESCRIPTION_POINTS_DATA_DEATHS = "GameMatchDescriptionPointsDataDeaths";
+			public static final String GAME_MATCH_DESCRIPTION_POINTS_DATA_BOMBEDS = "GameMatchDescriptionPointsDataBombeds";
 			public static final String GAME_MATCH_DESCRIPTION_POINTS_DATA_INVERTED = "GameMatchDescriptionPointsDataInverted";
 			public static final String GAME_MATCH_DESCRIPTION_POINTS_DATA_ITEMS = "GameMatchDescriptionPointsDataItems";
-			public static final String GAME_MATCH_DESCRIPTION_POINTS_DATA_KILLS = "GameMatchDescriptionPointsDataKills";
+			public static final String GAME_MATCH_DESCRIPTION_POINTS_DATA_BOMBINGS = "GameMatchDescriptionPointsDataBombings";
 			public static final String GAME_MATCH_DESCRIPTION_POINTS_DATA_NOSHARE = "GameMatchDescriptionPointsDataNoshare";
 			public static final String GAME_MATCH_DESCRIPTION_POINTS_DATA_PAINTINGS = "GameMatchDescriptionPointsDataPaintings";
 			public static final String GAME_MATCH_DESCRIPTION_POINTS_DATA_PARTIAL = "GameMatchDescriptionPointsDataPartial";
@@ -460,9 +460,9 @@ public class GuiKeys
 		public static final String GAME_MATCH_RESULTS_HEADER_CROWNS = "GameMatchResultsHeaderCrowns";
 		public static final String GAME_MATCH_RESULTS_HEADER_CUSTOM_LIMIT = "GameMatchResultsHeaderCustomLimit";
 		public static final String GAME_MATCH_RESULTS_HEADER_CUSTOM_POINTS = "GameMatchResultsHeaderCustomPoints";
-		public static final String GAME_MATCH_RESULTS_HEADER_DEATHS = "GameMatchResultsHeaderDeaths";
+		public static final String GAME_MATCH_RESULTS_HEADER_BOMBEDS = "GameMatchResultsHeaderBombeds";
 		public static final String GAME_MATCH_RESULTS_HEADER_ITEMS = "GameMatchResultsHeaderItems";
-		public static final String GAME_MATCH_RESULTS_HEADER_KILLS = "GameMatchResultsHeaderKills";
+		public static final String GAME_MATCH_RESULTS_HEADER_BOMBINGS = "GameMatchResultsHeaderBombings";
 		public static final String GAME_MATCH_RESULTS_HEADER_NAME = "GameMatchResultsHeaderName";
 		public static final String GAME_MATCH_RESULTS_HEADER_PAINTINGS = "GameMatchResultsHeaderPaintings";
 		public static final String GAME_MATCH_RESULTS_HEADER_POINTS = "GameMatchResultsHeaderPoints";
@@ -509,9 +509,9 @@ public class GuiKeys
 			public static final String GAME_ROUND_DESCRIPTION_LIMIT_HEADER_BOMBS = "GameRoundDescriptionLimitHeaderBombs";
 			public static final String GAME_ROUND_DESCRIPTION_LIMIT_HEADER_CROWNS = "GameRoundDescriptionLimitHeaderCrowns";
 			public static final String GAME_ROUND_DESCRIPTION_LIMIT_HEADER_CUSTOM = "GameRoundDescriptionLimitHeaderCustom";
-			public static final String GAME_ROUND_DESCRIPTION_LIMIT_HEADER_DEATHS = "GameRoundDescriptionLimitHeaderDeaths";
+			public static final String GAME_ROUND_DESCRIPTION_LIMIT_HEADER_BOMBEDS = "GameRoundDescriptionLimitHeaderBombeds";
 			public static final String GAME_ROUND_DESCRIPTION_LIMIT_HEADER_ITEMS = "GameRoundDescriptionLimitHeaderItems";
-			public static final String GAME_ROUND_DESCRIPTION_LIMIT_HEADER_KILLS = "GameRoundDescriptionLimitHeaderKills";
+			public static final String GAME_ROUND_DESCRIPTION_LIMIT_HEADER_BOMBINGS = "GameRoundDescriptionLimitHeaderBombings";
 			public static final String GAME_ROUND_DESCRIPTION_LIMIT_HEADER_PAINTINGS = "GameRoundDescriptionLimitHeaderPaintings";
 			public static final String GAME_ROUND_DESCRIPTION_LIMIT_HEADER_TIME = "GameRoundDescriptionLimitHeaderTime";
 		/* MISC */
@@ -538,10 +538,10 @@ public class GuiKeys
 			/* DATA */
 			public static final String GAME_ROUND_DESCRIPTION_POINTS_DATA_BOMBS = "GameRoundDescriptionPointsDataBombs";
 			public static final String GAME_ROUND_DESCRIPTION_POINTS_DATA_CROWNS = "GameRoundDescriptionPointsDataCrowns";
-			public static final String GAME_ROUND_DESCRIPTION_POINTS_DATA_DEATHS = "GameRoundDescriptionPointsDataDeaths";
+			public static final String GAME_ROUND_DESCRIPTION_POINTS_DATA_BOMBEDS = "GameRoundDescriptionPointsDataBombeds";
 			public static final String GAME_ROUND_DESCRIPTION_POINTS_DATA_INVERTED = "GameRoundDescriptionPointsDataInverted";
 			public static final String GAME_ROUND_DESCRIPTION_POINTS_DATA_ITEMS = "GameRoundDescriptionPointsDataItems";
-			public static final String GAME_ROUND_DESCRIPTION_POINTS_DATA_KILLS = "GameRoundDescriptionPointsDataKills";
+			public static final String GAME_ROUND_DESCRIPTION_POINTS_DATA_BOMBINGS = "GameRoundDescriptionPointsDataBombings";
 			public static final String GAME_ROUND_DESCRIPTION_POINTS_DATA_NOSHARE = "GameRoundDescriptionPointsDataNoshare";
 			public static final String GAME_ROUND_DESCRIPTION_POINTS_DATA_PAINTINGS = "GameRoundDescriptionPointsDataPaintings";
 			public static final String GAME_ROUND_DESCRIPTION_POINTS_DATA_PARTIAL = "GameRoundDescriptionPointsDataPartial";
@@ -557,9 +557,9 @@ public class GuiKeys
 		public static final String GAME_ROUND_RESULTS_HEADER_CROWNS = "GameRoundResultsHeaderCrowns";
 		public static final String GAME_ROUND_RESULTS_HEADER_CUSTOM_LIMIT = "GameRoundResultsHeaderCustomLimit";
 		public static final String GAME_ROUND_RESULTS_HEADER_CUSTOM_POINTS = "GameRoundResultsHeaderCustomPoints";
-		public static final String GAME_ROUND_RESULTS_HEADER_DEATHS = "GameRoundResultsHeaderDeaths";
+		public static final String GAME_ROUND_RESULTS_HEADER_BOMBEDS = "GameRoundResultsHeaderBombeds";
 		public static final String GAME_ROUND_RESULTS_HEADER_ITEMS = "GameRoundResultsHeaderItems";
-		public static final String GAME_ROUND_RESULTS_HEADER_KILLS = "GameRoundResultsHeaderKills";
+		public static final String GAME_ROUND_RESULTS_HEADER_BOMBINGS = "GameRoundResultsHeaderBombings";
 		public static final String GAME_ROUND_RESULTS_HEADER_NAME = "GameRoundResultsHeaderName";
 		public static final String GAME_ROUND_RESULTS_HEADER_PAINTINGS = "GameRoundResultsHeaderPaintings";
 		public static final String GAME_ROUND_RESULTS_HEADER_PROFILE = "GameRoundResultsHeaderProfile";

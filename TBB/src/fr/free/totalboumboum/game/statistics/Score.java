@@ -25,7 +25,7 @@ import java.util.ArrayList;
 
 
 public enum Score
-{	BOMBS, CROWNS, DEATHS, ITEMS, KILLS, PAINTINGS, TIME;
+{	BOMBS, CROWNS, BOMBEDS, ITEMS, BOMBINGS, PAINTINGS, TIME;
 	
 	public long[] process(StatisticRound stats, StatisticEvent event)
 	{	long[] result = new long[stats.getPlayers().size()];
@@ -36,14 +36,14 @@ public enum Score
 			case CROWNS:
 				result = processCrowns(stats,event);
 				break;
-			case DEATHS:
-				result = processDeaths(stats,event);
+			case BOMBEDS:
+				result = processBombeds(stats,event);
 				break;
 			case ITEMS:
 				result = processItems(stats,event);
 				break;
-			case KILLS:
-				result = processKills(stats,event);
+			case BOMBINGS:
+				result = processBombings(stats,event);
 				break;
 			case PAINTINGS:
 				result = processPaintings(stats,event);
@@ -83,12 +83,12 @@ public enum Score
 		return result;
 	}
 
-	public long[] processDeaths(StatisticRound stats, StatisticEvent event)
+	public long[] processBombeds(StatisticRound stats, StatisticEvent event)
 	{	// init
 		ArrayList<String> players = stats.getPlayers();
 		long result[] = stats.getScores(this);
 		// processing
-		if(event.getAction() == StatisticAction.KILL_PLAYER)
+		if(event.getAction() == StatisticAction.EXPLOSE_PLAYER)
 		{	//target
 			int index = players.indexOf(event.getTarget());
 			result[index] = result[index] + 1;
@@ -108,12 +108,12 @@ public enum Score
 		return result;
 	}
 
-	public long[] processKills(StatisticRound stats, StatisticEvent event)
+	public long[] processBombings(StatisticRound stats, StatisticEvent event)
 	{	// init
 		ArrayList<String> players = stats.getPlayers();
 		long result[] = stats.getScores(this);
 		// processing
-		if(event.getAction() == StatisticAction.KILL_PLAYER)
+		if(event.getAction() == StatisticAction.EXPLOSE_PLAYER)
 		{	// actor (can be null, ie: level)
 			if(event.getActor()!=null)
 			{	int index = players.indexOf(event.getActor());
@@ -142,14 +142,12 @@ public enum Score
 		return result;
 	}
 
-//TODO trouver un moyen de gérer TIME en temps réel...
 	public long[] processTime(StatisticRound stats, StatisticEvent event)
 	{	// init
 		ArrayList<String> players = stats.getPlayers();
 		long result[] = stats.getScores(this);
 		// processing
-		//NOTE pour les differents playModes, il faudra surement distinguer mort du joueur (burn, shrink ou autre) et élimination définitive (plus aucun controle ou vengence)
-		if(event.getAction() == StatisticAction.KILL_PLAYER)
+		if(event.getAction() == StatisticAction.ELIMINATE_PLAYER)
 		{	int index = players.indexOf(event.getTarget());
 			long time = event.getTime();
 			result[index] = -time;

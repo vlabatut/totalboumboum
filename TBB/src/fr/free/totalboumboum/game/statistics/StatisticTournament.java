@@ -23,19 +23,15 @@ package fr.free.totalboumboum.game.statistics;
 
 import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.Date;
-import java.util.GregorianCalendar;
-import java.util.HashMap;
-import java.util.Iterator;
-
-import fr.free.totalboumboum.configuration.profile.Profile;
-import fr.free.totalboumboum.game.points.PointsProcessor;
 import fr.free.totalboumboum.game.tournament.AbstractTournament;
 
 public class StatisticTournament extends StatisticBase implements Serializable
 {
 	private static final long serialVersionUID = 1L;
+	
+	public StatisticTournament(AbstractTournament tournament)
+	{	super(tournament);
+	}
 	
 	/////////////////////////////////////////////////////////////////
 	// STATISTIC MATCHES	/////////////////////////////////////////
@@ -56,10 +52,13 @@ public class StatisticTournament extends StatisticBase implements Serializable
 			for(int i=0;i<matchScores.length;i++)
 				currentScores[i] = currentScores[i] + matchScores[i];
 		}
-		// partial points
+		// total
 		float[] matchPoints = match.getPoints();
-		for(int i=0;i<players.size();i++)
-			total[i] = total[i] + matchPoints[i];
+		for(int i=0;i<getTotal().length;i++)
+			getTotal()[i] = getTotal()[i] + matchPoints[i];
+		// time
+		long time = getTotalTime() + match.getTotalTime();
+		setTotalTime(time);
 	}
 
 	@Override
@@ -67,64 +66,10 @@ public class StatisticTournament extends StatisticBase implements Serializable
 	{	int result = matches.size();
 		return result;
 	}
-
-//	TODO à réutiliser
-//		Calendar cal = new GregorianCalendar();
-//		date = cal.getTime();
-	
-	
-	
-	
-	
-	
-	public void init(AbstractTournament tournament)
-	{	// players
-		ArrayList<Profile> profiles = tournament.getProfiles();
-		Iterator<Profile> it = profiles.iterator();
-		while(it.hasNext())
-		{	Profile temp = it.next();
-			String name = temp.getName();
-			players.add(name);
-		}
-		// points
-		points = new float[players.size()];
-		for(int j=0;j<points.length;j++)
-			points[j] = 0;
-		// partial points
-		total = new float[players.size()];
-		for(int j=0;j<total.length;j++)
-			total[j] = 0;
-		// scores
-		for (Score score : Score.values())
-		{	long[] sc = new long[players.size()];
-			for(int i=0;i<sc.length;i++)
-				sc[i] = 0;
-			scores.put(score,sc);
-		}
-	}
-	
-
-	
-	
-	
-	
-	
-	
-	public void computePoints(PointsProcessor pointProcessor)
-	{	points = pointProcessor.process(this);
-	}
-
-	
-
-
-	
-	@Override
-	public long getTotalTime()
-	{	long result = 0;
-		for(StatisticRound r: matches)
-			result = result + r.getTotalTime();
-		return 0;
-	}
 }
+
+//TODO à réutiliser
+//Calendar cal = new GregorianCalendar();
+//date = cal.getTime();
 
 

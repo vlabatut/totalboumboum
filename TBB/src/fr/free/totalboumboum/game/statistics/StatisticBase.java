@@ -22,12 +22,36 @@ package fr.free.totalboumboum.game.statistics;
  */
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Date;
 import java.util.HashMap;
+
+import fr.free.totalboumboum.configuration.profile.Profile;
 
 
 public abstract class StatisticBase
 {
+	public StatisticBase(StatisticHolder holder)
+	{	totalTime = 0;
+		// players
+		for(Profile p: holder.getProfiles())
+		{	String player = p.getFileName();
+			players.add(player);
+		}
+		// points
+		points = new float[players.size()];
+		Arrays.fill(points,0);
+		// total
+		total = new float[players.size()];
+		Arrays.fill(total,0);
+		// scores
+		for(Score score : Score.values())
+		{	long[] sc = new long[players.size()];
+			Arrays.fill(sc,0);
+			scores.put(score,sc);
+		}		
+	}
+	
 	/////////////////////////////////////////////////////////////////
 	// SCORES			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
@@ -79,6 +103,10 @@ public abstract class StatisticBase
 
 	public long getTotalTime()
 	{	return totalTime;	
+	}
+	
+	public void setTotalTime(long totalTime)
+	{	this.totalTime = totalTime;
 	}
 
 	/////////////////////////////////////////////////////////////////

@@ -38,6 +38,10 @@ public class StatisticRound extends StatisticBase implements Serializable
 {
 	private static final long serialVersionUID = 1L;
 
+	public StatisticRound(Round round)
+	{	super(round);
+	}
+	
 	/////////////////////////////////////////////////////////////////
 	// STATISTIC EVENTS	/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
@@ -51,11 +55,8 @@ public class StatisticRound extends StatisticBase implements Serializable
 	{	// events
 		events.add(event);
 		// scores
-		Iterator<Score> i = scores.keySet().iterator();
-		while(i.hasNext())
-		{	Score temp = i.next();
-			temp.process(this, event);
-		}
+		for(Score s: Score.values())
+			s.process(this, event);
 	}
 
 	@Override
@@ -68,39 +69,29 @@ public class StatisticRound extends StatisticBase implements Serializable
 	/////////////////////////////////////////////////////////////////
 	// STATISTIC EVENTS	/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-
-	
-	
-	
-	public void init(Round round)
-	{	totalTime = 0;
-		// players
-		ArrayList<Profile> profiles = round.getProfiles();
-		Iterator<Profile> it = profiles.iterator();
-		while(it.hasNext())
-		{	Profile temp = it.next();
-			String name = temp.getName();
-			players.add(name);
-		}
-		// points
-		points = new float[players.size()];
-		Arrays.fill(points,0);
-		// partial points
-		total = new float[players.size()];
-		Arrays.fill(total,0);
-		// scores
-		for (Score score : Score.values())
-		{	long[] sc = new long[players.size()];
-			for(int i=0;i<sc.length;i++)
-				sc[i] = 0;
-			scores.put(score,sc);
+	public void updateTime(long time)
+	{	setTotalTime(time);
+		long[] sc = getScores(Score.TIME);
+		for(int i=0;i<sc.length;i++)
+		{	if(sc[i]>=0)
+				sc[i] = time;
 		}
 	}
 
-	public void computePoints(PointsProcessor pointProcessor)
-	{	points = pointProcessor.process(this);
+	public void finalizeTime(long time)
+	{	//updateTime(time+1);
+		long[] sc = getScores(Score.TIME);
+		for(int i=0;i<sc.length;i++)
+		{	if(sc[i]<0)
+				sc[i] = -sc[i];
+		}
 	}
 
+
+
+	
+	
+	
 
 
 	public TreeSet<PlayerPoints> getOrderedPlayers()
@@ -128,21 +119,5 @@ public class StatisticRound extends StatisticBase implements Serializable
 		return result;
 	}
 		
-	public void updateTime(long time)
-	{	totalTime = time;
-		long[] sc = scores.get(Score.TIME);
-		for(int i=0;i<sc.length;i++)
-		{	if(sc[i]>=0)
-				sc[i] = time;
-		}
-	}
-	public void finish(long time)
-	{	updateTime(time+1);
-		long[] sc = scores.get(Score.TIME);
-		for(int i=0;i<sc.length;i++)
-		{	if(sc[i]<0)
-				sc[i] = -sc[i];
-		}
-	}
 
 }

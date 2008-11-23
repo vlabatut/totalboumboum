@@ -57,7 +57,7 @@ public class HeroEventManager extends EventManager
 	protected Direction controlDirection;
 	
 	// NOTE à initialiser à chaque réincarnation
-	protected String killedBy = null;
+	protected String explosedBy = null;
 
 	public HeroEventManager(Hero sprite)
 	{	super(sprite);		
@@ -103,8 +103,8 @@ public class HeroEventManager extends EventManager
 			|| gesture.equals(GestureConstants.WAITING) 
 			|| gesture.equals(GestureConstants.STANDING) 
 			|| gesture.equals(GestureConstants.WALKING))
-		{	// killed by
-			if(killedBy==null)
+		{	// explosed by
+			if(explosedBy==null)
 			{	Sprite spr = event.getAction().getActor();
 				if(spr instanceof Fire)
 				{	Fire temp = (Fire)spr;
@@ -116,15 +116,15 @@ public class HeroEventManager extends EventManager
 				}
 				if(spr instanceof Hero)
 				{	Hero temp = (Hero)spr;
-					killedBy = temp.getPlayer().getName();
+					explosedBy = temp.getPlayer().getName();
 				}
-if(killedBy==null)
+if(explosedBy==null)
 	System.out.println();
 			}
 			// stats
-			StatisticAction statAction = StatisticAction.KILL_PLAYER;
+			StatisticAction statAction = StatisticAction.EXPLOSE_PLAYER;
 			long statTime = sprite.getLoopTime();
-			String statActor = killedBy;
+			String statActor = explosedBy;
 			String statTarget = sprite.getPlayer().getName();
 			StatisticEvent statEvent = new StatisticEvent(statActor,statAction,statTarget,statTime);
 			sprite.addStatisticEvent(statEvent);
