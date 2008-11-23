@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<trajectories 
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+	xsi:noNamespaceSchemaLocation="..\..\..\..\schemas\trajectories.xsd">
+
+	<gesture name="pushing" xInteraction="50" yInteraction="50">
+		<direction name="down" />
+		<direction name="downleft" />
+		<direction name="downright" />
+		<direction name="left" />
+		<direction name="right" />
+		<direction name="up" />
+		<direction name="upleft" />
+		<direction name="upright" />
+	</gesture>
+	
+	<gesture name="walking" xInteraction="50" yInteraction="50">
+		<direction name="down" />
+		<direction name="downleft" />
+		<direction name="downright" />
+		<direction name="left" />
+		<direction name="right" />
+		<direction name="up" />
+		<direction name="upleft" />
+		<direction name="upright" />
+	</gesture>
+
+</trajectories>

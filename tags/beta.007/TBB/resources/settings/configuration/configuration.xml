@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+	xsi:noNamespaceSchemaLocation="..\..\schemas\configuration.xsd">
+	
+<!-- ENGINE -->	
+	<fps value="50" />
+	<speed value="1" />
+
+<!-- DISPLAY -->	
+	<smoothGraphics value="true" />
+		
+<!-- DISPLAY -->	
+<!-- 	attention : si vous augmentez la résolution graphique, il faut donner plus de mémoire à la java machine
+		par exemple en utilisant l'option d'exécution -xmx128m pour donner 128 Mo au lieu des 64 alloués par défaut -->
+	<panelDimension width="1024" height="768" />
+
+<!-- PROFILES -->	
+	<profiles>
+<!-- brown -->			<!-- 5 -->			<!-- DÉGRADÉ -->			<!--		<profile value="BasmanSandalli" />			 -->	
+<!-- grass -->				<!-- 8 -->			<!-- IDENTIQUE  -->		<!--		<profile value="BaydarCamci" />				 -->
+<!-- blue -->				<!-- 1 -->			<!-- IDENTIQUE  -->				<profile value="BingolKetenci" />				 
+<!-- orange -->			<!-- 9 -->			<!-- DÉGRADÉ  -->			<!--		<profile value="CaglayanElmas"/>				 -->
+<!-- cyan -->				<!--11-->			<!-- IDENTIQUE  -->		<!--		<profile value="CamasDemirbas" />			 -->
+<!-- grey -->				<!--14-->			<!-- IDENTIQUE  -->		<!--		<profile value="CiritMutlu" />						 -->
+<!-- white -->				<!-- 4 -->			<!-- DÉGRADÉ -->					<profile value="DemirkolDogan" />			 
+<!-- indigo -->				<!--10-->			<!-- IDENTIQUE  -->		<!--		<profile value="GokceEren" /> 					 -->						
+<!-- pink -->				<!--14-->			<!-- IDENTIQUE  -->		<!--		<profile value="GoksayKose" />  				 -->
+<!-- green --> 			<!-- 6 -->			<!-- DÉGRADÉ -->			<!--		<profile value="GokselMenges" />				 -->
+<!-- purple -->			<!--13-->			<!-- IDENTIQUE  -->		<!--		<profile value="HanciToprak" /> 				 -->
+<!-- rust -->				<!--14-->			<!-- IDENTIQUE  -->		<!--		<profile value="KecerYaman" /> 				 -->
+<!-- red -->					<!-- 3 -->			<!-- IDENTIQUE  -->				<profile value="KilicPala" /> 						 
+<!-- ultramarine -->	<!--11-->			<!-- IDENTIQUE  -->		<!--		<profile value="KurtulusOzsoy" /> 			 -->
+<!-- black --> 				<!-- 2 -->			<!-- BUGUÉ -->	  			<!--		<profile value="OkanYuksel" />					 -->
+<!-- yellow -->			<!-- 7 -->			<!-- IDENTIQUE  -->		<!--		<profile value="SahinYildirim" /> 				 -->
+
+ 
+<!-- orange -->																						<profile value="Promeneur" />
+<!-- cyan -->																							<profile value="Human" />	
+
+	</profiles>
+
+<!-- TOURNAMENT -->	
+	<tournament value="tournamentLong" />
+	
+<!-- QUICK MATCH -->	
+	<quickmatch value="matchLong" />
+
+<!-- QUICK LAUNCH -->	
+	<quickstart value="round01" />
+	
+</configuration>

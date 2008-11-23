@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<profiles xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="..\..\..\resources\schemas\profiles.xsd">
+	<general last="26" />
+	<list>
+		<profile file="17" name="Şahin+Yıldırım" />
+		<profile file="18" name="Promeneur" />
+		<profile file="15" name="Kurtuluş+Özsoy" />
+		<profile file="16" name="Okan+Yüksel" />
+		<profile file="13" name="Keçer+Yaman" />
+		<profile file="14" name="Kılıç+Pala" />
+		<profile file="11" name="Göksel+Mengeş" />
+		<profile file="12" name="Hanci+Toprak" />
+		<profile file="3" name="Baydar+Camcı" />
+		<profile file="2" name="Başman+Sandallı" />
+		<profile file="10" name="Göksay+Köse" />
+		<profile file="1" name="Joueur Humain" />
+		<profile file="7" name="Cirit+Mutlu" />
+		<profile file="6" name="Çamaş+Demirbaş" />
+		<profile file="5" name="Çağlayan+Elmas" />
+		<profile file="4" name="Bingöl+Ketenci" />
+		<profile file="9" name="Eren+Gökçe" />
+		<profile file="8" name="Demirkol+Doğan" />
+	</list>
+</profiles>
+
