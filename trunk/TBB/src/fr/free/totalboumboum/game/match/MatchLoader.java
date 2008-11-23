@@ -68,22 +68,29 @@ public class MatchLoader
 	{	// init
     	Match result = new Match(tournament);
 		Element element;
+		
 		// notes
 		element = root.getChild(XmlTools.ELT_NOTES);
 		ArrayList<String> notes = loadNotesElement(element);
 		result.setNotes(notes);
+		
 		// author
 		element = root.getChild(XmlTools.ELT_AUTHOR);
-		String author = element.getAttributeValue(XmlTools.ATT_VALUE);
-		result.setAuthor(author);	
+		if(element!=null)
+		{	String author = element.getAttributeValue(XmlTools.ATT_VALUE);
+			result.setAuthor(author);
+		}
+		
 		// limits
 		element = root.getChild(XmlTools.ELT_LIMITS);
 		Limits<MatchLimit> limits = loadLimitsElement(element,folderPath);
 		result.setLimits(limits);
+		
 		// points
 		element = root.getChild(XmlTools.ELT_POINTS);
 		PointsProcessor pp = PointsProcessorLoader.loadPointProcessorFromElement(element,folderPath);
 		result.setPointProcessor(pp);
+		
 		// rounds
 		element = root.getChild(XmlTools.ELT_ROUNDS);
 		loadRoundsElement(element,folderPath,result);

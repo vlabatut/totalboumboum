@@ -656,11 +656,15 @@ public class Launcher
 	 * *********************** A FAIRE ***********************
 	 * *******************************************************
 	 * 
+	 * - virer les boutons inutiles dans l'écran de sélection des joueurs
+	 * 
 	 * - virer la possibilité de définir plusieurs couleurs, ça ne sert à rien
 	 * 
 	 * - faire le classement lexicographique gérant les signes diacritiques partout où c'est nécessaire
 	 * 
 	 * - inutile de maintenir une liste des profils, ça peut se calculer au démarrage du jeu sans aucun problème 
+	 * 
+	 * - mutualiser encore plus les composants graphiques : séparer structures de contenu (liste des navigateurs) et contenus (limites,points...)
 	 * 
 	 * - parties en cours :
 	 * 		- une seule partie en même temps

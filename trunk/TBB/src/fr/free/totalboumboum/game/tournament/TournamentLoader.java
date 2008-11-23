@@ -93,8 +93,10 @@ public class TournamentLoader
 		
 		// author
 		element = root.getChild(XmlTools.ELT_AUTHOR);
-		String author = element.getAttributeValue(XmlTools.ATT_VALUE);
-		result.setAuthor(author);
+		if(element!=null)
+		{	String author = element.getAttributeValue(XmlTools.ATT_VALUE);
+			result.setAuthor(author);
+		}
 		
 		//
 		result.setName(name);
