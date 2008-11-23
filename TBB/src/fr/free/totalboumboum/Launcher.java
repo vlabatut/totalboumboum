@@ -649,6 +649,8 @@ public class Launcher
 	 * - nouveauté : visualisation des niveaux
 	 * - nouveauté : sélection des joueurs avant une partie rapide
 	 * - modification : dans la police de caractères : i minuscule et barre du sept
+	 * - nouveauté : visualisation des matches
+	 * - modification : calcul du nombre de joueurs nécessaires pour un match et pour un round
 	 * 
 	 * *******************************************************
 	 * *********************** A FAIRE ***********************
