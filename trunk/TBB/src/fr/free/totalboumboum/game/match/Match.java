@@ -28,11 +28,14 @@ import java.util.Collections;
 import java.util.GregorianCalendar;
 import java.util.Iterator;
 import java.util.Random;
+import java.util.Set;
+import java.util.TreeSet;
 
 import javax.xml.parsers.ParserConfigurationException;
 
 import org.xml.sax.SAXException;
 
+import fr.free.totalboumboum.configuration.GameConstants;
 import fr.free.totalboumboum.configuration.profile.Profile;
 import fr.free.totalboumboum.game.limit.Limits;
 import fr.free.totalboumboum.game.limit.MatchLimit;
@@ -137,8 +140,6 @@ public class Match
 	// PLAYERS			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	private final ArrayList<Profile> profiles = new ArrayList<Profile>();
-	private int minPlayerNumber;
-	private int maxPlayerNumber;
 
 	public void addProfile(Profile profile)
 	{	profiles.add(profile);
@@ -147,16 +148,15 @@ public class Match
 	{	return profiles;	
 	}
 	
-	public void updateMinPlayerNumber()
-	{	
-		// TODO charger partiellement tous les matches 
-		// pour déterminer le nombre de joueurs nécessaire
-	}
-	public int getMinPlayerNumber()
-	{	return minPlayerNumber;			
-	}
-	public int getMaxPlayerNumber()
-	{	return maxPlayerNumber;			
+	public Set<Integer> getAllowedPlayerNumbers()
+	{	TreeSet<Integer> result = new TreeSet<Integer>();
+		for(int i=1;i<=GameConstants.MAX_PROFILES_COUNT;i++)
+			result.add(i);
+		for(Round r:rounds)
+		{	Set<Integer> temp = r.getAllowedPlayerNumbers();
+			result.retainAll(temp);			
+		}
+		return result;			
 	}
 	
 	/////////////////////////////////////////////////////////////////

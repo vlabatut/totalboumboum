@@ -22,6 +22,9 @@ package fr.free.totalboumboum.tools;
  */
 
 import java.text.NumberFormat;
+import java.util.Set;
+
+import fr.free.totalboumboum.configuration.GameConstants;
 
 public class StringTools
 {
@@ -49,5 +52,34 @@ public class StringTools
 		String milliseconds = nf.format(time);
 		result = seconds+"''"+milliseconds;
 		return result;
+	}
+	
+	public static String formatAllowedPlayerNumbers(Set<Integer> playerNumbers)
+	{	StringBuffer temp = new StringBuffer();
+		if(playerNumbers.size()>0)
+		{	int value = playerNumbers.iterator().next();
+			temp.append(value);
+			boolean serie = true;
+			int first = value;
+			for(int index=value+1;index<=GameConstants.MAX_PROFILES_COUNT+1;index++)
+			{	if(playerNumbers.contains(index))
+				{	if(!serie)
+					{	serie = true;
+						first = index;
+						temp.append(";"+index);
+					}					
+				}
+				else
+				{	if(serie)
+					{	serie = false;
+						if(index-1!=first)
+							temp.append("-"+(index-1));
+					}
+				}				
+			}
+		}
+		else
+			temp.append(0);
+		return temp.toString();
 	}
 }

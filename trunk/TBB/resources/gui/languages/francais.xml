@@ -124,7 +124,7 @@
 						<text name="Name" value="Nom" tooltip="Nom de cette rencontre" />
 						<text name="Players" value="Joueurs" tooltip="Nombre de joueurs pour cette rencontre" />
 						<text name="Points" value="Points"  tooltip="Calcul des points pour cette rencontre" />
-						<text name="Rounds" value="Manches"  tooltip="Nombre de rounds définis pour cette rencontre" />
+						<text name="Rounds" value="Manches"  tooltip="Nombre de manches définies pour cette rencontre" />
 					</group>
 				</group>
 			</group>	
@@ -466,7 +466,7 @@
 					<text name="Title" value="Limites"  tooltip="Informations sur les critères de fin de rencontre" />
 					<group name="Header">
 						<text name="Bombs" value="Bombes"  tooltip="Nombre de bombes devant être posées pour terminer cette rencontre" />
-						<text name="Confrontations" value="Manches"  tooltip="Nombre maximal de manches dans ce match" />
+						<text name="Confrontations" value="Manches"  tooltip="Nombre maximal de manches dans cette rencontre" />
 						<text name="Crowns" value="Couronnes"  tooltip="Nombre de couronnes devant être ramassées pour terminer cette rencontre" />
 						<text name="Custom" value="Personnalisé"  tooltip="Nombre de points personnalisés devant être marqués pour terminer cette rencontre" />
 						<text name="Deaths" value="Décès"  tooltip="Nombre de décès devant être subis pour terminer cette rencontre" />
@@ -491,7 +491,7 @@
 						<text name="Controls" value="Commandes"  tooltip="Commandes du joueur" />
 						<text name="Name" value="Nom"  tooltip="Nom du joueur" />
 						<text name="Profile" value="Humain/Ordinateur"  tooltip="Joueur controlé par un humain ou un ordinateur" />
-						<text name="Rank" value="n°"  tooltip="Classement du joueur dans le tournoi, avant ce match" />
+						<text name="Rank" value="n°"  tooltip="Classement du joueur dans le tournoi, avant cette rencontre" />
 					</group>
 					<group name="Data">
 						<text name="Computer" value="Ordinateur"  tooltip="Joueur contrôlé par l'ordinateur" />
@@ -510,7 +510,7 @@
 						<text name="Rankings" value="Classement"  tooltip="Calcule un classement en fonction de différents types de points" />
 						<text name="Rankpoints" value="Classement valué"  tooltip="Calcule les points en fonction d'un classement" />
 						<text name="Score" value="Score"  tooltip="Scores de tous les joueurs de cette rencontre" />
-						<text name="Total" value="Total" tooltip="Nombre total de points marqué dans chaque manche de ce match" />
+						<text name="Total" value="Total" tooltip="Nombre total de points marqué dans chaque manche de cette rencontre" />
 					</group>
 					<group name="Data">
 						<text name="Bombs" value="Bombes"  tooltip="Utilise le nombre total de bombes posées au cours de la rencontre" />

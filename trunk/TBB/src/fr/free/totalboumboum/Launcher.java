@@ -648,6 +648,7 @@ public class Launcher
 	 * - nouveauté : visualisation des personnages
 	 * - nouveauté : visualisation des niveaux
 	 * - nouveauté : sélection des joueurs avant une partie rapide
+	 * - modification : dans la police de caractères : i minuscule et barre du sept
 	 * 
 	 * *******************************************************
 	 * *********************** A FAIRE ***********************
@@ -730,7 +731,7 @@ public class Launcher
 	 * - limites exprimées de façon relative (peindre 75% des cases...)
 	 * - items: 1 item arrêtant la partie, 1 item faisant diminuer le temps restant (anti-temps)
 	 * - au moins finir le cycle lors d'une mort, histoire que la différence de timing ne vienne pas juste de l'ordre des joueurs dans la partie 
-	 * - possibilité de choisir entre le fait que le match s'arrête dès que tout le monde est mort sauf 1, ou dernière flamme terminée
+	 * - possibilité de choisir entre le fait que le round s'arrête dès que tout le monde est mort sauf 1, ou dernière flamme terminée
 	 * - feature lié au précédent : gagner plus de points si on finit effetivement le jeu que si on a un time out ou un entre-tuage
 	 * reformater les modes de jeu :
 	 * 	- virer les modes de jeu, car ils sont inutiles à part pour paint
@@ -740,5 +741,18 @@ public class Launcher
 	 *  - on rajoute également le système de bonus pour une limite donnée
 	 *  - intérêt : tout ça permet d'implémenter le bonus à celui qui tue tout le monde en survival, par opposition à une victoire temporelle qui rapporterait donc moins de points
 	 *  - LA NOTION DE PLAYMODE EST A SUPPRIMER 
+	 */
+	
+	
+	/*
+	 * partie rapide :
+	 * 	- le match est défini ad hoc, de façon simplifiée
+	 * 		- on choisit directement des niveaux et pas des rounds
+	 * 		- mêmes points pour tous les rounds
+	 * 		- mêmes limites aussi 
+	 *  - on peut configurer le match dans une certaine mesure
+	 *  	- choix des joueurs
+	 *  	- choix des NIVEAUX + ordre aléatoire ou pas
+	 *  	- choix des limites pour match et rounds
 	 */
 }

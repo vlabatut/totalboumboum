@@ -24,6 +24,9 @@ package fr.free.totalboumboum.game.round;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.Set;
+import java.util.TreeSet;
+import java.util.Map.Entry;
 
 import javax.xml.parsers.ParserConfigurationException;
 
@@ -32,6 +35,7 @@ import org.xml.sax.SAXException;
 import fr.free.totalboumboum.configuration.profile.Profile;
 import fr.free.totalboumboum.engine.container.level.HollowLevel;
 import fr.free.totalboumboum.engine.loop.Loop;
+import fr.free.totalboumboum.engine.player.PlayerLocation;
 import fr.free.totalboumboum.game.limit.Limits;
 import fr.free.totalboumboum.game.limit.RoundLimit;
 import fr.free.totalboumboum.game.match.Match;
@@ -141,6 +145,16 @@ public class Round
 	private int remainingPlayers;
 	private final ArrayList<Boolean> playersInGame = new ArrayList<Boolean>();
 
+	public Set<Integer> getAllowedPlayerNumbers()
+	{	TreeSet<Integer> result = new TreeSet<Integer>();
+		Iterator<Entry<Integer,PlayerLocation[]>> it = hollowLevel.getPlayers().getLocations().entrySet().iterator();
+		while(it.hasNext())
+		{	Entry<Integer,PlayerLocation[]> entry = it.next();
+			result.add(entry.getKey());
+		}
+		return result;			
+	}
+	
 	public ArrayList<Profile> getProfiles()
 	{	return match.getProfiles();
 	}	

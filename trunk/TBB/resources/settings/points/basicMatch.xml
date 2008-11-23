@@ -8,8 +8,6 @@
 		<line value="If some players have the same number of points, scores are used: kills, then items, then bombs." />
 		<line value="If there's still a draw, points are shared." />
 	</notes>
-	
-	<author value="Vincent Labatut" />
 
 	<rankpoints invert="false" exaequoShare="true">
 		<rankings>
