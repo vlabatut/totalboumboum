@@ -23,38 +23,55 @@ package fr.free.totalboumboum.game.limit;
 
 import fr.free.totalboumboum.game.points.PointsProcessor;
 import fr.free.totalboumboum.game.statistics.StatisticBase;
+import fr.free.totalboumboum.game.statistics.StatisticHolder;
 
+/**
+ * this limit is based on the number of points calculated by its PointProcessor.
+ * for example, a match can be stopped as soon as a player scores more than 50 points.
+ * 
+ * @author Vincent
+ *
+ */
 public class LimitPoints implements TournamentLimit, MatchLimit, RoundLimit
 {
-	private float limit;
-	private PointsProcessor pointProcessor;
-
-	public LimitPoints(float limit)
-	{	this.limit = limit;
+	public LimitPoints(float limit, PointsProcessor pointProcessor, PointsProcessor thresholdPointProcessor)
+	{	this.threshold = limit;
+		this.thresholdPointProcessor = thresholdPointProcessor;
+		this.pointProcessor = pointProcessor;
 	}
 	
-	public PointsProcessor getPointProcessor()
-	{	return pointProcessor;
+	/////////////////////////////////////////////////////////////////
+	// LIMITED VALUE	/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	private PointsProcessor thresholdPointProcessor;
+
+	public PointsProcessor getThresholdPointProcessor()
+	{	return thresholdPointProcessor;
 	}
-	public void setPointProcessor(PointsProcessor pointProcessor)
-	{	this.pointProcessor = pointProcessor;
+	public void setThresholdPointProcessor(PointsProcessor thresholdPointProcessor)
+	{	this.thresholdPointProcessor = thresholdPointProcessor;
 	}
 
-	public float getLimit()
-	{	return limit;
+	/////////////////////////////////////////////////////////////////
+	// THRESHOLD		/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	private float threshold;
+
+	public float getThreshold()
+	{	return threshold;
 	}
 
-	public void setLimit(float limit)
-	{	this.limit = limit;
+	public void setThreshold(float threshold)
+	{	this.threshold = threshold;
 	}
 
 	@Override
-	public int testLimit(StatisticBase stats)
+	public boolean testThreshold(StatisticHolder holder)
 	{	int result = -1;
 		float points[] = pointProcessor.process(stats);
 		int i=0;
 		while(i<points.length && result<0)
-		{	if(points[i]>=limit)
+		{	if(points[i]>=threshold)
 				result = i;
 			else
 				i++;
@@ -62,4 +79,22 @@ public class LimitPoints implements TournamentLimit, MatchLimit, RoundLimit
 		return result;
 	}
 
+	/////////////////////////////////////////////////////////////////
+	// POINTS			/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	private PointsProcessor pointProcessor;
+	
+	public PointsProcessor getPointProcessor()
+	{	return pointProcessor;
+	}
+
+	public void setPointProcessor(PointsProcessor pointProcessor)
+	{	this.pointProcessor = pointProcessor;
+	}
+
+	@Override
+	public float[] processPoints(StatisticHolder holder)
+	{	
+		
+	}
 }

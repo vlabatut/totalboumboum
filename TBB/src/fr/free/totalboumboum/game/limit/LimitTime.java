@@ -21,30 +21,65 @@ package fr.free.totalboumboum.game.limit;
  * 
  */
 
+import fr.free.totalboumboum.game.points.PointsProcessor;
 import fr.free.totalboumboum.game.statistics.StatisticBase;
+import fr.free.totalboumboum.game.statistics.StatisticHolder;
 
-public class LimitTime implements RoundLimit
+/**
+ * this limit is based on time. In a round, a similar limit could be defined 
+ * whith a ScoreLimit, but not in a tournament or match. Moreover, if there is no
+ * player left in the round (which is theoretically possible), then the ScoreLimit 
+ * based on time is no longer equivalent to the TimeLimit.
+ * For example, a tournament can be stopped when one player's cumulated time is
+ * greater than 10 minutes.   
+ * 
+ * @author Vincent
+ *
+ */
+public class LimitTime implements TournamentLimit, MatchLimit, RoundLimit
 {
-	private long limit;
-	
-	public LimitTime(long limit)
-	{	this.limit = limit;	
+	public LimitTime(long limit, PointsProcessor pointProcessor)
+	{	this.threshold = limit;	
+		this.pointProcessor = pointProcessor;
 	}
 	
-	public long getLimit()
-	{	return limit;
+	/////////////////////////////////////////////////////////////////
+	// THRESHOLD		/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	private long threshold;
+
+	public long getThreshold()
+	{	return threshold;
 	}
 
-	public void setLimit(long limit)
-	{	this.limit = limit;
+	public void setThreshold(long threshold)
+	{	this.threshold = threshold;
 	}
 
 	@Override
-	public int testLimit(StatisticBase stats)
+	public boolean testThreshold(StatisticHolder holder)
 	{	int result = -1;
-		if(stats.getTime()>=limit)
+		if(stats.getTime()>=threshold)
 			result = stats.getPlayers().size(); 
 		return result;
 	}
 
+	/////////////////////////////////////////////////////////////////
+	// POINTS			/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	private PointsProcessor pointProcessor;
+	
+	public PointsProcessor getPointProcessor()
+	{	return pointProcessor;
+	}
+
+	public void setPointProcessor(PointsProcessor pointProcessor)
+	{	this.pointProcessor = pointProcessor;
+	}
+
+	@Override
+	public float[] processPoints(StatisticHolder holder)
+	{	
+		
+	}
 }

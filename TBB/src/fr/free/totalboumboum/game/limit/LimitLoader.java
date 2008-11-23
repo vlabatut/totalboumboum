@@ -54,7 +54,7 @@ public class LimitLoader
 			result = loadLimitTimeElement(root);
 		
 		else if(type.equals(XmlTools.ELT_TOTAL))
-			result = loadLimitTotalElement(root);
+			result = loadLimitLastStandingElement(root);
 		
 		return result;
 	}
@@ -123,12 +123,12 @@ public class LimitLoader
 		return result;
 	}
 
-	private static LimitTotal loadLimitTotalElement(Element root)
+	private static LimitLastStanding loadLimitLastStandingElement(Element root)
 	{	// value
 		String str = root.getAttribute(XmlTools.ATT_VALUE).getValue();
-		float value = Float.valueOf(str);
+		int value = Integer.valueOf(str);
 		// result
-		LimitTotal result = new LimitTotal(value);
+		LimitLastStanding result = new LimitLastStanding(value);
 		return result;
 	}
 }

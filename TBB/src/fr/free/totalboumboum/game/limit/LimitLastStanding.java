@@ -26,15 +26,15 @@ import fr.free.totalboumboum.game.statistics.StatisticBase;
 import fr.free.totalboumboum.game.statistics.StatisticHolder;
 
 /**
- * this limit is based on the number of confrontations during a tournament or match.
- * for example, a match can be limited to 10 rounds, or a sequence tournament to 5 matches
+ * this limit is based on the number of players remaining in a round.
+ * For example, a round can be stopped when there is only one player remaining.
  * 
  * @author Vincent
  *
  */
-public class LimitConfrontation implements TournamentLimit, MatchLimit
+public class LimitLastStanding implements TournamentLimit, MatchLimit, RoundLimit
 {	
-	public LimitConfrontation(int limit, PointsProcessor pointProcessor)
+	public LimitLastStanding(long limit, PointsProcessor pointProcessor)
 	{	this.threshold = limit;	
 		this.pointProcessor = pointProcessor;
 	}
@@ -42,25 +42,24 @@ public class LimitConfrontation implements TournamentLimit, MatchLimit
 	/////////////////////////////////////////////////////////////////
 	// THRESHOLD		/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	private int threshold;
-
-	public int getThreshold()
+	private long threshold;
+	
+	public long getThreshold()
 	{	return threshold;
 	}
 
-	public void setThreshold(int threshold)
+	public void setThreshold(long threshold)
 	{	this.threshold = threshold;
 	}
 
 	@Override
 	public boolean testThreshold(StatisticHolder holder)
 	{	int result = -1;
-		int nbr = stats.getConfrontationCount();
-		if(nbr>=threshold)
-			result = stats.getPlayers().size();
-		return result;
+		if(stats.getTime()>=threshold)
+			result = stats.getPlayers().size(); 
+//		return result;
 	}
-	
+
 	/////////////////////////////////////////////////////////////////
 	// POINTS			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////

@@ -21,36 +21,49 @@ package fr.free.totalboumboum.game.limit;
  * 
  */
 
+import fr.free.totalboumboum.game.points.PointsProcessor;
 import fr.free.totalboumboum.game.statistics.Score;
 import fr.free.totalboumboum.game.statistics.StatisticBase;
+import fr.free.totalboumboum.game.statistics.StatisticHolder;
 
+/**
+ * this limit is based on a given score (time, kills, items...).
+ * for example, a round can be stopped as soon as a player collects 30 items, or has 4 kills
+ * 
+ * @author Vincent
+ *
+ */
 public class LimitScore implements TournamentLimit, MatchLimit, RoundLimit
 {
-	private long limit;
-	private Score score;
-	// is the limit a superior limit (or an inferior)
-	private boolean supLimit;
-	// if the limit is crossed, does the player win ?
-	@SuppressWarnings("unused")
-	private boolean win;
-
-	public LimitScore(long limit, Score score, boolean supLimit, boolean win)
-	{	this.limit = limit;
+	public LimitScore(long limit, Score score, boolean supLimit, PointsProcessor pointProcessor)
+	{	this.threshold = limit;
 		this.score = score;
 		this.supLimit = supLimit;
-		this.win = win;
+		this.pointProcessor = pointProcessor;
 	}
 
-	public long getLimit()
-	{	return limit;
-	}
-	
+	/////////////////////////////////////////////////////////////////
+	// LIMITED VALUE	/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	private Score score;
+
 	public Score getScore()
 	{	return score;
 	}
 
-	public void setLimit(int limit)
-	{	this.limit = limit;
+	/////////////////////////////////////////////////////////////////
+	// THRESHOLD		/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	private long threshold;
+	// is the limit a superior limit (or an inferior)
+	private boolean supLimit;
+	
+	public long getThreshold()
+	{	return threshold;
+	}
+	
+	public void setThreshold(int threshold)
+	{	this.threshold = threshold;
 	}
 
 	public void setsupLimit(boolean supLimit)
@@ -58,13 +71,13 @@ public class LimitScore implements TournamentLimit, MatchLimit, RoundLimit
 	}
 
 	@Override
-	public int testLimit(StatisticBase stats)
+	public boolean testThreshold(StatisticHolder holder)
 	{	int result = -1;
 		long scores[] = stats.getScores(score);
 		int i=0;
 		if(supLimit)
 		{	while(i<scores.length && result<0)
-			{	if(scores[i]>=limit)
+			{	if(scores[i]>=threshold)
 					result = i;
 				else
 					i++;
@@ -72,12 +85,31 @@ public class LimitScore implements TournamentLimit, MatchLimit, RoundLimit
 		}
 		else
 		{	while(i<scores.length && result<0)
-			{	if(scores[i]<=limit)
+			{	if(scores[i]<=threshold)
 					result = i;
 				else
 					i++;
 			}
 		}
 		return result;
+	}
+
+	/////////////////////////////////////////////////////////////////
+	// POINTS			/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	private PointsProcessor pointProcessor;
+	
+	public PointsProcessor getPointProcessor()
+	{	return pointProcessor;
+	}
+
+	public void setPointProcessor(PointsProcessor pointProcessor)
+	{	this.pointProcessor = pointProcessor;
+	}
+
+	@Override
+	public float[] processPoints(StatisticHolder holder)
+	{	
+		
 	}
 }

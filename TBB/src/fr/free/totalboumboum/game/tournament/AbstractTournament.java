@@ -32,9 +32,10 @@ import org.xml.sax.SAXException;
 import fr.free.totalboumboum.configuration.profile.Profile;
 import fr.free.totalboumboum.configuration.profile.ProfileLoader;
 import fr.free.totalboumboum.game.match.Match;
+import fr.free.totalboumboum.game.statistics.StatisticHolder;
 import fr.free.totalboumboum.game.statistics.StatisticTournament;
 
-public abstract class AbstractTournament
+public abstract class AbstractTournament implements StatisticHolder<StatisticTournament>
 {	
 	/////////////////////////////////////////////////////////////////
 	// GAME		/////////////////////////////////////////////

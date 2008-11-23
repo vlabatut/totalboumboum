@@ -41,11 +41,12 @@ import fr.free.totalboumboum.game.limit.Limits;
 import fr.free.totalboumboum.game.limit.MatchLimit;
 import fr.free.totalboumboum.game.points.PointsProcessor;
 import fr.free.totalboumboum.game.round.Round;
+import fr.free.totalboumboum.game.statistics.StatisticHolder;
 import fr.free.totalboumboum.game.statistics.StatisticMatch;
 import fr.free.totalboumboum.game.statistics.StatisticRound;
 import fr.free.totalboumboum.game.tournament.AbstractTournament;
 
-public class Match
+public class Match implements StatisticHolder<StatisticMatch>
 {	
 	public Match(AbstractTournament tournament)
 	{	this.tournament = tournament;

@@ -756,53 +756,53 @@ public class RoundDescription extends EntitledDataPanel
 			if(limit instanceof LimitConfrontation)
 			{	LimitConfrontation l = (LimitConfrontation)limit;
 				iconName = prefix+"Confrontations";
-				value = nf.format(l.getLimit());
+				value = nf.format(l.getThreshold());
 			}
 			else if(limit instanceof LimitTime)
 			{	LimitTime l = (LimitTime)limit;
 				iconName = prefix+"Time";
-				value = StringTools.formatTimeWithSeconds(l.getLimit());
+				value = StringTools.formatTimeWithSeconds(l.getThreshold());
 			}
 			else if(limit instanceof LimitPoints)
 			{	LimitPoints l = (LimitPoints)limit;
 				iconName = prefix+"Custom";
-				value = nf.format(l.getLimit());
+				value = nf.format(l.getThreshold());
 			}
 			else if(limit instanceof LimitTotal)
 			{	LimitTotal l = (LimitTotal)limit;
 				iconName = prefix+"Total";
-				value = nf.format(l.getLimit());
+				value = nf.format(l.getThreshold());
 			}
 			else if(limit instanceof LimitScore)
 			{	LimitScore l = (LimitScore) limit;
 				switch(l.getScore())
 				{	case BOMBS:
 						iconName = prefix+"Bombs";
-						value = nf.format(l.getLimit());
+						value = nf.format(l.getThreshold());
 						break;
 					case CROWNS:
 						iconName = prefix+"Crowns";
-						value = nf.format(l.getLimit());
+						value = nf.format(l.getThreshold());
 						break;
 					case DEATHS:
 						iconName = prefix+"Deaths";
-						value = nf.format(l.getLimit());
+						value = nf.format(l.getThreshold());
 						break;
 					case ITEMS:
 						iconName = prefix+"Items";
-						value = nf.format(l.getLimit());
+						value = nf.format(l.getThreshold());
 						break;
 					case KILLS:
 						iconName = prefix+"Kills";
-						value = nf.format(l.getLimit());
+						value = nf.format(l.getThreshold());
 						break;
 					case PAINTINGS:
 						iconName = prefix+"Paintings";
-						value = nf.format(l.getLimit());
+						value = nf.format(l.getThreshold());
 						break;
 					case TIME:
 						iconName = prefix+"Time";
-						value = nf.format(l.getLimit());
+						value = nf.format(l.getThreshold());
 						break;
 				}
 			}
