@@ -13,7 +13,10 @@
 
 	<limits>
 
-		<confrontation value="10" />
+		<confrontation>
+			<points local="false" name="basicMatch" />
+			<threshold value="10" />
+		</confrontation>
 	
  <!-- 		
 		<points value="5" >
@@ -31,7 +34,6 @@
   -->			
 	</limits>
 
-	<points local="false" name="basicMatch" />
  	
  	<rounds randomOrder="false" >
 <!--   		<round local="false" name="roundTest" />  -->

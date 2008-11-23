@@ -12,12 +12,13 @@
 	<author value="Vincent Labatut" />
 
 	<limits>
-		<time value="60000"/>
+		<time>
+			<points local="false" name="basicSurvival" />
+ 			<threshold value="60000" />
+		</time>
 	</limits>
 	
 	<gameplay playMode="survival"  />
-	
-	<points local="false" name="basicSurvival" />
 	
 	<level packname="sbm1Custom" name="test3" />
 

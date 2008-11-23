@@ -53,7 +53,7 @@ public class LimitLoader
 		else if(type.equals(XmlTools.ELT_TIME))
 			result = loadLimitTimeElement(root);
 		
-		else if(type.equals(XmlTools.ELT_TOTAL))
+		else if(type.equals(XmlTools.ELT_LAST_STANDING))
 			result = loadLimitLastStandingElement(root);
 		
 		return result;

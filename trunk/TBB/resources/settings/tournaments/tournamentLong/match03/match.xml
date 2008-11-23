@@ -12,11 +12,13 @@
 	<author value="Vincent Labatut" />
 
 	<limits>
-		<confrontation value="3" />
+		<confrontation>
+			<points local="false" name="basicMatch" />
+ 			<threshold value="3" />
+		</confrontation>
 	</limits>
 
-	<points local="false" name="basicMatch" />
- 	
+	
  	<rounds randomOrder="false" >
   		<round local="true" name="round00" />
   	</rounds>
