@@ -56,6 +56,7 @@ import fr.free.totalboumboum.gui.game.round.description.RoundDescription;
 import fr.free.totalboumboum.gui.tools.GuiKeys;
 import fr.free.totalboumboum.gui.tools.GuiTools;
 import fr.free.totalboumboum.tools.FileTools;
+import fr.free.totalboumboum.tools.StringTools;
 
 public class SelectedMatchData extends EntitledDataPanel implements MouseListener
 {	
@@ -122,7 +123,7 @@ public class SelectedMatchData extends EntitledDataPanel implements MouseListene
 			mainPanel.add(Box.createHorizontalGlue());
 			
 			// right panel
-			{	rightHeight = (dataHeight - 2*margin)/3;
+			{	rightHeight = (int)((dataHeight - 2*margin)*0.4);
 				int previewHeight = dataHeight - 2*rightHeight - 2*margin; 
 				
 				rightPanel = new SubPanel(rightWidth,dataHeight);
@@ -310,7 +311,7 @@ public class SelectedMatchData extends EntitledDataPanel implements MouseListene
 			values[VIEW_LINE_NAME] = selectedMatchFolder;
 			values[VIEW_LINE_AUTHOR]= selectedMatch.getAuthor();
 			values[VIEW_LINE_ROUNDS] = Integer.toString(selectedMatch.getRound().size());
-			values[VIEW_LINE_PLAYERS] = "["+selectedMatch.getMinPlayerNumber()+";"+selectedMatch.getMaxPlayerNumber()+"]";
+			values[VIEW_LINE_PLAYERS] = StringTools.formatAllowedPlayerNumbers(selectedMatch.getAllowedPlayerNumbers());
 		}
 		// common
 		for(int line=0;line<values.length;line++)
@@ -348,7 +349,7 @@ public class SelectedMatchData extends EntitledDataPanel implements MouseListene
 	{	if(selectedMatch==null)
 			limitsPanel = makeLimitsPanel(rightWidth,rightHeight);
 		else
-			limitsPanel = RoundDescription.makePointsPanel(rightWidth,rightHeight,selectedMatch.getPointProcessor(),"Match");
+			limitsPanel = RoundDescription.makeLimitsPanel(rightWidth,rightHeight,selectedMatch.getLimits(),"Match");
 		rightPanel.remove(LIMITS_PANEL_INDEX);
 		rightPanel.add(limitsPanel,LIMITS_PANEL_INDEX);
 	}
@@ -363,6 +364,8 @@ public class SelectedMatchData extends EntitledDataPanel implements MouseListene
 		refreshPreview();
 		refreshPoints();
 		refreshLimits();
+//		rightPanel.validate();
+//		rightPanel.repaint();
 	}
 
 	@Override
@@ -413,6 +416,8 @@ public class SelectedMatchData extends EntitledDataPanel implements MouseListene
 				selectedRow = pos[0];
 				listPanels.get(currentPage).setLabelBackground(selectedRow,0,GuiTools.COLOR_TABLE_SELECTED_BACKGROUND);
 				refreshPreview();
+				refreshPoints();
+				refreshLimits();
 		}
 	}
 	@Override
