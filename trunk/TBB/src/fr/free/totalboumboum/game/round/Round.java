@@ -42,9 +42,10 @@ import fr.free.totalboumboum.game.match.Match;
 import fr.free.totalboumboum.game.points.PlayerPoints;
 import fr.free.totalboumboum.game.points.PointsProcessor;
 import fr.free.totalboumboum.game.statistics.StatisticEvent;
+import fr.free.totalboumboum.game.statistics.StatisticHolder;
 import fr.free.totalboumboum.game.statistics.StatisticRound;
 
-public class Round
+public class Round implements StatisticHolder<StatisticRound>
 {
 	public Round(Match match)
 	{	this.match = match;

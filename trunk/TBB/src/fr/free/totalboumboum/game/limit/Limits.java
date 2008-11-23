@@ -25,6 +25,7 @@ import java.util.ArrayList;
 import java.util.Iterator;
 
 import fr.free.totalboumboum.game.statistics.StatisticBase;
+import fr.free.totalboumboum.game.statistics.StatisticHolder;
 
 public class Limits<T extends Limit>
 {
@@ -34,12 +35,12 @@ public class Limits<T extends Limit>
 	{	limits.add(limit);
 	}
 	
-	public int testLimits(StatisticBase stats)
-	{	int result = -1;
+	public boolean testLimit(StatisticHolder holder)
+	{	boolean result = false;
 		Iterator<T> i = limits.iterator();
-		while(i.hasNext() && result<0)
+		while(i.hasNext() && !result)
 		{	T temp = i.next();
-			result = temp.testLimit(stats);
+			result = temp.testThreshold(holder);
 		}
 		return result;
 	}
