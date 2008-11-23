@@ -30,15 +30,43 @@ import fr.free.totalboumboum.configuration.profile.Profile;
 import fr.free.totalboumboum.game.match.Match;
 import fr.free.totalboumboum.game.points.PointsProcessor;
 
-public class StatisticMatch implements Serializable, StatisticBase
+public class StatisticMatch extends StatisticBase implements Serializable
 {
 	private static final long serialVersionUID = 1L;
 
-	private final ArrayList<String> players = new ArrayList<String>();
+	/////////////////////////////////////////////////////////////////
+	// STATISTIC ROUNDS	/////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
 	private final ArrayList<StatisticRound> rounds = new ArrayList<StatisticRound>();
-	private final HashMap<Score,long[]> scores = new HashMap<Score,long[]>();
-	private float[] points;
-	private float[] partialPoints;
+
+	public ArrayList<StatisticRound> getStatisticRounds()
+	{	return rounds;
+	}
+
+	public void addStatisticRound(StatisticRound round)
+	{	// round stats
+		rounds.add(round);
+		// scores
+		for (Score score : Score.values())
+		{	long[] currentScores = getScores(score);
+			long[] roundScores = round.getScores(score);
+			for(int i=0;i<roundScores.length;i++)
+				currentScores[i] = currentScores[i] + roundScores[i];
+		}
+		// partial points
+		float[] roundPoints = round.getPoints();
+		for(int i=0;i<players.size();i++)
+			total[i] = total[i] + roundPoints[i];
+	}
+
+	@Override
+	public int getConfrontationCount()
+	{	int result = rounds.size();
+		return result;
+	}
+	
+	
+	
 	
 	public void init(Match match)
 	{	// players
@@ -54,9 +82,9 @@ public class StatisticMatch implements Serializable, StatisticBase
 		for(int j=0;j<points.length;j++)
 			points[j] = 0;
 		// partial points
-		partialPoints = new float[players.size()];
-		for(int j=0;j<partialPoints.length;j++)
-			partialPoints[j] = 0;
+		total = new float[players.size()];
+		for(int j=0;j<total.length;j++)
+			total[j] = 0;
 		// scores
 		for (Score score : Score.values())
 		{	long[] sc = new long[players.size()];
@@ -65,83 +93,18 @@ public class StatisticMatch implements Serializable, StatisticBase
 			scores.put(score,sc);
 		}
 	}
-	
-	public void addPlayer(String player)
-	{	players.add(player);
-	}
-	public ArrayList<String> getPlayers()
-	{	return players;
-	}
 
-	public void addStatisticRound(StatisticRound round)
-	{	// round stats
-		rounds.add(round);
-		// scores
-		for (Score score : Score.values())
-		{	long[] currentScores = scores.get(score);
-			long[] roundScores = round.getScores(score);
-			for(int i=0;i<roundScores.length;i++)
-				currentScores[i] = currentScores[i] + roundScores[i];
-		}
-		// partial points
-		float[] roundPoints = round.getPoints();
-		for(int i=0;i<players.size();i++)
-			partialPoints[i] = partialPoints[i] + roundPoints[i];
-	}
 	
 	public void computePoints(PointsProcessor pointProcessor)
 	{	points = pointProcessor.process(this);
 	}
 	
-	public int getSize()
-	{	return rounds.size();
-	}
-
-	public long[] getScores(Score score)
-	{	long[] result;
-		result = scores.get(score);
-		return result;	
-	}
 	
-	/** renvoie les points calculés a posteriori pour ce match*/
-	public float[] getPoints()
-	{	return points;		
-	}
-
-	/** 
-	 * renvoie la somme des points obtenus lors des rounds de ce match,
-	 * qui sera utilisée pour calculer les points obtenus lors de ce match  
-	 */
-	public float[] getPartialPoints()
-	{	return partialPoints;
-	}
-
-	public ArrayList<StatisticRound> getStatRounds()
-	{	return rounds;
-	}
-
 	@Override
-	public int getConfrontationCount()
-	{	int result = rounds.size();
-		return result;
-	}
-	
-	public void setWinner(int index)
-	{	 
-		/* NOTE pbs
-		 * comment savoir qui avait 'gagné' ?
-		 * comment savoir cb de pts donner au nouveau gagnant ?
-		 * combien de pts donner aux autres ?
-		 * 
-		 * une solution serait d'utiliser une limite jumelée avec le calcul de points
-		 * autre solution : on décalle simplement les scores en partant du nouveau gagnant et en remontant vers le premier 
-		 */
-		
-	}
-
-	@Override
-	public long getTime()
-	{	// useless
+	public long getTotalTime()
+	{	long result = 0;
+		for(StatisticRound r: rounds)
+			result = result + r.getTotalTime();
 		return 0;
 	}
 }

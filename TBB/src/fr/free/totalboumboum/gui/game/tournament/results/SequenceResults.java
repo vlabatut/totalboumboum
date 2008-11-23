@@ -94,8 +94,8 @@ public class SequenceResults extends TournamentResults
 		SequenceTournament tournament = (SequenceTournament)Configuration.getGameConfiguration().getTournament();
 		ArrayList<Profile> players = tournament.getProfiles();
 		StatisticTournament stats = tournament.getStats();
-		ArrayList<StatisticMatch> matches = stats.getStatMatches();
-		float[] partialPoints = stats.getPartialPoints();
+		ArrayList<StatisticMatch> matches = stats.getStatisticMatches();
+		float[] partialPoints = stats.getTotal();
 		float[] points = stats.getPoints();
 		
 		// sorting players according to points/partial points

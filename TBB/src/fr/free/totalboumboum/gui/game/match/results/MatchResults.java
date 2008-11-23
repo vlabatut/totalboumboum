@@ -99,8 +99,8 @@ public class MatchResults extends EntitledDataPanel
 		Match match = Configuration.getGameConfiguration().getTournament().getCurrentMatch();
 		ArrayList<Profile> players = match.getProfiles();
 		StatisticMatch stats = match.getStats();
-		ArrayList<StatisticRound> rounds = stats.getStatRounds();
-		float[] partialPoints = stats.getPartialPoints();
+		ArrayList<StatisticRound> rounds = stats.getStatisticRounds();
+		float[] partialPoints = stats.getTotal();
 		float[] points = stats.getPoints();
 		
 		// sorting players according to points/partial points
