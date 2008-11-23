@@ -70,29 +70,37 @@ public class RoundLoader
 	{	// init
     	Round result = new Round(match);
 		Element element;
+		
 		// notes
 		element = root.getChild(XmlTools.ELT_NOTES);
 		ArrayList<String> notes = MatchLoader.loadNotesElement(element);
 		result.setNotes(notes);
+		
 		// author
 		element = root.getChild(XmlTools.ELT_AUTHOR);
-		String author = element.getAttributeValue(XmlTools.ATT_VALUE);
-		result.setAuthor(author);	
+		if(element!=null)
+		{	String author = element.getAttributeValue(XmlTools.ATT_VALUE);
+			result.setAuthor(author);
+		}
+		
 		// limits
 		element = root.getChild(XmlTools.ELT_LIMITS);
 		Limits<RoundLimit> limits = loadLimitsElement(element,folderPath);
 		result.setLimits(limits);
+		
 		// gameplay
 		element = root.getChild(XmlTools.ELT_GAMEPLAY);
 		loadGameplayElement(element,result);
+		
 		// points
 		element = root.getChild(XmlTools.ELT_POINTS);
 		PointsProcessor pp = PointsProcessorLoader.loadPointProcessorFromElement(element,folderPath);
 		result.setPointProcessor(pp);
+		
 		// level
 		element = root.getChild(XmlTools.ELT_LEVEL);
 		loadLevelElement(element,result);
-		//
+
 		return result;
 	}		
 		
