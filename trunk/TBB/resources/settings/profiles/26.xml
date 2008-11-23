@@ -1,9 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<profile xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="..\..\..\resources\schemas\profile.xsd">
-	<general name="AAAAAAAA" />
-	<colors>
-		<color rank="0" name="WHITE" />
-	</colors>
-	<character name="shirobon" packname="superbomberman1" />
-</profile>
-
