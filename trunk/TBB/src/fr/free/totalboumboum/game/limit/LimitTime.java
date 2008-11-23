@@ -58,9 +58,9 @@ public class LimitTime implements TournamentLimit, MatchLimit, RoundLimit
 
 	@Override
 	public boolean testThreshold(StatisticHolder holder)
-	{	int result = -1;
-		if(stats.getTotalTime()>=threshold)
-			result = stats.getPlayers().size(); 
+	{	boolean result;
+		StatisticBase stats = holder.getStats();
+		result = stats.getTotalTime()>=threshold; 
 		return result;
 	}
 
@@ -79,7 +79,6 @@ public class LimitTime implements TournamentLimit, MatchLimit, RoundLimit
 
 	@Override
 	public float[] processPoints(StatisticHolder holder)
-	{	
-		
+	{	return pointProcessor.process(holder);		
 	}
 }

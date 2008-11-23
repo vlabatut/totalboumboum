@@ -8,5 +8,5 @@ public interface StatisticHolder
 {
 	public StatisticBase getStats();
 	public ArrayList<Profile> getProfiles();
-	
+	public ArrayList<Boolean> getPlayersStatus();
 }

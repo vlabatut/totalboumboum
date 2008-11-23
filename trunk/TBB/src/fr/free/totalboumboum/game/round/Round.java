@@ -65,7 +65,7 @@ public class Round implements StatisticHolder
 	{	stats.init(this);
 		remainingPlayers = getProfiles().size();
 		for(int i=0;i<remainingPlayers;i++)
-			playersInGame.add(new Boolean(true));
+			playersStatus.add(new Boolean(true));
 		hollowLevel.getZone().makeMatrix();
 	}
 	
@@ -92,7 +92,7 @@ public class Round implements StatisticHolder
 		// misc
 		match = null;
 		panel = null;
-		playersInGame.clear();
+		playersStatus.clear();
 		stats = null;
 		// garbage collect
 		Runtime rt = Runtime.getRuntime();
@@ -144,8 +144,12 @@ public class Round implements StatisticHolder
 	// PLAYERS			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	private int remainingPlayers;
-	private final ArrayList<Boolean> playersInGame = new ArrayList<Boolean>();
+	private final ArrayList<Boolean> playersStatus = new ArrayList<Boolean>();
 
+	public ArrayList<Boolean> getPlayersStatus()
+	{	return playersStatus;		
+	}
+	
 	public Set<Integer> getAllowedPlayerNumbers()
 	{	TreeSet<Integer> result = new TreeSet<Integer>();
 		Iterator<Entry<Integer,PlayerLocation[]>> it = hollowLevel.getPlayers().getLocations().entrySet().iterator();
@@ -163,7 +167,8 @@ public class Round implements StatisticHolder
 	public void playerOut(int index)
 	{	if(!roundOver)
 		{	remainingPlayers --;
-			playersInGame.set(index,new Boolean(false));
+			playersStatus.set(index,new Boolean(false));
+//TODO à adapter :			
 			if(remainingPlayers<2 /*&& getPlayMode()==PlayMode.SURVIVAL*/)
 				closeGame();		
 		}

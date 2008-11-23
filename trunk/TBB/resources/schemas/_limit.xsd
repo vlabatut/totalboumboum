@@ -2,37 +2,79 @@
 <xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema">
 <xsd:include schemaLocation="_score.xsd"/>
 
-	<xsd:complexType name="tLimitConfrontation">
-		<xsd:attribute name="value" type="xsd:int" use="required" />
-	</xsd:complexType>
-	
+<!-- COMMON -->
 	<xsd:complexType name="tPointProcessor">
 		<xsd:attribute name="name" type="xsd:string" use="required" />
 		<xsd:attribute name="local" type="xsd:boolean" use="optional" default="false" />
 	</xsd:complexType>
 
+	<xsd:complexType name="tThreshold">
+		<xsd:attribute name="sup" type="xsd:boolean" use="optional"  default="true" />
+	</xsd:complexType>
+
+	<xsd:complexType name="tIntegerThreshold">
+		<xsd:complexContent>
+			<xsd:extension base="tThreshold">
+				<xsd:attribute name="value" type="xsd:integer" use="required" />
+			</xsd:extension>
+		</xsd:complexContent>
+	</xsd:complexType>
+
+	<xsd:complexType name="tLongThreshold">
+		<xsd:complexContent>
+			<xsd:extension base="tThreshold">
+				<xsd:attribute name="value" type="xsd:long" use="required" />
+			</xsd:extension>
+		</xsd:complexContent>
+	</xsd:complexType>
+
+	<xsd:complexType name="tFloatThreshold">
+		<xsd:complexContent>
+			<xsd:extension base="tThreshold">
+				<xsd:attribute name="value" type="xsd:float" use="required" />
+			</xsd:extension>
+		</xsd:complexContent>
+	</xsd:complexType>
+
+<!-- LIMITS -->
+	<xsd:complexType name="tLimitConfrontation">
+		<xsd:sequence>
+			<xsd:element name="points" type="tPointProcessor" />
+			<xsd:element name="threshold" type="tIntegerThreshold" />
+		</xsd:sequence>
+	</xsd:complexType>
+	
 	<xsd:complexType name="tLimitPoints">
 		<xsd:sequence>
 			<xsd:element name="points" type="tPointProcessor" />
+			<xsd:element name="threshold" type="tIntegerThreshold" />
+			<xsd:element name="source" type="tPointProcessor" />
 		</xsd:sequence>
-		<xsd:attribute name="value" type="xsd:float" use="required" />
 	</xsd:complexType>
 	
 	<xsd:complexType name="tLimitScore">
+		<xsd:sequence>
+			<xsd:element name="points" type="tPointProcessor" />
+			<xsd:element name="threshold" type="tLongThreshold" />
+		</xsd:sequence>
 		<xsd:attribute name="type" type="tScore" use="required" />
-		<xsd:attribute name="value" type="xsd:long" use="required" />
-		<xsd:attribute name="sup" type="xsd:boolean" use="optional"  default="true" />
-		<xsd:attribute name="win" type="xsd:boolean" use="required" />
 	</xsd:complexType>
 	
 	<xsd:complexType name="tLimitTime">
-		<xsd:attribute name="value" type="xsd:long" use="required" />
+		<xsd:sequence>
+			<xsd:element name="points" type="tPointProcessor" />
+			<xsd:element name="threshold" type="tLongThreshold" />
+		</xsd:sequence>
 	</xsd:complexType>
 	
 	<xsd:complexType name="tLimitLastStanding">
-		<xsd:attribute name="value" type="xsd:integer" use="required" />
+		<xsd:sequence>
+			<xsd:element name="points" type="tPointProcessor" />
+			<xsd:element name="threshold" type="tIntegerThreshold" />
+		</xsd:sequence>
 	</xsd:complexType>
 	
+<!-- GROUPS -->
 	<xsd:group name="gTournamentLimit">
 		<xsd:choice>
 			<xsd:element name="confrontation" type="tLimitConfrontation" />
@@ -60,6 +102,7 @@
 		</xsd:choice>
 	</xsd:group>
 	
+<!-- MAIN -->
 	<xsd:complexType name="tTournamentLimits">
 		<xsd:sequence>
 			<xsd:group ref="gTournamentLimit"  maxOccurs="unbounded"/>

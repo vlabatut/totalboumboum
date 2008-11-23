@@ -22,7 +22,6 @@ package fr.free.totalboumboum.game.limit;
  */
 
 import fr.free.totalboumboum.game.points.PointsProcessor;
-import fr.free.totalboumboum.game.statistics.StatisticBase;
 import fr.free.totalboumboum.game.statistics.StatisticHolder;
 
 /**
@@ -67,14 +66,12 @@ public class LimitPoints implements TournamentLimit, MatchLimit, RoundLimit
 
 	@Override
 	public boolean testThreshold(StatisticHolder holder)
-	{	int result = -1;
-		float points[] = pointProcessor.process(stats);
+	{	boolean result = false;
+		float points[] = pointProcessor.process(holder);
 		int i=0;
-		while(i<points.length && result<0)
-		{	if(points[i]>=threshold)
-				result = i;
-			else
-				i++;
+		while(i<points.length && !result)
+		{	result = points[i]>=threshold;
+			i++;
 		}
 		return result;
 	}
@@ -94,7 +91,6 @@ public class LimitPoints implements TournamentLimit, MatchLimit, RoundLimit
 
 	@Override
 	public float[] processPoints(StatisticHolder holder)
-	{	
-		
+	{	return pointProcessor.process(holder);		
 	}
 }

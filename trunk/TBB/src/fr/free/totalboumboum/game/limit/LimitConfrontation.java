@@ -54,10 +54,10 @@ public class LimitConfrontation implements TournamentLimit, MatchLimit
 
 	@Override
 	public boolean testThreshold(StatisticHolder holder)
-	{	int result = -1;
+	{	boolean result;
+		StatisticBase stats = holder.getStats();
 		int nbr = stats.getConfrontationCount();
-		if(nbr>=threshold)
-			result = stats.getPlayers().size();
+		result = nbr>=threshold;
 		return result;
 	}
 	
@@ -76,7 +76,6 @@ public class LimitConfrontation implements TournamentLimit, MatchLimit
 
 	@Override
 	public float[] processPoints(StatisticHolder holder)
-	{	
-		
+	{	return pointProcessor.process(holder);		
 	}
 }
