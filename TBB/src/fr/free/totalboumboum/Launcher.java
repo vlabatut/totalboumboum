@@ -733,20 +733,13 @@ public class Launcher
 	 * - possibilité de bloquer certains items (on ne les perd pas lorsqu'on meurt)
 	 * 
 	 * LIMITES & MODES de jeu :
-	 * - s'occuper de la limite qui fait gagner le joueur qui la franchit : pq pas un simple bonus/malus pour celui qui arrête la partie ?
 	 * - limites exprimées de façon relative (peindre 75% des cases...)
 	 * - items: 1 item arrêtant la partie, 1 item faisant diminuer le temps restant (anti-temps)
 	 * - au moins finir le cycle lors d'une mort, histoire que la différence de timing ne vienne pas juste de l'ordre des joueurs dans la partie 
 	 * - possibilité de choisir entre le fait que le round s'arrête dès que tout le monde est mort sauf 1, ou dernière flamme terminée
 	 * - feature lié au précédent : gagner plus de points si on finit effetivement le jeu que si on a un time out ou un entre-tuage
 	 * reformater les modes de jeu :
-	 * 	- virer les modes de jeu, car ils sont inutiles à part pour paint
 	 * 	- pour paint il suffit de définir des bombes spéciales qui peignent le sol
-	 *  - pour les autres, tout peut se faire avec le système de limites de match
-	 *  - pour survival, il suffit d'utiliser une limite de type last-standing
-	 *  - on rajoute également le système de bonus pour une limite donnée
-	 *  - intérêt : tout ça permet d'implémenter le bonus à celui qui tue tout le monde en survival, par opposition à une victoire temporelle qui rapporterait donc moins de points
-	 *  - LA NOTION DE PLAYMODE EST A SUPPRIMER 
 	 */
 	
 	
@@ -760,5 +753,15 @@ public class Launcher
 	 *  	- choix des joueurs
 	 *  	- choix des NIVEAUX + ordre aléatoire ou pas
 	 *  	- choix des limites pour match et rounds
+	 */
+	
+	
+	/**
+	 * LIMITES : 
+	 * faut reformater lastStanding. pistes :
+	 * 	- player count, mettre une limite qui est forcément basse
+	 * 	- option strict : la limite ne déclenche que si c'est exactement le nombre de joueurs prévu.
+	 * 		et sinon il faudrait définir une autre limite (style 1 et 0) avec des scores différents
+	 * 
 	 */
 }

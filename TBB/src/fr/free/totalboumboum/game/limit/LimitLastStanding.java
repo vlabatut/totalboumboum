@@ -33,9 +33,9 @@ import fr.free.totalboumboum.game.statistics.StatisticHolder;
  * @author Vincent
  *
  */
-public class LimitPlayerCount implements RoundLimit
+public class LimitLastStanding implements RoundLimit
 {	
-	public LimitPlayerCount(int threshold, boolean supLimit, PointsProcessor pointProcessor)
+	public LimitLastStanding(int threshold, boolean supLimit, PointsProcessor pointProcessor)
 	{	this.threshold = threshold;
 		this.supLimit = supLimit;
 		this.pointProcessor = pointProcessor;
