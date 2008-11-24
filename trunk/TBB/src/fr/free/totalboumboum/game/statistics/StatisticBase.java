@@ -23,7 +23,9 @@ package fr.free.totalboumboum.game.statistics;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Calendar;
 import java.util.Date;
+import java.util.GregorianCalendar;
 import java.util.HashMap;
 
 import fr.free.totalboumboum.configuration.profile.Profile;
@@ -81,6 +83,11 @@ public abstract class StatisticBase
 	{	return points;
 	}
 
+	public void setPoints(float[] points)
+	{	for(int i=0;i<points.length;i++)
+			this.points[i] = points[i];
+	}
+	
 	/**
 	 * sum of the points for all sub-confrontations
 	 * (ie matches for a tournament and rounds for a match. 
@@ -119,16 +126,18 @@ public abstract class StatisticBase
 	{	return startDate;
 	}
 	
-	public void setStartDate(Date startDate)
-	{	this.startDate = startDate;
+	public void initStartDate()
+	{	Calendar cal = new GregorianCalendar();
+		this.startDate = cal.getTime();
 	}
 	
 	public Date getEndDate()
 	{	return endDate;
 	}
 	
-	public void setEndDate(Date endDate)
-	{	this.endDate = endDate;
+	public void initEndDate()
+	{	Calendar cal = new GregorianCalendar();
+		this.endDate = cal.getTime();
 	}
 
 	/////////////////////////////////////////////////////////////////

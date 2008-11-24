@@ -34,8 +34,9 @@ import fr.free.totalboumboum.game.statistics.StatisticHolder;
  */
 public class LimitConfrontation implements TournamentLimit, MatchLimit
 {	
-	public LimitConfrontation(int limit, PointsProcessor pointProcessor)
-	{	this.threshold = limit;	
+	public LimitConfrontation(int threshold, boolean supLimit, PointsProcessor pointProcessor)
+	{	this.threshold = threshold;	
+		this.supLimit = supLimit;
 		this.pointProcessor = pointProcessor;
 	}
 	
@@ -43,6 +44,7 @@ public class LimitConfrontation implements TournamentLimit, MatchLimit
 	// THRESHOLD		/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	private int threshold;
+	private boolean supLimit;
 
 	public int getThreshold()
 	{	return threshold;
@@ -52,12 +54,23 @@ public class LimitConfrontation implements TournamentLimit, MatchLimit
 	{	this.threshold = threshold;
 	}
 
+	public boolean getSupLimit()
+	{	return supLimit;
+	}
+	
+	public void setsupLimit(boolean supLimit)
+	{	this.supLimit = supLimit;
+	}
+
 	@Override
 	public boolean testThreshold(StatisticHolder holder)
 	{	boolean result;
 		StatisticBase stats = holder.getStats();
 		int nbr = stats.getConfrontationCount();
-		result = nbr>=threshold;
+		if(supLimit)
+			result = nbr>=threshold;
+		else
+			result = nbr<=threshold;
 		return result;
 	}
 	

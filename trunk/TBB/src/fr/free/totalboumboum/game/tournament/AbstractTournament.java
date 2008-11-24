@@ -87,6 +87,12 @@ public abstract class AbstractTournament implements StatisticHolder
 	{	return maxPlayerNumber;			
 	}
 
+	@Override
+	public ArrayList<Boolean> getPlayersStatus()
+	{	// useless here
+		return null;
+	}
+
 	/////////////////////////////////////////////////////////////////
 	// NAME			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
@@ -102,7 +108,7 @@ public abstract class AbstractTournament implements StatisticHolder
 	/////////////////////////////////////////////////////////////////
 	// STATISTICS		/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	protected StatisticTournament stats = new StatisticTournament();
+	protected StatisticTournament stats = new StatisticTournament(this);
 
 	public StatisticTournament getStats()
 	{	return stats;

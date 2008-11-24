@@ -29,21 +29,35 @@ import fr.free.totalboumboum.game.statistics.StatisticHolder;
 public class Limits<T extends Limit>
 {
 	ArrayList<T> limits = new ArrayList<T>();
+	private int index;
 	
 	public void addLimit(T limit)
 	{	limits.add(limit);
+		index = -1;
 	}
 	
 	public boolean testLimit(StatisticHolder holder)
 	{	boolean result = false;
-		Iterator<T> i = limits.iterator();
-		while(i.hasNext() && !result)
-		{	T temp = i.next();
+		index = -1;
+		Iterator<T> it = limits.iterator();
+		int i = 0;
+		while(it.hasNext() && !result)
+		{	T temp = it.next();
 			result = temp.testThreshold(holder);
+			if(result)
+				index = i;
+			else
+				i++;
 		}
 		return result;
 	}
 
+	public float[] processPoints(StatisticHolder holder)
+	{	Limit limit = limits.get(index);
+		float[] result = limit.processPoints(holder);
+		return result;
+	}
+	
 	public Iterator<T> iterator()
 	{	return limits.iterator();
 	}

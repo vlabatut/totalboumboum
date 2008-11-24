@@ -39,8 +39,6 @@ import fr.free.totalboumboum.game.limit.Limits;
 import fr.free.totalboumboum.game.limit.RoundLimit;
 import fr.free.totalboumboum.game.match.Match;
 import fr.free.totalboumboum.game.match.MatchLoader;
-import fr.free.totalboumboum.game.points.PointsProcessor;
-import fr.free.totalboumboum.game.points.PointsProcessorLoader;
 import fr.free.totalboumboum.game.round.PlayMode;
 import fr.free.totalboumboum.tools.FileTools;
 import fr.free.totalboumboum.tools.XmlTools;
@@ -91,11 +89,6 @@ public class RoundLoader
 		// gameplay
 		element = root.getChild(XmlTools.ELT_GAMEPLAY);
 		loadGameplayElement(element,result);
-		
-		// points
-		element = root.getChild(XmlTools.ELT_POINTS);
-		PointsProcessor pp = PointsProcessorLoader.loadPointProcessorFromElement(element,folderPath);
-		result.setPointProcessor(pp);
 		
 		// level
 		element = root.getChild(XmlTools.ELT_LEVEL);

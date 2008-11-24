@@ -35,8 +35,6 @@ import org.xml.sax.SAXException;
 import fr.free.totalboumboum.game.limit.LimitLoader;
 import fr.free.totalboumboum.game.limit.Limits;
 import fr.free.totalboumboum.game.limit.MatchLimit;
-import fr.free.totalboumboum.game.points.PointsProcessor;
-import fr.free.totalboumboum.game.points.PointsProcessorLoader;
 import fr.free.totalboumboum.game.round.Round;
 import fr.free.totalboumboum.game.round.RoundLoader;
 import fr.free.totalboumboum.game.tournament.AbstractTournament;
@@ -85,11 +83,6 @@ public class MatchLoader
 		element = root.getChild(XmlTools.ELT_LIMITS);
 		Limits<MatchLimit> limits = loadLimitsElement(element,folderPath);
 		result.setLimits(limits);
-		
-		// points
-		element = root.getChild(XmlTools.ELT_POINTS);
-		PointsProcessor pp = PointsProcessorLoader.loadPointProcessorFromElement(element,folderPath);
-		result.setPointProcessor(pp);
 		
 		// rounds
 		element = root.getChild(XmlTools.ELT_ROUNDS);

@@ -104,14 +104,11 @@ public class GameConfiguration
 			match.setNotes(notes);
 		}
 		{	// limits
+			PointsProcessor pointProcessor = new PointsTotal();
 			Limits<MatchLimit> limits = new Limits<MatchLimit>();
-			MatchLimit limit = new LimitConfrontation(1);
+			MatchLimit limit = new LimitConfrontation(1,true,pointProcessor);
 			limits.addLimit(limit);
 			match.setLimits(limits);
-		}
-		{	// points processor
-			PointsProcessor pointProcessor = new PointsTotal();
-			match.setPointProcessor(pointProcessor);
 		}
 		quickstart.setMatch(match);
 		// round
