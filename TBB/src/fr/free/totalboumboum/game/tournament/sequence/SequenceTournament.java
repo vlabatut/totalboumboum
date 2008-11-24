@@ -38,6 +38,7 @@ import fr.free.totalboumboum.game.limit.Limits;
 import fr.free.totalboumboum.game.limit.TournamentLimit;
 import fr.free.totalboumboum.game.match.Match;
 import fr.free.totalboumboum.game.statistics.StatisticMatch;
+import fr.free.totalboumboum.game.statistics.StatisticTournament;
 import fr.free.totalboumboum.game.tournament.AbstractTournament;
 
 public class SequenceTournament extends AbstractTournament
@@ -75,6 +76,7 @@ public class SequenceTournament extends AbstractTournament
 		// NOTE vérifier si le nombre de joueurs sélectionnés correspond
 		setProfiles(Configuration.getProfilesConfiguration().getSelected());
 		iterator = matches.iterator();
+		stats = new StatisticTournament(this);
 		stats.initStartDate();
 	}
 

@@ -39,7 +39,8 @@ public class LimitLoader
 	public static Limit loadLimitElement(Element root, String folder) throws ParserConfigurationException, SAXException, IOException
 	{	Limit result = null;
 		String type = root.getName();
-		PointsProcessor pointProcessor = PointsProcessorLoader.loadPointProcessorFromElement(root,folder);
+		Element pointProcessorElt = root.getChild(XmlTools.ELT_POINTS);
+		PointsProcessor pointProcessor = PointsProcessorLoader.loadPointProcessorFromElement(pointProcessorElt,folder);
 
 		if(type.equals(XmlTools.ELT_CONFRONTATION))
 			result = loadLimitConfrontationElement(root,pointProcessor);

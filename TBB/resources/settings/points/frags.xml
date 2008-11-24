@@ -6,8 +6,8 @@
 	<notes />
 
 	<subtraction>
-		<scores type="kills"/>
-		<scores type="deaths"/>
+		<scores type="bombings"/>
+		<scores type="bombeds"/>
 	</subtraction>
 	
 </points>
