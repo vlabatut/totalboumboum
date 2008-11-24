@@ -39,8 +39,6 @@ import fr.free.totalboumboum.engine.player.PlayerLocation;
 import fr.free.totalboumboum.game.limit.Limits;
 import fr.free.totalboumboum.game.limit.RoundLimit;
 import fr.free.totalboumboum.game.match.Match;
-import fr.free.totalboumboum.game.points.PlayerPoints;
-import fr.free.totalboumboum.game.points.PointsProcessor;
 import fr.free.totalboumboum.game.statistics.StatisticEvent;
 import fr.free.totalboumboum.game.statistics.StatisticHolder;
 import fr.free.totalboumboum.game.statistics.StatisticRound;
@@ -62,7 +60,8 @@ public class Round implements StatisticHolder
 	}
 	
 	public void init() throws ParserConfigurationException, SAXException, IOException, ClassNotFoundException, IllegalArgumentException, SecurityException, IllegalAccessException, NoSuchFieldException
-	{	stats.initStartDate();
+	{	stats = new StatisticRound(this);
+		stats.initStartDate();
 		remainingPlayers = getProfiles().size();
 		for(int i=0;i<remainingPlayers;i++)
 			playersStatus.add(new Boolean(true));
@@ -119,7 +118,7 @@ public class Round implements StatisticHolder
 	/////////////////////////////////////////////////////////////////
 	// STATISTICS		/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	private StatisticRound stats = new StatisticRound(this);
+	private StatisticRound stats;
 
 	public StatisticRound getStats()
 	{	return stats;
@@ -170,24 +169,15 @@ public class Round implements StatisticHolder
 	{	if(!roundOver)
 		{	remainingPlayers --;
 			playersStatus.set(index,new Boolean(false));
-//TODO à adapter :			
-			if(remainingPlayers<2 /*&& getPlayMode()==PlayMode.SURVIVAL*/)
-				closeGame();		
 		}
 	}
 	public void updateTime(long time)
 	{	if(!roundOver)
 		{	stats.updateTime(time);			
-//			if(getTimeLimit()>0 && time>=getTimeLimit()/getConfiguration().getSpeedCoeff())
 			if(getLimits().testLimit(this))
-			{	// close game
-				roundOver = true;
-				stats.finish(loop.getTotalTime());
-				stats.computePoints(getPointProcessor());
-				celebrate();		
-			}
-			else
-				stats.computePoints(getPointProcessor());
+				closeGame();
+//			else TODO à voir quand on s'occupera d'afficher les points en temps réel dans la GUI
+//				stats.computePoints(getPointProcessor());
 		}
 	}
 	public void closeGame()
@@ -199,18 +189,10 @@ public class Round implements StatisticHolder
 	}
 	private void celebrate()
 	{	loop.initCelebrationDelay();
-		ArrayList<PlayerPoints> winners = stats.getWinners();
-		// indexes of the winners
-		ArrayList<Integer> winnersIndex = new ArrayList<Integer>();
-		{	Iterator<PlayerPoints> i = winners.iterator();
-			while(i.hasNext())
-			{	PlayerPoints pp = i.next();
-				winnersIndex.add(new Integer(pp.getIndex()));
-			}
-		}
+		ArrayList<Integer> winners = stats.getWinners();
 		// celebration time !
 		for(int i=0;i<getProfiles().size();i++)
-		{	if(winnersIndex.contains(new Integer(i)))	
+		{	if(winners.contains(new Integer(i)))	
 				loop.reportVictory(i);
 			else
 				loop.reportDefeat(i);

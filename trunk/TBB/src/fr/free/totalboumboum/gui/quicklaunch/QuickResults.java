@@ -26,8 +26,6 @@ import java.awt.Dimension;
 import java.awt.Font;
 import java.text.NumberFormat;
 import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.TreeSet;
 
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -36,7 +34,6 @@ import javax.swing.SwingConstants;
 
 import fr.free.totalboumboum.configuration.Configuration;
 import fr.free.totalboumboum.configuration.profile.Profile;
-import fr.free.totalboumboum.game.points.PlayerPoints;
 import fr.free.totalboumboum.game.round.Round;
 import fr.free.totalboumboum.game.statistics.Score;
 import fr.free.totalboumboum.game.statistics.StatisticRound;
@@ -49,8 +46,6 @@ public class QuickResults extends JPanel
 {	
 	private static final long serialVersionUID = 1L;
 
-	@SuppressWarnings("unused")
-	private Configuration configuration;
 	private Font headerFont;
 	private Font regularFont;
 	private int columns = 0;
@@ -68,7 +63,7 @@ public class QuickResults extends JPanel
 		Round round = Configuration.getGameConfiguration().getTournament().getCurrentMatch().getCurrentRound();
 		StatisticRound stats = round.getStats();
 		ArrayList<Profile> players = round.getProfiles();
-		TreeSet<PlayerPoints> ranking = stats.getOrderedPlayers();
+		int[] orderedPlayers = stats.getOrderedPlayers();
 		float[] points = stats.getPoints();
 		setAlignmentX(CENTER_ALIGNMENT);
 		setAlignmentY(CENTER_ALIGNMENT);
@@ -136,21 +131,20 @@ public class QuickResults extends JPanel
 			}
 		}
 		// data
-		{	Iterator<PlayerPoints> i = ranking.descendingIterator();
-			int col = 0;
+		{	int col = 0;
 			int line = 0;
-			while(i.hasNext())
+			for(int i=0;i<orderedPlayers.length;i++)
 			{	// init
 				col = 0;
 				line++;
-				PlayerPoints pp = i.next();
-				Profile profile = players.get(pp.getIndex());
+				Profile profile = players.get(orderedPlayers[i]);
 				// color
 				Color clr = profile.getSpriteSelectedColor().getColor();
 				// name
 				{	JLabel nameLabel = getLabel(line, col++);
-					nameLabel.setText(pp.getPlayer());
-					nameLabel.setToolTipText(pp.getPlayer());
+					String playerName = profile.getName();
+					nameLabel.setText(playerName);
+					nameLabel.setToolTipText(playerName);
 					int alpha = GuiTools.ALPHA_TABLE_REGULAR_BACKGROUND_LEVEL3;
 					Color bg = new Color(clr.getRed(),clr.getGreen(),clr.getBlue(),alpha);
 					nameLabel.setBackground(bg);
@@ -166,20 +160,20 @@ public class QuickResults extends JPanel
 					String sc = "";
 					switch(round.getPlayMode())
 					{	case CROWN:
-							sc = nf.format(stats.getScores(Score.CROWNS)[pp.getIndex()]);
+							sc = nf.format(stats.getScores(Score.CROWNS)[orderedPlayers[i]]);
 							break;
 						case PAINT:
-							sc = nf.format(stats.getScores(Score.PAINTINGS)[pp.getIndex()]);
+							sc = nf.format(stats.getScores(Score.PAINTINGS)[orderedPlayers[i]]);
 							break;
 						case SURVIVAL:
-							sc = StringTools.formatTimeWithSeconds(stats.getScores(Score.TIME)[pp.getIndex()]);
+							sc = StringTools.formatTimeWithSeconds(stats.getScores(Score.TIME)[orderedPlayers[i]]);
 							break;
 					}
 					String[] scores = 
-					{	nf.format(stats.getScores(Score.BOMBS)[pp.getIndex()]),
-						nf.format(stats.getScores(Score.ITEMS)[pp.getIndex()]),
-						nf.format(stats.getScores(Score.BOMBEDS)[pp.getIndex()]),
-						nf.format(stats.getScores(Score.BOMBINGS)[pp.getIndex()]),
+					{	nf.format(stats.getScores(Score.BOMBS)[orderedPlayers[i]]),
+						nf.format(stats.getScores(Score.ITEMS)[orderedPlayers[i]]),
+						nf.format(stats.getScores(Score.BOMBEDS)[orderedPlayers[i]]),
+						nf.format(stats.getScores(Score.BOMBINGS)[orderedPlayers[i]]),
 						sc
 					};
 					for(int j=0;j<scores.length;j++)
@@ -192,7 +186,7 @@ public class QuickResults extends JPanel
 				}			
 				// points
 				{	JLabel pointsLabel = getLabel(line, col++);
-					double pts = points[pp.getIndex()];
+					double pts = points[orderedPlayers[i]];
 					NumberFormat nf = NumberFormat.getInstance();
 					nf.setMaximumFractionDigits(2);
 					nf.setMinimumFractionDigits(0);

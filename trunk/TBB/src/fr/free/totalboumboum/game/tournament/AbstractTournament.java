@@ -108,7 +108,7 @@ public abstract class AbstractTournament implements StatisticHolder
 	/////////////////////////////////////////////////////////////////
 	// STATISTICS		/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	protected StatisticTournament stats = new StatisticTournament(this);
+	protected StatisticTournament stats;
 
 	public StatisticTournament getStats()
 	{	return stats;

@@ -5,9 +5,9 @@
 		<xsd:restriction base="xsd:string">
 			<xsd:enumeration value="bombs" />
 			<xsd:enumeration value="crowns" />
-			<xsd:enumeration value="deaths" />
+			<xsd:enumeration value="bombeds" />
 			<xsd:enumeration value="items" />
-			<xsd:enumeration value="kills" />
+			<xsd:enumeration value="bombings" />
 			<xsd:enumeration value="paintings" />
 			<xsd:enumeration value="time" />
 		</xsd:restriction>

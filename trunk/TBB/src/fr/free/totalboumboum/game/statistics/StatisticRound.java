@@ -23,15 +23,7 @@ package fr.free.totalboumboum.game.statistics;
 
 import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.TreeSet;
 
-import fr.free.totalboumboum.configuration.profile.Profile;
-import fr.free.totalboumboum.game.points.PlayerPoints;
-import fr.free.totalboumboum.game.points.PointsProcessor;
-import fr.free.totalboumboum.game.round.PlayMode;
 import fr.free.totalboumboum.game.round.Round;
 
 public class StatisticRound extends StatisticBase implements Serializable
@@ -79,7 +71,7 @@ public class StatisticRound extends StatisticBase implements Serializable
 	}
 
 	public void finalizeTime(long time)
-	{	//updateTime(time+1);
+	{	updateTime(time+1);
 		long[] sc = getScores(Score.TIME);
 		for(int i=0;i<sc.length;i++)
 		{	if(sc[i]<0)
@@ -87,37 +79,48 @@ public class StatisticRound extends StatisticBase implements Serializable
 		}
 	}
 
+	/////////////////////////////////////////////////////////////////
+	// POINTS			/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
 
+	public int[] getRanks()
+	{	int[] result = new int[getPlayers().size()];
+		for(int i=0;i<result.length;i++)
+			result[i] = 1;
 
+		for(int i=0;i<result.length-1;i++)
+		{	for(int j=i+1;j<result.length;j++)
+			{	if(getPoints()[i]<getPoints()[j])
+					result[i] = result[i] + 1;
+				else if(getPoints()[i]>getPoints()[j])
+					result[j] = result[j] + 1;
+			}
+		}	
+
+		return result;
+	}
 	
-	
-	
-
-
-	public TreeSet<PlayerPoints> getOrderedPlayers()
-	{	TreeSet<PlayerPoints> result = new TreeSet<PlayerPoints>();
-		for(int i=0;i<points.length;i++)
-		{	PlayerPoints pp = new PlayerPoints(players.get(i),i);
-			pp.addPoint(points[i]);
-			result.add(pp);
+	public int[] getOrderedPlayers()
+	{	int[] result = new int[getPlayers().size()];
+		int[] ranks = getRanks();
+		int done = 0;
+		for(int i=1;i<=result.length;i++)
+		{	for(int j=0;j<ranks.length;j++)
+			{	if(ranks[j]==i)
+				{	result[done] = j;
+					done++;
+				}
+			}
 		}
 		return result;
 	}
-	public ArrayList<PlayerPoints> getWinners()
-	{	ArrayList<PlayerPoints> result = new ArrayList<PlayerPoints>();
-		TreeSet<PlayerPoints> orderedPlayers = getOrderedPlayers();
-		Iterator<PlayerPoints> i = orderedPlayers.descendingIterator();
-		PlayerPoints first = orderedPlayers.last();
-		boolean goOn = true;
-		while(i.hasNext() && goOn)	
-		{	PlayerPoints temp = i.next();
-			if(temp.equalsPoints(first))
-				result.add(temp);
-			else
-				goOn = false;
-		}
+	
+	public ArrayList<Integer> getWinners()
+	{	ArrayList<Integer> result = new ArrayList<Integer>();
+		int[] ranks = getRanks();
+		for(int i=0;i<ranks.length;i++)
+			if(ranks[i]==1)
+				result.add(i);
 		return result;
 	}
-		
-
 }

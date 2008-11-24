@@ -30,6 +30,7 @@ import org.xml.sax.SAXException;
 import fr.free.totalboumboum.configuration.Configuration;
 import fr.free.totalboumboum.game.match.Match;
 import fr.free.totalboumboum.game.statistics.StatisticMatch;
+import fr.free.totalboumboum.game.statistics.StatisticTournament;
 import fr.free.totalboumboum.game.tournament.AbstractTournament;
 
 public class SingleTournament extends AbstractTournament
@@ -44,6 +45,7 @@ public class SingleTournament extends AbstractTournament
 	{	begun = true;
 		// NOTE vérifier si le nombre de joueurs sélectionnés correspond
 		setProfiles(Configuration.getProfilesConfiguration().getSelected());
+		stats = new StatisticTournament(this);
 		stats.initStartDate();
 	}
 

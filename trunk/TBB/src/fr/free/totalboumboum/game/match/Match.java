@@ -86,6 +86,7 @@ public class Match implements StatisticHolder
 		// rounds
 		iterator = rounds.iterator();
 		// stats
+		stats = new StatisticMatch(this);
 		stats.initStartDate();
 	}
 
@@ -220,7 +221,7 @@ public class Match implements StatisticHolder
 	/////////////////////////////////////////////////////////////////
 	// STATISTICS		/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	private StatisticMatch stats = new StatisticMatch(this);
+	private StatisticMatch stats;
 	
 	public StatisticMatch getStats()
 	{	return stats;
