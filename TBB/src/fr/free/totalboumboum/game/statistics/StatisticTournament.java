@@ -67,9 +67,3 @@ public class StatisticTournament extends StatisticBase implements Serializable
 		return result;
 	}
 }
-
-//TODO à réutiliser
-//Calendar cal = new GregorianCalendar();
-//date = cal.getTime();
-
-

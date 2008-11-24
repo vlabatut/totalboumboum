@@ -21,7 +21,6 @@ package fr.free.totalboumboum.game.limit;
  * 
  */
 
-import java.io.File;
 import java.io.IOException;
 import java.util.Locale;
 
@@ -40,95 +39,94 @@ public class LimitLoader
 	public static Limit loadLimitElement(Element root, String folder) throws ParserConfigurationException, SAXException, IOException
 	{	Limit result = null;
 		String type = root.getName();
+		PointsProcessor pointProcessor = PointsProcessorLoader.loadPointProcessorFromElement(root,folder);
 
 		if(type.equals(XmlTools.ELT_CONFRONTATION))
-			result = loadLimitConfrontationElement(root);
+			result = loadLimitConfrontationElement(root,pointProcessor);
 		
 		else if(type.equals(XmlTools.ELT_POINTS))
-			result = loadLimitPointsElement(root,folder);
+			result = loadLimitPointsElement(root,folder,pointProcessor);
 		
 		else if(type.equals(XmlTools.ELT_SCORE))
-			result = loadLimitScoreElement(root);
+			result = loadLimitScoreElement(root,pointProcessor);
 		
 		else if(type.equals(XmlTools.ELT_TIME))
-			result = loadLimitTimeElement(root);
+			result = loadLimitTimeElement(root,pointProcessor);
 		
 		else if(type.equals(XmlTools.ELT_LAST_STANDING))
-			result = loadLimitLastStandingElement(root);
+			result = loadLimitLastStandingElement(root,pointProcessor);
 		
 		return result;
 	}
 
-	private static LimitConfrontation loadLimitConfrontationElement(Element root)
-	{	// value
-		String str = root.getAttribute(XmlTools.ATT_VALUE).getValue();
-		int value = Integer.parseInt(str);
+	private static LimitConfrontation loadLimitConfrontationElement(Element root, PointsProcessor pointProcessor)
+	{	// threshold
+		Element thresholdElt = root.getChild(XmlTools.ELT_THRESHOLD);
+		String str = thresholdElt.getAttribute(XmlTools.ATT_VALUE).getValue();
+		int threshold = Integer.parseInt(str);
+		// supLimit
+		str = root.getAttribute(XmlTools.ATT_SUP).getValue();
+		boolean supLimit = Boolean.valueOf(str);
 		// result
-		LimitConfrontation result = new LimitConfrontation(value);
+		LimitConfrontation result = new LimitConfrontation(threshold,supLimit,pointProcessor);
 		return result;
 	}
 
-    private static void loadPointsElement(Element root, String folder, LimitPoints result) throws ParserConfigurationException, SAXException, IOException
-	{	PointsProcessor pp;
-		// local
-		String localStr = root.getAttribute(XmlTools.ATT_LOCAL).getValue().trim();
-		boolean local = Boolean.valueOf(localStr);
-		// name
-		String name = root.getAttribute(XmlTools.ATT_NAME).getValue();
-		// loading
-		if(local)
-		{	folder = folder+File.separator+name;
-			pp = PointsProcessorLoader.loadPointProcessorFromFilePath(folder);
-		}
-		else
-			pp = PointsProcessorLoader.loadPointProcessorFromName(name);
-		result.setPointProcessor(pp);
-	}
-	private static LimitPoints loadLimitPointsElement(Element root, String folder) throws ParserConfigurationException, SAXException, IOException
-	{	// value
-		String str = root.getAttribute(XmlTools.ATT_VALUE).getValue();
-		float value = Float.valueOf(str);
-		// result
-		LimitPoints result = new LimitPoints(value);
+	private static LimitPoints loadLimitPointsElement(Element root, String folder, PointsProcessor pointProcessor) throws ParserConfigurationException, SAXException, IOException
+	{	// threshold
+		Element thresholdElt = root.getChild(XmlTools.ELT_THRESHOLD);
+		String str = thresholdElt.getAttribute(XmlTools.ATT_VALUE).getValue();
+		float threshold = Float.parseFloat(str);
+		// supLimit
+		str = root.getAttribute(XmlTools.ATT_SUP).getValue();
+		boolean supLimit = Boolean.valueOf(str);
 		// point processor
-    	Element element = root.getChild(XmlTools.ELT_POINTS);
-		loadPointsElement(element,folder,result);
+    	Element thresholdPointProcessorElt = root.getChild(XmlTools.ELT_SOURCE);
+		PointsProcessor thresholdPointProcessor = PointsProcessorLoader.loadPointProcessorFromElement(thresholdPointProcessorElt,folder);
+		// result
+		LimitPoints result = new LimitPoints(threshold,supLimit,pointProcessor,thresholdPointProcessor);
 		return result;
 	}
 	
-	private static LimitScore loadLimitScoreElement(Element root)
-	{	// value
-		String str = root.getAttribute(XmlTools.ATT_VALUE).getValue();
-		long value = Long.valueOf(str);
+	private static LimitScore loadLimitScoreElement(Element root, PointsProcessor pointProcessor)
+	{	// threshold
+		Element thresholdElt = root.getChild(XmlTools.ELT_THRESHOLD);
+		String str = thresholdElt.getAttribute(XmlTools.ATT_VALUE).getValue();
+		long threshold = Long.parseLong(str);
+		// supLimit
+		str = root.getAttribute(XmlTools.ATT_SUP).getValue();
+		boolean supLimit = Boolean.valueOf(str);
 		// score
 		str = root.getAttribute(XmlTools.ATT_TYPE).getValue();
 		Score score  = Score.valueOf(str.toUpperCase(Locale.ENGLISH).trim());
-		// inf or sup limit ?
+		// result
+		LimitScore result = new LimitScore(threshold,supLimit,score,pointProcessor);
+		return result;
+	}
+
+	private static LimitTime loadLimitTimeElement(Element root, PointsProcessor pointProcessor)
+	{	// threshold
+		Element thresholdElt = root.getChild(XmlTools.ELT_THRESHOLD);
+		String str = thresholdElt.getAttribute(XmlTools.ATT_VALUE).getValue();
+		long threshold = Long.parseLong(str);
+		// supLimit
 		str = root.getAttribute(XmlTools.ATT_SUP).getValue();
 		boolean supLimit = Boolean.valueOf(str);
-		// winner ?
-		str = root.getAttribute(XmlTools.ATT_WIN).getValue();
-		boolean win = Boolean.valueOf(str);
 		// result
-		LimitScore result = new LimitScore(value,score,supLimit,win);
+		LimitTime result = new LimitTime(threshold,supLimit,pointProcessor);
 		return result;
 	}
 
-	private static LimitTime loadLimitTimeElement(Element root)
-	{	// value
-		String str = root.getAttribute(XmlTools.ATT_VALUE).getValue();
-		long value = Long.valueOf(str);
+	private static LimitLastStanding loadLimitLastStandingElement(Element root, PointsProcessor pointProcessor)
+	{	// threshold
+		Element thresholdElt = root.getChild(XmlTools.ELT_THRESHOLD);
+		String str = thresholdElt.getAttribute(XmlTools.ATT_VALUE).getValue();
+		int threshold = Integer.parseInt(str);
+		// supLimit
+		str = root.getAttribute(XmlTools.ATT_SUP).getValue();
+		boolean supLimit = false/*Boolean.valueOf(str)*/;
 		// result
-		LimitTime result = new LimitTime(value);
-		return result;
-	}
-
-	private static LimitLastStanding loadLimitLastStandingElement(Element root)
-	{	// value
-		String str = root.getAttribute(XmlTools.ATT_VALUE).getValue();
-		int value = Integer.valueOf(str);
-		// result
-		LimitLastStanding result = new LimitLastStanding(value);
+		LimitLastStanding result = new LimitLastStanding(threshold,supLimit,pointProcessor);
 		return result;
 	}
 }

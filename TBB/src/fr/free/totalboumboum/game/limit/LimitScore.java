@@ -35,8 +35,8 @@ import fr.free.totalboumboum.game.statistics.StatisticHolder;
  */
 public class LimitScore implements TournamentLimit, MatchLimit, RoundLimit
 {
-	public LimitScore(long limit, Score score, boolean supLimit, PointsProcessor pointProcessor)
-	{	this.threshold = limit;
+	public LimitScore(long threshold, boolean supLimit, Score score, PointsProcessor pointProcessor)
+	{	this.threshold = threshold;
 		this.score = score;
 		this.supLimit = supLimit;
 		this.pointProcessor = pointProcessor;
@@ -55,7 +55,6 @@ public class LimitScore implements TournamentLimit, MatchLimit, RoundLimit
 	// THRESHOLD		/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	private long threshold;
-	// is the limit a superior limit (or an inferior)
 	private boolean supLimit;
 	
 	public long getThreshold()
@@ -66,6 +65,10 @@ public class LimitScore implements TournamentLimit, MatchLimit, RoundLimit
 	{	this.threshold = threshold;
 	}
 
+	public boolean getSupLimit()
+	{	return supLimit;
+	}
+	
 	public void setsupLimit(boolean supLimit)
 	{	this.supLimit = supLimit;
 	}

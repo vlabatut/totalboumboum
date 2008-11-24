@@ -29,8 +29,6 @@ import org.xml.sax.SAXException;
 
 import fr.free.totalboumboum.configuration.Configuration;
 import fr.free.totalboumboum.game.match.Match;
-import fr.free.totalboumboum.game.points.PointsProcessor;
-import fr.free.totalboumboum.game.points.PointsTotal;
 import fr.free.totalboumboum.game.statistics.StatisticMatch;
 import fr.free.totalboumboum.game.tournament.AbstractTournament;
 
@@ -44,10 +42,9 @@ public class SingleTournament extends AbstractTournament
 	@Override
 	public void init() throws IllegalArgumentException, SecurityException, ParserConfigurationException, SAXException, IOException, IllegalAccessException, NoSuchFieldException, ClassNotFoundException
 	{	begun = true;
-		pointProcessor = new PointsTotal();
 		// NOTE vérifier si le nombre de joueurs sélectionnés correspond
 		setProfiles(Configuration.getProfilesConfiguration().getSelected());
-		stats.init(this);
+		stats.initStartDate();
 	}
 
 	@Override
@@ -92,10 +89,13 @@ public class SingleTournament extends AbstractTournament
 	{	// stats
 		StatisticMatch statsMatch = match.getStats();
 		stats.addStatisticMatch(statsMatch);
-		stats.computePoints(pointProcessor);
+		float[] points = stats.getTotal();
+		stats.setPoints(points);
 		tournamentOver = true;
 		if(panel!=null)
-			panel.tournamentOver();
+		{	panel.tournamentOver();
+			stats.initEndDate();		
+		}
 //NOTE ou bien : panel.matchOver();		
 	}
 	
@@ -108,14 +108,5 @@ public class SingleTournament extends AbstractTournament
 	{	
 		// TODO charger partiellement tous les matches 
 		// pour déterminer le nombre de joueurs nécessaire
-	}
-
-	/////////////////////////////////////////////////////////////////
-	// POINTS			/////////////////////////////////////////////
-	/////////////////////////////////////////////////////////////////
-	private PointsProcessor pointProcessor;
-
-	public PointsProcessor getPointProcessor()
-	{	return pointProcessor;
 	}
 }

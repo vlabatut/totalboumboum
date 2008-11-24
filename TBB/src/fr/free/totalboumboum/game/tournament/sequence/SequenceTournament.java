@@ -37,7 +37,6 @@ import fr.free.totalboumboum.configuration.Configuration;
 import fr.free.totalboumboum.game.limit.Limits;
 import fr.free.totalboumboum.game.limit.TournamentLimit;
 import fr.free.totalboumboum.game.match.Match;
-import fr.free.totalboumboum.game.points.PointsProcessor;
 import fr.free.totalboumboum.game.statistics.StatisticMatch;
 import fr.free.totalboumboum.game.tournament.AbstractTournament;
 
@@ -76,7 +75,7 @@ public class SequenceTournament extends AbstractTournament
 		// NOTE vérifier si le nombre de joueurs sélectionnés correspond
 		setProfiles(Configuration.getProfilesConfiguration().getSelected());
 		iterator = matches.iterator();
-		stats.init(this);
+		stats.initStartDate();
 	}
 
 	@Override
@@ -141,17 +140,16 @@ public class SequenceTournament extends AbstractTournament
 	{	// stats
 		StatisticMatch statsMatch = currentMatch.getStats();
 		stats.addStatisticMatch(statsMatch);
-		stats.computePoints(pointProcessor);
+		float[] points = limits.processPoints(this);
+		stats.setPoints(points);
 		// iterator
 		if(!iterator.hasNext())
 			iterator = matches.iterator();
 		// limits
-		int limit = limits.testLimits(stats);
-		if(limit>=0)
-		{	if(limit>=0 && limit<profiles.size())
-				stats.setWinner(limit);
-			tournamentOver = true;
+		if(getLimits().testLimit(this))
+		{	tournamentOver = true;
 			panel.tournamentOver();
+			stats.initEndDate();
 		}
 		else
 		{	panel.matchOver();		
@@ -168,17 +166,4 @@ public class SequenceTournament extends AbstractTournament
 		// TODO charger partiellement tous les matches 
 		// pour déterminer le nombre de joueurs nécessaire
 	}
-
-	/////////////////////////////////////////////////////////////////
-	// POINTS			/////////////////////////////////////////////
-	/////////////////////////////////////////////////////////////////
-	private PointsProcessor pointProcessor;
-
-	public void setPointProcessor(PointsProcessor pointProcessor)
-	{	this.pointProcessor = pointProcessor;
-	}
-	public PointsProcessor getPointProcessor()
-	{	return pointProcessor;
-	}
-
 }

@@ -39,7 +39,6 @@ import fr.free.totalboumboum.configuration.GameConstants;
 import fr.free.totalboumboum.configuration.profile.Profile;
 import fr.free.totalboumboum.game.limit.Limits;
 import fr.free.totalboumboum.game.limit.MatchLimit;
-import fr.free.totalboumboum.game.points.PointsProcessor;
 import fr.free.totalboumboum.game.round.Round;
 import fr.free.totalboumboum.game.statistics.StatisticHolder;
 import fr.free.totalboumboum.game.statistics.StatisticMatch;
@@ -87,7 +86,7 @@ public class Match implements StatisticHolder
 		// rounds
 		iterator = rounds.iterator();
 		// stats
-		stats.init(this);
+		stats.initStartDate();
 	}
 
 	public void progress() throws IllegalArgumentException, SecurityException, ParserConfigurationException, SAXException, IOException, ClassNotFoundException, IllegalAccessException, NoSuchFieldException
@@ -160,6 +159,12 @@ public class Match implements StatisticHolder
 		return result;			
 	}
 	
+	@Override
+	public ArrayList<Boolean> getPlayersStatus()
+	{	// useless here
+		return null;
+	}
+	
 	/////////////////////////////////////////////////////////////////
 	// ROUNDS			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
@@ -173,19 +178,19 @@ public class Match implements StatisticHolder
 	{	// stats
 		StatisticRound statsRound = currentRound.getStats();
 		stats.addStatisticRound(statsRound);
-		stats.computePoints(pointProcessor);
+		float[] points = limits.processPoints(this);
+		stats.setPoints(points);
 		// iterator
 		if(!iterator.hasNext())
 			iterator = rounds.iterator();
 		// limits
-		int limit = limits.testLimits(stats);
-		if(limit>=0)
-		{	if(limit>=0 && limit<profiles.size())
-				stats.setWinner(limit);
-			matchOver = true;
+		if(getLimits().testLimit(this))
+		{	matchOver = true;
 			tournament.matchOver();
 			if(panel!=null)
-				panel.matchOver();
+			{	panel.matchOver();
+				stats.initEndDate();
+			}
 		}
 		else
 		{	//tournament.roundOver();
@@ -204,7 +209,6 @@ public class Match implements StatisticHolder
 		limits = null;
 		// misc
 		panel = null;
-		pointProcessor = null;
 		profiles.clear();
 		stats = null;
 		tournament = null;
@@ -214,21 +218,9 @@ public class Match implements StatisticHolder
 	}
 	
 	/////////////////////////////////////////////////////////////////
-	// POINTS			/////////////////////////////////////////////
-	/////////////////////////////////////////////////////////////////
-	private PointsProcessor pointProcessor;
-
-	public void setPointProcessor(PointsProcessor pointProcessor)
-	{	this.pointProcessor = pointProcessor;
-	}
-	public PointsProcessor getPointProcessor()
-	{	return pointProcessor;
-	}
-
-	/////////////////////////////////////////////////////////////////
 	// STATISTICS		/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	private StatisticMatch stats = new StatisticMatch();
+	private StatisticMatch stats = new StatisticMatch(this);
 	
 	public StatisticMatch getStats()
 	{	return stats;
@@ -285,7 +277,6 @@ public class Match implements StatisticHolder
 		// misc
 		result.setNotes(notes);
 		result.setLimits(limits);
-		result.pointProcessor = pointProcessor;
 		return result;
 	}
 }

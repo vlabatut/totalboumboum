@@ -36,8 +36,6 @@ import fr.free.totalboumboum.game.limit.Limits;
 import fr.free.totalboumboum.game.limit.TournamentLimit;
 import fr.free.totalboumboum.game.match.Match;
 import fr.free.totalboumboum.game.match.MatchLoader;
-import fr.free.totalboumboum.game.points.PointsProcessor;
-import fr.free.totalboumboum.game.points.PointsProcessorLoader;
 import fr.free.totalboumboum.tools.XmlTools;
 
 public class SequenceTournamentLoader
@@ -45,14 +43,12 @@ public class SequenceTournamentLoader
 	public static SequenceTournament loadTournamentElement(String folder, Element root) throws ParserConfigurationException, SAXException, IOException, ClassNotFoundException
 	{	SequenceTournament result = new SequenceTournament();
 		Element element;
+		
 		// limits
 		element = root.getChild(XmlTools.ELT_LIMITS);
 		Limits<TournamentLimit> limits = loadLimitsElement(element,folder);
 		result.setLimits(limits);
-		// points
-		element = root.getChild(XmlTools.ELT_POINTS);
-		PointsProcessor pp = PointsProcessorLoader.loadPointProcessorFromElement(element,folder);
-		result.setPointProcessor(pp);
+		
 		// matches
 		element = root.getChild(XmlTools.ELT_MATCHES);
 		loadMatchesElement(element,folder,result);

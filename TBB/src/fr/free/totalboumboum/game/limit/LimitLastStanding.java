@@ -33,10 +33,11 @@ import fr.free.totalboumboum.game.statistics.StatisticHolder;
  * @author Vincent
  *
  */
-public class LimitLastStanding implements TournamentLimit, MatchLimit, RoundLimit
+public class LimitLastStanding implements RoundLimit
 {	
-	public LimitLastStanding(int limit, PointsProcessor pointProcessor)
-	{	this.threshold = limit;	
+	public LimitLastStanding(int threshold, boolean supLimit, PointsProcessor pointProcessor)
+	{	this.threshold = threshold;
+		this.supLimit = supLimit;
 		this.pointProcessor = pointProcessor;
 	}
 	
@@ -44,6 +45,7 @@ public class LimitLastStanding implements TournamentLimit, MatchLimit, RoundLimi
 	// THRESHOLD		/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	private int threshold;
+	private boolean supLimit;
 	
 	public int getThreshold()
 	{	return threshold;
@@ -51,6 +53,14 @@ public class LimitLastStanding implements TournamentLimit, MatchLimit, RoundLimi
 
 	public void setThreshold(int threshold)
 	{	this.threshold = threshold;
+	}
+
+	public boolean getSupLimit()
+	{	return supLimit;
+	}
+	
+	public void setsupLimit(boolean supLimit)
+	{	this.supLimit = supLimit;
 	}
 
 	@Override

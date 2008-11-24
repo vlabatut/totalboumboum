@@ -38,14 +38,16 @@ import fr.free.totalboumboum.game.statistics.StatisticHolder;
  */
 public class LimitTime implements TournamentLimit, MatchLimit, RoundLimit
 {
-	public LimitTime(long limit, PointsProcessor pointProcessor)
-	{	this.threshold = limit;	
+	public LimitTime(long threshold, boolean supLimit, PointsProcessor pointProcessor)
+	{	this.threshold = threshold;	
+		this.supLimit = supLimit;
 		this.pointProcessor = pointProcessor;
 	}
 	
 	/////////////////////////////////////////////////////////////////
 	// THRESHOLD		/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
+	private boolean supLimit;
 	private long threshold;
 
 	public long getThreshold()
@@ -56,11 +58,22 @@ public class LimitTime implements TournamentLimit, MatchLimit, RoundLimit
 	{	this.threshold = threshold;
 	}
 
+	public boolean getSupLimit()
+	{	return supLimit;
+	}
+	
+	public void setsupLimit(boolean supLimit)
+	{	this.supLimit = supLimit;
+	}
+
 	@Override
 	public boolean testThreshold(StatisticHolder holder)
 	{	boolean result;
 		StatisticBase stats = holder.getStats();
-		result = stats.getTotalTime()>=threshold; 
+		if(supLimit)
+			result = stats.getTotalTime()>=threshold;
+		else
+			result = stats.getTotalTime()<=threshold;
 		return result;
 	}
 

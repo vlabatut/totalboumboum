@@ -33,8 +33,9 @@ import fr.free.totalboumboum.game.statistics.StatisticHolder;
  */
 public class LimitPoints implements TournamentLimit, MatchLimit, RoundLimit
 {
-	public LimitPoints(float limit, PointsProcessor pointProcessor, PointsProcessor thresholdPointProcessor)
-	{	this.threshold = limit;
+	public LimitPoints(float threshold, boolean supLimit, PointsProcessor pointProcessor, PointsProcessor thresholdPointProcessor)
+	{	this.threshold = threshold;
+		this.supLimit = supLimit;
 		this.thresholdPointProcessor = thresholdPointProcessor;
 		this.pointProcessor = pointProcessor;
 	}
@@ -55,6 +56,7 @@ public class LimitPoints implements TournamentLimit, MatchLimit, RoundLimit
 	// THRESHOLD		/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	private float threshold;
+	private boolean supLimit;
 
 	public float getThreshold()
 	{	return threshold;
@@ -64,14 +66,30 @@ public class LimitPoints implements TournamentLimit, MatchLimit, RoundLimit
 	{	this.threshold = threshold;
 	}
 
+	public boolean getSupLimit()
+	{	return supLimit;
+	}
+	
+	public void setsupLimit(boolean supLimit)
+	{	this.supLimit = supLimit;
+	}
+
 	@Override
 	public boolean testThreshold(StatisticHolder holder)
 	{	boolean result = false;
 		float points[] = pointProcessor.process(holder);
 		int i=0;
-		while(i<points.length && !result)
-		{	result = points[i]>=threshold;
-			i++;
+		if(supLimit)
+		{	while(i<points.length && !result)
+			{	result = points[i]>=threshold;
+				i++;
+			}
+		}
+		else
+		{	while(i<points.length && !result)
+			{	result = points[i]<=threshold;
+				i++;
+			}
 		}
 		return result;
 	}

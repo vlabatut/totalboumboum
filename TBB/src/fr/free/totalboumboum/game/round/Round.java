@@ -62,7 +62,7 @@ public class Round implements StatisticHolder
 	}
 	
 	public void init() throws ParserConfigurationException, SAXException, IOException, ClassNotFoundException, IllegalArgumentException, SecurityException, IllegalAccessException, NoSuchFieldException
-	{	stats.init(this);
+	{	stats.initStartDate();
 		remainingPlayers = getProfiles().size();
 		for(int i=0;i<remainingPlayers;i++)
 			playersStatus.add(new Boolean(true));
@@ -111,13 +111,15 @@ public class Round implements StatisticHolder
 	public void loopOver()
 	{	match.roundOver();
 		if(panel!=null)
-			panel.roundOver();
+		{	panel.roundOver();
+			stats.initEndDate();
+		}
 	}
 	
 	/////////////////////////////////////////////////////////////////
 	// STATISTICS		/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	private StatisticRound stats = new StatisticRound();
+	private StatisticRound stats = new StatisticRound(this);
 
 	public StatisticRound getStats()
 	{	return stats;
@@ -177,14 +179,11 @@ public class Round implements StatisticHolder
 	{	if(!roundOver)
 		{	stats.updateTime(time);			
 //			if(getTimeLimit()>0 && time>=getTimeLimit()/getConfiguration().getSpeedCoeff())
-			int limit = getLimits().testLimits(stats);
-			if(limit>=0)
+			if(getLimits().testLimit(this))
 			{	// close game
 				roundOver = true;
 				stats.finish(loop.getTotalTime());
 				stats.computePoints(getPointProcessor());
-				if(limit>=0 && limit<getProfiles().size())
-					stats.setWinner(limit);
 				celebrate();		
 			}
 			else
@@ -193,8 +192,9 @@ public class Round implements StatisticHolder
 	}
 	public void closeGame()
 	{	roundOver = true;
-		stats.finish(loop.getTotalTime());
-		stats.computePoints(getPointProcessor());
+		stats.finalizeTime(loop.getTotalTime());
+		float[] points = limits.processPoints(this);
+		stats.setPoints(points);
 		celebrate();		
 	}
 	private void celebrate()
@@ -249,18 +249,6 @@ public class Round implements StatisticHolder
 	}
 
 	/////////////////////////////////////////////////////////////////
-	// POINTS			/////////////////////////////////////////////
-	/////////////////////////////////////////////////////////////////
-	private PointsProcessor pointProcessor;
-
-	public void setPointProcessor(PointsProcessor pointProcessor)
-	{	this.pointProcessor = pointProcessor;
-	}
-	public PointsProcessor getPointProcessor()
-	{	return pointProcessor;
-	}
-
-	/////////////////////////////////////////////////////////////////
 	// LIMIT			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	private Limits<RoundLimit> limits;
@@ -303,7 +291,6 @@ public class Round implements StatisticHolder
 		result.setNotes(notes);
 		result.setLimits(limits);
 		result.setPlayMode(playMode);
-		result.pointProcessor = pointProcessor;
 		result.setHollowLevel(hollowLevel.copy());
 		return result;
 	}
