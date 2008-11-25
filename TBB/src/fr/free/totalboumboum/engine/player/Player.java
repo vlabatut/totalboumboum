@@ -106,6 +106,9 @@ public class Player
 			ai.update();
 	}
 	
+	public String getFileName()
+	{	return profile.getFileName();
+	}
 	public String getName()
 	{	return profile.getName();
 	}
