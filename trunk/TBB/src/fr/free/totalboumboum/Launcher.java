@@ -753,15 +753,10 @@ public class Launcher
 	 *  	- choix des joueurs
 	 *  	- choix des NIVEAUX + ordre aléatoire ou pas
 	 *  	- choix des limites pour match et rounds
+	 *  - choix limité de limite, voire configuration simplifiée :
+	 *  	- temps limite
+	 *  	- ? s'inspirer des BM existants
 	 */
 	
-	
-	/**
-	 * LIMITES : 
-	 * faut reformater lastStanding. pistes :
-	 * 	- player count, mettre une limite qui est forcément basse
-	 * 	- option strict : la limite ne déclenche que si c'est exactement le nombre de joueurs prévu.
-	 * 		et sinon il faudrait définir une autre limite (style 1 et 0) avec des scores différents
-	 * 
-	 */
+	//TODO ROUND : esc doit déclencher la première limite trouvée, penser à calculer les points
 }

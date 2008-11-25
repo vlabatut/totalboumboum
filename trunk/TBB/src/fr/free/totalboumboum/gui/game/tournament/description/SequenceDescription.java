@@ -85,8 +85,9 @@ public class SequenceDescription extends TournamentDescription
 				int downHeight = dataHeight - upHeight - margin;
 				
 				// points panel
-				{	SubPanel pointsPanel = RoundDescription.makePointsPanel(rightWidth,downHeight,tournament.getPointProcessor(),"Tournament");
-					rightPanel.add(pointsPanel);
+				{	
+//					SubPanel pointsPanel = RoundDescription.makePointsPanel(rightWidth,downHeight,tournament.getPointProcessor(),"Tournament");
+//					rightPanel.add(pointsPanel);
 				}
 
 				rightPanel.add(Box.createVerticalGlue());

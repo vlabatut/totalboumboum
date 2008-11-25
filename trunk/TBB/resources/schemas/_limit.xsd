@@ -3,13 +3,23 @@
 <xsd:include schemaLocation="_score.xsd"/>
 
 <!-- COMMON -->
+	<xsd:simpleType name="tComparatorCode">
+		<xsd:restriction base="xsd:string">
+			<xsd:enumeration value="equal" />
+			<xsd:enumeration value="greater" />
+			<xsd:enumeration value="greatereq" />
+			<xsd:enumeration value="less" />
+			<xsd:enumeration value="lesseq" />
+		</xsd:restriction>
+	</xsd:simpleType>
+
 	<xsd:complexType name="tPointProcessor">
 		<xsd:attribute name="name" type="xsd:string" use="required" />
 		<xsd:attribute name="local" type="xsd:boolean" use="optional" default="false" />
 	</xsd:complexType>
 
 	<xsd:complexType name="tThreshold">
-		<xsd:attribute name="sup" type="xsd:boolean" use="optional"  default="true" />
+		<xsd:attribute name="comparator" type="tComparatorCode" use="optional"  default="greatereq" />
 	</xsd:complexType>
 
 	<xsd:complexType name="tIntegerThreshold">

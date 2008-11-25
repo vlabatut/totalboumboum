@@ -35,9 +35,9 @@ import fr.free.totalboumboum.game.statistics.StatisticHolder;
  */
 public class LimitLastStanding implements RoundLimit
 {	
-	public LimitLastStanding(int threshold, boolean supLimit, PointsProcessor pointProcessor)
+	public LimitLastStanding(int threshold, ComparatorCode comparatorCode, PointsProcessor pointProcessor)
 	{	this.threshold = threshold;
-		this.supLimit = supLimit;
+		this.comparatorCode = comparatorCode;
 		this.pointProcessor = pointProcessor;
 	}
 	
@@ -45,7 +45,7 @@ public class LimitLastStanding implements RoundLimit
 	// THRESHOLD		/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	private int threshold;
-	private boolean supLimit;
+	private ComparatorCode comparatorCode;
 	
 	public int getThreshold()
 	{	return threshold;
@@ -55,24 +55,40 @@ public class LimitLastStanding implements RoundLimit
 	{	this.threshold = threshold;
 	}
 
-	public boolean getSupLimit()
-	{	return supLimit;
+	public ComparatorCode getSupLimit()
+	{	return comparatorCode;
 	}
 	
-	public void setsupLimit(boolean supLimit)
-	{	this.supLimit = supLimit;
+	public void setsupLimit(ComparatorCode comparatorCode)
+	{	this.comparatorCode = comparatorCode;
 	}
 
 	@Override
 	public boolean testThreshold(StatisticHolder holder)
-	{	boolean result;
+	{	boolean result = false;
 		ArrayList<Boolean> playersStatus = holder.getPlayersStatus();
 		int count = 0;
 		for(boolean b: playersStatus)
 		{	if(b)
 				count++;
 		}
-		result = count<=threshold;
+		switch(comparatorCode)
+		{	case EQUAL:
+				result = count==threshold;
+				break;
+			case GREATER:
+				result = count>threshold;
+				break;
+			case GREATEREQ:
+				result = count>=threshold;
+				break;
+			case LESS:
+				result = count<threshold;
+				break;
+			case LESSEQ:
+				result = count<=threshold;
+				break;
+		}
 		return result;
 	}
 

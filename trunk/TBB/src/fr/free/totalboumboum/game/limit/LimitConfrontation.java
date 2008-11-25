@@ -34,9 +34,9 @@ import fr.free.totalboumboum.game.statistics.StatisticHolder;
  */
 public class LimitConfrontation implements TournamentLimit, MatchLimit
 {	
-	public LimitConfrontation(int threshold, boolean supLimit, PointsProcessor pointProcessor)
+	public LimitConfrontation(int threshold, ComparatorCode comparatorCode, PointsProcessor pointProcessor)
 	{	this.threshold = threshold;	
-		this.supLimit = supLimit;
+		this.comparatorCode = comparatorCode;
 		this.pointProcessor = pointProcessor;
 	}
 	
@@ -44,7 +44,7 @@ public class LimitConfrontation implements TournamentLimit, MatchLimit
 	// THRESHOLD		/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	private int threshold;
-	private boolean supLimit;
+	private ComparatorCode comparatorCode;
 
 	public int getThreshold()
 	{	return threshold;
@@ -54,23 +54,36 @@ public class LimitConfrontation implements TournamentLimit, MatchLimit
 	{	this.threshold = threshold;
 	}
 
-	public boolean getSupLimit()
-	{	return supLimit;
+	public ComparatorCode getSupLimit()
+	{	return comparatorCode;
 	}
 	
-	public void setsupLimit(boolean supLimit)
-	{	this.supLimit = supLimit;
+	public void setsupLimit(ComparatorCode comparatorCode)
+	{	this.comparatorCode = comparatorCode;
 	}
 
 	@Override
 	public boolean testThreshold(StatisticHolder holder)
-	{	boolean result;
+	{	boolean result = false;
 		StatisticBase stats = holder.getStats();
 		int nbr = stats.getConfrontationCount();
-		if(supLimit)
-			result = nbr>=threshold;
-		else
-			result = nbr<=threshold;
+		switch(comparatorCode)
+		{	case EQUAL:
+				result = nbr==threshold;
+				break;
+			case GREATER:
+				result = nbr>threshold;
+				break;
+			case GREATEREQ:
+				result = nbr>=threshold;
+				break;
+			case LESS:
+				result = nbr<threshold;
+				break;
+			case LESSEQ:
+				result = nbr<=threshold;
+				break;
+		}
 		return result;
 	}
 	

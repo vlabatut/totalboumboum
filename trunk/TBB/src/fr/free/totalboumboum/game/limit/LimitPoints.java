@@ -33,9 +33,9 @@ import fr.free.totalboumboum.game.statistics.StatisticHolder;
  */
 public class LimitPoints implements TournamentLimit, MatchLimit, RoundLimit
 {
-	public LimitPoints(float threshold, boolean supLimit, PointsProcessor pointProcessor, PointsProcessor thresholdPointProcessor)
+	public LimitPoints(float threshold, ComparatorCode comparatorCode, PointsProcessor pointProcessor, PointsProcessor thresholdPointProcessor)
 	{	this.threshold = threshold;
-		this.supLimit = supLimit;
+		this.comparatorCode = comparatorCode;
 		this.thresholdPointProcessor = thresholdPointProcessor;
 		this.pointProcessor = pointProcessor;
 	}
@@ -56,7 +56,7 @@ public class LimitPoints implements TournamentLimit, MatchLimit, RoundLimit
 	// THRESHOLD		/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	private float threshold;
-	private boolean supLimit;
+	private ComparatorCode comparatorCode;
 
 	public float getThreshold()
 	{	return threshold;
@@ -66,12 +66,12 @@ public class LimitPoints implements TournamentLimit, MatchLimit, RoundLimit
 	{	this.threshold = threshold;
 	}
 
-	public boolean getSupLimit()
-	{	return supLimit;
+	public ComparatorCode getSupLimit()
+	{	return comparatorCode;
 	}
 	
-	public void setsupLimit(boolean supLimit)
-	{	this.supLimit = supLimit;
+	public void setsupLimit(ComparatorCode comparatorCode)
+	{	this.comparatorCode = comparatorCode;
 	}
 
 	@Override
@@ -79,17 +79,37 @@ public class LimitPoints implements TournamentLimit, MatchLimit, RoundLimit
 	{	boolean result = false;
 		float points[] = pointProcessor.process(holder);
 		int i=0;
-		if(supLimit)
-		{	while(i<points.length && !result)
-			{	result = points[i]>=threshold;
-				i++;
-			}
-		}
-		else
-		{	while(i<points.length && !result)
-			{	result = points[i]<=threshold;
-				i++;
-			}
+		switch(comparatorCode)
+		{	case EQUAL:
+				while(i<points.length && !result)
+				{	result = points[i]==threshold;
+					i++;
+				}
+				break;
+			case GREATER:
+				while(i<points.length && !result)
+				{	result = points[i]>threshold;
+					i++;
+				}
+				break;
+			case GREATEREQ:
+				while(i<points.length && !result)
+				{	result = points[i]>=threshold;
+					i++;
+				}
+				break;
+			case LESS:
+				while(i<points.length && !result)
+				{	result = points[i]<threshold;
+					i++;
+				}
+				break;
+			case LESSEQ:
+				while(i<points.length && !result)
+				{	result = points[i]<=threshold;
+					i++;
+				}
+				break;
 		}
 		return result;
 	}
