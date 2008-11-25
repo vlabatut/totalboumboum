@@ -92,8 +92,9 @@ public class MatchDescription extends EntitledDataPanel implements MouseListener
 				int downHeight = dataHeight - upHeight - margin;
 				
 				// points panel
-				{	SubPanel pointsPanel = RoundDescription.makePointsPanel(rightWidth,downHeight,match.getPointProcessor(),"Match");
-					rightPanel.add(pointsPanel);
+				{	
+//					SubPanel pointsPanel = RoundDescription.makePointsPanel(rightWidth,downHeight,match.getPointProcessor(),"Match");
+//					rightPanel.add(pointsPanel);
 				}
 
 				rightPanel.add(Box.createVerticalGlue());

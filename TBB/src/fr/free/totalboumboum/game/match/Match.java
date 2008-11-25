@@ -167,6 +167,47 @@ public class Match implements StatisticHolder
 	}
 	
 	/////////////////////////////////////////////////////////////////
+	// RESULTS			/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+
+	public int[] getRanks(float[] pts)
+	{	int[] result = new int[getProfiles().size()];
+		for(int i=0;i<result.length;i++)
+			result[i] = 1;
+
+		for(int i=0;i<result.length-1;i++)
+		{	for(int j=i+1;j<result.length;j++)
+			{	if(pts[i]<pts[j])
+					result[i] = result[i] + 1;
+				else if(pts[i]>pts[j])
+					result[j] = result[j] + 1;
+			}
+		}	
+
+		return result;
+	}
+	
+	public int[] getOrderedPlayers()
+	{	float[] pts;
+		if(isOver())
+			pts = stats.getPoints();
+		else
+			pts = stats.getTotal();
+		int[] result = new int[getProfiles().size()];
+		int[] ranks = getRanks(pts);
+		int done = 0;
+		for(int i=1;i<=result.length;i++)
+		{	for(int j=0;j<ranks.length;j++)
+			{	if(ranks[j]==i)
+				{	result[done] = j;
+					done++;
+				}
+			}
+		}
+		return result;
+	}
+
+	/////////////////////////////////////////////////////////////////
 	// ROUNDS			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	private Round currentRound;

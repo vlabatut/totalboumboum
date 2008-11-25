@@ -38,17 +38,17 @@ import fr.free.totalboumboum.game.statistics.StatisticHolder;
  */
 public class LimitTime implements TournamentLimit, MatchLimit, RoundLimit
 {
-	public LimitTime(long threshold, boolean supLimit, PointsProcessor pointProcessor)
+	public LimitTime(long threshold, ComparatorCode comparatorCode, PointsProcessor pointProcessor)
 	{	this.threshold = threshold;	
-		this.supLimit = supLimit;
+		this.comparatorCode = comparatorCode;
 		this.pointProcessor = pointProcessor;
 	}
 	
 	/////////////////////////////////////////////////////////////////
 	// THRESHOLD		/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	private boolean supLimit;
 	private long threshold;
+	private ComparatorCode comparatorCode;
 
 	public long getThreshold()
 	{	return threshold;
@@ -58,22 +58,35 @@ public class LimitTime implements TournamentLimit, MatchLimit, RoundLimit
 	{	this.threshold = threshold;
 	}
 
-	public boolean getSupLimit()
-	{	return supLimit;
+	public ComparatorCode getSupLimit()
+	{	return comparatorCode;
 	}
 	
-	public void setsupLimit(boolean supLimit)
-	{	this.supLimit = supLimit;
+	public void setsupLimit(ComparatorCode comparatorCode)
+	{	this.comparatorCode = comparatorCode;
 	}
 
 	@Override
 	public boolean testThreshold(StatisticHolder holder)
-	{	boolean result;
+	{	boolean result = false;
 		StatisticBase stats = holder.getStats();
-		if(supLimit)
-			result = stats.getTotalTime()>=threshold;
-		else
-			result = stats.getTotalTime()<=threshold;
+		switch(comparatorCode)
+		{	case EQUAL:
+			result = stats.getTotalTime()==threshold;
+				break;
+			case GREATER:
+				result = stats.getTotalTime()>threshold;
+				break;
+			case GREATEREQ:
+				result = stats.getTotalTime()>=threshold;
+				break;
+			case LESS:
+				result = stats.getTotalTime()<threshold;
+				break;
+			case LESSEQ:
+				result = stats.getTotalTime()<=threshold;
+				break;
+		}
 		return result;
 	}
 

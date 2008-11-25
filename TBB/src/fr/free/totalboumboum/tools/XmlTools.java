@@ -205,6 +205,7 @@ public class XmlTools
 	public static final String ATT_BOUND_ZSHIFT = "boundZShift";
 	public static final String ATT_COLOR = "color";
 	public static final String ATT_COL = "col";
+	public static final String ATT_COMPARATOR = "comparator";
 	public static final String ATT_CONTACT = "contact";
 	public static final String ATT_DEFAULT = "default";
 	public static final String ATT_DIRECTION = "direction";

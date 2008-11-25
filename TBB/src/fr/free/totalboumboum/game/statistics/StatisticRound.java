@@ -73,49 +73,4 @@ public class StatisticRound extends StatisticBase implements Serializable
 	public void finalizeTime(Round round)
 	{	updateTime(getTotalTime()+1, round);
 	}
-
-	/////////////////////////////////////////////////////////////////
-	// POINTS			/////////////////////////////////////////////
-	/////////////////////////////////////////////////////////////////
-
-	public int[] getRanks()
-	{	int[] result = new int[getPlayers().size()];
-		for(int i=0;i<result.length;i++)
-			result[i] = 1;
-
-		for(int i=0;i<result.length-1;i++)
-		{	for(int j=i+1;j<result.length;j++)
-			{	if(getPoints()[i]<getPoints()[j])
-					result[i] = result[i] + 1;
-				else if(getPoints()[i]>getPoints()[j])
-					result[j] = result[j] + 1;
-			}
-		}	
-
-		return result;
-	}
-	
-	public int[] getOrderedPlayers()
-	{	int[] result = new int[getPlayers().size()];
-		int[] ranks = getRanks();
-		int done = 0;
-		for(int i=1;i<=result.length;i++)
-		{	for(int j=0;j<ranks.length;j++)
-			{	if(ranks[j]==i)
-				{	result[done] = j;
-					done++;
-				}
-			}
-		}
-		return result;
-	}
-	
-	public ArrayList<Integer> getWinners()
-	{	ArrayList<Integer> result = new ArrayList<Integer>();
-		int[] ranks = getRanks();
-		for(int i=0;i<ranks.length;i++)
-			if(ranks[i]==1)
-				result.add(i);
-		return result;
-	}
 }

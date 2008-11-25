@@ -63,7 +63,7 @@ public class QuickResults extends JPanel
 		Round round = Configuration.getGameConfiguration().getTournament().getCurrentMatch().getCurrentRound();
 		StatisticRound stats = round.getStats();
 		ArrayList<Profile> players = round.getProfiles();
-		int[] orderedPlayers = stats.getOrderedPlayers();
+		int[] orderedPlayers = round.getOrderedPlayers();
 		float[] points = stats.getPoints();
 		setAlignmentX(CENTER_ALIGNMENT);
 		setAlignmentY(CENTER_ALIGNMENT);

@@ -25,15 +25,12 @@ import java.awt.Color;
 import java.awt.image.BufferedImage;
 import java.text.NumberFormat;
 import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.TreeSet;
 
 import javax.swing.JLabel;
 
 import fr.free.totalboumboum.configuration.Configuration;
 import fr.free.totalboumboum.configuration.profile.Portraits;
 import fr.free.totalboumboum.configuration.profile.Profile;
-import fr.free.totalboumboum.game.points.PlayerPoints;
 import fr.free.totalboumboum.game.round.Round;
 import fr.free.totalboumboum.game.statistics.Score;
 import fr.free.totalboumboum.game.statistics.StatisticRound;
@@ -66,8 +63,10 @@ public class RoundResults extends EntitledDataPanel
 			{	{	JLabel lbl = resultsPanel.getLabel(0,0);
 					lbl.setOpaque(false);
 				}				
+				@SuppressWarnings("unused")
 				Round round = Configuration.getGameConfiguration().getTournament().getCurrentMatch().getCurrentRound();
 				String sc = null;
+/*				
 				switch(round.getPlayMode())
 				{	case CROWN:
 						sc = GuiKeys.GAME_ROUND_RESULTS_HEADER_CROWNS;
@@ -79,6 +78,8 @@ public class RoundResults extends EntitledDataPanel
 						sc = GuiKeys.GAME_ROUND_RESULTS_HEADER_TIME;
 						break;
 				}
+*/				
+sc = GuiKeys.GAME_ROUND_RESULTS_HEADER_TIME;
 				String keys[] = 
 				{	GuiKeys.GAME_ROUND_RESULTS_HEADER_NAME,
 					GuiKeys.GAME_ROUND_RESULTS_HEADER_BOMBS,
@@ -113,24 +114,22 @@ public class RoundResults extends EntitledDataPanel
 		Round round = Configuration.getGameConfiguration().getTournament().getCurrentMatch().getCurrentRound();
 		StatisticRound stats = round.getStats();
 		ArrayList<Profile> players = round.getProfiles();
-		TreeSet<PlayerPoints> ranking = stats.getOrderedPlayers();
+		int[] orderedPlayers = round.getOrderedPlayers();
 		float[] points = stats.getPoints();
 
 		// display the ranking
-		Iterator<PlayerPoints> i = ranking.descendingIterator();
 		int col = 0;
 		int line = 0;
-		while(i.hasNext())
+		for(int i=0;i<orderedPlayers.length;i++)
 		{	// init
 			col = 0;
 			line++;
-			PlayerPoints pp = i.next();
-			Profile profile = players.get(pp.getIndex());
+			Profile profile = players.get(orderedPlayers[i]);
 			// color
 			Color clr = profile.getSpriteSelectedColor().getColor();
 			// portrait
 			{	BufferedImage image = profile.getPortraits().getOutgamePortrait(Portraits.OUTGAME_HEAD);
-				String tooltip = pp.getPlayer();
+				String tooltip = profile.getSpriteName();
 				resultsPanel.setLabelIcon(line,col,image,tooltip);
 				int alpha = GuiTools.ALPHA_TABLE_REGULAR_BACKGROUND_LEVEL3;
 				Color bg = new Color(clr.getRed(),clr.getGreen(),clr.getBlue(),alpha);
@@ -138,8 +137,8 @@ public class RoundResults extends EntitledDataPanel
 				col++;
 			}
 			// name
-			{	String text = pp.getPlayer();
-				String tooltip = pp.getPlayer();
+			{	String text = profile.getName();
+				String tooltip = profile.getName();
 				resultsPanel.setLabelText(line,col,text,tooltip);
 				int alpha = GuiTools.ALPHA_TABLE_REGULAR_BACKGROUND_LEVEL3;
 				Color bg = new Color(clr.getRed(),clr.getGreen(),clr.getBlue(),alpha);
@@ -151,6 +150,7 @@ public class RoundResults extends EntitledDataPanel
 				nf.setMaximumFractionDigits(2);
 				nf.setMinimumFractionDigits(0);
 				String sc = "";
+/*				
 				switch(round.getPlayMode())
 				{	case CROWN:
 						sc = nf.format(stats.getScores(Score.CROWNS)[pp.getIndex()]);
@@ -162,11 +162,13 @@ public class RoundResults extends EntitledDataPanel
 						sc = StringTools.formatTimeWithSeconds(stats.getScores(Score.TIME)[pp.getIndex()]);
 						break;
 				}
+*/
+sc = StringTools.formatTimeWithSeconds(stats.getScores(Score.TIME)[orderedPlayers[i]]);
 				String[] scores = 
-				{	nf.format(stats.getScores(Score.BOMBS)[pp.getIndex()]),
-					nf.format(stats.getScores(Score.ITEMS)[pp.getIndex()]),
-					nf.format(stats.getScores(Score.BOMBEDS)[pp.getIndex()]),
-					nf.format(stats.getScores(Score.BOMBINGS)[pp.getIndex()]),
+				{	nf.format(stats.getScores(Score.BOMBS)[orderedPlayers[i]]),
+					nf.format(stats.getScores(Score.ITEMS)[orderedPlayers[i]]),
+					nf.format(stats.getScores(Score.BOMBEDS)[orderedPlayers[i]]),
+					nf.format(stats.getScores(Score.BOMBINGS)[orderedPlayers[i]]),
 					sc
 				};
 				for(int j=0;j<scores.length;j++)
@@ -180,7 +182,7 @@ public class RoundResults extends EntitledDataPanel
 				}
 			}			
 			// points
-			{	double pts = points[pp.getIndex()];
+			{	double pts = points[orderedPlayers[i]];
 				NumberFormat nf = NumberFormat.getInstance();
 				nf.setMaximumFractionDigits(2);
 				nf.setMinimumFractionDigits(0);

@@ -26,7 +26,6 @@ import java.awt.image.BufferedImage;
 import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.Iterator;
-import java.util.TreeSet;
 
 import javax.swing.JLabel;
 
@@ -34,7 +33,6 @@ import fr.free.totalboumboum.configuration.Configuration;
 import fr.free.totalboumboum.configuration.profile.Portraits;
 import fr.free.totalboumboum.configuration.profile.Profile;
 import fr.free.totalboumboum.game.match.Match;
-import fr.free.totalboumboum.game.points.PlayerPoints;
 import fr.free.totalboumboum.game.statistics.Score;
 import fr.free.totalboumboum.game.statistics.StatisticMatch;
 import fr.free.totalboumboum.game.statistics.StatisticRound;
@@ -104,14 +102,8 @@ public class MatchResults extends EntitledDataPanel
 		float[] points = stats.getPoints();
 		
 		// sorting players according to points/partial points
-		TreeSet<PlayerPoints> ranking = new TreeSet<PlayerPoints>();
-		for(int i=0;i<points.length;i++)
-		{	PlayerPoints pp = new PlayerPoints(players.get(i).getName(),i);
-			pp.addPoint(points[i]);
-			pp.addPoint(partialPoints[i]);
-			ranking.add(pp);
-		}
-		
+		int[] orderedPlayers = match.getOrderedPlayers();
+
 		// completing missing labels
 		int col = 2+4+(rounds.size()-1);
 		int cols = 2+4+rounds.size()+2;
@@ -123,19 +115,17 @@ public class MatchResults extends EntitledDataPanel
 		}
 		
 		// display the ranking
-		Iterator<PlayerPoints> i = ranking.descendingIterator();
 		int line = 0;
-		while(i.hasNext())
+		for(int i=0;i<orderedPlayers.length;i++)
 		{	// init
 			col = 0;
 			line++;
-			PlayerPoints pp = i.next();
-			Profile profile = players.get(pp.getIndex());
+			Profile profile = players.get(orderedPlayers[i]);
 			// color
-			Color clr = players.get(pp.getIndex()).getSpriteSelectedColor().getColor();
+			Color clr = profile.getSpriteSelectedColor().getColor();
 			// portrait
 			{	BufferedImage image = profile.getPortraits().getOutgamePortrait(Portraits.OUTGAME_HEAD);
-				String tooltip = pp.getPlayer();
+				String tooltip = profile.getSpriteName();
 				resultsPanel.setLabelIcon(line,col,image,tooltip);
 				JLabel portraitLabel = resultsPanel.getLabel(line, col);
 				int alpha = GuiTools.ALPHA_TABLE_REGULAR_BACKGROUND_LEVEL3;
@@ -144,8 +134,8 @@ public class MatchResults extends EntitledDataPanel
 				col++;
 			}
 			// name
-			{	String text = pp.getPlayer();
-				String tooltip = pp.getPlayer();
+			{	String text = profile.getName();
+				String tooltip = profile.getName();
 				resultsPanel.setLabelText(line,col,text,tooltip);
 				int alpha = GuiTools.ALPHA_TABLE_REGULAR_BACKGROUND_LEVEL3;
 				Color bg = new Color(clr.getRed(),clr.getGreen(),clr.getBlue(),alpha);
@@ -157,10 +147,10 @@ public class MatchResults extends EntitledDataPanel
 				nf.setMaximumFractionDigits(2);
 				nf.setMinimumFractionDigits(0);
 				String[] scores = 
-				{	nf.format(stats.getScores(Score.BOMBS)[pp.getIndex()]),
-					nf.format(stats.getScores(Score.ITEMS)[pp.getIndex()]),
-					nf.format(stats.getScores(Score.BOMBEDS)[pp.getIndex()]),
-					nf.format(stats.getScores(Score.BOMBINGS)[pp.getIndex()]),
+				{	nf.format(stats.getScores(Score.BOMBS)[orderedPlayers[i]]),
+					nf.format(stats.getScores(Score.ITEMS)[orderedPlayers[i]]),
+					nf.format(stats.getScores(Score.BOMBEDS)[orderedPlayers[i]]),
+					nf.format(stats.getScores(Score.BOMBINGS)[orderedPlayers[i]]),
 				};
 				for(int j=0;j<scores.length;j++)
 				{	String text = scores[j];
@@ -176,7 +166,7 @@ public class MatchResults extends EntitledDataPanel
 			Iterator<StatisticRound> r = rounds.iterator();
 			while(r.hasNext())
 			{	StatisticRound statRound = r.next();
-				float pts = statRound.getPoints()[pp.getIndex()];
+				float pts = statRound.getPoints()[orderedPlayers[i]];
 				NumberFormat nf = NumberFormat.getInstance();
 				nf.setMaximumFractionDigits(2);
 				nf.setMinimumFractionDigits(0);
@@ -189,7 +179,7 @@ public class MatchResults extends EntitledDataPanel
 				col++;
 			}
 			// total
-			{	float pts = partialPoints[pp.getIndex()];
+			{	float pts = partialPoints[orderedPlayers[i]];
 				NumberFormat nf = NumberFormat.getInstance();
 				nf.setMaximumFractionDigits(2);
 				nf.setMinimumFractionDigits(0);
@@ -208,7 +198,7 @@ public class MatchResults extends EntitledDataPanel
 				nf.setMaximumFractionDigits(2);
 				nf.setMinimumFractionDigits(0);
 				if(match.isOver())	
-				{	float pts = points[pp.getIndex()];
+				{	float pts = points[orderedPlayers[i]];
 					text = nf.format(pts);
 					tooltip = nf.format(pts);					
 				}

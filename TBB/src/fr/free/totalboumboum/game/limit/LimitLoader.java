@@ -65,11 +65,11 @@ public class LimitLoader
 		Element thresholdElt = root.getChild(XmlTools.ELT_THRESHOLD);
 		String str = thresholdElt.getAttribute(XmlTools.ATT_VALUE).getValue();
 		int threshold = Integer.parseInt(str);
-		// supLimit
-		str = thresholdElt.getAttribute(XmlTools.ATT_SUP).getValue();
-		boolean supLimit = Boolean.valueOf(str);
+		// comparator
+		str = thresholdElt.getAttribute(XmlTools.ATT_COMPARATOR).getValue();
+		ComparatorCode comparatorCode = ComparatorCode.valueOf(str.toUpperCase(Locale.ENGLISH));
 		// result
-		LimitConfrontation result = new LimitConfrontation(threshold,supLimit,pointProcessor);
+		LimitConfrontation result = new LimitConfrontation(threshold,comparatorCode,pointProcessor);
 		return result;
 	}
 
@@ -78,14 +78,14 @@ public class LimitLoader
 		Element thresholdElt = root.getChild(XmlTools.ELT_THRESHOLD);
 		String str = thresholdElt.getAttribute(XmlTools.ATT_VALUE).getValue();
 		float threshold = Float.parseFloat(str);
-		// supLimit
-		str = thresholdElt.getAttribute(XmlTools.ATT_SUP).getValue();
-		boolean supLimit = Boolean.valueOf(str);
+		// comparator
+		str = thresholdElt.getAttribute(XmlTools.ATT_COMPARATOR).getValue();
+		ComparatorCode comparatorCode = ComparatorCode.valueOf(str.toUpperCase(Locale.ENGLISH));
 		// point processor
     	Element thresholdPointProcessorElt = root.getChild(XmlTools.ELT_SOURCE);
 		PointsProcessor thresholdPointProcessor = PointsProcessorLoader.loadPointProcessorFromElement(thresholdPointProcessorElt,folder);
 		// result
-		LimitPoints result = new LimitPoints(threshold,supLimit,pointProcessor,thresholdPointProcessor);
+		LimitPoints result = new LimitPoints(threshold,comparatorCode,pointProcessor,thresholdPointProcessor);
 		return result;
 	}
 	
@@ -94,14 +94,14 @@ public class LimitLoader
 		Element thresholdElt = root.getChild(XmlTools.ELT_THRESHOLD);
 		String str = thresholdElt.getAttribute(XmlTools.ATT_VALUE).getValue();
 		long threshold = Long.parseLong(str);
-		// supLimit
-		str = thresholdElt.getAttribute(XmlTools.ATT_SUP).getValue();
-		boolean supLimit = Boolean.valueOf(str);
+		// comparator
+		str = thresholdElt.getAttribute(XmlTools.ATT_COMPARATOR).getValue();
+		ComparatorCode comparatorCode = ComparatorCode.valueOf(str.toUpperCase(Locale.ENGLISH));
 		// score
 		str = root.getAttribute(XmlTools.ATT_TYPE).getValue();
 		Score score  = Score.valueOf(str.toUpperCase(Locale.ENGLISH).trim());
 		// result
-		LimitScore result = new LimitScore(threshold,supLimit,score,pointProcessor);
+		LimitScore result = new LimitScore(threshold,comparatorCode,score,pointProcessor);
 		return result;
 	}
 
@@ -110,11 +110,11 @@ public class LimitLoader
 		Element thresholdElt = root.getChild(XmlTools.ELT_THRESHOLD);
 		String str = thresholdElt.getAttribute(XmlTools.ATT_VALUE).getValue();
 		long threshold = Long.parseLong(str);
-		// supLimit
-		str = thresholdElt.getAttribute(XmlTools.ATT_SUP).getValue();
-		boolean supLimit = Boolean.valueOf(str);
+		// comparator
+		str = thresholdElt.getAttribute(XmlTools.ATT_COMPARATOR).getValue();
+		ComparatorCode comparatorCode = ComparatorCode.valueOf(str.toUpperCase(Locale.ENGLISH));
 		// result
-		LimitTime result = new LimitTime(threshold,supLimit,pointProcessor);
+		LimitTime result = new LimitTime(threshold,comparatorCode,pointProcessor);
 		return result;
 	}
 
@@ -123,11 +123,11 @@ public class LimitLoader
 		Element thresholdElt = root.getChild(XmlTools.ELT_THRESHOLD);
 		String str = thresholdElt.getAttribute(XmlTools.ATT_VALUE).getValue();
 		int threshold = Integer.parseInt(str);
-		// supLimit
-		str = thresholdElt.getAttribute(XmlTools.ATT_SUP).getValue();
-		boolean supLimit = false/*Boolean.valueOf(str)*/;
+		// comparator
+		str = thresholdElt.getAttribute(XmlTools.ATT_COMPARATOR).getValue();
+		ComparatorCode comparatorCode = ComparatorCode.valueOf(str.toUpperCase(Locale.ENGLISH));
 		// result
-		LimitLastStanding result = new LimitLastStanding(threshold,supLimit,pointProcessor);
+		LimitLastStanding result = new LimitLastStanding(threshold,comparatorCode,pointProcessor);
 		return result;
 	}
 }

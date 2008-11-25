@@ -35,10 +35,10 @@ import fr.free.totalboumboum.game.statistics.StatisticHolder;
  */
 public class LimitScore implements TournamentLimit, MatchLimit, RoundLimit
 {
-	public LimitScore(long threshold, boolean supLimit, Score score, PointsProcessor pointProcessor)
+	public LimitScore(long threshold, ComparatorCode comparatorCode, Score score, PointsProcessor pointProcessor)
 	{	this.threshold = threshold;
 		this.score = score;
-		this.supLimit = supLimit;
+		this.comparatorCode = comparatorCode;
 		this.pointProcessor = pointProcessor;
 	}
 
@@ -55,7 +55,7 @@ public class LimitScore implements TournamentLimit, MatchLimit, RoundLimit
 	// THRESHOLD		/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	private long threshold;
-	private boolean supLimit;
+	private ComparatorCode comparatorCode;
 	
 	public long getThreshold()
 	{	return threshold;
@@ -65,12 +65,12 @@ public class LimitScore implements TournamentLimit, MatchLimit, RoundLimit
 	{	this.threshold = threshold;
 	}
 
-	public boolean getSupLimit()
-	{	return supLimit;
+	public ComparatorCode getSupLimit()
+	{	return comparatorCode;
 	}
 	
-	public void setsupLimit(boolean supLimit)
-	{	this.supLimit = supLimit;
+	public void setsupLimit(ComparatorCode comparatorCode)
+	{	this.comparatorCode = comparatorCode;
 	}
 
 	@Override
@@ -79,17 +79,37 @@ public class LimitScore implements TournamentLimit, MatchLimit, RoundLimit
 		StatisticBase stats = holder.getStats();
 		long scores[] = stats.getScores(score);
 		int i=0;
-		if(supLimit)
-		{	while(i<scores.length && !result)
-			{	result = scores[i]>=threshold;
-				i++;
-			}
-		}
-		else
-		{	while(i<scores.length && !result)
-			{	result = scores[i]<=threshold;
-				i++;
-			}
+		switch(comparatorCode)
+		{	case EQUAL:
+				while(i<scores.length && !result)
+				{	result = scores[i]==threshold;
+					i++;
+				}
+				break;
+			case GREATER:
+				while(i<scores.length && !result)
+				{	result = scores[i]>threshold;
+					i++;
+				}
+				break;
+			case GREATEREQ:
+				while(i<scores.length && !result)
+				{	result = scores[i]>=threshold;
+					i++;
+				}
+				break;
+			case LESS:
+				while(i<scores.length && !result)
+				{	result = scores[i]<threshold;
+					i++;
+				}
+				break;
+			case LESSEQ:
+				while(i<scores.length && !result)
+				{	result = scores[i]<=threshold;
+					i++;
+				}
+				break;
 		}
 		return result;
 	}

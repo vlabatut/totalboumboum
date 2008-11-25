@@ -14,7 +14,7 @@
 	<limits>
 		<lastStanding>
 			<points local="false" name="basicSurvival" />
-			<threshold value="1"/>
+			<threshold value="1" comparator="lesseq"/>
 		</lastStanding>
 		<time>
 			<points local="false" name="basicSurvival" />
