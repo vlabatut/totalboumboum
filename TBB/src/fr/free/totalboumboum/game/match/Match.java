@@ -179,14 +179,14 @@ public class Match implements StatisticHolder
 	{	// stats
 		StatisticRound statsRound = currentRound.getStats();
 		stats.addStatisticRound(statsRound);
-		float[] points = limits.processPoints(this);
-		stats.setPoints(points);
 		// iterator
 		if(!iterator.hasNext())
 			iterator = rounds.iterator();
 		// limits
-		if(getLimits().testLimit(this))
-		{	matchOver = true;
+		if(limits.testLimit(this))
+		{	float[] points = limits.processPoints(this);
+			stats.setPoints(points);
+			matchOver = true;
 			tournament.matchOver();
 			if(panel!=null)
 			{	panel.matchOver();
