@@ -88,7 +88,7 @@ public enum Score
 		ArrayList<String> players = stats.getPlayers();
 		long result[] = stats.getScores(this);
 		// processing
-		if(event.getAction() == StatisticAction.EXPLOSE_PLAYER)
+		if(event.getAction() == StatisticAction.BOMB_PLAYER)
 		{	//target
 			int index = players.indexOf(event.getTarget());
 			result[index] = result[index] + 1;
@@ -113,7 +113,7 @@ public enum Score
 		ArrayList<String> players = stats.getPlayers();
 		long result[] = stats.getScores(this);
 		// processing
-		if(event.getAction() == StatisticAction.EXPLOSE_PLAYER)
+		if(event.getAction() == StatisticAction.BOMB_PLAYER)
 		{	// actor (can be null, ie: level)
 			if(event.getActor()!=null)
 			{	int index = players.indexOf(event.getActor());
@@ -143,15 +143,7 @@ public enum Score
 	}
 
 	public long[] processTime(StatisticRound stats, StatisticEvent event)
-	{	// init
-		ArrayList<String> players = stats.getPlayers();
-		long result[] = stats.getScores(this);
-		// processing
-		if(event.getAction() == StatisticAction.ELIMINATE_PLAYER)
-		{	int index = players.indexOf(event.getTarget());
-			long time = event.getTime();
-			result[index] = -time;
-		}
+	{	long result[] = stats.getScores(this);
 		return result;
 	}
 	

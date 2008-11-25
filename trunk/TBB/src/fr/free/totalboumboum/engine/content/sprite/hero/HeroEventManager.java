@@ -44,10 +44,8 @@ import fr.free.totalboumboum.engine.content.sprite.bomb.Bomb;
 import fr.free.totalboumboum.engine.content.sprite.fire.Fire;
 import fr.free.totalboumboum.engine.content.sprite.item.Item;
 import fr.free.totalboumboum.engine.player.Player;
-import fr.free.totalboumboum.game.round.PlayMode;
 import fr.free.totalboumboum.game.statistics.StatisticAction;
 import fr.free.totalboumboum.game.statistics.StatisticEvent;
-
 
 public class HeroEventManager extends EventManager
 {	
@@ -122,14 +120,14 @@ if(explosedBy==null)
 	System.out.println();
 			}
 			// stats
-			StatisticAction statAction = StatisticAction.EXPLOSE_PLAYER;
+			StatisticAction statAction = StatisticAction.BOMB_PLAYER;
 			long statTime = sprite.getLoopTime();
 			String statActor = explosedBy;
 			String statTarget = sprite.getPlayer().getFileName();
 			StatisticEvent statEvent = new StatisticEvent(statActor,statAction,statTarget,statTime);
 			sprite.addStatisticEvent(statEvent);
-			// player out NOTE ï¿½ modifier pour autres PlayModes
-			if(sprite.getLoop().getPlayMode() == PlayMode.SURVIVAL)
+			// player out NOTE à modifier pour autres PlayModes
+//			if(sprite.getLoop().getPlayMode() == PlayMode.SURVIVAL)
 			{	Player player = sprite.getPlayer(); 
 				if(player!=null)
 					player.setOut();

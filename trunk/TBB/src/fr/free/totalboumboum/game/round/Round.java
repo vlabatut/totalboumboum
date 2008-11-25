@@ -125,18 +125,6 @@ public class Round implements StatisticHolder
 	}
 
 	/////////////////////////////////////////////////////////////////
-	// PLAY MODE	/////////////////////////////////////////
-	/////////////////////////////////////////////////////////////////
-	private PlayMode playMode;
-	
-	public PlayMode getPlayMode()
-	{	return playMode;	
-	}
-	public void setPlayMode(PlayMode playMode)
-	{	this.playMode = playMode;	
-	}
-
-	/////////////////////////////////////////////////////////////////
 	// MATCH			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	private Match match;
@@ -173,7 +161,7 @@ public class Round implements StatisticHolder
 	}
 	public void updateTime(long time)
 	{	if(!roundOver)
-		{	stats.updateTime(time);			
+		{	stats.updateTime(time,this);			
 			if(getLimits().testLimit(this))
 				closeGame();
 //			else TODO à voir quand on s'occupera d'afficher les points en temps réel dans la GUI
@@ -182,7 +170,7 @@ public class Round implements StatisticHolder
 	}
 	public void closeGame()
 	{	roundOver = true;
-		stats.finalizeTime(loop.getTotalTime());
+		stats.finalizeTime(this);
 		float[] points = limits.processPoints(this);
 		stats.setPoints(points);
 		celebrate();		
@@ -272,7 +260,6 @@ public class Round implements StatisticHolder
 	{	Round result = new Round(match);
 		result.setNotes(notes);
 		result.setLimits(limits);
-		result.setPlayMode(playMode);
 		result.setHollowLevel(hollowLevel.copy());
 		return result;
 	}
