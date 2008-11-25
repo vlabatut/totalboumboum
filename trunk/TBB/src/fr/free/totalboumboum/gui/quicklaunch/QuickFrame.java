@@ -36,7 +36,10 @@ import fr.free.totalboumboum.game.match.Match;
 import fr.free.totalboumboum.game.round.Round;
 import fr.free.totalboumboum.game.round.RoundRenderPanel;
 import fr.free.totalboumboum.game.tournament.AbstractTournament;
+import fr.free.totalboumboum.gui.data.configuration.GuiConfiguration;
+import fr.free.totalboumboum.gui.data.configuration.misc.MiscConfiguration;
 import fr.free.totalboumboum.gui.tools.GuiFileTools;
+import fr.free.totalboumboum.gui.tools.GuiTools;
 
 
 import java.awt.Canvas;
@@ -95,6 +98,12 @@ public class QuickFrame extends JFrame implements WindowListener,LoopRenderPanel
 	    int screenWidth = screenSize.width;
 	    setLocation((screenWidth-getSize().width)/2,(screenHeight-getSize().height)/2);
 	   
+	    // init the gui
+		GuiTools.quickInit();
+		MiscConfiguration miscConfig = new MiscConfiguration();
+		miscConfig.setFont(null,new Font("Arial",Font.PLAIN,10));
+		GuiConfiguration.setMiscConfiguration(miscConfig);
+	    
 	    // init the game
 	 // tournament
 	    Configuration.getGameConfiguration().loadQuickstart();

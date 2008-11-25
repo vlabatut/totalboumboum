@@ -142,14 +142,14 @@ public class SequenceTournament extends AbstractTournament
 	{	// stats
 		StatisticMatch statsMatch = currentMatch.getStats();
 		stats.addStatisticMatch(statsMatch);
-		float[] points = limits.processPoints(this);
-		stats.setPoints(points);
 		// iterator
 		if(!iterator.hasNext())
 			iterator = matches.iterator();
 		// limits
 		if(getLimits().testLimit(this))
-		{	tournamentOver = true;
+		{	float[] points = limits.processPoints(this);
+			stats.setPoints(points);
+			tournamentOver = true;
 			panel.tournamentOver();
 			stats.initEndDate();
 		}

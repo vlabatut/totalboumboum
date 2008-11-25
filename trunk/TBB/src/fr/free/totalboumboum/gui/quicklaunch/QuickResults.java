@@ -90,13 +90,12 @@ public class QuickResults extends JPanel
 //		BufferedImage bi = new BufferedImage(10,10,BufferedImage.TYPE_INT_ARGB);
 //		Graphics g = bi.getGraphics();
 //		GuiTools.setGraphics(g);
-		GuiConfiguration.getMiscConfiguration().setFont(null,new Font("Arial",Font.PLAIN,10));
-		int headerHeight = (int)(1.5*pHeight/17.5);
+		int headerHeight = (int)(1.5*pHeight/(lines+0.5));
 		int headerSize = GuiTools.getFontSize(headerHeight);
-		headerFont = new Font("Arial",Font.PLAIN,headerSize); 
-		int lineHeight = (pHeight-headerHeight)/16;
+		headerFont = GuiConfiguration.getMiscConfiguration().getFont().deriveFont((float)(headerSize)); 
+		int lineHeight = (pHeight-headerHeight)/(lines-1);
 		int lineSize = GuiTools.getFontSize(lineHeight);
-		regularFont = new Font("Arial",Font.PLAIN,lineSize); 
+		headerFont = GuiConfiguration.getMiscConfiguration().getFont().deriveFont((float)(lineSize)); 
 		
 		// table
 		for(int col=0;col<cols;col++)
