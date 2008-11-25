@@ -66,7 +66,7 @@ public class LimitLoader
 		String str = thresholdElt.getAttribute(XmlTools.ATT_VALUE).getValue();
 		int threshold = Integer.parseInt(str);
 		// supLimit
-		str = root.getAttribute(XmlTools.ATT_SUP).getValue();
+		str = thresholdElt.getAttribute(XmlTools.ATT_SUP).getValue();
 		boolean supLimit = Boolean.valueOf(str);
 		// result
 		LimitConfrontation result = new LimitConfrontation(threshold,supLimit,pointProcessor);
@@ -79,7 +79,7 @@ public class LimitLoader
 		String str = thresholdElt.getAttribute(XmlTools.ATT_VALUE).getValue();
 		float threshold = Float.parseFloat(str);
 		// supLimit
-		str = root.getAttribute(XmlTools.ATT_SUP).getValue();
+		str = thresholdElt.getAttribute(XmlTools.ATT_SUP).getValue();
 		boolean supLimit = Boolean.valueOf(str);
 		// point processor
     	Element thresholdPointProcessorElt = root.getChild(XmlTools.ELT_SOURCE);
@@ -95,7 +95,7 @@ public class LimitLoader
 		String str = thresholdElt.getAttribute(XmlTools.ATT_VALUE).getValue();
 		long threshold = Long.parseLong(str);
 		// supLimit
-		str = root.getAttribute(XmlTools.ATT_SUP).getValue();
+		str = thresholdElt.getAttribute(XmlTools.ATT_SUP).getValue();
 		boolean supLimit = Boolean.valueOf(str);
 		// score
 		str = root.getAttribute(XmlTools.ATT_TYPE).getValue();
@@ -111,7 +111,7 @@ public class LimitLoader
 		String str = thresholdElt.getAttribute(XmlTools.ATT_VALUE).getValue();
 		long threshold = Long.parseLong(str);
 		// supLimit
-		str = root.getAttribute(XmlTools.ATT_SUP).getValue();
+		str = thresholdElt.getAttribute(XmlTools.ATT_SUP).getValue();
 		boolean supLimit = Boolean.valueOf(str);
 		// result
 		LimitTime result = new LimitTime(threshold,supLimit,pointProcessor);
@@ -124,7 +124,7 @@ public class LimitLoader
 		String str = thresholdElt.getAttribute(XmlTools.ATT_VALUE).getValue();
 		int threshold = Integer.parseInt(str);
 		// supLimit
-		str = root.getAttribute(XmlTools.ATT_SUP).getValue();
+		str = thresholdElt.getAttribute(XmlTools.ATT_SUP).getValue();
 		boolean supLimit = false/*Boolean.valueOf(str)*/;
 		// result
 		LimitLastStanding result = new LimitLastStanding(threshold,supLimit,pointProcessor);

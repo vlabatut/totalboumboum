@@ -56,7 +56,7 @@ public class HeroEventManager extends EventManager
 	/** current interactive move direction*/
 	protected Direction controlDirection;
 	
-	// NOTE à initialiser à chaque réincarnation
+	// NOTE ï¿½ initialiser ï¿½ chaque rï¿½incarnation
 	protected String explosedBy = null;
 
 	public HeroEventManager(Hero sprite)
@@ -116,7 +116,7 @@ public class HeroEventManager extends EventManager
 				}
 				if(spr instanceof Hero)
 				{	Hero temp = (Hero)spr;
-					explosedBy = temp.getPlayer().getName();
+					explosedBy = temp.getPlayer().getFileName();
 				}
 if(explosedBy==null)
 	System.out.println();
@@ -125,10 +125,10 @@ if(explosedBy==null)
 			StatisticAction statAction = StatisticAction.EXPLOSE_PLAYER;
 			long statTime = sprite.getLoopTime();
 			String statActor = explosedBy;
-			String statTarget = sprite.getPlayer().getName();
+			String statTarget = sprite.getPlayer().getFileName();
 			StatisticEvent statEvent = new StatisticEvent(statActor,statAction,statTarget,statTime);
 			sprite.addStatisticEvent(statEvent);
-			// player out NOTE à modifier pour autres PlayModes
+			// player out NOTE ï¿½ modifier pour autres PlayModes
 			if(sprite.getLoop().getPlayMode() == PlayMode.SURVIVAL)
 			{	Player player = sprite.getPlayer(); 
 				if(player!=null)
@@ -283,7 +283,7 @@ if(explosedBy==null)
 	{	//if(gesture.equals(GestureConstants.PUSHING) || gesture.equals(GestureConstants.STANDING)
 		//	 || gesture.equals(GestureConstants.WAITING) || gesture.equals(GestureConstants.WALKING))
 		if(event.getMode())
-		{	sprite.triggerBomb(); // cette méthode se charge des controles nécessaires
+		{	sprite.triggerBomb(); // cette mï¿½thode se charge des controles nï¿½cessaires
 		}
 	}
 	
@@ -429,13 +429,13 @@ if(explosedBy==null)
 			// the sprite is not allowed to land
 			else
 				gesture = GestureConstants.BOUNCING;
-			// si pas de direction bloquée, alors celles du sprite de du controle n'ont pas changé (sont toujours correctes)
+			// si pas de direction bloquï¿½e, alors celles du sprite de du controle n'ont pas changï¿½ (sont toujours correctes)
 			if(blockedDirection==Direction.NONE)
 				sprite.setGesture(gesture,spriteDirection,controlDirection,true);
-			// sinon on prend celle qui est bloquée, car celles du controle/sprite ont pu changer
+			// sinon on prend celle qui est bloquï¿½e, car celles du controle/sprite ont pu changer
 			else
 				sprite.setGesture(gesture,blockedDirection,blockedDirection,true);
-			// on met éventuellement à jour pour le rebond 
+			// on met ï¿½ventuellement ï¿½ jour pour le rebond 
 			if(gesture.equals(GestureConstants.BOUNCING) && blockedDirection==Direction.NONE)
 				blockedDirection = spriteDirection;											
 		}
@@ -468,7 +468,7 @@ if(explosedBy==null)
 		}
 		else
 		{
-			//NOTE programmer l'action (exécution retardée) quand ce sera possible
+			//NOTE programmer l'action (exï¿½cution retardï¿½e) quand ce sera possible
 		}
 		
 		

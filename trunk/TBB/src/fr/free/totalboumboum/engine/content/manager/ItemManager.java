@@ -97,7 +97,7 @@ public class ItemManager
 		if(!initial)
 		{	StatisticAction statAction = StatisticAction.GATHER_ITEM;
 			long statTime = sprite.getLoopTime();
-			String statActor = sprite.getPlayer().getName();
+			String statActor = sprite.getPlayer().getFileName();
 			String statTarget = item.getItemName();
 			StatisticEvent statEvent = new StatisticEvent(statActor,statAction,statTarget,statTime);
 			sprite.addStatisticEvent(statEvent);
@@ -120,7 +120,7 @@ public class ItemManager
 		// stats
 		StatisticAction statAction = StatisticAction.LOSE_ITEM;
 		long statTime = sprite.getLoopTime();
-		String statActor = sprite.getPlayer().getName();
+		String statActor = sprite.getPlayer().getFileName();
 		String statTarget = result.getItemName();
 		StatisticEvent statEvent = new StatisticEvent(statActor,statAction,statTarget,statTime);
 		sprite.addStatisticEvent(statEvent);

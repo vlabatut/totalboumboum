@@ -87,7 +87,7 @@ public class BombsetManager
 					// stats
 					StatisticAction statAction = StatisticAction.DROP_BOMB;
 					long statTime = sprite.getLoopTime();
-					String statActor = sprite.getPlayer().getName();
+					String statActor = sprite.getPlayer().getFileName();
 					String statTarget = bomb.getBombName();
 					StatisticEvent statEvent = new StatisticEvent(statActor,statAction,statTarget,statTime);
 					sprite.addStatisticEvent(statEvent);
