@@ -656,8 +656,6 @@ public class Launcher
 	 * *********************** A FAIRE ***********************
 	 * *******************************************************
 	 * 
-	 * - quicklaunch : les commandes systèmes ne répondent plus (encore !)
-	 * 
 	 * - virer les boutons inutiles dans l'écran de sélection des joueurs
 	 * 
 	 * - virer la possibilité de définir plusieurs couleurs, ça ne sert à rien

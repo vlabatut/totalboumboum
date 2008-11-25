@@ -61,22 +61,17 @@ public class StatisticRound extends StatisticBase implements Serializable
 	/////////////////////////////////////////////////////////////////
 	// STATISTIC EVENTS	/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	public void updateTime(long time)
+	public void updateTime(long time, Round round)
 	{	setTotalTime(time);
 		long[] sc = getScores(Score.TIME);
 		for(int i=0;i<sc.length;i++)
-		{	if(sc[i]>=0)
+		{	if(round.getPlayersStatus().get(i))
 				sc[i] = time;
 		}
 	}
 
-	public void finalizeTime(long time)
-	{	updateTime(time+1);
-		long[] sc = getScores(Score.TIME);
-		for(int i=0;i<sc.length;i++)
-		{	if(sc[i]<0)
-				sc[i] = -sc[i];
-		}
+	public void finalizeTime(Round round)
+	{	updateTime(getTotalTime()+1, round);
 	}
 
 	/////////////////////////////////////////////////////////////////

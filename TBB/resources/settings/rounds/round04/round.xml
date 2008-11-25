@@ -18,8 +18,6 @@
 		</time>
 	</limits>
 	
-	<gameplay playMode="survival"  />
-	
 	<level packname="sbm1Custom" name="test3d" />
 
 </round>

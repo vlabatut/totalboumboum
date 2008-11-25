@@ -56,7 +56,6 @@ import fr.free.totalboumboum.engine.content.sprite.item.Item;
 import fr.free.totalboumboum.engine.control.SystemControl;
 import fr.free.totalboumboum.engine.player.Player;
 import fr.free.totalboumboum.engine.player.PlayerLocation;
-import fr.free.totalboumboum.game.round.PlayMode;
 import fr.free.totalboumboum.game.round.Round;
 import fr.free.totalboumboum.game.statistics.StatisticEvent;
 import fr.free.totalboumboum.tools.FileTools;
@@ -643,13 +642,6 @@ System.out.println();
 		panel.playerOut(index);	
 	}
 
-	/////////////////////////////////////////////////////////////////
-	// OPTIONS			/////////////////////////////////////////////
-	/////////////////////////////////////////////////////////////////
-	public PlayMode getPlayMode()
-	{	return round.getPlayMode();
-	}
-	
 	/////////////////////////////////////////////////////////////////
 	// LEVEL 			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////

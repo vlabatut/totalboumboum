@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema">
 <xsd:include schemaLocation="_limit.xsd"/>
-<xsd:include schemaLocation="_playmode.xsd"/>
 <xsd:include schemaLocation="_notes.xsd"/>
 
 	<xsd:complexType name="tAuthor">
@@ -13,16 +12,11 @@
 		<xsd:attribute name="name" type="xsd:string" use="required" />
 	</xsd:complexType>
 
-	<xsd:complexType name="tGame">
-		<xsd:attribute name="playMode" type="tPlayMode" use="required" />
-	</xsd:complexType>
-
 	<xsd:complexType name="tRound">
 		<xsd:sequence>
 			<xsd:element name="notes" type="tNotes" />
 			<xsd:element name="author" type="tAuthor"  minOccurs="0"/>
 			<xsd:element name="limits" type="tRoundLimits"  />
-			<xsd:element name="gameplay" type="tGame" />
 			<xsd:element name="level" type="tLevel" />
 		</xsd:sequence>
 	</xsd:complexType>
