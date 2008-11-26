@@ -53,6 +53,7 @@ import fr.free.totalboumboum.engine.container.zone.Zone;
 import fr.free.totalboumboum.engine.content.sprite.SpritePreview;
 import fr.free.totalboumboum.game.limit.Limit;
 import fr.free.totalboumboum.game.limit.LimitConfrontation;
+import fr.free.totalboumboum.game.limit.LimitLastStanding;
 import fr.free.totalboumboum.game.limit.LimitPoints;
 import fr.free.totalboumboum.game.limit.LimitScore;
 import fr.free.totalboumboum.game.limit.LimitTime;
@@ -728,7 +729,7 @@ public class RoundDescription extends EntitledDataPanel
 		}
 	}
 	
-	public static <T extends Limit> SubPanel makeLimitsPanel(int width, int height, Limits<T> limits, String prefix)
+	public static <T extends Limit> SubPanel makeLimitsPanel(JPanel panel, int width, int height, Limits<T> limits, String prefix)
 	{	// init
 		prefix = "Game"+prefix+"DescriptionLimit";
 		int lines = 8;
@@ -768,7 +769,11 @@ public class RoundDescription extends EntitledDataPanel
 				iconName = prefix+"Custom";
 				value = nf.format(l.getThreshold());
 			}
-//TODO gérer LimitLastStanding			
+			else if(limit instanceof LimitLastStanding)
+			{	LimitPoints l = (LimitPoints)limit;
+				iconName = prefix+"LastStanding";
+				value = nf.format(l.getThreshold());
+			}
 			else if(limit instanceof LimitScore)
 			{	LimitScore l = (LimitScore) limit;
 				switch(l.getScore())
