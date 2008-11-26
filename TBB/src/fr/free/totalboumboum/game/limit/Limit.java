@@ -21,6 +21,7 @@ package fr.free.totalboumboum.game.limit;
  * 
  */
 
+import fr.free.totalboumboum.game.points.PointsProcessor;
 import fr.free.totalboumboum.game.statistics.StatisticHolder;
 
 public interface Limit
@@ -34,5 +35,6 @@ public interface Limit
 	// POINTS 			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	public float[] processPoints(StatisticHolder holder);
+	public PointsProcessor getPointProcessor();
 	
 }

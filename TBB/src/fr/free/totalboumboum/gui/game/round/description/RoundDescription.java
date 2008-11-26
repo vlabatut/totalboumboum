@@ -25,6 +25,8 @@ import java.awt.Color;
 import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.Font;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.text.NumberFormat;
@@ -77,11 +79,23 @@ import fr.free.totalboumboum.gui.tools.GuiTools;
 import fr.free.totalboumboum.tools.ImageTools;
 import fr.free.totalboumboum.tools.StringTools;
 
-public class RoundDescription extends EntitledDataPanel 
+public class RoundDescription extends EntitledDataPanel implements MouseListener
 {	
 	private static final long serialVersionUID = 1L;
 	private static final float SPLIT_RATIO = 0.4f;
 
+	private JPanel downPanel;
+	private int selectedRow = -1;
+	
+	@SuppressWarnings("unused")
+	private static final int LIMITS_PANEL_INDEX = 0;
+	private EntitledSubPanelTable limitsPanel;
+	
+	private static final int POINTS_PANEL_INDEX = 2;
+	private EntitledSubPanelTable pointsPanel;
+	private int pointsHeight;
+	private int pointsWidth;
+	
 	public RoundDescription(SplitMenuPanel container)
 	{	super(container);
 	
@@ -192,7 +206,7 @@ public class RoundDescription extends EntitledDataPanel
 				rightPanel.add(Box.createVerticalGlue());
 				
 				// down panel
-				{	JPanel downPanel = new JPanel();
+				{	downPanel = new JPanel();
 					{	BoxLayout layout = new BoxLayout(downPanel,BoxLayout.LINE_AXIS); 
 						downPanel.setLayout(layout);
 					}
@@ -203,18 +217,22 @@ public class RoundDescription extends EntitledDataPanel
 					downPanel.setMaximumSize(dim);
 					int innerWidth = (rightWidth - margin)/2;
 					
-					// points panel
-					{	
-//						SubPanel pointsPanel = makePointsPanel(innerWidth,downHeight,round.getPointProcessor(),"Round");
-//						downPanel.add(pointsPanel);
+					// limits panel
+					{	limitsPanel = makeLimitsPanel(this,innerWidth,downHeight,round.getLimits(),GuiKeys.ROUND);
+						downPanel.add(limitsPanel);
 					}
 					
 					downPanel.add(Box.createHorizontalGlue());
-					
-					// limits panel
-					{	SubPanel limitsPanel = makeLimitsPanel(innerWidth,downHeight,round.getLimits(),"Round");
-						downPanel.add(limitsPanel);
+
+					// points panel
+					{	pointsWidth = innerWidth;
+						pointsHeight = downHeight;
+						downPanel.add(new JPanel()); // dummy
+						selectLimit(0);
+//						SubPanel pointsPanel = makePointsPanel(innerWidth,downHeight,round.getPointProcessor(),GuiKeys.ROUND);
+//						downPanel.add(pointsPanel);
 					}
+					
 					rightPanel.add(downPanel);
 				}
 				infoPanel.add(rightPanel);
@@ -443,9 +461,9 @@ public class RoundDescription extends EntitledDataPanel
 		return itemsPanel;
 	}
 
-	public static SubPanel makePointsPanel(int width, int height, PointsProcessor mainPP, String prefix)
+	public static EntitledSubPanelTable makePointsPanel(int width, int height, PointsProcessor mainPP, String prefix)
 	{	// init
-		prefix = "Game"+prefix+"DescriptionPoints";
+		prefix = GuiKeys.GAME+prefix+GuiKeys.DESCRIPTION+GuiKeys.POINTS;
 		
 		ArrayList<ArrayList<Object>> data = new ArrayList<ArrayList<Object>>();
 		ArrayList<ArrayList<String>> tooltips = new ArrayList<ArrayList<String>>();
@@ -455,10 +473,10 @@ public class RoundDescription extends EntitledDataPanel
 		int colSubs = 2;
 		int colGroups = 1;
 
-		EntitledSubPanelTable pointsPanel = new EntitledSubPanelTable(width,height,colGroups,colSubs,lines);
-		String titleKey = prefix+"Title";
-		pointsPanel.setTitleKey(titleKey,true);
-		pointsPanel.getTable().setSubColumnsMaxWidth(1,Integer.MAX_VALUE);
+		EntitledSubPanelTable result = new EntitledSubPanelTable(width,height,colGroups,colSubs,lines);
+		String titleKey = prefix+GuiKeys.TITLE;
+		result.setTitleKey(titleKey,true);
+		result.getTable().setSubColumnsMaxWidth(1,Integer.MAX_VALUE);
 		
 		Iterator<ArrayList<Object>> dt = data.iterator();
 		Iterator<ArrayList<String>> tt = tooltips.iterator();
@@ -472,16 +490,16 @@ public class RoundDescription extends EntitledDataPanel
 			// left
 			{	String tooltip = tempTt.get(colSub);
 				Color fg = GuiTools.COLOR_TABLE_HEADER_FOREGROUND;
-				pointsPanel.getTable().setLabelForeground(line,colGroup,colSub,fg);
+				result.getTable().setLabelForeground(line,colGroup,colSub,fg);
 				Color bg = GuiTools.COLOR_TABLE_HEADER_BACKGROUND;
-				pointsPanel.getTable().setLabelBackground(line,colGroup,colSub,bg);
+				result.getTable().setLabelBackground(line,colGroup,colSub,bg);
 				if(tempDt.get(colSub) instanceof BufferedImage)
 				{	BufferedImage image = (BufferedImage)tempDt.get(colSub);
-					pointsPanel.getTable().setLabelIcon(line,colGroup,colSub,image,tooltip);
+					result.getTable().setLabelIcon(line,colGroup,colSub,image,tooltip);
 				}
 				else
 				{	String text = (String)tempDt.get(colSub);
-					pointsPanel.getTable().setLabelText(line,colGroup,colSub,text,tooltip);
+					result.getTable().setLabelText(line,colGroup,colSub,text,tooltip);
 				}
 				colSub++;
 			}
@@ -489,14 +507,14 @@ public class RoundDescription extends EntitledDataPanel
 			{	String tooltip = tempTt.get(colSub);
 				if(tempDt.get(colSub) instanceof BufferedImage)
 				{	BufferedImage image = (BufferedImage)tempDt.get(colSub);
-					pointsPanel.getTable().setLabelIcon(line,colGroup,colSub,image,tooltip);
+					result.getTable().setLabelIcon(line,colGroup,colSub,image,tooltip);
 				}
 				else
 				{	String text = (String)tempDt.get(colSub);
-					pointsPanel.getTable().setLabelText(line,colGroup,colSub,text,tooltip);
+					result.getTable().setLabelText(line,colGroup,colSub,text,tooltip);
 				}
 				Color bg = GuiTools.COLOR_TABLE_REGULAR_BACKGROUND;
-				pointsPanel.getTable().setLabelBackground(line,colGroup,colSub,bg);
+				result.getTable().setLabelBackground(line,colGroup,colSub,bg);
 				colSub++;
 			}
 			line++;
@@ -506,7 +524,7 @@ public class RoundDescription extends EntitledDataPanel
 			}
 		}			
 
-		return pointsPanel;
+		return result;
 	}
 	private static void makePointsPanelRec(PointsProcessor pp, ArrayList<ArrayList<Object>> data, ArrayList<ArrayList<String>> tooltips, String prefix)
 	{	// format
@@ -522,16 +540,16 @@ public class RoundDescription extends EntitledDataPanel
 				ArrayList<String> tt = new ArrayList<String>();
 				data.add(dt);
 				tooltips.add(tt);
-				String name = prefix+"Header"+"Rankpoints";
+				String name = prefix+GuiKeys.HEADER+GuiKeys.RANKPOINTS;
 				BufferedImage image = GuiTools.getIcon(name);
 				String tooltip = GuiConfiguration.getMiscConfiguration().getLanguage().getText(name+GuiKeys.TOOLTIP);
 				dt.add(image);
 				tt.add(tooltip);
 				boolean exaequoShare = pr.getExaequoShare();
 				if(exaequoShare)
-					name = prefix+"Data"+"Share";
+					name = prefix+GuiKeys.DATA+GuiKeys.SHARE;
 				else
-					name = prefix+"Data"+"Noshare";
+					name = prefix+GuiKeys.DATA+GuiKeys.NO_SHARE;
 				image = GuiTools.getIcon(name);
 				tooltip = GuiConfiguration.getMiscConfiguration().getLanguage().getText(name+GuiKeys.TOOLTIP);
 				dt.add(image);
@@ -571,7 +589,7 @@ public class RoundDescription extends EntitledDataPanel
 				ArrayList<String> tt = new ArrayList<String>();
 				data.add(dt);
 				tooltips.add(tt);
-				String name = prefix+"Header"+"Discretize";
+				String name = prefix+GuiKeys.HEADER+GuiKeys.DISCRETIZE;
 				BufferedImage image = GuiTools.getIcon(name);
 				String tooltip = GuiConfiguration.getMiscConfiguration().getLanguage().getText(name+GuiKeys.TOOLTIP);
 				dt.add(image);
@@ -616,13 +634,13 @@ public class RoundDescription extends EntitledDataPanel
 				ArrayList<String> tt = new ArrayList<String>();
 				data.add(dt);
 				tooltips.add(tt);
-				String name = prefix+"Header"+"Rankings";
+				String name = prefix+GuiKeys.HEADER+GuiKeys.RANKINGS;
 				BufferedImage image = GuiTools.getIcon(name);
 				String tooltip = GuiConfiguration.getMiscConfiguration().getLanguage().getText(name+GuiKeys.TOOLTIP);
 				if(inverted)
-					name = prefix+"Data"+"Inverted";
+					name = prefix+GuiKeys.DATA+GuiKeys.INVERTED;
 				else
-					name = prefix+"Data"+"Regular";
+					name = prefix+GuiKeys.DATA+GuiKeys.REGULAR;
 				dt.add(image);
 				tt.add(tooltip);
 			}
@@ -643,7 +661,7 @@ public class RoundDescription extends EntitledDataPanel
 			ArrayList<String> tt = new ArrayList<String>();
 			data.add(dt);
 			tooltips.add(tt);
-			String name = prefix+"Header"+"Constant";
+			String name = prefix+GuiKeys.HEADER+GuiKeys.CONSTANT;
 			BufferedImage image = GuiTools.getIcon(name);
 			String tooltip = GuiConfiguration.getMiscConfiguration().getLanguage().getText(name+GuiKeys.TOOLTIP);
 			dt.add(image);
@@ -659,7 +677,7 @@ public class RoundDescription extends EntitledDataPanel
 			ArrayList<String> tt = new ArrayList<String>();
 			data.add(dt);
 			tooltips.add(tt);
-			String name = prefix+"Header"+"Total";
+			String name = prefix+GuiKeys.HEADER+GuiKeys.TOTAL;
 			BufferedImage image = GuiTools.getIcon(name);
 			String tooltip = GuiConfiguration.getMiscConfiguration().getLanguage().getText(name+GuiKeys.TOOLTIP);
 			dt.add(image);
@@ -676,7 +694,7 @@ public class RoundDescription extends EntitledDataPanel
 			ArrayList<String> tt = new ArrayList<String>();
 			data.add(dt);
 			tooltips.add(tt);
-			String name = prefix+"Header"+"Score";
+			String name = prefix+GuiKeys.HEADER+GuiKeys.SCORE;
 			BufferedImage image = GuiTools.getIcon(name);
 			String tooltip = GuiConfiguration.getMiscConfiguration().getLanguage().getText(name+GuiKeys.TOOLTIP);
 			dt.add(image);
@@ -684,25 +702,25 @@ public class RoundDescription extends EntitledDataPanel
 			name = null;
 			switch(score)
 			{	case BOMBS:
-					name = prefix+"Data"+"Bombs";
+					name = prefix+GuiKeys.DATA+GuiKeys.BOMBS;
 					break;
 				case CROWNS:
-					name = prefix+"Data"+"Crowns";
+					name = prefix+GuiKeys.DATA+GuiKeys.CROWNS;
 					break;					
 				case BOMBEDS:
-					name = prefix+"Data"+"Bombeds";
+					name = prefix+GuiKeys.DATA+GuiKeys.BOMBEDS;
 					break;					
 				case ITEMS:
-					name = prefix+"Data"+"Items";
+					name = prefix+GuiKeys.DATA+GuiKeys.ITEMS;
 					break;					
 				case BOMBINGS:
-					name = prefix+"Data"+"Bombings";
+					name = prefix+GuiKeys.DATA+GuiKeys.BOMBINGS;
 					break;					
 				case PAINTINGS:
-					name = prefix+"Data"+"Paintings";
+					name = prefix+GuiKeys.DATA+GuiKeys.PAINTINGS;
 					break;					
 				case TIME:
-					name = prefix+"Data"+"Time";
+					name = prefix+GuiKeys.DATA+GuiKeys.TIME;
 					break;					
 			}
 			image = GuiTools.getIcon(name);
@@ -719,7 +737,7 @@ public class RoundDescription extends EntitledDataPanel
 			// icon
 			//BufferedImage icon = GuiTools.getIcon(GuiTools.GAME_ROUND_HEADER_PARTIAL);
 			String icon = "-";
-			String tooltip = GuiConfiguration.getMiscConfiguration().getLanguage().getText(prefix+"Data"+"Partial"+GuiKeys.TOOLTIP);
+			String tooltip = GuiConfiguration.getMiscConfiguration().getLanguage().getText(prefix+GuiKeys.DATA+GuiKeys.PARTIAL+GuiKeys.TOOLTIP);
 			dt.add(icon);
 			tt.add(tooltip);
 			// text
@@ -729,25 +747,25 @@ public class RoundDescription extends EntitledDataPanel
 		}
 	}
 	
-	public static <T extends Limit> SubPanel makeLimitsPanel(JPanel panel, int width, int height, Limits<T> limits, String prefix)
+	public static <T extends Limit> EntitledSubPanelTable makeLimitsPanel(MouseListener mouseListener, int width, int height, Limits<T> limits, String prefix)
 	{	// init
-		prefix = "Game"+prefix+"DescriptionLimit";
+		prefix = GuiKeys.GAME+prefix+GuiKeys.DESCRIPTION+GuiKeys.LIMIT;
 		int lines = 8;
 		int colSubs = 2;
 		int colGroups = 1;
 		if(limits.size()>lines*colGroups)
 			colGroups = 2;
 		
-		EntitledSubPanelTable limitsPanel = new EntitledSubPanelTable(width,height,colGroups,colSubs,lines);
-		String titleKey = prefix+"Title";
-		limitsPanel.setTitleKey(titleKey,true);
-		limitsPanel.getTable().setSubColumnsMaxWidth(1,Integer.MAX_VALUE);
+		EntitledSubPanelTable result = new EntitledSubPanelTable(width,height,colGroups,colSubs,lines);
+		String titleKey = prefix+GuiKeys.TITLE;
+		result.setTitleKey(titleKey,true);
+		result.getTable().setSubColumnsMaxWidth(1,Integer.MAX_VALUE);
 		
 		// data
 		NumberFormat nf = NumberFormat.getInstance();
 		nf.setMinimumFractionDigits(0);
 		Iterator<T> i = limits.iterator();
-		prefix = prefix+"Header";
+		prefix = prefix+GuiKeys.HEADER;
 		int line = 0;
 		int colGroup = 0;
 		while(i.hasNext() && colGroup<colGroups)
@@ -756,71 +774,75 @@ public class RoundDescription extends EntitledDataPanel
 			String value = null;
 			if(limit instanceof LimitConfrontation)
 			{	LimitConfrontation l = (LimitConfrontation)limit;
-				iconName = prefix+"Confrontations";
+				iconName = prefix+GuiKeys.CONFRONTATIONS;
 				value = nf.format(l.getThreshold());
 			}
 			else if(limit instanceof LimitTime)
 			{	LimitTime l = (LimitTime)limit;
-				iconName = prefix+"Time";
+				iconName = prefix+GuiKeys.TIME;
 				value = StringTools.formatTimeWithSeconds(l.getThreshold());
 			}
 			else if(limit instanceof LimitPoints)
 			{	LimitPoints l = (LimitPoints)limit;
-				iconName = prefix+"Custom";
+				iconName = prefix+GuiKeys.CUSTOM;
 				value = nf.format(l.getThreshold());
 			}
 			else if(limit instanceof LimitLastStanding)
-			{	LimitPoints l = (LimitPoints)limit;
-				iconName = prefix+"LastStanding";
+			{	LimitLastStanding l = (LimitLastStanding)limit;
+				iconName = prefix+GuiKeys.LAST_STANDING;
 				value = nf.format(l.getThreshold());
 			}
 			else if(limit instanceof LimitScore)
 			{	LimitScore l = (LimitScore) limit;
 				switch(l.getScore())
 				{	case BOMBS:
-						iconName = prefix+"Bombs";
+						iconName = prefix+GuiKeys.BOMBS;
 						value = nf.format(l.getThreshold());
 						break;
 					case CROWNS:
-						iconName = prefix+"Crowns";
+						iconName = prefix+GuiKeys.CROWNS;
 						value = nf.format(l.getThreshold());
 						break;
 					case BOMBEDS:
-						iconName = prefix+"Bombeds";
+						iconName = prefix+GuiKeys.BOMBEDS;
 						value = nf.format(l.getThreshold());
 						break;
 					case ITEMS:
-						iconName = prefix+"Items";
+						iconName = prefix+GuiKeys.ITEMS;
 						value = nf.format(l.getThreshold());
 						break;
 					case BOMBINGS:
-						iconName = prefix+"Bombings";
+						iconName = prefix+GuiKeys.BOMBINGS;
 						value = nf.format(l.getThreshold());
 						break;
 					case PAINTINGS:
-						iconName = prefix+"Paintings";
+						iconName = prefix+GuiKeys.PAINTINGS;
 						value = nf.format(l.getThreshold());
 						break;
 					case TIME:
-						iconName = prefix+"Time";
+						iconName = prefix+GuiKeys.TIME;
 						value = nf.format(l.getThreshold());
 						break;
 				}
 			}
 			//
 			int colSub = 0;
-			{	limitsPanel.getTable().setLabelKey(line,colGroup,colSub,iconName,true);
+			{	result.getTable().setLabelKey(line,colGroup,colSub,iconName,true);
 				Color fg = GuiTools.COLOR_TABLE_HEADER_FOREGROUND;
-				limitsPanel.getTable().setLabelForeground(line,colGroup,colSub,fg);
+				result.getTable().setLabelForeground(line,colGroup,colSub,fg);
 				Color bg = GuiTools.COLOR_TABLE_HEADER_BACKGROUND;
-				limitsPanel.getTable().setLabelBackground(line,colGroup,colSub,bg);
+				result.getTable().setLabelBackground(line,colGroup,colSub,bg);
+				JLabel lbl = result.getTable().getLabel(line,colGroup,colSub);
+				lbl.addMouseListener(mouseListener);
 				colSub++;
 			}
 			{	String text = value;
 				String tooltip = value;
-				limitsPanel.getTable().setLabelText(line,colGroup,colSub,text,tooltip);
+				result.getTable().setLabelText(line,colGroup,colSub,text,tooltip);
 				Color bg = GuiTools.COLOR_TABLE_REGULAR_BACKGROUND;
-				limitsPanel.getTable().setLabelBackground(line,colGroup,colSub,bg);
+				result.getTable().setLabelBackground(line,colGroup,colSub,bg);
+				JLabel lbl = result.getTable().getLabel(line,colGroup,colSub);
+				lbl.addMouseListener(mouseListener);
 				colSub++;
 			}
 			line++;
@@ -828,9 +850,9 @@ public class RoundDescription extends EntitledDataPanel
 			{	line = 0;
 				colGroup++;
 			}
-		}			
+		}
 
-		return limitsPanel;
+		return result;
 	}
 
 	@Override
@@ -841,5 +863,59 @@ public class RoundDescription extends EntitledDataPanel
 	@Override
 	public void updateData()
 	{	// nothing to do here
+	}
+
+	/////////////////////////////////////////////////////////////////
+	// MOUSE LISTENER	/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	@Override
+	public void mouseClicked(MouseEvent e)
+	{	
+	}
+
+	@Override
+	public void mouseEntered(MouseEvent e)
+	{	
+	}
+
+	@Override
+	public void mouseExited(MouseEvent e)
+	{	
+	}
+
+	@Override
+	public void mousePressed(MouseEvent e)
+	{	// init
+		JLabel label = (JLabel)e.getComponent();
+		int[] pos = limitsPanel.getTable().getLabelPosition(label);
+		// unselect
+		if(selectedRow!=-1)
+		{	limitsPanel.getTable().setLabelBackground(selectedRow,0,GuiTools.COLOR_TABLE_HEADER_BACKGROUND);
+			limitsPanel.getTable().setLabelBackground(selectedRow,1,GuiTools.COLOR_TABLE_REGULAR_BACKGROUND);
+			selectedRow = -1;
+		}		
+		// select
+		selectLimit(pos[0]);
+	}
+	
+	private void selectLimit(int row)
+	{	// paint line
+		selectedRow = row;
+		limitsPanel.getTable().setLabelBackground(selectedRow,0,GuiTools.COLOR_TABLE_SELECTED_DARK_BACKGROUND);
+		limitsPanel.getTable().setLabelBackground(selectedRow,1,GuiTools.COLOR_TABLE_SELECTED_BACKGROUND);
+		// update points panel
+		Round round = Configuration.getGameConfiguration().getTournament().getCurrentMatch().getCurrentRound();
+		Limit limit = round.getLimits().getLimit(row);
+		PointsProcessor pp = limit.getPointProcessor();
+		pointsPanel = makePointsPanel(pointsWidth,pointsHeight,pp,GuiKeys.ROUND);
+		downPanel.remove(POINTS_PANEL_INDEX);
+		downPanel.add(pointsPanel,POINTS_PANEL_INDEX);
+		validate();
+		repaint();
+	}
+
+	@Override
+	public void mouseReleased(MouseEvent e)
+	{	
 	}
 }

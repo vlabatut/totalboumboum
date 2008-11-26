@@ -420,6 +420,7 @@ public class SelectedMatchData extends EntitledDataPanel implements MouseListene
 				refreshLimits();
 		}
 	}
+	
 	@Override
 	public void mouseReleased(MouseEvent e)
 	{	

@@ -62,6 +62,10 @@ public class Limits<T extends Limit>
 	{	return limits.iterator();
 	}
 	
+	public Limit getLimit(int index)
+	{	return limits.get(index);		
+	}
+	
 	public void finish()
 	{	limits.clear();		
 	}
