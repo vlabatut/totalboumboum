@@ -356,12 +356,12 @@
 						<text name="Confrontations" value="Rencontres"  tooltip="Nombre maximal de rencontres dans le tournoi" />
 						<text name="Crowns" value="Couronnes"  tooltip="Nombre de couronnes devant être ramassées pour finir le tournoi" />
 						<text name="Custom" value="Points personnalisés"  tooltip="Nombre de points personnalisés à marquer pour finir le tournoi" />
-						<text name="Bombed" value="Bombé"  tooltip="Nombre d'explosions devant être subies pour finir le tournoi" />
+						<text name="Bombeds" value="Bombé"  tooltip="Nombre d'explosions devant être subies pour finir le tournoi" />
 						<text name="Items" value="Items"  tooltip="Nombre d'items devant être ramassés pour finir le tournoi" />
-						<text name="Bombing" value="Bombeur"  tooltip="Number de joueurs devant être explosés pour finir le tournoi" />
+						<text name="Bombings" value="Bombeur"  tooltip="Number de joueurs devant être explosés pour finir le tournoi" />
 						<text name="Paintings" value="Peinture"  tooltip="Nombre de cases devant être peintes pour finir le tournoi" />
 						<text name="Time" value="Temps"  tooltip="Durée maximale (cumulée) du tournoi" />
-						<text name="Total" value="Total"  tooltip="Nombre total de points devant être marqué sur l'ensemble des rencontres pour finir le tournoi" />
+						<text name="LastStanding" value="Joueurs"  tooltip="La fin du tournoi dépend du nombre de joueurs restant en lice" />
 					</group>
 				</group>
 				
@@ -399,10 +399,10 @@
 					<group name="Data">
 						<text name="Bombs" value="Bombes"  tooltip="Utilise le nombre total de bombes posées au cours du tournoi" />
 						<text name="Crowns" value="Couronnes"  tooltip="Utilise le nombre total de couronnes ramassées au cours du tournoi" />
-						<text name="Bombed" value="Bombé"  tooltip="Utilise le nombre total d'explosions subies au cours du tournoi" />
+						<text name="Bombeds" value="Bombé"  tooltip="Utilise le nombre total d'explosions subies au cours du tournoi" />
 						<text name="Inverted" value="Inversé"  tooltip="Ordre inversé" />
 						<text name="Items" value="Items"  tooltip="Utilise le nombre total d'items ramassés au cours du tournoi" />
-						<text name="Bombing" value="Bombeur"  tooltip="Utilise le nombre total de joueurs explosés au cours du tournoi" />
+						<text name="Bombings" value="Bombeur"  tooltip="Utilise le nombre total de joueurs explosés au cours du tournoi" />
 						<text name="Noshare" value="Sans partage"  tooltip="En cas d'égalité, les points ne sont pas partagés" />
 						<text name="Paintings" value="Peinture"  tooltip="Utilise le nombre total de cases peintes au cours du tournoi" />
 						<text name="Partial" value="Partiel"  tooltip="Utilise un résultat partiel issu d'un calcul de points personnalisé" />
@@ -421,9 +421,9 @@
 					<text name="Crowns" value="Couronnes"  tooltip="Nombre total de couronnes ramassées au cours du tournoi" />
 					<text name="CustomLimit" value="Personnalisé"  tooltip="Points personnalisés utilisés comme critère de limite" />
 					<text name="CustomPoints" value="Personnalisé"  tooltip="Points personnalisés utilisés dans le calcul final des points" />
-					<text name="Bombed" value="Bombé"  tooltip="Nombre total d'explosions subies par le joueur au cours du tournoi" />
+					<text name="Bombeds" value="Bombé"  tooltip="Nombre total d'explosions subies par le joueur au cours du tournoi" />
 					<text name="Items" value="Items"  tooltip="Nombre total d'items ramassés au cours du tournoi" />
-					<text name="Bombing" value="Bombeur"  tooltip="Nombre total de joueurs explosés au cours du tournoi" />
+					<text name="Bombings" value="Bombeur"  tooltip="Nombre total de joueurs explosés au cours du tournoi" />
 					<text name="Match" value="R"  tooltip="Nombre total de points marqués au cours pour la rencontre numéro" />
 					<text name="Name" value="Nom"  tooltip="Nom du joueur" />
 					<text name="Paintings" value="Peinture"  tooltip="Nombre total de cases peintes au cours du tournoi" />
@@ -469,12 +469,12 @@
 						<text name="Confrontations" value="Manches"  tooltip="Nombre maximal de manches dans cette rencontre" />
 						<text name="Crowns" value="Couronnes"  tooltip="Nombre de couronnes devant être ramassées pour terminer cette rencontre" />
 						<text name="Custom" value="Personnalisé"  tooltip="Nombre de points personnalisés devant être marqués pour terminer cette rencontre" />
-						<text name="Bombed" value="Bombé"  tooltip="Nombre d'explosions devant être subies pour terminer cette rencontre" />
+						<text name="Bombeds" value="Bombé"  tooltip="Nombre d'explosions devant être subies pour terminer cette rencontre" />
 						<text name="Items" value="Items"  tooltip="Nombre d'items devant être ramassés pour terminer cette rencontre" />
-						<text name="Bombing" value="Bombeur"  tooltip="Nombre de joueurs devant être explosés pour terminer cette rencontre" />
+						<text name="Bombings" value="Bombeur"  tooltip="Nombre de joueurs devant être explosés pour terminer cette rencontre" />
 						<text name="Paintings" value="Peinture"  tooltip="Nombre de cases devant être peintes pour terminer cette rencontre" />
 						<text name="Time" value="Temps"  tooltip="Durée cumulée maximale de cette rencontre" />
-						<text name="Total" value="Total"  tooltip="Nombre de points devant être marqués au cours des manches pour terminer cette rencontre" />
+						<text name="LastStanding" value="Joueurs"  tooltip="La fin de la rencontre dépend du nombre de joueurs restant en lice" />
 					</group>
 				</group>
 								
@@ -515,10 +515,10 @@
 					<group name="Data">
 						<text name="Bombs" value="Bombes"  tooltip="Utilise le nombre total de bombes posées au cours de la rencontre" />
 						<text name="Crowns" value="Couronnes"  tooltip="Utilise le nombre total de couronnes ramassées au cours de la rencontre" />
-						<text name="Bombed" value="Bombé"  tooltip="Utilise le nombre total d'explosions subies au cours de la rencontre" />
+						<text name="Bombeds" value="Bombé"  tooltip="Utilise le nombre total d'explosions subies au cours de la rencontre" />
 						<text name="Inverted" value="Inversé"  tooltip="Ordre inversé" />
 						<text name="Items" value="Items"  tooltip="Utilise le nombre total d'items ramassés au cours de la rencontre" />
-						<text name="Bombing" value="Bombeur"  tooltip="Utilise le nombre total de joueurs explosés au cours de la rencontre" />
+						<text name="Bombings" value="Bombeur"  tooltip="Utilise le nombre total de joueurs explosés au cours de la rencontre" />
 						<text name="Noshare" value="Sans partage"  tooltip="En cas d'égalité, les points ne sont pas partagés" />
 						<text name="Paintings" value="Peinture"  tooltip="Utilise le nombre total de cases peintes au cours de la rencontre" />
 						<text name="Partial" value="Partiel"  tooltip="Utilise un résultat partiel issu d'un calcul de points personnalisé" />
@@ -537,9 +537,9 @@
 					<text name="Crowns" value="Couronnes"  tooltip="Nombre total de couronnes ramassées au cours de cette rencontre" />
 					<text name="CustomLimit" value="Personnalisé"  tooltip="Points personnalisés utilisés comme un critère de fin de rencontre" />
 					<text name="CustomPoints" value="Personnalisé"  tooltip="Points personnalisés utilisés dans le calcul des points de la rencotre" />
-					<text name="Bombed" value="Bombé"  tooltip="Nombre total d'explosions subies au cours de cette rencontre" />
+					<text name="Bombeds" value="Bombé"  tooltip="Nombre total d'explosions subies au cours de cette rencontre" />
 					<text name="Items" value="Items"  tooltip="Nombre total d'items ramassés au cours de cette rencontre" />
-					<text name="Bombing" value="Bombeur"  tooltip="Nombre total de joueurs explosés au cours de cette rencontre" />
+					<text name="Bombings" value="Bombeur"  tooltip="Nombre total de joueurs explosés au cours de cette rencontre" />
 					<text name="Name" value="Nom"  tooltip="Nom du joueur" />
 					<text name="Paintings" value="Peinture"  tooltip="Nombre total de cases peintes au cours de cette rencontre" />
 					<text name="Points" value="Points"  tooltip="Nombre total de points marqués pour cette rencontre" />
@@ -602,11 +602,12 @@
 						<text name="Bombs" value="Bombes"  tooltip="Nombre de bombes devant être posées pour terminer cette manche" />
 						<text name="Crowns" value="Couronnes"  tooltip="Nombre de couronnes devant être ramassées pour terminer cette manche" />
 						<text name="Custom" value="Personnalisé"  tooltip="Nombre de points personnalisés devant être marqués pour terminer cette manche" />
-						<text name="Bombed" value="Bombé"  tooltip="Nombre d'explosions devant être subies pour terminer cette manche" />
+						<text name="Bombeds" value="Bombé"  tooltip="Nombre d'explosions devant être subies pour terminer cette manche" />
 						<text name="Items" value="Items"  tooltip="Nombre d'items devant être ramassés pour terminer cette manche" />
-						<text name="Bombing" value="Bombeur"  tooltip="Nombre de joueurs devant être explosés pour terminer cette manche" />
+						<text name="Bombings" value="Bombeur"  tooltip="Nombre de joueurs devant être explosés pour terminer cette manche" />
 						<text name="Paintings" value="Peintures"  tooltip="Nombre de cases devant être peintes pour terminer cette manche" />
 						<text name="Time" value="Temps"  tooltip="Durée maximale de la manche" />
+						<text name="LastStanding" value="Joueurs"  tooltip="La fin de la manche dépend du nombre de joueurs restant en lice" />
 					</group>
 				</group>
 								
@@ -640,10 +641,10 @@
 					<group name="Data">
 						<text name="Bombs" value="Bombes"  tooltip="Utilise le nombre de bombes posées au cours de cette manche" />
 						<text name="Crowns" value="Couronnes"  tooltip="Utilise le nombre de couronnes ramassées au cours de cette manche" />
-						<text name="Bombed" value="Bombé"  tooltip="Utilise le nombre d'explosions subies au cours de cette manche" />
+						<text name="Bombeds" value="Bombé"  tooltip="Utilise le nombre d'explosions subies au cours de cette manche" />
 						<text name="Inverted" value="Inversé"  tooltip="Ordre inversé" />
 						<text name="Items" value="Items"  tooltip="Utilise le nombre d'items ramassés au cours de cette manche" />
-						<text name="Bombing" value="Bombeur"  tooltip="Utilise le nombre de joueurs explosés au cours de cette manche" />
+						<text name="Bombings" value="Bombeur"  tooltip="Utilise le nombre de joueurs explosés au cours de cette manche" />
 						<text name="Noshare" value="Sans partage"  tooltip="En cas d'égalité, les points ne sont pas partagés" />
 						<text name="Paintings" value="Peinture"  tooltip="Utilise le nombre de cases peintes au cours de cette manche" />
 						<text name="Partial" value="Partiel"  tooltip="Utilise un résultat partiel issu d'un calcul de points personnalisé" />
@@ -665,9 +666,9 @@
 					<text name="Crowns" value="Couronnes"  tooltip="Nombre total de couronnes ramassées au cours de cette manche" />
 					<text name="CustomLimit" value="Personnalisé"  tooltip="Points personnalisés utilisés comme critère de fin de manche" />
 					<text name="CustomPoints" value="Personnalisé"  tooltip="Points personnalisés utilisés dans le calcul des points de la manche" />
-					<text name="Bombed" value="Bombé"  tooltip="Nombre total d'explosions subies au cours de cette manche" />
+					<text name="Bombeds" value="Bombé"  tooltip="Nombre total d'explosions subies au cours de cette manche" />
 					<text name="Items" value="Items"  tooltip="Nombre total d'items ramassés au cours de cette manche" />
-					<text name="Bombing" value="Bombeur"  tooltip="Nombre total de joueurs explosés au cours de cette manche" />
+					<text name="Bombings" value="Bombeur"  tooltip="Nombre total de joueurs explosés au cours de cette manche" />
 					<text name="Name" value="Nom"  tooltip="Nom du joueur" />
 					<text name="Paintings" value="Peinture"  tooltip="Nombre total de cases peintes au cours de cette manche" />
 					<text name="Points" value="Points"  tooltip="Nombre de points marqués pour cette manche" />

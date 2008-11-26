@@ -29,8 +29,48 @@ import fr.free.totalboumboum.gui.data.configuration.GuiConfiguration;
 
 public class GuiKeys
 {
+	/////////////////////////////////////////////////////////////////
+	// MISC	/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
 	public static final String TOOLTIP = "Tooltip";
+	
+	public static final String DATA = "Data";
+	public static final String HEADER = "Header";
+	public static final String SCORE = "Score";
+	public static final String PARTIAL = "Partial";
+	public static final String GAME = "Game";
+	public static final String DESCRIPTION = "Description";
+	public static final String LIMIT = "Limit";
+	public static final String TITLE = "Title";
+	
+	public static final String BOMBS = "Bombs";
+	public static final String CROWNS = "Crowns";
+	public static final String BOMBEDS = "Bombeds";
+	public static final String ITEMS = "Items";
+	public static final String BOMBINGS = "Bombings";
+	public static final String PAINTINGS = "Paintings";
+	public static final String TIME = "Time";
 
+	public static final String CONFRONTATIONS = "Confrontations";
+	public static final String CUSTOM = "Custom";
+	public static final String LAST_STANDING = "LastStanding";
+
+	public static final String TOURNAMENT = "Tournament";
+	public static final String MATCH = "Match";
+	public static final String ROUND = "Round";
+
+	public static final String POINTS = "Points";
+	public static final String RANKPOINTS = "Rankpoints";
+	public static final String SHARE = "Share";
+	public static final String NO_SHARE = "NoShare";
+	public static final String DISCRETIZE = "Discretize";
+	public static final String RANKINGS = "Rankings";
+	public static final String INVERTED = "Inverted";
+	public static final String REGULAR = "Regular";
+	public static final String CONSTANT = "Constant";
+	public static final String TOTAL = "Total";
+
+	
 	/////////////////////////////////////////////////////////////////
 	// MENUS			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////

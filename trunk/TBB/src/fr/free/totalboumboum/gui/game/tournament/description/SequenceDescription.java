@@ -23,6 +23,8 @@ package fr.free.totalboumboum.gui.game.tournament.description;
 
 import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.awt.image.BufferedImage;
 import java.text.NumberFormat;
 import java.util.ArrayList;
@@ -36,18 +38,33 @@ import javax.swing.JPanel;
 import fr.free.totalboumboum.configuration.Configuration;
 import fr.free.totalboumboum.configuration.profile.Portraits;
 import fr.free.totalboumboum.configuration.profile.Profile;
+import fr.free.totalboumboum.game.limit.Limit;
+import fr.free.totalboumboum.game.points.PointsProcessor;
 import fr.free.totalboumboum.game.tournament.sequence.SequenceTournament;
 import fr.free.totalboumboum.gui.common.panel.SplitMenuPanel;
+import fr.free.totalboumboum.gui.common.subpanel.EntitledSubPanelTable;
 import fr.free.totalboumboum.gui.common.subpanel.SubPanel;
 import fr.free.totalboumboum.gui.common.subpanel.UntitledSubPanelTable;
 import fr.free.totalboumboum.gui.game.round.description.RoundDescription;
 import fr.free.totalboumboum.gui.tools.GuiKeys;
 import fr.free.totalboumboum.gui.tools.GuiTools;
 
-public class SequenceDescription extends TournamentDescription 
+public class SequenceDescription extends TournamentDescription implements MouseListener
 {	
 	private static final long serialVersionUID = 1L;
 	private static final float SPLIT_RATIO = 0.6f;
+
+	private JPanel rightPanel;
+	private int selectedRow = -1;
+	
+	@SuppressWarnings("unused")
+	private static final int LIMITS_PANEL_INDEX = 0;
+	private EntitledSubPanelTable limitsPanel;
+	
+	private static final int POINTS_PANEL_INDEX = 2;
+	private EntitledSubPanelTable pointsPanel;
+	private int pointsHeight;
+	private int pointsWidth;
 
 	public SequenceDescription(SplitMenuPanel container)
 	{	super(container);
@@ -72,7 +89,7 @@ public class SequenceDescription extends TournamentDescription
 			infoPanel.add(Box.createHorizontalGlue());
 			
 			// right panel
-			{	JPanel rightPanel = new JPanel();
+			{	rightPanel = new JPanel();
 				{	BoxLayout layout = new BoxLayout(rightPanel,BoxLayout.PAGE_AXIS); 
 					rightPanel.setLayout(layout);
 				}
@@ -84,18 +101,22 @@ public class SequenceDescription extends TournamentDescription
 				int upHeight = (dataHeight - margin)/2;
 				int downHeight = dataHeight - upHeight - margin;
 				
-				// points panel
-				{	
-//					SubPanel pointsPanel = RoundDescription.makePointsPanel(rightWidth,downHeight,tournament.getPointProcessor(),"Tournament");
-//					rightPanel.add(pointsPanel);
+				// limit panel
+				{	limitsPanel = RoundDescription.makeLimitsPanel(this,rightWidth,downHeight,tournament.getLimits(),GuiKeys.TOURNAMENT);
+					rightPanel.add(limitsPanel);
 				}
 
 				rightPanel.add(Box.createVerticalGlue());
 				
-				// limit panel
-				{	SubPanel limitsPanel = RoundDescription.makeLimitsPanel(rightWidth,downHeight,tournament.getLimits(),"Tournament");
-					rightPanel.add(limitsPanel);
+				// points panel
+				{	pointsWidth = rightWidth;
+					pointsHeight = downHeight;
+					rightPanel.add(new JPanel()); // dummy
+					selectLimit(0);
+//					SubPanel pointsPanel = RoundDescription.makePointsPanel(rightWidth,downHeight,tournament.getPointProcessor(),GuiKey.TOURNAMENT);
+//					rightPanel.add(pointsPanel);
 				}
+				
 				infoPanel.add(rightPanel);
 			}
 
@@ -180,5 +201,59 @@ public class SequenceDescription extends TournamentDescription
 			}
 		}
 		return playersPanel;		
+	}
+
+	/////////////////////////////////////////////////////////////////
+	// MOUSE LISTENER	/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	@Override
+	public void mouseClicked(MouseEvent e)
+	{	
+	}
+
+	@Override
+	public void mouseEntered(MouseEvent e)
+	{	
+	}
+
+	@Override
+	public void mouseExited(MouseEvent e)
+	{	
+	}
+
+	@Override
+	public void mousePressed(MouseEvent e)
+	{	// init
+		JLabel label = (JLabel)e.getComponent();
+		int[] pos = limitsPanel.getTable().getLabelPosition(label);
+		// unselect
+		if(selectedRow!=-1)
+		{	limitsPanel.getTable().setLabelBackground(selectedRow,0,GuiTools.COLOR_TABLE_HEADER_BACKGROUND);
+			limitsPanel.getTable().setLabelBackground(selectedRow,1,GuiTools.COLOR_TABLE_REGULAR_BACKGROUND);
+			selectedRow = -1;
+		}		
+		// select
+		selectLimit(pos[0]);
+	}
+	
+	private void selectLimit(int row)
+	{	// paint line
+		selectedRow = row;
+		limitsPanel.getTable().setLabelBackground(selectedRow,0,GuiTools.COLOR_TABLE_SELECTED_DARK_BACKGROUND);
+		limitsPanel.getTable().setLabelBackground(selectedRow,1,GuiTools.COLOR_TABLE_SELECTED_BACKGROUND);
+		// update points panel
+		SequenceTournament tournament = (SequenceTournament)Configuration.getGameConfiguration().getTournament();
+		Limit limit = tournament.getLimits().getLimit(row);
+		PointsProcessor pp = limit.getPointProcessor();
+		pointsPanel = RoundDescription.makePointsPanel(pointsWidth,pointsHeight,pp,GuiKeys.TOURNAMENT);
+		rightPanel.add(pointsPanel,POINTS_PANEL_INDEX);
+		rightPanel.remove(POINTS_PANEL_INDEX+1);
+		validate();
+		repaint();
+	}
+
+	@Override
+	public void mouseReleased(MouseEvent e)
+	{	
 	}
 }
