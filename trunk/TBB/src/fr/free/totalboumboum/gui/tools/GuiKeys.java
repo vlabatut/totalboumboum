@@ -327,7 +327,7 @@ public class GuiKeys
 			public static final String GAME_TOURNAMENT_DESCRIPTION_LIMIT_HEADER_BOMBINGS = "GameTournamentDescriptionLimitHeaderBombings";
 			public static final String GAME_TOURNAMENT_DESCRIPTION_LIMIT_HEADER_PAINTINGS = "GameTournamentDescriptionLimitHeaderPaintings";
 			public static final String GAME_TOURNAMENT_DESCRIPTION_LIMIT_HEADER_TIME = "GameTournamentDescriptionLimitHeaderTime";
-			public static final String GAME_TOURNAMENT_DESCRIPTION_LIMIT_HEADER_TOTAL = "GameTournamentDescriptionLimitHeaderTotal";
+			public static final String GAME_TOURNAMENT_DESCRIPTION_LIMIT_HEADER_LAST_STANDING = "GameTournamentDescriptionLimitHeaderLastStanding";
 		/* MISC */
 		public static final String GAME_TOURNAMENT_DESCRIPTION_MISC_TITLE = "GameTournamentDescriptionMiscTitle";
 		/* NOTES */
@@ -414,7 +414,7 @@ public class GuiKeys
 			public static final String GAME_MATCH_DESCRIPTION_LIMIT_HEADER_BOMBINGS = "GameMatchDescriptionLimitHeaderBombings";
 			public static final String GAME_MATCH_DESCRIPTION_LIMIT_HEADER_PAINTINGS = "GameMatchDescriptionLimitHeaderPaintings";
 			public static final String GAME_MATCH_DESCRIPTION_LIMIT_HEADER_TIME = "GameMatchDescriptionLimitHeaderTime";
-			public static final String GAME_MATCH_DESCRIPTION_LIMIT_HEADER_TOTAL = "GameMatchDescriptionLimitHeaderTotal";
+			public static final String GAME_MATCH_DESCRIPTION_LIMIT_HEADER_LAST_STANDING = "GameMatchDescriptionLimitHeaderLastStanding";
 		/* MISC */
 		public static final String GAME_MATCH_DESCRIPTION_MISC_TITLE = "GameMatchDescriptionMiscTitle";
 		/* NOTES */
@@ -512,6 +512,7 @@ public class GuiKeys
 			public static final String GAME_ROUND_DESCRIPTION_LIMIT_HEADER_BOMBEDS = "GameRoundDescriptionLimitHeaderBombeds";
 			public static final String GAME_ROUND_DESCRIPTION_LIMIT_HEADER_ITEMS = "GameRoundDescriptionLimitHeaderItems";
 			public static final String GAME_ROUND_DESCRIPTION_LIMIT_HEADER_BOMBINGS = "GameRoundDescriptionLimitHeaderBombings";
+			public static final String GAME_ROUND_DESCRIPTION_LIMIT_HEADER_LAST_STANDING = "GameRoundDescriptionLimitHeaderLastStanding";
 			public static final String GAME_ROUND_DESCRIPTION_LIMIT_HEADER_PAINTINGS = "GameRoundDescriptionLimitHeaderPaintings";
 			public static final String GAME_ROUND_DESCRIPTION_LIMIT_HEADER_TIME = "GameRoundDescriptionLimitHeaderTime";
 		/* MISC */
