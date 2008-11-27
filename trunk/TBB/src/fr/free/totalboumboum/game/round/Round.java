@@ -168,6 +168,12 @@ public class Round implements StatisticHolder
 //				stats.computePoints(getPointProcessor());
 		}
 	}
+	
+	public void cancelGame()
+	{	getLimits().selectLimit(0);
+		closeGame();
+	}
+	
 	public void closeGame()
 	{	roundOver = true;
 		stats.finalizeTime(this);

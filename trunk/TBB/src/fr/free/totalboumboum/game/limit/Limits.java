@@ -58,6 +58,10 @@ public class Limits<T extends Limit>
 		return result;
 	}
 	
+	public void selectLimit(int index)
+	{	this.index = index;
+	}
+	
 	public Iterator<T> iterator()
 	{	return limits.iterator();
 	}

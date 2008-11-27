@@ -757,6 +757,4 @@ public class Launcher
 	 *  	- temps limite
 	 *  	- ? s'inspirer des BM existants
 	 */
-	
-	//TODO ROUND : esc doit déclencher la première limite trouvée, penser à calculer les points
 }

@@ -38,9 +38,12 @@ import fr.free.totalboumboum.configuration.Configuration;
 import fr.free.totalboumboum.configuration.GameConstants;
 import fr.free.totalboumboum.configuration.profile.Portraits;
 import fr.free.totalboumboum.configuration.profile.Profile;
+import fr.free.totalboumboum.game.limit.Limit;
 import fr.free.totalboumboum.game.match.Match;
+import fr.free.totalboumboum.game.points.PointsProcessor;
 import fr.free.totalboumboum.gui.common.panel.SplitMenuPanel;
 import fr.free.totalboumboum.gui.common.panel.data.EntitledDataPanel;
+import fr.free.totalboumboum.gui.common.subpanel.EntitledSubPanelTable;
 import fr.free.totalboumboum.gui.common.subpanel.SubPanel;
 import fr.free.totalboumboum.gui.common.subpanel.UntitledSubPanelTable;
 import fr.free.totalboumboum.gui.data.configuration.GuiConfiguration;
@@ -55,6 +58,18 @@ public class MatchDescription extends EntitledDataPanel implements MouseListener
 	private UntitledSubPanelTable playersPanel;
 	private ArrayList<String> controlTexts = new ArrayList<String>();
 	private ArrayList<String> controlTooltips = new ArrayList<String>();
+	
+	private JPanel rightPanel;
+	private int selectedRow = -1;
+	
+	@SuppressWarnings("unused")
+	private static final int LIMITS_PANEL_INDEX = 0;
+	private EntitledSubPanelTable limitsPanel;
+	
+	private static final int POINTS_PANEL_INDEX = 2;
+	private EntitledSubPanelTable pointsPanel;
+	private int pointsHeight;
+	private int pointsWidth;
 	
 	public MatchDescription(SplitMenuPanel container)
 	{	super(container);
@@ -83,7 +98,7 @@ public class MatchDescription extends EntitledDataPanel implements MouseListener
 			infoPanel.add(Box.createHorizontalGlue());
 			
 			// right panel
-			{	JPanel rightPanel = new JPanel();
+			{	rightPanel = new JPanel();
 				{	BoxLayout layout = new BoxLayout(rightPanel,BoxLayout.PAGE_AXIS); 
 					rightPanel.setLayout(layout);
 				}
@@ -91,17 +106,22 @@ public class MatchDescription extends EntitledDataPanel implements MouseListener
 				int upHeight = (dataHeight - margin)/2;
 				int downHeight = dataHeight - upHeight - margin;
 				
-				// points panel
-				{	SubPanel pointsPanel = RoundDescription.makePointsPanel(rightWidth,downHeight,match.getPointProcessor(),"Match");
-					rightPanel.add(pointsPanel);
+				// limit panel
+				{	SubPanel limitsPanel = RoundDescription.makeLimitsPanel(this,rightWidth,downHeight,match.getLimits(),GuiKeys.MATCH);
+					rightPanel.add(limitsPanel);
 				}
 
 				rightPanel.add(Box.createVerticalGlue());
 				
-				// limit panel
-				{	SubPanel limitsPanel = RoundDescription.makeLimitsPanel(rightWidth,downHeight,match.getLimits(),"Match");
-					rightPanel.add(limitsPanel);
+				// points panel
+				{	pointsWidth = rightWidth;
+					pointsHeight = downHeight;
+					rightPanel.add(new JPanel()); // dummy
+					selectLimit(0);
+//					SubPanel pointsPanel = RoundDescription.makePointsPanel(this,rightWidth,downHeight,match.getPointProcessor(),GuiKeys.MATCH);
+//					rightPanel.add(pointsPanel);
 				}
+				
 				infoPanel.add(rightPanel);
 			}
 
@@ -317,67 +337,72 @@ public class MatchDescription extends EntitledDataPanel implements MouseListener
 	public void mouseClicked(MouseEvent e)
 	{	
 	}
+	
 	@Override
 	public void mouseEntered(MouseEvent e)
 	{	
 	}
+	
 	@Override
 	public void mouseExited(MouseEvent e)
 	{	
 	}
+	
 	@Override
 	public void mousePressed(MouseEvent e)
 	{	JLabel label = (JLabel)e.getComponent();
 		int[] pos = playersPanel.getLabelPositionSimple(label);
-		// controls
-		if(pos[1]==2)
-		{	ArrayList<Profile> profiles = Configuration.getGameConfiguration().getTournament().getCurrentMatch().getProfiles();
-			Profile profile = profiles.get(pos[0]-1);
-			int index = profile.getControlSettingsIndex();
-			if(profile.hasAi())
-			{	if(index==GameConstants.CONTROL_COUNT)
-					index = 0;
+		// limits panel
+		if(pos[0]==-1)
+		{	pos = limitsPanel.getTable().getLabelPositionSimple(label);
+			// unselect
+			if(selectedRow!=-1)
+			{	limitsPanel.getTable().setLabelBackground(selectedRow,0,GuiTools.COLOR_TABLE_HEADER_BACKGROUND);
+				limitsPanel.getTable().setLabelBackground(selectedRow,1,GuiTools.COLOR_TABLE_REGULAR_BACKGROUND);
+				selectedRow = -1;
+			}		
+			// select
+			selectLimit(pos[0]);
+		}
+		// players panel
+		else
+		{	// controls
+			if(pos[1]==2)
+			{	ArrayList<Profile> profiles = Configuration.getGameConfiguration().getTournament().getCurrentMatch().getProfiles();
+				Profile profile = profiles.get(pos[0]-1);
+				int index = profile.getControlSettingsIndex();
+				if(profile.hasAi())
+				{	if(index==GameConstants.CONTROL_COUNT)
+						index = 0;
+					else
+						index = Configuration.getProfilesConfiguration().getNextFreeControls(profiles,index);
+				}
 				else
-					index = getNextFreeControls(profiles,index);
+					index = Configuration.getProfilesConfiguration().getNextFreeControls(profiles,index);
+				profile.setControlSettingsIndex(index);
+				playersPanel.setLabelText(pos[0],pos[1],controlTexts.get(index),controlTooltips.get(index));
 			}
-			else
-				index = getNextFreeControls(profiles,index);
-			profile.setControlSettingsIndex(index);
-			playersPanel.setLabelText(pos[0],pos[1],controlTexts.get(index),controlTooltips.get(index));
 		}
 	}
+	
 	@Override
 	public void mouseReleased(MouseEvent e)
 	{	
 	}
 
-
-	public int getNextFreeControls(ArrayList<Profile> profiles, int start)
-	{	/// init
-		Iterator<Profile> it = profiles.iterator();
-		ArrayList<Integer> occupied = new ArrayList<Integer>();
-		while(it.hasNext())
-		{	Profile profile = it.next();
-			int index = profile.getControlSettingsIndex();
-			if(index>0)
-				occupied.add(index);
-		}
-		// next free index
-		boolean found = false;
-		int result = 0;
-		int test = 1;
-		while(!found && test<=GameConstants.CONTROL_COUNT)
-		{	int temp = (start+test)%(GameConstants.CONTROL_COUNT+1);
-			if(occupied.contains(temp))
-				test++;
-			else
-			{	result = temp;
-				found = true;
-			}
-		}
-		if(!found)
-			result = start;
-		return result;
-	}
-
+	private void selectLimit(int row)
+	{	// paint line
+		selectedRow = row;
+		limitsPanel.getTable().setLabelBackground(selectedRow,0,GuiTools.COLOR_TABLE_SELECTED_DARK_BACKGROUND);
+		limitsPanel.getTable().setLabelBackground(selectedRow,1,GuiTools.COLOR_TABLE_SELECTED_BACKGROUND);
+		// update points panel
+		Match match = Configuration.getGameConfiguration().getTournament().getCurrentMatch();			
+		Limit limit = match.getLimits().getLimit(row);
+		PointsProcessor pp = limit.getPointProcessor();
+		pointsPanel = RoundDescription.makePointsPanel(pointsWidth,pointsHeight,pp,GuiKeys.MATCH);
+		rightPanel.remove(POINTS_PANEL_INDEX);
+		rightPanel.add(pointsPanel,POINTS_PANEL_INDEX);
+		validate();
+		repaint();
+	}	
 }

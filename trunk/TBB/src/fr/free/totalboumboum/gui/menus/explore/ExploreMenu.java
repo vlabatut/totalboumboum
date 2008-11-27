@@ -52,11 +52,9 @@ public class ExploreMenu extends InnerMenuPanel
 	@SuppressWarnings("unused")
 	private JButton buttonLevels;
 
-	@SuppressWarnings("unused")
 	private JButton buttonTournaments;
 	@SuppressWarnings("unused")
 	private JButton buttonMatches;
-	@SuppressWarnings("unused")
 	private JButton buttonRounds;
 	
 	@SuppressWarnings("unused")
@@ -90,8 +88,10 @@ buttonInstances.setEnabled(false);
 		buttonLevels = GuiTools.createButton(GuiKeys.MENU_RESOURCES_BUTTON_LEVELS,buttonWidth,buttonHeight,fontSize,this);
 		add(Box.createRigidArea(new Dimension(0,GuiTools.buttonVerticalSpace)));
 		buttonTournaments = GuiTools.createButton(GuiKeys.MENU_RESOURCES_BUTTON_TOURNAMENTS,buttonWidth,buttonHeight,fontSize,this);
+buttonTournaments.setEnabled(false);
 		buttonMatches = GuiTools.createButton(GuiKeys.MENU_RESOURCES_BUTTON_MATCHES,buttonWidth,buttonHeight,fontSize,this);
 		buttonRounds = GuiTools.createButton(GuiKeys.MENU_RESOURCES_BUTTON_ROUNDS,buttonWidth,buttonHeight,fontSize,this);
+buttonRounds.setEnabled(false);
 		add(Box.createRigidArea(new Dimension(0,GuiTools.buttonVerticalSpace)));
 		buttonBack = GuiTools.createButton(GuiKeys.MENU_RESOURCES_BUTTON_BACK,buttonWidth,buttonHeight,fontSize,this);
 		add(Box.createVerticalGlue());		
