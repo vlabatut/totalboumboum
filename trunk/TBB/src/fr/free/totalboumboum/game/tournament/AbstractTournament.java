@@ -65,7 +65,7 @@ public abstract class AbstractTournament implements StatisticHolder
 	protected int maxPlayerNumber;
 
 	public void addProfiles(ArrayList<Profile> profiles)
-	{	profiles.addAll(profiles);		
+	{	this.profiles.addAll(profiles);		
 	}
 	
 	public ArrayList<Profile> getProfiles()
