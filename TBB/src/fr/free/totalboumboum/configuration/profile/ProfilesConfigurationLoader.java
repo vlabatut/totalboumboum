@@ -23,6 +23,7 @@ package fr.free.totalboumboum.configuration.profile;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
@@ -54,6 +55,9 @@ public class ProfilesConfigurationLoader
 		// list
 		Element listElement = root.getChild(XmlTools.ELT_LIST);
 		loadListElement(listElement,result);
+		// selected
+		Element selectedElement = root.getChild(XmlTools.ELT_SELECTED);
+		loadSelectedElement(selectedElement,result);
 	}
 
 	@SuppressWarnings("unchecked")
@@ -64,11 +68,13 @@ public class ProfilesConfigurationLoader
 		{	Element temp = i.next();
 			loadProfileElement(temp,result);
 		}
+/*		
 result.addSelected("4");
 result.addSelected("8");		
 result.addSelected("14");		
 result.addSelected("18");		
-result.addSelected("1");		
+result.addSelected("1");
+*/		
 	}
 		
 	private static void loadProfileElement(Element root, ProfilesConfiguration result) throws IllegalArgumentException, SecurityException, ParserConfigurationException, SAXException, IOException, IllegalAccessException, NoSuchFieldException
@@ -80,6 +86,38 @@ result.addSelected("1");
 	private static void loadGeneralElement(Element root, ProfilesConfiguration result)
 	{	String lastProfileStr = root.getAttribute(XmlTools.ATT_LAST).getValue().trim();
 		int lastProfile = Integer.parseInt(lastProfileStr);
-		result.setLastProfile(lastProfile);
+		result.setLastProfileIndex(lastProfile);
+	}
+
+	private static void loadSelectedElement(Element root, ProfilesConfiguration result) throws IllegalArgumentException, SecurityException, ParserConfigurationException, SAXException, IOException, IllegalAccessException, NoSuchFieldException
+	{	// quickstart
+		Element quickstartElement = root.getChild(XmlTools.ELT_QUICKSTART);
+		ArrayList<String> quickStartSelected = loadPlayersElement(quickstartElement);
+		for(String s: quickStartSelected)
+			result.addQuickStartSelected(s);
+		// quickmatch
+		Element quickmatchElement = root.getChild(XmlTools.ELT_QUICKMATCH);
+		ArrayList<String> quickMatchSelected = loadPlayersElement(quickmatchElement);
+		for(String s: quickMatchSelected)
+			result.addQuickMatchSelected(s);
+		// tournament
+		Element tournamentElement = root.getChild(XmlTools.ELT_TOURNAMENT);
+		ArrayList<String> tournamentSelected = loadPlayersElement(tournamentElement);
+		for(String s: tournamentSelected)
+			result.addTournamentSelected(s);
+	}
+
+	@SuppressWarnings("unchecked")
+	private static ArrayList<String> loadPlayersElement(Element root)
+	{	ArrayList<String> result = new ArrayList<String>();
+		List<Element> playersElt = root.getChildren(XmlTools.ELT_PLAYER);
+		for(Element elt: playersElt)
+			loadPlayerElement(elt,result);
+		return result;
+	}
+	
+	private static void loadPlayerElement(Element root, ArrayList<String> result)
+	{	String fileName = root.getAttributeValue(XmlTools.ATT_FILE);
+		result.add(fileName);
 	}
 }

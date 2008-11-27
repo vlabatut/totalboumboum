@@ -64,7 +64,16 @@ public class GameConfiguration
 	// QUICKMATCH		/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	private String quickmatchName = null;
+	private boolean useLastPlayers = false;
 	
+	public boolean getUseLastPlayers()
+	{	return useLastPlayers;
+	}
+
+	public void setUseLastPlayers(boolean useLastPlayers)
+	{	this.useLastPlayers = useLastPlayers;
+	}
+
 	public String getQuickmatchName()
 	{	return quickmatchName;	
 	}

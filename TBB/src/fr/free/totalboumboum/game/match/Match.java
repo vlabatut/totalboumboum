@@ -64,11 +64,7 @@ public class Match implements StatisticHolder
 	public void init(ArrayList<Profile> profiles)
 	{	// are rounds in random order ?
     	if(randomOrder)
-    	{	Calendar cal = new GregorianCalendar();
-			long seed = cal.getTimeInMillis();
-			Random random = new Random(seed);
-			Collections.shuffle(rounds,random);
-    	}	
+    		randomizeRounds();
 		// NOTE vérifier si le nombre de joueurs sélectionnés correspond
 		// profiles
     	int i = 1;
@@ -89,7 +85,14 @@ public class Match implements StatisticHolder
 		stats = new StatisticMatch(this);
 		stats.initStartDate();
 	}
-
+	
+	private void randomizeRounds()
+	{	Calendar cal = new GregorianCalendar();
+		long seed = cal.getTimeInMillis();
+		Random random = new Random(seed);
+		Collections.shuffle(rounds,random);
+	}
+	
 	public void progress() throws IllegalArgumentException, SecurityException, ParserConfigurationException, SAXException, IOException, ClassNotFoundException, IllegalAccessException, NoSuchFieldException
 	{	if(!isOver())
 		{	Round round = iterator.next();
@@ -222,7 +225,10 @@ public class Match implements StatisticHolder
 		stats.addStatisticRound(statsRound);
 		// iterator
 		if(!iterator.hasNext())
-			iterator = rounds.iterator();
+		{	if(randomOrder)
+				randomizeRounds();
+			iterator = rounds.iterator();		
+		}
 		// limits
 		if(limits.testLimit(this))
 		{	float[] points = limits.processPoints(this);

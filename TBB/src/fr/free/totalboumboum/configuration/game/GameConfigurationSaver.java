@@ -59,8 +59,13 @@ public class GameConfigurationSaver
 	
 	private static Element saveQuickmatchElement(GameConfiguration gameConfiguration)
 	{	Element result = new Element(XmlTools.ELT_QUICKMATCH);
+		// name
 		String quickmatch = gameConfiguration.getQuickmatchName();
 		result.setAttribute(XmlTools.ATT_VALUE,quickmatch);
+		// use last players
+		String useLastPlayers = Boolean.toString(gameConfiguration.getUseLastPlayers());
+		result.setAttribute(XmlTools.ATT_USE_LAST_PLAYERS,useLastPlayers);
+		//
 		return result;
 	}
 	

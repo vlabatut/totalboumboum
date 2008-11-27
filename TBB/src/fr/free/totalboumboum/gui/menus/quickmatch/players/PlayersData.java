@@ -76,12 +76,11 @@ public class PlayersData extends EntitledDataPanel implements MouseListener
 	// profiles
 	private ArrayList<Profile> profiles;
 	
-	public PlayersData(SplitMenuPanel container)
+	public PlayersData(SplitMenuPanel container, ArrayList<Profile> selectedProfiles)
 	{	super(container);
 		
 		// profiles
-		//initProfiles();
-profiles = Configuration.getGameConfiguration().getTournament().getProfiles();
+		profiles = selectedProfiles;
 	
 		// title
 		String key = GuiKeys.MENU_QUICKMATCH_PLAYERS_TITLE;
@@ -443,5 +442,8 @@ profiles = Configuration.getGameConfiguration().getTournament().getProfiles();
 		{	e.printStackTrace();
 		}
 	}
-	
+
+	public ArrayList<Profile> getSelectedProfiles()
+	{	return profiles;	
+	}
 }
