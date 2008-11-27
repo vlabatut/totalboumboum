@@ -63,6 +63,10 @@ public class UntitledSubPanelTable extends SubPanel
 		if(header)
 		{	lineHeight = (int)((height - (lines+1)*GuiTools.subPanelMargin)/(lines+GuiTools.TABLE_HEADER_RATIO-1));
 			headerHeight = height - (lines+1)*GuiTools.subPanelMargin - lineHeight*(lines-1);
+			if(headerHeight-(lines-1)>=lineHeight)
+			{	headerHeight = headerHeight - (lines-1);
+				lineHeight ++;
+			}
 			headerFontSize = GuiTools.getFontSize(headerHeight*GuiTools.FONT_RATIO);
 			headerFont = GuiConfiguration.getMiscConfiguration().getFont().deriveFont((float)headerFontSize);
 		}
