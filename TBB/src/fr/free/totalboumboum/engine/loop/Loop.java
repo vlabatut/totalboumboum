@@ -513,7 +513,7 @@ System.out.println();
 			}
 			
 			if(isCanceled())
-			{	round.closeGame();
+			{	round.cancelGame();
 				setCanceled(false);
 			}
 		}
