@@ -21,5 +21,29 @@
 		<profile file="9" name="Eren+Gökçe" />
 		<profile file="8" name="Demirkol+Doğan" />
 	</list>
+	
+	<selected>
+		<quickstart>
+			<player file="4"/>
+			<player file="8"/>
+			<player file="14"/>
+			<player file="18"/>
+			<player file="1"/>
+		</quickstart>
+		
+		<quickmatch>
+			<player file="18"/>
+			<player file="1"/>
+		</quickmatch>
+		
+		<tournament>
+			<player file="4"/>
+			<player file="8"/>
+			<player file="14"/>
+			<player file="18"/>
+			<player file="1"/>
+		</tournament>
+	</selected>
+	
 </profiles>
 

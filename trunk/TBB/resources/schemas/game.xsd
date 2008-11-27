@@ -3,6 +3,7 @@
 
 	<xsd:complexType name="tQuickmatch">
 		<xsd:attribute name="value" type="xsd:string" use="required" />
+		<xsd:attribute name="useLastPlayers" type="xsd:boolean" use="required" />
 	</xsd:complexType>
 
 	<xsd:complexType name="tQuickstart">

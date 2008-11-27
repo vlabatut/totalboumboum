@@ -139,6 +139,7 @@ public class XmlTools
 	public static final String ELT_PERMISSION = "permission";
 	public static final String ELT_PERMISSIONS = "permissions";
 	public static final String ELT_PLAYER = "player";
+	public static final String ELT_PLAYERS = "players";
 	public static final String ELT_POINT = "point";
 	public static final String ELT_POINTS = "points";
 	public static final String ELT_PORTRAIT = "portrait";
@@ -155,6 +156,7 @@ public class XmlTools
 	public static final String ELT_ROUNDS = "rounds";
 	public static final String ELT_SCORE = "score";
 	public static final String ELT_SCORES = "scores";
+	public static final String ELT_SELECTED = "selected";
 	public static final String ELT_SETTING = "setting";
 	public static final String ELT_SHADOW = "shadow";
 	public static final String ELT_SHADOWS = "shadows";
@@ -262,6 +264,7 @@ public class XmlTools
 	public static final String ATT_TIME_LIMIT = "timeLimit";
 	public static final String ATT_TYPE = "type";
 	public static final String ATT_UPLINE = "upLine";
+	public static final String ATT_USE_LAST_PLAYERS = "useLastPlayers";
 	public static final String ATT_USES = "uses";
 	public static final String ATT_VALUE = "value";
 	public static final String ATT_WIDTH = "width";

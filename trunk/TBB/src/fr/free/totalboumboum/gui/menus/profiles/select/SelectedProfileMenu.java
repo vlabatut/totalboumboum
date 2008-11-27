@@ -101,9 +101,9 @@ public class SelectedProfileMenu extends InnerMenuPanel
 		{	try
 			{	// refresh counter
 				ProfilesConfiguration profilesConfig = Configuration.getProfilesConfiguration();
-				int lastProfile = profilesConfig.getLastProfile();
+				int lastProfile = profilesConfig.getLastProfileIndex();
 				int nextProfile = lastProfile+1;
-				profilesConfig.setLastProfile(nextProfile);
+				profilesConfig.setLastProfileIndex(nextProfile);
 				// create profile
 				Profile newProfile = new Profile();
 				String key = GuiKeys.MENU_PROFILES_LIST_NEW_PROFILE;

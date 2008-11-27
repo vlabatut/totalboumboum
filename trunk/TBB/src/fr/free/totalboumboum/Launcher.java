@@ -757,4 +757,8 @@ public class Launcher
 	 *  	- temps limite
 	 *  	- ? s'inspirer des BM existants
 	 */
+	
+	/* TODO
+	 * dans la gestion des profils enregistrés, il faut tenir compte de la couleur, du perso et de la commande
+	 */
 }

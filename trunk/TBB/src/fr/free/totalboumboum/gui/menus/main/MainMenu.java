@@ -36,7 +36,8 @@ import javax.xml.parsers.ParserConfigurationException;
 import org.xml.sax.SAXException;
 
 import fr.free.totalboumboum.configuration.Configuration;
-import fr.free.totalboumboum.game.tournament.AbstractTournament;
+import fr.free.totalboumboum.configuration.profile.Profile;
+import fr.free.totalboumboum.configuration.profile.ProfileLoader;
 import fr.free.totalboumboum.gui.common.MenuContainer;
 import fr.free.totalboumboum.gui.common.panel.menu.MenuPanel;
 import fr.free.totalboumboum.gui.common.panel.menu.SimpleMenuPanel;
@@ -155,38 +156,38 @@ buttonAbout.setEnabled(false);
 	    }
 		else if(e.getActionCommand().equals(GuiKeys.MENU_MAIN_BUTTON_QUICKMATCH))
 		{	if(quickmatchGamePanel==null)
-			{	try
-				{	Configuration.getGameConfiguration().loadQuickmatch();
-					AbstractTournament tournament = Configuration.getGameConfiguration().getTournament();
-					tournament.init();
-					tournament.progress();
+			{	ArrayList<Profile> selectedProfiles = new ArrayList<Profile>();
+				if(Configuration.getGameConfiguration().getUseLastPlayers())
+				{	ArrayList<String> selectedProfileNames = Configuration.getProfilesConfiguration().getQuickMatchSelected();
+					try
+					{	selectedProfiles = ProfileLoader.loadProfiles(selectedProfileNames);
+					}
+					catch (IllegalArgumentException e1)
+					{	e1.printStackTrace();
+					}
+					catch (SecurityException e1)
+					{	e1.printStackTrace();
+					}
+					catch (ParserConfigurationException e1)
+					{	e1.printStackTrace();
+					}
+					catch (SAXException e1)
+					{	e1.printStackTrace();
+					}
+					catch (IOException e1)
+					{	e1.printStackTrace();
+					}
+					catch (IllegalAccessException e1)
+					{	e1.printStackTrace();
+					}
+					catch (NoSuchFieldException e1)
+					{	e1.printStackTrace();
+					}
+					catch (ClassNotFoundException e1)
+					{	e1.printStackTrace();
+					}
 				}
-				catch (ParserConfigurationException e1)
-				{	e1.printStackTrace();
-				}
-				catch (SAXException e1)
-				{	e1.printStackTrace();
-				}
-				catch (IOException e1)
-				{	e1.printStackTrace();
-				}
-				catch (ClassNotFoundException e1)
-				{	e1.printStackTrace();
-				}
-				catch (IllegalArgumentException e1)
-				{	e1.printStackTrace();
-				}
-				catch (SecurityException e1)
-				{	e1.printStackTrace();
-				}
-				catch (IllegalAccessException e1)
-				{	e1.printStackTrace();
-				}
-				catch (NoSuchFieldException e1)
-				{	e1.printStackTrace();
-				}
-//				quickmatchGamePanel = new MatchSplitPanel(getContainer(),this);
-				quickmatchGamePanel = new PlayersSplitPanel(getContainer(),this);
+				quickmatchGamePanel = new PlayersSplitPanel(getContainer(),this,selectedProfiles);
 			}			
 			replaceWith(quickmatchGamePanel);
 	    }

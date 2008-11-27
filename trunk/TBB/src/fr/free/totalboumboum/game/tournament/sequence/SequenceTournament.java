@@ -33,7 +33,7 @@ import javax.xml.parsers.ParserConfigurationException;
 
 import org.xml.sax.SAXException;
 
-import fr.free.totalboumboum.configuration.Configuration;
+import fr.free.totalboumboum.configuration.profile.Profile;
 import fr.free.totalboumboum.game.limit.Limits;
 import fr.free.totalboumboum.game.limit.TournamentLimit;
 import fr.free.totalboumboum.game.match.Match;
@@ -62,24 +62,27 @@ public class SequenceTournament extends AbstractTournament
 	private boolean tournamentOver = false;
 	
 	@Override
-	public void init() throws IllegalArgumentException, SecurityException, ParserConfigurationException, SAXException, IOException, IllegalAccessException, NoSuchFieldException, ClassNotFoundException
+	public void init(ArrayList<Profile> selected) throws IllegalArgumentException, SecurityException, ParserConfigurationException, SAXException, IOException, IllegalAccessException, NoSuchFieldException, ClassNotFoundException
 	{	begun = true;
 		
 		// are matches in random order ?
 		if(randomOrder)
-		{	Calendar cal = new GregorianCalendar();
-			long seed = cal.getTimeInMillis();
-			Random random = new Random(seed);
-			Collections.shuffle(matches,random);
-		}
+			randomizeMatches();
 		
 		// NOTE vérifier si le nombre de joueurs sélectionnés correspond
-		setProfiles(Configuration.getProfilesConfiguration().getSelected());
+		addProfiles(selected);
 		iterator = matches.iterator();
 		stats = new StatisticTournament(this);
 		stats.initStartDate();
 	}
 
+	private void randomizeMatches()
+	{	Calendar cal = new GregorianCalendar();
+		long seed = cal.getTimeInMillis();
+		Random random = new Random(seed);
+		Collections.shuffle(matches,random);
+	}
+	
 	@Override
 	public boolean isOver()
 	{	return tournamentOver;
@@ -144,7 +147,10 @@ public class SequenceTournament extends AbstractTournament
 		stats.addStatisticMatch(statsMatch);
 		// iterator
 		if(!iterator.hasNext())
-			iterator = matches.iterator();
+		{	if(randomOrder)
+				randomizeMatches();
+			iterator = matches.iterator();		
+		}
 		// limits
 		if(getLimits().testLimit(this))
 		{	float[] points = limits.processPoints(this);

@@ -23,6 +23,7 @@ package fr.free.totalboumboum.configuration.profile;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map.Entry;
@@ -56,6 +57,9 @@ public class ProfilesConfigurationSaver
 		// list
 		Element listElement = saveListElement(profilesConfiguration);
 		result.addContent(listElement);
+		// selected
+		Element selectedElement = saveSelectedElement(profilesConfiguration);
+		result.addContent(selectedElement);
 		//
 		return result;		
 	}
@@ -78,8 +82,42 @@ public class ProfilesConfigurationSaver
 
 	private static Element saveGeneralElement(ProfilesConfiguration profilesConfiguration)
 	{	Element result = new Element(XmlTools.ELT_GENERAL);
-		String lastProfile = Integer.toString(profilesConfiguration.getLastProfile());
+		String lastProfile = Integer.toString(profilesConfiguration.getLastProfileIndex());
 		result.setAttribute(XmlTools.ATT_LAST,lastProfile);
+		return result;
+	}
+
+	private static Element saveSelectedElement(ProfilesConfiguration profilesConfiguration)
+	{	Element result = new Element(XmlTools.ELT_SELECTED);
+		// quickstart
+		Element quickstartElement = new Element(XmlTools.ELT_QUICKSTART);
+		ArrayList<String> quickstartSelected = profilesConfiguration.getQuickStartSelected();
+		savePlayersElement(quickstartElement,quickstartSelected);
+		result.addContent(quickstartElement);
+		// quickmatch
+		Element quickmatchElement = new Element(XmlTools.ELT_QUICKMATCH);
+		ArrayList<String> quickmatchSelected = profilesConfiguration.getQuickMatchSelected();
+		savePlayersElement(quickmatchElement,quickmatchSelected);
+		result.addContent(quickmatchElement);
+		// quickstart
+		Element tournamentElement = new Element(XmlTools.ELT_TOURNAMENT);
+		ArrayList<String> tournamentSelected = profilesConfiguration.getTournamentSelected();
+		savePlayersElement(tournamentElement,tournamentSelected);
+		result.addContent(tournamentElement);
+		//
+		return result;
+	}
+	
+	private static void savePlayersElement(Element result, ArrayList<String> selected)
+	{	for(String s: selected)
+		{	Element playerElt = savePlayerElement(s);
+			result.addContent(playerElt);
+		}
+	}
+	
+	private static Element savePlayerElement(String fileName)
+	{	Element result = new Element(XmlTools.ELT_PLAYER);
+		result.setAttribute(XmlTools.ATT_FILE,fileName);
 		return result;
 	}
 }

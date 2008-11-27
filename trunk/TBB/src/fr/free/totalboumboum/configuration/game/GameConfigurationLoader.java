@@ -56,8 +56,12 @@ public class GameConfigurationLoader
 	}
 	
 	private static void loadQuickmatchElement(Element root, GameConfiguration result) throws IllegalArgumentException, SecurityException, ParserConfigurationException, SAXException, IOException, IllegalAccessException, NoSuchFieldException, ClassNotFoundException
-	{	String quickmatchName = root.getAttribute(XmlTools.ATT_VALUE).getValue().trim();
+	{	// name
+		String quickmatchName = root.getAttribute(XmlTools.ATT_VALUE).getValue().trim();
 		result.setQuickmatchName(quickmatchName);
+		// use last players
+		boolean useLastPlayers = Boolean.parseBoolean(root.getAttributeValue(XmlTools.ATT_USE_LAST_PLAYERS));
+		result.setUseLastPlayers(useLastPlayers);
 	}
 
 	private static void loadQuickstartElement(Element root, GameConfiguration result) throws IllegalArgumentException, SecurityException, ParserConfigurationException, SAXException, IOException, IllegalAccessException, NoSuchFieldException, ClassNotFoundException

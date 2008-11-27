@@ -42,10 +42,22 @@ public class ProfilesConfiguration
 			}
 		}
 		// selected
-		{	Iterator<String> it = selected.iterator();
+		{	Iterator<String> it = quickStartSelected.iterator();
 			while(it.hasNext())
 			{	String temp = it.next();
-				result.addSelected(temp);			
+				result.addQuickStartSelected(temp);			
+			}
+		}
+		{	Iterator<String> it = quickMatchSelected.iterator();
+			while(it.hasNext())
+			{	String temp = it.next();
+				result.addQuickMatchSelected(temp);			
+			}
+		}
+		{	Iterator<String> it = tournamentSelected.iterator();
+			while(it.hasNext())
+			{	String temp = it.next();
+				result.addTournamentSelected(temp);			
 			}
 		}
 		return result;
@@ -55,7 +67,8 @@ public class ProfilesConfiguration
 	// PROFILES				/////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	private HashMap<String,String> profiles = new HashMap<String,String>();
-	
+	private int lastProfileIndex = 0;
+
 	public HashMap<String,String> getProfiles()
 	{	return profiles;	
 	}
@@ -68,30 +81,40 @@ public class ProfilesConfiguration
 	{	profiles.remove(file);		
 	}
 	
+	public int getLastProfileIndex()
+	{	return lastProfileIndex;
+	}
+
+	public void setLastProfileIndex(int lastProfileIndex)
+	{	this.lastProfileIndex = lastProfileIndex;
+	}
+	
 	/////////////////////////////////////////////////////////////////
 	// SELECTED				/////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	private final ArrayList<String> selected = new ArrayList<String>();
+	private final ArrayList<String> quickStartSelected = new ArrayList<String>();
+	private final ArrayList<String> quickMatchSelected = new ArrayList<String>();
+	private final ArrayList<String> tournamentSelected = new ArrayList<String>();
 	
-	public ArrayList<String> getSelected()
-	{	return selected;	
-	}
-	
-	public void addSelected(String file)
-	{	selected.add(file);		
-	}
-
-	/////////////////////////////////////////////////////////////////
-	// PROFILES			/////////////////////////////////////////////
-	/////////////////////////////////////////////////////////////////
-	private int lastProfile = 0;
-
-	public int getLastProfile()
-	{	return lastProfile;
+	public ArrayList<String> getQuickStartSelected()
+	{	return quickStartSelected;	
+	}	
+	public void addQuickStartSelected(String file)
+	{	quickStartSelected.add(file);		
 	}
 
-	public void setLastProfile(int lastProfile)
-	{	this.lastProfile = lastProfile;
+	public ArrayList<String> getQuickMatchSelected()
+	{	return quickMatchSelected;	
+	}	
+	public void addQuickMatchSelected(String file)
+	{	quickMatchSelected.add(file);		
+	}
+
+	public ArrayList<String> getTournamentSelected()
+	{	return tournamentSelected;	
+	}	
+	public void addTournamentSelected(String file)
+	{	tournamentSelected.add(file);		
 	}
 
 	/////////////////////////////////////////////////////////////////

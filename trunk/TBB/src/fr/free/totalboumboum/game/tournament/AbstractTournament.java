@@ -23,14 +23,12 @@ package fr.free.totalboumboum.game.tournament;
 
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Iterator;
 
 import javax.xml.parsers.ParserConfigurationException;
 
 import org.xml.sax.SAXException;
 
 import fr.free.totalboumboum.configuration.profile.Profile;
-import fr.free.totalboumboum.configuration.profile.ProfileLoader;
 import fr.free.totalboumboum.game.match.Match;
 import fr.free.totalboumboum.game.statistics.StatisticHolder;
 import fr.free.totalboumboum.game.statistics.StatisticTournament;
@@ -42,7 +40,7 @@ public abstract class AbstractTournament implements StatisticHolder
 	/////////////////////////////////////////////////////////////////
 	protected boolean begun = false;
 	
-	public abstract void init() throws IllegalArgumentException, SecurityException, ParserConfigurationException, SAXException, IOException, IllegalAccessException, NoSuchFieldException, ClassNotFoundException;
+	public abstract void init(ArrayList<Profile> selected) throws IllegalArgumentException, SecurityException, ParserConfigurationException, SAXException, IOException, IllegalAccessException, NoSuchFieldException, ClassNotFoundException;
 	public abstract void progress();
 	public abstract void finish();
 	public abstract boolean isOver();
@@ -66,14 +64,10 @@ public abstract class AbstractTournament implements StatisticHolder
 	protected int minPlayerNumber;
 	protected int maxPlayerNumber;
 
-	public void setProfiles(ArrayList<String> profilesNames) throws IllegalArgumentException, SecurityException, ParserConfigurationException, SAXException, IOException, IllegalAccessException, NoSuchFieldException, ClassNotFoundException
-	{	Iterator<String> i = profilesNames.iterator();
-		while(i.hasNext())
-		{	String name = i.next();
-			Profile profile = ProfileLoader.loadProfile(name);
-			profiles.add(profile);
-		}
+	public void addProfiles(ArrayList<Profile> profiles)
+	{	profiles.addAll(profiles);		
 	}
+	
 	public ArrayList<Profile> getProfiles()
 	{	return profiles;	
 	}

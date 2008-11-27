@@ -30,6 +30,8 @@ import org.xml.sax.SAXException;
 
 import fr.free.totalboumboum.configuration.Configuration;
 import fr.free.totalboumboum.configuration.GameConstants;
+import fr.free.totalboumboum.configuration.profile.Profile;
+import fr.free.totalboumboum.configuration.profile.ProfileLoader;
 import fr.free.totalboumboum.engine.loop.Loop;
 import fr.free.totalboumboum.engine.loop.LoopRenderPanel;
 import fr.free.totalboumboum.game.match.Match;
@@ -55,6 +57,7 @@ import java.awt.event.WindowListener;
 import java.awt.image.BufferStrategy;
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 
 public class QuickFrame extends JFrame implements WindowListener,LoopRenderPanel,RoundRenderPanel
 {	private static final long serialVersionUID = 1L;
@@ -107,8 +110,11 @@ public class QuickFrame extends JFrame implements WindowListener,LoopRenderPanel
 	    // init the game
 	 // tournament
 	    Configuration.getGameConfiguration().loadQuickstart();
-		AbstractTournament tournament = Configuration.getGameConfiguration().getTournament();  
-	    tournament.init();
+		AbstractTournament tournament = Configuration.getGameConfiguration().getTournament();
+		ArrayList<Profile> selectedProfiles = new ArrayList<Profile>();
+		ArrayList<String> selectedProfileNames = Configuration.getProfilesConfiguration().getQuickStartSelected();
+		selectedProfiles = ProfileLoader.loadProfiles(selectedProfileNames);
+		tournament.init(selectedProfiles);
 	    tournament.progress();
 	    // match
 	    Match match = tournament.getCurrentMatch();

@@ -23,6 +23,7 @@ package fr.free.totalboumboum.configuration.profile;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Locale;
@@ -39,6 +40,17 @@ import fr.free.totalboumboum.tools.XmlTools;
 
 public class ProfileLoader
 {	
+	public static ArrayList<Profile> loadProfiles(ArrayList<String> profilesNames) throws IllegalArgumentException, SecurityException, ParserConfigurationException, SAXException, IOException, IllegalAccessException, NoSuchFieldException, ClassNotFoundException
+	{	ArrayList<Profile> result = new ArrayList<Profile>();
+		Iterator<String> i = profilesNames.iterator();
+		while(i.hasNext())
+		{	String name = i.next();
+			Profile profile = loadProfile(name);
+			result.add(profile);
+		}
+		return result;
+	}
+
 	public static Profile loadProfile(String fileName) throws ParserConfigurationException, SAXException, IOException, IllegalArgumentException, SecurityException, IllegalAccessException, NoSuchFieldException, ClassNotFoundException
 	{	String profilesFolder = FileTools.getProfilesPath();
 		File dataFile = new File(profilesFolder+File.separator+fileName+FileTools.EXTENSION_DATA);

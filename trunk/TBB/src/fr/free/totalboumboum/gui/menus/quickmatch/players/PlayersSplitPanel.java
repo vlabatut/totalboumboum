@@ -24,7 +24,9 @@ package fr.free.totalboumboum.gui.menus.quickmatch.players;
 import java.awt.BorderLayout;
 import java.awt.Graphics;
 import java.awt.image.BufferedImage;
+import java.util.ArrayList;
 
+import fr.free.totalboumboum.configuration.profile.Profile;
 import fr.free.totalboumboum.gui.common.MenuContainer;
 import fr.free.totalboumboum.gui.common.panel.SplitMenuPanel;
 import fr.free.totalboumboum.gui.common.panel.menu.MenuPanel;
@@ -36,14 +38,14 @@ public class PlayersSplitPanel extends SplitMenuPanel
 
 	private BufferedImage image;
 
-	public PlayersSplitPanel(MenuContainer container, MenuPanel parent)
+	public PlayersSplitPanel(MenuContainer container, MenuPanel parent, ArrayList<Profile> selectedProfiles)
 	{	super(container,parent,BorderLayout.PAGE_END,GuiTools.HORIZONTAL_SPLIT_RATIO);
 	
 		// background
 		image = GuiConfiguration.getMiscConfiguration().getDarkBackground();
 	    
 		// panels
-		PlayersMenu menu = new PlayersMenu(this,parent);
+		PlayersMenu menu = new PlayersMenu(this,parent,selectedProfiles);
 		setMenuPart(menu);
 	}
 	
