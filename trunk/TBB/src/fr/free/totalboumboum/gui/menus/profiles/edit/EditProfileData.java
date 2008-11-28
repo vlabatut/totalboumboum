@@ -257,52 +257,51 @@ public class EditProfileData extends EntitledDataPanel implements MouseListener,
 			}
 			
 			// COLORS
-			{	for(int i=0;i<profile.getSpriteColors().length;i++)
-				{	int line = LINE_COLOR+i;
-					Line ln = editPanel.getLine(line);
-					ln.addLabel(0);
-					ln.addLabel(0);
-					ln.addLabel(0);
-					int col = 0;
-					// icon
-					{	ln.setLabelMinWidth(col,ln.getHeight());
-						ln.setLabelMaxWidth(col,ln.getHeight());
-						BufferedImage image = GuiTools.getIcon(GuiKeys.MENU_PROFILES_EDIT_COLOR);
-						String tooltip = GuiConfiguration.getMiscConfiguration().getLanguage().getText(GuiKeys.MENU_PROFILES_EDIT_COLOR+GuiKeys.TOOLTIP);
-						ln.setLabelIcon(col,image,tooltip+" "+(i+1));
-						Color bg = GuiTools.COLOR_TABLE_HEADER_BACKGROUND;
-						ln.setLabelBackground(col,bg);
-						col++;
-					}
-					// value
-					{	ln.setLabelMaxWidth(col,Integer.MAX_VALUE);
-						col++;
-					}
-					// previous
-					{	ln.setLabelMinWidth(col,ln.getHeight());
-						ln.setLabelMaxWidth(col,ln.getHeight());
-						ln.setLabelKey(col,GuiKeys.MENU_PROFILES_EDIT_COLOR_PREVIOUS,true);
-						Color bg = GuiTools.COLOR_TABLE_REGULAR_BACKGROUND;
-						ln.setLabelBackground(col,bg);
-						JLabel label = editPanel.getLabel(line,col);
-						label.addMouseListener(this);
-						col++;
-					}
-					// next
-					{	ln.setLabelMinWidth(col,ln.getHeight());
-						ln.setLabelMaxWidth(col,ln.getHeight());
-						ln.setLabelKey(col,GuiKeys.MENU_PROFILES_EDIT_COLOR_NEXT,true);
-						Color bg = GuiTools.COLOR_TABLE_REGULAR_BACKGROUND;
-						ln.setLabelBackground(col,bg);
-						JLabel label = editPanel.getLabel(line,col);
-						label.addMouseListener(this);
-						col++;
-					}
+			{	int line = LINE_COLOR;
+				Line ln = editPanel.getLine(line);
+				ln.addLabel(0);
+				ln.addLabel(0);
+				ln.addLabel(0);
+				int col = 0;
+				// icon
+				{	ln.setLabelMinWidth(col,ln.getHeight());
+					ln.setLabelMaxWidth(col,ln.getHeight());
+					String key = GuiKeys.MENU_PROFILES_EDIT_COLOR;
+					ln.setLabelKey(col,key,true);
+					Color bg = GuiTools.COLOR_TABLE_HEADER_BACKGROUND;
+					ln.setLabelBackground(col,bg);
+					col++;
+				}
+				// value
+				{	ln.setLabelMaxWidth(col,Integer.MAX_VALUE);
+					col++;
+				}
+				// previous
+				{	ln.setLabelMinWidth(col,ln.getHeight());
+					ln.setLabelMaxWidth(col,ln.getHeight());
+					String key = GuiKeys.MENU_PROFILES_EDIT_COLOR_PREVIOUS;
+					ln.setLabelKey(col,key,true);
+					Color bg = GuiTools.COLOR_TABLE_REGULAR_BACKGROUND;
+					ln.setLabelBackground(col,bg);
+					JLabel label = editPanel.getLabel(line,col);
+					label.addMouseListener(this);
+					col++;
+				}
+				// next
+				{	ln.setLabelMinWidth(col,ln.getHeight());
+					ln.setLabelMaxWidth(col,ln.getHeight());
+					String key = GuiKeys.MENU_PROFILES_EDIT_COLOR_NEXT;
+					ln.setLabelKey(col,key,true);
+					Color bg = GuiTools.COLOR_TABLE_REGULAR_BACKGROUND;
+					ln.setLabelBackground(col,bg);
+					JLabel label = editPanel.getLabel(line,col);
+					label.addMouseListener(this);
+					col++;
 				}
 			}
 			
 			// EMPTY
-			{	for(int line=LINE_COLOR+profile.getSpriteColors().length;line<LINE_COUNT;line++)
+			{	for(int line=LINE_COLOR+1;line<LINE_COUNT;line++)
 				{	Line ln = editPanel.getLine(line);
 					int col = 0;
 					int mw = ln.getWidth();
@@ -319,9 +318,8 @@ public class EditProfileData extends EntitledDataPanel implements MouseListener,
 		dataPart.add(editPanel);
 	}
 
-	private void refreshColor(int colorIndex)
-	{	int line = LINE_COLOR+colorIndex;
-		PredefinedColor color = profile.getSpriteColors()[colorIndex];
+	private void refreshColor()
+	{	PredefinedColor color = profile.getSpriteDefaultColor();
 		String text = null;
 		String tooltip = null;
 		Color bg = GuiTools.COLOR_TABLE_REGULAR_BACKGROUND;
@@ -335,8 +333,8 @@ public class EditProfileData extends EntitledDataPanel implements MouseListener,
 			int alpha = GuiTools.ALPHA_TABLE_REGULAR_BACKGROUND_LEVEL3;
 			bg = new Color(clr.getRed(),clr.getGreen(),clr.getBlue(),alpha);
 		}
-		editPanel.setLabelText(line,1,text,tooltip);
-		editPanel.setLabelBackground(line,1,bg);
+		editPanel.setLabelText(LINE_COLOR,1,text,tooltip);
+		editPanel.setLabelBackground(LINE_COLOR,1,bg);
 	}
 	
 	
@@ -395,34 +393,19 @@ public class EditProfileData extends EntitledDataPanel implements MouseListener,
 				getContainer().replaceWith(heroPanel);
 				break;
 			// COLOR
-			default:
-				int colorIndex = pos[0]-LINE_COLOR;
-				PredefinedColor colors[] = profile.getSpriteColors();
-				PredefinedColor color = colors[colorIndex];
+			case LINE_COLOR:
+				PredefinedColor color = profile.getSpriteDefaultColor();
 				PredefinedColor allColors[] = PredefinedColor.values();
-				boolean colorSet = false;
 				if(pos[1]==2)
 				{	int i = allColors.length-1;
 					if(color!=null)
 					{	while(i>=0 && allColors[i]!=color)
 							i--;
 					}
-					while(!colorSet)
-					{	if(i==-1)
-						{	color = null;
-							colorSet = true;
-						}
-						else
-						{	color = allColors[i];
-							int j = allColors.length-1;
-							while(j>=0 && colors[j]!=color)
-								j--;
-							if(j==-1)
-								colorSet = true;
-							else
-								i--;
-						}	
-					}
+					if(i==0)
+						color = null;
+					else
+						color = allColors[i-1];
 				}
 				else //if(pos{1==3)
 				{	int i = 0;
@@ -430,25 +413,13 @@ public class EditProfileData extends EntitledDataPanel implements MouseListener,
 					{	while(i<allColors.length && allColors[i]!=color)
 							i++;
 					}
-					while(!colorSet)
-					{	if(i==allColors.length)
-						{	color = null;
-							colorSet = true;
-						}
-						else
-						{	color = allColors[i];
-							int j = 0;
-							while(j<colors.length && colors[j]!=color)
-								j++;
-							if(j==colors.length)
-								colorSet = true;
-							else
-								i++;
-						}	
-					}
+					if(i==allColors.length-1)
+						color = null;
+					else
+						color = allColors[i+1];
 				}
-				profile.getSpriteColors()[colorIndex] = color;
-				refreshColor(colorIndex);
+				profile.setSpriteDefaultColor(color);
+				refreshColor();
 		}	
 	}
 	@Override
@@ -460,7 +431,7 @@ public class EditProfileData extends EntitledDataPanel implements MouseListener,
 	{	refreshName();
 		refreshAi();
 		refreshHero();
-		refreshColors();
+		refreshColor();
 	}
 	
 	private void refreshName()
@@ -494,11 +465,6 @@ public class EditProfileData extends EntitledDataPanel implements MouseListener,
 			ln.setLabelText(col,text,tooltip);
 			col++;
 		}
-	}
-	
-	private void refreshColors()
-	{	for(int i=0;i<profile.getSpriteColors().length;i++)
-			refreshColor(i);
 	}
 	
 	private void refreshHero()

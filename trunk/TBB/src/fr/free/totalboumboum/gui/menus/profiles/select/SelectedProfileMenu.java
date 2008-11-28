@@ -114,7 +114,7 @@ public class SelectedProfileMenu extends InnerMenuPanel
 				String spriteFolder = "shirobon";
 				newProfile.setSpriteFolder(spriteFolder);
 				PredefinedColor spriteColor = PredefinedColor.WHITE;
-				newProfile.setSpriteColor(spriteColor,0);
+				newProfile.setSpriteDefaultColor(spriteColor);
 				// create file
 				String fileName = Integer.toString(nextProfile)/*+FileTools.EXTENSION_DATA*/;			
 				ProfileSaver.saveProfile(newProfile, fileName);

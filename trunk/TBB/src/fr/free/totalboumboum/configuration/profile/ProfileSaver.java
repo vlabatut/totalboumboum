@@ -23,6 +23,7 @@ package fr.free.totalboumboum.configuration.profile;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.Locale;
 
 import org.jdom.Element;
 
@@ -44,21 +45,21 @@ public class ProfileSaver
 
 	private static Element saveProfileElement(Profile profile)
 	{	Element result = new Element(XmlTools.ELT_PROFILE);
+		
 		// general properties
 		Element generalElement = saveGeneralElement(profile);
 		result.addContent(generalElement);
+		
 		// artificial intelligence
 		if(profile.hasAi())
 		{	Element aiElement = saveAiElement(profile);
 			result.addContent(aiElement);
 		}
-		// colors
-		Element colorsElement = saveColorsElement(profile);
-		result.addContent(colorsElement);
+		
 		// sprite info
 		Element characterElement = saveCharacterElement(profile);
 		result.addContent(characterElement);
-		//
+		
 		return result;
 	}
 	
@@ -81,24 +82,6 @@ public class ProfileSaver
 		return result;
 	}
 	
-	private static Element saveColorsElement(Profile profile)
-	{	Element result = new Element(XmlTools.ELT_COLORS);
-		PredefinedColor[] colors = profile.getSpriteColors();
-		for(int i=0;i<colors.length;i++)
-		{	if(colors[i]!=null)
-			{	Element colorElt = new Element(XmlTools.ELT_COLOR);
-				result.addContent(colorElt);
-				// rank
-				String rank = Integer.toString(i);
-				colorElt.setAttribute(XmlTools.ATT_RANK,rank);
-				// color
-				String color = colors[i].toString();
-				colorElt.setAttribute(XmlTools.ATT_NAME,color);
-			}
-		}
-		return result;
-	}
-
 	private static Element saveCharacterElement(Profile profile)
 	{	Element result = new Element(XmlTools.ELT_CHARACTER);
 		// name
@@ -107,6 +90,9 @@ public class ProfileSaver
 		// pack
 		String packname = profile.getSpritePack();
 		result.setAttribute(XmlTools.ATT_PACKNAME,packname);
+		// colors
+		String defaultColor = profile.getSpriteDefaultColor().toString().toLowerCase(Locale.ENGLISH);
+		result.setAttribute(XmlTools.ATT_COLOR,defaultColor);
 		//
 		return result;
 	}

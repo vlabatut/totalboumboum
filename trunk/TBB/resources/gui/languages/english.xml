@@ -247,7 +247,7 @@
 				<text name="Ai" value="Artificial intelligence" tooltip="Name of the artificial intelligence" />
 				<text name="AiChange" value="Select the AI" tooltip="Select another artificial intelligence" />
 				<text name="AiReset" value="Reset" tooltip="Delete the previously selected artificial intelligence" />
-				<text name="Color" value="Color #" tooltip="Color of the character" />
+				<text name="Color" value="Color" tooltip="Color of the character" />
 				<text name="ColorNext" value="Next" tooltip="Next color" />
 				<text name="ColorPrevious" value="Previous" tooltip="Previous color" />
 				<text name="Hero" value="Character" tooltip="Character controled by the player" />
@@ -266,7 +266,7 @@
 			<group name="Preview" >
 				<text name="AiName" value="AI name" tooltip="Name of the artificial intelligence" />
 				<text name="AiPack" value="AI package" tooltip="Name of the artificial intelligence package" />
-				<text name="Color" value="Color" tooltip="Main color of the character" />
+				<text name="Color" value="Color" tooltip="Default color of the character" />
 				<text name="HeroName" value="Hero name" tooltip="Name of the character" />
 				<text name="HeroPack" value="Hero package" tooltip="Name of the character package" />
 				<text name="Name" value="Player name" tooltip="Name of the player" />

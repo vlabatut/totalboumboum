@@ -2,9 +2,7 @@
 <profile xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="..\..\..\resources\schemas\profile.xsd">
 	<general name="Kökciyan+Mazmanoğlu" />
 	<ai name="kokciyanmazmanoglu" pack="tournament200809" />
-	<colors>
-		<color rank="0" name="GREEN" />
-	</colors>
-	<character name="shirobon" packname="superbomberman5" />
+
+	<character name="shirobon" packname="superbomberman5" color="green"/>
 </profile>
 

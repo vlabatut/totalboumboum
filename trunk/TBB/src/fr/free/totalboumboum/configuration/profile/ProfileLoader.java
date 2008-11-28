@@ -25,7 +25,6 @@ import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Iterator;
-import java.util.List;
 import java.util.Locale;
 
 import javax.xml.parsers.ParserConfigurationException;
@@ -73,10 +72,6 @@ public class ProfileLoader
 		if(ai!=null)
 			loadAiElement(ai,result);
 		
-		// colors
-		Element colors = root.getChild(XmlTools.ELT_COLORS);
-		loadColorsElement(colors,result);
-		
 		// sprite info
 		Element character = root.getChild(XmlTools.ELT_CHARACTER);
 		loadSpriteElement(character,result);
@@ -113,28 +108,16 @@ public class ProfileLoader
 		String spriteName = heroPreview.getName();
 		result.setSpriteName(spriteName);
     	
+		// color
+		String spriteDefaultColorStr = root.getAttribute(XmlTools.ATT_COLOR).getValue().trim().toUpperCase(Locale.ENGLISH);
+    	PredefinedColor spriteDefaultColor = PredefinedColor.valueOf(spriteDefaultColorStr);
+    	result.setSpriteDefaultColor(spriteDefaultColor);
+		
     	// portraits
     	PredefinedColor spriteColor = result.getSpriteSelectedColor();
 		loadPortraits(result,spritePackname,spriteFolder,spriteColor);
     }	        
 
-    @SuppressWarnings("unchecked")
-	private static void loadColorsElement(Element root, Profile result) throws ParserConfigurationException, SAXException, IOException, ClassNotFoundException
-    {	List<Element> elements = root.getChildren(XmlTools.ATT_COLOR);
-    	Iterator<Element> it = elements.iterator();
-    	while(it.hasNext())
-    	{	Element tempElt = it.next();
-	    	// rank
-    		String rankStr = tempElt.getAttributeValue(XmlTools.ATT_RANK);
-    		int rank = Integer.parseInt(rankStr);
-    		// color
-    		String spriteColorStr = tempElt.getAttribute(XmlTools.ATT_NAME).getValue().trim().toUpperCase(Locale.ENGLISH);
-	    	PredefinedColor spriteColor = PredefinedColor.valueOf(spriteColorStr);
-	    	// add to profile
-	    	result.setSpriteColor(spriteColor,rank);
-    	}
-    }
-    
     public static void reloadPortraits(Profile profile) throws ParserConfigurationException, SAXException, IOException, ClassNotFoundException
     {	String spritePackname = profile.getSpritePack();
 		String spriteFoldername = profile.getSpriteFolder();

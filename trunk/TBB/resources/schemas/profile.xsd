@@ -1,20 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+<xsd:include schemaLocation="_colors.xsd"/>
 
 	<xsd:complexType name="tCharacter">
 		<xsd:attribute name="name" type="xsd:string" use="required" />
 		<xsd:attribute name="packname" type="xsd:string" use="required" />
-	</xsd:complexType>
-
-	<xsd:complexType name="tColor">
-		<xsd:attribute name="rank" type="xsd:integer" use="required" />
-		<xsd:attribute name="name" type="xsd:string" use="required" />
-	</xsd:complexType>
-	
-	<xsd:complexType name="tColors">
-		<xsd:sequence>
-			<xsd:element name="color" type="tColor"  minOccurs="1" maxOccurs="16"/>
-		</xsd:sequence>
+		<xsd:attribute name="color" type="tColor" use="required" />
 	</xsd:complexType>
 
 	<xsd:complexType name="tGeneral">
@@ -30,7 +21,6 @@
 		<xsd:sequence>
 			<xsd:element name="general" type="tGeneral" />
 			<xsd:element name="ai" type="tArtificialIntelligence"  minOccurs="0"/>
-			<xsd:element name="colors" type="tColors" />
 			<xsd:element name="character" type="tCharacter" />
 		</xsd:sequence>
 	</xsd:complexType>
