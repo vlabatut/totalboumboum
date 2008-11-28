@@ -52,4 +52,14 @@ public class AiFloor extends AiSprite<Floor>
 	void finish()
 	{	super.finish();
 	}
+
+	@Override
+	public String toString()
+	{	StringBuffer result = new StringBuffer();
+		result.append("Floor: [");
+		result.append(super.toString());
+		result.append(" ]");
+		return result.toString();
+	}
+
 }

@@ -54,6 +54,16 @@ public class AiFire extends AiSprite<Fire>
 	{	super.finish();
 	}
 
+	@Override
+	public String toString()
+	{	StringBuffer result = new StringBuffer();
+		result.append("Fire: [");
+		result.append(super.toString());
+		result.append(" - type: "+type);
+		result.append(" ]");
+		return result.toString();
+	}
+
 	/////////////////////////////////////////////////////////////////
 	// FIRE				/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////

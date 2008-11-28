@@ -110,7 +110,7 @@ public class AiTile
 	@Override
 	public String toString()
 	{	StringBuffer result = new StringBuffer();
-		result.append("("+col+";"+line+")");
+		result.append("("+line+";"+col+")");
 		return result.toString();
 	}
 	

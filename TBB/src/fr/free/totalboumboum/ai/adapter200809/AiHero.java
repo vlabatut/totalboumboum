@@ -58,6 +58,19 @@ public class AiHero extends AiSprite<Hero>
 	{	super.finish();
 	}
 
+	@Override
+	public String toString()
+	{	StringBuffer result = new StringBuffer();
+		result.append("Hero: [");
+		result.append(super.toString());
+		result.append(" - bmbCnt.: "+bombCount);
+		result.append(" - bmbNbr.: "+bombNumber);
+		result.append(" - bmbRge.: "+bombRange);
+		result.append(" - color: "+color);
+		result.append(" ]");
+		return result.toString();
+	}
+
 	/////////////////////////////////////////////////////////////////
 	// BOMB PARAM		/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////

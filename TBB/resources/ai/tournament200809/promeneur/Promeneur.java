@@ -48,7 +48,7 @@ public class Promeneur extends ArtificialIntelligence
 	
 	public AiAction processAction() throws StopRequestException
 	{	checkInterruption(); //APPEL OBLIGATOIRE
-		
+
 		AiZone zone = getPercepts();
 		AiHero ownHero = zone.getOwnHero();
 		AiAction result = new AiAction(AiActionName.NONE);

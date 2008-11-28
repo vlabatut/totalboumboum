@@ -81,6 +81,16 @@ public class AiState
 		return result;
 	}
 
+	@Override
+	public String toString()
+	{	StringBuffer result = new StringBuffer();
+		result.append("(");
+		result.append("name.: "+name);
+		result.append("dir.: "+direction);
+		result.append(")");
+		return result.toString();
+	}
+
 	/////////////////////////////////////////////////////////////////
 	// NAME				/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////

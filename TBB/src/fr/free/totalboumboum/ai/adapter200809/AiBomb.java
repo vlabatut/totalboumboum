@@ -63,6 +63,20 @@ public class AiBomb extends AiSprite<Bomb>
 	{	super.finish();
 	}
 
+	@Override
+	public String toString()
+	{	StringBuffer result = new StringBuffer();
+		result.append("Bomb: [");
+		result.append(super.toString());
+		result.append(" - type: "+type);
+		result.append(" - clr: "+color);
+		result.append(" - wrk: "+working);
+		result.append(" - dur.: "+normalDuration);
+		result.append(" - rge: "+range);
+		result.append(" ]");
+		return result.toString();
+	}
+
 	/////////////////////////////////////////////////////////////////
 	// TYPE				/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
