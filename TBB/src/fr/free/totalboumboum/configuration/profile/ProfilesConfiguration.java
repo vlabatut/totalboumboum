@@ -158,10 +158,7 @@ public class ProfilesConfiguration
 		}
 		// preferred colors
 		ArrayList<PredefinedColor> preferredColors = new ArrayList<PredefinedColor>();
-		for(PredefinedColor c: profile.getSpriteColors())
-		{	if(c!=null && (c==color || !usedColors.contains(c)))
-					preferredColors.add(c);
-		}
+		preferredColors.add(profile.getSpriteDefaultColor());
 		for(PredefinedColor c: PredefinedColor.values())
 		{	if(c==color || (!usedColors.contains(c) && !preferredColors.contains(c)))
 				preferredColors.add(c);

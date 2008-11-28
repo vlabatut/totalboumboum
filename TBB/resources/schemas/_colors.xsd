@@ -40,5 +40,4 @@
 		<xsd:attribute name="folder" type="xsd:string" use="optional" />
 	</xsd:complexType>
 
-
 </xsd:schema>

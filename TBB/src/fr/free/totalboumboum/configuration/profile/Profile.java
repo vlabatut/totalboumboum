@@ -21,7 +21,6 @@ package fr.free.totalboumboum.configuration.profile;
  * 
  */
 
-import fr.free.totalboumboum.configuration.GameConstants;
 import fr.free.totalboumboum.engine.control.PlayerControl;
 
 public class Profile
@@ -30,7 +29,7 @@ public class Profile
 	{	name = null;
 		spritePack = null;
 		spriteFolder = null;
-		spriteColors = new PredefinedColor[GameConstants.MAX_PROFILES_COUNT];
+		spriteDefaultColor = null;
 		aiName = null;
 		aiPackname = null;
 	}
@@ -67,7 +66,7 @@ public class Profile
 	private String spritePack;
 	private String spriteFolder;
 	private String spriteName;
-	private PredefinedColor[] spriteColors;
+	private PredefinedColor spriteDefaultColor;
 	private PredefinedColor spriteSelectedColor;
 
 	public String getSpritePack()
@@ -86,8 +85,8 @@ public class Profile
 	{	this.spriteFolder = spriteFolder;
 	}
 
-	public PredefinedColor[] getSpriteColors()
-	{	return spriteColors;
+	public PredefinedColor getSpriteDefaultColor()
+	{	return spriteDefaultColor;
 	}
 	
 	public String getSpriteName()
@@ -101,14 +100,7 @@ public class Profile
 	public PredefinedColor getSpriteSelectedColor()
 	{	PredefinedColor result = spriteSelectedColor;
 		if(result==null)
-		{	int i = 0;
-			while(spriteColors[i]==null && i<spriteColors.length)
-				i++;
-			if(i<spriteColors.length)
-			{	spriteSelectedColor = spriteColors[i];
-				result = spriteSelectedColor;
-			}
-		}
+			result = spriteDefaultColor;
 		return result;
 	}
 	
@@ -116,8 +108,8 @@ public class Profile
 	{	this.spriteSelectedColor = spriteSelectedColor;		
 	}
 	
-	public void setSpriteColor(PredefinedColor spriteColor, int index)
-	{	this.spriteColors[index] = spriteColor;
+	public void setSpriteDefaultColor(PredefinedColor spriteDefaultColor)
+	{	this.spriteDefaultColor = spriteDefaultColor;
 	}
 
 	/////////////////////////////////////////////////////////////////
@@ -187,7 +179,8 @@ public class Profile
 		result.controlSettingsIndex = controlSettingsIndex;
 		result.name = name;
 		result.portraits = portraits; //TODO copy
-		result.spriteColors = spriteColors.clone();
+		result.spriteDefaultColor = spriteDefaultColor;
+		result.spriteSelectedColor = spriteSelectedColor;
 		result.spriteControl = spriteControl;//TODO copy
 		result.spriteFolder = spriteFolder;
 		result.spritePack = spritePack;
@@ -213,9 +206,7 @@ public class Profile
 		}
 		result = result && name.equals(profile.getName());
 		result = result && spriteSelectedColor == profile.getSpriteSelectedColor();
-		for(int i=0;i<spriteColors.length;i++)
-		{	result = result && spriteColors[i]==profile.getSpriteColors()[i];			
-		}
+		result = result && spriteDefaultColor == spriteDefaultColor;
 		result = result && spriteFolder.equals(profile.getSpriteFolder());
 		result = result && spritePack.equals(profile.getSpritePack());
 		return result;
