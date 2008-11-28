@@ -281,12 +281,9 @@ public class GuiKeys
 		public static final String MENU_QUICKMATCH = "MenuQuickmatch";
 		/* BUTTON */
 			public static final String MENU_QUICKMATCH_BUTTON = MENU_QUICKMATCH+"Button";
-			public static final String MENU_QUICKMATCH_BUTTON_DESCRIPTION = MENU_QUICKMATCH_BUTTON+"Description";
 			public static final String MENU_QUICKMATCH_BUTTON_NEXT = MENU_QUICKMATCH_BUTTON+"Next";
 			public static final String MENU_QUICKMATCH_BUTTON_PREVIOUS = MENU_QUICKMATCH_BUTTON+"Previous";
 			public static final String MENU_QUICKMATCH_BUTTON_QUIT = MENU_QUICKMATCH_BUTTON+"Quit";
-			public static final String MENU_QUICKMATCH_BUTTON_RESULTS = MENU_QUICKMATCH_BUTTON+"Results";
-			public static final String MENU_QUICKMATCH_BUTTON_STATISTICS = MENU_QUICKMATCH_BUTTON+"Statistics";
 		/* PLAYERS */
 			public static final String MENU_QUICKMATCH_PLAYERS = MENU_QUICKMATCH+"Players";
 			public static final String MENU_QUICKMATCH_PLAYERS_TITLE = MENU_QUICKMATCH_PLAYERS+"Title";

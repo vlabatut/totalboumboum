@@ -140,8 +140,7 @@ public class GuiTools
 			String[] uses = 
 			{	GuiKeys.GAME_TOURNAMENT_BUTTON_DESCRIPTION,
 				GuiKeys.GAME_MATCH_BUTTON_DESCRIPTION,
-				GuiKeys.GAME_ROUND_BUTTON_DESCRIPTION,
-				GuiKeys.MENU_QUICKMATCH_BUTTON_DESCRIPTION
+				GuiKeys.GAME_ROUND_BUTTON_DESCRIPTION
 			};
 			loadButtonImages(buttonStates,folder,uses);
 		}
@@ -181,8 +180,7 @@ public class GuiTools
 			String[] uses = 
 			{	GuiKeys.GAME_TOURNAMENT_BUTTON_RESULTS,
 				GuiKeys.GAME_MATCH_BUTTON_RESULTS,
-				GuiKeys.GAME_ROUND_BUTTON_RESULTS,
-				GuiKeys.MENU_QUICKMATCH_BUTTON_RESULTS
+				GuiKeys.GAME_ROUND_BUTTON_RESULTS
 			};
 			loadButtonImages(buttonStates,folder,uses);
 		}
@@ -205,8 +203,7 @@ public class GuiTools
 			String[] uses = 
 			{	GuiKeys.GAME_TOURNAMENT_BUTTON_STATISTICS,
 				GuiKeys.GAME_MATCH_BUTTON_STATISTICS,
-				GuiKeys.GAME_ROUND_BUTTON_STATISTICS,
-				GuiKeys.MENU_QUICKMATCH_BUTTON_STATISTICS
+				GuiKeys.GAME_ROUND_BUTTON_STATISTICS
 			};
 			loadButtonImages(buttonStates,folder,uses);
 		}

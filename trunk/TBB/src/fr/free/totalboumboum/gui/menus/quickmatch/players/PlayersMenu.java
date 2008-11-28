@@ -29,9 +29,7 @@ import java.util.ArrayList;
 
 import javax.swing.Box;
 import javax.swing.BoxLayout;
-import javax.swing.ButtonGroup;
 import javax.swing.JButton;
-import javax.swing.JToggleButton;
 import javax.xml.parsers.ParserConfigurationException;
 
 import org.xml.sax.SAXException;
@@ -56,9 +54,6 @@ public class PlayersMenu extends InnerMenuPanel
 	private JButton buttonQuit;
 	@SuppressWarnings("unused")
 	private JButton buttonPrevious;
-	private JToggleButton buttonDescription;
-	private JToggleButton buttonResults;
-	private JToggleButton buttonStatistics;
 	@SuppressWarnings("unused")
 	private JButton buttonNext;
 	
@@ -83,16 +78,19 @@ public class PlayersMenu extends InnerMenuPanel
 		add(Box.createHorizontalGlue());
 		buttonPrevious = GuiTools.createButton(GuiKeys.MENU_QUICKMATCH_BUTTON_PREVIOUS,buttonWidth,buttonHeight,1,this);
 		add(Box.createRigidArea(new Dimension(GuiTools.buttonHorizontalSpace,0)));
-	    ButtonGroup group = new ButtonGroup();
-	    buttonDescription = GuiTools.createToggleButton(GuiKeys.MENU_QUICKMATCH_BUTTON_DESCRIPTION,buttonWidth,buttonHeight,1,this);
-	    buttonDescription.setEnabled(false);		
-	    group.add(buttonDescription);
-	    buttonResults = GuiTools.createToggleButton(GuiKeys.MENU_QUICKMATCH_BUTTON_RESULTS,buttonWidth,buttonHeight,1,this);
-	    buttonResults.setEnabled(false);		
-	    group.add(buttonResults);
-	    buttonStatistics = GuiTools.createToggleButton(GuiKeys.MENU_QUICKMATCH_BUTTON_STATISTICS,buttonWidth,buttonHeight,1,this);
-	    buttonStatistics.setEnabled(false);		
-	    group.add(buttonStatistics);
+//	    ButtonGroup group = new ButtonGroup();
+add(Box.createRigidArea(new Dimension(buttonWidth,buttonHeight)));
+//	    buttonDescription = GuiTools.createToggleButton(GuiKeys.MENU_QUICKMATCH_BUTTON_DESCRIPTION,buttonWidth,buttonHeight,1,this);
+//	    buttonDescription.setEnabled(false);		
+//	    group.add(buttonDescription);
+add(Box.createRigidArea(new Dimension(buttonWidth,buttonHeight)));
+//	    buttonResults = GuiTools.createToggleButton(GuiKeys.MENU_QUICKMATCH_BUTTON_RESULTS,buttonWidth,buttonHeight,1,this);
+//	    buttonResults.setEnabled(false);		
+//	    group.add(buttonResults);
+add(Box.createRigidArea(new Dimension(buttonWidth,buttonHeight)));
+//	    buttonStatistics = GuiTools.createToggleButton(GuiKeys.MENU_QUICKMATCH_BUTTON_STATISTICS,buttonWidth,buttonHeight,1,this);
+//	    buttonStatistics.setEnabled(false);		
+//	    group.add(buttonStatistics);
 		add(Box.createRigidArea(new Dimension(GuiTools.buttonHorizontalSpace,0)));
 		buttonNext = GuiTools.createButton(GuiKeys.MENU_QUICKMATCH_BUTTON_NEXT,buttonWidth,buttonHeight,1,this);
 		
@@ -110,15 +108,6 @@ public class PlayersMenu extends InnerMenuPanel
 	    }
 		else if(e.getActionCommand().equals(GuiKeys.MENU_QUICKMATCH_BUTTON_PREVIOUS))				
 		{	replaceWith(parent);
-	    }
-		else if(e.getActionCommand().equals(GuiKeys.MENU_QUICKMATCH_BUTTON_DESCRIPTION))
-		{	// never used
-	    }
-		else if(e.getActionCommand().equals(GuiKeys.MENU_QUICKMATCH_BUTTON_RESULTS))
-		{	// never used
-	    }
-		else if(e.getActionCommand().equals(GuiKeys.MENU_QUICKMATCH_BUTTON_STATISTICS))
-		{	// never used
 	    }
 		else if(e.getActionCommand().equals(GuiKeys.MENU_QUICKMATCH_BUTTON_NEXT))
 		{	if(matchSplitPanel==null)

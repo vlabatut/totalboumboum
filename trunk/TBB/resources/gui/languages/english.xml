@@ -277,12 +277,9 @@
 <!-- QUICKMATCH MENU -->	
 		<group name="Quickmatch">
 			<group name="Button">
-				<text name="Description" value="Description" tooltip="" />
 				<text name="Next" value="Next" tooltip="Go to match parameters" />
 				<text name="Previous" value="Previous" tooltip="Back to main menu" />
 				<text name="Quit" value="Quit" tooltip="Go to main menu" />
-				<text name="Results" value="Results" tooltip="" />
-				<text name="Statistics" value="Statistics" tooltip="" />
 			</group>
 			
 			<group name="Players" >
