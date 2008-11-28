@@ -469,7 +469,7 @@ public class RoundDescription extends EntitledDataPanel implements MouseListener
 		ArrayList<ArrayList<String>> tooltips = new ArrayList<ArrayList<String>>();
 		makePointsPanelRec(mainPP,data,tooltips,prefix);
 		
-		int lines = data.size();
+		int lines = Math.max(8,data.size());
 		int colSubs = 2;
 		int colGroups = 1;
 
@@ -522,7 +522,7 @@ public class RoundDescription extends EntitledDataPanel implements MouseListener
 			{	line = 0;
 				colGroup++;
 			}
-		}			
+		}
 
 		return result;
 	}

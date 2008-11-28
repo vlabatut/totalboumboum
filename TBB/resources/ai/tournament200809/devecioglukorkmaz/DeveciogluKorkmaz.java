@@ -59,7 +59,7 @@ public class DeveciogluKorkmaz extends ArtificialIntelligence {
 			} else if (getDistance(currentTile, enemy.getTile()) <= 1
 					&& currentTile.getBombs().size() == 0) {
 				result = new AiAction(AiActionName.DROP_BOMB);
-				System.out.println("J'ai pose une bombe");
+//				System.out.println("J'ai pose une bombe");
 			} else {
 				AiTile m = getCloseToEnemy();
 				if (!dangerousTiles.contains(m)) {
@@ -98,7 +98,7 @@ public class DeveciogluKorkmaz extends ArtificialIntelligence {
 			while (visited.contains(node)) {
 				node = fifo.poll();
 			}
-			System.out.println(node.toString());
+//			System.out.println(node.toString());
 			if (!dangerousTiles.contains(node)) {
 				solution = node;
 			} else {
@@ -162,7 +162,7 @@ public class DeveciogluKorkmaz extends ArtificialIntelligence {
 			while (visited.contains(node)) {
 				node = fifo.poll();
 			}
-			System.out.println(node.toString());
+//			System.out.println(node.toString());
 			if (!dangerousTiles.contains(node)) {
 				closest = node;
 			} else {
@@ -218,7 +218,7 @@ public class DeveciogluKorkmaz extends ArtificialIntelligence {
 				}
 			}
 		}
-		System.out.println(result.toString());
+//		System.out.println(result.toString());
 		return result;
 	}
 

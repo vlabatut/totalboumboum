@@ -37,9 +37,9 @@ public class TirtilTomruk extends ArtificialIntelligence
 	public AiAction processAction() throws StopRequestException
 	{	checkInterruption(); //Appel Obligatoire
 	
-		System.out.println("---------------------***********-------------");
-		System.out.println("---------------------*Iteration*-------------");
-		System.out.println("---------------------***********-------------");
+//		System.out.println("---------------------***********-------------");
+//		System.out.println("---------------------*Iteration*-------------");
+//		System.out.println("---------------------***********-------------");
 		initAI();	
 		
 		// si ownHero est null, c'est que l'IA est morte : inutile de continuer
@@ -49,7 +49,7 @@ public class TirtilTomruk extends ArtificialIntelligence
 			
 			if(danger)
 			{//Il y a un danger, il faut se sauver.
-				System.out.println("DANGER");
+//				System.out.println("DANGER");
 				pickNextTile();
 				if(isClear(caractere.getTile()))
 				{
@@ -62,7 +62,7 @@ public class TirtilTomruk extends ArtificialIntelligence
 			}
 			else
 			{//On peut attaquer.
-				System.out.println("ATTACK");
+//				System.out.println("ATTACK");
 				attack();
 				if(dropBombe)
 				{						
@@ -182,9 +182,9 @@ public class TirtilTomruk extends ArtificialIntelligence
 		{	checkInterruption(); //Appel Obligatoire
 			escapeTileTemp = itEscape.next();
 			PathFinder pathFind = new PathFinder(this.zone,escapeTileTemp,this);
-			System.out.println("Paths essaye:" + escapeTileTemp.toString());
+//			System.out.println("Paths essaye:" + escapeTileTemp.toString());
 			temp = pathFind.getPath();
-			System.out.println(temp.toString());
+//			System.out.println(temp.toString());
 			if(minPath > temp.size() && !temp.isEmpty())
 			{			
 				minPath = temp.size();
@@ -196,9 +196,9 @@ public class TirtilTomruk extends ArtificialIntelligence
 			System.out.println("Min distance:" + minPath);
 			*/
 		}
-		System.out.println("Place: (" + caractere.getCol() + "," + caractere.getLine() + ")");
-		System.out.println("Path trouve:" + result.toString());
-		System.out.println("Min distance:" + minPath);
+//		System.out.println("Place: (" + caractere.getCol() + "," + caractere.getLine() + ")");
+//		System.out.println("Path trouve:" + result.toString());
+//		System.out.println("Min distance:" + minPath);
 		return result;
 	}
 
@@ -289,6 +289,6 @@ public class TirtilTomruk extends ArtificialIntelligence
 					rivals.add(tempHero);
 			}
 		}
-		System.out.print(zoneAdapted.toString());
+//		System.out.print(zoneAdapted.toString());
 	}
 }
