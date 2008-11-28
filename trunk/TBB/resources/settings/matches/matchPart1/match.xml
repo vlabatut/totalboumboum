@@ -12,12 +12,19 @@
 	<author value="Vincent Labatut" />
 
 	<limits>
-
+<!-- 
 		<confrontation>
 			<points local="true" name="total" />
 			<threshold value="3" />
 		</confrontation>
-	
+ -->
+ 		<points>
+			<points local="true" name="total" />
+			<threshold value="2" />
+			<source local="true" name="total"/>
+ 		</points>
+ 	
+ 	
 	</limits>
 
  	
