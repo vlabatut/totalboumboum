@@ -1,14 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <profiles xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="..\..\..\resources\schemas\profiles.xsd">
-	<general last="26" />
+	<general last="41" />
 	<list>
 		<profile file="17" name="Şahin+Yıldırım" />
 		<profile file="18" name="Promeneur" />
 		<profile file="15" name="Kurtuluş+Özsoy" />
 		<profile file="16" name="Okan+Yüksel" />
 		<profile file="13" name="Keçer+Yaman" />
+		<profile file="27" name="Adatepe" />
 		<profile file="14" name="Kılıç+Pala" />
+		<profile file="28" name="Akkaya+Danacioğlu" />
 		<profile file="11" name="Göksel+Mengeş" />
+		<profile file="29" name="Akpolat+Şener" />
 		<profile file="12" name="Hanci+Toprak" />
 		<profile file="3" name="Baydar+Camcı" />
 		<profile file="2" name="Başman+Sandallı" />
@@ -19,31 +22,38 @@
 		<profile file="5" name="Çağlayan+Elmas" />
 		<profile file="4" name="Bingöl+Ketenci" />
 		<profile file="9" name="Eren+Gökçe" />
-		<profile file="8" name="Demirkol+Doğan" />
+		<profile file="30" name="Altay+Basaranoğlu" />
+		<profile file="31" name="Bilgin+Karabağ" />
+		<profile file="32" name="Çalışkan+Cap+Doğaner" />
+		<profile file="33" name="Çöremen+Küçükkarakürt" />
+		<profile file="34" name="Dayioğlugil+Geçkalan" />
+		<profile file="35" name="Demirağ+Şagar" />
+		<profile file="36" name="Devecioğlu+Körkmaz" />
+		<profile file="37" name="Erişik+Pektaş" />
+		<profile file="38" name="Günalp+Yürtsever" />
+		<profile file="39" name="Kökciyan+Mazmanoğlu" />
+		<profile file="40" name="Medeni+Uluer" />
+		<profile file="41" name="Tırtıl+Tomruk" />
 	</list>
-	
 	<selected>
 		<quickstart>
-			<player file="4"/>
-			<player file="8"/>
-			<player file="14"/>
-			<player file="18"/>
-			<player file="1"/>
+			<player file="4" />
+			<player file="8" />
+			<player file="14" />
+			<player file="18" />
+			<player file="1" />
 		</quickstart>
-		
 		<quickmatch>
-			<player file="18"/>
-			<player file="1"/>
+			<player file="18" />
+			<player file="1" />
 		</quickmatch>
-		
 		<tournament>
-			<player file="4"/>
-			<player file="8"/>
-			<player file="14"/>
-			<player file="18"/>
-			<player file="1"/>
+			<player file="4" />
+			<player file="8" />
+			<player file="14" />
+			<player file="18" />
+			<player file="1" />
 		</tournament>
 	</selected>
-	
 </profiles>
 
