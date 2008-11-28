@@ -651,6 +651,8 @@ public class Launcher
 	 * - modification : dans la police de caractères : i minuscule et barre du sept
 	 * - nouveauté : visualisation des matches
 	 * - modification : calcul du nombre de joueurs nécessaires pour un match et pour un round
+	 * - modification : un pointprocesssor par limite
+	 * - modification : fonctions toString pour visualiser les sprites dans l'API pour l'IA
 	 * 
 	 * *******************************************************
 	 * *********************** A FAIRE ***********************
