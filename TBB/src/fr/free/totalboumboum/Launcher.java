@@ -658,13 +658,12 @@ public class Launcher
 	 * *********************** A FAIRE ***********************
 	 * *******************************************************
 	 * 
-	 * - virer les boutons inutiles dans l'écran de sélection des joueurs
+	 * - ça serait bien que les joueurs soient affichés dans l'ordre relatif aux points de la limite rencontrée
+	 *   voire on définit explicitement un ordre d'affichage dans la compétition
 	 * 
 	 * - virer la possibilité de définir plusieurs couleurs, ça ne sert à rien
 	 * 
 	 * - faire le classement lexicographique gérant les signes diacritiques partout où c'est nécessaire
-	 * 
-	 * - inutile de maintenir une liste des profils, ça peut se calculer au démarrage du jeu sans aucun problème 
 	 * 
 	 * - mutualiser encore plus les composants graphiques : séparer structures de contenu (liste des navigateurs) et contenus (limites,points...)
 	 * 
@@ -697,8 +696,6 @@ public class Launcher
 	 * 
 	 * - bug d'animation : quand le bonhomme va à droite et qu'on appuie sur gauche, y a une espèce de passage droite-gauche très rapide au niveau de l'animation, insuportable
 	 * 
-	 * - possibilité de changer la couleur et le perso ad hoc, comme pour les commandes (?) ou bien avant le tournoi/match
-	 * 
 	 * - dans les résultats :
 	 * 		- afficher par défaut les 4 scores de bases
 	 * 		- plus les scores utilisés dans les points et/ou les limites
@@ -709,9 +706,7 @@ public class Launcher
 	 * - bug de gameplay : quand deux persos meurent dans le même cycle, le moteur considère une précédence temporelle alors qu'il n'y en a pas
 	 * 
 	 * - stats : nombre de fois qu'un level a été joué
-	 * 
 	 * - champ en plus dans les profils : le classement du joueur, nbre de rouds gagnés/nbre de rounds joués
-	 * 
 	 * - dans les persos : % de rounds gagnés, ou bien nbre de rounds joués
 	 * 
 	 * - lors de la sélection des commandes :
