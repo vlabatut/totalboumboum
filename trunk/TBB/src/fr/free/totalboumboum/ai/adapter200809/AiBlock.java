@@ -64,6 +64,16 @@ public class AiBlock extends AiSprite<Block>
 	{	super.finish();
 	}
 
+	@Override
+	public String toString()
+	{	StringBuffer result = new StringBuffer();
+		result.append("Block: [");
+		result.append(super.toString());
+		result.append(" - destr.: "+destructible);
+		result.append(" ]");
+		return result.toString();
+	}
+
 	/////////////////////////////////////////////////////////////////
 	// DESTRUCTIBLE		/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////

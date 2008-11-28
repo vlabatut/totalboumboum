@@ -9,7 +9,14 @@
 		<line value="If there's still a draw, points are shared." />
 	</notes>
 
-	<constant value="1" />
+	<rankpoints invert="false" exaequoShare="true">
+		<rankings>
+			<scores type="time" />
+		</rankings>	
+		<values>
+			<value value="1" />
+		</values>
+	</rankpoints>
 	
 <!-- 	
 	<discretize>

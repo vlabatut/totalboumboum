@@ -231,7 +231,7 @@ public class AiZone
 	 * @param line	ligne de la case dont on veut le voisin
 	 * @param col	colonne de la case dont on veut le voisin
 	 * @param direction	direction dans laquelle le voisin se trouve
-	 * @return	le voisin de la case située à la position (line,col) et situé dans la direction indiquée
+	 * @return	le voisin de la case passée en paramètre et situé dans la direction indiquée
 	 */
 	public AiTile getNeighbourTile(AiTile tile, Direction direction)
 	{	AiTile result = null;

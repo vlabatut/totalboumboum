@@ -85,6 +85,15 @@ public abstract class AiSprite<T extends Sprite>
 		return result;
 	}
 
+	@Override
+	public String toString()
+	{	StringBuffer result = new StringBuffer();
+		result.append(" ("+getTile().getLine()+";"+getTile().getCol()+")");
+		result.append(" ("+posX+";"+posY+";"+posZ+")");
+		result.append(" - state: "+state.toString());
+		return result.toString();
+	}
+
 	/////////////////////////////////////////////////////////////////
 	// SPRITE			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
