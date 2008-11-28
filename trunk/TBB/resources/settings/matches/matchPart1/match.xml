@@ -14,7 +14,7 @@
 	<limits>
 
 		<confrontation>
-			<points local="false" name="basicMatch" />
+			<points local="true" name="total" />
 			<threshold value="3" />
 		</confrontation>
 	

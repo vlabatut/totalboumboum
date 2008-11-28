@@ -13,13 +13,20 @@
 
 	<limits>
 		<lastStanding>
-			<points local="false" name="basicSurvival" />
-			<threshold value="1" comparator="lesseq"/>
+			<points local="true" name="zeroPoint" />
+			<threshold value="0" comparator="equal"/>
 		</lastStanding>
+
+		<lastStanding>
+			<points local="true" name="onePoint" />
+			<threshold value="1" comparator="equal"/>
+		</lastStanding>
+
 		<time>
-			<points local="false" name="basicSurvival" />
+			<points local="true" name="zeroPoint" />
  			<threshold value="30000" />
 		</time>
+		
 	</limits>
 	
 	<level packname="sbm1Custom" name="part1" />

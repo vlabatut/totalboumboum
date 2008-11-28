@@ -833,7 +833,7 @@ public class KokciyanMazmanoglu extends ArtificialIntelligence
 			checkInterruption();
 			AiTile t = iterCase.next();
 			if (i == 0 && isWall(t)) {
-				System.out.println(i+" "+getPercepts().getDirection(bombe, t));
+//				System.out.println(i+" "+getPercepts().getDirection(bombe, t));
 				if (possibleMoveD(me.getLine(), me.getCol(), 2, -2)) { // 2 kadar
 					// asagi
 					liste
@@ -843,7 +843,7 @@ public class KokciyanMazmanoglu extends ArtificialIntelligence
 				}
 			}
 			if (i == 1 && isWall(t)) {
-				System.out.println(i+" "+getPercepts().getDirection(bombe, t));
+//				System.out.println(i+" "+getPercepts().getDirection(bombe, t));
 				if (possibleMoveD(me.getLine(), me.getCol(), 2, -1)) {// 2 kadar
 					// sol
 					liste
@@ -853,7 +853,7 @@ public class KokciyanMazmanoglu extends ArtificialIntelligence
 				}
 			}
 			if (i == 2 && isWall(t)) {
-				System.out.println(i+" "+getPercepts().getDirection(bombe, t));
+//				System.out.println(i+" "+getPercepts().getDirection(bombe, t));
 				if (possibleMoveD(me.getLine(), me.getCol(), 2, 1)) { // 2
 					// kadar
 					// saga
@@ -863,7 +863,7 @@ public class KokciyanMazmanoglu extends ArtificialIntelligence
 				}
 			}
 			if (i == 3 && isWall(t)) {
-				System.out.println(i+" "+getPercepts().getDirection(bombe, t));
+//				System.out.println(i+" "+getPercepts().getDirection(bombe, t));
 				if (possibleMoveD(me.getLine(), me.getCol(), 2, 2)) { // 2 kadar
 					// yukari
 					liste

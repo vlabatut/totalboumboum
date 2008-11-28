@@ -295,14 +295,4 @@ public class Adatepe extends ArtificialIntelligence
 		}
 		return result;
 	}
-	
-	
-	
-	
-}	
-	
-
-
-	
-		
-
+}

@@ -64,8 +64,8 @@ public class ErisikPektas extends ArtificialIntelligence {
 		y = bomberman.getLine();
 		
 		//qd nous sommes en dessus en xml et qd nos couleurs sont les memes avec lautre les 2 fonc suivants envoient les memes valeurs
-		 System.out.println(bomberman.getTile());
-		 System.out.println(tous.getHeroes().iterator().next().getTile());
+//		 System.out.println(bomberman.getTile());
+//		 System.out.println(tous.getHeroes().iterator().next().getTile());
 
 		// on accede a la case ou se trouve notre bomberman
 		caseactuelle = bomberman.getTile();
@@ -100,7 +100,7 @@ public class ErisikPektas extends ArtificialIntelligence {
 			// sil nya pas de danger et caseprochaine nest pas nulle nous
 			// avançons en suivant lautre joueur
 			else if (caseprochaine == caseactuelle) {
-				System.out.println("prozhaine");
+//				System.out.println("prozhaine");
 
 				poursuivre();
 
@@ -209,7 +209,7 @@ public class ErisikPektas extends ArtificialIntelligence {
 					if (controle(procpossible)) {
 						if (procpossible.getCol() < x) {
 							libre = true;
-							System.out.println("<x");
+//							System.out.println("<x");
 							caseprochaine = procpossible;
 
 						}
@@ -235,7 +235,7 @@ public class ErisikPektas extends ArtificialIntelligence {
 					if (controle(procpossible)) {
 						if (procpossible.getCol() > x) {
 							libre = true;
-							System.out.println("x<" + procpossible);
+//							System.out.println("x<" + procpossible);
 							caseprochaine = procpossible;
 
 						}
@@ -259,7 +259,7 @@ public class ErisikPektas extends ArtificialIntelligence {
 					if (controle(procpossible)) {
 						if (procpossible.getLine() < y) {
 							libre = true;
-							System.out.println("<y" + procpossible);
+//							System.out.println("<y" + procpossible);
 
 							caseprochaine = procpossible;
 
@@ -287,7 +287,7 @@ public class ErisikPektas extends ArtificialIntelligence {
 					if (controle(procpossible)) {
 						if (procpossible.getLine() > y) {
 							libre = true;
-							System.out.println(">y" + procpossible);
+//							System.out.println(">y" + procpossible);
 							caseprochaine = procpossible;
 
 						}
@@ -406,7 +406,7 @@ public class ErisikPektas extends ArtificialIntelligence {
 			}
 
 		}
-		System.out.println(reponse);
+//		System.out.println(reponse);
 
 		// pour qu'au prochaine fois il evite dentrer a la recherche ci dessus
 		impasse = true;
