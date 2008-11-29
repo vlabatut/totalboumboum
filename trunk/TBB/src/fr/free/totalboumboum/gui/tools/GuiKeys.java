@@ -179,7 +179,7 @@ public class GuiKeys
 		public static final String MENU_OPTIONS_BUTTON_CANCEL = MENU_OPTIONS_BUTTON+"Cancel";
 		public static final String MENU_OPTIONS_BUTTON_CONFIRM = MENU_OPTIONS_BUTTON+"Confirm";
 		public static final String MENU_OPTIONS_BUTTON_CONTROLS = MENU_OPTIONS_BUTTON+"Controls";
-		public static final String MENU_OPTIONS_BUTTON_GAMEPLAY = MENU_OPTIONS_BUTTON+"Gameplay";
+		public static final String MENU_OPTIONS_BUTTON_GAME = MENU_OPTIONS_BUTTON+"Game";
 		public static final String MENU_OPTIONS_BUTTON_GUI = MENU_OPTIONS_BUTTON+"Gui";
 		public static final String MENU_OPTIONS_BUTTON_NEXT = MENU_OPTIONS_BUTTON+"Next";
 		public static final String MENU_OPTIONS_BUTTON_PREVIOUS = MENU_OPTIONS_BUTTON+"Previous";
@@ -217,7 +217,17 @@ public class GuiKeys
 				public static final String MENU_OPTIONS_CONTROLS_LINE_AUTO_TRUE = "MenuOptionsControlsLineAutoTrue";
 				public static final String MENU_OPTIONS_CONTROLS_LINE_AUTO_FALSE = "MenuOptionsControlsLineAutoFalse";
 		/* GAMEPLAY */
-		public static final String MENU_OPTIONS_GAMEPLAY_TITLE = "MenuOptionsGameplayTitle";
+			/* BUTTON */
+			public static final String MENU_OPTIONS_GAME_BUTTON = "MenuOptionsGameButton";
+			public static final String MENU_OPTIONS_GAME_BUTTON_QUICKSTART = MENU_OPTIONS_GAME_BUTTON+"Quickstart";
+			public static final String MENU_OPTIONS_GAME_BUTTON_QUICKMATCH = MENU_OPTIONS_GAME_BUTTON+"Quickmatch";
+			public static final String MENU_OPTIONS_GAME_BUTTON_TOURNAMENT = MENU_OPTIONS_GAME_BUTTON+"Tournament";
+			/* QUICK START */
+			public static final String MENU_OPTIONS_GAME_QUICKSTART_TITLE = "MenuOptionsGameQuickstartTitle";
+			/* QUICK MATCH */
+			public static final String MENU_OPTIONS_GAME_QUICKMATCH_TITLE = "MenuOptionsGameQuickmatchTitle";
+			/* TOURNAMENT */
+			public static final String MENU_OPTIONS_GAME_TOURNAMENT_TITLE = "MenuOptionsGameTournamentTitle";
 		/* GUI */
 		public static final String MENU_OPTIONS_GUI_TITLE = "MenuOptionsGuiTitle";
 			/* LINE */
