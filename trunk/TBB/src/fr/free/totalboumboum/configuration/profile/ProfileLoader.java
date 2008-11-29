@@ -24,7 +24,6 @@ package fr.free.totalboumboum.configuration.profile;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.Locale;
 
 import javax.xml.parsers.ParserConfigurationException;
@@ -39,12 +38,20 @@ import fr.free.totalboumboum.tools.XmlTools;
 
 public class ProfileLoader
 {	
-	public static ArrayList<Profile> loadProfiles(ArrayList<String> profilesNames) throws IllegalArgumentException, SecurityException, ParserConfigurationException, SAXException, IOException, IllegalAccessException, NoSuchFieldException, ClassNotFoundException
+	public static ArrayList<Profile> loadProfiles(ProfilesSelection profilesSelection) throws IllegalArgumentException, SecurityException, ParserConfigurationException, SAXException, IOException, IllegalAccessException, NoSuchFieldException, ClassNotFoundException
 	{	ArrayList<Profile> result = new ArrayList<Profile>();
-		Iterator<String> i = profilesNames.iterator();
-		while(i.hasNext())
-		{	String name = i.next();
+		int size = profilesSelection.getProfileCount();
+		for(int i=0;i<size;i++)
+		{	// profile
+			String name = profilesSelection.getFileName(i);
 			Profile profile = loadProfile(name);
+			// color
+			PredefinedColor color = profilesSelection.getColor(i);
+			profile.setSpriteSelectedColor(color);
+			// controls
+			int controlsIndex = profilesSelection.getControlsIndex(i);
+			profile.setControlSettingsIndex(controlsIndex);
+			// result
 			result.add(profile);
 		}
 		return result;

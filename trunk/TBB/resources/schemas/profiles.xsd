@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+<xsd:include schemaLocation="_colors.xsd"/>
 
 	<xsd:complexType name="tGeneral">
 		<xsd:attribute name="last" type="xsd:integer" use="required" />
@@ -18,6 +19,8 @@
 
 	<xsd:complexType name="tPlayer">
 		<xsd:attribute name="file" type="xsd:string" use="required" />
+		<xsd:attribute name="color" type="tColor" use="required" />
+		<xsd:attribute name="controls" type="xsd:integer" use="optional" default="0"/>
 	</xsd:complexType>
 
 	<xsd:complexType name="tPlayers">

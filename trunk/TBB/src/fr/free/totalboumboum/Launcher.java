@@ -753,9 +753,6 @@ public class Launcher
 	 *  - choix limité de limite, voire configuration simplifiée :
 	 *  	- temps limite
 	 *  	- ? s'inspirer des BM existants
-	 */
-	
-	/* TODO
-	 * dans la gestion des profils enregistrés, il faut tenir compte de la couleur, du perso et de la commande
+	 *  	- emplacement de départ aléatoire
 	 */
 }

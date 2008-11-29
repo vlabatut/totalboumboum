@@ -32,34 +32,22 @@ public class ProfilesConfiguration
 {
 	public ProfilesConfiguration copy()
 	{	ProfilesConfiguration result = new ProfilesConfiguration();
-		// profiles
-		{	Iterator<Entry<String,String>> it = profiles.entrySet().iterator();
-			while(it.hasNext())
-			{	Entry<String,String> entry = it.next();
-				String value = entry.getValue();
-				String key = entry.getKey();
-				result.addProfile(key,value);			
-			}
+		// loaded profiles
+		Iterator<Entry<String,String>> it = profiles.entrySet().iterator();
+		while(it.hasNext())
+		{	Entry<String,String> entry = it.next();
+			String value = entry.getValue();
+			String key = entry.getKey();
+			result.addProfile(key,value);			
 		}
-		// selected
-		{	Iterator<String> it = quickStartSelected.iterator();
-			while(it.hasNext())
-			{	String temp = it.next();
-				result.addQuickStartSelected(temp);			
-			}
-		}
-		{	Iterator<String> it = quickMatchSelected.iterator();
-			while(it.hasNext())
-			{	String temp = it.next();
-				result.addQuickMatchSelected(temp);			
-			}
-		}
-		{	Iterator<String> it = tournamentSelected.iterator();
-			while(it.hasNext())
-			{	String temp = it.next();
-				result.addTournamentSelected(temp);			
-			}
-		}
+		// selected profiles
+		ProfilesSelection quickstartCopy = quickStartSelected.copy();
+		result.setQuickStartSelected(quickstartCopy);
+		ProfilesSelection quickmatchCopy = quickMatchSelected.copy();
+		result.setQuickMatchSelected(quickmatchCopy);
+		ProfilesSelection tournamentCopy = tournamentSelected.copy();
+		result.setTournamentSelected(tournamentCopy);
+		//
 		return result;
 	}
 	
@@ -92,30 +80,30 @@ public class ProfilesConfiguration
 	/////////////////////////////////////////////////////////////////
 	// SELECTED				/////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	private final ArrayList<String> quickStartSelected = new ArrayList<String>();
-	private final ArrayList<String> quickMatchSelected = new ArrayList<String>();
-	private final ArrayList<String> tournamentSelected = new ArrayList<String>();
+	private ProfilesSelection quickStartSelected = new ProfilesSelection();
+	private ProfilesSelection quickMatchSelected = new ProfilesSelection();
+	private ProfilesSelection tournamentSelected = new ProfilesSelection();
 	
-	public ArrayList<String> getQuickStartSelected()
+	public ProfilesSelection getQuickStartSelected()
 	{	return quickStartSelected;	
 	}	
-	public void addQuickStartSelected(String file)
-	{	quickStartSelected.add(file);		
-	}
+	public void setQuickStartSelected(ProfilesSelection quickStartSelected)
+	{	this.quickStartSelected = quickStartSelected;	
+	}	
 
-	public ArrayList<String> getQuickMatchSelected()
+	public ProfilesSelection getQuickMatchSelected()
 	{	return quickMatchSelected;	
 	}	
-	public void addQuickMatchSelected(String file)
-	{	quickMatchSelected.add(file);		
-	}
+	public void setQuickMatchSelected(ProfilesSelection quickMatchSelected)
+	{	this.quickMatchSelected = quickMatchSelected;	
+	}	
 
-	public ArrayList<String> getTournamentSelected()
+	public ProfilesSelection getTournamentSelected()
 	{	return tournamentSelected;	
 	}	
-	public void addTournamentSelected(String file)
-	{	tournamentSelected.add(file);		
-	}
+	public void setTournamentSelected(ProfilesSelection tournamentSelected)
+	{	this.tournamentSelected = tournamentSelected;	
+	}	
 
 	/////////////////////////////////////////////////////////////////
 	// PROCESS			/////////////////////////////////////////////

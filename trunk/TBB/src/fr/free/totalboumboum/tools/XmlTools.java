@@ -209,6 +209,7 @@ public class XmlTools
 	public static final String ATT_COL = "col";
 	public static final String ATT_COMPARATOR = "comparator";
 	public static final String ATT_CONTACT = "contact";
+	public static final String ATT_CONTROLS = "controls";
 	public static final String ATT_DEFAULT = "default";
 	public static final String ATT_DIRECTION = "direction";
 	public static final String ATT_DURATION = "duration";

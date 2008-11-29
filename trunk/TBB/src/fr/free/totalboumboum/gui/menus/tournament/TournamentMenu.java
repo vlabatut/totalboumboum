@@ -36,6 +36,7 @@ import org.xml.sax.SAXException;
 import fr.free.totalboumboum.configuration.Configuration;
 import fr.free.totalboumboum.configuration.profile.Profile;
 import fr.free.totalboumboum.configuration.profile.ProfileLoader;
+import fr.free.totalboumboum.configuration.profile.ProfilesSelection;
 import fr.free.totalboumboum.game.tournament.AbstractTournament;
 import fr.free.totalboumboum.game.tournament.single.SingleTournament;
 import fr.free.totalboumboum.gui.common.panel.SplitMenuPanel;
@@ -159,8 +160,8 @@ buttonPlayers.setEnabled(false);
 		{	//NOTE c icite qu'il faut tester que les profils sont OK
 			try
 			{	AbstractTournament tournament = Configuration.getGameConfiguration().getTournament();
-				ArrayList<String> selectedProfileFiles = Configuration.getProfilesConfiguration().getTournamentSelected();
-				ArrayList<Profile> selectedProfiles = ProfileLoader.loadProfiles(selectedProfileFiles);
+				ProfilesSelection profilesSelection = Configuration.getProfilesConfiguration().getTournamentSelected();
+				ArrayList<Profile> selectedProfiles = ProfileLoader.loadProfiles(profilesSelection);
 				tournament.init(selectedProfiles);
 				if(tournament instanceof SingleTournament)
 				{	tournament.progress();
