@@ -574,12 +574,10 @@
 
 			<group name="Progressbar">
 				<text name="Bombset" value="Bombes"  />
-				<text name="Common" value="Joueurs"  />
-				<text name="Complete" value="Fini"  />
 				<text name="Itemset" value="Items"  />
-				<text name="Player" value="Personnage"  />
 				<text name="Theme" value="Theme"  />
-				<text name="Zone" value="Zone"  />
+				<text name="Player" value="Personnage"  />
+				<text name="Complete" value="Fini"  />
 			</group>
 			
 			<group name="Description">

@@ -24,6 +24,7 @@ package fr.free.totalboumboum.gui.quicklaunch;
 import javax.swing.JFrame;
 import javax.swing.JProgressBar;
 import javax.swing.SwingUtilities;
+import javax.swing.ToolTipManager;
 import javax.xml.parsers.ParserConfigurationException;
 
 import org.xml.sax.SAXException;
@@ -80,6 +81,9 @@ public class QuickFrame extends JFrame implements WindowListener,LoopRenderPanel
 		String iconPath = GuiFileTools.getIconsPath()+File.separator+GuiFileTools.FILE_FRAME;
 		Image icon = Toolkit.getDefaultToolkit().getImage(iconPath);
 		setIconImage(icon);
+		
+		// set tooltip delay
+		ToolTipManager.sharedInstance().setInitialDelay(200);
 		
 		// set dimensions
 		Dimension dim = Configuration.getVideoConfiguration().getPanelDimension();

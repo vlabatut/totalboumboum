@@ -528,12 +528,10 @@ public class GuiKeys
 	public static final String GAME_ROUND_BUTTON_STATISTICS = "GameRoundButtonStatistics";
 	/* PROGRESS BAR */	
 	public static final String GAME_ROUND_PROGRESSBAR_BOMBSET = "GameRoundProgressbarBombset";
-	public static final String GAME_ROUND_PROGRESSBAR_COMMON = "GameRoundProgressbarCommon";
 	public static final String GAME_ROUND_PROGRESSBAR_COMPLETE = "GameRoundProgressbarComplete";
 	public static final String GAME_ROUND_PROGRESSBAR_ITEMSET = "GameRoundProgressbarItemset";
 	public static final String GAME_ROUND_PROGRESSBAR_PLAYER = "GameRoundProgressbarPlayer";
 	public static final String GAME_ROUND_PROGRESSBAR_THEME = "GameRoundProgressbarTheme";
-	public static final String GAME_ROUND_PROGRESSBAR_ZONE = "GameRoundProgressbarZone";
 	/* DESCRIPTION */
 	public static final String GAME_ROUND_DESCRIPTION_TITLE = "GameRoundDescriptionTitle";
 		/* INITIAL ITEMS */

@@ -575,12 +575,10 @@
 
 			<group name="Progressbar">
 				<text name="Bombset" value="Loading bombs"  />
-				<text name="Common" value="Loading common player data"  />
-				<text name="Complete" value="Loading complete"  />
 				<text name="Itemset" value="Loading items"  />
-				<text name="Player" value="Loading player"  />
 				<text name="Theme" value="Loading theme"  />
-				<text name="Zone" value="Loading zone"  />
+				<text name="Player" value="Loading player"  />
+				<text name="Complete" value="Loading complete"  />
 			</group>
 			
 			<group name="Description">
