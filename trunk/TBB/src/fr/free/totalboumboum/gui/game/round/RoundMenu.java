@@ -141,7 +141,7 @@ buttonStatistics.setEnabled(false);
 			buttonQuit.setEnabled(false);
 			buttonMatch.setEnabled(false);
 			Round round = Configuration.getGameConfiguration().getTournament().getCurrentMatch().getCurrentRound();
-			int limit = round.getProfiles().size()+2;
+			int limit = round.getProfiles().size()+3;
 			loadProgressBar = new JProgressBar(0,limit);
 			int fontSize = GuiTools.getFontSize(getHeight()*0.6);
 			Font font = GuiConfiguration.getMiscConfiguration().getFont().deriveFont((float)fontSize);
@@ -224,7 +224,6 @@ buttonStatistics.setEnabled(false);
 	@Override
 	public void loadStepOver()
 	{	int val = loadProgressBar.getValue();
-		loadProgressBar.setValue(val+1);
 		String text;
 		switch(val)
 		{	// itemset
@@ -257,5 +256,6 @@ buttonStatistics.setEnabled(false);
 				}
 				break;
 		}
+		loadProgressBar.setValue(val+1);
 	}
 }

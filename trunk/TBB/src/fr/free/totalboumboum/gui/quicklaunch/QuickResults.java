@@ -92,10 +92,10 @@ public class QuickResults extends JPanel
 //		GuiTools.setGraphics(g);
 		int headerHeight = (int)(1.5*pHeight/(lines+0.5));
 		int headerSize = GuiTools.getFontSize(headerHeight);
-		headerFont = GuiConfiguration.getMiscConfiguration().getFont().deriveFont((float)(headerSize)); 
+		headerFont = GuiConfiguration.getMiscConfiguration().getFont().deriveFont(headerSize*0.8f); 
 		int lineHeight = (pHeight-headerHeight)/(lines-1);
 		int lineSize = GuiTools.getFontSize(lineHeight);
-		headerFont = GuiConfiguration.getMiscConfiguration().getFont().deriveFont((float)(lineSize)); 
+		regularFont = GuiConfiguration.getMiscConfiguration().getFont().deriveFont(lineSize*0.8f); 
 		
 		// table
 		for(int col=0;col<cols;col++)

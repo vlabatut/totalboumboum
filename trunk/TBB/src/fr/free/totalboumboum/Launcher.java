@@ -653,6 +653,7 @@ public class Launcher
 	 * - modification : calcul du nombre de joueurs nécessaires pour un match et pour un round
 	 * - modification : un pointprocesssor par limite
 	 * - modification : fonctions toString pour visualiser les sprites dans l'API pour l'IA
+	 * - correction : bug graphique sur la progress bar lors du chargement d'un round
 	 * 
 	 * *******************************************************
 	 * *********************** A FAIRE ***********************
