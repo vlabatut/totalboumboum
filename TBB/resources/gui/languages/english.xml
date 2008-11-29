@@ -138,7 +138,7 @@
 				<text name="Cancel" value="Cancel" tooltip="Cancel the last modifications and go back to the options menu" />
 				<text name="Confirm" value="Confirm" tooltip="Confirm the last modifications and go back to the options menu" />
 				<text name="Controls" value="Controls" tooltip="Modify the in-game control keys" />
-				<text name="Gameplay" value="Gameplay" tooltip="Modify the play settings" />
+				<text name="Game" value="Game" tooltip="Modify game modes settings" />
 				<text name="Gui" value="Interface" tooltip="Modify graphical interface settings" />
 				<text name="Next" value="Next" tooltip="Next settings" />
 				<text name="Previous" value="Previous" tooltip="Previous settings" />
@@ -191,8 +191,21 @@
 				</group>
 			</group>
 
-			<group name="Gameplay">
-				<text name="Title" value="Gameplay" tooltip="Modify gameplay settings" />
+			<group name="Game">
+				<group name="Button">
+					<text name="Quickstart" value="Quick start" tooltip="Modify quick start settings" />
+					<text name="Quickmatch" value="Quick match" tooltip="Modify quick match settings" />
+					<text name="Tournament" value="Tournament" tooltip="Modify tournament settings" />
+				</group>
+				<group name="Quickstart">
+					<text name="Title" value="Quick start" tooltip="Modify quick start settings" />
+				</group>
+				<group name="Quickmatch">
+					<text name="Title" value="Quick match" tooltip="Modify quick match settings" />
+				</group>
+				<group name="Tournament">
+					<text name="Title" value="Tournament" tooltip="Modify tournament settings" />
+				</group>
 			</group>
 
 			<group name="Gui">

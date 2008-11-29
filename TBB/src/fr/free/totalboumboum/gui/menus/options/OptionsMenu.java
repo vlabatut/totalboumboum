@@ -39,6 +39,7 @@ import fr.free.totalboumboum.gui.common.panel.menu.InnerMenuPanel;
 import fr.free.totalboumboum.gui.common.panel.menu.MenuPanel;
 import fr.free.totalboumboum.gui.menus.options.advanced.AdvancedSplitPanel;
 import fr.free.totalboumboum.gui.menus.options.controls.ControlsSplitPanel;
+import fr.free.totalboumboum.gui.menus.options.gameplay.GameSplitPanel;
 import fr.free.totalboumboum.gui.menus.options.gui.GuiSplitPanel;
 import fr.free.totalboumboum.gui.menus.options.video.VideoSplitPanel;
 import fr.free.totalboumboum.gui.tools.GuiKeys;
@@ -51,6 +52,7 @@ public class OptionsMenu extends InnerMenuPanel
 	private JButton buttonAdvanced;
 	@SuppressWarnings("unused")
 	private JButton buttonControls;
+	@SuppressWarnings("unused")
 	private JButton buttonGameplay;
 	@SuppressWarnings("unused")
 	private JButton buttonVideo;
@@ -80,8 +82,7 @@ public class OptionsMenu extends InnerMenuPanel
 		// buttons
 		add(Box.createVerticalGlue());
 		buttonControls = GuiTools.createButton(GuiKeys.MENU_OPTIONS_BUTTON_CONTROLS,buttonWidth,buttonHeight,fontSize,this);
-		buttonGameplay = GuiTools.createButton(GuiKeys.MENU_OPTIONS_BUTTON_GAMEPLAY,buttonWidth,buttonHeight,fontSize,this);
-buttonGameplay.setEnabled(false);
+		buttonGameplay = GuiTools.createButton(GuiKeys.MENU_OPTIONS_BUTTON_GAME,buttonWidth,buttonHeight,fontSize,this);
 		buttonVideo = GuiTools.createButton(GuiKeys.MENU_OPTIONS_BUTTON_VIDEO,buttonWidth,buttonHeight,fontSize,this);
 		buttonGui = GuiTools.createButton(GuiKeys.MENU_OPTIONS_BUTTON_GUI,buttonWidth,buttonHeight,fontSize,this);
 		buttonAdvanced = GuiTools.createButton(GuiKeys.MENU_OPTIONS_BUTTON_ADVANCED,buttonWidth,buttonHeight,fontSize,this);
@@ -176,8 +177,10 @@ buttonGameplay.setEnabled(false);
 			{	e1.printStackTrace();
 			}
 	    }
-		else if(e.getActionCommand().equals(GuiKeys.MENU_OPTIONS_BUTTON_GAMEPLAY))
-		{	
+		else if(e.getActionCommand().equals(GuiKeys.MENU_OPTIONS_BUTTON_GAME))
+		{	// TODO certainement à compléter
+			GameSplitPanel gamePanel = new GameSplitPanel(container.getContainer(),container);
+			replaceWith(gamePanel);
 	    }
 		else if(e.getActionCommand().equals(GuiKeys.MENU_OPTIONS_BUTTON_CONTROLS))
 		{	try

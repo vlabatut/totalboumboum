@@ -138,7 +138,7 @@
 				<text name="Cancel" value="Annuler" tooltip="Annuler les dernières modifications et revenir au menu des options" />
 				<text name="Confirm" value="Confirmer" tooltip="Confirmer les dernières modifications et revenir au menu des options" />
 				<text name="Controls" value="Commandes" tooltip="Modifier les touches commandant les personnages" />
-				<text name="Gameplay" value="Jeu" tooltip="Modifier les paramètres de jouabilité" />
+				<text name="Game" value="Jeu" tooltip="Modifier les paramètres des différents modes de jeu" />
 				<text name="Gui" value="Interface" tooltip="Modifier les paramètres de l'interface graphique" />
 				<text name="Next" value="Suivant" tooltip="Accéder aux réglages suivants" />
 				<text name="Previous" value="Précédent" tooltip="Accéder aux réglages précédents" />
@@ -191,8 +191,21 @@
 				</group>
 			</group>
 
-			<group name="Gameplay">
-				<text name="Title" value="Jeu" tooltip="Modifier les paramètres de jouabilité" />
+			<group name="Game">
+				<group name="Button">
+					<text name="Quickstart" value="Démarrage rapide" tooltip="Modifier les paramètres du démarrage rapide" />
+					<text name="Quickmatch" value="Rencontre rapide" tooltip="Modifier les paramètres de la rencontre rapide" />
+					<text name="Tournament" value="Tournoi" tooltip="Modifier les paramètres du tournoi" />
+				</group>
+				<group name="Quickstart">
+					<text name="Title" value="Démarrage rapide" tooltip="Modifier les paramètres du démarrage rapide" />
+				</group>
+				<group name="Quickmatch">
+					<text name="Title" value="Rencontre rapide" tooltip="Modifier les paramètres de la rencontre rapide" />
+				</group>
+				<group name="Tournament">
+					<text name="Title" value="Tournoi" tooltip="Modifier les paramètres du tournoi" />
+				</group>
 			</group>
 
 			<group name="Gui">
