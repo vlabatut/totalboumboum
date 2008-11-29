@@ -38,6 +38,7 @@ import org.xml.sax.SAXException;
 import fr.free.totalboumboum.configuration.Configuration;
 import fr.free.totalboumboum.configuration.profile.Profile;
 import fr.free.totalboumboum.configuration.profile.ProfileLoader;
+import fr.free.totalboumboum.configuration.profile.ProfilesSelection;
 import fr.free.totalboumboum.gui.common.MenuContainer;
 import fr.free.totalboumboum.gui.common.panel.menu.MenuPanel;
 import fr.free.totalboumboum.gui.common.panel.menu.SimpleMenuPanel;
@@ -158,9 +159,9 @@ buttonAbout.setEnabled(false);
 		{	if(quickmatchGamePanel==null)
 			{	ArrayList<Profile> selectedProfiles = new ArrayList<Profile>();
 				if(Configuration.getGameConfiguration().getUseLastPlayers())
-				{	ArrayList<String> selectedProfileNames = Configuration.getProfilesConfiguration().getQuickMatchSelected();
+				{	ProfilesSelection profilesSelection = Configuration.getProfilesConfiguration().getQuickMatchSelected();
 					try
-					{	selectedProfiles = ProfileLoader.loadProfiles(selectedProfileNames);
+					{	selectedProfiles = ProfileLoader.loadProfiles(profilesSelection);
 					}
 					catch (IllegalArgumentException e1)
 					{	e1.printStackTrace();

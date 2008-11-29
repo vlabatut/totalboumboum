@@ -23,7 +23,6 @@ package fr.free.totalboumboum.configuration.profile;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
@@ -68,13 +67,6 @@ public class ProfilesConfigurationLoader
 		{	Element temp = i.next();
 			loadProfileElement(temp,result);
 		}
-/*		
-result.addSelected("4");
-result.addSelected("8");		
-result.addSelected("14");		
-result.addSelected("18");		
-result.addSelected("1");
-*/		
 	}
 		
 	private static void loadProfileElement(Element root, ProfilesConfiguration result) throws IllegalArgumentException, SecurityException, ParserConfigurationException, SAXException, IOException, IllegalAccessException, NoSuchFieldException
@@ -92,32 +84,15 @@ result.addSelected("1");
 	private static void loadSelectedElement(Element root, ProfilesConfiguration result) throws IllegalArgumentException, SecurityException, ParserConfigurationException, SAXException, IOException, IllegalAccessException, NoSuchFieldException
 	{	// quickstart
 		Element quickstartElement = root.getChild(XmlTools.ELT_QUICKSTART);
-		ArrayList<String> quickStartSelected = loadPlayersElement(quickstartElement);
-		for(String s: quickStartSelected)
-			result.addQuickStartSelected(s);
+		ProfilesSelection quickstartSelected = ProfilesSelectionLoader.loadProfilesSelection(quickstartElement);
+		result.setQuickStartSelected(quickstartSelected);
 		// quickmatch
 		Element quickmatchElement = root.getChild(XmlTools.ELT_QUICKMATCH);
-		ArrayList<String> quickMatchSelected = loadPlayersElement(quickmatchElement);
-		for(String s: quickMatchSelected)
-			result.addQuickMatchSelected(s);
+		ProfilesSelection quickmatchSelected = ProfilesSelectionLoader.loadProfilesSelection(quickmatchElement);
+		result.setQuickMatchSelected(quickmatchSelected);
 		// tournament
 		Element tournamentElement = root.getChild(XmlTools.ELT_TOURNAMENT);
-		ArrayList<String> tournamentSelected = loadPlayersElement(tournamentElement);
-		for(String s: tournamentSelected)
-			result.addTournamentSelected(s);
-	}
-
-	@SuppressWarnings("unchecked")
-	private static ArrayList<String> loadPlayersElement(Element root)
-	{	ArrayList<String> result = new ArrayList<String>();
-		List<Element> playersElt = root.getChildren(XmlTools.ELT_PLAYER);
-		for(Element elt: playersElt)
-			loadPlayerElement(elt,result);
-		return result;
-	}
-	
-	private static void loadPlayerElement(Element root, ArrayList<String> result)
-	{	String fileName = root.getAttributeValue(XmlTools.ATT_FILE);
-		result.add(fileName);
+		ProfilesSelection tournamentSelected = ProfilesSelectionLoader.loadProfilesSelection(tournamentElement);
+		result.setTournamentSelected(tournamentSelected);
 	}
 }

@@ -32,6 +32,7 @@ import fr.free.totalboumboum.configuration.Configuration;
 import fr.free.totalboumboum.configuration.GameConstants;
 import fr.free.totalboumboum.configuration.profile.Profile;
 import fr.free.totalboumboum.configuration.profile.ProfileLoader;
+import fr.free.totalboumboum.configuration.profile.ProfilesSelection;
 import fr.free.totalboumboum.engine.loop.Loop;
 import fr.free.totalboumboum.engine.loop.LoopRenderPanel;
 import fr.free.totalboumboum.game.match.Match;
@@ -112,8 +113,8 @@ public class QuickFrame extends JFrame implements WindowListener,LoopRenderPanel
 	    Configuration.getGameConfiguration().loadQuickstart();
 		AbstractTournament tournament = Configuration.getGameConfiguration().getTournament();
 		ArrayList<Profile> selectedProfiles = new ArrayList<Profile>();
-		ArrayList<String> selectedProfileNames = Configuration.getProfilesConfiguration().getQuickStartSelected();
-		selectedProfiles = ProfileLoader.loadProfiles(selectedProfileNames);
+		ProfilesSelection profilesSelection = Configuration.getProfilesConfiguration().getQuickStartSelected();
+		selectedProfiles = ProfileLoader.loadProfiles(profilesSelection);
 		tournament.init(selectedProfiles);
 	    tournament.progress();
 	    // match

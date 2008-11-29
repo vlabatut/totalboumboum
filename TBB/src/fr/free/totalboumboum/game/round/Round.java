@@ -236,9 +236,10 @@ public class Round implements StatisticHolder
 	
 	public ArrayList<Integer> getWinners()
 	{	ArrayList<Integer> result = new ArrayList<Integer>();
-		int[] ranks = getRanks(stats.getPoints());
+		float[] points = stats.getPoints();
+		int[] ranks = getRanks(points);
 		for(int i=0;i<ranks.length;i++)
-			if(ranks[i]==1)
+			if(ranks[i]==1 && points[i]>0)
 				result.add(i);
 		return result;
 	}
