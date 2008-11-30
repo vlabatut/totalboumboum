@@ -50,16 +50,19 @@ public class ProfilesConfigurationSaver
 
 	private static Element saveProfilesElement(ProfilesConfiguration profilesConfiguration)
 	{	Element result = new Element(XmlTools.ELT_PROFILES);
+		
 		// general
 		Element generalElement = saveGeneralElement(profilesConfiguration);
 		result.addContent(generalElement);
+		
 		// list
 		Element listElement = saveListElement(profilesConfiguration);
 		result.addContent(listElement);
+		
 		// selected
 		Element selectedElement = saveSelectedElement(profilesConfiguration);
 		result.addContent(selectedElement);
-		//
+
 		return result;		
 	}
 	
@@ -88,22 +91,25 @@ public class ProfilesConfigurationSaver
 
 	private static Element saveSelectedElement(ProfilesConfiguration profilesConfiguration)
 	{	Element result = new Element(XmlTools.ELT_SELECTED);
+		
 		// quickstart
 		Element quickstartElement = new Element(XmlTools.ELT_QUICKSTART);
 		ProfilesSelection quickstartSelected = profilesConfiguration.getQuickStartSelected();
 		ProfilesSelectionSaver.saveProfilesSelection(quickstartElement,quickstartSelected);
 		result.addContent(quickstartElement);
+		
 		// quickmatch
 		Element quickmatchElement = new Element(XmlTools.ELT_QUICKMATCH);
 		ProfilesSelection quickmatchSelected = profilesConfiguration.getQuickMatchSelected();
 		ProfilesSelectionSaver.saveProfilesSelection(quickmatchElement,quickmatchSelected);
 		result.addContent(quickmatchElement);
+		
 		// quickstart
 		Element tournamentElement = new Element(XmlTools.ELT_TOURNAMENT);
 		ProfilesSelection tournamentSelected = profilesConfiguration.getTournamentSelected();
 		ProfilesSelectionSaver.saveProfilesSelection(tournamentElement,tournamentSelected);
 		result.addContent(tournamentElement);
-		//
+
 		return result;
 	}
 }
