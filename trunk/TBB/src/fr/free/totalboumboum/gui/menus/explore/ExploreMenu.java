@@ -37,6 +37,7 @@ import fr.free.totalboumboum.gui.menus.explore.ais.select.SelectedAiSplitPanel;
 import fr.free.totalboumboum.gui.menus.explore.heroes.select.SelectedHeroSplitPanel;
 import fr.free.totalboumboum.gui.menus.explore.levels.select.SelectedLevelSplitPanel;
 import fr.free.totalboumboum.gui.menus.explore.matches.select.SelectedMatchSplitPanel;
+import fr.free.totalboumboum.gui.menus.explore.rounds.select.SelectedRoundSplitPanel;
 import fr.free.totalboumboum.gui.tools.GuiKeys;
 import fr.free.totalboumboum.gui.tools.GuiTools;
 
@@ -55,6 +56,7 @@ public class ExploreMenu extends InnerMenuPanel
 	private JButton buttonTournaments;
 	@SuppressWarnings("unused")
 	private JButton buttonMatches;
+	@SuppressWarnings("unused")
 	private JButton buttonRounds;
 	
 	@SuppressWarnings("unused")
@@ -87,11 +89,10 @@ public class ExploreMenu extends InnerMenuPanel
 buttonInstances.setEnabled(false);
 		buttonLevels = GuiTools.createButton(GuiKeys.MENU_RESOURCES_BUTTON_LEVELS,buttonWidth,buttonHeight,fontSize,this);
 		add(Box.createRigidArea(new Dimension(0,GuiTools.buttonVerticalSpace)));
+		buttonRounds = GuiTools.createButton(GuiKeys.MENU_RESOURCES_BUTTON_ROUNDS,buttonWidth,buttonHeight,fontSize,this);
+		buttonMatches = GuiTools.createButton(GuiKeys.MENU_RESOURCES_BUTTON_MATCHES,buttonWidth,buttonHeight,fontSize,this);
 		buttonTournaments = GuiTools.createButton(GuiKeys.MENU_RESOURCES_BUTTON_TOURNAMENTS,buttonWidth,buttonHeight,fontSize,this);
 buttonTournaments.setEnabled(false);
-		buttonMatches = GuiTools.createButton(GuiKeys.MENU_RESOURCES_BUTTON_MATCHES,buttonWidth,buttonHeight,fontSize,this);
-		buttonRounds = GuiTools.createButton(GuiKeys.MENU_RESOURCES_BUTTON_ROUNDS,buttonWidth,buttonHeight,fontSize,this);
-buttonRounds.setEnabled(false);
 		add(Box.createRigidArea(new Dimension(0,GuiTools.buttonVerticalSpace)));
 		buttonBack = GuiTools.createButton(GuiKeys.MENU_RESOURCES_BUTTON_BACK,buttonWidth,buttonHeight,fontSize,this);
 		add(Box.createVerticalGlue());		
@@ -120,8 +121,8 @@ buttonRounds.setEnabled(false);
 			replaceWith(levelMenuPanel);
 	    }
 		else if(e.getActionCommand().equals(GuiKeys.MENU_RESOURCES_BUTTON_TOURNAMENTS))
-		{	//SelectedTournamentSplitPanel tournamentMenuPanel = new SelectedLevelSplitPanel(container.getContainer(),container);
-			//replaceWith(tournamentMenuPanel);
+		{	SelectedRoundSplitPanel roundMenuPanel = new SelectedRoundSplitPanel(container.getContainer(),container);
+			replaceWith(roundMenuPanel);
 	    }
 		else if(e.getActionCommand().equals(GuiKeys.MENU_RESOURCES_BUTTON_MATCHES))
 		{	SelectedMatchSplitPanel matchMenuPanel = new SelectedMatchSplitPanel(container.getContainer(),container);

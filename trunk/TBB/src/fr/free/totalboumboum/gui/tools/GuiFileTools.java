@@ -55,6 +55,7 @@ public class GuiFileTools
 	public final static String FILE_ITEMS = "items.png";
 	public final static String FILE_KEY = "key.png";
 	public final static String FILE_KILLS = "kills.png";
+	public final static String FILE_LEVEL = "level.png";
 	public final static String FILE_LIMITS = "limits.png";
 	public final static String FILE_MINUS = "minus.png";
 	public final static String FILE_MISC = "misc.png";

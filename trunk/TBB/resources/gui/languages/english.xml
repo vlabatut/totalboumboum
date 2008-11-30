@@ -113,18 +113,40 @@
 					<text name="Back" value="Back" tooltip="Go back to the resources menu" />
 				</group>		
 				<group name="Select">
-					<text name="Title" value="Liste des matches" tooltip="Liste of predefined matches" />
+					<text name="Title" value="List of matches" tooltip="List of predefined matches" />
 					<group name="List">
 						<text name="PageDown" value="Page down" tooltip="Go to the next matches page" />
 						<text name="PageUp" value="Page up" tooltip="Go back to the previous matches page" />
 					</group>
 					<group name="Preview">
-						<text name="Author" value="Auteur"  tooltip="Author of this match" />
-						<text name="Limit" value="Instance" tooltip="Limits for this match" />
-						<text name="Name" value="Nom" tooltip="Name of this match" />
-						<text name="Players" value="Joueurs" tooltip="Number of players needed for this match" />
+						<text name="Author" value="Author"  tooltip="Author of this match" />
+						<text name="Limit" value="Limit" tooltip="Limits for this match" />
+						<text name="Name" value="Name" tooltip="Name of this match" />
+						<text name="Players" value="Players" tooltip="Number of players needed for this match" />
 						<text name="Points" value="Points"  tooltip="Points processing for this match" />
-						<text name="Rounds" value="Manches"  tooltip="Number of rounds defined for this match" />
+						<text name="Rounds" value="Rounds"  tooltip="Number of rounds defined for this match" />
+					</group>
+				</group>
+			</group>	
+
+			<group name="Round">
+				<group name="Button">
+					<text name="Back" value="Back" tooltip="Go back to the resources menu" />
+				</group>		
+				<group name="Select">
+					<text name="Title" value="List of rounds" tooltip="List of predefined rounds" />
+					<group name="List">
+						<text name="PageDown" value="Page down" tooltip="Go to the next rounds page" />
+						<text name="PageUp" value="Page up" tooltip="Go back to the previous rounds page" />
+					</group>
+					<group name="Preview">
+						<text name="Author" value="Author"  tooltip="Author of this round" />
+						<text name="LevelFolder" value="Level"  tooltip="Level name for this round" />
+						<text name="LevelPack" value="Package"  tooltip="Level package for this round" />
+						<text name="Limit" value="Limits" tooltip="Limits for this round" />
+						<text name="Name" value="Name" tooltip="Name of this round" />
+						<text name="Players" value="Players" tooltip="Number of players needed for this round" />
+						<text name="Points" value="Points"  tooltip="Points processing for this round" />
 					</group>
 				</group>
 			</group>	
