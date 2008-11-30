@@ -39,7 +39,7 @@ import fr.free.totalboumboum.gui.common.panel.menu.InnerMenuPanel;
 import fr.free.totalboumboum.gui.common.panel.menu.MenuPanel;
 import fr.free.totalboumboum.gui.menus.options.advanced.AdvancedSplitPanel;
 import fr.free.totalboumboum.gui.menus.options.controls.ControlsSplitPanel;
-import fr.free.totalboumboum.gui.menus.options.gameplay.GameSplitPanel;
+import fr.free.totalboumboum.gui.menus.options.game.GameSplitPanel;
 import fr.free.totalboumboum.gui.menus.options.gui.GuiSplitPanel;
 import fr.free.totalboumboum.gui.menus.options.video.VideoSplitPanel;
 import fr.free.totalboumboum.gui.tools.GuiKeys;

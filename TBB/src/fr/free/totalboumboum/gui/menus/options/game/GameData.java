@@ -1,4 +1,4 @@
-package fr.free.totalboumboum.gui.menus.options.gameplay;
+package fr.free.totalboumboum.gui.menus.options.game;
 
 /*
  * Total Boum Boum

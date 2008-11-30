@@ -121,16 +121,15 @@ buttonTournaments.setEnabled(false);
 			replaceWith(levelMenuPanel);
 	    }
 		else if(e.getActionCommand().equals(GuiKeys.MENU_RESOURCES_BUTTON_TOURNAMENTS))
-		{	SelectedRoundSplitPanel roundMenuPanel = new SelectedRoundSplitPanel(container.getContainer(),container);
-			replaceWith(roundMenuPanel);
+		{	
 	    }
 		else if(e.getActionCommand().equals(GuiKeys.MENU_RESOURCES_BUTTON_MATCHES))
 		{	SelectedMatchSplitPanel matchMenuPanel = new SelectedMatchSplitPanel(container.getContainer(),container);
 			replaceWith(matchMenuPanel);
 	    }
 		else if(e.getActionCommand().equals(GuiKeys.MENU_RESOURCES_BUTTON_ROUNDS))
-		{	//SelectedRoundSplitPanel roundMenuPanel = new SelectedLevelSplitPanel(container.getContainer(),container);
-			//replaceWith(roundMenuPanel);
+		{	SelectedRoundSplitPanel roundMenuPanel = new SelectedRoundSplitPanel(container.getContainer(),container);
+			replaceWith(roundMenuPanel);
 	    }
 		else if(e.getActionCommand().equals(GuiKeys.MENU_RESOURCES_BUTTON_BACK))
 		{	replaceWith(parent);

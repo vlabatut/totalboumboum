@@ -1,4 +1,4 @@
-package fr.free.totalboumboum.gui.menus.options.gameplay;
+package fr.free.totalboumboum.gui.menus.options.game;
 
 /*
  * Total Boum Boum
@@ -41,7 +41,7 @@ import fr.free.totalboumboum.gui.common.panel.SplitMenuPanel;
 import fr.free.totalboumboum.gui.common.panel.data.InnerDataPanel;
 import fr.free.totalboumboum.gui.common.panel.menu.InnerMenuPanel;
 import fr.free.totalboumboum.gui.common.panel.menu.MenuPanel;
-import fr.free.totalboumboum.gui.menus.options.gameplay.quickstart.QuickstartSplitPanel;
+import fr.free.totalboumboum.gui.menus.options.game.quickstart.QuickstartSplitPanel;
 import fr.free.totalboumboum.gui.tools.GuiKeys;
 import fr.free.totalboumboum.gui.tools.GuiTools;
 
