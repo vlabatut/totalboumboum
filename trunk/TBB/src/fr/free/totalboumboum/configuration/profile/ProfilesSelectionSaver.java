@@ -47,7 +47,7 @@ public class ProfilesSelectionSaver
 		result.setAttribute(XmlTools.ATT_COLOR,color);
 		// controls
 		String controlsIndex = Integer.toString(profilesSelection.getControlsIndex(index));
-		result.setAttribute(XmlTools.ATT_FILE,controlsIndex);
+		result.setAttribute(XmlTools.ATT_CONTROLS,controlsIndex);
 		return result;
 	}
 }
