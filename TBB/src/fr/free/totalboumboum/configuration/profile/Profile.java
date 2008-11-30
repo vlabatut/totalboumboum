@@ -174,17 +174,22 @@ public class Profile
 	/////////////////////////////////////////////////////////////////
 	public Profile copy()
 	{	Profile result = new Profile();
+		
 		result.aiName = aiName;
 		result.aiPackname = aiPackname;
+		
 		result.controlSettingsIndex = controlSettingsIndex;
 		result.name = name;
+		result.fileName = fileName;
 		result.portraits = portraits; //TODO copy
+		
 		result.spriteDefaultColor = spriteDefaultColor;
 		result.spriteSelectedColor = spriteSelectedColor;
 		result.spriteControl = spriteControl;//TODO copy
 		result.spriteFolder = spriteFolder;
 		result.spritePack = spritePack;
 		result.spriteName = spriteName;
+		
 		return result;
 	}
 
