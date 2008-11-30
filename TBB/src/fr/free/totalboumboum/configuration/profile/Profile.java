@@ -205,10 +205,13 @@ public class Profile
 			result = result && aiPackname.equals(profile.getAiPackname());
 		}
 		result = result && name.equals(profile.getName());
+		result = result && controlSettingsIndex == profile.getControlSettingsIndex();
+
 		result = result && spriteSelectedColor == profile.getSpriteSelectedColor();
 		result = result && spriteDefaultColor == spriteDefaultColor;
 		result = result && spriteFolder.equals(profile.getSpriteFolder());
 		result = result && spritePack.equals(profile.getSpritePack());
+		
 		return result;
 	}
 }

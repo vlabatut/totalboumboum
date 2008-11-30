@@ -654,6 +654,8 @@ public class Launcher
 	 * - modification : un pointprocesssor par limite
 	 * - modification : fonctions toString pour visualiser les sprites dans l'API pour l'IA
 	 * - correction : bug graphique sur la progress bar lors du chargement d'un round
+	 * - nouveauté : configuration du round rapide
+	 * - modification : simplification du profil, impossible de définir plus couleurs dorénavant
 	 * 
 	 * *******************************************************
 	 * *********************** A FAIRE ***********************
@@ -661,8 +663,6 @@ public class Launcher
 	 * 
 	 * - ça serait bien que les joueurs soient affichés dans l'ordre relatif aux points de la limite rencontrée
 	 *   voire on définit explicitement un ordre d'affichage dans la compétition
-	 * 
-	 * - virer la possibilité de définir plusieurs couleurs, ça ne sert à rien
 	 * 
 	 * - faire le classement lexicographique gérant les signes diacritiques partout où c'est nécessaire
 	 * 
@@ -686,16 +686,12 @@ public class Launcher
 	 * 
 	 * - bug de déplacement quand on bouge en diagonale en posant plein de bombes dans un espace dégagé, on se retrouve téléporté sur une case voisine
 	 * - bug d'animation/collision : push ne se déclenche pas
-	 * 
-	 * - redescendre les stats dans loop, et gestion de fin de partie et tout ce qui est en fait directement lié au moteur
-	 * - en fait tout le calcul de points dans les stats est à déplacer dans les rounds/matches, etc 
+	 * - bug d'animation : quand le bonhomme va à droite et qu'on appuie sur gauche, y a une espèce de passage droite-gauche très rapide au niveau de l'animation, insuportable
 	 * 
 	 * - faire un paramètre dans les rounds qui permet de déterminer s'ils sont compatibles avec le tournoi 2007-08
 	 * - tournoi : 1) on choisit les paramètres 2) on choisit les joueurs, le jeu restreint leur nombre pr qu'il soit compatible avec le tournoi, et restreint aussi les IA pour les mêmes raisons
 	 * 
 	 * - besoin d'une méthode permettant d'exporter un tournoi/match/round, ie de l'écrire entièrement en local (pas de référence à des composants existants)
-	 * 
-	 * - bug d'animation : quand le bonhomme va à droite et qu'on appuie sur gauche, y a une espèce de passage droite-gauche très rapide au niveau de l'animation, insuportable
 	 * 
 	 * - dans les résultats :
 	 * 		- afficher par défaut les 4 scores de bases
@@ -703,8 +699,6 @@ public class Launcher
 	 * 		- si les limites utilisent des points custom, les afficher aussi
 	 * 
 	 * - bug d'affichage dans les notes d'IA, les accents sont affichés avec la police par défaut
-	 * 
-	 * - bug de gameplay : quand deux persos meurent dans le même cycle, le moteur considère une précédence temporelle alors qu'il n'y en a pas
 	 * 
 	 * - stats : nombre de fois qu'un level a été joué
 	 * - champ en plus dans les profils : le classement du joueur, nbre de rouds gagnés/nbre de rounds joués
