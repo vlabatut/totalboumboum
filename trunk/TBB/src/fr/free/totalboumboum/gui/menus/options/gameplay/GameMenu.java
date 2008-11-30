@@ -23,16 +23,25 @@ package fr.free.totalboumboum.gui.menus.options.gameplay;
 
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
+import java.io.IOException;
 import java.util.ArrayList;
 
 import javax.swing.Box;
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
+import javax.xml.parsers.ParserConfigurationException;
 
+import org.xml.sax.SAXException;
+
+import fr.free.totalboumboum.configuration.Configuration;
+import fr.free.totalboumboum.configuration.profile.Profile;
+import fr.free.totalboumboum.configuration.profile.ProfileLoader;
+import fr.free.totalboumboum.configuration.profile.ProfilesSelection;
 import fr.free.totalboumboum.gui.common.panel.SplitMenuPanel;
 import fr.free.totalboumboum.gui.common.panel.data.InnerDataPanel;
 import fr.free.totalboumboum.gui.common.panel.menu.InnerMenuPanel;
 import fr.free.totalboumboum.gui.common.panel.menu.MenuPanel;
+import fr.free.totalboumboum.gui.menus.options.gameplay.quickstart.QuickstartSplitPanel;
 import fr.free.totalboumboum.gui.tools.GuiKeys;
 import fr.free.totalboumboum.gui.tools.GuiTools;
 
@@ -82,17 +91,45 @@ buttonTournament.setEnabled(false);
 }
 	
 	public void actionPerformed(ActionEvent e)
-	{	if(e.getActionCommand().equals(GuiKeys.MENU_OPTIONS_BUTTON_ADVANCED))
+	{	if(e.getActionCommand().equals(GuiKeys.MENU_OPTIONS_GAME_BUTTON_QUICKSTART))
+		{	try
+			{	ProfilesSelection profilesSelection = Configuration.getProfilesConfiguration().getQuickStartSelected();
+				ArrayList<Profile> profiles = ProfileLoader.loadProfiles(profilesSelection);
+				String roundFile = Configuration.getGameConfiguration().getQuickstartName();
+				QuickstartSplitPanel quickstartPanel = new QuickstartSplitPanel(container.getContainer(),container,profiles,roundFile);
+				replaceWith(quickstartPanel);
+			}
+			catch (IllegalArgumentException e1)
+			{	e1.printStackTrace();
+			}
+			catch (SecurityException e1)
+			{	e1.printStackTrace();
+			}
+			catch (ParserConfigurationException e1)
+			{	e1.printStackTrace();
+			}
+			catch (SAXException e1)
+			{	e1.printStackTrace();
+			}
+			catch (IOException e1)
+			{	e1.printStackTrace();
+			}
+			catch (IllegalAccessException e1)
+			{	e1.printStackTrace();
+			}
+			catch (NoSuchFieldException e1)
+			{	e1.printStackTrace();
+			}
+			catch (ClassNotFoundException e1)
+			{	e1.printStackTrace();
+			}
+		}
+	else if(e.getActionCommand().equals(GuiKeys.MENU_OPTIONS_GAME_BUTTON_QUICKMATCH))
 		{	
 //			VideoSplitPanel videoPanel = new VideoSplitPanel(container.getContainer(),container);
 //			replaceWith(videoPanel);
 		}
-	else if(e.getActionCommand().equals(GuiKeys.MENU_OPTIONS_BUTTON_GUI))
-		{	
-//			VideoSplitPanel videoPanel = new VideoSplitPanel(container.getContainer(),container);
-//			replaceWith(videoPanel);
-		}
-		else if(e.getActionCommand().equals(GuiKeys.MENU_OPTIONS_BUTTON_VIDEO))
+		else if(e.getActionCommand().equals(GuiKeys.MENU_OPTIONS_GAME_BUTTON_TOURNAMENT))
 		{	
 //			VideoSplitPanel videoPanel = new VideoSplitPanel(container.getContainer(),container);
 //			replaceWith(videoPanel);

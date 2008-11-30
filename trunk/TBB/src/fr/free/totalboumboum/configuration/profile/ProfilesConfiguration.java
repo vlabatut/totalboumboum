@@ -169,4 +169,15 @@ public class ProfilesConfiguration
 		boolean result = !usedColors.contains(color);
 		return result;
 	}
+	
+	public static ProfilesSelection getSelection(ArrayList<Profile> profiles)
+	{	ProfilesSelection result = new ProfilesSelection();
+		for(Profile p: profiles)
+		{	String file = p.getFileName();
+			PredefinedColor color = p.getSpriteSelectedColor();
+			int controlsIndex = p.getControlSettingsIndex();
+			result.addProfile(file, color, controlsIndex);			
+		}
+		return result;
+	}
 }
