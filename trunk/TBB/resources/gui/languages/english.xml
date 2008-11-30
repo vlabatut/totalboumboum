@@ -199,6 +199,26 @@
 				</group>
 				<group name="Quickstart">
 					<text name="Title" value="Quick start" tooltip="Modify quick start settings" />
+					<group name="Round">
+						<text name="Browse" value="Manche" tooltip="Sélectionner la manche du démarrage rapide" />
+					</group>
+					<group name="Players" >
+						<text name="Controls" value="Controls" tooltip="Selected controls" />
+						<text name="Color" value="Color" tooltip="Selected color" />
+						<group name="Hero" >
+							<text name="Header" value="Hero" tooltip="Selected character" />
+						</group>
+						<group name="Profile" >
+							<text name="Add" value="Add" tooltip="Add a player" />
+							<text name="Delete" value="Unselect" tooltip="Unselect this profile" />
+							<text name="Header" value="Profile" tooltip="Selected profile" />
+						</group>
+						<group name="Type" >
+							<text name="Computer" value="Computer" tooltip="Computer-controlled player" />
+							<text name="Header" value="Type" tooltip="Profile type" />
+							<text name="Human" value="Human" tooltip="Human-controlled player" />
+						</group>						
+					</group>
 				</group>
 				<group name="Quickmatch">
 					<text name="Title" value="Quick match" tooltip="Modify quick match settings" />
@@ -320,8 +340,8 @@
 					<text name="Header" value="Type" tooltip="Profile type" />
 					<text name="Human" value="Human" tooltip="Human-controlled player" />
 				</group>
-				
 			</group>
+			
 		</group>	
 
 <!-- TOURNAMENT MENU -->	

@@ -45,16 +45,17 @@ import fr.free.totalboumboum.gui.common.panel.SplitMenuPanel;
 import fr.free.totalboumboum.gui.common.panel.data.EntitledDataPanel;
 import fr.free.totalboumboum.gui.common.subpanel.SubPanel;
 import fr.free.totalboumboum.gui.common.subpanel.UntitledSubPanelTable;
-import fr.free.totalboumboum.gui.data.configuration.GuiConfiguration;
 import fr.free.totalboumboum.gui.game.match.description.MatchDescription;
 import fr.free.totalboumboum.gui.menus.options.gameplay.quickstart.hero.SelectHeroSplitPanel;
 import fr.free.totalboumboum.gui.menus.options.gameplay.quickstart.profile.SelectProfileSplitPanel;
+import fr.free.totalboumboum.gui.menus.quickmatch.players.PlayersData;
 import fr.free.totalboumboum.gui.tools.GuiKeys;
 import fr.free.totalboumboum.gui.tools.GuiTools;
 
 public class QuickstartData extends EntitledDataPanel implements MouseListener
 {	
 	private static final long serialVersionUID = 1L;
+	private static final float SPLIT_RATIO = 0.06f;
 	
 	private static final int LINE_COUNT = 16+1;
 	private static final int COL_COUNT = 6;
@@ -67,6 +68,10 @@ public class QuickstartData extends EntitledDataPanel implements MouseListener
 	private static final int COL_CONTROLS = 5;
 	
 	private UntitledSubPanelTable playersPanel;
+	private UntitledSubPanelTable roundPanel;
+	private SubPanel mainPanel;
+	private int roundHeight;
+	private int playersHeight;
 
 	// controls
 	private ArrayList<String> controlTexts = new ArrayList<String>();
@@ -92,34 +97,34 @@ public class QuickstartData extends EntitledDataPanel implements MouseListener
 		
 		// data
 		{	mainPanel = new SubPanel(dataWidth,dataHeight);
-			{	BoxLayout layout = new BoxLayout(mainPanel,BoxLayout.LINE_AXIS); 
+			{	BoxLayout layout = new BoxLayout(mainPanel,BoxLayout.PAGE_AXIS); 
 				mainPanel.setLayout(layout);
 			}
 			
 			int margin = GuiTools.panelMargin;
-			leftWidth = (int)(dataWidth*SPLIT_RATIO); 
-			int rightWidth = dataWidth - leftWidth - margin; 
+			roundHeight = (int)(dataHeight*SPLIT_RATIO); 
+			playersHeight = dataHeight - roundHeight - margin;
 			mainPanel.setOpaque(false);
-			profilesConfiguration = Configuration.getProfilesConfiguration();
-			initProfiles();
 			
-			// list panel
-			{	makeListPanels(leftWidth,dataHeight);
-				mainPanel.add(listPanels.get(currentPage));
+			// round panel
+			{	roundPanel = makeRoundPanel(dataWidth,roundHeight);
+				mainPanel.add(roundPanel);
+			}
+
+			mainPanel.add(Box.createVerticalGlue());
+			
+			// players panel
+			{	playersPanel = makePlayersPanel(dataWidth,playersHeight);
+				mainPanel.add(playersPanel);
 			}
 			
-			mainPanel.add(Box.createHorizontalGlue());
-			
-			// preview panel
-			{	makePreviewPanel(rightWidth,dataHeight);
-				mainPanel.add(previewPanel);
-			}
 			
 			setDataPart(mainPanel);
 			
 		}
-		playersPanel = makePlayersPanel(dataWidth,dataHeight);
-		setDataPart(playersPanel);
+
+		setDataPart(mainPanel);
+		refreshRound();
 		for(int line=1;line<LINE_COUNT;line++)
 			refreshPlayer(line);
 	}
@@ -138,12 +143,12 @@ public class QuickstartData extends EntitledDataPanel implements MouseListener
 	private UntitledSubPanelTable makePlayersPanel(int width, int height)
 	{	int headerCols = 6;
 		int margin = GuiTools.subPanelMargin;
-		UntitledSubPanelTable playersPanel = new UntitledSubPanelTable(width,height,COL_COUNT,LINE_COUNT,true);
-		int headerHeight = playersPanel.getHeaderHeight();
-		int lineHeight = playersPanel.getLineHeight();
+		UntitledSubPanelTable result = new UntitledSubPanelTable(width,height,COL_COUNT,LINE_COUNT,true);
+		int headerHeight = result.getHeaderHeight();
+		int lineHeight = result.getLineHeight();
 		int deleteWidth = lineHeight;
-		int controlWidth = MatchDescription.initControlsTexts(playersPanel.getLineFontSize(),controlTexts,controlTooltips);
-		int colorWidth = initColorTexts(playersPanel.getLineFontSize(),colorTexts,colorTooltips,colorBackgrounds);
+		int controlWidth = MatchDescription.initControlsTexts(result.getLineFontSize(),controlTexts,controlTooltips);
+		int colorWidth = PlayersData.initColorTexts(result.getLineFontSize(),colorTexts,colorTooltips,colorBackgrounds);
 		int typeWidth = headerHeight;
 		int heroWidth = headerHeight;
 		int fixedSum = margin*(headerCols+1) + deleteWidth + heroWidth + controlWidth + colorWidth + typeWidth;
@@ -152,11 +157,11 @@ public class QuickstartData extends EntitledDataPanel implements MouseListener
 		// headers
 		{	String keys[] = 
 			{	null,
-				GuiKeys.MENU_QUICKMATCH_PLAYERS_PROFILE_HEADER,
-				GuiKeys.MENU_QUICKMATCH_PLAYERS_TYPE_HEADER,
-				GuiKeys.MENU_QUICKMATCH_PLAYERS_HERO_HEADER,
-				GuiKeys.MENU_QUICKMATCH_PLAYERS_COLOR,
-				GuiKeys.MENU_QUICKMATCH_PLAYERS_CONTROLS
+				GuiKeys.MENU_OPTIONS_GAME_QUICKSTART_PLAYERS_PROFILE_HEADER,
+				GuiKeys.MENU_OPTIONS_GAME_QUICKSTART_PLAYERS_TYPE_HEADER,
+				GuiKeys.MENU_OPTIONS_GAME_QUICKSTART_PLAYERS_HERO_HEADER,
+				GuiKeys.MENU_OPTIONS_GAME_QUICKSTART_PLAYERS_COLOR,
+				GuiKeys.MENU_OPTIONS_GAME_QUICKSTART_PLAYERS_CONTROLS
 			};
 			int sizes[] = 
 			{	deleteWidth,
@@ -167,13 +172,13 @@ public class QuickstartData extends EntitledDataPanel implements MouseListener
 				controlWidth
 			};
 			for(int col=0;col<keys.length;col++)
-			{	playersPanel.setSubColumnsMinWidth(col,sizes[col]);
-				playersPanel.setSubColumnsPreferredWidth(col,sizes[col]);
-				playersPanel.setSubColumnsMaxWidth(col,sizes[col]);
+			{	result.setSubColumnsMinWidth(col,sizes[col]);
+				result.setSubColumnsPreferredWidth(col,sizes[col]);
+				result.setSubColumnsMaxWidth(col,sizes[col]);
 				if(keys[col]!=null)
-				{	playersPanel.setLabelKey(0,col,keys[col],true);
+				{	result.setLabelKey(0,col,keys[col],true);
 					Color bg = GuiTools.COLOR_TABLE_HEADER_BACKGROUND;
-					playersPanel.setLabelBackground(0,col,bg);
+					result.setLabelBackground(0,col,bg);
 				}
 			}
 		}
@@ -182,11 +187,57 @@ public class QuickstartData extends EntitledDataPanel implements MouseListener
 		for(int line=1;line<LINE_COUNT;line++)
 		{	for(int col=0;col<COL_COUNT;col++)
 			{	Color bg = GuiTools.COLOR_TABLE_NEUTRAL_BACKGROUND;
-				playersPanel.setLabelBackground(line,col,bg);
+				result.setLabelBackground(line,col,bg);
 			}
 		}
 		
-		return playersPanel;	
+		return result;	
+	}
+
+	private UntitledSubPanelTable makeRoundPanel(int width, int height)
+	{	int cols = 2;
+		int lines = 1;
+		int margin = GuiTools.subPanelMargin;
+		UntitledSubPanelTable result = new UntitledSubPanelTable(width,height,cols,lines,false);
+		@SuppressWarnings("unused")
+		int headerHeight = result.getHeaderHeight();
+		int lineHeight = result.getLineHeight();
+		int browseWidth = lineHeight;
+		int fileWidth = width - (browseWidth + 3*margin);		
+		
+		{	int line = 0;
+			int col = 0;
+			// name
+			{	// size
+				result.setSubColumnsMinWidth(col,fileWidth);
+				result.setSubColumnsPreferredWidth(col,fileWidth);
+				result.setSubColumnsMaxWidth(col,fileWidth);
+				// color
+				Color bg = GuiTools.COLOR_TABLE_NEUTRAL_BACKGROUND;
+				result.setLabelBackground(line,col,bg);
+				// next
+				col++;
+			}
+			// browse
+			{	// size
+				result.setSubColumnsMinWidth(col,browseWidth);
+				result.setSubColumnsPreferredWidth(col,browseWidth);
+				result.setSubColumnsMaxWidth(col,browseWidth);
+				// icon
+				String key = GuiKeys.MENU_OPTIONS_GAME_QUICKSTART_ROUND_BROWSE;
+				result.setLabelKey(line,col,key,true);
+				// color
+				Color bg = GuiTools.COLOR_TABLE_HEADER_BACKGROUND;
+				result.setLabelBackground(line,col,bg);
+				// listener
+				JLabel lbl = result.getLabel(line,col);
+				lbl.addMouseListener(this);
+				// next
+				col++;
+			}
+		}
+		
+		return result;	
 	}
 	
 	private void refreshPlayer(int line)
@@ -199,7 +250,7 @@ public class QuickstartData extends EntitledDataPanel implements MouseListener
 			Color color = clr.getColor();
 			// delete
 			{	// content
-				playersPanel.setLabelKey(line,COL_DELETE,GuiKeys.MENU_QUICKMATCH_PLAYERS_PROFILE_DELETE,true);
+				playersPanel.setLabelKey(line,COL_DELETE,GuiKeys.MENU_OPTIONS_GAME_QUICKSTART_PLAYERS_PROFILE_DELETE,true);
 				// color
 				Color bg = new Color(color.getRed(),color.getGreen(),color.getBlue(),GuiTools.ALPHA_TABLE_REGULAR_BACKGROUND_LEVEL2);
 				playersPanel.setLabelBackground(line,COL_DELETE,bg);
@@ -225,9 +276,9 @@ public class QuickstartData extends EntitledDataPanel implements MouseListener
 			{	// content
 				String profileType;
 				if(profile.hasAi())
-					profileType = GuiKeys.MENU_QUICKMATCH_PLAYERS_TYPE_COMPUTER;
+					profileType = GuiKeys.MENU_OPTIONS_GAME_QUICKSTART_PLAYERS_TYPE_COMPUTER;
 				else
-					profileType = GuiKeys.MENU_QUICKMATCH_PLAYERS_TYPE_HUMAN;
+					profileType = GuiKeys.MENU_OPTIONS_GAME_QUICKSTART_PLAYERS_TYPE_HUMAN;
 				playersPanel.setLabelKey(line,COL_TYPE,profileType,true);
 				// color
 				Color bg = new Color(color.getRed(),color.getGreen(),color.getBlue(),GuiTools.ALPHA_TABLE_REGULAR_BACKGROUND_LEVEL1);
@@ -288,7 +339,7 @@ public class QuickstartData extends EntitledDataPanel implements MouseListener
 			}
 			if(index==profiles.size())
 			{	int col = COL_DELETE;
-				String key = GuiKeys.MENU_QUICKMATCH_PLAYERS_PROFILE_ADD;
+				String key = GuiKeys.MENU_OPTIONS_GAME_QUICKSTART_PLAYERS_PROFILE_ADD;
 				playersPanel.setLabelKey(line,col,key,true);
 				Color bg = GuiTools.COLOR_TABLE_REGULAR_BACKGROUND;
 				playersPanel.setLabelBackground(line,col,bg);
@@ -299,65 +350,13 @@ public class QuickstartData extends EntitledDataPanel implements MouseListener
 		}
 	}
 
-/*	
-		// empty
-		{	playersPanel.setSubColumnsPreferredWidth(2,ctrlColWidth);
-			playersPanel.setSubColumnsMaxWidth(3,Integer.MAX_VALUE);
-		}
-		// data
-		{	ArrayList<Profile> players = match.getProfiles();
-			Iterator<Profile> i = players.iterator();
-			int line = 1;
-			while(i.hasNext())
-			{	int col = 0;
-				Profile profile = i.next();
-				// color
-				Color clr = profile.getSpriteColor().getColor();
-				int alpha = GuiTools.ALPHA_TABLE_REGULAR_BACKGROUND_LEVEL3;
-				Color bg = new Color(clr.getRed(),clr.getGreen(),clr.getBlue(),alpha);
-				playersPanel.setLineBackground(line,bg);
-				// portrait
-				{	BufferedImage image = profile.getPortraits().getOutgamePortrait(Portraits.OUTGAME_HEAD);
-					String tooltip = profile.getName();
-					playersPanel.setLabelIcon(line,col,image,tooltip);
-					col++;
-				}
-				// profile type
-				{	String aiName = profile.getAiName();
-					String key;
-					if(aiName==null)
-						key = GuiKeys.GAME_TOURNAMENT_DESCRIPTION_PLAYERS_DATA_HUMAN;
-					else
-						key = GuiKeys.GAME_TOURNAMENT_DESCRIPTION_PLAYERS_DATA_COMPUTER;
-					playersPanel.setLabelKey(line,col,key,true);
-					col++;
-				}
-				// controls
-				{	int index = profile.getControlSettingsIndex();
-					playersPanel.setLabelText(line,col,controlTexts.get(index),controlTooltips.get(index));
-					JLabel label = playersPanel.getLabel(line,col);
-					label.addMouseListener(this);
-					col++;
-				}
-				// name
-				{	String text = profile.getName();
-					String tooltip = profile.getName();
-					playersPanel.setLabelText(line,col,text,tooltip);
-					col++;
-				}
-				// rank
-				{	NumberFormat nf = NumberFormat.getInstance();
-					nf.setMinimumFractionDigits(0);
-					String text = "-";
-					String tooltip = "-";
-					playersPanel.setLabelText(line,col,text,tooltip);
-					col++;
-				}
-				//
-				line++;
-			}
-		}
- */
+	private void refreshRound()
+	{	// if there's a selected round
+		if(roundFile!=null)
+			roundPanel.setLabelText(0,0,roundFile,roundFile);
+		else
+			roundPanel.setLabelText(0,0,null,null);
+	}
 	
 	/////////////////////////////////////////////////////////////////
 	// MOUSE LISTENER	/////////////////////////////////////////////
@@ -379,79 +378,63 @@ public class QuickstartData extends EntitledDataPanel implements MouseListener
 	public void mousePressed(MouseEvent e)
 	{	JLabel label = (JLabel)e.getComponent();
 		int[] pos = playersPanel.getLabelPosition(label);
-		switch(pos[2])
-		{	case COL_DELETE:
-				{	int index = pos[0]-1;
-					// add a profile
-					if(index==profiles.size())
-					{	SelectProfileSplitPanel selectProfilePanel = new SelectProfileSplitPanel(container.getContainer(),container,index,profiles);
-						getContainer().replaceWith(selectProfilePanel);						
+		// round
+		if(pos[0]==-1)
+		{	//TODO
+			
+		}
+		// players
+		else
+		{	switch(pos[2])
+			{	case COL_DELETE:
+					{	int index = pos[0]-1;
+						// add a profile
+						if(index==profiles.size())
+						{	SelectProfileSplitPanel selectProfilePanel = new SelectProfileSplitPanel(container.getContainer(),container,index,profiles);
+							getContainer().replaceWith(selectProfilePanel);						
+						}
+						// or remove a profile
+						else if(index<profiles.size())
+						{	profiles.remove(index);
+							refresh();
+						}
 					}
-					// or remove a profile
-					else if(index<profiles.size())
-					{	profiles.remove(index);
-						refresh();
+					break;
+				case COL_PROFILE:
+					{	int index = pos[0]-1;
+						SelectProfileSplitPanel selectProfilePanel = new SelectProfileSplitPanel(container.getContainer(),container,index,profiles);
+						getContainer().replaceWith(selectProfilePanel);
 					}
-				}
-				break;
-			case COL_PROFILE:
-				{	int index = pos[0]-1;
-					SelectProfileSplitPanel selectProfilePanel = new SelectProfileSplitPanel(container.getContainer(),container,index,profiles);
-					getContainer().replaceWith(selectProfilePanel);
-				}
-				break;
-			case COL_HERO:
-				{	Profile profile = profiles.get(pos[0]-1);
-					SelectHeroSplitPanel selectHeroPanel = new SelectHeroSplitPanel(container.getContainer(),container,profile);
-					getContainer().replaceWith(selectHeroPanel);					
-				}
-				break;
-			case COL_COLOR:
-				{	Profile profile = profiles.get(pos[0]-1);
-					PredefinedColor color = profile.getSpriteSelectedColor();
-					color = Configuration.getProfilesConfiguration().getNextFreeColor(profiles,profile,color);
-					profile.setSpriteSelectedColor(color);
-					reloadPortraits(pos[0]);
-					refreshPlayer(pos[0]);
-				}
-				break;
-			case COL_CONTROLS:
-				{	Profile profile = profiles.get(pos[0]-1);
-					int index = profile.getControlSettingsIndex();
-					index = Configuration.getProfilesConfiguration().getNextFreeControls(profiles,index);
-					profile.setControlSettingsIndex(index);
-					playersPanel.setLabelText(pos[0],pos[2],controlTexts.get(index),controlTooltips.get(index));
-				}
-				break;
+					break;
+				case COL_HERO:
+					{	Profile profile = profiles.get(pos[0]-1);
+						SelectHeroSplitPanel selectHeroPanel = new SelectHeroSplitPanel(container.getContainer(),container,profile);
+						getContainer().replaceWith(selectHeroPanel);					
+					}
+					break;
+				case COL_COLOR:
+					{	Profile profile = profiles.get(pos[0]-1);
+						PredefinedColor color = profile.getSpriteSelectedColor();
+						color = Configuration.getProfilesConfiguration().getNextFreeColor(profiles,profile,color);
+						profile.setSpriteSelectedColor(color);
+						reloadPortraits(pos[0]);
+						refreshPlayer(pos[0]);
+					}
+					break;
+				case COL_CONTROLS:
+					{	Profile profile = profiles.get(pos[0]-1);
+						int index = profile.getControlSettingsIndex();
+						index = Configuration.getProfilesConfiguration().getNextFreeControls(profiles,index);
+						profile.setControlSettingsIndex(index);
+						playersPanel.setLabelText(pos[0],pos[2],controlTexts.get(index),controlTooltips.get(index));
+					}
+					break;
+			}
 		}
 	}
 	@Override
 	public void mouseReleased(MouseEvent e)
 	{	
-	}
-
-	public static int initColorTexts(int fontSize, ArrayList<String> colorTexts, ArrayList<String> colorTooltips, ArrayList<Color> colorBackgrounds)
-	{	int result = 0;
-		for(PredefinedColor color : PredefinedColor.values())
-		{	// text
-			String colorKey = color.toString();
-			colorKey = colorKey.toUpperCase().substring(0,1)+colorKey.toLowerCase().substring(1,colorKey.length());
-			colorKey = GuiKeys.COLOR+colorKey;
-			String text = GuiConfiguration.getMiscConfiguration().getLanguage().getText(colorKey); 
-			String tooltip = text;
-			Color clr = color.getColor();
-			int alpha = GuiTools.ALPHA_TABLE_REGULAR_BACKGROUND_LEVEL3;
-			Color bg = new Color(clr.getRed(),clr.getGreen(),clr.getBlue(),alpha);
-			//
-			colorTexts.add(text);
-			colorTooltips.add(tooltip);
-			colorBackgrounds.add(bg);
-			// width
-			int temp = GuiTools.getPixelWidth(fontSize,text);
-			if(temp>result)
-				result = temp;
-		}
-		return result;
 	}
 
 	private void reloadPortraits(int line)
@@ -479,6 +462,6 @@ public class QuickstartData extends EntitledDataPanel implements MouseListener
 	}
 
 	public String getSelectedRound()
-	{	return selectedRound;	
+	{	return roundFile;	
 	}
 }

@@ -39,7 +39,7 @@ public class QuickstartSplitPanel extends SplitMenuPanel
 	private BufferedImage image;
 
 	public QuickstartSplitPanel(MenuContainer container, MenuPanel parent, ArrayList<Profile> selectedProfiles, String roundFile)
-	{	super(container,parent,BorderLayout.PAGE_END,GuiTools.HORIZONTAL_SPLIT_RATIO);
+	{	super(container,parent,BorderLayout.LINE_START,GuiTools.VERTICAL_SPLIT_RATIO);
 	
 		// background
 		image = GuiConfiguration.getMiscConfiguration().getDarkBackground();
