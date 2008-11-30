@@ -199,6 +199,26 @@
 				</group>
 				<group name="Quickstart">
 					<text name="Title" value="Démarrage rapide" tooltip="Modifier les paramètres du démarrage rapide" />
+					<group name="Round">
+						<text name="Browse" value="Manche" tooltip="Sélectionner la manche du démarrage rapide" />
+					</group>
+					<group name="Players" >
+						<text name="Controls" value="Commandes" tooltip="Commandes sélectionnées" />
+						<text name="Color" value="Color" tooltip="Couleur sélectionnée" />
+						<group name="Hero" >
+							<text name="Header" value="Hero" tooltip="Personnage sélectionné" />
+						</group>
+						<group name="Profile" >
+							<text name="Add" value="Ajoute" tooltip="Sélectionner un autre profil" />
+							<text name="Delete" value="Désélectionne" tooltip="Désélectionne le profil" />
+							<text name="Header" value="Profil" tooltip="Profil sélectionné" />
+						</group>
+						<group name="Type" >
+							<text name="Computer" value="Ordinateur" tooltip="Intelligence artificielle" />
+							<text name="Header" value="Type" tooltip="Type de profil (joueur humain ou IA)" />
+							<text name="Human" value="Humain" tooltip="Joueur humain" />
+						</group>				
+					</group>
 				</group>
 				<group name="Quickmatch">
 					<text name="Title" value="Rencontre rapide" tooltip="Modifier les paramètres de la rencontre rapide" />
@@ -319,9 +339,9 @@
 					<text name="Computer" value="Ordinateur" tooltip="Intelligence artificielle" />
 					<text name="Header" value="Type" tooltip="Type de profil (joueur humain ou IA)" />
 					<text name="Human" value="Humain" tooltip="Joueur humain" />
-				</group>
-				
+				</group>				
 			</group>
+			
 		</group>	
 
 <!-- TOURNAMENT MENU -->	

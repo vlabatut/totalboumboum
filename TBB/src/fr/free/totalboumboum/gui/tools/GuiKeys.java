@@ -216,14 +216,42 @@ public class GuiKeys
 				/* AUTO */
 				public static final String MENU_OPTIONS_CONTROLS_LINE_AUTO_TRUE = "MenuOptionsControlsLineAutoTrue";
 				public static final String MENU_OPTIONS_CONTROLS_LINE_AUTO_FALSE = "MenuOptionsControlsLineAutoFalse";
-		/* GAMEPLAY */
+		/* GAME */
 			/* BUTTON */
-			public static final String MENU_OPTIONS_GAME_BUTTON = "MenuOptionsGameButton";
+			public static final String MENU_OPTIONS_GAME = "MenuOptionsGame";
+			public static final String MENU_OPTIONS_GAME_BUTTON = MENU_OPTIONS_GAME+"Button";
 			public static final String MENU_OPTIONS_GAME_BUTTON_QUICKSTART = MENU_OPTIONS_GAME_BUTTON+"Quickstart";
 			public static final String MENU_OPTIONS_GAME_BUTTON_QUICKMATCH = MENU_OPTIONS_GAME_BUTTON+"Quickmatch";
 			public static final String MENU_OPTIONS_GAME_BUTTON_TOURNAMENT = MENU_OPTIONS_GAME_BUTTON+"Tournament";
 			/* QUICK START */
-			public static final String MENU_OPTIONS_GAME_QUICKSTART_TITLE = "MenuOptionsGameQuickstartTitle";
+			public static final String MENU_OPTIONS_GAME_QUICKSTART = MENU_OPTIONS_GAME+"Quickstart";
+			public static final String MENU_OPTIONS_GAME_QUICKSTART_TITLE = MENU_OPTIONS_GAME_QUICKSTART+"Title";
+				/* ROUND */
+				public static final String MENU_OPTIONS_GAME_QUICKSTART_ROUND = MENU_OPTIONS_GAME_QUICKSTART+"Round";
+				public static final String MENU_OPTIONS_GAME_QUICKSTART_ROUND_BROWSE = MENU_OPTIONS_GAME_QUICKSTART_ROUND+"Browse";
+				/* PLAYERS */
+				public static final String MENU_OPTIONS_GAME_QUICKSTART_PLAYERS = MENU_OPTIONS_GAME_QUICKSTART+"Players";
+				public static final String MENU_OPTIONS_GAME_QUICKSTART_PLAYERS_TITLE = MENU_OPTIONS_GAME_QUICKSTART_PLAYERS+"Title";
+				public static final String MENU_OPTIONS_GAME_QUICKSTART_PLAYERS_CONTROLS = MENU_OPTIONS_GAME_QUICKSTART_PLAYERS+"Controls";
+				public static final String MENU_OPTIONS_GAME_QUICKSTART_PLAYERS_COLOR = MENU_OPTIONS_GAME_QUICKSTART_PLAYERS+"Color";
+					/* HERO */
+					public static final String MENU_OPTIONS_GAME_QUICKSTART_PLAYERS_HERO_HEADER = MENU_OPTIONS_GAME_QUICKSTART_PLAYERS+"HeroHeader";
+						/* BUTTON */
+						public static final String MENU_OPTIONS_GAME_QUICKSTART_PLAYERS_HERO_BUTTON = MENU_OPTIONS_GAME_QUICKSTART_PLAYERS+"HeroButton";
+						public static final String MENU_OPTIONS_GAME_QUICKSTART_PLAYERS_HERO_BUTTON_CANCEL = MENU_OPTIONS_GAME_QUICKSTART_PLAYERS_HERO_BUTTON+"Cancel";
+						public static final String MENU_OPTIONS_GAME_QUICKSTART_PLAYERS_HERO_BUTTON_CONFIRM = MENU_OPTIONS_GAME_QUICKSTART_PLAYERS_HERO_BUTTON+"Confirm";
+					/* PROFILE */
+					public static final String MENU_OPTIONS_GAME_QUICKSTART_PLAYERS_PROFILE_ADD = MENU_OPTIONS_GAME_QUICKSTART_PLAYERS+"ProfileAdd";
+					public static final String MENU_OPTIONS_GAME_QUICKSTART_PLAYERS_PROFILE_DELETE = MENU_OPTIONS_GAME_QUICKSTART_PLAYERS+"ProfileDelete";
+					public static final String MENU_OPTIONS_GAME_QUICKSTART_PLAYERS_PROFILE_HEADER = MENU_OPTIONS_GAME_QUICKSTART_PLAYERS+"ProfileHeader";
+						/* BUTTON */
+						public static final String MENU_OPTIONS_GAME_QUICKSTART_PLAYERS_PROFILE_BUTTON = MENU_OPTIONS_GAME_QUICKSTART_PLAYERS+"ProfileButton";
+						public static final String MENU_OPTIONS_GAME_QUICKSTART_PLAYERS_PROFILE_BUTTON_CANCEL = MENU_OPTIONS_GAME_QUICKSTART_PLAYERS_PROFILE_BUTTON+"Cancel";
+						public static final String MENU_OPTIONS_GAME_QUICKSTART_PLAYERS_PROFILE_BUTTON_CONFIRM = MENU_OPTIONS_GAME_QUICKSTART_PLAYERS_PROFILE_BUTTON+"Confirm";
+					/* TYPE */
+					public static final String MENU_OPTIONS_GAME_QUICKSTART_PLAYERS_TYPE_COMPUTER = MENU_OPTIONS_GAME_QUICKSTART_PLAYERS+"TypeComputer";
+					public static final String MENU_OPTIONS_GAME_QUICKSTART_PLAYERS_TYPE_HEADER = MENU_OPTIONS_GAME_QUICKSTART_PLAYERS+"TypeHeader";
+					public static final String MENU_OPTIONS_GAME_QUICKSTART_PLAYERS_TYPE_HUMAN = MENU_OPTIONS_GAME_QUICKSTART_PLAYERS+"TypeHuman";
 			/* QUICK MATCH */
 			public static final String MENU_OPTIONS_GAME_QUICKMATCH_TITLE = "MenuOptionsGameQuickmatchTitle";
 			/* TOURNAMENT */
@@ -288,17 +316,17 @@ public class GuiKeys
 		public static final String MENU_PROFILES_PREVIEW_HEROPACK = "MenuProfilesPreviewHeroPack";
 		public static final String MENU_PROFILES_PREVIEW_NAME = "MenuProfilesPreviewName";
 	/* QUICKMATCH */	
-		public static final String MENU_QUICKMATCH = "MenuQuickmatch";
+	public static final String MENU_QUICKMATCH = "MenuQuickmatch";
 		/* BUTTON */
-			public static final String MENU_QUICKMATCH_BUTTON = MENU_QUICKMATCH+"Button";
-			public static final String MENU_QUICKMATCH_BUTTON_NEXT = MENU_QUICKMATCH_BUTTON+"Next";
-			public static final String MENU_QUICKMATCH_BUTTON_PREVIOUS = MENU_QUICKMATCH_BUTTON+"Previous";
-			public static final String MENU_QUICKMATCH_BUTTON_QUIT = MENU_QUICKMATCH_BUTTON+"Quit";
+		public static final String MENU_QUICKMATCH_BUTTON = MENU_QUICKMATCH+"Button";
+		public static final String MENU_QUICKMATCH_BUTTON_NEXT = MENU_QUICKMATCH_BUTTON+"Next";
+		public static final String MENU_QUICKMATCH_BUTTON_PREVIOUS = MENU_QUICKMATCH_BUTTON+"Previous";
+		public static final String MENU_QUICKMATCH_BUTTON_QUIT = MENU_QUICKMATCH_BUTTON+"Quit";
 		/* PLAYERS */
-			public static final String MENU_QUICKMATCH_PLAYERS = MENU_QUICKMATCH+"Players";
-			public static final String MENU_QUICKMATCH_PLAYERS_TITLE = MENU_QUICKMATCH_PLAYERS+"Title";
-			public static final String MENU_QUICKMATCH_PLAYERS_CONTROLS = MENU_QUICKMATCH_PLAYERS+"Controls";
-			public static final String MENU_QUICKMATCH_PLAYERS_COLOR = MENU_QUICKMATCH_PLAYERS+"Color";
+		public static final String MENU_QUICKMATCH_PLAYERS = MENU_QUICKMATCH+"Players";
+		public static final String MENU_QUICKMATCH_PLAYERS_TITLE = MENU_QUICKMATCH_PLAYERS+"Title";
+		public static final String MENU_QUICKMATCH_PLAYERS_CONTROLS = MENU_QUICKMATCH_PLAYERS+"Controls";
+		public static final String MENU_QUICKMATCH_PLAYERS_COLOR = MENU_QUICKMATCH_PLAYERS+"Color";
 			/* HERO */
 			public static final String MENU_QUICKMATCH_PLAYERS_HERO_HEADER = MENU_QUICKMATCH_PLAYERS+"HeroHeader";
 				/* BUTTON */
