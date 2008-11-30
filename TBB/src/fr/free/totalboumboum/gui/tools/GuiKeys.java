@@ -170,6 +170,23 @@ public class GuiKeys
 				public static final String MENU_RESOURCES_MATCH_SELECT_PREVIEW_PLAYERS = "MenuResourcesMatchSelectPreviewPlayers";
 				public static final String MENU_RESOURCES_MATCH_SELECT_PREVIEW_POINTS = "MenuResourcesMatchSelectPreviewPoints";
 				public static final String MENU_RESOURCES_MATCH_SELECT_PREVIEW_ROUNDS = "MenuResourcesMatchSelectPreviewRounds";
+		/* ROUND */
+			/* BUTTON */
+			public static final String MENU_RESOURCES_ROUND_BUTTON = "MenuResourcesRoundButton";	
+			public static final String MENU_RESOURCES_ROUND_BUTTON_BACK = MENU_RESOURCES_ROUND_BUTTON+"Back";	
+			/* SELECT */
+			public static final String MENU_RESOURCES_ROUND_SELECT_TITLE = "MenuResourcesRoundSelectTitle";
+				/* LIST */
+				public static final String MENU_RESOURCES_ROUND_SELECT_LIST_PAGEDOWN = "MenuResourcesRoundSelectListPageDown";
+				public static final String MENU_RESOURCES_ROUND_SELECT_LIST_PAGEUP = "MenuResourcesRoundSelectListPageUp";
+				/* PREVIEW */
+				public static final String MENU_RESOURCES_ROUND_SELECT_PREVIEW_AUTHOR = "MenuResourcesRoundSelectPreviewAuthor";
+				public static final String MENU_RESOURCES_ROUND_SELECT_PREVIEW_LEVEL_FOLDER = "MenuResourcesRoundSelectPreviewLevelFolder";
+				public static final String MENU_RESOURCES_ROUND_SELECT_PREVIEW_LEVEL_PACK = "MenuResourcesRoundSelectPreviewLevelPack";
+				public static final String MENU_RESOURCES_ROUND_SELECT_PREVIEW_LIMIT = "MenuResourcesRoundSelectPreviewLimit";
+				public static final String MENU_RESOURCES_ROUND_SELECT_PREVIEW_NAME = "MenuResourcesRoundSelectPreviewName";
+				public static final String MENU_RESOURCES_ROUND_SELECT_PREVIEW_PLAYERS = "MenuResourcesRoundSelectPreviewPlayers";
+				public static final String MENU_RESOURCES_ROUND_SELECT_PREVIEW_POINTS = "MenuResourcesRoundSelectPreviewPoints";
 			
 	/* OPTIONS */
 		/* BUTTON */

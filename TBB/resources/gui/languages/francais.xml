@@ -128,6 +128,28 @@
 					</group>
 				</group>
 			</group>	
+
+			<group name="Round">
+				<group name="Button">
+					<text name="Back" value="Retour" tooltip="Revenir au menu des ressources" />
+				</group>		
+				<group name="Select">
+					<text name="Title" value="Liste des manches" tooltip="Liste des manches prédéfinies" />
+					<group name="List">
+						<text name="PageDown" value="Descendre" tooltip="Aller à la page de manches suivante" />
+						<text name="PageUp" value="Monter" tooltip="Revenir à la page de manches précédente" />
+					</group>
+					<group name="Preview">
+						<text name="Author" value="Auteur"  tooltip="Auteur de cette manche" />
+						<text name="LevelFolder" value="Niveau"  tooltip="Nom du niveau utilisé dans cette manche" />
+						<text name="LevelPack" value="Paquet"  tooltip="Nom du paquet contenant le niveau utilisé dans cette manche" />
+						<text name="Limit" value="Instance" tooltip="Limites cette manche" />
+						<text name="Name" value="Nom" tooltip="Nom de cette manche" />
+						<text name="Players" value="Joueurs" tooltip="Nombre de joueurs pour cette manche" />
+						<text name="Points" value="Points"  tooltip="Calcul des points pour cette manche" />
+					</group>
+				</group>
+			</group>	
 		</group>
 
 <!-- OPTIONS MENU -->
