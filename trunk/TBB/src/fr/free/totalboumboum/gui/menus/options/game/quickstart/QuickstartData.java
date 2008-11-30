@@ -48,6 +48,7 @@ import fr.free.totalboumboum.gui.common.subpanel.UntitledSubPanelTable;
 import fr.free.totalboumboum.gui.game.match.description.MatchDescription;
 import fr.free.totalboumboum.gui.menus.options.game.quickstart.hero.SelectHeroSplitPanel;
 import fr.free.totalboumboum.gui.menus.options.game.quickstart.profile.SelectProfileSplitPanel;
+import fr.free.totalboumboum.gui.menus.options.game.quickstart.round.SelectRoundSplitPanel;
 import fr.free.totalboumboum.gui.menus.quickmatch.players.PlayersData;
 import fr.free.totalboumboum.gui.tools.GuiKeys;
 import fr.free.totalboumboum.gui.tools.GuiTools;
@@ -83,13 +84,14 @@ public class QuickstartData extends EntitledDataPanel implements MouseListener
 	
 	// profiles
 	private ArrayList<Profile> profiles;
-	private String roundFile;
+	private StringBuffer roundFile;
 	
 	public QuickstartData(SplitMenuPanel container, ArrayList<Profile> selectedProfiles, String roundFolder)
 	{	super(container);
 		
 		// profiles
 		profiles = selectedProfiles;
+		roundFile = new StringBuffer(roundFolder);
 	
 		// title
 		String key = GuiKeys.MENU_OPTIONS_GAME_QUICKSTART_TITLE;
@@ -133,6 +135,7 @@ public class QuickstartData extends EntitledDataPanel implements MouseListener
 	public void refresh()
 	{	for(int line=1;line<LINE_COUNT;line++)
 			refreshPlayer(line);
+		refreshRound();
 	}
 
 	@Override
@@ -353,7 +356,7 @@ public class QuickstartData extends EntitledDataPanel implements MouseListener
 	private void refreshRound()
 	{	// if there's a selected round
 		if(roundFile!=null)
-			roundPanel.setLabelText(0,0,roundFile,roundFile);
+			roundPanel.setLabelText(0,0,roundFile.toString(),roundFile.toString());
 		else
 			roundPanel.setLabelText(0,0,null,null);
 	}
@@ -380,8 +383,8 @@ public class QuickstartData extends EntitledDataPanel implements MouseListener
 		int[] pos = playersPanel.getLabelPosition(label);
 		// round
 		if(pos[0]==-1)
-		{	//TODO
-			
+		{	SelectRoundSplitPanel selectRoundPanel = new SelectRoundSplitPanel(container.getContainer(),container,roundFile);
+			getContainer().replaceWith(selectRoundPanel);
 		}
 		// players
 		else
@@ -462,6 +465,6 @@ public class QuickstartData extends EntitledDataPanel implements MouseListener
 	}
 
 	public String getSelectedRound()
-	{	return roundFile;	
+	{	return roundFile.toString();	
 	}
 }
