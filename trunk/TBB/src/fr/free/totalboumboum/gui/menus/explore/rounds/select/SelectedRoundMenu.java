@@ -65,7 +65,7 @@ public class SelectedRoundMenu extends InnerMenuPanel
 		add(Box.createVerticalGlue());		
 
 		// panels
-		levelData = new SelectedRoundData(container,FileTools.getMatchesPath());
+		levelData = new SelectedRoundData(container,FileTools.getRoundsPath());
 		container.setDataPart(levelData);
 	}
 	

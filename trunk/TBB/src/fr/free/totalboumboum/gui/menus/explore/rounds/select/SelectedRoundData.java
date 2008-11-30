@@ -22,9 +22,12 @@ package fr.free.totalboumboum.gui.menus.explore.rounds.select;
  */
 
 import java.awt.Color;
+import java.awt.Component;
 import java.awt.Dimension;
+import java.awt.Font;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.FileFilter;
 import java.io.IOException;
@@ -39,11 +42,16 @@ import java.util.Locale;
 
 import javax.swing.Box;
 import javax.swing.BoxLayout;
+import javax.swing.ImageIcon;
 import javax.swing.JLabel;
+import javax.swing.SwingConstants;
 import javax.xml.parsers.ParserConfigurationException;
 
 import org.xml.sax.SAXException;
 
+import fr.free.totalboumboum.engine.container.level.HollowLevel;
+import fr.free.totalboumboum.engine.container.level.LevelPreview;
+import fr.free.totalboumboum.engine.container.level.LevelPreviewLoader;
 import fr.free.totalboumboum.game.limit.Limit;
 import fr.free.totalboumboum.game.points.PointsProcessor;
 import fr.free.totalboumboum.game.round.Round;
@@ -59,6 +67,7 @@ import fr.free.totalboumboum.gui.game.round.description.RoundDescription;
 import fr.free.totalboumboum.gui.tools.GuiKeys;
 import fr.free.totalboumboum.gui.tools.GuiTools;
 import fr.free.totalboumboum.tools.FileTools;
+import fr.free.totalboumboum.tools.ImageTools;
 import fr.free.totalboumboum.tools.StringTools;
 
 public class SelectedRoundData extends EntitledDataPanel implements MouseListener
@@ -87,6 +96,8 @@ public class SelectedRoundData extends EntitledDataPanel implements MouseListene
 	
 	private SubPanel mainPanel;
 	private SubPanel rightPanel;
+	private SubPanel imagePanel;
+	private JLabel imageLabel;
 	private EntitledSubPanel limitsPanel;
 	private EntitledSubPanel pointsPanel;
 	private UntitledSubPanelTable previewPanel;
@@ -97,6 +108,10 @@ public class SelectedRoundData extends EntitledDataPanel implements MouseListene
 	private int leftWidth;
 	private int rightWidth;
 	private int rightHeight;
+	private int rightUpWidth;
+	private int leftUpWidth;
+	private int imageLabelHeight;
+	private int imageLabelWidth;
 	
 	private String baseFolder;
 	private int selectedLimitRow = -1;
@@ -128,7 +143,7 @@ public class SelectedRoundData extends EntitledDataPanel implements MouseListene
 			mainPanel.add(Box.createHorizontalGlue());
 			
 			// right panel
-			{	rightHeight = (int)((dataHeight - 2*margin)*0.4);
+			{	rightHeight = (int)((dataHeight - 2*margin)*0.375);
 				int previewHeight = dataHeight - 2*rightHeight - 2*margin; 
 				
 				rightPanel = new SubPanel(rightWidth,dataHeight);
@@ -140,8 +155,28 @@ public class SelectedRoundData extends EntitledDataPanel implements MouseListene
 				
 				rightPanel.add(Box.createVerticalGlue());
 
-				{	makePreviewPanel(rightWidth,previewHeight);
-					rightPanel.add(previewPanel);
+				{	
+					SubPanel upPanel = new SubPanel(rightWidth,previewHeight);
+					upPanel.setOpaque(false);
+					{	BoxLayout layout = new BoxLayout(upPanel,BoxLayout.LINE_AXIS); 
+						upPanel.setLayout(layout);
+					}
+					rightUpWidth = (rightWidth - margin) / 2;
+					leftUpWidth = rightWidth - rightUpWidth - margin;
+									
+					// preview
+					{	makePreviewPanel(leftUpWidth,previewHeight);
+						upPanel.add(previewPanel);
+					}
+					
+					upPanel.add(Box.createHorizontalGlue());
+
+					// level preview
+					{	makeImagePanel(rightUpWidth,previewHeight);
+						upPanel.add(imagePanel);
+					}
+					
+					rightPanel.add(upPanel);
 				}
 
 				rightPanel.add(Box.createRigidArea(new Dimension(margin,margin)));
@@ -342,6 +377,43 @@ public class SelectedRoundData extends EntitledDataPanel implements MouseListene
 		result.setTitleKey(key,true);
 		return result;
 	}
+
+	private void makeImagePanel(int width, int height)
+	{	imagePanel = new SubPanel(width,height);
+		int margin = GuiTools.subPanelMargin;
+		imagePanel.setBackground(GuiTools.COLOR_COMMON_BACKGROUND);
+		BoxLayout layout = new BoxLayout(imagePanel,BoxLayout.PAGE_AXIS);
+		imagePanel.setLayout(layout);
+
+		imageLabel = new JLabel();
+		imagePanel.add(Box.createVerticalGlue());
+		imagePanel.add(imageLabel);
+		imagePanel.add(Box.createVerticalGlue());
+		imageLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
+		imageLabel.setAlignmentY(Component.CENTER_ALIGNMENT);
+
+		imageLabelHeight = height - 2*margin;
+		imageLabelWidth = width - 2*margin;
+		Dimension dim = new Dimension(imageLabelWidth,imageLabelHeight);
+		imageLabel.setMinimumSize(dim);
+		imageLabel.setPreferredSize(dim);
+		imageLabel.setMaximumSize(dim);
+		
+		imageLabel.setHorizontalAlignment(SwingConstants.CENTER);
+		imageLabel.setVerticalAlignment(SwingConstants.CENTER);
+		
+		String text = GuiConfiguration.getMiscConfiguration().getLanguage().getText(GuiKeys.MENU_RESOURCES_LEVEL_SELECT_PREVIEW_IMAGE);
+		String tooltip = GuiConfiguration.getMiscConfiguration().getLanguage().getText(GuiKeys.MENU_RESOURCES_LEVEL_SELECT_PREVIEW_IMAGE+GuiKeys.TOOLTIP);
+		imageLabel.setText(null);
+		imageLabel.setToolTipText(tooltip);
+
+		int fontSize = GuiTools.getFontSize(imageLabelWidth, imageLabelHeight, text);
+		Font font = GuiConfiguration.getMiscConfiguration().getFont().deriveFont((float)fontSize);
+		imageLabel.setFont(font);
+		imageLabel.setBackground(GuiTools.COLOR_TABLE_NEUTRAL_BACKGROUND);
+		imageLabel.setForeground(GuiTools.COLOR_TABLE_REGULAR_FOREGROUND);
+		imageLabel.setOpaque(true);
+	}
 	
 	private void refreshLimits()
 	{	if(selectedRound==null)
@@ -366,6 +438,53 @@ public class SelectedRoundData extends EntitledDataPanel implements MouseListene
 		}
 	}
 	
+	private void refreshImage()
+	{	BufferedImage image = null;
+		if(selectedRound!=null)
+		{	HollowLevel hollowLevel = selectedRound.getHollowLevel();
+			String pack = hollowLevel.getPackName();
+			String folder = hollowLevel.getFolderName();
+			LevelPreview levelPreview;
+			try
+			{	levelPreview = LevelPreviewLoader.loadLevelPreview(pack, folder);
+				image = levelPreview.getVisualPreview();			
+			}
+			catch (ParserConfigurationException e)
+			{	e.printStackTrace();
+			}
+			catch (SAXException e)
+			{	e.printStackTrace();
+			}
+			catch (IOException e)
+			{	e.printStackTrace();
+			}
+			catch (ClassNotFoundException e)
+			{	e.printStackTrace();
+			}
+		}
+		// put the image
+		if(image!=null)
+		{	float zoomX = imageLabelWidth/(float)image.getWidth();
+			float zoomY = imageLabelHeight/(float)image.getHeight();
+			float zoom = Math.min(zoomX,zoomY);
+			image = ImageTools.resize(image,zoom,true);
+			ImageIcon icon = new ImageIcon(image);
+			imageLabel.setIcon(icon);
+			imageLabel.setText(null);
+			Color bg = GuiTools.COLOR_TABLE_REGULAR_BACKGROUND;
+			imageLabel.setBackground(bg);
+		}
+		else
+		{	String text = null;//GuiConfiguration.getMiscConfiguration().getLanguage().getText(GuiTools.MENU_LEVEL_SELECT_PREVIEW_IMAGE);
+			String tooltip = GuiConfiguration.getMiscConfiguration().getLanguage().getText(GuiKeys.MENU_RESOURCES_LEVEL_SELECT_PREVIEW_IMAGE+GuiKeys.TOOLTIP);
+			imageLabel.setText(text);
+			imageLabel.setToolTipText(tooltip);
+			Color bg = GuiTools.COLOR_TABLE_NEUTRAL_BACKGROUND;
+			imageLabel.setBackground(bg);
+		}
+		
+	}
+
 	@Override
 	public void refresh()
 	{	initRounds();
@@ -374,6 +493,7 @@ public class SelectedRoundData extends EntitledDataPanel implements MouseListene
 		if(selectedRow!=-1)
 			listPanels.get(currentPage).setLabelBackground(selectedRow,0,GuiTools.COLOR_TABLE_SELECTED_BACKGROUND);
 		refreshPreview();
+		refreshImage();
 		refreshPoints();
 		refreshLimits();
 //		rightPanel.validate();
@@ -439,12 +559,13 @@ public class SelectedRoundData extends EntitledDataPanel implements MouseListene
 						refreshList();
 					}
 					break;
-				// profile selected
+				// round selected
 				default:
 					unselectList();
 					selectedRow = pos[0];
 					listPanels.get(currentPage).setLabelBackground(selectedRow,0,GuiTools.COLOR_TABLE_SELECTED_BACKGROUND);
 					refreshPreview();
+					refreshImage();
 					refreshLimits();
 					refreshPoints();
 			}
