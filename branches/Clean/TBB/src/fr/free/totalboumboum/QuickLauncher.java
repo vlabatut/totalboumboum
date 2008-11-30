@@ -31,8 +31,7 @@ import javax.xml.parsers.ParserConfigurationException;
 
 import org.xml.sax.SAXException;
 
-import fr.free.totalboumboum.data.configuration.Configuration;
-import fr.free.totalboumboum.data.configuration.ConfigurationLoader;
+import fr.free.totalboumboum.configuration.Configuration;
 import fr.free.totalboumboum.gui.quicklaunch.QuickFrame;
 import fr.free.totalboumboum.tools.XmlTools;
 
@@ -43,7 +42,7 @@ public class QuickLauncher
 	{	
 		// init
 		XmlTools.init();
-		final Configuration configuration = ConfigurationLoader.quickloadConfiguration();
+		Configuration.loadConfiguration();
 		// graphic conf
 		GraphicsEnvironment graphEnv = GraphicsEnvironment.getLocalGraphicsEnvironment();
 		GraphicsDevice graphDevice = graphEnv.getDefaultScreenDevice();
@@ -53,7 +52,7 @@ public class QuickLauncher
 		SwingUtilities.invokeLater(new Runnable()
 		{	public void run()
 			{	try
-				{	new QuickFrame(configuration,graphicConf);
+				{	new QuickFrame(graphicConf);
 				}
 				catch (IllegalArgumentException e)
 				{	e.printStackTrace();
