@@ -41,18 +41,18 @@
 			<player file="8" color="white" controls="0" />
 			<player file="14" color="red" controls="0" />
 			<player file="18" color="orange" controls="0" />
-			<player file="1" color="cyan" controls="0" />
+			<player file="1" color="cyan" controls="1" />
 		</quickstart>
 		<quickmatch>
 			<player file="18" color="orange" controls="0" />
-			<player file="1" color="cyan" controls="0" />
+			<player file="1" color="cyan" controls="1" />
 		</quickmatch>
 		<tournament>
 			<player file="4" color="blue" controls="0" />
 			<player file="8" color="white" controls="0" />
 			<player file="14" color="red" controls="0" />
 			<player file="18" color="orange" controls="0" />
-			<player file="1" color="cyan" controls="0" />
+			<player file="1" color="cyan" controls="1" />
 		</tournament>
 	</selected>
 </profiles>
