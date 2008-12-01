@@ -29,9 +29,9 @@ import javax.swing.Box;
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
 
-import fr.free.totalboumboum.gui.common.panel.SplitMenuPanel;
-import fr.free.totalboumboum.gui.common.panel.menu.InnerMenuPanel;
-import fr.free.totalboumboum.gui.common.panel.menu.MenuPanel;
+import fr.free.totalboumboum.gui.common.structure.panel.SplitMenuPanel;
+import fr.free.totalboumboum.gui.common.structure.panel.menu.InnerMenuPanel;
+import fr.free.totalboumboum.gui.common.structure.panel.menu.MenuPanel;
 import fr.free.totalboumboum.gui.menus.explore.rounds.select.SelectedRoundData;
 import fr.free.totalboumboum.gui.tools.GuiKeys;
 import fr.free.totalboumboum.gui.tools.GuiTools;

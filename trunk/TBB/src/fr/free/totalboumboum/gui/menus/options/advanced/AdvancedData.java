@@ -30,10 +30,10 @@ import javax.swing.JLabel;
 
 import fr.free.totalboumboum.configuration.Configuration;
 import fr.free.totalboumboum.configuration.engine.EngineConfiguration;
-import fr.free.totalboumboum.gui.common.panel.SplitMenuPanel;
-import fr.free.totalboumboum.gui.common.panel.data.EntitledDataPanel;
-import fr.free.totalboumboum.gui.common.subpanel.Line;
-import fr.free.totalboumboum.gui.common.subpanel.UntitledSubPanelLines;
+import fr.free.totalboumboum.gui.common.structure.panel.SplitMenuPanel;
+import fr.free.totalboumboum.gui.common.structure.panel.data.EntitledDataPanel;
+import fr.free.totalboumboum.gui.common.structure.subpanel.Line;
+import fr.free.totalboumboum.gui.common.structure.subpanel.UntitledSubPanelLines;
 import fr.free.totalboumboum.gui.data.configuration.GuiConfiguration;
 import fr.free.totalboumboum.gui.tools.GuiKeys;
 import fr.free.totalboumboum.gui.tools.GuiTools;

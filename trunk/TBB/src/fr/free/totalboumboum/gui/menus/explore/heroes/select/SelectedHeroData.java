@@ -46,12 +46,12 @@ import org.xml.sax.SAXException;
 import fr.free.totalboumboum.configuration.profile.PredefinedColor;
 import fr.free.totalboumboum.engine.content.sprite.SpritePreview;
 import fr.free.totalboumboum.engine.content.sprite.SpritePreviewLoader;
-import fr.free.totalboumboum.gui.common.panel.SplitMenuPanel;
-import fr.free.totalboumboum.gui.common.panel.data.EntitledDataPanel;
-import fr.free.totalboumboum.gui.common.subpanel.Column;
-import fr.free.totalboumboum.gui.common.subpanel.SubPanel;
-import fr.free.totalboumboum.gui.common.subpanel.UntitledSubPanelColumns;
-import fr.free.totalboumboum.gui.common.subpanel.UntitledSubPanelTable;
+import fr.free.totalboumboum.gui.common.structure.panel.SplitMenuPanel;
+import fr.free.totalboumboum.gui.common.structure.panel.data.EntitledDataPanel;
+import fr.free.totalboumboum.gui.common.structure.subpanel.Column;
+import fr.free.totalboumboum.gui.common.structure.subpanel.SubPanel;
+import fr.free.totalboumboum.gui.common.structure.subpanel.UntitledSubPanelColumns;
+import fr.free.totalboumboum.gui.common.structure.subpanel.UntitledSubPanelTable;
 import fr.free.totalboumboum.gui.data.configuration.GuiConfiguration;
 import fr.free.totalboumboum.gui.tools.GuiKeys;
 import fr.free.totalboumboum.gui.tools.GuiTools;
@@ -251,7 +251,7 @@ public class SelectedHeroData extends EntitledDataPanel implements MouseListener
 		Iterator<String> it = heroPackages.iterator(); 
 		for(int panelIndex=0;panelIndex<getPackagesPageCount();panelIndex++)
 		{	UntitledSubPanelTable listPanel = new UntitledSubPanelTable(width,height,cols,LIST_LINE_COUNT,false);
-			listPanel.setSubColumnsMaxWidth(0,Integer.MAX_VALUE);
+			listPanel.setColSubMaxWidth(0,Integer.MAX_VALUE);
 		
 			// data
 			int line = LIST_LINE_PREVIOUS+1;
@@ -290,7 +290,7 @@ public class SelectedHeroData extends EntitledDataPanel implements MouseListener
 		Iterator<SpritePreview> it = heroPreviews.iterator(); 
 		for(int panelIndex=0;panelIndex<getFoldersPageCount();panelIndex++)
 		{	UntitledSubPanelTable listPanel = new UntitledSubPanelTable(width,height,cols,LIST_LINE_COUNT,false);
-			listPanel.setSubColumnsMaxWidth(0,Integer.MAX_VALUE);
+			listPanel.setColSubMaxWidth(0,Integer.MAX_VALUE);
 		
 			// data
 			int line = LIST_LINE_PARENT+1;
@@ -364,8 +364,8 @@ public class SelectedHeroData extends EntitledDataPanel implements MouseListener
 			}
 		}
 		int maxWidth = width-3*GuiTools.subPanelMargin-infosPanel.getHeaderHeight();
-		infosPanel.setSubColumnsMaxWidth(1,maxWidth);
-		infosPanel.setSubColumnsPreferredWidth(1,maxWidth);
+		infosPanel.setColSubMaxWidth(1,maxWidth);
+		infosPanel.setColSubPreferredWidth(1,maxWidth);
 	}
 	
 	private void makeImagePanel(int width, int height)

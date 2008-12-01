@@ -21,9 +21,9 @@ package fr.free.totalboumboum.gui.game.tournament.results;
  * 
  */
 
-import fr.free.totalboumboum.gui.common.panel.SplitMenuPanel;
-import fr.free.totalboumboum.gui.common.panel.data.EntitledDataPanel;
-import fr.free.totalboumboum.gui.common.subpanel.UntitledSubPanelTable;
+import fr.free.totalboumboum.gui.common.structure.panel.SplitMenuPanel;
+import fr.free.totalboumboum.gui.common.structure.panel.data.EntitledDataPanel;
+import fr.free.totalboumboum.gui.common.structure.subpanel.UntitledSubPanelTable;
 import fr.free.totalboumboum.gui.tools.GuiKeys;
 
 public abstract class TournamentResults extends EntitledDataPanel

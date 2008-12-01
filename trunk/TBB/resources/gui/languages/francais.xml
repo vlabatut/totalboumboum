@@ -413,7 +413,6 @@
 						<text name="Bombings" value="Bombeur"  tooltip="Number de joueurs devant être explosés pour finir le tournoi" />
 						<text name="Paintings" value="Peinture"  tooltip="Nombre de cases devant être peintes pour finir le tournoi" />
 						<text name="Time" value="Temps"  tooltip="Durée maximale (cumulée) du tournoi" />
-						<text name="LastStanding" value="Joueurs"  tooltip="La fin du tournoi dépend du nombre de joueurs restant en lice" />
 					</group>
 				</group>
 				
@@ -526,7 +525,6 @@
 						<text name="Bombings" value="Bombeur"  tooltip="Nombre de joueurs devant être explosés pour terminer cette rencontre" />
 						<text name="Paintings" value="Peinture"  tooltip="Nombre de cases devant être peintes pour terminer cette rencontre" />
 						<text name="Time" value="Temps"  tooltip="Durée cumulée maximale de cette rencontre" />
-						<text name="LastStanding" value="Joueurs"  tooltip="La fin de la rencontre dépend du nombre de joueurs restant en lice" />
 					</group>
 				</group>
 								

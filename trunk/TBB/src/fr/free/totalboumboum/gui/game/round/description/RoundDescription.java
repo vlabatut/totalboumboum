@@ -25,12 +25,9 @@ import java.awt.Color;
 import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.Font;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.text.NumberFormat;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
 
@@ -53,48 +50,28 @@ import fr.free.totalboumboum.engine.container.level.LevelPreview;
 import fr.free.totalboumboum.engine.container.level.LevelPreviewLoader;
 import fr.free.totalboumboum.engine.container.zone.Zone;
 import fr.free.totalboumboum.engine.content.sprite.SpritePreview;
-import fr.free.totalboumboum.game.limit.Limit;
-import fr.free.totalboumboum.game.limit.LimitConfrontation;
-import fr.free.totalboumboum.game.limit.LimitLastStanding;
-import fr.free.totalboumboum.game.limit.LimitPoints;
-import fr.free.totalboumboum.game.limit.LimitScore;
-import fr.free.totalboumboum.game.limit.LimitTime;
-import fr.free.totalboumboum.game.limit.Limits;
-import fr.free.totalboumboum.game.points.PointsConstant;
-import fr.free.totalboumboum.game.points.PointsDiscretize;
-import fr.free.totalboumboum.game.points.PointsProcessor;
-import fr.free.totalboumboum.game.points.PointsRankings;
-import fr.free.totalboumboum.game.points.PointsRankpoints;
-import fr.free.totalboumboum.game.points.PointsScores;
-import fr.free.totalboumboum.game.points.PointsTotal;
+import fr.free.totalboumboum.game.limit.RoundLimit;
 import fr.free.totalboumboum.game.round.Round;
-import fr.free.totalboumboum.game.statistics.Score;
-import fr.free.totalboumboum.gui.common.panel.SplitMenuPanel;
-import fr.free.totalboumboum.gui.common.panel.data.EntitledDataPanel;
-import fr.free.totalboumboum.gui.common.subpanel.EntitledSubPanelTable;
-import fr.free.totalboumboum.gui.common.subpanel.SubPanel;
+import fr.free.totalboumboum.gui.common.content.subpanel.LimitsSubPanel;
+import fr.free.totalboumboum.gui.common.content.subpanel.PointsSubPanel;
+import fr.free.totalboumboum.gui.common.structure.panel.SplitMenuPanel;
+import fr.free.totalboumboum.gui.common.structure.panel.data.EntitledDataPanel;
+import fr.free.totalboumboum.gui.common.structure.subpanel.EntitledSubPanelTable;
+import fr.free.totalboumboum.gui.common.structure.subpanel.SubPanel;
 import fr.free.totalboumboum.gui.data.configuration.GuiConfiguration;
 import fr.free.totalboumboum.gui.tools.GuiKeys;
 import fr.free.totalboumboum.gui.tools.GuiTools;
 import fr.free.totalboumboum.tools.ImageTools;
-import fr.free.totalboumboum.tools.StringTools;
 
-public class RoundDescription extends EntitledDataPanel implements MouseListener
+public class RoundDescription extends EntitledDataPanel
 {	
 	private static final long serialVersionUID = 1L;
 	private static final float SPLIT_RATIO = 0.4f;
 
 	private JPanel downPanel;
-	private int selectedRow = -1;
 	
-	@SuppressWarnings("unused")
-	private static final int LIMITS_PANEL_INDEX = 0;
-	private EntitledSubPanelTable limitsPanel;
-	
-	private static final int POINTS_PANEL_INDEX = 2;
-	private EntitledSubPanelTable pointsPanel;
-	private int pointsHeight;
-	private int pointsWidth;
+	private LimitsSubPanel<RoundLimit> limitsPanel;
+	private PointsSubPanel pointsPanel;
 	
 	public RoundDescription(SplitMenuPanel container)
 	{	super(container);
@@ -218,17 +195,15 @@ public class RoundDescription extends EntitledDataPanel implements MouseListener
 					int innerWidth = (rightWidth - margin)/2;
 					
 					// limits panel
-					{	limitsPanel = makeLimitsPanel(this,innerWidth,downHeight,round.getLimits(),GuiKeys.ROUND);
+					{	limitsPanel = new LimitsSubPanel<RoundLimit>(innerWidth,downHeight,round.getLimits(),GuiKeys.ROUND);
 						downPanel.add(limitsPanel);
 					}
 					
 					downPanel.add(Box.createHorizontalGlue());
 
 					// points panel
-					{	pointsWidth = innerWidth;
-						pointsHeight = downHeight;
-						downPanel.add(new JPanel()); // dummy
-						selectLimit(0);
+					{	pointsPanel = limitsPanel.makePointsPanel(innerWidth,downHeight);
+						downPanel.add(pointsPanel);
 //						SubPanel pointsPanel = makePointsPanel(innerWidth,downHeight,round.getPointProcessor(),GuiKeys.ROUND);
 //						downPanel.add(pointsPanel);
 					}
@@ -291,7 +266,7 @@ public class RoundDescription extends EntitledDataPanel implements MouseListener
 		EntitledSubPanelTable itemsetPanel = new EntitledSubPanelTable(width,height,colGroups,colSubs,lines);
 		String titleKey = GuiKeys.GAME_ROUND_DESCRIPTION_ITEMSET_TITLE;
 		itemsetPanel.setTitleKey(titleKey,true);
-		itemsetPanel.getTable().setSubColumnsMaxWidth(1,Integer.MAX_VALUE);
+		itemsetPanel.getTable().setColSubMaxWidth(1,Integer.MAX_VALUE);
 		
 		// data
 		NumberFormat nf = NumberFormat.getInstance();
@@ -352,7 +327,7 @@ public class RoundDescription extends EntitledDataPanel implements MouseListener
 		EntitledSubPanelTable miscPanel = new EntitledSubPanelTable(width,height,colGroups,colSubs,lines);
 		String titleKey = GuiKeys.GAME_ROUND_DESCRIPTION_MISC_TITLE;
 		miscPanel.setTitleKey(titleKey,true);
-		miscPanel.getTable().setSubColumnsMaxWidth(1,Integer.MAX_VALUE);
+		miscPanel.getTable().setColSubMaxWidth(1,Integer.MAX_VALUE);
 		
 		// data
 		String keys[] = 
@@ -416,7 +391,7 @@ public class RoundDescription extends EntitledDataPanel implements MouseListener
 		EntitledSubPanelTable itemsPanel = new EntitledSubPanelTable(width,height,colGroups,colSubs,lines);
 		String titleKey = GuiKeys.GAME_ROUND_DESCRIPTION_INITIALITEMS_TITLE;
 		itemsPanel.setTitleKey(titleKey,true);
-		itemsPanel.getTable().setSubColumnsMaxWidth(1,Integer.MAX_VALUE);
+		itemsPanel.getTable().setColSubMaxWidth(1,Integer.MAX_VALUE);
 		
 		// data
 		NumberFormat nf = NumberFormat.getInstance();
@@ -460,401 +435,7 @@ public class RoundDescription extends EntitledDataPanel implements MouseListener
 		
 		return itemsPanel;
 	}
-
-	public static EntitledSubPanelTable makePointsPanel(int width, int height, PointsProcessor mainPP, String prefix)
-	{	// init
-		prefix = GuiKeys.GAME+prefix+GuiKeys.DESCRIPTION+GuiKeys.POINTS;
-		
-		ArrayList<ArrayList<Object>> data = new ArrayList<ArrayList<Object>>();
-		ArrayList<ArrayList<String>> tooltips = new ArrayList<ArrayList<String>>();
-		makePointsPanelRec(mainPP,data,tooltips,prefix);
-		
-		int lines = Math.max(8,data.size());
-		int colSubs = 2;
-		int colGroups = 1;
-
-		EntitledSubPanelTable result = new EntitledSubPanelTable(width,height,colGroups,colSubs,lines);
-		String titleKey = prefix+GuiKeys.TITLE;
-		result.setTitleKey(titleKey,true);
-		result.getTable().setSubColumnsMaxWidth(1,Integer.MAX_VALUE);
-		
-		Iterator<ArrayList<Object>> dt = data.iterator();
-		Iterator<ArrayList<String>> tt = tooltips.iterator();
-		int line = 0;
-		int colGroup = 0;
-		while(dt.hasNext())
-		{	// init
-			ArrayList<Object> tempDt = dt.next();
-			ArrayList<String> tempTt = tt.next();
-			int colSub = 0;
-			// left
-			{	String tooltip = tempTt.get(colSub);
-				Color fg = GuiTools.COLOR_TABLE_HEADER_FOREGROUND;
-				result.getTable().setLabelForeground(line,colGroup,colSub,fg);
-				Color bg = GuiTools.COLOR_TABLE_HEADER_BACKGROUND;
-				result.getTable().setLabelBackground(line,colGroup,colSub,bg);
-				if(tempDt.get(colSub) instanceof BufferedImage)
-				{	BufferedImage image = (BufferedImage)tempDt.get(colSub);
-					result.getTable().setLabelIcon(line,colGroup,colSub,image,tooltip);
-				}
-				else
-				{	String text = (String)tempDt.get(colSub);
-					result.getTable().setLabelText(line,colGroup,colSub,text,tooltip);
-				}
-				colSub++;
-			}
-			// right
-			{	String tooltip = tempTt.get(colSub);
-				if(tempDt.get(colSub) instanceof BufferedImage)
-				{	BufferedImage image = (BufferedImage)tempDt.get(colSub);
-					result.getTable().setLabelIcon(line,colGroup,colSub,image,tooltip);
-				}
-				else
-				{	String text = (String)tempDt.get(colSub);
-					result.getTable().setLabelText(line,colGroup,colSub,text,tooltip);
-				}
-				Color bg = GuiTools.COLOR_TABLE_REGULAR_BACKGROUND;
-				result.getTable().setLabelBackground(line,colGroup,colSub,bg);
-				colSub++;
-			}
-			line++;
-			if(line==lines)
-			{	line = 0;
-				colGroup++;
-			}
-		}
-
-		return result;
-	}
-	private static void makePointsPanelRec(PointsProcessor pp, ArrayList<ArrayList<Object>> data, ArrayList<ArrayList<String>> tooltips, String prefix)
-	{	// format
-		NumberFormat nf = NumberFormat.getInstance();
-		nf.setMaximumFractionDigits(2);
-		nf.setMinimumFractionDigits(0);
-
-		// rankpoints
-		if(pp instanceof PointsRankpoints)
-		{	PointsRankpoints pr = (PointsRankpoints) pp;
-			// this pp
-			{	ArrayList<Object> dt = new ArrayList<Object>();
-				ArrayList<String> tt = new ArrayList<String>();
-				data.add(dt);
-				tooltips.add(tt);
-				String name = prefix+GuiKeys.HEADER+GuiKeys.RANKPOINTS;
-				BufferedImage image = GuiTools.getIcon(name);
-				String tooltip = GuiConfiguration.getMiscConfiguration().getLanguage().getText(name+GuiKeys.TOOLTIP);
-				dt.add(image);
-				tt.add(tooltip);
-				boolean exaequoShare = pr.getExaequoShare();
-				if(exaequoShare)
-					name = prefix+GuiKeys.DATA+GuiKeys.SHARE;
-				else
-					name = prefix+GuiKeys.DATA+GuiKeys.NO_SHARE;
-				image = GuiTools.getIcon(name);
-				tooltip = GuiConfiguration.getMiscConfiguration().getLanguage().getText(name+GuiKeys.TOOLTIP);
-				dt.add(image);
-				tt.add(tooltip);
-			}
-			// source
-			{	PointsRankings prk = pr.getSource();
-				ArrayList<PointsProcessor> sources = prk.getSources();
-				Iterator<PointsProcessor> i = sources.iterator();
-				while(i.hasNext())
-				{	PointsProcessor source = i.next();
-					makePointsPanelRec(source,data,tooltips,prefix);
-				}
-			}
-			// values
-			{	float[] values = pr.getValues();
-				for(int i=0;i<values.length;i++)
-				{	String nbr = "#"+(i+1); 
-					String value = nf.format(values[i]);
-					String tooltip = nbr+new Character('\u2192').toString()+value+"pts";
-					ArrayList<Object> dt = new ArrayList<Object>();
-					ArrayList<String> tt = new ArrayList<String>();
-					data.add(dt);
-					tooltips.add(tt);
-					dt.add(nbr);
-					tt.add(tooltip);
-					dt.add(value);
-					tt.add(tooltip);			
-				}
-			}
-		}
-		// discretize
-		else if(pp instanceof PointsDiscretize)
-		{	PointsDiscretize pd = (PointsDiscretize) pp;
-			// this pp
-			{	ArrayList<Object> dt = new ArrayList<Object>();
-				ArrayList<String> tt = new ArrayList<String>();
-				data.add(dt);
-				tooltips.add(tt);
-				String name = prefix+GuiKeys.HEADER+GuiKeys.DISCRETIZE;
-				BufferedImage image = GuiTools.getIcon(name);
-				String tooltip = GuiConfiguration.getMiscConfiguration().getLanguage().getText(name+GuiKeys.TOOLTIP);
-				dt.add(image);
-				tt.add(tooltip);				
-				String text = "";
-				dt.add(text);
-				tt.add(tooltip);				
-			}
-			// source
-			{	PointsProcessor source = pd.getSource();
-				makePointsPanelRec(source,data,tooltips,prefix);
-			}
-			// values & thresholds
-			{	float[] values = pd.getValues();
-				float[] thresholds = pd.getThresholds();
-				String previousThreshold;
-				String threshold = new Character('\u2212').toString()+new Character('\u221E').toString();
-				for(int i=0;i<values.length;i++)
-				{	String value = nf.format(values[i]);
-					previousThreshold = threshold; 
-					threshold = nf.format(thresholds[i]);
-					String interval;
-					interval = "]"+previousThreshold+";"+threshold+"]";
-					String tooltip = interval+new Character('\u2192').toString()+value;
-					ArrayList<Object> dt = new ArrayList<Object>();
-					ArrayList<String> tt = new ArrayList<String>();
-					data.add(dt);
-					tooltips.add(tt);
-					dt.add(interval);
-					tt.add(tooltip);
-					dt.add(value);
-					tt.add(tooltip);			
-				}
-			}
-		}
-		// rankings
-		else if(pp instanceof PointsRankings)
-		{	PointsRankings pr = (PointsRankings) pp;
-			// this PP
-			{	boolean inverted = pr.isInverted();
-				ArrayList<Object> dt = new ArrayList<Object>();
-				ArrayList<String> tt = new ArrayList<String>();
-				data.add(dt);
-				tooltips.add(tt);
-				String name = prefix+GuiKeys.HEADER+GuiKeys.RANKINGS;
-				BufferedImage image = GuiTools.getIcon(name);
-				String tooltip = GuiConfiguration.getMiscConfiguration().getLanguage().getText(name+GuiKeys.TOOLTIP);
-				if(inverted)
-					name = prefix+GuiKeys.DATA+GuiKeys.INVERTED;
-				else
-					name = prefix+GuiKeys.DATA+GuiKeys.REGULAR;
-				dt.add(image);
-				tt.add(tooltip);
-			}
-			// sources
-			{	ArrayList<PointsProcessor> sources = pr.getSources();
-				Iterator<PointsProcessor> i = sources.iterator();
-				while(i.hasNext())
-				{	PointsProcessor source = i.next();
-					makePointsPanelRec(source,data,tooltips,prefix);
-				}
-			}
-		}
-		// constant
-		else if(pp instanceof PointsConstant)
-		{	PointsConstant pc = (PointsConstant) pp;
-			float value = pc.getValue();
-			ArrayList<Object> dt = new ArrayList<Object>();
-			ArrayList<String> tt = new ArrayList<String>();
-			data.add(dt);
-			tooltips.add(tt);
-			String name = prefix+GuiKeys.HEADER+GuiKeys.CONSTANT;
-			BufferedImage image = GuiTools.getIcon(name);
-			String tooltip = GuiConfiguration.getMiscConfiguration().getLanguage().getText(name+GuiKeys.TOOLTIP);
-			dt.add(image);
-			tt.add(tooltip);
-			String text = nf.format(value);
-			dt.add(text);
-			tt.add(text);
-		}
-		// total
-		else if(pp instanceof PointsTotal)
-		{	//PointsTotal pt = (PointsTotal) pp;
-			ArrayList<Object> dt = new ArrayList<Object>();
-			ArrayList<String> tt = new ArrayList<String>();
-			data.add(dt);
-			tooltips.add(tt);
-			String name = prefix+GuiKeys.HEADER+GuiKeys.TOTAL;
-			BufferedImage image = GuiTools.getIcon(name);
-			String tooltip = GuiConfiguration.getMiscConfiguration().getLanguage().getText(name+GuiKeys.TOOLTIP);
-			dt.add(image);
-			tt.add(tooltip);
-			String text = "";
-			dt.add(text);
-			tt.add(tooltip);
-		}
-		// scores
-		else if(pp instanceof PointsScores)
-		{	PointsScores ps = (PointsScores) pp;
-			Score score = ps.getScore();
-			ArrayList<Object> dt = new ArrayList<Object>();
-			ArrayList<String> tt = new ArrayList<String>();
-			data.add(dt);
-			tooltips.add(tt);
-			String name = prefix+GuiKeys.HEADER+GuiKeys.SCORE;
-			BufferedImage image = GuiTools.getIcon(name);
-			String tooltip = GuiConfiguration.getMiscConfiguration().getLanguage().getText(name+GuiKeys.TOOLTIP);
-			dt.add(image);
-			tt.add(tooltip);
-			name = null;
-			switch(score)
-			{	case BOMBS:
-					name = prefix+GuiKeys.DATA+GuiKeys.BOMBS;
-					break;
-				case CROWNS:
-					name = prefix+GuiKeys.DATA+GuiKeys.CROWNS;
-					break;					
-				case BOMBEDS:
-					name = prefix+GuiKeys.DATA+GuiKeys.BOMBEDS;
-					break;					
-				case ITEMS:
-					name = prefix+GuiKeys.DATA+GuiKeys.ITEMS;
-					break;					
-				case BOMBINGS:
-					name = prefix+GuiKeys.DATA+GuiKeys.BOMBINGS;
-					break;					
-				case PAINTINGS:
-					name = prefix+GuiKeys.DATA+GuiKeys.PAINTINGS;
-					break;					
-				case TIME:
-					name = prefix+GuiKeys.DATA+GuiKeys.TIME;
-					break;					
-			}
-			image = GuiTools.getIcon(name);
-			tooltip = GuiConfiguration.getMiscConfiguration().getLanguage().getText(name+GuiKeys.TOOLTIP);
-			dt.add(image);
-			tt.add(tooltip);
-		}
-		// others
-		else
-		{	ArrayList<Object> dt = new ArrayList<Object>();
-			ArrayList<String> tt = new ArrayList<String>();
-			data.add(dt);
-			tooltips.add(tt);
-			// icon
-			//BufferedImage icon = GuiTools.getIcon(GuiTools.GAME_ROUND_HEADER_PARTIAL);
-			String icon = "-";
-			String tooltip = GuiConfiguration.getMiscConfiguration().getLanguage().getText(prefix+GuiKeys.DATA+GuiKeys.PARTIAL+GuiKeys.TOOLTIP);
-			dt.add(icon);
-			tt.add(tooltip);
-			// text
-			String text = pp.toString();
-			dt.add(text);
-			tt.add(text);
-		}
-	}
 	
-	public static <T extends Limit> EntitledSubPanelTable makeLimitsPanel(MouseListener mouseListener, int width, int height, Limits<T> limits, String prefix)
-	{	// init
-		prefix = GuiKeys.GAME+prefix+GuiKeys.DESCRIPTION+GuiKeys.LIMIT;
-		int lines = 8;
-		int colSubs = 2;
-		int colGroups = 1;
-		if(limits.size()>lines*colGroups)
-			colGroups = 2;
-		
-		EntitledSubPanelTable result = new EntitledSubPanelTable(width,height,colGroups,colSubs,lines);
-		String titleKey = prefix+GuiKeys.TITLE;
-		result.setTitleKey(titleKey,true);
-		result.getTable().setSubColumnsMaxWidth(1,Integer.MAX_VALUE);
-		
-		// data
-		NumberFormat nf = NumberFormat.getInstance();
-		nf.setMinimumFractionDigits(0);
-		Iterator<T> i = limits.iterator();
-		prefix = prefix+GuiKeys.HEADER;
-		int line = 0;
-		int colGroup = 0;
-		while(i.hasNext() && colGroup<colGroups)
-		{	Limit limit = i.next();
-			String iconName = null;
-			String value = null;
-			if(limit instanceof LimitConfrontation)
-			{	LimitConfrontation l = (LimitConfrontation)limit;
-				iconName = prefix+GuiKeys.CONFRONTATIONS;
-				value = nf.format(l.getThreshold());
-			}
-			else if(limit instanceof LimitTime)
-			{	LimitTime l = (LimitTime)limit;
-				iconName = prefix+GuiKeys.TIME;
-				value = StringTools.formatTimeWithSeconds(l.getThreshold());
-			}
-			else if(limit instanceof LimitPoints)
-			{	LimitPoints l = (LimitPoints)limit;
-				iconName = prefix+GuiKeys.CUSTOM;
-				value = nf.format(l.getThreshold());
-			}
-			else if(limit instanceof LimitLastStanding)
-			{	LimitLastStanding l = (LimitLastStanding)limit;
-				iconName = prefix+GuiKeys.LAST_STANDING;
-				value = nf.format(l.getThreshold());
-			}
-			else if(limit instanceof LimitScore)
-			{	LimitScore l = (LimitScore) limit;
-				switch(l.getScore())
-				{	case BOMBS:
-						iconName = prefix+GuiKeys.BOMBS;
-						value = nf.format(l.getThreshold());
-						break;
-					case CROWNS:
-						iconName = prefix+GuiKeys.CROWNS;
-						value = nf.format(l.getThreshold());
-						break;
-					case BOMBEDS:
-						iconName = prefix+GuiKeys.BOMBEDS;
-						value = nf.format(l.getThreshold());
-						break;
-					case ITEMS:
-						iconName = prefix+GuiKeys.ITEMS;
-						value = nf.format(l.getThreshold());
-						break;
-					case BOMBINGS:
-						iconName = prefix+GuiKeys.BOMBINGS;
-						value = nf.format(l.getThreshold());
-						break;
-					case PAINTINGS:
-						iconName = prefix+GuiKeys.PAINTINGS;
-						value = nf.format(l.getThreshold());
-						break;
-					case TIME:
-						iconName = prefix+GuiKeys.TIME;
-						value = nf.format(l.getThreshold());
-						break;
-				}
-			}
-			//
-			int colSub = 0;
-			{	result.getTable().setLabelKey(line,colGroup,colSub,iconName,true);
-				Color fg = GuiTools.COLOR_TABLE_HEADER_FOREGROUND;
-				result.getTable().setLabelForeground(line,colGroup,colSub,fg);
-				Color bg = GuiTools.COLOR_TABLE_HEADER_BACKGROUND;
-				result.getTable().setLabelBackground(line,colGroup,colSub,bg);
-				JLabel lbl = result.getTable().getLabel(line,colGroup,colSub);
-				lbl.addMouseListener(mouseListener);
-				colSub++;
-			}
-			{	String text = value;
-				String tooltip = value;
-				result.getTable().setLabelText(line,colGroup,colSub,text,tooltip);
-				Color bg = GuiTools.COLOR_TABLE_REGULAR_BACKGROUND;
-				result.getTable().setLabelBackground(line,colGroup,colSub,bg);
-				JLabel lbl = result.getTable().getLabel(line,colGroup,colSub);
-				lbl.addMouseListener(mouseListener);
-				colSub++;
-			}
-			line++;
-			if(line==lines)
-			{	line = 0;
-				colGroup++;
-			}
-		}
-
-		return result;
-	}
-
 	@Override
 	public void refresh()
 	{	// nothing to do here
@@ -865,57 +446,4 @@ public class RoundDescription extends EntitledDataPanel implements MouseListener
 	{	// nothing to do here
 	}
 
-	/////////////////////////////////////////////////////////////////
-	// MOUSE LISTENER	/////////////////////////////////////////////
-	/////////////////////////////////////////////////////////////////
-	@Override
-	public void mouseClicked(MouseEvent e)
-	{	
-	}
-
-	@Override
-	public void mouseEntered(MouseEvent e)
-	{	
-	}
-
-	@Override
-	public void mouseExited(MouseEvent e)
-	{	
-	}
-
-	@Override
-	public void mousePressed(MouseEvent e)
-	{	// init
-		JLabel label = (JLabel)e.getComponent();
-		int[] pos = limitsPanel.getTable().getLabelPosition(label);
-		// unselect
-		if(selectedRow!=-1)
-		{	limitsPanel.getTable().setLabelBackground(selectedRow,0,GuiTools.COLOR_TABLE_HEADER_BACKGROUND);
-			limitsPanel.getTable().setLabelBackground(selectedRow,1,GuiTools.COLOR_TABLE_REGULAR_BACKGROUND);
-			selectedRow = -1;
-		}		
-		// select
-		selectLimit(pos[0]);
-	}
-	
-	private void selectLimit(int row)
-	{	// paint line
-		selectedRow = row;
-		limitsPanel.getTable().setLabelBackground(selectedRow,0,GuiTools.COLOR_TABLE_SELECTED_DARK_BACKGROUND);
-		limitsPanel.getTable().setLabelBackground(selectedRow,1,GuiTools.COLOR_TABLE_SELECTED_BACKGROUND);
-		// update points panel
-		Round round = Configuration.getGameConfiguration().getTournament().getCurrentMatch().getCurrentRound();
-		Limit limit = round.getLimits().getLimit(row);
-		PointsProcessor pp = limit.getPointProcessor();
-		pointsPanel = makePointsPanel(pointsWidth,pointsHeight,pp,GuiKeys.ROUND);
-		downPanel.remove(POINTS_PANEL_INDEX);
-		downPanel.add(pointsPanel,POINTS_PANEL_INDEX);
-		validate();
-		repaint();
-	}
-
-	@Override
-	public void mouseReleased(MouseEvent e)
-	{	
-	}
 }

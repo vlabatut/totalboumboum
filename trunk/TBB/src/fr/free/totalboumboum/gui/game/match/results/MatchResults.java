@@ -36,9 +36,9 @@ import fr.free.totalboumboum.game.match.Match;
 import fr.free.totalboumboum.game.statistics.Score;
 import fr.free.totalboumboum.game.statistics.StatisticMatch;
 import fr.free.totalboumboum.game.statistics.StatisticRound;
-import fr.free.totalboumboum.gui.common.panel.SplitMenuPanel;
-import fr.free.totalboumboum.gui.common.panel.data.EntitledDataPanel;
-import fr.free.totalboumboum.gui.common.subpanel.UntitledSubPanelTable;
+import fr.free.totalboumboum.gui.common.structure.panel.SplitMenuPanel;
+import fr.free.totalboumboum.gui.common.structure.panel.data.EntitledDataPanel;
+import fr.free.totalboumboum.gui.common.structure.subpanel.UntitledSubPanelTable;
 import fr.free.totalboumboum.gui.data.configuration.GuiConfiguration;
 import fr.free.totalboumboum.gui.tools.GuiKeys;
 import fr.free.totalboumboum.gui.tools.GuiTools;
@@ -78,7 +78,7 @@ public class MatchResults extends EntitledDataPanel
 					resultsPanel.setLabelKey(0,col,keys[col-1],true);
 			}
 			// data
-			{	resultsPanel.setSubColumnsMaxWidth(1,Integer.MAX_VALUE);
+			{	resultsPanel.setColSubMaxWidth(1,Integer.MAX_VALUE);
 			}
 			//
 			setDataPart(resultsPanel);

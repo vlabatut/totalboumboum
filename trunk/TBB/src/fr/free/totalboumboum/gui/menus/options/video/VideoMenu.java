@@ -36,9 +36,9 @@ import org.xml.sax.SAXException;
 import fr.free.totalboumboum.configuration.Configuration;
 import fr.free.totalboumboum.configuration.video.VideoConfiguration;
 import fr.free.totalboumboum.configuration.video.VideoConfigurationSaver;
-import fr.free.totalboumboum.gui.common.panel.SplitMenuPanel;
-import fr.free.totalboumboum.gui.common.panel.menu.InnerMenuPanel;
-import fr.free.totalboumboum.gui.common.panel.menu.MenuPanel;
+import fr.free.totalboumboum.gui.common.structure.panel.SplitMenuPanel;
+import fr.free.totalboumboum.gui.common.structure.panel.menu.InnerMenuPanel;
+import fr.free.totalboumboum.gui.common.structure.panel.menu.MenuPanel;
 import fr.free.totalboumboum.gui.tools.GuiKeys;
 import fr.free.totalboumboum.gui.tools.GuiTools;
 

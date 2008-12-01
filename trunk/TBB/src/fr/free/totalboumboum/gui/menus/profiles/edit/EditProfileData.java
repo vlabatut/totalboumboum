@@ -48,10 +48,10 @@ import javax.swing.text.StyledDocument;
 
 import fr.free.totalboumboum.configuration.profile.PredefinedColor;
 import fr.free.totalboumboum.configuration.profile.Profile;
-import fr.free.totalboumboum.gui.common.panel.SplitMenuPanel;
-import fr.free.totalboumboum.gui.common.panel.data.EntitledDataPanel;
-import fr.free.totalboumboum.gui.common.subpanel.Line;
-import fr.free.totalboumboum.gui.common.subpanel.UntitledSubPanelLines;
+import fr.free.totalboumboum.gui.common.structure.panel.SplitMenuPanel;
+import fr.free.totalboumboum.gui.common.structure.panel.data.EntitledDataPanel;
+import fr.free.totalboumboum.gui.common.structure.subpanel.Line;
+import fr.free.totalboumboum.gui.common.structure.subpanel.UntitledSubPanelLines;
 import fr.free.totalboumboum.gui.data.configuration.GuiConfiguration;
 import fr.free.totalboumboum.gui.menus.profiles.ais.SelectedAiSplitPanel;
 import fr.free.totalboumboum.gui.menus.profiles.heroes.SelectedHeroSplitPanel;

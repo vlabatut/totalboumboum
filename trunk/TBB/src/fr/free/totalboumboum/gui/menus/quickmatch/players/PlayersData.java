@@ -39,9 +39,9 @@ import fr.free.totalboumboum.configuration.profile.Portraits;
 import fr.free.totalboumboum.configuration.profile.PredefinedColor;
 import fr.free.totalboumboum.configuration.profile.Profile;
 import fr.free.totalboumboum.configuration.profile.ProfileLoader;
-import fr.free.totalboumboum.gui.common.panel.SplitMenuPanel;
-import fr.free.totalboumboum.gui.common.panel.data.EntitledDataPanel;
-import fr.free.totalboumboum.gui.common.subpanel.UntitledSubPanelTable;
+import fr.free.totalboumboum.gui.common.structure.panel.SplitMenuPanel;
+import fr.free.totalboumboum.gui.common.structure.panel.data.EntitledDataPanel;
+import fr.free.totalboumboum.gui.common.structure.subpanel.UntitledSubPanelTable;
 import fr.free.totalboumboum.gui.data.configuration.GuiConfiguration;
 import fr.free.totalboumboum.gui.game.match.description.MatchDescription;
 import fr.free.totalboumboum.gui.menus.quickmatch.players.hero.SelectHeroSplitPanel;
@@ -136,9 +136,9 @@ public class PlayersData extends EntitledDataPanel implements MouseListener
 				controlWidth
 			};
 			for(int col=0;col<keys.length;col++)
-			{	playersPanel.setSubColumnsMinWidth(col,sizes[col]);
-				playersPanel.setSubColumnsPreferredWidth(col,sizes[col]);
-				playersPanel.setSubColumnsMaxWidth(col,sizes[col]);
+			{	playersPanel.setColSubMinWidth(col,sizes[col]);
+				playersPanel.setColSubPreferredWidth(col,sizes[col]);
+				playersPanel.setColSubMaxWidth(col,sizes[col]);
 				if(keys[col]!=null)
 				{	playersPanel.setLabelKey(0,col,keys[col],true);
 					Color bg = GuiTools.COLOR_TABLE_HEADER_BACKGROUND;

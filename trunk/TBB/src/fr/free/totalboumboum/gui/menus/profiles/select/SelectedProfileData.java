@@ -44,10 +44,10 @@ import fr.free.totalboumboum.configuration.Configuration;
 import fr.free.totalboumboum.configuration.profile.Profile;
 import fr.free.totalboumboum.configuration.profile.ProfileLoader;
 import fr.free.totalboumboum.configuration.profile.ProfilesConfiguration;
-import fr.free.totalboumboum.gui.common.panel.SplitMenuPanel;
-import fr.free.totalboumboum.gui.common.panel.data.EntitledDataPanel;
-import fr.free.totalboumboum.gui.common.subpanel.SubPanel;
-import fr.free.totalboumboum.gui.common.subpanel.UntitledSubPanelTable;
+import fr.free.totalboumboum.gui.common.structure.panel.SplitMenuPanel;
+import fr.free.totalboumboum.gui.common.structure.panel.data.EntitledDataPanel;
+import fr.free.totalboumboum.gui.common.structure.subpanel.SubPanel;
+import fr.free.totalboumboum.gui.common.structure.subpanel.UntitledSubPanelTable;
 import fr.free.totalboumboum.gui.data.configuration.GuiConfiguration;
 import fr.free.totalboumboum.gui.tools.GuiKeys;
 import fr.free.totalboumboum.gui.tools.GuiTools;
@@ -142,7 +142,7 @@ public class SelectedProfileData extends EntitledDataPanel implements MouseListe
 		
 		for(int panelIndex=0;panelIndex<getPageCount();panelIndex++)
 		{	UntitledSubPanelTable listPanel = new UntitledSubPanelTable(width,height,cols,lines,false);
-			listPanel.setSubColumnsMaxWidth(0,Integer.MAX_VALUE);
+			listPanel.setColSubMaxWidth(0,Integer.MAX_VALUE);
 		
 			// data
 			int line = 1;
@@ -213,8 +213,8 @@ public class SelectedProfileData extends EntitledDataPanel implements MouseListe
 			}
 		}
 		int maxWidth = width-3*GuiTools.subPanelMargin-previewPanel.getHeaderHeight();
-		previewPanel.setSubColumnsMaxWidth(1,maxWidth);
-		previewPanel.setSubColumnsPreferredWidth(1,maxWidth);
+		previewPanel.setColSubMaxWidth(1,maxWidth);
+		previewPanel.setColSubPreferredWidth(1,maxWidth);
 	}
 	
 	private void refreshPreview()

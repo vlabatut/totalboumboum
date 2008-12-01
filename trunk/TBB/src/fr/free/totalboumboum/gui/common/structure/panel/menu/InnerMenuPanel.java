@@ -21,7 +21,7 @@ package fr.free.totalboumboum.gui.common.structure.panel.menu;
  * 
  */
 
-import fr.free.totalboumboum.gui.common.ButtonAware;
+import fr.free.totalboumboum.gui.common.structure.ButtonAware;
 import fr.free.totalboumboum.gui.common.structure.panel.ContentPanel;
 import fr.free.totalboumboum.gui.common.structure.panel.SplitMenuPanel;
 import fr.free.totalboumboum.gui.menus.main.MainFrame;
