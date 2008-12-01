@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<tournament
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+	xsi:noNamespaceSchemaLocation="..\..\..\schemas\tournament.xsd">
+	
+	<general name="Tournament-séquence loooong"/>
+
+ 	<notes>
+ 		<line value="Here goes a short description of the tournament." />
+ 		<line value="Author: Vincent Labatut" />
+ 		<line value="Date: 20-10-2008" />
+ 	</notes>
+ 	
+	<sequence>
+
+ 		<limits>
+ 			<confrontation>
+				<points local="false" name="basicTournament" />
+ 				<threshold value="3" />
+ 			</confrontation>
+ 		</limits>
+	 	
+		<matches randomOrder="false">
+			<match local="false" name="matchLong" />
+			<match local="false" name="matchLong" />
+			<match local="false" name="matchLong" />
+		</matches>
+
+	</sequence>
+		
+		
+</tournament>

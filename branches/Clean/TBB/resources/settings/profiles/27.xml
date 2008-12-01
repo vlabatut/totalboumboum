@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<profile xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="..\..\..\resources\schemas\profile.xsd">
+	<general name="Adatepe" />
+	<ai name="adatepe" pack="tournament200809" />
+
+	<character name="shirobon" packname="superbomberman5"  color="brown"/>
+</profile>
+
