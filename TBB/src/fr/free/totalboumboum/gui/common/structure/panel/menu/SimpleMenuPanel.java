@@ -1,7 +1,7 @@
 package fr.free.totalboumboum.gui.common.structure.panel.menu;
 
-import fr.free.totalboumboum.gui.common.ButtonAware;
-import fr.free.totalboumboum.gui.common.MenuContainer;
+import fr.free.totalboumboum.gui.common.structure.ButtonAware;
+import fr.free.totalboumboum.gui.common.structure.MenuContainer;
 
 /*
  * Total Boum Boum

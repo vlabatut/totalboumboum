@@ -165,7 +165,6 @@ public class GuiKeys
 				public static final String MENU_RESOURCES_MATCH_SELECT_LIST_PAGEUP = "MenuResourcesMatchSelectListPageUp";
 				/* PREVIEW */
 				public static final String MENU_RESOURCES_MATCH_SELECT_PREVIEW_AUTHOR = "MenuResourcesMatchSelectPreviewAuthor";
-				public static final String MENU_RESOURCES_MATCH_SELECT_PREVIEW_LIMIT = "MenuResourcesMatchSelectPreviewLimit";
 				public static final String MENU_RESOURCES_MATCH_SELECT_PREVIEW_NAME = "MenuResourcesMatchSelectPreviewName";
 				public static final String MENU_RESOURCES_MATCH_SELECT_PREVIEW_PLAYERS = "MenuResourcesMatchSelectPreviewPlayers";
 				public static final String MENU_RESOURCES_MATCH_SELECT_PREVIEW_POINTS = "MenuResourcesMatchSelectPreviewPoints";
@@ -183,7 +182,6 @@ public class GuiKeys
 				public static final String MENU_RESOURCES_ROUND_SELECT_PREVIEW_AUTHOR = "MenuResourcesRoundSelectPreviewAuthor";
 				public static final String MENU_RESOURCES_ROUND_SELECT_PREVIEW_LEVEL_FOLDER = "MenuResourcesRoundSelectPreviewLevelFolder";
 				public static final String MENU_RESOURCES_ROUND_SELECT_PREVIEW_LEVEL_PACK = "MenuResourcesRoundSelectPreviewLevelPack";
-				public static final String MENU_RESOURCES_ROUND_SELECT_PREVIEW_LIMIT = "MenuResourcesRoundSelectPreviewLimit";
 				public static final String MENU_RESOURCES_ROUND_SELECT_PREVIEW_NAME = "MenuResourcesRoundSelectPreviewName";
 				public static final String MENU_RESOURCES_ROUND_SELECT_PREVIEW_PLAYERS = "MenuResourcesRoundSelectPreviewPlayers";
 				public static final String MENU_RESOURCES_ROUND_SELECT_PREVIEW_POINTS = "MenuResourcesRoundSelectPreviewPoints";
@@ -407,19 +405,6 @@ public class GuiKeys
 	public static final String GAME_TOURNAMENT_BUTTON_STATISTICS = "GameTournamentButtonStatistics";
 	/* DESCRIPTION */
 	public static final String GAME_TOURNAMENT_DESCRIPTION_TITLE = "GameTournamentDescriptionTitle";
-		/* LIMIT */
-		public static final String GAME_TOURNAMENT_DESCRIPTION_LIMIT_TITLE = "GameTournamentDescriptionLimitTitle";
-			/* HEADER */
-			public static final String GAME_TOURNAMENT_DESCRIPTION_LIMIT_HEADER_BOMBS = "GameTournamentDescriptionLimitHeaderBombs";
-			public static final String GAME_TOURNAMENT_DESCRIPTION_LIMIT_HEADER_CONFRONTATIONS = "GameTournamentDescriptionLimitHeaderConfrontations";
-			public static final String GAME_TOURNAMENT_DESCRIPTION_LIMIT_HEADER_CROWNS = "GameTournamentDescriptionLimitHeaderCrowns";
-			public static final String GAME_TOURNAMENT_DESCRIPTION_LIMIT_HEADER_CUSTOM = "GameTournamentDescriptionLimitHeaderCustom";
-			public static final String GAME_TOURNAMENT_DESCRIPTION_LIMIT_HEADER_BOMBEDS = "GameTournamentDescriptionLimitHeaderBombeds";
-			public static final String GAME_TOURNAMENT_DESCRIPTION_LIMIT_HEADER_ITEMS = "GameTournamentDescriptionLimitHeaderItems";
-			public static final String GAME_TOURNAMENT_DESCRIPTION_LIMIT_HEADER_BOMBINGS = "GameTournamentDescriptionLimitHeaderBombings";
-			public static final String GAME_TOURNAMENT_DESCRIPTION_LIMIT_HEADER_PAINTINGS = "GameTournamentDescriptionLimitHeaderPaintings";
-			public static final String GAME_TOURNAMENT_DESCRIPTION_LIMIT_HEADER_TIME = "GameTournamentDescriptionLimitHeaderTime";
-			public static final String GAME_TOURNAMENT_DESCRIPTION_LIMIT_HEADER_LAST_STANDING = "GameTournamentDescriptionLimitHeaderLastStanding";
 		/* MISC */
 		public static final String GAME_TOURNAMENT_DESCRIPTION_MISC_TITLE = "GameTournamentDescriptionMiscTitle";
 		/* NOTES */
@@ -432,29 +417,6 @@ public class GuiKeys
 			/* DATA */
 			public static final String GAME_TOURNAMENT_DESCRIPTION_PLAYERS_DATA_COMPUTER = "GameTournamentDescriptionPlayersDataComputer";
 			public static final String GAME_TOURNAMENT_DESCRIPTION_PLAYERS_DATA_HUMAN = "GameTournamentDescriptionPlayersDataHuman";
-		/* POINTS */
-		public static final String GAME_TOURNAMENT_DESCRIPTION_POINTS_TITLE = "GameTournamentDescriptionPointsTitle";
-			/* HEADER */
-			public static final String GAME_TOURNAMENT_DESCRIPTION_POINTS_HEADER_CONSTANT = "GameTournamentDescriptionPointsHeaderConstant";
-			public static final String GAME_TOURNAMENT_DESCRIPTION_POINTS_HEADER_DISCRETIZE = "GameTournamentDescriptionPointsHeaderDiscretize";
-			public static final String GAME_TOURNAMENT_DESCRIPTION_POINTS_HEADER_PARTIAL = "GameTournamentDescriptionPointsHeaderPartial";
-			public static final String GAME_TOURNAMENT_DESCRIPTION_POINTS_HEADER_RANKINGS = "GameTournamentDescriptionPointsHeaderRankings";
-			public static final String GAME_TOURNAMENT_DESCRIPTION_POINTS_HEADER_RANKPOINTS = "GameTournamentDescriptionPointsHeaderRankpoints";
-			public static final String GAME_TOURNAMENT_DESCRIPTION_POINTS_HEADER_SCORE = "GameTournamentDescriptionPointsHeaderScore";
-			public static final String GAME_TOURNAMENT_DESCRIPTION_POINTS_HEADER_TOTAL = "GameTournamentDescriptionPointsHeaderTotal";
-			/* DATA */
-			public static final String GAME_TOURNAMENT_DESCRIPTION_POINTS_DATA_BOMBS = "GameTournamentDescriptionPointsDataBombs";
-			public static final String GAME_TOURNAMENT_DESCRIPTION_POINTS_DATA_CROWNS = "GameTournamentDescriptionPointsDataCrowns";
-			public static final String GAME_TOURNAMENT_DESCRIPTION_POINTS_DATA_BOMBEDS = "GameTournamentDescriptionPointsDataBombeds";
-			public static final String GAME_TOURNAMENT_DESCRIPTION_POINTS_DATA_INVERTED = "GameTournamentDescriptionPointsDataInverted";
-			public static final String GAME_TOURNAMENT_DESCRIPTION_POINTS_DATA_ITEMS = "GameTournamentDescriptionPointsDataItems";
-			public static final String GAME_TOURNAMENT_DESCRIPTION_POINTS_DATA_BOMBINGS = "GameTournamentDescriptionPointsDataBombings";
-			public static final String GAME_TOURNAMENT_DESCRIPTION_POINTS_DATA_NOSHARE = "GameTournamentDescriptionPointsDataNoshare";
-			public static final String GAME_TOURNAMENT_DESCRIPTION_POINTS_DATA_PAINTINGS = "GameTournamentDescriptionPointsDataPaintings";
-			public static final String GAME_TOURNAMENT_DESCRIPTION_POINTS_DATA_PARTIAL = "GameTournamentDescriptionPointsDataPartial";
-			public static final String GAME_TOURNAMENT_DESCRIPTION_POINTS_DATA_REGULAR = "GameTournamentDescriptionPointsDataRegular";
-			public static final String GAME_TOURNAMENT_DESCRIPTION_POINTS_DATA_SHARE = "GameTournamentDescriptionPointsDataShare";
-			public static final String GAME_TOURNAMENT_DESCRIPTION_POINTS_DATA_TIME = "GameTournamentDescriptionPointsDataTime";
 	/* RESULTS */
 	public static final String GAME_TOURNAMENT_RESULTS_TITLE = "GameTournamentResultsTitle";
 		/* HEADER */
@@ -494,19 +456,6 @@ public class GuiKeys
 	public static final String GAME_MATCH_BUTTON_STATISTICS = "GameMatchButtonStatistics";
 	/* DESCRIPTION */
 	public static final String GAME_MATCH_DESCRIPTION_TITLE = "GameMatchDescriptionTitle";
-		/* LIMIT */
-		public static final String GAME_MATCH_DESCRIPTION_LIMIT_TITLE = "GameMatchDescriptionLimitTitle";
-			/* HEADER */
-			public static final String GAME_MATCH_DESCRIPTION_LIMIT_HEADER_BOMBS = "GameMatchDescriptionLimitHeaderBombs";
-			public static final String GAME_MATCH_DESCRIPTION_LIMIT_HEADER_CONFRONTATIONS = "GameMatchDescriptionLimitHeaderConfrontations";
-			public static final String GAME_MATCH_DESCRIPTION_LIMIT_HEADER_CROWNS = "GameMatchDescriptionLimitHeaderCrowns";
-			public static final String GAME_MATCH_DESCRIPTION_LIMIT_HEADER_CUSTOM = "GameMatchDescriptionLimitHeaderCustom";
-			public static final String GAME_MATCH_DESCRIPTION_LIMIT_HEADER_BOMBEDS = "GameMatchDescriptionLimitHeaderBombeds";
-			public static final String GAME_MATCH_DESCRIPTION_LIMIT_HEADER_ITEMS = "GameMatchDescriptionLimitHeaderItems";
-			public static final String GAME_MATCH_DESCRIPTION_LIMIT_HEADER_BOMBINGS = "GameMatchDescriptionLimitHeaderBombings";
-			public static final String GAME_MATCH_DESCRIPTION_LIMIT_HEADER_PAINTINGS = "GameMatchDescriptionLimitHeaderPaintings";
-			public static final String GAME_MATCH_DESCRIPTION_LIMIT_HEADER_TIME = "GameMatchDescriptionLimitHeaderTime";
-			public static final String GAME_MATCH_DESCRIPTION_LIMIT_HEADER_LAST_STANDING = "GameMatchDescriptionLimitHeaderLastStanding";
 		/* MISC */
 		public static final String GAME_MATCH_DESCRIPTION_MISC_TITLE = "GameMatchDescriptionMiscTitle";
 		/* NOTES */
@@ -522,29 +471,6 @@ public class GuiKeys
 			public static final String GAME_MATCH_DESCRIPTION_PLAYERS_DATA_CONTROLS = "GameMatchDescriptionPlayersDataControls";
 			public static final String GAME_MATCH_DESCRIPTION_PLAYERS_DATA_HUMAN = "GameMatchDescriptionPlayersDataHuman";
 			public static final String GAME_MATCH_DESCRIPTION_PLAYERS_DATA_NOCONTROLS = "GameMatchDescriptionPlayersDataNocontrols";
-		/* POINTS */
-		public static final String GAME_MATCH_DESCRIPTION_POINTS_TITLE = "GameMatchDescriptionPointsTitle";
-			/* HEADER */
-			public static final String GAME_MATCH_DESCRIPTION_POINTS_HEADER_CONSTANT = "GameMatchDescriptionPointsHeaderConstant";
-			public static final String GAME_MATCH_DESCRIPTION_POINTS_HEADER_DISCRETIZE = "GameMatchDescriptionPointsHeaderDiscretize";
-			public static final String GAME_MATCH_DESCRIPTION_POINTS_HEADER_PARTIAL = "GameMatchDescriptionPointsHeaderPartial";
-			public static final String GAME_MATCH_DESCRIPTION_POINTS_HEADER_RANKINGS = "GameMatchDescriptionPointsHeaderRankings";
-			public static final String GAME_MATCH_DESCRIPTION_POINTS_HEADER_RANKPOINTS = "GameMatchDescriptionPointsHeaderRankpoints";
-			public static final String GAME_MATCH_DESCRIPTION_POINTS_HEADER_SCORE = "GameMatchDescriptionPointsHeaderScore";
-			public static final String GAME_MATCH_DESCRIPTION_POINTS_HEADER_TOTAL = "GameMatchDescriptionPointsHeaderTotal";
-			/* DATA */
-			public static final String GAME_MATCH_DESCRIPTION_POINTS_DATA_BOMBS = "GameMatchDescriptionPointsDataBombs";
-			public static final String GAME_MATCH_DESCRIPTION_POINTS_DATA_CROWNS = "GameMatchDescriptionPointsDataCrowns";
-			public static final String GAME_MATCH_DESCRIPTION_POINTS_DATA_BOMBEDS = "GameMatchDescriptionPointsDataBombeds";
-			public static final String GAME_MATCH_DESCRIPTION_POINTS_DATA_INVERTED = "GameMatchDescriptionPointsDataInverted";
-			public static final String GAME_MATCH_DESCRIPTION_POINTS_DATA_ITEMS = "GameMatchDescriptionPointsDataItems";
-			public static final String GAME_MATCH_DESCRIPTION_POINTS_DATA_BOMBINGS = "GameMatchDescriptionPointsDataBombings";
-			public static final String GAME_MATCH_DESCRIPTION_POINTS_DATA_NOSHARE = "GameMatchDescriptionPointsDataNoshare";
-			public static final String GAME_MATCH_DESCRIPTION_POINTS_DATA_PAINTINGS = "GameMatchDescriptionPointsDataPaintings";
-			public static final String GAME_MATCH_DESCRIPTION_POINTS_DATA_PARTIAL = "GameMatchDescriptionPointsDataPartial";
-			public static final String GAME_MATCH_DESCRIPTION_POINTS_DATA_REGULAR = "GameMatchDescriptionPointsDataRegular";
-			public static final String GAME_MATCH_DESCRIPTION_POINTS_DATA_SHARE = "GameMatchDescriptionPointsDataShare";
-			public static final String GAME_MATCH_DESCRIPTION_POINTS_DATA_TIME = "GameMatchDescriptionPointsDataTime";
 	/* RESULTS */
 	public static final String GAME_MATCH_RESULTS_TITLE = "GameMatchResultsTitle";
 		/* HEADER */
@@ -593,18 +519,6 @@ public class GuiKeys
 		public static final String GAME_ROUND_DESCRIPTION_INITIALITEMS_TITLE = "GameRoundDescriptionInitialItemsTitle";
 		/* ITEMSET */
 		public static final String GAME_ROUND_DESCRIPTION_ITEMSET_TITLE = "GameRoundDescriptionItemset";
-		/* LIMIT */
-		public static final String GAME_ROUND_DESCRIPTION_LIMIT_TITLE = "GameRoundDescriptionLimitTitle";
-			/* HEADER */
-			public static final String GAME_ROUND_DESCRIPTION_LIMIT_HEADER_BOMBS = "GameRoundDescriptionLimitHeaderBombs";
-			public static final String GAME_ROUND_DESCRIPTION_LIMIT_HEADER_CROWNS = "GameRoundDescriptionLimitHeaderCrowns";
-			public static final String GAME_ROUND_DESCRIPTION_LIMIT_HEADER_CUSTOM = "GameRoundDescriptionLimitHeaderCustom";
-			public static final String GAME_ROUND_DESCRIPTION_LIMIT_HEADER_BOMBEDS = "GameRoundDescriptionLimitHeaderBombeds";
-			public static final String GAME_ROUND_DESCRIPTION_LIMIT_HEADER_ITEMS = "GameRoundDescriptionLimitHeaderItems";
-			public static final String GAME_ROUND_DESCRIPTION_LIMIT_HEADER_BOMBINGS = "GameRoundDescriptionLimitHeaderBombings";
-			public static final String GAME_ROUND_DESCRIPTION_LIMIT_HEADER_LAST_STANDING = "GameRoundDescriptionLimitHeaderLastStanding";
-			public static final String GAME_ROUND_DESCRIPTION_LIMIT_HEADER_PAINTINGS = "GameRoundDescriptionLimitHeaderPaintings";
-			public static final String GAME_ROUND_DESCRIPTION_LIMIT_HEADER_TIME = "GameRoundDescriptionLimitHeaderTime";
 		/* MISC */
 		public static final String GAME_ROUND_DESCRIPTION_MISC_TITLE = "GameRoundDescriptionMiscTitle";
 			/* HEADER */
@@ -617,28 +531,6 @@ public class GuiKeys
 			public static final String GAME_ROUND_DESCRIPTION_MISC_HEADER_TITLE = "GameRoundDescriptionMiscHeaderTitle";
 		/* NOTES */
 		public static final String GAME_ROUND_DESCRIPTION_NOTES_TITLE = "GameRoundDescriptionNotesTitle";
-		/* POINTS */
-		public static final String GAME_ROUND_DESCRIPTION_POINTS_TITLE = "GameRoundDescriptionPointsTitle";
-			/* HEADER */
-			public static final String GAME_ROUND_DESCRIPTION_POINTS_HEADER_CONSTANT = "GameRoundDescriptionPointsHeaderConstant";
-			public static final String GAME_ROUND_DESCRIPTION_POINTS_HEADER_DISCRETIZE = "GameRoundDescriptionPointsHeaderDiscretize";
-			public static final String GAME_ROUND_DESCRIPTION_POINTS_HEADER_PARTIAL = "GameRoundDescriptionPointsHeaderPartial";
-			public static final String GAME_ROUND_DESCRIPTION_POINTS_HEADER_RANKINGS = "GameRoundDescriptionPointsHeaderRankings";
-			public static final String GAME_ROUND_DESCRIPTION_POINTS_HEADER_RANKPOINTS = "GameRoundDescriptionPointsHeaderRankpoints";
-			public static final String GAME_ROUND_DESCRIPTION_POINTS_HEADER_SCORE = "GameRoundDescriptionPointsHeaderScore";
-			/* DATA */
-			public static final String GAME_ROUND_DESCRIPTION_POINTS_DATA_BOMBS = "GameRoundDescriptionPointsDataBombs";
-			public static final String GAME_ROUND_DESCRIPTION_POINTS_DATA_CROWNS = "GameRoundDescriptionPointsDataCrowns";
-			public static final String GAME_ROUND_DESCRIPTION_POINTS_DATA_BOMBEDS = "GameRoundDescriptionPointsDataBombeds";
-			public static final String GAME_ROUND_DESCRIPTION_POINTS_DATA_INVERTED = "GameRoundDescriptionPointsDataInverted";
-			public static final String GAME_ROUND_DESCRIPTION_POINTS_DATA_ITEMS = "GameRoundDescriptionPointsDataItems";
-			public static final String GAME_ROUND_DESCRIPTION_POINTS_DATA_BOMBINGS = "GameRoundDescriptionPointsDataBombings";
-			public static final String GAME_ROUND_DESCRIPTION_POINTS_DATA_NOSHARE = "GameRoundDescriptionPointsDataNoshare";
-			public static final String GAME_ROUND_DESCRIPTION_POINTS_DATA_PAINTINGS = "GameRoundDescriptionPointsDataPaintings";
-			public static final String GAME_ROUND_DESCRIPTION_POINTS_DATA_PARTIAL = "GameRoundDescriptionPointsDataPartial";
-			public static final String GAME_ROUND_DESCRIPTION_POINTS_DATA_REGULAR = "GameRoundDescriptionPointsDataRegular";
-			public static final String GAME_ROUND_DESCRIPTION_POINTS_DATA_SHARE = "GameRoundDescriptionPointsDataShare";
-			public static final String GAME_ROUND_DESCRIPTION_POINTS_DATA_TIME = "GameRoundDescriptionPointsDataTime";
 		/* PREVIEW */
 		public static final String GAME_ROUND_DESCRIPTION_PREVIEW_TITLE = "GameRoundDescriptionPreviewTitle";
 	/* RESULTS */
@@ -663,6 +555,135 @@ public class GuiKeys
 	public static final String GAME_ROUND_STATISTICS_TITLE = "GameRoundStatisticsTitle";
 		/* HEADER */
 		public static final String GAME_ROUND_STATISTICS_HEADER_NAME = "GameRoundStatisticsHeaderName";
+		
+	/////////////////////////////////////////////////////////////////
+	// COMMON CONTENT	/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	public static final String COMMON = "Common";
+	/* LIMIT */
+	public static final String COMMON_LIMIT = COMMON+LIMIT;
+		/* MATCH */
+		public static final String COMMON_LIMIT_MATCH = COMMON_LIMIT+MATCH;
+		public static final String COMMON_LIMIT_MATCH_TITLE = COMMON_LIMIT_MATCH+TITLE;
+			/* HEADER */
+			public static final String COMMON_LIMIT_MATCH_HEADER = COMMON_LIMIT_MATCH+HEADER;
+			public static final String COMMON_LIMIT_MATCH_HEADER_BOMBEDS = COMMON_LIMIT_MATCH_HEADER+BOMBEDS;
+			public static final String COMMON_LIMIT_MATCH_HEADER_BOMBINGS = COMMON_LIMIT_MATCH_HEADER+BOMBINGS;
+			public static final String COMMON_LIMIT_MATCH_HEADER_BOMBS = COMMON_LIMIT_MATCH_HEADER+BOMBS;
+			public static final String COMMON_LIMIT_MATCH_HEADER_CONFRONTATIONS = COMMON_LIMIT_MATCH_HEADER+CONFRONTATIONS;
+			public static final String COMMON_LIMIT_MATCH_HEADER_CROWNS = COMMON_LIMIT_MATCH_HEADER+CROWNS;
+			public static final String COMMON_LIMIT_MATCH_HEADER_CUSTOM = COMMON_LIMIT_MATCH_HEADER+CUSTOM;
+			public static final String COMMON_LIMIT_MATCH_HEADER_ITEMS = COMMON_LIMIT_MATCH_HEADER+ITEMS;
+			public static final String COMMON_LIMIT_MATCH_HEADER_PAINTINGS = COMMON_LIMIT_MATCH_HEADER+PAINTINGS;
+			public static final String COMMON_LIMIT_MATCH_HEADER_TIME = COMMON_LIMIT_MATCH_HEADER+TIME;
+		/* ROUND */
+		public static final String COMMON_LIMIT_ROUND = COMMON_LIMIT+ROUND;
+		public static final String COMMON_LIMIT_ROUND_TITLE = COMMON_LIMIT_ROUND+TITLE;
+			/* HEADER */
+			public static final String COMMON_LIMIT_ROUND_HEADER = COMMON_LIMIT_ROUND+HEADER;
+			public static final String COMMON_LIMIT_ROUND_HEADER_BOMBEDS = COMMON_LIMIT_ROUND_HEADER+BOMBEDS;
+			public static final String COMMON_LIMIT_ROUND_HEADER_BOMBINGS = COMMON_LIMIT_ROUND_HEADER+BOMBINGS;
+			public static final String COMMON_LIMIT_ROUND_HEADER_BOMBS = COMMON_LIMIT_ROUND_HEADER+BOMBS;
+			public static final String COMMON_LIMIT_ROUND_HEADER_CROWNS = COMMON_LIMIT_ROUND_HEADER+CROWNS;
+			public static final String COMMON_LIMIT_ROUND_HEADER_CUSTOM = COMMON_LIMIT_ROUND_HEADER+CUSTOM;
+			public static final String COMMON_LIMIT_ROUND_HEADER_ITEMS = COMMON_LIMIT_ROUND_HEADER+ITEMS;
+			public static final String COMMON_LIMIT_ROUND_HEADER_LAST_STANDING = COMMON_LIMIT_ROUND_HEADER+LAST_STANDING;
+			public static final String COMMON_LIMIT_ROUND_HEADER_PAINTINGS = COMMON_LIMIT_ROUND_HEADER+PAINTINGS;
+			public static final String COMMON_LIMIT_ROUND_HEADER_TIME = COMMON_LIMIT_ROUND_HEADER+TIME;
+		/* TOURNAMENT */
+		public static final String COMMON_LIMIT_TOURNAMENT = COMMON_LIMIT+TOURNAMENT;
+		public static final String COMMON_LIMIT_TOURNAMENT_TITLE = COMMON_LIMIT_TOURNAMENT+TITLE;
+			/* HEADER */
+			public static final String COMMON_LIMIT_TOURNAMENT_HEADER = COMMON_LIMIT_TOURNAMENT+HEADER;
+			public static final String COMMON_LIMIT_TOURNAMENT_HEADER_BOMBEDS = COMMON_LIMIT_TOURNAMENT_HEADER+BOMBEDS;
+			public static final String COMMON_LIMIT_TOURNAMENT_HEADER_BOMBINGS = COMMON_LIMIT_TOURNAMENT_HEADER+BOMBINGS;
+			public static final String COMMON_LIMIT_TOURNAMENT_HEADER_BOMBS = COMMON_LIMIT_TOURNAMENT_HEADER+BOMBS;
+			public static final String COMMON_LIMIT_TOURNAMENT_HEADER_CONFRONTATIONS = COMMON_LIMIT_TOURNAMENT_HEADER+CONFRONTATIONS;
+			public static final String COMMON_LIMIT_TOURNAMENT_HEADER_CROWNS = COMMON_LIMIT_TOURNAMENT_HEADER+CROWNS;
+			public static final String COMMON_LIMIT_TOURNAMENT_HEADER_CUSTOM = COMMON_LIMIT_TOURNAMENT_HEADER+CUSTOM;
+			public static final String COMMON_LIMIT_TOURNAMENT_HEADER_ITEMS = COMMON_LIMIT_TOURNAMENT_HEADER+ITEMS;
+			public static final String COMMON_LIMIT_TOURNAMENT_HEADER_PAINTINGS = COMMON_LIMIT_TOURNAMENT_HEADER+PAINTINGS;
+			public static final String COMMON_LIMIT_TOURNAMENT_HEADER_TIME = COMMON_LIMIT_TOURNAMENT_HEADER+TIME;
+	/* LIMIT */
+	public static final String COMMON_POINTS = COMMON+POINTS;
+		/* MATCH */
+		public static final String COMMON_POINTS_MATCH = COMMON_POINTS+MATCH;
+		public static final String COMMON_POINTS_MATCH_TITLE = COMMON_POINTS_MATCH+TITLE;
+			/* HEADER */
+			public static final String COMMON_POINTS_MATCH_HEADER = COMMON_POINTS_MATCH+HEADER;
+			public static final String COMMON_POINTS_MATCH_HEADER_CONSTANT = COMMON_POINTS_MATCH_HEADER+CONSTANT;
+			public static final String COMMON_POINTS_MATCH_HEADER_DISCRETIZE = COMMON_POINTS_MATCH_HEADER+DISCRETIZE;
+			public static final String COMMON_POINTS_MATCH_HEADER_PARTIAL = COMMON_POINTS_MATCH_HEADER+PARTIAL;
+			public static final String COMMON_POINTS_MATCH_HEADER_RANKINGS = COMMON_POINTS_MATCH_HEADER+RANKINGS;
+			public static final String COMMON_POINTS_MATCH_HEADER_RANKPOINTS = COMMON_POINTS_MATCH_HEADER+RANKPOINTS;
+			public static final String COMMON_POINTS_MATCH_HEADER_SCORE = COMMON_POINTS_MATCH_HEADER+SCORE;
+			public static final String COMMON_POINTS_MATCH_HEADER_TOTAL = COMMON_POINTS_MATCH_HEADER+TOTAL;
+			/* DATA */
+			public static final String COMMON_POINTS_MATCH_DATA = COMMON_POINTS_MATCH+DATA;
+			public static final String COMMON_POINTS_MATCH_DATA_BOMBEDS = COMMON_POINTS_MATCH_DATA+BOMBEDS;
+			public static final String COMMON_POINTS_MATCH_DATA_BOMBINGS = COMMON_POINTS_MATCH_DATA+BOMBINGS;
+			public static final String COMMON_POINTS_MATCH_DATA_BOMBS = COMMON_POINTS_MATCH_DATA+BOMBS;
+			public static final String COMMON_POINTS_MATCH_DATA_CROWNS = COMMON_POINTS_MATCH_DATA+CROWNS;
+			public static final String COMMON_POINTS_MATCH_DATA_INVERTED = COMMON_POINTS_MATCH_DATA+INVERTED;
+			public static final String COMMON_POINTS_MATCH_DATA_ITEMS = COMMON_POINTS_MATCH_DATA+ITEMS;
+			public static final String COMMON_POINTS_MATCH_DATA_NOSHARE = COMMON_POINTS_MATCH_DATA+NO_SHARE;
+			public static final String COMMON_POINTS_MATCH_DATA_PAINTINGS = COMMON_POINTS_MATCH_DATA+PAINTINGS;
+			public static final String COMMON_POINTS_MATCH_DATA_PARTIAL = COMMON_POINTS_MATCH_DATA+PARTIAL;
+			public static final String COMMON_POINTS_MATCH_DATA_REGULAR = COMMON_POINTS_MATCH_DATA+REGULAR;
+			public static final String COMMON_POINTS_MATCH_DATA_SHARE = COMMON_POINTS_MATCH_DATA+SHARE;
+			public static final String COMMON_POINTS_MATCH_DATA_TIME = COMMON_POINTS_MATCH_DATA+TIME;
+		/* ROUND */
+		public static final String COMMON_POINTS_ROUND = COMMON_POINTS+ROUND;
+		public static final String COMMON_POINTS_ROUND_TITLE = COMMON_POINTS_ROUND+TITLE;
+			/* HEADER */
+			public static final String COMMON_POINTS_ROUND_HEADER = COMMON_POINTS_ROUND+HEADER;
+			public static final String COMMON_POINTS_ROUND_HEADER_CONSTANT = COMMON_POINTS_ROUND_HEADER+CONSTANT;
+			public static final String COMMON_POINTS_ROUND_HEADER_DISCRETIZE = COMMON_POINTS_ROUND_HEADER+DISCRETIZE;
+			public static final String COMMON_POINTS_ROUND_HEADER_PARTIAL = COMMON_POINTS_ROUND_HEADER+PARTIAL;
+			public static final String COMMON_POINTS_ROUND_HEADER_RANKINGS = COMMON_POINTS_ROUND_HEADER+RANKINGS;
+			public static final String COMMON_POINTS_ROUND_HEADER_RANKPOINTS = COMMON_POINTS_ROUND_HEADER+RANKPOINTS;
+			public static final String COMMON_POINTS_ROUND_HEADER_SCORE = COMMON_POINTS_ROUND_HEADER+SCORE;
+			public static final String COMMON_POINTS_ROUND_HEADER_TOTAL = COMMON_POINTS_ROUND_HEADER+TOTAL;
+			/* DATA */
+			public static final String COMMON_POINTS_ROUND_DATA = COMMON_POINTS_ROUND+DATA;
+			public static final String COMMON_POINTS_ROUND_DATA_BOMBEDS = COMMON_POINTS_ROUND_DATA+BOMBEDS;
+			public static final String COMMON_POINTS_ROUND_DATA_BOMBINGS = COMMON_POINTS_ROUND_DATA+BOMBINGS;
+			public static final String COMMON_POINTS_ROUND_DATA_BOMBS = COMMON_POINTS_ROUND_DATA+BOMBS;
+			public static final String COMMON_POINTS_ROUND_DATA_CROWNS = COMMON_POINTS_ROUND_DATA+CROWNS;
+			public static final String COMMON_POINTS_ROUND_DATA_INVERTED = COMMON_POINTS_ROUND_DATA+INVERTED;
+			public static final String COMMON_POINTS_ROUND_DATA_ITEMS = COMMON_POINTS_ROUND_DATA+ITEMS;
+			public static final String COMMON_POINTS_ROUND_DATA_NOSHARE = COMMON_POINTS_ROUND_DATA+NO_SHARE;
+			public static final String COMMON_POINTS_ROUND_DATA_PAINTINGS = COMMON_POINTS_ROUND_DATA+PAINTINGS;
+			public static final String COMMON_POINTS_ROUND_DATA_PARTIAL = COMMON_POINTS_ROUND_DATA+PARTIAL;
+			public static final String COMMON_POINTS_ROUND_DATA_REGULAR = COMMON_POINTS_ROUND_DATA+REGULAR;
+			public static final String COMMON_POINTS_ROUND_DATA_SHARE = COMMON_POINTS_ROUND_DATA+SHARE;
+			public static final String COMMON_POINTS_ROUND_DATA_TIME = COMMON_POINTS_ROUND_DATA+TIME;
+		/* TOURNAMENT */
+		public static final String COMMON_POINTS_TOURNAMENT = COMMON_POINTS+TOURNAMENT;
+		public static final String COMMON_POINTS_TOURNAMENT_TITLE = COMMON_POINTS_TOURNAMENT+TITLE;
+			/* HEADER */
+			public static final String COMMON_POINTS_TOURNAMENT_HEADER = COMMON_POINTS_TOURNAMENT+HEADER;
+			public static final String COMMON_POINTS_TOURNAMENT_HEADER_CONSTANT = COMMON_POINTS_TOURNAMENT_HEADER+CONSTANT;
+			public static final String COMMON_POINTS_TOURNAMENT_HEADER_DISCRETIZE = COMMON_POINTS_TOURNAMENT_HEADER+DISCRETIZE;
+			public static final String COMMON_POINTS_TOURNAMENT_HEADER_PARTIAL = COMMON_POINTS_TOURNAMENT_HEADER+PARTIAL;
+			public static final String COMMON_POINTS_TOURNAMENT_HEADER_RANKINGS = COMMON_POINTS_TOURNAMENT_HEADER+RANKINGS;
+			public static final String COMMON_POINTS_TOURNAMENT_HEADER_RANKPOINTS = COMMON_POINTS_TOURNAMENT_HEADER+RANKPOINTS;
+			public static final String COMMON_POINTS_TOURNAMENT_HEADER_SCORE = COMMON_POINTS_TOURNAMENT_HEADER+SCORE;
+			public static final String COMMON_POINTS_TOURNAMENT_HEADER_TOTAL = COMMON_POINTS_TOURNAMENT_HEADER+TOTAL;
+			/* DATA */
+			public static final String COMMON_POINTS_TOURNAMENT_DATA = COMMON_POINTS_TOURNAMENT+DATA;
+			public static final String COMMON_POINTS_TOURNAMENT_DATA_BOMBEDS = COMMON_POINTS_TOURNAMENT_DATA+BOMBEDS;
+			public static final String COMMON_POINTS_TOURNAMENT_DATA_BOMBINGS = COMMON_POINTS_TOURNAMENT_DATA+BOMBINGS;
+			public static final String COMMON_POINTS_TOURNAMENT_DATA_BOMBS = COMMON_POINTS_TOURNAMENT_DATA+BOMBS;
+			public static final String COMMON_POINTS_TOURNAMENT_DATA_CROWNS = COMMON_POINTS_TOURNAMENT_DATA+CROWNS;
+			public static final String COMMON_POINTS_TOURNAMENT_DATA_INVERTED = COMMON_POINTS_TOURNAMENT_DATA+INVERTED;
+			public static final String COMMON_POINTS_TOURNAMENT_DATA_ITEMS = COMMON_POINTS_TOURNAMENT_DATA+ITEMS;
+			public static final String COMMON_POINTS_TOURNAMENT_DATA_NOSHARE = COMMON_POINTS_TOURNAMENT_DATA+NO_SHARE;
+			public static final String COMMON_POINTS_TOURNAMENT_DATA_PAINTINGS = COMMON_POINTS_TOURNAMENT_DATA+PAINTINGS;
+			public static final String COMMON_POINTS_TOURNAMENT_DATA_PARTIAL = COMMON_POINTS_TOURNAMENT_DATA+PARTIAL;
+			public static final String COMMON_POINTS_TOURNAMENT_DATA_REGULAR = COMMON_POINTS_TOURNAMENT_DATA+REGULAR;
+			public static final String COMMON_POINTS_TOURNAMENT_DATA_SHARE = COMMON_POINTS_TOURNAMENT_DATA+SHARE;
+			public static final String COMMON_POINTS_TOURNAMENT_DATA_TIME = COMMON_POINTS_TOURNAMENT_DATA+TIME;
 
 	/////////////////////////////////////////////////////////////////
 	// PROCESS			/////////////////////////////////////////////

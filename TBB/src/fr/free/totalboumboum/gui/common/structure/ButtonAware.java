@@ -1,4 +1,4 @@
-package fr.free.totalboumboum.gui.common;
+package fr.free.totalboumboum.gui.common.structure;
 
 /*
  * Total Boum Boum
@@ -21,20 +21,10 @@ package fr.free.totalboumboum.gui.common;
  * 
  */
 
-import fr.free.totalboumboum.gui.common.structure.panel.menu.MenuPanel;
-import fr.free.totalboumboum.gui.menus.main.MainFrame;
+import java.awt.Component;
+import java.awt.event.ActionListener;
 
-public interface MenuContainer
+public interface ButtonAware extends ActionListener
 {	
-	/////////////////////////////////////////////////////////////////
-	// FRAME			/////////////////////////////////////////////
-	/////////////////////////////////////////////////////////////////
-	public MainFrame getFrame();
-
-	/////////////////////////////////////////////////////////////////
-	// MENU PANEL		/////////////////////////////////////////////
-	/////////////////////////////////////////////////////////////////
-	public int getMenuHeight();
-	public int getMenuWidth();
-	public void setMenuPanel(MenuPanel newPanel);
+	public Component add(Component comp);
 }

@@ -34,9 +34,9 @@ import javax.swing.JLabel;
 import fr.free.totalboumboum.configuration.Configuration;
 import fr.free.totalboumboum.configuration.controls.ControlSettings;
 import fr.free.totalboumboum.engine.content.feature.event.ControlEvent;
-import fr.free.totalboumboum.gui.common.panel.SplitMenuPanel;
-import fr.free.totalboumboum.gui.common.panel.data.EntitledDataPanel;
-import fr.free.totalboumboum.gui.common.subpanel.UntitledSubPanelTable;
+import fr.free.totalboumboum.gui.common.structure.panel.SplitMenuPanel;
+import fr.free.totalboumboum.gui.common.structure.panel.data.EntitledDataPanel;
+import fr.free.totalboumboum.gui.common.structure.subpanel.UntitledSubPanelTable;
 import fr.free.totalboumboum.gui.data.configuration.GuiConfiguration;
 import fr.free.totalboumboum.gui.tools.GuiKeys;
 import fr.free.totalboumboum.gui.tools.GuiTools;
@@ -93,7 +93,7 @@ public class ControlsData extends EntitledDataPanel implements MouseListener,Key
 				}
 				keysPanel.setLineKeysSimple(0, keys, imageFlags);
 				//keysPanel.setColumnWidth(0,Integer.MAX_VALUE);
-				keysPanel.setSubColumnsMaxWidth(1,Integer.MAX_VALUE);
+				keysPanel.setColSubMaxWidth(1,Integer.MAX_VALUE);
 			}			
 			
 			// data

@@ -23,7 +23,7 @@ package fr.free.totalboumboum.gui.common.structure.panel;
 
 import java.awt.BorderLayout;
 
-import fr.free.totalboumboum.gui.common.MenuContainer;
+import fr.free.totalboumboum.gui.common.structure.MenuContainer;
 import fr.free.totalboumboum.gui.common.structure.panel.menu.InnerMenuPanel;
 import fr.free.totalboumboum.gui.common.structure.panel.menu.MenuPanel;
 

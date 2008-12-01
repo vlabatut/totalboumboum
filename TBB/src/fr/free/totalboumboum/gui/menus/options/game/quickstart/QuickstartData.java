@@ -41,10 +41,10 @@ import fr.free.totalboumboum.configuration.profile.Portraits;
 import fr.free.totalboumboum.configuration.profile.PredefinedColor;
 import fr.free.totalboumboum.configuration.profile.Profile;
 import fr.free.totalboumboum.configuration.profile.ProfileLoader;
-import fr.free.totalboumboum.gui.common.panel.SplitMenuPanel;
-import fr.free.totalboumboum.gui.common.panel.data.EntitledDataPanel;
-import fr.free.totalboumboum.gui.common.subpanel.SubPanel;
-import fr.free.totalboumboum.gui.common.subpanel.UntitledSubPanelTable;
+import fr.free.totalboumboum.gui.common.structure.panel.SplitMenuPanel;
+import fr.free.totalboumboum.gui.common.structure.panel.data.EntitledDataPanel;
+import fr.free.totalboumboum.gui.common.structure.subpanel.SubPanel;
+import fr.free.totalboumboum.gui.common.structure.subpanel.UntitledSubPanelTable;
 import fr.free.totalboumboum.gui.game.match.description.MatchDescription;
 import fr.free.totalboumboum.gui.menus.options.game.quickstart.hero.SelectHeroSplitPanel;
 import fr.free.totalboumboum.gui.menus.options.game.quickstart.profile.SelectProfileSplitPanel;
@@ -175,9 +175,9 @@ public class QuickstartData extends EntitledDataPanel implements MouseListener
 				controlWidth
 			};
 			for(int col=0;col<keys.length;col++)
-			{	result.setSubColumnsMinWidth(col,sizes[col]);
-				result.setSubColumnsPreferredWidth(col,sizes[col]);
-				result.setSubColumnsMaxWidth(col,sizes[col]);
+			{	result.setColSubMinWidth(col,sizes[col]);
+				result.setColSubPreferredWidth(col,sizes[col]);
+				result.setColSubMaxWidth(col,sizes[col]);
 				if(keys[col]!=null)
 				{	result.setLabelKey(0,col,keys[col],true);
 					Color bg = GuiTools.COLOR_TABLE_HEADER_BACKGROUND;
@@ -212,9 +212,9 @@ public class QuickstartData extends EntitledDataPanel implements MouseListener
 			int col = 0;
 			// name
 			{	// size
-				result.setSubColumnsMinWidth(col,fileWidth);
-				result.setSubColumnsPreferredWidth(col,fileWidth);
-				result.setSubColumnsMaxWidth(col,fileWidth);
+				result.setColSubMinWidth(col,fileWidth);
+				result.setColSubPreferredWidth(col,fileWidth);
+				result.setColSubMaxWidth(col,fileWidth);
 				// color
 				Color bg = GuiTools.COLOR_TABLE_NEUTRAL_BACKGROUND;
 				result.setLabelBackground(line,col,bg);
@@ -223,9 +223,9 @@ public class QuickstartData extends EntitledDataPanel implements MouseListener
 			}
 			// browse
 			{	// size
-				result.setSubColumnsMinWidth(col,browseWidth);
-				result.setSubColumnsPreferredWidth(col,browseWidth);
-				result.setSubColumnsMaxWidth(col,browseWidth);
+				result.setColSubMinWidth(col,browseWidth);
+				result.setColSubPreferredWidth(col,browseWidth);
+				result.setColSubMaxWidth(col,browseWidth);
 				// icon
 				String key = GuiKeys.MENU_OPTIONS_GAME_QUICKSTART_ROUND_BROWSE;
 				result.setLabelKey(line,col,key,true);

@@ -34,21 +34,24 @@ public class EntitledSubPanelTable extends EntitledSubPanel
 	{	super(width,height);
 
 		// init table
-		int margin = GuiTools.subPanelMargin;
 		remove(0);
 
-		add(Box.createRigidArea(new Dimension(margin,margin)),0);
+		add(Box.createRigidArea(new Dimension(GuiTools.subPanelMargin,GuiTools.subPanelMargin)),0);
 
-		int tableHeight = height - getTitleHeight() - margin;
+		setNewTable(colGroups,colSubs,lines);
+	}
+	
+	public UntitledSubPanelTable getTable()
+	{	return (UntitledSubPanelTable)getDataPanel();
+	}
+	
+	public void setNewTable(int colGroups, int colSubs, int lines)
+	{	int tableHeight = height - getTitleHeight() - GuiTools.subPanelMargin;
 		int tableWidth = width;
 		UntitledSubPanelTable tablePanel = new UntitledSubPanelTable(tableWidth,tableHeight,colGroups,colSubs,lines,false);
 		tablePanel.setOpaque(false);
 		setDataPanel(tablePanel);
 		remove(4); 	// remove glue
 		remove(2); 	// remove glue
-	}
-	
-	public UntitledSubPanelTable getTable()
-	{	return (UntitledSubPanelTable)getDataPanel();
 	}
 }

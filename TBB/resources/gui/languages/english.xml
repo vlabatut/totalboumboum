@@ -412,7 +412,6 @@
 						<text name="Bombings" value="Bombings"  tooltip="Number of players to explose in order to stop this tournament" />
 						<text name="Paintings" value="Paintings"  tooltip="Number of tiles to paint in order to stop this tournament" />
 						<text name="Time" value="Time"  tooltip="Maximum duration of this tournament" />
-						<text name="LastStanding" value="Players"  tooltip="The tournament end depends on the number of remaining players" />
 					</group>
 				</group>
 				
@@ -527,7 +526,6 @@
 						<text name="Bombings" value="Bombings"  tooltip="Number of players to explose in order to stop this match" />
 						<text name="Paintings" value="Paintings"  tooltip="Number of tiles to paint in order to stop this match" />
 						<text name="Time" value="Time"  tooltip="Maximum duration of this match" />
-						<text name="LastStanding" value="Players"  tooltip="The match end depends on the number of remaining players" />
 					</group>
 				</group>
 								

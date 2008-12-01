@@ -119,16 +119,16 @@ public class UntitledSubPanelTable extends SubPanel
 	private int colGroups = 0;
 	private int colSubs = 0;
 	
-	public void setSubColumnsMinWidth(int colSub, int width)
-	{	setSubColumnsWidth(colSub,width,0);		
+	public void setColSubMinWidth(int colSub, int width)
+	{	setColSubWidth(colSub,width,0);		
 	}
-	public void setSubColumnsPreferredWidth(int colSub, int width)
-	{	setSubColumnsWidth(colSub,width,1);		
+	public void setColSubPreferredWidth(int colSub, int width)
+	{	setColSubWidth(colSub,width,1);		
 	}
-	public void setSubColumnsMaxWidth(int colSub, int width)
-	{	setSubColumnsWidth(colSub,width,2);		
+	public void setColSubMaxWidth(int colSub, int width)
+	{	setColSubWidth(colSub,width,2);		
 	}
-	private void setSubColumnsWidth(int colSub, int width, int mode)
+	private void setColSubWidth(int colSub, int width, int mode)
 	{	Dimension headerDim = new Dimension(width,headerHeight);
 		Dimension lineDim = new Dimension(width,lineHeight);
 		int start = 0;
@@ -165,16 +165,16 @@ public class UntitledSubPanelTable extends SubPanel
 		}
 	}	
 
-	public void unsetSubColumnsMinWidth(int colSub)
-	{	unsetSubColumnsWidth(colSub,0);		
+	public void unsetColSubMinWidth(int colSub)
+	{	unsetColSubWidth(colSub,0);		
 	}
-	public void unsetSubColumnsPreferredWidth(int colSub)
-	{	unsetSubColumnsWidth(colSub,1);		
+	public void unsetColSubPreferredWidth(int colSub)
+	{	unsetColSubWidth(colSub,1);		
 	}
-	public void unsetSubColumnsMaxWidth(int colSub)
-	{	unsetSubColumnsWidth(colSub,2);		
+	public void unsetColSubMaxWidth(int colSub)
+	{	unsetColSubWidth(colSub,2);		
 	}
-	private void unsetSubColumnsWidth(int colSub, int mode)
+	private void unsetColSubWidth(int colSub, int mode)
 	{	for(int colGroup=0;colGroup<colGroups;colGroup++)
 			for(int line=0;line<lines;line++)
 			{	JLabel label = getLabel(line,colGroup,colSub);
@@ -193,9 +193,9 @@ public class UntitledSubPanelTable extends SubPanel
 	}
 
 	public ArrayList<JLabel> getColumn(int col)
-	{	return getSubColumn(0,col);		
+	{	return getColSub(0,col);		
 	}
-	public ArrayList<JLabel> getSubColumn(int colGroup, int colSub)
+	public ArrayList<JLabel> getColSub(int colGroup, int colSub)
 	{	ArrayList<JLabel> result = new ArrayList<JLabel>();
 		for(int line=0;line<lines;line++)
 		{	JLabel label = getLabel(line,colGroup,colSub);
@@ -207,12 +207,18 @@ public class UntitledSubPanelTable extends SubPanel
 	public int getColumnCount()
 	{	return colGroups*colSubs;
 	}
+	public int getColGroupCount()
+	{	return colGroups;
+	}
+	public int getColSubCount()
+	{	return colSubs;
+	}
 	
 	public void addColumn(int index)
-	{	addSubColumn(index);
+	{	addColSub(index);
 	}
 
-	public void addSubColumn(int subIndex)
+	public void addColSub(int subIndex)
 	{	colSubs++;
 		int start = 0;
 	
@@ -250,7 +256,46 @@ public class UntitledSubPanelTable extends SubPanel
 
 		updateLayout();
 	}
+
+	public void addColGroup(int groupIndex)
+	{	colGroups++;
+		int start = 0;
 	
+		// header
+		if(header)
+		{	start = 1;
+			for(int sub=0;sub<colSubs;sub++)
+			{	int index = sub+groupIndex*colSubs;
+				String txt = null;
+				JLabel lbl = new JLabel(txt);
+				lbl.setFont(headerFont);
+				lbl.setHorizontalAlignment(SwingConstants.CENTER);
+				lbl.setBackground(GuiTools.COLOR_TABLE_HEADER_BACKGROUND);
+				lbl.setForeground(GuiTools.COLOR_TABLE_HEADER_FOREGROUND);
+				lbl.setOpaque(true);
+				add(lbl,index);
+			}
+		}
+		
+		//data
+		for(int line=start;line<lines;line++)
+		{	for(int sub=0;sub<colSubs;sub++)
+			{	int index = sub+groupIndex*colSubs;
+				String txt = null;
+				JLabel lbl = new JLabel(txt);
+				lbl.setFont(lineFont);
+				lbl.setHorizontalAlignment(SwingConstants.CENTER);
+				lbl.setBackground(GuiTools.COLOR_TABLE_NEUTRAL_BACKGROUND);
+				lbl.setForeground(GuiTools.COLOR_TABLE_REGULAR_FOREGROUND);
+				lbl.setOpaque(true);
+				int idx = index+line*getColumnCount();
+				add(lbl,idx);
+			}
+		}
+
+		updateLayout();
+	}
+
 	public void setColumnKeys(int col, ArrayList<String> keys, ArrayList<Boolean> imageFlags)
 	{	setColumnKeys(0,col,keys,imageFlags);
 	}
@@ -320,6 +365,10 @@ public class UntitledSubPanelTable extends SubPanel
 	// LINES			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	private int lines = 0;
+
+	public int getLineCount()
+	{	return lines;
+	}
 
 	public ArrayList<JLabel> getLine(int index)
 	{	ArrayList<JLabel> result = new ArrayList<JLabel>();

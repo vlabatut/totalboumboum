@@ -25,8 +25,8 @@ import java.awt.event.ActionEvent;
 
 import javax.swing.BoxLayout;
 
-import fr.free.totalboumboum.gui.common.panel.SplitMenuPanel;
-import fr.free.totalboumboum.gui.common.panel.data.InnerDataPanel;
+import fr.free.totalboumboum.gui.common.structure.panel.SplitMenuPanel;
+import fr.free.totalboumboum.gui.common.structure.panel.data.InnerDataPanel;
 
 public class ExploreData extends InnerDataPanel
 {	private static final long serialVersionUID = 1L;

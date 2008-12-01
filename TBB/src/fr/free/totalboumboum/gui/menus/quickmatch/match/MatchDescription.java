@@ -38,16 +38,15 @@ import fr.free.totalboumboum.configuration.Configuration;
 import fr.free.totalboumboum.configuration.GameConstants;
 import fr.free.totalboumboum.configuration.profile.Portraits;
 import fr.free.totalboumboum.configuration.profile.Profile;
-import fr.free.totalboumboum.game.limit.Limit;
+import fr.free.totalboumboum.game.limit.MatchLimit;
 import fr.free.totalboumboum.game.match.Match;
-import fr.free.totalboumboum.game.points.PointsProcessor;
-import fr.free.totalboumboum.gui.common.panel.SplitMenuPanel;
-import fr.free.totalboumboum.gui.common.panel.data.EntitledDataPanel;
-import fr.free.totalboumboum.gui.common.subpanel.EntitledSubPanelTable;
-import fr.free.totalboumboum.gui.common.subpanel.SubPanel;
-import fr.free.totalboumboum.gui.common.subpanel.UntitledSubPanelTable;
+import fr.free.totalboumboum.gui.common.content.subpanel.LimitsSubPanel;
+import fr.free.totalboumboum.gui.common.content.subpanel.PointsSubPanel;
+import fr.free.totalboumboum.gui.common.structure.panel.SplitMenuPanel;
+import fr.free.totalboumboum.gui.common.structure.panel.data.EntitledDataPanel;
+import fr.free.totalboumboum.gui.common.structure.subpanel.SubPanel;
+import fr.free.totalboumboum.gui.common.structure.subpanel.UntitledSubPanelTable;
 import fr.free.totalboumboum.gui.data.configuration.GuiConfiguration;
-import fr.free.totalboumboum.gui.game.round.description.RoundDescription;
 import fr.free.totalboumboum.gui.tools.GuiKeys;
 import fr.free.totalboumboum.gui.tools.GuiTools;
 
@@ -60,16 +59,9 @@ public class MatchDescription extends EntitledDataPanel implements MouseListener
 	private ArrayList<String> controlTooltips = new ArrayList<String>();
 	
 	private JPanel rightPanel;
-	private int selectedRow = -1;
 	
-	@SuppressWarnings("unused")
-	private static final int LIMITS_PANEL_INDEX = 0;
-	private EntitledSubPanelTable limitsPanel;
-	
-	private static final int POINTS_PANEL_INDEX = 2;
-	private EntitledSubPanelTable pointsPanel;
-	private int pointsHeight;
-	private int pointsWidth;
+	private LimitsSubPanel<MatchLimit> limitsPanel;
+	private PointsSubPanel pointsPanel;
 	
 	public MatchDescription(SplitMenuPanel container)
 	{	super(container);
@@ -107,17 +99,15 @@ public class MatchDescription extends EntitledDataPanel implements MouseListener
 				int downHeight = dataHeight - upHeight - margin;
 				
 				// limit panel
-				{	SubPanel limitsPanel = RoundDescription.makeLimitsPanel(this,rightWidth,downHeight,match.getLimits(),GuiKeys.MATCH);
+				{	SubPanel limitsPanel = new LimitsSubPanel<MatchLimit>(rightWidth,downHeight,match.getLimits(),GuiKeys.MATCH);
 					rightPanel.add(limitsPanel);
 				}
 
 				rightPanel.add(Box.createVerticalGlue());
 				
 				// points panel
-				{	pointsWidth = rightWidth;
-					pointsHeight = downHeight;
-					rightPanel.add(new JPanel()); // dummy
-					selectLimit(0);
+				{	pointsPanel = limitsPanel.makePointsPanel(rightWidth,downHeight);
+					rightPanel.add(pointsPanel);
 //					SubPanel pointsPanel = RoundDescription.makePointsPanel(this,rightWidth,downHeight,match.getPointProcessor(),GuiKeys.MATCH);
 //					rightPanel.add(pointsPanel);
 				}
@@ -159,8 +149,8 @@ public class MatchDescription extends EntitledDataPanel implements MouseListener
 				playersPanel.setLabelKey(0,i,keys[i-1],true);
 		}
 		// empty
-		{	playersPanel.setSubColumnsPreferredWidth(2,ctrlColWidth);
-			playersPanel.setSubColumnsMaxWidth(3,Integer.MAX_VALUE);
+		{	playersPanel.setColSubPreferredWidth(2,ctrlColWidth);
+			playersPanel.setColSubMaxWidth(3,Integer.MAX_VALUE);
 		}
 		// data
 		{	ArrayList<Profile> players = match.getProfiles();
@@ -352,20 +342,6 @@ public class MatchDescription extends EntitledDataPanel implements MouseListener
 	public void mousePressed(MouseEvent e)
 	{	JLabel label = (JLabel)e.getComponent();
 		int[] pos = playersPanel.getLabelPositionSimple(label);
-		// limits panel
-		if(pos[0]==-1)
-		{	pos = limitsPanel.getTable().getLabelPositionSimple(label);
-			// unselect
-			if(selectedRow!=-1)
-			{	limitsPanel.getTable().setLabelBackground(selectedRow,0,GuiTools.COLOR_TABLE_HEADER_BACKGROUND);
-				limitsPanel.getTable().setLabelBackground(selectedRow,1,GuiTools.COLOR_TABLE_REGULAR_BACKGROUND);
-				selectedRow = -1;
-			}		
-			// select
-			selectLimit(pos[0]);
-		}
-		// players panel
-		else
 		{	// controls
 			if(pos[1]==2)
 			{	ArrayList<Profile> profiles = Configuration.getGameConfiguration().getTournament().getCurrentMatch().getProfiles();
@@ -389,20 +365,4 @@ public class MatchDescription extends EntitledDataPanel implements MouseListener
 	public void mouseReleased(MouseEvent e)
 	{	
 	}
-
-	private void selectLimit(int row)
-	{	// paint line
-		selectedRow = row;
-		limitsPanel.getTable().setLabelBackground(selectedRow,0,GuiTools.COLOR_TABLE_SELECTED_DARK_BACKGROUND);
-		limitsPanel.getTable().setLabelBackground(selectedRow,1,GuiTools.COLOR_TABLE_SELECTED_BACKGROUND);
-		// update points panel
-		Match match = Configuration.getGameConfiguration().getTournament().getCurrentMatch();			
-		Limit limit = match.getLimits().getLimit(row);
-		PointsProcessor pp = limit.getPointProcessor();
-		pointsPanel = RoundDescription.makePointsPanel(pointsWidth,pointsHeight,pp,GuiKeys.MATCH);
-		rightPanel.remove(POINTS_PANEL_INDEX);
-		rightPanel.add(pointsPanel,POINTS_PANEL_INDEX);
-		validate();
-		repaint();
-	}	
 }
