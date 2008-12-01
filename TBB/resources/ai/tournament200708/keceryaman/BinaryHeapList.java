@@ -68,7 +68,7 @@ public class BinaryHeapList {
 		return list.contains(node);
 	}
 	
-	// TODO
+	// 
 	public void compare(Node node,Node parent){
 		int length = length();
 		int i = 1;
