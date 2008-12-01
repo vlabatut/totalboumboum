@@ -1,4 +1,4 @@
-package fr.free.totalboumboum.gui.common.subpanel;
+package fr.free.totalboumboum.gui.common.structure.subpanel;
 
 import java.awt.Component;
 import java.awt.Dimension;

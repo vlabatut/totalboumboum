@@ -1,4 +1,4 @@
-package fr.free.totalboumboum.gui.common.panel.menu;
+package fr.free.totalboumboum.gui.common.structure.panel.menu;
 
 /*
  * Total Boum Boum
@@ -22,8 +22,8 @@ package fr.free.totalboumboum.gui.common.panel.menu;
  */
 
 import fr.free.totalboumboum.gui.common.ButtonAware;
-import fr.free.totalboumboum.gui.common.panel.ContentPanel;
-import fr.free.totalboumboum.gui.common.panel.SplitMenuPanel;
+import fr.free.totalboumboum.gui.common.structure.panel.ContentPanel;
+import fr.free.totalboumboum.gui.common.structure.panel.SplitMenuPanel;
 import fr.free.totalboumboum.gui.menus.main.MainFrame;
 
 public abstract class InnerMenuPanel extends ContentPanel implements ButtonAware
