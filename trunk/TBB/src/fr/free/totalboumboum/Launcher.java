@@ -625,37 +625,8 @@ public class Launcher
 	/*
 	 * TODO
 	 * 
-	 * + beta.008
-	 * - modification : utilisation d'une image plus foncée pour les fonds de tous les menus sauf le principal
-	 * - modification : correction de quelques bugs dans l'API des IA
-	 * - modification : réorganisation de la gestion des controles
-	 * - nouveauté : écran de configuration des controles
-	 * - nouveauté : enregistrement de la modification des controles
-	 * - modification : mise à jour de la police de caractères du jeu
-	 * - nouveauté : affichage du type de joueur dans la présentation des tournois et matches
-	 * - nouveauté : possibilité de choisir les commandes des joueurs dans la présentation des matches
-	 * - modification : découpage modulaire de la configuration
-	 * - nouveauté : possibilité de configurer les options graphiques depuis la GUI
-	 * - nouveauté : redémarrage de l'application quand on modifie la résolution
-	 * - nouveauté : configuration des paramètres avancés
-	 * - nouveauté : visualisation et édition des profils
-	 * - modification : informations légales dans le splashscreen
-	 * - nouveauté : personnage : shirobon de SBM5
-	 * - nouveauté : personnage : assistant pirate de SBM5
-	 * - nouveauté : traduction des couleurs dans l'interface
-	 * - nouveauté : visualisation des IA
-	 * - nouveauté : possibilité de ranger les 16 couleurs par ordre de préférence (au lieu de définir une seule couleur dans son profil)
-	 * - nouveauté : visualisation des personnages
-	 * - nouveauté : visualisation des niveaux
-	 * - nouveauté : sélection des joueurs avant une partie rapide
-	 * - modification : dans la police de caractères : i minuscule et barre du sept
-	 * - nouveauté : visualisation des matches
-	 * - modification : calcul du nombre de joueurs nécessaires pour un match et pour un round
-	 * - modification : un pointprocesssor par limite
-	 * - modification : fonctions toString pour visualiser les sprites dans l'API pour l'IA
-	 * - correction : bug graphique sur la progress bar lors du chargement d'un round
-	 * - nouveauté : configuration du round rapide
-	 * - modification : simplification du profil, impossible de définir plus couleurs dorénavant
+	 * + beta.009
+	 * - xxx
 	 * 
 	 * *******************************************************
 	 * *********************** A FAIRE ***********************
