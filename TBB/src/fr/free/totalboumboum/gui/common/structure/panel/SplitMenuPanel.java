@@ -1,4 +1,4 @@
-package fr.free.totalboumboum.gui.common.panel;
+package fr.free.totalboumboum.gui.common.structure.panel;
 
 /*
  * Total Boum Boum
@@ -24,8 +24,8 @@ package fr.free.totalboumboum.gui.common.panel;
 import java.awt.BorderLayout;
 
 import fr.free.totalboumboum.gui.common.MenuContainer;
-import fr.free.totalboumboum.gui.common.panel.menu.InnerMenuPanel;
-import fr.free.totalboumboum.gui.common.panel.menu.MenuPanel;
+import fr.free.totalboumboum.gui.common.structure.panel.menu.InnerMenuPanel;
+import fr.free.totalboumboum.gui.common.structure.panel.menu.MenuPanel;
 
 public abstract class SplitMenuPanel extends MenuPanel implements MenuContainer
 {	private static final long serialVersionUID = 1L;
