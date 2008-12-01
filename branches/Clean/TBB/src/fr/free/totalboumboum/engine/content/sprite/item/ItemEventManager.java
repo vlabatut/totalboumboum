@@ -62,7 +62,7 @@ public class ItemEventManager extends EventManager
 	}
 		
 	private void actionGather(ActionEvent event)
-	{	//NOTE traitement effectué par l'itemMgr du sprite qui ramasse
+	{	//
 	}
 		
 /*

@@ -69,7 +69,7 @@ public class SequenceTournament extends AbstractTournament
 		if(randomOrder)
 			randomizeMatches();
 		
-		// NOTE vérifier si le nombre de joueurs sélectionnés correspond
+		// 
 		addProfiles(selected);
 		iterator = matches.iterator();
 		stats = new StatisticTournament(this);
@@ -171,8 +171,6 @@ public class SequenceTournament extends AbstractTournament
 	@Override
 	public void updatePlayerNumber()
 	{	
-		// TODO charger partiellement tous les matches 
-		// pour déterminer le nombre de joueurs nécessaire
 	}
 
 	/////////////////////////////////////////////////////////////////

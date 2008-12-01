@@ -99,10 +99,8 @@ public abstract class AiManager extends AbstractAiManager<Integer>
     	Sprite sprite = player.getSprite();
     	
     	// état du shrink
-//NOTE à compléter    	
     	timeBeforeShrink = Long.MAX_VALUE;
     	// position du prochain bloc shrinké
-//NOTE à compléter    	
     	nextShrinkPosition = new int[2];
     	nextShrinkPosition[0] = 0;
     	nextShrinkPosition[1] = 0;

@@ -111,7 +111,7 @@ public class GuiMenu extends InnerMenuPanel
 			}
 			if(restart)
 				getFrame().restart();
-//TODO propager éventuellement au round (car il n'y a pas modification mais remplacement, donc si c déjà affecté à un player..
+//
 			else
 				replaceWith(parent);
 	    }

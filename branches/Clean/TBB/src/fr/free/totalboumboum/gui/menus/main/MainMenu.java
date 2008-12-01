@@ -57,7 +57,7 @@ public class MainMenu extends SimpleMenuPanel
 	private BufferedImage image;
 
 	private MenuPanel tournamentMainPanel;
-	private MenuPanel quickmatchGamePanel;
+	private PlayersSplitPanel quickmatchGamePanel;
 	
 	@SuppressWarnings("unused")
 	private JButton buttonOptions;
@@ -97,6 +97,7 @@ buttonStats.setEnabled(false);
 buttonAbout.setEnabled(false);
 		add(Box.createRigidArea(new Dimension(0,GuiTools.buttonVerticalSpace)));
 		buttonTournament = GuiTools.createButton(GuiKeys.MENU_MAIN_BUTTON_TOURNAMENT,buttonWidth,buttonHeight,fontSize,this);
+buttonTournament.setEnabled(false);
 		buttonQuickMatch = GuiTools.createButton(GuiKeys.MENU_MAIN_BUTTON_QUICKMATCH,buttonWidth,buttonHeight,fontSize,this);
 		add(Box.createVerticalGlue());		
 	}
@@ -189,8 +190,15 @@ buttonAbout.setEnabled(false);
 					}
 				}
 				quickmatchGamePanel = new PlayersSplitPanel(getContainer(),this,selectedProfiles);
-			}			
-			replaceWith(quickmatchGamePanel);
+				replaceWith(quickmatchGamePanel);
+			}
+			else
+			{	MenuPanel matchPanel = quickmatchGamePanel.getMatchPanel();
+				if(matchPanel==null)
+					replaceWith(quickmatchGamePanel);
+				else
+					replaceWith(matchPanel);
+			}
 	    }
 	}
 	

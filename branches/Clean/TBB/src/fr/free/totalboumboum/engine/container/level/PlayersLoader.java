@@ -39,19 +39,6 @@ public class PlayersLoader
 {	
     public static Players loadPlayers(String folder) throws ParserConfigurationException, SAXException, IOException
 	{	
-    	/* 
-		 * NOTE tester ici si le level est suffisamment grand
-		 * NOTE faut qu'il y ait au moins une config, à définir dans XSD
-		 * attention, le numéro des joueurs ne doit pas dépasser maxPlayer-1
-		 * NOTE il faut tester qu'il y a bien autant de locations de que de players indiqué dans la situation
-		 */
-
-		/*
-		 * si le level ne supporte pas explicitement le nbre n de joueurs voulu,
-		 * on prend la config pour la taille au dessus, et on utilise les n premières
-		 * positions définies
-		 */
-
     	// init
 		Element root;
 		String schemaFolder = FileTools.getSchemasPath();

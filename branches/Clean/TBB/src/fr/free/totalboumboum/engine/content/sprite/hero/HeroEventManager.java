@@ -54,7 +54,7 @@ public class HeroEventManager extends EventManager
 	/** current interactive move direction*/
 	protected Direction controlDirection;
 	
-	// NOTE ï¿½ initialiser ï¿½ chaque rï¿½incarnation
+	// 
 	protected String explosedBy = null;
 
 	public HeroEventManager(Hero sprite)
@@ -126,7 +126,7 @@ if(explosedBy==null)
 			String statTarget = sprite.getPlayer().getFileName();
 			StatisticEvent statEvent = new StatisticEvent(statActor,statAction,statTarget,statTime);
 			sprite.addStatisticEvent(statEvent);
-			// player out NOTE à modifier pour autres PlayModes
+			// player out 
 //			if(sprite.getLoop().getPlayMode() == PlayMode.SURVIVAL)
 			{	Player player = sprite.getPlayer(); 
 				if(player!=null)
@@ -166,7 +166,7 @@ if(explosedBy==null)
 			controlDirection = controlDirection.drop(dir);
 		// gesture dependant
 		if(gesture.equals(GestureConstants.JUMPING) || gesture.equals(GestureConstants.LANDING))
-		{	//NOTE ici il faudra certainement distinguer ON et OFF
+		{	//
 			spriteDirection = controlDirection;
 			blockedDirection = controlDirection;
 			sprite.setGesture(gesture,spriteDirection,controlDirection,false);
@@ -466,7 +466,7 @@ if(explosedBy==null)
 		}
 		else
 		{
-			//NOTE programmer l'action (exï¿½cution retardï¿½e) quand ce sera possible
+			//
 		}
 		
 		
@@ -490,7 +490,7 @@ if(explosedBy==null)
 		}
 		else
 		{
-			//NOTE programmer l'action quand ce sera possible
+			//
 		}
 		
 		

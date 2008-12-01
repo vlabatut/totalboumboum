@@ -181,11 +181,11 @@ public class Profile
 		result.controlSettingsIndex = controlSettingsIndex;
 		result.name = name;
 		result.fileName = fileName;
-		result.portraits = portraits; //TODO copy
+		result.portraits = portraits; //
 		
 		result.spriteDefaultColor = spriteDefaultColor;
 		result.spriteSelectedColor = spriteSelectedColor;
-		result.spriteControl = spriteControl;//TODO copy
+		result.spriteControl = spriteControl;//
 		result.spriteFolder = spriteFolder;
 		result.spritePack = spritePack;
 		result.spriteName = spriteName;

@@ -113,11 +113,11 @@ buttonStatistics.setEnabled(false);
 		}
 		else if(tournament instanceof CupTournament)
 		{
-			// NOTE à compléter
+			// 
 		}
 		else if(tournament instanceof LeagueTournament)
 		{
-			// NOTE à compléter
+			// 
 		}
 		tournament.setPanel(this);
 	}

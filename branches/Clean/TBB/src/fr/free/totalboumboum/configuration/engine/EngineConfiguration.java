@@ -39,7 +39,6 @@ public class EngineConfiguration
 	private int fps;
 	private long milliPeriod;
 	private long nanoPeriod;
-	//NOTE speedcoeff à descendre au niveau de loop, car il peut dépendre du level
 	private double speedCoeff;
 
 	public void setAutoFps(boolean autoFps)

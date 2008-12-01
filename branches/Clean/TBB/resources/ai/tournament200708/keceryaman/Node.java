@@ -86,7 +86,6 @@ public class Node {
 		if (x>0){
 			leftValue = Map.getValue((x-1), y);
 		}
-		//TODO: change the number to the custom value
 		if ( topValue != 2 ){
 			int[] temp = {x,y-1};
 			if ( !AStar.isInClosedList(temp[0], temp[1]) )

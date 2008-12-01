@@ -53,4 +53,8 @@ public class PlayersSplitPanel extends SplitMenuPanel
 	public void paintComponent(Graphics g)
 	{	g.drawImage(image, 0, 0, null);
 	}
+	
+	public MenuPanel getMatchPanel()
+	{	return ((PlayersMenu)menuPart).getMatchPanel();
+	}
 }

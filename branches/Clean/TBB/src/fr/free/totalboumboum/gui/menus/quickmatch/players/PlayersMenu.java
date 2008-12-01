@@ -47,7 +47,7 @@ import fr.free.totalboumboum.gui.tools.GuiTools;
 public class PlayersMenu extends InnerMenuPanel
 {	private static final long serialVersionUID = 1L;
 	
-	private MatchSplitPanel matchSplitPanel;
+	private MatchSplitPanel matchSplitPanel = null;
 	private PlayersData profilesData;
 		
 	@SuppressWarnings("unused")
@@ -111,7 +111,7 @@ add(Box.createRigidArea(new Dimension(buttonWidth,buttonHeight)));
 	    }
 		else if(e.getActionCommand().equals(GuiKeys.MENU_QUICKMATCH_BUTTON_NEXT))
 		{	if(matchSplitPanel==null)
-			{	//TODO temporaire
+			{	//
 				try
 				{	Configuration.getGameConfiguration().loadQuickmatch();
 					AbstractTournament tournament = Configuration.getGameConfiguration().getTournament();
@@ -162,4 +162,8 @@ add(Box.createRigidArea(new Dimension(buttonWidth,buttonHeight)));
 //		getParent().paintComponents(g);
 		super.paintComponent(g);
     }
+	
+	public MenuPanel getMatchPanel()
+	{	return matchSplitPanel;		
+	}
 }

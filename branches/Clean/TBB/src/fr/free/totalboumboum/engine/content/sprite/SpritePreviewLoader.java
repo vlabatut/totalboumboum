@@ -34,7 +34,7 @@ public class SpritePreviewLoader
 	public static SpritePreview loadSpritePreview(String folder) throws ParserConfigurationException, SAXException, IOException, ClassNotFoundException
 	{	Element root = SpriteFactoryLoader.openFile(folder);
 		SpritePreview result = loadSpriteElement(root,folder);
-		result.setPack(null);//TODO à compléter en extrayant le pack du chemin folder
+		result.setPack(null);//
 		result.setFolder(new File(folder).getName());
 		return result;
 	}

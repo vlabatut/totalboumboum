@@ -37,19 +37,19 @@ public class CupTournament extends AbstractTournament
 
 	@Override
 	public void matchOver() {
-		// TODO Auto-generated method stub
+		// 
 		
 	}
 
 	@Override
 	public void finish() {
-		// TODO Auto-generated method stub
+		// 
 		
 	}
 
 	@Override
 	public Match getCurrentMatch() {
-		// TODO Auto-generated method stub
+		// 
 		return null;
 	}
 
@@ -58,31 +58,31 @@ public class CupTournament extends AbstractTournament
 			ParserConfigurationException, SAXException, IOException,
 			IllegalAccessException, NoSuchFieldException,
 			ClassNotFoundException {
-		// TODO Auto-generated method stub
+		// 
 		
 	}
 
 	@Override
 	public boolean isOver() {
-		// TODO Auto-generated method stub
+		// 
 		return false;
 	}
 
 	@Override
 	public boolean isReady() {
-		// TODO Auto-generated method stub
+		// 
 		return false;
 	}
 
 	@Override
 	public void progress() {
-		// TODO Auto-generated method stub
+		// 
 		
 	}
 
 	@Override
 	public void updatePlayerNumber() {
-		// TODO Auto-generated method stub
+		// 
 		
 	}
 	

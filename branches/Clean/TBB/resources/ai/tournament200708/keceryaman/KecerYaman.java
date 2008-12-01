@@ -103,7 +103,7 @@ public class KecerYaman extends ArtificialIntelligence {
 	
 	/**
 	 * Adds player positions to the map
-	 * TODO: Do not add dead players' positions
+	 * 
 	 */
 	private void addPlayersToMap (){
 		int playerCount = getPlayerCount();

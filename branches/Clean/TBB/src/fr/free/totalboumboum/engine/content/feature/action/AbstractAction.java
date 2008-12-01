@@ -347,7 +347,7 @@ public abstract class AbstractAction
 	 * 	<br>paramètre: restriction=N/D
 	 */
 	public static final String TRIGGER = "trigger";
-// TODO manque l'action d'immobiliser une bombe en déplacement	
+// 	
 
 	/** 
 	 * name of this action 

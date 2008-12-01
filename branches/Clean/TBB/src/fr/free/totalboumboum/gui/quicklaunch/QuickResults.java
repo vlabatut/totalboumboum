@@ -103,19 +103,6 @@ public class QuickResults extends JPanel
 		
 		// headers
 		{	String sc = null;
-/* TODO à adapter
-			switch(round.getPlayMode())
-			{	case CROWN:
-					sc = "Crowns";
-					break;
-				case PAINT:
-					sc = "Paints";
-					break;
-				case SURVIVAL:
-					sc = "Time";
-					break;
-			}
-*/			
 sc = "Time";
 			String names[] = 
 			{	"Player",
@@ -160,19 +147,6 @@ sc = "Time";
 					nf.setMaximumFractionDigits(2);
 					nf.setMinimumFractionDigits(0);
 					String sc = "";
-/*	TODO à adapter				
-					switch(round.getPlayMode())
-					{	case CROWN:
-							sc = nf.format(stats.getScores(Score.CROWNS)[orderedPlayers[i]]);
-							break;
-						case PAINT:
-							sc = nf.format(stats.getScores(Score.PAINTINGS)[orderedPlayers[i]]);
-							break;
-						case SURVIVAL:
-							sc = StringTools.formatTimeWithSeconds(stats.getScores(Score.TIME)[orderedPlayers[i]]);
-							break;
-					}
-*/					
 sc = StringTools.formatTimeWithSeconds(stats.getScores(Score.TIME)[orderedPlayers[i]]);
 					String[] scores = 
 					{	nf.format(stats.getScores(Score.BOMBS)[orderedPlayers[i]]),

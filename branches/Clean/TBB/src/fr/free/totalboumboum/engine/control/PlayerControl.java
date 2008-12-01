@@ -75,7 +75,7 @@ public class PlayerControl implements KeyListener
 
 	@Override
 	public void keyTyped(KeyEvent arg0)
-	{	// NOTE a priori inutile ici
+	{	// 
 	}
 	
 	private boolean finished = false;

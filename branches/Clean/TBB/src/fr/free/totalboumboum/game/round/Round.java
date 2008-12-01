@@ -164,7 +164,7 @@ public class Round implements StatisticHolder
 		{	stats.updateTime(time,this);			
 			if(getLimits().testLimit(this))
 				closeGame();
-//			else TODO à voir quand on s'occupera d'afficher les points en temps réel dans la GUI
+//			else 
 //				stats.computePoints(getPointProcessor());
 		}
 	}

@@ -65,7 +65,7 @@ public class GameData extends InnerDataPanel
 	}
 
 	public void refresh()
-	{	// NOTE à compléter
+	{	// 
 	}
 
 	@Override

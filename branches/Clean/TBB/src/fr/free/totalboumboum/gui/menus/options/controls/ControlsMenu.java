@@ -133,7 +133,7 @@ public class ControlsMenu extends InnerMenuPanel
 			catch (NoSuchFieldException e1)
 			{	e1.printStackTrace();
 			}
-//TODO propager éventuellement au round (car il n'y a pas modification mais remplacement, donc si c déjà affecté à un player..
+//
 			replaceWith(parent);
 	    }
 		else if(e.getActionCommand().equals(GuiKeys.MENU_OPTIONS_BUTTON_CANCEL))

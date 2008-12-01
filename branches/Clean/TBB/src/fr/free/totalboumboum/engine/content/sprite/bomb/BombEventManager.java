@@ -315,8 +315,6 @@ public class BombEventManager extends EventManager
 			}
 			else
 			{
-				//NOTE prévoir le cas où la bombe ne peut pas péter, il faut le remettre au prochain instant
-				// sauf que certains états prévoient une réinit du timer au changement d'état (ex : bouncing)
 			}
 		}
 		// explosion-caused explosion

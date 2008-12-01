@@ -178,7 +178,7 @@ public class TrajectoryManager
 			if(totalDuration == 0)
 			{	isTerminated = true;
 				forcedDurationCoeff = 1;
-				sprite.processEvent(new EngineEvent(EngineEvent.TRAJECTORY_OVER)); //NOTE pertinent ?
+				sprite.processEvent(new EngineEvent(EngineEvent.TRAJECTORY_OVER)); //
 			}
 			else
 			{	isTerminated = false;
@@ -216,9 +216,6 @@ public class TrajectoryManager
 			// update forced shifts
 			if(forcedPositionTime>0)
 				correctForcedShifts();
-			/* NOTE en cas de trajectoire repeat : 
-			 * ne faut-il pas réinitialiser la position forcée à chaque répétition ?
-			 */
 		}
 	}
 
@@ -282,9 +279,6 @@ public class TrajectoryManager
 		double gapX = theoreticalX - currentPosX;
 		double gapY = theoreticalY - currentPosY;
 		double gapZ = theoreticalZ - currentPosZ;
-		/* TODO on pourrait échelonner la correction, mais on choisit l'approche brutale
-		 * quitte à affiner par la suite si nécessaire
-		 */
 		currentPosX = currentPosX + gapX;
 		currentPosY = currentPosY + gapY;
 		currentPosZ = currentPosZ + gapZ;
@@ -512,7 +506,7 @@ if(moveDir!=Direction.NONE)
 					boolean autorization = neighbour.answerAndRequest(req);
 					if(!autorization && moveXDir==dir)
 					{	//currentPosX = tile.getPosX();
-						currentPosX = previousPosX; //NOTE cf la note plus bas
+						currentPosX = previousPosX; //
 						sprite.putEvent(new Event(Event.ENV_BLOCKED_PATH));
 					}
 				}
@@ -531,12 +525,6 @@ if(moveDir!=Direction.NONE)
 					boolean autorization = neighbour.answerAndRequest(req);
 					if(!autorization && moveYDir==dir)
 					{	//currentPosY = tile.getPosY();
-						// NOTE pour éviter les pb avec les bombes : 
-						// quand on sort et qu'on revient en arrière, ça téléporte à la bonne position... 
-						// on suppose maintenant qu'on ne fera pas de déplacement trop important, 
-						// sinon le bonhomme se retrouvera bloqué loin de l'obstacle, en fait. 
-						// et faudrait recalculer sa position
-						//
 						currentPosY = previousPosY;
 						sprite.putEvent(new Event(Event.ENV_BLOCKED_PATH));
 					}
@@ -598,7 +586,7 @@ if(moveDir!=Direction.NONE)
 		
 		
 		// normalizing an absolute position (if not bound)
-			//NOTE à placer avant, non ?
+			//
 		if(!isBoundToSprite())
 		{	double temp[] = sprite.getLevel().normalizePosition(currentPosX, currentPosY);
 			currentPosX = temp[0];
@@ -611,10 +599,7 @@ if(moveDir!=Direction.NONE)
 		
 		// normalizing height at the end of an air move
 		if(isTerminated)
-		{	/* FIXME grosssssse bidouille:
-			 * avec les calculs il arrive que le z ne revienne pas à zéro après un saut.
-			 */
-			if(CalculusTools.isRelativelyEqualTo(currentPosZ,0,sprite.getLoop()))
+		{	if(CalculusTools.isRelativelyEqualTo(currentPosZ,0,sprite.getLoop()))
 				currentPosZ = 0;
 			//
 			if(hasFlied && currentPosZ==0)
@@ -971,9 +956,6 @@ else
 ThirdPermission permission = tempSprite.getThirdPermission(specificAction);
 result = permission==null;
 
-/* FIXME grosse bidouille pour éviter qu'une bombe qui vient d'être posée ne bloque un joueur.
- * à rectifier !
- */ 
 if(sprite instanceof Hero && tempSprite instanceof Bomb && sprite.getTile()==tempSprite.getTile())
 	result=false;
 
@@ -1030,16 +1012,6 @@ if(sprite instanceof Hero && tempSprite instanceof Bomb && sprite.getTile()==tem
 	private void testCollisionsComposite(ArrayList<Sprite> sprites, Direction moveDir, Sprite newCollidedSprites[])
 	{	
 		
-/*
- * TODO very ugly workaround 
- * problem description : 
- * 		in some fancy graphical definitions and/or speeds, 
- * 		player gets blocked at crossroads when moving in a composite direction
- * cause :
- * 		the sprite doesn't pass by central the location of the tile
- * workaround :
- * 		if this center is on the sprite trajectory, its location is rounded to this center 		
- */
 double tileX = sprite.getTile().getPosX();
 double tileY = sprite.getTile().getPosY();
 if((moveDir.getHorizontalPrimary()==Direction.RIGHT && tileX>previousPosX && tileX<currentPosX)
@@ -1099,7 +1071,6 @@ if((moveDir.getVerticalPrimary()==Direction.DOWN && tileY>previousPosY && tileY<
 					newCollidedSprites[1] = temp;
 				}
 			}
-			//NOTE faudrait p-ê un else ici ? ou pas, pr le cas où on est dans un obstacle
 			if(hDir!=Direction.NONE && isClose(distYP,true) && distXC<distXP)
 			{	int dir = hDir.getIntFromDirection()[0];
 				hDir = Direction.NONE;
@@ -1178,10 +1149,6 @@ if((moveDir.getVerticalPrimary()==Direction.DOWN && tileY>previousPosY && tileY<
 					else 
 						newPosX = temp.getCurrentPosX()+d;
 				}
-				// on ne modifie l'ancienne direction que si le sprite est suffisament loin du centre de l'obstacle
-				/* NOTE l'aide à la navigation est ici. à ne réserver qu'aux sprites heros ? (pas bombes et autres)... 
-				 * de toute façon, ils ne devraient jamais en avoir besoin, car ils sont censés être parfaitement centrés 
-				 */
 				if(Math.abs(delta1)>scaledTileDim/4 && help)
 				{	//de plus, il faut que le passage dans la nouvelle direction soit dégagé, sinon c'est pas la peine de bouger
 					double dir = delta1/Math.abs(delta1);
@@ -1253,7 +1220,7 @@ if((moveDir.getVerticalPrimary()==Direction.DOWN && tileY>previousPosY && tileY<
 		}
 		if(debug)
 			System.out.println("newDir:"+newDir);					
-		//NOTE if & else sont pareils ?
+		//
 		if(newDir == Direction.NONE)
 		{	currentPosX = newPosX;
 			currentPosY = newPosY;
@@ -1320,9 +1287,7 @@ if(sprite instanceof Hero)
 	}
 	
 	private void updateCollidedSprites(Sprite newCollidedSprites[])
-	{	//NOTE faut-il distinquer les changements de direction ?
-
-		
+	{	
 /*		
 //		if(newCollidedSprites.size()>0)
 //			System.out.println("->"+newCollidedSprites.size());

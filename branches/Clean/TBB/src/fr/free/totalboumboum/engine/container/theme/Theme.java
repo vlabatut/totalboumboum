@@ -60,7 +60,6 @@ public class Theme
 	
 	public Block makeBlock(String name)
 	{	Block result = blocks.get(name).makeSprite();
-//NOTE dans ce type de méthode, il faut tester si le nom passé en paramètre a bien été trouvé !	
 		result.initGesture();
 		return result;
 	}

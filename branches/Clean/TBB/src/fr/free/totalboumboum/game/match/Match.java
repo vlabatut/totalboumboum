@@ -65,7 +65,7 @@ public class Match implements StatisticHolder
 	{	// are rounds in random order ?
     	if(randomOrder)
     		randomizeRounds();
-		// NOTE vérifier si le nombre de joueurs sélectionnés correspond
+		// 
 		// profiles
     	int i = 1;
     	this.profiles.addAll(profiles);

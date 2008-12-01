@@ -146,7 +146,7 @@ public class SpecificAction extends AbstractAction
 	}
 	
 	private void updateGeneralAction()
-	{	//NOTE à virer car remplacé par allowAction dans permission ?
+	{	//
 		generalAction = new GeneralAction(name);
 		generalAction.addActor(actor.getClass());
 		generalAction.addDirection(direction);

@@ -120,7 +120,6 @@ public abstract class Sprite
 	
 	public Sprite getOwner()
 	{	return owner;
-		//NOTE à modifier pour recherche récursivement l'owner final (mais peut être est-ce déjà fait ailleurs)
 	}
 	public void setOwner(Sprite owner)
 	{	this.owner = owner;
@@ -219,11 +218,6 @@ public abstract class Sprite
 			itemManager.update();
 			animeManager.update();
 			trajectoryManager.update();
-			/*
-			 * NOTE : il est important que le trajectoryManager soit updaté en dernier
-			 * comme ça, un changement de case arrive après avoir traité tous les évènements
-			 * (raisons de synchro)
-			 */
 //System.out.println("sx,sy:"+getPositionX()+";"+getPositionY()+" - tx,ty:"+tile.getLine()+";"+tile.getCol());
 			Iterator<Sprite> i = boundSprites.iterator();
 			while(i.hasNext())

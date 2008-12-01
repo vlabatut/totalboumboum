@@ -254,11 +254,11 @@ public class Level
 	{	return isInsidePositionX(x) && isInsidePositionY(y);		
 	}
 	public boolean isInsidePositionX(double x)
-	{	//NOTE comparaison relative?
+	{	//
 		return x>=globalLeftX && x<=globalLeftX+globalWidth*getTileDimension();
 	}
 	public boolean isInsidePositionY(double y)
-	{	//NOTE comparaison relative?
+	{	//
 		return y>=globalUpY && y<=globalUpY+globalHeight*getTileDimension();
 	}
 	
@@ -329,7 +329,7 @@ public class Level
 			drawFPS(g);
 	}
 
-	//NOTE optimisation : à effectuer seulement pour les tiles visibles
+	//
 	private void drawLevel(Graphics g)
 	{	// only the on-ground flat sprites (they don't have shadow)
 		for(int line=0;line<globalHeight;line++)
