@@ -167,7 +167,6 @@ public class GuiKeys
 				public static final String MENU_RESOURCES_MATCH_SELECT_PREVIEW_AUTHOR = "MenuResourcesMatchSelectPreviewAuthor";
 				public static final String MENU_RESOURCES_MATCH_SELECT_PREVIEW_NAME = "MenuResourcesMatchSelectPreviewName";
 				public static final String MENU_RESOURCES_MATCH_SELECT_PREVIEW_PLAYERS = "MenuResourcesMatchSelectPreviewPlayers";
-				public static final String MENU_RESOURCES_MATCH_SELECT_PREVIEW_POINTS = "MenuResourcesMatchSelectPreviewPoints";
 				public static final String MENU_RESOURCES_MATCH_SELECT_PREVIEW_ROUNDS = "MenuResourcesMatchSelectPreviewRounds";
 		/* ROUND */
 			/* BUTTON */
@@ -184,7 +183,6 @@ public class GuiKeys
 				public static final String MENU_RESOURCES_ROUND_SELECT_PREVIEW_LEVEL_PACK = "MenuResourcesRoundSelectPreviewLevelPack";
 				public static final String MENU_RESOURCES_ROUND_SELECT_PREVIEW_NAME = "MenuResourcesRoundSelectPreviewName";
 				public static final String MENU_RESOURCES_ROUND_SELECT_PREVIEW_PLAYERS = "MenuResourcesRoundSelectPreviewPlayers";
-				public static final String MENU_RESOURCES_ROUND_SELECT_PREVIEW_POINTS = "MenuResourcesRoundSelectPreviewPoints";
 			
 	/* OPTIONS */
 		/* BUTTON */
@@ -372,25 +370,6 @@ public class GuiKeys
 	public static final String MENU_TOURNAMENT_BUTTON_SAVE_AS = MENU_TOURNAMENT_BUTTON+"SaveAs";
 	public static final String MENU_TOURNAMENT_BUTTON_START = MENU_TOURNAMENT_BUTTON+"Start";
 	
-	/* COLORS */
-	public static final String COLOR = "Color";
-	public static final String COLOR_BLACK = COLOR+"Black";
-	public static final String COLOR_BLUE = COLOR+"Blue";
-	public static final String COLOR_BROWN = COLOR+"Brown";
-	public static final String COLOR_CYAN = COLOR+"Cyan";
-	public static final String COLOR_GRASS = COLOR+"Grass";
-	public static final String COLOR_GREEN = COLOR+"Green";
-	public static final String COLOR_GREY = COLOR+"Grey";
-	public static final String COLOR_INDIGO = COLOR+"Indigo";
-	public static final String COLOR_ORANGE = COLOR+"Orange";
-	public static final String COLOR_PINK = COLOR+"Pink";
-	public static final String COLOR_PURPLE = COLOR+"Purple";
-	public static final String COLOR_RED = COLOR+"Red";
-	public static final String COLOR_RUST = COLOR+"Rust";
-	public static final String COLOR_ULTRAMARINE = COLOR+"Ultramarine";
-	public static final String COLOR_WHITE = COLOR+"White";
-	public static final String COLOR_YELLOW = COLOR+"Yellow";
-	
 	/////////////////////////////////////////////////////////////////
 	// GAME TOURNAMENT	/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
@@ -560,6 +539,41 @@ public class GuiKeys
 	// COMMON CONTENT	/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	public static final String COMMON = "Common";
+	/* COLORS */
+		public static final String COLOR = "Color";
+		public static final String COMMON_COLOR = COMMON+COLOR;
+		public static final String BLACK = "Black";
+		public static final String BLUE = "Blue";
+		public static final String BROWN = "Brown";
+		public static final String CYAN = "Cyan";
+		public static final String GRASS = "Grass";
+		public static final String GREEN = "Green";
+		public static final String GREY = "Grey";
+		public static final String INDIGO = "Indigo";
+		public static final String ORANGE = "Orange";
+		public static final String PINK = "Pink";
+		public static final String PURPLE = "Purple";
+		public static final String RED = "Red";
+		public static final String RUST = "Rust";
+		public static final String ULTRAMARINE = "Ultramarine";
+		public static final String WHITE = "White";
+		public static final String YELLOW = "Yellow";
+		public static final String COMMON_COLOR_BLACK = COMMON_COLOR+BLACK;
+		public static final String COMMON_COLOR_BLUE = COMMON_COLOR+BLUE;
+		public static final String COMMON_COLOR_BROWN = COMMON_COLOR+BROWN;
+		public static final String COMMON_COLOR_CYAN = COMMON_COLOR+CYAN;
+		public static final String COMMON_COLOR_GRASS = COMMON_COLOR+GRASS;
+		public static final String COMMON_COLOR_GREEN = COMMON_COLOR+GREEN;
+		public static final String COMMON_COLOR_GREY = COMMON_COLOR+GREY;
+		public static final String COMMON_COLOR_INDIGO = COMMON_COLOR+INDIGO;
+		public static final String COMMON_COLOR_ORANGE = COMMON_COLOR+ORANGE;
+		public static final String COMMON_COLOR_PINK = COMMON_COLOR+PINK;
+		public static final String COMMON_COLOR_PURPLE = COMMON_COLOR+PURPLE;
+		public static final String COMMON_COLOR_RED = COMMON_COLOR+RED;
+		public static final String COMMON_COLOR_RUST = COMMON_COLOR+RUST;
+		public static final String COMMON_COLOR_ULTRAMARINE = COMMON_COLOR+ULTRAMARINE;
+		public static final String COMMON_COLOR_WHITE = COMMON_COLOR+WHITE;
+		public static final String COMMON_COLOR_YELLOW = COMMON_COLOR+YELLOW;	
 	/* LIMIT */
 	public static final String COMMON_LIMIT = COMMON+LIMIT;
 		/* MATCH */
@@ -604,7 +618,7 @@ public class GuiKeys
 			public static final String COMMON_LIMIT_TOURNAMENT_HEADER_ITEMS = COMMON_LIMIT_TOURNAMENT_HEADER+ITEMS;
 			public static final String COMMON_LIMIT_TOURNAMENT_HEADER_PAINTINGS = COMMON_LIMIT_TOURNAMENT_HEADER+PAINTINGS;
 			public static final String COMMON_LIMIT_TOURNAMENT_HEADER_TIME = COMMON_LIMIT_TOURNAMENT_HEADER+TIME;
-	/* LIMIT */
+	/* POINTS */
 	public static final String COMMON_POINTS = COMMON+POINTS;
 		/* MATCH */
 		public static final String COMMON_POINTS_MATCH = COMMON_POINTS+MATCH;

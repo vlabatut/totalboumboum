@@ -219,7 +219,7 @@ public class PlayersData extends EntitledDataPanel implements MouseListener
 			{	// content
 				String colorKey = clr.toString();
 				colorKey = colorKey.toUpperCase().substring(0,1)+colorKey.toLowerCase().substring(1,colorKey.length());
-				colorKey = GuiKeys.COLOR+colorKey;
+				colorKey = GuiKeys.COMMON_COLOR+colorKey;
 				playersPanel.setLabelKey(line,COL_COLOR,colorKey,false);
 				// color
 				Color bg = new Color(color.getRed(),color.getGreen(),color.getBlue(),GuiTools.ALPHA_TABLE_REGULAR_BACKGROUND_LEVEL3);
@@ -405,7 +405,7 @@ public class PlayersData extends EntitledDataPanel implements MouseListener
 		{	// text
 			String colorKey = color.toString();
 			colorKey = colorKey.toUpperCase().substring(0,1)+colorKey.toLowerCase().substring(1,colorKey.length());
-			colorKey = GuiKeys.COLOR+colorKey;
+			colorKey = GuiKeys.COMMON_COLOR+colorKey;
 			String text = GuiConfiguration.getMiscConfiguration().getLanguage().getText(colorKey); 
 			String tooltip = text;
 			Color clr = color.getColor();
