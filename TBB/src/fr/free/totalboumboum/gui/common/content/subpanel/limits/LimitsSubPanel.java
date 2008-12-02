@@ -1,9 +1,10 @@
-package fr.free.totalboumboum.gui.common.content.subpanel;
+package fr.free.totalboumboum.gui.common.content.subpanel.limits;
 
 import java.awt.Color;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.text.NumberFormat;
+import java.util.ArrayList;
 import java.util.Iterator;
 
 import javax.swing.JLabel;
@@ -15,7 +16,6 @@ import fr.free.totalboumboum.game.limit.LimitPoints;
 import fr.free.totalboumboum.game.limit.LimitScore;
 import fr.free.totalboumboum.game.limit.LimitTime;
 import fr.free.totalboumboum.game.limit.Limits;
-import fr.free.totalboumboum.game.points.PointsProcessor;
 import fr.free.totalboumboum.gui.common.structure.subpanel.EntitledSubPanelTable;
 import fr.free.totalboumboum.gui.tools.GuiKeys;
 import fr.free.totalboumboum.gui.tools.GuiTools;
@@ -24,22 +24,20 @@ import fr.free.totalboumboum.tools.StringTools;
 public class LimitsSubPanel<T extends Limit> extends EntitledSubPanelTable implements MouseListener
 {	private static final long serialVersionUID = 1L;
 
-	private String type;
 	private String prefix;
 
-	public LimitsSubPanel(int width, int height, Limits<T> limits, String type)
+	public LimitsSubPanel(int width, int height, String type)
 	{	super(width,height,1,1,1);
 		
 		// init	
-		this.type = type;
 		this.prefix = GuiKeys.COMMON_LIMIT+type;
 		
 		// title
 		String titleKey = prefix+GuiKeys.TITLE;
 		setTitleKey(titleKey,true);
 		
-		// data
-		setLimits(limits);
+		// limits
+		setLimits(null);
 	}
 	
 	/////////////////////////////////////////////////////////////////
@@ -168,27 +166,15 @@ public class LimitsSubPanel<T extends Limit> extends EntitledSubPanelTable imple
 		selectedRow = row;
 		getTable().setLabelBackground(selectedRow,0,GuiTools.COLOR_TABLE_SELECTED_DARK_BACKGROUND);
 		getTable().setLabelBackground(selectedRow,1,GuiTools.COLOR_TABLE_SELECTED_BACKGROUND);
-		// update points panel
-		if(pointsPanel!=null)
-		{	Limit limit = limits.getLimit(row);
-			PointsProcessor pointsProcessor = limit.getPointProcessor();
-			pointsPanel.setPointsProcessor(pointsProcessor);
-		}
+		// update listeners
+		fireLimitSelectionChange();
 	}
 	
-	/////////////////////////////////////////////////////////////////
-	// POINTS PROCESSOR	/////////////////////////////////////////////
-	/////////////////////////////////////////////////////////////////
-	private PointsSubPanel pointsPanel;
-	
-	public PointsSubPanel makePointsPanel(int width, int height)
-	{	if(selectedRow!=-1)
-		{	Limit limit = limits.getLimit(selectedRow);
-			pointsPanel = new PointsSubPanel(width,height,limit.getPointProcessor(),type);
-		}
-		else
-			pointsPanel = new PointsSubPanel(width,height,null,type);
-		return pointsPanel;
+	public Limit getSelectedLimit()
+	{	Limit result = null;
+		if(selectedRow>-1 && limits!=null)
+			result = limits.getLimit(selectedRow);
+		return result;
 	}
 	
 	/////////////////////////////////////////////////////////////////
@@ -227,5 +213,24 @@ public class LimitsSubPanel<T extends Limit> extends EntitledSubPanelTable imple
 	@Override
 	public void mouseReleased(MouseEvent e)
 	{	
+	}
+
+	/////////////////////////////////////////////////////////////////
+	// LISTENERS		/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	private ArrayList<LimitsListener> listeners = new ArrayList<LimitsListener>();
+	
+	public void addListener(LimitsListener listener)
+	{	if(!listeners.contains(listener))
+			listeners.add(listener);		
+	}
+
+	public void removeListener(LimitsListener listener)
+	{	listeners.remove(listener);		
+	}
+	
+	private void fireLimitSelectionChange()
+	{	for(LimitsListener listener: listeners)
+			listener.limitSelectionChange();
 	}
 }

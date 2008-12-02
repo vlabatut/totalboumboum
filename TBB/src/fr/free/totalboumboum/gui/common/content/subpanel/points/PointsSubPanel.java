@@ -1,4 +1,4 @@
-package fr.free.totalboumboum.gui.common.content.subpanel;
+package fr.free.totalboumboum.gui.common.content.subpanel.points;
 
 import java.awt.Color;
 import java.awt.image.BufferedImage;
@@ -26,7 +26,7 @@ public class PointsSubPanel extends EntitledSubPanelTable
 
 	private String prefix;
 
-	public PointsSubPanel(int width, int height, PointsProcessor pointsProcessor, String type)
+	public PointsSubPanel(int width, int height, String type)
 	{	super(width,height,1,1,1);
 		
 		// init
@@ -36,7 +36,7 @@ public class PointsSubPanel extends EntitledSubPanelTable
 		String titleKey = prefix+GuiKeys.TITLE;
 		setTitleKey(titleKey,true);
 		
-		setPointsProcessor(pointsProcessor);
+		setPointsProcessor(null);
 	}
 		
 	/////////////////////////////////////////////////////////////////

@@ -24,7 +24,6 @@ package fr.free.totalboumboum.gui.game.round.description;
 import java.awt.Color;
 import java.awt.Component;
 import java.awt.Dimension;
-import java.awt.Font;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.text.NumberFormat;
@@ -33,10 +32,7 @@ import java.util.Iterator;
 
 import javax.swing.Box;
 import javax.swing.BoxLayout;
-import javax.swing.ImageIcon;
-import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.SwingConstants;
 import javax.xml.parsers.ParserConfigurationException;
 
 import org.xml.sax.SAXException;
@@ -50,10 +46,14 @@ import fr.free.totalboumboum.engine.container.level.LevelPreview;
 import fr.free.totalboumboum.engine.container.level.LevelPreviewLoader;
 import fr.free.totalboumboum.engine.container.zone.Zone;
 import fr.free.totalboumboum.engine.content.sprite.SpritePreview;
+import fr.free.totalboumboum.game.limit.Limit;
 import fr.free.totalboumboum.game.limit.RoundLimit;
+import fr.free.totalboumboum.game.points.PointsProcessor;
 import fr.free.totalboumboum.game.round.Round;
-import fr.free.totalboumboum.gui.common.content.subpanel.LimitsSubPanel;
-import fr.free.totalboumboum.gui.common.content.subpanel.PointsSubPanel;
+import fr.free.totalboumboum.gui.common.content.subpanel.image.ImageSubPanel;
+import fr.free.totalboumboum.gui.common.content.subpanel.limits.LimitsListener;
+import fr.free.totalboumboum.gui.common.content.subpanel.limits.LimitsSubPanel;
+import fr.free.totalboumboum.gui.common.content.subpanel.points.PointsSubPanel;
 import fr.free.totalboumboum.gui.common.structure.panel.SplitMenuPanel;
 import fr.free.totalboumboum.gui.common.structure.panel.data.EntitledDataPanel;
 import fr.free.totalboumboum.gui.common.structure.subpanel.EntitledSubPanelTable;
@@ -63,12 +63,13 @@ import fr.free.totalboumboum.gui.tools.GuiKeys;
 import fr.free.totalboumboum.gui.tools.GuiTools;
 import fr.free.totalboumboum.tools.ImageTools;
 
-public class RoundDescription extends EntitledDataPanel
+public class RoundDescription extends EntitledDataPanel implements LimitsListener
 {	
 	private static final long serialVersionUID = 1L;
 	private static final float SPLIT_RATIO = 0.4f;
 
 	private JPanel downPanel;
+	private ImageSubPanel imagePanel;
 	
 	private LimitsSubPanel<RoundLimit> limitsPanel;
 	private PointsSubPanel pointsPanel;
@@ -77,8 +78,9 @@ public class RoundDescription extends EntitledDataPanel
 	{	super(container);
 	
 		// title
-		String key = GuiKeys.GAME_ROUND_DESCRIPTION_TITLE;
-		setTitleKey(key);
+		{	String key = GuiKeys.GAME_ROUND_DESCRIPTION_TITLE;
+			setTitleKey(key);
+		}
 	
 		// data
 		{	Round round = Configuration.getGameConfiguration().getTournament().getCurrentMatch().getCurrentRound();
@@ -120,11 +122,14 @@ public class RoundDescription extends EntitledDataPanel
 				leftPanel.setMinimumSize(dim);
 				leftPanel.setMaximumSize(dim);
 				
-				// preview label
+				// image panel
 				{	int innerHeight = leftWidth;
-					JLabel previewLabel = makePreviewLabel(leftWidth,innerHeight,preview);
-					previewLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
-					leftPanel.add(previewLabel);
+					imagePanel = new ImageSubPanel(leftWidth,innerHeight);
+					BufferedImage image = preview.getVisualPreview();
+					String key = GuiKeys.GAME_ROUND_DESCRIPTION_PREVIEW_TITLE+GuiKeys.TOOLTIP;
+					String tooltip = GuiConfiguration.getMiscConfiguration().getLanguage().getText(key);
+					imagePanel.setImage(image,tooltip);
+					leftPanel.add(imagePanel);
 				}
 
 				leftPanel.add(Box.createVerticalGlue());
@@ -195,15 +200,17 @@ public class RoundDescription extends EntitledDataPanel
 					int innerWidth = (rightWidth - margin)/2;
 					
 					// limits panel
-					{	limitsPanel = new LimitsSubPanel<RoundLimit>(innerWidth,downHeight,round.getLimits(),GuiKeys.ROUND);
+					{	limitsPanel = new LimitsSubPanel<RoundLimit>(innerWidth,downHeight,GuiKeys.ROUND);
+						limitsPanel.addListener(this);
 						downPanel.add(limitsPanel);
 					}
 					
 					downPanel.add(Box.createHorizontalGlue());
 
 					// points panel
-					{	pointsPanel = limitsPanel.makePointsPanel(innerWidth,downHeight);
+					{	pointsPanel = new PointsSubPanel(innerWidth,downHeight,GuiKeys.ROUND);
 						downPanel.add(pointsPanel);
+						limitSelectionChange();
 //						SubPanel pointsPanel = makePointsPanel(innerWidth,downHeight,round.getPointProcessor(),GuiKeys.ROUND);
 //						downPanel.add(pointsPanel);
 					}
@@ -214,45 +221,11 @@ public class RoundDescription extends EntitledDataPanel
 			}
 
 			setDataPart(infoPanel);
+			
+			limitsPanel.setLimits(round.getLimits());
 		}
 	}
 
-	private JLabel makePreviewLabel(int width, int height, LevelPreview levelPreview)
-	{	// init
-		JLabel result = new JLabel();
-		//String text = "No preview";
-		String text = GuiConfiguration.getMiscConfiguration().getLanguage().getText(GuiKeys.GAME_ROUND_DESCRIPTION_PREVIEW_TITLE);
-		//String tooltip = "Zone preview";
-		String tooltip = GuiConfiguration.getMiscConfiguration().getLanguage().getText(GuiKeys.GAME_ROUND_DESCRIPTION_PREVIEW_TITLE+GuiKeys.TOOLTIP);
-		result.setText(text);
-		result.setToolTipText(tooltip);
-		Dimension dim = new Dimension(width,height);
-		result.setPreferredSize(dim);
-		result.setMinimumSize(dim);
-		result.setMaximumSize(dim);
-		result.setHorizontalAlignment(SwingConstants.CENTER);
-		result.setVerticalAlignment(SwingConstants.CENTER);
-		int fontSize = GuiTools.getFontSize(width, height, text);
-		Font font = GuiConfiguration.getMiscConfiguration().getFont().deriveFont((float)fontSize);
-		result.setFont(font);
-		result.setBackground(GuiTools.COLOR_TABLE_HEADER_BACKGROUND);
-		result.setForeground(GuiTools.COLOR_TABLE_HEADER_FOREGROUND);
-		result.setOpaque(true);
-		// image
-		BufferedImage img = levelPreview.getVisualPreview(); 
-		if(img!=null)
-		{	float zoomX = width/(float)img.getWidth();
-			float zoomY = height/(float)img.getHeight();
-			float zoom = Math.min(zoomX,zoomY);
-			img = ImageTools.resize(img,zoom,true);
-			ImageIcon icon = new ImageIcon(img);
-			result.setIcon(icon);
-			result.setText(null);
-		}
-		//
-		return result;
-	}
-	
 	private SubPanel makeItemsetPanel(int width, int height, LevelPreview levelPreview)
 	{	// init
 		int lines = 4;
@@ -446,4 +419,16 @@ public class RoundDescription extends EntitledDataPanel
 	{	// nothing to do here
 	}
 
+	/////////////////////////////////////////////////////////////////
+	// LIMITS 			/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	
+	@Override
+	public void limitSelectionChange()
+	{	Limit limit = limitsPanel.getSelectedLimit();
+		PointsProcessor pointsProcessor = null;
+		if(limit!=null)
+			pointsProcessor = limit.getPointProcessor();
+		pointsPanel.setPointsProcessor(pointsProcessor);
+	}
 }
