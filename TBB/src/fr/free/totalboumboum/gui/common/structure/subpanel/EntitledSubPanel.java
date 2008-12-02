@@ -143,9 +143,10 @@ public class EntitledSubPanel extends SubPanel
 	private int dataWidth;
 
 	public void setDataPanel(SubPanel panel)
-	{	remove(data);
+	{	int index = GuiTools.indexOfComponent(this,data);
+		remove(index);
 		data = panel;	
-		add(data,3);
+		add(data,index);
 	}
 	
 	public SubPanel getDataPanel()

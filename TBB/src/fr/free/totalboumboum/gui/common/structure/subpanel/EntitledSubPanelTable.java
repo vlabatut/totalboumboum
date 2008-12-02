@@ -35,8 +35,9 @@ public class EntitledSubPanelTable extends EntitledSubPanel
 
 		// init table
 		remove(0);
-
 		add(Box.createRigidArea(new Dimension(GuiTools.subPanelMargin,GuiTools.subPanelMargin)),0);
+		remove(4); 	// remove glue
+//		remove(2); 	// remove glue
 
 		setNewTable(colGroups,colSubs,lines);
 	}
@@ -51,7 +52,5 @@ public class EntitledSubPanelTable extends EntitledSubPanel
 		UntitledSubPanelTable tablePanel = new UntitledSubPanelTable(tableWidth,tableHeight,colGroups,colSubs,lines,false);
 		tablePanel.setOpaque(false);
 		setDataPanel(tablePanel);
-//		remove(4); 	// remove glue
-//		remove(2); 	// remove glue
 	}
 }
