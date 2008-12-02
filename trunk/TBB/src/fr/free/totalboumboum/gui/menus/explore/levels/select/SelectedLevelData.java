@@ -22,9 +22,6 @@ package fr.free.totalboumboum.gui.menus.explore.levels.select;
  */
 
 import java.awt.Color;
-import java.awt.Component;
-import java.awt.Dimension;
-import java.awt.Font;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.image.BufferedImage;
@@ -38,9 +35,7 @@ import java.util.Iterator;
 
 import javax.swing.Box;
 import javax.swing.BoxLayout;
-import javax.swing.ImageIcon;
 import javax.swing.JLabel;
-import javax.swing.SwingConstants;
 import javax.xml.parsers.ParserConfigurationException;
 
 import org.xml.sax.SAXException;
@@ -48,6 +43,7 @@ import org.xml.sax.SAXException;
 import fr.free.totalboumboum.engine.container.level.HollowLevel;
 import fr.free.totalboumboum.engine.container.level.LevelPreview;
 import fr.free.totalboumboum.engine.container.level.LevelPreviewLoader;
+import fr.free.totalboumboum.gui.common.content.subpanel.image.ImageSubPanel;
 import fr.free.totalboumboum.gui.common.structure.panel.SplitMenuPanel;
 import fr.free.totalboumboum.gui.common.structure.panel.data.EntitledDataPanel;
 import fr.free.totalboumboum.gui.common.structure.subpanel.SubPanel;
@@ -56,7 +52,6 @@ import fr.free.totalboumboum.gui.data.configuration.GuiConfiguration;
 import fr.free.totalboumboum.gui.tools.GuiKeys;
 import fr.free.totalboumboum.gui.tools.GuiTools;
 import fr.free.totalboumboum.tools.FileTools;
-import fr.free.totalboumboum.tools.ImageTools;
 
 public class SelectedLevelData extends EntitledDataPanel implements MouseListener
 {	
@@ -87,11 +82,8 @@ public class SelectedLevelData extends EntitledDataPanel implements MouseListene
 
 	private SubPanel mainPanel;
 	private SubPanel previewPanel;
-	private JLabel previewLabel;
 	private UntitledSubPanelTable infosPanel;
-	private SubPanel imagePanel;
-	private int imageLabelWidth;
-	private int imageLabelHeight;
+	private ImageSubPanel imagePanel;
 	private int listWidth;
 	private int listHeight;
 	
@@ -150,7 +142,7 @@ public class SelectedLevelData extends EntitledDataPanel implements MouseListene
 
 				previewPanel.add(Box.createVerticalGlue());
 
-				makeImagePanel(rightWidth,downHeight);
+				imagePanel = new ImageSubPanel(rightWidth,downHeight);
 				previewPanel.add(imagePanel);
 				
 				mainPanel.add(previewPanel);
@@ -351,43 +343,6 @@ public class SelectedLevelData extends EntitledDataPanel implements MouseListene
 		infosPanel.setColSubPreferredWidth(1,maxWidth);
 	}
 	
-	private void makeImagePanel(int width, int height)
-	{	imagePanel = new SubPanel(width,height);
-		int margin = GuiTools.subPanelMargin;
-		imagePanel.setBackground(GuiTools.COLOR_COMMON_BACKGROUND);
-		BoxLayout layout = new BoxLayout(imagePanel,BoxLayout.PAGE_AXIS);
-		imagePanel.setLayout(layout);
-
-		previewLabel = new JLabel();
-		imagePanel.add(Box.createVerticalGlue());
-		imagePanel.add(previewLabel);
-		imagePanel.add(Box.createVerticalGlue());
-		previewLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
-		previewLabel.setAlignmentY(Component.CENTER_ALIGNMENT);
-
-		imageLabelHeight = height - 2*margin;
-		imageLabelWidth = width - 2*margin;
-		Dimension dim = new Dimension(imageLabelWidth,imageLabelHeight);
-		previewLabel.setMinimumSize(dim);
-		previewLabel.setPreferredSize(dim);
-		previewLabel.setMaximumSize(dim);
-		
-		previewLabel.setHorizontalAlignment(SwingConstants.CENTER);
-		previewLabel.setVerticalAlignment(SwingConstants.CENTER);
-		
-		String text = GuiConfiguration.getMiscConfiguration().getLanguage().getText(GuiKeys.MENU_RESOURCES_LEVEL_SELECT_PREVIEW_IMAGE);
-		String tooltip = GuiConfiguration.getMiscConfiguration().getLanguage().getText(GuiKeys.MENU_RESOURCES_LEVEL_SELECT_PREVIEW_IMAGE+GuiKeys.TOOLTIP);
-		previewLabel.setText(null);
-		previewLabel.setToolTipText(tooltip);
-
-		int fontSize = GuiTools.getFontSize(imageLabelWidth, imageLabelHeight, text);
-		Font font = GuiConfiguration.getMiscConfiguration().getFont().deriveFont((float)fontSize);
-		previewLabel.setFont(font);
-		previewLabel.setBackground(GuiTools.COLOR_TABLE_NEUTRAL_BACKGROUND);
-		previewLabel.setForeground(GuiTools.COLOR_TABLE_REGULAR_FOREGROUND);
-		previewLabel.setOpaque(true);
-	}
-	
 	private void refreshPreview()
 	{	String infosValues[] = new String[10];
 		BufferedImage image;
@@ -435,26 +390,8 @@ public class SelectedLevelData extends EntitledDataPanel implements MouseListene
 			infosPanel.setLabelText(line,colSub,text,tooltip);
 		}
 		// image
-		if(image!=null)
-		{	float zoomX = imageLabelWidth/(float)image.getWidth();
-			float zoomY = imageLabelHeight/(float)image.getHeight();
-			float zoom = Math.min(zoomX,zoomY);
-			image = ImageTools.resize(image,zoom,true);
-			ImageIcon icon = new ImageIcon(image);
-			previewLabel.setIcon(icon);
-			previewLabel.setText(null);
-			Color bg = GuiTools.COLOR_TABLE_REGULAR_BACKGROUND;
-			previewLabel.setBackground(bg);
-		}
-		else
-		{	String text = null;//GuiConfiguration.getMiscConfiguration().getLanguage().getText(GuiTools.MENU_LEVEL_SELECT_PREVIEW_IMAGE);
-			String tooltip = GuiConfiguration.getMiscConfiguration().getLanguage().getText(GuiKeys.MENU_RESOURCES_LEVEL_SELECT_PREVIEW_IMAGE+GuiKeys.TOOLTIP);
-			previewLabel.setText(text);
-			previewLabel.setToolTipText(tooltip);
-			Color bg = GuiTools.COLOR_TABLE_NEUTRAL_BACKGROUND;
-			previewLabel.setBackground(bg);
-		}
-		
+		String tooltip = GuiConfiguration.getMiscConfiguration().getLanguage().getText(GuiKeys.MENU_RESOURCES_LEVEL_SELECT_PREVIEW_IMAGE+GuiKeys.TOOLTIP);
+		imagePanel.setImage(image,tooltip);
 	}
 
 	@Override

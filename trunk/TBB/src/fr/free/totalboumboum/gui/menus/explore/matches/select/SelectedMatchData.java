@@ -44,11 +44,14 @@ import javax.xml.parsers.ParserConfigurationException;
 
 import org.xml.sax.SAXException;
 
+import fr.free.totalboumboum.game.limit.Limit;
 import fr.free.totalboumboum.game.limit.MatchLimit;
 import fr.free.totalboumboum.game.match.Match;
 import fr.free.totalboumboum.game.match.MatchLoader;
-import fr.free.totalboumboum.gui.common.content.subpanel.LimitsSubPanel;
-import fr.free.totalboumboum.gui.common.content.subpanel.PointsSubPanel;
+import fr.free.totalboumboum.game.points.PointsProcessor;
+import fr.free.totalboumboum.gui.common.content.subpanel.limits.LimitsListener;
+import fr.free.totalboumboum.gui.common.content.subpanel.limits.LimitsSubPanel;
+import fr.free.totalboumboum.gui.common.content.subpanel.points.PointsSubPanel;
 import fr.free.totalboumboum.gui.common.structure.panel.SplitMenuPanel;
 import fr.free.totalboumboum.gui.common.structure.panel.data.EntitledDataPanel;
 import fr.free.totalboumboum.gui.common.structure.subpanel.SubPanel;
@@ -59,7 +62,7 @@ import fr.free.totalboumboum.gui.tools.GuiTools;
 import fr.free.totalboumboum.tools.FileTools;
 import fr.free.totalboumboum.tools.StringTools;
 
-public class SelectedMatchData extends EntitledDataPanel implements MouseListener
+public class SelectedMatchData extends EntitledDataPanel implements MouseListener, LimitsListener
 {	
 	private static final long serialVersionUID = 1L;
 	private static final float SPLIT_RATIO = 0.5f;
@@ -140,14 +143,16 @@ public class SelectedMatchData extends EntitledDataPanel implements MouseListene
 
 				rightPanel.add(Box.createRigidArea(new Dimension(margin,margin)));
 
-				{	limitsPanel = new LimitsSubPanel<MatchLimit>(rightWidth,rightHeight,null,GuiKeys.MATCH);
+				{	limitsPanel = new LimitsSubPanel<MatchLimit>(rightWidth,rightHeight,GuiKeys.MATCH);
+					limitsPanel.addListener(this);
 					rightPanel.add(limitsPanel);
 				}
 
 				rightPanel.add(Box.createRigidArea(new Dimension(margin,margin)));
 
-				{	pointsPanel = limitsPanel.makePointsPanel(rightWidth,rightHeight);
+				{	pointsPanel = new PointsSubPanel(rightWidth,rightHeight,GuiKeys.MATCH);
 					rightPanel.add(pointsPanel);
+					limitSelectionChange();
 				}
 
 				rightPanel.add(Box.createVerticalGlue());
@@ -441,5 +446,18 @@ public class SelectedMatchData extends EntitledDataPanel implements MouseListene
 		selectedRow = index%(LIST_LINE_COUNT-2)+1;
 		listPanels.get(currentPage).setLabelBackground(selectedRow,0,GuiTools.COLOR_TABLE_SELECTED_BACKGROUND);
 		refreshPreview();
+	}
+
+	/////////////////////////////////////////////////////////////////
+	// LIMITS 			/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	
+	@Override
+	public void limitSelectionChange()
+	{	Limit limit = limitsPanel.getSelectedLimit();
+		PointsProcessor pointsProcessor = null;
+		if(limit!=null)
+			pointsProcessor = limit.getPointProcessor();
+		pointsPanel.setPointsProcessor(pointsProcessor);
 	}
 }

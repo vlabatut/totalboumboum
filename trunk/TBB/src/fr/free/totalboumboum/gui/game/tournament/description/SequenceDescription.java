@@ -36,17 +36,20 @@ import javax.swing.JPanel;
 import fr.free.totalboumboum.configuration.Configuration;
 import fr.free.totalboumboum.configuration.profile.Portraits;
 import fr.free.totalboumboum.configuration.profile.Profile;
+import fr.free.totalboumboum.game.limit.Limit;
 import fr.free.totalboumboum.game.limit.TournamentLimit;
+import fr.free.totalboumboum.game.points.PointsProcessor;
 import fr.free.totalboumboum.game.tournament.sequence.SequenceTournament;
-import fr.free.totalboumboum.gui.common.content.subpanel.LimitsSubPanel;
-import fr.free.totalboumboum.gui.common.content.subpanel.PointsSubPanel;
+import fr.free.totalboumboum.gui.common.content.subpanel.limits.LimitsListener;
+import fr.free.totalboumboum.gui.common.content.subpanel.limits.LimitsSubPanel;
+import fr.free.totalboumboum.gui.common.content.subpanel.points.PointsSubPanel;
 import fr.free.totalboumboum.gui.common.structure.panel.SplitMenuPanel;
 import fr.free.totalboumboum.gui.common.structure.subpanel.SubPanel;
 import fr.free.totalboumboum.gui.common.structure.subpanel.UntitledSubPanelTable;
 import fr.free.totalboumboum.gui.tools.GuiKeys;
 import fr.free.totalboumboum.gui.tools.GuiTools;
 
-public class SequenceDescription extends TournamentDescription
+public class SequenceDescription extends TournamentDescription implements LimitsListener
 {	
 	private static final long serialVersionUID = 1L;
 	private static final float SPLIT_RATIO = 0.6f;
@@ -92,15 +95,17 @@ public class SequenceDescription extends TournamentDescription
 				int downHeight = dataHeight - upHeight - margin;
 				
 				// limit panel
-				{	limitsPanel = new LimitsSubPanel<TournamentLimit>(rightWidth,downHeight,tournament.getLimits(),GuiKeys.TOURNAMENT);
+				{	limitsPanel = new LimitsSubPanel<TournamentLimit>(rightWidth,downHeight,GuiKeys.TOURNAMENT);
+					limitsPanel.addListener(this);
 					rightPanel.add(limitsPanel);
 				}
 
 				rightPanel.add(Box.createVerticalGlue());
 				
 				// points panel
-				{	pointsPanel = limitsPanel.makePointsPanel(rightWidth,downHeight);
+				{	pointsPanel = new PointsSubPanel(rightWidth,downHeight,GuiKeys.TOURNAMENT);
 					rightPanel.add(pointsPanel);
+					limitSelectionChange();
 //					SubPanel pointsPanel = RoundDescription.makePointsPanel(rightWidth,downHeight,tournament.getPointProcessor(),GuiKey.TOURNAMENT);
 //					rightPanel.add(pointsPanel);
 				}
@@ -109,6 +114,8 @@ public class SequenceDescription extends TournamentDescription
 			}
 
 			setDataPart(infoPanel);
+			
+			limitsPanel.setLimits(tournament.getLimits());
 		}
 	}
 
@@ -189,5 +196,18 @@ public class SequenceDescription extends TournamentDescription
 			}
 		}
 		return playersPanel;		
+	}
+	
+	/////////////////////////////////////////////////////////////////
+	// LIMITS 			/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	
+	@Override
+	public void limitSelectionChange()
+	{	Limit limit = limitsPanel.getSelectedLimit();
+		PointsProcessor pointsProcessor = null;
+		if(limit!=null)
+			pointsProcessor = limit.getPointProcessor();
+		pointsPanel.setPointsProcessor(pointsProcessor);
 	}
 }
