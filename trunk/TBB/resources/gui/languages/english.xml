@@ -120,10 +120,8 @@
 					</group>
 					<group name="Preview">
 						<text name="Author" value="Author"  tooltip="Author of this match" />
-						<text name="Limit" value="Limit" tooltip="Limits for this match" />
 						<text name="Name" value="Name" tooltip="Name of this match" />
 						<text name="Players" value="Players" tooltip="Number of players needed for this match" />
-						<text name="Points" value="Points"  tooltip="Points processing for this match" />
 						<text name="Rounds" value="Rounds"  tooltip="Number of rounds defined for this match" />
 					</group>
 				</group>
@@ -143,10 +141,8 @@
 						<text name="Author" value="Author"  tooltip="Author of this round" />
 						<text name="LevelFolder" value="Level"  tooltip="Level name for this round" />
 						<text name="LevelPack" value="Package"  tooltip="Level package for this round" />
-						<text name="Limit" value="Limits" tooltip="Limits for this round" />
 						<text name="Name" value="Name" tooltip="Name of this round" />
 						<text name="Players" value="Players" tooltip="Number of players needed for this round" />
-						<text name="Points" value="Points"  tooltip="Points processing for this round" />
 					</group>
 				</group>
 			</group>	
@@ -400,21 +396,6 @@
 			<group name="Description">
 				<text name="Title" value="Tournament description"  tooltip="Tournament description" />
 
-				<group name="Limit">
-					<text name="Title" value="Limits"  tooltip="Information about what may cause the tournament to end" />
-					<group name="Header">
-						<text name="Bombs" value="Bombs"  tooltip="Number of bombs to drop in order to stop this tournament" />
-						<text name="Confrontations" value="Matches"  tooltip="Maximal number of matches in this tournament" />
-						<text name="Crowns" value="Crowns"  tooltip="Number of crowns to pick in order to stop this tournament" />
-						<text name="Custom" value="Custom points"  tooltip="Number of custom points to score in order to stop this tournament" />
-						<text name="Bombeds" value="Bombeds"  tooltip="Number of explosions to suffer in order to stop this tournament" />
-						<text name="Items" value="Items"  tooltip="Number of items to pick in order to stop this tournament" />
-						<text name="Bombings" value="Bombings"  tooltip="Number of players to explose in order to stop this tournament" />
-						<text name="Paintings" value="Paintings"  tooltip="Number of tiles to paint in order to stop this tournament" />
-						<text name="Time" value="Time"  tooltip="Maximum duration of this tournament" />
-					</group>
-				</group>
-				
 				<group name="Misc">
 					<text name="Title" value="Misc"  tooltip="Various information about this tournament" />
 				</group>
@@ -435,33 +416,6 @@
 					</group>
 				</group>
 
-				<group name="Points">
-					<text name="Title" value="Points"  tooltip="Information about how points are processed for this tournament" />
-					<group name="Header">
-						<text name="Constant" value="Constant"  tooltip="Constant value" />
-						<text name="Discretize" value="Discretize"  tooltip="Calculates points according to some intervals" />
-						<text name="Partial" value="Partial"  tooltip="Partial result of custom points processing" />
-						<text name="Rankings" value="Rankings"  tooltip="Caculates a ranking according to one or several points" />
-						<text name="Rankpoints" value="Rankpoints"  tooltip="Calculates points according to a ranking" />
-						<text name="Score" value="Score"  tooltip="Scores from all the players in this tournament" />
-						<text name="Total" value="Total" tooltip="Total number of points scored in each match" />
-					</group>
-					<group name="Data">
-						<text name="Bombs" value="Bombs"  tooltip="Uses the total number of bombs dropped during the tournament" />
-						<text name="Crowns" value="Crowns"  tooltip="Uses the total number of crowns picked during the tournament" />
-						<text name="Bombeds" value="Bombeds"  tooltip="Uses the total number of explosions suffered during the tournament" />
-						<text name="Inverted" value="Inverted"  tooltip="Inverted order" />
-						<text name="Items" value="Items"  tooltip="Uses the total number of items picked during the tournament" />
-						<text name="Bombings" value="Bombings"  tooltip="Uses the total number of players explosed during the tournament" />
-						<text name="Noshare" value="No share"  tooltip="In case of tie, points are not shared" />
-						<text name="Paintings" value="Paintings"  tooltip="Uses total the number of tiles painted during the tournament" />
-						<text name="Partial" value="Partial"  tooltip="Uses a previous partial result of custom point procesing" />
-						<text name="Regular" value="Regular"  tooltip="Regular order" />
-						<text name="Share" value="Share"  tooltip="In case of tie, points are shared" />
-						<text name="Time" value="Time"  tooltip="Uses the total amount of time played during the tournament" />
-					</group>
-				</group>
-				
 			</group>
 
 			<group name="Results">
@@ -514,21 +468,6 @@
 			<group name="Description">
 				<text name="Title" value="Match description"  tooltip="Match description" />
 				
-				<group name="Limit">
-					<text name="Title" value="Limits"  tooltip="Information about what may cause the match to end" />
-					<group name="Header">
-						<text name="Bombs" value="Bombs"  tooltip="Number of bombs to drop in order to stop this match" />
-						<text name="Confrontations" value="Rounds"  tooltip="Maximal number of rounds in this match" />
-						<text name="Crowns" value="Crowns"  tooltip="Number of crowns to pick in order to stop this match" />
-						<text name="Custom" value="Custom"  tooltip="Number of custom points to score in order to stop this match" />
-						<text name="Bombeds" value="Bombeds"  tooltip="Number of explosions to suffer in order to stop this match" />
-						<text name="Items" value="Items"  tooltip="Number of items to pick in order to stop this match" />
-						<text name="Bombings" value="Bombings"  tooltip="Number of players to explose in order to stop this match" />
-						<text name="Paintings" value="Paintings"  tooltip="Number of tiles to paint in order to stop this match" />
-						<text name="Time" value="Time"  tooltip="Maximum duration of this match" />
-					</group>
-				</group>
-								
 				<group name="Misc">
 					<text name="Title" value="Misc"  tooltip="Various information about this match" />
 				</group>
@@ -549,33 +488,6 @@
 						<text name="Controls" value="#"  tooltip="The player uses the commands number" />
 						<text name="Human" value="Human"  tooltip="This player is human-controlled" />
 						<text name="Nocontrols" value="-"  tooltip="This player does not use any commands" />
-					</group>
-				</group>
-				
-				<group name="Points">
-					<text name="Title" value="Points"  tooltip="Information about how points are processed for this match" />
-					<group name="Header">
-						<text name="Constant" value="Constant"  tooltip="Constant value" />
-						<text name="Discretize" value="Discretize"  tooltip="Calculates points according to some intervals" />
-						<text name="Partial" value="Partial"  tooltip="Partial result of custom points processing" />
-						<text name="Rankings" value="Rankings"  tooltip="Caculates a ranking according to one or several points" />
-						<text name="Rankpoints" value="Rankpoints"  tooltip="Calculates points according to a ranking" />
-						<text name="Score" value="Score"  tooltip="Scores from all the players in this match" />
-						<text name="Total" value="Total" tooltip="Total number of points scored in each round" />
-					</group>
-					<group name="Data">
-						<text name="Bombs" value="Bombs"  tooltip="Uses the total number of bombs dropped during the match" />
-						<text name="Crowns" value="Crowns"  tooltip="Uses the total number of crowns picked during the match" />
-						<text name="Bombeds" value="Bombeds"  tooltip="Uses the total number of explosions suffered during the match" />
-						<text name="Inverted" value="Inverted"  tooltip="Inverted order" />
-						<text name="Items" value="Items"  tooltip="Uses the total number of items picked during the match" />
-						<text name="Bombings" value="Bombings"  tooltip="Uses the total number of players explosed during the match" />
-						<text name="Noshare" value="No share"  tooltip="In case of tie, points are not shared" />
-						<text name="Paintings" value="Paintings"  tooltip="Uses total the number of tiles painted during the match" />
-						<text name="Partial" value="Partial"  tooltip="Uses a previous partial result of custom point procesing" />
-						<text name="Regular" value="Regular"  tooltip="Regular order" />
-						<text name="Share" value="Share"  tooltip="In case of tie, points are shared" />
-						<text name="Time" value="Time"  tooltip="Uses the total amount of time played during the match" />
 					</group>
 				</group>
 				
@@ -645,21 +557,6 @@
 					<text name="Title" value="Itemset"  tooltip="Items available during  this round" />
 				</group>
 				
-				<group name="Limit">
-					<text name="Title" value="Limits"  tooltip="Information about what may cause the round to end" />
-					<group name="Header">
-						<text name="Bombs" value="Bombs"  tooltip="Number of bombs to drop in order to stop this round" />
-						<text name="Crowns" value="Crowns"  tooltip="Number of crowns to pick in order to stop this round" />
-						<text name="Custom" value="Custom"  tooltip="Number of custom points to score in order to stop this round" />
-						<text name="Bombeds" value="Bombeds"  tooltip="Number of explosions to suffer in order to stop this round" />
-						<text name="Items" value="Items"  tooltip="Number of items to pick in order to stop this round" />
-						<text name="Bombings" value="Bombings"  tooltip="Number of players to explose in order to stop this round" />
-						<text name="Paintings" value="Paintings"  tooltip="Number of tiles to paint in order to stop this round" />
-						<text name="Time" value="Time"  tooltip="Maximum duration of this round" />
-						<text name="LastStanding" value="Players"  tooltip="The round end depends on the number of remaining players" />
-					</group>
-				</group>
-								
 				<group name="Misc">
 					<text name="Title" value="Misc"  tooltip="Various information about this round" />
 					<group name="Header">
@@ -675,32 +572,6 @@
 								
 				<group name="Notes">
 					<text name="Title" value="Notes"  tooltip="Notes from the designer of this round" />
-				</group>
-				
-				<group name="Points">
-					<text name="Title" value="Points"  tooltip="Information about how points are processed for this round" />
-					<group name="Header">
-						<text name="Constant" value="Constant"  tooltip="Constant value" />
-						<text name="Discretize" value="Discretize"  tooltip="Calculates points according to some intervals" />
-						<text name="Partial" value="Partial"  tooltip="Partial result of custom points processing" />
-						<text name="Rankings" value="Rankings"  tooltip="Caculates a ranking according to one or several points" />
-						<text name="Rankpoints" value="Rankpoints"  tooltip="Calculates points according to a ranking" />
-						<text name="Score" value="Score"  tooltip="Scores from all the players in this round" />
-					</group>
-					<group name="Data">
-						<text name="Bombs" value="Bombs"  tooltip="Uses the number of bombs dropped during the round" />
-						<text name="Crowns" value="Crowns"  tooltip="Uses the number of crowns picked during the round" />
-						<text name="Bombeds" value="Bombeds"  tooltip="Uses the number of explosions suffered during the round" />
-						<text name="Inverted" value="Inverted"  tooltip="Inverted order" />
-						<text name="Items" value="Items"  tooltip="Uses the number of items picked during the round" />
-						<text name="Bombings" value="Bombings"  tooltip="Uses the number of players explosed during the round" />
-						<text name="Noshare" value="No share"  tooltip="In case of tie, points are not shared" />
-						<text name="Paintings" value="Paintings"  tooltip="Uses the number of tiles painted during the round" />
-						<text name="Partial" value="Partial"  tooltip="Uses a previous partial result of custom point procesing" />
-						<text name="Regular" value="Regular"  tooltip="Regular order" />
-						<text name="Share" value="Share"  tooltip="In case of tie, points are shared" />
-						<text name="Time" value="Time"  tooltip="Uses the amount of time played during the round" />
-					</group>
 				</group>
 				
 				<group name="Preview">
@@ -741,23 +612,155 @@
 		
 	</group>
 
-	<group name="Color">
-		<text name="Black" value="Noir" tooltip="Noir"/>
-		<text name="Blue" value="Bleu" tooltip="Bleu"/>
-		<text name="Brown" value="Marron" tooltip="Marron"/>
-		<text name="Cyan" value="Cyan" tooltip="Cyan"/>
-		<text name="Grass" value="Herbe" tooltip="Herbe"/>
-		<text name="Green" value="Vert" tooltip="Vert"/>
-		<text name="Grey" value="Gris" tooltip="Gris"/>
-		<text name="Indigo" value="Indigo" tooltip="Indigo"/>
-		<text name="Orange" value="Orange" tooltip="Orange"/>
-		<text name="Pink" value="Rose" tooltip="Rose"/>
-		<text name="Purple" value="Violet" tooltip="Violet"/>
-		<text name="Red" value="Rouge" tooltip="Rouge"/>
-		<text name="Rust" value="Rouille" tooltip="Rouille"/>
-		<text name="Ultramarine" value="Outremer" tooltip="Outremer"/>
-		<text name="White" value="Blanc" tooltip="Blanc"/>
-		<text name="Yellow" value="Jaune" tooltip="Jaune"/>
+	<group name="Common">
+		<group name="Color">
+			<text name="Black" value="Noir" tooltip="Noir"/>
+			<text name="Blue" value="Bleu" tooltip="Bleu"/>
+			<text name="Brown" value="Marron" tooltip="Marron"/>
+			<text name="Cyan" value="Cyan" tooltip="Cyan"/>
+			<text name="Grass" value="Herbe" tooltip="Herbe"/>
+			<text name="Green" value="Vert" tooltip="Vert"/>
+			<text name="Grey" value="Gris" tooltip="Gris"/>
+			<text name="Indigo" value="Indigo" tooltip="Indigo"/>
+			<text name="Orange" value="Orange" tooltip="Orange"/>
+			<text name="Pink" value="Rose" tooltip="Rose"/>
+			<text name="Purple" value="Violet" tooltip="Violet"/>
+			<text name="Red" value="Rouge" tooltip="Rouge"/>
+			<text name="Rust" value="Rouille" tooltip="Rouille"/>
+			<text name="Ultramarine" value="Outremer" tooltip="Outremer"/>
+			<text name="White" value="Blanc" tooltip="Blanc"/>
+			<text name="Yellow" value="Jaune" tooltip="Jaune"/>
+		</group>
+		
+		<group name="Limit">
+			<group name="Match">
+				<text name="Title" value="Limits"  tooltip="Information about what may cause the match to end" />
+				<group name="Header">
+					<text name="Bombeds" value="Bombeds"  tooltip="Number of explosions to suffer in order to stop this match" />
+					<text name="Bombings" value="Bombings"  tooltip="Number of players to explose in order to stop this match" />
+					<text name="Bombs" value="Bombs"  tooltip="Number of bombs to drop in order to stop this match" />
+					<text name="Confrontations" value="Rounds"  tooltip="Maximal number of rounds in this match" />
+					<text name="Crowns" value="Crowns"  tooltip="Number of crowns to pick in order to stop this match" />
+					<text name="Custom" value="Custom"  tooltip="Number of custom points to score in order to stop this match" />
+					<text name="Items" value="Items"  tooltip="Number of items to pick in order to stop this match" />
+					<text name="Paintings" value="Paintings"  tooltip="Number of tiles to paint in order to stop this match" />
+					<text name="Time" value="Time"  tooltip="Maximum duration of this match" />
+				</group>
+			</group>
+
+			<group name="Round">
+				<text name="Title" value="Limits"  tooltip="Information about what may cause the round to end" />
+				<group name="Header">
+					<text name="Bombeds" value="Bombeds"  tooltip="Number of explosions to suffer in order to stop this round" />
+					<text name="Bombs" value="Bombs"  tooltip="Number of bombs to drop in order to stop this round" />
+					<text name="Bombings" value="Bombings"  tooltip="Number of players to explose in order to stop this round" />
+					<text name="Crowns" value="Crowns"  tooltip="Number of crowns to pick in order to stop this round" />
+					<text name="Custom" value="Custom"  tooltip="Number of custom points to score in order to stop this round" />
+					<text name="Items" value="Items"  tooltip="Number of items to pick in order to stop this round" />
+					<text name="LastStanding" value="Players"  tooltip="The round end depends on the number of remaining players" />
+					<text name="Paintings" value="Paintings"  tooltip="Number of tiles to paint in order to stop this round" />
+					<text name="Time" value="Time"  tooltip="Maximum duration of this round" />
+				</group>
+			</group>
+							
+			<group name="Tournament">
+				<text name="Title" value="Limits"  tooltip="Information about what may cause the tournament to end" />
+				<group name="Header">
+					<text name="Bombings" value="Bombings"  tooltip="Number of players to explose in order to stop this tournament" />
+					<text name="Bombeds" value="Bombeds"  tooltip="Number of explosions to suffer in order to stop this tournament" />
+					<text name="Bombs" value="Bombs"  tooltip="Number of bombs to drop in order to stop this tournament" />
+					<text name="Confrontations" value="Matches"  tooltip="Maximal number of matches in this tournament" />
+					<text name="Crowns" value="Crowns"  tooltip="Number of crowns to pick in order to stop this tournament" />
+					<text name="Custom" value="Custom points"  tooltip="Number of custom points to score in order to stop this tournament" />
+					<text name="Items" value="Items"  tooltip="Number of items to pick in order to stop this tournament" />
+					<text name="Paintings" value="Paintings"  tooltip="Number of tiles to paint in order to stop this tournament" />
+					<text name="Time" value="Time"  tooltip="Maximum duration of this tournament" />
+				</group>
+			</group>
+		</group>
+
+		<group name="Points">
+			<group name="Match">
+				<text name="Title" value="Points"  tooltip="Information about how points are processed for this match" />
+				<group name="Header">
+					<text name="Constant" value="Constant"  tooltip="Constant value" />
+					<text name="Discretize" value="Discretize"  tooltip="Calculates points according to some intervals" />
+					<text name="Partial" value="Partial"  tooltip="Partial result of custom points processing" />
+					<text name="Rankings" value="Rankings"  tooltip="Caculates a ranking according to one or several points" />
+					<text name="Rankpoints" value="Rankpoints"  tooltip="Calculates points according to a ranking" />
+					<text name="Score" value="Score"  tooltip="Scores from all the players in this match" />
+					<text name="Total" value="Total" tooltip="Total number of points scored in each round" />
+				</group>
+				<group name="Data">
+					<text name="Bombs" value="Bombs"  tooltip="Uses the total number of bombs dropped during the match" />
+					<text name="Crowns" value="Crowns"  tooltip="Uses the total number of crowns picked during the match" />
+					<text name="Bombeds" value="Bombeds"  tooltip="Uses the total number of explosions suffered during the match" />
+					<text name="Inverted" value="Inverted"  tooltip="Inverted order" />
+					<text name="Items" value="Items"  tooltip="Uses the total number of items picked during the match" />
+					<text name="Bombings" value="Bombings"  tooltip="Uses the total number of players explosed during the match" />
+					<text name="Noshare" value="No share"  tooltip="In case of tie, points are not shared" />
+					<text name="Paintings" value="Paintings"  tooltip="Uses total the number of tiles painted during the match" />
+					<text name="Partial" value="Partial"  tooltip="Uses a previous partial result of custom point procesing" />
+					<text name="Regular" value="Regular"  tooltip="Regular order" />
+					<text name="Share" value="Share"  tooltip="In case of tie, points are shared" />
+					<text name="Time" value="Time"  tooltip="Uses the total amount of time played during the match" />
+				</group>
+			</group>
+			
+			<group name="Round">
+				<text name="Title" value="Points"  tooltip="Information about how points are processed for this round" />
+				<group name="Header">
+					<text name="Constant" value="Constant"  tooltip="Constant value" />
+					<text name="Discretize" value="Discretize"  tooltip="Calculates points according to some intervals" />
+					<text name="Partial" value="Partial"  tooltip="Partial result of custom points processing" />
+					<text name="Rankings" value="Rankings"  tooltip="Caculates a ranking according to one or several points" />
+					<text name="Rankpoints" value="Rankpoints"  tooltip="Calculates points according to a ranking" />
+					<text name="Score" value="Score"  tooltip="Scores from all the players in this round" />
+				</group>
+				<group name="Data">
+					<text name="Bombs" value="Bombs"  tooltip="Uses the number of bombs dropped during the round" />
+					<text name="Crowns" value="Crowns"  tooltip="Uses the number of crowns picked during the round" />
+					<text name="Bombeds" value="Bombeds"  tooltip="Uses the number of explosions suffered during the round" />
+					<text name="Inverted" value="Inverted"  tooltip="Inverted order" />
+					<text name="Items" value="Items"  tooltip="Uses the number of items picked during the round" />
+					<text name="Bombings" value="Bombings"  tooltip="Uses the number of players explosed during the round" />
+					<text name="Noshare" value="No share"  tooltip="In case of tie, points are not shared" />
+					<text name="Paintings" value="Paintings"  tooltip="Uses the number of tiles painted during the round" />
+					<text name="Partial" value="Partial"  tooltip="Uses a previous partial result of custom point procesing" />
+					<text name="Regular" value="Regular"  tooltip="Regular order" />
+					<text name="Share" value="Share"  tooltip="In case of tie, points are shared" />
+					<text name="Time" value="Time"  tooltip="Uses the amount of time played during the round" />
+				</group>
+			</group>
+			
+			<group name="Tournament">
+				<text name="Title" value="Points"  tooltip="Information about how points are processed for this tournament" />
+				<group name="Header">
+					<text name="Constant" value="Constant"  tooltip="Constant value" />
+					<text name="Discretize" value="Discretize"  tooltip="Calculates points according to some intervals" />
+					<text name="Partial" value="Partial"  tooltip="Partial result of custom points processing" />
+					<text name="Rankings" value="Rankings"  tooltip="Caculates a ranking according to one or several points" />
+					<text name="Rankpoints" value="Rankpoints"  tooltip="Calculates points according to a ranking" />
+					<text name="Score" value="Score"  tooltip="Scores from all the players in this tournament" />
+					<text name="Total" value="Total" tooltip="Total number of points scored in each match" />
+				</group>
+				<group name="Data">
+					<text name="Bombs" value="Bombs"  tooltip="Uses the total number of bombs dropped during the tournament" />
+					<text name="Crowns" value="Crowns"  tooltip="Uses the total number of crowns picked during the tournament" />
+					<text name="Bombeds" value="Bombeds"  tooltip="Uses the total number of explosions suffered during the tournament" />
+					<text name="Inverted" value="Inverted"  tooltip="Inverted order" />
+					<text name="Items" value="Items"  tooltip="Uses the total number of items picked during the tournament" />
+					<text name="Bombings" value="Bombings"  tooltip="Uses the total number of players explosed during the tournament" />
+					<text name="Noshare" value="No share"  tooltip="In case of tie, points are not shared" />
+					<text name="Paintings" value="Paintings"  tooltip="Uses total the number of tiles painted during the tournament" />
+					<text name="Partial" value="Partial"  tooltip="Uses a previous partial result of custom point procesing" />
+					<text name="Regular" value="Regular"  tooltip="Regular order" />
+					<text name="Share" value="Share"  tooltip="In case of tie, points are shared" />
+					<text name="Time" value="Time"  tooltip="Uses the total amount of time played during the tournament" />
+				</group>
+			</group>	
+		</group>
+							
 	</group>
 
 </language>

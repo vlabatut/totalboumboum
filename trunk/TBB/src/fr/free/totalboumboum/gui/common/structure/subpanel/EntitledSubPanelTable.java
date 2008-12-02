@@ -51,7 +51,7 @@ public class EntitledSubPanelTable extends EntitledSubPanel
 		UntitledSubPanelTable tablePanel = new UntitledSubPanelTable(tableWidth,tableHeight,colGroups,colSubs,lines,false);
 		tablePanel.setOpaque(false);
 		setDataPanel(tablePanel);
-		remove(4); 	// remove glue
-		remove(2); 	// remove glue
+//		remove(4); 	// remove glue
+//		remove(2); 	// remove glue
 	}
 }
