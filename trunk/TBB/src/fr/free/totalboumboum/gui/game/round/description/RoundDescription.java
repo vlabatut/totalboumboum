@@ -51,6 +51,7 @@ import fr.free.totalboumboum.game.limit.RoundLimit;
 import fr.free.totalboumboum.game.points.PointsProcessor;
 import fr.free.totalboumboum.game.round.Round;
 import fr.free.totalboumboum.gui.common.content.subpanel.image.ImageSubPanel;
+import fr.free.totalboumboum.gui.common.content.subpanel.items.InitialItemsSubPanel;
 import fr.free.totalboumboum.gui.common.content.subpanel.limits.LimitsListener;
 import fr.free.totalboumboum.gui.common.content.subpanel.limits.LimitsSubPanel;
 import fr.free.totalboumboum.gui.common.content.subpanel.points.PointsSubPanel;
@@ -70,6 +71,7 @@ public class RoundDescription extends EntitledDataPanel implements LimitsListene
 
 	private JPanel downPanel;
 	private ImageSubPanel imagePanel;
+	private InitialItemsSubPanel initialItemsPanel;
 	
 	private LimitsSubPanel<RoundLimit> limitsPanel;
 	private PointsSubPanel pointsPanel;
@@ -179,7 +181,8 @@ public class RoundDescription extends EntitledDataPanel implements LimitsListene
 					upPanel.add(Box.createHorizontalGlue());
 					
 					// initial items panel
-					{	JPanel initialItemsPanel = makeInitialItemsPanel(innerWidth,upHeight,preview);
+					{	initialItemsPanel = new InitialItemsSubPanel(innerWidth,upHeight);
+						initialItemsPanel.setLevelPreview(preview);
 						upPanel.add(initialItemsPanel);
 					}
 					rightPanel.add(upPanel);
@@ -237,7 +240,7 @@ public class RoundDescription extends EntitledDataPanel implements LimitsListene
 		}
 
 		EntitledSubPanelTable itemsetPanel = new EntitledSubPanelTable(width,height,colGroups,colSubs,lines);
-		String titleKey = GuiKeys.GAME_ROUND_DESCRIPTION_ITEMSET_TITLE;
+		String titleKey = GuiKeys.COMMON_ITEMS_AVAILABLE_TITLE;
 		itemsetPanel.setTitleKey(titleKey,true);
 		itemsetPanel.getTable().setColSubMaxWidth(1,Integer.MAX_VALUE);
 		
@@ -350,64 +353,10 @@ public class RoundDescription extends EntitledDataPanel implements LimitsListene
 		
 		return miscPanel;
 	}
-
-	private SubPanel makeInitialItemsPanel(int width, int height, LevelPreview levelPreview)
-	{	// init
-		int lines = 4;
-		int colSubs = 2;
-		int colGroups = 1;
-		if(levelPreview.getInitialItems().size()>lines*colGroups)
-		{	lines = 8;
-			colGroups = 4;
-		}
 	
-		EntitledSubPanelTable itemsPanel = new EntitledSubPanelTable(width,height,colGroups,colSubs,lines);
-		String titleKey = GuiKeys.GAME_ROUND_DESCRIPTION_INITIALITEMS_TITLE;
-		itemsPanel.setTitleKey(titleKey,true);
-		itemsPanel.getTable().setColSubMaxWidth(1,Integer.MAX_VALUE);
-		
-		// data
-		NumberFormat nf = NumberFormat.getInstance();
-		nf.setMinimumFractionDigits(0);
-		ItemsetPreview itemsetPreview = levelPreview.getItemsetPreview();
-		HashMap<String,Integer> initialItems = levelPreview.getInitialItems();
-		Iterator<Entry<String,Integer>> i = initialItems.entrySet().iterator();
-		int line = 0;
-		int colGroup = 0;
-		while(i.hasNext())
-		{	// init
-			Entry<String,Integer> temp = i.next();
-			String itemName = temp.getKey();
-			int number = temp.getValue();
-			SpritePreview spritePreview = itemsetPreview.getItemPreview(itemName);
-			String name = spritePreview.getName();
-			BufferedImage image = spritePreview.getImage(null);
-			String tooltip = name+": "+number;
-			String value = Integer.toString(number);
-			//
-			int colSub = 0;
-			{	itemsPanel.getTable().setLabelIcon(line,colGroup,colSub,image,tooltip);
-				Color fg = GuiTools.COLOR_TABLE_HEADER_FOREGROUND;
-				itemsPanel.getTable().setLabelForeground(line,colGroup,colSub,fg);
-				Color bg = GuiTools.COLOR_TABLE_HEADER_BACKGROUND;
-				itemsPanel.getTable().setLabelBackground(line,colGroup,colSub,bg);
-				colSub++;
-			}
-			{	String text = value;
-				itemsPanel.getTable().setLabelText(line,colGroup,colSub,text,tooltip);
-				Color bg = GuiTools.COLOR_TABLE_REGULAR_BACKGROUND;
-				itemsPanel.getTable().setLabelBackground(line,colGroup,colSub,bg);
-				colSub++;
-			}
-			line++;
-			if(line==lines)
-			{	line = 0;
-				colGroup++;
-			}
-		}			
-		
-		return itemsPanel;
-	}
+	/////////////////////////////////////////////////////////////////
+	// CONTENT PANEL	/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
 	
 	@Override
 	public void refresh()

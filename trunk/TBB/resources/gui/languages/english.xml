@@ -549,14 +549,6 @@
 			<group name="Description">
 				<text name="Title" value="Round description"  tooltip="Round description" />
 								
-				<group name="InitialItems">
-					<text name="Title" value="Items"  tooltip="Items given to each player at the begining of this round" />
-				</group>
-				
-				<group name="Itemset">
-					<text name="Title" value="Itemset"  tooltip="Items available during  this round" />
-				</group>
-				
 				<group name="Misc">
 					<text name="Title" value="Misc"  tooltip="Various information about this round" />
 					<group name="Header">
@@ -630,6 +622,15 @@
 			<text name="Ultramarine" value="Outremer" tooltip="Outremer"/>
 			<text name="White" value="Blanc" tooltip="Blanc"/>
 			<text name="Yellow" value="Jaune" tooltip="Jaune"/>
+		</group>
+
+		<group name="Items">
+			<group name="Available">
+				<text name="Title" value="Available items"  tooltip="Items available during the round" />
+			</group>
+			<group name="Initial">
+				<text name="Title" value="Initial items"  tooltip="Items given to each player at the begining of the round" />
+			</group>
 		</group>
 		
 		<group name="Limit">

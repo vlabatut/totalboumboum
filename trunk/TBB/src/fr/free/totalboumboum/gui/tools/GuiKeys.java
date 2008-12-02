@@ -494,10 +494,6 @@ public class GuiKeys
 	public static final String GAME_ROUND_PROGRESSBAR_THEME = "GameRoundProgressbarTheme";
 	/* DESCRIPTION */
 	public static final String GAME_ROUND_DESCRIPTION_TITLE = "GameRoundDescriptionTitle";
-		/* INITIAL ITEMS */
-		public static final String GAME_ROUND_DESCRIPTION_INITIALITEMS_TITLE = "GameRoundDescriptionInitialItemsTitle";
-		/* ITEMSET */
-		public static final String GAME_ROUND_DESCRIPTION_ITEMSET_TITLE = "GameRoundDescriptionItemset";
 		/* MISC */
 		public static final String GAME_ROUND_DESCRIPTION_MISC_TITLE = "GameRoundDescriptionMiscTitle";
 			/* HEADER */
@@ -698,6 +694,17 @@ public class GuiKeys
 			public static final String COMMON_POINTS_TOURNAMENT_DATA_REGULAR = COMMON_POINTS_TOURNAMENT_DATA+REGULAR;
 			public static final String COMMON_POINTS_TOURNAMENT_DATA_SHARE = COMMON_POINTS_TOURNAMENT_DATA+SHARE;
 			public static final String COMMON_POINTS_TOURNAMENT_DATA_TIME = COMMON_POINTS_TOURNAMENT_DATA+TIME;
+	/* ITEMS */
+	public static final String COMMON_ITEMS = COMMON+ITEMS;
+		/* AVAILABLE */
+		public static final String AVAILABLE = "Available";
+		public static final String COMMON_ITEMS_AVAILABLE = COMMON_ITEMS+AVAILABLE;
+		public static final String COMMON_ITEMS_AVAILABLE_TITLE = COMMON_ITEMS_AVAILABLE+TITLE;
+		/* INITIAL */
+		public static final String INITIAL = "Initial";
+		public static final String COMMON_ITEMS_INITIAL = COMMON_ITEMS+INITIAL;
+		public static final String COMMON_ITEMS_INITIAL_TITLE = COMMON_ITEMS_INITIAL+TITLE;
+
 
 	/////////////////////////////////////////////////////////////////
 	// PROCESS			/////////////////////////////////////////////

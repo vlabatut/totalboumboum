@@ -23,6 +23,7 @@ package fr.free.totalboumboum.gui.tools;
 
 import java.awt.Color;
 import java.awt.Component;
+import java.awt.Container;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.FontMetrics;
@@ -32,8 +33,10 @@ import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Iterator;
+import java.util.List;
 
 import javax.swing.AbstractButton;
 import javax.swing.ImageIcon;
@@ -363,7 +366,7 @@ public class GuiTools
 		// initial
 		{	String folder = baseFolder+GuiFileTools.FILE_INITIAL;
 			String[] uses =
-			{	GuiKeys.GAME_ROUND_DESCRIPTION_INITIALITEMS_TITLE
+			{	GuiKeys.COMMON_ITEMS_INITIAL_TITLE
 			};
 			loadTableImages(folder,uses);
 		}
@@ -384,7 +387,7 @@ public class GuiTools
 				GuiKeys.COMMON_LIMIT_TOURNAMENT_HEADER_ITEMS,
 				GuiKeys.COMMON_LIMIT_MATCH_HEADER_ITEMS,
 				GuiKeys.COMMON_LIMIT_ROUND_HEADER_ITEMS,
-				GuiKeys.GAME_ROUND_DESCRIPTION_ITEMSET_TITLE
+				GuiKeys.COMMON_ITEMS_AVAILABLE_TITLE
 			};
 			loadTableImages(folder,uses);
 		}
@@ -1017,6 +1020,17 @@ public class GuiTools
 	public final static int ALPHA_TABLE_REGULAR_BACKGROUND_LEVEL1 = 80; //scores
 	public final static int ALPHA_TABLE_REGULAR_BACKGROUND_LEVEL2 = 140; // rounds/matches
 	public final static int ALPHA_TABLE_REGULAR_BACKGROUND_LEVEL3 = 200; //portrait/name/total/points
+	
+	/////////////////////////////////////////////////////////////////
+	// MISC				/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	public static int indexOfComponent(Container container, Component component)
+	{	Component[] components = container.getComponents();
+		List<Component> list = Arrays.asList(components);
+		int result = list.indexOf(component);
+		return result;
+	}
+	
 	
 	/////////////////////////////////////////////////////////////////
 	// BUTTONS			/////////////////////////////////////////////

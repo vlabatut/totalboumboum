@@ -548,14 +548,6 @@
 			<group name="Description">
 				<text name="Title" value="Description de la manche"  tooltip="Description de la manche" />
 								
-				<group name="InitialItems">
-					<text name="Title" value="Items"  tooltip="Items donnés à chaque joueur au début de la manche" />
-				</group>
-				
-				<group name="Itemset">
-					<text name="Title" value="Itemset"  tooltip="Ensemble de tous les items disponibles au cours de cette manche" />
-				</group>
-				
 				<group name="Misc">
 					<text name="Title" value="Divers"  tooltip="Informations diverses sur cette manche" />
 					<group name="Header">
@@ -631,6 +623,15 @@
 			<text name="Yellow" value="Jaune" tooltip="Jaune"/>
 		</group>
 
+		<group name="Items">
+			<group name="Available">
+				<text name="Title" value="Items disponibles"  tooltip="Ensemble de tous les items disponibles en cours de manche" />
+			</group>			
+			<group name="Initial">
+				<text name="Title" value="Items initiaux"  tooltip="Items donnés à chaque joueur en début de manche" />
+			</group>
+		</group>
+		
 		<group name="Limit">
 			<group name="Match">
 				<text name="Title" value="Limites"  tooltip="Informations sur les critères de fin de rencontre" />
