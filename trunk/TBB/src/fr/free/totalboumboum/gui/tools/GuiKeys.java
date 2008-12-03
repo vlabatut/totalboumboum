@@ -32,44 +32,44 @@ public class GuiKeys
 	/////////////////////////////////////////////////////////////////
 	// MISC	/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	public static final String TOOLTIP = "Tooltip";
-	
-	public static final String DATA = "Data";
-	public static final String HEADER = "Header";
-	public static final String SCORE = "Score";
-	public static final String PARTIAL = "Partial";
-	public static final String GAME = "Game";
-	public static final String DESCRIPTION = "Description";
-	public static final String LIMIT = "Limit";
-	public static final String TITLE = "Title";
-	
-	public static final String BOMBS = "Bombs";
-	public static final String CROWNS = "Crowns";
 	public static final String BOMBEDS = "Bombeds";
-	public static final String ITEMS = "Items";
 	public static final String BOMBINGS = "Bombings";
-	public static final String PAINTINGS = "Paintings";
-	public static final String TIME = "Time";
-
+	public static final String BOMBS = "Bombs";
+	public static final String COMPUTER = "Computer";
+	public static final String CONFRONTATION = "Confrontation";
 	public static final String CONFRONTATIONS = "Confrontations";
-	public static final String CUSTOM = "Custom";
-	public static final String LAST_STANDING = "LastStanding";
-
-	public static final String TOURNAMENT = "Tournament";
-	public static final String MATCH = "Match";
-	public static final String ROUND = "Round";
-
-	public static final String POINTS = "Points";
-	public static final String RANKPOINTS = "Rankpoints";
-	public static final String SHARE = "Share";
-	public static final String NO_SHARE = "NoShare";
-	public static final String DISCRETIZE = "Discretize";
-	public static final String RANKINGS = "Rankings";
-	public static final String INVERTED = "Inverted";
-	public static final String REGULAR = "Regular";
 	public static final String CONSTANT = "Constant";
+	public static final String CROWNS = "Crowns";
+	public static final String CUSTOM = "Custom";
+	public static final String DATA = "Data";
+	public static final String DESCRIPTION = "Description";
+	public static final String DISCRETIZE = "Discretize";
+	public static final String GAME = "Game";
+	public static final String HEADER = "Header";
+	public static final String HUMAN = "Human";
+	public static final String INVERTED = "Inverted";
+	public static final String ITEMS = "Items";
+	public static final String LAST_STANDING = "LastStanding";
+	public static final String LIMIT = "Limit";
+	public static final String MATCH = "Match";
+	public static final String NAME = "Name";
+	public static final String NO_SHARE = "NoShare";
+	public static final String PAINTINGS = "Paintings";
+	public static final String PARTIAL = "Partial";
+	public static final String POINTS = "Points";
+	public static final String PORTRAIT = "Portrait";
+	public static final String PROFILE = "Profile";
+	public static final String RANKINGS = "Rankings";
+	public static final String RANKPOINTS = "Rankpoints";
+	public static final String REGULAR = "Regular";
+	public static final String ROUND = "Round";
+	public static final String SCORE = "Score";
+	public static final String SHARE = "Share";
+	public static final String TIME = "Time";
+	public static final String TITLE = "Title";
+	public static final String TOOLTIP = "Tooltip";
 	public static final String TOTAL = "Total";
-
+	public static final String TOURNAMENT = "Tournament";
 	
 	/////////////////////////////////////////////////////////////////
 	// MENUS			/////////////////////////////////////////////
@@ -370,166 +370,107 @@ public class GuiKeys
 	public static final String MENU_TOURNAMENT_BUTTON_SAVE_AS = MENU_TOURNAMENT_BUTTON+"SaveAs";
 	public static final String MENU_TOURNAMENT_BUTTON_START = MENU_TOURNAMENT_BUTTON+"Start";
 	
-	/////////////////////////////////////////////////////////////////
-	// GAME TOURNAMENT	/////////////////////////////////////////////
-	/////////////////////////////////////////////////////////////////
-	/* BUTTONS */	
-	public static final String GAME_TOURNAMENT_BUTTON_QUIT = "GameTournamentButtonQuit";
-	public static final String GAME_TOURNAMENT_BUTTON_CURRENT_MATCH = "GameTournamentButtonCurrentMatch";
-	public static final String GAME_TOURNAMENT_BUTTON_DESCRIPTION = "GameTournamentButtonDescription";
-	public static final String GAME_TOURNAMENT_BUTTON_FINISH = "GameTournamentButtonFinish";
-	public static final String GAME_TOURNAMENT_BUTTON_MENU = "GameTournamentButtonMenu";
-	public static final String GAME_TOURNAMENT_BUTTON_NEXT_MATCH = "GameTournamentButtonNextMatch";
-	public static final String GAME_TOURNAMENT_BUTTON_RESULTS = "GameTournamentButtonResults";
-	public static final String GAME_TOURNAMENT_BUTTON_STATISTICS = "GameTournamentButtonStatistics";
-	/* DESCRIPTION */
-	public static final String GAME_TOURNAMENT_DESCRIPTION_TITLE = "GameTournamentDescriptionTitle";
-		/* MISC */
-		public static final String GAME_TOURNAMENT_DESCRIPTION_MISC_TITLE = "GameTournamentDescriptionMiscTitle";
-		/* NOTES */
-		public static final String GAME_TOURNAMENT_DESCRIPTION_NOTES_TITLE = "GameTournamentDescriptionNotesTitle";
-		/* PLAYERS */
-			/* HEADER */
-			public static final String GAME_TOURNAMENT_DESCRIPTION_PLAYERS_HEADER_NAME = "GameTournamentDescriptionPlayersHeaderName";
-			public static final String GAME_TOURNAMENT_DESCRIPTION_PLAYERS_HEADER_PROFILE = "GameTournamentDescriptionPlayersHeaderProfile";
-			public static final String GAME_TOURNAMENT_DESCRIPTION_PLAYERS_HEADER_RANK = "GameTournamentDescriptionPlayersHeaderRank";
-			/* DATA */
-			public static final String GAME_TOURNAMENT_DESCRIPTION_PLAYERS_DATA_COMPUTER = "GameTournamentDescriptionPlayersDataComputer";
-			public static final String GAME_TOURNAMENT_DESCRIPTION_PLAYERS_DATA_HUMAN = "GameTournamentDescriptionPlayersDataHuman";
-	/* RESULTS */
-	public static final String GAME_TOURNAMENT_RESULTS_TITLE = "GameTournamentResultsTitle";
-		/* HEADER */
-		public static final String GAME_TOURNAMENT_RESULTS_HEADER_BOMBS = "GameTournamentResultsHeaderBombs";
-		public static final String GAME_TOURNAMENT_RESULTS_HEADER_CROWNS = "GameTournamentResultsHeaderCrowns";
-		public static final String GAME_TOURNAMENT_RESULTS_HEADER_CUSTOM_LIMIT = "GameTournamentResultsHeaderCustomLimit";
-		public static final String GAME_TOURNAMENT_RESULTS_HEADER_CUSTOM_POINTS = "GameTournamentResultsHeaderCustomPoints";
-		public static final String GAME_TOURNAMENT_RESULTS_HEADER_BOMBEDS = "GameTournamentResultsHeaderBombeds";
-		public static final String GAME_TOURNAMENT_RESULTS_HEADER_ITEMS = "GameTournamentResultsHeaderItems";
-		public static final String GAME_TOURNAMENT_RESULTS_HEADER_BOMBINGS = "GameTournamentResultsHeaderBombings";
-		public static final String GAME_TOURNAMENT_RESULTS_HEADER_MATCH = "GameTournamentResultsHeaderMatch";
-		public static final String GAME_TOURNAMENT_RESULTS_HEADER_NAME = "GameTournamentResultsHeaderName";
-		public static final String GAME_TOURNAMENT_RESULTS_HEADER_PAINTINGS = "GameTournamentResultsHeaderPaintings";
-		public static final String GAME_TOURNAMENT_RESULTS_HEADER_PROFILE = "GameTournamentResultsHeaderProfile";
-		public static final String GAME_TOURNAMENT_RESULTS_HEADER_POINTS = "GameTournamentResultsHeaderPoints";
-		public static final String GAME_TOURNAMENT_RESULTS_HEADER_TIME = "GameTournamentResultsHeaderTime";
-		public static final String GAME_TOURNAMENT_RESULTS_HEADER_TOTAL = "GameTournamentResultsHeaderTotal";
-		/* DATA */
-		public static final String GAME_TOURNAMENT_RESULTS_DATA_COMPUTER = "GameTournamentResultsDataComputer";
-		public static final String GAME_TOURNAMENT_RESULTS_DATA_HUMAN = "GameTournamentResultsDataHuman";
-	/* STATISTICS */
-	public static final String GAME_TOURNAMENT_STATISTICS_TITLE = "GameTournamentStatisticsTitle";
-		/* HEADER */
-		public static final String GAME_TOURNAMENT_STATISTICS_HEADER_NAME = "GameTournamentStatisticsHeaderName";
-	
-	/////////////////////////////////////////////////////////////////
-	// GAME MATCH		/////////////////////////////////////////////
-	/////////////////////////////////////////////////////////////////
-	/* BUTTONS */	
-	public static final String GAME_MATCH_BUTTON_QUIT = "GameMatchButtonQuit";
-	public static final String GAME_MATCH_BUTTON_CURRENT_ROUND = "GameMatchButtonCurrentRound";
-	public static final String GAME_MATCH_BUTTON_CURRENT_TOURNAMENT = "GameMatchButtonCurrentTournament";
-	public static final String GAME_MATCH_BUTTON_DESCRIPTION = "GameMatchButtonDescription";
-	public static final String GAME_MATCH_BUTTON_FINISH = "GameMatchButtonFinish";
-	public static final String GAME_MATCH_BUTTON_NEXT_ROUND = "GameMatchButtonNextRound";
-	public static final String GAME_MATCH_BUTTON_RESULTS = "GameMatchButtonResults";
-	public static final String GAME_MATCH_BUTTON_STATISTICS = "GameMatchButtonStatistics";
-	/* DESCRIPTION */
-	public static final String GAME_MATCH_DESCRIPTION_TITLE = "GameMatchDescriptionTitle";
-		/* MISC */
-		public static final String GAME_MATCH_DESCRIPTION_MISC_TITLE = "GameMatchDescriptionMiscTitle";
-		/* NOTES */
-		public static final String GAME_MATCH_DESCRIPTION_NOTES_TITLE = "GameMatchDescriptionNotesTitle";
-		/* PLAYERS */
-			/* HEADER */
-			public static final String GAME_MATCH_DESCRIPTION_PLAYERS_HEADER_CONTROLS = "GameMatchDescriptionPlayersHeaderControls";
-			public static final String GAME_MATCH_DESCRIPTION_PLAYERS_HEADER_NAME = "GameMatchDescriptionPlayersHeaderName";
-			public static final String GAME_MATCH_DESCRIPTION_PLAYERS_HEADER_PROFILE = "GameMatchDescriptionPlayersHeaderProfile";
-			public static final String GAME_MATCH_DESCRIPTION_PLAYERS_HEADER_RANK = "GameMatchDescriptionPlayersHeaderRank";
-			/* DATA */
-			public static final String GAME_MATCH_DESCRIPTION_PLAYERS_DATA_COMPUTER = "GameMatchDescriptionPlayersDataComputer";
-			public static final String GAME_MATCH_DESCRIPTION_PLAYERS_DATA_CONTROLS = "GameMatchDescriptionPlayersDataControls";
-			public static final String GAME_MATCH_DESCRIPTION_PLAYERS_DATA_HUMAN = "GameMatchDescriptionPlayersDataHuman";
-			public static final String GAME_MATCH_DESCRIPTION_PLAYERS_DATA_NOCONTROLS = "GameMatchDescriptionPlayersDataNocontrols";
-	/* RESULTS */
-	public static final String GAME_MATCH_RESULTS_TITLE = "GameMatchResultsTitle";
-		/* HEADER */
-		public static final String GAME_MATCH_RESULTS_HEADER_BOMBS = "GameMatchResultsHeaderBombs";
-		public static final String GAME_MATCH_RESULTS_HEADER_CROWNS = "GameMatchResultsHeaderCrowns";
-		public static final String GAME_MATCH_RESULTS_HEADER_CUSTOM_LIMIT = "GameMatchResultsHeaderCustomLimit";
-		public static final String GAME_MATCH_RESULTS_HEADER_CUSTOM_POINTS = "GameMatchResultsHeaderCustomPoints";
-		public static final String GAME_MATCH_RESULTS_HEADER_BOMBEDS = "GameMatchResultsHeaderBombeds";
-		public static final String GAME_MATCH_RESULTS_HEADER_ITEMS = "GameMatchResultsHeaderItems";
-		public static final String GAME_MATCH_RESULTS_HEADER_BOMBINGS = "GameMatchResultsHeaderBombings";
-		public static final String GAME_MATCH_RESULTS_HEADER_NAME = "GameMatchResultsHeaderName";
-		public static final String GAME_MATCH_RESULTS_HEADER_PAINTINGS = "GameMatchResultsHeaderPaintings";
-		public static final String GAME_MATCH_RESULTS_HEADER_POINTS = "GameMatchResultsHeaderPoints";
-		public static final String GAME_MATCH_RESULTS_HEADER_PROFILE = "GameMatchResultsHeaderProfile";
-		public static final String GAME_MATCH_RESULTS_HEADER_ROUND = "GameMatchResultsHeaderRound";
-		public static final String GAME_MATCH_RESULTS_HEADER_TIME = "GameMatchResultsHeaderTime";
-		public static final String GAME_MATCH_RESULTS_HEADER_TOTAL = "GameMatchResultsHeaderTotal";
-		/* DATA */
-		public static final String GAME_MATCH_RESULTS_DATA_COMPUTER = "GameMatchResultsDataComputer";
-		public static final String GAME_MATCH_RESULTS_DATA_HUMAN = "GameMatchResultsDataHuman";
-	/* STATISTICS */
-	public static final String GAME_MATCH_STATISTICS_TITLE = "GameMatchStatisticsTitle";
-		/* HEADER */
-		public static final String GAME_MATCH_STATISTICS_HEADER_NAME = "GameMatchStatisticsHeaderName";
-	
-	/////////////////////////////////////////////////////////////////
-	// GAME ROUND		/////////////////////////////////////////////
-	/////////////////////////////////////////////////////////////////
-	/* BUTTONS */	
-	public static final String GAME_ROUND_BUTTON_QUIT = "GameRoundButtonQuit";
-	public static final String GAME_ROUND_BUTTON_CURRENT_MATCH = "GameRoundButtonCurrentMatch";
-	public static final String GAME_ROUND_BUTTON_DESCRIPTION = "GameRoundButtonDescription";
-	public static final String GAME_ROUND_BUTTON_FINISH = "GameRoundButtonFinish";
-	public static final String GAME_ROUND_BUTTON_PLAY = "GameRoundButtonPlay";
-	public static final String GAME_ROUND_BUTTON_RESULTS = "GameRoundButtonResults";
-	public static final String GAME_ROUND_BUTTON_STATISTICS = "GameRoundButtonStatistics";
-	/* PROGRESS BAR */	
-	public static final String GAME_ROUND_PROGRESSBAR_BOMBSET = "GameRoundProgressbarBombset";
-	public static final String GAME_ROUND_PROGRESSBAR_COMPLETE = "GameRoundProgressbarComplete";
-	public static final String GAME_ROUND_PROGRESSBAR_ITEMSET = "GameRoundProgressbarItemset";
-	public static final String GAME_ROUND_PROGRESSBAR_PLAYER = "GameRoundProgressbarPlayer";
-	public static final String GAME_ROUND_PROGRESSBAR_THEME = "GameRoundProgressbarTheme";
-	/* DESCRIPTION */
-	public static final String GAME_ROUND_DESCRIPTION_TITLE = "GameRoundDescriptionTitle";
-		/* MISC */
-		public static final String GAME_ROUND_DESCRIPTION_MISC_TITLE = "GameRoundDescriptionMiscTitle";
-			/* HEADER */
-			public static final String GAME_ROUND_DESCRIPTION_MISC_HEADER_AUTHOR = "GameRoundDescriptionMiscHeaderAuthor";
-			public static final String GAME_ROUND_DESCRIPTION_MISC_HEADER_DIMENSION = "GameRoundDescriptionMiscHeaderDimension";
-			public static final String GAME_ROUND_DESCRIPTION_MISC_HEADER_INSTANCE = "GameRoundDescriptionMiscHeaderInstance";
-			public static final String GAME_ROUND_DESCRIPTION_MISC_HEADER_PACK = "GameRoundDescriptionMiscHeaderPack";
-			public static final String GAME_ROUND_DESCRIPTION_MISC_HEADER_SOURCE = "GameRoundDescriptionMiscHeaderSource";
-			public static final String GAME_ROUND_DESCRIPTION_MISC_HEADER_THEME = "GameRoundDescriptionMiscHeaderTheme";
-			public static final String GAME_ROUND_DESCRIPTION_MISC_HEADER_TITLE = "GameRoundDescriptionMiscHeaderTitle";
-		/* NOTES */
-		public static final String GAME_ROUND_DESCRIPTION_NOTES_TITLE = "GameRoundDescriptionNotesTitle";
-		/* PREVIEW */
-		public static final String GAME_ROUND_DESCRIPTION_PREVIEW_TITLE = "GameRoundDescriptionPreviewTitle";
-	/* RESULTS */
-	public static final String GAME_ROUND_RESULTS_TITLE = "GameRoundResultsTitle";
-		/* HEADER */
-		public static final String GAME_ROUND_RESULTS_HEADER_BOMBS = "GameRoundResultsHeaderBombs";
-		public static final String GAME_ROUND_RESULTS_HEADER_CROWNS = "GameRoundResultsHeaderCrowns";
-		public static final String GAME_ROUND_RESULTS_HEADER_CUSTOM_LIMIT = "GameRoundResultsHeaderCustomLimit";
-		public static final String GAME_ROUND_RESULTS_HEADER_CUSTOM_POINTS = "GameRoundResultsHeaderCustomPoints";
-		public static final String GAME_ROUND_RESULTS_HEADER_BOMBEDS = "GameRoundResultsHeaderBombeds";
-		public static final String GAME_ROUND_RESULTS_HEADER_ITEMS = "GameRoundResultsHeaderItems";
-		public static final String GAME_ROUND_RESULTS_HEADER_BOMBINGS = "GameRoundResultsHeaderBombings";
-		public static final String GAME_ROUND_RESULTS_HEADER_NAME = "GameRoundResultsHeaderName";
-		public static final String GAME_ROUND_RESULTS_HEADER_PAINTINGS = "GameRoundResultsHeaderPaintings";
-		public static final String GAME_ROUND_RESULTS_HEADER_PROFILE = "GameRoundResultsHeaderProfile";
-		public static final String GAME_ROUND_RESULTS_HEADER_POINTS = "GameRoundResultsHeaderPoints";
-		public static final String GAME_ROUND_RESULTS_HEADER_TIME = "GameRoundResultsHeaderTime";
-		/* DATA */
-		public static final String GAME_ROUND_RESULTS_DATA_COMPUTER = "GameRoundResultsDataComputer";
-		public static final String GAME_ROUND_RESULTS_DATA_HUMAN = "GameRoundResultsDataHuman";
-	/* STATISTICS */
-	public static final String GAME_ROUND_STATISTICS_TITLE = "GameRoundStatisticsTitle";
-		/* HEADER */
-		public static final String GAME_ROUND_STATISTICS_HEADER_NAME = "GameRoundStatisticsHeaderName";
+	/* GAME */
+		/* TOURNAMENT */
+			/* BUTTONS */	
+			public static final String GAME_TOURNAMENT_BUTTON_QUIT = "GameTournamentButtonQuit";
+			public static final String GAME_TOURNAMENT_BUTTON_CURRENT_MATCH = "GameTournamentButtonCurrentMatch";
+			public static final String GAME_TOURNAMENT_BUTTON_DESCRIPTION = "GameTournamentButtonDescription";
+			public static final String GAME_TOURNAMENT_BUTTON_FINISH = "GameTournamentButtonFinish";
+			public static final String GAME_TOURNAMENT_BUTTON_MENU = "GameTournamentButtonMenu";
+			public static final String GAME_TOURNAMENT_BUTTON_NEXT_MATCH = "GameTournamentButtonNextMatch";
+			public static final String GAME_TOURNAMENT_BUTTON_RESULTS = "GameTournamentButtonResults";
+			public static final String GAME_TOURNAMENT_BUTTON_STATISTICS = "GameTournamentButtonStatistics";
+			/* DESCRIPTION */
+			public static final String GAME_TOURNAMENT_DESCRIPTION_TITLE = "GameTournamentDescriptionTitle";
+				/* MISC */
+				public static final String GAME_TOURNAMENT_DESCRIPTION_MISC_TITLE = "GameTournamentDescriptionMiscTitle";
+				/* NOTES */
+				public static final String GAME_TOURNAMENT_DESCRIPTION_NOTES_TITLE = "GameTournamentDescriptionNotesTitle";
+				/* PLAYERS */
+					/* HEADER */
+					public static final String GAME_TOURNAMENT_DESCRIPTION_PLAYERS_HEADER_NAME = "GameTournamentDescriptionPlayersHeaderName";
+					public static final String GAME_TOURNAMENT_DESCRIPTION_PLAYERS_HEADER_PROFILE = "GameTournamentDescriptionPlayersHeaderProfile";
+					public static final String GAME_TOURNAMENT_DESCRIPTION_PLAYERS_HEADER_RANK = "GameTournamentDescriptionPlayersHeaderRank";
+					/* DATA */
+					public static final String GAME_TOURNAMENT_DESCRIPTION_PLAYERS_DATA_COMPUTER = "GameTournamentDescriptionPlayersDataComputer";
+					public static final String GAME_TOURNAMENT_DESCRIPTION_PLAYERS_DATA_HUMAN = "GameTournamentDescriptionPlayersDataHuman";
+			/* RESULTS */
+			public static final String GAME_TOURNAMENT_RESULTS_TITLE = "GameTournamentResultsTitle";
+			/* STATISTICS */
+			public static final String GAME_TOURNAMENT_STATISTICS_TITLE = "GameTournamentStatisticsTitle";
+				/* HEADER */
+				public static final String GAME_TOURNAMENT_STATISTICS_HEADER_NAME = "GameTournamentStatisticsHeaderName";
+		/* MATCH */
+			/* BUTTONS */	
+			public static final String GAME_MATCH_BUTTON_QUIT = "GameMatchButtonQuit";
+			public static final String GAME_MATCH_BUTTON_CURRENT_ROUND = "GameMatchButtonCurrentRound";
+			public static final String GAME_MATCH_BUTTON_CURRENT_TOURNAMENT = "GameMatchButtonCurrentTournament";
+			public static final String GAME_MATCH_BUTTON_DESCRIPTION = "GameMatchButtonDescription";
+			public static final String GAME_MATCH_BUTTON_FINISH = "GameMatchButtonFinish";
+			public static final String GAME_MATCH_BUTTON_NEXT_ROUND = "GameMatchButtonNextRound";
+			public static final String GAME_MATCH_BUTTON_RESULTS = "GameMatchButtonResults";
+			public static final String GAME_MATCH_BUTTON_STATISTICS = "GameMatchButtonStatistics";
+			/* DESCRIPTION */
+			public static final String GAME_MATCH_DESCRIPTION_TITLE = "GameMatchDescriptionTitle";
+				/* MISC */
+				public static final String GAME_MATCH_DESCRIPTION_MISC_TITLE = "GameMatchDescriptionMiscTitle";
+				/* NOTES */
+				public static final String GAME_MATCH_DESCRIPTION_NOTES_TITLE = "GameMatchDescriptionNotesTitle";
+				/* PLAYERS */
+					/* HEADER */
+					public static final String GAME_MATCH_DESCRIPTION_PLAYERS_HEADER_CONTROLS = "GameMatchDescriptionPlayersHeaderControls";
+					public static final String GAME_MATCH_DESCRIPTION_PLAYERS_HEADER_NAME = "GameMatchDescriptionPlayersHeaderName";
+					public static final String GAME_MATCH_DESCRIPTION_PLAYERS_HEADER_PROFILE = "GameMatchDescriptionPlayersHeaderProfile";
+					public static final String GAME_MATCH_DESCRIPTION_PLAYERS_HEADER_RANK = "GameMatchDescriptionPlayersHeaderRank";
+					/* DATA */
+					public static final String GAME_MATCH_DESCRIPTION_PLAYERS_DATA_COMPUTER = "GameMatchDescriptionPlayersDataComputer";
+					public static final String GAME_MATCH_DESCRIPTION_PLAYERS_DATA_CONTROLS = "GameMatchDescriptionPlayersDataControls";
+					public static final String GAME_MATCH_DESCRIPTION_PLAYERS_DATA_HUMAN = "GameMatchDescriptionPlayersDataHuman";
+					public static final String GAME_MATCH_DESCRIPTION_PLAYERS_DATA_NOCONTROLS = "GameMatchDescriptionPlayersDataNocontrols";
+			/* RESULTS */
+			public static final String GAME_MATCH_RESULTS_TITLE = "GameMatchResultsTitle";
+			/* STATISTICS */
+			public static final String GAME_MATCH_STATISTICS_TITLE = "GameMatchStatisticsTitle";
+				/* HEADER */
+				public static final String GAME_MATCH_STATISTICS_HEADER_NAME = "GameMatchStatisticsHeaderName";
+		/* ROUND */
+			/* BUTTONS */	
+			public static final String GAME_ROUND_BUTTON_QUIT = "GameRoundButtonQuit";
+			public static final String GAME_ROUND_BUTTON_CURRENT_MATCH = "GameRoundButtonCurrentMatch";
+			public static final String GAME_ROUND_BUTTON_DESCRIPTION = "GameRoundButtonDescription";
+			public static final String GAME_ROUND_BUTTON_FINISH = "GameRoundButtonFinish";
+			public static final String GAME_ROUND_BUTTON_PLAY = "GameRoundButtonPlay";
+			public static final String GAME_ROUND_BUTTON_RESULTS = "GameRoundButtonResults";
+			public static final String GAME_ROUND_BUTTON_STATISTICS = "GameRoundButtonStatistics";
+			/* PROGRESS BAR */	
+			public static final String GAME_ROUND_PROGRESSBAR_BOMBSET = "GameRoundProgressbarBombset";
+			public static final String GAME_ROUND_PROGRESSBAR_COMPLETE = "GameRoundProgressbarComplete";
+			public static final String GAME_ROUND_PROGRESSBAR_ITEMSET = "GameRoundProgressbarItemset";
+			public static final String GAME_ROUND_PROGRESSBAR_PLAYER = "GameRoundProgressbarPlayer";
+			public static final String GAME_ROUND_PROGRESSBAR_THEME = "GameRoundProgressbarTheme";
+			/* DESCRIPTION */
+			public static final String GAME_ROUND_DESCRIPTION_TITLE = "GameRoundDescriptionTitle";
+				/* MISC */
+				public static final String GAME_ROUND_DESCRIPTION_MISC_TITLE = "GameRoundDescriptionMiscTitle";
+					/* HEADER */
+					public static final String GAME_ROUND_DESCRIPTION_MISC_HEADER_AUTHOR = "GameRoundDescriptionMiscHeaderAuthor";
+					public static final String GAME_ROUND_DESCRIPTION_MISC_HEADER_DIMENSION = "GameRoundDescriptionMiscHeaderDimension";
+					public static final String GAME_ROUND_DESCRIPTION_MISC_HEADER_INSTANCE = "GameRoundDescriptionMiscHeaderInstance";
+					public static final String GAME_ROUND_DESCRIPTION_MISC_HEADER_PACK = "GameRoundDescriptionMiscHeaderPack";
+					public static final String GAME_ROUND_DESCRIPTION_MISC_HEADER_SOURCE = "GameRoundDescriptionMiscHeaderSource";
+					public static final String GAME_ROUND_DESCRIPTION_MISC_HEADER_THEME = "GameRoundDescriptionMiscHeaderTheme";
+					public static final String GAME_ROUND_DESCRIPTION_MISC_HEADER_TITLE = "GameRoundDescriptionMiscHeaderTitle";
+				/* NOTES */
+				public static final String GAME_ROUND_DESCRIPTION_NOTES_TITLE = "GameRoundDescriptionNotesTitle";
+				/* PREVIEW */
+				public static final String GAME_ROUND_DESCRIPTION_PREVIEW_TITLE = "GameRoundDescriptionPreviewTitle";
+			/* RESULTS */
+			public static final String GAME_ROUND_RESULTS_TITLE = "GameRoundResultsTitle";
+			/* STATISTICS */
+			public static final String GAME_ROUND_STATISTICS_TITLE = "GameRoundStatisticsTitle";
+				/* HEADER */
+				public static final String GAME_ROUND_STATISTICS_HEADER_NAME = "GameRoundStatisticsHeaderName";
 		
 	/////////////////////////////////////////////////////////////////
 	// COMMON CONTENT	/////////////////////////////////////////////
@@ -570,6 +511,18 @@ public class GuiKeys
 		public static final String COMMON_COLOR_ULTRAMARINE = COMMON_COLOR+ULTRAMARINE;
 		public static final String COMMON_COLOR_WHITE = COMMON_COLOR+WHITE;
 		public static final String COMMON_COLOR_YELLOW = COMMON_COLOR+YELLOW;	
+		
+	/* ITEMS */
+	public static final String COMMON_ITEMS = COMMON+ITEMS;
+		/* AVAILABLE */
+		public static final String AVAILABLE = "Available";
+		public static final String COMMON_ITEMS_AVAILABLE = COMMON_ITEMS+AVAILABLE;
+		public static final String COMMON_ITEMS_AVAILABLE_TITLE = COMMON_ITEMS_AVAILABLE+TITLE;
+		/* INITIAL */
+		public static final String INITIAL = "Initial";
+		public static final String COMMON_ITEMS_INITIAL = COMMON_ITEMS+INITIAL;
+		public static final String COMMON_ITEMS_INITIAL_TITLE = COMMON_ITEMS_INITIAL+TITLE;
+
 	/* LIMIT */
 	public static final String COMMON_LIMIT = COMMON+LIMIT;
 		/* MATCH */
@@ -614,6 +567,7 @@ public class GuiKeys
 			public static final String COMMON_LIMIT_TOURNAMENT_HEADER_ITEMS = COMMON_LIMIT_TOURNAMENT_HEADER+ITEMS;
 			public static final String COMMON_LIMIT_TOURNAMENT_HEADER_PAINTINGS = COMMON_LIMIT_TOURNAMENT_HEADER+PAINTINGS;
 			public static final String COMMON_LIMIT_TOURNAMENT_HEADER_TIME = COMMON_LIMIT_TOURNAMENT_HEADER+TIME;
+			
 	/* POINTS */
 	public static final String COMMON_POINTS = COMMON+POINTS;
 		/* MATCH */
@@ -694,18 +648,75 @@ public class GuiKeys
 			public static final String COMMON_POINTS_TOURNAMENT_DATA_REGULAR = COMMON_POINTS_TOURNAMENT_DATA+REGULAR;
 			public static final String COMMON_POINTS_TOURNAMENT_DATA_SHARE = COMMON_POINTS_TOURNAMENT_DATA+SHARE;
 			public static final String COMMON_POINTS_TOURNAMENT_DATA_TIME = COMMON_POINTS_TOURNAMENT_DATA+TIME;
-	/* ITEMS */
-	public static final String COMMON_ITEMS = COMMON+ITEMS;
-		/* AVAILABLE */
-		public static final String AVAILABLE = "Available";
-		public static final String COMMON_ITEMS_AVAILABLE = COMMON_ITEMS+AVAILABLE;
-		public static final String COMMON_ITEMS_AVAILABLE_TITLE = COMMON_ITEMS_AVAILABLE+TITLE;
-		/* INITIAL */
-		public static final String INITIAL = "Initial";
-		public static final String COMMON_ITEMS_INITIAL = COMMON_ITEMS+INITIAL;
-		public static final String COMMON_ITEMS_INITIAL_TITLE = COMMON_ITEMS_INITIAL+TITLE;
-
-
+			
+	/* RESULTS */
+	public static final String RESULTS = "Results";
+	public static final String COMMON_RESULTS = COMMON+RESULTS;
+		/* MATCH */
+		public static final String COMMON_RESULTS_MATCH = COMMON_RESULTS+MATCH;
+			/* HEADER */
+			public static final String COMMON_RESULTS_MATCH_HEADER = COMMON_RESULTS_MATCH+HEADER;
+			public static final String COMMON_RESULTS_MATCH_HEADER_BOMBEDS = COMMON_RESULTS_MATCH_HEADER+BOMBEDS;
+			public static final String COMMON_RESULTS_MATCH_HEADER_BOMBINGS = COMMON_RESULTS_MATCH_HEADER+BOMBINGS;
+			public static final String COMMON_RESULTS_MATCH_HEADER_BOMBS = COMMON_RESULTS_MATCH_HEADER+BOMBS;
+			public static final String COMMON_RESULTS_MATCH_HEADER_CONFRONTATION = COMMON_RESULTS_MATCH_HEADER+CONFRONTATION;
+			public static final String COMMON_RESULTS_MATCH_HEADER_CROWNS = COMMON_RESULTS_MATCH_HEADER+CROWNS;
+			public static final String COMMON_RESULTS_MATCH_HEADER_LIMIT = COMMON_RESULTS_MATCH_HEADER+LIMIT;
+			public static final String COMMON_RESULTS_MATCH_HEADER_ITEMS = COMMON_RESULTS_MATCH_HEADER+ITEMS;
+			public static final String COMMON_RESULTS_MATCH_HEADER_NAME = COMMON_RESULTS_MATCH_HEADER+NAME;
+			public static final String COMMON_RESULTS_MATCH_HEADER_PAINTINGS = COMMON_RESULTS_MATCH_HEADER+PAINTINGS;
+			public static final String COMMON_RESULTS_MATCH_HEADER_POINTS = COMMON_RESULTS_MATCH_HEADER+POINTS;
+			public static final String COMMON_RESULTS_MATCH_HEADER_PORTRAIT = COMMON_RESULTS_MATCH_HEADER+PORTRAIT;
+			public static final String COMMON_RESULTS_MATCH_HEADER_PROFILE = COMMON_RESULTS_MATCH_HEADER+PROFILE;
+			public static final String COMMON_RESULTS_MATCH_HEADER_TIME = COMMON_RESULTS_MATCH_HEADER+TIME;
+			public static final String COMMON_RESULTS_MATCH_HEADER_TOTAL = COMMON_RESULTS_MATCH_HEADER+TOTAL;
+			/* DATA */
+			public static final String COMMON_RESULTS_MATCH_DATA = COMMON_RESULTS_MATCH+DATA;
+			public static final String COMMON_RESULTS_MATCH_DATA_COMPUTER = COMMON_RESULTS_MATCH_DATA+COMPUTER;
+			public static final String COMMON_RESULTS_MATCH_DATA_HUMAN = COMMON_RESULTS_MATCH_DATA+HUMAN;
+		/* TOURNAMENT */
+		public static final String COMMON_RESULTS_TOURNAMENT = COMMON_RESULTS+TOURNAMENT;
+			/* HEADER */
+			public static final String COMMON_RESULTS_TOURNAMENT_HEADER = COMMON_RESULTS_TOURNAMENT+HEADER;
+			public static final String COMMON_RESULTS_TOURNAMENT_HEADER_BOMBEDS = COMMON_RESULTS_TOURNAMENT_HEADER+BOMBEDS;
+			public static final String COMMON_RESULTS_TOURNAMENT_HEADER_BOMBINGS = COMMON_RESULTS_TOURNAMENT_HEADER+BOMBINGS;
+			public static final String COMMON_RESULTS_TOURNAMENT_HEADER_BOMBS = COMMON_RESULTS_TOURNAMENT_HEADER+BOMBS;
+			public static final String COMMON_RESULTS_TOURNAMENT_HEADER_CONFRONTATION = COMMON_RESULTS_TOURNAMENT_HEADER+CONFRONTATION;
+			public static final String COMMON_RESULTS_TOURNAMENT_HEADER_CROWNS = COMMON_RESULTS_TOURNAMENT_HEADER+CROWNS;
+			public static final String COMMON_RESULTS_TOURNAMENT_HEADER_LIMIT = COMMON_RESULTS_TOURNAMENT_HEADER+LIMIT;
+			public static final String COMMON_RESULTS_TOURNAMENT_HEADER_ITEMS = COMMON_RESULTS_TOURNAMENT_HEADER+ITEMS;
+			public static final String COMMON_RESULTS_TOURNAMENT_HEADER_NAME = COMMON_RESULTS_TOURNAMENT_HEADER+NAME;
+			public static final String COMMON_RESULTS_TOURNAMENT_HEADER_PAINTINGS = COMMON_RESULTS_TOURNAMENT_HEADER+PAINTINGS;
+			public static final String COMMON_RESULTS_TOURNAMENT_HEADER_POINTS = COMMON_RESULTS_TOURNAMENT_HEADER+POINTS;
+			public static final String COMMON_RESULTS_TOURNAMENT_HEADER_PORTRAIT = COMMON_RESULTS_TOURNAMENT_HEADER+PORTRAIT;
+			public static final String COMMON_RESULTS_TOURNAMENT_HEADER_PROFILE = COMMON_RESULTS_TOURNAMENT_HEADER+PROFILE;
+			public static final String COMMON_RESULTS_TOURNAMENT_HEADER_TIME = COMMON_RESULTS_TOURNAMENT_HEADER+TIME;
+			public static final String COMMON_RESULTS_TOURNAMENT_HEADER_TOTAL = COMMON_RESULTS_TOURNAMENT_HEADER+TOTAL;
+			/* DATA */
+			public static final String COMMON_RESULTS_TOURNAMENT_DATA = COMMON_RESULTS_TOURNAMENT+DATA;
+			public static final String COMMON_RESULTS_TOURNAMENT_DATA_COMPUTER = COMMON_RESULTS_TOURNAMENT_DATA+COMPUTER;
+			public static final String COMMON_RESULTS_TOURNAMENT_DATA_HUMAN = COMMON_RESULTS_TOURNAMENT_DATA+HUMAN;
+		/* ROUND */
+		public static final String COMMON_RESULTS_ROUND = COMMON_RESULTS+ROUND;
+			/* HEADER */
+			public static final String COMMON_RESULTS_ROUND_HEADER = COMMON_RESULTS_ROUND+HEADER;
+			public static final String COMMON_RESULTS_ROUND_HEADER_BOMBEDS = COMMON_RESULTS_ROUND_HEADER+BOMBEDS;
+			public static final String COMMON_RESULTS_ROUND_HEADER_BOMBINGS = COMMON_RESULTS_ROUND_HEADER+BOMBINGS;
+			public static final String COMMON_RESULTS_ROUND_HEADER_BOMBS = COMMON_RESULTS_ROUND_HEADER+BOMBS;
+			public static final String COMMON_RESULTS_ROUND_HEADER_CROWNS = COMMON_RESULTS_ROUND_HEADER+CROWNS;
+			public static final String COMMON_RESULTS_ROUND_HEADER_LIMIT = COMMON_RESULTS_ROUND_HEADER+LIMIT;
+			public static final String COMMON_RESULTS_ROUND_HEADER_ITEMS = COMMON_RESULTS_ROUND_HEADER+ITEMS;
+			public static final String COMMON_RESULTS_ROUND_HEADER_NAME = COMMON_RESULTS_ROUND_HEADER+NAME;
+			public static final String COMMON_RESULTS_ROUND_HEADER_PAINTINGS = COMMON_RESULTS_ROUND_HEADER+PAINTINGS;
+			public static final String COMMON_RESULTS_ROUND_HEADER_POINTS = COMMON_RESULTS_ROUND_HEADER+POINTS;
+			public static final String COMMON_RESULTS_ROUND_HEADER_PORTRAIT = COMMON_RESULTS_ROUND_HEADER+PORTRAIT;
+			public static final String COMMON_RESULTS_ROUND_HEADER_PROFILE = COMMON_RESULTS_ROUND_HEADER+PROFILE;
+			public static final String COMMON_RESULTS_ROUND_HEADER_TIME = COMMON_RESULTS_ROUND_HEADER+TIME;
+			/* DATA */
+			public static final String COMMON_RESULTS_ROUND_DATA = COMMON_RESULTS_ROUND+DATA;
+			public static final String COMMON_RESULTS_ROUND_DATA_COMPUTER = COMMON_RESULTS_ROUND_DATA+COMPUTER;
+			public static final String COMMON_RESULTS_ROUND_DATA_HUMAN = COMMON_RESULTS_MATCH_DATA+HUMAN;
+	
 	/////////////////////////////////////////////////////////////////
 	// PROCESS			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////

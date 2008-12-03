@@ -379,6 +379,7 @@
 	</group>
 
 
+<!-- GAME -->
 	<group name="Game" >
 
 <!-- TOURNAMENT PANEL -->
@@ -421,26 +422,6 @@
 
 			<group name="Results">
 				<text name="Title" value="Résultats du tournoi"  tooltip="Résultats du tournoi" />
-				<group name="Header">
-					<text name="Bombs" value="Bombes"  tooltip="Nombre total de bombes posées au cours du tournoi" />
-					<text name="Crowns" value="Couronnes"  tooltip="Nombre total de couronnes ramassées au cours du tournoi" />
-					<text name="CustomLimit" value="Personnalisé"  tooltip="Points personnalisés utilisés comme critère de limite" />
-					<text name="CustomPoints" value="Personnalisé"  tooltip="Points personnalisés utilisés dans le calcul final des points" />
-					<text name="Bombeds" value="Bombé"  tooltip="Nombre total d'explosions subies par le joueur au cours du tournoi" />
-					<text name="Items" value="Items"  tooltip="Nombre total d'items ramassés au cours du tournoi" />
-					<text name="Bombings" value="Bombeur"  tooltip="Nombre total de joueurs explosés au cours du tournoi" />
-					<text name="Match" value="R"  tooltip="Nombre total de points marqués au cours pour la rencontre numéro" />
-					<text name="Name" value="Nom"  tooltip="Nom du joueur" />
-					<text name="Paintings" value="Peinture"  tooltip="Nombre total de cases peintes au cours du tournoi" />
-					<text name="Points" value="Points"  tooltip="Nombre de points marqués pour ce tournoi" />
-					<text name="Profile" value="Humain/Ordinateur"  tooltip="Joueur controlé par un humain ou un ordinateur" />
-					<text name="Time" value="Temps"  tooltip="Nombre total cumulé au cours du tournoi" />
-					<text name="Total" value="Total"  tooltip="Nombre total de points marqués au cours des rencontres" />
-				</group>
-				<group name="Data">
-						<text name="Computer" value="Ordinateur"  tooltip="Ce joueur est contrôlé par l'ordinateur" />
-						<text name="Human" value="Humain"  tooltip="Ce joueur est contrôlé par un être humain (ou un geek)" />
-				</group>
 			</group>
 
 			<group name="Statistics">
@@ -494,26 +475,6 @@
 				
 			<group name="Results">
 				<text name="Title" value="Résultats de la rencontre"  tooltip="Résultats de la rencontre" />
-				<group name="Header">
-					<text name="Bombs" value="Bombes"  tooltip="Nombre total de bombes posées au cours de cette rencontre" />
-					<text name="Crowns" value="Couronnes"  tooltip="Nombre total de couronnes ramassées au cours de cette rencontre" />
-					<text name="CustomLimit" value="Personnalisé"  tooltip="Points personnalisés utilisés comme un critère de fin de rencontre" />
-					<text name="CustomPoints" value="Personnalisé"  tooltip="Points personnalisés utilisés dans le calcul des points de la rencotre" />
-					<text name="Bombeds" value="Bombé"  tooltip="Nombre total d'explosions subies au cours de cette rencontre" />
-					<text name="Items" value="Items"  tooltip="Nombre total d'items ramassés au cours de cette rencontre" />
-					<text name="Bombings" value="Bombeur"  tooltip="Nombre total de joueurs explosés au cours de cette rencontre" />
-					<text name="Name" value="Nom"  tooltip="Nom du joueur" />
-					<text name="Paintings" value="Peinture"  tooltip="Nombre total de cases peintes au cours de cette rencontre" />
-					<text name="Points" value="Points"  tooltip="Nombre total de points marqués pour cette rencontre" />
-					<text name="Profile" value="Humain/Ordinateur"  tooltip="Joueur controlé par un humain ou un ordinateur" />
-					<text name="Round" value="M"  tooltip="Nombre de points marqués pour la manche numéro " />
-					<text name="Time" value="Temps"  tooltip="Temps total cumulé pour cette rencontre" />
-					<text name="Total" value="Total"  tooltip="Nombre total de points marqués pour toutes les manches de cette rencontre" />
-				</group>
-				<group name="Data">
-						<text name="Computer" value="Ordinateur"  tooltip="Joueur contrôlé par l'ordinateur" />
-						<text name="Human" value="Humain"  tooltip="Joueur contrôlé par un être humain" />
-				</group>
 			</group>
 				
 			<group name="Statistics">
@@ -572,24 +533,6 @@
 								
 			<group name="Results">
 				<text name="Title" value="Résultats de la manche"  tooltip="Résultats de la manche" />
-				<group name="Header">
-					<text name="Bombs" value="Bombes"  tooltip="Nombre total de bombes posées au cours de cette manche" />
-					<text name="Crowns" value="Couronnes"  tooltip="Nombre total de couronnes ramassées au cours de cette manche" />
-					<text name="CustomLimit" value="Personnalisé"  tooltip="Points personnalisés utilisés comme critère de fin de manche" />
-					<text name="CustomPoints" value="Personnalisé"  tooltip="Points personnalisés utilisés dans le calcul des points de la manche" />
-					<text name="Bombeds" value="Bombé"  tooltip="Nombre total d'explosions subies au cours de cette manche" />
-					<text name="Items" value="Items"  tooltip="Nombre total d'items ramassés au cours de cette manche" />
-					<text name="Bombings" value="Bombeur"  tooltip="Nombre total de joueurs explosés au cours de cette manche" />
-					<text name="Name" value="Nom"  tooltip="Nom du joueur" />
-					<text name="Paintings" value="Peinture"  tooltip="Nombre total de cases peintes au cours de cette manche" />
-					<text name="Points" value="Points"  tooltip="Nombre de points marqués pour cette manche" />
-					<text name="Profile" value="Humain/Ordinateur"  tooltip="Joueur controlé par un humain ou un ordinateur" />
-					<text name="Time" value="Temps"  tooltip="Temps de jeu pour cette manche" />
-				</group>
-				<group name="Data">
-					<text name="Computer" value="Ordinateur"  tooltip="Joueur contrôlé par l'ordinateur" />
-					<text name="Human" value="Humain"  tooltip="Joueur contrôlé par un être humain" />
-				</group>
 			</group>
 				
 			<group name="Statistics">
@@ -761,6 +704,75 @@
 			</group>
 		</group>
 		
+		<group name="Results" >
+			<group name="Match">
+				<group name="Header">
+					<text name="Bombings" value="Bombeur"  tooltip="Nombre total de joueurs explosés au cours de cette rencontre" />
+					<text name="Bombeds" value="Bombé"  tooltip="Nombre total d'explosions subies au cours de cette rencontre" />
+					<text name="Bombs" value="Bombes"  tooltip="Nombre total de bombes posées au cours de cette rencontre" />
+					<text name="Confrontation" value="M"  tooltip="Nombre de points marqués pour la manche numéro " />
+					<text name="Crowns" value="Couronnes"  tooltip="Nombre total de couronnes ramassées au cours de cette rencontre" />
+					<text name="Limit" value="Limite"  tooltip="Points personnalisés utilisés comme un critère de fin de rencontre" />
+					<text name="Items" value="Items"  tooltip="Nombre total d'items ramassés au cours de cette rencontre" />
+					<text name="Name" value="Nom"  tooltip="Nom du joueur" />
+					<text name="Paintings" value="Peinture"  tooltip="Nombre total de cases peintes au cours de cette rencontre" />
+					<text name="Points" value="Points"  tooltip="Nombre total de points marqués pour cette rencontre" />
+					<text name="Portrait" value="Personnage"  tooltip="Personnage utilisé par le joueur" />
+					<text name="Profile" value="Humain/Ordinateur"  tooltip="Joueur controlé par un humain ou un ordinateur" />
+					<text name="Time" value="Temps"  tooltip="Temps total cumulé pour cette rencontre" />
+					<text name="Total" value="Total"  tooltip="Nombre total de points marqués pour toutes les manches de cette rencontre" />
+				</group>
+				<group name="Data">
+						<text name="Computer" value="Ordinateur"  tooltip="Joueur contrôlé par l'ordinateur" />
+						<text name="Human" value="Humain"  tooltip="Joueur contrôlé par un être humain" />
+				</group>
+			</group>
+			
+			<group name="Round">
+				<group name="Header">
+					<text name="Bombeds" value="Bombé"  tooltip="Nombre total d'explosions subies au cours de cette manche" />
+					<text name="Bombings" value="Bombeur"  tooltip="Nombre total de joueurs explosés au cours de cette manche" />
+					<text name="Bombs" value="Bombes"  tooltip="Nombre total de bombes posées au cours de cette manche" />
+					<text name="Crowns" value="Couronnes"  tooltip="Nombre total de couronnes ramassées au cours de cette manche" />
+					<text name="Limit" value="Limite"  tooltip="Points personnalisés utilisés comme critère de fin de manche" />
+					<text name="Items" value="Items"  tooltip="Nombre total d'items ramassés au cours de cette manche" />
+					<text name="Name" value="Nom"  tooltip="Nom du joueur" />
+					<text name="Paintings" value="Peinture"  tooltip="Nombre total de cases peintes au cours de cette manche" />
+					<text name="Points" value="Points"  tooltip="Nombre de points marqués pour cette manche" />
+					<text name="Portrait" value="Personnage"  tooltip="Personnage utilisé par le joueur" />
+					<text name="Profile" value="Humain/Ordinateur"  tooltip="Joueur controlé par un humain ou un ordinateur" />
+					<text name="Time" value="Temps"  tooltip="Temps de jeu pour cette manche" />
+				</group>
+				<group name="Data">
+					<text name="Computer" value="Ordinateur"  tooltip="Joueur contrôlé par l'ordinateur" />
+					<text name="Human" value="Humain"  tooltip="Joueur contrôlé par un être humain" />
+				</group>
+			</group>
+
+			<group name="Tournament" >
+				<group name="Header">
+					<text name="Bombeds" value="Bombé"  tooltip="Nombre total d'explosions subies par le joueur au cours du tournoi" />
+					<text name="Bombings" value="Bombeur"  tooltip="Nombre total de joueurs explosés au cours du tournoi" />
+					<text name="Bombs" value="Bombes"  tooltip="Nombre total de bombes posées au cours du tournoi" />
+					<text name="Confrontation" value="R"  tooltip="Nombre total de points marqués au cours pour la rencontre numéro" />
+					<text name="Crowns" value="Couronnes"  tooltip="Nombre total de couronnes ramassées au cours du tournoi" />
+					<text name="Limit" value="Limite"  tooltip="Points personnalisés utilisés comme critère de limite" />
+					<text name="Items" value="Items"  tooltip="Nombre total d'items ramassés au cours du tournoi" />
+					<text name="Name" value="Nom"  tooltip="Nom du joueur" />
+					<text name="Paintings" value="Peinture"  tooltip="Nombre total de cases peintes au cours du tournoi" />
+					<text name="Points" value="Points"  tooltip="Nombre de points marqués pour ce tournoi" />
+					<text name="Portrait" value="Personnage"  tooltip="Personnage utilisé par le joueur" />
+					<text name="Profile" value="Humain/Ordinateur"  tooltip="Joueur controlé par un humain ou un ordinateur" />
+					<text name="Time" value="Temps"  tooltip="Nombre total cumulé au cours du tournoi" />
+					<text name="Total" value="Total"  tooltip="Nombre total de points marqués au cours des rencontres" />
+				</group>
+				<group name="Data">
+						<text name="Computer" value="Ordinateur"  tooltip="Ce joueur est contrôlé par l'ordinateur" />
+						<text name="Human" value="Humain"  tooltip="Ce joueur est contrôlé par un être humain (ou un geek)" />
+				</group>
+			</group>
+		</group>
+			
 	</group>
 	
 </language>

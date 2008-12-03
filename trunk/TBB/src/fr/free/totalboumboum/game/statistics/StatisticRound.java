@@ -58,6 +58,12 @@ public class StatisticRound extends StatisticBase implements Serializable
 		return result;
 	}
 
+	@Override
+	public ArrayList<StatisticBase> getConfrontationStats()
+	{	ArrayList<StatisticBase> result = new ArrayList<StatisticBase>();
+		return result;
+	}
+	
 	/////////////////////////////////////////////////////////////////
 	// STATISTIC EVENTS	/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////

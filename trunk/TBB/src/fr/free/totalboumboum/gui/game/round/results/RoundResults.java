@@ -21,31 +21,18 @@ package fr.free.totalboumboum.gui.game.round.results;
  * 
  */
 
-import java.awt.Color;
-import java.awt.image.BufferedImage;
-import java.text.NumberFormat;
-import java.util.ArrayList;
-
-import javax.swing.JLabel;
-
 import fr.free.totalboumboum.configuration.Configuration;
-import fr.free.totalboumboum.configuration.profile.Portraits;
-import fr.free.totalboumboum.configuration.profile.Profile;
 import fr.free.totalboumboum.game.round.Round;
-import fr.free.totalboumboum.game.statistics.Score;
-import fr.free.totalboumboum.game.statistics.StatisticRound;
+import fr.free.totalboumboum.gui.common.content.subpanel.results.ResultsSubPanel;
 import fr.free.totalboumboum.gui.common.structure.panel.SplitMenuPanel;
 import fr.free.totalboumboum.gui.common.structure.panel.data.EntitledDataPanel;
-import fr.free.totalboumboum.gui.common.structure.subpanel.UntitledSubPanelTable;
 import fr.free.totalboumboum.gui.tools.GuiKeys;
-import fr.free.totalboumboum.gui.tools.GuiTools;
-import fr.free.totalboumboum.tools.StringTools;
 
 public class RoundResults extends EntitledDataPanel
 {	
 	private static final long serialVersionUID = 1L;
 
-	private UntitledSubPanelTable resultsPanel;
+	private ResultsSubPanel resultsPanel;
 	
 	public RoundResults(SplitMenuPanel container)
 	{	super(container);
@@ -55,51 +42,13 @@ public class RoundResults extends EntitledDataPanel
 		setTitleKey(key);
 		
 		// data
-		{	int lines = 16+1;
-			int cols = 2+5+1;			
-			resultsPanel = new UntitledSubPanelTable(dataWidth,dataHeight,cols,lines,true);
-
-			// headers
-			{	{	JLabel lbl = resultsPanel.getLabel(0,0);
-					lbl.setOpaque(false);
-				}				
-				@SuppressWarnings("unused")
-				Round round = Configuration.getGameConfiguration().getTournament().getCurrentMatch().getCurrentRound();
-				String sc = null;
-/*				
-				switch(round.getPlayMode())
-				{	case CROWN:
-						sc = GuiKeys.GAME_ROUND_RESULTS_HEADER_CROWNS;
-						break;
-					case PAINT:
-						sc = GuiKeys.GAME_ROUND_RESULTS_HEADER_PAINTINGS;
-						break;
-					case SURVIVAL:
-						sc = GuiKeys.GAME_ROUND_RESULTS_HEADER_TIME;
-						break;
-				}
-*/				
-sc = GuiKeys.GAME_ROUND_RESULTS_HEADER_TIME;
-				String keys[] = 
-				{	GuiKeys.GAME_ROUND_RESULTS_HEADER_NAME,
-					GuiKeys.GAME_ROUND_RESULTS_HEADER_BOMBS,
-					GuiKeys.GAME_ROUND_RESULTS_HEADER_ITEMS,
-					GuiKeys.GAME_ROUND_RESULTS_HEADER_BOMBEDS,
-					GuiKeys.GAME_ROUND_RESULTS_HEADER_BOMBINGS,
-					sc,
-					GuiKeys.GAME_ROUND_RESULTS_HEADER_POINTS
-				};
-				for(int col=1;col<keys.length+1;col++)
-					resultsPanel.setLabelKey(0,col,keys[col-1],true);
-			}
-			// data
-			{	resultsPanel.setColSubMaxWidth(1,Integer.MAX_VALUE);
-				int w = resultsPanel.getHeaderHeight();
-				resultsPanel.setColSubPreferredWidth(1,w);
-			}
-			//
+		{	resultsPanel = new ResultsSubPanel(dataWidth,dataHeight);
+			resultsPanel.setShowConfrontations(false);
+			resultsPanel.setShowTotal(false);
 			setDataPart(resultsPanel);
-			updateData();
+			//
+			Round round = Configuration.getGameConfiguration().getTournament().getCurrentMatch().getCurrentRound();
+			resultsPanel.setStatisticHolder(round);
 		}
 	}
 
@@ -110,90 +59,7 @@ sc = GuiKeys.GAME_ROUND_RESULTS_HEADER_TIME;
 
 	@Override
 	public void updateData()
-	{	// init
-		Round round = Configuration.getGameConfiguration().getTournament().getCurrentMatch().getCurrentRound();
-		StatisticRound stats = round.getStats();
-		ArrayList<Profile> players = round.getProfiles();
-		int[] orderedPlayers = round.getOrderedPlayers();
-		float[] points = stats.getPoints();
-
-		// display the ranking
-		int col = 0;
-		int line = 0;
-		for(int i=0;i<orderedPlayers.length;i++)
-		{	// init
-			col = 0;
-			line++;
-			Profile profile = players.get(orderedPlayers[i]);
-			// color
-			Color clr = profile.getSpriteSelectedColor().getColor();
-			// portrait
-			{	BufferedImage image = profile.getPortraits().getOutgamePortrait(Portraits.OUTGAME_HEAD);
-				String tooltip = profile.getSpriteName();
-				resultsPanel.setLabelIcon(line,col,image,tooltip);
-				int alpha = GuiTools.ALPHA_TABLE_REGULAR_BACKGROUND_LEVEL3;
-				Color bg = new Color(clr.getRed(),clr.getGreen(),clr.getBlue(),alpha);
-				resultsPanel.setLabelBackground(line,col,bg);			
-				col++;
-			}
-			// name
-			{	String text = profile.getName();
-				String tooltip = profile.getName();
-				resultsPanel.setLabelText(line,col,text,tooltip);
-				int alpha = GuiTools.ALPHA_TABLE_REGULAR_BACKGROUND_LEVEL3;
-				Color bg = new Color(clr.getRed(),clr.getGreen(),clr.getBlue(),alpha);
-				resultsPanel.setLabelBackground(line,col,bg);			
-				col++;
-			}
-			// scores
-			{	NumberFormat nf = NumberFormat.getInstance();
-				nf.setMaximumFractionDigits(2);
-				nf.setMinimumFractionDigits(0);
-				String sc = "";
-/*				
-				switch(round.getPlayMode())
-				{	case CROWN:
-						sc = nf.format(stats.getScores(Score.CROWNS)[pp.getIndex()]);
-						break;
-					case PAINT:
-						sc = nf.format(stats.getScores(Score.PAINTINGS)[pp.getIndex()]);
-						break;
-					case SURVIVAL:
-						sc = StringTools.formatTimeWithSeconds(stats.getScores(Score.TIME)[pp.getIndex()]);
-						break;
-				}
-*/
-sc = StringTools.formatTimeWithSeconds(stats.getScores(Score.TIME)[orderedPlayers[i]]);
-				String[] scores = 
-				{	nf.format(stats.getScores(Score.BOMBS)[orderedPlayers[i]]),
-					nf.format(stats.getScores(Score.ITEMS)[orderedPlayers[i]]),
-					nf.format(stats.getScores(Score.BOMBEDS)[orderedPlayers[i]]),
-					nf.format(stats.getScores(Score.BOMBINGS)[orderedPlayers[i]]),
-					sc
-				};
-				for(int j=0;j<scores.length;j++)
-				{	String text = scores[j];
-					String tooltip = scores[j];
-					resultsPanel.setLabelText(line,col,text,tooltip);
-					int alpha = GuiTools.ALPHA_TABLE_REGULAR_BACKGROUND_LEVEL1;
-					Color bg = new Color(clr.getRed(),clr.getGreen(),clr.getBlue(),alpha);
-					resultsPanel.setLabelBackground(line,col,bg);			
-					col++;
-				}
-			}			
-			// points
-			{	double pts = points[orderedPlayers[i]];
-				NumberFormat nf = NumberFormat.getInstance();
-				nf.setMaximumFractionDigits(2);
-				nf.setMinimumFractionDigits(0);
-				String text = nf.format(pts);
-				String tooltip = nf.format(pts);
-				resultsPanel.setLabelText(line,col,text,tooltip);
-				int alpha = GuiTools.ALPHA_TABLE_REGULAR_BACKGROUND_LEVEL3;
-				Color bg = new Color(clr.getRed(),clr.getGreen(),clr.getBlue(),alpha);
-				resultsPanel.setLabelBackground(line,col,bg);			
-				col++;;
-			}
-		}
+	{	Round round = Configuration.getGameConfiguration().getTournament().getCurrentMatch().getCurrentRound();
+		resultsPanel.setStatisticHolder(round);
 	}
 }

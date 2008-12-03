@@ -22,13 +22,9 @@ package fr.free.totalboumboum.gui.game.round.description;
  */
 
 import java.awt.Color;
-import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
-import java.text.NumberFormat;
-import java.util.HashMap;
-import java.util.Iterator;
 
 import javax.swing.Box;
 import javax.swing.BoxLayout;
@@ -37,20 +33,16 @@ import javax.xml.parsers.ParserConfigurationException;
 
 import org.xml.sax.SAXException;
 
-import java.util.Map.Entry;
-
 import fr.free.totalboumboum.configuration.Configuration;
-import fr.free.totalboumboum.engine.container.itemset.ItemsetPreview;
 import fr.free.totalboumboum.engine.container.level.HollowLevel;
 import fr.free.totalboumboum.engine.container.level.LevelPreview;
 import fr.free.totalboumboum.engine.container.level.LevelPreviewLoader;
-import fr.free.totalboumboum.engine.container.zone.Zone;
-import fr.free.totalboumboum.engine.content.sprite.SpritePreview;
 import fr.free.totalboumboum.game.limit.Limit;
 import fr.free.totalboumboum.game.limit.RoundLimit;
 import fr.free.totalboumboum.game.points.PointsProcessor;
 import fr.free.totalboumboum.game.round.Round;
 import fr.free.totalboumboum.gui.common.content.subpanel.image.ImageSubPanel;
+import fr.free.totalboumboum.gui.common.content.subpanel.items.AvailableItemsSubPanel;
 import fr.free.totalboumboum.gui.common.content.subpanel.items.InitialItemsSubPanel;
 import fr.free.totalboumboum.gui.common.content.subpanel.limits.LimitsListener;
 import fr.free.totalboumboum.gui.common.content.subpanel.limits.LimitsSubPanel;
@@ -62,7 +54,6 @@ import fr.free.totalboumboum.gui.common.structure.subpanel.SubPanel;
 import fr.free.totalboumboum.gui.data.configuration.GuiConfiguration;
 import fr.free.totalboumboum.gui.tools.GuiKeys;
 import fr.free.totalboumboum.gui.tools.GuiTools;
-import fr.free.totalboumboum.tools.ImageTools;
 
 public class RoundDescription extends EntitledDataPanel implements LimitsListener
 {	
@@ -72,7 +63,7 @@ public class RoundDescription extends EntitledDataPanel implements LimitsListene
 	private JPanel downPanel;
 	private ImageSubPanel imagePanel;
 	private InitialItemsSubPanel initialItemsPanel;
-	
+	private AvailableItemsSubPanel availableItemsPanel;
 	private LimitsSubPanel<RoundLimit> limitsPanel;
 	private PointsSubPanel pointsPanel;
 	
@@ -138,9 +129,10 @@ public class RoundDescription extends EntitledDataPanel implements LimitsListene
 				
 				// itemset panel
 				{	int innerHeight = dataHeight - leftWidth - margin;
-					JPanel itemsetPanel = makeItemsetPanel(leftWidth,innerHeight,preview);
-					itemsetPanel.setAlignmentX(Component.CENTER_ALIGNMENT);
-					leftPanel.add(itemsetPanel);
+					availableItemsPanel = new AvailableItemsSubPanel(leftWidth,innerHeight);
+					availableItemsPanel.setLevelPreview(preview);
+//					itemsetPanel.setAlignmentX(Component.CENTER_ALIGNMENT);
+					leftPanel.add(availableItemsPanel);
 				}
 				//
 				infoPanel.add(leftPanel);
@@ -227,71 +219,6 @@ public class RoundDescription extends EntitledDataPanel implements LimitsListene
 			
 			limitsPanel.setLimits(round.getLimits());
 		}
-	}
-
-	private SubPanel makeItemsetPanel(int width, int height, LevelPreview levelPreview)
-	{	// init
-		int lines = 4;
-		int colSubs = 2;
-		int colGroups = 5;
-		if(levelPreview.getItemsetPreview().size()>lines*colGroups)
-		{	lines = 5;
-			colGroups = 6;
-		}
-
-		EntitledSubPanelTable itemsetPanel = new EntitledSubPanelTable(width,height,colGroups,colSubs,lines);
-		String titleKey = GuiKeys.COMMON_ITEMS_AVAILABLE_TITLE;
-		itemsetPanel.setTitleKey(titleKey,true);
-		itemsetPanel.getTable().setColSubMaxWidth(1,Integer.MAX_VALUE);
-		
-		// data
-		NumberFormat nf = NumberFormat.getInstance();
-		nf.setMinimumFractionDigits(0);
-		ItemsetPreview itemsetPreview = levelPreview.getItemsetPreview();
-		Zone zone = Configuration.getGameConfiguration().getTournament().getCurrentMatch().getCurrentRound().getHollowLevel().getZone();
-		HashMap<String,Integer> itemList = zone.getItemCount();
-		Iterator<Entry<String,SpritePreview>> i = itemsetPreview.getItemPreviews().entrySet().iterator();
-		int line = 0;
-		int colGroup = 0;
-		while(i.hasNext())
-		{	// init
-			Entry<String,SpritePreview> temp = i.next();
-			String itemName = temp.getKey();
-			SpritePreview spritePreview = temp.getValue();
-			String name = spritePreview.getName();
-			BufferedImage image = spritePreview.getImage(null);
-			int number = 0;
-			if(itemList.containsKey(itemName))
-				number = itemList.get(itemName);
-			String tooltip;
-			tooltip = name+": "+number;				
-			if(number==0)
-			{	image = ImageTools.getGreyScale(image);
-			}
-			String value = Integer.toString(number);
-			//
-			int colSub = 0;
-			{	itemsetPanel.getTable().setLabelIcon(line,colGroup,colSub,image,tooltip);
-				Color fg = GuiTools.COLOR_TABLE_HEADER_FOREGROUND;
-				itemsetPanel.getTable().setLabelForeground(line,colGroup,colSub,fg);
-				Color bg = GuiTools.COLOR_TABLE_HEADER_BACKGROUND;
-				itemsetPanel.getTable().setLabelBackground(line,colGroup,colSub,bg);
-				colSub++;
-			}
-			{	String text = value;
-				itemsetPanel.getTable().setLabelText(line,colGroup,colSub,text,tooltip);
-				Color bg = GuiTools.COLOR_TABLE_REGULAR_BACKGROUND;
-				itemsetPanel.getTable().setLabelBackground(line,colGroup,colSub,bg);
-				colSub++;
-			}
-			line++;
-			if(line==lines)
-			{	line = 0;
-				colGroup++;
-			}
-		}			
-
-		return itemsetPanel;
 	}
 
 	private SubPanel makeMiscPanel(int width, int height, LevelPreview preview)
