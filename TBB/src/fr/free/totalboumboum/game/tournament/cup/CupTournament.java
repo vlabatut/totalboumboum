@@ -85,5 +85,11 @@ public class CupTournament extends AbstractTournament
 		// TODO Auto-generated method stub
 		
 	}
+
+	@Override
+	public int[] getOrderedPlayers() {
+		// TODO Auto-generated method stub
+		return null;
+	}
 	
 }

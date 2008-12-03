@@ -378,6 +378,7 @@
 		
 	</group>
 
+<!-- GAME -->	
 	<group name="Game" >
 
 <!-- TOURNAMENT PANEL -->
@@ -420,26 +421,6 @@
 
 			<group name="Results">
 				<text name="Title" value="Tournament results"  tooltip="Tournament results" />
-				<group name="Header">
-					<text name="Bombs" value="Bombs"  tooltip="Total number of bombs dropped in this tournament" />
-					<text name="Crowns" value="Crowns"  tooltip="Total number of crowns picked in this tournament" />
-					<text name="CustomLimit" value="Custom"  tooltip="Custom points used as a limit criterion" />
-					<text name="CustomPoints" value="Custom"  tooltip="Custom points used to compute the overall points" />
-					<text name="Bombeds" value="Bombeds"  tooltip="Total number of times the player was explosed in this tournament" />
-					<text name="Items" value="Items"  tooltip="Total number of items picked in this tournament" />
-					<text name="Bombings" value="Bombings"  tooltip="Total number of players explosed in this tournament" />
-					<text name="Match" value="M"  tooltip="Number of points scored for the match number" />
-					<text name="Name" value="Name"  tooltip="Name of the player" />
-					<text name="Paintings" value="Paintings"  tooltip="Total number of tiles painted in this tournament" />
-					<text name="Points" value="Points"  tooltip="Number of points scored for this tournament" />
-					<text name="Profile" value="Human/Computer"  tooltip="Human or computer-controlled player" />
-					<text name="Time" value="Time"  tooltip="Total time spend in the tournament" />
-					<text name="Total" value="Total"  tooltip="Total number of points scored for all the matches" />
-				</group>
-				<group name="Data">
-						<text name="Computer" value="Computer"  tooltip="Computer-controlled player" />
-						<text name="Human" value="Human"  tooltip="Human-controlled player" />
-				</group>
 			</group>
 
 			<group name="Statistics">
@@ -495,26 +476,6 @@
 				
 			<group name="Results">
 				<text name="Title" value="Match results"  tooltip="Match results" />
-				<group name="Header">
-					<text name="Bombs" value="Bombs"  tooltip="Total number of bombs dropped in this match" />
-					<text name="Crowns" value="Crowns"  tooltip="Total number of crowns picked in this match" />
-					<text name="CustomLimit" value="Custom"  tooltip="Custom points used as a limit criterion" />
-					<text name="CustomPoints" value="Custom"  tooltip="Custom points used to compute the overall points" />
-					<text name="Bombeds" value="Bombeds"  tooltip="Total number of times the player was explosed in this match" />
-					<text name="Items" value="Items"  tooltip="Total number of items picked in this match" />
-					<text name="Bombings" value="Bombings"  tooltip="Total number of players explosed in this match" />
-					<text name="Name" value="Name"  tooltip="Name of the player" />
-					<text name="Paintings" value="Paintings"  tooltip="Total number of tiles painted in this match" />
-					<text name="Points" value="Points"  tooltip="Number of points scored for this match" />
-					<text name="Profile" value="Human/Computer"  tooltip="Human or computer-controlled player" />
-					<text name="Round" value="R"  tooltip="Number of points scored for the round number" />
-					<text name="Time" value="Time"  tooltip="Total time spend in the match" />
-					<text name="Total" value="Total"  tooltip="Total number of points scored for all the rounds" />
-				</group>
-				<group name="Data">
-					<text name="Computer" value="Computer"  tooltip="Computer-controlled player" />
-					<text name="Human" value="Human"  tooltip="Human-controlled player" />
-				</group>
 			</group>
 				
 			<group name="Statistics">
@@ -573,24 +534,6 @@
 								
 			<group name="Results">
 				<text name="Title" value="Round results"  tooltip="Round results" />
-				<group name="Header">
-					<text name="Bombs" value="Bombs"  tooltip="Total number of bombs dropped in this round" />
-					<text name="Crowns" value="Crowns"  tooltip="Number of crowns picked in this round" />
-					<text name="CustomLimit" value="Custom"  tooltip="Custom points used as a limit criterion" />
-					<text name="CustomPoints" value="Custom"  tooltip="Custom points used to compute the overall points" />
-					<text name="Bombeds" value="Bombeds"  tooltip="Number of times the player was explosed in this round" />
-					<text name="Items" value="Items"  tooltip="Number of items picked in this round" />
-					<text name="Bombings" value="Bombings"  tooltip="Number of players explosed in this round" />
-					<text name="Name" value="Name"  tooltip="Name of the player" />
-					<text name="Paintings" value="Paintings"  tooltip="Number of tiles painted in this round" />
-					<text name="Points" value="Points"  tooltip="Number of points scored for this round" />
-					<text name="Profile" value="Human/Computer"  tooltip="Human or computer-controlled player" />
-					<text name="Time" value="Time"  tooltip="Time spend in the round" />
-				</group>
-				<group name="Data">
-					<text name="Computer" value="Computer"  tooltip="Computer-controlled player" />
-					<text name="Human" value="Human"  tooltip="Human-controlled player" />
-				</group>
 			</group>
 				
 			<group name="Statistics">
@@ -762,6 +705,75 @@
 			</group>	
 		</group>
 							
+		<group name="Results" >
+			<group name="Match">
+				<group name="Header">
+					<text name="Bombeds" value="Bombeds"  tooltip="Total number of times the player was explosed in this match" />
+					<text name="Bombings" value="Bombings"  tooltip="Total number of players explosed in this match" />
+					<text name="Bombs" value="Bombs"  tooltip="Total number of bombs dropped in this match" />
+					<text name="Confrontation" value="R"  tooltip="Number of points scored for the round number" />
+					<text name="Crowns" value="Crowns"  tooltip="Total number of crowns picked in this match" />
+					<text name="Limit" value="Limit"  tooltip="Custom points used as a limit criterion" />
+					<text name="Items" value="Items"  tooltip="Total number of items picked in this match" />
+					<text name="Name" value="Name"  tooltip="Name of the player" />
+					<text name="Paintings" value="Paintings"  tooltip="Total number of tiles painted in this match" />
+					<text name="Points" value="Points"  tooltip="Number of points scored for this match" />
+					<text name="Portrait" value="Character"  tooltip="Character used by the player" />
+					<text name="Profile" value="Human/Computer"  tooltip="Human or computer-controlled player" />
+					<text name="Time" value="Time"  tooltip="Total time spend in the match" />
+					<text name="Total" value="Total"  tooltip="Total number of points scored for all the rounds" />
+				</group>
+				<group name="Data">
+					<text name="Computer" value="Computer"  tooltip="Computer-controlled player" />
+					<text name="Human" value="Human"  tooltip="Human-controlled player" />
+				</group>
+			</group>
+			
+			<group name="Round">
+				<group name="Header">
+					<text name="Bombeds" value="Bombeds"  tooltip="Number of times the player was explosed in this round" />
+					<text name="Bombings" value="Bombings"  tooltip="Number of players explosed in this round" />
+					<text name="Bombs" value="Bombs"  tooltip="Total number of bombs dropped in this round" />
+					<text name="Crowns" value="Crowns"  tooltip="Number of crowns picked in this round" />
+					<text name="Limit" value="Limit"  tooltip="Custom points used as a limit criterion" />
+					<text name="Items" value="Items"  tooltip="Number of items picked in this round" />
+					<text name="Name" value="Name"  tooltip="Name of the player" />
+					<text name="Paintings" value="Paintings"  tooltip="Number of tiles painted in this round" />
+					<text name="Points" value="Points"  tooltip="Number of points scored for this round" />
+					<text name="Portrait" value="Character"  tooltip="Character used by the player" />
+					<text name="Profile" value="Human/Computer"  tooltip="Human or computer-controlled player" />
+					<text name="Time" value="Time"  tooltip="Time spend in the round" />
+				</group>
+				<group name="Data">
+					<text name="Computer" value="Computer"  tooltip="Computer-controlled player" />
+					<text name="Human" value="Human"  tooltip="Human-controlled player" />
+				</group>
+			</group>
+
+			<group name="Tournament" >
+				<group name="Header">
+					<text name="Bombeds" value="Bombeds"  tooltip="Total number of times the player was explosed in this tournament" />
+					<text name="Bombings" value="Bombings"  tooltip="Total number of players explosed in this tournament" />
+					<text name="Bombs" value="Bombs"  tooltip="Total number of bombs dropped in this tournament" />
+					<text name="Confrontation" value="M"  tooltip="Number of points scored for the match number" />
+					<text name="Crowns" value="Crowns"  tooltip="Total number of crowns picked in this tournament" />
+					<text name="Limit" value="Limit"  tooltip="Custom points used as a limit criterion" />
+					<text name="Items" value="Items"  tooltip="Total number of items picked in this tournament" />
+					<text name="Name" value="Name"  tooltip="Name of the player" />
+					<text name="Paintings" value="Paintings"  tooltip="Total number of tiles painted in this tournament" />
+					<text name="Points" value="Points"  tooltip="Number of points scored for this tournament" />
+					<text name="Portrait" value="Character"  tooltip="Character used by the player" />
+					<text name="Profile" value="Human/Computer"  tooltip="Human or computer-controlled player" />
+					<text name="Time" value="Time"  tooltip="Total time spend in the tournament" />
+					<text name="Total" value="Total"  tooltip="Total number of points scored for all the matches" />
+				</group>
+				<group name="Data">
+						<text name="Computer" value="Computer"  tooltip="Computer-controlled player" />
+						<text name="Human" value="Human"  tooltip="Human-controlled player" />
+				</group>
+			</group>
+		</group>
+			
 	</group>
 
 </language>

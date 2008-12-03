@@ -66,4 +66,12 @@ public class StatisticMatch extends StatisticBase implements Serializable
 	{	int result = rounds.size();
 		return result;
 	}
+	
+	@Override
+	public ArrayList<StatisticBase> getConfrontationStats()
+	{	ArrayList<StatisticBase> result = new ArrayList<StatisticBase>();
+		for(StatisticRound r: rounds)
+			result.add(r);
+		return result;
+	}
 }

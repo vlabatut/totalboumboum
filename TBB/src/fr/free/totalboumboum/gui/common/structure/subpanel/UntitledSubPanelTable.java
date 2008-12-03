@@ -59,6 +59,26 @@ public class UntitledSubPanelTable extends SubPanel
 		SpringLayout layout = new SpringLayout();
 		setLayout(layout);
 		
+		reinit(colGroups,colSubs,lines);
+	}
+	
+	private void updateLayout()
+	{	SpringLayout layout = new SpringLayout();
+		setLayout(layout);
+		int margin = GuiTools.subPanelMargin;
+		SpringUtilities.makeCompactGrid(this,lines,getColumnCount(),margin,margin,margin,margin);		
+	}
+	
+	public void reinit(int columns, int lines)
+	{	reinit(1,columns,lines);
+	}
+	
+	private void reinit(int colGroups, int colSubs, int lines)
+	{	removeAll();
+		this.colGroups = 0;
+		this.colSubs = 0;
+		this.lines = 0;
+		
 		// size
 		if(header)
 		{	lineHeight = (int)((height - (lines+1)*GuiTools.subPanelMargin)/(lines+GuiTools.TABLE_HEADER_RATIO-1));
@@ -74,19 +94,12 @@ public class UntitledSubPanelTable extends SubPanel
 			lineHeight = (int)((height - (lines+1)*GuiTools.subPanelMargin)/((float)lines));
 		lineFontSize = GuiTools.getFontSize(lineHeight*GuiTools.FONT_RATIO);
 		lineFont = GuiConfiguration.getMiscConfiguration().getFont().deriveFont((float)lineFontSize);
-
+	
 		// table
 		this.colGroups = colGroups;
 		this.lines = lines;
 		for(int col=0;col<colSubs;col++)
 			addColumn(col);
-	}
-	
-	private void updateLayout()
-	{	SpringLayout layout = new SpringLayout();
-		setLayout(layout);
-		int margin = GuiTools.subPanelMargin;
-		SpringUtilities.makeCompactGrid(this,lines,getColumnCount(),margin,margin,margin,margin);		
 	}
 
 	/////////////////////////////////////////////////////////////////
@@ -116,8 +129,8 @@ public class UntitledSubPanelTable extends SubPanel
 	/////////////////////////////////////////////////////////////////
 	// COLUMNS			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	private int colGroups = 0;
-	private int colSubs = 0;
+	private int colGroups;
+	private int colSubs;
 	
 	public void setColSubMinWidth(int colSub, int width)
 	{	setColSubWidth(colSub,width,0);		
@@ -364,7 +377,7 @@ public class UntitledSubPanelTable extends SubPanel
 	/////////////////////////////////////////////////////////////////
 	// LINES			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	private int lines = 0;
+	private int lines;
 
 	public int getLineCount()
 	{	return lines;

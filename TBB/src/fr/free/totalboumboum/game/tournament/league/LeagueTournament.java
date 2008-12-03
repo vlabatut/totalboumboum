@@ -86,4 +86,10 @@ public class LeagueTournament extends AbstractTournament
 		
 	}
 
+	@Override
+	public int[] getOrderedPlayers() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }
