@@ -80,51 +80,73 @@ public class PointsSubPanel extends EntitledSubPanelTable
 		int colGroups = 1;
 
 		setNewTable(colGroups,colSubs,lines);
-		getTable().setColSubMaxWidth(1,Integer.MAX_VALUE);
+		setColSubMaxWidth(1,Integer.MAX_VALUE);
+
+		if(pointsProcessor==null)
+		{	// title
+			Color bg = GuiTools.COLOR_TABLE_REGULAR_BACKGROUND;
+			setTitleBackground(bg);
+			// empty lines
+			int iconWidth = getLineHeight();
+			setColSubMinWidth(0,iconWidth);
+			setColSubPreferredWidth(0,iconWidth);
+			setColSubMaxWidth(0,iconWidth);
+			int textWidth = getWidth() - iconWidth - 3*GuiTools.subPanelMargin;
+			setColSubMinWidth(1,textWidth);
+			setColSubPreferredWidth(1,textWidth);
+			setColSubMaxWidth(1,textWidth);
+		}
+		else
+		{	// title
+			{	Color bg = GuiTools.COLOR_TABLE_HEADER_BACKGROUND;
+				setTitleBackground(bg);
+			}
 		
-		Iterator<ArrayList<Object>> dt = data.iterator();
-		Iterator<ArrayList<String>> tt = tooltips.iterator();
-		int line = 0;
-		int colGroup = 0;
-		while(dt.hasNext())
-		{	// init
-			ArrayList<Object> tempDt = dt.next();
-			ArrayList<String> tempTt = tt.next();
-			int colSub = 0;
-			// left
-			{	String tooltip = tempTt.get(colSub);
-				Color fg = GuiTools.COLOR_TABLE_HEADER_FOREGROUND;
-				getTable().setLabelForeground(line,colGroup,colSub,fg);
-				Color bg = GuiTools.COLOR_TABLE_HEADER_BACKGROUND;
-				getTable().setLabelBackground(line,colGroup,colSub,bg);
-				if(tempDt.get(colSub) instanceof BufferedImage)
-				{	BufferedImage image = (BufferedImage)tempDt.get(colSub);
-					getTable().setLabelIcon(line,colGroup,colSub,image,tooltip);
+			// data
+			Iterator<ArrayList<Object>> dt = data.iterator();
+			Iterator<ArrayList<String>> tt = tooltips.iterator();
+			int line = 0;
+			int colGroup = 0;
+			while(dt.hasNext())
+			{	// init
+				ArrayList<Object> tempDt = dt.next();
+				ArrayList<String> tempTt = tt.next();
+				int colSub = 0;
+				// left
+				{	String tooltip = tempTt.get(colSub);
+					Color fg = GuiTools.COLOR_TABLE_HEADER_FOREGROUND;
+					setLabelForeground(line,colGroup,colSub,fg);
+					Color bg = GuiTools.COLOR_TABLE_HEADER_BACKGROUND;
+					setLabelBackground(line,colGroup,colSub,bg);
+					if(tempDt.get(colSub) instanceof BufferedImage)
+					{	BufferedImage image = (BufferedImage)tempDt.get(colSub);
+						setLabelIcon(line,colGroup,colSub,image,tooltip);
+					}
+					else
+					{	String text = (String)tempDt.get(colSub);
+						setLabelText(line,colGroup,colSub,text,tooltip);
+					}
+					colSub++;
 				}
-				else
-				{	String text = (String)tempDt.get(colSub);
-					getTable().setLabelText(line,colGroup,colSub,text,tooltip);
+				// right
+				{	String tooltip = tempTt.get(colSub);
+					if(tempDt.get(colSub) instanceof BufferedImage)
+					{	BufferedImage image = (BufferedImage)tempDt.get(colSub);
+						setLabelIcon(line,colGroup,colSub,image,tooltip);
+					}
+					else
+					{	String text = (String)tempDt.get(colSub);
+						setLabelText(line,colGroup,colSub,text,tooltip);
+					}
+					Color bg = GuiTools.COLOR_TABLE_REGULAR_BACKGROUND;
+					setLabelBackground(line,colGroup,colSub,bg);
+					colSub++;
 				}
-				colSub++;
-			}
-			// right
-			{	String tooltip = tempTt.get(colSub);
-				if(tempDt.get(colSub) instanceof BufferedImage)
-				{	BufferedImage image = (BufferedImage)tempDt.get(colSub);
-					getTable().setLabelIcon(line,colGroup,colSub,image,tooltip);
+				line++;
+				if(line==lines)
+				{	line = 0;
+					colGroup++;
 				}
-				else
-				{	String text = (String)tempDt.get(colSub);
-					getTable().setLabelText(line,colGroup,colSub,text,tooltip);
-				}
-				Color bg = GuiTools.COLOR_TABLE_REGULAR_BACKGROUND;
-				getTable().setLabelBackground(line,colGroup,colSub,bg);
-				colSub++;
-			}
-			line++;
-			if(line==lines)
-			{	line = 0;
-				colGroup++;
 			}
 		}
 //		validate();

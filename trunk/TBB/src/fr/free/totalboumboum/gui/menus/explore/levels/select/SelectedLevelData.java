@@ -40,10 +40,10 @@ import javax.xml.parsers.ParserConfigurationException;
 
 import org.xml.sax.SAXException;
 
-import fr.free.totalboumboum.engine.container.level.HollowLevel;
 import fr.free.totalboumboum.engine.container.level.LevelPreview;
 import fr.free.totalboumboum.engine.container.level.LevelPreviewLoader;
 import fr.free.totalboumboum.gui.common.content.subpanel.image.ImageSubPanel;
+import fr.free.totalboumboum.gui.common.content.subpanel.level.LevelSubPanel;
 import fr.free.totalboumboum.gui.common.structure.panel.SplitMenuPanel;
 import fr.free.totalboumboum.gui.common.structure.panel.data.EntitledDataPanel;
 import fr.free.totalboumboum.gui.common.structure.subpanel.SubPanel;
@@ -63,14 +63,6 @@ public class SelectedLevelData extends EntitledDataPanel implements MouseListene
 	private static final int LIST_LINE_PARENT = 1;
 	private static final int LIST_LINE_NEXT = LIST_LINE_COUNT-1;
 
-	private static final int VIEW_LINE_NAME = 0;
-	private static final int VIEW_LINE_PACK = 1;
-	private static final int VIEW_LINE_AUTHOR = 2;
-	private static final int VIEW_LINE_SOURCE = 3;
-	private static final int VIEW_LINE_INSTANCE = 4;
-	private static final int VIEW_LINE_THEME = 5;
-	private static final int VIEW_LINE_SIZE = 6;
-
 	private static final int LIST_PANEL_INDEX = 0;
 	@SuppressWarnings("unused")
 	private static final int PREVIEW_PANEL_INDEX = 2;
@@ -82,7 +74,7 @@ public class SelectedLevelData extends EntitledDataPanel implements MouseListene
 
 	private SubPanel mainPanel;
 	private SubPanel previewPanel;
-	private UntitledSubPanelTable infosPanel;
+	private LevelSubPanel infosPanel;
 	private ImageSubPanel imagePanel;
 	private int listWidth;
 	private int listHeight;
@@ -137,7 +129,9 @@ public class SelectedLevelData extends EntitledDataPanel implements MouseListene
 				int upHeight = (int)(dataHeight*0.5); 
 				int downHeight = dataHeight - upHeight - margin; 
 				
-				makeInfosPanel(rightWidth,upHeight);
+				infosPanel = new LevelSubPanel(rightWidth,upHeight);
+				infosPanel.setShowPanelTitle(false);
+				infosPanel.setLevelPreview(selectedLevelPreview,10);
 				previewPanel.add(infosPanel);
 
 				previewPanel.add(Box.createVerticalGlue());
@@ -303,92 +297,23 @@ public class SelectedLevelData extends EntitledDataPanel implements MouseListene
 		}
 	}
 
-	private void makeInfosPanel(int width, int height)
-	{	int lines = 10;
-		int colSubs = 2;
-		int colGroups = 1;
-		infosPanel = new UntitledSubPanelTable(width,height,colGroups,colSubs,lines,true);
-		
-		// data
-		String keys[] = 
-		{	GuiKeys.MENU_RESOURCES_LEVEL_SELECT_PREVIEW_NAME,
-			GuiKeys.MENU_RESOURCES_LEVEL_SELECT_PREVIEW_PACKAGE,
-			GuiKeys.MENU_RESOURCES_LEVEL_SELECT_PREVIEW_AUTHOR,
-			GuiKeys.MENU_RESOURCES_LEVEL_SELECT_PREVIEW_SOURCE,
-			GuiKeys.MENU_RESOURCES_LEVEL_SELECT_PREVIEW_INSTANCE,
-			GuiKeys.MENU_RESOURCES_LEVEL_SELECT_PREVIEW_THEME,
-			GuiKeys.MENU_RESOURCES_LEVEL_SELECT_PREVIEW_SIZE
-		};
-		for(int line=0;line<keys.length;line++)
-		{	int colSub = 0;
-			{	infosPanel.setLabelKey(line,colSub,keys[line],true);
-				Color fg = GuiTools.COLOR_TABLE_HEADER_FOREGROUND;
-				infosPanel.setLabelForeground(line,0,fg);
-				Color bg = GuiTools.COLOR_TABLE_HEADER_BACKGROUND;
-				infosPanel.setLabelBackground(line,colSub,bg);
-				colSub++;
-			}
-			{	String text = null;
-				String tooltip = GuiConfiguration.getMiscConfiguration().getLanguage().getText(keys[line]+GuiKeys.TOOLTIP);
-				infosPanel.setLabelText(line,colSub,text,tooltip);
-				if(line>0)
-				{	Color bg = GuiTools.COLOR_TABLE_REGULAR_BACKGROUND;
-					infosPanel.setLabelBackground(line,colSub,bg);
-				}
-				colSub++;
-			}
-		}
-		int maxWidth = width-(colGroups*colSubs+1)*GuiTools.subPanelMargin-infosPanel.getHeaderHeight();
-		infosPanel.setColSubMaxWidth(1,maxWidth);
-		infosPanel.setColSubPreferredWidth(1,maxWidth);
-	}
-	
 	private void refreshPreview()
-	{	String infosValues[] = new String[10];
-		BufferedImage image;
+	{	BufferedImage image;
 		// no level selected
 		if(packageMode || selectedLevelRow<0)
 		{	// image
 			image = null;
 			// infos
-			for(int i=0;i<infosValues.length;i++)
-				infosValues[i] = null;
+			selectedLevelPreview = null;
 		}
 		// one level selected
 		else
 		{	// image
 			image = selectedLevelPreview.getVisualPreview();
 			// infos
-			try
-			{	HollowLevel hollowLevel = new HollowLevel(selectedLevelPreview.getPack()+File.separator+selectedLevelPreview.getFolder());
-				infosValues[VIEW_LINE_NAME] = selectedLevelPreview.getTitle();
-				infosValues[VIEW_LINE_PACK]= selectedLevelPreview.getPack();
-				infosValues[VIEW_LINE_AUTHOR] = selectedLevelPreview.getAuthor();
-				infosValues[VIEW_LINE_SOURCE] = selectedLevelPreview.getSource();
-				infosValues[VIEW_LINE_INSTANCE] = hollowLevel.getInstanceName();
-				infosValues[VIEW_LINE_THEME] = hollowLevel.getThemeName();
-				infosValues[VIEW_LINE_SIZE] = Integer.toString(hollowLevel.getVisibleHeight())+new Character('\u00D7').toString()+Integer.toString(hollowLevel.getVisibleWidth());
-			}
-			catch (ParserConfigurationException e)
-			{	e.printStackTrace();
-			}
-			catch (SAXException e)
-			{	e.printStackTrace();
-			}
-			catch (IOException e)
-			{	e.printStackTrace();
-			}
-			catch (ClassNotFoundException e)
-			{	e.printStackTrace();
-			}
 		}
 		// infos
-		for(int line=0;line<infosValues.length;line++)
-		{	int colSub = 1;
-			String text = infosValues[line];
-			String tooltip = text;
-			infosPanel.setLabelText(line,colSub,text,tooltip);
-		}
+		infosPanel.setLevelPreview(selectedLevelPreview,10);
 		// image
 		String tooltip = GuiConfiguration.getMiscConfiguration().getLanguage().getText(GuiKeys.MENU_RESOURCES_LEVEL_SELECT_PREVIEW_IMAGE+GuiKeys.TOOLTIP);
 		imagePanel.setImage(image,tooltip);

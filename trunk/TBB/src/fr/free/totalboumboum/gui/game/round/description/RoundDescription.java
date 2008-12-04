@@ -21,7 +21,6 @@ package fr.free.totalboumboum.gui.game.round.description;
  * 
  */
 
-import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
@@ -44,12 +43,12 @@ import fr.free.totalboumboum.game.round.Round;
 import fr.free.totalboumboum.gui.common.content.subpanel.image.ImageSubPanel;
 import fr.free.totalboumboum.gui.common.content.subpanel.items.AvailableItemsSubPanel;
 import fr.free.totalboumboum.gui.common.content.subpanel.items.InitialItemsSubPanel;
+import fr.free.totalboumboum.gui.common.content.subpanel.level.LevelSubPanel;
 import fr.free.totalboumboum.gui.common.content.subpanel.limits.LimitsListener;
 import fr.free.totalboumboum.gui.common.content.subpanel.limits.LimitsSubPanel;
 import fr.free.totalboumboum.gui.common.content.subpanel.points.PointsSubPanel;
 import fr.free.totalboumboum.gui.common.structure.panel.SplitMenuPanel;
 import fr.free.totalboumboum.gui.common.structure.panel.data.EntitledDataPanel;
-import fr.free.totalboumboum.gui.common.structure.subpanel.EntitledSubPanelTable;
 import fr.free.totalboumboum.gui.common.structure.subpanel.SubPanel;
 import fr.free.totalboumboum.gui.data.configuration.GuiConfiguration;
 import fr.free.totalboumboum.gui.tools.GuiKeys;
@@ -66,6 +65,7 @@ public class RoundDescription extends EntitledDataPanel implements LimitsListene
 	private AvailableItemsSubPanel availableItemsPanel;
 	private LimitsSubPanel<RoundLimit> limitsPanel;
 	private PointsSubPanel pointsPanel;
+	private LevelSubPanel miscPanel;
 	
 	public RoundDescription(SplitMenuPanel container)
 	{	super(container);
@@ -166,7 +166,8 @@ public class RoundDescription extends EntitledDataPanel implements LimitsListene
 					int innerWidth = (rightWidth - margin)/2;
 					
 					// misc panel
-					{	JPanel miscPanel = makeMiscPanel(innerWidth,upHeight,preview);
+					{	miscPanel = new LevelSubPanel(innerWidth,upHeight);
+						miscPanel.setLevelPreview(preview,8);
 						upPanel.add(miscPanel);
 					}
 					
@@ -221,66 +222,6 @@ public class RoundDescription extends EntitledDataPanel implements LimitsListene
 		}
 	}
 
-	private SubPanel makeMiscPanel(int width, int height, LevelPreview preview)
-	{	// init
-		int lines = 8;
-		int colSubs = 2;
-		int colGroups = 1;
-
-		EntitledSubPanelTable miscPanel = new EntitledSubPanelTable(width,height,colGroups,colSubs,lines);
-		String titleKey = GuiKeys.GAME_ROUND_DESCRIPTION_MISC_TITLE;
-		miscPanel.setTitleKey(titleKey,true);
-		miscPanel.getTable().setColSubMaxWidth(1,Integer.MAX_VALUE);
-		
-		// data
-		String keys[] = 
-		{	GuiKeys.GAME_ROUND_DESCRIPTION_MISC_HEADER_PACK,
-			GuiKeys.GAME_ROUND_DESCRIPTION_MISC_HEADER_TITLE,
-			GuiKeys.GAME_ROUND_DESCRIPTION_MISC_HEADER_SOURCE,
-			GuiKeys.GAME_ROUND_DESCRIPTION_MISC_HEADER_AUTHOR,
-			GuiKeys.GAME_ROUND_DESCRIPTION_MISC_HEADER_INSTANCE,
-			GuiKeys.GAME_ROUND_DESCRIPTION_MISC_HEADER_THEME,
-			GuiKeys.GAME_ROUND_DESCRIPTION_MISC_HEADER_DIMENSION
-		};
-		Round round = Configuration.getGameConfiguration().getTournament().getCurrentMatch().getCurrentRound();
-		HollowLevel hollowLevel = round.getHollowLevel();
-		String texts[] = 
-		{	hollowLevel.getPackName(),
-			preview.getTitle(),
-			preview.getSource(),
-			preview.getAuthor(),
-			hollowLevel.getInstanceName(),
-			hollowLevel.getThemeName(),
-			Integer.toString(hollowLevel.getVisibleHeight())+new Character('\u00D7').toString()+Integer.toString(hollowLevel.getVisibleWidth())
-		};
-		int line = 0;
-		int colGroup = 0;
-		for(int i=0;i<keys.length;i++)
-		{	int colSub = 0;
-			{	miscPanel.getTable().setLabelKey(line,colGroup,colSub,keys[i],true);
-				Color fg = GuiTools.COLOR_TABLE_HEADER_FOREGROUND;
-				miscPanel.getTable().setLabelForeground(line,colGroup,colSub,fg);
-				Color bg = GuiTools.COLOR_TABLE_HEADER_BACKGROUND;
-				miscPanel.getTable().setLabelBackground(line,colGroup,colSub,bg);
-				colSub++;
-			}
-			{	String text = texts[i];
-				String tooltip = texts[i];
-				miscPanel.getTable().setLabelText(line,colGroup,colSub,text,tooltip);
-				Color bg = GuiTools.COLOR_TABLE_REGULAR_BACKGROUND;
-				miscPanel.getTable().setLabelBackground(line,colGroup,colSub,bg);
-				colSub++;
-			}
-			line++;
-			if(line==lines)
-			{	line = 0;
-				colGroup++;
-			}
-		}		
-		
-		return miscPanel;
-	}
-	
 	/////////////////////////////////////////////////////////////////
 	// CONTENT PANEL	/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////

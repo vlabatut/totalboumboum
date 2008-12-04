@@ -71,6 +71,15 @@ public class LevelPreviewLoader
 		String source = element.getAttribute(XmlTools.ATT_VALUE).getValue().trim();
 		result.setSource(source);
 		
+		// visible size
+		element = root.getChild(XmlTools.ELT_VISIBLE_DIMENSION);
+		String visibleHeightStr = element.getAttribute(XmlTools.ATT_HEIGHT).getValue().trim();
+		int visibleHeight = Integer.parseInt(visibleHeightStr);
+		result.setVisibleHeight(visibleHeight);
+		String visibleWidthStr = element.getAttribute(XmlTools.ATT_WIDTH).getValue().trim();
+		int visibleWidth = Integer.parseInt(visibleWidthStr);
+		result.setVisibleWidth(visibleWidth);
+
 		// visual preview
 		element = root.getChild(XmlTools.ELT_PREVIEW);
 		String filePath = folder+File.separator+element.getAttribute(XmlTools.ATT_FILE).getValue().trim();
@@ -80,6 +89,7 @@ public class LevelPreviewLoader
 		// instance
 		element = root.getChild(XmlTools.ELT_INSTANCE);
 		String instanceName = element.getAttribute(XmlTools.ATT_NAME).getValue().trim();
+		result.setInstanceName(instanceName);
 		String instanceFolder = FileTools.getInstancesPath()+File.separator+instanceName;
 
 		// players stuff preview
@@ -93,6 +103,14 @@ public class LevelPreviewLoader
 		int globalWidth = Integer.parseInt(globalWidthStr);
 		Zone zone = ZoneLoader.loadZone(folder,globalHeight,globalWidth);
 */
+		// theme
+		element = root.getChild(XmlTools.ELT_THEME);
+		String themeName = element.getAttribute(XmlTools.ATT_NAME).getValue().trim();
+		result.setThemeName(themeName);
+		String themeFolder = instanceFolder + File.separator + FileTools.FOLDER_THEMES;
+		@SuppressWarnings("unused")
+		String themePath = themeFolder + File.separator+themeName;
+
 		// itemset
 		String itemFolder = instanceFolder + File.separator+FileTools.FOLDER_ITEMS;
 		ItemsetPreview itemsetPreview = ItemsetPreviewLoader.loadItemsetPreview(itemFolder);

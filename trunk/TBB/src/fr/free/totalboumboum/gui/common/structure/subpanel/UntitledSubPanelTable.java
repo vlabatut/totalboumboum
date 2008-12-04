@@ -39,7 +39,7 @@ import fr.free.totalboumboum.gui.tools.SpringUtilities;
 import fr.free.totalboumboum.gui.tools.GuiTools;
 import fr.free.totalboumboum.tools.ImageTools;
 
-public class UntitledSubPanelTable extends SubPanel
+public class UntitledSubPanelTable extends SubPanel implements SubPanelTable
 {	private static final long serialVersionUID = 1L;
 
 	public UntitledSubPanelTable(int width, int height, int columns, int lines, boolean header)
@@ -73,7 +73,7 @@ public class UntitledSubPanelTable extends SubPanel
 	{	reinit(1,columns,lines);
 	}
 	
-	private void reinit(int colGroups, int colSubs, int lines)
+	public void reinit(int colGroups, int colSubs, int lines)
 	{	removeAll();
 		this.colGroups = 0;
 		this.colSubs = 0;
