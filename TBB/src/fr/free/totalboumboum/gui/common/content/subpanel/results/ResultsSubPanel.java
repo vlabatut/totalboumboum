@@ -57,13 +57,6 @@ public class ResultsSubPanel extends UntitledSubPanelTable
 	// STATISTIC HOLDER	/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	private StatisticHolder statisticHolder;
-	private boolean showPortrait = true;
-	private boolean showName = true;
-	private boolean showConfrontations = true;
-	private boolean showTotal = true;
-	private boolean showPoints = true;
-	private boolean showScores = true;
-	private boolean showTime = true;
 
 	public StatisticHolder getStatisticHolder()
 	{	return statisticHolder;	
@@ -283,6 +276,17 @@ public class ResultsSubPanel extends UntitledSubPanelTable
 		{	reinit(1,lines);
 		}
 	}
+	
+	/////////////////////////////////////////////////////////////////
+	// DISPLAY			/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	private boolean showPortrait = true;
+	private boolean showName = true;
+	private boolean showConfrontations = true;
+	private boolean showTotal = true;
+	private boolean showPoints = true;
+	private boolean showScores = true;
+	private boolean showTime = true;
 	
 	public void setShowPortrait(boolean showPortrait)
 	{	this.showPortrait = showPortrait;

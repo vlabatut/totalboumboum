@@ -57,6 +57,7 @@ import fr.free.totalboumboum.gui.common.content.subpanel.image.ImageSubPanel;
 import fr.free.totalboumboum.gui.common.content.subpanel.limits.LimitsListener;
 import fr.free.totalboumboum.gui.common.content.subpanel.limits.LimitsSubPanel;
 import fr.free.totalboumboum.gui.common.content.subpanel.points.PointsSubPanel;
+import fr.free.totalboumboum.gui.common.content.subpanel.round.RoundSubPanel;
 import fr.free.totalboumboum.gui.common.structure.panel.SplitMenuPanel;
 import fr.free.totalboumboum.gui.common.structure.panel.data.EntitledDataPanel;
 import fr.free.totalboumboum.gui.common.structure.subpanel.SubPanel;
@@ -65,7 +66,6 @@ import fr.free.totalboumboum.gui.data.configuration.GuiConfiguration;
 import fr.free.totalboumboum.gui.tools.GuiKeys;
 import fr.free.totalboumboum.gui.tools.GuiTools;
 import fr.free.totalboumboum.tools.FileTools;
-import fr.free.totalboumboum.tools.StringTools;
 
 public class SelectedRoundData extends EntitledDataPanel implements MouseListener, LimitsListener
 {	
@@ -75,13 +75,6 @@ public class SelectedRoundData extends EntitledDataPanel implements MouseListene
 	private static final int LIST_LINE_COUNT = 20;
 	private static final int LIST_LINE_PREVIOUS = 0;
 	private static final int LIST_LINE_NEXT = LIST_LINE_COUNT-1;
-
-	private static final int VIEW_LINE_COUNT = 5;
-	private static final int VIEW_LINE_NAME = 0;
-	private static final int VIEW_LINE_AUTHOR = 1;
-	private static final int VIEW_LINE_PLAYERS = 2;
-	private static final int VIEW_LINE_LEVEL_NAME = 3;
-	private static final int VIEW_LINE_LEVEL_PACK = 4;
 
 	private static final int LIST_PANEL_INDEX = 0;
 	
@@ -94,7 +87,7 @@ public class SelectedRoundData extends EntitledDataPanel implements MouseListene
 	private ImageSubPanel imagePanel;
 	private LimitsSubPanel<RoundLimit> limitsPanel;
 	private PointsSubPanel pointsPanel;
-	private UntitledSubPanelTable previewPanel;
+	private RoundSubPanel miscPanel;
 
 	private ArrayList<String> rounds;
 	private Round selectedRound = null;
@@ -156,8 +149,8 @@ public class SelectedRoundData extends EntitledDataPanel implements MouseListene
 					leftUpWidth = rightWidth - rightUpWidth - margin;
 									
 					// preview
-					{	makePreviewPanel(leftUpWidth,previewHeight);
-						upPanel.add(previewPanel);
+					{	miscPanel = new RoundSubPanel(leftUpWidth,previewHeight);
+						upPanel.add(miscPanel);
 					}
 					
 					upPanel.add(Box.createHorizontalGlue());
@@ -254,7 +247,7 @@ public class SelectedRoundData extends EntitledDataPanel implements MouseListene
 			// page up
 			{	Color bg = GuiTools.COLOR_TABLE_HEADER_BACKGROUND;
 				listPanel.setLabelBackground(LIST_LINE_PREVIOUS,0,bg);
-				String key = GuiKeys.MENU_RESOURCES_ROUND_SELECT_LIST_PAGEUP;
+				String key = GuiKeys.MENU_RESOURCES_ROUND_SELECT_PAGEUP;
 				listPanel.setLabelKey(LIST_LINE_PREVIOUS,0,key,true);
 				JLabel label = listPanel.getLabel(LIST_LINE_PREVIOUS,0);
 				label.addMouseListener(this);
@@ -262,7 +255,7 @@ public class SelectedRoundData extends EntitledDataPanel implements MouseListene
 			// page down
 			{	Color bg = GuiTools.COLOR_TABLE_HEADER_BACKGROUND;
 				listPanel.setLabelBackground(LIST_LINE_NEXT,0,bg);
-				String key = GuiKeys.MENU_RESOURCES_ROUND_SELECT_LIST_PAGEDOWN;
+				String key = GuiKeys.MENU_RESOURCES_ROUND_SELECT_PAGEDOWN;
 				listPanel.setLabelKey(LIST_LINE_NEXT,0,key,true);
 				JLabel label = listPanel.getLabel(LIST_LINE_NEXT,0);
 				label.addMouseListener(this);
@@ -271,50 +264,9 @@ public class SelectedRoundData extends EntitledDataPanel implements MouseListene
 		}
 	}
 	
-	private void makePreviewPanel(int width, int height)
-	{	int colSubs = 2;
-		int colGroups = 1;
-		previewPanel = new UntitledSubPanelTable(width,height,colGroups,colSubs,VIEW_LINE_COUNT,true);
-		
-		// data
-		String keys[] = 
-		{	GuiKeys.MENU_RESOURCES_ROUND_SELECT_PREVIEW_NAME,
-			GuiKeys.MENU_RESOURCES_ROUND_SELECT_PREVIEW_AUTHOR,
-			GuiKeys.MENU_RESOURCES_ROUND_SELECT_PREVIEW_PLAYERS,
-			GuiKeys.MENU_RESOURCES_ROUND_SELECT_PREVIEW_LEVEL_FOLDER,
-			GuiKeys.MENU_RESOURCES_ROUND_SELECT_PREVIEW_LEVEL_PACK
-		};
-		for(int line=0;line<keys.length;line++)
-		{	int colSub = 0;
-			{	previewPanel.setLabelKey(line,colSub,keys[line],true);
-				Color fg = GuiTools.COLOR_TABLE_HEADER_FOREGROUND;
-				previewPanel.setLabelForeground(line,0,fg);
-				Color bg = GuiTools.COLOR_TABLE_HEADER_BACKGROUND;
-				previewPanel.setLabelBackground(line,colSub,bg);
-				colSub++;
-			}
-			{	String text = null;
-				String tooltip = GuiConfiguration.getMiscConfiguration().getLanguage().getText(keys[line]+GuiKeys.TOOLTIP);
-				previewPanel.setLabelText(line,colSub,text,tooltip);
-				if(line>0)
-				{	Color bg = GuiTools.COLOR_TABLE_REGULAR_BACKGROUND;
-					previewPanel.setLabelBackground(line,colSub,bg);
-				}
-				colSub++;
-			}
-		}
-		int maxWidth = width-3*GuiTools.subPanelMargin-previewPanel.getHeaderHeight();
-		previewPanel.setColSubMaxWidth(1,maxWidth);
-		previewPanel.setColSubPreferredWidth(1,maxWidth);
-	}
-	
 	private void refreshPreview()
-	{	String values[] = new String[VIEW_LINE_COUNT];
-		// no round selected
-		if(selectedRow<0)
-		{	for(int i=0;i<values.length;i++)
-				values[i] = null;	
-			selectedRound = null;
+	{	if(selectedRow<0)
+		{	selectedRound = null;
 			selectedRoundFolder = null;
 		}
 		// one round selected
@@ -342,19 +294,8 @@ public class SelectedRoundData extends EntitledDataPanel implements MouseListene
 			catch (ClassNotFoundException e)
 			{	e.printStackTrace();
 			}
-			values[VIEW_LINE_NAME] = selectedRoundFolder;
-			values[VIEW_LINE_AUTHOR]= selectedRound.getAuthor();
-			values[VIEW_LINE_PLAYERS] = StringTools.formatAllowedPlayerNumbers(selectedRound.getAllowedPlayerNumbers());
-			values[VIEW_LINE_LEVEL_NAME] = selectedRound.getHollowLevel().getFolderName();
-			values[VIEW_LINE_LEVEL_PACK] = selectedRound.getHollowLevel().getPackName();
 		}
-		// common
-		for(int line=0;line<values.length;line++)
-		{	int colSub = 1;
-			String text = values[line];
-			String tooltip = text;
-			previewPanel.setLabelText(line,colSub,text,tooltip);
-		}
+		miscPanel.setRound(selectedRound);
 	}
 
 	private void refreshLimits()

@@ -52,7 +52,11 @@ public class RoundLoader
 		schemaFile = new File(schemaFolder+File.separator+FileTools.FILE_ROUND+FileTools.EXTENSION_SCHEMA);
 		Element root = XmlTools.getRootFromFile(dataFile,schemaFile);
 		// loading
-		Round result = loadRoundElement(root,folderPath,match);
+		Round result = new Round(match);
+		File temp = new File(folderPath);
+		String name = temp.getName();
+		result.setName(name);
+		loadRoundElement(root,folderPath,result);
 		return result;
     }
     
@@ -62,10 +66,9 @@ public class RoundLoader
 		return result;
     }
 
-    private static Round loadRoundElement(Element root, String folderPath, Match match) throws ParserConfigurationException, SAXException, IOException, ClassNotFoundException
+    private static void loadRoundElement(Element root, String folderPath, Round result) throws ParserConfigurationException, SAXException, IOException, ClassNotFoundException
 	{	// init
-    	Round result = new Round(match);
-		Element element;
+    	Element element;
 		
 		// notes
 		element = root.getChild(XmlTools.ELT_NOTES);
@@ -87,8 +90,6 @@ public class RoundLoader
 		// level
 		element = root.getChild(XmlTools.ELT_LEVEL);
 		loadLevelElement(element,result);
-
-		return result;
 	}		
 		
     private static void loadLevelElement(Element root, Round result) throws ParserConfigurationException, SAXException, IOException, ClassNotFoundException

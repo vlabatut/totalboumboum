@@ -79,10 +79,16 @@ public class LimitsSubPanel<T extends Limit> extends EntitledSubPanelTable imple
 		int lines = 8;
 		
 		if(limits!=null)
-		{	if(limits.size()>lines*colGroups)
+		{	// title
+			{	Color bg = GuiTools.COLOR_TABLE_HEADER_BACKGROUND;
+				setTitleBackground(bg);
+			}
+	
+			// data
+			if(limits.size()>lines*colGroups)
 				colGroups = 2;
 			setNewTable(colGroups,colSubs,lines);
-			getTable().setColSubMaxWidth(1,Integer.MAX_VALUE);
+			setColSubMaxWidth(1,Integer.MAX_VALUE);
 			
 			NumberFormat nf = NumberFormat.getInstance();
 			nf.setMinimumFractionDigits(0);
@@ -91,7 +97,7 @@ public class LimitsSubPanel<T extends Limit> extends EntitledSubPanelTable imple
 			int line = 0;
 			int colGroup = 0;
 			
-			while(i.hasNext() && colGroup<getTable().getColGroupCount())
+			while(i.hasNext() && colGroup<getColGroupCount())
 			{	Limit limit = i.next();
 				String iconName = null;
 				String value = null;
@@ -150,26 +156,26 @@ public class LimitsSubPanel<T extends Limit> extends EntitledSubPanelTable imple
 				}
 				//
 				int colSub = 0;
-				{	getTable().setLabelKey(line,colGroup,colSub,iconName,true);
+				{	setLabelKey(line,colGroup,colSub,iconName,true);
 					Color fg = GuiTools.COLOR_TABLE_HEADER_FOREGROUND;
-					getTable().setLabelForeground(line,colGroup,colSub,fg);
+					setLabelForeground(line,colGroup,colSub,fg);
 					Color bg = GuiTools.COLOR_TABLE_HEADER_BACKGROUND;
-					getTable().setLabelBackground(line,colGroup,colSub,bg);
-					JLabel lbl = getTable().getLabel(line,colGroup,colSub);
+					setLabelBackground(line,colGroup,colSub,bg);
+					JLabel lbl = getLabel(line,colGroup,colSub);
 					lbl.addMouseListener(this);
 					colSub++;
 				}
 				{	String text = value;
 					String tooltip = value;
-					getTable().setLabelText(line,colGroup,colSub,text,tooltip);
+					setLabelText(line,colGroup,colSub,text,tooltip);
 					Color bg = GuiTools.COLOR_TABLE_REGULAR_BACKGROUND;
-					getTable().setLabelBackground(line,colGroup,colSub,bg);
-					JLabel lbl = getTable().getLabel(line,colGroup,colSub);
+					setLabelBackground(line,colGroup,colSub,bg);
+					JLabel lbl = getLabel(line,colGroup,colSub);
 					lbl.addMouseListener(this);
 					colSub++;
 				}
 				line++;
-				if(line==getTable().getLineCount())
+				if(line==getLineCount())
 				{	line = 0;
 					colGroup++;
 				}
@@ -178,15 +184,20 @@ public class LimitsSubPanel<T extends Limit> extends EntitledSubPanelTable imple
 			selectLimit(0);
 		}
 		else
-		{	setNewTable(colGroups,1,lines);			
+		{	// title
+			Color bg = GuiTools.COLOR_TABLE_REGULAR_BACKGROUND;
+			setTitleBackground(bg);			
+			
+			// empty lines
+			setNewTable(colGroups,1,lines);			
 		}
 	}
 
 	private void selectLimit(int row)
 	{	// paint line
 		selectedRow = row;
-		getTable().setLabelBackground(selectedRow,0,GuiTools.COLOR_TABLE_SELECTED_DARK_BACKGROUND);
-		getTable().setLabelBackground(selectedRow,1,GuiTools.COLOR_TABLE_SELECTED_BACKGROUND);
+		setLabelBackground(selectedRow,0,GuiTools.COLOR_TABLE_SELECTED_DARK_BACKGROUND);
+		setLabelBackground(selectedRow,1,GuiTools.COLOR_TABLE_SELECTED_BACKGROUND);
 		// update listeners
 		fireLimitSelectionChange();
 	}
@@ -220,11 +231,11 @@ public class LimitsSubPanel<T extends Limit> extends EntitledSubPanelTable imple
 	public void mousePressed(MouseEvent e)
 	{	// init
 		JLabel label = (JLabel)e.getComponent();
-		int[] pos = getTable().getLabelPosition(label);
+		int[] pos = getLabelPosition(label);
 		// unselect
 		if(selectedRow!=-1)
-		{	getTable().setLabelBackground(selectedRow,0,GuiTools.COLOR_TABLE_HEADER_BACKGROUND);
-			getTable().setLabelBackground(selectedRow,1,GuiTools.COLOR_TABLE_REGULAR_BACKGROUND);
+		{	setLabelBackground(selectedRow,0,GuiTools.COLOR_TABLE_HEADER_BACKGROUND);
+			setLabelBackground(selectedRow,1,GuiTools.COLOR_TABLE_REGULAR_BACKGROUND);
 			selectedRow = -1;
 		}		
 		// select

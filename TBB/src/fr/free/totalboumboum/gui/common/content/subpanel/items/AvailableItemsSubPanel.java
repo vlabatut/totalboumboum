@@ -68,15 +68,15 @@ public class AvailableItemsSubPanel extends EntitledSubPanelTable
 				colGroups = 6;
 			}
 			setNewTable(colGroups,colSubs,lines);
-			int lineHeight = getTable().getLineHeight();
+			int lineHeight = getLineHeight();
 			int iconWidth = lineHeight;
-			getTable().setColSubMinWidth(0,lineHeight);
-			getTable().setColSubPreferredWidth(0,lineHeight);
-			getTable().setColSubMaxWidth(0,lineHeight);
+			setColSubMinWidth(0,lineHeight);
+			setColSubPreferredWidth(0,lineHeight);
+			setColSubMaxWidth(0,lineHeight);
 			int textWidth = (width - (iconWidth*colGroups+GuiTools.subPanelMargin*(colSubs*colGroups+1)))/colGroups;
-			getTable().setColSubMinWidth(1,textWidth);
-			getTable().setColSubPreferredWidth(1,textWidth);
-			getTable().setColSubMaxWidth(1,textWidth);			
+			setColSubMinWidth(1,textWidth);
+			setColSubPreferredWidth(1,textWidth);
+			setColSubMaxWidth(1,textWidth);			
 			
 			// data
 			NumberFormat nf = NumberFormat.getInstance();
@@ -105,17 +105,17 @@ public class AvailableItemsSubPanel extends EntitledSubPanelTable
 				String value = Integer.toString(number);
 				//
 				int colSub = 0;
-				{	getTable().setLabelIcon(line,colGroup,colSub,image,tooltip);
+				{	setLabelIcon(line,colGroup,colSub,image,tooltip);
 					Color fg = GuiTools.COLOR_TABLE_HEADER_FOREGROUND;
-					getTable().setLabelForeground(line,colGroup,colSub,fg);
+					setLabelForeground(line,colGroup,colSub,fg);
 					Color bg = GuiTools.COLOR_TABLE_HEADER_BACKGROUND;
-					getTable().setLabelBackground(line,colGroup,colSub,bg);
+					setLabelBackground(line,colGroup,colSub,bg);
 					colSub++;
 				}
 				{	String text = value;
-					getTable().setLabelText(line,colGroup,colSub,text,tooltip);
+					setLabelText(line,colGroup,colSub,text,tooltip);
 					Color bg = GuiTools.COLOR_TABLE_REGULAR_BACKGROUND;
-					getTable().setLabelBackground(line,colGroup,colSub,bg);
+					setLabelBackground(line,colGroup,colSub,bg);
 					colSub++;
 				}
 				line++;
@@ -129,11 +129,11 @@ public class AvailableItemsSubPanel extends EntitledSubPanelTable
 		{	//table
 			setNewTable(colGroups,colSubs,lines);
 			// widths
-			int lineHeight = getTable().getLineHeight();
-			getTable().setColSubMinWidth(0,lineHeight);
-			getTable().setColSubPreferredWidth(0,lineHeight);
-			getTable().setColSubMaxWidth(0,lineHeight);
-			getTable().setColSubMaxWidth(1,Integer.MAX_VALUE);			
+			int lineHeight = getLineHeight();
+			setColSubMinWidth(0,lineHeight);
+			setColSubPreferredWidth(0,lineHeight);
+			setColSubMaxWidth(0,lineHeight);
+			setColSubMaxWidth(1,Integer.MAX_VALUE);			
 		}
 	}
 

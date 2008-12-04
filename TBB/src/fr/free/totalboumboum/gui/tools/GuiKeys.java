@@ -32,6 +32,8 @@ public class GuiKeys
 	/////////////////////////////////////////////////////////////////
 	// MISC	/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
+	public static final String ALLOWED = "Allowed";
+	public static final String AUTHOR = "Author";
 	public static final String BOMBEDS = "Bombeds";
 	public static final String BOMBINGS = "Bombings";
 	public static final String BOMBS = "Bombs";
@@ -44,18 +46,22 @@ public class GuiKeys
 	public static final String DATA = "Data";
 	public static final String DESCRIPTION = "Description";
 	public static final String DISCRETIZE = "Discretize";
+	public static final String FOLDER = "Folder";
 	public static final String GAME = "Game";
 	public static final String HEADER = "Header";
 	public static final String HUMAN = "Human";
 	public static final String INVERTED = "Inverted";
 	public static final String ITEMS = "Items";
 	public static final String LAST_STANDING = "LastStanding";
+	public static final String LEVEL = "Level";
 	public static final String LIMIT = "Limit";
 	public static final String MATCH = "Match";
 	public static final String NAME = "Name";
 	public static final String NO_SHARE = "NoShare";
+	public static final String PACK = "Pack";
 	public static final String PAINTINGS = "Paintings";
 	public static final String PARTIAL = "Partial";
+	public static final String PLAYERS = "Players";
 	public static final String POINTS = "Points";
 	public static final String PORTRAIT = "Portrait";
 	public static final String PROFILE = "Profile";
@@ -174,15 +180,8 @@ public class GuiKeys
 			public static final String MENU_RESOURCES_ROUND_BUTTON_BACK = MENU_RESOURCES_ROUND_BUTTON+"Back";	
 			/* SELECT */
 			public static final String MENU_RESOURCES_ROUND_SELECT_TITLE = "MenuResourcesRoundSelectTitle";
-				/* LIST */
-				public static final String MENU_RESOURCES_ROUND_SELECT_LIST_PAGEDOWN = "MenuResourcesRoundSelectListPageDown";
-				public static final String MENU_RESOURCES_ROUND_SELECT_LIST_PAGEUP = "MenuResourcesRoundSelectListPageUp";
-				/* PREVIEW */
-				public static final String MENU_RESOURCES_ROUND_SELECT_PREVIEW_AUTHOR = "MenuResourcesRoundSelectPreviewAuthor";
-				public static final String MENU_RESOURCES_ROUND_SELECT_PREVIEW_LEVEL_FOLDER = "MenuResourcesRoundSelectPreviewLevelFolder";
-				public static final String MENU_RESOURCES_ROUND_SELECT_PREVIEW_LEVEL_PACK = "MenuResourcesRoundSelectPreviewLevelPack";
-				public static final String MENU_RESOURCES_ROUND_SELECT_PREVIEW_NAME = "MenuResourcesRoundSelectPreviewName";
-				public static final String MENU_RESOURCES_ROUND_SELECT_PREVIEW_PLAYERS = "MenuResourcesRoundSelectPreviewPlayers";
+			public static final String MENU_RESOURCES_ROUND_SELECT_PAGEDOWN = "MenuResourcesRoundListPageDown";
+			public static final String MENU_RESOURCES_ROUND_SELECT_PAGEUP = "MenuResourcesRoundListPageUp";
 			
 	/* OPTIONS */
 		/* BUTTON */
@@ -716,6 +715,14 @@ public class GuiKeys
 			public static final String COMMON_RESULTS_ROUND_DATA = COMMON_RESULTS_ROUND+DATA;
 			public static final String COMMON_RESULTS_ROUND_DATA_COMPUTER = COMMON_RESULTS_ROUND_DATA+COMPUTER;
 			public static final String COMMON_RESULTS_ROUND_DATA_HUMAN = COMMON_RESULTS_MATCH_DATA+HUMAN;
+	/* ROUND */
+	public static final String COMMON_ROUND = COMMON+ROUND;
+	public static final String COMMON_ROUND_ALLOWED_PLAYERS = COMMON_ROUND+ALLOWED+PLAYERS;
+	public static final String COMMON_ROUND_AUTHOR = COMMON_ROUND+AUTHOR;
+	public static final String COMMON_ROUND_LEVEL_FOLDER = COMMON_ROUND+LEVEL+FOLDER;
+	public static final String COMMON_ROUND_LEVEL_PACK = COMMON_ROUND+LEVEL+PACK;
+	public static final String COMMON_ROUND_TITLE = COMMON_ROUND+TITLE;
+			
 	
 	/////////////////////////////////////////////////////////////////
 	// PROCESS			/////////////////////////////////////////////

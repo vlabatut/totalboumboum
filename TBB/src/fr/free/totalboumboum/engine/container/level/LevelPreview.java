@@ -32,10 +32,28 @@ public class LevelPreview
 	/////////////////////////////////////////////////////////////////
 	// MISC 			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
+	private String instanceName;
+	private String themeName;
 	private String author;
 	private String title;
 	private String source;
+	private int visibleHeight;
+	private int visibleWidth;
 	
+	public String getInstanceName()
+	{	return instanceName;
+	}
+	public void setInstanceName(String instanceName)
+	{	this.instanceName = instanceName;
+	}
+
+	public String getThemeName()
+	{	return themeName;
+	}
+	public void setThemeName(String themeName)
+	{	this.themeName = themeName;
+	}
+
 	public String getAuthor()
 	{	return author;
 	}
@@ -57,10 +75,23 @@ public class LevelPreview
 	{	this.source = source;
 	}
 	
+	public int getVisibleHeight()
+	{	return visibleHeight;
+	}
+	public void setVisibleHeight(int visibleHeight)
+	{	this.visibleHeight = visibleHeight;
+	}
+	
+	public int getVisibleWidth()
+	{	return visibleWidth;
+	}
+	public void setVisibleWidth(int visibleWidth)
+	{	this.visibleWidth = visibleWidth;
+	}
+	
 	/////////////////////////////////////////////////////////////////
 	// VISUAL PREVIEW	/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-
 	private BufferedImage visualPreview = null;
 	
 	public BufferedImage getVisualPreview()

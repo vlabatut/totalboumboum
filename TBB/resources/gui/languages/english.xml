@@ -133,17 +133,8 @@
 				</group>		
 				<group name="Select">
 					<text name="Title" value="List of rounds" tooltip="List of predefined rounds" />
-					<group name="List">
-						<text name="PageDown" value="Page down" tooltip="Go to the next rounds page" />
-						<text name="PageUp" value="Page up" tooltip="Go back to the previous rounds page" />
-					</group>
-					<group name="Preview">
-						<text name="Author" value="Author"  tooltip="Author of this round" />
-						<text name="LevelFolder" value="Level"  tooltip="Level name for this round" />
-						<text name="LevelPack" value="Package"  tooltip="Level package for this round" />
-						<text name="Name" value="Name" tooltip="Name of this round" />
-						<text name="Players" value="Players" tooltip="Number of players needed for this round" />
-					</group>
+					<text name="PageDown" value="Page down" tooltip="Go to the next rounds page" />
+					<text name="PageUp" value="Page up" tooltip="Go back to the previous rounds page" />
 				</group>
 			</group>	
 		</group>	
@@ -774,6 +765,14 @@
 			</group>
 		</group>
 			
+		<group name="Round">
+			<text name="AllowedPlayers" value="Players" tooltip="Number of players needed for this round" />
+			<text name="Author" value="Author"  tooltip="Author of this round" />
+			<text name="LevelFolder" value="Level"  tooltip="Level name for this round" />
+			<text name="LevelPack" value="Package"  tooltip="Level package for this round" />
+			<text name="Title" value="Title" tooltip="Name of this round" />
+		</group>
+
 	</group>
 
 </language>

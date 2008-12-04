@@ -21,6 +21,7 @@ package fr.free.totalboumboum.gui.common.structure.subpanel;
  * 
  */
 
+import java.awt.Color;
 import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.Font;
@@ -133,6 +134,10 @@ public class EntitledSubPanel extends SubPanel
 	}
 	public int getTitleFontSize()
 	{	return titleFontSize;
+	}
+	
+	public void setTitleBackground(Color bg)
+	{	title.setBackground(bg);		
 	}
 	
 	/////////////////////////////////////////////////////////////////
