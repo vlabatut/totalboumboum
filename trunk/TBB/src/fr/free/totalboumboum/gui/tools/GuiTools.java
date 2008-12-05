@@ -223,7 +223,7 @@ public class GuiTools
 		// author
 		{	String folder = baseFolder+GuiFileTools.FILE_AUTHOR;
 			String[] uses =
-			{	GuiKeys.GAME_ROUND_DESCRIPTION_MISC_HEADER_AUTHOR,
+			{	GuiKeys.COMMON_LEVEL_AUTHOR,
 				GuiKeys.MENU_RESOURCES_AI_SELECT_PREVIEW_AUTHOR,
 				GuiKeys.MENU_RESOURCES_HERO_SELECT_PREVIEW_AUTHOR,
 				GuiKeys.MENU_RESOURCES_LEVEL_SELECT_PREVIEW_AUTHOR,
@@ -334,7 +334,7 @@ public class GuiTools
 		// dimension
 		{	String folder = baseFolder+GuiFileTools.FILE_DIMENSION;
 			String[] uses =
-			{	GuiKeys.GAME_ROUND_DESCRIPTION_MISC_HEADER_DIMENSION,
+			{	GuiKeys.COMMON_LEVEL_DIMENSION,
 				GuiKeys.MENU_RESOURCES_LEVEL_SELECT_PREVIEW_SIZE
 			};
 			loadTableImages(folder,uses);
@@ -373,7 +373,7 @@ public class GuiTools
 		// instance
 		{	String folder = baseFolder+GuiFileTools.FILE_INSTANCE;
 			String[] uses =
-			{	GuiKeys.GAME_ROUND_DESCRIPTION_MISC_HEADER_INSTANCE,
+			{	GuiKeys.COMMON_LEVEL_INSTANCE,
 				GuiKeys.MENU_RESOURCES_LEVEL_SELECT_PREVIEW_INSTANCE
 			};
 			loadTableImages(folder,uses);
@@ -416,7 +416,8 @@ public class GuiTools
 		// level
 		{	String folder = baseFolder+GuiFileTools.FILE_LEVEL;
 			String[] uses =
-			{	GuiKeys.COMMON_ROUND_LEVEL_FOLDER
+			{	GuiKeys.COMMON_ROUND_LEVEL_FOLDER,
+				GuiKeys.COMMON_LEVEL_TITLE
 			};
 			loadTableImages(folder,uses);
 		}
@@ -434,7 +435,6 @@ public class GuiTools
 			String[] uses =
 			{	GuiKeys.GAME_TOURNAMENT_DESCRIPTION_MISC_TITLE,
 				GuiKeys.GAME_MATCH_DESCRIPTION_MISC_TITLE,
-				GuiKeys.GAME_ROUND_DESCRIPTION_MISC_TITLE,
 				GuiKeys.MENU_RESOURCES_AI_SELECT_PREVIEW_NOTES
 			};
 			loadTableImages(folder,uses);
@@ -460,7 +460,7 @@ public class GuiTools
 		// pack
 		{	String folder = baseFolder+GuiFileTools.FILE_PACK;
 			String[] uses =
-			{	GuiKeys.GAME_ROUND_DESCRIPTION_MISC_HEADER_PACK,
+			{	GuiKeys.COMMON_LEVEL_PACK,
 				GuiKeys.MENU_PROFILES_PREVIEW_AIPACK,
 				GuiKeys.MENU_PROFILES_PREVIEW_HEROPACK,
 				GuiKeys.MENU_RESOURCES_AI_SELECT_PREVIEW_PACKAGE,
@@ -550,7 +550,7 @@ public class GuiTools
 		// source
 		{	String folder = baseFolder+GuiFileTools.FILE_SOURCE;
 			String[] uses =
-			{	GuiKeys.GAME_ROUND_DESCRIPTION_MISC_HEADER_SOURCE,
+			{	GuiKeys.COMMON_LEVEL_SOURCE,
 				GuiKeys.MENU_RESOURCES_HERO_SELECT_PREVIEW_SOURCE,
 				GuiKeys.MENU_RESOURCES_LEVEL_SELECT_PREVIEW_SOURCE
 			};
@@ -559,7 +559,7 @@ public class GuiTools
 		// theme
 		{	String folder = baseFolder+GuiFileTools.FILE_THEME;
 			String[] uses =
-			{	GuiKeys.GAME_ROUND_DESCRIPTION_MISC_HEADER_THEME,
+			{	GuiKeys.COMMON_LEVEL_THEME,
 				GuiKeys.MENU_RESOURCES_LEVEL_SELECT_PREVIEW_THEME
 			};
 			loadTableImages(folder,uses);
@@ -579,7 +579,7 @@ public class GuiTools
 		// title
 		{	String folder = baseFolder+GuiFileTools.FILE_TITLE;
 			String[] uses =
-			{	GuiKeys.GAME_ROUND_DESCRIPTION_MISC_HEADER_TITLE,
+			{	GuiKeys.COMMON_LEVEL_NAME,
 				GuiKeys.MENU_RESOURCES_AI_SELECT_PREVIEW_NAME,
 				GuiKeys.MENU_RESOURCES_HERO_SELECT_PREVIEW_NAME,
 				GuiKeys.MENU_RESOURCES_LEVEL_SELECT_PREVIEW_NAME,

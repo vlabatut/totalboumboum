@@ -119,7 +119,7 @@ public class RoundDescription extends EntitledDataPanel implements LimitsListene
 				{	int innerHeight = leftWidth;
 					imagePanel = new ImageSubPanel(leftWidth,innerHeight);
 					BufferedImage image = preview.getVisualPreview();
-					String key = GuiKeys.GAME_ROUND_DESCRIPTION_PREVIEW_TITLE+GuiKeys.TOOLTIP;
+					String key = GuiKeys.GAME_ROUND_DESCRIPTION_PREVIEW+GuiKeys.TOOLTIP;
 					String tooltip = GuiConfiguration.getMiscConfiguration().getLanguage().getText(key);
 					imagePanel.setImage(image,tooltip);
 					leftPanel.add(imagePanel);
