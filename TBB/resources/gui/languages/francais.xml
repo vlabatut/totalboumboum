@@ -499,27 +499,7 @@
 			
 			<group name="Description">
 				<text name="Title" value="Description de la manche"  tooltip="Description de la manche" />
-								
-				<group name="Misc">
-					<text name="Title" value="Divers"  tooltip="Informations diverses sur cette manche" />
-					<group name="Header">
-						<text name="Author" value="Auteur"  tooltip="Auteur/ripper du niveau" />
-						<text name="Dimension" value="Dimension"  tooltip="Dimension de la zone de jeu visible" />
-						<text name="Instance" value="Instance"  tooltip="Instance utilisée dans le niveau" />
-						<text name="Pack" value="Paquet"  tooltip="Paquet contenant le niveau" />
-						<text name="Source" value="Source"  tooltip="Source du niveau (oeuvre originale ou extrait d'un jeu existant)" />
-						<text name="Theme" value="Thème"  tooltip="Thème utilisé dans le niveau" />
-						<text name="Title" value="Titre"  tooltip="Titre du niveau" />
-					</group>
-				</group>
-								
-				<group name="Notes">
-					<text name="Title" value="Notes"  tooltip="Notes du concepteur de cette manche" />
-				</group>
-				
-				<group name="Preview">
-					<text name="Title" value="Aperçu"  tooltip="Aperçu du niveau" />
-				</group>
+				<text name="Preview" value="Aperçu"  tooltip="Aperçu du niveau" />
 			</group>
 								
 			<group name="Results">
@@ -564,6 +544,17 @@
 			<group name="Initial">
 				<text name="Title" value="Items initiaux"  tooltip="Items donnés à chaque joueur en début de manche" />
 			</group>
+		</group>
+								
+		<group name="Level">
+			<text name="Title" value="Divers"  tooltip="Informations diverses sur le niveau" />
+			<text name="Author" value="Auteur"  tooltip="Auteur/ripper du niveau" />
+			<text name="Dimension" value="Dimension"  tooltip="Dimension de la zone de jeu visible" />
+			<text name="Instance" value="Instance"  tooltip="Instance utilisée dans le niveau" />
+			<text name="Pack" value="Paquet"  tooltip="Paquet contenant le niveau" />
+			<text name="Source" value="Source"  tooltip="Source du niveau (oeuvre originale ou extrait d'un jeu existant)" />
+			<text name="Theme" value="Thème"  tooltip="Thème utilisé dans le niveau" />
+			<text name="Name" value="Nom"  tooltip="Nom du niveau" />
 		</group>
 		
 		<group name="Limit">

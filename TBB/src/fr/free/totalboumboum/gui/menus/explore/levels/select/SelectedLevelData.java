@@ -130,7 +130,7 @@ public class SelectedLevelData extends EntitledDataPanel implements MouseListene
 				int downHeight = dataHeight - upHeight - margin; 
 				
 				infosPanel = new LevelSubPanel(rightWidth,upHeight);
-				infosPanel.setShowPanelTitle(false);
+				infosPanel.setShowTitle(false);
 				infosPanel.setLevelPreview(selectedLevelPreview,10);
 				previewPanel.add(infosPanel);
 

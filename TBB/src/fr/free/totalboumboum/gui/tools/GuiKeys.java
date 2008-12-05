@@ -45,11 +45,13 @@ public class GuiKeys
 	public static final String CUSTOM = "Custom";
 	public static final String DATA = "Data";
 	public static final String DESCRIPTION = "Description";
+	public static final String DIMENSION = "Dimension";
 	public static final String DISCRETIZE = "Discretize";
 	public static final String FOLDER = "Folder";
 	public static final String GAME = "Game";
 	public static final String HEADER = "Header";
 	public static final String HUMAN = "Human";
+	public static final String INSTANCE = "Instance";
 	public static final String INVERTED = "Inverted";
 	public static final String ITEMS = "Items";
 	public static final String LAST_STANDING = "LastStanding";
@@ -71,6 +73,8 @@ public class GuiKeys
 	public static final String ROUND = "Round";
 	public static final String SCORE = "Score";
 	public static final String SHARE = "Share";
+	public static final String SOURCE = "Source";
+	public static final String THEME = "Theme";
 	public static final String TIME = "Time";
 	public static final String TITLE = "Title";
 	public static final String TOOLTIP = "Tooltip";
@@ -450,20 +454,7 @@ public class GuiKeys
 			public static final String GAME_ROUND_PROGRESSBAR_THEME = "GameRoundProgressbarTheme";
 			/* DESCRIPTION */
 			public static final String GAME_ROUND_DESCRIPTION_TITLE = "GameRoundDescriptionTitle";
-				/* MISC */
-				public static final String GAME_ROUND_DESCRIPTION_MISC_TITLE = "GameRoundDescriptionMiscTitle";
-					/* HEADER */
-					public static final String GAME_ROUND_DESCRIPTION_MISC_HEADER_AUTHOR = "GameRoundDescriptionMiscHeaderAuthor";
-					public static final String GAME_ROUND_DESCRIPTION_MISC_HEADER_DIMENSION = "GameRoundDescriptionMiscHeaderDimension";
-					public static final String GAME_ROUND_DESCRIPTION_MISC_HEADER_INSTANCE = "GameRoundDescriptionMiscHeaderInstance";
-					public static final String GAME_ROUND_DESCRIPTION_MISC_HEADER_PACK = "GameRoundDescriptionMiscHeaderPack";
-					public static final String GAME_ROUND_DESCRIPTION_MISC_HEADER_SOURCE = "GameRoundDescriptionMiscHeaderSource";
-					public static final String GAME_ROUND_DESCRIPTION_MISC_HEADER_THEME = "GameRoundDescriptionMiscHeaderTheme";
-					public static final String GAME_ROUND_DESCRIPTION_MISC_HEADER_TITLE = "GameRoundDescriptionMiscHeaderTitle";
-				/* NOTES */
-				public static final String GAME_ROUND_DESCRIPTION_NOTES_TITLE = "GameRoundDescriptionNotesTitle";
-				/* PREVIEW */
-				public static final String GAME_ROUND_DESCRIPTION_PREVIEW_TITLE = "GameRoundDescriptionPreviewTitle";
+			public static final String GAME_ROUND_DESCRIPTION_PREVIEW = "GameRoundDescriptionPreview";
 			/* RESULTS */
 			public static final String GAME_ROUND_RESULTS_TITLE = "GameRoundResultsTitle";
 			/* STATISTICS */
@@ -522,6 +513,17 @@ public class GuiKeys
 		public static final String COMMON_ITEMS_INITIAL = COMMON_ITEMS+INITIAL;
 		public static final String COMMON_ITEMS_INITIAL_TITLE = COMMON_ITEMS_INITIAL+TITLE;
 
+	/* LEVEL */
+	public static final String COMMON_LEVEL = COMMON+LEVEL;
+	public static final String COMMON_LEVEL_TITLE = COMMON_LEVEL+TITLE;
+	public static final String COMMON_LEVEL_AUTHOR = COMMON_LEVEL+AUTHOR;
+	public static final String COMMON_LEVEL_DIMENSION = COMMON_LEVEL+DIMENSION;
+	public static final String COMMON_LEVEL_INSTANCE = COMMON_LEVEL+INSTANCE;
+	public static final String COMMON_LEVEL_NAME = COMMON_LEVEL+NAME;
+	public static final String COMMON_LEVEL_PACK = COMMON_LEVEL+PACK;
+	public static final String COMMON_LEVEL_SOURCE = COMMON_LEVEL+SOURCE;
+	public static final String COMMON_LEVEL_THEME = COMMON_LEVEL+THEME;
+		
 	/* LIMIT */
 	public static final String COMMON_LIMIT = COMMON+LIMIT;
 		/* MATCH */

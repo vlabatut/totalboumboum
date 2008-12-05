@@ -500,27 +500,7 @@
 			
 			<group name="Description">
 				<text name="Title" value="Round description"  tooltip="Round description" />
-								
-				<group name="Misc">
-					<text name="Title" value="Misc"  tooltip="Various information about this round" />
-					<group name="Header">
-						<text name="Author" value="Author"  tooltip="Author/ripper of the level" />
-						<text name="Dimension" value="Dimension"  tooltip="Dimension of the visible play zone" />
-						<text name="Instance" value="Instance"  tooltip="Instance used in the level" />
-						<text name="Pack" value="Pack"  tooltip="Pack containing the level" />
-						<text name="Source" value="Source"  tooltip="Source of the level (original work or ripped from some existing game)" />
-						<text name="Theme" value="Theme"  tooltip="Theme used in the level" />
-						<text name="Title" value="Title"  tooltip="Title of the level" />
-					</group>
-				</group>
-								
-				<group name="Notes">
-					<text name="Title" value="Notes"  tooltip="Notes from the designer of this round" />
-				</group>
-				
-				<group name="Preview">
-					<text name="Title" value="Preview"  tooltip="Level preview" />
-				</group>
+				<text name="Preview" value="Preview"  tooltip="Level preview" />
 			</group>
 								
 			<group name="Results">
@@ -565,6 +545,17 @@
 			<group name="Initial">
 				<text name="Title" value="Initial items"  tooltip="Items given to each player at the begining of the round" />
 			</group>
+		</group>	
+								
+		<group name="Level">
+			<text name="Title" value="Misc"  tooltip="Various information about the level" />
+			<text name="Author" value="Author"  tooltip="Author/ripper of the level" />
+			<text name="Dimension" value="Dimension"  tooltip="Dimension of the visible play zone" />
+			<text name="Instance" value="Instance"  tooltip="Instance used in the level" />
+			<text name="Name" value="Name"  tooltip="Name of the level" />
+			<text name="Pack" value="Pack"  tooltip="Pack containing the level" />
+			<text name="Source" value="Source"  tooltip="Source of the level (original work or ripped from some existing game)" />
+			<text name="Theme" value="Theme"  tooltip="Theme used in the level" />
 		</group>
 		
 		<group name="Limit">

@@ -52,8 +52,6 @@ public class LevelSubPanel extends SubPanel
 /*
  * TODO 
  * - pb d'alignement vertical dans le game description
- * - mettre à jour les fichiers de langue
- * - mettre à jour l'icone Level dans la description de round	
  */
 	
 	
@@ -84,9 +82,9 @@ public class LevelSubPanel extends SubPanel
 		int colGroups = 1;
 		if(innerPanel!=null)
 			remove((SubPanel)innerPanel);
-		if(showPanelTitle)
+		if(showTitle)
 		{	innerPanel = new EntitledSubPanelTable(width,height,colGroups,colSubs,lines);
-			String titleKey = GuiKeys.GAME_ROUND_DESCRIPTION_MISC_TITLE;
+			String titleKey = GuiKeys.COMMON_LEVEL_TITLE;
 			((EntitledSubPanelTable)innerPanel).setTitleKey(titleKey,true);
 		}
 		else
@@ -95,25 +93,25 @@ public class LevelSubPanel extends SubPanel
 		
 		// icons
 		ArrayList<String> keys = new ArrayList<String>();
-		if(showTitle)
-			keys.add(GuiKeys.GAME_ROUND_DESCRIPTION_MISC_HEADER_TITLE);
+		if(showName)
+			keys.add(GuiKeys.COMMON_LEVEL_NAME);
 		if(showPack)
-			keys.add(GuiKeys.GAME_ROUND_DESCRIPTION_MISC_HEADER_PACK);
+			keys.add(GuiKeys.COMMON_LEVEL_PACK);
 		if(showSource)
-			keys.add(GuiKeys.GAME_ROUND_DESCRIPTION_MISC_HEADER_SOURCE);
+			keys.add(GuiKeys.COMMON_LEVEL_SOURCE);
 		if(showAuthor)
-			keys.add(GuiKeys.GAME_ROUND_DESCRIPTION_MISC_HEADER_AUTHOR);
+			keys.add(GuiKeys.COMMON_LEVEL_AUTHOR);
 		if(showInstance)
-			keys.add(GuiKeys.GAME_ROUND_DESCRIPTION_MISC_HEADER_INSTANCE);
+			keys.add(GuiKeys.COMMON_LEVEL_INSTANCE);
 		if(showTheme)
-			keys.add(GuiKeys.GAME_ROUND_DESCRIPTION_MISC_HEADER_THEME);
+			keys.add(GuiKeys.COMMON_LEVEL_THEME);
 		if(showDimension)
-			keys.add(GuiKeys.GAME_ROUND_DESCRIPTION_MISC_HEADER_DIMENSION);
+			keys.add(GuiKeys.COMMON_LEVEL_DIMENSION);
 		
 		if(levelPreview!=null)
 		{	// text
 			ArrayList<String> values = new ArrayList<String>();
-			if(showTitle)
+			if(showName)
 				values.add(levelPreview.getTitle());
 			if(showPack)
 				values.add(levelPreview.getPack());
@@ -144,7 +142,7 @@ public class LevelSubPanel extends SubPanel
 					Color fg = GuiTools.COLOR_TABLE_HEADER_FOREGROUND;
 					innerPanel.setLabelForeground(line,0,fg);
 					Color bg;
-					if(line==0 && !showPanelTitle)
+					if(line==0 && !showTitle)
 						bg = GuiTools.COLOR_TABLE_HEADER_BACKGROUND;
 					else
 						bg = GuiTools.COLOR_TABLE_REGULAR_BACKGROUND;
@@ -167,7 +165,7 @@ public class LevelSubPanel extends SubPanel
 					String tooltip = GuiConfiguration.getMiscConfiguration().getLanguage().getText(keys.get(line)+GuiKeys.TOOLTIP);
 					innerPanel.setLabelText(line,colSub,text,tooltip);
 					Color bg;
-					if(line==0 && !showPanelTitle)
+					if(line==0 && !showTitle)
 						bg = GuiTools.COLOR_TABLE_REGULAR_BACKGROUND;
 					else
 						bg = GuiTools.COLOR_TABLE_NEUTRAL_BACKGROUND;
@@ -185,8 +183,8 @@ public class LevelSubPanel extends SubPanel
 	/////////////////////////////////////////////////////////////////
 	// DISPLAY			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	private boolean showPanelTitle = true;
 	private boolean showTitle = true;
+	private boolean showName = true;
 	private boolean showPack = true;
 	private boolean showSource = true;
 	private boolean showAuthor = true;
@@ -194,8 +192,8 @@ public class LevelSubPanel extends SubPanel
 	private boolean showTheme = true;
 	private boolean showDimension = true;
 
-	public void setShowPanelTitle(boolean showPanelTitle)
-	{	this.showPanelTitle = showPanelTitle;
+	public void setShowTitle(boolean showTitle)
+	{	this.showTitle = showTitle;
 		setLevelPreview(levelPreview,lines);
 	}
 
@@ -203,8 +201,8 @@ public class LevelSubPanel extends SubPanel
 	{	this.showPack = showPack;
 	}
 
-	public void setShowTitle(boolean showTitle)
-	{	this.showTitle = showTitle;
+	public void setShowName(boolean showName)
+	{	this.showName = showName;
 	}
 
 	public void setShowSource(boolean showSource)
