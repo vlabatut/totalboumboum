@@ -114,7 +114,8 @@ public class SelectHeroMenu extends InnerMenuPanel
 				catch (ClassNotFoundException e1)
 				{	e1.printStackTrace();
 				}
-		}
+			}
+			parent.refresh();
 			replaceWith(parent);
 	    }
 	} 

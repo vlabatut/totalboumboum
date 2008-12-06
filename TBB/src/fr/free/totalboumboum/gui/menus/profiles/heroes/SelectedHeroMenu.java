@@ -88,6 +88,7 @@ public class SelectedHeroMenu extends InnerMenuPanel
 			{	profile.setSpriteFolder(heroPreview.getFolder());
 				profile.setSpritePack(heroPreview.getPack());
 			}
+			parent.refresh();
 			replaceWith(parent);
 	    }
 	} 
