@@ -124,11 +124,6 @@ public class SequenceDescription extends TournamentDescription implements Limits
 	{	// nothing to do here
 	}
 
-	@Override
-	public void updateData()
-	{	// nothing to do here
-	}
-
 	private SubPanel makePlayersPanel(int width, int height)
 	{	SequenceTournament tournament = (SequenceTournament)Configuration.getGameConfiguration().getTournament();
 		int lines = 16+1;

@@ -67,9 +67,4 @@ public class ExploreData extends InnerDataPanel
 	public void refresh()
 	{	// NOTE à compléter
 	}
-
-	@Override
-	public void updateData()
-	{	// no use
-	}
 }

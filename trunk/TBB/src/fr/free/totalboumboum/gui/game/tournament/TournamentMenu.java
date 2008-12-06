@@ -180,7 +180,7 @@ buttonStatistics.setEnabled(false);
 	public void matchOver()
 	{	SwingUtilities.invokeLater(new Runnable()
 		{	public void run()
-			{	tournamentResults.updateData();
+			{	tournamentResults.refresh();
 				buttonResults.doClick();
 			}
 		});	
@@ -190,7 +190,7 @@ buttonStatistics.setEnabled(false);
 	public void tournamentOver()
 	{	SwingUtilities.invokeLater(new Runnable()
 		{	public void run()
-			{	tournamentResults.updateData();
+			{	tournamentResults.refresh();
 				buttonResults.doClick();
 			}
 		});	

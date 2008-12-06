@@ -32,11 +32,11 @@ import javax.xml.parsers.ParserConfigurationException;
 
 import org.xml.sax.SAXException;
 
-import fr.free.totalboumboum.configuration.Configuration;
 import fr.free.totalboumboum.engine.container.level.HollowLevel;
 import fr.free.totalboumboum.engine.container.level.LevelPreview;
 import fr.free.totalboumboum.engine.container.level.LevelPreviewLoader;
 import fr.free.totalboumboum.game.limit.Limit;
+import fr.free.totalboumboum.game.limit.Limits;
 import fr.free.totalboumboum.game.limit.RoundLimit;
 import fr.free.totalboumboum.game.points.PointsProcessor;
 import fr.free.totalboumboum.game.round.Round;
@@ -60,6 +60,7 @@ public class RoundDescription extends EntitledDataPanel implements LimitsListene
 	private static final float SPLIT_RATIO = 0.4f;
 
 	private JPanel downPanel;
+	//
 	private ImageSubPanel imagePanel;
 	private InitialItemsSubPanel initialItemsPanel;
 	private AvailableItemsSubPanel availableItemsPanel;
@@ -76,29 +77,11 @@ public class RoundDescription extends EntitledDataPanel implements LimitsListene
 		}
 	
 		// data
-		{	Round round = Configuration.getGameConfiguration().getTournament().getCurrentMatch().getCurrentRound();
-			HollowLevel hollowLevel = round.getHollowLevel();
-			LevelPreview preview = null;
-			try
-			{	preview = LevelPreviewLoader.loadLevelPreview(hollowLevel.getPackName(),hollowLevel.getFolderName());
-			}
-			catch (ParserConfigurationException e)
-			{	e.printStackTrace();
-			}
-			catch (SAXException e)
-			{	e.printStackTrace();
-			}
-			catch (IOException e)
-			{	e.printStackTrace();
-			}
-			catch (ClassNotFoundException e)
-			{	e.printStackTrace();
-			}
-			SubPanel infoPanel = new SubPanel(dataWidth,dataHeight);
+		{	SubPanel infoPanel = new SubPanel(dataWidth,dataHeight);
 			{	BoxLayout layout = new BoxLayout(infoPanel,BoxLayout.LINE_AXIS); 
 				infoPanel.setLayout(layout);
 			}
-
+			
 			int margin = GuiTools.panelMargin;
 			int leftWidth = (int)(dataWidth*SPLIT_RATIO); 
 			int rightWidth = dataWidth - leftWidth - margin; 
@@ -118,20 +101,14 @@ public class RoundDescription extends EntitledDataPanel implements LimitsListene
 				// image panel
 				{	int innerHeight = leftWidth;
 					imagePanel = new ImageSubPanel(leftWidth,innerHeight);
-					BufferedImage image = preview.getVisualPreview();
-					String key = GuiKeys.GAME_ROUND_DESCRIPTION_PREVIEW+GuiKeys.TOOLTIP;
-					String tooltip = GuiConfiguration.getMiscConfiguration().getLanguage().getText(key);
-					imagePanel.setImage(image,tooltip);
 					leftPanel.add(imagePanel);
 				}
 
 				leftPanel.add(Box.createVerticalGlue());
 				
-				// itemset panel
+				// available itemset panel
 				{	int innerHeight = dataHeight - leftWidth - margin;
 					availableItemsPanel = new AvailableItemsSubPanel(leftWidth,innerHeight);
-					availableItemsPanel.setLevelPreview(preview);
-//					itemsetPanel.setAlignmentX(Component.CENTER_ALIGNMENT);
 					leftPanel.add(availableItemsPanel);
 				}
 				//
@@ -167,7 +144,6 @@ public class RoundDescription extends EntitledDataPanel implements LimitsListene
 					
 					// misc panel
 					{	miscPanel = new LevelSubPanel(innerWidth,upHeight);
-						miscPanel.setLevelPreview(preview,8);
 						upPanel.add(miscPanel);
 					}
 					
@@ -175,7 +151,6 @@ public class RoundDescription extends EntitledDataPanel implements LimitsListene
 					
 					// initial items panel
 					{	initialItemsPanel = new InitialItemsSubPanel(innerWidth,upHeight);
-						initialItemsPanel.setLevelPreview(preview);
 						upPanel.add(initialItemsPanel);
 					}
 					rightPanel.add(upPanel);
@@ -206,9 +181,6 @@ public class RoundDescription extends EntitledDataPanel implements LimitsListene
 					// points panel
 					{	pointsPanel = new PointsSubPanel(innerWidth,downHeight,GuiKeys.ROUND);
 						downPanel.add(pointsPanel);
-						limitSelectionChange();
-//						SubPanel pointsPanel = makePointsPanel(innerWidth,downHeight,round.getPointProcessor(),GuiKeys.ROUND);
-//						downPanel.add(pointsPanel);
 					}
 					
 					rightPanel.add(downPanel);
@@ -217,23 +189,71 @@ public class RoundDescription extends EntitledDataPanel implements LimitsListene
 			}
 
 			setDataPart(infoPanel);
-			
-			limitsPanel.setLimits(round.getLimits());
 		}
 	}
 
+	/////////////////////////////////////////////////////////////////
+	// ROUND			/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////	
+	private Round round;
+	private HollowLevel hollowLevel;
+	private LevelPreview levelPreview;
+	
+	public void setRound(Round round)
+	{	// init
+		this.round = round;
+		BufferedImage image = null;
+		Limits<RoundLimit> limits = null;
+		if(round==null)
+		{	hollowLevel = null;
+			levelPreview = null;
+		}
+		else
+		{	hollowLevel = round.getHollowLevel();
+			limits = round.getLimits();
+			try
+			{	levelPreview = LevelPreviewLoader.loadLevelPreview(hollowLevel.getPackName(),hollowLevel.getFolderName());
+				image = levelPreview.getVisualPreview();
+			}
+			catch (ParserConfigurationException e)
+			{	e.printStackTrace();
+			}
+			catch (SAXException e)
+			{	e.printStackTrace();
+			}
+			catch (IOException e)
+			{	e.printStackTrace();
+			}
+			catch (ClassNotFoundException e)
+			{	e.printStackTrace();
+			}
+		}
+		// image panel
+		String key = GuiKeys.GAME_ROUND_DESCRIPTION_PREVIEW+GuiKeys.TOOLTIP;
+		String tooltip = GuiConfiguration.getMiscConfiguration().getLanguage().getText(key);
+		imagePanel.setImage(image,tooltip);
+		// level
+		miscPanel.setLevelPreview(levelPreview,8);
+		// initial items panel
+		initialItemsPanel.setLevelPreview(levelPreview);
+		// available items panel
+		availableItemsPanel.setLevel(levelPreview,hollowLevel);
+		// limits & points
+		limitsPanel.setLimits(limits);
+//		limitSelectionChange();
+	}
+	
+	public Round getRound()
+	{	return round;	
+	}
+	
 	/////////////////////////////////////////////////////////////////
 	// CONTENT PANEL	/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	
 	@Override
 	public void refresh()
-	{	// nothing to do here
-	}
-
-	@Override
-	public void updateData()
-	{	// nothing to do here
+	{	setRound(round);
 	}
 
 	/////////////////////////////////////////////////////////////////

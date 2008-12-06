@@ -222,11 +222,6 @@ public class GuiData extends EntitledDataPanel implements MouseListener
 	{	// nothing to do here
 	}
 
-	@Override
-	public void updateData()
-	{	// nothing to do here
-	}
-
 	public MiscConfiguration getMiscConfiguration()
 	{	return miscConfiguration;
 	}	

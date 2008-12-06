@@ -53,11 +53,6 @@ public class MatchResults extends EntitledDataPanel
 
 	@Override
 	public void refresh()
-	{	// nothing to do here
-	}
-
-	@Override
-	public void updateData()
 	{	Match match = Configuration.getGameConfiguration().getTournament().getCurrentMatch();
 		resultsPanel.setStatisticHolder(match);		
 	}

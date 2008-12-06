@@ -98,11 +98,6 @@ public class PlayersData extends EntitledDataPanel implements MouseListener
 	{	for(int line=1;line<LINE_COUNT;line++)
 			refreshPlayer(line);
 	}
-
-	@Override
-	public void updateData()
-	{	// nothing to do here
-	}
 	
 	private UntitledSubPanelTable makePlayersPanel(int width, int height)
 	{	int headerCols = 6;

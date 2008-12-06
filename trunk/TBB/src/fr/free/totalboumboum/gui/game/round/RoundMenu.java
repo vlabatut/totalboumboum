@@ -37,11 +37,9 @@ import javax.xml.parsers.ParserConfigurationException;
 
 import org.xml.sax.SAXException;
 
-import fr.free.totalboumboum.configuration.Configuration;
 import fr.free.totalboumboum.game.round.Round;
 import fr.free.totalboumboum.game.round.RoundRenderPanel;
 import fr.free.totalboumboum.gui.common.structure.panel.SplitMenuPanel;
-import fr.free.totalboumboum.gui.common.structure.panel.data.InnerDataPanel;
 import fr.free.totalboumboum.gui.common.structure.panel.menu.InnerMenuPanel;
 import fr.free.totalboumboum.gui.common.structure.panel.menu.MenuPanel;
 import fr.free.totalboumboum.gui.data.configuration.GuiConfiguration;
@@ -56,9 +54,9 @@ public class RoundMenu extends InnerMenuPanel implements RoundRenderPanel
 {	private static final long serialVersionUID = 1L;
 	
 	private LoopPanel loopPanel;
-	private InnerDataPanel roundDescription;
-	private InnerDataPanel roundResults;
-	private InnerDataPanel roundStatistics;
+	private RoundDescription roundDescription;
+	private RoundResults roundResults;
+	private RoundStatistics roundStatistics;
 		
 	private JButton buttonQuit;
 	private JButton buttonMatch;
@@ -101,20 +99,71 @@ buttonStatistics.setEnabled(false);
 	    group.add(buttonStatistics);
 		add(Box.createRigidArea(new Dimension(GuiTools.buttonHorizontalSpace,0)));
 		buttonPlay = GuiTools.createButton(GuiKeys.GAME_ROUND_BUTTON_PLAY,buttonWidth,buttonHeight,1,this);
+		buttonPlay.setEnabled(false);		
 		
 		// panels
-		{	roundDescription = null;
-			roundDescription = new RoundDescription(container);
-			container.setDataPart(roundDescription);
-			roundResults = new RoundResults(container);
-			roundStatistics = new RoundStatistics(container);
-		}
-		
-		// round
-		Round round = Configuration.getGameConfiguration().getTournament().getCurrentMatch().getCurrentRound();
+		roundDescription = new RoundDescription(container);
+		container.setDataPart(roundDescription);
+		roundResults = new RoundResults(container);
+		roundStatistics = new RoundStatistics(container);
+	}
+
+	/////////////////////////////////////////////////////////////////
+	// ROUND			/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	private Round round;
+
+	public void setRound(Round round)
+	{	// round
+		if(round!=null)
+			round.setPanel(null);
+		this.round = round;
 		round.setPanel(this);
+		// panels
+		roundDescription.setRound(round);
+		roundResults.setRound(round);
+		roundStatistics.setRound(round);	
+		// buttons
+		refreshButtons();
 	}
 	
+	public Round getRound()
+	{	return round;	
+	}
+
+	/////////////////////////////////////////////////////////////////
+	// REFRESH	/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	private void refreshButtons()
+	{	if(round!=null)
+		{	if(round.isOver())
+			{	// play
+				buttonPlay.setEnabled(false);
+				// finish
+				GuiTools.setButtonContent(GuiKeys.GAME_ROUND_BUTTON_FINISH, buttonMatch);
+			}
+			else
+			{	// play
+				buttonPlay.setEnabled(true);
+				// match
+				GuiTools.setButtonContent(GuiKeys.GAME_ROUND_BUTTON_CURRENT_MATCH, buttonMatch);
+			}
+		}
+		else
+		{	// play
+			buttonPlay.setEnabled(false);
+		}
+	}
+	
+	private void refreshPanels()
+	{	roundDescription.refresh();
+		roundResults.refresh();
+		roundStatistics.refresh();	
+	}
+
+	/////////////////////////////////////////////////////////////////
+	// ACTION LISTENER	/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
 	public void actionPerformed(ActionEvent e)
 	{	if(e.getActionCommand().equals(GuiKeys.GAME_ROUND_BUTTON_QUIT))
 		{	getFrame().setMainMenuPanel();
@@ -123,8 +172,7 @@ buttonStatistics.setEnabled(false);
 		{	replaceWith(parent);
 	    }
 		else if(e.getActionCommand().equals(GuiKeys.GAME_ROUND_BUTTON_FINISH))
-		{	Round round = Configuration.getGameConfiguration().getTournament().getCurrentMatch().getCurrentRound();
-			round.finish();
+		{	round.finish();
 			replaceWith(parent);
 	    }
 		else if(e.getActionCommand().equals(GuiKeys.GAME_ROUND_BUTTON_DESCRIPTION))
@@ -140,7 +188,6 @@ buttonStatistics.setEnabled(false);
 		{	buttonPlay.setEnabled(false);
 			buttonQuit.setEnabled(false);
 			buttonMatch.setEnabled(false);
-			Round round = Configuration.getGameConfiguration().getTournament().getCurrentMatch().getCurrentRound();
 			int limit = round.getProfiles().size()+3;
 			loadProgressBar = new JProgressBar(0,limit);
 			int fontSize = GuiTools.getFontSize(getHeight()*0.6);
@@ -188,23 +235,20 @@ buttonStatistics.setEnabled(false);
 	    }
 	} 
 
+	/////////////////////////////////////////////////////////////////
+	// CONTENT PANEL	/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	
 	@Override
 	public void refresh()
-	{	Round round = Configuration.getGameConfiguration().getTournament().getCurrentMatch().getCurrentRound();
-		if(round.isOver())
-		{	// play
-			buttonPlay.setEnabled(false);
-			// finish
-			GuiTools.setButtonContent(GuiKeys.GAME_ROUND_BUTTON_FINISH, buttonMatch);
-		}
-		else
-		{	// play
-			buttonPlay.setEnabled(true);
-			// match
-			GuiTools.setButtonContent(GuiKeys.GAME_ROUND_BUTTON_CURRENT_MATCH, buttonMatch);
-		}
+	{	refreshPanels();
+		refreshButtons();
 	} 
 
+	/////////////////////////////////////////////////////////////////
+	// ROUND RENDER PANEL	/////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	
 	@Override
 	public void roundOver()
 	{	SwingUtilities.invokeLater(new Runnable()
@@ -215,7 +259,7 @@ buttonStatistics.setEnabled(false);
 				//
 				buttonMatch.setEnabled(true);
 				buttonQuit.setEnabled(true);
-				roundResults.updateData();
+				roundResults.refresh();
 				buttonResults.doClick();
 			}
 		});	
@@ -240,7 +284,6 @@ buttonStatistics.setEnabled(false);
 				break;
 			// players
 			default:
-				Round round = Configuration.getGameConfiguration().getTournament().getCurrentMatch().getCurrentRound();
 				if(val==round.getProfiles().size()+2)
 				{	text = GuiConfiguration.getMiscConfiguration().getLanguage().getText(GuiKeys.GAME_ROUND_PROGRESSBAR_COMPLETE);
 					loadProgressBar.setString(text);

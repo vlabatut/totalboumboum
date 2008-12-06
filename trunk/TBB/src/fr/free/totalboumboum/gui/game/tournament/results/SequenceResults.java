@@ -47,11 +47,6 @@ public class SequenceResults extends TournamentResults
 
 	@Override
 	public void refresh()
-	{	// nothing to do here
-	}
-
-	@Override
-	public void updateData()
 	{	SequenceTournament tournament = (SequenceTournament)Configuration.getGameConfiguration().getTournament();
 		resultsPanel.setStatisticHolder(tournament);
 	}

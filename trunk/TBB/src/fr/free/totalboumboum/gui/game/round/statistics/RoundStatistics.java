@@ -21,6 +21,7 @@ package fr.free.totalboumboum.gui.game.round.statistics;
  * 
  */
 
+import fr.free.totalboumboum.game.round.Round;
 import fr.free.totalboumboum.gui.common.structure.panel.SplitMenuPanel;
 import fr.free.totalboumboum.gui.common.structure.panel.data.EntitledDataPanel;
 import fr.free.totalboumboum.gui.tools.GuiKeys;
@@ -38,13 +39,25 @@ public class RoundStatistics extends EntitledDataPanel
 	
 	}
 
+	/////////////////////////////////////////////////////////////////
+	// ROUND			/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	private Round round;
+
+	public void setRound(Round round)
+	{	this.round = round;
+	}
+	
+	public Round getRound()
+	{	return round;	
+	}
+	
+	/////////////////////////////////////////////////////////////////
+	// CONTENT PANEL	/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	
 	@Override
 	public void refresh()
-	{	// nothing to do here
-	}
-
-	@Override
-	public void updateData()
-	{	// nothing to do here
+	{	// 
 	}
 }

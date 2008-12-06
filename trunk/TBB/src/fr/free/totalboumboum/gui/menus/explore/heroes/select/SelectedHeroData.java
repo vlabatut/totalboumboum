@@ -528,11 +528,6 @@ public class SelectedHeroData extends EntitledDataPanel implements MouseListener
 
 	@Override
 	public void refresh()
-	{	refreshPreview();
-	}
-
-	@Override
-	public void updateData()
 	{	// nothing to do here
 	}
 	

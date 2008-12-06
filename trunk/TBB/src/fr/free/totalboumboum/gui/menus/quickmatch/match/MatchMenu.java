@@ -54,7 +54,7 @@ import fr.free.totalboumboum.gui.tools.GuiTools;
 public class MatchMenu extends InnerMenuPanel implements MatchRenderPanel
 {	private static final long serialVersionUID = 1L;
 	
-	private MenuPanel roundPanel;
+	private RoundSplitPanel roundPanel;
 	private InnerDataPanel matchDescription;
 	private InnerDataPanel matchResults;
 	private InnerDataPanel matchStatistics;
@@ -66,6 +66,8 @@ public class MatchMenu extends InnerMenuPanel implements MatchRenderPanel
 	private JToggleButton buttonResults;
 	private JToggleButton buttonStatistics;
 	private JButton buttonRound;
+	
+	private Match match;
 	
 	public MatchMenu(SplitMenuPanel container, MenuPanel parent)
 	{	super(container,parent);
@@ -107,7 +109,7 @@ buttonStatistics.setEnabled(false);
 			matchStatistics = new MatchStatistics(container);		
 		}
 		
-		Match match = Configuration.getGameConfiguration().getTournament().getCurrentMatch();
+		match = Configuration.getGameConfiguration().getTournament().getCurrentMatch();
 		match.setPanel(this);
 	}
 	
@@ -119,8 +121,7 @@ buttonStatistics.setEnabled(false);
 		{	replaceWith(parent);
 	    }
 		else if(e.getActionCommand().equals(GuiKeys.GAME_MATCH_BUTTON_FINISH))
-		{	Match match = Configuration.getGameConfiguration().getTournament().getCurrentMatch();
-			match.finish();
+		{	match.finish();
 			replaceWith(parent);
 	    }
 		else if(e.getActionCommand().equals(GuiKeys.GAME_MATCH_BUTTON_DESCRIPTION))
@@ -164,14 +165,15 @@ buttonStatistics.setEnabled(false);
 			{	e1.printStackTrace();
 			}
 			roundPanel = new RoundSplitPanel(container.getContainer(),container);
+			Round round = match.getCurrentRound();		
+			roundPanel.setRound(round);
 			replaceWith(roundPanel);
 	    }
 	} 
 
 	@Override
 	public void refresh()
-	{	Match match = Configuration.getGameConfiguration().getTournament().getCurrentMatch(); 
-		if(match.isOver())
+	{	if(match.isOver())
 		{	// Round
 			buttonRound.setEnabled(false);
 			// Finish
@@ -194,7 +196,7 @@ buttonStatistics.setEnabled(false);
 	public void matchOver()
 	{	SwingUtilities.invokeLater(new Runnable()
 		{	public void run()
-			{	matchResults.updateData();
+			{	matchResults.refresh();
 				buttonResults.doClick();
 			}
 		});	
@@ -204,7 +206,7 @@ buttonStatistics.setEnabled(false);
 	public void roundOver()
 	{	SwingUtilities.invokeLater(new Runnable()
 		{	public void run()
-			{	matchResults.updateData();
+			{	matchResults.refresh();
 				buttonResults.doClick();
 			}
 		});	

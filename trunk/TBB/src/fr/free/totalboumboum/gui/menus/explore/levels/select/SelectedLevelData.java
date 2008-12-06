@@ -321,11 +321,6 @@ public class SelectedLevelData extends EntitledDataPanel implements MouseListene
 
 	@Override
 	public void refresh()
-	{	refreshPreview();
-	}
-
-	@Override
-	public void updateData()
 	{	// nothing to do here
 	}
 	
