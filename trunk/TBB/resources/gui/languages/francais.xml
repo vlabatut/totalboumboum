@@ -395,20 +395,7 @@
 				
 				<group name="Notes">
 					<text name="Title" value="Notes"  tooltip="Notes du concepteur de ce tournoi" />
-				</group>
-				
-				<group name="Players">
-					<group name="Header">
-						<text name="Name" value="Nom"  tooltip="Nom du joueur" />
-						<text name="Profile" value="Humain/Ordinateur"  tooltip="Joueur controlé par un humain ou un ordinateur" />
-						<text name="Rank" value="n°"  tooltip="Classement du joueur dans les statistiques générales du jeu (avant ce tournoi)" />
-					</group>
-					<group name="Data">
-						<text name="Computer" value="Ordinateur"  tooltip="Ce joueur est contrôlé par l'ordinateur" />
-						<text name="Human" value="Humain"  tooltip="Ce joueur est contrôlé par un être humain (ou un geek)" />
-					</group>
-				</group>
-
+				</group>				
 			</group>
 
 			<group name="Results">
@@ -446,22 +433,6 @@
 				<group name="Notes">
 					<text name="Title" value="Notes"  tooltip="Notes du concepteur de cette rencontre" />
 				</group>
-				
-				<group name="Players">
-					<group name="Header">
-						<text name="Controls" value="Commandes"  tooltip="Commandes du joueur" />
-						<text name="Name" value="Nom"  tooltip="Nom du joueur" />
-						<text name="Profile" value="Humain/Ordinateur"  tooltip="Joueur controlé par un humain ou un ordinateur" />
-						<text name="Rank" value="n°"  tooltip="Classement du joueur dans le tournoi, avant cette rencontre" />
-					</group>
-					<group name="Data">
-						<text name="Computer" value="Ordinateur"  tooltip="Joueur contrôlé par l'ordinateur" />
-						<text name="Controls" value="n°"  tooltip="Le joueur utilise les commandes numéro" />
-						<text name="Human" value="Humain"  tooltip="Joueur contrôlé par un être humain" />
-						<text name="Nocontrols" value="-"  tooltip="Le joueur n'utilise pas de commandes" />
-					</group>
-				</group>
-				
 			</group>
 				
 			<group name="Results">
@@ -604,6 +575,24 @@
 			</group>
 		</group>
 
+		<group name="Players">
+			<group name="List">
+				<group name="Header">
+					<text name="Controls" value="Commandes"  tooltip="Commandes du joueur" />
+					<text name="Hero" value="Personnage"  tooltip="Personnage choisi par le joueur" />
+					<text name="Name" value="Nom"  tooltip="Nom du joueur" />
+					<text name="Profile" value="Humain/Ordinateur"  tooltip="Joueur controlé par un humain ou un ordinateur" />
+					<text name="Rank" value="n°"  tooltip="Classement du joueur dans les statistiques du jeu" />
+				</group>
+				<group name="Data">
+					<text name="Computer" value="Ordinateur"  tooltip="Joueur contrôlé par l'ordinateur" />
+					<text name="Controls" value="n°"  tooltip="Le joueur utilise les commandes numéro" />
+					<text name="Human" value="Humain"  tooltip="Joueur contrôlé par un être humain" />
+					<text name="NoControls" value="-"  tooltip="Le joueur n'utilise pas de commandes" />
+				</group>
+			</group>
+		</group>
+		
 		<group name="Points">
 			<group name="Match">
 				<text name="Title" value="Points"  tooltip="Informations sur le calcul des points de cette rencontre" />

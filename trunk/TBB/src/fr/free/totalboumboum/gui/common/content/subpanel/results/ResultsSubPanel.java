@@ -70,8 +70,7 @@ public class ResultsSubPanel extends UntitledSubPanelTable
 		int cols = 0;
 		
 		if(statisticHolder!=null)
-		{
-			if(showPortrait) 
+		{	if(showPortrait) 
 				cols++;
 			if(showName) 
 				cols++;

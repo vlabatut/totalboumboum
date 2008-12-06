@@ -395,19 +395,6 @@
 				<group name="Notes">
 					<text name="Title" value="Notes"  tooltip="Notes from the designer of this tournament" />
 				</group>
-				
-				<group name="Players">
-					<group name="Header">
-						<text name="Name" value="Name"  tooltip="Name of the player" />
-						<text name="Profile" value="Human/Computer"  tooltip="Human or computer-controlled player" />
-						<text name="Rank" value="#"  tooltip="Rank of the player in the general statistics before this tournament" />
-					</group>
-					<group name="Data">
-						<text name="Computer" value="Computer"  tooltip="This player is computer-controlled" />
-						<text name="Human" value="Human"  tooltip="This player is human-controlled" />
-					</group>
-				</group>
-
 			</group>
 
 			<group name="Results">
@@ -447,22 +434,6 @@
 				<group name="Notes">
 					<text name="Title" value="Notes"  tooltip="Notes from the designer of this match" />
 				</group>
-				
-				<group name="Players">
-					<group name="Header">
-						<text name="Name" value="Name"  tooltip="Name of the player" />
-						<text name="Controls" value="Controls"  tooltip="Controls of the player" />
-						<text name="Profile" value="Human/Computer"  tooltip="Human or computer-controlled player" />
-						<text name="Rank" value="#"  tooltip="Rank of the player in the tournament before this match" />
-					</group>
-					<group name="Data">
-						<text name="Computer" value="Computer"  tooltip="This player is computer-controlled" />
-						<text name="Controls" value="#"  tooltip="The player uses the commands number" />
-						<text name="Human" value="Human"  tooltip="This player is human-controlled" />
-						<text name="Nocontrols" value="-"  tooltip="This player does not use any commands" />
-					</group>
-				</group>
-				
 			</group>
 				
 			<group name="Results">
@@ -601,6 +572,24 @@
 					<text name="Items" value="Items"  tooltip="Number of items to pick in order to stop this tournament" />
 					<text name="Paintings" value="Paintings"  tooltip="Number of tiles to paint in order to stop this tournament" />
 					<text name="Time" value="Time"  tooltip="Maximum duration of this tournament" />
+				</group>
+			</group>
+		</group>
+
+		<group name="Players">
+			<group name="List">
+				<group name="Header">
+					<text name="Controls" value="Controls"  tooltip="Controls of the player" />
+					<text name="Hero" value="Character"  tooltip="Character selected by the player" />
+					<text name="Name" value="Name"  tooltip="Name of the player" />
+					<text name="Profile" value="Human/Computer"  tooltip="Human or computer-controlled player" />
+					<text name="Rank" value="#"  tooltip="Rank of the player in the general game statistics" />
+				</group>
+				<group name="Data">
+					<text name="Computer" value="Computer"  tooltip="This player is computer-controlled" />
+					<text name="Controls" value="#"  tooltip="The player uses the commands number" />
+					<text name="Human" value="Human"  tooltip="This player is human-controlled" />
+					<text name="NoControls" value="-"  tooltip="This player does not use any commands" />
 				</group>
 			</group>
 		</group>

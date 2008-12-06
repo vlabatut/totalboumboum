@@ -41,6 +41,7 @@ public class GuiKeys
 	public static final String CONFRONTATION = "Confrontation";
 	public static final String CONFRONTATIONS = "Confrontations";
 	public static final String CONSTANT = "Constant";
+	public static final String CONTROLS = "Controls";
 	public static final String CROWNS = "Crowns";
 	public static final String CUSTOM = "Custom";
 	public static final String DATA = "Data";
@@ -50,6 +51,7 @@ public class GuiKeys
 	public static final String FOLDER = "Folder";
 	public static final String GAME = "Game";
 	public static final String HEADER = "Header";
+	public static final String HERO = "Hero";
 	public static final String HUMAN = "Human";
 	public static final String INSTANCE = "Instance";
 	public static final String INVERTED = "Inverted";
@@ -57,9 +59,11 @@ public class GuiKeys
 	public static final String LAST_STANDING = "LastStanding";
 	public static final String LEVEL = "Level";
 	public static final String LIMIT = "Limit";
+	public static final String LIST = "List";
 	public static final String MATCH = "Match";
 	public static final String NAME = "Name";
 	public static final String NO_SHARE = "NoShare";
+	public static final String NO_CONTROLS = "NoControls";
 	public static final String PACK = "Pack";
 	public static final String PAINTINGS = "Paintings";
 	public static final String PARTIAL = "Partial";
@@ -67,6 +71,7 @@ public class GuiKeys
 	public static final String POINTS = "Points";
 	public static final String PORTRAIT = "Portrait";
 	public static final String PROFILE = "Profile";
+	public static final String RANK = "Rank";
 	public static final String RANKINGS = "Rankings";
 	public static final String RANKPOINTS = "Rankpoints";
 	public static final String REGULAR = "Regular";
@@ -390,14 +395,6 @@ public class GuiKeys
 				public static final String GAME_TOURNAMENT_DESCRIPTION_MISC_TITLE = "GameTournamentDescriptionMiscTitle";
 				/* NOTES */
 				public static final String GAME_TOURNAMENT_DESCRIPTION_NOTES_TITLE = "GameTournamentDescriptionNotesTitle";
-				/* PLAYERS */
-					/* HEADER */
-					public static final String GAME_TOURNAMENT_DESCRIPTION_PLAYERS_HEADER_NAME = "GameTournamentDescriptionPlayersHeaderName";
-					public static final String GAME_TOURNAMENT_DESCRIPTION_PLAYERS_HEADER_PROFILE = "GameTournamentDescriptionPlayersHeaderProfile";
-					public static final String GAME_TOURNAMENT_DESCRIPTION_PLAYERS_HEADER_RANK = "GameTournamentDescriptionPlayersHeaderRank";
-					/* DATA */
-					public static final String GAME_TOURNAMENT_DESCRIPTION_PLAYERS_DATA_COMPUTER = "GameTournamentDescriptionPlayersDataComputer";
-					public static final String GAME_TOURNAMENT_DESCRIPTION_PLAYERS_DATA_HUMAN = "GameTournamentDescriptionPlayersDataHuman";
 			/* RESULTS */
 			public static final String GAME_TOURNAMENT_RESULTS_TITLE = "GameTournamentResultsTitle";
 			/* STATISTICS */
@@ -420,17 +417,6 @@ public class GuiKeys
 				public static final String GAME_MATCH_DESCRIPTION_MISC_TITLE = "GameMatchDescriptionMiscTitle";
 				/* NOTES */
 				public static final String GAME_MATCH_DESCRIPTION_NOTES_TITLE = "GameMatchDescriptionNotesTitle";
-				/* PLAYERS */
-					/* HEADER */
-					public static final String GAME_MATCH_DESCRIPTION_PLAYERS_HEADER_CONTROLS = "GameMatchDescriptionPlayersHeaderControls";
-					public static final String GAME_MATCH_DESCRIPTION_PLAYERS_HEADER_NAME = "GameMatchDescriptionPlayersHeaderName";
-					public static final String GAME_MATCH_DESCRIPTION_PLAYERS_HEADER_PROFILE = "GameMatchDescriptionPlayersHeaderProfile";
-					public static final String GAME_MATCH_DESCRIPTION_PLAYERS_HEADER_RANK = "GameMatchDescriptionPlayersHeaderRank";
-					/* DATA */
-					public static final String GAME_MATCH_DESCRIPTION_PLAYERS_DATA_COMPUTER = "GameMatchDescriptionPlayersDataComputer";
-					public static final String GAME_MATCH_DESCRIPTION_PLAYERS_DATA_CONTROLS = "GameMatchDescriptionPlayersDataControls";
-					public static final String GAME_MATCH_DESCRIPTION_PLAYERS_DATA_HUMAN = "GameMatchDescriptionPlayersDataHuman";
-					public static final String GAME_MATCH_DESCRIPTION_PLAYERS_DATA_NOCONTROLS = "GameMatchDescriptionPlayersDataNocontrols";
 			/* RESULTS */
 			public static final String GAME_MATCH_RESULTS_TITLE = "GameMatchResultsTitle";
 			/* STATISTICS */
@@ -569,6 +555,24 @@ public class GuiKeys
 			public static final String COMMON_LIMIT_TOURNAMENT_HEADER_PAINTINGS = COMMON_LIMIT_TOURNAMENT_HEADER+PAINTINGS;
 			public static final String COMMON_LIMIT_TOURNAMENT_HEADER_TIME = COMMON_LIMIT_TOURNAMENT_HEADER+TIME;
 			
+	/* PLAYERS */
+	public static final String COMMON_PLAYERS = COMMON+PLAYERS;
+		/* LIST */
+		public static final String COMMON_PLAYERS_LIST = COMMON_PLAYERS+LIST;
+			/* HEADER */
+			public static final String COMMON_PLAYERS_LIST_HEADER = COMMON_PLAYERS_LIST+HEADER;
+			public static final String COMMON_PLAYERS_LIST_HEADER_CONTROLS = COMMON_PLAYERS_LIST_HEADER+CONTROLS;
+			public static final String COMMON_PLAYERS_LIST_HEADER_HERO = COMMON_PLAYERS_LIST_HEADER+HERO;
+			public static final String COMMON_PLAYERS_LIST_HEADER_NAME = COMMON_PLAYERS_LIST_HEADER+NAME;
+			public static final String COMMON_PLAYERS_LIST_HEADER_PROFILE = COMMON_PLAYERS_LIST_HEADER+PROFILE;
+			public static final String COMMON_PLAYERS_LIST_HEADER_RANK = COMMON_PLAYERS_LIST_HEADER+RANK;
+			/* DATA */
+			public static final String COMMON_PLAYERS_LIST_DATA = COMMON_PLAYERS_LIST+DATA;
+			public static final String COMMON_PLAYERS_LIST_DATA_COMPUTER = COMMON_PLAYERS_LIST_DATA+COMPUTER;
+			public static final String COMMON_PLAYERS_LIST_DATA_CONTROLS = COMMON_PLAYERS_LIST_DATA+CONTROLS;
+			public static final String COMMON_PLAYERS_LIST_DATA_HUMAN = COMMON_PLAYERS_LIST_DATA+HUMAN;
+			public static final String COMMON_PLAYERS_LIST_DATA_NO_CONTROLS = COMMON_PLAYERS_LIST_DATA+NO_CONTROLS;
+
 	/* POINTS */
 	public static final String COMMON_POINTS = COMMON+POINTS;
 		/* MATCH */

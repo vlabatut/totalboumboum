@@ -21,20 +21,14 @@ package fr.free.totalboumboum.gui.game.tournament.description;
  * 
  */
 
-import java.awt.Color;
 import java.awt.Dimension;
-import java.awt.image.BufferedImage;
-import java.text.NumberFormat;
 import java.util.ArrayList;
-import java.util.Iterator;
 
 import javax.swing.Box;
 import javax.swing.BoxLayout;
-import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 import fr.free.totalboumboum.configuration.Configuration;
-import fr.free.totalboumboum.configuration.profile.Portraits;
 import fr.free.totalboumboum.configuration.profile.Profile;
 import fr.free.totalboumboum.game.limit.Limit;
 import fr.free.totalboumboum.game.limit.TournamentLimit;
@@ -42,10 +36,10 @@ import fr.free.totalboumboum.game.points.PointsProcessor;
 import fr.free.totalboumboum.game.tournament.sequence.SequenceTournament;
 import fr.free.totalboumboum.gui.common.content.subpanel.limits.LimitsListener;
 import fr.free.totalboumboum.gui.common.content.subpanel.limits.LimitsSubPanel;
+import fr.free.totalboumboum.gui.common.content.subpanel.players.PlayersListSubPanel;
 import fr.free.totalboumboum.gui.common.content.subpanel.points.PointsSubPanel;
 import fr.free.totalboumboum.gui.common.structure.panel.SplitMenuPanel;
 import fr.free.totalboumboum.gui.common.structure.subpanel.SubPanel;
-import fr.free.totalboumboum.gui.common.structure.subpanel.UntitledSubPanelTable;
 import fr.free.totalboumboum.gui.tools.GuiKeys;
 import fr.free.totalboumboum.gui.tools.GuiTools;
 
@@ -56,6 +50,7 @@ public class SequenceDescription extends TournamentDescription implements Limits
 
 	private JPanel rightPanel;
 	
+	private PlayersListSubPanel playersPanel;
 	private LimitsSubPanel<TournamentLimit> limitsPanel;
 	private PointsSubPanel pointsPanel;
 
@@ -75,7 +70,10 @@ public class SequenceDescription extends TournamentDescription implements Limits
 			SequenceTournament tournament = (SequenceTournament)Configuration.getGameConfiguration().getTournament();
 			
 			// players panel
-			{	JPanel playersPanel = makePlayersPanel(leftWidth,dataHeight);
+			{	ArrayList<Profile> players = tournament.getProfiles();
+				playersPanel = new PlayersListSubPanel(leftWidth,dataHeight);
+				playersPanel.setShowControls(false);
+				playersPanel.setPlayers(players);
 				infoPanel.add(playersPanel);
 			}
 			
@@ -124,75 +122,6 @@ public class SequenceDescription extends TournamentDescription implements Limits
 	{	// nothing to do here
 	}
 
-	private SubPanel makePlayersPanel(int width, int height)
-	{	SequenceTournament tournament = (SequenceTournament)Configuration.getGameConfiguration().getTournament();
-		int lines = 16+1;
-		int cols = 3+1;
-		UntitledSubPanelTable playersPanel = new UntitledSubPanelTable(width,height,cols,lines,true);
-		// headers
-		{	{	JLabel lbl = playersPanel.getLabel(0,0);
-				lbl.setOpaque(false);
-			}
-			String keys[] = 
-			{	GuiKeys.GAME_TOURNAMENT_DESCRIPTION_PLAYERS_HEADER_PROFILE,
-				GuiKeys.GAME_TOURNAMENT_DESCRIPTION_PLAYERS_HEADER_NAME,
-				GuiKeys.GAME_TOURNAMENT_DESCRIPTION_PLAYERS_HEADER_RANK
-			};
-			for(int i=1;i<keys.length+1;i++)
-				playersPanel.setLabelKey(0,i,keys[i-1],true);
-		}
-		// empty
-		{	playersPanel.setColSubMaxWidth(2,Integer.MAX_VALUE);
-		}
-		// data
-		{	ArrayList<Profile> players = tournament.getProfiles();
-			Iterator<Profile> i = players.iterator();
-			int line = 1;
-			while(i.hasNext())
-			{	int col = 0;
-				Profile profile = i.next();
-				// color
-				Color clr = profile.getSpriteSelectedColor().getColor();
-				int alpha = GuiTools.ALPHA_TABLE_REGULAR_BACKGROUND_LEVEL3;
-				Color bg = new Color(clr.getRed(),clr.getGreen(),clr.getBlue(),alpha);
-				playersPanel.setLineBackground(line,bg);
-				// portrait
-				{	BufferedImage image = profile.getPortraits().getOutgamePortrait(Portraits.OUTGAME_HEAD);
-					String tooltip = profile.getName();
-					playersPanel.setLabelIcon(line,col,image,tooltip);
-					col++;
-				}
-				// profile type
-				{	String aiName = profile.getAiName();
-					String key;
-					if(aiName==null)
-						key = GuiKeys.GAME_TOURNAMENT_DESCRIPTION_PLAYERS_DATA_HUMAN;
-					else
-						key = GuiKeys.GAME_TOURNAMENT_DESCRIPTION_PLAYERS_DATA_COMPUTER;
-					playersPanel.setLabelKey(line,col,key,true);
-					col++;
-				}
-				// name
-				{	String text = profile.getName();
-					String tooltip = profile.getName();
-					playersPanel.setLabelText(line,col,text,tooltip);
-					col++;
-				}
-				// rank
-				{	NumberFormat nf = NumberFormat.getInstance();
-					nf.setMinimumFractionDigits(0);
-					String text = "-";
-					String tooltip = "-";
-					playersPanel.setLabelText(line,col,text,tooltip);
-					col++;
-				}
-				//
-				line++;
-			}
-		}
-		return playersPanel;		
-	}
-	
 	/////////////////////////////////////////////////////////////////
 	// LIMITS 			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////

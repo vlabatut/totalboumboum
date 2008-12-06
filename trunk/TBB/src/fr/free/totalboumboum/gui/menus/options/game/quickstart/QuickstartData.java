@@ -45,12 +45,12 @@ import fr.free.totalboumboum.gui.common.structure.panel.SplitMenuPanel;
 import fr.free.totalboumboum.gui.common.structure.panel.data.EntitledDataPanel;
 import fr.free.totalboumboum.gui.common.structure.subpanel.SubPanel;
 import fr.free.totalboumboum.gui.common.structure.subpanel.UntitledSubPanelTable;
-import fr.free.totalboumboum.gui.game.match.description.MatchDescription;
 import fr.free.totalboumboum.gui.menus.options.game.quickstart.hero.SelectHeroSplitPanel;
 import fr.free.totalboumboum.gui.menus.options.game.quickstart.profile.SelectProfileSplitPanel;
 import fr.free.totalboumboum.gui.menus.options.game.quickstart.round.SelectRoundSplitPanel;
 import fr.free.totalboumboum.gui.menus.quickmatch.players.PlayersData;
 import fr.free.totalboumboum.gui.tools.GuiKeys;
+import fr.free.totalboumboum.gui.tools.GuiStringTools;
 import fr.free.totalboumboum.gui.tools.GuiTools;
 
 public class QuickstartData extends EntitledDataPanel implements MouseListener
@@ -145,7 +145,7 @@ public class QuickstartData extends EntitledDataPanel implements MouseListener
 		int headerHeight = result.getHeaderHeight();
 		int lineHeight = result.getLineHeight();
 		int deleteWidth = lineHeight;
-		int controlWidth = MatchDescription.initControlsTexts(result.getLineFontSize(),controlTexts,controlTooltips);
+		int controlWidth = GuiStringTools.initControlsTexts(result.getLineFontSize(),controlTexts,controlTooltips);
 		int colorWidth = PlayersData.initColorTexts(result.getLineFontSize(),colorTexts,colorTooltips,colorBackgrounds);
 		int typeWidth = headerHeight;
 		int heroWidth = headerHeight;
