@@ -42,9 +42,4 @@ public class TournamentStatistics extends EntitledDataPanel
 	public void refresh()
 	{	// nothing to do here
 	}
-
-	@Override
-	public void updateData()
-	{	// nothing to do here
-	}
 }

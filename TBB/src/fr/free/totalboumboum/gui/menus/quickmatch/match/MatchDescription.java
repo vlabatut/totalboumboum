@@ -130,11 +130,6 @@ public class MatchDescription extends EntitledDataPanel implements MouseListener
 	public void refresh()
 	{	// nothing to do here
 	}
-
-	@Override
-	public void updateData()
-	{	// nothing to do here
-	}
 	
 	private UntitledSubPanelTable makePlayersPanel(int width, int height)
 	{	Match match = Configuration.getGameConfiguration().getTournament().getCurrentMatch();

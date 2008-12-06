@@ -194,7 +194,7 @@ buttonStatistics.setEnabled(false);
 	public void matchOver()
 	{	SwingUtilities.invokeLater(new Runnable()
 		{	public void run()
-			{	matchResults.updateData();
+			{	matchResults.refresh();
 				buttonResults.doClick();
 			}
 		});	
@@ -204,7 +204,7 @@ buttonStatistics.setEnabled(false);
 	public void roundOver()
 	{	SwingUtilities.invokeLater(new Runnable()
 		{	public void run()
-			{	matchResults.updateData();
+			{	matchResults.refresh();
 				buttonResults.doClick();
 			}
 		});	

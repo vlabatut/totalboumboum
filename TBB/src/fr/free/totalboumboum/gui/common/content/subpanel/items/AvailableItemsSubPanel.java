@@ -28,8 +28,8 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map.Entry;
 
-import fr.free.totalboumboum.configuration.Configuration;
 import fr.free.totalboumboum.engine.container.itemset.ItemsetPreview;
+import fr.free.totalboumboum.engine.container.level.HollowLevel;
 import fr.free.totalboumboum.engine.container.level.LevelPreview;
 import fr.free.totalboumboum.engine.container.zone.Zone;
 import fr.free.totalboumboum.engine.content.sprite.SpritePreview;
@@ -53,9 +53,11 @@ public class AvailableItemsSubPanel extends EntitledSubPanelTable
 	// LEVEL PREVIEW	/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	private LevelPreview levelPreview;	
+	private HollowLevel hollowLevel;	
 	
-	public void setLevelPreview(LevelPreview levelPreview)
+	public void setLevel(LevelPreview levelPreview, HollowLevel hollowLevel)
 	{	this.levelPreview = levelPreview;
+		this.hollowLevel = hollowLevel;
 	
 		// init
 		int lines = 4;
@@ -82,7 +84,7 @@ public class AvailableItemsSubPanel extends EntitledSubPanelTable
 			NumberFormat nf = NumberFormat.getInstance();
 			nf.setMinimumFractionDigits(0);
 			ItemsetPreview itemsetPreview = levelPreview.getItemsetPreview();
-			Zone zone = Configuration.getGameConfiguration().getTournament().getCurrentMatch().getCurrentRound().getHollowLevel().getZone();
+			Zone zone = hollowLevel.getZone();
 			HashMap<String,Integer> itemList = zone.getItemCount();
 			Iterator<Entry<String,SpritePreview>> i = itemsetPreview.getItemPreviews().entrySet().iterator();
 			int line = 0;
@@ -139,5 +141,9 @@ public class AvailableItemsSubPanel extends EntitledSubPanelTable
 
 	public LevelPreview getLevelPreview()
 	{	return levelPreview;	
+	}
+
+	public HollowLevel getHollowLevel()
+	{	return hollowLevel;	
 	}
 }

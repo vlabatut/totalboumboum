@@ -25,6 +25,7 @@ import java.awt.BorderLayout;
 import java.awt.Graphics;
 import java.awt.image.BufferedImage;
 
+import fr.free.totalboumboum.game.round.Round;
 import fr.free.totalboumboum.gui.common.structure.MenuContainer;
 import fr.free.totalboumboum.gui.common.structure.panel.SplitMenuPanel;
 import fr.free.totalboumboum.gui.common.structure.panel.menu.MenuPanel;
@@ -47,6 +48,25 @@ public class RoundSplitPanel extends SplitMenuPanel
 		setMenuPart(menu);
 	}
 	
+	/////////////////////////////////////////////////////////////////
+	// ROUND			/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	private Round round;
+
+	public void setRound(Round round)
+	{	// round
+		this.round = round;
+		// panels
+		((RoundMenu)menuPart).setRound(round);
+	}
+	
+	public Round getRound()
+	{	return round;	
+	}
+
+	/////////////////////////////////////////////////////////////////
+	// PAINT			/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
 	@Override
 	public void paintComponent(Graphics g)
 	{	g.drawImage(image, 0, 0, null);

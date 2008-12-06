@@ -170,7 +170,7 @@ public class MainFrame extends JFrame implements WindowListener,MenuContainer
 	{	Container contentPane = getContentPane();
 		contentPane.remove(currentPanel);
 		currentPanel = newPanel;
-		currentPanel.refresh();
+//		currentPanel.refresh();
 		contentPane.add(newPanel, BorderLayout.CENTER);
 		contentPane.validate();
 		contentPane.repaint();

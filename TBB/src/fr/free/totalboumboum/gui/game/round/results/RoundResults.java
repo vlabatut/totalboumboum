@@ -21,7 +21,6 @@ package fr.free.totalboumboum.gui.game.round.results;
  * 
  */
 
-import fr.free.totalboumboum.configuration.Configuration;
 import fr.free.totalboumboum.game.round.Round;
 import fr.free.totalboumboum.gui.common.content.subpanel.results.ResultsSubPanel;
 import fr.free.totalboumboum.gui.common.structure.panel.SplitMenuPanel;
@@ -46,20 +45,29 @@ public class RoundResults extends EntitledDataPanel
 			resultsPanel.setShowConfrontations(false);
 			resultsPanel.setShowTotal(false);
 			setDataPart(resultsPanel);
-			//
-			Round round = Configuration.getGameConfiguration().getTournament().getCurrentMatch().getCurrentRound();
-			resultsPanel.setStatisticHolder(round);
 		}
 	}
 
+	/////////////////////////////////////////////////////////////////
+	// ROUND			/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	private Round round;
+
+	public void setRound(Round round)
+	{	this.round = round;
+		resultsPanel.setStatisticHolder(round);
+	}
+	
+	public Round getRound()
+	{	return round;	
+	}
+	
+	/////////////////////////////////////////////////////////////////
+	// CONTENT PANEL	/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	
 	@Override
 	public void refresh()
-	{	// nothing to do here		
-	}
-
-	@Override
-	public void updateData()
-	{	Round round = Configuration.getGameConfiguration().getTournament().getCurrentMatch().getCurrentRound();
-		resultsPanel.setStatisticHolder(round);
+	{	setRound(round);
 	}
 }

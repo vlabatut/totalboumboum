@@ -47,15 +47,6 @@ public class LevelSubPanel extends SubPanel
 		
 		setLevelPreview(null,8);
 	}
-		
-	
-/*
- * TODO 
- * - pb d'alignement vertical dans le game description
- */
-	
-	
-	
 	
 	/////////////////////////////////////////////////////////////////
 	// INNER PANEM		/////////////////////////////////////////////

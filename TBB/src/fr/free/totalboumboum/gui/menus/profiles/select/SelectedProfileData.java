@@ -295,11 +295,6 @@ public class SelectedProfileData extends EntitledDataPanel implements MouseListe
 		refreshPreview();
 	}
 
-	@Override
-	public void updateData()
-	{	// nothing to do here
-	}
-
 	public ProfilesConfiguration getProfilesConfiguration()
 	{	return profilesConfiguration;
 	}	

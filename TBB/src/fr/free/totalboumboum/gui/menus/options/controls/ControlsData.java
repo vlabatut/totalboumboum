@@ -168,11 +168,6 @@ public class ControlsData extends EntitledDataPanel implements MouseListener,Key
 	{	// nothing to do here
 	}
 
-	@Override
-	public void updateData()
-	{	// nothing to do here
-	}
-
 	public ControlSettings getControlSettings()
 	{	return controlSettings;
 	}	

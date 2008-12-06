@@ -74,11 +74,16 @@ public abstract class SplitMenuPanel extends MenuPanel implements MenuContainer
 	{	if(this.menuPart!=null)
 			remove(this.menuPart);
 		this.menuPart = menuPart;
-		this.menuPart.refresh();
+//		this.menuPart.refresh();
 		add(menuPart, menuLocation);
 		validate();
 		repaint();		
 	}
+	
+	public InnerMenuPanel getMenuPart()
+	{	return menuPart;
+	}
+	
 	public int getMenuHeight()
 	{	return menuHeight;	
 	}
@@ -101,7 +106,7 @@ public abstract class SplitMenuPanel extends MenuPanel implements MenuContainer
 	{	if(this.dataPart!=null)
 			remove(this.dataPart);
 		this.dataPart = dataPart;
-		this.dataPart.refresh();
+//		this.dataPart.refresh();
 		add(dataPart, BorderLayout.CENTER);
 		validate();
 		repaint();		

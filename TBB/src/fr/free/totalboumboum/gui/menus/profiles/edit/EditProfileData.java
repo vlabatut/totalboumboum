@@ -344,11 +344,6 @@ public class EditProfileData extends EntitledDataPanel implements MouseListener,
 	public void refresh()
 	{	refreshData();
 	}
-
-	@Override
-	public void updateData()
-	{	// nothing to do here
-	}
 	
 	public Profile getProfile()
 	{	return profile;	

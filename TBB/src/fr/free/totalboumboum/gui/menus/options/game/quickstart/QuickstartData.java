@@ -137,11 +137,6 @@ public class QuickstartData extends EntitledDataPanel implements MouseListener
 			refreshPlayer(line);
 		refreshRound();
 	}
-
-	@Override
-	public void updateData()
-	{	// nothing to do here
-	}
 	
 	private UntitledSubPanelTable makePlayersPanel(int width, int height)
 	{	int headerCols = 6;
