@@ -88,6 +88,7 @@ public class SelectedAiMenu extends InnerMenuPanel
 			{	profile.setAiName(aiPreview.getFolder());
 				profile.setAiPackname(aiPreview.getPack());
 			}
+			parent.refresh();
 			replaceWith(parent);
 	    }
 	} 

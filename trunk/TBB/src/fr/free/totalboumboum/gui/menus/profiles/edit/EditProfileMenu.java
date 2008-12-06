@@ -109,6 +109,7 @@ public class EditProfileMenu extends InnerMenuPanel
 				{	e1.printStackTrace();
 				}
 			}
+			parent.refresh();
 			replaceWith(parent);
 	    }
 		else if(e.getActionCommand().equals(GuiKeys.MENU_PROFILES_BUTTON_CANCEL))

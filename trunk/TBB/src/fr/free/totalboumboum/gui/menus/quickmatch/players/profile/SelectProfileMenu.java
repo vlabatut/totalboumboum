@@ -122,6 +122,7 @@ public class SelectProfileMenu extends InnerMenuPanel
 				else
 					profiles.add(profile);
 			}
+			parent.refresh();
 			replaceWith(parent);
 	    }
 	} 
