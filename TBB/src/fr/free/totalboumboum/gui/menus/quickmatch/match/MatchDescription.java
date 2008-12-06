@@ -142,10 +142,10 @@ public class MatchDescription extends EntitledDataPanel implements MouseListener
 				lbl.setOpaque(false);
 			}
 			String keys[] = 
-			{	GuiKeys.GAME_MATCH_DESCRIPTION_PLAYERS_HEADER_PROFILE,
-				GuiKeys.GAME_MATCH_DESCRIPTION_PLAYERS_HEADER_CONTROLS,
-				GuiKeys.GAME_MATCH_DESCRIPTION_PLAYERS_HEADER_NAME,
-				GuiKeys.GAME_MATCH_DESCRIPTION_PLAYERS_HEADER_RANK
+			{	GuiKeys.COMMON_PLAYERS_LIST_HEADER_PROFILE,
+				GuiKeys.COMMON_PLAYERS_LIST_HEADER_CONTROLS,
+				GuiKeys.COMMON_PLAYERS_LIST_HEADER_NAME,
+				GuiKeys.COMMON_PLAYERS_LIST_HEADER_RANK
 			};
 			for(int i=1;i<keys.length+1;i++)
 				playersPanel.setLabelKey(0,i,keys[i-1],true);
@@ -176,9 +176,9 @@ public class MatchDescription extends EntitledDataPanel implements MouseListener
 				{	String aiName = profile.getAiName();
 					String key;
 					if(aiName==null)
-						key = GuiKeys.GAME_TOURNAMENT_DESCRIPTION_PLAYERS_DATA_HUMAN;
+						key = GuiKeys.COMMON_PLAYERS_LIST_DATA_HUMAN;
 					else
-						key = GuiKeys.GAME_TOURNAMENT_DESCRIPTION_PLAYERS_DATA_COMPUTER;
+						key = GuiKeys.COMMON_PLAYERS_LIST_DATA_COMPUTER;
 					playersPanel.setLabelKey(line,col,key,true);
 					col++;
 				}
@@ -214,10 +214,10 @@ public class MatchDescription extends EntitledDataPanel implements MouseListener
 	{	int result = 0;
 		// no control
 		{	// text
-			String text = GuiConfiguration.getMiscConfiguration().getLanguage().getText(GuiKeys.GAME_MATCH_DESCRIPTION_PLAYERS_DATA_NOCONTROLS);
+			String text = GuiConfiguration.getMiscConfiguration().getLanguage().getText(GuiKeys.COMMON_PLAYERS_LIST_DATA_NO_CONTROLS);
 			controlTexts.add(text);
 			// tooltip
-			String tooltip = GuiConfiguration.getMiscConfiguration().getLanguage().getText(GuiKeys.GAME_MATCH_DESCRIPTION_PLAYERS_DATA_NOCONTROLS+GuiKeys.TOOLTIP);
+			String tooltip = GuiConfiguration.getMiscConfiguration().getLanguage().getText(GuiKeys.COMMON_PLAYERS_LIST_DATA_NO_CONTROLS+GuiKeys.TOOLTIP);
 			controlTooltips.add(tooltip);
 			// width
 			result = GuiTools.getPixelWidth(playersPanel.getLineFontSize(),text);
@@ -225,10 +225,10 @@ public class MatchDescription extends EntitledDataPanel implements MouseListener
 		// control number X
 		for(int index=1;index<=GameConstants.CONTROL_COUNT;index++)
 		{	// text
-			String text = GuiConfiguration.getMiscConfiguration().getLanguage().getText(GuiKeys.GAME_MATCH_DESCRIPTION_PLAYERS_DATA_CONTROLS)+index;
+			String text = GuiConfiguration.getMiscConfiguration().getLanguage().getText(GuiKeys.COMMON_PLAYERS_LIST_DATA_CONTROLS)+index;
 			controlTexts.add(text);
 			// tooltip
-			String tooltip = GuiConfiguration.getMiscConfiguration().getLanguage().getText(GuiKeys.GAME_MATCH_DESCRIPTION_PLAYERS_DATA_CONTROLS+GuiKeys.TOOLTIP)+" "+index;
+			String tooltip = GuiConfiguration.getMiscConfiguration().getLanguage().getText(GuiKeys.COMMON_PLAYERS_LIST_DATA_CONTROLS+GuiKeys.TOOLTIP)+" "+index;
 			controlTooltips.add(tooltip);
 			// width
 			int temp = GuiTools.getPixelWidth(playersPanel.getLineFontSize(),text);
