@@ -128,14 +128,10 @@
 			</group>	
 
 			<group name="Round">
+				<text name="Title" value="List of rounds" tooltip="List of predefined rounds" />
 				<group name="Button">
 					<text name="Back" value="Back" tooltip="Go back to the resources menu" />
 				</group>		
-				<group name="Select">
-					<text name="Title" value="List of rounds" tooltip="List of predefined rounds" />
-					<text name="PageDown" value="Page down" tooltip="Go to the next rounds page" />
-					<text name="PageUp" value="Page up" tooltip="Go back to the previous rounds page" />
-				</group>
 			</group>	
 		</group>	
 
@@ -412,6 +408,15 @@
 
 <!-- COMMON -->
 	<group name="Common">
+<!-- BROWSE -->
+		<group name="Browser">
+			<group name="File">
+				<text name="PageDown" value="Page down" tooltip="Go to the next page" />
+				<text name="PageUp" value="Page up" tooltip="Go back to the previous page" />
+			</group>
+		</group>
+	
+	
 <!-- COLOR -->
 		<group name="Color">
 			<text name="Black" value="Noir" tooltip="Noir"/>

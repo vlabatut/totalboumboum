@@ -43,6 +43,7 @@ public class GuiKeys
 	public static final String BOMBS = "Bombs";
 	public static final String BOMBSET = "Bombset";
 	public static final String BROWN = "Brown";
+	public static final String BROWSER = "Browser";
 	public static final String BUTTON = "Button";
 	public static final String CANCEL = "Cancel";
 	public static final String COLOR = "Color";
@@ -63,6 +64,7 @@ public class GuiKeys
 	public static final String DESCRIPTION = "Description";
 	public static final String DIMENSION = "Dimension";
 	public static final String DISCRETIZE = "Discretize";
+	public static final String FILE = "File";
 	public static final String FINISH = "Finish";
 	public static final String FOLDER = "Folder";
 	public static final String GAME = "Game";
@@ -91,6 +93,8 @@ public class GuiKeys
 	public static final String NO_CONTROLS = "NoControls";
 	public static final String ORANGE = "Orange";
 	public static final String PACK = "Pack";
+	public static final String PAGEDOWN = "PageDown";
+	public static final String PAGEUP = "PageUp";
 	public static final String PAINTINGS = "Paintings";
 	public static final String PARTIAL = "Partial";
 	public static final String PINK = "Pink";
@@ -229,13 +233,10 @@ public class GuiKeys
 				public static final String MENU_RESOURCES_MATCH_SELECT_PREVIEW_PLAYERS = "MenuResourcesMatchSelectPreviewPlayers";
 				public static final String MENU_RESOURCES_MATCH_SELECT_PREVIEW_ROUNDS = "MenuResourcesMatchSelectPreviewRounds";
 		/* ROUND */
+			public static final String MENU_RESOURCES_ROUND_TITLE = "MenuResourcesRoundTitle";
 			/* BUTTON */
 			public static final String MENU_RESOURCES_ROUND_BUTTON = "MenuResourcesRoundButton";	
 			public static final String MENU_RESOURCES_ROUND_BUTTON_BACK = MENU_RESOURCES_ROUND_BUTTON+"Back";	
-			/* SELECT */
-			public static final String MENU_RESOURCES_ROUND_SELECT_TITLE = "MenuResourcesRoundSelectTitle";
-			public static final String MENU_RESOURCES_ROUND_SELECT_PAGEDOWN = "MenuResourcesRoundListPageDown";
-			public static final String MENU_RESOURCES_ROUND_SELECT_PAGEUP = "MenuResourcesRoundListPageUp";
 			
 	/* OPTIONS */
 		/* BUTTON */
@@ -457,6 +458,14 @@ public class GuiKeys
 	/////////////////////////////////////////////////////////////////
 	// COMMON CONTENT	/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
+	/* BROWSER */
+	public static final String COMMON_BROWSER = COMMON+BROWSER;
+		/* FILE */
+		public static final String COMMON_BROWSER_FILE = COMMON_BROWSER+FILE;
+		public static final String COMMON_BROWSER_FILE_PAGEDOWN = COMMON_BROWSER_FILE+PAGEDOWN;
+		public static final String COMMON_BROWSER_FILE_PAGEUP = COMMON_BROWSER_FILE+PAGEUP;
+		/* PACK */
+
 	/* COLORS */
 	public static final String COMMON_COLOR = COMMON+COLOR;
 		public static final String COMMON_COLOR_BLACK = COMMON_COLOR+BLACK;
