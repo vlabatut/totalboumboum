@@ -82,8 +82,8 @@ public class GameConfigurationLoader
 		
 		// players
 		Element playersElement = root.getChild(XmlTools.ELT_PLAYERS);
-		ProfilesSelection tournamentSelected = ProfilesSelectionLoader.loadProfilesSelection(playersElement);
-		result.setQuickMatchSelected(tournamentSelected);
+		ProfilesSelection quickMatchSelected = ProfilesSelectionLoader.loadProfilesSelection(playersElement);
+		result.setQuickMatchSelected(quickMatchSelected);
 	}
 
 	private static void loadQuickStartElement(Element root, GameConfiguration result) throws IllegalArgumentException, SecurityException, ParserConfigurationException, SAXException, IOException, IllegalAccessException, NoSuchFieldException, ClassNotFoundException
@@ -94,7 +94,7 @@ public class GameConfigurationLoader
 		
 		// players
 		Element playersElement = root.getChild(XmlTools.ELT_PLAYERS);
-		ProfilesSelection tournamentSelected = ProfilesSelectionLoader.loadProfilesSelection(playersElement);
-		result.setQuickMatchSelected(tournamentSelected);
+		ProfilesSelection quickStartSelected = ProfilesSelectionLoader.loadProfilesSelection(playersElement);
+		result.setQuickStartSelected(quickStartSelected);
 	}
 }
