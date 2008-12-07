@@ -45,10 +45,24 @@ public class PlayersSplitPanel extends SplitMenuPanel
 		image = GuiConfiguration.getMiscConfiguration().getDarkBackground();
 	    
 		// panels
-		PlayersMenu menu = new PlayersMenu(this,parent,selectedProfiles);
+		PlayersMenu menu = new PlayersMenu(this,parent);
 		setMenuPart(menu);
 	}
 	
+	/////////////////////////////////////////////////////////////////
+	// PLAYERS						/////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	public void setSelectedProfiles(ArrayList<Profile> selectedProfiles)
+	{	((PlayersMenu)menuPart).setSelectedProfiles(selectedProfiles);
+	}
+	
+	public ArrayList<Profile> getSelectedProfiles()
+	{	return ((PlayersMenu)menuPart).getSelectedProfiles();	
+	}
+	
+	/////////////////////////////////////////////////////////////////
+	// PAINT				/////////////////////////////////
+	/////////////////////////////////////////////////////////////////
 	@Override
 	public void paintComponent(Graphics g)
 	{	g.drawImage(image, 0, 0, null);

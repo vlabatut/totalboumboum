@@ -49,7 +49,7 @@ import fr.free.totalboumboum.game.limit.MatchLimit;
 import fr.free.totalboumboum.game.match.Match;
 import fr.free.totalboumboum.game.match.MatchLoader;
 import fr.free.totalboumboum.game.points.PointsProcessor;
-import fr.free.totalboumboum.gui.common.content.subpanel.limits.LimitsListener;
+import fr.free.totalboumboum.gui.common.content.subpanel.limits.LimitsSubPanelListener;
 import fr.free.totalboumboum.gui.common.content.subpanel.limits.LimitsSubPanel;
 import fr.free.totalboumboum.gui.common.content.subpanel.points.PointsSubPanel;
 import fr.free.totalboumboum.gui.common.structure.panel.SplitMenuPanel;
@@ -62,7 +62,7 @@ import fr.free.totalboumboum.gui.tools.GuiTools;
 import fr.free.totalboumboum.tools.FileTools;
 import fr.free.totalboumboum.tools.StringTools;
 
-public class SelectedMatchData extends EntitledDataPanel implements MouseListener, LimitsListener
+public class SelectedMatchData extends EntitledDataPanel implements MouseListener, LimitsSubPanelListener
 {	
 	private static final long serialVersionUID = 1L;
 	private static final float SPLIT_RATIO = 0.5f;

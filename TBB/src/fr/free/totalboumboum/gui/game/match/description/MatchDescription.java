@@ -33,7 +33,7 @@ import fr.free.totalboumboum.game.limit.Limits;
 import fr.free.totalboumboum.game.limit.MatchLimit;
 import fr.free.totalboumboum.game.match.Match;
 import fr.free.totalboumboum.game.points.PointsProcessor;
-import fr.free.totalboumboum.gui.common.content.subpanel.limits.LimitsListener;
+import fr.free.totalboumboum.gui.common.content.subpanel.limits.LimitsSubPanelListener;
 import fr.free.totalboumboum.gui.common.content.subpanel.limits.LimitsSubPanel;
 import fr.free.totalboumboum.gui.common.content.subpanel.players.PlayersListSubPanel;
 import fr.free.totalboumboum.gui.common.content.subpanel.points.PointsSubPanel;
@@ -43,7 +43,7 @@ import fr.free.totalboumboum.gui.common.structure.subpanel.SubPanel;
 import fr.free.totalboumboum.gui.tools.GuiKeys;
 import fr.free.totalboumboum.gui.tools.GuiTools;
 
-public class MatchDescription extends EntitledDataPanel implements LimitsListener
+public class MatchDescription extends EntitledDataPanel implements LimitsSubPanelListener
 {	
 	private static final long serialVersionUID = 1L;
 	

@@ -57,17 +57,9 @@ public class QuickstartMenu extends InnerMenuPanel
 	private JButton buttonConfirm;
 	@SuppressWarnings("unused")
 	private JButton buttonCancel;
-	
-	private ArrayList<Profile> selectedProfiles;
-	private String roundFile;
-	
-	public QuickstartMenu(SplitMenuPanel container, MenuPanel parent, ArrayList<Profile> selectedProfiles, String roundFile)
+		
+	public QuickstartMenu(SplitMenuPanel container, MenuPanel parent)
 	{	super(container,parent);
-		this.selectedProfiles = selectedProfiles;
-		this.roundFile = roundFile;
-		ArrayList<Profile> selectedProfilesCopy = new ArrayList<Profile>();
-		for(Profile p: selectedProfiles)
-			selectedProfilesCopy.add(p.copy());		
 	
 		// layout
 		BoxLayout layout = new BoxLayout(this,BoxLayout.PAGE_AXIS); 
@@ -90,10 +82,44 @@ public class QuickstartMenu extends InnerMenuPanel
 		add(Box.createVerticalGlue());		
 	
 		// panels
-		quickstartPanel = new QuickstartData(container,selectedProfilesCopy,roundFile);
+		quickstartPanel = new QuickstartData(container);
 		container.setDataPart(quickstartPanel);
 	}
 	
+	/////////////////////////////////////////////////////////////////
+	// PLAYERS						/////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	private ArrayList<Profile> players;
+
+	public void setSelectedProfiles(ArrayList<Profile> selectedProfiles)
+	{	players = selectedProfiles;
+		ArrayList<Profile> selectedProfilesCopy = new ArrayList<Profile>();
+		for(Profile p: selectedProfiles)
+			selectedProfilesCopy.add(p.copy());		
+		quickstartPanel.setSelectedProfiles(selectedProfilesCopy);
+	}
+	
+	public ArrayList<Profile> getSelectedProfiles()
+	{	return players;	
+	}
+	
+	/////////////////////////////////////////////////////////////////
+	// ROUND			/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	private String roundFile;
+	
+	public void setRound(String roundFolder)
+	{	roundFile = roundFolder;
+		quickstartPanel.setRound(roundFolder);
+	}
+	
+	public String getSelectedRound()
+	{	return roundFile.toString();	
+	}
+	
+	/////////////////////////////////////////////////////////////////
+	// ACTION LISTENER				/////////////////////////////////
+	/////////////////////////////////////////////////////////////////
 	public void actionPerformed(ActionEvent e)
 	{	if(e.getActionCommand().equals(GuiKeys.MENU_OPTIONS_BUTTON_CONFIRM))
 		{	ArrayList<Profile> sProfiles = quickstartPanel.getSelectedProfiles();
@@ -107,7 +133,7 @@ public class QuickstartMenu extends InnerMenuPanel
 				}
 				// selected profiles
 				{	boolean save = false;
-					Iterator<Profile> it1 = selectedProfiles.iterator();
+					Iterator<Profile> it1 = players.iterator();
 					Iterator<Profile> it2 = sProfiles.iterator();
 					while(!save && it1.hasNext() && it2.hasNext())
 					{	Profile p1 = it1.next();
@@ -148,11 +174,17 @@ public class QuickstartMenu extends InnerMenuPanel
 	    }
 	} 
 
+	/////////////////////////////////////////////////////////////////
+	// CONTENT PANEL				/////////////////////////////////
+	/////////////////////////////////////////////////////////////////
 	@Override
 	public void refresh()
 	{	
 	}
 	
+	/////////////////////////////////////////////////////////////////
+	// PAINT						/////////////////////////////////
+	/////////////////////////////////////////////////////////////////
 	@Override
     protected void paintComponent(Graphics g)
 	{	//g.clearRect(0, 0, getWidth(), getHeight());

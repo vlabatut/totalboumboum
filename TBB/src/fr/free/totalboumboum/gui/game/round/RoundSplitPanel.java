@@ -51,17 +51,12 @@ public class RoundSplitPanel extends SplitMenuPanel
 	/////////////////////////////////////////////////////////////////
 	// ROUND			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	private Round round;
-
 	public void setRound(Round round)
-	{	// round
-		this.round = round;
-		// panels
-		((RoundMenu)menuPart).setRound(round);
+	{	((RoundMenu)menuPart).setRound(round);
 	}
 	
 	public Round getRound()
-	{	return round;	
+	{	return ((RoundMenu)menuPart).getRound();	
 	}
 
 	/////////////////////////////////////////////////////////////////

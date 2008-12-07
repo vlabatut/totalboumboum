@@ -56,17 +56,12 @@ public class TournamentSplitPanel extends SplitMenuPanel
 	/////////////////////////////////////////////////////////////////
 	// TOURNAMENT		/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	private AbstractTournament tournament;
-
 	public void setTournament(AbstractTournament tournament)
-	{	// tournament
-		this.tournament = tournament;
-		// panels
-		((TournamentMenu)menuPart).setTournament(tournament);
+	{	((TournamentMenu)menuPart).setTournament(tournament);
 	}
 	
 	public AbstractTournament getTournament()
-	{	return tournament;	
+	{	return ((TournamentMenu)menuPart).getTournament();	
 	}
 
 	/////////////////////////////////////////////////////////////////

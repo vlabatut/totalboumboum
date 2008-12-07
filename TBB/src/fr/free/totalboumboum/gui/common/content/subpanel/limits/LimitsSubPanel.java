@@ -250,19 +250,19 @@ public class LimitsSubPanel<T extends Limit> extends EntitledSubPanelTable imple
 	/////////////////////////////////////////////////////////////////
 	// LISTENERS		/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	private ArrayList<LimitsListener> listeners = new ArrayList<LimitsListener>();
+	private ArrayList<LimitsSubPanelListener> listeners = new ArrayList<LimitsSubPanelListener>();
 	
-	public void addListener(LimitsListener listener)
+	public void addListener(LimitsSubPanelListener listener)
 	{	if(!listeners.contains(listener))
 			listeners.add(listener);		
 	}
 
-	public void removeListener(LimitsListener listener)
+	public void removeListener(LimitsSubPanelListener listener)
 	{	listeners.remove(listener);		
 	}
 	
 	private void fireLimitSelectionChange()
-	{	for(LimitsListener listener: listeners)
+	{	for(LimitsSubPanelListener listener: listeners)
 			listener.limitSelectionChange();
 	}
 }

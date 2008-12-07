@@ -38,17 +38,42 @@ public class QuickstartSplitPanel extends SplitMenuPanel
 
 	private BufferedImage image;
 
-	public QuickstartSplitPanel(MenuContainer container, MenuPanel parent, ArrayList<Profile> selectedProfiles, String roundFile)
+	public QuickstartSplitPanel(MenuContainer container, MenuPanel parent)
 	{	super(container,parent,BorderLayout.LINE_START,GuiTools.VERTICAL_SPLIT_RATIO);
 	
 		// background
 		image = GuiConfiguration.getMiscConfiguration().getDarkBackground();
 	    
 		// panels
-		QuickstartMenu menu = new QuickstartMenu(this,parent,selectedProfiles,roundFile);
+		QuickstartMenu menu = new QuickstartMenu(this,parent);
 		setMenuPart(menu);
 	}
 	
+	/////////////////////////////////////////////////////////////////
+	// ROUND			/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	public void setRound(String roundFolder)
+	{	((QuickstartMenu)menuPart).setRound(roundFolder);
+	}
+	
+	public String getSelectedRound()
+	{	return ((QuickstartMenu)menuPart).getSelectedRound();
+	}
+	
+	/////////////////////////////////////////////////////////////////
+	// PLAYERS						/////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	public void setSelectedProfiles(ArrayList<Profile> selectedProfiles)
+	{	((QuickstartMenu)menuPart).setSelectedProfiles(selectedProfiles);
+	}
+	
+	public ArrayList<Profile> getSelectedProfiles()
+	{	return ((QuickstartMenu)menuPart).getSelectedProfiles();	
+	}
+	
+	/////////////////////////////////////////////////////////////////
+	// PAINT						/////////////////////////////////
+	/////////////////////////////////////////////////////////////////
 	@Override
 	public void paintComponent(Graphics g)
 	{	g.drawImage(image, 0, 0, null);

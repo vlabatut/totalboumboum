@@ -58,7 +58,7 @@ public class PlayersMenu extends InnerMenuPanel
 	@SuppressWarnings("unused")
 	private JButton buttonNext;
 	
-	public PlayersMenu(SplitMenuPanel container, MenuPanel parent, ArrayList<Profile> selectedProfiles)
+	public PlayersMenu(SplitMenuPanel container, MenuPanel parent)
 	{	super(container,parent);
 	
 		// layout
@@ -71,46 +71,47 @@ public class PlayersMenu extends InnerMenuPanel
 		// sizes
 		int buttonWidth = getHeight();
 		int buttonHeight = getHeight();
-//		ArrayList<String> texts = GuiKeys.getKeysLike(GuiKeys.MENU_TOURNAMENT_BUTTON);
-//		int fontSize = GuiTools.getOptimalFontSize(buttonWidth, buttonHeight, texts);
 
 		// buttons
-		buttonQuit = GuiTools.createButton(GuiKeys.MENU_QUICKMATCH_BUTTON_QUIT,buttonWidth,buttonHeight,1,this);
+		buttonQuit = GuiTools.createButton(GuiKeys.MENU_QUICKMATCH_PLAYERS_BUTTON_QUIT,buttonWidth,buttonHeight,1,this);
 		add(Box.createHorizontalGlue());
-		buttonPrevious = GuiTools.createButton(GuiKeys.MENU_QUICKMATCH_BUTTON_PREVIOUS,buttonWidth,buttonHeight,1,this);
+		buttonPrevious = GuiTools.createButton(GuiKeys.MENU_QUICKMATCH_PLAYERS_BUTTON_PREVIOUS,buttonWidth,buttonHeight,1,this);
 		add(Box.createRigidArea(new Dimension(GuiTools.buttonHorizontalSpace,0)));
-//	    ButtonGroup group = new ButtonGroup();
-add(Box.createRigidArea(new Dimension(buttonWidth,buttonHeight)));
-//	    buttonDescription = GuiTools.createToggleButton(GuiKeys.MENU_QUICKMATCH_BUTTON_DESCRIPTION,buttonWidth,buttonHeight,1,this);
-//	    buttonDescription.setEnabled(false);		
-//	    group.add(buttonDescription);
-add(Box.createRigidArea(new Dimension(buttonWidth,buttonHeight)));
-//	    buttonResults = GuiTools.createToggleButton(GuiKeys.MENU_QUICKMATCH_BUTTON_RESULTS,buttonWidth,buttonHeight,1,this);
-//	    buttonResults.setEnabled(false);		
-//	    group.add(buttonResults);
-add(Box.createRigidArea(new Dimension(buttonWidth,buttonHeight)));
-//	    buttonStatistics = GuiTools.createToggleButton(GuiKeys.MENU_QUICKMATCH_BUTTON_STATISTICS,buttonWidth,buttonHeight,1,this);
-//	    buttonStatistics.setEnabled(false);		
-//	    group.add(buttonStatistics);
+		add(Box.createRigidArea(new Dimension(buttonWidth,buttonHeight)));
+		add(Box.createRigidArea(new Dimension(buttonWidth,buttonHeight)));
+		add(Box.createRigidArea(new Dimension(buttonWidth,buttonHeight)));
 		add(Box.createRigidArea(new Dimension(GuiTools.buttonHorizontalSpace,0)));
-		buttonNext = GuiTools.createButton(GuiKeys.MENU_QUICKMATCH_BUTTON_NEXT,buttonWidth,buttonHeight,1,this);
+		buttonNext = GuiTools.createButton(GuiKeys.MENU_QUICKMATCH_PLAYERS_BUTTON_NEXT,buttonWidth,buttonHeight,1,this);
 		
-		profilesData = new PlayersData(container,selectedProfiles);
+		profilesData = new PlayersData(container);
 		container.setDataPart(profilesData);
-/*		
-		Match match = Configuration.getGameConfiguration().getTournament().getCurrentMatch();
-		match.setPanel(this);
-*/		
 	}
 	
+	/////////////////////////////////////////////////////////////////
+	// PLAYERS						/////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	private ArrayList<Profile> players;
+
+	public void setSelectedProfiles(ArrayList<Profile> selectedProfiles)
+	{	players = selectedProfiles;
+		profilesData.setSelectedProfiles(players);
+	}
+	
+	public ArrayList<Profile> getSelectedProfiles()
+	{	return players;	
+	}
+	
+	/////////////////////////////////////////////////////////////////
+	// ACTION LISTENER				/////////////////////////////////
+	/////////////////////////////////////////////////////////////////
 	public void actionPerformed(ActionEvent e)
-	{	if(e.getActionCommand().equals(GuiKeys.MENU_QUICKMATCH_BUTTON_QUIT))
+	{	if(e.getActionCommand().equals(GuiKeys.MENU_QUICKMATCH_PLAYERS_BUTTON_QUIT))
 		{	getFrame().setMainMenuPanel();
 	    }
-		else if(e.getActionCommand().equals(GuiKeys.MENU_QUICKMATCH_BUTTON_PREVIOUS))				
+		else if(e.getActionCommand().equals(GuiKeys.MENU_QUICKMATCH_PLAYERS_BUTTON_PREVIOUS))				
 		{	replaceWith(parent);
 	    }
-		else if(e.getActionCommand().equals(GuiKeys.MENU_QUICKMATCH_BUTTON_NEXT))
+		else if(e.getActionCommand().equals(GuiKeys.MENU_QUICKMATCH_PLAYERS_BUTTON_NEXT))
 		{	if(matchSplitPanel==null)
 			{	//TODO temporaire
 				try
@@ -154,11 +155,17 @@ add(Box.createRigidArea(new Dimension(buttonWidth,buttonHeight)));
 	    }
 	} 
 
+	/////////////////////////////////////////////////////////////////
+	// CONTENT PANEL				/////////////////////////////////
+	/////////////////////////////////////////////////////////////////
 	@Override
 	public void refresh()
 	{	
 	}
 	
+	/////////////////////////////////////////////////////////////////
+	// PAINT				/////////////////////////////////
+	/////////////////////////////////////////////////////////////////
 	@Override
     protected void paintComponent(Graphics g)
 	{	//g.clearRect(0, 0, getWidth(), getHeight());

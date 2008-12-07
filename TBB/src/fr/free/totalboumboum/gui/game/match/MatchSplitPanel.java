@@ -51,17 +51,12 @@ public class MatchSplitPanel extends SplitMenuPanel
 	/////////////////////////////////////////////////////////////////
 	// MATCH			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	private Match match;
-
 	public void setMatch(Match match)
-	{	// match
-		this.match = match;
-		// panels
-		((MatchMenu)menuPart).setMatch(match);
+	{	((MatchMenu)menuPart).setMatch(match);
 	}
 	
 	public Match getMatch()
-	{	return match;	
+	{	return ((MatchMenu)menuPart).getMatch();	
 	}
 
 	/////////////////////////////////////////////////////////////////
