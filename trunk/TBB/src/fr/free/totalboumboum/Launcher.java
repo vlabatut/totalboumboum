@@ -145,6 +145,13 @@ public class Launcher
 	 * il faut implémenter la fonction finish qui permet d'effacer toutes les références qu'elle utilisait
 	 */
 	
+	/*
+	 * TODO GUI
+	 * Split : reçoit les paramètres mais ne les met pas en cache
+	 * Menu  : met les originaux en cache, envoie une copie au data
+	 * Data  : modifie les paramètres reçus. le menu se charge de les récupérer, les comparer et éventuellement les sauver
+	 */
+	
 // **********************************************************
 // IA / TOURNOI
 // **********************************************************

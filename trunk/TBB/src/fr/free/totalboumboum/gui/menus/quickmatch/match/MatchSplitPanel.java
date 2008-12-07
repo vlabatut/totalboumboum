@@ -30,7 +30,6 @@ import fr.free.totalboumboum.gui.common.structure.MenuContainer;
 import fr.free.totalboumboum.gui.common.structure.panel.SplitMenuPanel;
 import fr.free.totalboumboum.gui.common.structure.panel.menu.MenuPanel;
 import fr.free.totalboumboum.gui.data.configuration.GuiConfiguration;
-import fr.free.totalboumboum.gui.game.match.MatchMenu;
 import fr.free.totalboumboum.gui.tools.GuiTools;
 
 public class MatchSplitPanel extends SplitMenuPanel
