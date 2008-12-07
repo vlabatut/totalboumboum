@@ -36,7 +36,8 @@ import org.xml.sax.SAXException;
 
 import fr.free.totalboumboum.configuration.Configuration;
 import fr.free.totalboumboum.configuration.profile.Profile;
-import fr.free.totalboumboum.game.tournament.AbstractTournament;
+import fr.free.totalboumboum.game.match.Match;
+import fr.free.totalboumboum.game.tournament.single.SingleTournament;
 import fr.free.totalboumboum.gui.common.structure.panel.SplitMenuPanel;
 import fr.free.totalboumboum.gui.common.structure.panel.menu.InnerMenuPanel;
 import fr.free.totalboumboum.gui.common.structure.panel.menu.MenuPanel;
@@ -113,11 +114,16 @@ add(Box.createRigidArea(new Dimension(buttonWidth,buttonHeight)));
 		{	if(matchSplitPanel==null)
 			{	//TODO temporaire
 				try
-				{	Configuration.getGameConfiguration().loadQuickmatch();
-					AbstractTournament tournament = Configuration.getGameConfiguration().getTournament();
+				{	// load
+					Configuration.getGameConfiguration().loadQuickmatch();
+					SingleTournament tournament = (SingleTournament)Configuration.getGameConfiguration().getTournament();
 					ArrayList<Profile> selectedProfiles = profilesData.getSelectedProfiles();
 					tournament.init(selectedProfiles);
 					tournament.progress();
+					// GUI
+					matchSplitPanel = new MatchSplitPanel(container.getContainer(),container);
+					Match match = tournament.getCurrentMatch();
+					matchSplitPanel.setMatch(match);
 				}
 				catch (ParserConfigurationException e1)
 				{	e1.printStackTrace();
@@ -143,9 +149,6 @@ add(Box.createRigidArea(new Dimension(buttonWidth,buttonHeight)));
 				catch (NoSuchFieldException e1)
 				{	e1.printStackTrace();
 				}
-				
-				// GUI
-				matchSplitPanel = new MatchSplitPanel(container.getContainer(),container);			
 			}
 			replaceWith(matchSplitPanel);
 	    }

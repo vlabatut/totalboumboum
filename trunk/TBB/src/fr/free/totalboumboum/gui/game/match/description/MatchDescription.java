@@ -27,9 +27,9 @@ import javax.swing.Box;
 import javax.swing.BoxLayout;
 import javax.swing.JPanel;
 
-import fr.free.totalboumboum.configuration.Configuration;
 import fr.free.totalboumboum.configuration.profile.Profile;
 import fr.free.totalboumboum.game.limit.Limit;
+import fr.free.totalboumboum.game.limit.Limits;
 import fr.free.totalboumboum.game.limit.MatchLimit;
 import fr.free.totalboumboum.game.match.Match;
 import fr.free.totalboumboum.game.points.PointsProcessor;
@@ -71,13 +71,10 @@ public class MatchDescription extends EntitledDataPanel implements LimitsListene
 			int margin = GuiTools.panelMargin;
 			int leftWidth = (int)(dataWidth*SPLIT_RATIO); 
 			int rightWidth = dataWidth - leftWidth - margin; 
-			Match match = Configuration.getGameConfiguration().getTournament().getCurrentMatch();			
 			infoPanel.setOpaque(false);
 			
 			// players panel
-			{	ArrayList<Profile> players = match.getProfiles();
-				playersPanel = new PlayersListSubPanel(leftWidth,dataHeight);
-				playersPanel.setPlayers(players);
+			{	playersPanel = new PlayersListSubPanel(leftWidth,dataHeight);
 				infoPanel.add(playersPanel);
 			}
 			
@@ -103,20 +100,38 @@ public class MatchDescription extends EntitledDataPanel implements LimitsListene
 				// points panel
 				{	pointsPanel = new PointsSubPanel(rightWidth,downHeight,GuiKeys.MATCH);
 					rightPanel.add(pointsPanel);
-					limitSelectionChange();
-//					SubPanel pointsPanel = RoundDescription.makePointsPanel(rightWidth,downHeight,match.getPointProcessor(),GuiKey.MATCH);
-//					rightPanel.add(pointsPanel);
 				}
 				
 				infoPanel.add(rightPanel);
 			}
 
 			setDataPart(infoPanel);
-			
-			limitsPanel.setLimits(match.getLimits());
 		}
 	}
 
+	/////////////////////////////////////////////////////////////////
+	// MATCH			/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////	
+	@SuppressWarnings("unused")
+	private Match match;
+	
+	public void setMatch(Match match)
+	{	// init
+		this.match = match;
+		Limits<MatchLimit> limits = null;
+		if(match!=null)
+		{	limits = match.getLimits();
+		}
+		// players
+		ArrayList<Profile> players = match.getProfiles();
+		playersPanel.setPlayers(players);
+		// limits & points
+		limitsPanel.setLimits(limits);
+	}
+	
+	/////////////////////////////////////////////////////////////////
+	// CONTENT PANEL	/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////	
 	@Override
 	public void refresh()
 	{	// nothing to do here
@@ -124,8 +139,7 @@ public class MatchDescription extends EntitledDataPanel implements LimitsListene
 
 	/////////////////////////////////////////////////////////////////
 	// LIMITS 			/////////////////////////////////////////////
-	/////////////////////////////////////////////////////////////////
-	
+	/////////////////////////////////////////////////////////////////	
 	@Override
 	public void limitSelectionChange()
 	{	Limit limit = limitsPanel.getSelectedLimit();

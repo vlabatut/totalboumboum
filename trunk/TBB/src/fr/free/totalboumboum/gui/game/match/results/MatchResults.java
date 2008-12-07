@@ -21,7 +21,6 @@ package fr.free.totalboumboum.gui.game.match.results;
  * 
  */
 
-import fr.free.totalboumboum.configuration.Configuration;
 import fr.free.totalboumboum.game.match.Match;
 import fr.free.totalboumboum.gui.common.content.subpanel.results.ResultsSubPanel;
 import fr.free.totalboumboum.gui.common.structure.panel.SplitMenuPanel;
@@ -45,15 +44,28 @@ public class MatchResults extends EntitledDataPanel
 		{	resultsPanel = new ResultsSubPanel(dataWidth,dataHeight);
 			resultsPanel.setShowTime(false);
 			setDataPart(resultsPanel);
-			//
-			Match match = Configuration.getGameConfiguration().getTournament().getCurrentMatch();
-			resultsPanel.setStatisticHolder(match);
 		}
 	}
 
+	/////////////////////////////////////////////////////////////////
+	// MATCH			/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	private Match match;
+
+	public void setMatch(Match match)
+	{	this.match = match;
+		resultsPanel.setStatisticHolder(match);
+	}
+	
+	public Match getMatch()
+	{	return match;	
+	}
+	
+	/////////////////////////////////////////////////////////////////
+	// CONTENT PANEL	/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////	
 	@Override
 	public void refresh()
-	{	Match match = Configuration.getGameConfiguration().getTournament().getCurrentMatch();
-		resultsPanel.setStatisticHolder(match);		
+	{	setMatch(match);
 	}
 }

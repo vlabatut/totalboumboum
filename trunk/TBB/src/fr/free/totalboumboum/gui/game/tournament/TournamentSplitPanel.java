@@ -30,6 +30,7 @@ import javax.xml.parsers.ParserConfigurationException;
 
 import org.xml.sax.SAXException;
 
+import fr.free.totalboumboum.game.tournament.AbstractTournament;
 import fr.free.totalboumboum.gui.common.structure.MenuContainer;
 import fr.free.totalboumboum.gui.common.structure.panel.SplitMenuPanel;
 import fr.free.totalboumboum.gui.common.structure.panel.menu.MenuPanel;
@@ -52,6 +53,25 @@ public class TournamentSplitPanel extends SplitMenuPanel
 		setMenuPart(menu);
 	}
 	
+	/////////////////////////////////////////////////////////////////
+	// TOURNAMENT		/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	private AbstractTournament tournament;
+
+	public void setTournament(AbstractTournament tournament)
+	{	// tournament
+		this.tournament = tournament;
+		// panels
+		((TournamentMenu)menuPart).setTournament(tournament);
+	}
+	
+	public AbstractTournament getTournament()
+	{	return tournament;	
+	}
+
+	/////////////////////////////////////////////////////////////////
+	// PAINT			/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
 	@Override
 	public void paintComponent(Graphics g)
 	{	g.drawImage(image, 0, 0, null);

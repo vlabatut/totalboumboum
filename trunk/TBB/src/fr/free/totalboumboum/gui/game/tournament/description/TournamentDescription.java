@@ -21,11 +21,12 @@ package fr.free.totalboumboum.gui.game.tournament.description;
  * 
  */
 
+import fr.free.totalboumboum.game.tournament.AbstractTournament;
 import fr.free.totalboumboum.gui.common.structure.panel.SplitMenuPanel;
 import fr.free.totalboumboum.gui.common.structure.panel.data.EntitledDataPanel;
 import fr.free.totalboumboum.gui.tools.GuiKeys;
 
-public abstract class TournamentDescription extends EntitledDataPanel
+public abstract class TournamentDescription<T extends AbstractTournament> extends EntitledDataPanel
 {	
 	private static final long serialVersionUID = 1L;
 
@@ -35,5 +36,16 @@ public abstract class TournamentDescription extends EntitledDataPanel
 		// title
 		String key = GuiKeys.GAME_TOURNAMENT_DESCRIPTION_TITLE;
 		setTitleKey(key);
+	}
+	
+	/////////////////////////////////////////////////////////////////
+	// TOURNAMENT			/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////	
+	protected T tournament;
+	
+	public abstract void setTournament(T tournament);
+	
+	public T getTournament()
+	{	return tournament;	
 	}
 }

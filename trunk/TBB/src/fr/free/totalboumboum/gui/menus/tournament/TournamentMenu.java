@@ -37,6 +37,7 @@ import fr.free.totalboumboum.configuration.Configuration;
 import fr.free.totalboumboum.configuration.profile.Profile;
 import fr.free.totalboumboum.configuration.profile.ProfileLoader;
 import fr.free.totalboumboum.configuration.profile.ProfilesSelection;
+import fr.free.totalboumboum.game.match.Match;
 import fr.free.totalboumboum.game.tournament.AbstractTournament;
 import fr.free.totalboumboum.game.tournament.single.SingleTournament;
 import fr.free.totalboumboum.gui.common.structure.panel.SplitMenuPanel;
@@ -165,10 +166,14 @@ buttonPlayers.setEnabled(false);
 				tournament.init(selectedProfiles);
 				if(tournament instanceof SingleTournament)
 				{	tournament.progress();
-					tournamentGamePanel = new MatchSplitPanel(container.getContainer(),container);					
+					tournamentGamePanel = new MatchSplitPanel(container.getContainer(),container);
+					Match match = tournament.getCurrentMatch();
+					((MatchSplitPanel)tournamentGamePanel).setMatch(match);
 				}
 				else
-					tournamentGamePanel = new TournamentSplitPanel(container.getContainer(),container);
+				{	tournamentGamePanel = new TournamentSplitPanel(container.getContainer(),container);
+					((TournamentSplitPanel)tournamentGamePanel).setTournament(tournament);
+				}
 			}
 			catch (IllegalArgumentException e1)
 			{	e1.printStackTrace();

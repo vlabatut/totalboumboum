@@ -21,6 +21,7 @@ package fr.free.totalboumboum.gui.game.tournament.statistics;
  * 
  */
 
+import fr.free.totalboumboum.game.tournament.AbstractTournament;
 import fr.free.totalboumboum.gui.common.structure.panel.SplitMenuPanel;
 import fr.free.totalboumboum.gui.common.structure.panel.data.EntitledDataPanel;
 import fr.free.totalboumboum.gui.tools.GuiKeys;
@@ -38,6 +39,22 @@ public class TournamentStatistics extends EntitledDataPanel
 	
 	}
 
+	/////////////////////////////////////////////////////////////////
+	// TOURNAMENT		/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	private AbstractTournament tournament;
+
+	public void setTournament(AbstractTournament tournament)
+	{	this.tournament = tournament;
+	}
+	
+	public AbstractTournament getTournament()
+	{	return tournament;	
+	}
+	
+	/////////////////////////////////////////////////////////////////
+	// CONTENT PANEL	/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////	
 	@Override
 	public void refresh()
 	{	// nothing to do here

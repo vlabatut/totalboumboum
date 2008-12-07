@@ -35,7 +35,6 @@ import javax.xml.parsers.ParserConfigurationException;
 
 import org.xml.sax.SAXException;
 
-import fr.free.totalboumboum.configuration.Configuration;
 import fr.free.totalboumboum.game.match.Match;
 import fr.free.totalboumboum.game.tournament.AbstractTournament;
 import fr.free.totalboumboum.game.tournament.TournamentRenderPanel;
@@ -43,12 +42,13 @@ import fr.free.totalboumboum.game.tournament.cup.CupTournament;
 import fr.free.totalboumboum.game.tournament.league.LeagueTournament;
 import fr.free.totalboumboum.game.tournament.sequence.SequenceTournament;
 import fr.free.totalboumboum.gui.common.structure.panel.SplitMenuPanel;
-import fr.free.totalboumboum.gui.common.structure.panel.data.InnerDataPanel;
 import fr.free.totalboumboum.gui.common.structure.panel.menu.InnerMenuPanel;
 import fr.free.totalboumboum.gui.common.structure.panel.menu.MenuPanel;
 import fr.free.totalboumboum.gui.game.match.MatchSplitPanel;
 import fr.free.totalboumboum.gui.game.tournament.description.SequenceDescription;
+import fr.free.totalboumboum.gui.game.tournament.description.TournamentDescription;
 import fr.free.totalboumboum.gui.game.tournament.results.SequenceResults;
+import fr.free.totalboumboum.gui.game.tournament.results.TournamentResults;
 import fr.free.totalboumboum.gui.game.tournament.statistics.TournamentStatistics;
 import fr.free.totalboumboum.gui.tools.GuiKeys;
 import fr.free.totalboumboum.gui.tools.GuiTools;
@@ -56,10 +56,10 @@ import fr.free.totalboumboum.gui.tools.GuiTools;
 public class TournamentMenu extends InnerMenuPanel implements TournamentRenderPanel
 {	private static final long serialVersionUID = 1L;
 	
-	private MenuPanel matchPanel;
-	private InnerDataPanel tournamentDescription;
-	private InnerDataPanel tournamentResults;
-	private InnerDataPanel tournamentStatistics;
+	private MatchSplitPanel matchPanel;
+	private TournamentDescription<?> tournamentDescription;
+	private TournamentResults<?> tournamentResults;
+	private TournamentStatistics tournamentStatistics;
 		
 	@SuppressWarnings("unused")
 	private JButton buttonQuit;
@@ -82,13 +82,12 @@ public class TournamentMenu extends InnerMenuPanel implements TournamentRenderPa
 		// sizes
 		int buttonWidth = getHeight();
 		int buttonHeight = getHeight();
-//		ArrayList<String> texts = GuiKeys.getKeysLike(GuiKeys.MENU_TOURNAMENT_BUTTON);
-//		int fontSize = GuiTools.getOptimalFontSize(buttonWidth, buttonHeight, texts);
 
 		// buttons
 		buttonQuit = GuiTools.createButton(GuiKeys.GAME_TOURNAMENT_BUTTON_QUIT,buttonWidth,buttonHeight,1,this);
 		add(Box.createHorizontalGlue());
 		buttonMenu = GuiTools.createButton(GuiKeys.GAME_TOURNAMENT_BUTTON_MENU,buttonWidth,buttonHeight,1,this);
+buttonMenu.setEnabled(false);		
 		add(Box.createRigidArea(new Dimension(GuiTools.buttonHorizontalSpace,0)));
 	    ButtonGroup group = new ButtonGroup();
 	    buttonDescription = GuiTools.createToggleButton(GuiKeys.GAME_TOURNAMENT_BUTTON_DESCRIPTION,buttonWidth,buttonHeight,1,this);
@@ -101,27 +100,94 @@ buttonStatistics.setEnabled(false);
 	    group.add(buttonStatistics);
 		add(Box.createRigidArea(new Dimension(GuiTools.buttonHorizontalSpace,0)));
 		buttonMatch = GuiTools.createButton(GuiKeys.GAME_TOURNAMENT_BUTTON_NEXT_MATCH,buttonWidth,buttonHeight,1,this);
-		
-		// panels
-		tournamentDescription = null;
-		AbstractTournament tournament = Configuration.getGameConfiguration().getTournament();
-		if(tournament instanceof SequenceTournament)
-		{	tournamentDescription = new SequenceDescription(container);
-			container.setDataPart(tournamentDescription);
-			tournamentResults = new SequenceResults(container);
-			tournamentStatistics = new TournamentStatistics(container);		
-		}
-		else if(tournament instanceof CupTournament)
-		{
-			// NOTE à compléter
-		}
-		else if(tournament instanceof LeagueTournament)
-		{
-			// NOTE à compléter
-		}
-		tournament.setPanel(this);
 	}
 	
+	/////////////////////////////////////////////////////////////////
+	// TOURNAMENT		/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	private AbstractTournament tournament;
+
+	public void setTournament(AbstractTournament tournament)
+	{	// tournament
+		this.tournament = tournament;
+		if(tournament==null)
+		{
+			
+		}
+		else
+		{	// panels
+			tournamentDescription = null;
+			if(tournament instanceof SequenceTournament)
+			{	SequenceTournament trnmt = (SequenceTournament) tournament;
+				// create
+				SequenceDescription trnmtDescription = new SequenceDescription(container);
+				tournamentDescription = trnmtDescription;
+				container.setDataPart(tournamentDescription);
+				SequenceResults trnmtResults = new SequenceResults(container);
+				tournamentResults = trnmtResults;
+				tournamentStatistics = new TournamentStatistics(container);
+				// set tournament
+				trnmtDescription.setTournament(trnmt);
+				trnmtResults.setTournament(trnmt);
+				tournamentStatistics.setTournament(trnmt);	
+			}
+			else if(tournament instanceof CupTournament)
+			{
+				// NOTE à compléter
+			}
+			else if(tournament instanceof LeagueTournament)
+			{
+				// NOTE à compléter
+			}
+			tournament.setPanel(this);
+		}
+		// buttons
+		refreshButtons();
+	}
+	
+	public AbstractTournament getTournament()
+	{	return tournament;	
+	}
+
+	/////////////////////////////////////////////////////////////////
+	// REFRESH	/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	private void refreshButtons()
+	{	if(tournament!=null)
+		{	if(tournament.isOver())
+			{	// match
+				buttonMatch.setEnabled(false);
+				// finish
+				GuiTools.setButtonContent(GuiKeys.GAME_TOURNAMENT_BUTTON_FINISH, buttonMenu);
+			}
+			else
+			{	// match
+				buttonMatch.setEnabled(true);
+				Match match = tournament.getCurrentMatch();
+				if(match==null || match.isOver())
+					GuiTools.setButtonContent(GuiKeys.GAME_TOURNAMENT_BUTTON_NEXT_MATCH, buttonMatch);
+				else
+					GuiTools.setButtonContent(GuiKeys.GAME_TOURNAMENT_BUTTON_CURRENT_MATCH, buttonMatch);
+				// menu
+				GuiTools.setButtonContent(GuiKeys.GAME_TOURNAMENT_BUTTON_MENU, buttonMenu);
+			}
+		}
+		else
+		{	// play
+			buttonMatch.setEnabled(false);
+		}
+	}
+	
+	private void refreshPanels()
+	{	tournamentDescription.refresh();
+		tournamentResults.refresh();
+		tournamentStatistics.refresh();	
+	}
+
+	/////////////////////////////////////////////////////////////////
+	// ACTION LISTENER	/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	@Override
 	public void actionPerformed(ActionEvent e)
 	{	if(e.getActionCommand().equals(GuiKeys.GAME_TOURNAMENT_BUTTON_QUIT))
 		{	getFrame().setMainMenuPanel();
@@ -130,8 +196,7 @@ buttonStatistics.setEnabled(false);
 		{	replaceWith(parent);
 	    }
 		else if(e.getActionCommand().equals(GuiKeys.GAME_TOURNAMENT_BUTTON_FINISH))
-		{	AbstractTournament tournament = Configuration.getGameConfiguration().getTournament();
-			tournament.finish();
+		{	tournament.finish();
 			replaceWith(parent);
 	    }
 		else if(e.getActionCommand().equals(GuiKeys.GAME_TOURNAMENT_BUTTON_DESCRIPTION))
@@ -147,35 +212,26 @@ buttonStatistics.setEnabled(false);
 		{	replaceWith(matchPanel);
 	    }
 		else if(e.getActionCommand().equals(GuiKeys.GAME_TOURNAMENT_BUTTON_NEXT_MATCH))
-		{	AbstractTournament tournament = Configuration.getGameConfiguration().getTournament();
-			tournament.progress();
+		{	tournament.progress();
 			matchPanel = new MatchSplitPanel(container.getContainer(),container);
+			Match match = tournament.getCurrentMatch();		
+			matchPanel.setMatch(match);
 			replaceWith(matchPanel);
 	    }
 	}
 
+	/////////////////////////////////////////////////////////////////
+	// CONTENT PANEL	/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
 	@Override
 	public void refresh()
-	{	AbstractTournament tournament = Configuration.getGameConfiguration().getTournament(); 
-		if(tournament.isOver())
-		{	// match
-			buttonMatch.setEnabled(false);
-			// finish
-			GuiTools.setButtonContent(GuiKeys.GAME_TOURNAMENT_BUTTON_FINISH, buttonMenu);
-		}
-		else
-		{	// match
-			buttonMatch.setEnabled(true);
-			Match match = tournament.getCurrentMatch();
-			if(match==null || match.isOver())
-				GuiTools.setButtonContent(GuiKeys.GAME_TOURNAMENT_BUTTON_NEXT_MATCH, buttonMatch);
-			else
-				GuiTools.setButtonContent(GuiKeys.GAME_TOURNAMENT_BUTTON_CURRENT_MATCH, buttonMatch);
-			// menu
-			GuiTools.setButtonContent(GuiKeys.GAME_TOURNAMENT_BUTTON_MENU, buttonMenu);
-		}
+	{	refreshPanels();
+		refreshButtons();
 	}
 
+	/////////////////////////////////////////////////////////////////
+	// TOURNAMENT RENDER PANEL	/////////////////////////////////////
+	/////////////////////////////////////////////////////////////////	
 	@Override
 	public void matchOver()
 	{	SwingUtilities.invokeLater(new Runnable()
