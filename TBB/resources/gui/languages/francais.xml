@@ -128,14 +128,10 @@
 			</group>	
 
 			<group name="Round">
+				<text name="Title" value="Liste des manches" tooltip="Liste des manches prédéfinies" />
 				<group name="Button">
 					<text name="Back" value="Retour" tooltip="Revenir au menu des ressources" />
 				</group>		
-				<group name="Select">
-					<text name="Title" value="Liste des manches" tooltip="Liste des manches prédéfinies" />
-					<text name="PageDown" value="Descendre" tooltip="Aller à la page de manches suivante" />
-					<text name="PageUp" value="Monter" tooltip="Revenir à la page de manches précédente" />
-				</group>
 			</group>	
 		</group>
 
@@ -412,6 +408,15 @@
 
 <!-- COMMON -->
 	<group name="Common">
+	
+<!-- BROWSE -->
+		<group name="Browser">
+			<group name="File">
+				<text name="PageDown" value="Descendre" tooltip="Aller à la page suivante" />
+				<text name="PageUp" value="Monter" tooltip="Revenir à la page précédente" />
+			</group>
+		</group>
+	
 <!-- COLOR -->
 		<group name="Color">
 			<text name="Black" value="Noir" tooltip="Noir"/>
