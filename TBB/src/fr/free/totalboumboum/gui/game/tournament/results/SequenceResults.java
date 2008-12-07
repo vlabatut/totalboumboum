@@ -21,12 +21,11 @@ package fr.free.totalboumboum.gui.game.tournament.results;
  * 
  */
 
-import fr.free.totalboumboum.configuration.Configuration;
 import fr.free.totalboumboum.game.tournament.sequence.SequenceTournament;
 import fr.free.totalboumboum.gui.common.content.subpanel.results.ResultsSubPanel;
 import fr.free.totalboumboum.gui.common.structure.panel.SplitMenuPanel;
 
-public class SequenceResults extends TournamentResults
+public class SequenceResults extends TournamentResults<SequenceTournament>
 {	
 	private static final long serialVersionUID = 1L;
 
@@ -39,15 +38,23 @@ public class SequenceResults extends TournamentResults
 		{	resultsPanel = new ResultsSubPanel(dataWidth,dataHeight);
 			resultsPanel.setShowTime(false);
 			setDataPart(resultsPanel);
-			//
-			SequenceTournament tournament = (SequenceTournament)Configuration.getGameConfiguration().getTournament();
-			resultsPanel.setStatisticHolder(tournament);
 		}
 	}
 
+	/////////////////////////////////////////////////////////////////
+	// TOURNAMENT		/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	@Override
+	public void setTournament(SequenceTournament tournament)
+	{	this.tournament = tournament;
+		resultsPanel.setStatisticHolder(tournament);
+	}
+	
+	/////////////////////////////////////////////////////////////////
+	// CONTENT PANEL	/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////	
 	@Override
 	public void refresh()
-	{	SequenceTournament tournament = (SequenceTournament)Configuration.getGameConfiguration().getTournament();
-		resultsPanel.setStatisticHolder(tournament);
+	{	setTournament(tournament);
 	}
 }

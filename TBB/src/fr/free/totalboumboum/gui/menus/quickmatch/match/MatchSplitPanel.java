@@ -25,10 +25,12 @@ import java.awt.BorderLayout;
 import java.awt.Graphics;
 import java.awt.image.BufferedImage;
 
+import fr.free.totalboumboum.game.match.Match;
 import fr.free.totalboumboum.gui.common.structure.MenuContainer;
 import fr.free.totalboumboum.gui.common.structure.panel.SplitMenuPanel;
 import fr.free.totalboumboum.gui.common.structure.panel.menu.MenuPanel;
 import fr.free.totalboumboum.gui.data.configuration.GuiConfiguration;
+import fr.free.totalboumboum.gui.game.match.MatchMenu;
 import fr.free.totalboumboum.gui.tools.GuiTools;
 
 public class MatchSplitPanel extends SplitMenuPanel
@@ -47,6 +49,25 @@ public class MatchSplitPanel extends SplitMenuPanel
 		setMenuPart(menu);
 	}
 	
+	/////////////////////////////////////////////////////////////////
+	// MATCH			/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	private Match match;
+
+	public void setMatch(Match match)
+	{	// match
+		this.match = match;
+		// panels
+		((MatchMenu)menuPart).setMatch(match);
+	}
+	
+	public Match getMatch()
+	{	return match;	
+	}
+
+	/////////////////////////////////////////////////////////////////
+	// PAINT	/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////	
 	@Override
 	public void paintComponent(Graphics g)
 	{	g.drawImage(image, 0, 0, null);

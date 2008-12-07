@@ -80,8 +80,6 @@ public class RoundMenu extends InnerMenuPanel implements RoundRenderPanel
 		// sizes
 		int buttonWidth = getHeight();
 		int buttonHeight = getHeight();
-//		ArrayList<String> texts = GuiKeys.getKeysLike(GuiKeys.MENU_TOURNAMENT_BUTTON);
-//		int fontSize = GuiTools.getOptimalFontSize(buttonWidth, buttonHeight, texts);
 
 		// buttons
 		buttonQuit = GuiTools.createButton(GuiKeys.GAME_ROUND_BUTTON_QUIT,buttonWidth,buttonHeight,1,this);
@@ -164,6 +162,7 @@ buttonStatistics.setEnabled(false);
 	/////////////////////////////////////////////////////////////////
 	// ACTION LISTENER	/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
+	@Override
 	public void actionPerformed(ActionEvent e)
 	{	if(e.getActionCommand().equals(GuiKeys.GAME_ROUND_BUTTON_QUIT))
 		{	getFrame().setMainMenuPanel();
@@ -238,7 +237,6 @@ buttonStatistics.setEnabled(false);
 	/////////////////////////////////////////////////////////////////
 	// CONTENT PANEL	/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	
 	@Override
 	public void refresh()
 	{	refreshPanels();
@@ -248,7 +246,6 @@ buttonStatistics.setEnabled(false);
 	/////////////////////////////////////////////////////////////////
 	// ROUND RENDER PANEL	/////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	
 	@Override
 	public void roundOver()
 	{	SwingUtilities.invokeLater(new Runnable()

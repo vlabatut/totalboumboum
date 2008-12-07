@@ -36,12 +36,10 @@ import javax.xml.parsers.ParserConfigurationException;
 
 import org.xml.sax.SAXException;
 
-import fr.free.totalboumboum.configuration.Configuration;
 import fr.free.totalboumboum.game.match.Match;
 import fr.free.totalboumboum.game.match.MatchRenderPanel;
 import fr.free.totalboumboum.game.round.Round;
 import fr.free.totalboumboum.gui.common.structure.panel.SplitMenuPanel;
-import fr.free.totalboumboum.gui.common.structure.panel.data.InnerDataPanel;
 import fr.free.totalboumboum.gui.common.structure.panel.menu.InnerMenuPanel;
 import fr.free.totalboumboum.gui.common.structure.panel.menu.MenuPanel;
 import fr.free.totalboumboum.gui.game.match.description.MatchDescription;
@@ -54,10 +52,10 @@ import fr.free.totalboumboum.gui.tools.GuiTools;
 public class MatchMenu extends InnerMenuPanel implements MatchRenderPanel
 {	private static final long serialVersionUID = 1L;
 	
-	private MenuPanel roundPanel;
-	private InnerDataPanel matchDescription;
-	private InnerDataPanel matchResults;
-	private InnerDataPanel matchStatistics;
+	private RoundSplitPanel roundPanel;
+	private MatchDescription matchDescription;
+	private MatchResults matchResults;
+	private MatchStatistics matchStatistics;
 		
 	@SuppressWarnings("unused")
 	private JButton buttonQuit;
@@ -80,8 +78,6 @@ public class MatchMenu extends InnerMenuPanel implements MatchRenderPanel
 		// sizes
 		int buttonWidth = getHeight();
 		int buttonHeight = getHeight();
-//		ArrayList<String> texts = GuiKeys.getKeysLike(GuiKeys.MENU_TOURNAMENT_BUTTON);
-//		int fontSize = GuiTools.getOptimalFontSize(buttonWidth, buttonHeight, texts);
 
 		// buttons
 		buttonQuit = GuiTools.createButton(GuiKeys.GAME_MATCH_BUTTON_QUIT,buttonWidth,buttonHeight,1,this);
@@ -106,11 +102,70 @@ buttonStatistics.setEnabled(false);
 			matchResults = new MatchResults(container);
 			matchStatistics = new MatchStatistics(container);		
 		}
-		
-		Match match = Configuration.getGameConfiguration().getTournament().getCurrentMatch();
-		match.setPanel(this);
 	}
 	
+	/////////////////////////////////////////////////////////////////
+	// ROUND			/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	private Match match;
+
+	public void setMatch(Match match)
+	{	// match
+		if(match!=null)
+			match.setPanel(null);
+		this.match = match;
+		match.setPanel(this);
+		// panels
+		matchDescription.setMatch(match);
+		matchResults.setMatch(match);
+		matchStatistics.setMatch(match);	
+		// buttons
+		refreshButtons();
+	}
+	
+	public Match getMatch()
+	{	return match;	
+	}
+
+	/////////////////////////////////////////////////////////////////
+	// REFRESH	/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	private void refreshButtons()
+	{	if(match!=null)
+		{	if(match.isOver())
+			{	// Round
+				buttonRound.setEnabled(false);
+				// Finish
+				GuiTools.setButtonContent(GuiKeys.GAME_MATCH_BUTTON_FINISH, buttonTournament);
+			}
+			else
+			{	// Round
+				buttonRound.setEnabled(true);
+				Round round = match.getCurrentRound();
+				if(round==null || round.isOver())
+					GuiTools.setButtonContent(GuiKeys.GAME_MATCH_BUTTON_NEXT_ROUND, buttonRound);
+				else
+					GuiTools.setButtonContent(GuiKeys.GAME_MATCH_BUTTON_CURRENT_ROUND, buttonRound);
+				// Tournament
+				GuiTools.setButtonContent(GuiKeys.GAME_MATCH_BUTTON_CURRENT_TOURNAMENT, buttonTournament);
+			}
+		}
+		else
+		{	// play
+			buttonRound.setEnabled(false);
+		}
+	}
+	
+	private void refreshPanels()
+	{	matchDescription.refresh();
+		matchResults.refresh();
+		matchStatistics.refresh();	
+	}
+
+	/////////////////////////////////////////////////////////////////
+	// ACTION PERFORMED	/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////	
+	@Override
 	public void actionPerformed(ActionEvent e)
 	{	if(e.getActionCommand().equals(GuiKeys.GAME_MATCH_BUTTON_QUIT))
 		{	getFrame().setMainMenuPanel();
@@ -119,8 +174,7 @@ buttonStatistics.setEnabled(false);
 		{	replaceWith(parent);
 	    }
 		else if(e.getActionCommand().equals(GuiKeys.GAME_MATCH_BUTTON_FINISH))
-		{	Match match = Configuration.getGameConfiguration().getTournament().getCurrentMatch();
-			match.finish();
+		{	match.finish();
 			replaceWith(parent);
 	    }
 		else if(e.getActionCommand().equals(GuiKeys.GAME_MATCH_BUTTON_DESCRIPTION))
@@ -137,7 +191,7 @@ buttonStatistics.setEnabled(false);
 	    }
 		else if(e.getActionCommand().equals(GuiKeys.GAME_MATCH_BUTTON_NEXT_ROUND))
 		{	try
-			{	Configuration.getGameConfiguration().getTournament().getCurrentMatch().progress();
+			{	match.progress();
 			}
 			catch (IllegalArgumentException e1)
 			{	e1.printStackTrace();
@@ -164,32 +218,24 @@ buttonStatistics.setEnabled(false);
 			{	e1.printStackTrace();
 			}
 			roundPanel = new RoundSplitPanel(container.getContainer(),container);
+			Round round = match.getCurrentRound();		
+			roundPanel.setRound(round);
 			replaceWith(roundPanel);
 	    }
 	} 
 
+	/////////////////////////////////////////////////////////////////
+	// CONTENT PANEL	/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////	
 	@Override
 	public void refresh()
-	{	Match match = Configuration.getGameConfiguration().getTournament().getCurrentMatch(); 
-		if(match.isOver())
-		{	// Round
-			buttonRound.setEnabled(false);
-			// Finish
-			GuiTools.setButtonContent(GuiKeys.GAME_MATCH_BUTTON_FINISH, buttonTournament);
-		}
-		else
-		{	// Round
-			buttonRound.setEnabled(true);
-			Round round = match.getCurrentRound();
-			if(round==null || round.isOver())
-				GuiTools.setButtonContent(GuiKeys.GAME_MATCH_BUTTON_NEXT_ROUND, buttonRound);
-			else
-				GuiTools.setButtonContent(GuiKeys.GAME_MATCH_BUTTON_CURRENT_ROUND, buttonRound);
-			// Tournament
-			GuiTools.setButtonContent(GuiKeys.GAME_MATCH_BUTTON_CURRENT_TOURNAMENT, buttonTournament);
-		}
+	{	refreshPanels();
+		refreshButtons();
 	}
 
+	/////////////////////////////////////////////////////////////////
+	// MATCH RENDER PANEL	/////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////	
 	@Override
 	public void matchOver()
 	{	SwingUtilities.invokeLater(new Runnable()
@@ -210,6 +256,9 @@ buttonStatistics.setEnabled(false);
 		});	
 	}
 	
+	/////////////////////////////////////////////////////////////////
+	// PAINT			/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////	
 	@Override
     protected void paintComponent(Graphics g)
 	{	//g.clearRect(0, 0, getWidth(), getHeight());

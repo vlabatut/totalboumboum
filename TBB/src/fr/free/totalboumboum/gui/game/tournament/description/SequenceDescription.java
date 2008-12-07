@@ -28,7 +28,6 @@ import javax.swing.Box;
 import javax.swing.BoxLayout;
 import javax.swing.JPanel;
 
-import fr.free.totalboumboum.configuration.Configuration;
 import fr.free.totalboumboum.configuration.profile.Profile;
 import fr.free.totalboumboum.game.limit.Limit;
 import fr.free.totalboumboum.game.limit.TournamentLimit;
@@ -43,7 +42,7 @@ import fr.free.totalboumboum.gui.common.structure.subpanel.SubPanel;
 import fr.free.totalboumboum.gui.tools.GuiKeys;
 import fr.free.totalboumboum.gui.tools.GuiTools;
 
-public class SequenceDescription extends TournamentDescription implements LimitsListener
+public class SequenceDescription extends TournamentDescription<SequenceTournament> implements LimitsListener
 {	
 	private static final long serialVersionUID = 1L;
 	private static final float SPLIT_RATIO = 0.6f;
@@ -67,13 +66,10 @@ public class SequenceDescription extends TournamentDescription implements Limits
 			int leftWidth = (int)(dataWidth*SPLIT_RATIO); 
 			int rightWidth = dataWidth - leftWidth - margin; 
 			infoPanel.setOpaque(false);
-			SequenceTournament tournament = (SequenceTournament)Configuration.getGameConfiguration().getTournament();
 			
 			// players panel
-			{	ArrayList<Profile> players = tournament.getProfiles();
-				playersPanel = new PlayersListSubPanel(leftWidth,dataHeight);
+			{	playersPanel = new PlayersListSubPanel(leftWidth,dataHeight);
 				playersPanel.setShowControls(false);
-				playersPanel.setPlayers(players);
 				infoPanel.add(playersPanel);
 			}
 			
@@ -104,19 +100,32 @@ public class SequenceDescription extends TournamentDescription implements Limits
 				{	pointsPanel = new PointsSubPanel(rightWidth,downHeight,GuiKeys.TOURNAMENT);
 					rightPanel.add(pointsPanel);
 					limitSelectionChange();
-//					SubPanel pointsPanel = RoundDescription.makePointsPanel(rightWidth,downHeight,tournament.getPointProcessor(),GuiKey.TOURNAMENT);
-//					rightPanel.add(pointsPanel);
 				}
 				
 				infoPanel.add(rightPanel);
 			}
 
 			setDataPart(infoPanel);
-			
-			limitsPanel.setLimits(tournament.getLimits());
 		}
 	}
 
+	/////////////////////////////////////////////////////////////////
+	// TOURNAMENT			/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////	
+	public void setTournament(SequenceTournament tournament)
+	{	// init
+		this.tournament = tournament;
+		// players
+		ArrayList<Profile> players = tournament.getProfiles();
+		playersPanel.setPlayers(players);
+		// limits
+		limitsPanel.setLimits(tournament.getLimits());		
+	}
+
+	/////////////////////////////////////////////////////////////////
+	// CONTENT PANEL	/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	
 	@Override
 	public void refresh()
 	{	// nothing to do here

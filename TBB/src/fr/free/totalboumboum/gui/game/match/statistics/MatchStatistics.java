@@ -21,6 +21,7 @@ package fr.free.totalboumboum.gui.game.match.statistics;
  * 
  */
 
+import fr.free.totalboumboum.game.match.Match;
 import fr.free.totalboumboum.gui.common.structure.panel.SplitMenuPanel;
 import fr.free.totalboumboum.gui.common.structure.panel.data.EntitledDataPanel;
 import fr.free.totalboumboum.gui.tools.GuiKeys;
@@ -38,6 +39,22 @@ public class MatchStatistics extends EntitledDataPanel
 
 	}
 
+	/////////////////////////////////////////////////////////////////
+	// MATCH			/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	private Match match;
+
+	public void setMatch(Match match)
+	{	this.match = match;
+	}
+	
+	public Match getMatch()
+	{	return match;	
+	}
+	
+	/////////////////////////////////////////////////////////////////
+	// CONTENT PANEL	/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////	
 	@Override
 	public void refresh()
 	{	// nothing to do here
