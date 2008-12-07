@@ -211,23 +211,6 @@
 					<group name="Round">
 						<text name="Browse" value="Manche" tooltip="Sélectionner la manche du démarrage rapide" />
 					</group>
-					<group name="Players" >
-						<text name="Controls" value="Commandes" tooltip="Commandes sélectionnées" />
-						<text name="Color" value="Color" tooltip="Couleur sélectionnée" />
-						<group name="Hero" >
-							<text name="Header" value="Hero" tooltip="Personnage sélectionné" />
-						</group>
-						<group name="Profile" >
-							<text name="Add" value="Ajoute" tooltip="Sélectionner un autre profil" />
-							<text name="Delete" value="Désélectionne" tooltip="Désélectionne le profil" />
-							<text name="Header" value="Profil" tooltip="Profil sélectionné" />
-						</group>
-						<group name="Type" >
-							<text name="Computer" value="Ordinateur" tooltip="Intelligence artificielle" />
-							<text name="Header" value="Type" tooltip="Type de profil (joueur humain ou IA)" />
-							<text name="Human" value="Humain" tooltip="Joueur humain" />
-						</group>				
-					</group>
 				</group>
 				<group name="Quickmatch">
 					<text name="Title" value="Rencontre rapide" tooltip="Modifier les paramètres de la rencontre rapide" />
@@ -318,39 +301,14 @@
 
 <!-- QUICKMATCH MENU -->	
 		<group name="Quickmatch">
+			<text name="Title" value="Sélection des joueurs" tooltip="Sélection des joueurs participant à la partie rapide" />
 			<group name="Button">
+				<text name="Cancel" value="Annuler" tooltip="Annuler et revenir à l'écran de sélection des joueurs" />
+				<text name="Confirm" value="Confirmer" tooltip="Valider la sélection" />
 				<text name="Next" value="Suivant" tooltip="Aller aux paramètres de la rencontre" />
 				<text name="Previous" value="Précédent" tooltip="Revenir au menu principal" />
 				<text name="Quit" value="Quitter" tooltip="Aller au menu principal" />
 			</group>
-			
-			<group name="Players" >
-				<text name="Title" value="Sélection des joueurs" tooltip="Sélection des joueurs participant à la partie rapide" />
-				<text name="Controls" value="Commandes" tooltip="Commandes sélectionnées" />
-				<text name="Color" value="Color" tooltip="Couleur sélectionnée" />
-				<group name="Hero" >
-					<text name="Header" value="Hero" tooltip="Personnage sélectionné" />
-					<group name="Button">
-						<text name="Cancel" value="Annuler" tooltip="Annuler et revenir à l'écran de sélection des joueurs" />
-						<text name="Confirm" value="Confirmer" tooltip="Valider le choix du personnage sélectionné" />
-					</group>
-				</group>
-				<group name="Profile" >
-					<text name="Add" value="Ajoute" tooltip="Sélectionner un autre profil" />
-					<text name="Delete" value="Désélectionne" tooltip="Désélectionne le profil" />
-					<text name="Header" value="Profil" tooltip="Profil sélectionné" />
-					<group name="Button">
-						<text name="Cancel" value="Annuler" tooltip="Annuler et revenir à l'écran de sélection des joueurs" />
-						<text name="Confirm" value="Confirmer" tooltip="Valider le choix du profil sélectionné" />
-					</group>
-				</group>
-				<group name="Type" >
-					<text name="Computer" value="Ordinateur" tooltip="Intelligence artificielle" />
-					<text name="Header" value="Type" tooltip="Type de profil (joueur humain ou IA)" />
-					<text name="Human" value="Humain" tooltip="Joueur humain" />
-				</group>				
-			</group>
-			
 		</group>	
 
 <!-- TOURNAMENT MENU -->	
@@ -385,28 +343,14 @@
 				<text name="Results" value="Résultats" tooltip="Voir les résultats actuels du tournoi courant" />
 				<text name="Statistics" value="Statistiques" tooltip="Voir les statistiques détaillées du tournoi courant" />
 			</group>
-
 			<group name="Description">
 				<text name="Title" value="Description du tournoi"  tooltip="Description du tournoi" />
-
-				<group name="Misc">
-					<text name="Title" value="Divers"  tooltip="Informations diverses sur le tournoi" />
-				</group>
-				
-				<group name="Notes">
-					<text name="Title" value="Notes"  tooltip="Notes du concepteur de ce tournoi" />
-				</group>				
 			</group>
-
 			<group name="Results">
 				<text name="Title" value="Résultats du tournoi"  tooltip="Résultats du tournoi" />
 			</group>
-
 			<group name="Statistics">
 				<text name="Title" value="Statistiques du tournoi"  tooltip="Statistiques du tournoi" />
-				<group name="Header">
-					<text name="Name" value="Nom"  tooltip="Nom du joueur" />
-				</group>
 			</group>
 		</group>
 
@@ -422,30 +366,15 @@
 				<text name="Results" value="Résultats" tooltip="Voir les résultats actuels de la rencontre courante" />
 				<text name="Statistics" value="Statistiques" tooltip="Voir les statistiques détaillées de la rencontre courante" />
 			</group>
-		
 			<group name="Description">
 				<text name="Title" value="Description de la rencontre"  tooltip="Description de la rencontre" />
-				
-				<group name="Misc">
-					<text name="Title" value="Divers"  tooltip="Informations diverses à propos de cette rencontre" />
-				</group>
-				
-				<group name="Notes">
-					<text name="Title" value="Notes"  tooltip="Notes du concepteur de cette rencontre" />
-				</group>
 			</group>
-				
 			<group name="Results">
 				<text name="Title" value="Résultats de la rencontre"  tooltip="Résultats de la rencontre" />
 			</group>
-				
 			<group name="Statistics">
 				<text name="Title" value="Statistiques de la rencontre"  tooltip="Statistiques de la rencontre" />
-				<group name="Header">
-					<text name="Name" value="Nom"  tooltip="Nom du joueur" />
-				</group>
 			</group>
-		
 		</group>
 		
 <!-- ROUND PANEL -->
@@ -459,7 +388,6 @@
 				<text name="Results" value="Résultats" tooltip="Voir les résultats de la manche courante" />
 				<text name="Statistics" value="Statistiques" tooltip="Voir les statistiques détaillées de la manche courante" />
 			</group>
-
 			<group name="Progressbar">
 				<text name="Bombset" value="Bombes"  />
 				<text name="Itemset" value="Items"  />
@@ -467,28 +395,22 @@
 				<text name="Player" value="Personnage"  />
 				<text name="Complete" value="Fini"  />
 			</group>
-			
 			<group name="Description">
 				<text name="Title" value="Description de la manche"  tooltip="Description de la manche" />
 				<text name="Preview" value="Aperçu"  tooltip="Aperçu du niveau" />
 			</group>
-								
 			<group name="Results">
 				<text name="Title" value="Résultats de la manche"  tooltip="Résultats de la manche" />
 			</group>
-				
 			<group name="Statistics">
 				<text name="Title" value="Statistiques de la manche"  tooltip="Statistiques de la manche" />
-				<group name="Header">
-					<text name="Name" value="Nom"  tooltip="Nom du joueur" />
-				</group>
 			</group>
-			
 		</group>
-		
 	</group>
 
+<!-- COMMON -->
 	<group name="Common">
+<!-- COLOR -->
 		<group name="Color">
 			<text name="Black" value="Noir" tooltip="Noir"/>
 			<text name="Blue" value="Bleu" tooltip="Bleu"/>
@@ -508,6 +430,7 @@
 			<text name="Yellow" value="Jaune" tooltip="Jaune"/>
 		</group>
 
+<!-- ITEMS -->
 		<group name="Items">
 			<group name="Available">
 				<text name="Title" value="Items disponibles"  tooltip="Ensemble de tous les items disponibles en cours de manche" />
@@ -517,6 +440,7 @@
 			</group>
 		</group>
 								
+<!-- LEVEL -->
 		<group name="Level">
 			<text name="Title" value="Divers"  tooltip="Informations diverses sur le niveau" />
 			<text name="Author" value="Auteur"  tooltip="Auteur/ripper du niveau" />
@@ -528,6 +452,7 @@
 			<text name="Name" value="Nom"  tooltip="Nom du niveau" />
 		</group>
 		
+<!-- LIMIT -->
 		<group name="Limit">
 			<group name="Match">
 				<text name="Title" value="Limites"  tooltip="Informations sur les critères de fin de rencontre" />
@@ -575,6 +500,7 @@
 			</group>
 		</group>
 
+<!-- PLAYERS -->
 		<group name="Players">
 			<group name="List">
 				<group name="Header">
@@ -591,8 +517,25 @@
 					<text name="NoControls" value="-"  tooltip="Le joueur n'utilise pas de commandes" />
 				</group>
 			</group>
+
+			<group name="Selection" >
+				<group name="Header" >
+					<text name="Color" value="Couleur" tooltip="Couleur sélectionnée" />
+					<text name="Controls" value="Commandes" tooltip="Commandes sélectionnées" />
+					<text name="Hero" value="Personnage" tooltip="Personnage sélectionné" />
+					<text name="Profile" value="Profil" tooltip="Profil sélectionné" />
+					<text name="Type" value="Type" tooltip="Type de profil (joueur humain ou IA)" />
+				</group>
+				<group name="Data" >
+					<text name="Add" value="Ajoute" tooltip="Sélectionner un autre profil" />
+					<text name="Computer" value="Ordinateur" tooltip="Intelligence artificielle" />
+					<text name="Delete" value="Désélectionne" tooltip="Désélectionne le profil" />
+					<text name="Human" value="Humain" tooltip="Joueur humain" />
+				</group>
+			</group>
 		</group>
 		
+<!-- POINTS -->
 		<group name="Points">
 			<group name="Match">
 				<text name="Title" value="Points"  tooltip="Informations sur le calcul des points de cette rencontre" />
@@ -675,6 +618,7 @@
 			</group>
 		</group>
 		
+<!-- RESULTS -->
 		<group name="Results" >
 			<group name="Match">
 				<group name="Header">
@@ -744,6 +688,7 @@
 			</group>
 		</group>
 		
+<!-- ROUND -->
 		<group name="Round">
 			<text name="AllowedPlayers" value="Joueurs" tooltip="Nombre de joueurs pour cette manche" />
 			<text name="Author" value="Auteur"  tooltip="Auteur de cette manche" />

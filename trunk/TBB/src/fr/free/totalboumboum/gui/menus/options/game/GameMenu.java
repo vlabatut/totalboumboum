@@ -94,9 +94,11 @@ buttonTournament.setEnabled(false);
 	{	if(e.getActionCommand().equals(GuiKeys.MENU_OPTIONS_GAME_BUTTON_QUICKSTART))
 		{	try
 			{	ProfilesSelection profilesSelection = Configuration.getProfilesConfiguration().getQuickStartSelected();
-				ArrayList<Profile> profiles = ProfileLoader.loadProfiles(profilesSelection);
+				QuickstartSplitPanel quickstartPanel = new QuickstartSplitPanel(container.getContainer(),container);
 				String roundFile = Configuration.getGameConfiguration().getQuickstartName();
-				QuickstartSplitPanel quickstartPanel = new QuickstartSplitPanel(container.getContainer(),container,profiles,roundFile);
+				quickstartPanel.setRound(roundFile);
+				ArrayList<Profile> profiles = ProfileLoader.loadProfiles(profilesSelection);
+				quickstartPanel.setSelectedProfiles(profiles);
 				replaceWith(quickstartPanel);
 			}
 			catch (IllegalArgumentException e1)

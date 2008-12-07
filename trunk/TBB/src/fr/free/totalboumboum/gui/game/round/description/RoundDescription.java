@@ -44,7 +44,7 @@ import fr.free.totalboumboum.gui.common.content.subpanel.image.ImageSubPanel;
 import fr.free.totalboumboum.gui.common.content.subpanel.items.AvailableItemsSubPanel;
 import fr.free.totalboumboum.gui.common.content.subpanel.items.InitialItemsSubPanel;
 import fr.free.totalboumboum.gui.common.content.subpanel.level.LevelSubPanel;
-import fr.free.totalboumboum.gui.common.content.subpanel.limits.LimitsListener;
+import fr.free.totalboumboum.gui.common.content.subpanel.limits.LimitsSubPanelListener;
 import fr.free.totalboumboum.gui.common.content.subpanel.limits.LimitsSubPanel;
 import fr.free.totalboumboum.gui.common.content.subpanel.points.PointsSubPanel;
 import fr.free.totalboumboum.gui.common.structure.panel.SplitMenuPanel;
@@ -54,7 +54,7 @@ import fr.free.totalboumboum.gui.data.configuration.GuiConfiguration;
 import fr.free.totalboumboum.gui.tools.GuiKeys;
 import fr.free.totalboumboum.gui.tools.GuiTools;
 
-public class RoundDescription extends EntitledDataPanel implements LimitsListener
+public class RoundDescription extends EntitledDataPanel implements LimitsSubPanelListener
 {	
 	private static final long serialVersionUID = 1L;
 	private static final float SPLIT_RATIO = 0.4f;
