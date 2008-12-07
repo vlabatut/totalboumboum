@@ -161,7 +161,7 @@ buttonPlayers.setEnabled(false);
 		{	//NOTE c icite qu'il faut tester que les profils sont OK
 			try
 			{	AbstractTournament tournament = Configuration.getGameConfiguration().getTournament();
-				ProfilesSelection profilesSelection = Configuration.getProfilesConfiguration().getTournamentSelected();
+				ProfilesSelection profilesSelection = Configuration.getGameConfiguration().getTournamentSelected();
 				ArrayList<Profile> selectedProfiles = ProfileLoader.loadProfiles(profilesSelection);
 				tournament.init(selectedProfiles);
 				if(tournament instanceof SingleTournament)

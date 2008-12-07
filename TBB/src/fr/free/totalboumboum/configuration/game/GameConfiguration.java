@@ -29,6 +29,7 @@ import javax.xml.parsers.ParserConfigurationException;
 
 import org.xml.sax.SAXException;
 
+import fr.free.totalboumboum.configuration.profile.ProfilesSelection;
 import fr.free.totalboumboum.game.limit.ComparatorCode;
 import fr.free.totalboumboum.game.limit.LimitConfrontation;
 import fr.free.totalboumboum.game.limit.Limits;
@@ -46,10 +47,36 @@ import fr.free.totalboumboum.tools.FileTools;
 
 public class GameConfiguration
 {
+	public GameConfiguration copy()
+	{	GameConfiguration result = new GameConfiguration();
+		// tournament
+		ProfilesSelection tournamentCopy = tournamentSelected.copy();
+		result.setTournamentSelected(tournamentCopy);
+		// quickmatch
+		ProfilesSelection quickmatchCopy = quickMatchSelected.copy();
+		result.setQuickMatchSelected(quickmatchCopy);
+		result.setQuickMatchName(quickMatchName);
+		result.setUseLastPlayers(useLastPlayers);
+		// quickstart
+		ProfilesSelection quickstartCopy = quickStartSelected.copy();
+		result.setQuickStartSelected(quickstartCopy);
+		result.setQuickStartName(quickStartName);
+		//
+		return result;
+	}
+	
 	/////////////////////////////////////////////////////////////////
-	// CURRENT TOURNAMENT	/////////////////////////////////////////
+	// TOURNAMENT	/////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	private AbstractTournament tournament = null;
+	private ProfilesSelection tournamentSelected = new ProfilesSelection();
+
+	public ProfilesSelection getTournamentSelected()
+	{	return tournamentSelected;	
+	}	
+	public void setTournamentSelected(ProfilesSelection tournamentSelected)
+	{	this.tournamentSelected = tournamentSelected;	
+	}	
 
 	public void loadLastTournament() throws ParserConfigurationException, SAXException, IOException, ClassNotFoundException
 	{	String folderPath = FileTools.getConfigurationPath()+File.separator+FileTools.FILE_TOURNAMENT;
@@ -63,29 +90,36 @@ public class GameConfiguration
 	/////////////////////////////////////////////////////////////////
 	// QUICKMATCH		/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	private String quickmatchName = null;
+	private String quickMatchName = null;
 	private boolean useLastPlayers = false;
+	private ProfilesSelection quickMatchSelected = new ProfilesSelection();
 	
 	public boolean getUseLastPlayers()
 	{	return useLastPlayers;
 	}
-
 	public void setUseLastPlayers(boolean useLastPlayers)
 	{	this.useLastPlayers = useLastPlayers;
 	}
 
-	public String getQuickmatchName()
-	{	return quickmatchName;	
+	public String getQuickMatchName()
+	{	return quickMatchName;	
 	}
-	public void setQuickmatchName(String quickmatchName)
-	{	this.quickmatchName = quickmatchName;
+	public void setQuickMatchName(String quickMatchName)
+	{	this.quickMatchName = quickMatchName;
 	}
 	
+	public ProfilesSelection getQuickMatchSelected()
+	{	return quickMatchSelected;	
+	}	
+	public void setQuickMatchSelected(ProfilesSelection quickMatchSelected)
+	{	this.quickMatchSelected = quickMatchSelected;	
+	}	
+
 	public void loadQuickmatch() throws ParserConfigurationException, SAXException, IOException, ClassNotFoundException
 	{	// single tournament
 		SingleTournament quickmatch = new SingleTournament();
 		// load match
-		Match match = MatchLoader.loadMatchFromName(quickmatchName,quickmatch);
+		Match match = MatchLoader.loadMatchFromName(quickMatchName,quickmatch);
 		quickmatch.setMatch(match);
 		// 
 		tournament = quickmatch;
@@ -94,15 +128,23 @@ public class GameConfiguration
 	/////////////////////////////////////////////////////////////////
 	// QUICKSTART		/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	private String quickstartName = null;
+	private ProfilesSelection quickStartSelected = new ProfilesSelection();
+	private String quickStartName = null;
 	
-	public String getQuickstartName()
-	{	return quickstartName;	
+	public String getQuickStartName()
+	{	return quickStartName;	
 	}	
-	public void setQuickstartName(String quickstartName)
-	{	this.quickstartName = quickstartName;
+	public void setQuickStartName(String quickStartName)
+	{	this.quickStartName = quickStartName;
 	}
 	
+	public ProfilesSelection getQuickStartSelected()
+	{	return quickStartSelected;	
+	}	
+	public void setQuickStartSelected(ProfilesSelection quickStartSelected)
+	{	this.quickStartSelected = quickStartSelected;	
+	}	
+
 	public void loadQuickstart() throws ParserConfigurationException, SAXException, IOException, ClassNotFoundException
 	{	// single tournament
 		SingleTournament quickstart = new SingleTournament();
@@ -122,7 +164,7 @@ public class GameConfiguration
 		}
 		quickstart.setMatch(match);
 		// round
-		Round round = RoundLoader.loadRoundFromName(quickstartName,match);
+		Round round = RoundLoader.loadRoundFromName(quickStartName,match);
 		match.addRound(round);
 		// 
 		tournament = quickstart;

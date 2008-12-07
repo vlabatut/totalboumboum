@@ -117,7 +117,7 @@ public class QuickFrame extends JFrame implements WindowListener,LoopRenderPanel
 	    Configuration.getGameConfiguration().loadQuickstart();
 		AbstractTournament tournament = Configuration.getGameConfiguration().getTournament();
 		ArrayList<Profile> selectedProfiles = new ArrayList<Profile>();
-		ProfilesSelection profilesSelection = Configuration.getProfilesConfiguration().getQuickStartSelected();
+		ProfilesSelection profilesSelection = Configuration.getGameConfiguration().getQuickStartSelected();
 		selectedProfiles = ProfileLoader.loadProfiles(profilesSelection);
 		tournament.init(selectedProfiles);
 	    tournament.progress();
