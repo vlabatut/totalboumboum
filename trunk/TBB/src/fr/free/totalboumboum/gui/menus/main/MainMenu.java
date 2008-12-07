@@ -159,7 +159,7 @@ buttonAbout.setEnabled(false);
 		{	if(quickmatchGamePanel==null)
 			{	ArrayList<Profile> selectedProfiles = new ArrayList<Profile>();
 				if(Configuration.getGameConfiguration().getUseLastPlayers())
-				{	ProfilesSelection profilesSelection = Configuration.getProfilesConfiguration().getQuickMatchSelected();
+				{	ProfilesSelection profilesSelection = Configuration.getGameConfiguration().getQuickMatchSelected();
 					try
 					{	selectedProfiles = ProfileLoader.loadProfiles(profilesSelection);
 					}

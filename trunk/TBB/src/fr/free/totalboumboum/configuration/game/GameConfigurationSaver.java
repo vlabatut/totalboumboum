@@ -29,6 +29,8 @@ import javax.xml.parsers.ParserConfigurationException;
 import org.jdom.Element;
 import org.xml.sax.SAXException;
 
+import fr.free.totalboumboum.configuration.profile.ProfilesSelection;
+import fr.free.totalboumboum.configuration.profile.ProfilesSelectionSaver;
 import fr.free.totalboumboum.tools.FileTools;
 import fr.free.totalboumboum.tools.XmlTools;
 
@@ -47,32 +49,73 @@ public class GameConfigurationSaver
 
 	private static Element saveGameElement(GameConfiguration gameConfiguration)
 	{	Element result = new Element(XmlTools.ELT_GAME); 
+		
+		// tournament
+		Element tournamentElement = saveTournamentElement(gameConfiguration);
+		result.addContent(tournamentElement);
+		
 		// quick match
-		Element matchElement = saveQuickmatchElement(gameConfiguration);
+		Element matchElement = saveQuickMatchElement(gameConfiguration);
 		result.addContent(matchElement);
+		
 		// quick start round
-		Element roundElement = saveQuickstartElement(gameConfiguration);
+		Element roundElement = saveQuickStartElement(gameConfiguration);
 		result.addContent(roundElement);
-		//
+
 		return result;
 	}
 	
-	private static Element saveQuickmatchElement(GameConfiguration gameConfiguration)
+	private static Element saveTournamentElement(GameConfiguration gameConfiguration)
+	{	Element result = new Element(XmlTools.ELT_TOURNAMENT);
+		
+		// players
+		Element playersElement = new Element(XmlTools.ELT_PLAYERS);
+		ProfilesSelection tournamentSelected = gameConfiguration.getTournamentSelected();
+		ProfilesSelectionSaver.saveProfilesSelection(playersElement,tournamentSelected);
+		result.addContent(playersElement);
+		
+		return result;
+	}
+
+	private static Element saveQuickMatchElement(GameConfiguration gameConfiguration)
 	{	Element result = new Element(XmlTools.ELT_QUICKMATCH);
+		
 		// name
-		String quickmatch = gameConfiguration.getQuickmatchName();
-		result.setAttribute(XmlTools.ATT_VALUE,quickmatch);
+		Element matchElement = new Element(XmlTools.ELT_MATCH);
+		String quickMatch = gameConfiguration.getQuickMatchName();
+		matchElement.setAttribute(XmlTools.ATT_NAME,quickMatch);
+		result.addContent(matchElement);
+		
 		// use last players
+		Element optionsElement = new Element(XmlTools.ELT_OPTIONS);
 		String useLastPlayers = Boolean.toString(gameConfiguration.getUseLastPlayers());
-		result.setAttribute(XmlTools.ATT_USE_LAST_PLAYERS,useLastPlayers);
-		//
+		optionsElement.setAttribute(XmlTools.ATT_USE_LAST_PLAYERS,useLastPlayers);
+		result.addContent(optionsElement);
+		
+		// players
+		Element playersElement = new Element(XmlTools.ELT_PLAYERS);
+		ProfilesSelection quickMatchSelected = gameConfiguration.getQuickMatchSelected();
+		ProfilesSelectionSaver.saveProfilesSelection(playersElement,quickMatchSelected);
+		result.addContent(playersElement);
+
 		return result;
 	}
 	
-	private static Element saveQuickstartElement(GameConfiguration gameConfiguration)
+	private static Element saveQuickStartElement(GameConfiguration gameConfiguration)
 	{	Element result = new Element(XmlTools.ELT_QUICKSTART);
-		String quickround = gameConfiguration.getQuickstartName();
-		result.setAttribute(XmlTools.ATT_VALUE,quickround);
+	
+		// name
+		Element roundElement = new Element(XmlTools.ELT_ROUND);
+		String quickStart = gameConfiguration.getQuickStartName();
+		roundElement.setAttribute(XmlTools.ATT_NAME,quickStart);
+		result.addContent(roundElement);
+		
+		// players
+		Element playersElement = new Element(XmlTools.ELT_PLAYERS);
+		ProfilesSelection quickStartSelected = gameConfiguration.getQuickStartSelected();
+		ProfilesSelectionSaver.saveProfilesSelection(playersElement,quickStartSelected);
+		result.addContent(playersElement);
+		
 		return result;
 	}
 }

@@ -40,13 +40,6 @@ public class ProfilesConfiguration
 			String key = entry.getKey();
 			result.addProfile(key,value);			
 		}
-		// selected profiles
-		ProfilesSelection quickstartCopy = quickStartSelected.copy();
-		result.setQuickStartSelected(quickstartCopy);
-		ProfilesSelection quickmatchCopy = quickMatchSelected.copy();
-		result.setQuickMatchSelected(quickmatchCopy);
-		ProfilesSelection tournamentCopy = tournamentSelected.copy();
-		result.setTournamentSelected(tournamentCopy);
 		//
 		return result;
 	}
@@ -77,34 +70,6 @@ public class ProfilesConfiguration
 	{	this.lastProfileIndex = lastProfileIndex;
 	}
 	
-	/////////////////////////////////////////////////////////////////
-	// SELECTED				/////////////////////////////////////////
-	/////////////////////////////////////////////////////////////////
-	private ProfilesSelection quickStartSelected = new ProfilesSelection();
-	private ProfilesSelection quickMatchSelected = new ProfilesSelection();
-	private ProfilesSelection tournamentSelected = new ProfilesSelection();
-	
-	public ProfilesSelection getQuickStartSelected()
-	{	return quickStartSelected;	
-	}	
-	public void setQuickStartSelected(ProfilesSelection quickStartSelected)
-	{	this.quickStartSelected = quickStartSelected;	
-	}	
-
-	public ProfilesSelection getQuickMatchSelected()
-	{	return quickMatchSelected;	
-	}	
-	public void setQuickMatchSelected(ProfilesSelection quickMatchSelected)
-	{	this.quickMatchSelected = quickMatchSelected;	
-	}	
-
-	public ProfilesSelection getTournamentSelected()
-	{	return tournamentSelected;	
-	}	
-	public void setTournamentSelected(ProfilesSelection tournamentSelected)
-	{	this.tournamentSelected = tournamentSelected;	
-	}	
-
 	/////////////////////////////////////////////////////////////////
 	// PROCESS			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////

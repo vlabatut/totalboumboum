@@ -93,9 +93,9 @@ buttonTournament.setEnabled(false);
 	public void actionPerformed(ActionEvent e)
 	{	if(e.getActionCommand().equals(GuiKeys.MENU_OPTIONS_GAME_BUTTON_QUICKSTART))
 		{	try
-			{	ProfilesSelection profilesSelection = Configuration.getProfilesConfiguration().getQuickStartSelected();
+			{	ProfilesSelection profilesSelection = Configuration.getGameConfiguration().getQuickStartSelected();
 				QuickstartSplitPanel quickstartPanel = new QuickstartSplitPanel(container.getContainer(),container);
-				String roundFile = Configuration.getGameConfiguration().getQuickstartName();
+				String roundFile = Configuration.getGameConfiguration().getQuickStartName();
 				quickstartPanel.setRound(roundFile);
 				ArrayList<Profile> profiles = ProfileLoader.loadProfiles(profilesSelection);
 				quickstartPanel.setSelectedProfiles(profiles);

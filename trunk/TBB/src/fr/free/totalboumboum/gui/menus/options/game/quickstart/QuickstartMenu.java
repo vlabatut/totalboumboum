@@ -40,7 +40,6 @@ import fr.free.totalboumboum.configuration.game.GameConfiguration;
 import fr.free.totalboumboum.configuration.game.GameConfigurationSaver;
 import fr.free.totalboumboum.configuration.profile.Profile;
 import fr.free.totalboumboum.configuration.profile.ProfilesConfiguration;
-import fr.free.totalboumboum.configuration.profile.ProfilesConfigurationSaver;
 import fr.free.totalboumboum.configuration.profile.ProfilesSelection;
 import fr.free.totalboumboum.gui.common.structure.panel.SplitMenuPanel;
 import fr.free.totalboumboum.gui.common.structure.panel.menu.InnerMenuPanel;
@@ -128,7 +127,7 @@ public class QuickstartMenu extends InnerMenuPanel
 			{	// round name
 				if(!sRound.equalsIgnoreCase(roundFile))
 				{	GameConfiguration gameConfiguration = Configuration.getGameConfiguration();
-					gameConfiguration.setQuickstartName(sRound);
+					gameConfiguration.setQuickStartName(sRound);
 					GameConfigurationSaver.saveGameConfiguration(gameConfiguration);
 				}
 				// selected profiles
@@ -145,9 +144,9 @@ public class QuickstartMenu extends InnerMenuPanel
 						save = true;
 					if(save)
 					{	ProfilesSelection profilesSelection = ProfilesConfiguration.getSelection(sProfiles);
-						ProfilesConfiguration profilesConfiguration = Configuration.getProfilesConfiguration();
-						profilesConfiguration.setQuickStartSelected(profilesSelection);
-						ProfilesConfigurationSaver.saveProfilesConfiguration(profilesConfiguration);
+						GameConfiguration gameConfiguration = Configuration.getGameConfiguration();
+						gameConfiguration.setQuickStartSelected(profilesSelection);
+						GameConfigurationSaver.saveGameConfiguration(gameConfiguration);
 					}
 					
 				}

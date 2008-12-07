@@ -54,9 +54,6 @@ public class ProfilesConfigurationLoader
 		// list
 		Element listElement = root.getChild(XmlTools.ELT_LIST);
 		loadListElement(listElement,result);
-		// selected
-		Element selectedElement = root.getChild(XmlTools.ELT_SELECTED);
-		loadSelectedElement(selectedElement,result);
 	}
 
 	@SuppressWarnings("unchecked")
@@ -79,20 +76,5 @@ public class ProfilesConfigurationLoader
 	{	String lastProfileStr = root.getAttribute(XmlTools.ATT_LAST).getValue().trim();
 		int lastProfile = Integer.parseInt(lastProfileStr);
 		result.setLastProfileIndex(lastProfile);
-	}
-
-	private static void loadSelectedElement(Element root, ProfilesConfiguration result) throws IllegalArgumentException, SecurityException, ParserConfigurationException, SAXException, IOException, IllegalAccessException, NoSuchFieldException
-	{	// quickstart
-		Element quickstartElement = root.getChild(XmlTools.ELT_QUICKSTART);
-		ProfilesSelection quickstartSelected = ProfilesSelectionLoader.loadProfilesSelection(quickstartElement);
-		result.setQuickStartSelected(quickstartSelected);
-		// quickmatch
-		Element quickmatchElement = root.getChild(XmlTools.ELT_QUICKMATCH);
-		ProfilesSelection quickmatchSelected = ProfilesSelectionLoader.loadProfilesSelection(quickmatchElement);
-		result.setQuickMatchSelected(quickmatchSelected);
-		// tournament
-		Element tournamentElement = root.getChild(XmlTools.ELT_TOURNAMENT);
-		ProfilesSelection tournamentSelected = ProfilesSelectionLoader.loadProfilesSelection(tournamentElement);
-		result.setTournamentSelected(tournamentSelected);
 	}
 }
