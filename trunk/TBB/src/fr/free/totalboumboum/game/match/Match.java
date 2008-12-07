@@ -67,8 +67,9 @@ public class Match implements StatisticHolder
     		randomizeRounds();
 		// NOTE vérifier si le nombre de joueurs sélectionnés correspond
 		// profiles
-    	int i = 1;
     	this.profiles.addAll(profiles);
+/*    	
+    	int i = 1;
 		Iterator<Profile> it = this.profiles.iterator();
 		while(it.hasNext())
 		{	Profile p = it.next();
@@ -79,6 +80,7 @@ public class Match implements StatisticHolder
 				i++;
 			}
 		}
+*/		
 		// rounds
 		iterator = rounds.iterator();
 		// stats
