@@ -301,13 +301,15 @@
 
 <!-- QUICKMATCH MENU -->	
 		<group name="Quickmatch">
-			<group name="Button">
-				<text name="Cancel" value="Cancel" tooltip="Cancel and come back to the players selection screen" />
-				<text name="Confirm" value="Confirm" tooltip="Confirm the selection" />
-				<text name="Next" value="Next" tooltip="Go to match parameters" />
-				<text name="Previous" value="Previous" tooltip="Back to main menu" />
-				<text name="Quit" value="Quit" tooltip="Go to main menu" />
-			</group>
+			<group name="Players">
+				<group name="Button">
+					<text name="Cancel" value="Cancel" tooltip="Cancel and come back to the players selection screen" />
+					<text name="Confirm" value="Confirm" tooltip="Confirm the selection" />
+					<text name="Next" value="Next" tooltip="Go to match parameters" />
+					<text name="Previous" value="Previous" tooltip="Back to main menu" />
+					<text name="Quit" value="Quit" tooltip="Go to main menu" />
+				</group>
+			</group>	
 		</group>	
 
 <!-- TOURNAMENT MENU -->	

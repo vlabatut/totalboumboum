@@ -48,6 +48,7 @@ public class PlayersData extends EntitledDataPanel implements PlayersSelectionSu
 		
 		// data
 		playersPanel = new PlayersSelectionSubPanel(dataWidth,dataHeight);
+		playersPanel.addListener(this);
 		setDataPart(playersPanel);
 	}
 

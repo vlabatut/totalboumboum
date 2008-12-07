@@ -57,7 +57,7 @@ public class MainMenu extends SimpleMenuPanel
 	private BufferedImage image;
 
 	private MenuPanel tournamentMainPanel;
-	private MenuPanel quickmatchGamePanel;
+	private PlayersSplitPanel quickmatchGamePanel;
 	
 	@SuppressWarnings("unused")
 	private JButton buttonOptions;
@@ -188,7 +188,8 @@ buttonAbout.setEnabled(false);
 					{	e1.printStackTrace();
 					}
 				}
-				quickmatchGamePanel = new PlayersSplitPanel(getContainer(),this,selectedProfiles);
+				quickmatchGamePanel = new PlayersSplitPanel(getContainer(),this);
+				quickmatchGamePanel.setSelectedProfiles(selectedProfiles);
 			}			
 			replaceWith(quickmatchGamePanel);
 	    }

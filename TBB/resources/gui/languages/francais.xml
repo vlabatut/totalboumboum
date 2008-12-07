@@ -301,13 +301,15 @@
 
 <!-- QUICKMATCH MENU -->	
 		<group name="Quickmatch">
-			<text name="Title" value="Sélection des joueurs" tooltip="Sélection des joueurs participant à la partie rapide" />
-			<group name="Button">
-				<text name="Cancel" value="Annuler" tooltip="Annuler et revenir à l'écran de sélection des joueurs" />
-				<text name="Confirm" value="Confirmer" tooltip="Valider la sélection" />
-				<text name="Next" value="Suivant" tooltip="Aller aux paramètres de la rencontre" />
-				<text name="Previous" value="Précédent" tooltip="Revenir au menu principal" />
-				<text name="Quit" value="Quitter" tooltip="Aller au menu principal" />
+			<group name="Players">
+				<text name="Title" value="Sélection des joueurs" tooltip="Sélection des joueurs participant à la partie rapide" />
+				<group name="Button">
+					<text name="Cancel" value="Annuler" tooltip="Annuler et revenir à l'écran de sélection des joueurs" />
+					<text name="Confirm" value="Confirmer" tooltip="Valider la sélection" />
+					<text name="Next" value="Suivant" tooltip="Aller aux paramètres de la rencontre" />
+					<text name="Previous" value="Précédent" tooltip="Revenir au menu principal" />
+					<text name="Quit" value="Quitter" tooltip="Aller au menu principal" />
+				</group>
 			</group>
 		</group>	
 

@@ -38,7 +38,7 @@ public class PlayersSplitPanel extends SplitMenuPanel
 
 	private BufferedImage image;
 
-	public PlayersSplitPanel(MenuContainer container, MenuPanel parent, ArrayList<Profile> selectedProfiles)
+	public PlayersSplitPanel(MenuContainer container, MenuPanel parent)
 	{	super(container,parent,BorderLayout.PAGE_END,GuiTools.HORIZONTAL_SPLIT_RATIO);
 	
 		// background

@@ -90,15 +90,12 @@ public class PlayersMenu extends InnerMenuPanel
 	/////////////////////////////////////////////////////////////////
 	// PLAYERS						/////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	private ArrayList<Profile> players;
-
 	public void setSelectedProfiles(ArrayList<Profile> selectedProfiles)
-	{	players = selectedProfiles;
-		profilesData.setSelectedProfiles(players);
+	{	profilesData.setSelectedProfiles(selectedProfiles);
 	}
 	
 	public ArrayList<Profile> getSelectedProfiles()
-	{	return players;	
+	{	return profilesData.getSelectedProfiles();	
 	}
 	
 	/////////////////////////////////////////////////////////////////

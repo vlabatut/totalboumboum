@@ -32,15 +32,18 @@ import javax.swing.JLabel;
 
 import fr.free.totalboumboum.configuration.profile.Profile;
 import fr.free.totalboumboum.gui.common.content.subpanel.players.PlayersSelectionSubPanel;
+import fr.free.totalboumboum.gui.common.content.subpanel.players.PlayersSelectionSubPanelListener;
 import fr.free.totalboumboum.gui.common.structure.panel.SplitMenuPanel;
 import fr.free.totalboumboum.gui.common.structure.panel.data.EntitledDataPanel;
 import fr.free.totalboumboum.gui.common.structure.subpanel.SubPanel;
 import fr.free.totalboumboum.gui.common.structure.subpanel.UntitledSubPanelTable;
 import fr.free.totalboumboum.gui.menus.options.game.quickstart.round.SelectRoundSplitPanel;
+import fr.free.totalboumboum.gui.menus.quickmatch.players.hero.SelectHeroSplitPanel;
+import fr.free.totalboumboum.gui.menus.quickmatch.players.profile.SelectProfileSplitPanel;
 import fr.free.totalboumboum.gui.tools.GuiKeys;
 import fr.free.totalboumboum.gui.tools.GuiTools;
 
-public class QuickstartData extends EntitledDataPanel implements MouseListener
+public class QuickstartData extends EntitledDataPanel implements PlayersSelectionSubPanelListener, MouseListener
 {	
 	private static final long serialVersionUID = 1L;
 	private static final float SPLIT_RATIO = 0.06f;
@@ -78,6 +81,7 @@ public class QuickstartData extends EntitledDataPanel implements MouseListener
 			
 			// players panel
 			{	playersPanel = new PlayersSelectionSubPanel(dataWidth,playersHeight);
+				playersPanel.addListener(this);
 				mainPanel.add(playersPanel);
 			}
 		}
@@ -148,6 +152,7 @@ public class QuickstartData extends EntitledDataPanel implements MouseListener
 	
 	public void setRound(String roundFolder)
 	{	roundFile = new StringBuffer(roundFolder);
+		refreshRound();
 	}
 	
 	public String getSelectedRound()
@@ -180,7 +185,7 @@ public class QuickstartData extends EntitledDataPanel implements MouseListener
 				result.setColSubPreferredWidth(col,fileWidth);
 				result.setColSubMaxWidth(col,fileWidth);
 				// color
-				Color bg = GuiTools.COLOR_TABLE_NEUTRAL_BACKGROUND;
+				Color bg = GuiTools.COLOR_TABLE_REGULAR_BACKGROUND;
 				result.setLabelBackground(line,col,bg);
 				// next
 				col++;
@@ -205,5 +210,27 @@ public class QuickstartData extends EntitledDataPanel implements MouseListener
 		}
 		
 		return result;	
+	}
+
+	/////////////////////////////////////////////////////////////////
+	// PLAYER SELECTION LISTENER	/////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	@Override
+	public void playerSelectionHeroSet(int index)
+	{	Profile profile = playersPanel.getPlayer(index);
+		SelectHeroSplitPanel selectHeroPanel = new SelectHeroSplitPanel(container.getContainer(),container,profile);
+		getContainer().replaceWith(selectHeroPanel);	
+	}
+
+	@Override
+	public void playerSelectionPlayerAdded(int index)
+	{	SelectProfileSplitPanel selectProfilePanel = new SelectProfileSplitPanel(container.getContainer(),container,index,players);
+		getContainer().replaceWith(selectProfilePanel);
+	}
+
+	@Override
+	public void playerSelectionProfileSet(int index)
+	{	SelectProfileSplitPanel selectProfilePanel = new SelectProfileSplitPanel(container.getContainer(),container,index,players);
+		getContainer().replaceWith(selectProfilePanel);
 	}
 }
