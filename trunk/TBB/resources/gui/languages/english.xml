@@ -18,7 +18,7 @@
 		</group>
 
 <!-- RESOURCES MENU -->
-		<group name="resources">
+		<group name="Resources">
 			<group name="Button">
 				<text name="Ai" value="AIs" tooltip="Show the available artificial intelligences" />
 				<text name="Back" value="Retour" tooltip="Come back to the main menu" />
@@ -60,15 +60,6 @@
 				</group>		
 				<group name="Select">
 					<text name="Title" value="List of characters" tooltip="List of all available characters" />
-					<group name="Folder">
-						<text name="PageDown" value="Page down" tooltip="Go to the next characters page" />
-						<text name="PageUp" value="Page up" tooltip="Go back to the previous characters page" />
-						<text name="Parent" value=".." tooltip="Go back to the packages list" />
-					</group>
-					<group name="Package">
-						<text name="PageDown" value="Page down" tooltip="Go to the next packages page" />
-						<text name="PageUp" value="Page up" tooltip="Go back to the previous packages page" />
-					</group>
 					<group name="Preview">
 						<text name="Author" value="Author"  tooltip="Author/ripper of this character" />
 						<text name="Colors" value="Colors"  tooltip="Available colors for this character" />
@@ -413,6 +404,11 @@
 			<group name="File">
 				<text name="PageDown" value="Page down" tooltip="Go to the next page" />
 				<text name="PageUp" value="Page up" tooltip="Go back to the previous page" />
+				<text name="Parent" value=".." tooltip="Go back to the packages list" />
+			</group>
+			<group name="Pack">
+				<text name="PageDown" value="Page down" tooltip="Go to the next packages page" />
+				<text name="PageUp" value="Page up" tooltip="Go back to the previous packages page" />
 			</group>
 		</group>
 	

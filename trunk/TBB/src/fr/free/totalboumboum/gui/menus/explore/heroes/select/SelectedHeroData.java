@@ -376,22 +376,25 @@ public class SelectedHeroData extends EntitledDataPanel implements MouseListener
 	public void packBrowserSelectionChange()
 	{	String pack = packPanel.getSelectedPack();
 		String folder = packPanel.getSelectedName();
-		try
-		{	selectedSprite = SpritePreviewLoader.loadHeroPreview(pack,folder);
+		if(pack==null || folder==null)
+			selectedSprite = null;
+		else
+		{	try
+			{	selectedSprite = SpritePreviewLoader.loadHeroPreview(pack,folder);
+			}
+			catch (ParserConfigurationException e)
+			{	e.printStackTrace();
+			}
+			catch (SAXException e)
+			{	e.printStackTrace();
+			}
+			catch (IOException e)
+			{	e.printStackTrace();
+			}
+			catch (ClassNotFoundException e)
+			{	e.printStackTrace();
+			}
 		}
-		catch (ParserConfigurationException e)
-		{	e.printStackTrace();
-		}
-		catch (SAXException e)
-		{	e.printStackTrace();
-		}
-		catch (IOException e)
-		{	e.printStackTrace();
-		}
-		catch (ClassNotFoundException e)
-		{	e.printStackTrace();
-		}			
 		refreshPreview();
 	}
-
 }
