@@ -132,7 +132,7 @@ public class QuickFrame extends JFrame implements WindowListener,LoopRenderPanel
 	    //round
 	    Round round = match.getCurrentRound();
 	    round.setPanel(this);
-		int limit = round.getProfiles().size()+2;
+		int limit = round.getProfiles().size()+3;
 		loadProgressBar = new JProgressBar(0,limit);
 		loadProgressBar.setStringPainted(true);
 		loadProgressBar.setFont(new Font("Arial",Font.PLAIN,dim.height/2));
