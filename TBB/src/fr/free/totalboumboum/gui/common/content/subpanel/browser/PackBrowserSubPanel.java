@@ -43,12 +43,12 @@ import fr.free.totalboumboum.gui.common.structure.subpanel.UntitledSubPanelTable
 import fr.free.totalboumboum.gui.tools.GuiKeys;
 import fr.free.totalboumboum.gui.tools.GuiTools;
 
-public class FileBrowserSubPanel extends SubPanel implements MouseListener
+public class PackBrowserSubPanel extends SubPanel implements MouseListener, FileBrowserSubPanelListener
 {	private static final long serialVersionUID = 1L;
 
 	private String prefix;
 
-	public FileBrowserSubPanel(int width, int height)
+	public PackBrowserSubPanel(int width, int height)
 	{	super(width,height);
 		setOpaque(false);
 		
@@ -57,7 +57,7 @@ public class FileBrowserSubPanel extends SubPanel implements MouseListener
 		setLayout(layout);
 		
 		// init	
-		this.prefix = GuiKeys.COMMON_BROWSER_FILE;
+		this.prefix = GuiKeys.COMMON_BROWSER_PACK;
 		
 		// pages
 		setFolder(null,null);
@@ -70,15 +70,15 @@ public class FileBrowserSubPanel extends SubPanel implements MouseListener
 	private String targetFile;
 	private int lines;
 	private int linePrevious;
-	private int lineParent;
 	private int lineNext;
 	private int controlTotalCount;
 	private int controlUpCount;
-	private int selectedRow;
 	private int currentPage = 0;
 	private ArrayList<UntitledSubPanelTable> listPanels;
 	private ArrayList<String> names;
-	private int pageCount;	
+	private int pageCount;
+	private FileBrowserSubPanel filePanel;
+	private String selectedName;
 	
 	public String getBaseFolder()
 	{	return baseFolder;	
@@ -94,16 +94,14 @@ public class FileBrowserSubPanel extends SubPanel implements MouseListener
 		this.targetFile = targetFile;
 		listPanels = new ArrayList<UntitledSubPanelTable>();
 		currentPage = 0;
-		selectedRow = -1;
+		filePanel = null;
+		selectedName = null;
 		
 		// size
 		lines = 20;
 		linePrevious = 0;
-		lineParent = 1;
 		lineNext = lines-1;
 		controlUpCount = 1;
-		if(showParent)
-			controlUpCount = 2;
 		controlTotalCount = controlUpCount+1;
 		int cols = 1;
 		
@@ -133,15 +131,6 @@ public class FileBrowserSubPanel extends SubPanel implements MouseListener
 				String key = prefix+GuiKeys.PAGEUP;
 				listPanel.setLabelKey(linePrevious,0,key,true);
 				JLabel label = listPanel.getLabel(linePrevious,0);
-				label.addMouseListener(this);
-			}
-			// parent
-			if(showParent)
-			{	Color bg = GuiTools.COLOR_TABLE_HEADER_BACKGROUND;
-				listPanel.setLabelBackground(lineParent,0,bg);
-				String key = prefix+GuiKeys.PARENT;
-				listPanel.setLabelKey(lineParent,0,key,false);
-				JLabel label = listPanel.getLabel(lineParent,0);
 				label.addMouseListener(this);
 			}
 			// page down
@@ -182,13 +171,20 @@ public class FileBrowserSubPanel extends SubPanel implements MouseListener
 				}
 			});
 			for(File f:fileFolders)
-			{	List<File> files = Arrays.asList(f.listFiles());
-				Iterator<File> it = files.iterator();
+			{	File[] folders = f.listFiles();
+				int i = 0;
 				boolean found = false;
-				while(it.hasNext() && !found)
-				{	File file = it.next();
-					if(file.getName().equalsIgnoreCase(targetFile))
-						found = true;
+				while(i<folders.length && !found)
+				{	if(folders[i].isDirectory())
+					{	List<File> files = Arrays.asList(folders[i].listFiles());
+						Iterator<File> it = files.iterator();
+						while(it.hasNext() && !found)
+						{	File file = it.next();
+							if(file.getName().equalsIgnoreCase(targetFile))
+								found = true;
+						}
+					}
+					i++;
 				}
 				if(found)
 					names.add(f.getName());
@@ -207,30 +203,39 @@ public class FileBrowserSubPanel extends SubPanel implements MouseListener
 	
 	public String getSelectedName()
 	{	String result = null;
-		if(selectedRow!=-1)
-		{	int selectedIndex = (selectedRow-controlUpCount)+currentPage*(lines-controlTotalCount);
-			result = names.get(selectedIndex);		
-		}
+		if(filePanel!=null)
+			result = filePanel.getSelectedName();		
 		return result;
 	}
 	
-	private void selectName(int row)
-	{	UntitledSubPanelTable table = listPanels.get(currentPage);
-		// unselect the previous selected line
-		if(selectedRow!=-1)
-			table.setLabelBackground(selectedRow,0,GuiTools.COLOR_TABLE_REGULAR_BACKGROUND);
-		// select the new line
-		selectedRow = row;
-		if(selectedRow!=-1)
-			table.setLabelBackground(selectedRow,0,GuiTools.COLOR_TABLE_SELECTED_BACKGROUND);
+	public String getSelectedPack()
+	{	String result = selectedName;
+		return result;
+	}
+	
+	private void selectPack(int row)
+	{	if(row==-1)
+		{	filePanel = null;
+			selectedName = null;
+		}
+		else
+		{	filePanel = new FileBrowserSubPanel(width,height);
+			selectedName = names.get(row);
+			String bFolder = baseFolder+File.separator+selectedName;
+			filePanel.setFolder(bFolder,targetFile);
+		}
+		refreshList();
 		// update listeners
-		fireFileBrowserSelectionChange();
+//		firePackBrowserSelectionChange();
 	}
 
 	private void refreshList()
 	{	if(this.getComponentCount()>0)
 			remove(0);
-		add(listPanels.get(currentPage));
+		if(filePanel == null)
+			add(listPanels.get(currentPage));
+		else
+			add(filePanel);
 		validate();
 		repaint();
 	}
@@ -240,22 +245,9 @@ public class FileBrowserSubPanel extends SubPanel implements MouseListener
 	}
 
 	/////////////////////////////////////////////////////////////////
-	// DISPLAY			/////////////////////////////////////////////
-	/////////////////////////////////////////////////////////////////
-	private boolean showParent = true;
-	
-	public boolean getShowParent()
-	{	return showParent;
-	}
-
-	public void setShowParent(boolean showParent)
-	{	this.showParent = showParent;
-		refresh();
-	}
-	
-	/////////////////////////////////////////////////////////////////
 	// MOUSE LISTENER	/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
+
 	@Override
 	public void mouseClicked(MouseEvent e)
 	{	
@@ -280,27 +272,19 @@ public class FileBrowserSubPanel extends SubPanel implements MouseListener
 		if(pos[0]==linePrevious)
 		{	if(currentPage>0)
 			{	currentPage--;
-				selectName(-1);
 				refreshList();
 			}
-		}
-		// parent
-		else if(pos[0]==lineParent)
-		{	selectName(-1);
-			refreshList();
-			fireFileBrowserParent();
 		}
 		// next page
 		else if(pos[0]==lineNext)
 		{	if(currentPage<getPageCount()-1)
 			{	currentPage++;
-				selectName(-1);
 				refreshList();
 			}
 		}
 		// select a name
 		else
-		{	selectName(pos[0]);
+		{	selectPack(pos[0]);
 		}
 	}
 	
@@ -312,24 +296,32 @@ public class FileBrowserSubPanel extends SubPanel implements MouseListener
 	/////////////////////////////////////////////////////////////////
 	// LISTENERS		/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	private ArrayList<FileBrowserSubPanelListener> listeners = new ArrayList<FileBrowserSubPanelListener>();
+	private ArrayList<PackBrowserSubPanelListener> listeners = new ArrayList<PackBrowserSubPanelListener>();
 	
-	public void addListener(FileBrowserSubPanelListener listener)
+	public void addListener(PackBrowserSubPanelListener listener)
 	{	if(!listeners.contains(listener))
 			listeners.add(listener);		
 	}
 
-	public void removeListener(FileBrowserSubPanelListener listener)
+	public void removeListener(PackBrowserSubPanelListener listener)
 	{	listeners.remove(listener);		
 	}
 	
-	private void fireFileBrowserSelectionChange()
-	{	for(FileBrowserSubPanelListener listener: listeners)
-			listener.fileBrowserSelectionChange();
+	private void firePackBrowserSelectionChange()
+	{	for(PackBrowserSubPanelListener listener: listeners)
+			listener.packBrowserSelectionChange();
 	}
 
-	private void fireFileBrowserParent()
-	{	for(FileBrowserSubPanelListener listener: listeners)
-			listener.fileBrowserParent();
+	/////////////////////////////////////////////////////////////////
+	// FILE BROWSER LISTENER		/////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	@Override
+	public void fileBrowserSelectionChange()
+	{	firePackBrowserSelectionChange();
+	}
+
+	@Override
+	public void fileBrowserParent()
+	{	selectPack(-1);
 	}
 }

@@ -22,18 +22,11 @@ package fr.free.totalboumboum.gui.menus.explore.heroes.select;
  */
 
 import java.awt.Color;
-import java.awt.Container;
 import java.awt.Dimension;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.image.BufferedImage;
-import java.io.File;
-import java.io.FileFilter;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.Iterator;
 
 import javax.swing.Box;
 import javax.swing.BoxLayout;
@@ -46,6 +39,8 @@ import org.xml.sax.SAXException;
 import fr.free.totalboumboum.configuration.profile.PredefinedColor;
 import fr.free.totalboumboum.engine.content.sprite.SpritePreview;
 import fr.free.totalboumboum.engine.content.sprite.SpritePreviewLoader;
+import fr.free.totalboumboum.gui.common.content.subpanel.browser.PackBrowserSubPanel;
+import fr.free.totalboumboum.gui.common.content.subpanel.browser.PackBrowserSubPanelListener;
 import fr.free.totalboumboum.gui.common.structure.panel.SplitMenuPanel;
 import fr.free.totalboumboum.gui.common.structure.panel.data.EntitledDataPanel;
 import fr.free.totalboumboum.gui.common.structure.subpanel.Column;
@@ -58,51 +53,26 @@ import fr.free.totalboumboum.gui.tools.GuiTools;
 import fr.free.totalboumboum.tools.FileTools;
 import fr.free.totalboumboum.tools.ImageTools;
 
-public class SelectedHeroData extends EntitledDataPanel implements MouseListener
+public class SelectedHeroData extends EntitledDataPanel implements MouseListener, PackBrowserSubPanelListener
 {	
 	private static final long serialVersionUID = 1L;
 	private static final float SPLIT_RATIO = 0.5f;
 	
-	private static final int LIST_LINE_COUNT = 20;
-	private static final int LIST_LINE_PREVIOUS = 0;
-	private static final int LIST_LINE_PARENT = 1;
-	private static final int LIST_LINE_NEXT = LIST_LINE_COUNT-1;
-
 	private static final int VIEW_LINE_NAME = 0;
 	private static final int VIEW_LINE_PACK = 1;
 	private static final int VIEW_LINE_AUTHOR = 2;
 	private static final int VIEW_LINE_SOURCE = 3;
 
-	private static final int LIST_PANEL_INDEX = 0;
-	@SuppressWarnings("unused")
-	private static final int PREVIEW_PANEL_INDEX = 2;
-	
-	@SuppressWarnings("unused")
-	private static final int INFOS_PANEL_INDEX = 0;
-	@SuppressWarnings("unused")
-	private static final int IMAGE_PANEL_INDEX = 2;
-
 	private SubPanel mainPanel;
 	private SubPanel previewPanel;
 	private UntitledSubPanelTable infosPanel;
 	private UntitledSubPanelColumns imagePanel;
+	private PackBrowserSubPanel packPanel;
 	private int listWidth;
 	private int listHeight;
-	
-	private ArrayList<UntitledSubPanelTable> listPackagePanels;
-	private int currentPackagePage = 0;
-	private int selectedPackageRow = -1;
-	private ArrayList<String> heroPackages;
-	private ArrayList<ArrayList<String>> heroFolders;
-
-	private ArrayList<UntitledSubPanelTable> listHeroPanels;
-	private int currentHeroPage = 0;
-	private int selectedHeroRow = -1;
-	private ArrayList<SpritePreview> heroPreviews;
+	private PredefinedColor selectedColor;
+	private SpritePreview selectedSprite;
 		
-	private boolean packageMode = true; //false if heroes are displayed 
-	private PredefinedColor selectedColor = null;
-	
 	public SelectedHeroData(SplitMenuPanel container)
 	{	super(container);
 
@@ -119,13 +89,16 @@ public class SelectedHeroData extends EntitledDataPanel implements MouseListener
 			int leftWidth = (int)(dataWidth*SPLIT_RATIO); 
 			int rightWidth = dataWidth - leftWidth - margin; 
 			mainPanel.setOpaque(false);
-			initPackages();
 			
 			// list panel
 			{	listWidth = leftWidth;
 				listHeight = dataHeight;
-				makePackagesListPanels(leftWidth,dataHeight);
-				mainPanel.add(listPackagePanels.get(currentPackagePage));
+				packPanel = new PackBrowserSubPanel(listWidth,listHeight);
+				String baseFolder = FileTools.getHeroesPath();
+				String targetFile = FileTools.FILE_SPRITE+FileTools.EXTENSION_DATA;
+				packPanel.setFolder(baseFolder,targetFile);
+				packPanel.addListener(this);
+				mainPanel.add(packPanel);
 			}
 			
 			mainPanel.add(Box.createHorizontalGlue());
@@ -152,182 +125,6 @@ public class SelectedHeroData extends EntitledDataPanel implements MouseListener
 			}
 			
 			setDataPart(mainPanel);
-		}
-	}
-		
-	/**
-	 * builds the list of heroes (main) packages and of heroes folders (or secondary packages).
-	 * for each folder, tests if a sprite.xml file is present.
-	 */
-	private void initPackages()
-	{	heroPackages = new ArrayList<String>();
-		heroFolders = new ArrayList<ArrayList<String>>();
-		
-		// packages
-		String heroMainName = FileTools.getHeroesPath();
-		File heroMainFile = new File(heroMainName);
-		FileFilter filter = new FileFilter()
-		{	@Override
-			public boolean accept(File pathname)
-			{	boolean result = pathname.exists() && pathname.isDirectory();
-				return result;
-			}
-		};
-		File heroPackageFilesTemp[] = heroMainFile.listFiles(filter);
-		ArrayList<File> heroPackageFiles = new ArrayList<File>();
-		for(int i=0;i<heroPackageFilesTemp.length;i++)
-			heroPackageFiles.add(heroPackageFilesTemp[i]);
-		Comparator<File> comparator = new Comparator<File>()
-		{	@Override
-			public int compare(File o1, File o2)
-			{	String n1 = o1.getName();
-				String n2 = o2.getName();
-				int result = n1.compareTo(n2);				
-				return result;
-			}			
-		};	
-		Collections.sort(heroPackageFiles,comparator);
-
-		// Heroes
-		Iterator<File> p = heroPackageFiles.iterator();
-		while(p.hasNext())
-		{	// get the list of folders in this package
-			File heroPackageFile = p.next();
-			String packageName = heroPackageFile.getName();
-			File heroFolderFiles[] = heroPackageFile.listFiles(filter);
-			ArrayList<File> heroFiles = new ArrayList<File>();
-			for(int i=0;i<heroFolderFiles.length;i++)
-				heroFiles.add(heroFolderFiles[i]);
-			Collections.sort(heroFiles,comparator);
-			ArrayList<String> heroFoldersTemp = new ArrayList<String>();
-			Iterator<File> q = heroFiles.iterator();
-			while(q.hasNext())
-			{	// find the XML file
-				File heroFolderFile = q.next();
-				String folderName = heroFolderFile.getName();
-				File[] content = heroFolderFile.listFiles();
-				String xmlFileName = FileTools.FILE_SPRITE+FileTools.EXTENSION_DATA;
-				File xmlFile = FileTools.getFile(xmlFileName,content);
-				if(xmlFile!=null)
-					heroFoldersTemp.add(folderName);
-			}
-			// add to the list of heroes for this package
-			if(heroFoldersTemp.size()>0)
-			{	heroFolders.add(heroFoldersTemp);
-				heroPackages.add(packageName);
-			}
-		}
-	}
-	
-	private void initHeroPreviews()
-	{	heroPreviews = new ArrayList<SpritePreview>();
-		int selectedPackageIndex = currentPackagePage*(LIST_LINE_COUNT-2)+(selectedPackageRow-1);
-		String packageName = heroPackages.get(selectedPackageIndex);
-		Iterator<String> it = heroFolders.get(selectedPackageIndex).iterator();
-		while(it.hasNext())
-		{	String folderName = it.next();
-			try
-			{	SpritePreview heroPreview = SpritePreviewLoader.loadHeroPreview(packageName,folderName);
-				heroPreviews.add(heroPreview);
-			}
-			catch (ParserConfigurationException e)
-			{	e.printStackTrace();
-			}
-			catch (SAXException e)
-			{	e.printStackTrace();
-			}
-			catch (IOException e)
-			{	e.printStackTrace();
-			}
-			catch (ClassNotFoundException e)
-			{	e.printStackTrace();
-			}
-		}
-	}
-	
-	private void makePackagesListPanels(int width, int height)
-	{	int cols = 1;
-		listPackagePanels = new ArrayList<UntitledSubPanelTable>();		
-		Iterator<String> it = heroPackages.iterator(); 
-		for(int panelIndex=0;panelIndex<getPackagesPageCount();panelIndex++)
-		{	UntitledSubPanelTable listPanel = new UntitledSubPanelTable(width,height,cols,LIST_LINE_COUNT,false);
-			listPanel.setColSubMaxWidth(0,Integer.MAX_VALUE);
-		
-			// data
-			int line = LIST_LINE_PREVIOUS+1;
-			while(line<LIST_LINE_NEXT && it.hasNext())
-			{	Color bg = GuiTools.COLOR_TABLE_REGULAR_BACKGROUND;
-				String name = it.next();
-				listPanel.setLabelBackground(line,0,bg);
-				listPanel.setLabelText(line,0,name,name);
-				JLabel label = listPanel.getLabel(line,0);
-				label.addMouseListener(this);
-				line++;
-			}			
-			// page up
-			{	Color bg = GuiTools.COLOR_TABLE_HEADER_BACKGROUND;
-				listPanel.setLabelBackground(LIST_LINE_PREVIOUS,0,bg);
-				String key = GuiKeys.MENU_RESOURCES_HERO_SELECT_PACKAGE_PAGEUP;
-				listPanel.setLabelKey(LIST_LINE_PREVIOUS,0,key,true);
-				JLabel label = listPanel.getLabel(LIST_LINE_PREVIOUS,0);
-				label.addMouseListener(this);
-			}
-			// page down
-			{	Color bg = GuiTools.COLOR_TABLE_HEADER_BACKGROUND;
-				listPanel.setLabelBackground(LIST_LINE_NEXT,0,bg);
-				String key = GuiKeys.MENU_RESOURCES_HERO_SELECT_PACKAGE_PAGEDOWN;
-				listPanel.setLabelKey(LIST_LINE_NEXT,0,key,true);
-				JLabel label = listPanel.getLabel(LIST_LINE_NEXT,0);
-				label.addMouseListener(this);
-			}
-			listPackagePanels.add(listPanel);
-		}
-	}
-
-	private void makeFoldersListPanels(int width, int height)
-	{	int cols = 1;
-		listHeroPanels = new ArrayList<UntitledSubPanelTable>();
-		Iterator<SpritePreview> it = heroPreviews.iterator(); 
-		for(int panelIndex=0;panelIndex<getFoldersPageCount();panelIndex++)
-		{	UntitledSubPanelTable listPanel = new UntitledSubPanelTable(width,height,cols,LIST_LINE_COUNT,false);
-			listPanel.setColSubMaxWidth(0,Integer.MAX_VALUE);
-		
-			// data
-			int line = LIST_LINE_PARENT+1;
-			while(line<LIST_LINE_NEXT && it.hasNext())
-			{	Color bg = GuiTools.COLOR_TABLE_REGULAR_BACKGROUND;
-				SpritePreview heroPreview = it.next();
-				listPanel.setLabelBackground(line,0,bg);
-				listPanel.setLabelText(line,0,heroPreview.getFolder(),heroPreview.getFolder());
-				JLabel label = listPanel.getLabel(line,0);
-				label.addMouseListener(this);
-				line++;
-			}			
-			// page up
-			{	Color bg = GuiTools.COLOR_TABLE_HEADER_BACKGROUND;
-				listPanel.setLabelBackground(LIST_LINE_PREVIOUS,0,bg);
-				String key = GuiKeys.MENU_RESOURCES_HERO_SELECT_FOLDER_PAGEUP;
-				listPanel.setLabelKey(LIST_LINE_PREVIOUS,0,key,true);
-				JLabel label = listPanel.getLabel(LIST_LINE_PREVIOUS,0);
-				label.addMouseListener(this);
-			}
-			// parent
-			{	Color bg = GuiTools.COLOR_TABLE_HEADER_BACKGROUND;
-				listPanel.setLabelBackground(LIST_LINE_PARENT,0,bg);
-				String key = GuiKeys.MENU_RESOURCES_HERO_SELECT_FOLDER_PARENT;
-				listPanel.setLabelKey(LIST_LINE_PARENT,0,key,false);
-				JLabel label = listPanel.getLabel(LIST_LINE_PARENT,0);
-				label.addMouseListener(this);
-			}
-			// page down
-			{	Color bg = GuiTools.COLOR_TABLE_HEADER_BACKGROUND;
-				listPanel.setLabelBackground(LIST_LINE_NEXT,0,bg);
-				String key = GuiKeys.MENU_RESOURCES_HERO_SELECT_FOLDER_PAGEDOWN;
-				listPanel.setLabelKey(LIST_LINE_NEXT,0,key,true);
-				JLabel label = listPanel.getLabel(LIST_LINE_NEXT,0);
-				label.addMouseListener(this);
-			}
-			listHeroPanels.add(listPanel);
 		}
 	}
 
@@ -432,11 +229,11 @@ public class SelectedHeroData extends EntitledDataPanel implements MouseListener
 	
 	private void refreshPreview()
 	{	String infosValues[] = new String[10];
-		BufferedImage image;
+		BufferedImage image = null;
 		PredefinedColor colorValues[] = PredefinedColor.values();
 		boolean colors[] = new boolean[PredefinedColor.values().length];
 		// no player selected
-		if(packageMode || selectedHeroRow<0)
+		if(selectedSprite==null)
 		{	// notes
 			image = null;
 			for(int i=0;i<colors.length;i++)
@@ -447,18 +244,16 @@ public class SelectedHeroData extends EntitledDataPanel implements MouseListener
 		}
 		// one player selected
 		else
-		{	int index = (selectedHeroRow-2)+currentHeroPage*(LIST_LINE_COUNT-3);
-			SpritePreview heroPreview = heroPreviews.get(index);
-			// image
-			image = heroPreview.getImage(selectedColor);
+		{	// image
+			image = selectedSprite.getImage(selectedColor);
 			for(int i=0;i<colors.length;i++)
-				if(heroPreview.hasColor(colorValues[i]))
+				if(selectedSprite.hasColor(colorValues[i]))
 					colors[i] = true;
 			// infos
-			infosValues[VIEW_LINE_NAME] = heroPreview.getName();
-			infosValues[VIEW_LINE_PACK]= heroPreview.getPack();
-			infosValues[VIEW_LINE_AUTHOR] = heroPreview.getAuthor();
-			infosValues[VIEW_LINE_SOURCE] = heroPreview.getSource();
+			infosValues[VIEW_LINE_NAME] = selectedSprite.getName();
+			infosValues[VIEW_LINE_PACK]= selectedSprite.getPack();
+			infosValues[VIEW_LINE_AUTHOR] = selectedSprite.getAuthor();
+			infosValues[VIEW_LINE_SOURCE] = selectedSprite.getSource();
 		}
 		// infos
 		for(int line=0;line<infosValues.length;line++)
@@ -526,6 +321,14 @@ public class SelectedHeroData extends EntitledDataPanel implements MouseListener
 		
 	}
 
+	public SpritePreview getSelectedHeroPreview()
+	{	return selectedSprite;
+		
+	}
+	
+	/////////////////////////////////////////////////////////////////
+	// CONTENT PANEL				/////////////////////////////////
+	/////////////////////////////////////////////////////////////////
 	@Override
 	public void refresh()
 	{	// nothing to do here
@@ -550,153 +353,45 @@ public class SelectedHeroData extends EntitledDataPanel implements MouseListener
 	@Override
 	public void mousePressed(MouseEvent e)
 	{	JLabel label = (JLabel)e.getComponent();
-		// list = packages
-		if(packageMode)
-		{	int[] pos = listPackagePanels.get(currentPackagePage).getLabelPosition(label);
-			switch(pos[0])
-			{	// previous page
-				case LIST_LINE_PREVIOUS:
-					if(currentPackagePage>0)
-					{	unselectList();
-						currentPackagePage--;
-						refreshList();
-					}
-					break;
-				// next page
-				case LIST_LINE_NEXT:
-					if(currentPackagePage<getPackagesPageCount()-1)
-					{	unselectList();
-						currentPackagePage++;
-						refreshList();
-					}
-					break;
-				// package selected
-				default:
-					unselectList();
-					selectedPackageRow = pos[0];
-					listPackagePanels.get(currentPackagePage).setLabelBackground(selectedPackageRow,0,GuiTools.COLOR_TABLE_SELECTED_BACKGROUND);
-					initHeroPreviews();
-					makeFoldersListPanels(listWidth,listHeight);
-					packageMode = false;
-					currentHeroPage = 0;
-					refreshList();
-			}
+		// colors
+		int[] pos = imagePanel.getLabelPosition(label);
+		selectedColor = null;
+		if(pos[1]==0 || pos[1]==1)
+		{	PredefinedColor colors[] = PredefinedColor.values();
+			int index = pos[0]*2+pos[1];
+			selectedColor = colors[index];
+			
 		}
-		// list = ai
-		else
-		{	Container cont = label.getParent();
-			// colors
-			if(cont instanceof Column)
-			{	int[] pos = imagePanel.getLabelPosition(label);
-				selectedColor = null;
-				if(pos[1]==0 || pos[1]==1)
-				{	PredefinedColor colors[] = PredefinedColor.values();
-					int index = pos[0]*2+pos[1];
-					selectedColor = colors[index];
-					
-				}
-				refreshPreview();
-			}
-			// list
-			else
-			{	int[] pos = listHeroPanels.get(currentHeroPage).getLabelPosition(label);
-				switch(pos[0])
-				{	// previous page
-					case LIST_LINE_PREVIOUS:
-						if(currentHeroPage>0)
-						{	unselectList();
-							currentHeroPage--;
-							refreshList();
-						}
-						break;
-					// go to package
-					case LIST_LINE_PARENT:
-						unselectList();
-						packageMode = true;
-						refreshPreview();
-						unselectList();
-						refreshList();
-						break;
-					// next page
-					case LIST_LINE_NEXT:
-						if(currentHeroPage<getFoldersPageCount()-1)
-						{	unselectList();
-							currentHeroPage++;
-							refreshList();
-						}
-						break;
-					// hero selected
-					default:
-						unselectList();
-						selectedHeroRow = pos[0];
-						//refreshList();
-						listHeroPanels.get(currentHeroPage).setLabelBackground(selectedHeroRow,0,GuiTools.COLOR_TABLE_SELECTED_BACKGROUND);
-						refreshPreview();
-				}
-			}
-		}
+		refreshPreview();
 	}
 	@Override
 	public void mouseReleased(MouseEvent e)
 	{	
 	}
 	
-	private int getPackagesPageCount()
-	{	int result = heroPackages.size()/(LIST_LINE_COUNT-2);
-		if(heroPackages.size()%(LIST_LINE_COUNT-2)>0)
-			result++;
-		else if(result==0)
-			result = 1;
-		return result;
-	}
-	
-	private int getFoldersPageCount()
-	{	int result = heroPreviews.size()/(LIST_LINE_COUNT-2);
-		if(heroPreviews.size()%(LIST_LINE_COUNT-2)>0)
-			result++;
-		else if(result==0)
-			result = 1;
-		return result;
-	}
-	
-	public void unselectList()
-	{	// packages displayed
-		if(packageMode && selectedPackageRow!=-1)
-		{	listPackagePanels.get(currentPackagePage).setLabelBackground(selectedPackageRow,0,GuiTools.COLOR_TABLE_REGULAR_BACKGROUND);
-			selectedPackageRow = -1;
-			//refreshPreview();
+	/////////////////////////////////////////////////////////////////
+	// PACK BROWSER LISTENER		/////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	@Override
+	public void packBrowserSelectionChange()
+	{	String pack = packPanel.getSelectedPack();
+		String folder = packPanel.getSelectedName();
+		try
+		{	selectedSprite = SpritePreviewLoader.loadHeroPreview(pack,folder);
 		}
-		// hero displayed
-		else if(!packageMode && selectedHeroRow!=-1)
-		{	listHeroPanels.get(currentHeroPage).setLabelBackground(selectedHeroRow,0,GuiTools.COLOR_TABLE_REGULAR_BACKGROUND);
-			selectedHeroRow = -1;
-			selectedColor = null;
-			refreshPreview();
+		catch (ParserConfigurationException e)
+		{	e.printStackTrace();
 		}
-	}
-	
-	private void refreshList()
-	{	// packages displayed
-		if(packageMode)
-		{	mainPanel.remove(LIST_PANEL_INDEX);
-			mainPanel.add(listPackagePanels.get(currentPackagePage),LIST_PANEL_INDEX);
+		catch (SAXException e)
+		{	e.printStackTrace();
 		}
-		// hero displayed
-		else
-		{	mainPanel.remove(LIST_PANEL_INDEX);
-			mainPanel.add(listHeroPanels.get(currentHeroPage),LIST_PANEL_INDEX);
+		catch (IOException e)
+		{	e.printStackTrace();
 		}
-		// common
-		mainPanel.validate();
-		mainPanel.repaint();
-	}
-	
-	public SpritePreview getSelectedHeroPreview()
-	{	SpritePreview result = null;
-		int index = currentHeroPage*(LIST_LINE_COUNT-2)+(selectedHeroRow-2);
-		if(!packageMode && index<heroPreviews.size())
-			result = heroPreviews.get(index);
-		return result;
+		catch (ClassNotFoundException e)
+		{	e.printStackTrace();
+		}			
+		refreshPreview();
 	}
 
 }
