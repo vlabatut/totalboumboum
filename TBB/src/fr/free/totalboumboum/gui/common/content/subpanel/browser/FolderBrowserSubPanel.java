@@ -43,12 +43,12 @@ import fr.free.totalboumboum.gui.common.structure.subpanel.UntitledSubPanelTable
 import fr.free.totalboumboum.gui.tools.GuiKeys;
 import fr.free.totalboumboum.gui.tools.GuiTools;
 
-public class FileBrowserSubPanel extends SubPanel implements MouseListener
+public class FolderBrowserSubPanel extends SubPanel implements MouseListener
 {	private static final long serialVersionUID = 1L;
 
 	private String prefix;
 
-	public FileBrowserSubPanel(int width, int height)
+	public FolderBrowserSubPanel(int width, int height)
 	{	super(width,height);
 		setOpaque(false);
 		
@@ -60,14 +60,14 @@ public class FileBrowserSubPanel extends SubPanel implements MouseListener
 		this.prefix = GuiKeys.COMMON_BROWSER_FILE;
 		
 		// pages
-		setFolder(null,null);
+		setFolder(null,new ArrayList<String>());
 	}
 	
 	/////////////////////////////////////////////////////////////////
 	// PAGES			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	private String baseFolder;
-	private String targetFile;
+	private ArrayList<String> targetFiles;
 	private int lines;
 	private int linePrevious;
 	private int lineParent;
@@ -84,14 +84,20 @@ public class FileBrowserSubPanel extends SubPanel implements MouseListener
 	{	return baseFolder;	
 	}
 	
-	public String getTargetFile()
-	{	return targetFile;	
+	public ArrayList<String> getTargetFiles()
+	{	return targetFiles;	
 	}
 	
 	public void setFolder(String baseFolder, String targetFile)
+	{	ArrayList<String> targetFiles = new ArrayList<String>();
+		targetFiles.add(targetFile);
+		setFolder(baseFolder,targetFiles);
+	}
+	
+	public void setFolder(String baseFolder, ArrayList<String> targetFiles)
 	{	// init
 		this.baseFolder = baseFolder;
-		this.targetFile = targetFile;
+		this.targetFiles = targetFiles;
 		listPanels = new ArrayList<UntitledSubPanelTable>();
 		currentPage = 0;
 		selectedRow = -1;
@@ -160,7 +166,7 @@ public class FileBrowserSubPanel extends SubPanel implements MouseListener
 
 	private void initNames()
 	{	names = new ArrayList<String>();
-		if(baseFolder!=null && targetFile!=null)
+		if(baseFolder!=null && targetFiles.size()>0)
 		{	File fileBaseFolder = new File(baseFolder);
 			FileFilter filter = new FileFilter()
 			{	@Override
@@ -183,12 +189,12 @@ public class FileBrowserSubPanel extends SubPanel implements MouseListener
 			});
 			for(File f:fileFolders)
 			{	List<File> files = Arrays.asList(f.listFiles());
-				Iterator<File> it = files.iterator();
-				boolean found = false;
-				while(it.hasNext() && !found)
-				{	File file = it.next();
-					if(file.getName().equalsIgnoreCase(targetFile))
-						found = true;
+				boolean found = true;
+				Iterator<String> it = targetFiles.iterator();
+				while(it.hasNext() && found)
+				{	String targetFile = it.next();
+					File testFile = new File(f.getPath()+File.separator+targetFile);
+					found = files.contains(testFile);
 				}
 				if(found)
 					names.add(f.getName());
@@ -236,7 +242,7 @@ public class FileBrowserSubPanel extends SubPanel implements MouseListener
 	}
 	
 	public void refresh()
-	{	setFolder(baseFolder,targetFile);		
+	{	setFolder(baseFolder,targetFiles);		
 	}
 
 	/////////////////////////////////////////////////////////////////
@@ -312,24 +318,24 @@ public class FileBrowserSubPanel extends SubPanel implements MouseListener
 	/////////////////////////////////////////////////////////////////
 	// LISTENERS		/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	private ArrayList<FileBrowserSubPanelListener> listeners = new ArrayList<FileBrowserSubPanelListener>();
+	private ArrayList<FolderBrowserSubPanelListener> listeners = new ArrayList<FolderBrowserSubPanelListener>();
 	
-	public void addListener(FileBrowserSubPanelListener listener)
+	public void addListener(FolderBrowserSubPanelListener listener)
 	{	if(!listeners.contains(listener))
 			listeners.add(listener);		
 	}
 
-	public void removeListener(FileBrowserSubPanelListener listener)
+	public void removeListener(FolderBrowserSubPanelListener listener)
 	{	listeners.remove(listener);		
 	}
 	
 	private void fireFileBrowserSelectionChange()
-	{	for(FileBrowserSubPanelListener listener: listeners)
+	{	for(FolderBrowserSubPanelListener listener: listeners)
 			listener.fileBrowserSelectionChange();
 	}
 
 	private void fireFileBrowserParent()
-	{	for(FileBrowserSubPanelListener listener: listeners)
+	{	for(FolderBrowserSubPanelListener listener: listeners)
 			listener.fileBrowserParent();
 	}
 }

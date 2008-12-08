@@ -76,7 +76,7 @@ public class SelectedProfileMenu extends InnerMenuPanel
 		// sizes
 		int buttonWidth = getWidth();
 		int buttonHeight = GuiTools.buttonTextHeight;
-		ArrayList<String> texts = GuiKeys.getKeysLike(GuiKeys.MENU_TOURNAMENT_BUTTON);
+		ArrayList<String> texts = GuiKeys.getKeysLike(GuiKeys.MENU_PROFILES_BUTTON);
 		int fontSize = GuiTools.getOptimalFontSize(buttonWidth*0.8, buttonHeight*0.9, texts);
 
 		// buttons

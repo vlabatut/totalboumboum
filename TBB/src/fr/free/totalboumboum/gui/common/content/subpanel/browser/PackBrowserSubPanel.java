@@ -43,7 +43,7 @@ import fr.free.totalboumboum.gui.common.structure.subpanel.UntitledSubPanelTable
 import fr.free.totalboumboum.gui.tools.GuiKeys;
 import fr.free.totalboumboum.gui.tools.GuiTools;
 
-public class PackBrowserSubPanel extends SubPanel implements MouseListener, FileBrowserSubPanelListener
+public class PackBrowserSubPanel extends SubPanel implements MouseListener, FolderBrowserSubPanelListener
 {	private static final long serialVersionUID = 1L;
 
 	private String prefix;
@@ -60,14 +60,14 @@ public class PackBrowserSubPanel extends SubPanel implements MouseListener, File
 		this.prefix = GuiKeys.COMMON_BROWSER_PACK;
 		
 		// pages
-		setFolder(null,null);
+		setFolder(null,new ArrayList<String>());
 	}
 	
 	/////////////////////////////////////////////////////////////////
 	// PAGES			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	private String baseFolder;
-	private String targetFile;
+	private ArrayList<String> targetFiles;
 	private int lines;
 	private int linePrevious;
 	private int lineNext;
@@ -77,21 +77,27 @@ public class PackBrowserSubPanel extends SubPanel implements MouseListener, File
 	private ArrayList<UntitledSubPanelTable> listPanels;
 	private ArrayList<String> names;
 	private int pageCount;
-	private FileBrowserSubPanel filePanel;
+	private FolderBrowserSubPanel filePanel;
 	private String selectedName;
 	
 	public String getBaseFolder()
 	{	return baseFolder;	
 	}
 	
-	public String getTargetFile()
-	{	return targetFile;	
+	public ArrayList<String> getTargetFiles()
+	{	return targetFiles;	
 	}
 	
 	public void setFolder(String baseFolder, String targetFile)
+	{	ArrayList<String> targetFiles = new ArrayList<String>();
+		targetFiles.add(targetFile);
+		setFolder(baseFolder,targetFiles);
+	}
+	
+	public void setFolder(String baseFolder, ArrayList<String> targetFiles)
 	{	// init
 		this.baseFolder = baseFolder;
-		this.targetFile = targetFile;
+		this.targetFiles = targetFiles;
 		listPanels = new ArrayList<UntitledSubPanelTable>();
 		currentPage = 0;
 		filePanel = null;
@@ -149,7 +155,7 @@ public class PackBrowserSubPanel extends SubPanel implements MouseListener, File
 
 	private void initNames()
 	{	names = new ArrayList<String>();
-		if(baseFolder!=null && targetFile!=null)
+		if(baseFolder!=null && targetFiles.size()>0)
 		{	File fileBaseFolder = new File(baseFolder);
 			FileFilter filter = new FileFilter()
 			{	@Override
@@ -173,20 +179,23 @@ public class PackBrowserSubPanel extends SubPanel implements MouseListener, File
 			for(File f:fileFolders)
 			{	File[] folders = f.listFiles();
 				int i = 0;
-				boolean found = false;
-				while(i<folders.length && !found)
+				boolean foundAll = false;
+				while(i<folders.length && !foundAll)
 				{	if(folders[i].isDirectory())
 					{	List<File> files = Arrays.asList(folders[i].listFiles());
-						Iterator<File> it = files.iterator();
-						while(it.hasNext() && !found)
-						{	File file = it.next();
-							if(file.getName().equalsIgnoreCase(targetFile))
-								found = true;
+						boolean found = true;
+						Iterator<String> it = targetFiles.iterator();
+						while(it.hasNext() && found)
+						{	String targetFile = it.next();
+							File testFile = new File(folders[i].getPath()+File.separator+targetFile);
+							found = files.contains(testFile);
 						}
+						if(found)
+							foundAll = true;
 					}
 					i++;
 				}
-				if(found)
+				if(foundAll)
 					names.add(f.getName());
 			}
 		}
@@ -222,11 +231,11 @@ public class PackBrowserSubPanel extends SubPanel implements MouseListener, File
 			selectedName = null;
 		}
 		else
-		{	filePanel = new FileBrowserSubPanel(width,height);
+		{	filePanel = new FolderBrowserSubPanel(width,height);
 			int selectedIndex = (row-controlUpCount)+currentPage*(lines-controlTotalCount);
 			selectedName = names.get(selectedIndex);
 			String bFolder = baseFolder+File.separator+selectedName;
-			filePanel.setFolder(bFolder,targetFile);
+			filePanel.setFolder(bFolder,targetFiles);
 			filePanel.addListener(this);
 		}
 		refreshList();
@@ -246,7 +255,7 @@ public class PackBrowserSubPanel extends SubPanel implements MouseListener, File
 	}
 	
 	public void refresh()
-	{	setFolder(baseFolder,targetFile);		
+	{	setFolder(baseFolder,targetFiles);		
 	}
 
 	/////////////////////////////////////////////////////////////////
