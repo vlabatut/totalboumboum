@@ -1,5 +1,6 @@
 package fr.free.totalboumboum.gui.common.structure.subpanel;
 
+import java.awt.Color;
 import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.Font;
@@ -14,6 +15,7 @@ import javax.swing.text.StyleConstants;
 import javax.swing.text.StyledDocument;
 
 import fr.free.totalboumboum.gui.data.configuration.GuiConfiguration;
+import fr.free.totalboumboum.gui.tools.GuiTools;
 
 /*
  * Total Boum Boum
@@ -72,6 +74,8 @@ public class SubTextPanel extends SubPanel
 		Font font = GuiConfiguration.getMiscConfiguration().getFont().deriveFont(fontSize);
 		StyleConstants.setFontFamily(sa,font.getFamily());
 		StyleConstants.setFontSize(sa,font.getSize());
+		Color fg = GuiTools.COLOR_TABLE_REGULAR_FOREGROUND;
+		StyleConstants.setForeground(sa, fg);
 		doc = textPane.getStyledDocument();
 //		doc.setParagraphAttributes(0,doc.getLength()-1,sa,true);		
 		doc.setCharacterAttributes(0,doc.getLength()+1,sa,true);

@@ -21,7 +21,7 @@ package fr.free.totalboumboum.gui.common.content.subpanel.browser;
  * 
  */
 
-public interface FileBrowserSubPanelListener
+public interface FolderBrowserSubPanelListener
 {
 	public void fileBrowserSelectionChange();
 	public void fileBrowserParent();

@@ -40,8 +40,8 @@ import fr.free.totalboumboum.game.limit.RoundLimit;
 import fr.free.totalboumboum.game.points.PointsProcessor;
 import fr.free.totalboumboum.game.round.Round;
 import fr.free.totalboumboum.game.round.RoundLoader;
-import fr.free.totalboumboum.gui.common.content.subpanel.browser.FileBrowserSubPanel;
-import fr.free.totalboumboum.gui.common.content.subpanel.browser.FileBrowserSubPanelListener;
+import fr.free.totalboumboum.gui.common.content.subpanel.browser.FolderBrowserSubPanel;
+import fr.free.totalboumboum.gui.common.content.subpanel.browser.FolderBrowserSubPanelListener;
 import fr.free.totalboumboum.gui.common.content.subpanel.image.ImageSubPanel;
 import fr.free.totalboumboum.gui.common.content.subpanel.limits.LimitsSubPanelListener;
 import fr.free.totalboumboum.gui.common.content.subpanel.limits.LimitsSubPanel;
@@ -55,7 +55,7 @@ import fr.free.totalboumboum.gui.tools.GuiKeys;
 import fr.free.totalboumboum.gui.tools.GuiTools;
 import fr.free.totalboumboum.tools.FileTools;
 
-public class SelectedRoundData extends EntitledDataPanel implements FileBrowserSubPanelListener, LimitsSubPanelListener
+public class SelectedRoundData extends EntitledDataPanel implements FolderBrowserSubPanelListener, LimitsSubPanelListener
 {	
 	private static final long serialVersionUID = 1L;
 	private static final float SPLIT_RATIO = 0.4f;
@@ -66,7 +66,7 @@ public class SelectedRoundData extends EntitledDataPanel implements FileBrowserS
 	private LimitsSubPanel<RoundLimit> limitsPanel;
 	private PointsSubPanel pointsPanel;
 	private RoundSubPanel miscPanel;
-	private FileBrowserSubPanel listPanel;
+	private FolderBrowserSubPanel listPanel;
 	
 	private Round selectedRound = null;
 	private int leftWidth;
@@ -94,7 +94,7 @@ public class SelectedRoundData extends EntitledDataPanel implements FileBrowserS
 			mainPanel.setOpaque(false);
 			
 			// list panel
-			{	listPanel = new FileBrowserSubPanel(leftWidth,dataHeight);
+			{	listPanel = new FolderBrowserSubPanel(leftWidth,dataHeight);
 				String targetFile = FileTools.FILE_ROUND+FileTools.EXTENSION_DATA;
 				listPanel.setShowParent(false);
 				listPanel.setFolder(baseFolder,targetFile);
