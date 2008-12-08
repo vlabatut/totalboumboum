@@ -60,15 +60,6 @@
 				</group>		
 				<group name="Select">
 					<text name="Title" value="Liste des personnages" tooltip="Liste des personnages disponibles" />
-					<group name="Folder">
-						<text name="PageDown" value="Descendre" tooltip="Aller à la page de personnages suivante" />
-						<text name="PageUp" value="Monter" tooltip="Revenir à la page de personnages précédente" />
-						<text name="Parent" value=".." tooltip="Revenir à la liste des paquets" />
-					</group>
-					<group name="Package">
-						<text name="PageDown" value="Descendre" tooltip="Aller à la page de paquets suivante" />
-						<text name="PageUp" value="Monter" tooltip="Revenir à la page de paquets précédente" />
-					</group>
 					<group name="Preview">
 						<text name="Author" value="Auteur"  tooltip="Auteur/ripper de ce personnage" />
 						<text name="Colors" value="Couleurs"  tooltip="Couleurs disponibles pour ce personnage" />
@@ -414,6 +405,11 @@
 			<group name="File">
 				<text name="PageDown" value="Descendre" tooltip="Aller à la page suivante" />
 				<text name="PageUp" value="Monter" tooltip="Revenir à la page précédente" />
+				<text name="Parent" value=".." tooltip="Revenir à la liste des paquets" />
+			</group>
+			<group name="Pack">
+				<text name="PageDown" value="Descendre" tooltip="Aller à la page de paquets suivante" />
+				<text name="PageUp" value="Monter" tooltip="Revenir à la page de paquets précédente" />
 			</group>
 		</group>
 	

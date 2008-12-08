@@ -96,6 +96,7 @@ public class SelectedRoundData extends EntitledDataPanel implements FileBrowserS
 			// list panel
 			{	listPanel = new FileBrowserSubPanel(leftWidth,dataHeight);
 				String targetFile = FileTools.FILE_ROUND+FileTools.EXTENSION_DATA;
+				listPanel.setShowParent(false);
 				listPanel.setFolder(baseFolder,targetFile);
 				listPanel.addListener(this);
 				mainPanel.add(listPanel);

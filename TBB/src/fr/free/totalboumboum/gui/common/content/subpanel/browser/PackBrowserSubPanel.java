@@ -215,14 +215,19 @@ public class PackBrowserSubPanel extends SubPanel implements MouseListener, File
 	
 	private void selectPack(int row)
 	{	if(row==-1)
-		{	filePanel = null;
+		{	
+//			if(filePanel!=null)
+//				filePanel.removeListener(this);
+			filePanel = null;
 			selectedName = null;
 		}
 		else
 		{	filePanel = new FileBrowserSubPanel(width,height);
-			selectedName = names.get(row);
+			int selectedIndex = (row-controlUpCount)+currentPage*(lines-controlTotalCount);
+			selectedName = names.get(selectedIndex);
 			String bFolder = baseFolder+File.separator+selectedName;
 			filePanel.setFolder(bFolder,targetFile);
+			filePanel.addListener(this);
 		}
 		refreshList();
 		// update listeners

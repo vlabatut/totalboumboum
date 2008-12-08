@@ -285,7 +285,7 @@ public class FileBrowserSubPanel extends SubPanel implements MouseListener
 			}
 		}
 		// parent
-		else if(pos[0]==lineParent)
+		else if(pos[0]==lineParent && showParent)
 		{	selectName(-1);
 			refreshList();
 			fireFileBrowserParent();
