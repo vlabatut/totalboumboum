@@ -230,7 +230,7 @@ public class FolderBrowserSubPanel extends SubPanel implements MouseListener
 		if(selectedRow!=-1)
 			table.setLabelBackground(selectedRow,0,GuiTools.COLOR_TABLE_SELECTED_BACKGROUND);
 		// update listeners
-		fireFileBrowserSelectionChange();
+		fireFolderBrowserSelectionChange();
 	}
 
 	private void refreshList()
@@ -294,7 +294,7 @@ public class FolderBrowserSubPanel extends SubPanel implements MouseListener
 		else if(pos[0]==lineParent && showParent)
 		{	selectName(-1);
 			refreshList();
-			fireFileBrowserParent();
+			fireFolderBrowserParent();
 		}
 		// next page
 		else if(pos[0]==lineNext)
@@ -329,13 +329,13 @@ public class FolderBrowserSubPanel extends SubPanel implements MouseListener
 	{	listeners.remove(listener);		
 	}
 	
-	private void fireFileBrowserSelectionChange()
+	private void fireFolderBrowserSelectionChange()
 	{	for(FolderBrowserSubPanelListener listener: listeners)
-			listener.fileBrowserSelectionChange();
+			listener.folderBrowserSelectionChange();
 	}
 
-	private void fireFileBrowserParent()
+	private void fireFolderBrowserParent()
 	{	for(FolderBrowserSubPanelListener listener: listeners)
-			listener.fileBrowserParent();
+			listener.folderBrowserParent();
 	}
 }

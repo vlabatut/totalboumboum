@@ -23,23 +23,11 @@ package fr.free.totalboumboum.gui.menus.explore.matches.select;
 
 import java.awt.Color;
 import java.awt.Dimension;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
 import java.io.File;
-import java.io.FileFilter;
 import java.io.IOException;
-import java.text.Collator;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Locale;
 
 import javax.swing.Box;
 import javax.swing.BoxLayout;
-import javax.swing.JLabel;
 import javax.xml.parsers.ParserConfigurationException;
 
 import org.xml.sax.SAXException;
@@ -49,6 +37,8 @@ import fr.free.totalboumboum.game.limit.MatchLimit;
 import fr.free.totalboumboum.game.match.Match;
 import fr.free.totalboumboum.game.match.MatchLoader;
 import fr.free.totalboumboum.game.points.PointsProcessor;
+import fr.free.totalboumboum.gui.common.content.subpanel.browser.FolderBrowserSubPanel;
+import fr.free.totalboumboum.gui.common.content.subpanel.browser.FolderBrowserSubPanelListener;
 import fr.free.totalboumboum.gui.common.content.subpanel.limits.LimitsSubPanelListener;
 import fr.free.totalboumboum.gui.common.content.subpanel.limits.LimitsSubPanel;
 import fr.free.totalboumboum.gui.common.content.subpanel.points.PointsSubPanel;
@@ -62,36 +52,25 @@ import fr.free.totalboumboum.gui.tools.GuiTools;
 import fr.free.totalboumboum.tools.FileTools;
 import fr.free.totalboumboum.tools.StringTools;
 
-public class SelectedMatchData extends EntitledDataPanel implements MouseListener, LimitsSubPanelListener
+public class SelectedMatchData extends EntitledDataPanel implements FolderBrowserSubPanelListener, LimitsSubPanelListener
 {	
 	private static final long serialVersionUID = 1L;
 	private static final float SPLIT_RATIO = 0.5f;
 	
-	private static final int LIST_LINE_COUNT = 20;
-	private static final int LIST_LINE_PREVIOUS = 0;
-	private static final int LIST_LINE_NEXT = LIST_LINE_COUNT-1;
-
 	private static final int VIEW_LINE_COUNT = 4;
 	private static final int VIEW_LINE_NAME = 0;
 	private static final int VIEW_LINE_AUTHOR = 1;
 	private static final int VIEW_LINE_ROUNDS = 2;
 	private static final int VIEW_LINE_PLAYERS = 3;
 
-	private static final int LIST_PANEL_INDEX = 0;
-	
-	private ArrayList<UntitledSubPanelTable> listPanels;
-	private int currentPage = 0;
-	private int selectedRow = -1;
-	
 	private SubPanel mainPanel;
 	private SubPanel rightPanel;
+	private FolderBrowserSubPanel folderPanel;
 	private LimitsSubPanel<MatchLimit> limitsPanel;
 	private PointsSubPanel pointsPanel;
 	private UntitledSubPanelTable previewPanel;
 
-	private ArrayList<String> matches;
 	private Match selectedMatch = null;
-	private String selectedMatchFolder = null;
 	private int leftWidth;
 	private int rightWidth;
 	private int rightHeight;
@@ -115,11 +94,14 @@ public class SelectedMatchData extends EntitledDataPanel implements MouseListene
 			leftWidth = (int)(dataWidth*SPLIT_RATIO); 
 			rightWidth = dataWidth - leftWidth - margin; 
 			mainPanel.setOpaque(false);
-			initMatches();
 			
 			// list panel
-			{	makeListPanels(leftWidth,dataHeight);
-				mainPanel.add(listPanels.get(currentPage));
+			{	folderPanel = new FolderBrowserSubPanel(leftWidth,dataHeight);
+				String targetFile = FileTools.FILE_MATCH+FileTools.EXTENSION_DATA;
+				folderPanel.setShowParent(false);
+				folderPanel.setFolder(baseFolder,targetFile);
+				folderPanel.addListener(this);
+				mainPanel.add(folderPanel);
 			}
 			
 			mainPanel.add(Box.createHorizontalGlue());
@@ -163,85 +145,6 @@ public class SelectedMatchData extends EntitledDataPanel implements MouseListene
 		}
 	}
 		
-	private void initMatches()
-	{	matches = new ArrayList<String>();
-		File heroMainFile = new File(baseFolder);
-		FileFilter filter = new FileFilter()
-		{	@Override
-			public boolean accept(File pathname)
-			{	boolean result = pathname.exists() && pathname.isDirectory();
-				return result;
-			}
-		};
-		List<File> matchesFolders = Arrays.asList(heroMainFile.listFiles(filter));
-		Collections.sort(matchesFolders,new Comparator<File>()
-		{	@Override
-			public int compare(File arg0, File arg1)
-			{	int result;
-				String name0 = arg0.getName();
-				String name1 = arg1.getName();
-				Collator collator = Collator.getInstance(Locale.ENGLISH);
-				result = collator.compare(name0,name1);
-				return result;
-			}
-		});
-		for(File f:matchesFolders)
-		{	List<File> files = Arrays.asList(f.listFiles());
-			String fileName = FileTools.FILE_MATCH+FileTools.EXTENSION_DATA;
-			Iterator<File> it = files.iterator();
-			boolean found = false;
-			while(it.hasNext() && !found)
-			{	File file = it.next();
-				if(file.getName().equalsIgnoreCase(fileName))
-					found = true;
-			}
-			if(found)
-				matches.add(f.getName());
-		}
-	}
-	
-	private void makeListPanels(int width, int height)
-	{	int lines = LIST_LINE_COUNT;
-		int cols = 1;
-		listPanels = new ArrayList<UntitledSubPanelTable>();
-		
-		for(int panelIndex=0;panelIndex<getPageCount();panelIndex++)
-		{	UntitledSubPanelTable listPanel = new UntitledSubPanelTable(width,height,cols,lines,false);
-			listPanel.setColSubMaxWidth(0,Integer.MAX_VALUE);
-		
-			// data
-			int line = 1;
-			int matchIndex = panelIndex*(LIST_LINE_COUNT-2);
-			while(line<LIST_LINE_NEXT && matchIndex<matches.size())
-			{	Color bg = GuiTools.COLOR_TABLE_REGULAR_BACKGROUND;
-				String name = matches.get(matchIndex);
-				listPanel.setLabelBackground(line,0,bg);
-				listPanel.setLabelText(line,0,name,name);
-				JLabel label = listPanel.getLabel(line,0);
-				label.addMouseListener(this);
-				matchIndex++;
-				line++;
-			}			
-			// page up
-			{	Color bg = GuiTools.COLOR_TABLE_HEADER_BACKGROUND;
-				listPanel.setLabelBackground(LIST_LINE_PREVIOUS,0,bg);
-				String key = GuiKeys.MENU_RESOURCES_MATCH_SELECT_LIST_PAGEUP;
-				listPanel.setLabelKey(LIST_LINE_PREVIOUS,0,key,true);
-				JLabel label = listPanel.getLabel(LIST_LINE_PREVIOUS,0);
-				label.addMouseListener(this);
-			}
-			// page down
-			{	Color bg = GuiTools.COLOR_TABLE_HEADER_BACKGROUND;
-				listPanel.setLabelBackground(LIST_LINE_NEXT,0,bg);
-				String key = GuiKeys.MENU_RESOURCES_MATCH_SELECT_LIST_PAGEDOWN;
-				listPanel.setLabelKey(LIST_LINE_NEXT,0,key,true);
-				JLabel label = listPanel.getLabel(LIST_LINE_NEXT,0);
-				label.addMouseListener(this);
-			}
-			listPanels.add(listPanel);
-		}
-	}
-	
 	private void makePreviewPanel(int width, int height)
 	{	int colSubs = 2;
 		int colGroups = 1;
@@ -281,38 +184,13 @@ public class SelectedMatchData extends EntitledDataPanel implements MouseListene
 	private void refreshPreview()
 	{	String values[] = new String[VIEW_LINE_COUNT];
 		// no match selected
-		if(selectedRow<0)
+		if(selectedMatch==null)
 		{	for(int i=0;i<values.length;i++)
 				values[i] = null;	
-			selectedMatch = null;
-			selectedMatchFolder = null;
 		}
 		// one match selected
 		else
-		{	try
-			{	selectedMatchFolder = matches.get((selectedRow-1)+currentPage*(LIST_LINE_COUNT-2));
-				String folderPath = baseFolder+File.separator+selectedMatchFolder;
-				selectedMatch = MatchLoader.loadMatchFromFolderPath(folderPath,null);			
-			}
-			catch (IllegalArgumentException e)
-			{	e.printStackTrace();
-			}
-			catch (SecurityException e)
-			{	e.printStackTrace();
-			}
-			catch (ParserConfigurationException e)
-			{	e.printStackTrace();
-			}
-			catch (SAXException e)
-			{	e.printStackTrace();
-			}
-			catch (IOException e)
-			{	e.printStackTrace();
-			} 
-			catch (ClassNotFoundException e)
-			{	e.printStackTrace();
-			}
-			values[VIEW_LINE_NAME] = selectedMatchFolder;
+		{	values[VIEW_LINE_NAME] = folderPanel.getSelectedName();
 			values[VIEW_LINE_AUTHOR]= selectedMatch.getAuthor();
 			values[VIEW_LINE_ROUNDS] = Integer.toString(selectedMatch.getRound().size());
 			values[VIEW_LINE_PLAYERS] = StringTools.formatAllowedPlayerNumbers(selectedMatch.getAllowedPlayerNumbers());
@@ -335,104 +213,31 @@ public class SelectedMatchData extends EntitledDataPanel implements MouseListene
 	
 	@Override
 	public void refresh()
-	{	initMatches();
+	{	
+/*
+		initMatches();
 		makeListPanels(leftWidth,dataHeight);
 		refreshList();
 		if(selectedRow!=-1)
 			listPanels.get(currentPage).setLabelBackground(selectedRow,0,GuiTools.COLOR_TABLE_SELECTED_BACKGROUND);
 		refreshPreview();
 		refreshLimits();
+*/		
 //		rightPanel.validate();
 //		rightPanel.repaint();
 	}
 
 	/////////////////////////////////////////////////////////////////
-	// MOUSE LISTENER	/////////////////////////////////////////////
+	// SELECTED MATCH	/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-
-	@Override
-	public void mouseClicked(MouseEvent e)
-	{	
-	}
-	
-	@Override
-	public void mouseEntered(MouseEvent e)
-	{	
-	}
-	
-	@Override
-	public void mouseExited(MouseEvent e)
-	{	
-	}
-	
-	@Override
-	public void mousePressed(MouseEvent e)
-	{	JLabel label = (JLabel)e.getComponent();
-		int[] pos = listPanels.get(currentPage).getLabelPosition(label);
-		{	switch(pos[0])
-			{	// previous page
-				case LIST_LINE_PREVIOUS:
-					if(currentPage>0)
-					{	unselectList();
-						currentPage--;
-						refreshList();
-					}
-					break;
-				// next page
-				case LIST_LINE_NEXT:
-					if(currentPage<getPageCount()-1)
-					{	unselectList();
-						currentPage++;
-						refreshList();
-					}
-					break;
-				// profile selected
-				default:
-					unselectList();
-					selectedRow = pos[0];
-					listPanels.get(currentPage).setLabelBackground(selectedRow,0,GuiTools.COLOR_TABLE_SELECTED_BACKGROUND);
-					refreshPreview();
-					refreshLimits();
-			}
-		}
-	}
-	
-	@Override
-	public void mouseReleased(MouseEvent e)
-	{	
-	}
-	
-	private int getPageCount()
-	{	int result = matches.size()/(LIST_LINE_COUNT-2);
-		if(matches.size()%(LIST_LINE_COUNT-2)>0)
-			result++;
-		else if(result==0)
-			result = 1;
-		return result;
-	}
-	
-	public void unselectList()
-	{	if(selectedRow!=-1)
-		{	listPanels.get(currentPage).setLabelBackground(selectedRow,0,GuiTools.COLOR_TABLE_REGULAR_BACKGROUND);
-			selectedRow = -1;
-			refreshPreview();
-		}		
-	}
-	
-	private void refreshList()
-	{	mainPanel.remove(LIST_PANEL_INDEX);
-		mainPanel.add(listPanels.get(currentPage),LIST_PANEL_INDEX);
-		mainPanel.validate();
-		mainPanel.repaint();
-	}
-	
 	public Match getSelectedMatch()
 	{	return selectedMatch;
 	}
+	
 	public String getSelectedMatchFile()
-	{	return selectedMatchFolder;
+	{	return folderPanel.getSelectedName();
 	}
-
+/*
 	public void setSelectedMatch(String fileName)
 	{	int index = matches.indexOf(matches);
 		currentPage = index/(LIST_LINE_COUNT-2);
@@ -442,7 +247,7 @@ public class SelectedMatchData extends EntitledDataPanel implements MouseListene
 		listPanels.get(currentPage).setLabelBackground(selectedRow,0,GuiTools.COLOR_TABLE_SELECTED_BACKGROUND);
 		refreshPreview();
 	}
-
+*/
 	/////////////////////////////////////////////////////////////////
 	// LIMITS 			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
@@ -454,5 +259,46 @@ public class SelectedMatchData extends EntitledDataPanel implements MouseListene
 		if(limit!=null)
 			pointsProcessor = limit.getPointProcessor();
 		pointsPanel.setPointsProcessor(pointsProcessor);
+	}
+	
+	/////////////////////////////////////////////////////////////////
+	// PACK BROWSER LISTENER		/////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	@Override
+	public void folderBrowserParent()
+	{	// no use here
+	}
+	
+	@Override
+	public void folderBrowserSelectionChange()
+	{	String folder = folderPanel.getSelectedName();
+		if(folder==null)
+			selectedMatch = null;
+		else
+		{	try
+			{	String folderPath = baseFolder+File.separator+folder;
+				selectedMatch = MatchLoader.loadMatchFromFolderPath(folderPath,null);			
+			}
+			catch (IllegalArgumentException e)
+			{	e.printStackTrace();
+			}
+			catch (SecurityException e)
+			{	e.printStackTrace();
+			}
+			catch (ParserConfigurationException e)
+			{	e.printStackTrace();
+			}
+			catch (SAXException e)
+			{	e.printStackTrace();
+			}
+			catch (IOException e)
+			{	e.printStackTrace();
+			} 
+			catch (ClassNotFoundException e)
+			{	e.printStackTrace();
+			}
+		}
+		refreshPreview();
+		refreshLimits();
 	}
 }
