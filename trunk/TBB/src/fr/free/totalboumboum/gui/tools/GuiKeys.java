@@ -96,6 +96,7 @@ public class GuiKeys
 	public static final String PAGEDOWN = "PageDown";
 	public static final String PAGEUP = "PageUp";
 	public static final String PAINTINGS = "Paintings";
+	public static final String PARENT = "Parent";
 	public static final String PARTIAL = "Partial";
 	public static final String PINK = "Pink";
 	public static final String PLAY = "Play";
@@ -182,13 +183,6 @@ public class GuiKeys
 			public static final String MENU_RESOURCES_HERO_BUTTON_BACK = MENU_RESOURCES_HERO_BUTTON+"Back";	
 			/* SELECT */
 			public static final String MENU_RESOURCES_HERO_SELECT_TITLE = "MenuResourcesHeroSelectTitle";
-				/* FOLDER */
-				public static final String MENU_RESOURCES_HERO_SELECT_FOLDER_PAGEDOWN = "MenuResourcesHeroSelectFolderPageDown";
-				public static final String MENU_RESOURCES_HERO_SELECT_FOLDER_PAGEUP = "MenuResourcesHeroSelectFolderPageUp";
-				public static final String MENU_RESOURCES_HERO_SELECT_FOLDER_PARENT = "MenuResourcesHeroSelectFolderParent";
-				/* PACKAGES */
-				public static final String MENU_RESOURCES_HERO_SELECT_PACKAGE_PAGEDOWN = "MenuResourcesHeroSelectPackagePageDown";
-				public static final String MENU_RESOURCES_HERO_SELECT_PACKAGE_PAGEUP = "MenuResourcesHeroSelectPackagePageUp";
 				/* PREVIEW */
 				public static final String MENU_RESOURCES_HERO_SELECT_PREVIEW_AUTHOR = "MenuResourcesHeroSelectPreviewAuthor";
 				public static final String MENU_RESOURCES_HERO_SELECT_PREVIEW_COLORS = "MenuResourcesHeroSelectPreviewColors";
@@ -464,7 +458,11 @@ public class GuiKeys
 		public static final String COMMON_BROWSER_FILE = COMMON_BROWSER+FILE;
 		public static final String COMMON_BROWSER_FILE_PAGEDOWN = COMMON_BROWSER_FILE+PAGEDOWN;
 		public static final String COMMON_BROWSER_FILE_PAGEUP = COMMON_BROWSER_FILE+PAGEUP;
+		public static final String COMMON_BROWSER_FILE_PARENT = COMMON_BROWSER_FILE+PARENT;
 		/* PACK */
+		public static final String COMMON_BROWSER_PACK = COMMON_BROWSER+PACK;
+		public static final String COMMON_BROWSER_PACK_PAGEDOWN = COMMON_BROWSER_PACK+PAGEDOWN;
+		public static final String COMMON_BROWSER_PACK_PAGEUP = COMMON_BROWSER_PACK+PAGEUP;
 
 	/* COLORS */
 	public static final String COMMON_COLOR = COMMON+COLOR;

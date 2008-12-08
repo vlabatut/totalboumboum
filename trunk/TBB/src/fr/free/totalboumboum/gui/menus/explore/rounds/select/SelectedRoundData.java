@@ -274,4 +274,9 @@ public class SelectedRoundData extends EntitledDataPanel implements FileBrowserS
 		refreshImage();
 		refreshLimits();
 	}
+
+	@Override
+	public void fileBrowserParent()
+	{	
+	}
 }
