@@ -161,7 +161,8 @@ public class SelectedAiData extends EntitledDataPanel implements PackBrowserSubP
 		infosPanel.setColSubMaxWidth(1,maxWidth);
 		infosPanel.setColSubPreferredWidth(1,maxWidth);
 	}
-	
+
+	//TODO implémenter un EntitledSubPanelText et renommer en UntitledSubPanelText
 	private void makeNotesPanel(int width, int height)
 	{	notesPanel = new EntitledSubPanel(width,height);
 		
