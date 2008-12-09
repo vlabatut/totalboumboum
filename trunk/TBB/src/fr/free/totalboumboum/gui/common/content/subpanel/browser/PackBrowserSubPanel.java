@@ -110,13 +110,14 @@ public class PackBrowserSubPanel extends SubPanel implements MouseListener, Fold
 		controlUpCount = 1;
 		controlTotalCount = controlUpCount+1;
 		int cols = 1;
+		int textMaxWidth = width - GuiTools.subPanelMargin*2;
 		
 		initNames();
 		pageCount = getPageCount();
 		
 		for(int panelIndex=0;panelIndex<pageCount;panelIndex++)
 		{	UntitledSubPanelTable listPanel = new UntitledSubPanelTable(width,height,cols,lines,false);
-			listPanel.setColSubMaxWidth(0,Integer.MAX_VALUE);
+			listPanel.setColSubMaxWidth(0,textMaxWidth);
 		
 			// data
 			int line = controlUpCount;
