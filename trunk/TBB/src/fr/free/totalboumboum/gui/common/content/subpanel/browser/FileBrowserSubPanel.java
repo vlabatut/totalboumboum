@@ -227,7 +227,9 @@ public class FileBrowserSubPanel extends SubPanel implements MouseListener
 	}
 	
 	public void refresh()
-	{	setFolder(fileNames);		
+	{	String selectedFileName = getSelectedFileName();
+		setFolder(fileNames);
+		setSelectedFileName(selectedFileName);
 	}
 
 	/////////////////////////////////////////////////////////////////
