@@ -182,7 +182,7 @@ public class SelectedProfileData extends EntitledDataPanel implements FileBrowse
 	/////////////////////////////////////////////////////////////////
 	@Override
 	public void refresh()
-	{	// nothing to do here
+	{	filePanel.refresh();
 	}
 
 	/////////////////////////////////////////////////////////////////

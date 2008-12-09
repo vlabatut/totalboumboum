@@ -118,7 +118,7 @@ public class SelectedProfileMenu extends InnerMenuPanel
 				// create file
 				String fileName = Integer.toString(nextProfile)/*+FileTools.EXTENSION_DATA*/;			
 				ProfileSaver.saveProfile(newProfile, fileName);
-				// add in config
+				// add/save in config
 				profilesConfig.addProfile(fileName, name);
 				ProfilesConfigurationSaver.saveProfilesConfiguration(profilesConfig);
 				// rebuild panel
