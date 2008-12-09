@@ -85,6 +85,7 @@ public class SelectedProfileData extends EntitledDataPanel implements FileBrowse
 			
 			// list panel
 			{	filePanel = new FileBrowserSubPanel(leftWidth,dataHeight);
+				filePanel.setShowParent(false);
 				HashMap<String,String> fileNames = profilesConfiguration.getProfiles();
 				filePanel.setFolder(fileNames);
 				filePanel.addListener(this);
