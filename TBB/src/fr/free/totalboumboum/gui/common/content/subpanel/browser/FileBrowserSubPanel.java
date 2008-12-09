@@ -29,6 +29,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.Locale;
 import java.util.Map.Entry;
 
@@ -187,7 +188,7 @@ public class FileBrowserSubPanel extends SubPanel implements MouseListener
 	}
 	
 	public void setSelectedFileName(String fileName)
-	{	java.util.Iterator<Entry<String,String>> it = fileNames.entrySet().iterator();
+	{	Iterator<Entry<String,String>> it = names.iterator();
 		boolean found = false;
 		int index = 0;
 		while(it.hasNext() && !found)
