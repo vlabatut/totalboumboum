@@ -52,6 +52,19 @@ public class Match implements StatisticHolder
 	}
 	
 	/////////////////////////////////////////////////////////////////
+	// NAME 			/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	private String name;
+	
+	public String getName()
+	{	return name;
+	}
+
+	public void setName(String name)
+	{	this.name = name;
+	}
+
+	/////////////////////////////////////////////////////////////////
 	// TOURNAMENT		/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	private AbstractTournament tournament;
@@ -135,7 +148,7 @@ public class Match implements StatisticHolder
 	public void addRound(Round round)
 	{	rounds.add(round);		
 	}
-	public ArrayList<Round> getRound()
+	public ArrayList<Round> getRounds()
 	{	return rounds;	
 	}
 	public void setRounds(ArrayList<Round> rounds)

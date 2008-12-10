@@ -38,17 +38,16 @@ import fr.free.totalboumboum.gui.tools.GuiTools;
  * 
  */
 
-public class SubTextPanel extends SubPanel
+public class SubPanelText extends SubPanel
 {	private static final long serialVersionUID = 1L;
 	private float fontSize;
 	private JTextPane textPane;
 	private StyledDocument doc;
 	private SimpleAttributeSet sa;
 	
-	public SubTextPanel(int width, int height, float fontSize)
+	public SubPanelText(int width, int height, float fontSize)
 	{	super(width, height);
-		this.fontSize = fontSize;
-	
+		
 		textPane = new JTextPane()
 		{	private static final long serialVersionUID = 1L;
 	
@@ -69,14 +68,16 @@ public class SubTextPanel extends SubPanel
 		textPane.setMaximumSize(dim);
 		textPane.setAlignmentX(Component.CENTER_ALIGNMENT);
 		
-		sa = new SimpleAttributeSet();
-		StyleConstants.setAlignment(sa,StyleConstants.ALIGN_LEFT/*JUSTIFIED*/);
-		Font font = GuiConfiguration.getMiscConfiguration().getFont().deriveFont(fontSize);
-		StyleConstants.setFontFamily(sa,font.getFamily());
-		StyleConstants.setFontSize(sa,font.getSize());
-		Color fg = GuiTools.COLOR_TABLE_REGULAR_FOREGROUND;
-		StyleConstants.setForeground(sa, fg);
 		doc = textPane.getStyledDocument();
+		sa = new SimpleAttributeSet();
+		// alignment
+		StyleConstants.setAlignment(sa,StyleConstants.ALIGN_LEFT/*JUSTIFIED*/);
+		// font size
+		setFontSize(fontSize);
+		// color
+		Color fg = GuiTools.COLOR_TABLE_REGULAR_FOREGROUND;
+		StyleConstants.setForeground(sa,fg);
+		// set
 //		doc.setParagraphAttributes(0,doc.getLength()-1,sa,true);		
 		doc.setCharacterAttributes(0,doc.getLength()+1,sa,true);
 		
@@ -85,8 +86,7 @@ public class SubTextPanel extends SubPanel
 
 	/////////////////////////////////////////////////////////////////
 	// CONTENT			/////////////////////////////////////////////
-	/////////////////////////////////////////////////////////////////
-	
+	/////////////////////////////////////////////////////////////////	
 	public void setText(String text)
 	{	// set text
 		try
@@ -96,6 +96,17 @@ public class SubTextPanel extends SubPanel
 		catch (BadLocationException e)
 		{	e.printStackTrace();
 		}
+	}
+	
+	/////////////////////////////////////////////////////////////////
+	// FONT			/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	public void setFontSize(float fontSize)
+	{	this.fontSize = fontSize;
+		Font font = GuiConfiguration.getMiscConfiguration().getFont().deriveFont(fontSize);
+		StyleConstants.setFontFamily(sa,font.getFamily());
+		StyleConstants.setFontSize(sa,font.getSize());
+		doc.setCharacterAttributes(0,doc.getLength()+1,sa,true);
 	}
 	
 	public float getFontSize()

@@ -32,10 +32,14 @@ public class GuiKeys
 	/////////////////////////////////////////////////////////////////
 	// MISC	/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
+	public static final String ABOUT = "About";
 	public static final String ADD = "Add";
+	public static final String ADVANCED = "Advanced";
+	public static final String AI = "Ai";
 	public static final String ALLOWED = "Allowed";
 	public static final String AUTHOR = "Author";
 	public static final String AVAILABLE = "Available";
+	public static final String BACK = "Back";
 	public static final String BLACK = "Black";
 	public static final String BLUE = "Blue";
 	public static final String BOMBEDS = "Bombeds";
@@ -55,6 +59,7 @@ public class GuiKeys
 	public static final String CONFRONTATIONS = "Confrontations";
 	public static final String CONSTANT = "Constant";
 	public static final String CONTROLS = "Controls";
+	public static final String COUNT = "Count";
 	public static final String CROWNS = "Crowns";
 	public static final String CURRENT = "Current";
 	public static final String CYAN = "Cyan";
@@ -71,6 +76,7 @@ public class GuiKeys
 	public static final String GRASS = "Grass";
 	public static final String GREEN = "Green";
 	public static final String GREY = "Grey";
+	public static final String GUI = "Gui";
 	public static final String HEADER = "Header";
 	public static final String HERO = "Hero";
 	public static final String HUMAN = "Human";
@@ -91,6 +97,7 @@ public class GuiKeys
 	public static final String NEXT = "Next";
 	public static final String NO_SHARE = "NoShare";
 	public static final String NO_CONTROLS = "NoControls";
+	public static final String OPTIONS = "Options";
 	public static final String ORANGE = "Orange";
 	public static final String PACK = "Pack";
 	public static final String PAGEDOWN = "PageDown";
@@ -107,6 +114,7 @@ public class GuiKeys
 	public static final String PREVIEW = "Preview";
 	public static final String PREVIOUS = "Previous";
 	public static final String PROFILE = "Profile";
+	public static final String PROFILES = "Profiles";
 	public static final String PROGRESSBAR = "Progressbar";
 	public static final String PURPLE = "Purple";
 	public static final String QUICKMATCH = "Quickmatch";
@@ -117,6 +125,7 @@ public class GuiKeys
 	public static final String RANKPOINTS = "Rankpoints";
 	public static final String RED = "Red";
 	public static final String REGULAR = "Regular";
+	public static final String RESOURCES = "Resources";
 	public static final String RESULTS = "Results";
 	public static final String ROUND = "Round";
 	public static final String RUST = "Rust";
@@ -133,6 +142,7 @@ public class GuiKeys
 	public static final String TOTAL = "Total";
 	public static final String TOURNAMENT = "Tournament";
 	public static final String TYPE = "Type";
+	public static final String VIDEO = "Video";
 	public static final String WHITE = "White";
 	public static final String YELLOW = "Yellow";
 	
@@ -140,14 +150,16 @@ public class GuiKeys
 	// MENUS			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	/* MAIN */ 
-	public static final String MENU_MAIN_BUTTON = "MenuMainButton";
-	public static final String MENU_MAIN_BUTTON_ABOUT = MENU_MAIN_BUTTON+"About";
-	public static final String MENU_MAIN_BUTTON_OPTIONS = MENU_MAIN_BUTTON+"Options";
-	public static final String MENU_MAIN_BUTTON_PROFILES = MENU_MAIN_BUTTON+"Profiles";
-	public static final String MENU_MAIN_BUTTON_QUICKMATCH = MENU_MAIN_BUTTON+"QuickMatch";
-	public static final String MENU_MAIN_BUTTON_RESOURCES = MENU_MAIN_BUTTON+"Resources";
-	public static final String MENU_MAIN_BUTTON_STATISTICS = MENU_MAIN_BUTTON+"Statistics";
-	public static final String MENU_MAIN_BUTTON_TOURNAMENT = MENU_MAIN_BUTTON+"Tournament";
+	public static final String MENU_MAIN = MENU+MAIN;
+		/* BUTTON */
+		public static final String MENU_MAIN_BUTTON = MENU_MAIN+BUTTON;
+		public static final String MENU_MAIN_BUTTON_ABOUT = MENU_MAIN_BUTTON+ABOUT;
+		public static final String MENU_MAIN_BUTTON_OPTIONS = MENU_MAIN_BUTTON+OPTIONS;
+		public static final String MENU_MAIN_BUTTON_PROFILES = MENU_MAIN_BUTTON+PROFILES;
+		public static final String MENU_MAIN_BUTTON_QUICKMATCH = MENU_MAIN_BUTTON+QUICKMATCH;
+		public static final String MENU_MAIN_BUTTON_RESOURCES = MENU_MAIN_BUTTON+RESOURCES;
+		public static final String MENU_MAIN_BUTTON_STATISTICS = MENU_MAIN_BUTTON+STATISTICS;
+		public static final String MENU_MAIN_BUTTON_TOURNAMENT = MENU_MAIN_BUTTON+TOURNAMENT;
 	
 	/* RESOURCES */
 	public static final String MENU_RESOURCES_BUTTON = "MenuResourcesButton";
@@ -165,18 +177,7 @@ public class GuiKeys
 			public static final String MENU_RESOURCES_AI_BUTTON_BACK = MENU_RESOURCES_AI_BUTTON+"Back";	
 			/* SELECT */
 			public static final String MENU_RESOURCES_AI_SELECT_TITLE = "MenuResourcesAiSelectTitle";
-				/* CLASS */
-				public static final String MENU_RESOURCES_AI_SELECT_CLASS_PAGEDOWN = "MenuResourcesAiSelectClassPageDown";
-				public static final String MENU_RESOURCES_AI_SELECT_CLASS_PAGEUP = "MenuResourcesAiSelectClassPageUp";
-				public static final String MENU_RESOURCES_AI_SELECT_CLASS_PARENT = "MenuResourcesAiSelectClassParent";
-				/* PACKAGES */
-				public static final String MENU_RESOURCES_AI_SELECT_PACKAGE_PAGEDOWN = "MenuResourcesAiSelectPackagePageDown";
-				public static final String MENU_RESOURCES_AI_SELECT_PACKAGE_PAGEUP = "MenuResourcesAiSelectPackagePageUp";
-				/* PREVIEW */
-				public static final String MENU_RESOURCES_AI_SELECT_PREVIEW_AUTHOR = "MenuResourcesAiSelectPreviewAuthor";
-				public static final String MENU_RESOURCES_AI_SELECT_PREVIEW_NAME = "MenuResourcesAiSelectPreviewName";
-				public static final String MENU_RESOURCES_AI_SELECT_PREVIEW_NOTES = "MenuResourcesAiSelectPreviewNotes";
-				public static final String MENU_RESOURCES_AI_SELECT_PREVIEW_PACKAGE = "MenuResourcesAiSelectPreviewPackage";			
+			public static final String MENU_RESOURCES_AI_SELECT_NOTES = "MenuResourcesAiSelectNotes";
 		/* HERO */
 			/* BUTTON */
 			public static final String MENU_RESOURCES_HERO_BUTTON = "MenuResourcesHeroButton";	
@@ -213,19 +214,10 @@ public class GuiKeys
 				public static final String MENU_RESOURCES_LEVEL_SELECT_PREVIEW_SOURCE = "MenuResourcesLevelSelectPreviewSource";
 				public static final String MENU_RESOURCES_LEVEL_SELECT_PREVIEW_THEME = "MenuResourcesLevelSelectPreviewTheme";
 		/* MATCH */
+			public static final String MENU_RESOURCES_MATCH_TITLE = "MenuResourcesMatchTitle";
 			/* BUTTON */
 			public static final String MENU_RESOURCES_MATCH_BUTTON = "MenuResourcesMatchButton";	
 			public static final String MENU_RESOURCES_MATCH_BUTTON_BACK = MENU_RESOURCES_MATCH_BUTTON+"Back";	
-			/* SELECT */
-			public static final String MENU_RESOURCES_MATCH_SELECT_TITLE = "MenuResourcesMatchSelectTitle";
-				/* LIST */
-				public static final String MENU_RESOURCES_MATCH_SELECT_LIST_PAGEDOWN = "MenuResourcesMatchSelectListPageDown";
-				public static final String MENU_RESOURCES_MATCH_SELECT_LIST_PAGEUP = "MenuResourcesMatchSelectListPageUp";
-				/* PREVIEW */
-				public static final String MENU_RESOURCES_MATCH_SELECT_PREVIEW_AUTHOR = "MenuResourcesMatchSelectPreviewAuthor";
-				public static final String MENU_RESOURCES_MATCH_SELECT_PREVIEW_NAME = "MenuResourcesMatchSelectPreviewName";
-				public static final String MENU_RESOURCES_MATCH_SELECT_PREVIEW_PLAYERS = "MenuResourcesMatchSelectPreviewPlayers";
-				public static final String MENU_RESOURCES_MATCH_SELECT_PREVIEW_ROUNDS = "MenuResourcesMatchSelectPreviewRounds";
 		/* ROUND */
 			public static final String MENU_RESOURCES_ROUND_TITLE = "MenuResourcesRoundTitle";
 			/* BUTTON */
@@ -235,16 +227,16 @@ public class GuiKeys
 	/* OPTIONS */
 		/* BUTTON */
 		public static final String MENU_OPTIONS_BUTTON = "MenuOptionsButton";
-		public static final String MENU_OPTIONS_BUTTON_ADVANCED = MENU_OPTIONS_BUTTON+"Advanced";
-		public static final String MENU_OPTIONS_BUTTON_BACK = MENU_OPTIONS_BUTTON+"Back";
-		public static final String MENU_OPTIONS_BUTTON_CANCEL = MENU_OPTIONS_BUTTON+"Cancel";
-		public static final String MENU_OPTIONS_BUTTON_CONFIRM = MENU_OPTIONS_BUTTON+"Confirm";
-		public static final String MENU_OPTIONS_BUTTON_CONTROLS = MENU_OPTIONS_BUTTON+"Controls";
-		public static final String MENU_OPTIONS_BUTTON_GAME = MENU_OPTIONS_BUTTON+"Game";
-		public static final String MENU_OPTIONS_BUTTON_GUI = MENU_OPTIONS_BUTTON+"Gui";
-		public static final String MENU_OPTIONS_BUTTON_NEXT = MENU_OPTIONS_BUTTON+"Next";
-		public static final String MENU_OPTIONS_BUTTON_PREVIOUS = MENU_OPTIONS_BUTTON+"Previous";
-		public static final String MENU_OPTIONS_BUTTON_VIDEO = MENU_OPTIONS_BUTTON+"Video";
+		public static final String MENU_OPTIONS_BUTTON_ADVANCED = MENU_OPTIONS_BUTTON+ADVANCED;
+		public static final String MENU_OPTIONS_BUTTON_BACK = MENU_OPTIONS_BUTTON+BACK;
+		public static final String MENU_OPTIONS_BUTTON_CANCEL = MENU_OPTIONS_BUTTON+CANCEL;
+		public static final String MENU_OPTIONS_BUTTON_CONFIRM = MENU_OPTIONS_BUTTON+CONFIRM;
+		public static final String MENU_OPTIONS_BUTTON_CONTROLS = MENU_OPTIONS_BUTTON+CONTROLS;
+		public static final String MENU_OPTIONS_BUTTON_GAME = MENU_OPTIONS_BUTTON+GAME;
+		public static final String MENU_OPTIONS_BUTTON_GUI = MENU_OPTIONS_BUTTON+GUI;
+		public static final String MENU_OPTIONS_BUTTON_NEXT = MENU_OPTIONS_BUTTON+NEXT;
+		public static final String MENU_OPTIONS_BUTTON_PREVIOUS = MENU_OPTIONS_BUTTON+PREVIOUS;
+		public static final String MENU_OPTIONS_BUTTON_VIDEO = MENU_OPTIONS_BUTTON+VIDEO;
 		/* ADVANCED */
 		public static final String MENU_OPTIONS_ADVANCED_TITLE = "MenuOptionsAdvancedTitle";
 			/* LINE */
@@ -452,6 +444,12 @@ public class GuiKeys
 	/////////////////////////////////////////////////////////////////
 	// COMMON CONTENT	/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
+	/* AI */
+	public static final String COMMON_AI = COMMON+AI;
+	public static final String COMMON_AI_AUTHOR = COMMON_AI+AUTHOR;
+	public static final String COMMON_AI_NAME = COMMON_AI+NAME;
+	public static final String COMMON_AI_PACK = COMMON_AI+PACK;			
+			
 	/* BROWSER */
 	public static final String COMMON_BROWSER = COMMON+BROWSER;
 		/* FILE */
@@ -547,6 +545,13 @@ public class GuiKeys
 			public static final String COMMON_LIMIT_TOURNAMENT_HEADER_ITEMS = COMMON_LIMIT_TOURNAMENT_HEADER+ITEMS;
 			public static final String COMMON_LIMIT_TOURNAMENT_HEADER_PAINTINGS = COMMON_LIMIT_TOURNAMENT_HEADER+PAINTINGS;
 			public static final String COMMON_LIMIT_TOURNAMENT_HEADER_TIME = COMMON_LIMIT_TOURNAMENT_HEADER+TIME;
+
+	/* MATCH */
+	public static final String COMMON_MATCH = COMMON+MATCH;
+	public static final String COMMON_MATCH_AUTHOR = COMMON_MATCH+AUTHOR;
+	public static final String COMMON_MATCH_NAME = COMMON_MATCH+NAME;
+	public static final String COMMON_MATCH_ALLOWED_PLAYERS = COMMON_MATCH+ALLOWED+PLAYERS;
+	public static final String COMMON_MATCH_ROUND_COUNT = COMMON_MATCH+ROUND+COUNT;
 			
 	/* PLAYERS */
 	public static final String COMMON_PLAYERS = COMMON+PLAYERS;

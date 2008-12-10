@@ -21,7 +21,6 @@ package fr.free.totalboumboum.gui.menus.explore.ais.select;
  * 
  */
 
-import java.awt.Color;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -34,15 +33,13 @@ import org.xml.sax.SAXException;
 
 import fr.free.totalboumboum.ai.AiPreview;
 import fr.free.totalboumboum.ai.AiPreviewLoader;
+import fr.free.totalboumboum.gui.common.content.subpanel.ai.AiSubPanel;
 import fr.free.totalboumboum.gui.common.content.subpanel.browser.PackBrowserSubPanel;
 import fr.free.totalboumboum.gui.common.content.subpanel.browser.PackBrowserSubPanelListener;
 import fr.free.totalboumboum.gui.common.structure.panel.SplitMenuPanel;
 import fr.free.totalboumboum.gui.common.structure.panel.data.EntitledDataPanel;
-import fr.free.totalboumboum.gui.common.structure.subpanel.EntitledSubPanel;
+import fr.free.totalboumboum.gui.common.structure.subpanel.EntitledSubPanelText;
 import fr.free.totalboumboum.gui.common.structure.subpanel.SubPanel;
-import fr.free.totalboumboum.gui.common.structure.subpanel.SubTextPanel;
-import fr.free.totalboumboum.gui.common.structure.subpanel.UntitledSubPanelTable;
-import fr.free.totalboumboum.gui.data.configuration.GuiConfiguration;
 import fr.free.totalboumboum.gui.tools.GuiKeys;
 import fr.free.totalboumboum.gui.tools.GuiTools;
 import fr.free.totalboumboum.tools.FileTools;
@@ -52,22 +49,15 @@ public class SelectedAiData extends EntitledDataPanel implements PackBrowserSubP
 	private static final long serialVersionUID = 1L;
 	private static final float SPLIT_RATIO = 0.5f;
 	
-	private static final int VIEW_LINE_NAME = 0;
-	private static final int VIEW_LINE_PACK = 1;
-	private static final int VIEW_LINE_AUTHOR = 2;
-
 	private SubPanel mainPanel;
 	private SubPanel previewPanel;
-	private UntitledSubPanelTable infosPanel;
-	private EntitledSubPanel notesPanel;
+	private AiSubPanel infosPanel;
+	private EntitledSubPanelText notesPanel;
 	private PackBrowserSubPanel packPanel;
 	private int listWidth;
 	private int listHeight;
 	
 	private AiPreview selectedAi;
-		
-	@SuppressWarnings("unused")
-	private int lastAuthorNumber = 1;
 	
 	public SelectedAiData(SplitMenuPanel container)
 	{	super(container);
@@ -111,12 +101,16 @@ public class SelectedAiData extends EntitledDataPanel implements PackBrowserSubP
 				int upHeight = (int)(dataHeight*0.5); 
 				int downHeight = dataHeight - upHeight - margin; 
 				
-				makeInfosPanel(rightWidth,upHeight);
+				infosPanel = new AiSubPanel(rightWidth,upHeight);
 				previewPanel.add(infosPanel);
 
 				previewPanel.add(Box.createVerticalGlue());
 
-				makeNotesPanel(rightWidth,downHeight);
+				notesPanel = new EntitledSubPanelText(rightWidth,downHeight);
+				String key = GuiKeys.MENU_RESOURCES_AI_SELECT_NOTES;
+				notesPanel.setTitleKey(key,true);
+				float fontSize = notesPanel.getTitleFontSize()/2;
+				notesPanel.setFontSize(fontSize);
 				previewPanel.add(notesPanel);
 				
 				mainPanel.add(previewPanel);
@@ -126,124 +120,30 @@ public class SelectedAiData extends EntitledDataPanel implements PackBrowserSubP
 		}
 	}
 
-	private void makeInfosPanel(int width, int height)
-	{	int lines = 10;
-		int colSubs = 2;
-		int colGroups = 1;
-		infosPanel = new UntitledSubPanelTable(width,height,colGroups,colSubs,lines,true);
-		
-		// data
-		String keys[] = 
-		{	GuiKeys.MENU_RESOURCES_AI_SELECT_PREVIEW_NAME,
-			GuiKeys.MENU_RESOURCES_AI_SELECT_PREVIEW_PACKAGE,
-			GuiKeys.MENU_RESOURCES_AI_SELECT_PREVIEW_AUTHOR
-		};
-		for(int line=0;line<keys.length;line++)
-		{	int colSub = 0;
-			{	infosPanel.setLabelKey(line,colSub,keys[line],true);
-				Color fg = GuiTools.COLOR_TABLE_HEADER_FOREGROUND;
-				infosPanel.setLabelForeground(line,0,fg);
-				Color bg = GuiTools.COLOR_TABLE_HEADER_BACKGROUND;
-				infosPanel.setLabelBackground(line,colSub,bg);
-				colSub++;
-			}
-			{	String text = null;
-				String tooltip = GuiConfiguration.getMiscConfiguration().getLanguage().getText(keys[line]+GuiKeys.TOOLTIP);
-				infosPanel.setLabelText(line,colSub,text,tooltip);
-				if(line>0)
-				{	Color bg = GuiTools.COLOR_TABLE_REGULAR_BACKGROUND;
-				infosPanel.setLabelBackground(line,colSub,bg);
-				}
-				colSub++;
-			}
-		}
-		int maxWidth = width-3*GuiTools.subPanelMargin-infosPanel.getHeaderHeight();
-		infosPanel.setColSubMaxWidth(1,maxWidth);
-		infosPanel.setColSubPreferredWidth(1,maxWidth);
-	}
-
-	//TODO implémenter un EntitledSubPanelText et renommer en UntitledSubPanelText
-	private void makeNotesPanel(int width, int height)
-	{	notesPanel = new EntitledSubPanel(width,height);
-		
-		String key = GuiKeys.MENU_RESOURCES_AI_SELECT_PREVIEW_NOTES;
-		notesPanel.setTitleKey(key,true);
-		
-		float fontSize = notesPanel.getTitleFontSize()/2;
-		int w = notesPanel.getDataWidth();
-		int h = notesPanel.getDataHeight();
-		SubTextPanel textPanel = new SubTextPanel(w,h,fontSize);
-		notesPanel.setDataPanel(textPanel);
-		textPanel.setBackground(GuiTools.COLOR_TABLE_NEUTRAL_BACKGROUND);
-	}
-	
 	private void refreshPreview()
-	{	String infosValues[] = new String[10];
+	{	// infos
+		infosPanel.setAiPreview(selectedAi);
+		// notes
 		ArrayList<String> notesValues;
-		SubTextPanel textPanel = (SubTextPanel)notesPanel.getDataPanel();
+		SubPanel textPanel = notesPanel.getDataPanel();
 		// no player selected
 		if(selectedAi==null)
-		{	// notes
-			notesValues = new ArrayList<String>();
+		{	notesValues = new ArrayList<String>();
 			textPanel.setBackground(GuiTools.COLOR_TABLE_NEUTRAL_BACKGROUND);
-			// infos
-			for(int i=0;i<infosValues.length;i++)
-				infosValues[i] = null;
-			for(int i=VIEW_LINE_AUTHOR+1;i<infosValues.length;i++)
-			{	infosPanel.setLabelIcon(i,0,null,null);
-				Color bg = GuiTools.COLOR_TABLE_NEUTRAL_BACKGROUND;
-				infosPanel.setLabelBackground(i,0,bg);	
-				infosPanel.setLabelBackground(i,1,bg);	
-			}
 		}
 		// one player selected
 		else
-		{	// notes
-			notesValues = selectedAi.getNotes();
+		{	notesValues = selectedAi.getNotes();
 			textPanel.setBackground(GuiTools.COLOR_TABLE_REGULAR_BACKGROUND);
-			// infos
-			infosValues[VIEW_LINE_NAME] = selectedAi.getFolder();
-			infosValues[VIEW_LINE_PACK]= selectedAi.getPack();
-			ArrayList<String> authors = selectedAi.getAuthors();
-			Iterator<String> it = authors.iterator();
-			int index = 0;
-			while(it.hasNext())
-			{	String author = it.next();	
-				infosValues[VIEW_LINE_AUTHOR+index] = author;
-				index++;
-			}
-			for(int i=1;i<index;i++)
-			{	int line = VIEW_LINE_AUTHOR+i;
-				infosPanel.setLabelKey(line,0,GuiKeys.MENU_RESOURCES_AI_SELECT_PREVIEW_AUTHOR,true);
-				Color fg = GuiTools.COLOR_TABLE_HEADER_FOREGROUND;
-				infosPanel.setLabelForeground(line,0,fg);
-				Color bg = GuiTools.COLOR_TABLE_HEADER_BACKGROUND;
-				infosPanel.setLabelBackground(line,0,bg);
-				bg = GuiTools.COLOR_TABLE_REGULAR_BACKGROUND;
-				infosPanel.setLabelBackground(line,1,bg);
-			}
-			for(int i=VIEW_LINE_AUTHOR+Math.max(index,1);i<infosValues.length;i++)
-			{	infosPanel.setLabelIcon(i,0,null,null);
-				Color bg = GuiTools.COLOR_TABLE_NEUTRAL_BACKGROUND;
-				infosPanel.setLabelBackground(i,0,bg);	
-				infosPanel.setLabelBackground(i,1,bg);	
-			}
 		}
-		// infos
-		for(int line=0;line<infosValues.length;line++)
-		{	int colSub = 1;
-			String text = infosValues[line];
-			String tooltip = text;
-			infosPanel.setLabelText(line,colSub,text,tooltip);
-		}
-		// notes
+		// refresh
 		String text = "";
 		Iterator<String> i = notesValues.iterator();
 		while (i.hasNext())
 		{	String temp = i.next();
 			text = text + temp + "\n";
 		}
-		textPanel.setText(text);
+		notesPanel.setText(text);
 	}
 
 	/////////////////////////////////////////////////////////////////

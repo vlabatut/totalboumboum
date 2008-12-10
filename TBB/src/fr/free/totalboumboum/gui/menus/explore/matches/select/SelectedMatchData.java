@@ -21,7 +21,6 @@ package fr.free.totalboumboum.gui.menus.explore.matches.select;
  * 
  */
 
-import java.awt.Color;
 import java.awt.Dimension;
 import java.io.File;
 import java.io.IOException;
@@ -41,34 +40,26 @@ import fr.free.totalboumboum.gui.common.content.subpanel.browser.FolderBrowserSu
 import fr.free.totalboumboum.gui.common.content.subpanel.browser.FolderBrowserSubPanelListener;
 import fr.free.totalboumboum.gui.common.content.subpanel.limits.LimitsSubPanelListener;
 import fr.free.totalboumboum.gui.common.content.subpanel.limits.LimitsSubPanel;
+import fr.free.totalboumboum.gui.common.content.subpanel.match.MatchSubPanel;
 import fr.free.totalboumboum.gui.common.content.subpanel.points.PointsSubPanel;
 import fr.free.totalboumboum.gui.common.structure.panel.SplitMenuPanel;
 import fr.free.totalboumboum.gui.common.structure.panel.data.EntitledDataPanel;
 import fr.free.totalboumboum.gui.common.structure.subpanel.SubPanel;
-import fr.free.totalboumboum.gui.common.structure.subpanel.UntitledSubPanelTable;
-import fr.free.totalboumboum.gui.data.configuration.GuiConfiguration;
 import fr.free.totalboumboum.gui.tools.GuiKeys;
 import fr.free.totalboumboum.gui.tools.GuiTools;
 import fr.free.totalboumboum.tools.FileTools;
-import fr.free.totalboumboum.tools.StringTools;
 
 public class SelectedMatchData extends EntitledDataPanel implements FolderBrowserSubPanelListener, LimitsSubPanelListener
 {	
 	private static final long serialVersionUID = 1L;
 	private static final float SPLIT_RATIO = 0.5f;
-	
-	private static final int VIEW_LINE_COUNT = 4;
-	private static final int VIEW_LINE_NAME = 0;
-	private static final int VIEW_LINE_AUTHOR = 1;
-	private static final int VIEW_LINE_ROUNDS = 2;
-	private static final int VIEW_LINE_PLAYERS = 3;
 
 	private SubPanel mainPanel;
 	private SubPanel rightPanel;
 	private FolderBrowserSubPanel folderPanel;
 	private LimitsSubPanel<MatchLimit> limitsPanel;
 	private PointsSubPanel pointsPanel;
-	private UntitledSubPanelTable previewPanel;
+	private MatchSubPanel miscPanel;
 
 	private Match selectedMatch = null;
 	private int leftWidth;
@@ -82,7 +73,7 @@ public class SelectedMatchData extends EntitledDataPanel implements FolderBrowse
 		this.baseFolder = baseFolder;
 
 		// title
-		setTitleKey(GuiKeys.MENU_RESOURCES_MATCH_SELECT_TITLE);
+		setTitleKey(GuiKeys.MENU_RESOURCES_MATCH_TITLE);
 	
 		// data
 		{	mainPanel = new SubPanel(dataWidth,dataHeight);
@@ -119,8 +110,8 @@ public class SelectedMatchData extends EntitledDataPanel implements FolderBrowse
 				
 				rightPanel.add(Box.createVerticalGlue());
 
-				{	makePreviewPanel(rightWidth,previewHeight);
-					rightPanel.add(previewPanel);
+				{	miscPanel = new MatchSubPanel(rightWidth,previewHeight);
+					rightPanel.add(miscPanel);
 				}
 
 				rightPanel.add(Box.createRigidArea(new Dimension(margin,margin)));
@@ -145,65 +136,6 @@ public class SelectedMatchData extends EntitledDataPanel implements FolderBrowse
 		}
 	}
 		
-	private void makePreviewPanel(int width, int height)
-	{	int colSubs = 2;
-		int colGroups = 1;
-		previewPanel = new UntitledSubPanelTable(width,height,colGroups,colSubs,VIEW_LINE_COUNT,true);
-		
-		// data
-		String keys[] = 
-		{	GuiKeys.MENU_RESOURCES_MATCH_SELECT_PREVIEW_NAME,
-			GuiKeys.MENU_RESOURCES_MATCH_SELECT_PREVIEW_AUTHOR,
-			GuiKeys.MENU_RESOURCES_MATCH_SELECT_PREVIEW_ROUNDS,
-			GuiKeys.MENU_RESOURCES_MATCH_SELECT_PREVIEW_PLAYERS,
-		};
-		for(int line=0;line<keys.length;line++)
-		{	int colSub = 0;
-			{	previewPanel.setLabelKey(line,colSub,keys[line],true);
-				Color fg = GuiTools.COLOR_TABLE_HEADER_FOREGROUND;
-				previewPanel.setLabelForeground(line,0,fg);
-				Color bg = GuiTools.COLOR_TABLE_HEADER_BACKGROUND;
-				previewPanel.setLabelBackground(line,colSub,bg);
-				colSub++;
-			}
-			{	String text = null;
-				String tooltip = GuiConfiguration.getMiscConfiguration().getLanguage().getText(keys[line]+GuiKeys.TOOLTIP);
-				previewPanel.setLabelText(line,colSub,text,tooltip);
-				if(line>0)
-				{	Color bg = GuiTools.COLOR_TABLE_REGULAR_BACKGROUND;
-					previewPanel.setLabelBackground(line,colSub,bg);
-				}
-				colSub++;
-			}
-		}
-		int maxWidth = width-3*GuiTools.subPanelMargin-previewPanel.getHeaderHeight();
-		previewPanel.setColSubMaxWidth(1,maxWidth);
-		previewPanel.setColSubPreferredWidth(1,maxWidth);
-	}
-	
-	private void refreshPreview()
-	{	String values[] = new String[VIEW_LINE_COUNT];
-		// no match selected
-		if(selectedMatch==null)
-		{	for(int i=0;i<values.length;i++)
-				values[i] = null;	
-		}
-		// one match selected
-		else
-		{	values[VIEW_LINE_NAME] = folderPanel.getSelectedName();
-			values[VIEW_LINE_AUTHOR]= selectedMatch.getAuthor();
-			values[VIEW_LINE_ROUNDS] = Integer.toString(selectedMatch.getRound().size());
-			values[VIEW_LINE_PLAYERS] = StringTools.formatAllowedPlayerNumbers(selectedMatch.getAllowedPlayerNumbers());
-		}
-		// common
-		for(int line=0;line<values.length;line++)
-		{	int colSub = 1;
-			String text = values[line];
-			String tooltip = text;
-			previewPanel.setLabelText(line,colSub,text,tooltip);
-		}
-	}
-
 	private void refreshLimits()
 	{	if(selectedMatch==null)
 			limitsPanel.setLimits(null);
@@ -213,7 +145,9 @@ public class SelectedMatchData extends EntitledDataPanel implements FolderBrowse
 	
 	@Override
 	public void refresh()
-	{	
+	{	folderPanel.refresh();
+		miscPanel.setMatch(selectedMatch);
+		refreshLimits();
 /*
 		initMatches();
 		makeListPanels(leftWidth,dataHeight);
@@ -298,7 +232,7 @@ public class SelectedMatchData extends EntitledDataPanel implements FolderBrowse
 			{	e.printStackTrace();
 			}
 		}
-		refreshPreview();
+		miscPanel.setMatch(selectedMatch);
 		refreshLimits();
 	}
 }

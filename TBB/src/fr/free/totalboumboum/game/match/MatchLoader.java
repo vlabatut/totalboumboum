@@ -52,7 +52,11 @@ public class MatchLoader
 		schemaFile = new File(schemaFolder+File.separator+FileTools.FILE_MATCH+FileTools.EXTENSION_SCHEMA);
 		Element root = XmlTools.getRootFromFile(dataFile,schemaFile);
 		// loading
-		Match result = loadMatchElement(root,folderPath,tournament);
+		Match result = new Match(tournament);
+		File temp = new File(folderPath);
+		String name = temp.getName();
+		result.setName(name);
+		loadMatchElement(root,folderPath,tournament,result);
 		return result;
     }
     
@@ -62,10 +66,9 @@ public class MatchLoader
 		return result;
     }
 
-    private static Match loadMatchElement(Element root, String folderPath, AbstractTournament tournament) throws ParserConfigurationException, SAXException, IOException, ClassNotFoundException
+    private static void loadMatchElement(Element root, String folderPath, AbstractTournament tournament, Match result) throws ParserConfigurationException, SAXException, IOException, ClassNotFoundException
 	{	// init
-    	Match result = new Match(tournament);
-		Element element;
+    	Element element;
 		
 		// notes
 		element = root.getChild(XmlTools.ELT_NOTES);
@@ -87,7 +90,6 @@ public class MatchLoader
 		// rounds
 		element = root.getChild(XmlTools.ELT_ROUNDS);
 		loadRoundsElement(element,folderPath,result);
-		return result;
 	}		
 		
     @SuppressWarnings("unchecked")

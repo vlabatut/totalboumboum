@@ -10,7 +10,7 @@
 				<text name="About" value="À propos" tooltip="À propos de Total Boum Boum" />
 				<text name="Options" value="Options" tooltip="Accéder aux options générales du jeu" />
 				<text name="Profiles" value="Profils" tooltip="Éditer les profils des joueurs" />
-				<text name="QuickMatch" value="Partie rapide" tooltip="Commencer une partie rapide" />
+				<text name="Quickmatch" value="Partie rapide" tooltip="Commencer une partie rapide" />
 				<text name="Resources" value="Ressources" tooltip="Naviguer parmi les ressources disponibles" />
 				<text name="Statistics" value="Statistiques" tooltip="Voir les statistiques des joueurs" />
 				<text name="Tournament" value="Tournoi" tooltip="Commencer un tournoi" />
@@ -36,21 +36,7 @@
 				</group>		
 				<group name="Select">
 					<text name="Title" value="Liste des IA" tooltip="Liste des intelligences artificielles disponibles" />
-					<group name="Class">
-						<text name="PageDown" value="Descendre" tooltip="Aller à la page d'IA suivante" />
-						<text name="PageUp" value="Monter" tooltip="Revenir à la page d'IA précédente" />
-						<text name="Parent" value=".." tooltip="Revenir à la liste des paquets" />
-					</group>
-					<group name="Package">
-						<text name="PageDown" value="Descendre" tooltip="Aller à la page de paquets suivante" />
-						<text name="PageUp" value="Monter" tooltip="Revenir à la page de paquets précédente" />
-					</group>
-					<group name="Preview">
-						<text name="Author" value="Auteur" tooltip="Auteur de l'intelligence artificielle" />
-						<text name="Name" value="Nom" tooltip="Nom de l'intelligence artificielle" />
-						<text name="Notes" value="Notes" tooltip="Notes de l'auteur de l'intelligence artificielle" />
-						<text name="Package" value="Paquet" tooltip="Paquet contenant l'intelligence artificielle" />
-					</group>
+					<text name="Notes" value="Notes" tooltip="Notes de l'auteur de l'intelligence artificielle" />
 				</group>
 			</group>	
 	
@@ -100,22 +86,10 @@
 			</group>	
 
 			<group name="Match">
+				<text name="Title" value="Liste des rencontres" tooltip="Liste des rencontres prédéfinies" />
 				<group name="Button">
 					<text name="Back" value="Retour" tooltip="Revenir au menu des ressources" />
 				</group>		
-				<group name="Select">
-					<text name="Title" value="Liste des rencontres" tooltip="Liste des rencontres prédéfinies" />
-					<group name="List">
-						<text name="PageDown" value="Descendre" tooltip="Aller à la page de rencontres suivante" />
-						<text name="PageUp" value="Monter" tooltip="Revenir à la page de rencontres précédente" />
-					</group>
-					<group name="Preview">
-						<text name="Author" value="Auteur"  tooltip="Auteur de cette rencontre" />
-						<text name="Name" value="Nom" tooltip="Nom de cette rencontre" />
-						<text name="Players" value="Joueurs" tooltip="Nombre de joueurs pour cette rencontre" />
-						<text name="Rounds" value="Manches"  tooltip="Nombre de manches définies pour cette rencontre" />
-					</group>
-				</group>
 			</group>	
 
 			<group name="Round">
@@ -399,6 +373,12 @@
 
 <!-- COMMON -->
 	<group name="Common">
+<!-- AI -->
+		<group name="Ai">
+			<text name="Author" value="Auteur" tooltip="Auteur de l'intelligence artificielle" />
+			<text name="Name" value="Nom" tooltip="Nom de l'intelligence artificielle" />
+			<text name="Pack" value="Paquet" tooltip="Paquet contenant l'intelligence artificielle" />
+		</group>
 	
 <!-- BROWSE -->
 		<group name="Browser">
@@ -501,6 +481,14 @@
 					<text name="Time" value="Temps"  tooltip="Durée maximale (cumulée) du tournoi" />
 				</group>
 			</group>
+		</group>
+
+<!-- MATCH -->
+		<group name="Match">
+			<text name="Author" value="Auteur"  tooltip="Auteur de cette rencontre" />
+			<text name="Name" value="Nom" tooltip="Nom de cette rencontre" />
+			<text name="AllowedPlayers" value="Joueurs" tooltip="Nombre de joueurs pour cette rencontre" />
+			<text name="RoundCount" value="Manches"  tooltip="Nombre de manches définies pour cette rencontre" />
 		</group>
 
 <!-- PLAYERS -->
