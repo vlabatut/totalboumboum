@@ -106,7 +106,7 @@ public class SelectedProfileMenu extends InnerMenuPanel
 				profilesConfig.setLastProfileIndex(nextProfile);
 				// create profile
 				Profile newProfile = new Profile();
-				String key = GuiKeys.MENU_PROFILES_LIST_NEW_PROFILE;
+				String key = GuiKeys.MENU_PROFILES_SELECT_NEW_PROFILE;
 				String name = GuiConfiguration.getMiscConfiguration().getLanguage().getText(key);
 				newProfile.setName(name);
 				String spritePack = "superbomberman1";

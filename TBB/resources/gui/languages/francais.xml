@@ -41,20 +41,10 @@
 			</group>	
 	
 			<group name="Hero">
+				<text name="Title" value="Liste des personnages" tooltip="Liste des personnages disponibles" />
 				<group name="Button">
 					<text name="Back" value="Retour" tooltip="Revenir au menu des ressources" />
 				</group>		
-				<group name="Select">
-					<text name="Title" value="Liste des personnages" tooltip="Liste des personnages disponibles" />
-					<group name="Preview">
-						<text name="Author" value="Auteur"  tooltip="Auteur/ripper de ce personnage" />
-						<text name="Colors" value="Couleurs"  tooltip="Couleurs disponibles pour ce personnage" />
-						<text name="Image" value="Prévisualisation" tooltip="Prévisualisation de ce personnage" />
-						<text name="Name" value="Nom" tooltip="Nom de ce personnage" />
-						<text name="Package" value="Paquet" tooltip="Paquet contenant ce personnage" />
-						<text name="Source" value="Source"  tooltip="Source de ce personnage (oeuvre originale ou extrait d'un jeu existant)" />
-					</group>
-				</group>
 			</group>	
 	
 			<group name="Level">
@@ -242,20 +232,9 @@
 				<text name="NameChange" value="Modifier le nom" tooltip="Modifier le nom du profil" />
 			</group>
 
-			<group name="List">
+			<group name="Select">
 				<text name="Title" value="Liste des profils" tooltip="Liste de tous les profils existants" />
 				<text name="NewProfile" value="Nouveau profil" tooltip="Nouveau profil" />
-				<text name="PageDown" value="Descendre" tooltip="Revenir à la page de profils suivante" />
-				<text name="PageUp" value="Monter" tooltip="Aller à la page de profils précédente" />
-			</group>
-			
-			<group name="Preview" >
-				<text name="AiName" value="Nom de l'IA" tooltip="Nom de l'intelligence artificielle" />
-				<text name="AiPack" value="Paquet de l'IA" tooltip="Nom du paquet contenant l'intelligence artificielle" />
-				<text name="Color" value="Couleur" tooltip="Couleur par défaut du personnage" />
-				<text name="HeroName" value="Nom du personnage" tooltip="Nom du personnage contrôlé par le joueur" />
-				<text name="HeroPack" value="Paquet du personnage" tooltip="Nom du paquet contenant le personnage contrôlé par le joueur" />
-				<text name="Name" value="Nom du joueur" tooltip="Nom du joueur correspondant à ce profil" />
 			</group>
 			
 		</group>	
@@ -608,7 +587,17 @@
 				</group>
 			</group>
 		</group>
-		
+
+<!-- PROFILES -->
+		<group name="Profiles" >
+			<text name="AiName" value="Nom de l'IA" tooltip="Nom de l'intelligence artificielle" />
+			<text name="AiPack" value="Paquet de l'IA" tooltip="Nom du paquet contenant l'intelligence artificielle" />
+			<text name="Color" value="Couleur" tooltip="Couleur par défaut du personnage" />
+			<text name="HeroName" value="Nom du personnage" tooltip="Nom du personnage contrôlé par le joueur" />
+			<text name="HeroPack" value="Paquet du personnage" tooltip="Nom du paquet contenant le personnage contrôlé par le joueur" />
+			<text name="Name" value="Nom du joueur" tooltip="Nom du joueur correspondant à ce profil" />
+		</group>
+				
 <!-- RESULTS -->
 		<group name="Results" >
 			<group name="Match">
@@ -686,6 +675,16 @@
 			<text name="LevelFolder" value="Niveau"  tooltip="Nom du niveau utilisé dans cette manche" />
 			<text name="LevelPack" value="Paquet"  tooltip="Nom du paquet contenant le niveau utilisé dans cette manche" />
 			<text name="Title" value="Nom" tooltip="Nom de cette manche" />
+		</group>
+
+<!-- SPRITE -->
+		<group name="Sprite">
+			<text name="Author" value="Auteur"  tooltip="Auteur/ripper de ce personnage" />
+			<text name="Colors" value="Couleurs"  tooltip="Couleurs disponibles pour ce personnage" />
+			<text name="Image" value="Prévisualisation" tooltip="Prévisualisation de ce personnage" />
+			<text name="Name" value="Nom" tooltip="Nom de ce personnage" />
+			<text name="Pack" value="Paquet" tooltip="Paquet contenant ce personnage" />
+			<text name="Source" value="Source"  tooltip="Source de ce personnage (oeuvre originale ou extrait d'un jeu existant)" />
 		</group>
 			
 	</group>

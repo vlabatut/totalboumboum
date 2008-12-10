@@ -44,8 +44,6 @@ import fr.free.totalboumboum.gui.tools.GuiTools;
 public class FileBrowserSubPanel extends SubPanel implements MouseListener
 {	private static final long serialVersionUID = 1L;
 
-	private String prefix;
-
 	public FileBrowserSubPanel(int width, int height)
 	{	super(width,height);
 		setOpaque(false);
@@ -53,9 +51,6 @@ public class FileBrowserSubPanel extends SubPanel implements MouseListener
 		// layout
 		BoxLayout layout = new BoxLayout(this,BoxLayout.PAGE_AXIS); 
 		setLayout(layout);
-		
-		// init	
-		this.prefix = GuiKeys.COMMON_BROWSER_FILE;
 		
 		// pages
 		setFolder(null);
@@ -128,7 +123,7 @@ public class FileBrowserSubPanel extends SubPanel implements MouseListener
 			// page up
 			{	Color bg = GuiTools.COLOR_TABLE_HEADER_BACKGROUND;
 				listPanel.setLabelBackground(linePrevious,0,bg);
-				String key = prefix+GuiKeys.PAGEUP;
+				String key = GuiKeys.COMMON_BROWSER_FILE_PAGEUP;
 				listPanel.setLabelKey(linePrevious,0,key,true);
 				JLabel label = listPanel.getLabel(linePrevious,0);
 				label.addMouseListener(this);
@@ -137,7 +132,7 @@ public class FileBrowserSubPanel extends SubPanel implements MouseListener
 			if(showParent)
 			{	Color bg = GuiTools.COLOR_TABLE_HEADER_BACKGROUND;
 				listPanel.setLabelBackground(lineParent,0,bg);
-				String key = prefix+GuiKeys.PARENT;
+				String key = GuiKeys.COMMON_BROWSER_FILE_PARENT;
 				listPanel.setLabelKey(lineParent,0,key,false);
 				JLabel label = listPanel.getLabel(lineParent,0);
 				label.addMouseListener(this);
@@ -145,7 +140,7 @@ public class FileBrowserSubPanel extends SubPanel implements MouseListener
 			// page down
 			{	Color bg = GuiTools.COLOR_TABLE_HEADER_BACKGROUND;
 				listPanel.setLabelBackground(lineNext,0,bg);
-				String key = prefix+GuiKeys.PAGEDOWN;
+				String key = GuiKeys.COMMON_BROWSER_FILE_PAGEDOWN;
 				listPanel.setLabelKey(lineNext,0,key,true);
 				JLabel label = listPanel.getLabel(lineNext,0);
 				label.addMouseListener(this);

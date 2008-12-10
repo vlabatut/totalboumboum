@@ -51,6 +51,7 @@ public class GuiKeys
 	public static final String BUTTON = "Button";
 	public static final String CANCEL = "Cancel";
 	public static final String COLOR = "Color";
+	public static final String COLORS = "Colors";
 	public static final String COMMON = "Common";
 	public static final String COMPLETE = "Complete";
 	public static final String COMPUTER = "Computer";
@@ -80,6 +81,7 @@ public class GuiKeys
 	public static final String HEADER = "Header";
 	public static final String HERO = "Hero";
 	public static final String HUMAN = "Human";
+	public static final String IMAGE = "Image";
 	public static final String INDIGO = "Indigo";
 	public static final String INITIAL = "Initial";
 	public static final String INSTANCE = "Instance";
@@ -129,6 +131,7 @@ public class GuiKeys
 	public static final String RESULTS = "Results";
 	public static final String ROUND = "Round";
 	public static final String RUST = "Rust";
+	public static final String SPRITE = "Sprite";
 	public static final String ULTRAMARINE = "Ultramarine";
 	public static final String SCORE = "Score";
 	public static final String SHARE = "Share";
@@ -179,18 +182,10 @@ public class GuiKeys
 			public static final String MENU_RESOURCES_AI_SELECT_TITLE = "MenuResourcesAiSelectTitle";
 			public static final String MENU_RESOURCES_AI_SELECT_NOTES = "MenuResourcesAiSelectNotes";
 		/* HERO */
+			public static final String MENU_RESOURCES_HERO_TITLE = "MenuResourcesHeroTitle";
 			/* BUTTON */
 			public static final String MENU_RESOURCES_HERO_BUTTON = "MenuResourcesHeroButton";	
 			public static final String MENU_RESOURCES_HERO_BUTTON_BACK = MENU_RESOURCES_HERO_BUTTON+"Back";	
-			/* SELECT */
-			public static final String MENU_RESOURCES_HERO_SELECT_TITLE = "MenuResourcesHeroSelectTitle";
-				/* PREVIEW */
-				public static final String MENU_RESOURCES_HERO_SELECT_PREVIEW_AUTHOR = "MenuResourcesHeroSelectPreviewAuthor";
-				public static final String MENU_RESOURCES_HERO_SELECT_PREVIEW_COLORS = "MenuResourcesHeroSelectPreviewColors";
-				public static final String MENU_RESOURCES_HERO_SELECT_PREVIEW_IMAGE = "MenuResourcesHeroSelectPreviewImage";
-				public static final String MENU_RESOURCES_HERO_SELECT_PREVIEW_NAME = "MenuResourcesHeroSelectPreviewName";
-				public static final String MENU_RESOURCES_HERO_SELECT_PREVIEW_PACKAGE = "MenuResourcesHeroSelectPreviewPackage";
-				public static final String MENU_RESOURCES_HERO_SELECT_PREVIEW_SOURCE = "MenuResourcesHeroSelectPreviewSource";				
 		/* LEVEL */
 			/* BUTTON */
 			public static final String MENU_RESOURCES_LEVEL_BUTTON = "MenuResourcesLevelButton";	
@@ -333,18 +328,9 @@ public class GuiKeys
 		public static final String MENU_PROFILES_EDIT_HERO_CHANGE = "MenuProfilesEditHeroChange";
 		public static final String MENU_PROFILES_EDIT_NAME = "MenuProfilesEditName";
 		public static final String MENU_PROFILES_EDIT_NAME_CHANGE = "MenuProfilesEditNameChange";
-		/* LIST */
-		public static final String MENU_PROFILES_LIST_TITLE = "MenuProfilesListTitle";
-		public static final String MENU_PROFILES_LIST_PAGEDOWN = "MenuProfilesListPageDown";
-		public static final String MENU_PROFILES_LIST_PAGEUP = "MenuProfilesListPageUp";
-		public static final String MENU_PROFILES_LIST_NEW_PROFILE = "MenuProfilesListNewProfile";
-		/* PREVIEW */
-		public static final String MENU_PROFILES_PREVIEW_AINAME = "MenuProfilesPreviewAiName";
-		public static final String MENU_PROFILES_PREVIEW_AIPACK = "MenuProfilesPreviewAiPack";
-		public static final String MENU_PROFILES_PREVIEW_COLOR = "MenuProfilesPreviewColor";
-		public static final String MENU_PROFILES_PREVIEW_HERONAME = "MenuProfilesPreviewHeroName";
-		public static final String MENU_PROFILES_PREVIEW_HEROPACK = "MenuProfilesPreviewHeroPack";
-		public static final String MENU_PROFILES_PREVIEW_NAME = "MenuProfilesPreviewName";
+		/* SELECT */
+		public static final String MENU_PROFILES_SELECT_TITLE = "MenuProfilesSelectTitle";
+		public static final String MENU_PROFILES_SELECT_NEW_PROFILE = "MenuProfilesSelectNewProfile";
 	/* QUICKMATCH */	
 	public static final String MENU_QUICKMATCH = MENU+QUICKMATCH;
 		/* PLAYERS */
@@ -666,6 +652,15 @@ public class GuiKeys
 			public static final String COMMON_POINTS_TOURNAMENT_DATA_REGULAR = COMMON_POINTS_TOURNAMENT_DATA+REGULAR;
 			public static final String COMMON_POINTS_TOURNAMENT_DATA_SHARE = COMMON_POINTS_TOURNAMENT_DATA+SHARE;
 			public static final String COMMON_POINTS_TOURNAMENT_DATA_TIME = COMMON_POINTS_TOURNAMENT_DATA+TIME;
+
+	/* PROFILES */
+	public static final String COMMON_PROFILES = COMMON+PROFILES;
+	public static final String COMMON_PROFILES_AI_NAME = COMMON_PROFILES+AI+NAME;
+	public static final String COMMON_PROFILES_AI_PACK = COMMON_PROFILES+AI+PACK;
+	public static final String COMMON_PROFILES_COLOR = COMMON_PROFILES+COLOR;
+	public static final String COMMON_PROFILES_HERO_NAME = COMMON_PROFILES+HERO+NAME;
+	public static final String COMMON_PROFILES_HERO_PACK = COMMON_PROFILES+HERO+PACK;
+	public static final String COMMON_PROFILES_NAME = COMMON_PROFILES+NAME;
 			
 	/* RESULTS */
 	public static final String COMMON_RESULTS = COMMON+RESULTS;
@@ -741,6 +736,14 @@ public class GuiKeys
 	public static final String COMMON_ROUND_LEVEL_FOLDER = COMMON_ROUND+LEVEL+FOLDER;
 	public static final String COMMON_ROUND_LEVEL_PACK = COMMON_ROUND+LEVEL+PACK;
 	public static final String COMMON_ROUND_TITLE = COMMON_ROUND+TITLE;
+	/* SPRITE */
+	public static final String COMMON_SPRITE = COMMON+SPRITE;
+	public static final String COMMON_SPRITE_AUTHOR = COMMON_SPRITE+AUTHOR;
+	public static final String COMMON_SPRITE_COLORS = COMMON_SPRITE+COLORS;
+	public static final String COMMON_SPRITE_IMAGE = COMMON_SPRITE+IMAGE;
+	public static final String COMMON_SPRITE_NAME = COMMON_SPRITE+NAME;
+	public static final String COMMON_SPRITE_PACK = COMMON_SPRITE+PACK;
+	public static final String COMMON_SPRITE_SOURCE = COMMON_SPRITE+SOURCE;				
 			
 	
 	/////////////////////////////////////////////////////////////////

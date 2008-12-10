@@ -54,18 +54,12 @@ public class SelectedMatchData extends EntitledDataPanel implements FolderBrowse
 	private static final long serialVersionUID = 1L;
 	private static final float SPLIT_RATIO = 0.5f;
 
-	private SubPanel mainPanel;
-	private SubPanel rightPanel;
 	private FolderBrowserSubPanel folderPanel;
 	private LimitsSubPanel<MatchLimit> limitsPanel;
 	private PointsSubPanel pointsPanel;
 	private MatchSubPanel miscPanel;
 
-	private Match selectedMatch = null;
-	private int leftWidth;
-	private int rightWidth;
-	private int rightHeight;
-	
+	private Match selectedMatch = null;	
 	private String baseFolder;
 	
 	public SelectedMatchData(SplitMenuPanel container, String baseFolder)
@@ -74,7 +68,8 @@ public class SelectedMatchData extends EntitledDataPanel implements FolderBrowse
 
 		// title
 		setTitleKey(GuiKeys.MENU_RESOURCES_MATCH_TITLE);
-	
+		
+		SubPanel mainPanel;
 		// data
 		{	mainPanel = new SubPanel(dataWidth,dataHeight);
 			{	BoxLayout layout = new BoxLayout(mainPanel,BoxLayout.LINE_AXIS); 
@@ -82,8 +77,8 @@ public class SelectedMatchData extends EntitledDataPanel implements FolderBrowse
 			}
 			
 			int margin = GuiTools.panelMargin;
-			leftWidth = (int)(dataWidth*SPLIT_RATIO); 
-			rightWidth = dataWidth - leftWidth - margin; 
+			int leftWidth = (int)(dataWidth*SPLIT_RATIO); 
+			int rightWidth = dataWidth - leftWidth - margin; 
 			mainPanel.setOpaque(false);
 			
 			// list panel
@@ -98,10 +93,10 @@ public class SelectedMatchData extends EntitledDataPanel implements FolderBrowse
 			mainPanel.add(Box.createHorizontalGlue());
 			
 			// right panel
-			{	rightHeight = (int)((dataHeight - 2*margin)*0.4);
+			{	int rightHeight = (int)((dataHeight - 2*margin)*0.4);
 				int previewHeight = dataHeight - 2*rightHeight - 2*margin; 
 				
-				rightPanel = new SubPanel(rightWidth,dataHeight);
+				SubPanel rightPanel = new SubPanel(rightWidth,dataHeight);
 				rightPanel.setOpaque(false);
 				mainPanel.add(rightPanel);
 				{	BoxLayout layout = new BoxLayout(rightPanel,BoxLayout.PAGE_AXIS); 

@@ -49,8 +49,6 @@ public class MatchDescription extends EntitledDataPanel implements LimitsSubPane
 	
 	private static final float SPLIT_RATIO = 0.6f;
 	
-	private JPanel rightPanel;
-
 	private PlayersListSubPanel playersPanel;
 	private LimitsSubPanel<MatchLimit> limitsPanel;
 	private PointsSubPanel pointsPanel;
@@ -81,7 +79,7 @@ public class MatchDescription extends EntitledDataPanel implements LimitsSubPane
 			infoPanel.add(Box.createHorizontalGlue());
 			
 			// right panel
-			{	rightPanel = new JPanel();
+			{	JPanel rightPanel = new JPanel();
 				{	BoxLayout layout = new BoxLayout(rightPanel,BoxLayout.PAGE_AXIS); 
 					rightPanel.setLayout(layout);
 				}

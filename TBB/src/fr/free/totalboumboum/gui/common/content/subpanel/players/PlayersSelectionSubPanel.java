@@ -46,13 +46,8 @@ import fr.free.totalboumboum.gui.tools.GuiTools;
 public class PlayersSelectionSubPanel extends UntitledSubPanelTable implements MouseListener
 {	private static final long serialVersionUID = 1L;
 
-	private String prefix;
-
 	public PlayersSelectionSubPanel(int width, int height)
 	{	super(width,height,1,1,1,true);
-		
-		// init	
-		this.prefix = GuiKeys.COMMON_PLAYERS_SELECTION;
 		
 		// limits
 		setPlayers(null);
@@ -97,14 +92,13 @@ public class PlayersSelectionSubPanel extends UntitledSubPanelTable implements M
 		int nameWidth = width - fixedSum;
 		
 		// headers
-		{	String headerPrefix = prefix+GuiKeys.HEADER;
-			String keys[] = 
+		{	String keys[] = 
 			{	null,
-				headerPrefix+GuiKeys.PROFILE,
-				headerPrefix+GuiKeys.TYPE,
-				headerPrefix+GuiKeys.HERO,
-				headerPrefix+GuiKeys.COLOR,
-				headerPrefix+GuiKeys.CONTROLS				
+				GuiKeys.COMMON_PLAYERS_SELECTION_HEADER_PROFILE,
+				GuiKeys.COMMON_PLAYERS_SELECTION_HEADER_TYPE,
+				GuiKeys.COMMON_PLAYERS_SELECTION_HEADER_HERO,
+				GuiKeys.COMMON_PLAYERS_SELECTION_HEADER_COLOR,
+				GuiKeys.COMMON_PLAYERS_SELECTION_HEADER_CONTROLS				
 			};
 			int sizes[] = 
 			{	deleteWidth,
