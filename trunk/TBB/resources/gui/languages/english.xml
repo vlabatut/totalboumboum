@@ -10,7 +10,7 @@
 				<text name="About" value="About" tooltip="About Total Boum Boum" />
 				<text name="Options" value="Options" tooltip="Access the game options" />
 				<text name="Profiles" value="Profiles" tooltip="Edit the players' profiles" />
-				<text name="QuickMatch" value="Quick match" tooltip="Play only one match" />
+				<text name="Quickmatch" value="Quick match" tooltip="Play only one match" />
 				<text name="Resources" value="Resources" tooltip="Browse the available resources" />
 				<text name="Statistics" value="Statistics" tooltip="See the player's statistics" />
 				<text name="Tournament" value="Tournament" tooltip="Select and play a tournament" />
@@ -36,21 +36,7 @@
 				</group>
 				<group name="Select">
 					<text name="Title" value="List of AIs" tooltip="List of all available artificial intelligences" />
-					<group name="Class">
-						<text name="PageDown" value="Page down" tooltip="Go to the next AIs page" />
-						<text name="PageUp" value="Page up" tooltip="Go back to the previous AIs page" />
-						<text name="Parent" value=".." tooltip="Go back to the packages list" />
-					</group>
-					<group name="Package">
-						<text name="PageDown" value="Page down" tooltip="Go to the next packages page" />
-						<text name="PageUp" value="Page up" tooltip="Go back to the previous packages page" />
-					</group>
-					<group name="Preview">
-						<text name="Author" value="Author" tooltip="Author of the artificial intelligence" />
-						<text name="Name" value="Name" tooltip="Name of the artificial intelligence" />
-						<text name="Notes" value="Notes" tooltip="Comments from the author" />
-						<text name="Package" value="Package" tooltip="Package containing the artificial intelligence" />
-					</group>
+					<text name="Pack" value="Package" tooltip="Package containing the artificial intelligence" />
 				</group>
 			</group>
 	
@@ -100,22 +86,10 @@
 			</group>
 				
 			<group name="Match">
+				<text name="Title" value="List of matches" tooltip="List of predefined matches" />
 				<group name="Button">
 					<text name="Back" value="Back" tooltip="Go back to the resources menu" />
 				</group>		
-				<group name="Select">
-					<text name="Title" value="List of matches" tooltip="List of predefined matches" />
-					<group name="List">
-						<text name="PageDown" value="Page down" tooltip="Go to the next matches page" />
-						<text name="PageUp" value="Page up" tooltip="Go back to the previous matches page" />
-					</group>
-					<group name="Preview">
-						<text name="Author" value="Author"  tooltip="Author of this match" />
-						<text name="Name" value="Name" tooltip="Name of this match" />
-						<text name="Players" value="Players" tooltip="Number of players needed for this match" />
-						<text name="Rounds" value="Rounds"  tooltip="Number of rounds defined for this match" />
-					</group>
-				</group>
 			</group>	
 
 			<group name="Round">
@@ -399,6 +373,12 @@
 
 <!-- COMMON -->
 	<group name="Common">
+<!-- AI -->
+		<group name="Ai">
+			<text name="Author" value="Author" tooltip="Author of the artificial intelligence" />
+			<text name="Name" value="Name" tooltip="Name of the artificial intelligence" />
+			<text name="Notes" value="Notes" tooltip="Comments from the author" />
+		</group>
 <!-- BROWSE -->
 		<group name="Browser">
 			<group name="File">
@@ -501,6 +481,14 @@
 					<text name="Time" value="Time"  tooltip="Maximum duration of this tournament" />
 				</group>
 			</group>
+		</group>
+
+<!-- MATCH -->
+		<group name="Match">
+			<text name="Author" value="Author"  tooltip="Author of this match" />
+			<text name="Name" value="Name" tooltip="Name of this match" />
+			<text name="AllowedPlayers" value="Players" tooltip="Number of players needed for this match" />
+			<text name="RoundCount" value="Rounds"  tooltip="Number of rounds defined for this match" />
 		</group>
 
 <!-- PLAYERS -->
