@@ -36,10 +36,10 @@ import fr.free.totalboumboum.gui.common.structure.subpanel.SubPanel;
 import fr.free.totalboumboum.gui.tools.GuiTools;
 import fr.free.totalboumboum.tools.ImageTools;
 
-public class ImageSubPanel extends SubPanel
+public class UntitledSubPanelImage extends SubPanel
 {	private static final long serialVersionUID = 1L;
 
-	public ImageSubPanel(int width, int height)
+	public UntitledSubPanelImage(int width, int height)
 	{	super(width,height);
 		
 		int margin = GuiTools.subPanelMargin;
