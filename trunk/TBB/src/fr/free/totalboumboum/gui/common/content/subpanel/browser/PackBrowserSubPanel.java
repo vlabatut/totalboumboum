@@ -46,8 +46,6 @@ import fr.free.totalboumboum.gui.tools.GuiTools;
 public class PackBrowserSubPanel extends SubPanel implements MouseListener, FolderBrowserSubPanelListener
 {	private static final long serialVersionUID = 1L;
 
-	private String prefix;
-
 	public PackBrowserSubPanel(int width, int height)
 	{	super(width,height);
 		setOpaque(false);
@@ -55,9 +53,6 @@ public class PackBrowserSubPanel extends SubPanel implements MouseListener, Fold
 		// layout
 		BoxLayout layout = new BoxLayout(this,BoxLayout.PAGE_AXIS); 
 		setLayout(layout);
-		
-		// init	
-		this.prefix = GuiKeys.COMMON_BROWSER_PACK;
 		
 		// pages
 		setFolder(null,new ArrayList<String>());
@@ -135,7 +130,7 @@ public class PackBrowserSubPanel extends SubPanel implements MouseListener, Fold
 			// page up
 			{	Color bg = GuiTools.COLOR_TABLE_HEADER_BACKGROUND;
 				listPanel.setLabelBackground(linePrevious,0,bg);
-				String key = prefix+GuiKeys.PAGEUP;
+				String key = GuiKeys.COMMON_BROWSER_PACK_PAGEUP;
 				listPanel.setLabelKey(linePrevious,0,key,true);
 				JLabel label = listPanel.getLabel(linePrevious,0);
 				label.addMouseListener(this);
@@ -143,7 +138,7 @@ public class PackBrowserSubPanel extends SubPanel implements MouseListener, Fold
 			// page down
 			{	Color bg = GuiTools.COLOR_TABLE_HEADER_BACKGROUND;
 				listPanel.setLabelBackground(lineNext,0,bg);
-				String key = prefix+GuiKeys.PAGEDOWN;
+				String key = GuiKeys.COMMON_BROWSER_PACK_PAGEDOWN;
 				listPanel.setLabelKey(lineNext,0,key,true);
 				JLabel label = listPanel.getLabel(lineNext,0);
 				label.addMouseListener(this);

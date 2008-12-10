@@ -40,7 +40,6 @@ import fr.free.totalboumboum.game.limit.Limits;
 import fr.free.totalboumboum.game.limit.RoundLimit;
 import fr.free.totalboumboum.game.points.PointsProcessor;
 import fr.free.totalboumboum.game.round.Round;
-import fr.free.totalboumboum.gui.common.content.subpanel.image.ImageSubPanel;
 import fr.free.totalboumboum.gui.common.content.subpanel.items.AvailableItemsSubPanel;
 import fr.free.totalboumboum.gui.common.content.subpanel.items.InitialItemsSubPanel;
 import fr.free.totalboumboum.gui.common.content.subpanel.level.LevelSubPanel;
@@ -50,6 +49,7 @@ import fr.free.totalboumboum.gui.common.content.subpanel.points.PointsSubPanel;
 import fr.free.totalboumboum.gui.common.structure.panel.SplitMenuPanel;
 import fr.free.totalboumboum.gui.common.structure.panel.data.EntitledDataPanel;
 import fr.free.totalboumboum.gui.common.structure.subpanel.SubPanel;
+import fr.free.totalboumboum.gui.common.structure.subpanel.UntitledSubPanelImage;
 import fr.free.totalboumboum.gui.data.configuration.GuiConfiguration;
 import fr.free.totalboumboum.gui.tools.GuiKeys;
 import fr.free.totalboumboum.gui.tools.GuiTools;
@@ -59,9 +59,7 @@ public class RoundDescription extends EntitledDataPanel implements LimitsSubPane
 	private static final long serialVersionUID = 1L;
 	private static final float SPLIT_RATIO = 0.4f;
 
-	private JPanel downPanel;
-	//
-	private ImageSubPanel imagePanel;
+	private UntitledSubPanelImage imagePanel;
 	private InitialItemsSubPanel initialItemsPanel;
 	private AvailableItemsSubPanel availableItemsPanel;
 	private LimitsSubPanel<RoundLimit> limitsPanel;
@@ -100,7 +98,7 @@ public class RoundDescription extends EntitledDataPanel implements LimitsSubPane
 				
 				// image panel
 				{	int innerHeight = leftWidth;
-					imagePanel = new ImageSubPanel(leftWidth,innerHeight);
+					imagePanel = new UntitledSubPanelImage(leftWidth,innerHeight);
 					leftPanel.add(imagePanel);
 				}
 
@@ -159,7 +157,7 @@ public class RoundDescription extends EntitledDataPanel implements LimitsSubPane
 				rightPanel.add(Box.createVerticalGlue());
 				
 				// down panel
-				{	downPanel = new JPanel();
+				{	JPanel downPanel = new JPanel();
 					{	BoxLayout layout = new BoxLayout(downPanel,BoxLayout.LINE_AXIS); 
 						downPanel.setLayout(layout);
 					}

@@ -42,7 +42,6 @@ import fr.free.totalboumboum.game.round.Round;
 import fr.free.totalboumboum.game.round.RoundLoader;
 import fr.free.totalboumboum.gui.common.content.subpanel.browser.FolderBrowserSubPanel;
 import fr.free.totalboumboum.gui.common.content.subpanel.browser.FolderBrowserSubPanelListener;
-import fr.free.totalboumboum.gui.common.content.subpanel.image.ImageSubPanel;
 import fr.free.totalboumboum.gui.common.content.subpanel.limits.LimitsSubPanelListener;
 import fr.free.totalboumboum.gui.common.content.subpanel.limits.LimitsSubPanel;
 import fr.free.totalboumboum.gui.common.content.subpanel.points.PointsSubPanel;
@@ -50,6 +49,7 @@ import fr.free.totalboumboum.gui.common.content.subpanel.round.RoundSubPanel;
 import fr.free.totalboumboum.gui.common.structure.panel.SplitMenuPanel;
 import fr.free.totalboumboum.gui.common.structure.panel.data.EntitledDataPanel;
 import fr.free.totalboumboum.gui.common.structure.subpanel.SubPanel;
+import fr.free.totalboumboum.gui.common.structure.subpanel.UntitledSubPanelImage;
 import fr.free.totalboumboum.gui.data.configuration.GuiConfiguration;
 import fr.free.totalboumboum.gui.tools.GuiKeys;
 import fr.free.totalboumboum.gui.tools.GuiTools;
@@ -60,28 +60,21 @@ public class SelectedRoundData extends EntitledDataPanel implements FolderBrowse
 	private static final long serialVersionUID = 1L;
 	private static final float SPLIT_RATIO = 0.4f;
 	
-	private SubPanel mainPanel;
-	private SubPanel rightPanel;
-	private ImageSubPanel imagePanel;
+	private UntitledSubPanelImage imagePanel;
 	private LimitsSubPanel<RoundLimit> limitsPanel;
 	private PointsSubPanel pointsPanel;
 	private RoundSubPanel miscPanel;
 	private FolderBrowserSubPanel listPanel;
 	
 	private Round selectedRound = null;
-	private int leftWidth;
-	private int rightWidth;
-	private int rightHeight;
-	private int rightUpWidth;
-	private int leftUpWidth;
-	
 	
 	public SelectedRoundData(SplitMenuPanel container, String baseFolder)
 	{	super(container);
 
 		// title
 		setTitleKey(GuiKeys.MENU_RESOURCES_ROUND_TITLE);
-	
+		
+		SubPanel mainPanel;
 		// data
 		{	mainPanel = new SubPanel(dataWidth,dataHeight);
 			{	BoxLayout layout = new BoxLayout(mainPanel,BoxLayout.LINE_AXIS); 
@@ -89,8 +82,8 @@ public class SelectedRoundData extends EntitledDataPanel implements FolderBrowse
 			}
 			
 			int margin = GuiTools.panelMargin;
-			leftWidth = (int)(dataWidth*SPLIT_RATIO); 
-			rightWidth = dataWidth - leftWidth - margin; 
+			int leftWidth = (int)(dataWidth*SPLIT_RATIO); 
+			int rightWidth = dataWidth - leftWidth - margin; 
 			mainPanel.setOpaque(false);
 			
 			// list panel
@@ -105,10 +98,10 @@ public class SelectedRoundData extends EntitledDataPanel implements FolderBrowse
 			mainPanel.add(Box.createHorizontalGlue());
 			
 			// right panel
-			{	rightHeight = (int)((dataHeight - 2*margin)*0.375);
+			{	int rightHeight = (int)((dataHeight - 2*margin)*0.375);
 				int previewHeight = dataHeight - 2*rightHeight - 2*margin; 
 				
-				rightPanel = new SubPanel(rightWidth,dataHeight);
+				SubPanel rightPanel = new SubPanel(rightWidth,dataHeight);
 				rightPanel.setOpaque(false);
 				mainPanel.add(rightPanel);
 				{	BoxLayout layout = new BoxLayout(rightPanel,BoxLayout.PAGE_AXIS); 
@@ -123,8 +116,8 @@ public class SelectedRoundData extends EntitledDataPanel implements FolderBrowse
 					{	BoxLayout layout = new BoxLayout(upPanel,BoxLayout.LINE_AXIS); 
 						upPanel.setLayout(layout);
 					}
-					rightUpWidth = (rightWidth - margin) / 2;
-					leftUpWidth = rightWidth - rightUpWidth - margin;
+					int rightUpWidth = (rightWidth - margin) / 2;
+					int leftUpWidth = rightWidth - rightUpWidth - margin;
 									
 					// preview
 					{	miscPanel = new RoundSubPanel(leftUpWidth,previewHeight);
@@ -134,7 +127,7 @@ public class SelectedRoundData extends EntitledDataPanel implements FolderBrowse
 					upPanel.add(Box.createHorizontalGlue());
 
 					// level preview
-					{	imagePanel = new ImageSubPanel(rightUpWidth,previewHeight);
+					{	imagePanel = new UntitledSubPanelImage(rightUpWidth,previewHeight);
 						upPanel.add(imagePanel);
 					}
 					

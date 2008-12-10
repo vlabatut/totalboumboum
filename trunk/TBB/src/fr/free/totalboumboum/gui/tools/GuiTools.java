@@ -225,7 +225,7 @@ public class GuiTools
 			String[] uses =
 			{	GuiKeys.COMMON_LEVEL_AUTHOR,
 				GuiKeys.COMMON_AI_AUTHOR,
-				GuiKeys.MENU_RESOURCES_HERO_SELECT_PREVIEW_AUTHOR,
+				GuiKeys.COMMON_SPRITE_AUTHOR,
 				GuiKeys.MENU_RESOURCES_LEVEL_SELECT_PREVIEW_AUTHOR,
 				GuiKeys.COMMON_MATCH_AUTHOR,
 				GuiKeys.COMMON_ROUND_AUTHOR
@@ -254,9 +254,9 @@ public class GuiTools
 		// color
 		{	String folder = baseFolder+GuiFileTools.FILE_COLOR;
 			String[] uses =
-			{	GuiKeys.MENU_PROFILES_PREVIEW_COLOR,
+			{	GuiKeys.COMMON_PROFILES_COLOR,
 				GuiKeys.MENU_PROFILES_EDIT_COLOR,
-				GuiKeys.MENU_RESOURCES_HERO_SELECT_PREVIEW_COLORS,
+				GuiKeys.COMMON_SPRITE_COLORS,
 				GuiKeys.COMMON_PLAYERS_SELECTION_HEADER_COLOR
 			};
 			loadTableImages(folder,uses);
@@ -271,7 +271,7 @@ public class GuiTools
 		// computer
 		{	String folder = baseFolder+GuiFileTools.FILE_COMPUTER;
 			String[] uses =
-			{	GuiKeys.MENU_PROFILES_PREVIEW_AINAME,
+			{	GuiKeys.COMMON_PROFILES_AI_NAME,
 					GuiKeys.MENU_PROFILES_EDIT_AI
 			};
 			loadTableImages(folder,uses);
@@ -350,9 +350,9 @@ public class GuiTools
 		// hero
 		{	String folder = baseFolder+GuiFileTools.FILE_HERO;
 			String[] uses =
-			{	GuiKeys.MENU_PROFILES_PREVIEW_HERONAME,
+			{	GuiKeys.COMMON_PROFILES_HERO_NAME,
 				GuiKeys.MENU_PROFILES_EDIT_HERO,
-				GuiKeys.MENU_RESOURCES_HERO_SELECT_PREVIEW_IMAGE,
+				GuiKeys.COMMON_SPRITE_IMAGE,
 				GuiKeys.COMMON_PLAYERS_SELECTION_HEADER_HERO,
 				GuiKeys.COMMON_RESULTS_TOURNAMENT_HEADER_PORTRAIT,
 				GuiKeys.COMMON_RESULTS_MATCH_HEADER_PORTRAIT,
@@ -442,7 +442,7 @@ public class GuiTools
 				GuiKeys.COMMON_PLAYERS_LIST_HEADER_NAME,
 				GuiKeys.COMMON_RESULTS_MATCH_HEADER_NAME,
 				GuiKeys.COMMON_RESULTS_ROUND_HEADER_NAME,
-				GuiKeys.MENU_PROFILES_PREVIEW_NAME,
+				GuiKeys.COMMON_PROFILES_NAME,
 				GuiKeys.MENU_PROFILES_EDIT_NAME,
 				GuiKeys.COMMON_PLAYERS_SELECTION_HEADER_PROFILE
 			};
@@ -452,10 +452,10 @@ public class GuiTools
 		{	String folder = baseFolder+GuiFileTools.FILE_PACK;
 			String[] uses =
 			{	GuiKeys.COMMON_LEVEL_PACK,
-				GuiKeys.MENU_PROFILES_PREVIEW_AIPACK,
-				GuiKeys.MENU_PROFILES_PREVIEW_HEROPACK,
+				GuiKeys.COMMON_PROFILES_AI_PACK,
+				GuiKeys.COMMON_PROFILES_HERO_PACK,
 				GuiKeys.COMMON_AI_PACK,
-				GuiKeys.MENU_RESOURCES_HERO_SELECT_PREVIEW_PACKAGE,
+				GuiKeys.COMMON_SPRITE_PACK,
 				GuiKeys.MENU_RESOURCES_LEVEL_SELECT_PREVIEW_PACKAGE,
 				GuiKeys.COMMON_ROUND_LEVEL_PACK
 			};
@@ -539,7 +539,7 @@ public class GuiTools
 		{	String folder = baseFolder+GuiFileTools.FILE_SOURCE;
 			String[] uses =
 			{	GuiKeys.COMMON_LEVEL_SOURCE,
-				GuiKeys.MENU_RESOURCES_HERO_SELECT_PREVIEW_SOURCE,
+				GuiKeys.COMMON_SPRITE_SOURCE,
 				GuiKeys.MENU_RESOURCES_LEVEL_SELECT_PREVIEW_SOURCE
 			};
 			loadTableImages(folder,uses);
@@ -569,7 +569,7 @@ public class GuiTools
 			String[] uses =
 			{	GuiKeys.COMMON_LEVEL_NAME,
 				GuiKeys.COMMON_AI_NAME,
-				GuiKeys.MENU_RESOURCES_HERO_SELECT_PREVIEW_NAME,
+				GuiKeys.COMMON_SPRITE_NAME,
 				GuiKeys.MENU_RESOURCES_LEVEL_SELECT_PREVIEW_NAME,
 				GuiKeys.COMMON_MATCH_NAME,
 				GuiKeys.COMMON_ROUND_TITLE
@@ -719,8 +719,7 @@ public class GuiTools
 		// page down
 		{	String folder = baseFolder+GuiFileTools.FILE_PAGE_DOWN;
 			String[] uses =
-			{	GuiKeys.MENU_PROFILES_LIST_PAGEDOWN,
-				GuiKeys.MENU_RESOURCES_LEVEL_SELECT_FOLDER_PAGEDOWN,
+			{	GuiKeys.MENU_RESOURCES_LEVEL_SELECT_FOLDER_PAGEDOWN,
 				GuiKeys.MENU_RESOURCES_LEVEL_SELECT_PACKAGE_PAGEDOWN,
 				GuiKeys.COMMON_BROWSER_FILE_PAGEDOWN,
 				GuiKeys.COMMON_BROWSER_PACK_PAGEDOWN
@@ -730,8 +729,7 @@ public class GuiTools
 		// page up
 		{	String folder = baseFolder+GuiFileTools.FILE_PAGE_UP;
 			String[] uses =
-			{	GuiKeys.MENU_PROFILES_LIST_PAGEUP,
-				GuiKeys.MENU_RESOURCES_LEVEL_SELECT_FOLDER_PAGEUP,
+			{	GuiKeys.MENU_RESOURCES_LEVEL_SELECT_FOLDER_PAGEUP,
 				GuiKeys.MENU_RESOURCES_LEVEL_SELECT_PACKAGE_PAGEUP,
 				GuiKeys.COMMON_BROWSER_FILE_PAGEUP,
 				GuiKeys.COMMON_BROWSER_PACK_PAGEUP

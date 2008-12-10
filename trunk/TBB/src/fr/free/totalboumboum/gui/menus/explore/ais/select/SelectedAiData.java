@@ -49,13 +49,9 @@ public class SelectedAiData extends EntitledDataPanel implements PackBrowserSubP
 	private static final long serialVersionUID = 1L;
 	private static final float SPLIT_RATIO = 0.5f;
 	
-	private SubPanel mainPanel;
-	private SubPanel previewPanel;
 	private AiSubPanel infosPanel;
 	private EntitledSubPanelText notesPanel;
 	private PackBrowserSubPanel packPanel;
-	private int listWidth;
-	private int listHeight;
 	
 	private AiPreview selectedAi;
 	
@@ -64,7 +60,7 @@ public class SelectedAiData extends EntitledDataPanel implements PackBrowserSubP
 
 		// title
 		setTitleKey(GuiKeys.MENU_RESOURCES_AI_SELECT_TITLE);
-	
+		SubPanel mainPanel;
 		// data
 		{	mainPanel = new SubPanel(dataWidth,dataHeight);
 			{	BoxLayout layout = new BoxLayout(mainPanel,BoxLayout.LINE_AXIS); 
@@ -77,8 +73,8 @@ public class SelectedAiData extends EntitledDataPanel implements PackBrowserSubP
 			mainPanel.setOpaque(false);
 			
 			// list panel
-			{	listWidth = leftWidth;
-				listHeight = dataHeight;
+			{	int listWidth = leftWidth;
+				int listHeight = dataHeight;
 				packPanel = new PackBrowserSubPanel(listWidth,listHeight);
 				String baseFolder = FileTools.getAiPath();
 				ArrayList<String> targetFiles = new ArrayList<String>();
@@ -92,7 +88,7 @@ public class SelectedAiData extends EntitledDataPanel implements PackBrowserSubP
 			mainPanel.add(Box.createHorizontalGlue());
 			
 			// preview panel
-			{	previewPanel = new SubPanel(rightWidth,dataHeight);
+			{	SubPanel previewPanel = new SubPanel(rightWidth,dataHeight);
 				{	BoxLayout layout = new BoxLayout(previewPanel,BoxLayout.PAGE_AXIS); 
 					previewPanel.setLayout(layout);
 				}

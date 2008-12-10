@@ -41,20 +41,10 @@
 			</group>
 	
 			<group name="Hero">
+				<text name="Title" value="List of characters" tooltip="List of all available characters" />
 				<group name="Button">
 					<text name="Back" value="Back" tooltip="Go back to the resources menu" />
 				</group>		
-				<group name="Select">
-					<text name="Title" value="List of characters" tooltip="List of all available characters" />
-					<group name="Preview">
-						<text name="Author" value="Author"  tooltip="Author/ripper of this character" />
-						<text name="Colors" value="Colors"  tooltip="Available colors for this character" />
-						<text name="Image" value="Preview" tooltip="Preview of this character" />
-						<text name="Name" value="Name" tooltip="Name of this character" />
-						<text name="Package" value="Package" tooltip="Package containing this character" />
-						<text name="Source" value="Source"  tooltip="Source of this character (original work or ripped from some existing game)" />
-					</group>
-				</group>
 			</group>	
 	
 			<group name="Level">
@@ -242,22 +232,11 @@
 				<text name="NameChange" value="Change name" tooltip="Change the name of the profile" />
 			</group>
 
-			<group name="List">
+			<group name="Select">
 				<text name="Title" value="Profiles list" tooltip="List of all the existing profiles" />
 				<text name="NewProfile" value="New profile" tooltip="New profile" />
-				<text name="PageDown" value="Page down" tooltip="Go to the next profiles page" />
-				<text name="PageUp" value="Page up" tooltip="Go back to the previous profiles page" />
 			</group>
 			
-			<group name="Preview" >
-				<text name="AiName" value="AI name" tooltip="Name of the artificial intelligence" />
-				<text name="AiPack" value="AI package" tooltip="Name of the artificial intelligence package" />
-				<text name="Color" value="Color" tooltip="Default color of the character" />
-				<text name="HeroName" value="Hero name" tooltip="Name of the character" />
-				<text name="HeroPack" value="Hero package" tooltip="Name of the character package" />
-				<text name="Name" value="Player name" tooltip="Name of the player" />
-			</group>
-
 		</group>	
 
 <!-- QUICKMATCH MENU -->	
@@ -608,6 +587,16 @@
 				</group>
 			</group>	
 		</group>
+		
+<!-- PROFILES -->
+		<group name="Profiles" >
+			<text name="AiName" value="AI name" tooltip="Name of the artificial intelligence" />
+			<text name="AiPack" value="AI package" tooltip="Name of the artificial intelligence package" />
+			<text name="Color" value="Color" tooltip="Default color of the character" />
+			<text name="HeroName" value="Hero name" tooltip="Name of the character" />
+			<text name="HeroPack" value="Hero package" tooltip="Name of the character package" />
+			<text name="Name" value="Player name" tooltip="Name of the player" />
+		</group>
 							
 <!-- RESULTS -->
 		<group name="Results" >
@@ -686,6 +675,16 @@
 			<text name="LevelFolder" value="Level"  tooltip="Level name for this round" />
 			<text name="LevelPack" value="Package"  tooltip="Level package for this round" />
 			<text name="Title" value="Title" tooltip="Name of this round" />
+		</group>
+
+<!-- SPRITE  -->
+		<group name="Sprite">
+			<text name="Author" value="Author"  tooltip="Author/ripper of this character" />
+			<text name="Colors" value="Colors"  tooltip="Available colors for this character" />
+			<text name="Image" value="Preview" tooltip="Preview of this character" />
+			<text name="Name" value="Name" tooltip="Name of this character" />
+			<text name="Pack" value="Package" tooltip="Package containing this character" />
+			<text name="Source" value="Source"  tooltip="Source of this character (original work or ripped from some existing game)" />
 		</group>
 
 	</group>

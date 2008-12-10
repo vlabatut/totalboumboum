@@ -43,15 +43,11 @@ import fr.free.totalboumboum.gui.tools.GuiTools;
 public class PlayersListSubPanel extends UntitledSubPanelTable implements MouseListener
 {	private static final long serialVersionUID = 1L;
 	
-	private String prefix;
 	private ArrayList<String> controlTexts;
 	private ArrayList<String> controlTooltips;
 
 	public PlayersListSubPanel(int width, int height)
 	{	super(width,height,1,1,1,true);
-		
-		// init
-		this.prefix = GuiKeys.COMMON_PLAYERS_LIST;
 		
 		setPlayers(null);
 	}
@@ -83,21 +79,20 @@ public class PlayersListSubPanel extends UntitledSubPanelTable implements MouseL
 		int ctrlColWidth = GuiStringTools.initControlsTexts(getLineFontSize(),controlTexts,controlTooltips);
 
 		// headers
-		{	String headerPrefix = prefix+GuiKeys.HEADER;
-			int col = 0;
+		{	int col = 0;
 			// hero
-			{	String key = headerPrefix+GuiKeys.HERO;
+			{	String key = GuiKeys.COMMON_PLAYERS_LIST_HEADER_HERO;
 				setLabelKey(0,col,key,true);
 				col++;
 			}
 			// profile
-			{	String key = headerPrefix+GuiKeys.PROFILE;
+			{	String key = GuiKeys.COMMON_PLAYERS_LIST_HEADER_PROFILE;
 				setLabelKey(0,col,key,true);
 				col++;
 			}
 			// controls
 			if(showControls)
-			{	String key = headerPrefix+GuiKeys.CONTROLS;
+			{	String key = GuiKeys.COMMON_PLAYERS_LIST_HEADER_CONTROLS;
 				setLabelKey(0,col,key,true);
 				setColSubMinWidth(col,ctrlColWidth);
 				setColSubPreferredWidth(col,ctrlColWidth);
@@ -105,22 +100,21 @@ public class PlayersListSubPanel extends UntitledSubPanelTable implements MouseL
 				col++;
 			}			
 			// name
-			{	String key = headerPrefix+GuiKeys.NAME;
+			{	String key = GuiKeys.COMMON_PLAYERS_LIST_HEADER_NAME;
 				setLabelKey(0,col,key,true);
 				setColSubMinWidth(col,getHeaderHeight());
 				setColSubMaxWidth(col,Integer.MAX_VALUE);
 				col++;
 			}
 			// rank
-			{	String key = headerPrefix+GuiKeys.RANK;
+			{	String key = GuiKeys.COMMON_PLAYERS_LIST_HEADER_RANK;
 				setLabelKey(0,col,key,true);
 				col++;
 			}
 		}
 		
 		// data
-		{	String dataPrefix = prefix+GuiKeys.DATA;
-			Iterator<Profile> i = players.iterator();
+		{	Iterator<Profile> i = players.iterator();
 			int line = 1;
 			while(i.hasNext())
 			{	int col = 0;
@@ -140,9 +134,9 @@ public class PlayersListSubPanel extends UntitledSubPanelTable implements MouseL
 				{	String aiName = profile.getAiName();
 					String key;
 					if(aiName==null)
-						key = dataPrefix+GuiKeys.HUMAN;
+						key = GuiKeys.COMMON_PLAYERS_LIST_DATA_HUMAN;
 					else
-						key = dataPrefix+GuiKeys.COMPUTER;
+						key = GuiKeys.COMMON_PLAYERS_LIST_DATA_COMPUTER;
 					setLabelKey(line,col,key,true);
 					col++;
 				}

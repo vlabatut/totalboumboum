@@ -633,7 +633,7 @@ public class Launcher
 	 * TODO
 	 * 
 	 * + beta.009
-	 * - xxx
+	 * - modification : mutualisation des classes codant les éléments de la GUI
 	 * 
 	 * *******************************************************
 	 * *********************** A FAIRE ***********************
@@ -643,8 +643,6 @@ public class Launcher
 	 *   voire on définit explicitement un ordre d'affichage dans la compétition
 	 * 
 	 * - faire le classement lexicographique gérant les signes diacritiques partout où c'est nécessaire
-	 * 
-	 * - mutualiser encore plus les composants graphiques : séparer structures de contenu (liste des navigateurs) et contenus (limites,points...)
 	 * 
 	 * - parties en cours :
 	 * 		- une seule partie en même temps

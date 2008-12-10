@@ -47,8 +47,6 @@ public class SequenceDescription extends TournamentDescription<SequenceTournamen
 	private static final long serialVersionUID = 1L;
 	private static final float SPLIT_RATIO = 0.6f;
 
-	private JPanel rightPanel;
-	
 	private PlayersListSubPanel playersPanel;
 	private LimitsSubPanel<TournamentLimit> limitsPanel;
 	private PointsSubPanel pointsPanel;
@@ -76,7 +74,7 @@ public class SequenceDescription extends TournamentDescription<SequenceTournamen
 			infoPanel.add(Box.createHorizontalGlue());
 			
 			// right panel
-			{	rightPanel = new JPanel();
+			{	JPanel rightPanel = new JPanel();
 				{	BoxLayout layout = new BoxLayout(rightPanel,BoxLayout.PAGE_AXIS); 
 					rightPanel.setLayout(layout);
 				}
