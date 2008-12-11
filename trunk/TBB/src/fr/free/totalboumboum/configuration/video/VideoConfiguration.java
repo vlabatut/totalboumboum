@@ -23,15 +23,42 @@ package fr.free.totalboumboum.configuration.video;
 
 import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.GraphicsDevice;
 
 public class VideoConfiguration
 {
 	public VideoConfiguration copy()
 	{	VideoConfiguration result = new VideoConfiguration();
+		result.fullScreen = fullScreen; 
 		result.smoothGraphics = smoothGraphics; 
 		result.borderColor = borderColor;
 		result.panelDimension = (Dimension)panelDimension.clone();
 		return result;
+	}
+
+	
+	/////////////////////////////////////////////////////////////////
+	// DEVICE		/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	private GraphicsDevice graphicsDevice;
+	
+	public void setGraphicsDevice(GraphicsDevice graphicsDevice)
+	{	this.graphicsDevice = graphicsDevice;		
+	}
+	public GraphicsDevice getGraphicsDevice()
+	{	return graphicsDevice;		
+	}
+
+	/////////////////////////////////////////////////////////////////
+	// FULL SCREEN		/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	private boolean fullScreen;
+
+	public void setFullScreen(boolean fullScreen)
+	{	this.fullScreen = fullScreen;		
+	}
+	public boolean getFullScreen()
+	{	return fullScreen;		
 	}
 	
 	/////////////////////////////////////////////////////////////////

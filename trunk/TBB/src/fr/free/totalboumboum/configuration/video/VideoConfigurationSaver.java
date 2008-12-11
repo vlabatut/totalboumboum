@@ -49,16 +49,26 @@ public class VideoConfigurationSaver
 
 	private static Element saveVideoElement(VideoConfiguration videoConfiguration)
 	{	Element result = new Element(XmlTools.ELT_VIDEO); 
+		// full screen
+		Element fullScreenElement = saveFullScreenElement(videoConfiguration);
+		result.addContent(fullScreenElement);
 		// smoothing
 		Element smoothingElement = saveSmoothGraphicsElement(videoConfiguration);
 		result.addContent(smoothingElement);
-		// parnel dimension
+		// panel dimension
 		Element panelElement = savePanelDimensionElement(videoConfiguration);
 		result.addContent(panelElement);
 		// border color
 		Element borderElement = saveBorderElement(videoConfiguration);
 		result.addContent(borderElement);
 		//
+		return result;
+	}
+	
+	private static Element saveFullScreenElement(VideoConfiguration videoConfiguration)
+	{	Element result = new Element(XmlTools.ELT_FULL_SCREEN);
+		String fullScreen = Boolean.toString(videoConfiguration.getFullScreen());
+		result.setAttribute(XmlTools.ATT_VALUE,fullScreen);
 		return result;
 	}
 	

@@ -69,6 +69,8 @@ public class MainMenu extends SimpleMenuPanel
 	private JButton buttonAbout;
 	private JButton buttonTournament;
 	private JButton buttonQuickMatch;
+	@SuppressWarnings("unused")
+	private JButton buttonQuit;
 	
 	public MainMenu(MenuContainer container, MenuPanel parent) throws IllegalArgumentException, SecurityException, ParserConfigurationException, SAXException, IOException, IllegalAccessException, NoSuchFieldException, ClassNotFoundException
 	{	super(container,parent);
@@ -98,6 +100,8 @@ buttonAbout.setEnabled(false);
 		add(Box.createRigidArea(new Dimension(0,GuiTools.buttonVerticalSpace)));
 		buttonTournament = GuiTools.createButton(GuiKeys.MENU_MAIN_BUTTON_TOURNAMENT,buttonWidth,buttonHeight,fontSize,this);
 		buttonQuickMatch = GuiTools.createButton(GuiKeys.MENU_MAIN_BUTTON_QUICKMATCH,buttonWidth,buttonHeight,fontSize,this);
+		add(Box.createRigidArea(new Dimension(0,GuiTools.buttonVerticalSpace)));
+		buttonQuit = GuiTools.createButton(GuiKeys.MENU_MAIN_BUTTON_QUIT,buttonWidth,buttonHeight,fontSize,this);
 		add(Box.createVerticalGlue());		
 	}
 	
@@ -121,6 +125,9 @@ buttonAbout.setEnabled(false);
 	    }
 		else if(e.getActionCommand().equals(GuiKeys.MENU_MAIN_BUTTON_STATISTICS))
 		{	
+	    }
+		else if(e.getActionCommand().equals(GuiKeys.MENU_MAIN_BUTTON_QUIT))
+		{	getFrame().exit();
 	    }
 		else if(e.getActionCommand().equals(GuiKeys.MENU_MAIN_BUTTON_TOURNAMENT))
 		{	if(tournamentMainPanel==null)

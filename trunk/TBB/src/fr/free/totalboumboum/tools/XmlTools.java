@@ -90,6 +90,7 @@ public class XmlTools
 	public static final String ELT_FONT = "font";
 	public static final String ELT_FORCE_POSITION = "forcePosition";
 	public static final String ELT_FPS = "fps";
+	public static final String ELT_FULL_SCREEN = "fullScreen";
 	public static final String ELT_GAME = "game";
 	public static final String ELT_GAMEPLAY = "gameplay";
 	public static final String ELT_GENERAL = "general";

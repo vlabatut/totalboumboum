@@ -160,6 +160,7 @@ public class GuiKeys
 		public static final String MENU_MAIN_BUTTON_OPTIONS = MENU_MAIN_BUTTON+OPTIONS;
 		public static final String MENU_MAIN_BUTTON_PROFILES = MENU_MAIN_BUTTON+PROFILES;
 		public static final String MENU_MAIN_BUTTON_QUICKMATCH = MENU_MAIN_BUTTON+QUICKMATCH;
+		public static final String MENU_MAIN_BUTTON_QUIT = MENU_MAIN_BUTTON+QUIT;
 		public static final String MENU_MAIN_BUTTON_RESOURCES = MENU_MAIN_BUTTON+RESOURCES;
 		public static final String MENU_MAIN_BUTTON_STATISTICS = MENU_MAIN_BUTTON+STATISTICS;
 		public static final String MENU_MAIN_BUTTON_TOURNAMENT = MENU_MAIN_BUTTON+TOURNAMENT;
@@ -302,6 +303,7 @@ public class GuiKeys
 			public static final String MENU_OPTIONS_VIDEO_LINE_BORDER_COLOR = "MenuOptionsVideoLineBorderColor";
 			public static final String MENU_OPTIONS_VIDEO_LINE_DISABLED = "MenuOptionsVideoLineDisabled";
 			public static final String MENU_OPTIONS_VIDEO_LINE_ENABLED = "MenuOptionsVideoLineEnabled";
+			public static final String MENU_OPTIONS_VIDEO_LINE_FULL_SCREEN = "MenuOptionsVideoLineFullScreen";
 			public static final String MENU_OPTIONS_VIDEO_LINE_MINUS = "MenuOptionsVideoLineMinus";
 			public static final String MENU_OPTIONS_VIDEO_LINE_PANEL_DIMENSION = "MenuOptionsVideoLinePanelDimension";
 			public static final String MENU_OPTIONS_VIDEO_LINE_PLUS = "MenuOptionsVideoLinePlus";

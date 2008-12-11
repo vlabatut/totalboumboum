@@ -47,6 +47,7 @@ public class VideoData extends EntitledDataPanel implements MouseListener
 	private static final int LINE_PANELDIM = 0;
 	private static final int LINE_BORDER = 1;
 	private static final int LINE_SMOOTH = 2;
+	private static final int LINE_FULL_SCREEN = 3;
 
 	private UntitledSubPanelLines optionsPanel;
 	private VideoConfiguration videoConfiguration;
@@ -176,8 +177,29 @@ public class VideoData extends EntitledDataPanel implements MouseListener
 					ln.setBackgroundColor(bg);
 				}
 
+				// #3 full screen
+				{	Line ln = optionsPanel.getLine(LINE_FULL_SCREEN);
+//					ln.setBackgroundColor(GuiTools.COLOR_TABLE_REGULAR_BACKGROUND);
+					ln.addLabel(0);
+					int col = 0;
+					// name
+					{	ln.setLabelMaxWidth(col,tWidth);
+						ln.setLabelPreferredWidth(col,tWidth);
+						ln.setLabelKey(col,GuiKeys.MENU_OPTIONS_VIDEO_LINE_FULL_SCREEN,false);
+						col++;
+					}
+					// value
+					{	ln.setLabelMaxWidth(col,Integer.MAX_VALUE);
+						setFullScreen();
+						ln.getLabel(col).addMouseListener(this);
+						col++;
+					}
+					Color bg = GuiTools.COLOR_TABLE_REGULAR_BACKGROUND;
+					ln.setBackgroundColor(bg);
+				}
+
 				// EMPTY
-				{	for(int line=LINE_SMOOTH+1;line<LINE_COUNT;line++)
+				{	for(int line=LINE_FULL_SCREEN+1;line<LINE_COUNT;line++)
 					{	Line ln = optionsPanel.getLine(line);
 						int col = 0;
 						int mw = ln.getWidth();
@@ -191,6 +213,16 @@ public class VideoData extends EntitledDataPanel implements MouseListener
 			
 			setDataPart(optionsPanel);
 		}
+	}
+	
+	private void setFullScreen()
+ 	{	boolean fullScreen = videoConfiguration.getFullScreen();
+		String key;
+		if(fullScreen)
+			key = GuiKeys.MENU_OPTIONS_VIDEO_LINE_ENABLED;
+		else
+			key = GuiKeys.MENU_OPTIONS_VIDEO_LINE_DISABLED;
+		optionsPanel.getLine(LINE_FULL_SCREEN).setLabelKey(1,key,true);
 	}
 	
 	private void setSmoothGraphics()
@@ -276,6 +308,12 @@ public class VideoData extends EntitledDataPanel implements MouseListener
 				boolean smooth = !videoConfiguration.getSmoothGraphics();
 				videoConfiguration.setSmoothGraphics(smooth);
 				setSmoothGraphics();
+				break;
+				// smooth graphics
+			case LINE_FULL_SCREEN:
+				boolean fullScreen = !videoConfiguration.getFullScreen();
+				videoConfiguration.setFullScreen(fullScreen);
+				setFullScreen();
 				break;
 		}
 
