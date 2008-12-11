@@ -11,6 +11,7 @@
 				<text name="Options" value="Options" tooltip="Accéder aux options générales du jeu" />
 				<text name="Profiles" value="Profils" tooltip="Éditer les profils des joueurs" />
 				<text name="Quickmatch" value="Partie rapide" tooltip="Commencer une partie rapide" />
+				<text name="Quit" value="Quitter" tooltip="Quitter le jeu" />
 				<text name="Resources" value="Ressources" tooltip="Naviguer parmi les ressources disponibles" />
 				<text name="Statistics" value="Statistiques" tooltip="Voir les statistiques des joueurs" />
 				<text name="Tournament" value="Tournoi" tooltip="Commencer un tournoi" />
@@ -196,8 +197,9 @@
 				<text name="Title" value="Vidéo" tooltip="Modifier les paramètres graphiques" />
 				<group name="Line">
 					<text name="BorderColor" value="Couleur de la bordure" tooltip="Couleur de la bordure durant le jeu" />
-					<text name="Disabled" value="Désactivé" tooltip="Lissage désactivé" />
-					<text name="Enabled" value="Activé" tooltip="Lissage activé" />
+					<text name="Disabled" value="Désactivé" tooltip="Option désactivée" />
+					<text name="Enabled" value="Activé" tooltip="Option activée" />
+					<text name="FullScreen" value="Plein écran" tooltip="Mode plein écran ou fenêtré" />
 					<text name="Minus" value="Moins" tooltip="Diminuer la taille de la fenêtre" />
 					<text name="PanelDimension" value="Taille de la fenêtre" tooltip="Taille de la fenêtre de TBB (toute modification entraîne un redémarrage du jeu)" />
 					<text name="Plus" value="Plus" tooltip="Augmenter la taille de la fenêtre" />

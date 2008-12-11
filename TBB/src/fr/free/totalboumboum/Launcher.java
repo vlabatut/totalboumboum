@@ -634,6 +634,7 @@ public class Launcher
 	 * 
 	 * + beta.009
 	 * - modification : mutualisation des classes codant les éléments de la GUI
+	 * - nouveauté : mode plein écran
 	 * 
 	 * *******************************************************
 	 * *********************** A FAIRE ***********************

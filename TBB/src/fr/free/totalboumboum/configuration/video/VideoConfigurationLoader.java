@@ -48,6 +48,9 @@ public class VideoConfigurationLoader
 
 	private static void loadVideoElement(Element root, VideoConfiguration result) throws ParserConfigurationException, SAXException, IOException, IllegalArgumentException, SecurityException, IllegalAccessException, NoSuchFieldException, ClassNotFoundException
 	{	Element element; 
+		// full screen
+		element = root.getChild(XmlTools.ELT_FULL_SCREEN);
+		loadFullScreenElement(element,result);
 		// smoothing
 		element = root.getChild(XmlTools.ELT_SMOOTH_GRAPHICS);
 		loadSmoothGraphicsElement(element,result);
@@ -57,6 +60,12 @@ public class VideoConfigurationLoader
 		// panel
 		element = root.getChild(XmlTools.ELT_PANEL_DIMENSION);
 		loadPanelDimensionElement(element,result);
+	}
+	
+	private static void loadFullScreenElement(Element root, VideoConfiguration result)
+	{	String value = root.getAttribute(XmlTools.ATT_VALUE).getValue().trim();
+		boolean fullScreen = Boolean.valueOf(value);
+		result.setFullScreen(fullScreen);
 	}
 	
 	private static void loadSmoothGraphicsElement(Element root, VideoConfiguration result)

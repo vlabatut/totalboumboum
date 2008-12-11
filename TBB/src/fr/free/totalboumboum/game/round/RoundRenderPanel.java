@@ -24,7 +24,6 @@ package fr.free.totalboumboum.game.round;
 public interface RoundRenderPanel
 {
 	public void roundOver();
-	
 	public void loadStepOver();
 	
 
