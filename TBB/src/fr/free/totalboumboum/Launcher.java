@@ -38,7 +38,7 @@ import org.xml.sax.SAXException;
 import fr.free.totalboumboum.configuration.Configuration;
 import fr.free.totalboumboum.configuration.GameConstants;
 import fr.free.totalboumboum.gui.data.configuration.GuiConfiguration;
-import fr.free.totalboumboum.gui.frames.MainFrame;
+import fr.free.totalboumboum.gui.frames.NormalFrame;
 import fr.free.totalboumboum.gui.frames.QuickFrame;
 import fr.free.totalboumboum.gui.tools.GuiTools;
 import fr.free.totalboumboum.tools.XmlTools;
@@ -75,7 +75,7 @@ public class Launcher
 		SwingUtilities.invokeLater(new Runnable()
 		{	public void run()
 			{	try
-				{	new MainFrame();
+				{	new NormalFrame();
 				}
 				catch (IllegalArgumentException e)
 				{	e.printStackTrace();

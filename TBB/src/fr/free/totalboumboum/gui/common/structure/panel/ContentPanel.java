@@ -25,7 +25,7 @@ import java.awt.Dimension;
 
 import javax.swing.JPanel;
 
-import fr.free.totalboumboum.gui.frames.MainFrame;
+import fr.free.totalboumboum.gui.frames.NormalFrame;
 
 public abstract class ContentPanel extends JPanel
 {
@@ -58,5 +58,5 @@ public abstract class ContentPanel extends JPanel
 	/////////////////////////////////////////////////////////////////
 	// FRAME			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	public abstract MainFrame getFrame();
+	public abstract NormalFrame getFrame();
 }
