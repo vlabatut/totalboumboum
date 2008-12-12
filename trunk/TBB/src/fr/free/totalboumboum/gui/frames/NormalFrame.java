@@ -47,12 +47,12 @@ import java.awt.event.WindowListener;
 import java.io.File;
 import java.io.IOException;
 
-public class MainFrame extends JFrame implements WindowListener,MenuContainer
+public class NormalFrame extends JFrame implements WindowListener,MenuContainer
 {	private static final long serialVersionUID = 1L;
 
 	private MainMenu mainMenuPanel;
 
-	public MainFrame() throws ParserConfigurationException, SAXException, IOException, IllegalArgumentException, SecurityException, IllegalAccessException, NoSuchFieldException, ClassNotFoundException
+	public NormalFrame() throws ParserConfigurationException, SAXException, IOException, IllegalArgumentException, SecurityException, IllegalAccessException, NoSuchFieldException, ClassNotFoundException
 	{	// init
 		super("TBB v."+GameConstants.VERSION);
 		// listener
@@ -157,7 +157,7 @@ public class MainFrame extends JFrame implements WindowListener,MenuContainer
 	// FRAME			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	@Override
-	public MainFrame getFrame()
+	public NormalFrame getFrame()
 	{	return this;
 	}
 

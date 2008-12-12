@@ -23,7 +23,7 @@ package fr.free.totalboumboum.gui.common.structure.panel.menu;
 
 import fr.free.totalboumboum.gui.common.structure.MenuContainer;
 import fr.free.totalboumboum.gui.common.structure.panel.ContentPanel;
-import fr.free.totalboumboum.gui.frames.MainFrame;
+import fr.free.totalboumboum.gui.frames.NormalFrame;
 
 
 public abstract class MenuPanel extends ContentPanel
@@ -62,7 +62,7 @@ public abstract class MenuPanel extends ContentPanel
 	/////////////////////////////////////////////////////////////////
 	// FRAME			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	public MainFrame getFrame()
+	public NormalFrame getFrame()
 	{	return container.getFrame();
 	}
 }
