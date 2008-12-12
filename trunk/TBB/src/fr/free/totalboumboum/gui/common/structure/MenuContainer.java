@@ -22,7 +22,7 @@ package fr.free.totalboumboum.gui.common.structure;
  */
 
 import fr.free.totalboumboum.gui.common.structure.panel.menu.MenuPanel;
-import fr.free.totalboumboum.gui.menus.main.MainFrame;
+import fr.free.totalboumboum.gui.frames.MainFrame;
 
 public interface MenuContainer
 {	

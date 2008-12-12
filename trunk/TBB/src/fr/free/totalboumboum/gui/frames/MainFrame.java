@@ -1,4 +1,4 @@
-package fr.free.totalboumboum.gui.menus.main;
+package fr.free.totalboumboum.gui.frames;
 
 /*
  * Total Boum Boum
@@ -32,6 +32,7 @@ import fr.free.totalboumboum.configuration.Configuration;
 import fr.free.totalboumboum.configuration.GameConstants;
 import fr.free.totalboumboum.gui.common.structure.MenuContainer;
 import fr.free.totalboumboum.gui.common.structure.panel.menu.MenuPanel;
+import fr.free.totalboumboum.gui.menus.main.MainMenu;
 import fr.free.totalboumboum.gui.tools.FullRepaintManager;
 import fr.free.totalboumboum.gui.tools.GuiFileTools;
 

@@ -24,7 +24,7 @@ package fr.free.totalboumboum.gui.common.structure.panel.menu;
 import fr.free.totalboumboum.gui.common.structure.ButtonAware;
 import fr.free.totalboumboum.gui.common.structure.panel.ContentPanel;
 import fr.free.totalboumboum.gui.common.structure.panel.SplitMenuPanel;
-import fr.free.totalboumboum.gui.menus.main.MainFrame;
+import fr.free.totalboumboum.gui.frames.MainFrame;
 
 public abstract class InnerMenuPanel extends ContentPanel implements ButtonAware
 {	private static final long serialVersionUID = 1L;

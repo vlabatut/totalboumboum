@@ -23,7 +23,7 @@ package fr.free.totalboumboum.gui.common.structure.panel.data;
 
 import fr.free.totalboumboum.gui.common.structure.panel.ContentPanel;
 import fr.free.totalboumboum.gui.common.structure.panel.SplitMenuPanel;
-import fr.free.totalboumboum.gui.menus.main.MainFrame;
+import fr.free.totalboumboum.gui.frames.MainFrame;
 
 public abstract class InnerDataPanel extends ContentPanel
 {	
