@@ -12,10 +12,10 @@
 	Set bin=.\bin
 	Set jdom=.\resources\lib\jdom.jar
 	Set cp=%bin%;%jdom%;%ai%
-	Set launcher=fr.free.totalboumboum.QuickLauncher
+	Set launcher=fr.free.totalboumboum.Launcher
 
 :: launch the game
-	java -Xmx128m -classpath %cp% %launcher%
+	java -Xmx128m -classpath %cp% %launcher% quick
 
 ::	pause
 

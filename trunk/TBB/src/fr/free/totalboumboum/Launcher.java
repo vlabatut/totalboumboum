@@ -39,14 +39,24 @@ import fr.free.totalboumboum.configuration.Configuration;
 import fr.free.totalboumboum.configuration.GameConstants;
 import fr.free.totalboumboum.gui.data.configuration.GuiConfiguration;
 import fr.free.totalboumboum.gui.menus.main.MainFrame;
+import fr.free.totalboumboum.gui.quicklaunch.QuickFrame;
 import fr.free.totalboumboum.gui.tools.GuiTools;
 import fr.free.totalboumboum.tools.XmlTools;
 
 public class Launcher
 {	
 	public static void main(String args[]) throws ParserConfigurationException, SAXException, IOException, IllegalArgumentException, SecurityException, IllegalAccessException, NoSuchFieldException, ClassNotFoundException
-	{	
-		// splashscreen
+	{	if(args.length>0 && args[0].equalsIgnoreCase(GameConstants.OPTION_QUICK))
+			quickLaunch();
+		else
+			normalLaunch();
+	}
+	
+	/////////////////////////////////////////////////////////////////
+	// NORMAL LAUNCH	/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	private static void normalLaunch() throws SAXException, ParserConfigurationException, IllegalArgumentException, SecurityException, IOException, IllegalAccessException, NoSuchFieldException, ClassNotFoundException
+	{	// splashscreen
 		SplashScreen splash = SplashScreen.getSplashScreen();
 		
 		// init
@@ -112,6 +122,51 @@ public class Launcher
 	        splash.update();
 		}
 	}
+	
+	/////////////////////////////////////////////////////////////////
+	// QUICK LAUNCH		/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	private static void quickLaunch() throws SAXException, ParserConfigurationException, IllegalArgumentException, SecurityException, IOException, IllegalAccessException, NoSuchFieldException, ClassNotFoundException
+	{	// init
+		XmlTools.init();
+		Configuration.loadConfiguration();
+		
+		// create GUI
+		SwingUtilities.invokeLater(new Runnable()
+		{	public void run()
+			{	try
+				{	QuickFrame fullFrame = new QuickFrame();
+					fullFrame.makeVisible();
+					fullFrame.begin();
+				}
+				catch (IllegalArgumentException e)
+				{	e.printStackTrace();
+				}
+				catch (SecurityException e)
+				{	e.printStackTrace();
+				}
+				catch (ParserConfigurationException e)
+				{	e.printStackTrace();
+				}
+				catch (SAXException e)
+				{	e.printStackTrace();
+				}
+				catch (IOException e)
+				{	e.printStackTrace();
+				}
+				catch (IllegalAccessException e)
+				{	e.printStackTrace();
+				}
+				catch (NoSuchFieldException e)
+				{	e.printStackTrace();
+				}
+				catch (ClassNotFoundException e)
+				{	e.printStackTrace();
+				}
+			}
+		});
+	}
+	
 	
 // **********************************************************
 // PERMANENT
