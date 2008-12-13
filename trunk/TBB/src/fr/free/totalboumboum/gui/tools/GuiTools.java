@@ -50,6 +50,9 @@ import fr.free.totalboumboum.tools.ImageTools;
 
 public class GuiTools
 {	
+	/////////////////////////////////////////////////////////////////
+	// INIT			/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
 	public static void init()
 	{	initFonts();
 		initSizes();
@@ -59,6 +62,40 @@ public class GuiTools
 	public static void quickInit()
 	{	initFonts();
 	}
+
+	/////////////////////////////////////////////////////////////////
+	// STARTUP			/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	public static final int STARTUP_XML = 0;
+	public static final int STARTUP_CONFIG = 1;
+	public static final int STARTUP_GUI = 2;
+	public static final int STARTUP_INIT = 3;
+	public static final int STARTUP_DONE = 4;
+	public static final String STARTUP_MESSAGES[] = 
+	{	"[Loading XML schemas]",
+		"[Loading configuration]",
+		"[Loading GUI]",
+		"[Initializing GUI]",
+		"[Done]"
+	};
+	
+	/////////////////////////////////////////////////////////////////
+	// HELP				/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	public static final int OPTION_HELP = 0;
+	public static final String OPTION_HELP_MESSAGE = "In-line parameters allowed for this software:";
+	public static final int OPTION_QUICK = 1;
+	public static final int OPTION_WINDOW = 2;
+	public static final String OPTIONS[] = 
+	{	"help",
+		"quick",
+		"window"
+	};
+	public static final String OPTIONS_HELP[] = 
+	{	"show this page (and does not launch the game)",
+		"launch the game in quick mode, i.e. with a minimal graphical interface, and allows playing only one predefined round",
+		"force the game to be displayed in a window, even if full screen is set in the game options"
+	};
 
 	/////////////////////////////////////////////////////////////////
 	// IMAGES			/////////////////////////////////////////////

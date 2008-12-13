@@ -21,7 +21,6 @@ package fr.free.totalboumboum.gui.frames;
  * 
  */
 
-import javax.swing.JFrame;
 import javax.swing.RepaintManager;
 import javax.swing.UIManager;
 import javax.xml.parsers.ParserConfigurationException;
@@ -34,20 +33,14 @@ import fr.free.totalboumboum.gui.common.structure.MenuContainer;
 import fr.free.totalboumboum.gui.common.structure.panel.menu.MenuPanel;
 import fr.free.totalboumboum.gui.menus.main.MainMenu;
 import fr.free.totalboumboum.gui.tools.FullRepaintManager;
-import fr.free.totalboumboum.gui.tools.GuiFileTools;
 
 
 import java.awt.BorderLayout;
 import java.awt.Container;
-import java.awt.Dimension;
-import java.awt.Image;
-import java.awt.Toolkit;
-import java.awt.event.WindowEvent;
-import java.awt.event.WindowListener;
 import java.io.File;
 import java.io.IOException;
 
-public class NormalFrame extends JFrame implements WindowListener,MenuContainer
+public class NormalFrame extends MainFrame implements MenuContainer
 {	private static final long serialVersionUID = 1L;
 
 	private MainMenu mainMenuPanel;
@@ -55,79 +48,24 @@ public class NormalFrame extends JFrame implements WindowListener,MenuContainer
 	public NormalFrame() throws ParserConfigurationException, SAXException, IOException, IllegalArgumentException, SecurityException, IllegalAccessException, NoSuchFieldException, ClassNotFoundException
 	{	// init
 		super("TBB v."+GameConstants.VERSION);
-		// listener
-		addWindowListener(this);
-		// set icon
-		String iconPath = GuiFileTools.getIconsPath()+File.separator+GuiFileTools.FILE_FRAME;
-		Image icon = Toolkit.getDefaultToolkit().getImage(iconPath);
-		setIconImage(icon);
-		// set dimensions
-		setMinimumSize(Configuration.getVideoConfiguration().getPanelDimension());
-		setResizable(false);
-		//
+		
+		// UI manager
 		UIManager.put("MenuItemUI","CustomMenuItemUI");
 		RepaintManager.setCurrentManager(new FullRepaintManager());
+		
 		// put panel
 		mainMenuPanel = new MainMenu(this,null);
 		currentPanel = mainMenuPanel;
 		getContentPane().add(mainMenuPanel, BorderLayout.CENTER);
-		// size the frame
-		pack();
-		// center the frame
-	    Toolkit tk = Toolkit.getDefaultToolkit();
-	    Dimension screenSize = tk.getScreenSize();
-	    int screenHeight = screenSize.height;
-	    int screenWidth = screenSize.width;
-	    setLocation((screenWidth-getSize().width)/2,(screenHeight-getSize().height)/2);
-		// show the frame
-		setVisible(true);
-        toFront();
 	}
 
-	// ----------------- window listener methods -------------
-
-	public void windowActivated(WindowEvent e)
-	{	//engine.setPause(false);
-	}
-
-	public void windowDeactivated(WindowEvent e)
-	{	//engine.setPause(true);
-	}
-
-	public void windowDeiconified(WindowEvent e)
-	{	//engine.setPause(false);
-	}
-
-	public void windowIconified(WindowEvent e)
-	{	//engine.setPause(true);
-	}
-
-	public void windowClosing(WindowEvent e)
-	{	//engine.setRunning(false);
-		exit();
-	}
-
-	public void windowClosed(WindowEvent e)
-	{
-	}
-
-	public void windowOpened(WindowEvent e)
-	{
-	}
-	
-	public void exit()
-	{	//saveConfiguration();
-		System.exit(0);
-	}
-	
-
-	
 	/////////////////////////////////////////////////////////////////
 	// CONFIGURATION	/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	@SuppressWarnings("unused")
 	private void saveConfiguration()
-	{	try
+	{	// TODO en fait c'est la partie qu'il faut enregistrer, car la conf est déjà enregistrée si elle a été modifiée
+		try
 		{	Configuration.saveConfiguration();
 		}
 		catch (IllegalArgumentException e)
@@ -191,8 +129,13 @@ public class NormalFrame extends JFrame implements WindowListener,MenuContainer
 	{	return Configuration.getVideoConfiguration().getPanelDimension().width;
 	}
 	
+	/////////////////////////////////////////////////////////////////
+	// EXECUTION		/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
 	public void restart()
-	{
+	{	// reinit resolution
+		revertFullScreen();
+		// restart
 		String ai = "."+File.separator+"resources"+File.separator+"ai";
 		String bin = "."+File.separator+"bin";
 		String jdom = "."+File.separator+"resources"+File.separator+"lib"+File.separator+"jdom.jar";
