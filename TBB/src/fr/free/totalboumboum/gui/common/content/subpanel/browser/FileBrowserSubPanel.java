@@ -53,7 +53,7 @@ public class FileBrowserSubPanel extends SubPanel implements MouseListener
 		setLayout(layout);
 		
 		// pages
-		setFolder(null);
+		setFileNames(null);
 	}
 	
 	/////////////////////////////////////////////////////////////////
@@ -76,7 +76,7 @@ public class FileBrowserSubPanel extends SubPanel implements MouseListener
 	{	return fileNames;	
 	}
 	
-	public void setFolder(HashMap<String,String> fileNames)
+	public void setFileNames(HashMap<String,String> fileNames)
 	{	// init
 		this.fileNames = fileNames;
 		if(fileNames==null)
@@ -102,8 +102,6 @@ public class FileBrowserSubPanel extends SubPanel implements MouseListener
 		
 		for(int panelIndex=0;panelIndex<pageCount;panelIndex++)
 		{	UntitledSubPanelTable listPanel = new UntitledSubPanelTable(width,height,cols,lines,false);
-			listPanel.setColSubMinWidth(0,textMaxWidth);
-			listPanel.setColSubPreferredWidth(0,textMaxWidth);
 			listPanel.setColSubMaxWidth(0,textMaxWidth);
 		
 			// data
@@ -227,7 +225,7 @@ public class FileBrowserSubPanel extends SubPanel implements MouseListener
 	
 	public void refresh()
 	{	String selectedFileName = getSelectedFileName();
-		setFolder(fileNames);
+		setFileNames(fileNames);
 		setSelectedFileName(selectedFileName);
 	}
 

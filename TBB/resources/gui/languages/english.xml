@@ -243,11 +243,20 @@
 
 <!-- QUICKMATCH MENU -->	
 		<group name="Quickmatch">
+			<group name="Levels">
+				<text name="Title" value="Levels selection" tooltip="Select the levels for this quick match" />
+				<group name="Button">
+					<text name="Next" value="Next" tooltip="Go to match parameters" />
+					<text name="Previous" value="Previous" tooltip="Back to players selection" />
+					<text name="Quit" value="Quit" tooltip="Go to main menu" />
+				</group>
+			</group>
 			<group name="Players">
+				<text name="Title" value="Players selection" tooltip="Select the players for this quick match" />
 				<group name="Button">
 					<text name="Cancel" value="Cancel" tooltip="Cancel and come back to the players selection screen" />
 					<text name="Confirm" value="Confirm" tooltip="Confirm the selection" />
-					<text name="Next" value="Next" tooltip="Go to match parameters" />
+					<text name="Next" value="Next" tooltip="Go to levels selection" />
 					<text name="Previous" value="Previous" tooltip="Back to main menu" />
 					<text name="Quit" value="Quit" tooltip="Go to main menu" />
 				</group>
@@ -689,6 +698,11 @@
 			<text name="Source" value="Source"  tooltip="Source of this character (original work or ripped from some existing game)" />
 		</group>
 
+<!-- TRANSFER -->
+		<group name="Transfer">
+			<text name="Left" value="Select"  tooltip="Select the object from the right window" />
+			<text name="Right" value="Unselect"  tooltip="Unselect the object from the left window" />
+		</group>
 	</group>
 
 </language>
