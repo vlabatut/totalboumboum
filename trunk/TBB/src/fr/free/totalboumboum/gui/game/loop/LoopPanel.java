@@ -88,9 +88,6 @@ public class LoopPanel extends SimpleMenuPanel implements LoopRenderPanel
 		{	Canvas canvas = new Canvas();
 			canvas.setPreferredSize(getPreferredSize());
 			add(canvas);
-Graphics g = canvas.getGraphics();
-g.drawOval(50,50,50,50);
-g.dispose();
 			canvas.createBufferStrategy(2);
 			bufferStrategy = canvas.getBufferStrategy();
 		}
@@ -105,6 +102,14 @@ g.dispose();
 		if (valid == VolatileImage.IMAGE_INCOMPATIBLE)
 			result = gc.createCompatibleVolatileImage(width,height,Transparency.OPAQUE);
 		return result;
+	}
+
+	/////////////////////////////////////////////////////////////////
+	// LOOP RENDER PANEL	/////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	@Override
+	public void playerOut(int index)
+	{	//System.out.println("the player n°"+index+" is out !");		
 	}
 
 	@Override
@@ -166,25 +171,20 @@ g.dispose();
 			}
 		});				
 	}
-
 	
-	
-	
-	
-	
+	/////////////////////////////////////////////////////////////////
+	// CONTENT PANEL	/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
 	@Override
 	public void refresh()
 	{	
 	}
 
+	/////////////////////////////////////////////////////////////////
+	// ACTION PERFORMED	/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
 	@Override
 	public void actionPerformed(ActionEvent arg0)
 	{	
-	}
-
-	@Override
-	public void playerOut(int index)
-	{			
-//System.out.println("the player n°"+index+" is out !");		
 	}
 }

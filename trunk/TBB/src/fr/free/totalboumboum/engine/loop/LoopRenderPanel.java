@@ -24,10 +24,11 @@ package fr.free.totalboumboum.engine.loop;
 import java.awt.event.KeyListener;
 
 public interface LoopRenderPanel
-{
-	public void paintScreen();
-	public void addKeyListener(KeyListener listener);
-	public void removeKeyListener(KeyListener listener);
+{	public void paintScreen();
+
 	public void loopOver();
 	public void playerOut(int index);
+	
+	public void addKeyListener(KeyListener listener);
+	public void removeKeyListener(KeyListener listener);
 }
