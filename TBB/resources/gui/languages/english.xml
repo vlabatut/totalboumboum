@@ -199,7 +199,7 @@
 					<text name="BorderColor" value="Border color" tooltip="Color of the ingame border" />
 					<text name="Disabled" value="Disabled" tooltip="Option disabled" />
 					<text name="Enabled" value="Enabled" tooltip="Option enabled" />
-					<text name="FullScreen" value="Full screen" tooltip="Full screen or windowed mode" />
+					<text name="FullScreen" value="Full screen" tooltip="Full screen or windowed mode (any change will cause TBB to restart)" />
 					<text name="Minus" value="Minus" tooltip="Get a smaller window" />
 					<text name="PanelDimension" value="Window size" tooltip="Size of TBB windows (any change will cause TBB to restart)" />
 					<text name="Plus" value="Plus" tooltip="Get a bigger window" />

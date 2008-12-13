@@ -25,6 +25,8 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.util.ArrayList;
+import java.util.TreeSet;
 
 import javax.swing.JLabel;
 
@@ -37,6 +39,7 @@ import fr.free.totalboumboum.gui.common.structure.subpanel.UntitledSubPanelLines
 import fr.free.totalboumboum.gui.data.configuration.GuiConfiguration;
 import fr.free.totalboumboum.gui.tools.GuiKeys;
 import fr.free.totalboumboum.gui.tools.GuiTools;
+import fr.free.totalboumboum.gui.tools.GuiVideoTools;
 
 public class VideoData extends EntitledDataPanel implements MouseListener
 {	
@@ -52,22 +55,7 @@ public class VideoData extends EntitledDataPanel implements MouseListener
 	private UntitledSubPanelLines optionsPanel;
 	private VideoConfiguration videoConfiguration;
 	
-	private int[] resolutionWidths = 
-	{	500,
-		640,
-		800,
-		1024,
-		1280,
-		1600
-	};
-	private int[] resolutionHeights = 
-	{	375,
-		480,
-		600,
-		768,
-		1024,
-		1200
-	};
+	private TreeSet<Dimension> availableResolutions;
 	
 	public VideoData(SplitMenuPanel container)
 	{	super(container);
@@ -76,6 +64,8 @@ public class VideoData extends EntitledDataPanel implements MouseListener
 		{	setTitleKey(GuiKeys.MENU_OPTIONS_VIDEO_TITLE);
 		}
 	
+		availableResolutions = GuiVideoTools.getAvailableResolutions();
+		
 		// data
 		{	int w = getDataWidth();
 			int h = getDataHeight();
@@ -261,14 +251,18 @@ public class VideoData extends EntitledDataPanel implements MouseListener
 	public void mouseClicked(MouseEvent e)
 	{	
 	}
+	
 	@Override
 	public void mouseEntered(MouseEvent e)
 	{	
 	}
+	
 	@Override
 	public void mouseExited(MouseEvent e)
 	{	
 	}
+	
+	@SuppressWarnings("unchecked")
 	@Override
 	public void mousePressed(MouseEvent e)
 	{	JLabel label = (JLabel)e.getComponent();
@@ -277,26 +271,28 @@ public class VideoData extends EntitledDataPanel implements MouseListener
 		{	// panel dimension
 			case LINE_PANELDIM:
 				Dimension dim = videoConfiguration.getPanelDimension();
-				int index;
-				int pw = dim.width;
+				// index of the current dimension
+				ArrayList<Dimension> resolist;
+				if(availableResolutions.contains(dim))
+					resolist = new ArrayList<Dimension>(availableResolutions);
+				else	
+				{	TreeSet<Dimension> copy = (TreeSet<Dimension>)availableResolutions.clone();
+					copy.add(dim);
+					resolist = new ArrayList<Dimension>(copy);			
+				}
+				int index = resolist.indexOf(dim);
 				// minus
 				if(pos[1]==1)
-				{	index = 0;
-					while(resolutionWidths[index]<pw && index<resolutionWidths.length)
-						index++;
-					if(index>0)
+				{	if(index>0)
 						index --;
 				}
 				// plus
 				else //if(pos[1]==3)
-				{	index = resolutionWidths.length-1;
-					while(resolutionWidths[index]>pw && index>=0)
-						index--;
-					if(index<resolutionWidths.length-1)
+				{	if(index<resolist.size()-1)
 						index ++;
 				}
 				// common
-				Dimension newDim = new Dimension(resolutionWidths[index],resolutionHeights[index]);
+				Dimension newDim = resolist.get(index);
 				videoConfiguration.setPanelDimension(newDim.width,newDim.height);
 				setPanelDimension();
 				break;
@@ -316,7 +312,6 @@ public class VideoData extends EntitledDataPanel implements MouseListener
 				setFullScreen();
 				break;
 		}
-
 	}
 	@Override
 	public void mouseReleased(MouseEvent e)

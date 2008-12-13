@@ -84,7 +84,8 @@ public class VideoMenu extends InnerMenuPanel
 	{	if(e.getActionCommand().equals(GuiKeys.MENU_OPTIONS_BUTTON_CONFIRM))
 		{	VideoConfiguration videoConfiguration = videoData.getVideoConfiguration();
 			boolean restart = false;
-			if(!videoConfiguration.getPanelDimension().equals(Configuration.getVideoConfiguration().getPanelDimension()))
+			if(!videoConfiguration.getPanelDimension().equals(Configuration.getVideoConfiguration().getPanelDimension())
+				|| videoConfiguration.getFullScreen()!=Configuration.getVideoConfiguration().getFullScreen())
 				restart = true;
 			Configuration.setVideoConfiguration(videoConfiguration);
 			try
@@ -107,8 +108,8 @@ public class VideoMenu extends InnerMenuPanel
 			}
 			if(restart)
 				getFrame().restart();
-//TODO propager éventuellement au round (car il n'y a pas modification mais remplacement, donc si c déjà affecté à un player..
 			else
+//TODO propager éventuellement au round (car il n'y a pas modification mais remplacement, donc si c déjà affecté à un player..
 				replaceWith(parent);
 	    }
 		else if(e.getActionCommand().equals(GuiKeys.MENU_OPTIONS_BUTTON_CANCEL))
