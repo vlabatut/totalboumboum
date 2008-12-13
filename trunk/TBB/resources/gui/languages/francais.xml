@@ -243,12 +243,20 @@
 
 <!-- QUICKMATCH MENU -->	
 		<group name="Quickmatch">
+			<group name="Levels">
+				<text name="Title" value="Sélection des niveaux" tooltip="Sélection des niveaux pour cette partie rapide" />
+				<group name="Button">
+					<text name="Next" value="Suivant" tooltip="Aller aux paramètres de la rencontre" />
+					<text name="Previous" value="Précédent" tooltip="Revenir à la sélection des joueurs" />
+					<text name="Quit" value="Quitter" tooltip="Aller au menu principal" />
+				</group>
+			</group>
 			<group name="Players">
 				<text name="Title" value="Sélection des joueurs" tooltip="Sélection des joueurs participant à la partie rapide" />
 				<group name="Button">
 					<text name="Cancel" value="Annuler" tooltip="Annuler et revenir à l'écran de sélection des joueurs" />
 					<text name="Confirm" value="Confirmer" tooltip="Valider la sélection" />
-					<text name="Next" value="Suivant" tooltip="Aller aux paramètres de la rencontre" />
+					<text name="Next" value="Suivant" tooltip="Aller à la sélection des niveaux" />
 					<text name="Previous" value="Précédent" tooltip="Revenir au menu principal" />
 					<text name="Quit" value="Quitter" tooltip="Aller au menu principal" />
 				</group>
@@ -689,6 +697,12 @@
 			<text name="Source" value="Source"  tooltip="Source de ce personnage (oeuvre originale ou extrait d'un jeu existant)" />
 		</group>
 			
+<!-- TRANSFER -->
+		<group name="Transfer">
+			<text name="Left" value="Sélectionner"  tooltip="Sélectionne l'objet de la fenêtre de droite" />
+			<text name="Right" value="Désélectionner"  tooltip="Désélectionne l'objet de la fenêtre de gauche" />
+		</group>
+
 	</group>
 	
 </language>

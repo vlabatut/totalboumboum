@@ -89,7 +89,9 @@ public class GuiKeys
 	public static final String ITEMS = "Items";
 	public static final String ITEMSET = "Itemset";
 	public static final String LAST_STANDING = "LastStanding";
+	public static final String LEFT = "Left";
 	public static final String LEVEL = "Level";
+	public static final String LEVELS = "Levels";
 	public static final String LIMIT = "Limit";
 	public static final String LIST = "List";
 	public static final String MAIN = "Main";
@@ -129,6 +131,7 @@ public class GuiKeys
 	public static final String REGULAR = "Regular";
 	public static final String RESOURCES = "Resources";
 	public static final String RESULTS = "Results";
+	public static final String RIGHT = "Right";
 	public static final String ROUND = "Round";
 	public static final String RUST = "Rust";
 	public static final String SPRITE = "Sprite";
@@ -144,6 +147,7 @@ public class GuiKeys
 	public static final String TOOLTIP = "Tooltip";
 	public static final String TOTAL = "Total";
 	public static final String TOURNAMENT = "Tournament";
+	public static final String TRANSFER = "Transfer";
 	public static final String TYPE = "Type";
 	public static final String VIDEO = "Video";
 	public static final String WHITE = "White";
@@ -335,6 +339,14 @@ public class GuiKeys
 		public static final String MENU_PROFILES_SELECT_NEW_PROFILE = "MenuProfilesSelectNewProfile";
 	/* QUICKMATCH */	
 	public static final String MENU_QUICKMATCH = MENU+QUICKMATCH;
+		/* LEVELS */
+		public static final String MENU_QUICKMATCH_LEVELS = MENU_QUICKMATCH+LEVELS;
+		public static final String MENU_QUICKMATCH_LEVELS_TITLE = MENU_QUICKMATCH_LEVELS+TITLE;
+			/* BUTTONS */
+			public static final String MENU_QUICKMATCH_LEVELS_BUTTON = MENU_QUICKMATCH_LEVELS+BUTTON;
+			public static final String MENU_QUICKMATCH_LEVELS_BUTTON_NEXT = MENU_QUICKMATCH_LEVELS_BUTTON+NEXT;
+			public static final String MENU_QUICKMATCH_LEVELS_BUTTON_PREVIOUS = MENU_QUICKMATCH_LEVELS_BUTTON+PREVIOUS;
+			public static final String MENU_QUICKMATCH_LEVELS_BUTTON_QUIT = MENU_QUICKMATCH_LEVELS_BUTTON+QUIT;
 		/* PLAYERS */
 		public static final String MENU_QUICKMATCH_PLAYERS = MENU_QUICKMATCH+PLAYERS;
 		public static final String MENU_QUICKMATCH_PLAYERS_TITLE = MENU_QUICKMATCH_PLAYERS+TITLE;
@@ -746,6 +758,10 @@ public class GuiKeys
 	public static final String COMMON_SPRITE_NAME = COMMON_SPRITE+NAME;
 	public static final String COMMON_SPRITE_PACK = COMMON_SPRITE+PACK;
 	public static final String COMMON_SPRITE_SOURCE = COMMON_SPRITE+SOURCE;				
+	/* TRANSFER */
+	public static final String COMMON_TRANSFER = COMMON+TRANSFER;
+	public static final String COMMON_TRANSFER_LEFT = COMMON_TRANSFER+LEFT;
+	public static final String COMMON_TRANSFER_RIGHT = COMMON_TRANSFER+RIGHT;
 			
 	
 	/////////////////////////////////////////////////////////////////

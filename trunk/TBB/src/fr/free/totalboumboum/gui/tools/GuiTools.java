@@ -189,7 +189,8 @@ public class GuiTools
 			{	GuiKeys.GAME_TOURNAMENT_BUTTON_MENU,
 				GuiKeys.GAME_MATCH_BUTTON_CURRENT_TOURNAMENT,
 				GuiKeys.GAME_ROUND_BUTTON_CURRENT_MATCH,
-				GuiKeys.MENU_QUICKMATCH_PLAYERS_BUTTON_PREVIOUS
+				GuiKeys.MENU_QUICKMATCH_PLAYERS_BUTTON_PREVIOUS,
+				GuiKeys.MENU_QUICKMATCH_LEVELS_BUTTON_PREVIOUS
 			};
 			loadButtonImages(buttonStates,folder,uses);
 		}
@@ -212,7 +213,8 @@ public class GuiTools
 			{	GuiKeys.GAME_TOURNAMENT_BUTTON_QUIT,
 				GuiKeys.GAME_MATCH_BUTTON_QUIT,
 				GuiKeys.GAME_ROUND_BUTTON_QUIT,
-				GuiKeys.MENU_QUICKMATCH_PLAYERS_BUTTON_QUIT
+				GuiKeys.MENU_QUICKMATCH_PLAYERS_BUTTON_QUIT,
+				GuiKeys.MENU_QUICKMATCH_LEVELS_BUTTON_QUIT
 			};
 			loadButtonImages(buttonStates,folder,uses);
 		}
@@ -226,7 +228,8 @@ public class GuiTools
 		}
 		{	String folder = baseFolder+GuiFileTools.FOLDER_RIGHT_BLUE+File.separator;
 			String[] uses = 
-			{	GuiKeys.MENU_QUICKMATCH_PLAYERS_BUTTON_NEXT
+			{	GuiKeys.MENU_QUICKMATCH_PLAYERS_BUTTON_NEXT,
+				GuiKeys.MENU_QUICKMATCH_LEVELS_BUTTON_NEXT
 			};
 			loadButtonImages(buttonStates,folder,uses);
 		}
@@ -485,6 +488,13 @@ public class GuiTools
 			};
 			loadTableImages(folder,uses);
 		}
+		// next
+		{	String folder = baseFolder+GuiFileTools.FILE_NEXT;
+			String[] uses =
+			{	GuiKeys.COMMON_TRANSFER_RIGHT
+			};
+			loadTableImages(folder,uses);
+		}
 		// pack
 		{	String folder = baseFolder+GuiFileTools.FILE_PACK;
 			String[] uses =
@@ -537,6 +547,13 @@ public class GuiTools
 				GuiKeys.COMMON_POINTS_TOURNAMENT_TITLE,
 				GuiKeys.COMMON_POINTS_MATCH_TITLE,
 				GuiKeys.COMMON_POINTS_ROUND_TITLE			};
+			loadTableImages(folder,uses);
+		}
+		// previous
+		{	String folder = baseFolder+GuiFileTools.FILE_PREVIOUS;
+			String[] uses =
+			{	GuiKeys.COMMON_TRANSFER_LEFT
+			};
 			loadTableImages(folder,uses);
 		}
 		// profile

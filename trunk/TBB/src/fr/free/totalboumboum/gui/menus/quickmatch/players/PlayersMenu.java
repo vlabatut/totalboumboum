@@ -41,6 +41,7 @@ import fr.free.totalboumboum.game.tournament.single.SingleTournament;
 import fr.free.totalboumboum.gui.common.structure.panel.SplitMenuPanel;
 import fr.free.totalboumboum.gui.common.structure.panel.menu.InnerMenuPanel;
 import fr.free.totalboumboum.gui.common.structure.panel.menu.MenuPanel;
+import fr.free.totalboumboum.gui.menus.quickmatch.levels.SelectedLevelSplitPanel;
 import fr.free.totalboumboum.gui.menus.quickmatch.match.MatchSplitPanel;
 import fr.free.totalboumboum.gui.tools.GuiKeys;
 import fr.free.totalboumboum.gui.tools.GuiTools;
@@ -83,6 +84,7 @@ public class PlayersMenu extends InnerMenuPanel
 		add(Box.createRigidArea(new Dimension(GuiTools.buttonHorizontalSpace,0)));
 		buttonNext = GuiTools.createButton(GuiKeys.MENU_QUICKMATCH_PLAYERS_BUTTON_NEXT,buttonWidth,buttonHeight,1,this);
 		
+		// panels
 		profilesData = new PlayersData(container);
 		container.setDataPart(profilesData);
 	}
@@ -109,7 +111,11 @@ public class PlayersMenu extends InnerMenuPanel
 		{	replaceWith(parent);
 	    }
 		else if(e.getActionCommand().equals(GuiKeys.MENU_QUICKMATCH_PLAYERS_BUTTON_NEXT))
-		{	if(matchSplitPanel==null)
+		{	
+			SelectedLevelSplitPanel levelsPanel = new SelectedLevelSplitPanel(container.getContainer(),container);
+			replaceWith(levelsPanel);
+/*			
+			if(matchSplitPanel==null)
 			{	//TODO temporaire
 				try
 				{	// load
@@ -149,6 +155,7 @@ public class PlayersMenu extends InnerMenuPanel
 				}
 			}
 			replaceWith(matchSplitPanel);
+*/			
 	    }
 	} 
 
