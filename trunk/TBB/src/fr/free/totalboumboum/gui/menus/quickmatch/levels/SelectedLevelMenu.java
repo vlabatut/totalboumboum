@@ -28,15 +28,21 @@ import javax.swing.Box;
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
 
+import fr.free.totalboumboum.configuration.Configuration;
+import fr.free.totalboumboum.configuration.game.LevelsSelection;
+import fr.free.totalboumboum.game.tournament.single.SingleTournament;
 import fr.free.totalboumboum.gui.common.structure.panel.SplitMenuPanel;
 import fr.free.totalboumboum.gui.common.structure.panel.menu.InnerMenuPanel;
 import fr.free.totalboumboum.gui.common.structure.panel.menu.MenuPanel;
+import fr.free.totalboumboum.gui.menus.quickmatch.match.MatchSplitPanel;
 import fr.free.totalboumboum.gui.tools.GuiKeys;
 import fr.free.totalboumboum.gui.tools.GuiTools;
 
 public class SelectedLevelMenu extends InnerMenuPanel
 {	private static final long serialVersionUID = 1L;
 	
+	private MatchSplitPanel matchPanel;
+
 	@SuppressWarnings("unused")
 	private JButton buttonQuit;
 	@SuppressWarnings("unused")
@@ -77,6 +83,25 @@ public class SelectedLevelMenu extends InnerMenuPanel
 	}
 	
 	/////////////////////////////////////////////////////////////////
+	// TOURNAMENT					/////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	private SingleTournament tournament;
+	
+	public void setTournament(SingleTournament tournament)
+	{	// init tournament
+		this.tournament = tournament;
+		// init data
+		LevelsSelection levelsSelection = new LevelsSelection();
+		if(Configuration.getGameConfiguration().getUseLastLevels())
+			levelsSelection = Configuration.getGameConfiguration().getQuickMatchSelectedLevels();
+		levelData.setLevelsSelection(levelsSelection);
+		// transmit
+		if(matchPanel!=null)
+		{	matchPanel.setTournament(tournament);
+		}			
+	}
+	
+	/////////////////////////////////////////////////////////////////
 	// ACTION LISTENER				/////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	public void actionPerformed(ActionEvent e)
@@ -87,8 +112,60 @@ public class SelectedLevelMenu extends InnerMenuPanel
 		{	replaceWith(parent);
 	    }
 		else if(e.getActionCommand().equals(GuiKeys.MENU_QUICKMATCH_LEVELS_BUTTON_NEXT))
-		{	
+		{	// set levels in configuration
+			LevelsSelection levelsSelection = levelData.getLevelsSelection();
+			Configuration.getGameConfiguration().setQuickMatchSelectedLevels(levelsSelection);
+			// set levels panel
+			if(matchPanel==null)
+			{	matchPanel = new MatchSplitPanel(container.getContainer(),container);
+			}			
+			matchPanel.setTournament(tournament);
+			replaceWith(matchPanel);
 	    }
+/*			
+		{	
+			if(matchSplitPanel==null)
+			{	//TODO temporaire
+				try
+				{	// load
+					Configuration.getGameConfiguration().loadQuickmatch();
+					SingleTournament tournament = (SingleTournament)Configuration.getGameConfiguration().getTournament();
+					ArrayList<Profile> selectedProfiles = profilesData.getSelectedProfiles();
+					tournament.init(selectedProfiles);
+					tournament.progress();
+					// GUI
+					matchSplitPanel = new MatchSplitPanel(container.getContainer(),container);
+					Match match = tournament.getCurrentMatch();
+					matchSplitPanel.setMatch(match);
+				}
+				catch (ParserConfigurationException e1)
+				{	e1.printStackTrace();
+				}
+				catch (SAXException e1)
+				{	e1.printStackTrace();
+				}
+				catch (IOException e1)
+				{	e1.printStackTrace();
+				}
+				catch (ClassNotFoundException e1)
+				{	e1.printStackTrace();
+				}
+				catch (IllegalArgumentException e1)
+				{	e1.printStackTrace();
+				}
+				catch (SecurityException e1)
+				{	e1.printStackTrace();
+				}
+				catch (IllegalAccessException e1)
+				{	e1.printStackTrace();
+				}
+				catch (NoSuchFieldException e1)
+				{	e1.printStackTrace();
+				}
+			}
+			replaceWith(matchSplitPanel);
+	    }
+*/			
 	} 
 	
 	/////////////////////////////////////////////////////////////////

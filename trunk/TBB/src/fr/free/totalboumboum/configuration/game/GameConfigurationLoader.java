@@ -75,16 +75,23 @@ public class GameConfigurationLoader
 		String quickMatchName = matchElement.getAttribute(XmlTools.ATT_NAME).getValue().trim();
 		result.setQuickMatchName(quickMatchName);
 		
-		// use last players
+		// options
 		Element optionsElement = root.getChild(XmlTools.ELT_OPTIONS);
 		boolean useLastPlayers = Boolean.parseBoolean(optionsElement.getAttributeValue(XmlTools.ATT_USE_LAST_PLAYERS));
 		result.setUseLastPlayers(useLastPlayers);
+		boolean useLastLevels = Boolean.parseBoolean(optionsElement.getAttributeValue(XmlTools.ATT_USE_LAST_LEVELS));
+		result.setUseLastLevels(useLastLevels);
 		
 		// players
 		Element playersElement = root.getChild(XmlTools.ELT_PLAYERS);
-		ProfilesSelection quickMatchSelected = ProfilesSelectionLoader.loadProfilesSelection(playersElement);
-		result.setQuickMatchSelected(quickMatchSelected);
-	}
+		ProfilesSelection quickMatchProfiles = ProfilesSelectionLoader.loadProfilesSelection(playersElement);
+		result.setQuickMatchSelectedProfiles(quickMatchProfiles);
+
+		// levels
+		Element levelsElement = root.getChild(XmlTools.ELT_LEVELS);
+		LevelsSelection quickMatchLevels = LevelsSelectionLoader.loadLevelsSelection(levelsElement);
+		result.setQuickMatchSelectedLevels(quickMatchLevels);
+}
 
 	private static void loadQuickStartElement(Element root, GameConfiguration result) throws IllegalArgumentException, SecurityException, ParserConfigurationException, SAXException, IOException, IllegalAccessException, NoSuchFieldException, ClassNotFoundException
 	{	// name

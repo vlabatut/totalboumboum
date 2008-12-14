@@ -24,9 +24,8 @@ package fr.free.totalboumboum.gui.menus.quickmatch.players;
 import java.awt.BorderLayout;
 import java.awt.Graphics;
 import java.awt.image.BufferedImage;
-import java.util.ArrayList;
 
-import fr.free.totalboumboum.configuration.profile.Profile;
+import fr.free.totalboumboum.game.tournament.single.SingleTournament;
 import fr.free.totalboumboum.gui.common.structure.MenuContainer;
 import fr.free.totalboumboum.gui.common.structure.panel.SplitMenuPanel;
 import fr.free.totalboumboum.gui.common.structure.panel.menu.MenuPanel;
@@ -37,7 +36,8 @@ public class PlayersSplitPanel extends SplitMenuPanel
 {	private static final long serialVersionUID = 1L;
 
 	private BufferedImage image;
-
+	private SingleTournament tournament = null;
+		
 	public PlayersSplitPanel(MenuContainer container, MenuPanel parent)
 	{	super(container,parent,BorderLayout.PAGE_END,GuiTools.HORIZONTAL_SPLIT_RATIO);
 	
@@ -50,18 +50,17 @@ public class PlayersSplitPanel extends SplitMenuPanel
 	}
 	
 	/////////////////////////////////////////////////////////////////
-	// PLAYERS						/////////////////////////////////
+	// TOURNAMENT					/////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	public void setSelectedProfiles(ArrayList<Profile> selectedProfiles)
-	{	((PlayersMenu)menuPart).setSelectedProfiles(selectedProfiles);
+	public void initTournament()
+	{	if(tournament==null || tournament.isOver())
+		{	tournament = new SingleTournament();
+			((PlayersMenu)getMenuPart()).setTournament(tournament);
+		}
 	}
 	
-	public ArrayList<Profile> getSelectedProfiles()
-	{	return ((PlayersMenu)menuPart).getSelectedProfiles();	
-	}
-	
 	/////////////////////////////////////////////////////////////////
-	// PAINT				/////////////////////////////////
+	// PAINT						/////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	@Override
 	public void paintComponent(Graphics g)

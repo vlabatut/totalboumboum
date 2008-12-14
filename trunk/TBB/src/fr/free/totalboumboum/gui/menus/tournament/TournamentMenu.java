@@ -159,11 +159,14 @@ buttonPlayers.setEnabled(false);
 	    }
 		else if(e.getActionCommand().equals(GuiKeys.MENU_TOURNAMENT_BUTTON_START))
 		{	//NOTE c icite qu'il faut tester que les profils sont OK
+//			if(tournament==null || tournament.isOver())
 			try
-			{	AbstractTournament tournament = Configuration.getGameConfiguration().getTournament();
+			{	Configuration.getGameConfiguration().loadLastTournament();
+				AbstractTournament tournament = Configuration.getGameConfiguration().getTournament();
 				ProfilesSelection profilesSelection = Configuration.getGameConfiguration().getTournamentSelected();
 				ArrayList<Profile> selectedProfiles = ProfileLoader.loadProfiles(profilesSelection);
-				tournament.init(selectedProfiles);
+				tournament.setProfiles(selectedProfiles);
+				tournament.init();
 				if(tournament instanceof SingleTournament)
 				{	tournament.progress();
 					tournamentGamePanel = new MatchSplitPanel(container.getContainer(),container);

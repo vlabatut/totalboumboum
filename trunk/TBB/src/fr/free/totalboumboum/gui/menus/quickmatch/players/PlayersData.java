@@ -21,9 +21,16 @@ package fr.free.totalboumboum.gui.menus.quickmatch.players;
  * 
  */
 
+import java.io.IOException;
 import java.util.ArrayList;
 
+import javax.xml.parsers.ParserConfigurationException;
+
+import org.xml.sax.SAXException;
+
 import fr.free.totalboumboum.configuration.profile.Profile;
+import fr.free.totalboumboum.configuration.profile.ProfileLoader;
+import fr.free.totalboumboum.configuration.profile.ProfilesSelection;
 import fr.free.totalboumboum.gui.common.content.subpanel.players.PlayersSelectionSubPanel;
 import fr.free.totalboumboum.gui.common.content.subpanel.players.PlayersSelectionSubPanelListener;
 import fr.free.totalboumboum.gui.common.structure.panel.SplitMenuPanel;
@@ -37,7 +44,6 @@ public class PlayersData extends EntitledDataPanel implements PlayersSelectionSu
 	private static final long serialVersionUID = 1L;
 	
 	private PlayersSelectionSubPanel playersPanel;
-	
 	
 	public PlayersData(SplitMenuPanel container)
 	{	super(container);
@@ -65,8 +71,36 @@ public class PlayersData extends EntitledDataPanel implements PlayersSelectionSu
 	/////////////////////////////////////////////////////////////////
 	private ArrayList<Profile> players;
 
-	public void setSelectedProfiles(ArrayList<Profile> selectedProfiles)
-	{	players = selectedProfiles;
+	public void setProfilesSelection(ProfilesSelection profilesSelection)
+	{	ArrayList<Profile> selectedProfiles = new ArrayList<Profile>();
+		try
+		{	selectedProfiles = ProfileLoader.loadProfiles(profilesSelection);
+		}
+		catch (IllegalArgumentException e1)
+		{	e1.printStackTrace();
+		}
+		catch (SecurityException e1)
+		{	e1.printStackTrace();
+		}
+		catch (ParserConfigurationException e1)
+		{	e1.printStackTrace();
+		}
+		catch (SAXException e1)
+		{	e1.printStackTrace();
+		}
+		catch (IOException e1)
+		{	e1.printStackTrace();
+		}
+		catch (IllegalAccessException e1)
+		{	e1.printStackTrace();
+		}
+		catch (NoSuchFieldException e1)
+		{	e1.printStackTrace();
+		}
+		catch (ClassNotFoundException e1)
+		{	e1.printStackTrace();
+		}
+		players = selectedProfiles;
 		playersPanel.setPlayers(players);
 	}
 	

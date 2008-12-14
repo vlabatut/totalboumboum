@@ -212,10 +212,7 @@ public class ResultsSubPanel extends UntitledSubPanelTable
 				}			
 				// time
 				if(showTime)
-				{	NumberFormat nf = NumberFormat.getInstance();
-					nf.setMaximumFractionDigits(2);
-					nf.setMinimumFractionDigits(0);
-					String text = StringTools.formatTimeWithSeconds(stats.getScores(Score.TIME)[orderedPlayers[i]]);
+				{	String text = StringTools.formatTimeWithSeconds(stats.getScores(Score.TIME)[orderedPlayers[i]]);
 					String tooltip = text;
 					setLabelText(line,col,text,tooltip);
 					int alpha = GuiTools.ALPHA_TABLE_REGULAR_BACKGROUND_LEVEL1;

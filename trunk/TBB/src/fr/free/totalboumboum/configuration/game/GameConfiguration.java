@@ -49,19 +49,25 @@ public class GameConfiguration
 {
 	public GameConfiguration copy()
 	{	GameConfiguration result = new GameConfiguration();
+		
 		// tournament
 		ProfilesSelection tournamentCopy = tournamentSelected.copy();
 		result.setTournamentSelected(tournamentCopy);
+		
 		// quickmatch
-		ProfilesSelection quickmatchCopy = quickMatchSelected.copy();
-		result.setQuickMatchSelected(quickmatchCopy);
+		ProfilesSelection quickmatchProfilesCopy = quickMatchSelectedProfiles.copy();
+		result.setQuickMatchSelectedProfiles(quickmatchProfilesCopy);
+		result.setUseLastPlayers(QuickMatchUseLastPlayers);
 		result.setQuickMatchName(quickMatchName);
-		result.setUseLastPlayers(useLastPlayers);
+		LevelsSelection quickmatchLevelsCopy = quickMatchSelectedLevels.copy();
+		result.setQuickMatchSelectedLevels(quickmatchLevelsCopy);
+		result.setUseLastLevels(QuickMatchUseLastLevels);
+		
 		// quickstart
 		ProfilesSelection quickstartCopy = quickStartSelected.copy();
 		result.setQuickStartSelected(quickstartCopy);
 		result.setQuickStartName(quickStartName);
-		//
+
 		return result;
 	}
 	
@@ -91,14 +97,23 @@ public class GameConfiguration
 	// QUICKMATCH		/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	private String quickMatchName = null;
-	private boolean useLastPlayers = false;
-	private ProfilesSelection quickMatchSelected = new ProfilesSelection();
+	private boolean QuickMatchUseLastPlayers = false;
+	private boolean QuickMatchUseLastLevels = false;
+	private ProfilesSelection quickMatchSelectedProfiles = new ProfilesSelection();
+	private LevelsSelection quickMatchSelectedLevels = new LevelsSelection();
 	
+	public boolean getUseLastLevels()
+	{	return QuickMatchUseLastLevels;
+	}
+	public void setUseLastLevels(boolean useLastLevels)
+	{	this.QuickMatchUseLastLevels = useLastLevels;
+	}
+
 	public boolean getUseLastPlayers()
-	{	return useLastPlayers;
+	{	return QuickMatchUseLastPlayers;
 	}
 	public void setUseLastPlayers(boolean useLastPlayers)
-	{	this.useLastPlayers = useLastPlayers;
+	{	this.QuickMatchUseLastPlayers = useLastPlayers;
 	}
 
 	public String getQuickMatchName()
@@ -108,11 +123,18 @@ public class GameConfiguration
 	{	this.quickMatchName = quickMatchName;
 	}
 	
-	public ProfilesSelection getQuickMatchSelected()
-	{	return quickMatchSelected;	
+	public ProfilesSelection getQuickMatchSelectedProfiles()
+	{	return quickMatchSelectedProfiles;	
 	}	
-	public void setQuickMatchSelected(ProfilesSelection quickMatchSelected)
-	{	this.quickMatchSelected = quickMatchSelected;	
+	public void setQuickMatchSelectedProfiles(ProfilesSelection quickMatchSelectedProfiles)
+	{	this.quickMatchSelectedProfiles = quickMatchSelectedProfiles;	
+	}	
+
+	public LevelsSelection getQuickMatchSelectedLevels()
+	{	return quickMatchSelectedLevels;	
+	}	
+	public void setQuickMatchSelectedLevels(LevelsSelection quickMatchSelectedLevels)
+	{	this.quickMatchSelectedLevels = quickMatchSelectedLevels;	
 	}	
 
 	public void loadQuickmatch() throws ParserConfigurationException, SAXException, IOException, ClassNotFoundException

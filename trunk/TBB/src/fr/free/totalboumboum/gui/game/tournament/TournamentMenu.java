@@ -41,6 +41,7 @@ import fr.free.totalboumboum.game.tournament.TournamentRenderPanel;
 import fr.free.totalboumboum.game.tournament.cup.CupTournament;
 import fr.free.totalboumboum.game.tournament.league.LeagueTournament;
 import fr.free.totalboumboum.game.tournament.sequence.SequenceTournament;
+import fr.free.totalboumboum.game.tournament.single.SingleTournament;
 import fr.free.totalboumboum.gui.common.structure.panel.SplitMenuPanel;
 import fr.free.totalboumboum.gui.common.structure.panel.menu.InnerMenuPanel;
 import fr.free.totalboumboum.gui.common.structure.panel.menu.MenuPanel;
@@ -136,6 +137,10 @@ buttonStatistics.setEnabled(false);
 				// NOTE à compléter
 			}
 			else if(tournament instanceof LeagueTournament)
+			{
+				// NOTE à compléter
+			}
+			else if(tournament instanceof SingleTournament)
 			{
 				// NOTE à compléter
 			}
