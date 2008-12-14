@@ -808,6 +808,7 @@ public class Launcher
 	 * - modification : fusion des launchers
 	 * - nouveauté : définition d'un ensemble de paramètres pour le launcher
 	 * - nouveauté : mode plein écran
+	 * - nouveauté : écran de sélection des niveaux pour le quick match
 	 * 
 	 * *******************************************************
 	 * *********************** A FAIRE ***********************

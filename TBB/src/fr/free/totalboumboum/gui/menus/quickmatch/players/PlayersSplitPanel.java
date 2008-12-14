@@ -25,6 +25,7 @@ import java.awt.BorderLayout;
 import java.awt.Graphics;
 import java.awt.image.BufferedImage;
 
+import fr.free.totalboumboum.game.match.Match;
 import fr.free.totalboumboum.game.tournament.single.SingleTournament;
 import fr.free.totalboumboum.gui.common.structure.MenuContainer;
 import fr.free.totalboumboum.gui.common.structure.panel.SplitMenuPanel;
@@ -55,6 +56,8 @@ public class PlayersSplitPanel extends SplitMenuPanel
 	public void initTournament()
 	{	if(tournament==null || tournament.isOver())
 		{	tournament = new SingleTournament();
+			Match match = new Match(tournament);
+			tournament.setMatch(match);
 			((PlayersMenu)getMenuPart()).setTournament(tournament);
 		}
 	}

@@ -46,11 +46,14 @@ public class SingleTournamentLoader
 	
 	private static void loadMatchElement(Element root, String folder, SingleTournament result) throws ParserConfigurationException, SAXException, IOException, ClassNotFoundException
 	{	Match match;
+		
 		// local
 		String localStr = root.getAttribute(XmlTools.ATT_LOCAL).getValue().trim();
 		boolean local = Boolean.valueOf(localStr);
+		
 		// name
 		String name = root.getAttribute(XmlTools.ATT_NAME).getValue();
+		
 		// loading
 		if(local)
 		{	folder = folder+File.separator+name;
@@ -58,6 +61,7 @@ public class SingleTournamentLoader
 		}
 		else
 			match = MatchLoader.loadMatchFromName(name,result);
+		
 		result.setMatch(match);
 	}
 }
