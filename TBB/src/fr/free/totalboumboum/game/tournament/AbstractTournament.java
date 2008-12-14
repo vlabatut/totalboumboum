@@ -21,12 +21,7 @@ package fr.free.totalboumboum.game.tournament;
  * 
  */
 
-import java.io.IOException;
 import java.util.ArrayList;
-
-import javax.xml.parsers.ParserConfigurationException;
-
-import org.xml.sax.SAXException;
 
 import fr.free.totalboumboum.configuration.profile.Profile;
 import fr.free.totalboumboum.game.match.Match;
@@ -40,7 +35,7 @@ public abstract class AbstractTournament implements StatisticHolder
 	/////////////////////////////////////////////////////////////////
 	protected boolean begun = false;
 	
-	public abstract void init(ArrayList<Profile> selected) throws IllegalArgumentException, SecurityException, ParserConfigurationException, SAXException, IOException, IllegalAccessException, NoSuchFieldException, ClassNotFoundException;
+	public abstract void init();
 	public abstract void progress();
 	public abstract void finish();
 	public abstract boolean isOver();
@@ -64,8 +59,9 @@ public abstract class AbstractTournament implements StatisticHolder
 	protected int minPlayerNumber;
 	protected int maxPlayerNumber;
 
-	public void addProfiles(ArrayList<Profile> profiles)
-	{	this.profiles.addAll(profiles);		
+	public void setProfiles(ArrayList<Profile> profiles)
+	{	this.profiles.clear();
+		this.profiles.addAll(profiles);		
 	}
 	
 	public ArrayList<Profile> getProfiles()

@@ -21,14 +21,6 @@ package fr.free.totalboumboum.game.tournament.single;
  * 
  */
 
-import java.io.IOException;
-import java.util.ArrayList;
-
-import javax.xml.parsers.ParserConfigurationException;
-
-import org.xml.sax.SAXException;
-
-import fr.free.totalboumboum.configuration.profile.Profile;
 import fr.free.totalboumboum.game.match.Match;
 import fr.free.totalboumboum.game.statistics.StatisticMatch;
 import fr.free.totalboumboum.game.statistics.StatisticTournament;
@@ -42,10 +34,9 @@ public class SingleTournament extends AbstractTournament
 	private boolean tournamentOver = false;
 	
 	@Override
-	public void init(ArrayList<Profile> selected) throws IllegalArgumentException, SecurityException, ParserConfigurationException, SAXException, IOException, IllegalAccessException, NoSuchFieldException, ClassNotFoundException
+	public void init()
 	{	begun = true;
 		// NOTE vérifier si le nombre de joueurs sélectionnés correspond
-		addProfiles(selected);
 		stats = new StatisticTournament(this);
 		stats.initStartDate();
 	}

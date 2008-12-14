@@ -24,32 +24,28 @@ package fr.free.totalboumboum.gui.menus.quickmatch.players;
 import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.event.ActionEvent;
-import java.io.IOException;
 import java.util.ArrayList;
 
 import javax.swing.Box;
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
-import javax.xml.parsers.ParserConfigurationException;
-
-import org.xml.sax.SAXException;
 
 import fr.free.totalboumboum.configuration.Configuration;
 import fr.free.totalboumboum.configuration.profile.Profile;
-import fr.free.totalboumboum.game.match.Match;
+import fr.free.totalboumboum.configuration.profile.ProfilesConfiguration;
+import fr.free.totalboumboum.configuration.profile.ProfilesSelection;
 import fr.free.totalboumboum.game.tournament.single.SingleTournament;
 import fr.free.totalboumboum.gui.common.structure.panel.SplitMenuPanel;
 import fr.free.totalboumboum.gui.common.structure.panel.menu.InnerMenuPanel;
 import fr.free.totalboumboum.gui.common.structure.panel.menu.MenuPanel;
 import fr.free.totalboumboum.gui.menus.quickmatch.levels.SelectedLevelSplitPanel;
-import fr.free.totalboumboum.gui.menus.quickmatch.match.MatchSplitPanel;
 import fr.free.totalboumboum.gui.tools.GuiKeys;
 import fr.free.totalboumboum.gui.tools.GuiTools;
 
 public class PlayersMenu extends InnerMenuPanel
 {	private static final long serialVersionUID = 1L;
 	
-	private MatchSplitPanel matchSplitPanel;
+	private SelectedLevelSplitPanel levelsPanel;
 	private PlayersData profilesData;
 		
 	@SuppressWarnings("unused")
@@ -90,14 +86,21 @@ public class PlayersMenu extends InnerMenuPanel
 	}
 	
 	/////////////////////////////////////////////////////////////////
-	// PLAYERS						/////////////////////////////////
+	// TOURNAMENT					/////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	public void setSelectedProfiles(ArrayList<Profile> selectedProfiles)
-	{	profilesData.setSelectedProfiles(selectedProfiles);
-	}
+	private SingleTournament tournament;
 	
-	public ArrayList<Profile> getSelectedProfiles()
-	{	return profilesData.getSelectedProfiles();	
+	public void setTournament(SingleTournament tournament)
+	{	// init tournament
+		this.tournament = tournament;
+		// init data
+		ProfilesSelection profilesSelection = new ProfilesSelection();
+		if(Configuration.getGameConfiguration().getUseLastPlayers())
+			profilesSelection = Configuration.getGameConfiguration().getQuickMatchSelectedProfiles();		
+		profilesData.setProfilesSelection(profilesSelection);
+		// transmit
+		if(levelsPanel!=null)
+			levelsPanel.setTournament(tournament);
 	}
 	
 	/////////////////////////////////////////////////////////////////
@@ -111,51 +114,18 @@ public class PlayersMenu extends InnerMenuPanel
 		{	replaceWith(parent);
 	    }
 		else if(e.getActionCommand().equals(GuiKeys.MENU_QUICKMATCH_PLAYERS_BUTTON_NEXT))
-		{	
-			SelectedLevelSplitPanel levelsPanel = new SelectedLevelSplitPanel(container.getContainer(),container);
+		{	// set profiles in tournament
+			ArrayList<Profile> selectedProfiles = profilesData.getSelectedProfiles();
+			tournament.setProfiles(selectedProfiles);
+			// set profiles in configuration
+			ProfilesSelection profilesSelection = ProfilesConfiguration.getSelection(selectedProfiles);
+			Configuration.getGameConfiguration().setQuickMatchSelectedProfiles(profilesSelection);
+			// set levels panel
+			if(levelsPanel==null)
+			{	levelsPanel = new SelectedLevelSplitPanel(container.getContainer(),container);
+			}			
+			levelsPanel.setTournament(tournament);
 			replaceWith(levelsPanel);
-/*			
-			if(matchSplitPanel==null)
-			{	//TODO temporaire
-				try
-				{	// load
-					Configuration.getGameConfiguration().loadQuickmatch();
-					SingleTournament tournament = (SingleTournament)Configuration.getGameConfiguration().getTournament();
-					ArrayList<Profile> selectedProfiles = profilesData.getSelectedProfiles();
-					tournament.init(selectedProfiles);
-					tournament.progress();
-					// GUI
-					matchSplitPanel = new MatchSplitPanel(container.getContainer(),container);
-					Match match = tournament.getCurrentMatch();
-					matchSplitPanel.setMatch(match);
-				}
-				catch (ParserConfigurationException e1)
-				{	e1.printStackTrace();
-				}
-				catch (SAXException e1)
-				{	e1.printStackTrace();
-				}
-				catch (IOException e1)
-				{	e1.printStackTrace();
-				}
-				catch (ClassNotFoundException e1)
-				{	e1.printStackTrace();
-				}
-				catch (IllegalArgumentException e1)
-				{	e1.printStackTrace();
-				}
-				catch (SecurityException e1)
-				{	e1.printStackTrace();
-				}
-				catch (IllegalAccessException e1)
-				{	e1.printStackTrace();
-				}
-				catch (NoSuchFieldException e1)
-				{	e1.printStackTrace();
-				}
-			}
-			replaceWith(matchSplitPanel);
-*/			
 	    }
 	} 
 

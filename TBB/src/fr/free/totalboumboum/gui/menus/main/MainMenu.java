@@ -35,10 +35,6 @@ import javax.xml.parsers.ParserConfigurationException;
 
 import org.xml.sax.SAXException;
 
-import fr.free.totalboumboum.configuration.Configuration;
-import fr.free.totalboumboum.configuration.profile.Profile;
-import fr.free.totalboumboum.configuration.profile.ProfileLoader;
-import fr.free.totalboumboum.configuration.profile.ProfilesSelection;
 import fr.free.totalboumboum.gui.common.structure.MenuContainer;
 import fr.free.totalboumboum.gui.common.structure.panel.menu.MenuPanel;
 import fr.free.totalboumboum.gui.common.structure.panel.menu.SimpleMenuPanel;
@@ -132,8 +128,13 @@ buttonAbout.setEnabled(false);
 		else if(e.getActionCommand().equals(GuiKeys.MENU_MAIN_BUTTON_TOURNAMENT))
 		{	if(tournamentMainPanel==null)
 			{	try
-				{	Configuration.getGameConfiguration().loadLastTournament();
-					tournamentMainPanel = new TournamentSplitPanel(getContainer(),this);
+				{	tournamentMainPanel = new TournamentSplitPanel(getContainer(),this);
+				}
+				catch (IllegalArgumentException e1)
+				{	e1.printStackTrace();
+				}
+				catch (SecurityException e1)
+				{	e1.printStackTrace();
 				}
 				catch (ParserConfigurationException e1)
 				{	e1.printStackTrace();
@@ -142,15 +143,6 @@ buttonAbout.setEnabled(false);
 				{	e1.printStackTrace();
 				}
 				catch (IOException e1)
-				{	e1.printStackTrace();
-				}
-				catch (ClassNotFoundException e1)
-				{	e1.printStackTrace();
-				}
-				catch (IllegalArgumentException e1)
-				{	e1.printStackTrace();
-				}
-				catch (SecurityException e1)
 				{	e1.printStackTrace();
 				}
 				catch (IllegalAccessException e1)
@@ -164,39 +156,8 @@ buttonAbout.setEnabled(false);
 	    }
 		else if(e.getActionCommand().equals(GuiKeys.MENU_MAIN_BUTTON_QUICKMATCH))
 		{	if(quickmatchGamePanel==null)
-			{	ArrayList<Profile> selectedProfiles = new ArrayList<Profile>();
-				if(Configuration.getGameConfiguration().getUseLastPlayers())
-				{	ProfilesSelection profilesSelection = Configuration.getGameConfiguration().getQuickMatchSelected();
-					try
-					{	selectedProfiles = ProfileLoader.loadProfiles(profilesSelection);
-					}
-					catch (IllegalArgumentException e1)
-					{	e1.printStackTrace();
-					}
-					catch (SecurityException e1)
-					{	e1.printStackTrace();
-					}
-					catch (ParserConfigurationException e1)
-					{	e1.printStackTrace();
-					}
-					catch (SAXException e1)
-					{	e1.printStackTrace();
-					}
-					catch (IOException e1)
-					{	e1.printStackTrace();
-					}
-					catch (IllegalAccessException e1)
-					{	e1.printStackTrace();
-					}
-					catch (NoSuchFieldException e1)
-					{	e1.printStackTrace();
-					}
-					catch (ClassNotFoundException e1)
-					{	e1.printStackTrace();
-					}
-				}
-				quickmatchGamePanel = new PlayersSplitPanel(getContainer(),this);
-				quickmatchGamePanel.setSelectedProfiles(selectedProfiles);
+			{	quickmatchGamePanel = new PlayersSplitPanel(getContainer(),this);
+				quickmatchGamePanel.initTournament();				
 			}			
 			replaceWith(quickmatchGamePanel);
 	    }

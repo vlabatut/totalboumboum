@@ -21,14 +21,6 @@ package fr.free.totalboumboum.game.tournament.league;
  * 
  */
 
-import java.io.IOException;
-import java.util.ArrayList;
-
-import javax.xml.parsers.ParserConfigurationException;
-
-import org.xml.sax.SAXException;
-
-import fr.free.totalboumboum.configuration.profile.Profile;
 import fr.free.totalboumboum.game.match.Match;
 import fr.free.totalboumboum.game.tournament.AbstractTournament;
 
@@ -54,10 +46,8 @@ public class LeagueTournament extends AbstractTournament
 	}
 
 	@Override
-	public void init(ArrayList<Profile> selected) throws IllegalArgumentException, SecurityException,
-			ParserConfigurationException, SAXException, IOException,
-			IllegalAccessException, NoSuchFieldException,
-			ClassNotFoundException {
+	public void init()
+	{
 		// TODO Auto-generated method stub
 		
 	}

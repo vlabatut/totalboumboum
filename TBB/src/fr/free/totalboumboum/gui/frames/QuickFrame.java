@@ -96,7 +96,8 @@ public class QuickFrame extends MainFrame implements ActionListener, LoopRenderP
 		ArrayList<Profile> selectedProfiles = new ArrayList<Profile>();
 		ProfilesSelection profilesSelection = Configuration.getGameConfiguration().getQuickStartSelected();
 		selectedProfiles = ProfileLoader.loadProfiles(profilesSelection);
-		tournament.init(selectedProfiles);
+		tournament.setProfiles(selectedProfiles);
+		tournament.init();
 	    tournament.progress();
 	    
 	    // match

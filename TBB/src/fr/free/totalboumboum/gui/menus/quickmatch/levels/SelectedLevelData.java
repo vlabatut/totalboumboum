@@ -24,6 +24,7 @@ package fr.free.totalboumboum.gui.menus.quickmatch.levels;
 import java.awt.Dimension;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
+import java.text.NumberFormat;
 import java.util.HashMap;
 
 import javax.swing.Box;
@@ -32,6 +33,7 @@ import javax.xml.parsers.ParserConfigurationException;
 
 import org.xml.sax.SAXException;
 
+import fr.free.totalboumboum.configuration.game.LevelsSelection;
 import fr.free.totalboumboum.engine.container.level.LevelPreview;
 import fr.free.totalboumboum.engine.container.level.LevelPreviewLoader;
 import fr.free.totalboumboum.gui.common.content.subpanel.browser.FileBrowserSubPanel;
@@ -60,10 +62,6 @@ public class SelectedLevelData extends EntitledDataPanel implements PackBrowserS
 	private PackBrowserSubPanel selectionPanel;
 	private TransferSubPanel commandsPanel;
 	
-	private HashMap<String,String> fileNames;
-	private HashMap<String,Integer> fileCounts;
-	private LevelPreview selectedLevelPreview = null;
-	
 	public SelectedLevelData(SplitMenuPanel container)
 	{	super(container);
 		
@@ -87,7 +85,6 @@ public class SelectedLevelData extends EntitledDataPanel implements PackBrowserS
 			{	selectedPanel = new FileBrowserSubPanel(listWidth,dataHeight);
 				selectedPanel.setShowParent(false);
 				fileNames = new HashMap<String,String>();	
-				fileCounts = new HashMap<String,Integer>();	
 				selectedPanel.setFileNames(fileNames);
 				mainPanel.add(selectedPanel);
 			}
@@ -163,10 +160,42 @@ public class SelectedLevelData extends EntitledDataPanel implements PackBrowserS
 	}
 	
 	/////////////////////////////////////////////////////////////////
-	// SELECTED LEVEL				/////////////////////////////////
+	// LEVELS						/////////////////////////////////
 	/////////////////////////////////////////////////////////////////
+	private LevelsSelection levelsSelection;
+	private HashMap<String,String> fileNames;
+	private LevelPreview selectedLevelPreview = null;
+
+	public void setLevelsSelection(LevelsSelection levelsSelection)
+	{	this.levelsSelection = levelsSelection;
+		fileNames = new HashMap<String, String>();	
+		numberFileNames();
+		selectedPanel.setFileNames(fileNames);
+	}
+	
+	private void numberFileNames()
+	{	int l = levelsSelection.getLevelCount();
+		int digits = 0;
+		while(l!=0)
+		{	l = l / 10;
+			digits++;
+		}
+		NumberFormat nf = NumberFormat.getInstance();
+		nf.setMinimumIntegerDigits(digits);
+		fileNames.clear();
+		for(int i=0;i<levelsSelection.getLevelCount();i++)
+		{	String key = Integer.toString(i+1);
+			String value = nf.format(i+1)+"."+levelsSelection.getFolderName(i);
+			fileNames.put(key,value);
+		}
+	}
+	
 	public LevelPreview getSelectedLevelPreview()
 	{	return selectedLevelPreview;
+	}
+
+	public LevelsSelection getLevelsSelection()
+	{	return levelsSelection;
 	}
 
 	/////////////////////////////////////////////////////////////////
@@ -203,45 +232,47 @@ public class SelectedLevelData extends EntitledDataPanel implements PackBrowserS
 	/////////////////////////////////////////////////////////////////
 	@Override
 	public void transferLeft()
-	{	String selected = selectionPanel.getSelectedName();
-		if(selected!=null)
-		{	Integer nbr = fileCounts.get(selected);
-			int value = 1;
-			if(nbr!=null)
-				value = nbr.intValue() + 1;
-			fileCounts.put(selected,value);
-			String name = selected;
-			if(value>1)
-				name = selected+" ("+value+")";
-			fileNames.put(selected,name);
+	{	String folderName = selectionPanel.getSelectedName();
+		String packName = selectionPanel.getSelectedPack();
+		if(folderName!=null && packName!=null)
+		{	int index = getTransferIndex();
+			if(index==-1)
+				index = fileNames.size();
+			else
+				index++;
+			// levels selection
+			levelsSelection.addLevel(index,packName,folderName);
+			// file names
+			numberFileNames();
 			selectedPanel.setFileNames(fileNames);
-			selectedPanel.validate();
+			String fileName = Integer.toString(index+1);
+			selectedPanel.setSelectedFileName(fileName);
 		}
 	}
 
 	@Override
 	public void transferRight()
-	{	String selected = selectedPanel.getSelectedFileName();
-		if(selected!=null)
-		{	Integer nbr = fileCounts.get(selected);
-			if(nbr!=null)
-			{	int value = nbr.intValue() - 1;
-				if(value==0)
-				{	fileNames.remove(selected);
-					selectedPanel.setFileNames(fileNames);
-					selectedPanel.validate();
-				}
-				else
-				{	fileCounts.put(selected,value);
-					String name = selected;
-					if(value>1)
-						name = selected+" ("+value+")";
-					fileNames.put(selected,name);
-					selectedPanel.setFileNames(fileNames);
-					selectedPanel.validate();
-					selectedPanel.setSelectedFileName(selected);
-				}
+	{	int index = getTransferIndex();
+		if(index>=0)
+		{	// levels selection
+			levelsSelection.removeLevel(index);
+			// file names
+			numberFileNames();
+			selectedPanel.setFileNames(fileNames);
+			if(index>=levelsSelection.getLevelCount())
+				index--;
+			if(index>=0)
+			{	String fileName = Integer.toString(index+1);
+				selectedPanel.setSelectedFileName(fileName);
 			}
 		}
+	}
+	
+	private int getTransferIndex()
+	{	int result = -1;
+		String idx = selectedPanel.getSelectedFileName();
+		if(idx!=null)
+			result = Integer.parseInt(idx)-1;
+		return result;
 	}
 }

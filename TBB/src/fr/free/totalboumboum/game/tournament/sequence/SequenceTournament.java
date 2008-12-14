@@ -21,7 +21,6 @@ package fr.free.totalboumboum.game.tournament.sequence;
  * 
  */
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Collections;
@@ -29,11 +28,6 @@ import java.util.GregorianCalendar;
 import java.util.Iterator;
 import java.util.Random;
 
-import javax.xml.parsers.ParserConfigurationException;
-
-import org.xml.sax.SAXException;
-
-import fr.free.totalboumboum.configuration.profile.Profile;
 import fr.free.totalboumboum.game.limit.Limits;
 import fr.free.totalboumboum.game.limit.TournamentLimit;
 import fr.free.totalboumboum.game.match.Match;
@@ -62,7 +56,7 @@ public class SequenceTournament extends AbstractTournament
 	private boolean tournamentOver = false;
 	
 	@Override
-	public void init(ArrayList<Profile> selected) throws IllegalArgumentException, SecurityException, ParserConfigurationException, SAXException, IOException, IllegalAccessException, NoSuchFieldException, ClassNotFoundException
+	public void init()
 	{	begun = true;
 		
 		// are matches in random order ?
@@ -70,7 +64,6 @@ public class SequenceTournament extends AbstractTournament
 			randomizeMatches();
 		
 		// NOTE vérifier si le nombre de joueurs sélectionnés correspond
-		addProfiles(selected);
 		iterator = matches.iterator();
 		stats = new StatisticTournament(this);
 		stats.initStartDate();

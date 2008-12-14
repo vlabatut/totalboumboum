@@ -26,10 +26,12 @@ import java.awt.Graphics;
 import java.awt.image.BufferedImage;
 
 import fr.free.totalboumboum.game.match.Match;
+import fr.free.totalboumboum.game.tournament.single.SingleTournament;
 import fr.free.totalboumboum.gui.common.structure.MenuContainer;
 import fr.free.totalboumboum.gui.common.structure.panel.SplitMenuPanel;
 import fr.free.totalboumboum.gui.common.structure.panel.menu.MenuPanel;
 import fr.free.totalboumboum.gui.data.configuration.GuiConfiguration;
+import fr.free.totalboumboum.gui.menus.quickmatch.levels.SelectedLevelMenu;
 import fr.free.totalboumboum.gui.tools.GuiTools;
 
 public class MatchSplitPanel extends SplitMenuPanel
@@ -49,14 +51,10 @@ public class MatchSplitPanel extends SplitMenuPanel
 	}
 	
 	/////////////////////////////////////////////////////////////////
-	// MATCH			/////////////////////////////////////////////
+	// TOURNAMENT					/////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	public void setMatch(Match match)
-	{	((MatchMenu)menuPart).setMatch(match);
-	}
-	
-	public Match getMatch()
-	{	return ((MatchMenu)menuPart).getMatch();	
+	public void setTournament(SingleTournament tournament)
+	{	((MatchMenu)getMenuPart()).setTournament(tournament);
 	}
 
 	/////////////////////////////////////////////////////////////////

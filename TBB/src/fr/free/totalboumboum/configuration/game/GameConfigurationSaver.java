@@ -94,7 +94,7 @@ public class GameConfigurationSaver
 		
 		// players
 		Element playersElement = new Element(XmlTools.ELT_PLAYERS);
-		ProfilesSelection quickMatchSelected = gameConfiguration.getQuickMatchSelected();
+		ProfilesSelection quickMatchSelected = gameConfiguration.getQuickMatchSelectedProfiles();
 		ProfilesSelectionSaver.saveProfilesSelection(playersElement,quickMatchSelected);
 		result.addContent(playersElement);
 

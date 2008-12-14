@@ -25,6 +25,7 @@ import java.awt.BorderLayout;
 import java.awt.Graphics;
 import java.awt.image.BufferedImage;
 
+import fr.free.totalboumboum.game.tournament.single.SingleTournament;
 import fr.free.totalboumboum.gui.common.structure.MenuContainer;
 import fr.free.totalboumboum.gui.common.structure.panel.SplitMenuPanel;
 import fr.free.totalboumboum.gui.common.structure.panel.menu.MenuPanel;
@@ -35,7 +36,7 @@ public class SelectedLevelSplitPanel extends SplitMenuPanel
 {	private static final long serialVersionUID = 1L; 
 
 	private BufferedImage image;
-
+	
 	public SelectedLevelSplitPanel(MenuContainer container, MenuPanel parent)
 	{	super(container,parent,BorderLayout.PAGE_END,GuiTools.HORIZONTAL_SPLIT_RATIO);
 	
@@ -43,11 +44,19 @@ public class SelectedLevelSplitPanel extends SplitMenuPanel
 		image = GuiConfiguration.getMiscConfiguration().getDarkBackground();
 		
 		// panels
-		setMenuPart(new SelectedLevelMenu(this,parent));
+		SelectedLevelMenu menu = new SelectedLevelMenu(this,parent);
+		setMenuPart(menu);
 	}
 	
 	/////////////////////////////////////////////////////////////////
-	// PAINT				/////////////////////////////////
+	// TOURNAMENT					/////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	public void setTournament(SingleTournament tournament)
+	{	((SelectedLevelMenu)getMenuPart()).setTournament(tournament);
+	}
+	
+	/////////////////////////////////////////////////////////////////
+	// PAINT						/////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	@Override
 	public void paintComponent(Graphics g)
