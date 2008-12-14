@@ -123,8 +123,8 @@ public class PlayersMenu extends InnerMenuPanel
 			// set levels panel
 			if(levelsPanel==null)
 			{	levelsPanel = new SelectedLevelSplitPanel(container.getContainer(),container);
+				levelsPanel.setTournament(tournament);
 			}			
-			levelsPanel.setTournament(tournament);
 			replaceWith(levelsPanel);
 	    }
 	} 

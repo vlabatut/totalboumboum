@@ -154,6 +154,9 @@ public class Match implements StatisticHolder
 	public void setRounds(ArrayList<Round> rounds)
 	{	this.rounds.addAll(rounds);			
 	}
+	public void clearRounds()
+	{	rounds.clear();	
+	}
 
 	/////////////////////////////////////////////////////////////////
 	// PLAYERS			/////////////////////////////////////////////
