@@ -1,4 +1,4 @@
-package fr.free.totalboumboum.gui.common.content.subpanel.round;
+package fr.free.totalboumboum.gui.common.content.subpanel.match;
 
 /*
  * Total Boum Boum
@@ -24,66 +24,62 @@ package fr.free.totalboumboum.gui.common.content.subpanel.round;
 import java.awt.Color;
 import java.util.ArrayList;
 
-import fr.free.totalboumboum.game.round.Round;
+import fr.free.totalboumboum.game.match.Match;
 import fr.free.totalboumboum.gui.common.structure.subpanel.UntitledSubPanelTable;
 import fr.free.totalboumboum.gui.data.configuration.GuiConfiguration;
 import fr.free.totalboumboum.gui.tools.GuiKeys;
 import fr.free.totalboumboum.gui.tools.GuiTools;
 import fr.free.totalboumboum.tools.StringTools;
 
-public class RoundSubPanel extends UntitledSubPanelTable
+public class MatchMiscSubPanel extends UntitledSubPanelTable
 {	private static final long serialVersionUID = 1L;
 	
-	public RoundSubPanel(int width, int height)
+	public MatchMiscSubPanel(int width, int height)
 	{	super(width,height,1,1,1,true);
 		
-		setRound(null);
+		setMatch(null);
 	}
 		
 	/////////////////////////////////////////////////////////////////
 	// ROUND			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	private Round round;
+	private Match match;
 
-	public Round getRound()
-	{	return round;	
+	public Match getMatch()
+	{	return match;	
 	}
 	
-	public void setRound(Round round)
-	{	this.round = round;
+	public void setMatch(Match match)
+	{	this.match = match;
 		
 		// sizes
-		int lines = 5;
+		int lines = 4;
 		int colSubs = 2;
 		int colGroups = 1;
 		reinit(colGroups,colSubs,lines);
 		
 		// icons
 		ArrayList<String> keys = new ArrayList<String>();
-		if(showTitle)
-			keys.add(GuiKeys.COMMON_ROUND_TITLE);
+		if(showName)
+			keys.add(GuiKeys.COMMON_MATCH_NAME);
 		if(showAuthor)
-			keys.add(GuiKeys.COMMON_ROUND_AUTHOR);
+			keys.add(GuiKeys.COMMON_MATCH_AUTHOR);
+		if(showRoundCount)
+			keys.add(GuiKeys.COMMON_MATCH_ROUND_COUNT);
 		if(showAllowedPlayerNumbers)
-			keys.add(GuiKeys.COMMON_ROUND_ALLOWED_PLAYERS);
-		if(showLevelFolder)
-			keys.add(GuiKeys.COMMON_ROUND_LEVEL_FOLDER);
-		if(showLevelPack)
-			keys.add(GuiKeys.COMMON_ROUND_LEVEL_PACK);
+			keys.add(GuiKeys.COMMON_MATCH_ALLOWED_PLAYERS);
 		
-		if(round!=null)
+		if(match!=null)
 		{	// text
 			ArrayList<String> values = new ArrayList<String>();
-			if(showTitle)
-				values.add(round.getName());
+			if(showName)
+				values.add(match.getName());
 			if(showAuthor)
-				values.add(round.getAuthor());
+				values.add(match.getAuthor());
+			if(showRoundCount)
+				values.add(Integer.toString(match.getRounds().size()));
 			if(showAllowedPlayerNumbers)
-				values.add(StringTools.formatAllowedPlayerNumbers(round.getAllowedPlayerNumbers()));
-			if(showLevelFolder)
-				values.add(round.getHollowLevel().getFolderName());
-			if(showLevelPack)
-				values.add(round.getHollowLevel().getPackName());
+				values.add(StringTools.formatAllowedPlayerNumbers(match.getAllowedPlayerNumbers()));
 			
 			// content
 			for(int line=0;line<keys.size();line++)
@@ -142,29 +138,25 @@ public class RoundSubPanel extends UntitledSubPanelTable
 	/////////////////////////////////////////////////////////////////
 	// DISPLAY			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	private boolean showTitle = true;
+	private boolean showName = true;
 	private boolean showAuthor = true;
+	private boolean showRoundCount = true;
 	private boolean showAllowedPlayerNumbers = true;
-	private boolean showLevelFolder = true;
-	private boolean showLevelPack = true;
 
-	public void setShowTitle(boolean showTitle)
-	{	this.showTitle = showTitle;
+	public void setShowName(boolean showName)
+	{	this.showName = showName;
 	}
 
 	public void setShowAuthor(boolean showAuthor)
 	{	this.showAuthor = showAuthor;
 	}
 
+	public void setShowRoundCount(boolean showRoundCount)
+	{	this.showRoundCount = showRoundCount;
+	}
+
 	public void setShowAllowedPlayerNumbers(boolean showAllowedPlayerNumbers)
 	{	this.showAllowedPlayerNumbers = showAllowedPlayerNumbers;
 	}
 
-	public void setShowLevelFolder(boolean showLevelFolder)
-	{	this.showLevelFolder = showLevelFolder;
-	}
-
-	public void setShowLevelPack(boolean showLevelPack)
-	{	this.showLevelPack = showLevelPack;
-	}
 }

@@ -45,7 +45,7 @@ import fr.free.totalboumboum.gui.common.content.subpanel.browser.FolderBrowserSu
 import fr.free.totalboumboum.gui.common.content.subpanel.limits.LimitsSubPanelListener;
 import fr.free.totalboumboum.gui.common.content.subpanel.limits.LimitsSubPanel;
 import fr.free.totalboumboum.gui.common.content.subpanel.points.PointsSubPanel;
-import fr.free.totalboumboum.gui.common.content.subpanel.round.RoundSubPanel;
+import fr.free.totalboumboum.gui.common.content.subpanel.round.RoundMiscSubPanel;
 import fr.free.totalboumboum.gui.common.structure.panel.SplitMenuPanel;
 import fr.free.totalboumboum.gui.common.structure.panel.data.EntitledDataPanel;
 import fr.free.totalboumboum.gui.common.structure.subpanel.SubPanel;
@@ -63,7 +63,7 @@ public class SelectedRoundData extends EntitledDataPanel implements FolderBrowse
 	private UntitledSubPanelImage imagePanel;
 	private LimitsSubPanel<RoundLimit> limitsPanel;
 	private PointsSubPanel pointsPanel;
-	private RoundSubPanel miscPanel;
+	private RoundMiscSubPanel miscPanel;
 	private FolderBrowserSubPanel listPanel;
 	
 	private Round selectedRound = null;
@@ -120,7 +120,7 @@ public class SelectedRoundData extends EntitledDataPanel implements FolderBrowse
 					int leftUpWidth = rightWidth - rightUpWidth - margin;
 									
 					// preview
-					{	miscPanel = new RoundSubPanel(leftUpWidth,previewHeight);
+					{	miscPanel = new RoundMiscSubPanel(leftUpWidth,previewHeight);
 						upPanel.add(miscPanel);
 					}
 					

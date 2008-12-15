@@ -40,7 +40,7 @@ import fr.free.totalboumboum.gui.common.content.subpanel.browser.FolderBrowserSu
 import fr.free.totalboumboum.gui.common.content.subpanel.browser.FolderBrowserSubPanelListener;
 import fr.free.totalboumboum.gui.common.content.subpanel.limits.LimitsSubPanelListener;
 import fr.free.totalboumboum.gui.common.content.subpanel.limits.LimitsSubPanel;
-import fr.free.totalboumboum.gui.common.content.subpanel.match.MatchSubPanel;
+import fr.free.totalboumboum.gui.common.content.subpanel.match.MatchMiscSubPanel;
 import fr.free.totalboumboum.gui.common.content.subpanel.points.PointsSubPanel;
 import fr.free.totalboumboum.gui.common.structure.panel.SplitMenuPanel;
 import fr.free.totalboumboum.gui.common.structure.panel.data.EntitledDataPanel;
@@ -57,7 +57,7 @@ public class SelectedMatchData extends EntitledDataPanel implements FolderBrowse
 	private FolderBrowserSubPanel folderPanel;
 	private LimitsSubPanel<MatchLimit> limitsPanel;
 	private PointsSubPanel pointsPanel;
-	private MatchSubPanel miscPanel;
+	private MatchMiscSubPanel miscPanel;
 
 	private Match selectedMatch = null;	
 	private String baseFolder;
@@ -105,7 +105,7 @@ public class SelectedMatchData extends EntitledDataPanel implements FolderBrowse
 				
 				rightPanel.add(Box.createVerticalGlue());
 
-				{	miscPanel = new MatchSubPanel(rightWidth,previewHeight);
+				{	miscPanel = new MatchMiscSubPanel(rightWidth,previewHeight);
 					rightPanel.add(miscPanel);
 				}
 
