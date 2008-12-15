@@ -1,4 +1,4 @@
-package fr.free.totalboumboum.gui.common.content.subpanel.match;
+package fr.free.totalboumboum.gui.common.content.subpanel.round;
 
 /*
  * Total Boum Boum
@@ -24,62 +24,76 @@ package fr.free.totalboumboum.gui.common.content.subpanel.match;
 import java.awt.Color;
 import java.util.ArrayList;
 
-import fr.free.totalboumboum.game.match.Match;
+import fr.free.totalboumboum.configuration.game.GameConfiguration;
+import fr.free.totalboumboum.game.round.Round;
+import fr.free.totalboumboum.gui.common.structure.subpanel.UntitledSubPanelLines;
 import fr.free.totalboumboum.gui.common.structure.subpanel.UntitledSubPanelTable;
 import fr.free.totalboumboum.gui.data.configuration.GuiConfiguration;
 import fr.free.totalboumboum.gui.tools.GuiKeys;
 import fr.free.totalboumboum.gui.tools.GuiTools;
 import fr.free.totalboumboum.tools.StringTools;
 
-public class MatchSubPanel extends UntitledSubPanelTable
+public class RoundQuickConfigSubPanel extends UntitledSubPanelLines
 {	private static final long serialVersionUID = 1L;
 	
-	public MatchSubPanel(int width, int height)
-	{	super(width,height,1,1,1,true);
-		
-		setMatch(null);
+	public RoundQuickConfigSubPanel(int width, int height)
+	{	super(width,height,LINE_COUNT,false);
+		setGameConfiguration(null);
 	}
 		
 	/////////////////////////////////////////////////////////////////
-	// ROUND			/////////////////////////////////////////////
+	// GameConfiguration	/////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	private Match match;
+	private static final int LINE_COUNT = 20;
+	private static final int LINE_LEVELS_ORDER = 0;
+	private static final int LINE_PLAYERS_POSITION = 1;
+	private static final int LINE_TIME_LIMIT = 2;
+	private static final int LINE_POINTS_RANKS = 3;
+	private static final int LINE_POINTS_VALUE = 4;
+	private static final int LINE_POINTS_SHARE = 5;
+	private static final int LINE_POINTS_DRAW = 6;
 
-	public Match getMatch()
-	{	return match;	
+	private GameConfiguration gameConfiguration;
+
+	public GameConfiguration getGameConfiguration()
+	{	return gameConfiguration;	
 	}
 	
-	public void setMatch(Match match)
-	{	this.match = match;
+	public void setGameConfiguration(GameConfiguration gameConfiguration)
+	{	this.gameConfiguration = gameConfiguration;
 		
 		// sizes
-		int lines = 4;
+		int lines = 5;
 		int colSubs = 2;
 		int colGroups = 1;
 		reinit(colGroups,colSubs,lines);
 		
 		// icons
 		ArrayList<String> keys = new ArrayList<String>();
-		if(showName)
-			keys.add(GuiKeys.COMMON_MATCH_NAME);
+		if(showTitle)
+			keys.add(GuiKeys.COMMON_ROUND_TITLE);
 		if(showAuthor)
-			keys.add(GuiKeys.COMMON_MATCH_AUTHOR);
-		if(showRoundCount)
-			keys.add(GuiKeys.COMMON_MATCH_ROUND_COUNT);
+			keys.add(GuiKeys.COMMON_ROUND_AUTHOR);
 		if(showAllowedPlayerNumbers)
-			keys.add(GuiKeys.COMMON_MATCH_ALLOWED_PLAYERS);
+			keys.add(GuiKeys.COMMON_ROUND_ALLOWED_PLAYERS);
+		if(showLevelFolder)
+			keys.add(GuiKeys.COMMON_ROUND_LEVEL_FOLDER);
+		if(showLevelPack)
+			keys.add(GuiKeys.COMMON_ROUND_LEVEL_PACK);
 		
-		if(match!=null)
+		if(round!=null)
 		{	// text
 			ArrayList<String> values = new ArrayList<String>();
-			if(showName)
-				values.add(match.getName());
+			if(showTitle)
+				values.add(round.getName());
 			if(showAuthor)
-				values.add(match.getAuthor());
-			if(showRoundCount)
-				values.add(Integer.toString(match.getRounds().size()));
+				values.add(round.getAuthor());
 			if(showAllowedPlayerNumbers)
-				values.add(StringTools.formatAllowedPlayerNumbers(match.getAllowedPlayerNumbers()));
+				values.add(StringTools.formatAllowedPlayerNumbers(round.getAllowedPlayerNumbers()));
+			if(showLevelFolder)
+				values.add(round.getHollowLevel().getFolderName());
+			if(showLevelPack)
+				values.add(round.getHollowLevel().getPackName());
 			
 			// content
 			for(int line=0;line<keys.size();line++)
@@ -138,25 +152,29 @@ public class MatchSubPanel extends UntitledSubPanelTable
 	/////////////////////////////////////////////////////////////////
 	// DISPLAY			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	private boolean showName = true;
+	private boolean showTitle = true;
 	private boolean showAuthor = true;
-	private boolean showRoundCount = true;
 	private boolean showAllowedPlayerNumbers = true;
+	private boolean showLevelFolder = true;
+	private boolean showLevelPack = true;
 
-	public void setShowName(boolean showName)
-	{	this.showName = showName;
+	public void setShowTitle(boolean showTitle)
+	{	this.showTitle = showTitle;
 	}
 
 	public void setShowAuthor(boolean showAuthor)
 	{	this.showAuthor = showAuthor;
 	}
 
-	public void setShowRoundCount(boolean showRoundCount)
-	{	this.showRoundCount = showRoundCount;
-	}
-
 	public void setShowAllowedPlayerNumbers(boolean showAllowedPlayerNumbers)
 	{	this.showAllowedPlayerNumbers = showAllowedPlayerNumbers;
 	}
 
+	public void setShowLevelFolder(boolean showLevelFolder)
+	{	this.showLevelFolder = showLevelFolder;
+	}
+
+	public void setShowLevelPack(boolean showLevelPack)
+	{	this.showLevelPack = showLevelPack;
+	}
 }
