@@ -38,14 +38,14 @@ import fr.free.totalboumboum.game.tournament.single.SingleTournament;
 import fr.free.totalboumboum.gui.common.structure.panel.SplitMenuPanel;
 import fr.free.totalboumboum.gui.common.structure.panel.menu.InnerMenuPanel;
 import fr.free.totalboumboum.gui.common.structure.panel.menu.MenuPanel;
-import fr.free.totalboumboum.gui.menus.quickmatch.levels.SelectedLevelSplitPanel;
+import fr.free.totalboumboum.gui.menus.quickmatch.levels.LevelsSplitPanel;
 import fr.free.totalboumboum.gui.tools.GuiKeys;
 import fr.free.totalboumboum.gui.tools.GuiTools;
 
 public class PlayersMenu extends InnerMenuPanel
 {	private static final long serialVersionUID = 1L;
 	
-	private SelectedLevelSplitPanel levelsPanel;
+	private LevelsSplitPanel levelsPanel;
 	private PlayersData profilesData;
 		
 	@SuppressWarnings("unused")
@@ -122,7 +122,7 @@ public class PlayersMenu extends InnerMenuPanel
 			Configuration.getGameConfiguration().setQuickMatchSelectedProfiles(profilesSelection);
 			// set levels panel
 			if(levelsPanel==null)
-			{	levelsPanel = new SelectedLevelSplitPanel(container.getContainer(),container);
+			{	levelsPanel = new LevelsSplitPanel(container.getContainer(),container);
 				levelsPanel.setTournament(tournament);
 			}			
 			replaceWith(levelsPanel);

@@ -1,4 +1,4 @@
-package fr.free.totalboumboum.gui.menus.quickmatch.levels;
+package fr.free.totalboumboum.gui.menus.quickmatch.options;
 
 /*
  * Total Boum Boum
@@ -32,19 +32,19 @@ import fr.free.totalboumboum.gui.common.structure.panel.menu.MenuPanel;
 import fr.free.totalboumboum.gui.data.configuration.GuiConfiguration;
 import fr.free.totalboumboum.gui.tools.GuiTools;
 
-public class SelectedLevelSplitPanel extends SplitMenuPanel
+public class OptionsSplitPanel extends SplitMenuPanel
 {	private static final long serialVersionUID = 1L; 
 
 	private BufferedImage image;
 	
-	public SelectedLevelSplitPanel(MenuContainer container, MenuPanel parent)
+	public OptionsSplitPanel(MenuContainer container, MenuPanel parent)
 	{	super(container,parent,BorderLayout.PAGE_END,GuiTools.HORIZONTAL_SPLIT_RATIO);
 	
 		// background
 		image = GuiConfiguration.getMiscConfiguration().getDarkBackground();
 		
 		// panels
-		SelectedLevelMenu menu = new SelectedLevelMenu(this,parent);
+		OptionsMenu menu = new OptionsMenu(this,parent);
 		setMenuPart(menu);
 	}
 	
@@ -52,7 +52,7 @@ public class SelectedLevelSplitPanel extends SplitMenuPanel
 	// TOURNAMENT					/////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	public void setTournament(SingleTournament tournament)
-	{	((SelectedLevelMenu)getMenuPart()).setTournament(tournament);
+	{	((OptionsMenu)getMenuPart()).setTournament(tournament);
 	}
 	
 	/////////////////////////////////////////////////////////////////
