@@ -1,4 +1,4 @@
-package fr.free.totalboumboum.gui.menus.quickmatch.levels;
+package fr.free.totalboumboum.gui.menus.quickmatch.options;
 
 /*
  * Total Boum Boum
@@ -51,7 +51,7 @@ import fr.free.totalboumboum.gui.tools.GuiKeys;
 import fr.free.totalboumboum.gui.tools.GuiTools;
 import fr.free.totalboumboum.tools.FileTools;
 
-public class SelectedLevelData extends EntitledDataPanel implements PackBrowserSubPanelListener, TransferSubPanelListener
+public class OptionsData extends EntitledDataPanel implements PackBrowserSubPanelListener, TransferSubPanelListener
 {	
 	private static final long serialVersionUID = 1L;
 	private static final float SPLIT_RATIO = 0.30f;
@@ -62,7 +62,7 @@ public class SelectedLevelData extends EntitledDataPanel implements PackBrowserS
 	private PackBrowserSubPanel selectionPanel;
 	private TransferSubPanel commandsPanel;
 	
-	public SelectedLevelData(SplitMenuPanel container)
+	public OptionsData(SplitMenuPanel container)
 	{	super(container);
 		
 		// title

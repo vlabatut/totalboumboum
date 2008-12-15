@@ -42,14 +42,14 @@ import fr.free.totalboumboum.game.tournament.single.SingleTournament;
 import fr.free.totalboumboum.gui.common.structure.panel.SplitMenuPanel;
 import fr.free.totalboumboum.gui.common.structure.panel.menu.InnerMenuPanel;
 import fr.free.totalboumboum.gui.common.structure.panel.menu.MenuPanel;
-import fr.free.totalboumboum.gui.menus.quickmatch.match.MatchSplitPanel;
+import fr.free.totalboumboum.gui.menus.quickmatch.options.OptionsSplitPanel;
 import fr.free.totalboumboum.gui.tools.GuiKeys;
 import fr.free.totalboumboum.gui.tools.GuiTools;
 
-public class SelectedLevelMenu extends InnerMenuPanel
+public class LevelsMenu extends InnerMenuPanel
 {	private static final long serialVersionUID = 1L;
 	
-	private MatchSplitPanel matchPanel;
+	private OptionsSplitPanel optionsPanel;
 
 	@SuppressWarnings("unused")
 	private JButton buttonQuit;
@@ -58,9 +58,9 @@ public class SelectedLevelMenu extends InnerMenuPanel
 	@SuppressWarnings("unused")
 	private JButton buttonNext;
 
-	private SelectedLevelData levelData;
+	private LevelsData levelData;
 
-	public SelectedLevelMenu(SplitMenuPanel container, MenuPanel parent)
+	public LevelsMenu(SplitMenuPanel container, MenuPanel parent)
 	{	super(container, parent);
 		
 		// layout
@@ -86,7 +86,7 @@ public class SelectedLevelMenu extends InnerMenuPanel
 		buttonNext = GuiTools.createButton(GuiKeys.MENU_QUICKMATCH_LEVELS_BUTTON_NEXT,buttonWidth,buttonHeight,1,this);
 
 		// panels
-		levelData = new SelectedLevelData(container);
+		levelData = new LevelsData(container);
 		container.setDataPart(levelData);
 	}
 	
@@ -104,8 +104,8 @@ public class SelectedLevelMenu extends InnerMenuPanel
 			levelsSelection = Configuration.getGameConfiguration().getQuickMatchSelectedLevels();
 		levelData.setLevelsSelection(levelsSelection);
 		// transmit
-		if(matchPanel!=null)
-		{	matchPanel.setTournament(tournament);
+		if(optionsPanel!=null)
+		{	optionsPanel.setTournament(tournament);
 		}			
 	}
 	
@@ -150,11 +150,11 @@ public class SelectedLevelMenu extends InnerMenuPanel
 			// set levels in configuration
 			Configuration.getGameConfiguration().setQuickMatchSelectedLevels(levelsSelection);
 			// set levels panel
-			if(matchPanel==null)
-			{	matchPanel = new MatchSplitPanel(container.getContainer(),container);
+			if(optionsPanel==null)
+			{	optionsPanel = new OptionsSplitPanel(container.getContainer(),container);
 			}			
-			matchPanel.setTournament(tournament);
-			replaceWith(matchPanel);
+			optionsPanel.setTournament(tournament);
+			replaceWith(optionsPanel);
 	    }
 /*			
 		{	
