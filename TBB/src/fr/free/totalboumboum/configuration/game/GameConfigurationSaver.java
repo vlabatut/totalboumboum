@@ -88,8 +88,12 @@ public class GameConfigurationSaver
 		
 		// use last players
 		Element optionsElement = new Element(XmlTools.ELT_OPTIONS);
-		String useLastPlayers = Boolean.toString(gameConfiguration.getUseLastPlayers());
+		String useLastPlayers = Boolean.toString(gameConfiguration.getQuickMatchUseLastPlayers());
 		optionsElement.setAttribute(XmlTools.ATT_USE_LAST_PLAYERS,useLastPlayers);
+		result.addContent(optionsElement);
+		// use last levels
+		String useLastLevels = Boolean.toString(gameConfiguration.getQuickMatchUseLastLevels());
+		optionsElement.setAttribute(XmlTools.ATT_USE_LAST_LEVELS,useLastLevels);
 		result.addContent(optionsElement);
 		
 		// players

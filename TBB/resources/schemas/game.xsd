@@ -43,10 +43,48 @@
 		<xsd:attribute name="useLastLevels" type="xsd:boolean" use="required" />
 	</xsd:complexType>
 
+	<xsd:complexType name="tMatchSettingsLevels">
+		<xsd:attribute name="randomOrder" type="xsd:boolean" use="required" />
+	</xsd:complexType>
+
+	<xsd:complexType name="tMatchSettingsPlayers">
+		<xsd:attribute name="randomLocation" type="xsd:boolean" use="required" />
+	</xsd:complexType>
+
+	<xsd:complexType name="tMatchSettingsValue">
+		<xsd:attribute name="rank" type="xsd:integer" use="required" />
+		<xsd:attribute name="points" type="xsd:integer" use="required" />
+	</xsd:complexType>
+
+	<xsd:simpleType name="tMatchSettingsDraw">
+		<xsd:restriction base="xsd:string">
+			<xsd:enumeration value="both" />
+			<xsd:enumeration value="time" />
+			<xsd:enumeration value="autokill" />
+		</xsd:restriction>
+	</xsd:simpleType>
+
+	<xsd:complexType name="tMatchSettingsPoints">
+		<xsd:sequence>
+			<xsd:element name="value" type="tMatchSettingsValue"  maxOccurs="unbounded"/>
+		</xsd:sequence>
+		<xsd:attribute name="share" type="xsd:boolean" use="required" />
+		<xsd:attribute name="draw" type="tMatchSettingsDraw" use="required" />
+	</xsd:complexType>
+
+	<xsd:complexType name="tMatchSettings">
+		<xsd:sequence>
+			<xsd:element name="levels" type="tMatchSettingsLevels" />
+			<xsd:element name="players" type="tMatchSettingsPlayers" />
+			<xsd:element name="points" type="tMatchSettingsPoints" />
+		</xsd:sequence>
+	</xsd:complexType>
+
 	<xsd:complexType name="tQuickmatch">
 		<xsd:sequence>
 			<xsd:element name="match" type="tConfrontation" />
 			<xsd:element name="options" type="tMatchOptions" />
+			<xsd:element name="settings" type="tMatchSettings" />
 			<xsd:element name="players" type="tPlayers" />
 			<xsd:element name="levels" type="tLevels" />
 		</xsd:sequence>

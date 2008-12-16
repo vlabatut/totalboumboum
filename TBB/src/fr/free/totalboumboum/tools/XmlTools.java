@@ -159,6 +159,7 @@ public class XmlTools
 	public static final String ELT_SCORES = "scores";
 	public static final String ELT_SELECTED = "selected";
 	public static final String ELT_SETTING = "setting";
+	public static final String ELT_SETTINGS = "settings";
 	public static final String ELT_SHADOW = "shadow";
 	public static final String ELT_SHADOWS = "shadows";
 	public static final String ELT_SITUATION = "situation";
@@ -213,6 +214,7 @@ public class XmlTools
 	public static final String ATT_CONTROLS = "controls";
 	public static final String ATT_DEFAULT = "default";
 	public static final String ATT_DIRECTION = "direction";
+	public static final String ATT_DRAW = "draw";
 	public static final String ATT_DURATION = "duration";
 	public static final String ATT_EXAEQUO_SHARE = "exaequoShare";
 	public static final String ATT_FILE = "file";
@@ -246,10 +248,12 @@ public class XmlTools
 	public static final String ATT_PLAY_MODE = "playMode";
 	public static final String ATT_PLAYER = "player";
 	public static final String ATT_PLAYERS = "players";
+	public static final String ATT_POINTS = "points";
 	public static final String ATT_POSITION = "pos";
 	public static final String ATT_PROBA = "proba";
 	public static final String ATT_PROPORTIONAL = "proportional";
-	public static final String ATT_RANDOM_ORDER = "randomOrder";
+	public static final String ATT_RANDOM_LOCATION = "randomLocation"; 
+	public static final String ATT_RANDOM_ORDER = "randomOrder"; 
 	public static final String ATT_RANK = "rank";
 	public static final String ATT_RED = "red";
 	public static final String ATT_REPEAT = "repeat";
@@ -258,6 +262,7 @@ public class XmlTools
 	public static final String ATT_SHADOW = "shadow";
 	public static final String ATT_SHADOW_XSHIFT = "shadowXShift";
 	public static final String ATT_SHADOW_YSHIFT = "shadowYShift";
+	public static final String ATT_SHARE = "share";
 	public static final String ATT_STRENGTH = "strength";
 	public static final String ATT_SUP = "sup";
 	public static final String ATT_TARGET = "target";
