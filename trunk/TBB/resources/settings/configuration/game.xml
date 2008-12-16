@@ -14,6 +14,17 @@
 	<quickmatch>
 		<match name="matchPart1" />
 		<options useLastPlayers="false" useLastLevels="false" />
+		<settings>
+			<levels randomOrder="false" />
+			<players randomLocation="false"/>
+			<points share="false" draw="both">
+				<value rank="1" points="1"/>
+				<value rank="2" points="0"/>
+				<value rank="3" points="0"/>
+				<value rank="4" points="0"/>
+				<value rank="5" points="0"/>
+			</points>
+		</settings>
 		<players>
 			<player file="18" color="orange" controls="0" />
 			<player file="1" color="cyan" controls="1" />

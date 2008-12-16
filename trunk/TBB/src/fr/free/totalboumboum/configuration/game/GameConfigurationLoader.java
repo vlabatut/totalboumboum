@@ -23,6 +23,9 @@ package fr.free.totalboumboum.configuration.game;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Locale;
 
 import javax.xml.parsers.ParserConfigurationException;
 
@@ -77,10 +80,18 @@ public class GameConfigurationLoader
 		
 		// options
 		Element optionsElement = root.getChild(XmlTools.ELT_OPTIONS);
-		boolean useLastPlayers = Boolean.parseBoolean(optionsElement.getAttributeValue(XmlTools.ATT_USE_LAST_PLAYERS));
-		result.setUseLastPlayers(useLastPlayers);
-		boolean useLastLevels = Boolean.parseBoolean(optionsElement.getAttributeValue(XmlTools.ATT_USE_LAST_LEVELS));
-		result.setUseLastLevels(useLastLevels);
+		// use last players
+		String att = optionsElement.getAttributeValue(XmlTools.ATT_USE_LAST_PLAYERS);
+		boolean useLastPlayers = Boolean.parseBoolean(att);
+		result.setQuickMatchUseLastPlayers(useLastPlayers);
+		// use last levels
+		att = optionsElement.getAttributeValue(XmlTools.ATT_USE_LAST_LEVELS);
+		boolean useLastLevels = Boolean.parseBoolean(att);
+		result.setQuickMatchUseLastLevels(useLastLevels);
+		
+		// settings
+		Element settingsElement = root.getChild(XmlTools.ELT_SETTINGS);
+		loadSettingsElement(settingsElement,result);
 		
 		// players
 		Element playersElement = root.getChild(XmlTools.ELT_PLAYERS);
@@ -91,8 +102,48 @@ public class GameConfigurationLoader
 		Element levelsElement = root.getChild(XmlTools.ELT_LEVELS);
 		LevelsSelection quickMatchLevels = LevelsSelectionLoader.loadLevelsSelection(levelsElement);
 		result.setQuickMatchSelectedLevels(quickMatchLevels);
-}
+	}
 
+	@SuppressWarnings("unchecked")
+	private static void loadSettingsElement(Element root, GameConfiguration result)
+	{	// levels 
+		{	Element levelsElement = root.getChild(XmlTools.ELT_LEVELS);
+			// random order
+			String att = levelsElement.getAttributeValue(XmlTools.ATT_RANDOM_ORDER);
+			boolean levelsRandomOrder = Boolean.parseBoolean(att);
+			result.setQuickMatchLevelsRandomOrder(levelsRandomOrder);
+		}		
+		// players 
+		{	Element playersElement = root.getChild(XmlTools.ELT_PLAYERS);
+			// random location
+			String att = playersElement.getAttributeValue(XmlTools.ATT_RANDOM_LOCATION);
+			boolean playersRandomLocation = Boolean.parseBoolean(att);
+			result.setQuickMatchPlayersRandomLocation(playersRandomLocation);
+		}		
+		// points
+		{	Element pointsElement = root.getChild(XmlTools.ELT_POINTS);
+			// values
+			ArrayList<Integer> points = new ArrayList<Integer>(5);
+			List<Element> list = pointsElement.getChildren(XmlTools.ELT_VALUE);
+			for(Element e:list)
+			{	String rankStr = e.getAttributeValue(XmlTools.ATT_RANK);
+				int rank = Integer.parseInt(rankStr);
+				String pointsStr = e.getAttributeValue(XmlTools.ATT_POINTS);
+				int pts = Integer.parseInt(pointsStr);
+				points.set(rank-1,pts);
+			}
+			result.setQuickMatchPoints(points);
+			// share
+			String att = pointsElement.getAttributeValue(XmlTools.ATT_SHARE);
+			boolean pointsShare = Boolean.parseBoolean(att);
+			result.setQuickMatchPointsShare(pointsShare);
+			// points draw
+			att = pointsElement.getAttributeValue(XmlTools.ATT_DRAW);
+			QuickMatchDraw pointsDraw = QuickMatchDraw.valueOf(att.toUpperCase(Locale.ENGLISH));
+			result.setQuickMatchPointsDraw(pointsDraw);
+		}	
+	}
+	
 	private static void loadQuickStartElement(Element root, GameConfiguration result) throws IllegalArgumentException, SecurityException, ParserConfigurationException, SAXException, IOException, IllegalAccessException, NoSuchFieldException, ClassNotFoundException
 	{	// name
 		Element roundElement = root.getChild(XmlTools.ELT_ROUND);

@@ -974,6 +974,25 @@ public class GuiTools
 		return result;
 	}
 
+	/**
+	 * process the maximal width for the given list of texts, relatively
+	 * to the given font size
+	 * @param fontSize
+	 * @param texts
+	 * @return
+	 */
+	public static int getMaximalWidth(float fontSize, ArrayList<String> texts)
+	{	int result = 0;
+		Iterator<String> it = texts.iterator();
+		while(it.hasNext())
+		{	String text = it.next();
+			int length = getPixelWidth(10,text);
+			if(length>result)
+				result = length;
+		}
+		return result;
+	}
+	
 	/////////////////////////////////////////////////////////////////
 	// SIZE 			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
