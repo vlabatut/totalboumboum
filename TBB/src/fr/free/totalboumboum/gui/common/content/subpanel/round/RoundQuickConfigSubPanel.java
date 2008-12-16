@@ -281,6 +281,26 @@ public class RoundQuickConfigSubPanel extends UntitledSubPanelLines implements M
 		}
 	}
 	
+	
+	
+	
+	/*
+	 * TODO
+	 * 1) compléter save gameConf
+	 * 2) compléter cette classe (réaction à la souris)
+	 * 3) compléter les Keys
+	 * 4) compléter les XML de langue
+	 */
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	/////////////////////////////////////////////////////////////////
 	// MOUSE LISTENER	/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
