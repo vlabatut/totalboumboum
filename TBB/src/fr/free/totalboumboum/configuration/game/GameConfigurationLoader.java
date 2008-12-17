@@ -120,6 +120,21 @@ public class GameConfigurationLoader
 			boolean playersRandomLocation = Boolean.parseBoolean(att);
 			result.setQuickMatchPlayersRandomLocation(playersRandomLocation);
 		}		
+		// limits 
+		{	Element limitsElement = root.getChild(XmlTools.ELT_LIMITS);
+			// points limit
+			String att = limitsElement.getAttributeValue(XmlTools.ATT_POINTS);
+			int limitPoints = Integer.parseInt(att);
+			result.setQuickMatchLimitPoints(limitPoints);
+			// rounds limit
+			att = limitsElement.getAttributeValue(XmlTools.ATT_ROUNDS);
+			int limitRounds = Integer.parseInt(att);
+			result.setQuickMatchLimitRounds(limitRounds);
+			// time limit
+			att = limitsElement.getAttributeValue(XmlTools.ATT_TIME);
+			int limitTime = Integer.parseInt(att);
+			result.setQuickMatchLimitTime(limitTime);
+		}		
 		// points
 		{	Element pointsElement = root.getChild(XmlTools.ELT_POINTS);
 			// values

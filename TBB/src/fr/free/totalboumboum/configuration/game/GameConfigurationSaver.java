@@ -23,6 +23,8 @@ package fr.free.totalboumboum.configuration.game;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Locale;
 
 import javax.xml.parsers.ParserConfigurationException;
 
@@ -86,21 +88,84 @@ public class GameConfigurationSaver
 		matchElement.setAttribute(XmlTools.ATT_NAME,quickMatch);
 		result.addContent(matchElement);
 		
-		// use last players
-		Element optionsElement = new Element(XmlTools.ELT_OPTIONS);
-		String useLastPlayers = Boolean.toString(gameConfiguration.getQuickMatchUseLastPlayers());
-		optionsElement.setAttribute(XmlTools.ATT_USE_LAST_PLAYERS,useLastPlayers);
-		result.addContent(optionsElement);
-		// use last levels
-		String useLastLevels = Boolean.toString(gameConfiguration.getQuickMatchUseLastLevels());
-		optionsElement.setAttribute(XmlTools.ATT_USE_LAST_LEVELS,useLastLevels);
-		result.addContent(optionsElement);
-		
+		// settings
+		Element optionssElement = saveQuickMatchOptionsElement(gameConfiguration);
+		result.addContent(optionssElement);
+
+		// settings
+		Element settingsElement = saveQuickMatchSettingsElement(gameConfiguration);
+		result.addContent(settingsElement);
+
 		// players
 		Element playersElement = new Element(XmlTools.ELT_PLAYERS);
 		ProfilesSelection quickMatchSelected = gameConfiguration.getQuickMatchSelectedProfiles();
 		ProfilesSelectionSaver.saveProfilesSelection(playersElement,quickMatchSelected);
 		result.addContent(playersElement);
+
+		return result;
+	}
+	
+	private static Element saveQuickMatchOptionsElement(GameConfiguration gameConfiguration)
+	{	Element result = new Element(XmlTools.ELT_OPTIONS);
+		
+	// use last players
+		String useLastPlayers = Boolean.toString(gameConfiguration.getQuickMatchUseLastPlayers());
+		result.setAttribute(XmlTools.ATT_USE_LAST_PLAYERS,useLastPlayers);
+
+		// use last levels
+		String useLastLevels = Boolean.toString(gameConfiguration.getQuickMatchUseLastLevels());
+		result.setAttribute(XmlTools.ATT_USE_LAST_LEVELS,useLastLevels);
+		
+		return result;
+	}
+	
+	private static Element saveQuickMatchSettingsElement(GameConfiguration gameConfiguration)
+	{	Element result = new Element(XmlTools.ELT_SETTINGS);
+
+		// levels
+		{	Element levelsElement = new Element(XmlTools.ELT_LEVELS);	
+			// random order
+			String randomOrder = Boolean.toString(gameConfiguration.getQuickMatchLevelsRandomOrder());
+			levelsElement.setAttribute(XmlTools.ATT_RANDOM_ORDER,randomOrder);
+		}
+		// players
+		{	Element playersElement = new Element(XmlTools.ELT_PLAYERS);
+			// random location
+			String randomLocation = Boolean.toString(gameConfiguration.getQuickMatchPlayersRandomLocation());
+			playersElement.setAttribute(XmlTools.ATT_RANDOM_LOCATION,randomLocation);
+		}
+		// limits
+		{	Element limitsElement = new Element(XmlTools.ELT_LIMITS);
+			// limit points
+			String points = Integer.toString(gameConfiguration.getQuickMatchLimitPoints());
+			limitsElement.setAttribute(XmlTools.ATT_POINTS,points);
+			// limit rounds
+			String rounds = Integer.toString(gameConfiguration.getQuickMatchLimitRounds());
+			limitsElement.setAttribute(XmlTools.ATT_ROUNDS,rounds);
+			// limit time
+			String time = Integer.toString(gameConfiguration.getQuickMatchLimitTime());
+			limitsElement.setAttribute(XmlTools.ATT_TIME,time);
+		}
+		// points
+		{	Element pointsElement = new Element(XmlTools.ELT_POINTS);
+			// share
+			String share = Boolean.toString(gameConfiguration.getQuickMatchPointsShare());
+			pointsElement.setAttribute(XmlTools.ATT_SHARE,share);
+			// draw
+			String draw = gameConfiguration.getQuickMatchPointsDraw().toString().toLowerCase(Locale.ENGLISH);
+			pointsElement.setAttribute(XmlTools.ATT_DRAW,draw);
+			// values
+			ArrayList<Integer> values = gameConfiguration.getQuickMatchPoints();
+			for(int r=0;r<values.size();r++)
+			{	Element valueElement = new Element(XmlTools.ELT_VALUE);
+				// limit rounds
+				String rank = Integer.toString(r+1);
+				valueElement.setAttribute(XmlTools.ATT_RANK,rank);
+				// limit time
+				String points = Integer.toString(values.get(r));
+				valueElement.setAttribute(XmlTools.ATT_POINTS,points);
+			}
+		}
 
 		return result;
 	}

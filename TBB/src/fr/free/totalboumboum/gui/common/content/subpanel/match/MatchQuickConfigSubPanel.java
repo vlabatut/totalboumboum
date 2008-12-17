@@ -1,4 +1,4 @@
-package fr.free.totalboumboum.gui.common.content.subpanel.round;
+package fr.free.totalboumboum.gui.common.content.subpanel.match;
 
 /*
  * Total Boum Boum
@@ -35,10 +35,10 @@ import fr.free.totalboumboum.gui.tools.GuiKeys;
 import fr.free.totalboumboum.gui.tools.GuiTools;
 import fr.free.totalboumboum.tools.StringTools;
 
-public class RoundQuickConfigSubPanel extends UntitledSubPanelLines implements MouseListener
+public class MatchQuickConfigSubPanel extends UntitledSubPanelLines implements MouseListener
 {	private static final long serialVersionUID = 1L;
 	
-	public RoundQuickConfigSubPanel(int width, int height)
+	public MatchQuickConfigSubPanel(int width, int height)
 	{	super(width,height,LINE_COUNT,false);
 		setGameConfiguration(null);
 	}

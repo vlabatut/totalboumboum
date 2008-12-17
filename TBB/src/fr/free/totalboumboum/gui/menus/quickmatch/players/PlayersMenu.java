@@ -95,7 +95,7 @@ public class PlayersMenu extends InnerMenuPanel
 		this.tournament = tournament;
 		// init data
 		ProfilesSelection profilesSelection = new ProfilesSelection();
-		if(Configuration.getGameConfiguration().getUseLastPlayers())
+		if(Configuration.getGameConfiguration().getQuickMatchUseLastPlayers())
 			profilesSelection = Configuration.getGameConfiguration().getQuickMatchSelectedProfiles();		
 		profilesData.setProfilesSelection(profilesSelection);
 		// transmit

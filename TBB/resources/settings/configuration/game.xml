@@ -17,6 +17,7 @@
 		<settings>
 			<levels randomOrder="false" />
 			<players randomLocation="false"/>
+			<limits time="60000" rounds="-1" points="5"/>
 			<points share="false" draw="both">
 				<value rank="1" points="1"/>
 				<value rank="2" points="0"/>

@@ -100,7 +100,7 @@ public class LevelsMenu extends InnerMenuPanel
 		this.tournament = tournament;
 		// init data
 		LevelsSelection levelsSelection = new LevelsSelection();
-		if(Configuration.getGameConfiguration().getUseLastLevels())
+		if(Configuration.getGameConfiguration().getQuickMatchUseLastLevels())
 			levelsSelection = Configuration.getGameConfiguration().getQuickMatchSelectedLevels();
 		levelData.setLevelsSelection(levelsSelection);
 		// transmit
