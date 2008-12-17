@@ -15,7 +15,7 @@ This product includes software developed by:
 		- class fr.free.totalboumboum.gui.tools.SpringUtilities - Copyright 1995-2008 Sun Microsystems Inc.
 	- Various AI students from Galatasaray University, Istanbul, Turkey:
 		- web site: http://gsu.edu.tr 
-		- the ai packages in resources/ai - Copyright 2007-2008 their respective authors (see the classes for details)
+		- the ai packages in resources/ai - Copyright 2007-2009 their respective authors (see the classes for details)
 ----------------------------------------------------------
 This product uses fonts designed by:
 	- Nate Piekos for Blambot Fonts:
