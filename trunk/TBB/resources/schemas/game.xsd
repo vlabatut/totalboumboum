@@ -51,6 +51,12 @@
 		<xsd:attribute name="randomLocation" type="xsd:boolean" use="required" />
 	</xsd:complexType>
 
+	<xsd:complexType name="tMatchSettingsLimits">
+		<xsd:attribute name="time" type="xsd:integer" use="required" />
+		<xsd:attribute name="rounds" type="xsd:integer" use="required" />
+		<xsd:attribute name="points" type="xsd:integer" use="required" />
+	</xsd:complexType>
+
 	<xsd:complexType name="tMatchSettingsValue">
 		<xsd:attribute name="rank" type="xsd:integer" use="required" />
 		<xsd:attribute name="points" type="xsd:integer" use="required" />
@@ -76,6 +82,7 @@
 		<xsd:sequence>
 			<xsd:element name="levels" type="tMatchSettingsLevels" />
 			<xsd:element name="players" type="tMatchSettingsPlayers" />
+			<xsd:element name="limits" type="tMatchSettingsLimits" />
 			<xsd:element name="points" type="tMatchSettingsPoints" />
 		</xsd:sequence>
 	</xsd:complexType>

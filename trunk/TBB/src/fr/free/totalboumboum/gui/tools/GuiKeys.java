@@ -38,6 +38,7 @@ public class GuiKeys
 	public static final String AI = "Ai";
 	public static final String ALLOWED = "Allowed";
 	public static final String AUTHOR = "Author";
+	public static final String AUTOKILL = "Autokill";
 	public static final String AVAILABLE = "Available";
 	public static final String BACK = "Back";
 	public static final String BLACK = "Black";
@@ -46,6 +47,7 @@ public class GuiKeys
 	public static final String BOMBINGS = "Bombings";
 	public static final String BOMBS = "Bombs";
 	public static final String BOMBSET = "Bombset";
+	public static final String BOTH = "Both";
 	public static final String BROWN = "Brown";
 	public static final String BROWSER = "Browser";
 	public static final String BUTTON = "Button";
@@ -70,8 +72,10 @@ public class GuiKeys
 	public static final String DESCRIPTION = "Description";
 	public static final String DIMENSION = "Dimension";
 	public static final String DISCRETIZE = "Discretize";
+	public static final String DRAW = "Draw";
 	public static final String FILE = "File";
 	public static final String FINISH = "Finish";
+	public static final String FIXED = "Fixed";
 	public static final String FOLDER = "Folder";
 	public static final String GAME = "Game";
 	public static final String GRASS = "Grass";
@@ -94,15 +98,18 @@ public class GuiKeys
 	public static final String LEVELS = "Levels";
 	public static final String LIMIT = "Limit";
 	public static final String LIST = "List";
+	public static final String LOCATION = "Location";
 	public static final String MAIN = "Main";
 	public static final String MATCH = "Match";
 	public static final String MENU = "Menu";
+	public static final String MINUS = "Minus";
 	public static final String NAME = "Name";
 	public static final String NEXT = "Next";
 	public static final String NO_SHARE = "NoShare";
 	public static final String NO_CONTROLS = "NoControls";
 	public static final String OPTIONS = "Options";
 	public static final String ORANGE = "Orange";
+	public static final String ORDER = "Order";
 	public static final String PACK = "Pack";
 	public static final String PAGEDOWN = "PageDown";
 	public static final String PAGEUP = "PageUp";
@@ -113,6 +120,7 @@ public class GuiKeys
 	public static final String PLAY = "Play";
 	public static final String PLAYER = "Player";
 	public static final String PLAYERS = "Players";
+	public static final String PLUS = "Plus";
 	public static final String POINTS = "Points";
 	public static final String PORTRAIT = "Portrait";
 	public static final String PREVIEW = "Preview";
@@ -124,7 +132,9 @@ public class GuiKeys
 	public static final String QUICKMATCH = "Quickmatch";
 	public static final String QUICKSTART = "Quickstart";
 	public static final String QUIT = "Quit";
+	public static final String RANDOM = "Random";
 	public static final String RANK = "Rank";
+	public static final String RANKS = "Ranks";
 	public static final String RANKINGS = "Rankings";
 	public static final String RANKPOINTS = "Rankpoints";
 	public static final String RED = "Red";
@@ -149,9 +159,13 @@ public class GuiKeys
 	public static final String TOURNAMENT = "Tournament";
 	public static final String TRANSFER = "Transfer";
 	public static final String TYPE = "Type";
+	public static final String VALUE = "Value";
+	public static final String VALUES = "Values";
+	public static final String VAR = "Var";
 	public static final String VIDEO = "Video";
 	public static final String WHITE = "White";
 	public static final String YELLOW = "Yellow";
+	public static final String YOK = "Yok";
 	
 	/////////////////////////////////////////////////////////////////
 	// MENUS			/////////////////////////////////////////////
@@ -750,6 +764,48 @@ public class GuiKeys
 	public static final String COMMON_ROUND_LEVEL_FOLDER = COMMON_ROUND+LEVEL+FOLDER;
 	public static final String COMMON_ROUND_LEVEL_PACK = COMMON_ROUND+LEVEL+PACK;
 	public static final String COMMON_ROUND_TITLE = COMMON_ROUND+TITLE;
+		/* LEVELS */
+		public static final String COMMON_ROUND_LEVELS = COMMON_ROUND+LEVELS;
+			/* ORDER */
+			public static final String COMMON_ROUND_LEVELS_ORDER = COMMON_ROUND_LEVELS+ORDER;
+			public static final String COMMON_ROUND_LEVELS_ORDER_FIXED = COMMON_ROUND_LEVELS_ORDER+FIXED;
+			public static final String COMMON_ROUND_LEVELS_ORDER_RANDOM = COMMON_ROUND_LEVELS_ORDER+RANDOM;
+			public static final String COMMON_ROUND_LEVELS_ORDER_TITLE = COMMON_ROUND_LEVELS_ORDER+TITLE;
+		/* PLAYERS */
+		public static final String COMMON_ROUND_PLAYERS = COMMON_ROUND+PLAYERS;
+			/* LOCATION */
+			public static final String COMMON_ROUND_PLAYERS_LOCATION = COMMON_ROUND_PLAYERS+LOCATION;
+			public static final String COMMON_ROUND_PLAYERS_LOCATION_FIXED = COMMON_ROUND_PLAYERS_LOCATION+FIXED;
+			public static final String COMMON_ROUND_PLAYERS_LOCATION_RANDOM = COMMON_ROUND_PLAYERS_LOCATION+RANDOM;
+			public static final String COMMON_ROUND_PLAYERS_LOCATION_TITLE = COMMON_ROUND_PLAYERS_LOCATION+TITLE;
+		/* POINTS */
+		public static final String COMMON_ROUND_POINTS = COMMON_ROUND+POINTS;
+			/* RANKS */
+			public static final String COMMON_ROUND_POINTS_RANKS = COMMON_ROUND_POINTS+RANKS;
+			public static final String COMMON_ROUND_POINTS_RANKS_TITLE = COMMON_ROUND_POINTS_RANKS+TITLE;
+			public static final String COMMON_ROUND_POINTS_RANKS_VALUE = COMMON_ROUND_POINTS_RANKS+VALUE;
+			/* DRAW */
+			public static final String COMMON_ROUND_POINTS_DRAW = COMMON_ROUND_POINTS+DRAW;
+			public static final String COMMON_ROUND_POINTS_DRAW_AUTOKILL = COMMON_ROUND_POINTS_DRAW+AUTOKILL;
+			public static final String COMMON_ROUND_POINTS_DRAW_BOTH = COMMON_ROUND_POINTS_DRAW+BOTH;
+			public static final String COMMON_ROUND_POINTS_DRAW_TIME = COMMON_ROUND_POINTS_DRAW+TIME;
+			public static final String COMMON_ROUND_POINTS_DRAW_TITLE = COMMON_ROUND_POINTS_DRAW+TITLE;
+			/* SHARE */
+			public static final String COMMON_ROUND_POINTS_SHARE = COMMON_ROUND_POINTS+SHARE;
+			public static final String COMMON_ROUND_POINTS_SHARE_TITLE = COMMON_ROUND_POINTS_SHARE+TITLE;
+			public static final String COMMON_ROUND_POINTS_SHARE_VAR = COMMON_ROUND_POINTS_SHARE+VAR;
+			public static final String COMMON_ROUND_POINTS_SHARE_YOK = COMMON_ROUND_POINTS_SHARE+YOK;
+			/* VALUES */
+			public static final String COMMON_ROUND_POINTS_VALUES = COMMON_ROUND_POINTS+VALUES;
+			public static final String COMMON_ROUND_POINTS_VALUES_MINUS = COMMON_ROUND_POINTS_VALUES+MINUS;
+			public static final String COMMON_ROUND_POINTS_VALUES_PLUS = COMMON_ROUND_POINTS_VALUES+PLUS;
+			public static final String COMMON_ROUND_POINTS_VALUES_TITLE = COMMON_ROUND_POINTS_VALUES+TITLE;
+			/* TIME */
+			public static final String COMMON_ROUND_TIME = COMMON_ROUND+TIME;
+			public static final String COMMON_ROUND_TIME_MINUS = COMMON_ROUND_TIME+MINUS;
+			public static final String COMMON_ROUND_TIME_PLUS = COMMON_ROUND_TIME+PLUS;
+			public static final String COMMON_ROUND_TIME_TITLE = COMMON_ROUND_TIME+TITLE;
+	
 	/* SPRITE */
 	public static final String COMMON_SPRITE = COMMON+SPRITE;
 	public static final String COMMON_SPRITE_AUTHOR = COMMON_SPRITE+AUTHOR;

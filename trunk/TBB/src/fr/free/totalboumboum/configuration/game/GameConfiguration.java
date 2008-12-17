@@ -57,11 +57,11 @@ public class GameConfiguration
 		// quickmatch
 		ProfilesSelection quickmatchProfilesCopy = quickMatchSelectedProfiles.copy();
 		result.setQuickMatchSelectedProfiles(quickmatchProfilesCopy);
-		result.setUseLastPlayers(quickMatchUseLastPlayers);
+		result.setQuickMatchUseLastPlayers(quickMatchUseLastPlayers);
 		result.setQuickMatchName(quickMatchName);
 		LevelsSelection quickmatchLevelsCopy = quickMatchSelectedLevels.copy();
 		result.setQuickMatchSelectedLevels(quickmatchLevelsCopy);
-		result.setUseLastLevels(quickMatchUseLastLevels);
+		result.setQuickMatchUseLastLevels(quickMatchUseLastLevels);
 		result.setQuickMatchLevelsRandomOrder(quickMatchLevelsRandomOrder);
 		result.setQuickMatchPlayersRandomLocation(quickMatchPlayersRandomLocation);
 		result.setQuickMatchPoints(quickMatchPoints);
@@ -111,6 +111,30 @@ public class GameConfiguration
 	private ArrayList<Integer> quickMatchPoints = new ArrayList<Integer>(5);
 	private boolean quickMatchPointsShare = false;
 	private QuickMatchDraw quickMatchPointsDraw = QuickMatchDraw.BOTH;
+	private int quickMatchLimitTime = 60000;
+	private int quickMatchLimitPoints = 5;
+	private int quickMatchLimitRounds = -1;
+
+	public int getQuickMatchLimitTime()
+	{	return quickMatchLimitTime;
+	}
+	public void setQuickMatchLimitTime(int quickMatchLimitTime)
+	{	this.quickMatchLimitTime = quickMatchLimitTime;
+	}
+	
+	public int getQuickMatchLimitPoints()
+	{	return quickMatchLimitPoints;
+	}
+	public void setQuickMatchLimitPoints(int quickMatchLimitPoints)
+	{	this.quickMatchLimitPoints = quickMatchLimitPoints;
+	}
+	
+	public int getQuickMatchLimitRounds()
+	{	return quickMatchLimitRounds;
+	}
+	public void setQuickMatchLimitRounds(int quickMatchLimitRounds)
+	{	this.quickMatchLimitRounds = quickMatchLimitRounds;
+	}
 
 	public boolean getQuickMatchUseLastPlayers()
 	{	return quickMatchUseLastPlayers;

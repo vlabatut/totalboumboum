@@ -257,6 +257,7 @@ public class XmlTools
 	public static final String ATT_RANK = "rank";
 	public static final String ATT_RED = "red";
 	public static final String ATT_REPEAT = "repeat";
+	public static final String ATT_ROUNDS = "rounds";
 	public static final String ATT_SCALE = "scale";
 	public static final String ATT_SCORE = "score";
 	public static final String ATT_SHADOW = "shadow";
