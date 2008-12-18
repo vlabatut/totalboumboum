@@ -51,7 +51,7 @@ import fr.free.totalboumboum.gui.tools.GuiKeys;
 import fr.free.totalboumboum.gui.tools.GuiTools;
 import fr.free.totalboumboum.tools.FileTools;
 
-public class OptionsData extends EntitledDataPanel implements PackBrowserSubPanelListener, TransferSubPanelListener
+public class SettingsData extends EntitledDataPanel implements PackBrowserSubPanelListener, TransferSubPanelListener
 {	
 	private static final long serialVersionUID = 1L;
 	private static final float SPLIT_RATIO = 0.30f;
@@ -62,7 +62,7 @@ public class OptionsData extends EntitledDataPanel implements PackBrowserSubPane
 	private PackBrowserSubPanel selectionPanel;
 	private TransferSubPanel commandsPanel;
 	
-	public OptionsData(SplitMenuPanel container)
+	public SettingsData(SplitMenuPanel container)
 	{	super(container);
 		
 		// title
