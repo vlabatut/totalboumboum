@@ -54,7 +54,7 @@ public class RoundQuickConfigSubPanel extends UntitledSubPanelLines implements M
 	private static final int POINTS_MAX = Integer.MAX_VALUE;
 	private static final int POINTS_DELTA = 1;
 
-	private static final int LINE_COUNT = 20;
+	private static final int LINE_COUNT = 10;
 	private static final int LINE_LEVELS_ORDER = 0;
 	private static final int LINE_PLAYERS_LOCATION = 1;
 	private static final int LINE_TIME_LIMIT = 2;
@@ -77,6 +77,8 @@ public class RoundQuickConfigSubPanel extends UntitledSubPanelLines implements M
 		int pointsRanksWidth = (width - nameWidth - 7*GuiTools.subPanelMargin) / GameConstants.CONTROL_COUNT;
 		int pointsValuesWidth = (pointsRanksWidth - 3*GuiTools.subPanelMargin - 2*getLineHeight());
 		removeAllLines();
+		for(int i=0;i<LINE_COUNT;i++)
+			addLine(0);
 
 		if(gameConfiguration!=null)
 		{	
@@ -309,7 +311,7 @@ public class RoundQuickConfigSubPanel extends UntitledSubPanelLines implements M
 		else 
 			text = StringTools.formatTimeWithSeconds(time);
 		String tooltip = text;
-		getLine(LINE_TIME_LIMIT).setLabelText(1,text,tooltip);
+		getLine(LINE_TIME_LIMIT).setLabelText(2,text,tooltip);
 	}
 	
 	private void setPointsValue(int index)

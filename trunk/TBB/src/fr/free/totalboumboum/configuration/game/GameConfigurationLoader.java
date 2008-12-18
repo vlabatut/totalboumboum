@@ -32,6 +32,7 @@ import javax.xml.parsers.ParserConfigurationException;
 import org.jdom.Element;
 import org.xml.sax.SAXException;
 
+import fr.free.totalboumboum.configuration.GameConstants;
 import fr.free.totalboumboum.configuration.profile.ProfilesSelection;
 import fr.free.totalboumboum.configuration.profile.ProfilesSelectionLoader;
 import fr.free.totalboumboum.tools.FileTools;
@@ -138,7 +139,9 @@ public class GameConfigurationLoader
 		// points
 		{	Element pointsElement = root.getChild(XmlTools.ELT_POINTS);
 			// values
-			ArrayList<Integer> points = new ArrayList<Integer>(5);
+			ArrayList<Integer> points = new ArrayList<Integer>();
+			for(int i=0;i<GameConstants.CONTROL_COUNT;i++)
+				points.add(0);
 			List<Element> list = pointsElement.getChildren(XmlTools.ELT_VALUE);
 			for(Element e:list)
 			{	String rankStr = e.getAttributeValue(XmlTools.ATT_RANK);

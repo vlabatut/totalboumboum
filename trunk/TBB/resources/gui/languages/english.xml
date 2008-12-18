@@ -262,6 +262,12 @@
 				</group>
 			</group>
 			<group name="Settings" >
+				<text name="Title" value="Quick match settings" tooltip="General settings of the quick match" />
+				<group name="Button">
+					<text name="Next" value="Next" tooltip="Start the match" />
+					<text name="Previous" value="Previous" tooltip="Back to levels selection" />
+					<text name="Quit" value="Quit" tooltip="Go to main menu" />
+				</group>
 				<group name="Levels">
 					<group name="Order">
 						<text name="Fixed" value="Fixed" tooltip="Levels are played in order fixed during their selection" />

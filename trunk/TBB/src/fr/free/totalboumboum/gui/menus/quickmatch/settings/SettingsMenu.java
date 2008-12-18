@@ -23,21 +23,31 @@ package fr.free.totalboumboum.gui.menus.quickmatch.settings;
 
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
-import java.io.File;
-import java.io.IOException;
+import java.util.ArrayList;
 
 import javax.swing.Box;
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
-import javax.xml.parsers.ParserConfigurationException;
-
-import org.xml.sax.SAXException;
 
 import fr.free.totalboumboum.configuration.Configuration;
-import fr.free.totalboumboum.configuration.game.LevelsSelection;
-import fr.free.totalboumboum.engine.container.level.HollowLevel;
+import fr.free.totalboumboum.configuration.game.GameConfiguration;
+import fr.free.totalboumboum.configuration.game.QuickMatchDraw;
+import fr.free.totalboumboum.game.limit.ComparatorCode;
+import fr.free.totalboumboum.game.limit.LimitConfrontation;
+import fr.free.totalboumboum.game.limit.LimitLastStanding;
+import fr.free.totalboumboum.game.limit.LimitPoints;
+import fr.free.totalboumboum.game.limit.LimitTime;
+import fr.free.totalboumboum.game.limit.Limits;
+import fr.free.totalboumboum.game.limit.MatchLimit;
+import fr.free.totalboumboum.game.limit.RoundLimit;
 import fr.free.totalboumboum.game.match.Match;
+import fr.free.totalboumboum.game.points.PointsConstant;
+import fr.free.totalboumboum.game.points.PointsProcessor;
+import fr.free.totalboumboum.game.points.PointsRankpoints;
+import fr.free.totalboumboum.game.points.PointsScores;
+import fr.free.totalboumboum.game.points.PointsTotal;
 import fr.free.totalboumboum.game.round.Round;
+import fr.free.totalboumboum.game.statistics.Score;
 import fr.free.totalboumboum.game.tournament.single.SingleTournament;
 import fr.free.totalboumboum.gui.common.structure.panel.SplitMenuPanel;
 import fr.free.totalboumboum.gui.common.structure.panel.menu.InnerMenuPanel;
@@ -58,7 +68,7 @@ public class SettingsMenu extends InnerMenuPanel
 	@SuppressWarnings("unused")
 	private JButton buttonNext;
 
-	private SettingsData levelData;
+	private SettingsData settingsData;
 
 	public SettingsMenu(SplitMenuPanel container, MenuPanel parent)
 	{	super(container, parent);
@@ -75,19 +85,19 @@ public class SettingsMenu extends InnerMenuPanel
 		int buttonHeight = getHeight();
 
 		// buttons
-		buttonQuit = GuiTools.createButton(GuiKeys.MENU_QUICKMATCH_LEVELS_BUTTON_QUIT,buttonWidth,buttonHeight,1,this);
+		buttonQuit = GuiTools.createButton(GuiKeys.MENU_QUICKMATCH_SETTINGS_BUTTON_QUIT,buttonWidth,buttonHeight,1,this);
 		add(Box.createHorizontalGlue());
-		buttonPrevious = GuiTools.createButton(GuiKeys.MENU_QUICKMATCH_LEVELS_BUTTON_PREVIOUS,buttonWidth,buttonHeight,1,this);
+		buttonPrevious = GuiTools.createButton(GuiKeys.MENU_QUICKMATCH_SETTINGS_BUTTON_PREVIOUS,buttonWidth,buttonHeight,1,this);
 		add(Box.createRigidArea(new Dimension(GuiTools.buttonHorizontalSpace,0)));
 		add(Box.createRigidArea(new Dimension(buttonWidth,buttonHeight)));
 		add(Box.createRigidArea(new Dimension(buttonWidth,buttonHeight)));
 		add(Box.createRigidArea(new Dimension(buttonWidth,buttonHeight)));
 		add(Box.createRigidArea(new Dimension(GuiTools.buttonHorizontalSpace,0)));
-		buttonNext = GuiTools.createButton(GuiKeys.MENU_QUICKMATCH_LEVELS_BUTTON_NEXT,buttonWidth,buttonHeight,1,this);
+		buttonNext = GuiTools.createButton(GuiKeys.MENU_QUICKMATCH_SETTINGS_BUTTON_NEXT,buttonWidth,buttonHeight,1,this);
 
 		// panels
-		levelData = new SettingsData(container);
-		container.setDataPart(levelData);
+		settingsData = new SettingsData(container);
+		container.setDataPart(settingsData);
 	}
 	
 	/////////////////////////////////////////////////////////////////
@@ -99,10 +109,8 @@ public class SettingsMenu extends InnerMenuPanel
 	{	// init tournament
 		this.tournament = tournament;
 		// init data
-		LevelsSelection levelsSelection = new LevelsSelection();
-		if(Configuration.getGameConfiguration().getQuickMatchUseLastLevels())
-			levelsSelection = Configuration.getGameConfiguration().getQuickMatchSelectedLevels();
-		levelData.setLevelsSelection(levelsSelection);
+		GameConfiguration gameConfiguration = Configuration.getGameConfiguration();
+		settingsData.setGameConfiguration(gameConfiguration);
 		// transmit
 		if(matchPanel!=null)
 		{	matchPanel.setTournament(tournament);
@@ -113,93 +121,86 @@ public class SettingsMenu extends InnerMenuPanel
 	// ACTION LISTENER				/////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	public void actionPerformed(ActionEvent e)
-	{	if(e.getActionCommand().equals(GuiKeys.MENU_QUICKMATCH_LEVELS_BUTTON_QUIT))
+	{	if(e.getActionCommand().equals(GuiKeys.MENU_QUICKMATCH_SETTINGS_BUTTON_QUIT))
 		{	getFrame().setMainMenuPanel();
 	    }
-		else if(e.getActionCommand().equals(GuiKeys.MENU_QUICKMATCH_LEVELS_BUTTON_PREVIOUS))				
+		else if(e.getActionCommand().equals(GuiKeys.MENU_QUICKMATCH_SETTINGS_BUTTON_PREVIOUS))				
 		{	replaceWith(parent);
 	    }
-		else if(e.getActionCommand().equals(GuiKeys.MENU_QUICKMATCH_LEVELS_BUTTON_NEXT))
-		{	LevelsSelection levelsSelection = levelData.getLevelsSelection();
-			// set levels in match
-			Match match = tournament.getCurrentMatch();
-			match.clearRounds();
-			for(int i=0;i<levelsSelection.getLevelCount();i++)
-			{	String folderName = levelsSelection.getFolderName(i);
-				String packName = levelsSelection.getPackName(i);
-				Round round = new Round(match);
-				match.addRound(round);
-				String path = packName+File.separator+folderName;
-		    	try
-				{	HollowLevel hollowLevel = new HollowLevel(path);
-			    	round.setHollowLevel(hollowLevel);
+		else if(e.getActionCommand().equals(GuiKeys.MENU_QUICKMATCH_SETTINGS_BUTTON_NEXT))
+		{	GameConfiguration gameConfiguration = settingsData.getGameConfiguration();
+			// set settings in match
+			{	Match match = tournament.getCurrentMatch();
+				// random order
+				{	boolean randomOrder = gameConfiguration.getQuickMatchLevelsRandomOrder();
+					match.setRandomOrder(randomOrder);
 				}
-				catch (ParserConfigurationException e1)
-				{	e1.printStackTrace();
+				// limits
+				{	Limits<MatchLimit> limits = new Limits<MatchLimit>();
+					PointsProcessor pointsProcessor = new PointsTotal();
+					// round limit
+					{	int roundsLimit = gameConfiguration.getQuickMatchLimitRounds();
+						if(roundsLimit>0)
+						{	MatchLimit limit = new LimitConfrontation(roundsLimit,ComparatorCode.GREATER,pointsProcessor);
+							limits.addLimit(limit);
+						}
+					}
+					// points limit
+					{	int pointsLimit = gameConfiguration.getQuickMatchLimitPoints();
+						if(pointsLimit>0)
+						{	MatchLimit limit = new LimitPoints(pointsLimit,ComparatorCode.GREATEREQ,pointsProcessor,pointsProcessor);
+							limits.addLimit(limit);
+						}
+					}
+					match.setLimits(limits);
 				}
-				catch (SAXException e1)
-				{	e1.printStackTrace();
+				// round settings
+				{	// limits
+					Limits<RoundLimit> limits = new Limits<RoundLimit>();
+					boolean share = gameConfiguration.getQuickMatchPointsShare();
+					ArrayList<Integer> pts = gameConfiguration.getQuickMatchPoints();
+					float[] values = new float[pts.size()];
+					for(int i=0;i<values.length;i++)
+						values[i] = pts.get(i);
+					PointsProcessor source = new PointsScores(Score.TIME);
+					ArrayList<PointsProcessor> sources = new ArrayList<PointsProcessor>();
+					sources.add(source);
+					PointsProcessor normalPP = new PointsRankpoints(sources,values,false,share);
+					PointsProcessor drawPP = new PointsConstant(0);
+					QuickMatchDraw draw = gameConfiguration.getQuickMatchPointsDraw();
+					long time = gameConfiguration.getQuickMatchLimitTime();
+					if(time>0)
+					{	// time limit
+						RoundLimit limit;
+						if(draw==QuickMatchDraw.TIME || draw==QuickMatchDraw.BOTH)
+							limit = new LimitTime(time,ComparatorCode.GREATEREQ,drawPP);
+						else
+							limit = new LimitTime(time,ComparatorCode.GREATEREQ,normalPP);
+						limits.addLimit(limit);						
+					}
+					{	// last standing limit
+						RoundLimit limit;
+						if(draw==QuickMatchDraw.AUTOKILL || draw==QuickMatchDraw.BOTH)
+						{	limit = new LimitLastStanding(0,ComparatorCode.LESSEQ,drawPP);
+							limits.addLimit(limit);
+						}
+						limit = new LimitLastStanding(1,ComparatorCode.LESSEQ,normalPP);
+						limits.addLimit(limit);
+					}
+					// rounds
+					ArrayList<Round> rounds = match.getRounds();
+					for(Round r: rounds)
+					{	r.setLimits(limits);
+					}
 				}
-				catch (IOException e1)
-				{	e1.printStackTrace();
-				}
-				catch (ClassNotFoundException e1)
-				{	e1.printStackTrace();
-				} 
 			}
-			// set levels in configuration
-			Configuration.getGameConfiguration().setQuickMatchSelectedLevels(levelsSelection);
-			// set levels panel
+			// set match panel
 			if(matchPanel==null)
 			{	matchPanel = new MatchSplitPanel(container.getContainer(),container);
 			}			
 			matchPanel.setTournament(tournament);
 			replaceWith(matchPanel);
 	    }
-/*			
-		{	
-			if(matchSplitPanel==null)
-			{	//TODO temporaire
-				try
-				{	// load
-					Configuration.getGameConfiguration().loadQuickmatch();
-					SingleTournament tournament = (SingleTournament)Configuration.getGameConfiguration().getTournament();
-					ArrayList<Profile> selectedProfiles = profilesData.getSelectedProfiles();
-					tournament.init(selectedProfiles);
-					tournament.progress();
-					// GUI
-					matchSplitPanel = new MatchSplitPanel(container.getContainer(),container);
-					Match match = tournament.getCurrentMatch();
-					matchSplitPanel.setMatch(match);
-				}
-				catch (ParserConfigurationException e1)
-				{	e1.printStackTrace();
-				}
-				catch (SAXException e1)
-				{	e1.printStackTrace();
-				}
-				catch (IOException e1)
-				{	e1.printStackTrace();
-				}
-				catch (ClassNotFoundException e1)
-				{	e1.printStackTrace();
-				}
-				catch (IllegalArgumentException e1)
-				{	e1.printStackTrace();
-				}
-				catch (SecurityException e1)
-				{	e1.printStackTrace();
-				}
-				catch (IllegalAccessException e1)
-				{	e1.printStackTrace();
-				}
-				catch (NoSuchFieldException e1)
-				{	e1.printStackTrace();
-				}
-			}
-			replaceWith(matchSplitPanel);
-	    }
-*/			
 	} 
 	
 	/////////////////////////////////////////////////////////////////

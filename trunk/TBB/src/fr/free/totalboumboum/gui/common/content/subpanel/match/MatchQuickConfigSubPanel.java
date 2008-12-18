@@ -48,7 +48,7 @@ public class MatchQuickConfigSubPanel extends UntitledSubPanelLines implements M
 	private static final int POINTS_MAX = Integer.MAX_VALUE;
 	private static final int ROUNDS_DELTA = 1;
 	private static final int ROUNDS_MAX = Integer.MAX_VALUE;
-	private static final int LINE_COUNT = 20;
+	private static final int LINE_COUNT = 10;
 	private static final int LINE_LIMIT_POINTS = 0;
 	private static final int LINE_LIMIT_ROUNDS = 1;
 
@@ -64,6 +64,8 @@ public class MatchQuickConfigSubPanel extends UntitledSubPanelLines implements M
 		// sizes
 		int nameWidth = (int)(width*0.66);
 		removeAllLines();
+		for(int i=0;i<LINE_COUNT;i++)
+			addLine(0);
 
 		if(gameConfiguration!=null)
 		{				
@@ -167,7 +169,7 @@ public class MatchQuickConfigSubPanel extends UntitledSubPanelLines implements M
 		else
 			text = Integer.toString(limit);
 		String tooltip = text;
-		getLine(LINE_LIMIT_POINTS).setLabelText(1,text,tooltip);
+		getLine(LINE_LIMIT_POINTS).setLabelText(2,text,tooltip);
 	}
 		
 	private void setRoundsLimit()
@@ -178,7 +180,7 @@ public class MatchQuickConfigSubPanel extends UntitledSubPanelLines implements M
 		else
 			text = Integer.toString(limit);
 		String tooltip = text;
-		getLine(LINE_LIMIT_ROUNDS).setLabelText(1,text,tooltip);
+		getLine(LINE_LIMIT_ROUNDS).setLabelText(2,text,tooltip);
 	}
 	
 	/////////////////////////////////////////////////////////////////
