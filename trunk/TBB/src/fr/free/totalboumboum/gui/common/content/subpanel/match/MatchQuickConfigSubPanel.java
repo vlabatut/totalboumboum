@@ -25,6 +25,8 @@ import java.awt.Color;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
+import javax.swing.JLabel;
+
 import fr.free.totalboumboum.configuration.game.GameConfiguration;
 import fr.free.totalboumboum.gui.common.structure.subpanel.Line;
 import fr.free.totalboumboum.gui.common.structure.subpanel.UntitledSubPanelLines;
@@ -42,6 +44,10 @@ public class MatchQuickConfigSubPanel extends UntitledSubPanelLines implements M
 	/////////////////////////////////////////////////////////////////
 	// GameConfiguration	/////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
+	private static final int POINTS_DELTA = 1;
+	private static final int POINTS_MAX = Integer.MAX_VALUE;
+	private static final int ROUNDS_DELTA = 1;
+	private static final int ROUNDS_MAX = Integer.MAX_VALUE;
 	private static final int LINE_COUNT = 20;
 	private static final int LINE_LIMIT_POINTS = 0;
 	private static final int LINE_LIMIT_ROUNDS = 1;
@@ -196,7 +202,44 @@ public class MatchQuickConfigSubPanel extends UntitledSubPanelLines implements M
 
 	@Override
 	public void mousePressed(MouseEvent e)
-	{	
+	{	JLabel label = (JLabel)e.getComponent();
+		int[] pos = getLabelPosition(label);
+		switch(pos[0])
+		{	// points limit
+			case LINE_LIMIT_POINTS:
+				int limitPoints = gameConfiguration.getQuickMatchLimitPoints();
+				// minus
+				if(pos[1]==1)
+				{	if(limitPoints>0)
+						limitPoints = limitPoints - POINTS_DELTA;
+				}
+				// plus
+				else //if(pos[1]==3)
+				{	if(limitPoints<POINTS_MAX)
+						limitPoints = limitPoints + POINTS_DELTA;
+				}
+				// common
+				gameConfiguration.setQuickMatchLimitPoints(limitPoints);
+				setPointsLimit();
+				break;
+				// points limit
+			case LINE_LIMIT_ROUNDS:
+				int limitRounds = gameConfiguration.getQuickMatchLimitRounds();
+				// minus
+				if(pos[1]==1)
+				{	if(limitRounds>0)
+						limitRounds = limitRounds - ROUNDS_DELTA;
+				}
+				// plus
+				else //if(pos[1]==3)
+				{	if(limitRounds<ROUNDS_MAX)
+						limitPoints = limitRounds + ROUNDS_DELTA;
+				}
+				// common
+				gameConfiguration.setQuickMatchLimitRounds(limitRounds);
+				setPointsLimit();
+				break;
+		}
 	}
 
 	@Override
