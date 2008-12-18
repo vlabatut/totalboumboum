@@ -26,6 +26,9 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.util.ArrayList;
 
+import javax.swing.JLabel;
+
+import fr.free.totalboumboum.configuration.GameConstants;
 import fr.free.totalboumboum.configuration.game.GameConfiguration;
 import fr.free.totalboumboum.configuration.game.QuickMatchDraw;
 import fr.free.totalboumboum.gui.common.structure.subpanel.Line;
@@ -46,6 +49,11 @@ public class RoundQuickConfigSubPanel extends UntitledSubPanelLines implements M
 	/////////////////////////////////////////////////////////////////
 	// GameConfiguration	/////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
+	private static final int TIME_MAX = Integer.MAX_VALUE;
+	private static final int TIME_DELTA = 10000;
+	private static final int POINTS_MAX = Integer.MAX_VALUE;
+	private static final int POINTS_DELTA = 1;
+
 	private static final int LINE_COUNT = 20;
 	private static final int LINE_LEVELS_ORDER = 0;
 	private static final int LINE_PLAYERS_LOCATION = 1;
@@ -66,7 +74,7 @@ public class RoundQuickConfigSubPanel extends UntitledSubPanelLines implements M
 		
 		// sizes
 		int nameWidth = (int)(width*0.66);
-		int pointsRanksWidth = (width - nameWidth - 7*GuiTools.subPanelMargin) / 5;
+		int pointsRanksWidth = (width - nameWidth - 7*GuiTools.subPanelMargin) / GameConstants.CONTROL_COUNT;
 		int pointsValuesWidth = (pointsRanksWidth - 3*GuiTools.subPanelMargin - 2*getLineHeight());
 		removeAllLines();
 
@@ -148,7 +156,7 @@ public class RoundQuickConfigSubPanel extends UntitledSubPanelLines implements M
 			
 			// points ranks
 			{	Line ln = getLine(LINE_POINTS_RANKS);
-				for(int i=0;i<5;i++)
+				for(int i=0;i<GameConstants.CONTROL_COUNT;i++)
 					ln.addLabel(0);
 				int col = 0;
 				// name
@@ -158,7 +166,7 @@ public class RoundQuickConfigSubPanel extends UntitledSubPanelLines implements M
 					col++;
 				}
 				// values
-				for(int i=1;i<=5;i++)
+				for(int i=1;i<=GameConstants.CONTROL_COUNT;i++)
 				{	String text = GuiConfiguration.getMiscConfiguration().getLanguage().getText(GuiKeys.MENU_QUICKMATCH_SETTINGS_POINTS_RANKS_VALUE)+i; 
 					String tooltip = GuiConfiguration.getMiscConfiguration().getLanguage().getText(GuiKeys.MENU_QUICKMATCH_SETTINGS_POINTS_RANKS_VALUE+GuiKeys.TOOLTIP); 
 					ln.setLabelText(col,text,tooltip);
@@ -172,7 +180,7 @@ public class RoundQuickConfigSubPanel extends UntitledSubPanelLines implements M
 			
 			// points values
 			{	Line ln = getLine(LINE_POINTS_VALUES);
-				for(int i=0;i<5;i++)
+				for(int i=0;i<GameConstants.CONTROL_COUNT;i++)
 				{	ln.addLabel(0);
 					ln.addLabel(0);
 					ln.addLabel(0);
@@ -185,7 +193,7 @@ public class RoundQuickConfigSubPanel extends UntitledSubPanelLines implements M
 					col++;
 				}
 				// values
-				for(int i=0;i<5;i++)
+				for(int i=0;i<GameConstants.CONTROL_COUNT;i++)
 				{	// minus button
 					{	ln.setLabelMaxWidth(col,ln.getHeight());
 						ln.setLabelKey(col,GuiKeys.MENU_QUICKMATCH_SETTINGS_POINTS_VALUES_MINUS,true);
@@ -356,7 +364,107 @@ public class RoundQuickConfigSubPanel extends UntitledSubPanelLines implements M
 
 	@Override
 	public void mousePressed(MouseEvent e)
-	{	
+	{	JLabel label = (JLabel)e.getComponent();
+		int[] pos = getLabelPosition(label);
+		switch(pos[0])
+		{	// levels order
+			case LINE_LEVELS_ORDER:
+				boolean levelsOrder = !gameConfiguration.getQuickMatchLevelsRandomOrder();
+				gameConfiguration.setQuickMatchLevelsRandomOrder(levelsOrder);
+				setLevelsOrder();
+				break;
+			// players location
+			case LINE_PLAYERS_LOCATION:
+				boolean playersLocation = !gameConfiguration.getQuickMatchPlayersRandomLocation();
+				gameConfiguration.setQuickMatchPlayersRandomLocation(playersLocation);
+				setPlayersLocation();
+				break;
+			// time limit
+			case LINE_TIME_LIMIT:
+				int limitTime = gameConfiguration.getQuickMatchLimitTime();
+				// minus
+				if(pos[1]==1)
+				{	if(limitTime>0)
+						limitTime = limitTime - TIME_DELTA;
+				}
+				// plus
+				else //if(pos[1]==3)
+				{	if(limitTime<TIME_MAX)
+						limitTime = limitTime + TIME_DELTA;
+				}
+				// common
+				gameConfiguration.setQuickMatchLimitTime(limitTime);
+				setTimeLimit();
+				break;
+			// time limit
+			case LINE_POINTS_VALUES:
+				int index = (pos[1]-1)/3;
+				int minus = (index*3)+1;
+				//int plus = (index*3)+2;
+				int pointsValues = gameConfiguration.getQuickMatchPoints().get(index);
+				// minus
+				if(pos[1]==minus)
+				{	if(pointsValues>0)
+						pointsValues = pointsValues - POINTS_DELTA;
+				}
+				// plus
+				else //if(pos[1]==plus)
+				{	if(pointsValues<POINTS_MAX)
+						pointsValues = pointsValues + POINTS_DELTA;
+				}
+				// common
+				gameConfiguration.getQuickMatchPoints().set(index,pointsValues);
+				setPointsValue(index);
+				break;
+			// points share
+			case LINE_POINTS_SHARE:
+				boolean pointsShare = !gameConfiguration.getQuickMatchPointsShare();
+				gameConfiguration.setQuickMatchPointsShare(pointsShare);
+				setPointsShare();
+				break;			
+			// points share
+			case LINE_POINTS_DRAW:
+				QuickMatchDraw pointsDraw = gameConfiguration.getQuickMatchPointsDraw();
+				pointsDraw = QuickMatchDraw.getNext(pointsDraw);
+				gameConfiguration.setQuickMatchPointsDraw(pointsDraw);
+				setPointsDraw();
+				break;
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+		}
 	}
 
 	@Override

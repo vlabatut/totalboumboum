@@ -1,4 +1,4 @@
-package fr.free.totalboumboum.gui.menus.quickmatch.options;
+package fr.free.totalboumboum.gui.menus.quickmatch.settings;
 
 /*
  * Total Boum Boum

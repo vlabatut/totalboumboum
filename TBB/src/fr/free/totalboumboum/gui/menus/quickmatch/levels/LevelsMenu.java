@@ -42,7 +42,7 @@ import fr.free.totalboumboum.game.tournament.single.SingleTournament;
 import fr.free.totalboumboum.gui.common.structure.panel.SplitMenuPanel;
 import fr.free.totalboumboum.gui.common.structure.panel.menu.InnerMenuPanel;
 import fr.free.totalboumboum.gui.common.structure.panel.menu.MenuPanel;
-import fr.free.totalboumboum.gui.menus.quickmatch.options.OptionsSplitPanel;
+import fr.free.totalboumboum.gui.menus.quickmatch.settings.OptionsSplitPanel;
 import fr.free.totalboumboum.gui.tools.GuiKeys;
 import fr.free.totalboumboum.gui.tools.GuiTools;
 
