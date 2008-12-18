@@ -49,7 +49,7 @@ import fr.free.totalboumboum.gui.tools.GuiTools;
 public class LevelsMenu extends InnerMenuPanel
 {	private static final long serialVersionUID = 1L;
 	
-	private SettingsSplitPanel optionsPanel;
+	private SettingsSplitPanel settingsPanel;
 
 	@SuppressWarnings("unused")
 	private JButton buttonQuit;
@@ -104,8 +104,8 @@ public class LevelsMenu extends InnerMenuPanel
 			levelsSelection = Configuration.getGameConfiguration().getQuickMatchSelectedLevels();
 		levelData.setLevelsSelection(levelsSelection);
 		// transmit
-		if(optionsPanel!=null)
-		{	optionsPanel.setTournament(tournament);
+		if(settingsPanel!=null)
+		{	settingsPanel.setTournament(tournament);
 		}			
 	}
 	
@@ -150,11 +150,11 @@ public class LevelsMenu extends InnerMenuPanel
 			// set levels in configuration
 			Configuration.getGameConfiguration().setQuickMatchSelectedLevels(levelsSelection);
 			// set levels panel
-			if(optionsPanel==null)
-			{	optionsPanel = new SettingsSplitPanel(container.getContainer(),container);
+			if(settingsPanel==null)
+			{	settingsPanel = new SettingsSplitPanel(container.getContainer(),container);
 			}			
-			optionsPanel.setTournament(tournament);
-			replaceWith(optionsPanel);
+			settingsPanel.setTournament(tournament);
+			replaceWith(settingsPanel);
 	    }
 /*			
 		{	

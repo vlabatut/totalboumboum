@@ -26,7 +26,11 @@ import java.io.File;
 import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Collections;
+import java.util.GregorianCalendar;
 import java.util.Iterator;
+import java.util.Random;
 import java.util.concurrent.locks.Condition;
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
@@ -99,6 +103,17 @@ public class Loop implements Runnable
 		int remainingPlayers = profiles.size();
 		Players plyrs = hollowLevel.getPlayers();
 		PlayerLocation[] initialPositions = plyrs.getLocations().get(remainingPlayers);
+		if(round.getRandomLocations())
+		{	ArrayList<PlayerLocation> loc = new ArrayList<PlayerLocation>();
+			for(int i=0;i<initialPositions.length;i++)
+				loc.add(initialPositions[i]);
+			Calendar cal = new GregorianCalendar();
+			long seed = cal.getTimeInMillis();
+			Random random = new Random(seed);
+			Collections.shuffle(loc,random);
+			for(int i=0;i<initialPositions.length;i++)
+				initialPositions[i] = loc.get(i);
+		}
 		ArrayList<String> items = plyrs.getInitialItems();
 		Itemset itemset = level.getItemset();
 		Iterator<Profile> i = profiles.iterator();

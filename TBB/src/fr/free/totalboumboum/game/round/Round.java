@@ -147,6 +147,14 @@ public class Round implements StatisticHolder
 	/////////////////////////////////////////////////////////////////
 	private int remainingPlayers;
 	private final ArrayList<Boolean> playersStatus = new ArrayList<Boolean>();
+	private boolean randomLocations;
+
+	public boolean getRandomLocations()
+	{	return randomLocations;
+	}
+	public void setRandomLocations(boolean randomLocations)
+	{	this.randomLocations = randomLocations;
+	}
 
 	public ArrayList<Boolean> getPlayersStatus()
 	{	return playersStatus;		
