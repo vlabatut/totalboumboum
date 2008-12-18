@@ -80,7 +80,7 @@ public class RoundQuickConfigSubPanel extends UntitledSubPanelLines implements M
 				// name
 				{	ln.setLabelMaxWidth(col,nameWidth);
 					ln.setLabelPreferredWidth(col,nameWidth);
-					ln.setLabelKey(col,GuiKeys.COMMON_ROUND_LEVELS_ORDER,false);
+					ln.setLabelKey(col,GuiKeys.MENU_QUICKMATCH_SETTINGS_LEVELS_ORDER,false);
 					col++;
 				}
 				// value
@@ -100,7 +100,7 @@ public class RoundQuickConfigSubPanel extends UntitledSubPanelLines implements M
 				// name
 				{	ln.setLabelMaxWidth(col,nameWidth);
 					ln.setLabelPreferredWidth(col,nameWidth);
-					ln.setLabelKey(col,GuiKeys.COMMON_ROUND_PLAYERS_LOCATION,false);
+					ln.setLabelKey(col,GuiKeys.MENU_QUICKMATCH_SETTINGS_PLAYERS_LOCATION,false);
 					col++;
 				}
 				// value
@@ -122,12 +122,12 @@ public class RoundQuickConfigSubPanel extends UntitledSubPanelLines implements M
 				// name
 				{	ln.setLabelMaxWidth(col,nameWidth);
 					ln.setLabelPreferredWidth(col,nameWidth);
-					ln.setLabelKey(col,GuiKeys.COMMON_ROUND_TIME_TITLE,false);
+					ln.setLabelKey(col,GuiKeys.MENU_QUICKMATCH_SETTINGS_LIMIT_TIME_TITLE,false);
 					col++;
 				}
 				// minus button
 				{	ln.setLabelMaxWidth(col,ln.getHeight());
-					ln.setLabelKey(col,GuiKeys.COMMON_ROUND_TIME_MINUS,true);
+					ln.setLabelKey(col,GuiKeys.MENU_QUICKMATCH_SETTINGS_LIMIT_TIME_MINUS,true);
 					ln.getLabel(col).addMouseListener(this);
 					col++;
 				}
@@ -138,7 +138,7 @@ public class RoundQuickConfigSubPanel extends UntitledSubPanelLines implements M
 				}
 				// plus button
 				{	ln.setLabelMaxWidth(col,ln.getHeight());
-					ln.setLabelKey(col,GuiKeys.COMMON_ROUND_TIME_PLUS,true);
+					ln.setLabelKey(col,GuiKeys.MENU_QUICKMATCH_SETTINGS_LIMIT_TIME_PLUS,true);
 					ln.getLabel(col).addMouseListener(this);
 					col++;
 				}
@@ -154,13 +154,13 @@ public class RoundQuickConfigSubPanel extends UntitledSubPanelLines implements M
 				// name
 				{	ln.setLabelMaxWidth(col,nameWidth);
 					ln.setLabelPreferredWidth(col,nameWidth);
-					ln.setLabelKey(col,GuiKeys.COMMON_ROUND_POINTS_RANKS_TITLE,false);
+					ln.setLabelKey(col,GuiKeys.MENU_QUICKMATCH_SETTINGS_POINTS_RANKS_TITLE,false);
 					col++;
 				}
 				// values
 				for(int i=1;i<=5;i++)
-				{	String text = GuiConfiguration.getMiscConfiguration().getLanguage().getText(GuiKeys.COMMON_ROUND_POINTS_RANKS_VALUE)+i; 
-					String tooltip = GuiConfiguration.getMiscConfiguration().getLanguage().getText(GuiKeys.COMMON_ROUND_POINTS_RANKS_VALUE+GuiKeys.TOOLTIP); 
+				{	String text = GuiConfiguration.getMiscConfiguration().getLanguage().getText(GuiKeys.MENU_QUICKMATCH_SETTINGS_POINTS_RANKS_VALUE)+i; 
+					String tooltip = GuiConfiguration.getMiscConfiguration().getLanguage().getText(GuiKeys.MENU_QUICKMATCH_SETTINGS_POINTS_RANKS_VALUE+GuiKeys.TOOLTIP); 
 					ln.setLabelText(col,text,tooltip);
 //					ln.setLabelMaxWidth(col,(int)(maxWidth*1.1));
 					ln.setLabelMaxWidth(col,pointsRanksWidth);
@@ -181,14 +181,14 @@ public class RoundQuickConfigSubPanel extends UntitledSubPanelLines implements M
 				// name
 				{	ln.setLabelMaxWidth(col,nameWidth);
 					ln.setLabelPreferredWidth(col,nameWidth);
-					ln.setLabelKey(col,GuiKeys.COMMON_ROUND_POINTS_VALUES_TITLE,false);
+					ln.setLabelKey(col,GuiKeys.MENU_QUICKMATCH_SETTINGS_POINTS_VALUES_TITLE,false);
 					col++;
 				}
 				// values
 				for(int i=0;i<5;i++)
 				{	// minus button
 					{	ln.setLabelMaxWidth(col,ln.getHeight());
-						ln.setLabelKey(col,GuiKeys.COMMON_ROUND_POINTS_VALUES_MINUS,true);
+						ln.setLabelKey(col,GuiKeys.MENU_QUICKMATCH_SETTINGS_POINTS_VALUES_MINUS,true);
 						ln.getLabel(col).addMouseListener(this);
 						col++;
 					}
@@ -199,7 +199,7 @@ public class RoundQuickConfigSubPanel extends UntitledSubPanelLines implements M
 					}
 					// plus button
 					{	ln.setLabelMaxWidth(col,ln.getHeight());
-						ln.setLabelKey(col,GuiKeys.COMMON_ROUND_POINTS_VALUES_PLUS,true);
+						ln.setLabelKey(col,GuiKeys.MENU_QUICKMATCH_SETTINGS_POINTS_VALUES_PLUS,true);
 						ln.getLabel(col).addMouseListener(this);
 						col++;
 					}
@@ -215,7 +215,7 @@ public class RoundQuickConfigSubPanel extends UntitledSubPanelLines implements M
 				// name
 				{	ln.setLabelMaxWidth(col,nameWidth);
 					ln.setLabelPreferredWidth(col,nameWidth);
-					ln.setLabelKey(col,GuiKeys.COMMON_ROUND_POINTS_SHARE_TITLE,false);
+					ln.setLabelKey(col,GuiKeys.MENU_QUICKMATCH_SETTINGS_POINTS_SHARE_TITLE,false);
 					col++;
 				}
 				// value
@@ -235,7 +235,7 @@ public class RoundQuickConfigSubPanel extends UntitledSubPanelLines implements M
 				// name
 				{	ln.setLabelMaxWidth(col,nameWidth);
 					ln.setLabelPreferredWidth(col,nameWidth);
-					ln.setLabelKey(col,GuiKeys.COMMON_ROUND_POINTS_DRAW_TITLE,false);
+					ln.setLabelKey(col,GuiKeys.MENU_QUICKMATCH_SETTINGS_POINTS_DRAW_TITLE,false);
 					col++;
 				}
 				// value
@@ -277,9 +277,9 @@ public class RoundQuickConfigSubPanel extends UntitledSubPanelLines implements M
 	{	boolean order = gameConfiguration.getQuickMatchLevelsRandomOrder();
 		String key;
 		if(order)
-			key = GuiKeys.COMMON_ROUND_LEVELS_ORDER_RANDOM;
+			key = GuiKeys.MENU_QUICKMATCH_SETTINGS_LEVELS_ORDER_RANDOM;
 		else
-			key = GuiKeys.COMMON_ROUND_LEVELS_ORDER_FIXED;
+			key = GuiKeys.MENU_QUICKMATCH_SETTINGS_LEVELS_ORDER_FIXED;
 		getLine(LINE_LEVELS_ORDER).setLabelKey(1,key,false);
 	}
 	
@@ -287,15 +287,19 @@ public class RoundQuickConfigSubPanel extends UntitledSubPanelLines implements M
 	{	boolean location = gameConfiguration.getQuickMatchPlayersRandomLocation();
 		String key;
 		if(location)
-			key = GuiKeys.COMMON_ROUND_PLAYERS_LOCATION_RANDOM;
+			key = GuiKeys.MENU_QUICKMATCH_SETTINGS_PLAYERS_LOCATION_RANDOM;
 		else
-			key = GuiKeys.COMMON_ROUND_PLAYERS_LOCATION_FIXED;
+			key = GuiKeys.MENU_QUICKMATCH_SETTINGS_PLAYERS_LOCATION_FIXED;
 		getLine(LINE_PLAYERS_LOCATION).setLabelKey(1,key,false);
 	}
 	
 	private void setTimeLimit()
 	{	int time = gameConfiguration.getQuickMatchLimitTime();
-		String text = StringTools.formatTimeWithSeconds(time);
+		String text;
+		if(time<=0)
+			text = new Character('\u221E').toString();
+		else 
+			text = StringTools.formatTimeWithSeconds(time);
 		String tooltip = text;
 		getLine(LINE_TIME_LIMIT).setLabelText(1,text,tooltip);
 	}
@@ -313,9 +317,9 @@ public class RoundQuickConfigSubPanel extends UntitledSubPanelLines implements M
 	{	boolean share = gameConfiguration.getQuickMatchPointsShare();
 		String key;
 		if(share)
-			key = GuiKeys.COMMON_ROUND_POINTS_SHARE_VAR;
+			key = GuiKeys.MENU_QUICKMATCH_SETTINGS_POINTS_SHARE_VAR;
 		else
-			key = GuiKeys.COMMON_ROUND_POINTS_SHARE_YOK;
+			key = GuiKeys.MENU_QUICKMATCH_SETTINGS_POINTS_SHARE_YOK;
 		getLine(LINE_POINTS_SHARE).setLabelKey(1,key,false);
 	}
 	
@@ -323,11 +327,11 @@ public class RoundQuickConfigSubPanel extends UntitledSubPanelLines implements M
 	{	QuickMatchDraw draw = gameConfiguration.getQuickMatchPointsDraw();
 		String key;
 		if(draw==QuickMatchDraw.AUTOKILL)
-			key = GuiKeys.COMMON_ROUND_POINTS_DRAW_AUTOKILL;
+			key = GuiKeys.MENU_QUICKMATCH_SETTINGS_POINTS_DRAW_AUTOKILL;
 		else if(draw==QuickMatchDraw.BOTH)
-			key = GuiKeys.COMMON_ROUND_POINTS_DRAW_BOTH;
+			key = GuiKeys.MENU_QUICKMATCH_SETTINGS_POINTS_DRAW_BOTH;
 		else //if(draw==QuickMatchDraw.TIME)
-			key = GuiKeys.COMMON_ROUND_POINTS_DRAW_TIME;
+			key = GuiKeys.MENU_QUICKMATCH_SETTINGS_POINTS_DRAW_TIME;
 		getLine(LINE_POINTS_DRAW).setLabelKey(1,key,false);
 	}
 	

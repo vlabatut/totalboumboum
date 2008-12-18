@@ -260,6 +260,61 @@
 					<text name="Previous" value="Previous" tooltip="Back to main menu" />
 					<text name="Quit" value="Quit" tooltip="Go to main menu" />
 				</group>
+			</group>
+			<group name="Settings" >
+				<group name="Levels">
+					<group name="Order">
+						<text name="Fixed" value="Fixed" tooltip="Levels are played in order fixed during their selection" />
+						<text name="Random" value="Randoù" tooltip="Levels are played in random order" />
+						<text name="Title" value="Order" tooltip="Levels order (fixed or random)" />
+					</group>
+				</group>
+				<group name="Players">
+					<group name="Location">
+						<text name="Fixed" value="Fixé" tooltip="Players are placed according to their number" />
+						<text name="Random" value="Aléatoire" tooltip="Players are randomly placed" />
+						<text name="Title" value="Location" tooltip="Players locations at the begining of a round (fixed or random)" />
+					</group>
+				</group>
+				<group name="Points">
+					<group name="Ranks">
+						<text name="Title" value="Rank" tooltip="Round rankings" />
+						<text name="Values" value="#" tooltip="#" />
+					</group>
+					<group name="Draw">
+						<text name="Autokill" value="Mutual bombing" tooltip="Draw if the last players kill each other" />
+						<text name="Both" value="Both" tooltip="Draw if there's a mutual bombing or the time limit is reached" />
+						<text name="Time" value="Time limit" tooltip="Draw if the time limit is reached" />
+						<text name="Title" value="Draw" tooltip="Conditions for a draw (no points scored)" />
+					</group>
+					<group name="Share">
+						<text name="Title" value="Share" tooltip="Points are shared if several players have the same rank" />
+						<text name="Var" value="With" tooltip="Points share enabled" />
+						<text name="Yok" value="Without" tooltip="Points share disabled" />
+					</group>
+					<group name="Values">
+						<text name="Title" value="Points" tooltip="Points scored by the player" />
+						<text name="Minus" value="Minus" tooltip="More points" />
+						<text name="Plus" value="Plus" tooltip="Less points" />
+					</group>
+				</group>
+				<group name="Limit">
+					<group name="Points">
+						<text name="Title" value="Points limit" tooltip="Number of points to score to win the match (or no limit)" />
+						<text name="Minus" value="Minus" tooltip="More time" />
+						<text name="Plus" value="Plus" tooltip="Less time" />
+					</group>			
+					<group name="Rounds">
+						<text name="Title" value="Rounds limit" tooltip="Maximal number of rounds in this match (or no limit)" />
+						<text name="Minus" value="Minus" tooltip="More time" />
+						<text name="Plus" value="Plus" tooltip="Less time" />
+					</group>			
+					<group name="Time">
+						<text name="Title" value="Time limit" tooltip="Time limit for a round (or no limit)" />
+						<text name="Minus" value="Minus" tooltip="More time" />
+						<text name="Plus" value="Plus" tooltip="Less time" />
+					</group>			
+				</group>			
 			</group>	
 		</group>	
 
@@ -686,48 +741,6 @@
 			<text name="LevelFolder" value="Level"  tooltip="Level name for this round" />
 			<text name="LevelPack" value="Package"  tooltip="Level package for this round" />
 			<text name="Title" value="Title" tooltip="Name of this round" />
-
-			<group name="Levels">
-				<group name="Order">
-					<text name="Fixed" value="Fixed" tooltip="Levels are played in order fixed during their selection" />
-					<text name="Random" value="Randoù" tooltip="Levels are played in random order" />
-					<text name="Title" value="Order" tooltip="Levels order (fixed or random)" />
-				</group>
-			</group>
-			<group name="Players">
-				<group name="Location">
-					<text name="Fixed" value="Fixé" tooltip="Players are placed according to their number" />
-					<text name="Random" value="Aléatoire" tooltip="Players are randomly placed" />
-					<text name="Title" value="Location" tooltip="Players locations at the begining of a round (fixed or random)" />
-				</group>
-			</group>
-			<group name="Points">
-				<group name="Ranks">
-					<text name="Title" value="Rank" tooltip="Round rankings" />
-					<text name="Values" value="#" tooltip="#" />
-				</group>
-				<group name="Draw">
-					<text name="Autokill" value="Mutual bombing" tooltip="Draw if the last players kill each other" />
-					<text name="Both" value="Both" tooltip="Draw if there's a mutual bombing or the time limit is reached" />
-					<text name="Time" value="Time limit" tooltip="Draw if the time limit is reached" />
-					<text name="Title" value="Draw" tooltip="Conditions for a draw (no points scored)" />
-				</group>
-				<group name="Share">
-					<text name="Title" value="Share" tooltip="Points are shared if several players have the same rank" />
-					<text name="Var" value="With" tooltip="Points share enabled" />
-					<text name="Yok" value="Without" tooltip="Points share disabled" />
-				</group>
-				<group name="Values">
-					<text name="Title" value="Points" tooltip="Points scored by the player" />
-					<text name="Minus" value="Minus" tooltip="More points" />
-					<text name="Plus" value="Plus" tooltip="Less points" />
-				</group>
-			</group>
-			<group name="Time">
-				<text name="Title" value="Limit" tooltip="Time limit for a round (0 means no limit)" />
-				<text name="Minus" value="Minus" tooltip="More time" />
-				<text name="Plus" value="Plus" tooltip="Less time" />
-			</group>			
 		</group>
 
 <!-- SPRITE  -->
