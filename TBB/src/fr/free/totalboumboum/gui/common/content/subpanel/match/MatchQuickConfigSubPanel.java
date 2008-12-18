@@ -24,16 +24,12 @@ package fr.free.totalboumboum.gui.common.content.subpanel.match;
 import java.awt.Color;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
-import java.util.ArrayList;
 
 import fr.free.totalboumboum.configuration.game.GameConfiguration;
-import fr.free.totalboumboum.configuration.game.QuickMatchDraw;
 import fr.free.totalboumboum.gui.common.structure.subpanel.Line;
 import fr.free.totalboumboum.gui.common.structure.subpanel.UntitledSubPanelLines;
-import fr.free.totalboumboum.gui.data.configuration.GuiConfiguration;
 import fr.free.totalboumboum.gui.tools.GuiKeys;
 import fr.free.totalboumboum.gui.tools.GuiTools;
-import fr.free.totalboumboum.tools.StringTools;
 
 public class MatchQuickConfigSubPanel extends UntitledSubPanelLines implements MouseListener
 {	private static final long serialVersionUID = 1L;
@@ -47,13 +43,8 @@ public class MatchQuickConfigSubPanel extends UntitledSubPanelLines implements M
 	// GameConfiguration	/////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	private static final int LINE_COUNT = 20;
-	private static final int LINE_LEVELS_ORDER = 0;
-	private static final int LINE_PLAYERS_LOCATION = 1;
-	private static final int LINE_TIME_LIMIT = 2;
-	private static final int LINE_POINTS_RANKS = 3;
-	private static final int LINE_POINTS_VALUES = 4;
-	private static final int LINE_POINTS_SHARE = 5;
-	private static final int LINE_POINTS_DRAW = 6;
+	private static final int LINE_LIMIT_POINTS = 0;
+	private static final int LINE_LIMIT_ROUNDS = 1;
 
 	private GameConfiguration gameConfiguration;
 
@@ -66,55 +57,12 @@ public class MatchQuickConfigSubPanel extends UntitledSubPanelLines implements M
 		
 		// sizes
 		int nameWidth = (int)(width*0.66);
-		int pointsRanksWidth = (width - nameWidth - 7*GuiTools.subPanelMargin) / 5;
-		int pointsValuesWidth = (pointsRanksWidth - 3*GuiTools.subPanelMargin - 2*getLineHeight());
 		removeAllLines();
 
 		if(gameConfiguration!=null)
-		{	
-			
-			// levels order
-			{	Line ln = getLine(LINE_LEVELS_ORDER);
-				ln.addLabel(0);
-				int col = 0;
-				// name
-				{	ln.setLabelMaxWidth(col,nameWidth);
-					ln.setLabelPreferredWidth(col,nameWidth);
-					ln.setLabelKey(col,GuiKeys.COMMON_ROUND_LEVELS_ORDER,false);
-					col++;
-				}
-				// value
-				{	setLevelsOrder();
-					ln.setLabelMaxWidth(col,Integer.MAX_VALUE);
-					ln.getLabel(col).addMouseListener(this);
-					col++;
-				}
-				Color bg = GuiTools.COLOR_TABLE_REGULAR_BACKGROUND;
-				ln.setBackgroundColor(bg);
-			}
-			
-			// players location
-			{	Line ln = getLine(LINE_PLAYERS_LOCATION);
-				ln.addLabel(0);
-				int col = 0;
-				// name
-				{	ln.setLabelMaxWidth(col,nameWidth);
-					ln.setLabelPreferredWidth(col,nameWidth);
-					ln.setLabelKey(col,GuiKeys.COMMON_ROUND_PLAYERS_LOCATION,false);
-					col++;
-				}
-				// value
-				{	setPlayersLocation();
-					ln.setLabelMaxWidth(col,Integer.MAX_VALUE);
-					ln.getLabel(col).addMouseListener(this);
-					col++;
-				}
-				Color bg = GuiTools.COLOR_TABLE_REGULAR_BACKGROUND;
-				ln.setBackgroundColor(bg);
-			}
-			
-			// time limit
-			{	Line ln = getLine(LINE_TIME_LIMIT);
+		{				
+			// points limit
+			{	Line ln = getLine(LINE_LIMIT_POINTS);
 				ln.addLabel(0);
 				ln.addLabel(0);
 				ln.addLabel(0);
@@ -122,23 +70,23 @@ public class MatchQuickConfigSubPanel extends UntitledSubPanelLines implements M
 				// name
 				{	ln.setLabelMaxWidth(col,nameWidth);
 					ln.setLabelPreferredWidth(col,nameWidth);
-					ln.setLabelKey(col,GuiKeys.COMMON_ROUND_TIME_TITLE,false);
+					ln.setLabelKey(col,GuiKeys.MENU_QUICKMATCH_SETTINGS_LIMIT_POINTS_TITLE,false);
 					col++;
 				}
 				// minus button
 				{	ln.setLabelMaxWidth(col,ln.getHeight());
-					ln.setLabelKey(col,GuiKeys.COMMON_ROUND_TIME_MINUS,true);
+					ln.setLabelKey(col,GuiKeys.MENU_QUICKMATCH_SETTINGS_LIMIT_POINTS_MINUS,true);
 					ln.getLabel(col).addMouseListener(this);
 					col++;
 				}
 				// value
-				{	setTimeLimit();
+				{	setPointsLimit();
 					ln.setLabelMaxWidth(col,Integer.MAX_VALUE);
 					col++;
 				}
 				// plus button
 				{	ln.setLabelMaxWidth(col,ln.getHeight());
-					ln.setLabelKey(col,GuiKeys.COMMON_ROUND_TIME_PLUS,true);
+					ln.setLabelKey(col,GuiKeys.MENU_QUICKMATCH_SETTINGS_LIMIT_POINTS_PLUS,true);
 					ln.getLabel(col).addMouseListener(this);
 					col++;
 				}
@@ -146,81 +94,32 @@ public class MatchQuickConfigSubPanel extends UntitledSubPanelLines implements M
 				ln.setBackgroundColor(bg);
 			}
 			
-			// points ranks
-			{	Line ln = getLine(LINE_POINTS_RANKS);
-				for(int i=0;i<5;i++)
-					ln.addLabel(0);
-				int col = 0;
-				// name
-				{	ln.setLabelMaxWidth(col,nameWidth);
-					ln.setLabelPreferredWidth(col,nameWidth);
-					ln.setLabelKey(col,GuiKeys.COMMON_ROUND_POINTS_RANKS_TITLE,false);
-					col++;
-				}
-				// values
-				for(int i=1;i<=5;i++)
-				{	String text = GuiConfiguration.getMiscConfiguration().getLanguage().getText(GuiKeys.COMMON_ROUND_POINTS_RANKS_VALUE)+i; 
-					String tooltip = GuiConfiguration.getMiscConfiguration().getLanguage().getText(GuiKeys.COMMON_ROUND_POINTS_RANKS_VALUE+GuiKeys.TOOLTIP); 
-					ln.setLabelText(col,text,tooltip);
-//					ln.setLabelMaxWidth(col,(int)(maxWidth*1.1));
-					ln.setLabelMaxWidth(col,pointsRanksWidth);
-					col++;
-				}
-				Color bg = GuiTools.COLOR_TABLE_REGULAR_BACKGROUND;
-				ln.setBackgroundColor(bg);
-			}
-			
-			// points values
-			{	Line ln = getLine(LINE_POINTS_VALUES);
-				for(int i=0;i<5;i++)
-				{	ln.addLabel(0);
-					ln.addLabel(0);
-					ln.addLabel(0);
-				}
-				int col = 0;
-				// name
-				{	ln.setLabelMaxWidth(col,nameWidth);
-					ln.setLabelPreferredWidth(col,nameWidth);
-					ln.setLabelKey(col,GuiKeys.COMMON_ROUND_POINTS_VALUES_TITLE,false);
-					col++;
-				}
-				// values
-				for(int i=0;i<5;i++)
-				{	// minus button
-					{	ln.setLabelMaxWidth(col,ln.getHeight());
-						ln.setLabelKey(col,GuiKeys.COMMON_ROUND_POINTS_VALUES_MINUS,true);
-						ln.getLabel(col).addMouseListener(this);
-						col++;
-					}
-					// value
-					{	setPointsValue(i);
-						ln.setLabelMaxWidth(col,pointsValuesWidth);
-						col++;
-					}
-					// plus button
-					{	ln.setLabelMaxWidth(col,ln.getHeight());
-						ln.setLabelKey(col,GuiKeys.COMMON_ROUND_POINTS_VALUES_PLUS,true);
-						ln.getLabel(col).addMouseListener(this);
-						col++;
-					}
-				}
-				Color bg = GuiTools.COLOR_TABLE_REGULAR_BACKGROUND;
-				ln.setBackgroundColor(bg);
-			}
-			
-			// points share
-			{	Line ln = getLine(LINE_POINTS_SHARE);
+			// rounds limit
+			{	Line ln = getLine(LINE_LIMIT_ROUNDS);
+				ln.addLabel(0);
+				ln.addLabel(0);
 				ln.addLabel(0);
 				int col = 0;
 				// name
 				{	ln.setLabelMaxWidth(col,nameWidth);
 					ln.setLabelPreferredWidth(col,nameWidth);
-					ln.setLabelKey(col,GuiKeys.COMMON_ROUND_POINTS_SHARE_TITLE,false);
+					ln.setLabelKey(col,GuiKeys.MENU_QUICKMATCH_SETTINGS_LIMIT_ROUNDS_TITLE,false);
+					col++;
+				}
+				// minus button
+				{	ln.setLabelMaxWidth(col,ln.getHeight());
+					ln.setLabelKey(col,GuiKeys.MENU_QUICKMATCH_SETTINGS_LIMIT_ROUNDS_MINUS,true);
+					ln.getLabel(col).addMouseListener(this);
 					col++;
 				}
 				// value
-				{	setPointsShare();
+				{	setRoundsLimit();
 					ln.setLabelMaxWidth(col,Integer.MAX_VALUE);
+					col++;
+				}
+				// plus button
+				{	ln.setLabelMaxWidth(col,ln.getHeight());
+					ln.setLabelKey(col,GuiKeys.MENU_QUICKMATCH_SETTINGS_LIMIT_ROUNDS_PLUS,true);
 					ln.getLabel(col).addMouseListener(this);
 					col++;
 				}
@@ -228,28 +127,9 @@ public class MatchQuickConfigSubPanel extends UntitledSubPanelLines implements M
 				ln.setBackgroundColor(bg);
 			}
 			
-			// points draw
-			{	Line ln = getLine(LINE_POINTS_DRAW);
-				ln.addLabel(0);
-				int col = 0;
-				// name
-				{	ln.setLabelMaxWidth(col,nameWidth);
-					ln.setLabelPreferredWidth(col,nameWidth);
-					ln.setLabelKey(col,GuiKeys.COMMON_ROUND_POINTS_DRAW_TITLE,false);
-					col++;
-				}
-				// value
-				{	setPointsDraw();
-					ln.setLabelMaxWidth(col,Integer.MAX_VALUE);
-					ln.getLabel(col).addMouseListener(this);
-					col++;
-				}
-				Color bg = GuiTools.COLOR_TABLE_REGULAR_BACKGROUND;
-				ln.setBackgroundColor(bg);
-			}
 			
 			// empty lines
-			{	for(int line=LINE_POINTS_DRAW+1;line<LINE_COUNT;line++)
+			{	for(int line=LINE_LIMIT_ROUNDS+1;line<LINE_COUNT;line++)
 				{	Line ln = getLine(line);
 					int col = 0;
 					int mw = ln.getWidth();
@@ -273,62 +153,26 @@ public class MatchQuickConfigSubPanel extends UntitledSubPanelLines implements M
 		}
 	}
 	
-	private void setLevelsOrder()
-	{	boolean order = gameConfiguration.getQuickMatchLevelsRandomOrder();
-		String key;
-		if(order)
-			key = GuiKeys.COMMON_ROUND_LEVELS_ORDER_RANDOM;
+	private void setPointsLimit()
+	{	int limit = gameConfiguration.getQuickMatchLimitPoints();
+		String text;
+		if(limit<=0)
+			text = new Character('\u221E').toString();
 		else
-			key = GuiKeys.COMMON_ROUND_LEVELS_ORDER_FIXED;
-		getLine(LINE_LEVELS_ORDER).setLabelKey(1,key,false);
-	}
-	
-	private void setPlayersLocation()
-	{	boolean location = gameConfiguration.getQuickMatchPlayersRandomLocation();
-		String key;
-		if(location)
-			key = GuiKeys.COMMON_ROUND_PLAYERS_LOCATION_RANDOM;
-		else
-			key = GuiKeys.COMMON_ROUND_PLAYERS_LOCATION_FIXED;
-		getLine(LINE_PLAYERS_LOCATION).setLabelKey(1,key,false);
-	}
-	
-	private void setTimeLimit()
-	{	int time = gameConfiguration.getQuickMatchLimitTime();
-		String text = StringTools.formatTimeWithSeconds(time);
+			text = Integer.toString(limit);
 		String tooltip = text;
-		getLine(LINE_TIME_LIMIT).setLabelText(1,text,tooltip);
+		getLine(LINE_LIMIT_POINTS).setLabelText(1,text,tooltip);
 	}
-	
-	private void setPointsValue(int index)
-	{	ArrayList<Integer> points = gameConfiguration.getQuickMatchPoints();
-		for(int i=0;i<points.size();i++)
-		{	String text = Integer.toString(points.get(i));
-			String tooltip = text;
-			getLine(LINE_POINTS_VALUES).setLabelText(1+i,text,tooltip);
-		}
-	}
-	
-	private void setPointsShare()
-	{	boolean share = gameConfiguration.getQuickMatchPointsShare();
-		String key;
-		if(share)
-			key = GuiKeys.COMMON_ROUND_POINTS_SHARE_VAR;
+		
+	private void setRoundsLimit()
+	{	int limit = gameConfiguration.getQuickMatchLimitRounds();
+		String text;
+		if(limit<=0)
+			text = new Character('\u221E').toString();
 		else
-			key = GuiKeys.COMMON_ROUND_POINTS_SHARE_YOK;
-		getLine(LINE_POINTS_SHARE).setLabelKey(1,key,false);
-	}
-	
-	private void setPointsDraw()
-	{	QuickMatchDraw draw = gameConfiguration.getQuickMatchPointsDraw();
-		String key;
-		if(draw==QuickMatchDraw.AUTOKILL)
-			key = GuiKeys.COMMON_ROUND_POINTS_DRAW_AUTOKILL;
-		else if(draw==QuickMatchDraw.BOTH)
-			key = GuiKeys.COMMON_ROUND_POINTS_DRAW_BOTH;
-		else //if(draw==QuickMatchDraw.TIME)
-			key = GuiKeys.COMMON_ROUND_POINTS_DRAW_TIME;
-		getLine(LINE_POINTS_DRAW).setLabelKey(1,key,false);
+			text = Integer.toString(limit);
+		String tooltip = text;
+		getLine(LINE_LIMIT_ROUNDS).setLabelText(1,text,tooltip);
 	}
 	
 	/////////////////////////////////////////////////////////////////
