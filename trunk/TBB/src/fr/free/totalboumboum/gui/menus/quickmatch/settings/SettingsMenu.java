@@ -46,7 +46,7 @@ import fr.free.totalboumboum.gui.menus.quickmatch.match.MatchSplitPanel;
 import fr.free.totalboumboum.gui.tools.GuiKeys;
 import fr.free.totalboumboum.gui.tools.GuiTools;
 
-public class OptionsMenu extends InnerMenuPanel
+public class SettingsMenu extends InnerMenuPanel
 {	private static final long serialVersionUID = 1L;
 	
 	private MatchSplitPanel matchPanel;
@@ -58,9 +58,9 @@ public class OptionsMenu extends InnerMenuPanel
 	@SuppressWarnings("unused")
 	private JButton buttonNext;
 
-	private OptionsData levelData;
+	private SettingsData levelData;
 
-	public OptionsMenu(SplitMenuPanel container, MenuPanel parent)
+	public SettingsMenu(SplitMenuPanel container, MenuPanel parent)
 	{	super(container, parent);
 		
 		// layout
@@ -86,7 +86,7 @@ public class OptionsMenu extends InnerMenuPanel
 		buttonNext = GuiTools.createButton(GuiKeys.MENU_QUICKMATCH_LEVELS_BUTTON_NEXT,buttonWidth,buttonHeight,1,this);
 
 		// panels
-		levelData = new OptionsData(container);
+		levelData = new SettingsData(container);
 		container.setDataPart(levelData);
 	}
 	

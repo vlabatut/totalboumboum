@@ -32,19 +32,19 @@ import fr.free.totalboumboum.gui.common.structure.panel.menu.MenuPanel;
 import fr.free.totalboumboum.gui.data.configuration.GuiConfiguration;
 import fr.free.totalboumboum.gui.tools.GuiTools;
 
-public class OptionsSplitPanel extends SplitMenuPanel
+public class SettingsSplitPanel extends SplitMenuPanel
 {	private static final long serialVersionUID = 1L; 
 
 	private BufferedImage image;
 	
-	public OptionsSplitPanel(MenuContainer container, MenuPanel parent)
+	public SettingsSplitPanel(MenuContainer container, MenuPanel parent)
 	{	super(container,parent,BorderLayout.PAGE_END,GuiTools.HORIZONTAL_SPLIT_RATIO);
 	
 		// background
 		image = GuiConfiguration.getMiscConfiguration().getDarkBackground();
 		
 		// panels
-		OptionsMenu menu = new OptionsMenu(this,parent);
+		SettingsMenu menu = new SettingsMenu(this,parent);
 		setMenuPart(menu);
 	}
 	
@@ -52,7 +52,7 @@ public class OptionsSplitPanel extends SplitMenuPanel
 	// TOURNAMENT					/////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	public void setTournament(SingleTournament tournament)
-	{	((OptionsMenu)getMenuPart()).setTournament(tournament);
+	{	((SettingsMenu)getMenuPart()).setTournament(tournament);
 	}
 	
 	/////////////////////////////////////////////////////////////////
