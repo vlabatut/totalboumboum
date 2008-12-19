@@ -30,7 +30,7 @@ import javax.swing.JLabel;
 
 import fr.free.totalboumboum.configuration.GameConstants;
 import fr.free.totalboumboum.configuration.game.GameConfiguration;
-import fr.free.totalboumboum.configuration.game.QuickMatchDraw;
+import fr.free.totalboumboum.configuration.game.quickmatch.QuickMatchDraw;
 import fr.free.totalboumboum.gui.common.structure.subpanel.Line;
 import fr.free.totalboumboum.gui.common.structure.subpanel.UntitledSubPanelLines;
 import fr.free.totalboumboum.gui.data.configuration.GuiConfiguration;

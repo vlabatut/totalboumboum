@@ -1,4 +1,4 @@
-package fr.free.totalboumboum.configuration.game;
+package fr.free.totalboumboum.configuration.game.quickstart;
 
 /*
  * Total Boum Boum
@@ -29,8 +29,6 @@ import javax.xml.parsers.ParserConfigurationException;
 
 import org.xml.sax.SAXException;
 
-import fr.free.totalboumboum.configuration.game.quickmatch.LevelsSelection;
-import fr.free.totalboumboum.configuration.game.quickmatch.QuickMatchDraw;
 import fr.free.totalboumboum.configuration.profile.ProfilesSelection;
 import fr.free.totalboumboum.game.limit.ComparatorCode;
 import fr.free.totalboumboum.game.limit.LimitConfrontation;
@@ -47,10 +45,10 @@ import fr.free.totalboumboum.game.tournament.TournamentLoader;
 import fr.free.totalboumboum.game.tournament.single.SingleTournament;
 import fr.free.totalboumboum.tools.FileTools;
 
-public class GameConfiguration
+public class QuickStartConfiguration
 {
-	public GameConfiguration copy()
-	{	GameConfiguration result = new GameConfiguration();
+	public QuickStartConfiguration copy()
+	{	QuickStartConfiguration result = new QuickStartConfiguration();
 		
 		// tournament
 		ProfilesSelection tournamentCopy = tournamentSelected.copy();

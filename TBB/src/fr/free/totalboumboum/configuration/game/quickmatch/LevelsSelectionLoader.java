@@ -1,4 +1,4 @@
-package fr.free.totalboumboum.configuration.game;
+package fr.free.totalboumboum.configuration.game.quickmatch;
 
 /*
  * Total Boum Boum
@@ -21,29 +21,29 @@ package fr.free.totalboumboum.configuration.game;
  * 
  */
 
+import java.util.List;
+
 import org.jdom.Element;
 
 import fr.free.totalboumboum.tools.XmlTools;
 
-public class LevelsSelectionSaver
+public class LevelsSelectionLoader
 {	
-	public static void saveLevelsSelection(Element result, LevelsSelection levelsSelection)
-	{	int size = levelsSelection.getLevelCount();
-		for(int i=0;i<size;i++)
-		{	Element levelElt = saveLevelElement(i,levelsSelection);
-			result.addContent(levelElt);
-		}
-	}
-	
-	private static Element saveLevelElement(int index, LevelsSelection levelsSelection)
-	{	Element result = new Element(XmlTools.ELT_LEVEL);
-		// folder pack
-		String packName = levelsSelection.getPackName(index);
-		result.setAttribute(XmlTools.ATT_PACK,packName);
-		// folder name
-		String folderName = levelsSelection.getFolderName(index);
-		result.setAttribute(XmlTools.ATT_FOLDER,folderName);
-		//
+	@SuppressWarnings("unchecked")
+	public static LevelsSelection loadLevelsSelection(Element root)
+	{	LevelsSelection result = new LevelsSelection();
+		List<Element> playersElt = root.getChildren(XmlTools.ELT_LEVEL);
+		for(Element elt: playersElt)
+			loadLevelElement(elt,result);
 		return result;
+	}
+
+	private static void loadLevelElement(Element root, LevelsSelection result)
+	{	// pack
+		String packName = root.getAttributeValue(XmlTools.ATT_PACK);
+		// folder
+		String folderName = root.getAttributeValue(XmlTools.ATT_FOLDER);
+		// result
+		result.addLevel(packName,folderName);
 	}
 }

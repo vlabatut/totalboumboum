@@ -31,7 +31,7 @@ import javax.swing.JButton;
 
 import fr.free.totalboumboum.configuration.Configuration;
 import fr.free.totalboumboum.configuration.game.GameConfiguration;
-import fr.free.totalboumboum.configuration.game.QuickMatchDraw;
+import fr.free.totalboumboum.configuration.game.quickmatch.QuickMatchDraw;
 import fr.free.totalboumboum.game.limit.ComparatorCode;
 import fr.free.totalboumboum.game.limit.LimitConfrontation;
 import fr.free.totalboumboum.game.limit.LimitLastStanding;
