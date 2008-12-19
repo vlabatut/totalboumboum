@@ -75,7 +75,7 @@ public class RoundQuickConfigSubPanel extends UntitledSubPanelLines implements M
 		// sizes
 		int nameWidth = (int)(width*0.33);
 		int pointsRanksWidth = (width - nameWidth - 7*GuiTools.subPanelMargin) / GameConstants.CONTROL_COUNT;
-		int pointsValuesWidth = (pointsRanksWidth - 3*GuiTools.subPanelMargin - 2*getLineHeight());
+		int pointsValuesWidth = (pointsRanksWidth - 2*GuiTools.subPanelMargin - 2*getLineHeight());
 		removeAllLines();
 		for(int i=0;i<LINE_COUNT;i++)
 			addLine(0);
@@ -318,11 +318,10 @@ public class RoundQuickConfigSubPanel extends UntitledSubPanelLines implements M
 	
 	private void setPointsValue(int index)
 	{	ArrayList<Integer> points = gameConfiguration.getQuickMatchPoints();
-		for(int i=0;i<points.size();i++)
-		{	String text = Integer.toString(points.get(i));
-			String tooltip = text;
-			getLine(LINE_POINTS_VALUES).setLabelText(1+i,text,tooltip);
-		}
+		int i = 1+(index*3)+1;
+		String text = Integer.toString(points.get(index));
+		String tooltip = text;
+		getLine(LINE_POINTS_VALUES).setLabelText(i,text,tooltip);
 	}
 	
 	private void setPointsShare()
@@ -403,8 +402,8 @@ public class RoundQuickConfigSubPanel extends UntitledSubPanelLines implements M
 			// time limit
 			case LINE_POINTS_VALUES:
 				int index = (pos[1]-1)/3;
-				int minus = (index*3)+1;
-				//int plus = (index*3)+2;
+				int minus = 1+(index*3);
+				//int plus = 1+(index*3)+1;
 				int pointsValues = gameConfiguration.getQuickMatchPoints().get(index);
 				// minus
 				if(pos[1]==minus)
@@ -433,41 +432,6 @@ public class RoundQuickConfigSubPanel extends UntitledSubPanelLines implements M
 				gameConfiguration.setQuickMatchPointsDraw(pointsDraw);
 				setPointsDraw();
 				break;
-				
-				
-				
-				
-				
-				
-				
-				
-				
-				
-				
-				
-				
-				
-				
-				
-				
-				
-				
-				
-				
-				
-				
-				
-				
-				
-				
-				
-				
-				
-				
-				
-				
-				
-				
 		}
 	}
 
