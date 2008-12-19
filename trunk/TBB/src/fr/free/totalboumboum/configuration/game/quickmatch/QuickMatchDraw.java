@@ -1,4 +1,4 @@
-package fr.free.totalboumboum.configuration.game;
+package fr.free.totalboumboum.configuration.game.quickmatch;
 
 public enum QuickMatchDraw
 {
