@@ -73,7 +73,7 @@ public class RoundQuickConfigSubPanel extends UntitledSubPanelLines implements M
 	{	this.gameConfiguration = gameConfiguration;
 		
 		// sizes
-		int nameWidth = (int)(width*0.66);
+		int nameWidth = (int)(width*0.33);
 		int pointsRanksWidth = (width - nameWidth - 7*GuiTools.subPanelMargin) / GameConstants.CONTROL_COUNT;
 		int pointsValuesWidth = (pointsRanksWidth - 3*GuiTools.subPanelMargin - 2*getLineHeight());
 		removeAllLines();
@@ -174,6 +174,7 @@ public class RoundQuickConfigSubPanel extends UntitledSubPanelLines implements M
 					ln.setLabelText(col,text,tooltip);
 //					ln.setLabelMaxWidth(col,(int)(maxWidth*1.1));
 					ln.setLabelMaxWidth(col,pointsRanksWidth);
+					ln.setLabelPreferredWidth(col,pointsRanksWidth);
 					col++;
 				}
 				Color bg = GuiTools.COLOR_TABLE_REGULAR_BACKGROUND;
@@ -205,6 +206,7 @@ public class RoundQuickConfigSubPanel extends UntitledSubPanelLines implements M
 					// value
 					{	setPointsValue(i);
 						ln.setLabelMaxWidth(col,pointsValuesWidth);
+						ln.setLabelPreferredWidth(col,pointsValuesWidth);
 						col++;
 					}
 					// plus button

@@ -285,13 +285,13 @@
 				<group name="Points">
 					<group name="Ranks">
 						<text name="Title" value="Classement" tooltip="Classements à la fin d'une manche" />
-						<text name="Values" value="n°" tooltip="n°" />
+						<text name="Value" value="n°" tooltip="n°" />
 					</group>
 					<group name="Draw">
 						<text name="Autokill" value="Entretuage" tooltip="Il y a égalité si les derniers joueurs s'entretuent" />
 						<text name="Both" value="Les deux" tooltip="Il y a égalité si les derniers joueurs s'entretuent ou si le temps atteint sa limite" />
-						<text name="Time" value="Plus de temps" tooltip="Il y a égalité si le temps atteint sa limite" />
-						<text name="Title" value="Rejouer" tooltip="Conditions pour qu'il y ait égalité (aucun joueur ne marque de points)" />
+						<text name="Time" value="Limite de temps" tooltip="Il y a égalité si le temps atteint sa limite" />
+						<text name="Title" value="Egalité" tooltip="Conditions pour qu'il y ait égalité (aucun joueur ne marque de points)" />
 					</group>
 					<group name="Share">
 						<text name="Title" value="Partage" tooltip="Partage des points quand deux joueurs ont le même classement" />
