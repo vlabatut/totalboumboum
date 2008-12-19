@@ -77,28 +77,6 @@ public class QuickMatchConfiguration
 	}
 	
 	/////////////////////////////////////////////////////////////////
-	// TOURNAMENT	/////////////////////////////////////////
-	/////////////////////////////////////////////////////////////////
-	private AbstractTournament tournament = null;
-	private ProfilesSelection tournamentSelected = new ProfilesSelection();
-
-	public ProfilesSelection getTournamentSelected()
-	{	return tournamentSelected;	
-	}	
-	public void setTournamentSelected(ProfilesSelection tournamentSelected)
-	{	this.tournamentSelected = tournamentSelected;	
-	}	
-
-	public void loadLastTournament() throws ParserConfigurationException, SAXException, IOException, ClassNotFoundException
-	{	String folderPath = FileTools.getConfigurationPath()+File.separator+FileTools.FILE_TOURNAMENT;
-		tournament = TournamentLoader.loadTournamentFromFolderPath(folderPath);			
-	}
-
-	public AbstractTournament getTournament()
-	{	return tournament;	
-	}
-
-	/////////////////////////////////////////////////////////////////
 	// QUICKMATCH		/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	private String quickMatchName = null;
@@ -206,58 +184,13 @@ public class QuickMatchConfiguration
 	{	this.quickMatchSelectedLevels = quickMatchSelectedLevels;	
 	}	
 
-	public void loadQuickmatch() throws ParserConfigurationException, SAXException, IOException, ClassNotFoundException
+	public SingleTournament loadQuickmatch() throws ParserConfigurationException, SAXException, IOException, ClassNotFoundException
 	{	// single tournament
-		SingleTournament quickmatch = new SingleTournament();
+		SingleTournament result = new SingleTournament();
 		// load match
-		Match match = MatchLoader.loadMatchFromName(quickMatchName,quickmatch);
-		quickmatch.setMatch(match);
+		Match match = MatchLoader.loadMatchFromName(quickMatchName,result);
+		result.setMatch(match);
 		// 
-		tournament = quickmatch;
-	}
-	
-	/////////////////////////////////////////////////////////////////
-	// QUICKSTART		/////////////////////////////////////////////
-	/////////////////////////////////////////////////////////////////
-	private ProfilesSelection quickStartSelected = new ProfilesSelection();
-	private String quickStartName = null;
-	
-	public String getQuickStartName()
-	{	return quickStartName;	
+		return result;
 	}	
-	public void setQuickStartName(String quickStartName)
-	{	this.quickStartName = quickStartName;
-	}
-	
-	public ProfilesSelection getQuickStartSelected()
-	{	return quickStartSelected;	
-	}	
-	public void setQuickStartSelected(ProfilesSelection quickStartSelected)
-	{	this.quickStartSelected = quickStartSelected;	
-	}	
-
-	public void loadQuickstart() throws ParserConfigurationException, SAXException, IOException, ClassNotFoundException
-	{	// single tournament
-		SingleTournament quickstart = new SingleTournament();
-		// one round match
-		Match match = new Match(quickstart);
-		{	// notes
-			ArrayList<String> notes = new ArrayList<String>();
-			notes.add("auto-generated notes");
-			match.setNotes(notes);
-		}
-		{	// limits
-			PointsProcessor pointProcessor = new PointsTotal();
-			Limits<MatchLimit> limits = new Limits<MatchLimit>();
-			MatchLimit limit = new LimitConfrontation(1,ComparatorCode.GREATEREQ,pointProcessor);
-			limits.addLimit(limit);
-			match.setLimits(limits);
-		}
-		quickstart.setMatch(match);
-		// round
-		Round round = RoundLoader.loadRoundFromName(quickStartName,match);
-		match.addRound(round);
-		// 
-		tournament = quickstart;
-	}
 }
