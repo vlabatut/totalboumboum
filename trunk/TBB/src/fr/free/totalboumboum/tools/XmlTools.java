@@ -92,6 +92,9 @@ public class XmlTools
 	public static final String ELT_FPS = "fps";
 	public static final String ELT_FULL_SCREEN = "fullScreen";
 	public static final String ELT_GAME = "game";
+	public static final String ELT_GAME_QUICKMATCH = "gameQuickMatch";
+	public static final String ELT_GAME_QUICKSTART = "gameQuickStart";
+	public static final String ELT_GAME_TOURNAMENT = "gameTournament";
 	public static final String ELT_GAMEPLAY = "gameplay";
 	public static final String ELT_GENERAL = "general";
 	public static final String ELT_GESTURES = "gestures";

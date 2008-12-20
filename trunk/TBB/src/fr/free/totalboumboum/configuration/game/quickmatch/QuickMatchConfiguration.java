@@ -21,17 +21,9 @@ package fr.free.totalboumboum.configuration.game.quickmatch;
  * 
  */
 
-import java.io.IOException;
 import java.util.ArrayList;
 
-import javax.xml.parsers.ParserConfigurationException;
-
-import org.xml.sax.SAXException;
-
 import fr.free.totalboumboum.configuration.profile.ProfilesSelection;
-import fr.free.totalboumboum.game.match.Match;
-import fr.free.totalboumboum.game.match.MatchLoader;
-import fr.free.totalboumboum.game.tournament.single.SingleTournament;
 
 public class QuickMatchConfiguration
 {
@@ -41,7 +33,6 @@ public class QuickMatchConfiguration
 		ProfilesSelection profilesCopy = profilesSelection.copy();
 		result.setProfilesSelection(profilesCopy);
 		result.setUseLastPlayers(useLastPlayers);
-		result.setName(matchName);
 		LevelsSelection levelsCopy = levelsSelection.copy();
 		result.setLevelsSelection(levelsCopy);
 		result.setUseLastLevels(useLastLevels);
@@ -57,7 +48,6 @@ public class QuickMatchConfiguration
 	/////////////////////////////////////////////////////////////////
 	// QUICKMATCH		/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	private String matchName = null;
 	private boolean useLastPlayers = false;
 	private boolean useLastLevels = false;
 	private ProfilesSelection profilesSelection = new ProfilesSelection();
@@ -141,13 +131,6 @@ public class QuickMatchConfiguration
 	{	this.pointsDraw = pointsDraw;
 	}
 	
-	public String getName()
-	{	return matchName;	
-	}
-	public void setName(String matchName)
-	{	this.matchName = matchName;
-	}
-	
 	public ProfilesSelection getProfilesSelection()
 	{	return profilesSelection;	
 	}	
@@ -160,15 +143,5 @@ public class QuickMatchConfiguration
 	}	
 	public void setLevelsSelection(LevelsSelection selectedLevels)
 	{	this.levelsSelection = selectedLevels;	
-	}	
-
-	public SingleTournament loadQuickmatch() throws ParserConfigurationException, SAXException, IOException, ClassNotFoundException
-	{	// single tournament
-		SingleTournament result = new SingleTournament();
-		// load match
-		Match match = MatchLoader.loadMatchFromName(matchName,result);
-		result.setMatch(match);
-		// 
-		return result;
 	}	
 }
