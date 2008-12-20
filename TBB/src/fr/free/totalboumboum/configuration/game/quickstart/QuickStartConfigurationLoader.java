@@ -166,7 +166,7 @@ public class QuickStartConfigurationLoader
 	{	// name
 		Element roundElement = root.getChild(XmlTools.ELT_ROUND);
 		String quickStartName = roundElement.getAttribute(XmlTools.ATT_NAME).getValue().trim();
-		result.setQuickStartName(quickStartName);
+		result.setRoundName(quickStartName);
 		
 		// players
 		Element playersElement = root.getChild(XmlTools.ELT_PLAYERS);

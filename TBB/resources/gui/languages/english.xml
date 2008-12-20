@@ -285,11 +285,11 @@
 				<group name="Points">
 					<group name="Ranks">
 						<text name="Title" value="Rank" tooltip="Round rankings" />
-						<text name="Values" value="#" tooltip="#" />
+						<text name="Values" value="#" tooltip="Player ranked #" />
 					</group>
 					<group name="Draw">
 						<text name="Autokill" value="Mutual bombing" tooltip="Draw if the last players kill each other" />
-						<text name="Both" value="Both" tooltip="Draw if there's a mutual bombing or the time limit is reached" />
+						<text name="Both" value="Mutual bombing or time limit" tooltip="Draw if there's a mutual bombing or the time limit is reached" />
 						<text name="Time" value="Time limit" tooltip="Draw if the time limit is reached" />
 						<text name="Title" value="Draw" tooltip="Conditions for a draw (no points scored)" />
 					</group>
