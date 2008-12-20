@@ -38,12 +38,16 @@ import org.xml.sax.SAXException;
 import fr.free.totalboumboum.configuration.Configuration;
 import fr.free.totalboumboum.configuration.game.GameConfiguration;
 import fr.free.totalboumboum.configuration.game.GameConfigurationSaver;
+import fr.free.totalboumboum.configuration.game.quickstart.QuickStartConfiguration;
 import fr.free.totalboumboum.configuration.profile.Profile;
+import fr.free.totalboumboum.configuration.profile.ProfileLoader;
 import fr.free.totalboumboum.configuration.profile.ProfilesConfiguration;
 import fr.free.totalboumboum.configuration.profile.ProfilesSelection;
 import fr.free.totalboumboum.gui.common.structure.panel.SplitMenuPanel;
 import fr.free.totalboumboum.gui.common.structure.panel.menu.InnerMenuPanel;
 import fr.free.totalboumboum.gui.common.structure.panel.menu.MenuPanel;
+import fr.free.totalboumboum.gui.menus.options.game.quickstart.QuickstartData;
+import fr.free.totalboumboum.gui.menus.options.game.quickstart.QuickstartMenu;
 import fr.free.totalboumboum.gui.tools.GuiKeys;
 import fr.free.totalboumboum.gui.tools.GuiTools;
 
@@ -83,6 +87,49 @@ public class QuickmatchMenu extends InnerMenuPanel
 		// panels
 		quickstartPanel = new QuickmatchData(container);
 		container.setDataPart(quickstartPanel);
+		
+		// init configuration
+		initConfiguration();
+	}
+	
+	/////////////////////////////////////////////////////////////////
+	// CONFIGURATION	/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	public void initConfiguration()
+	{	QuickStartConfiguration conf = Configuration.getGameConfiguration().getQuickStartConfiguration();
+		quickstartPanel.setConfiguration(conf.copy());
+/*
+try
+		{	String roundFile = Configuration.getGameConfiguration().getQuickStartName();
+			quickstartPanel.setRound(roundFile);
+			ProfilesSelection profilesSelection = Configuration.getGameConfiguration().getQuickStartSelected();
+			ArrayList<Profile> profiles = ProfileLoader.loadProfiles(profilesSelection);
+			quickstartPanel.setSelectedProfiles(profiles);			
+		}
+		catch (IllegalArgumentException e1)
+		{	e1.printStackTrace();
+		}
+		catch (SecurityException e1)
+		{	e1.printStackTrace();
+		}
+		catch (ParserConfigurationException e1)
+		{	e1.printStackTrace();
+		}
+		catch (SAXException e1)
+		{	e1.printStackTrace();
+		}
+		catch (IOException e1)
+		{	e1.printStackTrace();
+		}
+		catch (IllegalAccessException e1)
+		{	e1.printStackTrace();
+		}
+		catch (NoSuchFieldException e1)
+		{	e1.printStackTrace();
+		}
+		catch (ClassNotFoundException e1)
+		{	e1.printStackTrace();
+		} */
 	}
 	
 	/////////////////////////////////////////////////////////////////
@@ -145,7 +192,7 @@ public class QuickmatchMenu extends InnerMenuPanel
 					if(save)
 					{	ProfilesSelection profilesSelection = ProfilesConfiguration.getSelection(sProfiles);
 						GameConfiguration gameConfiguration = Configuration.getGameConfiguration();
-						gameConfiguration.setQuickStartSelected(profilesSelection);
+						gameConfiguration.setProfilesSelection(profilesSelection);
 						GameConfigurationSaver.saveGameConfiguration(gameConfiguration);
 					}
 					

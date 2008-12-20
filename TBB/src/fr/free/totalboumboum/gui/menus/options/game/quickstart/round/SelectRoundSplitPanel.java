@@ -46,6 +46,9 @@ public class SelectRoundSplitPanel extends SplitMenuPanel
 		setMenuPart(new SelectRoundMenu(this,parent,roundFile));
 	}
 	
+	/////////////////////////////////////////////////////////////////
+	// PAINT						/////////////////////////////////
+	/////////////////////////////////////////////////////////////////
 	@Override
 	public void paintComponent(Graphics g)
 	{	g.drawImage(image, 0, 0, null);

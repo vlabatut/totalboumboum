@@ -24,9 +24,7 @@ package fr.free.totalboumboum.gui.menus.options.game.quickstart;
 import java.awt.BorderLayout;
 import java.awt.Graphics;
 import java.awt.image.BufferedImage;
-import java.util.ArrayList;
 
-import fr.free.totalboumboum.configuration.profile.Profile;
 import fr.free.totalboumboum.gui.common.structure.MenuContainer;
 import fr.free.totalboumboum.gui.common.structure.panel.SplitMenuPanel;
 import fr.free.totalboumboum.gui.common.structure.panel.menu.MenuPanel;
@@ -47,28 +45,6 @@ public class QuickstartSplitPanel extends SplitMenuPanel
 		// panels
 		QuickstartMenu menu = new QuickstartMenu(this,parent);
 		setMenuPart(menu);
-	}
-	
-	/////////////////////////////////////////////////////////////////
-	// ROUND			/////////////////////////////////////////////
-	/////////////////////////////////////////////////////////////////
-	public void setRound(String roundFolder)
-	{	((QuickstartMenu)menuPart).setRound(roundFolder);
-	}
-	
-	public String getSelectedRound()
-	{	return ((QuickstartMenu)menuPart).getSelectedRound();
-	}
-	
-	/////////////////////////////////////////////////////////////////
-	// PLAYERS						/////////////////////////////////
-	/////////////////////////////////////////////////////////////////
-	public void setSelectedProfiles(ArrayList<Profile> selectedProfiles)
-	{	((QuickstartMenu)menuPart).setSelectedProfiles(selectedProfiles);
-	}
-	
-	public ArrayList<Profile> getSelectedProfiles()
-	{	return ((QuickstartMenu)menuPart).getSelectedProfiles();	
 	}
 	
 	/////////////////////////////////////////////////////////////////

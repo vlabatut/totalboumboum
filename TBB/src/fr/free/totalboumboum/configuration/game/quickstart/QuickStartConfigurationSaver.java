@@ -52,7 +52,7 @@ public class QuickStartConfigurationSaver
 			
 		// name
 		Element roundElement = new Element(XmlTools.ELT_ROUND);
-		String quickStart = gameConfiguration.getRoundName();
+		String quickStart = gameConfiguration.getRoundName().toString();
 		roundElement.setAttribute(XmlTools.ATT_NAME,quickStart);
 		result.addContent(roundElement);
 		

@@ -809,6 +809,7 @@ public class Launcher
 	 * - nouveauté : définition d'un ensemble de paramètres pour le launcher
 	 * - nouveauté : mode plein écran
 	 * - nouveauté : écran de sélection des niveaux pour le quick match
+	 * - nouveauté : écran des options pour le quick match
 	 * 
 	 * *******************************************************
 	 * *********************** A FAIRE ***********************
@@ -900,5 +901,14 @@ public class Launcher
 	 *  	- temps limite
 	 *  	- ? s'inspirer des BM existants
 	 *  	- emplacement de départ aléatoire
+	 */
+	
+	/* TODO
+	 * 1) adaper les options
+	 * 
+	 * 2) compléter les options
+	 * 3) débugger le tournoi
+	 * 4) mutualiser les panels de jeu (réutilisés dans les frames
+	 * 5) panel différent pour singleTournament
 	 */
 }

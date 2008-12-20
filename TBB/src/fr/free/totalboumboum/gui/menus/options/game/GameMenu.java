@@ -23,24 +23,17 @@ package fr.free.totalboumboum.gui.menus.options.game;
 
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
-import java.io.IOException;
 import java.util.ArrayList;
 
 import javax.swing.Box;
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
-import javax.xml.parsers.ParserConfigurationException;
 
-import org.xml.sax.SAXException;
-
-import fr.free.totalboumboum.configuration.Configuration;
-import fr.free.totalboumboum.configuration.profile.Profile;
-import fr.free.totalboumboum.configuration.profile.ProfileLoader;
-import fr.free.totalboumboum.configuration.profile.ProfilesSelection;
 import fr.free.totalboumboum.gui.common.structure.panel.SplitMenuPanel;
 import fr.free.totalboumboum.gui.common.structure.panel.data.InnerDataPanel;
 import fr.free.totalboumboum.gui.common.structure.panel.menu.InnerMenuPanel;
 import fr.free.totalboumboum.gui.common.structure.panel.menu.MenuPanel;
+import fr.free.totalboumboum.gui.menus.options.game.quickmatch.QuickmatchSplitPanel;
 import fr.free.totalboumboum.gui.menus.options.game.quickstart.QuickstartSplitPanel;
 import fr.free.totalboumboum.gui.tools.GuiKeys;
 import fr.free.totalboumboum.gui.tools.GuiTools;
@@ -50,7 +43,9 @@ public class GameMenu extends InnerMenuPanel
 	
 	@SuppressWarnings("unused")
 	private JButton buttonQuickStart;
+	@SuppressWarnings("unused")
 	private JButton buttonQuickMatch;
+	@SuppressWarnings("unused")
 	private JButton buttonTournament;
 	
 	@SuppressWarnings("unused")
@@ -78,9 +73,7 @@ public class GameMenu extends InnerMenuPanel
 		add(Box.createVerticalGlue());
 		buttonQuickStart = GuiTools.createButton(GuiKeys.MENU_OPTIONS_GAME_BUTTON_QUICKSTART,buttonWidth,buttonHeight,fontSize,this);
 		buttonQuickMatch = GuiTools.createButton(GuiKeys.MENU_OPTIONS_GAME_BUTTON_QUICKMATCH,buttonWidth,buttonHeight,fontSize,this);
-buttonQuickMatch.setEnabled(false);
 		buttonTournament = GuiTools.createButton(GuiKeys.MENU_OPTIONS_GAME_BUTTON_TOURNAMENT,buttonWidth,buttonHeight,fontSize,this);
-buttonTournament.setEnabled(false);
 		add(Box.createRigidArea(new Dimension(0,GuiTools.buttonVerticalSpace)));
 		buttonBack = GuiTools.createButton(GuiKeys.MENU_OPTIONS_BUTTON_BACK,buttonWidth,buttonHeight,fontSize,this);
 		add(Box.createVerticalGlue());		
@@ -88,59 +81,29 @@ buttonTournament.setEnabled(false);
 		// panels
 		optionsData = new GameData(container);
 		container.setDataPart(optionsData);
-}
+	}
 	
 	public void actionPerformed(ActionEvent e)
 	{	if(e.getActionCommand().equals(GuiKeys.MENU_OPTIONS_GAME_BUTTON_QUICKSTART))
-		{	try
-			{	ProfilesSelection profilesSelection = Configuration.getGameConfiguration().getQuickStartSelected();
-				QuickstartSplitPanel quickstartPanel = new QuickstartSplitPanel(container.getContainer(),container);
-				String roundFile = Configuration.getGameConfiguration().getQuickStartName();
-				quickstartPanel.setRound(roundFile);
-				ArrayList<Profile> profiles = ProfileLoader.loadProfiles(profilesSelection);
-				quickstartPanel.setSelectedProfiles(profiles);
-				replaceWith(quickstartPanel);
-			}
-			catch (IllegalArgumentException e1)
-			{	e1.printStackTrace();
-			}
-			catch (SecurityException e1)
-			{	e1.printStackTrace();
-			}
-			catch (ParserConfigurationException e1)
-			{	e1.printStackTrace();
-			}
-			catch (SAXException e1)
-			{	e1.printStackTrace();
-			}
-			catch (IOException e1)
-			{	e1.printStackTrace();
-			}
-			catch (IllegalAccessException e1)
-			{	e1.printStackTrace();
-			}
-			catch (NoSuchFieldException e1)
-			{	e1.printStackTrace();
-			}
-			catch (ClassNotFoundException e1)
-			{	e1.printStackTrace();
-			}
+		{	QuickstartSplitPanel quickstartPanel = new QuickstartSplitPanel(container.getContainer(),container);
+			replaceWith(quickstartPanel);
 		}
-	else if(e.getActionCommand().equals(GuiKeys.MENU_OPTIONS_GAME_BUTTON_QUICKMATCH))
-		{	
-//			VideoSplitPanel videoPanel = new VideoSplitPanel(container.getContainer(),container);
-//			replaceWith(videoPanel);
+		else if(e.getActionCommand().equals(GuiKeys.MENU_OPTIONS_GAME_BUTTON_QUICKMATCH))
+		{	QuickmatchSplitPanel quickmatchPanel = new QuickmatchSplitPanel(container.getContainer(),container);
+			replaceWith(quickmatchPanel);
 		}
 		else if(e.getActionCommand().equals(GuiKeys.MENU_OPTIONS_GAME_BUTTON_TOURNAMENT))
-		{	
-//			VideoSplitPanel videoPanel = new VideoSplitPanel(container.getContainer(),container);
-//			replaceWith(videoPanel);
+		{	//QuickstartSplitPanel quickstartPanel = new QuickstartSplitPanel(container.getContainer(),container);
+			//replaceWith(quickstartPanel);
 	    }
 		else if(e.getActionCommand().equals(GuiKeys.MENU_OPTIONS_BUTTON_BACK))
 		{	replaceWith(parent);
-	    }
+		}
 	} 
 	
+	/////////////////////////////////////////////////////////////////
+	// PAINT						/////////////////////////////////
+	/////////////////////////////////////////////////////////////////
 	public void refresh()
 	{	//
 	}

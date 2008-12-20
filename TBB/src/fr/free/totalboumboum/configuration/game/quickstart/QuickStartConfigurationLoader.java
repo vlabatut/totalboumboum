@@ -51,11 +51,11 @@ public class QuickStartConfigurationLoader
 	{	// name
 		Element roundElement = root.getChild(XmlTools.ELT_ROUND);
 		String quickStartName = roundElement.getAttribute(XmlTools.ATT_NAME).getValue().trim();
-		result.setRoundName(quickStartName);
+		result.setRoundName(new StringBuffer(quickStartName));
 		
 		// players
 		Element playersElement = root.getChild(XmlTools.ELT_PLAYERS);
 		ProfilesSelection quickStartSelected = ProfilesSelectionLoader.loadProfilesSelection(playersElement);
-		result.setQuickStartSelected(quickStartSelected);
+		result.setProfilesSelection(quickStartSelected);
 	}
 }
