@@ -38,55 +38,19 @@ import fr.free.totalboumboum.tools.XmlTools;
 
 public class QuickMatchConfigurationSaver
 {	
-	public static void saveGameConfiguration(QuickMatchConfiguration gameConfiguration) throws ParserConfigurationException, SAXException, IOException
+	public static void saveQuickMatchConfiguration(QuickMatchConfiguration gameConfiguration) throws ParserConfigurationException, SAXException, IOException
 	{	// build document
-		Element root = saveGameElement(gameConfiguration);	
+		Element root = saveGameQuickMatchElement(gameConfiguration);	
 		// save file
-		String engineFile = FileTools.getConfigurationPath()+File.separator+FileTools.FILE_GAME+FileTools.EXTENSION_DATA;
+		String engineFile = FileTools.getConfigurationPath()+File.separator+FileTools.FILE_GAME_QUICKMATCH+FileTools.EXTENSION_DATA;
 		File dataFile = new File(engineFile);
 		String schemaFolder = FileTools.getSchemasPath();
-		File schemaFile = new File(schemaFolder+File.separator+FileTools.FILE_GAME+FileTools.EXTENSION_SCHEMA);
+		File schemaFile = new File(schemaFolder+File.separator+FileTools.FILE_GAME_QUICKMATCH+FileTools.EXTENSION_SCHEMA);
 		XmlTools.makeFileFromRoot(dataFile,schemaFile,root);
 	}
 
-	private static Element saveGameElement(QuickMatchConfiguration gameConfiguration)
-	{	Element result = new Element(XmlTools.ELT_GAME); 
-		
-		// tournament
-		Element tournamentElement = saveTournamentElement(gameConfiguration);
-		result.addContent(tournamentElement);
-		
-		// quick match
-		Element matchElement = saveQuickMatchElement(gameConfiguration);
-		result.addContent(matchElement);
-		
-		// quick start round
-		Element roundElement = saveQuickStartElement(gameConfiguration);
-		result.addContent(roundElement);
-
-		return result;
-	}
-	
-	private static Element saveTournamentElement(QuickMatchConfiguration gameConfiguration)
-	{	Element result = new Element(XmlTools.ELT_TOURNAMENT);
-		
-		// players
-		Element playersElement = new Element(XmlTools.ELT_PLAYERS);
-		ProfilesSelection tournamentSelected = gameConfiguration.getTournamentSelected();
-		ProfilesSelectionSaver.saveProfilesSelection(playersElement,tournamentSelected);
-		result.addContent(playersElement);
-		
-		return result;
-	}
-
-	private static Element saveQuickMatchElement(QuickMatchConfiguration gameConfiguration)
-	{	Element result = new Element(XmlTools.ELT_QUICKMATCH);
-		
-		// name
-		Element matchElement = new Element(XmlTools.ELT_MATCH);
-		String quickMatch = gameConfiguration.getQuickMatchName();
-		matchElement.setAttribute(XmlTools.ATT_NAME,quickMatch);
-		result.addContent(matchElement);
+	private static Element saveGameQuickMatchElement(QuickMatchConfiguration gameConfiguration)
+	{	Element result = new Element(XmlTools.ELT_GAME_QUICKMATCH); 
 		
 		// settings
 		Element optionssElement = saveQuickMatchOptionsElement(gameConfiguration);
@@ -98,7 +62,7 @@ public class QuickMatchConfigurationSaver
 
 		// players
 		Element playersElement = new Element(XmlTools.ELT_PLAYERS);
-		ProfilesSelection quickMatchSelected = gameConfiguration.getQuickMatchSelectedProfiles();
+		ProfilesSelection quickMatchSelected = gameConfiguration.getProfilesSelection();
 		ProfilesSelectionSaver.saveProfilesSelection(playersElement,quickMatchSelected);
 		result.addContent(playersElement);
 
@@ -108,12 +72,12 @@ public class QuickMatchConfigurationSaver
 	private static Element saveQuickMatchOptionsElement(QuickMatchConfiguration gameConfiguration)
 	{	Element result = new Element(XmlTools.ELT_OPTIONS);
 		
-	// use last players
-		String useLastPlayers = Boolean.toString(gameConfiguration.getQuickMatchUseLastPlayers());
+		// use last players
+		String useLastPlayers = Boolean.toString(gameConfiguration.getUseLastPlayers());
 		result.setAttribute(XmlTools.ATT_USE_LAST_PLAYERS,useLastPlayers);
 
 		// use last levels
-		String useLastLevels = Boolean.toString(gameConfiguration.getQuickMatchUseLastLevels());
+		String useLastLevels = Boolean.toString(gameConfiguration.getUseLastLevels());
 		result.setAttribute(XmlTools.ATT_USE_LAST_LEVELS,useLastLevels);
 		
 		return result;
@@ -125,22 +89,22 @@ public class QuickMatchConfigurationSaver
 		// levels
 		{	Element levelsElement = new Element(XmlTools.ELT_LEVELS);	
 			// random order
-			String randomOrder = Boolean.toString(gameConfiguration.getQuickMatchLevelsRandomOrder());
+			String randomOrder = Boolean.toString(gameConfiguration.getLevelsRandomOrder());
 			levelsElement.setAttribute(XmlTools.ATT_RANDOM_ORDER,randomOrder);
 		}
 		// players
 		{	Element playersElement = new Element(XmlTools.ELT_PLAYERS);
 			// random location
-			String randomLocation = Boolean.toString(gameConfiguration.getQuickMatchPlayersRandomLocation());
+			String randomLocation = Boolean.toString(gameConfiguration.getPlayersRandomLocation());
 			playersElement.setAttribute(XmlTools.ATT_RANDOM_LOCATION,randomLocation);
 		}
 		// limits
 		{	Element limitsElement = new Element(XmlTools.ELT_LIMITS);
 			// limit points
-			String points = Integer.toString(gameConfiguration.getQuickMatchLimitPoints());
+			String points = Integer.toString(gameConfiguration.getLimitPoints());
 			limitsElement.setAttribute(XmlTools.ATT_POINTS,points);
 			// limit rounds
-			String rounds = Integer.toString(gameConfiguration.getQuickMatchLimitRounds());
+			String rounds = Integer.toString(gameConfiguration.getLimitRounds());
 			limitsElement.setAttribute(XmlTools.ATT_ROUNDS,rounds);
 			// limit time
 			String time = Integer.toString(gameConfiguration.getLimitTime());
@@ -149,13 +113,13 @@ public class QuickMatchConfigurationSaver
 		// points
 		{	Element pointsElement = new Element(XmlTools.ELT_POINTS);
 			// share
-			String share = Boolean.toString(gameConfiguration.getQuickMatchPointsShare());
+			String share = Boolean.toString(gameConfiguration.getPointsShare());
 			pointsElement.setAttribute(XmlTools.ATT_SHARE,share);
 			// draw
-			String draw = gameConfiguration.getQuickMatchPointsDraw().toString().toLowerCase(Locale.ENGLISH);
+			String draw = gameConfiguration.getPointsDraw().toString().toLowerCase(Locale.ENGLISH);
 			pointsElement.setAttribute(XmlTools.ATT_DRAW,draw);
 			// values
-			ArrayList<Integer> values = gameConfiguration.getQuickMatchPoints();
+			ArrayList<Integer> values = gameConfiguration.getPoints();
 			for(int r=0;r<values.size();r++)
 			{	Element valueElement = new Element(XmlTools.ELT_VALUE);
 				// limit rounds
@@ -167,24 +131,6 @@ public class QuickMatchConfigurationSaver
 			}
 		}
 
-		return result;
-	}
-	
-	private static Element saveQuickStartElement(QuickMatchConfiguration gameConfiguration)
-	{	Element result = new Element(XmlTools.ELT_QUICKSTART);
-	
-		// name
-		Element roundElement = new Element(XmlTools.ELT_ROUND);
-		String quickStart = gameConfiguration.getRoundName();
-		roundElement.setAttribute(XmlTools.ATT_NAME,quickStart);
-		result.addContent(roundElement);
-		
-		// players
-		Element playersElement = new Element(XmlTools.ELT_PLAYERS);
-		ProfilesSelection quickStartSelected = gameConfiguration.getProfilesSelection();
-		ProfilesSelectionSaver.saveProfilesSelection(playersElement,quickStartSelected);
-		result.addContent(playersElement);
-		
 		return result;
 	}
 }

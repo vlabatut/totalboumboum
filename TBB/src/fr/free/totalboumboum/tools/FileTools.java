@@ -53,6 +53,9 @@ public class FileTools
 	public static final String FILE_FIRESETS = "firesets";
 	public static final String FILE_FLOOR = "floor";
 	public static final String FILE_GAME = "game";
+	public static final String FILE_GAME_QUICKMATCH = "gameQuickmatch";
+	public static final String FILE_GAME_QUICKSTART = "gameQuickstart";
+	public static final String FILE_GAME_TOURNAMENT = "gameTournament";
 	public static final String FILE_GESTUREPERMISSIONS = "gesturepermissions";
 	public static final String FILE_HERO = "hero";
 	public static final String FILE_ITEM = "item";

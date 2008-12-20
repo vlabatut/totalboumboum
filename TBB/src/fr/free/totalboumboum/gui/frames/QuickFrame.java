@@ -30,6 +30,7 @@ import org.xml.sax.SAXException;
 
 import fr.free.totalboumboum.configuration.Configuration;
 import fr.free.totalboumboum.configuration.GameConstants;
+import fr.free.totalboumboum.configuration.game.quickstart.QuickStartConfiguration;
 import fr.free.totalboumboum.configuration.profile.Profile;
 import fr.free.totalboumboum.configuration.profile.ProfileLoader;
 import fr.free.totalboumboum.configuration.profile.ProfilesSelection;
@@ -63,6 +64,8 @@ public class QuickFrame extends MainFrame implements ActionListener, LoopRenderP
 	private JProgressBar loadProgressBar;
 	private Canvas canvas;
 	
+	private AbstractTournament tournament;
+	
 	public QuickFrame() throws IllegalArgumentException, SecurityException, ParserConfigurationException, SAXException, IOException, IllegalAccessException, NoSuchFieldException, ClassNotFoundException
 	{	// init
 		super("TBB v."+GameConstants.VERSION+" (Quicklaunch)");
@@ -91,10 +94,10 @@ public class QuickFrame extends MainFrame implements ActionListener, LoopRenderP
 		getContentPane().add(loadProgressBar);
 		
 		// tournament
-	    Configuration.getGameConfiguration().loadQuickstart();
-		AbstractTournament tournament = Configuration.getGameConfiguration().getTournament();
+		QuickStartConfiguration quickStartConfiguration = Configuration.getGameConfiguration().getQuickStartConfiguration(); 
+		tournament = quickStartConfiguration.loadQuickstart();
 		ArrayList<Profile> selectedProfiles = new ArrayList<Profile>();
-		ProfilesSelection profilesSelection = Configuration.getGameConfiguration().getQuickStartSelected();
+		ProfilesSelection profilesSelection = quickStartConfiguration.getProfilesSelection();
 		selectedProfiles = ProfileLoader.loadProfiles(profilesSelection);
 		tournament.setProfiles(selectedProfiles);
 		tournament.init();
@@ -116,8 +119,7 @@ public class QuickFrame extends MainFrame implements ActionListener, LoopRenderP
 	// GAME				/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	public void begin() throws IllegalArgumentException, SecurityException, ParserConfigurationException, SAXException, IOException, ClassNotFoundException, IllegalAccessException, NoSuchFieldException
-	{	AbstractTournament tournament = Configuration.getGameConfiguration().getTournament();
-		Match match = tournament.getCurrentMatch();
+	{	Match match = tournament.getCurrentMatch();
 	    Round round = match.getCurrentRound();
 	    round.progress();
 	}
@@ -170,7 +172,7 @@ public class QuickFrame extends MainFrame implements ActionListener, LoopRenderP
 				break;
 			// players
 			default:
-				Round round = Configuration.getGameConfiguration().getTournament().getCurrentMatch().getCurrentRound();
+				Round round = tournament.getCurrentMatch().getCurrentRound();
 				if(val==round.getProfiles().size()+2)
 				{	// progress bar
 					loadProgressBar.repaint();

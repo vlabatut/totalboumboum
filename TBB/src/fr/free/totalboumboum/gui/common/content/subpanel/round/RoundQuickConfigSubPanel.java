@@ -28,7 +28,7 @@ import java.util.ArrayList;
 import javax.swing.JLabel;
 
 import fr.free.totalboumboum.configuration.GameConstants;
-import fr.free.totalboumboum.configuration.game.GameConfiguration;
+import fr.free.totalboumboum.configuration.game.quickmatch.QuickMatchConfiguration;
 import fr.free.totalboumboum.configuration.game.quickmatch.QuickMatchDraw;
 import fr.free.totalboumboum.gui.common.structure.subpanel.Line;
 import fr.free.totalboumboum.gui.common.structure.subpanel.UntitledSubPanelLines;
@@ -42,7 +42,7 @@ public class RoundQuickConfigSubPanel extends UntitledSubPanelLines implements M
 	
 	public RoundQuickConfigSubPanel(int width, int height)
 	{	super(width,height,LINE_COUNT,false);
-		setGameConfiguration(null);
+		setQuickMatchConfiguration(null);
 	}
 		
 	/////////////////////////////////////////////////////////////////
@@ -62,14 +62,14 @@ public class RoundQuickConfigSubPanel extends UntitledSubPanelLines implements M
 	private static final int LINE_POINTS_SHARE = 5;
 	private static final int LINE_POINTS_DRAW = 6;
 
-	private GameConfiguration gameConfiguration;
+	private QuickMatchConfiguration quickMatchConfiguration;
 
-	public GameConfiguration getGameConfiguration()
-	{	return gameConfiguration;	
+	public QuickMatchConfiguration getQuickMatchConfiguration()
+	{	return quickMatchConfiguration;	
 	}
 	
-	public void setGameConfiguration(GameConfiguration gameConfiguration)
-	{	this.gameConfiguration = gameConfiguration;
+	public void setQuickMatchConfiguration(QuickMatchConfiguration quickMatchConfiguration)
+	{	this.quickMatchConfiguration = quickMatchConfiguration;
 		
 		// sizes
 		int nameWidth = (int)(width*0.33);
@@ -79,7 +79,7 @@ public class RoundQuickConfigSubPanel extends UntitledSubPanelLines implements M
 		for(int i=0;i<LINE_COUNT;i++)
 			addLine(0);
 
-		if(gameConfiguration!=null)
+		if(quickMatchConfiguration!=null)
 		{	
 			
 			// levels order
@@ -311,7 +311,7 @@ public class RoundQuickConfigSubPanel extends UntitledSubPanelLines implements M
 	}
 	
 	private void setLevelsOrder()
-	{	boolean order = gameConfiguration.getQuickMatchLevelsRandomOrder();
+	{	boolean order = quickMatchConfiguration.getLevelsRandomOrder();
 		String key;
 		if(order)
 			key = GuiKeys.MENU_QUICKMATCH_SETTINGS_LEVELS_ORDER_RANDOM;
@@ -321,7 +321,7 @@ public class RoundQuickConfigSubPanel extends UntitledSubPanelLines implements M
 	}
 	
 	private void setPlayersLocation()
-	{	boolean location = gameConfiguration.getQuickMatchPlayersRandomLocation();
+	{	boolean location = quickMatchConfiguration.getPlayersRandomLocation();
 		String key;
 		if(location)
 			key = GuiKeys.MENU_QUICKMATCH_SETTINGS_PLAYERS_LOCATION_RANDOM;
@@ -331,7 +331,7 @@ public class RoundQuickConfigSubPanel extends UntitledSubPanelLines implements M
 	}
 	
 	private void setTimeLimit()
-	{	int time = gameConfiguration.getQuickMatchLimitTime();
+	{	int time = quickMatchConfiguration.getLimitTime();
 		String text;
 		if(time<=0)
 			text = new Character('\u221E').toString();
@@ -342,7 +342,7 @@ public class RoundQuickConfigSubPanel extends UntitledSubPanelLines implements M
 	}
 	
 	private void setPointsValue(int index)
-	{	ArrayList<Integer> points = gameConfiguration.getQuickMatchPoints();
+	{	ArrayList<Integer> points = quickMatchConfiguration.getPoints();
 		int i = 1+(index*3)+1;
 		String text = Integer.toString(points.get(index));
 		String tooltip = text;
@@ -350,7 +350,7 @@ public class RoundQuickConfigSubPanel extends UntitledSubPanelLines implements M
 	}
 	
 	private void setPointsShare()
-	{	boolean share = gameConfiguration.getQuickMatchPointsShare();
+	{	boolean share = quickMatchConfiguration.getPointsShare();
 		String key;
 		if(share)
 			key = GuiKeys.MENU_QUICKMATCH_SETTINGS_POINTS_SHARE_VAR;
@@ -360,7 +360,7 @@ public class RoundQuickConfigSubPanel extends UntitledSubPanelLines implements M
 	}
 	
 	private void setPointsDraw()
-	{	QuickMatchDraw draw = gameConfiguration.getQuickMatchPointsDraw();
+	{	QuickMatchDraw draw = quickMatchConfiguration.getPointsDraw();
 		String key;
 		if(draw==QuickMatchDraw.AUTOKILL)
 			key = GuiKeys.MENU_QUICKMATCH_SETTINGS_POINTS_DRAW_AUTOKILL;
@@ -397,19 +397,19 @@ public class RoundQuickConfigSubPanel extends UntitledSubPanelLines implements M
 		switch(pos[0])
 		{	// levels order
 			case LINE_LEVELS_ORDER:
-				boolean levelsOrder = !gameConfiguration.getQuickMatchLevelsRandomOrder();
-				gameConfiguration.setQuickMatchLevelsRandomOrder(levelsOrder);
+				boolean levelsOrder = !quickMatchConfiguration.getLevelsRandomOrder();
+				quickMatchConfiguration.setLevelsRandomOrder(levelsOrder);
 				setLevelsOrder();
 				break;
 			// players location
 			case LINE_PLAYERS_LOCATION:
-				boolean playersLocation = !gameConfiguration.getQuickMatchPlayersRandomLocation();
-				gameConfiguration.setQuickMatchPlayersRandomLocation(playersLocation);
+				boolean playersLocation = !quickMatchConfiguration.getPlayersRandomLocation();
+				quickMatchConfiguration.setPlayersRandomLocation(playersLocation);
 				setPlayersLocation();
 				break;
 			// time limit
 			case LINE_TIME_LIMIT:
-				int limitTime = gameConfiguration.getQuickMatchLimitTime();
+				int limitTime = quickMatchConfiguration.getLimitTime();
 				// minus
 				if(pos[1]==1)
 				{	if(limitTime>0)
@@ -421,7 +421,7 @@ public class RoundQuickConfigSubPanel extends UntitledSubPanelLines implements M
 						limitTime = limitTime + TIME_DELTA;
 				}
 				// common
-				gameConfiguration.setQuickMatchLimitTime(limitTime);
+				quickMatchConfiguration.setLimitTime(limitTime);
 				setTimeLimit();
 				break;
 			// time limit
@@ -429,7 +429,7 @@ public class RoundQuickConfigSubPanel extends UntitledSubPanelLines implements M
 				int index = (pos[1]-1)/3;
 				int minus = 1+(index*3);
 				//int plus = 1+(index*3)+1;
-				int pointsValues = gameConfiguration.getQuickMatchPoints().get(index);
+				int pointsValues = quickMatchConfiguration.getPoints().get(index);
 				// minus
 				if(pos[1]==minus)
 				{	if(pointsValues>0)
@@ -441,20 +441,20 @@ public class RoundQuickConfigSubPanel extends UntitledSubPanelLines implements M
 						pointsValues = pointsValues + POINTS_DELTA;
 				}
 				// common
-				gameConfiguration.getQuickMatchPoints().set(index,pointsValues);
+				quickMatchConfiguration.getPoints().set(index,pointsValues);
 				setPointsValue(index);
 				break;
 			// points share
 			case LINE_POINTS_SHARE:
-				boolean pointsShare = !gameConfiguration.getQuickMatchPointsShare();
-				gameConfiguration.setQuickMatchPointsShare(pointsShare);
+				boolean pointsShare = !quickMatchConfiguration.getPointsShare();
+				quickMatchConfiguration.setPointsShare(pointsShare);
 				setPointsShare();
 				break;			
 			// points share
 			case LINE_POINTS_DRAW:
-				QuickMatchDraw pointsDraw = gameConfiguration.getQuickMatchPointsDraw();
+				QuickMatchDraw pointsDraw = quickMatchConfiguration.getPointsDraw();
 				pointsDraw = QuickMatchDraw.getNext(pointsDraw);
-				gameConfiguration.setQuickMatchPointsDraw(pointsDraw);
+				quickMatchConfiguration.setPointsDraw(pointsDraw);
 				setPointsDraw();
 				break;
 		}

@@ -26,7 +26,7 @@ import java.awt.event.MouseListener;
 
 import javax.swing.JLabel;
 
-import fr.free.totalboumboum.configuration.game.GameConfiguration;
+import fr.free.totalboumboum.configuration.game.quickmatch.QuickMatchConfiguration;
 import fr.free.totalboumboum.gui.common.structure.subpanel.Line;
 import fr.free.totalboumboum.gui.common.structure.subpanel.UntitledSubPanelLines;
 import fr.free.totalboumboum.gui.tools.GuiKeys;
@@ -37,7 +37,7 @@ public class MatchQuickConfigSubPanel extends UntitledSubPanelLines implements M
 	
 	public MatchQuickConfigSubPanel(int width, int height)
 	{	super(width,height,LINE_COUNT,false);
-		setGameConfiguration(null);
+		setQuickMatchConfiguration(null);
 	}
 		
 	/////////////////////////////////////////////////////////////////
@@ -51,14 +51,14 @@ public class MatchQuickConfigSubPanel extends UntitledSubPanelLines implements M
 	private static final int LINE_LIMIT_POINTS = 0;
 	private static final int LINE_LIMIT_ROUNDS = 1;
 
-	private GameConfiguration gameConfiguration;
+	private QuickMatchConfiguration quickMatchConfiguration;
 
-	public GameConfiguration getGameConfiguration()
-	{	return gameConfiguration;	
+	public QuickMatchConfiguration getQuickMatchConfiguration()
+	{	return quickMatchConfiguration;	
 	}
 	
-	public void setGameConfiguration(GameConfiguration gameConfiguration)
-	{	this.gameConfiguration = gameConfiguration;
+	public void setQuickMatchConfiguration(QuickMatchConfiguration quickMatchConfiguration)
+	{	this.quickMatchConfiguration = quickMatchConfiguration;
 		
 		// sizes
 		int nameWidth = (int)(width*0.66);
@@ -66,7 +66,7 @@ public class MatchQuickConfigSubPanel extends UntitledSubPanelLines implements M
 		for(int i=0;i<LINE_COUNT;i++)
 			addLine(0);
 
-		if(gameConfiguration!=null)
+		if(quickMatchConfiguration!=null)
 		{				
 			// points limit
 			{	Line ln = getLine(LINE_LIMIT_POINTS);
@@ -169,7 +169,7 @@ public class MatchQuickConfigSubPanel extends UntitledSubPanelLines implements M
 	}
 	
 	private void setPointsLimit()
-	{	int limit = gameConfiguration.getQuickMatchLimitPoints();
+	{	int limit = quickMatchConfiguration.getLimitPoints();
 		String text;
 		if(limit<=0)
 			text = new Character('\u221E').toString();
@@ -180,7 +180,7 @@ public class MatchQuickConfigSubPanel extends UntitledSubPanelLines implements M
 	}
 		
 	private void setRoundsLimit()
-	{	int limit = gameConfiguration.getQuickMatchLimitRounds();
+	{	int limit = quickMatchConfiguration.getLimitRounds();
 		String text;
 		if(limit<=0)
 			text = new Character('\u221E').toString();
@@ -216,7 +216,7 @@ public class MatchQuickConfigSubPanel extends UntitledSubPanelLines implements M
 		switch(pos[0])
 		{	// points limit
 			case LINE_LIMIT_POINTS:
-				int limitPoints = gameConfiguration.getQuickMatchLimitPoints();
+				int limitPoints = quickMatchConfiguration.getLimitPoints();
 				// minus
 				if(pos[1]==1)
 				{	if(limitPoints>0)
@@ -228,12 +228,12 @@ public class MatchQuickConfigSubPanel extends UntitledSubPanelLines implements M
 						limitPoints = limitPoints + POINTS_DELTA;
 				}
 				// common
-				gameConfiguration.setQuickMatchLimitPoints(limitPoints);
+				quickMatchConfiguration.setLimitPoints(limitPoints);
 				setPointsLimit();
 				break;
 				// points limit
 			case LINE_LIMIT_ROUNDS:
-				int limitRounds = gameConfiguration.getQuickMatchLimitRounds();
+				int limitRounds = quickMatchConfiguration.getLimitRounds();
 				// minus
 				if(pos[1]==1)
 				{	if(limitRounds>0)
@@ -245,7 +245,7 @@ public class MatchQuickConfigSubPanel extends UntitledSubPanelLines implements M
 						limitPoints = limitRounds + ROUNDS_DELTA;
 				}
 				// common
-				gameConfiguration.setQuickMatchLimitRounds(limitRounds);
+				quickMatchConfiguration.setLimitRounds(limitRounds);
 				setRoundsLimit();
 				break;
 		}
