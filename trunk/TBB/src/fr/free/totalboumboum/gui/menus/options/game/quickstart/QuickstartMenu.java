@@ -26,7 +26,6 @@ import java.awt.Graphics;
 import java.awt.event.ActionEvent;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Iterator;
 
 import javax.swing.Box;
 import javax.swing.BoxLayout;
@@ -36,11 +35,8 @@ import javax.xml.parsers.ParserConfigurationException;
 import org.xml.sax.SAXException;
 
 import fr.free.totalboumboum.configuration.Configuration;
-import fr.free.totalboumboum.configuration.game.GameConfiguration;
-import fr.free.totalboumboum.configuration.game.GameConfigurationSaver;
-import fr.free.totalboumboum.configuration.profile.Profile;
-import fr.free.totalboumboum.configuration.profile.ProfilesConfiguration;
-import fr.free.totalboumboum.configuration.profile.ProfilesSelection;
+import fr.free.totalboumboum.configuration.game.quickstart.QuickStartConfiguration;
+import fr.free.totalboumboum.configuration.game.quickstart.QuickStartConfigurationSaver;
 import fr.free.totalboumboum.gui.common.structure.panel.SplitMenuPanel;
 import fr.free.totalboumboum.gui.common.structure.panel.menu.InnerMenuPanel;
 import fr.free.totalboumboum.gui.common.structure.panel.menu.MenuPanel;
@@ -83,88 +79,45 @@ public class QuickstartMenu extends InnerMenuPanel
 		// panels
 		quickstartPanel = new QuickstartData(container);
 		container.setDataPart(quickstartPanel);
+		initConfiguration();
 	}
 	
 	/////////////////////////////////////////////////////////////////
-	// PLAYERS						/////////////////////////////////
+	// CONFIGURATION	/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	private ArrayList<Profile> players;
+	private QuickStartConfiguration quickStartConfiguration;
+	
+	public void initConfiguration()
+	{	quickStartConfiguration = Configuration.getGameConfiguration().getQuickStartConfiguration();
+		quickstartPanel.setQuickStartConfiguration(quickStartConfiguration.copy());
+	}
 
-	public void setSelectedProfiles(ArrayList<Profile> selectedProfiles)
-	{	players = selectedProfiles;
-		ArrayList<Profile> selectedProfilesCopy = new ArrayList<Profile>();
-		for(Profile p: selectedProfiles)
-			selectedProfilesCopy.add(p.copy());		
-		quickstartPanel.setSelectedProfiles(selectedProfilesCopy);
-	}
-	
-	public ArrayList<Profile> getSelectedProfiles()
-	{	return players;	
-	}
-	
-	/////////////////////////////////////////////////////////////////
-	// ROUND			/////////////////////////////////////////////
-	/////////////////////////////////////////////////////////////////
-	private String roundFile;
-	
-	public void setRound(String roundFolder)
-	{	roundFile = roundFolder;
-		quickstartPanel.setRound(roundFolder);
-	}
-	
-	public String getSelectedRound()
-	{	return roundFile.toString();	
-	}
-	
 	/////////////////////////////////////////////////////////////////
 	// ACTION LISTENER				/////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	public void actionPerformed(ActionEvent e)
 	{	if(e.getActionCommand().equals(GuiKeys.MENU_OPTIONS_BUTTON_CONFIRM))
-		{	ArrayList<Profile> sProfiles = quickstartPanel.getSelectedProfiles();
-			String sRound = quickstartPanel.getSelectedRound();
-			try
-			{	// round name
-				if(!sRound.equalsIgnoreCase(roundFile))
-				{	GameConfiguration gameConfiguration = Configuration.getGameConfiguration();
-					gameConfiguration.setQuickStartName(sRound);
-					GameConfigurationSaver.saveGameConfiguration(gameConfiguration);
+		{	QuickStartConfiguration copyConfiguration = quickstartPanel.getQuickStartConfiguration();
+			if(!quickStartConfiguration.equals(copyConfiguration))
+			{	Configuration.getGameConfiguration().setQuickStartConfiguration(copyConfiguration);
+				try
+				{	QuickStartConfigurationSaver.saveQuickStartConfiguration(copyConfiguration);
 				}
-				// selected profiles
-				{	boolean save = false;
-					Iterator<Profile> it1 = players.iterator();
-					Iterator<Profile> it2 = sProfiles.iterator();
-					while(!save && it1.hasNext() && it2.hasNext())
-					{	Profile p1 = it1.next();
-						Profile p2 = it2.next();
-						if(!p1.isTheSame(p2))
-							save = true;
-					}
-					if(it1.hasNext() || it2.hasNext())
-						save = true;
-					if(save)
-					{	ProfilesSelection profilesSelection = ProfilesConfiguration.getSelection(sProfiles);
-						GameConfiguration gameConfiguration = Configuration.getGameConfiguration();
-						gameConfiguration.setQuickStartSelected(profilesSelection);
-						GameConfigurationSaver.saveGameConfiguration(gameConfiguration);
-					}
-					
+				catch (IllegalArgumentException e1)
+				{	e1.printStackTrace();
 				}
-			}
-			catch (IllegalArgumentException e1)
-			{	e1.printStackTrace();
-			}
-			catch (SecurityException e1)
-			{	e1.printStackTrace();
-			}
-			catch (ParserConfigurationException e1)
-			{	e1.printStackTrace();
-			}
-			catch (SAXException e1)
-			{	e1.printStackTrace();
-			}
-			catch (IOException e1)
-			{	e1.printStackTrace();
+				catch (SecurityException e1)
+				{	e1.printStackTrace();
+				}
+				catch (ParserConfigurationException e1)
+				{	e1.printStackTrace();
+				}
+				catch (SAXException e1)
+				{	e1.printStackTrace();
+				}
+				catch (IOException e1)
+				{	e1.printStackTrace();
+				}
 			}
 			replaceWith(parent);
 	    }

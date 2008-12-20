@@ -47,9 +47,25 @@ public class QuickStartConfiguration
 
 		// quickstart
 		ProfilesSelection quickstartCopy = profilesSelection.copy();
-		result.setQuickStartSelected(quickstartCopy);
+		result.setProfilesSelection(quickstartCopy);
 		result.setRoundName(roundName);
 
+		return result;
+	}
+	
+	public boolean hasChanged(QuickStartConfiguration copy)
+	{	boolean result = false;
+		// round
+		if(!result)
+		{	StringBuffer copyRound = copy.getRoundName();
+			result = !roundName.equals(copyRound);
+		}
+		// profiles selection
+		if(!result)
+		{	ProfilesSelection copyProfiles = copy.getProfilesSelection();
+			result = !profilesSelection.equals(copyProfiles);
+		}
+		//
 		return result;
 	}
 	
@@ -57,19 +73,19 @@ public class QuickStartConfiguration
 	// QUICKSTART		/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	private ProfilesSelection profilesSelection = new ProfilesSelection();
-	private String roundName = null;
+	private StringBuffer roundName = null;
 	
-	public String getRoundName()
+	public StringBuffer getRoundName()
 	{	return roundName;	
 	}	
-	public void setRoundName(String roundName)
+	public void setRoundName(StringBuffer roundName)
 	{	this.roundName = roundName;
 	}
 	
 	public ProfilesSelection getProfilesSelection()
 	{	return profilesSelection;	
 	}	
-	public void setQuickStartSelected(ProfilesSelection profilesSelection)
+	public void setProfilesSelection(ProfilesSelection profilesSelection)
 	{	this.profilesSelection = profilesSelection;	
 	}	
 
@@ -92,7 +108,7 @@ public class QuickStartConfiguration
 		}
 		result.setMatch(match);
 		// round
-		Round round = RoundLoader.loadRoundFromName(roundName,match);
+		Round round = RoundLoader.loadRoundFromName(roundName.toString(),match);
 		match.addRound(round);
 		// 
 		return result;

@@ -32,6 +32,24 @@ public class ProfilesSelection
 		return result;
 	}
 	
+	public boolean equals(Object object)
+	{	boolean result;
+		if(object instanceof ProfilesSelection)
+		{	ProfilesSelection profilesSelection = (ProfilesSelection)object;
+			int i=0;
+			result = true;
+			while(i<fileNames.size() && result)
+			{	result = colors.get(i)==profilesSelection.getColor(i);
+				result = result && controls.get(i).equals(profilesSelection.getControlsIndex(i));
+				result = result && fileNames.get(i).equals(profilesSelection.getFileName(i));
+				i++;
+			}				
+		}
+		else
+			result = false;
+		return result;
+	}
+	
 	/////////////////////////////////////////////////////////////////
 	// GENERAL				/////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
