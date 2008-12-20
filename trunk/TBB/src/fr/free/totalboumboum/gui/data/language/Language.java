@@ -44,7 +44,7 @@ public class Language
 	public String getText(String key)
 	{	String result = texts.get(key);
 		if(result==null)
-			result = "N/A";
+			result = key/*"N/A"*/;
 		return result;
 	}
 	

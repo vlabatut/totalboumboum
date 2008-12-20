@@ -30,7 +30,7 @@ import javax.swing.BoxLayout;
 import javax.swing.JButton;
 
 import fr.free.totalboumboum.configuration.Configuration;
-import fr.free.totalboumboum.configuration.game.GameConfiguration;
+import fr.free.totalboumboum.configuration.game.quickmatch.QuickMatchConfiguration;
 import fr.free.totalboumboum.configuration.game.quickmatch.QuickMatchDraw;
 import fr.free.totalboumboum.game.limit.ComparatorCode;
 import fr.free.totalboumboum.game.limit.LimitConfrontation;
@@ -109,8 +109,8 @@ public class SettingsMenu extends InnerMenuPanel
 	{	// init tournament
 		this.tournament = tournament;
 		// init data
-		GameConfiguration gameConfiguration = Configuration.getGameConfiguration();
-		settingsData.setGameConfiguration(gameConfiguration);
+		QuickMatchConfiguration quickMatchConfiguration = Configuration.getGameConfiguration().getQuickMatchConfiguration();
+		settingsData.setQuickMatchConfiguration(quickMatchConfiguration);
 		// transmit
 		if(matchPanel!=null)
 		{	matchPanel.setTournament(tournament);
@@ -128,25 +128,25 @@ public class SettingsMenu extends InnerMenuPanel
 		{	replaceWith(parent);
 	    }
 		else if(e.getActionCommand().equals(GuiKeys.MENU_QUICKMATCH_SETTINGS_BUTTON_NEXT))
-		{	GameConfiguration gameConfiguration = settingsData.getGameConfiguration();
+		{	QuickMatchConfiguration quickMatchConfiguration = settingsData.getQuickMatchConfiguration();
 			// set settings in match
 			{	Match match = tournament.getCurrentMatch();
 				// random order
-				{	boolean randomOrder = gameConfiguration.getQuickMatchLevelsRandomOrder();
+				{	boolean randomOrder = quickMatchConfiguration.getLevelsRandomOrder();
 					match.setRandomOrder(randomOrder);
 				}
 				// limits
 				{	Limits<MatchLimit> limits = new Limits<MatchLimit>();
 					PointsProcessor pointsProcessor = new PointsTotal();
 					// round limit
-					{	int roundsLimit = gameConfiguration.getQuickMatchLimitRounds();
+					{	int roundsLimit = quickMatchConfiguration.getLimitRounds();
 						if(roundsLimit>0)
 						{	MatchLimit limit = new LimitConfrontation(roundsLimit,ComparatorCode.GREATER,pointsProcessor);
 							limits.addLimit(limit);
 						}
 					}
 					// points limit
-					{	int pointsLimit = gameConfiguration.getQuickMatchLimitPoints();
+					{	int pointsLimit = quickMatchConfiguration.getLimitPoints();
 						if(pointsLimit>0)
 						{	MatchLimit limit = new LimitPoints(pointsLimit,ComparatorCode.GREATEREQ,pointsProcessor,pointsProcessor);
 							limits.addLimit(limit);
@@ -157,8 +157,8 @@ public class SettingsMenu extends InnerMenuPanel
 				// round settings
 				{	// limits
 					Limits<RoundLimit> limits = new Limits<RoundLimit>();
-					boolean share = gameConfiguration.getQuickMatchPointsShare();
-					ArrayList<Integer> pts = gameConfiguration.getQuickMatchPoints();
+					boolean share = quickMatchConfiguration.getPointsShare();
+					ArrayList<Integer> pts = quickMatchConfiguration.getPoints();
 					float[] values = new float[pts.size()];
 					for(int i=0;i<values.length;i++)
 						values[i] = pts.get(i);
@@ -167,8 +167,8 @@ public class SettingsMenu extends InnerMenuPanel
 					sources.add(source);
 					PointsProcessor normalPP = new PointsRankpoints(sources,values,false,share);
 					PointsProcessor drawPP = new PointsConstant(0);
-					QuickMatchDraw draw = gameConfiguration.getQuickMatchPointsDraw();
-					long time = gameConfiguration.getQuickMatchLimitTime();
+					QuickMatchDraw draw = quickMatchConfiguration.getPointsDraw();
+					long time = quickMatchConfiguration.getLimitTime();
 					if(time>0)
 					{	// time limit
 						RoundLimit limit;

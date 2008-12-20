@@ -53,7 +53,7 @@ public class LoopPanel extends SimpleMenuPanel implements LoopRenderPanel
 	private Image image;
 	private BufferStrategy bufferStrategy;
 	
-	public LoopPanel(MenuContainer container, MenuPanel parent)
+	public LoopPanel(MenuContainer container, MenuPanel parent, Loop loop)
 	{	super(container,parent);
     	setIgnoreRepaint(true);
 
@@ -65,7 +65,7 @@ public class LoopPanel extends SimpleMenuPanel implements LoopRenderPanel
 		RescaleOp rop = new RescaleOp(scales, offsets, null);
 	    image = rop.filter((BufferedImage)image, null);
 */
-	    loop = Configuration.getGameConfiguration().getTournament().getCurrentMatch().getCurrentRound().getLoop();
+	    this.loop = loop;
 	    Dimension dim = Configuration.getVideoConfiguration().getPanelDimension();
 		setPreferredSize(dim);
 		setDoubleBuffered(false);
