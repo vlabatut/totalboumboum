@@ -52,7 +52,7 @@ public class TournamentConfigurationSaver
 		
 		// players
 		Element playersElement = new Element(XmlTools.ELT_PLAYERS);
-		ProfilesSelection tournamentSelected = gameConfiguration.getTournamentSelected();
+		ProfilesSelection tournamentSelected = gameConfiguration.getProfilesSelection();
 		ProfilesSelectionSaver.saveProfilesSelection(playersElement,tournamentSelected);
 		result.addContent(playersElement);
 		

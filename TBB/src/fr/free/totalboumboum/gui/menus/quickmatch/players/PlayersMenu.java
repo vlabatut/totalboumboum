@@ -31,6 +31,7 @@ import javax.swing.BoxLayout;
 import javax.swing.JButton;
 
 import fr.free.totalboumboum.configuration.Configuration;
+import fr.free.totalboumboum.configuration.game.quickmatch.QuickMatchConfiguration;
 import fr.free.totalboumboum.configuration.profile.Profile;
 import fr.free.totalboumboum.configuration.profile.ProfilesConfiguration;
 import fr.free.totalboumboum.configuration.profile.ProfilesSelection;
@@ -95,8 +96,9 @@ public class PlayersMenu extends InnerMenuPanel
 		this.tournament = tournament;
 		// init data
 		ProfilesSelection profilesSelection = new ProfilesSelection();
-		if(Configuration.getGameConfiguration().getQuickMatchUseLastPlayers())
-			profilesSelection = Configuration.getGameConfiguration().getQuickMatchSelectedProfiles();		
+		QuickMatchConfiguration quickMatchConfiguration = Configuration.getGameConfiguration().getQuickMatchConfiguration();
+		if(quickMatchConfiguration.getUseLastPlayers())
+			profilesSelection = quickMatchConfiguration.getProfilesSelection();		
 		profilesData.setProfilesSelection(profilesSelection);
 		// transmit
 		if(levelsPanel!=null)
@@ -119,7 +121,8 @@ public class PlayersMenu extends InnerMenuPanel
 			tournament.setProfiles(selectedProfiles);
 			// set profiles in configuration
 			ProfilesSelection profilesSelection = ProfilesConfiguration.getSelection(selectedProfiles);
-			Configuration.getGameConfiguration().setQuickMatchSelectedProfiles(profilesSelection);
+			QuickMatchConfiguration quickMatchConfiguration = Configuration.getGameConfiguration().getQuickMatchConfiguration();
+			quickMatchConfiguration.setProfilesSelection(profilesSelection);
 			// set levels panel
 			if(levelsPanel==null)
 			{	levelsPanel = new LevelsSplitPanel(container.getContainer(),container);

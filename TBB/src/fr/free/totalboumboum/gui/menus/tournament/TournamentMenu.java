@@ -34,6 +34,7 @@ import javax.xml.parsers.ParserConfigurationException;
 import org.xml.sax.SAXException;
 
 import fr.free.totalboumboum.configuration.Configuration;
+import fr.free.totalboumboum.configuration.game.tournament.TournamentConfiguration;
 import fr.free.totalboumboum.configuration.profile.Profile;
 import fr.free.totalboumboum.configuration.profile.ProfileLoader;
 import fr.free.totalboumboum.configuration.profile.ProfilesSelection;
@@ -161,9 +162,9 @@ buttonPlayers.setEnabled(false);
 		{	//NOTE c icite qu'il faut tester que les profils sont OK
 //			if(tournament==null || tournament.isOver())
 			try
-			{	Configuration.getGameConfiguration().loadLastTournament();
-				AbstractTournament tournament = Configuration.getGameConfiguration().getTournament();
-				ProfilesSelection profilesSelection = Configuration.getGameConfiguration().getTournamentSelected();
+			{	TournamentConfiguration tournamentConfiguration = Configuration.getGameConfiguration().getTournamentConfiguration();
+				tournament = tournamentConfiguration.loadLastTournament();
+				ProfilesSelection profilesSelection = tournamentConfiguration.getProfilesSelection();
 				ArrayList<Profile> selectedProfiles = ProfileLoader.loadProfiles(profilesSelection);
 				tournament.setProfiles(selectedProfiles);
 				tournament.init();
@@ -212,10 +213,10 @@ buttonPlayers.setEnabled(false);
 	    }
 	} 
 
-	public void refresh()
-	{	AbstractTournament tournament = Configuration.getGameConfiguration().getTournament();
+	private AbstractTournament tournament;
 	
-		// New: always possible
+	public void refresh()
+	{	// New: always possible
 		// Load: always possible
 		// Rules: always possible
 		// Players: always possible

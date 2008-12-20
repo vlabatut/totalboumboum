@@ -32,7 +32,6 @@ import javax.swing.JPanel;
 import javax.swing.SpringLayout;
 import javax.swing.SwingConstants;
 
-import fr.free.totalboumboum.configuration.Configuration;
 import fr.free.totalboumboum.configuration.profile.Profile;
 import fr.free.totalboumboum.game.round.Round;
 import fr.free.totalboumboum.game.statistics.Score;
@@ -52,7 +51,7 @@ public class QuickResults extends JPanel
 	private int lines = 0;
 	private int tableMargin;
 	
-	public QuickResults(Dimension dimen)
+	public QuickResults(Dimension dimen, Round round)
 	{	super();
 		
 		// init
@@ -60,7 +59,6 @@ public class QuickResults extends JPanel
 		int cols = 1+5+1;			
 		int width = dimen.width;
 		int height = dimen.height;
-		Round round = Configuration.getGameConfiguration().getTournament().getCurrentMatch().getCurrentRound();
 		StatisticRound stats = round.getStats();
 		ArrayList<Profile> players = round.getProfiles();
 		int[] orderedPlayers = round.getOrderedPlayers();

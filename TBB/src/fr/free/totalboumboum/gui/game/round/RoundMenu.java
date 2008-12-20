@@ -285,7 +285,7 @@ buttonStatistics.setEnabled(false);
 				{	text = GuiConfiguration.getMiscConfiguration().getLanguage().getText(GuiKeys.GAME_ROUND_PROGRESSBAR_COMPLETE);
 					loadProgressBar.setString(text);
 					loadProgressBar.repaint();
-					loopPanel = new LoopPanel(container.getContainer(),container);
+					loopPanel = new LoopPanel(container.getContainer(),container,round.getLoop());
 					replaceWith(loopPanel);
 					loopPanel.start();
 				}

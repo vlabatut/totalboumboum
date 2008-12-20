@@ -65,6 +65,7 @@ public class QuickFrame extends MainFrame implements ActionListener, LoopRenderP
 	private Canvas canvas;
 	
 	private AbstractTournament tournament;
+	private Round round;
 	
 	public QuickFrame() throws IllegalArgumentException, SecurityException, ParserConfigurationException, SAXException, IOException, IllegalAccessException, NoSuchFieldException, ClassNotFoundException
 	{	// init
@@ -108,7 +109,7 @@ public class QuickFrame extends MainFrame implements ActionListener, LoopRenderP
 	    match.progress();
 		       
 	    //round
-	    Round round = match.getCurrentRound();
+	    round = match.getCurrentRound();
 	    round.setPanel(this);
 		int limit = round.getProfiles().size()+3;
 		loadProgressBar.setMinimum(0);
@@ -200,7 +201,7 @@ public class QuickFrame extends MainFrame implements ActionListener, LoopRenderP
 	{	remove(canvas);
 		Container contentPane = getContentPane();
 		Dimension dim = Configuration.getVideoConfiguration().getPanelDimension();
-		QuickResults roundResults = new QuickResults(dim);
+		QuickResults roundResults = new QuickResults(dim,round);
 		contentPane.add(roundResults,BorderLayout.NORTH);
 		JButton exitButton = new JButton("OK");
 		exitButton.addActionListener(this);

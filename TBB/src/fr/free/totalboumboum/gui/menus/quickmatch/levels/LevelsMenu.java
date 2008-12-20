@@ -35,6 +35,7 @@ import org.xml.sax.SAXException;
 
 import fr.free.totalboumboum.configuration.Configuration;
 import fr.free.totalboumboum.configuration.game.quickmatch.LevelsSelection;
+import fr.free.totalboumboum.configuration.game.quickmatch.QuickMatchConfiguration;
 import fr.free.totalboumboum.engine.container.level.HollowLevel;
 import fr.free.totalboumboum.game.match.Match;
 import fr.free.totalboumboum.game.round.Round;
@@ -100,8 +101,9 @@ public class LevelsMenu extends InnerMenuPanel
 		this.tournament = tournament;
 		// init data
 		LevelsSelection levelsSelection = new LevelsSelection();
-		if(Configuration.getGameConfiguration().getQuickMatchUseLastLevels())
-			levelsSelection = Configuration.getGameConfiguration().getQuickMatchSelectedLevels();
+		QuickMatchConfiguration quickMatchConfiguration = Configuration.getGameConfiguration().getQuickMatchConfiguration();
+		if(quickMatchConfiguration.getUseLastLevels())
+			levelsSelection = quickMatchConfiguration.getLevelsSelection();
 		levelData.setLevelsSelection(levelsSelection);
 		// transmit
 		if(settingsPanel!=null)
@@ -148,7 +150,8 @@ public class LevelsMenu extends InnerMenuPanel
 				} 
 			}
 			// set levels in configuration
-			Configuration.getGameConfiguration().setQuickMatchSelectedLevels(levelsSelection);
+			QuickMatchConfiguration quickMatchConfiguration = Configuration.getGameConfiguration().getQuickMatchConfiguration();
+			quickMatchConfiguration.setLevelsSelection(levelsSelection);
 			// set levels panel
 			if(settingsPanel==null)
 			{	settingsPanel = new SettingsSplitPanel(container.getContainer(),container);

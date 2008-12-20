@@ -50,7 +50,7 @@ public class TournamentConfiguration
 	/////////////////////////////////////////////////////////////////
 	private ProfilesSelection tournamentSelected = new ProfilesSelection();
 
-	public ProfilesSelection getTournamentSelected()
+	public ProfilesSelection getProfilesSelection()
 	{	return tournamentSelected;	
 	}	
 	public void setTournamentSelected(ProfilesSelection tournamentSelected)

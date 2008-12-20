@@ -26,7 +26,7 @@ import java.awt.Dimension;
 import javax.swing.Box;
 import javax.swing.BoxLayout;
 
-import fr.free.totalboumboum.configuration.game.GameConfiguration;
+import fr.free.totalboumboum.configuration.game.quickmatch.QuickMatchConfiguration;
 import fr.free.totalboumboum.gui.common.content.subpanel.match.MatchQuickConfigSubPanel;
 import fr.free.totalboumboum.gui.common.content.subpanel.round.RoundQuickConfigSubPanel;
 import fr.free.totalboumboum.gui.common.structure.panel.SplitMenuPanel;
@@ -85,15 +85,15 @@ public class SettingsData extends EntitledDataPanel
 	/////////////////////////////////////////////////////////////////
 	// GAME CONFIGURATION			/////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	private GameConfiguration gameConfiguration = null;
+	private QuickMatchConfiguration quickMatchConfiguration = null;
 
-	public void setGameConfiguration(GameConfiguration gameConfiguration)
-	{	this.gameConfiguration = gameConfiguration;
-		matchPanel.setGameConfiguration(gameConfiguration);
-		roundPanel.setGameConfiguration(gameConfiguration);
+	public void setQuickMatchConfiguration(QuickMatchConfiguration quickMatchConfiguration)
+	{	this.quickMatchConfiguration = quickMatchConfiguration;
+		matchPanel.setQuickMatchConfiguration(quickMatchConfiguration);
+		roundPanel.setQuickMatchConfiguration(quickMatchConfiguration);
 	}
 	
-	public GameConfiguration getGameConfiguration()
-	{	return gameConfiguration;
+	public QuickMatchConfiguration getQuickMatchConfiguration()
+	{	return quickMatchConfiguration;
 	}
 }

@@ -9,6 +9,6 @@
 		</xsd:sequence>
 	</xsd:complexType>
 	
-	<xsd:element name="game" type="tQuickstart" />
+	<xsd:element name="gameQuickstart" type="tQuickstart" />
 
 </xsd:schema>
