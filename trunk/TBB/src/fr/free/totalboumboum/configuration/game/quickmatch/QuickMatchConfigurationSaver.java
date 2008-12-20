@@ -143,7 +143,7 @@ public class QuickMatchConfigurationSaver
 			String rounds = Integer.toString(gameConfiguration.getQuickMatchLimitRounds());
 			limitsElement.setAttribute(XmlTools.ATT_ROUNDS,rounds);
 			// limit time
-			String time = Integer.toString(gameConfiguration.getQuickMatchLimitTime());
+			String time = Integer.toString(gameConfiguration.getLimitTime());
 			limitsElement.setAttribute(XmlTools.ATT_TIME,time);
 		}
 		// points
@@ -175,13 +175,13 @@ public class QuickMatchConfigurationSaver
 	
 		// name
 		Element roundElement = new Element(XmlTools.ELT_ROUND);
-		String quickStart = gameConfiguration.getQuickStartName();
+		String quickStart = gameConfiguration.getRoundName();
 		roundElement.setAttribute(XmlTools.ATT_NAME,quickStart);
 		result.addContent(roundElement);
 		
 		// players
 		Element playersElement = new Element(XmlTools.ELT_PLAYERS);
-		ProfilesSelection quickStartSelected = gameConfiguration.getQuickStartSelected();
+		ProfilesSelection quickStartSelected = gameConfiguration.getProfilesSelection();
 		ProfilesSelectionSaver.saveProfilesSelection(playersElement,quickStartSelected);
 		result.addContent(playersElement);
 		

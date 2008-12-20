@@ -175,13 +175,13 @@ public class QuickStartConfigurationSaver
 	
 		// name
 		Element roundElement = new Element(XmlTools.ELT_ROUND);
-		String quickStart = gameConfiguration.getQuickStartName();
+		String quickStart = gameConfiguration.getRoundName();
 		roundElement.setAttribute(XmlTools.ATT_NAME,quickStart);
 		result.addContent(roundElement);
 		
 		// players
 		Element playersElement = new Element(XmlTools.ELT_PLAYERS);
-		ProfilesSelection quickStartSelected = gameConfiguration.getQuickStartSelected();
+		ProfilesSelection quickStartSelected = gameConfiguration.getProfilesSelection();
 		ProfilesSelectionSaver.saveProfilesSelection(playersElement,quickStartSelected);
 		result.addContent(playersElement);
 		

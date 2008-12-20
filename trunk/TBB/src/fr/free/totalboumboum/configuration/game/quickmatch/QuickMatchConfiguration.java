@@ -21,7 +21,6 @@ package fr.free.totalboumboum.configuration.game.quickmatch;
  * 
  */
 
-import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 
@@ -30,48 +29,27 @@ import javax.xml.parsers.ParserConfigurationException;
 import org.xml.sax.SAXException;
 
 import fr.free.totalboumboum.configuration.profile.ProfilesSelection;
-import fr.free.totalboumboum.game.limit.ComparatorCode;
-import fr.free.totalboumboum.game.limit.LimitConfrontation;
-import fr.free.totalboumboum.game.limit.Limits;
-import fr.free.totalboumboum.game.limit.MatchLimit;
 import fr.free.totalboumboum.game.match.Match;
 import fr.free.totalboumboum.game.match.MatchLoader;
-import fr.free.totalboumboum.game.points.PointsProcessor;
-import fr.free.totalboumboum.game.points.PointsTotal;
-import fr.free.totalboumboum.game.round.Round;
-import fr.free.totalboumboum.game.round.RoundLoader;
-import fr.free.totalboumboum.game.tournament.AbstractTournament;
-import fr.free.totalboumboum.game.tournament.TournamentLoader;
 import fr.free.totalboumboum.game.tournament.single.SingleTournament;
-import fr.free.totalboumboum.tools.FileTools;
 
 public class QuickMatchConfiguration
 {
 	public QuickMatchConfiguration copy()
 	{	QuickMatchConfiguration result = new QuickMatchConfiguration();
 		
-		// tournament
-		ProfilesSelection tournamentCopy = tournamentSelected.copy();
-		result.setTournamentSelected(tournamentCopy);
-		
-		// quickmatch
-		ProfilesSelection quickmatchProfilesCopy = quickMatchSelectedProfiles.copy();
-		result.setQuickMatchSelectedProfiles(quickmatchProfilesCopy);
-		result.setQuickMatchUseLastPlayers(quickMatchUseLastPlayers);
-		result.setQuickMatchName(quickMatchName);
-		LevelsSelection quickmatchLevelsCopy = quickMatchSelectedLevels.copy();
-		result.setQuickMatchSelectedLevels(quickmatchLevelsCopy);
-		result.setQuickMatchUseLastLevels(quickMatchUseLastLevels);
-		result.setQuickMatchLevelsRandomOrder(quickMatchLevelsRandomOrder);
-		result.setQuickMatchPlayersRandomLocation(quickMatchPlayersRandomLocation);
-		result.setQuickMatchPoints(quickMatchPoints);
-		result.setQuickMatchPointsShare(quickMatchPointsShare);
-		result.setQuickMatchPointsDraw(quickMatchPointsDraw);
-		
-		// quickstart
-		ProfilesSelection quickstartCopy = quickStartSelected.copy();
-		result.setQuickStartSelected(quickstartCopy);
-		result.setQuickStartName(quickStartName);
+		ProfilesSelection profilesCopy = profilesSelection.copy();
+		result.setProfilesSelection(profilesCopy);
+		result.setUseLastPlayers(useLastPlayers);
+		result.setName(matchName);
+		LevelsSelection levelsCopy = levelsSelection.copy();
+		result.setLevelsSelection(levelsCopy);
+		result.setUseLastLevels(useLastLevels);
+		result.setLevelsRandomOrder(levelsRandomOrder);
+		result.setPlayersRandomLocation(playersRandomLocation);
+		result.setPoints(points);
+		result.setPointsShare(pointsShare);
+		result.setPointsDraw(pointsDraw);
 
 		return result;
 	}
@@ -79,116 +57,116 @@ public class QuickMatchConfiguration
 	/////////////////////////////////////////////////////////////////
 	// QUICKMATCH		/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	private String quickMatchName = null;
-	private boolean quickMatchUseLastPlayers = false;
-	private boolean quickMatchUseLastLevels = false;
-	private ProfilesSelection quickMatchSelectedProfiles = new ProfilesSelection();
-	private LevelsSelection quickMatchSelectedLevels = new LevelsSelection();
-	private boolean quickMatchLevelsRandomOrder = false;
-	private boolean quickMatchPlayersRandomLocation = false;
-	private ArrayList<Integer> quickMatchPoints = new ArrayList<Integer>(5);
-	private boolean quickMatchPointsShare = false;
-	private QuickMatchDraw quickMatchPointsDraw = QuickMatchDraw.BOTH;
-	private int quickMatchLimitTime = 60000;
-	private int quickMatchLimitPoints = 5;
-	private int quickMatchLimitRounds = -1;
+	private String matchName = null;
+	private boolean useLastPlayers = false;
+	private boolean useLastLevels = false;
+	private ProfilesSelection profilesSelection = new ProfilesSelection();
+	private LevelsSelection levelsSelection = new LevelsSelection();
+	private boolean levelsRandomOrder = false;
+	private boolean playersRandomLocation = false;
+	private ArrayList<Integer> points = new ArrayList<Integer>(5);
+	private boolean pointsShare = false;
+	private QuickMatchDraw pointsDraw = QuickMatchDraw.BOTH;
+	private int limitTime = 60000;
+	private int limitPoints = 5;
+	private int limitRounds = -1;
 
-	public int getQuickMatchLimitTime()
-	{	return quickMatchLimitTime;
+	public int getLimitTime()
+	{	return limitTime;
 	}
-	public void setQuickMatchLimitTime(int quickMatchLimitTime)
-	{	this.quickMatchLimitTime = quickMatchLimitTime;
-	}
-	
-	public int getQuickMatchLimitPoints()
-	{	return quickMatchLimitPoints;
-	}
-	public void setQuickMatchLimitPoints(int quickMatchLimitPoints)
-	{	this.quickMatchLimitPoints = quickMatchLimitPoints;
+	public void setLimitTime(int limitTime)
+	{	this.limitTime = limitTime;
 	}
 	
-	public int getQuickMatchLimitRounds()
-	{	return quickMatchLimitRounds;
+	public int getLimitPoints()
+	{	return limitPoints;
 	}
-	public void setQuickMatchLimitRounds(int quickMatchLimitRounds)
-	{	this.quickMatchLimitRounds = quickMatchLimitRounds;
+	public void setLimitPoints(int limitPoints)
+	{	this.limitPoints = limitPoints;
+	}
+	
+	public int getLimitRounds()
+	{	return limitRounds;
+	}
+	public void setLimitRounds(int limitRounds)
+	{	this.limitRounds = limitRounds;
 	}
 
-	public boolean getQuickMatchUseLastPlayers()
-	{	return quickMatchUseLastPlayers;
+	public boolean getUseLastPlayers()
+	{	return useLastPlayers;
 	}
-	public void setQuickMatchUseLastPlayers(boolean quickMatchUseLastPlayers)
-	{	this.quickMatchUseLastPlayers = quickMatchUseLastPlayers;
-	}
-	
-	public boolean getQuickMatchUseLastLevels()
-	{	return quickMatchUseLastLevels;
-	}
-	public void setQuickMatchUseLastLevels(boolean quickMatchUseLastLevels)
-	{	this.quickMatchUseLastLevels = quickMatchUseLastLevels;
+	public void setUseLastPlayers(boolean useLastPlayers)
+	{	this.useLastPlayers = useLastPlayers;
 	}
 	
-	public boolean getQuickMatchLevelsRandomOrder()
-	{	return quickMatchLevelsRandomOrder;
+	public boolean getUseLastLevels()
+	{	return useLastLevels;
 	}
-	public void setQuickMatchLevelsRandomOrder(boolean quickMatchLevelsRandomOrder)
-	{	this.quickMatchLevelsRandomOrder = quickMatchLevelsRandomOrder;
-	}
-	
-	public boolean getQuickMatchPlayersRandomLocation()
-	{	return quickMatchPlayersRandomLocation;
-	}
-	public void setQuickMatchPlayersRandomLocation(boolean quickMatchPlayersRandomLocation)
-	{	this.quickMatchPlayersRandomLocation = quickMatchPlayersRandomLocation;
+	public void setUseLastLevels(boolean useLastLevels)
+	{	this.useLastLevels = useLastLevels;
 	}
 	
-	public ArrayList<Integer> getQuickMatchPoints()
-	{	return quickMatchPoints;
+	public boolean getLevelsRandomOrder()
+	{	return levelsRandomOrder;
 	}
-	public void setQuickMatchPoints(ArrayList<Integer> quickMatchPoints)
-	{	this.quickMatchPoints = quickMatchPoints;
-	}
-	
-	public boolean getQuickMatchPointsShare()
-	{	return quickMatchPointsShare;
-	}
-	public void setQuickMatchPointsShare(boolean quickMatchPointsShare)
-	{	this.quickMatchPointsShare = quickMatchPointsShare;
+	public void setLevelsRandomOrder(boolean levelsRandomOrder)
+	{	this.levelsRandomOrder = levelsRandomOrder;
 	}
 	
-	public QuickMatchDraw getQuickMatchPointsDraw()
-	{	return quickMatchPointsDraw;
+	public boolean getPlayersRandomLocation()
+	{	return playersRandomLocation;
 	}
-	public void setQuickMatchPointsDraw(QuickMatchDraw quickMatchPointsDraw)
-	{	this.quickMatchPointsDraw = quickMatchPointsDraw;
-	}
-	
-	public String getQuickMatchName()
-	{	return quickMatchName;	
-	}
-	public void setQuickMatchName(String quickMatchName)
-	{	this.quickMatchName = quickMatchName;
+	public void setPlayersRandomLocation(boolean playersRandomLocation)
+	{	this.playersRandomLocation = playersRandomLocation;
 	}
 	
-	public ProfilesSelection getQuickMatchSelectedProfiles()
-	{	return quickMatchSelectedProfiles;	
+	public ArrayList<Integer> getPoints()
+	{	return points;
+	}
+	public void setPoints(ArrayList<Integer> points)
+	{	this.points = points;
+	}
+	
+	public boolean getPointsShare()
+	{	return pointsShare;
+	}
+	public void setPointsShare(boolean pointsShare)
+	{	this.pointsShare = pointsShare;
+	}
+	
+	public QuickMatchDraw getPointsDraw()
+	{	return pointsDraw;
+	}
+	public void setPointsDraw(QuickMatchDraw pointsDraw)
+	{	this.pointsDraw = pointsDraw;
+	}
+	
+	public String getName()
+	{	return matchName;	
+	}
+	public void setName(String matchName)
+	{	this.matchName = matchName;
+	}
+	
+	public ProfilesSelection getProfilesSelection()
+	{	return profilesSelection;	
 	}	
-	public void setQuickMatchSelectedProfiles(ProfilesSelection quickMatchSelectedProfiles)
-	{	this.quickMatchSelectedProfiles = quickMatchSelectedProfiles;	
+	public void setProfilesSelection(ProfilesSelection profilesSelection)
+	{	this.profilesSelection = profilesSelection;	
 	}	
 
-	public LevelsSelection getQuickMatchSelectedLevels()
-	{	return quickMatchSelectedLevels;	
+	public LevelsSelection getLevelsSelection()
+	{	return levelsSelection;	
 	}	
-	public void setQuickMatchSelectedLevels(LevelsSelection quickMatchSelectedLevels)
-	{	this.quickMatchSelectedLevels = quickMatchSelectedLevels;	
+	public void setLevelsSelection(LevelsSelection selectedLevels)
+	{	this.levelsSelection = selectedLevels;	
 	}	
 
 	public SingleTournament loadQuickmatch() throws ParserConfigurationException, SAXException, IOException, ClassNotFoundException
 	{	// single tournament
 		SingleTournament result = new SingleTournament();
 		// load match
-		Match match = MatchLoader.loadMatchFromName(quickMatchName,result);
+		Match match = MatchLoader.loadMatchFromName(matchName,result);
 		result.setMatch(match);
 		// 
 		return result;

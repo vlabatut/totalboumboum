@@ -21,7 +21,6 @@ package fr.free.totalboumboum.gui.common.content.subpanel.match;
  * 
  */
 
-import java.awt.Color;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
@@ -48,7 +47,7 @@ public class MatchQuickConfigSubPanel extends UntitledSubPanelLines implements M
 	private static final int POINTS_MAX = Integer.MAX_VALUE;
 	private static final int ROUNDS_DELTA = 1;
 	private static final int ROUNDS_MAX = Integer.MAX_VALUE;
-	private static final int LINE_COUNT = 10;
+	private static final int LINE_COUNT = 8;
 	private static final int LINE_LIMIT_POINTS = 0;
 	private static final int LINE_LIMIT_ROUNDS = 1;
 
@@ -79,27 +78,31 @@ public class MatchQuickConfigSubPanel extends UntitledSubPanelLines implements M
 				{	ln.setLabelMaxWidth(col,nameWidth);
 					ln.setLabelPreferredWidth(col,nameWidth);
 					ln.setLabelKey(col,GuiKeys.MENU_QUICKMATCH_SETTINGS_LIMIT_POINTS_TITLE,false);
+					ln.setLabelBackground(col,GuiTools.COLOR_TABLE_HEADER_BACKGROUND);
+					ln.setLabelForeground(col,GuiTools.COLOR_TABLE_HEADER_FOREGROUND);
 					col++;
 				}
 				// minus button
 				{	ln.setLabelMaxWidth(col,ln.getHeight());
 					ln.setLabelKey(col,GuiKeys.MENU_QUICKMATCH_SETTINGS_LIMIT_POINTS_MINUS,true);
 					ln.getLabel(col).addMouseListener(this);
+					ln.setLabelBackground(col,GuiTools.COLOR_TABLE_HEADER_BACKGROUND);
 					col++;
 				}
 				// value
 				{	setPointsLimit();
 					ln.setLabelMaxWidth(col,Integer.MAX_VALUE);
+					ln.setLabelBackground(col,GuiTools.COLOR_TABLE_REGULAR_BACKGROUND);
+					ln.setLabelForeground(col,GuiTools.COLOR_TABLE_REGULAR_FOREGROUND);
 					col++;
 				}
 				// plus button
 				{	ln.setLabelMaxWidth(col,ln.getHeight());
 					ln.setLabelKey(col,GuiKeys.MENU_QUICKMATCH_SETTINGS_LIMIT_POINTS_PLUS,true);
 					ln.getLabel(col).addMouseListener(this);
+					ln.setLabelBackground(col,GuiTools.COLOR_TABLE_HEADER_BACKGROUND);
 					col++;
 				}
-				Color bg = GuiTools.COLOR_TABLE_REGULAR_BACKGROUND;
-				ln.setBackgroundColor(bg);
 			}
 			
 			// rounds limit
@@ -112,27 +115,31 @@ public class MatchQuickConfigSubPanel extends UntitledSubPanelLines implements M
 				{	ln.setLabelMaxWidth(col,nameWidth);
 					ln.setLabelPreferredWidth(col,nameWidth);
 					ln.setLabelKey(col,GuiKeys.MENU_QUICKMATCH_SETTINGS_LIMIT_ROUNDS_TITLE,false);
+					ln.setLabelBackground(col,GuiTools.COLOR_TABLE_HEADER_BACKGROUND);
+					ln.setLabelForeground(col,GuiTools.COLOR_TABLE_HEADER_FOREGROUND);
 					col++;
 				}
 				// minus button
 				{	ln.setLabelMaxWidth(col,ln.getHeight());
 					ln.setLabelKey(col,GuiKeys.MENU_QUICKMATCH_SETTINGS_LIMIT_ROUNDS_MINUS,true);
 					ln.getLabel(col).addMouseListener(this);
+					ln.setLabelBackground(col,GuiTools.COLOR_TABLE_HEADER_BACKGROUND);
 					col++;
 				}
 				// value
 				{	setRoundsLimit();
 					ln.setLabelMaxWidth(col,Integer.MAX_VALUE);
+					ln.setLabelBackground(col,GuiTools.COLOR_TABLE_REGULAR_BACKGROUND);
+					ln.setLabelForeground(col,GuiTools.COLOR_TABLE_REGULAR_FOREGROUND);
 					col++;
 				}
 				// plus button
 				{	ln.setLabelMaxWidth(col,ln.getHeight());
 					ln.setLabelKey(col,GuiKeys.MENU_QUICKMATCH_SETTINGS_LIMIT_ROUNDS_PLUS,true);
 					ln.getLabel(col).addMouseListener(this);
+					ln.setLabelBackground(col,GuiTools.COLOR_TABLE_HEADER_BACKGROUND);
 					col++;
 				}
-				Color bg = GuiTools.COLOR_TABLE_REGULAR_BACKGROUND;
-				ln.setBackgroundColor(bg);
 			}
 			
 			
@@ -239,7 +246,7 @@ public class MatchQuickConfigSubPanel extends UntitledSubPanelLines implements M
 				}
 				// common
 				gameConfiguration.setQuickMatchLimitRounds(limitRounds);
-				setPointsLimit();
+				setRoundsLimit();
 				break;
 		}
 	}

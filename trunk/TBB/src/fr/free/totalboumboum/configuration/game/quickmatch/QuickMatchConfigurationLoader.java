@@ -134,7 +134,7 @@ public class QuickMatchConfigurationLoader
 			// time limit
 			att = limitsElement.getAttributeValue(XmlTools.ATT_TIME);
 			int limitTime = Integer.parseInt(att);
-			result.setQuickMatchLimitTime(limitTime);
+			result.setLimitTime(limitTime);
 		}		
 		// points
 		{	Element pointsElement = root.getChild(XmlTools.ELT_POINTS);
@@ -166,7 +166,7 @@ public class QuickMatchConfigurationLoader
 	{	// name
 		Element roundElement = root.getChild(XmlTools.ELT_ROUND);
 		String quickStartName = roundElement.getAttribute(XmlTools.ATT_NAME).getValue().trim();
-		result.setQuickStartName(quickStartName);
+		result.setRoundName(quickStartName);
 		
 		// players
 		Element playersElement = root.getChild(XmlTools.ELT_PLAYERS);

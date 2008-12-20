@@ -21,7 +21,6 @@ package fr.free.totalboumboum.gui.common.content.subpanel.round;
  * 
  */
 
-import java.awt.Color;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.util.ArrayList;
@@ -54,7 +53,7 @@ public class RoundQuickConfigSubPanel extends UntitledSubPanelLines implements M
 	private static final int POINTS_MAX = Integer.MAX_VALUE;
 	private static final int POINTS_DELTA = 1;
 
-	private static final int LINE_COUNT = 10;
+	private static final int LINE_COUNT = 8;
 	private static final int LINE_LEVELS_ORDER = 0;
 	private static final int LINE_PLAYERS_LOCATION = 1;
 	private static final int LINE_TIME_LIMIT = 2;
@@ -90,17 +89,19 @@ public class RoundQuickConfigSubPanel extends UntitledSubPanelLines implements M
 				// name
 				{	ln.setLabelMaxWidth(col,nameWidth);
 					ln.setLabelPreferredWidth(col,nameWidth);
-					ln.setLabelKey(col,GuiKeys.MENU_QUICKMATCH_SETTINGS_LEVELS_ORDER,false);
+					ln.setLabelKey(col,GuiKeys.MENU_QUICKMATCH_SETTINGS_LEVELS_ORDER_TITLE,false);
+					ln.setLabelBackground(col,GuiTools.COLOR_TABLE_HEADER_BACKGROUND);
+					ln.setLabelForeground(col,GuiTools.COLOR_TABLE_HEADER_FOREGROUND);
 					col++;
 				}
 				// value
 				{	setLevelsOrder();
 					ln.setLabelMaxWidth(col,Integer.MAX_VALUE);
 					ln.getLabel(col).addMouseListener(this);
+					ln.setLabelBackground(col,GuiTools.COLOR_TABLE_REGULAR_BACKGROUND);
+					ln.setLabelForeground(col,GuiTools.COLOR_TABLE_REGULAR_FOREGROUND);
 					col++;
 				}
-				Color bg = GuiTools.COLOR_TABLE_REGULAR_BACKGROUND;
-				ln.setBackgroundColor(bg);
 			}
 			
 			// players location
@@ -110,17 +111,19 @@ public class RoundQuickConfigSubPanel extends UntitledSubPanelLines implements M
 				// name
 				{	ln.setLabelMaxWidth(col,nameWidth);
 					ln.setLabelPreferredWidth(col,nameWidth);
-					ln.setLabelKey(col,GuiKeys.MENU_QUICKMATCH_SETTINGS_PLAYERS_LOCATION,false);
+					ln.setLabelKey(col,GuiKeys.MENU_QUICKMATCH_SETTINGS_PLAYERS_LOCATION_TITLE,false);
+					ln.setLabelBackground(col,GuiTools.COLOR_TABLE_HEADER_BACKGROUND);
+					ln.setLabelForeground(col,GuiTools.COLOR_TABLE_HEADER_FOREGROUND);
 					col++;
 				}
 				// value
 				{	setPlayersLocation();
 					ln.setLabelMaxWidth(col,Integer.MAX_VALUE);
 					ln.getLabel(col).addMouseListener(this);
+					ln.setLabelBackground(col,GuiTools.COLOR_TABLE_REGULAR_BACKGROUND);
+					ln.setLabelForeground(col,GuiTools.COLOR_TABLE_REGULAR_FOREGROUND);
 					col++;
 				}
-				Color bg = GuiTools.COLOR_TABLE_REGULAR_BACKGROUND;
-				ln.setBackgroundColor(bg);
 			}
 			
 			// time limit
@@ -133,27 +136,31 @@ public class RoundQuickConfigSubPanel extends UntitledSubPanelLines implements M
 				{	ln.setLabelMaxWidth(col,nameWidth);
 					ln.setLabelPreferredWidth(col,nameWidth);
 					ln.setLabelKey(col,GuiKeys.MENU_QUICKMATCH_SETTINGS_LIMIT_TIME_TITLE,false);
+					ln.setLabelBackground(col,GuiTools.COLOR_TABLE_HEADER_BACKGROUND);
+					ln.setLabelForeground(col,GuiTools.COLOR_TABLE_HEADER_FOREGROUND);
 					col++;
 				}
 				// minus button
 				{	ln.setLabelMaxWidth(col,ln.getHeight());
 					ln.setLabelKey(col,GuiKeys.MENU_QUICKMATCH_SETTINGS_LIMIT_TIME_MINUS,true);
 					ln.getLabel(col).addMouseListener(this);
+					ln.setLabelBackground(col,GuiTools.COLOR_TABLE_HEADER_BACKGROUND);
 					col++;
 				}
 				// value
 				{	setTimeLimit();
 					ln.setLabelMaxWidth(col,Integer.MAX_VALUE);
+					ln.setLabelBackground(col,GuiTools.COLOR_TABLE_REGULAR_BACKGROUND);
+					ln.setLabelForeground(col,GuiTools.COLOR_TABLE_REGULAR_FOREGROUND);
 					col++;
 				}
 				// plus button
 				{	ln.setLabelMaxWidth(col,ln.getHeight());
 					ln.setLabelKey(col,GuiKeys.MENU_QUICKMATCH_SETTINGS_LIMIT_TIME_PLUS,true);
 					ln.getLabel(col).addMouseListener(this);
+					ln.setLabelBackground(col,GuiTools.COLOR_TABLE_HEADER_BACKGROUND);
 					col++;
 				}
-				Color bg = GuiTools.COLOR_TABLE_REGULAR_BACKGROUND;
-				ln.setBackgroundColor(bg);
 			}
 			
 			// points ranks
@@ -165,20 +172,26 @@ public class RoundQuickConfigSubPanel extends UntitledSubPanelLines implements M
 				{	ln.setLabelMaxWidth(col,nameWidth);
 					ln.setLabelPreferredWidth(col,nameWidth);
 					ln.setLabelKey(col,GuiKeys.MENU_QUICKMATCH_SETTINGS_POINTS_RANKS_TITLE,false);
+					ln.setLabelBackground(col,GuiTools.COLOR_TABLE_HEADER_BACKGROUND);
+					ln.setLabelForeground(col,GuiTools.COLOR_TABLE_HEADER_FOREGROUND);
 					col++;
 				}
 				// values
 				for(int i=1;i<=GameConstants.CONTROL_COUNT;i++)
 				{	String text = GuiConfiguration.getMiscConfiguration().getLanguage().getText(GuiKeys.MENU_QUICKMATCH_SETTINGS_POINTS_RANKS_VALUE)+i; 
-					String tooltip = GuiConfiguration.getMiscConfiguration().getLanguage().getText(GuiKeys.MENU_QUICKMATCH_SETTINGS_POINTS_RANKS_VALUE+GuiKeys.TOOLTIP); 
+					String tooltip = GuiConfiguration.getMiscConfiguration().getLanguage().getText(GuiKeys.MENU_QUICKMATCH_SETTINGS_POINTS_RANKS_VALUE+GuiKeys.TOOLTIP)+i; 
 					ln.setLabelText(col,text,tooltip);
 //					ln.setLabelMaxWidth(col,(int)(maxWidth*1.1));
-					ln.setLabelMaxWidth(col,pointsRanksWidth);
-					ln.setLabelPreferredWidth(col,pointsRanksWidth);
+					if(i==1)
+						ln.setLabelMaxWidth(col,Integer.MAX_VALUE);
+					else
+					{	ln.setLabelMaxWidth(col,pointsRanksWidth);
+						ln.setLabelPreferredWidth(col,pointsRanksWidth);
+					}
+					ln.setLabelBackground(col,GuiTools.COLOR_TABLE_HEADER_BACKGROUND);
+					ln.setLabelForeground(col,GuiTools.COLOR_TABLE_HEADER_FOREGROUND);
 					col++;
 				}
-				Color bg = GuiTools.COLOR_TABLE_REGULAR_BACKGROUND;
-				ln.setBackgroundColor(bg);
 			}
 			
 			// points values
@@ -193,6 +206,8 @@ public class RoundQuickConfigSubPanel extends UntitledSubPanelLines implements M
 				{	ln.setLabelMaxWidth(col,nameWidth);
 					ln.setLabelPreferredWidth(col,nameWidth);
 					ln.setLabelKey(col,GuiKeys.MENU_QUICKMATCH_SETTINGS_POINTS_VALUES_TITLE,false);
+					ln.setLabelBackground(col,GuiTools.COLOR_TABLE_HEADER_BACKGROUND);
+					ln.setLabelForeground(col,GuiTools.COLOR_TABLE_HEADER_FOREGROUND);
 					col++;
 				}
 				// values
@@ -201,23 +216,29 @@ public class RoundQuickConfigSubPanel extends UntitledSubPanelLines implements M
 					{	ln.setLabelMaxWidth(col,ln.getHeight());
 						ln.setLabelKey(col,GuiKeys.MENU_QUICKMATCH_SETTINGS_POINTS_VALUES_MINUS,true);
 						ln.getLabel(col).addMouseListener(this);
+						ln.setLabelBackground(col,GuiTools.COLOR_TABLE_HEADER_BACKGROUND);
 						col++;
 					}
 					// value
 					{	setPointsValue(i);
-						ln.setLabelMaxWidth(col,pointsValuesWidth);
-						ln.setLabelPreferredWidth(col,pointsValuesWidth);
+						if(i==0)
+							ln.setLabelMaxWidth(col,Integer.MAX_VALUE);
+						else
+						{	ln.setLabelMaxWidth(col,pointsValuesWidth);
+							ln.setLabelPreferredWidth(col,pointsValuesWidth);
+						}
+						ln.setLabelBackground(col,GuiTools.COLOR_TABLE_REGULAR_BACKGROUND);
+						ln.setLabelForeground(col,GuiTools.COLOR_TABLE_REGULAR_FOREGROUND);
 						col++;
 					}
 					// plus button
 					{	ln.setLabelMaxWidth(col,ln.getHeight());
 						ln.setLabelKey(col,GuiKeys.MENU_QUICKMATCH_SETTINGS_POINTS_VALUES_PLUS,true);
 						ln.getLabel(col).addMouseListener(this);
+						ln.setLabelBackground(col,GuiTools.COLOR_TABLE_HEADER_BACKGROUND);
 						col++;
 					}
 				}
-				Color bg = GuiTools.COLOR_TABLE_REGULAR_BACKGROUND;
-				ln.setBackgroundColor(bg);
 			}
 			
 			// points share
@@ -228,16 +249,18 @@ public class RoundQuickConfigSubPanel extends UntitledSubPanelLines implements M
 				{	ln.setLabelMaxWidth(col,nameWidth);
 					ln.setLabelPreferredWidth(col,nameWidth);
 					ln.setLabelKey(col,GuiKeys.MENU_QUICKMATCH_SETTINGS_POINTS_SHARE_TITLE,false);
+					ln.setLabelBackground(col,GuiTools.COLOR_TABLE_HEADER_BACKGROUND);
+					ln.setLabelForeground(col,GuiTools.COLOR_TABLE_HEADER_FOREGROUND);
 					col++;
 				}
 				// value
 				{	setPointsShare();
 					ln.setLabelMaxWidth(col,Integer.MAX_VALUE);
 					ln.getLabel(col).addMouseListener(this);
+					ln.setLabelBackground(col,GuiTools.COLOR_TABLE_REGULAR_BACKGROUND);
+					ln.setLabelForeground(col,GuiTools.COLOR_TABLE_REGULAR_FOREGROUND);
 					col++;
 				}
-				Color bg = GuiTools.COLOR_TABLE_REGULAR_BACKGROUND;
-				ln.setBackgroundColor(bg);
 			}
 			
 			// points draw
@@ -248,16 +271,18 @@ public class RoundQuickConfigSubPanel extends UntitledSubPanelLines implements M
 				{	ln.setLabelMaxWidth(col,nameWidth);
 					ln.setLabelPreferredWidth(col,nameWidth);
 					ln.setLabelKey(col,GuiKeys.MENU_QUICKMATCH_SETTINGS_POINTS_DRAW_TITLE,false);
+					ln.setLabelBackground(col,GuiTools.COLOR_TABLE_HEADER_BACKGROUND);
+					ln.setLabelForeground(col,GuiTools.COLOR_TABLE_HEADER_FOREGROUND);
 					col++;
 				}
 				// value
 				{	setPointsDraw();
 					ln.setLabelMaxWidth(col,Integer.MAX_VALUE);
 					ln.getLabel(col).addMouseListener(this);
+					ln.setLabelBackground(col,GuiTools.COLOR_TABLE_REGULAR_BACKGROUND);
+					ln.setLabelForeground(col,GuiTools.COLOR_TABLE_REGULAR_FOREGROUND);
 					col++;
 				}
-				Color bg = GuiTools.COLOR_TABLE_REGULAR_BACKGROUND;
-				ln.setBackgroundColor(bg);
 			}
 			
 			// empty lines
