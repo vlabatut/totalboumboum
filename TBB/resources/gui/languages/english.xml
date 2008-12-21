@@ -166,6 +166,21 @@
 				</group>
 				<group name="Quickmatch">
 					<text name="Title" value="Quick match" tooltip="Modify quick match settings" />
+					<group name="Levels">
+						<text name="False" value="Disabled" tooltip="Disabled" />
+						<text name="True" value="Enabled" tooltip="Enabled" />
+						<text name="Use" value="Same levels" tooltip="Use last quick match levels" />
+					</group>
+					<group name="Players">
+						<text name="False" value="Disabled" tooltip="Disabled" />
+						<text name="True" value="Enabled" tooltip="Enabled" />
+						<text name="Use" value="Same players" tooltip="Use last quick match players" />
+					</group>
+					<group name="Settings">
+						<text name="False" value="Disabled" tooltip="Disabled" />
+						<text name="True" value="Enabled" tooltip="Enabled" />
+						<text name="Use" value="Same settings" tooltip="Use last quick match settings" />
+					</group>
 				</group>
 				<group name="Tournament">
 					<text name="Title" value="Tournament" tooltip="Modify tournament settings" />

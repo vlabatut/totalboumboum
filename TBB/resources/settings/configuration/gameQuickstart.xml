@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<gameQuickStart xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="..\..\..\resources\schemas\gameQuickstart.xsd">
+<gameQuickstart xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="..\..\..\resources\schemas\gameQuickstart.xsd">
 	<round name="round01" />
 	<players>
 		<player file="4" color="blue" controls="0" />
@@ -8,5 +8,5 @@
 		<player file="18" color="orange" controls="0" />
 		<player file="1" color="cyan" controls="1" />
 	</players>
-</gameQuickStart>
+</gameQuickstart>
 
