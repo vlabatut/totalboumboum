@@ -51,7 +51,7 @@ import fr.free.totalboumboum.gui.menus.options.game.quickstart.round.SelectRound
 import fr.free.totalboumboum.gui.tools.GuiKeys;
 import fr.free.totalboumboum.gui.tools.GuiTools;
 
-public class CopyOfQuickStartData extends EntitledDataPanel implements PlayersSelectionSubPanelListener, MouseListener
+public class QuickStartData extends EntitledDataPanel implements PlayersSelectionSubPanelListener, MouseListener
 {	
 	private static final long serialVersionUID = 1L;
 	private static final float SPLIT_RATIO = 0.06f;
@@ -62,7 +62,7 @@ public class CopyOfQuickStartData extends EntitledDataPanel implements PlayersSe
 	private int roundHeight;
 	private int playersHeight;
 
-	public CopyOfQuickStartData(SplitMenuPanel container)
+	public QuickStartData(SplitMenuPanel container)
 	{	super(container);
 		
 		// title
