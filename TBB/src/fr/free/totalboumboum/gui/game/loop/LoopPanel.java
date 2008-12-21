@@ -166,7 +166,8 @@ public class LoopPanel extends SimpleMenuPanel implements LoopRenderPanel
 	public void loopOver()
 	{	SwingUtilities.invokeLater(new Runnable()
 		{	public void run()
-			{	//System.out.println("the round is over.");		
+			{	//System.out.println("the round is over.");
+				parent.refresh();
 				replaceWith(parent);
 			}
 		});				
