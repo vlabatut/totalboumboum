@@ -54,7 +54,7 @@ public class ProfilesSelectionSaver
 		
 		// sprite
 		String hero[] = profilesSelection.getHero(index);
-		result.setAttribute(XmlTools.ATT_SPRITE_PACK,hero[1]);
+		result.setAttribute(XmlTools.ATT_SPRITE_PACK,hero[0]);
 		result.setAttribute(XmlTools.ATT_SPRITE_FOLDER,hero[1]);
 		
 		return result;

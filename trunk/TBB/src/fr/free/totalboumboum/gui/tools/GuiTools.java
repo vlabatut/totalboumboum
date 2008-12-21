@@ -44,6 +44,7 @@ import javax.swing.JButton;
 import javax.swing.JToggleButton;
 
 import fr.free.totalboumboum.configuration.Configuration;
+import fr.free.totalboumboum.configuration.GameConstants;
 import fr.free.totalboumboum.gui.common.structure.ButtonAware;
 import fr.free.totalboumboum.gui.data.configuration.GuiConfiguration;
 import fr.free.totalboumboum.tools.ImageTools;
@@ -77,6 +78,11 @@ public class GuiTools
 		"[Loading GUI]",
 		"[Initializing GUI]",
 		"[Done]"
+	};
+	public static final String STARTUP_LEGAL[] = 
+	{	"Total Boum Boum version "+GameConstants.VERSION,
+		new Character('\u00A9').toString()+" 2008 Vincent Labatut",
+		"Licensed under the GPL v2"
 	};
 	
 	/////////////////////////////////////////////////////////////////

@@ -43,7 +43,6 @@ import javax.xml.parsers.ParserConfigurationException;
 import org.xml.sax.SAXException;
 
 import fr.free.totalboumboum.configuration.Configuration;
-import fr.free.totalboumboum.configuration.GameConstants;
 import fr.free.totalboumboum.gui.data.configuration.GuiConfiguration;
 import fr.free.totalboumboum.gui.data.configuration.misc.MiscConfiguration;
 import fr.free.totalboumboum.gui.frames.NormalFrame;
@@ -67,14 +66,13 @@ public class Launcher
 	}
 	
 	/////////////////////////////////////////////////////////////////
-	// DISPLAY HELP		/////////////////////////////////////////////
+	// DISPLAY			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	private static void displayHelp()
 	{	System.out.println(GuiTools.OPTION_HELP_MESSAGE);
 		for(int i=0;i<GuiTools.OPTIONS.length;i++)
 			System.out.println("    ->"+GuiTools.OPTIONS[i]+": "+GuiTools.OPTIONS_HELP[i]);
 	}
-	
 	
 	/////////////////////////////////////////////////////////////////
 	// NORMAL LAUNCH	/////////////////////////////////////////////
@@ -146,9 +144,8 @@ public class Launcher
 			g.setPaintMode();
 			g.setFont(new Font("Arial",Font.PLAIN,10));
 			g.setColor(new Color(0,0,0,100));
-		    g.drawString("Total Boum Boum version "+GameConstants.VERSION,70,90);
-		    g.drawString(new Character('\u00A9').toString()+" 2008 Vincent Labatut",70,100);
-		    g.drawString("Licensed under the GPL v2",70,110);
+			for(int i=0;i<GuiTools.STARTUP_LEGAL.length;i++)
+				g.drawString(GuiTools.STARTUP_LEGAL[i],70,90+i*10);
 			g.setColor(GuiTools.COLOR_SPLASHSCREEN_TEXT);
 	        g.drawString(msg,70,315);
 	        splash.update();
@@ -159,7 +156,11 @@ public class Launcher
 	// QUICK LAUNCH		/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	private static void quickLaunch() throws SAXException, ParserConfigurationException, IllegalArgumentException, SecurityException, IOException, IllegalAccessException, NoSuchFieldException, ClassNotFoundException
-	{	// load XML schemas
+	{	// legal
+		for(int i=0;i<GuiTools.STARTUP_LEGAL.length;i++)
+			System.out.println(GuiTools.STARTUP_LEGAL[i]);
+		System.out.println("--------------------------------");
+		// load XML schemas
 		System.out.println(GuiTools.STARTUP_MESSAGES[GuiTools.STARTUP_XML]);
 		XmlTools.init();
 		// load configuration 
