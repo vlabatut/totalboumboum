@@ -811,22 +811,22 @@ public class Launcher
 	 * - nouveauté : mode plein écran
 	 * - nouveauté : écran de sélection des niveaux pour le quick match
 	 * - nouveauté : écran des options pour le quick match
+	 * - nouveauté : gestion complète d'un quick match
+	 * - nouveauté : placement aléatoire des joueurs en début de round
 	 * 
 	 * *******************************************************
 	 * *********************** A FAIRE ***********************
 	 * *******************************************************
 	 * 
+	 * - previews: hiérarchiser, nettoyer, adapter aux infos à afficher
+	 * 
+	 * - profils: simplifier, pas besoin de la double représentation default+selected.
+	 * - réorganiser par rapport aux besoins: joueur pdt le jeu, joueur chargé en dehors du jeu, joueur pas chargé ?
+	 * 
 	 * - ça serait bien que les joueurs soient affichés dans l'ordre relatif aux points de la limite rencontrée
 	 *   voire on définit explicitement un ordre d'affichage dans la compétition
 	 * 
 	 * - faire le classement lexicographique gérant les signes diacritiques partout où c'est nécessaire
-	 * 
-	 * - parties en cours :
-	 * 		- une seule partie en même temps
-	 * 		- cliquer sur exit termine effectivement la partie en cours
-	 * 		- utiliser les flèches par contre, permet d'en sortir avec possibilité d'y revenir, l'autre type de rencontre est bloqué (quickmatch/tournament)
-	 * 		- ou alors le fait de commencer une nouvelle partie provoque l'arrêt de l'ancienne (avec interrogation de l'utilisateur)
-	 * 		+ plus simplement : gérer deux configurations séparées pour le tournoi et le quickmatch
 	 * 
 	 * - modifier le loader d'image de manière à ce qu'une image non-trouvée soit remplacée par la croix rouge
 	 * 
@@ -847,7 +847,7 @@ public class Launcher
 	 * - besoin d'une méthode permettant d'exporter un tournoi/match/round, ie de l'écrire entièrement en local (pas de référence à des composants existants)
 	 * 
 	 * - dans les résultats :
-	 * 		- afficher par défaut les 4 scores de bases
+	 * 		- afficher par défaut les 4 scores de base
 	 * 		- plus les scores utilisés dans les points et/ou les limites
 	 * 		- si les limites utilisent des points custom, les afficher aussi
 	 * 
@@ -856,6 +856,7 @@ public class Launcher
 	 * - stats : nombre de fois qu'un level a été joué
 	 * - champ en plus dans les profils : le classement du joueur, nbre de rouds gagnés/nbre de rounds joués
 	 * - dans les persos : % de rounds gagnés, ou bien nbre de rounds joués
+	 * - tout ça est fait simplement en rajoutant les informations adéquates dans les classes de stat
 	 * 
 	 * - lors de la sélection des commandes :
 	 * 		- cliquer sur le bouton d'action fait réagir quelque chose dans la ligne du joueur correspondant
@@ -864,54 +865,22 @@ public class Launcher
 	 * -------------------------------------------------------------------
 	 * - calcul de points : introduire des variables comme le nombre de joueurs (pour définir un bonus pr le joueur qui fait un perfect en survival)
 	 * - gérer le shrink
-	 * - mode plein écran
 	 * - dans les autorisations, gérer l'apparition comme une action en soit. si pas possible d'apparaître au début de la partie, faire un atterrissage ?
-	 * - à la fin du round, faire apparaitre les résultats par transparence...ça serait la classe ça !
+	 * - à la fin du round, faire apparaitre les résultats par transparence
 	 * 
-	 * - pour painting, possibilité de définir quelles cases peuvent être repeinte, ce qui permet de poser comme limite un %age de cases repeintes
+	 * - pour painting, possibilité de définir quelles cases peuvent être repeintes, ce qui permet de poser comme limite un %age de cases repeintes
 	 * - définir des noms "human readable" pour les items, histoire de ne pas afficher ces codes internes dans la GUI, en profiter pour introduire une decription, le tout en plusieurs langues. utiliser le code ISO comme paramètre de langue, et l'introduire dans le fichier de langue
 	 * - possibilité de définir un nom pour tournament/match/round, qui sera affiche en titre de présentation/stats etc. si pas de nom, utilisation d'un nom générique (Round 1 - Prensentation) etc
 	 * - faire un chargement ad hoc des matches, rounds, etc ? fusionner du coup HollowLevel et LevelPreview ? (voir si les objets de ces deux classes sont créés au même moment)
-	 * - ergonomie : faire le chargement du round dès qu'on clique sur "next" dans le match, et attendre ensuite que le joueur valide le début du match !
 	 * 
 	 * - redistribution des items lors de la mort d'un joueur (option de round?)
 	 * - possibilité de bloquer certains items (on ne les perd pas lorsqu'on meurt)
 	 * 
 	 * LIMITES & MODES de jeu :
-	 * - limites exprimées de façon relative (peindre 75% des cases...)
+	 * - limites exprimées de façon relative (peindre 75% des cases, éliminer la moitié des joueurs...)
 	 * - items: 1 item arrêtant la partie, 1 item faisant diminuer le temps restant (anti-temps)
-	 * - au moins finir le cycle lors d'une mort, histoire que la différence de timing ne vienne pas juste de l'ordre des joueurs dans la partie 
 	 * - possibilité de choisir entre le fait que le round s'arrête dès que tout le monde est mort sauf 1, ou dernière flamme terminée
-	 * - feature lié au précédent : gagner plus de points si on finit effetivement le jeu que si on a un time out ou un entre-tuage
 	 * reformater les modes de jeu :
 	 * 	- pour paint il suffit de définir des bombes spéciales qui peignent le sol
-	 */
-	
-	
-	/*
-	 * partie rapide :
-	 * 	- le match est défini ad hoc, de façon simplifiée
-	 * 		- on choisit directement des niveaux et pas des rounds
-	 * 		- mêmes points pour tous les rounds
-	 * 		- mêmes limites aussi 
-	 *  - on peut configurer le match dans une certaine mesure
-	 *  	- choix des joueurs
-	 *  	- choix des NIVEAUX + ordre aléatoire ou pas
-	 *  	- choix des limites pour match et rounds
-	 *  - choix limité de limite, voire configuration simplifiée :
-	 *  	- temps limite
-	 *  	- ? s'inspirer des BM existants
-	 *  	- emplacement de départ aléatoire
-	 */
-	
-	/* TODO
-	 * 1) adaper les options
-	 * 2) compléter les options
-	 * 3) débugger le tournoi
-	 * 4) mutualiser les panels de jeu (réutilisés dans les frames
-	 * 
-	 * 5) panel différent pour singleTournament
-	 * 
-	 * 6) vérifier que le nombre de joueurs est compatible avec les niveaux
-	 */
+	 */	
 }

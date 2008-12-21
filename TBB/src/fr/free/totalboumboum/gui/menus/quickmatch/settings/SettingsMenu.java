@@ -23,14 +23,19 @@ package fr.free.totalboumboum.gui.menus.quickmatch.settings;
 
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
+import java.io.IOException;
 import java.util.ArrayList;
 
 import javax.swing.Box;
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
+import javax.xml.parsers.ParserConfigurationException;
+
+import org.xml.sax.SAXException;
 
 import fr.free.totalboumboum.configuration.Configuration;
 import fr.free.totalboumboum.configuration.game.quickmatch.QuickMatchConfiguration;
+import fr.free.totalboumboum.configuration.game.quickmatch.QuickMatchConfigurationSaver;
 import fr.free.totalboumboum.configuration.game.quickmatch.QuickMatchDraw;
 import fr.free.totalboumboum.game.limit.ComparatorCode;
 import fr.free.totalboumboum.game.limit.LimitConfrontation;
@@ -110,6 +115,8 @@ public class SettingsMenu extends InnerMenuPanel
 		this.tournament = tournament;
 		// init data
 		QuickMatchConfiguration quickMatchConfiguration = Configuration.getGameConfiguration().getQuickMatchConfiguration();
+		if(!quickMatchConfiguration.getUseLastSettings())
+			quickMatchConfiguration.reinitSettings();		
 		settingsData.setQuickMatchConfiguration(quickMatchConfiguration);
 		// transmit
 		if(matchPanel!=null)
@@ -187,12 +194,28 @@ public class SettingsMenu extends InnerMenuPanel
 						limit = new LimitLastStanding(1,ComparatorCode.LESSEQ,normalPP);
 						limits.addLimit(limit);
 					}
+					// random location
+					boolean randomLocation = quickMatchConfiguration.getPlayersRandomLocation();
 					// rounds
 					ArrayList<Round> rounds = match.getRounds();
 					for(Round r: rounds)
 					{	r.setLimits(limits);
+						r.setRandomLocations(randomLocation);
 					}
-				}
+				}				
+			}
+			// save quick match options
+			try
+			{	QuickMatchConfigurationSaver.saveQuickMatchConfiguration(quickMatchConfiguration);
+			}
+			catch (ParserConfigurationException e1)
+			{	e1.printStackTrace();
+			}
+			catch (SAXException e1)
+			{	e1.printStackTrace();
+			}
+			catch (IOException e1)
+			{	e1.printStackTrace();
 			}
 			// set match panel
 			if(matchPanel==null)
