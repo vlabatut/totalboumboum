@@ -24,51 +24,27 @@ package fr.free.totalboumboum.gui.menus.options.game.quickmatch;
 import java.awt.BorderLayout;
 import java.awt.Graphics;
 import java.awt.image.BufferedImage;
-import java.util.ArrayList;
 
-import fr.free.totalboumboum.configuration.profile.Profile;
 import fr.free.totalboumboum.gui.common.structure.MenuContainer;
 import fr.free.totalboumboum.gui.common.structure.panel.SplitMenuPanel;
 import fr.free.totalboumboum.gui.common.structure.panel.menu.MenuPanel;
 import fr.free.totalboumboum.gui.data.configuration.GuiConfiguration;
 import fr.free.totalboumboum.gui.tools.GuiTools;
 
-public class QuickmatchSplitPanel extends SplitMenuPanel
+public class QuickMatchSplitPanel extends SplitMenuPanel
 {	private static final long serialVersionUID = 1L;
 
 	private BufferedImage image;
 
-	public QuickmatchSplitPanel(MenuContainer container, MenuPanel parent)
+	public QuickMatchSplitPanel(MenuContainer container, MenuPanel parent)
 	{	super(container,parent,BorderLayout.LINE_START,GuiTools.VERTICAL_SPLIT_RATIO);
 	
 		// background
 		image = GuiConfiguration.getMiscConfiguration().getDarkBackground();
 	    
 		// panels
-		QuickmatchMenu menu = new QuickmatchMenu(this,parent);
+		QuickMatchMenu menu = new QuickMatchMenu(this,parent);
 		setMenuPart(menu);
-	}
-	
-	/////////////////////////////////////////////////////////////////
-	// ROUND			/////////////////////////////////////////////
-	/////////////////////////////////////////////////////////////////
-	public void setRound(String roundFolder)
-	{	((QuickmatchMenu)menuPart).setRound(roundFolder);
-	}
-	
-	public String getSelectedRound()
-	{	return ((QuickmatchMenu)menuPart).getSelectedRound();
-	}
-	
-	/////////////////////////////////////////////////////////////////
-	// PLAYERS						/////////////////////////////////
-	/////////////////////////////////////////////////////////////////
-	public void setSelectedProfiles(ArrayList<Profile> selectedProfiles)
-	{	((QuickmatchMenu)menuPart).setSelectedProfiles(selectedProfiles);
-	}
-	
-	public ArrayList<Profile> getSelectedProfiles()
-	{	return ((QuickmatchMenu)menuPart).getSelectedProfiles();	
 	}
 	
 	/////////////////////////////////////////////////////////////////
