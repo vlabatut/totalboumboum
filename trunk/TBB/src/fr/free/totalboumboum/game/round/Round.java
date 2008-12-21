@@ -339,6 +339,9 @@ public class Round implements StatisticHolder
 		result.setNotes(notes);
 		result.setLimits(limits);
 		result.setHollowLevel(hollowLevel.copy());
+		result.setAuthor(author);
+		result.setName(name);
+		result.setRandomLocations(randomLocations);
 		return result;
 	}
 	

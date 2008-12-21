@@ -23,6 +23,7 @@ package fr.free.totalboumboum.configuration.game.quickmatch;
 
 import java.util.ArrayList;
 
+import fr.free.totalboumboum.configuration.GameConstants;
 import fr.free.totalboumboum.configuration.profile.ProfilesSelection;
 
 public class QuickMatchConfiguration
@@ -78,13 +79,36 @@ public class QuickMatchConfiguration
 	}
 	
 	/////////////////////////////////////////////////////////////////
-	// QUICKMATCH		/////////////////////////////////////////////
+	// OPTIONS			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	private boolean useLastPlayers = false;
 	private boolean useLastLevels = false;
 	private boolean useLastSettings = false;
-	private ProfilesSelection profilesSelection = new ProfilesSelection();
-	private LevelsSelection levelsSelection = new LevelsSelection();
+
+	public boolean getUseLastPlayers()
+	{	return useLastPlayers;
+	}
+	public void setUseLastPlayers(boolean useLastPlayers)
+	{	this.useLastPlayers = useLastPlayers;
+	}
+	
+	public boolean getUseLastLevels()
+	{	return useLastLevels;
+	}
+	public void setUseLastLevels(boolean useLastLevels)
+	{	this.useLastLevels = useLastLevels;
+	}
+	
+	public boolean getUseLastSettings()
+	{	return useLastSettings;
+	}
+	public void setUseLastSettings(boolean useLastSettings)
+	{	this.useLastSettings = useLastSettings;
+	}
+
+	/////////////////////////////////////////////////////////////////
+	// SETTINGS			/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
 	private boolean levelsRandomOrder = false;
 	private boolean playersRandomLocation = false;
 	private ArrayList<Integer> points = new ArrayList<Integer>(5);
@@ -113,27 +137,6 @@ public class QuickMatchConfiguration
 	}
 	public void setLimitRounds(int limitRounds)
 	{	this.limitRounds = limitRounds;
-	}
-
-	public boolean getUseLastPlayers()
-	{	return useLastPlayers;
-	}
-	public void setUseLastPlayers(boolean useLastPlayers)
-	{	this.useLastPlayers = useLastPlayers;
-	}
-	
-	public boolean getUseLastLevels()
-	{	return useLastLevels;
-	}
-	public void setUseLastLevels(boolean useLastLevels)
-	{	this.useLastLevels = useLastLevels;
-	}
-	
-	public boolean getUseLastSettings()
-	{	return useLastSettings;
-	}
-	public void setUseLastSettings(boolean useLastSettings)
-	{	this.useLastSettings = useLastSettings;
 	}
 	
 	public boolean getLevelsRandomOrder()
@@ -171,17 +174,42 @@ public class QuickMatchConfiguration
 	{	this.pointsDraw = pointsDraw;
 	}
 	
-	public ProfilesSelection getProfilesSelection()
-	{	return profilesSelection;	
-	}	
-	public void setProfilesSelection(ProfilesSelection profilesSelection)
-	{	this.profilesSelection = profilesSelection;	
-	}	
+	public void reinitSettings()
+	{	levelsRandomOrder = false;
+		playersRandomLocation = false;
+		points = new ArrayList<Integer>();
+		for(int i=0;i<GameConstants.CONTROL_COUNT;i++)
+			points.set(i,0);
+		pointsShare = false;
+		pointsDraw = QuickMatchDraw.BOTH;
+		limitTime = 60000;
+		limitPoints = 5;
+		limitRounds = -1;
+	}
+	
+	/////////////////////////////////////////////////////////////////
+	// LEVELS			/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	private LevelsSelection levelsSelection = new LevelsSelection();
 
 	public LevelsSelection getLevelsSelection()
 	{	return levelsSelection;	
-	}	
+	}
+	
 	public void setLevelsSelection(LevelsSelection selectedLevels)
 	{	this.levelsSelection = selectedLevels;	
-	}	
+	}
+
+	/////////////////////////////////////////////////////////////////
+	// PLAYERS			/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	private ProfilesSelection profilesSelection = new ProfilesSelection();
+
+	public ProfilesSelection getProfilesSelection()
+	{	return profilesSelection;	
+	}
+	
+	public void setProfilesSelection(ProfilesSelection profilesSelection)
+	{	this.profilesSelection = profilesSelection;	
+	}
 }
