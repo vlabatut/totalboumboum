@@ -277,7 +277,7 @@
 				</group>
 			</group>
 			<group name="Settings">
-				<text name="Title" value="Options de la partie" tooltip="Réglage des options générales de la partie" />
+				<text name="Title" value="Réglages de la partie" tooltip="Réglage des paramètres généraux de la partie" />
 				<group name="Button">
 					<text name="Next" value="Suivant" tooltip="Commencer la partie" />
 					<text name="Previous" value="Précédent" tooltip="Revenir à la sélection des niveaux" />
