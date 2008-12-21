@@ -106,12 +106,11 @@ public class ProfilesConfiguration
 		// used colors
 		ArrayList<PredefinedColor> usedColors = new ArrayList<PredefinedColor>();
 		for(Profile p: profiles)
-		{	PredefinedColor clr = p.getSpriteSelectedColor();
+		{	PredefinedColor clr = p.getSpriteColor();
 			usedColors.add(clr);
 		}
 		// preferred colors
 		ArrayList<PredefinedColor> preferredColors = new ArrayList<PredefinedColor>();
-		preferredColors.add(profile.getSpriteDefaultColor());
 		for(PredefinedColor c: PredefinedColor.values())
 		{	if(c==color || (!usedColors.contains(c) && !preferredColors.contains(c)))
 				preferredColors.add(c);
@@ -128,7 +127,7 @@ public class ProfilesConfiguration
 	{	// used colors
 		ArrayList<PredefinedColor> usedColors = new ArrayList<PredefinedColor>();
 		for(Profile p: profiles)
-		{	PredefinedColor clr = p.getSpriteSelectedColor();
+		{	PredefinedColor clr = p.getSpriteColor();
 			usedColors.add(clr);
 		}
 		boolean result = !usedColors.contains(color);
@@ -139,9 +138,10 @@ public class ProfilesConfiguration
 	{	ProfilesSelection result = new ProfilesSelection();
 		for(Profile p: profiles)
 		{	String file = p.getFileName();
-			PredefinedColor color = p.getSpriteSelectedColor();
+			PredefinedColor color = p.getSpriteColor();
 			int controlsIndex = p.getControlSettingsIndex();
-			result.addProfile(file, color, controlsIndex);			
+			String[] hero = {p.getSpritePack(),p.getSpriteFolder()};
+			result.addProfile(file,color,controlsIndex,hero);			
 		}
 		return result;
 	}

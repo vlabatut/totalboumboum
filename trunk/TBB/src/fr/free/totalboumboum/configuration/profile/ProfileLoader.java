@@ -45,9 +45,14 @@ public class ProfileLoader
 		{	// profile
 			String name = profilesSelection.getFileName(i);
 			Profile profile = loadProfile(name);
+			SpriteInfo selectedSprite = profile.getSelectedSprite();
+			SpriteInfo defaultSprite = profile.getDefaultSprite();
+			// sprite
+			selectedSprite.setPack(defaultSprite.getPack());
+			selectedSprite.setFolder(defaultSprite.getFolder());
+			selectedSprite.setName(defaultSprite.getName());
 			// color
-			PredefinedColor color = profilesSelection.getColor(i);
-			profile.setSpriteSelectedColor(color);
+			selectedSprite.setColor(defaultSprite.getColor());
 			// controls
 			int controlsIndex = profilesSelection.getControlsIndex(i);
 			profile.setControlSettingsIndex(controlsIndex);
@@ -103,32 +108,32 @@ public class ProfileLoader
     private static void loadSpriteElement(Element root, Profile result) throws ParserConfigurationException, SAXException, IOException, ClassNotFoundException
     {	// packname
     	String spritePackname = root.getAttribute(XmlTools.ATT_PACKNAME).getValue();
-    	result.setSpritePack(spritePackname);
+    	result.getDefaultSprite().setPack(spritePackname);
     	
     	// folder
     	String spriteFolder = root.getAttribute(XmlTools.ATT_NAME).getValue();
-    	result.setSpriteFolder(spriteFolder);
+    	result.getDefaultSprite().setFolder(spriteFolder);
     	
     	// name
     	SpritePreview heroPreview = new SpritePreview();
 		heroPreview = SpritePreviewLoader.loadHeroPreview(spritePackname,spriteFolder);
 		String spriteName = heroPreview.getName();
-		result.setSpriteName(spriteName);
+		result.getDefaultSprite().setName(spriteName);
     	
 		// color
 		String spriteDefaultColorStr = root.getAttribute(XmlTools.ATT_COLOR).getValue().trim().toUpperCase(Locale.ENGLISH);
     	PredefinedColor spriteDefaultColor = PredefinedColor.valueOf(spriteDefaultColorStr);
-    	result.setSpriteDefaultColor(spriteDefaultColor);
+    	result.getDefaultSprite().setColor(spriteDefaultColor);
 		
     	// portraits
-    	PredefinedColor spriteColor = result.getSpriteSelectedColor();
-		loadPortraits(result,spritePackname,spriteFolder,spriteColor);
+//    	PredefinedColor spriteColor = result.getSpriteSelectedColor();
+		loadPortraits(result,spritePackname,spriteFolder,spriteDefaultColor);
     }	        
 
     public static void reloadPortraits(Profile profile) throws ParserConfigurationException, SAXException, IOException, ClassNotFoundException
     {	String spritePackname = profile.getSpritePack();
 		String spriteFoldername = profile.getSpriteFolder();
-		PredefinedColor spriteColor = profile.getSpriteSelectedColor();
+		PredefinedColor spriteColor = profile.getSpriteColor();
 		loadPortraits(profile,spritePackname,spriteFoldername,spriteColor);
     }
     

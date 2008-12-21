@@ -87,11 +87,11 @@ public class ProfileSubPanel extends UntitledSubPanelTable
 				values.add(profile.getSpritePack());
 			Color colorBg = null;
 			if(showColor)
-			{	String colorKey = profile.getSpriteSelectedColor().toString();
+			{	String colorKey = profile.getSpriteColor().toString();
 				colorKey = colorKey.toUpperCase().substring(0,1)+colorKey.toLowerCase().substring(1,colorKey.length());
 				colorKey = GuiKeys.COMMON_COLOR+colorKey;				 
 				values.add(GuiConfiguration.getMiscConfiguration().getLanguage().getText(colorKey));			
-				Color clr = profile.getSpriteSelectedColor().getColor();
+				Color clr = profile.getSpriteColor().getColor();
 				int alpha = GuiTools.ALPHA_TABLE_REGULAR_BACKGROUND_LEVEL3;
 				colorBg = new Color(clr.getRed(),clr.getGreen(),clr.getBlue(),alpha);
 			}

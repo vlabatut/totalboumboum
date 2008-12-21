@@ -42,13 +42,20 @@ public class ProfilesSelectionLoader
 	private static void loadPlayerElement(Element root, ProfilesSelection result)
 	{	// file
 		String fileName = root.getAttributeValue(XmlTools.ATT_FILE);
+		
 		// color
 		String colorStr = root.getAttributeValue(XmlTools.ATT_COLOR);
 		PredefinedColor color = PredefinedColor.valueOf(colorStr.toUpperCase(Locale.ENGLISH));
+		
 		// controls
 		String controlsStr = root.getAttributeValue(XmlTools.ATT_CONTROLS);
 		int controlsIndex = Integer.parseInt(controlsStr);
-		// result
-		result.addProfile(fileName, color, controlsIndex);
+
+		// sprite
+		String spriteFolder = root.getAttributeValue(XmlTools.ATT_SPRITE_FOLDER);
+		String spritePack = root.getAttributeValue(XmlTools.ATT_SPRITE_PACK);
+		String[] hero = {spritePack,spriteFolder};
+		
+		result.addProfile(fileName,color,controlsIndex,hero);
 	}
 }

@@ -35,6 +35,7 @@ import org.xml.sax.SAXException;
 
 import fr.free.totalboumboum.configuration.profile.Profile;
 import fr.free.totalboumboum.configuration.profile.ProfileLoader;
+import fr.free.totalboumboum.configuration.profile.SpriteInfo;
 import fr.free.totalboumboum.engine.content.sprite.SpritePreview;
 import fr.free.totalboumboum.gui.common.structure.panel.SplitMenuPanel;
 import fr.free.totalboumboum.gui.common.structure.panel.menu.InnerMenuPanel;
@@ -92,12 +93,13 @@ public class SelectHeroMenu extends InnerMenuPanel
 		{	SpritePreview heroPreview = heroData.getSelectedHeroPreview();
 			if(heroPreview!=null)
 			{	// update profile
+				SpriteInfo spriteInfo = profile.getSelectedSprite();
 				String spriteName = heroPreview.getName();
-				profile.setSpriteName(spriteName);
+				spriteInfo.setName(spriteName);
 				String spriteFolder = heroPreview.getFolder();
-				profile.setSpriteFolder(spriteFolder);
+				spriteInfo.setFolder(spriteFolder);
 				String spritePack = heroPreview.getPack();
-				profile.setSpritePack(spritePack);
+				spriteInfo.setPack(spritePack);
 				// reload portraits
 				try
 				{	ProfileLoader.reloadPortraits(profile);

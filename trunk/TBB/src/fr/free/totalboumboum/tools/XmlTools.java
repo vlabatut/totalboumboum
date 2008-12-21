@@ -267,6 +267,8 @@ public class XmlTools
 	public static final String ATT_SHADOW_XSHIFT = "shadowXShift";
 	public static final String ATT_SHADOW_YSHIFT = "shadowYShift";
 	public static final String ATT_SHARE = "share";
+	public static final String ATT_SPRITE_FOLDER = "spriteFolder";
+	public static final String ATT_SPRITE_PACK = "spritePack";
 	public static final String ATT_STRENGTH = "strength";
 	public static final String ATT_SUP = "sup";
 	public static final String ATT_TARGET = "target";

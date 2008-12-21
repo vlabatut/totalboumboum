@@ -139,7 +139,7 @@ sc = "Time";
 				line++;
 				Profile profile = players.get(orderedPlayers[i]);
 				// color
-				Color clr = profile.getSpriteSelectedColor().getColor();
+				Color clr = profile.getSpriteColor().getColor();
 				// name
 				{	JLabel nameLabel = getLabel(line, col++);
 					String playerName = profile.getName();

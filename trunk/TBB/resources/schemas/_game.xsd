@@ -6,6 +6,8 @@
 		<xsd:attribute name="file" type="xsd:string" use="required" />
 		<xsd:attribute name="color" type="tColor" use="required" />
 		<xsd:attribute name="controls" type="xsd:integer" use="optional" default="0"/>
+		<xsd:attribute name="spriteFolder" type="xsd:string" use="required"/>
+		<xsd:attribute name="spritePack" type="xsd:string" use="required" />
 	</xsd:complexType>
 
 	<xsd:complexType name="tPlayers">

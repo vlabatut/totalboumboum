@@ -91,7 +91,7 @@ public class ProfileSaver
 		String packname = profile.getSpritePack();
 		result.setAttribute(XmlTools.ATT_PACKNAME,packname);
 		// colors
-		String defaultColor = profile.getSpriteDefaultColor().toString().toLowerCase(Locale.ENGLISH);
+		String defaultColor = profile.getDefaultSprite().getColor().toString().toLowerCase(Locale.ENGLISH);
 		result.setAttribute(XmlTools.ATT_COLOR,defaultColor);
 		//
 		return result;
