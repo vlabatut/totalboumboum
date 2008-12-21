@@ -24,13 +24,21 @@ package fr.free.totalboumboum.gui.menus.options.game.quickmatch;
 import java.awt.Color;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.io.IOException;
 import java.util.ArrayList;
 
 import javax.swing.Box;
 import javax.swing.BoxLayout;
 import javax.swing.JLabel;
+import javax.xml.parsers.ParserConfigurationException;
 
+import org.xml.sax.SAXException;
+
+import fr.free.totalboumboum.configuration.game.quickstart.QuickStartConfiguration;
 import fr.free.totalboumboum.configuration.profile.Profile;
+import fr.free.totalboumboum.configuration.profile.ProfileLoader;
+import fr.free.totalboumboum.configuration.profile.ProfilesConfiguration;
+import fr.free.totalboumboum.configuration.profile.ProfilesSelection;
 import fr.free.totalboumboum.gui.common.content.subpanel.players.PlayersSelectionSubPanel;
 import fr.free.totalboumboum.gui.common.content.subpanel.players.PlayersSelectionSubPanelListener;
 import fr.free.totalboumboum.gui.common.structure.panel.SplitMenuPanel;
@@ -43,7 +51,7 @@ import fr.free.totalboumboum.gui.menus.quickmatch.players.profile.SelectProfileS
 import fr.free.totalboumboum.gui.tools.GuiKeys;
 import fr.free.totalboumboum.gui.tools.GuiTools;
 
-public class QuickmatchData extends EntitledDataPanel implements PlayersSelectionSubPanelListener, MouseListener
+public class QuickMatchData extends EntitledDataPanel implements PlayersSelectionSubPanelListener, MouseListener
 {	
 	private static final long serialVersionUID = 1L;
 	private static final float SPLIT_RATIO = 0.06f;
@@ -54,7 +62,7 @@ public class QuickmatchData extends EntitledDataPanel implements PlayersSelectio
 	private int roundHeight;
 	private int playersHeight;
 
-	public QuickmatchData(SplitMenuPanel container)
+	public QuickMatchData(SplitMenuPanel container)
 	{	super(container);
 		
 		// title
@@ -122,6 +130,7 @@ public class QuickmatchData extends EntitledDataPanel implements PlayersSelectio
 //		JLabel label = (JLabel)e.getComponent();
 //		int[] pos = playersPanel.getLabelPosition(label);
 		// round
+		StringBuffer roundFile = quickStartConfiguration.getRoundName();
 		SelectRoundSplitPanel selectRoundPanel = new SelectRoundSplitPanel(container.getContainer(),container,roundFile);
 		getContainer().replaceWith(selectRoundPanel);
 	}
@@ -132,35 +141,57 @@ public class QuickmatchData extends EntitledDataPanel implements PlayersSelectio
 	}
 
 	/////////////////////////////////////////////////////////////////
-	// PLAYERS						/////////////////////////////////
+	// CONFIGURATION				/////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	private ArrayList<Profile> players;
+	private QuickStartConfiguration quickStartConfiguration;
 
-	public void setSelectedProfiles(ArrayList<Profile> selectedProfiles)
-	{	players = selectedProfiles;
-		playersPanel.setPlayers(players);
+	public void setQuickStartConfiguration(QuickStartConfiguration quickStartConfiguration)
+	{	this.quickStartConfiguration = quickStartConfiguration;
+		try
+		{	ProfilesSelection profilesSelection = quickStartConfiguration.getProfilesSelection();
+			ArrayList<Profile> profiles = ProfileLoader.loadProfiles(profilesSelection);
+			playersPanel.setPlayers(profiles);
+			refreshRound();
+		}
+		catch (IllegalArgumentException e1)
+		{	e1.printStackTrace();
+		}
+		catch (SecurityException e1)
+		{	e1.printStackTrace();
+		}
+		catch (ParserConfigurationException e1)
+		{	e1.printStackTrace();
+		}
+		catch (SAXException e1)
+		{	e1.printStackTrace();
+		}
+		catch (IOException e1)
+		{	e1.printStackTrace();
+		}
+		catch (IllegalAccessException e1)
+		{	e1.printStackTrace();
+		}
+		catch (NoSuchFieldException e1)
+		{	e1.printStackTrace();
+		}
+		catch (ClassNotFoundException e1)
+		{	e1.printStackTrace();
+		}		
 	}
 	
-	public ArrayList<Profile> getSelectedProfiles()
-	{	return players;	
+	public QuickStartConfiguration getQuickStartConfiguration()
+	{	ArrayList<Profile> players = playersPanel.getPlayers();
+		ProfilesSelection profilesSelection = ProfilesConfiguration.getSelection(players);
+		quickStartConfiguration.setProfilesSelection(profilesSelection);
+		return quickStartConfiguration;	
 	}
 
 	/////////////////////////////////////////////////////////////////
 	// ROUND			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	private StringBuffer roundFile;
-	
-	public void setRound(String roundFolder)
-	{	roundFile = new StringBuffer(roundFolder);
-		refreshRound();
-	}
-	
-	public String getSelectedRound()
-	{	return roundFile.toString();	
-	}
-	
 	private void refreshRound()
-	{	if(roundFile!=null)
+	{	String roundFile = quickStartConfiguration.getRoundName().toString();
+		if(roundFile!=null)
 			roundPanel.setLabelText(0,0,roundFile.toString(),roundFile.toString());
 		else
 			roundPanel.setLabelText(0,0,null,null);
@@ -224,13 +255,15 @@ public class QuickmatchData extends EntitledDataPanel implements PlayersSelectio
 
 	@Override
 	public void playerSelectionPlayerAdded(int index)
-	{	SelectProfileSplitPanel selectProfilePanel = new SelectProfileSplitPanel(container.getContainer(),container,index,players);
+	{	ArrayList<Profile> players = playersPanel.getPlayers();
+		SelectProfileSplitPanel selectProfilePanel = new SelectProfileSplitPanel(container.getContainer(),container,index,players);
 		getContainer().replaceWith(selectProfilePanel);
 	}
 
 	@Override
 	public void playerSelectionProfileSet(int index)
-	{	SelectProfileSplitPanel selectProfilePanel = new SelectProfileSplitPanel(container.getContainer(),container,index,players);
+	{	ArrayList<Profile> players = playersPanel.getPlayers();
+		SelectProfileSplitPanel selectProfilePanel = new SelectProfileSplitPanel(container.getContainer(),container,index,players);
 		getContainer().replaceWith(selectProfilePanel);
 	}
 }

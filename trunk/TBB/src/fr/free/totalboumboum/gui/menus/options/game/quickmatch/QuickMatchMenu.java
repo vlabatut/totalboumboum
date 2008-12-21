@@ -1,4 +1,4 @@
-package fr.free.totalboumboum.gui.menus.options.game.quickstart;
+package fr.free.totalboumboum.gui.menus.options.game.quickmatch;
 
 /*
  * Total Boum Boum
@@ -43,17 +43,17 @@ import fr.free.totalboumboum.gui.common.structure.panel.menu.MenuPanel;
 import fr.free.totalboumboum.gui.tools.GuiKeys;
 import fr.free.totalboumboum.gui.tools.GuiTools;
 
-public class QuickstartMenu extends InnerMenuPanel
+public class QuickMatchMenu extends InnerMenuPanel
 {	private static final long serialVersionUID = 1L;
 	
-	private QuickStartData quickstartPanel;
+	private QuickMatchData quickstartPanel;
 	
 	@SuppressWarnings("unused")
 	private JButton buttonConfirm;
 	@SuppressWarnings("unused")
 	private JButton buttonCancel;
 		
-	public QuickstartMenu(SplitMenuPanel container, MenuPanel parent)
+	public QuickMatchMenu(SplitMenuPanel container, MenuPanel parent)
 	{	super(container,parent);
 	
 		// layout
@@ -77,7 +77,7 @@ public class QuickstartMenu extends InnerMenuPanel
 		add(Box.createVerticalGlue());		
 	
 		// panels
-		quickstartPanel = new QuickStartData(container);
+		quickstartPanel = new QuickMatchData(container);
 		container.setDataPart(quickstartPanel);
 		initConfiguration();
 	}
