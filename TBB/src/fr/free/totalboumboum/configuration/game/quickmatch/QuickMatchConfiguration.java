@@ -29,19 +29,29 @@ public class QuickMatchConfiguration
 {
 	public QuickMatchConfiguration copy()
 	{	QuickMatchConfiguration result = new QuickMatchConfiguration();
-		
-		ProfilesSelection profilesCopy = profilesSelection.copy();
-		result.setProfilesSelection(profilesCopy);
+
+		// options
 		result.setUseLastPlayers(useLastPlayers);
-		LevelsSelection levelsCopy = levelsSelection.copy();
-		result.setLevelsSelection(levelsCopy);
 		result.setUseLastLevels(useLastLevels);
+		result.setUseLastSettings(useLastSettings);
+	
+		// settings
 		result.setLevelsRandomOrder(levelsRandomOrder);
 		result.setPlayersRandomLocation(playersRandomLocation);
+		result.limitPoints = limitPoints;
+		result.limitRounds = limitRounds;
+		result.limitTime = limitTime;
 		result.setPoints(points);
 		result.setPointsShare(pointsShare);
 		result.setPointsDraw(pointsDraw);
-		result.setUseLastSettings(useLastSettings);
+		
+		// levels
+		LevelsSelection levelsCopy = levelsSelection.copy();
+		result.setLevelsSelection(levelsCopy);
+
+		// players
+		ProfilesSelection profilesCopy = profilesSelection.copy();
+		result.setProfilesSelection(profilesCopy);
 
 		return result;
 	}
