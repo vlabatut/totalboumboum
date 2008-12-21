@@ -43,7 +43,7 @@ import fr.free.totalboumboum.gui.common.structure.panel.menu.MenuPanel;
 import fr.free.totalboumboum.gui.tools.GuiKeys;
 import fr.free.totalboumboum.gui.tools.GuiTools;
 
-public class QuickStartMenu extends InnerMenuPanel
+public class CopyOfQuickStartMenu extends InnerMenuPanel
 {	private static final long serialVersionUID = 1L;
 	
 	private QuickStartData quickstartPanel;
@@ -53,7 +53,7 @@ public class QuickStartMenu extends InnerMenuPanel
 	@SuppressWarnings("unused")
 	private JButton buttonCancel;
 		
-	public QuickStartMenu(SplitMenuPanel container, MenuPanel parent)
+	public CopyOfQuickStartMenu(SplitMenuPanel container, MenuPanel parent)
 	{	super(container,parent);
 	
 		// layout
@@ -98,7 +98,7 @@ public class QuickStartMenu extends InnerMenuPanel
 	public void actionPerformed(ActionEvent e)
 	{	if(e.getActionCommand().equals(GuiKeys.MENU_OPTIONS_BUTTON_CONFIRM))
 		{	QuickStartConfiguration copyConfiguration = quickstartPanel.getQuickStartConfiguration();
-			if(!quickStartConfiguration.hasChanged(copyConfiguration))
+			if(quickStartConfiguration.hasChanged(copyConfiguration))
 			{	Configuration.getGameConfiguration().setQuickStartConfiguration(copyConfiguration);
 				try
 				{	QuickStartConfigurationSaver.saveQuickStartConfiguration(copyConfiguration);
