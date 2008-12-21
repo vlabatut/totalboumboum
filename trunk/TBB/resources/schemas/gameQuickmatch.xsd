@@ -40,6 +40,7 @@
 
 	<xsd:simpleType name="tMatchSettingsDraw">
 		<xsd:restriction base="xsd:string">
+			<xsd:enumeration value="none" />
 			<xsd:enumeration value="both" />
 			<xsd:enumeration value="time" />
 			<xsd:enumeration value="autokill" />

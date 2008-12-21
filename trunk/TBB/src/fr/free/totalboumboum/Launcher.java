@@ -883,4 +883,11 @@ public class Launcher
 	 * reformater les modes de jeu :
 	 * 	- pour paint il suffit de définir des bombes spéciales qui peignent le sol
 	 */	
+
+	/*
+	 * TODO
+	 * pq ne pas mutualiser localement les split panels ?
+	 * ex: plutot que de faire un truc séquentiel compliqué pr quickmatch,
+	 * faire un seul split qui choisit les menu/data panels en fonction de l'état du match
+	 */
 }

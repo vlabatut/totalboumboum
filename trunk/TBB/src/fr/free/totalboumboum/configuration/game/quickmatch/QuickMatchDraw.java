@@ -2,16 +2,18 @@ package fr.free.totalboumboum.configuration.game.quickmatch;
 
 public enum QuickMatchDraw
 {
-	BOTH,TIME,AUTOKILL;
+	NONE,BOTH,TIME,AUTOKILL;
 	
 	public static QuickMatchDraw getNext(QuickMatchDraw value)
-	{	QuickMatchDraw result;
-		if(value==BOTH)
+	{	QuickMatchDraw result = null;
+		if(value==NONE)
+			result = BOTH;
+		else if(value==BOTH)
 			result = TIME;
 		else if(value==TIME)
 			result = AUTOKILL;
-		else
-			result = BOTH;
+		else if(value==AUTOKILL)
+			result = NONE;
 		return result;
 	}
 }
