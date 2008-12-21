@@ -889,5 +889,8 @@ public class Launcher
 	 * pq ne pas mutualiser localement les split panels ?
 	 * ex: plutot que de faire un truc séquentiel compliqué pr quickmatch,
 	 * faire un seul split qui choisit les menu/data panels en fonction de l'état du match
+	 * 
+	 * en profiter pour réorganiser la transmission du tournoi lors des modifications
+	 * style players >> levels >> settings
 	 */
 }

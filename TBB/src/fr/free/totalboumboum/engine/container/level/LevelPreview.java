@@ -23,6 +23,7 @@ package fr.free.totalboumboum.engine.container.level;
 
 import java.awt.image.BufferedImage;
 import java.util.HashMap;
+import java.util.Set;
 
 import fr.free.totalboumboum.engine.container.itemset.ItemsetPreview;
 
@@ -138,7 +139,6 @@ public class LevelPreview
 	/////////////////////////////////////////////////////////////////
 	// INITIAL ITEMS	/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-
 	private HashMap<String,Integer> initialItems;
 
 	public HashMap<String, Integer> getInitialItems()
@@ -148,4 +148,16 @@ public class LevelPreview
 	{	this.initialItems = initialItems;
 	}
 
+	/////////////////////////////////////////////////////////////////
+	// PLAYERS			/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	private Set<Integer> allowedPlayerNumbers;
+	
+	public Set<Integer> getAllowedPlayerNumbers()
+	{	return allowedPlayerNumbers;    	
+    }
+
+    public void setAllowedPlayerNumbers(Set<Integer> allowedPlayerNumbers)
+    {	this.allowedPlayerNumbers = allowedPlayerNumbers;    	
+    }
 }
