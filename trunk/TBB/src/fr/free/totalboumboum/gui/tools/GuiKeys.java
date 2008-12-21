@@ -593,6 +593,7 @@ public class GuiKeys
 	/* LEVEL */
 	public static final String COMMON_LEVEL = COMMON+LEVEL;
 	public static final String COMMON_LEVEL_TITLE = COMMON_LEVEL+TITLE;
+	public static final String COMMON_LEVEL_ALLOWED_PLAYERS = COMMON_LEVEL+ALLOWED+PLAYERS;
 	public static final String COMMON_LEVEL_AUTHOR = COMMON_LEVEL+AUTHOR;
 	public static final String COMMON_LEVEL_DIMENSION = COMMON_LEVEL+DIMENSION;
 	public static final String COMMON_LEVEL_INSTANCE = COMMON_LEVEL+INSTANCE;

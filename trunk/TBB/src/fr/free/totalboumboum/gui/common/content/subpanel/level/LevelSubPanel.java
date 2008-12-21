@@ -34,6 +34,7 @@ import fr.free.totalboumboum.gui.common.structure.subpanel.UntitledSubPanelTable
 import fr.free.totalboumboum.gui.data.configuration.GuiConfiguration;
 import fr.free.totalboumboum.gui.tools.GuiKeys;
 import fr.free.totalboumboum.gui.tools.GuiTools;
+import fr.free.totalboumboum.tools.StringTools;
 
 public class LevelSubPanel extends SubPanel
 {	private static final long serialVersionUID = 1L;
@@ -93,6 +94,8 @@ public class LevelSubPanel extends SubPanel
 			keys.add(GuiKeys.COMMON_LEVEL_THEME);
 		if(showDimension)
 			keys.add(GuiKeys.COMMON_LEVEL_DIMENSION);
+		if(showAllowedPlayerNumbers)
+			keys.add(GuiKeys.COMMON_LEVEL_ALLOWED_PLAYERS);
 		
 		if(levelPreview!=null)
 		{	// text
@@ -111,6 +114,8 @@ public class LevelSubPanel extends SubPanel
 				values.add(levelPreview.getThemeName());
 			if(showDimension)
 				values.add(Integer.toString(levelPreview.getVisibleHeight())+new Character('\u00D7').toString()+Integer.toString(levelPreview.getVisibleWidth()));
+			if(showAllowedPlayerNumbers)
+				values.add(StringTools.formatAllowedPlayerNumbers(levelPreview.getAllowedPlayerNumbers()));
 			
 			// content
 			for(int line=0;line<keys.size();line++)
@@ -178,6 +183,7 @@ public class LevelSubPanel extends SubPanel
 	private boolean showInstance = true;
 	private boolean showTheme = true;
 	private boolean showDimension = true;
+	private boolean showAllowedPlayerNumbers = true;
 
 	public void setShowTitle(boolean showTitle)
 	{	this.showTitle = showTitle;
@@ -210,5 +216,9 @@ public class LevelSubPanel extends SubPanel
 
 	public void setShowDimension(boolean showDimension)
 	{	this.showDimension = showDimension;
+	}
+
+	public void setShowAllowedPlayerNumbers(boolean showAllowedPlayerNumbers)
+	{	this.showAllowedPlayerNumbers = showAllowedPlayerNumbers;
 	}
 }

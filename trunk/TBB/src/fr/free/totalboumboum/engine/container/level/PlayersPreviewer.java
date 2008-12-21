@@ -26,6 +26,8 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Set;
+import java.util.TreeSet;
 
 import javax.xml.parsers.ParserConfigurationException;
 
@@ -54,10 +56,27 @@ public class PlayersPreviewer
     private static void previewPlayersElement(Element root, LevelPreview result)
     {	// init
     	Element element;
+    	// locations
+    	element = root.getChild(XmlTools.ELT_LOCATIONS);
+    	previewLocationsElement(element,result);
     	// items
     	element = root.getChild(XmlTools.ELT_ITEMS);
     	previewItemsElement(element,result);
     }
+    
+    @SuppressWarnings("unchecked")
+	private static void previewLocationsElement(Element root, LevelPreview result)
+    {	Set<Integer> allowedPlayersNumber = new TreeSet<Integer>();
+    	List<Element> elements = root.getChildren(XmlTools.ELT_CASE);
+		Iterator<Element> i = elements.iterator();
+		while(i.hasNext())
+		{	Element temp = i.next();
+			String valStr = temp.getAttribute(XmlTools.ATT_PLAYERS).getValue().trim();
+			int value = Integer.valueOf(valStr);
+			allowedPlayersNumber.add(value);
+		}
+		result.setAllowedPlayerNumbers(allowedPlayersNumber);
+	}
     
     @SuppressWarnings("unchecked")
     private static void previewItemsElement(Element root, LevelPreview result)

@@ -165,12 +165,45 @@ public class LevelsData extends EntitledDataPanel implements PackBrowserSubPanel
 	private LevelsSelection levelsSelection;
 	private HashMap<String,String> fileNames;
 	private LevelPreview selectedLevelPreview = null;
+	private int playerCount = 0;
 
-	public void setLevelsSelection(LevelsSelection levelsSelection)
-	{	this.levelsSelection = levelsSelection;
-		fileNames = new HashMap<String, String>();	
+	public void setLevelsSelection(LevelsSelection levelsSelection, int playerCount)
+	{	// player count
+		this.playerCount = playerCount;
+		// level selection
+		this.levelsSelection = levelsSelection;
+		checkLevelsSelection();
+		// filenames
+		fileNames = new HashMap<String,String>();	
 		numberFileNames();
 		selectedPanel.setFileNames(fileNames);
+	}
+	
+	private void checkLevelsSelection()
+	{	int i=0;
+		while(i<levelsSelection.getLevelCount())
+		{	String pack = levelsSelection.getPackName(i);
+			String folder = levelsSelection.getFolderName(i);
+			try
+			{	LevelPreview levelPreview = LevelPreviewLoader.loadLevelPreview(pack,folder);
+				if(levelPreview.getAllowedPlayerNumbers().contains(playerCount))
+					i++;
+				else
+					levelsSelection.removeLevel(i);
+			}
+			catch (ParserConfigurationException e)
+			{	e.printStackTrace();
+			}
+			catch (SAXException e)
+			{	e.printStackTrace();
+			}
+			catch (IOException e)
+			{	e.printStackTrace();
+			}
+			catch (ClassNotFoundException e)
+			{	e.printStackTrace();
+			}
+		}
 	}
 	
 	private void numberFileNames()
@@ -206,9 +239,13 @@ public class LevelsData extends EntitledDataPanel implements PackBrowserSubPanel
 	{	String pack = selectionPanel.getSelectedPack();
 		String folder = selectionPanel.getSelectedName();
 		if(pack==null || folder==null)
-			selectedLevelPreview = null;
+		{	selectedLevelPreview = null;
+			refreshPreview();
+			commandsPanel.setEnabledLeft(true);
+		}
 		else
-		{	try
+		{	// preview
+			try
 			{	selectedLevelPreview = LevelPreviewLoader.loadLevelPreview(pack,folder);
 			}
 			catch (ParserConfigurationException e)
@@ -223,8 +260,13 @@ public class LevelsData extends EntitledDataPanel implements PackBrowserSubPanel
 			catch (ClassNotFoundException e)
 			{	e.printStackTrace();
 			}
+			refreshPreview();
+			// allowed players number
+			if(selectedLevelPreview.getAllowedPlayerNumbers().contains(playerCount))
+				commandsPanel.setEnabledLeft(true);
+			else
+				commandsPanel.setEnabledLeft(false);
 		}
-		refreshPreview();
 	}
 
 	/////////////////////////////////////////////////////////////////

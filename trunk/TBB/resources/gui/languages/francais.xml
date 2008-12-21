@@ -492,6 +492,7 @@
 <!-- LEVEL -->
 		<group name="Level">
 			<text name="Title" value="Divers"  tooltip="Informations diverses sur le niveau" />
+			<text name="AllowedPlayers" value="Joueurs" tooltip="Nombre de joueurs autorisés sur ce niveau" />
 			<text name="Author" value="Auteur"  tooltip="Auteur/ripper du niveau" />
 			<text name="Dimension" value="Dimension"  tooltip="Dimension de la zone de jeu visible" />
 			<text name="Instance" value="Instance"  tooltip="Instance utilisée dans le niveau" />

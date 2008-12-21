@@ -170,8 +170,7 @@ buttonAbout.setEnabled(false);
 				}
 				else
 				{	quickmatchGamePanel.refresh();
-					replaceWith(quickmatchGamePanel);
-				
+					replaceWith(quickmatchGamePanel);			
 				}
 			}
 	    }

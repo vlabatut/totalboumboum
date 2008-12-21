@@ -67,13 +67,24 @@ public class TransferSubPanel extends UntitledSubPanelTable implements MouseList
 			keys.add(GuiKeys.COMMON_TRANSFER_LEFT);
 		if(showRight)
 			keys.add(GuiKeys.COMMON_TRANSFER_RIGHT);
+
+		// enabled
+		ArrayList<Boolean> enabled = new ArrayList<Boolean>();
+		if(showLeft)
+			enabled.add(enabledLeft);
+		if(showRight)
+			enabled.add(enabledRight);
 		
 		// content
 		for(int line=0;line<keys.size();line++)
 		{	// header
 			int col = 0;
 			{	setLabelKey(line,col,keys.get(line),true);
-				Color bg = GuiTools.COLOR_TABLE_HEADER_BACKGROUND;
+				Color bg;
+				if(enabled.get(line))
+					bg = GuiTools.COLOR_TABLE_HEADER_BACKGROUND;
+				else
+					bg = GuiTools.COLOR_TABLE_NEUTRAL_BACKGROUND;
 				setLabelBackground(line,col,bg);
 				JLabel label = getLabel(line,col);
 				label.addMouseListener(this);
@@ -87,14 +98,24 @@ public class TransferSubPanel extends UntitledSubPanelTable implements MouseList
 	/////////////////////////////////////////////////////////////////
 	private boolean showLeft = true;
 	private boolean showRight = true;
+	private boolean enabledLeft = true;
+	private boolean enabledRight = true;
 
 	public void setShowLeft(boolean showLeft)
 	{	this.showLeft = showLeft;
 		init();
 	}
+	public void setEnabledLeft(boolean enabled)
+	{	enabledLeft = enabled;
+		init();
+	}
 
 	public void setShowRight(boolean showRight)
 	{	this.showRight = showRight;
+		init();
+	}
+	public void setEnabledRight(boolean enabled)
+	{	enabledRight = enabled;
 		init();
 	}
 
@@ -122,11 +143,11 @@ public class TransferSubPanel extends UntitledSubPanelTable implements MouseList
 		int[] pos = getLabelPosition(label);
 		
 		// left
-		if(pos[0]==lineLeft)
+		if(pos[0]==lineLeft && enabledLeft)
 		{	fireTransferLeft();			
 		}
 		// right
-		else if(pos[0]==lineRight)
+		else if(pos[0]==lineRight && enabledRight)
 		{	fireTransferRight();			
 		}
 	}

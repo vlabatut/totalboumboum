@@ -57,41 +57,30 @@ public class LevelPreviewLoader
     }
 
     private static void loadLevelElement(String folder, Element root, LevelPreview result) throws ParserConfigurationException, SAXException, IOException, ClassNotFoundException
-	{	// init
-		Element element;
+	{	// title
+		Element titleElement = root.getChild(XmlTools.ELT_TITLE);
+		loadTitleElement(titleElement,result);
 		
-		// misc
-		element = root.getChild(XmlTools.ELT_TITLE);
-		String title = element.getAttribute(XmlTools.ATT_VALUE).getValue().trim();
-		result.setTitle(title);
-		element = root.getChild(XmlTools.ELT_AUTHOR);
-		String author = element.getAttribute(XmlTools.ATT_VALUE).getValue().trim();
-		result.setAuthor(author);
-		element = root.getChild(XmlTools.ELT_SOURCE);
-		String source = element.getAttribute(XmlTools.ATT_VALUE).getValue().trim();
-		result.setSource(source);
+		// author
+		Element authorElement = root.getChild(XmlTools.ELT_AUTHOR);
+		loadAuthorElement(authorElement,result);
+		
+		// source
+		Element sourceElement = root.getChild(XmlTools.ELT_SOURCE);
+		loadSourceElement(sourceElement,result);
 		
 		// visible size
-		element = root.getChild(XmlTools.ELT_VISIBLE_DIMENSION);
-		String visibleHeightStr = element.getAttribute(XmlTools.ATT_HEIGHT).getValue().trim();
-		int visibleHeight = Integer.parseInt(visibleHeightStr);
-		result.setVisibleHeight(visibleHeight);
-		String visibleWidthStr = element.getAttribute(XmlTools.ATT_WIDTH).getValue().trim();
-		int visibleWidth = Integer.parseInt(visibleWidthStr);
-		result.setVisibleWidth(visibleWidth);
+		Element visibleDimensionElement = root.getChild(XmlTools.ELT_VISIBLE_DIMENSION);
+		loadVisibleDimensionElement(visibleDimensionElement,result);
 
 		// visual preview
-		element = root.getChild(XmlTools.ELT_PREVIEW);
-		String filePath = folder+File.separator+element.getAttribute(XmlTools.ATT_FILE).getValue().trim();
-		BufferedImage image = ImageTools.loadImage(filePath,null);
-    	result.setVisualPreview(image);		
+		Element previewElement = root.getChild(XmlTools.ELT_PREVIEW);
+		loadPreviewElement(previewElement,folder,result);
 		
 		// instance
-		element = root.getChild(XmlTools.ELT_INSTANCE);
-		String instanceName = element.getAttribute(XmlTools.ATT_NAME).getValue().trim();
-		result.setInstanceName(instanceName);
-		String instanceFolder = FileTools.getInstancesPath()+File.separator+instanceName;
-
+		Element instanceElement = root.getChild(XmlTools.ELT_INSTANCE);
+		loadInstanceElement(instanceElement,result);
+		
 		// players stuff preview
 		PlayersPreviewer.previewPlayers(folder,result);
 /*
@@ -104,16 +93,59 @@ public class LevelPreviewLoader
 		Zone zone = ZoneLoader.loadZone(folder,globalHeight,globalWidth);
 */
 		// theme
-		element = root.getChild(XmlTools.ELT_THEME);
-		String themeName = element.getAttribute(XmlTools.ATT_NAME).getValue().trim();
+		Element themeElement = root.getChild(XmlTools.ELT_THEME);
+		loadThemeElement(themeElement,result);
+		
+		// itemset
+		String instanceFolder = FileTools.getInstancesPath()+File.separator+result.getInstanceName();		
+		String itemFolder = instanceFolder + File.separator+FileTools.FOLDER_ITEMS;
+		ItemsetPreview itemsetPreview = ItemsetPreviewLoader.loadItemsetPreview(itemFolder);
+		result.setItemsetPreview(itemsetPreview);
+	}
+    
+    private static void loadTitleElement(Element root, LevelPreview result)
+    {	String title = root.getAttribute(XmlTools.ATT_VALUE).getValue().trim();
+		result.setTitle(title);    	
+    }
+
+    private static void loadAuthorElement(Element root, LevelPreview result)
+    {	String author = root.getAttribute(XmlTools.ATT_VALUE).getValue().trim();
+		result.setAuthor(author);		   	
+    }
+    
+    private static void loadSourceElement(Element root, LevelPreview result)
+    {	String source = root.getAttribute(XmlTools.ATT_VALUE).getValue().trim();
+		result.setSource(source);
+    }
+    
+	private static void loadVisibleDimensionElement(Element root, LevelPreview result)
+	{	// height
+    	String visibleHeightStr = root.getAttribute(XmlTools.ATT_HEIGHT).getValue().trim();
+		int visibleHeight = Integer.parseInt(visibleHeightStr);
+		result.setVisibleHeight(visibleHeight);
+		// width
+		String visibleWidthStr = root.getAttribute(XmlTools.ATT_WIDTH).getValue().trim();
+		int visibleWidth = Integer.parseInt(visibleWidthStr);
+		result.setVisibleWidth(visibleWidth);
+    }
+	
+	private static void loadPreviewElement(Element root, String folder, LevelPreview result) throws IOException
+	{	String filePath = folder+File.separator+root.getAttribute(XmlTools.ATT_FILE).getValue().trim();
+		BufferedImage image = ImageTools.loadImage(filePath,null);
+    	result.setVisualPreview(image);				
+	}
+	
+	private static void loadInstanceElement(Element root, LevelPreview result)
+	{	String instanceName = root.getAttribute(XmlTools.ATT_NAME).getValue().trim();
+		result.setInstanceName(instanceName);
+	}
+	
+	private static void loadThemeElement(Element root, LevelPreview result)
+	{	String instanceFolder = FileTools.getInstancesPath()+File.separator+result.getInstanceName();		
+		String themeName = root.getAttribute(XmlTools.ATT_NAME).getValue().trim();
 		result.setThemeName(themeName);
 		String themeFolder = instanceFolder + File.separator + FileTools.FOLDER_THEMES;
 		@SuppressWarnings("unused")
 		String themePath = themeFolder + File.separator+themeName;
-
-		// itemset
-		String itemFolder = instanceFolder + File.separator+FileTools.FOLDER_ITEMS;
-		ItemsetPreview itemsetPreview = ItemsetPreviewLoader.loadItemsetPreview(itemFolder);
-		result.setItemsetPreview(itemsetPreview);
 	}
 }

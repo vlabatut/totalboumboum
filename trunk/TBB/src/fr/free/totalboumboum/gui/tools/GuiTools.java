@@ -543,7 +543,8 @@ public class GuiTools
 			String[] uses =
 			{	GuiKeys.COMMON_MATCH_ALLOWED_PLAYERS,
 				GuiKeys.COMMON_LIMIT_ROUND_HEADER_LAST_STANDING,
-				GuiKeys.COMMON_ROUND_ALLOWED_PLAYERS
+				GuiKeys.COMMON_ROUND_ALLOWED_PLAYERS,
+				GuiKeys.COMMON_LEVEL_ALLOWED_PLAYERS
 			};
 			loadTableImages(folder,uses);
 		}

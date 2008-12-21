@@ -105,7 +105,7 @@ public class LevelsMenu extends InnerMenuPanel
 		QuickMatchConfiguration quickMatchConfiguration = Configuration.getGameConfiguration().getQuickMatchConfiguration();
 		if(quickMatchConfiguration.getUseLastLevels())
 			levelsSelection = quickMatchConfiguration.getLevelsSelection();
-		levelData.setLevelsSelection(levelsSelection);
+		levelData.setLevelsSelection(levelsSelection,tournament.getProfiles().size());
 		// transmit
 		if(settingsPanel!=null)
 		{	settingsPanel.setTournament(tournament);
