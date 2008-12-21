@@ -72,7 +72,7 @@ public class QuickMatchData extends EntitledDataPanel implements MouseListener
 				}
 				// value
 				{	ln.setLabelMaxWidth(col,Integer.MAX_VALUE);
-					setUseLevels();
+//					setUseLevels();
 					ln.getLabel(col).addMouseListener(this);
 					col++;
 				}
@@ -92,7 +92,7 @@ public class QuickMatchData extends EntitledDataPanel implements MouseListener
 				}
 				// value
 				{	ln.setLabelMaxWidth(col,Integer.MAX_VALUE);
-					setUsePlayers();
+//					setUsePlayers();
 					ln.getLabel(col).addMouseListener(this);
 					col++;
 				}
@@ -112,7 +112,7 @@ public class QuickMatchData extends EntitledDataPanel implements MouseListener
 				}
 				// value
 				{	ln.setLabelMaxWidth(col,Integer.MAX_VALUE);
-					setUseSettings();
+//					setUseSettings();
 					ln.getLabel(col).addMouseListener(this);
 					col++;
 				}

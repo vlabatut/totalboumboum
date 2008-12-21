@@ -98,7 +98,7 @@ public class QuickMatchMenu extends InnerMenuPanel
 	public void actionPerformed(ActionEvent e)
 	{	if(e.getActionCommand().equals(GuiKeys.MENU_OPTIONS_BUTTON_CONFIRM))
 		{	QuickMatchConfiguration copyConfiguration = quickMatchPanel.getQuickMatchConfiguration();
-			if(!quickMatchConfiguration.hasChanged(copyConfiguration))
+			if(quickMatchConfiguration.hasChanged(copyConfiguration))
 			{	Configuration.getGameConfiguration().setQuickMatchConfiguration(copyConfiguration);
 				try
 				{	QuickMatchConfigurationSaver.saveQuickMatchConfiguration(copyConfiguration);
