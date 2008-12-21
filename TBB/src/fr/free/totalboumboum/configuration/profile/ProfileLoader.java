@@ -46,17 +46,16 @@ public class ProfileLoader
 			String name = profilesSelection.getFileName(i);
 			Profile profile = loadProfile(name);
 			SpriteInfo selectedSprite = profile.getSelectedSprite();
-			SpriteInfo defaultSprite = profile.getDefaultSprite();
 			// sprite
-			selectedSprite.setPack(defaultSprite.getPack());
-			selectedSprite.setFolder(defaultSprite.getFolder());
-			selectedSprite.setName(defaultSprite.getName());
+			selectedSprite.setPack(profilesSelection.getHero(i)[0]);
+			selectedSprite.setFolder(profilesSelection.getHero(i)[1]);
 			// color
-			selectedSprite.setColor(defaultSprite.getColor());
+			selectedSprite.setColor(profilesSelection.getColor(i));
 			// controls
 			int controlsIndex = profilesSelection.getControlsIndex(i);
 			profile.setControlSettingsIndex(controlsIndex);
 			// result
+			reloadPortraits(profile);
 			result.add(profile);
 		}
 		return result;
@@ -126,8 +125,10 @@ public class ProfileLoader
     	result.getDefaultSprite().setColor(spriteDefaultColor);
 		
     	// portraits
-//    	PredefinedColor spriteColor = result.getSpriteSelectedColor();
-		loadPortraits(result,spritePackname,spriteFolder,spriteDefaultColor);
+    	PredefinedColor spriteColor = result.getSpriteColor();
+    	String packName = result.getSpritePack();
+    	String folderName = result.getSpriteFolder();
+		loadPortraits(result,packName,folderName,spriteColor);
     }	        
 
     public static void reloadPortraits(Profile profile) throws ParserConfigurationException, SAXException, IOException, ClassNotFoundException

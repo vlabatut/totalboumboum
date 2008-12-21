@@ -64,8 +64,7 @@ public class SpriteInfo
 	}
 
 	public void setFolder(String folder)
-	{	
-		this.folder = folder;
+	{	this.folder = folder;
 	}
 	
 	/////////////////////////////////////////////////////////////////
