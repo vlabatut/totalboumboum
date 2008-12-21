@@ -16,6 +16,7 @@
 	<xsd:complexType name="tMatchOptions">
 		<xsd:attribute name="useLastPlayers" type="xsd:boolean" use="required" />
 		<xsd:attribute name="useLastLevels" type="xsd:boolean" use="required" />
+		<xsd:attribute name="useLastSettings" type="xsd:boolean" use="required" />
 	</xsd:complexType>
 
 	<xsd:complexType name="tMatchSettingsLevels">

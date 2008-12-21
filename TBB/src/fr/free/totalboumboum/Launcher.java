@@ -910,5 +910,7 @@ public class Launcher
 	 * 3) débugger le tournoi
 	 * 4) mutualiser les panels de jeu (réutilisés dans les frames
 	 * 5) panel différent pour singleTournament
+	 * 
+	 * 6) vérifier que le nombre de joueurs est compatible avec les niveaux
 	 */
 }

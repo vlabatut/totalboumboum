@@ -2,7 +2,7 @@
 <gameQuickmatch xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="..\..\..\resources\schemas\gameQuickmatch.xsd">
 	
 	<match name="matchPart1" />
-	<options useLastPlayers="false" useLastLevels="false" />
+	<options useLastPlayers="false" useLastLevels="false" useLastSettings="false" />
 	<settings>
 		<levels randomOrder="false" />
 		<players randomLocation="false"/>

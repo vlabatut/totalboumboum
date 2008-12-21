@@ -52,9 +52,9 @@ public class QuickMatchConfigurationSaver
 	private static Element saveGameQuickMatchElement(QuickMatchConfiguration gameConfiguration)
 	{	Element result = new Element(XmlTools.ELT_GAME_QUICKMATCH); 
 		
-		// settings
-		Element optionssElement = saveQuickMatchOptionsElement(gameConfiguration);
-		result.addContent(optionssElement);
+		// options
+		Element optionsElement = saveQuickMatchOptionsElement(gameConfiguration);
+		result.addContent(optionsElement);
 
 		// settings
 		Element settingsElement = saveQuickMatchSettingsElement(gameConfiguration);
@@ -79,6 +79,10 @@ public class QuickMatchConfigurationSaver
 		// use last levels
 		String useLastLevels = Boolean.toString(gameConfiguration.getUseLastLevels());
 		result.setAttribute(XmlTools.ATT_USE_LAST_LEVELS,useLastLevels);
+		
+		// use last settings
+		String useLastSettings = Boolean.toString(gameConfiguration.getUseLastSettings());
+		result.setAttribute(XmlTools.ATT_USE_LAST_SETTINGS,useLastSettings);
 		
 		return result;
 	}

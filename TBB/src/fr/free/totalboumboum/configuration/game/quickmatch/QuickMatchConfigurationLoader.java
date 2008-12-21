@@ -62,6 +62,10 @@ public class QuickMatchConfigurationLoader
 		att = optionsElement.getAttributeValue(XmlTools.ATT_USE_LAST_LEVELS);
 		boolean useLastLevels = Boolean.parseBoolean(att);
 		result.setUseLastLevels(useLastLevels);
+		// use last settings
+		att = optionsElement.getAttributeValue(XmlTools.ATT_USE_LAST_SETTINGS);
+		boolean useLastSettings = Boolean.parseBoolean(att);
+		result.setUseLastSettings(useLastSettings);
 		
 		// settings
 		Element settingsElement = root.getChild(XmlTools.ELT_SETTINGS);
