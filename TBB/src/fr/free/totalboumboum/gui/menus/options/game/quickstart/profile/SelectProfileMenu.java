@@ -97,10 +97,10 @@ public class SelectProfileMenu extends InnerMenuPanel
 			Profile profile = profileData.getSelectedProfile();
 			if(profile!=null && !profiles.contains(profile))
 			{	// check if color is free
-				PredefinedColor selectedColor = profile.getSpriteSelectedColor();
+				PredefinedColor selectedColor = profile.getSpriteColor();
 				while(!profilesConfiguration.isFreeColor(profiles,selectedColor))
 					selectedColor = profilesConfiguration.getNextFreeColor(profiles,profile,selectedColor);
-				profile.setSpriteSelectedColor(selectedColor);
+				profile.getSelectedSprite().setColor(selectedColor);
 				try
 				{	ProfileLoader.reloadPortraits(profile);
 				}
@@ -122,6 +122,7 @@ public class SelectProfileMenu extends InnerMenuPanel
 				else
 					profiles.add(profile);
 			}
+			parent.refresh();
 			replaceWith(parent);
 	    }
 	} 

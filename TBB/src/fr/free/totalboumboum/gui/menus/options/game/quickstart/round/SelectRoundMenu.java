@@ -89,6 +89,7 @@ public class SelectRoundMenu extends InnerMenuPanel
 			{	roundFile.delete(0,roundFile.length());
 				roundFile.append(rFile);
 			}
+			parent.refresh();
 			replaceWith(parent);
 	    }
 	} 
