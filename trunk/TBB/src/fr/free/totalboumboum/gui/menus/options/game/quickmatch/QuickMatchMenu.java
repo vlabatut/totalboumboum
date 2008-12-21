@@ -35,8 +35,8 @@ import javax.xml.parsers.ParserConfigurationException;
 import org.xml.sax.SAXException;
 
 import fr.free.totalboumboum.configuration.Configuration;
-import fr.free.totalboumboum.configuration.game.quickstart.QuickStartConfiguration;
-import fr.free.totalboumboum.configuration.game.quickstart.QuickStartConfigurationSaver;
+import fr.free.totalboumboum.configuration.game.quickmatch.QuickMatchConfiguration;
+import fr.free.totalboumboum.configuration.game.quickmatch.QuickMatchConfigurationSaver;
 import fr.free.totalboumboum.gui.common.structure.panel.SplitMenuPanel;
 import fr.free.totalboumboum.gui.common.structure.panel.menu.InnerMenuPanel;
 import fr.free.totalboumboum.gui.common.structure.panel.menu.MenuPanel;
@@ -46,7 +46,7 @@ import fr.free.totalboumboum.gui.tools.GuiTools;
 public class QuickMatchMenu extends InnerMenuPanel
 {	private static final long serialVersionUID = 1L;
 	
-	private QuickMatchData quickstartPanel;
+	private QuickMatchData quickMatchPanel;
 	
 	@SuppressWarnings("unused")
 	private JButton buttonConfirm;
@@ -77,19 +77,19 @@ public class QuickMatchMenu extends InnerMenuPanel
 		add(Box.createVerticalGlue());		
 	
 		// panels
-		quickstartPanel = new QuickMatchData(container);
-		container.setDataPart(quickstartPanel);
+		quickMatchPanel = new QuickMatchData(container);
+		container.setDataPart(quickMatchPanel);
 		initConfiguration();
 	}
 	
 	/////////////////////////////////////////////////////////////////
 	// CONFIGURATION	/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	private QuickStartConfiguration quickStartConfiguration;
+	private QuickMatchConfiguration quickMatchConfiguration;
 	
 	public void initConfiguration()
-	{	quickStartConfiguration = Configuration.getGameConfiguration().getQuickStartConfiguration();
-		quickstartPanel.setQuickStartConfiguration(quickStartConfiguration.copy());
+	{	quickMatchConfiguration = Configuration.getGameConfiguration().getQuickMatchConfiguration();
+		quickMatchPanel.setQuickMatchConfiguration(quickMatchConfiguration.copy());
 	}
 
 	/////////////////////////////////////////////////////////////////
@@ -97,11 +97,11 @@ public class QuickMatchMenu extends InnerMenuPanel
 	/////////////////////////////////////////////////////////////////
 	public void actionPerformed(ActionEvent e)
 	{	if(e.getActionCommand().equals(GuiKeys.MENU_OPTIONS_BUTTON_CONFIRM))
-		{	QuickStartConfiguration copyConfiguration = quickstartPanel.getQuickStartConfiguration();
-			if(!quickStartConfiguration.equals(copyConfiguration))
-			{	Configuration.getGameConfiguration().setQuickStartConfiguration(copyConfiguration);
+		{	QuickMatchConfiguration copyConfiguration = quickMatchPanel.getQuickMatchConfiguration();
+			if(!quickMatchConfiguration.hasChanged(copyConfiguration))
+			{	Configuration.getGameConfiguration().setQuickMatchConfiguration(copyConfiguration);
 				try
-				{	QuickStartConfigurationSaver.saveQuickStartConfiguration(copyConfiguration);
+				{	QuickMatchConfigurationSaver.saveQuickMatchConfiguration(copyConfiguration);
 				}
 				catch (IllegalArgumentException e1)
 				{	e1.printStackTrace();
