@@ -905,8 +905,8 @@ public class Launcher
 	
 	/* TODO
 	 * 1) adaper les options
-	 * 
 	 * 2) compléter les options
+	 * 
 	 * 3) débugger le tournoi
 	 * 4) mutualiser les panels de jeu (réutilisés dans les frames
 	 * 5) panel différent pour singleTournament

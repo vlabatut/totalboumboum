@@ -65,7 +65,6 @@
 
 	<xsd:complexType name="tQuickmatch">
 		<xsd:sequence>
-			<xsd:element name="match" type="tConfrontation" />
 			<xsd:element name="options" type="tMatchOptions" />
 			<xsd:element name="settings" type="tMatchSettings" />
 			<xsd:element name="players" type="tPlayers" />

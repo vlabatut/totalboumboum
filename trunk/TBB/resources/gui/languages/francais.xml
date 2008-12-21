@@ -166,6 +166,21 @@
 				</group>
 				<group name="Quickmatch">
 					<text name="Title" value="Rencontre rapide" tooltip="Modifier les paramètres de la rencontre rapide" />
+					<group name="Levels">
+						<text name="False" value="Désactivé" tooltip="Option désactivée" />
+						<text name="True" value="Activé" tooltip="Option activée" />
+						<text name="Use" value="Mémoriser les niveaux" tooltip="Utiliser les niveaux de la dernière partie rapide" />
+					</group>
+					<group name="Players">
+						<text name="False" value="Désactivé" tooltip="Option désactivée" />
+						<text name="True" value="Activé" tooltip="Option activée" />
+						<text name="Use" value="Mémoriser les joueurs" tooltip="Utiliser les joueurs de la dernière partie rapide" />
+					</group>
+					<group name="Settings">
+						<text name="False" value="Désactivé" tooltip="Option désactivée" />
+						<text name="True" value="Activé" tooltip="Option activée" />
+						<text name="Use" value="Mémoriser les réglages" tooltip="Utiliser les réglages généraux de la dernière partie rapide" />
+					</group>
 				</group>
 				<group name="Tournament">
 					<text name="Title" value="Tournoi" tooltip="Modifier les paramètres du tournoi" />
