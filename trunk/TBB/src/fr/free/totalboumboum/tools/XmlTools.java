@@ -277,6 +277,7 @@ public class XmlTools
 	public static final String ATT_UPLINE = "upLine";
 	public static final String ATT_USE_LAST_PLAYERS = "useLastPlayers";
 	public static final String ATT_USE_LAST_LEVELS = "useLastLevels";
+	public static final String ATT_USE_LAST_SETTINGS = "useLastSettings";
 	public static final String ATT_USES = "uses";
 	public static final String ATT_VALUE = "value";
 	public static final String ATT_WIDTH = "width";

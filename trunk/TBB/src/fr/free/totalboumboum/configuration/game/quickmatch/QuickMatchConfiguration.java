@@ -41,7 +41,29 @@ public class QuickMatchConfiguration
 		result.setPoints(points);
 		result.setPointsShare(pointsShare);
 		result.setPointsDraw(pointsDraw);
+		result.setUseLastSettings(useLastSettings);
 
+		return result;
+	}
+	
+	public boolean hasChanged(QuickMatchConfiguration copy)
+	{	boolean result = false;
+		// use last players
+		if(!result)
+		{	boolean ulp = copy.getUseLastPlayers();
+			result = !useLastPlayers==ulp;
+		}
+		// use last levels
+		if(!result)
+		{	boolean ull = copy.getUseLastLevels();
+			result = !useLastLevels==ull;
+		}
+		// use last settings
+		if(!result)
+		{	boolean uls = copy.getUseLastSettings();
+			result = !useLastSettings==uls;
+		}
+		//
 		return result;
 	}
 	
@@ -50,6 +72,7 @@ public class QuickMatchConfiguration
 	/////////////////////////////////////////////////////////////////
 	private boolean useLastPlayers = false;
 	private boolean useLastLevels = false;
+	private boolean useLastSettings = false;
 	private ProfilesSelection profilesSelection = new ProfilesSelection();
 	private LevelsSelection levelsSelection = new LevelsSelection();
 	private boolean levelsRandomOrder = false;
@@ -94,6 +117,13 @@ public class QuickMatchConfiguration
 	}
 	public void setUseLastLevels(boolean useLastLevels)
 	{	this.useLastLevels = useLastLevels;
+	}
+	
+	public boolean getUseLastSettings()
+	{	return useLastSettings;
+	}
+	public void setUseLastSettings(boolean useLastSettings)
+	{	this.useLastSettings = useLastSettings;
 	}
 	
 	public boolean getLevelsRandomOrder()

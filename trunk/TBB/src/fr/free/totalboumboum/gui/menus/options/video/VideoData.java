@@ -72,30 +72,29 @@ public class VideoData extends EntitledDataPanel implements MouseListener
 			optionsPanel = new UntitledSubPanelLines(w,h,LINE_COUNT,false);
 			int tWidth = (int)(w*0.66);
 			
-			// data
-			{	videoConfiguration = Configuration.getVideoConfiguration().copy();;
-				
-				// #0 panel dimension
-				{	Line ln = optionsPanel.getLine(LINE_PANELDIM);
+			videoConfiguration = Configuration.getVideoConfiguration().copy();;
+			
+			// #0 panel dimension
+			{	Line ln = optionsPanel.getLine(LINE_PANELDIM);
 //					ln.setBackgroundColor(GuiTools.COLOR_TABLE_REGULAR_BACKGROUND);
-					ln.addLabel(0);
-					ln.addLabel(0);
-					ln.addLabel(0);
-					int col = 0;
-					// name
-					{	ln.setLabelMaxWidth(col,tWidth);
-						ln.setLabelPreferredWidth(col,tWidth);
-						ln.setLabelKey(col,GuiKeys.MENU_OPTIONS_VIDEO_LINE_PANEL_DIMENSION,false);
-						col++;
-					}
-					// minus button
-					{	ln.setLabelMaxWidth(col,ln.getHeight());
-						ln.setLabelKey(col,GuiKeys.MENU_OPTIONS_VIDEO_LINE_MINUS,true);
-						ln.getLabel(col).addMouseListener(this);
-						col++;
-					}
-					// value
-					{	
+				ln.addLabel(0);
+				ln.addLabel(0);
+				ln.addLabel(0);
+				int col = 0;
+				// name
+				{	ln.setLabelMaxWidth(col,tWidth);
+					ln.setLabelPreferredWidth(col,tWidth);
+					ln.setLabelKey(col,GuiKeys.MENU_OPTIONS_VIDEO_LINE_PANEL_DIMENSION,false);
+					col++;
+				}
+				// minus button
+				{	ln.setLabelMaxWidth(col,ln.getHeight());
+					ln.setLabelKey(col,GuiKeys.MENU_OPTIONS_VIDEO_LINE_MINUS,true);
+					ln.getLabel(col).addMouseListener(this);
+					col++;
+				}
+				// value
+				{	
 //						int panelWidth = videoConfiguration.getPanelDimension().width;
 //						int panelHeight = videoConfiguration.getPanelDimension().height;
 //						String text = Integer.toString(panelWidth)+new Character('\u00D7').toString()+Integer.toString(panelHeight);
@@ -108,96 +107,95 @@ public class VideoData extends EntitledDataPanel implements MouseListener
 //						}
 //						ln.setLabelMaxWidth(col,maxWidth);
 //						ln.setLabelPreferredWidth(col,maxWidth);
-						ln.setLabelMaxWidth(col,Integer.MAX_VALUE);
-						setPanelDimension();
-						col++;
-					}
-					// plus button
-					{	ln.setLabelMaxWidth(col,ln.getHeight());
-						ln.setLabelKey(col,GuiKeys.MENU_OPTIONS_VIDEO_LINE_PLUS,true);
-						ln.getLabel(col).addMouseListener(this);
-						col++;
-					}
-					Color bg = GuiTools.COLOR_TABLE_REGULAR_BACKGROUND;
-					ln.setBackgroundColor(bg);
+					ln.setLabelMaxWidth(col,Integer.MAX_VALUE);
+					setPanelDimension();
+					col++;
 				}
-				
-				// #1 border color
-				{	Line ln = optionsPanel.getLine(LINE_BORDER);
+				// plus button
+				{	ln.setLabelMaxWidth(col,ln.getHeight());
+					ln.setLabelKey(col,GuiKeys.MENU_OPTIONS_VIDEO_LINE_PLUS,true);
+					ln.getLabel(col).addMouseListener(this);
+					col++;
+				}
+				Color bg = GuiTools.COLOR_TABLE_REGULAR_BACKGROUND;
+				ln.setBackgroundColor(bg);
+			}
+			
+			// #1 border color
+			{	Line ln = optionsPanel.getLine(LINE_BORDER);
 //					ln.setBackgroundColor(GuiTools.COLOR_TABLE_REGULAR_BACKGROUND);
-					ln.addLabel(0);
-					int col = 0;
-					// name
-					{	ln.setLabelMaxWidth(col,tWidth);
-						ln.setLabelPreferredWidth(col,tWidth);
-						ln.setLabelKey(col,GuiKeys.MENU_OPTIONS_VIDEO_LINE_BORDER_COLOR,false);
-						col++;
-					}
-					// value
-					{	String text = "Black";
+				ln.addLabel(0);
+				int col = 0;
+				// name
+				{	ln.setLabelMaxWidth(col,tWidth);
+					ln.setLabelPreferredWidth(col,tWidth);
+					ln.setLabelKey(col,GuiKeys.MENU_OPTIONS_VIDEO_LINE_BORDER_COLOR,false);
+					col++;
+				}
+				// value
+				{	String text = "Black";
 //						int txtWidth = GuiTools.getPixelWidth(ln.getLineFontSize(),text);
-						String tooltip = GuiConfiguration.getMiscConfiguration().getLanguage().getText(GuiKeys.MENU_OPTIONS_VIDEO_LINE_BORDER_COLOR+GuiKeys.TOOLTIP); 
+					String tooltip = GuiConfiguration.getMiscConfiguration().getLanguage().getText(GuiKeys.MENU_OPTIONS_VIDEO_LINE_BORDER_COLOR+GuiKeys.TOOLTIP); 
 //						ln.setLabelMaxWidth(col,txtWidth);
-						ln.setLabelMaxWidth(col,Integer.MAX_VALUE);
-						ln.setLabelText(col,text,tooltip);
-						col++;
-					}
-					Color bg = GuiTools.COLOR_TABLE_REGULAR_BACKGROUND;
-					ln.setBackgroundColor(bg);
+					ln.setLabelMaxWidth(col,Integer.MAX_VALUE);
+					ln.setLabelText(col,text,tooltip);
+					col++;
 				}
-				
-				// #2 smooth graphics
-				{	Line ln = optionsPanel.getLine(LINE_SMOOTH);
+				Color bg = GuiTools.COLOR_TABLE_REGULAR_BACKGROUND;
+				ln.setBackgroundColor(bg);
+			}
+			
+			// #2 smooth graphics
+			{	Line ln = optionsPanel.getLine(LINE_SMOOTH);
 //					ln.setBackgroundColor(GuiTools.COLOR_TABLE_REGULAR_BACKGROUND);
-					ln.addLabel(0);
-					int col = 0;
-					// name
-					{	ln.setLabelMaxWidth(col,tWidth);
-						ln.setLabelPreferredWidth(col,tWidth);
-						ln.setLabelKey(col,GuiKeys.MENU_OPTIONS_VIDEO_LINE_SMOOTH_GRAPHICS,false);
-						col++;
-					}
-					// value
-					{	ln.setLabelMaxWidth(col,Integer.MAX_VALUE);
-						setSmoothGraphics();
-						ln.getLabel(col).addMouseListener(this);
-						col++;
-					}
-					Color bg = GuiTools.COLOR_TABLE_REGULAR_BACKGROUND;
-					ln.setBackgroundColor(bg);
+				ln.addLabel(0);
+				int col = 0;
+				// name
+				{	ln.setLabelMaxWidth(col,tWidth);
+					ln.setLabelPreferredWidth(col,tWidth);
+					ln.setLabelKey(col,GuiKeys.MENU_OPTIONS_VIDEO_LINE_SMOOTH_GRAPHICS,false);
+					col++;
 				}
+				// value
+				{	ln.setLabelMaxWidth(col,Integer.MAX_VALUE);
+					setSmoothGraphics();
+					ln.getLabel(col).addMouseListener(this);
+					col++;
+				}
+				Color bg = GuiTools.COLOR_TABLE_REGULAR_BACKGROUND;
+				ln.setBackgroundColor(bg);
+			}
 
-				// #3 full screen
-				{	Line ln = optionsPanel.getLine(LINE_FULL_SCREEN);
+			// #3 full screen
+			{	Line ln = optionsPanel.getLine(LINE_FULL_SCREEN);
 //					ln.setBackgroundColor(GuiTools.COLOR_TABLE_REGULAR_BACKGROUND);
-					ln.addLabel(0);
-					int col = 0;
-					// name
-					{	ln.setLabelMaxWidth(col,tWidth);
-						ln.setLabelPreferredWidth(col,tWidth);
-						ln.setLabelKey(col,GuiKeys.MENU_OPTIONS_VIDEO_LINE_FULL_SCREEN,false);
-						col++;
-					}
-					// value
-					{	ln.setLabelMaxWidth(col,Integer.MAX_VALUE);
-						setFullScreen();
-						ln.getLabel(col).addMouseListener(this);
-						col++;
-					}
-					Color bg = GuiTools.COLOR_TABLE_REGULAR_BACKGROUND;
-					ln.setBackgroundColor(bg);
+				ln.addLabel(0);
+				int col = 0;
+				// name
+				{	ln.setLabelMaxWidth(col,tWidth);
+					ln.setLabelPreferredWidth(col,tWidth);
+					ln.setLabelKey(col,GuiKeys.MENU_OPTIONS_VIDEO_LINE_FULL_SCREEN,false);
+					col++;
 				}
+				// value
+				{	ln.setLabelMaxWidth(col,Integer.MAX_VALUE);
+					setFullScreen();
+					ln.getLabel(col).addMouseListener(this);
+					col++;
+				}
+				Color bg = GuiTools.COLOR_TABLE_REGULAR_BACKGROUND;
+				ln.setBackgroundColor(bg);
+			}
 
-				// EMPTY
-				{	for(int line=LINE_FULL_SCREEN+1;line<LINE_COUNT;line++)
-					{	Line ln = optionsPanel.getLine(line);
-						int col = 0;
-						int mw = ln.getWidth();
-						ln.setLabelMinWidth(col,mw);
-						ln.setLabelPreferredWidth(col,mw);
-						ln.setLabelMaxWidth(col,mw);
-						col++;
-					}
+			// EMPTY
+			{	for(int line=LINE_FULL_SCREEN+1;line<LINE_COUNT;line++)
+				{	Line ln = optionsPanel.getLine(line);
+					int col = 0;
+					int mw = ln.getWidth();
+					ln.setLabelMinWidth(col,mw);
+					ln.setLabelPreferredWidth(col,mw);
+					ln.setLabelMaxWidth(col,mw);
+					col++;
 				}
 			}
 			
@@ -313,6 +311,7 @@ public class VideoData extends EntitledDataPanel implements MouseListener
 				break;
 		}
 	}
+	
 	@Override
 	public void mouseReleased(MouseEvent e)
 	{	
