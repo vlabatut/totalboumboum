@@ -53,7 +53,8 @@ public class MatchSplitPanel extends SplitMenuPanel
 	// TOURNAMENT					/////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	public void setTournament(SingleTournament tournament)
-	{	tournament.progress();
+	{	tournament.init();
+		tournament.progress();
 		Match match = tournament.getCurrentMatch();
 		((MatchMenu)getMenuPart()).setMatch(match);
 	}
