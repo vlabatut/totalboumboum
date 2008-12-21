@@ -42,6 +42,7 @@ import fr.free.totalboumboum.gui.data.configuration.GuiConfiguration;
 import fr.free.totalboumboum.gui.menus.explore.ExploreSplitPanel;
 import fr.free.totalboumboum.gui.menus.options.OptionsSplitPanel;
 import fr.free.totalboumboum.gui.menus.profiles.select.SelectedProfileSplitPanel;
+import fr.free.totalboumboum.gui.menus.quickmatch.match.MatchSplitPanel;
 import fr.free.totalboumboum.gui.menus.quickmatch.players.PlayersSplitPanel;
 import fr.free.totalboumboum.gui.menus.tournament.TournamentSplitPanel;
 import fr.free.totalboumboum.gui.tools.GuiKeys;
@@ -155,11 +156,24 @@ buttonAbout.setEnabled(false);
 			replaceWith(tournamentMainPanel);
 	    }
 		else if(e.getActionCommand().equals(GuiKeys.MENU_MAIN_BUTTON_QUICKMATCH))
-		{	if(quickmatchGamePanel==null)
+		{	if(quickmatchGamePanel==null || quickmatchGamePanel.getTournament().isOver())
 			{	quickmatchGamePanel = new PlayersSplitPanel(getContainer(),this);
 				quickmatchGamePanel.initTournament();				
-			}			
-			replaceWith(quickmatchGamePanel);
+				replaceWith(quickmatchGamePanel);
+			}
+			else
+			{	MatchSplitPanel matchPanel = quickmatchGamePanel.getTournamentPanel();
+				if(matchPanel!=null)
+				{	matchPanel.setMenuParent(this);
+					matchPanel.refresh();
+					replaceWith(matchPanel);
+				}
+				else
+				{	quickmatchGamePanel.refresh();
+					replaceWith(quickmatchGamePanel);
+				
+				}
+			}
 	    }
 	}
 	

@@ -4,10 +4,10 @@
 	<settings>
 		<levels randomOrder="true" />
 		<players randomLocation="true" />
-		<limits points="6" rounds="0" time="60000" />
-		<points share="true" draw="both">
-			<value rank="1" points="2" />
-			<value rank="2" points="1" />
+		<limits points="3" rounds="0" time="60000" />
+		<points share="true" draw="none">
+			<value rank="1" points="1" />
+			<value rank="2" points="0" />
 			<value rank="3" points="0" />
 			<value rank="4" points="0" />
 			<value rank="5" points="0" />
@@ -16,13 +16,18 @@
 	<players>
 		<player file="1" color="cyan" controls="1" spritePack="superbomberman5" spriteFolder="shirobon" />
 		<player file="4" color="blue" controls="0" spritePack="superbomberman1" spriteFolder="shirobon" />
-		<player file="33" color="yellow" controls="0" spritePack="superbomberman5" spriteFolder="shirobon" />
 		<player file="30" color="red" controls="0" spritePack="superbomberman5" spriteFolder="shirobon" />
+		<player file="33" color="yellow" controls="0" spritePack="superbomberman5" spriteFolder="shirobon" />
 	</players>
 	<levels>
-		<level pack="sbm1Custom" folder="part1" />
-		<level pack="sbm1Custom" folder="test3" />
+		<level pack="sbm1Custom" folder="test3b" />
 		<level pack="sbm1Official" folder="battle_02" />
+		<level pack="sbm1Custom" folder="test3" />
+		<level pack="sbm1Custom" folder="part1" />
+		<level pack="sbm1Official" folder="battle_08" />
+		<level pack="sbm1Official" folder="battle_08" />
+		<level pack="sbm1Official" folder="battle_08" />
+		<level pack="sbm1Custom" folder="testIA" />
 	</levels>
 </gameQuickmatch>
 

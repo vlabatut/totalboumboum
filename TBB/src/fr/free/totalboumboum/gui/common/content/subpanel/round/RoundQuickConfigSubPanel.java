@@ -361,12 +361,14 @@ public class RoundQuickConfigSubPanel extends UntitledSubPanelLines implements M
 	
 	private void setPointsDraw()
 	{	QuickMatchDraw draw = quickMatchConfiguration.getPointsDraw();
-		String key;
+		String key = null;
 		if(draw==QuickMatchDraw.AUTOKILL)
 			key = GuiKeys.MENU_QUICKMATCH_SETTINGS_POINTS_DRAW_AUTOKILL;
 		else if(draw==QuickMatchDraw.BOTH)
 			key = GuiKeys.MENU_QUICKMATCH_SETTINGS_POINTS_DRAW_BOTH;
-		else //if(draw==QuickMatchDraw.TIME)
+		else if(draw==QuickMatchDraw.NONE)
+			key = GuiKeys.MENU_QUICKMATCH_SETTINGS_POINTS_DRAW_NONE;
+		else if(draw==QuickMatchDraw.TIME)
 			key = GuiKeys.MENU_QUICKMATCH_SETTINGS_POINTS_DRAW_TIME;
 		getLine(LINE_POINTS_DRAW).setLabelKey(1,key,false);
 	}
@@ -450,7 +452,7 @@ public class RoundQuickConfigSubPanel extends UntitledSubPanelLines implements M
 				quickMatchConfiguration.setPointsShare(pointsShare);
 				setPointsShare();
 				break;			
-			// points share
+			// points draw
 			case LINE_POINTS_DRAW:
 				QuickMatchDraw pointsDraw = quickMatchConfiguration.getPointsDraw();
 				pointsDraw = QuickMatchDraw.getNext(pointsDraw);

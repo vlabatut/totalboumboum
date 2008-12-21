@@ -47,11 +47,11 @@ public class QuickMatchConfigurationLoader
 		String schemaFolder = FileTools.getSchemasPath();
 		File schemaFile = new File(schemaFolder+File.separator+FileTools.FILE_GAME_QUICKMATCH+FileTools.EXTENSION_SCHEMA);
 		Element root = XmlTools.getRootFromFile(dataFile,schemaFile);
-		loadGameElement(root,result);
+		loadGameQuickMatchElement(root,result);
 		return result;
 	}
 
-	private static void loadGameElement(Element root, QuickMatchConfiguration result) throws ParserConfigurationException, SAXException, IOException, IllegalArgumentException, SecurityException, IllegalAccessException, NoSuchFieldException, ClassNotFoundException
+	private static void loadGameQuickMatchElement(Element root, QuickMatchConfiguration result) throws ParserConfigurationException, SAXException, IOException, IllegalArgumentException, SecurityException, IllegalAccessException, NoSuchFieldException, ClassNotFoundException
 	{	// options
 		Element optionsElement = root.getChild(XmlTools.ELT_OPTIONS);
 		// use last players

@@ -40,7 +40,7 @@ public class LevelsSelection
 	}
 
 	public void addLevel(String packName, String folderName)
-	{	addLevel(0,packName,folderName);
+	{	addLevel(getLevelCount(),packName,folderName);
 	}
 	
 	public void addLevel(int index, String packName, String folderName)

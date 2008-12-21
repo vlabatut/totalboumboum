@@ -305,6 +305,7 @@
 					<group name="Draw">
 						<text name="Autokill" value="Mutual bombing" tooltip="Draw if the last players kill each other" />
 						<text name="Both" value="Mutual bombing or time limit" tooltip="Draw if there's a mutual bombing or the time limit is reached" />
+						<text name="None" value="Disabled" tooltip="No draw situation defined" />
 						<text name="Time" value="Time limit" tooltip="Draw if the time limit is reached" />
 						<text name="Title" value="Draw" tooltip="Conditions for a draw (no points scored)" />
 					</group>

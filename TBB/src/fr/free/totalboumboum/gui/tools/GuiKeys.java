@@ -109,6 +109,7 @@ public class GuiKeys
 	public static final String NEXT = "Next";
 	public static final String NO_SHARE = "NoShare";
 	public static final String NO_CONTROLS = "NoControls";
+	public static final String NONE = "None";
 	public static final String OPTIONS = "Options";
 	public static final String ORANGE = "Orange";
 	public static final String ORDER = "Order";
@@ -443,6 +444,7 @@ public class GuiKeys
 				public static final String MENU_QUICKMATCH_SETTINGS_POINTS_DRAW = MENU_QUICKMATCH_SETTINGS_POINTS+DRAW;
 				public static final String MENU_QUICKMATCH_SETTINGS_POINTS_DRAW_AUTOKILL = MENU_QUICKMATCH_SETTINGS_POINTS_DRAW+AUTOKILL;
 				public static final String MENU_QUICKMATCH_SETTINGS_POINTS_DRAW_BOTH = MENU_QUICKMATCH_SETTINGS_POINTS_DRAW+BOTH;
+				public static final String MENU_QUICKMATCH_SETTINGS_POINTS_DRAW_NONE = MENU_QUICKMATCH_SETTINGS_POINTS_DRAW+NONE;
 				public static final String MENU_QUICKMATCH_SETTINGS_POINTS_DRAW_TIME = MENU_QUICKMATCH_SETTINGS_POINTS_DRAW+TIME;
 				public static final String MENU_QUICKMATCH_SETTINGS_POINTS_DRAW_TITLE = MENU_QUICKMATCH_SETTINGS_POINTS_DRAW+TITLE;
 				/* SHARE */

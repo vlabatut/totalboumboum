@@ -31,6 +31,7 @@ import fr.free.totalboumboum.gui.common.structure.MenuContainer;
 import fr.free.totalboumboum.gui.common.structure.panel.SplitMenuPanel;
 import fr.free.totalboumboum.gui.common.structure.panel.menu.MenuPanel;
 import fr.free.totalboumboum.gui.data.configuration.GuiConfiguration;
+import fr.free.totalboumboum.gui.menus.quickmatch.match.MatchSplitPanel;
 import fr.free.totalboumboum.gui.tools.GuiTools;
 
 public class PlayersSplitPanel extends SplitMenuPanel
@@ -60,6 +61,15 @@ public class PlayersSplitPanel extends SplitMenuPanel
 			tournament.setMatch(match);
 			((PlayersMenu)getMenuPart()).setTournament(tournament);
 		}
+	}
+	
+	public SingleTournament getTournament()
+	{	SingleTournament result = ((PlayersMenu)getMenuPart()).getTournament();
+		return result;
+	}
+	
+	public MatchSplitPanel getTournamentPanel()
+	{	return ((PlayersMenu)getMenuPart()).getTournamentPanel();		
 	}
 	
 	/////////////////////////////////////////////////////////////////

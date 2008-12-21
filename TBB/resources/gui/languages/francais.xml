@@ -305,6 +305,7 @@
 					<group name="Draw">
 						<text name="Autokill" value="Zéro joueurs" tooltip="Il y a égalité si les derniers joueurs s'entretuent" />
 						<text name="Both" value="Zéro joueurs ou limite de temps" tooltip="Il y a égalité si les derniers joueurs s'entretuent ou si le temps atteint sa limite" />
+						<text name="None" value="Désactivé" tooltip="Aucune situation d'égalité n'est prévue" />
 						<text name="Time" value="Limite de temps" tooltip="Il y a égalité si le temps atteint sa limite" />
 						<text name="Title" value="Egalité" tooltip="Conditions pour qu'il y ait égalité (aucun joueur ne marque de points)" />
 					</group>
