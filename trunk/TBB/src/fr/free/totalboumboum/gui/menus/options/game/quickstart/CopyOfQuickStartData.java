@@ -45,13 +45,13 @@ import fr.free.totalboumboum.gui.common.structure.panel.SplitMenuPanel;
 import fr.free.totalboumboum.gui.common.structure.panel.data.EntitledDataPanel;
 import fr.free.totalboumboum.gui.common.structure.subpanel.SubPanel;
 import fr.free.totalboumboum.gui.common.structure.subpanel.UntitledSubPanelTable;
+import fr.free.totalboumboum.gui.menus.options.game.quickstart.hero.SelectHeroSplitPanel;
+import fr.free.totalboumboum.gui.menus.options.game.quickstart.profile.SelectProfileSplitPanel;
 import fr.free.totalboumboum.gui.menus.options.game.quickstart.round.SelectRoundSplitPanel;
-import fr.free.totalboumboum.gui.menus.quickmatch.players.hero.SelectHeroSplitPanel;
-import fr.free.totalboumboum.gui.menus.quickmatch.players.profile.SelectProfileSplitPanel;
 import fr.free.totalboumboum.gui.tools.GuiKeys;
 import fr.free.totalboumboum.gui.tools.GuiTools;
 
-public class QuickStartData extends EntitledDataPanel implements PlayersSelectionSubPanelListener, MouseListener
+public class CopyOfQuickStartData extends EntitledDataPanel implements PlayersSelectionSubPanelListener, MouseListener
 {	
 	private static final long serialVersionUID = 1L;
 	private static final float SPLIT_RATIO = 0.06f;
@@ -62,7 +62,7 @@ public class QuickStartData extends EntitledDataPanel implements PlayersSelectio
 	private int roundHeight;
 	private int playersHeight;
 
-	public QuickStartData(SplitMenuPanel container)
+	public CopyOfQuickStartData(SplitMenuPanel container)
 	{	super(container);
 		
 		// title
