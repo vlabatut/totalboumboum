@@ -24,77 +24,116 @@ package fr.free.totalboumboum.gui.menus.options.game.quickmatch;
 import java.awt.Color;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
-import java.io.IOException;
-import java.util.ArrayList;
 
-import javax.swing.Box;
-import javax.swing.BoxLayout;
 import javax.swing.JLabel;
-import javax.xml.parsers.ParserConfigurationException;
 
-import org.xml.sax.SAXException;
-
-import fr.free.totalboumboum.configuration.game.quickstart.QuickStartConfiguration;
-import fr.free.totalboumboum.configuration.profile.Profile;
-import fr.free.totalboumboum.configuration.profile.ProfileLoader;
-import fr.free.totalboumboum.configuration.profile.ProfilesConfiguration;
-import fr.free.totalboumboum.configuration.profile.ProfilesSelection;
-import fr.free.totalboumboum.gui.common.content.subpanel.players.PlayersSelectionSubPanel;
-import fr.free.totalboumboum.gui.common.content.subpanel.players.PlayersSelectionSubPanelListener;
+import fr.free.totalboumboum.configuration.game.quickmatch.QuickMatchConfiguration;
 import fr.free.totalboumboum.gui.common.structure.panel.SplitMenuPanel;
 import fr.free.totalboumboum.gui.common.structure.panel.data.EntitledDataPanel;
-import fr.free.totalboumboum.gui.common.structure.subpanel.SubPanel;
-import fr.free.totalboumboum.gui.common.structure.subpanel.UntitledSubPanelTable;
-import fr.free.totalboumboum.gui.menus.options.game.quickstart.round.SelectRoundSplitPanel;
-import fr.free.totalboumboum.gui.menus.quickmatch.players.hero.SelectHeroSplitPanel;
-import fr.free.totalboumboum.gui.menus.quickmatch.players.profile.SelectProfileSplitPanel;
+import fr.free.totalboumboum.gui.common.structure.subpanel.Line;
+import fr.free.totalboumboum.gui.common.structure.subpanel.UntitledSubPanelLines;
 import fr.free.totalboumboum.gui.tools.GuiKeys;
 import fr.free.totalboumboum.gui.tools.GuiTools;
 
-public class QuickMatchData extends EntitledDataPanel implements PlayersSelectionSubPanelListener, MouseListener
+public class QuickMatchData extends EntitledDataPanel implements MouseListener
 {	
 	private static final long serialVersionUID = 1L;
-	private static final float SPLIT_RATIO = 0.06f;
 	
-	private PlayersSelectionSubPanel playersPanel;
-	private UntitledSubPanelTable roundPanel;
-	private SubPanel mainPanel;
-	private int roundHeight;
-	private int playersHeight;
+	private static final int LINE_COUNT = 20;
+
+	private static final int LINE_USE_PLAYERS = 0;
+	private static final int LINE_USE_LEVELS = 1;
+	private static final int LINE_USE_SETTINGS = 2;
+
+	private UntitledSubPanelLines optionsPanel;
 
 	public QuickMatchData(SplitMenuPanel container)
 	{	super(container);
 		
 		// title
-		String key = GuiKeys.MENU_OPTIONS_GAME_QUICKSTART_TITLE;
+		String key = GuiKeys.MENU_OPTIONS_GAME_QUICKMATCH_TITLE;
 		setTitleKey(key);
 		
 		// data
-		{	mainPanel = new SubPanel(dataWidth,dataHeight);
-			{	BoxLayout layout = new BoxLayout(mainPanel,BoxLayout.PAGE_AXIS); 
-				mainPanel.setLayout(layout);
+		{	int w = getDataWidth();
+			int h = getDataHeight();
+			optionsPanel = new UntitledSubPanelLines(w,h,LINE_COUNT,false);
+			int tWidth = (int)(w*0.66);
+			
+			// #0 use last levels
+			{	Line ln = optionsPanel.getLine(LINE_USE_LEVELS);
+				ln.addLabel(0);
+				int col = 0;
+				// name
+				{	ln.setLabelMaxWidth(col,tWidth);
+					ln.setLabelPreferredWidth(col,tWidth);
+					ln.setLabelKey(col,GuiKeys.MENU_OPTIONS_GAME_QUICKMATCH_LEVELS_USE,false);
+					col++;
+				}
+				// value
+				{	ln.setLabelMaxWidth(col,Integer.MAX_VALUE);
+					setUseLevels();
+					ln.getLabel(col).addMouseListener(this);
+					col++;
+				}
+				Color bg = GuiTools.COLOR_TABLE_REGULAR_BACKGROUND;
+				ln.setBackgroundColor(bg);
 			}
 			
-			int margin = GuiTools.panelMargin;
-			roundHeight = (int)(dataHeight*SPLIT_RATIO); 
-			playersHeight = dataHeight - roundHeight - margin;
-			mainPanel.setOpaque(false);
-			
-			// round panel
-			{	roundPanel = makeRoundPanel(dataWidth,roundHeight);
-				mainPanel.add(roundPanel);
+			// #1 use last players
+			{	Line ln = optionsPanel.getLine(LINE_USE_PLAYERS);
+				ln.addLabel(0);
+				int col = 0;
+				// name
+				{	ln.setLabelMaxWidth(col,tWidth);
+					ln.setLabelPreferredWidth(col,tWidth);
+					ln.setLabelKey(col,GuiKeys.MENU_OPTIONS_GAME_QUICKMATCH_PLAYERS_USE,false);
+					col++;
+				}
+				// value
+				{	ln.setLabelMaxWidth(col,Integer.MAX_VALUE);
+					setUsePlayers();
+					ln.getLabel(col).addMouseListener(this);
+					col++;
+				}
+				Color bg = GuiTools.COLOR_TABLE_REGULAR_BACKGROUND;
+				ln.setBackgroundColor(bg);
 			}
 
-			mainPanel.add(Box.createVerticalGlue());
-			
-			// players panel
-			{	playersPanel = new PlayersSelectionSubPanel(dataWidth,playersHeight);
-				playersPanel.addListener(this);
-				mainPanel.add(playersPanel);
+			// #2 use last settings
+			{	Line ln = optionsPanel.getLine(LINE_USE_SETTINGS);
+				ln.addLabel(0);
+				int col = 0;
+				// name
+				{	ln.setLabelMaxWidth(col,tWidth);
+					ln.setLabelPreferredWidth(col,tWidth);
+					ln.setLabelKey(col,GuiKeys.MENU_OPTIONS_GAME_QUICKMATCH_SETTINGS_USE,false);
+					col++;
+				}
+				// value
+				{	ln.setLabelMaxWidth(col,Integer.MAX_VALUE);
+					setUseSettings();
+					ln.getLabel(col).addMouseListener(this);
+					col++;
+				}
+				Color bg = GuiTools.COLOR_TABLE_REGULAR_BACKGROUND;
+				ln.setBackgroundColor(bg);
+			}
+
+			// EMPTY
+			{	for(int line=LINE_USE_SETTINGS+1;line<LINE_COUNT;line++)
+				{	Line ln = optionsPanel.getLine(line);
+					int col = 0;
+					int mw = ln.getWidth();
+					ln.setLabelMinWidth(col,mw);
+					ln.setLabelPreferredWidth(col,mw);
+					ln.setLabelMaxWidth(col,mw);
+					col++;
+				}
 			}
 		}
 
-		setDataPart(mainPanel);
+		setDataPart(optionsPanel);
 	}
 
 	/////////////////////////////////////////////////////////////////
@@ -102,8 +141,7 @@ public class QuickMatchData extends EntitledDataPanel implements PlayersSelectio
 	/////////////////////////////////////////////////////////////////
 	@Override
 	public void refresh()
-	{	playersPanel.refresh();
-		refreshRound();
+	{	//
 	}
 		
 	/////////////////////////////////////////////////////////////////
@@ -126,13 +164,28 @@ public class QuickMatchData extends EntitledDataPanel implements PlayersSelectio
 	
 	@Override
 	public void mousePressed(MouseEvent e)
-	{	
-//		JLabel label = (JLabel)e.getComponent();
-//		int[] pos = playersPanel.getLabelPosition(label);
-		// round
-		StringBuffer roundFile = quickStartConfiguration.getRoundName();
-		SelectRoundSplitPanel selectRoundPanel = new SelectRoundSplitPanel(container.getContainer(),container,roundFile);
-		getContainer().replaceWith(selectRoundPanel);
+	{	JLabel label = (JLabel)e.getComponent();
+		int[] pos = optionsPanel.getLabelPosition(label);
+		switch(pos[0])
+		{	// levels use
+			case LINE_USE_LEVELS:
+				boolean useLevels = !quickMatchConfiguration.getUseLastLevels();
+				quickMatchConfiguration.setUseLastLevels(useLevels);
+				setUseLevels();
+				break;
+			// players use
+			case LINE_USE_PLAYERS:
+				boolean usePlayers = !quickMatchConfiguration.getUseLastPlayers();
+				quickMatchConfiguration.setUseLastPlayers(usePlayers);
+				setUsePlayers();
+				break;
+			// settings use
+			case LINE_USE_SETTINGS:
+				boolean useSettings = !quickMatchConfiguration.getUseLastSettings();
+				quickMatchConfiguration.setUseLastSettings(useSettings);
+				setUseSettings();
+				break;
+		}
 	}
 	
 	@Override
@@ -143,127 +196,53 @@ public class QuickMatchData extends EntitledDataPanel implements PlayersSelectio
 	/////////////////////////////////////////////////////////////////
 	// CONFIGURATION				/////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	private QuickStartConfiguration quickStartConfiguration;
+	private QuickMatchConfiguration quickMatchConfiguration;
 
-	public void setQuickStartConfiguration(QuickStartConfiguration quickStartConfiguration)
-	{	this.quickStartConfiguration = quickStartConfiguration;
-		try
-		{	ProfilesSelection profilesSelection = quickStartConfiguration.getProfilesSelection();
-			ArrayList<Profile> profiles = ProfileLoader.loadProfiles(profilesSelection);
-			playersPanel.setPlayers(profiles);
-			refreshRound();
-		}
-		catch (IllegalArgumentException e1)
-		{	e1.printStackTrace();
-		}
-		catch (SecurityException e1)
-		{	e1.printStackTrace();
-		}
-		catch (ParserConfigurationException e1)
-		{	e1.printStackTrace();
-		}
-		catch (SAXException e1)
-		{	e1.printStackTrace();
-		}
-		catch (IOException e1)
-		{	e1.printStackTrace();
-		}
-		catch (IllegalAccessException e1)
-		{	e1.printStackTrace();
-		}
-		catch (NoSuchFieldException e1)
-		{	e1.printStackTrace();
-		}
-		catch (ClassNotFoundException e1)
-		{	e1.printStackTrace();
-		}		
+	public void setQuickMatchConfiguration(QuickMatchConfiguration quickMatchConfiguration)
+	{	this.quickMatchConfiguration = quickMatchConfiguration;
+		refreshOptions();
 	}
 	
-	public QuickStartConfiguration getQuickStartConfiguration()
-	{	ArrayList<Profile> players = playersPanel.getPlayers();
-		ProfilesSelection profilesSelection = ProfilesConfiguration.getSelection(players);
-		quickStartConfiguration.setProfilesSelection(profilesSelection);
-		return quickStartConfiguration;	
+	public QuickMatchConfiguration getQuickMatchConfiguration()
+	{	return quickMatchConfiguration;	
 	}
 
 	/////////////////////////////////////////////////////////////////
-	// ROUND			/////////////////////////////////////////////
+	// OPTIONS			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	private void refreshRound()
-	{	String roundFile = quickStartConfiguration.getRoundName().toString();
-		if(roundFile!=null)
-			roundPanel.setLabelText(0,0,roundFile.toString(),roundFile.toString());
+	private void refreshOptions()
+	{	setUseLevels();
+		setUsePlayers();
+		setUseSettings();
+	}
+	
+	private void setUseLevels()
+	{	boolean useLevels = quickMatchConfiguration.getUseLastLevels();
+		String key;
+		if(useLevels)
+			key = GuiKeys.MENU_OPTIONS_GAME_QUICKMATCH_LEVELS_TRUE;
 		else
-			roundPanel.setLabelText(0,0,null,null);
+			key = GuiKeys.MENU_OPTIONS_GAME_QUICKMATCH_LEVELS_FALSE;
+		optionsPanel.getLine(LINE_USE_LEVELS).setLabelKey(1,key,true);
+	}
+	
+	private void setUsePlayers()
+	{	boolean usePlayers = quickMatchConfiguration.getUseLastPlayers();
+		String key;
+		if(usePlayers)
+			key = GuiKeys.MENU_OPTIONS_GAME_QUICKMATCH_PLAYERS_TRUE;
+		else
+			key = GuiKeys.MENU_OPTIONS_GAME_QUICKMATCH_PLAYERS_FALSE;
+		optionsPanel.getLine(LINE_USE_PLAYERS).setLabelKey(1,key,true);
 	}
 
-	private UntitledSubPanelTable makeRoundPanel(int width, int height)
-	{	int cols = 2;
-		int lines = 1;
-		int margin = GuiTools.subPanelMargin;
-		UntitledSubPanelTable result = new UntitledSubPanelTable(width,height,cols,lines,false);
-		@SuppressWarnings("unused")
-		int headerHeight = result.getHeaderHeight();
-		int lineHeight = result.getLineHeight();
-		int browseWidth = lineHeight;
-		int fileWidth = width - (browseWidth + 3*margin);		
-		
-		{	int line = 0;
-			int col = 0;
-			// name
-			{	// size
-				result.setColSubMinWidth(col,fileWidth);
-				result.setColSubPreferredWidth(col,fileWidth);
-				result.setColSubMaxWidth(col,fileWidth);
-				// color
-				Color bg = GuiTools.COLOR_TABLE_REGULAR_BACKGROUND;
-				result.setLabelBackground(line,col,bg);
-				// next
-				col++;
-			}
-			// browse
-			{	// size
-				result.setColSubMinWidth(col,browseWidth);
-				result.setColSubPreferredWidth(col,browseWidth);
-				result.setColSubMaxWidth(col,browseWidth);
-				// icon
-				String key = GuiKeys.MENU_OPTIONS_GAME_QUICKSTART_ROUND_BROWSE;
-				result.setLabelKey(line,col,key,true);
-				// color
-				Color bg = GuiTools.COLOR_TABLE_HEADER_BACKGROUND;
-				result.setLabelBackground(line,col,bg);
-				// listener
-				JLabel lbl = result.getLabel(line,col);
-				lbl.addMouseListener(this);
-				// next
-				col++;
-			}
-		}
-		
-		return result;	
-	}
-
-	/////////////////////////////////////////////////////////////////
-	// PLAYER SELECTION LISTENER	/////////////////////////////////
-	/////////////////////////////////////////////////////////////////
-	@Override
-	public void playerSelectionHeroSet(int index)
-	{	Profile profile = playersPanel.getPlayer(index);
-		SelectHeroSplitPanel selectHeroPanel = new SelectHeroSplitPanel(container.getContainer(),container,profile);
-		getContainer().replaceWith(selectHeroPanel);	
-	}
-
-	@Override
-	public void playerSelectionPlayerAdded(int index)
-	{	ArrayList<Profile> players = playersPanel.getPlayers();
-		SelectProfileSplitPanel selectProfilePanel = new SelectProfileSplitPanel(container.getContainer(),container,index,players);
-		getContainer().replaceWith(selectProfilePanel);
-	}
-
-	@Override
-	public void playerSelectionProfileSet(int index)
-	{	ArrayList<Profile> players = playersPanel.getPlayers();
-		SelectProfileSplitPanel selectProfilePanel = new SelectProfileSplitPanel(container.getContainer(),container,index,players);
-		getContainer().replaceWith(selectProfilePanel);
+	private void setUseSettings()
+	{	boolean useSettings = quickMatchConfiguration.getUseLastSettings();
+		String key;
+		if(useSettings)
+			key = GuiKeys.MENU_OPTIONS_GAME_QUICKMATCH_SETTINGS_TRUE;
+		else
+			key = GuiKeys.MENU_OPTIONS_GAME_QUICKMATCH_SETTINGS_FALSE;
+		optionsPanel.getLine(LINE_USE_SETTINGS).setLabelKey(1,key,true);
 	}
 }
