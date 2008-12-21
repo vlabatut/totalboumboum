@@ -40,6 +40,7 @@ import fr.free.totalboumboum.configuration.profile.Profile;
 import fr.free.totalboumboum.configuration.profile.ProfileSaver;
 import fr.free.totalboumboum.configuration.profile.ProfilesConfiguration;
 import fr.free.totalboumboum.configuration.profile.ProfilesConfigurationSaver;
+import fr.free.totalboumboum.configuration.profile.SpriteInfo;
 import fr.free.totalboumboum.gui.common.structure.panel.SplitMenuPanel;
 import fr.free.totalboumboum.gui.common.structure.panel.menu.InnerMenuPanel;
 import fr.free.totalboumboum.gui.common.structure.panel.menu.MenuPanel;
@@ -109,12 +110,13 @@ public class SelectedProfileMenu extends InnerMenuPanel
 				String key = GuiKeys.MENU_PROFILES_SELECT_NEW_PROFILE;
 				String name = GuiConfiguration.getMiscConfiguration().getLanguage().getText(key);
 				newProfile.setName(name);
+				SpriteInfo spriteInfo = newProfile.getDefaultSprite();
 				String spritePack = "superbomberman1";
-				newProfile.setSpritePack(spritePack);
+				spriteInfo.setPack(spritePack);
 				String spriteFolder = "shirobon";
-				newProfile.setSpriteFolder(spriteFolder);
+				spriteInfo.setFolder(spriteFolder);
 				PredefinedColor spriteColor = PredefinedColor.WHITE;
-				newProfile.setSpriteDefaultColor(spriteColor);
+				spriteInfo.setColor(spriteColor);
 				// create file
 				String fileName = Integer.toString(nextProfile)/*+FileTools.EXTENSION_DATA*/;			
 				ProfileSaver.saveProfile(newProfile, fileName);

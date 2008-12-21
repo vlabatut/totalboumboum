@@ -30,6 +30,7 @@ import javax.swing.BoxLayout;
 import javax.swing.JButton;
 
 import fr.free.totalboumboum.configuration.profile.Profile;
+import fr.free.totalboumboum.configuration.profile.SpriteInfo;
 import fr.free.totalboumboum.engine.content.sprite.SpritePreview;
 import fr.free.totalboumboum.gui.common.structure.panel.SplitMenuPanel;
 import fr.free.totalboumboum.gui.common.structure.panel.menu.InnerMenuPanel;
@@ -85,8 +86,10 @@ public class SelectedHeroMenu extends InnerMenuPanel
 		else if(e.getActionCommand().equals(GuiKeys.MENU_PROFILES_BUTTON_CONFIRM))
 		{	SpritePreview heroPreview = heroData.getSelectedHeroPreview();
 			if(heroPreview!=null)
-			{	profile.setSpriteFolder(heroPreview.getFolder());
-				profile.setSpritePack(heroPreview.getPack());
+			{	SpriteInfo spriteInfo = profile.getDefaultSprite();
+				spriteInfo.setName(heroPreview.getName());
+				spriteInfo.setFolder(heroPreview.getFolder());
+				spriteInfo.setPack(heroPreview.getPack());
 			}
 			parent.refresh();
 			replaceWith(parent);

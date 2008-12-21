@@ -136,7 +136,7 @@ public class PlayersSelectionSubPanel extends UntitledSubPanelTable implements M
 		if(players.size()>index)
 		{	// init
 			Profile profile = players.get(index);
-			PredefinedColor clr = profile.getSpriteSelectedColor();
+			PredefinedColor clr = profile.getSpriteColor();
 			Color color = clr.getColor();
 			// delete
 			{	// content
@@ -334,9 +334,9 @@ public class PlayersSelectionSubPanel extends UntitledSubPanelTable implements M
 				break;
 			case COL_COLOR:
 				{	Profile profile = players.get(pos[0]-1);
-					PredefinedColor color = profile.getSpriteSelectedColor();
+					PredefinedColor color = profile.getSpriteColor();
 					color = Configuration.getProfilesConfiguration().getNextFreeColor(players,profile,color);
-					profile.setSpriteSelectedColor(color);
+					profile.getSelectedSprite().setColor(color);
 					reloadPortraits(pos[0]);
 					refreshPlayer(pos[0]);
 				}

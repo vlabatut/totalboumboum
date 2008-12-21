@@ -319,7 +319,7 @@ public class EditProfileData extends EntitledDataPanel implements MouseListener,
 	}
 
 	private void refreshColor()
-	{	PredefinedColor color = profile.getSpriteDefaultColor();
+	{	PredefinedColor color = profile.getDefaultSprite().getColor();
 		String text = null;
 		String tooltip = null;
 		Color bg = GuiTools.COLOR_TABLE_REGULAR_BACKGROUND;
@@ -389,7 +389,7 @@ public class EditProfileData extends EntitledDataPanel implements MouseListener,
 				break;
 			// COLOR
 			case LINE_COLOR:
-				PredefinedColor color = profile.getSpriteDefaultColor();
+				PredefinedColor color = profile.getDefaultSprite().getColor();
 				PredefinedColor allColors[] = PredefinedColor.values();
 				if(pos[1]==2)
 				{	int i = allColors.length-1;
@@ -413,7 +413,7 @@ public class EditProfileData extends EntitledDataPanel implements MouseListener,
 					else
 						color = allColors[i+1];
 				}
-				profile.setSpriteDefaultColor(color);
+				profile.getDefaultSprite().setColor(color);
 				refreshColor();
 		}	
 	}

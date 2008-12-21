@@ -168,7 +168,7 @@ public class ResultsSubPanel extends UntitledSubPanelTable
 				line++;
 				Profile profile = players.get(orderedPlayers[i]);
 				// color
-				Color clr = profile.getSpriteSelectedColor().getColor();
+				Color clr = profile.getSpriteColor().getColor();
 				// portrait
 				if(showPortrait)
 				{	BufferedImage image = profile.getPortraits().getOutgamePortrait(Portraits.OUTGAME_HEAD);

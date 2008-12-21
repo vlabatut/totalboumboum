@@ -27,9 +27,8 @@ public class Profile
 {
 	public Profile()
 	{	name = null;
-		spritePack = null;
-		spriteFolder = null;
-		spriteDefaultColor = null;
+		defaultSprite = new SpriteInfo();
+		selectedSprite = new SpriteInfo();
 		aiName = null;
 		aiPackname = null;
 	}
@@ -61,55 +60,53 @@ public class Profile
 	}
 
 	/////////////////////////////////////////////////////////////////
-	// SPRITE			/////////////////////////////////////////////
+	// SPRITES			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	private String spritePack;
-	private String spriteFolder;
-	private String spriteName;
-	private PredefinedColor spriteDefaultColor;
-	private PredefinedColor spriteSelectedColor;
+	private SpriteInfo defaultSprite;
+	private SpriteInfo selectedSprite;
+	
+	public SpriteInfo getDefaultSprite()
+	{	return defaultSprite;
+	}
+
+	public void setDefaultSprite(SpriteInfo defaultSprite)
+	{	this.defaultSprite = defaultSprite;
+	}
+
+	public SpriteInfo getSelectedSprite()
+	{	return selectedSprite;
+	}
+
+	public void setSelectedSprite(SpriteInfo selectedSprite)
+	{	this.selectedSprite = selectedSprite;
+	}
+
+	public PredefinedColor getSpriteColor()
+	{	PredefinedColor result = selectedSprite.getColor();
+		if(result==null)
+			result = defaultSprite.getColor();
+		return result;
+	}
+
+	public String getSpriteName()
+	{	String result = selectedSprite.getName();
+		if(result==null)
+			result = defaultSprite.getName();
+		return result;
+	}
 
 	public String getSpritePack()
-	{	return spritePack;
-	}
-	
-	public void setSpritePack(String spritePack)
-	{	this.spritePack = spritePack;
+	{	String result = selectedSprite.getPack();
+		if(result==null)
+			result = defaultSprite.getPack();
+		return result;
 	}
 
 	public String getSpriteFolder()
-	{	return spriteFolder;
-	}
-	
-	public void setSpriteFolder(String spriteFolder)
-	{	this.spriteFolder = spriteFolder;
-	}
-
-	public PredefinedColor getSpriteDefaultColor()
-	{	return spriteDefaultColor;
-	}
-	
-	public String getSpriteName()
-	{	return spriteName;
-	}
-	
-	public void setSpriteName(String spriteName)
-	{	this.spriteName = spriteName;
-	}
-
-	public PredefinedColor getSpriteSelectedColor()
-	{	PredefinedColor result = spriteSelectedColor;
+	{	String result = selectedSprite.getFolder();
 		if(result==null)
-			result = spriteDefaultColor;
+			result = defaultSprite.getFolder();
 		return result;
-	}
-	
-	public void setSpriteSelectedColor(PredefinedColor spriteSelectedColor)
-	{	this.spriteSelectedColor = spriteSelectedColor;		
-	}
-	
-	public void setSpriteDefaultColor(PredefinedColor spriteDefaultColor)
-	{	this.spriteDefaultColor = spriteDefaultColor;
 	}
 
 	/////////////////////////////////////////////////////////////////
@@ -183,12 +180,9 @@ public class Profile
 		result.fileName = fileName;
 		result.portraits = portraits; //TODO copy
 		
-		result.spriteDefaultColor = spriteDefaultColor;
-		result.spriteSelectedColor = spriteSelectedColor;
+		result.defaultSprite = defaultSprite.copy();
+		result.selectedSprite = selectedSprite.copy();
 		result.spriteControl = spriteControl;//TODO copy
-		result.spriteFolder = spriteFolder;
-		result.spritePack = spritePack;
-		result.spriteName = spriteName;
 		
 		return result;
 	}
@@ -212,10 +206,8 @@ public class Profile
 		result = result && name.equals(profile.getName());
 		result = result && controlSettingsIndex == profile.getControlSettingsIndex();
 
-		result = result && spriteSelectedColor == profile.getSpriteSelectedColor();
-		result = result && spriteDefaultColor == spriteDefaultColor;
-		result = result && spriteFolder.equals(profile.getSpriteFolder());
-		result = result && spritePack.equals(profile.getSpritePack());
+		result = result && !selectedSprite.hasChanged(profile.getSelectedSprite());
+		result = result && !defaultSprite.hasChanged(profile.getDefaultSprite());
 		
 		return result;
 	}

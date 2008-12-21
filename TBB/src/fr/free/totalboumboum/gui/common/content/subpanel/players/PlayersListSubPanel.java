@@ -120,7 +120,7 @@ public class PlayersListSubPanel extends UntitledSubPanelTable implements MouseL
 			{	int col = 0;
 				Profile profile = i.next();
 				// color
-				Color clr = profile.getSpriteSelectedColor().getColor();
+				Color clr = profile.getSpriteColor().getColor();
 				int alpha = GuiTools.ALPHA_TABLE_REGULAR_BACKGROUND_LEVEL3;
 				Color bg = new Color(clr.getRed(),clr.getGreen(),clr.getBlue(),alpha);
 				setLineBackground(line,bg);
