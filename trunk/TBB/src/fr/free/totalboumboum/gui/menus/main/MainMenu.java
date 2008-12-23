@@ -42,8 +42,7 @@ import fr.free.totalboumboum.gui.data.configuration.GuiConfiguration;
 import fr.free.totalboumboum.gui.menus.explore.ExploreSplitPanel;
 import fr.free.totalboumboum.gui.menus.options.OptionsSplitPanel;
 import fr.free.totalboumboum.gui.menus.profiles.select.SelectedProfileSplitPanel;
-import fr.free.totalboumboum.gui.menus.quickmatch.match.MatchSplitPanel;
-import fr.free.totalboumboum.gui.menus.quickmatch.players.PlayersSplitPanel;
+import fr.free.totalboumboum.gui.menus.quickmatch.temp.QuickMatchSplitPanel;
 import fr.free.totalboumboum.gui.menus.tournament.TournamentSplitPanel;
 import fr.free.totalboumboum.gui.tools.GuiKeys;
 import fr.free.totalboumboum.gui.tools.GuiTools;
@@ -54,7 +53,7 @@ public class MainMenu extends SimpleMenuPanel
 	private BufferedImage image;
 
 	private MenuPanel tournamentMainPanel;
-	private PlayersSplitPanel quickmatchGamePanel;
+	private QuickMatchSplitPanel quickMatchSplitPanel;
 	
 	@SuppressWarnings("unused")
 	private JButton buttonOptions;
@@ -156,7 +155,12 @@ buttonAbout.setEnabled(false);
 			replaceWith(tournamentMainPanel);
 	    }
 		else if(e.getActionCommand().equals(GuiKeys.MENU_MAIN_BUTTON_QUICKMATCH))
-		{	if(quickmatchGamePanel==null || quickmatchGamePanel.getTournament().isOver())
+		{	if(quickMatchSplitPanel==null)
+				quickMatchSplitPanel = new QuickMatchSplitPanel(getContainer(),this);
+			quickMatchSplitPanel.initTournament();				
+			replaceWith(quickMatchSplitPanel);
+/*		
+			if(quickmatchGamePanel==null || quickmatchGamePanel.getTournament().isOver())
 			{	quickmatchGamePanel = new PlayersSplitPanel(getContainer(),this);
 				quickmatchGamePanel.initTournament();				
 				replaceWith(quickmatchGamePanel);
@@ -173,13 +177,17 @@ buttonAbout.setEnabled(false);
 					replaceWith(quickmatchGamePanel);			
 				}
 			}
+*/		
 	    }
 	}
 	
 	public void refresh()
-	{	if(tournamentMainPanel!=null)
+	{	
+/*		
+		if(tournamentMainPanel!=null)
 			buttonQuickMatch.setEnabled(false);
-		if(quickmatchGamePanel!=null)
+		if(quickMatchSplitPanel!=null)
 			buttonTournament.setEnabled(false);
+*/		
 	}
 }

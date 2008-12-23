@@ -95,7 +95,7 @@ public class FolderBrowserSubPanel extends SubPanel implements MouseListener
 		this.targetFiles = targetFiles;
 		listPanels = new ArrayList<UntitledSubPanelTable>();
 		currentPage = 0;
-		selectedRow = -1;
+		selectedRow = -1;fireFolderBrowserSelectionChange();
 		
 		// size
 		lines = 20;
@@ -327,11 +327,11 @@ public class FolderBrowserSubPanel extends SubPanel implements MouseListener
 	
 	private void fireFolderBrowserSelectionChange()
 	{	for(FolderBrowserSubPanelListener listener: listeners)
-			listener.folderBrowserSelectionChange();
+			listener.packBrowserSelectionChange();
 	}
 
 	private void fireFolderBrowserParent()
 	{	for(FolderBrowserSubPanelListener listener: listeners)
-			listener.folderBrowserParent();
+			listener.packBrowserParent();
 	}
 }

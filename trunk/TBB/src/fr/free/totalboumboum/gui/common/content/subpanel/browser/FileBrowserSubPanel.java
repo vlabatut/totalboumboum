@@ -83,7 +83,7 @@ public class FileBrowserSubPanel extends SubPanel implements MouseListener
 			this.fileNames = new HashMap<String, String>();
 		listPanels = new ArrayList<UntitledSubPanelTable>();
 		currentPage = 0;
-		selectedRow = -1;
+		selectedRow = -1; fireFileBrowserSelectionChange();
 		
 		// size
 		lines = 20;
@@ -212,7 +212,7 @@ public class FileBrowserSubPanel extends SubPanel implements MouseListener
 		if(selectedRow!=-1)
 			table.setLabelBackground(selectedRow,0,GuiTools.COLOR_TABLE_SELECTED_BACKGROUND);
 		// update listeners
-		fireFolderBrowserSelectionChange();
+		fireFileBrowserSelectionChange();
 	}
 
 	private void refreshList()
@@ -278,7 +278,7 @@ public class FileBrowserSubPanel extends SubPanel implements MouseListener
 		else if(pos[0]==lineParent && showParent)
 		{	selectName(-1);
 			refreshList();
-			fireFolderBrowserParent();
+			fireFileBrowserParent();
 		}
 		// next page
 		else if(pos[0]==lineNext)
@@ -313,12 +313,12 @@ public class FileBrowserSubPanel extends SubPanel implements MouseListener
 	{	listeners.remove(listener);		
 	}
 	
-	private void fireFolderBrowserSelectionChange()
+	private void fireFileBrowserSelectionChange()
 	{	for(FileBrowserSubPanelListener listener: listeners)
 			listener.fileBrowserSelectionChange();
 	}
 
-	private void fireFolderBrowserParent()
+	private void fireFileBrowserParent()
 	{	for(FileBrowserSubPanelListener listener: listeners)
 			listener.fileBrowserParent();
 	}

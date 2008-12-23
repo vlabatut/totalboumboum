@@ -326,12 +326,12 @@ public class PackBrowserSubPanel extends SubPanel implements MouseListener, Fold
 	// FILE BROWSER LISTENER		/////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	@Override
-	public void folderBrowserSelectionChange()
+	public void packBrowserSelectionChange()
 	{	firePackBrowserSelectionChange();
 	}
 
 	@Override
-	public void folderBrowserParent()
+	public void packBrowserParent()
 	{	selectPack(-1);
 	}
 }

@@ -1198,8 +1198,10 @@ public class GuiTools
 		// set text
 		setButtonContent(name,result);
 		// add to panel
-		panel.add(result);
-		result.addActionListener(panel);
+		if(panel!=null)
+		{	panel.add(result);
+			result.addActionListener(panel);
+		}
 	}
 	
 	public static JButton createButton(String name, int width, int height, int fontSize, ButtonAware panel)

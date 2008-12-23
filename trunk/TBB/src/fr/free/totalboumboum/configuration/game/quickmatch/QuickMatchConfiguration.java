@@ -200,6 +200,10 @@ public class QuickMatchConfiguration
 	{	this.levelsSelection = selectedLevels;	
 	}
 
+	public void reinitLevels()
+	{	levelsSelection = new LevelsSelection();
+	}
+
 	/////////////////////////////////////////////////////////////////
 	// PLAYERS			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
@@ -211,5 +215,9 @@ public class QuickMatchConfiguration
 	
 	public void setProfilesSelection(ProfilesSelection profilesSelection)
 	{	this.profilesSelection = profilesSelection;	
+	}
+
+	public void reinitPlayers()
+	{	profilesSelection = new ProfilesSelection();
 	}
 }

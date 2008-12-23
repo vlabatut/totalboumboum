@@ -23,6 +23,6 @@ package fr.free.totalboumboum.gui.common.content.subpanel.browser;
 
 public interface FolderBrowserSubPanelListener
 {
-	public void folderBrowserSelectionChange();
-	public void folderBrowserParent();
+	public void packBrowserSelectionChange();
+	public void packBrowserParent();
 }
