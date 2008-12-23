@@ -234,7 +234,7 @@ public class SelectedRoundData extends EntitledDataPanel implements FolderBrowse
 	// FILE BROWSER		/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	@Override
-	public void folderBrowserSelectionChange()
+	public void packBrowserSelectionChange()
 	{	// load new selected round
 		String selectedRoundFolder = listPanel.getSelectedName();
 		if(selectedRoundFolder!=null)
@@ -270,7 +270,7 @@ public class SelectedRoundData extends EntitledDataPanel implements FolderBrowse
 	}
 
 	@Override
-	public void folderBrowserParent()
+	public void packBrowserParent()
 	{	
 	}
 }
