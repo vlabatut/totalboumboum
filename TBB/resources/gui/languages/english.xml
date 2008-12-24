@@ -8,6 +8,7 @@
 		<group name="Main">
 			<group name="Button">
 				<text name="About" value="About" tooltip="About Total Boum Boum" />
+				<text name="Load" value="Load" tooltip="Load a previous game" />
 				<text name="Options" value="Options" tooltip="Access the game options" />
 				<text name="Profiles" value="Profiles" tooltip="Edit the players' profiles" />
 				<text name="Quickmatch" value="Quick match" tooltip="Play only one match" />

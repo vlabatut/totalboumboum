@@ -100,6 +100,7 @@ public class GuiKeys
 	public static final String LEVELS = "Levels";
 	public static final String LIMIT = "Limit";
 	public static final String LIST = "List";
+	public static final String LOAD = "Load";
 	public static final String LOCATION = "Location";
 	public static final String MAIN = "Main";
 	public static final String MATCH = "Match";
@@ -182,6 +183,7 @@ public class GuiKeys
 		/* BUTTON */
 		public static final String MENU_MAIN_BUTTON = MENU_MAIN+BUTTON;
 		public static final String MENU_MAIN_BUTTON_ABOUT = MENU_MAIN_BUTTON+ABOUT;
+		public static final String MENU_MAIN_BUTTON_LOAD = MENU_MAIN_BUTTON+LOAD;
 		public static final String MENU_MAIN_BUTTON_OPTIONS = MENU_MAIN_BUTTON+OPTIONS;
 		public static final String MENU_MAIN_BUTTON_PROFILES = MENU_MAIN_BUTTON+PROFILES;
 		public static final String MENU_MAIN_BUTTON_QUICKMATCH = MENU_MAIN_BUTTON+QUICKMATCH;
