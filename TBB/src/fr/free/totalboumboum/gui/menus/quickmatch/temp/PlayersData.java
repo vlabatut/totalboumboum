@@ -36,8 +36,8 @@ import fr.free.totalboumboum.gui.common.content.subpanel.players.PlayersSelectio
 import fr.free.totalboumboum.gui.common.content.subpanel.players.PlayersSelectionSubPanelListener;
 import fr.free.totalboumboum.gui.common.structure.panel.SplitMenuPanel;
 import fr.free.totalboumboum.gui.common.structure.panel.data.EntitledDataPanel;
-import fr.free.totalboumboum.gui.menus.quickmatch.players.hero.SelectHeroSplitPanel;
-import fr.free.totalboumboum.gui.menus.quickmatch.players.profile.SelectProfileSplitPanel;
+import fr.free.totalboumboum.gui.menus.quickmatch.hero.SelectHeroSplitPanel;
+import fr.free.totalboumboum.gui.menus.quickmatch.profile.SelectProfileSplitPanel;
 import fr.free.totalboumboum.gui.tools.GuiKeys;
 
 public class PlayersData extends EntitledDataPanel implements PlayersSelectionSubPanelListener
