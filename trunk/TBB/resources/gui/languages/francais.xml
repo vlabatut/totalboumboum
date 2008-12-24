@@ -8,6 +8,7 @@
 		<group name="Main">
 			<group name="Button">
 				<text name="About" value="À propos" tooltip="À propos de Total Boum Boum" />
+				<text name="Load" value="Charger" tooltip="Charger une partie précédemment commencée" />
 				<text name="Options" value="Options" tooltip="Accéder aux options générales du jeu" />
 				<text name="Profiles" value="Profils" tooltip="Éditer les profils des joueurs" />
 				<text name="Quickmatch" value="Partie rapide" tooltip="Commencer une partie rapide" />

@@ -43,7 +43,6 @@ import fr.free.totalboumboum.gui.menus.explore.ExploreSplitPanel;
 import fr.free.totalboumboum.gui.menus.options.OptionsSplitPanel;
 import fr.free.totalboumboum.gui.menus.profiles.select.SelectedProfileSplitPanel;
 import fr.free.totalboumboum.gui.menus.quickmatch.temp.QuickMatchContainer;
-import fr.free.totalboumboum.gui.menus.quickmatch.temp.QuickMatchSplitPanel;
 import fr.free.totalboumboum.gui.menus.tournament.TournamentSplitPanel;
 import fr.free.totalboumboum.gui.tools.GuiKeys;
 import fr.free.totalboumboum.gui.tools.GuiTools;
@@ -64,8 +63,12 @@ public class MainMenu extends SimpleMenuPanel
 	@SuppressWarnings("unused")
 	private JButton buttonResources;
 	private JButton buttonAbout;
+	@SuppressWarnings("unused")
 	private JButton buttonTournament;
+	@SuppressWarnings("unused")
 	private JButton buttonQuickMatch;
+	@SuppressWarnings("unused")
+	private JButton buttonLoad;
 	@SuppressWarnings("unused")
 	private JButton buttonQuit;
 	
@@ -92,12 +95,13 @@ public class MainMenu extends SimpleMenuPanel
 		buttonStats = GuiTools.createButton(GuiKeys.MENU_MAIN_BUTTON_STATISTICS,buttonWidth,buttonHeight,fontSize,this);
 buttonStats.setEnabled(false);
 		buttonResources = GuiTools.createButton(GuiKeys.MENU_MAIN_BUTTON_RESOURCES,buttonWidth,buttonHeight,fontSize,this);
-		buttonAbout = GuiTools.createButton(GuiKeys.MENU_MAIN_BUTTON_ABOUT,buttonWidth,buttonHeight,fontSize,this);
-buttonAbout.setEnabled(false);
 		add(Box.createRigidArea(new Dimension(0,GuiTools.buttonVerticalSpace)));
 		buttonTournament = GuiTools.createButton(GuiKeys.MENU_MAIN_BUTTON_TOURNAMENT,buttonWidth,buttonHeight,fontSize,this);
 		buttonQuickMatch = GuiTools.createButton(GuiKeys.MENU_MAIN_BUTTON_QUICKMATCH,buttonWidth,buttonHeight,fontSize,this);
+		buttonLoad = GuiTools.createButton(GuiKeys.MENU_MAIN_BUTTON_LOAD,buttonWidth,buttonHeight,fontSize,this);
 		add(Box.createRigidArea(new Dimension(0,GuiTools.buttonVerticalSpace)));
+		buttonAbout = GuiTools.createButton(GuiKeys.MENU_MAIN_BUTTON_ABOUT,buttonWidth,buttonHeight,fontSize,this);
+buttonAbout.setEnabled(false);
 		buttonQuit = GuiTools.createButton(GuiKeys.MENU_MAIN_BUTTON_QUIT,buttonWidth,buttonHeight,fontSize,this);
 		add(Box.createVerticalGlue());		
 	}
@@ -121,6 +125,9 @@ buttonAbout.setEnabled(false);
 			replaceWith(exploreMenuPanel);
 	    }
 		else if(e.getActionCommand().equals(GuiKeys.MENU_MAIN_BUTTON_STATISTICS))
+		{	
+	    }
+		else if(e.getActionCommand().equals(GuiKeys.MENU_MAIN_BUTTON_LOAD))
 		{	
 	    }
 		else if(e.getActionCommand().equals(GuiKeys.MENU_MAIN_BUTTON_QUIT))
@@ -160,25 +167,6 @@ buttonAbout.setEnabled(false);
 				quickMatchContainer = new QuickMatchContainer(getContainer(),this);
 			quickMatchContainer.initTournament();
 			replaceWith(quickMatchContainer);
-/*		
-			if(quickmatchGamePanel==null || quickmatchGamePanel.getTournament().isOver())
-			{	quickmatchGamePanel = new PlayersSplitPanel(getContainer(),this);
-				quickmatchGamePanel.initTournament();				
-				replaceWith(quickmatchGamePanel);
-			}
-			else
-			{	MatchSplitPanel matchPanel = quickmatchGamePanel.getTournamentPanel();
-				if(matchPanel!=null)
-				{	matchPanel.setMenuParent(this);
-					matchPanel.refresh();
-					replaceWith(matchPanel);
-				}
-				else
-				{	quickmatchGamePanel.refresh();
-					replaceWith(quickmatchGamePanel);			
-				}
-			}
-*/		
 	    }
 	}
 	
