@@ -29,6 +29,7 @@ import fr.free.totalboumboum.gui.common.structure.MenuContainer;
 import fr.free.totalboumboum.gui.common.structure.panel.SplitMenuPanel;
 import fr.free.totalboumboum.gui.common.structure.panel.menu.MenuPanel;
 import fr.free.totalboumboum.gui.data.configuration.GuiConfiguration;
+import fr.free.totalboumboum.gui.menus.quickmatch.match.MatchSplitPanel;
 import fr.free.totalboumboum.gui.tools.GuiTools;
 
 public class QuickMatchSplitPanel extends SplitMenuPanel
@@ -50,8 +51,12 @@ public class QuickMatchSplitPanel extends SplitMenuPanel
 	/////////////////////////////////////////////////////////////////
 	// TOURNAMENT					/////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	public void initTournament()
-	{	((QuickMatchMenu)getMenuPart()).initTournament();
+	public boolean initTournament()
+	{	return ((QuickMatchMenu)getMenuPart()).initTournament();
+	}
+
+	public MatchSplitPanel getMatchPanel()
+	{	return ((QuickMatchMenu)getMenuPart()).getMatchPanel();
 	}
 
 	/////////////////////////////////////////////////////////////////

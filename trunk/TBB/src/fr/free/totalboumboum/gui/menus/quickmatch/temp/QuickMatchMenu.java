@@ -73,8 +73,6 @@ import fr.free.totalboumboum.gui.tools.GuiTools;
 public class QuickMatchMenu extends InnerMenuPanel
 {	private static final long serialVersionUID = 1L;
 	
-	private MatchSplitPanel matchPanel;
-
 	public QuickMatchMenu(SplitMenuPanel container, MenuPanel parent)
 	{	super(container, parent);
 		
@@ -167,8 +165,9 @@ public class QuickMatchMenu extends InnerMenuPanel
 	private SingleTournament tournament;
 	private QuickMatchConfiguration quickMatchConfiguration;
 	
-	public void initTournament()
-	{	// init tournament
+	public boolean initTournament()
+	{	boolean result = false;
+		// init tournament
 		if(tournament==null || tournament.isOver())
 		{	tournament = new SingleTournament();
 			Match match = new Match(tournament);
@@ -185,10 +184,13 @@ public class QuickMatchMenu extends InnerMenuPanel
 			playersData.setQuickMatchConfiguration(quickMatchConfiguration);
 			container.setDataPart(playersData);
 			setButtonsPlayers();
+			result = true;
 		}		
 		// existing (unfinished) tournament
 		else if(tournament.hasBegun())
-			replaceWith(matchPanel);
+			//replaceWith(matchPanel);
+			result = false;
+		return result;
 	}
 
 	private void setTournamentPlayers()
@@ -299,9 +301,14 @@ public class QuickMatchMenu extends InnerMenuPanel
 	/////////////////////////////////////////////////////////////////
 	// PANELS						/////////////////////////////////
 	/////////////////////////////////////////////////////////////////
+	private MatchSplitPanel matchPanel;
 	private PlayersData playersData;
 	private LevelsData levelsData;
 	private SettingsData settingsData;
+	
+	public MatchSplitPanel getMatchPanel()
+	{	return matchPanel;
+	}
 	
 	/////////////////////////////////////////////////////////////////
 	// ACTION LISTENER				/////////////////////////////////
