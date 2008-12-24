@@ -1,4 +1,4 @@
-package fr.free.totalboumboum.gui.menus.quickmatch.players.hero;
+package fr.free.totalboumboum.gui.menus.quickmatch.hero;
 
 /*
  * Total Boum Boum
