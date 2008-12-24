@@ -1,4 +1,4 @@
-package fr.free.totalboumboum.gui.menus.quickmatch.players.hero;
+package fr.free.totalboumboum.gui.menus.quickmatch.profile;
 
 /*
  * Total Boum Boum
@@ -33,18 +33,19 @@ import javax.xml.parsers.ParserConfigurationException;
 
 import org.xml.sax.SAXException;
 
+import fr.free.totalboumboum.configuration.Configuration;
+import fr.free.totalboumboum.configuration.profile.PredefinedColor;
 import fr.free.totalboumboum.configuration.profile.Profile;
 import fr.free.totalboumboum.configuration.profile.ProfileLoader;
-import fr.free.totalboumboum.configuration.profile.SpriteInfo;
-import fr.free.totalboumboum.engine.content.sprite.SpritePreview;
+import fr.free.totalboumboum.configuration.profile.ProfilesConfiguration;
 import fr.free.totalboumboum.gui.common.structure.panel.SplitMenuPanel;
 import fr.free.totalboumboum.gui.common.structure.panel.menu.InnerMenuPanel;
 import fr.free.totalboumboum.gui.common.structure.panel.menu.MenuPanel;
-import fr.free.totalboumboum.gui.menus.explore.heroes.select.SelectedHeroData;
+import fr.free.totalboumboum.gui.menus.profiles.select.SelectedProfileData;
 import fr.free.totalboumboum.gui.tools.GuiKeys;
 import fr.free.totalboumboum.gui.tools.GuiTools;
 
-public class SelectHeroMenu extends InnerMenuPanel
+public class SelectProfileMenu extends InnerMenuPanel
 {	private static final long serialVersionUID = 1L;
 	
 	@SuppressWarnings("unused")
@@ -52,13 +53,15 @@ public class SelectHeroMenu extends InnerMenuPanel
 	@SuppressWarnings("unused")
 	private JButton buttonConfirm;
 
-	private Profile profile;
+	private int index;
+	private ArrayList<Profile> profiles;
 	
-	private SelectedHeroData heroData;
+	private SelectedProfileData profileData;
 
-	public SelectHeroMenu(SplitMenuPanel container, MenuPanel parent, Profile profile)
+	public SelectProfileMenu(SplitMenuPanel container, MenuPanel parent, int index, ArrayList<Profile> profiles)
 	{	super(container, parent);
-		this.profile = profile;
+		this.index = index;
+		this.profiles = profiles;
 	
 		// layout
 		BoxLayout layout = new BoxLayout(this,BoxLayout.PAGE_AXIS); 
@@ -81,8 +84,8 @@ public class SelectHeroMenu extends InnerMenuPanel
 		add(Box.createVerticalGlue());		
 
 		// panels
-		heroData = new SelectedHeroData(container);
-		container.setDataPart(heroData);
+		profileData = new SelectedProfileData(container);
+		container.setDataPart(profileData);
 	}
 	
 	public void actionPerformed(ActionEvent e)
@@ -90,17 +93,14 @@ public class SelectHeroMenu extends InnerMenuPanel
 		{	replaceWith(parent);
 	    }
 		else if(e.getActionCommand().equals(GuiKeys.MENU_QUICKMATCH_PLAYERS_BUTTON_CONFIRM))
-		{	SpritePreview heroPreview = heroData.getSelectedHeroPreview();
-			if(heroPreview!=null)
-			{	// update profile
-				SpriteInfo spriteInfo = profile.getSelectedSprite();
-				String spriteName = heroPreview.getName();
-				spriteInfo.setName(spriteName);
-				String spriteFolder = heroPreview.getFolder();
-				spriteInfo.setFolder(spriteFolder);
-				String spritePack = heroPreview.getPack();
-				spriteInfo.setPack(spritePack);
-				// reload portraits
+		{	ProfilesConfiguration profilesConfiguration = Configuration.getProfilesConfiguration();
+			Profile profile = profileData.getSelectedProfile();
+			if(profile!=null && !profiles.contains(profile))
+			{	// check if color is free
+				PredefinedColor selectedColor = profile.getSpriteColor();
+				while(!profilesConfiguration.isFreeColor(profiles,selectedColor))
+					selectedColor = profilesConfiguration.getNextFreeColor(profiles,profile,selectedColor);
+				profile.getSelectedSprite().setColor(selectedColor);
 				try
 				{	ProfileLoader.reloadPortraits(profile);
 				}
@@ -116,6 +116,11 @@ public class SelectHeroMenu extends InnerMenuPanel
 				catch (ClassNotFoundException e1)
 				{	e1.printStackTrace();
 				}
+				// add to profiles list
+				if(index<profiles.size())
+					profiles.set(index,profile);
+				else
+					profiles.add(profile);
 			}
 			parent.refresh();
 			replaceWith(parent);
