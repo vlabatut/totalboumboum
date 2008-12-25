@@ -277,7 +277,8 @@ public class GuiTools
 				GuiKeys.COMMON_SPRITE_AUTHOR,
 				GuiKeys.MENU_RESOURCES_LEVEL_SELECT_PREVIEW_AUTHOR,
 				GuiKeys.COMMON_MATCH_AUTHOR,
-				GuiKeys.COMMON_ROUND_AUTHOR
+				GuiKeys.COMMON_ROUND_AUTHOR,
+				GuiKeys.COMMON_TOURNAMENT_AUTHOR
 			};
 			loadTableImages(folder,uses);
 		}
@@ -480,7 +481,8 @@ public class GuiTools
 		// misc
 		{	String folder = baseFolder+GuiFileTools.FILE_MISC;
 			String[] uses =
-			{	GuiKeys.MENU_RESOURCES_AI_SELECT_NOTES
+			{	GuiKeys.MENU_RESOURCES_AI_SELECT_NOTES,
+				GuiKeys.COMMON_TOURNAMENT_TYPE
 			};
 			loadTableImages(folder,uses);
 		}
@@ -544,7 +546,8 @@ public class GuiTools
 			{	GuiKeys.COMMON_MATCH_ALLOWED_PLAYERS,
 				GuiKeys.COMMON_LIMIT_ROUND_HEADER_LAST_STANDING,
 				GuiKeys.COMMON_ROUND_ALLOWED_PLAYERS,
-				GuiKeys.COMMON_LEVEL_ALLOWED_PLAYERS
+				GuiKeys.COMMON_LEVEL_ALLOWED_PLAYERS,
+				GuiKeys.COMMON_TOURNAMENT_ALLOWED_PLAYERS
 			};
 			loadTableImages(folder,uses);
 		}
@@ -636,7 +639,8 @@ public class GuiTools
 				GuiKeys.COMMON_SPRITE_NAME,
 				GuiKeys.MENU_RESOURCES_LEVEL_SELECT_PREVIEW_NAME,
 				GuiKeys.COMMON_MATCH_NAME,
-				GuiKeys.COMMON_ROUND_TITLE
+				GuiKeys.COMMON_ROUND_TITLE,
+				GuiKeys.COMMON_TOURNAMENT_NAME
 			};
 			loadTableImages(folder,uses);
 		}

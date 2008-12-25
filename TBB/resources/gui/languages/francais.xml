@@ -90,6 +90,14 @@
 					<text name="Back" value="Retour" tooltip="Revenir au menu des ressources" />
 				</group>		
 			</group>	
+			
+			<group name="Tournament">
+				<text name="Title" value="Liste des tournois" tooltip="Liste des tournois prédéfinis" />
+				<group name="Button">
+					<text name="Back" value="Retour" tooltip="Revenir au menu des ressources" />
+				</group>		
+			</group>	
+
 		</group>
 
 <!-- OPTIONS MENU -->
@@ -776,6 +784,20 @@
 			<text name="Source" value="Source"  tooltip="Source de ce personnage (oeuvre originale ou extrait d'un jeu existant)" />
 		</group>
 			
+<!-- TOURNAMENT -->
+		<group name="Tournament">
+			<text name="Author" value="Auteur"  tooltip="Auteur de ce tournoi" />
+			<text name="Name" value="Nom" tooltip="Nom de ce tournoi" />
+			<text name="AllowedPlayers" value="Joueurs" tooltip="Nombre de joueurs pour ce tournoi" />
+			<text name="Type" value="Type"  tooltip="Type de ce tournoi" />
+			<group name="Types">
+				<text name="Cup" value="Coupe"  tooltip="Tournoi à élimination directe" />
+				<text name="League" value="Ligue"  tooltip="Tournoi à classement dans lequel tous les joueurs se rencontrent au cours de plusieurs rencontres" />
+				<text name="Sequence" value="Séquence"  tooltip="Tournoi composé d'une séquence de plusieurs rencontres confrontant les mêmes joueurs" />
+				<text name="Single" value="Simple"  tooltip="Tournoi comportant une seule rencontre" />
+			</group>
+		</group>
+
 <!-- TRANSFER -->
 		<group name="Transfer">
 			<text name="Left" value="Sélectionner"  tooltip="Sélectionne l'objet de la fenêtre de droite" />

@@ -21,6 +21,8 @@ package fr.free.totalboumboum.game.tournament.single;
  * 
  */
 
+import java.util.Set;
+
 import fr.free.totalboumboum.game.match.Match;
 import fr.free.totalboumboum.game.statistics.StatisticMatch;
 import fr.free.totalboumboum.game.statistics.StatisticTournament;
@@ -98,10 +100,9 @@ public class SingleTournament extends AbstractTournament
 	/////////////////////////////////////////////////////////////////
 	
 	@Override
-	public void updatePlayerNumber()
-	{	
-		// TODO charger partiellement tous les matches 
-		// pour déterminer le nombre de joueurs nécessaire
+	public Set<Integer> getAllowedPlayerNumbers()
+	{	Set<Integer> result = match.getAllowedPlayerNumbers();
+		return result;			
 	}
 
 	/////////////////////////////////////////////////////////////////

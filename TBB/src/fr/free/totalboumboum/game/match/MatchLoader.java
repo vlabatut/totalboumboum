@@ -95,12 +95,14 @@ public class MatchLoader
     @SuppressWarnings("unchecked")
 	public static ArrayList<String> loadNotesElement(Element root)
     {	ArrayList<String> result = new ArrayList<String>();
-    	List<Element> lines = root.getChildren(XmlTools.ELT_LINE);
-    	Iterator<Element> i = lines.iterator();
-    	while(i.hasNext())
-    	{	Element temp = i.next();
-    		String line = temp.getAttributeValue(XmlTools.ATT_VALUE).trim();
-    		result.add(line);
+    	if(root!=null)
+    	{	List<Element> lines = root.getChildren(XmlTools.ELT_LINE);
+	    	Iterator<Element> i = lines.iterator();
+	    	while(i.hasNext())
+	    	{	Element temp = i.next();
+	    		String line = temp.getAttributeValue(XmlTools.ATT_VALUE).trim();
+	    		result.add(line);
+	    	}
     	}
     	return result;
     }

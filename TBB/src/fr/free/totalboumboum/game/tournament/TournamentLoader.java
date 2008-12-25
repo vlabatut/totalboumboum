@@ -75,7 +75,7 @@ public class TournamentLoader
 		
 		// content
 		List<Element> elements = root.getChildren();
-		element = elements.get(2);
+		element = elements.get(elements.size()-1);
 		String type = element.getName();
 		if(type.equalsIgnoreCase(CUP))
 			result = CupTournamentLoader.loadTournamentElement(path,element);

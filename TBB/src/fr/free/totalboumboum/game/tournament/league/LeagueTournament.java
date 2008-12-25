@@ -21,6 +21,8 @@ package fr.free.totalboumboum.game.tournament.league;
  * 
  */
 
+import java.util.Set;
+
 import fr.free.totalboumboum.game.match.Match;
 import fr.free.totalboumboum.game.tournament.AbstractTournament;
 
@@ -71,9 +73,9 @@ public class LeagueTournament extends AbstractTournament
 	}
 
 	@Override
-	public void updatePlayerNumber() {
-		// TODO Auto-generated method stub
-		
+	public Set<Integer> getAllowedPlayerNumbers()
+	{	// TODO Auto-generated method stub
+		return null;			
 	}
 
 	@Override
