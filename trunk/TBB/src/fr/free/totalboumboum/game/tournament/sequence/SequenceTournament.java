@@ -27,7 +27,10 @@ import java.util.Collections;
 import java.util.GregorianCalendar;
 import java.util.Iterator;
 import java.util.Random;
+import java.util.Set;
+import java.util.TreeSet;
 
+import fr.free.totalboumboum.configuration.GameConstants;
 import fr.free.totalboumboum.game.limit.Limits;
 import fr.free.totalboumboum.game.limit.TournamentLimit;
 import fr.free.totalboumboum.game.match.Match;
@@ -162,10 +165,15 @@ public class SequenceTournament extends AbstractTournament
 	/////////////////////////////////////////////////////////////////
 	
 	@Override
-	public void updatePlayerNumber()
-	{	
-		// TODO charger partiellement tous les matches 
-		// pour déterminer le nombre de joueurs nécessaire
+	public Set<Integer> getAllowedPlayerNumbers()
+	{	TreeSet<Integer> result = new TreeSet<Integer>();
+		for(int i=1;i<=GameConstants.MAX_PROFILES_COUNT;i++)
+			result.add(i);
+		for(Match m:matches)
+		{	Set<Integer> temp = m.getAllowedPlayerNumbers();
+			result.retainAll(temp);			
+		}
+		return result;			
 	}
 
 	/////////////////////////////////////////////////////////////////

@@ -38,6 +38,7 @@ import fr.free.totalboumboum.gui.menus.explore.heroes.select.SelectedHeroSplitPa
 import fr.free.totalboumboum.gui.menus.explore.levels.select.SelectedLevelSplitPanel;
 import fr.free.totalboumboum.gui.menus.explore.matches.select.SelectedMatchSplitPanel;
 import fr.free.totalboumboum.gui.menus.explore.rounds.select.SelectedRoundSplitPanel;
+import fr.free.totalboumboum.gui.menus.explore.tournaments.select.SelectedTournamentSplitPanel;
 import fr.free.totalboumboum.gui.tools.GuiKeys;
 import fr.free.totalboumboum.gui.tools.GuiTools;
 
@@ -53,6 +54,7 @@ public class ExploreMenu extends InnerMenuPanel
 	@SuppressWarnings("unused")
 	private JButton buttonLevels;
 
+	@SuppressWarnings("unused")
 	private JButton buttonTournaments;
 	@SuppressWarnings("unused")
 	private JButton buttonMatches;
@@ -92,7 +94,6 @@ buttonInstances.setEnabled(false);
 		buttonRounds = GuiTools.createButton(GuiKeys.MENU_RESOURCES_BUTTON_ROUNDS,buttonWidth,buttonHeight,fontSize,this);
 		buttonMatches = GuiTools.createButton(GuiKeys.MENU_RESOURCES_BUTTON_MATCHES,buttonWidth,buttonHeight,fontSize,this);
 		buttonTournaments = GuiTools.createButton(GuiKeys.MENU_RESOURCES_BUTTON_TOURNAMENTS,buttonWidth,buttonHeight,fontSize,this);
-buttonTournaments.setEnabled(false);
 		add(Box.createRigidArea(new Dimension(0,GuiTools.buttonVerticalSpace)));
 		buttonBack = GuiTools.createButton(GuiKeys.MENU_RESOURCES_BUTTON_BACK,buttonWidth,buttonHeight,fontSize,this);
 		add(Box.createVerticalGlue());		
@@ -121,7 +122,8 @@ buttonTournaments.setEnabled(false);
 			replaceWith(levelMenuPanel);
 	    }
 		else if(e.getActionCommand().equals(GuiKeys.MENU_RESOURCES_BUTTON_TOURNAMENTS))
-		{	
+		{	SelectedTournamentSplitPanel tournamentMenuPanel = new SelectedTournamentSplitPanel(container.getContainer(),container);
+			replaceWith(tournamentMenuPanel);
 	    }
 		else if(e.getActionCommand().equals(GuiKeys.MENU_RESOURCES_BUTTON_MATCHES))
 		{	SelectedMatchSplitPanel matchMenuPanel = new SelectedMatchSplitPanel(container.getContainer(),container);

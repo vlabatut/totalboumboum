@@ -22,6 +22,7 @@ package fr.free.totalboumboum.game.tournament;
  */
 
 import java.util.ArrayList;
+import java.util.Set;
 
 import fr.free.totalboumboum.configuration.profile.Profile;
 import fr.free.totalboumboum.game.match.Match;
@@ -68,15 +69,8 @@ public abstract class AbstractTournament implements StatisticHolder
 	{	return profiles;	
 	}
 
-	public abstract void updatePlayerNumber();
+	public abstract Set<Integer> getAllowedPlayerNumbers();
 	
-	public int getMinPlayerNumber()
-	{	return minPlayerNumber;			
-	}
-	public int getMaxPlayerNumber()
-	{	return maxPlayerNumber;			
-	}
-
 	@Override
 	public ArrayList<Boolean> getPlayersStatus()
 	{	// useless here

@@ -90,6 +90,14 @@
 					<text name="Back" value="Back" tooltip="Go back to the resources menu" />
 				</group>		
 			</group>	
+				
+			<group name="Tournament">
+				<text name="Title" value="List of tournaments" tooltip="List of predefined tournaments" />
+				<group name="Button">
+					<text name="Back" value="Back" tooltip="Go back to the resources menu" />
+				</group>		
+			</group>	
+
 		</group>	
 
 <!-- OPTIONS MENU -->
@@ -775,6 +783,20 @@
 			<text name="Name" value="Name" tooltip="Name of this character" />
 			<text name="Pack" value="Package" tooltip="Package containing this character" />
 			<text name="Source" value="Source"  tooltip="Source of this character (original work or ripped from some existing game)" />
+		</group>
+
+<!-- TOURNAMENT -->
+		<group name="Tournoi">
+			<text name="Author" value="Author"  tooltip="Author of this tournament" />
+			<text name="Name" value="Name" tooltip="Name of this tournament" />
+			<text name="AllowedPlayers" value="Players" tooltip="Number of players needed for this tournament" />
+			<text name="Type" value="Type"  tooltip="Number of rounds defined for this tournament" />
+			<group name="Types">
+				<text name="Cup" value="Cup"  tooltip="Knock-out tournament" />
+				<text name="League" value="League"  tooltip="Ranked round-robin tournament" />
+				<text name="Sequence" value="Sequence"  tooltip="Tournament made up of several matches involving the same players" />
+				<text name="Single" value="Single"  tooltip="One match tournament" />
+			</group>
 		</group>
 
 <!-- TRANSFER -->

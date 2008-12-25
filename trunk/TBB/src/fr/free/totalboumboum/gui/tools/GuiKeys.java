@@ -65,6 +65,7 @@ public class GuiKeys
 	public static final String CONTROLS = "Controls";
 	public static final String COUNT = "Count";
 	public static final String CROWNS = "Crowns";
+	public static final String CUP = "Cup";
 	public static final String CURRENT = "Current";
 	public static final String CYAN = "Cyan";
 	public static final String CUSTOM = "Custom";
@@ -95,6 +96,7 @@ public class GuiKeys
 	public static final String ITEMS = "Items";
 	public static final String ITEMSET = "Itemset";
 	public static final String LAST_STANDING = "LastStanding";
+	public static final String LEAGUE = "League";
 	public static final String LEFT = "Left";
 	public static final String LEVEL = "Level";
 	public static final String LEVELS = "Levels";
@@ -149,7 +151,9 @@ public class GuiKeys
 	public static final String ROUND = "Round";
 	public static final String ROUNDS = "Rounds";
 	public static final String RUST = "Rust";
+	public static final String SEQUENCE = "Sequence";
 	public static final String SETTINGS = "Settings";
+	public static final String SINGLE = "Single";
 	public static final String SPRITE = "Sprite";
 	public static final String ULTRAMARINE = "Ultramarine";
 	public static final String SCORE = "Score";
@@ -166,6 +170,7 @@ public class GuiKeys
 	public static final String TRANSFER = "Transfer";
 	public static final String TRUE = "True";
 	public static final String TYPE = "Type";
+	public static final String TYPES = "Types";
 	public static final String USE = "Use";
 	public static final String VALUE = "Value";
 	public static final String VALUES = "Values";
@@ -237,15 +242,20 @@ public class GuiKeys
 				public static final String MENU_RESOURCES_LEVEL_SELECT_PREVIEW_SOURCE = "MenuResourcesLevelSelectPreviewSource";
 				public static final String MENU_RESOURCES_LEVEL_SELECT_PREVIEW_THEME = "MenuResourcesLevelSelectPreviewTheme";
 		/* MATCH */
-			public static final String MENU_RESOURCES_MATCH_TITLE = "MenuResourcesMatchTitle";
+		public static final String MENU_RESOURCES_MATCH_TITLE = "MenuResourcesMatchTitle";
 			/* BUTTON */
 			public static final String MENU_RESOURCES_MATCH_BUTTON = "MenuResourcesMatchButton";	
 			public static final String MENU_RESOURCES_MATCH_BUTTON_BACK = MENU_RESOURCES_MATCH_BUTTON+"Back";	
 		/* ROUND */
-			public static final String MENU_RESOURCES_ROUND_TITLE = "MenuResourcesRoundTitle";
+		public static final String MENU_RESOURCES_ROUND_TITLE = "MenuResourcesRoundTitle";
 			/* BUTTON */
 			public static final String MENU_RESOURCES_ROUND_BUTTON = "MenuResourcesRoundButton";	
 			public static final String MENU_RESOURCES_ROUND_BUTTON_BACK = MENU_RESOURCES_ROUND_BUTTON+"Back";	
+		/* TOURNAMENT */
+		public static final String MENU_RESOURCES_TOURNAMENT_TITLE = "MenuResourcesTournamentTitle";
+			/* BUTTON */
+			public static final String MENU_RESOURCES_TOURNAMENT_BUTTON = "MenuResourcesTournamentButton";	
+			public static final String MENU_RESOURCES_TOURNAMENT_BUTTON_BACK = MENU_RESOURCES_TOURNAMENT_BUTTON+"Back";	
 			
 	/* OPTIONS */
 	public static final String MENU_OPTIONS = MENU+OPTIONS;
@@ -861,7 +871,21 @@ public class GuiKeys
 	public static final String COMMON_SPRITE_IMAGE = COMMON_SPRITE+IMAGE;
 	public static final String COMMON_SPRITE_NAME = COMMON_SPRITE+NAME;
 	public static final String COMMON_SPRITE_PACK = COMMON_SPRITE+PACK;
-	public static final String COMMON_SPRITE_SOURCE = COMMON_SPRITE+SOURCE;				
+	public static final String COMMON_SPRITE_SOURCE = COMMON_SPRITE+SOURCE;	
+	
+	/* TOURNAMENT */
+	public static final String COMMON_TOURNAMENT = COMMON+TOURNAMENT;
+	public static final String COMMON_TOURNAMENT_AUTHOR = COMMON_TOURNAMENT+AUTHOR;
+	public static final String COMMON_TOURNAMENT_NAME = COMMON_TOURNAMENT+NAME;
+	public static final String COMMON_TOURNAMENT_ALLOWED_PLAYERS = COMMON_TOURNAMENT+ALLOWED+PLAYERS;
+	public static final String COMMON_TOURNAMENT_TYPE = COMMON_TOURNAMENT+TYPE;
+		/* TYPES */
+		public static final String COMMON_TOURNAMENT_TYPES = COMMON_TOURNAMENT+TYPES;
+		public static final String COMMON_TOURNAMENT_TYPES_CUP = COMMON_TOURNAMENT_TYPES+CUP;
+		public static final String COMMON_TOURNAMENT_TYPES_LEAGUE = COMMON_TOURNAMENT_TYPES+LEAGUE;
+		public static final String COMMON_TOURNAMENT_TYPES_SEQUENCE = COMMON_TOURNAMENT_TYPES+SEQUENCE;
+		public static final String COMMON_TOURNAMENT_TYPES_SINGLE = COMMON_TOURNAMENT_TYPES+SINGLE;
+
 	/* TRANSFER */
 	public static final String COMMON_TRANSFER = COMMON+TRANSFER;
 	public static final String COMMON_TRANSFER_LEFT = COMMON_TRANSFER+LEFT;
