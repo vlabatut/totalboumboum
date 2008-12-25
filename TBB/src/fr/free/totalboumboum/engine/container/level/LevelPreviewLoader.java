@@ -37,11 +37,63 @@ import fr.free.totalboumboum.tools.ImageTools;
 import fr.free.totalboumboum.tools.XmlTools;
 
 public class LevelPreviewLoader
-{
+{	private static boolean previewBasics;
+	private static boolean previewItemset;
+	private static boolean previewPlayers;
+	private static boolean previewAllowedPlayersOnly;
+	private static boolean previewImage;
 
     public static LevelPreview loadLevelPreview(String pack, String folder) throws ParserConfigurationException, SAXException, IOException, ClassNotFoundException    
-    {	// init
-    	String schemaFolder = FileTools.getSchemasPath();
+    {	// parameters
+    	previewBasics = true;
+    	previewItemset = true;
+    	previewPlayers = true;
+    	previewAllowedPlayersOnly = false;
+    	previewImage = true;
+    	// load
+    	LevelPreview result = loadLevelPreviewCommon(pack,folder);
+		return result;
+    }
+    
+    public static LevelPreview loadLevelPreviewWithoutItemset(String pack, String folder) throws ParserConfigurationException, SAXException, IOException, ClassNotFoundException    
+    {	// parameters
+    	previewBasics = true;
+    	previewItemset = false;
+    	previewPlayers = true;
+    	previewAllowedPlayersOnly = false;
+    	previewImage = true;
+    	// load
+    	LevelPreview result = loadLevelPreviewCommon(pack,folder);
+		return result;
+    }
+    
+    public static LevelPreview loadLevelPreviewOnlyAllowedPlayers(String pack, String folder) throws ParserConfigurationException, SAXException, IOException, ClassNotFoundException
+    {	// parameters
+    	previewBasics = false;
+    	previewItemset = false;
+    	previewPlayers = false;
+    	previewAllowedPlayersOnly = true;
+    	previewImage = false;
+    	// load
+       	LevelPreview result = loadLevelPreviewCommon(pack,folder);
+		return result;    	
+    }
+
+    public static LevelPreview loadLevelPreviewOnlyImage(String pack, String folder) throws ParserConfigurationException, SAXException, IOException, ClassNotFoundException
+    {	// parameters
+    	previewBasics = false;
+    	previewItemset = false;
+    	previewPlayers = false;
+    	previewAllowedPlayersOnly = false;
+    	previewImage = true;
+    	// load
+       	LevelPreview result = loadLevelPreviewCommon(pack,folder);
+		return result;    	
+    }
+
+	private static LevelPreview loadLevelPreviewCommon(String pack, String folder) throws ParserConfigurationException, SAXException, IOException, ClassNotFoundException
+	{	// init
+   		String schemaFolder = FileTools.getSchemasPath();
 		String individualFolder = FileTools.getLevelsPath()+File.separator+pack+File.separator+folder;
 		File schemaFile,dataFile;
 		// opening
@@ -54,35 +106,47 @@ public class LevelPreviewLoader
 		result.setFolder(folder);
 		loadLevelElement(individualFolder,root,result);
 		return result;
-    }
+	}
+   
+	private static void loadLevelElement(String folder, Element root, LevelPreview result) throws ParserConfigurationException, SAXException, IOException, ClassNotFoundException
+	{	if(previewBasics)
+		{	// title
+			Element titleElement = root.getChild(XmlTools.ELT_TITLE);
+			loadTitleElement(titleElement,result);
+			
+			// author
+			Element authorElement = root.getChild(XmlTools.ELT_AUTHOR);
+			loadAuthorElement(authorElement,result);
+			
+			// source
+			Element sourceElement = root.getChild(XmlTools.ELT_SOURCE);
+			loadSourceElement(sourceElement,result);
+			
+			// visible size
+			Element visibleDimensionElement = root.getChild(XmlTools.ELT_VISIBLE_DIMENSION);
+			loadVisibleDimensionElement(visibleDimensionElement,result);
+	
+			// instance
+			Element instanceElement = root.getChild(XmlTools.ELT_INSTANCE);
+			loadInstanceElement(instanceElement,result);
 
-    private static void loadLevelElement(String folder, Element root, LevelPreview result) throws ParserConfigurationException, SAXException, IOException, ClassNotFoundException
-	{	// title
-		Element titleElement = root.getChild(XmlTools.ELT_TITLE);
-		loadTitleElement(titleElement,result);
+			// theme
+			Element themeElement = root.getChild(XmlTools.ELT_THEME);
+			loadThemeElement(themeElement,result);
+		}
 		
-		// author
-		Element authorElement = root.getChild(XmlTools.ELT_AUTHOR);
-		loadAuthorElement(authorElement,result);
-		
-		// source
-		Element sourceElement = root.getChild(XmlTools.ELT_SOURCE);
-		loadSourceElement(sourceElement,result);
-		
-		// visible size
-		Element visibleDimensionElement = root.getChild(XmlTools.ELT_VISIBLE_DIMENSION);
-		loadVisibleDimensionElement(visibleDimensionElement,result);
-
 		// visual preview
-		Element previewElement = root.getChild(XmlTools.ELT_PREVIEW);
-		loadPreviewElement(previewElement,folder,result);
-		
-		// instance
-		Element instanceElement = root.getChild(XmlTools.ELT_INSTANCE);
-		loadInstanceElement(instanceElement,result);
-		
+		if(previewImage)
+		{	Element previewElement = root.getChild(XmlTools.ELT_PREVIEW);
+			loadPreviewElement(previewElement,folder,result);
+		}
+	
 		// players stuff preview
-		PlayersPreviewer.previewPlayers(folder,result);
+		if(previewPlayers)
+			PlayersPreviewer.loadPlayers(folder,result);		
+		else if(previewAllowedPlayersOnly)
+			PlayersPreviewer.loadPlayersAllowed(folder,result);		
+		
 /*
 		// zone stuff preview
 		element = root.getChild(XmlTools.ELT_GLOBAL_DIMENSION);
@@ -92,15 +156,13 @@ public class LevelPreviewLoader
 		int globalWidth = Integer.parseInt(globalWidthStr);
 		Zone zone = ZoneLoader.loadZone(folder,globalHeight,globalWidth);
 */
-		// theme
-		Element themeElement = root.getChild(XmlTools.ELT_THEME);
-		loadThemeElement(themeElement,result);
-		
 		// itemset
-		String instanceFolder = FileTools.getInstancesPath()+File.separator+result.getInstanceName();		
-		String itemFolder = instanceFolder + File.separator+FileTools.FOLDER_ITEMS;
-		ItemsetPreview itemsetPreview = ItemsetPreviewLoader.loadItemsetPreview(itemFolder);
-		result.setItemsetPreview(itemsetPreview);
+		if(previewItemset)
+		{	String instanceFolder = FileTools.getInstancesPath()+File.separator+result.getInstanceName();		
+			String itemFolder = instanceFolder + File.separator+FileTools.FOLDER_ITEMS;
+			ItemsetPreview itemsetPreview = ItemsetPreviewLoader.loadItemsetPreview(itemFolder);
+			result.setItemsetPreview(itemsetPreview);
+		}
 	}
     
     private static void loadTitleElement(Element root, LevelPreview result)

@@ -204,7 +204,7 @@ public class LevelsData extends EntitledDataPanel implements PackBrowserSubPanel
 		{	String pack = levelsSelection.getPackName(i);
 			String folder = levelsSelection.getFolderName(i);
 			try
-			{	LevelPreview levelPreview = LevelPreviewLoader.loadLevelPreview(pack,folder);
+			{	LevelPreview levelPreview = LevelPreviewLoader.loadLevelPreviewOnlyAllowedPlayers(pack,folder);
 				if(levelPreview.getAllowedPlayerNumbers().contains(playerCount))
 					i++;
 				else
@@ -263,7 +263,7 @@ public class LevelsData extends EntitledDataPanel implements PackBrowserSubPanel
 		else
 		{	// preview
 			try
-			{	selectedLevelPreview = LevelPreviewLoader.loadLevelPreview(pack,folder);
+			{	selectedLevelPreview = LevelPreviewLoader.loadLevelPreviewWithoutItemset(pack,folder);
 			}
 			catch (ParserConfigurationException e)
 			{	e.printStackTrace();

@@ -39,7 +39,23 @@ import fr.free.totalboumboum.tools.XmlTools;
 
 public class PlayersPreviewer
 {	
-    public static void previewPlayers(String folder, LevelPreview result) throws ParserConfigurationException, SAXException, IOException
+	private static boolean onlyAllowedPlayers;
+	
+    public static void loadPlayers(String folder, LevelPreview result) throws ParserConfigurationException, SAXException, IOException
+	{	// parameters
+    	onlyAllowedPlayers = false;
+    	// load
+		loadPlayersCommon(folder,result);
+    }
+
+    public static void loadPlayersAllowed(String folder, LevelPreview result) throws ParserConfigurationException, SAXException, IOException
+	{	// parameters
+    	onlyAllowedPlayers = true;
+    	// load
+		loadPlayersCommon(folder,result);
+    }
+
+    private static void loadPlayersCommon(String folder, LevelPreview result) throws ParserConfigurationException, SAXException, IOException
 	{	// init
 		Element root;
 		String schemaFolder = FileTools.getSchemasPath();
@@ -50,22 +66,24 @@ public class PlayersPreviewer
 		schemaFile = new File(schemaFolder+File.separator+FileTools.FILE_PLAYERS+FileTools.EXTENSION_SCHEMA);
 		root = XmlTools.getRootFromFile(dataFile,schemaFile);
 		// reading
-		previewPlayersElement(root,result);
+		loadPlayersElement(root,result);
     }
-    
-    private static void previewPlayersElement(Element root, LevelPreview result)
+
+    private static void loadPlayersElement(Element root, LevelPreview result)
     {	// init
     	Element element;
     	// locations
     	element = root.getChild(XmlTools.ELT_LOCATIONS);
-    	previewLocationsElement(element,result);
+    	loadLocationsElement(element,result);
     	// items
-    	element = root.getChild(XmlTools.ELT_ITEMS);
-    	previewItemsElement(element,result);
+    	if(!onlyAllowedPlayers)
+    	{	element = root.getChild(XmlTools.ELT_ITEMS);
+    		loadItemsElement(element,result);
+    	}
     }
     
     @SuppressWarnings("unchecked")
-	private static void previewLocationsElement(Element root, LevelPreview result)
+	private static void loadLocationsElement(Element root, LevelPreview result)
     {	Set<Integer> allowedPlayersNumber = new TreeSet<Integer>();
     	List<Element> elements = root.getChildren(XmlTools.ELT_CASE);
 		Iterator<Element> i = elements.iterator();
@@ -79,7 +97,7 @@ public class PlayersPreviewer
 	}
     
     @SuppressWarnings("unchecked")
-    private static void previewItemsElement(Element root, LevelPreview result)
+    private static void loadItemsElement(Element root, LevelPreview result)
     {	HashMap<String,Integer> initialItems = new HashMap<String, Integer>();
     	List<Element> elements = root.getChildren(XmlTools.ELT_ITEM);
 		Iterator<Element> i = elements.iterator();
