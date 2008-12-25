@@ -91,6 +91,14 @@ public class SelectTournamentMenu extends InnerMenuPanel
 	public void actionPerformed(ActionEvent e)
 	{	if(e.getActionCommand().equals(GuiKeys.MENU_TOURNAMENT_SELECT_BUTTON_CANCEL))
 		{	replaceWith(parent);
+		
+		
+/*
+ * TODO
+ * 1) finir d'adapter cette classe
+ * 2) faire le trnmntMenu
+ * 3) adapter main menu 	
+ */
 	    }
 		else if(e.getActionCommand().equals(GuiKeys.MENU_TOURNAMENT_SELECT_BUTTON_CONFIRM))
 		{	SpritePreview heroPreview = tournamentData.getSelectedHeroPreview();
