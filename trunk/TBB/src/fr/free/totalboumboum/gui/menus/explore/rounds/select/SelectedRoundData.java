@@ -168,9 +168,8 @@ public class SelectedRoundData extends EntitledDataPanel implements FolderBrowse
 		{	HollowLevel hollowLevel = selectedRound.getHollowLevel();
 			String pack = hollowLevel.getPackName();
 			String folder = hollowLevel.getFolderName();
-			LevelPreview levelPreview;
 			try
-			{	levelPreview = LevelPreviewLoader.loadLevelPreview(pack, folder);
+			{	LevelPreview levelPreview = LevelPreviewLoader.loadLevelPreviewOnlyImage(pack, folder);
 				image = levelPreview.getVisualPreview();			
 			}
 			catch (ParserConfigurationException e)

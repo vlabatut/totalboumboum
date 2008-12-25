@@ -153,7 +153,7 @@ public class SelectedLevelData extends EntitledDataPanel implements PackBrowserS
 			selectedLevelPreview = null;
 		else
 		{	try
-			{	selectedLevelPreview = LevelPreviewLoader.loadLevelPreview(pack,folder);
+			{	selectedLevelPreview = LevelPreviewLoader.loadLevelPreviewWithoutItemset(pack,folder);
 			}
 			catch (ParserConfigurationException e)
 			{	e.printStackTrace();

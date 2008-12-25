@@ -813,18 +813,18 @@ public class Launcher
 	 * - nouveauté : écran des options pour le quick match
 	 * - nouveauté : gestion complète d'un quick match
 	 * - nouveauté : placement aléatoire des joueurs en début de round
+	 * - modification : chargement adapté des preview de levels (temps de chargement plus court, ce qui n'est pas nécessaire n'est plus chargé)
 	 * 
 	 * *******************************************************
 	 * *********************** A FAIRE ***********************
 	 * *******************************************************
-	 * 
-	 * - previews: hiérarchiser, nettoyer, adapter aux infos à afficher
 	 * 
 	 * - profils: simplifier, pas besoin de la double représentation default+selected.
 	 * - réorganiser par rapport aux besoins: joueur pdt le jeu, joueur chargé en dehors du jeu, joueur pas chargé ?
 	 * 
 	 * - ça serait bien que les joueurs soient affichés dans l'ordre relatif aux points de la limite rencontrée
 	 *   voire on définit explicitement un ordre d'affichage dans la compétition
+	 * - faut afficher explicitement le classement à la fin d'une confrontation
 	 * 
 	 * - faire le classement lexicographique gérant les signes diacritiques partout où c'est nécessaire
 	 * 
