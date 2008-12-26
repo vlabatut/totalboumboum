@@ -25,7 +25,7 @@ import java.awt.BorderLayout;
 import java.awt.Graphics;
 import java.awt.image.BufferedImage;
 
-import fr.free.totalboumboum.configuration.profile.Profile;
+import fr.free.totalboumboum.configuration.game.tournament.TournamentConfiguration;
 import fr.free.totalboumboum.gui.common.structure.MenuContainer;
 import fr.free.totalboumboum.gui.common.structure.panel.SplitMenuPanel;
 import fr.free.totalboumboum.gui.common.structure.panel.menu.MenuPanel;
@@ -37,14 +37,15 @@ public class SelectTournamentSplitPanel extends SplitMenuPanel
 
 	private BufferedImage image;
 
-	public SelectTournamentSplitPanel(MenuContainer container, MenuPanel parent, Profile profile)
+	public SelectTournamentSplitPanel(MenuContainer container, MenuPanel parent, TournamentConfiguration tournamentConfiguration)
 	{	super(container,parent,BorderLayout.LINE_START,GuiTools.VERTICAL_SPLIT_RATIO);
 	
 		// background
 		image = GuiConfiguration.getMiscConfiguration().getDarkBackground();
 		
 		// panels
-		setMenuPart(new SelectTournamentMenu(this,parent,profile));
+		SelectTournamentMenu menuPanel = new SelectTournamentMenu(this,parent,tournamentConfiguration);
+		setMenuPart(menuPanel);
 	}
 	
 	@Override

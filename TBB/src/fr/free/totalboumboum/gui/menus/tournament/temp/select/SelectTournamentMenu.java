@@ -23,25 +23,17 @@ package fr.free.totalboumboum.gui.menus.tournament.temp.select;
 
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
-import java.io.IOException;
 import java.util.ArrayList;
 
 import javax.swing.Box;
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
-import javax.xml.parsers.ParserConfigurationException;
 
-import org.xml.sax.SAXException;
-
-import fr.free.totalboumboum.configuration.profile.Profile;
-import fr.free.totalboumboum.configuration.profile.ProfileLoader;
-import fr.free.totalboumboum.configuration.profile.SpriteInfo;
-import fr.free.totalboumboum.engine.content.sprite.SpritePreview;
+import fr.free.totalboumboum.configuration.game.tournament.TournamentConfiguration;
 import fr.free.totalboumboum.game.tournament.AbstractTournament;
 import fr.free.totalboumboum.gui.common.structure.panel.SplitMenuPanel;
 import fr.free.totalboumboum.gui.common.structure.panel.menu.InnerMenuPanel;
 import fr.free.totalboumboum.gui.common.structure.panel.menu.MenuPanel;
-import fr.free.totalboumboum.gui.menus.explore.heroes.select.SelectedHeroData;
 import fr.free.totalboumboum.gui.menus.explore.tournaments.select.SelectedTournamentData;
 import fr.free.totalboumboum.gui.tools.GuiKeys;
 import fr.free.totalboumboum.gui.tools.GuiTools;
@@ -55,13 +47,13 @@ public class SelectTournamentMenu extends InnerMenuPanel
 	@SuppressWarnings("unused")
 	private JButton buttonConfirm;
 
-	private AbstractTournament tournament;
-	
+	private TournamentConfiguration tournamentConfiguration;
+	private String folder;
 	private SelectedTournamentData tournamentData;
 
-	public SelectTournamentMenu(SplitMenuPanel container, MenuPanel parent, AbstractTournament tournament)
+	public SelectTournamentMenu(SplitMenuPanel container, MenuPanel parent, TournamentConfiguration tournamentConfiguration)
 	{	super(container, parent);
-		this.tournament = tournament;
+		this.tournamentConfiguration = tournamentConfiguration;
 	
 		// layout
 		BoxLayout layout = new BoxLayout(this,BoxLayout.PAGE_AXIS); 
@@ -84,49 +76,22 @@ public class SelectTournamentMenu extends InnerMenuPanel
 		add(Box.createVerticalGlue());		
 
 		// panels
-		tournamentData = new SelectedTournamentData(container,FileTools.getTournamentsPath());
+		folder = FileTools.getTournamentsPath();
+		tournamentData = new SelectedTournamentData(container,folder);
 		container.setDataPart(tournamentData);
 	}
 	
 	public void actionPerformed(ActionEvent e)
 	{	if(e.getActionCommand().equals(GuiKeys.MENU_TOURNAMENT_SELECT_BUTTON_CANCEL))
 		{	replaceWith(parent);
-		
-		
-/*
- * TODO
- * 1) finir d'adapter cette classe
- * 2) faire le trnmntMenu
- * 3) adapter main menu 	
- */
 	    }
 		else if(e.getActionCommand().equals(GuiKeys.MENU_TOURNAMENT_SELECT_BUTTON_CONFIRM))
-		{	SpritePreview heroPreview = tournamentData.getSelectedHeroPreview();
-			if(heroPreview!=null)
-			{	// update profile
-				SpriteInfo spriteInfo = profile.getSelectedSprite();
-				String spriteName = heroPreview.getName();
-				spriteInfo.setName(spriteName);
-				String spriteFolder = heroPreview.getFolder();
-				spriteInfo.setFolder(spriteFolder);
-				String spritePack = heroPreview.getPack();
-				spriteInfo.setPack(spritePack);
-				// reload portraits
-				try
-				{	ProfileLoader.reloadPortraits(profile);
-				}
-				catch (ParserConfigurationException e1)
-				{	e1.printStackTrace();
-				}
-				catch (SAXException e1)
-				{	e1.printStackTrace();
-				}
-				catch (IOException e1)
-				{	e1.printStackTrace();
-				}
-				catch (ClassNotFoundException e1)
-				{	e1.printStackTrace();
-				}
+		{	AbstractTournament tournament = tournamentData.getSelectedTournament();
+			if(tournament!=null)
+			{	// update configuration
+				tournamentConfiguration.setTournament(tournament);
+				String file = tournamentData.getSelectedTournamentFile();
+				tournamentConfiguration.setTournamentFile(file);
 			}
 			parent.refresh();
 			replaceWith(parent);

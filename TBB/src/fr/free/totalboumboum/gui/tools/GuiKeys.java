@@ -151,6 +151,7 @@ public class GuiKeys
 	public static final String ROUND = "Round";
 	public static final String ROUNDS = "Rounds";
 	public static final String RUST = "Rust";
+	public static final String SELECT = "Select";
 	public static final String SEQUENCE = "Sequence";
 	public static final String SETTINGS = "Settings";
 	public static final String SINGLE = "Single";
@@ -471,6 +472,26 @@ public class GuiKeys
 				public static final String MENU_QUICKMATCH_SETTINGS_POINTS_VALUES_TITLE = MENU_QUICKMATCH_SETTINGS_POINTS_VALUES+TITLE;
 			
 	/* TOURNAMENT */	
+	public static final String MENU_TOURNAMENT = MENU+TOURNAMENT;
+		/* SELECT */
+		public static final String MENU_TOURNAMENT_SELECT = MENU_TOURNAMENT+SELECT;
+		public static final String MENU_TOURNAMENT_SELECT_TITLE = MENU_TOURNAMENT_SELECT+TITLE;
+			/* BUTTONS */
+			public static final String MENU_TOURNAMENT_SELECT_BUTTON = MENU_TOURNAMENT_SELECT+BUTTON;
+			public static final String MENU_TOURNAMENT_SELECT_BUTTON_CANCEL = MENU_TOURNAMENT_SELECT_BUTTON+CANCEL;
+			public static final String MENU_TOURNAMENT_SELECT_BUTTON_CONFIRM = MENU_TOURNAMENT_SELECT_BUTTON+CONFIRM;
+		/* PLAYERS */
+		public static final String MENU_TOURNAMENT_PLAYERS = MENU_TOURNAMENT+PLAYERS;
+		public static final String MENU_TOURNAMENT_TITLE = MENU_TOURNAMENT+TITLE;
+			/* BUTTONS */
+			public static final String MENU_TOURNAMENT_PLAYERS_BUTTON = MENU_TOURNAMENT_PLAYERS+BUTTON;
+			public static final String MENU_TOURNAMENT_PLAYERS_BUTTON_CANCEL = MENU_TOURNAMENT_PLAYERS+CANCEL;
+			public static final String MENU_TOURNAMENT_PLAYERS_BUTTON_CONFIRM = MENU_TOURNAMENT_PLAYERS+CONFIRM;
+			public static final String MENU_TOURNAMENT_PLAYERS_BUTTON_NEXT = MENU_TOURNAMENT_PLAYERS+NEXT;
+			public static final String MENU_TOURNAMENT_PLAYERS_BUTTON_PREVIOUS = MENU_TOURNAMENT_PLAYERS+PREVIOUS;
+			public static final String MENU_TOURNAMENT_PLAYERS_BUTTON_QUIT = MENU_TOURNAMENT_PLAYERS+QUIT;
+			
+			
 	public static final String MENU_TOURNAMENT_BUTTON = "MenuTournamentButton";
 	public static final String MENU_TOURNAMENT_BUTTON_BACK = MENU_TOURNAMENT_BUTTON+"Back";
 	public static final String MENU_TOURNAMENT_BUTTON_CONTINUE = MENU_TOURNAMENT_BUTTON+"Continue";
