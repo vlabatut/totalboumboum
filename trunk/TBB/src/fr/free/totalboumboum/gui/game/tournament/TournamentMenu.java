@@ -23,7 +23,6 @@ package fr.free.totalboumboum.gui.game.tournament;
 
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
-import java.io.IOException;
 
 import javax.swing.Box;
 import javax.swing.BoxLayout;
@@ -31,9 +30,6 @@ import javax.swing.ButtonGroup;
 import javax.swing.JButton;
 import javax.swing.JToggleButton;
 import javax.swing.SwingUtilities;
-import javax.xml.parsers.ParserConfigurationException;
-
-import org.xml.sax.SAXException;
 
 import fr.free.totalboumboum.game.match.Match;
 import fr.free.totalboumboum.game.tournament.AbstractTournament;
@@ -70,7 +66,7 @@ public class TournamentMenu extends InnerMenuPanel implements TournamentRenderPa
 	private JToggleButton  buttonStatistics;
 	private JButton buttonMatch;
 	
-	public TournamentMenu(SplitMenuPanel container, MenuPanel parent) throws IllegalArgumentException, SecurityException, ParserConfigurationException, SAXException, IOException, IllegalAccessException, NoSuchFieldException
+	public TournamentMenu(SplitMenuPanel container, MenuPanel parent)
 	{	super(container,parent);
 	
 		// layout

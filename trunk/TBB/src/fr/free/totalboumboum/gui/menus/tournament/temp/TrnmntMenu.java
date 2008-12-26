@@ -63,6 +63,7 @@ import fr.free.totalboumboum.game.tournament.single.SingleTournament;
 import fr.free.totalboumboum.gui.common.structure.panel.SplitMenuPanel;
 import fr.free.totalboumboum.gui.common.structure.panel.menu.InnerMenuPanel;
 import fr.free.totalboumboum.gui.common.structure.panel.menu.MenuPanel;
+import fr.free.totalboumboum.gui.game.tournament.TournamentSplitPanel;
 import fr.free.totalboumboum.gui.menus.tournament.temp.select.SelectTournamentSplitPanel;
 import fr.free.totalboumboum.gui.tools.GuiKeys;
 import fr.free.totalboumboum.gui.tools.GuiTools;
@@ -85,8 +86,8 @@ public class TrnmntMenu extends InnerMenuPanel
 
 		// panels
 		playersData = new PlayersData(container);
-		selectData = new SelectTournamentSplitPanel(container);
-		matchPanel = new MatchSplitPanel(container.getContainer(),getMenuParent()/*container*/);
+		selectPanel = new SelectTournamentSplitPanel(container,this.container,Configuration.getGameConfiguration().getTournamentConfiguration());
+		tournamentPanel = new TournamentSplitPanel(container.getContainer(),getMenuParent()/*container*/);
 	}
 	
 	/////////////////////////////////////////////////////////////////
@@ -297,13 +298,12 @@ public class TrnmntMenu extends InnerMenuPanel
 	/////////////////////////////////////////////////////////////////
 	// PANELS						/////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	private MatchSplitPanel matchPanel;
+	private TournamentSplitPanel tournamentPanel;
+	private SelectTournamentSplitPanel selectPanel;
 	private PlayersData playersData;
-	private LevelsData levelsData;
-	private SettingsData settingsData;
 	
-	public MatchSplitPanel getMatchPanel()
-	{	return matchPanel;
+	public TournamentSplitPanel getTournamentPanel()
+	{	return tournamentPanel;
 	}
 	
 	/////////////////////////////////////////////////////////////////
@@ -364,8 +364,8 @@ public class TrnmntMenu extends InnerMenuPanel
 			// synch game options
 			Configuration.getGameConfiguration().setQuickMatchConfiguration(quickMatchConfiguration);
 			// match panel
-			matchPanel.setTournament(tournament);
-			replaceWith(matchPanel);
+			tournamentPanel.setTournament(tournament);
+			replaceWith(tournamentPanel);
 	    }
 	} 
 	

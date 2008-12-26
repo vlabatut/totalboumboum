@@ -39,23 +39,33 @@ public class TournamentConfiguration
 	{	TournamentConfiguration result = new TournamentConfiguration();
 		
 		// tournament
-		ProfilesSelection tournamentCopy = tournamentSelected.copy();
+		ProfilesSelection tournamentCopy = profimesSelection.copy();
 		result.setTournamentSelected(tournamentCopy);
 
 		return result;
 	}
 	
 	/////////////////////////////////////////////////////////////////
-	// TOURNAMENT	/////////////////////////////////////////
+	// TOURNAMENT			/////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	private ProfilesSelection tournamentSelected = new ProfilesSelection();
+	private AbstractTournament tournament;
+	private String tournamentFile;
+	
+	public AbstractTournament getTournament()
+	{	return tournament;
+	}
+	
+	public void setTournament(AbstractTournament tournament)
+	{	this.tournament = tournament;
+	}
 
-	public ProfilesSelection getProfilesSelection()
-	{	return tournamentSelected;	
-	}	
-	public void setTournamentSelected(ProfilesSelection tournamentSelected)
-	{	this.tournamentSelected = tournamentSelected;	
-	}	
+	public String getTournamentFile()
+	{	return tournamentFile;
+	}
+	
+	public void setTournamentFile(String tournamentFile)
+	{	this.tournamentFile = tournamentFile;
+	}
 
 	public AbstractTournament loadLastTournament() throws ParserConfigurationException, SAXException, IOException, ClassNotFoundException
 	{	AbstractTournament result;
@@ -63,4 +73,16 @@ public class TournamentConfiguration
 		result = TournamentLoader.loadTournamentFromFolderPath(folderPath);
 		return result;
 	}
+
+	/////////////////////////////////////////////////////////////////
+	// PLAYERS				/////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	private ProfilesSelection profimesSelection = new ProfilesSelection();
+
+	public ProfilesSelection getProfilesSelection()
+	{	return profimesSelection;	
+	}	
+	public void setTournamentSelected(ProfilesSelection profimesSelection)
+	{	this.profimesSelection = profimesSelection;	
+	}	
 }
