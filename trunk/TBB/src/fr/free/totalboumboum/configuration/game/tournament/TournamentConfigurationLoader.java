@@ -48,7 +48,18 @@ public class TournamentConfigurationLoader
 	}
 
 	private static void loadGameTournamentElement(Element root, TournamentConfiguration result) throws ParserConfigurationException, SAXException, IOException, IllegalArgumentException, SecurityException, IllegalAccessException, NoSuchFieldException, ClassNotFoundException
-	{	// name
+	{	// options
+		Element optionsElement = root.getChild(XmlTools.ELT_OPTIONS);
+		// use last players
+		String att = optionsElement.getAttributeValue(XmlTools.ATT_USE_LAST_PLAYERS);
+		boolean useLastPlayers = Boolean.parseBoolean(att);
+		result.setUseLastPlayers(useLastPlayers);
+		// use last tournament
+		att = optionsElement.getAttributeValue(XmlTools.ATT_USE_LAST_TOURNAMENT);
+		boolean useLastTournament = Boolean.parseBoolean(att);
+		result.setUseLastTournament(useLastTournament);
+		
+		// name
 		Element tournamentElement = root.getChild(XmlTools.ELT_TOURNAMENT);
 		String tournamentName = tournamentElement.getAttribute(XmlTools.ATT_NAME).getValue().trim();
 		result.setTournamentName(new StringBuffer(tournamentName));

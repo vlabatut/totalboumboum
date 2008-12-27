@@ -106,7 +106,7 @@ public class SelectedTournamentData extends EntitledDataPanel implements FolderB
 				
 				rightPanel.add(Box.createVerticalGlue());
 
-				{	miscPanel = new TournamentMiscSubPanel(rightWidth,previewHeight);
+				{	miscPanel = new TournamentMiscSubPanel(rightWidth,previewHeight,4);
 					rightPanel.add(miscPanel);
 				}
 

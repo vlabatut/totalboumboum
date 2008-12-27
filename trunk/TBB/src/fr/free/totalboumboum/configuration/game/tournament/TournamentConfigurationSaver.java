@@ -36,9 +36,9 @@ import fr.free.totalboumboum.tools.XmlTools;
 
 public class TournamentConfigurationSaver
 {	
-	public static void saveTournamentConfiguration(TournamentConfiguration gameConfiguration) throws ParserConfigurationException, SAXException, IOException
+	public static void saveTournamentConfiguration(TournamentConfiguration tournamentConfiguration) throws ParserConfigurationException, SAXException, IOException
 	{	// build document
-		Element root = saveGameTournamentElement(gameConfiguration);	
+		Element root = saveGameTournamentElement(tournamentConfiguration);	
 		// save file
 		String engineFile = FileTools.getConfigurationPath()+File.separator+FileTools.FILE_GAME_TOURNAMENT+FileTools.EXTENSION_DATA;
 		File dataFile = new File(engineFile);
@@ -47,22 +47,40 @@ public class TournamentConfigurationSaver
 		XmlTools.makeFileFromRoot(dataFile,schemaFile,root);
 	}
 
-	private static Element saveGameTournamentElement(TournamentConfiguration gameConfiguration)
+	private static Element saveGameTournamentElement(TournamentConfiguration tournamentConfiguration)
 	{	Element result = new Element(XmlTools.ELT_GAME_TOURNAMENT); 
 		
+		// options
+		Element optionsElement = saveTournamentOptionsElement(tournamentConfiguration);
+		result.addContent(optionsElement);
+	
 		// name
 		Element tournamentElement = new Element(XmlTools.ELT_TOURNAMENT);
-		String tournament = gameConfiguration.getTournamentName().toString();
+		String tournament = tournamentConfiguration.getTournamentName().toString();
 		tournamentElement.setAttribute(XmlTools.ATT_NAME,tournament);
 		result.addContent(tournamentElement);
 		
 		// players
 		Element playersElement = new Element(XmlTools.ELT_PLAYERS);
-		ProfilesSelection tournamentSelected = gameConfiguration.getProfilesSelection();
+		ProfilesSelection tournamentSelected = tournamentConfiguration.getProfilesSelection();
 		ProfilesSelectionSaver.saveProfilesSelection(playersElement,tournamentSelected);
 		result.addContent(playersElement);
 		
 		return result;
 	}
 
+	private static Element saveTournamentOptionsElement(TournamentConfiguration tournamentConfiguration)
+	{	Element result = new Element(XmlTools.ELT_OPTIONS);
+		
+		// use last players
+		String useLastPlayers = Boolean.toString(tournamentConfiguration.getUseLastPlayers());
+		result.setAttribute(XmlTools.ATT_USE_LAST_PLAYERS,useLastPlayers);
+
+		// use last settings
+		String useLastTournament = Boolean.toString(tournamentConfiguration.getUseLastTournament());
+		result.setAttribute(XmlTools.ATT_USE_LAST_TOURNAMENT,useLastTournament);
+		
+		return result;
+	}
+	
 }

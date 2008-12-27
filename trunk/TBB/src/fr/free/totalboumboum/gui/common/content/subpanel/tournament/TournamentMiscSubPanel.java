@@ -39,9 +39,10 @@ import fr.free.totalboumboum.tools.StringTools;
 public class TournamentMiscSubPanel extends UntitledSubPanelTable
 {	private static final long serialVersionUID = 1L;
 	
-	public TournamentMiscSubPanel(int width, int height)
+	public TournamentMiscSubPanel(int width, int height, int lines)
 	{	super(width,height,1,1,1,true);
 		
+		this.lines = lines;
 		setTournament(null);
 	}
 		
@@ -49,6 +50,7 @@ public class TournamentMiscSubPanel extends UntitledSubPanelTable
 	// ROUND			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	private AbstractTournament tournament;
+	private int lines;
 
 	public AbstractTournament getTournament()
 	{	return tournament;	
@@ -58,7 +60,6 @@ public class TournamentMiscSubPanel extends UntitledSubPanelTable
 	{	this.tournament = tournament;
 		
 		// sizes
-		int lines = 4;
 		int colSubs = 2;
 		int colGroups = 1;
 		reinit(colGroups,colSubs,lines);

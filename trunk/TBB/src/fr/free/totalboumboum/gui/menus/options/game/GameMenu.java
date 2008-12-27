@@ -35,6 +35,7 @@ import fr.free.totalboumboum.gui.common.structure.panel.menu.InnerMenuPanel;
 import fr.free.totalboumboum.gui.common.structure.panel.menu.MenuPanel;
 import fr.free.totalboumboum.gui.menus.options.game.quickmatch.QuickMatchSplitPanel;
 import fr.free.totalboumboum.gui.menus.options.game.quickstart.QuickStartSplitPanel;
+import fr.free.totalboumboum.gui.menus.options.game.tournament.TournamentSplitPanel;
 import fr.free.totalboumboum.gui.tools.GuiKeys;
 import fr.free.totalboumboum.gui.tools.GuiTools;
 
@@ -45,7 +46,7 @@ public class GameMenu extends InnerMenuPanel
 	private JButton buttonQuickStart;
 	@SuppressWarnings("unused")
 	private JButton buttonQuickMatch;
-//	@SuppressWarnings("unused")
+	@SuppressWarnings("unused")
 	private JButton buttonTournament;
 	
 	@SuppressWarnings("unused")
@@ -74,7 +75,6 @@ public class GameMenu extends InnerMenuPanel
 		buttonQuickStart = GuiTools.createButton(GuiKeys.MENU_OPTIONS_GAME_BUTTON_QUICKSTART,buttonWidth,buttonHeight,fontSize,this);
 		buttonQuickMatch = GuiTools.createButton(GuiKeys.MENU_OPTIONS_GAME_BUTTON_QUICKMATCH,buttonWidth,buttonHeight,fontSize,this);
 		buttonTournament = GuiTools.createButton(GuiKeys.MENU_OPTIONS_GAME_BUTTON_TOURNAMENT,buttonWidth,buttonHeight,fontSize,this);
-buttonTournament.setEnabled(false);
 		add(Box.createRigidArea(new Dimension(0,GuiTools.buttonVerticalSpace)));
 		buttonBack = GuiTools.createButton(GuiKeys.MENU_OPTIONS_BUTTON_BACK,buttonWidth,buttonHeight,fontSize,this);
 		add(Box.createVerticalGlue());		
@@ -94,8 +94,8 @@ buttonTournament.setEnabled(false);
 			replaceWith(quickmatchPanel);
 		}
 		else if(e.getActionCommand().equals(GuiKeys.MENU_OPTIONS_GAME_BUTTON_TOURNAMENT))
-		{	//QuickstartSplitPanel quickstartPanel = new QuickstartSplitPanel(container.getContainer(),container);
-			//replaceWith(quickstartPanel);
+		{	TournamentSplitPanel tournamentPanel = new TournamentSplitPanel(container.getContainer(),container);
+			replaceWith(tournamentPanel);
 	    }
 		else if(e.getActionCommand().equals(GuiKeys.MENU_OPTIONS_BUTTON_BACK))
 		{	replaceWith(parent);

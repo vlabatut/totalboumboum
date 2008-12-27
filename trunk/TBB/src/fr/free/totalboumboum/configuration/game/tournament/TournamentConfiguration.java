@@ -52,6 +52,22 @@ public class TournamentConfiguration
 		return result;
 	}
 	
+	public boolean hasChanged(TournamentConfiguration copy)
+	{	boolean result = false;
+		// use last players
+		if(!result)
+		{	boolean ulp = copy.getUseLastPlayers();
+			result = !useLastPlayers==ulp;
+		}
+		// use last tournament
+		if(!result)
+		{	boolean ult = copy.getUseLastTournament();
+			result = !useLastTournament==ult;
+		}
+		//
+		return result;
+	}
+	
 	/////////////////////////////////////////////////////////////////
 	// OPTIONS			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////

@@ -189,7 +189,17 @@ public class LimitsSubPanel<T extends Limit> extends EntitledSubPanelTable imple
 			setTitleBackground(bg);			
 			
 			// empty lines
-			setNewTable(colGroups,1,lines);			
+			setNewTable(colGroups,colSubs,lines);
+			int iconWidth = getLineHeight();
+			setColSubMinWidth(0,iconWidth);
+			setColSubPreferredWidth(0,iconWidth);
+			setColSubMaxWidth(0,iconWidth);
+			int textWidth = getWidth() - iconWidth - 3*GuiTools.subPanelMargin;
+			setColSubMinWidth(1,textWidth);
+			setColSubPreferredWidth(1,textWidth);
+			setColSubMaxWidth(1,textWidth);
+			
+			fireLimitSelectionChange();
 		}
 	}
 
