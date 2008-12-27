@@ -65,14 +65,14 @@ public class SelectTournamentMenu extends InnerMenuPanel
 		// sizes
 		int buttonWidth = getWidth();
 		int buttonHeight = GuiTools.buttonTextHeight;
-		ArrayList<String> texts = GuiKeys.getKeysLike(GuiKeys.MENU_TOURNAMENT_SELECT_BUTTON);
+		ArrayList<String> texts = GuiKeys.getKeysLike(GuiKeys.MENU_TOURNAMENT_SETTINGS_BUTTON);
 		int fontSize = GuiTools.getOptimalFontSize(buttonWidth*0.8, buttonHeight*0.9, texts);
 
 		// buttons
 		add(Box.createVerticalGlue());
-		buttonConfirm = GuiTools.createButton(GuiKeys.MENU_TOURNAMENT_SELECT_BUTTON_CONFIRM,buttonWidth,buttonHeight,fontSize,this);
+		buttonConfirm = GuiTools.createButton(GuiKeys.MENU_TOURNAMENT_SETTINGS_BUTTON_CONFIRM,buttonWidth,buttonHeight,fontSize,this);
 		add(Box.createRigidArea(new Dimension(0,GuiTools.buttonVerticalSpace)));
-		buttonCancel = GuiTools.createButton(GuiKeys.MENU_TOURNAMENT_SELECT_BUTTON_CANCEL,buttonWidth,buttonHeight,fontSize,this);
+		buttonCancel = GuiTools.createButton(GuiKeys.MENU_TOURNAMENT_SETTINGS_BUTTON_CANCEL,buttonWidth,buttonHeight,fontSize,this);
 		add(Box.createVerticalGlue());		
 
 		// panels
@@ -82,16 +82,15 @@ public class SelectTournamentMenu extends InnerMenuPanel
 	}
 	
 	public void actionPerformed(ActionEvent e)
-	{	if(e.getActionCommand().equals(GuiKeys.MENU_TOURNAMENT_SELECT_BUTTON_CANCEL))
+	{	if(e.getActionCommand().equals(GuiKeys.MENU_TOURNAMENT_SETTINGS_BUTTON_CANCEL))
 		{	replaceWith(parent);
 	    }
-		else if(e.getActionCommand().equals(GuiKeys.MENU_TOURNAMENT_SELECT_BUTTON_CONFIRM))
-		{	AbstractTournament tournament = tournamentData.getSelectedTournament();
-			if(tournament!=null)
-			{	// update configuration
+		else if(e.getActionCommand().equals(GuiKeys.MENU_TOURNAMENT_SETTINGS_BUTTON_CONFIRM))
+		{	String tFile = tournamentData.getSelectedTournamentFile();
+			if(tFile!=null)
+			{	tournamentConfiguration.setTournamentName(new StringBuffer(tFile));
+				AbstractTournament tournament = tournamentData.getSelectedTournament();
 				tournamentConfiguration.setTournament(tournament);
-				String file = tournamentData.getSelectedTournamentFile();
-				tournamentConfiguration.setTournamentFile(file);
 			}
 			parent.refresh();
 			replaceWith(parent);

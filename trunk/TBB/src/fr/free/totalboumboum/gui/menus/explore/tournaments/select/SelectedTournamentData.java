@@ -150,7 +150,7 @@ public class SelectedTournamentData extends EntitledDataPanel implements FolderB
 	}
 
 	/////////////////////////////////////////////////////////////////
-	// SELECTED MATCH	/////////////////////////////////////////////
+	// SELECTED TOURNAMENT	/////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	public AbstractTournament getSelectedTournament()
 	{	return selectedTournament;
@@ -189,7 +189,7 @@ public class SelectedTournamentData extends EntitledDataPanel implements FolderB
 		else
 		{	try
 			{	String folderPath = baseFolder+File.separator+folder;
-				selectedTournament = TournamentLoader.loadTournamentFromFolderPath(folderPath);			
+				selectedTournament = TournamentLoader.loadTournamentFromFolderPath(folderPath);
 			}
 			catch (IllegalArgumentException e)
 			{	e.printStackTrace();

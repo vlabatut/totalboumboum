@@ -21,32 +21,41 @@ package fr.free.totalboumboum.gui.menus.tournament.temp;
  * 
  */
 
+import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 
 import javax.swing.Box;
 import javax.swing.BoxLayout;
+import javax.swing.JLabel;
 
-import fr.free.totalboumboum.configuration.game.quickmatch.QuickMatchConfiguration;
-import fr.free.totalboumboum.gui.common.content.subpanel.match.MatchQuickConfigSubPanel;
-import fr.free.totalboumboum.gui.common.content.subpanel.round.RoundQuickConfigSubPanel;
+import fr.free.totalboumboum.configuration.game.tournament.TournamentConfiguration;
+import fr.free.totalboumboum.game.tournament.AbstractTournament;
+import fr.free.totalboumboum.gui.common.content.subpanel.tournament.TournamentMiscSubPanel;
 import fr.free.totalboumboum.gui.common.structure.panel.SplitMenuPanel;
 import fr.free.totalboumboum.gui.common.structure.panel.data.EntitledDataPanel;
 import fr.free.totalboumboum.gui.common.structure.subpanel.SubPanel;
+import fr.free.totalboumboum.gui.common.structure.subpanel.UntitledSubPanelTable;
+import fr.free.totalboumboum.gui.menus.tournament.temp.select.SelectTournamentSplitPanel;
 import fr.free.totalboumboum.gui.tools.GuiKeys;
 import fr.free.totalboumboum.gui.tools.GuiTools;
 
-public class SettingsData extends EntitledDataPanel
+public class SettingsData extends EntitledDataPanel implements MouseListener
 {	
 	private static final long serialVersionUID = 1L;
+	private static final float SPLIT_RATIO = 0.06f;
 	
-	private MatchQuickConfigSubPanel matchPanel;
-	private RoundQuickConfigSubPanel roundPanel;
+	private TournamentMiscSubPanel miscPanel;
+	private UntitledSubPanelTable tournamentPanel;
+	private int tournamentHeight;
+	private int miscHeight;
 	
 	public SettingsData(SplitMenuPanel container)
 	{	super(container);
 		
 		// title
-		setTitleKey(GuiKeys.MENU_QUICKMATCH_SETTINGS_TITLE);
+		setTitleKey(GuiKeys.MENU_TOURNAMENT_SETTINGS_TITLE);
 		
 		SubPanel mainPanel;
 		// data
@@ -55,19 +64,21 @@ public class SettingsData extends EntitledDataPanel
 				mainPanel.setLayout(layout);
 			}
 			
-			int panelHeight = (dataHeight - GuiTools.panelMargin)/2; 
+			int margin = GuiTools.panelMargin;
+			tournamentHeight = (int)(dataHeight*SPLIT_RATIO); 
+			miscHeight = dataHeight - tournamentHeight - margin;
 			mainPanel.setOpaque(false);
 			
-			// match
-			{	matchPanel = new MatchQuickConfigSubPanel(dataWidth,panelHeight);
-				mainPanel.add(matchPanel);
+			// tournament panel
+			{	tournamentPanel = makeTournamentPanel(dataWidth,tournamentHeight);
+				mainPanel.add(tournamentPanel);
 			}
 			
 			mainPanel.add(Box.createRigidArea(new Dimension(GuiTools.panelMargin,GuiTools.panelMargin)));
 			
 			// commands panel
-			{	roundPanel = new RoundQuickConfigSubPanel(dataWidth,panelHeight);
-				mainPanel.add(roundPanel);
+			{	tournamentPanel = new TournamentMiscSubPanel(dataWidth,miscHeight);
+				mainPanel.add(tournamentPanel);
 			}
 			
 			setDataPart(mainPanel);
@@ -79,21 +90,108 @@ public class SettingsData extends EntitledDataPanel
 	/////////////////////////////////////////////////////////////////
 	@Override
 	public void refresh()
-	{	// nothing to do here
+	{	AbstractTournament tournament = tournamentConfiguration.getTournament();
+		miscPanel.setTournament(tournament);
+		refreshTournament();
 	}
 	
 	/////////////////////////////////////////////////////////////////
-	// GAME CONFIGURATION			/////////////////////////////////
+	// MOUSE LISTENER	/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	private QuickMatchConfiguration quickMatchConfiguration = null;
+	@Override
+	public void mouseClicked(MouseEvent e)
+	{	
+	}
+	
+	@Override
+	public void mouseEntered(MouseEvent e)
+	{	
+	}
+	
+	@Override
+	public void mouseExited(MouseEvent e)
+	{	
+	}
+	
+	@Override
+	public void mousePressed(MouseEvent e)
+	{	SelectTournamentSplitPanel selectTournamentPanel = new SelectTournamentSplitPanel(container.getContainer(),container,tournamentConfiguration);
+		getContainer().replaceWith(selectTournamentPanel);
+	}
+	
+	@Override
+	public void mouseReleased(MouseEvent e)
+	{	
+	}
 
-	public void setQuickMatchConfiguration(QuickMatchConfiguration quickMatchConfiguration)
-	{	this.quickMatchConfiguration = quickMatchConfiguration;
-		matchPanel.setQuickMatchConfiguration(quickMatchConfiguration);
-		roundPanel.setQuickMatchConfiguration(quickMatchConfiguration);
+	/////////////////////////////////////////////////////////////////
+	// CONFIGURATION				/////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	private TournamentConfiguration tournamentConfiguration;
+
+	public void setQuickStartConfiguration(TournamentConfiguration tournamentConfiguration)
+	{	this.tournamentConfiguration = tournamentConfiguration;
+		refresh();
 	}
 	
-	public QuickMatchConfiguration getQuickMatchConfiguration()
-	{	return quickMatchConfiguration;
+	public TournamentConfiguration getQuickStartConfiguration()
+	{	return tournamentConfiguration;	
+	}
+
+	/////////////////////////////////////////////////////////////////
+	// TOURNAMENT			/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	private void refreshTournament()
+	{	String tournamentFile = tournamentConfiguration.getTournamentName().toString();
+		if(tournamentFile!=null)
+			tournamentPanel.setLabelText(0,0,tournamentFile.toString(),tournamentFile.toString());
+		else
+			tournamentPanel.setLabelText(0,0,null,null);
+	}
+
+	private UntitledSubPanelTable makeTournamentPanel(int width, int height)
+	{	int cols = 2;
+		int lines = 1;
+		int margin = GuiTools.subPanelMargin;
+		UntitledSubPanelTable result = new UntitledSubPanelTable(width,height,cols,lines,false);
+		@SuppressWarnings("unused")
+		int headerHeight = result.getHeaderHeight();
+		int lineHeight = result.getLineHeight();
+		int browseWidth = lineHeight;
+		int fileWidth = width - (browseWidth + 3*margin);		
+		
+		{	int line = 0;
+			int col = 0;
+			// name
+			{	// size
+				result.setColSubMinWidth(col,fileWidth);
+				result.setColSubPreferredWidth(col,fileWidth);
+				result.setColSubMaxWidth(col,fileWidth);
+				// color
+				Color bg = GuiTools.COLOR_TABLE_REGULAR_BACKGROUND;
+				result.setLabelBackground(line,col,bg);
+				// next
+				col++;
+			}
+			// browse
+			{	// size
+				result.setColSubMinWidth(col,browseWidth);
+				result.setColSubPreferredWidth(col,browseWidth);
+				result.setColSubMaxWidth(col,browseWidth);
+				// icon
+				String key = GuiKeys.MENU_TOURNAMENT_SETTINGS_BUTTON_SELECT;
+				result.setLabelKey(line,col,key,true);
+				// color
+				Color bg = GuiTools.COLOR_TABLE_HEADER_BACKGROUND;
+				result.setLabelBackground(line,col,bg);
+				// listener
+				JLabel lbl = result.getLabel(line,col);
+				lbl.addMouseListener(this);
+				// next
+				col++;
+			}
+		}
+		
+		return result;	
 	}
 }

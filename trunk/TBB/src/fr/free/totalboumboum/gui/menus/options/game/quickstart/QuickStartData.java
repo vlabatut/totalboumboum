@@ -58,7 +58,6 @@ public class QuickStartData extends EntitledDataPanel implements PlayersSelectio
 	
 	private PlayersSelectionSubPanel playersPanel;
 	private UntitledSubPanelTable roundPanel;
-	private SubPanel mainPanel;
 	private int roundHeight;
 	private int playersHeight;
 
@@ -69,6 +68,7 @@ public class QuickStartData extends EntitledDataPanel implements PlayersSelectio
 		String key = GuiKeys.MENU_OPTIONS_GAME_QUICKSTART_TITLE;
 		setTitleKey(key);
 		
+		SubPanel mainPanel;
 		// data
 		{	mainPanel = new SubPanel(dataWidth,dataHeight);
 			{	BoxLayout layout = new BoxLayout(mainPanel,BoxLayout.PAGE_AXIS); 
