@@ -43,7 +43,7 @@ import fr.free.totalboumboum.gui.menus.explore.ExploreSplitPanel;
 import fr.free.totalboumboum.gui.menus.options.OptionsSplitPanel;
 import fr.free.totalboumboum.gui.menus.profiles.select.SelectedProfileSplitPanel;
 import fr.free.totalboumboum.gui.menus.quickmatch.QuickMatchContainer;
-import fr.free.totalboumboum.gui.menus.tournament.TournamentSplitPanel;
+import fr.free.totalboumboum.gui.menus.tournament.temp.TrnmntContainer;
 import fr.free.totalboumboum.gui.tools.GuiKeys;
 import fr.free.totalboumboum.gui.tools.GuiTools;
 
@@ -52,7 +52,7 @@ public class MainMenu extends SimpleMenuPanel
 	
 	private BufferedImage image;
 
-	private MenuPanel tournamentMainPanel;
+	private TrnmntContainer tournamentContainer;
 	private QuickMatchContainer quickMatchContainer;
 	
 	@SuppressWarnings("unused")
@@ -134,6 +134,12 @@ buttonAbout.setEnabled(false);
 		{	getFrame().exit();
 	    }
 		else if(e.getActionCommand().equals(GuiKeys.MENU_MAIN_BUTTON_TOURNAMENT))
+		{	if(tournamentContainer==null)
+				tournamentContainer = new TrnmntContainer(getContainer(),this);
+			tournamentContainer.initTournament();
+			replaceWith(tournamentContainer);
+	    }
+/*	
 		{	if(tournamentMainPanel==null)
 			{	try
 				{	tournamentMainPanel = new TournamentSplitPanel(getContainer(),this);
@@ -162,6 +168,7 @@ buttonAbout.setEnabled(false);
 			}
 			replaceWith(tournamentMainPanel);
 	    }
+*/		
 		else if(e.getActionCommand().equals(GuiKeys.MENU_MAIN_BUTTON_QUICKMATCH))
 		{	if(quickMatchContainer==null)
 				quickMatchContainer = new QuickMatchContainer(getContainer(),this);

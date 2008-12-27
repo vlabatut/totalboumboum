@@ -129,12 +129,12 @@ public class SettingsData extends EntitledDataPanel implements MouseListener
 	/////////////////////////////////////////////////////////////////
 	private TournamentConfiguration tournamentConfiguration;
 
-	public void setQuickStartConfiguration(TournamentConfiguration tournamentConfiguration)
+	public void setTournamentConfiguration(TournamentConfiguration tournamentConfiguration)
 	{	this.tournamentConfiguration = tournamentConfiguration;
 		refresh();
 	}
 	
-	public TournamentConfiguration getQuickStartConfiguration()
+	public TournamentConfiguration getTournamentConfiguration()
 	{	return tournamentConfiguration;	
 	}
 
