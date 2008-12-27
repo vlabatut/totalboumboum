@@ -1,4 +1,4 @@
-package fr.free.totalboumboum.gui.game.match.description;
+package fr.free.totalboumboum.gui.game.match;
 
 /*
  * Total Boum Boum
