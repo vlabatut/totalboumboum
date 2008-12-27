@@ -171,7 +171,8 @@ buttonStatistics.setEnabled(false);
 		{	getFrame().setMainMenuPanel();
 	    }
 		else if(e.getActionCommand().equals(GuiKeys.GAME_MATCH_BUTTON_CURRENT_TOURNAMENT))				
-		{	replaceWith(parent);
+		{	parent.refresh();
+			replaceWith(parent);
 	    }
 		else if(e.getActionCommand().equals(GuiKeys.GAME_MATCH_BUTTON_FINISH))
 		{	match.finish();

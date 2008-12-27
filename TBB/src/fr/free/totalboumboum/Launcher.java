@@ -815,6 +815,13 @@ public class Launcher
 	 * - nouveauté : placement aléatoire des joueurs en début de round
 	 * - modification : chargement adapté des preview de levels (temps de chargement plus court, ce qui n'est pas nécessaire n'est plus chargé)
 	 * - modification : menu de configuration du tournoi entièrement refait
+	 * - correction : bug graphique dans la liste des joueurs en cours de jeu
+	 * - correction : bug de raffraichissement des écrans tournoi/rencontre/manche en cours de partie
+	 * 
+	 * - correction : bug empêchant de sortir définitivement d'un tournoi
+	 * - modification : unification des classes d'affichage des parties (package game)
+	 * - nouveauté : enregistrement automatique
+	 * - nouveauté : enregistrement à la demande
 	 * 
 	 * *******************************************************
 	 * *********************** A FAIRE ***********************

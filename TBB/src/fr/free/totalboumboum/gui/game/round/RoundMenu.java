@@ -168,7 +168,8 @@ buttonStatistics.setEnabled(false);
 		{	getFrame().setMainMenuPanel();
 	    }
 		else if(e.getActionCommand().equals(GuiKeys.GAME_ROUND_BUTTON_CURRENT_MATCH))
-		{	replaceWith(parent);
+		{	parent.refresh();
+			replaceWith(parent);
 	    }
 		else if(e.getActionCommand().equals(GuiKeys.GAME_ROUND_BUTTON_FINISH))
 		{	round.finish();
