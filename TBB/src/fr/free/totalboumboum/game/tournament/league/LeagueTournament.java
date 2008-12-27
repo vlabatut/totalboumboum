@@ -55,12 +55,6 @@ public class LeagueTournament extends AbstractTournament
 	}
 
 	@Override
-	public boolean isOver() {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
-	@Override
 	public boolean isReady() {
 		// TODO Auto-generated method stub
 		return false;

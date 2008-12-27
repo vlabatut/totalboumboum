@@ -85,6 +85,11 @@ public class Round implements StatisticHolder
 	{	return roundOver;
 	}
 	
+	public void cancel()
+	{	// TODO à compléter
+		match.cancel();
+	}
+	
 	public void progress() throws IllegalArgumentException, SecurityException, ParserConfigurationException, SAXException, IOException, ClassNotFoundException, IllegalAccessException, NoSuchFieldException
 	{	if(!isOver())
 		{	loop = new Loop(this);

@@ -256,6 +256,14 @@ public class GuiTools
 			};
 			loadButtonImages(buttonStates,folder,uses);
 		}
+		{	String folder = baseFolder+GuiFileTools.FOLDER_SAVE+File.separator;
+			String[] uses = 
+			{	GuiKeys.GAME_TOURNAMENT_BUTTON_SAVE,
+				GuiKeys.GAME_MATCH_BUTTON_SAVE,
+				GuiKeys.GAME_ROUND_BUTTON_SAVE
+			};
+			loadButtonImages(buttonStates,folder,uses);
+		}
 		{	String folder = baseFolder+GuiFileTools.FOLDER_STATS+File.separator;
 			String[] uses = 
 			{	GuiKeys.GAME_TOURNAMENT_BUTTON_STATISTICS,

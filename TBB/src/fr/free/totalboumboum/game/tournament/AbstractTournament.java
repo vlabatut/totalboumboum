@@ -35,11 +35,23 @@ public abstract class AbstractTournament implements StatisticHolder
 	// GAME		/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	protected boolean begun = false;
+	private boolean tournamentOver = false;
 	
 	public abstract void init();
 	public abstract void progress();
 	public abstract void finish();
-	public abstract boolean isOver();
+	
+	public boolean isOver()
+	{	return tournamentOver;
+	}
+	public void setOver(boolean tournamentOver)
+	{	this.tournamentOver = tournamentOver;
+	}
+	
+	public void cancel()
+	{	// TODO à compléter (sauver stats?)
+		tournamentOver = true;
+	}
 	
 	public abstract boolean isReady();
 	
