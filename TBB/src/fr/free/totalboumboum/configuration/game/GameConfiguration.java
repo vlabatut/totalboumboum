@@ -21,9 +21,9 @@ package fr.free.totalboumboum.configuration.game;
  * 
  */
 
+import fr.free.totalboumboum.configuration.game.tournament.TournamentConfiguration;
 import fr.free.totalboumboum.configuration.game.quickmatch.QuickMatchConfiguration;
 import fr.free.totalboumboum.configuration.game.quickstart.QuickStartConfiguration;
-import fr.free.totalboumboum.configuration.game.tournament.TournamentConfiguration;
 
 public class GameConfiguration
 {

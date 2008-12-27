@@ -76,9 +76,9 @@ public class SettingsData extends EntitledDataPanel implements MouseListener
 			
 			mainPanel.add(Box.createRigidArea(new Dimension(GuiTools.panelMargin,GuiTools.panelMargin)));
 			
-			// commands panel
-			{	tournamentPanel = new TournamentMiscSubPanel(dataWidth,miscHeight);
-				mainPanel.add(tournamentPanel);
+			// misc panel
+			{	miscPanel = new TournamentMiscSubPanel(dataWidth,miscHeight,15);
+				mainPanel.add(miscPanel);
 			}
 			
 			setDataPart(mainPanel);

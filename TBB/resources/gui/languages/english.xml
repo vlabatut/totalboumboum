@@ -193,6 +193,16 @@
 				</group>
 				<group name="Tournament">
 					<text name="Title" value="Tournament" tooltip="Modify tournament settings" />
+					<group name="Players">
+						<text name="False" value="Disabled" tooltip="Disabled" />
+						<text name="True" value="Enabled" tooltip="Enabled" />
+						<text name="Use" value="Same players" tooltip="Use last quick match players" />
+					</group>
+					<group name="Tournament">
+						<text name="False" value="Disabled" tooltip="Disabled" />
+						<text name="True" value="Enabled" tooltip="Enabled" />
+						<text name="Use" value="Same tournament" tooltip="Use the tournament from the last game" />
+					</group>
 				</group>
 			</group>
 
@@ -272,7 +282,7 @@
 				<group name="Button">
 					<text name="Next" value="Next" tooltip="Go to match parameters" />
 					<text name="Previous" value="Previous" tooltip="Back to players selection" />
-					<text name="Quit" value="Quit" tooltip="Go to main menu" />
+					<text name="Quit" value="Quit" tooltip="Quit the match and go to main menu" />
 				</group>
 			</group>
 			<group name="Players">
@@ -281,8 +291,8 @@
 					<text name="Cancel" value="Cancel" tooltip="Cancel and come back to the players selection screen" />
 					<text name="Confirm" value="Confirm" tooltip="Confirm the selection" />
 					<text name="Next" value="Next" tooltip="Go to levels selection" />
-					<text name="Previous" value="Previous" tooltip="Back to main menu" />
-					<text name="Quit" value="Quit" tooltip="Go to main menu" />
+					<text name="Previous" value="Previous" tooltip="Back to main menu without quitting the match" />
+					<text name="Quit" value="Quit" tooltip="Quit the match and go to main menu" />
 				</group>
 			</group>
 			<group name="Settings" >
@@ -290,7 +300,7 @@
 				<group name="Button">
 					<text name="Next" value="Next" tooltip="Start the match" />
 					<text name="Previous" value="Previous" tooltip="Back to levels selection" />
-					<text name="Quit" value="Quit" tooltip="Go to main menu" />
+					<text name="Quit" value="Quit" tooltip="Quit the match and go to main menu" />
 				</group>
 				<group name="Levels">
 					<group name="Order">
@@ -352,14 +362,26 @@
 <!-- TOURNAMENT MENU -->	
 		<group name="Tournament">
 			<group name="Button">
-				<text name="Back" value="Back" tooltip="Go back to the main menu" />
-				<text name="Continue" value="Continue" tooltip="Continue with the current tournament" />
-				<text name="Load" value="Load" tooltip="Load an existing tournament" />
-				<text name="New" value="New" tooltip="Start a new tournament" />
-				<text name="Players" value="Players" tooltip="Select the players" />
-				<text name="Rules" value="Rules" tooltip="See the parameters of the tournament" />
-				<text name="SaveAs" value="Save as..." tooltip="Save the current tournament in a different file than the default one" />
-				<text name="Start" value="Start" tooltip="Start the tournament" />
+				<text name="Quit" value="Quit" tooltip="Quit the tournament and go back to the main menu" />
+			</group>
+			<group name="Players">
+				<text name="Title" value="Players selection" tooltip="Select the players for this tournament" />
+				<group name="Button">
+					<text name="Cancel" value="Cancel" tooltip="Cancel your sélection and come back to players selection" />
+					<text name="Confirm" value="Confirm" tooltip="Confirm your selection" />
+					<text name="Next" value="Next" tooltip="Go to tournament selection" />
+					<text name="Previous" value="Previous" tooltip="Come back to the main menu without quitting this tournament" />
+				</group>
+			</group>
+			<group name="Settings">
+				<text name="Title" value="Tournament selection" tooltip="Select a tournament" />
+				<group name="Button">
+					<text name="Cancel" value="Cancel" tooltip="Cancel your selection and come back to tournament selection" />
+					<text name="Confirm" value="Confirm" tooltip="Confirm your selection" />
+					<text name="Next" value="Next" tooltip="Start the tournament" />
+					<text name="Previous" value="Previous" tooltip="Go back to players selection" />
+					<text name="Select" value="Select" tooltip="Select another tournament" />
+				</group>
 			</group>
 		</group>	
 		
@@ -374,9 +396,9 @@
 				<text name="CurrentMatch" value="Current match" tooltip="Go to the current match" />
 				<text name="Description" value="Description" tooltip="See the description of the current tournament" />
 				<text name="Finish" value="Finish" tooltip="Finish the current tournament and go back to the tournament menu" />
-				<text name="Menu" value="Menu" tooltip="Go back to the tournament menu" />
+				<text name="Menu" value="Menu" tooltip="Go back to the main menu without quitting the tournament" />
 				<text name="NextMatch" value="Next match" tooltip="Go to the next match" />
-				<text name="Quit" value="Quit" tooltip="Go back to the main menu" />
+				<text name="Quit" value="Quit" tooltip="Quit the tournament and go back to main menu" />
 				<text name="Results" value="Results" tooltip="See the current results of this tournament" />
 				<text name="Statistics" value="Statistics" tooltip="See the detailed statistics of the current tournament" />
 			</group>
@@ -397,7 +419,7 @@
 				<text name="CurrentRound" value="Current round" tooltip="Go to the current round" />
 				<text name="CurrentTournament" value="Current tournament" tooltip="Go to the current tournament" />
 				<text name="Description" value="Description" tooltip="See the description of the current match" />
-				<text name="Quit" value="Quit" tooltip="Quit the current tournament" />
+				<text name="Quit" value="Quit" tooltip="Quit the tournament and go back to main menu" />
 				<text name="Finish" value="Finish the current match" tooltip="Finish this match and back to the tournament" />
 				<text name="NextRound" value="Next Round" tooltip="Go to the next round" />
 				<text name="Results" value="Results" tooltip="See the current results of this match" />
@@ -422,7 +444,7 @@
 				<text name="Description" value="Description" tooltip="See the description of the current round" />
 				<text name="Finish" value="Finish the current round" tooltip="Finish this round and back to the match" />
 				<text name="Play" value="Play" tooltip="Start to play" />
-				<text name="Quit" value="Quit" tooltip="Quit the current tournament" />
+				<text name="Quit" value="Quit" tooltip="Quit the tournament and go back to main menu" />
 				<text name="Results" value="Results" tooltip="See the results of the current round" />
 				<text name="Statistics" value="Statistics" tooltip="See the detailed statistics of the current round" />
 			</group>

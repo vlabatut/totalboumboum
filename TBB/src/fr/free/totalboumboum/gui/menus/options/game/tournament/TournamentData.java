@@ -1,4 +1,4 @@
-package fr.free.totalboumboum.gui.menus.options.game.quickmatch;
+package fr.free.totalboumboum.gui.menus.options.game.tournament;
 
 /*
  * Total Boum Boum
@@ -27,7 +27,7 @@ import java.awt.event.MouseListener;
 
 import javax.swing.JLabel;
 
-import fr.free.totalboumboum.configuration.game.quickmatch.QuickMatchConfiguration;
+import fr.free.totalboumboum.configuration.game.tournament.TournamentConfiguration;
 import fr.free.totalboumboum.gui.common.structure.panel.SplitMenuPanel;
 import fr.free.totalboumboum.gui.common.structure.panel.data.EntitledDataPanel;
 import fr.free.totalboumboum.gui.common.structure.subpanel.Line;
@@ -35,23 +35,22 @@ import fr.free.totalboumboum.gui.common.structure.subpanel.UntitledSubPanelLines
 import fr.free.totalboumboum.gui.tools.GuiKeys;
 import fr.free.totalboumboum.gui.tools.GuiTools;
 
-public class QuickMatchData extends EntitledDataPanel implements MouseListener
+public class TournamentData extends EntitledDataPanel implements MouseListener
 {	
 	private static final long serialVersionUID = 1L;
 	
 	private static final int LINE_COUNT = 20;
 
 	private static final int LINE_USE_PLAYERS = 0;
-	private static final int LINE_USE_LEVELS = 1;
-	private static final int LINE_USE_SETTINGS = 2;
+	private static final int LINE_USE_TOURNAMENT = 1;
 
 	private UntitledSubPanelLines optionsPanel;
 
-	public QuickMatchData(SplitMenuPanel container)
+	public TournamentData(SplitMenuPanel container)
 	{	super(container);
 		
 		// title
-		String key = GuiKeys.MENU_OPTIONS_GAME_QUICKMATCH_TITLE;
+		String key = GuiKeys.MENU_OPTIONS_GAME_TOURNAMENT_TITLE;
 		setTitleKey(key);
 		
 		// data
@@ -67,7 +66,7 @@ public class QuickMatchData extends EntitledDataPanel implements MouseListener
 				// name
 				{	ln.setLabelMaxWidth(col,tWidth);
 					ln.setLabelPreferredWidth(col,tWidth);
-					ln.setLabelKey(col,GuiKeys.MENU_OPTIONS_GAME_QUICKMATCH_PLAYERS_USE,false);
+					ln.setLabelKey(col,GuiKeys.MENU_OPTIONS_GAME_TOURNAMENT_PLAYERS_USE,false);
 					col++;
 				}
 				// value
@@ -80,34 +79,14 @@ public class QuickMatchData extends EntitledDataPanel implements MouseListener
 				ln.setBackgroundColor(bg);
 			}
 
-			// #1 use last levels
-			{	Line ln = optionsPanel.getLine(LINE_USE_LEVELS);
-				ln.addLabel(0);
-				int col = 0;
-				// name
-				{	ln.setLabelMaxWidth(col,tWidth);
-					ln.setLabelPreferredWidth(col,tWidth);
-					ln.setLabelKey(col,GuiKeys.MENU_OPTIONS_GAME_QUICKMATCH_LEVELS_USE,false);
-					col++;
-				}
-				// value
-				{	ln.setLabelMaxWidth(col,Integer.MAX_VALUE);
-//					setUseLevels();
-					ln.getLabel(col).addMouseListener(this);
-					col++;
-				}
-				Color bg = GuiTools.COLOR_TABLE_REGULAR_BACKGROUND;
-				ln.setBackgroundColor(bg);
-			}
-			
 			// #2 use last settings
-			{	Line ln = optionsPanel.getLine(LINE_USE_SETTINGS);
+			{	Line ln = optionsPanel.getLine(LINE_USE_TOURNAMENT);
 				ln.addLabel(0);
 				int col = 0;
 				// name
 				{	ln.setLabelMaxWidth(col,tWidth);
 					ln.setLabelPreferredWidth(col,tWidth);
-					ln.setLabelKey(col,GuiKeys.MENU_OPTIONS_GAME_QUICKMATCH_SETTINGS_USE,false);
+					ln.setLabelKey(col,GuiKeys.MENU_OPTIONS_GAME_TOURNAMENT_TOURNAMENT_USE,false);
 					col++;
 				}
 				// value
@@ -121,7 +100,7 @@ public class QuickMatchData extends EntitledDataPanel implements MouseListener
 			}
 
 			// EMPTY
-			{	for(int line=LINE_USE_SETTINGS+1;line<LINE_COUNT;line++)
+			{	for(int line=LINE_USE_TOURNAMENT+1;line<LINE_COUNT;line++)
 				{	Line ln = optionsPanel.getLine(line);
 					int col = 0;
 					int mw = ln.getWidth();
@@ -167,23 +146,17 @@ public class QuickMatchData extends EntitledDataPanel implements MouseListener
 	{	JLabel label = (JLabel)e.getComponent();
 		int[] pos = optionsPanel.getLabelPosition(label);
 		switch(pos[0])
-		{	// levels use
-			case LINE_USE_LEVELS:
-				boolean useLevels = !quickMatchConfiguration.getUseLastLevels();
-				quickMatchConfiguration.setUseLastLevels(useLevels);
-				setUseLevels();
-				break;
-			// players use
+		{	// players use
 			case LINE_USE_PLAYERS:
-				boolean usePlayers = !quickMatchConfiguration.getUseLastPlayers();
-				quickMatchConfiguration.setUseLastPlayers(usePlayers);
+				boolean usePlayers = !tournamentConfiguration.getUseLastPlayers();
+				tournamentConfiguration.setUseLastPlayers(usePlayers);
 				setUsePlayers();
 				break;
-			// settings use
-			case LINE_USE_SETTINGS:
-				boolean useSettings = !quickMatchConfiguration.getUseLastSettings();
-				quickMatchConfiguration.setUseLastSettings(useSettings);
-				setUseSettings();
+			// tournament use
+			case LINE_USE_TOURNAMENT:
+				boolean useTournament = !tournamentConfiguration.getUseLastTournament();
+				tournamentConfiguration.setUseLastTournament(useTournament);
+				setUseTournament();
 				break;
 		}
 	}
@@ -196,53 +169,42 @@ public class QuickMatchData extends EntitledDataPanel implements MouseListener
 	/////////////////////////////////////////////////////////////////
 	// CONFIGURATION				/////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	private QuickMatchConfiguration quickMatchConfiguration;
+	private TournamentConfiguration tournamentConfiguration;
 
-	public void setQuickMatchConfiguration(QuickMatchConfiguration quickMatchConfiguration)
-	{	this.quickMatchConfiguration = quickMatchConfiguration;
+	public void setTournamentConfiguration(TournamentConfiguration quickMatchConfiguration)
+	{	this.tournamentConfiguration = quickMatchConfiguration;
 		refreshOptions();
 	}
 	
-	public QuickMatchConfiguration getQuickMatchConfiguration()
-	{	return quickMatchConfiguration;	
+	public TournamentConfiguration getTournamentConfiguration()
+	{	return tournamentConfiguration;	
 	}
 
 	/////////////////////////////////////////////////////////////////
 	// OPTIONS			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	private void refreshOptions()
-	{	setUseLevels();
-		setUsePlayers();
-		setUseSettings();
-	}
-	
-	private void setUseLevels()
-	{	boolean useLevels = quickMatchConfiguration.getUseLastLevels();
-		String key;
-		if(useLevels)
-			key = GuiKeys.MENU_OPTIONS_GAME_QUICKMATCH_LEVELS_TRUE;
-		else
-			key = GuiKeys.MENU_OPTIONS_GAME_QUICKMATCH_LEVELS_FALSE;
-		optionsPanel.getLine(LINE_USE_LEVELS).setLabelKey(1,key,true);
+	{	setUsePlayers();
+		setUseTournament();
 	}
 	
 	private void setUsePlayers()
-	{	boolean usePlayers = quickMatchConfiguration.getUseLastPlayers();
+	{	boolean usePlayers = tournamentConfiguration.getUseLastPlayers();
 		String key;
 		if(usePlayers)
-			key = GuiKeys.MENU_OPTIONS_GAME_QUICKMATCH_PLAYERS_TRUE;
+			key = GuiKeys.MENU_OPTIONS_GAME_TOURNAMENT_PLAYERS_TRUE;
 		else
-			key = GuiKeys.MENU_OPTIONS_GAME_QUICKMATCH_PLAYERS_FALSE;
+			key = GuiKeys.MENU_OPTIONS_GAME_TOURNAMENT_PLAYERS_FALSE;
 		optionsPanel.getLine(LINE_USE_PLAYERS).setLabelKey(1,key,true);
 	}
 
-	private void setUseSettings()
-	{	boolean useSettings = quickMatchConfiguration.getUseLastSettings();
+	private void setUseTournament()
+	{	boolean useTournament = tournamentConfiguration.getUseLastTournament();
 		String key;
-		if(useSettings)
-			key = GuiKeys.MENU_OPTIONS_GAME_QUICKMATCH_SETTINGS_TRUE;
+		if(useTournament)
+			key = GuiKeys.MENU_OPTIONS_GAME_TOURNAMENT_TOURNAMENT_TRUE;
 		else
-			key = GuiKeys.MENU_OPTIONS_GAME_QUICKMATCH_SETTINGS_FALSE;
-		optionsPanel.getLine(LINE_USE_SETTINGS).setLabelKey(1,key,true);
+			key = GuiKeys.MENU_OPTIONS_GAME_TOURNAMENT_TOURNAMENT_FALSE;
+		optionsPanel.getLine(LINE_USE_TOURNAMENT).setLabelKey(1,key,true);
 	}
 }

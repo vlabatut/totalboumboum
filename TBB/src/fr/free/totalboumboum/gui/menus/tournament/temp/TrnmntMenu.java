@@ -156,6 +156,7 @@ public class TrnmntMenu extends InnerMenuPanel
 	private void loadTournament()
 	{	try
 		{	tournament = tournamentConfiguration.loadLastTournament();
+			tournamentConfiguration.setTournament(tournament);
 		}
 		catch (ParserConfigurationException e)
 		{	e.printStackTrace();
@@ -197,7 +198,7 @@ public class TrnmntMenu extends InnerMenuPanel
 		else if(e.getActionCommand().equals(GuiKeys.MENU_TOURNAMENT_PLAYERS_BUTTON_PREVIOUS))				
 		{	replaceWith(parent);
 	    }
-		else if(e.getActionCommand().equals(GuiKeys.MENU_QUICKMATCH_SETTINGS_BUTTON_PREVIOUS))				
+		else if(e.getActionCommand().equals(GuiKeys.MENU_TOURNAMENT_SETTINGS_BUTTON_PREVIOUS))				
 		{	setButtonsPlayers();
 			container.setDataPart(playersData);
 	    }
@@ -208,13 +209,15 @@ public class TrnmntMenu extends InnerMenuPanel
 			// set settings panel
 			settingsData.setTournamentConfiguration(tournamentConfiguration);
 			setButtonsSettings();
+			refresh();
 			container.setDataPart(settingsData);
 	    }
 		else if(e.getActionCommand().equals(GuiKeys.MENU_TOURNAMENT_SETTINGS_BUTTON_NEXT))
 		{	// implements settings in tournament
+			tournament = tournamentConfiguration.getTournament();
 			setTournamentPlayers();
 			setTournamentSettings();
-			// save quick match options
+			// save tournament options
 			try
 			{	TournamentConfigurationSaver.saveTournamentConfiguration(tournamentConfiguration);
 			}
@@ -239,6 +242,10 @@ public class TrnmntMenu extends InnerMenuPanel
 	// CONTENT PANEL				/////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	public void refresh()
-	{	//
+	{	if(tournament==null || 
+			!tournament.getAllowedPlayerNumbers().contains(tournamentConfiguration.getProfilesSelection().getProfileCount()))
+			buttonSettingsNext.setEnabled(false);
+		else
+			buttonSettingsNext.setEnabled(true);
 	}
 }

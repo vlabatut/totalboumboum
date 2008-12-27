@@ -86,6 +86,7 @@ public class PointsSubPanel extends EntitledSubPanelTable
 		{	// title
 			Color bg = GuiTools.COLOR_TABLE_REGULAR_BACKGROUND;
 			setTitleBackground(bg);
+			
 			// empty lines
 			int iconWidth = getLineHeight();
 			setColSubMinWidth(0,iconWidth);

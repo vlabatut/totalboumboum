@@ -193,6 +193,16 @@
 				</group>
 				<group name="Tournament">
 					<text name="Title" value="Tournoi" tooltip="Modifier les paramètres du tournoi" />
+					<group name="Players">
+						<text name="False" value="Désactivé" tooltip="Option désactivée" />
+						<text name="True" value="Activé" tooltip="Option activée" />
+						<text name="Use" value="Mémoriser les joueurs" tooltip="Utiliser les joueurs de la dernière partie" />
+					</group>
+					<group name="Tournament">
+						<text name="False" value="Désactivé" tooltip="Option désactivée" />
+						<text name="True" value="Activé" tooltip="Option activée" />
+						<text name="Use" value="Mémoriser le tournoi" tooltip="Utiliser le tournoi de la dernière partie" />
+					</group>
 				</group>
 			</group>
 
@@ -272,7 +282,7 @@
 				<group name="Button">
 					<text name="Next" value="Suivant" tooltip="Aller aux paramètres de la rencontre" />
 					<text name="Previous" value="Précédent" tooltip="Revenir à la sélection des joueurs" />
-					<text name="Quit" value="Quitter" tooltip="Aller au menu principal" />
+					<text name="Quit" value="Quitter" tooltip="Quitter la rencontre et revenir au menu principal" />
 				</group>
 			</group>
 			<group name="Players">
@@ -281,8 +291,8 @@
 					<text name="Cancel" value="Annuler" tooltip="Annuler et revenir à l'écran de sélection des joueurs" />
 					<text name="Confirm" value="Confirmer" tooltip="Valider la sélection" />
 					<text name="Next" value="Suivant" tooltip="Aller à la sélection des niveaux" />
-					<text name="Previous" value="Précédent" tooltip="Revenir au menu principal" />
-					<text name="Quit" value="Quitter" tooltip="Aller au menu principal" />
+					<text name="Previous" value="Précédent" tooltip="Revenir au menu principal sans quitter" />
+					<text name="Quit" value="Quitter" tooltip="Quitter la rencontre et revenir au menu principal" />
 				</group>
 			</group>
 			<group name="Settings">
@@ -290,7 +300,7 @@
 				<group name="Button">
 					<text name="Next" value="Suivant" tooltip="Commencer la partie" />
 					<text name="Previous" value="Précédent" tooltip="Revenir à la sélection des niveaux" />
-					<text name="Quit" value="Quitter" tooltip="Aller au menu principal" />
+					<text name="Quit" value="Quitter" tooltip="Quitter la rencontre et revenir au menu principal" />
 				</group>
 				<group name="Levels">
 					<group name="Order">
@@ -352,14 +362,26 @@
 <!-- TOURNAMENT MENU -->	
 		<group name="Tournament">
 			<group name="Button">
-				<text name="Back" value="Retour" tooltip="Revenir au menu principal" />
-				<text name="Continue" value="Continuer" tooltip="Continuer le tournoi courant" />
-				<text name="Load" value="Charger" tooltip="Charger un tournoi existant" />
-				<text name="New" value="Nouveau" tooltip="Commencer un nouveau tournoi" />
-				<text name="Players" value="Joueurs" tooltip="Choisir les joueurs" />
-				<text name="Rules" value="Règles" tooltip="Accéder aux paramètres du tournoi" />
-				<text name="SaveAs" value="Enregistrer sous..." tooltip="Enregistrer le tournoi courant" />
-				<text name="Start" value="Commencer" tooltip="Commencer le tournoi" />
+				<text name="Quit" value="Quitter" tooltip="Quitter le tournoi et revenir au menu principal" />
+			</group>
+			<group name="Players">
+				<text name="Title" value="Sélection des joueurs" tooltip="Écran de sélection des joueurs pour ce tournoi" />
+				<group name="Button">
+					<text name="Cancel" value="Annuler" tooltip="Annuler la sélection et revenir à l'écran des joueurs" />
+					<text name="Confirm" value="Confirmer" tooltip="Confirmer la sélection" />
+					<text name="Next" value="Suivant" tooltip="Aller à la sélection du tournoi" />
+					<text name="Previous" value="Précédent" tooltip="Revenir au menu principal sans quitter le tournoi" />
+				</group>
+			</group>
+			<group name="Settings">
+				<text name="Title" value="Sélection du tournoi" tooltip="Écran de sélection du tournoi" />
+				<group name="Button">
+					<text name="Cancel" value="Annuler" tooltip="Annuler la sélection et revenir à l'écran du tournoi" />
+					<text name="Confirm" value="Confirmer" tooltip="Confirmer la sélection" />
+					<text name="Next" value="Suivant" tooltip="Commencer le tournoi" />
+					<text name="Previous" value="Précédent" tooltip="Revenir à la sélection des joueurs" />
+					<text name="Select" value="Sélectionner" tooltip="Sélectionner un autre tournoi prédéfini" />
+				</group>
 			</group>
 		</group>	
 
@@ -374,10 +396,10 @@
 			<group name="Button">
 				<text name="CurrentMatch" value="Rencontre courante" tooltip="Aller à la rencontre courante" />
 				<text name="Description" value="Description" tooltip="Voir la description du tournoi courant" />
-				<text name="Finish" value="Finir" tooltip="Finir le tournoi courant et revenir au menu des tournois" />
-				<text name="Menu" value="Menu" tooltip="Revenir au menu des tournois" />
+				<text name="Finish" value="Finir" tooltip="Finir le tournoi courant et revenir au menu principal" />
+				<text name="Menu" value="Menu" tooltip="Revenir au menu principal sans quitter le tournoi" />
 				<text name="NextMatch" value="Rencontre suivante" tooltip="Commencer la rencontre suivante" />
-				<text name="Quit" value="Quitter" tooltip="Revenir au menu principal" />
+				<text name="Quit" value="Quitter" tooltip="Quitter le tournoi et revenir au menu principal" />
 				<text name="Results" value="Résultats" tooltip="Voir les résultats actuels du tournoi courant" />
 				<text name="Statistics" value="Statistiques" tooltip="Voir les statistiques détaillées du tournoi courant" />
 			</group>
@@ -398,7 +420,7 @@
 				<text name="CurrentRound" value="Manche courante" tooltip="Aller à la manche courante" />
 				<text name="CurrentTournament" value="Tournoi courant" tooltip="Aller au tournoi courant" />
 				<text name="Description" value="Description" tooltip="Voir la description de la rencontre courante" />
-				<text name="Quit" value="Quitter" tooltip="Revenir au menu principal" />
+				<text name="Quit" value="Quitter" tooltip="Quitter le tournoi et revenir au menu principal" />
 				<text name="Finish" value="Finir" tooltip="Finir la rencontre courante et revenir au tournoi courant" />
 				<text name="NextRound" value="Rencontre suivante" tooltip="Commencer la manche suivante" />
 				<text name="Results" value="Résultats" tooltip="Voir les résultats actuels de la rencontre courante" />
@@ -422,7 +444,7 @@
 				<text name="Description" value="Description" tooltip="Voir la description de la manche courante" />
 				<text name="Finish" value="Finir" tooltip="Finir la manche courante et revenir à la rencontre courante" />
 				<text name="Play" value="Jouer" tooltip="Commencer à jouer" />
-				<text name="Quit" value="Quitter" tooltip="Revenir au menu principal" />
+				<text name="Quit" value="Quitter" tooltip="Quitter le tournoi et revenir au menu principal" />
 				<text name="Results" value="Résultats" tooltip="Voir les résultats de la manche courante" />
 				<text name="Statistics" value="Statistiques" tooltip="Voir les statistiques détaillées de la manche courante" />
 			</group>
