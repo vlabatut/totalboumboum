@@ -24,37 +24,43 @@ package fr.free.totalboumboum.gui.menus.tournament;
 import java.awt.BorderLayout;
 import java.awt.Graphics;
 import java.awt.image.BufferedImage;
-import java.io.IOException;
-
-import javax.xml.parsers.ParserConfigurationException;
-
-import org.xml.sax.SAXException;
 
 import fr.free.totalboumboum.gui.common.structure.MenuContainer;
 import fr.free.totalboumboum.gui.common.structure.panel.SplitMenuPanel;
 import fr.free.totalboumboum.gui.common.structure.panel.menu.MenuPanel;
 import fr.free.totalboumboum.gui.data.configuration.GuiConfiguration;
+import fr.free.totalboumboum.gui.game.tournament.TournamentSplitPanel;
 import fr.free.totalboumboum.gui.tools.GuiTools;
 
-public class TournamentSplitPanel extends SplitMenuPanel
-{	private static final long serialVersionUID = 1L;
-	
-	private BufferedImage image;
+public class TrnmntSplitPanel extends SplitMenuPanel
+{	private static final long serialVersionUID = 1L; 
 
-	public TournamentSplitPanel(MenuContainer container, MenuPanel parent) throws IllegalArgumentException, SecurityException, ParserConfigurationException, SAXException, IOException, IllegalAccessException, NoSuchFieldException
-	{	super(container,parent,BorderLayout.LINE_START,GuiTools.VERTICAL_SPLIT_RATIO);
-		
+	private BufferedImage image;
+	
+	public TrnmntSplitPanel(MenuContainer container, MenuPanel parent)
+	{	super(container,parent,BorderLayout.PAGE_END,GuiTools.HORIZONTAL_SPLIT_RATIO);
+	
 		// background
 		image = GuiConfiguration.getMiscConfiguration().getDarkBackground();
 		
 		// panels
-		TournamentMenu menu = new TournamentMenu(this,parent);
+		TrnmntMenu menu = new TrnmntMenu(this,parent);
 		setMenuPart(menu);
 	}
-
 	
 	/////////////////////////////////////////////////////////////////
-	// PAINT COMPONENT	/////////////////////////////////////////////
+	// TOURNAMENT					/////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	public boolean initTournament()
+	{	return ((TrnmntMenu)getMenuPart()).initTournament();
+	}
+
+	public TournamentSplitPanel getTournamentPanel()
+	{	return ((TrnmntMenu)getMenuPart()).getTournamentPanel();
+	}
+
+	/////////////////////////////////////////////////////////////////
+	// PAINT						/////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	@Override
 	public void paintComponent(Graphics g)
