@@ -59,6 +59,7 @@ public class RoundMenu extends InnerMenuPanel implements RoundRenderPanel
 	private RoundStatistics roundStatistics;
 		
 	private JButton buttonQuit;
+	private JButton buttonSave;
 	private JButton buttonMatch;
 	private JToggleButton buttonDescription;
 	private JToggleButton buttonResults;
@@ -83,6 +84,7 @@ public class RoundMenu extends InnerMenuPanel implements RoundRenderPanel
 
 		// buttons
 		buttonQuit = GuiTools.createButton(GuiKeys.GAME_ROUND_BUTTON_QUIT,buttonWidth,buttonHeight,1,this);
+		buttonSave = GuiTools.createButton(GuiKeys.GAME_TOURNAMENT_BUTTON_SAVE,buttonWidth,buttonHeight,1,this);
 		add(Box.createHorizontalGlue());
 		buttonMatch = GuiTools.createButton(GuiKeys.GAME_ROUND_BUTTON_CURRENT_MATCH,buttonWidth,buttonHeight,1,this);
 		add(Box.createRigidArea(new Dimension(GuiTools.buttonHorizontalSpace,0)));
@@ -165,7 +167,8 @@ buttonStatistics.setEnabled(false);
 	@Override
 	public void actionPerformed(ActionEvent e)
 	{	if(e.getActionCommand().equals(GuiKeys.GAME_ROUND_BUTTON_QUIT))
-		{	getFrame().setMainMenuPanel();
+		{	round.cancel();
+			getFrame().setMainMenuPanel();
 	    }
 		else if(e.getActionCommand().equals(GuiKeys.GAME_ROUND_BUTTON_CURRENT_MATCH))
 		{	parent.refresh();
@@ -188,6 +191,7 @@ buttonStatistics.setEnabled(false);
 		else if(e.getActionCommand().equals(GuiKeys.GAME_ROUND_BUTTON_PLAY))
 		{	buttonPlay.setEnabled(false);
 			buttonQuit.setEnabled(false);
+			buttonSave.setEnabled(false);
 			buttonMatch.setEnabled(false);
 			int limit = round.getProfiles().size()+3;
 			loadProgressBar = new JProgressBar(0,limit);
@@ -201,13 +205,12 @@ buttonStatistics.setEnabled(false);
 			int height = getHeight();
 			Dimension dim = new Dimension(width,height);
 			loadProgressBar.setMaximumSize(dim);
-			remove(1);
-			add(loadProgressBar,1);
+			remove(2);
+			add(loadProgressBar,2);
 			validate();
 			repaint();
 			try
-			{
-				round.progress();
+			{	round.progress();
 			}
 			catch (IllegalArgumentException e1)
 			{	e1.printStackTrace();
@@ -253,11 +256,12 @@ buttonStatistics.setEnabled(false);
 	{	SwingUtilities.invokeLater(new Runnable()
 		{	public void run()
 			{	// remove progress bar
-				remove(1);
-				add(Box.createHorizontalGlue(),1);
+				remove(2);
+				add(Box.createHorizontalGlue(),2);
 				//
 				buttonMatch.setEnabled(true);
 				buttonQuit.setEnabled(true);
+				buttonSave.setEnabled(true);
 				roundResults.refresh();
 				buttonResults.doClick();
 			}

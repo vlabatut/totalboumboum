@@ -101,6 +101,7 @@ public class GuiFileTools
 	public final static String FOLDER_RESULTS = "results";
 	public final static String FOLDER_RIGHT_BLUE = "right_blue";
 	public final static String FOLDER_RIGHT_RED = "right_red";
+	public final static String FOLDER_SAVE = "save";
 	public final static String FOLDER_STATS = "stats";
 
 	public static String getGuiPath()

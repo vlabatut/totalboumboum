@@ -56,8 +56,6 @@ public class SequenceTournament extends AbstractTournament
 	/////////////////////////////////////////////////////////////////
 	// GAME				/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	private boolean tournamentOver = false;
-	
 	@Override
 	public void init()
 	{	begun = true;
@@ -77,11 +75,6 @@ public class SequenceTournament extends AbstractTournament
 		long seed = cal.getTimeInMillis();
 		Random random = new Random(seed);
 		Collections.shuffle(matches,random);
-	}
-	
-	@Override
-	public boolean isOver()
-	{	return tournamentOver;
 	}
 	
 	@Override
@@ -151,7 +144,7 @@ public class SequenceTournament extends AbstractTournament
 		if(getLimits().testLimit(this))
 		{	float[] points = limits.processPoints(this);
 			stats.setPoints(points);
-			tournamentOver = true;
+			setOver(true);
 			panel.tournamentOver();
 			stats.initEndDate();
 		}

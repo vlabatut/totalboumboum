@@ -401,6 +401,7 @@
 				<text name="NextMatch" value="Rencontre suivante" tooltip="Commencer la rencontre suivante" />
 				<text name="Quit" value="Quitter" tooltip="Quitter le tournoi et revenir au menu principal" />
 				<text name="Results" value="Résultats" tooltip="Voir les résultats actuels du tournoi courant" />
+				<text name="Save" value="Enregistrer" tooltip="Enregistrer la partie courante" />
 				<text name="Statistics" value="Statistiques" tooltip="Voir les statistiques détaillées du tournoi courant" />
 			</group>
 			<group name="Description">
@@ -424,6 +425,7 @@
 				<text name="Finish" value="Finir" tooltip="Finir la rencontre courante et revenir au tournoi courant" />
 				<text name="NextRound" value="Rencontre suivante" tooltip="Commencer la manche suivante" />
 				<text name="Results" value="Résultats" tooltip="Voir les résultats actuels de la rencontre courante" />
+				<text name="Save" value="Enregistrer" tooltip="Enregistrer la partie courante" />
 				<text name="Statistics" value="Statistiques" tooltip="Voir les statistiques détaillées de la rencontre courante" />
 			</group>
 			<group name="Description">
@@ -446,6 +448,7 @@
 				<text name="Play" value="Jouer" tooltip="Commencer à jouer" />
 				<text name="Quit" value="Quitter" tooltip="Quitter le tournoi et revenir au menu principal" />
 				<text name="Results" value="Résultats" tooltip="Voir les résultats de la manche courante" />
+				<text name="Save" value="Enregistrer" tooltip="Enregistrer la partie courante" />
 				<text name="Statistics" value="Statistiques" tooltip="Voir les statistiques détaillées de la manche courante" />
 			</group>
 			<group name="Progressbar">

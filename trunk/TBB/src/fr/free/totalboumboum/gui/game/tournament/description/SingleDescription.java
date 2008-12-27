@@ -1,4 +1,4 @@
-package fr.free.totalboumboum.gui.game.match;
+package fr.free.totalboumboum.gui.game.tournament.description;
 
 /*
  * Total Boum Boum
@@ -33,17 +33,17 @@ import fr.free.totalboumboum.game.limit.Limits;
 import fr.free.totalboumboum.game.limit.MatchLimit;
 import fr.free.totalboumboum.game.match.Match;
 import fr.free.totalboumboum.game.points.PointsProcessor;
+import fr.free.totalboumboum.game.tournament.single.SingleTournament;
 import fr.free.totalboumboum.gui.common.content.subpanel.limits.LimitsSubPanelListener;
 import fr.free.totalboumboum.gui.common.content.subpanel.limits.LimitsSubPanel;
 import fr.free.totalboumboum.gui.common.content.subpanel.players.PlayersListSubPanel;
 import fr.free.totalboumboum.gui.common.content.subpanel.points.PointsSubPanel;
 import fr.free.totalboumboum.gui.common.structure.panel.SplitMenuPanel;
-import fr.free.totalboumboum.gui.common.structure.panel.data.EntitledDataPanel;
 import fr.free.totalboumboum.gui.common.structure.subpanel.SubPanel;
 import fr.free.totalboumboum.gui.tools.GuiKeys;
 import fr.free.totalboumboum.gui.tools.GuiTools;
 
-public class MatchDescription extends EntitledDataPanel implements LimitsSubPanelListener
+public class SingleDescription extends TournamentDescription<SingleTournament> implements LimitsSubPanelListener
 {	
 	private static final long serialVersionUID = 1L;
 	
@@ -53,7 +53,7 @@ public class MatchDescription extends EntitledDataPanel implements LimitsSubPane
 	private LimitsSubPanel<MatchLimit> limitsPanel;
 	private PointsSubPanel pointsPanel;
 	
-	public MatchDescription(SplitMenuPanel container)
+	public SingleDescription(SplitMenuPanel container)
 	{	super(container);
 	
 		// title
@@ -110,12 +110,10 @@ public class MatchDescription extends EntitledDataPanel implements LimitsSubPane
 	/////////////////////////////////////////////////////////////////
 	// MATCH			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////	
-	@SuppressWarnings("unused")
-	private Match match;
-	
-	public void setMatch(Match match)
+	public void setTournament(SingleTournament tournament)
 	{	// init
-		this.match = match;
+		this.tournament = tournament;
+		Match match = tournament.getCurrentMatch();
 		Limits<MatchLimit> limits = null;
 		if(match!=null)
 		{	limits = match.getLimits();

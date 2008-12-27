@@ -151,6 +151,7 @@ public class GuiKeys
 	public static final String ROUND = "Round";
 	public static final String ROUNDS = "Rounds";
 	public static final String RUST = "Rust";
+	public static final String SAVE = "Save";
 	public static final String SELECT = "Select";
 	public static final String SEQUENCE = "Sequence";
 	public static final String SETTINGS = "Settings";
@@ -506,17 +507,6 @@ public class GuiKeys
 			public static final String MENU_TOURNAMENT_SETTINGS_BUTTON_NEXT = MENU_TOURNAMENT_SETTINGS_BUTTON+NEXT;
 			public static final String MENU_TOURNAMENT_SETTINGS_BUTTON_PREVIOUS = MENU_TOURNAMENT_SETTINGS_BUTTON+PREVIOUS;
 			public static final String MENU_TOURNAMENT_SETTINGS_BUTTON_SELECT = MENU_TOURNAMENT_SETTINGS_BUTTON+SELECT;
-			
-			
-			
-	public static final String MENU_TOURNAMENT_BUTTON_BACK = MENU_TOURNAMENT_BUTTON+"Back";
-	public static final String MENU_TOURNAMENT_BUTTON_CONTINUE = MENU_TOURNAMENT_BUTTON+"Continue";
-	public static final String MENU_TOURNAMENT_BUTTON_LOAD = MENU_TOURNAMENT_BUTTON+"Load";
-	public static final String MENU_TOURNAMENT_BUTTON_NEW = MENU_TOURNAMENT_BUTTON+"New";
-	public static final String MENU_TOURNAMENT_BUTTON_PLAYERS = MENU_TOURNAMENT_BUTTON+"Players";
-	public static final String MENU_TOURNAMENT_BUTTON_RULES = MENU_TOURNAMENT_BUTTON+"Rules";
-	public static final String MENU_TOURNAMENT_BUTTON_SAVE_AS = MENU_TOURNAMENT_BUTTON+"SaveAs";
-	public static final String MENU_TOURNAMENT_BUTTON_START = MENU_TOURNAMENT_BUTTON+"Start";
 	
 	/* GAME */
 		/* TOURNAMENT */
@@ -530,6 +520,7 @@ public class GuiKeys
 			public static final String GAME_TOURNAMENT_BUTTON_NEXT_MATCH = GAME_TOURNAMENT_BUTTON+NEXT+MATCH;
 			public static final String GAME_TOURNAMENT_BUTTON_QUIT = GAME_TOURNAMENT_BUTTON+QUIT;
 			public static final String GAME_TOURNAMENT_BUTTON_RESULTS = GAME_TOURNAMENT_BUTTON+RESULTS;
+			public static final String GAME_TOURNAMENT_BUTTON_SAVE = GAME_TOURNAMENT_BUTTON+SAVE;
 			public static final String GAME_TOURNAMENT_BUTTON_STATISTICS = GAME_TOURNAMENT_BUTTON+STATISTICS;
 			/* DESCRIPTION */
 			public static final String GAME_TOURNAMENT_DESCRIPTION = GAME_TOURNAMENT+DESCRIPTION;
@@ -551,6 +542,7 @@ public class GuiKeys
 			public static final String GAME_MATCH_BUTTON_FINISH = GAME_MATCH_BUTTON+FINISH;
 			public static final String GAME_MATCH_BUTTON_NEXT_ROUND = GAME_MATCH_BUTTON+NEXT+ROUND;
 			public static final String GAME_MATCH_BUTTON_RESULTS = GAME_MATCH_BUTTON+RESULTS;
+			public static final String GAME_MATCH_BUTTON_SAVE = GAME_MATCH_BUTTON+SAVE;
 			public static final String GAME_MATCH_BUTTON_STATISTICS = GAME_MATCH_BUTTON+STATISTICS;
 			/* DESCRIPTION */
 			public static final String GAME_MATCH_DESCRIPTION = GAME_MATCH+DESCRIPTION;
@@ -571,6 +563,7 @@ public class GuiKeys
 			public static final String GAME_ROUND_BUTTON_FINISH = GAME_ROUND_BUTTON+FINISH;
 			public static final String GAME_ROUND_BUTTON_PLAY = GAME_ROUND_BUTTON+PLAY;
 			public static final String GAME_ROUND_BUTTON_RESULTS = GAME_ROUND_BUTTON+RESULTS;
+			public static final String GAME_ROUND_BUTTON_SAVE = GAME_ROUND_BUTTON+SAVE;
 			public static final String GAME_ROUND_BUTTON_STATISTICS = GAME_ROUND_BUTTON+STATISTICS;
 			/* PROGRESS BAR */	
 			public static final String GAME_ROUND_PROGRESSBAR = GAME_ROUND+PROGRESSBAR;

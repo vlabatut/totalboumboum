@@ -42,6 +42,9 @@ import fr.free.totalboumboum.game.round.Round;
 import fr.free.totalboumboum.gui.common.structure.panel.SplitMenuPanel;
 import fr.free.totalboumboum.gui.common.structure.panel.menu.InnerMenuPanel;
 import fr.free.totalboumboum.gui.common.structure.panel.menu.MenuPanel;
+import fr.free.totalboumboum.gui.game.match.description.MatchDescription;
+import fr.free.totalboumboum.gui.game.match.results.MatchResults;
+import fr.free.totalboumboum.gui.game.match.statistics.MatchStatistics;
 import fr.free.totalboumboum.gui.game.round.RoundSplitPanel;
 import fr.free.totalboumboum.gui.tools.GuiKeys;
 import fr.free.totalboumboum.gui.tools.GuiTools;
@@ -56,6 +59,8 @@ public class MatchMenu extends InnerMenuPanel implements MatchRenderPanel
 		
 	@SuppressWarnings("unused")
 	private JButton buttonQuit;
+	@SuppressWarnings("unused")
+	private JButton buttonSave;
 	private JButton buttonTournament;
 	private JToggleButton buttonDescription;
 	private JToggleButton buttonResults;
@@ -78,6 +83,7 @@ public class MatchMenu extends InnerMenuPanel implements MatchRenderPanel
 
 		// buttons
 		buttonQuit = GuiTools.createButton(GuiKeys.GAME_MATCH_BUTTON_QUIT,buttonWidth,buttonHeight,1,this);
+		buttonSave = GuiTools.createButton(GuiKeys.GAME_TOURNAMENT_BUTTON_SAVE,buttonWidth,buttonHeight,1,this);
 		add(Box.createHorizontalGlue());
 		buttonTournament = GuiTools.createButton(GuiKeys.GAME_MATCH_BUTTON_CURRENT_TOURNAMENT,buttonWidth,buttonHeight,1,this);
 		add(Box.createRigidArea(new Dimension(GuiTools.buttonHorizontalSpace,0)));
@@ -165,7 +171,8 @@ buttonStatistics.setEnabled(false);
 	@Override
 	public void actionPerformed(ActionEvent e)
 	{	if(e.getActionCommand().equals(GuiKeys.GAME_MATCH_BUTTON_QUIT))
-		{	getFrame().setMainMenuPanel();
+		{	match.cancel();
+			getFrame().setMainMenuPanel();
 	    }
 		else if(e.getActionCommand().equals(GuiKeys.GAME_MATCH_BUTTON_CURRENT_TOURNAMENT))				
 		{	parent.refresh();

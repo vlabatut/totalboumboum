@@ -1,4 +1,4 @@
-package fr.free.totalboumboum.gui.game.match;
+package fr.free.totalboumboum.gui.game.match.statistics;
 
 /*
  * Total Boum Boum
@@ -22,29 +22,21 @@ package fr.free.totalboumboum.gui.game.match;
  */
 
 import fr.free.totalboumboum.game.match.Match;
-import fr.free.totalboumboum.gui.common.content.subpanel.results.ResultsSubPanel;
 import fr.free.totalboumboum.gui.common.structure.panel.SplitMenuPanel;
 import fr.free.totalboumboum.gui.common.structure.panel.data.EntitledDataPanel;
 import fr.free.totalboumboum.gui.tools.GuiKeys;
 
-public class MatchResults extends EntitledDataPanel
+public class MatchStatistics extends EntitledDataPanel
 {	
 	private static final long serialVersionUID = 1L;
 
-	private ResultsSubPanel resultsPanel;
-	
-	public MatchResults(SplitMenuPanel container)
+	public MatchStatistics(SplitMenuPanel container)
 	{	super(container);
 
 		// title
-		String key = GuiKeys.GAME_MATCH_RESULTS_TITLE;
+		String key = GuiKeys.GAME_MATCH_STATISTICS_TITLE;
 		setTitleKey(key);
-		
-		// data
-		{	resultsPanel = new ResultsSubPanel(dataWidth,dataHeight);
-			resultsPanel.setShowTime(false);
-			setDataPart(resultsPanel);
-		}
+
 	}
 
 	/////////////////////////////////////////////////////////////////
@@ -54,7 +46,6 @@ public class MatchResults extends EntitledDataPanel
 
 	public void setMatch(Match match)
 	{	this.match = match;
-		resultsPanel.setStatisticHolder(match);
 	}
 	
 	public Match getMatch()
@@ -66,6 +57,6 @@ public class MatchResults extends EntitledDataPanel
 	/////////////////////////////////////////////////////////////////	
 	@Override
 	public void refresh()
-	{	setMatch(match);
+	{	// nothing to do here
 	}
 }

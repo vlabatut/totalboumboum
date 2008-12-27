@@ -817,11 +817,13 @@ public class Launcher
 	 * - modification : menu de configuration du tournoi entièrement refait
 	 * - correction : bug graphique dans la liste des joueurs en cours de jeu
 	 * - correction : bug de raffraichissement des écrans tournoi/rencontre/manche en cours de partie
-	 * 
-	 * - correction : bug empêchant de sortir définitivement d'un tournoi
 	 * - modification : unification des classes d'affichage des parties (package game)
-	 * - nouveauté : enregistrement automatique
+	 * - correction : bug empêchant de sortir définitivement d'un tournoi
+	 * - correction : bug de placement des joueurs de gauche dans le niveau testAI
+	 * - nouveauté : bouton d'enregistrement en cours de partie
+	 * 
 	 * - nouveauté : enregistrement à la demande
+	 * - nouveauté : enregistrement automatique
 	 * 
 	 * *******************************************************
 	 * *********************** A FAIRE ***********************

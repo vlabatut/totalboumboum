@@ -61,7 +61,7 @@ public class QuickMatchContainer extends MenuPanel implements MenuContainer
 	{	if(quickMatchSplitPanel.initTournament())
 			setMenuPanel(quickMatchSplitPanel);
 		else
-			setMenuPanel(quickMatchSplitPanel.getMatchPanel());
+			setMenuPanel(quickMatchSplitPanel.getTournamentPanel());
 	}
 
 	/////////////////////////////////////////////////////////////////

@@ -33,7 +33,6 @@ public class SingleTournament extends AbstractTournament
 	/////////////////////////////////////////////////////////////////
 	// GAME				/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	private boolean tournamentOver = false;
 	
 	@Override
 	public void init()
@@ -43,11 +42,6 @@ public class SingleTournament extends AbstractTournament
 		stats.initStartDate();
 	}
 
-	@Override
-	public boolean isOver()
-	{	return tournamentOver;
-	}
-	
 	@Override
 	public void progress()
 	{	if(!isOver())
@@ -87,7 +81,7 @@ public class SingleTournament extends AbstractTournament
 		stats.addStatisticMatch(statsMatch);
 		float[] points = stats.getTotal();
 		stats.setPoints(points);
-		tournamentOver = true;
+		setOver(true);
 		if(panel!=null)
 		{	panel.tournamentOver();
 			stats.initEndDate();		

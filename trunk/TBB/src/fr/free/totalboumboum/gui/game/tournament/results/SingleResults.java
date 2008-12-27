@@ -1,4 +1,4 @@
-package fr.free.totalboumboum.gui.menus.quickmatch.match;
+package fr.free.totalboumboum.gui.game.tournament.results;
 
 /*
  * Total Boum Boum
@@ -21,49 +21,46 @@ package fr.free.totalboumboum.gui.menus.quickmatch.match;
  * 
  */
 
-import java.awt.BorderLayout;
-import java.awt.Graphics;
-import java.awt.image.BufferedImage;
-
 import fr.free.totalboumboum.game.match.Match;
 import fr.free.totalboumboum.game.tournament.single.SingleTournament;
-import fr.free.totalboumboum.gui.common.structure.MenuContainer;
+import fr.free.totalboumboum.gui.common.content.subpanel.results.ResultsSubPanel;
 import fr.free.totalboumboum.gui.common.structure.panel.SplitMenuPanel;
-import fr.free.totalboumboum.gui.common.structure.panel.menu.MenuPanel;
-import fr.free.totalboumboum.gui.data.configuration.GuiConfiguration;
-import fr.free.totalboumboum.gui.tools.GuiTools;
+import fr.free.totalboumboum.gui.tools.GuiKeys;
 
-public class MatchSplitPanel extends SplitMenuPanel
-{	private static final long serialVersionUID = 1L;
+public class SingleResults extends TournamentResults<SingleTournament>
+{	
+	private static final long serialVersionUID = 1L;
 
-	private BufferedImage image;
-
-	public MatchSplitPanel(MenuContainer container, MenuPanel parent)
-	{	super(container,parent,BorderLayout.PAGE_END,GuiTools.HORIZONTAL_SPLIT_RATIO);
+	private ResultsSubPanel resultsPanel;
 	
-		// background
-		image = GuiConfiguration.getMiscConfiguration().getDarkBackground();
-	    
-		// panels
-		MatchMenu menu = new MatchMenu(this,parent);
-		setMenuPart(menu);
+	public SingleResults(SplitMenuPanel container)
+	{	super(container);
+
+		// title
+		String key = GuiKeys.GAME_MATCH_RESULTS_TITLE;
+		setTitleKey(key);
+		
+		// data
+		{	resultsPanel = new ResultsSubPanel(dataWidth,dataHeight);
+			resultsPanel.setShowTime(false);
+			setDataPart(resultsPanel);
+		}
 	}
-	
+
 	/////////////////////////////////////////////////////////////////
-	// TOURNAMENT					/////////////////////////////////
+	// TOURNAMENT		/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	public void setTournament(SingleTournament tournament)
-	{	tournament.init();
-		tournament.progress();
+	{	this.tournament = tournament;
 		Match match = tournament.getCurrentMatch();
-		((MatchMenu)getMenuPart()).setMatch(match);
+		resultsPanel.setStatisticHolder(match);
 	}
-
+	
 	/////////////////////////////////////////////////////////////////
-	// PAINT	/////////////////////////////////////////////
+	// CONTENT PANEL	/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////	
 	@Override
-	public void paintComponent(Graphics g)
-	{	g.drawImage(image, 0, 0, null);
+	public void refresh()
+	{	setTournament(tournament);
 	}
 }
