@@ -126,7 +126,7 @@ public class PlayersListSubPanel extends UntitledSubPanelTable implements MouseL
 				setLineBackground(line,bg);
 				// portrait
 				{	BufferedImage image = profile.getPortraits().getOutgamePortrait(Portraits.OUTGAME_HEAD);
-					String tooltip = profile.getName();
+					String tooltip = profile.getSpriteName();
 					setLabelIcon(line,col,image,tooltip);
 					col++;
 				}

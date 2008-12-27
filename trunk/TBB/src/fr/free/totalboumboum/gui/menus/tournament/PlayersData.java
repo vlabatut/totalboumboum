@@ -36,8 +36,8 @@ import fr.free.totalboumboum.gui.common.content.subpanel.players.PlayersSelectio
 import fr.free.totalboumboum.gui.common.content.subpanel.players.PlayersSelectionSubPanelListener;
 import fr.free.totalboumboum.gui.common.structure.panel.SplitMenuPanel;
 import fr.free.totalboumboum.gui.common.structure.panel.data.EntitledDataPanel;
-import fr.free.totalboumboum.gui.menus.quickmatch.hero.SelectHeroSplitPanel;
-import fr.free.totalboumboum.gui.menus.quickmatch.profile.SelectProfileSplitPanel;
+import fr.free.totalboumboum.gui.menus.tournament.hero.SelectHeroSplitPanel;
+import fr.free.totalboumboum.gui.menus.tournament.profile.SelectProfileSplitPanel;
 import fr.free.totalboumboum.gui.tools.GuiKeys;
 
 public class PlayersData extends EntitledDataPanel implements PlayersSelectionSubPanelListener
@@ -50,7 +50,7 @@ public class PlayersData extends EntitledDataPanel implements PlayersSelectionSu
 	{	super(container);
 		
 		// title
-		String key = GuiKeys.MENU_QUICKMATCH_PLAYERS_TITLE;
+		String key = GuiKeys.MENU_TOURNAMENT_PLAYERS_TITLE;
 		setTitleKey(key);
 		
 		// data
