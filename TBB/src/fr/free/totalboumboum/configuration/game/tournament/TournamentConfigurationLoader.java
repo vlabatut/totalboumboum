@@ -48,9 +48,14 @@ public class TournamentConfigurationLoader
 	}
 
 	private static void loadGameTournamentElement(Element root, TournamentConfiguration result) throws ParserConfigurationException, SAXException, IOException, IllegalArgumentException, SecurityException, IllegalAccessException, NoSuchFieldException, ClassNotFoundException
-	{	// players
+	{	// name
+		Element tournamentElement = root.getChild(XmlTools.ELT_TOURNAMENT);
+		String tournamentName = tournamentElement.getAttribute(XmlTools.ATT_NAME).getValue().trim();
+		result.setTournamentName(new StringBuffer(tournamentName));
+		
+		// players
 		Element playersElement = root.getChild(XmlTools.ELT_PLAYERS);
 		ProfilesSelection tournamentSelected = ProfilesSelectionLoader.loadProfilesSelection(playersElement);
-		result.setTournamentSelected(tournamentSelected);
+		result.setProfilesSelection(tournamentSelected);
 	}
 }

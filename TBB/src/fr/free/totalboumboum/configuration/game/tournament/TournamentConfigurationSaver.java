@@ -50,6 +50,12 @@ public class TournamentConfigurationSaver
 	private static Element saveGameTournamentElement(TournamentConfiguration gameConfiguration)
 	{	Element result = new Element(XmlTools.ELT_GAME_TOURNAMENT); 
 		
+		// name
+		Element tournamentElement = new Element(XmlTools.ELT_TOURNAMENT);
+		String tournament = gameConfiguration.getTournamentName().toString();
+		tournamentElement.setAttribute(XmlTools.ATT_NAME,tournament);
+		result.addContent(tournamentElement);
+		
 		// players
 		Element playersElement = new Element(XmlTools.ELT_PLAYERS);
 		ProfilesSelection tournamentSelected = gameConfiguration.getProfilesSelection();

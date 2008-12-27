@@ -38,18 +38,45 @@ public class TournamentConfiguration
 	public TournamentConfiguration copy()
 	{	TournamentConfiguration result = new TournamentConfiguration();
 		
+		// options
+		result.setUseLastPlayers(useLastPlayers);
+		result.setUseLastTournament(useLastTournament);
+		
 		// tournament
-		ProfilesSelection tournamentCopy = profimesSelection.copy();
-		result.setTournamentSelected(tournamentCopy);
+		result.setTournamentName(tournamentName);
+		
+		// players
+		ProfilesSelection tournamentCopy = profilesSelection.copy();
+		result.setProfilesSelection(tournamentCopy);
 
 		return result;
 	}
 	
 	/////////////////////////////////////////////////////////////////
+	// OPTIONS			/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	private boolean useLastPlayers = false;
+	private boolean useLastTournament = false;
+
+	public boolean getUseLastPlayers()
+	{	return useLastPlayers;
+	}
+	public void setUseLastPlayers(boolean useLastPlayers)
+	{	this.useLastPlayers = useLastPlayers;
+	}
+	
+	public boolean getUseLastTournament()
+	{	return useLastTournament;
+	}
+	public void setUseLastTournament(boolean useLastTournament)
+	{	this.useLastTournament = useLastTournament;
+	}
+
+	/////////////////////////////////////////////////////////////////
 	// TOURNAMENT			/////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
+	private StringBuffer tournamentName = new StringBuffer();
 	private AbstractTournament tournament;
-	private String tournamentFile;
 	
 	public AbstractTournament getTournament()
 	{	return tournament;
@@ -59,30 +86,42 @@ public class TournamentConfiguration
 	{	this.tournament = tournament;
 	}
 
-	public String getTournamentFile()
-	{	return tournamentFile;
+	public StringBuffer getTournamentName()
+	{	return tournamentName;
 	}
 	
-	public void setTournamentFile(String tournamentFile)
-	{	this.tournamentFile = tournamentFile;
+	public void setTournamentName(StringBuffer tournamentName)
+	{	this.tournamentName = tournamentName;
 	}
 
 	public AbstractTournament loadLastTournament() throws ParserConfigurationException, SAXException, IOException, ClassNotFoundException
-	{	AbstractTournament result;
-		String folderPath = FileTools.getConfigurationPath()+File.separator+FileTools.FILE_TOURNAMENT;
-		result = TournamentLoader.loadTournamentFromFolderPath(folderPath);
+	{	AbstractTournament result = null;
+		if(tournamentName!=null)
+		{	// String folderPath = FileTools.getConfigurationPath()+File.separator+FileTools.FILE_TOURNAMENT;
+			String folderPath = FileTools.getTournamentsPath()+File.separator+tournamentName;
+			result = TournamentLoader.loadTournamentFromFolderPath(folderPath);
+		}
 		return result;
+	}
+
+	public void reinitTournament()
+	{	tournamentName.delete(0,tournamentName.length());
 	}
 
 	/////////////////////////////////////////////////////////////////
 	// PLAYERS				/////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	private ProfilesSelection profimesSelection = new ProfilesSelection();
+	private ProfilesSelection profilesSelection = new ProfilesSelection();
 
 	public ProfilesSelection getProfilesSelection()
-	{	return profimesSelection;	
+	{	return profilesSelection;	
 	}	
-	public void setTournamentSelected(ProfilesSelection profimesSelection)
-	{	this.profimesSelection = profimesSelection;	
+	
+	public void setProfilesSelection(ProfilesSelection profimesSelection)
+	{	this.profilesSelection = profimesSelection;	
 	}	
+
+	public void reinitPlayers()
+	{	profilesSelection = new ProfilesSelection();
+	}
 }

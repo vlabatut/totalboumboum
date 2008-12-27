@@ -151,24 +151,20 @@ public class TrnmntMenu extends InnerMenuPanel
 	/////////////////////////////////////////////////////////////////
 	private AbstractTournament tournament;
 	private TournamentConfiguration tournamentConfiguration;
+	private boolean configStarted;
 	
 	public boolean initTournament()
 	{	boolean result = false;
 		// init tournament
-		if(tournament==null || tournament.isOver())
-		{	tournament = new SingleTournament();
-			Match match = new Match(tournament);
-			tournament.setMatch(match);
-			// init configuration
-			tournamentConfiguration = Configuration.getGameConfiguration().getQuickMatchConfiguration().copy();
+		if(!configStarted || (tournament!=null && tournament.isOver()))
+		{	// init configuration
+			tournamentConfiguration = Configuration.getGameConfiguration().getTournamentConfiguration().copy();
 			if(!tournamentConfiguration.getUseLastPlayers())
 				tournamentConfiguration.reinitPlayers();		
-			if(!tournamentConfiguration.getUseLastLevels())
-				tournamentConfiguration.reinitLevels();
-			if(!tournamentConfiguration.getUseLastSettings())
-				tournamentConfiguration.reinitSettings();
+			if(!tournamentConfiguration.getUseLastTournament())
+				tournamentConfiguration.reinitTournament();
 			// set panel
-			playersData.setQuickMatchConfiguration(tournamentConfiguration);
+			playersData.setTournamentConfiguration(tournamentConfiguration);
 			container.setDataPart(playersData);
 			setButtonsPlayers();
 			result = true;
@@ -185,32 +181,21 @@ public class TrnmntMenu extends InnerMenuPanel
 		tournament.setProfiles(selectedProfiles);
 	}
 	
-	private void setTournamentLevels()
-	{	LevelsSelection levelsSelection = tournamentConfiguration.getLevelsSelection();
-		Match match = tournament.getCurrentMatch();
-		match.clearRounds();
-		for(int i=0;i<levelsSelection.getLevelCount();i++)
-		{	String folderName = levelsSelection.getFolderName(i);
-			String packName = levelsSelection.getPackName(i);
-			Round round = new Round(match);
-			match.addRound(round);
-			String path = packName+File.separator+folderName;
-	    	try
-			{	HollowLevel hollowLevel = new HollowLevel(path);
-		    	round.setHollowLevel(hollowLevel);
-			}
-			catch (ParserConfigurationException e1)
-			{	e1.printStackTrace();
-			}
-			catch (SAXException e1)
-			{	e1.printStackTrace();
-			}
-			catch (IOException e1)
-			{	e1.printStackTrace();
-			}
-			catch (ClassNotFoundException e1)
-			{	e1.printStackTrace();
-			} 
+	private void loadTournament()
+	{	try
+		{	tournament = tournamentConfiguration.loadLastTournament();
+		}
+		catch (ParserConfigurationException e)
+		{	e.printStackTrace();
+		}
+		catch (SAXException e)
+		{	e.printStackTrace();
+		}
+		catch (IOException e)
+		{	e.printStackTrace();
+		}
+		catch (ClassNotFoundException e)
+		{	e.printStackTrace();
 		}
 	}
 	

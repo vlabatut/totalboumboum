@@ -70,9 +70,20 @@ public class QuickStartConfiguration
 	}
 	
 	/////////////////////////////////////////////////////////////////
-	// QUICKSTART		/////////////////////////////////////////////
+	// PLAYERS			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	private ProfilesSelection profilesSelection = new ProfilesSelection();
+
+	public ProfilesSelection getProfilesSelection()
+	{	return profilesSelection;	
+	}	
+	public void setProfilesSelection(ProfilesSelection profilesSelection)
+	{	this.profilesSelection = profilesSelection;	
+	}	
+
+	/////////////////////////////////////////////////////////////////
+	// ROUND			/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
 	private StringBuffer roundName = null;
 	
 	public StringBuffer getRoundName()
@@ -82,13 +93,6 @@ public class QuickStartConfiguration
 	{	this.roundName = roundName;
 	}
 	
-	public ProfilesSelection getProfilesSelection()
-	{	return profilesSelection;	
-	}	
-	public void setProfilesSelection(ProfilesSelection profilesSelection)
-	{	this.profilesSelection = profilesSelection;	
-	}	
-
 	public SingleTournament loadQuickstart() throws ParserConfigurationException, SAXException, IOException, ClassNotFoundException
 	{	// single tournament
 		SingleTournament result = new SingleTournament();

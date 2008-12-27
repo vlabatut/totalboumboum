@@ -28,7 +28,7 @@ import javax.xml.parsers.ParserConfigurationException;
 
 import org.xml.sax.SAXException;
 
-import fr.free.totalboumboum.configuration.game.quickmatch.QuickMatchConfiguration;
+import fr.free.totalboumboum.configuration.game.tournament.TournamentConfiguration;
 import fr.free.totalboumboum.configuration.profile.Profile;
 import fr.free.totalboumboum.configuration.profile.ProfileLoader;
 import fr.free.totalboumboum.configuration.profile.ProfilesSelection;
@@ -72,8 +72,8 @@ public class PlayersData extends EntitledDataPanel implements PlayersSelectionSu
 	/////////////////////////////////////////////////////////////////
 	private ArrayList<Profile> players;
 
-	public void setQuickMatchConfiguration(QuickMatchConfiguration quickMatchConfiguration)
-	{	ProfilesSelection profilesSelection = quickMatchConfiguration.getProfilesSelection();
+	public void setTournamentConfiguration(TournamentConfiguration tournamentConfiguration)
+	{	ProfilesSelection profilesSelection = tournamentConfiguration.getProfilesSelection();
 		ArrayList<Profile> selectedProfiles = new ArrayList<Profile>();
 		try
 		{	selectedProfiles = ProfileLoader.loadProfiles(profilesSelection);

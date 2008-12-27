@@ -4,6 +4,7 @@
 
 	<xsd:complexType name="tTournament">
 		<xsd:sequence>
+			<xsd:element name="tournament" type="tConfrontation" />
 			<xsd:element name="players" type="tPlayers" />
 			</xsd:sequence>
 	</xsd:complexType>
