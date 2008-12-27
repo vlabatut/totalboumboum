@@ -47,8 +47,12 @@ public class ProfileLoader
 			Profile profile = loadProfile(name);
 			SpriteInfo selectedSprite = profile.getSelectedSprite();
 			// sprite
-			selectedSprite.setPack(profilesSelection.getHero(i)[0]);
-			selectedSprite.setFolder(profilesSelection.getHero(i)[1]);
+			String packName = profilesSelection.getHero(i)[0];
+			selectedSprite.setPack(packName);
+			String folderName = profilesSelection.getHero(i)[1];
+			selectedSprite.setFolder(folderName);
+			SpritePreview heroPreview = SpritePreviewLoader.loadHeroPreviewOnlyName(packName,folderName);
+			selectedSprite.setName(heroPreview.getName());
 			// color
 			selectedSprite.setColor(profilesSelection.getColor(i));
 			// controls
@@ -115,7 +119,7 @@ public class ProfileLoader
     	
     	// name
     	SpritePreview heroPreview = new SpritePreview();
-		heroPreview = SpritePreviewLoader.loadHeroPreview(spritePackname,spriteFolder);
+		heroPreview = SpritePreviewLoader.loadHeroPreviewOnlyName(spritePackname,spriteFolder);
 		String spriteName = heroPreview.getName();
 		result.getDefaultSprite().setName(spriteName);
     	

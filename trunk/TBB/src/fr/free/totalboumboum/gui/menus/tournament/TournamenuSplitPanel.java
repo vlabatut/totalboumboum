@@ -32,19 +32,19 @@ import fr.free.totalboumboum.gui.data.configuration.GuiConfiguration;
 import fr.free.totalboumboum.gui.game.tournament.TournamentSplitPanel;
 import fr.free.totalboumboum.gui.tools.GuiTools;
 
-public class TrnmntSplitPanel extends SplitMenuPanel
+public class TournamenuSplitPanel extends SplitMenuPanel
 {	private static final long serialVersionUID = 1L; 
 
 	private BufferedImage image;
 	
-	public TrnmntSplitPanel(MenuContainer container, MenuPanel parent)
+	public TournamenuSplitPanel(MenuContainer container, MenuPanel parent)
 	{	super(container,parent,BorderLayout.PAGE_END,GuiTools.HORIZONTAL_SPLIT_RATIO);
 	
 		// background
 		image = GuiConfiguration.getMiscConfiguration().getDarkBackground();
 		
 		// panels
-		TrnmntMenu menu = new TrnmntMenu(this,parent);
+		TournamenuMenu menu = new TournamenuMenu(this,parent);
 		setMenuPart(menu);
 	}
 	
@@ -52,11 +52,11 @@ public class TrnmntSplitPanel extends SplitMenuPanel
 	// TOURNAMENT					/////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	public boolean initTournament()
-	{	return ((TrnmntMenu)getMenuPart()).initTournament();
+	{	return ((TournamenuMenu)getMenuPart()).initTournament();
 	}
 
 	public TournamentSplitPanel getTournamentPanel()
-	{	return ((TrnmntMenu)getMenuPart()).getTournamentPanel();
+	{	return ((TournamenuMenu)getMenuPart()).getTournamentPanel();
 	}
 
 	/////////////////////////////////////////////////////////////////

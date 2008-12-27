@@ -47,10 +47,10 @@ import fr.free.totalboumboum.gui.game.tournament.TournamentSplitPanel;
 import fr.free.totalboumboum.gui.tools.GuiKeys;
 import fr.free.totalboumboum.gui.tools.GuiTools;
 
-public class TrnmntMenu extends InnerMenuPanel
+public class TournamenuMenu extends InnerMenuPanel
 {	private static final long serialVersionUID = 1L;
 	
-	public TrnmntMenu(SplitMenuPanel container, MenuPanel parent)
+	public TournamenuMenu(SplitMenuPanel container, MenuPanel parent)
 	{	super(container, parent);
 		
 		// layout
