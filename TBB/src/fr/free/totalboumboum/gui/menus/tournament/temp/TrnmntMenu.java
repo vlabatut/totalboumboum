@@ -39,6 +39,7 @@ import fr.free.totalboumboum.configuration.game.quickmatch.LevelsSelection;
 import fr.free.totalboumboum.configuration.game.quickmatch.QuickMatchConfiguration;
 import fr.free.totalboumboum.configuration.game.quickmatch.QuickMatchConfigurationSaver;
 import fr.free.totalboumboum.configuration.game.quickmatch.QuickMatchDraw;
+import fr.free.totalboumboum.configuration.game.tournament.TournamentConfiguration;
 import fr.free.totalboumboum.configuration.profile.Profile;
 import fr.free.totalboumboum.configuration.profile.ProfilesConfiguration;
 import fr.free.totalboumboum.configuration.profile.ProfilesSelection;
@@ -59,6 +60,7 @@ import fr.free.totalboumboum.game.points.PointsScores;
 import fr.free.totalboumboum.game.points.PointsTotal;
 import fr.free.totalboumboum.game.round.Round;
 import fr.free.totalboumboum.game.statistics.Score;
+import fr.free.totalboumboum.game.tournament.AbstractTournament;
 import fr.free.totalboumboum.game.tournament.single.SingleTournament;
 import fr.free.totalboumboum.gui.common.structure.panel.SplitMenuPanel;
 import fr.free.totalboumboum.gui.common.structure.panel.menu.InnerMenuPanel;
@@ -86,6 +88,7 @@ public class TrnmntMenu extends InnerMenuPanel
 
 		// panels
 		playersData = new PlayersData(container);
+		settingsData = new SettingsData(container);
 		selectPanel = new SelectTournamentSplitPanel(container,this.container,Configuration.getGameConfiguration().getTournamentConfiguration());
 		tournamentPanel = new TournamentSplitPanel(container.getContainer(),getMenuParent()/*container*/);
 	}
@@ -95,11 +98,10 @@ public class TrnmntMenu extends InnerMenuPanel
 	/////////////////////////////////////////////////////////////////
 	private JButton buttonQuit;
 	private JButton buttonPlayersPrevious;
-	private JButton buttonLevelsPrevious;
-	private JButton buttonSettingsPrevious;
 	private JButton buttonPlayersNext;
-	private JButton buttonLevelsNext;
+	private JButton buttonSettingsPrevious;
 	private JButton buttonSettingsNext;
+	private JButton buttonSettingsLoad;
 	private int buttonWidth;
 	private int buttonHeight;
 
@@ -107,13 +109,12 @@ public class TrnmntMenu extends InnerMenuPanel
 	{	buttonWidth = getHeight();
 		buttonHeight = getHeight();
 		//
-		buttonQuit = GuiTools.createButton(GuiKeys.MENU_QUICKMATCH_SETTINGS_BUTTON_QUIT,buttonWidth,buttonHeight,1,this);
-		buttonPlayersPrevious = GuiTools.createButton(GuiKeys.MENU_QUICKMATCH_PLAYERS_BUTTON_PREVIOUS,buttonWidth,buttonHeight,1,this);
-		buttonLevelsPrevious = GuiTools.createButton(GuiKeys.MENU_QUICKMATCH_LEVELS_BUTTON_PREVIOUS,buttonWidth,buttonHeight,1,this);
-		buttonSettingsPrevious = GuiTools.createButton(GuiKeys.MENU_QUICKMATCH_SETTINGS_BUTTON_PREVIOUS,buttonWidth,buttonHeight,1,this);
-		buttonPlayersNext = GuiTools.createButton(GuiKeys.MENU_QUICKMATCH_PLAYERS_BUTTON_NEXT,buttonWidth,buttonHeight,1,this);
-		buttonLevelsNext = GuiTools.createButton(GuiKeys.MENU_QUICKMATCH_LEVELS_BUTTON_NEXT,buttonWidth,buttonHeight,1,this);
-		buttonSettingsNext = GuiTools.createButton(GuiKeys.MENU_QUICKMATCH_SETTINGS_BUTTON_NEXT,buttonWidth,buttonHeight,1,this);
+		buttonQuit = GuiTools.createButton(GuiKeys.MENU_TOURNAMENT_BUTTON_QUIT,buttonWidth,buttonHeight,1,this);
+		buttonPlayersPrevious = GuiTools.createButton(GuiKeys.MENU_TOURNAMENT_PLAYERS_BUTTON_PREVIOUS,buttonWidth,buttonHeight,1,this);
+		buttonPlayersNext = GuiTools.createButton(GuiKeys.MENU_TOURNAMENT_PLAYERS_BUTTON_NEXT,buttonWidth,buttonHeight,1,this);
+		buttonSettingsPrevious = GuiTools.createButton(GuiKeys.MENU_TOURNAMENT_SETTINGS_BUTTON_PREVIOUS,buttonWidth,buttonHeight,1,this);
+		buttonSettingsNext = GuiTools.createButton(GuiKeys.MENU_TOURNAMENT_SETTINGS_BUTTON_NEXT,buttonWidth,buttonHeight,1,this);
+		buttonSettingsLoad = GuiTools.createButton(GuiKeys.MENU_TOURNAMENT_SETTINGS_BUTTON_LOAD,buttonWidth,buttonHeight,1,this);
 		removeAll();
 	}
 	
@@ -130,22 +131,11 @@ public class TrnmntMenu extends InnerMenuPanel
 		add(buttonPlayersNext);
 	}
 	
-	private void setButtonsLevels()
-	{	removeAll();
-		add(buttonQuit);
-		add(Box.createHorizontalGlue());
-		add(buttonLevelsPrevious);
-		add(Box.createRigidArea(new Dimension(GuiTools.buttonHorizontalSpace,0)));
-		add(Box.createRigidArea(new Dimension(buttonWidth,buttonHeight)));
-		add(Box.createRigidArea(new Dimension(buttonWidth,buttonHeight)));
-		add(Box.createRigidArea(new Dimension(buttonWidth,buttonHeight)));
-		add(Box.createRigidArea(new Dimension(GuiTools.buttonHorizontalSpace,0)));
-		add(buttonLevelsNext);
-	}
-	
 	private void setButtonsSettings()
 	{	removeAll();
 		add(buttonQuit);
+		add(Box.createRigidArea(new Dimension(GuiTools.buttonHorizontalSpace,0)));
+		add(buttonSettingsLoad);
 		add(Box.createHorizontalGlue());
 		add(buttonSettingsPrevious);
 		add(Box.createRigidArea(new Dimension(GuiTools.buttonHorizontalSpace,0)));
@@ -159,8 +149,8 @@ public class TrnmntMenu extends InnerMenuPanel
 	/////////////////////////////////////////////////////////////////
 	// TOURNAMENT					/////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	private SingleTournament tournament;
-	private QuickMatchConfiguration quickMatchConfiguration;
+	private AbstractTournament tournament;
+	private TournamentConfiguration tournamentConfiguration;
 	
 	public boolean initTournament()
 	{	boolean result = false;
@@ -170,15 +160,15 @@ public class TrnmntMenu extends InnerMenuPanel
 			Match match = new Match(tournament);
 			tournament.setMatch(match);
 			// init configuration
-			quickMatchConfiguration = Configuration.getGameConfiguration().getQuickMatchConfiguration().copy();
-			if(!quickMatchConfiguration.getUseLastPlayers())
-				quickMatchConfiguration.reinitPlayers();		
-			if(!quickMatchConfiguration.getUseLastLevels())
-				quickMatchConfiguration.reinitLevels();
-			if(!quickMatchConfiguration.getUseLastSettings())
-				quickMatchConfiguration.reinitSettings();
+			tournamentConfiguration = Configuration.getGameConfiguration().getQuickMatchConfiguration().copy();
+			if(!tournamentConfiguration.getUseLastPlayers())
+				tournamentConfiguration.reinitPlayers();		
+			if(!tournamentConfiguration.getUseLastLevels())
+				tournamentConfiguration.reinitLevels();
+			if(!tournamentConfiguration.getUseLastSettings())
+				tournamentConfiguration.reinitSettings();
 			// set panel
-			playersData.setQuickMatchConfiguration(quickMatchConfiguration);
+			playersData.setQuickMatchConfiguration(tournamentConfiguration);
 			container.setDataPart(playersData);
 			setButtonsPlayers();
 			result = true;
@@ -196,7 +186,7 @@ public class TrnmntMenu extends InnerMenuPanel
 	}
 	
 	private void setTournamentLevels()
-	{	LevelsSelection levelsSelection = quickMatchConfiguration.getLevelsSelection();
+	{	LevelsSelection levelsSelection = tournamentConfiguration.getLevelsSelection();
 		Match match = tournament.getCurrentMatch();
 		match.clearRounds();
 		for(int i=0;i<levelsSelection.getLevelCount();i++)
@@ -227,7 +217,7 @@ public class TrnmntMenu extends InnerMenuPanel
 	private void setTournamentSettings()
 	{	Match match = tournament.getCurrentMatch();
 		// random order
-		{	boolean randomOrder = quickMatchConfiguration.getLevelsRandomOrder();
+		{	boolean randomOrder = tournamentConfiguration.getLevelsRandomOrder();
 			match.setRandomOrder(randomOrder);
 		}
 		
@@ -235,14 +225,14 @@ public class TrnmntMenu extends InnerMenuPanel
 		{	Limits<MatchLimit> limits = new Limits<MatchLimit>();
 			PointsProcessor pointsProcessor = new PointsTotal();
 			// round limit
-			{	int roundsLimit = quickMatchConfiguration.getLimitRounds();
+			{	int roundsLimit = tournamentConfiguration.getLimitRounds();
 				if(roundsLimit>0)
 				{	MatchLimit limit = new LimitConfrontation(roundsLimit,ComparatorCode.GREATER,pointsProcessor);
 					limits.addLimit(limit);
 				}
 			}
 			// points limit
-			{	int pointsLimit = quickMatchConfiguration.getLimitPoints();
+			{	int pointsLimit = tournamentConfiguration.getLimitPoints();
 				if(pointsLimit>0)
 				{	MatchLimit limit = new LimitPoints(pointsLimit,ComparatorCode.GREATEREQ,pointsProcessor,pointsProcessor);
 					limits.addLimit(limit);
@@ -254,8 +244,8 @@ public class TrnmntMenu extends InnerMenuPanel
 		// round settings
 		{	// limits
 			Limits<RoundLimit> limits = new Limits<RoundLimit>();
-			boolean share = quickMatchConfiguration.getPointsShare();
-			ArrayList<Integer> pts = quickMatchConfiguration.getPoints();
+			boolean share = tournamentConfiguration.getPointsShare();
+			ArrayList<Integer> pts = tournamentConfiguration.getPoints();
 			float[] values = new float[pts.size()];
 			for(int i=0;i<values.length;i++)
 				values[i] = pts.get(i);
@@ -264,8 +254,8 @@ public class TrnmntMenu extends InnerMenuPanel
 			sources.add(source);
 			PointsProcessor normalPP = new PointsRankpoints(sources,values,false,share);
 			PointsProcessor drawPP = new PointsConstant(0);
-			QuickMatchDraw draw = quickMatchConfiguration.getPointsDraw();
-			long time = quickMatchConfiguration.getLimitTime();
+			QuickMatchDraw draw = tournamentConfiguration.getPointsDraw();
+			long time = tournamentConfiguration.getLimitTime();
 			if(time>0)
 			{	// time limit
 				RoundLimit limit;
@@ -285,7 +275,7 @@ public class TrnmntMenu extends InnerMenuPanel
 				limits.addLimit(limit);
 			}
 			// random location
-			boolean randomLocation = quickMatchConfiguration.getPlayersRandomLocation();
+			boolean randomLocation = tournamentConfiguration.getPlayersRandomLocation();
 			// rounds
 			ArrayList<Round> rounds = match.getRounds();
 			for(Round r: rounds)
@@ -301,6 +291,7 @@ public class TrnmntMenu extends InnerMenuPanel
 	private TournamentSplitPanel tournamentPanel;
 	private SelectTournamentSplitPanel selectPanel;
 	private PlayersData playersData;
+	private SettingsData settingsData;
 	
 	public TournamentSplitPanel getTournamentPanel()
 	{	return tournamentPanel;
@@ -341,7 +332,7 @@ public class TrnmntMenu extends InnerMenuPanel
 		{	// set levels in tournament
 			setTournamentLevels();
 			// set settings panel
-			settingsData.setQuickMatchConfiguration(quickMatchConfiguration);
+			settingsData.setQuickMatchConfiguration(tournamentConfiguration);
 			setButtonsSettings();
 			container.setDataPart(settingsData);
 	    }
@@ -350,7 +341,7 @@ public class TrnmntMenu extends InnerMenuPanel
 			setTournamentSettings();
 			// save quick match options
 			try
-			{	QuickMatchConfigurationSaver.saveQuickMatchConfiguration(quickMatchConfiguration);
+			{	QuickMatchConfigurationSaver.saveQuickMatchConfiguration(tournamentConfiguration);
 			}
 			catch (ParserConfigurationException e1)
 			{	e1.printStackTrace();
@@ -362,7 +353,7 @@ public class TrnmntMenu extends InnerMenuPanel
 			{	e1.printStackTrace();
 			}
 			// synch game options
-			Configuration.getGameConfiguration().setQuickMatchConfiguration(quickMatchConfiguration);
+			Configuration.getGameConfiguration().setQuickMatchConfiguration(tournamentConfiguration);
 			// match panel
 			tournamentPanel.setTournament(tournament);
 			replaceWith(tournamentPanel);
