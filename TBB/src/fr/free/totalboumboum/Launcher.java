@@ -807,13 +807,14 @@ public class Launcher
 	 * + beta.009
 	 * - modification : mutualisation des classes codant les éléments de la GUI
 	 * - modification : fusion des launchers
-	 * - nouveauté : définition d'un ensemble de paramètres pour le launcher
+	 * - nouveauté : définition d'un ensemble de paramètres en ligne de commande pour le launcher
 	 * - nouveauté : mode plein écran
 	 * - nouveauté : écran de sélection des niveaux pour le quick match
 	 * - nouveauté : écran des options pour le quick match
 	 * - nouveauté : gestion complète d'un quick match
 	 * - nouveauté : placement aléatoire des joueurs en début de round
 	 * - modification : chargement adapté des preview de levels (temps de chargement plus court, ce qui n'est pas nécessaire n'est plus chargé)
+	 * - modification : menu de configuration du tournoi entièrement refait
 	 * 
 	 * *******************************************************
 	 * *********************** A FAIRE ***********************

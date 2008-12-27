@@ -75,50 +75,50 @@
 - Modification	: réorganisation du projet Eclipse de manière à placer les classes d'ia dans le dossier resources
 - Modification	: révision du système d'adaptateur pour les IA de 2007-08
 - Modification	: FPS baissé de 100 à 50, afin d'économiser les ressources et d'éviter que ça rame trop sur des petites machines (ou pas accélérées)
-- Nouveauté	: adaptateur spécial pour les IA 2008-09
+- Nouveauté		: adaptateur spécial pour les IA 2008-09
 - Correction 	: petit bug dans la GUI, les dimensions des niveaux étaient fausses
 
 + alpha.44
 - Modification	: amélioration de la structure de données destinées aux IA 2008-09 et représentant la zone et son contenu
 - Nouveauté 	: IA d'exemple pour le package 2008-09
-- Correction		: bug qui empêchait un bon décompte des kills/deaths (différent du premier!)
-- Nouveauté	: niveau plus petit pour tester la nouvelle IA
-- Nouveauté	: système pour controler que le thread d'une IA ne reste pas bloqué dans une bloucle infinite (ou autre)
+- Correction	: bug qui empêchait un bon décompte des kills/deaths (différent du premier!)
+- Nouveauté		: niveau plus petit pour tester la nouvelle IA
+- Nouveauté		: système pour controler que le thread d'une IA ne reste pas bloqué dans une bloucle infinite (ou autre)
 - Modification	: plus d'icones dans la GUI notamment pour les points processors
-- Nouveauté	: création d'un splash screen, qui énumére les étapes d'initialisation et permet d'avoir un Graphics pour l'init de la GUI avant de faire apparaître le frame
+- Nouveauté		: création d'un splash screen, qui énumére les étapes d'initialisation et permet d'avoir un Graphics pour l'init de la GUI avant de faire apparaître le frame
 - Modification	: meilleure décomposition du fichier de langue, en plusieurs sections plus lisibles
 - Modification	: changement d'icône pour les points, les stats et les points custom
 - Modification	: centrage de la fenêtre principale à la création
 
 + alpha.45
-- Nouveauté	: scripts de lancement/compilation pour Windows et BASH
-- Correction		: utilisation dans la GUI d'une méthode qui provoque une exception sous Linux, quand on essaie de convertir une image en niveaux de gris avec BufferedImageOp. Méthode alternative employée à la place.
-- Nouveauté	: documents relatifs à la licence GPL
-- Nouveauté	: fichiers d'information dans la racine du projet
-- Nouveauté	: modification de l'API d'IA demanière à refléter les différents types de bombes, items et flammes  
-- Nouveauté	: commentaires complets des classes d'IA
-- Nouveauté	: tournoi simple (ne contenant qu'un seul match)
-- Correction		: bug dans la barre de progression lors du chargement du round
-- Nouveauté	: mode quicklaunch pour jouer un round très rapidement (pas de GUI)
-- Nouveauté	: affichage du score dans le QuickLaunch
-- Nouveauté	: ajustement automatique du FPS en fonction de la machine
-- Correction		: problème de collision quand on change de vitesse ou quand on baisse trop l'UPS : partiellement résolu (direction simple), partiellement contourné (direction composée)
-- Correction		: bug graphique : une bombe en panne ne doit plus être animée dans l'instance SBM1
-- Correction		: bug de GUI : dans le mode quicklaunch, le niveau était coupé verticalement car affiché derrière la barre de titre de la fenêtre
-- Nouveauté	: traduction du fichier de langue en français
+- Nouveauté		: scripts de lancement/compilation pour Windows et BASH
+- Correction	: utilisation dans la GUI d'une méthode qui provoque une exception sous Linux, quand on essaie de convertir une image en niveaux de gris avec BufferedImageOp. Méthode alternative employée à la place.
+- Nouveauté		: documents relatifs à la licence GPL
+- Nouveauté		: fichiers d'information dans la racine du projet
+- Nouveauté		: modification de l'API d'IA demanière à refléter les différents types de bombes, items et flammes  
+- Nouveauté		: commentaires complets des classes d'IA
+- Nouveauté		: tournoi simple (ne contenant qu'un seul match)
+- Correction	: bug dans la barre de progression lors du chargement du round
+- Nouveauté		: mode quicklaunch pour jouer un round très rapidement (pas de GUI)
+- Nouveauté		: affichage du score dans le QuickLaunch
+- Nouveauté		: ajustement automatique du FPS en fonction de la machine
+- Correction	: problème de collision quand on change de vitesse ou quand on baisse trop l'UPS : partiellement résolu (direction simple), partiellement contourné (direction composée)
+- Correction	: bug graphique : une bombe en panne ne doit plus être animée dans l'instance SBM1
+- Correction	: bug de GUI : dans le mode quicklaunch, le niveau était coupé verticalement car affiché derrière la barre de titre de la fenêtre
+- Nouveauté		: traduction du fichier de langue en français
 - Modification	: ajout dans la police de caractères des voyelles accentuées, cédille et autres
-- Correction		: bug lors du décompte des items au début du round
-- Correction		: bug dans le TrajectoryMgr qui empêchait une bombe atterrissant dans des flammes d'exploser normalement  
+- Correction	: bug lors du décompte des items au début du round
+- Correction	: bug dans le TrajectoryMgr qui empêchait une bombe atterrissant dans des flammes d'exploser normalement  
 
 + beta.001
-- modification : jeu nettoyé de toutes les ressources qui ne sont pas encore utilisées
+- modification	: jeu nettoyé de toutes les ressources qui ne sont pas encore utilisées
 - correction	: bug dans la GUI lorsqu'on utilise une résolution carrée : les itemset et initialitem dans la présentation des rounds sont coupés (certains items sont hors-écran)
 - correction	: bug graphique >> les textes des boutons sont coupés
-- correction : bug de gameplay dans SBM1 : le temps de latence des bombes était deux fois trop court
-- modification : dans la GUI, les boutons pas encore implémentés sont désactivés
-- nouveauté : activation et implémentation de l'option quickmatch dans le menu principal, gestion de la cohérence avec l'option tournament
-- correction : quelques bugs concernant la taille des différents éléments graphiques dans la GUI
-- nouveauté : les tooltips apparaissent plus rapidement (200 ms)
+- correction	: bug de gameplay dans SBM1 : le temps de latence des bombes était deux fois trop court
+- modification 	: dans la GUI, les boutons pas encore implémentés sont désactivés
+- nouveauté 	: activation et implémentation de l'option quickmatch dans le menu principal, gestion de la cohérence avec l'option tournament
+- correction 	: quelques bugs concernant la taille des différents éléments graphiques dans la GUI
+- nouveauté 	: les tooltips apparaissent plus rapidement (200 ms)
 
 + beta.002
 - modification : noms des joueurs
