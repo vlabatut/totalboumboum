@@ -27,10 +27,10 @@ import java.awt.BorderLayout;
 import fr.free.totalboumboum.gui.common.structure.MenuContainer;
 import fr.free.totalboumboum.gui.common.structure.panel.menu.MenuPanel;
 
-public class TrnmntContainer extends MenuPanel implements MenuContainer
+public class TournamenuContainer extends MenuPanel implements MenuContainer
 {	private static final long serialVersionUID = 1L;
 
-	public TrnmntContainer(MenuContainer container, MenuPanel parent)
+	public TournamenuContainer(MenuContainer container, MenuPanel parent)
 	{	super(container.getMenuWidth(),container.getMenuHeight());
 		
 		// layout
@@ -44,7 +44,7 @@ public class TrnmntContainer extends MenuPanel implements MenuContainer
 		this.parent = parent;
 		
 		// split panel
-		tournamentSplitPanel = new TrnmntSplitPanel(this,parent);
+		tournamentSplitPanel = new TournamenuSplitPanel(this,parent);
 		setMenuPanel(tournamentSplitPanel);
 	}	
 	
@@ -55,7 +55,7 @@ public class TrnmntContainer extends MenuPanel implements MenuContainer
 	/////////////////////////////////////////////////////////////////
 	// SPLIT PANELS		/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	private TrnmntSplitPanel tournamentSplitPanel;
+	private TournamenuSplitPanel tournamentSplitPanel;
 	
 	public void initTournament()
 	{	if(tournamentSplitPanel.initTournament())

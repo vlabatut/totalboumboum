@@ -22,7 +22,32 @@ import fr.free.totalboumboum.tools.XmlTools;
 
 public class SpritePreviewLoader
 {
+	private static boolean loadAuthor;
+	private static boolean loadImages;
+	private static boolean loadName;
+	private static boolean loadSource;
+	
+	
+	
 	public static SpritePreview loadHeroPreview(String packName, String spriteName) throws ParserConfigurationException, SAXException, IOException, ClassNotFoundException
+	{	loadAuthor = true;
+		loadImages = true;
+		loadName = true;
+		loadSource = true;
+		SpritePreview result = loadHeroPreviewCommon(packName,spriteName);
+		return result;
+	}
+
+	public static SpritePreview loadHeroPreviewOnlyName(String packName, String spriteName) throws ParserConfigurationException, SAXException, IOException, ClassNotFoundException
+	{	loadAuthor = false;
+		loadImages = false;
+		loadName = true;
+		loadSource = false;
+		SpritePreview result = loadHeroPreviewCommon(packName,spriteName);
+		return result;
+	}
+
+	public static SpritePreview loadHeroPreviewCommon(String packName, String spriteName) throws ParserConfigurationException, SAXException, IOException, ClassNotFoundException
 	{	String folder = FileTools.getHeroesPath()+File.separator+packName+File.separator+spriteName;
 		Element root = SpriteFactoryLoader.openFile(folder);
 		SpritePreview result = loadSpriteElement(root,folder);
@@ -32,7 +57,11 @@ public class SpritePreviewLoader
 	}
 
 	public static SpritePreview loadSpritePreview(String folder) throws ParserConfigurationException, SAXException, IOException, ClassNotFoundException
-	{	Element root = SpriteFactoryLoader.openFile(folder);
+	{	loadAuthor = true;
+		loadImages = true;
+		loadName = true;
+		loadSource = true;
+		Element root = SpriteFactoryLoader.openFile(folder);
 		SpritePreview result = loadSpriteElement(root,folder);
 		result.setPack(null);//TODO à compléter en extrayant le pack du chemin folder
 		result.setFolder(new File(folder).getName());
@@ -41,10 +70,14 @@ public class SpritePreviewLoader
 
 	private static SpritePreview loadSpriteElement(Element root, String folder) throws IOException, ParserConfigurationException, SAXException
 	{	SpritePreview result = new SpritePreview();
-		loadNameElement(root,result);
-		loadAuthorElement(root, result);
-		loadSourceElement(root, result);
-		loadImages(folder,result);
+		if(loadName)
+			loadNameElement(root,result);
+		if(loadAuthor)
+			loadAuthorElement(root, result);
+		if(loadSource)
+			loadSourceElement(root, result);
+		if(loadImages)
+			loadImages(folder,result);
 		return result;
 	}
 	
