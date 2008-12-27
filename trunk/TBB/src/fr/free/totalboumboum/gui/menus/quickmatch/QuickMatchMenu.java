@@ -334,7 +334,6 @@ public class QuickMatchMenu extends InnerMenuPanel
 			setTournamentPlayers();
 			// synch game options
 			ProfilesSelection profilesSelection = ProfilesConfiguration.getSelection(tournament.getProfiles());
-			QuickMatchConfiguration quickMatchConfiguration = Configuration.getGameConfiguration().getQuickMatchConfiguration();
 			quickMatchConfiguration.setProfilesSelection(profilesSelection);
 			// set levels panel
 			levelsData.setQuickMatchConfiguration(quickMatchConfiguration);
