@@ -1,5 +1,7 @@
 package fr.free.totalboumboum.engine.container.tile;
 
+import java.io.Serializable;
+
 /*
  * Total Boum Boum
  * Copyright 2008 Vincent Labatut 
@@ -21,8 +23,9 @@ package fr.free.totalboumboum.engine.container.tile;
  * 
  */
 
-public class ValueTile
-{
+public class ValueTile implements Serializable
+{	private static final long serialVersionUID = 1L;
+
 	private float proba;
 	private String block;
 	private String item;

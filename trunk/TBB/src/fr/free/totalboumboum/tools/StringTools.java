@@ -106,14 +106,14 @@ public class StringTools
 		Calendar calendar = GregorianCalendar.getInstance();
 		calendar.setTime(date);
 		int year = calendar.get(Calendar.YEAR);
-		int month = calendar.get(Calendar.MONTH+1);
+		int month = calendar.get(Calendar.MONTH)+1;
 		int day = calendar.get(Calendar.DAY_OF_MONTH);
 		int hourOfDay = calendar.get(Calendar.HOUR_OF_DAY);
 		int minute = calendar.get(Calendar.MINUTE);
 		int second = calendar.get(Calendar.SECOND);
 		NumberFormat nf = NumberFormat.getIntegerInstance();
 		nf.setMinimumIntegerDigits(2);
-		String result = year+"-"+nf.format(month)+"-"+nf.format(day)+"T"+nf.format(hourOfDay)+":"+nf.format(minute)+nf.format(second);
+		String result = year+"-"+nf.format(month)+"-"+nf.format(day)+"T"+nf.format(hourOfDay)+":"+nf.format(minute)+":"+nf.format(second);
 		return result;
 	}
 }

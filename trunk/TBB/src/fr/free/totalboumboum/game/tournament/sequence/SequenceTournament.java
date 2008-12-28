@@ -25,7 +25,6 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Collections;
 import java.util.GregorianCalendar;
-import java.util.Iterator;
 import java.util.Random;
 import java.util.Set;
 import java.util.TreeSet;
@@ -39,7 +38,7 @@ import fr.free.totalboumboum.game.statistics.StatisticTournament;
 import fr.free.totalboumboum.game.tournament.AbstractTournament;
 
 public class SequenceTournament extends AbstractTournament
-{
+{	private static final long serialVersionUID = 1L;
 
 	/////////////////////////////////////////////////////////////////
 	// LIMIT			/////////////////////////////////////////////
@@ -65,7 +64,7 @@ public class SequenceTournament extends AbstractTournament
 			randomizeMatches();
 		
 		// NOTE vérifier si le nombre de joueurs sélectionnés correspond
-		iterator = matches.iterator();
+		currentIndex = 0;
 		stats = new StatisticTournament(this);
 		stats.initStartDate();
 	}
@@ -80,7 +79,8 @@ public class SequenceTournament extends AbstractTournament
 	@Override
 	public void progress()
 	{	if(!isOver())
-		{	Match match = iterator.next();
+		{	Match match = matches.get(currentIndex);
+			currentIndex++;
 			currentMatch = match.copy();
 			currentMatch.init(profiles);
 		}
@@ -112,7 +112,7 @@ public class SequenceTournament extends AbstractTournament
 	private boolean randomOrder;
 	private ArrayList<Match> matches = new ArrayList<Match>();
 	private Match currentMatch;
-	private Iterator<Match> iterator;
+	private int currentIndex;
 
 	public boolean getRandomOrder()
 	{	return randomOrder;
@@ -135,10 +135,10 @@ public class SequenceTournament extends AbstractTournament
 		StatisticMatch statsMatch = currentMatch.getStats();
 		stats.addStatisticMatch(statsMatch);
 		// iterator
-		if(!iterator.hasNext())
+		if(currentIndex>=matches.size())
 		{	if(randomOrder)
 				randomizeMatches();
-			iterator = matches.iterator();		
+			currentIndex = 0;
 		}
 		// limits
 		if(getLimits().testLimit(this))

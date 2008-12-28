@@ -34,7 +34,8 @@ import fr.free.totalboumboum.game.statistics.StatisticHolder;
  *
  */
 public class LimitLastStanding implements RoundLimit
-{	
+{	private static final long serialVersionUID = 1L;
+
 	public LimitLastStanding(int threshold, ComparatorCode comparatorCode, PointsProcessor pointProcessor)
 	{	this.threshold = threshold;
 		this.comparatorCode = comparatorCode;

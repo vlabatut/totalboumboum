@@ -37,7 +37,8 @@ import fr.free.totalboumboum.game.statistics.StatisticHolder;
  *
  */
 public class LimitTime implements TournamentLimit, MatchLimit, RoundLimit
-{
+{	private static final long serialVersionUID = 1L;
+
 	public LimitTime(long threshold, ComparatorCode comparatorCode, PointsProcessor pointProcessor)
 	{	this.threshold = threshold;	
 		this.comparatorCode = comparatorCode;

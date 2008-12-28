@@ -21,10 +21,13 @@ package fr.free.totalboumboum.configuration.profile;
  * 
  */
 
+import java.io.Serializable;
+
 import fr.free.totalboumboum.engine.control.PlayerControl;
 
-public class Profile
-{
+public class Profile implements Serializable
+{	private static final long serialVersionUID = 1L;
+
 	public Profile()
 	{	name = null;
 		defaultSprite = new SpriteInfo();
@@ -134,7 +137,7 @@ public class Profile
 	/////////////////////////////////////////////////////////////////
 	// PORTRAITS		/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	private Portraits portraits;
+	transient private Portraits portraits;
 
 	public Portraits getPortraits()
 	{	return portraits;
@@ -147,7 +150,7 @@ public class Profile
 	/////////////////////////////////////////////////////////////////
 	// CONTROLS			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	private PlayerControl spriteControl;
+	transient private PlayerControl spriteControl;
 	private int controlSettingsIndex = 0;
 
 	public int getControlSettingsIndex()

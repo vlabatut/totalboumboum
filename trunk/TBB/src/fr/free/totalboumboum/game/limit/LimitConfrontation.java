@@ -33,7 +33,8 @@ import fr.free.totalboumboum.game.statistics.StatisticHolder;
  *
  */
 public class LimitConfrontation implements TournamentLimit, MatchLimit
-{	
+{	private static final long serialVersionUID = 1L;
+	
 	public LimitConfrontation(int threshold, ComparatorCode comparatorCode, PointsProcessor pointProcessor)
 	{	this.threshold = threshold;	
 		this.comparatorCode = comparatorCode;

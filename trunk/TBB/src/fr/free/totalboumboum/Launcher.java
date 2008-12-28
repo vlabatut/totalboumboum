@@ -821,8 +821,11 @@ public class Launcher
 	 * - correction : bug empêchant de sortir définitivement d'un tournoi
 	 * - correction : bug de placement des joueurs de gauche dans le niveau testAI
 	 * - nouveauté : bouton d'enregistrement en cours de partie
-	 * 
 	 * - nouveauté : enregistrement à la demande
+	 * 
+	 * - nouveauté : possibilité de créer un nouveau slot d'enregistrement
+	 * - nouveauté : possibilité de supprimer un slot d'enregistrement existant
+	 * - nouveauté : chargement d'une partie préalablement enregistrée
 	 * - nouveauté : enregistrement automatique
 	 * - modification : check sur le nombre de joueurs dans quickstart options et tournament settings + gérer la désactivation des boutons, y compris dans quickmatch (pas commencer tournoi si pas assez de joueurs/rounds)
 	 * 

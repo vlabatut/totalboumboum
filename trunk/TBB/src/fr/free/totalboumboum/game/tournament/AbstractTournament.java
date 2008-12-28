@@ -21,6 +21,7 @@ package fr.free.totalboumboum.game.tournament;
  * 
  */
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Set;
 
@@ -29,8 +30,9 @@ import fr.free.totalboumboum.game.match.Match;
 import fr.free.totalboumboum.game.statistics.StatisticHolder;
 import fr.free.totalboumboum.game.statistics.StatisticTournament;
 
-public abstract class AbstractTournament implements StatisticHolder
-{	
+public abstract class AbstractTournament implements StatisticHolder, Serializable
+{	private static final long serialVersionUID = 1L;
+
 	/////////////////////////////////////////////////////////////////
 	// GAME		/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
@@ -113,7 +115,7 @@ public abstract class AbstractTournament implements StatisticHolder
 	/////////////////////////////////////////////////////////////////
 	// PANEL			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	protected TournamentRenderPanel panel;
+	transient protected TournamentRenderPanel panel;
 	
 	public void setPanel(TournamentRenderPanel panel)
 	{	this.panel = panel;

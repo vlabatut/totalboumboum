@@ -35,8 +35,7 @@ import fr.free.totalboumboum.engine.content.sprite.item.ItemFactory;
 
 
 public class Itemset
-{	
-	// components
+{	// components
 	private HashMap<String,ItemFactory> itemFactories;
 
 	public Itemset(HashMap<String,ItemFactory> itemFactories) throws ParserConfigurationException, SAXException, IOException, ClassNotFoundException

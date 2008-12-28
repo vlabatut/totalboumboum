@@ -25,7 +25,7 @@ import java.awt.image.BufferedImage;
 import java.util.HashMap;
 
 public class Portraits
-{
+{	
 	public static final String INGAME_LOST = "LOST";
 	public static final String INGAME_NORMAL = "NORMAL";
 	public static final String INGAME_OUT = "OUT";

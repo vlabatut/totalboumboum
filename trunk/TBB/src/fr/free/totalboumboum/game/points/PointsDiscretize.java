@@ -42,7 +42,8 @@ import fr.free.totalboumboum.game.statistics.StatisticHolder;
  */
 
 public class PointsDiscretize extends PointsProcessor implements PPFunction
-{
+{	private static final long serialVersionUID = 1L;
+
 	public PointsDiscretize(PointsProcessor source, float[] thresholds, float[] values)
 	{	this.source = source;
 		this.thresholds = thresholds;

@@ -41,8 +41,7 @@ import fr.free.totalboumboum.engine.player.Player;
  */
 
 public abstract class AiManager extends AbstractAiManager<AiAction>
-{
-	/**
+{	/**
 	 * Construit un gestionnaire pour l'IA passée en paramètre.
 	 * Cette méthode doit être appelée par une classe héritant de celle-ci,
 	 * et placée dans le package contenant l'IA. 

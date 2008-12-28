@@ -24,6 +24,7 @@ package fr.free.totalboumboum.engine.loop;
 import java.awt.Graphics;
 import java.io.File;
 import java.io.IOException;
+import java.io.Serializable;
 import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -64,8 +65,10 @@ import fr.free.totalboumboum.game.round.Round;
 import fr.free.totalboumboum.game.statistics.StatisticEvent;
 import fr.free.totalboumboum.tools.FileTools;
 
-public class Loop implements Runnable
-{	private Round round;
+public class Loop implements Runnable, Serializable
+{	private static final long serialVersionUID = 1L;
+
+	private Round round;
 	
 	public Loop(Round round)
 	{	this.round = round;
@@ -278,7 +281,7 @@ public class Loop implements Runnable
 	/////////////////////////////////////////////////////////////////
 	// GRAPHICS			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	private LoopRenderPanel panel;
+	transient private LoopRenderPanel panel;
 
 	public void setPanel(LoopRenderPanel panel)
 	{	loadLock.lock();

@@ -22,6 +22,7 @@ package fr.free.totalboumboum.game.match;
  */
 
 import java.io.IOException;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Collections;
@@ -45,8 +46,9 @@ import fr.free.totalboumboum.game.statistics.StatisticMatch;
 import fr.free.totalboumboum.game.statistics.StatisticRound;
 import fr.free.totalboumboum.game.tournament.AbstractTournament;
 
-public class Match implements StatisticHolder
-{	
+public class Match implements StatisticHolder, Serializable
+{	private static final long serialVersionUID = 1L;
+
 	public Match(AbstractTournament tournament)
 	{	this.tournament = tournament;
 	}
@@ -68,6 +70,10 @@ public class Match implements StatisticHolder
 	// TOURNAMENT		/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	private AbstractTournament tournament;
+	
+	public AbstractTournament getTournament()
+	{	return tournament;	
+	}
 	
 	/////////////////////////////////////////////////////////////////
 	// GAME				/////////////////////////////////////////////
@@ -95,7 +101,7 @@ public class Match implements StatisticHolder
 		}
 */		
 		// rounds
-		iterator = rounds.iterator();
+    	currentIndex = 0;
 		// stats
 		stats = new StatisticMatch(this);
 		stats.initStartDate();
@@ -110,7 +116,8 @@ public class Match implements StatisticHolder
 	
 	public void progress() throws IllegalArgumentException, SecurityException, ParserConfigurationException, SAXException, IOException, ClassNotFoundException, IllegalAccessException, NoSuchFieldException
 	{	if(!isOver())
-		{	Round round = iterator.next();
+		{	Round round = rounds.get(currentIndex);
+			currentIndex++;
 			currentRound = round.copy();
 			currentRound.init();
 		}
@@ -237,7 +244,7 @@ public class Match implements StatisticHolder
 	// ROUNDS			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	private Round currentRound;
-	private Iterator<Round> iterator;
+	private int currentIndex;
 	
 	public Round getCurrentRound()
 	{	return currentRound;	
@@ -247,10 +254,10 @@ public class Match implements StatisticHolder
 		StatisticRound statsRound = currentRound.getStats();
 		stats.addStatisticRound(statsRound);
 		// iterator
-		if(!iterator.hasNext())
+		if(currentIndex>=rounds.size())
 		{	if(randomOrder)
 				randomizeRounds();
-			iterator = rounds.iterator();		
+			currentIndex = 0;		
 		}
 		// limits
 		if(limits.testLimit(this))
@@ -273,7 +280,6 @@ public class Match implements StatisticHolder
 	public void finish()
 	{	// rounds
 		currentRound = null;
-		iterator = null;
 		rounds.clear();
 		// limits
 		limits.finish();
@@ -313,7 +319,7 @@ public class Match implements StatisticHolder
 	/////////////////////////////////////////////////////////////////
 	// PANEL			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	private MatchRenderPanel panel;
+	transient private MatchRenderPanel panel;
 	
 	public void setPanel(MatchRenderPanel panel)
 	{	this.panel = panel;

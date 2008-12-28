@@ -1,5 +1,8 @@
 package fr.free.totalboumboum.configuration.profile;
 
+import java.io.Serializable;
+
+
 /*
  * Total Boum Boum
  * Copyright 2008 Vincent Labatut 
@@ -21,8 +24,9 @@ package fr.free.totalboumboum.configuration.profile;
  * 
  */
 
-public class SpriteInfo
-{
+public class SpriteInfo implements Serializable
+{	private static final long serialVersionUID = 1L;
+
 	public SpriteInfo copy()
 	{	SpriteInfo result = new SpriteInfo();
 		result.setPack(pack);

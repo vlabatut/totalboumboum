@@ -21,12 +21,14 @@ package fr.free.totalboumboum.game.points;
  * 
  */
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
 import fr.free.totalboumboum.game.statistics.StatisticHolder;
 
-public abstract class PointsProcessor
-{	
+public abstract class PointsProcessor implements Serializable
+{	private static final long serialVersionUID = 1L;
+	
 	public abstract float[] process(StatisticHolder holder);
 	
 	/////////////////////////////////////////////////////////////////

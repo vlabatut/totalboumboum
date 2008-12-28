@@ -30,7 +30,8 @@ import fr.free.totalboumboum.engine.content.sprite.bomb.Bomb;
 import fr.free.totalboumboum.engine.content.sprite.bomb.BombFactory;
 
 public class Bombset
-{	private ArrayList<BombFactory> bombFactories;
+{	
+	private ArrayList<BombFactory> bombFactories;
 	private ArrayList<ArrayList<StateAbility>> requiredAbilities;
 	
 	public Bombset()

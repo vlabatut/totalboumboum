@@ -37,7 +37,8 @@ import fr.free.totalboumboum.game.statistics.StatisticHolder;
  */
 
 public class PointsConstant extends PointsProcessor implements PPConstant
-{	
+{	private static final long serialVersionUID = 1L;
+
 	public PointsConstant(float value)
 	{	this.value = value;	
 	}

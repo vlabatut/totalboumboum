@@ -31,8 +31,7 @@ import fr.free.totalboumboum.engine.content.sprite.SpriteFactory;
 import fr.free.totalboumboum.engine.content.sprite.item.ItemEventManager;
 
 public class ItemFactory extends SpriteFactory<Item>
-{	
-	private ArrayList<AbstractAbility> itemAbilities;
+{	private ArrayList<AbstractAbility> itemAbilities;
 	private String itemName;
 	
 	public ItemFactory(Level level, String itemName)

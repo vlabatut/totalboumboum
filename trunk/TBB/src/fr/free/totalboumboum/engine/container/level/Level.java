@@ -45,8 +45,7 @@ import fr.free.totalboumboum.tools.FileTools;
 import fr.free.totalboumboum.tools.StringTools;
 
 public class Level
-{	
-	public Level(Loop loop)				
+{	public Level(Loop loop)				
 	{	this.loop = loop;
 	}
 	

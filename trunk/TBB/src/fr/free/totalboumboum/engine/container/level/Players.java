@@ -21,13 +21,15 @@ package fr.free.totalboumboum.engine.container.level;
  * 
  */
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
 
 import fr.free.totalboumboum.engine.player.PlayerLocation;
 
-public class Players
-{
+public class Players implements Serializable
+{	private static final long serialVersionUID = 1L;
+
 	private HashMap<Integer, PlayerLocation[]> locations = new HashMap<Integer, PlayerLocation[]>();
 	private ArrayList<String> initialItems = new ArrayList<String>();
 		

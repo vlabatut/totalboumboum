@@ -41,7 +41,8 @@ import fr.free.totalboumboum.game.statistics.StatisticHolder;
  */
 
 public class PointsRankings extends PointsProcessor implements PPFunction
-{
+{	private static final long serialVersionUID = 1L;
+
 	public PointsRankings(ArrayList<PointsProcessor> sources, boolean inverted)
 	{	this.sources.addAll(sources);
 		this.inverted = inverted;

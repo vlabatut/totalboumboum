@@ -47,7 +47,8 @@ import fr.free.totalboumboum.game.statistics.StatisticHolder;
  */
 
 public class PointsRankpoints extends PointsProcessor implements PPFunction
-{
+{	private static final long serialVersionUID = 1L;
+
 	public PointsRankpoints(ArrayList<PointsProcessor> sources, float[] values, boolean inverted, boolean exaequoShare)
 	{	this.source = new PointsRankings(sources,inverted);
 		this.values = values;

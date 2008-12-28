@@ -47,8 +47,7 @@ import fr.free.totalboumboum.engine.player.Player;
  */
 
 public abstract class AbstractAiManager<V>
-{
-    /**
+{	/**
      * contruit un nouveau manager pour l'IA passé en paramètre.
      * Ce constructeur est destiné à être appelé par le constructeur situé dans 
      * la classe héritant de celle-ci et située dans le dossier de l'IA   

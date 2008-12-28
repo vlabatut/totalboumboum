@@ -1,5 +1,7 @@
 package fr.free.totalboumboum.engine.container.zone;
 
+import java.io.Serializable;
+
 /*
  * Total Boum Boum
  * Copyright 2008 Vincent Labatut 
@@ -21,9 +23,10 @@ package fr.free.totalboumboum.engine.container.zone;
  * 
  */
 
-public class ZoneTile
+public class ZoneTile implements Serializable
 {
-	
+	private static final long serialVersionUID = 1L;
+
 	public ZoneTile(int line, int col)
 	{	this.line = line;
 		this.col = col;

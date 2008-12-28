@@ -125,7 +125,7 @@ public class TournamenuMenu extends InnerMenuPanel
 	private TournamentConfiguration tournamentConfiguration;
 	
 	public boolean initTournament()
-	{	boolean result = false;
+	{	boolean result = true;
 		// init tournament
 		if(tournament==null || tournament.isOver())
 		{	// init configuration
