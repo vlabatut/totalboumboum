@@ -824,6 +824,7 @@ public class Launcher
 	 * 
 	 * - nouveauté : enregistrement à la demande
 	 * - nouveauté : enregistrement automatique
+	 * - modification : check sur le nombre de joueurs dans quickstart options et tournament settings + gérer la désactivation des boutons, y compris dans quickmatch (pas commencer tournoi si pas assez de joueurs/rounds)
 	 * 
 	 * *******************************************************
 	 * *********************** A FAIRE ***********************

@@ -37,6 +37,7 @@ public class GuiKeys
 	public static final String ADVANCED = "Advanced";
 	public static final String AI = "Ai";
 	public static final String ALLOWED = "Allowed";
+	public static final String ARCHIVE = "Archive";
 	public static final String AUTHOR = "Author";
 	public static final String AUTOKILL = "Autokill";
 	public static final String AVAILABLE = "Available";
@@ -106,9 +107,11 @@ public class GuiKeys
 	public static final String LOCATION = "Location";
 	public static final String MAIN = "Main";
 	public static final String MATCH = "Match";
+	public static final String MATCHES = "Matches";
 	public static final String MENU = "Menu";
 	public static final String MINUS = "Minus";
 	public static final String NAME = "Name";
+	public static final String NEW = "New";
 	public static final String NEXT = "Next";
 	public static final String NO_SHARE = "NoShare";
 	public static final String NO_CONTROLS = "NoControls";
@@ -157,6 +160,7 @@ public class GuiKeys
 	public static final String SETTINGS = "Settings";
 	public static final String SINGLE = "Single";
 	public static final String SPRITE = "Sprite";
+	public static final String START = "Start";
 	public static final String ULTRAMARINE = "Ultramarine";
 	public static final String SCORE = "Score";
 	public static final String SHARE = "Share";
@@ -511,10 +515,13 @@ public class GuiKeys
 	/* GAME */
 		/* SAVE */
 		public static final String GAME_SAVE = GAME+SAVE;
+		public static final String GAME_SAVE_TITLE = GAME_SAVE+TITLE;
 			/* BUTTONS */	
 			public static final String GAME_SAVE_BUTTON = GAME_SAVE+BUTTON;
 			public static final String GAME_SAVE_BUTTON_CANCEL = GAME_SAVE_BUTTON+CURRENT+CANCEL;
 			public static final String GAME_SAVE_BUTTON_CONFIRM = GAME_SAVE_BUTTON+CONFIRM;
+			public static final String GAME_SAVE_BUTTON_DELETE = GAME_SAVE_BUTTON+DELETE;
+			public static final String GAME_SAVE_BUTTON_NEW = GAME_SAVE_BUTTON+CURRENT+NEW;
 		/* TOURNAMENT */
 		public static final String GAME_TOURNAMENT = GAME+TOURNAMENT;
 			/* BUTTONS */	
@@ -598,6 +605,21 @@ public class GuiKeys
 	public static final String COMMON_AI_NAME = COMMON_AI+NAME;
 	public static final String COMMON_AI_PACK = COMMON_AI+PACK;			
 			
+	/* ARCHIVE */
+	public static final String COMMON_ARCHIVE = COMMON+ARCHIVE;
+	public static final String COMMON_ARCHIVE_NAME = COMMON_ARCHIVE+NAME;
+	public static final String COMMON_ARCHIVE_TYPE = COMMON_ARCHIVE+TYPE;			
+	public static final String COMMON_ARCHIVE_CONFRONTATIONS = COMMON_ARCHIVE+CONFRONTATIONS;
+	public static final String COMMON_ARCHIVE_PLAYERS = COMMON_ARCHIVE+PLAYERS;
+	public static final String COMMON_ARCHIVE_START = COMMON_ARCHIVE+START;			
+	public static final String COMMON_ARCHIVE_SAVE = COMMON_ARCHIVE+SAVE;
+		/* TYPES */
+		public static final String COMMON_ARCHIVE_TYPES = COMMON_ARCHIVE+TYPES;
+		public static final String COMMON_ARCHIVE_TYPES_CUP = COMMON_ARCHIVE_TYPES+CUP;
+		public static final String COMMON_ARCHIVE_TYPES_LEAGUE = COMMON_ARCHIVE_TYPES+LEAGUE;
+		public static final String COMMON_ARCHIVE_TYPES_SEQUENCE = COMMON_ARCHIVE_TYPES+SEQUENCE;
+		public static final String COMMON_ARCHIVE_TYPES_SINGLE = COMMON_ARCHIVE_TYPES+SINGLE;
+
 	/* BROWSER */
 	public static final String COMMON_BROWSER = COMMON+BROWSER;
 		/* FILE */
