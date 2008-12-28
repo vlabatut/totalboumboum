@@ -390,6 +390,17 @@
 <!-- GAME -->	
 	<group name="Game" >
 
+<!-- SAVE PANEL -->
+		<group name="Save">
+			<text name="Title" value="Save current game"  tooltip="Save current game" />
+			<group name="Button">
+				<text name="Cancel" value="Cancel" tooltip="Cancel and go back to the tournament" />
+				<text name="Confirm" value="Confirm" tooltip="Save and go back to the tournament" />
+				<text name="Delete" value="Delete" tooltip="Delete the selected slot" />
+				<text name="New" value="New" tooltip="Create a new slot" />
+			</group>
+		</group>
+
 <!-- TOURNAMENT PANEL -->
 		<group name="Tournament">
 			<group name="Button">
@@ -474,12 +485,30 @@
 
 <!-- COMMON -->
 	<group name="Common">
+	
+<!-- ARCHIVE -->
+		<group name="Archive">
+			<text name="Name" value="Name" tooltip="Tournament name" />
+			<text name="Type" value="Type" tooltip="Tournament type" />
+			<text name="Confrontations" value="Confrontations" tooltip="Number of played matches/rounds" />
+			<text name="Players" value="Players" tooltip="Players involved" />
+			<text name="Start" value="Start" tooltip="Begining date" />
+			<text name="Save" value="Save" tooltip="Last save date" />
+			<group name="Types">
+				<text name="Cup" value="Cup" tooltip="Knock-out tournament" />
+				<text name="League" value="League" tooltip="Championship tournament" />
+				<text name="Sequence" value="Sequence" tooltip="The same players play several games" />
+				<text name="Single" value="Single" tooltip="Only one game is played" />
+			</group>
+		</group>
+	
 <!-- AI -->
 		<group name="Ai">
 			<text name="Author" value="Author" tooltip="Author of the artificial intelligence" />
 			<text name="Name" value="Name" tooltip="Name of the artificial intelligence" />
 			<text name="Notes" value="Notes" tooltip="Comments from the author" />
 		</group>
+		
 <!-- BROWSE -->
 		<group name="Browser">
 			<group name="File">

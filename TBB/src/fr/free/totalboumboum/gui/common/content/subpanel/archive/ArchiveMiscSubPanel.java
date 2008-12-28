@@ -1,4 +1,4 @@
-package fr.free.totalboumboum.gui.common.content.subpanel.tournament;
+package fr.free.totalboumboum.gui.common.content.subpanel.archive;
 
 /*
  * Total Boum Boum
@@ -22,42 +22,38 @@ package fr.free.totalboumboum.gui.common.content.subpanel.tournament;
  */
 
 import java.awt.Color;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Set;
 
-import fr.free.totalboumboum.game.tournament.AbstractTournament;
-import fr.free.totalboumboum.game.tournament.cup.CupTournament;
-import fr.free.totalboumboum.game.tournament.league.LeagueTournament;
-import fr.free.totalboumboum.game.tournament.sequence.SequenceTournament;
-import fr.free.totalboumboum.game.tournament.single.SingleTournament;
+import fr.free.totalboumboum.game.archive.GameArchive;
+import fr.free.totalboumboum.game.archive.TournamentType;
 import fr.free.totalboumboum.gui.common.structure.subpanel.UntitledSubPanelTable;
 import fr.free.totalboumboum.gui.data.configuration.GuiConfiguration;
 import fr.free.totalboumboum.gui.tools.GuiKeys;
 import fr.free.totalboumboum.gui.tools.GuiTools;
-import fr.free.totalboumboum.tools.StringTools;
 
-public class TournamentMiscSubPanel extends UntitledSubPanelTable
+public class ArchiveMiscSubPanel extends UntitledSubPanelTable
 {	private static final long serialVersionUID = 1L;
 	
-	public TournamentMiscSubPanel(int width, int height, int lines)
+	public ArchiveMiscSubPanel(int width, int height, int lines)
 	{	super(width,height,1,1,1,true);
 		
 		this.lines = lines;
-		setTournament(null);
+		setGameArchive(null);
 	}
 		
 	/////////////////////////////////////////////////////////////////
-	// TOURNAMENT		/////////////////////////////////////////////
+	// ARCHIVE			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	private AbstractTournament tournament;
+	private GameArchive gameArchive;
 	private int lines;
 
-	public AbstractTournament getTournament()
-	{	return tournament;	
+	public GameArchive getGameArchive()
+	{	return gameArchive;	
 	}
 	
-	public void setTournament(AbstractTournament tournament)
-	{	this.tournament = tournament;
+	public void setGameArchive(GameArchive gameArchive)
+	{	this.gameArchive = gameArchive;
 		
 		// sizes
 		int colSubs = 2;
@@ -67,45 +63,58 @@ public class TournamentMiscSubPanel extends UntitledSubPanelTable
 		// icons
 		ArrayList<String> keys = new ArrayList<String>();
 		if(showName)
-			keys.add(GuiKeys.COMMON_TOURNAMENT_NAME);
-		if(showAuthor)
-			keys.add(GuiKeys.COMMON_TOURNAMENT_AUTHOR);
+			keys.add(GuiKeys.COMMON_ARCHIVE_NAME);
 		if(showType)
-			keys.add(GuiKeys.COMMON_TOURNAMENT_TYPE);
-		if(showAllowedPlayerNumbers)
-			keys.add(GuiKeys.COMMON_TOURNAMENT_ALLOWED_PLAYERS);
+			keys.add(GuiKeys.COMMON_ARCHIVE_TYPE);
+		if(showConfrontations)
+			keys.add(GuiKeys.COMMON_ARCHIVE_CONFRONTATIONS);
+		if(showStart)
+			keys.add(GuiKeys.COMMON_ARCHIVE_START);
+		if(showSave)
+			keys.add(GuiKeys.COMMON_ARCHIVE_SAVE);
 		
-		if(tournament!=null)
+		if(gameArchive!=null)
 		{	// text
 			ArrayList<String> textValues = new ArrayList<String>();
 			ArrayList<String> tooltipValues = new ArrayList<String>();
 			if(showName)
-			{	textValues.add(tournament.getName());
-				tooltipValues.add(tournament.getName());
-			}
-			if(showAuthor)
-			{	textValues.add(tournament.getAuthor());
-				tooltipValues.add(tournament.getAuthor());
+			{	textValues.add(gameArchive.getName());
+				tooltipValues.add(gameArchive.getName());
 			}
 			if(showType)
 			{	String key = "";
-				if(tournament instanceof CupTournament)
-					key = GuiKeys.COMMON_TOURNAMENT_TYPES_CUP;
-				else if(tournament instanceof LeagueTournament)
-					key = GuiKeys.COMMON_TOURNAMENT_TYPES_LEAGUE;
-				else if(tournament instanceof SequenceTournament)
-					key = GuiKeys.COMMON_TOURNAMENT_TYPES_SEQUENCE;
-				else if(tournament instanceof SingleTournament)
-					key = GuiKeys.COMMON_TOURNAMENT_TYPES_SINGLE;
+				TournamentType type = gameArchive.getType();
+				if(type==TournamentType.CUP)
+					key = GuiKeys.COMMON_ARCHIVE_TYPES_CUP;
+				else if(type==TournamentType.LEAGUE)
+					key = GuiKeys.COMMON_ARCHIVE_TYPES_LEAGUE;
+				else if(type==TournamentType.SEQUENCE)
+					key = GuiKeys.COMMON_ARCHIVE_TYPES_SEQUENCE;
+				else if(type==TournamentType.SINGLE)
+					key = GuiKeys.COMMON_ARCHIVE_TYPES_SINGLE;
 				textValues.add(GuiConfiguration.getMiscConfiguration().getLanguage().getText(key));
 				tooltipValues.add(GuiConfiguration.getMiscConfiguration().getLanguage().getText(key+GuiKeys.TOOLTIP));
 			}
-			if(showAllowedPlayerNumbers)
-			{	Set<Integer> allowedPlayers = tournament.getAllowedPlayerNumbers();
-				textValues.add(StringTools.formatAllowedPlayerNumbers(allowedPlayers));
-				tooltipValues.add(StringTools.formatAllowedPlayerNumbers(allowedPlayers));
+			if(showConfrontations)
+			{	String matches = Integer.toString(gameArchive.getPlayedMatches());
+				String rounds = Integer.toString(gameArchive.getPlayedRounds());
+				textValues.add(matches+" ; "+rounds);
+				tooltipValues.add(matches);
+			}
+			if(showStart)
+			{	SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
+				String start = sdf.format(gameArchive.getStartDate());
+				textValues.add(start);
+				tooltipValues.add(start);
 			}
 			
+			if(showSave)
+			{	SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
+				String save = sdf.format(gameArchive.getSaveDate());
+				textValues.add(save);
+				tooltipValues.add(save);
+			}
+
 			// content
 			for(int line=0;line<keys.size();line++)
 			{	// header
@@ -164,24 +173,29 @@ public class TournamentMiscSubPanel extends UntitledSubPanelTable
 	// DISPLAY			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	private boolean showName = true;
-	private boolean showAuthor = true;
 	private boolean showType = true;
-	private boolean showAllowedPlayerNumbers = true;
+	private boolean showConfrontations = true;
+	private boolean showStart = true;
+	private boolean showSave = true;
 
 	public void setShowName(boolean showName)
 	{	this.showName = showName;
-	}
-
-	public void setShowAuthor(boolean showAuthor)
-	{	this.showAuthor = showAuthor;
 	}
 
 	public void setShowType(boolean showType)
 	{	this.showType = showType;
 	}
 
-	public void setShowAllowedPlayerNumbers(boolean showAllowedPlayerNumbers)
-	{	this.showAllowedPlayerNumbers = showAllowedPlayerNumbers;
+	public void setShowConfrontations(boolean showConfrontations)
+	{	this.showConfrontations = showConfrontations;
+	}
+
+	public void setShowStart(boolean showStart)
+	{	this.showStart = showStart;
+	}
+
+	public void setShowSave(boolean showSave)
+	{	this.showSave = showSave;
 	}
 
 }

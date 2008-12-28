@@ -22,8 +22,8 @@ package fr.free.totalboumboum.gui.game.save;
  */
 
 import java.awt.Dimension;
-import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 
 import javax.swing.Box;
 import javax.swing.BoxLayout;
@@ -31,18 +31,12 @@ import javax.xml.parsers.ParserConfigurationException;
 
 import org.xml.sax.SAXException;
 
-import fr.free.totalboumboum.game.limit.Limit;
-import fr.free.totalboumboum.game.limit.TournamentLimit;
-import fr.free.totalboumboum.game.points.PointsProcessor;
-import fr.free.totalboumboum.game.tournament.AbstractTournament;
-import fr.free.totalboumboum.game.tournament.TournamentLoader;
-import fr.free.totalboumboum.game.tournament.sequence.SequenceTournament;
+import fr.free.totalboumboum.game.archive.GameArchive;
+import fr.free.totalboumboum.game.archive.GameArchiveLoader;
+import fr.free.totalboumboum.gui.common.content.subpanel.archive.ArchiveMiscSubPanel;
+import fr.free.totalboumboum.gui.common.content.subpanel.archive.ArchivePlayersSubPanel;
 import fr.free.totalboumboum.gui.common.content.subpanel.browser.FolderBrowserSubPanel;
 import fr.free.totalboumboum.gui.common.content.subpanel.browser.FolderBrowserSubPanelListener;
-import fr.free.totalboumboum.gui.common.content.subpanel.limits.LimitsSubPanelListener;
-import fr.free.totalboumboum.gui.common.content.subpanel.limits.LimitsSubPanel;
-import fr.free.totalboumboum.gui.common.content.subpanel.points.PointsSubPanel;
-import fr.free.totalboumboum.gui.common.content.subpanel.tournament.TournamentMiscSubPanel;
 import fr.free.totalboumboum.gui.common.structure.panel.SplitMenuPanel;
 import fr.free.totalboumboum.gui.common.structure.panel.data.EntitledDataPanel;
 import fr.free.totalboumboum.gui.common.structure.subpanel.SubPanel;
@@ -50,17 +44,16 @@ import fr.free.totalboumboum.gui.tools.GuiKeys;
 import fr.free.totalboumboum.gui.tools.GuiTools;
 import fr.free.totalboumboum.tools.FileTools;
 
-public class SaveData extends EntitledDataPanel implements FolderBrowserSubPanelListener, LimitsSubPanelListener
+public class SaveData extends EntitledDataPanel implements FolderBrowserSubPanelListener
 {	
 	private static final long serialVersionUID = 1L;
 	private static final float SPLIT_RATIO = 0.5f;
 
 	private FolderBrowserSubPanel folderPanel;
-	private LimitsSubPanel<TournamentLimit> limitsPanel;
-	private PointsSubPanel pointsPanel;
-	private TournamentMiscSubPanel miscPanel;
+	private ArchiveMiscSubPanel miscPanel;
+	private ArchivePlayersSubPanel playersPanel;
 
-	private AbstractTournament selectedTournament = null;	
+	@SuppressWarnings("unused")
 	private String baseFolder;
 	
 	public SaveData(SplitMenuPanel container, String baseFolder)
@@ -68,7 +61,7 @@ public class SaveData extends EntitledDataPanel implements FolderBrowserSubPanel
 		this.baseFolder = baseFolder;
 
 		// title
-		setTitleKey(GuiKeys.MENU_RESOURCES_TOURNAMENT_TITLE);
+		setTitleKey(GuiKeys.GAME_SAVE_TITLE);
 		
 		SubPanel mainPanel;
 		// data
@@ -84,9 +77,11 @@ public class SaveData extends EntitledDataPanel implements FolderBrowserSubPanel
 			
 			// list panel
 			{	folderPanel = new FolderBrowserSubPanel(leftWidth,dataHeight);
-				String targetFile = FileTools.FILE_TOURNAMENT+FileTools.EXTENSION_XML;
+				ArrayList<String> targetFiles = new ArrayList<String>();
+				targetFiles.add(FileTools.FILE_ARCHIVE+FileTools.EXTENSION_XML);
+				targetFiles.add(FileTools.FILE_ARCHIVE+FileTools.EXTENSION_DATA);
 				folderPanel.setShowParent(false);
-				folderPanel.setFolder(baseFolder,targetFile);
+				folderPanel.setFolder(baseFolder,targetFiles);
 				folderPanel.addListener(this);
 				mainPanel.add(folderPanel);
 			}
@@ -94,8 +89,8 @@ public class SaveData extends EntitledDataPanel implements FolderBrowserSubPanel
 			mainPanel.add(Box.createHorizontalGlue());
 			
 			// right panel
-			{	int rightHeight = (int)((dataHeight - 2*margin)*0.4);
-				int previewHeight = dataHeight - 2*rightHeight - 2*margin; 
+			{	int miscHeight = (dataHeight - margin)/2;
+				int playersHeight = dataHeight - miscHeight - margin; 
 				
 				SubPanel rightPanel = new SubPanel(rightWidth,dataHeight);
 				rightPanel.setOpaque(false);
@@ -106,22 +101,14 @@ public class SaveData extends EntitledDataPanel implements FolderBrowserSubPanel
 				
 				rightPanel.add(Box.createVerticalGlue());
 
-				{	miscPanel = new TournamentMiscSubPanel(rightWidth,previewHeight,4);
+				{	miscPanel = new ArchiveMiscSubPanel(rightWidth,miscHeight,5);
 					rightPanel.add(miscPanel);
 				}
 
 				rightPanel.add(Box.createRigidArea(new Dimension(margin,margin)));
 
-				{	limitsPanel = new LimitsSubPanel<TournamentLimit>(rightWidth,rightHeight,GuiKeys.MATCH);
-					limitsPanel.addListener(this);
-					rightPanel.add(limitsPanel);
-				}
-
-				rightPanel.add(Box.createRigidArea(new Dimension(margin,margin)));
-
-				{	pointsPanel = new PointsSubPanel(rightWidth,rightHeight,GuiKeys.MATCH);
-					rightPanel.add(pointsPanel);
-					limitSelectionChange();
+				{	playersPanel = new ArchivePlayersSubPanel(rightWidth,playersHeight);
+					rightPanel.add(playersPanel);
 				}
 
 				rightPanel.add(Box.createVerticalGlue());
@@ -132,47 +119,22 @@ public class SaveData extends EntitledDataPanel implements FolderBrowserSubPanel
 		}
 	}
 		
-	private void refreshLimits()
-	{	if(selectedTournament==null || !(selectedTournament instanceof SequenceTournament))
-			limitsPanel.setLimits(null);
-		else
-		{	SequenceTournament seq = (SequenceTournament)selectedTournament;
-			limitsPanel.setLimits(seq.getLimits());
-		
-		}
-	}
-	
 	@Override
 	public void refresh()
 	{	folderPanel.refresh();
-		miscPanel.setTournament(selectedTournament);
-		refreshLimits();
+		miscPanel.setGameArchive(selectedArchive);
+		playersPanel.setGameArchive(selectedArchive);
 	}
 
 	/////////////////////////////////////////////////////////////////
-	// SELECTED TOURNAMENT	/////////////////////////////////////////
+	// SELECTED ARCHIVE		/////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	public AbstractTournament getSelectedTournament()
-	{	return selectedTournament;
-	}
-	
-	public String getSelectedTournamentFile()
-	{	return folderPanel.getSelectedName();
+	private GameArchive selectedArchive = null;	
+
+	public GameArchive getSelectedGameArchive()
+	{	return selectedArchive;
 	}
 
-	/////////////////////////////////////////////////////////////////
-	// LIMITS 			/////////////////////////////////////////////
-	/////////////////////////////////////////////////////////////////
-	
-	@Override
-	public void limitSelectionChange()
-	{	Limit limit = limitsPanel.getSelectedLimit();
-		PointsProcessor pointsProcessor = null;
-		if(limit!=null)
-			pointsProcessor = limit.getPointProcessor();
-		pointsPanel.setPointsProcessor(pointsProcessor);
-	}
-	
 	/////////////////////////////////////////////////////////////////
 	// PACK BROWSER LISTENER		/////////////////////////////////
 	/////////////////////////////////////////////////////////////////
@@ -185,11 +147,10 @@ public class SaveData extends EntitledDataPanel implements FolderBrowserSubPanel
 	public void packBrowserSelectionChange()
 	{	String folder = folderPanel.getSelectedName();
 		if(folder==null)
-			selectedTournament = null;
+			selectedArchive = null;
 		else
 		{	try
-			{	String folderPath = baseFolder+File.separator+folder;
-				selectedTournament = TournamentLoader.loadTournamentFromFolderPath(folderPath);
+			{	selectedArchive = GameArchiveLoader.loadGameArchive(folder);
 			}
 			catch (IllegalArgumentException e)
 			{	e.printStackTrace();
@@ -209,8 +170,14 @@ public class SaveData extends EntitledDataPanel implements FolderBrowserSubPanel
 			catch (ClassNotFoundException e)
 			{	e.printStackTrace();
 			}
+			catch (IllegalAccessException e)
+			{	e.printStackTrace();
+			}
+			catch (NoSuchFieldException e)
+			{	e.printStackTrace();
+			}
 		}
-		miscPanel.setTournament(selectedTournament);
-		refreshLimits();
+		miscPanel.setGameArchive(selectedArchive);
+		playersPanel.setGameArchive(selectedArchive);
 	}
 }

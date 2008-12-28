@@ -391,6 +391,17 @@
 <!-- GAME -->
 	<group name="Game" >
 
+<!-- SAVE PANEL -->
+		<group name="Save">
+			<text name="Title" value="Enregistrer la partie"  tooltip="Enregistrer la partie courante" />
+			<group name="Button">
+				<text name="Cancel" value="Annuler" tooltip="Annuler et revenir au tournoi" />
+				<text name="Confirm" value="Confirmer" tooltip="Enregistrer et revenir au tournoi" />
+				<text name="Delete" value="Supprimer" tooltip="Supprimer l'enregistrement sélectionné" />
+				<text name="New" value="Créer" tooltip="Créer un nouvel enregistrement" />
+			</group>
+		</group>
+
 <!-- TOURNAMENT PANEL -->
 		<group name="Tournament">
 			<group name="Button">
@@ -473,11 +484,28 @@
 
 <!-- COMMON -->
 	<group name="Common">
+	
 <!-- AI -->
 		<group name="Ai">
 			<text name="Author" value="Auteur" tooltip="Auteur de l'intelligence artificielle" />
 			<text name="Name" value="Nom" tooltip="Nom de l'intelligence artificielle" />
 			<text name="Pack" value="Paquet" tooltip="Paquet contenant l'intelligence artificielle" />
+		</group>
+	
+<!-- ARCHIVE -->
+		<group name="Archive">
+			<text name="Name" value="Nom" tooltip="Nom du tournoi" />
+			<text name="Type" value="Type" tooltip="Type de tournoi" />
+			<text name="Confrontations" value="Confrontations" tooltip="Nombre de rencontres/manches jouées" />
+			<text name="Players" value="Joueurs" tooltip="Joueurs participant au tournoi" />
+			<text name="Start" value="Début" tooltip="Date de début du tournoi" />
+			<text name="Save" value="Enregistrement" tooltip="Date du dernier enregistrement" />
+			<group name="Types">
+				<text name="Cup" value="Coupe" tooltip="Tournoi à élimination directe" />
+				<text name="League" value="Ligue" tooltip="Tournoi de type championnat" />
+				<text name="Sequence" value="Séquence" tooltip="Séquence de plusieurs rencontres confrontant les mêmes joueurs" />
+				<text name="Single" value="Simple" tooltip="Tournoi composé d'une seule rencontre" />
+			</group>
 		</group>
 	
 <!-- BROWSE -->

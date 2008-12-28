@@ -25,12 +25,16 @@ import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.io.File;
 import java.io.FileOutputStream;
+import java.io.IOException;
 import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 
 import javax.swing.Box;
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
+import javax.xml.parsers.ParserConfigurationException;
+
+import org.xml.sax.SAXException;
 
 import fr.free.totalboumboum.game.archive.GameArchive;
 import fr.free.totalboumboum.game.archive.GameArchiveSaver;
@@ -63,13 +67,16 @@ public class SaveMenu extends InnerMenuPanel
 
 		// buttons
 		add(Box.createVerticalGlue());
+		buttonNew = GuiTools.createButton(GuiKeys.GAME_SAVE_BUTTON_NEW,buttonWidth,buttonHeight,fontSize,this);
+		buttonDelete = GuiTools.createButton(GuiKeys.GAME_SAVE_BUTTON_DELETE,buttonWidth,buttonHeight,fontSize,this);
+		add(Box.createRigidArea(new Dimension(0,GuiTools.buttonVerticalSpace)));
 		buttonConfirm = GuiTools.createButton(GuiKeys.GAME_SAVE_BUTTON_CONFIRM,buttonWidth,buttonHeight,fontSize,this);
 		add(Box.createRigidArea(new Dimension(0,GuiTools.buttonVerticalSpace)));
 		buttonCancel = GuiTools.createButton(GuiKeys.GAME_SAVE_BUTTON_CANCEL,buttonWidth,buttonHeight,fontSize,this);
 		add(Box.createVerticalGlue());		
 
 		// panels
-		levelData = new SaveData(container,FileTools.getTournamentsPath());
+		levelData = new SaveData(container,FileTools.getSavesPath());
 		container.setDataPart(levelData);
 	}
 
@@ -85,6 +92,10 @@ public class SaveMenu extends InnerMenuPanel
 	private JButton buttonConfirm;
 	@SuppressWarnings("unused")
 	private JButton buttonCancel;
+	@SuppressWarnings("unused")
+	private JButton buttonDelete;
+	@SuppressWarnings("unused")
+	private JButton buttonNew;
 
 	/////////////////////////////////////////////////////////////////
 	// TOURNAMENT					/////////////////////////////////
@@ -103,18 +114,29 @@ public class SaveMenu extends InnerMenuPanel
 		{	replaceWith(parent);
 	    }
 		else if(e.getActionCommand().equals(GuiKeys.GAME_SAVE_BUTTON_CANCEL))
-		{	String folder = levelData.getSelectedFile();
-			// XML file
-			GameArchive gameArchive = GameArchive.getArchive(tournament,folder);
-			GameArchiveSaver.saveGameArchive(gameArchive);
-			// data file
-			String path = FileTools.getSavesPath()+File.separator+folder;
-			String fileName = FileTools.FILE_ARCHIVE+FileTools.EXTENSION_DATA;
-			File file = new File(path+File.separator+fileName);
-			FileOutputStream out = new FileOutputStream(file);
-			ObjectOutputStream oOut = new ObjectOutputStream(out);
-			oOut.writeObject(tournament);
-			oOut.close();
+		{	try
+			{	String folder = levelData.getSelectedGameArchive().getFolder();
+				// XML file
+				GameArchive gameArchive = GameArchive.getArchive(tournament,folder);
+				GameArchiveSaver.saveGameArchive(gameArchive);
+				// data file
+				String path = FileTools.getSavesPath()+File.separator+folder;
+				String fileName = FileTools.FILE_ARCHIVE+FileTools.EXTENSION_DATA;
+				File file = new File(path+File.separator+fileName);
+				FileOutputStream out = new FileOutputStream(file);
+				ObjectOutputStream oOut = new ObjectOutputStream(out);
+				oOut.writeObject(tournament);
+				oOut.close();
+			}
+			catch (ParserConfigurationException e1)
+			{	e1.printStackTrace();
+			}
+			catch (SAXException e1)
+			{	e1.printStackTrace();
+			}
+			catch (IOException e1)
+			{	e1.printStackTrace();
+			}
 			//
 			replaceWith(parent);
 	    }
