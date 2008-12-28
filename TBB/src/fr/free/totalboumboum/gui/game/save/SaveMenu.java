@@ -40,13 +40,14 @@ import fr.free.totalboumboum.game.archive.GameArchive;
 import fr.free.totalboumboum.game.archive.GameArchiveSaver;
 import fr.free.totalboumboum.game.tournament.AbstractTournament;
 import fr.free.totalboumboum.gui.common.structure.panel.SplitMenuPanel;
+import fr.free.totalboumboum.gui.common.structure.panel.data.DataPanelListener;
 import fr.free.totalboumboum.gui.common.structure.panel.menu.InnerMenuPanel;
 import fr.free.totalboumboum.gui.common.structure.panel.menu.MenuPanel;
 import fr.free.totalboumboum.gui.tools.GuiKeys;
 import fr.free.totalboumboum.gui.tools.GuiTools;
 import fr.free.totalboumboum.tools.FileTools;
 
-public class SaveMenu extends InnerMenuPanel
+public class SaveMenu extends InnerMenuPanel implements DataPanelListener
 {	private static final long serialVersionUID = 1L;
 
 	public SaveMenu(SplitMenuPanel container, MenuPanel parent)
@@ -76,8 +77,10 @@ public class SaveMenu extends InnerMenuPanel
 		add(Box.createVerticalGlue());		
 
 		// panels
-		levelData = new SaveData(container,FileTools.getSavesPath());
+		levelData = new SaveData(container,baseFolder);
+		levelData.addListener(this);
 		container.setDataPart(levelData);
+		refreshButtons();
 	}
 
 	/////////////////////////////////////////////////////////////////
@@ -88,22 +91,33 @@ public class SaveMenu extends InnerMenuPanel
 	/////////////////////////////////////////////////////////////////
 	// BUTTONS						/////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	@SuppressWarnings("unused")
 	private JButton buttonConfirm;
 	@SuppressWarnings("unused")
 	private JButton buttonCancel;
-	@SuppressWarnings("unused")
 	private JButton buttonDelete;
 	@SuppressWarnings("unused")
 	private JButton buttonNew;
 
+	private void refreshButtons()
+	{	GameArchive gameArchive = levelData.getSelectedGameArchive();
+		if(gameArchive==null)
+		{	buttonDelete.setEnabled(false);
+			buttonConfirm.setEnabled(false);
+		}
+		else
+		{	buttonDelete.setEnabled(true);
+			buttonConfirm.setEnabled(true);
+		}
+	}
+	
 	/////////////////////////////////////////////////////////////////
 	// TOURNAMENT					/////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	private AbstractTournament tournament;
+	private String baseFolder = FileTools.getSavesPath();
 	
 	public void setTournament(AbstractTournament tournament)
-	{	this.tournament = tournament;		
+	{	this.tournament = tournament;
 	}
 	
 	/////////////////////////////////////////////////////////////////
@@ -112,6 +126,16 @@ public class SaveMenu extends InnerMenuPanel
 	public void actionPerformed(ActionEvent e)
 	{	if(e.getActionCommand().equals(GuiKeys.GAME_SAVE_BUTTON_CANCEL))
 		{	replaceWith(parent);
+	    }
+		if(e.getActionCommand().equals(GuiKeys.GAME_SAVE_BUTTON_DELETE))
+		{	GameArchive selectedArchive = levelData.getSelectedGameArchive();
+			if(selectedArchive!=null)
+			{	String folder = selectedArchive.getFolder();
+				String path = baseFolder+File.separator+folder;
+				File file = new File(path);
+				FileTools.deleteDirectory(file);
+				levelData.refresh();			
+			}
 	    }
 		else if(e.getActionCommand().equals(GuiKeys.GAME_SAVE_BUTTON_CONFIRM))
 		{	try
@@ -146,6 +170,14 @@ public class SaveMenu extends InnerMenuPanel
 	// CONTENT PANEL				/////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	public void refresh()
-	{	//
+	{	
+	}
+
+	/////////////////////////////////////////////////////////////////
+	// DATA PANEL LISTENER			/////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	@Override
+	public void dataPanelSelectionChange()
+	{	refreshButtons();
 	}
 }
