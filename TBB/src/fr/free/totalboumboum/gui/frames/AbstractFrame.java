@@ -39,10 +39,10 @@ import java.awt.event.WindowListener;
 import java.io.File;
 import java.io.IOException;
 
-public abstract class MainFrame extends JFrame implements WindowListener
+public abstract class AbstractFrame extends JFrame implements WindowListener
 {	private static final long serialVersionUID = 1L;
 
-	public MainFrame(String title) throws IllegalArgumentException, SecurityException, ParserConfigurationException, SAXException, IOException, IllegalAccessException, NoSuchFieldException, ClassNotFoundException
+	public AbstractFrame(String title) throws IllegalArgumentException, SecurityException, ParserConfigurationException, SAXException, IOException, IllegalAccessException, NoSuchFieldException, ClassNotFoundException
 	{	// init
 		super(title);
 		
