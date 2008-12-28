@@ -32,6 +32,8 @@ import javax.swing.Box;
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
 
+import fr.free.totalboumboum.game.archive.GameArchive;
+import fr.free.totalboumboum.game.archive.GameArchiveSaver;
 import fr.free.totalboumboum.game.tournament.AbstractTournament;
 import fr.free.totalboumboum.gui.common.structure.panel.SplitMenuPanel;
 import fr.free.totalboumboum.gui.common.structure.panel.menu.InnerMenuPanel;
@@ -101,12 +103,19 @@ public class SaveMenu extends InnerMenuPanel
 		{	replaceWith(parent);
 	    }
 		else if(e.getActionCommand().equals(GuiKeys.GAME_SAVE_BUTTON_CANCEL))
-		{	String path = FileTools.getSavesPath()+levelData.getSelectedFile();
-			File file = new File(path);
+		{	String folder = levelData.getSelectedFile();
+			// XML file
+			GameArchive gameArchive = GameArchive.getArchive(tournament,folder);
+			GameArchiveSaver.saveGameArchive(gameArchive);
+			// data file
+			String path = FileTools.getSavesPath()+File.separator+folder;
+			String fileName = FileTools.FILE_ARCHIVE+FileTools.EXTENSION_DATA;
+			File file = new File(path+File.separator+fileName);
 			FileOutputStream out = new FileOutputStream(file);
 			ObjectOutputStream oOut = new ObjectOutputStream(out);
 			oOut.writeObject(tournament);
 			oOut.close();
+			//
 			replaceWith(parent);
 	    }
 	} 

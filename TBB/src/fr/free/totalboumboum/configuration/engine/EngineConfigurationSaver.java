@@ -38,7 +38,7 @@ public class EngineConfigurationSaver
 	{	// build document
 		Element root = saveEngineElement(engineConfiguration);	
 		// save file
-		String engineFile = FileTools.getConfigurationPath()+File.separator+FileTools.FILE_ENGINE+FileTools.EXTENSION_DATA;
+		String engineFile = FileTools.getConfigurationPath()+File.separator+FileTools.FILE_ENGINE+FileTools.EXTENSION_XML;
 		File dataFile = new File(engineFile);
 		String schemaFolder = FileTools.getSchemasPath();
 		File schemaFile = new File(schemaFolder+File.separator+FileTools.FILE_ENGINE+FileTools.EXTENSION_SCHEMA);

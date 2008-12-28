@@ -22,6 +22,9 @@ package fr.free.totalboumboum.tools;
  */
 
 import java.text.NumberFormat;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.GregorianCalendar;
 import java.util.Set;
 
 import fr.free.totalboumboum.configuration.GameConstants;
@@ -81,5 +84,36 @@ public class StringTools
 		else
 			temp.append(0);
 		return temp.toString();
+	}
+	
+	public static Date dateXmlToJava(String xmlStr)
+	{	// 2008-12-05T09:30:10.5
+		String tab[] = xmlStr.split("-|T|:|.");
+		int year = Integer.parseInt(tab[0]);
+		int month = Integer.parseInt(tab[1])-1;
+		int day = Integer.parseInt(tab[2]);
+		int hourOfDay = Integer.parseInt(tab[3]);
+		int minute = Integer.parseInt(tab[4]);
+		int second = Integer.parseInt(tab[5]);		
+		Calendar calendar = GregorianCalendar.getInstance();
+		calendar.set(year,month,day,hourOfDay,minute,second);
+		Date result = calendar.getTime();
+		return result;
+	}
+	
+	public static String dateJavaToXml(Date date)
+	{	// 2008-12-05T09:30:10.5
+		Calendar calendar = GregorianCalendar.getInstance();
+		calendar.setTime(date);
+		int year = calendar.get(Calendar.YEAR);
+		int month = calendar.get(Calendar.MONTH+1);
+		int day = calendar.get(Calendar.DAY_OF_MONTH);
+		int hourOfDay = calendar.get(Calendar.HOUR_OF_DAY);
+		int minute = calendar.get(Calendar.MINUTE);
+		int second = calendar.get(Calendar.SECOND);
+		NumberFormat nf = NumberFormat.getIntegerInstance();
+		nf.setMinimumIntegerDigits(2);
+		String result = year+"-"+nf.format(month)+"-"+nf.format(day)+"T"+nf.format(hourOfDay)+":"+nf.format(minute)+nf.format(second);
+		return result;
 	}
 }

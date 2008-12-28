@@ -152,7 +152,7 @@ public class SelectedProfileMenu extends InnerMenuPanel
 			{	try
 				{	String profileFile = profileData.getSelectedProfileFile();
 					// delete file
-					String path = FileTools.getProfilesPath()+File.separator+profileFile+FileTools.EXTENSION_DATA;
+					String path = FileTools.getProfilesPath()+File.separator+profileFile+FileTools.EXTENSION_XML;
 					File file = new File(path);
 					file.delete();
 					// delete entry in config

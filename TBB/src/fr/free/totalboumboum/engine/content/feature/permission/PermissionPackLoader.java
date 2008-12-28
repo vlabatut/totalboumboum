@@ -51,7 +51,7 @@ public class PermissionPackLoader
 
 	public static PermissionPack loadPermissionPack(String individualFolder, Level level) throws ParserConfigurationException, SAXException, IOException, ClassNotFoundException
 	{	PermissionPack result = new PermissionPack();
-		File dataFile = new File(individualFolder+File.separator+FileTools.FILE_PERMISSIONS+FileTools.EXTENSION_DATA);
+		File dataFile = new File(individualFolder+File.separator+FileTools.FILE_PERMISSIONS+FileTools.EXTENSION_XML);
 		if(dataFile.exists())
 		{	// opening
 			String schemaFolder = FileTools.getSchemasPath();

@@ -100,7 +100,7 @@ public class AbilityLoader
     
 	public static ArrayList<AbstractAbility> loadAbilityPack(String folderPath, Level level) throws ParserConfigurationException, SAXException, IOException, ClassNotFoundException
 	{	ArrayList<AbstractAbility> result = new ArrayList<AbstractAbility>();
-		File dataFile = new File(folderPath+File.separator+FileTools.FILE_ABILITIES+FileTools.EXTENSION_DATA);
+		File dataFile = new File(folderPath+File.separator+FileTools.FILE_ABILITIES+FileTools.EXTENSION_XML);
 		if(dataFile.exists())
 		{	String schemaFolder = FileTools.getSchemasPath();
 			File schemaFile = new File(schemaFolder+File.separator+FileTools.FILE_ABILITIES+FileTools.EXTENSION_SCHEMA);

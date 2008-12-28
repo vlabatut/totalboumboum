@@ -37,7 +37,7 @@ public class EngineConfigurationLoader
 	public static EngineConfiguration loadEngineConfiguration() throws ParserConfigurationException, SAXException, IOException
 	{	EngineConfiguration result = new EngineConfiguration();
 		String individualFolder = FileTools.getConfigurationPath();
-		File dataFile = new File(individualFolder+File.separator+FileTools.FILE_ENGINE+FileTools.EXTENSION_DATA);
+		File dataFile = new File(individualFolder+File.separator+FileTools.FILE_ENGINE+FileTools.EXTENSION_XML);
 		String schemaFolder = FileTools.getSchemasPath();
 		File schemaFile = new File(schemaFolder+File.separator+FileTools.FILE_ENGINE+FileTools.EXTENSION_SCHEMA);
 		Element root = XmlTools.getRootFromFile(dataFile,schemaFile);

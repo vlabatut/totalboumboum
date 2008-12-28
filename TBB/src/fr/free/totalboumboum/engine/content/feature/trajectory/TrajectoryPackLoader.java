@@ -48,7 +48,7 @@ public class TrajectoryPackLoader
 */
 	public static TrajectoryPack loadTrajectoryPack(String individualFolder, Level level) throws ParserConfigurationException, SAXException, IOException
 	{	TrajectoryPack result = new TrajectoryPack();
-		File dataFile = new File(individualFolder+File.separator+FileTools.FILE_TRAJECTORIES+FileTools.EXTENSION_DATA);
+		File dataFile = new File(individualFolder+File.separator+FileTools.FILE_TRAJECTORIES+FileTools.EXTENSION_XML);
 		if(dataFile.exists())
 		{	// opening
 			String schemaFolder = FileTools.getSchemasPath();

@@ -27,7 +27,8 @@ import java.io.File;
 
 public class FileTools
 {
-	public static final String EXTENSION_DATA = ".xml";
+	public static final String EXTENSION_XML = ".xml";
+	public static final String EXTENSION_DATA = ".data";
 	public static final String EXTENSION_CLASS = ".class";
 	public static final String EXTENSION_FONT = ".ttf";
 	public static final String EXTENSION_JAVA = ".java";
@@ -37,6 +38,7 @@ public class FileTools
 	public static final String FILE_AI = "ai";
 	public static final String FILE_AI_MAIN_CLASS = "AiMain";
 	public static final String FILE_ANIMES = "animes";
+	public static final String FILE_ARCHIVE = "archive";
 	public static final String FILE_BLOCK = "block";
 	public static final String FILE_BOMB = "bomb";
 	public static final String FILE_BOMBSETS = "bombsets";

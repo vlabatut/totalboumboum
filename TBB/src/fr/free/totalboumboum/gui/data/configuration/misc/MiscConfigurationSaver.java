@@ -40,7 +40,7 @@ public class MiscConfigurationSaver
 	{	// build document
 		Element root = saveGuiElement(miscConfiguration);	
 		// save file
-		String engineFile = FileTools.getConfigurationPath()+File.separator+GuiFileTools.FILE_GUI+FileTools.EXTENSION_DATA;
+		String engineFile = FileTools.getConfigurationPath()+File.separator+GuiFileTools.FILE_GUI+FileTools.EXTENSION_XML;
 		File dataFile = new File(engineFile);
 		String schemaFolder = FileTools.getSchemasPath();
 		File schemaFile = new File(schemaFolder+File.separator+GuiFileTools.FILE_GUI+FileTools.EXTENSION_SCHEMA);

@@ -41,7 +41,7 @@ public class ProfilesConfigurationSaver
 	{	// build document
 		Element root = saveProfilesElement(profilesConfiguration);	
 		// save file
-		String engineFile = FileTools.getConfigurationPath()+File.separator+FileTools.FILE_PROFILES+FileTools.EXTENSION_DATA;
+		String engineFile = FileTools.getConfigurationPath()+File.separator+FileTools.FILE_PROFILES+FileTools.EXTENSION_XML;
 		File dataFile = new File(engineFile);
 		String schemaFolder = FileTools.getSchemasPath();
 		File schemaFile = new File(schemaFolder+File.separator+FileTools.FILE_PROFILES+FileTools.EXTENSION_SCHEMA);

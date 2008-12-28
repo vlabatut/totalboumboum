@@ -40,7 +40,7 @@ public class AiPreviewSaver
 		Element root = saveAiElement(aiPreview);	
 		// save file
 		String path = FileTools.getAiPath()+File.separator+aiPreview.getPack()+File.separator+aiPreview.getFolder();
-		String engineFile = path+File.separator+FileTools.FILE_AI+FileTools.EXTENSION_DATA;
+		String engineFile = path+File.separator+FileTools.FILE_AI+FileTools.EXTENSION_XML;
 		File dataFile = new File(engineFile);
 		String schemaFolder = FileTools.getSchemasPath();
 		File schemaFile = new File(schemaFolder+File.separator+FileTools.FILE_AI+FileTools.EXTENSION_SCHEMA);

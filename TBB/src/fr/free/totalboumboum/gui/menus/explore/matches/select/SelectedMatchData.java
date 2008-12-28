@@ -83,7 +83,7 @@ public class SelectedMatchData extends EntitledDataPanel implements FolderBrowse
 			
 			// list panel
 			{	folderPanel = new FolderBrowserSubPanel(leftWidth,dataHeight);
-				String targetFile = FileTools.FILE_MATCH+FileTools.EXTENSION_DATA;
+				String targetFile = FileTools.FILE_MATCH+FileTools.EXTENSION_XML;
 				folderPanel.setShowParent(false);
 				folderPanel.setFolder(baseFolder,targetFile);
 				folderPanel.addListener(this);

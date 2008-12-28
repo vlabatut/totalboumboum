@@ -43,7 +43,7 @@ public class LanguageLoader
 	public static Language loadLanguage(String name) throws ParserConfigurationException, SAXException, IOException
 	{	Language result = new Language();
 		String individualFolder = GuiFileTools.getLanguagesPath();
-		File dataFile = new File(individualFolder+File.separator+name+FileTools.EXTENSION_DATA);
+		File dataFile = new File(individualFolder+File.separator+name+FileTools.EXTENSION_XML);
 		String schemaFolder = FileTools.getSchemasPath();
 		File schemaFile = new File(schemaFolder+File.separator+FileTools.FILE_LANGUAGE+FileTools.EXTENSION_SCHEMA);
 		Element root = XmlTools.getRootFromFile(dataFile,schemaFile);

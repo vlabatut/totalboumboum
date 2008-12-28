@@ -1,5 +1,11 @@
 package fr.free.totalboumboum.game.archive;
 
+import fr.free.totalboumboum.game.tournament.AbstractTournament;
+import fr.free.totalboumboum.game.tournament.cup.CupTournament;
+import fr.free.totalboumboum.game.tournament.league.LeagueTournament;
+import fr.free.totalboumboum.game.tournament.sequence.SequenceTournament;
+import fr.free.totalboumboum.game.tournament.single.SingleTournament;
+
 /*
  * Total Boum Boum
  * Copyright 2008 Vincent Labatut 
@@ -23,5 +29,18 @@ package fr.free.totalboumboum.game.archive;
 
 public enum TournamentType
 {
-	CUP,LEAGUE,SEQUENCE,SINGLE
+	CUP,LEAGUE,SEQUENCE,SINGLE;
+	
+	public static TournamentType getType(AbstractTournament tournament)
+	{	TournamentType result = null;
+		if(tournament instanceof CupTournament)
+			result = CUP;
+		else if(tournament instanceof LeagueTournament)
+			result = LEAGUE;
+		else if(tournament instanceof SequenceTournament)
+			result = SEQUENCE;
+		else if(tournament instanceof SingleTournament)
+			result = SINGLE;
+		return result;
+	}
 }

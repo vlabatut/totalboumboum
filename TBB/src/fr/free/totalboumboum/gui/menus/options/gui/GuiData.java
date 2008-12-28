@@ -364,8 +364,8 @@ public class GuiData extends EntitledDataPanel implements MouseListener
 			public boolean accept(File pathname)
 			{	boolean result;
 				String name = pathname.getName();
-				int beginIndex = name.length()-FileTools.EXTENSION_DATA.length();
-				result = name.substring(beginIndex,name.length()).equalsIgnoreCase(FileTools.EXTENSION_DATA);
+				int beginIndex = name.length()-FileTools.EXTENSION_XML.length();
+				result = name.substring(beginIndex,name.length()).equalsIgnoreCase(FileTools.EXTENSION_XML);
 				return result;
 			}
 			
@@ -374,7 +374,7 @@ public class GuiData extends EntitledDataPanel implements MouseListener
 		TreeSet<String> temp = new TreeSet<String>();
 		for(int i=0;i<files.length;i++)
 		{	String name = files[i].getName();
-			temp.add(name.substring(0,name.length()-FileTools.EXTENSION_DATA.length()));
+			temp.add(name.substring(0,name.length()-FileTools.EXTENSION_XML.length()));
 		}
 		languages = new String[files.length];
 		Iterator<String> it = temp.iterator();

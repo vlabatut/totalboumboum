@@ -78,7 +78,7 @@ public class SelectedLevelData extends EntitledDataPanel implements PackBrowserS
 				int listHeight = dataHeight;
 				packPanel = new PackBrowserSubPanel(listWidth,listHeight);
 				String baseFolder = FileTools.getLevelsPath();
-				String targetFile = FileTools.FILE_LEVEL+FileTools.EXTENSION_DATA;
+				String targetFile = FileTools.FILE_LEVEL+FileTools.EXTENSION_XML;
 				packPanel.setFolder(baseFolder,targetFile);
 				packPanel.addListener(this);
 				mainPanel.add(packPanel);

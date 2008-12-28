@@ -84,7 +84,7 @@ public class SelectedTournamentData extends EntitledDataPanel implements FolderB
 			
 			// list panel
 			{	folderPanel = new FolderBrowserSubPanel(leftWidth,dataHeight);
-				String targetFile = FileTools.FILE_TOURNAMENT+FileTools.EXTENSION_DATA;
+				String targetFile = FileTools.FILE_TOURNAMENT+FileTools.EXTENSION_XML;
 				folderPanel.setShowParent(false);
 				folderPanel.setFolder(baseFolder,targetFile);
 				folderPanel.addListener(this);

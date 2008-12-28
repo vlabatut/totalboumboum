@@ -47,7 +47,7 @@ public class PortraitsLoader
 		File schemaFile,dataFile;
 		String folderPath = spriteFolderPath+File.separator+FileTools.FOLDER_PORTRAITS;
 		// opening
-		dataFile = new File(folderPath+File.separator+FileTools.FILE_PORTRAITS+FileTools.EXTENSION_DATA);
+		dataFile = new File(folderPath+File.separator+FileTools.FILE_PORTRAITS+FileTools.EXTENSION_XML);
 		schemaFile = new File(schemaFolder+File.separator+FileTools.FILE_PORTRAITS+FileTools.EXTENSION_SCHEMA);
 		Element root = XmlTools.getRootFromFile(dataFile,schemaFile);
 		//

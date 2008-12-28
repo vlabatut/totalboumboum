@@ -23,62 +23,115 @@ package fr.free.totalboumboum.game.archive;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.Locale;
 
 import javax.xml.parsers.ParserConfigurationException;
 
 import org.jdom.Element;
 import org.xml.sax.SAXException;
 
-import fr.free.totalboumboum.configuration.profile.ProfilesSelection;
-import fr.free.totalboumboum.configuration.profile.ProfilesSelectionSaver;
 import fr.free.totalboumboum.tools.FileTools;
+import fr.free.totalboumboum.tools.StringTools;
 import fr.free.totalboumboum.tools.XmlTools;
 
 public class GameArchiveSaver
 {	
-	public static void saveGameArchive(GameArchive tournamentConfiguration) throws ParserConfigurationException, SAXException, IOException
+	public static void saveGameArchive(GameArchive gameArchive) throws ParserConfigurationException, SAXException, IOException
 	{	// build document
-		Element root = saveGameTournamentElement(tournamentConfiguration);	
+		Element root = saveArchiveElement(gameArchive);	
 		// save file
-		String engineFile = FileTools.getConfigurationPath()+File.separator+FileTools.FILE_GAME_TOURNAMENT+FileTools.EXTENSION_DATA;
-		File dataFile = new File(engineFile);
+		String folder = FileTools.getSavesPath()+File.separator+gameArchive.getFolder();
+		String path = folder + File.separator+FileTools.FILE_ARCHIVE+FileTools.EXTENSION_XML;
+		File dataFile = new File(path);
 		String schemaFolder = FileTools.getSchemasPath();
-		File schemaFile = new File(schemaFolder+File.separator+FileTools.FILE_GAME_TOURNAMENT+FileTools.EXTENSION_SCHEMA);
+		File schemaFile = new File(schemaFolder+File.separator+FileTools.FILE_ARCHIVE+FileTools.EXTENSION_SCHEMA);
 		XmlTools.makeFileFromRoot(dataFile,schemaFile,root);
 	}
 
-	private static Element saveGameTournamentElement(TournamentConfiguration tournamentConfiguration)
+	private static Element saveArchiveElement(GameArchive gameArchive)
 	{	Element result = new Element(XmlTools.ELT_GAME_TOURNAMENT); 
 		
-		// options
-		Element optionsElement = saveTournamentOptionsElement(tournamentConfiguration);
-		result.addContent(optionsElement);
-	
-		// name
-		Element tournamentElement = new Element(XmlTools.ELT_TOURNAMENT);
-		String tournament = tournamentConfiguration.getTournamentName().toString();
-		tournamentElement.setAttribute(XmlTools.ATT_NAME,tournament);
+		// tournament
+		Element tournamentElement = saveTournamentElement(gameArchive);
 		result.addContent(tournamentElement);
-		
+	
+		// played
+		Element playedElement = savePlayedElement(gameArchive);
+		result.addContent(playedElement);
+	
+		// dates
+		Element datesElement = saveDatesElement(gameArchive);
+		result.addContent(datesElement);
+	
 		// players
-		Element playersElement = new Element(XmlTools.ELT_PLAYERS);
-		ProfilesSelection tournamentSelected = tournamentConfiguration.getProfilesSelection();
-		ProfilesSelectionSaver.saveProfilesSelection(playersElement,tournamentSelected);
+		Element playersElement = savePlayersElement(gameArchive);
 		result.addContent(playersElement);
+
+		return result;
+	}
+
+	private static Element saveTournamentElement(GameArchive gameArchive)
+	{	Element result = new Element(XmlTools.ELT_TOURNAMENT);
+		
+		// name
+		String name = gameArchive.getName();
+		result.setAttribute(XmlTools.ATT_NAME,name);
+
+		// type
+		TournamentType type = gameArchive.getType();
+		String typeStr = type.toString().toLowerCase(Locale.ENGLISH);
+		result.setAttribute(XmlTools.ATT_TYPE,typeStr);
 		
 		return result;
 	}
 
-	private static Element saveTournamentOptionsElement(TournamentConfiguration tournamentConfiguration)
-	{	Element result = new Element(XmlTools.ELT_OPTIONS);
+	private static Element savePlayedElement(GameArchive gameArchive)
+	{	Element result = new Element(XmlTools.ELT_PLAYED);
 		
-		// use last players
-		String useLastPlayers = Boolean.toString(tournamentConfiguration.getUseLastPlayers());
-		result.setAttribute(XmlTools.ATT_USE_LAST_PLAYERS,useLastPlayers);
+		// matches
+		String matches = Integer.toString(gameArchive.getPlayedMatches());
+		result.setAttribute(XmlTools.ATT_MATCHES,matches);
 
-		// use last settings
-		String useLastTournament = Boolean.toString(tournamentConfiguration.getUseLastTournament());
-		result.setAttribute(XmlTools.ATT_USE_LAST_TOURNAMENT,useLastTournament);
+		// rounds
+		String rounds = Integer.toString(gameArchive.getPlayedRounds());
+		result.setAttribute(XmlTools.ATT_ROUNDS,rounds);
+		
+		return result;
+	}
+
+	private static Element saveDatesElement(GameArchive gameArchive)
+	{	Element result = new Element(XmlTools.ELT_DATES);
+		
+		// start
+		Date start = gameArchive.getStartDate();
+		String startStr = StringTools.dateJavaToXml(start);
+		result.setAttribute(XmlTools.ATT_START,startStr);
+
+		// save
+		Date save = gameArchive.getSaveDate();
+		String saveStr = StringTools.dateJavaToXml(save);
+		result.setAttribute(XmlTools.ATT_SAVE,saveStr);
+		
+		return result;
+	}
+
+	private static Element savePlayersElement(GameArchive gameArchive)
+	{	Element result = new Element(XmlTools.ELT_PLAYERS);
+		ArrayList<String> players = gameArchive.getPlayers();
+		for(String player: players)
+		{	Element playerElement = savePlayerElement(player);
+			result.addContent(playerElement);
+		}
+		return result;
+	}
+	
+	private static Element savePlayerElement(String player)
+	{	Element result = new Element(XmlTools.ELT_PLAYER);
+		
+		// name
+		result.setAttribute(XmlTools.ATT_NAME,player);
 		
 		return result;
 	}

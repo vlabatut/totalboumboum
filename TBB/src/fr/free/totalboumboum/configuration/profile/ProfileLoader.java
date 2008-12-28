@@ -67,7 +67,7 @@ public class ProfileLoader
 
 	public static Profile loadProfile(String fileName) throws ParserConfigurationException, SAXException, IOException, IllegalArgumentException, SecurityException, IllegalAccessException, NoSuchFieldException, ClassNotFoundException
 	{	String profilesFolder = FileTools.getProfilesPath();
-		File dataFile = new File(profilesFolder+File.separator+fileName+FileTools.EXTENSION_DATA);
+		File dataFile = new File(profilesFolder+File.separator+fileName+FileTools.EXTENSION_XML);
 		String schemaFolder = FileTools.getSchemasPath();
 		File schemaFile = new File(schemaFolder+File.separator+FileTools.FILE_PROFILE+FileTools.EXTENSION_SCHEMA);
 		Element root = XmlTools.getRootFromFile(dataFile,schemaFile);
