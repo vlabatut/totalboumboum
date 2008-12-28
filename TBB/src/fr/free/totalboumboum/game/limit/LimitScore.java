@@ -34,7 +34,8 @@ import fr.free.totalboumboum.game.statistics.StatisticHolder;
  *
  */
 public class LimitScore implements TournamentLimit, MatchLimit, RoundLimit
-{
+{	private static final long serialVersionUID = 1L;
+
 	public LimitScore(long threshold, ComparatorCode comparatorCode, Score score, PointsProcessor pointProcessor)
 	{	this.threshold = threshold;
 		this.score = score;

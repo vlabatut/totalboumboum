@@ -234,6 +234,7 @@ buttonStatistics.setEnabled(false);
 	    }
 		else if(e.getActionCommand().equals(GuiKeys.GAME_TOURNAMENT_BUTTON_SAVE))
 		{	SaveSplitPanel savePanel = new SaveSplitPanel(container.getContainer(),container);
+			savePanel.setTournament(tournament);
 			replaceWith(savePanel);
 	    }
 		else if(e.getActionCommand().equals(GuiKeys.GAME_TOURNAMENT_BUTTON_MENU))

@@ -37,7 +37,8 @@ import fr.free.totalboumboum.game.statistics.StatisticHolder;
  */
 
 public class PointsMaximum extends PointsProcessor implements PPFunction
-{	
+{	private static final long serialVersionUID = 1L;
+
 	public PointsMaximum(PointsProcessor source)
 	{	this.source = source;
 	}

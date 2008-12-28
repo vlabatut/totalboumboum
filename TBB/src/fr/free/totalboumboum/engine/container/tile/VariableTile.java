@@ -21,12 +21,14 @@ package fr.free.totalboumboum.engine.container.tile;
  * 
  */
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Iterator;
 
 
-public class VariableTile
-{
+public class VariableTile implements Serializable
+{	private static final long serialVersionUID = 1L;
+
 	private ArrayList<ValueTile> values = new ArrayList<ValueTile>();
 	private ArrayList<Integer> counts;
 	private String name;//debug

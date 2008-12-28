@@ -27,7 +27,7 @@ import fr.free.totalboumboum.game.match.Match;
 import fr.free.totalboumboum.game.tournament.AbstractTournament;
 
 public class CupTournament extends AbstractTournament
-{
+{	private static final long serialVersionUID = 1L;
 
 	@Override
 	public void matchOver() {

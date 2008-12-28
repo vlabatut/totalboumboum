@@ -37,7 +37,8 @@ import fr.free.totalboumboum.game.statistics.StatisticHolder;
  */
 
 public class PointsDivision extends PointsProcessor implements PPPrimaryOperator
-{
+{	private static final long serialVersionUID = 1L;
+
 	public PointsDivision(PointsProcessor leftSource, PointsProcessor rightSource)
 	{	this.leftSource = leftSource;
 		this.rightSource = rightSource;

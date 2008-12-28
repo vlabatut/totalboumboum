@@ -24,6 +24,7 @@ package fr.free.totalboumboum.engine.container.level;
 import java.awt.Dimension;
 import java.io.File;
 import java.io.IOException;
+import java.io.Serializable;
 import java.util.ArrayList;
 
 import javax.xml.parsers.ParserConfigurationException;
@@ -47,9 +48,10 @@ import fr.free.totalboumboum.engine.loop.Loop;
 import fr.free.totalboumboum.tools.FileTools;
 import fr.free.totalboumboum.tools.XmlTools;
 
-public class HollowLevel
-{
-    private Level level;
+public class HollowLevel implements Serializable
+{	private static final long serialVersionUID = 1L;
+
+	transient private Level level;
     
     private boolean displayForceAll;
 	private boolean displayMaximize;

@@ -21,10 +21,12 @@ package fr.free.totalboumboum.game.limit;
  * 
  */
 
+import java.io.Serializable;
+
 import fr.free.totalboumboum.game.points.PointsProcessor;
 import fr.free.totalboumboum.game.statistics.StatisticHolder;
 
-public interface Limit
+public interface Limit extends Serializable
 {
 	/////////////////////////////////////////////////////////////////
 	// THRESHOLD		/////////////////////////////////////////////

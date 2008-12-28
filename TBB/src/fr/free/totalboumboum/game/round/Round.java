@@ -22,6 +22,7 @@ package fr.free.totalboumboum.game.round;
  */
 
 import java.io.IOException;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.Set;
@@ -43,8 +44,9 @@ import fr.free.totalboumboum.game.statistics.StatisticEvent;
 import fr.free.totalboumboum.game.statistics.StatisticHolder;
 import fr.free.totalboumboum.game.statistics.StatisticRound;
 
-public class Round implements StatisticHolder
-{
+public class Round implements StatisticHolder, Serializable
+{	private static final long serialVersionUID = 1L;
+
 	public Round(Match match)
 	{	this.match = match;
 	}
@@ -119,7 +121,7 @@ public class Round implements StatisticHolder
 	/////////////////////////////////////////////////////////////////
 	// LOOP 			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	private Loop loop = null;
+	transient private Loop loop = null;
 	
 	public Loop getLoop()
 	{	return loop;
@@ -146,6 +148,10 @@ public class Round implements StatisticHolder
 	// MATCH			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	private Match match;
+	
+	public Match getMatch()
+	{	return match;	
+	}
 	
 	/////////////////////////////////////////////////////////////////
 	// PLAYERS			/////////////////////////////////////////////
@@ -273,7 +279,7 @@ public class Round implements StatisticHolder
 	/////////////////////////////////////////////////////////////////
 	// PANEL			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	private RoundRenderPanel panel;
+	transient private RoundRenderPanel panel;
 	
 	public void setPanel(RoundRenderPanel panel)
 	{	this.panel = panel;

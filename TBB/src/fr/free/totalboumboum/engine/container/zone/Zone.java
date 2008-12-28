@@ -21,6 +21,7 @@ package fr.free.totalboumboum.engine.container.zone;
  * 
  */
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -29,8 +30,9 @@ import java.util.Map.Entry;
 import fr.free.totalboumboum.engine.container.tile.ValueTile;
 import fr.free.totalboumboum.engine.container.tile.VariableTile;
 
-public class Zone
-{
+public class Zone implements Serializable
+{	private static final long serialVersionUID = 1L;
+
 	private int globalWidth;
 	private int globalHeight;
 	

@@ -21,13 +21,15 @@ package fr.free.totalboumboum.game.limit;
  * 
  */
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Iterator;
 
 import fr.free.totalboumboum.game.statistics.StatisticHolder;
 
-public class Limits<T extends Limit>
-{
+public class Limits<T extends Limit> implements Serializable
+{	private static final long serialVersionUID = 1L;
+
 	ArrayList<T> limits = new ArrayList<T>();
 	private int index;
 	

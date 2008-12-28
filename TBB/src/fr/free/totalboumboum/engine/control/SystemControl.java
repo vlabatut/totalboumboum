@@ -29,7 +29,8 @@ import fr.free.totalboumboum.configuration.Configuration;
 import fr.free.totalboumboum.engine.loop.Loop;
 
 public class SystemControl implements KeyListener
-{	private Loop loop;
+{	
+	private Loop loop;
 	// nécessaire pour éviter d'émettre des évènements de façon répétitive pour un seul pressage de touche
 	private HashMap<Integer,Boolean> keysPressed;
 	

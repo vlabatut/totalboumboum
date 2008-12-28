@@ -29,11 +29,12 @@ import fr.free.totalboumboum.game.statistics.StatisticTournament;
 import fr.free.totalboumboum.game.tournament.AbstractTournament;
 
 public class SingleTournament extends AbstractTournament
-{
+{	private static final long serialVersionUID = 1L;
+	
 	/////////////////////////////////////////////////////////////////
 	// GAME				/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	
+
 	@Override
 	public void init()
 	{	begun = true;

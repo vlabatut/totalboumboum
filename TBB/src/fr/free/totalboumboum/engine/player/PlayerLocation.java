@@ -1,5 +1,7 @@
 package fr.free.totalboumboum.engine.player;
 
+import java.io.Serializable;
+
 /*
  * Total Boum Boum
  * Copyright 2008 Vincent Labatut 
@@ -21,8 +23,9 @@ package fr.free.totalboumboum.engine.player;
  * 
  */
 
-public class PlayerLocation
-{
+public class PlayerLocation implements Serializable
+{	private static final long serialVersionUID = 1L;
+
 	private int number; //debug
 	private int col;
 	private int line;

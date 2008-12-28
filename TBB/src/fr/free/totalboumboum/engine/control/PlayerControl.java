@@ -31,8 +31,7 @@ import fr.free.totalboumboum.engine.loop.Loop;
 import fr.free.totalboumboum.engine.player.Player;
 
 public class PlayerControl implements KeyListener
-{	
-	private Player player;
+{	private Player player;
 	// nécessaire pour éviter d'émettre des évènements de façon répétitive pour un seul pressage de touche
 	private final HashMap<Integer,Boolean> keysPressed = new HashMap<Integer,Boolean>();
 	

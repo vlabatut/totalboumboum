@@ -36,7 +36,8 @@ import fr.free.totalboumboum.game.statistics.StatisticHolder;
  */
 
 public class PointsSubstraction extends PointsProcessor implements PPSecondaryOperator
-{	
+{	private static final long serialVersionUID = 1L;
+
 	public PointsSubstraction(PointsProcessor leftSource, PointsProcessor rightSource)
 	{	this.leftSource = leftSource;
 		this.rightSource = rightSource;

@@ -46,8 +46,7 @@ import fr.free.totalboumboum.engine.loop.Loop;
 import fr.free.totalboumboum.engine.player.Player;
 
 public abstract class AiManager extends AbstractAiManager<Integer>
-{
-	private boolean debug = false;
+{	private boolean debug = false;
 
 	public AiManager(ArtificialIntelligence ai)
     {	super(ai);

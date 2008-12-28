@@ -37,7 +37,8 @@ import fr.free.totalboumboum.game.statistics.StatisticHolder;
  */
 
 public class PointsMinimum extends PointsProcessor implements PPFunction
-{
+{	private static final long serialVersionUID = 1L;
+
 	public PointsMinimum(PointsProcessor source)
 	{	this.source = source;
 	}
