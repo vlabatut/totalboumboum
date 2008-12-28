@@ -105,8 +105,7 @@ public class GameArchiveLoader
 
 	@SuppressWarnings("unchecked")
 	private static void loadPlayersElement(Element root, GameArchive result)
-	{	Element playersElement = root.getChild(XmlTools.ELT_PLAYERS);
-		List<Element> playerList = playersElement.getChildren(XmlTools.ELT_PLAYER);
+	{	List<Element> playerList = root.getChildren(XmlTools.ELT_PLAYER);
 		for(Element playerElement: playerList)
 			loadPlayerElement(playerElement,result);
 	}

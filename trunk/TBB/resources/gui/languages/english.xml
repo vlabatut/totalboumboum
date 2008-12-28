@@ -490,7 +490,7 @@
 		<group name="Archive">
 			<text name="Name" value="Name" tooltip="Tournament name" />
 			<text name="Type" value="Type" tooltip="Tournament type" />
-			<text name="Confrontations" value="Confrontations" tooltip="Number of played matches/rounds" />
+			<text name="Confrontations" value="Confrontations" tooltip="Number of played matches:rounds" />
 			<text name="Players" value="Players" tooltip="Players involved" />
 			<text name="Start" value="Start" tooltip="Begining date" />
 			<text name="Save" value="Save" tooltip="Last save date" />

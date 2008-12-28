@@ -46,6 +46,7 @@ import fr.free.totalboumboum.gui.game.match.description.MatchDescription;
 import fr.free.totalboumboum.gui.game.match.results.MatchResults;
 import fr.free.totalboumboum.gui.game.match.statistics.MatchStatistics;
 import fr.free.totalboumboum.gui.game.round.RoundSplitPanel;
+import fr.free.totalboumboum.gui.game.save.SaveSplitPanel;
 import fr.free.totalboumboum.gui.tools.GuiKeys;
 import fr.free.totalboumboum.gui.tools.GuiTools;
 
@@ -173,6 +174,10 @@ buttonStatistics.setEnabled(false);
 	{	if(e.getActionCommand().equals(GuiKeys.GAME_MATCH_BUTTON_QUIT))
 		{	match.cancel();
 			getFrame().setMainMenuPanel();
+	    }
+		else if(e.getActionCommand().equals(GuiKeys.GAME_TOURNAMENT_BUTTON_SAVE))
+		{	SaveSplitPanel savePanel = new SaveSplitPanel(container.getContainer(),container);
+			replaceWith(savePanel);
 	    }
 		else if(e.getActionCommand().equals(GuiKeys.GAME_MATCH_BUTTON_CURRENT_TOURNAMENT))				
 		{	parent.refresh();

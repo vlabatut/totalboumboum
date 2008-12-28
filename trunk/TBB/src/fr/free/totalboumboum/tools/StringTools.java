@@ -88,7 +88,7 @@ public class StringTools
 	
 	public static Date dateXmlToJava(String xmlStr)
 	{	// 2008-12-05T09:30:10.5
-		String tab[] = xmlStr.split("-|T|:|.");
+		String tab[] = xmlStr.split("[-T:.]");
 		int year = Integer.parseInt(tab[0]);
 		int month = Integer.parseInt(tab[1])-1;
 		int day = Integer.parseInt(tab[2]);

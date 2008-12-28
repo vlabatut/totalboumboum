@@ -89,7 +89,7 @@ public class SaveData extends EntitledDataPanel implements FolderBrowserSubPanel
 			mainPanel.add(Box.createHorizontalGlue());
 			
 			// right panel
-			{	int miscHeight = (dataHeight - margin)/2;
+			{	int miscHeight = (int)((dataHeight - margin)*0.27);
 				int playersHeight = dataHeight - miscHeight - margin; 
 				
 				SubPanel rightPanel = new SubPanel(rightWidth,dataHeight);

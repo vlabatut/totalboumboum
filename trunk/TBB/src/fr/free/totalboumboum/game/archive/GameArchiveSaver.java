@@ -51,7 +51,7 @@ public class GameArchiveSaver
 	}
 
 	private static Element saveArchiveElement(GameArchive gameArchive)
-	{	Element result = new Element(XmlTools.ELT_GAME_TOURNAMENT); 
+	{	Element result = new Element(XmlTools.ELT_ARCHIVE); 
 		
 		// tournament
 		Element tournamentElement = saveTournamentElement(gameArchive);
