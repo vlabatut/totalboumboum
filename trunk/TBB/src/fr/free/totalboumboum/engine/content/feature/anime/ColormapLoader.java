@@ -37,7 +37,7 @@ public class ColormapLoader
 {
 	public static Colormap loadColormap(String individualFolder) throws IOException, ParserConfigurationException, SAXException
 	{	// oprning
-		File dataFile = new File(individualFolder+FileTools.EXTENSION_DATA);
+		File dataFile = new File(individualFolder+FileTools.EXTENSION_XML);
 		String schemaFolder = FileTools.getSchemasPath();
 		File schemaFile = new File(schemaFolder+File.separator+FileTools.FILE_COLORMAP+FileTools.EXTENSION_SCHEMA);
 		Element root = XmlTools.getRootFromFile(dataFile,schemaFile);

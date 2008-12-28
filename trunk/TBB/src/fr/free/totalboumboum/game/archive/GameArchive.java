@@ -21,12 +21,62 @@ package fr.free.totalboumboum.game.archive;
  * 
  */
 
-import java.sql.Date;
+import java.util.Date;
 import java.util.ArrayList;
+import java.util.GregorianCalendar;
+
+import fr.free.totalboumboum.configuration.profile.Profile;
+import fr.free.totalboumboum.game.match.Match;
+import fr.free.totalboumboum.game.tournament.AbstractTournament;
 
 public class GameArchive
 {
 	
+	public static GameArchive getArchive(AbstractTournament tournament, String folder)
+	{	GameArchive result = new GameArchive();
+		
+		// folder
+		result.folder = folder;
+		
+		// tournament
+		result.name = tournament.getName();
+		result.type = TournamentType.getType(tournament);
+		
+		// played
+		result.matches = tournament.getStats().getConfrontationCount();
+		Match match = tournament.getCurrentMatch();
+		if(match==null)
+			result.rounds = 0;
+		else
+			result.rounds = match.getStats().getConfrontationCount();
+		
+		// dates
+		result.start = tournament.getStats().getStartDate();
+		result.save = GregorianCalendar.getInstance().getTime();
+		
+		// players
+		ArrayList<Profile> profiles = tournament.getProfiles();
+		for(Profile profile: profiles)
+		{	String name = profile.getName();
+			result.addPlayer(name);
+		}
+		
+		return result;
+			
+	}
+	
+	/////////////////////////////////////////////////////////////////
+	// FOLDER			/////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	private String folder;
+	
+	public void setFolder(String folder)
+	{	this.folder = folder;
+	}
+	public String getFolder()
+	{	return folder;
+	}
+
 	/////////////////////////////////////////////////////////////////
 	// TOURNAMENT			/////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
@@ -90,10 +140,10 @@ public class GameArchive
 	/////////////////////////////////////////////////////////////////
 	// PLAYERS				/////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	private ArrayList<String> players;
+	private final ArrayList<String> players = new ArrayList<String>();
 	
-	public void setPlayers(ArrayList<String> players)
-	{	this.players = players;
+	public void addPlayer(String player)
+	{	players.add(player);
 	}
 	public ArrayList<String> getPlayers()
 	{	return players;

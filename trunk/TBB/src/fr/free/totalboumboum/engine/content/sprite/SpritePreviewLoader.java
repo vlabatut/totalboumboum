@@ -106,7 +106,7 @@ public class SpritePreviewLoader
 	@SuppressWarnings("unchecked")
 	private static void loadImages(String folder, SpritePreview result) throws ParserConfigurationException, SAXException, IOException
 	{	String folderPath = folder+File.separator+FileTools.FILE_ANIMES;
-		File dataFile = new File(folderPath+File.separator+FileTools.FILE_ANIMES+FileTools.EXTENSION_DATA);
+		File dataFile = new File(folderPath+File.separator+FileTools.FILE_ANIMES+FileTools.EXTENSION_XML);
 		if(dataFile.exists())
 		{	// opening
 			String schemaFolder = FileTools.getSchemasPath();

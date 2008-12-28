@@ -64,7 +64,7 @@ public class PointsProcessorLoader
 		String individualFolder = folderPath;
 		File schemaFile,dataFile;
 		// opening
-		dataFile = new File(individualFolder+FileTools.EXTENSION_DATA);
+		dataFile = new File(individualFolder+FileTools.EXTENSION_XML);
 		schemaFile = new File(schemaFolder+File.separator+FileTools.FILE_POINT+FileTools.EXTENSION_SCHEMA);
 		Element root = XmlTools.getRootFromFile(dataFile,schemaFile);
 		PointsProcessor result = loadPointProcessorElement(root);
@@ -77,7 +77,7 @@ public class PointsProcessorLoader
 		String individualFolder = FileTools.getPointsPath();
 		File schemaFile,dataFile;
 		// opening
-		dataFile = new File(individualFolder+File.separator+name+FileTools.EXTENSION_DATA);
+		dataFile = new File(individualFolder+File.separator+name+FileTools.EXTENSION_XML);
 		schemaFile = new File(schemaFolder+File.separator+FileTools.FILE_POINT+FileTools.EXTENSION_SCHEMA);
 		Element root = XmlTools.getRootFromFile(dataFile,schemaFile);
 		PointsProcessor result = loadPointProcessorElement(root);

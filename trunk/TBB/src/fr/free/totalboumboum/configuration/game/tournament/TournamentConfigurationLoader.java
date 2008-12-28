@@ -39,7 +39,7 @@ public class TournamentConfigurationLoader
 	public static TournamentConfiguration loadTournamentConfiguration() throws ParserConfigurationException, SAXException, IOException, IllegalArgumentException, SecurityException, IllegalAccessException, NoSuchFieldException, ClassNotFoundException
 	{	TournamentConfiguration result = new TournamentConfiguration();
 		String individualFolder = FileTools.getConfigurationPath();
-		File dataFile = new File(individualFolder+File.separator+FileTools.FILE_GAME_TOURNAMENT+FileTools.EXTENSION_DATA);
+		File dataFile = new File(individualFolder+File.separator+FileTools.FILE_GAME_TOURNAMENT+FileTools.EXTENSION_XML);
 		String schemaFolder = FileTools.getSchemasPath();
 		File schemaFile = new File(schemaFolder+File.separator+FileTools.FILE_GAME_TOURNAMENT+FileTools.EXTENSION_SCHEMA);
 		Element root = XmlTools.getRootFromFile(dataFile,schemaFile);

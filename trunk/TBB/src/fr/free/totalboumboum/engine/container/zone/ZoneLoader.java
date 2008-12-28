@@ -49,7 +49,7 @@ public class ZoneLoader
 		String individualFolder = folder;
 		File schemaFile,dataFile;
 		// opening
-		dataFile = new File(individualFolder+File.separator+FileTools.FILE_ZONE+FileTools.EXTENSION_DATA);
+		dataFile = new File(individualFolder+File.separator+FileTools.FILE_ZONE+FileTools.EXTENSION_XML);
 		schemaFile = new File(schemaFolder+File.separator+FileTools.FILE_ZONE+FileTools.EXTENSION_SCHEMA);
 		root = XmlTools.getRootFromFile(dataFile,schemaFile);
 		// tiles random variable

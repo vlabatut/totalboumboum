@@ -40,7 +40,7 @@ public class QuickStartConfigurationSaver
 	{	// build document
 		Element root = saveGameQuickStartElement(gameConfiguration);	
 		// save file
-		String engineFile = FileTools.getConfigurationPath()+File.separator+FileTools.FILE_GAME_QUICKSTART+FileTools.EXTENSION_DATA;
+		String engineFile = FileTools.getConfigurationPath()+File.separator+FileTools.FILE_GAME_QUICKSTART+FileTools.EXTENSION_XML;
 		File dataFile = new File(engineFile);
 		String schemaFolder = FileTools.getSchemasPath();
 		File schemaFile = new File(schemaFolder+File.separator+FileTools.FILE_GAME_QUICKSTART+FileTools.EXTENSION_SCHEMA);

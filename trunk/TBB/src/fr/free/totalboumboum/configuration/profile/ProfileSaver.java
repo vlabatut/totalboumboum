@@ -36,7 +36,7 @@ public class ProfileSaver
 	{	// build document
 		Element root = saveProfileElement(profile);	
 		// save file
-		String file = FileTools.getProfilesPath()+File.separator+fileName+FileTools.EXTENSION_DATA;
+		String file = FileTools.getProfilesPath()+File.separator+fileName+FileTools.EXTENSION_XML;
 		File dataFile = new File(file);
 		String schemaFolder = FileTools.getSchemasPath();
 		File schemaFile = new File(schemaFolder+File.separator+FileTools.FILE_PROFILE+FileTools.EXTENSION_SCHEMA);

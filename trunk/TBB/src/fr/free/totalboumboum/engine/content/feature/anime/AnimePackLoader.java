@@ -55,7 +55,7 @@ public class AnimePackLoader
 	public static AnimePack loadAnimePack(String folderPath, Level level, PredefinedColor color) throws IOException, ParserConfigurationException, SAXException
 	{	AnimePack result = new AnimePack();
 		result.setColor(color);
-		File dataFile = new File(folderPath+File.separator+FileTools.FILE_ANIMES+FileTools.EXTENSION_DATA);
+		File dataFile = new File(folderPath+File.separator+FileTools.FILE_ANIMES+FileTools.EXTENSION_XML);
 		if(dataFile.exists())
 		{	// opening
 			String schemaFolder = FileTools.getSchemasPath();

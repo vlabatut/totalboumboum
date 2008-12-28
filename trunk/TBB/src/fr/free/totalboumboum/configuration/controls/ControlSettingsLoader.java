@@ -38,7 +38,7 @@ public class ControlSettingsLoader
 {	
 	public static ControlSettings loadControlSettings(String fileName) throws ParserConfigurationException, SAXException, IOException, IllegalArgumentException, SecurityException, IllegalAccessException, NoSuchFieldException
 	{	ControlSettings result;
-		String controlFile = FileTools.getControlsPath()+File.separator+fileName+FileTools.EXTENSION_DATA;
+		String controlFile = FileTools.getControlsPath()+File.separator+fileName+FileTools.EXTENSION_XML;
 		File dataFile = new File(controlFile);
 		String schemaFolder = FileTools.getSchemasPath();
 		File schemaFile = new File(schemaFolder+File.separator+FileTools.FILE_CONTROLS+FileTools.EXTENSION_SCHEMA);

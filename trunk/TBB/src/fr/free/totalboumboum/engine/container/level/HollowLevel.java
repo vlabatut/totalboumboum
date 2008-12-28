@@ -83,7 +83,7 @@ public class HollowLevel
 		String individualFolder = FileTools.getLevelsPath()+File.separator+folder;
 		File schemaFile,dataFile;
 		// opening
-		dataFile = new File(individualFolder+File.separator+FileTools.FILE_LEVEL+FileTools.EXTENSION_DATA);
+		dataFile = new File(individualFolder+File.separator+FileTools.FILE_LEVEL+FileTools.EXTENSION_XML);
 		schemaFile = new File(schemaFolder+File.separator+FileTools.FILE_LEVEL+FileTools.EXTENSION_SCHEMA);
 		Element root = XmlTools.getRootFromFile(dataFile,schemaFile);
 		// loading

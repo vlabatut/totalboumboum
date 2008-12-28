@@ -62,7 +62,7 @@ public class PlayersPreviewer
 		String individualFolder = folder;
 		File schemaFile,dataFile;
 		// opening
-		dataFile = new File(individualFolder+File.separator+FileTools.FILE_PLAYERS+FileTools.EXTENSION_DATA);
+		dataFile = new File(individualFolder+File.separator+FileTools.FILE_PLAYERS+FileTools.EXTENSION_XML);
 		schemaFile = new File(schemaFolder+File.separator+FileTools.FILE_PLAYERS+FileTools.EXTENSION_SCHEMA);
 		root = XmlTools.getRootFromFile(dataFile,schemaFile);
 		// reading

@@ -75,6 +75,7 @@ public class XmlTools
 	public static final String ELT_CONSTANT = "constant";
 	public static final String ELT_CONTROL = "control";
 	public static final String ELT_CONTROLS = "controls";
+	public static final String ELT_DATES = "dates";
 	public static final String ELT_DIRECTION = "direction";
 	public static final String ELT_DISCRETIZE = "discretize";
 	public static final String ELT_DISPLAY = "display";
@@ -142,6 +143,7 @@ public class XmlTools
 	public static final String ELT_PANEL_DIMENSION = "panelDimension";
 	public static final String ELT_PERMISSION = "permission";
 	public static final String ELT_PERMISSIONS = "permissions";
+	public static final String ELT_PLAYED = "played";
 	public static final String ELT_PLAYER = "player";
 	public static final String ELT_PLAYERS = "players";
 	public static final String ELT_POINT = "point";
@@ -240,6 +242,7 @@ public class XmlTools
 	public static final String ATT_MARGIN = "margin";
 	public static final String ATT_MATCH_LIMIT = "matchLimit";
 	public static final String ATT_MATCH_LIMIT_VALUE = "matchLimitValue";
+	public static final String ATT_MATCHES = "matches";
 	public static final String ATT_MAXIMIZE = "maximize";
 	public static final String ATT_MAXPLAYERS = "maxPlayers";
 	public static final String ATT_MAX_STRENGTH = "maxStrength";
@@ -261,6 +264,7 @@ public class XmlTools
 	public static final String ATT_RED = "red";
 	public static final String ATT_REPEAT = "repeat";
 	public static final String ATT_ROUNDS = "rounds";
+	public static final String ATT_SAVE = "save";
 	public static final String ATT_SCALE = "scale";
 	public static final String ATT_SCORE = "score";
 	public static final String ATT_SHADOW = "shadow";
@@ -269,6 +273,7 @@ public class XmlTools
 	public static final String ATT_SHARE = "share";
 	public static final String ATT_SPRITE_FOLDER = "spriteFolder";
 	public static final String ATT_SPRITE_PACK = "spritePack";
+	public static final String ATT_START = "start";
 	public static final String ATT_STRENGTH = "strength";
 	public static final String ATT_SUP = "sup";
 	public static final String ATT_TARGET = "target";
