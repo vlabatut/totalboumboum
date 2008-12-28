@@ -208,4 +208,17 @@ public class FileTools
 		}
 		return result;
 	}
+	
+	public static void deleteDirectory(File dir)
+	{	if(dir.exists() && dir.isDirectory())
+		{	File[] files = dir.listFiles();
+			for(File f: files)
+			{	if(f.isFile())
+					f.delete();
+				else
+					deleteDirectory(f);
+			}
+			dir.delete();
+		}		
+	}
 }

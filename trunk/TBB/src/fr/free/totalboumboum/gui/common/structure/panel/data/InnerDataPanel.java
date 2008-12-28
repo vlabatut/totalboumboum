@@ -21,6 +21,8 @@ package fr.free.totalboumboum.gui.common.structure.panel.data;
  * 
  */
 
+import java.util.ArrayList;
+
 import fr.free.totalboumboum.gui.common.structure.panel.ContentPanel;
 import fr.free.totalboumboum.gui.common.structure.panel.SplitMenuPanel;
 import fr.free.totalboumboum.gui.frames.NormalFrame;
@@ -48,5 +50,24 @@ public abstract class InnerDataPanel extends ContentPanel
 	/////////////////////////////////////////////////////////////////
 	public NormalFrame getFrame()
 	{	return container.getFrame();
+	}
+	
+	/////////////////////////////////////////////////////////////////
+	// LISTENERS		/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	private ArrayList<DataPanelListener> listeners = new ArrayList<DataPanelListener>();
+	
+	public void addListener(DataPanelListener listener)
+	{	if(!listeners.contains(listener))
+			listeners.add(listener);		
+	}
+
+	public void removeListener(DataPanelListener listener)
+	{	listeners.remove(listener);		
+	}
+	
+	protected void fireDataPanelSelectionChange()
+	{	for(DataPanelListener listener: listeners)
+			listener.dataPanelSelectionChange();
 	}
 }
