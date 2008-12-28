@@ -26,6 +26,7 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.TreeSet;
 
 import javax.swing.Box;
 import javax.swing.BoxLayout;
@@ -50,6 +51,7 @@ import fr.free.totalboumboum.gui.menus.options.game.quickstart.profile.SelectPro
 import fr.free.totalboumboum.gui.menus.options.game.quickstart.round.SelectRoundSplitPanel;
 import fr.free.totalboumboum.gui.tools.GuiKeys;
 import fr.free.totalboumboum.gui.tools.GuiTools;
+import fr.free.totalboumboum.tools.StringTools;
 
 public class QuickStartData extends EntitledDataPanel implements PlayersSelectionSubPanelListener, MouseListener
 {	
@@ -126,12 +128,7 @@ public class QuickStartData extends EntitledDataPanel implements PlayersSelectio
 	
 	@Override
 	public void mousePressed(MouseEvent e)
-	{	
-//		JLabel label = (JLabel)e.getComponent();
-//		int[] pos = playersPanel.getLabelPosition(label);
-		// round
-		StringBuffer roundFile = quickStartConfiguration.getRoundName();
-		SelectRoundSplitPanel selectRoundPanel = new SelectRoundSplitPanel(container.getContainer(),container,roundFile);
+	{	SelectRoundSplitPanel selectRoundPanel = new SelectRoundSplitPanel(container.getContainer(),container,quickStartConfiguration);
 		getContainer().replaceWith(selectRoundPanel);
 	}
 	
@@ -191,14 +188,28 @@ public class QuickStartData extends EntitledDataPanel implements PlayersSelectio
 	/////////////////////////////////////////////////////////////////
 	private void refreshRound()
 	{	String roundFile = quickStartConfiguration.getRoundName().toString();
-		if(roundFile!=null)
-			roundPanel.setLabelText(0,0,roundFile.toString(),roundFile.toString());
+		if(roundFile==null)
+		{	roundPanel.setLabelText(0,0,null,null);
+			roundPanel.setLabelText(0,1,null,null);
+		}
 		else
-			roundPanel.setLabelText(0,0,null,null);
+		{	roundPanel.setLabelText(0,0,roundFile.toString(),roundFile.toString());
+			TreeSet<Integer> allowedPlayers = quickStartConfiguration.getAllowedPlayers();
+			String allowedPlayersStr = StringTools.formatAllowedPlayerNumbers(quickStartConfiguration.getAllowedPlayers());
+			roundPanel.setLabelText(0,1,allowedPlayersStr,allowedPlayersStr);
+			int playersNumber = playersPanel.getPlayers().size();
+			Color bg;
+			if(allowedPlayers.contains(playersNumber))
+				bg = GuiTools.COLOR_TABLE_REGULAR_BACKGROUND;
+			else
+				bg = GuiTools.COLOR_TABLE_SELECTED_BACKGROUND;
+			roundPanel.setLabelBackground(0,1,bg);
+		}
+		fireDataPanelSelectionChange();
 	}
 
 	private UntitledSubPanelTable makeRoundPanel(int width, int height)
-	{	int cols = 2;
+	{	int cols = 3;
 		int lines = 1;
 		int margin = GuiTools.subPanelMargin;
 		UntitledSubPanelTable result = new UntitledSubPanelTable(width,height,cols,lines,false);
@@ -206,15 +217,27 @@ public class QuickStartData extends EntitledDataPanel implements PlayersSelectio
 		int headerHeight = result.getHeaderHeight();
 		int lineHeight = result.getLineHeight();
 		int browseWidth = lineHeight;
-		int fileWidth = width - (browseWidth + 3*margin);		
+		int nameWidth = (width - (browseWidth + 4*margin))/2;		
+		int allowedPlayersWidth = width - (browseWidth + 4*margin + nameWidth);		
 		
 		{	int line = 0;
 			int col = 0;
 			// name
 			{	// size
-				result.setColSubMinWidth(col,fileWidth);
-				result.setColSubPreferredWidth(col,fileWidth);
-				result.setColSubMaxWidth(col,fileWidth);
+				result.setColSubMinWidth(col,nameWidth);
+				result.setColSubPreferredWidth(col,nameWidth);
+				result.setColSubMaxWidth(col,nameWidth);
+				// color
+				Color bg = GuiTools.COLOR_TABLE_REGULAR_BACKGROUND;
+				result.setLabelBackground(line,col,bg);
+				// next
+				col++;
+			}
+			// allowed players
+			{	// size
+				result.setColSubMinWidth(col,allowedPlayersWidth);
+				result.setColSubPreferredWidth(col,allowedPlayersWidth);
+				result.setColSubMaxWidth(col,allowedPlayersWidth);
 				// color
 				Color bg = GuiTools.COLOR_TABLE_REGULAR_BACKGROUND;
 				result.setLabelBackground(line,col,bg);
@@ -258,6 +281,11 @@ public class QuickStartData extends EntitledDataPanel implements PlayersSelectio
 	{	ArrayList<Profile> players = playersPanel.getPlayers();
 		SelectProfileSplitPanel selectProfilePanel = new SelectProfileSplitPanel(container.getContainer(),container,index,players);
 		getContainer().replaceWith(selectProfilePanel);
+	}
+
+	@Override
+	public void playerSelectionPlayerRemoved(int index)
+	{	refreshRound();
 	}
 
 	@Override

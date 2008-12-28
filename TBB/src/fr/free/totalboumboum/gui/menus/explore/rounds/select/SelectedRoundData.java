@@ -266,6 +266,7 @@ public class SelectedRoundData extends EntitledDataPanel implements FolderBrowse
 		miscPanel.setRound(selectedRound);
 		refreshImage();
 		refreshLimits();
+		fireDataPanelSelectionChange();
 	}
 
 	@Override

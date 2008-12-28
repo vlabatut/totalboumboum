@@ -23,6 +23,7 @@ package fr.free.totalboumboum.configuration.game.quickstart;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.TreeSet;
 
 import javax.xml.parsers.ParserConfigurationException;
 
@@ -48,14 +49,29 @@ public class QuickStartConfigurationLoader
 	}
 
 	private static void loadGameQuickStartElement(Element root, QuickStartConfiguration result) throws ParserConfigurationException, SAXException, IOException, IllegalArgumentException, SecurityException, IllegalAccessException, NoSuchFieldException, ClassNotFoundException
-	{	// name
+	{	// round
 		Element roundElement = root.getChild(XmlTools.ELT_ROUND);
-		String quickStartName = roundElement.getAttribute(XmlTools.ATT_NAME).getValue().trim();
-		result.setRoundName(new StringBuffer(quickStartName));
+		loadRoundElement(roundElement,result);
 		
 		// players
 		Element playersElement = root.getChild(XmlTools.ELT_PLAYERS);
 		ProfilesSelection quickStartSelected = ProfilesSelectionLoader.loadProfilesSelection(playersElement);
 		result.setProfilesSelection(quickStartSelected);
+	}
+	
+	private static void loadRoundElement(Element root, QuickStartConfiguration result)
+	{	// name
+		String quickStartName = root.getAttribute(XmlTools.ATT_NAME).getValue().trim();
+		result.setRoundName(new StringBuffer(quickStartName));
+		
+		// allowed players
+		TreeSet<Integer> allowedPlayers = new TreeSet<Integer>();
+		String apStr = root.getAttributeValue(XmlTools.ATT_ALLOWED_PLAYERS);
+		String[] split = apStr.split(" ");
+		for(String s: split)
+		{	int value = Integer.parseInt(s);
+			allowedPlayers.add(value);
+		}
+		result.setAllowedPlayers(allowedPlayers);
 	}
 }

@@ -822,12 +822,14 @@ public class Launcher
 	 * - correction : bug de placement des joueurs de gauche dans le niveau testAI
 	 * - nouveauté : bouton d'enregistrement en cours de partie
 	 * - nouveauté : enregistrement à la demande
+	 * - correction : activation/désactivation des boutons dans les menus quand c'est nécessaire
+	 * - modification : test sur le nombre de joueurs dans les options quickstart
 	 * 
 	 * - nouveauté : possibilité de créer un nouveau slot d'enregistrement
 	 * - nouveauté : possibilité de supprimer un slot d'enregistrement existant
 	 * - nouveauté : chargement d'une partie préalablement enregistrée
 	 * - nouveauté : enregistrement automatique
-	 * - modification : check sur le nombre de joueurs dans quickstart options et tournament settings + gérer la désactivation des boutons, y compris dans quickmatch (pas commencer tournoi si pas assez de joueurs/rounds)
+	 * - modification : check sur le nombre de joueurs dans tournament settings + gérer la désactivation des boutons, y compris dans quickmatch (pas commencer tournoi si pas assez de joueurs/rounds)
 	 * 
 	 * *******************************************************
 	 * *********************** A FAIRE ***********************

@@ -47,6 +47,9 @@ public class SelectHeroSplitPanel extends SplitMenuPanel
 		setMenuPart(new SelectHeroMenu(this,parent,profile));
 	}
 	
+	/////////////////////////////////////////////////////////////////
+	// PAINT						/////////////////////////////////
+	/////////////////////////////////////////////////////////////////
 	@Override
 	public void paintComponent(Graphics g)
 	{	g.drawImage(image, 0, 0, null);

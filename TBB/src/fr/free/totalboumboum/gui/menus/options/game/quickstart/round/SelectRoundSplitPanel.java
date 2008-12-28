@@ -25,6 +25,7 @@ import java.awt.BorderLayout;
 import java.awt.Graphics;
 import java.awt.image.BufferedImage;
 
+import fr.free.totalboumboum.configuration.game.quickstart.QuickStartConfiguration;
 import fr.free.totalboumboum.gui.common.structure.MenuContainer;
 import fr.free.totalboumboum.gui.common.structure.panel.SplitMenuPanel;
 import fr.free.totalboumboum.gui.common.structure.panel.menu.MenuPanel;
@@ -36,14 +37,14 @@ public class SelectRoundSplitPanel extends SplitMenuPanel
 
 	private BufferedImage image;
 
-	public SelectRoundSplitPanel(MenuContainer container, MenuPanel parent, StringBuffer roundFile)
+	public SelectRoundSplitPanel(MenuContainer container, MenuPanel parent, QuickStartConfiguration quickStartConfiguration)
 	{	super(container,parent,BorderLayout.LINE_START,GuiTools.VERTICAL_SPLIT_RATIO);
 	
 		// background
 		image = GuiConfiguration.getMiscConfiguration().getDarkBackground();
 		
 		// panels
-		setMenuPart(new SelectRoundMenu(this,parent,roundFile));
+		setMenuPart(new SelectRoundMenu(this,parent,quickStartConfiguration));
 	}
 	
 	/////////////////////////////////////////////////////////////////

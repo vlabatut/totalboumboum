@@ -22,7 +22,6 @@ package fr.free.totalboumboum.gui.game.save;
  */
 
 import java.awt.Dimension;
-import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 
@@ -54,6 +53,7 @@ public class SaveData extends EntitledDataPanel implements FolderBrowserSubPanel
 	private ArchiveMiscSubPanel miscPanel;
 	private ArchivePlayersSubPanel playersPanel;
 
+	@SuppressWarnings("unused")
 	private String baseFolder;
 	
 	public SaveData(SplitMenuPanel container, String baseFolder)

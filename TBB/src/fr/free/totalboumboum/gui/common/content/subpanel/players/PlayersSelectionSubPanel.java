@@ -319,6 +319,7 @@ public class PlayersSelectionSubPanel extends UntitledSubPanelTable implements M
 					else if(index<players.size())
 					{	players.remove(index);
 						refresh();
+						firePlayerRemoved(index);
 					}
 				}
 				break;
@@ -371,6 +372,11 @@ public class PlayersSelectionSubPanel extends UntitledSubPanelTable implements M
 	{	listeners.remove(listener);		
 	}
 	
+	public void firePlayerRemoved(int index)
+	{	for(PlayersSelectionSubPanelListener listener: listeners)
+			listener.playerSelectionPlayerRemoved(index);
+	}
+
 	public void firePlayerAdded(int index)
 	{	for(PlayersSelectionSubPanelListener listener: listeners)
 			listener.playerSelectionPlayerAdded(index);

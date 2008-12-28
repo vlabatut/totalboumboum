@@ -23,6 +23,7 @@ package fr.free.totalboumboum.configuration.game.quickstart;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.TreeSet;
 
 import javax.xml.parsers.ParserConfigurationException;
 
@@ -36,9 +37,9 @@ import fr.free.totalboumboum.tools.XmlTools;
 
 public class QuickStartConfigurationSaver
 {	
-	public static void saveQuickStartConfiguration(QuickStartConfiguration gameConfiguration) throws ParserConfigurationException, SAXException, IOException
+	public static void saveQuickStartConfiguration(QuickStartConfiguration quickStartConfiguration) throws ParserConfigurationException, SAXException, IOException
 	{	// build document
-		Element root = saveGameQuickStartElement(gameConfiguration);	
+		Element root = saveGameQuickStartElement(quickStartConfiguration);	
 		// save file
 		String engineFile = FileTools.getConfigurationPath()+File.separator+FileTools.FILE_GAME_QUICKSTART+FileTools.EXTENSION_XML;
 		File dataFile = new File(engineFile);
@@ -47,20 +48,39 @@ public class QuickStartConfigurationSaver
 		XmlTools.makeFileFromRoot(dataFile,schemaFile,root);
 	}
 
-	private static Element saveGameQuickStartElement(QuickStartConfiguration gameConfiguration)
+	private static Element saveGameQuickStartElement(QuickStartConfiguration quickStartConfiguration)
 	{	Element result = new Element(XmlTools.ELT_GAME_QUICKSTART); 
 			
-		// name
-		Element roundElement = new Element(XmlTools.ELT_ROUND);
-		String quickStart = gameConfiguration.getRoundName().toString();
-		roundElement.setAttribute(XmlTools.ATT_NAME,quickStart);
+		// round
+		Element roundElement = saveRoundELement(quickStartConfiguration);
 		result.addContent(roundElement);
-		
+	
 		// players
 		Element playersElement = new Element(XmlTools.ELT_PLAYERS);
-		ProfilesSelection quickStartSelected = gameConfiguration.getProfilesSelection();
+		ProfilesSelection quickStartSelected = quickStartConfiguration.getProfilesSelection();
 		ProfilesSelectionSaver.saveProfilesSelection(playersElement,quickStartSelected);
 		result.addContent(playersElement);
+		
+		return result;
+	}
+	
+	private static Element saveRoundELement(QuickStartConfiguration quickStartConfiguration)
+	{	Element result = new Element(XmlTools.ELT_ROUND); 
+	
+		// name
+		String roundName = quickStartConfiguration.getRoundName().toString();
+		result.setAttribute(XmlTools.ATT_NAME,roundName);
+
+		// allowed players
+		TreeSet<Integer> allowedPlayers = quickStartConfiguration.getAllowedPlayers();
+		String allowedPlayersStr = "";
+		for(Integer i: allowedPlayers)
+		{	String str = i.toString();
+			allowedPlayersStr = allowedPlayersStr + str + " ";
+		}
+		if(allowedPlayers.size()>0)
+			allowedPlayersStr = allowedPlayersStr.substring(0,allowedPlayersStr.length()-1);
+		result.setAttribute(XmlTools.ATT_ALLOWED_PLAYERS,allowedPlayersStr);
 		
 		return result;
 	}

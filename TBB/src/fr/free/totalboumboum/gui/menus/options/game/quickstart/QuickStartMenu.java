@@ -26,6 +26,7 @@ import java.awt.Graphics;
 import java.awt.event.ActionEvent;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.TreeSet;
 
 import javax.swing.Box;
 import javax.swing.BoxLayout;
@@ -38,21 +39,17 @@ import fr.free.totalboumboum.configuration.Configuration;
 import fr.free.totalboumboum.configuration.game.quickstart.QuickStartConfiguration;
 import fr.free.totalboumboum.configuration.game.quickstart.QuickStartConfigurationSaver;
 import fr.free.totalboumboum.gui.common.structure.panel.SplitMenuPanel;
+import fr.free.totalboumboum.gui.common.structure.panel.data.DataPanelListener;
 import fr.free.totalboumboum.gui.common.structure.panel.menu.InnerMenuPanel;
 import fr.free.totalboumboum.gui.common.structure.panel.menu.MenuPanel;
 import fr.free.totalboumboum.gui.tools.GuiKeys;
 import fr.free.totalboumboum.gui.tools.GuiTools;
 
-public class QuickStartMenu extends InnerMenuPanel
+public class QuickStartMenu extends InnerMenuPanel implements DataPanelListener
 {	private static final long serialVersionUID = 1L;
 	
 	private QuickStartData quickstartPanel;
 	
-	@SuppressWarnings("unused")
-	private JButton buttonConfirm;
-	@SuppressWarnings("unused")
-	private JButton buttonCancel;
-		
 	public QuickStartMenu(SplitMenuPanel container, MenuPanel parent)
 	{	super(container,parent);
 	
@@ -78,6 +75,7 @@ public class QuickStartMenu extends InnerMenuPanel
 	
 		// panels
 		quickstartPanel = new QuickStartData(container);
+		quickstartPanel.addListener(this);
 		container.setDataPart(quickstartPanel);
 		initConfiguration();
 	}
@@ -90,8 +88,26 @@ public class QuickStartMenu extends InnerMenuPanel
 	public void initConfiguration()
 	{	quickStartConfiguration = Configuration.getGameConfiguration().getQuickStartConfiguration();
 		quickstartPanel.setQuickStartConfiguration(quickStartConfiguration.copy());
+		refreshButtons();
 	}
 
+	/////////////////////////////////////////////////////////////////
+	// BUTTONS			/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	private JButton buttonConfirm;
+	@SuppressWarnings("unused")
+	private JButton buttonCancel;
+		
+	private void refreshButtons()
+	{	QuickStartConfiguration copyConfiguration = quickstartPanel.getQuickStartConfiguration();
+		TreeSet<Integer> allowedPlayers = copyConfiguration.getAllowedPlayers();
+		int playersNumber = copyConfiguration.getProfilesSelection().getProfileCount();
+		if(allowedPlayers.contains(playersNumber))
+			buttonConfirm.setEnabled(true);
+		else
+			buttonConfirm.setEnabled(false);		
+	}
+	
 	/////////////////////////////////////////////////////////////////
 	// ACTION LISTENER				/////////////////////////////////
 	/////////////////////////////////////////////////////////////////
@@ -143,4 +159,12 @@ public class QuickStartMenu extends InnerMenuPanel
 //		getParent().paintComponents(g);
 		super.paintComponent(g);
     }
+
+	/////////////////////////////////////////////////////////////////
+	// DATA PANEL LISTENER			/////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	@Override
+	public void dataPanelSelectionChange()
+	{	refreshButtons();
+	}
 }

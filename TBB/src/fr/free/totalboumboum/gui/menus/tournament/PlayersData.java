@@ -127,6 +127,11 @@ public class PlayersData extends EntitledDataPanel implements PlayersSelectionSu
 	}
 
 	@Override
+	public void playerSelectionPlayerRemoved(int index)
+	{	
+	}
+
+	@Override
 	public void playerSelectionProfileSet(int index)
 	{	SelectProfileSplitPanel selectProfilePanel = new SelectProfileSplitPanel(container.getContainer(),container,index,players);
 		getContainer().replaceWith(selectProfilePanel);
