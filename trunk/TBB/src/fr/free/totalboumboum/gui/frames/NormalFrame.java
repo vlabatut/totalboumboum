@@ -40,7 +40,7 @@ import java.awt.Container;
 import java.io.File;
 import java.io.IOException;
 
-public class NormalFrame extends MainFrame implements MenuContainer
+public class NormalFrame extends AbstractFrame implements MenuContainer
 {	private static final long serialVersionUID = 1L;
 
 	private MainMenu mainMenuPanel;

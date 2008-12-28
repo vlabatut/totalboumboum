@@ -509,8 +509,14 @@ public class GuiKeys
 			public static final String MENU_TOURNAMENT_SETTINGS_BUTTON_SELECT = MENU_TOURNAMENT_SETTINGS_BUTTON+SELECT;
 	
 	/* GAME */
+		/* SAVE */
+		public static final String GAME_SAVE = GAME+SAVE;
+			/* BUTTONS */	
+			public static final String GAME_SAVE_BUTTON = GAME_SAVE+BUTTON;
+			public static final String GAME_SAVE_BUTTON_CANCEL = GAME_SAVE_BUTTON+CURRENT+CANCEL;
+			public static final String GAME_SAVE_BUTTON_CONFIRM = GAME_SAVE_BUTTON+CONFIRM;
 		/* TOURNAMENT */
-			public static final String GAME_TOURNAMENT = GAME+TOURNAMENT;
+		public static final String GAME_TOURNAMENT = GAME+TOURNAMENT;
 			/* BUTTONS */	
 			public static final String GAME_TOURNAMENT_BUTTON = GAME_TOURNAMENT+BUTTON;
 			public static final String GAME_TOURNAMENT_BUTTON_CURRENT_MATCH = GAME_TOURNAMENT_BUTTON+CURRENT+MATCH;
@@ -532,7 +538,7 @@ public class GuiKeys
 			public static final String GAME_TOURNAMENT_STATISTICS = GAME_TOURNAMENT+STATISTICS;
 			public static final String GAME_TOURNAMENT_STATISTICS_TITLE = GAME_TOURNAMENT_STATISTICS+TITLE;
 		/* MATCH */
-			public static final String GAME_MATCH = GAME+MATCH;
+		public static final String GAME_MATCH = GAME+MATCH;
 			/* BUTTON */	
 			public static final String GAME_MATCH_BUTTON = GAME_MATCH+BUTTON;
 			public static final String GAME_MATCH_BUTTON_QUIT = GAME_MATCH_BUTTON+QUIT;
@@ -554,7 +560,7 @@ public class GuiKeys
 			public static final String GAME_MATCH_STATISTICS = GAME_MATCH+STATISTICS;
 			public static final String GAME_MATCH_STATISTICS_TITLE = GAME_MATCH_STATISTICS+TITLE;
 		/* ROUND */
-			public static final String GAME_ROUND = GAME+ROUND;
+		public static final String GAME_ROUND = GAME+ROUND;
 			/* BUTTON */	
 			public static final String GAME_ROUND_BUTTON = GAME_ROUND+BUTTON;
 			public static final String GAME_ROUND_BUTTON_QUIT = GAME_ROUND_BUTTON+QUIT;

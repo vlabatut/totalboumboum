@@ -56,7 +56,7 @@ import java.awt.image.BufferStrategy;
 import java.io.IOException;
 import java.util.ArrayList;
 
-public class QuickFrame extends MainFrame implements ActionListener, LoopRenderPanel, RoundRenderPanel
+public class QuickFrame extends AbstractFrame implements ActionListener, LoopRenderPanel, RoundRenderPanel
 {	private static final long serialVersionUID = 1L;
 
 	private BufferStrategy bufferStrategy;

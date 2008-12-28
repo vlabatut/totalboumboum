@@ -1,4 +1,4 @@
-package fr.free.totalboumboum.gui.menus.tournament.hero;
+package fr.free.totalboumboum.gui.game.save;
 
 /*
  * Total Boum Boum
@@ -23,43 +23,29 @@ package fr.free.totalboumboum.gui.menus.tournament.hero;
 
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
-import java.io.IOException;
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 
 import javax.swing.Box;
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
-import javax.xml.parsers.ParserConfigurationException;
 
-import org.xml.sax.SAXException;
-
-import fr.free.totalboumboum.configuration.profile.Profile;
-import fr.free.totalboumboum.configuration.profile.ProfileLoader;
-import fr.free.totalboumboum.configuration.profile.SpriteInfo;
-import fr.free.totalboumboum.engine.content.sprite.SpritePreview;
+import fr.free.totalboumboum.game.tournament.AbstractTournament;
 import fr.free.totalboumboum.gui.common.structure.panel.SplitMenuPanel;
 import fr.free.totalboumboum.gui.common.structure.panel.menu.InnerMenuPanel;
 import fr.free.totalboumboum.gui.common.structure.panel.menu.MenuPanel;
-import fr.free.totalboumboum.gui.menus.explore.heroes.select.SelectedHeroData;
 import fr.free.totalboumboum.gui.tools.GuiKeys;
 import fr.free.totalboumboum.gui.tools.GuiTools;
+import fr.free.totalboumboum.tools.FileTools;
 
-public class SelectHeroMenu extends InnerMenuPanel
+public class SaveMenu extends InnerMenuPanel
 {	private static final long serialVersionUID = 1L;
-	
-	@SuppressWarnings("unused")
-	private JButton buttonCancel;
-	@SuppressWarnings("unused")
-	private JButton buttonConfirm;
 
-	private Profile profile;
-	
-	private SelectedHeroData heroData;
-
-	public SelectHeroMenu(SplitMenuPanel container, MenuPanel parent, Profile profile)
+	public SaveMenu(SplitMenuPanel container, MenuPanel parent)
 	{	super(container, parent);
-		this.profile = profile;
-	
+		
 		// layout
 		BoxLayout layout = new BoxLayout(this,BoxLayout.PAGE_AXIS); 
 		setLayout(layout);
@@ -70,57 +56,57 @@ public class SelectHeroMenu extends InnerMenuPanel
 		// sizes
 		int buttonWidth = getWidth();
 		int buttonHeight = GuiTools.buttonTextHeight;
-		ArrayList<String> texts = GuiKeys.getKeysLike(GuiKeys.MENU_TOURNAMENT_PLAYERS_BUTTON);
+		ArrayList<String> texts = GuiKeys.getKeysLike(GuiKeys.GAME_SAVE_BUTTON);
 		int fontSize = GuiTools.getOptimalFontSize(buttonWidth*0.8, buttonHeight*0.9, texts);
 
 		// buttons
 		add(Box.createVerticalGlue());
-		buttonConfirm = GuiTools.createButton(GuiKeys.MENU_TOURNAMENT_PLAYERS_BUTTON_CONFIRM,buttonWidth,buttonHeight,fontSize,this);
+		buttonConfirm = GuiTools.createButton(GuiKeys.GAME_SAVE_BUTTON_CONFIRM,buttonWidth,buttonHeight,fontSize,this);
 		add(Box.createRigidArea(new Dimension(0,GuiTools.buttonVerticalSpace)));
-		buttonCancel = GuiTools.createButton(GuiKeys.MENU_TOURNAMENT_PLAYERS_BUTTON_CANCEL,buttonWidth,buttonHeight,fontSize,this);
+		buttonCancel = GuiTools.createButton(GuiKeys.GAME_SAVE_BUTTON_CANCEL,buttonWidth,buttonHeight,fontSize,this);
 		add(Box.createVerticalGlue());		
 
 		// panels
-		heroData = new SelectedHeroData(container);
-		container.setDataPart(heroData);
+		levelData = new SaveData(container,FileTools.getTournamentsPath());
+		container.setDataPart(levelData);
+	}
+
+	/////////////////////////////////////////////////////////////////
+	// PANELS						/////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	private SaveData levelData;
+
+	/////////////////////////////////////////////////////////////////
+	// BUTTONS						/////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	@SuppressWarnings("unused")
+	private JButton buttonConfirm;
+	@SuppressWarnings("unused")
+	private JButton buttonCancel;
+
+	/////////////////////////////////////////////////////////////////
+	// TOURNAMENT					/////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	private AbstractTournament tournament;
+	
+	public void setTournament(AbstractTournament tournament)
+	{	this.tournament = tournament;		
 	}
 	
 	/////////////////////////////////////////////////////////////////
 	// ACTION LISTENER				/////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	public void actionPerformed(ActionEvent e)
-	{	if(e.getActionCommand().equals(GuiKeys.MENU_TOURNAMENT_PLAYERS_BUTTON_CANCEL))
+	{	if(e.getActionCommand().equals(GuiKeys.GAME_SAVE_BUTTON_CANCEL))
 		{	replaceWith(parent);
 	    }
-		else if(e.getActionCommand().equals(GuiKeys.MENU_TOURNAMENT_PLAYERS_BUTTON_CONFIRM))
-		{	SpritePreview heroPreview = heroData.getSelectedHeroPreview();
-			if(heroPreview!=null)
-			{	// update profile
-				SpriteInfo spriteInfo = profile.getSelectedSprite();
-				String spriteName = heroPreview.getName();
-				spriteInfo.setName(spriteName);
-				String spriteFolder = heroPreview.getFolder();
-				spriteInfo.setFolder(spriteFolder);
-				String spritePack = heroPreview.getPack();
-				spriteInfo.setPack(spritePack);
-				// reload portraits
-				try
-				{	ProfileLoader.reloadPortraits(profile);
-				}
-				catch (ParserConfigurationException e1)
-				{	e1.printStackTrace();
-				}
-				catch (SAXException e1)
-				{	e1.printStackTrace();
-				}
-				catch (IOException e1)
-				{	e1.printStackTrace();
-				}
-				catch (ClassNotFoundException e1)
-				{	e1.printStackTrace();
-				}
-			}
-			parent.refresh();
+		else if(e.getActionCommand().equals(GuiKeys.GAME_SAVE_BUTTON_CANCEL))
+		{	String path = FileTools.getSavesPath()+levelData.getSelectedFile();
+			File file = new File(path);
+			FileOutputStream out = new FileOutputStream(file);
+			ObjectOutputStream oOut = new ObjectOutputStream(out);
+			oOut.writeObject(tournament);
+			oOut.close();
 			replaceWith(parent);
 	    }
 	} 
