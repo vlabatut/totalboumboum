@@ -24,6 +24,7 @@ package fr.free.totalboumboum.gui.common.content.subpanel.players;
 public interface PlayersSelectionSubPanelListener
 {
 	public void playerSelectionPlayerAdded(int index);
+	public void playerSelectionPlayerRemoved(int index);
 	public void playerSelectionProfileSet(int index);
 	public void playerSelectionHeroSet(int index);
 }

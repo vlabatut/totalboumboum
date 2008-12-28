@@ -23,6 +23,7 @@ package fr.free.totalboumboum.configuration.game.quickstart;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.TreeSet;
 
 import javax.xml.parsers.ParserConfigurationException;
 
@@ -42,14 +43,15 @@ import fr.free.totalboumboum.game.tournament.single.SingleTournament;
 
 public class QuickStartConfiguration
 {
+	@SuppressWarnings("unchecked")
 	public QuickStartConfiguration copy()
 	{	QuickStartConfiguration result = new QuickStartConfiguration();
 
 		// quickstart
 		ProfilesSelection quickstartCopy = profilesSelection.copy();
 		result.setProfilesSelection(quickstartCopy);
-		result.setRoundName(roundName);
-
+		result.setRoundName(new StringBuffer(roundName));
+		result.setAllowedPlayers((TreeSet<Integer>)allowedPlayers.clone());
 		return result;
 	}
 	
@@ -85,7 +87,15 @@ public class QuickStartConfiguration
 	// ROUND			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	private StringBuffer roundName = null;
+	private TreeSet<Integer> allowedPlayers = new TreeSet<Integer>();
 	
+	public TreeSet<Integer> getAllowedPlayers()
+	{	return allowedPlayers;
+	}
+	public void setAllowedPlayers(TreeSet<Integer> allowedPlayers)
+	{	this.allowedPlayers = allowedPlayers;
+	}
+
 	public StringBuffer getRoundName()
 	{	return roundName;	
 	}	

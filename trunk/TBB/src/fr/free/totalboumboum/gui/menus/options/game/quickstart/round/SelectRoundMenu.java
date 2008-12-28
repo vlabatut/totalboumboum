@@ -24,12 +24,16 @@ package fr.free.totalboumboum.gui.menus.options.game.quickstart.round;
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.util.ArrayList;
+import java.util.TreeSet;
 
 import javax.swing.Box;
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
 
+import fr.free.totalboumboum.configuration.game.quickstart.QuickStartConfiguration;
+import fr.free.totalboumboum.game.round.Round;
 import fr.free.totalboumboum.gui.common.structure.panel.SplitMenuPanel;
+import fr.free.totalboumboum.gui.common.structure.panel.data.DataPanelListener;
 import fr.free.totalboumboum.gui.common.structure.panel.menu.InnerMenuPanel;
 import fr.free.totalboumboum.gui.common.structure.panel.menu.MenuPanel;
 import fr.free.totalboumboum.gui.menus.explore.rounds.select.SelectedRoundData;
@@ -37,21 +41,16 @@ import fr.free.totalboumboum.gui.tools.GuiKeys;
 import fr.free.totalboumboum.gui.tools.GuiTools;
 import fr.free.totalboumboum.tools.FileTools;
 
-public class SelectRoundMenu extends InnerMenuPanel
+public class SelectRoundMenu extends InnerMenuPanel implements DataPanelListener
 {	private static final long serialVersionUID = 1L;
 	
-	@SuppressWarnings("unused")
-	private JButton buttonCancel;
-	@SuppressWarnings("unused")
-	private JButton buttonConfirm;
-
-	private StringBuffer roundFile;
+	private QuickStartConfiguration quickStartConfiguration;
 	
 	private SelectedRoundData roundData;
 
-	public SelectRoundMenu(SplitMenuPanel container, MenuPanel parent, StringBuffer roundFile)
+	public SelectRoundMenu(SplitMenuPanel container, MenuPanel parent, QuickStartConfiguration quickStartConfiguration)
 	{	super(container, parent);
-		this.roundFile = roundFile;
+		this.quickStartConfiguration = quickStartConfiguration;
 	
 		// layout
 		BoxLayout layout = new BoxLayout(this,BoxLayout.PAGE_AXIS); 
@@ -77,8 +76,28 @@ public class SelectRoundMenu extends InnerMenuPanel
 		String baseFolder = FileTools.getRoundsPath();
 		roundData = new SelectedRoundData(container,baseFolder);
 		container.setDataPart(roundData);
+		roundData.addListener(this);
+		refreshButtons();
 	}
 	
+	/////////////////////////////////////////////////////////////////
+	// BUTTONS						/////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	@SuppressWarnings("unused")
+	private JButton buttonCancel;
+	private JButton buttonConfirm;
+
+	private void refreshButtons()
+	{	Round round = roundData.getSelectedRound();
+		if(round==null)
+			buttonConfirm.setEnabled(false);
+		else
+			buttonConfirm.setEnabled(true);
+	}
+	
+	/////////////////////////////////////////////////////////////////
+	// ACTION LISTENER				/////////////////////////////////
+	/////////////////////////////////////////////////////////////////
 	public void actionPerformed(ActionEvent e)
 	{	if(e.getActionCommand().equals(GuiKeys.MENU_OPTIONS_BUTTON_CANCEL))
 		{	replaceWith(parent);
@@ -86,15 +105,31 @@ public class SelectRoundMenu extends InnerMenuPanel
 		else if(e.getActionCommand().equals(GuiKeys.MENU_OPTIONS_BUTTON_CONFIRM))
 		{	String rFile = roundData.getSelectedRoundFile();
 			if(rFile!=null)
-			{	roundFile.delete(0,roundFile.length());
+			{	// name
+				StringBuffer roundFile = quickStartConfiguration.getRoundName();
+				roundFile.delete(0,roundFile.length());
 				roundFile.append(rFile);
+				// allowed players
+				TreeSet<Integer> allowedPlayers = roundData.getSelectedRound().getAllowedPlayerNumbers();
+				quickStartConfiguration.setAllowedPlayers(allowedPlayers);
 			}
 			parent.refresh();
 			replaceWith(parent);
 	    }
 	} 
 	
+	/////////////////////////////////////////////////////////////////
+	// CONTENT PANEL				/////////////////////////////////
+	/////////////////////////////////////////////////////////////////
 	public void refresh()
 	{	//
+	}
+
+	/////////////////////////////////////////////////////////////////
+	// DATA PANEL LISTENER			/////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	@Override
+	public void dataPanelSelectionChange()
+	{	refreshButtons();
 	}
 }

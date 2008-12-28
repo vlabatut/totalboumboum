@@ -43,7 +43,7 @@ public class TournamentConfiguration
 		result.setUseLastTournament(useLastTournament);
 		
 		// tournament
-		result.setTournamentName(tournamentName);
+		result.setTournamentName(new StringBuffer(tournamentName));
 		
 		// players
 		ProfilesSelection tournamentCopy = profilesSelection.copy();

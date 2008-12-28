@@ -153,5 +153,6 @@ public class SelectedHeroData extends EntitledDataPanel implements PackBrowserSu
 		// refresh
 		infosPanel.setSpritePreview(selectedSprite);
 		imagePanel.setSpritePreview(selectedSprite);
+		fireDataPanelSelectionChange();
 	}
 }

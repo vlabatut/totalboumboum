@@ -160,5 +160,6 @@ public class SelectedProfileData extends EntitledDataPanel implements FileBrowse
 			}
 		}
 		miscPanel.setProfile(selectedProfile);
+		fireDataPanelSelectionChange();
 	}
 }

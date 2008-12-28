@@ -208,6 +208,7 @@ public class XmlTools
 	// Attributes names
 	public static final String ATT_ACTOR = "actor";
 	public static final String ATT_AI = "ai";
+	public static final String ATT_ALLOWED_PLAYERS = "allowedPlayers";
 	public static final String ATT_AUTOFIRE = "autofire";
 	public static final String ATT_BLUE = "blue";
 	public static final String ATT_BOUND_HEIGHT = "boundHeight";

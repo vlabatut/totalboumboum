@@ -25,7 +25,6 @@ import java.io.IOException;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Iterator;
-import java.util.Set;
 import java.util.TreeSet;
 import java.util.Map.Entry;
 
@@ -171,7 +170,7 @@ public class Round implements StatisticHolder, Serializable
 	{	return playersStatus;		
 	}
 	
-	public Set<Integer> getAllowedPlayerNumbers()
+	public TreeSet<Integer> getAllowedPlayerNumbers()
 	{	TreeSet<Integer> result = new TreeSet<Integer>();
 		Iterator<Entry<Integer,PlayerLocation[]>> it = hollowLevel.getPlayers().getLocations().entrySet().iterator();
 		while(it.hasNext())
