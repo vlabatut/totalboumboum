@@ -61,7 +61,7 @@ public class ArchivePlayersSubPanel extends UntitledSubPanelTable
 		int line = 0;
 		{	String key = GuiKeys.COMMON_ARCHIVE_PLAYERS;
 			setLabelKey(line,0,key,true);
-			Color bg = GuiTools.COLOR_TABLE_REGULAR_BACKGROUND;
+			Color bg = GuiTools.COLOR_TABLE_HEADER_BACKGROUND;
 			setLabelBackground(line,0,bg);
 			line++;
 		}
@@ -80,6 +80,7 @@ public class ArchivePlayersSubPanel extends UntitledSubPanelTable
 				setLabelForeground(line,0,fg);
 				Color bg = GuiTools.COLOR_TABLE_REGULAR_BACKGROUND;
 				setLabelBackground(line,0,bg);
+				line++;
 			}
 		}
 		

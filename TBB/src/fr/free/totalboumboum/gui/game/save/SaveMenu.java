@@ -113,7 +113,7 @@ public class SaveMenu extends InnerMenuPanel
 	{	if(e.getActionCommand().equals(GuiKeys.GAME_SAVE_BUTTON_CANCEL))
 		{	replaceWith(parent);
 	    }
-		else if(e.getActionCommand().equals(GuiKeys.GAME_SAVE_BUTTON_CANCEL))
+		else if(e.getActionCommand().equals(GuiKeys.GAME_SAVE_BUTTON_CONFIRM))
 		{	try
 			{	String folder = levelData.getSelectedGameArchive().getFolder();
 				// XML file

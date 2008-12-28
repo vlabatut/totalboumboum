@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<archive xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="..\..\..\resources\schemas\archive.xsd">
+	
+	<tournament name="tournamentLong" type="single" />
+	<played matches="10" rounds="5" />
+	<dates start="2008-12-05T09:30:10.5" save="2008-12-28T19:38:09" />
+	<players>
+		<player name="Vincent" />
+		<player name="Une ia" />
+		<player name="Une autre" />
+		<player name="Et encore une autre" />
+		<player name="Et c'est tout" />
+	</players>
+</archive>
+

@@ -13,7 +13,7 @@
 	</xsd:complexType>
 
 	<xsd:complexType name="tDates">
-		<xsd:attribute name="begin" type="xsd:dateTime" use="required" />
+		<xsd:attribute name="start" type="xsd:dateTime" use="required" />
 		<xsd:attribute name="save" type="xsd:dateTime" use="required" />
 	</xsd:complexType>
 
@@ -27,7 +27,7 @@
 		<xsd:attribute name="name" type="xsd:string" use="required" />
 	</xsd:complexType>
 
-	<xsd:complexType name="tGameArchive">
+	<xsd:complexType name="tArchive">
 		<xsd:sequence>
 			<xsd:element name="tournament" type="tTournament" />
 			<xsd:element name="played" type="tPlayed" />
@@ -36,6 +36,6 @@
 		</xsd:sequence>
 	</xsd:complexType>
 	
-	<xsd:element name="gameArchive" type="tGameArchive" />
+	<xsd:element name="archive" type="tArchive" />
 
 </xsd:schema>

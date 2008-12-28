@@ -98,8 +98,9 @@ public class ArchiveMiscSubPanel extends UntitledSubPanelTable
 			if(showConfrontations)
 			{	String matches = Integer.toString(gameArchive.getPlayedMatches());
 				String rounds = Integer.toString(gameArchive.getPlayedRounds());
-				textValues.add(matches+" ; "+rounds);
-				tooltipValues.add(matches);
+				String text = matches+" : "+rounds;
+				textValues.add(text);
+				tooltipValues.add(text);
 			}
 			if(showStart)
 			{	SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");

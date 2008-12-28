@@ -47,6 +47,7 @@ import fr.free.totalboumboum.gui.game.loop.LoopPanel;
 import fr.free.totalboumboum.gui.game.round.description.RoundDescription;
 import fr.free.totalboumboum.gui.game.round.results.RoundResults;
 import fr.free.totalboumboum.gui.game.round.statistics.RoundStatistics;
+import fr.free.totalboumboum.gui.game.save.SaveSplitPanel;
 import fr.free.totalboumboum.gui.tools.GuiKeys;
 import fr.free.totalboumboum.gui.tools.GuiTools;
 
@@ -169,6 +170,10 @@ buttonStatistics.setEnabled(false);
 	{	if(e.getActionCommand().equals(GuiKeys.GAME_ROUND_BUTTON_QUIT))
 		{	round.cancel();
 			getFrame().setMainMenuPanel();
+	    }
+		else if(e.getActionCommand().equals(GuiKeys.GAME_TOURNAMENT_BUTTON_SAVE))
+		{	SaveSplitPanel savePanel = new SaveSplitPanel(container.getContainer(),container);
+			replaceWith(savePanel);
 	    }
 		else if(e.getActionCommand().equals(GuiKeys.GAME_ROUND_BUTTON_CURRENT_MATCH))
 		{	parent.refresh();

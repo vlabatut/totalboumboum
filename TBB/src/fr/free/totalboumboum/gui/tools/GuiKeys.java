@@ -518,10 +518,10 @@ public class GuiKeys
 		public static final String GAME_SAVE_TITLE = GAME_SAVE+TITLE;
 			/* BUTTONS */	
 			public static final String GAME_SAVE_BUTTON = GAME_SAVE+BUTTON;
-			public static final String GAME_SAVE_BUTTON_CANCEL = GAME_SAVE_BUTTON+CURRENT+CANCEL;
+			public static final String GAME_SAVE_BUTTON_CANCEL = GAME_SAVE_BUTTON+CANCEL;
 			public static final String GAME_SAVE_BUTTON_CONFIRM = GAME_SAVE_BUTTON+CONFIRM;
 			public static final String GAME_SAVE_BUTTON_DELETE = GAME_SAVE_BUTTON+DELETE;
-			public static final String GAME_SAVE_BUTTON_NEW = GAME_SAVE_BUTTON+CURRENT+NEW;
+			public static final String GAME_SAVE_BUTTON_NEW = GAME_SAVE_BUTTON+NEW;
 		/* TOURNAMENT */
 		public static final String GAME_TOURNAMENT = GAME+TOURNAMENT;
 			/* BUTTONS */	
