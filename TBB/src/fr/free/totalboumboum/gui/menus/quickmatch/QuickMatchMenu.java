@@ -61,6 +61,7 @@ import fr.free.totalboumboum.game.round.Round;
 import fr.free.totalboumboum.game.statistics.Score;
 import fr.free.totalboumboum.game.tournament.single.SingleTournament;
 import fr.free.totalboumboum.gui.common.structure.panel.SplitMenuPanel;
+import fr.free.totalboumboum.gui.common.structure.panel.data.DataPanelListener;
 import fr.free.totalboumboum.gui.common.structure.panel.menu.InnerMenuPanel;
 import fr.free.totalboumboum.gui.common.structure.panel.menu.MenuPanel;
 import fr.free.totalboumboum.gui.game.tournament.TournamentSplitPanel;
@@ -70,7 +71,7 @@ import fr.free.totalboumboum.gui.menus.quickmatch.SettingsData;
 import fr.free.totalboumboum.gui.tools.GuiKeys;
 import fr.free.totalboumboum.gui.tools.GuiTools;
 
-public class QuickMatchMenu extends InnerMenuPanel
+public class QuickMatchMenu extends InnerMenuPanel implements DataPanelListener
 {	private static final long serialVersionUID = 1L;
 	
 	public QuickMatchMenu(SplitMenuPanel container, MenuPanel parent)
@@ -89,6 +90,7 @@ public class QuickMatchMenu extends InnerMenuPanel
 		// panels
 		playersData = new PlayersData(container);
 		levelsData = new LevelsData(container);
+		levelsData.addListener(this);
 		settingsData = new SettingsData(container);
 		tournamentPanel = new TournamentSplitPanel(container.getContainer(),getMenuParent());
 	}
@@ -131,6 +133,7 @@ public class QuickMatchMenu extends InnerMenuPanel
 		add(Box.createRigidArea(new Dimension(buttonWidth,buttonHeight)));
 		add(Box.createRigidArea(new Dimension(GuiTools.buttonHorizontalSpace,0)));
 		add(buttonPlayersNext);
+		refreshButtons();
 	}
 	
 	private void setButtonsLevels()
@@ -144,6 +147,7 @@ public class QuickMatchMenu extends InnerMenuPanel
 		add(Box.createRigidArea(new Dimension(buttonWidth,buttonHeight)));
 		add(Box.createRigidArea(new Dimension(GuiTools.buttonHorizontalSpace,0)));
 		add(buttonLevelsNext);
+		refreshButtons();
 	}
 	
 	private void setButtonsSettings()
@@ -157,6 +161,14 @@ public class QuickMatchMenu extends InnerMenuPanel
 		add(Box.createRigidArea(new Dimension(buttonWidth,buttonHeight)));
 		add(Box.createRigidArea(new Dimension(GuiTools.buttonHorizontalSpace,0)));
 		add(buttonSettingsNext);
+		refreshButtons();
+	}
+	
+	private void refreshButtons()
+	{	if(quickMatchConfiguration.getLevelsSelection().getLevelCount()==0)
+			buttonLevelsNext.setEnabled(false);
+		else
+			buttonLevelsNext.setEnabled(true);
 	}
 	
 	/////////////////////////////////////////////////////////////////
@@ -376,6 +388,14 @@ public class QuickMatchMenu extends InnerMenuPanel
 	// CONTENT PANEL				/////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	public void refresh()
-	{	//
+	{	refreshButtons();
+	}
+
+	/////////////////////////////////////////////////////////////////
+	// DATA PANEL LISTENER	/////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	@Override
+	public void dataPanelSelectionChange()
+	{	refreshButtons();
 	}
 }

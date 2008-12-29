@@ -32,6 +32,7 @@ import javax.swing.JButton;
 import fr.free.totalboumboum.configuration.game.tournament.TournamentConfiguration;
 import fr.free.totalboumboum.game.tournament.AbstractTournament;
 import fr.free.totalboumboum.gui.common.structure.panel.SplitMenuPanel;
+import fr.free.totalboumboum.gui.common.structure.panel.data.DataPanelListener;
 import fr.free.totalboumboum.gui.common.structure.panel.menu.InnerMenuPanel;
 import fr.free.totalboumboum.gui.common.structure.panel.menu.MenuPanel;
 import fr.free.totalboumboum.gui.menus.explore.tournaments.select.SelectedTournamentData;
@@ -39,14 +40,9 @@ import fr.free.totalboumboum.gui.tools.GuiKeys;
 import fr.free.totalboumboum.gui.tools.GuiTools;
 import fr.free.totalboumboum.tools.FileTools;
 
-public class SelectTournamentMenu extends InnerMenuPanel
+public class SelectTournamentMenu extends InnerMenuPanel implements DataPanelListener
 {	private static final long serialVersionUID = 1L;
 	
-	@SuppressWarnings("unused")
-	private JButton buttonCancel;
-	@SuppressWarnings("unused")
-	private JButton buttonConfirm;
-
 	private TournamentConfiguration tournamentConfiguration;
 	private String folder;
 	private SelectedTournamentData tournamentData;
@@ -79,6 +75,23 @@ public class SelectTournamentMenu extends InnerMenuPanel
 		folder = FileTools.getTournamentsPath();
 		tournamentData = new SelectedTournamentData(container,folder);
 		container.setDataPart(tournamentData);
+		tournamentData.addListener(this);
+		refreshButtons();
+	}
+
+	/////////////////////////////////////////////////////////////////
+	// BUTTONS						/////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	@SuppressWarnings("unused")
+	private JButton buttonCancel;
+	private JButton buttonConfirm;
+
+	private void refreshButtons()
+	{	AbstractTournament tournament = tournamentData.getSelectedTournament();
+		if(tournament==null)
+			buttonConfirm.setEnabled(false);
+		else
+			buttonConfirm.setEnabled(true);
 	}
 	
 	/////////////////////////////////////////////////////////////////
@@ -105,5 +118,13 @@ public class SelectTournamentMenu extends InnerMenuPanel
 	/////////////////////////////////////////////////////////////////
 	public void refresh()
 	{	//
+	}
+	
+	/////////////////////////////////////////////////////////////////
+	// DATA PANEL LISTENER	/////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	@Override
+	public void dataPanelSelectionChange()
+	{	refreshButtons();
 	}
 }

@@ -6,8 +6,8 @@
 		<player file="4" color="blue" controls="0" spritePack="superbomberman1" spriteFolder="shirobon" />
 		<player file="8" color="white" controls="0" spritePack="superbomberman1" spriteFolder="shirobon" />
 		<player file="14" color="red" controls="0" spritePack="superbomberman1" spriteFolder="shirobon" />
-		<player file="18" color="orange" controls="2" spritePack="superbomberman5" spriteFolder="assistantpirate" />
 		<player file="1" color="cyan" controls="1" spritePack="superbomberman5" spriteFolder="assistantpirate" />
+		<player file="18" color="orange" controls="2" spritePack="superbomberman5" spriteFolder="assistantpirate" />
 	</players>
 </gameTournament>
 

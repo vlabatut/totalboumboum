@@ -182,5 +182,6 @@ public class SelectedAiData extends EntitledDataPanel implements PackBrowserSubP
 			}
 		}
 		refreshPreview();
+		fireDataPanelSelectionChange();
 	}
 }

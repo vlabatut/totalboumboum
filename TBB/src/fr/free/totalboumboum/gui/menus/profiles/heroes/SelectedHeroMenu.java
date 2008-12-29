@@ -33,21 +33,16 @@ import fr.free.totalboumboum.configuration.profile.Profile;
 import fr.free.totalboumboum.configuration.profile.SpriteInfo;
 import fr.free.totalboumboum.engine.content.sprite.SpritePreview;
 import fr.free.totalboumboum.gui.common.structure.panel.SplitMenuPanel;
+import fr.free.totalboumboum.gui.common.structure.panel.data.DataPanelListener;
 import fr.free.totalboumboum.gui.common.structure.panel.menu.InnerMenuPanel;
 import fr.free.totalboumboum.gui.common.structure.panel.menu.MenuPanel;
 import fr.free.totalboumboum.gui.menus.explore.heroes.select.SelectedHeroData;
 import fr.free.totalboumboum.gui.tools.GuiKeys;
 import fr.free.totalboumboum.gui.tools.GuiTools;
 
-public class SelectedHeroMenu extends InnerMenuPanel
+public class SelectedHeroMenu extends InnerMenuPanel implements DataPanelListener
 {	private static final long serialVersionUID = 1L;
 	
-	@SuppressWarnings("unused")
-	private JButton buttonCancel;
-	@SuppressWarnings("unused")
-	private JButton buttonConfirm;
-
-	private SelectedHeroData heroData;
 	private Profile profile;
 
 	public SelectedHeroMenu(SplitMenuPanel container, MenuPanel parent, Profile profile)
@@ -77,8 +72,33 @@ public class SelectedHeroMenu extends InnerMenuPanel
 		// panels
 		heroData = new SelectedHeroData(container);
 		container.setDataPart(heroData);
+		heroData.addListener(this);
+		refreshButtons();
 	}
-	
+
+	/////////////////////////////////////////////////////////////////
+	// BUTTONS			/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	@SuppressWarnings("unused")
+	private JButton buttonCancel;
+	private JButton buttonConfirm;
+
+	/////////////////////////////////////////////////////////////////
+	// PANELS			/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	private SelectedHeroData heroData;
+
+	private void refreshButtons()
+	{	SpritePreview heroPreview = heroData.getSelectedHeroPreview();
+		if(heroPreview==null)
+			buttonConfirm.setEnabled(false);
+		else
+			buttonConfirm.setEnabled(true);
+	}
+
+	/////////////////////////////////////////////////////////////////
+	// ACTION LISTENER	/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
 	public void actionPerformed(ActionEvent e)
 	{	if(e.getActionCommand().equals(GuiKeys.MENU_PROFILES_BUTTON_CANCEL))
 		{	replaceWith(parent);
@@ -96,7 +116,18 @@ public class SelectedHeroMenu extends InnerMenuPanel
 	    }
 	} 
 	
+	/////////////////////////////////////////////////////////////////
+	// CONTENT PANEL	/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
 	public void refresh()
 	{	//
+	}
+
+	/////////////////////////////////////////////////////////////////
+	// DATA PANEL LISTENER	/////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	@Override
+	public void dataPanelSelectionChange()
+	{	refreshButtons();
 	}
 }

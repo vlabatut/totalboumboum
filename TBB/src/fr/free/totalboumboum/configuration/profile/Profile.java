@@ -209,7 +209,8 @@ public class Profile implements Serializable
 		result = result && name.equals(profile.getName());
 		result = result && controlSettingsIndex == profile.getControlSettingsIndex();
 
-		result = result && !selectedSprite.hasChanged(profile.getSelectedSprite());
+		result = result && ((selectedSprite==null && profile.getSelectedSprite()==null)
+							|| (!selectedSprite.hasChanged(profile.getSelectedSprite())));
 		result = result && !defaultSprite.hasChanged(profile.getDefaultSprite());
 		
 		return result;

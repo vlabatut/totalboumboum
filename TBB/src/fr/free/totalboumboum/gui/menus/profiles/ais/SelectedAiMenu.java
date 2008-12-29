@@ -32,21 +32,16 @@ import javax.swing.JButton;
 import fr.free.totalboumboum.ai.AiPreview;
 import fr.free.totalboumboum.configuration.profile.Profile;
 import fr.free.totalboumboum.gui.common.structure.panel.SplitMenuPanel;
+import fr.free.totalboumboum.gui.common.structure.panel.data.DataPanelListener;
 import fr.free.totalboumboum.gui.common.structure.panel.menu.InnerMenuPanel;
 import fr.free.totalboumboum.gui.common.structure.panel.menu.MenuPanel;
 import fr.free.totalboumboum.gui.menus.explore.ais.select.SelectedAiData;
 import fr.free.totalboumboum.gui.tools.GuiKeys;
 import fr.free.totalboumboum.gui.tools.GuiTools;
 
-public class SelectedAiMenu extends InnerMenuPanel
+public class SelectedAiMenu extends InnerMenuPanel implements DataPanelListener
 {	private static final long serialVersionUID = 1L;
 	
-	@SuppressWarnings("unused")
-	private JButton buttonCancel;
-	@SuppressWarnings("unused")
-	private JButton buttonConfirm;
-
-	private SelectedAiData aiData;
 	private Profile profile;
 
 	public SelectedAiMenu(SplitMenuPanel container, MenuPanel parent, Profile profile)
@@ -76,8 +71,28 @@ public class SelectedAiMenu extends InnerMenuPanel
 		// panels
 		aiData = new SelectedAiData(container);
 		container.setDataPart(aiData);
+		aiData.addListener(this);
+		refreshButtons();
 	}
+
+	/////////////////////////////////////////////////////////////////
+	// BUTTONS			/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	@SuppressWarnings("unused")
+	private JButton buttonCancel;
+	private JButton buttonConfirm;
 	
+	private void refreshButtons()
+	{	AiPreview aiPreview = aiData.getSelectedAiPreview();
+		if(aiPreview==null)
+			buttonConfirm.setEnabled(false);
+		else
+			buttonConfirm.setEnabled(true);
+	}
+
+	/////////////////////////////////////////////////////////////////
+	// ACTION LISTENER	/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
 	public void actionPerformed(ActionEvent e)
 	{	if(e.getActionCommand().equals(GuiKeys.MENU_PROFILES_BUTTON_CANCEL))
 		{	replaceWith(parent);
@@ -92,8 +107,24 @@ public class SelectedAiMenu extends InnerMenuPanel
 			replaceWith(parent);
 	    }
 	} 
-	
+
+	/////////////////////////////////////////////////////////////////
+	// PANELS			/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	private SelectedAiData aiData;
+
+	/////////////////////////////////////////////////////////////////
+	// CONTENT PANEL	/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
 	public void refresh()
 	{	//
+	}
+
+	/////////////////////////////////////////////////////////////////
+	// DATA PANEL LISTENER	/////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	@Override
+	public void dataPanelSelectionChange()
+	{	refreshButtons();
 	}
 }

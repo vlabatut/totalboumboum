@@ -48,12 +48,6 @@ public class SelectedProfileData extends EntitledDataPanel implements FileBrowse
 	private static final long serialVersionUID = 1L;
 	private static final float SPLIT_RATIO = 0.5f;
 	
-	private ProfilesConfiguration profilesConfiguration;
-	private FileBrowserSubPanel filePanel;
-	private ProfileSubPanel miscPanel;
-	
-	private Profile selectedProfile = null;
-	
 	public SelectedProfileData(SplitMenuPanel container)
 	{	super(container);
 
@@ -95,6 +89,13 @@ public class SelectedProfileData extends EntitledDataPanel implements FileBrowse
 	}
 	
 	/////////////////////////////////////////////////////////////////
+	// PANELS				/////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	private ProfilesConfiguration profilesConfiguration;
+	private FileBrowserSubPanel filePanel;
+	private ProfileSubPanel miscPanel;
+	
+	/////////////////////////////////////////////////////////////////
 	// CONTENT PANEL				/////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	@Override
@@ -105,6 +106,8 @@ public class SelectedProfileData extends EntitledDataPanel implements FileBrowse
 	/////////////////////////////////////////////////////////////////
 	// PROFILES						/////////////////////////////////
 	/////////////////////////////////////////////////////////////////
+	private Profile selectedProfile = null;
+	
 	public Profile getSelectedProfile()
 	{	return selectedProfile;
 	}

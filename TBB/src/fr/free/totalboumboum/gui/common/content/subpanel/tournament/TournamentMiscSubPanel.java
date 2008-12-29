@@ -51,6 +51,7 @@ public class TournamentMiscSubPanel extends UntitledSubPanelTable
 	/////////////////////////////////////////////////////////////////
 	private AbstractTournament tournament;
 	private int lines;
+	private int allowedPlayersLine;
 
 	public AbstractTournament getTournament()
 	{	return tournament;	
@@ -66,12 +67,19 @@ public class TournamentMiscSubPanel extends UntitledSubPanelTable
 		
 		// icons
 		ArrayList<String> keys = new ArrayList<String>();
+		allowedPlayersLine = 0;
 		if(showName)
-			keys.add(GuiKeys.COMMON_TOURNAMENT_NAME);
+		{	keys.add(GuiKeys.COMMON_TOURNAMENT_NAME);
+			allowedPlayersLine++;
+		}
 		if(showAuthor)
-			keys.add(GuiKeys.COMMON_TOURNAMENT_AUTHOR);
+		{	keys.add(GuiKeys.COMMON_TOURNAMENT_AUTHOR);
+			allowedPlayersLine++;
+		}
 		if(showType)
-			keys.add(GuiKeys.COMMON_TOURNAMENT_TYPE);
+		{	keys.add(GuiKeys.COMMON_TOURNAMENT_TYPE);
+			allowedPlayersLine++;
+		}
 		if(showAllowedPlayerNumbers)
 			keys.add(GuiKeys.COMMON_TOURNAMENT_ALLOWED_PLAYERS);
 		
@@ -158,6 +166,20 @@ public class TournamentMiscSubPanel extends UntitledSubPanelTable
 		int maxWidth = width-3*GuiTools.subPanelMargin-getHeaderHeight();
 		setColSubMaxWidth(1,maxWidth);
 		setColSubPreferredWidth(1,maxWidth);
+	}
+	
+	public void selectAllowedPlayers(boolean flag)
+	{	Color hbg,dbg;
+		if(showAllowedPlayerNumbers && flag)
+		{	hbg = GuiTools.COLOR_TABLE_SELECTED_DARK_BACKGROUND;
+			dbg = GuiTools.COLOR_TABLE_SELECTED_BACKGROUND;
+		}
+		else
+		{	hbg = GuiTools.COLOR_TABLE_HEADER_BACKGROUND;
+			dbg = GuiTools.COLOR_TABLE_REGULAR_BACKGROUND;
+		}
+		setLabelBackground(allowedPlayersLine,0,hbg);
+		setLabelBackground(allowedPlayersLine,1,dbg);
 	}
 	
 	/////////////////////////////////////////////////////////////////
