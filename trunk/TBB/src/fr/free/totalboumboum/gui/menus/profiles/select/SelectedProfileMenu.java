@@ -42,6 +42,7 @@ import fr.free.totalboumboum.configuration.profile.ProfilesConfiguration;
 import fr.free.totalboumboum.configuration.profile.ProfilesConfigurationSaver;
 import fr.free.totalboumboum.configuration.profile.SpriteInfo;
 import fr.free.totalboumboum.gui.common.structure.panel.SplitMenuPanel;
+import fr.free.totalboumboum.gui.common.structure.panel.data.DataPanelListener;
 import fr.free.totalboumboum.gui.common.structure.panel.menu.InnerMenuPanel;
 import fr.free.totalboumboum.gui.common.structure.panel.menu.MenuPanel;
 import fr.free.totalboumboum.gui.data.configuration.GuiConfiguration;
@@ -50,18 +51,9 @@ import fr.free.totalboumboum.gui.tools.GuiKeys;
 import fr.free.totalboumboum.gui.tools.GuiTools;
 import fr.free.totalboumboum.tools.FileTools;
 
-public class SelectedProfileMenu extends InnerMenuPanel
+public class SelectedProfileMenu extends InnerMenuPanel implements DataPanelListener
 {	private static final long serialVersionUID = 1L;
 	
-	@SuppressWarnings("unused")
-	private JButton buttonBack;
-	@SuppressWarnings("unused")
-	private JButton buttonNew;
-	@SuppressWarnings("unused")
-	private JButton buttonModify;
-	@SuppressWarnings("unused")
-	private JButton buttonDelete;
-
 	private SelectedProfileData profileData;
 
 	public SelectedProfileMenu(SplitMenuPanel container, MenuPanel parent)
@@ -92,8 +84,35 @@ public class SelectedProfileMenu extends InnerMenuPanel
 		// panels
 		profileData = new SelectedProfileData(container);
 		container.setDataPart(profileData);
+		profileData.addListener(this);
+		refreshButtons();
 	}
-	
+
+	/////////////////////////////////////////////////////////////////
+	// BUTTONS			/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	@SuppressWarnings("unused")
+	private JButton buttonBack;
+	@SuppressWarnings("unused")
+	private JButton buttonNew;
+	private JButton buttonModify;
+	private JButton buttonDelete;
+
+	private void refreshButtons()
+	{	Profile profile = profileData.getSelectedProfile();
+		if(profile==null)
+		{	buttonModify.setEnabled(false);
+			buttonDelete.setEnabled(false);
+		}
+		else
+		{	buttonModify.setEnabled(true);
+			buttonDelete.setEnabled(true);
+		}
+	}
+
+	/////////////////////////////////////////////////////////////////
+	// ACTION LISTENER	/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
 	public void actionPerformed(ActionEvent e)
 	{	if(e.getActionCommand().equals(GuiKeys.MENU_PROFILES_BUTTON_BACK))
 		{	replaceWith(parent);
@@ -177,7 +196,18 @@ public class SelectedProfileMenu extends InnerMenuPanel
 	    }
 	} 
 	
+	/////////////////////////////////////////////////////////////////
+	// CONTENT PANEL	/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
 	public void refresh()
 	{	//
+	}
+
+	/////////////////////////////////////////////////////////////////
+	// DATA PANEL LISTENER	/////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	@Override
+	public void dataPanelSelectionChange()
+	{	refreshButtons();
 	}
 }

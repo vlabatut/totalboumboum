@@ -281,8 +281,8 @@ public class FolderBrowserSubPanel extends SubPanel implements MouseListener
 		// previous page
 		if(pos[0]==linePrevious)
 		{	if(currentPage>0)
-			{	currentPage--;
-				selectName(-1);
+			{	selectName(-1);
+				currentPage--;
 				refreshList();
 			}
 		}
@@ -295,8 +295,8 @@ public class FolderBrowserSubPanel extends SubPanel implements MouseListener
 		// next page
 		else if(pos[0]==lineNext)
 		{	if(currentPage<getPageCount()-1)
-			{	currentPage++;
-				selectName(-1);
+			{	selectName(-1);
+				currentPage++;
 				refreshList();
 			}
 		}

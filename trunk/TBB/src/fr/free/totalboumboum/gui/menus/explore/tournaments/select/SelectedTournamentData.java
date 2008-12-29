@@ -212,5 +212,6 @@ public class SelectedTournamentData extends EntitledDataPanel implements FolderB
 		}
 		miscPanel.setTournament(selectedTournament);
 		refreshLimits();
+		fireDataPanelSelectionChange();
 	}
 }
