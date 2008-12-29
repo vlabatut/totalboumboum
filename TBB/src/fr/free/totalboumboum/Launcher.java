@@ -826,8 +826,9 @@ public class Launcher
 	 * - correction : activation/désactivation des boutons dans les menus quand c'est nécessaire
 	 * - nouveauté : possibilité de supprimer un slot d'enregistrement existant
 	 * - modification : check sur le nombre de joueurs dans tournament settings + quickmatch
-	 * 
 	 * - correction : problème avec les boutons dans les settings du match rapide
+	 * 
+	 * - modification : bloquer le match rapide si aucune limite de match/round n'est définie
 	 * - nouveauté : possibilité de créer un nouveau slot d'enregistrement
 	 * - nouveauté : chargement d'une partie préalablement enregistrée
 	 * - nouveauté : enregistrement automatique

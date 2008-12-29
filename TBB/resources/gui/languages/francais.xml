@@ -335,25 +335,25 @@
 					</group>
 					<group name="Values">
 						<text name="Title" value="Points" tooltip="Points marqués par le joueur" />
-						<text name="Minus" value="Moins" tooltip="Donner plus de points" />
-						<text name="Plus" value="Plus" tooltip="Donner moins de points" />
+						<text name="Minus" value="Moins" tooltip="Donner moins de points" />
+						<text name="Plus" value="Plus" tooltip="Donner plus de points" />
 					</group>
 				</group>
 				<group name="Limit">
 					<group name="Points">
 						<text name="Title" value="Limite de points" tooltip="Nombre de points à marquer pour gagner cette rencontre (ou pas de limite)" />
-						<text name="Minus" value="Moins" tooltip="Augmenter la limite de points" />
-						<text name="Plus" value="Plus" tooltip="Diminuer la limite de points" />
+						<text name="Minus" value="Moins" tooltip="Diminuer la limite de points" />
+						<text name="Plus" value="Plus" tooltip="Augmenter la limite de points" />
 					</group>			
 					<group name="Rounds">
 						<text name="Title" value="Limite de manches" tooltip="Nombre maximal de manches pour cette rencontre (ou pas de limite)" />
-						<text name="Minus" value="Moins" tooltip="Augmenter la limite de manches" />
-						<text name="Plus" value="Plus" tooltip="Diminuer la limite de manches" />
+						<text name="Minus" value="Moins" tooltip="Diminuer la limite de manches" />
+						<text name="Plus" value="Plus" tooltip="Augmenter la limite de manches" />
 					</group>			
 					<group name="Time">
 						<text name="Title" value="Limite de temps" tooltip="Limite de temps pour une manche (ou pas de limite)" />
-						<text name="Minus" value="Moins" tooltip="Augmenter la limite de temps" />
-						<text name="Plus" value="Plus" tooltip="Diminuer la limite de temps" />
+						<text name="Minus" value="Moins" tooltip="Diminuer la limite de temps" />
+						<text name="Plus" value="Plus" tooltip="Augmenter la limite de temps" />
 					</group>			
 				</group>			
 			</group>

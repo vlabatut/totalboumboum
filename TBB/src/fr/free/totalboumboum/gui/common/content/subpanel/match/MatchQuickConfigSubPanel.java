@@ -242,7 +242,7 @@ public class MatchQuickConfigSubPanel extends UntitledSubPanelLines implements M
 				// plus
 				else //if(pos[1]==3)
 				{	if(limitRounds<ROUNDS_MAX)
-						limitPoints = limitRounds + ROUNDS_DELTA;
+						limitRounds = limitRounds + ROUNDS_DELTA;
 				}
 				// common
 				quickMatchConfiguration.setLimitRounds(limitRounds);
