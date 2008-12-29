@@ -335,25 +335,25 @@
 					</group>
 					<group name="Values">
 						<text name="Title" value="Points" tooltip="Points scored by the player" />
-						<text name="Minus" value="Minus" tooltip="More points" />
-						<text name="Plus" value="Plus" tooltip="Less points" />
+						<text name="Minus" value="Minus" tooltip="Less points" />
+						<text name="Plus" value="Plus" tooltip="More points" />
 					</group>
 				</group>
 				<group name="Limit">
 					<group name="Points">
 						<text name="Title" value="Points limit" tooltip="Number of points to score to win the match (or no limit)" />
-						<text name="Minus" value="Minus" tooltip="More time" />
-						<text name="Plus" value="Plus" tooltip="Less time" />
+						<text name="Minus" value="Minus" tooltip="Less time" />
+						<text name="Plus" value="Plus" tooltip="More time" />
 					</group>			
 					<group name="Rounds">
 						<text name="Title" value="Rounds limit" tooltip="Maximal number of rounds in this match (or no limit)" />
-						<text name="Minus" value="Minus" tooltip="More time" />
-						<text name="Plus" value="Plus" tooltip="Less time" />
+						<text name="Minus" value="Minus" tooltip="Less time" />
+						<text name="Plus" value="Plus" tooltip="More time" />
 					</group>			
 					<group name="Time">
 						<text name="Title" value="Time limit" tooltip="Time limit for a round (or no limit)" />
-						<text name="Minus" value="Minus" tooltip="More time" />
-						<text name="Plus" value="Plus" tooltip="Less time" />
+						<text name="Minus" value="Minus" tooltip="Less time" />
+						<text name="Plus" value="Plus" tooltip="More time" />
 					</group>			
 				</group>			
 			</group>	
