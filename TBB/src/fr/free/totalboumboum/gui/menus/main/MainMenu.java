@@ -40,6 +40,7 @@ import fr.free.totalboumboum.gui.common.structure.panel.menu.MenuPanel;
 import fr.free.totalboumboum.gui.common.structure.panel.menu.SimpleMenuPanel;
 import fr.free.totalboumboum.gui.data.configuration.GuiConfiguration;
 import fr.free.totalboumboum.gui.menus.explore.ExploreSplitPanel;
+import fr.free.totalboumboum.gui.menus.load.LoadSplitPanel;
 import fr.free.totalboumboum.gui.menus.options.OptionsSplitPanel;
 import fr.free.totalboumboum.gui.menus.profiles.select.SelectedProfileSplitPanel;
 import fr.free.totalboumboum.gui.menus.quickmatch.QuickMatchContainer;
@@ -128,7 +129,10 @@ buttonAbout.setEnabled(false);
 		{	
 	    }
 		else if(e.getActionCommand().equals(GuiKeys.MENU_MAIN_BUTTON_LOAD))
-		{	
+		{	if(tournamentContainer==null)
+				tournamentContainer = new TournamenuContainer(getContainer(),this);
+			tournamentContainer.loadTournament();
+			replaceWith(tournamentContainer);
 	    }
 		else if(e.getActionCommand().equals(GuiKeys.MENU_MAIN_BUTTON_QUIT))
 		{	getFrame().exit();
