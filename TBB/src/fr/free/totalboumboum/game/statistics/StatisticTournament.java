@@ -21,11 +21,10 @@ package fr.free.totalboumboum.game.statistics;
  * 
  */
 
-import java.io.Serializable;
 import java.util.ArrayList;
 import fr.free.totalboumboum.game.tournament.AbstractTournament;
 
-public class StatisticTournament extends StatisticBase implements Serializable
+public class StatisticTournament extends StatisticBase
 {
 	private static final long serialVersionUID = 1L;
 	

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <language
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
-	xsi:noNamespaceSchemaLocation="..\..\schemas\language.xsd">
+	xsi:noNamespaceSchemaLocation="../../schemas/language.xsd">
 	
 	<group name="Menu" >
 <!-- MAIN MENU -->
@@ -363,6 +363,14 @@
 		<group name="Tournament">
 			<group name="Button">
 				<text name="Quit" value="Quit" tooltip="Quit the tournament and go back to the main menu" />
+			</group>
+			<group name="Load">
+				<text name="Title" value="Load a game" tooltip="Load a previous game" />
+				<group name="Button">
+					<text name="Cancel" value="Cancel" tooltip="Cancel and go back to the main menu" />
+					<text name="Confirm" value="Confirm" tooltip="Confirm and load your selection" />
+					<text name="Delete" value="Previous" tooltip="Delete the selected game" />
+				</group>
 			</group>
 			<group name="Players">
 				<text name="Title" value="Players selection" tooltip="Select the players for this tournament" />

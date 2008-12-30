@@ -2,13 +2,13 @@
 <archive xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="..\..\..\resources\schemas\archive.xsd">
 	<tournament name="Tournament-séquence loooong" type="sequence" />
 	<played matches="0" rounds="2" />
-	<dates start="2008-12-28T19:24:55" save="2008-12-28T19:27:50" />
+	<dates start="2008-12-30T22:31:31" save="2008-12-30T22:34:11" />
 	<players>
 		<player name="Bingöl+Ketenci" />
 		<player name="Demirkol+Doğan" />
 		<player name="Kılıç+Pala" />
-		<player name="Promeneur" />
 		<player name="Joueur humain" />
+		<player name="Promeneur" />
 	</players>
 </archive>
 

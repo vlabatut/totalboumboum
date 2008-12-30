@@ -63,10 +63,10 @@ public class TournamenuMenu extends InnerMenuPanel
 		// buttons
 		initButtons();	
 
+		tournamentConfiguration = Configuration.getGameConfiguration().getTournamentConfiguration().copy();
 		// panels
 		playersData = new PlayersData(container);
 		settingsData = new SettingsData(container);
-		tournamentPanel = new TournamentSplitPanel(container.getContainer(),getMenuParent()/*container*/);
 	}
 	
 	/////////////////////////////////////////////////////////////////
@@ -121,41 +121,31 @@ public class TournamenuMenu extends InnerMenuPanel
 	/////////////////////////////////////////////////////////////////
 	// TOURNAMENT					/////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	private AbstractTournament tournament;
 	private TournamentConfiguration tournamentConfiguration;
 	
-	public boolean initTournament()
-	{	boolean result = true;
-		// init tournament
-		if(tournament==null || tournament.isOver())
-		{	// init configuration
-			tournamentConfiguration = Configuration.getGameConfiguration().getTournamentConfiguration().copy();
-			loadTournament();
-			if(!tournamentConfiguration.getUseLastPlayers())
-				tournamentConfiguration.reinitPlayers();		
-			if(!tournamentConfiguration.getUseLastTournament())
-				tournamentConfiguration.reinitTournament();
-			// set panel
-			playersData.setTournamentConfiguration(tournamentConfiguration);
-			container.setDataPart(playersData);
-			setButtonsPlayers();
-			result = true;
-		}		
-		// existing (unfinished) tournament
-		else if(tournament.hasBegun())
-			//replaceWith(matchPanel);
-			result = false;
-		return result;
+	public void initTournament()
+	{	// init configuration
+		tournamentConfiguration = Configuration.getGameConfiguration().getTournamentConfiguration().copy();
+		loadTournament();
+		if(!tournamentConfiguration.getUseLastPlayers())
+			tournamentConfiguration.reinitPlayers();		
+		if(!tournamentConfiguration.getUseLastTournament())
+			tournamentConfiguration.reinitTournament();
+		// set panel
+		playersData.setTournamentConfiguration(tournamentConfiguration);
+		container.setDataPart(playersData);
+		setButtonsPlayers();
 	}
 
 	private void setTournamentPlayers()
 	{	ArrayList<Profile> selectedProfiles = playersData.getSelectedProfiles();
+		AbstractTournament tournament = tournamentConfiguration.getTournament();
 		tournament.setProfiles(selectedProfiles);
 	}
 	
 	private void loadTournament()
 	{	try
-		{	tournament = tournamentConfiguration.loadLastTournament();
+		{	AbstractTournament tournament = tournamentConfiguration.loadLastTournament();
 			tournamentConfiguration.setTournament(tournament);
 		}
 		catch (ParserConfigurationException e)
@@ -183,8 +173,8 @@ public class TournamenuMenu extends InnerMenuPanel
 	private PlayersData playersData;
 	private SettingsData settingsData;
 	
-	public TournamentSplitPanel getTournamentPanel()
-	{	return tournamentPanel;
+	public void setTournamentPanel(TournamentSplitPanel tournamentPanel)
+	{	this.tournamentPanel = tournamentPanel;
 	}
 	
 	/////////////////////////////////////////////////////////////////
@@ -192,7 +182,8 @@ public class TournamenuMenu extends InnerMenuPanel
 	/////////////////////////////////////////////////////////////////
 	public void actionPerformed(ActionEvent e)
 	{	if(e.getActionCommand().equals(GuiKeys.MENU_TOURNAMENT_BUTTON_QUIT))
-		{	tournament = null;
+		{	AbstractTournament tournament = null;
+			tournamentConfiguration.setTournament(tournament);
 			getFrame().setMainMenuPanel();
 	    }
 		else if(e.getActionCommand().equals(GuiKeys.MENU_TOURNAMENT_PLAYERS_BUTTON_PREVIOUS))				
@@ -214,7 +205,6 @@ public class TournamenuMenu extends InnerMenuPanel
 	    }
 		else if(e.getActionCommand().equals(GuiKeys.MENU_TOURNAMENT_SETTINGS_BUTTON_NEXT))
 		{	// implements settings in tournament
-			tournament = tournamentConfiguration.getTournament();
 			setTournamentPlayers();
 			setTournamentSettings();
 			// save tournament options
@@ -233,6 +223,7 @@ public class TournamenuMenu extends InnerMenuPanel
 			// synch game options
 			Configuration.getGameConfiguration().setTournamentConfiguration(tournamentConfiguration);
 			// match panel
+			AbstractTournament tournament = tournamentConfiguration.getTournament();
 			tournamentPanel.setTournament(tournament);
 			replaceWith(tournamentPanel);
 	    }
@@ -242,7 +233,8 @@ public class TournamenuMenu extends InnerMenuPanel
 	// CONTENT PANEL				/////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	public void refresh()
-	{	if(tournament==null || 
+	{	AbstractTournament tournament = tournamentConfiguration.getTournament();
+		if(tournament==null || 
 			!tournament.getAllowedPlayerNumbers().contains(tournamentConfiguration.getProfilesSelection().getProfileCount()))
 			buttonSettingsNext.setEnabled(false);
 		else

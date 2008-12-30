@@ -24,8 +24,13 @@ package fr.free.totalboumboum.gui.menus.tournament;
 
 import java.awt.BorderLayout;
 
+import fr.free.totalboumboum.configuration.Configuration;
+import fr.free.totalboumboum.configuration.game.tournament.TournamentConfiguration;
+import fr.free.totalboumboum.game.tournament.AbstractTournament;
 import fr.free.totalboumboum.gui.common.structure.MenuContainer;
 import fr.free.totalboumboum.gui.common.structure.panel.menu.MenuPanel;
+import fr.free.totalboumboum.gui.game.tournament.TournamentSplitPanel;
+import fr.free.totalboumboum.gui.menus.tournament.load.LoadSplitPanel;
 
 public class TournamenuContainer extends MenuPanel implements MenuContainer
 {	private static final long serialVersionUID = 1L;
@@ -44,26 +49,55 @@ public class TournamenuContainer extends MenuPanel implements MenuContainer
 		this.parent = parent;
 		
 		// split panel
-		tournamentSplitPanel = new TournamenuSplitPanel(this,parent);
-		setMenuPanel(tournamentSplitPanel);
+		tournamentSplitPanel = new TournamentSplitPanel(this,parent);
+		menuSplitPanel = new TournamenuSplitPanel(this,parent);
+		menuSplitPanel.setTournamentPanel(tournamentSplitPanel);
+		loadSplitPanel = new LoadSplitPanel(this,parent);
+		loadSplitPanel.setTournamentPanel(tournamentSplitPanel);
+		setMenuPanel(menuSplitPanel);
 	}	
 	
 	public void refresh()
 	{	menuPart.refresh();
 	}
+
+	
+/*
+	public void setTournament(AbstractTournament tournament)
+	{	this.tournament = tournament;
+		tournamentConfiguration.setTournament(tournament);
+		tournamentPanel.setTournament(tournament);
+//		replaceWith(tournamentPanel);
+	}
+	
+*/
+	
+	
 	
 	/////////////////////////////////////////////////////////////////
 	// SPLIT PANELS		/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	private TournamenuSplitPanel tournamentSplitPanel;
+	private TournamenuSplitPanel menuSplitPanel;
+	private TournamentSplitPanel tournamentSplitPanel;
+	private LoadSplitPanel loadSplitPanel;
 	
 	public void initTournament()
-	{	if(tournamentSplitPanel.initTournament())
+	{	TournamentConfiguration tournamentConfiguration = Configuration.getGameConfiguration().getTournamentConfiguration();
+		AbstractTournament tournament = tournamentConfiguration.getTournament();
+		if(tournament==null || tournament.isOver())
+		{	menuSplitPanel.initTournament();
+			setMenuPanel(menuSplitPanel);		
+		}
+		else if(tournament.hasBegun())
 			setMenuPanel(tournamentSplitPanel);
 		else
-			setMenuPanel(tournamentSplitPanel.getTournamentPanel());
+			setMenuPanel(menuSplitPanel);		
 	}
-
+	
+	public void initLoad()
+	{	setMenuPanel(loadSplitPanel);
+	}
+	
 	/////////////////////////////////////////////////////////////////
 	// MENU CONTAINER	/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
