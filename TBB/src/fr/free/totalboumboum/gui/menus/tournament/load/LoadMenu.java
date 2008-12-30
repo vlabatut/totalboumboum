@@ -36,6 +36,7 @@ import javax.xml.parsers.ParserConfigurationException;
 
 import org.xml.sax.SAXException;
 
+import fr.free.totalboumboum.configuration.Configuration;
 import fr.free.totalboumboum.game.archive.GameArchive;
 import fr.free.totalboumboum.game.tournament.AbstractTournament;
 import fr.free.totalboumboum.gui.common.structure.panel.SplitMenuPanel;
@@ -149,6 +150,7 @@ public class LoadMenu extends InnerMenuPanel implements DataPanelListener
 				tournament.reloadPortraits();
 				//
 				tournamentPanel.setTournament(tournament);
+				Configuration.getGameConfiguration().getTournamentConfiguration().setTournament(tournament);
 				replaceWith(tournamentPanel);
 			}
 			catch (IOException e1)
@@ -163,8 +165,6 @@ public class LoadMenu extends InnerMenuPanel implements DataPanelListener
 			catch (SAXException e1)
 			{	e1.printStackTrace();
 			}
-			//
-			replaceWith(parent);
 	    }
 	} 
 	
