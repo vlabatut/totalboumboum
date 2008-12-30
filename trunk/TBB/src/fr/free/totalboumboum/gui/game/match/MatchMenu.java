@@ -199,7 +199,12 @@ buttonStatistics.setEnabled(false);
 		{	container.setDataPart(matchStatistics);
 	    }
 		else if(e.getActionCommand().equals(GuiKeys.GAME_MATCH_BUTTON_CURRENT_ROUND))
-		{	replaceWith(roundPanel);
+		{	Round round = match.getCurrentRound();
+			if(roundPanel==null || roundPanel.getRound()!=round)
+			{	roundPanel = new RoundSplitPanel(container.getContainer(),container);
+				roundPanel.setRound(round);
+			}
+			replaceWith(roundPanel);
 	    }
 		else if(e.getActionCommand().equals(GuiKeys.GAME_MATCH_BUTTON_NEXT_ROUND))
 		{	try

@@ -95,7 +95,8 @@ public class TournamenuContainer extends MenuPanel implements MenuContainer
 	}
 	
 	public void initLoad()
-	{	setMenuPanel(loadSplitPanel);
+	{	loadSplitPanel.refresh();
+		setMenuPanel(loadSplitPanel);
 	}
 	
 	/////////////////////////////////////////////////////////////////

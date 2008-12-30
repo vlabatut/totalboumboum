@@ -255,10 +255,23 @@ buttonStatistics.setEnabled(false);
 		{	container.setDataPart(tournamentStatistics);
 	    }
 		else if(e.getActionCommand().equals(GuiKeys.GAME_TOURNAMENT_BUTTON_CURRENT_MATCH))
-		{	replaceWith(matchPanel);
+		{	Match match = tournament.getCurrentMatch();		
+			if(matchPanel==null || ((MatchSplitPanel)matchPanel).getMatch()!=match)
+			{	MatchSplitPanel mPanel = new MatchSplitPanel(container.getContainer(),container);
+				matchPanel = mPanel;
+				mPanel.setMatch(match);
+			}
+			replaceWith(matchPanel);
 	    }
 		else if(e.getActionCommand().equals(GuiKeys.GAME_MATCH_BUTTON_CURRENT_ROUND))
-		{	replaceWith(matchPanel);
+		{	Match match = tournament.getCurrentMatch();		
+			Round round = match.getCurrentRound();
+			if(matchPanel==null || ((RoundSplitPanel)matchPanel).getRound()!=round)
+			{	RoundSplitPanel rPanel = new RoundSplitPanel(container.getContainer(),container);
+				matchPanel = rPanel;
+				rPanel.setRound(round);
+			}							
+			replaceWith(matchPanel);
 	    }
 		else if(e.getActionCommand().equals(GuiKeys.GAME_TOURNAMENT_BUTTON_NEXT_MATCH))
 		{	tournament.progress();
