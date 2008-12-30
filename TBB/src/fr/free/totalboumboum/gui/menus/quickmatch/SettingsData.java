@@ -28,14 +28,16 @@ import javax.swing.BoxLayout;
 
 import fr.free.totalboumboum.configuration.game.quickmatch.QuickMatchConfiguration;
 import fr.free.totalboumboum.gui.common.content.subpanel.match.MatchQuickConfigSubPanel;
+import fr.free.totalboumboum.gui.common.content.subpanel.match.MatchQuickConfigSubPanelListener;
 import fr.free.totalboumboum.gui.common.content.subpanel.round.RoundQuickConfigSubPanel;
+import fr.free.totalboumboum.gui.common.content.subpanel.round.RoundQuickConfigSubPanelListener;
 import fr.free.totalboumboum.gui.common.structure.panel.SplitMenuPanel;
 import fr.free.totalboumboum.gui.common.structure.panel.data.EntitledDataPanel;
 import fr.free.totalboumboum.gui.common.structure.subpanel.SubPanel;
 import fr.free.totalboumboum.gui.tools.GuiKeys;
 import fr.free.totalboumboum.gui.tools.GuiTools;
 
-public class SettingsData extends EntitledDataPanel
+public class SettingsData extends EntitledDataPanel implements MatchQuickConfigSubPanelListener, RoundQuickConfigSubPanelListener
 {	
 	private static final long serialVersionUID = 1L;
 	
@@ -61,6 +63,7 @@ public class SettingsData extends EntitledDataPanel
 			// match
 			{	matchPanel = new MatchQuickConfigSubPanel(dataWidth,panelHeight);
 				mainPanel.add(matchPanel);
+				matchPanel.addListener(this);
 			}
 			
 			mainPanel.add(Box.createRigidArea(new Dimension(GuiTools.panelMargin,GuiTools.panelMargin)));
@@ -68,6 +71,7 @@ public class SettingsData extends EntitledDataPanel
 			// commands panel
 			{	roundPanel = new RoundQuickConfigSubPanel(dataWidth,panelHeight);
 				mainPanel.add(roundPanel);
+				roundPanel.addListener(this);
 			}
 			
 			setDataPart(mainPanel);
@@ -95,5 +99,21 @@ public class SettingsData extends EntitledDataPanel
 	
 	public QuickMatchConfiguration getQuickMatchConfiguration()
 	{	return quickMatchConfiguration;
+	}
+
+	/////////////////////////////////////////////////////////////////
+	// MATCH QUICK CONFIGURATION LISTENER	/////////////////////////
+	/////////////////////////////////////////////////////////////////
+	@Override
+	public void matchQuickConfigModified()
+	{	fireDataPanelSelectionChange();
+	}
+
+	/////////////////////////////////////////////////////////////////
+	// ROUND QUICK CONFIGURATION LISTENER	/////////////////////////
+	/////////////////////////////////////////////////////////////////
+	@Override
+	public void roundQuickConfigModified()
+	{	fireDataPanelSelectionChange();
 	}
 }

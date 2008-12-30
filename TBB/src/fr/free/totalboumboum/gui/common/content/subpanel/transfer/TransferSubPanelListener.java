@@ -23,6 +23,6 @@ package fr.free.totalboumboum.gui.common.content.subpanel.transfer;
 
 public interface TransferSubPanelListener
 {
-	public void transferLeft();
-	public void transferRight();
+	public void transferLeftClicked();
+	public void transferRightClicked();
 }

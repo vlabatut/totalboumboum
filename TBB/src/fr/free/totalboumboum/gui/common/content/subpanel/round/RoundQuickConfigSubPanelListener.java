@@ -1,4 +1,4 @@
-package fr.free.totalboumboum.gui.common.content.subpanel.browser;
+package fr.free.totalboumboum.gui.common.content.subpanel.round;
 
 /*
  * Total Boum Boum
@@ -21,8 +21,7 @@ package fr.free.totalboumboum.gui.common.content.subpanel.browser;
  * 
  */
 
-public interface FolderBrowserSubPanelListener
+public interface RoundQuickConfigSubPanelListener
 {
-	public void packBrowserSelectionChanged();
-	public void packBrowserParentReached();
+	public void roundQuickConfigModified();
 }

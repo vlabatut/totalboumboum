@@ -161,7 +161,7 @@ public class SelectedAiData extends EntitledDataPanel implements PackBrowserSubP
 	// PACK BROWSER LISTENER		/////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	@Override
-	public void packBrowserSelectionChange()
+	public void packBrowserSelectionChanged()
 	{	String pack = packPanel.getSelectedPack();
 		String folder = packPanel.getSelectedName();
 		if(pack==null || folder==null)

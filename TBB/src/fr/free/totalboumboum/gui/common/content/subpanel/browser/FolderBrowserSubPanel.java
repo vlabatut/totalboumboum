@@ -327,11 +327,11 @@ public class FolderBrowserSubPanel extends SubPanel implements MouseListener
 	
 	private void fireFolderBrowserSelectionChange()
 	{	for(FolderBrowserSubPanelListener listener: listeners)
-			listener.packBrowserSelectionChange();
+			listener.packBrowserSelectionChanged();
 	}
 
 	private void fireFolderBrowserParent()
 	{	for(FolderBrowserSubPanelListener listener: listeners)
-			listener.packBrowserParent();
+			listener.packBrowserParentReached();
 	}
 }

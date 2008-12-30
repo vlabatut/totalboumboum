@@ -315,11 +315,11 @@ public class FileBrowserSubPanel extends SubPanel implements MouseListener
 	
 	private void fireFileBrowserSelectionChange()
 	{	for(FileBrowserSubPanelListener listener: listeners)
-			listener.fileBrowserSelectionChange();
+			listener.fileBrowserSelectionChanged();
 	}
 
 	private void fireFileBrowserParent()
 	{	for(FileBrowserSubPanelListener listener: listeners)
-			listener.fileBrowserParent();
+			listener.fileBrowserParentReached();
 	}
 }
