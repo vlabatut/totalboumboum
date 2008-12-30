@@ -21,6 +21,7 @@ package fr.free.totalboumboum.game.statistics;
  * 
  */
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Calendar;
@@ -31,8 +32,9 @@ import java.util.HashMap;
 import fr.free.totalboumboum.configuration.profile.Profile;
 
 
-public abstract class StatisticBase
-{
+public abstract class StatisticBase implements Serializable
+{	private static final long serialVersionUID = 1L;
+	
 	public StatisticBase(StatisticHolder holder)
 	{	totalTime = 0;
 		// players

@@ -1,4 +1,4 @@
-package fr.free.totalboumboum.gui.menus.tournament;
+package fr.free.totalboumboum.gui.menus.tournament.load;
 
 /*
  * Total Boum Boum
@@ -32,35 +32,31 @@ import fr.free.totalboumboum.gui.data.configuration.GuiConfiguration;
 import fr.free.totalboumboum.gui.game.tournament.TournamentSplitPanel;
 import fr.free.totalboumboum.gui.tools.GuiTools;
 
-public class TournamenuSplitPanel extends SplitMenuPanel
+public class LoadSplitPanel extends SplitMenuPanel
 {	private static final long serialVersionUID = 1L; 
 
 	private BufferedImage image;
-	
-	public TournamenuSplitPanel(MenuContainer container, MenuPanel parent)
-	{	super(container,parent,BorderLayout.PAGE_END,GuiTools.HORIZONTAL_SPLIT_RATIO);
+
+	public LoadSplitPanel(MenuContainer container, MenuPanel parent)
+	{	super(container,parent,BorderLayout.LINE_START,GuiTools.VERTICAL_SPLIT_RATIO);
 	
 		// background
 		image = GuiConfiguration.getMiscConfiguration().getDarkBackground();
 		
 		// panels
-		TournamenuMenu menu = new TournamenuMenu(this,parent);
-		setMenuPart(menu);
+		LoadMenu menuPanel = new LoadMenu(this,parent);
+		setMenuPart(menuPanel);
 	}
 	
 	/////////////////////////////////////////////////////////////////
-	// TOURNAMENT					/////////////////////////////////
+	// TOURNAMENT CONTAINER			/////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	public void initTournament()
-	{	((TournamenuMenu)getMenuPart()).initTournament();
-	}
-
 	public void setTournamentPanel(TournamentSplitPanel tournamentPanel)
-	{	((TournamenuMenu)getMenuPart()).setTournamentPanel(tournamentPanel);
+	{	((LoadMenu)menuPart).setTournamentPanel(tournamentPanel);
 	}
 
 	/////////////////////////////////////////////////////////////////
-	// PAINT						/////////////////////////////////
+	// PAINT			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	@Override
 	public void paintComponent(Graphics g)

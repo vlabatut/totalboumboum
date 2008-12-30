@@ -21,11 +21,17 @@ package fr.free.totalboumboum.game.tournament;
  * 
  */
 
+import java.io.IOException;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Set;
 
+import javax.xml.parsers.ParserConfigurationException;
+
+import org.xml.sax.SAXException;
+
 import fr.free.totalboumboum.configuration.profile.Profile;
+import fr.free.totalboumboum.configuration.profile.ProfileLoader;
 import fr.free.totalboumboum.game.match.Match;
 import fr.free.totalboumboum.game.statistics.StatisticHolder;
 import fr.free.totalboumboum.game.statistics.StatisticTournament;
@@ -89,6 +95,11 @@ public abstract class AbstractTournament implements StatisticHolder, Serializabl
 	public ArrayList<Boolean> getPlayersStatus()
 	{	// useless here
 		return null;
+	}
+	
+	public void reloadPortraits() throws ParserConfigurationException, SAXException, IOException, ClassNotFoundException
+	{	for(Profile p: profiles)
+			ProfileLoader.reloadPortraits(p);
 	}
 
 	/////////////////////////////////////////////////////////////////

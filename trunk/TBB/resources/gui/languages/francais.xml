@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <language
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
-	xsi:noNamespaceSchemaLocation="..\..\schemas\language.xsd">
+	xsi:noNamespaceSchemaLocation="../../schemas/language.xsd">
 	
 	<group name="Menu" >
 <!-- MAIN MENU -->
@@ -363,6 +363,14 @@
 		<group name="Tournament">
 			<group name="Button">
 				<text name="Quit" value="Quitter" tooltip="Quitter le tournoi et revenir au menu principal" />
+			</group>
+			<group name="Load">
+				<text name="Title" value="Charger une partie" tooltip="Charger une partie précédemment enregistrée" />
+				<group name="Button">
+					<text name="Cancel" value="Annuler" tooltip="Annuler et revenir au menu principal" />
+					<text name="Confirm" value="Confirmer" tooltip="Confirmer et charger la partie sélectionnée" />
+					<text name="Delete" value="Supprimer" tooltip="Supprimer l'enregistrement sélectionné" />
+				</group>
 			</group>
 			<group name="Players">
 				<text name="Title" value="Sélection des joueurs" tooltip="Écran de sélection des joueurs pour ce tournoi" />
