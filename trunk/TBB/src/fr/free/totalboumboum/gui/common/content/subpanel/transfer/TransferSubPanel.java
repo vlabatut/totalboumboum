@@ -173,11 +173,11 @@ public class TransferSubPanel extends UntitledSubPanelTable implements MouseList
 	
 	private void fireTransferLeft()
 	{	for(TransferSubPanelListener listener: listeners)
-			listener.transferLeft();
+			listener.transferLeftClicked();
 	}
 
 	private void fireTransferRight()
 	{	for(TransferSubPanelListener listener: listeners)
-			listener.transferRight();
+			listener.transferRightClicked();
 	}
 }

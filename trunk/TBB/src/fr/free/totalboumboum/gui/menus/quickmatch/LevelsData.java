@@ -254,7 +254,7 @@ public class LevelsData extends EntitledDataPanel implements PackBrowserSubPanel
 	// PACK BROWSER LISTENER				/////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	@Override
-	public void packBrowserSelectionChange()
+	public void packBrowserSelectionChanged()
 	{	String pack = selectionPanel.getSelectedPack();
 		String folder = selectionPanel.getSelectedName();
 		if(pack==null || folder==null)
@@ -286,7 +286,7 @@ public class LevelsData extends EntitledDataPanel implements PackBrowserSubPanel
 	// TRANSFER LISTENER			/////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	@Override
-	public void transferLeft()
+	public void transferLeftClicked()
 	{	String folderName = selectionPanel.getSelectedName();
 		String packName = selectionPanel.getSelectedPack();
 		if(folderName!=null && packName!=null)
@@ -307,7 +307,7 @@ public class LevelsData extends EntitledDataPanel implements PackBrowserSubPanel
 	}
 
 	@Override
-	public void transferRight()
+	public void transferRightClicked()
 	{	int index = getTransferIndex();
 		if(index>=0)
 		{	// levels selection
@@ -337,12 +337,12 @@ public class LevelsData extends EntitledDataPanel implements PackBrowserSubPanel
 	// FILE BROWSER SUBPANEL LISTENER	/////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	@Override
-	public void fileBrowserParent()
+	public void fileBrowserParentReached()
 	{	
 	}
 
 	@Override
-	public void fileBrowserSelectionChange()
+	public void fileBrowserSelectionChanged()
 	{	refreshCommands();
 	}
 }

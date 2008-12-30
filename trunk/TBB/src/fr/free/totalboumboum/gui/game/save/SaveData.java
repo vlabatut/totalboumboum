@@ -139,12 +139,12 @@ public class SaveData extends EntitledDataPanel implements FolderBrowserSubPanel
 	// PACK BROWSER LISTENER		/////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	@Override
-	public void packBrowserParent()
+	public void packBrowserParentReached()
 	{	// no use here
 	}
 	
 	@Override
-	public void packBrowserSelectionChange()
+	public void packBrowserSelectionChanged()
 	{	String folder = folderPanel.getSelectedName();
 		if(folder==null)
 			selectedArchive = null;

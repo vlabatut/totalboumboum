@@ -319,19 +319,19 @@ public class PackBrowserSubPanel extends SubPanel implements MouseListener, Fold
 	
 	private void firePackBrowserSelectionChange()
 	{	for(PackBrowserSubPanelListener listener: listeners)
-			listener.packBrowserSelectionChange();
+			listener.packBrowserSelectionChanged();
 	}
 
 	/////////////////////////////////////////////////////////////////
 	// FILE BROWSER LISTENER		/////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	@Override
-	public void packBrowserSelectionChange()
+	public void packBrowserSelectionChanged()
 	{	firePackBrowserSelectionChange();
 	}
 
 	@Override
-	public void packBrowserParent()
+	public void packBrowserParentReached()
 	{	selectPack(-1);
 	}
 }

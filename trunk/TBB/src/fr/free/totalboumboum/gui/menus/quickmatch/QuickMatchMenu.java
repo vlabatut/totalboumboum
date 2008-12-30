@@ -92,6 +92,7 @@ public class QuickMatchMenu extends InnerMenuPanel implements DataPanelListener
 		levelsData = new LevelsData(container);
 		levelsData.addListener(this);
 		settingsData = new SettingsData(container);
+		settingsData.addListener(this);
 		tournamentPanel = new TournamentSplitPanel(container.getContainer(),getMenuParent());
 	}
 	
@@ -169,6 +170,10 @@ public class QuickMatchMenu extends InnerMenuPanel implements DataPanelListener
 			buttonLevelsNext.setEnabled(false);
 		else
 			buttonLevelsNext.setEnabled(true);
+		if(quickMatchConfiguration.getLimitPoints()<=0 && quickMatchConfiguration.getLimitRounds()<=0)
+			buttonSettingsNext.setEnabled(false);
+		else
+			buttonSettingsNext.setEnabled(true);
 	}
 	
 	/////////////////////////////////////////////////////////////////
@@ -395,7 +400,7 @@ public class QuickMatchMenu extends InnerMenuPanel implements DataPanelListener
 	// DATA PANEL LISTENER	/////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	@Override
-	public void dataPanelSelectionChange()
+	public void dataPanelSelectionChanged()
 	{	refreshButtons();
 	}
 }

@@ -124,12 +124,12 @@ public class SelectedProfileData extends EntitledDataPanel implements FileBrowse
 	// FILE BROWSER LISTENER		/////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	@Override
-	public void fileBrowserParent()
+	public void fileBrowserParentReached()
 	{	
 	}
 
 	@Override
-	public void fileBrowserSelectionChange()
+	public void fileBrowserSelectionChanged()
 	{	String file = filePanel.getSelectedFileName();
 		if(file==null)
 			selectedProfile = null;

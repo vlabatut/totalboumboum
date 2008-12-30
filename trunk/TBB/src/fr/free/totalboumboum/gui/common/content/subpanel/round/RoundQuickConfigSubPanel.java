@@ -402,12 +402,14 @@ public class RoundQuickConfigSubPanel extends UntitledSubPanelLines implements M
 				boolean levelsOrder = !quickMatchConfiguration.getLevelsRandomOrder();
 				quickMatchConfiguration.setLevelsRandomOrder(levelsOrder);
 				setLevelsOrder();
+				fireRoundQuickConfigModified();
 				break;
 			// players location
 			case LINE_PLAYERS_LOCATION:
 				boolean playersLocation = !quickMatchConfiguration.getPlayersRandomLocation();
 				quickMatchConfiguration.setPlayersRandomLocation(playersLocation);
 				setPlayersLocation();
+				fireRoundQuickConfigModified();
 				break;
 			// time limit
 			case LINE_TIME_LIMIT:
@@ -425,6 +427,7 @@ public class RoundQuickConfigSubPanel extends UntitledSubPanelLines implements M
 				// common
 				quickMatchConfiguration.setLimitTime(limitTime);
 				setTimeLimit();
+				fireRoundQuickConfigModified();
 				break;
 			// time limit
 			case LINE_POINTS_VALUES:
@@ -445,12 +448,14 @@ public class RoundQuickConfigSubPanel extends UntitledSubPanelLines implements M
 				// common
 				quickMatchConfiguration.getPoints().set(index,pointsValues);
 				setPointsValue(index);
+				fireRoundQuickConfigModified();
 				break;
 			// points share
 			case LINE_POINTS_SHARE:
 				boolean pointsShare = !quickMatchConfiguration.getPointsShare();
 				quickMatchConfiguration.setPointsShare(pointsShare);
 				setPointsShare();
+				fireRoundQuickConfigModified();
 				break;			
 			// points draw
 			case LINE_POINTS_DRAW:
@@ -458,6 +463,7 @@ public class RoundQuickConfigSubPanel extends UntitledSubPanelLines implements M
 				pointsDraw = QuickMatchDraw.getNext(pointsDraw);
 				quickMatchConfiguration.setPointsDraw(pointsDraw);
 				setPointsDraw();
+				fireRoundQuickConfigModified();
 				break;
 		}
 	}
@@ -465,5 +471,24 @@ public class RoundQuickConfigSubPanel extends UntitledSubPanelLines implements M
 	@Override
 	public void mouseReleased(MouseEvent e)
 	{	
+	}
+
+	/////////////////////////////////////////////////////////////////
+	// LISTENERS		/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	private ArrayList<RoundQuickConfigSubPanelListener> listeners = new ArrayList<RoundQuickConfigSubPanelListener>();
+	
+	public void addListener(RoundQuickConfigSubPanelListener listener)
+	{	if(!listeners.contains(listener))
+			listeners.add(listener);		
+	}
+
+	public void removeListener(RoundQuickConfigSubPanelListener listener)
+	{	listeners.remove(listener);		
+	}
+	
+	private void fireRoundQuickConfigModified()
+	{	for(RoundQuickConfigSubPanelListener listener: listeners)
+			listener.roundQuickConfigModified();
 	}
 }

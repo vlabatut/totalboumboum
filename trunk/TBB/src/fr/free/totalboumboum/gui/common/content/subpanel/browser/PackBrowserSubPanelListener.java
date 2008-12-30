@@ -23,5 +23,5 @@ package fr.free.totalboumboum.gui.common.content.subpanel.browser;
 
 public interface PackBrowserSubPanelListener
 {
-	public void packBrowserSelectionChange();
+	public void packBrowserSelectionChanged();
 }

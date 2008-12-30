@@ -21,8 +21,10 @@ package fr.free.totalboumboum.gui.common.content.subpanel.match;
  * 
  */
 
+import java.awt.Color;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.util.ArrayList;
 
 import javax.swing.JLabel;
 
@@ -90,8 +92,7 @@ public class MatchQuickConfigSubPanel extends UntitledSubPanelLines implements M
 					col++;
 				}
 				// value
-				{	setPointsLimit();
-					ln.setLabelMaxWidth(col,Integer.MAX_VALUE);
+				{	ln.setLabelMaxWidth(col,Integer.MAX_VALUE);
 					ln.setLabelBackground(col,GuiTools.COLOR_TABLE_REGULAR_BACKGROUND);
 					ln.setLabelForeground(col,GuiTools.COLOR_TABLE_REGULAR_FOREGROUND);
 					col++;
@@ -127,8 +128,7 @@ public class MatchQuickConfigSubPanel extends UntitledSubPanelLines implements M
 					col++;
 				}
 				// value
-				{	setRoundsLimit();
-					ln.setLabelMaxWidth(col,Integer.MAX_VALUE);
+				{	ln.setLabelMaxWidth(col,Integer.MAX_VALUE);
 					ln.setLabelBackground(col,GuiTools.COLOR_TABLE_REGULAR_BACKGROUND);
 					ln.setLabelForeground(col,GuiTools.COLOR_TABLE_REGULAR_FOREGROUND);
 					col++;
@@ -141,7 +141,8 @@ public class MatchQuickConfigSubPanel extends UntitledSubPanelLines implements M
 					col++;
 				}
 			}
-			
+			setPointsLimit();
+			setRoundsLimit();			
 			
 			// empty lines
 			{	for(int line=LINE_LIMIT_ROUNDS+1;line<LINE_COUNT;line++)
@@ -177,6 +178,7 @@ public class MatchQuickConfigSubPanel extends UntitledSubPanelLines implements M
 			text = Integer.toString(limit);
 		String tooltip = text;
 		getLine(LINE_LIMIT_POINTS).setLabelText(2,text,tooltip);
+		setLimitsBackground();
 	}
 		
 	private void setRoundsLimit()
@@ -188,6 +190,31 @@ public class MatchQuickConfigSubPanel extends UntitledSubPanelLines implements M
 			text = Integer.toString(limit);
 		String tooltip = text;
 		getLine(LINE_LIMIT_ROUNDS).setLabelText(2,text,tooltip);
+		setLimitsBackground();
+	}
+	
+	private void setLimitsBackground()
+	{	// set colors
+		Color hbg,dbg;
+		if(quickMatchConfiguration.getLimitPoints()<=0 && quickMatchConfiguration.getLimitRounds()<=0)
+		{	hbg = GuiTools.COLOR_TABLE_SELECTED_DARK_BACKGROUND;
+			dbg = GuiTools.COLOR_TABLE_SELECTED_BACKGROUND;
+		}
+		else
+		{	hbg = GuiTools.COLOR_TABLE_HEADER_BACKGROUND;
+			dbg = GuiTools.COLOR_TABLE_REGULAR_BACKGROUND;
+		}
+		// set background
+		Line line = getLine(LINE_LIMIT_POINTS);
+		line.setLabelBackground(0,hbg);
+		line.setLabelBackground(1,hbg);
+		line.setLabelBackground(2,dbg);
+		line.setLabelBackground(3,hbg);
+		line = getLine(LINE_LIMIT_ROUNDS);
+		line.setLabelBackground(0,hbg);
+		line.setLabelBackground(1,hbg);
+		line.setLabelBackground(2,dbg);
+		line.setLabelBackground(3,hbg);
 	}
 	
 	/////////////////////////////////////////////////////////////////
@@ -230,6 +257,7 @@ public class MatchQuickConfigSubPanel extends UntitledSubPanelLines implements M
 				// common
 				quickMatchConfiguration.setLimitPoints(limitPoints);
 				setPointsLimit();
+				fireMatchQuickConfigModified();
 				break;
 				// points limit
 			case LINE_LIMIT_ROUNDS:
@@ -247,6 +275,7 @@ public class MatchQuickConfigSubPanel extends UntitledSubPanelLines implements M
 				// common
 				quickMatchConfiguration.setLimitRounds(limitRounds);
 				setRoundsLimit();
+				fireMatchQuickConfigModified();
 				break;
 		}
 	}
@@ -254,5 +283,24 @@ public class MatchQuickConfigSubPanel extends UntitledSubPanelLines implements M
 	@Override
 	public void mouseReleased(MouseEvent e)
 	{	
+	}
+
+	/////////////////////////////////////////////////////////////////
+	// LISTENERS		/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	private ArrayList<MatchQuickConfigSubPanelListener> listeners = new ArrayList<MatchQuickConfigSubPanelListener>();
+	
+	public void addListener(MatchQuickConfigSubPanelListener listener)
+	{	if(!listeners.contains(listener))
+			listeners.add(listener);		
+	}
+
+	public void removeListener(MatchQuickConfigSubPanelListener listener)
+	{	listeners.remove(listener);		
+	}
+	
+	private void fireMatchQuickConfigModified()
+	{	for(MatchQuickConfigSubPanelListener listener: listeners)
+			listener.matchQuickConfigModified();
 	}
 }
