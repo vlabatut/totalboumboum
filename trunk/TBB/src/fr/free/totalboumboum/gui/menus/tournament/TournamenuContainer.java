@@ -23,14 +23,21 @@ package fr.free.totalboumboum.gui.menus.tournament;
 
 
 import java.awt.BorderLayout;
+import java.io.IOException;
+
+import javax.xml.parsers.ParserConfigurationException;
+
+import org.xml.sax.SAXException;
 
 import fr.free.totalboumboum.configuration.Configuration;
 import fr.free.totalboumboum.configuration.game.tournament.TournamentConfiguration;
+import fr.free.totalboumboum.game.archive.GameArchive;
 import fr.free.totalboumboum.game.tournament.AbstractTournament;
 import fr.free.totalboumboum.gui.common.structure.MenuContainer;
 import fr.free.totalboumboum.gui.common.structure.panel.menu.MenuPanel;
 import fr.free.totalboumboum.gui.game.tournament.TournamentSplitPanel;
 import fr.free.totalboumboum.gui.menus.tournament.load.LoadSplitPanel;
+import fr.free.totalboumboum.tools.FileTools;
 
 public class TournamenuContainer extends MenuPanel implements MenuContainer
 {	private static final long serialVersionUID = 1L;
@@ -80,18 +87,43 @@ public class TournamenuContainer extends MenuPanel implements MenuContainer
 	private TournamenuSplitPanel menuSplitPanel;
 	private TournamentSplitPanel tournamentSplitPanel;
 	private LoadSplitPanel loadSplitPanel;
+	private boolean firstTime = true;
 	
 	public void initTournament()
 	{	TournamentConfiguration tournamentConfiguration = Configuration.getGameConfiguration().getTournamentConfiguration();
-		AbstractTournament tournament = tournamentConfiguration.getTournament();
-		if(tournament==null || tournament.isOver())
-		{	menuSplitPanel.initTournament();
-			setMenuPanel(menuSplitPanel);		
+		if(tournamentConfiguration.getAutoLoad() && firstTime)
+		{	firstTime = false;
+			try
+			{	String folder = FileTools.FOLDER_DEFAULT;
+				AbstractTournament tournament = GameArchive.loadGame(folder);
+				tournamentSplitPanel.setTournament(tournament);
+				Configuration.getGameConfiguration().getTournamentConfiguration().setTournament(tournament);
+				setMenuPanel(tournamentSplitPanel);
+			}
+			catch (IOException e1)
+			{	e1.printStackTrace();
+			}
+			catch (ClassNotFoundException e1)
+			{	e1.printStackTrace();
+			}
+			catch (ParserConfigurationException e1)
+			{	e1.printStackTrace();
+			}
+			catch (SAXException e1)
+			{	e1.printStackTrace();
+			}
 		}
-		else if(tournament.hasBegun())
-			setMenuPanel(tournamentSplitPanel);
 		else
-			setMenuPanel(menuSplitPanel);		
+		{	AbstractTournament tournament = tournamentConfiguration.getTournament();
+			if(tournament==null || tournament.isOver())
+			{	menuSplitPanel.initTournament();
+				setMenuPanel(menuSplitPanel);		
+			}
+			else if(tournament.hasBegun())
+				setMenuPanel(tournamentSplitPanel);
+			else
+				setMenuPanel(menuSplitPanel);
+		}
 	}
 	
 	public void initLoad()

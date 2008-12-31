@@ -36,9 +36,13 @@ import javax.xml.parsers.ParserConfigurationException;
 
 import org.xml.sax.SAXException;
 
+import fr.free.totalboumboum.configuration.Configuration;
+import fr.free.totalboumboum.configuration.game.tournament.TournamentConfiguration;
+import fr.free.totalboumboum.game.archive.GameArchive;
 import fr.free.totalboumboum.game.match.Match;
 import fr.free.totalboumboum.game.match.MatchRenderPanel;
 import fr.free.totalboumboum.game.round.Round;
+import fr.free.totalboumboum.game.tournament.AbstractTournament;
 import fr.free.totalboumboum.gui.common.structure.panel.SplitMenuPanel;
 import fr.free.totalboumboum.gui.common.structure.panel.menu.InnerMenuPanel;
 import fr.free.totalboumboum.gui.common.structure.panel.menu.MenuPanel;
@@ -49,6 +53,7 @@ import fr.free.totalboumboum.gui.game.round.RoundSplitPanel;
 import fr.free.totalboumboum.gui.game.save.SaveSplitPanel;
 import fr.free.totalboumboum.gui.tools.GuiKeys;
 import fr.free.totalboumboum.gui.tools.GuiTools;
+import fr.free.totalboumboum.tools.FileTools;
 
 public class MatchMenu extends InnerMenuPanel implements MatchRenderPanel
 {	private static final long serialVersionUID = 1L;
@@ -109,7 +114,7 @@ buttonStatistics.setEnabled(false);
 	}
 	
 	/////////////////////////////////////////////////////////////////
-	// ROUND			/////////////////////////////////////////////
+	// MATCH			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	private Match match;
 
@@ -129,6 +134,27 @@ buttonStatistics.setEnabled(false);
 	
 	public Match getMatch()
 	{	return match;	
+	}
+	
+	private void saveTournament()
+	{	AbstractTournament tournament = match.getTournament();
+		TournamentConfiguration tournamentConfiguration = Configuration.getGameConfiguration().getTournamentConfiguration();
+		AbstractTournament tournamentConf = tournamentConfiguration.getTournament();
+		if(tournament==tournamentConf && tournamentConfiguration.getAutoSave())
+		{	String folder = FileTools.FOLDER_DEFAULT;
+			try
+			{	GameArchive.saveGame(folder, tournament);
+			}
+			catch (ParserConfigurationException e)
+			{	e.printStackTrace();
+			}
+			catch (SAXException e)
+			{	e.printStackTrace();
+			}
+			catch (IOException e)
+			{	e.printStackTrace();
+			}
+		}
 	}
 
 	/////////////////////////////////////////////////////////////////
@@ -258,6 +284,7 @@ buttonStatistics.setEnabled(false);
 	{	SwingUtilities.invokeLater(new Runnable()
 		{	public void run()
 			{	matchResults.refresh();
+				saveTournament();
 				buttonResults.doClick();
 			}
 		});	
@@ -268,6 +295,7 @@ buttonStatistics.setEnabled(false);
 	{	SwingUtilities.invokeLater(new Runnable()
 		{	public void run()
 			{	matchResults.refresh();
+				saveTournament();
 				buttonResults.doClick();
 			}
 		});	

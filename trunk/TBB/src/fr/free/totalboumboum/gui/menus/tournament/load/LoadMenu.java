@@ -24,9 +24,7 @@ package fr.free.totalboumboum.gui.menus.tournament.load;
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.io.File;
-import java.io.FileInputStream;
 import java.io.IOException;
-import java.io.ObjectInputStream;
 import java.util.ArrayList;
 
 import javax.swing.Box;
@@ -140,18 +138,9 @@ public class LoadMenu extends InnerMenuPanel implements DataPanelListener
 		else if(e.getActionCommand().equals(GuiKeys.MENU_TOURNAMENT_LOAD_BUTTON_CONFIRM))
 		{	try
 			{	String folder = levelData.getSelectedGameArchive().getFolder();
-				String path = FileTools.getSavesPath()+File.separator+folder;
-				String fileName = FileTools.FILE_ARCHIVE+FileTools.EXTENSION_DATA;
-				File file = new File(path+File.separator+fileName);
-				FileInputStream in = new FileInputStream(file);
-				ObjectInputStream oIn = new ObjectInputStream(in);
-				AbstractTournament tournament = (AbstractTournament)oIn.readObject();
-				oIn.close();
-				tournament.reloadPortraits();
-				//
+				AbstractTournament tournament = GameArchive.loadGame(folder);
 				tournamentPanel.setTournament(tournament);
 				Configuration.getGameConfiguration().getTournamentConfiguration().setTournament(tournament);
-				replaceWith(tournamentPanel);
 			}
 			catch (IOException e1)
 			{	e1.printStackTrace();
@@ -165,6 +154,7 @@ public class LoadMenu extends InnerMenuPanel implements DataPanelListener
 			catch (SAXException e1)
 			{	e1.printStackTrace();
 			}
+			replaceWith(tournamentPanel);
 	    }
 	} 
 	

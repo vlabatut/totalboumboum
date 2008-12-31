@@ -52,7 +52,8 @@ public class TournamentSplitPanel extends SplitMenuPanel
 	// TOURNAMENT		/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	public void setTournament(AbstractTournament tournament)
-	{	tournament.init();
+	{	if(!tournament.hasBegun())
+			tournament.init();
 		((TournamentMenu)getMenuPart()).setTournament(tournament);
 	}
 

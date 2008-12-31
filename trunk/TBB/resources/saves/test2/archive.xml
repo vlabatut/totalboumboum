@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <archive xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="..\..\..\resources\schemas\archive.xsd">
 	<tournament name="Tournament-séquence loooong" type="sequence" />
-	<played matches="0" rounds="5" />
-	<dates start="2008-12-30T23:41:48" save="2008-12-30T23:43:47" />
+	<played matches="1" rounds="1" />
+	<dates start="2008-12-31T23:12:38" save="2008-12-31T23:35:42" />
 	<players>
 		<player name="Bingöl+Ketenci" />
 		<player name="Demirkol+Doğan" />

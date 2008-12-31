@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <archive xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="..\..\..\resources\schemas\archive.xsd">
-	<tournament name="Tournament-séquence loooong" type="sequence" />
-	<played matches="0" rounds="2" />
-	<dates start="2008-12-28T19:24:55" save="2008-12-28T19:27:50" />
+	<tournament name="Tournament-séquence court" type="sequence" />
+	<played matches="1" rounds="0" />
+	<dates start="2008-12-31T23:54:10" save="2008-12-31T23:57:20" />
 	<players>
 		<player name="Bingöl+Ketenci" />
 		<player name="Demirkol+Doğan" />
 		<player name="Kılıç+Pala" />
-		<player name="Promeneur" />
 		<player name="Joueur humain" />
+		<player name="Promeneur" />
 	</players>
 </archive>
 
