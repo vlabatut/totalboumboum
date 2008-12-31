@@ -40,6 +40,8 @@ public class GuiKeys
 	public static final String ARCHIVE = "Archive";
 	public static final String AUTHOR = "Author";
 	public static final String AUTOKILL = "Autokill";
+	public static final String AUTOLOAD = "Autoload";
+	public static final String AUTOSAVE = "Autosave";
 	public static final String AVAILABLE = "Available";
 	public static final String BACK = "Back";
 	public static final String BLACK = "Black";
@@ -343,6 +345,16 @@ public class GuiKeys
 			/* TOURNAMENT */
 			public static final String MENU_OPTIONS_GAME_TOURNAMENT = MENU_OPTIONS_GAME+TOURNAMENT;
 			public static final String MENU_OPTIONS_GAME_TOURNAMENT_TITLE = MENU_OPTIONS_GAME_TOURNAMENT+TITLE;
+				/* AUTOSAVE */
+				public static final String MENU_OPTIONS_GAME_TOURNAMENT_AUTOSAVE = MENU_OPTIONS_GAME_TOURNAMENT+AUTOSAVE;
+				public static final String MENU_OPTIONS_GAME_TOURNAMENT_AUTOSAVE_FALSE = MENU_OPTIONS_GAME_TOURNAMENT_AUTOSAVE+FALSE;
+				public static final String MENU_OPTIONS_GAME_TOURNAMENT_AUTOSAVE_TRUE = MENU_OPTIONS_GAME_TOURNAMENT_AUTOSAVE+TRUE;
+				public static final String MENU_OPTIONS_GAME_TOURNAMENT_AUTOSAVE_TITLE = MENU_OPTIONS_GAME_TOURNAMENT_AUTOSAVE+TITLE;
+				/* AUTOLOAD */
+				public static final String MENU_OPTIONS_GAME_TOURNAMENT_AUTOLOAD = MENU_OPTIONS_GAME_TOURNAMENT+AUTOLOAD;
+				public static final String MENU_OPTIONS_GAME_TOURNAMENT_AUTOLOAD_FALSE = MENU_OPTIONS_GAME_TOURNAMENT_AUTOLOAD+FALSE;
+				public static final String MENU_OPTIONS_GAME_TOURNAMENT_AUTOLOAD_TRUE = MENU_OPTIONS_GAME_TOURNAMENT_AUTOLOAD+TRUE;
+				public static final String MENU_OPTIONS_GAME_TOURNAMENT_AUTOLOAD_TITLE = MENU_OPTIONS_GAME_TOURNAMENT_AUTOLOAD+TITLE;
 				/* PLAYERS */
 				public static final String MENU_OPTIONS_GAME_TOURNAMENT_PLAYERS = MENU_OPTIONS_GAME_TOURNAMENT+PLAYERS;
 				public static final String MENU_OPTIONS_GAME_TOURNAMENT_PLAYERS_FALSE = MENU_OPTIONS_GAME_TOURNAMENT_PLAYERS+FALSE;

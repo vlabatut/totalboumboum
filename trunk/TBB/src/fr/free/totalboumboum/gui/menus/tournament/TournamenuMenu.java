@@ -145,8 +145,8 @@ public class TournamenuMenu extends InnerMenuPanel
 	
 	private void loadTournament()
 	{	try
-		{	AbstractTournament tournament = tournamentConfiguration.loadLastTournament();
-			tournamentConfiguration.setTournament(tournament);
+		{	tournamentConfiguration.loadLastTournament();
+			//tournamentConfiguration.setTournament(tournament);
 		}
 		catch (ParserConfigurationException e)
 		{	e.printStackTrace();

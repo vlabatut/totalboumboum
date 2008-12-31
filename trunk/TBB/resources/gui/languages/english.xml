@@ -170,7 +170,7 @@
 				<group name="Quickstart">
 					<text name="Title" value="Quick start" tooltip="Modify quick start settings" />
 					<group name="Round">
-						<text name="Browse" value="Manche" tooltip="Sélectionner la manche du démarrage rapide" />
+						<text name="Browse" value="Manche" tooltip="Select the quick start round" />
 					</group>
 				</group>
 				<group name="Quickmatch">
@@ -193,6 +193,16 @@
 				</group>
 				<group name="Tournament">
 					<text name="Title" value="Tournament" tooltip="Modify tournament settings" />
+					<group name="Autoload">
+						<text name="False" value="Disabled" tooltip="Disabled" />
+						<text name="True" value="Enabled" tooltip="Enabled" />
+						<text name="Title" value="Automatic loading" tooltip="Automatically load the last saved game" />
+					</group>
+					<group name="Autosave">
+						<text name="False" value="Disabled" tooltip="Disabled" />
+						<text name="True" value="Enabled" tooltip="Enabled" />
+						<text name="Title" value="Automatic saving" tooltip="Automatically saves the current tournament on the default slot" />
+					</group>
 					<group name="Players">
 						<text name="False" value="Disabled" tooltip="Disabled" />
 						<text name="True" value="Enabled" tooltip="Enabled" />
