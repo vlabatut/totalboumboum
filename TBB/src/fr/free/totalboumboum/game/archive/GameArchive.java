@@ -22,8 +22,10 @@ package fr.free.totalboumboum.game.archive;
  */
 
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.util.Date;
 import java.util.ArrayList;
@@ -73,18 +75,33 @@ public class GameArchive
 		return result;
 	}
 
-	public static void saveAll(String folder, AbstractTournament tournament) throws ParserConfigurationException, SAXException, IOException
-	{	// XML file
+	public static void saveGame(String folder, AbstractTournament tournament) throws ParserConfigurationException, SAXException, IOException
+	{	String path = FileTools.getSavesPath()+File.separator+folder;
+		File folderFile = new File(path);
+		if(!folderFile.exists())
+			folderFile.mkdir();
+		// XML file
 		GameArchive gameArchive = GameArchive.getArchive(tournament,folder);
 		GameArchiveSaver.saveGameArchive(gameArchive);
 		// data file
-		String path = FileTools.getSavesPath()+File.separator+folder;
 		String fileName = FileTools.FILE_ARCHIVE+FileTools.EXTENSION_DATA;
 		File file = new File(path+File.separator+fileName);
 		FileOutputStream out = new FileOutputStream(file);
 		ObjectOutputStream oOut = new ObjectOutputStream(out);
 		oOut.writeObject(tournament);
 		oOut.close();
+	}
+	
+	public static AbstractTournament loadGame(String folder) throws IOException, ClassNotFoundException, ParserConfigurationException, SAXException
+	{	String path = FileTools.getSavesPath()+File.separator+folder;
+		String fileName = FileTools.FILE_ARCHIVE+FileTools.EXTENSION_DATA;
+		File file = new File(path+File.separator+fileName);
+		FileInputStream in = new FileInputStream(file);
+		ObjectInputStream oIn = new ObjectInputStream(in);
+		AbstractTournament result = (AbstractTournament)oIn.readObject();
+		oIn.close();
+		result.reloadPortraits();
+		return result;
 	}
 
 	/////////////////////////////////////////////////////////////////

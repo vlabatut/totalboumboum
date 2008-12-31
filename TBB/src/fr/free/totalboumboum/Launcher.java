@@ -514,6 +514,14 @@ public class Launcher
 	 * déterministe des actions (le tirage se ferait dans la fonction appelant l'actionMger,
 	 * ie généralement : l'eventMgr)
 	 */
+	
+	/*
+	 * TODO type de tournoi plus adapté au réseau :
+	 * des joueurs jouent un match pendant que d'autres attendent 
+	 * à la fin du match, les n derniers joueurs sont relégués dans la salle d'attente
+	 * n joueurs qui attendaient sont qualifiés.
+	 * un classement permet de déterminer le leader provisoire
+	 */
 
 // **********************************************************
 // JOUEURS
@@ -831,6 +839,7 @@ public class Launcher
 	 * - nouveauté : chargement d'une partie préalablement enregistrée
 	 * - nouveauté : autosave & autoload dans les options
 	 * - nouveauté : enregistrement automatique
+	 * - nouveauté : chargement automatique
 	 * 
 	 * - nouveauté : possibilité de créer un nouveau slot d'enregistrement
 	 * 

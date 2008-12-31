@@ -282,7 +282,7 @@ public class Match implements StatisticHolder, Serializable
 		currentRound = null;
 		rounds.clear();
 		// limits
-		limits.finish();
+//		limits.finish();
 		limits = null;
 		// misc
 		panel = null;

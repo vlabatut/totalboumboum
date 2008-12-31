@@ -137,7 +137,7 @@ public class SaveMenu extends InnerMenuPanel implements DataPanelListener
 		else if(e.getActionCommand().equals(GuiKeys.GAME_SAVE_BUTTON_CONFIRM))
 		{	try
 			{	String folder = levelData.getSelectedGameArchive().getFolder();
-				GameArchive.saveAll(folder,tournament);
+				GameArchive.saveGame(folder,tournament);
 			}
 			catch (ParserConfigurationException e1)
 			{	e1.printStackTrace();
