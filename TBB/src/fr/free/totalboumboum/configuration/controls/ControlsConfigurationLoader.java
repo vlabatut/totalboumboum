@@ -2,7 +2,7 @@ package fr.free.totalboumboum.configuration.controls;
 
 /*
  * Total Boum Boum
- * Copyright 2008 Vincent Labatut 
+ * Copyright 2008-2009 Vincent Labatut 
  * 
  * This file is part of Total Boum Boum.
  * 
