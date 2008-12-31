@@ -210,6 +210,8 @@ public class XmlTools
 	public static final String ATT_AI = "ai";
 	public static final String ATT_ALLOWED_PLAYERS = "allowedPlayers";
 	public static final String ATT_AUTOFIRE = "autofire";
+	public static final String ATT_AUTOLOAD = "autoload";
+	public static final String ATT_AUTOSAVE = "autosave";
 	public static final String ATT_BLUE = "blue";
 	public static final String ATT_BOUND_HEIGHT = "boundHeight";
 	public static final String ATT_BOUND_YSHIFT = "boundYShift";

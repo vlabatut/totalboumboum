@@ -50,14 +50,7 @@ public class TournamentConfigurationLoader
 	private static void loadGameTournamentElement(Element root, TournamentConfiguration result) throws ParserConfigurationException, SAXException, IOException, IllegalArgumentException, SecurityException, IllegalAccessException, NoSuchFieldException, ClassNotFoundException
 	{	// options
 		Element optionsElement = root.getChild(XmlTools.ELT_OPTIONS);
-		// use last players
-		String att = optionsElement.getAttributeValue(XmlTools.ATT_USE_LAST_PLAYERS);
-		boolean useLastPlayers = Boolean.parseBoolean(att);
-		result.setUseLastPlayers(useLastPlayers);
-		// use last tournament
-		att = optionsElement.getAttributeValue(XmlTools.ATT_USE_LAST_TOURNAMENT);
-		boolean useLastTournament = Boolean.parseBoolean(att);
-		result.setUseLastTournament(useLastTournament);
+		loadOptionsElement(optionsElement,result);
 		
 		// name
 		Element tournamentElement = root.getChild(XmlTools.ELT_TOURNAMENT);
@@ -68,5 +61,27 @@ public class TournamentConfigurationLoader
 		Element playersElement = root.getChild(XmlTools.ELT_PLAYERS);
 		ProfilesSelection tournamentSelected = ProfilesSelectionLoader.loadProfilesSelection(playersElement);
 		result.setProfilesSelection(tournamentSelected);
+	}
+	
+	private static void loadOptionsElement(Element root, TournamentConfiguration result)
+	{	// use last players
+		String useLastPlayersStr = root.getAttributeValue(XmlTools.ATT_USE_LAST_PLAYERS);
+		boolean useLastPlayers = Boolean.parseBoolean(useLastPlayersStr);
+		result.setUseLastPlayers(useLastPlayers);
+		
+		// use last tournament
+		String useLastTournamentStr = root.getAttributeValue(XmlTools.ATT_USE_LAST_TOURNAMENT);
+		boolean useLastTournament = Boolean.parseBoolean(useLastTournamentStr);
+		result.setUseLastTournament(useLastTournament);
+		
+		// autoload
+		String autoLoadStr = root.getAttributeValue(XmlTools.ATT_AUTOLOAD);
+		boolean autoLoad = Boolean.parseBoolean(autoLoadStr);
+		result.setAutoLoad(autoLoad);
+		
+		// autosave
+		String autoSaveStr = root.getAttributeValue(XmlTools.ATT_AUTOSAVE);
+		boolean autoSave = Boolean.parseBoolean(autoSaveStr);
+		result.setAutoSave(autoSave);
 	}
 }

@@ -79,6 +79,14 @@ public class TournamentConfigurationSaver
 		// use last settings
 		String useLastTournament = Boolean.toString(tournamentConfiguration.getUseLastTournament());
 		result.setAttribute(XmlTools.ATT_USE_LAST_TOURNAMENT,useLastTournament);
+
+		// auto load
+		String autoLoad = Boolean.toString(tournamentConfiguration.getAutoLoad());
+		result.setAttribute(XmlTools.ATT_AUTOLOAD,autoLoad);
+
+		// auto save
+		String autoSave = Boolean.toString(tournamentConfiguration.getAutoSave());
+		result.setAttribute(XmlTools.ATT_AUTOSAVE,autoSave);
 		
 		return result;
 	}

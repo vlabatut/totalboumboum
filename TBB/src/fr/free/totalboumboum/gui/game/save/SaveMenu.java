@@ -24,9 +24,7 @@ package fr.free.totalboumboum.gui.game.save;
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.io.File;
-import java.io.FileOutputStream;
 import java.io.IOException;
-import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 
 import javax.swing.Box;
@@ -37,7 +35,6 @@ import javax.xml.parsers.ParserConfigurationException;
 import org.xml.sax.SAXException;
 
 import fr.free.totalboumboum.game.archive.GameArchive;
-import fr.free.totalboumboum.game.archive.GameArchiveSaver;
 import fr.free.totalboumboum.game.tournament.AbstractTournament;
 import fr.free.totalboumboum.gui.common.structure.panel.SplitMenuPanel;
 import fr.free.totalboumboum.gui.common.structure.panel.data.DataPanelListener;
@@ -140,17 +137,7 @@ public class SaveMenu extends InnerMenuPanel implements DataPanelListener
 		else if(e.getActionCommand().equals(GuiKeys.GAME_SAVE_BUTTON_CONFIRM))
 		{	try
 			{	String folder = levelData.getSelectedGameArchive().getFolder();
-				// XML file
-				GameArchive gameArchive = GameArchive.getArchive(tournament,folder);
-				GameArchiveSaver.saveGameArchive(gameArchive);
-				// data file
-				String path = FileTools.getSavesPath()+File.separator+folder;
-				String fileName = FileTools.FILE_ARCHIVE+FileTools.EXTENSION_DATA;
-				File file = new File(path+File.separator+fileName);
-				FileOutputStream out = new FileOutputStream(file);
-				ObjectOutputStream oOut = new ObjectOutputStream(out);
-				oOut.writeObject(tournament);
-				oOut.close();
+				GameArchive.saveAll(folder,tournament);
 			}
 			catch (ParserConfigurationException e1)
 			{	e1.printStackTrace();

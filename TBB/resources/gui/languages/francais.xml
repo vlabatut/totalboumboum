@@ -193,6 +193,16 @@
 				</group>
 				<group name="Tournament">
 					<text name="Title" value="Tournoi" tooltip="Modifier les paramètres du tournoi" />
+					<group name="Autoload">
+						<text name="False" value="Désactivé" tooltip="Option désactivée" />
+						<text name="True" value="Activé" tooltip="Option activée" />
+						<text name="Title" value="Chargement automatique" tooltip="Charger automatiquement le dernier tournoi enregistré" />
+					</group>
+					<group name="Autosave">
+						<text name="False" value="Désactivé" tooltip="Option désactivée" />
+						<text name="True" value="Activé" tooltip="Option activée" />
+						<text name="Title" value="Enregistrement automatique" tooltip="Enregistrer automatiquement le tournoi sur l'emplacement par défaut" />
+					</group>
 					<group name="Players">
 						<text name="False" value="Désactivé" tooltip="Option désactivée" />
 						<text name="True" value="Activé" tooltip="Option activée" />

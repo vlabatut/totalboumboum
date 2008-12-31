@@ -41,6 +41,8 @@ public class TournamentConfiguration
 		// options
 		result.setUseLastPlayers(useLastPlayers);
 		result.setUseLastTournament(useLastTournament);
+		result.setAutoLoad(autoLoad);
+		result.setAutoSave(autoSave);
 		
 		// tournament
 		result.setTournamentName(new StringBuffer(tournamentName));
@@ -64,6 +66,16 @@ public class TournamentConfiguration
 		{	boolean ult = copy.getUseLastTournament();
 			result = !useLastTournament==ult;
 		}
+		// auto load
+		if(!result)
+		{	boolean al = copy.getAutoLoad();
+			result = !autoLoad==al;
+		}
+		// auto save
+		if(!result)
+		{	boolean as = copy.getAutoSave();
+			result = !autoSave==as;
+		}
 		//
 		return result;
 	}
@@ -73,6 +85,8 @@ public class TournamentConfiguration
 	/////////////////////////////////////////////////////////////////
 	private boolean useLastPlayers = false;
 	private boolean useLastTournament = false;
+	private boolean autoSave = true;
+	private boolean autoLoad = true;
 
 	public boolean getUseLastPlayers()
 	{	return useLastPlayers;
@@ -86,6 +100,20 @@ public class TournamentConfiguration
 	}
 	public void setUseLastTournament(boolean useLastTournament)
 	{	this.useLastTournament = useLastTournament;
+	}
+
+	public boolean getAutoSave()
+	{	return autoSave;
+	}
+	public void setAutoSave(boolean autoSave)
+	{	this.autoSave = autoSave;
+	}
+
+	public boolean getAutoLoad()
+	{	return autoLoad;
+	}
+	public void setAutoLoad(boolean autoLoad)
+	{	this.autoLoad = autoLoad;
 	}
 
 	/////////////////////////////////////////////////////////////////
@@ -110,16 +138,14 @@ public class TournamentConfiguration
 	{	this.tournamentName = tournamentName;
 	}
 
-	public AbstractTournament loadLastTournament() throws ParserConfigurationException, SAXException, IOException, ClassNotFoundException
-	{	AbstractTournament result = null;
-		if(tournamentName!=null)
+	public void loadLastTournament() throws ParserConfigurationException, SAXException, IOException, ClassNotFoundException
+	{	if(tournamentName!=null)
 		{	// String folderPath = FileTools.getConfigurationPath()+File.separator+FileTools.FILE_TOURNAMENT;
 			String folderPath = FileTools.getTournamentsPath()+File.separator+tournamentName;
-			result = TournamentLoader.loadTournamentFromFolderPath(folderPath);
+			tournament = TournamentLoader.loadTournamentFromFolderPath(folderPath);
 		}
-		return result;
 	}
-
+	
 	public void reinitTournament()
 	{	tournamentName.delete(0,tournamentName.length());
 	}

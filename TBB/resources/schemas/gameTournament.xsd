@@ -5,6 +5,8 @@
 	<xsd:complexType name="tOptions">
 		<xsd:attribute name="useLastPlayers" type="xsd:boolean" use="required" />
 		<xsd:attribute name="useLastTournament" type="xsd:boolean" use="required" />
+		<xsd:attribute name="autoload" type="xsd:boolean" use="required" />
+		<xsd:attribute name="autosave" type="xsd:boolean" use="required" />
 	</xsd:complexType>
 
 	<xsd:complexType name="tTournament">

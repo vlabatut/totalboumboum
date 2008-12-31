@@ -829,9 +829,10 @@ public class Launcher
 	 * - correction : problème avec les boutons dans les settings du match rapide
 	 * - modification : bloquer le match rapide si aucune limite de match
 	 * - nouveauté : chargement d'une partie préalablement enregistrée
+	 * - nouveauté : autosave & autoload dans les options
+	 * - nouveauté : enregistrement automatique
 	 * 
 	 * - nouveauté : possibilité de créer un nouveau slot d'enregistrement
-	 * - nouveauté : enregistrement automatique
 	 * 
 	 * *******************************************************
 	 * *********************** A FAIRE ***********************
@@ -901,14 +902,4 @@ public class Launcher
 	 * reformater les modes de jeu :
 	 * 	- pour paint il suffit de définir des bombes spéciales qui peignent le sol
 	 */	
-
-	/*
-	 * TODO
-	 * pq ne pas mutualiser localement les split panels ?
-	 * ex: plutot que de faire un truc séquentiel compliqué pr quickmatch,
-	 * faire un seul split qui choisit les menu/data panels en fonction de l'état du match
-	 * 
-	 * en profiter pour réorganiser la transmission du tournoi lors des modifications
-	 * style players >> levels >> settings
-	 */
 }

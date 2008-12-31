@@ -21,13 +21,22 @@ package fr.free.totalboumboum.game.archive;
  * 
  */
 
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectOutputStream;
 import java.util.Date;
 import java.util.ArrayList;
 import java.util.GregorianCalendar;
 
+import javax.xml.parsers.ParserConfigurationException;
+
+import org.xml.sax.SAXException;
+
 import fr.free.totalboumboum.configuration.profile.Profile;
 import fr.free.totalboumboum.game.match.Match;
 import fr.free.totalboumboum.game.tournament.AbstractTournament;
+import fr.free.totalboumboum.tools.FileTools;
 
 public class GameArchive
 {
@@ -62,9 +71,22 @@ public class GameArchive
 		}
 		
 		return result;
-			
 	}
-	
+
+	public static void saveAll(String folder, AbstractTournament tournament) throws ParserConfigurationException, SAXException, IOException
+	{	// XML file
+		GameArchive gameArchive = GameArchive.getArchive(tournament,folder);
+		GameArchiveSaver.saveGameArchive(gameArchive);
+		// data file
+		String path = FileTools.getSavesPath()+File.separator+folder;
+		String fileName = FileTools.FILE_ARCHIVE+FileTools.EXTENSION_DATA;
+		File file = new File(path+File.separator+fileName);
+		FileOutputStream out = new FileOutputStream(file);
+		ObjectOutputStream oOut = new ObjectOutputStream(out);
+		oOut.writeObject(tournament);
+		oOut.close();
+	}
+
 	/////////////////////////////////////////////////////////////////
 	// FOLDER			/////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////

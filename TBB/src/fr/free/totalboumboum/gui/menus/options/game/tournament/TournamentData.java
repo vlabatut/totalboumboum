@@ -43,6 +43,8 @@ public class TournamentData extends EntitledDataPanel implements MouseListener
 
 	private static final int LINE_USE_PLAYERS = 0;
 	private static final int LINE_USE_TOURNAMENT = 1;
+	private static final int LINE_AUTOSAVE = 2;
+	private static final int LINE_AUTOLOAD = 3;
 
 	private UntitledSubPanelLines optionsPanel;
 
@@ -79,7 +81,7 @@ public class TournamentData extends EntitledDataPanel implements MouseListener
 				ln.setBackgroundColor(bg);
 			}
 
-			// #2 use last settings
+			// #1 use last settings
 			{	Line ln = optionsPanel.getLine(LINE_USE_TOURNAMENT);
 				ln.addLabel(0);
 				int col = 0;
@@ -99,8 +101,48 @@ public class TournamentData extends EntitledDataPanel implements MouseListener
 				ln.setBackgroundColor(bg);
 			}
 
+			// #2 auto save
+			{	Line ln = optionsPanel.getLine(LINE_AUTOSAVE);
+				ln.addLabel(0);
+				int col = 0;
+				// name
+				{	ln.setLabelMaxWidth(col,tWidth);
+					ln.setLabelPreferredWidth(col,tWidth);
+					ln.setLabelKey(col,GuiKeys.MENU_OPTIONS_GAME_TOURNAMENT_AUTOSAVE_TITLE,false);
+					col++;
+				}
+				// value
+				{	ln.setLabelMaxWidth(col,Integer.MAX_VALUE);
+//					setUseSettings();
+					ln.getLabel(col).addMouseListener(this);
+					col++;
+				}
+				Color bg = GuiTools.COLOR_TABLE_REGULAR_BACKGROUND;
+				ln.setBackgroundColor(bg);
+			}
+
+			// #3 auto load
+			{	Line ln = optionsPanel.getLine(LINE_AUTOLOAD);
+				ln.addLabel(0);
+				int col = 0;
+				// name
+				{	ln.setLabelMaxWidth(col,tWidth);
+					ln.setLabelPreferredWidth(col,tWidth);
+					ln.setLabelKey(col,GuiKeys.MENU_OPTIONS_GAME_TOURNAMENT_AUTOLOAD_TITLE,false);
+					col++;
+				}
+				// value
+				{	ln.setLabelMaxWidth(col,Integer.MAX_VALUE);
+//					setUseSettings();
+					ln.getLabel(col).addMouseListener(this);
+					col++;
+				}
+				Color bg = GuiTools.COLOR_TABLE_REGULAR_BACKGROUND;
+				ln.setBackgroundColor(bg);
+			}
+
 			// EMPTY
-			{	for(int line=LINE_USE_TOURNAMENT+1;line<LINE_COUNT;line++)
+			{	for(int line=LINE_AUTOLOAD+1;line<LINE_COUNT;line++)
 				{	Line ln = optionsPanel.getLine(line);
 					int col = 0;
 					int mw = ln.getWidth();
@@ -158,6 +200,18 @@ public class TournamentData extends EntitledDataPanel implements MouseListener
 				tournamentConfiguration.setUseLastTournament(useTournament);
 				setUseTournament();
 				break;
+			// auto save
+			case LINE_AUTOSAVE:
+				boolean autoSave = !tournamentConfiguration.getAutoSave();
+				tournamentConfiguration.setAutoSave(autoSave);
+				setAutoSave();
+				break;
+			// auto load
+			case LINE_AUTOLOAD:
+				boolean autoLoad = !tournamentConfiguration.getAutoLoad();
+				tournamentConfiguration.setAutoLoad(autoLoad);
+				setAutoLoad();
+				break;
 		}
 	}
 	
@@ -186,6 +240,8 @@ public class TournamentData extends EntitledDataPanel implements MouseListener
 	private void refreshOptions()
 	{	setUsePlayers();
 		setUseTournament();
+		setAutoLoad();
+		setAutoSave();
 	}
 	
 	private void setUsePlayers()
@@ -206,5 +262,25 @@ public class TournamentData extends EntitledDataPanel implements MouseListener
 		else
 			key = GuiKeys.MENU_OPTIONS_GAME_TOURNAMENT_TOURNAMENT_FALSE;
 		optionsPanel.getLine(LINE_USE_TOURNAMENT).setLabelKey(1,key,true);
+	}
+
+	private void setAutoSave()
+	{	boolean autoSave = tournamentConfiguration.getAutoSave();
+		String key;
+		if(autoSave)
+			key = GuiKeys.MENU_OPTIONS_GAME_TOURNAMENT_AUTOSAVE_TRUE;
+		else
+			key = GuiKeys.MENU_OPTIONS_GAME_TOURNAMENT_AUTOSAVE_FALSE;
+		optionsPanel.getLine(LINE_AUTOSAVE).setLabelKey(1,key,true);
+	}
+
+	private void setAutoLoad()
+	{	boolean autoLoad = tournamentConfiguration.getAutoLoad();
+		String key;
+		if(autoLoad)
+			key = GuiKeys.MENU_OPTIONS_GAME_TOURNAMENT_AUTOLOAD_TRUE;
+		else
+			key = GuiKeys.MENU_OPTIONS_GAME_TOURNAMENT_AUTOLOAD_FALSE;
+		optionsPanel.getLine(LINE_AUTOLOAD).setLabelKey(1,key,true);
 	}
 }
