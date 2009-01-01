@@ -41,6 +41,7 @@ import fr.free.totalboumboum.gui.common.structure.dialog.info.InfoModalDialogPan
 import fr.free.totalboumboum.gui.common.structure.panel.menu.MenuPanel;
 import fr.free.totalboumboum.gui.common.structure.panel.menu.SimpleMenuPanel;
 import fr.free.totalboumboum.gui.data.configuration.GuiConfiguration;
+import fr.free.totalboumboum.gui.menus.about.AboutModalDialogPanel;
 import fr.free.totalboumboum.gui.menus.explore.ExploreSplitPanel;
 import fr.free.totalboumboum.gui.menus.options.OptionsSplitPanel;
 import fr.free.totalboumboum.gui.menus.profiles.select.SelectedProfileSplitPanel;
@@ -163,10 +164,16 @@ buttonStats.setEnabled(false);
 			replaceWith(quickMatchContainer);
 	    }
 		else if(e.getActionCommand().equals(GuiKeys.MENU_MAIN_BUTTON_ABOUT))
-		{	ArrayList<String> text = new ArrayList<String>();
+		{	
+/*			
+			ArrayList<String> text = new ArrayList<String>();
 			text.add("blablablablab !");
 			text.add("blëblëblëblëb !");
 			InfoModalDialogPanel aboutPanel = new InfoModalDialogPanel(this,"Test","Ceci est un test",text);
+			aboutPanel.addListener(this);
+			getFrame().setModalDialog(aboutPanel);
+*/			
+			AboutModalDialogPanel aboutPanel = new AboutModalDialogPanel(this);
 			aboutPanel.addListener(this);
 			getFrame().setModalDialog(aboutPanel);
 	    }

@@ -33,8 +33,10 @@ public class FileTools
 	public static final String EXTENSION_FONT = ".ttf";
 	public static final String EXTENSION_JAVA = ".java";
 	public static final String EXTENSION_SCHEMA = ".xsd";
+	public static final String EXTENSION_TEXT = ".txt";
 	//
 	public static final String FILE_ABILITIES = "abilities";
+	public static final String FILE_ABOUT = "about";
 	public static final String FILE_AI = "ai";
 	public static final String FILE_AI_MAIN_CLASS = "AiMain";
 	public static final String FILE_ANIMES = "animes";

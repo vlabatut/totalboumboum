@@ -19,6 +19,10 @@
 			</group>
 		</group>
 
+		<group name="About">
+			<text name="Title" value="About" tooltip="About Total Boum Boum" />
+		</group>	
+
 <!-- RESOURCES MENU -->
 		<group name="Resources">
 			<group name="Button">
@@ -31,7 +35,7 @@
 				<text name="Rounds" value="Rounds" tooltip="Show the available predefined rounds" />
 				<text name="Tournaments" value="Tournaments" tooltip="Show the available predefined tournaments" />
 			</group>
-
+	
 			<group name="Ai">
 				<group name="Button">
 					<text name="Back" value="Back" tooltip="Go back to the resources menu" />
