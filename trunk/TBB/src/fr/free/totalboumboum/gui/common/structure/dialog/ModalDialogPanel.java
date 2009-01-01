@@ -32,7 +32,7 @@ import fr.free.totalboumboum.gui.frames.NormalFrame;
 import fr.free.totalboumboum.gui.tools.GuiTools;
 
 
-public abstract class ModalDialogPanel<T extends SubPanel> extends ContentPanel
+public abstract class ModalDialogPanel<T extends ModalDialogSubPanel> extends ContentPanel implements ModalDialogSubPanelListener
 {	private static final long serialVersionUID = 1L;
 
 	public ModalDialogPanel(MenuPanel parent, T subPanel)
@@ -50,6 +50,7 @@ public abstract class ModalDialogPanel<T extends SubPanel> extends ContentPanel
 		interPanel.setBackground(GuiTools.COLOR_COMMON_BACKGROUND);
 		add(interPanel);
 		this.subPanel = subPanel;
+		subPanel.addListener(this);
 		interPanel.add(subPanel);
 	}
 

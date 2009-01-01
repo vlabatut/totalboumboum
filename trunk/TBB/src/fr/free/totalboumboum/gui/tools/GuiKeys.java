@@ -75,6 +75,7 @@ public class GuiKeys
 	public static final String DATA = "Data";
 	public static final String DELETE = "Delete";
 	public static final String DESCRIPTION = "Description";
+	public static final String DIALOG = "Dialog";
 	public static final String DIMENSION = "Dimension";
 	public static final String DISCRETIZE = "Discretize";
 	public static final String DRAW = "Draw";
@@ -670,7 +671,12 @@ public class GuiKeys
 		public static final String COMMON_COLOR_ULTRAMARINE = COMMON_COLOR+ULTRAMARINE;
 		public static final String COMMON_COLOR_WHITE = COMMON_COLOR+WHITE;
 		public static final String COMMON_COLOR_YELLOW = COMMON_COLOR+YELLOW;	
-		
+
+	/* DIALOG */
+	public static final String COMMON_DIALOG = COMMON+DIALOG;
+	public static final String COMMON_DIALOG_CANCEL = COMMON_DIALOG+CANCEL;
+	public static final String COMMON_DIALOG_CONFIRM = COMMON_DIALOG+CONFIRM;
+
 	/* ITEMS */
 	public static final String COMMON_ITEMS = COMMON+ITEMS;
 		/* AVAILABLE */

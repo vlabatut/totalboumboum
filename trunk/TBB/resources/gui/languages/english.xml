@@ -561,6 +561,12 @@
 			<text name="Yellow" value="Jaune" tooltip="Jaune"/>
 		</group>
 
+<!-- DIALOG -->
+		<group name="Dialog">
+			<text name="Cancel" value="Cancel"  tooltip="Cancel the ongoing operation and close this window" />
+			<text name="Confirm" value="Confirm"  tooltip="Confirme the ongoing operation and close this window" />
+		</group>
+								
 <!-- ITEMS -->
 		<group name="Items">
 			<group name="Available">

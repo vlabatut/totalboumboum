@@ -21,32 +21,37 @@ package fr.free.totalboumboum.gui.common.structure.dialog.info;
  * 
  */
 
-import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.Component;
+import java.awt.Dimension;
+import java.awt.Font;
+import java.awt.Graphics;
+import java.awt.Graphics2D;
+import java.awt.RenderingHints;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.util.ArrayList;
-import java.util.Set;
 
+import javax.swing.Box;
+import javax.swing.BoxLayout;
 import javax.swing.JLabel;
-import javax.swing.SwingConstants;
+import javax.swing.JPanel;
+import javax.swing.JTextPane;
+import javax.swing.text.BadLocationException;
+import javax.swing.text.SimpleAttributeSet;
+import javax.swing.text.StyleConstants;
+import javax.swing.text.StyledDocument;
 
-import fr.free.totalboumboum.game.tournament.AbstractTournament;
-import fr.free.totalboumboum.game.tournament.cup.CupTournament;
-import fr.free.totalboumboum.game.tournament.league.LeagueTournament;
-import fr.free.totalboumboum.game.tournament.sequence.SequenceTournament;
-import fr.free.totalboumboum.game.tournament.single.SingleTournament;
-import fr.free.totalboumboum.gui.common.structure.subpanel.EntitledSubPanel;
-import fr.free.totalboumboum.gui.common.structure.subpanel.SubPanel;
-import fr.free.totalboumboum.gui.common.structure.subpanel.UntitledSubPanelTable;
+import fr.free.totalboumboum.gui.common.structure.dialog.ModalDialogSubPanel;
 import fr.free.totalboumboum.gui.data.configuration.GuiConfiguration;
 import fr.free.totalboumboum.gui.tools.GuiKeys;
 import fr.free.totalboumboum.gui.tools.GuiTools;
-import fr.free.totalboumboum.tools.StringTools;
 
-public class InfoSubPanel extends EntitledSubPanel
+public class InfoSubPanel extends ModalDialogSubPanel implements MouseListener
 {	private static final long serialVersionUID = 1L;
 	
 	public InfoSubPanel(int width, int height, String title, String tooltip, ArrayList<String> text)
-	{	super(width,height);
+	{	super(width,height,title,tooltip,text);
 		
 		setTitleText(title,tooltip);
 	
@@ -54,168 +59,97 @@ public class InfoSubPanel extends EntitledSubPanel
 	}
 		
 	/////////////////////////////////////////////////////////////////
-	// TEXT		/////////////////////////////////////////////
+	// TEXT				/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
+	private JLabel buttonConfirm;
+	
 	public void setText(ArrayList<String> text)
-	{	
-		for(String txt: text)
-		{	JLabel label = new JLabel();
-			label.setText(txt);
-			label.setFont(lineFont);
-			label.setHorizontalAlignment(SwingConstants.CENTER);
-			add(label);
-			
-		}
+	{	// sizes
+		float fontSize = getTitleFontSize()*GuiTools.FONT_TEXT_RATIO;
+		Font font = GuiConfiguration.getMiscConfiguration().getFont().deriveFont(fontSize);
+		int buttonsHeight = (int)(GuiTools.getPixelHeight(fontSize)/GuiTools.FONT_RATIO);
+		int textHeight = getDataHeight() - buttonsHeight - GuiTools.subPanelMargin;
 		
+//		getDataPanel().add(Box.createVerticalGlue());
 		
-		
-		
-		
-		// sizes
-		int lines =;
-		int colSubs = 2;
-		int colGroups = 1;
-		reinit(colGroups,colSubs,lines);
-		
-		// icons
-		ArrayList<String> keys = new ArrayList<String>();
-		allowedPlayersLine = 0;
-		if(showName)
-		{	keys.add(GuiKeys.COMMON_TOURNAMENT_NAME);
-			allowedPlayersLine++;
-		}
-		if(showAuthor)
-		{	keys.add(GuiKeys.COMMON_TOURNAMENT_AUTHOR);
-			allowedPlayersLine++;
-		}
-		if(showType)
-		{	keys.add(GuiKeys.COMMON_TOURNAMENT_TYPE);
-			allowedPlayersLine++;
-		}
-		if(showAllowedPlayerNumbers)
-			keys.add(GuiKeys.COMMON_TOURNAMENT_ALLOWED_PLAYERS);
-		
-		if(tournament!=null)
-		{	// text
-			ArrayList<String> textValues = new ArrayList<String>();
-			ArrayList<String> tooltipValues = new ArrayList<String>();
-			if(showName)
-			{	textValues.add(tournament.getName());
-				tooltipValues.add(tournament.getName());
-			}
-			if(showAuthor)
-			{	textValues.add(tournament.getAuthor());
-				tooltipValues.add(tournament.getAuthor());
-			}
-			if(showType)
-			{	String key = "";
-				if(tournament instanceof CupTournament)
-					key = GuiKeys.COMMON_TOURNAMENT_TYPES_CUP;
-				else if(tournament instanceof LeagueTournament)
-					key = GuiKeys.COMMON_TOURNAMENT_TYPES_LEAGUE;
-				else if(tournament instanceof SequenceTournament)
-					key = GuiKeys.COMMON_TOURNAMENT_TYPES_SEQUENCE;
-				else if(tournament instanceof SingleTournament)
-					key = GuiKeys.COMMON_TOURNAMENT_TYPES_SINGLE;
-				textValues.add(GuiConfiguration.getMiscConfiguration().getLanguage().getText(key));
-				tooltipValues.add(GuiConfiguration.getMiscConfiguration().getLanguage().getText(key+GuiKeys.TOOLTIP));
-			}
-			if(showAllowedPlayerNumbers)
-			{	Set<Integer> allowedPlayers = tournament.getAllowedPlayerNumbers();
-				textValues.add(StringTools.formatAllowedPlayerNumbers(allowedPlayers));
-				tooltipValues.add(StringTools.formatAllowedPlayerNumbers(allowedPlayers));
-			}
-			
-			// content
-			for(int line=0;line<keys.size();line++)
-			{	// header
-				int colSub = 0;
-				{	setLabelKey(line,colSub,keys.get(line),true);
-					Color bg = GuiTools.COLOR_TABLE_HEADER_BACKGROUND;
-					setLabelBackground(line,colSub,bg);
-					colSub++;
-				}
-				// data
-				{	String text = textValues.get(line);
-					String tooltip = tooltipValues.get(line);
-					setLabelText(line,colSub,text,tooltip);
-					Color fg = GuiTools.COLOR_TABLE_HEADER_FOREGROUND;
-					setLabelForeground(line,0,fg);
-					Color bg;
-					if(line>0)
-						bg = GuiTools.COLOR_TABLE_REGULAR_BACKGROUND;
-					else
-						bg = GuiTools.COLOR_TABLE_HEADER_BACKGROUND;
-					setLabelBackground(line,colSub,bg);
-					colSub++;
-				}
-			}
-		}
-		else
-		{	for(int line=0;line<keys.size();line++)
-			{	// header
-				int colSub = 0;
-				{	setLabelKey(line,colSub,keys.get(line),true);
-					Color bg = GuiTools.COLOR_TABLE_REGULAR_BACKGROUND;
-					setLabelBackground(line,colSub,bg);
-					colSub++;
-				}
-				// data
-				{	String text = null;
-					String tooltip = GuiConfiguration.getMiscConfiguration().getLanguage().getText(keys.get(line)+GuiKeys.TOOLTIP);
-					setLabelText(line,colSub,text,tooltip);
-					Color bg;
-					if(line>0)
-						bg = GuiTools.COLOR_TABLE_NEUTRAL_BACKGROUND;
-					else
-						bg = GuiTools.COLOR_TABLE_REGULAR_BACKGROUND;
-					setLabelBackground(line,colSub,bg);
-					colSub++;
-				}
-			}
-		}
-		
-		int maxWidth = width-3*GuiTools.subPanelMargin-getHeaderHeight();
-		setColSubMaxWidth(1,maxWidth);
-		setColSubPreferredWidth(1,maxWidth);
-	}
+		// message
+		{	JTextPane textPane = new JTextPane()
+			{	private static final long serialVersionUID = 1L;
+				public void paintComponent(Graphics g)
+			    {	Graphics2D g2 = (Graphics2D) g;
+		        	g2.setRenderingHint(RenderingHints.KEY_TEXT_ANTIALIASING,RenderingHints.VALUE_TEXT_ANTIALIAS_ON);
+		        	g2.setRenderingHint(RenderingHints.KEY_RENDERING,RenderingHints.VALUE_RENDER_QUALITY);
+		        	super.paintComponent(g2);
+			    }			
+			};
+			textPane.setEditable(false);
+			textPane.setHighlighter(null);
+			textPane.setOpaque(false);
 	
-	public void selectAllowedPlayers(boolean flag)
-	{	Color hbg,dbg;
-		if(showAllowedPlayerNumbers && flag)
-		{	hbg = GuiTools.COLOR_TABLE_SELECTED_DARK_BACKGROUND;
-			dbg = GuiTools.COLOR_TABLE_SELECTED_BACKGROUND;
+			Dimension dim = new Dimension(getDataWidth(),textHeight);
+			textPane.setPreferredSize(dim);
+			textPane.setMinimumSize(dim);
+			textPane.setMaximumSize(dim);
+			textPane.setAlignmentX(Component.CENTER_ALIGNMENT);
+	
+			// styles
+			StyledDocument doc = textPane.getStyledDocument();
+			SimpleAttributeSet sa = new SimpleAttributeSet();
+			// alignment
+			StyleConstants.setAlignment(sa,StyleConstants.ALIGN_LEFT/*JUSTIFIED*/);
+			// font size
+			StyleConstants.setFontFamily(sa,font.getFamily());
+			StyleConstants.setFontSize(sa,font.getSize());
+			doc.setCharacterAttributes(0,doc.getLength()+1,sa,true);		
+			// color
+			Color fg = GuiTools.COLOR_TABLE_REGULAR_FOREGROUND;
+			StyleConstants.setForeground(sa,fg);
+			// set
+	//		doc.setParagraphAttributes(0,doc.getLength()-1,sa,true);		
+			doc.setCharacterAttributes(0,doc.getLength()+1,sa,true);		
+			// text
+			try
+			{	doc.remove(0,doc.getLength());
+				for(String txt: text)
+					doc.insertString(0,txt,sa);
+			}
+			catch (BadLocationException e)
+			{	e.printStackTrace();
+			}
+			getDataPanel().add(textPane);
 		}
-		else
-		{	hbg = GuiTools.COLOR_TABLE_HEADER_BACKGROUND;
-			dbg = GuiTools.COLOR_TABLE_REGULAR_BACKGROUND;
+		
+		getDataPanel().add(Box.createRigidArea(new Dimension(GuiTools.subPanelMargin,GuiTools.subPanelMargin)));
+		
+		// buttons
+		{	// buttons panel
+			JPanel buttonsPanel = new JPanel();
+			Dimension dim = new Dimension(getDataWidth(),buttonsHeight);
+			buttonsPanel.setMinimumSize(dim);
+			buttonsPanel.setPreferredSize(dim);
+			buttonsPanel.setMaximumSize(dim);
+			BoxLayout layout = new BoxLayout(buttonsPanel,BoxLayout.LINE_AXIS);
+			buttonsPanel.setLayout(layout);
+			getDataPanel().add(buttonsPanel);
+			
+			// confirm button
+			String key = GuiKeys.COMMON_DIALOG_CONFIRM;			
+			buttonConfirm = initButton(key,font,buttonsHeight);
+			buttonsPanel.add(buttonConfirm);
 		}
-		setLabelBackground(allowedPlayersLine,0,hbg);
-		setLabelBackground(allowedPlayersLine,1,dbg);
+		
+//		getDataPanel().add(Box.createVerticalGlue());
 	}
 	
 	/////////////////////////////////////////////////////////////////
-	// DISPLAY			/////////////////////////////////////////////
+	// MOUSE LISTENER	/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	private boolean showName = true;
-	private boolean showAuthor = true;
-	private boolean showType = true;
-	private boolean showAllowedPlayerNumbers = true;
-
-	public void setShowName(boolean showName)
-	{	this.showName = showName;
+	@Override
+	public void mousePressed(MouseEvent e)
+	{	Component component = e.getComponent();
+		if(component==buttonConfirm)
+		{	String code = buttonConfirm.getText();
+			fireModalDialogButtonClicked(code);
+		}
 	}
-
-	public void setShowAuthor(boolean showAuthor)
-	{	this.showAuthor = showAuthor;
-	}
-
-	public void setShowType(boolean showType)
-	{	this.showType = showType;
-	}
-
-	public void setShowAllowedPlayerNumbers(boolean showAllowedPlayerNumbers)
-	{	this.showAllowedPlayerNumbers = showAllowedPlayerNumbers;
-	}
-
 }
