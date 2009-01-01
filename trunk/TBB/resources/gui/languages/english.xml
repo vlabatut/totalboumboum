@@ -421,6 +421,11 @@
 				<text name="Delete" value="Delete" tooltip="Delete the selected slot" />
 				<text name="New" value="New" tooltip="Create a new slot" />
 			</group>
+			<group name="New">
+				<text name="Name" value="New slot" />
+				<text name="Question" value="Enter the name for the new save slot" tooltip="Enter the name for the new save slot" />
+				<text name="Title" value="Slot name" tooltip="Name for the new save slot" />
+			</group>
 		</group>
 
 <!-- TOURNAMENT PANEL -->

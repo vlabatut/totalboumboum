@@ -130,8 +130,9 @@ public class SaveMenu extends InnerMenuPanel implements DataPanelListener,ModalD
 		if(e.getActionCommand().equals(GuiKeys.GAME_SAVE_BUTTON_NEW))
 		{	String key = GuiKeys.GAME_SAVE_NEW_TITLE;
 			ArrayList<String> text = new ArrayList<String>();
-			text.add(GuiConfiguration.getMiscConfiguration().getLanguage().getText(GuiKeys.GAME_SAVE_NEW_TITLE));
-			inputPanel = new InputModalDialogPanel(getMenuParent(),key,text);
+			text.add(GuiConfiguration.getMiscConfiguration().getLanguage().getText(GuiKeys.GAME_SAVE_NEW_QUESTION));
+			String defaultText = GuiConfiguration.getMiscConfiguration().getLanguage().getText(GuiKeys.GAME_SAVE_NEW_NAME);
+			inputPanel = new InputModalDialogPanel(getMenuParent(),key,text,defaultText);
 			inputPanel.addListener(this);
 			getFrame().setModalDialog(inputPanel);
 
@@ -191,18 +192,20 @@ public class SaveMenu extends InnerMenuPanel implements DataPanelListener,ModalD
 		String input = inputPanel.getInput();
 		getFrame().unsetModalDialog();
 		inputPanel = null;
-		// create & save
-		try
-		{	GameArchive.saveGame(input,tournament);
-		}
-		catch (ParserConfigurationException e1)
-		{	e1.printStackTrace();
-		}
-		catch (SAXException e1)
-		{	e1.printStackTrace();
-		}
-		catch (IOException e1)
-		{	e1.printStackTrace();
+		if(buttonCode.equals(GuiKeys.COMMON_DIALOG_CONFIRM))
+		{	// create & save
+			try
+			{	GameArchive.saveGame(input,tournament);
+			}
+			catch (ParserConfigurationException e1)
+			{	e1.printStackTrace();
+			}
+			catch (SAXException e1)
+			{	e1.printStackTrace();
+			}
+			catch (IOException e1)
+			{	e1.printStackTrace();
+			}
 		}
 	}
 }

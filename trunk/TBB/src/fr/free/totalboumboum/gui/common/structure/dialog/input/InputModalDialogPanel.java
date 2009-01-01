@@ -31,8 +31,8 @@ import fr.free.totalboumboum.gui.tools.GuiTools;
 public class InputModalDialogPanel extends ModalDialogPanel<InputSubPanel>
 {	private static final long serialVersionUID = 1L;
 
-	public InputModalDialogPanel(MenuPanel parent, String key, ArrayList<String> text)
-	{	super(parent,new InputSubPanel((int)(parent.getFrame().getMenuWidth()*GuiTools.MODAL_DIALOG_RATIO),(int)(parent.getFrame().getMenuHeight()*GuiTools.MODAL_DIALOG_RATIO),key,text));
+	public InputModalDialogPanel(MenuPanel parent, String key, ArrayList<String> text, String defaultText)
+	{	super(parent,new InputSubPanel((int)(parent.getFrame().getMenuWidth()*GuiTools.MODAL_DIALOG_RATIO),(int)(parent.getFrame().getMenuHeight()*GuiTools.MODAL_DIALOG_RATIO),key,text,defaultText));
 		InputSubPanel subPanel = getSubPanel();
 		subPanel.addListener(this);
 	}
