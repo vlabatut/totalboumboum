@@ -21,6 +21,8 @@ package fr.free.totalboumboum.gui.common.structure.dialog;
  * 
  */
 
+import java.awt.Component;
+import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
@@ -56,9 +58,10 @@ public abstract class ModalDialogSubPanel extends EntitledSubPanel implements Mo
 	protected JLabel initButton(String key, Font font, int buttonsHeight)
 	{	JLabel result = new JLabel();
 		result.setFont(font);
+		result.setAlignmentX(Component.CENTER_ALIGNMENT);
 		result.setHorizontalAlignment(SwingConstants.CENTER);
-		result.setBackground(GuiTools.COLOR_TABLE_NEUTRAL_BACKGROUND);
-		result.setForeground(GuiTools.COLOR_TABLE_REGULAR_FOREGROUND);
+		result.setBackground(GuiTools.COLOR_TABLE_HEADER_BACKGROUND);
+		result.setForeground(GuiTools.COLOR_TABLE_HEADER_FOREGROUND);
 		result.setOpaque(true);
 		String tooltip = GuiConfiguration.getMiscConfiguration().getLanguage().getText(key+GuiKeys.TOOLTIP);
 		BufferedImage icon = GuiTools.getIcon(key);
@@ -71,6 +74,7 @@ public abstract class ModalDialogSubPanel extends EntitledSubPanel implements Mo
 		result.setText(null);
 		result.setIcon(icn);
 		result.setToolTipText(tooltip);
+		result.setMaximumSize(new Dimension(Integer.MAX_VALUE,buttonsHeight));
 		result.addMouseListener(this);
 		return result;
 	}

@@ -1,4 +1,4 @@
-package fr.free.totalboumboum.gui.common.structure.dialog;
+package fr.free.totalboumboum.gui.common.structure.dialog.info;
 
 /*
  * Total Boum Boum
@@ -42,6 +42,7 @@ import javax.swing.text.SimpleAttributeSet;
 import javax.swing.text.StyleConstants;
 import javax.swing.text.StyledDocument;
 
+import fr.free.totalboumboum.gui.common.structure.dialog.ModalDialogSubPanel;
 import fr.free.totalboumboum.gui.data.configuration.GuiConfiguration;
 import fr.free.totalboumboum.gui.tools.GuiKeys;
 import fr.free.totalboumboum.gui.tools.GuiTools;
@@ -51,10 +52,6 @@ public class InfoSubPanel extends ModalDialogSubPanel implements MouseListener
 	
 	public InfoSubPanel(int width, int height, String title, String tooltip, ArrayList<String> text)
 	{	super(width,height,title,tooltip,text);
-		
-		setTitleText(title,tooltip);
-	
-		setText(text);
 	}
 		
 	/////////////////////////////////////////////////////////////////
@@ -69,10 +66,22 @@ public class InfoSubPanel extends ModalDialogSubPanel implements MouseListener
 		int buttonsHeight = (int)(GuiTools.getPixelHeight(fontSize)/GuiTools.FONT_RATIO);
 		int textHeight = getDataHeight() - buttonsHeight - GuiTools.subPanelMargin;
 		
-//		getDataPanel().add(Box.createVerticalGlue());
+		{	BoxLayout layout = new BoxLayout(getDataPanel(),BoxLayout.PAGE_AXIS); 
+			getDataPanel().setLayout(layout);
+		}
 		
 		// message
-		{	JTextPane textPane = new JTextPane()
+		{	JPanel textPanel = new JPanel();
+			textPanel.setOpaque(false);
+			Dimension dim = new Dimension(getDataWidth(),textHeight);
+			textPanel.setPreferredSize(dim);
+			textPanel.setMinimumSize(dim);
+			textPanel.setMaximumSize(dim);
+			BoxLayout layout = new BoxLayout(textPanel,BoxLayout.PAGE_AXIS);
+			textPanel.setLayout(layout);
+			getDataPanel().add(textPanel);
+			
+			JTextPane textPane = new JTextPane()
 			{	private static final long serialVersionUID = 1L;
 				public void paintComponent(Graphics g)
 			    {	Graphics2D g2 = (Graphics2D) g;
@@ -83,13 +92,8 @@ public class InfoSubPanel extends ModalDialogSubPanel implements MouseListener
 			};
 			textPane.setEditable(false);
 			textPane.setHighlighter(null);
-			textPane.setOpaque(false);
-	
-			Dimension dim = new Dimension(getDataWidth(),textHeight);
-			textPane.setPreferredSize(dim);
-			textPane.setMinimumSize(dim);
-			textPane.setMaximumSize(dim);
-			textPane.setAlignmentX(Component.CENTER_ALIGNMENT);
+			textPane.setOpaque(true);
+			textPane.setBackground(GuiTools.COLOR_TABLE_NEUTRAL_BACKGROUND);
 	
 			// styles
 			StyledDocument doc = textPane.getStyledDocument();
@@ -110,12 +114,12 @@ public class InfoSubPanel extends ModalDialogSubPanel implements MouseListener
 			try
 			{	doc.remove(0,doc.getLength());
 				for(String txt: text)
-					doc.insertString(0,txt,sa);
+					doc.insertString(0,txt+"\n",sa);
 			}
 			catch (BadLocationException e)
 			{	e.printStackTrace();
 			}
-			getDataPanel().add(textPane);
+			textPanel.add(textPane);
 		}
 		
 		getDataPanel().add(Box.createRigidArea(new Dimension(GuiTools.subPanelMargin,GuiTools.subPanelMargin)));
@@ -123,6 +127,7 @@ public class InfoSubPanel extends ModalDialogSubPanel implements MouseListener
 		// buttons
 		{	// buttons panel
 			JPanel buttonsPanel = new JPanel();
+			buttonsPanel.setOpaque(false);
 			Dimension dim = new Dimension(getDataWidth(),buttonsHeight);
 			buttonsPanel.setMinimumSize(dim);
 			buttonsPanel.setPreferredSize(dim);

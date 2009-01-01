@@ -47,15 +47,6 @@ import fr.free.totalboumboum.gui.tools.GuiTools;
 public class EditProfileMenu extends InnerMenuPanel
 {	private static final long serialVersionUID = 1L;
 	
-	@SuppressWarnings("unused")
-	private JButton buttonConfirm;
-	@SuppressWarnings("unused")
-	private JButton buttonCancel;
-
-	private EditProfileData profileData;
-	private Profile profile;
-	private String profileFile;
-
 	public EditProfileMenu(SplitMenuPanel container, MenuPanel parent, Profile profile, String profileFile)
 	{	super(container, parent);
 		this.profile = profile;
@@ -86,6 +77,28 @@ public class EditProfileMenu extends InnerMenuPanel
 		container.setDataPart(profileData);
 	}
 	
+	/////////////////////////////////////////////////////////////////
+	// PANELS			/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	private EditProfileData profileData;
+
+	/////////////////////////////////////////////////////////////////
+	// BUTTONS			/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	@SuppressWarnings("unused")
+	private JButton buttonConfirm;
+	@SuppressWarnings("unused")
+	private JButton buttonCancel;
+
+	/////////////////////////////////////////////////////////////////
+	// PROFILE			/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	private Profile profile;
+	private String profileFile;
+
+	/////////////////////////////////////////////////////////////////
+	// ACTION LISTENER	/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
 	public void actionPerformed(ActionEvent e)
 	{	if(e.getActionCommand().equals(GuiKeys.MENU_PROFILES_BUTTON_CONFIRM))
 		{	Profile newProfile = profileData.getProfile();
@@ -117,6 +130,9 @@ public class EditProfileMenu extends InnerMenuPanel
 	    }
 	} 
 	
+	/////////////////////////////////////////////////////////////////
+	// CONTENT PANEL	/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
 	public void refresh()
 	{	//
 	}

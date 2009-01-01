@@ -747,7 +747,8 @@ public class GuiTools
 				GuiKeys.MENU_OPTIONS_GAME_TOURNAMENT_PLAYERS_FALSE,
 				GuiKeys.MENU_OPTIONS_GAME_TOURNAMENT_TOURNAMENT_FALSE,
 				GuiKeys.MENU_OPTIONS_GAME_TOURNAMENT_AUTOLOAD_FALSE,
-				GuiKeys.MENU_OPTIONS_GAME_TOURNAMENT_AUTOSAVE_FALSE
+				GuiKeys.MENU_OPTIONS_GAME_TOURNAMENT_AUTOSAVE_FALSE,
+				GuiKeys.COMMON_DIALOG_CANCEL
 			};
 			loadTableImages(folder,uses);
 		}
@@ -921,7 +922,8 @@ public class GuiTools
 				GuiKeys.MENU_OPTIONS_GAME_TOURNAMENT_PLAYERS_TRUE,
 				GuiKeys.MENU_OPTIONS_GAME_TOURNAMENT_TOURNAMENT_TRUE,
 				GuiKeys.MENU_OPTIONS_GAME_TOURNAMENT_AUTOLOAD_TRUE,
-				GuiKeys.MENU_OPTIONS_GAME_TOURNAMENT_AUTOSAVE_TRUE
+				GuiKeys.MENU_OPTIONS_GAME_TOURNAMENT_AUTOSAVE_TRUE,
+				GuiKeys.COMMON_DIALOG_CONFIRM
 			};
 			loadTableImages(folder,uses);
 		}
@@ -1075,6 +1077,9 @@ public class GuiTools
 	public final static float VERTICAL_SPLIT_RATIO = 0.25f;
 	public final static float HORIZONTAL_SPLIT_RATIO = 0.07f;
 
+	// modal dialog
+	public final static float MODAL_DIALOG_RATIO = 0.4f;
+	
 	// buttons
 	private final static float BUTTON_TEXT_HEIGHT_RATIO = 0.05f; // height of a button relatively to the panel height
 	public static int buttonTextHeight;
@@ -1116,6 +1121,7 @@ public class GuiTools
 	/////////////////////////////////////////////////////////////////
 
 	public final static Color COLOR_SPLASHSCREEN_TEXT = new Color(204,18,128);
+	public final static Color COLOR_DIALOG_BACKGROUND = new Color(0,0,0,175);
 	public final static Color COLOR_COMMON_BACKGROUND = new Color(255,255,255,150);
 	public final static Color COLOR_TITLE_FOREGROUND = Color.BLACK;
 	public final static Color COLOR_TABLE_SELECTED_BACKGROUND = new Color(204,18,128,80);

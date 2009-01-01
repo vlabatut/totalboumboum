@@ -161,11 +161,13 @@ public class NormalFrame extends AbstractFrame implements MenuContainer
 	
 	public void setModalDialog(ModalDialogPanel<?> modalDialogPanel)
 	{	this.modalDialogPanel = modalDialogPanel;
+		modalDialogPanel.setBounds(0,0,modalDialogPanel.getWidth(),modalDialogPanel.getHeight());
 		JLayeredPane layeredPane = getLayeredPane();
+//		layeredPane.setLayout(new BoxLayout(layeredPane,BoxLayout.PAGE_AXIS));
 		layeredPane.add(modalDialogPanel,JLayeredPane.MODAL_LAYER);
 	}
 	
-	public void unsetModalDialog(Object modalDialogAnswer)
+	public void unsetModalDialog()
 	{	JLayeredPane layeredPane = getLayeredPane();
 		layeredPane.remove(modalDialogPanel);
 	}
