@@ -1,4 +1,4 @@
-package fr.free.totalboumboum.gui.common.structure.dialog.info;
+package fr.free.totalboumboum.gui.menus.about;
 
 /*
  * Total Boum Boum
@@ -30,12 +30,17 @@ import java.awt.Graphics2D;
 import java.awt.RenderingHints;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.util.ArrayList;
+import java.util.Scanner;
 
 import javax.swing.Box;
 import javax.swing.BoxLayout;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
 import javax.swing.JTextPane;
 import javax.swing.text.BadLocationException;
 import javax.swing.text.SimpleAttributeSet;
@@ -46,15 +51,20 @@ import fr.free.totalboumboum.gui.common.structure.dialog.ModalDialogSubPanel;
 import fr.free.totalboumboum.gui.data.configuration.GuiConfiguration;
 import fr.free.totalboumboum.gui.tools.GuiKeys;
 import fr.free.totalboumboum.gui.tools.GuiTools;
+import fr.free.totalboumboum.tools.FileTools;
 
-public class InfoSubPanel extends ModalDialogSubPanel implements MouseListener
+public class AboutSubPanel extends ModalDialogSubPanel implements MouseListener
 {	private static final long serialVersionUID = 1L;
 	
-	public InfoSubPanel(int width, int height, String title, String tooltip, ArrayList<String> text)
+	public AboutSubPanel(int width, int height)
 	{	super(width,height);
 	
-		setTitleText(title, tooltip);
-	
+		String key = GuiKeys.MENU_ABOUT_TITLE;
+		String title = GuiConfiguration.getMiscConfiguration().getLanguage().getText(key);
+		String tooltip = GuiConfiguration.getMiscConfiguration().getLanguage().getText(key+GuiKeys.TOOLTIP);
+		setTitleText(title,tooltip);
+		
+		ArrayList<String> text = loadText();
 		setContent(text);
 	}
 		
@@ -75,17 +85,7 @@ public class InfoSubPanel extends ModalDialogSubPanel implements MouseListener
 		}
 		
 		// message
-		{	JPanel textPanel = new JPanel();
-			textPanel.setOpaque(false);
-			Dimension dim = new Dimension(getDataWidth(),textHeight);
-			textPanel.setPreferredSize(dim);
-			textPanel.setMinimumSize(dim);
-			textPanel.setMaximumSize(dim);
-			BoxLayout layout = new BoxLayout(textPanel,BoxLayout.PAGE_AXIS);
-			textPanel.setLayout(layout);
-			getDataPanel().add(textPanel);
-			
-			JTextPane textPane = new JTextPane()
+		{	JTextPane textPane = new JTextPane()
 			{	private static final long serialVersionUID = 1L;
 				public void paintComponent(Graphics g)
 			    {	Graphics2D g2 = (Graphics2D) g;
@@ -123,6 +123,17 @@ public class InfoSubPanel extends ModalDialogSubPanel implements MouseListener
 			catch (BadLocationException e)
 			{	e.printStackTrace();
 			}
+			
+			JScrollPane textPanel = new JScrollPane(textPane);
+			textPanel.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
+//			textPanel.setOpaque(false);
+			Dimension dim = new Dimension(getDataWidth(),textHeight);
+			textPanel.setPreferredSize(dim);
+			textPanel.setMinimumSize(dim);
+			textPanel.setMaximumSize(dim);
+//			BoxLayout layout = new BoxLayout(textPanel,BoxLayout.PAGE_AXIS);
+//			textPanel.setLayout(layout);
+			getDataPanel().add(textPanel);		
 			textPanel.add(textPane);
 		}
 		
@@ -147,6 +158,23 @@ public class InfoSubPanel extends ModalDialogSubPanel implements MouseListener
 		}
 		
 //		getDataPanel().add(Box.createVerticalGlue());
+	}
+	
+	public ArrayList<String> loadText()
+	{	ArrayList<String> result = new ArrayList<String>();
+		String fileName = FileTools.FILE_ABOUT+FileTools.EXTENSION_TEXT;
+		File file = new File(fileName);
+		try
+		{	FileInputStream in = new FileInputStream(file);
+			Scanner sc = new Scanner(in);
+			while(sc.hasNextLine())
+				result.add(sc.nextLine());
+			sc.close();
+		}
+		catch (FileNotFoundException e)
+		{	e.printStackTrace();
+		}
+		return result;
 	}
 	
 	/////////////////////////////////////////////////////////////////

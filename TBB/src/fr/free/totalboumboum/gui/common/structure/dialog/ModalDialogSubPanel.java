@@ -42,18 +42,12 @@ import fr.free.totalboumboum.tools.ImageTools;
 public abstract class ModalDialogSubPanel extends EntitledSubPanel implements MouseListener
 {	private static final long serialVersionUID = 1L;
 	
-	public ModalDialogSubPanel(int width, int height, String title, String tooltip, ArrayList<String> text)
+	public ModalDialogSubPanel(int width, int height)
 	{	super(width,height);
-		
-		setTitleText(title,tooltip);
-	
-		setText(text);
 	}
 	/////////////////////////////////////////////////////////////////
 	// TEXT				/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-
-	public abstract void setText(ArrayList<String> text);
 
 	protected JLabel initButton(String key, Font font, int buttonsHeight)
 	{	JLabel result = new JLabel();

@@ -206,6 +206,10 @@ public class GuiKeys
 		public static final String MENU_MAIN_BUTTON_STATISTICS = MENU_MAIN_BUTTON+STATISTICS;
 		public static final String MENU_MAIN_BUTTON_TOURNAMENT = MENU_MAIN_BUTTON+TOURNAMENT;
 	
+	/* ABOUT */
+	public static final String MENU_ABOUT = MENU+ABOUT;
+	public static final String MENU_ABOUT_TITLE = MENU_ABOUT+TITLE;
+
 	/* RESOURCES */
 	public static final String MENU_RESOURCES_BUTTON = "MenuResourcesButton";
 	public static final String MENU_RESOURCES_BUTTON_AI = MENU_RESOURCES_BUTTON+"Ai";

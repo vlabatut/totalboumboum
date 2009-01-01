@@ -19,6 +19,10 @@
 			</group>
 		</group>
 
+		<group name="About">
+			<text name="Title" value="À propos" tooltip="À propos de Total Boum Boum" />
+		</group>	
+
 <!-- RESOURCES MENU -->
 		<group name="Resources">
 			<group name="Button">
