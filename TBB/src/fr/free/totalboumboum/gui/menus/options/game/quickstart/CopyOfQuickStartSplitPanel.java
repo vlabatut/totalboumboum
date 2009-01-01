@@ -2,7 +2,7 @@ package fr.free.totalboumboum.gui.menus.options.game.quickstart;
 
 /*
  * Total Boum Boum
- * Copyright 2008 Vincent Labatut 
+ * Copyright 2008-2009 Vincent Labatut 
  * 
  * This file is part of Total Boum Boum.
  * 
@@ -31,12 +31,12 @@ import fr.free.totalboumboum.gui.common.structure.panel.menu.MenuPanel;
 import fr.free.totalboumboum.gui.data.configuration.GuiConfiguration;
 import fr.free.totalboumboum.gui.tools.GuiTools;
 
-public class QuickStartSplitPanel extends SplitMenuPanel
+public class CopyOfQuickStartSplitPanel extends SplitMenuPanel
 {	private static final long serialVersionUID = 1L;
 
 	private BufferedImage image;
 
-	public QuickStartSplitPanel(MenuContainer container, MenuPanel parent)
+	public CopyOfQuickStartSplitPanel(MenuContainer container, MenuPanel parent)
 	{	super(container,parent,BorderLayout.LINE_START,GuiTools.VERTICAL_SPLIT_RATIO);
 	
 		// background
