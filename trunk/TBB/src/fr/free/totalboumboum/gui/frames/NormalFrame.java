@@ -21,6 +21,7 @@ package fr.free.totalboumboum.gui.frames;
  * 
  */
 
+import javax.swing.JLayeredPane;
 import javax.swing.RepaintManager;
 import javax.swing.UIManager;
 import javax.xml.parsers.ParserConfigurationException;
@@ -30,6 +31,7 @@ import org.xml.sax.SAXException;
 import fr.free.totalboumboum.configuration.Configuration;
 import fr.free.totalboumboum.configuration.GameConstants;
 import fr.free.totalboumboum.gui.common.structure.MenuContainer;
+import fr.free.totalboumboum.gui.common.structure.dialog.ModalDialogPanel;
 import fr.free.totalboumboum.gui.common.structure.panel.menu.MenuPanel;
 import fr.free.totalboumboum.gui.menus.main.MainMenu;
 import fr.free.totalboumboum.gui.tools.FullRepaintManager;
@@ -150,6 +152,22 @@ public class NormalFrame extends AbstractFrame implements MenuContainer
 		{	e.printStackTrace();
 		}
 		exit();
+	}
+
+	/////////////////////////////////////////////////////////////////
+	// MODAL DIALOG		/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	private ModalDialogPanel<?> modalDialogPanel;
+	
+	public void setModalDialog(ModalDialogPanel<?> modalDialogPanel)
+	{	this.modalDialogPanel = modalDialogPanel;
+		JLayeredPane layeredPane = getLayeredPane();
+		layeredPane.add(modalDialogPanel,JLayeredPane.MODAL_LAYER);
+	}
+	
+	public void unsetModalDialog(Object modalDialogAnswer)
+	{	JLayeredPane layeredPane = getLayeredPane();
+		layeredPane.remove(modalDialogPanel);
 	}
 }
 
