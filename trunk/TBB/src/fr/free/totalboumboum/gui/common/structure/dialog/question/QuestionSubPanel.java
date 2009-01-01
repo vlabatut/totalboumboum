@@ -1,4 +1,4 @@
-package fr.free.totalboumboum.gui.common.structure.dialog.info;
+package fr.free.totalboumboum.gui.common.structure.dialog.question;
 
 /*
  * Total Boum Boum
@@ -47,10 +47,10 @@ import fr.free.totalboumboum.gui.data.configuration.GuiConfiguration;
 import fr.free.totalboumboum.gui.tools.GuiKeys;
 import fr.free.totalboumboum.gui.tools.GuiTools;
 
-public class InfoSubPanel extends ModalDialogSubPanel implements MouseListener
+public class QuestionSubPanel extends ModalDialogSubPanel implements MouseListener
 {	private static final long serialVersionUID = 1L;
 	
-	public InfoSubPanel(int width, int height, String key, ArrayList<String> text)
+	public QuestionSubPanel(int width, int height, String key, ArrayList<String> text)
 	{	super(width,height);
 	
 		setTitleKey(key,false);
@@ -62,6 +62,7 @@ public class InfoSubPanel extends ModalDialogSubPanel implements MouseListener
 	// TEXT				/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	private JLabel buttonConfirm;
+	private JLabel buttonCancel;
 	
 	public void setContent(ArrayList<String> text)
 	{	// sizes
@@ -140,11 +141,20 @@ public class InfoSubPanel extends ModalDialogSubPanel implements MouseListener
 			buttonsPanel.setLayout(layout);
 			getDataPanel().add(buttonsPanel);
 			
+			// cancel button
+			{	String key = GuiKeys.COMMON_DIALOG_CANCEL;			
+				buttonCancel = initButton(key,font,buttonsHeight);
+				buttonsPanel.add(buttonCancel);
+			}
+
+			buttonsPanel.add(Box.createRigidArea(new Dimension(GuiTools.subPanelMargin,GuiTools.subPanelMargin)));
+			
 			// confirm button
-			String key = GuiKeys.COMMON_DIALOG_CONFIRM;			
-			buttonConfirm = initButton(key,font,buttonsHeight);
-			buttonsPanel.add(buttonConfirm);
-		}
+			{	String key = GuiKeys.COMMON_DIALOG_CONFIRM;			
+				buttonConfirm = initButton(key,font,buttonsHeight);
+				buttonsPanel.add(buttonConfirm);
+			}
+}
 		
 //		getDataPanel().add(Box.createVerticalGlue());
 	}

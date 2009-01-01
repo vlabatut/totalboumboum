@@ -141,6 +141,7 @@ public class GuiKeys
 	public static final String PROFILES = "Profiles";
 	public static final String PROGRESSBAR = "Progressbar";
 	public static final String PURPLE = "Purple";
+	public static final String QUESTION = "Question";
 	public static final String QUICKMATCH = "Quickmatch";
 	public static final String QUICKSTART = "Quickstart";
 	public static final String QUIT = "Quit";
@@ -547,6 +548,11 @@ public class GuiKeys
 			public static final String GAME_SAVE_BUTTON_CONFIRM = GAME_SAVE_BUTTON+CONFIRM;
 			public static final String GAME_SAVE_BUTTON_DELETE = GAME_SAVE_BUTTON+DELETE;
 			public static final String GAME_SAVE_BUTTON_NEW = GAME_SAVE_BUTTON+NEW;
+			/* NEW */
+			public static final String GAME_SAVE_NEW = GAME_SAVE+NEW;
+			public static final String GAME_SAVE_NEW_QUESTION = GAME_SAVE_NEW+QUESTION;
+			public static final String GAME_SAVE_NEW_TITLE = GAME_SAVE_NEW+TITLE;
+			
 		/* TOURNAMENT */
 		public static final String GAME_TOURNAMENT = GAME+TOURNAMENT;
 			/* BUTTONS */	

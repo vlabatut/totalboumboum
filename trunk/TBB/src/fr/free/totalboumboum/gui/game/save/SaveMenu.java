@@ -36,15 +36,18 @@ import org.xml.sax.SAXException;
 
 import fr.free.totalboumboum.game.archive.GameArchive;
 import fr.free.totalboumboum.game.tournament.AbstractTournament;
+import fr.free.totalboumboum.gui.common.structure.dialog.ModalDialogPanelListener;
+import fr.free.totalboumboum.gui.common.structure.dialog.input.InputModalDialogPanel;
 import fr.free.totalboumboum.gui.common.structure.panel.SplitMenuPanel;
 import fr.free.totalboumboum.gui.common.structure.panel.data.DataPanelListener;
 import fr.free.totalboumboum.gui.common.structure.panel.menu.InnerMenuPanel;
 import fr.free.totalboumboum.gui.common.structure.panel.menu.MenuPanel;
+import fr.free.totalboumboum.gui.data.configuration.GuiConfiguration;
 import fr.free.totalboumboum.gui.tools.GuiKeys;
 import fr.free.totalboumboum.gui.tools.GuiTools;
 import fr.free.totalboumboum.tools.FileTools;
 
-public class SaveMenu extends InnerMenuPanel implements DataPanelListener
+public class SaveMenu extends InnerMenuPanel implements DataPanelListener,ModalDialogPanelListener
 {	private static final long serialVersionUID = 1L;
 
 	public SaveMenu(SplitMenuPanel container, MenuPanel parent)
@@ -124,6 +127,15 @@ public class SaveMenu extends InnerMenuPanel implements DataPanelListener
 	{	if(e.getActionCommand().equals(GuiKeys.GAME_SAVE_BUTTON_CANCEL))
 		{	replaceWith(parent);
 	    }
+		if(e.getActionCommand().equals(GuiKeys.GAME_SAVE_BUTTON_NEW))
+		{	String key = GuiKeys.GAME_SAVE_NEW_TITLE;
+			ArrayList<String> text = new ArrayList<String>();
+			text.add(GuiConfiguration.getMiscConfiguration().getLanguage().getText(GuiKeys.GAME_SAVE_NEW_TITLE));
+			inputPanel = new InputModalDialogPanel(getMenuParent(),key,text);
+			inputPanel.addListener(this);
+			getFrame().setModalDialog(inputPanel);
+
+	    }
 		if(e.getActionCommand().equals(GuiKeys.GAME_SAVE_BUTTON_DELETE))
 		{	GameArchive selectedArchive = levelData.getSelectedGameArchive();
 			if(selectedArchive!=null)
@@ -166,5 +178,31 @@ public class SaveMenu extends InnerMenuPanel implements DataPanelListener
 	@Override
 	public void dataPanelSelectionChanged()
 	{	refreshButtons();
+	}
+	
+	/////////////////////////////////////////////////////////////////
+	// MODAL DIALOG PANEL LISTENER	/////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	private InputModalDialogPanel inputPanel;
+	
+	@Override
+	public void modalDialogButtonClicked(String buttonCode)
+	{	// dialog
+		String input = inputPanel.getInput();
+		getFrame().unsetModalDialog();
+		inputPanel = null;
+		// create & save
+		try
+		{	GameArchive.saveGame(input,tournament);
+		}
+		catch (ParserConfigurationException e1)
+		{	e1.printStackTrace();
+		}
+		catch (SAXException e1)
+		{	e1.printStackTrace();
+		}
+		catch (IOException e1)
+		{	e1.printStackTrace();
+		}
 	}
 }

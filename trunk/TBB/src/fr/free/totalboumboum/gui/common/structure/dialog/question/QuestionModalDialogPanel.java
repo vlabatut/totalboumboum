@@ -1,4 +1,4 @@
-package fr.free.totalboumboum.gui.common.structure.dialog.info;
+package fr.free.totalboumboum.gui.common.structure.dialog.question;
 
 /*
  * Total Boum Boum
@@ -28,12 +28,12 @@ import fr.free.totalboumboum.gui.common.structure.dialog.ModalDialogPanel;
 import fr.free.totalboumboum.gui.common.structure.panel.menu.MenuPanel;
 import fr.free.totalboumboum.gui.tools.GuiTools;
 
-public class InfoModalDialogPanel extends ModalDialogPanel<InfoSubPanel>
+public class QuestionModalDialogPanel extends ModalDialogPanel<QuestionSubPanel>
 {	private static final long serialVersionUID = 1L;
 
-	public InfoModalDialogPanel(MenuPanel parent, String key, ArrayList<String> text)
-	{	super(parent,new InfoSubPanel((int)(parent.getFrame().getMenuWidth()*GuiTools.MODAL_DIALOG_RATIO),(int)(parent.getFrame().getMenuHeight()*GuiTools.MODAL_DIALOG_RATIO),key,text));
-		InfoSubPanel subPanel = getSubPanel();
+	public QuestionModalDialogPanel(MenuPanel parent, String key, ArrayList<String> text)
+	{	super(parent,new QuestionSubPanel((int)(parent.getFrame().getMenuWidth()*GuiTools.MODAL_DIALOG_RATIO),(int)(parent.getFrame().getMenuHeight()*GuiTools.MODAL_DIALOG_RATIO),key,text));
+		QuestionSubPanel subPanel = getSubPanel();
 		subPanel.addListener(this);
 	}
 

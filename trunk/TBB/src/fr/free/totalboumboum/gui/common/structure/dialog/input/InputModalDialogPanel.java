@@ -1,4 +1,4 @@
-package fr.free.totalboumboum.gui.common.structure.dialog.info;
+package fr.free.totalboumboum.gui.common.structure.dialog.input;
 
 /*
  * Total Boum Boum
@@ -28,15 +28,22 @@ import fr.free.totalboumboum.gui.common.structure.dialog.ModalDialogPanel;
 import fr.free.totalboumboum.gui.common.structure.panel.menu.MenuPanel;
 import fr.free.totalboumboum.gui.tools.GuiTools;
 
-public class InfoModalDialogPanel extends ModalDialogPanel<InfoSubPanel>
+public class InputModalDialogPanel extends ModalDialogPanel<InputSubPanel>
 {	private static final long serialVersionUID = 1L;
 
-	public InfoModalDialogPanel(MenuPanel parent, String key, ArrayList<String> text)
-	{	super(parent,new InfoSubPanel((int)(parent.getFrame().getMenuWidth()*GuiTools.MODAL_DIALOG_RATIO),(int)(parent.getFrame().getMenuHeight()*GuiTools.MODAL_DIALOG_RATIO),key,text));
-		InfoSubPanel subPanel = getSubPanel();
+	public InputModalDialogPanel(MenuPanel parent, String key, ArrayList<String> text)
+	{	super(parent,new InputSubPanel((int)(parent.getFrame().getMenuWidth()*GuiTools.MODAL_DIALOG_RATIO),(int)(parent.getFrame().getMenuHeight()*GuiTools.MODAL_DIALOG_RATIO),key,text));
+		InputSubPanel subPanel = getSubPanel();
 		subPanel.addListener(this);
 	}
 
+	/////////////////////////////////////////////////////////////////
+	// INPUT			/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	public String getInput()
+	{	return getSubPanel().getInput();	
+	}
+	
 	/////////////////////////////////////////////////////////////////
 	// CONTENT PANEL	/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
