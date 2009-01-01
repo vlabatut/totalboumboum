@@ -25,13 +25,14 @@ package fr.free.totalboumboum.gui.common.structure.dialog;
 import java.util.ArrayList;
 
 import fr.free.totalboumboum.gui.common.structure.panel.menu.MenuPanel;
+import fr.free.totalboumboum.gui.tools.GuiTools;
 
 
 public class InfoModalDialogPanel extends ModalDialogPanel<InfoSubPanel>
 {	private static final long serialVersionUID = 1L;
 
 	public InfoModalDialogPanel(MenuPanel parent, String title, String tooltip, ArrayList<String> text)
-	{	super(parent,new InfoSubPanel(parent.getFrame().getMenuWidth(),parent.getFrame().getMenuHeight(),title,tooltip,text));
+	{	super(parent,new InfoSubPanel((int)(parent.getFrame().getMenuWidth()*GuiTools.MODAL_DIALOG_RATIO),(int)(parent.getFrame().getMenuHeight()*GuiTools.MODAL_DIALOG_RATIO),title,tooltip,text));
 		InfoSubPanel subPanel = getSubPanel();
 		subPanel.addListener(this);
 	}

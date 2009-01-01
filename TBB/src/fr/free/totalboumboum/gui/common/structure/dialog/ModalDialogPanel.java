@@ -89,7 +89,7 @@ public abstract class ModalDialogPanel<T extends ModalDialogSubPanel> extends Co
 	public NormalFrame getFrame()
 	{	return parent.getFrame();
 	}
-
+/*
 	protected void showDialog()
 	{	getFrame().setModalDialog(this);		
 	}
@@ -97,7 +97,7 @@ public abstract class ModalDialogPanel<T extends ModalDialogSubPanel> extends Co
 	protected void hideDialog()
 	{	getFrame().unsetModalDialog(this);		
 	}
-	
+*/	
 	/////////////////////////////////////////////////////////////////
 	// LISTENERS		/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
