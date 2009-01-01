@@ -31,12 +31,12 @@ import fr.free.totalboumboum.gui.common.structure.panel.menu.MenuPanel;
 import fr.free.totalboumboum.gui.data.configuration.GuiConfiguration;
 import fr.free.totalboumboum.gui.tools.GuiTools;
 
-public class CopyOfQuickStartSplitPanel extends SplitMenuPanel
+public class QuickStartSplitPanel extends SplitMenuPanel
 {	private static final long serialVersionUID = 1L;
 
 	private BufferedImage image;
 
-	public CopyOfQuickStartSplitPanel(MenuContainer container, MenuPanel parent)
+	public QuickStartSplitPanel(MenuContainer container, MenuPanel parent)
 	{	super(container,parent,BorderLayout.LINE_START,GuiTools.VERTICAL_SPLIT_RATIO);
 	
 		// background
