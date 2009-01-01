@@ -77,6 +77,7 @@ public class GameArchive
 
 	public static void saveGame(String folder, AbstractTournament tournament) throws ParserConfigurationException, SAXException, IOException
 	{	String path = FileTools.getSavesPath()+File.separator+folder;
+		// folder
 		File folderFile = new File(path);
 		if(!folderFile.exists())
 			folderFile.mkdir();

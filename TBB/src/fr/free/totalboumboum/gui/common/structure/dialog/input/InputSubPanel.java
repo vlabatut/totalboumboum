@@ -1,4 +1,4 @@
-package fr.free.totalboumboum.gui.common.structure.dialog.info;
+package fr.free.totalboumboum.gui.common.structure.dialog.input;
 
 /*
  * Total Boum Boum
@@ -47,10 +47,10 @@ import fr.free.totalboumboum.gui.data.configuration.GuiConfiguration;
 import fr.free.totalboumboum.gui.tools.GuiKeys;
 import fr.free.totalboumboum.gui.tools.GuiTools;
 
-public class InfoSubPanel extends ModalDialogSubPanel implements MouseListener
+public class InputSubPanel extends ModalDialogSubPanel implements MouseListener
 {	private static final long serialVersionUID = 1L;
 	
-	public InfoSubPanel(int width, int height, String key, ArrayList<String> text)
+	public InputSubPanel(int width, int height, String key, ArrayList<String> text)
 	{	super(width,height);
 	
 		setTitleKey(key,false);
@@ -62,6 +62,8 @@ public class InfoSubPanel extends ModalDialogSubPanel implements MouseListener
 	// TEXT				/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	private JLabel buttonConfirm;
+	private JLabel buttonCancel;
+	private JTextPane inputPane;
 	
 	public void setContent(ArrayList<String> text)
 	{	// sizes
@@ -127,6 +129,40 @@ public class InfoSubPanel extends ModalDialogSubPanel implements MouseListener
 		}
 		
 		getDataPanel().add(Box.createRigidArea(new Dimension(GuiTools.subPanelMargin,GuiTools.subPanelMargin)));
+
+		// text field
+		{	inputPane = new JTextPane()
+			{	private static final long serialVersionUID = 1L;
+				public void paintComponent(Graphics g)
+			    {	Graphics2D g2 = (Graphics2D) g;
+		        	g2.setRenderingHint(RenderingHints.KEY_TEXT_ANTIALIASING,RenderingHints.VALUE_TEXT_ANTIALIAS_ON);
+		        	g2.setRenderingHint(RenderingHints.KEY_RENDERING,RenderingHints.VALUE_RENDER_QUALITY);
+		        	super.paintComponent(g2);
+			    }			
+			};
+			inputPane.setEditable(true);
+			inputPane.setOpaque(true);
+			Dimension dim = new Dimension(getDataWidth(),buttonsHeight);
+			inputPane.setPreferredSize(dim);
+			inputPane.setMinimumSize(dim);
+			inputPane.setMaximumSize(dim);
+			inputPane.setAlignmentX(Component.CENTER_ALIGNMENT);
+			Color bg = GuiTools.COLOR_TABLE_REGULAR_BACKGROUND;
+			inputPane.setBackground(bg);
+			Color fg = GuiTools.COLOR_TABLE_REGULAR_FOREGROUND;
+			inputPane.setForeground(fg);
+			SimpleAttributeSet sa = new SimpleAttributeSet();
+			StyleConstants.setAlignment(sa,StyleConstants.ALIGN_CENTER/*JUSTIFIED*/);
+			StyleConstants.setFontFamily(sa,font.getFamily());
+			StyleConstants.setFontSize(sa,font.getSize());
+			StyleConstants.setForeground(sa,fg);
+			StyledDocument doc = inputPane.getStyledDocument();
+			doc.setParagraphAttributes(0,doc.getLength()+1,sa,true);
+//			doc.addDocumentListener(this);
+			getDataPanel().add(inputPane);
+		}
+		
+		getDataPanel().add(Box.createRigidArea(new Dimension(GuiTools.subPanelMargin,GuiTools.subPanelMargin)));
 		
 		// buttons
 		{	// buttons panel
@@ -140,13 +176,27 @@ public class InfoSubPanel extends ModalDialogSubPanel implements MouseListener
 			buttonsPanel.setLayout(layout);
 			getDataPanel().add(buttonsPanel);
 			
+			// cancel button
+			{	String key = GuiKeys.COMMON_DIALOG_CANCEL;			
+				buttonCancel = initButton(key,font,buttonsHeight);
+				buttonsPanel.add(buttonCancel);
+			}
+
+			buttonsPanel.add(Box.createRigidArea(new Dimension(GuiTools.subPanelMargin,GuiTools.subPanelMargin)));
+			
 			// confirm button
-			String key = GuiKeys.COMMON_DIALOG_CONFIRM;			
-			buttonConfirm = initButton(key,font,buttonsHeight);
-			buttonsPanel.add(buttonConfirm);
-		}
+			{	String key = GuiKeys.COMMON_DIALOG_CONFIRM;			
+				buttonConfirm = initButton(key,font,buttonsHeight);
+				buttonsPanel.add(buttonConfirm);
+			}
+}
 		
 //		getDataPanel().add(Box.createVerticalGlue());
+	}
+	
+	public String getInput()
+	{	String result = inputPane.getText();
+		return result;
 	}
 	
 	/////////////////////////////////////////////////////////////////
