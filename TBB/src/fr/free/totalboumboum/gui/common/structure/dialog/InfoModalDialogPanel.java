@@ -1,4 +1,4 @@
-package fr.free.totalboumboum.gui.common.structure.dialog.info;
+package fr.free.totalboumboum.gui.common.structure.dialog;
 
 /*
  * Total Boum Boum
@@ -24,7 +24,6 @@ package fr.free.totalboumboum.gui.common.structure.dialog.info;
 
 import java.util.ArrayList;
 
-import fr.free.totalboumboum.gui.common.structure.dialog.ModalDialogPanel;
 import fr.free.totalboumboum.gui.common.structure.panel.menu.MenuPanel;
 
 
