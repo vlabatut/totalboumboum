@@ -1,4 +1,4 @@
-package fr.free.totalboumboum.gui.common.structure.dialog;
+package fr.free.totalboumboum.gui.common.structure.dialog.info;
 
 /*
  * Total Boum Boum
@@ -24,9 +24,9 @@ package fr.free.totalboumboum.gui.common.structure.dialog;
 
 import java.util.ArrayList;
 
+import fr.free.totalboumboum.gui.common.structure.dialog.ModalDialogPanel;
 import fr.free.totalboumboum.gui.common.structure.panel.menu.MenuPanel;
 import fr.free.totalboumboum.gui.tools.GuiTools;
-
 
 public class InfoModalDialogPanel extends ModalDialogPanel<InfoSubPanel>
 {	private static final long serialVersionUID = 1L;

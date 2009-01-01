@@ -36,6 +36,8 @@ import javax.xml.parsers.ParserConfigurationException;
 import org.xml.sax.SAXException;
 
 import fr.free.totalboumboum.gui.common.structure.MenuContainer;
+import fr.free.totalboumboum.gui.common.structure.dialog.ModalDialogPanelListener;
+import fr.free.totalboumboum.gui.common.structure.dialog.info.InfoModalDialogPanel;
 import fr.free.totalboumboum.gui.common.structure.panel.menu.MenuPanel;
 import fr.free.totalboumboum.gui.common.structure.panel.menu.SimpleMenuPanel;
 import fr.free.totalboumboum.gui.data.configuration.GuiConfiguration;
@@ -47,31 +49,9 @@ import fr.free.totalboumboum.gui.menus.tournament.TournamenuContainer;
 import fr.free.totalboumboum.gui.tools.GuiKeys;
 import fr.free.totalboumboum.gui.tools.GuiTools;
 
-public class MainMenu extends SimpleMenuPanel
+public class MainMenu extends SimpleMenuPanel implements ModalDialogPanelListener
 {	private static final long serialVersionUID = 1L;
-	
-	private BufferedImage image;
-
-	private TournamenuContainer tournamentContainer;
-	private QuickMatchContainer quickMatchContainer;
-	
-	@SuppressWarnings("unused")
-	private JButton buttonOptions;
-	@SuppressWarnings("unused")
-	private JButton buttonProfiles;
-	private JButton buttonStats;
-	@SuppressWarnings("unused")
-	private JButton buttonResources;
-	private JButton buttonAbout;
-	@SuppressWarnings("unused")
-	private JButton buttonTournament;
-	@SuppressWarnings("unused")
-	private JButton buttonQuickMatch;
-	@SuppressWarnings("unused")
-	private JButton buttonLoad;
-	@SuppressWarnings("unused")
-	private JButton buttonQuit;
-	
+		
 	public MainMenu(MenuContainer container, MenuPanel parent) throws IllegalArgumentException, SecurityException, ParserConfigurationException, SAXException, IOException, IllegalAccessException, NoSuchFieldException, ClassNotFoundException
 	{	super(container,parent);
 		// layout
@@ -101,16 +81,50 @@ buttonStats.setEnabled(false);
 		buttonLoad = GuiTools.createButton(GuiKeys.MENU_MAIN_BUTTON_LOAD,buttonWidth,buttonHeight,fontSize,this);
 		add(Box.createRigidArea(new Dimension(0,GuiTools.buttonVerticalSpace)));
 		buttonAbout = GuiTools.createButton(GuiKeys.MENU_MAIN_BUTTON_ABOUT,buttonWidth,buttonHeight,fontSize,this);
-buttonAbout.setEnabled(false);
 		buttonQuit = GuiTools.createButton(GuiKeys.MENU_MAIN_BUTTON_QUIT,buttonWidth,buttonHeight,fontSize,this);
 		add(Box.createVerticalGlue());		
 	}
 	
+	/////////////////////////////////////////////////////////////////
+	// BUTTONS			/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	@SuppressWarnings("unused")
+	private JButton buttonOptions;
+	@SuppressWarnings("unused")
+	private JButton buttonProfiles;
+	private JButton buttonStats;
+	@SuppressWarnings("unused")
+	private JButton buttonResources;
+	@SuppressWarnings("unused")
+	private JButton buttonAbout;
+	@SuppressWarnings("unused")
+	private JButton buttonTournament;
+	@SuppressWarnings("unused")
+	private JButton buttonQuickMatch;
+	@SuppressWarnings("unused")
+	private JButton buttonLoad;
+	@SuppressWarnings("unused")
+	private JButton buttonQuit;
+	
+	/////////////////////////////////////////////////////////////////
+	// PANELS			/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	private TournamenuContainer tournamentContainer;
+	private QuickMatchContainer quickMatchContainer;
+	
+	/////////////////////////////////////////////////////////////////
+	// JCOMPONENT		/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	private BufferedImage image;
+
 	@Override
 	public void paintComponent(Graphics g)
 	{	g.drawImage(image, 0, 0, null);
 	}
 	
+	/////////////////////////////////////////////////////////////////
+	// ACTION LISTENER	/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
 	public void actionPerformed(ActionEvent e)
 	{	if(e.getActionCommand().equals(GuiKeys.MENU_MAIN_BUTTON_OPTIONS))
 		{	OptionsSplitPanel optionsMenuPanel = new OptionsSplitPanel(getContainer(),this);
@@ -148,8 +162,19 @@ buttonAbout.setEnabled(false);
 			quickMatchContainer.initTournament();
 			replaceWith(quickMatchContainer);
 	    }
+		else if(e.getActionCommand().equals(GuiKeys.MENU_MAIN_BUTTON_ABOUT))
+		{	ArrayList<String> text = new ArrayList<String>();
+			text.add("blablablablab !");
+			text.add("blëblëblëblëb !");
+			InfoModalDialogPanel aboutPanel = new InfoModalDialogPanel(this,"Test","Ceci est un test",text);
+			aboutPanel.addListener(this);
+			getFrame().setModalDialog(aboutPanel);
+	    }
 	}
 	
+	/////////////////////////////////////////////////////////////////
+	// CONTENT PANEL	/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
 	public void refresh()
 	{	
 /*		
@@ -158,5 +183,13 @@ buttonAbout.setEnabled(false);
 		if(quickMatchSplitPanel!=null)
 			buttonTournament.setEnabled(false);
 */		
+	}
+
+	/////////////////////////////////////////////////////////////////
+	// MODAL DIALOG PANEL LISTENER	/////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	@Override
+	public void modalDialogButtonClicked(String buttonCode)
+	{	getFrame().unsetModalDialog();
 	}
 }

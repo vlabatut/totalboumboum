@@ -21,8 +21,12 @@ package fr.free.totalboumboum.gui.common.structure.dialog;
  * 
  */
 
+import java.awt.Component;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.util.ArrayList;
 
+import javax.swing.Box;
 import javax.swing.BoxLayout;
 
 import fr.free.totalboumboum.gui.common.structure.panel.ContentPanel;
@@ -31,27 +35,38 @@ import fr.free.totalboumboum.gui.common.structure.subpanel.SubPanel;
 import fr.free.totalboumboum.gui.frames.NormalFrame;
 import fr.free.totalboumboum.gui.tools.GuiTools;
 
-
-public abstract class ModalDialogPanel<T extends ModalDialogSubPanel> extends ContentPanel implements ModalDialogSubPanelListener
+public abstract class ModalDialogPanel<T extends ModalDialogSubPanel> extends ContentPanel implements ModalDialogSubPanelListener, MouseListener
 {	private static final long serialVersionUID = 1L;
 
 	public ModalDialogPanel(MenuPanel parent, T subPanel)
 	{	super(parent.getFrame().getMenuWidth(),parent.getFrame().getMenuHeight());
 		this.parent = parent;
 		
-		setBackground(GuiTools.COLOR_COMMON_BACKGROUND);
+		setOpaque(false);
+		setAlignmentX(Component.CENTER_ALIGNMENT);
+		setAlignmentY(Component.CENTER_ALIGNMENT);
 		
 		// layout
-		BoxLayout layout = new BoxLayout(this,BoxLayout.PAGE_AXIS); 
-		setLayout(layout);
+		{	BoxLayout layout = new BoxLayout(this,BoxLayout.PAGE_AXIS); 
+			setLayout(layout);
+		}
 		
-		// sub panel
-		interPanel = new SubPanel(subPanel.getWidth(),subPanel.getHeight());
-		interPanel.setBackground(GuiTools.COLOR_COMMON_BACKGROUND);
+		// inter panel
+		interPanel = new SubPanel(getWidth(),getHeight());
+		{	BoxLayout layout = new BoxLayout(interPanel,BoxLayout.PAGE_AXIS); 
+			interPanel.setLayout(layout);
+		}
+		interPanel.setBackground(GuiTools.COLOR_DIALOG_BACKGROUND);
+		interPanel.setAlignmentY(Component.CENTER_ALIGNMENT);
+		interPanel.addMouseListener(this);
 		add(interPanel);
+		// sub panel
 		this.subPanel = subPanel;
 		subPanel.addListener(this);
+		interPanel.add(Box.createVerticalGlue());
 		interPanel.add(subPanel);
+		interPanel.add(Box.createVerticalGlue());
+		subPanel.setAlignmentY(Component.CENTER_ALIGNMENT);
 	}
 
 	/////////////////////////////////////////////////////////////////
@@ -115,5 +130,38 @@ public abstract class ModalDialogPanel<T extends ModalDialogSubPanel> extends Co
 	protected void fireModalDialogButtonClicked(String buttonCode)
 	{	for(ModalDialogPanelListener listener: listeners)
 			listener.modalDialogButtonClicked(buttonCode);
+	}
+
+	/////////////////////////////////////////////////////////////////
+	// MOUSE LISTENER	/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	@Override
+	public void mouseClicked(MouseEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void mouseEntered(MouseEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void mouseExited(MouseEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void mousePressed(MouseEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void mouseReleased(MouseEvent e) {
+		// TODO Auto-generated method stub
+		
 	}
 }

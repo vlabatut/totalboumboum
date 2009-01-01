@@ -63,7 +63,7 @@ public class EntitledSubPanel extends SubPanel
 		// title
 		{	String text = null;
 			title = new JLabel(text);
-			Font font = GuiConfiguration.getMiscConfiguration().getFont().deriveFont(titleFontSize);
+			Font font = GuiConfiguration.getMiscConfiguration().getFont().deriveFont((float)titleFontSize);
 			title.setFont(font);
 			String tooltip = null;
 			title.setToolTipText(tooltip);
