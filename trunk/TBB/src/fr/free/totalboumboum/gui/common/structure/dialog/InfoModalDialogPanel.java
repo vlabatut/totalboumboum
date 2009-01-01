@@ -32,8 +32,13 @@ public class InfoModalDialogPanel extends ModalDialogPanel<InfoSubPanel>
 
 	public InfoModalDialogPanel(MenuPanel parent, String title, String tooltip, ArrayList<String> text)
 	{	super(parent,new InfoSubPanel(parent.getFrame().getMenuWidth(),parent.getFrame().getMenuHeight(),title,tooltip,text));
+		InfoSubPanel subPanel = getSubPanel();
+		subPanel.addListener(this);
 	}
 
+	/////////////////////////////////////////////////////////////////
+	// CONTENT PANEL	/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
 	@Override
 	public void refresh()
 	{	
@@ -44,6 +49,6 @@ public class InfoModalDialogPanel extends ModalDialogPanel<InfoSubPanel>
 	/////////////////////////////////////////////////////////////////
 	@Override
 	public void modalDialogButtonClicked(String buttonCode)
-	{	
+	{	fireModalDialogButtonClicked(buttonCode);
 	}
 }
