@@ -103,7 +103,6 @@ public class TournamentMenu extends InnerMenuPanel implements TournamentRenderPa
 		add(Box.createRigidArea(new Dimension(GuiTools.buttonHorizontalSpace,0)));
 	    ButtonGroup group = new ButtonGroup();
 	    buttonDescription = GuiTools.createToggleButton(GuiKeys.GAME_TOURNAMENT_BUTTON_DESCRIPTION,buttonWidth,buttonHeight,1,this);
-		buttonDescription.setSelected(true);
 	    group.add(buttonDescription);
 	    buttonResults = GuiTools.createToggleButton(GuiKeys.GAME_TOURNAMENT_BUTTON_RESULTS,buttonWidth,buttonHeight,1,this);
 	    group.add(buttonResults);
@@ -120,7 +119,9 @@ buttonStatistics.setEnabled(false);
 	private AbstractTournament tournament;
 
 	public void setTournament(AbstractTournament tournament)
-	{	// tournament
+	{	buttonDescription.setSelected(true);
+	
+		// tournament
 		this.tournament = tournament;
 		if(tournament==null)
 		{

@@ -522,6 +522,11 @@ public class Launcher
 	 * n joueurs qui attendaient sont qualifiés.
 	 * un classement permet de déterminer le leader provisoire
 	 */
+	
+	/*
+	 * TODO sprite du bad bomberman dans SBM1
+	 * éventuellement les autres persos du monde avec le ring
+	 */
 
 // **********************************************************
 // JOUEURS
