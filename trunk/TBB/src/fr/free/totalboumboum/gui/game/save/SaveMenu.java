@@ -206,6 +206,9 @@ public class SaveMenu extends InnerMenuPanel implements DataPanelListener,ModalD
 			catch (IOException e1)
 			{	e1.printStackTrace();
 			}
+//			getDataPart().refresh();
+//			refreshButtons();
+			replaceWith(parent);
 		}
 	}
 }

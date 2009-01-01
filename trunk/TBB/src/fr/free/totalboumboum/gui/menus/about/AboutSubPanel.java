@@ -112,6 +112,7 @@ public class AboutSubPanel extends ModalDialogSubPanel implements MouseListener
 			catch (BadLocationException e)
 			{	e.printStackTrace();
 			}
+			textPane.setCaretPosition(0);
 			
 			JScrollPane textPanel = new JScrollPane(textPane);
 			textPanel.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);

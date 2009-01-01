@@ -37,6 +37,7 @@ import javax.swing.BoxLayout;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextPane;
+import javax.swing.SwingUtilities;
 import javax.swing.text.BadLocationException;
 import javax.swing.text.SimpleAttributeSet;
 import javax.swing.text.StyleConstants;
@@ -113,8 +114,7 @@ public class InputSubPanel extends ModalDialogSubPanel implements MouseListener
 			// color
 			Color fg = GuiTools.COLOR_TABLE_REGULAR_FOREGROUND;
 			StyleConstants.setForeground(sa,fg);
-			// set
-	//		doc.setParagraphAttributes(0,doc.getLength()-1,sa,true);		
+			// set style
 			doc.setCharacterAttributes(0,doc.getLength()+1,sa,true);		
 			// text
 			try
@@ -125,6 +125,7 @@ public class InputSubPanel extends ModalDialogSubPanel implements MouseListener
 			catch (BadLocationException e)
 			{	e.printStackTrace();
 			}
+			doc.setParagraphAttributes(0,doc.getLength()-1,sa,true);		
 			textPanel.add(textPane);
 		}
 		
@@ -161,12 +162,19 @@ public class InputSubPanel extends ModalDialogSubPanel implements MouseListener
 			try
 			{	doc.remove(0,doc.getLength());
 				doc.insertString(doc.getLength(),defaultText,sa);
-				inputPane.selectAll();
 			}
 			catch (BadLocationException e)
 			{	e.printStackTrace();
 			}
 			getDataPanel().add(inputPane);
+			inputPane.selectAll();
+			inputPane.getCaret().setSelectionVisible(true);
+			// request focus to be directly on the text field
+			SwingUtilities.invokeLater(new Runnable()
+			{	public void run()
+				{	inputPane.requestFocusInWindow();
+				}
+			});
 		}
 		
 		getDataPanel().add(Box.createRigidArea(new Dimension(GuiTools.subPanelMargin,GuiTools.subPanelMargin)));
