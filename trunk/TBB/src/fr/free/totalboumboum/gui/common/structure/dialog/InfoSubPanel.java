@@ -1,4 +1,4 @@
-package fr.free.totalboumboum.gui.common.structure.dialog.info;
+package fr.free.totalboumboum.gui.common.structure.dialog;
 
 /*
  * Total Boum Boum
@@ -42,7 +42,6 @@ import javax.swing.text.SimpleAttributeSet;
 import javax.swing.text.StyleConstants;
 import javax.swing.text.StyledDocument;
 
-import fr.free.totalboumboum.gui.common.structure.dialog.ModalDialogSubPanel;
 import fr.free.totalboumboum.gui.data.configuration.GuiConfiguration;
 import fr.free.totalboumboum.gui.tools.GuiKeys;
 import fr.free.totalboumboum.gui.tools.GuiTools;
