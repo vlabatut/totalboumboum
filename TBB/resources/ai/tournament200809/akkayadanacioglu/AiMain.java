@@ -2,7 +2,7 @@ package tournament200809.akkayadanacioglu;
 
 /*
  * Total Boum Boum
- * Copyright 2008 Vincent Labatut 
+ * Copyright 2008-2009 Vincent Labatut 
  * 
  * This file is part of Total Boum Boum.
  * 
