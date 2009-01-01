@@ -28,12 +28,23 @@ import fr.free.totalboumboum.gui.common.structure.dialog.ModalDialogPanel;
 import fr.free.totalboumboum.gui.common.structure.panel.menu.MenuPanel;
 
 
-public abstract class InfoModalDialogPanel extends ModalDialogPanel<InfoSubPanel>
+public class InfoModalDialogPanel extends ModalDialogPanel<InfoSubPanel>
 {	private static final long serialVersionUID = 1L;
 
 	public InfoModalDialogPanel(MenuPanel parent, String title, String tooltip, ArrayList<String> text)
 	{	super(parent,new InfoSubPanel(parent.getFrame().getMenuWidth(),parent.getFrame().getMenuHeight(),title,tooltip,text));
 	}
-	
 
+	@Override
+	public void refresh()
+	{	
+	}
+
+	/////////////////////////////////////////////////////////////////
+	// MODAL DIALOG SUB PANEL LISTENER	/////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	@Override
+	public void modalDialogButtonClicked(String buttonCode)
+	{	
+	}
 }
