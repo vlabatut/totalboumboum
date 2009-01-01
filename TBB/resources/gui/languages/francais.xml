@@ -422,6 +422,11 @@
 				<text name="Delete" value="Supprimer" tooltip="Supprimer l'enregistrement sélectionné" />
 				<text name="New" value="Créer" tooltip="Créer un nouvel enregistrement" />
 			</group>
+			<group name="New">
+				<text name="Name" value="Nouvel enregistrement" />
+				<text name="Question" value="Entrez le nom de la nouvelle sauvegarde" tooltip="Entrez le nom de la nouvelle sauvegarde" />
+				<text name="Title" value="Nom de la sauvegarde" tooltip="Nom de la nouvelle sauvegarde" />
+			</group>
 		</group>
 
 <!-- TOURNAMENT PANEL -->

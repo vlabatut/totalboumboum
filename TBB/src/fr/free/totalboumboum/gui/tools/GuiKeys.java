@@ -550,6 +550,7 @@ public class GuiKeys
 			public static final String GAME_SAVE_BUTTON_NEW = GAME_SAVE_BUTTON+NEW;
 			/* NEW */
 			public static final String GAME_SAVE_NEW = GAME_SAVE+NEW;
+			public static final String GAME_SAVE_NEW_NAME = GAME_SAVE_NEW+NAME;
 			public static final String GAME_SAVE_NEW_QUESTION = GAME_SAVE_NEW+QUESTION;
 			public static final String GAME_SAVE_NEW_TITLE = GAME_SAVE_NEW+TITLE;
 			

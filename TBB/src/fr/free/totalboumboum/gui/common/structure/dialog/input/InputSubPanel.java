@@ -50,12 +50,12 @@ import fr.free.totalboumboum.gui.tools.GuiTools;
 public class InputSubPanel extends ModalDialogSubPanel implements MouseListener
 {	private static final long serialVersionUID = 1L;
 	
-	public InputSubPanel(int width, int height, String key, ArrayList<String> text)
+	public InputSubPanel(int width, int height, String key, ArrayList<String> text, String defaultText)
 	{	super(width,height);
 	
 		setTitleKey(key,false);
 	
-		setContent(text);
+		setContent(text,defaultText);
 	}
 		
 	/////////////////////////////////////////////////////////////////
@@ -65,12 +65,12 @@ public class InputSubPanel extends ModalDialogSubPanel implements MouseListener
 	private JLabel buttonCancel;
 	private JTextPane inputPane;
 	
-	public void setContent(ArrayList<String> text)
+	public void setContent(ArrayList<String> text, String defaultText)
 	{	// sizes
 		float fontSize = getTitleFontSize()*GuiTools.FONT_TEXT_RATIO;
 		Font font = GuiConfiguration.getMiscConfiguration().getFont().deriveFont(fontSize);
 		int buttonsHeight = (int)(GuiTools.getPixelHeight(fontSize)/GuiTools.FONT_RATIO);
-		int textHeight = getDataHeight() - buttonsHeight - GuiTools.subPanelMargin;
+		int textHeight = getDataHeight() - 2*buttonsHeight - 2*GuiTools.subPanelMargin;
 		
 		{	BoxLayout layout = new BoxLayout(getDataPanel(),BoxLayout.PAGE_AXIS); 
 			getDataPanel().setLayout(layout);
@@ -120,7 +120,7 @@ public class InputSubPanel extends ModalDialogSubPanel implements MouseListener
 			try
 			{	doc.remove(0,doc.getLength());
 				for(String txt: text)
-					doc.insertString(0,txt+"\n",sa);
+					doc.insertString(doc.getLength(),txt+"\n",sa);
 			}
 			catch (BadLocationException e)
 			{	e.printStackTrace();
@@ -147,18 +147,25 @@ public class InputSubPanel extends ModalDialogSubPanel implements MouseListener
 			inputPane.setMinimumSize(dim);
 			inputPane.setMaximumSize(dim);
 			inputPane.setAlignmentX(Component.CENTER_ALIGNMENT);
-			Color bg = GuiTools.COLOR_TABLE_REGULAR_BACKGROUND;
+			Color bg = GuiTools.COLOR_TABLE_SELECTED_BACKGROUND;
 			inputPane.setBackground(bg);
 			Color fg = GuiTools.COLOR_TABLE_REGULAR_FOREGROUND;
 			inputPane.setForeground(fg);
 			SimpleAttributeSet sa = new SimpleAttributeSet();
-			StyleConstants.setAlignment(sa,StyleConstants.ALIGN_CENTER/*JUSTIFIED*/);
+			StyleConstants.setAlignment(sa,StyleConstants.ALIGN_CENTER);
 			StyleConstants.setFontFamily(sa,font.getFamily());
 			StyleConstants.setFontSize(sa,font.getSize());
 			StyleConstants.setForeground(sa,fg);
 			StyledDocument doc = inputPane.getStyledDocument();
 			doc.setParagraphAttributes(0,doc.getLength()+1,sa,true);
-//			doc.addDocumentListener(this);
+			try
+			{	doc.remove(0,doc.getLength());
+				doc.insertString(doc.getLength(),defaultText,sa);
+				inputPane.selectAll();
+			}
+			catch (BadLocationException e)
+			{	e.printStackTrace();
+			}
 			getDataPanel().add(inputPane);
 		}
 		
@@ -205,8 +212,12 @@ public class InputSubPanel extends ModalDialogSubPanel implements MouseListener
 	@Override
 	public void mousePressed(MouseEvent e)
 	{	Component component = e.getComponent();
-		if(component instanceof JLabel)
-		{	String code = ((JLabel)component).getText();
+		if(component==buttonCancel)
+		{	String code = GuiKeys.COMMON_DIALOG_CANCEL;
+			fireModalDialogButtonClicked(code);
+		}
+		else if(component==buttonConfirm)
+		{	String code = GuiKeys.COMMON_DIALOG_CONFIRM;
 			fireModalDialogButtonClicked(code);
 		}
 	}

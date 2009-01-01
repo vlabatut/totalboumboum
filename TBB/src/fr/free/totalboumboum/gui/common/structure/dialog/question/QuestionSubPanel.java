@@ -119,7 +119,7 @@ public class QuestionSubPanel extends ModalDialogSubPanel implements MouseListen
 			try
 			{	doc.remove(0,doc.getLength());
 				for(String txt: text)
-					doc.insertString(0,txt+"\n",sa);
+					doc.insertString(doc.getLength(),txt+"\n",sa);
 			}
 			catch (BadLocationException e)
 			{	e.printStackTrace();
@@ -165,8 +165,8 @@ public class QuestionSubPanel extends ModalDialogSubPanel implements MouseListen
 	@Override
 	public void mousePressed(MouseEvent e)
 	{	Component component = e.getComponent();
-		if(component instanceof JLabel)
-		{	String code = ((JLabel)component).getText();
+		if(component==buttonConfirm)
+		{	String code = GuiKeys.COMMON_DIALOG_CONFIRM;
 			fireModalDialogButtonClicked(code);
 		}
 	}
