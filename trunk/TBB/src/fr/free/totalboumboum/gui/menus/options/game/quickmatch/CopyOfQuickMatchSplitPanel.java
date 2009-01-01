@@ -2,7 +2,7 @@ package fr.free.totalboumboum.gui.menus.options.game.quickmatch;
 
 /*
  * Total Boum Boum
- * Copyright 2008 Vincent Labatut 
+ * Copyright 2008-2009 Vincent Labatut 
  * 
  * This file is part of Total Boum Boum.
  * 
@@ -31,12 +31,12 @@ import fr.free.totalboumboum.gui.common.structure.panel.menu.MenuPanel;
 import fr.free.totalboumboum.gui.data.configuration.GuiConfiguration;
 import fr.free.totalboumboum.gui.tools.GuiTools;
 
-public class QuickMatchSplitPanel extends SplitMenuPanel
+public class CopyOfQuickMatchSplitPanel extends SplitMenuPanel
 {	private static final long serialVersionUID = 1L;
 
 	private BufferedImage image;
 
-	public QuickMatchSplitPanel(MenuContainer container, MenuPanel parent)
+	public CopyOfQuickMatchSplitPanel(MenuContainer container, MenuPanel parent)
 	{	super(container,parent,BorderLayout.LINE_START,GuiTools.VERTICAL_SPLIT_RATIO);
 	
 		// background
