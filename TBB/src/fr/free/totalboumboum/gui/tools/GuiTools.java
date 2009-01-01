@@ -411,6 +411,13 @@ public class GuiTools
 			};
 			loadTableImages(folder,uses);
 		}
+		// false
+		{	String folder = baseFolder+GuiFileTools.FILE_FALSE;
+			String[] uses =
+			{	GuiKeys.COMMON_DIALOG_CANCEL,
+			};
+			loadTableImages(folder,uses);
+		}
 		// hero
 		{	String folder = baseFolder+GuiFileTools.FILE_HERO;
 			String[] uses =
@@ -679,6 +686,13 @@ public class GuiTools
 			};
 			loadTableImages(folder,uses);
 		}
+		// true
+		{	String folder = baseFolder+GuiFileTools.FILE_TRUE;
+			String[] uses =
+			{	GuiKeys.COMMON_DIALOG_CONFIRM
+			};
+			loadTableImages(folder,uses);
+		}
 	}
 	
 	private static void initDataImages()
@@ -747,8 +761,7 @@ public class GuiTools
 				GuiKeys.MENU_OPTIONS_GAME_TOURNAMENT_PLAYERS_FALSE,
 				GuiKeys.MENU_OPTIONS_GAME_TOURNAMENT_TOURNAMENT_FALSE,
 				GuiKeys.MENU_OPTIONS_GAME_TOURNAMENT_AUTOLOAD_FALSE,
-				GuiKeys.MENU_OPTIONS_GAME_TOURNAMENT_AUTOSAVE_FALSE,
-				GuiKeys.COMMON_DIALOG_CANCEL
+				GuiKeys.MENU_OPTIONS_GAME_TOURNAMENT_AUTOSAVE_FALSE
 			};
 			loadTableImages(folder,uses);
 		}
@@ -922,8 +935,7 @@ public class GuiTools
 				GuiKeys.MENU_OPTIONS_GAME_TOURNAMENT_PLAYERS_TRUE,
 				GuiKeys.MENU_OPTIONS_GAME_TOURNAMENT_TOURNAMENT_TRUE,
 				GuiKeys.MENU_OPTIONS_GAME_TOURNAMENT_AUTOLOAD_TRUE,
-				GuiKeys.MENU_OPTIONS_GAME_TOURNAMENT_AUTOSAVE_TRUE,
-				GuiKeys.COMMON_DIALOG_CONFIRM
+				GuiKeys.MENU_OPTIONS_GAME_TOURNAMENT_AUTOSAVE_TRUE
 			};
 			loadTableImages(folder,uses);
 		}

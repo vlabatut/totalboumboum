@@ -37,7 +37,6 @@ import org.xml.sax.SAXException;
 
 import fr.free.totalboumboum.gui.common.structure.MenuContainer;
 import fr.free.totalboumboum.gui.common.structure.dialog.ModalDialogPanelListener;
-import fr.free.totalboumboum.gui.common.structure.dialog.info.InfoModalDialogPanel;
 import fr.free.totalboumboum.gui.common.structure.panel.menu.MenuPanel;
 import fr.free.totalboumboum.gui.common.structure.panel.menu.SimpleMenuPanel;
 import fr.free.totalboumboum.gui.data.configuration.GuiConfiguration;
