@@ -171,6 +171,7 @@ public class NormalFrame extends AbstractFrame implements MenuContainer
 	{	JLayeredPane layeredPane = getLayeredPane();
 		layeredPane.remove(modalDialogPanel);
 		modalDialogPanel = null;
+		repaint();
 	}
 }
 

@@ -25,9 +25,6 @@ import java.awt.Color;
 import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.Font;
-import java.awt.Graphics;
-import java.awt.Graphics2D;
-import java.awt.RenderingHints;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.io.File;
@@ -76,8 +73,9 @@ public class AboutSubPanel extends ModalDialogSubPanel implements MouseListener
 	public void setContent(ArrayList<String> text)
 	{	// sizes
 		float fontSize = getTitleFontSize()*GuiTools.FONT_TEXT_RATIO;
-		Font font = GuiConfiguration.getMiscConfiguration().getFont().deriveFont(fontSize);
 		int buttonsHeight = (int)(GuiTools.getPixelHeight(fontSize)/GuiTools.FONT_RATIO);
+		fontSize = fontSize*0.75f;
+		Font font = GuiConfiguration.getMiscConfiguration().getFont().deriveFont(fontSize);
 		int textHeight = getDataHeight() - buttonsHeight - GuiTools.subPanelMargin;
 		
 		{	BoxLayout layout = new BoxLayout(getDataPanel(),BoxLayout.PAGE_AXIS); 
@@ -85,15 +83,7 @@ public class AboutSubPanel extends ModalDialogSubPanel implements MouseListener
 		}
 		
 		// message
-		{	JTextPane textPane = new JTextPane()
-			{	private static final long serialVersionUID = 1L;
-				public void paintComponent(Graphics g)
-			    {	Graphics2D g2 = (Graphics2D) g;
-		        	g2.setRenderingHint(RenderingHints.KEY_TEXT_ANTIALIASING,RenderingHints.VALUE_TEXT_ANTIALIAS_ON);
-		        	g2.setRenderingHint(RenderingHints.KEY_RENDERING,RenderingHints.VALUE_RENDER_QUALITY);
-		        	super.paintComponent(g2);
-			    }			
-			};
+		{	JTextPane textPane = new JTextPane();
 			textPane.setEditable(false);
 			textPane.setHighlighter(null);
 			textPane.setOpaque(true);
@@ -103,22 +93,21 @@ public class AboutSubPanel extends ModalDialogSubPanel implements MouseListener
 			StyledDocument doc = textPane.getStyledDocument();
 			SimpleAttributeSet sa = new SimpleAttributeSet();
 			// alignment
-			StyleConstants.setAlignment(sa,StyleConstants.ALIGN_LEFT/*JUSTIFIED*/);
+			StyleConstants.setAlignment(sa,StyleConstants.ALIGN_JUSTIFIED);
 			// font size
-			StyleConstants.setFontFamily(sa,font.getFamily());
+			StyleConstants.setFontFamily(sa,"Courier");
 			StyleConstants.setFontSize(sa,font.getSize());
 			doc.setCharacterAttributes(0,doc.getLength()+1,sa,true);		
 			// color
 			Color fg = GuiTools.COLOR_TABLE_REGULAR_FOREGROUND;
 			StyleConstants.setForeground(sa,fg);
 			// set
-	//		doc.setParagraphAttributes(0,doc.getLength()-1,sa,true);		
 			doc.setCharacterAttributes(0,doc.getLength()+1,sa,true);		
 			// text
 			try
 			{	doc.remove(0,doc.getLength());
 				for(String txt: text)
-					doc.insertString(0,txt+"\n",sa);
+					doc.insertString(doc.getLength(),txt+"\n",sa);
 			}
 			catch (BadLocationException e)
 			{	e.printStackTrace();
@@ -126,15 +115,11 @@ public class AboutSubPanel extends ModalDialogSubPanel implements MouseListener
 			
 			JScrollPane textPanel = new JScrollPane(textPane);
 			textPanel.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
-//			textPanel.setOpaque(false);
 			Dimension dim = new Dimension(getDataWidth(),textHeight);
 			textPanel.setPreferredSize(dim);
 			textPanel.setMinimumSize(dim);
 			textPanel.setMaximumSize(dim);
-//			BoxLayout layout = new BoxLayout(textPanel,BoxLayout.PAGE_AXIS);
-//			textPanel.setLayout(layout);
 			getDataPanel().add(textPanel);		
-			textPanel.add(textPane);
 		}
 		
 		getDataPanel().add(Box.createRigidArea(new Dimension(GuiTools.subPanelMargin,GuiTools.subPanelMargin)));

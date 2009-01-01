@@ -30,7 +30,7 @@ public class AboutModalDialogPanel extends ModalDialogPanel<AboutSubPanel>
 {	private static final long serialVersionUID = 1L;
 
 	public AboutModalDialogPanel(MenuPanel parent)
-	{	super(parent,new AboutSubPanel((int)(parent.getFrame().getMenuWidth()*GuiTools.MODAL_DIALOG_RATIO),(int)(parent.getFrame().getMenuHeight()*GuiTools.MODAL_DIALOG_RATIO)));
+	{	super(parent,new AboutSubPanel((int)(parent.getFrame().getMenuWidth()*GuiTools.MODAL_DIALOG_RATIO*2),(int)(parent.getFrame().getMenuHeight()*GuiTools.MODAL_DIALOG_RATIO*1.5)));
 		AboutSubPanel subPanel = getSubPanel();
 		subPanel.addListener(this);
 	}
