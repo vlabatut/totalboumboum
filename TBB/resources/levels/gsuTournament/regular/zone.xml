@@ -127,11 +127,11 @@
 			</tile>
 			<tile pos="2">
 				<floor name="regular" />
-				<block group="hardwalls" name="up" />
+				<block group="hardwalls" name="leftT" />
 			</tile>
 			<tile pos="3">
 				<floor name="regular" />
-				<block group="hardwalls" name="up" />
+				<block group="hardwalls" name="upright" />
 			</tile>
 			<tile pos="4">
 				<floor name="regular" />
@@ -284,15 +284,15 @@
 			</tile>
 			<tile pos="19">
 				<floor name="regular" />
-				<block group="hardwalls" name="down" />
+				<block group="hardwalls" name="downleft" />
 			</tile>
 			<tile pos="20">
 				<floor name="regular" />
-				<block group="hardwalls" name="down" />
+				<block group="hardwalls" name="center" />
 			</tile>
 			<tile pos="21">
 				<floor name="regular" />
-				<block group="hardwalls" name="down" />
+				<block group="hardwalls" name="upright" />
 			</tile>
 			<tile pos="22">
 				<floor name="regular" />
@@ -379,11 +379,11 @@
 			</tile>
 			<tile pos="19">
 				<floor name="regular" />
-				<block group="hardwalls" name="up" />
+				<block group="hardwalls" name="upleft" />
 			</tile>
 			<tile pos="20">
 				<floor name="regular" />
-				<block group="hardwalls" name="up" />
+				<block group="hardwalls" name="upright" />
 			</tile>
 			<tile pos="21">
 				<floor name="regular" />
@@ -398,15 +398,15 @@
 		<line pos="4">
 			<tile pos="0">
 				<floor name="regular" />
-				<block group="hardwalls" name="down" />
+				<block group="hardwalls" name="horizontalB" />
 			</tile>
 			<tile pos="1">
 				<floor name="regular" />
-				<block group="hardwalls" name="down" />
+				<block group="hardwalls" name="downT" />
 			</tile>
 			<tile pos="2">
 				<floor name="regular" />
-				<block group="hardwalls" name="down" />
+				<block group="hardwalls" name="downright" />
 			</tile>
 			<tile pos="3">
 				<floor name="regular" />
@@ -474,38 +474,38 @@
 			</tile>
 			<tile pos="19">
 				<floor name="regular" />
-				<block group="hardwalls" name="down" />
+				<block group="hardwalls" name="leftT" />
 			</tile>
 			<tile pos="20">
 				<floor name="regular" />
-				<block group="hardwalls" name="down" />
+				<block group="hardwalls" name="downright" />
 			</tile>
 			<tile pos="21">
 				<floor name="regular" />
-				<block group="hardwalls" name="down" />
+				<block group="hardwalls" name="downleft" />
 			</tile>
 			<tile pos="22">
 				<floor name="regular" />
-				<block group="hardwalls" name="down" />
+				<block group="hardwalls" name="rightT" />
 			</tile>
 		</line>	
 
 		<line pos="5">
 			<tile pos="0">
 				<floor name="regular" />
-				<block group="hardwalls" name="up" />
+				<block group="hardwalls" name="upleft" />
 			</tile>
 			<tile pos="1">
 				<floor name="regular" />
-				<block group="hardwalls" name="up" />
+				<block group="hardwalls" name="upright" />
 			</tile>
 			<tile pos="2">
 				<floor name="regular" />
-				<block group="hardwalls" name="up" />
+				<block group="hardwalls" name="upleft" />
 			</tile>
 			<tile pos="3">
 				<floor name="regular" />
-				<block group="hardwalls" name="up" />
+				<block group="hardwalls" name="rightT" />
 			</tile>
 			<tile pos="4">
 				<floor name="regular" />
@@ -573,11 +573,11 @@
 			</tile>
 			<tile pos="20">
 				<floor name="regular" />
-				<block group="hardwalls" name="up" />
+				<block group="hardwalls" name="upleft" />
 			</tile>
 			<tile pos="21">
 				<floor name="regular" />
-				<block group="hardwalls" name="up" />
+				<block group="hardwalls" name="upright" />
 			</tile>
 			<tile pos="22">
 				<floor name="regular" />
@@ -778,11 +778,11 @@
 			</tile>
 			<tile pos="1">
 				<floor name="regular" />
-				<block group="hardwalls" name="down" />
+				<block group="hardwalls" name="downleft" />
 			</tile>
 			<tile pos="2">
 				<floor name="regular" />
-				<block group="hardwalls" name="down" />
+				<block group="hardwalls" name="downright" />
 			</tile>
 			<tile pos="3">
 				<floor name="regular" />
@@ -872,15 +872,15 @@
 			</tile>
 			<tile pos="1">
 				<floor name="regular" />
-				<block group="hardwalls" name="up" />
+				<block group="hardwalls" name="upleft" />
 			</tile>
 			<tile pos="2">
 				<floor name="regular" />
-				<block group="hardwalls" name="up" />
+				<block group="hardwalls" name="upT" />
 			</tile>
 			<tile pos="3">
 				<floor name="regular" />
-				<block group="hardwalls" name="up" />
+				<block group="hardwalls" name="upright" />
 			</tile>
 			<tile pos="4">
 				<floor name="regular" />
@@ -1039,11 +1039,11 @@
 			</tile>
 			<tile pos="19">
 				<floor name="regular" />
-				<block group="hardwalls" name="down" />
+				<block group="hardwalls" name="leftT" />
 			</tile>
 			<tile pos="20">
 				<floor name="regular" />
-				<block group="hardwalls" name="down" />
+				<block group="hardwalls" name="rightT" />
 			</tile>
 			<tile pos="21">
 				<floor name="regular" />
@@ -1134,15 +1134,15 @@
 			</tile>
 			<tile pos="19">
 				<floor name="regular" />
-				<block group="hardwalls" name="up" />
+				<block group="hardwalls" name="leftT" />
 			</tile>
 			<tile pos="20">
 				<floor name="regular" />
-				<block group="hardwalls" name="up" />
+				<block group="hardwalls" name="center" />
 			</tile>
 			<tile pos="21">
 				<floor name="regular" />
-				<block group="hardwalls" name="up" />
+				<block group="hardwalls" name="downright" />
 			</tile>
 			<tile pos="22">
 				<floor name="regular" />
@@ -1235,11 +1235,11 @@
 			</tile>
 			<tile pos="21">
 				<floor name="regular" />
-				<block group="hardwalls" name="down" />
+				<block group="hardwalls" name="upleft" />
 			</tile>
 			<tile pos="22">
 				<floor name="regular" />
-				<block group="hardwalls" name="down" />
+				<block group="hardwalls" name="rightT" />
 			</tile>
 		</line>	
 
@@ -1349,7 +1349,7 @@
 			</tile>
 			<tile pos="3">
 				<floor name="regular" />
-				<block group="hardwalls" name="down" />
+				<block group="hardwalls" name="downright" />
 			</tile>
 			<tile pos="4">
 				<floor name="regular" />

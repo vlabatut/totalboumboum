@@ -3,6 +3,8 @@
 		xsi:noNamespaceSchemaLocation="..\..\..\schemas\players.xsd" >
 	
 	<locations>
+		<case players="0">
+		</case>
 		<case players="1">
 			<location player="0" line="01" col="05" />
 		</case>
