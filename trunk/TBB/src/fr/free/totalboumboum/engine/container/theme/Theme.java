@@ -53,7 +53,10 @@ public class Theme
 		return result;
 	}
 	public Floor makeFloor(String name)
-	{	Floor result = floors.get(name).makeSprite();
+	{	FloorFactory ff = floors.get(name);
+if(ff==null)
+	System.out.println(name);
+		Floor result = ff.makeSprite();
 		result.initGesture();
 		return result;
 	}
