@@ -12,7 +12,7 @@
 
 	<xsd:complexType name="tPlayers">
 		<xsd:sequence>
-			<xsd:element name="player" type="tPlayer" maxOccurs="unbounded"/>
+			<xsd:element name="player" type="tPlayer" minOccurs="0" maxOccurs="unbounded"/>
 		</xsd:sequence>
 	</xsd:complexType>
 
