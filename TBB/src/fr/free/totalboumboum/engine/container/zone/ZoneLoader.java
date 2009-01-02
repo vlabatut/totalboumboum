@@ -78,26 +78,24 @@ public class ZoneLoader
         		Element tile = iL.next();
         		int posT = Integer.parseInt(tile.getAttribute(XmlTools.ATT_POSITION).getValue().trim());
         		ZoneTile zt = new ZoneTile(posL,posT);
-        		// variable tile
+        		// constant parts
+        		content = loadBasicTileElement(tile);
+    			// floor
+    			if(content[0]!=null)
+    				zt.setFloor(content[0]);
+    			// blocks
+    			if(content[1]!=null)
+    				zt.setBlock(content[1]);
+    			// items
+    			if(content[2]!=null)
+    				zt.setItem(content[2]);        		
+        		// variable part
         		Element elt = tile.getChild(XmlTools.ELT_REFERENCE);
         		if(elt!=null)
         		{	String name = elt.getAttribute(XmlTools.ATT_NAME).getValue();
         			zt.setVariable(name);
         			VariableTile vt = variableTiles.get(name);
         			vt.incrementOccurrencesCount();
-        		}
-        		// constant tile
-        		else
-        		{	content = loadBasicTileElement(tile);
-        			// floor
-        			if(content[0]!=null)
-        				zt.setFloor(content[0]);
-        			// blocks
-        			if(content[1]!=null)
-        				zt.setBlock(content[1]);
-        			// items
-        			if(content[2]!=null)
-        				zt.setItem(content[2]);
         		}
         		result.addTile(zt);
         	}

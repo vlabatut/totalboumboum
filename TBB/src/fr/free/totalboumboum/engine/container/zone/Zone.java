@@ -98,7 +98,11 @@ public class Zone implements Serializable
     		ZoneTile tile = it.next();
     		int col = tile.getCol();
     		int line = tile.getLine();
-    		// variable tile
+    		// constant parts
+    		content[0] = tile.getFloor();
+   			content[1] = tile.getBlock();
+   			content[2] = tile.getItem();     			
+    		// variable part
     		String name = tile.getVariable();
     		if(name!=null)
     		{	VariableTile vt = variableTiles.get(name);
@@ -106,15 +110,12 @@ public class Zone implements Serializable
     			String itm = vit.getItem();
 				String blck = vit.getBlock();
 				String flr = vit.getFloor();
-				content[0] = flr;
-				content[1] = blck;
-				content[2] = itm;
-    		}
-    		// constant tile
-    		else
-    		{	content[0] = tile.getFloor();
-    			content[1] = tile.getBlock();
-    			content[2] = tile.getItem();     			
+				if(content[0]==null)
+					content[0] = flr;
+				if(content[1]==null)
+					content[1] = blck;
+				if(content[2]==null)
+					content[2] = itm;
     		}
     		// values
 			{	// floor

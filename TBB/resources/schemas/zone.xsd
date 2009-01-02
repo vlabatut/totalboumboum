@@ -29,17 +29,17 @@
 		<xsd:attribute name="name" type="xsd:string" />
 	</xsd:complexType>
 
-	<xsd:complexType name="tTileChoice">
-		<xsd:choice>
+	<xsd:complexType name="tTileType">
+		<xsd:sequence>
 			<xsd:group ref="gBasicTile" />
-			<xsd:element name="reference" type="tTileReference" />
-		</xsd:choice>
+			<xsd:element name="reference" type="tTileReference" minOccurs="0"/>
+		</xsd:sequence>
 		<xsd:attribute name="pos" type="xsd:integer" />
 	</xsd:complexType>
 
 	<xsd:complexType name="tLine">
 		<xsd:sequence>
-			<xsd:element name="tile" type="tTileChoice" maxOccurs="unbounded"/>
+			<xsd:element name="tile" type="tTileType" maxOccurs="unbounded"/>
 		</xsd:sequence>
 		<xsd:attribute name="pos" type="xsd:integer" />
 	</xsd:complexType>

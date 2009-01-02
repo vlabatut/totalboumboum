@@ -15,7 +15,7 @@
 	Set launcher=fr.free.totalboumboum.Launcher
 
 :: launch the game
-	java -Xmx128m -classpath %cp% %launcher% quick
+	java -Xmx256m -classpath %cp% %launcher% quick
 
 ::	pause
 

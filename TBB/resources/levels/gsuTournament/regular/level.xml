@@ -10,9 +10,9 @@
 	<instance name="superbomberman1" />
 	<theme name="gsu_regular"/>
 
-	<globalDimension width="19" height="15" />
+	<globalDimension width="23" height="15" />
 	<visibleDimension width="15" height="15" />
-	<visiblePosition leftCol="2" upLine="0" />
-	<display forceAll="false" maximize="true" />
+	<visiblePosition leftCol="4" upLine="0" />
+	<display forceAll="true" maximize="true" />
 	
 </level>
