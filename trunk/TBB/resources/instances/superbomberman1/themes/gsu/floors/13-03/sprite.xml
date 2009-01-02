@@ -3,6 +3,6 @@
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
 	xsi:noNamespaceSchemaLocation="..\..\..\..\..\schemas\sprite.xsd">
 	
-	<general name="Regular floor" />
+	<general name="Logo floor 13,03" />
 
 </sprite>
