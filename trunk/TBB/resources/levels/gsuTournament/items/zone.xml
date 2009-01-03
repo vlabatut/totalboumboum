@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <zone xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
-		xsi:noNamespaceSchemaLocation="..\..\..\schemas\zone.xsd" >
+		xsi:noNamespaceSchemaLocation="../../../schemas/zone.xsd" >
 	
 	<variable-tiles>
 		<variable-tile name="blockTile">
