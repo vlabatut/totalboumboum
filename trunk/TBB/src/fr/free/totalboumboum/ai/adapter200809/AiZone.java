@@ -24,7 +24,9 @@ package fr.free.totalboumboum.ai.adapter200809;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.Iterator;
+import java.util.Map.Entry;
 
 import fr.free.totalboumboum.configuration.profile.PredefinedColor;
 import fr.free.totalboumboum.engine.container.level.Level;
@@ -331,17 +333,17 @@ public class AiZone
 	// SPRITES			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	/** liste des blocks contenus dans cette zone */
-	private final ArrayList<AiBlock> blocks = new ArrayList<AiBlock>();
+	private final HashMap<Block,AiBlock> blocks = new HashMap<Block,AiBlock>();
 	/** liste des bombes contenues dans cette zone */
-	private final ArrayList<AiBomb> bombs = new ArrayList<AiBomb>();
+	private final HashMap<Bomb,AiBomb> bombs = new HashMap<Bomb,AiBomb>();
 	/** liste des feux contenus dans cette zone */
-	private final ArrayList<AiFire> fires = new ArrayList<AiFire>();
+	private final HashMap<Fire,AiFire> fires = new HashMap<Fire,AiFire>();
 	/** liste des sols contenus dans cette zone */
-	private final ArrayList<AiFloor> floors = new ArrayList<AiFloor>();
+	private final HashMap<Floor,AiFloor> floors = new HashMap<Floor,AiFloor>();
 	/** liste des personnages contenus dans cette zone */
-	private final ArrayList<AiHero> heroes = new ArrayList<AiHero>();
+	private final HashMap<Hero,AiHero> heroes = new HashMap<Hero,AiHero>();
 	/** liste des items contenus dans cette zone */
-	private final ArrayList<AiItem> items = new ArrayList<AiItem>();
+	private final HashMap<Item,AiItem> items = new HashMap<Item,AiItem>();
 	
 	/** 
 	 * renvoie la liste des blocks contenues dans cette zone
@@ -353,7 +355,7 @@ public class AiZone
 	 * @return	liste de tous les blocs contenus dans cette zone
 	 */
 	public Collection<AiBlock> getBlocks()
-	{	Collection<AiBlock> result = Collections.unmodifiableCollection(blocks);
+	{	Collection<AiBlock> result = Collections.unmodifiableCollection(blocks.values());
 		return result;	
 	}
 	
@@ -363,14 +365,7 @@ public class AiZone
 	 * @return	le AiBlock correspondant
 	 */
 	AiBlock getBlock(Block block)
-	{	AiBlock result = null;
-		Iterator<AiBlock> it = blocks.iterator();
-		while(it.hasNext() && result==null)
-		{	AiBlock b = it.next();
-			if(b.isSprite(block))
-				result = b;			
-		}
-		return result;
+	{	return blocks.get(block);
 	}
 	
 	/**
@@ -380,7 +375,7 @@ public class AiZone
 	 * @param block	le bloc à rajouter à la liste
 	 */
 	void addBlock(AiBlock block)
-	{	blocks.add(block);	
+	{	blocks.put(block.getSprite(),block);	
 	}
 	
 	/** 
@@ -393,7 +388,7 @@ public class AiZone
 	 * @return	liste de toutes les bombes contenues dans cette zone
 	 */
 	public Collection<AiBomb> getBombs()
-	{	Collection<AiBomb> result = Collections.unmodifiableCollection(bombs);
+	{	Collection<AiBomb> result = Collections.unmodifiableCollection(bombs.values());
 		return result;	
 	}
 	
@@ -403,14 +398,7 @@ public class AiZone
 	 * @return	le AiBomb correspondant
 	 */
 	AiBomb getBomb(Bomb bomb)
-	{	AiBomb result = null;
-		Iterator<AiBomb> it = bombs.iterator();
-		while(it.hasNext() && result==null)
-		{	AiBomb b = it.next();
-			if(b.isSprite(bomb))
-				result = b;			
-		}
-		return result;
+	{	return bombs.get(bomb);
 	}
 	
 	/**
@@ -420,7 +408,7 @@ public class AiZone
 	 * @param bomb	la bombe à rajouter à la liste
 	 */
 	void addBomb(AiBomb bomb)
-	{	bombs.add(bomb);	
+	{	bombs.put(bomb.getSprite(),bomb);	
 	}
 	
 	/** 
@@ -433,7 +421,7 @@ public class AiZone
 	 * @return	liste de tous les feux contenus dans cette zone
 	 */
 	public Collection<AiFire> getFires()
-	{	Collection<AiFire> result = Collections.unmodifiableCollection(fires);
+	{	Collection<AiFire> result = Collections.unmodifiableCollection(fires.values());
 		return result;	
 	}
 	
@@ -443,14 +431,7 @@ public class AiZone
 	 * @return	le AiFire correspondant
 	 */
 	AiFire getFire(Fire fire)
-	{	AiFire result = null;
-		Iterator<AiFire> it = fires.iterator();
-		while(it.hasNext() && result==null)
-		{	AiFire f = it.next();
-			if(f.isSprite(fire))
-				result = f;			
-		}
-		return result;
+	{	return fires.get(fire);
 	}
 	
 	/**
@@ -460,7 +441,7 @@ public class AiZone
 	 * @param fire	le feu à rajouter à la liste
 	 */
 	void addFire(AiFire fire)
-	{	fires.add(fire);	
+	{	fires.put(fire.getSprite(),fire);	
 	}
 	
 	/** 
@@ -472,7 +453,7 @@ public class AiZone
 	 * @return	liste de tous les sols contenus dans cette zone
 	 */
 	public Collection<AiFloor> getFloors()
-	{	Collection<AiFloor> result = Collections.unmodifiableCollection(floors);
+	{	Collection<AiFloor> result = Collections.unmodifiableCollection(floors.values());
 		return result;	
 	}
 	
@@ -482,14 +463,7 @@ public class AiZone
 	 * @return	le AiFloor correspondant
 	 */
 	AiFloor getFloor(Floor floor)
-	{	AiFloor result = null;
-		Iterator<AiFloor> it = floors.iterator();
-		while(it.hasNext() && result==null)
-		{	AiFloor f = it.next();
-			if(f.isSprite(floor))
-				result = f;			
-		}
-		return result;
+	{	return floors.get(floor);
 	}
 	
 	/**
@@ -499,7 +473,7 @@ public class AiZone
 	 * @param floor	le sol à rajouter à la liste
 	 */
 	void addFloor(AiFloor floor)
-	{	floors.add(floor);	
+	{	floors.put(floor.getSprite(),floor);	
 	}
 	
 	/** 
@@ -512,7 +486,7 @@ public class AiZone
 	 * @return	liste de tous les joueurs contenus dans cette zone
 	 */
 	public Collection<AiHero> getHeroes()
-	{	Collection<AiHero> result = Collections.unmodifiableCollection(heroes);
+	{	Collection<AiHero> result = Collections.unmodifiableCollection(heroes.values());
 		return result;	
 	}
 	
@@ -522,14 +496,7 @@ public class AiZone
 	 * @return	le AiHero correspondant
 	 */
 	AiHero getHero(Hero hero)
-	{	AiHero result = null;
-		Iterator<AiHero> it = heroes.iterator();
-		while(it.hasNext() && result==null)
-		{	AiHero h = it.next();
-			if(h.isSprite(hero))
-				result = h;			
-		}
-		return result;
+	{	return heroes.get(hero);
 	}
 	
 	/**
@@ -539,7 +506,7 @@ public class AiZone
 	 * @param hero	le personnage à rajouter à la liste
 	 */
 	void addHero(AiHero hero)
-	{	heroes.add(hero);	
+	{	heroes.put(hero.getSprite(),hero);	
 	}
 	
 	/** 
@@ -552,7 +519,7 @@ public class AiZone
 	 * @return	liste de tous les items contenus dans cette zone
 	 */
 	public Collection<AiItem> getItems()
-	{	Collection<AiItem> result = Collections.unmodifiableCollection(items);
+	{	Collection<AiItem> result = Collections.unmodifiableCollection(items.values());
 		return result;	
 	}
 	
@@ -562,14 +529,7 @@ public class AiZone
 	 * @return	le AiItem correspondant
 	 */
 	AiItem getItem(Item item)
-	{	AiItem result = null;
-		Iterator<AiItem> it = items.iterator();
-		while(it.hasNext() && result==null)
-		{	AiItem i = it.next();
-			if(i.isSprite(item))
-				result = i;			
-		}
-		return result;
+	{	return items.get(item);
 	}
 	
 	/**
@@ -579,7 +539,7 @@ public class AiZone
 	 * @param item	l'item à rajouter à la liste
 	 */
 	void addItem(AiItem item)
-	{	items.add(item);	
+	{	items.put(item.getSprite(),item);	
 	}
 	
 	/**
@@ -592,10 +552,10 @@ public class AiZone
 	 * @param <T>	type de la liste à traiter
 	 * @param list	liste à traiter
 	 */
-	private <T extends AiSprite<?>> void uncheckAll(ArrayList<T> list)
-	{	Iterator<T> it = list.iterator();
+	private <U extends Sprite, T extends AiSprite<?>> void uncheckAll(HashMap<U,T> list)
+	{	Iterator<Entry<U,T>> it = list.entrySet().iterator();
 		while(it.hasNext())
-		{	T temp = it.next();
+		{	T temp = it.next().getValue();
 			temp.uncheck();
 		}
 	}
@@ -606,10 +566,10 @@ public class AiZone
 	 * @param <T>	type de la liste à traiter
 	 * @param list	liste à traiter
 	 */
-	private <T extends AiSprite<?>> void removeUnchecked(ArrayList<T> list)
-	{	Iterator<T> it = list.iterator();
+	private <U extends Sprite, T extends AiSprite<?>> void removeUnchecked(HashMap<U,T> list)
+	{	Iterator<Entry<U,T>> it = list.entrySet().iterator();
 		while(it.hasNext())
-		{	T temp = it.next();
+		{	T temp = it.next().getValue();
 			if(!temp.isChecked())
 			{	Sprite sprite = temp.getSprite();
 				if(sprite.isEnded())
@@ -636,10 +596,10 @@ public class AiZone
 	 */
 	private void initOwnHero()
 	{	PredefinedColor color = player.getColor(); 
-		Iterator<AiHero> i = heroes.iterator();
+		Iterator<Entry<Hero,AiHero>> i = heroes.entrySet().iterator();
 		boolean found = false;
 		while(i.hasNext() && !found)
-		{	AiHero temp = i.next();
+		{	AiHero temp = i.next().getValue();
 			if(temp.getColor()==color)
 			{	ownHero = temp;
 				found = true;
