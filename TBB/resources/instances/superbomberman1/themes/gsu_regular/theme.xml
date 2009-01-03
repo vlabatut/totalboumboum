@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <theme 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
-		xsi:noNamespaceSchemaLocation="..\..\..\..\schemas\theme.xsd" >
+		xsi:noNamespaceSchemaLocation="../../../../schemas/theme.xsd" >
 	<floors folder="floors">
 		<floor name="regular" folder="regular"/>
 		<floor name="00_01" folder="00_01"/>
