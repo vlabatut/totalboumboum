@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <level 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
-		xsi:noNamespaceSchemaLocation="..\..\..\schemas\level.xsd" >
+		xsi:noNamespaceSchemaLocation="../../../schemas/level.xsd" >
 
 	<title value="Bonus Zone #1" />
 	<author value="Vincent Labatut" />
