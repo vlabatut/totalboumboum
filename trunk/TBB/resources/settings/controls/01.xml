@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<controls xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="..\..\..\resources\schemas\controls.xsd">
+<controls xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../resources/schemas/controls.xsd">
 	<event name="DROPBOMB" autofire="true">
 		<on key="VK_Q" />
 		<off key="VK_Q" />

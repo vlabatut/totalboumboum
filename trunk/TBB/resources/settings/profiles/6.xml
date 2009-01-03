@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <profile
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
-	xsi:noNamespaceSchemaLocation="..\..\schemas\profile.xsd">
+	xsi:noNamespaceSchemaLocation="../../schemas/profile.xsd">
 	
  	<general name="Çamaş+Demirbaş"  /> 
  	<ai name="camasdemirbas" pack="tournament200708" />
