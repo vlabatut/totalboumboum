@@ -4,7 +4,7 @@
 	<settings>
 		<levels randomOrder="false" />
 		<players randomLocation="true" />
-		<limits points="0" rounds="5" time="60000" />
+		<limits points="0" rounds="10" time="60000" />
 		<points share="true" draw="none">
 			<value rank="1" points="8" />
 			<value rank="2" points="4" />
@@ -14,6 +14,10 @@
 		</points>
 	</settings>
 	<players>
+		<player file="18" color="orange" controls="2" spritePack="superbomberman5" spriteFolder="assistantpirate" />
+		<player file="1" color="cyan" controls="1" spritePack="superbomberman5" spriteFolder="assistantpirate" />
+		<player file="33" color="yellow" controls="0" spritePack="superbomberman5" spriteFolder="shirobon" />
+		<player file="30" color="red" controls="0" spritePack="superbomberman5" spriteFolder="shirobon" />
 	</players>
 	<levels>
 		<level pack="gsuTournament" folder="carrefour" />
