@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <tournament
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
-	xsi:noNamespaceSchemaLocation="..\..\..\schemas\tournament.xsd">
+	xsi:noNamespaceSchemaLocation="../../../schemas/tournament.xsd">
 	
 	<general name="Tournament-séquence loooong"/>
 

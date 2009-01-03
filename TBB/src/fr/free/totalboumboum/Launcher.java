@@ -345,6 +345,14 @@ public class Launcher
 	 * de définir des fonctions spécifiques à chaque fois.
 	 */
 	
+	/*
+	 * TODO type de tournoi plus adapté au réseau :
+	 * des joueurs jouent un match pendant que d'autres attendent 
+	 * à la fin du match, les n derniers joueurs sont relégués dans la salle d'attente
+	 * n joueurs qui attendaient sont qualifiés.
+	 * un classement permet de déterminer le leader provisoire
+	 */
+	
 // **********************************************************
 // BOMBES
 // **********************************************************
@@ -516,14 +524,6 @@ public class Launcher
 	 */
 	
 	/*
-	 * TODO type de tournoi plus adapté au réseau :
-	 * des joueurs jouent un match pendant que d'autres attendent 
-	 * à la fin du match, les n derniers joueurs sont relégués dans la salle d'attente
-	 * n joueurs qui attendaient sont qualifiés.
-	 * un classement permet de déterminer le leader provisoire
-	 */
-	
-	/*
 	 * TODO sprite du bad bomberman dans SBM1
 	 * éventuellement les autres persos du monde avec le ring
 	 */
@@ -554,15 +554,6 @@ public class Launcher
 	 * TODO au chargement du tournoi, nécessaire de déterminer ce nombre de joueurs max
 	 * de même pour match et round
 	 */	
-	
-// **********************************************************
-// PERSOS
-// **********************************************************
-
-	/* TODO
-	 * 
-	 * un sprite de perso doit être défini dans toutes les 16 couleurs possibles
-	 */
 	
 // **********************************************************
 // ITEMS
@@ -851,6 +842,7 @@ public class Launcher
 	 * - nouveauté : niveaux spéciaux pour le tournoi
 	 * - correction : bug dans l'API d'IA dans la méthode renvoyant la direction entre deux cases : le cas du niveau circulaire n'était pas pris en compte
 	 * - correction : bug dans la GUI lors de l'initialisation d'un match rapide (limite de confrontations)
+	 * - modification : optimisation de l'API IA : les ArrayLists de sprites ont été remplacées par des HashMaps
 	 * 
 	 * *******************************************************
 	 * *********************** A FAIRE ***********************
