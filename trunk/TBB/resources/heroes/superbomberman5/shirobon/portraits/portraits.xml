@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <portraits xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
-		xsi:noNamespaceSchemaLocation="..\..\..\..\schemas\portraits.xsd">
+		xsi:noNamespaceSchemaLocation="../../../../schemas/portraits.xsd">
 	
 	<colors folder="colormaps" >
 		<colormap name="black" file="black" />
