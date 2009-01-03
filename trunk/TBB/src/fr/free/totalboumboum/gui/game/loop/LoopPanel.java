@@ -22,6 +22,7 @@ package fr.free.totalboumboum.gui.game.loop;
  */
 
 import java.awt.Canvas;
+import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.GraphicsConfiguration;
@@ -47,6 +48,7 @@ public class LoopPanel extends SimpleMenuPanel implements LoopRenderPanel
 {	private static final long serialVersionUID = 1L;
 	private Loop loop;
 	private BufferedImage backgroundImage;
+	private Color backgroundColor;
 	// 0=normal 1=VolatileImage 2=BufferStrategy
 	// apparently BuffereStrategy doesn't work when the canvas is in a swing container
 	private int mode = 1;
@@ -58,7 +60,9 @@ public class LoopPanel extends SimpleMenuPanel implements LoopRenderPanel
     	setIgnoreRepaint(true);
 
 		// background image
-		backgroundImage = GuiConfiguration.getMiscConfiguration().getDarkBackground();	
+		backgroundImage = GuiConfiguration.getMiscConfiguration().getDarkBackground();
+		backgroundColor = Configuration.getVideoConfiguration().getBorderColor();
+
 /*
 		float[] scales = { 0.5f, 0.5f, 0.5f, 1f };
 		float[] offsets = new float[4];
@@ -134,7 +138,13 @@ public class LoopPanel extends SimpleMenuPanel implements LoopRenderPanel
 					g = bufferStrategy.getDrawGraphics();
 
 				// draw stuff in the buffer
-				g.drawImage(backgroundImage,0,0,null);
+				if(backgroundColor==null)
+					g.drawImage(backgroundImage,0,0,null);
+				else
+				{	g.setColor(backgroundColor);
+					Dimension dim = Configuration.getVideoConfiguration().getPanelDimension();
+					g.fillRect(0,0,dim.width,dim.height);				
+				}
 				loop.drawLevel(g);
 				g.dispose();
 

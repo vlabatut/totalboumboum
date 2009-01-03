@@ -62,7 +62,10 @@ if(ff==null)
 	}
 	
 	public Block makeBlock(String name)
-	{	Block result = blocks.get(name).makeSprite();
+	{	BlockFactory bf = blocks.get(name);
+if(bf==null)
+	System.out.println(name);
+		Block result = bf.makeSprite();
 //NOTE dans ce type de méthode, il faut tester si le nom passé en paramètre a bien été trouvé !	
 		result.initGesture();
 		return result;

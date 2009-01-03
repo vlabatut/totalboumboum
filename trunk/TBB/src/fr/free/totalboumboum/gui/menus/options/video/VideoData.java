@@ -129,16 +129,18 @@ public class VideoData extends EntitledDataPanel implements MouseListener
 				// name
 				{	ln.setLabelMaxWidth(col,tWidth);
 					ln.setLabelPreferredWidth(col,tWidth);
-					ln.setLabelKey(col,GuiKeys.MENU_OPTIONS_VIDEO_LINE_BORDER_COLOR,false);
+					ln.setLabelKey(col,GuiKeys.MENU_OPTIONS_VIDEO_LINE_BORDER_COLOR_TITLE,false);
 					col++;
 				}
 				// value
 				{	String text = "Black";
 //						int txtWidth = GuiTools.getPixelWidth(ln.getLineFontSize(),text);
-					String tooltip = GuiConfiguration.getMiscConfiguration().getLanguage().getText(GuiKeys.MENU_OPTIONS_VIDEO_LINE_BORDER_COLOR+GuiKeys.TOOLTIP); 
+					String tooltip = GuiConfiguration.getMiscConfiguration().getLanguage().getText(GuiKeys.MENU_OPTIONS_VIDEO_LINE_BORDER_COLOR_TITLE+GuiKeys.TOOLTIP); 
 //						ln.setLabelMaxWidth(col,txtWidth);
 					ln.setLabelMaxWidth(col,Integer.MAX_VALUE);
 					ln.setLabelText(col,text,tooltip);
+					setBorderColor();
+					ln.getLabel(col).addMouseListener(this);
 					col++;
 				}
 				Color bg = GuiTools.COLOR_TABLE_REGULAR_BACKGROUND;
@@ -232,6 +234,18 @@ public class VideoData extends EntitledDataPanel implements MouseListener
 		
 	}
 	
+	private void setBorderColor()
+	{	Color color = videoConfiguration.getBorderColor();
+		String text;
+		if(color==null)
+			text = GuiConfiguration.getMiscConfiguration().getLanguage().getText(GuiKeys.MENU_OPTIONS_VIDEO_LINE_BORDER_COLOR_NONE);
+		else
+			text = GuiConfiguration.getMiscConfiguration().getLanguage().getText(GuiKeys.MENU_OPTIONS_VIDEO_LINE_BORDER_COLOR_BLACK);
+		String tooltip = GuiConfiguration.getMiscConfiguration().getLanguage().getText(GuiKeys.MENU_OPTIONS_VIDEO_LINE_BORDER_COLOR_TITLE+GuiKeys.TOOLTIP);
+		optionsPanel.getLine(LINE_BORDER).setLabelText(1,text,tooltip);
+		
+	}
+	
 	@Override
 	public void refresh()
 	{	// nothing to do here
@@ -296,6 +310,13 @@ public class VideoData extends EntitledDataPanel implements MouseListener
 				break;
 			// border
 			case LINE_BORDER:
+				Color color = videoConfiguration.getBorderColor();
+				if(color==null)
+					color = Color.BLACK;
+				else
+					color = null;
+				videoConfiguration.setBorderColor(color);
+				setBorderColor();
 				break;
 			// smooth graphics
 			case LINE_SMOOTH:

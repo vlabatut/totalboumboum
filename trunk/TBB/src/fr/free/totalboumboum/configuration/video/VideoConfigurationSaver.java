@@ -83,6 +83,7 @@ public class VideoConfigurationSaver
 	{	// init
 		Element result = new Element(XmlTools.ELT_BORDER);
 		Color color = videoConfiguration.getBorderColor();
+/*		
 		// red
 		String red = Integer.toString(color.getRed());
 		result.setAttribute(XmlTools.ATT_RED,red);
@@ -92,6 +93,9 @@ public class VideoConfigurationSaver
 		// blue
 		String blue = Integer.toString(color.getBlue());
 		result.setAttribute(XmlTools.ATT_BLUE,blue);
+*/
+		if(color!=null)
+			result.setAttribute(XmlTools.ATT_VALUE,"black");
 		//
 		return result;
 	}

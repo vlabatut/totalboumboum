@@ -845,8 +845,10 @@ public class Launcher
 	 * - nouveauté : autosave & autoload dans les options
 	 * - nouveauté : enregistrement automatique
 	 * - nouveauté : chargement automatique
-	 * 
+	 * - nouveauté : choix effectif du fond d'écran au cours du jeu
 	 * - nouveauté : possibilité de créer un nouveau slot d'enregistrement
+	 * - nouveauté : thème spécial pour le tournoi, avec logo GSÜ au sol
+	 * - nouveauté : niveaux spéciaux pour le tournoi
 	 * 
 	 * *******************************************************
 	 * *********************** A FAIRE ***********************

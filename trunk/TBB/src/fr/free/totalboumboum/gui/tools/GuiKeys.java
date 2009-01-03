@@ -389,7 +389,6 @@ public class GuiKeys
 		/* VIDEO */
 		public static final String MENU_OPTIONS_VIDEO_TITLE = "MenuOptionsVideoTitle";
 			/* LINE */
-			public static final String MENU_OPTIONS_VIDEO_LINE_BORDER_COLOR = "MenuOptionsVideoLineBorderColor";
 			public static final String MENU_OPTIONS_VIDEO_LINE_DISABLED = "MenuOptionsVideoLineDisabled";
 			public static final String MENU_OPTIONS_VIDEO_LINE_ENABLED = "MenuOptionsVideoLineEnabled";
 			public static final String MENU_OPTIONS_VIDEO_LINE_FULL_SCREEN = "MenuOptionsVideoLineFullScreen";
@@ -397,6 +396,11 @@ public class GuiKeys
 			public static final String MENU_OPTIONS_VIDEO_LINE_PANEL_DIMENSION = "MenuOptionsVideoLinePanelDimension";
 			public static final String MENU_OPTIONS_VIDEO_LINE_PLUS = "MenuOptionsVideoLinePlus";
 			public static final String MENU_OPTIONS_VIDEO_LINE_SMOOTH_GRAPHICS = "MenuOptionsVideoLineSmoothGraphics";
+				/* COLOR */
+			public static final String MENU_OPTIONS_VIDEO_LINE_BORDER_COLOR = "MenuOptionsVideoLineBorderColor";
+				public static final String MENU_OPTIONS_VIDEO_LINE_BORDER_COLOR_BLACK = MENU_OPTIONS_VIDEO_LINE_BORDER_COLOR+BLACK;
+				public static final String MENU_OPTIONS_VIDEO_LINE_BORDER_COLOR_NONE = MENU_OPTIONS_VIDEO_LINE_BORDER_COLOR+NONE;
+				public static final String MENU_OPTIONS_VIDEO_LINE_BORDER_COLOR_TITLE = MENU_OPTIONS_VIDEO_LINE_BORDER_COLOR+TITLE;
 			
 	/* PROFILES */
 		/* BUTTON */

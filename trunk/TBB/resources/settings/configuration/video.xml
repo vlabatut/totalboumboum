@@ -3,6 +3,6 @@
 	<fullScreen value="false" />
 	<smoothGraphics value="true" />
 	<panelDimension width="1024" height="768" />
-	<border red="0" green="0" blue="0" />
+	<border value="black" />
 </video>
 

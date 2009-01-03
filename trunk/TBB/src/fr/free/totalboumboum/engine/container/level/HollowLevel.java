@@ -237,8 +237,10 @@ public class HollowLevel implements Serializable
 		double tileDimension = level.getTileDimension();
 		double visibleLeftX = posX - visibleWidth*tileDimension/2/* + tileDimension/2*/;
 		double visibleUpY = posY - visibleHeight*tileDimension/2 /*+ tileDimension/2*/;
-		double globalLeftX = posX - globalWidth*tileDimension/2;
-		double globalUpY = posY - globalHeight*tileDimension/2;
+//		double globalLeftX = posX - globalWidth*tileDimension/2;
+//		double globalUpY = posY - globalHeight*tileDimension/2;
+		double globalLeftX = posX - (visibleLeftCol+visibleWidth/2.0)*tileDimension;
+		double globalUpY = posY - (visibleUpLine+visibleHeight/2.0)*tileDimension;
     	level.setTilePositions(globalWidth,globalHeight,globalLeftX,globalUpY);
 		
 //NOTE il y a une ligne horizontale dans les borders au dessus du niveau (forcer le zoomFactor à 1 pour la faire apparaitre)		
