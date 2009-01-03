@@ -295,7 +295,7 @@ public class HollowLevel implements Serializable
     public void loadTheme() throws ParserConfigurationException, SAXException, IOException, ClassNotFoundException
     {	// theme
     	Theme theme = ThemeLoader.loadTheme(themePath,level);
-		level.setTheme(theme);
+//		level.setTheme(theme);
 		// init zone
 		Tile[][] matrix = level.getMatrix();
 		Itemset itemset = level.getItemset();
