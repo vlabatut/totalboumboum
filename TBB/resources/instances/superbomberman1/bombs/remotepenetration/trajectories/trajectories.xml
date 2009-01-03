@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <trajectories
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
-	xsi:noNamespaceSchemaLocation="..\..\..\..\..\schemas\trajectories.xsd">
+	xsi:noNamespaceSchemaLocation="../../../../../schemas/trajectories.xsd">
 
 	<gesture name="bouncing" repeat="false">
 		<direction name="down">
