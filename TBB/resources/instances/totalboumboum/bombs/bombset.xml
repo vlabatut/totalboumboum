@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <bombset
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
-	xsi:noNamespaceSchemaLocation="..\..\..\xml\schemas\bombsets.xsd">
+	xsi:noNamespaceSchemaLocation="../../../xml/schemas/bombsets.xsd">
 
 	<bomb name="remotepenetration" folder="remotepenetration">
 		<ability name="ABLT_DROP_BOMB" kind="penetration" />
