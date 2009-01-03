@@ -75,13 +75,21 @@ public class VideoConfigurationLoader
 	}
 	
 	private static void loadBorderElement(Element root, VideoConfiguration result)
-	{	String value = root.getAttribute(XmlTools.ATT_RED).getValue().trim();
+	{	
+/*		
+		String value = root.getAttribute(XmlTools.ATT_RED).getValue().trim();
 		int red = Integer.parseInt(value);
 		value = root.getAttribute(XmlTools.ATT_GREEN).getValue().trim();
 		int green = Integer.parseInt(value);
 		value = root.getAttribute(XmlTools.ATT_BLUE).getValue().trim();
 		int blue = Integer.parseInt(value);
 		Color borderColor = new Color(red,green,blue);
+		result.setBorderColor(borderColor);
+*/		
+		Color borderColor = null;
+		String value = root.getAttributeValue(XmlTools.ATT_VALUE);
+		if(value!=null)
+			borderColor = Color.BLACK;
 		result.setBorderColor(borderColor);
 	}
 	
