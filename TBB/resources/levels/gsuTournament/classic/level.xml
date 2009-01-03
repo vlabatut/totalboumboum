@@ -2,17 +2,17 @@
 <level 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
 		xsi:noNamespaceSchemaLocation="..\..\..\schemas\level.xsd" >
 
-	<title value="Items Zone" />
+	<title value="Regular Zone" />
 	<author value="Vincent Labatut" />
-	<source value="Super Bomberman 1" />
+	<source value="Bomberman" />
 	<preview file="preview.jpg" />
 
 	<instance name="superbomberman1" />
 	<theme name="gsu_regular"/>
 
 	<globalDimension width="23" height="15" />
-	<visibleDimension width="15" height="13" />
-	<visiblePosition leftCol="4" upLine="2" />
+	<visibleDimension width="15" height="15" />
+	<visiblePosition leftCol="4" upLine="0" />
 	<display forceAll="true" maximize="true" />
 	
 </level>

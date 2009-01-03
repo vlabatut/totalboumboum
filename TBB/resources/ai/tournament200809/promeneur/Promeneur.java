@@ -99,7 +99,7 @@ public class Promeneur extends ArtificialIntelligence
 	 */
 	private void pickNextTile() throws StopRequestException
 	{	checkInterruption(); //APPEL OBLIGATOIRE
-	
+		
 		// liste des cases voisines accessibles	
 		ArrayList<AiTile> tiles = getClearNeighbours(currentTile);
 		// on sort de la liste la case d'où l'on vient (pour éviter de repasser au même endroit)

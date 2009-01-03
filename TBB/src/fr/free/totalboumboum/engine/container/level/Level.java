@@ -34,7 +34,6 @@ import java.util.Iterator;
 import fr.free.totalboumboum.configuration.Configuration;
 import fr.free.totalboumboum.engine.container.bombset.Bombset;
 import fr.free.totalboumboum.engine.container.itemset.Itemset;
-import fr.free.totalboumboum.engine.container.theme.Theme;
 import fr.free.totalboumboum.engine.container.tile.Tile;
 import fr.free.totalboumboum.engine.content.feature.Direction;
 import fr.free.totalboumboum.engine.content.sprite.Sprite;
@@ -77,6 +76,9 @@ public class Level
     /////////////////////////////////////////////////////////////////
 	// THEME				/////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
+/*
+ TODO semblait inutile, dc désactivé 
+ (également dans HollowLevel.loadTheme() et Level.finish())
 	private Theme theme;
 
 	public void setTheme(Theme theme)
@@ -85,6 +87,7 @@ public class Level
 	public Theme getTheme()
 	{	return theme;
 	}
+*/
 
 	/////////////////////////////////////////////////////////////////
 	// SIZE & LOCATION in TILES		/////////////////////////////////
@@ -545,8 +548,8 @@ public class Level
 				it.remove();
 			}
 			// theme
-			theme.finish();
-			theme = null;
+//			theme.finish();
+//			theme = null;
 		}
 	}
 }

@@ -257,7 +257,7 @@ public class QuickMatchMenu extends InnerMenuPanel implements DataPanelListener
 			// round limit
 			{	int roundsLimit = quickMatchConfiguration.getLimitRounds();
 				if(roundsLimit>0)
-				{	MatchLimit limit = new LimitConfrontation(roundsLimit,ComparatorCode.GREATER,pointsProcessor);
+				{	MatchLimit limit = new LimitConfrontation(roundsLimit,ComparatorCode.GREATEREQ,pointsProcessor);
 					limits.addLimit(limit);
 				}
 			}

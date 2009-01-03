@@ -849,6 +849,8 @@ public class Launcher
 	 * - nouveauté : possibilité de créer un nouveau slot d'enregistrement
 	 * - nouveauté : thème spécial pour le tournoi, avec logo GSÜ au sol
 	 * - nouveauté : niveaux spéciaux pour le tournoi
+	 * - correction : bug dans l'API d'IA dans la méthode renvoyant la direction entre deux cases : le cas du niveau circulaire n'était pas pris en compte
+	 * - correction : bug dans la GUI lors de l'initialisation d'un match rapide (limite de confrontations)
 	 * 
 	 * *******************************************************
 	 * *********************** A FAIRE ***********************
