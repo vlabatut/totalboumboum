@@ -291,19 +291,39 @@ public class AiZone
 	 * Cette fonction peut être utile quand on veut savoir dans quelle direction
 	 * il faut se déplacer pour aller de source à target.
 	 * <p>
-	 * ATTENTION : si les deux cases ne sont pas des voisines directes (ie. ayant un coté commun),
+	 * ATTENTION 1 : si les deux cases ne sont pas des voisines directes (ie. ayant un coté commun),
 	 * il est possible que cette méthode renvoie une direction composite,
 	 * c'est à dire : DOWNLEFT, DOWNRIGHT, UPLEFT ou UPRIGHT. Référez-vous à 
 	 * la classe Direction pour plus d'informations sur ces valeurs. 
+	 * <p>
+	 * ATTENTION 2 : comme les niveaux sont circulaires, il y a toujours deux directions possibles.
+	 * Cette méthode renvoie la direction du plus court chemin (sans considérer les éventuels obstacles).
+	 * Par exemple, pour les cases (2,0) et (2,11) d'un niveau de 12 cases de largeur, le résultat sera
+	 * RIGHT, car LEFT permet également d'atteindre la case, mais en parcourant un chemin plus long. 
 	 * 
 	 * @param source	case de référence
 	 * @param target	case dont on veut connaitre la direction
 	 * @return	la direction de target par rapport à source
 	 */
 	public Direction getDirection(AiTile source, AiTile target)
-	{	int dx = target.getCol()-source.getCol();
+	{	// differences
+		int dx = target.getCol()-source.getCol();
 		int dy = target.getLine()-source.getLine();
-		Direction result = Direction.getCompositeFromDouble(dx,dy);
+		// direction
+		Direction temp = Direction.getCompositeFromDouble(dx,dy);
+		Direction tempX = temp.getHorizontalPrimary();
+		Direction tempY = temp.getVerticalPrimary();
+		// distances
+		int distDirX = Math.abs(dx);
+		int distIndirX = getWidth()-distDirX;
+		if(distDirX>distIndirX)
+			tempX = tempX.getOpposite();
+		int distDirY = Math.abs(dy);
+		int distIndirY = getHeigh()-distDirY;
+		if(distDirY>distIndirY)
+			tempY = tempY.getOpposite();
+		// result
+		Direction result = Direction.getComposite(tempX,tempY);
 		return result;
 	}
 	

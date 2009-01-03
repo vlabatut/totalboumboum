@@ -99,7 +99,7 @@ public enum Direction
 	
 	public Direction getHorizontalPrimary()
 	{	Direction result;
-		if(isPrimary())
+		if(isHorizontal())
 			result = this;
 		else if(this==DOWNRIGHT)
 			result = RIGHT;
@@ -116,7 +116,7 @@ public enum Direction
 
 	public Direction getVerticalPrimary()
 	{	Direction result;
-		if(isPrimary())
+		if(isVertical())
 			result = this;
 		else if(this==DOWNRIGHT)
 			result = DOWN;
