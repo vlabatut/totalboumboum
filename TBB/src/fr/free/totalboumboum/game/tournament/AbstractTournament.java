@@ -40,21 +40,13 @@ public abstract class AbstractTournament implements StatisticHolder, Serializabl
 {	private static final long serialVersionUID = 1L;
 
 	/////////////////////////////////////////////////////////////////
-	// GAME		/////////////////////////////////////////////
+	// GAME				/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	protected boolean begun = false;
-	private boolean tournamentOver = false;
 	
 	public abstract void init();
 	public abstract void progress();
 	public abstract void finish();
-	
-	public boolean isOver()
-	{	return tournamentOver;
-	}
-	public void setOver(boolean tournamentOver)
-	{	this.tournamentOver = tournamentOver;
-	}
 	
 	public void cancel()
 	{	// TODO à compléter (sauver stats?)
@@ -65,6 +57,18 @@ public abstract class AbstractTournament implements StatisticHolder, Serializabl
 	{	return begun;	
 	}
 
+	/////////////////////////////////////////////////////////////////
+	// OVER				/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	private boolean tournamentOver = false;
+
+	public boolean isOver()
+	{	return tournamentOver;
+	}
+	public void setOver(boolean tournamentOver)
+	{	this.tournamentOver = tournamentOver;
+	}
+	
 	/////////////////////////////////////////////////////////////////
 	// MATCHES		/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////

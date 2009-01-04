@@ -2,7 +2,10 @@ package fr.free.totalboumboum.game.tournament.cup;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Set;
+import java.util.TreeSet;
 
+import fr.free.totalboumboum.configuration.GameConstants;
 import fr.free.totalboumboum.configuration.profile.Profile;
 import fr.free.totalboumboum.game.match.Match;
 
@@ -40,7 +43,14 @@ public class CupPart implements Serializable
 	/////////////////////////////////////////////////////////////////
 	public void init()
 	{	initProfiles();
-		match.init(profiles);
+		currentMatch = match;
+		currentMatch.init(profiles);
+	}
+	
+	public void progress()
+	{	currentMatch = tieBreak.getMatch();
+//TODO only tied profiles, not necesserally all of them		
+		currentMatch.init(profiles);
 	}
 	
 	public void finish()
@@ -49,6 +59,27 @@ public class CupPart implements Serializable
 		match = null;
 		tieBreak = null;
 		players.clear();
+	}
+
+	public void matchOver()
+	{	if(currentMatch==match)
+		{	if(noTie())
+				setOver(true);
+		}
+		else
+			setOver(true);
+	}
+
+	/////////////////////////////////////////////////////////////////
+	// OVER				/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	private boolean partOver = false;
+
+	public boolean isOver()
+	{	return partOver;
+	}
+	public void setOver(boolean partOver)
+	{	this.partOver = partOver;
 	}
 	
 	/////////////////////////////////////////////////////////////////
@@ -72,6 +103,7 @@ public class CupPart implements Serializable
 	// MATCH			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	private Match match;
+	private Match currentMatch;
 	
 	public void setMatch(Match match)
 	{	this.match = match;
@@ -79,6 +111,10 @@ public class CupPart implements Serializable
 	
 	public Match getMatch()
 	{	return match;
+	}
+	
+	public Match getCurrentMatch()
+	{	return currentMatch;
 	}
 	
 	/////////////////////////////////////////////////////////////////
@@ -137,6 +173,7 @@ public class CupPart implements Serializable
 	/////////////////////////////////////////////////////////////////
 	private ArrayList<Profile> profiles;
 	private final ArrayList<CupPlayer> players = new ArrayList<CupPlayer>();
+	private Set<Integer> allowedPlayerNumbers = null;
 	
 	public ArrayList<CupPlayer> getPlayers()
 	{	return players;
@@ -164,4 +201,48 @@ public class CupPart implements Serializable
 			}
 		}		
 	}
+	
+	public boolean isPlayerNeeded(int number)
+	{	boolean result;
+		if(allowedPlayerNumbers==null)
+			getAllowedPlayerNumbers();
+		
+		
+		return result;
+	}
+	
+	public Set<Integer> getAllowedPlayerNumbers()
+	{	if(allowedPlayerNumbers==null)
+		{	allowedPlayerNumbers = new TreeSet<Integer>();
+			int legNumber = leg.getNumber();
+			int legCount = getTournament().getLegs().size();
+			// last leg
+			if(legNumber==legCount)
+			{	Set<Integer> temp = match.getAllowedPlayerNumbers();
+				int max = players.size();
+				for(int i=GameConstants.MAX_PROFILES_COUNT;i>max;i--)
+					temp.remove(i);				
+			}
+			// other leg
+			else
+			{	
+				
+			}
+		
+		}
+		return allowedPlayerNumbers;
+	
+	
+	
+	
+		TreeSet<Integer> result = new TreeSet<Integer>();
+		for(int i=1;i<=GameConstants.MAX_PROFILES_COUNT;i++)
+			result.add(i);
+		for(Match m:matches)
+		{	Set<Integer> temp = m.getAllowedPlayerNumbers();
+			result.retainAll(temp);			
+		}
+		return result;			
+	}
+
 }
