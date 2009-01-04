@@ -22,14 +22,57 @@ package fr.free.totalboumboum.game.tournament.cup;
  */
 
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Collections;
+import java.util.GregorianCalendar;
+import java.util.Random;
 import java.util.Set;
 
 import fr.free.totalboumboum.game.match.Match;
+import fr.free.totalboumboum.game.statistics.StatisticTournament;
 import fr.free.totalboumboum.game.tournament.AbstractTournament;
 
 public class CupTournament extends AbstractTournament
 {	private static final long serialVersionUID = 1L;
 
+	/////////////////////////////////////////////////////////////////
+	// GAME				/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	@Override
+	public void init()
+	{	begun = true;
+	
+		// are players in random order ?
+		if(randomizePlayers)
+			randomizePlayers();
+		
+		// are legs in random order ?
+		if(randomizeLegs)
+			randomizeLegs();
+		
+		// NOTE vérifier si le nombre de joueurs sélectionnés correspond
+		currentIndex = 0;
+		stats = new StatisticTournament(this);
+		stats.initStartDate();
+	}
+
+	@Override
+	public void progress()
+	{	if(!isOver())
+		{	currentLeg = legs.get(currentIndex);
+			currentIndex++;
+			currentLeg.init();
+		}
+	}
+	
+	@Override
+	public void finish()
+	{	// legs
+//		for(CupLeg leg:legs)
+//			leg.finish();
+		legs.clear();
+		currentLeg = null;
+	}
 	/////////////////////////////////////////////////////////////////
 	// PLAYERS			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
@@ -41,6 +84,13 @@ public class CupTournament extends AbstractTournament
 
 	public void setRandomizePlayers(boolean randomizePlayers)
 	{	this.randomizePlayers = randomizePlayers;
+	}
+
+	private void randomizePlayers()
+	{	Calendar cal = new GregorianCalendar();
+		long seed = cal.getTimeInMillis();
+		Random random = new Random(seed);
+		Collections.shuffle(players,random);
 	}
 
 	@Override
@@ -64,16 +114,40 @@ public class CupTournament extends AbstractTournament
 	// LEGS				/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	private final ArrayList<CupLeg> legs = new ArrayList<CupLeg>();
+	private boolean randomizeLegs;
+	private int currentIndex;
+	private CupLeg currentLeg;
 	
 	public ArrayList<CupLeg> getLegs()
 	{	return legs;	
+	}
+	
+	public CupLeg getLeg(int index)
+	{	return legs.get(index);	
 	}
 	
 	public void addLeg(CupLeg leg)
 	{	legs.add(leg);	
 	}
 	
+	public CupLeg getCurrentLeg()
+	{	return currentLeg;	
+	}
 	
+	private void randomizeLegs()
+	{	Calendar cal = new GregorianCalendar();
+		long seed = cal.getTimeInMillis();
+		Random random = new Random(seed);
+		Collections.shuffle(legs,random);
+	}
+
+	public boolean getRandomizeLegs()
+	{	return randomizeLegs;
+	}
+	public void setRandomizeLegs(boolean randomizeLegs)
+	{	this.randomizeLegs = randomizeLegs;
+	}
+
 	/////////////////////////////////////////////////////////////////
 	// MATCH			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
@@ -91,34 +165,4 @@ public class CupTournament extends AbstractTournament
 		
 	}
 
-	/////////////////////////////////////////////////////////////////
-	// GAME				/////////////////////////////////////////////
-	/////////////////////////////////////////////////////////////////
-	@Override
-	public void init()
-	{
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public boolean isReady()
-	{
-		// TODO Auto-generated method stub
-		return false;
-	}
-
-	@Override
-	public void progress()
-	{
-		// TODO Auto-generated method stub
-		
-	}	
-
-	@Override
-	public void finish()
-	{
-		// TODO Auto-generated method stub
-		
-	}
 }

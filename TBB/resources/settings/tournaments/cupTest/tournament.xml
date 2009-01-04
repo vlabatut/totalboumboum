@@ -13,9 +13,9 @@
  	
 	<author value="Vincent Labatut" />
 
-	<cup randomizePlayers="true">
-		<leg number="1" >
-			<part name="Quart-de-finale 1" number="1">
+	<cup randomizePlayers="true" randomizeLegs="false">
+		<leg number="0" randomizeParts="false" >
+			<part name="Quart-de-finale 1" number="0">
 				<match local="false" name="matchLong" />
 				<tieBreak>
 					<rankings>
@@ -33,7 +33,7 @@
 					<player part="0" rank="4"/>
 				</players>
 			</part>
-			<part name="Quart-de-finale 2" number="2">
+			<part name="Quart-de-finale 2" number="1">
 				<match local="false" name="matchLong" />
 				<tieBreak>
 					<rankings>
@@ -51,7 +51,7 @@
 					<player part="0" rank="8"/>
 				</players>
 			</part>
-			<part name="Quart-de-finale 3" number="3">
+			<part name="Quart-de-finale 3" number="2">
 				<match local="false" name="matchLong" />
 				<tieBreak>
 					<rankings>
@@ -69,7 +69,7 @@
 					<player part="0" rank="12"/>
 				</players>
 			</part>
-			<part name="Quart-de-finale 4" number="4">
+			<part name="Quart-de-finale 4" number="3">
 				<match local="false" name="matchLong" />
 				<tieBreak>
 					<rankings>
@@ -89,8 +89,8 @@
 			</part>
 		</leg>
 		
-		<leg number="2" >
-			<part name="Classement 1" number="1">
+		<leg number="1" >
+			<part name="Classement 1" number="0">
 				<match local="false" name="matchLong" />
 				<tieBreak>
 					<rankings>
@@ -108,7 +108,7 @@
 					<player part="4" rank="4"/>
 				</players>
 			</part>
-			<part name="Classement 2" number="2">
+			<part name="Classement 2" number="1">
 				<match local="false" name="matchLong" />
 				<tieBreak>
 					<rankings>
@@ -126,7 +126,7 @@
 					<player part="4" rank="3"/>
 				</players>
 			</part>
-			<part name="Demi-finale 1" number="3">
+			<part name="Demi-finale 1" number="2">
 				<match local="false" name="matchLong" />
 				<tieBreak>
 					<rankings>
@@ -144,7 +144,7 @@
 					<player part="4" rank="2"/>
 				</players>
 			</part>
-			<part name="Demi-finale 2" number="4">
+			<part name="Demi-finale 2" number="3">
 				<match local="false" name="matchLong" />
 				<tieBreak>
 					<rankings>
@@ -164,8 +164,8 @@
 			</part>
 		</leg>
 
-		<leg number="3" >
-			<part name="Classement 3" number="1" rank="4">
+		<leg number="2" >
+			<part name="Classement 4" number="1" rank="3">
 				<match local="false" name="matchLong" />
 				<tieBreak>
 					<rankings>
@@ -183,7 +183,7 @@
 					<player part="4" rank="4"/>
 				</players>
 			</part>
-			<part name="Classement 4" number="2" rank="3">
+			<part name="Classement 3" number="2" rank="2">
 				<match local="false" name="matchLong" />
 				<tieBreak>
 					<rankings>
@@ -201,7 +201,7 @@
 					<player part="4" rank="2"/>
 				</players>
 			</part>
-			<part name="Petite finale" number="3" rank="2">
+			<part name="Petite finale" number="3" rank="1">
 				<match local="false" name="matchLong" />
 				<tieBreak>
 					<rankings>
@@ -219,7 +219,7 @@
 					<player part="2" rank="4"/>
 				</players>
 			</part>
-			<part name="Finale" number="4" rank="1">
+			<part name="Finale" number="4" rank="0">
 				<match local="false" name="matchLong" />
 				<tieBreak>
 					<rankings>

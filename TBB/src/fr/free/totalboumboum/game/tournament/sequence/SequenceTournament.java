@@ -60,7 +60,7 @@ public class SequenceTournament extends AbstractTournament
 	{	begun = true;
 		
 		// are matches in random order ?
-		if(randomOrder)
+		if(randomizeMatches)
 			randomizeMatches();
 		
 		// NOTE vérifier si le nombre de joueurs sélectionnés correspond
@@ -69,13 +69,6 @@ public class SequenceTournament extends AbstractTournament
 		stats.initStartDate();
 	}
 
-	private void randomizeMatches()
-	{	Calendar cal = new GregorianCalendar();
-		long seed = cal.getTimeInMillis();
-		Random random = new Random(seed);
-		Collections.shuffle(matches,random);
-	}
-	
 	@Override
 	public void progress()
 	{	if(!isOver())
@@ -93,38 +86,33 @@ public class SequenceTournament extends AbstractTournament
 		limits.finish();
 		limits = null;
 	}
-/*
-	@Override
-	public boolean hasBegun()
-	{	boolean result = stats.getSize()>0;
-		return result;
-	}
-*/
-	@Override
-	public boolean isReady()
-	{	boolean result = true;
-		return result;
-	}
 	
 	/////////////////////////////////////////////////////////////////
-	// MATCH			/////////////////////////////////////////////
+	// MATCHES			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	private boolean randomOrder;
+	private boolean randomizeMatches;
 	private ArrayList<Match> matches = new ArrayList<Match>();
 	private Match currentMatch;
 	private int currentIndex;
 
-	public boolean getRandomOrder()
-	{	return randomOrder;
+	public boolean getRandomizeMatches()
+	{	return randomizeMatches;
 	}
-	public void setRandomOrder(boolean randomOrder)
-	{	this.randomOrder = randomOrder;
+	public void setRandomizeMatches(boolean randomOrder)
+	{	this.randomizeMatches = randomOrder;
 	}
 
 	public void addMatch(Match match)
 	{	matches.add(match);
 	}
 
+	private void randomizeMatches()
+	{	Calendar cal = new GregorianCalendar();
+		long seed = cal.getTimeInMillis();
+		Random random = new Random(seed);
+		Collections.shuffle(matches,random);
+	}
+	
 	@Override
 	public Match getCurrentMatch()
 	{	return currentMatch;	
@@ -137,7 +125,7 @@ public class SequenceTournament extends AbstractTournament
 		stats.addStatisticMatch(statsMatch);
 		// iterator
 		if(currentIndex>=matches.size())
-		{	if(randomOrder)
+		{	if(randomizeMatches)
 				randomizeMatches();
 			currentIndex = 0;
 		}
@@ -156,8 +144,7 @@ public class SequenceTournament extends AbstractTournament
 	
 	/////////////////////////////////////////////////////////////////
 	// PLAYERS			/////////////////////////////////////////////
-	/////////////////////////////////////////////////////////////////
-	
+	/////////////////////////////////////////////////////////////////	
 	@Override
 	public Set<Integer> getAllowedPlayerNumbers()
 	{	TreeSet<Integer> result = new TreeSet<Integer>();

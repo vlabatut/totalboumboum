@@ -268,6 +268,8 @@ public class XmlTools
 	public static final String ATT_PROPORTIONAL = "proportional";
 	public static final String ATT_RANDOM_LOCATION = "randomLocation"; 
 	public static final String ATT_RANDOM_ORDER = "randomOrder"; 
+	public static final String ATT_RANDOMIZE_LEGS = "randomizeLegs"; 
+	public static final String ATT_RANDOMIZE_PARTS = "randomizeParts"; 
 	public static final String ATT_RANDOMIZE_PLAYERS = "randomizePlayers"; 
 	public static final String ATT_RANK = "rank";
 	public static final String ATT_RANKING = "ranking";

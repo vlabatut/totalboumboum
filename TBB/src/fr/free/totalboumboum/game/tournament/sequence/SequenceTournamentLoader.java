@@ -59,7 +59,7 @@ public class SequenceTournamentLoader
 	{	// matches order
     	String str = root.getAttribute(XmlTools.ATT_RANDOM_ORDER).getValue().trim();
     	boolean randomOrder = Boolean.valueOf(str);
-    	result.setRandomOrder(randomOrder);
+    	result.setRandomizeMatches(randomOrder);
     	// matches
     	List<Element> matches = root.getChildren(XmlTools.ELT_MATCH);
 		Iterator<Element> i = matches.iterator();
