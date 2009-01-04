@@ -22,9 +22,9 @@ package fr.free.totalboumboum.game.tournament.cup;
  */
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Collections;
+import java.util.Comparator;
 import java.util.GregorianCalendar;
 import java.util.Iterator;
 import java.util.Random;
@@ -32,10 +32,12 @@ import java.util.Set;
 import java.util.TreeSet;
 
 import fr.free.totalboumboum.configuration.GameConstants;
+import fr.free.totalboumboum.configuration.profile.Profile;
 import fr.free.totalboumboum.game.match.Match;
 import fr.free.totalboumboum.game.statistics.StatisticMatch;
 import fr.free.totalboumboum.game.statistics.StatisticTournament;
 import fr.free.totalboumboum.game.tournament.AbstractTournament;
+import fr.free.totalboumboum.tools.CalculusTools;
 
 public class CupTournament extends AbstractTournament
 {	private static final long serialVersionUID = 1L;
@@ -59,6 +61,7 @@ public class CupTournament extends AbstractTournament
 		currentIndex = 0;
 		currentLeg = legs.get(currentIndex);
 		currentLeg.init();
+		initLegPlayers();
 		
 		stats = new StatisticTournament(this);
 		stats.initStartDate();
@@ -70,6 +73,7 @@ public class CupTournament extends AbstractTournament
 		{	currentIndex++;
 			currentLeg = legs.get(currentIndex);
 			currentLeg.init();
+			initLegPlayers();
 		}
 		else
 			currentLeg.progress();
@@ -100,44 +104,149 @@ public class CupTournament extends AbstractTournament
 	{	Calendar cal = new GregorianCalendar();
 		long seed = cal.getTimeInMillis();
 		Random random = new Random(seed);
-		Collections.shuffle(players,random);
+		Collections.shuffle(profiles,random);
 	}
 
 	@Override
 	public Set<Integer> getAllowedPlayerNumbers()
 	{	Set<Integer> result = new TreeSet<Integer>();
+		for(int i=0;i<GameConstants.MAX_PROFILES_COUNT;i++)
+		{	ArrayList<ArrayList<Integer>> distri = processPlayerDistribution(i);
+			if(distri.size()>0)
+				result.add(i);
+		}
+		return result;
+	}
 	
-		ArrayList<Set<Integer>> ap = new ArrayList<Set<Integer>>();
-		CupLeg leg = legs.get(0);
-		ArrayList<CupPart> parts = leg.getParts();
-		// only one leg
-		if(legs.size()==1)
-		{	for(CupPart part: parts)
-			{	Set<Integer> temp = part.getMatch().getAllowedPlayerNumbers();
-				int max = part.getPlayers().size();
-				for(int i=GameConstants.MAX_PROFILES_COUNT;i>max;i--)
-					temp.remove(i);
-				ap.add(temp);
-			}
-		}
-		// several legs
-		else //if(legs.size()>1)
-		{	for(CupPart part: parts)
-			{	Set<Integer> temp = part.getMatch().getAllowedPlayerNumbers();
-				int max = part.getPlayers().size();
-				for(int i=GameConstants.MAX_PROFILES_COUNT;i>max;i--)
-					temp.remove(i);
-				ap.add(temp);
-			}
-			// players needed in next legs
-			int[] counts = new int[parts.size()];
-			Arrays.fill(counts,0);
-			
-				
-		}
+	private ArrayList<ArrayList<Integer>> processPlayerDistribution(int playerCount)
+	{	int matches = legs.get(0).getParts().size();
+
+		// get the distributions
+		ArrayList<ArrayList<Integer>> distributions = CalculusTools.processDistributions(playerCount,matches);
 		
+		// permute them
+		TreeSet<ArrayList<Integer>> permutations = new TreeSet<ArrayList<Integer>>(new Comparator<ArrayList<Integer>>()
+		{	@Override
+			public int compare(ArrayList<Integer> o1, ArrayList<Integer> o2)
+			{	int result = 0;
+				// size
+				int size1 = o1.size();
+				int size2 = o2.size();
+				result = size1 - size2;
+				// content
+				int i=0;
+				while(i<size1 && result==0)
+				{	result = o1.get(i)-o2.get(i);
+					i++;
+				}
+				return result;
+			}				
+		});
+/*		
+System.out.println();
+System.out.println("DISTRIBUTIONS");
+for(ArrayList<Integer> list: distributions)
+{	for(Integer i: list)
+		System.out.print(i+" ");
+	System.out.println();
+}
+*/		
+		for(ArrayList<Integer> distrib: distributions)
+		{	ArrayList<ArrayList<Integer>> perms = CalculusTools.processPermutations(distrib);
+/*		
+System.out.println();
+System.out.println("PERMUTATIONS");
+for(ArrayList<Integer> list: perms)
+{	for(Integer i: list)
+		System.out.print(i+" ");
+	System.out.println();
+}
+*/
+			permutations.addAll(perms);
+		}
+	
+/*		
+System.out.println();
+System.out.println("RESULTAT");
+for(ArrayList<Integer> list: permutations)
+{	for(Integer i: list)
+		System.out.print(i+" ");
+	System.out.println();
+}
+*/	
+		// keep the working distributions
+		ArrayList<ArrayList<Integer>> result = new ArrayList<ArrayList<Integer>>();
+		for(ArrayList<Integer> list: permutations)
+		{	if(checkPlayerDistribution(list))
+				result.add(list);			
+		}
 		
 		return result;
+	}
+	
+	@SuppressWarnings("unchecked")
+	private boolean checkPlayerDistribution(ArrayList<Integer> distribution)
+	{	boolean result = true;
+		ArrayList<ArrayList<Integer>> temp = new ArrayList<ArrayList<Integer>>();
+		temp.add((ArrayList<Integer>)distribution.clone());
+		
+		Iterator<CupLeg> itLeg = legs.iterator();
+		while(itLeg.hasNext() && result)
+		{	CupLeg leg = itLeg.next();
+			int legNumber = leg.getNumber();
+			int prevLeg = legNumber-1;
+			ArrayList<Integer> list = new ArrayList<Integer>();
+			temp.add(list);
+			Iterator<CupPart> itPart = leg.getParts().iterator();
+			while(itPart.hasNext() && result)
+			{	list.add(new Integer(0));
+				CupPart part = itPart.next();
+				int partNumber = part.getNumber();
+				Set<Integer> matchAllowed = part.getMatch().getAllowedPlayerNumbers();
+				int qualifiedCount = 0;
+				if(legNumber==0)
+				{	int prevPart = partNumber-1;
+					qualifiedCount = temp.get(prevLeg).get(prevPart);
+					if(!matchAllowed.contains(qualifiedCount))
+						result = false;
+					else
+						list.set(partNumber-1,qualifiedCount);
+				}
+				else
+				{	ArrayList<CupPlayer> players = part.getPlayers();
+					for(CupPlayer player: players)
+					{	int prevPart = player.getPart();
+						int prevInvolved = temp.get(prevLeg).get(prevPart);
+						int prevRank = player.getRank();
+						if(prevRank<=prevInvolved)
+							qualifiedCount++;						
+					}
+					if(!matchAllowed.contains(qualifiedCount))
+						result = false;					
+					else
+						list.set(partNumber-1,qualifiedCount);
+				}
+			}			
+		}
+		
+		return result;
+	}
+	
+	private void initLegPlayers()
+	{	int playerCount = profiles.size();
+		ArrayList<ArrayList<Integer>> distri = processPlayerDistribution(playerCount);		
+		ArrayList<Integer> distribution = distri.get(0);
+		int p=0;
+		for(int i=0;i<distribution.size();i++)
+		{	int playerNbr = distribution.get(i);
+			CupPart part = currentLeg.getParts().get(i);
+			for(int j=0;j<playerNbr;j++)
+			{	Profile profile = profiles.get(p);
+				part.addProfile(profile);
+				p++;
+			}
+		}
+			
 	}
 
 	/////////////////////////////////////////////////////////////////

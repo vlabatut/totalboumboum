@@ -161,11 +161,17 @@ public class SequenceTournament extends AbstractTournament
 	// RESULTS			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 
-	public int[] getRanks(float[] pts)
+	public int[] getRanks()
 	{	int[] result = new int[getProfiles().size()];
 		for(int i=0;i<result.length;i++)
 			result[i] = 1;
 
+		float[] pts;
+		if(isOver())
+			pts = stats.getPoints();
+		else
+			pts = stats.getTotal();
+		
 		for(int i=0;i<result.length-1;i++)
 		{	for(int j=i+1;j<result.length;j++)
 			{	if(pts[i]<pts[j])
@@ -180,13 +186,8 @@ public class SequenceTournament extends AbstractTournament
 	
 	@Override
 	public int[] getOrderedPlayers()
-	{	float[] pts;
-		if(isOver())
-			pts = stats.getPoints();
-		else
-			pts = stats.getTotal();
-		int[] result = new int[getProfiles().size()];
-		int[] ranks = getRanks(pts);
+	{	int[] result = new int[getProfiles().size()];
+		int[] ranks = getRanks();
 		int done = 0;
 		for(int i=1;i<=result.length;i++)
 		{	for(int j=0;j<ranks.length;j++)

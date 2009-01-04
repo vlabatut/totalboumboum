@@ -2,6 +2,8 @@ package fr.free.totalboumboum.game.tournament.cup;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashMap;
 import java.util.Set;
 import java.util.TreeSet;
 
@@ -41,9 +43,10 @@ public class CupPart implements Serializable
 	/////////////////////////////////////////////////////////////////
 	// GAME		/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
+	private HashMap<Integer,ArrayList<Integer>> ties;
+	
 	public void init()
-	{	initProfiles();
-		currentMatch = match;
+	{	currentMatch = match;
 		currentMatch.init(profiles);
 	}
 	
@@ -63,13 +66,40 @@ public class CupPart implements Serializable
 
 	public void matchOver()
 	{	if(currentMatch==match)
-		{	if(noTie())
+		{	HashMap<Integer,ArrayList<Integer>> ties = getTies();
+			if(ties.size()==0)
 				setOver(true);
 		}
 		else
 			setOver(true);
 	}
 
+	private void processTies()
+	{	
+		/*
+		 * 1) calculer les ties (peut y en avoir plusieurs !)
+		 * 2) déterminer lesquels ont des conséquences sur le leg suivant
+		 * 3) break the ties avec PP
+		 * 4) si pas possib: break avec match (match à cloner comme dans un tournoi séquence)
+		 * 
+		 */
+		
+		
+		
+		
+		
+		boolean result = false;
+		// get ranks
+		int[] ranks = match.getRanks();
+		// count ranks
+		int[] count = new int[ranks.length];
+		Arrays.fill(count,0);
+		for(int i=0;i<ranks.length;i++)
+			count[ranks[i]]++;
+		// detect doubles
+		
+	}
+	
 	/////////////////////////////////////////////////////////////////
 	// OVER				/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
@@ -171,9 +201,8 @@ public class CupPart implements Serializable
 	/////////////////////////////////////////////////////////////////
 	// PLAYERS			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	private ArrayList<Profile> profiles;
+	private final ArrayList<Profile> profiles = new ArrayList<Profile>();
 	private final ArrayList<CupPlayer> players = new ArrayList<CupPlayer>();
-	private Set<Integer> allowedPlayerNumbers = null;
 	
 	public ArrayList<CupPlayer> getPlayers()
 	{	return players;
@@ -183,66 +212,7 @@ public class CupPart implements Serializable
 	{	players.add(player);
 	}
 	
-	private void initProfiles()
-	{	profiles = new ArrayList<Profile>();
-		int previousLegIndex = leg.getNumber()-1;
-		if(previousLegIndex<0)
-		{
-			
-		}
-		else
-		{	CupLeg previousLeg = getTournament().getLeg(previousLegIndex);
-			for(CupPlayer p: players)
-			{	int previousPartIndex = p.getPart();
-				CupPart previousPart = previousLeg.getPart(previousPartIndex);
-				int playerRank = p.getRank();
-				Profile profile = previousPart.getRankedPlayer(playerRank);
-				profiles.add(profile);
-			}
-		}		
-	}
-	
-	public boolean isPlayerNeeded(int number)
-	{	boolean result;
-		if(allowedPlayerNumbers==null)
-			getAllowedPlayerNumbers();
-		
-		
-		return result;
-	}
-	
-	public Set<Integer> getAllowedPlayerNumbers()
-	{	if(allowedPlayerNumbers==null)
-		{	allowedPlayerNumbers = new TreeSet<Integer>();
-			int legNumber = leg.getNumber();
-			int legCount = getTournament().getLegs().size();
-			// last leg
-			if(legNumber==legCount)
-			{	Set<Integer> temp = match.getAllowedPlayerNumbers();
-				int max = players.size();
-				for(int i=GameConstants.MAX_PROFILES_COUNT;i>max;i--)
-					temp.remove(i);				
-			}
-			// other leg
-			else
-			{	
-				
-			}
-		
-		}
-		return allowedPlayerNumbers;
-	
-	
-	
-	
-		TreeSet<Integer> result = new TreeSet<Integer>();
-		for(int i=1;i<=GameConstants.MAX_PROFILES_COUNT;i++)
-			result.add(i);
-		for(Match m:matches)
-		{	Set<Integer> temp = m.getAllowedPlayerNumbers();
-			result.retainAll(temp);			
-		}
-		return result;			
-	}
-
+	public void addProfile(Profile profile)
+	{	profiles.add(profile);
+	}	
 }

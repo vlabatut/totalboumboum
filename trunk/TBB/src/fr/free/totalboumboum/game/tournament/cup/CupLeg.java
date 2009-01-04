@@ -7,9 +7,6 @@ import java.util.Collections;
 import java.util.GregorianCalendar;
 import java.util.Random;
 
-import fr.free.totalboumboum.game.match.Match;
-import fr.free.totalboumboum.game.statistics.StatisticMatch;
-
 /*
  * Total Boum Boum
  * Copyright 2008-2009 Vincent Labatut 
