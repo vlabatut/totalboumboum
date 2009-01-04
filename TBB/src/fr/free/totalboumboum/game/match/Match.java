@@ -203,11 +203,23 @@ public class Match implements StatisticHolder, Serializable
 	// RESULTS			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 
-	public int[] getRanks(float[] pts)
+	/**
+	 * process an array of ranks, each one corresponding to a player,
+	 * according to the points in input.
+	 * eg: {1,3,2} means the player 0 came first, player 1 came 
+	 * third and player 2 came second
+	 */
+	public int[] getRanks()
 	{	int[] result = new int[getProfiles().size()];
 		for(int i=0;i<result.length;i++)
 			result[i] = 1;
 
+		float[] pts;
+		if(isOver())
+			pts = stats.getPoints();
+		else
+			pts = stats.getTotal();
+		
 		for(int i=0;i<result.length-1;i++)
 		{	for(int j=i+1;j<result.length;j++)
 			{	if(pts[i]<pts[j])
@@ -220,14 +232,14 @@ public class Match implements StatisticHolder, Serializable
 		return result;
 	}
 	
+	/**
+	 * process the players' numbers in function of their rank in this match.
+	 * eg: {0,2,1,3} means player 0 is first, player 2 is second,
+	 * player 1 is third and player 3 is fourth. 
+	 */
 	public int[] getOrderedPlayers()
-	{	float[] pts;
-		if(isOver())
-			pts = stats.getPoints();
-		else
-			pts = stats.getTotal();
-		int[] result = new int[getProfiles().size()];
-		int[] ranks = getRanks(pts);
+	{	int[] result = new int[getProfiles().size()];
+		int[] ranks = getRanks();
 		int done = 0;
 		for(int i=1;i<=result.length;i++)
 		{	for(int j=0;j<ranks.length;j++)
