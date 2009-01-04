@@ -7,6 +7,9 @@ import java.util.Collections;
 import java.util.GregorianCalendar;
 import java.util.Random;
 
+import fr.free.totalboumboum.game.match.Match;
+import fr.free.totalboumboum.game.statistics.StatisticMatch;
+
 /*
  * Total Boum Boum
  * Copyright 2008-2009 Vincent Labatut 
@@ -47,8 +50,17 @@ public class CupLeg implements Serializable
 		
 		currentIndex = 0;
 		currentPart = parts.get(currentIndex);
-		currentIndex++;
 		currentPart.init();
+	}
+	
+	public void progress()
+	{	if(currentPart.isOver())
+		{	currentIndex++;
+			currentPart = parts.get(currentIndex);
+			currentPart.init();
+		}
+		else
+			currentPart.progress();
 	}
 	
 	public void finish()
@@ -56,6 +68,24 @@ public class CupLeg implements Serializable
 		tournament = null;
 		// parts
 		parts.clear();
+	}
+	
+	public void matchOver()
+	{	currentPart.matchOver();
+		if(currentPart.isOver() && currentIndex==parts.size()-1)
+			setOver(true);			
+	}
+
+	/////////////////////////////////////////////////////////////////
+	// OVER				/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	private boolean legOver = false;
+
+	public boolean isOver()
+	{	return legOver;
+	}
+	public void setOver(boolean legOver)
+	{	this.legOver = legOver;
 	}
 	
 	/////////////////////////////////////////////////////////////////
@@ -89,6 +119,10 @@ public class CupLeg implements Serializable
 	
 	public void addPart(CupPart part)
 	{	parts.add(part);
+	}
+
+	public CupPart getCurrentPart()
+	{	return currentPart;
 	}
 
 	private void randomizeParts()

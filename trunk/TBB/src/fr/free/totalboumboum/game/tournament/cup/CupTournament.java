@@ -22,13 +22,18 @@ package fr.free.totalboumboum.game.tournament.cup;
  */
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Collections;
 import java.util.GregorianCalendar;
+import java.util.Iterator;
 import java.util.Random;
 import java.util.Set;
+import java.util.TreeSet;
 
+import fr.free.totalboumboum.configuration.GameConstants;
 import fr.free.totalboumboum.game.match.Match;
+import fr.free.totalboumboum.game.statistics.StatisticMatch;
 import fr.free.totalboumboum.game.statistics.StatisticTournament;
 import fr.free.totalboumboum.game.tournament.AbstractTournament;
 
@@ -52,17 +57,22 @@ public class CupTournament extends AbstractTournament
 		
 		// NOTE vérifier si le nombre de joueurs sélectionnés correspond
 		currentIndex = 0;
+		currentLeg = legs.get(currentIndex);
+		currentLeg.init();
+		
 		stats = new StatisticTournament(this);
 		stats.initStartDate();
 	}
 
 	@Override
 	public void progress()
-	{	if(!isOver())
-		{	currentLeg = legs.get(currentIndex);
-			currentIndex++;
+	{	if(currentLeg.isOver())
+		{	currentIndex++;
+			currentLeg = legs.get(currentIndex);
 			currentLeg.init();
 		}
+		else
+			currentLeg.progress();
 	}
 	
 	@Override
@@ -95,8 +105,39 @@ public class CupTournament extends AbstractTournament
 
 	@Override
 	public Set<Integer> getAllowedPlayerNumbers()
-	{	// TODO Auto-generated method stub
-		return null;			
+	{	Set<Integer> result = new TreeSet<Integer>();
+	
+		ArrayList<Set<Integer>> ap = new ArrayList<Set<Integer>>();
+		CupLeg leg = legs.get(0);
+		ArrayList<CupPart> parts = leg.getParts();
+		// only one leg
+		if(legs.size()==1)
+		{	for(CupPart part: parts)
+			{	Set<Integer> temp = part.getMatch().getAllowedPlayerNumbers();
+				int max = part.getPlayers().size();
+				for(int i=GameConstants.MAX_PROFILES_COUNT;i>max;i--)
+					temp.remove(i);
+				ap.add(temp);
+			}
+		}
+		// several legs
+		else //if(legs.size()>1)
+		{	for(CupPart part: parts)
+			{	Set<Integer> temp = part.getMatch().getAllowedPlayerNumbers();
+				int max = part.getPlayers().size();
+				for(int i=GameConstants.MAX_PROFILES_COUNT;i>max;i--)
+					temp.remove(i);
+				ap.add(temp);
+			}
+			// players needed in next legs
+			int[] counts = new int[parts.size()];
+			Arrays.fill(counts,0);
+			
+				
+		}
+		
+		
+		return result;
 	}
 
 	/////////////////////////////////////////////////////////////////
@@ -153,16 +194,26 @@ public class CupTournament extends AbstractTournament
 	/////////////////////////////////////////////////////////////////
 	@Override
 	public Match getCurrentMatch()
-	{
-		// TODO Auto-generated method stub
-		return null;
+	{	CupPart currentPart = currentLeg.getCurrentPart();
+		Match match = currentPart.getCurrentMatch();
+		return match;
 	}
 
 	@Override
 	public void matchOver()
-	{
-		// TODO Auto-generated method stub
+	{	// stats
+		Match currentMatch = getCurrentMatch();
+		StatisticMatch statsMatch = currentMatch.getStats();
+		stats.addStatisticMatch(statsMatch);
 		
+		currentLeg.matchOver();
+		if(currentLeg.isOver() && currentIndex==legs.size()-1)
+		{	setOver(true);
+			panel.tournamentOver();
+			stats.initEndDate();
+		}
+		else
+		{	panel.matchOver();		
+		}
 	}
-
 }
