@@ -45,11 +45,15 @@ public class CupTournamentLoader
 		Element element;
 		
 		// randomize players
-		String ransomizePlayersStr = root.getAttribute(XmlTools.ATT_RANDOMIZE_PLAYERS).getValue().trim();
-		boolean ransomizePlayers = Boolean.valueOf(ransomizePlayersStr);
-    	result.setRandomizePlayers(ransomizePlayers);
+		String randomizePlayersStr = root.getAttribute(XmlTools.ATT_RANDOMIZE_PLAYERS).getValue().trim();
+		boolean randomizePlayers = Boolean.valueOf(randomizePlayersStr);
+    	result.setRandomizePlayers(randomizePlayers);
     	
-		
+		// randomize legs
+		String randomizeLegsStr = root.getAttribute(XmlTools.ATT_RANDOMIZE_LEGS).getValue().trim();
+		boolean randomizeLegs = Boolean.valueOf(randomizeLegsStr);
+    	result.setRandomizeLegs(randomizeLegs);
+    			
 		// legs
 		element = root;
 		loadLegsElement(element,folder,result);
@@ -70,8 +74,13 @@ public class CupTournamentLoader
 
 	@SuppressWarnings("unchecked")
 	private static CupLeg loadLegElement(Element root, String folder, CupTournament tournament) throws ParserConfigurationException, SAXException, IOException, ClassNotFoundException
-	{	CupLeg result = new CupLeg();
+	{	CupLeg result = new CupLeg(tournament);
 	
+		// randomize parts
+		String randomizePartsStr = root.getAttribute(XmlTools.ATT_RANDOMIZE_PARTS).getValue().trim();
+		boolean randomizeParts = Boolean.valueOf(randomizePartsStr);
+    	result.setRandomizeParts(randomizeParts);
+
 		// number
 		String numberStr = root.getAttribute(XmlTools.ATT_NUMBER).getValue().trim();
 		int number = Integer.valueOf(numberStr);
@@ -82,15 +91,15 @@ public class CupTournamentLoader
 		Iterator<Element> i = parts.iterator();
 		while(i.hasNext())
 		{	Element temp = i.next();
-			CupPart part = loadPartElement(temp,folder,tournament);
+			CupPart part = loadPartElement(temp,folder,result);
 			result.addPart(part);
 		}
 		
 		return result;
 	}
 	
-	private static CupPart loadPartElement(Element root, String folder, CupTournament tournament) throws ParserConfigurationException, SAXException, IOException, ClassNotFoundException
-	{	CupPart result = new CupPart();
+	private static CupPart loadPartElement(Element root, String folder, CupLeg leg) throws ParserConfigurationException, SAXException, IOException, ClassNotFoundException
+	{	CupPart result = new CupPart(leg);
 	
 		// name
 		String name = root.getAttribute(XmlTools.ATT_NAME).getValue().trim();
@@ -108,12 +117,12 @@ public class CupTournamentLoader
 
 		// match
 		Element matchElt = root.getChild(XmlTools.ELT_MATCH);
-		Match match = TournamentLoader.loadMatchElement(matchElt,folder,tournament);
+		Match match = TournamentLoader.loadMatchElement(matchElt,folder,leg.getTournament());
 		result.setMatch(match);
 		
 		// tie break
 		Element tieBreakElt = root.getChild(XmlTools.ELT_TIE_BREAK);
-		CupTieBreak tieBreak = loadTieBreakElement(tieBreakElt,folder,tournament);
+		CupTieBreak tieBreak = loadTieBreakElement(tieBreakElt,folder,leg.getTournament());
 		result.setTieBreak(tieBreak);
 		
 		// players

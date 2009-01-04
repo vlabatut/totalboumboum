@@ -3,6 +3,7 @@ package fr.free.totalboumboum.game.tournament.cup;
 import java.io.Serializable;
 import java.util.ArrayList;
 
+import fr.free.totalboumboum.configuration.profile.Profile;
 import fr.free.totalboumboum.game.match.Match;
 
 /*
@@ -29,6 +30,43 @@ import fr.free.totalboumboum.game.match.Match;
 
 public class CupPart implements Serializable
 {	private static final long serialVersionUID = 1L;
+
+	public CupPart(CupLeg leg)
+	{	this.leg = leg;
+	}
+
+	/////////////////////////////////////////////////////////////////
+	// GAME		/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	public void init()
+	{	initProfiles();
+		match.init(profiles);
+	}
+	
+	public void finish()
+	{	// misc
+		leg = null;
+		match = null;
+		tieBreak = null;
+		players.clear();
+	}
+	
+	/////////////////////////////////////////////////////////////////
+	// LEG				/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	private CupLeg leg;
+	
+	public CupLeg getLeg()
+	{	return leg;
+	}
+	
+	public void setLeg(CupLeg leg)
+	{	this.leg = leg;
+	}
+	
+	public CupTournament getTournament()
+	{	return leg.getTournament();		
+	}
 
 	/////////////////////////////////////////////////////////////////
 	// MATCH			/////////////////////////////////////////////
@@ -97,6 +135,7 @@ public class CupPart implements Serializable
 	/////////////////////////////////////////////////////////////////
 	// PLAYERS			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
+	private ArrayList<Profile> profiles;
 	private final ArrayList<CupPlayer> players = new ArrayList<CupPlayer>();
 	
 	public ArrayList<CupPlayer> getPlayers()
@@ -105,5 +144,24 @@ public class CupPart implements Serializable
 	
 	public void addPlayer(CupPlayer player)
 	{	players.add(player);
+	}
+	
+	private void initProfiles()
+	{	profiles = new ArrayList<Profile>();
+		int previousLegIndex = leg.getNumber()-1;
+		if(previousLegIndex<0)
+		{
+			
+		}
+		else
+		{	CupLeg previousLeg = getTournament().getLeg(previousLegIndex);
+			for(CupPlayer p: players)
+			{	int previousPartIndex = p.getPart();
+				CupPart previousPart = previousLeg.getPart(previousPartIndex);
+				int playerRank = p.getRank();
+				Profile profile = previousPart.getRankedPlayer(playerRank);
+				profiles.add(profile);
+			}
+		}		
 	}
 }

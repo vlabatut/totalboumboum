@@ -61,8 +61,6 @@ public abstract class AbstractTournament implements StatisticHolder, Serializabl
 		tournamentOver = true;
 	}
 	
-	public abstract boolean isReady();
-	
 	public boolean hasBegun()
 	{	return begun;	
 	}
@@ -77,8 +75,6 @@ public abstract class AbstractTournament implements StatisticHolder, Serializabl
 	// PLAYERS		/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	protected ArrayList<Profile> profiles = new ArrayList<Profile>();
-	protected int minPlayerNumber;
-	protected int maxPlayerNumber;
 
 	public void setProfiles(ArrayList<Profile> profiles)
 	{	this.profiles.clear();

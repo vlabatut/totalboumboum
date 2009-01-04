@@ -39,6 +39,7 @@
 			<xsd:element name="part" type="tPart" maxOccurs="unbounded"/>
 		</xsd:sequence>
 		<xsd:attribute name="number" type="xsd:integer" use="required"/>
+		<xsd:attribute name="randomizeParts" type="xsd:boolean" use="optional" default="false" />
 	</xsd:complexType>
 
 	<xsd:complexType name="tCup">
@@ -46,6 +47,7 @@
 			<xsd:element name="leg" type="tLeg" maxOccurs="unbounded"/>
 		</xsd:sequence>
 		<xsd:attribute name="randomizePlayers" type="xsd:boolean" use="optional" default="false" />
+		<xsd:attribute name="randomizeLegs" type="xsd:boolean" use="optional" default="false" />
 	</xsd:complexType>
 
 <!-- LEAGUE -->

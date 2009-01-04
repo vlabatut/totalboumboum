@@ -2,6 +2,10 @@ package fr.free.totalboumboum.game.tournament.cup;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Collections;
+import java.util.GregorianCalendar;
+import java.util.Random;
 
 /*
  * Total Boum Boum
@@ -28,17 +32,77 @@ import java.util.ArrayList;
 public class CupLeg implements Serializable
 {	private static final long serialVersionUID = 1L;
 
+	public CupLeg(CupTournament tournament)
+	{	this.tournament = tournament;	
+	}
+
+	/////////////////////////////////////////////////////////////////
+	// GAME		/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	public void init()
+	{	
+		// are parts in random order ?
+		if(randomizeParts)
+			randomizeParts();
+		
+		currentIndex = 0;
+		currentPart = parts.get(currentIndex);
+		currentIndex++;
+		currentPart.init();
+	}
+	
+	public void finish()
+	{	// misc
+		tournament = null;
+		// parts
+		parts.clear();
+	}
+	
+	/////////////////////////////////////////////////////////////////
+	// TOURNAMENT		/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	private CupTournament tournament;
+	
+	public CupTournament getTournament()
+	{	return tournament;
+	}
+	
+	public void setTournament(CupTournament tournament)
+	{	this.tournament = tournament;
+	}
+
 	/////////////////////////////////////////////////////////////////
 	// PARTS			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	private final ArrayList<CupPart> parts = new ArrayList<CupPart>();
+	private int currentIndex;
+	private CupPart currentPart;
+	private boolean randomizeParts;
 	
 	public ArrayList<CupPart> getParts()
 	{	return parts;
 	}
 	
+	public CupPart getPart(int index)
+	{	return parts.get(index);
+	}
+	
 	public void addPart(CupPart part)
 	{	parts.add(part);
+	}
+
+	private void randomizeParts()
+	{	Calendar cal = new GregorianCalendar();
+		long seed = cal.getTimeInMillis();
+		Random random = new Random(seed);
+		Collections.shuffle(parts,random);
+	}
+	
+	public boolean getRandomizeParts()
+	{	return randomizeParts;
+	}
+	public void setRandomizeParts(boolean randomizeParts)
+	{	this.randomizeParts = randomizeParts;
 	}
 
 	/////////////////////////////////////////////////////////////////
