@@ -21,7 +21,6 @@ package fr.free.totalboumboum.game.tournament.sequence;
  * 
  */
 
-import java.io.File;
 import java.io.IOException;
 import java.util.Iterator;
 import java.util.List;
@@ -35,7 +34,7 @@ import fr.free.totalboumboum.game.limit.LimitLoader;
 import fr.free.totalboumboum.game.limit.Limits;
 import fr.free.totalboumboum.game.limit.TournamentLimit;
 import fr.free.totalboumboum.game.match.Match;
-import fr.free.totalboumboum.game.match.MatchLoader;
+import fr.free.totalboumboum.game.tournament.TournamentLoader;
 import fr.free.totalboumboum.tools.XmlTools;
 
 public class SequenceTournamentLoader
@@ -71,19 +70,7 @@ public class SequenceTournamentLoader
 	}
 		
 	private static void loadMatchElement(Element root, String folder, SequenceTournament result) throws ParserConfigurationException, SAXException, IOException, ClassNotFoundException
-	{	Match match;
-		// local
-		String localStr = root.getAttribute(XmlTools.ATT_LOCAL).getValue().trim();
-		boolean local = Boolean.valueOf(localStr);
-		// name
-		String name = root.getAttribute(XmlTools.ATT_NAME).getValue();
-		// loading
-		if(local)
-		{	folder = folder+File.separator+name;
-			match = MatchLoader.loadMatchFromFolderPath(folder,result);
-		}
-		else
-			match = MatchLoader.loadMatchFromName(name,result);
+	{	Match match = TournamentLoader.loadMatchElement(root,folder,result);
 		result.addMatch(match);
 	}
 

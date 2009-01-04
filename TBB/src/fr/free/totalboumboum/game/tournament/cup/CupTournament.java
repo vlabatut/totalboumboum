@@ -21,6 +21,7 @@ package fr.free.totalboumboum.game.tournament.cup;
  * 
  */
 
+import java.util.ArrayList;
 import java.util.Set;
 
 import fr.free.totalboumboum.game.match.Match;
@@ -29,41 +30,17 @@ import fr.free.totalboumboum.game.tournament.AbstractTournament;
 public class CupTournament extends AbstractTournament
 {	private static final long serialVersionUID = 1L;
 
-	@Override
-	public void matchOver() {
-		// TODO Auto-generated method stub
-		
+	/////////////////////////////////////////////////////////////////
+	// PLAYERS			/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	private boolean randomizePlayers;
+
+	public boolean isRandomizePlayers()
+	{	return randomizePlayers;
 	}
 
-	@Override
-	public void finish() {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public Match getCurrentMatch() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public void init()
-	{
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public boolean isReady() {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
-	@Override
-	public void progress() {
-		// TODO Auto-generated method stub
-		
+	public void setRandomizePlayers(boolean randomizePlayers)
+	{	this.randomizePlayers = randomizePlayers;
 	}
 
 	@Override
@@ -72,10 +49,76 @@ public class CupTournament extends AbstractTournament
 		return null;			
 	}
 
+	/////////////////////////////////////////////////////////////////
+	// RESULTS			/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+
 	@Override
-	public int[] getOrderedPlayers() {
+	public int[] getOrderedPlayers()
+	{
 		// TODO Auto-generated method stub
 		return null;
 	}
+
+	/////////////////////////////////////////////////////////////////
+	// LEGS				/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	private final ArrayList<CupLeg> legs = new ArrayList<CupLeg>();
 	
+	public ArrayList<CupLeg> getLegs()
+	{	return legs;	
+	}
+	
+	public void addLeg(CupLeg leg)
+	{	legs.add(leg);	
+	}
+	
+	
+	/////////////////////////////////////////////////////////////////
+	// MATCH			/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	@Override
+	public Match getCurrentMatch()
+	{
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void matchOver()
+	{
+		// TODO Auto-generated method stub
+		
+	}
+
+	/////////////////////////////////////////////////////////////////
+	// GAME				/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	@Override
+	public void init()
+	{
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public boolean isReady()
+	{
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public void progress()
+	{
+		// TODO Auto-generated method stub
+		
+	}	
+
+	@Override
+	public void finish()
+	{
+		// TODO Auto-generated method stub
+		
+	}
 }

@@ -21,7 +21,6 @@ package fr.free.totalboumboum.game.tournament.single;
  * 
  */
 
-import java.io.File;
 import java.io.IOException;
 
 import javax.xml.parsers.ParserConfigurationException;
@@ -30,7 +29,7 @@ import org.jdom.Element;
 import org.xml.sax.SAXException;
 
 import fr.free.totalboumboum.game.match.Match;
-import fr.free.totalboumboum.game.match.MatchLoader;
+import fr.free.totalboumboum.game.tournament.TournamentLoader;
 import fr.free.totalboumboum.tools.XmlTools;
 
 public class SingleTournamentLoader
@@ -45,23 +44,7 @@ public class SingleTournamentLoader
 	}
 	
 	private static void loadMatchElement(Element root, String folder, SingleTournament result) throws ParserConfigurationException, SAXException, IOException, ClassNotFoundException
-	{	Match match;
-		
-		// local
-		String localStr = root.getAttribute(XmlTools.ATT_LOCAL).getValue().trim();
-		boolean local = Boolean.valueOf(localStr);
-		
-		// name
-		String name = root.getAttribute(XmlTools.ATT_NAME).getValue();
-		
-		// loading
-		if(local)
-		{	folder = folder+File.separator+name;
-			match = MatchLoader.loadMatchFromFolderPath(folder,result);
-		}
-		else
-			match = MatchLoader.loadMatchFromName(name,result);
-		
+	{	Match match = TournamentLoader.loadMatchElement(root,folder,result);
 		result.setMatch(match);
 	}
 }
