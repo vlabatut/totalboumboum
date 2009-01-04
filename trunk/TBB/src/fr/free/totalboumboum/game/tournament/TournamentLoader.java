@@ -31,6 +31,7 @@ import javax.xml.parsers.ParserConfigurationException;
 import org.jdom.Element;
 import org.xml.sax.SAXException;
 
+import fr.free.totalboumboum.game.match.Match;
 import fr.free.totalboumboum.game.match.MatchLoader;
 import fr.free.totalboumboum.game.tournament.cup.CupTournamentLoader;
 import fr.free.totalboumboum.game.tournament.league.LeagueTournamentLoader;
@@ -100,6 +101,27 @@ public class TournamentLoader
 		
 		//
 		result.setName(name);
+		return result;
+	}
+	
+	public static Match loadMatchElement(Element root, String folder, AbstractTournament tournament) throws ParserConfigurationException, SAXException, IOException, ClassNotFoundException
+	{	Match result;
+		
+		// local
+		String localStr = root.getAttribute(XmlTools.ATT_LOCAL).getValue().trim();
+		boolean local = Boolean.valueOf(localStr);
+		
+		// name
+		String name = root.getAttribute(XmlTools.ATT_NAME).getValue();
+		
+		// loading
+		if(local)
+		{	folder = folder+File.separator+name;
+			result = MatchLoader.loadMatchFromFolderPath(folder,tournament);
+		}
+		else
+			result = MatchLoader.loadMatchFromName(name,tournament);
+		
 		return result;
 	}
 }

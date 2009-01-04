@@ -115,6 +115,7 @@ public class XmlTools
 	public static final String ELT_KEY = "key";
 	public static final String ELT_LANGUAGE = "language";
 	public static final String ELT_LAST_STANDING = "lastStanding";
+	public static final String ELT_LEG = "leg";
 	public static final String ELT_LEVEL = "level";
 	public static final String ELT_LEVELS = "levels";
 	public static final String ELT_LIMIT = "limit";
@@ -142,6 +143,7 @@ public class XmlTools
 	public static final String ELT_ORIGIN = "origin";
 	public static final String ELT_OUTGAME = "outgame";
 	public static final String ELT_PANEL_DIMENSION = "panelDimension";
+	public static final String ELT_PART = "part";
 	public static final String ELT_PERMISSION = "permission";
 	public static final String ELT_PERMISSIONS = "permissions";
 	public static final String ELT_PLAYED = "played";
@@ -189,6 +191,7 @@ public class XmlTools
 	public static final String ELT_THIRD_RESTRICTIONS = "third-restrictions";
 	public static final String ELT_THRESHOLD = "threshold";
 	public static final String ELT_THRESHOLDS = "thresholds";
+	public static final String ELT_TIE_BREAK = "tieBreak";
 	public static final String ELT_TILE = "tile";
 	public static final String ELT_TIME = "time";
 	public static final String ELT_TITLE = "title";
@@ -255,6 +258,7 @@ public class XmlTools
 	public static final String ATT_ORIENTATION = "orientation";
 	public static final String ATT_PACK = "pack";
 	public static final String ATT_PACKNAME = "packname";
+	public static final String ATT_PART = "part";
 	public static final String ATT_PLAY_MODE = "playMode";
 	public static final String ATT_PLAYER = "player";
 	public static final String ATT_PLAYERS = "players";
@@ -264,7 +268,9 @@ public class XmlTools
 	public static final String ATT_PROPORTIONAL = "proportional";
 	public static final String ATT_RANDOM_LOCATION = "randomLocation"; 
 	public static final String ATT_RANDOM_ORDER = "randomOrder"; 
+	public static final String ATT_RANDOMIZE_PLAYERS = "randomizePlayers"; 
 	public static final String ATT_RANK = "rank";
+	public static final String ATT_RANKING = "ranking";
 	public static final String ATT_RED = "red";
 	public static final String ATT_REPEAT = "repeat";
 	public static final String ATT_ROUNDS = "rounds";

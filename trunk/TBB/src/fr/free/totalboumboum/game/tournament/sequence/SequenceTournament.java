@@ -129,6 +129,7 @@ public class SequenceTournament extends AbstractTournament
 	public Match getCurrentMatch()
 	{	return currentMatch;	
 	}
+	
 	@Override
 	public void matchOver()
 	{	// stats
@@ -190,6 +191,7 @@ public class SequenceTournament extends AbstractTournament
 		return result;
 	}
 	
+	@Override
 	public int[] getOrderedPlayers()
 	{	float[] pts;
 		if(isOver())

@@ -2,11 +2,50 @@
 <xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema">
 <xsd:include schemaLocation="_limit.xsd"/>
 <xsd:include schemaLocation="_notes.xsd"/>
+<xsd:include schemaLocation="_points.xsd"/>
 
 <!-- CUP -->
+	<xsd:complexType name="tPlayer">
+		<xsd:attribute name="rank" type="xsd:integer" use="required"/>
+		<xsd:attribute name="part" type="xsd:integer" use="required"/>
+	</xsd:complexType>
+
+	<xsd:complexType name="tPlayers">
+		<xsd:sequence>
+			<xsd:element name="player" type="tPlayer" maxOccurs="unbounded"/>
+		</xsd:sequence>
+	</xsd:complexType>
+
+	<xsd:complexType name="tTieBreak">
+		<xsd:sequence>
+			<xsd:element name="rankings" type="tPointsRankings" minOccurs="0"/>
+			<xsd:element name="match" type="tMatch"/>
+		</xsd:sequence>
+	</xsd:complexType>
+
+	<xsd:complexType name="tPart">
+		<xsd:sequence>
+			<xsd:element name="match" type="tMatch" />
+			<xsd:element name="tieBreak" type="tTieBreak" />
+			<xsd:element name="players" type="tPlayers" />
+		</xsd:sequence>
+		<xsd:attribute name="name" type="xsd:string" use="required"/>
+		<xsd:attribute name="number" type="xsd:integer" use="required"/>
+		<xsd:attribute name="rank" type="xsd:integer" use="optional" default="0"/>
+	</xsd:complexType>
+
+	<xsd:complexType name="tLeg">
+		<xsd:sequence>
+			<xsd:element name="part" type="tPart" maxOccurs="unbounded"/>
+		</xsd:sequence>
+		<xsd:attribute name="number" type="xsd:integer" use="required"/>
+	</xsd:complexType>
+
 	<xsd:complexType name="tCup">
 		<xsd:sequence>
+			<xsd:element name="leg" type="tLeg" maxOccurs="unbounded"/>
 		</xsd:sequence>
+		<xsd:attribute name="randomizePlayers" type="xsd:boolean" use="optional" default="false" />
 	</xsd:complexType>
 
 <!-- LEAGUE -->
@@ -16,11 +55,6 @@
 	</xsd:complexType>
 
 <!-- SEQUENCE -->
-	<xsd:complexType name="tMatch">
-		<xsd:attribute name="local" type="xsd:boolean" use="optional" default="false" />
-		<xsd:attribute name="name" type="xsd:string" use="required" />
-	</xsd:complexType>
-
 	<xsd:complexType name="tMatches">
 		<xsd:sequence>
 			<xsd:element name="match" type="tMatch" maxOccurs="unbounded"/>
@@ -43,6 +77,11 @@
 	</xsd:complexType>
 
 <!-- COMMON -->
+	<xsd:complexType name="tMatch">
+		<xsd:attribute name="local" type="xsd:boolean" use="optional" default="false" />
+		<xsd:attribute name="name" type="xsd:string" use="required" />
+	</xsd:complexType>
+
 	<xsd:complexType name="tAuthor">
 		<xsd:attribute name="value" type="xsd:string" use="required" />
 	</xsd:complexType>
