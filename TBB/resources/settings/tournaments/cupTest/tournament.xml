@@ -19,7 +19,6 @@
 				<match local="false" name="matchLong" />
 				<tieBreak>
 					<rankings>
-						<total />
 						<scores type="bombings"/>
 						<scores type="items"/>
 						<scores type="bombs"/>
@@ -37,7 +36,6 @@
 				<match local="false" name="matchLong" />
 				<tieBreak>
 					<rankings>
-						<total />
 						<scores type="bombings"/>
 						<scores type="items"/>
 						<scores type="bombs"/>
@@ -55,7 +53,6 @@
 				<match local="false" name="matchLong" />
 				<tieBreak>
 					<rankings>
-						<total />
 						<scores type="bombings"/>
 						<scores type="items"/>
 						<scores type="bombs"/>
@@ -73,7 +70,6 @@
 				<match local="false" name="matchLong" />
 				<tieBreak>
 					<rankings>
-						<total />
 						<scores type="bombings"/>
 						<scores type="items"/>
 						<scores type="bombs"/>
@@ -94,7 +90,6 @@
 				<match local="false" name="matchLong" />
 				<tieBreak>
 					<rankings>
-						<total />
 						<scores type="bombings"/>
 						<scores type="items"/>
 						<scores type="bombs"/>
@@ -112,7 +107,6 @@
 				<match local="false" name="matchLong" />
 				<tieBreak>
 					<rankings>
-						<total />
 						<scores type="bombings"/>
 						<scores type="items"/>
 						<scores type="bombs"/>
@@ -130,7 +124,6 @@
 				<match local="false" name="matchLong" />
 				<tieBreak>
 					<rankings>
-						<total />
 						<scores type="bombings"/>
 						<scores type="items"/>
 						<scores type="bombs"/>
@@ -148,7 +141,6 @@
 				<match local="false" name="matchLong" />
 				<tieBreak>
 					<rankings>
-						<total />
 						<scores type="bombings"/>
 						<scores type="items"/>
 						<scores type="bombs"/>
@@ -169,7 +161,6 @@
 				<match local="false" name="matchLong" />
 				<tieBreak>
 					<rankings>
-						<total />
 						<scores type="bombings"/>
 						<scores type="items"/>
 						<scores type="bombs"/>
@@ -187,7 +178,6 @@
 				<match local="false" name="matchLong" />
 				<tieBreak>
 					<rankings>
-						<total />
 						<scores type="bombings"/>
 						<scores type="items"/>
 						<scores type="bombs"/>
@@ -205,7 +195,6 @@
 				<match local="false" name="matchLong" />
 				<tieBreak>
 					<rankings>
-						<total />
 						<scores type="bombings"/>
 						<scores type="items"/>
 						<scores type="bombs"/>
@@ -223,7 +212,6 @@
 				<match local="false" name="matchLong" />
 				<tieBreak>
 					<rankings>
-						<total />
 						<scores type="bombings"/>
 						<scores type="items"/>
 						<scores type="bombs"/>

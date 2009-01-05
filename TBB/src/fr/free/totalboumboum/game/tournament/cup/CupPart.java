@@ -3,9 +3,12 @@ package fr.free.totalboumboum.game.tournament.cup;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.Set;
 import java.util.TreeSet;
+import java.util.Map.Entry;
 
 import fr.free.totalboumboum.configuration.GameConstants;
 import fr.free.totalboumboum.configuration.profile.Profile;
@@ -65,39 +68,105 @@ public class CupPart implements Serializable
 	}
 
 	public void matchOver()
-	{	if(currentMatch==match)
-		{	HashMap<Integer,ArrayList<Integer>> ties = getTies();
-			if(ties.size()==0)
-				setOver(true);
-		}
-		else
-			setOver(true);
-	}
-
-	private void processTies()
 	{	
-		/*
-		 * 1) calculer les ties (peut y en avoir plusieurs !)
-		 * 2) déterminer lesquels ont des conséquences sur le leg suivant
-		 * 3) break the ties avec PP
-		 * 4) si pas possib: break avec match (match à cloner comme dans un tournoi séquence)
+		// process the ranks needed for the coming leg (or final ranking)
+		ArrayList<Integer> neededRanks = getNeededRanks();		
+		
+		// identify the first tie conflicting with these needed ranks
+		ArrayList<Integer> problematicTie = getProblematicTie(neededRanks);
+
+		/* TODO
+		 * 1) calculer les rangs nécessaires dans le leg suivant
+		 * 2) calculer les ties problématiques
+		 * 3) résoudre le premier tie aux points
+		 * 		si pas possible : préparer le match
+		 * 		si possible : refaire le point 3 jusqu'à plus de tie ou tie nécessitant un match
+		 * 4) s'il faut un match : préparer le match
+		 * 	  sinon le CupPart est terminé
 		 * 
 		 */
 		
+		/*
+		 * quand un match est terminé : 
+		 * tous les joueurs classables sont classés
+		 * ça fait éventuellement apparaitre de nouveaux ties,
+		 * style tie en 5 devient 2 + 1 + 2 (deux nouveaux ties, mais le joueur du milieu peut être classé)
+		 */
 		
-		
-		
-		
-		boolean result = false;
-		// get ranks
+		boolean result = processTies();
+		if(!result)
+			setOver(true);
+	
+	}
+
+	private ArrayList<Integer> getNeededRanks()
+	{	ArrayList<Integer> result = new ArrayList<Integer>();
+		int nextLegNumber = leg.getNumber()+1;
+		ArrayList<CupLeg> legs = getTournament().getLegs();
+		// this was the last leg
+		if(nextLegNumber>=legs.size())
+		{	// this part ranked : all ranks count 
+			if(rank!=-1)
+			{	for(int i=1;i<=players.size();i++)
+					result.add(i);
+			}
+			// and else: no rank counts
+		}
+		// there is another leg coming
+		else
+		{	CupLeg nextLeg = legs.get(nextLegNumber);
+			for(CupPart part: nextLeg.getParts())
+			{	for(CupPlayer player: part.getPlayers())
+				{	if(player.getPart()==number)
+						result.add(player.getRank());
+				}
+			}
+		}
+		Collections.sort(result);
+		return result;
+	}
+	
+	private ArrayList<Integer> getProblematicTie(ArrayList<Integer> neededRanks)
+	{	// process ranks
 		int[] ranks = match.getRanks();
-		// count ranks
-		int[] count = new int[ranks.length];
-		Arrays.fill(count,0);
+		HashMap<Integer,ArrayList<Integer>> res = new HashMap<Integer, ArrayList<Integer>>();
 		for(int i=0;i<ranks.length;i++)
-			count[ranks[i]]++;
-		// detect doubles
+		{	int rank = ranks[i];
+			ArrayList<Integer> list = res.get(rank);
+			if(list==null)
+				list = new ArrayList<Integer>();
+			list.add(i);			
+		}
 		
+		// keep only (meaninful) ties
+		boolean found = false;
+		int i = 1;
+		while(i<=GameConstants.CONTROL_COUNT && !found)
+		{	ArrayList<Integer> list = res.get(i);
+			// no tie
+			if(list==null || list.size()==1)
+				res.remove(i);
+			// not a problematic tie
+			else
+			{	int j = 0;
+				while(j<list.size() && !found)
+				{	int r = i+j;
+					if(neededRanks.contains(r))
+						found = true;
+					else
+						j++;
+				}
+				if(!found)
+					res.remove(i);
+			}
+			if(!found)
+				i++;
+		}
+		
+		ArrayList<Integer> result = new ArrayList<Integer>();
+		if(found)
+			result = res.get(i);
+		return result;
 	}
 	
 	/////////////////////////////////////////////////////////////////
@@ -175,7 +244,7 @@ public class CupPart implements Serializable
 	/////////////////////////////////////////////////////////////////
 	// RANKING			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	private int rank;
+	private int rank = -1;
 
 	public void setRank(int rank)
 	{	this.rank = rank;
