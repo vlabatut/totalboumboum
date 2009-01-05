@@ -13,6 +13,7 @@ import java.util.Map.Entry;
 import fr.free.totalboumboum.configuration.GameConstants;
 import fr.free.totalboumboum.configuration.profile.Profile;
 import fr.free.totalboumboum.game.match.Match;
+import fr.free.totalboumboum.game.statistics.StatisticTournament;
 
 /*
  * Total Boum Boum
@@ -46,7 +47,7 @@ public class CupPart implements Serializable
 	/////////////////////////////////////////////////////////////////
 	// GAME		/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	private HashMap<Integer,ArrayList<Integer>> ties;
+	private HashMap<Integer,ArrayList<Integer>> rankings;
 	
 	public void init()
 	{	currentMatch = match;
@@ -68,13 +69,28 @@ public class CupPart implements Serializable
 	}
 
 	public void matchOver()
-	{	
+	{	// init the players rankings according to the match results
+		initRankings();
+		
 		// process the ranks needed for the coming leg (or final ranking)
 		ArrayList<Integer> neededRanks = getNeededRanks();		
 		
 		// identify the first tie conflicting with these needed ranks
-		ArrayList<Integer> problematicTie = getProblematicTie(neededRanks);
+		int problematicTie = getProblematicTie(neededRanks);
+		
+		// try to break the tie with points
+		StatisticTournament stats = getTournament().getStats();
+		while(tieBreak.breakTie(rankings,problematicTie,stats))
+		{
+			
+		}
 
+		if(problematicTie==-1)
+			setOver(true);
+		else
+		{	
+			
+		}
 		/* TODO
 		 * 1) calculer les rangs nécessaires dans le leg suivant
 		 * 2) calculer les ties problématiques
@@ -93,9 +109,6 @@ public class CupPart implements Serializable
 		 * style tie en 5 devient 2 + 1 + 2 (deux nouveaux ties, mais le joueur du milieu peut être classé)
 		 */
 		
-		boolean result = processTies();
-		if(!result)
-			setOver(true);
 	
 	}
 
@@ -103,6 +116,7 @@ public class CupPart implements Serializable
 	{	ArrayList<Integer> result = new ArrayList<Integer>();
 		int nextLegNumber = leg.getNumber()+1;
 		ArrayList<CupLeg> legs = getTournament().getLegs();
+		
 		// this was the last leg
 		if(nextLegNumber>=legs.size())
 		{	// this part ranked : all ranks count 
@@ -112,6 +126,7 @@ public class CupPart implements Serializable
 			}
 			// and else: no rank counts
 		}
+		
 		// there is another leg coming
 		else
 		{	CupLeg nextLeg = legs.get(nextLegNumber);
@@ -122,50 +137,46 @@ public class CupPart implements Serializable
 				}
 			}
 		}
+		
+		// result
 		Collections.sort(result);
 		return result;
 	}
 	
-	private ArrayList<Integer> getProblematicTie(ArrayList<Integer> neededRanks)
+	private void initRankings()
 	{	// process ranks
 		int[] ranks = match.getRanks();
-		HashMap<Integer,ArrayList<Integer>> res = new HashMap<Integer, ArrayList<Integer>>();
+		rankings = new HashMap<Integer, ArrayList<Integer>>();
 		for(int i=0;i<ranks.length;i++)
 		{	int rank = ranks[i];
-			ArrayList<Integer> list = res.get(rank);
+			ArrayList<Integer> list = rankings.get(rank);
 			if(list==null)
 				list = new ArrayList<Integer>();
 			list.add(i);			
 		}
-		
-		// keep only (meaninful) ties
-		boolean found = false;
+	}
+	
+	@SuppressWarnings("unchecked")
+	private int getProblematicTie(ArrayList<Integer> neededRanks)
+	{	// keep only (meaninful) ties
+		int result = -1;
 		int i = 1;
-		while(i<=GameConstants.CONTROL_COUNT && !found)
-		{	ArrayList<Integer> list = res.get(i);
-			// no tie
-			if(list==null || list.size()==1)
-				res.remove(i);
-			// not a problematic tie
-			else
+		while(i<=GameConstants.CONTROL_COUNT && result<0)
+		{	ArrayList<Integer> list = rankings.get(i);
+			if(list!=null && list.size()>1)
 			{	int j = 0;
-				while(j<list.size() && !found)
+				while(j<list.size() && result<0)
 				{	int r = i+j;
 					if(neededRanks.contains(r))
-						found = true;
+						result = i;
 					else
 						j++;
 				}
-				if(!found)
-					res.remove(i);
 			}
-			if(!found)
+			if(result<0)
 				i++;
 		}
 		
-		ArrayList<Integer> result = new ArrayList<Integer>();
-		if(found)
-			result = res.get(i);
 		return result;
 	}
 	

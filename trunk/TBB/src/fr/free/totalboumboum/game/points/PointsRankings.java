@@ -32,7 +32,7 @@ import fr.free.totalboumboum.game.statistics.StatisticHolder;
  * coming from the source PointsProcessor objects. The position of the source
  * in the list determines its priority while evaluating the rankings.
  * 
- * For example, if the source was {12,2,5} then the result would be {1,3,2} 
+ * For example, if the sources were {12,5,5} and {0,4,6} then the rankings would be {1,3,2} 
  * 
  * Note : the order can be normal (ie. increasing) or inverted (ie. decreasing)
  * 

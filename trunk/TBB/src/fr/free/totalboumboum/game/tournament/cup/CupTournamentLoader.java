@@ -145,7 +145,7 @@ public class CupTournamentLoader
 		PointsRankings rankings = new PointsRankings(new ArrayList<PointsProcessor>(),false);
 		if(rankingsElt!=null)
 			rankings = (PointsRankings)PointsProcessorLoader.loadPointProcessorFromElement(rankingsElt, folder);
-		result.setRankings(rankings);
+		result.setPointsRankings(rankings);
 		
 		return result;
 	}

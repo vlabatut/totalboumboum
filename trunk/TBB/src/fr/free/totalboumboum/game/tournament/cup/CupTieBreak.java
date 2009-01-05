@@ -1,9 +1,12 @@
 package fr.free.totalboumboum.game.tournament.cup;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.HashMap;
 
 import fr.free.totalboumboum.game.match.Match;
 import fr.free.totalboumboum.game.points.PointsRankings;
+import fr.free.totalboumboum.game.statistics.StatisticTournament;
 
 /*
  * Total Boum Boum
@@ -46,13 +49,25 @@ public class CupTieBreak implements Serializable
 	/////////////////////////////////////////////////////////////////
 	// RANKINGS			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	private PointsRankings rankings;
+	private PointsRankings pointsRankings;
 	
-	public void setRankings(PointsRankings rankings)
-	{	this.rankings = rankings;
+	public void setPointsRankings(PointsRankings rankings)
+	{	this.pointsRankings = rankings;
 	}	
 	
-	public PointsRankings getRankings()
-	{	return rankings;
-	}	
+	public PointsRankings getPointsRankings()
+	{	return pointsRankings;
+	}
+	
+	public boolean breakTie(HashMap<Integer,ArrayList<Integer>> ranking, int problematicTie, CupTournament tournament)
+	{	boolean result;
+		if(problematicTie<0)
+			result = true;
+		else
+		{	float[] ranks = pointsRankings.process(tournament);
+			//TODO le PP fait le classement sur le tournoi, comment récupérer les bons joueurs ?
+			
+		}
+		return result;
+	}
 }
