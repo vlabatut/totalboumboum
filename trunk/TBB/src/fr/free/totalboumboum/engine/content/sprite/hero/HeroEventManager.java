@@ -54,7 +54,7 @@ public class HeroEventManager extends EventManager
 	/** current interactive move direction*/
 	protected Direction controlDirection;
 	
-	// NOTE � initialiser � chaque r�incarnation
+	// NOTE a initialiser a chaque reincarnation
 	protected String explosedBy = null;
 
 	public HeroEventManager(Hero sprite)

@@ -310,7 +310,7 @@ public class QuickMatchMenu extends InnerMenuPanel implements DataPanelListener
 			ArrayList<Round> rounds = match.getRounds();
 			for(Round r: rounds)
 			{	r.setLimits(limits);
-				r.setRandomLocations(randomLocation);
+				r.setRandomLocation(randomLocation);
 			}
 		}				
 	}

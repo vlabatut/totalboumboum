@@ -93,8 +93,16 @@ public class RoundLoader
 	}		
 		
     private static void loadLevelElement(Element root, Round result) throws ParserConfigurationException, SAXException, IOException, ClassNotFoundException
-    {	String name = root.getAttribute(XmlTools.ATT_NAME).getValue().trim();
+    {	// random locations
+    	String randomLocationStr = root.getAttributeValue(XmlTools.ATT_RANDOM_LOCATION).trim();
+    	boolean randomLocation = Boolean.parseBoolean(randomLocationStr);
+    	result.setRandomLocation(randomLocation);
+    	
+    	// name
+    	String name = root.getAttribute(XmlTools.ATT_NAME).getValue().trim();
+    	// packname
     	String packname = root.getAttribute(XmlTools.ATT_PACKNAME).getValue().trim();
+    	// load
     	String folder = packname+File.separator+name;
     	HollowLevel hollowLevel = new HollowLevel(folder); 
     	result.setHollowLevel(hollowLevel);
