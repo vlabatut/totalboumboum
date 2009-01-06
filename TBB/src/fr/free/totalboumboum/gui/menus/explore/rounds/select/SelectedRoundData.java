@@ -145,7 +145,7 @@ public class SelectedRoundData extends EntitledDataPanel implements FolderBrowse
 
 				{	pointsPanel = new PointsSubPanel(rightWidth,rightHeight,GuiKeys.ROUND);
 					rightPanel.add(pointsPanel);
-					limitSelectionChange();
+					limitSelectionChanged();
 				}
 
 				rightPanel.add(Box.createVerticalGlue());
@@ -221,7 +221,7 @@ public class SelectedRoundData extends EntitledDataPanel implements FolderBrowse
 	// LIMITS 			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	@Override
-	public void limitSelectionChange()
+	public void limitSelectionChanged()
 	{	Limit limit = limitsPanel.getSelectedLimit();
 		PointsProcessor pointsProcessor = null;
 		if(limit!=null)

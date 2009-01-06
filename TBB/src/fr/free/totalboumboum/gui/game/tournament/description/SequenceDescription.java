@@ -97,7 +97,7 @@ public class SequenceDescription extends TournamentDescription<SequenceTournamen
 				// points panel
 				{	pointsPanel = new PointsSubPanel(rightWidth,downHeight,GuiKeys.TOURNAMENT);
 					rightPanel.add(pointsPanel);
-					limitSelectionChange();
+					limitSelectionChanged();
 				}
 				
 				infoPanel.add(rightPanel);
@@ -134,7 +134,7 @@ public class SequenceDescription extends TournamentDescription<SequenceTournamen
 	/////////////////////////////////////////////////////////////////
 	
 	@Override
-	public void limitSelectionChange()
+	public void limitSelectionChanged()
 	{	Limit limit = limitsPanel.getSelectedLimit();
 		PointsProcessor pointsProcessor = null;
 		if(limit!=null)

@@ -121,7 +121,7 @@ public class SelectedTournamentData extends EntitledDataPanel implements FolderB
 
 				{	pointsPanel = new PointsSubPanel(rightWidth,rightHeight,GuiKeys.MATCH);
 					rightPanel.add(pointsPanel);
-					limitSelectionChange();
+					limitSelectionChanged();
 				}
 
 				rightPanel.add(Box.createVerticalGlue());
@@ -165,7 +165,7 @@ public class SelectedTournamentData extends EntitledDataPanel implements FolderB
 	/////////////////////////////////////////////////////////////////
 	
 	@Override
-	public void limitSelectionChange()
+	public void limitSelectionChanged()
 	{	Limit limit = limitsPanel.getSelectedLimit();
 		PointsProcessor pointsProcessor = null;
 		if(limit!=null)

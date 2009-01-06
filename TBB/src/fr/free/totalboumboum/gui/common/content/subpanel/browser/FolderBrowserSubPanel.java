@@ -95,7 +95,7 @@ public class FolderBrowserSubPanel extends SubPanel implements MouseListener
 		this.targetFiles = targetFiles;
 		listPanels = new ArrayList<UntitledSubPanelTable>();
 		currentPage = 0;
-		selectedRow = -1;fireFolderBrowserSelectionChange();
+		selectedRow = -1;fireFolderBrowserSelectionChanged();
 		
 		// size
 		lines = 20;
@@ -226,7 +226,7 @@ public class FolderBrowserSubPanel extends SubPanel implements MouseListener
 		if(selectedRow!=-1)
 			table.setLabelBackground(selectedRow,0,GuiTools.COLOR_TABLE_SELECTED_BACKGROUND);
 		// update listeners
-		fireFolderBrowserSelectionChange();
+		fireFolderBrowserSelectionChanged();
 	}
 
 	private void refreshList()
@@ -290,7 +290,7 @@ public class FolderBrowserSubPanel extends SubPanel implements MouseListener
 		else if(pos[0]==lineParent && showParent)
 		{	selectName(-1);
 			refreshList();
-			fireFolderBrowserParent();
+			fireFolderBrowserParentClicked();
 		}
 		// next page
 		else if(pos[0]==lineNext)
@@ -325,12 +325,12 @@ public class FolderBrowserSubPanel extends SubPanel implements MouseListener
 	{	listeners.remove(listener);		
 	}
 	
-	private void fireFolderBrowserSelectionChange()
+	private void fireFolderBrowserSelectionChanged()
 	{	for(FolderBrowserSubPanelListener listener: listeners)
 			listener.packBrowserSelectionChanged();
 	}
 
-	private void fireFolderBrowserParent()
+	private void fireFolderBrowserParentClicked()
 	{	for(FolderBrowserSubPanelListener listener: listeners)
 			listener.packBrowserParentReached();
 	}

@@ -137,7 +137,7 @@ public class SingleDescription extends TournamentDescription<SingleTournament> i
 	// LIMITS 			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////	
 	@Override
-	public void limitSelectionChange()
+	public void limitSelectionChanged()
 	{	Limit limit = limitsPanel.getSelectedLimit();
 		PointsProcessor pointsProcessor = null;
 		if(limit!=null)

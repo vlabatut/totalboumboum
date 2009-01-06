@@ -659,6 +659,15 @@
 			<text name="RoundCount" value="Rounds"  tooltip="Number of rounds defined for this match" />
 		</group>
 
+<!-- PART -->
+		<group name="Part">
+			<text name="After" value="After"  tooltip="Qualified for the match..." />
+			<text name="Before" value="Before" tooltip="Qualified from the match..." />
+			<text name="Player" value="Player" tooltip="Player name" />
+			<text name="Rank" value="Rank"  tooltip="Player rank in this match" />
+			<text name="Undecided" value="Undecided"  tooltip="Player not determined yet" />
+		</group>
+
 <!-- PLAYERS -->
 		<group name="Players">
 			<group name="List">

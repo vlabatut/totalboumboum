@@ -120,7 +120,7 @@ public class SelectedMatchData extends EntitledDataPanel implements FolderBrowse
 
 				{	pointsPanel = new PointsSubPanel(rightWidth,rightHeight,GuiKeys.MATCH);
 					rightPanel.add(pointsPanel);
-					limitSelectionChange();
+					limitSelectionChanged();
 				}
 
 				rightPanel.add(Box.createVerticalGlue());
@@ -182,7 +182,7 @@ public class SelectedMatchData extends EntitledDataPanel implements FolderBrowse
 	/////////////////////////////////////////////////////////////////
 	
 	@Override
-	public void limitSelectionChange()
+	public void limitSelectionChanged()
 	{	Limit limit = limitsPanel.getSelectedLimit();
 		PointsProcessor pointsProcessor = null;
 		if(limit!=null)

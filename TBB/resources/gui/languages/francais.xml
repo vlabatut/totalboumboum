@@ -657,6 +657,15 @@
 			<text name="RoundCount" value="Manches"  tooltip="Nombre de manches définies pour cette rencontre" />
 		</group>
 
+<!-- PART -->
+		<group name="Part">
+			<text name="After" value="Suivant"  tooltip="Qualifié pour la rencontre..." />
+			<text name="Before" value="Précédent" tooltip="Qualifié de la rencontre..." />
+			<text name="Player" value="Joueur" tooltip="Nom du joueur" />
+			<text name="Rank" value="Rang"  tooltip="Rang du joueur dans cette rencontre" />
+			<text name="Undecided" value="Indéterminé"  tooltip="Joueur pas encore déterminé" />
+		</group>
+
 <!-- PLAYERS -->
 		<group name="Players">
 			<group name="List">
