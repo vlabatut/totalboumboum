@@ -146,7 +146,9 @@ buttonStatistics.setEnabled(false);
 				tournamentStatistics.setTournament(trnmt);	
 			}
 			else if(tournament instanceof CupTournament)
-			{	CupTournament trnmt = (CupTournament) tournament;
+			{	
+/*				
+				CupTournament trnmt = (CupTournament) tournament;
 				// create
 				CupDescription trnmtDescription = new CupDescription(container);
 				tournamentDescription = trnmtDescription;
@@ -158,6 +160,7 @@ buttonStatistics.setEnabled(false);
 				trnmtDescription.setTournament(trnmt);
 				trnmtResults.setTournament(trnmt);
 				tournamentStatistics.setTournament(trnmt);	
+*/				
 			}
 			else if(tournament instanceof LeagueTournament)
 			{
