@@ -4,10 +4,10 @@
 	
 	<variable-tiles>
 		<variable-tile name="itemTile">
-			<value proba="0.5" >
+			<value proba="0.4" >
 				<item type="extrabomb" />
 			</value>
-			<value proba="0.5" >
+			<value proba="0.6" >
 				<item type="extraflame" />
 			</value>
 		</variable-tile>
