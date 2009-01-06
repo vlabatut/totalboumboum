@@ -397,6 +397,7 @@ if(explosedBy==null)
 					ActionAbility ability = sprite.computeAbility(action);
 					if(ability.isActive())
 					{	sprite.addItem(item);
+						//TODO c'est bizarre : le gesture de l'item n'est pas mis à HIDDING au cours de l'opération (?)
 					}
 				}
 			}

@@ -50,7 +50,6 @@ public class AiHero extends AiSprite<Hero>
 	@Override
 	void update(AiTile tile)
 	{	super.update(tile);
-System.out.println(getSprite()+": "+getState().getName());	
 		updateBombParam();
 	}
 

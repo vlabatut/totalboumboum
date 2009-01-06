@@ -159,18 +159,18 @@ result = level.getTile(x, y)==this;
 		if(block!=null)
 		{	block.update();
 			if(block.isToBeRemovedFromTile())
-			{	block = null;
-				level.removeSprite(block);
-			//NOTE à compléter (?)
+			{	level.removeSprite(block); //NOTE deux lignes inversées, idem pr item
+				block = null;			
+				//NOTE à compléter (?)
 			}
 		}		
 		// item
 		if(item!=null)
 		{	item.update();
 			if(item.isToBeRemovedFromTile())
-			{	item = null;
-				level.removeSprite(item);
-			//NOTE à compléter (?)
+			{	level.removeSprite(item); //NOTE deux lignes inversées, idem pr block
+				item = null;				
+				//NOTE à compléter (?)
 			}
 		}		
 	}
