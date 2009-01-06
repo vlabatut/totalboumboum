@@ -612,7 +612,7 @@ public class AiZone
 		{	T temp = it.next();
 			if(!temp.isChecked())
 			{	Sprite sprite = temp.getSprite();
-				if(sprite.isEnded())
+				if(sprite.isEnded() || sprite.isToBeRemovedFromTile())
 					it.remove();
 			}
 		}
