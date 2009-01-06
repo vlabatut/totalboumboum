@@ -2,11 +2,12 @@ package fr.free.totalboumboum.game.tournament.cup;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 
+import fr.free.totalboumboum.configuration.profile.Profile;
 import fr.free.totalboumboum.game.match.Match;
 import fr.free.totalboumboum.game.points.PointsRankings;
-import fr.free.totalboumboum.game.statistics.StatisticTournament;
 
 /*
  * Total Boum Boum
@@ -33,6 +34,23 @@ import fr.free.totalboumboum.game.statistics.StatisticTournament;
 public class CupTieBreak implements Serializable
 {	private static final long serialVersionUID = 1L;
 
+	public CupTieBreak(CupPart part)
+	{	this.part = part;
+	}
+
+	/////////////////////////////////////////////////////////////////
+	// PART			/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	private CupPart part;
+	
+	public void setPart(CupPart part)
+	{	this.part = part;
+	}	
+	
+	public CupPart getPart()
+	{	return part;
+	}
+	
 	/////////////////////////////////////////////////////////////////
 	// MATCH			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
@@ -44,6 +62,25 @@ public class CupTieBreak implements Serializable
 	
 	public Match getMatch()
 	{	return match;
+	}
+	
+	public Match initMatch()
+	{	// involved players
+		ArrayList<Profile> partProfiles = part.getProfiles();
+		ArrayList<Profile> profiles = new ArrayList<Profile>();
+		HashMap<Integer,ArrayList<Integer>> rankings = part.getRankings();
+		int problematicTie = part.getProblematicTie();
+		ArrayList<Integer> tie = rankings.get(problematicTie);
+		for(Integer i: tie)
+		{	Profile p = partProfiles.get(i);
+			profiles.add(p);			
+		}
+		
+		// init match 
+		Match result = match.copy();
+		result.init(profiles);
+		
+		return result;
 	}
 	
 	/////////////////////////////////////////////////////////////////
@@ -59,13 +96,57 @@ public class CupTieBreak implements Serializable
 	{	return pointsRankings;
 	}
 	
-	public boolean breakTie(HashMap<Integer,ArrayList<Integer>> ranking, int problematicTie, CupTournament tournament)
+	public boolean breakTie()
 	{	boolean result;
+		int problematicTie = part.getProblematicTie();
 		if(problematicTie<0)
 			result = true;
 		else
-		{	float[] ranks = pointsRankings.process(tournament);
-			//TODO le PP fait le classement sur le tournoi, comment récupérer les bons joueurs ?
+		{	// profiles of the tied players
+			ArrayList<Profile> partProfiles = part.getProfiles();
+			HashMap<Integer,ArrayList<Integer>> rankings = part.getRankings();
+			ArrayList<Integer> tie = rankings.get(problematicTie);
+			int tiedPlayersCount = tie.size();
+			ArrayList<Profile> tiedProfiles = new ArrayList<Profile>();
+			for(Integer i: tie)
+				tiedProfiles.add(partProfiles.get(i));
+			
+			// tournament-relative numbers of the tied players
+			CupTournament tournament = part.getTournament();
+			ArrayList<Profile> tournamentProfiles = tournament.getProfiles();
+			ArrayList<Integer> numbers = new ArrayList<Integer>();
+			for(Profile p: tiedProfiles)
+				numbers.add(tournamentProfiles.indexOf(p));
+			
+			// PP-relative ranks of the tied players
+			float[] tournamentRanks = pointsRankings.process(tournament);
+			int relativeRanks[] = new int[tiedPlayersCount];
+			Arrays.fill(relativeRanks,problematicTie);
+			for(int i=0;i<numbers.size()-1;i++)
+			{	for(int j=i+1;j<numbers.size();j++)
+				{	if(tournamentRanks[i]>tournamentRanks[j])
+						relativeRanks[i]++;
+					else if(tournamentRanks[i]<tournamentRanks[j])
+						relativeRanks[j]++;
+				}
+			}		
+				
+			// update rankings in part
+			for(int i=0;i<relativeRanks.length;i++)
+			{	if(relativeRanks[i]!=problematicTie)
+				{	// delete old rank
+					int playerNumber = tie.get(i);
+					tie.remove(playerNumber);
+					// insert new rank
+					int newRank = relativeRanks[i];
+					ArrayList<Integer> list = new ArrayList<Integer>();
+					list.add(playerNumber);
+					rankings.put(newRank,list);
+				}				
+			}
+			
+			// if at least one tie was remove, then the tie-break was successful
+			result = tie.size() != tiedPlayersCount;
 			
 		}
 		return result;

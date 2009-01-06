@@ -157,13 +157,13 @@ public class Round implements StatisticHolder, Serializable
 	/////////////////////////////////////////////////////////////////
 	private int remainingPlayers;
 	private final ArrayList<Boolean> playersStatus = new ArrayList<Boolean>();
-	private boolean randomLocations;
+	private boolean randomLocation;
 
-	public boolean getRandomLocations()
-	{	return randomLocations;
+	public boolean getRandomLocation()
+	{	return randomLocation;
 	}
-	public void setRandomLocations(boolean randomLocations)
-	{	this.randomLocations = randomLocations;
+	public void setRandomLocation(boolean randomLocations)
+	{	this.randomLocation = randomLocations;
 	}
 
 	public ArrayList<Boolean> getPlayersStatus()
@@ -351,7 +351,7 @@ public class Round implements StatisticHolder, Serializable
 		result.setHollowLevel(hollowLevel.copy());
 		result.setAuthor(author);
 		result.setName(name);
-		result.setRandomLocations(randomLocations);
+		result.setRandomLocation(randomLocation);
 		return result;
 	}
 	

@@ -122,7 +122,7 @@ public class CupTournamentLoader
 		
 		// tie break
 		Element tieBreakElt = root.getChild(XmlTools.ELT_TIE_BREAK);
-		CupTieBreak tieBreak = loadTieBreakElement(tieBreakElt,folder,leg.getTournament());
+		CupTieBreak tieBreak = loadTieBreakElement(tieBreakElt,folder,result);
 		result.setTieBreak(tieBreak);
 		
 		// players
@@ -132,12 +132,12 @@ public class CupTournamentLoader
 		return result;
 	}
 	
-	private static CupTieBreak loadTieBreakElement(Element root, String folder, CupTournament tournament) throws ParserConfigurationException, SAXException, IOException, ClassNotFoundException
-	{	CupTieBreak result = new CupTieBreak();
+	private static CupTieBreak loadTieBreakElement(Element root, String folder, CupPart part) throws ParserConfigurationException, SAXException, IOException, ClassNotFoundException
+	{	CupTieBreak result = new CupTieBreak(part);
 	
 		// match
 		Element matchElt = root.getChild(XmlTools.ELT_MATCH);
-		Match match = TournamentLoader.loadMatchElement(matchElt,folder,tournament);
+		Match match = TournamentLoader.loadMatchElement(matchElt,folder,part.getTournament());
 		result.setMatch(match);
 		
 		// tie break

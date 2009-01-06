@@ -2,18 +2,12 @@ package fr.free.totalboumboum.game.tournament.cup;
 
 import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashMap;
-import java.util.Iterator;
-import java.util.Set;
-import java.util.TreeSet;
-import java.util.Map.Entry;
 
 import fr.free.totalboumboum.configuration.GameConstants;
 import fr.free.totalboumboum.configuration.profile.Profile;
 import fr.free.totalboumboum.game.match.Match;
-import fr.free.totalboumboum.game.statistics.StatisticTournament;
 
 /*
  * Total Boum Boum
@@ -48,6 +42,15 @@ public class CupPart implements Serializable
 	// GAME		/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	private HashMap<Integer,ArrayList<Integer>> rankings;
+	private int problematicTie = -1;
+	
+	public int getProblematicTie()
+	{	return problematicTie;
+	}
+	
+	public HashMap<Integer,ArrayList<Integer>> getRankings()
+	{	return rankings;		
+	}
 	
 	public void init()
 	{	currentMatch = match;
@@ -55,8 +58,7 @@ public class CupPart implements Serializable
 	}
 	
 	public void progress()
-	{	currentMatch = tieBreak.getMatch();
-//TODO only tied profiles, not necesserally all of them		
+	{	currentMatch = tieBreak.initMatch();
 		currentMatch.init(profiles);
 	}
 	
@@ -76,40 +78,14 @@ public class CupPart implements Serializable
 		ArrayList<Integer> neededRanks = getNeededRanks();		
 		
 		// identify the first tie conflicting with these needed ranks
-		int problematicTie = getProblematicTie(neededRanks);
+		problematicTie = getProblematicTie(neededRanks);
 		
 		// try to break the tie with points
-		StatisticTournament stats = getTournament().getStats();
-		while(tieBreak.breakTie(rankings,problematicTie,stats))
-		{
-			
-		}
+		while(tieBreak.breakTie())
+			problematicTie = getProblematicTie(neededRanks);
 
 		if(problematicTie==-1)
 			setOver(true);
-		else
-		{	
-			
-		}
-		/* TODO
-		 * 1) calculer les rangs nécessaires dans le leg suivant
-		 * 2) calculer les ties problématiques
-		 * 3) résoudre le premier tie aux points
-		 * 		si pas possible : préparer le match
-		 * 		si possible : refaire le point 3 jusqu'à plus de tie ou tie nécessitant un match
-		 * 4) s'il faut un match : préparer le match
-		 * 	  sinon le CupPart est terminé
-		 * 
-		 */
-		
-		/*
-		 * quand un match est terminé : 
-		 * tous les joueurs classables sont classés
-		 * ça fait éventuellement apparaitre de nouveaux ties,
-		 * style tie en 5 devient 2 + 1 + 2 (deux nouveaux ties, mais le joueur du milieu peut être classé)
-		 */
-		
-	
 	}
 
 	private ArrayList<Integer> getNeededRanks()
@@ -156,7 +132,6 @@ public class CupPart implements Serializable
 		}
 	}
 	
-	@SuppressWarnings("unchecked")
 	private int getProblematicTie(ArrayList<Integer> neededRanks)
 	{	// keep only (meaninful) ties
 		int result = -1;
@@ -253,7 +228,7 @@ public class CupPart implements Serializable
 	}
 
 	/////////////////////////////////////////////////////////////////
-	// RANKING			/////////////////////////////////////////////
+	// RANK				/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	private int rank = -1;
 
@@ -295,4 +270,8 @@ public class CupPart implements Serializable
 	public void addProfile(Profile profile)
 	{	profiles.add(profile);
 	}	
+	
+	public ArrayList<Profile> getProfiles()
+	{	return profiles;	
+	}
 }

@@ -106,7 +106,7 @@ public class Loop implements Runnable, Serializable
 		int remainingPlayers = profiles.size();
 		Players plyrs = hollowLevel.getPlayers();
 		PlayerLocation[] initialPositions = plyrs.getLocations().get(remainingPlayers);
-		if(round.getRandomLocations())
+		if(round.getRandomLocation())
 		{	ArrayList<PlayerLocation> loc = new ArrayList<PlayerLocation>();
 			for(int i=0;i<initialPositions.length;i++)
 				loc.add(initialPositions[i]);
