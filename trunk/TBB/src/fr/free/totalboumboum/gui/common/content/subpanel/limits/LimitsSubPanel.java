@@ -273,6 +273,6 @@ public class LimitsSubPanel<T extends Limit> extends EntitledSubPanelTable imple
 	
 	private void fireLimitSelectionChange()
 	{	for(LimitsSubPanelListener listener: listeners)
-			listener.limitSelectionChange();
+			listener.limitSelectionChanged();
 	}
 }

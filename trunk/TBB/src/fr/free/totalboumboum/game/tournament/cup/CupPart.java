@@ -41,7 +41,7 @@ public class CupPart implements Serializable
 	/////////////////////////////////////////////////////////////////
 	// GAME		/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	private HashMap<Integer,ArrayList<Integer>> rankings;
+	private final HashMap<Integer,ArrayList<Integer>> rankings = new HashMap<Integer, ArrayList<Integer>>();
 	private int problematicTie = -1;
 	
 	public int getProblematicTie()
@@ -122,7 +122,6 @@ public class CupPart implements Serializable
 	private void initRankings()
 	{	// process ranks
 		int[] ranks = match.getRanks();
-		rankings = new HashMap<Integer, ArrayList<Integer>>();
 		for(int i=0;i<ranks.length;i++)
 		{	int rank = ranks[i];
 			ArrayList<Integer> list = rankings.get(rank);

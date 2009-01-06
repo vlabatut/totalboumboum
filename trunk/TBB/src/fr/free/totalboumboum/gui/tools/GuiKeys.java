@@ -35,6 +35,7 @@ public class GuiKeys
 	public static final String ABOUT = "About";
 	public static final String ADD = "Add";
 	public static final String ADVANCED = "Advanced";
+	public static final String AFTER = "After";
 	public static final String AI = "Ai";
 	public static final String ALLOWED = "Allowed";
 	public static final String ARCHIVE = "Archive";
@@ -44,6 +45,7 @@ public class GuiKeys
 	public static final String AUTOSAVE = "Autosave";
 	public static final String AVAILABLE = "Available";
 	public static final String BACK = "Back";
+	public static final String BEFORE = "Before";
 	public static final String BLACK = "Black";
 	public static final String BLUE = "Blue";
 	public static final String BOMBEDS = "Bombeds";
@@ -127,6 +129,7 @@ public class GuiKeys
 	public static final String PAGEUP = "PageUp";
 	public static final String PAINTINGS = "Paintings";
 	public static final String PARENT = "Parent";
+	public static final String PART = "Part";
 	public static final String PARTIAL = "Partial";
 	public static final String PINK = "Pink";
 	public static final String PLAY = "Play";
@@ -181,6 +184,7 @@ public class GuiKeys
 	public static final String TRUE = "True";
 	public static final String TYPE = "Type";
 	public static final String TYPES = "Types";
+	public static final String UNDECIDED = "Undecided";
 	public static final String USE = "Use";
 	public static final String VALUE = "Value";
 	public static final String VALUES = "Values";
@@ -765,6 +769,14 @@ public class GuiKeys
 	public static final String COMMON_MATCH_ALLOWED_PLAYERS = COMMON_MATCH+ALLOWED+PLAYERS;
 	public static final String COMMON_MATCH_ROUND_COUNT = COMMON_MATCH+ROUND+COUNT;
 			
+	/* PART */
+	public static final String COMMON_PART = COMMON+PART;
+	public static final String COMMON_PART_AFTER = COMMON_PART+AFTER;
+	public static final String COMMON_PART_BEFORE = COMMON_PART+BEFORE;
+	public static final String COMMON_PART_PLAYER = COMMON_PART+PLAYER;
+	public static final String COMMON_PART_RANK = COMMON_PART+RANK;
+	public static final String COMMON_PART_UNDECIDED= COMMON_PART+UNDECIDED;
+
 	/* PLAYERS */
 	public static final String COMMON_PLAYERS = COMMON+PLAYERS;
 		/* LIST */

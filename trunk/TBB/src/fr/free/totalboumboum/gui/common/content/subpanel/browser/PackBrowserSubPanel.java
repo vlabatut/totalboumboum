@@ -317,7 +317,7 @@ public class PackBrowserSubPanel extends SubPanel implements MouseListener, Fold
 	{	listeners.remove(listener);		
 	}
 	
-	private void firePackBrowserSelectionChange()
+	private void firePackBrowserSelectionChanged()
 	{	for(PackBrowserSubPanelListener listener: listeners)
 			listener.packBrowserSelectionChanged();
 	}
@@ -327,7 +327,7 @@ public class PackBrowserSubPanel extends SubPanel implements MouseListener, Fold
 	/////////////////////////////////////////////////////////////////
 	@Override
 	public void packBrowserSelectionChanged()
-	{	firePackBrowserSelectionChange();
+	{	firePackBrowserSelectionChanged();
 	}
 
 	@Override

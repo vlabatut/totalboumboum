@@ -257,7 +257,7 @@ public class RoundDescription extends EntitledDataPanel implements LimitsSubPane
 	// LIMITS 			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	@Override
-	public void limitSelectionChange()
+	public void limitSelectionChanged()
 	{	Limit limit = limitsPanel.getSelectedLimit();
 		PointsProcessor pointsProcessor = null;
 		if(limit!=null)

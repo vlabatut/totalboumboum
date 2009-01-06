@@ -1,4 +1,6 @@
-package fr.free.totalboumboum.gui.common.content.subpanel.limits;
+package fr.free.totalboumboum.gui.common.content.subpanel.part;
+
+import fr.free.totalboumboum.game.tournament.cup.CupPart;
 
 /*
  * Total Boum Boum
@@ -21,7 +23,8 @@ package fr.free.totalboumboum.gui.common.content.subpanel.limits;
  * 
  */
 
-public interface LimitsSubPanelListener
+public interface PartSubPanelListener
 {
-	public void limitSelectionChanged();
+	public void partBeforeClicked(CupPart part);
+	public void partAfterClicked(CupPart part);
 }
