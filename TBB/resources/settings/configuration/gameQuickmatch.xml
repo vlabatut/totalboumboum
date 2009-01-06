@@ -3,7 +3,7 @@
 	<options useLastPlayers="true" useLastLevels="true" useLastSettings="true" />
 	<settings>
 		<levels randomOrder="false" />
-		<players randomLocation="true" />
+		<players randomLocation="false" />
 		<limits points="0" rounds="6" time="60000" />
 		<points share="true" draw="none">
 			<value rank="1" points="8" />
