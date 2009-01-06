@@ -148,7 +148,7 @@ public class SequenceTournament extends AbstractTournament
 	@Override
 	public Set<Integer> getAllowedPlayerNumbers()
 	{	TreeSet<Integer> result = new TreeSet<Integer>();
-		for(int i=1;i<=GameConstants.MAX_PROFILES_COUNT;i++)
+		for(int i=0;i<=GameConstants.MAX_PROFILES_COUNT;i++)
 			result.add(i);
 		for(Match m:matches)
 		{	Set<Integer> temp = m.getAllowedPlayerNumbers();

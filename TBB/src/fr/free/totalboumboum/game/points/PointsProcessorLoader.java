@@ -101,7 +101,7 @@ public class PointsProcessorLoader
 		return result;
 	}		
 
-	private static PointsProcessor loadGeneralPointElement(Element root)
+	public static PointsProcessor loadGeneralPointElement(Element root)
 	{	PointsProcessor result = null;
 		String type = root.getName();
 

@@ -184,11 +184,11 @@ public class Match implements StatisticHolder, Serializable
 	
 	public Set<Integer> getAllowedPlayerNumbers()
 	{	TreeSet<Integer> result = new TreeSet<Integer>();
-		for(int i=1;i<=GameConstants.MAX_PROFILES_COUNT;i++)
+		for(int i=0;i<=GameConstants.MAX_PROFILES_COUNT;i++)
 			result.add(i);
 		for(Round r:rounds)
 		{	Set<Integer> temp = r.getAllowedPlayerNumbers();
-			result.retainAll(temp);			
+			result.retainAll(temp);
 		}
 		return result;			
 	}
