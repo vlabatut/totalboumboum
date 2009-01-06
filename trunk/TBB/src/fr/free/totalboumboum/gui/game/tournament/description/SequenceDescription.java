@@ -1,4 +1,4 @@
-package fr.free.totalboumboum.gui.game.tournament.description.cup;
+package fr.free.totalboumboum.gui.game.tournament.description;
 
 /*
  * Total Boum Boum
@@ -39,11 +39,10 @@ import fr.free.totalboumboum.gui.common.content.subpanel.players.PlayersListSubP
 import fr.free.totalboumboum.gui.common.content.subpanel.points.PointsSubPanel;
 import fr.free.totalboumboum.gui.common.structure.panel.SplitMenuPanel;
 import fr.free.totalboumboum.gui.common.structure.subpanel.SubPanel;
-import fr.free.totalboumboum.gui.game.tournament.description.TournamentDescription;
 import fr.free.totalboumboum.gui.tools.GuiKeys;
 import fr.free.totalboumboum.gui.tools.GuiTools;
 
-public class CupDescription extends TournamentDescription<SequenceTournament> implements LimitsSubPanelListener
+public class SequenceDescription extends TournamentDescription<SequenceTournament> implements LimitsSubPanelListener
 {	
 	private static final long serialVersionUID = 1L;
 	private static final float SPLIT_RATIO = 0.6f;
@@ -52,7 +51,7 @@ public class CupDescription extends TournamentDescription<SequenceTournament> im
 	private LimitsSubPanel<TournamentLimit> limitsPanel;
 	private PointsSubPanel pointsPanel;
 
-	public CupDescription(SplitMenuPanel container)
+	public SequenceDescription(SplitMenuPanel container)
 	{	super(container);
 		
 		// data

@@ -144,7 +144,7 @@ public class CupTournamentLoader
 		Element rankingsElt = root.getChild(XmlTools.ELT_RANKINGS);
 		PointsRankings rankings = new PointsRankings(new ArrayList<PointsProcessor>(),false);
 		if(rankingsElt!=null)
-			rankings = (PointsRankings)PointsProcessorLoader.loadPointProcessorFromElement(rankingsElt, folder);
+			rankings = (PointsRankings)PointsProcessorLoader.loadGeneralPointElement(rankingsElt);
 		result.setPointsRankings(rankings);
 		
 		return result;

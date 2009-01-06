@@ -1,4 +1,4 @@
-package fr.free.totalboumboum.gui.game.tournament.description.single;
+package fr.free.totalboumboum.gui.game.tournament.description;
 
 /*
  * Total Boum Boum
@@ -40,7 +40,6 @@ import fr.free.totalboumboum.gui.common.content.subpanel.players.PlayersListSubP
 import fr.free.totalboumboum.gui.common.content.subpanel.points.PointsSubPanel;
 import fr.free.totalboumboum.gui.common.structure.panel.SplitMenuPanel;
 import fr.free.totalboumboum.gui.common.structure.subpanel.SubPanel;
-import fr.free.totalboumboum.gui.game.tournament.description.TournamentDescription;
 import fr.free.totalboumboum.gui.tools.GuiKeys;
 import fr.free.totalboumboum.gui.tools.GuiTools;
 

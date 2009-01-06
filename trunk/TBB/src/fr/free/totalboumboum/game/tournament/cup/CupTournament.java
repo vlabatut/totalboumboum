@@ -110,7 +110,7 @@ public class CupTournament extends AbstractTournament
 	@Override
 	public Set<Integer> getAllowedPlayerNumbers()
 	{	Set<Integer> result = new TreeSet<Integer>();
-		for(int i=0;i<GameConstants.MAX_PROFILES_COUNT;i++)
+		for(int i=0;i<=GameConstants.MAX_PROFILES_COUNT;i++)
 		{	ArrayList<ArrayList<Integer>> distri = processPlayerDistribution(i);
 			if(distri.size()>0)
 				result.add(i);
@@ -194,7 +194,7 @@ for(ArrayList<Integer> list: permutations)
 		while(itLeg.hasNext() && result)
 		{	CupLeg leg = itLeg.next();
 			int legNumber = leg.getNumber();
-			int prevLeg = legNumber-1;
+//			int prevLeg = legNumber-1;
 			ArrayList<Integer> list = new ArrayList<Integer>();
 			temp.add(list);
 			Iterator<CupPart> itPart = leg.getParts().iterator();
@@ -205,18 +205,18 @@ for(ArrayList<Integer> list: permutations)
 				Set<Integer> matchAllowed = part.getMatch().getAllowedPlayerNumbers();
 				int qualifiedCount = 0;
 				if(legNumber==0)
-				{	int prevPart = partNumber-1;
-					qualifiedCount = temp.get(prevLeg).get(prevPart);
+				{	int prevPart = partNumber;
+					qualifiedCount = temp.get(legNumber).get(prevPart);
 					if(!matchAllowed.contains(qualifiedCount))
 						result = false;
 					else
-						list.set(partNumber-1,qualifiedCount);
+						list.set(partNumber,qualifiedCount);
 				}
 				else
 				{	ArrayList<CupPlayer> players = part.getPlayers();
 					for(CupPlayer player: players)
 					{	int prevPart = player.getPart();
-						int prevInvolved = temp.get(prevLeg).get(prevPart);
+						int prevInvolved = temp.get(legNumber).get(prevPart);
 						int prevRank = player.getRank();
 						if(prevRank<=prevInvolved)
 							qualifiedCount++;						
@@ -224,7 +224,7 @@ for(ArrayList<Integer> list: permutations)
 					if(!matchAllowed.contains(qualifiedCount))
 						result = false;					
 					else
-						list.set(partNumber-1,qualifiedCount);
+						list.set(partNumber,qualifiedCount);
 				}
 			}			
 		}
@@ -246,7 +246,6 @@ for(ArrayList<Integer> list: permutations)
 				p++;
 			}
 		}
-			
 	}
 
 	/////////////////////////////////////////////////////////////////
