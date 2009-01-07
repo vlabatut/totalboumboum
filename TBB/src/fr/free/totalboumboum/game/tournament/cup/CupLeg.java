@@ -40,8 +40,7 @@ public class CupLeg implements Serializable
 	// GAME		/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	public void init()
-	{	
-		// are parts in random order ?
+	{	// are parts in random order ?
 		if(randomizeParts)
 			randomizeParts();
 		

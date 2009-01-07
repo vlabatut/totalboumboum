@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.Map.Entry;
 
 import fr.free.totalboumboum.configuration.GameConstants;
@@ -60,7 +61,7 @@ public class CupPart implements Serializable
 	
 	public void progress()
 	{	currentMatch = tieBreak.initMatch();
-		currentMatch.init(profiles);
+//		currentMatch.init(profiles); //déjà fait dans tieBreak.initMatch()
 	}
 	
 	public void finish()
@@ -76,13 +77,13 @@ public class CupPart implements Serializable
 		initRankings();
 		
 		// process the ranks needed for the coming leg (or final ranking)
-		ArrayList<Integer> neededRanks = getNeededRanks();		
+		ArrayList<Integer> neededRanks = getNeededRanks();
 		
 		// identify the first tie conflicting with these needed ranks
 		problematicTie = getProblematicTie(neededRanks);
 		
 		// try to break the tie with points
-		while(tieBreak.breakTie())
+		while(problematicTie!=-1 && tieBreak.breakTie())
 			problematicTie = getProblematicTie(neededRanks);
 
 		if(problematicTie==-1)
@@ -127,7 +128,9 @@ public class CupPart implements Serializable
 		{	int rank = ranks[i];
 			ArrayList<Integer> list = rankings.get(rank);
 			if(list==null)
-				list = new ArrayList<Integer>();
+			{	list = new ArrayList<Integer>();
+				rankings.put(rank,list);
+			}
 			list.add(i);			
 		}
 	}
@@ -281,11 +284,38 @@ public class CupPart implements Serializable
 	{	players.add(player);
 	}
 	
+	/////////////////////////////////////////////////////////////////
+	// PROFILES			/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
 	public void addProfile(Profile profile)
 	{	profiles.add(profile);
 	}	
 	
 	public ArrayList<Profile> getProfiles()
 	{	return profiles;	
+	}
+	
+	public Profile getProfileForRank(int rank)
+	{	int index = getIndexForRank(rank);
+		Profile result = null;
+		if(index>=0 && index<profiles.size())
+			result = profiles.get(index);
+		return result;
+	}
+	
+	public int getIndexForRank(int rank)
+	{	int result = -1;
+		Iterator<Entry<Integer,ArrayList<Integer>>> it = rankings.entrySet().iterator();
+		int cpt = 0;
+		while(cpt<rank && it.hasNext())
+		{	Entry<Integer,ArrayList<Integer>> entry = it.next();
+			ArrayList<Integer> list = entry.getValue();
+			Iterator<Integer> it2 = list.iterator();
+			while(cpt<rank && it2.hasNext())
+			{	cpt ++;
+				result = it2.next();
+			}
+		}
+		return result;
 	}
 }

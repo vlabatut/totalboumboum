@@ -82,7 +82,7 @@ public class GuiTools
 	};
 	public static final String STARTUP_LEGAL[] = 
 	{	"Total Boum Boum version "+GameConstants.VERSION,
-		new Character('\u00A9').toString()+" 2008 Vincent Labatut",
+		new Character('\u00A9').toString()+" 2008-2009 Vincent Labatut",
 		"Licensed under the GPL v2"
 	};
 	

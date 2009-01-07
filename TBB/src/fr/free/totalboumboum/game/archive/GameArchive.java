@@ -54,9 +54,11 @@ public class GameArchive
 		result.type = TournamentType.getType(tournament);
 		
 		// played
-		result.matches = tournament.getStats().getConfrontationCount();
+		result.matches = 0;
+		if(tournament.getStats()!=null)
+			result.matches = tournament.getStats().getConfrontationCount();
 		Match match = tournament.getCurrentMatch();
-		if(match==null)
+		if(match==null || match.getStats()==null)
 			result.rounds = 0;
 		else
 			result.rounds = match.getStats().getConfrontationCount();

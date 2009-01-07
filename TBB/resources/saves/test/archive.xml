@@ -1,14 +1,25 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<archive xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../resources/schemas/archive.xsd">
-	<tournament name="Tournament-séquence court" type="sequence" />
-	<played matches="1" rounds="0" />
-	<dates start="2008-12-31T23:54:10" save="2008-12-31T23:57:20" />
+<archive xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="..\..\..\resources\schemas\archive.xsd">
+	<tournament name="Tournoi Galatasaray 2" type="cup" />
+	<played matches="11" rounds="4" />
+	<dates start="2009-01-07T21:09:10" save="2009-01-08T00:25:53" />
 	<players>
-		<player name="Bingöl+Ketenci" />
-		<player name="Demirkol+Doğan" />
-		<player name="Kılıç+Pala" />
+		<player name="Tırtıl+Tomruk" />
+		<player name="Kökciyan+Mazmanoğlu" />
 		<player name="Joueur humain" />
-		<player name="Promeneur" />
+		<player name="Bilgin+Karabağ" />
+		<player name="Erişik+Pektaş" />
+		<player name="Devecioğlu+Korkmaz" />
+		<player name="Adatepe" />
+		<player name="Akpolat+Şener" />
+		<player name="Çalışkan+Cap+Doğaner" />
+		<player name="Medeni+Uluer" />
+		<player name="Çöremen+Küçükkarakürt" />
+		<player name="Demirağ+Şagar" />
+		<player name="Günalp+Yürtsever" />
+		<player name="Dayioğlugil+Geçkalan" />
+		<player name="Altay+Basaranoğlu" />
+		<player name="Akkaya+Danacioğlu" />
 	</players>
 </archive>
 
