@@ -354,7 +354,7 @@ public class PartSubPanel extends EntitledSubPanelLines implements MouseListener
 			listener.partAfterClicked(part);
 	}
 
-	private void fireBeforeAfterClicked(CupPart part)
+	private void fireBeforeClicked(CupPart part)
 	{	for(PartSubPanelListener listener: listeners)
 			listener.partBeforeClicked(part);
 	}
@@ -402,7 +402,7 @@ public class PartSubPanel extends EntitledSubPanelLines implements MouseListener
 						if(previousLegNumber>=0)
 						{	CupLeg previousLeg = tournament.getLegs().get(previousLegNumber);
 							CupPart previousPart = previousLeg.getPart(partNumber);
-							fireBeforeAfterClicked(previousPart);
+							fireBeforeClicked(previousPart);
 						}
 					}
 					break;
