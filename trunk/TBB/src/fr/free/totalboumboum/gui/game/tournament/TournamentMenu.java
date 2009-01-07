@@ -56,6 +56,7 @@ import fr.free.totalboumboum.gui.game.tournament.description.CupDescription;
 import fr.free.totalboumboum.gui.game.tournament.description.SequenceDescription;
 import fr.free.totalboumboum.gui.game.tournament.description.SingleDescription;
 import fr.free.totalboumboum.gui.game.tournament.description.TournamentDescription;
+import fr.free.totalboumboum.gui.game.tournament.results.CupResults;
 import fr.free.totalboumboum.gui.game.tournament.results.SequenceResults;
 import fr.free.totalboumboum.gui.game.tournament.results.SingleResults;
 import fr.free.totalboumboum.gui.game.tournament.results.TournamentResults;
@@ -146,21 +147,18 @@ buttonStatistics.setEnabled(false);
 				tournamentStatistics.setTournament(trnmt);	
 			}
 			else if(tournament instanceof CupTournament)
-			{	
-/*				
-				CupTournament trnmt = (CupTournament) tournament;
+			{	CupTournament trnmt = (CupTournament) tournament;
 				// create
 				CupDescription trnmtDescription = new CupDescription(container);
 				tournamentDescription = trnmtDescription;
 				container.setDataPart(tournamentDescription);
-				SequenceResults trnmtResults = new SequenceResults(container);
+				CupResults trnmtResults = new CupResults(container);
 				tournamentResults = trnmtResults;
 				tournamentStatistics = new TournamentStatistics(container);
 				// set tournament
 				trnmtDescription.setTournament(trnmt);
 				trnmtResults.setTournament(trnmt);
 				tournamentStatistics.setTournament(trnmt);	
-*/				
 			}
 			else if(tournament instanceof LeagueTournament)
 			{

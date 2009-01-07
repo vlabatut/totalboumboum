@@ -31,8 +31,8 @@ import org.xml.sax.SAXException;
 
 import fr.free.totalboumboum.engine.content.sprite.SpritePreview;
 import fr.free.totalboumboum.engine.content.sprite.SpritePreviewLoader;
-import fr.free.totalboumboum.gui.common.content.subpanel.browser.PackBrowserSubPanel;
-import fr.free.totalboumboum.gui.common.content.subpanel.browser.PackBrowserSubPanelListener;
+import fr.free.totalboumboum.gui.common.content.subpanel.file.PackBrowserSubPanel;
+import fr.free.totalboumboum.gui.common.content.subpanel.file.PackBrowserSubPanelListener;
 import fr.free.totalboumboum.gui.common.content.subpanel.sprite.SpriteImageSubPanel;
 import fr.free.totalboumboum.gui.common.content.subpanel.sprite.SpriteInfoSubPanel;
 import fr.free.totalboumboum.gui.common.structure.panel.SplitMenuPanel;

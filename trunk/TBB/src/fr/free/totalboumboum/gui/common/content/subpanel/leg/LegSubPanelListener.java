@@ -1,6 +1,4 @@
-package fr.free.totalboumboum.gui.common.content.subpanel.part;
-
-import fr.free.totalboumboum.game.tournament.cup.CupPart;
+package fr.free.totalboumboum.gui.common.content.subpanel.leg;
 
 /*
  * Total Boum Boum
@@ -23,9 +21,9 @@ import fr.free.totalboumboum.game.tournament.cup.CupPart;
  * 
  */
 
-public interface PartSubPanelListener
+public interface LegSubPanelListener
 {
-	public void partAfterClicked(CupPart part);
-	public void partBeforeClicked(CupPart part);
-	public void partTitleClicked(CupPart part);
+	public void legSelectionChanged();
+	public void legBeforeClicked();
+	public void legAfterClicked();
 }

@@ -589,7 +589,15 @@
 				<text name="Title" value="Initial items"  tooltip="Items given to each player at the begining of the round" />
 			</group>
 		</group>	
-								
+
+<!-- LEG -->
+		<group name="Leg">
+			<text name="Down" value="Next page"  tooltip="Go to the next page" />
+			<text name="Left" value="Previous leg" tooltip="Come bactk to the previous leg" />
+			<text name="Right" value="Next leg"  tooltip="Go to the next leg" />
+			<text name="Up" value="Previous page"  tooltip="Come back to the previous page" />
+		</group>
+										
 <!-- LEVEL -->
 		<group name="Level">
 			<text name="Title" value="Misc"  tooltip="Various information about the level" />

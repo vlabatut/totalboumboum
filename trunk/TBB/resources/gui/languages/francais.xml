@@ -588,6 +588,14 @@
 			</group>
 		</group>
 								
+<!-- LEG -->
+		<group name="Leg">
+			<text name="Down" value="Page suivante"  tooltip="Aller à la page suivante de ce tour" />
+			<text name="Left" value="Tour précédent" tooltip="Revenir au tour précédent" />
+			<text name="Right" value="Tour suivant"  tooltip="Aller au tour suivant" />
+			<text name="Up" value="Page précédente"  tooltip="Revenir à la page précédente" />
+		</group>
+		
 <!-- LEVEL -->
 		<group name="Level">
 			<text name="Title" value="Divers"  tooltip="Informations diverses sur le niveau" />
