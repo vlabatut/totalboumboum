@@ -848,12 +848,15 @@ public class Launcher
 	 * *********************** A FAIRE ***********************
 	 * *******************************************************
 	 * 
-	 * - profils: simplifier, pas besoin de la double représentation default+selected.
-	 * - réorganiser par rapport aux besoins: joueur pdt le jeu, joueur chargé en dehors du jeu, joueur pas chargé ?
-	 * 
+	 * - lors du calcul des points, il faut forcer la présence d'un classement: ça facilite énormément de traitements en aval
+	 *   au pire, si le classement est inutile (ex: simple total), on définit un classement-identité (pts utilisés pr le classement <=> pts marqués)
 	 * - ça serait bien que les joueurs soient affichés dans l'ordre relatif aux points de la limite rencontrée
 	 *   voire on définit explicitement un ordre d'affichage dans la compétition
 	 * - faut afficher explicitement le classement à la fin d'une confrontation
+	 * 
+	 * - profils: simplifier, pas besoin de la double représentation default+selected.
+	 * - réorganiser par rapport aux besoins: joueur pdt le jeu, joueur chargé en dehors du jeu, joueur pas chargé ?
+	 * 
 	 * 
 	 * - faire le classement lexicographique gérant les signes diacritiques partout où c'est nécessaire
 	 * 

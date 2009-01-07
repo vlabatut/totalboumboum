@@ -22,6 +22,7 @@ package fr.free.totalboumboum.game.tournament.cup;
  */
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Collections;
 import java.util.Comparator;
@@ -254,9 +255,40 @@ for(ArrayList<Integer> list: permutations)
 
 	@Override
 	public int[] getOrderedPlayers()
-	{
-		// TODO Auto-generated method stub
-		return null;
+	{	int[] result = new int[getProfiles().size()];
+		if(isOver())
+		{	Arrays.fill(result,-1);
+			CupLeg leg = legs.get(legs.size()-1);
+			int partRank = 1;
+			int playerRank = 1;
+			boolean found = true;
+			while(playerRank<=profiles.size()&& found)
+			{	found = false;
+				Iterator<CupPart> it = leg.getParts().iterator();
+				CupPart part = null;
+				while(it.hasNext() && !found)
+				{	part = it.next();
+					if(part.getRank()==partRank)
+						found = true;
+				}
+				if(found)
+				{	int[] orderedPlayers = part.getOrderedPlayers();
+					ArrayList<Profile> prof = part.getProfiles();
+					for(int k=0;k<orderedPlayers.length;k++)
+					{	int index = profiles.indexOf(prof.get(orderedPlayers[k]));
+						result[playerRank-1] = index;
+						playerRank++;
+					}				
+					partRank++;
+				}
+			}
+		}
+		else
+		{	for(int i=0;i<result.length;i++)
+				result[i] = i;
+		}
+		
+		return result;
 	}
 
 	/////////////////////////////////////////////////////////////////

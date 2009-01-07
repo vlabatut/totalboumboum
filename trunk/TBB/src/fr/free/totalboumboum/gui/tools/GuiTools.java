@@ -519,7 +519,8 @@ public class GuiTools
 				GuiKeys.COMMON_PROFILES_NAME,
 				GuiKeys.MENU_PROFILES_EDIT_NAME,
 				GuiKeys.COMMON_PLAYERS_SELECTION_HEADER_PROFILE,
-				GuiKeys.COMMON_ARCHIVE_PLAYERS
+				GuiKeys.COMMON_ARCHIVE_PLAYERS,
+				GuiKeys.COMMON_PART_PLAYER
 			};
 			loadTableImages(folder,uses);
 		}
@@ -613,7 +614,8 @@ public class GuiTools
 				GuiKeys.COMMON_POINTS_ROUND_HEADER_RANKINGS,
 				GuiKeys.COMMON_POINTS_TOURNAMENT_HEADER_RANKPOINTS,
 				GuiKeys.COMMON_POINTS_MATCH_HEADER_RANKPOINTS,
-				GuiKeys.COMMON_POINTS_ROUND_HEADER_RANKPOINTS
+				GuiKeys.COMMON_POINTS_ROUND_HEADER_RANKPOINTS,
+				GuiKeys.COMMON_PART_RANK
 			};
 			loadTableImages(folder,uses);
 		}
@@ -823,7 +825,10 @@ public class GuiTools
 			{	GuiKeys.MENU_OPTIONS_GUI_LINE_LANGUAGE_NEXT,
 				GuiKeys.MENU_OPTIONS_GUI_LINE_FONT_NEXT,
 				GuiKeys.MENU_OPTIONS_GUI_LINE_BACKGROUND_NEXT,
-				GuiKeys.MENU_PROFILES_EDIT_COLOR_NEXT
+				GuiKeys.MENU_PROFILES_EDIT_COLOR_NEXT,
+				GuiKeys.COMMON_PART_AFTER,
+				GuiKeys.COMMON_LEG_RIGHT
+
 			};
 			loadTableImages(folder,uses);
 		}
@@ -842,7 +847,8 @@ public class GuiTools
 			{	GuiKeys.MENU_RESOURCES_LEVEL_SELECT_FOLDER_PAGEDOWN,
 				GuiKeys.MENU_RESOURCES_LEVEL_SELECT_PACKAGE_PAGEDOWN,
 				GuiKeys.COMMON_BROWSER_FILE_PAGEDOWN,
-				GuiKeys.COMMON_BROWSER_PACK_PAGEDOWN
+				GuiKeys.COMMON_BROWSER_PACK_PAGEDOWN,
+				GuiKeys.COMMON_LEG_DOWN
 			};
 			loadTableImages(folder,uses);
 		}
@@ -852,7 +858,8 @@ public class GuiTools
 			{	GuiKeys.MENU_RESOURCES_LEVEL_SELECT_FOLDER_PAGEUP,
 				GuiKeys.MENU_RESOURCES_LEVEL_SELECT_PACKAGE_PAGEUP,
 				GuiKeys.COMMON_BROWSER_FILE_PAGEUP,
-				GuiKeys.COMMON_BROWSER_PACK_PAGEUP
+				GuiKeys.COMMON_BROWSER_PACK_PAGEUP,
+				GuiKeys.COMMON_LEG_UP
 			};
 			loadTableImages(folder,uses);
 		}
@@ -893,7 +900,9 @@ public class GuiTools
 			{	GuiKeys.MENU_OPTIONS_GUI_LINE_LANGUAGE_PREVIOUS,
 				GuiKeys.MENU_OPTIONS_GUI_LINE_FONT_PREVIOUS,
 				GuiKeys.MENU_OPTIONS_GUI_LINE_BACKGROUND_PREVIOUS,
-				GuiKeys.MENU_PROFILES_EDIT_COLOR_PREVIOUS
+				GuiKeys.MENU_PROFILES_EDIT_COLOR_PREVIOUS,
+				GuiKeys.COMMON_PART_BEFORE,
+				GuiKeys.COMMON_LEG_LEFT
 			};
 			loadTableImages(folder,uses);
 		}
@@ -1137,6 +1146,7 @@ public class GuiTools
 	public final static Color COLOR_DIALOG_BACKGROUND = new Color(0,0,0,175);
 	public final static Color COLOR_COMMON_BACKGROUND = new Color(255,255,255,150);
 	public final static Color COLOR_TITLE_FOREGROUND = Color.BLACK;
+	public final static Color COLOR_TABLE_SELECTED_PALE_BACKGROUND = new Color(204,18,128,50);
 	public final static Color COLOR_TABLE_SELECTED_BACKGROUND = new Color(204,18,128,80);
 	public final static Color COLOR_TABLE_SELECTED_DARK_BACKGROUND = new Color(204,18,128,130);
 	public final static Color COLOR_TABLE_REGULAR_BACKGROUND = new Color(0,0,0,80);

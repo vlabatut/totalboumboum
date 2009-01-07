@@ -22,6 +22,7 @@ package fr.free.totalboumboum.gui.common.content.subpanel.leg;
  */
 
 import java.awt.Color;
+import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
@@ -57,7 +58,7 @@ public class LegSubPanel extends SubPanel implements MouseListener, PartSubPanel
 		}
 		
 		// sizes
-		int buttonsHeight = (int)(height*0.1);
+		int buttonsHeight = (int)(height*0.06);
 		int partsHeight = height - 4*GuiTools.subPanelMargin - 2*buttonsHeight;
 		int buttonsWidth = width - 2*GuiTools.subPanelMargin;
 		int partsWidth = width - 2*GuiTools.subPanelMargin;
@@ -73,6 +74,7 @@ public class LegSubPanel extends SubPanel implements MouseListener, PartSubPanel
 			// layout
 			{	BoxLayout layout = new BoxLayout(upPanel,BoxLayout.LINE_AXIS); 
 				upPanel.setLayout(layout);
+				upPanel.setAlignmentY(Component.CENTER_ALIGNMENT);
 			}
 			// size
 			{	Dimension dim = new Dimension(buttonsWidth,buttonsHeight);
@@ -80,46 +82,56 @@ public class LegSubPanel extends SubPanel implements MouseListener, PartSubPanel
 				upPanel.setPreferredSize(dim);
 				upPanel.setMaximumSize(dim);
 			}
-			upPanel.add(Box.createHorizontalGlue());
+			
+			upPanel.add(Box.createRigidArea(new Dimension(GuiTools.subPanelMargin,GuiTools.subPanelMargin)));
 			// left
 			{	JLabel label = new JLabel();
-				setBackground(bg);
+				label.setOpaque(true);
+				label.setBackground(bg);
 				Dimension dim = new Dimension(externalButtonsWidth,buttonsHeight);
 				label.setMinimumSize(dim);
 				label.setPreferredSize(dim);
 				label.setMaximumSize(dim);
 				String key = GuiKeys.COMMON_LEG_LEFT;
 				GuiTools.setLabelKey(label,key,true);
+				label.setHorizontalAlignment(JLabel.CENTER);
+				label.setVerticalAlignment(JLabel.CENTER);
 				label.addMouseListener(this);
 				upPanel.add(label);
 			}
-			upPanel.add(Box.createHorizontalGlue());
+			upPanel.add(Box.createRigidArea(new Dimension(GuiTools.subPanelMargin,GuiTools.subPanelMargin)));
 			// up
 			{	JLabel label = new JLabel();
-				setBackground(bg);
+				label.setOpaque(true);
+				label.setBackground(bg);
 				Dimension dim = new Dimension(centralButtonWidth,buttonsHeight);
 				label.setMinimumSize(dim);
 				label.setPreferredSize(dim);
 				label.setMaximumSize(dim);
 				String key = GuiKeys.COMMON_LEG_UP;
 				GuiTools.setLabelKey(label,key,true);
+				label.setHorizontalAlignment(JLabel.CENTER);
+				label.setVerticalAlignment(JLabel.CENTER);
 				label.addMouseListener(this);
 				upPanel.add(label);
 			}
-			upPanel.add(Box.createHorizontalGlue());
+			upPanel.add(Box.createRigidArea(new Dimension(GuiTools.subPanelMargin,GuiTools.subPanelMargin)));
 			// right
 			{	JLabel label = new JLabel();
-				setBackground(bg);
+				label.setOpaque(true);
+				label.setBackground(bg);
 				Dimension dim = new Dimension(externalButtonsWidth,buttonsHeight);
 				label.setMinimumSize(dim);
 				label.setPreferredSize(dim);
 				label.setMaximumSize(dim);
 				String key = GuiKeys.COMMON_LEG_RIGHT;
 				GuiTools.setLabelKey(label,key,true);
+				label.setHorizontalAlignment(JLabel.CENTER);
+				label.setVerticalAlignment(JLabel.CENTER);
 				label.addMouseListener(this);
 				upPanel.add(label);
 			}
-			upPanel.add(Box.createHorizontalGlue());
+//			upPanel.add(Box.createHorizontalGlue());
 			
 			add(upPanel);
 		}
@@ -158,46 +170,56 @@ public class LegSubPanel extends SubPanel implements MouseListener, PartSubPanel
 				downPanel.setPreferredSize(dim);
 				downPanel.setMaximumSize(dim);
 			}
-			downPanel.add(Box.createHorizontalGlue());
+			
+			downPanel.add(Box.createRigidArea(new Dimension(GuiTools.subPanelMargin,GuiTools.subPanelMargin)));
 			// left
 			{	JLabel label = new JLabel();
-				setBackground(bg);
+				label.setOpaque(true);
+				label.setBackground(bg);
 				Dimension dim = new Dimension(externalButtonsWidth,buttonsHeight);
 				label.setMinimumSize(dim);
 				label.setPreferredSize(dim);
 				label.setMaximumSize(dim);
 				String key = GuiKeys.COMMON_LEG_LEFT;
 				GuiTools.setLabelKey(label,key,true);
+				label.setHorizontalAlignment(JLabel.CENTER);
+				label.setVerticalAlignment(JLabel.CENTER);
 				label.addMouseListener(this);
 				downPanel.add(label);
 			}
-			downPanel.add(Box.createHorizontalGlue());
+			downPanel.add(Box.createRigidArea(new Dimension(GuiTools.subPanelMargin,GuiTools.subPanelMargin)));
 			// up
 			{	JLabel label = new JLabel();
-				setBackground(bg);
+				label.setOpaque(true);
+				label.setBackground(bg);
 				Dimension dim = new Dimension(centralButtonWidth,buttonsHeight);
 				label.setMinimumSize(dim);
 				label.setPreferredSize(dim);
 				label.setMaximumSize(dim);
 				String key = GuiKeys.COMMON_LEG_DOWN;
 				GuiTools.setLabelKey(label,key,true);
+				label.setHorizontalAlignment(JLabel.CENTER);
+				label.setVerticalAlignment(JLabel.CENTER);
 				label.addMouseListener(this);
 				downPanel.add(label);
 			}
-			downPanel.add(Box.createHorizontalGlue());
+			downPanel.add(Box.createRigidArea(new Dimension(GuiTools.subPanelMargin,GuiTools.subPanelMargin)));
 			// right
 			{	JLabel label = new JLabel();
-				setBackground(bg);
+				label.setOpaque(true);
+				label.setBackground(bg);
 				Dimension dim = new Dimension(externalButtonsWidth,buttonsHeight);
 				label.setMinimumSize(dim);
 				label.setPreferredSize(dim);
 				label.setMaximumSize(dim);
 				String key = GuiKeys.COMMON_LEG_RIGHT;
 				GuiTools.setLabelKey(label,key,true);
+				label.setHorizontalAlignment(JLabel.CENTER);
+				label.setVerticalAlignment(JLabel.CENTER);
 				label.addMouseListener(this);
 				downPanel.add(label);
 			}
-			downPanel.add(Box.createHorizontalGlue());
+//			downPanel.add(Box.createHorizontalGlue());
 			
 			add(downPanel);
 		}
@@ -232,7 +254,6 @@ public class LegSubPanel extends SubPanel implements MouseListener, PartSubPanel
 	{	// init
 		this.leg = leg;
 		this.partsPerPage = partsPerPage;
-		ArrayList<CupPart> parts = leg.getParts();
 		pagePanels = new ArrayList<JPanel>();
 		currentPage = 0;
 		selectedPart = null;
@@ -262,10 +283,12 @@ public class LegSubPanel extends SubPanel implements MouseListener, PartSubPanel
 			// content
 			for(int p=0;p<partsPerPage;p++)
 			{	CupPart part = null;
-				if(parts.size()>p)
-					part = parts.get(p);
+				int partIndex = p+panelIndex*partsPerPage;
+				if(leg!=null && leg.getParts().size()>partIndex)
+					part = leg.getParts().get(partIndex);
 				PartSubPanel partPanel = new PartSubPanel(partWidth,partHeight);
 				partPanel.setPart(part);
+				partPanel.addListener(this);
 				tempPanel.add(partPanel);
 				if(p<partsPerPage-1)
 					tempPanel.add(Box.createVerticalGlue());					
@@ -310,7 +333,7 @@ public class LegSubPanel extends SubPanel implements MouseListener, PartSubPanel
 		}
 		
 		//select
-		index = parts.indexOf(parts);
+		index = parts.indexOf(part);
 		if(part!=null && index>=0)
 		{	// refresh page
 			int page = index/partsPerPage;
@@ -331,9 +354,10 @@ public class LegSubPanel extends SubPanel implements MouseListener, PartSubPanel
 	}
 
 	private void refreshList()
-	{	remove(partsPanel);
+	{	int index = GuiTools.indexOfComponent(this,partsPanel);
+		remove(partsPanel);
 		partsPanel = pagePanels.get(currentPage);
-		add(partsPanel);
+		add(partsPanel,index);
 		validate();
 		repaint();
 	}
@@ -376,8 +400,9 @@ public class LegSubPanel extends SubPanel implements MouseListener, PartSubPanel
 		{	ArrayList<CupLeg> legs = leg.getTournament().getLegs();
 			int legNumber = leg.getNumber();
 			if(legNumber>0)
-			{	CupLeg newLeg = legs.get(legNumber-1);
-				setLeg(newLeg,legNumber);
+			{	selectPart(null);
+				CupLeg newLeg = legs.get(legNumber-1);
+				setLeg(newLeg,partsPerPage);
 				fireLegBeforeClicked();
 			}		
 		}
@@ -405,8 +430,9 @@ public class LegSubPanel extends SubPanel implements MouseListener, PartSubPanel
 		{	ArrayList<CupLeg> legs = leg.getTournament().getLegs();
 			int legNumber = leg.getNumber();
 			if(legNumber<legs.size()-1)
-			{	CupLeg newLeg = legs.get(legNumber+1);
-				setLeg(newLeg,legNumber);
+			{	selectPart(null);
+				CupLeg newLeg = legs.get(legNumber+1);
+				setLeg(newLeg,partsPerPage);
 				fireLegAfterClicked();
 			}
 		}

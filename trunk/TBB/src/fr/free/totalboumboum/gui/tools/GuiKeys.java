@@ -785,7 +785,7 @@ public class GuiKeys
 	public static final String COMMON_PART_BEFORE = COMMON_PART+BEFORE;
 	public static final String COMMON_PART_PLAYER = COMMON_PART+PLAYER;
 	public static final String COMMON_PART_RANK = COMMON_PART+RANK;
-	public static final String COMMON_PART_UNDECIDED= COMMON_PART+UNDECIDED;
+	public static final String COMMON_PART_UNDECIDED = COMMON_PART+UNDECIDED;
 
 	/* PLAYERS */
 	public static final String COMMON_PLAYERS = COMMON+PLAYERS;

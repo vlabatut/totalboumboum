@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
+import java.util.Map.Entry;
 
 import fr.free.totalboumboum.configuration.GameConstants;
 import fr.free.totalboumboum.configuration.profile.Profile;
@@ -151,6 +152,20 @@ public class CupPart implements Serializable
 				i++;
 		}
 		
+		return result;
+	}
+	
+	/////////////////////////////////////////////////////////////////
+	// RESULTS			/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	public int[] getOrderedPlayers()
+	{	int[] result = new int[profiles.size()];
+		for(Entry<Integer,ArrayList<Integer>> i: rankings.entrySet())
+		{	Integer r = i.getKey();
+			ArrayList<Integer> list = i.getValue();
+			for(Integer j: list)
+				result[r-1] = j; //NOTE on suppose qu'il n'y a plus de tie, à ce niveau
+		}
 		return result;
 	}
 	

@@ -56,6 +56,7 @@ public class CupDescription extends TournamentDescription<CupTournament> impleme
 			// legs panel
 			{	legsPanel = new LegSubPanel(leftWidth,dataHeight);
 				legsPanel.setLeg(null,LEGS_PER_PAGE);
+				infoPanel.add(legsPanel);
 			}
 
 			infoPanel.add(Box.createHorizontalGlue());
