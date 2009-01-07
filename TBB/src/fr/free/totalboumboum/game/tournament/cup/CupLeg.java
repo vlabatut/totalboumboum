@@ -148,6 +148,4 @@ public class CupLeg implements Serializable
 	public int getNumber()
 	{	return number;
 	}
-
-	
 }

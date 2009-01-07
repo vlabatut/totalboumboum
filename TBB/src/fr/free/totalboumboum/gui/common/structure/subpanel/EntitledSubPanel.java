@@ -125,6 +125,9 @@ public class EntitledSubPanel extends SubPanel
 	{	title.setText(text);
 		title.setToolTipText(tooltip);
 	}
+	public JLabel getTitleLabel()
+	{	return title;
+	}
 
 	public int getTitleHeight()
 	{	return titleHeight;

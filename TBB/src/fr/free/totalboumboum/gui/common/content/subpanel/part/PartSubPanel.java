@@ -75,7 +75,7 @@ public class PartSubPanel extends EntitledSubPanelLines implements MouseListener
 			lines = 1+part.getPlayers().size();
 		setNewTable(lines);
 		int buttonWidth = getLineHeight();
-		int nameWidth = (int)(getWidth() - (2*buttonWidth + 5*GuiTools.subPanelMargin)*0.75);
+		int nameWidth = (int)((getWidth() - (2*buttonWidth + 5*GuiTools.subPanelMargin))*0.75);
 		int rankWidth = getWidth() - (2*buttonWidth + nameWidth + 5*GuiTools.subPanelMargin);
 	
 		int line = 0;
@@ -89,7 +89,7 @@ public class PartSubPanel extends EntitledSubPanelLines implements MouseListener
 			{	ln.setLabelMaxWidth(col,buttonWidth);
 				ln.setLabelPreferredWidth(col,buttonWidth);
 				ln.setLabelText(col,null,null);
-				ln.setLabelBackground(col,null);
+				ln.getLabel(col).setOpaque(false);
 				col++;
 			}
 			// player
@@ -112,7 +112,7 @@ public class PartSubPanel extends EntitledSubPanelLines implements MouseListener
 			{	ln.setLabelMaxWidth(col,buttonWidth);
 				ln.setLabelPreferredWidth(col,buttonWidth);
 				ln.setLabelText(col,null,null);
-				ln.setLabelBackground(col,null);
+				ln.getLabel(col).setOpaque(false);
 				col++;
 			}
 		}
@@ -121,6 +121,7 @@ public class PartSubPanel extends EntitledSubPanelLines implements MouseListener
 		{	// title
 			String title = part.getName();
 			setTitleText(title,title);
+			getTitleLabel().addMouseListener(this);
 						
 			line++;
 			// players
@@ -323,15 +324,15 @@ public class PartSubPanel extends EntitledSubPanelLines implements MouseListener
 	{	Color hBg,dBg;
 		if(select)
 		{	hBg = GuiTools.COLOR_TABLE_SELECTED_DARK_BACKGROUND;
-			dBg = GuiTools.COLOR_TABLE_SELECTED_BACKGROUND;
+			dBg = GuiTools.COLOR_TABLE_SELECTED_PALE_BACKGROUND;
 		}
 		else
-		{	hBg = GuiTools.COLOR_TABLE_HEADER_FOREGROUND;
+		{	hBg = GuiTools.COLOR_TABLE_HEADER_BACKGROUND;
 			dBg = GuiTools.COLOR_COMMON_BACKGROUND;
 		}
+		setTitleBackground(hBg);
 		setLineBackground(0,hBg);
-		getDataPanel().setBackground(dBg);
-		
+		setBackground(dBg);
 	}
 	
 	/////////////////////////////////////////////////////////////////
@@ -385,7 +386,7 @@ public class PartSubPanel extends EntitledSubPanelLines implements MouseListener
 	public void mousePressed(MouseEvent e)
 	{	JLabel label = (JLabel)e.getComponent();
 		int[] pos = getLabelPosition(label);
-		if(pos[0]==0)
+		if(pos==null)
 			fireTitleClicked(part);
 		else
 		{	int index = getPlayerForLine(pos[0]);

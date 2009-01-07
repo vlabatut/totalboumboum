@@ -34,7 +34,7 @@ import fr.free.totalboumboum.game.round.Round;
 import fr.free.totalboumboum.game.statistics.Score;
 import fr.free.totalboumboum.game.statistics.StatisticBase;
 import fr.free.totalboumboum.game.statistics.StatisticHolder;
-import fr.free.totalboumboum.game.tournament.sequence.SequenceTournament;
+import fr.free.totalboumboum.game.tournament.AbstractTournament;
 import fr.free.totalboumboum.gui.common.structure.subpanel.UntitledSubPanelTable;
 import fr.free.totalboumboum.gui.data.configuration.GuiConfiguration;
 import fr.free.totalboumboum.gui.tools.GuiKeys;
@@ -93,7 +93,7 @@ public class ResultsSubPanel extends UntitledSubPanelTable
 				type = GuiKeys.MATCH;
 			else if(statisticHolder instanceof Round)
 				type = GuiKeys.ROUND;
-			else if(statisticHolder instanceof SequenceTournament)
+			else if(statisticHolder instanceof AbstractTournament)
 				type = GuiKeys.TOURNAMENT;
 			prefix = GuiKeys.COMMON_RESULTS+type;
 				

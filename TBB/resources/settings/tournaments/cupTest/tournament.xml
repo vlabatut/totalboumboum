@@ -156,41 +156,7 @@
 		</leg>
 
 		<leg number="2" >
-			<part name="Classement 4" number="0" rank="3">
-				<match local="true" name="regular" />
-				<tieBreak>
-					<rankings>
-						<scores type="bombings"/>
-						<scores type="items"/>
-						<scores type="bombs"/>
-					</rankings>
-					<match local="true" name="tieBreak" />
-				</tieBreak>
-				<players>
-					<player part="2" rank="3"/>
-					<player part="2" rank="4"/>
-					<player part="3" rank="3"/>
-					<player part="3" rank="4"/>
-				</players>
-			</part>
-			<part name="Classement 3" number="1" rank="2">
-				<match local="true" name="regular" />
-				<tieBreak>
-					<rankings>
-						<scores type="bombings"/>
-						<scores type="items"/>
-						<scores type="bombs"/>
-					</rankings>
-					<match local="true" name="tieBreak" />
-				</tieBreak>
-				<players>
-					<player part="2" rank="1"/>
-					<player part="2" rank="2"/>
-					<player part="3" rank="1"/>
-					<player part="3" rank="2"/>
-				</players>
-			</part>
-			<part name="Petite finale" number="2" rank="1">
+			<part name="Classement 4" number="0" rank="4">
 				<match local="true" name="regular" />
 				<tieBreak>
 					<rankings>
@@ -207,7 +173,7 @@
 					<player part="1" rank="4"/>
 				</players>
 			</part>
-			<part name="Finale" number="3" rank="0">
+			<part name="Classement 3" number="1" rank="3">
 				<match local="true" name="regular" />
 				<tieBreak>
 					<rankings>
@@ -222,6 +188,40 @@
 					<player part="0" rank="2"/>
 					<player part="1" rank="1"/>
 					<player part="1" rank="2"/>
+				</players>
+			</part>
+			<part name="Petite finale" number="2" rank="2">
+				<match local="true" name="regular" />
+				<tieBreak>
+					<rankings>
+						<scores type="bombings"/>
+						<scores type="items"/>
+						<scores type="bombs"/>
+					</rankings>
+					<match local="true" name="tieBreak" />
+				</tieBreak>
+				<players>
+					<player part="2" rank="3"/>
+					<player part="2" rank="4"/>
+					<player part="3" rank="3"/>
+					<player part="3" rank="4"/>
+				</players>
+			</part>
+			<part name="Finale" number="3" rank="1">
+				<match local="true" name="regular" />
+				<tieBreak>
+					<rankings>
+						<scores type="bombings"/>
+						<scores type="items"/>
+						<scores type="bombs"/>
+					</rankings>
+					<match local="true" name="tieBreak" />
+				</tieBreak>
+				<players>
+					<player part="2" rank="1"/>
+					<player part="2" rank="2"/>
+					<player part="3" rank="1"/>
+					<player part="3" rank="2"/>
 				</players>
 			</part>
 		</leg>
