@@ -21,25 +21,65 @@ package fr.free.totalboumboum.gui.game.tournament.results;
  * 
  */
 
+import java.util.ArrayList;
+
+import javax.swing.Box;
+import javax.swing.BoxLayout;
+
+import fr.free.totalboumboum.game.tournament.cup.CupLeg;
 import fr.free.totalboumboum.game.tournament.cup.CupTournament;
+import fr.free.totalboumboum.gui.common.content.subpanel.leg.LegSubPanel;
 import fr.free.totalboumboum.gui.common.content.subpanel.results.ResultsSubPanel;
 import fr.free.totalboumboum.gui.common.structure.panel.SplitMenuPanel;
+import fr.free.totalboumboum.gui.common.structure.subpanel.SubPanel;
+import fr.free.totalboumboum.gui.tools.GuiTools;
 
 public class CupResults extends TournamentResults<CupTournament>
 {	
 	private static final long serialVersionUID = 1L;
-
-	private ResultsSubPanel resultsPanel;
 	
 	public CupResults(SplitMenuPanel container)
 	{	super(container);
 		
 		// data
-		{	resultsPanel = new ResultsSubPanel(dataWidth,dataHeight);
-			resultsPanel.setShowTime(false);
-			setDataPart(resultsPanel);
+		{	SubPanel infoPanel = new SubPanel(dataWidth,dataHeight);
+			{	BoxLayout layout = new BoxLayout(infoPanel,BoxLayout.LINE_AXIS); 
+				infoPanel.setLayout(layout);
+			}
+	
+			int margin = GuiTools.panelMargin;
+			int rightWidth = (int)(dataWidth*SPLIT_RATIO); 
+			int leftWidth = dataWidth - rightWidth - margin; 
+			infoPanel.setOpaque(false);
+	
+			// players panel
+			{	resultsPanel = new ResultsSubPanel(leftWidth,dataHeight);
+				resultsPanel.setShowTime(false);
+				resultsPanel.setShowConfrontations(false);
+				resultsPanel.setShowPoints(false);
+				resultsPanel.setShowTotal(false);
+				infoPanel.add(resultsPanel);
+			}
+	
+			infoPanel.add(Box.createHorizontalGlue());
+	
+			// legs panel
+			{	legsPanel = new LegSubPanel(rightWidth,dataHeight);
+				legsPanel.setLeg(null,LEGS_PER_PAGE);
+				infoPanel.add(legsPanel);
+			}
+	
+			setDataPart(infoPanel);
 		}
 	}
+	
+	/////////////////////////////////////////////////////////////////
+	// PANELS			/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////	
+	private static final float SPLIT_RATIO = 0.5f;
+	private static final int LEGS_PER_PAGE = 2;
+	private ResultsSubPanel resultsPanel;
+	private LegSubPanel legsPanel;
 
 	/////////////////////////////////////////////////////////////////
 	// TOURNAMENT		/////////////////////////////////////////////
@@ -48,6 +88,9 @@ public class CupResults extends TournamentResults<CupTournament>
 	public void setTournament(CupTournament tournament)
 	{	this.tournament = tournament;
 		resultsPanel.setStatisticHolder(tournament);
+		// legs
+		ArrayList<CupLeg> legs = tournament.getLegs();
+		legsPanel.setLeg(legs.get(0),LEGS_PER_PAGE);		
 	}
 	
 	/////////////////////////////////////////////////////////////////
@@ -56,5 +99,6 @@ public class CupResults extends TournamentResults<CupTournament>
 	@Override
 	public void refresh()
 	{	setTournament(tournament);
+		legsPanel.setLeg(tournament.getCurrentLeg(),LEGS_PER_PAGE);
 	}
 }

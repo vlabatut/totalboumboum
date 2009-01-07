@@ -212,21 +212,36 @@ public class PartSubPanel extends EntitledSubPanelLines implements MouseListener
 		}
 		// profile not known yet
 		else
-		{	bg = GuiTools.COLOR_TABLE_REGULAR_BACKGROUND;
-			String key = GuiKeys.COMMON_PART_UNDECIDED;
-			text = GuiConfiguration.getMiscConfiguration().getLanguage().getText(key);
+		{	// maybe the part from the previous leg is over
 			CupLeg leg = part.getLeg();
 			int previousLegNumber = leg.getNumber()-1;
 			CupPlayer p = part.getPlayers().get(index);
-			int partNumber = p.getPart();
-			int pRank = p.getRank();
+			int previousPartNumber = p.getPart();
+			int previousRank = p.getRank();
 			CupTournament tournament = part.getTournament();
-			if(previousLegNumber<0)
-				tooltip = null;
+			CupPart previousPart = null;
+			if(previousLegNumber>=0)
+				previousPart = tournament.getLeg(previousLegNumber).getPart(previousPartNumber);
+			if(previousPart!=null && previousPart.isOver())
+			{	Profile profile = previousPart.getProfileForRank(previousRank);
+				Color clr = profile.getSpriteColor().getColor();
+				int alpha = GuiTools.ALPHA_TABLE_REGULAR_BACKGROUND_LEVEL3;
+				bg = new Color(clr.getRed(),clr.getGreen(),clr.getBlue(),alpha);
+				text = profile.getName();
+				tooltip = text;
+			}
+			// or maybe not
 			else
-			{	CupLeg previousLeg = tournament.getLegs().get(previousLegNumber);
-				String partName = previousLeg.getPart(partNumber).getName();
-				tooltip = partName+":"+pRank;						
+			{	bg = GuiTools.COLOR_TABLE_REGULAR_BACKGROUND;
+				String key = GuiKeys.COMMON_PART_UNDECIDED;
+				text = GuiConfiguration.getMiscConfiguration().getLanguage().getText(key);
+				if(previousLegNumber<0)
+					tooltip = null;
+				else
+				{	CupLeg previousLeg = tournament.getLegs().get(previousLegNumber);
+					String partName = previousLeg.getPart(previousPartNumber).getName();
+					tooltip = partName+":"+previousRank;						
+				}
 			}
 		}
 
@@ -242,20 +257,9 @@ public class PartSubPanel extends EntitledSubPanelLines implements MouseListener
 	 * @return
 	 */
 	private int getPlayerForLine(int line)
-	{	int result = line - 1;
-		HashMap<Integer,ArrayList<Integer>> rankings = part.getRankings();
-		
-		if(rankings.size()>0)
-		{	Iterator<Entry<Integer,ArrayList<Integer>>> it = rankings.entrySet().iterator();
-			int cpt = 0;
-			while(cpt<line && it.hasNext())
-			{	Entry<Integer,ArrayList<Integer>> entry = it.next();
-				ArrayList<Integer> list = entry.getValue();
-				cpt = cpt + list.size();
-				result = entry.getKey();
-			}			
-		}
-		
+	{	int result = part.getIndexForRank(line);
+		if(result==-1)
+			result = line - 1;
 		return result;
 	}
 	

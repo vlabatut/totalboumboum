@@ -61,8 +61,8 @@ public class CupTournament extends AbstractTournament
 		// NOTE vérifier si le nombre de joueurs sélectionnés correspond
 		currentIndex = 0;
 		currentLeg = legs.get(currentIndex);
+		initFirstLegProfiles();
 		currentLeg.init();
-		initLegPlayers();
 		
 		stats = new StatisticTournament(this);
 		stats.initStartDate();
@@ -73,8 +73,8 @@ public class CupTournament extends AbstractTournament
 	{	if(currentLeg.isOver())
 		{	currentIndex++;
 			currentLeg = legs.get(currentIndex);
+			initLegProfiles();
 			currentLeg.init();
-			initLegPlayers();
 		}
 		else
 			currentLeg.progress();
@@ -233,7 +233,7 @@ for(ArrayList<Integer> list: permutations)
 		return result;
 	}
 	
-	private void initLegPlayers()
+	private void initFirstLegProfiles()
 	{	int playerCount = profiles.size();
 		ArrayList<ArrayList<Integer>> distri = processPlayerDistribution(playerCount);		
 		ArrayList<Integer> distribution = distri.get(0);
@@ -245,6 +245,20 @@ for(ArrayList<Integer> list: permutations)
 			{	Profile profile = profiles.get(p);
 				part.addProfile(profile);
 				p++;
+			}
+		}
+	}
+	
+	private void initLegProfiles()
+	{	CupLeg previousLeg = legs.get(currentIndex-1);
+		ArrayList<CupPart> parts = currentLeg.getParts();
+		for(CupPart part: parts)
+		{	for(CupPlayer player: part.getPlayers())
+			{	int previousPartNumber = player.getPart();
+				int previousRank = player.getRank();
+				CupPart previousPart = previousLeg.getPart(previousPartNumber);
+				Profile profile = previousPart.getProfileForRank(previousRank);
+				part.addProfile(profile);
 			}
 		}
 	}

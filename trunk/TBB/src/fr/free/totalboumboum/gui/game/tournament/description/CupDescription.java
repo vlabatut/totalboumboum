@@ -49,22 +49,22 @@ public class CupDescription extends TournamentDescription<CupTournament> impleme
 			}
 
 			int margin = GuiTools.panelMargin;
-			int leftWidth = (int)(dataWidth*SPLIT_RATIO); 
-			int rightWidth = dataWidth - leftWidth - margin; 
+			int rightWidth = (int)(dataWidth*SPLIT_RATIO); 
+			int leftWidth = dataWidth - rightWidth - margin; 
 			infoPanel.setOpaque(false);
 
-			// legs panel
-			{	legsPanel = new LegSubPanel(leftWidth,dataHeight);
-				legsPanel.setLeg(null,LEGS_PER_PAGE);
-				infoPanel.add(legsPanel);
+			// players panel
+			{	playersPanel = new PlayersListSubPanel(leftWidth,dataHeight);
+				playersPanel.setShowControls(false);
+				infoPanel.add(playersPanel);
 			}
 
 			infoPanel.add(Box.createHorizontalGlue());
 
-			// players panel
-			{	playersPanel = new PlayersListSubPanel(rightWidth,dataHeight);
-				playersPanel.setShowControls(false);
-				infoPanel.add(playersPanel);
+			// legs panel
+			{	legsPanel = new LegSubPanel(rightWidth,dataHeight);
+				legsPanel.setLeg(null,LEGS_PER_PAGE);
+				infoPanel.add(legsPanel);
 			}
 
 			setDataPart(infoPanel);

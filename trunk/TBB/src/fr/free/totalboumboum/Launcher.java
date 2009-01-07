@@ -848,6 +848,8 @@ public class Launcher
 	 * *********************** A FAIRE ***********************
 	 * *******************************************************
 	 * 
+	 * - comportement bizarre du classement inversé : compte les égalités en partant de la fin...
+	 * 
 	 * - lors du calcul des points, il faut forcer la présence d'un classement: ça facilite énormément de traitements en aval
 	 *   au pire, si le classement est inutile (ex: simple total), on définit un classement-identité (pts utilisés pr le classement <=> pts marqués)
 	 * - ça serait bien que les joueurs soient affichés dans l'ordre relatif aux points de la limite rencontrée

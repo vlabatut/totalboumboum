@@ -320,6 +320,9 @@ public class PointsSubPanel extends EntitledSubPanelTable
 				name = prefix+GuiKeys.DATA+GuiKeys.REGULAR;
 			dt.add(image);
 			tt.add(tooltip);
+			String text = "";
+			dt.add(text);
+			tt.add(tooltip);
 		}
 		// sources
 		{	ArrayList<PointsProcessor> sources = pr.getSources();
