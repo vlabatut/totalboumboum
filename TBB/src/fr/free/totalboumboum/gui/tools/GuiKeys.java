@@ -80,6 +80,7 @@ public class GuiKeys
 	public static final String DIALOG = "Dialog";
 	public static final String DIMENSION = "Dimension";
 	public static final String DISCRETIZE = "Discretize";
+	public static final String DOWN = "Down";
 	public static final String DRAW = "Draw";
 	public static final String FALSE = "False";
 	public static final String FILE = "File";
@@ -104,6 +105,7 @@ public class GuiKeys
 	public static final String LAST_STANDING = "LastStanding";
 	public static final String LEAGUE = "League";
 	public static final String LEFT = "Left";
+	public static final String LEG = "Leg";
 	public static final String LEVEL = "Level";
 	public static final String LEVELS = "Levels";
 	public static final String LIMIT = "Limit";
@@ -185,6 +187,7 @@ public class GuiKeys
 	public static final String TYPE = "Type";
 	public static final String TYPES = "Types";
 	public static final String UNDECIDED = "Undecided";
+	public static final String UP = "Up";
 	public static final String USE = "Use";
 	public static final String VALUE = "Value";
 	public static final String VALUES = "Values";
@@ -704,6 +707,13 @@ public class GuiKeys
 		/* INITIAL */
 		public static final String COMMON_ITEMS_INITIAL = COMMON_ITEMS+INITIAL;
 		public static final String COMMON_ITEMS_INITIAL_TITLE = COMMON_ITEMS_INITIAL+TITLE;
+
+	/* LEG */
+	public static final String COMMON_LEG = COMMON+LEG;
+	public static final String COMMON_LEG_DOWN = COMMON_LEG+DOWN;
+	public static final String COMMON_LEG_LEFT = COMMON_LEG+LEFT;
+	public static final String COMMON_LEG_RIGHT = COMMON_LEG+RIGHT;
+	public static final String COMMON_LEG_UP = COMMON_LEG+UP;
 
 	/* LEVEL */
 	public static final String COMMON_LEVEL = COMMON+LEVEL;

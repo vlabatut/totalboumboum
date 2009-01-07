@@ -41,6 +41,7 @@ import java.util.List;
 import javax.swing.AbstractButton;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
+import javax.swing.JLabel;
 import javax.swing.JToggleButton;
 
 import fr.free.totalboumboum.configuration.Configuration;
@@ -1282,4 +1283,46 @@ public class GuiTools
 		//
 		return result;
 	}
+	
+	
+	
+	
+	/**
+	 * set a label's icon or text. for an icon, the label's PREFERRED SIZE
+	 * MUST BE SET before calling this method.
+	 * @param label
+	 * @param key
+	 * @param imageFlag
+	 */
+	public static void setLabelKey(JLabel label, String key, boolean imageFlag)
+	{	String tooltip = GuiConfiguration.getMiscConfiguration().getLanguage().getText(key+GuiKeys.TOOLTIP);
+		// is there an available icon ?
+		if(imageFlag)
+		{	BufferedImage icon = GuiTools.getIcon(key);
+			setLabelIcon(label,icon,tooltip);		
+		}
+		// if not : use text
+		else
+		{	String text = GuiConfiguration.getMiscConfiguration().getLanguage().getText(key);
+			setLabelText(label,text,tooltip);
+		}		
+	}
+	public static void setLabelIcon(JLabel label, BufferedImage icon, String tooltip)
+	{	ImageIcon icn = null;
+		if(icon!=null)
+		{	int h = label.getPreferredSize().height;
+			double zoom = h/(double)icon.getHeight();
+			icon = ImageTools.resize(icon,zoom,true);
+			icn = new ImageIcon(icon);
+		}
+		label.setText(null);
+		label.setIcon(icn);
+		label.setToolTipText(tooltip);
+	}
+	public static void setLabelText(JLabel label, String text, String tooltip)
+	{	label.setIcon(null);
+		label.setText(text);
+		label.setToolTipText(tooltip);
+	}
+
 }

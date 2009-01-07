@@ -319,6 +319,21 @@ public class PartSubPanel extends EntitledSubPanelLines implements MouseListener
 		}
 	}
 	
+	public void setSelected(boolean select)
+	{	Color hBg,dBg;
+		if(select)
+		{	hBg = GuiTools.COLOR_TABLE_SELECTED_DARK_BACKGROUND;
+			dBg = GuiTools.COLOR_TABLE_SELECTED_BACKGROUND;
+		}
+		else
+		{	hBg = GuiTools.COLOR_TABLE_HEADER_FOREGROUND;
+			dBg = GuiTools.COLOR_COMMON_BACKGROUND;
+		}
+		setLineBackground(0,hBg);
+		getDataPanel().setBackground(dBg);
+		
+	}
+	
 	/////////////////////////////////////////////////////////////////
 	// LISTENERS		/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
@@ -343,6 +358,11 @@ public class PartSubPanel extends EntitledSubPanelLines implements MouseListener
 			listener.partBeforeClicked(part);
 	}
 
+	private void fireTitleClicked(CupPart part)
+	{	for(PartSubPanelListener listener: listeners)
+			listener.partTitleClicked(part);
+	}
+
 	/////////////////////////////////////////////////////////////////
 	// MOUSE LISTENER	/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
@@ -365,66 +385,70 @@ public class PartSubPanel extends EntitledSubPanelLines implements MouseListener
 	public void mousePressed(MouseEvent e)
 	{	JLabel label = (JLabel)e.getComponent();
 		int[] pos = getLabelPosition(label);
-		int index = getPlayerForLine(pos[0]);
-		switch(pos[1])
-		{	// before button
-			case COL_BEFORE:
-				{	CupLeg leg = part.getLeg();
-					int previousLegNumber = leg.getNumber()-1;
-					CupPlayer p = part.getPlayers().get(index);
-					int partNumber = p.getPart();
-					CupTournament tournament = part.getTournament();
-					// doesn't work for the first leg 
-					if(previousLegNumber>=0)
-					{	CupLeg previousLeg = tournament.getLegs().get(previousLegNumber);
-						CupPart previousPart = previousLeg.getPart(partNumber);
-						fireBeforeAfterClicked(previousPart);
-					}
-				}
-				break;
-			// after button
-			case COL_AFTER:
-				{	HashMap<Integer,ArrayList<Integer>> rankings = part.getRankings();
-					// works only if there are rankings
-					if(rankings.size()>0)
-					{	// look fot this player's ranking
-						Iterator<Entry<Integer,ArrayList<Integer>>> it = rankings.entrySet().iterator();
-						int rk = -1;
-						while(rk<0 && it.hasNext())
-						{	Entry<Integer,ArrayList<Integer>> entry = it.next();
-							ArrayList<Integer> list = entry.getValue();
-							if(list.contains(index))
-								rk = entry.getKey();							
+		if(pos[0]==0)
+			fireTitleClicked(part);
+		else
+		{	int index = getPlayerForLine(pos[0]);
+			switch(pos[1])
+			{	// before button
+				case COL_BEFORE:
+					{	CupLeg leg = part.getLeg();
+						int previousLegNumber = leg.getNumber()-1;
+						CupPlayer p = part.getPlayers().get(index);
+						int partNumber = p.getPart();
+						CupTournament tournament = part.getTournament();
+						// doesn't work for the first leg 
+						if(previousLegNumber>=0)
+						{	CupLeg previousLeg = tournament.getLegs().get(previousLegNumber);
+							CupPart previousPart = previousLeg.getPart(partNumber);
+							fireBeforeAfterClicked(previousPart);
 						}
-						// works only if the player isn't tied to others
-						if(rk>=0 && rankings.get(rk).size()==1)
-						{	int partNumber = part.getNumber();
-							int legNumber = part.getLeg().getNumber();
-							int nextLegNumber = legNumber+1;
-							CupTournament tournament = part.getTournament();
-							// works only if it wasn't the last leg
-							if(tournament.getLegs().size()>nextLegNumber)
-							{	CupLeg nextLeg = tournament.getLeg(nextLegNumber);
-								CupPart nextPart = null;
-								ArrayList<CupPart> parts = nextLeg.getParts();
-								Iterator<CupPart> iter = parts.iterator();
-								while(iter.hasNext() && nextPart==null)
-								{	CupPart part = iter.next();
-									Iterator<CupPlayer> itp = part.getPlayers().iterator();
-									while(itp.hasNext() && nextPart==null)
-									{	CupPlayer plyr = itp.next();
-										if(plyr.getPart()==partNumber && plyr.getRank()==rk)
-											nextPart = part;										
+					}
+					break;
+				// after button
+				case COL_AFTER:
+					{	HashMap<Integer,ArrayList<Integer>> rankings = part.getRankings();
+						// works only if there are rankings
+						if(rankings.size()>0)
+						{	// look fot this player's ranking
+							Iterator<Entry<Integer,ArrayList<Integer>>> it = rankings.entrySet().iterator();
+							int rk = -1;
+							while(rk<0 && it.hasNext())
+							{	Entry<Integer,ArrayList<Integer>> entry = it.next();
+								ArrayList<Integer> list = entry.getValue();
+								if(list.contains(index))
+									rk = entry.getKey();							
+							}
+							// works only if the player isn't tied to others
+							if(rk>=0 && rankings.get(rk).size()==1)
+							{	int partNumber = part.getNumber();
+								int legNumber = part.getLeg().getNumber();
+								int nextLegNumber = legNumber+1;
+								CupTournament tournament = part.getTournament();
+								// works only if it wasn't the last leg
+								if(tournament.getLegs().size()>nextLegNumber)
+								{	CupLeg nextLeg = tournament.getLeg(nextLegNumber);
+									CupPart nextPart = null;
+									ArrayList<CupPart> parts = nextLeg.getParts();
+									Iterator<CupPart> iter = parts.iterator();
+									while(iter.hasNext() && nextPart==null)
+									{	CupPart part = iter.next();
+										Iterator<CupPlayer> itp = part.getPlayers().iterator();
+										while(itp.hasNext() && nextPart==null)
+										{	CupPlayer plyr = itp.next();
+											if(plyr.getPart()==partNumber && plyr.getRank()==rk)
+												nextPart = part;										
+										}
 									}
+									// works only if there's a part using the player
+									if(nextPart!=null)
+										firePartAfterClicked(nextPart);
 								}
-								// works only if there's a part using the player
-								if(nextPart!=null)
-									firePartAfterClicked(nextPart);
 							}
 						}
 					}
-				}
-				break;
+					break;
+			}
 		}
 	}
 

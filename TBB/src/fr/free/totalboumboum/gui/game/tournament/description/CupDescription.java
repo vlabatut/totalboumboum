@@ -21,35 +21,23 @@ package fr.free.totalboumboum.gui.game.tournament.description;
  * 
  */
 
-import java.awt.Dimension;
 import java.util.ArrayList;
 
 import javax.swing.Box;
 import javax.swing.BoxLayout;
-import javax.swing.JPanel;
 
 import fr.free.totalboumboum.configuration.profile.Profile;
-import fr.free.totalboumboum.game.limit.Limit;
-import fr.free.totalboumboum.game.limit.TournamentLimit;
-import fr.free.totalboumboum.game.points.PointsProcessor;
-import fr.free.totalboumboum.game.tournament.sequence.SequenceTournament;
-import fr.free.totalboumboum.gui.common.content.subpanel.limits.LimitsSubPanelListener;
-import fr.free.totalboumboum.gui.common.content.subpanel.limits.LimitsSubPanel;
+import fr.free.totalboumboum.game.tournament.cup.CupLeg;
+import fr.free.totalboumboum.game.tournament.cup.CupTournament;
+import fr.free.totalboumboum.gui.common.content.subpanel.leg.LegSubPanel;
+import fr.free.totalboumboum.gui.common.content.subpanel.leg.LegSubPanelListener;
 import fr.free.totalboumboum.gui.common.content.subpanel.players.PlayersListSubPanel;
-import fr.free.totalboumboum.gui.common.content.subpanel.points.PointsSubPanel;
 import fr.free.totalboumboum.gui.common.structure.panel.SplitMenuPanel;
 import fr.free.totalboumboum.gui.common.structure.subpanel.SubPanel;
-import fr.free.totalboumboum.gui.tools.GuiKeys;
 import fr.free.totalboumboum.gui.tools.GuiTools;
 
-public class CupDescription extends TournamentDescription<SequenceTournament> implements LimitsSubPanelListener
-{	
-	private static final long serialVersionUID = 1L;
-	private static final float SPLIT_RATIO = 0.6f;
-
-	private PlayersListSubPanel playersPanel;
-	private LimitsSubPanel<TournamentLimit> limitsPanel;
-	private PointsSubPanel pointsPanel;
+public class CupDescription extends TournamentDescription<CupTournament> implements LegSubPanelListener
+{	private static final long serialVersionUID = 1L;
 
 	public CupDescription(SplitMenuPanel container)
 	{	super(container);
@@ -64,60 +52,43 @@ public class CupDescription extends TournamentDescription<SequenceTournament> im
 			int leftWidth = (int)(dataWidth*SPLIT_RATIO); 
 			int rightWidth = dataWidth - leftWidth - margin; 
 			infoPanel.setOpaque(false);
-			
+
+			// legs panel
+			{	legsPanel = new LegSubPanel(leftWidth,dataHeight);
+				legsPanel.setLeg(null,LEGS_PER_PAGE);
+			}
+
+			infoPanel.add(Box.createHorizontalGlue());
+
 			// players panel
-			{	playersPanel = new PlayersListSubPanel(leftWidth,dataHeight);
+			{	playersPanel = new PlayersListSubPanel(rightWidth,dataHeight);
 				playersPanel.setShowControls(false);
 				infoPanel.add(playersPanel);
-			}
-			
-			infoPanel.add(Box.createHorizontalGlue());
-			
-			// right panel
-			{	JPanel rightPanel = new JPanel();
-				{	BoxLayout layout = new BoxLayout(rightPanel,BoxLayout.PAGE_AXIS); 
-					rightPanel.setLayout(layout);
-				}
-				rightPanel.setOpaque(false);
-				Dimension dim = new Dimension(rightWidth,dataHeight);
-				rightPanel.setPreferredSize(dim);
-				rightPanel.setMinimumSize(dim);
-				rightPanel.setMaximumSize(dim);
-				int upHeight = (dataHeight - margin)/2;
-				int downHeight = dataHeight - upHeight - margin;
-				
-				// limit panel
-				{	limitsPanel = new LimitsSubPanel<TournamentLimit>(rightWidth,downHeight,GuiKeys.TOURNAMENT);
-					limitsPanel.addListener(this);
-					rightPanel.add(limitsPanel);
-				}
-
-				rightPanel.add(Box.createVerticalGlue());
-				
-				// points panel
-				{	pointsPanel = new PointsSubPanel(rightWidth,downHeight,GuiKeys.TOURNAMENT);
-					rightPanel.add(pointsPanel);
-					limitSelectionChanged();
-				}
-				
-				infoPanel.add(rightPanel);
 			}
 
 			setDataPart(infoPanel);
 		}
 	}
+	/////////////////////////////////////////////////////////////////
+	// PANELS			/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////	
+	private static final float SPLIT_RATIO = 0.5f;
+	private static final int LEGS_PER_PAGE = 2;
+	private PlayersListSubPanel playersPanel;
+	private LegSubPanel legsPanel;
 
 	/////////////////////////////////////////////////////////////////
 	// TOURNAMENT			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////	
-	public void setTournament(SequenceTournament tournament)
+	public void setTournament(CupTournament tournament)
 	{	// init
 		this.tournament = tournament;
 		// players
 		ArrayList<Profile> players = tournament.getProfiles();
 		playersPanel.setPlayers(players);
-		// limits
-		limitsPanel.setLimits(tournament.getLimits());		
+		// legs
+		ArrayList<CupLeg> legs = tournament.getLegs();
+		legsPanel.setLeg(legs.get(0),LEGS_PER_PAGE);		
 	}
 
 	/////////////////////////////////////////////////////////////////
@@ -130,15 +101,21 @@ public class CupDescription extends TournamentDescription<SequenceTournament> im
 	}
 
 	/////////////////////////////////////////////////////////////////
-	// LIMITS 			/////////////////////////////////////////////
+	// LEG PANEL LISTENER 	/////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	
 	@Override
-	public void limitSelectionChanged()
-	{	Limit limit = limitsPanel.getSelectedLimit();
-		PointsProcessor pointsProcessor = null;
-		if(limit!=null)
-			pointsProcessor = limit.getPointProcessor();
-		pointsPanel.setPointsProcessor(pointsProcessor);
+	public void legSelectionChanged()
+	{	
+	}
+
+	@Override
+	public void legAfterClicked()
+	{	
+	}
+
+	@Override
+	public void legBeforeClicked()
+	{	
 	}
 }
