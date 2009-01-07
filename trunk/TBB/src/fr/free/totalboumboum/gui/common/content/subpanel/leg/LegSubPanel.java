@@ -27,6 +27,7 @@ import java.awt.Dimension;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.util.ArrayList;
+import java.util.Iterator;
 
 import javax.swing.Box;
 import javax.swing.BoxLayout;
@@ -35,6 +36,7 @@ import javax.swing.JPanel;
 
 import fr.free.totalboumboum.game.tournament.cup.CupLeg;
 import fr.free.totalboumboum.game.tournament.cup.CupPart;
+import fr.free.totalboumboum.game.tournament.cup.CupTournament;
 import fr.free.totalboumboum.gui.common.content.subpanel.part.PartSubPanel;
 import fr.free.totalboumboum.gui.common.content.subpanel.part.PartSubPanelListener;
 import fr.free.totalboumboum.gui.common.structure.subpanel.SubPanel;
@@ -333,9 +335,22 @@ public class LegSubPanel extends SubPanel implements MouseListener, PartSubPanel
 		}
 		
 		//select
-		index = parts.indexOf(part);
-		if(part!=null && index>=0)
-		{	// refresh page
+		if(part!=null)
+		{	// same leg, or other leg ?
+			index = parts.indexOf(part);
+			if(index==-1)
+			{	CupTournament tournament = leg.getTournament();
+				ArrayList<CupLeg> legs = tournament.getLegs();
+				Iterator<CupLeg> it = legs.iterator();
+				CupLeg lg = null;
+				while(index==-1 && it.hasNext())
+				{	lg = it.next();
+					index = lg.getParts().indexOf(part);
+				}
+				// refresh leg
+				setLeg(lg,partsPerPage);
+			}
+			// refresh page
 			int page = index/partsPerPage;
 			if(page!=currentPage)
 			{	currentPage = page;
