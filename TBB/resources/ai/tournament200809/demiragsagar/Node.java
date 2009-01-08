@@ -20,7 +20,7 @@ public class Node {
 		this.tile = courant;
 		this.heuristic = heuristic;
 	}
-
+	
 	public double getHeuristic() {
 		return heuristic;
 	}
@@ -31,8 +31,13 @@ public class Node {
 	}
 
 	public boolean memeCoordonnees(Node test) {
-		return this.tile.getCol() == test.tile.getCol()
-				&& this.tile.getLine() == test.tile.getLine();
+		return this.getTile().getCol() == test.getTile().getCol()
+				&& this.getTile().getLine() == test.getTile().getLine();
 
+	}
+	
+	public AiTile getTile()
+	{
+		return this.tile;
 	}
 }

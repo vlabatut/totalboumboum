@@ -2,11 +2,15 @@ package tournament200809.demiragsagar;
 
 import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.LinkedList;
+
+import tournament200809.demiragsagar.AStar;
 
 import fr.free.totalboumboum.ai.adapter200809.AiAction;
 import fr.free.totalboumboum.ai.adapter200809.AiActionName;
 import fr.free.totalboumboum.ai.adapter200809.AiBomb;
 import fr.free.totalboumboum.ai.adapter200809.AiHero;
+import fr.free.totalboumboum.ai.adapter200809.AiItem;
 import fr.free.totalboumboum.ai.adapter200809.AiTile;
 import fr.free.totalboumboum.ai.adapter200809.AiZone;
 import fr.free.totalboumboum.ai.adapter200809.ArtificialIntelligence;
@@ -14,214 +18,563 @@ import fr.free.totalboumboum.ai.adapter200809.StopRequestException;
 import fr.free.totalboumboum.engine.content.feature.Direction;
 
 public class MonIA extends ArtificialIntelligence {
-	Direction d;
-	AiZone zone;
-	AiHero ownHero;
-	AiTile caseCourant;
-	AiTile caseHedef;
-	ArrayList<AiTile> bombes;
-	int baseX = 0;
-	int baseY;
-	int zoneWidth;
-	int zoneHeight;
-	Attack monAttack;
-	double[][] matrice;
-	Escape esc;
-	ArrayList<AiTile> interTiles;
-	boolean estIntermediaire;
-	boolean debug;
-	boolean olmadikacilk;
+
+	//les variables globales qui sont mise a jour a chaque iteration
+	private int state;
+	private Direction d;
+	private AiZone zone;
+	private AiHero ownHero;
+	private AiTile caseCourant;
+	private AiTile caseTarget;
+	private boolean debug;
+	private ArrayList<AiTile> caseEnemies;
+	private ArrayList<AiTile> caseBombes;
+	private ArrayList<AiTile> caseItems;
+	private TimeMatrice timeMatrice;
+	private long dangerTime;
+	private int distanceTarget;
+	private int counter;
 
 	public MonIA() {
+		//l'initialisation des variables globales
+		this.state = 0;
 		this.d = Direction.NONE;
-		this.estIntermediaire = false;
-		this.caseHedef = null;		
-		this.interTiles = new ArrayList<AiTile>();
-		this.bombes = new ArrayList<AiTile>();
-		this.monAttack = null;
-		this.debug=false;
-		this.olmadikacilk=false;
+		this.caseEnemies = new ArrayList<AiTile>();
+		this.caseBombes = new ArrayList<AiTile>();
+		this.caseItems = new ArrayList<AiTile>();
+		this.timeMatrice = null;
+		this.debug = false;
+		this.dangerTime=60;
+		this.distanceTarget=75;
+		this.counter=0;
 	}
 
-	@Override
+	@Override 
 	public AiAction processAction() throws StopRequestException {
 		checkInterruption();
 		AiAction result = new AiAction(AiActionName.NONE);
-
-		// zone details
+		// je recoit les aspects de la zone
 		this.zone = getPercepts();
-		if(this.monAttack==null) this.monAttack = new Attack(zone,9, 9, 4, 3);
-		getBombes();
+		this.ownHero = this.zone.getOwnHero();
+		this.caseCourant = this.ownHero.getTile();
+		// les cases ou se trouvent les enemies
+		this.caseEnemies = getEnemiesTile();
+		if (this.caseEnemies.isEmpty())
+			// il n' y a plus d'enemies
+			// nous avons gagne
+			this.state = -1;
+		this.caseBombes = getBombesTile();
+		this.caseItems = getItemsTile();
+		this.calculeZoneAspect(this.zone);
+		if (this.state != 0){
+			timeMatrice.updateTimeMatrice(this.caseBombes);
+			//this.timeMatrice.printTimeMatrice();
+		}
 		
-		if (baseX == 0)
-			calculeZoneAspect(zone);
-
-		// les heros
-		ownHero = zone.getOwnHero();
-		caseCourant = ownHero.getTile();
-		AiTile caseEnemi = this.getEnemyTile();
-		if(caseEnemi==null)
-			return new AiAction(AiActionName.NONE);
-
-		if (d == Direction.NONE) {
-			AiTile target = null;
-			// nous navons pas de direction
-			if (caseCourant.getCol() == monAttack.midPointX && caseCourant.getLine() == monAttack.midPointY) {
-				// on a divise la zone par 4, nous sommes au milieu
-				if(debug) System.out.println("point milieu");
-				bombes.clear();
-				bombes.add(zone.getTile(caseCourant.getLine(), caseCourant.getCol()));
-				monAttack.updateNewPoints(caseEnemi);
-				bombes.add(zone.getTile(monAttack.midPointY,monAttack.midPointX));
-				esc = new Escape(bombes);
-				this.interTiles = esc.getIntersection(zone);
-				bombes.clear();
-				estIntermediaire = true;
-				return new AiAction(AiActionName.DROP_BOMB);
-			} else if (bombes.isEmpty() && monAttack.olmadikac && zone.getFires().isEmpty()) {
-				if(debug) System.out.println("kacmayi birak");
-				monAttack.olmadikac = false;
-				//TODO sacma
-				olmadikacilk=false;
-				this.estIntermediaire = false;
-				monAttack=null;
-				return new AiAction(AiActionName.DROP_BOMB);
-			} else if (monAttack.olmadikac) {
-				if(debug) System.out.println("kac");
-				//estIntermediaire = false;
-				//si getEscape n'a pas un effet un sur ou on est ,il faut faire retourner ou on est
-				this.getBombes();
-				esc = new Escape(bombes);
-				target = esc.getEscape(caseCourant, zone);
-				//TODO: 
-				if(olmadikacilk==false) {
-					olmadikacilk=true;
-					return new AiAction(AiActionName.NONE);
-				}
-				//printTile(target);
-			} else if (estIntermediaire) {
-				if(debug) System.out.println("kesisim'e bomba koy");
-				// avancer a l'intersection
-				target = interTiles.get(0);
-				// l'intersection des effets des bombes que nous avons depose
-				// regarder tous les intersections
-				if (ownHero.getCol() == interTiles.get(0).getCol() && ownHero.getLine() == interTiles.get(0).getLine()) {
-					if(debug) System.out.println("kesisim'e gelmissin la");
-					// nous sommes a l'intersection
-					estIntermediaire = false;
-					return new AiAction(AiActionName.DROP_BOMB);
-				}
-			} else {  //if (estIntermediaire == false) 
-				if(debug) System.out.println("hic bisi yok orta noktaya ilerle");
-				// aller au milieu de la zone partage
-				target = this.zone.getTile(monAttack.midPointY,	monAttack.midPointX);
-			}
-				
-			//System.out.println("bee:"+target.getCol()+" "+target.getLine());
-			if(caseCourant.getLine()==target.getLine() && caseCourant.getCol()==target.getCol())
-				return new AiAction(AiActionName.NONE);
-			AStar arbre;
-			arbre = new AStar(caseCourant, target, false);
-			arbre.formeArbre();
-			if(arbre.path==null) {
-				printTile(target);
-				return new AiAction(AiActionName.NONE);
-			}
-			Iterator<Node> it = arbre.path.iterator();
-			if (it.hasNext())
-				caseHedef = it.next().tile;
+		if(this.debug)
+			System.out.println("State: "+this.state+" La case Courant est: "+caseCourant.toString());
+		switch (this.state) {
+		case -1: {
+			// quand il ne reste plus d'enemies
+			// nous avons gagne
+			result = new AiAction(AiActionName.NONE);
+			break;
+		}
+		case 0: {
+			/*
+			 * quand la classe est juste cree
+			 */
+			//seulement a l'inisialisation
+			//on creer la matrice de temps restant des bombes
+			this.timeMatrice=new TimeMatrice(this.zone,ownHero.getBombRange());
+			this.timeMatrice.updateTimeMatrice(caseBombes);
+			this.state=4;
+			break;
+		}
+		case 4: {
+			/*
+			 * Y a t-il un danger au case courant? Danger = une bombe ou un fire
+			 * Si il y a, aller au cas 5 Sinon aller au cas 6
+			 */		
+			if (this.timeMatrice.getTime(caseCourant) > 0) // S'il ya un danger
+				this.state = 5;
 			else
-				// System.out.println("pas de chemin");
-				caseHedef = caseCourant;
-			//System.out.println("caseHedef: "+caseHedef.getCol()+","+caseHedef.getLine());
-			d = getPercepts().getDirection(caseCourant, caseHedef);
-			// System.out.println(d.toString());
-			result = new AiAction(AiActionName.MOVE, d);
-			// moving finished
-
-		} else if (!estCaseCible())
-			// on avance jusqu'a la case cible
-			result = new AiAction(AiActionName.MOVE, d);
+				this.state = 6;
+			break;
+		}
+		case 5: {
+			/*
+			 * Tester si on peut se cacher qquepart
+			 */
+			if (this.seCacher()) {
+				this.state = 500;
+			} else {
+				if(this.caseTarget==null){
+					//sinon penser de nouveau
+					this.state=4;
+					result=new AiAction(AiActionName.NONE);					
+				}
+				else{	
+				this.state = 500;
+				}
+			}
+			break;
+		}
+		case 6: {
+			/*
+			 * Y a t il un item?
+			 * Si il existe, aller a 7
+			 * Sinon a 8
+			 */
+			int min=-1;
+			AiTile minTile=null;
+			if (this.caseItems.size()==0)
+				this.state = 8;
+		    else {
+		    	for(AiTile temp: caseItems)
+		    	{
+		    		//La distance entre nous et l'item
+		    		int valeur=Functions.trouveDistance(this.ownHero.getTile(), temp);	
+		    		if(valeur!=-1){
+		    			//Il existe un chemin
+		    			if(min==-1 || min>valeur)
+		    			{	
+		    				minTile=temp;
+		    				min=valeur;
+		    			}
+		    		}
+		    	}
+		    	if(minTile==null){
+		    		/*
+		    		 * Il existe un item
+		    		 * Mais on ne possede pas un chemin
+		    		 */
+		    		this.state=78;
+		    	}
+		    			
+		    	else {
+		    		/*
+		    		 * Qui est plus proche?
+		    		 * Aller a 7 pour le decider
+		    		 */
+		    		this.caseTarget = minTile;
+		    		this.state = 7;
+		    	}
+		    }
+			break;
+		}
+		case 7: {
+			
+			int notreDistance = Functions.trouveDistance(caseCourant,caseTarget);
+			if (notreDistance == -1) {
+				/*
+				 * Nous ne possedont pas un chemin a l'item
+				 * On va exploser un mur
+				 */
+				if(this.debug)
+					System.out.println("Duvar patlatilacak");
+				this.state = 78;
+			}	
+			else {
+				AiTile closer=Functions.TheCloserTile(this.caseTarget, this.caseEnemies);
+				int closerDist=Functions.trouveDistance(closer, this.caseTarget);
+				if(this.debug)
+					System.out.println("distnce nous :"+notreDistance+", lui:"+closerDist);
+				if(notreDistance >= closerDist && closerDist!=-1){
+					/*
+					 * Si le enemy est plus proche au item
+					 * On va essayer de l'empecher
+					 */
+					this.state = 10;
+				}
+				else {
+					if(!dangerOnTheTrack(this.caseTarget,false)){
+						//aller au item
+						this.state = 500;
+					}
+					else
+						this.state=4;//penser a nouveau
+				}
+			}			
+			break;
+		}		
+		case 10: {
+			AiTile closer=Functions.TheCloserTile(this.caseTarget, this.caseEnemies);
+			if(closer!=null){
+				//compare les chemin entre nous-item et enemie-item
+				//envoie l'intersection
+				this.caseTarget=this.EnemyAtTheGate(closer);
+			}
+			if(this.caseTarget!=null)
+				this.state=501;
+			else 
+				this.state=4;
+			break;
+		}		
+		case 8: {		
+			if (this.FindSoftWallNumber()!=0)
+				this.state=78;
+			else this.state=4; //rien a faire recommencer
+			break;
+		}
+		case 78:{
+			if(Functions.ChildNodes(this.caseCourant)==1) {
+				//regarde les cases voisins
+				//met une bombe si ==1
+				if(supposerBombe(this.caseCourant))
+					result=new AiAction(AiActionName.DROP_BOMB);
+				this.state=4;//penser a nouveau
+				this.caseTarget=null;
+				break;
+			}
+			if(this.caseTarget==null)
+				caseTarget=this.caseEnemies.get(0); 
+			AStar a=new AStar(this.caseCourant,this.caseTarget);
+			a.formeArbre();
+			ArrayList<Node>fils=a.getFils();
+			/*
+			 * On explose les murs qui nous empeche
+			 * a aller a l'enemie
+			 * 
+			 */
+			if(!fils.isEmpty()) {
+				int min=-1;
+				for(Node temp:fils)
+					if(this.timeMatrice.getTime(temp.getTile())==0) {
+						int tempDistance=Functions.trouveDistance(caseCourant, temp.getTile());
+						if(min==-1 || min>tempDistance)
+							if(this.supposerBombe(temp.getTile())){
+								min=tempDistance;							
+								this.caseTarget=temp.getTile();
+								if(!dangerOnTheTrack(this.caseTarget,true))
+									this.state=501;
+								else
+									this.state=4;
+								break;
+							}
+				}				
+			}
+			if(this.state==78) {
+				if(this.supposerBombe(caseCourant)){
+					//rien a faire, laisser une bombe
+					result=new AiAction(AiActionName.DROP_BOMB);
+					this.state=4;
+					break;
+				}
+				this.state=78;
+			}
+			break;
+		}
+		case 501: 
+		case 500:
+		{
+			//Former un chemin selon le target que l'on a choisie
+			if(this.caseTarget!=null && !this.caseTarget.getBombs().isEmpty()){
+			state=4;
+			}
+			if (this.caseTarget != null)
+				if(this.debug)
+					System.out.println("Case Target: "+caseTarget.toString());
+			if (!estCaseCible()) {
+				counter++;
+				AiTile nextCase = null;
+				AStar arbre = new AStar(this.caseCourant, this.caseTarget, false);
+				arbre.formeArbre();
+				// Il n'y a pas de chemin entre la case courant et la case qu'on
+				// veut aller
+				LinkedList<Node> path = arbre.getPath();
+				if (path == null) {
+					if(Functions.memeCordonnes(caseCourant, caseTarget))
+						System.out.println("ERREUR: Pas de chemin");
+					break;
+					}
+				else {
+					Iterator<Node> it = path.iterator();
+					if (it.hasNext())
+						nextCase = it.next().tile;
+					else {
+						this.state=-5;
+						System.out.println("ERREUR: Nous sommes au case cible");
+						break;
+					}
+					if(this.dangerOnTheTrack(this.caseTarget,false)) {
+						this.state=4;
+						break;
+					}
+					//System.out.println("counter: "+counter);
+					if(counter>this.distanceTarget){
+						counter=0;
+						this.state=4;
+						break;
+						}
+					if (this.debug)
+						System.out.println("nextCase: " + nextCase);
+					this.d = getPercepts().getDirection(this.caseCourant,nextCase);
+					result = new AiAction(AiActionName.MOVE, this.d);
+				}
+			} else {
+				counter=0;
+				if(this.state == 501){
+					if(supposerBombe(this.caseCourant)){
+						result = new AiAction(AiActionName.DROP_BOMB);
+						this.timeMatrice.setDefaultPortee(this.ownHero.getBombRange());
+						this.timeMatrice.placerNouvelleBombe(this.caseCourant);
+					}
+					
+				}
+				else result = new AiAction(AiActionName.NONE);
+				this.state = 4;
+				this.caseTarget=null;
+			}
+			break;
+		}
+		default:
+			if(this.debug)
+			System.out.println("Bulunamayan State:"+this.state);
+			result = new AiAction(AiActionName.NONE);
+			break;
+		}
 		return result;
+	}
+	
+	/*
+	 * Prend l'intersection entre le chmein du enemie-item
+	 * et de nous-item
+	 */
+	public AiTile EnemyAtTheGate(AiTile enemy)
+	{
+		try {
+			checkInterruption();
+		} catch (StopRequestException e) {
+			e.printStackTrace();
+		}
+		AiTile result=null;
+		AStar arbre1=new AStar(this.ownHero.getTile(),this.caseTarget);
+		arbre1.formeArbre();
+		//		Il n'y a pas de chemin entre la case courant et la case qu'on veut aller
+		if(arbre1.getPath()==null) 
+			return null;
+		else {
+			if(Functions.memeCordonnes(caseTarget,enemy))
+				System.out.println("enemy ile ayni case");
+			AStar arbre2 = new AStar(enemy,this.caseTarget);
+			arbre2.formeArbre();
+			if(arbre2.getPath()==null)
+				return null;
+			Node tempNode1 = new Node(this.caseTarget);
+			Node tempNode2 = new Node(this.caseTarget);
+			while(tempNode1.memeCoordonnees(tempNode2)&& tempNode1!=null && tempNode2!=null ) {
+				result=tempNode1.getTile();
+				if(!tempNode1.memeCoordonnees(new Node(arbre1.firstTile)) && !tempNode2.memeCoordonnees(new Node(arbre2.firstTile))){
+				tempNode1=arbre1.getParentLink(tempNode1).getOrigin();
+				tempNode2=arbre2.getParentLink(tempNode2).getOrigin();
+				}
+				else
+					break;
+			}
+			
+		}
+		return result;
+	}
+	/*
+	 * On suppose de mettre une bombe
+	 * On regarde si on sera en danger
+	 */
+	public boolean supposerBombe(AiTile temp){
+		try {
+			checkInterruption();
+		} catch (StopRequestException e) {
+			e.printStackTrace();
+		}
+		int i,j;
+		boolean resultat=false;
+		long nouveauTime [][]= new long[17][15];
+		for (j = 0; j < 15; j++)
+			for (i = 0; i < 17; i++)
+			{
+				nouveauTime[i][j]=this.timeMatrice.getTime(i,j);
+			}
+		this.timeMatrice.placerNouvelleBombe(temp);
+		if(this.seCacher(true))
+			resultat=true;
+		for (j = 0; j < 15; j++)
+			for (i = 0; i < 17; i++)
+			{
+				this.timeMatrice.putTime(i,j,nouveauTime[i][j]);
+			}
+		return resultat;
+	}
+	/*
+	 * Mettre a jour les tiles des enemies
+	 */
+	public ArrayList<AiTile> getEnemiesTile() {
+		try {
+			checkInterruption();
+		} catch (StopRequestException e) {
+			e.printStackTrace();
+		}
+
+		ArrayList<AiTile> monItera = new ArrayList<AiTile>();
+
+		for (AiHero i : this.zone.getHeroes()) {
+			if (this.debug)
+				System.out.println("La couleur de l'enemy: " + i.getColor());
+			try {
+				checkInterruption();
+			} catch (StopRequestException e) {
+				e.printStackTrace();
+			}
+			if (i.getColor() != this.ownHero.getColor())
+				if (i != null)
+					monItera.add(i.getTile());
+		}
+		return monItera;
+	}
+
+	/*
+	 * Mettre a jour les tiles des bombes
+	 */
+	public ArrayList<AiTile> getBombesTile() {
+		ArrayList<AiTile> b = new ArrayList<AiTile>();
+		try {
+			checkInterruption();
+		} catch (StopRequestException e) {
+			e.printStackTrace();
+		}
+		if (this.zone.getBombs() != null)
+			for (AiBomb i : this.zone.getBombs()) {
+				try {
+					checkInterruption();
+				} catch (StopRequestException e) {
+					e.printStackTrace();
+				}
+				if(!i.getTile().getBombs().isEmpty())
+					b.add(i.getTile());
+			}
+		return b;
+	}
+
+	/*
+	 * Mettre a jour les tiles des items
+	 */
+	public ArrayList<AiTile> getItemsTile() {
+		ArrayList<AiTile> p = new ArrayList<AiTile>();
+		try {
+			checkInterruption();
+		} catch (StopRequestException e) {
+			e.printStackTrace();
+		}
+		if (this.zone.getItems() != null)
+			for (AiItem i : this.zone.getItems()) {
+				try {
+					checkInterruption();
+				} catch (StopRequestException e) {
+					e.printStackTrace();
+				}
+				if(i.getTile().getItem()!=null)
+					p.add(i.getTile());
+			}
+		return p;
 	}
 
 	public void calculeZoneAspect(AiZone zone) {
 		try {
 			checkInterruption();
 		} catch (StopRequestException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		this.zoneHeight = 9;
-		this.zoneWidth = 9;
-		this.baseX = 4;
-		this.baseY = 3;
+	}
+	public boolean seCacher(){
+		return seCacher(false);
+	}
+	/*
+	 * Chercher une case pour se cacher
+	 */
+	
+	public boolean seCacher(boolean poserBombe) {
+		try {
+			checkInterruption();
+		} catch (StopRequestException e) {
+			e.printStackTrace();
+		}
+		AiTile petit = null;
+		boolean fuir = false;
+		int min = 10000, temp, i, j;
+		for (j = 0; j < 15; j++)
+			for (i = 0; i < 17; i++)
+				if(!Functions.memeCordonnes(zone.getTile(j,i), this.caseCourant))
+					if ( this.timeMatrice.getTime(i,j)==0) {//bulacakkkk
+						temp = Functions.trouveDistance(caseCourant,this.zone.getTile(j, i));
+						if (temp > 0 && min > temp) 
+							if(!dangerOnTheTrack(this.zone.getTile(j, i),poserBombe)) {
+								min = temp;
+								petit = this.zone.getTile(j, i);
+								fuir = true;
+							}
+					}
+		this.caseTarget = petit;
+		return fuir;
+	}
+	/*
+	 * Regarde si il existe un danger sur le chemin chosit
+	 */
+	public boolean dangerOnTheTrack(AiTile target,boolean placerBombe) {
+		try {
+			checkInterruption();
+		} catch (StopRequestException e) {
+			e.printStackTrace();
+		}
+		boolean flag=false;
+		AStar arbre=new AStar(this.caseCourant,target);
+		arbre.formeArbre();
+		LinkedList<Node> path=arbre.getPath();
+		if(path==null)
+			return true;
+		int dangerSize=path.size();
+		if(placerBombe)
+			dangerSize=dangerSize+5;
+		for(Node tempNode:path) {
+			if(this.timeMatrice.getTime(tempNode.getTile()) < dangerSize*(this.dangerTime*3) && this.timeMatrice.getTime(tempNode.getTile())!=0)
+				flag=true;
+		}
+		return flag;
 	}
 
+	/*
+	 * Regarde si nous sommes arrive a la case cible
+	 */
 	public boolean estCaseCible() {
 		try {
 			checkInterruption();
 		} catch (StopRequestException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		// fonction verifiant si l'ia est arrive a la case cible
 		boolean resultat = false;
-
-		if (caseHedef == null)
-			caseHedef = caseCourant.getNeighbour(d);
-		if (ownHero.getTile().equals(caseHedef)) {
-			d = Direction.NONE;
-			caseHedef = null;
+		if (this.ownHero.getTile().getCol() == this.caseTarget.getCol()	&& this.ownHero.getTile().getLine() == this.caseTarget.getLine())
 			resultat = true;
-		}
 		return resultat;
 
 	}
 
-	public AiTile getEnemyTile() {
+	/*
+	 * Compte les nombres des SoftWalls restant
+	 */
+	public int FindSoftWallNumber() {
 		try {
 			checkInterruption();
 		} catch (StopRequestException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		AiHero enemy = null;
-		for (AiHero i : this.zone.getHeroes()){
-			try {
-				checkInterruption();
-			} catch (StopRequestException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-			if (i.getColor() != this.ownHero.getColor())
-				enemy = i;
-		}
-		if (enemy != null)
-			return enemy.getTile();
-		return null;
-	}
-
-	public void getBombes() {
-		try {
-			checkInterruption();
-		} catch (StopRequestException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		bombes.clear();
-		if (this.zone.getBombs() != null)
-			for (AiBomb i : this.zone.getBombs()){
-				try {
-					checkInterruption();
-				} catch (StopRequestException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
+		int mat[][] = this.timeMatrice.getBombMatrice(this.zone);
+		int sommeHardWall = 0;
+		for (int i = 0; i < 15; i++)
+			for (int j = 0; j < 17; j++)
+				if (mat[j][i] == -1) {
+					AiTile temp = this.zone.getTile(i, j);
+					if (temp.getBlock().isDestructible())
+						sommeHardWall++;
 				}
-				bombes.add(i.getTile());
-			}
-	}
-	public void printTile(AiTile t) {
-		System.out.println("[]"+t.getLine()+" "+t.getCol());
+		return sommeHardWall;
 	}
 }
