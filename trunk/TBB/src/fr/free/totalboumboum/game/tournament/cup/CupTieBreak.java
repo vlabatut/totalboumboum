@@ -123,10 +123,12 @@ public class CupTieBreak implements Serializable
 			int relativeRanks[] = new int[tiedPlayersCount];
 			Arrays.fill(relativeRanks,problematicTie);
 			for(int i=0;i<numbers.size()-1;i++)
-			{	for(int j=i+1;j<numbers.size();j++)
-				{	if(tournamentRanks[i]>tournamentRanks[j])
+			{	int indexI = numbers.get(i);
+				for(int j=i+1;j<numbers.size();j++)
+				{	int indexJ = numbers.get(j);
+					if(tournamentRanks[indexI]>tournamentRanks[indexJ])
 						relativeRanks[i]++;
-					else if(tournamentRanks[i]<tournamentRanks[j])
+					else if(tournamentRanks[indexI]<tournamentRanks[indexJ])
 						relativeRanks[j]++;
 				}
 			}		

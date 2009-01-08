@@ -5,7 +5,7 @@
 		<player file="1" color="cyan" controls="1" spritePack="superbomberman5" spriteFolder="assistantpirate" />
 		<player file="18" color="orange" controls="2" spritePack="superbomberman5" spriteFolder="assistantpirate" />
 		<player file="30" color="red" controls="0" spritePack="superbomberman5" spriteFolder="shirobon" />
-		<player file="33" color="yellow" controls="0" spritePack="superbomberman5" spriteFolder="shirobon" />
+		<player file="37" color="blue" controls="0" spritePack="superbomberman5" spriteFolder="shirobon" />
 	</players>
 </gameQuickstart>
 
