@@ -285,7 +285,7 @@ public class MonIA extends ArtificialIntelligence {
 				LinkedList<Node> path = arbre.getPath();
 				if (path == null) {
 					if(Functions.memeCordonnes(caseCourant, caseTarget))
-						System.out.println("ERREUR: Pas de chemin");
+						//System.out.println("ERREUR: Pas de chemin");
 					break;
 					}
 				else {
@@ -294,7 +294,7 @@ public class MonIA extends ArtificialIntelligence {
 						nextCase = it.next().tile;
 					else {
 						this.state=-5;
-						System.out.println("ERREUR: Nous sommes au case cible");
+						//System.out.println("ERREUR: Nous sommes au case cible");
 						break;
 					}
 					if(this.dangerOnTheTrack(this.caseTarget,false)) {
@@ -356,7 +356,8 @@ public class MonIA extends ArtificialIntelligence {
 			return null;
 		else {
 			if(Functions.memeCordonnes(caseTarget,enemy))
-				System.out.println("enemy ile ayni case");
+				if(debug)
+					System.out.println("enemy ile ayni case");
 			AStar arbre2 = new AStar(enemy,this.caseTarget);
 			arbre2.formeArbre();
 			if(arbre2.getPath()==null)
