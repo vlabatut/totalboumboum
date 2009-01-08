@@ -4,9 +4,9 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.Iterator;
+import java.util.LinkedList;
 import java.util.PriorityQueue;
 import java.util.Vector;
-
 
 import fr.free.totalboumboum.ai.adapter200809.AiAction;
 import fr.free.totalboumboum.ai.adapter200809.AiActionName;
@@ -14,6 +14,8 @@ import fr.free.totalboumboum.ai.adapter200809.AiBlock;
 import fr.free.totalboumboum.ai.adapter200809.AiBomb;
 import fr.free.totalboumboum.ai.adapter200809.AiFire;
 import fr.free.totalboumboum.ai.adapter200809.AiHero;
+import fr.free.totalboumboum.ai.adapter200809.AiItem;
+import fr.free.totalboumboum.ai.adapter200809.AiItemType;
 import fr.free.totalboumboum.ai.adapter200809.AiTile;
 import fr.free.totalboumboum.ai.adapter200809.AiZone;
 import fr.free.totalboumboum.ai.adapter200809.ArtificialIntelligence;
@@ -24,18 +26,26 @@ public class KokciyanMazmanoglu extends ArtificialIntelligence
 {
 	/** la case occupée actuellement par le personnage*/
 	private AiTile currentTile;
-	/** la case sur laquelle on veut aller */
+	/** la case suivant à aller */
 	private AiTile nextTile = null;
 	/** la dernière case par laquelle on est passé */ 
 	private AiTile previousTile = null;
 
+	/** la case sur laquelle on veut aller */
+	private AiTile targetTile=null;
+	/** Ce qu'on va faire.*/
+	private Mission mission; 	
+	private Mission lastmission; 	
+
 	private double FieldMatrix[][];
+	private double ActionMatrix[][];
+
+
 	private AiZone zone;
 	private Tree tree;
 
-	int bombeLine=-1;
-	int bombeCol=-1;
-	private AiTile ciblePos=null;
+	private int tilecounter=0;
+	private int missioncounter=0; 
 
 
 
@@ -43,59 +53,164 @@ public class KokciyanMazmanoglu extends ArtificialIntelligence
 		checkInterruption(); // APPEL OBLIGATOIRE
 		zone = getPercepts();
 
-		Collection<AiBomb> bombeListe = zone.getBombs();
-
 		AiHero ownHero = zone.getOwnHero();
-		this.currentTile = zone.getTile(ownHero.getLine(), ownHero.getCol());
-		FieldMatrix = new double[zone.getWidth()][zone.getHeigh()];
+		this.currentTile =ownHero.getTile();
 
+		FieldMatrix = new double[zone.getHeigh()][zone.getWidth()];
+		ActionMatrix = new double[zone.getHeigh()][zone.getWidth()];
 		AiAction result = new AiAction(AiActionName.NONE);
-		getMatrixValues(FieldMatrix);
+
+
+		//-----------------------------------------------------------------------------------------------
+
 
 		if (ownHero != null) {
 
-			if (!isTimeToRun2()) {
+			if(currentTile == previousTile)
+				tilecounter ++;
+			if(mission == lastmission)
+				missioncounter ++;
+			
+			if(missioncounter == 75 && tilecounter == 7 ){
+				mission = Mission.ATTACK_RIVAL;
+				missioncounter = 0;
+				tilecounter  = 0;
+			}
+			
+			if(mission == null)
+				mission = Mission.STAND_IDLY;
+			getActionMatrixValues();
+			updateAMWithTraps();
+			getMatrixValues();
 
-				int[] coor = getClosestPlayerPosition();
 
-				if (distance(ownHero.getTile(), zone.getTile(coor[0], coor[1])) <= 5
-						&& coor[0] != -1
-						&& coor[1] != -1
-						&& !isTrap(zone.getTile(coor[0], coor[1]), ownHero
-								.getTile())) {
-					if (bombeListe.size() == 0) 
-						result = new AiAction(AiActionName.DROP_BOMB);
+			//printmatrix(ActionMatrix);
+			//System.out.println(mission);
+
+			double newmaxval = MaxValor();
+			//if(targetTile != null)
+				//System.out.println(newmaxval + " " +  ActionMatrix[targetTile.getLine()][targetTile.getCol()]);
 
 
+			if (isTimeToRun2()) {
 
-				} else {
-					tree = new Tree(coor[0], coor[1], this);
-					AiAction turn = algoAEtoile(ownHero.getTile(), zone
-							.getTile(coor[0], coor[1]));
+				if(mission == Mission.RUN_RUN_RUN_FAR_AWAY && targetTile != null && isSafe2(targetTile)){
+
+					//System.out.println(targetTile.getLine() +" " + targetTile.getCol());
+					tree = new Tree(targetTile.getLine(),targetTile.getCol(), this);
+					AiAction turn = algoAEtoile(currentTile, targetTile);
 					result = turn;
 
+
+				}
+				else{
+					this.lastmission = mission;
+					this.mission = Mission.RUN_RUN_RUN_FAR_AWAY;
+					getActionMatrixValuesV2();
+
+					targetTile = findSafeTile();
+					if(targetTile !=null)
+					{
+						//System.out.println(targetTile.getLine() +" " + targetTile.getCol());
+						tree = new Tree(targetTile.getLine(),targetTile.getCol(), this);
+					}
+					else
+						targetTile = currentTile;
+					AiAction turn = algoAEtoile(currentTile, targetTile);
+
+					result = turn;
+				}
+			}
+			else{
+				if(targetTile == null || newmaxval > ActionMatrix[targetTile.getLine()][targetTile.getCol()] || mission == Mission.RUN_RUN_RUN_FAR_AWAY )
+				{
+					targetTile = chooseTile();
+					decodeAction(targetTile);
+				}
+				//System.out.println(targetTile.getLine() +" " + targetTile.getCol());
+				//----------------------------------------------------------------------------------------------
+				int count = countPos();
+				if(count != 2 && !canIMove()){
+					result = new AiAction(AiActionName.NONE);
+				}
+				else if(mission == Mission.DESTROY_WALL){
+					if(currentTile != targetTile){
+
+						tree = new Tree(targetTile.getLine(),targetTile.getCol(), this);
+						AiAction turn = algoAEtoile(currentTile, targetTile);
+						result = turn;
+					}
+					else{
+						if(!isTrap3(currentTile)){
+							
+							result = new AiAction(AiActionName.DROP_BOMB);
+							}
+					}
+				}
+				else if(mission == Mission.GATHER_EXTRA_BOMB){
+					if(currentTile != targetTile){
+						tree = new Tree(targetTile.getLine(),targetTile.getCol(), this);
+						AiAction turn = algoAEtoile(currentTile, targetTile);
+						result = turn;
+					}
+
+				}
+				else if(mission == Mission.GATHER_RANGE_EXTENDER){
+					if(currentTile != targetTile){
+						tree = new Tree(targetTile.getLine(),targetTile.getCol(), this);
+						AiAction turn = algoAEtoile(currentTile, targetTile);
+						result = turn;
+					}
+				}
+				else if(mission == Mission.DESTROY_SURPLUS_BOMB){
+					if(!isBlockBetween(currentTile, targetTile) && distance(currentTile,targetTile)<=ownHero.getBombRange()){
+						if(!isTrap3(currentTile))
+							result = new AiAction(AiActionName.DROP_BOMB);
+					}
+					else{
+						tree = new Tree(targetTile.getLine(),targetTile.getCol(), this);
+						AiAction turn = algoAEtoile(currentTile, targetTile);
+						result = turn;
+					}
+
+				}
+				else if(mission == Mission.DESTROY_SURPLUS_RANGE_EXTENDER){
+					if(!isBlockBetween(currentTile, targetTile) && distance(currentTile,targetTile)<=ownHero.getBombRange()){
+						if(!isTrap3(currentTile))
+							result = new AiAction(AiActionName.DROP_BOMB);
+					}
+					else{
+						tree = new Tree(targetTile.getLine(),targetTile.getCol(), this);
+						AiAction turn = algoAEtoile(currentTile, targetTile);
+						result = turn;
+					}
+
+				}
+				else if(mission == Mission.STAND_IDLY){
+					result = new AiAction(AiActionName.NONE);
+				}
+				else if(mission == Mission.ATTACK_RIVAL){
+					//!isBlockBetween(currentTile, targetTile) && 
+					if(distance(currentTile,targetTile)<=ownHero.getBombRange()){
+						if(!isTrap3(currentTile))
+							result = new AiAction(AiActionName.DROP_BOMB);
+					}
+					else{
+						tree = new Tree(targetTile.getLine(),targetTile.getCol(), this);
+						AiAction turn = algoAEtoile(currentTile, targetTile);
+						result = turn;
+					}
+
+				}
+				else{
+					result = new AiAction(AiActionName.NONE);
 				}
 
-			}// ifrun
-			else {
-				int[] coor = getClosestPlayerPosition();
-				tree = new Tree(coor[0], coor[1], this);
-				AiAction turn = algoAEtoile(ownHero.getTile(), zone.getTile(coor[0], coor[1]));
-				result = turn;
-				if (turn.getName() == AiActionName.NONE) {
-					ciblePos = FindSafeCible(bombeListe.iterator().next()
-							.getTile(), ownHero.getTile());
-					if (ciblePos != null) {
-						tree = new Tree(ciblePos.getLine(), ciblePos.getCol(), this);
+			}			
 
-						result = algoAEtoile(ownHero.getTile(), ciblePos);
-					} else
-						result = new AiAction(AiActionName.NONE);
-
-
-				}// elserun
-			}
 		}
+		if(result==null)
+			result = new AiAction(AiActionName.NONE);
 
 		return result;
 	}
@@ -109,7 +224,6 @@ public class KokciyanMazmanoglu extends ArtificialIntelligence
 	public  AiAction algoAEtoile(AiTile startTile, AiTile targetTile) throws StopRequestException{
 		checkInterruption();
 		AiAction result = new AiAction(AiActionName.NONE);
-		this.nextTile = this.currentTile;
 		Node startNode = tree.convertToNode(startTile);
 
 		Node endNode = tree.convertToNode(targetTile);
@@ -166,13 +280,13 @@ public class KokciyanMazmanoglu extends ArtificialIntelligence
 	 * @param FieldMatrix[][]
 	 * @throws StopRequestException 
 	 */	
-	public void getMatrixValues(double FieldMatrix[][]) throws StopRequestException{
+	public void getMatrixValues() throws StopRequestException{
 		checkInterruption();
 
 
-		for(int i = 0; i<zone.getWidth(); i++){
+		for(int i = 0; i<zone.getHeigh(); i++){
 			checkInterruption();	
-			for(int j = 0; i<zone.getHeigh(); i++){
+			for(int j = 0; j<zone.getWidth(); j++){
 				checkInterruption();
 
 				AiTile tActual = zone.getTile(i, j);
@@ -187,12 +301,90 @@ public class KokciyanMazmanoglu extends ArtificialIntelligence
 					FieldMatrix[i][j]=distance(getCurrentTile(), zone.getTile(i, j));
 					//FieldMatrix[i][j]=1;
 				}
+
 			}
 			getbombs();
 
 		}
 
 	}
+
+	public void getActionMatrixValuesV2() throws StopRequestException{
+		checkInterruption();
+
+		LinkedList<AiTile> list = new LinkedList<AiTile>();
+		list.offer(currentTile);
+		LinkedList<AiTile> checked = new LinkedList<AiTile>();
+
+		for(int i = 0; i<zone.getHeigh(); i++){
+			checkInterruption();
+			for(int j = 0; j<zone.getWidth(); j++){
+				checkInterruption();
+
+				ActionMatrix[i][j] = -1;
+			}
+		}
+
+		while(list.size()>0){
+			checkInterruption();
+			AiTile temp = list.poll();
+			checked.offer(temp);
+
+			if (temp.getBlock()==null) {
+				Iterator<AiTile> neigh = zone.getNeighbourTiles(temp).iterator();
+				while (neigh.hasNext()) {
+					checkInterruption();
+					AiTile temp2 = neigh.next();
+					if (!checked.contains(temp2))
+						list.offer(temp2);
+				}
+			}
+			ActionMatrix[temp.getLine()][temp.getCol()] = evaluateTile(temp);
+		}
+
+		getActionMatrixBombRanges();
+	}
+
+	public void getActionMatrixValues() throws StopRequestException{
+		checkInterruption();
+
+		LinkedList<AiTile> list = new LinkedList<AiTile>();
+		list.offer(currentTile);
+		LinkedList<AiTile> checked = new LinkedList<AiTile>();
+
+		for(int i = 0; i<zone.getHeigh(); i++){
+			checkInterruption();
+			for(int j = 0; j<zone.getWidth(); j++){
+				checkInterruption();
+
+				ActionMatrix[i][j] = -1;
+			}
+		}
+
+
+
+
+
+		while(list.size()>0){
+			checkInterruption();
+			AiTile temp = list.poll();
+			checked.offer(temp);
+
+			if (temp.getBlock()==null) {
+				Iterator<AiTile> neigh = zone.getNeighbourTiles(temp).iterator();
+				while (neigh.hasNext()) {
+					checkInterruption();
+					AiTile temp2 = neigh.next();
+					if (!checked.contains(temp2))
+						list.offer(temp2);
+				}
+			}
+			ActionMatrix[temp.getLine()][temp.getCol()] = evaluateTile(temp);
+		}
+
+		getActionMatrixBombRanges();
+	}
+
 
 	/**
 	 * 
@@ -683,6 +875,28 @@ public class KokciyanMazmanoglu extends ArtificialIntelligence
 		return result;
 	}
 
+	public  boolean isSafe2(AiTile tile) throws StopRequestException{
+
+		boolean result=true;
+		Iterator<AiBomb> a = zone.getBombs().iterator();
+		if(a.hasNext()){
+			AiBomb bomb = a.next();
+			if((bomb.getLine()==tile.getLine() || bomb.getCol()==tile.getCol()) && ((bomb.getColor()!= zone.getOwnHero().getColor() && bomb.getRange()> distance(bomb.getTile(),tile)) || ((bomb.getColor() == zone.getOwnHero().getColor() && zone.getOwnHero().getBombRange() > distance(bomb.getTile(),tile))))){
+				result=result && isBlockBetween(bomb.getTile(),tile);
+			}
+		}
+		else
+			result=true;		
+		return result;
+	}
+
+
+
+
+
+
+
+
 	/**
 	 * 2 case arasinda duvar var mi
 	 * @param t1
@@ -697,7 +911,8 @@ public class KokciyanMazmanoglu extends ArtificialIntelligence
 			if(t2.getCol() < t1.getCol()){
 				int count=t1.getCol()-t2.getCol();
 				for(int i=1;i<count;i++){
-					if(isVoisinMur(zone.getTile(t2.getLine(), t2.getCol()+i),Direction.DOWN)){
+					checkInterruption();
+					if(isVoisinMur(zone.getTile(t2.getLine(), t2.getCol()+i),Direction.RIGHT)){
 						result=true;
 						break;
 					}
@@ -707,7 +922,8 @@ public class KokciyanMazmanoglu extends ArtificialIntelligence
 			if(t2.getCol() > t1.getCol()){
 				int count=t2.getCol()-t1.getCol();
 				for(int i=1;i<count;i++){
-					if(isVoisinMur(zone.getTile(t2.getLine(), t2.getCol()-i), Direction.UP)){
+					checkInterruption();
+					if(isVoisinMur(zone.getTile(t2.getLine(), t2.getCol()-i), Direction.LEFT)){
 						result=true;
 						break;
 					}
@@ -719,7 +935,8 @@ public class KokciyanMazmanoglu extends ArtificialIntelligence
 			if(t2.getLine()<t1.getLine()){
 				int count=t1.getLine()-t2.getLine();
 				for(int i=1;i<count;i++){
-					if(isVoisinMur(zone.getTile(t2.getLine()+i,t2.getCol()),Direction.RIGHT)){
+					checkInterruption();
+					if(isVoisinMur(zone.getTile(t2.getLine()+i,t2.getCol()),Direction.DOWN)){
 						result=true;
 						break;
 					}
@@ -728,7 +945,8 @@ public class KokciyanMazmanoglu extends ArtificialIntelligence
 			if(t2.getLine()>t1.getLine()){
 				int count=t2.getLine()-t1.getLine();
 				for(int i=1;i<count;i++){
-					if(isVoisinMur(zone.getTile(t2.getLine()-i, t2.getCol()),Direction.LEFT)){
+					checkInterruption();
+					if(isVoisinMur(zone.getTile(t2.getLine()-i, t2.getCol()),Direction.UP)){
 						result=true;
 						break;
 					}
@@ -753,32 +971,33 @@ public class KokciyanMazmanoglu extends ArtificialIntelligence
 		int yTemp;
 		AiTile tileTemp;
 		while(iterTile.hasNext()){
+			checkInterruption();
 			switch(d){
 			case UP:
 				xTemp=tile.getLine();
 				yTemp=tile.getCol()-1;
-				tileTemp=zone.getTile(yTemp,xTemp);
+				tileTemp=zone.getTile(xTemp,yTemp);
 				if(isWall(tileTemp))
 					res=true;
 				break;
 			case DOWN:
 				xTemp=tile.getLine();
 				yTemp=tile.getCol()+1;
-				tileTemp=zone.getTile(yTemp,xTemp);
+				tileTemp=zone.getTile(xTemp,yTemp);
 				if(isWall(tileTemp))
 					res=true;
 				break;
 			case RIGHT:
 				xTemp=tile.getLine()+1;
 				yTemp=tile.getCol();
-				tileTemp=zone.getTile(yTemp,xTemp);
+				tileTemp=zone.getTile(xTemp,yTemp);
 				if(isWall(tileTemp))
 					res=true;
 				break;
 			case LEFT:
 				xTemp=tile.getLine()-1;
 				yTemp=tile.getCol();
-				tileTemp=zone.getTile(yTemp,xTemp);
+				tileTemp=zone.getTile(xTemp,yTemp);
 				if(isWall(tileTemp))
 					res=true;
 				break;
@@ -820,7 +1039,7 @@ public class KokciyanMazmanoglu extends ArtificialIntelligence
 	 * @return
 	 * @throws StopRequestException
 	 */
-	public AiTile FindSafeCible(AiTile bombe, AiTile me) throws StopRequestException {
+	public AiTile FindSafeCible2(AiTile bombe, AiTile me) throws StopRequestException {
 		checkInterruption();
 		Collection<AiTile> cases = getPercepts().getNeighbourTiles(bombe);
 		Iterator<AiTile> iterCase = cases.iterator();
@@ -833,7 +1052,7 @@ public class KokciyanMazmanoglu extends ArtificialIntelligence
 			checkInterruption();
 			AiTile t = iterCase.next();
 			if (i == 0 && isWall(t)) {
-//				System.out.println(i+" "+getPercepts().getDirection(bombe, t));
+				//System.out.println(i+" "+getPercepts().getDirection(bombe, t));
 				if (possibleMoveD(me.getLine(), me.getCol(), 2, -2)) { // 2 kadar
 					// asagi
 					liste
@@ -843,7 +1062,7 @@ public class KokciyanMazmanoglu extends ArtificialIntelligence
 				}
 			}
 			if (i == 1 && isWall(t)) {
-//				System.out.println(i+" "+getPercepts().getDirection(bombe, t));
+				//System.out.println(i+" "+getPercepts().getDirection(bombe, t));
 				if (possibleMoveD(me.getLine(), me.getCol(), 2, -1)) {// 2 kadar
 					// sol
 					liste
@@ -853,7 +1072,7 @@ public class KokciyanMazmanoglu extends ArtificialIntelligence
 				}
 			}
 			if (i == 2 && isWall(t)) {
-//				System.out.println(i+" "+getPercepts().getDirection(bombe, t));
+				//System.out.println(i+" "+getPercepts().getDirection(bombe, t));
 				if (possibleMoveD(me.getLine(), me.getCol(), 2, 1)) { // 2
 					// kadar
 					// saga
@@ -863,7 +1082,7 @@ public class KokciyanMazmanoglu extends ArtificialIntelligence
 				}
 			}
 			if (i == 3 && isWall(t)) {
-//				System.out.println(i+" "+getPercepts().getDirection(bombe, t));
+				//System.out.println(i+" "+getPercepts().getDirection(bombe, t));
 				if (possibleMoveD(me.getLine(), me.getCol(), 2, 2)) { // 2 kadar
 					// yukari
 					liste
@@ -973,7 +1192,7 @@ public class KokciyanMazmanoglu extends ArtificialIntelligence
 		for(int i = 1;i<=bomb.getRange();i++){
 			checkInterruption();
 
-			if (zone.getOwnHero().getCol() + i < zone.getWidth() - 3) {
+			if (zone.getOwnHero().getCol() + i < zone.getWidth()) {
 				AiTile t = zone.getTile(bomb.getLine(), bomb.getCol() + i);
 				Iterator<AiBomb> bombIt = t.getBombs().iterator();
 				while (bombIt.hasNext()) {
@@ -986,7 +1205,7 @@ public class KokciyanMazmanoglu extends ArtificialIntelligence
 		}
 		for(int i = 0;i<bomb.getRange();i++){
 			checkInterruption();
-			if (zone.getOwnHero().getCol() - i > 2) {
+			if (zone.getOwnHero().getCol() - i > 0) {
 				AiTile t = zone.getTile(bomb.getLine(), bomb.getCol() - i);
 				Iterator<AiBomb> bombIt = t.getBombs().iterator();
 				while (bombIt.hasNext()) {
@@ -997,7 +1216,7 @@ public class KokciyanMazmanoglu extends ArtificialIntelligence
 		}
 		for(int i = 0;i<bomb.getRange();i++){
 			checkInterruption();
-			if (zone.getOwnHero().getLine() + i < zone.getHeigh() - 3) {
+			if (zone.getOwnHero().getLine() + i < zone.getHeigh()) {
 				AiTile t = zone.getTile(bomb.getLine() + i, bomb.getCol());
 				Iterator<AiBomb> bombIt = t.getBombs().iterator();
 				while (bombIt.hasNext()) {
@@ -1008,7 +1227,7 @@ public class KokciyanMazmanoglu extends ArtificialIntelligence
 		}
 		for(int i = 0;i<bomb.getRange();i++){
 			checkInterruption();
-			if (zone.getOwnHero().getLine() - i > 2) {
+			if (zone.getOwnHero().getLine() - i > 0) {
 				AiTile t = zone.getTile(bomb.getLine() - i, bomb.getCol());
 				Iterator<AiBomb> bombIt = t.getBombs().iterator();
 				while (bombIt.hasNext()) {
@@ -1031,9 +1250,9 @@ public class KokciyanMazmanoglu extends ArtificialIntelligence
 		AiTile cible=null;
 		double min=100000;
 
-		for (int i = 0; i < zone.getWidth(); i++){
+		for (int i = 0; i < zone.getHeigh(); i++){
 			checkInterruption();
-			for (int j = 0; j < zone.getHeigh(); j++){
+			for (int j = 0; j < zone.getWidth(); j++){
 				checkInterruption();
 				if(FieldMatrix[i][j]<min){
 					min=FieldMatrix[i][j];
@@ -1073,7 +1292,7 @@ public class KokciyanMazmanoglu extends ArtificialIntelligence
 
 
 			AiBomb temp = iterIB.next();
-			double time = Double.MAX_VALUE;
+			double time = 150;
 
 			int bx = temp.getLine();
 			int by = temp.getCol();
@@ -1084,7 +1303,7 @@ public class KokciyanMazmanoglu extends ArtificialIntelligence
 			}
 			for(int k=1;k<temp.getRange();k++){
 				checkInterruption();
-				if(bx+k<zone.getHeigh()-3)
+				if(bx+k<zone.getHeigh())
 					FieldMatrix[bx+k][by] = time;
 			}
 			for(int k=1;k<temp.getRange();k++){
@@ -1094,7 +1313,7 @@ public class KokciyanMazmanoglu extends ArtificialIntelligence
 			}
 			for(int k=1;k<temp.getRange();k++){
 				checkInterruption();
-				if(by+k<zone.getWidth()-3)
+				if(by+k<zone.getWidth())
 					FieldMatrix[bx][by+k] = time;
 			}	
 
@@ -1114,6 +1333,7 @@ public class KokciyanMazmanoglu extends ArtificialIntelligence
 		Iterator<AiBomb> iterIB = iB.iterator();
 		Vector<AiBomb> iBomb = new Vector<AiBomb>();
 		while(iterIB.hasNext()){
+			checkInterruption();
 			iBomb.add(iterIB.next());
 		}
 
@@ -1139,7 +1359,7 @@ public class KokciyanMazmanoglu extends ArtificialIntelligence
 				}
 
 				while(tempVectaDev.size() > 0){
-
+					checkInterruption();
 					AiBomb temp = tempVectaDev.elementAt(0);
 					tempVect.add(temp);
 					tempVectaDev.removeElementAt(0);
@@ -1157,12 +1377,13 @@ public class KokciyanMazmanoglu extends ArtificialIntelligence
 
 				Iterator<AiBomb> b = tempVect.iterator();
 				while(b.hasNext()){
-
+					checkInterruption();
 					min = shorterFuseTime(bomb, b.next());
 
 				}
 				b = tempVect.iterator();
 				while(b.hasNext()){
+					checkInterruption();
 					AiBomb bmb = b.next();
 					bombMap.put(bmb, min);
 					iBomb.remove(bmb);
@@ -1211,40 +1432,76 @@ public class KokciyanMazmanoglu extends ArtificialIntelligence
 	 */
 	public Boolean isTimeToRun2() throws StopRequestException{
 		Boolean result = false;
-		AiTile bomb = zone.getOwnHero().getTile();
+		AiTile hero = zone.getOwnHero().getTile();
 		for(int i = 0;i<=4;i++){
 			checkInterruption();
 
-			if (zone.getOwnHero().getCol() + i < zone.getWidth() - 3) {
-				AiTile t = zone.getTile(bomb.getLine(), bomb.getCol() + i);
+			if (hero.getCol() + i < zone.getWidth()) {
+				AiTile t = zone.getTile(hero.getLine(), hero.getCol() + i);
 				Iterator<AiBomb> bombIt = t.getBombs().iterator();
-				if(bombIt.hasNext()) result = true;
+				if(bombIt.hasNext()){ 
+					while(bombIt.hasNext()){
+						checkInterruption();
+						AiBomb br= bombIt.next();
+						if(br.getRange() >= distance(br.getTile(),currentTile)){
+							result = true;
+							break;
+						}
+					}
+				}
 			}
 
 
 		}
 		for(int i = 0;i<=4;i++){
 			checkInterruption();
-			if (zone.getOwnHero().getCol() - i > 2) {
-				AiTile t = zone.getTile(bomb.getLine(), bomb.getCol() - i);
+			if (hero.getCol() - i > 0) {
+				AiTile t = zone.getTile(hero.getLine(), hero.getCol() - i);
 				Iterator<AiBomb> bombIt = t.getBombs().iterator();
-				if(bombIt.hasNext()) result = true;
+				if(bombIt.hasNext()){ 
+					while(bombIt.hasNext()){
+						checkInterruption();
+						AiBomb br= bombIt.next();
+						if(br.getRange() >= distance(br.getTile(),currentTile)){
+							result = true;
+							break;
+						}
+					}
+				}
 			}
 		}
 		for(int i = 0;i<=4;i++){
 			checkInterruption();
-			if (zone.getOwnHero().getLine() + i < zone.getHeigh() - 3) {
-				AiTile t = zone.getTile(bomb.getLine() + i, bomb.getCol());
+			if (hero.getLine() + i < zone.getHeigh()) {
+				AiTile t = zone.getTile(hero.getLine() + i, hero.getCol());
 				Iterator<AiBomb> bombIt = t.getBombs().iterator();
-				if(bombIt.hasNext()) result = true;
+				if(bombIt.hasNext()){ 
+					while(bombIt.hasNext()){
+						checkInterruption();
+						AiBomb br= bombIt.next();
+						if(br.getRange() >= distance(br.getTile(),currentTile)){
+							result = true;
+							break;
+						}
+					}
+				}
 			}
 		}
 		for(int i = 0;i<=4;i++){
 			checkInterruption();
-			if (zone.getOwnHero().getLine() - i > 2) {
-				AiTile t = zone.getTile(bomb.getLine() - i, bomb.getCol());
+			if (hero.getLine() - i > 0) {
+				AiTile t = zone.getTile(hero.getLine() - i, hero.getCol());
 				Iterator<AiBomb> bombIt = t.getBombs().iterator();
-				if(bombIt.hasNext()) result = true;
+				if(bombIt.hasNext()){ 
+					while(bombIt.hasNext()){
+						checkInterruption();
+						AiBomb br= bombIt.next();
+						if(br.getRange() >= distance(br.getTile(),currentTile)){
+							result = true;
+							break;
+						}
+					}
+				}
 			}
 		}
 
@@ -1252,7 +1509,581 @@ public class KokciyanMazmanoglu extends ArtificialIntelligence
 	}
 
 
+	public AiTile chooseTile() throws StopRequestException{
+		checkInterruption(); // APPEL OBLIGATOIRE
+		double res = MaxValor();
+		@SuppressWarnings("unused")
+		int count = countPos();
+		//if(count==3) res=res/2;
+		AiTile targetTile = currentTile;
+		if(res>0)
+		{
+			ArrayList<AiTile> list = new ArrayList<AiTile>();
+			for (int i = 0; i < zone.getHeigh(); i++){
+				checkInterruption();
+				for (int j = 0; j < zone.getWidth(); j++){
+					checkInterruption();
+					if(ActionMatrix[i][j]==res){
+						list.add(zone.getTile(i, j));
 
+					}
+				} //j
+			} //i	
+
+
+			if(list.size() > 0){
+				int random = (int) (Math.random() * list.size());
+				targetTile = list.get(random);
+			}
+		}
+
+
+		return targetTile;
+	}
+
+	public void decodeAction(AiTile tile) throws StopRequestException{
+		checkInterruption(); // APPEL OBLIGATOIRE
+
+		Iterator<AiHero> heroes = tile.getHeroes().iterator();
+		Collection<AiHero> heroes2 = new LinkedList<AiHero>();
+
+		while(heroes.hasNext()){
+			checkInterruption();
+			AiHero t = heroes.next();
+			if(!t.equals(zone.getOwnHero()))
+				heroes2.add(t);
+		}
+
+		this.lastmission = mission;
+		if(heroes2.size() > 0){
+			this.mission = Mission.ATTACK_RIVAL;}
+		else{
+			if(tile.getItem() != null){
+				AiItemType item = tile.getItem().getType();
+				if(item == AiItemType.EXTRA_BOMB && zone.getOwnHero().getBombNumber() < 5)
+					this.mission = Mission.GATHER_EXTRA_BOMB;	
+				else if(item == AiItemType.EXTRA_BOMB && zone.getOwnHero().getBombNumber() == 5)
+					this.mission = Mission.DESTROY_SURPLUS_BOMB;
+				else if(item == AiItemType.EXTRA_FLAME && zone.getOwnHero().getBombRange() < 5)
+					this.mission = Mission.GATHER_RANGE_EXTENDER;
+				else if(item == AiItemType.EXTRA_FLAME && zone.getOwnHero().getBombRange() == 5)
+					this.mission = Mission.DESTROY_SURPLUS_RANGE_EXTENDER;
+			}
+			else
+				this.mission = Mission.DESTROY_WALL;
+		}
+
+
+	}
+
+	public double evaluateTile(AiTile tile) throws StopRequestException{
+		checkInterruption(); // APPEL OBLIGATOIRE
+		double resultat = 0;
+		int wall_counter = 0;
+		if(isObstacle(tile)){
+			if(isBomb(tile))
+				resultat=-10;
+			else if(isFire(tile))
+				resultat = -5;
+			else if (isWall(tile)){
+				if(tile.getBlock().isDestructible())
+					resultat = -2;
+				else
+					resultat = -3;}
+			else
+				resultat = -1;
+		}
+		//else if(tile.getItem()==null && isTrap3(tile))
+		//resultat = -8;
+		else
+		{
+			Iterator<AiHero> heroes = tile.getHeroes().iterator();
+			Collection<AiHero> heroes2 = new LinkedList<AiHero>();
+
+			while(heroes.hasNext()){
+				checkInterruption();
+				AiHero t = heroes.next();
+				if(!t.equals(zone.getOwnHero()))
+					heroes2.add(t);
+			}
+			resultat += 41*heroes2.size(); 
+			//-------------------------------------------
+
+
+			int range = zone.getOwnHero().getBombRange();
+
+			boolean u = true;
+			boolean r = true;
+			boolean d = true;
+			boolean l = true;
+
+			for(int i=0;i<range;i++){
+				checkInterruption();
+				if (tile.getCol() + i < zone.getWidth() && r) {
+					AiTile t = zone.getTile(tile.getLine(), tile.getCol() + i);
+					if(isObstacle(t)){
+						if(isSoft(t)){
+							wall_counter++;
+							r= false;
+						}
+						else{
+							r=false;
+						}
+					}
+				}
+				if (tile.getCol() - i > 0 && l) {
+					AiTile t = zone.getTile(tile.getLine(), tile.getCol() - i);
+					if(isObstacle(t)){
+						if(isSoft(t)){
+							wall_counter++;
+							l= false;
+						}
+						else{
+							l=false;
+						}
+					}
+				}
+				if (tile.getLine() + i < zone.getHeigh() && d) {
+					AiTile t = zone.getTile(tile.getLine() + i, tile.getCol());
+					if(isObstacle(t)){
+						if(isSoft(t)){
+							wall_counter++;
+							d= false;
+						}
+						else{
+							d=false;
+						}
+					}
+				}
+				if (tile.getLine() - i > 0 && u) {
+					AiTile t = zone.getTile(tile.getLine() - i, tile.getCol());
+					if(isObstacle(t)){
+						if(isSoft(t)){
+							wall_counter++;
+							u= false;
+						}
+						else{
+							u=false;
+						}
+					}
+				}
+
+
+			}
+
+			//--------------------------------------------			
+
+
+			resultat += 15*wall_counter;
+			AiItem bonus = tile.getItem();
+			if(bonus!=null)
+				resultat += 40;
+
+			//resultat = resultat/((int)(distance(currentTile,tile)/4)+1);
+
+		}
+		return resultat;
+
+	}
+
+
+	public double MaxValor() throws StopRequestException{
+		checkInterruption();
+		double res=0;
+
+		for (int i = 0; i < zone.getHeigh(); i++){
+			checkInterruption();
+			for (int j = 0; j < zone.getWidth(); j++){
+				checkInterruption();
+				if(ActionMatrix[i][j]>res){
+					res=ActionMatrix[i][j];
+				}
+			} //j
+		} //i
+
+
+		return res;		
+	}
+
+
+	public double MinValor(double matrix[][]) throws StopRequestException{
+		checkInterruption();
+		double res=Double.MAX_VALUE;
+
+		for (int i = 0; i < zone.getHeigh(); i++){
+			checkInterruption();
+			for (int j = 0; j < zone.getWidth(); j++){
+				checkInterruption();
+				if(matrix[i][j]<res){
+					res=matrix[i][j];
+				}
+			} //j
+		} //i
+
+
+		return res;		
+	}
+
+	public double MinPosValor(double matrix[][]) throws StopRequestException{
+		checkInterruption();
+		double res=Double.MAX_VALUE;
+
+		for (int i = 0; i < zone.getHeigh(); i++){
+			checkInterruption();
+			for (int j = 0; j < zone.getWidth(); j++){
+				checkInterruption();
+				if(matrix[i][j]<res && matrix[i][j]>0){
+					res=matrix[i][j];
+				}
+			} //j
+		} //i
+
+
+		return res;		
+	}
+
+	/**
+	 * 
+	 * @throws StopRequestException
+	 */
+	public void getActionMatrixBombRanges() throws StopRequestException{
+		checkInterruption();
+		Iterator<AiBomb> iterIB = zone.getBombs().iterator();
+
+		while(iterIB.hasNext()){
+			checkInterruption();
+
+
+			AiBomb temp = iterIB.next();
+			double time = -33.0;
+
+			int bx = temp.getLine();
+			int by = temp.getCol();
+			for(int k=0;k<=temp.getRange();k++){
+				checkInterruption();
+				if(bx-k>0)
+					ActionMatrix[bx-k][by] = time;
+			}
+			for(int k=0;k<=temp.getRange();k++){
+				checkInterruption();
+				if(bx+k<zone.getHeigh())
+					ActionMatrix[bx+k][by] = time;
+			}
+			for(int k=0;k<=temp.getRange();k++){
+				checkInterruption();
+				if(by-k>0)
+					ActionMatrix[bx][by-k] = time;
+			}
+			for(int k=0;k<=temp.getRange();k++){
+				checkInterruption();
+				if(by+k<zone.getWidth())
+					ActionMatrix[bx][by+k] = time;
+			}	
+
+		}
+	}
+
+
+
+
+
+	public boolean FindSafeCible(AiTile bombe, AiTile me) throws StopRequestException {
+		checkInterruption();
+		Collection<AiTile> cases = getPercepts().getNeighbourTiles(bombe);
+		Iterator<AiTile> iterCase = cases.iterator();
+		Vector<AiTile> liste = new Vector<AiTile>();
+		@SuppressWarnings("unused")
+		AiTile cible = null;
+		boolean res=false;
+		//int dist = 1000;
+		int i = 0; // 0: yukari 1: sol 2: asagi 3: sag
+		//int temp = 0;
+		while (iterCase.hasNext()) {
+			checkInterruption();
+			AiTile t = iterCase.next();
+			if (i == 0 && isWall(t)) {
+				//System.out.println(i+" "+getPercepts().getDirection(bombe, t));
+				if (possibleMoveD(me.getLine(), me.getCol(), 2, -2)) { // 2 kadar
+					// asagi
+					liste.add(zone.getTile(bombe.getLine()+2, bombe.getCol()));
+
+				}
+			}
+			if (i == 1 && isWall(t)) {
+				//System.out.println(i+" "+getPercepts().getDirection(bombe, t));
+				if (possibleMoveD(me.getLine(), me.getCol(), 2, -1)) {// 2 kadar
+					// sol
+					liste.add(zone.getTile(bombe.getLine(),bombe.getCol() - 2));
+
+				}
+			}
+			if (i == 2 && isWall(t)) {
+				//System.out.println(i+" "+getPercepts().getDirection(bombe, t));
+				if (possibleMoveD(me.getLine(), me.getCol(), 2, 1)) { // 2
+					// kadar
+					// saga
+					liste.add(zone.getTile(bombe.getLine(), bombe.getCol()+2));
+
+				}
+			}
+			if (i == 3 && isWall(t)) {
+				//System.out.println(i+" "+getPercepts().getDirection(bombe, t));
+				if (possibleMoveD(me.getLine(), me.getCol(), 2, 2)) { // 2 kadar
+					// yukari
+					liste.add(zone.getTile(bombe.getLine()-2,bombe.getCol()));
+
+				}
+			}
+			i++;
+		}
+
+		if (liste.size() != 0) {
+			/*
+		Iterator<AiTile> iterListe = liste.iterator();
+		int mindistance = 1000;
+		while (iterListe.hasNext()) {
+		checkInterruption();
+		AiTile t2 = iterListe.next();
+		if (distance(t2, me) < mindistance) {
+		mindistance = distance(t2, me);
+		cible = t2;
+		}*/
+			synchronized(liste){
+				Iterator<AiTile> itList= liste.iterator();
+				while(itList.hasNext()){
+					AiTile t= itList.next();
+					if(ActionMatrix[t.getLine()][t.getCol()]<0)
+						liste.remove(t);
+					//else
+						//System.out.println("safe tile1: "+t.toString());
+				}
+				if(liste.size()!=0)
+					res=true;
+				else
+					res=false;
+			}
+		} //else {
+		ArrayList<AiTile> possible = new ArrayList<AiTile>();
+		if(0<me.getLine()-2 && 0<me.getCol()-1)
+			possible.add(zone.getTile(me.getLine()-2,me.getCol()-1));// sol ust capraz
+		if(0<me.getLine()-2 && me.getCol()+1<zone.getWidth())
+			possible.add(zone.getTile(me.getLine()-2,me.getCol()+1));// sag ust capraz
+		if(me.getLine()+2<zone.getHeigh() && 0<me.getCol()-1)
+			possible.add(zone.getTile(me.getLine()+2,me.getCol()-1));// sol alt capraz
+		if(me.getLine()+2<zone.getHeigh() && me.getCol()+1<zone.getWidth())
+			possible.add(zone.getTile(me.getLine()+2,me.getCol()+1));// sag alt capraz
+
+		ArrayList<AiTile> result= new ArrayList<AiTile>();
+
+		for(int k=0;k<possible.size();k++){
+			if(!isObstacle(possible.get(k))){
+				result.add(possible.get(k));
+			}
+		}
+		/*if(result.size()>0)
+		cible= result.get(0);
+		else result = null;*/
+
+		if(result.size()>0){
+			synchronized(result){
+				Iterator<AiTile> itList= result.iterator();
+				while(itList.hasNext()){
+					AiTile t= itList.next();
+					if(ActionMatrix[t.getLine()][t.getCol()]<0)
+						result.remove(t);
+					//else
+						//System.out.println("safe tile2: "+t.toString());
+				}
+
+			}}
+		else
+			res=false;
+
+		if(result.size()>0){
+			res=true;
+		}
+		//} else kaldirilan
+		return res;
+	}
+
+	public AiTile findSafeTile() throws StopRequestException{
+		checkInterruption();
+		AiTile res = null;
+		double matrix[][] =  new double[zone.getHeigh()][zone.getWidth()];
+		for(int i = 0; i<zone.getHeigh(); i++){
+			checkInterruption();
+			for(int j = 0; j<zone.getWidth(); j++){
+				checkInterruption();
+				matrix[i][j]=FieldMatrix[i][j]/ActionMatrix[i][j];
+
+			}
+		}
+
+		double count = MinPosValor(matrix);
+
+		ArrayList<AiTile> list = new ArrayList<AiTile>();
+		for (int i = 0; i < zone.getHeigh(); i++){
+			checkInterruption();
+			for (int j = 0; j < zone.getWidth(); j++){
+				checkInterruption();
+				if(matrix[i][j]==count){
+					list.add(zone.getTile(i, j));
+				}
+			} //j
+		} //i	
+
+		if(list.size() > 0){
+			int random = (int) (Math.random() * list.size());
+			res = list.get(random);
+		}
+
+		return res;
+	}
+
+	public AiTile findSafeTileV2(double matrix[][]) throws StopRequestException{
+		checkInterruption();
+		AiTile res = null;
+
+
+		double count = MinPosValor(matrix);
+		if(count != Double.MAX_VALUE){
+			ArrayList<AiTile> list = new ArrayList<AiTile>();
+			for (int i = 0; i < zone.getHeigh(); i++){
+				checkInterruption();
+				for (int j = 0; j < zone.getWidth(); j++){
+					checkInterruption();
+					if(matrix[i][j]==count){
+						list.add(zone.getTile(i, j));
+					}
+				} //j
+			} //i	
+
+			if(list.size() > 0){
+				int random = (int) (Math.random() * list.size());
+				res = list.get(random);
+			}
+		}
+		return res;
+	}
+
+	public boolean isTrap2(AiTile BombTile) throws StopRequestException{
+		checkInterruption();
+		boolean result = false;
+		int range = zone.getOwnHero().getBombRange();
+
+		double matrix[][] =  new double[zone.getHeigh()][zone.getWidth()];
+		for(int i = 0; i<zone.getHeigh(); i++){
+			checkInterruption();
+			for(int j = 0; j<zone.getWidth(); j++){
+				checkInterruption();
+				if(BombTile.getLine()-range<=i && i<=BombTile.getLine()+range && BombTile.getCol() == j)
+					matrix[i][j] = -1;
+				else if(BombTile.getCol()-range<=j && j<=BombTile.getCol() + range && BombTile.getLine() == i)
+					matrix[i][j] = -1;
+				else{
+					if(isObstacle(BombTile)){
+						matrix[i][j]=-1;
+					}
+					else 
+						matrix[i][j]=FieldMatrix[i][j];
+				}
+			}
+		}
+
+		double z = MinPosValor(matrix);
+		if(z == Double.MAX_VALUE)
+			result = true;
+
+		return result;
+	}
+
+
+	public boolean isTrap3(AiTile BombTile) throws StopRequestException{
+		checkInterruption();
+		boolean result = false;
+		int range = zone.getOwnHero().getBombRange();
+		double matrix[][] = new double[zone.getHeigh()][zone.getWidth()];
+		for(int i = 0; i<zone.getHeigh(); i++){
+			checkInterruption();
+			for(int j = 0; j<zone.getWidth(); j++){
+				checkInterruption();
+				if(BombTile.getLine()-range<=i && i<=BombTile.getLine()+range && BombTile.getCol() == j)
+					matrix[i][j] = -10;
+				else if(BombTile.getCol()-range<=j && j<=BombTile.getCol() + range && BombTile.getLine() == i)
+					matrix[i][j] = -10;
+				else
+					matrix[i][j] = ActionMatrix[i][j];
+			}
+		}
+		AiTile t=findSafeTileV2(matrix);
+		if(t == null)
+			result=true;
+
+		return result;
+	}
+
+	public void updateAMWithTraps() throws StopRequestException{
+		checkInterruption();
+		for(int i = 0; i<zone.getHeigh(); i++){
+			checkInterruption();
+			for(int j = 0; j<zone.getWidth(); j++){
+				checkInterruption();
+				if(zone.getTile(i, j).getItem()==null && !isObstacle(zone.getTile(i, j)) && isTrap3(zone.getTile(i, j))){
+					ActionMatrix[i][j] = -9;
+				}
+
+			}
+		}
+	}
+
+	public void printmatrix(double matrix[][]) throws StopRequestException{
+		checkInterruption();
+		for(int i = 0; i<zone.getHeigh(); i++){
+			checkInterruption();
+			String s = "";
+			for(int j = 0; j<zone.getWidth(); j++){
+				s += matrix[i][j] +  " ";
+			}
+			System.out.println(s);
+		}
+
+	}
+
+	public boolean canIMove() throws StopRequestException{
+		checkInterruption();
+		boolean control = false;
+		
+		Collection<AiTile> coll = zone.getNeighbourTiles(currentTile);
+		Iterator<AiTile> iterColl = coll.iterator();
+		
+		while(iterColl.hasNext()){
+			AiTile t = iterColl.next();
+			if(ActionMatrix[t.getLine()][t.getCol()]>=0)
+				control = true;
+		}
+		
+		return control;
+		
+	}
+
+public int countPos() throws StopRequestException{
+	checkInterruption();
+	int count=0;
+	for(int i = 0; i<zone.getHeigh(); i++){
+		checkInterruption();
+		for(int j = 0; j<zone.getWidth(); j++){
+			checkInterruption();
+			if(ActionMatrix[i][j]>=0){
+				count++;
+			}
+		}
+	}
+	
+	return count;
+}
+	
+	
+	
 }
 
 

@@ -1,4 +1,3 @@
-
 package tournament200809.dayioglugilgeckalan;
 
 import java.util.ArrayList;
@@ -6,284 +5,676 @@ import java.util.Collection;
 import java.util.Iterator;
 import java.util.LinkedList;
 
+import java.util.Vector;
+
+
+
 import fr.free.totalboumboum.ai.adapter200809.AiAction;
 import fr.free.totalboumboum.ai.adapter200809.AiActionName;
 import fr.free.totalboumboum.ai.adapter200809.AiBlock;
 import fr.free.totalboumboum.ai.adapter200809.AiBomb;
 import fr.free.totalboumboum.ai.adapter200809.AiFire;
 import fr.free.totalboumboum.ai.adapter200809.AiHero;
+import fr.free.totalboumboum.ai.adapter200809.AiItem;
 import fr.free.totalboumboum.ai.adapter200809.AiTile;
 import fr.free.totalboumboum.ai.adapter200809.AiZone;
 import fr.free.totalboumboum.ai.adapter200809.ArtificialIntelligence;
 import fr.free.totalboumboum.ai.adapter200809.StopRequestException;
 import fr.free.totalboumboum.engine.content.feature.Direction;
 
-public class DayioglugilGeckalan extends ArtificialIntelligence 
-{
-	
-	private AiTile currentTile;	
-	private AiTile nextTile = null;
-	private AiTile previousTile = null;
-	AiTile safe;
-	Collection<AiTile> danger;
-	AiHero tahta;
-	
-	public AiAction processAction() throws StopRequestException
-	{	checkInterruption(); //APPEL OBLIGATOIRE
-		
-		AiZone zone = getPercepts();
-		AiHero ownHero = zone.getOwnHero();
-		AiAction result = new AiAction(AiActionName.NONE);
-		
-
-		
-		// si ownHero est null, c'est que l'IA est morte : inutile de continuer
-		if(ownHero!=null)
-		{	// on met à jour la position de l'ia dans la zone
-			//currentTile = ownHero.getTile();
-			danger=danger();
-			currentTile = ownHero.getTile();
-			if (currentTile.getBombs()!=null)
-				danger.add(currentTile);
-			tahta=getEnemy();
-			safe= safePlace();		
-			// premier appel : on initialise l'IA
-			if(nextTile == null)
-				init();
-			/* if(danger.contains(currentTile)){
-				AiTile t=getNextTile();
-				nextTile=t;
-			 }*/
-			 else if (currentTile.getCol() == tahta.getCol()
-						|| currentTile.getLine() == tahta.getLine())
-					result = new AiAction(AiActionName.DROP_BOMB);
-			 
-			// arrivé à destination : on choisit une nouvelle destination
-			 else if(currentTile==nextTile)
-				pickNextTile();
-			// au cas ou quelqu'un prendrait le contrôle manuel du personnage
-			
-			// sinon (on garde la même direction) on vérifie qu'un obstacle (ex: bombe) n'est pas apparu dans la case
-			else
-				checkNextTile();
-			
-			// on calcule la direction à prendre
-			Direction direction = getPercepts().getDirection(currentTile,nextTile);
-	
-			// on calcule l'action
-			if(direction!=Direction.NONE)
-				result = new AiAction(AiActionName.MOVE,direction);
-			
-		}
-		return result;
-	}
-	
-	
-	
-	private AiHero getEnemy() throws StopRequestException
-	{checkInterruption();
-	AiZone zone = getPercepts();
-	AiHero ownHero = zone.getOwnHero();
-	Collection<AiHero> pasa = zone.getHeroes();
-	AiHero enemy=null;
-	Iterator<AiHero> it = pasa.iterator();
-		while (it.hasNext())
-		{  checkInterruption();
-		AiHero temp=it.next();
-			if (!temp.equals(ownHero))
-				enemy = temp;
-		}
-		
-	return enemy;
-	}
-	
-	private void init() throws StopRequestException
-	{	checkInterruption(); //APPEL OBLIGATOIRE
-		
-		nextTile = currentTile;		
-		previousTile = currentTile;		
-	}
-
-	public AiTile safePlace() throws StopRequestException{
-		checkInterruption();
-		AiTile safePlace = null;
-		LinkedList<AiTile> file = new LinkedList<AiTile>();
-		file.offer(currentTile);
-		Collection<AiTile> x=new ArrayList<AiTile>();
-		while (!file.isEmpty() && safePlace == null) {
-			AiTile searchNode = file.poll();
-			x.add(searchNode);
-			if (!danger.contains(searchNode))
-				safePlace=searchNode;
-			else if(x.contains(searchNode))
-				safePlace=null;
-			
-			else {
-					Collection<AiTile> neighbours=getClearNeighbours(searchNode);
-					Iterator<AiTile> i = neighbours.iterator();
-					while (i.hasNext()) {
-						checkInterruption();
-						file.offer(i.next());						
-					}
-			}
-		}
-		return safePlace;
-	}
-	
-	private int getDistance(AiTile t,AiTile y) throws StopRequestException
-	{  checkInterruption();		
-		int a=y.getCol();
-		int b=y.getLine();
-		int c=t.getCol();
-		int d=t.getLine();
-		int result = 0;
-		result = result + Math.abs(a-c);
-		result = result + Math.abs(b-d);
-		return result;
-	}
+public class DayioglugilGeckalan extends ArtificialIntelligence {
+	//private AiZone zone1;
+	private AiTile currentTile=null;
+	private AiTile nextTile=null;
+	//private AiTile previousTile=null;
+	private AiTile targetTile=null;
+	private boolean danger;
+	private LinkedList<AiTile> path;	
+	int width = 0;
+	int heigh = 0;
+	int x;
+	LinkedList<AiTile> choix;
+	int y;
+	AiZone zone;
+	AiHero ownHero;
+	AiTile mur;
+	Direction direction = Direction.NONE;
+	Noeud goal;
+	boolean arret=false;
+	AiAction result = new AiAction(AiActionName.NONE);
 
 	
-	private Collection<AiTile> danger()  throws StopRequestException
-	{  checkInterruption();
-		Collection<AiTile> danger=new ArrayList<AiTile>();
-		AiZone zone=getPercepts();
-		AiHero ownHero = zone.getOwnHero();
-		@SuppressWarnings("unused")
-		AiTile currentTil = ownHero.getTile();
-		Collection<AiBomb> bomb=zone.getBombs();
-		Iterator<AiBomb> it=bomb.iterator();
+	
+	public AiAction processAction() throws StopRequestException {
+		checkInterruption(); // APPEL OBLIGATOIRE
 		
-		AiTile temp;
-		int i=0;
-		while(it.hasNext()){
-			checkInterruption();
-			 temp=it.next().getTile();
-			 danger.add(temp);
-			 for(i=0;i<5;i++)
-			 danger.add(zone.getTile(temp.getCol(),temp.getLine()+i));
-			 for(i=0;i<5;i++)
-				 danger.add(zone.getTile(temp.getCol(),temp.getLine()-i));
-			 for(i=0;i<5;i++)
-				 danger.add(zone.getTile(temp.getCol()+i,temp.getLine()));
-			 for(i=0;i<5;i++)
-				 danger.add(zone.getTile(temp.getCol()-i,temp.getLine()));
+		 zone = getPercepts();
+		width = zone.getWidth();
+		heigh = zone.getHeigh();
+		 ownHero = zone.getOwnHero();
+		 x=getPercepts().getOwnHero().getCol();
+		 y=getPercepts().getOwnHero().getLine();
+		 currentTile = ownHero.getTile();
+			
+
+			targetTile = currentTile;
+			danger = false;
+		 if (nextTile==null)
+			 init();
+		
+		
+		if (ownHero != null) {
+			boolean existe=false;
+			//bonus();
+			Iterator <AiBlock>ip=getPercepts().getBlocks().iterator();
+			 while(ip.hasNext() && !existe)
+			 {if(( ip.next()).isDestructible())
+				 existe=true;
 				 
-		}
+			 }
+			//if (!arret){
 			
-	return danger;	
+				//arret=true;
+
+				 
+			if(existe)
+			mur=getClosestDestructibleBlock();
+			//}
+			
+			
+			//isDanger();
+			LinkedList<AiTile> danger = dangerZone();
+//			LinkedList<AiTile> safe = safeZone();
+			if (danger.contains(currentTile) || danger.contains(nextTile)) {
+				//kacma fonksiyonu
+				
+				pickNextTile(findPath());
+				
+				
+			} 
+			else if(existe) {				
+				pickNextTile(mur);
+				
+				// ulasabildigin bonus varsa bonus topla
+				
+				boolean bonusFound = false;
+				AiTile bonusTile = null;
+				if(isThereBonusAccessible())
+				{
+					bonusTile = getClosestBonus();
+					if(bonusTile != null)
+					{
+						
+						PathFinder pathFind = new PathFinder(zone,bonusTile,this);
+						if(!pathFind.getPath().isEmpty() && pathFind.getPath()!=null && pathFind.getPath().size() <= 6)
+						{
+							
+							bonusFound = true;
+						}
+					}
+				}
+				
+				if(bonusFound && bonusTile!=null)
+				{
+					pickNextTile(bonusTile);
+					
+				}
+				else{
+				
+				// bonus yoksa duvar patlat
+				
+				//ya da attack yap
+				if (currentTile==mur){
+					
+					if (isSafe(mur) && ownHero.getBombCount() ==0)
+				{
+						result=new AiAction(AiActionName.DROP_BOMB);
+				direction=Direction.NONE;}
+				arret=false;
+				}
+				}}
+			if (nextTile!=null){
+			direction = zone.getDirection(
+					currentTile, nextTile);
+			
+			}
+			if ( direction!=Direction.NONE &&direction != Direction.DOWNLEFT
+					&& direction != Direction.DOWNRIGHT
+					&& direction != Direction.UPLEFT
+					&& direction != Direction.UPRIGHT) {
+
+				
+				
+
+				result = new AiAction(AiActionName.MOVE, direction);
+			}
+		}
+		if(dangerZone().contains(nextTile) && !dangerZone().contains(currentTile))
+			result = new AiAction(AiActionName.NONE);
+		
+		return result;
+	}
+	public void init(){
+		
+		nextTile=currentTile;
+		//previousTile=currentTile;
 	}
 
-	
-	@SuppressWarnings("unused")
-	private AiTile getNextTile() throws StopRequestException{
+	/*private LinkedList<AiTile> pathDestructible() throws StopRequestException 
+	{
 		checkInterruption();
 		
-		ArrayList<AiTile> list = getClearNeighbours(currentTile);
-		Iterator<AiTile> it1 = list.iterator();
-		AiTile temp;
-	    AiTile min=it1.next();
+		LinkedList<AiTile> result = new LinkedList<AiTile>();
+		LinkedList<AiTile> temp = new LinkedList<AiTile>();
+		int min = 1000;
+		AiBlock isDestructible;
+		Collection<AiBlock> tempDestructible = new ArrayList<AiBlock>();
+		
+		tempDestructible = zone1.getBlocks();
+		Iterator<AiBlock> it1 = tempDestructible.iterator();
 		while(it1.hasNext())
-		{ checkInterruption();
-		temp=it1.next();
-		if(getDistance(safe, temp)<getDistance(safe, min))
-		min=temp;
+		{
+			isDestructible = it1.next();
+			if(isDestructible.isDestructible())
+			{
+				result.add(isDestructible.getTile()) ;
+			}
+			PathFinder pathFind = new PathFinder(this.zone1, isDestructible.getTile(),this);
+			temp = (LinkedList<AiTile>) pathFind.getPath();
+			if (min > temp.size() && !temp.isEmpty()) {
+				min = temp.size();
+				result = temp;
+				targetTile = isDestructible.getTile();
+			
 		}
 		
-	return min;
+		}
+		return result;	
+	}
+	private LinkedList<AiTile> safeWay()
+	{
+		LinkedList<AiTile>  dangerWay = new LinkedList<AiTile>();
+		LinkedList<AiTile>  safeWay = new LinkedList<AiTile>();
+		Collection<AiBlock> blocks = new ArrayList<AiBlock>();
+		Collection<AiFire> fires = new LinkedList<AiFire>();
+		Collection<AiBomb> bombs = new LinkedList<AiBomb>();
+		blocks=zone.getBlocks();
+		fires=zone.getFires();
+		bombs= zone.getBombs();
+		
+		Iterator<AiBlock> it1= blocks.iterator();
+		
+		
+		while(it1.hasNext())
+		{
+			AiTile temp1= it1.next().getTile();
+			dangerWay.add(temp1);
+			
+		}
+		Iterator<AiFire> it2= fires.iterator();
+		while(it1.hasNext())
+		{
+			AiTile temp1= it2.next().getTile();
+			dangerWay.add(temp1);
+			
+		}
+		Iterator<AiBomb> it3= bombs.iterator();
+		while(it1.hasNext())
+		{
+			AiTile temp1= it3.next().getTile();
+			dangerWay.add(temp1);
+			
+		}
+		
+		for (int i = 0 ; i < width ; i++) {
+			for (int j = 0 ; j < heigh ; j++) {
+				AiTile safe = zone.getTile(j,i);
+				if (!dangerWay.contains(safe))
+					safeWay.add(safe);
+			}
+		}
+		
+		return safeWay;
+	}
+*/
+	private LinkedList<AiTile> dangerZone() throws StopRequestException {
+		checkInterruption(); // APPEL OBLIGATOIRE
 
-	}
-	private void pickNextTile() throws StopRequestException
-	{	checkInterruption(); //APPEL OBLIGATOIRE
-	
-		// liste des cases voisines accessibles	
-		ArrayList<AiTile> tiles = getClearNeighbours(currentTile);
-		// on sort de la liste la case d'où l'on vient (pour éviter de repasser au même endroit)
-		boolean canGoBack = false;
-		if(tiles.contains(previousTile))
-		{	tiles.remove(previousTile);
-			canGoBack = true;
-		}
-		// s'il reste des cases dans la liste
-		if(tiles.size()>0)
-		{	// si la liste contient la case située dans la direction déplacement précedente,
-			// on évite de l'utiliser (je veux avancer en zig-zag et non pas en ligne droite)
-			AiTile tempTile = null;
-			Direction dir = getPercepts().getDirection(previousTile,currentTile);
-			if(dir!=Direction.NONE)
-			{	tempTile =  getPercepts().getNeighbourTile(currentTile, dir);
-				if(tiles.contains(tempTile))
-					tiles.remove(tempTile);
-			}
-			// s'il reste des cases dans la liste
-			if(tiles.size()>0)
-			{	// on en tire une au hasard
-				double p = Math.random()*tiles.size();
-				int index = (int)p;
-				nextTile = tiles.get(index);
-				previousTile = currentTile;
-			}
-			// sinon (pas le choix) on continue dans la même direction
-			else
-			{	nextTile = tempTile;
-				previousTile = currentTile;
-			}
-		}
-		// sinon (pas le choix) on tente de revenir en arrière
-		else
-		{	if(canGoBack)
-			{	nextTile = previousTile;
-				previousTile = currentTile;
-			}
-			// et sinon on ne peut pas bouger, donc on ne fait rien du tout
-		}
-	}
-	
-	private ArrayList<AiTile> getClearNeighbours(AiTile tile) throws StopRequestException
-	{	checkInterruption(); //APPEL OBLIGATOIRE
-	
-		// liste des cases autour de la case de référence
-		Collection<AiTile> neighbours = getPercepts().getNeighbourTiles(tile);
-		// on garde les cases sans bloc ni bombe ni feu
-		ArrayList<AiTile> result = new ArrayList<AiTile>();
-		Iterator<AiTile> it = neighbours.iterator();
-		while(it.hasNext())
-		{	checkInterruption(); //APPEL OBLIGATOIRE
+		LinkedList<AiTile> dangerZone = new LinkedList<AiTile>();
+		Collection<AiBomb> bombs = new ArrayList<AiBomb>();
+		Collection<AiTile> bombDanger = new ArrayList<AiTile>();
+		AiZone zone = getPercepts();
+		bombs = zone.getBombs();
 		
-			AiTile t = it.next();
-			if(isClear(t))
-				result.add(t);
+		Iterator<AiBomb> itBomb = bombs.iterator();
+	
+		while (itBomb.hasNext()) {
+			checkInterruption();
+			AiBomb temp = itBomb.next();
+			
+			AiTile temp2 =temp.getTile();
+			bombDanger.add(temp2); 								
+			
+			int bnx = temp.getCol();
+			int bny = temp.getLine();			
+			
+			AiBlock right = temp2.getNeighbour(Direction.RIGHT).getBlock();
+			AiBlock left = temp2.getNeighbour(Direction.LEFT).getBlock();
+			AiBlock up = temp2.getNeighbour(Direction.UP).getBlock();
+			AiBlock down = temp2.getNeighbour(Direction.DOWN).getBlock();			
+		
+			if (left == null) {
+				for (int i = 1 ; (i <= temp.getRange()) && (bnx-i > 0) ; i++ ) {	
+					checkInterruption(); // APPEL OBLIGATOIRE				
+					if (zone.getTile(bny,bnx-i).getBlock() == null && !bombDanger.contains(zone.getTile(bny,bnx-i))) 
+						bombDanger.add(zone.getTile(bny,bnx-i));				
+				}			
+			}
+			if (right == null) {
+				for (int i = 1 ; (i <= temp.getRange()) && (bnx+i < width); i++ ) { 
+					checkInterruption(); // APPEL OBLIGATOIRE					
+					if (zone.getTile(bny,bnx+i).getBlock() == null && !bombDanger.contains(zone.getTile(bny,bnx+i))) 
+						bombDanger.add(zone.getTile(bny,bnx+i));											
+				}		
+			}
+			if (up == null) {
+				for (int i = 1 ; (i <= temp.getRange()) && (bny -i> 0); i++ ) {	
+					checkInterruption(); // APPEL OBLIGATOIRE
+						if (zone.getTile(bny-i,bnx).getBlock() == null && !bombDanger.contains(zone.getTile(bny-i,bnx))) 
+							bombDanger.add(zone.getTile(bny-i,bnx));					
+				}				
+			}
+			if (down == null)	{
+				for (int i = 1 ; (i <= temp.getRange()) && (bny+i < heigh); i++ ) {  
+					checkInterruption(); // APPEL OBLIGATOIRE
+					if (zone.getTile(bny+i,bnx).getBlock() == null && !bombDanger.contains(zone.getTile(bny+i,bnx))) 
+						bombDanger.add(zone.getTile(bny+i,bnx));														
+				}				
+			}		
+		}	
+			
+
+		Collection<AiFire> fires = new ArrayList<AiFire>();
+		LinkedList<AiTile> fireDanger = new LinkedList<AiTile>();
+		fires = zone.getFires();
+		Iterator<AiFire> itFire = fires.iterator();
+
+		while (itFire.hasNext())
+		{
+			checkInterruption(); // APPEL OBLIGATOIRE
+			fireDanger.add(itFire.next().getTile());
 		}
-		return result;
+		Iterator<AiTile> itBD = bombDanger.iterator();
+		Iterator<AiTile> itFD = fireDanger.iterator();
+
+		while (itBD.hasNext()) {
+			checkInterruption(); // APPEL OBLIGATOIRE
+			dangerZone.add(itBD.next());
+		}
+		while (itFD.hasNext())
+		{
+			checkInterruption(); // APPEL OBLIGATOIRE
+			dangerZone.add(itFD.next());
+		}
+		
+		return dangerZone;	
 	}
 	
-	private boolean isClear(AiTile tile) throws StopRequestException
-	{	checkInterruption(); //APPEL OBLIGATOIRE
-	
-		boolean result;
-		AiBlock block = tile.getBlock();
-		Collection<AiBomb> bombs = tile.getBombs();
-		Collection<AiFire> fires = tile.getFires();
-		result = block==null && bombs.size()==0 && fires.size()==0;
-		return result;
-	}
-	
-	private void checkNextTile() throws StopRequestException
-	{	checkInterruption(); //APPEL OBLIGATOIRE
-	
-		// si un obstacle est apparu sur la case destination, on change de destination
-		if(!isClear(nextTile))
-		{	// liste des cases voisines accessibles	
-			ArrayList<AiTile> tiles = getClearNeighbours(currentTile);
-			// on sort l'ancienne destination (qui est maintenant bloquée) de la liste
-			if(tiles.contains(nextTile))
-				tiles.remove(nextTile);
-			// s'il reste des cases dans la liste : on en tire une au hasard
-			if(tiles.size()>0)
-			{	double p = Math.random()*tiles.size();
-				int index = (int)p;
-				nextTile = tiles.get(index);
-				previousTile = currentTile;
+	private LinkedList<AiTile> safeZone() throws StopRequestException
+	{	checkInterruption(); // APPEL OBLIGATOIRE
+		LinkedList<AiTile> safeZone = new LinkedList<AiTile>();
+		LinkedList<AiTile> dangerZone = new LinkedList<AiTile>();
+		Collection<AiBlock> blocks = new ArrayList<AiBlock>();
+		
+		
+		
+		dangerZone = dangerZone();
+		//System.out.println("danger"+dangerZone);
+		blocks = zone.getBlocks();
+		
+		for (int i = 0 ; i < width ; i++) {
+			checkInterruption(); // APPEL OBLIGATOIRE
+			for (int j = 0 ; j < heigh ; j++) {
+				checkInterruption(); // APPEL OBLIGATOIRE
+				AiTile tile = zone.getTile(j,i);
+				if ( !dangerZone.contains(tile) && !blocks.contains(tile.getBlock()))
+					safeZone.add(tile);
 			}
 		}
+		//System.out.println(safeZone);
+		return safeZone;
 	}
+	/*private void bonus() throws StopRequestException{
+		checkInterruption();
+	 choix = new LinkedList<AiTile>();
+		LinkedList<Astar> choixas = new LinkedList<Astar>();
+		for (int i = 0; i <width; i++) {
+			checkInterruption();
+			for (int j = 0; j < heigh; j++) {
+				checkInterruption();
+				// i j hata veriyo eger destination ayn� bulundugu yerse
+				if ((getPercepts().getTile(j, i).getItem() != null )) {
+
+					PathFinder pathfinder = new PathFinder(getPercepts(),getPercepts().getTile(j, i),this);
+					if(pathfinder.getPath()!= null)
+					{
+					
+
+						choix.add(getPercepts().getTile(j, i));
+						
+
+					}
+				}
+			}
+		}
+		//System.out.println(choix);
+		 result = new AiAction(AiActionName.MOVE, Direction.NONE);
+		
+		
+		
+	}*/
+	private void pickNextTile(AiTile targettile) throws StopRequestException {
+		checkInterruption();
+		AiZone zone = getPercepts();
+		//AiHero ownHero = zone.getOwnHero();
+		
+			
+			//previousTile = currentTile;
+			if (targettile != currentTile) {
+				PathFinder tempPath = new PathFinder(zone, targettile,this);
+				
+		
+				this.path = tempPath.getPath();
+				if(path!=null && !path.isEmpty()){
+					nextTile=path.poll();
+					if(nextTile==currentTile)
+					{
+						if(path!=null)
+							nextTile=path.poll();
+					}
+				}
+			}
+			else
+			{
+				nextTile = currentTile;
+			}
+			/*} else {
+				
+				previousTile = currentTile;
+				this.path = findPath();
+				if (targetTile != ownHero.getTile()) {
+					if (!path.isEmpty()) {
+						nextTile = path.poll();
+						if (nextTile.equals(ownHero.getTile()))
+							nextTile = path.poll();
+					}
+				}
+			}*/
+		
+	}
+
+	private AiTile findPath() throws StopRequestException {
+		checkInterruption();
+		LinkedList<AiTile> escapeTiles = new LinkedList<AiTile>();
+		
+		
+	//	Zone tempZone = new Zone(this.zone,this);
+		
+		
+		LinkedList<AiTile> temp = new LinkedList<AiTile>();
+		int min = 1000;
+		AiTile escapeTileTemp;
+		escapeTiles = safeZone();
+		
+		Iterator<AiTile> itEscape = escapeTiles.iterator();
+		
+		while (itEscape.hasNext()) {
+			checkInterruption(); // APPEL OBLIGATOIRE
+			escapeTileTemp = itEscape.next();
+			
+			PathFinder pathFind = new PathFinder(this.getPercepts(), escapeTileTemp,this);
+			//System.out.println("sakfj");
+			
+			temp = (LinkedList<AiTile>) pathFind.getPath();
+			if ((min > temp.size() && !temp.isEmpty()) || escapeTileTemp.equals(ownHero.getTile())) {
+				min = temp.size();
+				
+				
+				targetTile = escapeTileTemp;
+			}
+		}
+		
+		return targetTile;
+	}
+	private AiTile getClosestDestructibleBlock() throws StopRequestException 
+	{	checkInterruption();
+		
+		
+		//AiTile res = null;
+		//LinkedList<AiTile> result = new LinkedList<AiTile>();
+		LinkedList<AiTile> temp = new LinkedList<AiTile>();
+		LinkedList<AiTile> nextPossibleTiles = new LinkedList<AiTile>();
+		LinkedList<AiTile> possibleTargets = new LinkedList<AiTile>();
+		//AiHero ownHero = zone.getOwnHero();
+		
+		int min = 1000;
+		//int min2 = 1000;
+		//AiBlock isDestructible;
+		Collection<AiBlock> blocks = new ArrayList<AiBlock>();
+		Collection<AiBlock> tempDestructible = new ArrayList<AiBlock>();
+		
+		//tempDestructible = zone1.getBlocks();
+		blocks = zone.getBlocks();
+		Iterator<AiBlock> itBl = blocks.iterator();
+			while (itBl.hasNext()) {
+				checkInterruption(); // APPEL OBLIGATOIRE
+				AiBlock temp2 = itBl.next();
+				if (temp2.isDestructible())
+					tempDestructible.add(temp2);
+			}
+		
+		Iterator<AiBlock> itBl2 = tempDestructible.iterator();
+		//LinkedList<AiTile> possibleTargetPath = new LinkedList<AiTile>();
+			while (itBl2.hasNext()) {
+				checkInterruption(); // APPEL OBLIGATOIRE
+				AiTile tempDest = itBl2.next().getTile();
+				AiTile git1 = zone.getTile(tempDest.getLine()+1,tempDest.getCol());
+				if (safeZone().contains(git1))
+				possibleTargets.add(git1);
+				AiTile git2 = zone.getTile(tempDest.getLine()-1,tempDest.getCol());
+				if (safeZone().contains(git2))
+				possibleTargets.add(git2);
+				AiTile git3 = zone.getTile(tempDest.getLine(),tempDest.getCol()+1);
+				if (safeZone().contains(git3))
+				possibleTargets.add(git3);
+				AiTile git4 = zone.getTile(tempDest.getLine(),tempDest.getCol()-1);
+				if (safeZone().contains(git4))
+				possibleTargets.add(git4);
+				//System.out.println(tempDest.toString());
+				//System.out.println("while 1");
+			}	
+				
+			Iterator<AiTile> itTile = possibleTargets.iterator();
+				
+			while (itTile.hasNext()){
+				checkInterruption(); // APPEL OBLIGATOIRE
+				//System.out.println("while 2");
+				AiTile tempTarget = itTile.next(); 
+				PathFinder pathFind = new PathFinder(this.zone,tempTarget,this);
+				temp = pathFind.getPath();
+				if(( min > temp.size() || min == temp.size() ) && !temp.isEmpty())
+				{			
+					min = temp.size();				
+					nextPossibleTiles.add(tempTarget);
+				}
+				//System.out.println("while 3");
+			}
+			
+			Iterator<AiTile> itTargets = nextPossibleTiles.iterator();
+ 			AiTile target = null;
+			if(itTargets.hasNext())
+ 				target = itTargets.next();
+			
+	/*	boolean found = false;
+		LinkedList<AiTile> nextPossibleTargets = new LinkedList<AiTile>();
+		
+		Iterator<AiTile> itTarget = nextPossibleTiles.iterator();
+			while (itTarget.hasNext() && !found) {
+					AiTile tempTarget = itTarget.next();
+					
+					
+					Iterator<AiTile> itPossible = possibleTargets.iterator();
+					while (itPossible.hasNext()) {
+						AiTile targetDest = itPossible.next();
+						PathFinder pathFinder = new PathFinder(this.zone,targetDest);
+						possibleTargetPath = pathFinder.getPath();
+						if ((min > possibleTargetPath.size() || min == possibleTargetPath.size()) && !possibleTargetPath.isEmpty())
+						{
+							min = possibleTargetPath.size();
+							nextPossibleTargets.add(targetDest);						
+						}									
+					}						
+					if ( !nextPossibleTargets.isEmpty())
+						found = true;	
+			}		
+			System.out.println("while dan ciktim -----------------------");
+		Iterator<AiTile> targets = nextPossibleTargets.iterator();	
+		AiTile target  = targets.next();*/
+		/*System.out.println("##########################################");
+		System.out.println(target);
+		System.out.println("##########################################");*/
+			
+		if(target==null){
+			
+			target = ownHero.getTile();
+			
+		}
+		return target;	
+	}
+
+
+	/*private AiAction move() throws StopRequestException {
+		checkInterruption();
+		AiZone zone1 = getPercepts();
+		AiHero ownHero = zone1.getOwnHero();
+		if (ownHero != null) {
+			currentTile = ownHero.getTile();
+
+			if (nextTile == null) {
+				nextTile = currentTile;
+				previousTile = currentTile;
+			}
+			
+			if (currentTile == nextTile)
+				pickNextTile();		
+			else if (previousTile != currentTile) {
+				previousTile = currentTile;
+				pickNextTile();
+			}
+			Direction direction = zone1.getDirection(currentTile, nextTile);
+
+			AiAction result = new AiAction(AiActionName.NONE);
+
+			if (direction == Direction.NONE)
+				result = new AiAction(AiActionName.MOVE, direction);
+			return result;
+		} else
+			return new AiAction(AiActionName.NONE);
+	}*/
+
+	/*private void isDanger() throws StopRequestException {
+		checkInterruption(); // APPEL OBLIGATOIRE
+		if (!isClear(currentTile) || !isClear(nextTile)) {
+			danger = true;
+		} else
+			danger = false;
+	}*/
+
+	/*private boolean isClear(AiTile tile) {
+		boolean resultat = true;
+
+
+		if (tile == null)
+			resultat = true;
+		else if (tile.getBombs().size() != 0 || (tile.getFires().size() != 0)) 
+			resultat = false;
+		else resultat=true;
+		
+		return resultat;
+	}*/
+	private boolean isSafe(AiTile tile) throws StopRequestException 
+	{
+		
+		checkInterruption(); // APPEL OBLIGATOIRE
+		int range = ownHero.getBombRange();
+		Vector <AiTile> explosion = new Vector<AiTile>();
+		
+		
+		for (int i = x -range ; i <= x + range ; i++  ) {
+			checkInterruption(); // APPEL OBLIGATOIRE
+			if ( i > 0 && (i) < width) 
+				explosion.add(zone.getTile(tile.getLine(),i));				
+		}
+		
+		for ( int j = y - range ; j <= y + range ; j++) {
+			checkInterruption(); // APPEL OBLIGATOIRE
+			if ((j) > 0 && (j) < heigh ) 
+				explosion.add(zone.getTile(tile.getLine(),j));
+		}
+
+		
+		
+		for (int i = x -range ; i <= x + range ; i++  ) {
+			checkInterruption(); // APPEL OBLIGATOIRE
+			for ( int j = y - range ; j <= y + range ; j++) {
+				checkInterruption(); // APPEL OBLIGATOIRE
+				if ( (i > 0 && (i) < width && (j) > 0 && (j) < heigh )) {
+					
+					if (safeZone().contains(zone.getTile(j,i)) && !explosion.contains(zone.getTile(j,i)))
+						danger = true;
+					
+				}
+			}
+		}
+		
+		return danger;
+		
+	}
+
+	public boolean isThereBonusAccessible() throws StopRequestException
+	{
+		checkInterruption(); // APPEL OBLIGATOIRE
+		Iterator<AiItem> itBonus = zone.getItems().iterator();
+		while(itBonus.hasNext())
+		{
+			checkInterruption(); // APPEL OBLIGATOIRE
+			PathFinder pathFind = new PathFinder(zone,itBonus.next().getTile(),this);
+			if(!pathFind.getPath().isEmpty() || pathFind.getPath() != null)
+				return true;
+		}
+		return false;
+	}
+	
+	public AiTile getClosestBonus() throws StopRequestException
+	{
+		checkInterruption(); // APPEL OBLIGATOIRE
+		AiTile minTile = null;
+		int minDist = Integer.MAX_VALUE;
+		Iterator<AiItem> itBonus = zone.getItems().iterator();
+		while(itBonus.hasNext())
+		{
+			checkInterruption(); // APPEL OBLIGATOIRE
+			AiTile temp = itBonus.next().getTile();
+			PathFinder pathFind = new PathFinder(zone,temp,this);
+			if(!pathFind.getPath().isEmpty() && pathFind.getPath() != null)
+				if(minDist > pathFind.getPath().size())
+				{
+					minDist = pathFind.getPath().size();
+					minTile = temp;
+				}
+		}
+		return minTile;		
+	}
+	
+	
 }

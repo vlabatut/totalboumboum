@@ -124,7 +124,7 @@ public class Tree {
 			if(nd == null){
 				nd = new Node(tl.getLine(),tl.getCol(),km.getFieldMatrix()[tl.getLine()][tl.getCol()],this,node.getDepth()+1);
 			}
-			if(!nd.isVisited()){
+			if(!nd.isVisited()  && !km.isWall(tl)){
 				Link lk = new Link(node, nd, new AiAction(AiActionName.MOVE,dr));
 				if(!vLink.contains(lk))
 					addLink(lk, vLink);

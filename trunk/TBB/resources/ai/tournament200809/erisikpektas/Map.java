@@ -15,7 +15,8 @@ import fr.free.totalboumboum.engine.content.feature.Direction;
 
 public class Map {
 
-//	private AiZone map;
+	@SuppressWarnings("unused")
+	private AiZone map;
 	private Collection<AiHero> adversaires;
 
 	private AiHero bomberman;
@@ -31,7 +32,7 @@ public class Map {
 	private Etat matrix[][];
 
 	public Map(AiZone zone) {
-//		this.map = zone;
+		this.map = zone;
 		this.bomberman = zone.getOwnHero();
 
 		this.adversaires = zone.getHeroes();
@@ -101,7 +102,7 @@ public class Map {
 
 		AiTile casebombe;
 		AiBomb b;
-//		boolean working;
+	
 
 		Iterator<AiBomb> danger = bombes.iterator();
 
@@ -111,7 +112,7 @@ public class Map {
 			casebombe = b.getTile();
 			xadversaire = b.getCol();
 			yadversaire = b.getLine();
-//			working = b.isWorking();
+			
 
 			AiBlock right = casebombe.getNeighbour(Direction.RIGHT).getBlock();
 			AiBlock up = casebombe.getNeighbour(Direction.UP).getBlock();

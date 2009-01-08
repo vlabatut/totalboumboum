@@ -1,10 +1,7 @@
-package tournament200809.tirtiltomruk.zone;
-
+package tournament200809.medeniuluer;
 import java.util.Collection;
 import java.util.Iterator;
-
-
-import tournament200809.tirtiltomruk.TirtilTomruk;
+import tournament200809.medeniuluer.MedeniUluer;
 
 import fr.free.totalboumboum.ai.adapter200809.AiBlock;
 import fr.free.totalboumboum.ai.adapter200809.AiBomb;
@@ -20,84 +17,70 @@ public class Zone {
 	// Une personnalisation generale du AiZone
 	private AiZone zone;
 	private Collection<AiHero> rivals;
-	private AiHero caractere;
-	private Collection<AiBomb> bombes;
+	private AiHero hero;
+	private Collection<AiBomb> bombs;
 	private Collection<AiBlock> blocs;
-	private Collection<AiItem> objets;
-	private Collection<AiFire> feus;
+	private Collection<AiItem> objects;
+	private Collection<AiFire> fires;
 	private int xMax;
 	private int yMax;
 	private ZoneEnum[][] zoneArray;
-	private TirtilTomruk source;
+	private MedeniUluer mu;
 	private int lastSimulatedBombExplodes;
 
-	public Zone(AiZone zone, TirtilTomruk source) throws StopRequestException {
-		source.checkInterruption(); // Appel Obligatoire
-		this.source = source;
+	public Zone(AiZone zone, MedeniUluer mu) throws StopRequestException {
+		mu.checkInterruption(); // Appel Obligatoire
+		this.mu = mu;
 		this.zone = zone;
-		this.caractere = zone.getOwnHero();
+		this.hero = zone.getOwnHero();
 		rivals = zone.getHeroes();
-		this.bombes = zone.getBombs();
+		this.bombs = zone.getBombs();
 		this.blocs = zone.getBlocks();
-		this.objets = zone.getItems();
-		this.feus = zone.getFires();
+		this.objects = zone.getItems();
+		this.fires = zone.getFires();
 		this.xMax = zone.getWidth();
 		this.yMax = zone.getHeigh();
 		init();
 	}
 
 	private void init() throws StopRequestException {
-		source.checkInterruption(); // Appel Obligatoire
+		mu.checkInterruption(); // Appel Obligatoire
 		zoneArray = new ZoneEnum[xMax][yMax];
 		int i, j;
 		// Initialisation
 		for (i = 0; i < xMax; i++) {
-			source.checkInterruption(); // Appel Obligatoire
+			mu.checkInterruption(); // Appel Obligatoire
 			for (j = 0; j < yMax; j++) {
-				source.checkInterruption(); // Appel Obligatoire
+				mu.checkInterruption(); // Appel Obligatoire
 				zoneArray[i][j] = ZoneEnum.LIBRE;
 			}
 		}
-		// Mettons notre caractere
-		//zoneArray[caractere.getTile().getCol()][caractere.getTile().getLine()] = ZoneEnum.CARACTERE;
+		
+		zoneArray[hero.getTile().getCol()][hero.getTile().getLine()] = ZoneEnum.CARACTERE;
 
-		// Mettons nos rivals
 		Iterator<AiHero> itRivals = rivals.iterator();
 		while (itRivals.hasNext()) {
-			source.checkInterruption(); // Appel Obligatoire
+			mu.checkInterruption(); // Appel Obligatoire
 			AiHero temp = itRivals.next();
-			if (!temp.equals(caractere))
+			if (!temp.equals(hero))
 				zoneArray[temp.getCol()][temp.getLine()] = ZoneEnum.RIVAL;
 		}
 
-		// Mettons les blocs
 		Iterator<AiBlock> itBlocs = blocs.iterator();
 		while (itBlocs.hasNext()) {
-			source.checkInterruption(); // Appel Obligatoire
+			mu.checkInterruption(); // Appel Obligatoire
 			AiBlock temp = itBlocs.next();
 			if (temp.isDestructible())
-				zoneArray[temp.getCol()][temp.getLine()] = ZoneEnum.BLOCDEST;
+				zoneArray[temp.getCol()][temp.getLine()] = ZoneEnum.BLOCDESTRUCTIBLE;
 			else
-				zoneArray[temp.getCol()][temp.getLine()] = ZoneEnum.BLOCINDEST;
+				zoneArray[temp.getCol()][temp.getLine()] = ZoneEnum.BLOCINDESTRUCTIBLE;
 		}
 
 		// Mettons les bombes et les feus possibles
-		Iterator<AiBomb> itBombes = bombes.iterator();
+		Iterator<AiBomb> itBombes = bombs.iterator();
 		while (itBombes.hasNext()) {
-			source.checkInterruption(); // Appel Obligatoire
+			mu.checkInterruption(); // Appel Obligatoire
 			AiBomb temp = itBombes.next();
-
-			/*
-			 * for(int k = temp.getCol() - temp.getRange(); k < temp.getCol() +
-			 * temp.getRange() && k < xMax && (zoneArray[k][temp.getLine()] !=
-			 * ZoneEnum.BLOCDEST || zoneArray[k][temp.getLine()] !=
-			 * ZoneEnum.BLOCINDEST); k++) zoneArray[k][temp.getLine()] =
-			 * ZoneEnum.FEUPOSSIBLE; for(int k = temp.getLine() -
-			 * temp.getRange(); k < temp.getLine() + temp.getRange() && k < yMax
-			 * && (zoneArray[temp.getCol()][k] != ZoneEnum.BLOCDEST ||
-			 * zoneArray[temp.getCol()][k] != ZoneEnum.BLOCINDEST); k++)
-			 * zoneArray[temp.getCol()][k] = ZoneEnum.FEUPOSSIBLE;
-			 */
 
 			// Les tiles dangeureux
 			int k = 1;
@@ -107,34 +90,34 @@ public class Zone {
 			boolean left = true;
 			boolean right = true;
 			while (k <= temp.getRange() && (up || down || left || right)) {
-				source.checkInterruption(); // Appel Obligatoire
+				mu.checkInterruption(); // Appel Obligatoire
 				if (up) {
-					if ((zoneArray[temp.getCol()][temp.getLine() - k] != ZoneEnum.BLOCDEST)
-							&& (zoneArray[temp.getCol()][temp.getLine() - k] != ZoneEnum.BLOCINDEST)) {
+					if ((zoneArray[temp.getCol()][temp.getLine() - k] != ZoneEnum.BLOCDESTRUCTIBLE)
+							&& (zoneArray[temp.getCol()][temp.getLine() - k] != ZoneEnum.BLOCINDESTRUCTIBLE)) {
 						zoneArray[temp.getCol()][temp.getLine() - k] = ZoneEnum.FEUPOSSIBLE;
 					} else {
 						up = false;
 					}
 				}
 				if (down) {
-					if ((zoneArray[temp.getCol()][temp.getLine() + k] != ZoneEnum.BLOCDEST)
-							&& (zoneArray[temp.getCol()][temp.getLine() + k] != ZoneEnum.BLOCINDEST)) {
+					if ((zoneArray[temp.getCol()][temp.getLine() + k] != ZoneEnum.BLOCDESTRUCTIBLE)
+							&& (zoneArray[temp.getCol()][temp.getLine() + k] != ZoneEnum.BLOCINDESTRUCTIBLE)) {
 						zoneArray[temp.getCol()][temp.getLine() + k] = ZoneEnum.FEUPOSSIBLE;
 					} else {
 						down = false;
 					}
 				}
 				if (left) {
-					if ((zoneArray[temp.getCol() - k][temp.getLine()] != ZoneEnum.BLOCDEST)
-							&& (zoneArray[temp.getCol() - k][temp.getLine()] != ZoneEnum.BLOCINDEST)) {
+					if ((zoneArray[temp.getCol() - k][temp.getLine()] != ZoneEnum.BLOCDESTRUCTIBLE)
+							&& (zoneArray[temp.getCol() - k][temp.getLine()] != ZoneEnum.BLOCINDESTRUCTIBLE)) {
 						zoneArray[temp.getCol() - k][temp.getLine()] = ZoneEnum.FEUPOSSIBLE;
 					} else {
 						left = false;
 					}
 				}
 				if (right) {
-					if ((zoneArray[temp.getCol() + k][temp.getLine()] != ZoneEnum.BLOCDEST)
-							&& (zoneArray[temp.getCol() + k][temp.getLine()] != ZoneEnum.BLOCINDEST)) {
+					if ((zoneArray[temp.getCol() + k][temp.getLine()] != ZoneEnum.BLOCDESTRUCTIBLE)
+							&& (zoneArray[temp.getCol() + k][temp.getLine()] != ZoneEnum.BLOCINDESTRUCTIBLE)) {
 						zoneArray[temp.getCol() + k][temp.getLine()] = ZoneEnum.FEUPOSSIBLE;
 					} else {
 						right = false;
@@ -145,25 +128,25 @@ public class Zone {
 		}
 
 		// Mettons les bombes
-		Iterator<AiBomb> itBombes2 = bombes.iterator();
+		Iterator<AiBomb> itBombes2 = bombs.iterator();
 		while (itBombes2.hasNext()) {
-			source.checkInterruption(); // Appel Obligatoire
+			mu.checkInterruption(); // Appel Obligatoire
 			AiBomb temp = itBombes2.next();
 			zoneArray[temp.getCol()][temp.getLine()] = ZoneEnum.BOMBE;
 		}
 
 		// Mettons les feus
-		Iterator<AiFire> itFeus = feus.iterator();
+		Iterator<AiFire> itFeus = fires.iterator();
 		while (itFeus.hasNext()) {
-			source.checkInterruption(); // Appel Obligatoire
+			mu.checkInterruption(); // Appel Obligatoire
 			AiFire temp = itFeus.next();
 			zoneArray[temp.getCol()][temp.getLine()] = ZoneEnum.FEU;
 		}
 
 		// Mettons les bonus
-		Iterator<AiItem> itObjets = objets.iterator();
+		Iterator<AiItem> itObjets = objects.iterator();
 		while (itObjets.hasNext()) {
-			source.checkInterruption(); // Appel Obligatoire
+			mu.checkInterruption(); // Appel Obligatoire
 			AiItem temp = itObjets.next();
 			if (temp.getType() == AiItemType.EXTRA_BOMB)
 				zoneArray[temp.getCol()][temp.getLine()] = ZoneEnum.BONUSBOMBE;
@@ -173,7 +156,7 @@ public class Zone {
 	}
 
 	public ZoneEnum[][] getZoneArray() throws StopRequestException {
-		source.checkInterruption(); // Appel Obligatoire
+		mu.checkInterruption(); // Appel Obligatoire
 		return zoneArray;
 	}
 
@@ -187,19 +170,11 @@ public class Zone {
 			result = result + "\n";
 		}
 		return result;
-		/*
-		 * String result = ""; result += "DENEME BIR KI UC"; for(int i = 0; i <
-		 * this.zone.getHeigh() ; i++) { for(int j = 0; j <
-		 * this.zone.getWidth(); j++) { if(zoneArray[j][i] == ZoneEnum.BLOCDEST)
-		 * result += zone.getTile(i, j).toString()+ "BLOCDEST   "; else
-		 * if(zoneArray[j][i] == ZoneEnum.BLOCINDEST) result += zone.getTile(i,
-		 * j).toString() + "BLOCINDS   "; else result += zone.getTile(i,
-		 * j).toString() + "LIBRE      "; } result += "\n"; } return result;
-		 */
+		
 	}
 
 	public ZoneEnum[][] simulateBomb(AiTile bomb) throws StopRequestException {
-		source.checkInterruption(); // Appel Obligatoire
+		mu.checkInterruption(); // Appel Obligatoire
 		ZoneEnum[][] result = new ZoneEnum[zone.getWidth()][zone.getHeigh()];
 		//Reproduisons le tableau:
 		for(int k = 0; k <this.zone.getHeigh(); k++)
@@ -226,48 +201,63 @@ public class Zone {
 		result[bomb.getCol()][bomb.getLine()] = ZoneEnum.EXPLOSION_SIMULE;
 		while (k <= this.zone.getOwnHero().getBombRange() && (up || down || left || right)) {
 			if (up) {
-				if ((result[bomb.getCol()][bomb.getLine() - k] != ZoneEnum.BLOCDEST)
-						&& (result[bomb.getCol()][bomb.getLine() - k] != ZoneEnum.BLOCINDEST)) {
+				if ((result[bomb.getCol()][bomb.getLine() - k] != ZoneEnum.BLOCDESTRUCTIBLE)
+						&& (result[bomb.getCol()][bomb.getLine() - k] != ZoneEnum.BLOCINDESTRUCTIBLE)) 
+				{
 					result[bomb.getCol()][bomb.getLine() - k] = ZoneEnum.EXPLOSION_SIMULE;
-				} else {
+				} 
+				else 
+				{
 					up = false;
-					if (result[bomb.getCol()][bomb.getLine() - k] == ZoneEnum.BLOCDEST) {
+					if (result[bomb.getCol()][bomb.getLine() - k] == ZoneEnum.BLOCDESTRUCTIBLE) 
+					{
 						result[bomb.getCol()][bomb.getLine() - k] = ZoneEnum.BLOC_EXPLOSE_SIMULE;
 						this.lastSimulatedBombExplodes++;
 					}
 				}
 			}
-			if (down) {
-				if ((result[bomb.getCol()][bomb.getLine() + k] != ZoneEnum.BLOCDEST)
-						&& (result[bomb.getCol()][bomb.getLine() + k] != ZoneEnum.BLOCINDEST)) {
+			if (down) 
+			{
+				if ((result[bomb.getCol()][bomb.getLine() + k] != ZoneEnum.BLOCDESTRUCTIBLE)
+						&& (result[bomb.getCol()][bomb.getLine() + k] != ZoneEnum.BLOCINDESTRUCTIBLE)) 
+				{
 					result[bomb.getCol()][bomb.getLine() + k] = ZoneEnum.EXPLOSION_SIMULE;
-				} else {
+				} 
+				else 
+				{
 					down = false;
-					if (result[bomb.getCol()][bomb.getLine() + k] == ZoneEnum.BLOCDEST) {
+					if (result[bomb.getCol()][bomb.getLine() + k] == ZoneEnum.BLOCDESTRUCTIBLE) {
 						result[bomb.getCol()][bomb.getLine() + k] = ZoneEnum.BLOC_EXPLOSE_SIMULE;
 						this.lastSimulatedBombExplodes++;
 					}
 				}
 			}
 			if (left) {
-				if ((result[bomb.getCol() - k][bomb.getLine()] != ZoneEnum.BLOCDEST)
-						&& (result[bomb.getCol() - k][bomb.getLine()] != ZoneEnum.BLOCINDEST)) {
+				if ((result[bomb.getCol() - k][bomb.getLine()] != ZoneEnum.BLOCDESTRUCTIBLE)
+						&& (result[bomb.getCol() - k][bomb.getLine()] != ZoneEnum.BLOCINDESTRUCTIBLE)) 
+				{
 					result[bomb.getCol() - k][bomb.getLine()] = ZoneEnum.EXPLOSION_SIMULE;
-				} else {
+				} 
+				else 
+				{
 					left = false;
-					if (result[bomb.getCol() - k][bomb.getLine()] == ZoneEnum.BLOCDEST) {
+					if (result[bomb.getCol() - k][bomb.getLine()] == ZoneEnum.BLOCDESTRUCTIBLE) {
 						result[bomb.getCol() - k][bomb.getLine()] = ZoneEnum.BLOC_EXPLOSE_SIMULE;
 						this.lastSimulatedBombExplodes++;
 					}
 				}
 			}
 			if (right) {
-				if ((result[bomb.getCol() + k][bomb.getLine()] != ZoneEnum.BLOCDEST)
-						&& (result[bomb.getCol() + k][bomb.getLine()] != ZoneEnum.BLOCINDEST)) {
+				if ((result[bomb.getCol() + k][bomb.getLine()] != ZoneEnum.BLOCDESTRUCTIBLE)
+						&& (result[bomb.getCol() + k][bomb.getLine()] != ZoneEnum.BLOCINDESTRUCTIBLE))
+				{
 					result[bomb.getCol() + k][bomb.getLine()] = ZoneEnum.EXPLOSION_SIMULE;
-				} else {
+				} 
+				else 
+				{
 					right = false;
-					if (result[bomb.getCol() + k][bomb.getLine()] == ZoneEnum.BLOCDEST) {
+					if (result[bomb.getCol() + k][bomb.getLine()] == ZoneEnum.BLOCDESTRUCTIBLE) 
+					{
 						result[bomb.getCol() + k][bomb.getLine()] = ZoneEnum.BLOC_EXPLOSE_SIMULE;
 						this.lastSimulatedBombExplodes++;
 					}

@@ -2,18 +2,25 @@ package tournament200809.coremenkucukkarakurt;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Collections;
 import java.util.Iterator;
+
+
+
 import fr.free.totalboumboum.ai.adapter200809.AiAction;
 import fr.free.totalboumboum.ai.adapter200809.AiActionName;
 import fr.free.totalboumboum.ai.adapter200809.AiBlock;
 import fr.free.totalboumboum.ai.adapter200809.AiBomb;
 import fr.free.totalboumboum.ai.adapter200809.AiFire;
 import fr.free.totalboumboum.ai.adapter200809.AiHero;
+
 import fr.free.totalboumboum.ai.adapter200809.AiTile;
 import fr.free.totalboumboum.ai.adapter200809.AiZone;
 import fr.free.totalboumboum.ai.adapter200809.ArtificialIntelligence;
 import fr.free.totalboumboum.ai.adapter200809.StopRequestException;
+
 import fr.free.totalboumboum.engine.content.feature.Direction;
+
 
 public class CoremenKucukkarakurt extends ArtificialIntelligence
 {
@@ -27,34 +34,56 @@ public class CoremenKucukkarakurt extends ArtificialIntelligence
 	/** la dernière case par laquelle on est passé */ 
 	private AiTile previousTile = null;
 	
-	
-	
-	
 	// la methode principale
 	public AiAction processAction() throws StopRequestException
 	{	
+		
 		checkInterruption(); //APPEL OBLIGATOIRE
+	
+		
 		
 		AiZone zone = getPercepts();
 		AiHero ownHero = zone.getOwnHero();
 		
+		
 		AiAction result = new AiAction(AiActionName.NONE);
 		
-		
-			
 		// si ownHero est null, c'est que l'IA est morte : inutile de continuer
 		if(ownHero!=null)
 		{	
+			
 			// on met à jour la position de l'ia dans la zone
 			currentTile = ownHero.getTile();
 			
 			// premier appel : on initialise l'IA	
 			if(nextTile == null)
 				init();
+
 			
-			// si il y a plus de 3 bombes
-			if(getPercepts().getBombs().size()>=3){
+			
+			/*
+			 * si mon currenttile est en securité et si ma region est en securité et si je suis à coté
+			 * d'un mur et si il y a pas une bombe proche
+			 */
+			if(isCaseSafe(currentTile) && isRegionSafe(currentTile) && canIDestroyAWall(currentTile)&& getCloseBombs().size()<1){
 				
+				// si il y a une direction n'est pas dangerous
+				if(isAnySafeDirection(currentTile)){
+					
+					// on mets une bombe
+					return result= new AiAction(AiActionName.DROP_BOMB);
+					
+				}
+				
+				// si tous les directions possibles sont dangereux
+				else{
+					// on fait un mouvement par hasard
+					return result= comportementHasard(zone, ownHero);
+				}
+			}
+		
+			// si il y a plus de 1 bombes
+			if(getCloseBombs().size()>=1){	
 				// si mon case est en securité
 				if(isCaseSafe(currentTile)){
 					
@@ -66,6 +95,7 @@ public class CoremenKucukkarakurt extends ArtificialIntelligence
 				else{
 					
 					// on fait un mouvement par hasard
+					
 					result=comportementHasard(zone, ownHero);
 					
 				}
@@ -75,21 +105,27 @@ public class CoremenKucukkarakurt extends ArtificialIntelligence
 			// et si je ne suis pas en meme ligne ou en meme colonne avec au autre bombe
 			else if((amIOnTheSameLine(currentTile)  ) && zone.getBombs().size()<2 && getClearNeighbours(currentTile).size()>2){
 				 
-				
 				// on verifie s'il y a une seule bombes
 				 if(getPercepts().getBombs().size()>0){
 					 // je ne mets pas une bombe si je suis en meme ligne ou colonne avec cette bombe
-					 if(getBombPos().get(0).getCol()==currentTile.getCol() || getBombPos().get(0).getLine()==currentTile.getLine())
-						// on fait un mouvement par hasard
+					 if(getBombPos().get(0).getCol()==currentTile.getCol() || getBombPos().get(0).getLine()==currentTile.getLine()){
+						
 						 result=comportementHasard(zone, ownHero);
+					 }
+						// on fait un mouvement par hasard
+						 
 					 else
 						// sinon on mets une bombe
+						
 						 result= new AiAction(AiActionName.DROP_BOMB);
 					
 				 }
 				 // sinon on mets une bombe
-				 else
+				 else{
+					 
 					 result=new AiAction(AiActionName.DROP_BOMB);
+				 }
+					 
 				
 			}
 			
@@ -111,6 +147,7 @@ public class CoremenKucukkarakurt extends ArtificialIntelligence
 				Direction direction = getPercepts().getDirection(currentTile,tempTile);
 				
 				// on applique le mouvement de cette direction
+				
 				result=new AiAction(AiActionName.MOVE,direction);
 				
 				
@@ -118,6 +155,7 @@ public class CoremenKucukkarakurt extends ArtificialIntelligence
 			// si il y a aucune bombe 
 			else {
 				 // on fait un mouvement par hasard
+				
 				 result=comportementHasard(zone, ownHero);
 			}
 				
@@ -125,11 +163,9 @@ public class CoremenKucukkarakurt extends ArtificialIntelligence
 				
 		}	
 						
-				
+		
 		return result;
 	}
-	
-	
 	
 	private void init() throws StopRequestException
 	{	checkInterruption(); //APPEL OBLIGATOIRE
@@ -201,7 +237,7 @@ public class CoremenKucukkarakurt extends ArtificialIntelligence
 		for (int i=0;i<5;i++){
 			checkInterruption(); //APPEL OBLIGATOIRE
 			AiTile tempTile =  getPercepts().getNeighbourTile(tile, Direction.UP);
-			if(tempTile.getBombs().size()!=0 && tempTile.getBlock()==null)
+			if((tempTile.getBombs().size()!=0 && tempTile.getBlock()==null) || tempTile.getFires().size()>0)
 				return false;
 			tile=tempTile;
 		}
@@ -209,7 +245,7 @@ public class CoremenKucukkarakurt extends ArtificialIntelligence
 		for (int i=0;i<5;i++){
 			checkInterruption(); //APPEL OBLIGATOIRE
 			AiTile tempTile =  getPercepts().getNeighbourTile(tile, Direction.DOWN);
-			if(tempTile.getBombs().size()!=0 && tempTile.getBlock()==null)
+			if((tempTile.getBombs().size()!=0 && tempTile.getBlock()==null) || tempTile.getFires().size()>0)
 				return false;
 			tile=tempTile;
 		}
@@ -217,7 +253,7 @@ public class CoremenKucukkarakurt extends ArtificialIntelligence
 		for (int i=0;i<5;i++){
 			checkInterruption(); //APPEL OBLIGATOIRE
 			AiTile tempTile =  getPercepts().getNeighbourTile(tile, Direction.RIGHT);
-			if(tempTile.getBombs().size()!=0 && tempTile.getBlock()==null)
+			if((tempTile.getBombs().size()!=0 && tempTile.getBlock()==null) || tempTile.getFires().size()>0)
 				return false;
 			tile=tempTile;
 		}
@@ -225,7 +261,7 @@ public class CoremenKucukkarakurt extends ArtificialIntelligence
 		for (int i=0;i<5;i++){
 			checkInterruption(); //APPEL OBLIGATOIRE
 			AiTile tempTile =  getPercepts().getNeighbourTile(tile, Direction.LEFT);
-			if(tempTile.getBombs().size()!=0 && tempTile.getBlock()==null)
+			if((tempTile.getBombs().size()!=0 && tempTile.getBlock()==null) || tempTile.getFires().size()>0)
 				return false;
 			tile=tempTile;
 		}
@@ -234,8 +270,6 @@ public class CoremenKucukkarakurt extends ArtificialIntelligence
 		
 		return true;
 	}
-	
-	
 	
 	
 	// la methode qui verifie si je suis en meme ligne ou en meme colonne avec un case choisi
@@ -296,7 +330,19 @@ public class CoremenKucukkarakurt extends ArtificialIntelligence
 				
 		if(nextTile == null)
 			init();
+		if(currentTile.getBombs().size()>0){
+			
+			if(isAnySafeDirection(currentTile)){
 				
+				return result= new AiAction(AiActionName.MOVE,getTheSafeDir(currentTile));
+				
+			}
+			
+			
+		}
+		
+		
+		
 		// arrivé à destination : on choisit une nouvelle destination
 		if(currentTile==nextTile)
 			pickNextTile();
@@ -338,22 +384,6 @@ public class CoremenKucukkarakurt extends ArtificialIntelligence
 		
 	}
 	
-	
-	// la methode qui verifie si je m'eloigne de la position d'une bombe
-	@SuppressWarnings("unused")
-	private boolean doesItMakesMeFar(AiTile tilebomb, AiTile tileNext) throws StopRequestException{
-		
-		checkInterruption(); //APPEL OBLIGATOIRE
-		
-		double dist1=getDistance(tilebomb,currentTile);
-		double dist2=getDistance(tilebomb, tileNext);
-		
-		if(dist2>dist1)
-			return true;
-		else
-			return false;
-		
-	}
 	
 	// la methode qui renvoi la liste des positions des bombes presentes
 	private ArrayList<AiTile> getBombPos() throws StopRequestException
@@ -425,7 +455,8 @@ public class CoremenKucukkarakurt extends ArtificialIntelligence
 		// et sinon on ne peut pas bouger, donc on ne fait rien du tout
 	}
 	}
-	// la methode pour s'enfuire avec un mouvement zigzag
+	
+	// la methode qui renvoie la direction qui n'est pas dangereuse 
 	private AiTile getDirection(AiTile refTile) throws StopRequestException{
 		
 		ArrayList<AiTile> tiles = getClearNeighbours(currentTile);
@@ -494,11 +525,245 @@ public class CoremenKucukkarakurt extends ArtificialIntelligence
 		{	checkInterruption(); //APPEL OBLIGATOIRE
 			
 			AiBomb t = it.next();
-			if(getDistance(currentTile, t.getTile())<10)
+			if(getDistance(currentTile, t.getTile())<5)
 				result.add(t);
 		
 		}
 		return result;
 	}	
+	
+	
+	
+	// la methode qui renvoie si notre hero est à coté d'un mur
+	private boolean canIDestroyAWall (AiTile tile) throws StopRequestException{
+		checkInterruption(); //APPEL OBLIGATOIRE
+		tile=currentTile;
+		
+		AiTile tempTile =  getPercepts().getNeighbourTile(tile, Direction.UP);
+		if(tempTile.getBlock()!=null){
+			if(tempTile.getBlock().isDestructible())
+				return true;
+		}
+			
+		tempTile =  getPercepts().getNeighbourTile(tile, Direction.DOWN);
+		if(tempTile.getBlock()!=null){
+			if(tempTile.getBlock().isDestructible())
+				return true;
+		}
+			
+		tempTile =  getPercepts().getNeighbourTile(tile, Direction.RIGHT);
+		if(tempTile.getBlock()!=null){
+			if(tempTile.getBlock().isDestructible())
+				return true;
+		}
+		
+		tempTile =  getPercepts().getNeighbourTile(tile, Direction.LEFT);
+		if(tempTile.getBlock()!=null){
+			if(tempTile.getBlock().isDestructible())
+				return true;
+		}
+		
+			
+		return false;
+	}
 
+	
+	
+	// la methode qui renvoie si notre hero a une possible direction qui n'est pas dangereuse
+	private boolean isAnySafeDirection(AiTile tile) throws StopRequestException{
+		checkInterruption(); //APPEL OBLIGATOIRE
+		
+		tile=currentTile;
+		
+		for (int i=0;i<10;i++){
+			checkInterruption(); //APPEL OBLIGATOIRE
+			AiTile tempTile =  getPercepts().getNeighbourTile(tile, Direction.UP);
+			
+			if(tempTile.getBlock()!=null ){
+				
+				break;
+			}
+			//else if(getTheNeigborgsNumber(tempTile)==1)	
+			else if(isClear(getPercepts().getNeighbourTile(tempTile, Direction.RIGHT)) || isClear(getPercepts().getNeighbourTile(tempTile, Direction.LEFT)))
+				return true;
+			
+			tile=tempTile;
+			
+		}
+		tile=currentTile;
+		for (int i=0;i<10;i++){
+			checkInterruption(); //APPEL OBLIGATOIRE
+			AiTile tempTile =  getPercepts().getNeighbourTile(tile, Direction.DOWN);
+			
+			if(tempTile.getBlock()!=null ){
+				
+				break;
+			}
+			//else if(getTheNeigborgsNumber(tempTile)==1)
+			else if(isClear(getPercepts().getNeighbourTile(tempTile, Direction.RIGHT)) || isClear(getPercepts().getNeighbourTile(tempTile, Direction.LEFT)))
+				return true;
+			
+			tile=tempTile;
+			
+		}
+		tile=currentTile;
+		for (int i=0;i<10;i++){
+			checkInterruption(); //APPEL OBLIGATOIRE
+			AiTile tempTile =  getPercepts().getNeighbourTile(tile, Direction.RIGHT);
+			
+			if(tempTile.getBlock()!=null ){
+				
+				break;
+			}
+			//else if(getTheNeigborgsNumber(tempTile)==1)
+			else if(isClear(getPercepts().getNeighbourTile(tempTile, Direction.DOWN)) || isClear(getPercepts().getNeighbourTile(tempTile, Direction.UP)))
+				return true;
+			 
+			tile=tempTile;
+			
+		}
+		tile=currentTile;
+		for (int i=0;i<10;i++){
+			checkInterruption(); //APPEL OBLIGATOIRE
+			AiTile tempTile =  getPercepts().getNeighbourTile(tile, Direction.LEFT);
+			
+			if(tempTile.getBlock()!=null ){
+				
+				break;
+			}
+			
+			//else if(getTheNeigborgsNumber(tempTile)==1)
+			else if(isClear(getPercepts().getNeighbourTile(tempTile, Direction.UP)) || isClear(getPercepts().getNeighbourTile(tempTile, Direction.DOWN)))
+				return true;
+			tile=tempTile;
+			
+		}
+		
+		return false;
+		
+	}
+	
+	
+	// la methode qui renvoie la direction ce qu'on doit faire pour n'est pas se suicide
+	private Direction getTheSafeDir(AiTile tile) throws StopRequestException{
+		checkInterruption(); //APPEL OBLIGATOIRE
+		
+		
+		ArrayList<Direction> dirs = new ArrayList<Direction>();
+		
+		
+		tile=currentTile;
+		
+		for (int i=0;i<10;i++){
+			checkInterruption(); //APPEL OBLIGATOIRE
+			AiTile tempTile =  getPercepts().getNeighbourTile(tile, Direction.UP);
+			
+			if(tempTile.getBlock()!=null ){
+				
+				break;
+			}
+			//else if(getTheNeigborgsNumber(tempTile)==1)	
+			else if(isClear(getPercepts().getNeighbourTile(tempTile, Direction.RIGHT)) || isClear(getPercepts().getNeighbourTile(tempTile, Direction.LEFT)))
+				dirs.add(Direction.UP);
+			
+			tile=tempTile;
+			
+		}
+		tile=currentTile;
+		for (int i=0;i<10;i++){
+			checkInterruption(); //APPEL OBLIGATOIRE
+			AiTile tempTile =  getPercepts().getNeighbourTile(tile, Direction.DOWN);
+			
+			if(tempTile.getBlock()!=null ){
+				
+				break;
+			}
+			//else if(getTheNeigborgsNumber(tempTile)==1)
+			else if(isClear(getPercepts().getNeighbourTile(tempTile, Direction.RIGHT)) || isClear(getPercepts().getNeighbourTile(tempTile, Direction.LEFT)))
+				dirs.add(Direction.DOWN);
+			
+			tile=tempTile;
+			
+		}
+		tile=currentTile;
+		for (int i=0;i<10;i++){
+			checkInterruption(); //APPEL OBLIGATOIRE
+			AiTile tempTile =  getPercepts().getNeighbourTile(tile, Direction.RIGHT);
+			
+			if(tempTile.getBlock()!=null ){
+				
+				break;
+			}
+			//else if(getTheNeigborgsNumber(tempTile)==1)
+			else if(isClear(getPercepts().getNeighbourTile(tempTile, Direction.DOWN)) || isClear(getPercepts().getNeighbourTile(tempTile, Direction.UP)))
+				dirs.add(Direction.RIGHT);
+			 
+			tile=tempTile;
+			
+		}
+		tile=currentTile;
+		for (int i=0;i<10;i++){
+			checkInterruption(); //APPEL OBLIGATOIRE
+			AiTile tempTile =  getPercepts().getNeighbourTile(tile, Direction.LEFT);
+			
+			if(tempTile.getBlock()!=null ){
+				
+				break;
+			}
+			
+			//else if(getTheNeigborgsNumber(tempTile)==1)
+			else if(isClear(getPercepts().getNeighbourTile(tempTile, Direction.UP)) || isClear(getPercepts().getNeighbourTile(tempTile, Direction.DOWN)))
+				dirs.add(Direction.LEFT);
+			tile=tempTile;
+			
+		}
+		
+		if(dirs.size()>0){
+			int rand = (int) Math.random()*dirs.size();
+			return dirs.get(rand);
+		}
+		else return
+			null;
+		
+	}
+	
+	// la methode qui renvoie si il y a au moins un voisin tile qui est en securité
+	private boolean isRegionSafe(AiTile tile) throws StopRequestException{
+		
+		checkInterruption(); //APPEL OBLIGATOIRE
+		
+		
+		
+		
+		// liste des cases autour de la case de référence
+		Collection<AiTile> neighborgs = getClearNeighbourTiles(currentTile);
+		// on garde les cases sans bloc ni bombe ni feu
+		
+	
+		Iterator<AiTile> it = neighborgs.iterator();
+	
+		while(it.hasNext())
+		{	checkInterruption(); //APPEL OBLIGATOIRE
+			
+			if(isCaseSafe(it.next()))
+					return true;
+		
+		}
+		return false;
+	}
+	
+	// la methode qui renvoie la liste des voisins 
+	private Collection<AiTile> getClearNeighbourTiles(AiTile tile) throws StopRequestException
+	{	Collection<AiTile> result = new ArrayList<AiTile>();
+		ArrayList<Direction> directions = Direction.getAllPrimaries();
+		Iterator<Direction> d = directions.iterator();
+		while(d.hasNext())
+		{	Direction dir = d.next();
+			AiTile neighbour = getPercepts().getNeighbourTile(tile, dir);
+			if(isClear(neighbour))
+				result.add(neighbour);
+		}
+		result = Collections.unmodifiableCollection(result);
+		return result;
+	}
 }
