@@ -3,13 +3,18 @@ package tournament200809.devecioglukorkmaz;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Iterator;
+import java.util.LinkedList;
 import java.util.PriorityQueue;
+
+import tournament200809.devecioglukorkmaz.Noeud;
+import tournament200809.devecioglukorkmaz.NoeudComparator;
+import tournament200809.devecioglukorkmaz.Tree;
+
 import fr.free.totalboumboum.ai.adapter200809.AiAction;
 import fr.free.totalboumboum.ai.adapter200809.AiActionName;
 import fr.free.totalboumboum.ai.adapter200809.AiBlock;
 import fr.free.totalboumboum.ai.adapter200809.AiBomb;
 import fr.free.totalboumboum.ai.adapter200809.AiFire;
-import fr.free.totalboumboum.ai.adapter200809.AiFloor;
 import fr.free.totalboumboum.ai.adapter200809.AiHero;
 import fr.free.totalboumboum.ai.adapter200809.AiTile;
 import fr.free.totalboumboum.ai.adapter200809.AiZone;
@@ -19,86 +24,300 @@ import fr.free.totalboumboum.engine.content.feature.Direction;
 
 public class DeveciogluKorkmaz extends ArtificialIntelligence {
 
-	AiHero enemy;
+	AiHero ownHero;
+	Collection<AiHero> enemies = new ArrayList<AiHero>();
 	Collection<AiBomb> bombs;
 	private AiTile currentTile;
 	AiZone zone;
 	Collection<AiTile> dangerousTiles;
-	Collection<AiTile> safeTiles;
 	AiTile safeTile;
+	AiTile nearestDestructible;
+	AiTile nearestItem;
+	AiTile nearestHero;
+	private LinkedList<Noeud> path;
+	Noeud cible;
+	int nombreHeroes;
 
 	public AiAction processAction() throws StopRequestException {
 		checkInterruption();
 		AiZone zone = getPercepts();
-		AiHero ownHero = zone.getOwnHero();
+		ownHero = zone.getOwnHero();
 		AiAction result = new AiAction(AiActionName.NONE);
 		if (ownHero != null) {
 			currentTile = ownHero.getTile();
 			this.zone = zone;
-			Collection<AiHero> hereos = zone.getHeroes();
-			Iterator<AiHero> k = hereos.iterator();
+			// updating enemies
+			Iterator<AiHero> k = zone.getHeroes().iterator();
 			AiHero temp;
-			if (hereos != null) {
-				while (k.hasNext()) {
-					checkInterruption();
-					temp = k.next();
-					if (!temp.equals(ownHero))
-						this.enemy = temp;
-				}
-			}
-			bombs = zone.getBombs();
-			safeTiles = setSafeTiles();
-			dangerousTiles = setDangerousTiles();
-			safeTile = setNearestSafeTile(currentTile);
-			Direction direction;
-			if (dangerousTiles.contains(currentTile)) {
+			enemies = new ArrayList<AiHero>();
+			while (k.hasNext()) {
 				checkInterruption();
-				direction = getPercepts().getDirection(currentTile,
-						goToNearestSafeTile());
-				result = new AiAction(AiActionName.MOVE, direction);
-			} else if (getDistance(currentTile, enemy.getTile()) <= 1
-					&& currentTile.getBombs().size() == 0) {
-				result = new AiAction(AiActionName.DROP_BOMB);
-//				System.out.println("J'ai pose une bombe");
-			} else {
-				AiTile m = getCloseToEnemy();
-				if (!dangerousTiles.contains(m)) {
-					direction = getPercepts().getDirection(currentTile, m);
-					result = new AiAction(AiActionName.MOVE, direction);
+				temp = k.next();
+				if (!temp.equals(ownHero)
+						&& !temp.getState().getName().name().equals("BURNING"))
+					enemies.add(temp);
+			}
+			// updating bombs
+			bombs = zone.getBombs();
+			// updating dangerous tiles
+			dangerousTiles = setDangerousTiles();
+			safeTile = setNearestSafeTile();
+			nearestDestructible = setNearestDestructible();
+			nearestItem = setNearestItem();
+			nearestHero = setNearestHero();
+			Direction direction = null;
+			int myBombs = 0;
+			boolean dontBomb = false;
+			Iterator<AiTile> iterator = getPercepts().getNeighbourTiles(
+					currentTile).iterator();
+			while (iterator.hasNext() && !dontBomb) {
+				checkInterruption();
+				AiTile temp4 = iterator.next();
+				if (!temp4.getBombs().isEmpty()
+						|| dangerousTiles.contains(temp4))
+					dontBomb = true;
+			}
+			if (bombs.size() > 0) {
+				Iterator<AiBomb> i = bombs.iterator();
+				while (i.hasNext()) {
+					checkInterruption();
+					AiBomb temp3 = i.next();
+					if (temp3.getColor().equals(ownHero.getColor())) {
+						myBombs++;
+					}
 				}
 			}
+			k = enemies.iterator();
+			boolean kill = false;
+			nombreHeroes = 0;
+			while (k.hasNext()) {
+				checkInterruption();
+				nombreHeroes++;
+				AiTile temp2 = k.next().getTile();
+				if (getDistance(temp2, currentTile) == 1)
+					kill = true;
+			}
+			boolean danger = false;
+			AiTile nextSafe = setPathNearestSafeTile(safeTile);
+			AiTile nextItem = setPath(nearestItem);
+			AiTile nextDestructible = setPath(nearestDestructible);
+			AiTile nextHero = setPathNearestSafeTile(nearestHero);
+			AiTile nextTile = null;
+			if (dangerousTiles.contains(currentTile) && nextSafe != null
+					&& safeTile != null) {
+				direction = getPercepts().getDirection(currentTile, nextSafe);
+				nextTile = nextSafe;
+				danger = true;
+			} else if (nearestItem != null && nextItem != null) {
+				direction = getPercepts().getDirection(currentTile, nextItem);
+				nextTile = nextItem;
+			} else if (myBombs > 0) {
+				result = new AiAction(AiActionName.NONE);
+			} else if (kill && myBombs <= 2 && !dontBomb) {
+				result = new AiAction(AiActionName.DROP_BOMB);
+			} else if (nearestDestructible != null
+					&& getDistance(currentTile, nearestDestructible) == 0
+					&& !dontBomb) {
+				result = new AiAction(AiActionName.DROP_BOMB);
+			} else if (nearestDestructible != null && nextDestructible != null) {
+				direction = getPercepts().getDirection(currentTile,
+						nextDestructible);
+				nextTile = nextDestructible;
+			} else if (nearestHero != null && nextHero != null) {
+				direction = getPercepts().getDirection(currentTile, nextHero);
+				nextTile = nextHero;
+			}
+			if (!danger && dangerousTiles.contains(nextTile)) {
+				result = new AiAction(AiActionName.NONE);
+			}
+			// last check
+			if (nextTile != null && nextTile.getBombs().isEmpty()
+					&& nextTile.getFires().isEmpty())
+				result = new AiAction(AiActionName.MOVE, direction);
 		}
 		return result;
 	}
 
-	private Collection<AiTile> setSafeTiles() {
-		Collection<AiFloor> floors = zone.getFloors();
-		Iterator<AiFloor> i = floors.iterator();
-		Collection<AiTile> tiles = new ArrayList<AiTile>();
-		while (i.hasNext())
-			tiles.add(i.next().getTile());
-		tiles.removeAll(zone.getBlocks());
-		if (dangerousTiles != null)
-			tiles.removeAll(dangerousTiles);
-		return tiles;
-
+	private AiTile setPath(AiTile target) throws StopRequestException {
+		checkInterruption();
+		Noeud cible = new Noeud(target);
+		path = new LinkedList<Noeud>();
+		Noeud courant = new Noeud(currentTile);
+		Tree tree = new Tree(courant);
+		NoeudComparator comparator = new NoeudComparator(courant, this);
+		PriorityQueue<Noeud> frange = new PriorityQueue<Noeud>(1000, comparator);
+		LinkedList<Noeud> open = new LinkedList<Noeud>();
+		LinkedList<Noeud> closed = new LinkedList<Noeud>();
+		Noeud temp = new Noeud(currentTile);
+		boolean found = false;
+		frange.offer(courant);
+		open.add(courant);
+		while (!found && !frange.isEmpty()) {
+			checkInterruption();
+			temp = frange.poll();
+			open.remove(open.indexOf(temp));
+			closed.add(temp);
+			if (temp.getTile().equals(cible.getTile())) {
+				found = true;
+			} else {
+				AiTile t = temp.getTile();
+				Collection<AiTile> neighbours = getClearNeighbours(t);
+				neighbours.removeAll(dangerousTiles);
+				Iterator<AiTile> i = neighbours.iterator();
+				while (i.hasNext()) {
+					checkInterruption();
+					AiTile temp2 = i.next();
+					Noeud noeud = new Noeud(temp2);
+					if (!closed.contains(noeud) && !open.contains(noeud)) {
+						open.add(noeud);
+						tree.addNoeud(temp, noeud);
+						frange.offer(noeud);
+					}
+				}
+			}
+		}
+		if (found)
+			path = tree.getPath(temp);
+		frange = null;
+		tree = null;
+		AiTile result;
+		if (path.size() > 1)
+			result = path.get(path.size() - 2).getTile();
+		else
+			result = null;
+		return result;
 	}
 
-	public AiTile setNearestSafeTile(AiTile t) throws StopRequestException {
+	private AiTile setPathNearestSafeTile(AiTile target)
+			throws StopRequestException {
+		checkInterruption();
+		Noeud cible = new Noeud(target);
+		path = new LinkedList<Noeud>();
+		Noeud courant = new Noeud(currentTile);
+		Tree tree = new Tree(courant);
+		NoeudComparator comparator = new NoeudComparator(courant, this);
+		PriorityQueue<Noeud> frange = new PriorityQueue<Noeud>(1000, comparator);
+		LinkedList<Noeud> open = new LinkedList<Noeud>();
+		LinkedList<Noeud> closed = new LinkedList<Noeud>();
+		Noeud temp = new Noeud(currentTile);
+		boolean found = false;
+		frange.offer(courant);
+		open.add(courant);
+		while (!found && !frange.isEmpty()) {
+			checkInterruption();
+			temp = frange.poll();
+			open.remove(open.indexOf(temp));
+			closed.add(temp);
+			if (temp.getTile().equals(cible.getTile())) {
+				found = true;
+			} else {
+				AiTile t = temp.getTile();
+				Collection<AiTile> neighbours = getClearNeighbours(t);
+				Iterator<AiTile> i = neighbours.iterator();
+				while (i.hasNext()) {
+					checkInterruption();
+					AiTile temp2 = i.next();
+					Noeud noeud = new Noeud(temp2);
+					if (!closed.contains(noeud) && !open.contains(noeud)) {
+						open.add(noeud);
+						tree.addNoeud(temp, noeud);
+						frange.offer(noeud);
+					}
+				}
+			}
+		}
+		if (found)
+			path = tree.getPath(temp);
+		frange = null;
+		tree = null;
+		AiTile result;
+		if (path.size() > 1)
+			result = path.get(path.size() - 2).getTile();
+		else
+			result = null;
+		return result;
+	}
+
+	private AiTile setNearestItem() throws StopRequestException {
 		checkInterruption();
 		AiTile solution = null;
 		PriorityQueue<AiTile> fifo = new PriorityQueue<AiTile>(1000,
-				new AiTileHeuristicComparator(currentTile, this));
+				new AiTileComparator(currentTile, this));
 		Iterator<AiTile> i;
 		Collection<AiTile> visited = new ArrayList<AiTile>();
-		fifo.offer(t);
+		fifo.offer(currentTile);
 		while (!fifo.isEmpty() && solution == null) {
 			checkInterruption();
 			AiTile node = fifo.poll();
-			while (visited.contains(node)) {
-				node = fifo.poll();
+			if (node.getItem() != null) {
+				if (!node.getItem().getState().getName().name().equals(
+						"BURNING"))
+					solution = node;
+			} else {
+				visited.add(node);
+				i = getClearNeighbours(node).iterator();
+				while (i.hasNext()) {
+					checkInterruption();
+					AiTile temp = i.next();
+					if (!dangerousTiles.contains(temp)
+							&& !visited.contains(temp))
+						fifo.offer(temp);
+				}
 			}
-//			System.out.println(node.toString());
+		}
+		return solution;
+	}
+
+	private AiTile setNearestDestructible() throws StopRequestException {
+		checkInterruption();
+		AiTile solution = null;
+		PriorityQueue<AiTile> fifo = new PriorityQueue<AiTile>(1000,
+				new AiTileComparator(currentTile, this));
+		Iterator<AiTile> i;
+		Collection<AiTile> visited = new ArrayList<AiTile>();
+		boolean found = false;
+		AiTile temp;
+		fifo.offer(currentTile);
+		while (!fifo.isEmpty() && solution == null) {
+			checkInterruption();
+			AiTile node = fifo.poll();
+			visited.add(node);
+			i = getPercepts().getNeighbourTiles(node).iterator();
+			while (i.hasNext()) {
+				checkInterruption();
+				temp = i.next();
+				if (temp.getBlock() != null) {
+					if (temp.getBlock().isDestructible())
+						found = true;
+				}
+			}
+			if (found) {
+				solution = node;
+			} else {
+				i = getClearNeighbours(node).iterator();
+				while (i.hasNext()) {
+					checkInterruption();
+					temp = i.next();
+					if (!dangerousTiles.contains(temp)
+							&& !visited.contains(temp))
+						fifo.offer(temp);
+				}
+			}
+		}
+		return solution;
+	}
+
+	private AiTile setNearestSafeTile() throws StopRequestException {
+		checkInterruption();
+		AiTile solution = null;
+		PriorityQueue<AiTile> fifo = new PriorityQueue<AiTile>(1000,
+				new AiTileComparator(currentTile, this));
+		Iterator<AiTile> i;
+		Collection<AiTile> visited = new ArrayList<AiTile>();
+		fifo.offer(currentTile);
+		while (!fifo.isEmpty() && solution == null) {
+			checkInterruption();
+			AiTile node = fifo.poll();
 			if (!dangerousTiles.contains(node)) {
 				solution = node;
 			} else {
@@ -107,145 +326,126 @@ public class DeveciogluKorkmaz extends ArtificialIntelligence {
 				while (i.hasNext()) {
 					checkInterruption();
 					AiTile temp = i.next();
-					fifo.offer(temp);
+					if (!visited.contains(temp))
+						fifo.offer(temp);
 				}
-				checkInterruption();
 			}
 		}
 		return solution;
 	}
 
-	private AiTile goToNearestSafeTile() throws StopRequestException {
-		checkInterruption();
-		Collection<AiTile> neighbours = new ArrayList<AiTile>();
-		AiTile closest;
-		AiTile temp;
-		neighbours = getClearNeighbours(currentTile);
-		Iterator<AiTile> i = neighbours.iterator();
-		closest = i.next();
-		while (i.hasNext()) {
-			checkInterruption();
-			temp = i.next();
-			checkInterruption();
-			if (getDistance(temp, safeTile) < getDistance(closest, safeTile)) {
-				checkInterruption();
-				closest = temp;
-			}
-		}
-		return closest;
-	}
-
-	private AiTile getCloseToEnemy() throws StopRequestException {
-		checkInterruption();
-		AiTile close = null;
-		Collection<AiTile> neighbours = new ArrayList<AiTile>();
-		AiTile temp;
-		neighbours = getClearNeighbours(currentTile);
-		Iterator<AiTile> i = neighbours.iterator();
-		close = i.next();
-		while (i.hasNext()) {
-			checkInterruption();
-			temp = i.next();
-			if (getDistance(temp, enemy.getTile()) < getDistance(close, enemy
-					.getTile()))
-				close = temp;
-		}
-		AiTile closest = close;
-		PriorityQueue<AiTile> fifo = new PriorityQueue<AiTile>(1000,
-				new AiTileHeuristicComparator(enemy.getTile(), this));
-		Iterator<AiTile> it;
-		Collection<AiTile> visited = new ArrayList<AiTile>();
-		fifo.offer(close);
-		while (!fifo.isEmpty() && closest == null) {
-			checkInterruption();
-			AiTile node = fifo.poll();
-			while (visited.contains(node)) {
-				node = fifo.poll();
-			}
-//			System.out.println(node.toString());
-			if (!dangerousTiles.contains(node)) {
-				closest = node;
-			} else {
-				visited.add(node);
-				it = getClearNeighbours(node).iterator();
-				while (i.hasNext()) {
-					checkInterruption();
-					AiTile temp1 = it.next();
-					fifo.offer(temp1);
-				}
-				checkInterruption();
-			}
-		}
-		return closest;
-	}
-
-	public double getDistance(AiTile a, AiTile b) throws StopRequestException {
-		checkInterruption();
-		int vertical = Math.abs(a.getCol() - b.getCol());
-		int horizontal = Math.abs(a.getLine() - b.getLine());
-		return Math.hypot(vertical, horizontal);
-	}
-
 	private Collection<AiTile> setDangerousTiles() throws StopRequestException {
 		checkInterruption();
 		Collection<AiTile> neigbourTiles;
-		AiTile temp1;
+		AiBomb temp1;
 		AiTile temp2;
 		Iterator<AiBomb> i = bombs.iterator();
 		Iterator<AiTile> it;
-		int k = 1;
+		int k = 0;
 		Collection<AiTile> result = new ArrayList<AiTile>();
 		if (bombs.size() > 0) {
 			while (i.hasNext()) {
 				checkInterruption();
-				temp1 = i.next().getTile();
-				if (!result.contains(temp1))
-					result.add(temp1);
-				neigbourTiles = getClearNeighbours(temp1);
+				temp1 = i.next();
+				int range = temp1.getRange();
+				if (!result.contains(temp1.getTile()))
+					result.add(temp1.getTile());
+				neigbourTiles = getPercepts()
+						.getNeighbourTiles(temp1.getTile());
 				it = neigbourTiles.iterator();
 				while (it.hasNext()) {
 					checkInterruption();
 					temp2 = it.next();
-					Direction d = zone.getDirection(temp1, temp2);
+					Direction d = zone.getDirection(temp1.getTile(), temp2);
+					boolean continuer = true;
 					while (isClear(temp2) || temp2.getFires().size() != 0
-							&& k <= 5) {
+							&& k <= range && continuer) {
 						checkInterruption();
 						if (!result.contains(temp2))
 							result.add(temp2);
+						if (temp2.getItem() != null)
+							continuer = false;
 						temp2 = zone.getNeighbourTile(temp2, d);
 						k++;
 					}
 				}
 			}
 		}
-//		System.out.println(result.toString());
+		Collection<AiFire> fires = zone.getFires();
+		Iterator<AiFire> iterator = fires.iterator();
+		while (iterator.hasNext()) {
+			checkInterruption();
+			AiTile temp3 = iterator.next().getTile();
+			if (!result.contains(temp3))
+				result.add(temp3);
+		}
 		return result;
+	}
+
+	private AiTile setNearestHero() throws StopRequestException {
+		checkInterruption();
+		AiTile solution = null;
+		PriorityQueue<AiTile> fifo = new PriorityQueue<AiTile>(1000,
+				new AiTileComparator(currentTile, this));
+		Iterator<AiTile> i;
+		Collection<AiTile> visited = new ArrayList<AiTile>();
+		fifo.offer(currentTile);
+		while (!fifo.isEmpty() && solution == null) {
+			checkInterruption();
+			AiTile node = fifo.poll();
+			Collection<AiHero> heroes = new ArrayList<AiHero>();
+			if (!node.equals(currentTile))
+				heroes = node.getHeroes();
+			if (!heroes.isEmpty()) {
+				solution = node;
+			} else {
+				visited.add(node);
+				i = getClearNeighbours(node).iterator();
+				while (i.hasNext()) {
+					checkInterruption();
+					AiTile temp = i.next();
+					if (!visited.contains(temp)
+							&& !dangerousTiles.contains(temp))
+						fifo.offer(temp);
+				}
+			}
+		}
+		return solution;
+	}
+
+	public double getDistance(AiTile a, AiTile b) throws StopRequestException {
+		checkInterruption();
+		int vertical = Math.abs(a.getCol() - b.getCol());
+		int horizontal = Math.abs(a.getLine() - b.getLine());
+		return vertical + horizontal;
+		// return Math.hypot(vertical, horizontal);
 	}
 
 	private ArrayList<AiTile> getClearNeighbours(AiTile tile)
 			throws StopRequestException {
-		checkInterruption(); // APPEL OBLIGATOIRE
-		// liste des cases autour de la case de référence
+		checkInterruption();
 		Collection<AiTile> neighbours = getPercepts().getNeighbourTiles(tile);
-		// on garde les cases sans bloc ni bombe ni feu
 		ArrayList<AiTile> result = new ArrayList<AiTile>();
 		Iterator<AiTile> it = neighbours.iterator();
 		while (it.hasNext()) {
-			checkInterruption(); // APPEL OBLIGATOIRE
+			checkInterruption();
 			AiTile t = it.next();
-			if (isClear(t))
+			if (t.getBlock() == null && t.getBombs().isEmpty()
+					&& t.getFires().isEmpty())
 				result.add(t);
 		}
 		return result;
 	}
 
 	private boolean isClear(AiTile tile) throws StopRequestException {
-		checkInterruption(); // APPEL OBLIGATOIRE
-		boolean result;
+		checkInterruption();
+		boolean result = false;
 		AiBlock block = tile.getBlock();
 		Collection<AiBomb> bombs = tile.getBombs();
 		Collection<AiFire> fires = tile.getFires();
-		result = block == null && bombs.size() == 0 && fires.size() == 0;
+		if (block == null && bombs.size() == 0 && fires.size() == 0)
+			result = true;
 		return result;
 	}
+
 }

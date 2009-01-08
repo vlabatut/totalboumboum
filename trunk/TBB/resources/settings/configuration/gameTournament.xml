@@ -16,9 +16,9 @@
 		<player file="37" color="blue" controls="0" spritePack="superbomberman5" spriteFolder="shirobon" />
 		<player file="38" color="orange" controls="0" spritePack="superbomberman5" spriteFolder="shirobon" />
 		<player file="39" color="green" controls="0" spritePack="superbomberman5" spriteFolder="shirobon" />
-		<player file="40" color="cyan" controls="0" spritePack="superbomberman5" spriteFolder="shirobon" />
 		<player file="41" color="black" controls="0" spritePack="superbomberman5" spriteFolder="shirobon" />
-		<player file="1" color="pink" controls="0" spritePack="superbomberman5" spriteFolder="assistantpirate" />
+		<player file="40" color="cyan" controls="0" spritePack="superbomberman5" spriteFolder="shirobon" />
+		<player file="18" color="pink" controls="0" spritePack="superbomberman5" spriteFolder="assistantpirate" />
 	</players>
 </gameTournament>
 

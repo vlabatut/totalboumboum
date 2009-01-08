@@ -808,47 +808,15 @@ public class Launcher
 	/*
 	 * TODO
 	 * 
-	 * + beta.009
-	 * - modification : mutualisation des classes codant les éléments de la GUI
-	 * - modification : fusion des launchers
-	 * - nouveauté : définition d'un ensemble de paramètres en ligne de commande pour le launcher
-	 * - nouveauté : mode plein écran
-	 * - nouveauté : écran de sélection des niveaux pour le quick match
-	 * - nouveauté : écran des options pour le quick match
-	 * - nouveauté : gestion complète d'un quick match
-	 * - nouveauté : placement aléatoire des joueurs en début de round
-	 * - modification : chargement adapté des preview de levels (temps de chargement plus court, ce qui n'est pas nécessaire n'est plus chargé)
-	 * - modification : menu de configuration du tournoi entièrement refait
-	 * - correction : bug graphique dans la liste des joueurs en cours de jeu
-	 * - correction : bug de raffraichissement des écrans tournoi/rencontre/manche en cours de partie
-	 * - modification : unification des classes d'affichage des parties (package game)
-	 * - correction : bug empêchant de sortir définitivement d'un tournoi
-	 * - correction : bug de placement des joueurs de gauche dans le niveau testAI
-	 * - nouveauté : bouton d'enregistrement en cours de partie
-	 * - nouveauté : enregistrement à la demande
-	 * - modification : test sur le nombre de joueurs dans les options quickstart
-	 * - correction : activation/désactivation des boutons dans les menus quand c'est nécessaire
-	 * - nouveauté : possibilité de supprimer un slot d'enregistrement existant
-	 * - modification : check sur le nombre de joueurs dans tournament settings + quickmatch
-	 * - correction : problème avec les boutons dans les settings du match rapide
-	 * - modification : bloquer le match rapide si aucune limite de match
-	 * - nouveauté : chargement d'une partie préalablement enregistrée
-	 * - nouveauté : autosave & autoload dans les options
-	 * - nouveauté : enregistrement automatique
-	 * - nouveauté : chargement automatique
-	 * - nouveauté : choix effectif du fond d'écran au cours du jeu
-	 * - nouveauté : possibilité de créer un nouveau slot d'enregistrement
-	 * - nouveauté : thème spécial pour le tournoi, avec logo GSÜ au sol
-	 * - nouveauté : niveaux spéciaux pour le tournoi
-	 * - correction : bug dans l'API d'IA dans la méthode renvoyant la direction entre deux cases : le cas du niveau circulaire n'était pas pris en compte
-	 * - correction : bug dans la GUI lors de l'initialisation d'un match rapide (limite de confrontations)
-	 * - modification : optimisation de l'API IA : les ArrayLists de sprites ont été remplacées par des HashMaps
+	 * + beta.010
+	 * - nouveauté : tournoi de type coupe
+	 * - nouveauté : GUI du tournoi-coupe
 	 * 
 	 * *******************************************************
 	 * *********************** A FAIRE ***********************
 	 * *******************************************************
 	 * 
-	 * - comportement bizarre du classement inversé : compte les égalités en partant de la fin...
+	 * - bug quand il manque un joueur, car son profil est nul est du cp ça pose des pb de correspondance entre les CupPlayers, et tout ça
 	 * 
 	 * - lors du calcul des points, il faut forcer la présence d'un classement: ça facilite énormément de traitements en aval
 	 *   au pire, si le classement est inutile (ex: simple total), on définit un classement-identité (pts utilisés pr le classement <=> pts marqués)
@@ -858,7 +826,6 @@ public class Launcher
 	 * 
 	 * - profils: simplifier, pas besoin de la double représentation default+selected.
 	 * - réorganiser par rapport aux besoins: joueur pdt le jeu, joueur chargé en dehors du jeu, joueur pas chargé ?
-	 * 
 	 * 
 	 * - faire le classement lexicographique gérant les signes diacritiques partout où c'est nécessaire
 	 * 

@@ -195,7 +195,7 @@ public class PartSubPanel extends EntitledSubPanelLines implements MouseListener
 		// profile should be known
 		if(profiles.size()>0)
 		{	// profile known
-			if(profiles.size()>index)
+			if(index!=-1 && profiles.size()>index)
 			{	Profile profile = profiles.get(index);
 				Color clr = profile.getSpriteColor().getColor();
 				int alpha = GuiTools.ALPHA_TABLE_REGULAR_BACKGROUND_LEVEL3;
@@ -219,12 +219,16 @@ public class PartSubPanel extends EntitledSubPanelLines implements MouseListener
 			int previousPartNumber = p.getPart();
 			int previousRank = p.getRank();
 			CupTournament tournament = part.getTournament();
-			CupPart previousPart = null;
+			Profile profile = null;
 			if(previousLegNumber>=0)
-				previousPart = tournament.getLeg(previousLegNumber).getPart(previousPartNumber);
-			if(previousPart!=null && previousPart.isOver())
-			{	Profile profile = previousPart.getProfileForRank(previousRank);
-				Color clr = profile.getSpriteColor().getColor();
+			{	CupPart previousPart = tournament.getLeg(previousLegNumber).getPart(previousPartNumber);
+				HashMap<Integer,ArrayList<Integer>> rkgs = previousPart.getRankings();
+				ArrayList<Integer> tie = rkgs.get(previousRank);
+				if(tie!=null && tie.size()==1)
+					profile = previousPart.getProfileForRank(previousRank);
+			}
+			if(profile!=null)
+			{	Color clr = profile.getSpriteColor().getColor();
 				int alpha = GuiTools.ALPHA_TABLE_REGULAR_BACKGROUND_LEVEL3;
 				bg = new Color(clr.getRed(),clr.getGreen(),clr.getBlue(),alpha);
 				text = profile.getName();

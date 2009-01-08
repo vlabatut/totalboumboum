@@ -23,6 +23,7 @@ package fr.free.totalboumboum.gui.game.tournament;
 
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
+import java.io.File;
 import java.io.IOException;
 
 import javax.swing.Box;
@@ -196,8 +197,13 @@ buttonStatistics.setEnabled(false);
 		AbstractTournament tournamentConf = tournamentConfiguration.getTournament();
 		if(tournament==tournamentConf && tournamentConfiguration.getAutoSave())
 		{	String folder = FileTools.FOLDER_DEFAULT;
+			File folderFile = new File(folder);
+			String backup = FileTools.FOLDER_DEFAULT_BACKUP;
+			File backupFile = new File(backup);
 			try
-			{	GameArchive.saveGame(folder, tournament);
+			{	FileTools.deleteDirectory(backupFile);
+				folderFile.renameTo(backupFile);
+				GameArchive.saveGame(folder, tournament);
 			}
 			catch (ParserConfigurationException e)
 			{	e.printStackTrace();
