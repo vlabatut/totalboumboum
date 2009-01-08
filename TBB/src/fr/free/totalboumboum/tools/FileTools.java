@@ -104,6 +104,7 @@ public class FileTools
 	public static final String FOLDER_CONTROLS = "controls";
 	public static final String FOLDER_DATA = "data";
 	public static final String FOLDER_DEFAULT = "default";
+	public static final String FOLDER_DEFAULT_BACKUP = "default_backup";
 	public static final String FOLDER_EXPLOSIONS = "explosions";
 	public static final String FOLDER_FIRE = "fire";
 	public static final String FOLDER_FIRES = "fires";

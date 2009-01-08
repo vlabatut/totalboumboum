@@ -9,9 +9,9 @@
 		<line value="Les scores sont considérés comme critères secondaires."/>
 	</notes>
 
-	<rankpoints invert="true">
+	<rankpoints exaequoShare="true">
 		<rankings>
-			<scores type="time" />
+			<total />
 			<scores type="bombings"/>
 			<scores type="items"/>
 			<scores type="bombs"/>

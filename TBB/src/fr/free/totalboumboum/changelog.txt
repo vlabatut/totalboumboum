@@ -174,3 +174,39 @@
 - nouveauté : configuration du round rapide
 - modification : simplification du profil, impossible de définir plus couleurs dorénavant
 
++ beta.009
+- modification : mutualisation des classes codant les éléments de la GUI
+- modification : fusion des launchers
+- nouveauté : définition d'un ensemble de paramètres en ligne de commande pour le launcher
+- nouveauté : mode plein écran
+- nouveauté : écran de sélection des niveaux pour le quick match
+- nouveauté : écran des options pour le quick match
+- nouveauté : gestion complète d'un quick match
+- nouveauté : placement aléatoire des joueurs en début de round
+- modification : chargement adapté des preview de levels (temps de chargement plus court, ce qui n'est pas nécessaire n'est plus chargé)
+- modification : menu de configuration du tournoi entièrement refait
+- correction : bug graphique dans la liste des joueurs en cours de jeu
+- correction : bug de raffraichissement des écrans tournoi/rencontre/manche en cours de partie
+- modification : unification des classes d'affichage des parties (package game)
+- correction : bug empêchant de sortir définitivement d'un tournoi
+- correction : bug de placement des joueurs de gauche dans le niveau testAI
+- nouveauté : bouton d'enregistrement en cours de partie
+- nouveauté : enregistrement à la demande
+- modification : test sur le nombre de joueurs dans les options quickstart
+- correction : activation/désactivation des boutons dans les menus quand c'est nécessaire
+- nouveauté : possibilité de supprimer un slot d'enregistrement existant
+- modification : check sur le nombre de joueurs dans tournament settings + quickmatch
+- correction : problème avec les boutons dans les settings du match rapide
+- modification : bloquer le match rapide si aucune limite de match
+- nouveauté : chargement d'une partie préalablement enregistrée
+- nouveauté : autosave & autoload dans les options
+- nouveauté : enregistrement automatique
+- nouveauté : chargement automatique
+- nouveauté : choix effectif du fond d'écran au cours du jeu
+- nouveauté : possibilité de créer un nouveau slot d'enregistrement
+- nouveauté : thème spécial pour le tournoi, avec logo GSÜ au sol
+- nouveauté : niveaux spéciaux pour le tournoi
+- correction : bug dans l'API d'IA dans la méthode renvoyant la direction entre deux cases : le cas du niveau circulaire n'était pas pris en compte
+- correction : bug dans la GUI lors de l'initialisation d'un match rapide (limite de confrontations)
+- modification : optimisation de l'API IA : les ArrayLists de sprites ont été remplacées par des HashMaps
+- modification : l'enregistrement automatique réalise aussi une copie de sauvegarde

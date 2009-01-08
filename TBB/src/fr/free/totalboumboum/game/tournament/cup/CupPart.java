@@ -151,12 +151,12 @@ public class CupPart implements Serializable
 			int matchIndex = currentMatch.getProfiles().indexOf(profile);
 			int relativeRank = ranks[matchIndex];
 			int newRank = problematicTie-1 + relativeRank;
-			ArrayList<Integer> list = rankings.get(problematicTie);
+			ArrayList<Integer> list = rankings.get(newRank);
 			if(list==null)
 			{	list = new ArrayList<Integer>();
 				rankings.put(newRank,list);
 			}
-			list.add(i);
+			list.add(playerNumber);
 		}
 	}
 	
@@ -328,6 +328,11 @@ public class CupPart implements Serializable
 		return result;
 	}
 	
+	/**
+	 * c pas vraiment le rank, c'est le rank + ex-aequo
+	 * @param rank
+	 * @return
+	 */
 	public int getIndexForRank(int rank)
 	{	int result = -1;
 		Iterator<Entry<Integer,ArrayList<Integer>>> it = rankings.entrySet().iterator();
@@ -341,6 +346,8 @@ public class CupPart implements Serializable
 				result = it2.next();
 			}
 		}
+		if(cpt<rank)
+			result = -1;
 		return result;
 	}
 }

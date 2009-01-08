@@ -1,16 +1,18 @@
 package tournament200809.devecioglukorkmaz;
 
 import java.util.Comparator;
+
 import fr.free.totalboumboum.ai.adapter200809.AiTile;
 import fr.free.totalboumboum.ai.adapter200809.StopRequestException;
 
-public class AiTileHeuristicComparator implements Comparator<AiTile> {
+public class AiTileComparator implements Comparator<AiTile> {
 
 	AiTile t;
 	DeveciogluKorkmaz dk;
 
-	public AiTileHeuristicComparator(AiTile t, DeveciogluKorkmaz dk)
+	public AiTileComparator(AiTile t, DeveciogluKorkmaz dk)
 			throws StopRequestException {
+
 		this.t = t;
 		dk.checkInterruption();
 		this.dk = dk;
@@ -26,13 +28,12 @@ public class AiTileHeuristicComparator implements Comparator<AiTile> {
 		try {
 			if (dk.getDistance(t, n1) > dk.getDistance(t, n2))
 				resultat = 1;
-			else
-
-			if (dk.getDistance(t, n1) < dk.getDistance(t, n2))
+			else if (dk.getDistance(t, n1) < dk.getDistance(t, n2))
 				resultat = -1;
 		} catch (StopRequestException e) {
 			e.printStackTrace();
 		}
 		return resultat;
 	}
+
 }

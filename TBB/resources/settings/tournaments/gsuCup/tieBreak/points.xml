@@ -10,11 +10,19 @@
 		<line value="Remarque: pour une rencontre décisive, il n'y a, a priori, qu'une seule manche."/>
 	</notes>
 
-	<rankings invert="true">
-		<total />
-		<scores type="bombings"/>
-		<scores type="items"/>
-		<scores type="bombs"/>
-	</rankings>	
+	<rankpoints exaequoShare="true">
+		<rankings>
+			<total />
+			<scores type="bombings"/>
+			<scores type="items"/>
+			<scores type="bombs"/>
+		</rankings>
+		<values>
+			<value value="8"/>
+			<value value="4"/>
+			<value value="2"/>
+			<value value="1"/>
+		</values>
+	</rankpoints>	
  		
 </points>

@@ -8,11 +8,19 @@
 		<line value="Ce rang dépend de leurs scores : temps, nombre de joueurs explosés, nombre d'items ramassés puis nombre de bombes posées." />
 	</notes>
 
-	<rankings invert="true">
-		<scores type="time" />
-		<scores type="bombings"/>
-		<scores type="items"/>
-		<scores type="bombs"/>
-	</rankings>	
+	<rankpoints exaequoShare="true">
+		<rankings>
+			<scores type="time" />
+			<scores type="bombings"/>
+			<scores type="items"/>
+			<scores type="bombs"/>
+		</rankings>
+		<values>
+			<value value="8"/>
+			<value value="4"/>
+			<value value="2"/>
+			<value value="1"/>
+		</values>
+	</rankpoints>	
 		
 </points>

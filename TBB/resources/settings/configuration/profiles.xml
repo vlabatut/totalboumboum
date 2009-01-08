@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<profiles xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../resources/schemas/profiles.xsd">
-	<general last="44" />
+<profiles xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="..\..\..\resources\schemas\profiles.xsd">
+	<general last="48" />
 	<list>
 		<profile file="35" name="Demirağ+Şagar" />
 		<profile file="17" name="Şahin+Yıldırım" />
@@ -24,8 +24,8 @@
 		<profile file="29" name="Akpolat+Şener" />
 		<profile file="3" name="Baydar+Camcı" />
 		<profile file="2" name="Başman+Sandallı" />
-		<profile file="10" name="Göksay+Köse" />
 		<profile file="1" name="Joueur Humain" />
+		<profile file="10" name="Göksay+Köse" />
 		<profile file="7" name="Cirit+Mutlu" />
 		<profile file="30" name="Altay+Basaranoğlu" />
 		<profile file="6" name="Çamaş+Demirbaş" />
