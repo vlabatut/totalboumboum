@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <gameTournament xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="..\..\..\resources\schemas\gameTournament.xsd">
 	<options useLastPlayers="true" useLastTournament="true" autoload="false" autosave="true" />
-	<tournament name="cupTest" />
+	<tournament name="gsuCup" />
 	<players>
 		<player file="27" color="brown" controls="0" spritePack="superbomberman5" spriteFolder="shirobon" />
 		<player file="28" color="grey" controls="0" spritePack="superbomberman5" spriteFolder="shirobon" />

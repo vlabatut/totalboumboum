@@ -74,7 +74,10 @@ public class CupPart implements Serializable
 
 	public void matchOver()
 	{	// init the players rankings according to the match results
-		initRankings();
+		if(rankings.size()==0)
+			initRankings();
+		else
+			updateRankings();
 		
 		// process the ranks needed for the coming leg (or final ranking)
 		ArrayList<Integer> neededRanks = getNeededRanks();
@@ -123,7 +126,7 @@ public class CupPart implements Serializable
 	
 	private void initRankings()
 	{	// process ranks
-		int[] ranks = match.getRanks();
+		int[] ranks = currentMatch.getRanks();
 		for(int i=0;i<ranks.length;i++)
 		{	int rank = ranks[i];
 			ArrayList<Integer> list = rankings.get(rank);
@@ -132,6 +135,28 @@ public class CupPart implements Serializable
 				rankings.put(rank,list);
 			}
 			list.add(i);			
+		}
+	}
+	
+	private void updateRankings()
+	{	// process ranks
+		int[] ranks = currentMatch.getRanks();
+		ArrayList<Integer> tie = rankings.get(problematicTie);
+		rankings.remove(problematicTie);
+		
+		// update rankings (hashmap)
+		for(int i=0;i<tie.size();i++)
+		{	int playerNumber = tie.get(i);
+			Profile profile = profiles.get(playerNumber);
+			int matchIndex = currentMatch.getProfiles().indexOf(profile);
+			int relativeRank = ranks[matchIndex];
+			int newRank = problematicTie-1 + relativeRank;
+			ArrayList<Integer> list = rankings.get(problematicTie);
+			if(list==null)
+			{	list = new ArrayList<Integer>();
+				rankings.put(newRank,list);
+			}
+			list.add(i);
 		}
 	}
 	
