@@ -580,6 +580,7 @@ public class GunalpYurtsever extends ArtificialIntelligence
 	 * @return
 	 * @throws StopRequestException
 	 */
+	@SuppressWarnings("unused")
 	private AiTile ultimateRunaway(AiHero targetedHero) throws StopRequestException{
 		
 		checkInterruption(); // APPEL OBLIGATOIRE

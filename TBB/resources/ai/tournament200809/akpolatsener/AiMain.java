@@ -1,8 +1,8 @@
-package tournament200809.old_erisikpektas;
+package tournament200809.akpolatsener;
 
 /*
  * Total Boum Boum
- * Copyright 2008-2009 Vincent Labatut 
+ * Copyright 2008 Vincent Labatut 
  * 
  * This file is part of Total Boum Boum.
  * 
@@ -27,7 +27,7 @@ public class AiMain extends AiManager
 {
 
 	public AiMain()
-	{	super(new ErisikPektas());
+	{	super(new AkpolatSener());
 	}
 
 }

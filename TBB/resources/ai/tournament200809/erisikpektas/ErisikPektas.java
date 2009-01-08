@@ -16,7 +16,9 @@ import fr.free.totalboumboum.ai.adapter200809.AiZone;
 import fr.free.totalboumboum.ai.adapter200809.AiHero;
 import fr.free.totalboumboum.ai.adapter200809.ArtificialIntelligence;
 import fr.free.totalboumboum.ai.adapter200809.StopRequestException;
+
 import fr.free.totalboumboum.engine.content.feature.Direction;
+
 
 public class ErisikPektas extends ArtificialIntelligence {
 	private Map map;
@@ -24,8 +26,7 @@ public class ErisikPektas extends ArtificialIntelligence {
 	private AiTile caseactuelle;
 	/** la case sur laquelle on veut aller */
 	private AiTile caseprochaine = null;
-	@SuppressWarnings("unused")
-	private AiTile caseprecedente = null;
+
 	private AiTile casedestination = null;
 	/** larea du jeu */
 	private AiZone tous;
@@ -43,7 +44,7 @@ public class ErisikPektas extends ArtificialIntelligence {
 	long bombtimer = 0;
 	private int premier = 0;
 
-	/** deux tableaux que nous allons utiliser pour stocker les temps des bombes */
+	/** deux tableaux que nous allons utiliser pour stocker les temps des bombes nous  mettons 50 pour que ce soit grandecestun nombre aleatoire*/
 	long[][] temps = new long[50][50];
 	long[][] danger = new long[50][50];
 
@@ -135,8 +136,7 @@ public class ErisikPektas extends ArtificialIntelligence {
 			 */
 			if (caseprochaine != null) {
 
-				if (caseprochaine != caseactuelle)
-					caseprecedente = caseactuelle;
+				
 				if (map.isNoWhereElse(caseprochaine.getCol(), caseprochaine
 						.getLine()))
 					if (!isdangerous(caseprochaine.getCol(), caseprochaine
@@ -154,23 +154,13 @@ public class ErisikPektas extends ArtificialIntelligence {
 							direction = getPercepts().getDirection(
 									caseactuelle, caseprochaine);
 
-					}
+					}}
 
-				else {
-					map.removebombe();
-					x = getPercepts().getOwnHero().getCol();
-					y = getPercepts().getOwnHero().getLine();
-					caseactuelle = getPercepts().getOwnHero().getTile();
-					init();
-					avancer();
-				}
-
-			}
 
 			// et le controle des directions composites pour que le jeu ne jette
 			// pas dexceptions
 
-			if (!aleatoire && !attaque && !explosion && !alentours
+			if (direction!=Direction.NONE&&!aleatoire && !attaque && !explosion && !alentours
 					&& direction != Direction.DOWNLEFT
 					&& direction != Direction.DOWNRIGHT
 					&& direction != Direction.UPLEFT
@@ -213,7 +203,7 @@ public class ErisikPektas extends ArtificialIntelligence {
 
 	private void init() throws StopRequestException {
 		checkInterruption(); // APPEL OBLIGATOIRE
-		caseprecedente = caseactuelle;
+		
 		caseprochaine = caseactuelle;
 
 	}
@@ -461,7 +451,7 @@ public class ErisikPektas extends ArtificialIntelligence {
 		else
 			attaque(true);
 
-		if (!attaque && !alentours && controle2(caseactuelle) && !choisir
+		/*if (!attaque && !alentours && controle2(caseactuelle) && !choisir
 				&& !bouger && map.isWalkable(x, y)
 				&& tous.getItems().size() == 0 && !explosion) {
 			map.setbombeposs(x, y, bomberman.getBombRange());
@@ -472,7 +462,7 @@ public class ErisikPektas extends ArtificialIntelligence {
 				map.removebombe();
 			aleatoire = true;
 			// System.out.println(aleatoire);
-		}
+		}*/
 
 		// if(bomberman.getState().getName()==AiStateName.STANDING &&
 		// getdangerous(x, y)>1200)
@@ -492,7 +482,7 @@ public class ErisikPektas extends ArtificialIntelligence {
 	// /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 	public AiTile sidanger(boolean selection) throws StopRequestException {
-
+		checkInterruption(); // APPEL OBLIGATOIRE
 		if (!isdangerous(x, y) && !selection) {
 			// System.out.println("seuriteye girrriddidiiin");
 			pasdedanger = tous.getTile(y, x);
@@ -1108,9 +1098,9 @@ public class ErisikPektas extends ArtificialIntelligence {
 
 		if (tous.getTile(y, x).getBombs().size() == 0) {
 			while (!securite(x, y, 0).isEmpty() && it.hasNext() && !attaque) {
-
+				checkInterruption(); // APPEL OBLIGATOIRE
 				hero = it.next();
-				if (hero != bomberman
+				if (hero != bomberman&&existe(hero.getTile())
 						&& !securite(hero.getCol(), hero.getLine(), 0)
 								.isEmpty()) {
 					attack = new Astar(map, x, y, hero.getCol(), hero.getLine());
@@ -1124,7 +1114,23 @@ public class ErisikPektas extends ArtificialIntelligence {
 									hero.getCol(), hero.getLine(), 2).size() == 0)) {
 
 						if (securite(x, y, 0).size() != 0
-								&& getdangerous(x, y) < (bombtimer * 2) / 3) {
+								&& getdangerous(x, y) < (bombtimer ) / 2 &&
+								(x+1<map.width &&(tous.getTile(y, x).getNeighbour(Direction.RIGHT).getBombs().size()==0
+								||(tous.getTile(y, x).getNeighbour(Direction.RIGHT).getBombs().size()>0 &&
+										tous.getTile(y, x).getNeighbour(Direction.RIGHT).getBombs().iterator().next().getColor()!=bomberman.getColor()	)))
+										 &&
+								(x-1>0 &&(tous.getTile(y, x).getNeighbour(Direction.LEFT).getBombs().size()==0
+								||(tous.getTile(y, x).getNeighbour(Direction.LEFT).getBombs().size()>0 &&
+										tous.getTile(y, x).getNeighbour(Direction.LEFT).getBombs().iterator().next().getColor()!=bomberman.getColor()	)))
+										 &&
+								(y+1<map.height &&(tous.getTile(y, x).getNeighbour(Direction.DOWN).getBombs().size()==0
+								||(tous.getTile(y, x).getNeighbour(Direction.DOWN).getBombs().size()>0 &&
+										tous.getTile(y, x).getNeighbour(Direction.DOWN).getBombs().iterator().next().getColor()!=bomberman.getColor()	)))
+										 &&
+								(y-1>0  &&(tous.getTile(y, x).getNeighbour(Direction.UP).getBombs().size()==0
+								||(tous.getTile(y, x).getNeighbour(Direction.UP).getBombs().size()>0 &&
+										tous.getTile(y, x).getNeighbour(Direction.UP).getBombs().iterator().next().getColor()!=bomberman.getColor()	)))
+							) {
 
 							// System.out.println("attaque");
 							result = laisser();

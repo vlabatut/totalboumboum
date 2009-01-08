@@ -2,7 +2,7 @@ package tournament200809.dayioglugilgeckalan;
 
 /*
  * Total Boum Boum
- * Copyright 2008-2009 Vincent Labatut 
+ * Copyright 2008 Vincent Labatut 
  * 
  * This file is part of Total Boum Boum.
  * 
@@ -25,7 +25,6 @@ import fr.free.totalboumboum.ai.adapter200809.AiManager;
 
 public class AiMain extends AiManager
 {
-
 	public AiMain()
 	{	super(new DayioglugilGeckalan());
 	}
