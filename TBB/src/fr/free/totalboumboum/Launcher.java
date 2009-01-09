@@ -812,6 +812,8 @@ public class Launcher
 	 * - nouveauté : tournoi de type coupe
 	 * - nouveauté : GUI du tournoi-coupe
 	 * 
+	 * - tester les 2 IA v1
+	 * - finir les stats
 	 * *******************************************************
 	 * *********************** A FAIRE ***********************
 	 * *******************************************************
