@@ -377,10 +377,10 @@ buttonStatistics.setEnabled(false);
 	/////////////////////////////////////////////////////////////////	
 	@Override
 	public void matchOver()
-	{	SwingUtilities.invokeLater(new Runnable()
+	{	saveTournament();
+		SwingUtilities.invokeLater(new Runnable()
 		{	public void run()
 			{	tournamentResults.refresh();
-				saveTournament();
 				buttonResults.doClick();
 			}
 		});	

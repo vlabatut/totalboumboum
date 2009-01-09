@@ -2,9 +2,9 @@
 <gameQuickmatch xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="..\..\..\resources\schemas\gameQuickmatch.xsd">
 	<options useLastPlayers="true" useLastLevels="true" useLastSettings="true" />
 	<settings>
-		<levels randomOrder="false" />
-		<players randomLocation="false" />
-		<limits points="0" rounds="6" time="60000" />
+		<levels randomOrder="true" />
+		<players randomLocation="true" />
+		<limits points="0" rounds="5" time="60000" />
 		<points share="true" draw="none">
 			<value rank="1" points="8" />
 			<value rank="2" points="4" />
@@ -14,17 +14,17 @@
 		</points>
 	</settings>
 	<players>
-		<player file="18" color="orange" controls="2" spritePack="superbomberman5" spriteFolder="assistantpirate" />
-		<player file="1" color="cyan" controls="1" spritePack="superbomberman5" spriteFolder="assistantpirate" />
 		<player file="37" color="blue" controls="0" spritePack="superbomberman5" spriteFolder="shirobon" />
+		<player file="30" color="red" controls="0" spritePack="superbomberman5" spriteFolder="shirobon" />
+		<player file="4" color="cyan" controls="0" spritePack="superbomberman1" spriteFolder="shirobon" />
+		<player file="14" color="pink" controls="0" spritePack="superbomberman1" spriteFolder="shirobon" />
 	</players>
 	<levels>
-		<level pack="gsuTournament" folder="carrefour" />
-		<level pack="gsuTournament" folder="pasaj" />
-		<level pack="gsuTournament" folder="power" />
-		<level pack="gsuTournament" folder="line" />
-		<level pack="gsuTournament" folder="items" />
-		<level pack="gsuTournament" folder="classic" />
+		<level pack="sbm1Custom" folder="test3" />
+		<level pack="sbm1Custom" folder="test3b" />
+		<level pack="sbm1Custom" folder="test3d" />
+		<level pack="sbm1Custom" folder="test3f" />
+		<level pack="sbm1Custom" folder="test3e" />
 	</levels>
 </gameQuickmatch>
 
