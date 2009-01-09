@@ -26,6 +26,7 @@ import java.awt.Graphics;
 import java.awt.event.ActionEvent;
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 
 import javax.swing.Box;
 import javax.swing.BoxLayout;
@@ -39,6 +40,7 @@ import org.xml.sax.SAXException;
 
 import fr.free.totalboumboum.configuration.Configuration;
 import fr.free.totalboumboum.configuration.game.tournament.TournamentConfiguration;
+import fr.free.totalboumboum.configuration.profile.Profile;
 import fr.free.totalboumboum.game.archive.GameArchive;
 import fr.free.totalboumboum.game.match.Match;
 import fr.free.totalboumboum.game.match.MatchRenderPanel;
@@ -122,7 +124,17 @@ buttonStatistics.setEnabled(false);
 	public void setMatch(Match match)
 	{	// match
 		if(match!=null)
-			match.setPanel(null);
+		{	match.setPanel(null);
+			ArrayList<Profile> profiles = match.getProfiles();
+			ArrayList<Integer> controls = new ArrayList<Integer>();
+			for(Profile p: profiles)
+			{	int control = p.getControlSettingsIndex();
+				if(controls.contains(control))
+					p.setControlSettingsIndex(0);
+				else
+					controls.add(control);
+			}
+		}
 		this.match = match;
 		match.setPanel(this);
 		// panels

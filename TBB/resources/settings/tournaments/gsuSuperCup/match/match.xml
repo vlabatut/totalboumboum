@@ -17,13 +17,8 @@
 		</confrontation>
 	</limits>
  	
- 	<rounds randomOrder="true" >
-  		<round local="true" name="roundClassic" />
-  		<round local="true" name="roundClassic" />
-  		<round local="true" name="roundItems" />
-  		<round local="true" name="roundLine" />
-  		<round local="true" name="roundPasaj" />
-  		<round local="true" name="roundPower" />
+ 	<rounds randomOrder="false" >
+  		<round local="true" name="round" />
   	</rounds>
 	
 </match>

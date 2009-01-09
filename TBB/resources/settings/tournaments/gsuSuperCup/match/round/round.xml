@@ -4,7 +4,7 @@
 	xsi:noNamespaceSchemaLocation="../../../../../schemas/round.xsd">
 	
  	<notes>
- 		<line value="Tout le monde sur la ligne de départ..." />
+ 		<line value="Nouveau thème sur ancienne structure" />
  		<line value="Date: 06-01-2009" />
  	</notes>
 
@@ -21,6 +21,6 @@
 		</time>
 	</limits>
 	
-	<level packname="gsuTournament" name="line" randomLocation="true"/>
+	<level packname="gsuTournament" name="old" randomLocation="true"/>
 
 </round>

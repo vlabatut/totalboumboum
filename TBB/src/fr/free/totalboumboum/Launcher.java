@@ -811,14 +811,11 @@ public class Launcher
 	 * + beta.010
 	 * - nouveauté : tournoi de type coupe
 	 * - nouveauté : GUI du tournoi-coupe
+	 * - correction : possibilité de conflit dans les controles quand les joueurs d'un match sont différents de ceux d'un tournoi (ex: coupe)
 	 * 
-	 * - tester les 2 IA v1
-	 * - finir les stats
 	 * *******************************************************
 	 * *********************** A FAIRE ***********************
 	 * *******************************************************
-	 * 
-	 * - bug sur quand les joueurs du tournoi et du match sont différents : les commandes sont mémorisées d'un match à l'autre, mais il peut y avoir des conflit. réinitialiser avant chaque PART dans le tournoi
 	 * 
 	 * - bug quand il manque un joueur, car son profil est nul est du cp ça pose des pb de correspondance entre les CupPlayers, et tout ça
 	 * 
