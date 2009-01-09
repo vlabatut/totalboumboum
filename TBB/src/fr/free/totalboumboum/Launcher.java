@@ -816,6 +816,8 @@ public class Launcher
 	 * *********************** A FAIRE ***********************
 	 * *******************************************************
 	 * 
+	 * - bug sur quand les joueurs du tournoi et du match sont différents : les commandes sont mémorisées d'un match à l'autre, mais il peut y avoir des conflit. réinitialiser avant chaque PART dans le tournoi
+	 * 
 	 * - bug quand il manque un joueur, car son profil est nul est du cp ça pose des pb de correspondance entre les CupPlayers, et tout ça
 	 * 
 	 * - lors du calcul des points, il faut forcer la présence d'un classement: ça facilite énormément de traitements en aval
