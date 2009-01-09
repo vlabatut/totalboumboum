@@ -1,24 +1,25 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <archive xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="..\..\..\resources\schemas\archive.xsd">
 	<tournament name="Tournoi de Galatasaray 2" type="cup" />
-	<played matches="5" rounds="0" />
-	<dates start="2009-01-08T22:40:55" save="2009-01-08T22:48:44" />
+	<played matches="1" rounds="1" />
+	<dates start="2009-01-09T00:31:52" save="2009-01-09T00:39:34" />
 	<players>
+		<player name="Promeneur 2" />
+		<player name="Medeni+Uluer" />
+		<player name="Tırtıl+Tomruk" />
+		<player name="Çöremen+Küçükkarakürt" />
+		<player name="Promeneur" />
 		<player name="Günalp+Yürtsever" />
 		<player name="Devecioğlu+Korkmaz" />
-		<player name="Dayioğlugil+Geçkalan" />
+		<player name="Promeneur 3" />
 		<player name="Akpolat+Şener" />
-		<player name="Demirağ+Şagar" />
-		<player name="Kökciyan+Mazmanoğlu" />
-		<player name="Bilgin+Karabağ" />
-		<player name="Medeni+Uluer" />
-		<player name="Çöremen+Küçükkarakürt" />
 		<player name="Altay+Basaranoğlu" />
+		<player name="Demirağ+Şagar" />
+		<player name="Dayioğlugil+Geçkalan" />
+		<player name="Bilgin+Karabağ" />
 		<player name="Akkaya+Danacioğlu" />
+		<player name="Kökciyan+Mazmanoğlu" />
 		<player name="Erişik+Pektaş" />
-		<player name="Çalışkan+Cap+Doğaner" />
-		<player name="Tırtıl+Tomruk" />
-		<player name="Adatepe" />
 	</players>
 </archive>
 

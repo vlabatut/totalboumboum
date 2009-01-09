@@ -284,7 +284,9 @@ buttonStatistics.setEnabled(false);
 		{	replaceWith(parent);
 	    }
 		else if(e.getActionCommand().equals(GuiKeys.GAME_TOURNAMENT_BUTTON_FINISH))
-		{	tournament.finish();
+		{	
+			
+			tournament.finish();
 			parent.refresh();
 			replaceWith(parent);
 	    }
