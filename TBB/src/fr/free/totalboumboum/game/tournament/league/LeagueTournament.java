@@ -24,6 +24,7 @@ package fr.free.totalboumboum.game.tournament.league;
 import java.util.Set;
 
 import fr.free.totalboumboum.game.match.Match;
+import fr.free.totalboumboum.game.rank.Ranks;
 import fr.free.totalboumboum.game.tournament.AbstractTournament;
 
 public class LeagueTournament extends AbstractTournament
@@ -67,7 +68,7 @@ public class LeagueTournament extends AbstractTournament
 	}
 
 	@Override
-	public int[] getOrderedPlayers() {
+	public Ranks getOrderedPlayers() {
 		// TODO Auto-generated method stub
 		return null;
 	}

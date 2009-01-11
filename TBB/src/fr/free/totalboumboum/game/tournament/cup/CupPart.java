@@ -3,13 +3,12 @@ package fr.free.totalboumboum.game.tournament.cup;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.HashMap;
 import java.util.Iterator;
-import java.util.Map.Entry;
 
 import fr.free.totalboumboum.configuration.GameConstants;
 import fr.free.totalboumboum.configuration.profile.Profile;
 import fr.free.totalboumboum.game.match.Match;
+import fr.free.totalboumboum.game.rank.Ranks;
 
 /*
  * Total Boum Boum
@@ -38,30 +37,32 @@ public class CupPart implements Serializable
 
 	public CupPart(CupLeg leg)
 	{	this.leg = leg;
+		ranks = new Ranks();
 	}
 
 	/////////////////////////////////////////////////////////////////
 	// GAME		/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	private final HashMap<Integer,ArrayList<Integer>> rankings = new HashMap<Integer, ArrayList<Integer>>();
 	private int problematicTie = -1;
 	
 	public int getProblematicTie()
 	{	return problematicTie;
 	}
 	
-	public HashMap<Integer,ArrayList<Integer>> getRankings()
-	{	return rankings;		
-	}
-	
 	public void init()
-	{	currentMatch = match;
+	{	// match
+		currentMatch = match;
+		// profiles
+		ArrayList<Profile> profiles = new ArrayList<Profile>();
+		for(int i=0;i<players.size();i++)
+		{	Profile p = getProfileForIndex(i);
+			profiles.add(p);
+		}
 		currentMatch.init(profiles);
 	}
 	
 	public void progress()
 	{	currentMatch = tieBreak.initMatch();
-//		currentMatch.init(profiles); //déjà fait dans tieBreak.initMatch()
 	}
 	
 	public void finish()
@@ -74,8 +75,8 @@ public class CupPart implements Serializable
 
 	public void matchOver()
 	{	// init the players rankings according to the match results
-		if(rankings.size()==0)
-			initRankings();
+		if(ranks.isEmpty())
+			ranks = match.getOrderedPlayers().copy();
 		else
 			updateRankings();
 		
@@ -124,39 +125,22 @@ public class CupPart implements Serializable
 		return result;
 	}
 	
-	private void initRankings()
-	{	// process ranks
-		int[] ranks = currentMatch.getRanks();
-		for(int i=0;i<ranks.length;i++)
-		{	int rank = ranks[i];
-			ArrayList<Integer> list = rankings.get(rank);
-			if(list==null)
-			{	list = new ArrayList<Integer>();
-				rankings.put(rank,list);
-			}
-			list.add(i);			
-		}
-	}
-	
 	private void updateRankings()
 	{	// process ranks
-		int[] ranks = currentMatch.getRanks();
-		ArrayList<Integer> tie = rankings.get(problematicTie);
-		rankings.remove(problematicTie);
+		Ranks matchRanks = currentMatch.getOrderedPlayers();
+		ArrayList<Profile> tie = ranks.getProfilesFromRank(problematicTie);
+		ranks.remove(problematicTie);
 		
-		// update rankings (hashmap)
+		// update rankings
 		for(int i=0;i<tie.size();i++)
-		{	int playerNumber = tie.get(i);
-			Profile profile = profiles.get(playerNumber);
-			int matchIndex = currentMatch.getProfiles().indexOf(profile);
-			int relativeRank = ranks[matchIndex];
+		{	Profile profile = tie.get(i);
+			int relativeRank = matchRanks.getRankFromProfile(profile);
 			int newRank = problematicTie-1 + relativeRank;
-			ArrayList<Integer> list = rankings.get(newRank);
+			ArrayList<Profile> list = ranks.getProfilesFromRank(newRank);
 			if(list==null)
-			{	list = new ArrayList<Integer>();
-				rankings.put(newRank,list);
-			}
-			list.add(playerNumber);
+				ranks.addProfile(newRank,profile);
+			else
+				list.add(profile);
 		}
 	}
 	
@@ -165,7 +149,7 @@ public class CupPart implements Serializable
 		int result = -1;
 		int i = 1;
 		while(i<=GameConstants.CONTROL_COUNT && result<0)
-		{	ArrayList<Integer> list = rankings.get(i);
+		{	ArrayList<Profile> list = ranks.getProfilesFromRank(i);
 			if(list!=null && list.size()>1)
 			{	int j = 0;
 				while(j<list.size() && result<0)
@@ -184,17 +168,12 @@ public class CupPart implements Serializable
 	}
 	
 	/////////////////////////////////////////////////////////////////
-	// RESULTS			/////////////////////////////////////////////
+	// RANKS			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	public int[] getOrderedPlayers()
-	{	int[] result = new int[profiles.size()];
-		for(Entry<Integer,ArrayList<Integer>> i: rankings.entrySet())
-		{	Integer r = i.getKey();
-			ArrayList<Integer> list = i.getValue();
-			for(Integer j: list)
-				result[r-1] = j; //NOTE on suppose qu'il n'y a plus de tie, à ce niveau
-		}
-		return result;
+	private Ranks ranks;
+	
+	public Ranks getOrderedPlayers()
+	{	return ranks;
 	}
 	
 	/////////////////////////////////////////////////////////////////
@@ -298,7 +277,6 @@ public class CupPart implements Serializable
 	/////////////////////////////////////////////////////////////////
 	// PLAYERS			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	private final ArrayList<Profile> profiles = new ArrayList<Profile>();
 	private final ArrayList<CupPlayer> players = new ArrayList<CupPlayer>();
 	
 	public ArrayList<CupPlayer> getPlayers()
@@ -312,42 +290,62 @@ public class CupPart implements Serializable
 	/////////////////////////////////////////////////////////////////
 	// PROFILES			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	public void addProfile(Profile profile)
-	{	profiles.add(profile);
+	/**
+	 * get the profile for the player whose index is indicated in parameter
+	 */
+	public Profile getProfileForIndex(int index)
+	{	Profile result = null;
+		CupPlayer player = players.get(index);
+		int previousRank = player.getRank();
+		int previousPartNumber = player.getPart();
+		// not the fiest leg
+		if(previousPartNumber>=0)
+		{	CupLeg previousLeg = leg.getPreviousLeg();
+			CupPart previousPart = previousLeg.getPart(previousPartNumber);
+			Ranks previousRanks = previousPart.getOrderedPlayers();
+			ArrayList<Profile> list = previousRanks.getProfilesFromRank(previousRank);
+			if(list!=null && list.size()==1)
+				result = list.get(0);
+		}
+		// first leg
+		else
+		{	ArrayList<Integer> firstLegPlayersdistribution = getTournament().getFirstLegPlayersdistribution();
+			int currentLegNumber = leg.getNumber();
+			int count = 0;
+			for(int i=0;i<currentLegNumber;i++)
+			{	int legCount = firstLegPlayersdistribution.get(i);
+				count = count + legCount;				
+			}
+			ArrayList<Profile> profiles = getTournament().getProfiles();
+			result = profiles.get(count+index);
+		}
+
+		return result;	
 	}	
 	
-	public ArrayList<Profile> getProfiles()
-	{	return profiles;	
-	}
-	
-	public Profile getProfileForRank(int rank)
-	{	int index = getIndexForRank(rank);
-		Profile result = null;
-		if(index>=0 && index<profiles.size())
-			result = profiles.get(index);
-		return result;
-	}
-	
 	/**
-	 * c pas vraiment le rank, c'est le rank + ex-aequo
+	 * process the next part for the player ranked at the indicated position
 	 * @param rank
 	 * @return
 	 */
-	public int getIndexForRank(int rank)
-	{	int result = -1;
-		Iterator<Entry<Integer,ArrayList<Integer>>> it = rankings.entrySet().iterator();
-		int cpt = 0;
-		while(cpt<rank && it.hasNext())
-		{	Entry<Integer,ArrayList<Integer>> entry = it.next();
-			ArrayList<Integer> list = entry.getValue();
-			Iterator<Integer> it2 = list.iterator();
-			while(cpt<rank && it2.hasNext())
-			{	cpt ++;
-				result = it2.next();
+	public CupPart getNextPartForRank(int rank)
+	{	CupPart result = null;
+		CupLeg nextLeg = leg.getNextLeg();
+	
+		// there is another leg coming
+		if(nextLeg!=null)
+		{	Iterator<CupPart> itPart = nextLeg.getParts().iterator();
+			while(itPart.hasNext() && result==null)
+			{	CupPart part = itPart.next();
+				Iterator<CupPlayer> itPlr = part.getPlayers().iterator();
+				while(itPlr.hasNext() && result==null)
+				{	CupPlayer player = itPlr.next();
+					if(player.getPart()==number && player.getRank()==rank)
+						result = part;
+				}
 			}
 		}
-		if(cpt<rank)
-			result = -1;
+
 		return result;
 	}
 }

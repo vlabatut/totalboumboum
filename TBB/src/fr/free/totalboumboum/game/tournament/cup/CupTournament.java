@@ -22,7 +22,6 @@ package fr.free.totalboumboum.game.tournament.cup;
  */
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Collections;
 import java.util.Comparator;
@@ -31,10 +30,12 @@ import java.util.Iterator;
 import java.util.Random;
 import java.util.Set;
 import java.util.TreeSet;
+import java.util.Map.Entry;
 
 import fr.free.totalboumboum.configuration.GameConstants;
 import fr.free.totalboumboum.configuration.profile.Profile;
 import fr.free.totalboumboum.game.match.Match;
+import fr.free.totalboumboum.game.rank.Ranks;
 import fr.free.totalboumboum.game.statistics.StatisticMatch;
 import fr.free.totalboumboum.game.statistics.StatisticTournament;
 import fr.free.totalboumboum.game.tournament.AbstractTournament;
@@ -58,10 +59,15 @@ public class CupTournament extends AbstractTournament
 		if(randomizeLegs)
 			randomizeLegs();
 		
+		// players distribution
+		int playerCount = profiles.size();
+		ArrayList<ArrayList<Integer>> distri = processPlayerDistribution(playerCount);		
+		firstLegPlayersdistribution = distri.get(0);
+				
+		
 		// NOTE vérifier si le nombre de joueurs sélectionnés correspond
 		currentIndex = 0;
 		currentLeg = legs.get(currentIndex);
-		initFirstLegProfiles();
 		currentLeg.init();
 		
 		stats = new StatisticTournament(this);
@@ -73,7 +79,6 @@ public class CupTournament extends AbstractTournament
 	{	if(currentLeg.isOver())
 		{	currentIndex++;
 			currentLeg = legs.get(currentIndex);
-			initLegProfiles();
 			currentLeg.init();
 		}
 		else
@@ -92,6 +97,7 @@ public class CupTournament extends AbstractTournament
 	// PLAYERS			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	private boolean randomizePlayers;
+	private ArrayList<Integer> firstLegPlayersdistribution;
 
 	public boolean isRandomizePlayers()
 	{	return randomizePlayers;
@@ -118,6 +124,11 @@ public class CupTournament extends AbstractTournament
 		}
 		return result;
 	}
+	
+	public 	ArrayList<Integer> getFirstLegPlayersdistribution()
+	{	return firstLegPlayersdistribution;		
+	}
+
 	
 	private ArrayList<ArrayList<Integer>> processPlayerDistribution(int playerCount)
 	{	int matches = legs.get(0).getParts().size();
@@ -232,74 +243,45 @@ for(ArrayList<Integer> list: permutations)
 		
 		return result;
 	}
-	
-	private void initFirstLegProfiles()
-	{	int playerCount = profiles.size();
-		ArrayList<ArrayList<Integer>> distri = processPlayerDistribution(playerCount);		
-		ArrayList<Integer> distribution = distri.get(0);
-		int p=0;
-		for(int i=0;i<distribution.size();i++)
-		{	int playerNbr = distribution.get(i);
-			CupPart part = currentLeg.getParts().get(i);
-			for(int j=0;j<playerNbr;j++)
-			{	Profile profile = profiles.get(p);
-				part.addProfile(profile);
-				p++;
-			}
-		}
-	}
-	
-	private void initLegProfiles()
-	{	CupLeg previousLeg = legs.get(currentIndex-1);
-		ArrayList<CupPart> parts = currentLeg.getParts();
-		for(CupPart part: parts)
-		{	for(CupPlayer player: part.getPlayers())
-			{	int previousPartNumber = player.getPart();
-				int previousRank = player.getRank();
-				CupPart previousPart = previousLeg.getPart(previousPartNumber);
-				Profile profile = previousPart.getProfileForRank(previousRank);
-				part.addProfile(profile);
-			}
-		}
-	}
 
 	/////////////////////////////////////////////////////////////////
 	// RESULTS			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 
 	@Override
-	public int[] getOrderedPlayers()
-	{	int[] result = new int[getProfiles().size()];
-		if(isOver())
-		{	Arrays.fill(result,-1);
-			CupLeg leg = legs.get(legs.size()-1);
-			int partRank = 1;
-			int playerRank = 1;
-			boolean found = true;
-			while(playerRank<=profiles.size()&& found)
-			{	found = false;
-				Iterator<CupPart> it = leg.getParts().iterator();
-				CupPart part = null;
-				while(it.hasNext() && !found)
-				{	part = it.next();
-					if(part.getRank()==partRank)
-						found = true;
-				}
-				if(found)
-				{	int[] orderedPlayers = part.getOrderedPlayers();
-					ArrayList<Profile> prof = part.getProfiles();
-					for(int k=0;k<orderedPlayers.length;k++)
-					{	int index = profiles.indexOf(prof.get(orderedPlayers[k]));
-						result[playerRank-1] = index;
-						playerRank++;
-					}				
-					partRank++;
-				}
+	public Ranks getOrderedPlayers()
+	{	Ranks result = new Ranks();		
+		ArrayList<Profile> ranked = new ArrayList<Profile>();
+		CupLeg leg = legs.get(legs.size()-1);
+		int partRank = 1;
+		int countPlayers = 0;
+		while(countPlayers<profiles.size())
+		{	CupPart part = leg.getPartFromRank(partRank);
+			// the part exists
+			if(part!=null)
+			{	int baseRank = countPlayers;
+				Ranks orderedPlayers = part.getOrderedPlayers();
+				for(Entry<Integer,ArrayList<Profile>> entry: orderedPlayers.getRanks().entrySet())
+				{	ArrayList<Profile> list = entry.getValue();
+					int r = entry.getKey()+baseRank;
+					for(Profile p: list)
+					{	result.addProfile(r,p);
+						countPlayers ++;
+						ranked.add(p);
+					}
+				}				
+				partRank++;
 			}
-		}
-		else
-		{	for(int i=0;i<result.length;i++)
-				result[i] = i;
+			// the part doesn't exist >> draw for all the remaining players
+			else
+			{	int r = countPlayers+1;
+				for(Profile p: profiles)
+				{	if(!ranked.contains(p))
+					{	result.addProfile(r,p);
+						countPlayers++;
+					}
+				}
+			}				
 		}
 		
 		return result;

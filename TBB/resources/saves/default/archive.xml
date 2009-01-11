@@ -2,24 +2,24 @@
 <archive xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="..\..\..\resources\schemas\archive.xsd">
 	<tournament name="Tournoi de Galatasaray 2" type="cup" />
 	<played matches="12" rounds="5" />
-	<dates start="2009-01-09T10:41:26" save="2009-01-09T14:29:44" />
+	<dates start="2009-01-10T12:35:29" save="2009-01-10T14:08:00" />
 	<players>
-		<player name="Akkaya+Danacioğlu" />
-		<player name="Çöremen+Küçükkarakürt" />
-		<player name="Altay+Basaranoğlu" />
-		<player name="Dayioğlugil+Geçkalan" />
-		<player name="Günalp+Yürtsever" />
-		<player name="Tırtıl+Tomruk" />
-		<player name="Promeneur 3" />
-		<player name="Demirağ+Şagar" />
-		<player name="Medeni+Uluer" />
-		<player name="Kökciyan+Mazmanoğlu" />
-		<player name="Bilgin+Karabağ" />
+		<player name="Adatepe" />
 		<player name="Akpolat+Şener" />
-		<player name="Erişik+Pektaş" />
-		<player name="Promeneur 2" />
+		<player name="Kökciyan+Mazmanoğlu" />
+		<player name="Çalışkan+Cap+Doğaner" />
+		<player name="Tırtıl+Tomruk" />
+		<player name="Altay+Basaranoğlu" />
 		<player name="Promeneur" />
+		<player name="Çöremen+Küçükkarakürt" />
+		<player name="Günalp+Yürtsever" />
+		<player name="Demirağ+Şagar" />
+		<player name="Bilgin+Karabağ" />
+		<player name="Dayioğlugil+Geçkalan" />
+		<player name="Akkaya+Danacioğlu" />
+		<player name="Erişik+Pektaş" />
 		<player name="Devecioğlu+Korkmaz" />
+		<player name="Medeni+Uluer" />
 	</players>
 </archive>
 

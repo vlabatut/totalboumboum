@@ -33,6 +33,7 @@ import javax.swing.SpringLayout;
 import javax.swing.SwingConstants;
 
 import fr.free.totalboumboum.configuration.profile.Profile;
+import fr.free.totalboumboum.game.rank.Ranks;
 import fr.free.totalboumboum.game.round.Round;
 import fr.free.totalboumboum.game.statistics.Score;
 import fr.free.totalboumboum.game.statistics.StatisticRound;
@@ -61,7 +62,7 @@ public class QuickResults extends JPanel
 		int height = dimen.height;
 		StatisticRound stats = round.getStats();
 		ArrayList<Profile> players = round.getProfiles();
-		int[] orderedPlayers = round.getOrderedPlayers();
+		Ranks orderedPlayers = round.getOrderedPlayers();
 		float[] points = stats.getPoints();
 		setAlignmentX(CENTER_ALIGNMENT);
 		setAlignmentY(CENTER_ALIGNMENT);
@@ -133,11 +134,12 @@ sc = "Time";
 		// data
 		{	int col = 0;
 			int line = 0;
-			for(int i=0;i<orderedPlayers.length;i++)
+			for(int i=0;i<points.length;i++)
 			{	// init
 				col = 0;
 				line++;
-				Profile profile = players.get(orderedPlayers[i]);
+				Profile profile = orderedPlayers.getProfileFromAbsoluteRank(i+1);
+				int profileIndex = players.indexOf(profile);
 				// color
 				Color clr = profile.getSpriteColor().getColor();
 				// name
@@ -171,12 +173,12 @@ sc = "Time";
 							break;
 					}
 */					
-sc = StringTools.formatTimeWithSeconds(stats.getScores(Score.TIME)[orderedPlayers[i]]);
+sc = StringTools.formatTimeWithSeconds(stats.getScores(Score.TIME)[profileIndex]);
 					String[] scores = 
-					{	nf.format(stats.getScores(Score.BOMBS)[orderedPlayers[i]]),
-						nf.format(stats.getScores(Score.ITEMS)[orderedPlayers[i]]),
-						nf.format(stats.getScores(Score.BOMBEDS)[orderedPlayers[i]]),
-						nf.format(stats.getScores(Score.BOMBINGS)[orderedPlayers[i]]),
+					{	nf.format(stats.getScores(Score.BOMBS)[profileIndex]),
+						nf.format(stats.getScores(Score.ITEMS)[profileIndex]),
+						nf.format(stats.getScores(Score.BOMBEDS)[profileIndex]),
+						nf.format(stats.getScores(Score.BOMBINGS)[profileIndex]),
 						sc
 					};
 					for(int j=0;j<scores.length;j++)
@@ -189,7 +191,7 @@ sc = StringTools.formatTimeWithSeconds(stats.getScores(Score.TIME)[orderedPlayer
 				}			
 				// points
 				{	JLabel pointsLabel = getLabel(line, col++);
-					double pts = points[orderedPlayers[i]];
+					double pts = points[profileIndex];
 					NumberFormat nf = NumberFormat.getInstance();
 					nf.setMaximumFractionDigits(2);
 					nf.setMinimumFractionDigits(0);

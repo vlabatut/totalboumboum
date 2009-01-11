@@ -67,7 +67,7 @@ public class LimitLoader
 		int threshold = Integer.parseInt(str);
 		// comparator
 		str = thresholdElt.getAttribute(XmlTools.ATT_COMPARATOR).getValue();
-		ComparatorCode comparatorCode = ComparatorCode.valueOf(str.toUpperCase(Locale.ENGLISH));
+		Comparisons comparatorCode = Comparisons.valueOf(str.toUpperCase(Locale.ENGLISH));
 		// result
 		LimitConfrontation result = new LimitConfrontation(threshold,comparatorCode,pointProcessor);
 		return result;
@@ -80,7 +80,7 @@ public class LimitLoader
 		float threshold = Float.parseFloat(str);
 		// comparator
 		str = thresholdElt.getAttribute(XmlTools.ATT_COMPARATOR).getValue();
-		ComparatorCode comparatorCode = ComparatorCode.valueOf(str.toUpperCase(Locale.ENGLISH));
+		Comparisons comparatorCode = Comparisons.valueOf(str.toUpperCase(Locale.ENGLISH));
 		// point processor
     	Element thresholdPointProcessorElt = root.getChild(XmlTools.ELT_SOURCE);
 		PointsProcessor thresholdPointProcessor = PointsProcessorLoader.loadPointProcessorFromElement(thresholdPointProcessorElt,folder);
@@ -96,7 +96,7 @@ public class LimitLoader
 		long threshold = Long.parseLong(str);
 		// comparator
 		str = thresholdElt.getAttribute(XmlTools.ATT_COMPARATOR).getValue();
-		ComparatorCode comparatorCode = ComparatorCode.valueOf(str.toUpperCase(Locale.ENGLISH));
+		Comparisons comparatorCode = Comparisons.valueOf(str.toUpperCase(Locale.ENGLISH));
 		// score
 		str = root.getAttribute(XmlTools.ATT_TYPE).getValue();
 		Score score  = Score.valueOf(str.toUpperCase(Locale.ENGLISH).trim());
@@ -112,7 +112,7 @@ public class LimitLoader
 		long threshold = Long.parseLong(str);
 		// comparator
 		str = thresholdElt.getAttribute(XmlTools.ATT_COMPARATOR).getValue();
-		ComparatorCode comparatorCode = ComparatorCode.valueOf(str.toUpperCase(Locale.ENGLISH));
+		Comparisons comparatorCode = Comparisons.valueOf(str.toUpperCase(Locale.ENGLISH));
 		// result
 		LimitTime result = new LimitTime(threshold,comparatorCode,pointProcessor);
 		return result;
@@ -125,7 +125,7 @@ public class LimitLoader
 		int threshold = Integer.parseInt(str);
 		// comparator
 		str = thresholdElt.getAttribute(XmlTools.ATT_COMPARATOR).getValue();
-		ComparatorCode comparatorCode = ComparatorCode.valueOf(str.toUpperCase(Locale.ENGLISH));
+		Comparisons comparatorCode = Comparisons.valueOf(str.toUpperCase(Locale.ENGLISH));
 		// result
 		LimitLastStanding result = new LimitLastStanding(threshold,comparatorCode,pointProcessor);
 		return result;

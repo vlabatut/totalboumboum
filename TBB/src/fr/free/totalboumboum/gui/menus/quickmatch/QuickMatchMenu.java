@@ -43,7 +43,7 @@ import fr.free.totalboumboum.configuration.profile.Profile;
 import fr.free.totalboumboum.configuration.profile.ProfilesConfiguration;
 import fr.free.totalboumboum.configuration.profile.ProfilesSelection;
 import fr.free.totalboumboum.engine.container.level.HollowLevel;
-import fr.free.totalboumboum.game.limit.ComparatorCode;
+import fr.free.totalboumboum.game.limit.Comparisons;
 import fr.free.totalboumboum.game.limit.LimitConfrontation;
 import fr.free.totalboumboum.game.limit.LimitLastStanding;
 import fr.free.totalboumboum.game.limit.LimitPoints;
@@ -257,14 +257,14 @@ public class QuickMatchMenu extends InnerMenuPanel implements DataPanelListener
 			// round limit
 			{	int roundsLimit = quickMatchConfiguration.getLimitRounds();
 				if(roundsLimit>0)
-				{	MatchLimit limit = new LimitConfrontation(roundsLimit,ComparatorCode.GREATEREQ,pointsProcessor);
+				{	MatchLimit limit = new LimitConfrontation(roundsLimit,Comparisons.GREATEREQ,pointsProcessor);
 					limits.addLimit(limit);
 				}
 			}
 			// points limit
 			{	int pointsLimit = quickMatchConfiguration.getLimitPoints();
 				if(pointsLimit>0)
-				{	MatchLimit limit = new LimitPoints(pointsLimit,ComparatorCode.GREATEREQ,pointsProcessor,pointsProcessor);
+				{	MatchLimit limit = new LimitPoints(pointsLimit,Comparisons.GREATEREQ,pointsProcessor,pointsProcessor);
 					limits.addLimit(limit);
 				}
 			}
@@ -290,18 +290,18 @@ public class QuickMatchMenu extends InnerMenuPanel implements DataPanelListener
 			{	// time limit
 				RoundLimit limit;
 				if(draw==QuickMatchDraw.TIME || draw==QuickMatchDraw.BOTH)
-					limit = new LimitTime(time,ComparatorCode.GREATEREQ,drawPP);
+					limit = new LimitTime(time,Comparisons.GREATEREQ,drawPP);
 				else
-					limit = new LimitTime(time,ComparatorCode.GREATEREQ,normalPP);
+					limit = new LimitTime(time,Comparisons.GREATEREQ,normalPP);
 				limits.addLimit(limit);						
 			}
 			{	// last standing limit
 				RoundLimit limit;
 				if(draw==QuickMatchDraw.AUTOKILL || draw==QuickMatchDraw.BOTH)
-				{	limit = new LimitLastStanding(0,ComparatorCode.LESSEQ,drawPP);
+				{	limit = new LimitLastStanding(0,Comparisons.LESSEQ,drawPP);
 					limits.addLimit(limit);
 				}
-				limit = new LimitLastStanding(1,ComparatorCode.LESSEQ,normalPP);
+				limit = new LimitLastStanding(1,Comparisons.LESSEQ,normalPP);
 				limits.addLimit(limit);
 			}
 			// random location
