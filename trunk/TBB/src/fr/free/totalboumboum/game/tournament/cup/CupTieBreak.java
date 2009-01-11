@@ -3,11 +3,11 @@ package fr.free.totalboumboum.game.tournament.cup;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.HashMap;
 
 import fr.free.totalboumboum.configuration.profile.Profile;
 import fr.free.totalboumboum.game.match.Match;
 import fr.free.totalboumboum.game.points.PointsRankings;
+import fr.free.totalboumboum.game.rank.Ranks;
 
 /*
  * Total Boum Boum
@@ -64,17 +64,13 @@ public class CupTieBreak implements Serializable
 	{	return match;
 	}
 	
+	@SuppressWarnings("unchecked")
 	public Match initMatch()
 	{	// involved players
-		ArrayList<Profile> partProfiles = part.getProfiles();
-		ArrayList<Profile> profiles = new ArrayList<Profile>();
-		HashMap<Integer,ArrayList<Integer>> rankings = part.getRankings();
+		Ranks ranks = part.getOrderedPlayers();
 		int problematicTie = part.getProblematicTie();
-		ArrayList<Integer> tie = rankings.get(problematicTie);
-		for(Integer i: tie)
-		{	Profile p = partProfiles.get(i);
-			profiles.add(p);			
-		}
+		ArrayList<Profile> tie = ranks.getProfilesFromRank(problematicTie);
+		ArrayList<Profile> profiles = (ArrayList<Profile>)tie.clone();
 		
 		// init match 
 		Match result = match.copy();
@@ -103,13 +99,10 @@ public class CupTieBreak implements Serializable
 			result = true;
 		else
 		{	// profiles of the tied players
-			ArrayList<Profile> partProfiles = part.getProfiles();
-			HashMap<Integer,ArrayList<Integer>> rankings = part.getRankings();
-			ArrayList<Integer> tie = rankings.get(problematicTie);
+			Ranks ranks = part.getOrderedPlayers();
+			ArrayList<Profile> tie = ranks.getProfilesFromRank(problematicTie);
 			int tiedPlayersCount = tie.size();
-			ArrayList<Profile> tiedProfiles = new ArrayList<Profile>();
-			for(Integer i: tie)
-				tiedProfiles.add(partProfiles.get(i));
+			ArrayList<Profile> tiedProfiles = (ArrayList<Profile>)tie;
 			
 			// tournament-relative numbers of the tied players
 			CupTournament tournament = part.getTournament();
@@ -137,13 +130,11 @@ public class CupTieBreak implements Serializable
 			for(int i=0;i<relativeRanks.length;i++)
 			{	if(relativeRanks[i]!=problematicTie)
 				{	// delete old rank
-					int playerNumber = tie.get(i);
-					tie.remove(playerNumber);
+					Profile profile = tie.get(i);
+					tie.remove(profile);
 					// insert new rank
 					int newRank = relativeRanks[i];
-					ArrayList<Integer> list = new ArrayList<Integer>();
-					list.add(playerNumber);
-					rankings.put(newRank,list);
+					ranks.addProfile(newRank,profile);
 				}				
 			}
 			

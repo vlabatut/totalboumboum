@@ -25,17 +25,14 @@ import java.awt.Color;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.Map.Entry;
 
 import javax.swing.JLabel;
 
 import fr.free.totalboumboum.configuration.profile.Profile;
+import fr.free.totalboumboum.game.rank.Ranks;
 import fr.free.totalboumboum.game.tournament.cup.CupLeg;
 import fr.free.totalboumboum.game.tournament.cup.CupPart;
 import fr.free.totalboumboum.game.tournament.cup.CupPlayer;
-import fr.free.totalboumboum.game.tournament.cup.CupTournament;
 import fr.free.totalboumboum.gui.common.structure.subpanel.EntitledSubPanelLines;
 import fr.free.totalboumboum.gui.common.structure.subpanel.Line;
 import fr.free.totalboumboum.gui.data.configuration.GuiConfiguration;
@@ -189,63 +186,30 @@ public class PartSubPanel extends EntitledSubPanelLines implements MouseListener
 	{	String text;
 		String tooltip;
 		Color bg;
-				
-		ArrayList<Profile> profiles = part.getProfiles();
-		int index = getPlayerForLine(line);
-		// profile should be known
-		if(profiles.size()>0)
-		{	// profile known
-			if(index!=-1 && profiles.size()>index)
-			{	Profile profile = profiles.get(index);
-				Color clr = profile.getSpriteColor().getColor();
-				int alpha = GuiTools.ALPHA_TABLE_REGULAR_BACKGROUND_LEVEL3;
-				bg = new Color(clr.getRed(),clr.getGreen(),clr.getBlue(),alpha);
-				text = profile.getName();
-				tooltip = text;
-			}
-			// not enough profiles
-			else
-			{	bg = GuiTools.COLOR_TABLE_REGULAR_BACKGROUND;
-				text = "-";
-				tooltip = null;
-			}			
+			
+		Profile profile = getProfileForLine(line);
+		// profile known
+		if(profile!=null)
+		{	Color clr = profile.getSpriteColor().getColor();
+			int alpha = GuiTools.ALPHA_TABLE_REGULAR_BACKGROUND_LEVEL3;
+			bg = new Color(clr.getRed(),clr.getGreen(),clr.getBlue(),alpha);
+			text = profile.getName();
+			tooltip = text;
 		}
-		// profile not known yet
+		// profile unknown yet
 		else
-		{	// maybe the part from the previous leg is over
-			CupLeg leg = part.getLeg();
-			int previousLegNumber = leg.getNumber()-1;
-			CupPlayer p = part.getPlayers().get(index);
-			int previousPartNumber = p.getPart();
-			int previousRank = p.getRank();
-			CupTournament tournament = part.getTournament();
-			Profile profile = null;
-			if(previousLegNumber>=0)
-			{	CupPart previousPart = tournament.getLeg(previousLegNumber).getPart(previousPartNumber);
-				HashMap<Integer,ArrayList<Integer>> rkgs = previousPart.getRankings();
-				ArrayList<Integer> tie = rkgs.get(previousRank);
-				if(tie!=null && tie.size()==1)
-					profile = previousPart.getProfileForRank(previousRank);
-			}
-			if(profile!=null)
-			{	Color clr = profile.getSpriteColor().getColor();
-				int alpha = GuiTools.ALPHA_TABLE_REGULAR_BACKGROUND_LEVEL3;
-				bg = new Color(clr.getRed(),clr.getGreen(),clr.getBlue(),alpha);
-				text = profile.getName();
-				tooltip = text;
-			}
-			// or maybe not
+		{	bg = GuiTools.COLOR_TABLE_REGULAR_BACKGROUND;
+			String key = GuiKeys.COMMON_PART_UNDECIDED;
+			text = GuiConfiguration.getMiscConfiguration().getLanguage().getText(key);
+			CupLeg previousLeg = part.getLeg().getPreviousLeg();
+			if(previousLeg==null)
+				tooltip = null;
 			else
-			{	bg = GuiTools.COLOR_TABLE_REGULAR_BACKGROUND;
-				String key = GuiKeys.COMMON_PART_UNDECIDED;
-				text = GuiConfiguration.getMiscConfiguration().getLanguage().getText(key);
-				if(previousLegNumber<0)
-					tooltip = null;
-				else
-				{	CupLeg previousLeg = tournament.getLegs().get(previousLegNumber);
-					String partName = previousLeg.getPart(previousPartNumber).getName();
-					tooltip = partName+":"+previousRank;						
-				}
+			{	CupPlayer player = part.getPlayers().get(line-1);
+				int previousPartNumber = player.getPart();
+				int previousRank = player.getRank();
+				String partName = previousLeg.getPart(previousPartNumber).getName();
+				tooltip = partName+":"+previousRank;						
 			}
 		}
 
@@ -260,10 +224,11 @@ public class PartSubPanel extends EntitledSubPanelLines implements MouseListener
 	 * @param line
 	 * @return
 	 */
-	private int getPlayerForLine(int line)
-	{	int result = part.getIndexForRank(line);
-		if(result==-1)
-			result = line - 1;
+	private Profile getProfileForLine(int line)
+	{	Ranks ranks = part.getOrderedPlayers();
+		Profile result = ranks.getProfileFromAbsoluteRank(line);
+		if(result==null)
+			result = part.getProfileForIndex(line-1);
 		return result;
 	}
 	
@@ -277,14 +242,10 @@ public class PartSubPanel extends EntitledSubPanelLines implements MouseListener
 		String tooltip;
 		Color bg;
 
-		ArrayList<Profile> profiles = part.getProfiles();
-		HashMap<Integer,ArrayList<Integer>> rankings = part.getRankings();
-		int index = getPlayerForLine(line);
-		
+		Profile profile = getProfileForLine(line);		
 		// color
-		if(profiles.size()>index)
-		{	Profile profile = profiles.get(index);
-			Color clr = profile.getSpriteColor().getColor();
+		if(profile!=null)
+		{	Color clr = profile.getSpriteColor().getColor();
 			int alpha = GuiTools.ALPHA_TABLE_REGULAR_BACKGROUND_LEVEL3;
 			bg = new Color(clr.getRed(),clr.getGreen(),clr.getBlue(),alpha);					
 		}
@@ -292,27 +253,15 @@ public class PartSubPanel extends EntitledSubPanelLines implements MouseListener
 			bg = GuiTools.COLOR_TABLE_REGULAR_BACKGROUND;
 
 		// rank
-		if(rankings.size()>0)
-		{	Iterator<Entry<Integer,ArrayList<Integer>>> it = rankings.entrySet().iterator();
-			int rk = -1;
-			while(rk<0 && it.hasNext())
-			{	Entry<Integer,ArrayList<Integer>> entry = it.next();
-				ArrayList<Integer> list = entry.getValue();
-				if(list.contains(index))
-					rk = entry.getKey();
-			}
-			if(rk==-1)
-			{	text = "-";
-				tooltip = null;
-			}
-			else
-			{	text = Integer.toString(rk);
-				tooltip = text;
-			}
-		}
-		else
+		Ranks ranks = part.getOrderedPlayers();
+		int rk = ranks.getRankFromProfile(profile);
+		if(rk==-1)
 		{	text = "-";
 			tooltip = null;
+		}
+		else
+		{	text = Integer.toString(rk);
+			tooltip = text;
 		}
 
 		// set content
@@ -397,18 +346,16 @@ public class PartSubPanel extends EntitledSubPanelLines implements MouseListener
 		if(pos==null)
 			fireTitleClicked(part);
 		else
-		{	int index = getPlayerForLine(pos[0]);
+		{	Profile profile = getProfileForLine(pos[0]);
 			switch(pos[1])
 			{	// before button
 				case COL_BEFORE:
 					{	CupLeg leg = part.getLeg();
-						int previousLegNumber = leg.getNumber()-1;
-						CupPlayer p = part.getPlayers().get(index);
-						int partNumber = p.getPart();
-						CupTournament tournament = part.getTournament();
+						CupLeg previousLeg = leg.getPreviousLeg();
 						// doesn't work for the first leg 
-						if(previousLegNumber>=0)
-						{	CupLeg previousLeg = tournament.getLegs().get(previousLegNumber);
+						if(previousLeg!=null)
+						{	CupPlayer p = part.getPlayerForProfile(profile);
+							int partNumber = p.getPart();
 							CupPart previousPart = previousLeg.getPart(partNumber);
 							fireBeforeClicked(previousPart);
 						}
@@ -416,44 +363,10 @@ public class PartSubPanel extends EntitledSubPanelLines implements MouseListener
 					break;
 				// after button
 				case COL_AFTER:
-					{	HashMap<Integer,ArrayList<Integer>> rankings = part.getRankings();
-						// works only if there are rankings
-						if(rankings.size()>0)
-						{	// look fot this player's ranking
-							Iterator<Entry<Integer,ArrayList<Integer>>> it = rankings.entrySet().iterator();
-							int rk = -1;
-							while(rk<0 && it.hasNext())
-							{	Entry<Integer,ArrayList<Integer>> entry = it.next();
-								ArrayList<Integer> list = entry.getValue();
-								if(list.contains(index))
-									rk = entry.getKey();							
-							}
-							// works only if the player isn't tied to others
-							if(rk>=0 && rankings.get(rk).size()==1)
-							{	int partNumber = part.getNumber();
-								int legNumber = part.getLeg().getNumber();
-								int nextLegNumber = legNumber+1;
-								CupTournament tournament = part.getTournament();
-								// works only if it wasn't the last leg
-								if(tournament.getLegs().size()>nextLegNumber)
-								{	CupLeg nextLeg = tournament.getLeg(nextLegNumber);
-									CupPart nextPart = null;
-									ArrayList<CupPart> parts = nextLeg.getParts();
-									Iterator<CupPart> iter = parts.iterator();
-									while(iter.hasNext() && nextPart==null)
-									{	CupPart part = iter.next();
-										Iterator<CupPlayer> itp = part.getPlayers().iterator();
-										while(itp.hasNext() && nextPart==null)
-										{	CupPlayer plyr = itp.next();
-											if(plyr.getPart()==partNumber && plyr.getRank()==rk)
-												nextPart = part;										
-										}
-									}
-									// works only if there's a part using the player
-									if(nextPart!=null)
-										firePartAfterClicked(nextPart);
-								}
-							}
+					{	if(profile!=null)
+						{	CupPart nextPart = part.getNextPartForRank(pos[0]);
+							if(nextPart!=null)
+								firePartAfterClicked(nextPart);
 						}
 					}
 					break;
