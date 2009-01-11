@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <round
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
-	xsi:noNamespaceSchemaLocation="../../schemas/round.xsd">
+	xsi:noNamespaceSchemaLocation="../../../../schemas/round.xsd">
 	
  	<notes>
  		<line value="Here goes a short description of the round." />

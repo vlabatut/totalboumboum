@@ -24,6 +24,7 @@ package fr.free.totalboumboum.game.match;
 import java.io.IOException;
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Collections;
 import java.util.GregorianCalendar;
@@ -40,6 +41,7 @@ import fr.free.totalboumboum.configuration.GameConstants;
 import fr.free.totalboumboum.configuration.profile.Profile;
 import fr.free.totalboumboum.game.limit.Limits;
 import fr.free.totalboumboum.game.limit.MatchLimit;
+import fr.free.totalboumboum.game.rank.Ranks;
 import fr.free.totalboumboum.game.round.Round;
 import fr.free.totalboumboum.game.statistics.StatisticHolder;
 import fr.free.totalboumboum.game.statistics.StatisticMatch;
@@ -209,17 +211,11 @@ public class Match implements StatisticHolder, Serializable
 	 * eg: {1,3,2} means the player 0 came first, player 1 came 
 	 * third and player 2 came second
 	 */
-	public int[] getRanks()
+	private int[] getRanks(float[] pts)
 	{	int[] result = new int[getProfiles().size()];
 		for(int i=0;i<result.length;i++)
 			result[i] = 1;
 
-		float[] pts;
-		if(isOver())
-			pts = stats.getPoints();
-		else
-			pts = stats.getTotal();
-		
 		for(int i=0;i<result.length-1;i++)
 		{	for(int j=i+1;j<result.length;j++)
 			{	if(pts[i]<pts[j])
@@ -232,23 +228,51 @@ public class Match implements StatisticHolder, Serializable
 		return result;
 	}
 	
-	/**
-	 * process the players' numbers in function of their rank in this match.
-	 * eg: {0,2,1,3} means player 0 is first, player 2 is second,
-	 * player 1 is third and player 3 is fourth. 
-	 */
-	public int[] getOrderedPlayers()
-	{	int[] result = new int[getProfiles().size()];
-		int[] ranks = getRanks();
-		int done = 0;
-		for(int i=1;i<=result.length;i++)
-		{	for(int j=0;j<ranks.length;j++)
-			{	if(ranks[j]==i)
-				{	result[done] = j;
-					done++;
-				}
-			}
+	public Ranks getOrderedPlayers()
+	{	Ranks result = new Ranks();
+		// points
+		float[] points = stats.getPoints();
+		float[] total = stats.getTotal();
+		// ranks
+		int ranks[];
+		int ranks2[];
+		if(isOver())
+		{	ranks = getRanks(points);
+			ranks2 = getRanks(total);
 		}
+		else
+		{	ranks = getRanks(total);
+			ranks2 = new int[ranks.length];
+			Arrays.fill(ranks2,0);
+		}
+		// result
+		for(int i=0;i<ranks.length;i++)
+		{	int rank = ranks[i];
+			int rank2 = ranks2[i];
+			Profile profile = getProfiles().get(i);
+			ArrayList<Profile> list = result.getProfilesFromRank(rank);
+			int index = -1;
+			// if no list yet : regular insertion
+			if(list==null)
+			{	result.addProfile(rank,profile);
+				index = 0;
+			}
+			// if list : insert at right place considering total points
+			else
+			{	int j = 0;
+				while(j<list.size() && index==-1)
+				{	Profile profileB = list.get(j);
+					int plrIdx = getProfiles().indexOf(profileB);
+					int rank2B = ranks2[plrIdx];
+					if(rank2<rank2B)
+						index = j;
+					else
+						j++;
+				}				
+				list.add(index,profile);
+			}			
+		}
+			
 		return result;
 	}
 

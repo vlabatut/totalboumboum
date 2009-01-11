@@ -21,9 +21,13 @@ package fr.free.totalboumboum.game.tournament.single;
  * 
  */
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Set;
 
+import fr.free.totalboumboum.configuration.profile.Profile;
 import fr.free.totalboumboum.game.match.Match;
+import fr.free.totalboumboum.game.rank.Ranks;
 import fr.free.totalboumboum.game.statistics.StatisticMatch;
 import fr.free.totalboumboum.game.statistics.StatisticTournament;
 import fr.free.totalboumboum.game.tournament.AbstractTournament;
@@ -98,7 +102,7 @@ public class SingleTournament extends AbstractTournament
 	// RESULTS			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 
-	public int[] getRanks(float[] pts)
+	private int[] getRanks(float[] pts)
 	{	int[] result = new int[getProfiles().size()];
 		for(int i=0;i<result.length;i++)
 			result[i] = 1;
@@ -115,23 +119,51 @@ public class SingleTournament extends AbstractTournament
 		return result;
 	}
 	
-	public int[] getOrderedPlayers()
-	{	float[] pts;
+	public Ranks getOrderedPlayers()
+	{	Ranks result = new Ranks();
+		// points
+		float[] points = stats.getPoints();
+		float[] total = stats.getTotal();
+		// ranks
+		int ranks[];
+		int ranks2[];
 		if(isOver())
-			pts = stats.getPoints();
-		else
-			pts = stats.getTotal();
-		int[] result = new int[getProfiles().size()];
-		int[] ranks = getRanks(pts);
-		int done = 0;
-		for(int i=1;i<=result.length;i++)
-		{	for(int j=0;j<ranks.length;j++)
-			{	if(ranks[j]==i)
-				{	result[done] = j;
-					done++;
-				}
-			}
+		{	ranks = getRanks(points);
+			ranks2 = getRanks(total);
 		}
+		else
+		{	ranks = getRanks(total);
+			ranks2 = new int[ranks.length];
+			Arrays.fill(ranks2,0);
+		}
+		// result
+		for(int i=0;i<ranks.length;i++)
+		{	int rank = ranks[i];
+			int rank2 = ranks2[i];
+			Profile profile = getProfiles().get(i);
+			ArrayList<Profile> list = result.getProfilesFromRank(rank);
+			int index = -1;
+			// if no list yet : regular insertion
+			if(list==null)
+			{	result.addProfile(rank,profile);
+				index = 0;
+			}
+			// if list : insert at right place considering total points
+			else
+			{	int j = 0;
+				while(j<list.size() && index==-1)
+				{	Profile profileB = list.get(j);
+					int plrIdx = getProfiles().indexOf(profileB);
+					int rank2B = ranks2[plrIdx];
+					if(rank2<rank2B)
+						index = j;
+					else
+						j++;
+				}				
+				list.add(index,profile);
+			}			
+		}
+			
 		return result;
 	}
 }

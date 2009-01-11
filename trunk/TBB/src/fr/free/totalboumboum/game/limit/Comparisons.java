@@ -1,6 +1,6 @@
 package fr.free.totalboumboum.game.limit;
 
-public enum ComparatorCode
+public enum Comparisons
 {
 	EQUAL,GREATER,LESS,GREATEREQ,LESSEQ
 }

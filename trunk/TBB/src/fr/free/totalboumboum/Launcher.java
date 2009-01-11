@@ -811,19 +811,25 @@ public class Launcher
 	 * + beta.010
 	 * - nouveauté : tournoi de type coupe
 	 * - nouveauté : GUI du tournoi-coupe
-	 * - correction : possibilité de conflit dans les controles quand les joueurs d'un match sont différents de ceux d'un tournoi (ex: coupe)
+	 * - correction : possibilité de conflit dans les controles quand les joueurs d'un match sont différents de ceux d'un tournoi (ex: coupe) >> test et reinit en début de match
+	 * - modification : définition d'une classe spéciale pour représenter le classement à l'issue d'une confrontation
 	 * 
-	 * *******************************************************
-	 * *********************** A FAIRE ***********************
-	 * *******************************************************
 	 * 
-	 * - bug quand il manque un joueur, car son profil est nul est du cp ça pose des pb de correspondance entre les CupPlayers, et tout ça
 	 * 
 	 * - lors du calcul des points, il faut forcer la présence d'un classement: ça facilite énormément de traitements en aval
 	 *   au pire, si le classement est inutile (ex: simple total), on définit un classement-identité (pts utilisés pr le classement <=> pts marqués)
 	 * - ça serait bien que les joueurs soient affichés dans l'ordre relatif aux points de la limite rencontrée
 	 *   voire on définit explicitement un ordre d'affichage dans la compétition
 	 * - faut afficher explicitement le classement à la fin d'une confrontation
+	 * - dans les résultats :
+	 * 		- afficher par défaut les 4 scores de base
+	 * 		- plus les scores utilisés dans les points et/ou les limites
+	 * 		- si les limites utilisent des points custom, les afficher aussi
+	 * *******************************************************
+	 * *********************** A FAIRE ***********************
+	 * *******************************************************
+	 * 
+	 * - bug quand il manque un joueur, car son profil est nul est du cp ça pose des pb de correspondance entre les CupPlayers, et tout ça
 	 * 
 	 * - profils: simplifier, pas besoin de la double représentation default+selected.
 	 * - réorganiser par rapport aux besoins: joueur pdt le jeu, joueur chargé en dehors du jeu, joueur pas chargé ?
@@ -847,11 +853,6 @@ public class Launcher
 	 * - tournoi : 1) on choisit les paramètres 2) on choisit les joueurs, le jeu restreint leur nombre pr qu'il soit compatible avec le tournoi, et restreint aussi les IA pour les mêmes raisons
 	 * 
 	 * - besoin d'une méthode permettant d'exporter un tournoi/match/round, ie de l'écrire entièrement en local (pas de référence à des composants existants)
-	 * 
-	 * - dans les résultats :
-	 * 		- afficher par défaut les 4 scores de base
-	 * 		- plus les scores utilisés dans les points et/ou les limites
-	 * 		- si les limites utilisent des points custom, les afficher aussi
 	 * 
 	 * - bug d'affichage dans les notes d'IA, les accents sont affichés avec la police par défaut
 	 * 

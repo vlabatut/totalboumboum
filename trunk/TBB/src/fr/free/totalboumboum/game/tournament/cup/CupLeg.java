@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Collections;
 import java.util.GregorianCalendar;
+import java.util.Iterator;
 import java.util.Random;
 
 /*
@@ -27,7 +28,6 @@ import java.util.Random;
  * along with Total Boum Boum.  If not, see <http://www.gnu.org/licenses/>.
  * 
  */
-
 
 public class CupLeg implements Serializable
 {	private static final long serialVersionUID = 1L;
@@ -72,6 +72,24 @@ public class CupLeg implements Serializable
 			setOver(true);			
 	}
 
+	/////////////////////////////////////////////////////////////////
+	// LEG				/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	public CupLeg getPreviousLeg()
+	{	CupLeg result = null;
+		if(number>0)
+			result = tournament.getLeg(number-1);
+		return result;
+	}
+	
+	public CupLeg getNextLeg()
+	{	CupLeg result = null;
+		if(number<tournament.getLegs().size()-1)
+			result = tournament.getLeg(number+1);
+		return result;
+	}
+	
+	
 	/////////////////////////////////////////////////////////////////
 	// OVER				/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
@@ -135,6 +153,17 @@ public class CupLeg implements Serializable
 	{	this.randomizeParts = randomizeParts;
 	}
 
+	public CupPart getPartFromRank(int rank)
+	{	CupPart result = null;
+		Iterator<CupPart> it = parts.iterator();
+		while(it.hasNext() && result==null)
+		{	CupPart part = it.next();
+			if(part.getRank()==rank)
+				result = part;
+		}
+		return result;
+	}
+	
 	/////////////////////////////////////////////////////////////////
 	// NUMBER			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////

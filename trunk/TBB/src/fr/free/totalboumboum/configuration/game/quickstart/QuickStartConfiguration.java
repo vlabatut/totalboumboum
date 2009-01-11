@@ -30,7 +30,7 @@ import javax.xml.parsers.ParserConfigurationException;
 import org.xml.sax.SAXException;
 
 import fr.free.totalboumboum.configuration.profile.ProfilesSelection;
-import fr.free.totalboumboum.game.limit.ComparatorCode;
+import fr.free.totalboumboum.game.limit.Comparisons;
 import fr.free.totalboumboum.game.limit.LimitConfrontation;
 import fr.free.totalboumboum.game.limit.Limits;
 import fr.free.totalboumboum.game.limit.MatchLimit;
@@ -116,7 +116,7 @@ public class QuickStartConfiguration
 		{	// limits
 			PointsProcessor pointProcessor = new PointsTotal();
 			Limits<MatchLimit> limits = new Limits<MatchLimit>();
-			MatchLimit limit = new LimitConfrontation(1,ComparatorCode.GREATEREQ,pointProcessor);
+			MatchLimit limit = new LimitConfrontation(1,Comparisons.GREATEREQ,pointProcessor);
 			limits.addLimit(limit);
 			match.setLimits(limits);
 		}

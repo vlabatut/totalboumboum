@@ -36,7 +36,7 @@ import fr.free.totalboumboum.game.statistics.StatisticHolder;
 public class LimitLastStanding implements RoundLimit
 {	private static final long serialVersionUID = 1L;
 
-	public LimitLastStanding(int threshold, ComparatorCode comparatorCode, PointsProcessor pointProcessor)
+	public LimitLastStanding(int threshold, Comparisons comparatorCode, PointsProcessor pointProcessor)
 	{	this.threshold = threshold;
 		this.comparatorCode = comparatorCode;
 		this.pointProcessor = pointProcessor;
@@ -46,7 +46,7 @@ public class LimitLastStanding implements RoundLimit
 	// THRESHOLD		/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	private int threshold;
-	private ComparatorCode comparatorCode;
+	private Comparisons comparatorCode;
 	
 	public int getThreshold()
 	{	return threshold;
@@ -56,11 +56,11 @@ public class LimitLastStanding implements RoundLimit
 	{	this.threshold = threshold;
 	}
 
-	public ComparatorCode getSupLimit()
+	public Comparisons getSupLimit()
 	{	return comparatorCode;
 	}
 	
-	public void setsupLimit(ComparatorCode comparatorCode)
+	public void setsupLimit(Comparisons comparatorCode)
 	{	this.comparatorCode = comparatorCode;
 	}
 
