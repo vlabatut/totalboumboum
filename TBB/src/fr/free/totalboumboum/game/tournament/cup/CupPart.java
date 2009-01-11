@@ -290,6 +290,20 @@ public class CupPart implements Serializable
 	/////////////////////////////////////////////////////////////////
 	// PROFILES			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
+	
+	public CupPlayer getPlayerForProfile(Profile profile)
+	{	CupPlayer result = null;
+		int i = 0;
+		while(i<players.size() && result==null)
+		{	CupPlayer player = players.get(i);
+			if(getProfileForIndex(i)==profile)
+				result = player;
+			else
+				i++;
+		}
+		return result;
+	}
+	
 	/**
 	 * get the profile for the player whose index is indicated in parameter
 	 */
@@ -298,7 +312,7 @@ public class CupPart implements Serializable
 		CupPlayer player = players.get(index);
 		int previousRank = player.getRank();
 		int previousPartNumber = player.getPart();
-		// not the fiest leg
+		// not the first leg
 		if(previousPartNumber>=0)
 		{	CupLeg previousLeg = leg.getPreviousLeg();
 			CupPart previousPart = previousLeg.getPart(previousPartNumber);
