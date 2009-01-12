@@ -1,9 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <archive xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="..\..\..\resources\schemas\archive.xsd">
+<<<<<<< .mine
+	<tournament name="Tournament-simple de test" type="single" />
+	<played matches="1" rounds="5" />
+	<dates start="2009-01-09T16:47:39" save="2009-01-09T16:53:44" />
+=======
 	<tournament name="Tournoi de Galatasaray 2" type="cup" />
 	<played matches="12" rounds="5" />
 	<dates start="2009-01-10T12:35:29" save="2009-01-10T14:08:00" />
+>>>>>>> .r1100
 	<players>
+<<<<<<< .mine
+=======
 		<player name="Adatepe" />
 		<player name="Akpolat+Şener" />
 		<player name="Kökciyan+Mazmanoğlu" />
@@ -12,13 +20,23 @@
 		<player name="Altay+Basaranoğlu" />
 		<player name="Promeneur" />
 		<player name="Çöremen+Küçükkarakürt" />
+>>>>>>> .r1100
+<<<<<<< .mine
+		<player name="Altay+Basaranoğlu" />
+=======
 		<player name="Günalp+Yürtsever" />
 		<player name="Demirağ+Şagar" />
 		<player name="Bilgin+Karabağ" />
 		<player name="Dayioğlugil+Geçkalan" />
 		<player name="Akkaya+Danacioğlu" />
+>>>>>>> .r1100
 		<player name="Erişik+Pektaş" />
+<<<<<<< .mine
+		<player name="Bingöl+Ketenci" />
+		<player name="Kılıç+Pala" />
+=======
 		<player name="Devecioğlu+Korkmaz" />
+>>>>>>> .r1100
 		<player name="Medeni+Uluer" />
 	</players>
 </archive>
