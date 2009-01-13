@@ -813,6 +813,7 @@ public class Launcher
 	 * - nouveauté : GUI du tournoi-coupe
 	 * - correction : possibilité de conflit dans les controles quand les joueurs d'un match sont différents de ceux d'un tournoi (ex: coupe) >> test et reinit en début de match
 	 * - modification : définition d'une classe spéciale pour représenter le classement à l'issue d'une confrontation
+	 * - nouveauté : bad bomber (nouveau personnage)
 	 * 
 	 * 
 	 * 
