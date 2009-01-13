@@ -168,6 +168,8 @@ public class ResultsSubPanel extends UntitledSubPanelTable
 				col = 0;
 				line++;
 				Profile profile = orderedPlayers.getProfileFromAbsoluteRank(i+1);
+				if(profile==null)
+					profile = players.get(i);
 				int profileIndex = players.indexOf(profile);
 				// color
 				Color clr = profile.getSpriteColor().getColor();
