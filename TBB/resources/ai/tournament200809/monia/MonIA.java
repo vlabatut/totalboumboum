@@ -10,6 +10,7 @@ public class MonIA extends ArtificialIntelligence
 	public AiAction processAction() throws StopRequestException
 	{	// avant tout : test d'interruption
 		checkInterruption();
+		
 		AiAction result = new AiAction(AiActionName.NONE);
 		uneMethode();
 		return result;
@@ -18,6 +19,7 @@ public class MonIA extends ArtificialIntelligence
 	private AiAction uneMethode() throws StopRequestException
 	{	// avant tout : test d'interruption
 		checkInterruption();
+		
 		// je crée un objet implémentant mon traitement
 		MonTraitement mt = new MonTraitement(this);
 		// j'appelle la méthode qui effectue le traitement

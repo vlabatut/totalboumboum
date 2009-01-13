@@ -17,14 +17,10 @@
 		<player file="37" color="blue" controls="0" spritePack="superbomberman5" spriteFolder="shirobon" />
 		<player file="30" color="red" controls="0" spritePack="superbomberman5" spriteFolder="shirobon" />
 		<player file="4" color="cyan" controls="0" spritePack="superbomberman1" spriteFolder="shirobon" />
-		<player file="14" color="pink" controls="0" spritePack="superbomberman1" spriteFolder="shirobon" />
+		<player file="1" color="grass" controls="1" spritePack="superbomberman1" spriteFolder="badBomber" />
 	</players>
 	<levels>
-		<level pack="sbm1Custom" folder="test3" />
-		<level pack="sbm1Custom" folder="test3b" />
-		<level pack="sbm1Custom" folder="test3d" />
-		<level pack="sbm1Custom" folder="test3f" />
-		<level pack="sbm1Custom" folder="test3e" />
+		<level pack="gsuTournament" folder="old" />
 	</levels>
 </gameQuickmatch>
 
