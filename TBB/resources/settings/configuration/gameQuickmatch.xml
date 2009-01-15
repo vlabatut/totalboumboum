@@ -2,7 +2,7 @@
 <gameQuickmatch xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="..\..\..\resources\schemas\gameQuickmatch.xsd">
 	<options useLastPlayers="true" useLastLevels="true" useLastSettings="true" />
 	<settings>
-		<levels randomOrder="true" />
+		<levels randomOrder="false" />
 		<players randomLocation="true" />
 		<limits points="0" rounds="5" time="60000" />
 		<points share="true" draw="none">
@@ -14,13 +14,11 @@
 		</points>
 	</settings>
 	<players>
-		<player file="37" color="blue" controls="0" spritePack="superbomberman5" spriteFolder="shirobon" />
-		<player file="30" color="red" controls="0" spritePack="superbomberman5" spriteFolder="shirobon" />
-		<player file="4" color="cyan" controls="0" spritePack="superbomberman1" spriteFolder="shirobon" />
-		<player file="1" color="grass" controls="1" spritePack="superbomberman1" spriteFolder="badBomber" />
+		<player file="41" color="brown" controls="0" spritePack="superbomberman5" spriteFolder="shirobon" />
+		<player file="63" color="blue" controls="0" spritePack="superbomberman5" spriteFolder="shirobon" />
 	</players>
 	<levels>
-		<level pack="gsuTournament" folder="old" />
+		<level pack="sbm1Custom" folder="part1" />
 	</levels>
 </gameQuickmatch>
 
