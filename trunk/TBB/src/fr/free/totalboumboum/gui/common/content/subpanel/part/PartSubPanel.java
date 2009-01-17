@@ -363,7 +363,9 @@ public class PartSubPanel extends EntitledSubPanelLines implements MouseListener
 					break;
 				// after button
 				case COL_AFTER:
-					{	if(profile!=null)
+					{	Ranks ranks = part.getOrderedPlayers();
+						ArrayList<Profile> pr = ranks.getProfilesFromRank(pos[0]);
+						if(pr!=null && pr.size()==1)
 						{	CupPart nextPart = part.getNextPartForRank(pos[0]);
 							if(nextPart!=null)
 								firePartAfterClicked(nextPart);
