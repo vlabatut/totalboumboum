@@ -831,6 +831,8 @@ public class Launcher
 	 * *********************** A FAIRE ***********************
 	 * *******************************************************
 	 * 
+	 * - pouvoir modifier l'UPS pour les IA
+	 * 
 	 * - bug quand il manque un joueur, car son profil est nul est du cp ça pose des pb de correspondance entre les CupPlayers, et tout ça
 	 * 
 	 * - profils: simplifier, pas besoin de la double représentation default+selected.
