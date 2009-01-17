@@ -47,7 +47,6 @@
 			<xsd:element name="leg" type="tLeg" maxOccurs="unbounded"/>
 		</xsd:sequence>
 		<xsd:attribute name="randomizePlayers" type="xsd:boolean" use="optional" default="false" />
-		<xsd:attribute name="randomizeLegs" type="xsd:boolean" use="optional" default="false" />
 	</xsd:complexType>
 
 <!-- LEAGUE -->
