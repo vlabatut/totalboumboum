@@ -155,9 +155,9 @@ buttonStatistics.setEnabled(false);
 		AbstractTournament tournamentConf = tournamentConfiguration.getTournament();
 		if(tournament==tournamentConf && tournamentConfiguration.getAutoSave())
 		{	String folder = FileTools.FOLDER_DEFAULT;
-			File folderFile = new File(folder);
+			File folderFile = new File(FileTools.getSavesPath()+File.separator+folder);
 			String backup = FileTools.FOLDER_DEFAULT_BACKUP;
-			File backupFile = new File(backup);
+			File backupFile = new File(FileTools.getSavesPath()+File.separator+backup);
 			try
 			{	FileTools.deleteDirectory(backupFile);
 				folderFile.renameTo(backupFile);

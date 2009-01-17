@@ -21,6 +21,7 @@ package fr.free.totalboumboum.game.rank;
  * 
  */
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -28,7 +29,7 @@ import java.util.Map.Entry;
 
 import fr.free.totalboumboum.configuration.profile.Profile;
 
-public class Ranks
+public class Ranks implements Serializable
 {	private static final long serialVersionUID = 1L;
 
 	public Ranks copy()
@@ -52,7 +53,7 @@ public class Ranks
 	}
 		
 	public void addProfile(int rank, Profile profile)
-	{	ArrayList<Profile> list = ranks.get(ranks);
+	{	ArrayList<Profile> list = ranks.get(rank);
 		if(list==null)
 		{	list = new ArrayList<Profile>();
 			ranks.put(rank,list);
@@ -92,7 +93,7 @@ public class Ranks
 	}
 	
 	public ArrayList<Profile> getProfilesFromRank(int rank)
-	{	ArrayList<Profile> result = ranks.get(ranks);
+	{	ArrayList<Profile> result = ranks.get(rank);
 		return result;		
 	}
 

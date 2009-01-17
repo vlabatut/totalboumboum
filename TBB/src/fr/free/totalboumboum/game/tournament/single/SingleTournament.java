@@ -160,6 +160,8 @@ public class SingleTournament extends AbstractTournament
 					else
 						j++;
 				}				
+				if(index==-1)
+					index = j;
 				list.add(index,profile);
 			}			
 		}

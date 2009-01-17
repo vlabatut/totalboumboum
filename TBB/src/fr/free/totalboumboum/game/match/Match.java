@@ -268,7 +268,9 @@ public class Match implements StatisticHolder, Serializable
 						index = j;
 					else
 						j++;
-				}				
+				}
+				if(index==-1)
+					index = j;
 				list.add(index,profile);
 			}			
 		}

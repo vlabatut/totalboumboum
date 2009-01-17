@@ -98,12 +98,14 @@ public class FileBrowserSubPanel extends SubPanel implements MouseListener
 		
 		initNames();
 		pageCount = getPageCount();
-		int textMaxWidth = width - GuiTools.subPanelMargin*2;
+		int textMaxWidth = width - 2*GuiTools.subPanelMargin;
 		
 		for(int panelIndex=0;panelIndex<pageCount;panelIndex++)
 		{	UntitledSubPanelTable listPanel = new UntitledSubPanelTable(width,height,cols,lines,false);
+			listPanel.setColSubMinWidth(0,textMaxWidth);
+			listPanel.setColSubPreferredWidth(0,textMaxWidth);
 			listPanel.setColSubMaxWidth(0,textMaxWidth);
-		
+			
 			// data
 			int line = controlUpCount;
 			int nameIndex = panelIndex*(lines-controlTotalCount);

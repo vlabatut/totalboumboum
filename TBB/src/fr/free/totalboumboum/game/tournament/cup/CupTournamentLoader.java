@@ -49,11 +49,6 @@ public class CupTournamentLoader
 		boolean randomizePlayers = Boolean.valueOf(randomizePlayersStr);
     	result.setRandomizePlayers(randomizePlayers);
     	
-		// randomize legs
-		String randomizeLegsStr = root.getAttribute(XmlTools.ATT_RANDOMIZE_LEGS).getValue().trim();
-		boolean randomizeLegs = Boolean.valueOf(randomizeLegsStr);
-    	result.setRandomizeLegs(randomizeLegs);
-    			
 		// legs
 		element = root;
 		loadLegsElement(element,folder,result);

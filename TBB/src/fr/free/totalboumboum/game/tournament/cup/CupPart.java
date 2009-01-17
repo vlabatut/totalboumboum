@@ -324,9 +324,8 @@ public class CupPart implements Serializable
 		// first leg
 		else
 		{	ArrayList<Integer> firstLegPlayersdistribution = getTournament().getFirstLegPlayersdistribution();
-			int currentLegNumber = leg.getNumber();
 			int count = 0;
-			for(int i=0;i<currentLegNumber;i++)
+			for(int i=0;i<number;i++)
 			{	int legCount = firstLegPlayersdistribution.get(i);
 				count = count + legCount;				
 			}

@@ -55,10 +55,6 @@ public class CupTournament extends AbstractTournament
 		if(randomizePlayers)
 			randomizePlayers();
 		
-		// are legs in random order ?
-		if(randomizeLegs)
-			randomizeLegs();
-		
 		// players distribution
 		int playerCount = profiles.size();
 		ArrayList<ArrayList<Integer>> distri = processPlayerDistribution(playerCount);		
@@ -291,7 +287,6 @@ for(ArrayList<Integer> list: permutations)
 	// LEGS				/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	private final ArrayList<CupLeg> legs = new ArrayList<CupLeg>();
-	private boolean randomizeLegs;
 	private int currentIndex;
 	private CupLeg currentLeg;
 	
@@ -309,20 +304,6 @@ for(ArrayList<Integer> list: permutations)
 	
 	public CupLeg getCurrentLeg()
 	{	return currentLeg;	
-	}
-	
-	private void randomizeLegs()
-	{	Calendar cal = new GregorianCalendar();
-		long seed = cal.getTimeInMillis();
-		Random random = new Random(seed);
-		Collections.shuffle(legs,random);
-	}
-
-	public boolean getRandomizeLegs()
-	{	return randomizeLegs;
-	}
-	public void setRandomizeLegs(boolean randomizeLegs)
-	{	this.randomizeLegs = randomizeLegs;
 	}
 
 	/////////////////////////////////////////////////////////////////
