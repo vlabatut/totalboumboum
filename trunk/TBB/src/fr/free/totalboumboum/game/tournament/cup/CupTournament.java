@@ -26,6 +26,7 @@ import java.util.Calendar;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.GregorianCalendar;
+import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Random;
 import java.util.Set;
@@ -57,10 +58,12 @@ public class CupTournament extends AbstractTournament
 		
 		// players distribution
 		int playerCount = profiles.size();
-		ArrayList<ArrayList<Integer>> distri = processPlayerDistribution(playerCount);
+		HashMap<Integer,ArrayList<ArrayList<Integer>>> distris = processPlayerDistribution(playerCount);
+		int mx = Collections.max(distris.keySet());
+		ArrayList<ArrayList<Integer>> distri = distris.get(mx);
 		int index = (int)(Math.random()*distri.size());
-//		firstLegPlayersdistribution = distri.get(index);
-firstLegPlayersdistribution = distri.get(0);			
+		firstLegPlayersdistribution = distri.get(index);
+//firstLegPlayersdistribution = distri.get(0);			
 		
 		// NOTE vérifier si le nombre de joueurs sélectionnés correspond
 		currentIndex = 0;
@@ -115,7 +118,7 @@ firstLegPlayersdistribution = distri.get(0);
 	public Set<Integer> getAllowedPlayerNumbers()
 	{	Set<Integer> result = new TreeSet<Integer>();
 		for(int i=0;i<=GameConstants.MAX_PROFILES_COUNT;i++)
-		{	ArrayList<ArrayList<Integer>> distri = processPlayerDistribution(i);
+		{	HashMap<Integer,ArrayList<ArrayList<Integer>>> distri = processPlayerDistribution(i);
 			if(distri.size()>0)
 				result.add(i);
 		}
@@ -127,7 +130,7 @@ firstLegPlayersdistribution = distri.get(0);
 	}
 
 	
-	private ArrayList<ArrayList<Integer>> processPlayerDistribution(int playerCount)
+	private HashMap<Integer,ArrayList<ArrayList<Integer>>> processPlayerDistribution(int playerCount)
 	{	int matches = legs.get(0).getParts().size();
 
 		// get the distributions
@@ -183,69 +186,126 @@ for(ArrayList<Integer> list: permutations)
 	System.out.println();
 }
 */	
-		// keep the working distributions
-		ArrayList<ArrayList<Integer>> result = new ArrayList<ArrayList<Integer>>();
+		// keep only the working distributions
+		HashMap<Integer,ArrayList<ArrayList<Integer>>> result = new HashMap<Integer,ArrayList<ArrayList<Integer>>>();
 		for(ArrayList<Integer> list: permutations)
-		{	if(checkPlayerDistribution(list))
-				result.add(list);			
+		{	int value = checkPlayerDistribution(list);
+			if(value>-1)
+			{	ArrayList<ArrayList<Integer>> l = result.get(value);
+				if(l==null)
+				{	l = new ArrayList<ArrayList<Integer>>();
+					result.put(value,l);					
+				}
+				l.add(list);			
+			}
 		}
 		
-		
+/*		
 		System.out.println();
 		System.out.println("FILTRE");
-		for(ArrayList<Integer> list: result)
-		{	for(Integer i: list)
-				System.out.print(i+" ");
-			System.out.println();
+		for(Entry<Integer,ArrayList<ArrayList<Integer>>> e: result.entrySet())
+		{	System.out.println(">>"+e.getKey()+":");
+			for(ArrayList<Integer> list: e.getValue())
+			{	for(Integer i: list)
+					System.out.print(i+" ");
+				System.out.println();
+			}
 		}
-		
+*/		
 		
 		return result;
 	}
 	
+	/**
+	 * check if the parameter players distribution is compatible 
+	 * with the matches composing this tournament. If it's not,
+	 * the method result is -1. If it is, it's the maximal rank
+	 * of a non-player at the end of the tournament. This value
+	 * allows ranking all the possible distributions in order
+	 * to peak the best one (i.e. the one with lower value)
+	 * @param distribution
+	 * @return
+	 */
 	@SuppressWarnings("unchecked")
-	private boolean checkPlayerDistribution(ArrayList<Integer> distribution)
-	{	boolean result = true;
+	private int checkPlayerDistribution(ArrayList<Integer> distribution)
+	{	int result = Integer.MAX_VALUE;
 		ArrayList<ArrayList<Integer>> temp = new ArrayList<ArrayList<Integer>>();
 		temp.add((ArrayList<Integer>)distribution.clone());
+		HashMap<Integer,int[]> finalRanking = new HashMap<Integer, int[]>();
 		
-		Iterator<CupLeg> itLeg = legs.iterator();
-		while(itLeg.hasNext() && result)
-		{	CupLeg leg = itLeg.next();
-			int legNumber = leg.getNumber();
-//			int prevLeg = legNumber-1;
-			ArrayList<Integer> list = new ArrayList<Integer>();
-			temp.add(list);
-			Iterator<CupPart> itPart = leg.getParts().iterator();
-			while(itPart.hasNext() && result)
-			{	list.add(new Integer(0));
-				CupPart part = itPart.next();
-				int partNumber = part.getNumber();
-				Set<Integer> matchAllowed = part.getMatch().getAllowedPlayerNumbers();
-				int qualifiedCount = 0;
-				if(legNumber==0)
-				{	int prevPart = partNumber;
-					qualifiedCount = temp.get(legNumber).get(prevPart);
-					if(!matchAllowed.contains(qualifiedCount))
-						result = false;
-					else
-						list.set(partNumber,qualifiedCount);
-				}
-				else
-				{	ArrayList<CupPlayer> players = part.getPlayers();
-					for(CupPlayer player: players)
-					{	int prevPart = player.getPart();
-						int prevInvolved = temp.get(legNumber).get(prevPart);
-						int prevRank = player.getRank();
-						if(prevRank<=prevInvolved)
-							qualifiedCount++;						
+		// check compatibility with matches
+		{	Iterator<CupLeg> itLeg = legs.iterator();
+			while(itLeg.hasNext() && result>=0)
+			{	CupLeg leg = itLeg.next();
+				int legNumber = leg.getNumber();
+//				int prevLeg = legNumber-1;
+				ArrayList<Integer> list = new ArrayList<Integer>();
+				temp.add(list);
+				Iterator<CupPart> itPart = leg.getParts().iterator();
+				while(itPart.hasNext() && result>=0)
+				{	list.add(new Integer(0));
+					CupPart part = itPart.next();
+					int partNumber = part.getNumber();
+					Set<Integer> matchAllowed = part.getMatch().getAllowedPlayerNumbers();
+					int qualifiedCount = 0;
+					ArrayList<CupPlayer> players = part.getPlayers();
+					if(legNumber==0)
+					{	int prevPart = partNumber;
+						qualifiedCount = temp.get(legNumber).get(prevPart);
+						if(!matchAllowed.contains(qualifiedCount))
+							result = -1;
+						else
+						{	list.set(partNumber,qualifiedCount);
+							//
+							int partRank = part.getRank();
+							if(partRank>0)
+							{	int tp[] = {qualifiedCount,players.size()};
+								finalRanking.put(partRank,tp);
+							}
+						}
 					}
-					if(!matchAllowed.contains(qualifiedCount))
-						result = false;					
 					else
-						list.set(partNumber,qualifiedCount);
+					{	for(CupPlayer player: players)
+						{	int prevPart = player.getPart();
+							int prevInvolved = temp.get(legNumber).get(prevPart);
+							int prevRank = player.getRank();
+							if(prevRank<=prevInvolved)
+								qualifiedCount++;						
+						}
+						if(!matchAllowed.contains(qualifiedCount))
+							result = -1;					
+						else
+						{	list.set(partNumber,qualifiedCount);
+							//
+							int partRank = part.getRank();
+							if(partRank>0)
+							{	int tp[] = {qualifiedCount,players.size()};
+								finalRanking.put(partRank,tp);
+							}
+						}
+					}
+				}	
+			}
+		}
+		
+		// process the highest non-player ranking
+		if(result!=-1)
+		{	boolean goOn = true;
+			int i=1;
+			int count = 1;
+			while(goOn)
+			{	int[] tp = finalRanking.get(i);
+				if(tp==null)
+					goOn = false;
+				else
+				{	count = count + tp[0];
+					if(tp[0]<tp[1])
+					{	result = count;
+						goOn = false;
+					}
+					i++;
 				}
-			}			
+			}
 		}
 		
 		return result;
