@@ -70,6 +70,13 @@ public class Ranks implements Serializable
 	{	ranks.remove(rank);		
 	}
 	
+	public int size()
+	{	int result = 0;
+		for(Entry<Integer,ArrayList<Profile>> entry: ranks.entrySet())
+			result = result + entry.getValue().size();
+		return result;		
+	}
+	
 	/////////////////////////////////////////////////////////////////
 	// PROFILES			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
