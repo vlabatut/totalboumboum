@@ -816,7 +816,9 @@ public class Launcher
 	 * - nouveauté : bad bomber (nouveau personnage)
 	 * - correction : bug dans l'ordonnancement des joueurs à la fin d'un round
 	 * - correction : bug d'affichage dans la dimension maximal de la liste des browsers (common contents)
+	 * - correction : bug empêchant de jouer à moins de 16 à un tournoi-coupe
 	 * 
+	 * - priorité de l'organisation des match coupes : que les premières places soient remplies
 	 * 
 	 * - lors du calcul des points, il faut forcer la présence d'un classement: ça facilite énormément de traitements en aval
 	 *   au pire, si le classement est inutile (ex: simple total), on définit un classement-identité (pts utilisés pr le classement <=> pts marqués)

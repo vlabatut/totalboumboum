@@ -56,6 +56,7 @@ public class CupPart implements Serializable
 		ArrayList<Profile> profiles = new ArrayList<Profile>();
 		for(int i=0;i<players.size();i++)
 		{	Profile p = getProfileForIndex(i);
+			if(p!=null)
 			profiles.add(p);
 		}
 		currentMatch.init(profiles);
@@ -324,13 +325,15 @@ public class CupPart implements Serializable
 		// first leg
 		else
 		{	ArrayList<Integer> firstLegPlayersdistribution = getTournament().getFirstLegPlayersdistribution();
-			int count = 0;
-			for(int i=0;i<number;i++)
-			{	int legCount = firstLegPlayersdistribution.get(i);
-				count = count + legCount;				
+			if(firstLegPlayersdistribution.get(number)>index)
+			{	int count = 0;
+				for(int i=0;i<number;i++)
+				{	int legCount = firstLegPlayersdistribution.get(i);
+					count = count + legCount;				
+				}
+				ArrayList<Profile> profiles = getTournament().getProfiles();
+				result = profiles.get(count+index);
 			}
-			ArrayList<Profile> profiles = getTournament().getProfiles();
-			result = profiles.get(count+index);
 		}
 
 		return result;	

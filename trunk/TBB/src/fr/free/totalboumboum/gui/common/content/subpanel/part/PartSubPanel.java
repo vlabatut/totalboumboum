@@ -227,7 +227,7 @@ public class PartSubPanel extends EntitledSubPanelLines implements MouseListener
 	private Profile getProfileForLine(int line)
 	{	Ranks ranks = part.getOrderedPlayers();
 		Profile result = ranks.getProfileFromAbsoluteRank(line);
-		if(result==null)
+		if(result==null && ranks.size()==0)
 			result = part.getProfileForIndex(line-1);
 		return result;
 	}

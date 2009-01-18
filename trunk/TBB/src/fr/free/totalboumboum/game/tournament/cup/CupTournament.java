@@ -57,9 +57,10 @@ public class CupTournament extends AbstractTournament
 		
 		// players distribution
 		int playerCount = profiles.size();
-		ArrayList<ArrayList<Integer>> distri = processPlayerDistribution(playerCount);		
-		firstLegPlayersdistribution = distri.get(0);
-				
+		ArrayList<ArrayList<Integer>> distri = processPlayerDistribution(playerCount);
+		int index = (int)(Math.random()*distri.size());
+//		firstLegPlayersdistribution = distri.get(index);
+firstLegPlayersdistribution = distri.get(0);			
 		
 		// NOTE vérifier si le nombre de joueurs sélectionnés correspond
 		currentIndex = 0;
@@ -188,6 +189,16 @@ for(ArrayList<Integer> list: permutations)
 		{	if(checkPlayerDistribution(list))
 				result.add(list);			
 		}
+		
+		
+		System.out.println();
+		System.out.println("FILTRE");
+		for(ArrayList<Integer> list: result)
+		{	for(Integer i: list)
+				System.out.print(i+" ");
+			System.out.println();
+		}
+		
 		
 		return result;
 	}
