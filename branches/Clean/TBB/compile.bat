@@ -27,7 +27,7 @@
 :: (re)compile the game
 :COMPILE	
 	echo compiling the game...
-	javac -nowarn -sourcepath %sp% -classpath %cp% %main%\Launcher.java %main%\QuickLauncher.java -d %bin%
+	javac -nowarn -sourcepath %sp% -classpath %cp% %main%\Launcher.java -d %bin%
 
 :: (re)compile the AI classes inside the game
 	echo compiling the AI classes inside the game...

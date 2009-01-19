@@ -3,7 +3,7 @@
 #
 # This is a BASH (Bourne-Again SHell) script, 
 # it should work on most Linux, Unix, and Mac OS.
-# It (re)compiles the whole TBB game
+# It (re)compiles the whole TBB game and the dependant AI classes
 #
 # -------------------------------------------------------------------
 #
@@ -25,7 +25,7 @@
 #
 # (re)compile the game
 	echo "compiling the game..."
-	javac -nowarn -sourcepath $sp -classpath $cp ${main}/Launcher.java ${main}/QuickLauncher.java -d $bin
+	javac -nowarn -sourcepath $sp -classpath $cp ${main}/Launcher.java -d $bin
 # (re)compile the AI classes located in the game
 	echo "compiling the AI classes inside the game..."
 	for i in $(ls -d ${aig}/*/); do 
