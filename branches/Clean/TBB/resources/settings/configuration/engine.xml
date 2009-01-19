@@ -1,7 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<engine xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="..\..\..\resources\schemas\engine.xsd">
-	<adjust value="true" />
-	<fps value="50" />
-	<speed value="1.0" />
-</engine>
-
