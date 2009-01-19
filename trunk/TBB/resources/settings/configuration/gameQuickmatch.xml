@@ -4,18 +4,18 @@
 	<settings>
 		<levels randomOrder="false" />
 		<players randomLocation="true" />
-		<limits points="0" rounds="5" time="60000" />
-		<points share="true" draw="none">
-			<value rank="1" points="8" />
-			<value rank="2" points="4" />
-			<value rank="3" points="2" />
-			<value rank="4" points="1" />
+		<limits points="3" rounds="0" time="30000" />
+		<points share="false" draw="both">
+			<value rank="1" points="1" />
+			<value rank="2" points="0" />
+			<value rank="3" points="0" />
+			<value rank="4" points="0" />
 			<value rank="5" points="0" />
 		</points>
 	</settings>
 	<players>
-		<player file="41" color="brown" controls="0" spritePack="superbomberman5" spriteFolder="shirobon" />
-		<player file="63" color="blue" controls="0" spritePack="superbomberman5" spriteFolder="shirobon" />
+		<player file="41" color="grey" controls="0" spritePack="superbomberman5" spriteFolder="shirobon" />
+		<player file="63" color="black" controls="0" spritePack="superbomberman5" spriteFolder="shirobon" />
 	</players>
 	<levels>
 		<level pack="sbm1Custom" folder="part1" />
