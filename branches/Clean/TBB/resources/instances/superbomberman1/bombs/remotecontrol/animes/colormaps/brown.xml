@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<colormap xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+		xsi:noNamespaceSchemaLocation="../../../../../../schemas/colormap.xsd" >		
+	
+	<color index="00" red="072" green="040" blue="000" /> <!-- contours -->
+	<color index="01" red="104" green="048" blue="024" /> <!-- corps très foncé -->
+	<color index="02" red="136" green="072" blue="032" /> <!-- corps foncé -->
+	<color index="03" red="196" green="127" blue="084" /> <!-- corps clair -->
+	<color index="04" red="173" green="096" blue="047" /> <!-- corps normal -->
+	<color index="05" red="240" green="162" blue="114" /> <!-- corps très clair -->
+	<color index="09" red="242" green="201" blue="175" /> <!-- corps très très clair -->
+	<color index="14" red="255" green="255" blue="255" /> <!-- reflets (blanc cassé) -->
+
+</colormap>

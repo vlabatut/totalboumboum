@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<profile xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../resources/schemas/profile.xsd">
+	<general name="0809v1.Kökciyan+Mazmanoğlu" />
+	<ai name="kokciyanmazmanoglu" pack="tournament200809v1" />
+
+	<character name="shirobon" packname="superbomberman5" color="green"/>
+</profile>
+

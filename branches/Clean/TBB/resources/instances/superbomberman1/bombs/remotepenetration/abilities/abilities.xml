@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<abilities xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+		xsi:noNamespaceSchemaLocation="../../../../../schemas/abilities.xsd" >
+
+		<!-- STATE -->
+<!--  	sprite-flat --> 
+<!--  	sprite-above --> 
+<!--	sprite-traverse-bomb --> 
+<!--	sprite-traverse-item --> 
+<!--	sprite-traverse-wall --> 
+<!--  	block-spawn --> 
+<!--  	bomb-explosion-latency --> 
+		<ability strength="70" frame="false" time="-1" uses="-1">
+			<name value="bomb-explosion-latency" />
+		</ability>
+<!--  	bomb-failure-maxduration --> 
+<!--  	bomb-failure-minduration --> 
+<!--  	bomb-failure-probability --> 
+<!--  	bomb-push-latency --> 
+<!--  	bomb-trigger-collision --> 
+<!--  	bomb-trigger-combustion --> 
+		<ability strength="1" frame="false" time="-1" uses="-1">
+			<name value="bomb-trigger-combustion" />
+		</ability>
+<!--  	bomb-trigger-control --> 
+		<ability strength="1" frame="false" time="-1" uses="-1">
+			<name value="bomb-trigger-control" />
+		</ability>
+<!--  	bomb-trigger-timer --> 
+<!--  	bomb-number --> 
+<!--  	bomb-range --> 
+<!--  	hero-punch-duration --> 
+<!--  	hero-wait-duration --> 
+			
+		<!-- ACTION -->
+<!--  	appear --> 
+		<ability frame="false" strength="1" time="-1" uses="-1" >
+			<action name="appear" direction="all" contact="all"
+				tilePosition="all" orientation="all" target="all" />
+		</ability> 
+<!--  	consume --> 
+<!--  	detonate --> 
+		<ability frame="false" strength="1" time="-1" uses="-1" >
+			<action name="detonate" direction="all" contact="all"
+				tilePosition="all" orientation="all" />
+		</ability> 
+<!--  	drop --> 
+<!--  	gather --> 
+<!--  	jump --> 
+<!--  	land --> 
+		<ability frame="false" strength="1" time="-1" uses="-1" >
+			<action name="land" direction="all" contact="all"
+				tilePosition="all" orientation="all" />
+		</ability> 
+<!--  	movehigh --> 
+		<ability frame="false" strength="1" time="-1" uses="-1" >
+			<action name="movehigh" direction="all" contact="all"
+				tilePosition="all" orientation="all" />
+		</ability> 
+<!--  	movelow --> 
+		<ability frame="false" strength="1" time="-1" uses="-1" >
+			<action name="movelow" direction="all" contact="all"
+				tilePosition="all" orientation="all" />
+		</ability> 
+<!--  	punch --> 
+<!--  	push --> 
+<!--  	trigger --> 
+
+</abilities>
