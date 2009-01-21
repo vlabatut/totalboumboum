@@ -808,17 +808,7 @@ public class Launcher
 	/*
 	 * TODO
 	 * 
-	 * + beta.010
-	 * - nouveauté : tournoi de type coupe
-	 * - nouveauté : GUI du tournoi-coupe
-	 * - correction : possibilité de conflit dans les controles quand les joueurs d'un match sont différents de ceux d'un tournoi (ex: coupe) >> test et reinit en début de match
-	 * - modification : définition d'une classe spéciale pour représenter le classement à l'issue d'une confrontation
-	 * - nouveauté : bad bomber (nouveau personnage)
-	 * - correction : bug dans l'ordonnancement des joueurs à la fin d'un round
-	 * - correction : bug d'affichage dans la dimension maximal de la liste des browsers (common contents)
-	 * - correction : bug empêchant de jouer à moins de 16 à un tournoi-coupe
-	 * - modification : quand des joueurs manquent en coupe, on essaie de s'organiser pour que les joueurs manquants finissent en bas de tableau
-	 * - modification : quand plusieurs distributions de joueurs sont possibles et de qualité équivalente (cf ci-dessus) on en prend une au hasard (au lieu de prendre syst. la 1ère)
+	 * + beta.011
 	 * 
 	 * - lors du calcul des points, il faut forcer la présence d'un classement: ça facilite énormément de traitements en aval
 	 *   au pire, si le classement est inutile (ex: simple total), on définit un classement-identité (pts utilisés pr le classement <=> pts marqués)
