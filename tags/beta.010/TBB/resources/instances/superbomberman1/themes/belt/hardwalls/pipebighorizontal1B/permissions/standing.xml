@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="utf-8"?>
+<gesture-permissions xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+		xsi:noNamespaceSchemaLocation="../../../../../../../schemas/gesturepermissions.xsd" >
+
+	<state-modulations>
+<!--  	sprite-flat --> 
+<!--  	sprite-above --> 
+<!--	sprite-traverse-bomb --> 
+<!--	sprite-traverse-item --> 
+<!--	sprite-traverse-wall --> 
+<!--  	block-spawn --> 
+<!--  	bomb-explosion-latency --> 
+<!--  	bomb-failure-maxduration --> 
+<!--  	bomb-failure-minduration --> 
+<!--  	bomb-failure-probability --> 
+<!--  	bomb-push-latency --> 
+<!--  	bomb-trigger-collision --> 
+<!--  	bomb-trigger-combustion --> 
+<!--  	bomb-trigger-control --> 
+<!--  	bomb-trigger-timer --> 
+<!--  	bomb-number --> 
+<!--  	bomb-range --> 
+<!--  	hero-punch-duration --> 
+<!--  	hero-wait-duration --> 
+	</state-modulations>
+	
+	<actor-permissions>
+<!--  	appear --> 
+<!--  	consume --> 
+<!--  	detonate --> 
+<!--  	drop --> 
+<!--  	gather --> 
+<!--  	jump --> 
+<!--  	land --> 
+<!--  	movehigh --> 
+<!--  	movelow --> 
+<!--  	punch --> 
+<!--  	push --> 
+<!--  	trigger --> 
+	</actor-permissions>
+	
+	<target-permissions>
+<!--  	appear --> 
+<!--  	consume --> 
+<!--  	drop --> 
+<!--  	gather --> 
+<!--  	punch --> 
+<!--  	push --> 
+<!--  	trigger --> 
+	</target-permissions>
+	
+	<third-permissions>
+<!--  	appear --> 
+<!--  	consume --> 
+<!--  	cry --> 
+		<permission frame="true" strength="1" >
+			<action name="cry" direction="all" contact="all"
+				tilePosition="all" orientation="all" actor="all" />
+			<actor-restrictions />
+			<target-restrictions />
+		</permission>
+<!--  	detonate --> 
+<!--  	drop --> 
+<!--  	exult --> 
+		<permission frame="true" strength="1" >
+			<action name="exult" direction="all" contact="all"
+				tilePosition="all" orientation="all" actor="all" />
+			<actor-restrictions />
+			<target-restrictions />
+		</permission>
+<!--  	gather --> 
+<!--  	jump --> 
+		<permission frame="true" strength="1" >
+			<action name="jump" direction="all" contact="all"
+				tilePosition="all" orientation="all" actor="all" />
+			<actor-restrictions />
+			<target-restrictions />
+		</permission>
+<!--  	land --> 
+<!--  	movehigh --> 
+		<permission frame="true" strength="1" >
+			<action name="movehigh" direction="all" contact="all"
+				tilePosition="all" orientation="all" actor="all" />
+			<actor-restrictions />
+			<target-restrictions />
+		</permission>
+<!--  	movelow --> 
+<!--  	punch --> 
+		<permission frame="true" strength="1" >
+			<action name="punch" direction="all" contact="all"
+				tilePosition="all" orientation="all" actor="all" target="all" />
+			<actor-restrictions />
+			<target-restrictions />
+		</permission>
+<!--  	push --> 
+		<permission frame="true" strength="1" >
+			<action name="push" direction="all" contact="all"
+				tilePosition="all" orientation="all" actor="all" target="all" />
+			<actor-restrictions />
+			<target-restrictions />
+		</permission>
+<!--  	trigger --> 
+		<permission frame="true" strength="1" >
+			<action name="trigger" direction="all" contact="all"
+				tilePosition="all" orientation="all" actor="all" target="all" />
+			<actor-restrictions />
+			<target-restrictions />
+		</permission>
+	</third-permissions>
+
+</gesture-permissions>

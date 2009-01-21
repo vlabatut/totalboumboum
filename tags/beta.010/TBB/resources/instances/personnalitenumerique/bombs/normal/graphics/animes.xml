@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<animes xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+		xsi:noNamespaceSchemaLocation="../../../../../xml/schemas/animes.xsd" 
+		scale="8" default="standing" >
+	
+	<colors>
+		<colorsprite name="pink" folder="pink" />
+		<colorsprite name="cyan" folder="cyan" />
+	</colors>
+	
+	<gestures>
+		<gesture name="burning" folder="burning" repeat="false">
+			<direction name="none">
+				<step duration="100" file="1.png"/>
+				<step duration="100" file="2.png"/>
+				<step duration="100" file="3.png"/>
+				<step duration="100" file="4.png"/>
+			</direction>
+		</gesture>
+		<gesture name="sliding" folder="standing" repeat="false" proportional="true">
+			<direction name="none">
+				<step duration="200" file="1.png" />
+				<step duration="200" file="2.png" />
+				<step duration="200" file="3.png" />
+				<step duration="200" file="4.png" />
+				<step duration="200" file="5.png" />
+				<step duration="200" file="6.png" />
+				<step duration="200" file="7.png" />
+				<step duration="200" file="8.png" />
+				<step duration="200" file="9.png" />
+			</direction>
+		</gesture>
+		<gesture name="sliding-failing" folder="failing" repeat="true">
+			<direction name="none">
+				<step duration="200" file="1.png" />
+				<step duration="200" file="2.png" />
+				<step duration="200" file="3.png" />
+				<step duration="200" file="4.png" />
+			</direction>
+		</gesture>
+		<gesture name="standing" folder="standing" repeat="false" proportional="true">
+			<direction name="none">
+				<step duration="200" file="1.png" />
+				<step duration="200" file="2.png" />
+				<step duration="200" file="3.png" />
+				<step duration="200" file="4.png" />
+				<step duration="200" file="5.png" />
+				<step duration="200" file="6.png" />
+				<step duration="200" file="7.png" />
+				<step duration="200" file="8.png" />
+				<step duration="200" file="9.png" />
+			</direction>
+		</gesture>
+		<gesture name="standing-failing" folder="failing" repeat="true">
+			<direction name="none">
+				<step duration="200" file="1.png" />
+				<step duration="200" file="2.png" />
+				<step duration="200" file="3.png" />
+				<step duration="200" file="4.png" />
+			</direction>
+		</gesture>
+	</gestures>		
+</animes>

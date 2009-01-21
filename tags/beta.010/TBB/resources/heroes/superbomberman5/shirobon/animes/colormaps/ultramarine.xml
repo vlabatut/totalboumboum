@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<colormap xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+		xsi:noNamespaceSchemaLocation="../../../../../schemas/colormap.xsd" >
+		
+	<color index="00" red="010" green="010" blue="010" /> <!-- contours -->
+	<color index="01" red="128" green="032" blue="032" /> <!-- explosion 1 -->
+	<color index="02" red="000" green="013" blue="121" /> <!-- corps sombre -->
+	<color index="03" red="144" green="056" blue="040" /> <!-- explosion 2 -->
+	<color index="04" red="208" green="032" blue="032" /> <!-- explosion 3 -->
+	<color index="05" red="216" green="080" blue="000" /> <!-- visière/poings sombres -->
+	<color index="06" red="248" green="048" blue="048" /> <!-- explosion 4 -->
+	<color index="07" red="004" green="019" blue="143" /> <!-- corps clair -->
+	<color index="08" red="216" green="095" blue="006" /> <!-- poings clair -->
+	<color index="09" red="248" green="128" blue="000" /> <!-- explosion 5 -->
+	<color index="10" red="000" green="008" blue="072" /> <!-- casque foncé -->
+	<color index="11" red="248" green="184" blue="016" /> <!-- explosion 6 -->
+	<color index="12" red="248" green="200" blue="080" /> <!-- membres/visage -->
+	<color index="13" red="004" green="019" blue="143" /> <!-- casque clair -->
+	<color index="15" red="000" green="000" blue="000" /> <!-- noir -->
+	
+</colormap>

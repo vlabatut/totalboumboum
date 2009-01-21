@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+
+	<xsd:simpleType name="tScore">
+		<xsd:restriction base="xsd:string">
+			<xsd:enumeration value="bombs" />
+			<xsd:enumeration value="crowns" />
+			<xsd:enumeration value="bombeds" />
+			<xsd:enumeration value="items" />
+			<xsd:enumeration value="bombings" />
+			<xsd:enumeration value="paintings" />
+			<xsd:enumeration value="time" />
+		</xsd:restriction>
+	</xsd:simpleType>
+
+</xsd:schema>
+		
