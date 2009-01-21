@@ -28,6 +28,7 @@ import java.util.concurrent.ExecutionException;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
+import java.util.concurrent.ThreadFactory;
 
 
 
@@ -83,7 +84,14 @@ public abstract class AbstractAiManager<V>
     public final void update()
     {	// s'il s'agit du premier appel
     	if(executorAi == null)
-    	{	executorAi = Executors.newSingleThreadExecutor();
+    	{	ThreadFactory fact = new ThreadFactory()
+    		{	public Thread newThread(Runnable r)
+    			{	Thread result = new Thread(r);
+    				result.setPriority(Thread.MIN_PRIORITY);
+    				return result;
+    			}   		
+    		};
+    		executorAi = Executors.newSingleThreadExecutor(fact);
     		makeCall();
     	}
     	// sinon : un appel avait déjà été effectué
@@ -122,7 +130,7 @@ public abstract class AbstractAiManager<V>
      */
     private final void makeCall()
     {	updatePercepts();
-    	futureAi = executorAi.submit(ai);
+     	futureAi = executorAi.submit(ai);
     }
     
     /**
