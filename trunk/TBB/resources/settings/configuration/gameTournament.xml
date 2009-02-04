@@ -18,7 +18,7 @@
 		<player file="63" color="black" controls="0" spritePack="superbomberman5" spriteFolder="shirobon" />
 		<player file="18" color="pink" controls="0" spritePack="superbomberman5" spriteFolder="assistantpirate" />
 		<player file="49" color="brown" controls="0" spritePack="superbomberman5" spriteFolder="assistantpirate" />
-		<player file="1" color="grass" controls="1" spritePack="superbomberman5" spriteFolder="assistantpirate" />
+		<player file="1" color="grass" controls="1" spritePack="nesbomberman2" spriteFolder="shirobon" />
 	</players>
 </gameTournament>
 
