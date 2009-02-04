@@ -2,23 +2,30 @@
 <gameQuickmatch xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="..\..\..\resources\schemas\gameQuickmatch.xsd">
 	<options useLastPlayers="true" useLastLevels="true" useLastSettings="true" />
 	<settings>
-		<levels randomOrder="false" />
+		<levels randomOrder="true" />
 		<players randomLocation="true" />
-		<limits points="3" rounds="0" time="30000" />
-		<points share="false" draw="both">
-			<value rank="1" points="1" />
-			<value rank="2" points="0" />
-			<value rank="3" points="0" />
-			<value rank="4" points="0" />
+		<limits points="0" rounds="6" time="60000" />
+		<points share="true" draw="none">
+			<value rank="1" points="8" />
+			<value rank="2" points="4" />
+			<value rank="3" points="2" />
+			<value rank="4" points="1" />
 			<value rank="5" points="0" />
 		</points>
 	</settings>
 	<players>
-		<player file="41" color="grey" controls="0" spritePack="superbomberman5" spriteFolder="shirobon" />
-		<player file="63" color="black" controls="0" spritePack="superbomberman5" spriteFolder="shirobon" />
+		<player file="1" color="cyan" controls="1" spritePack="nesbomberman2" spriteFolder="shirobon" />
+		<player file="30" color="red" controls="0" spritePack="superbomberman5" spriteFolder="shirobon" />
+		<player file="59" color="blue" controls="0" spritePack="superbomberman5" spriteFolder="shirobon" />
+		<player file="60" color="orange" controls="0" spritePack="superbomberman5" spriteFolder="shirobon" />
 	</players>
 	<levels>
-		<level pack="sbm1Custom" folder="part1" />
+		<level pack="gsuTournament" folder="carrefour" />
+		<level pack="gsuTournament" folder="classic" />
+		<level pack="gsuTournament" folder="items" />
+		<level pack="gsuTournament" folder="line" />
+		<level pack="gsuTournament" folder="pasaj" />
+		<level pack="gsuTournament" folder="power" />
 	</levels>
 </gameQuickmatch>
 
