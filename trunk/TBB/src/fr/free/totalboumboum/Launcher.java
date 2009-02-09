@@ -810,6 +810,7 @@ public class Launcher
 	 * 
 	 * + beta.011
 	 * - sauvegarde automatique modifiée pour éviter les conflits de version avec SVN
+	 * - correction d'un bug lors de la sauvegarde automatique d'un tournoi simple (pas de panel de match => pas de sauvegarde)
 	 * 
 	 * 
 	 * - lors du calcul des points, il faut forcer la présence d'un classement: ça facilite énormément de traitements en aval
