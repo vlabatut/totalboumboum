@@ -309,7 +309,7 @@ public class Match implements StatisticHolder, Serializable
 			}
 		}
 		else
-		{	//tournament.roundOver();
+		{	tournament.roundOver();
 			if(panel!=null)
 				panel.roundOver();
 		}

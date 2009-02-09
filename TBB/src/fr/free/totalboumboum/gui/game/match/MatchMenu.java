@@ -154,14 +154,27 @@ buttonStatistics.setEnabled(false);
 		TournamentConfiguration tournamentConfiguration = Configuration.getGameConfiguration().getTournamentConfiguration();
 		AbstractTournament tournamentConf = tournamentConfiguration.getTournament();
 		if(tournament==tournamentConf && tournamentConfiguration.getAutoSave())
-		{	String folder = FileTools.FOLDER_DEFAULT;
-			File folderFile = new File(FileTools.getSavesPath()+File.separator+folder);
-			String backup = FileTools.FOLDER_DEFAULT_BACKUP;
-			File backupFile = new File(FileTools.getSavesPath()+File.separator+backup);
-			try
-			{	FileTools.deleteDirectory(backupFile);
-				folderFile.renameTo(backupFile);
-				GameArchive.saveGame(folder, tournament);
+		{	try
+			{	// filenames
+				String folderShort = FileTools.FOLDER_DEFAULT;
+				String folder = FileTools.getSavesPath()+File.separator+folderShort;
+				String backup = FileTools.getSavesPath()+File.separator+FileTools.FOLDER_DEFAULT_BACKUP;
+				String dataFileName = FileTools.FILE_ARCHIVE+FileTools.EXTENSION_DATA;
+				String xmlFileName = FileTools.FILE_ARCHIVE+FileTools.EXTENSION_XML;
+				// backup
+				File oldFile,newFile;
+				oldFile = new File(folder,dataFileName);
+				newFile = new File(backup,dataFileName);
+				if(newFile.exists())
+					newFile.delete();
+				oldFile.renameTo(newFile);
+				oldFile = new File(folder,xmlFileName);
+				newFile = new File(backup,xmlFileName);
+				if(newFile.exists())
+					newFile.delete();
+				oldFile.renameTo(newFile);
+				// save
+				GameArchive.saveGame(folderShort,tournament);
 			}
 			catch (ParserConfigurationException e)
 			{	e.printStackTrace();

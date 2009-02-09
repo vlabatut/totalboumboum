@@ -809,6 +809,8 @@ public class Launcher
 	 * TODO
 	 * 
 	 * + beta.011
+	 * - sauvegarde automatique modifiée pour éviter les conflits de version avec SVN
+	 * 
 	 * 
 	 * - lors du calcul des points, il faut forcer la présence d'un classement: ça facilite énormément de traitements en aval
 	 *   au pire, si le classement est inutile (ex: simple total), on définit un classement-identité (pts utilisés pr le classement <=> pts marqués)
@@ -824,8 +826,6 @@ public class Launcher
 	 * *******************************************************
 	 * 
 	 * - pouvoir modifier l'UPS pour les IA
-	 * 
-	 * - bug quand il manque un joueur, car son profil est nul est du cp ça pose des pb de correspondance entre les CupPlayers, et tout ça
 	 * 
 	 * - profils: simplifier, pas besoin de la double représentation default+selected.
 	 * - réorganiser par rapport aux besoins: joueur pdt le jeu, joueur chargé en dehors du jeu, joueur pas chargé ?
