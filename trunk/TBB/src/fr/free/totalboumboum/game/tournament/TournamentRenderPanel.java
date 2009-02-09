@@ -25,4 +25,5 @@ public interface TournamentRenderPanel
 {
 	public void tournamentOver();
 	public void matchOver();
+	public void roundOver();
 }

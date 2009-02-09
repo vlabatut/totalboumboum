@@ -404,4 +404,8 @@ for(ArrayList<Integer> list: permutations)
 		{	panel.matchOver();		
 		}
 	}
+
+	public void roundOver()
+	{	panel.roundOver();
+	}
 }

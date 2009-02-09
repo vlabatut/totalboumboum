@@ -35,7 +35,13 @@ public class LeagueTournament extends AbstractTournament
 		// TODO Auto-generated method stub
 		
 	}
-
+	
+	@Override
+	public void roundOver() {
+		// TODO Auto-generated method stub
+		
+	}
+	
 	@Override
 	public void finish() {
 		// TODO Auto-generated method stub

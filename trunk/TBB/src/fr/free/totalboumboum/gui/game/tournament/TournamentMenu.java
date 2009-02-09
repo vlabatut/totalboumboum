@@ -196,13 +196,21 @@ buttonStatistics.setEnabled(false);
 	{	TournamentConfiguration tournamentConfiguration = Configuration.getGameConfiguration().getTournamentConfiguration();
 		AbstractTournament tournamentConf = tournamentConfiguration.getTournament();
 		if(tournament==tournamentConf && tournamentConfiguration.getAutoSave())
-		{	String folder = FileTools.FOLDER_DEFAULT;
-			File folderFile = new File(folder);
-			String backup = FileTools.FOLDER_DEFAULT_BACKUP;
-			File backupFile = new File(backup);
-			try
-			{	FileTools.deleteDirectory(backupFile);
-				folderFile.renameTo(backupFile);
+		{	try
+			{	// filenames
+				String folder = FileTools.FOLDER_DEFAULT;
+				String backup = FileTools.FOLDER_DEFAULT_BACKUP;
+				String dataFileName = FileTools.FILE_ARCHIVE+FileTools.EXTENSION_DATA;
+				String xmlFileName = FileTools.FILE_ARCHIVE+FileTools.EXTENSION_XML;
+				// backup
+				File oldFile,newFile;
+				oldFile = new File(folder,dataFileName);
+				newFile = new File(backup,dataFileName);
+				oldFile.renameTo(newFile);
+				oldFile = new File(folder,xmlFileName);
+				newFile = new File(backup,xmlFileName);
+				oldFile.renameTo(newFile);
+				// save
 				GameArchive.saveGame(folder, tournament);
 			}
 			catch (ParserConfigurationException e)
@@ -375,6 +383,19 @@ buttonStatistics.setEnabled(false);
 	/////////////////////////////////////////////////////////////////
 	// TOURNAMENT RENDER PANEL	/////////////////////////////////////
 	/////////////////////////////////////////////////////////////////	
+	@Override
+	public void roundOver()
+	{	saveTournament();
+/*	
+		SwingUtilities.invokeLater(new Runnable()
+		{	public void run()
+			{	tournamentResults.refresh();
+				buttonResults.doClick();
+			}
+		});
+*/			
+	}
+
 	@Override
 	public void matchOver()
 	{	saveTournament();
