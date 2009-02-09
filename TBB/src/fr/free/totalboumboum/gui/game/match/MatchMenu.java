@@ -24,7 +24,6 @@ package fr.free.totalboumboum.gui.game.match;
 import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.event.ActionEvent;
-import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 
@@ -38,14 +37,10 @@ import javax.xml.parsers.ParserConfigurationException;
 
 import org.xml.sax.SAXException;
 
-import fr.free.totalboumboum.configuration.Configuration;
-import fr.free.totalboumboum.configuration.game.tournament.TournamentConfiguration;
 import fr.free.totalboumboum.configuration.profile.Profile;
-import fr.free.totalboumboum.game.archive.GameArchive;
 import fr.free.totalboumboum.game.match.Match;
 import fr.free.totalboumboum.game.match.MatchRenderPanel;
 import fr.free.totalboumboum.game.round.Round;
-import fr.free.totalboumboum.game.tournament.AbstractTournament;
 import fr.free.totalboumboum.gui.common.structure.panel.SplitMenuPanel;
 import fr.free.totalboumboum.gui.common.structure.panel.menu.InnerMenuPanel;
 import fr.free.totalboumboum.gui.common.structure.panel.menu.MenuPanel;
@@ -56,7 +51,6 @@ import fr.free.totalboumboum.gui.game.round.RoundSplitPanel;
 import fr.free.totalboumboum.gui.game.save.SaveSplitPanel;
 import fr.free.totalboumboum.gui.tools.GuiKeys;
 import fr.free.totalboumboum.gui.tools.GuiTools;
-import fr.free.totalboumboum.tools.FileTools;
 
 public class MatchMenu extends InnerMenuPanel implements MatchRenderPanel
 {	private static final long serialVersionUID = 1L;
@@ -148,7 +142,7 @@ buttonStatistics.setEnabled(false);
 	public Match getMatch()
 	{	return match;	
 	}
-	
+/*	
 	private void saveTournament()
 	{	AbstractTournament tournament = match.getTournament();
 		TournamentConfiguration tournamentConfiguration = Configuration.getGameConfiguration().getTournamentConfiguration();
@@ -187,7 +181,7 @@ buttonStatistics.setEnabled(false);
 			}
 		}
 	}
-
+*/
 	/////////////////////////////////////////////////////////////////
 	// REFRESH	/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
@@ -315,7 +309,7 @@ buttonStatistics.setEnabled(false);
 	{	SwingUtilities.invokeLater(new Runnable()
 		{	public void run()
 			{	matchResults.refresh();
-				saveTournament();
+//				saveTournament();
 				buttonResults.doClick();
 			}
 		});	
@@ -326,7 +320,7 @@ buttonStatistics.setEnabled(false);
 	{	SwingUtilities.invokeLater(new Runnable()
 		{	public void run()
 			{	matchResults.refresh();
-				saveTournament();
+//				saveTournament();
 				buttonResults.doClick();
 			}
 		});	
