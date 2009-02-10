@@ -7,5 +7,6 @@
 	
 	<gesture name="burning" file="burning.xml" />
 	<gesture name="standing" file="standing.xml" />
+	<gesture name="standing-failing" file="standingfailing.xml" />
 
 </permissions>

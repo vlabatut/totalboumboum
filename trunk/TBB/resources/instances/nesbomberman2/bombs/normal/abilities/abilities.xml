@@ -10,7 +10,7 @@
 <!--	sprite-traverse-wall --> 
 <!--  	block-spawn --> 
 <!--  	bomb-explosion-latency --> 
-		<ability strength="140" frame="false" time="-1" uses="-1">
+		<ability strength="70" frame="false" time="-1" uses="-1">
 			<name value="bomb-explosion-latency" />
 		</ability>
 <!--  	bomb-failure-maxduration --> 
@@ -24,7 +24,7 @@
 		</ability>
 <!--  	bomb-trigger-control --> 
 <!--  	bomb-trigger-timer --> 
-		<ability strength="2400" frame="false" time="-1" uses="-1">
+		<ability strength="2000" frame="false" time="-1" uses="-1">
 			<name value="bomb-trigger-timer" />
 		</ability>
 <!--  	bomb-number --> 
