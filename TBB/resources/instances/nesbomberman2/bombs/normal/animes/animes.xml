@@ -23,10 +23,6 @@
 	</colors>
 	
 	
-	<shadows folder="pictures">
- 		<shadow name="shadow" file="shadow.png" />
-	</shadows>
-	
 	<gestures folder="pictures">
 	
 		<gesture name="burning" repeat="false">
@@ -35,12 +31,12 @@
 			</direction>
 		</gesture>
 
-		<gesture name="standing" repeat="true" shadow="shadow" >
+		<gesture name="standing" repeat="true"  >
 			<direction name="none">
-				<step duration="300" file="2.gif" />
-				<step duration="300" file="3.gif" />
-				<step duration="300" file="2.gif" />
-				<step duration="300" file="1.gif" />
+				<step duration="250" file="3.gif" />
+				<step duration="250" file="2.gif" />
+				<step duration="250" file="1.gif" />
+				<step duration="250" file="2.gif" />
 			</direction>
 		</gesture>
 		
