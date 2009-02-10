@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<itemset
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+	xsi:noNamespaceSchemaLocation="../../../schemas/itemset.xsd">
+
+	<item name="extrabomb" folder="extrabomb">	
+		<ability >
+			<name value="bomb-number" />
+		</ability>
+	</item>
+	<item name="extraflame" folder="extraflame">
+		<ability >
+			<name value="bomb-range" />
+		</ability>
+	</item>
+	<item name="remotecontrol" folder="remotecontrol" >
+		<ability >
+			<name value="bomb-type-remotecontrol" />
+		</ability>
+	</item>
+	<item name="throughbombs" folder="throughbombs" >
+		<ability >
+			<name value="sprite-traverse-bomb" />
+		</ability>
+	</item>
+	<item name="throughwalls" folder="throughwalls" >
+		<ability >
+			<name value="sprite-traverse-wall" />
+		</ability>
+	</item>
+
+</itemset>
