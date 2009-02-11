@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<theme 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+		xsi:noNamespaceSchemaLocation="../../../../schemas/theme.xsd" >
+	<floors folder="floor">
+		<floor name="floor" />
+	</floors>
+	<blocks>
+		<block folder="softwall" name="softwall" />
+		<group name="hardwalls" folder="hardwalls">
+			<block name="regular" folder="regular"/>
+			<block name="inDown" folder="inDown"/>
+			<block name="inDownleft" folder="inDownleft"/>
+			<block name="inDownright" folder="inDownright"/>
+			<block name="inLeftA" folder="inLeftA"/>
+			<block name="inLeftB" folder="inLeftB"/>
+			<block name="inRightA" folder="inRightA"/>
+			<block name="inRightB" folder="inRightB"/>
+			<block name="inUp" folder="inUp"/>
+			<block name="inUpleft" folder="inUpleft"/>
+			<block name="inUpright" folder="inUpright"/>
+			<block name="outDown" folder="outDown"/>
+			<block name="outDownLeft" folder="outDownLeft"/>
+			<block name="outDownright" folder="outDownright"/>
+			<block name="outLeft" folder="outLeft"/>
+			<block name="outRight" folder="outRight"/>
+			<block name="outUp" folder="outUp"/>
+			<block name="outUpleft" folder="outUpleft"/>
+			<block name="outUpright" folder="outUpright"/>
+		</group>
+	</blocks>
+	
+</theme>
