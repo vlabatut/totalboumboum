@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<theme 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+		xsi:noNamespaceSchemaLocation="../../../../schemas/theme.xsd" >
+	<floors folder="floor">
+		<floor name="floor" />
+	</floors>
+	<blocks>
+		<block folder="softwall" name="softwall" />
+		<group name="hardwalls" folder="hardwalls">
+			<block name="regular" folder="regular"/>
+			<block name="border" folder="border"/>
+		</group>
+	</blocks>
+	
+</theme>
