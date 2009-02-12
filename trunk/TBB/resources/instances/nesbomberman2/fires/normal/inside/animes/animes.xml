@@ -9,8 +9,8 @@
 				<step duration="70" file="2.gif" />
 				<step duration="70" file="3.gif" />
 				<step duration="70" file="4.gif" />
-				<step duration="70" file="2.gif" />
-				<step duration="60" file="3.gif" />
+				<step duration="70" file="3.gif" />
+				<step duration="60" file="2.gif" />
 				<step duration="70" file="1.gif" />
 			</direction>
 			<direction name="left" folder="horizontal">
@@ -18,8 +18,8 @@
 				<step duration="70" file="2.gif" />
 				<step duration="70" file="3.gif" />
 				<step duration="70" file="4.gif" />
-				<step duration="70" file="2.gif" />
-				<step duration="60" file="3.gif" />
+				<step duration="70" file="3.gif" />
+				<step duration="60" file="2.gif" />
 				<step duration="70" file="1.gif" />
 			</direction>
 			<direction name="none" folder="center">
@@ -27,8 +27,8 @@
 				<step duration="70" file="2.gif" />
 				<step duration="70" file="3.gif" />
 				<step duration="70" file="4.gif" />
-				<step duration="70" file="2.gif" />
-				<step duration="60" file="3.gif" />
+				<step duration="70" file="3.gif" />
+				<step duration="60" file="2.gif" />
 				<step duration="70" file="1.gif" />
 			</direction>
 			<direction name="right" folder="horizontal">
@@ -36,8 +36,8 @@
 				<step duration="70" file="2.gif" />
 				<step duration="70" file="3.gif" />
 				<step duration="70" file="4.gif" />
-				<step duration="70" file="2.gif" />
-				<step duration="60" file="3.gif" />
+				<step duration="70" file="3.gif" />
+				<step duration="60" file="2.gif" />
 				<step duration="70" file="1.gif" />
 			</direction>
 			<direction name="up" folder="vertical">
@@ -45,8 +45,8 @@
 				<step duration="70" file="2.gif" />
 				<step duration="70" file="3.gif" />
 				<step duration="70" file="4.gif" />
-				<step duration="70" file="2.gif" />
-				<step duration="60" file="3.gif" />
+				<step duration="70" file="3.gif" />
+				<step duration="60" file="2.gif" />
 				<step duration="70" file="1.gif" />
 			</direction>
 		</gesture>
