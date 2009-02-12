@@ -16,6 +16,8 @@
 			<block name="horizontalAbroken" folder="horizontalAbroken"/>
 			<block name="horizontalB" folder="horizontalB"/>
 			<block name="horizontalBbroken" folder="horizontalBbroken"/>
+			<block name="horizontalC" folder="horizontalC"/>
+			<block name="horizontalCbroken" folder="horizontalCbroken"/>
 			<block name="leftA" folder="leftA"/>
 			<block name="leftAbroken" folder="leftAbroken"/>
 			<block name="leftB" folder="leftB"/>
