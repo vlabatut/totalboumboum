@@ -15,6 +15,7 @@
 			<block name="inLeft" folder="inLeft"/>
 			<block name="inRight" folder="inRight"/>
 			<block name="inUpA" folder="inUpA"/>
+			<block name="inUpA2" folder="inUpA2"/>
 			<block name="inUpB" folder="inUpB"/>
 			<block name="inUpC" folder="inUpC"/>
 			<block name="inUpleft" folder="inUpleft"/>

@@ -8,6 +8,7 @@
 		<block folder="softwall" name="softwall" />
 		<group name="hardwalls" folder="hardwalls">
 			<block name="regular" folder="regular"/>
+			<block name="inDown" folder="inDown"/>
 			<block name="inDownleft" folder="inDownleft"/>
 			<block name="inDownright" folder="inDownright"/>
 			<block name="inLeftA" folder="inLeftA"/>
