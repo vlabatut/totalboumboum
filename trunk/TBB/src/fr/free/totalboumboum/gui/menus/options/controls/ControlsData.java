@@ -58,7 +58,8 @@ public class ControlsData extends EntitledDataPanel implements MouseListener,Key
 		ControlEvent.DOWN,
 		ControlEvent.LEFT,
 		ControlEvent.DROPBOMB,
-		ControlEvent.PUNCHBOMB
+		ControlEvent.PUNCHBOMB,
+		ControlEvent.TRIGGERBOMB
 	};
 	private int selectedRow = -1;
 	

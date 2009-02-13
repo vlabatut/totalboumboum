@@ -15,15 +15,15 @@
 				<block name="softwall" />
 				<item type="extraflame" />
 			</value>
-			<value proba="0.04" >
+			<value proba="0.01" >
 				<block name="softwall" />
 				<item type="remotecontrol" />
 			</value>
-			<value proba="0.03" >
+			<value proba="0.04" >
 				<block name="softwall" />
 				<item type="throughbombs" />
 			</value>
-			<value proba="0.03" >
+			<value proba="0.05" >
 				<block name="softwall" />
 				<item type="throughwalls" />
 			</value>

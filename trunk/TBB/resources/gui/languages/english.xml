@@ -155,7 +155,8 @@
 						<text name="Down" value="Down" tooltip="Go down" />
 						<text name="Left" value="Left" tooltip="Go left" />
 						<text name="Dropbomb" value="Drop" tooltip="Drop a bomb" />
-						<text name="Punchbomb" value="Punch" tooltip="Punch  a bomb" />
+						<text name="Punchbomb" value="Punch" tooltip="Punch a bomb" />
+						<text name="Triggerbomb" value="Remote control" tooltip="Trigger a bombe remotely" />
 					</group>
 
 					<group name="Auto" >

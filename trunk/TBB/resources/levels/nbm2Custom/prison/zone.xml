@@ -18,15 +18,15 @@
 				<block group="softwalls" name="broken"/>
 				<item type="extraflame" />
 			</value>
-			<value proba="0.04" >
+			<value proba="0.01" >
 				<block group="softwalls" name="regular"/>
 				<item type="remotecontrol" />
 			</value>
-			<value proba="0.03" >
+			<value proba="0.04" >
 				<block group="softwalls" name="regular"/>
 				<item type="throughbombs" />
 			</value>
-			<value proba="0.03" >
+			<value proba="0.05" >
 				<block group="softwalls" name="broken"/>
 				<item type="throughwalls" />
 			</value>

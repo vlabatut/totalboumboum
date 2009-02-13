@@ -13,7 +13,12 @@
 			<value rank="5" points="0" />
 		</points>
 	</settings>
-	<players />
+	<players>
+		<player file="1" color="cyan" controls="1" spritePack="nesbomberman2" spriteFolder="shirobon" />
+		<player file="53" color="red" controls="0" spritePack="superbomberman5" spriteFolder="shirobon" />
+		<player file="59" color="blue" controls="0" spritePack="superbomberman5" spriteFolder="shirobon" />
+		<player file="60" color="orange" controls="0" spritePack="superbomberman5" spriteFolder="shirobon" />
+	</players>
 	<levels>
 		<level pack="nbm2Custom" folder="battle" />
 		<level pack="nbm2Custom" folder="cave" />
