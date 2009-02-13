@@ -13,11 +13,14 @@
 			<value rank="5" points="0" />
 		</points>
 	</settings>
-	<players>
-		<player file="1" color="cyan" controls="1" spritePack="nesbomberman2" spriteFolder="shirobon" />
-	</players>
+	<players />
 	<levels>
-		<level pack="nbm2Official" folder="world5" />
+		<level pack="nbm2Custom" folder="battle" />
+		<level pack="nbm2Custom" folder="cave" />
+		<level pack="nbm2Custom" folder="forest" />
+		<level pack="nbm2Custom" folder="lake" />
+		<level pack="nbm2Custom" folder="mountain" />
+		<level pack="nbm2Custom" folder="prison" />
 	</levels>
 </gameQuickmatch>
 

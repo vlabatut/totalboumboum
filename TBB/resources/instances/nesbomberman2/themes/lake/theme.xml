@@ -11,10 +11,15 @@
 			<block name="inDown" folder="inDown"/>
 			<block name="inDownleft" folder="inDownleft"/>
 			<block name="inDownright" folder="inDownright"/>
+			<block name="inEmpty" folder="inEmpty"/>
 			<block name="inLeftA" folder="inLeftA"/>
 			<block name="inLeftB" folder="inLeftB"/>
+			<block name="inLeftdown" folder="inLeftdown"/>
+			<block name="inLeftup" folder="inLeftup"/>
 			<block name="inRightA" folder="inRightA"/>
 			<block name="inRightB" folder="inRightB"/>
+			<block name="inRightdown" folder="inRightdown"/>
+			<block name="inRightup" folder="inRightup"/>
 			<block name="inUp" folder="inUp"/>
 			<block name="inUpleft" folder="inUpleft"/>
 			<block name="inUpright" folder="inUpright"/>
