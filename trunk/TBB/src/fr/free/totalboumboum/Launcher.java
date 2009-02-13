@@ -809,8 +809,12 @@ public class Launcher
 	 * TODO
 	 * 
 	 * + beta.011
-	 * - sauvegarde automatique modifiée pour éviter les conflits de version avec SVN
-	 * - correction d'un bug lors de la sauvegarde automatique d'un tournoi simple (pas de panel de match => pas de sauvegarde)
+	 * - nouveauté : sauvegarde automatique modifiée pour éviter les conflits de version avec SVN
+	 * - correction : un bug lors de la sauvegarde automatique d'un tournoi simple (pas de panel de match => pas de sauvegarde)
+	 * - nouveauté : personnage Shirobon de Nes Bomberman 2
+	 * - nouveauté : instance de NES Bomberman 2
+	 * - nouveauté : niveaux de NBM2
+	 * - nouveauté : niveaux custom pour NBM2
 	 * 
 	 * 
 	 * - lors du calcul des points, il faut forcer la présence d'un classement: ça facilite énormément de traitements en aval
