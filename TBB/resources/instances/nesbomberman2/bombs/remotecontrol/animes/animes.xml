@@ -23,7 +23,7 @@
 	</colors>
 	
 	<gestures folder="pictures">
-	
+
 		<gesture name="burning" repeat="false">
 			<direction name="none">
 				<step duration="100" />

@@ -20,6 +20,10 @@
 		<on key="VK_NUMPAD8" />
 		<off key="VK_NUMPAD8" />
 	</event>
+	<event name="TRIGGERBOMB" autofire="false">
+		<on key="VK_NUMPAD1" />
+		<off key="VK_NUMPAD1" />
+	</event>
 	<event name="LEFT" autofire="true">
 		<on key="VK_NUMPAD4" />
 		<off key="VK_NUMPAD4" />

@@ -4,7 +4,7 @@
 		<on key="VK_Q" />
 		<off key="VK_Q" />
 	</event>
-	<event name="PUNCHBOMB" autofire="true">
+	<event name="PUNCHBOMB" autofire="false">
 		<on key="VK_X" />
 		<off key="VK_X" />
 	</event>
@@ -23,6 +23,10 @@
 	<event name="LEFT" autofire="true">
 		<on key="VK_LEFT" />
 		<off key="VK_LEFT" />
+	</event>
+	<event name="TRIGGERBOMB" autofire="false">
+		<on key="VK_S" />
+		<off key="VK_S" />
 	</event>
 </controls>
 

@@ -156,6 +156,7 @@
 						<text name="Left" value="Gauche" tooltip="Aller vers la gauche" />
 						<text name="Dropbomb" value="Poser" tooltip="Poser une bombe" />
 						<text name="Punchbomb" value="Frapper" tooltip="Frapper une bombe" />
+						<text name="Triggerbomb" value="Télécommande" tooltip="Déclencher une bombe à distance" />
 					</group>
 
 					<group name="Auto" >
