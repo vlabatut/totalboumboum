@@ -23,6 +23,7 @@ package fr.free.totalboumboum.gui.common.structure.subpanel.temp.fait.contentpan
 
 import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.Font;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 
@@ -30,12 +31,18 @@ import javax.swing.Box;
 import javax.swing.BoxLayout;
 import javax.swing.JLabel;
 
+import fr.free.totalboumboum.gui.data.configuration.GuiConfiguration;
 import fr.free.totalboumboum.gui.tools.GuiTools;
 
 public class LinesContentPanel extends ContentPanel
 {	private static final long serialVersionUID = 1L;
 
+	
 	public LinesContentPanel(int width, int height, int lines, boolean header)
+	{	this(width,height,lines,1,header);		
+	}
+	
+	public LinesContentPanel(int width, int height, int lines, int cols, boolean header)
 	{	super(width,height);
 //		setBackground(GuiTools.COLOR_COMMON_BACKGROUND);
 		
@@ -45,33 +52,65 @@ public class LinesContentPanel extends ContentPanel
 		BoxLayout layout = new BoxLayout(this,BoxLayout.PAGE_AXIS); 
 		setLayout(layout);
 
-		setDim(width,height);
-		
-		// content
+		this.lines = 2; //temporary
+		setDim(width,height);		
+		reinit(lines,cols);
+	}
+
+	public void reinit(int lines, int cols)
+	{	// content
+		removeAll();
+		this.lines = 0;
 		for(int line=0;line<lines;line++)
-			addLine(line);
+			addLine(line,cols);
+		setDim(width,height);
+	}
+
+	/////////////////////////////////////////////////////////////////
+	// FONTS				/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	private Font headerFont;
+	private Font lineFont;
+	private int lineFontSize;
+	private int headerFontSize;
+
+	public Font getHeaderFont()
+	{	return headerFont;	
+	}
+	
+	public Font getLineFont()
+	{	return lineFont;	
+	}
+	
+	public int getLineFontSize()
+	{	return lineFontSize;	
+	}
+	
+	public int getHeaderFontSize()
+	{	return headerFontSize;	
+	}
+	
+	/////////////////////////////////////////////////////////////////
+	// SIZE				/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	private boolean header;
+	
+	public boolean hasHeader()
+	{	return header;	
 	}
 
 	/////////////////////////////////////////////////////////////////
 	// SIZE				/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	private boolean header;
 	private int headerHeight;
 	private int headerWidth;
 	private int lineHeight;
 	private int lineWidth;
-	private int lineFontSize;
-	private int headerFontSize;
 
-	public int getLineFontSize()
-	{	return lineFontSize;	
-	}
-	public int getHeaderFontSize()
-	{	return headerFontSize;	
-	}
 	public int getHeaderHeight()
 	{	return headerHeight;	
 	}
+	
 	public int getLineHeight()
 	{	return lineHeight;	
 	}
@@ -82,11 +121,17 @@ public class LinesContentPanel extends ContentPanel
 		if(header)
 		{	lineHeight = (int)((height - (lines-1)*GuiTools.subPanelMargin)/(lines+GuiTools.TABLE_HEADER_RATIO-1));
 			headerHeight = height - (lines-1)*GuiTools.subPanelMargin - lineHeight*(lines-1);
+			if(headerHeight-(lines-1)>=lineHeight)
+			{	headerHeight = headerHeight - (lines-1);
+				lineHeight ++;
+			}
 			headerFontSize = GuiTools.getFontSize(headerHeight*GuiTools.FONT_RATIO);
+			headerFont = GuiConfiguration.getMiscConfiguration().getFont().deriveFont((float)headerFontSize);
 		}
 		else
 			lineHeight = (int)((height - (lines-1)*GuiTools.subPanelMargin)/((float)lines));
 		lineFontSize = GuiTools.getFontSize(lineHeight*GuiTools.FONT_RATIO);
+		lineFont = GuiConfiguration.getMiscConfiguration().getFont().deriveFont((float)lineFontSize);
 		lineWidth = width;
 		headerWidth = lineWidth;
 		// content
@@ -107,6 +152,10 @@ public class LinesContentPanel extends ContentPanel
 	}
 	
 	public void addLine(int index)
+	{	addLine(index,1);		
+	}
+	
+	public void addLine(int index, int cols)
 	{	if(index>0)
 			add(Box.createRigidArea(new Dimension(GuiTools.subPanelMargin,GuiTools.subPanelMargin)),2*index-1);
 //			add(Box.createVerticalGlue(),2*index);
@@ -119,13 +168,13 @@ public class LinesContentPanel extends ContentPanel
 		
 		// header
 		if(header && index==0)
-		{	line = new Line(headerWidth,headerHeight,1);
+		{	line = new Line(headerWidth,headerHeight,cols);
 			line.setBackgroundColor(GuiTools.COLOR_TABLE_HEADER_BACKGROUND);
 			line.setForegroundColor(GuiTools.COLOR_TABLE_HEADER_FOREGROUND);
 		}
 		//data
 		else
-			line = new Line(lineWidth,lineHeight,1);
+			line = new Line(lineWidth,lineHeight,cols);
 
 		add(line,2*index);
 	}
@@ -157,7 +206,7 @@ public class LinesContentPanel extends ContentPanel
 	
 	private void updateLinesHeights()
 	{	int start = 0;
-		if(header)
+		if(header && lines>0)
 		{	Line ln = getLine(start);
 			ln.setDim(headerWidth,headerHeight);
 			start = 1;			
@@ -231,28 +280,33 @@ public class LinesContentPanel extends ContentPanel
 	}
 	
 	public void setLabelMinWidth(int line, int col, int width)
-	{	Line l = getLine(line);
-		l.setLabelMinWidth(col,width);
+	{	setLabelWidth(line,col,width,0);
 	}
 	public void setLabelPreferredWidth(int line, int col, int width)
-	{	Line l = getLine(line);
-		l.setLabelPreferredWidth(col,width);
+	{	setLabelWidth(line,col,width,1);
 	}
 	public void setLabelMaxWidth(int line, int col, int width)
+	{	setLabelWidth(line,col,width,2);
+	}
+	public void setLabelWidth(int line, int col, int width, int mode)
 	{	Line l = getLine(line);
-		l.setLabelMaxWidth(col,width);
+		l.setLabelWidth(col,width,mode);
 	}
 	
-	public void unsetLabelMinWidth(int line, int colSub)
+	public void unsetLabelMinWidth(int line, int col)
 	{	Line l = getLine(line);
-		l.unsetLabelMinWidth(colSub);
+		l.unsetLabelMinWidth(col);
 	}
-	public void unsetLabelPreferredWidth(int line, int colSub)
+	public void unsetLabelPreferredWidth(int line, int col)
 	{	Line l = getLine(line);
-		l.unsetLabelPreferredWidth(colSub);
+		l.unsetLabelPreferredWidth(col);
 	}
-	public void unsetLabelMaxWidth(int line, int colSub)
+	public void unsetLabelMaxWidth(int line, int col)
 	{	Line l = getLine(line);
-		l.unsetLabelMaxWidth(colSub);
+		l.unsetLabelMaxWidth(col);
+	}
+	public void unsetLabelWidth(int line, int col, int mode)
+	{	Line l = getLine(line);
+		l.unsetLabelWidth(col,mode);
 	}
 }

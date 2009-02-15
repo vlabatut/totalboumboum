@@ -43,11 +43,18 @@ public class ColumnsContentPanel extends ContentPanel
 		BoxLayout layout = new BoxLayout(this,BoxLayout.LINE_AXIS); 
 		setLayout(layout);
 
-		setDim(width,height);
+		this.cols = 2; //temporary
+		setDim(width,height);		
+		reinit(cols);
+	}
 
-		// content
+	public void reinit(int lines)
+	{	// content
+		removeAll();
+		this.cols = 0;
 		for(int col=0;col<cols;col++)
 			addColumn(col);
+		setDim(width,height);
 	}
 
 	/////////////////////////////////////////////////////////////////
@@ -85,10 +92,8 @@ public class ColumnsContentPanel extends ContentPanel
 			add(Box.createRigidArea(new Dimension(GuiTools.subPanelMargin,GuiTools.subPanelMargin)),2*index);
 			
 		cols++;
-		Column column;
-		
+		Column column;		
 		column = new Column(colWidth,colHeight,1);
-
 		add(column,2*index);
 	}
 	
