@@ -38,16 +38,17 @@ import fr.free.totalboumboum.configuration.profile.Portraits;
 import fr.free.totalboumboum.configuration.profile.PredefinedColor;
 import fr.free.totalboumboum.configuration.profile.Profile;
 import fr.free.totalboumboum.configuration.profile.ProfileLoader;
-import fr.free.totalboumboum.gui.common.structure.subpanel.temp.fait.UntitledSubPanelTable;
+import fr.free.totalboumboum.gui.common.structure.subpanel.outside.SubPanel;
+import fr.free.totalboumboum.gui.common.structure.subpanel.outside.TableSubPanel;
 import fr.free.totalboumboum.gui.tools.GuiKeys;
 import fr.free.totalboumboum.gui.tools.GuiStringTools;
 import fr.free.totalboumboum.gui.tools.GuiTools;
 
-public class PlayersSelectionSubPanel extends UntitledSubPanelTable implements MouseListener
+public class PlayersSelectionSubPanel extends TableSubPanel implements MouseListener
 {	private static final long serialVersionUID = 1L;
 
 	public PlayersSelectionSubPanel(int width, int height)
-	{	super(width,height,1,1,1,true);
+	{	super(width,height,SubPanel.Mode.BORDER,1,1,1,true);
 		
 		// limits
 		setPlayers(null);
@@ -89,7 +90,7 @@ public class PlayersSelectionSubPanel extends UntitledSubPanelTable implements M
 		int typeWidth = headerHeight;
 		int heroWidth = headerHeight;
 		int fixedSum = GuiTools.subPanelMargin*(cols+1) + deleteWidth + heroWidth + controlWidth + colorWidth + typeWidth;
-		int nameWidth = width - fixedSum;
+		int nameWidth = getDataWidth() - fixedSum;
 		
 		// headers
 		{	String keys[] = 
@@ -307,7 +308,7 @@ public class PlayersSelectionSubPanel extends UntitledSubPanelTable implements M
 	@Override
 	public void mousePressed(MouseEvent e)
 	{	JLabel label = (JLabel)e.getComponent();
-		int[] pos = getLabelPosition(label);
+		int[] pos = getLabelPositionMultiple(label);
 		switch(pos[2])
 		{	case COL_DELETE:
 				{	int index = pos[0]-1;

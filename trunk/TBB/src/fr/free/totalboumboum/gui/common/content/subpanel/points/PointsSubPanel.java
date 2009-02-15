@@ -35,18 +35,19 @@ import fr.free.totalboumboum.game.points.PointsRankpoints;
 import fr.free.totalboumboum.game.points.PointsScores;
 import fr.free.totalboumboum.game.points.PointsTotal;
 import fr.free.totalboumboum.game.statistics.Score;
-import fr.free.totalboumboum.gui.common.structure.subpanel.temp.fait.EntitledSubPanelTable;
+import fr.free.totalboumboum.gui.common.structure.subpanel.outside.SubPanel;
+import fr.free.totalboumboum.gui.common.structure.subpanel.outside.TableSubPanel;
 import fr.free.totalboumboum.gui.data.configuration.GuiConfiguration;
 import fr.free.totalboumboum.gui.tools.GuiKeys;
 import fr.free.totalboumboum.gui.tools.GuiTools;
 
-public class PointsSubPanel extends EntitledSubPanelTable
+public class PointsSubPanel extends TableSubPanel
 {	private static final long serialVersionUID = 1L;
 	
 	private String prefix;
 
 	public PointsSubPanel(int width, int height, String type)
-	{	super(width,height,1,1,1);
+	{	super(width,height,SubPanel.Mode.TITLE,1,1,1,false);
 		
 		// init
 		this.prefix = GuiKeys.COMMON_POINTS+type;
@@ -79,7 +80,7 @@ public class PointsSubPanel extends EntitledSubPanelTable
 		int colSubs = 2;
 		int colGroups = 1;
 
-		setNewTable(colGroups,colSubs,lines);
+		reinit(lines,colGroups,colSubs);
 		setColSubMaxWidth(1,Integer.MAX_VALUE);
 
 		if(pointsProcessor==null)

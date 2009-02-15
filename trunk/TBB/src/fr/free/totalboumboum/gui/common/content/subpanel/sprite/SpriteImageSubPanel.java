@@ -32,19 +32,19 @@ import javax.swing.JLabel;
 
 import fr.free.totalboumboum.configuration.profile.PredefinedColor;
 import fr.free.totalboumboum.engine.content.sprite.SpritePreview;
-import fr.free.totalboumboum.gui.common.structure.subpanel.temp.fait.Column;
-import fr.free.totalboumboum.gui.common.structure.subpanel.temp.fait.UntitledSubPanelColumns;
+import fr.free.totalboumboum.gui.common.structure.subpanel.inside.Column;
+import fr.free.totalboumboum.gui.common.structure.subpanel.outside.ColumnsSubPanel;
+import fr.free.totalboumboum.gui.common.structure.subpanel.outside.SubPanel;
 import fr.free.totalboumboum.gui.data.configuration.GuiConfiguration;
 import fr.free.totalboumboum.gui.tools.GuiKeys;
 import fr.free.totalboumboum.gui.tools.GuiTools;
 import fr.free.totalboumboum.tools.ImageTools;
 
-public class SpriteImageSubPanel extends UntitledSubPanelColumns implements MouseListener
+public class SpriteImageSubPanel extends ColumnsSubPanel implements MouseListener
 {	private static final long serialVersionUID = 1L;
 	
 	public SpriteImageSubPanel(int width, int height)
-	{	super(width,height,3);
-		
+	{	super(width,height,SubPanel.Mode.BORDER,3);
 		setSpritePreview(null);
 	}
 		
@@ -70,16 +70,16 @@ public class SpriteImageSubPanel extends UntitledSubPanelColumns implements Mous
 		lines = colorValues.length/2;
 		if(colorValues.length%2 > 0)
 			lines++;
-		lineHeight = (height - (lines-1)*GuiTools.subPanelMargin)/lines;
+		lineHeight = (getDataHeight() - (lines-1)*GuiTools.subPanelMargin)/lines;
 		if(showColors)
-			rightWidth = width - 2*lineHeight - 5*GuiTools.subPanelMargin;
+			rightWidth = getDataWidth() - 2*lineHeight - 5*GuiTools.subPanelMargin;
 		else
-			rightWidth = width - 2*GuiTools.subPanelMargin;			
+			rightWidth = getDataWidth() - 2*GuiTools.subPanelMargin;			
 
 		int col = 0;
 		// colors 0
 		{	Column cl = getColumn(col);
-			cl.setWidth(lineHeight);
+			cl.setDim(lineHeight,getDataHeight());
 			for(int i=1;i<lines;i++)
 				cl.addLabel(0);
 			for(int line=0;line<lines;line++)
@@ -96,7 +96,7 @@ public class SpriteImageSubPanel extends UntitledSubPanelColumns implements Mous
 		
 		// colors 1
 		{	Column cl = getColumn(col);
-			cl.setWidth(lineHeight);
+			cl.setDim(lineHeight,getDataHeight());
 			for(int i=1;i<lines;i++)
 				cl.addLabel(0);
 			for(int line=0;line<lines;line++)
@@ -113,11 +113,11 @@ public class SpriteImageSubPanel extends UntitledSubPanelColumns implements Mous
 		
 		// image
 		{	Column cl = getColumn(col);
-			cl.setWidth(rightWidth);
+			cl.setDim(rightWidth,getDataHeight());
 			int line = 0;
-			cl.setLabelMinHeight(line,height);
-			cl.setLabelPreferredHeight(line,height);
-			cl.setLabelMaxHeight(line,height);
+			cl.setLabelMinHeight(line,getDataHeight());
+			cl.setLabelPreferredHeight(line,getDataHeight());
+			cl.setLabelMaxHeight(line,getDataHeight());
 			JLabel label = cl.getLabel(line);
 			label.addMouseListener(this);
 			Color bg = GuiTools.COLOR_TABLE_NEUTRAL_BACKGROUND;

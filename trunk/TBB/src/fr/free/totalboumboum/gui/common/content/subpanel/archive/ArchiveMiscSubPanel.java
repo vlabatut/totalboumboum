@@ -27,16 +27,17 @@ import java.util.ArrayList;
 
 import fr.free.totalboumboum.game.archive.GameArchive;
 import fr.free.totalboumboum.game.archive.TournamentType;
-import fr.free.totalboumboum.gui.common.structure.subpanel.temp.fait.UntitledSubPanelTable;
+import fr.free.totalboumboum.gui.common.structure.subpanel.outside.SubPanel;
+import fr.free.totalboumboum.gui.common.structure.subpanel.outside.TableSubPanel;
 import fr.free.totalboumboum.gui.data.configuration.GuiConfiguration;
 import fr.free.totalboumboum.gui.tools.GuiKeys;
 import fr.free.totalboumboum.gui.tools.GuiTools;
 
-public class ArchiveMiscSubPanel extends UntitledSubPanelTable
+public class ArchiveMiscSubPanel extends TableSubPanel
 {	private static final long serialVersionUID = 1L;
 	
 	public ArchiveMiscSubPanel(int width, int height, int lines)
-	{	super(width,height,1,1,1,true);
+	{	super(width,height,SubPanel.Mode.BORDER,1,1,1,true);
 		
 		this.lines = lines;
 		setGameArchive(null);
@@ -165,7 +166,7 @@ public class ArchiveMiscSubPanel extends UntitledSubPanelTable
 			}
 		}
 		
-		int maxWidth = width-3*GuiTools.subPanelMargin-getHeaderHeight();
+		int maxWidth = getDataWidth()-3*GuiTools.subPanelMargin-getHeaderHeight();
 		setColSubMaxWidth(1,maxWidth);
 		setColSubPreferredWidth(1,maxWidth);
 	}

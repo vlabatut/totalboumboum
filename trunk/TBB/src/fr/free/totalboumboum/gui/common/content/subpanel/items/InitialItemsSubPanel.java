@@ -31,15 +31,16 @@ import java.util.Map.Entry;
 import fr.free.totalboumboum.engine.container.itemset.ItemsetPreview;
 import fr.free.totalboumboum.engine.container.level.LevelPreview;
 import fr.free.totalboumboum.engine.content.sprite.SpritePreview;
-import fr.free.totalboumboum.gui.common.structure.subpanel.temp.fait.EntitledSubPanelTable;
+import fr.free.totalboumboum.gui.common.structure.subpanel.outside.SubPanel;
+import fr.free.totalboumboum.gui.common.structure.subpanel.outside.TableSubPanel;
 import fr.free.totalboumboum.gui.tools.GuiKeys;
 import fr.free.totalboumboum.gui.tools.GuiTools;
 
-public class InitialItemsSubPanel extends EntitledSubPanelTable
+public class InitialItemsSubPanel extends TableSubPanel
 {	private static final long serialVersionUID = 1L;
 
 	public InitialItemsSubPanel(int width, int height)
-	{	super(width,height,1,1,1);
+	{	super(width,height,SubPanel.Mode.TITLE,1,1,1,false);
 		
 		// title
 		String titleKey = GuiKeys.COMMON_ITEMS_INITIAL_TITLE;
@@ -65,7 +66,7 @@ public class InitialItemsSubPanel extends EntitledSubPanelTable
 			{	lines = 8;
 				colGroups = 4;
 			}
-			setNewTable(colGroups,colSubs,lines);
+			reinit(lines,colGroups,colSubs);
 			int lineHeight = getLineHeight();
 			setColSubMinWidth(0,lineHeight);
 			setColSubPreferredWidth(0,lineHeight);
@@ -114,7 +115,7 @@ public class InitialItemsSubPanel extends EntitledSubPanelTable
 		}
 		else
 		{	//table
-			setNewTable(colGroups,colSubs,lines);
+			reinit(lines,colGroups,colSubs);
 			// widths
 			int lineHeight = getLineHeight();
 			setColSubMinWidth(0,lineHeight);

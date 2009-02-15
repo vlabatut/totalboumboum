@@ -25,16 +25,17 @@ import java.awt.Color;
 import java.util.ArrayList;
 
 import fr.free.totalboumboum.ai.AiPreview;
-import fr.free.totalboumboum.gui.common.structure.subpanel.temp.fait.UntitledSubPanelTable;
+import fr.free.totalboumboum.gui.common.structure.subpanel.outside.SubPanel;
+import fr.free.totalboumboum.gui.common.structure.subpanel.outside.TableSubPanel;
 import fr.free.totalboumboum.gui.data.configuration.GuiConfiguration;
 import fr.free.totalboumboum.gui.tools.GuiKeys;
 import fr.free.totalboumboum.gui.tools.GuiTools;
 
-public class AiSubPanel extends UntitledSubPanelTable
+public class AiSubPanel extends TableSubPanel
 {	private static final long serialVersionUID = 1L;
 	
 	public AiSubPanel(int width, int height)
-	{	super(width,height,1,1,1,true);
+	{	super(width,height,SubPanel.Mode.BORDER,1,1,1,true);
 		
 	setAiPreview(null);
 	}
@@ -133,7 +134,7 @@ public class AiSubPanel extends UntitledSubPanelTable
 			}
 		}
 		
-		int maxWidth = width-3*GuiTools.subPanelMargin-getHeaderHeight();
+		int maxWidth = getDataWidth()-3*GuiTools.subPanelMargin-getHeaderHeight();
 		setColSubMaxWidth(1,maxWidth);
 		setColSubPreferredWidth(1,maxWidth);
 	}
