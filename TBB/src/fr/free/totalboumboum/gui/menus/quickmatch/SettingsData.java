@@ -33,7 +33,7 @@ import fr.free.totalboumboum.gui.common.content.subpanel.round.RoundQuickConfigS
 import fr.free.totalboumboum.gui.common.content.subpanel.round.RoundQuickConfigSubPanelListener;
 import fr.free.totalboumboum.gui.common.structure.panel.SplitMenuPanel;
 import fr.free.totalboumboum.gui.common.structure.panel.data.EntitledDataPanel;
-import fr.free.totalboumboum.gui.common.structure.subpanel.SubPanel;
+import fr.free.totalboumboum.gui.common.structure.subpanel.temp.fait.SubPanel;
 import fr.free.totalboumboum.gui.tools.GuiKeys;
 import fr.free.totalboumboum.gui.tools.GuiTools;
 

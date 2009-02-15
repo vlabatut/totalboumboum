@@ -27,10 +27,10 @@ import java.util.ArrayList;
 import javax.swing.BoxLayout;
 
 import fr.free.totalboumboum.engine.container.level.LevelPreview;
-import fr.free.totalboumboum.gui.common.structure.subpanel.EntitledSubPanelTable;
-import fr.free.totalboumboum.gui.common.structure.subpanel.SubPanel;
-import fr.free.totalboumboum.gui.common.structure.subpanel.SubPanelTable;
-import fr.free.totalboumboum.gui.common.structure.subpanel.UntitledSubPanelTable;
+import fr.free.totalboumboum.gui.common.structure.subpanel.temp.fait.EntitledSubPanelTable;
+import fr.free.totalboumboum.gui.common.structure.subpanel.temp.fait.SubPanel;
+import fr.free.totalboumboum.gui.common.structure.subpanel.temp.fait.SubPanelTable;
+import fr.free.totalboumboum.gui.common.structure.subpanel.temp.fait.UntitledSubPanelTable;
 import fr.free.totalboumboum.gui.data.configuration.GuiConfiguration;
 import fr.free.totalboumboum.gui.tools.GuiKeys;
 import fr.free.totalboumboum.gui.tools.GuiTools;

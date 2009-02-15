@@ -25,10 +25,10 @@ import java.awt.Dimension;
 
 import javax.swing.JPanel;
 
-public class SubPanel extends JPanel
+public abstract class BasicPanel extends JPanel
 {	private static final long serialVersionUID = 1L;
 	
-	public SubPanel(int width, int height)
+	public BasicPanel(int width, int height)
 	{	this.width = width;
 		this.height = height;
 		Dimension dim = new Dimension(width,height);
@@ -47,15 +47,17 @@ public class SubPanel extends JPanel
 	{	return width;
 	}
 	
-	public void setWidth(int width)
+	public int getHeight()
+	{	return height;
+	}
+
+	public void setDim(int width, int height)
 	{	this.width = width;
+		this.height = height;
 		Dimension dim = new Dimension(width,height);
 		setPreferredSize(dim);
 		setMaximumSize(dim);
 		setMinimumSize(dim);
 	}
 
-	public int getHeight()
-	{	return height;
-	}
 }

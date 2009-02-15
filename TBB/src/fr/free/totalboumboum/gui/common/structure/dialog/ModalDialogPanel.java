@@ -31,7 +31,7 @@ import javax.swing.BoxLayout;
 
 import fr.free.totalboumboum.gui.common.structure.panel.ContentPanel;
 import fr.free.totalboumboum.gui.common.structure.panel.menu.MenuPanel;
-import fr.free.totalboumboum.gui.common.structure.subpanel.SubPanel;
+import fr.free.totalboumboum.gui.common.structure.subpanel.temp.fait.SubPanel;
 import fr.free.totalboumboum.gui.frames.NormalFrame;
 import fr.free.totalboumboum.gui.tools.GuiTools;
 
