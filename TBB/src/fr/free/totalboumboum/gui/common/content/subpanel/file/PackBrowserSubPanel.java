@@ -38,12 +38,11 @@ import java.util.Locale;
 import javax.swing.BoxLayout;
 import javax.swing.JLabel;
 
-import fr.free.totalboumboum.gui.common.structure.subpanel.temp.fait.SubPanel;
-import fr.free.totalboumboum.gui.common.structure.subpanel.temp.fait.UntitledSubPanelTable;
+import fr.free.totalboumboum.gui.common.structure.subpanel.outside.EmptySubPanel;
 import fr.free.totalboumboum.gui.tools.GuiKeys;
 import fr.free.totalboumboum.gui.tools.GuiTools;
 
-public class PackBrowserSubPanel extends SubPanel implements MouseListener, FolderBrowserSubPanelListener
+public class PackBrowserSubPanel extends EmptySubPanel implements MouseListener, FolderBrowserSubPanelListener
 {	private static final long serialVersionUID = 1L;
 
 	public PackBrowserSubPanel(int width, int height)

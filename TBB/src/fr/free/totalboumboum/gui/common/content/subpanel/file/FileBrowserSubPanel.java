@@ -36,12 +36,11 @@ import java.util.Map.Entry;
 import javax.swing.BoxLayout;
 import javax.swing.JLabel;
 
-import fr.free.totalboumboum.gui.common.structure.subpanel.temp.fait.SubPanel;
-import fr.free.totalboumboum.gui.common.structure.subpanel.temp.fait.UntitledSubPanelTable;
+import fr.free.totalboumboum.gui.common.structure.subpanel.outside.EmptySubPanel;
 import fr.free.totalboumboum.gui.tools.GuiKeys;
 import fr.free.totalboumboum.gui.tools.GuiTools;
 
-public class FileBrowserSubPanel extends SubPanel implements MouseListener
+public class FileBrowserSubPanel extends EmptySubPanel implements MouseListener
 {	private static final long serialVersionUID = 1L;
 
 	public FileBrowserSubPanel(int width, int height)
