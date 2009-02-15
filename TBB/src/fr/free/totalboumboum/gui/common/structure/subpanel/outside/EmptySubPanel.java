@@ -1,4 +1,4 @@
-package fr.free.totalboumboum.gui.common.structure.dialog;
+package fr.free.totalboumboum.gui.common.structure.subpanel.outside;
 
 /*
  * Total Boum Boum
@@ -21,7 +21,19 @@ package fr.free.totalboumboum.gui.common.structure.dialog;
  * 
  */
 
-public interface ModalDialogSubPanelListener
-{
-	public void modalDialogButtonClicked(String buttonCode);
+import fr.free.totalboumboum.gui.common.structure.subpanel.inside.EmptyContentPanel;
+
+public class EmptySubPanel extends SubPanel<EmptyContentPanel>
+{	private static final long serialVersionUID = 1L;
+
+	public EmptySubPanel(int width, int height)
+	{	this(width,height,Mode.NOTHING);
+		
+	}
+	public EmptySubPanel(int width, int height, Mode mode)
+	{	super(width,height,mode);
+
+		EmptyContentPanel emptyPanel = new EmptyContentPanel(getDataWidth(),getDataHeight());
+		setDataPanel(emptyPanel);
+	}
 }

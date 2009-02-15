@@ -815,6 +815,7 @@ public class Launcher
 	 * - nouveauté : instance de NES Bomberman 2
 	 * - nouveauté : niveaux de NBM2
 	 * - nouveauté : niveaux custom pour NBM2
+	 * - modification : organisation des subpanels
 	 * 
 	 * 
 	 * - lors du calcul des points, il faut forcer la présence d'un classement: ça facilite énormément de traitements en aval
@@ -829,6 +830,8 @@ public class Launcher
 	 * *******************************************************
 	 * *********************** A FAIRE ***********************
 	 * *******************************************************
+	 * 
+	 * - GUI : dans les tables, remplacer les labels par une classe custom qui implémenterait l'interface basicPanel
 	 * 
 	 * - pouvoir modifier l'UPS pour les IA
 	 * 

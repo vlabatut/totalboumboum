@@ -1,4 +1,4 @@
-package fr.free.totalboumboum.gui.common.structure.dialog;
+package fr.free.totalboumboum.gui.common.structure.dialog.inside;
 
 /*
  * Total Boum Boum
@@ -33,13 +33,13 @@ import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.SwingConstants;
 
-import fr.free.totalboumboum.gui.common.structure.subpanel.temp.fait.EntitledSubPanel;
+import fr.free.totalboumboum.gui.common.structure.subpanel.BasicPanel;
 import fr.free.totalboumboum.gui.data.configuration.GuiConfiguration;
 import fr.free.totalboumboum.gui.tools.GuiKeys;
 import fr.free.totalboumboum.gui.tools.GuiTools;
 import fr.free.totalboumboum.tools.ImageTools;
 
-public abstract class ModalDialogSubPanel extends EntitledSubPanel implements MouseListener
+public abstract class ModalDialogSubPanel extends BasicPanel implements MouseListener
 {	private static final long serialVersionUID = 1L;
 	
 	public ModalDialogSubPanel(int width, int height)

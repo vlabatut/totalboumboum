@@ -1,4 +1,4 @@
-package fr.free.totalboumboum.gui.common.structure.subpanel.inside;
+package fr.free.totalboumboum.gui.common.structure.dialog.inside;
 
 /*
  * Total Boum Boum
@@ -21,12 +21,7 @@ package fr.free.totalboumboum.gui.common.structure.subpanel.inside;
  * 
  */
 
-import fr.free.totalboumboum.gui.common.structure.subpanel.BasicPanel;
-
-public abstract class ContentPanel extends BasicPanel
-{	private static final long serialVersionUID = 1L;
-
-	public ContentPanel(int width, int height)
-	{	super(width, height);
-	}
+public interface ModalDialogSubPanelListener
+{
+	public void modalDialogButtonClicked(String buttonCode);
 }

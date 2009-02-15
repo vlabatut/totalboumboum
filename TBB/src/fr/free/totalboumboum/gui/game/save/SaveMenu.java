@@ -36,8 +36,8 @@ import org.xml.sax.SAXException;
 
 import fr.free.totalboumboum.game.archive.GameArchive;
 import fr.free.totalboumboum.game.tournament.AbstractTournament;
-import fr.free.totalboumboum.gui.common.structure.dialog.ModalDialogPanelListener;
-import fr.free.totalboumboum.gui.common.structure.dialog.input.InputModalDialogPanel;
+import fr.free.totalboumboum.gui.common.structure.dialog.outside.InputModalDialogPanel;
+import fr.free.totalboumboum.gui.common.structure.dialog.outside.ModalDialogPanelListener;
 import fr.free.totalboumboum.gui.common.structure.panel.SplitMenuPanel;
 import fr.free.totalboumboum.gui.common.structure.panel.data.DataPanelListener;
 import fr.free.totalboumboum.gui.common.structure.panel.menu.InnerMenuPanel;

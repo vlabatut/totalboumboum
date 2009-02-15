@@ -31,7 +31,8 @@ import javax.swing.JLabel;
 import javax.swing.SwingConstants;
 
 import fr.free.totalboumboum.gui.common.structure.panel.SplitMenuPanel;
-import fr.free.totalboumboum.gui.common.structure.subpanel.temp.fait.SubPanel;
+import fr.free.totalboumboum.gui.common.structure.subpanel.outside.EmptySubPanel;
+import fr.free.totalboumboum.gui.common.structure.subpanel.outside.SubPanel;
 import fr.free.totalboumboum.gui.data.configuration.GuiConfiguration;
 import fr.free.totalboumboum.gui.tools.GuiKeys;
 import fr.free.totalboumboum.gui.tools.GuiTools;
@@ -79,7 +80,7 @@ public abstract class EntitledDataPanel extends InnerDataPanel
 		add(Box.createVerticalGlue());
 		
 		// data panel
-		{	dataPart = new SubPanel(dataWidth,dataHeight);
+		{	dataPart = new EmptySubPanel(dataWidth,dataHeight);
 			dataPart.setBackground(GuiTools.COLOR_COMMON_BACKGROUND);
 			add(dataPart);
 		}
@@ -113,11 +114,11 @@ public abstract class EntitledDataPanel extends InnerDataPanel
 	/////////////////////////////////////////////////////////////////
 	// DATA PART		/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	protected SubPanel dataPart;
+	protected SubPanel<?> dataPart;
 	protected int dataHeight;
 	protected int dataWidth;
 
-	public void setDataPart(SubPanel dataPart)
+	public void setDataPart(SubPanel<?> dataPart)
 	{	if(this.dataPart!=null)
 			remove(this.dataPart);
 		this.dataPart = dataPart;
