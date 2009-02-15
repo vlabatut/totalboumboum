@@ -1,4 +1,4 @@
-package fr.free.totalboumboum.gui.common.structure.subpanel.temp.fait.subpanels;
+package fr.free.totalboumboum.gui.common.structure.subpanel.outside;
 
 /*
  * Total Boum Boum
