@@ -43,11 +43,11 @@ public class TextContentPanel extends ContentPanel
 	
 	public TextContentPanel(int width, int height, float fontSize)
 	{	super(width, height);
-		setBackground(GuiTools.COLOR_TABLE_NEUTRAL_BACKGROUND);
+//		setBackground(GuiTools.COLOR_TABLE_NEUTRAL_BACKGROUND);
 		
 		// text pane
 		textPane = new JTextPane()
-		{	private static final long serialVersionUID = 1L;
+		{	private static final long serialVersionUID = 1L; 
 	
 			public void paintComponent(Graphics g)
 		    {	Graphics2D g2 = (Graphics2D) g;
