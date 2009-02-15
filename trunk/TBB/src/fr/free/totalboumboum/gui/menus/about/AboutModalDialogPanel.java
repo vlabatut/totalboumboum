@@ -22,7 +22,7 @@ package fr.free.totalboumboum.gui.menus.about;
  */
 
 
-import fr.free.totalboumboum.gui.common.structure.dialog.ModalDialogPanel;
+import fr.free.totalboumboum.gui.common.structure.dialog.outside.ModalDialogPanel;
 import fr.free.totalboumboum.gui.common.structure.panel.menu.MenuPanel;
 import fr.free.totalboumboum.gui.tools.GuiTools;
 

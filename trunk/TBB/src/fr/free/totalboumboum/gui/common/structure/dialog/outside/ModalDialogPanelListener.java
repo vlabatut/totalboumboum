@@ -1,4 +1,4 @@
-package fr.free.totalboumboum.gui.common.structure.dialog;
+package fr.free.totalboumboum.gui.common.structure.dialog.outside;
 
 /*
  * Total Boum Boum

@@ -1,4 +1,4 @@
-package fr.free.totalboumboum.gui.common.structure.dialog.input;
+package fr.free.totalboumboum.gui.common.structure.dialog.inside;
 
 /*
  * Total Boum Boum
@@ -37,41 +37,37 @@ import javax.swing.BoxLayout;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextPane;
-import javax.swing.SwingUtilities;
 import javax.swing.text.BadLocationException;
 import javax.swing.text.SimpleAttributeSet;
 import javax.swing.text.StyleConstants;
 import javax.swing.text.StyledDocument;
 
-import fr.free.totalboumboum.gui.common.structure.dialog.ModalDialogSubPanel;
 import fr.free.totalboumboum.gui.data.configuration.GuiConfiguration;
 import fr.free.totalboumboum.gui.tools.GuiKeys;
 import fr.free.totalboumboum.gui.tools.GuiTools;
 
-public class InputSubPanel extends ModalDialogSubPanel implements MouseListener
+public class InfoSubPanel extends ModalDialogSubPanel implements MouseListener
 {	private static final long serialVersionUID = 1L;
 	
-	public InputSubPanel(int width, int height, String key, ArrayList<String> text, String defaultText)
+	public InfoSubPanel(int width, int height, String key, ArrayList<String> text)
 	{	super(width,height);
 	
 		setTitleKey(key,false);
 	
-		setContent(text,defaultText);
+		setContent(text);
 	}
 		
 	/////////////////////////////////////////////////////////////////
 	// TEXT				/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	private JLabel buttonConfirm;
-	private JLabel buttonCancel;
-	private JTextPane inputPane;
 	
-	public void setContent(ArrayList<String> text, String defaultText)
+	public void setContent(ArrayList<String> text)
 	{	// sizes
 		float fontSize = getTitleFontSize()*GuiTools.FONT_TEXT_RATIO;
 		Font font = GuiConfiguration.getMiscConfiguration().getFont().deriveFont(fontSize);
 		int buttonsHeight = (int)(GuiTools.getPixelHeight(fontSize)/GuiTools.FONT_RATIO);
-		int textHeight = getDataHeight() - 2*buttonsHeight - 2*GuiTools.subPanelMargin;
+		int textHeight = getDataHeight() - buttonsHeight - GuiTools.subPanelMargin;
 		
 		{	BoxLayout layout = new BoxLayout(getDataPanel(),BoxLayout.PAGE_AXIS); 
 			getDataPanel().setLayout(layout);
@@ -114,7 +110,8 @@ public class InputSubPanel extends ModalDialogSubPanel implements MouseListener
 			// color
 			Color fg = GuiTools.COLOR_TABLE_REGULAR_FOREGROUND;
 			StyleConstants.setForeground(sa,fg);
-			// set style
+			// set
+	//		doc.setParagraphAttributes(0,doc.getLength()-1,sa,true);		
 			doc.setCharacterAttributes(0,doc.getLength()+1,sa,true);		
 			// text
 			try
@@ -125,56 +122,7 @@ public class InputSubPanel extends ModalDialogSubPanel implements MouseListener
 			catch (BadLocationException e)
 			{	e.printStackTrace();
 			}
-			doc.setParagraphAttributes(0,doc.getLength()-1,sa,true);		
 			textPanel.add(textPane);
-		}
-		
-		getDataPanel().add(Box.createRigidArea(new Dimension(GuiTools.subPanelMargin,GuiTools.subPanelMargin)));
-
-		// text field
-		{	inputPane = new JTextPane()
-			{	private static final long serialVersionUID = 1L;
-				public void paintComponent(Graphics g)
-			    {	Graphics2D g2 = (Graphics2D) g;
-		        	g2.setRenderingHint(RenderingHints.KEY_TEXT_ANTIALIASING,RenderingHints.VALUE_TEXT_ANTIALIAS_ON);
-		        	g2.setRenderingHint(RenderingHints.KEY_RENDERING,RenderingHints.VALUE_RENDER_QUALITY);
-		        	super.paintComponent(g2);
-			    }			
-			};
-			inputPane.setEditable(true);
-			inputPane.setOpaque(true);
-			Dimension dim = new Dimension(getDataWidth(),buttonsHeight);
-			inputPane.setPreferredSize(dim);
-			inputPane.setMinimumSize(dim);
-			inputPane.setMaximumSize(dim);
-			inputPane.setAlignmentX(Component.CENTER_ALIGNMENT);
-			Color bg = GuiTools.COLOR_TABLE_SELECTED_BACKGROUND;
-			inputPane.setBackground(bg);
-			Color fg = GuiTools.COLOR_TABLE_REGULAR_FOREGROUND;
-			inputPane.setForeground(fg);
-			SimpleAttributeSet sa = new SimpleAttributeSet();
-			StyleConstants.setAlignment(sa,StyleConstants.ALIGN_CENTER);
-			StyleConstants.setFontFamily(sa,font.getFamily());
-			StyleConstants.setFontSize(sa,font.getSize());
-			StyleConstants.setForeground(sa,fg);
-			StyledDocument doc = inputPane.getStyledDocument();
-			doc.setParagraphAttributes(0,doc.getLength()+1,sa,true);
-			try
-			{	doc.remove(0,doc.getLength());
-				doc.insertString(doc.getLength(),defaultText,sa);
-			}
-			catch (BadLocationException e)
-			{	e.printStackTrace();
-			}
-			getDataPanel().add(inputPane);
-			inputPane.selectAll();
-			inputPane.getCaret().setSelectionVisible(true);
-			// request focus to be directly on the text field
-			SwingUtilities.invokeLater(new Runnable()
-			{	public void run()
-				{	inputPane.requestFocusInWindow();
-				}
-			});
 		}
 		
 		getDataPanel().add(Box.createRigidArea(new Dimension(GuiTools.subPanelMargin,GuiTools.subPanelMargin)));
@@ -191,27 +139,13 @@ public class InputSubPanel extends ModalDialogSubPanel implements MouseListener
 			buttonsPanel.setLayout(layout);
 			getDataPanel().add(buttonsPanel);
 			
-			// cancel button
-			{	String key = GuiKeys.COMMON_DIALOG_CANCEL;			
-				buttonCancel = initButton(key,font,buttonsHeight);
-				buttonsPanel.add(buttonCancel);
-			}
-
-			buttonsPanel.add(Box.createRigidArea(new Dimension(GuiTools.subPanelMargin,GuiTools.subPanelMargin)));
-			
 			// confirm button
-			{	String key = GuiKeys.COMMON_DIALOG_CONFIRM;			
-				buttonConfirm = initButton(key,font,buttonsHeight);
-				buttonsPanel.add(buttonConfirm);
-			}
-}
+			String key = GuiKeys.COMMON_DIALOG_CONFIRM;			
+			buttonConfirm = initButton(key,font,buttonsHeight);
+			buttonsPanel.add(buttonConfirm);
+		}
 		
 //		getDataPanel().add(Box.createVerticalGlue());
-	}
-	
-	public String getInput()
-	{	String result = inputPane.getText();
-		return result;
 	}
 	
 	/////////////////////////////////////////////////////////////////
@@ -220,11 +154,7 @@ public class InputSubPanel extends ModalDialogSubPanel implements MouseListener
 	@Override
 	public void mousePressed(MouseEvent e)
 	{	Component component = e.getComponent();
-		if(component==buttonCancel)
-		{	String code = GuiKeys.COMMON_DIALOG_CANCEL;
-			fireModalDialogButtonClicked(code);
-		}
-		else if(component==buttonConfirm)
+		if(component==buttonConfirm)
 		{	String code = GuiKeys.COMMON_DIALOG_CONFIRM;
 			fireModalDialogButtonClicked(code);
 		}

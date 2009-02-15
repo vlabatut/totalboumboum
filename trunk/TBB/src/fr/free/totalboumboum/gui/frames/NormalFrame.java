@@ -31,7 +31,7 @@ import org.xml.sax.SAXException;
 import fr.free.totalboumboum.configuration.Configuration;
 import fr.free.totalboumboum.configuration.GameConstants;
 import fr.free.totalboumboum.gui.common.structure.MenuContainer;
-import fr.free.totalboumboum.gui.common.structure.dialog.ModalDialogPanel;
+import fr.free.totalboumboum.gui.common.structure.dialog.outside.ModalDialogPanel;
 import fr.free.totalboumboum.gui.common.structure.panel.menu.MenuPanel;
 import fr.free.totalboumboum.gui.menus.main.MainMenu;
 import fr.free.totalboumboum.gui.tools.FullRepaintManager;

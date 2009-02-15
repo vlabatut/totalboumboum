@@ -1,4 +1,4 @@
-package fr.free.totalboumboum.gui.common.structure.dialog;
+package fr.free.totalboumboum.gui.common.structure.dialog.outside;
 
 /*
  * Total Boum Boum
@@ -29,9 +29,10 @@ import java.util.ArrayList;
 import javax.swing.Box;
 import javax.swing.BoxLayout;
 
+import fr.free.totalboumboum.gui.common.structure.dialog.inside.ModalDialogSubPanel;
+import fr.free.totalboumboum.gui.common.structure.dialog.inside.ModalDialogSubPanelListener;
 import fr.free.totalboumboum.gui.common.structure.panel.ContentPanel;
 import fr.free.totalboumboum.gui.common.structure.panel.menu.MenuPanel;
-import fr.free.totalboumboum.gui.common.structure.subpanel.temp.fait.SubPanel;
 import fr.free.totalboumboum.gui.frames.NormalFrame;
 import fr.free.totalboumboum.gui.tools.GuiTools;
 
