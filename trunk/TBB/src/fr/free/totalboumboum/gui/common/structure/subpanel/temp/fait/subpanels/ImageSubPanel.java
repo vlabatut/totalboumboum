@@ -23,7 +23,7 @@ package fr.free.totalboumboum.gui.common.structure.subpanel.temp.fait.subpanels;
 
 import java.awt.image.BufferedImage;
 
-import fr.free.totalboumboum.gui.common.structure.subpanel.temp.fait.contentpanels.ImageContentPanel;
+import fr.free.totalboumboum.gui.common.structure.subpanel.inside.ImageContentPanel;
 
 public class ImageSubPanel extends SubPanel<ImageContentPanel>
 {	private static final long serialVersionUID = 1L;

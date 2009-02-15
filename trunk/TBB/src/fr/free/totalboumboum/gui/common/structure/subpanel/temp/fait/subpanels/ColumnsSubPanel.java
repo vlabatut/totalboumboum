@@ -27,8 +27,8 @@ import java.util.ArrayList;
 
 import javax.swing.JLabel;
 
-import fr.free.totalboumboum.gui.common.structure.subpanel.temp.fait.contentpanels.Column;
-import fr.free.totalboumboum.gui.common.structure.subpanel.temp.fait.contentpanels.ColumnsContentPanel;
+import fr.free.totalboumboum.gui.common.structure.subpanel.inside.Column;
+import fr.free.totalboumboum.gui.common.structure.subpanel.inside.ColumnsContentPanel;
 
 public class ColumnsSubPanel extends SubPanel<ColumnsContentPanel>
 {	private static final long serialVersionUID = 1L;
