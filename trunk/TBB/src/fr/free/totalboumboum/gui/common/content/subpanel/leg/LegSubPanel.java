@@ -39,11 +39,11 @@ import fr.free.totalboumboum.game.tournament.cup.CupPart;
 import fr.free.totalboumboum.game.tournament.cup.CupTournament;
 import fr.free.totalboumboum.gui.common.content.subpanel.part.PartSubPanel;
 import fr.free.totalboumboum.gui.common.content.subpanel.part.PartSubPanelListener;
-import fr.free.totalboumboum.gui.common.structure.subpanel.temp.fait.SubPanel;
+import fr.free.totalboumboum.gui.common.structure.subpanel.outside.EmptySubPanel;
 import fr.free.totalboumboum.gui.tools.GuiKeys;
 import fr.free.totalboumboum.gui.tools.GuiTools;
 
-public class LegSubPanel extends SubPanel implements MouseListener, PartSubPanelListener
+public class LegSubPanel extends EmptySubPanel implements MouseListener, PartSubPanelListener
 {	private static final long serialVersionUID = 1L;
 
 	public LegSubPanel(int width, int height)

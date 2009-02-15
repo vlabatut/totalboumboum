@@ -27,16 +27,13 @@ import java.util.ArrayList;
 import javax.swing.BoxLayout;
 
 import fr.free.totalboumboum.engine.container.level.LevelPreview;
-import fr.free.totalboumboum.gui.common.structure.subpanel.temp.fait.EntitledSubPanelTable;
-import fr.free.totalboumboum.gui.common.structure.subpanel.temp.fait.SubPanel;
-import fr.free.totalboumboum.gui.common.structure.subpanel.temp.fait.SubPanelTable;
-import fr.free.totalboumboum.gui.common.structure.subpanel.temp.fait.UntitledSubPanelTable;
+import fr.free.totalboumboum.gui.common.structure.subpanel.outside.EmptySubPanel;
 import fr.free.totalboumboum.gui.data.configuration.GuiConfiguration;
 import fr.free.totalboumboum.gui.tools.GuiKeys;
 import fr.free.totalboumboum.gui.tools.GuiTools;
 import fr.free.totalboumboum.tools.StringTools;
 
-public class LevelSubPanel extends SubPanel
+public class LevelSubPanel extends EmptySubPanel
 {	private static final long serialVersionUID = 1L;
 	
 	public LevelSubPanel(int width, int height)
