@@ -28,16 +28,17 @@ import java.util.ArrayList;
 
 import javax.swing.JLabel;
 
-import fr.free.totalboumboum.gui.common.structure.subpanel.temp.fait.UntitledSubPanelTable;
+import fr.free.totalboumboum.gui.common.structure.subpanel.outside.SubPanel;
+import fr.free.totalboumboum.gui.common.structure.subpanel.outside.TableSubPanel;
 import fr.free.totalboumboum.gui.tools.GuiKeys;
 import fr.free.totalboumboum.gui.tools.GuiTools;
 
-public class TransferSubPanel extends UntitledSubPanelTable implements MouseListener
+public class TransferSubPanel extends TableSubPanel implements MouseListener
 {	private static final long serialVersionUID = 1L;
 	
 	public TransferSubPanel(int width, int height)
-	{	super(width,height,1,1,1,false);
-		
+	{	super(width,height,SubPanel.Mode.BORDER,1,1,1,false);
+	
 		init();
 	}
 		
@@ -140,7 +141,7 @@ public class TransferSubPanel extends UntitledSubPanelTable implements MouseList
 	@Override
 	public void mousePressed(MouseEvent e)
 	{	JLabel label = (JLabel)e.getComponent();
-		int[] pos = getLabelPosition(label);
+		int[] pos = getLabelPositionMultiple(label);
 		
 		// left
 		if(pos[0]==lineLeft && enabledLeft)

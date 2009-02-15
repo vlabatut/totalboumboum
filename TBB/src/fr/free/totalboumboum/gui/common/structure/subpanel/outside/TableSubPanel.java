@@ -35,9 +35,13 @@ public class TableSubPanel extends SubPanel<TableContentPanel>
 {	private static final long serialVersionUID = 1L;
 
 	public TableSubPanel(int width, int height, Mode mode, int lines, int cols, boolean header)
+	{	this(width,height,mode,lines,1,cols,header);		
+	}
+	
+	public TableSubPanel(int width, int height, Mode mode, int lines, int colGroups, int colSubs, boolean header)
 	{	super(width,height,mode);
 
-		TableContentPanel tablePanel = new TableContentPanel(getDataWidth(),getDataHeight(),lines,cols,header);
+		TableContentPanel tablePanel = new TableContentPanel(getDataWidth(),getDataHeight(),lines,colGroups,colSubs,header);
 		setDataPanel(tablePanel);
 	}
 
@@ -70,8 +74,12 @@ public class TableSubPanel extends SubPanel<TableContentPanel>
 	/////////////////////////////////////////////////////////////////
 	// SIZE				/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
+	public void reinit(int lines, int colGroups, int colSubs)
+	{	getDataPanel().reinit(lines,colGroups,colSubs);		
+	}
+	
 	public void reinit(int lines, int cols)
-	{	getDataPanel().reinit(lines,cols);		
+	{	reinit(lines,1,cols);		
 	}
 
 	public int getHeaderHeight()
@@ -124,66 +132,53 @@ public class TableSubPanel extends SubPanel<TableContentPanel>
 	/////////////////////////////////////////////////////////////////
 	// LABELS			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	public int[] getLabelPosition(JLabel label)
-	{	return getDataPanel().getLabelPosition(label);
+	public int[] getLabelPositionSimple(JLabel label)
+	{	return getDataPanel().getLabelPositionSimple(label);
+	}
+	public int[] getLabelPositionMultiple(JLabel label)
+	{	return getDataPanel().getLabelPositionMultiple(label);
 	}
 	
 	public JLabel getLabel(int line, int col)
-	{	return getDataPanel().getLabel(line,col);
+	{	return getLabel(line,1,col);
+	}
+	public JLabel getLabel(int line, int colGroup, int colSub)
+	{	return getDataPanel().getLabel(line,colGroup,colSub);
 	}
 	
-	public void addLabel(int line, int col)
-	{	getDataPanel().addLabel(line,col);
-	}
-
 	public void setLabelKey(int line, int col, String key, boolean imageFlag)
-	{	getDataPanel().setLabelKey(line,col,key,imageFlag);
+	{	setLabelKey(line,1,col,key,imageFlag);
+	}
+	public void setLabelKey(int line, int colGroup, int colSub, String key, boolean imageFlag)
+	{	getDataPanel().setLabelKey(line,colGroup,colSub,key,imageFlag);
 	}
 
 	public void setLabelIcon(int line, int col, BufferedImage icon, String tooltip)
-	{	getDataPanel().setLabelIcon(line,col,icon,tooltip);
+	{	setLabelIcon(line,1,col,icon,tooltip);
+	}
+	public void setLabelIcon(int line, int colGroup, int colSub, BufferedImage icon, String tooltip)
+	{	getDataPanel().setLabelIcon(line,colGroup,colSub,icon,tooltip);
 	}
 
 	public void setLabelText(int line, int col, String text, String tooltip)
-	{	getDataPanel().setLabelText(line,col,text,tooltip);
+	{	setLabelText(line,1,col,text,tooltip);
+	}
+	public void setLabelText(int line, int colGroup, int colSub, String text, String tooltip)
+	{	getDataPanel().setLabelText(line,colGroup,colSub,text,tooltip);
 	}
 	
 	public void setLabelBackground(int line, int col, Color bg)
-	{	getDataPanel().setLabelBackground(line,col,bg);
+	{	setLabelBackground(line,1,col,bg);
+	}
+	public void setLabelBackground(int line, int colGroup, int colSub, Color bg)
+	{	getDataPanel().setLabelBackground(line,colGroup,colSub,bg);
 	}
 	
 	public void setLabelForeground(int line, int col, Color fg)
-	{	getDataPanel().setLabelForeground(line,col,fg);
+	{	setLabelForeground(line,1,col,fg);
 	}
-
-	public int getLabelColumn(int line, JLabel label)
-	{	return getDataPanel().getLabelColumn(line,label);
-	}
-	
-	public void setLabelMinWidth(int line, int col, int width)
-	{	getDataPanel().setLabelMinWidth(line,col,width);
-	}
-	public void setLabelPreferredWidth(int line, int col, int width)
-	{	getDataPanel().setLabelPreferredWidth(line,col,width);
-	}
-	public void setLabelMaxWidth(int line, int col, int width)
-	{	getDataPanel().setLabelMaxWidth(line,col,width);
-	}
-	public void setLabelWidth(int line, int col, int width, int mode)
-	{	getDataPanel().setLabelWidth(line,col,width,mode);
-	}
-	
-	public void unsetLabelMinWidth(int line, int colSub)
-	{	getDataPanel().unsetLabelMinWidth(line,colSub);
-	}
-	public void unsetLabelPreferredWidth(int line, int colSub)
-	{	getDataPanel().unsetLabelPreferredWidth(line,colSub);
-	}
-	public void unsetLabelMaxWidth(int line, int colSub)
-	{	getDataPanel().unsetLabelMaxWidth(line,colSub);
-	}
-	public void unsetLabelWidth(int line, int col, int mode)
-	{	getDataPanel().unsetLabelWidth(line,col,mode);
+	public void setLabelForeground(int line, int colGroup, int colSub, Color fg)
+	{	getDataPanel().setLabelForeground(line,colGroup,colSub,fg);
 	}
 
 	/////////////////////////////////////////////////////////////////

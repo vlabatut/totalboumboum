@@ -30,18 +30,20 @@ import javax.swing.JLabel;
 import fr.free.totalboumboum.configuration.GameConstants;
 import fr.free.totalboumboum.configuration.game.quickmatch.QuickMatchConfiguration;
 import fr.free.totalboumboum.configuration.game.quickmatch.QuickMatchDraw;
-import fr.free.totalboumboum.gui.common.structure.subpanel.temp.fait.Line;
-import fr.free.totalboumboum.gui.common.structure.subpanel.temp.fait.UntitledSubPanelLines;
+import fr.free.totalboumboum.gui.common.structure.subpanel.inside.Line;
+import fr.free.totalboumboum.gui.common.structure.subpanel.outside.LinesSubPanel;
+import fr.free.totalboumboum.gui.common.structure.subpanel.outside.SubPanel;
 import fr.free.totalboumboum.gui.data.configuration.GuiConfiguration;
 import fr.free.totalboumboum.gui.tools.GuiKeys;
 import fr.free.totalboumboum.gui.tools.GuiTools;
 import fr.free.totalboumboum.tools.StringTools;
 
-public class RoundQuickConfigSubPanel extends UntitledSubPanelLines implements MouseListener
+public class RoundQuickConfigSubPanel extends LinesSubPanel implements MouseListener
 {	private static final long serialVersionUID = 1L;
 	
 	public RoundQuickConfigSubPanel(int width, int height)
-	{	super(width,height,LINE_COUNT,false);
+	{	super(width,height,SubPanel.Mode.BORDER,LINE_COUNT,1,false);
+	
 		setQuickMatchConfiguration(null);
 	}
 		
@@ -72,12 +74,10 @@ public class RoundQuickConfigSubPanel extends UntitledSubPanelLines implements M
 	{	this.quickMatchConfiguration = quickMatchConfiguration;
 		
 		// sizes
-		int nameWidth = (int)(width*0.33);
-		int pointsRanksWidth = (width - nameWidth - 7*GuiTools.subPanelMargin) / GameConstants.CONTROL_COUNT;
+		int nameWidth = (int)(getDataWidth()*0.33);
+		int pointsRanksWidth = (getDataWidth() - nameWidth - 7*GuiTools.subPanelMargin) / GameConstants.CONTROL_COUNT;
 		int pointsValuesWidth = (pointsRanksWidth - 2*GuiTools.subPanelMargin - 2*getLineHeight());
-		removeAllLines();
-		for(int i=0;i<LINE_COUNT;i++)
-			addLine(0);
+		reinit(LINE_COUNT,1);
 
 		if(quickMatchConfiguration!=null)
 		{	

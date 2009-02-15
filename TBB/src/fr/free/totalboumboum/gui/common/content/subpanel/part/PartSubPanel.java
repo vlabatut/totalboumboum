@@ -33,17 +33,18 @@ import fr.free.totalboumboum.game.rank.Ranks;
 import fr.free.totalboumboum.game.tournament.cup.CupLeg;
 import fr.free.totalboumboum.game.tournament.cup.CupPart;
 import fr.free.totalboumboum.game.tournament.cup.CupPlayer;
-import fr.free.totalboumboum.gui.common.structure.subpanel.temp.fait.EntitledSubPanelLines;
-import fr.free.totalboumboum.gui.common.structure.subpanel.temp.fait.Line;
+import fr.free.totalboumboum.gui.common.structure.subpanel.inside.Line;
+import fr.free.totalboumboum.gui.common.structure.subpanel.outside.LinesSubPanel;
+import fr.free.totalboumboum.gui.common.structure.subpanel.outside.SubPanel;
 import fr.free.totalboumboum.gui.data.configuration.GuiConfiguration;
 import fr.free.totalboumboum.gui.tools.GuiKeys;
 import fr.free.totalboumboum.gui.tools.GuiTools;
 
-public class PartSubPanel extends EntitledSubPanelLines implements MouseListener
+public class PartSubPanel extends LinesSubPanel implements MouseListener
 {	private static final long serialVersionUID = 1L;
 	
 	public PartSubPanel(int width, int height)
-	{	super(width,height,1);
+	{	super(width,height,SubPanel.Mode.TITLE,1,1,false);
 		
 		setPart(null);
 	}
@@ -70,7 +71,7 @@ public class PartSubPanel extends EntitledSubPanelLines implements MouseListener
 			lines = 1+4;
 		else
 			lines = 1+part.getPlayers().size();
-		setNewTable(lines);
+		reinit(lines,1);
 		int buttonWidth = getLineHeight();
 		int nameWidth = (int)((getWidth() - (2*buttonWidth + 5*GuiTools.subPanelMargin))*0.75);
 		int rankWidth = getWidth() - (2*buttonWidth + nameWidth + 5*GuiTools.subPanelMargin);

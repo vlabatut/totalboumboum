@@ -36,20 +36,21 @@ import fr.free.totalboumboum.game.statistics.Score;
 import fr.free.totalboumboum.game.statistics.StatisticBase;
 import fr.free.totalboumboum.game.statistics.StatisticHolder;
 import fr.free.totalboumboum.game.tournament.AbstractTournament;
-import fr.free.totalboumboum.gui.common.structure.subpanel.temp.fait.UntitledSubPanelTable;
+import fr.free.totalboumboum.gui.common.structure.subpanel.outside.SubPanel;
+import fr.free.totalboumboum.gui.common.structure.subpanel.outside.TableSubPanel;
 import fr.free.totalboumboum.gui.data.configuration.GuiConfiguration;
 import fr.free.totalboumboum.gui.tools.GuiKeys;
 import fr.free.totalboumboum.gui.tools.GuiTools;
 import fr.free.totalboumboum.tools.StringTools;
 
-public class ResultsSubPanel extends UntitledSubPanelTable
+public class ResultsSubPanel extends TableSubPanel
 {	private static final long serialVersionUID = 1L;
 	
 
 	private String prefix;
 
 	public ResultsSubPanel(int width, int height)
-	{	super(width,height,1,1,1,true);
+	{	super(width,height,SubPanel.Mode.BORDER,1,1,1,true);
 		
 		setStatisticHolder(null);
 	}

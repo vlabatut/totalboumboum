@@ -25,17 +25,18 @@ import java.awt.Color;
 import java.util.ArrayList;
 
 import fr.free.totalboumboum.game.round.Round;
-import fr.free.totalboumboum.gui.common.structure.subpanel.temp.fait.UntitledSubPanelTable;
+import fr.free.totalboumboum.gui.common.structure.subpanel.outside.SubPanel;
+import fr.free.totalboumboum.gui.common.structure.subpanel.outside.TableSubPanel;
 import fr.free.totalboumboum.gui.data.configuration.GuiConfiguration;
 import fr.free.totalboumboum.gui.tools.GuiKeys;
 import fr.free.totalboumboum.gui.tools.GuiTools;
 import fr.free.totalboumboum.tools.StringTools;
 
-public class RoundMiscSubPanel extends UntitledSubPanelTable
+public class RoundMiscSubPanel extends TableSubPanel
 {	private static final long serialVersionUID = 1L;
 	
 	public RoundMiscSubPanel(int width, int height)
-	{	super(width,height,1,1,1,true);
+	{	super(width,height,SubPanel.Mode.BORDER,1,1,1,true);
 		
 		setRound(null);
 	}
@@ -134,7 +135,7 @@ public class RoundMiscSubPanel extends UntitledSubPanelTable
 			}
 		}
 		
-		int maxWidth = width-3*GuiTools.subPanelMargin-getHeaderHeight();
+		int maxWidth = getDataWidth()-3*GuiTools.subPanelMargin-getHeaderHeight();
 		setColSubMaxWidth(1,maxWidth);
 		setColSubPreferredWidth(1,maxWidth);
 	}

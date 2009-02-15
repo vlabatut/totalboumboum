@@ -37,18 +37,19 @@ import fr.free.totalboumboum.game.limit.LimitPoints;
 import fr.free.totalboumboum.game.limit.LimitScore;
 import fr.free.totalboumboum.game.limit.LimitTime;
 import fr.free.totalboumboum.game.limit.Limits;
-import fr.free.totalboumboum.gui.common.structure.subpanel.temp.fait.EntitledSubPanelTable;
+import fr.free.totalboumboum.gui.common.structure.subpanel.outside.SubPanel;
+import fr.free.totalboumboum.gui.common.structure.subpanel.outside.TableSubPanel;
 import fr.free.totalboumboum.gui.tools.GuiKeys;
 import fr.free.totalboumboum.gui.tools.GuiTools;
 import fr.free.totalboumboum.tools.StringTools;
 
-public class LimitsSubPanel<T extends Limit> extends EntitledSubPanelTable implements MouseListener
+public class LimitsSubPanel<T extends Limit> extends TableSubPanel implements MouseListener
 {	private static final long serialVersionUID = 1L;
 
 	private String prefix;
 
 	public LimitsSubPanel(int width, int height, String type)
-	{	super(width,height,1,1,1);
+	{	super(width,height,SubPanel.Mode.TITLE,1,1,1,false);
 		
 		// init	
 		this.prefix = GuiKeys.COMMON_LIMIT+type;
@@ -87,7 +88,7 @@ public class LimitsSubPanel<T extends Limit> extends EntitledSubPanelTable imple
 			// data
 			if(limits.size()>lines*colGroups)
 				colGroups = 2;
-			setNewTable(colGroups,colSubs,lines);
+			reinit(lines,colGroups,colSubs);
 			setColSubMaxWidth(1,Integer.MAX_VALUE);
 			
 			NumberFormat nf = NumberFormat.getInstance();
@@ -189,7 +190,7 @@ public class LimitsSubPanel<T extends Limit> extends EntitledSubPanelTable imple
 			setTitleBackground(bg);			
 			
 			// empty lines
-			setNewTable(colGroups,colSubs,lines);
+			reinit(lines,colGroups,colSubs);
 			int iconWidth = getLineHeight();
 			setColSubMinWidth(0,iconWidth);
 			setColSubPreferredWidth(0,iconWidth);
@@ -241,7 +242,7 @@ public class LimitsSubPanel<T extends Limit> extends EntitledSubPanelTable imple
 	public void mousePressed(MouseEvent e)
 	{	// init
 		JLabel label = (JLabel)e.getComponent();
-		int[] pos = getLabelPosition(label);
+		int[] pos = getLabelPositionMultiple(label);
 		// unselect
 		if(selectedRow!=-1)
 		{	setLabelBackground(selectedRow,0,GuiTools.COLOR_TABLE_HEADER_BACKGROUND);

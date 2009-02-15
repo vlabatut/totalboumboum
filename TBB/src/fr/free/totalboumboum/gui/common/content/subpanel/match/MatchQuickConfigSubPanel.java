@@ -29,16 +29,17 @@ import java.util.ArrayList;
 import javax.swing.JLabel;
 
 import fr.free.totalboumboum.configuration.game.quickmatch.QuickMatchConfiguration;
-import fr.free.totalboumboum.gui.common.structure.subpanel.temp.fait.Line;
-import fr.free.totalboumboum.gui.common.structure.subpanel.temp.fait.UntitledSubPanelLines;
+import fr.free.totalboumboum.gui.common.structure.subpanel.inside.Line;
+import fr.free.totalboumboum.gui.common.structure.subpanel.outside.LinesSubPanel;
+import fr.free.totalboumboum.gui.common.structure.subpanel.outside.SubPanel;
 import fr.free.totalboumboum.gui.tools.GuiKeys;
 import fr.free.totalboumboum.gui.tools.GuiTools;
 
-public class MatchQuickConfigSubPanel extends UntitledSubPanelLines implements MouseListener
+public class MatchQuickConfigSubPanel extends LinesSubPanel implements MouseListener
 {	private static final long serialVersionUID = 1L;
 	
 	public MatchQuickConfigSubPanel(int width, int height)
-	{	super(width,height,LINE_COUNT,false);
+	{	super(width,height,SubPanel.Mode.BORDER,LINE_COUNT,1,false);
 		setQuickMatchConfiguration(null);
 	}
 		
@@ -63,10 +64,8 @@ public class MatchQuickConfigSubPanel extends UntitledSubPanelLines implements M
 	{	this.quickMatchConfiguration = quickMatchConfiguration;
 		
 		// sizes
-		int nameWidth = (int)(width*0.66);
-		removeAllLines();
-		for(int i=0;i<LINE_COUNT;i++)
-			addLine(0);
+		int nameWidth = (int)(getDataWidth()*0.66);
+		reinit(LINE_COUNT,1);
 
 		if(quickMatchConfiguration!=null)
 		{				

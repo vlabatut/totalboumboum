@@ -35,19 +35,20 @@ import fr.free.totalboumboum.configuration.Configuration;
 import fr.free.totalboumboum.configuration.GameConstants;
 import fr.free.totalboumboum.configuration.profile.Portraits;
 import fr.free.totalboumboum.configuration.profile.Profile;
-import fr.free.totalboumboum.gui.common.structure.subpanel.temp.fait.UntitledSubPanelTable;
+import fr.free.totalboumboum.gui.common.structure.subpanel.outside.SubPanel;
+import fr.free.totalboumboum.gui.common.structure.subpanel.outside.TableSubPanel;
 import fr.free.totalboumboum.gui.tools.GuiKeys;
 import fr.free.totalboumboum.gui.tools.GuiStringTools;
 import fr.free.totalboumboum.gui.tools.GuiTools;
 
-public class PlayersListSubPanel extends UntitledSubPanelTable implements MouseListener
+public class PlayersListSubPanel extends TableSubPanel implements MouseListener
 {	private static final long serialVersionUID = 1L;
 	
 	private ArrayList<String> controlTexts;
 	private ArrayList<String> controlTooltips;
 
 	public PlayersListSubPanel(int width, int height)
-	{	super(width,height,1,1,1,true);
+	{	super(width,height,SubPanel.Mode.BORDER,1,1,1,true);
 		
 		setPlayers(null);
 	}

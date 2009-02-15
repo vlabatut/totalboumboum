@@ -386,8 +386,8 @@ public class TableContentPanel extends LinesContentPanel
 	public int[] getLabelPositionSimple(JLabel label)
 	{	return super.getLabelPosition(label);
 	}
-//TODO à renommer avec multiple et virer le "simple" ci dessus	+ répercussion dans le SubPanel correspondant
-	public int[] getLabelPosition(JLabel label)
+
+	public int[] getLabelPositionMultiple(JLabel label)
 	{	int[] result = {-1,-1,-1};
 		int line = 0;
 		while(line<getLineCount() && result[0]==-1)
