@@ -22,112 +22,33 @@ package fr.free.totalboumboum.gui.common.structure.subpanel.temp.fait.contentpan
  */
 
 import java.awt.Color;
-import java.awt.Dimension;
-import java.awt.Font;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 import java.util.Iterator;
 
-import javax.swing.ImageIcon;
 import javax.swing.JLabel;
-import javax.swing.SpringLayout;
 import javax.swing.SwingConstants;
 
-import fr.free.totalboumboum.gui.common.structure.subpanel.temp.SubPanelTable;
-import fr.free.totalboumboum.gui.common.structure.subpanel.temp.fait.BasicSubPanel;
-import fr.free.totalboumboum.gui.data.configuration.GuiConfiguration;
-import fr.free.totalboumboum.gui.tools.GuiKeys;
-import fr.free.totalboumboum.gui.tools.SpringUtilities;
 import fr.free.totalboumboum.gui.tools.GuiTools;
-import fr.free.totalboumboum.tools.ImageTools;
 
-public class UntitledSubPanelTable extends BasicSubPanel implements SubPanelTable
+public class TableContentPanel extends LinesContentPanel
 {	private static final long serialVersionUID = 1L;
 
-	public UntitledSubPanelTable(int width, int height, int columns, int lines, boolean header)
+	public TableContentPanel(int width, int height, int columns, int lines, boolean header)
 	{	this(width,height,1,columns,lines,header);
 	}
 
-	public UntitledSubPanelTable(int width, int height, int colGroups, int colSubs, int lines, boolean header)
-	{	super(width,height);
+	public TableContentPanel(int width, int height, int colGroups, int colSubs, int lines, boolean header)
+	{	super(width,height,lines,colGroups*colSubs,header);
 		
-		// init
-		this.header = header;
-		
-		// background
-		setBackground(GuiTools.COLOR_COMMON_BACKGROUND);
-
-		// layout
-		SpringLayout layout = new SpringLayout();
-		setLayout(layout);
-		
-		reinit(colGroups,colSubs,lines);
-	}
-	
-	private void updateLayout()
-	{	SpringLayout layout = new SpringLayout();
-		setLayout(layout);
-		int margin = GuiTools.subPanelMargin;
-		SpringUtilities.makeCompactGrid(this,lines,getColumnCount(),margin,margin,margin,margin);		
-	}
-	
-	public void reinit(int columns, int lines)
-	{	reinit(1,columns,lines);
+		this.colGroups = colGroups;
+		this.colSubs = colSubs;
 	}
 	
 	public void reinit(int colGroups, int colSubs, int lines)
-	{	removeAll();
-		this.colGroups = 0;
-		this.colSubs = 0;
-		this.lines = 0;
-		
-		// size
-		if(header)
-		{	lineHeight = (int)((height - (lines+1)*GuiTools.subPanelMargin)/(lines+GuiTools.TABLE_HEADER_RATIO-1));
-			headerHeight = height - (lines+1)*GuiTools.subPanelMargin - lineHeight*(lines-1);
-			if(headerHeight-(lines-1)>=lineHeight)
-			{	headerHeight = headerHeight - (lines-1);
-				lineHeight ++;
-			}
-			headerFontSize = GuiTools.getFontSize(headerHeight*GuiTools.FONT_RATIO);
-			headerFont = GuiConfiguration.getMiscConfiguration().getFont().deriveFont((float)headerFontSize);
-		}
-		else
-			lineHeight = (int)((height - (lines+1)*GuiTools.subPanelMargin)/((float)lines));
-		lineFontSize = GuiTools.getFontSize(lineHeight*GuiTools.FONT_RATIO);
-		lineFont = GuiConfiguration.getMiscConfiguration().getFont().deriveFont((float)lineFontSize);
-	
-		// table
-		this.colGroups = colGroups;
-		this.lines = lines;
-		for(int col=0;col<colSubs;col++)
-			addColumn(col);
+	{	super.reinit(lines,colGroups*colSubs);
 	}
 
-	/////////////////////////////////////////////////////////////////
-	// SIZE				/////////////////////////////////////////////
-	/////////////////////////////////////////////////////////////////
-	private Font headerFont;
-	private Font lineFont;
-	private boolean header;
-	private int headerHeight;
-	private int lineHeight;
-	private int lineFontSize;
-	private int headerFontSize;
-
-	public int getLineFontSize()
-	{	return lineFontSize;	
-	}
-	public int getHeaderFontSize()
-	{	return headerFontSize;	
-	}
-	public int getHeaderHeight()
-	{	return headerHeight;	
-	}
-	public int getLineHeight()
-	{	return lineHeight;	
-	}
-	
 	/////////////////////////////////////////////////////////////////
 	// COLUMNS			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
@@ -144,39 +65,15 @@ public class UntitledSubPanelTable extends BasicSubPanel implements SubPanelTabl
 	{	setColSubWidth(colSub,width,2);		
 	}
 	private void setColSubWidth(int colSub, int width, int mode)
-	{	Dimension headerDim = new Dimension(width,headerHeight);
-		Dimension lineDim = new Dimension(width,lineHeight);
-		int start = 0;
+	{	int start = 0;
 		for(int colGroup=0;colGroup<colGroups;colGroup++)
-		{	if(header)
-			{	start = 1;
-				JLabel label = getLabel(0,colGroup,colSub);
-				switch(mode)
-				{	case 0:
-						label.setMinimumSize(headerDim);
-						break;
-					case 1:
-						label.setPreferredSize(headerDim);
-						break;
-					case 2:
-						label.setMaximumSize(headerDim);
-						break;
-				}
+		{	int col = colGroup*colSubs + colSub;
+			if(hasHeader())
+			{	setLabelWidth(start,col,getHeaderHeight(),mode);
+				start = 1;
 			}
-			for(int line=start;line<lines;line++)
-			{	JLabel label = getLabel(line,colGroup,colSub);
-				switch(mode)
-				{	case 0:
-						label.setMinimumSize(lineDim);
-						break;
-					case 1:
-						label.setPreferredSize(lineDim);
-						break;
-					case 2:
-						label.setMaximumSize(lineDim);
-						break;
-				}
-			}
+			for(int line=start;line<getLineCount();line++)
+				setLabelWidth(line,col,getLineHeight(),mode);
 		}
 	}	
 
@@ -190,29 +87,24 @@ public class UntitledSubPanelTable extends BasicSubPanel implements SubPanelTabl
 	{	unsetColSubWidth(colSub,2);		
 	}
 	private void unsetColSubWidth(int colSub, int mode)
-	{	for(int colGroup=0;colGroup<colGroups;colGroup++)
-			for(int line=0;line<lines;line++)
-			{	JLabel label = getLabel(line,colGroup,colSub);
-				switch(mode)
-				{	case 0:
-						label.setMinimumSize(null);
-						break;
-					case 1:
-						label.setPreferredSize(null);
-						break;
-					case 2:
-						label.setMaximumSize(null);
-						break;
-				}
+	{	int start = 0;
+		for(int colGroup=0;colGroup<colGroups;colGroup++)
+		{	int col = colGroup*colSubs + colSub;
+			if(hasHeader())
+			{	unsetLabelWidth(start,col,mode);
+				start = 1;
 			}
-	}
+			for(int line=start;line<getLineCount();line++)
+				unsetLabelWidth(line,col,mode);
+		}
+	}	
 
 	public ArrayList<JLabel> getColumn(int col)
 	{	return getColSub(0,col);		
 	}
 	public ArrayList<JLabel> getColSub(int colGroup, int colSub)
 	{	ArrayList<JLabel> result = new ArrayList<JLabel>();
-		for(int line=0;line<lines;line++)
+		for(int line=0;line<getLineCount();line++)
 		{	JLabel label = getLabel(line,colGroup,colSub);
 			result.add(label);
 		}
@@ -238,13 +130,13 @@ public class UntitledSubPanelTable extends BasicSubPanel implements SubPanelTabl
 		int start = 0;
 	
 		// header
-		if(header)
+		if(hasHeader())
 		{	start = 1;
 			for(int grp=0;grp<colGroups;grp++)
 			{	int index = subIndex+grp*colSubs;
 				String txt = null;
 				JLabel lbl = new JLabel(txt);
-				lbl.setFont(headerFont);
+				lbl.setFont(getHeaderFont());
 				lbl.setHorizontalAlignment(SwingConstants.CENTER);
 				lbl.setBackground(GuiTools.COLOR_TABLE_HEADER_BACKGROUND);
 				lbl.setForeground(GuiTools.COLOR_TABLE_HEADER_FOREGROUND);
@@ -254,12 +146,12 @@ public class UntitledSubPanelTable extends BasicSubPanel implements SubPanelTabl
 		}
 		
 		//data
-		for(int line=start;line<lines;line++)
+		for(int line=start;line<getLineCount();line++)
 		{	for(int grp=0;grp<colGroups;grp++)
 			{	int index = subIndex+grp*colSubs;
 				String txt = null;
 				JLabel lbl = new JLabel(txt);
-				lbl.setFont(lineFont);
+				lbl.setFont(getLineFont());
 				lbl.setHorizontalAlignment(SwingConstants.CENTER);
 				lbl.setBackground(GuiTools.COLOR_TABLE_NEUTRAL_BACKGROUND);
 				lbl.setForeground(GuiTools.COLOR_TABLE_REGULAR_FOREGROUND);
@@ -268,8 +160,6 @@ public class UntitledSubPanelTable extends BasicSubPanel implements SubPanelTabl
 				add(lbl,idx);
 			}
 		}
-
-		updateLayout();
 	}
 
 	public void addColGroup(int groupIndex)
@@ -277,13 +167,13 @@ public class UntitledSubPanelTable extends BasicSubPanel implements SubPanelTabl
 		int start = 0;
 	
 		// header
-		if(header)
+		if(hasHeader())
 		{	start = 1;
 			for(int sub=0;sub<colSubs;sub++)
 			{	int index = sub+groupIndex*colSubs;
 				String txt = null;
 				JLabel lbl = new JLabel(txt);
-				lbl.setFont(headerFont);
+				lbl.setFont(getHeaderFont());
 				lbl.setHorizontalAlignment(SwingConstants.CENTER);
 				lbl.setBackground(GuiTools.COLOR_TABLE_HEADER_BACKGROUND);
 				lbl.setForeground(GuiTools.COLOR_TABLE_HEADER_FOREGROUND);
@@ -293,12 +183,12 @@ public class UntitledSubPanelTable extends BasicSubPanel implements SubPanelTabl
 		}
 		
 		//data
-		for(int line=start;line<lines;line++)
+		for(int line=start;line<getLineCount();line++)
 		{	for(int sub=0;sub<colSubs;sub++)
 			{	int index = sub+groupIndex*colSubs;
 				String txt = null;
 				JLabel lbl = new JLabel(txt);
-				lbl.setFont(lineFont);
+				lbl.setFont(getLineFont());
 				lbl.setHorizontalAlignment(SwingConstants.CENTER);
 				lbl.setBackground(GuiTools.COLOR_TABLE_NEUTRAL_BACKGROUND);
 				lbl.setForeground(GuiTools.COLOR_TABLE_REGULAR_FOREGROUND);
@@ -307,8 +197,6 @@ public class UntitledSubPanelTable extends BasicSubPanel implements SubPanelTabl
 				add(lbl,idx);
 			}
 		}
-
-		updateLayout();
 	}
 
 	public void setColumnKeys(int col, ArrayList<String> keys, ArrayList<Boolean> imageFlags)
@@ -360,7 +248,7 @@ public class UntitledSubPanelTable extends BasicSubPanel implements SubPanelTabl
 	{	setColumnBackground(0,col,bg);
 	}
 	public void setColumnBackground(int colGroup, int colSub, Color bg)
-	{	for(int line=0;line<lines;line++)
+	{	for(int line=0;line<getLineCount();line++)
 		{	JLabel label = getLabel(line,colGroup,colSub);
 			label.setBackground(bg);
 		}
@@ -370,55 +258,20 @@ public class UntitledSubPanelTable extends BasicSubPanel implements SubPanelTabl
 	{	setColumnForeground(0,col,fg);
 	}
 	public void setColumnForeground(int colGroup, int colSub, Color fg)
-	{	for(int line=0;line<lines;line++)
+	{	for(int line=0;line<getLineCount();line++)
 		{	JLabel label = getLabel(line,colGroup,colSub);
 			label.setForeground(fg);
 		}
 	}
-
-	/////////////////////////////////////////////////////////////////
-	// LINES			/////////////////////////////////////////////
-	/////////////////////////////////////////////////////////////////
-	private int lines;
-
-	public int getLineCount()
-	{	return lines;
-	}
-
-	public ArrayList<JLabel> getLine(int index)
-	{	ArrayList<JLabel> result = new ArrayList<JLabel>();
-		for(int grp=0;grp<colGroups;grp++)
-			for(int sub=0;sub<colSubs;sub++)
-			{	JLabel label = getLabel(index,grp,sub);
-				result.add(label);
-			}
-		return result;
-	}
-	
-	public void addLine(int index)
-	{	int cols = getColumnCount();
-		int line = index*cols;
-		for(int col=0;col<cols;col++)
-		{	String txt = null;
-			JLabel lbl = new JLabel(txt);
-			lbl.setFont(lineFont);
-			lbl.setHorizontalAlignment(SwingConstants.CENTER);
-			lbl.setBackground(GuiTools.COLOR_TABLE_NEUTRAL_BACKGROUND);
-			lbl.setForeground(GuiTools.COLOR_TABLE_REGULAR_FOREGROUND);
-			lbl.setOpaque(true);
-			add(lbl,line);
-		}
-		updateLayout();
-	}
-
+//TODO les 6 suivantes très certainement à revoir	
 	public void setLineKeysSimple(int line, ArrayList<String> keys, ArrayList<Boolean> imageFlags)
 	{	ArrayList<ArrayList<String>> newKeys = new ArrayList<ArrayList<String>>();
 		newKeys.add(keys);
 		ArrayList<ArrayList<Boolean>> newFlags = new ArrayList<ArrayList<Boolean>>();
 		newFlags.add(imageFlags);
-		setLineKeys(line,newKeys,newFlags);
+		setLineKeysMultiple(line,newKeys,newFlags);
 	}
-	public void setLineKeys(int line, ArrayList<ArrayList<String>> keys, ArrayList<ArrayList<Boolean>> imageFlags)
+	public void setLineKeysMultiple(int line, ArrayList<ArrayList<String>> keys, ArrayList<ArrayList<Boolean>> imageFlags)
 	{	Iterator<ArrayList<String>> groupKeys = keys.iterator();
 		Iterator<ArrayList<Boolean>> groupFlags = imageFlags.iterator();
 		int colGroup = 0;
@@ -443,9 +296,9 @@ public class UntitledSubPanelTable extends BasicSubPanel implements SubPanelTabl
 		newIcons.add(icons);
 		ArrayList<ArrayList<String>> newTooltips = new ArrayList<ArrayList<String>>();
 		newTooltips.add(tooltips);
-		setLineIcons(line,newIcons,newTooltips);
+		setLineIconsMultiple(line,newIcons,newTooltips);
 	}
-	public void setLineIcons(int line, ArrayList<ArrayList<BufferedImage>> icons, ArrayList<ArrayList<String>> tooltips)
+	public void setLineIconsMultiple(int line, ArrayList<ArrayList<BufferedImage>> icons, ArrayList<ArrayList<String>> tooltips)
 	{	Iterator<ArrayList<BufferedImage>> groupIcons = icons.iterator();
 		Iterator<ArrayList<String>> groupTooltips = tooltips.iterator();
 		int colGroup = 0;
@@ -470,9 +323,9 @@ public class UntitledSubPanelTable extends BasicSubPanel implements SubPanelTabl
 		newTexts.add(texts);
 		ArrayList<ArrayList<String>> newTooltips = new ArrayList<ArrayList<String>>();
 		newTooltips.add(tooltips);
-		setLineTexts(line,newTexts,newTooltips);
+		setLineTextsMultiple(line,newTexts,newTooltips);
 	}
-	public void setLineTexts(int line, ArrayList<ArrayList<String>> texts, ArrayList<ArrayList<String>> tooltips)
+	public void setLineTextsMultiple(int line, ArrayList<ArrayList<String>> texts, ArrayList<ArrayList<String>> tooltips)
 	{	Iterator<ArrayList<String>> groupTexts = texts.iterator();
 		Iterator<ArrayList<String>> groupTooltips = tooltips.iterator();
 		int colGroup = 0;
@@ -492,119 +345,48 @@ public class UntitledSubPanelTable extends BasicSubPanel implements SubPanelTabl
 		}
 	}
 
-	public void setLineBackground(int line, Color bg)
-	{	for(int grp=0;grp<colGroups;grp++)
-			for(int sub=0;sub<colSubs;sub++)
-			{	JLabel label = getLabel(line,grp,sub);
-				label.setBackground(bg);
-			}
-	}
-
-	public void setLineForeground(int line, Color fg)
-	{	for(int grp=0;grp<colGroups;grp++)
-			for(int sub=0;sub<colSubs;sub++)
-			{	JLabel label = getLabel(line,grp,sub);
-				label.setForeground(fg);
-			}
-	}
-
 	/////////////////////////////////////////////////////////////////
 	// LABELS			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	
-	public JLabel getLabel(int line, int col)
-	{	return getLabel(line,0,col);
-	}
 	public JLabel getLabel(int line, int colGroup, int colSub)
-	{	JLabel result = (JLabel)getComponent(colSub+colGroup*colSubs+line*getColumnCount());;
-		return result;
+	{	int col = colSub+colGroup*colSubs;
+		return getLabel(line,col);
 	}
 	
-	public void setLabelKey(int line, int col, String key, boolean imageFlag)
-	{	setLabelKey(line,0,col,key,imageFlag);
-	}
 	public void setLabelKey(int line, int colGroup, int colSub, String key, boolean imageFlag)
-	{	String tooltip = GuiConfiguration.getMiscConfiguration().getLanguage().getText(key+GuiKeys.TOOLTIP);
-		// is there an available icon ?
-		if(imageFlag)
-		{	BufferedImage icon = GuiTools.getIcon(key);
-			setLabelIcon(line,colGroup,colSub,icon,tooltip);		
-		}
-		// if not : use text
-		else
-		{	String text = GuiConfiguration.getMiscConfiguration().getLanguage().getText(key);
-			setLabelText(line,colGroup,colSub,text,tooltip);
-		}
+	{	int col = colSub+colGroup*colSubs;
+		setLabelKey(line,col,key,imageFlag);
 	}
 
-	public void setLabelIcon(int line, int col, BufferedImage icon, String tooltip)
-	{	setLabelIcon(line,0,col,icon,tooltip);
-	}
 	public void setLabelIcon(int line, int colGroup, int colSub, BufferedImage icon, String tooltip)
-	{	JLabel label = getLabel(line,colGroup,colSub);
-		ImageIcon icn = null;
-		if(icon!=null)
-		{	int h;
-			if(line==0 && header)
-				h = headerHeight;
-			else
-				h = lineHeight;
-			double zoom = h/(double)icon.getHeight();
-			icon = ImageTools.resize(icon,zoom,true);
-			icn = new ImageIcon(icon);
-		}
-		label.setText(null);
-		label.setIcon(icn);
-		label.setToolTipText(tooltip);
+	{	int col = colSub+colGroup*colSubs;
+		setLabelIcon(line,col,icon,tooltip);
 	}
 
-	public void setLabelText(int line, int col, String text, String tooltip)
-	{	setLabelText(line,0,col,text,tooltip);
-	}
 	public void setLabelText(int line, int colGroup, int colSub, String text, String tooltip)
-	{	JLabel label = getLabel(line,colGroup,colSub);
-		label.setIcon(null);
-		label.setText(text);
-		label.setToolTipText(tooltip);
+	{	int col = colSub+colGroup*colSubs;
+		setLabelText(line,col,text,tooltip);
 	}
 	
-	public void setLabelBackground(int line, int col, Color bg)
-	{	setLabelBackground(line,0,col,bg);
-	}
 	public void setLabelBackground(int line, int colGroup, int colSub, Color bg)
-	{	JLabel label = getLabel(line, colGroup, colSub);
-		label.setBackground(bg);
+	{	int col = colSub+colGroup*colSubs;
+		setLabelBackground(line,col,bg);
 	}
 	
-	public void setLabelForeground(int line, int col, Color fg)
-	{	setLabelForeground(line,0,col,fg);
-	}
 	public void setLabelForeground(int line, int colGroup, int colSub, Color fg)
-	{	JLabel label = getLabel(line, colGroup, colSub);
-		label.setForeground(fg);
+	{	int col = colSub+colGroup*colSubs;
+		setLabelForeground(line,col,fg);
 	}
 
 	public int[] getLabelPositionSimple(JLabel label)
-	{	int[] result = {-1,-1};
-		int line = 0;
-		while(line<lines && result[0]==-1)
-		{	int col = 0;
-			while(col<getColumnCount() && result[0]==-1)
-			{	JLabel l = getLabel(line,col);
-				if(label == l)
-				{	result[0] = line;
-					result[1] = col;
-				}
-				col++;
-			}
-			line++;
-		}
-		return result;
+	{	return super.getLabelPosition(label);
 	}
+//TODO à renommer avec multiple et virer le "simple" ci dessus	
 	public int[] getLabelPosition(JLabel label)
 	{	int[] result = {-1,-1,-1};
 		int line = 0;
-		while(line<lines && result[0]==-1)
+		while(line<getLineCount() && result[0]==-1)
 		{	int colGroup = 0;
 			while(colGroup<colGroups && result[0]==-1)
 			{	int colSub = 0;
@@ -633,9 +415,9 @@ public class UntitledSubPanelTable extends BasicSubPanel implements SubPanelTabl
 		{	Iterator<ArrayList<String>> keysIt = keys.iterator();
 			Iterator<ArrayList<Boolean>> flagsIt = imageFlags.iterator();
 			int line = 0;
-			if(header)
+			if(hasHeader())
 				line = 1;
-			while(keysIt.hasNext() && line<lines)
+			while(keysIt.hasNext() && line<getLineCount())
 			{	int colGroup=0;
 				while(keysIt.hasNext() && colGroup<colGroups)
 				{	ArrayList<String> tempKeys = keysIt.next();
@@ -656,12 +438,12 @@ public class UntitledSubPanelTable extends BasicSubPanel implements SubPanelTabl
 		{	Iterator<ArrayList<String>> keysIt = keys.iterator();
 			Iterator<ArrayList<Boolean>> flagsIt = imageFlags.iterator();
 			int start = 0;
-			if(header)
+			if(hasHeader())
 				start = 1;
 			int colGroup = 0;
 			while(keysIt.hasNext() && colGroup<colGroups)
 			{	int line=start;
-				while(keysIt.hasNext() && line<lines)
+				while(keysIt.hasNext() && line<getLineCount())
 				{	ArrayList<String> tempKeys = keysIt.next();
 					ArrayList<Boolean> tempFlags = flagsIt.next();
 					Iterator<String> keyIt = tempKeys.iterator();
@@ -683,9 +465,9 @@ public class UntitledSubPanelTable extends BasicSubPanel implements SubPanelTabl
 		{	Iterator<ArrayList<BufferedImage>> iconsIt = icons.iterator();
 			Iterator<ArrayList<String>> tooltipsIt = tooltips.iterator();
 			int line = 0;
-			if(header)
+			if(hasHeader())
 				line = 1;
-			while(iconsIt.hasNext() && line<lines)
+			while(iconsIt.hasNext() && line<getLineCount())
 			{	int colGroup=0;
 				while(iconsIt.hasNext() && colGroup<colGroups)
 				{	ArrayList<BufferedImage> tempIcons = iconsIt.next();
@@ -706,12 +488,12 @@ public class UntitledSubPanelTable extends BasicSubPanel implements SubPanelTabl
 		{	Iterator<ArrayList<BufferedImage>> iconsIt = icons.iterator();
 			Iterator<ArrayList<String>> tooltipsIt = tooltips.iterator();
 			int start = 0;
-			if(header)
+			if(hasHeader())
 				start = 1;
 			int colGroup = 0;
 			while(iconsIt.hasNext() && colGroup<colGroups)
 			{	int line=start;
-				while(iconsIt.hasNext() && line<lines)
+				while(iconsIt.hasNext() && line<getLineCount())
 				{	ArrayList<BufferedImage> tempIcons = iconsIt.next();
 					ArrayList<String> tempTooltips = tooltipsIt.next();
 					Iterator<BufferedImage> iconIt = tempIcons.iterator();
@@ -733,9 +515,9 @@ public class UntitledSubPanelTable extends BasicSubPanel implements SubPanelTabl
 		{	Iterator<ArrayList<String>> textsIt = texts.iterator();
 			Iterator<ArrayList<String>> tooltipsIt = tooltips.iterator();
 			int line = 0;
-			if(header)
+			if(hasHeader())
 				line = 1;
-			while(textsIt.hasNext() && line<lines)
+			while(textsIt.hasNext() && line<getLineCount())
 			{	int colGroup=0;
 				while(textsIt.hasNext() && colGroup<colGroups)
 				{	ArrayList<String> tempTexts = textsIt.next();
@@ -756,12 +538,12 @@ public class UntitledSubPanelTable extends BasicSubPanel implements SubPanelTabl
 		{	Iterator<ArrayList<String>> textsIt = texts.iterator();
 			Iterator<ArrayList<String>> tooltipsIt = tooltips.iterator();
 			int start = 0;
-			if(header)
+			if(hasHeader())
 				start = 1;
 			int colGroup = 0;
 			while(textsIt.hasNext() && colGroup<colGroups)
 			{	int line=start;
-				while(textsIt.hasNext() && line<lines)
+				while(textsIt.hasNext() && line<getLineCount())
 				{	ArrayList<String> tempTexts = textsIt.next();
 					ArrayList<String> tempTooltips = tooltipsIt.next();
 					Iterator<String> textIt = tempTexts.iterator();
