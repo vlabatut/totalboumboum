@@ -22,297 +22,267 @@ package fr.free.totalboumboum.gui.common.structure.subpanel.temp.fait.subpanels;
  */
 
 import java.awt.Color;
-import java.awt.Dimension;
+import java.awt.Font;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 
-import javax.swing.Box;
 import javax.swing.JLabel;
 
-import fr.free.totalboumboum.gui.common.structure.subpanel.temp.fait.EntitledSubPanel;
+import fr.free.totalboumboum.gui.common.structure.subpanel.temp.fait.contentpanels.Line;
 import fr.free.totalboumboum.gui.common.structure.subpanel.temp.fait.contentpanels.TableContentPanel;
-import fr.free.totalboumboum.gui.tools.GuiTools;
 
-public class TableSubPanel extends EntitledSubPanel implements SubPanelTable
+public class TableSubPanel extends SubPanel<TableContentPanel>
 {	private static final long serialVersionUID = 1L;
 
-	public TableSubPanel(int width, int height, int colGroups, int colSubs, int lines)
-	{	super(width,height);
+	public TableSubPanel(int width, int height, Mode mode, int lines, int cols, boolean header)
+	{	super(width,height,mode);
 
-		// init table
-		remove(0);
-		add(Box.createRigidArea(new Dimension(GuiTools.subPanelMargin,GuiTools.subPanelMargin)),0);
-		remove(4); 	// remove glue
-//		remove(2); 	// remove glue
-
-		setNewTable(colGroups,colSubs,lines);
-	}
-	
-	private TableContentPanel getTable()
-	{	return (TableContentPanel)getDataPanel();
-	}
-	
-	public void setNewTable(int colGroups, int colSubs, int lines)
-	{	int tableHeight = height - getTitleHeight() - GuiTools.subPanelMargin;
-		int tableWidth = width;
-		TableContentPanel tablePanel = new TableContentPanel(tableWidth,tableHeight,colGroups,colSubs,lines,false);
-		tablePanel.setOpaque(false);
+		TableContentPanel tablePanel = new TableContentPanel(getDataWidth(),getDataHeight(),lines,cols,header);
 		setDataPanel(tablePanel);
 	}
 
 	/////////////////////////////////////////////////////////////////
-	// MISC				/////////////////////////////////////////////
+	// FONT				/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	@Override
-	public void reinit(int columns, int lines)
-	{	getTable().reinit(columns,lines);
+	public Font getHeaderFont()
+	{	return getDataPanel().getHeaderFont();	
 	}
-	@Override
-	public void reinit(int colGroups, int colSubs, int lines)
-	{	getTable().reinit(colGroups,colSubs,lines);
+	
+	public Font getLineFont()
+	{	return getDataPanel().getLineFont();	
+	}
+	
+	public int getLineFontSize()
+	{	return getDataPanel().getLineFontSize();	
+	}
+	
+	public int getHeaderFontSize()
+	{	return getDataPanel().getHeaderFontSize();	
+	}
+
+	/////////////////////////////////////////////////////////////////
+	// HEADER			/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	public boolean hasHeader()
+	{	return getDataPanel().hasHeader();	
 	}
 
 	/////////////////////////////////////////////////////////////////
 	// SIZE				/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	@Override
-	public int getLineFontSize()
-	{	return getTable().getLineFontSize();
+	public void reinit(int lines, int cols)
+	{	getDataPanel().reinit(lines,cols);		
 	}
-	@Override
-	public int getHeaderFontSize()
-	{	return getTable().getHeaderFontSize();
-	}
-	@Override
+
 	public int getHeaderHeight()
-	{	return getTable().getHeaderHeight();
-	}
-	@Override
-	public int getLineHeight()
-	{	return getTable().getLineHeight();
+	{	return getDataPanel().getHeaderHeight();	
 	}
 	
-	/////////////////////////////////////////////////////////////////
-	// COLUMNS			/////////////////////////////////////////////
-	/////////////////////////////////////////////////////////////////
-	@Override
-	public void setColSubMinWidth(int colSub, int width)
-	{	getTable().setColSubMinWidth(colSub,width);
-	}
-	@Override
-	public void setColSubPreferredWidth(int colSub, int width)
-	{	getTable().setColSubPreferredWidth(colSub,width);
-	}
-	@Override
-	public void setColSubMaxWidth(int colSub, int width)
-	{	getTable().setColSubMaxWidth(colSub,width);
-	}
-	@Override
-	public void unsetColSubMinWidth(int colSub)
-	{	getTable().unsetColSubMinWidth(colSub);
-	}
-	@Override
-	public void unsetColSubPreferredWidth(int colSub)
-	{	getTable().unsetColSubPreferredWidth(colSub);
-	}
-	@Override
-	public void unsetColSubMaxWidth(int colSub)
-	{	getTable().unsetColSubMaxWidth(colSub);
-	}
-	@Override
-	public ArrayList<JLabel> getColumn(int col)
-	{	return getTable().getColumn(col);
-	}
-	@Override
-	public ArrayList<JLabel> getColSub(int colGroup, int colSub)
-	{	return getTable().getColSub(colGroup,colSub);
-	}
-	@Override
-	public int getColumnCount()
-	{	return getTable().getColumnCount();
-	}
-	@Override
-	public int getColGroupCount()
-	{	return getTable().getColGroupCount();
-	}
-	@Override
-	public int getColSubCount()
-	{	return getTable().getColSubCount();
-	}
-	@Override
-	public void addColumn(int index)
-	{	getTable().addColumn(index);
-	}
-	@Override
-	public void addColSub(int subIndex)
-	{	getTable().addColSub(subIndex);
-	}
-	@Override
-	public void addColGroup(int groupIndex)
-	{	getTable().addColGroup(groupIndex);
-	}
-	@Override
-	public void setColumnKeys(int col, ArrayList<String> keys, ArrayList<Boolean> imageFlags)
-	{	getTable().setColumnKeys(col,keys,imageFlags);
-	}
-	@Override
-	public void setColumnKeys(int colGroup, int colSub, ArrayList<String> keys, ArrayList<Boolean> imageFlags)
-	{	getTable().setColumnKeys(colGroup,colSub,keys,imageFlags);
-	}
-	@Override
-	public void setColumnIcons(int col, ArrayList<BufferedImage> icons, ArrayList<String> tooltips)
-	{	getTable().setColumnIcons(col,icons,tooltips);
-	}
-	@Override
-	public void setColumnIcons(int colGroup, int colSub, ArrayList<BufferedImage> icons, ArrayList<String> tooltips)
-	{	getTable().setColumnIcons(colGroup,colSub,icons,tooltips);
-	}
-	@Override
-	public void setColumnTexts(int col, ArrayList<String> texts, ArrayList<String> tooltips)
-	{	getTable().setColumnTexts(col,texts,tooltips);
-	}
-	@Override
-	public void setColumnTexts(int colGroup, int colSub, ArrayList<String> texts, ArrayList<String> tooltips)
-	{	getTable().setColumnTexts(colGroup,colSub,texts,tooltips);
-	}
-	@Override
-	public void setColumnBackground(int col, Color bg)
-	{	getTable().setColumnBackground(col,bg);
-	}
-	@Override
-	public void setColumnBackground(int colGroup, int colSub, Color bg)
-	{	getTable().setColumnBackground(colGroup,colSub,bg);
-	}
-	@Override
-	public void setColumnForeground(int col, Color fg)
-	{	getTable().setColumnForeground(col,fg);
-	}
-	@Override
-	public void setColumnForeground(int colGroup, int colSub, Color fg)
-	{	getTable().setColumnForeground(colGroup,colSub,fg);
+	public int getLineHeight()
+	{	return getDataPanel().getLineHeight();	
 	}
 
 	/////////////////////////////////////////////////////////////////
 	// LINES			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	@Override
+	public Line getLine(int line)
+	{	return getDataPanel().getLine(line);
+	}
+
 	public int getLineCount()
-	{	return getTable().getLineCount();
+	{	return getDataPanel().getLineCount();
 	}
-	@Override
-	public ArrayList<JLabel> getLine(int index)
-	{	return getTable().getLine(index);
-	}
-	@Override
+	
 	public void addLine(int index)
-	{	getTable().addLine(index);
+	{	getDataPanel().addLine(index);
 	}
-	@Override
-	public void setLineKeysSimple(int line, ArrayList<String> keys, ArrayList<Boolean> imageFlags)
-	{	getTable().setLineKeysSimple(line,keys,imageFlags);
+	
+	public void addLine(int index, int cols)
+	{	getDataPanel().addLine(index,cols);
 	}
-	@Override
-	public void setLineKeys(int line, ArrayList<ArrayList<String>> keys, ArrayList<ArrayList<Boolean>> imageFlags)
-	{	getTable().setLineKeys(line,keys,imageFlags);
+	
+	public void setLineKeys(int line, ArrayList<String> keys, ArrayList<Boolean> imageFlags)
+	{	getDataPanel().setLineKeys(line,keys,imageFlags);
 	}
-	@Override
-	public void setLineIconsSimple(int line, ArrayList<BufferedImage> icons, ArrayList<String> tooltips)
-	{	getTable().setLineIconsSimple(line,icons,tooltips);
+	
+	public void setLineIcons(int line, ArrayList<BufferedImage> icons, ArrayList<String> tooltips)
+	{	getDataPanel().setLineIcons(line,icons,tooltips);
 	}
-	@Override
-	public void setLineIcons(int line, ArrayList<ArrayList<BufferedImage>> icons, ArrayList<ArrayList<String>> tooltips)
-	{	getTable().setLineIcons(line,icons,tooltips);
+	
+	public void setLineTexts(int line, ArrayList<String> texts, ArrayList<String> tooltips)
+	{	getDataPanel().setLineTexts(line,texts,tooltips);
 	}
-	@Override
-	public void setLineTextsSimple(int line, ArrayList<String> texts, ArrayList<String> tooltips)
-	{	getTable().setLineTextsSimple(line,texts,tooltips);
-	}
-	@Override
-	public void setLineTexts(int line, ArrayList<ArrayList<String>> texts, ArrayList<ArrayList<String>> tooltips)
-	{	getTable().setLineTexts(line,texts,tooltips);
-	}
-	@Override
+
 	public void setLineBackground(int line, Color bg)
-	{	getTable().setLineBackground(line,bg);
+	{	getDataPanel().setLineBackground(line,bg);
 	}
-	@Override
+
 	public void setLineForeground(int line, Color fg)
-	{	getTable().setLineForeground(line,fg);
+	{	getDataPanel().setLineForeground(line,fg);
 	}
 
 	/////////////////////////////////////////////////////////////////
 	// LABELS			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	@Override
-	public JLabel getLabel(int line, int col)
-	{	return getTable().getLabel(line,col);
-	}
-	@Override
-	public JLabel getLabel(int line, int colGroup, int colSub)
-	{	return getTable().getLabel(line,colGroup,colSub);
-	}
-	@Override
-	public void setLabelKey(int line, int col, String key, boolean imageFlag)
-	{	getTable().setLabelKey(line,col,key,imageFlag);
-	}
-	@Override
-	public void setLabelKey(int line, int colGroup, int colSub, String key, boolean imageFlag)
-	{	getTable().setLabelKey(line,colGroup,colSub,key,imageFlag);
-	}
-	@Override
-	public void setLabelIcon(int line, int col, BufferedImage icon, String tooltip)
-	{	getTable().setLabelIcon(line,col,icon,tooltip);
-	}
-	@Override
-	public void setLabelIcon(int line, int colGroup, int colSub, BufferedImage icon, String tooltip)
-	{	getTable().setLabelIcon(line,colGroup,colSub,icon,tooltip);
-	}
-	@Override
-	public void setLabelText(int line, int col, String text, String tooltip)
-	{	getTable().setLabelText(line,col,text,tooltip);
-	}
-	@Override
-	public void setLabelText(int line, int colGroup, int colSub, String text, String tooltip)
-	{	getTable().setLabelText(line,colGroup,colSub,text,tooltip);
-	}
-	@Override
-	public void setLabelBackground(int line, int col, Color bg)
-	{	getTable().setLabelBackground(line,col,bg);
-	}
-	@Override
-	public void setLabelBackground(int line, int colGroup, int colSub, Color bg)
-	{	getTable().setLabelBackground(line,colGroup,colSub,bg);
-	}
-	@Override
-	public void setLabelForeground(int line, int col, Color fg)
-	{	getTable().setLabelForeground(line,col,fg);
-	}
-	@Override
-	public void setLabelForeground(int line, int colGroup, int colSub, Color fg)
-	{	getTable().setLabelForeground(line,colGroup,colSub,fg);
-	}
-	@Override
-	public int[] getLabelPositionSimple(JLabel label)
-	{	return getTable().getLabelPositionSimple(label);
-	}
-	@Override
 	public int[] getLabelPosition(JLabel label)
-	{	return getTable().getLabelPosition(label);
+	{	return getDataPanel().getLabelPosition(label);
 	}
 	
+	public JLabel getLabel(int line, int col)
+	{	return getDataPanel().getLabel(line,col);
+	}
+	
+	public void addLabel(int line, int col)
+	{	getDataPanel().addLabel(line,col);
+	}
+
+	public void setLabelKey(int line, int col, String key, boolean imageFlag)
+	{	getDataPanel().setLabelKey(line,col,key,imageFlag);
+	}
+
+	public void setLabelIcon(int line, int col, BufferedImage icon, String tooltip)
+	{	getDataPanel().setLabelIcon(line,col,icon,tooltip);
+	}
+
+	public void setLabelText(int line, int col, String text, String tooltip)
+	{	getDataPanel().setLabelText(line,col,text,tooltip);
+	}
+	
+	public void setLabelBackground(int line, int col, Color bg)
+	{	getDataPanel().setLabelBackground(line,col,bg);
+	}
+	
+	public void setLabelForeground(int line, int col, Color fg)
+	{	getDataPanel().setLabelForeground(line,col,fg);
+	}
+
+	public int getLabelColumn(int line, JLabel label)
+	{	return getDataPanel().getLabelColumn(line,label);
+	}
+	
+	public void setLabelMinWidth(int line, int col, int width)
+	{	getDataPanel().setLabelMinWidth(line,col,width);
+	}
+	public void setLabelPreferredWidth(int line, int col, int width)
+	{	getDataPanel().setLabelPreferredWidth(line,col,width);
+	}
+	public void setLabelMaxWidth(int line, int col, int width)
+	{	getDataPanel().setLabelMaxWidth(line,col,width);
+	}
+	public void setLabelWidth(int line, int col, int width, int mode)
+	{	getDataPanel().setLabelWidth(line,col,width,mode);
+	}
+	
+	public void unsetLabelMinWidth(int line, int colSub)
+	{	getDataPanel().unsetLabelMinWidth(line,colSub);
+	}
+	public void unsetLabelPreferredWidth(int line, int colSub)
+	{	getDataPanel().unsetLabelPreferredWidth(line,colSub);
+	}
+	public void unsetLabelMaxWidth(int line, int colSub)
+	{	getDataPanel().unsetLabelMaxWidth(line,colSub);
+	}
+	public void unsetLabelWidth(int line, int col, int mode)
+	{	getDataPanel().unsetLabelWidth(line,col,mode);
+	}
+
+	/////////////////////////////////////////////////////////////////
+	// COLUMNS			/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	public void setColSubMinWidth(int colSub, int width)
+	{	getDataPanel().setColSubMinWidth(colSub,width);
+	}
+	public void setColSubPreferredWidth(int colSub, int width)
+	{	getDataPanel().setColSubPreferredWidth(colSub,width);
+	}
+	public void setColSubMaxWidth(int colSub, int width)
+	{	getDataPanel().setColSubMaxWidth(colSub,width);
+	}
+	public void setColSubWidth(int colSub, int width, int mode)
+	{	getDataPanel().setColSubWidth(colSub,width,mode);
+	}
+	
+	public void unsetColSubMinWidth(int colSub)
+	{	getDataPanel().unsetColSubMinWidth(colSub);
+	}
+	public void unsetColSubPreferredWidth(int colSub)
+	{	getDataPanel().unsetColSubPreferredWidth(colSub);
+	}
+	public void unsetColSubMaxWidth(int colSub)
+	{	getDataPanel().unsetColSubMaxWidth(colSub);
+	}
+	public void unsetColSubWidth(int colSub, int mode)
+	{	getDataPanel().unsetColSubWidth(colSub,mode);
+	}
+	
+	public ArrayList<JLabel> getColumn(int col)
+	{	return getDataPanel().getColumn(col);
+	}
+	public ArrayList<JLabel> getColSub(int colGroup, int colSub)
+	{	return getDataPanel().getColSub(colGroup,colSub);
+	}
+	
+	public int getColumnCount()
+	{	return getDataPanel().getColumnCount();
+	}
+	public int getColGroupCount()
+	{	return getDataPanel().getColGroupCount();
+	}
+	public int getColSubCount()
+	{	return getDataPanel().getColSubCount();
+	}
+	
+	public void addColumn(int index)
+	{	getDataPanel().addColumn(index);
+	}
+	public void addColSub(int subIndex)
+	{	getDataPanel().addColSub(subIndex);
+	}
+	public void addColGroup(int groupIndex)
+	{	getDataPanel().addColGroup(groupIndex);
+	}
+	public void setColumnKeys(int col, ArrayList<String> keys, ArrayList<Boolean> imageFlags)
+	{	getDataPanel().setColumnKeys(col,keys,imageFlags);
+	}
+	public void setColumnKeys(int colGroup, int colSub, ArrayList<String> keys, ArrayList<Boolean> imageFlags)
+	{	getDataPanel().setColumnKeys(colGroup,colSub,keys,imageFlags);
+	}
+	public void setColumnIcons(int col, ArrayList<BufferedImage> icons, ArrayList<String> tooltips)
+	{	getDataPanel().setColumnIcons(col,icons,tooltips);
+	}
+	public void setColumnIcons(int colGroup, int colSub, ArrayList<BufferedImage> icons, ArrayList<String> tooltips)
+	{	getDataPanel().setColumnIcons(colGroup,colSub,icons,tooltips);
+	}
+	public void setColumnTexts(int col, ArrayList<String> texts, ArrayList<String> tooltips)
+	{	getDataPanel().setColumnTexts(col,texts,tooltips);
+	}
+	public void setColumnTexts(int colGroup, int colSub, ArrayList<String> texts, ArrayList<String> tooltips)
+	{	getDataPanel().setColumnTexts(colGroup,colSub,texts,tooltips);
+	}
+	public void setColumnBackground(int col, Color bg)
+	{	getDataPanel().setColumnBackground(col,bg);
+	}
+	public void setColumnBackground(int colGroup, int colSub, Color bg)
+	{	getDataPanel().setColumnBackground(colGroup,colSub,bg);
+	}
+	public void setColumnForeground(int col, Color fg)
+	{	getDataPanel().setColumnForeground(col,fg);
+	}
+	public void setColumnForeground(int colGroup, int colSub, Color fg)
+	{	getDataPanel().setColumnForeground(colGroup,colSub,fg);
+	}
+
+
 	/////////////////////////////////////////////////////////////////
 	// CONTENT			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	@Override
 	public void setContentBySubLineKeys(ArrayList<ArrayList<String>> keys, ArrayList<ArrayList<Boolean>> imageFlags, boolean wholeLine)
-	{	getTable().setContentBySubLineKeys(keys,imageFlags,wholeLine);
+	{	getDataPanel().setContentBySubLineKeys(keys,imageFlags,wholeLine);
 	}
-	@Override
 	public void setContentBySubLineIcon(ArrayList<ArrayList<BufferedImage>> icons, ArrayList<ArrayList<String>> tooltips, boolean wholeLine)
-	{	getTable().setContentBySubLineIcon(icons,tooltips,wholeLine);
+	{	getDataPanel().setContentBySubLineIcon(icons,tooltips,wholeLine);
 	}
-	@Override
 	public void setContentBySubLineText(ArrayList<ArrayList<String>> texts, ArrayList<ArrayList<String>> tooltips, boolean wholeLine)
-	{	getTable().setContentBySubLineText(texts,tooltips,wholeLine);
+	{	getDataPanel().setContentBySubLineText(texts,tooltips,wholeLine);
 	}
 }
