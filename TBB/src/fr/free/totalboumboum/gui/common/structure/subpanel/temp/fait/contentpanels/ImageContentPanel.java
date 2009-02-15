@@ -39,9 +39,7 @@ public class ImageContentPanel extends ContentPanel
 
 	public ImageContentPanel(int width, int height)
 	{	super(width,height);
-		
-		//background
-		setBackground(GuiTools.COLOR_COMMON_BACKGROUND);
+//		setBackground(GuiTools.COLOR_COMMON_BACKGROUND);
 		
 		// layout
 		BoxLayout layout = new BoxLayout(this,BoxLayout.PAGE_AXIS);
