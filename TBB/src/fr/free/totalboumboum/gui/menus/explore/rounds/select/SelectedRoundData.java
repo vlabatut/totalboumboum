@@ -48,8 +48,9 @@ import fr.free.totalboumboum.gui.common.content.subpanel.points.PointsSubPanel;
 import fr.free.totalboumboum.gui.common.content.subpanel.round.RoundMiscSubPanel;
 import fr.free.totalboumboum.gui.common.structure.panel.SplitMenuPanel;
 import fr.free.totalboumboum.gui.common.structure.panel.data.EntitledDataPanel;
-import fr.free.totalboumboum.gui.common.structure.subpanel.temp.fait.SubPanel;
-import fr.free.totalboumboum.gui.common.structure.subpanel.temp.fait.UntitledSubPanelImage;
+import fr.free.totalboumboum.gui.common.structure.subpanel.BasicPanel;
+import fr.free.totalboumboum.gui.common.structure.subpanel.outside.ImageSubPanel;
+import fr.free.totalboumboum.gui.common.structure.subpanel.outside.SubPanel.Mode;
 import fr.free.totalboumboum.gui.data.configuration.GuiConfiguration;
 import fr.free.totalboumboum.gui.tools.GuiKeys;
 import fr.free.totalboumboum.gui.tools.GuiTools;
@@ -60,7 +61,7 @@ public class SelectedRoundData extends EntitledDataPanel implements FolderBrowse
 	private static final long serialVersionUID = 1L;
 	private static final float SPLIT_RATIO = 0.4f;
 	
-	private UntitledSubPanelImage imagePanel;
+	private ImageSubPanel imagePanel;
 	private LimitsSubPanel<RoundLimit> limitsPanel;
 	private PointsSubPanel pointsPanel;
 	private RoundMiscSubPanel miscPanel;
@@ -74,9 +75,9 @@ public class SelectedRoundData extends EntitledDataPanel implements FolderBrowse
 		// title
 		setTitleKey(GuiKeys.MENU_RESOURCES_ROUND_TITLE);
 		
-		SubPanel mainPanel;
+		BasicPanel mainPanel;
 		// data
-		{	mainPanel = new SubPanel(dataWidth,dataHeight);
+		{	mainPanel = new BasicPanel(dataWidth,dataHeight);
 			{	BoxLayout layout = new BoxLayout(mainPanel,BoxLayout.LINE_AXIS); 
 				mainPanel.setLayout(layout);
 			}
@@ -101,7 +102,7 @@ public class SelectedRoundData extends EntitledDataPanel implements FolderBrowse
 			{	int rightHeight = (int)((dataHeight - 2*margin)*0.375);
 				int previewHeight = dataHeight - 2*rightHeight - 2*margin; 
 				
-				SubPanel rightPanel = new SubPanel(rightWidth,dataHeight);
+				BasicPanel rightPanel = new BasicPanel(rightWidth,dataHeight);
 				rightPanel.setOpaque(false);
 				mainPanel.add(rightPanel);
 				{	BoxLayout layout = new BoxLayout(rightPanel,BoxLayout.PAGE_AXIS); 
@@ -111,7 +112,7 @@ public class SelectedRoundData extends EntitledDataPanel implements FolderBrowse
 				rightPanel.add(Box.createVerticalGlue());
 
 				{	
-					SubPanel upPanel = new SubPanel(rightWidth,previewHeight);
+					BasicPanel upPanel = new BasicPanel(rightWidth,previewHeight);
 					upPanel.setOpaque(false);
 					{	BoxLayout layout = new BoxLayout(upPanel,BoxLayout.LINE_AXIS); 
 						upPanel.setLayout(layout);
@@ -127,7 +128,7 @@ public class SelectedRoundData extends EntitledDataPanel implements FolderBrowse
 					upPanel.add(Box.createHorizontalGlue());
 
 					// level preview
-					{	imagePanel = new UntitledSubPanelImage(rightUpWidth,previewHeight);
+					{	imagePanel = new ImageSubPanel(rightUpWidth,previewHeight,Mode.BORDER);
 						upPanel.add(imagePanel);
 					}
 					

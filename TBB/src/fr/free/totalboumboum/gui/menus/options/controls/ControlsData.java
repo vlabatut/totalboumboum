@@ -36,7 +36,8 @@ import fr.free.totalboumboum.configuration.controls.ControlSettings;
 import fr.free.totalboumboum.engine.content.feature.event.ControlEvent;
 import fr.free.totalboumboum.gui.common.structure.panel.SplitMenuPanel;
 import fr.free.totalboumboum.gui.common.structure.panel.data.EntitledDataPanel;
-import fr.free.totalboumboum.gui.common.structure.subpanel.temp.fait.UntitledSubPanelTable;
+import fr.free.totalboumboum.gui.common.structure.subpanel.outside.TableSubPanel;
+import fr.free.totalboumboum.gui.common.structure.subpanel.outside.SubPanel.Mode;
 import fr.free.totalboumboum.gui.data.configuration.GuiConfiguration;
 import fr.free.totalboumboum.gui.tools.GuiKeys;
 import fr.free.totalboumboum.gui.tools.GuiTools;
@@ -50,7 +51,7 @@ public class ControlsData extends EntitledDataPanel implements MouseListener,Key
 	private static final int COL_KEY = 1;
 	private static final int COL_AUTO = 2;
 	
-	private UntitledSubPanelTable keysPanel;
+	private TableSubPanel keysPanel;
 	private ControlSettings controlSettings;
 	private String actions[] = 
 	{	ControlEvent.UP,
@@ -83,7 +84,7 @@ public class ControlsData extends EntitledDataPanel implements MouseListener,Key
 			int cols = head.length;
 			int w = getDataWidth();
 			int h = getDataHeight();
-			keysPanel = new UntitledSubPanelTable(w,h,cols,lines,true);
+			keysPanel = new TableSubPanel(w,h,Mode.BORDER,cols,lines,true);
 
 			// headers
 			{	ArrayList<String> keys = new ArrayList<String>();
@@ -92,7 +93,7 @@ public class ControlsData extends EntitledDataPanel implements MouseListener,Key
 				{	keys.add(head[i]);
 					imageFlags.add(true);
 				}
-				keysPanel.setLineKeysSimple(0, keys, imageFlags);
+				keysPanel.setLineKeysSimple(0,keys,imageFlags);
 				//keysPanel.setColumnWidth(0,Integer.MAX_VALUE);
 				keysPanel.setColSubMaxWidth(1,Integer.MAX_VALUE);
 			}			

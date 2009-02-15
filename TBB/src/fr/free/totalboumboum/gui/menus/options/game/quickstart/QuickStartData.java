@@ -44,8 +44,9 @@ import fr.free.totalboumboum.gui.common.content.subpanel.players.PlayersSelectio
 import fr.free.totalboumboum.gui.common.content.subpanel.players.PlayersSelectionSubPanelListener;
 import fr.free.totalboumboum.gui.common.structure.panel.SplitMenuPanel;
 import fr.free.totalboumboum.gui.common.structure.panel.data.EntitledDataPanel;
-import fr.free.totalboumboum.gui.common.structure.subpanel.temp.fait.SubPanel;
-import fr.free.totalboumboum.gui.common.structure.subpanel.temp.fait.UntitledSubPanelTable;
+import fr.free.totalboumboum.gui.common.structure.subpanel.BasicPanel;
+import fr.free.totalboumboum.gui.common.structure.subpanel.outside.TableSubPanel;
+import fr.free.totalboumboum.gui.common.structure.subpanel.outside.SubPanel.Mode;
 import fr.free.totalboumboum.gui.menus.options.game.quickstart.hero.SelectHeroSplitPanel;
 import fr.free.totalboumboum.gui.menus.options.game.quickstart.profile.SelectProfileSplitPanel;
 import fr.free.totalboumboum.gui.menus.options.game.quickstart.round.SelectRoundSplitPanel;
@@ -59,7 +60,7 @@ public class QuickStartData extends EntitledDataPanel implements PlayersSelectio
 	private static final float SPLIT_RATIO = 0.06f;
 	
 	private PlayersSelectionSubPanel playersPanel;
-	private UntitledSubPanelTable roundPanel;
+	private TableSubPanel roundPanel;
 	private int roundHeight;
 	private int playersHeight;
 
@@ -70,9 +71,9 @@ public class QuickStartData extends EntitledDataPanel implements PlayersSelectio
 		String key = GuiKeys.MENU_OPTIONS_GAME_QUICKSTART_TITLE;
 		setTitleKey(key);
 		
-		SubPanel mainPanel;
+		BasicPanel mainPanel;
 		// data
-		{	mainPanel = new SubPanel(dataWidth,dataHeight);
+		{	mainPanel = new BasicPanel(dataWidth,dataHeight);
 			{	BoxLayout layout = new BoxLayout(mainPanel,BoxLayout.PAGE_AXIS); 
 				mainPanel.setLayout(layout);
 			}
@@ -208,11 +209,11 @@ public class QuickStartData extends EntitledDataPanel implements PlayersSelectio
 		fireDataPanelSelectionChange();
 	}
 
-	private UntitledSubPanelTable makeRoundPanel(int width, int height)
+	private TableSubPanel makeRoundPanel(int width, int height)
 	{	int cols = 3;
 		int lines = 1;
 		int margin = GuiTools.subPanelMargin;
-		UntitledSubPanelTable result = new UntitledSubPanelTable(width,height,cols,lines,false);
+		TableSubPanel result = new TableSubPanel(width,height,Mode.BORDER,cols,lines,false);
 		@SuppressWarnings("unused")
 		int headerHeight = result.getHeaderHeight();
 		int lineHeight = result.getLineHeight();

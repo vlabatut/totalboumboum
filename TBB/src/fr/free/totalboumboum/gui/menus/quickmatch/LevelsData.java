@@ -46,8 +46,9 @@ import fr.free.totalboumboum.gui.common.content.subpanel.transfer.TransferSubPan
 import fr.free.totalboumboum.gui.common.content.subpanel.transfer.TransferSubPanelListener;
 import fr.free.totalboumboum.gui.common.structure.panel.SplitMenuPanel;
 import fr.free.totalboumboum.gui.common.structure.panel.data.EntitledDataPanel;
-import fr.free.totalboumboum.gui.common.structure.subpanel.temp.fait.SubPanel;
-import fr.free.totalboumboum.gui.common.structure.subpanel.temp.fait.UntitledSubPanelImage;
+import fr.free.totalboumboum.gui.common.structure.subpanel.BasicPanel;
+import fr.free.totalboumboum.gui.common.structure.subpanel.outside.ImageSubPanel;
+import fr.free.totalboumboum.gui.common.structure.subpanel.outside.SubPanel.Mode;
 import fr.free.totalboumboum.gui.data.configuration.GuiConfiguration;
 import fr.free.totalboumboum.gui.tools.GuiKeys;
 import fr.free.totalboumboum.gui.tools.GuiTools;
@@ -59,7 +60,7 @@ public class LevelsData extends EntitledDataPanel implements PackBrowserSubPanel
 	private static final float SPLIT_RATIO = 0.30f;
 	
 	private LevelSubPanel infosPanel;
-	private UntitledSubPanelImage imagePanel;
+	private ImageSubPanel imagePanel;
 	private FileBrowserSubPanel selectedPanel;
 	private PackBrowserSubPanel selectionPanel;
 	private TransferSubPanel commandsPanel;
@@ -70,9 +71,9 @@ public class LevelsData extends EntitledDataPanel implements PackBrowserSubPanel
 		// title
 		setTitleKey(GuiKeys.MENU_QUICKMATCH_LEVELS_TITLE);
 		
-		SubPanel mainPanel;
+		BasicPanel mainPanel;
 		// data
-		{	mainPanel = new SubPanel(dataWidth,dataHeight);
+		{	mainPanel = new BasicPanel(dataWidth,dataHeight);
 			{	BoxLayout layout = new BoxLayout(mainPanel,BoxLayout.LINE_AXIS); 
 				mainPanel.setLayout(layout);
 			}
@@ -114,7 +115,7 @@ public class LevelsData extends EntitledDataPanel implements PackBrowserSubPanel
 			mainPanel.add(Box.createHorizontalGlue());
 			
 			// preview panel
-			{	SubPanel previewPanel = new SubPanel(previewWidth,dataHeight);
+			{	BasicPanel previewPanel = new BasicPanel(previewWidth,dataHeight);
 				{	BoxLayout layout = new BoxLayout(previewPanel,BoxLayout.PAGE_AXIS); 
 					previewPanel.setLayout(layout);
 				}
@@ -130,7 +131,7 @@ public class LevelsData extends EntitledDataPanel implements PackBrowserSubPanel
 				
 				previewPanel.add(Box.createVerticalGlue());
 				
-				imagePanel = new UntitledSubPanelImage(previewWidth,downHeight);
+				imagePanel = new ImageSubPanel(previewWidth,downHeight,Mode.BORDER);
 				previewPanel.add(imagePanel);
 				
 				mainPanel.add(previewPanel);

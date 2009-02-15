@@ -33,23 +33,19 @@ import java.util.Iterator;
 import java.util.Locale;
 import java.util.Map.Entry;
 
-import javax.swing.BoxLayout;
 import javax.swing.JLabel;
 
-import fr.free.totalboumboum.gui.common.structure.subpanel.outside.EmptySubPanel;
+import fr.free.totalboumboum.gui.common.structure.subpanel.inside.TableContentPanel;
+import fr.free.totalboumboum.gui.common.structure.subpanel.outside.SubPanel;
+import fr.free.totalboumboum.gui.common.structure.subpanel.outside.TableSubPanel;
 import fr.free.totalboumboum.gui.tools.GuiKeys;
 import fr.free.totalboumboum.gui.tools.GuiTools;
 
-public class FileBrowserSubPanel extends EmptySubPanel implements MouseListener
+public class FileBrowserSubPanel extends TableSubPanel implements MouseListener
 {	private static final long serialVersionUID = 1L;
 
 	public FileBrowserSubPanel(int width, int height)
-	{	super(width,height);
-		setOpaque(false);
-		
-		// layout
-		BoxLayout layout = new BoxLayout(this,BoxLayout.PAGE_AXIS); 
-		setLayout(layout);
+	{	super(width,height,SubPanel.Mode.BORDER,1,1,1,false);
 		
 		// pages
 		setFileNames(null);
@@ -68,7 +64,7 @@ public class FileBrowserSubPanel extends EmptySubPanel implements MouseListener
 	private int controlUpCount;
 	private int selectedRow;
 	private int currentPage = 0;
-	private ArrayList<UntitledSubPanelTable> listPanels;
+	private ArrayList<TableContentPanel> listPanels;
 	private int pageCount;	
 	
 	public HashMap<String,String> getFileNames()
@@ -80,7 +76,7 @@ public class FileBrowserSubPanel extends EmptySubPanel implements MouseListener
 		this.fileNames = fileNames;
 		if(fileNames==null)
 			this.fileNames = new HashMap<String, String>();
-		listPanels = new ArrayList<UntitledSubPanelTable>();
+		listPanels = new ArrayList<TableContentPanel>();
 		currentPage = 0;
 		selectedRow = -1; fireFileBrowserSelectionChanged();
 		
@@ -97,10 +93,10 @@ public class FileBrowserSubPanel extends EmptySubPanel implements MouseListener
 		
 		initNames();
 		pageCount = getPageCount();
-		int textMaxWidth = width - 2*GuiTools.subPanelMargin;
+		int textMaxWidth = getDataWidth() - 2*GuiTools.subPanelMargin;
 		
 		for(int panelIndex=0;panelIndex<pageCount;panelIndex++)
-		{	UntitledSubPanelTable listPanel = new UntitledSubPanelTable(width,height,cols,lines,false);
+		{	TableContentPanel listPanel = new TableContentPanel(getDataWidth(),getDataHeight(),cols,lines,false);
 			listPanel.setColSubMinWidth(0,textMaxWidth);
 			listPanel.setColSubPreferredWidth(0,textMaxWidth);
 			listPanel.setColSubMaxWidth(0,textMaxWidth);
@@ -204,7 +200,7 @@ public class FileBrowserSubPanel extends EmptySubPanel implements MouseListener
 	}
 	
 	private void selectName(int row)
-	{	UntitledSubPanelTable table = listPanels.get(currentPage);
+	{	TableContentPanel table = listPanels.get(currentPage);
 		// unselect the previous selected line
 		if(selectedRow!=-1)
 			table.setLabelBackground(selectedRow,0,GuiTools.COLOR_TABLE_REGULAR_BACKGROUND);
@@ -217,9 +213,8 @@ public class FileBrowserSubPanel extends EmptySubPanel implements MouseListener
 	}
 
 	private void refreshList()
-	{	if(this.getComponentCount()>0)
-			remove(0);
-		add(listPanels.get(currentPage));
+	{	TableContentPanel p = listPanels.get(currentPage);
+		setDataPanel(p);
 		validate();
 		repaint();
 	}

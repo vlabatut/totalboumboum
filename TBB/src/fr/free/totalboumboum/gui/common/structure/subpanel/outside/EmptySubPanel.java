@@ -27,9 +27,9 @@ public class EmptySubPanel extends SubPanel<EmptyContentPanel>
 {	private static final long serialVersionUID = 1L;
 
 	public EmptySubPanel(int width, int height)
-	{	this(width,height,Mode.NOTHING);
-		
+	{	this(width,height,Mode.NOTHING);		
 	}
+	
 	public EmptySubPanel(int width, int height, Mode mode)
 	{	super(width,height,mode);
 
