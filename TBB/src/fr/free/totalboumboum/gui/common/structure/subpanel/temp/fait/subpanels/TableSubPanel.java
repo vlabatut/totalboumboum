@@ -28,8 +28,8 @@ import java.util.ArrayList;
 
 import javax.swing.JLabel;
 
-import fr.free.totalboumboum.gui.common.structure.subpanel.temp.fait.contentpanels.Line;
-import fr.free.totalboumboum.gui.common.structure.subpanel.temp.fait.contentpanels.TableContentPanel;
+import fr.free.totalboumboum.gui.common.structure.subpanel.inside.Line;
+import fr.free.totalboumboum.gui.common.structure.subpanel.inside.TableContentPanel;
 
 public class TableSubPanel extends SubPanel<TableContentPanel>
 {	private static final long serialVersionUID = 1L;

@@ -21,7 +21,7 @@ package fr.free.totalboumboum.gui.common.structure.subpanel.temp.fait.subpanels;
  * 
  */
 
-import fr.free.totalboumboum.gui.common.structure.subpanel.temp.fait.contentpanels.TextContentPanel;
+import fr.free.totalboumboum.gui.common.structure.subpanel.inside.TextContentPanel;
 
 public class TextSubPanel extends SubPanel<TextContentPanel>
 {	private static final long serialVersionUID = 1L;
