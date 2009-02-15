@@ -34,18 +34,18 @@ import fr.free.totalboumboum.gui.tools.GuiTools;
 public class TableContentPanel extends LinesContentPanel
 {	private static final long serialVersionUID = 1L;
 
-	public TableContentPanel(int width, int height, int columns, int lines, boolean header)
-	{	this(width,height,1,columns,lines,header);
+	public TableContentPanel(int width, int height, int lines, int columns, boolean header)
+	{	this(width,height,lines,1,columns,header);
 	}
 
-	public TableContentPanel(int width, int height, int colGroups, int colSubs, int lines, boolean header)
+	public TableContentPanel(int width, int height, int lines, int colGroups, int colSubs, boolean header)
 	{	super(width,height,lines,colGroups*colSubs,header);
 		
 		this.colGroups = colGroups;
 		this.colSubs = colSubs;
 	}
 	
-	public void reinit(int colGroups, int colSubs, int lines)
+	public void reinit(int lines,int colGroups, int colSubs)
 	{	super.reinit(lines,colGroups*colSubs);
 	}
 

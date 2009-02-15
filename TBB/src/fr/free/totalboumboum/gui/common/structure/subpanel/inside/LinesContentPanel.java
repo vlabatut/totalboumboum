@@ -52,7 +52,7 @@ public class LinesContentPanel extends ContentPanel
 		BoxLayout layout = new BoxLayout(this,BoxLayout.PAGE_AXIS); 
 		setLayout(layout);
 
-		this.lines = 2; //temporary
+		this.lines = 0;
 		setDim(width,height);		
 		reinit(lines,cols);
 	}
@@ -116,23 +116,41 @@ public class LinesContentPanel extends ContentPanel
 	}
 	
 	public void setDim(int width, int height)
-	{	super.setDim(width, height);
+	{	super.setDim(width,height);
 		// lines
-		if(header)
-		{	lineHeight = (int)((height - (lines-1)*GuiTools.subPanelMargin)/(lines+GuiTools.TABLE_HEADER_RATIO-1));
-			headerHeight = height - (lines-1)*GuiTools.subPanelMargin - lineHeight*(lines-1);
-			if(headerHeight-(lines-1)>=lineHeight)
-			{	headerHeight = headerHeight - (lines-1);
-				lineHeight ++;
+		
+		if(lines==0)
+		{	if(header)
+			{	lineHeight = 0;
+				headerHeight = height;
+				headerFontSize = GuiTools.getFontSize(headerHeight*GuiTools.FONT_RATIO);
 			}
-			headerFontSize = GuiTools.getFontSize(headerHeight*GuiTools.FONT_RATIO);
-			headerFont = GuiConfiguration.getMiscConfiguration().getFont().deriveFont((float)headerFontSize);
+			else
+			{	lineHeight = height;
+				headerHeight = 0;
+				headerFontSize = 0;
+			}
 		}
 		else
-			lineHeight = (int)((height - (lines-1)*GuiTools.subPanelMargin)/((float)lines));
+		{	if(header)
+			{	lineHeight = (int)((height - (lines-1)*GuiTools.subPanelMargin)/(lines+GuiTools.TABLE_HEADER_RATIO-1));
+				headerHeight = height - (lines-1)*GuiTools.subPanelMargin - lineHeight*(lines-1);
+				if(headerHeight-(lines-1)>=lineHeight)
+				{	headerHeight = headerHeight - (lines-1);
+					lineHeight ++;
+				}
+				headerFontSize = GuiTools.getFontSize(headerHeight*GuiTools.FONT_RATIO);
+			}
+			else
+			{	lineHeight = (int)((height - (lines-1)*GuiTools.subPanelMargin)/((float)lines));
+				headerHeight = 0;
+				headerFontSize = 0;
+			}
+		}
 		lineFontSize = GuiTools.getFontSize(lineHeight*GuiTools.FONT_RATIO);
 		lineFont = GuiConfiguration.getMiscConfiguration().getFont().deriveFont((float)lineFontSize);
 		lineWidth = width;
+		headerFont = GuiConfiguration.getMiscConfiguration().getFont().deriveFont((float)headerFontSize);
 		headerWidth = lineWidth;
 		// content
 		updateLinesHeights();
@@ -144,7 +162,7 @@ public class LinesContentPanel extends ContentPanel
 	private int lines = 0;
 
 	public Line getLine(int line)
-	{	return (Line)getComponent(line*2+1);		
+	{	return (Line)getComponent(line*2);		
 	}
 
 	public int getLineCount()

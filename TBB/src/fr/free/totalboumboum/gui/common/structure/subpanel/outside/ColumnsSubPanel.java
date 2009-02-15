@@ -36,15 +36,15 @@ public class ColumnsSubPanel extends SubPanel<ColumnsContentPanel>
 	public ColumnsSubPanel(int width, int height, Mode mode, int cols)
 	{	super(width,height,mode);
 
-	ColumnsContentPanel linesPanel = new ColumnsContentPanel(getDataWidth(),getDataHeight(),cols);
+		ColumnsContentPanel linesPanel = new ColumnsContentPanel(getDataWidth(),getDataHeight(),cols);
 		setDataPanel(linesPanel);
 	}
 	
 	/////////////////////////////////////////////////////////////////
 	// SIZE				/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	public void reinit(int lines)
-	{	getDataPanel().reinit(lines);
+	public void reinit(int cols)
+	{	getDataPanel().reinit(cols);
 	}
 
 	public int getColumnHeight()

@@ -213,7 +213,7 @@ public class QuickStartData extends EntitledDataPanel implements PlayersSelectio
 	{	int cols = 3;
 		int lines = 1;
 		int margin = GuiTools.subPanelMargin;
-		TableSubPanel result = new TableSubPanel(width,height,Mode.BORDER,cols,lines,false);
+		TableSubPanel result = new TableSubPanel(width,height,Mode.BORDER,lines,cols,false);
 		@SuppressWarnings("unused")
 		int headerHeight = result.getHeaderHeight();
 		int lineHeight = result.getLineHeight();

@@ -31,6 +31,7 @@ import javax.swing.Box;
 import javax.swing.BoxLayout;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
+import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 
 import fr.free.totalboumboum.gui.common.structure.subpanel.BasicPanel;
@@ -70,6 +71,7 @@ public abstract class SubPanel<T extends ContentPanel> extends BasicPanel
 		}
 		
 		// dimension
+		setDim(width,height);
 		setMode(mode);
 	}
 
@@ -85,16 +87,25 @@ public abstract class SubPanel<T extends ContentPanel> extends BasicPanel
 				add(Box.createVerticalGlue());
 				add(title);
 				add(Box.createVerticalGlue());
-				add(data);
+				if(data!=null)
+					add(data);
+				else
+					add(new JPanel());
 				add(Box.createVerticalGlue());
 				break;
 			case BORDER:
 				add(Box.createVerticalGlue());
-				add(data);
+				if(data!=null)
+					add(data);
+				else
+					add(new JPanel());
 				add(Box.createVerticalGlue());
 				break;
 			case NOTHING:
-				add(data);
+				if(data!=null)
+					add(data);
+				else
+					add(new JPanel());
 				break;
 		}
 	}
