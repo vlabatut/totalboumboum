@@ -34,18 +34,17 @@ import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.SwingConstants;
 
-import fr.free.totalboumboum.gui.common.structure.subpanel.inside.EmptyContentPanel;
-import fr.free.totalboumboum.gui.common.structure.subpanel.outside.SubPanel;
+import fr.free.totalboumboum.gui.common.structure.subpanel.outside.EmptySubPanel;
 import fr.free.totalboumboum.gui.data.configuration.GuiConfiguration;
 import fr.free.totalboumboum.gui.tools.GuiKeys;
 import fr.free.totalboumboum.gui.tools.GuiTools;
 import fr.free.totalboumboum.tools.ImageTools;
 
-public abstract class ModalDialogSubPanel extends SubPanel<EmptyContentPanel> implements MouseListener
+public abstract class ModalDialogSubPanel extends EmptySubPanel implements MouseListener
 {	private static final long serialVersionUID = 1L;
 	
 	public ModalDialogSubPanel(int width, int height)
-	{	super(width,height);
+	{	super(width,height,Mode.TITLE);
 	}
 	/////////////////////////////////////////////////////////////////
 	// TEXT				/////////////////////////////////////////////
