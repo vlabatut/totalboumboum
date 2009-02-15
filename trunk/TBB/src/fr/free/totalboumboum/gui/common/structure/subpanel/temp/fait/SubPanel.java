@@ -1,4 +1,4 @@
-package fr.free.totalboumboum.gui.common.structure.subpanel;
+package fr.free.totalboumboum.gui.common.structure.subpanel.temp.fait;
 
 /*
  * Total Boum Boum
@@ -21,36 +21,41 @@ package fr.free.totalboumboum.gui.common.structure.subpanel;
  * 
  */
 
-import fr.free.totalboumboum.gui.tools.GuiTools;
+import java.awt.Dimension;
 
-public class EntitledSubPanelText extends EntitledSubPanel
+import javax.swing.JPanel;
+
+public class SubPanel extends JPanel
 {	private static final long serialVersionUID = 1L;
-	private SubPanelText textPanel;
 	
-	public EntitledSubPanelText(int width, int height)
-	{	super(width,height);
-
-		float fontSize = getTitleFontSize()/2;
-		textPanel = new SubPanelText(getDataWidth(),getDataHeight(),fontSize);
-		setDataPanel(textPanel);
-		textPanel.setBackground(GuiTools.COLOR_TABLE_NEUTRAL_BACKGROUND);
+	public SubPanel(int width, int height)
+	{	this.width = width;
+		this.height = height;
+		Dimension dim = new Dimension(width,height);
+		setPreferredSize(dim);
+		setMaximumSize(dim);
+		setMinimumSize(dim);
 	}
 
 	/////////////////////////////////////////////////////////////////
-	// CONTENT			/////////////////////////////////////////////
+	// DIMENSION		/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	public void setText(String text)
-	{	textPanel.setText(text);
+	protected int width;
+	protected int height;
+	
+	public int getWidth()
+	{	return width;
 	}
 	
-	/////////////////////////////////////////////////////////////////
-	// FONT			/////////////////////////////////////////////
-	/////////////////////////////////////////////////////////////////
-	public void setFontSize(float fontSize)
-	{	textPanel.setFontSize(fontSize);
+	public void setWidth(int width)
+	{	this.width = width;
+		Dimension dim = new Dimension(width,height);
+		setPreferredSize(dim);
+		setMaximumSize(dim);
+		setMinimumSize(dim);
 	}
-	
-	public float getFontSize()
-	{	return textPanel.getFontSize();
+
+	public int getHeight()
+	{	return height;
 	}
 }

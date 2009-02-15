@@ -29,8 +29,8 @@ import java.util.ArrayList;
 import javax.swing.JLabel;
 
 import fr.free.totalboumboum.configuration.game.quickmatch.QuickMatchConfiguration;
-import fr.free.totalboumboum.gui.common.structure.subpanel.Line;
-import fr.free.totalboumboum.gui.common.structure.subpanel.UntitledSubPanelLines;
+import fr.free.totalboumboum.gui.common.structure.subpanel.temp.fait.Line;
+import fr.free.totalboumboum.gui.common.structure.subpanel.temp.fait.UntitledSubPanelLines;
 import fr.free.totalboumboum.gui.tools.GuiKeys;
 import fr.free.totalboumboum.gui.tools.GuiTools;
 

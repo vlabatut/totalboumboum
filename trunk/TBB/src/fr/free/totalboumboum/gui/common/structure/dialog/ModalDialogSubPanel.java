@@ -33,7 +33,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.SwingConstants;
 
-import fr.free.totalboumboum.gui.common.structure.subpanel.EntitledSubPanel;
+import fr.free.totalboumboum.gui.common.structure.subpanel.temp.fait.EntitledSubPanel;
 import fr.free.totalboumboum.gui.data.configuration.GuiConfiguration;
 import fr.free.totalboumboum.gui.tools.GuiKeys;
 import fr.free.totalboumboum.gui.tools.GuiTools;

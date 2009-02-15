@@ -33,7 +33,7 @@ import fr.free.totalboumboum.gui.common.content.subpanel.leg.LegSubPanel;
 import fr.free.totalboumboum.gui.common.content.subpanel.leg.LegSubPanelListener;
 import fr.free.totalboumboum.gui.common.content.subpanel.players.PlayersListSubPanel;
 import fr.free.totalboumboum.gui.common.structure.panel.SplitMenuPanel;
-import fr.free.totalboumboum.gui.common.structure.subpanel.SubPanel;
+import fr.free.totalboumboum.gui.common.structure.subpanel.temp.fait.SubPanel;
 import fr.free.totalboumboum.gui.tools.GuiTools;
 
 public class CupDescription extends TournamentDescription<CupTournament> implements LegSubPanelListener

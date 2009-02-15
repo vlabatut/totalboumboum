@@ -39,7 +39,7 @@ import fr.free.totalboumboum.game.tournament.cup.CupPart;
 import fr.free.totalboumboum.game.tournament.cup.CupTournament;
 import fr.free.totalboumboum.gui.common.content.subpanel.part.PartSubPanel;
 import fr.free.totalboumboum.gui.common.content.subpanel.part.PartSubPanelListener;
-import fr.free.totalboumboum.gui.common.structure.subpanel.SubPanel;
+import fr.free.totalboumboum.gui.common.structure.subpanel.temp.fait.SubPanel;
 import fr.free.totalboumboum.gui.tools.GuiKeys;
 import fr.free.totalboumboum.gui.tools.GuiTools;
 

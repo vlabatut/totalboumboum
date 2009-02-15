@@ -31,7 +31,7 @@ import javax.swing.JLabel;
 import javax.swing.SwingConstants;
 
 import fr.free.totalboumboum.gui.common.structure.panel.SplitMenuPanel;
-import fr.free.totalboumboum.gui.common.structure.subpanel.SubPanel;
+import fr.free.totalboumboum.gui.common.structure.subpanel.temp.fait.SubPanel;
 import fr.free.totalboumboum.gui.data.configuration.GuiConfiguration;
 import fr.free.totalboumboum.gui.tools.GuiKeys;
 import fr.free.totalboumboum.gui.tools.GuiTools;

@@ -27,7 +27,7 @@ import java.util.ArrayList;
 
 import fr.free.totalboumboum.game.archive.GameArchive;
 import fr.free.totalboumboum.game.archive.TournamentType;
-import fr.free.totalboumboum.gui.common.structure.subpanel.UntitledSubPanelTable;
+import fr.free.totalboumboum.gui.common.structure.subpanel.temp.fait.UntitledSubPanelTable;
 import fr.free.totalboumboum.gui.data.configuration.GuiConfiguration;
 import fr.free.totalboumboum.gui.tools.GuiKeys;
 import fr.free.totalboumboum.gui.tools.GuiTools;

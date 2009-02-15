@@ -36,7 +36,7 @@ import fr.free.totalboumboum.configuration.controls.ControlSettings;
 import fr.free.totalboumboum.engine.content.feature.event.ControlEvent;
 import fr.free.totalboumboum.gui.common.structure.panel.SplitMenuPanel;
 import fr.free.totalboumboum.gui.common.structure.panel.data.EntitledDataPanel;
-import fr.free.totalboumboum.gui.common.structure.subpanel.UntitledSubPanelTable;
+import fr.free.totalboumboum.gui.common.structure.subpanel.temp.fait.UntitledSubPanelTable;
 import fr.free.totalboumboum.gui.data.configuration.GuiConfiguration;
 import fr.free.totalboumboum.gui.tools.GuiKeys;
 import fr.free.totalboumboum.gui.tools.GuiTools;

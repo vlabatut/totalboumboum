@@ -21,43 +21,36 @@ package fr.free.totalboumboum.gui.common.structure.subpanel.temp.fait;
  * 
  */
 
-import java.awt.Dimension;
+import fr.free.totalboumboum.gui.tools.GuiTools;
 
-import javax.swing.JPanel;
-
-public abstract class BasicPanel extends JPanel
+public class EntitledSubPanelText extends EntitledSubPanel
 {	private static final long serialVersionUID = 1L;
+	private SubPanelText textPanel;
 	
-	public BasicPanel(int width, int height)
-	{	this.width = width;
-		this.height = height;
-		Dimension dim = new Dimension(width,height);
-		setPreferredSize(dim);
-		setMaximumSize(dim);
-		setMinimumSize(dim);
+	public EntitledSubPanelText(int width, int height)
+	{	super(width,height);
+
+		float fontSize = getTitleFontSize()/2;
+		textPanel = new SubPanelText(getDataWidth(),getDataHeight(),fontSize);
+		setDataPanel(textPanel);
+		textPanel.setBackground(GuiTools.COLOR_TABLE_NEUTRAL_BACKGROUND);
 	}
 
 	/////////////////////////////////////////////////////////////////
-	// DIMENSION		/////////////////////////////////////////////
+	// CONTENT			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	protected int width;
-	protected int height;
-	
-	public int getWidth()
-	{	return width;
+	public void setText(String text)
+	{	textPanel.setText(text);
 	}
 	
-	public int getHeight()
-	{	return height;
+	/////////////////////////////////////////////////////////////////
+	// FONT			/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	public void setFontSize(float fontSize)
+	{	textPanel.setFontSize(fontSize);
 	}
-
-	public void setDim(int width, int height)
-	{	this.width = width;
-		this.height = height;
-		Dimension dim = new Dimension(width,height);
-		setPreferredSize(dim);
-		setMaximumSize(dim);
-		setMinimumSize(dim);
+	
+	public float getFontSize()
+	{	return textPanel.getFontSize();
 	}
-
 }
