@@ -64,7 +64,7 @@ public class TableContentPanel extends LinesContentPanel
 	public void setColSubMaxWidth(int colSub, int width)
 	{	setColSubWidth(colSub,width,2);		
 	}
-	private void setColSubWidth(int colSub, int width, int mode)
+	public void setColSubWidth(int colSub, int width, int mode)
 	{	int start = 0;
 		for(int colGroup=0;colGroup<colGroups;colGroup++)
 		{	int col = colGroup*colSubs + colSub;
@@ -86,7 +86,7 @@ public class TableContentPanel extends LinesContentPanel
 	public void unsetColSubMaxWidth(int colSub)
 	{	unsetColSubWidth(colSub,2);		
 	}
-	private void unsetColSubWidth(int colSub, int mode)
+	public void unsetColSubWidth(int colSub, int mode)
 	{	int start = 0;
 		for(int colGroup=0;colGroup<colGroups;colGroup++)
 		{	int col = colGroup*colSubs + colSub;
@@ -263,6 +263,11 @@ public class TableContentPanel extends LinesContentPanel
 			label.setForeground(fg);
 		}
 	}
+	
+	/////////////////////////////////////////////////////////////////
+	// XXXXX			/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	
 //TODO les 6 suivantes très certainement à revoir	
 	public void setLineKeysSimple(int line, ArrayList<String> keys, ArrayList<Boolean> imageFlags)
 	{	ArrayList<ArrayList<String>> newKeys = new ArrayList<ArrayList<String>>();
@@ -347,8 +352,7 @@ public class TableContentPanel extends LinesContentPanel
 
 	/////////////////////////////////////////////////////////////////
 	// LABELS			/////////////////////////////////////////////
-	/////////////////////////////////////////////////////////////////
-	
+	/////////////////////////////////////////////////////////////////	
 	public JLabel getLabel(int line, int colGroup, int colSub)
 	{	int col = colSub+colGroup*colSubs;
 		return getLabel(line,col);
@@ -382,7 +386,7 @@ public class TableContentPanel extends LinesContentPanel
 	public int[] getLabelPositionSimple(JLabel label)
 	{	return super.getLabelPosition(label);
 	}
-//TODO à renommer avec multiple et virer le "simple" ci dessus	
+//TODO à renommer avec multiple et virer le "simple" ci dessus	+ répercussion dans le SubPanel correspondant
 	public int[] getLabelPosition(JLabel label)
 	{	int[] result = {-1,-1,-1};
 		int line = 0;

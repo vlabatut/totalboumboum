@@ -71,6 +71,14 @@ public class ColumnsContentPanel extends ContentPanel
 		// content
 		updateColumnsWidths();
 	}
+	
+	public int getColumnHeight()
+	{	return colHeight;		
+	}
+
+	public int getColumnWidth()
+	{	return colWidth;		
+	}
 
 	/////////////////////////////////////////////////////////////////
 	// LINES			/////////////////////////////////////////////
@@ -184,7 +192,7 @@ public class ColumnsContentPanel extends ContentPanel
 		l.setLabelForeground(line,fg);
 	}
 
-	public int getLabelLine(int col, JLabel label)
+	public int getLabelColumn(int col, JLabel label)
 	{	int result = -1;
 		Column l = getColumn(col);
 		result = l.getLabelLine(label);
@@ -203,6 +211,10 @@ public class ColumnsContentPanel extends ContentPanel
 	{	Column l = getColumn(col);
 		l.setLabelMaxHeight(line,height);
 	}
+	public void setLabelHeight(int line, int col, int height, int mode)
+	{	Column c = getColumn(col);
+		c.setLabelHeight(line,height,mode);
+	}
 	
 	public void unsetLabelMinHeight(int line, int col)
 	{	Column l = getColumn(col);
@@ -215,5 +227,9 @@ public class ColumnsContentPanel extends ContentPanel
 	public void unsetLabelMaxHeight(int line, int col)
 	{	Column l = getColumn(col);
 		l.unsetLabelMaxHeight(line);
+	}
+	public void unsetLabelHeight(int line, int col, int mode)
+	{	Column c = getColumn(col);
+		c.unsetLabelHeight(line,mode);
 	}
 }

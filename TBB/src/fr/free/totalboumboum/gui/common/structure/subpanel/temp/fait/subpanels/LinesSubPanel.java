@@ -22,156 +22,167 @@ package fr.free.totalboumboum.gui.common.structure.subpanel.temp.fait.subpanels;
  */
 
 import java.awt.Color;
-import java.awt.Dimension;
+import java.awt.Font;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 
-import javax.swing.Box;
 import javax.swing.JLabel;
 
-import fr.free.totalboumboum.gui.common.structure.subpanel.temp.Line;
-import fr.free.totalboumboum.gui.common.structure.subpanel.temp.fait.EntitledSubPanel;
-import fr.free.totalboumboum.gui.common.structure.subpanel.temp.fait.contentpanels.UntitledSubPanelLines;
-import fr.free.totalboumboum.gui.tools.GuiTools;
+import fr.free.totalboumboum.gui.common.structure.subpanel.temp.fait.contentpanels.Line;
+import fr.free.totalboumboum.gui.common.structure.subpanel.temp.fait.contentpanels.LinesContentPanel;
 
-public class EntitledSubPanelLines extends EntitledSubPanel
+public class LinesSubPanel extends SubPanel<LinesContentPanel>
 {	private static final long serialVersionUID = 1L;
 
-	public EntitledSubPanelLines(int width, int height, int lines)
-	{	super(width,height);
+	public LinesSubPanel(int width, int height, Mode mode, int lines, int cols, boolean header)
+	{	super(width,height,mode);
 
-		// init table
-		remove(0);
-		add(Box.createRigidArea(new Dimension(GuiTools.subPanelMargin,GuiTools.subPanelMargin)),0);
-		remove(4); 	// remove glue
-//		remove(2); 	// remove glue
-
-		setNewTable(lines);
+		LinesContentPanel linesPanel = new LinesContentPanel(getDataWidth(),getDataHeight(),lines,cols,header);
+		setDataPanel(linesPanel);
 	}
 	
-	private UntitledSubPanelLines getTable()
-	{	return (UntitledSubPanelLines)getDataPanel();
+	/////////////////////////////////////////////////////////////////
+	// FONT				/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	public Font getHeaderFont()
+	{	return getDataPanel().getHeaderFont();	
 	}
 	
-	public void setNewTable(int lines)
-	{	int tableHeight = height - getTitleHeight() - GuiTools.subPanelMargin;
-		int tableWidth = width;
-		UntitledSubPanelLines tablePanel = new UntitledSubPanelLines(tableWidth,tableHeight,lines,false);
-		tablePanel.setOpaque(false);
-		setDataPanel(tablePanel);
+	public Font getLineFont()
+	{	return getDataPanel().getLineFont();	
+	}
+	
+	public int getLineFontSize()
+	{	return getDataPanel().getLineFontSize();	
+	}
+	
+	public int getHeaderFontSize()
+	{	return getDataPanel().getHeaderFontSize();	
+	}
+
+	/////////////////////////////////////////////////////////////////
+	// HEADER			/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	public boolean hasHeader()
+	{	return getDataPanel().hasHeader();	
 	}
 
 	/////////////////////////////////////////////////////////////////
 	// SIZE				/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	public int getLineFontSize()
-	{	return getTable().getLineFontSize();	
+	public void reinit(int lines, int cols)
+	{	getDataPanel().reinit(lines,cols);		
 	}
-	public int getHeaderFontSize()
-	{	return getTable().getHeaderFontSize();	
-	}
+
 	public int getHeaderHeight()
-	{	return getTable().getHeaderHeight();	
+	{	return getDataPanel().getHeaderHeight();	
 	}
+	
 	public int getLineHeight()
-	{	return getTable().getLineHeight();	
+	{	return getDataPanel().getLineHeight();	
 	}
 
 	/////////////////////////////////////////////////////////////////
 	// LINES			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	public Line getLine(int line)
-	{	return getTable().getLine(line);
+	{	return getDataPanel().getLine(line);
 	}
 
 	public int getLineCount()
-	{	return getTable().getLineCount();
+	{	return getDataPanel().getLineCount();
 	}
 	
 	public void addLine(int index)
-	{	getTable().addLine(index);
+	{	getDataPanel().addLine(index);
+	}
+	
+	public void addLine(int index, int cols)
+	{	getDataPanel().addLine(index,cols);
 	}
 	
 	public void setLineKeys(int line, ArrayList<String> keys, ArrayList<Boolean> imageFlags)
-	{	getTable().setLineKeys(line,keys,imageFlags);
+	{	getDataPanel().setLineKeys(line,keys,imageFlags);
 	}
 	
 	public void setLineIcons(int line, ArrayList<BufferedImage> icons, ArrayList<String> tooltips)
-	{	getTable().setLineIcons(line,icons,tooltips);
+	{	getDataPanel().setLineIcons(line,icons,tooltips);
 	}
 	
 	public void setLineTexts(int line, ArrayList<String> texts, ArrayList<String> tooltips)
-	{	getTable().setLineTexts(line,texts,tooltips);
+	{	getDataPanel().setLineTexts(line,texts,tooltips);
 	}
 
 	public void setLineBackground(int line, Color bg)
-	{	getTable().setLineBackground(line,bg);
+	{	getDataPanel().setLineBackground(line,bg);
 	}
 
 	public void setLineForeground(int line, Color fg)
-	{	getTable().setLineForeground(line,fg);
-	}
-	
-	public void removeAllLines()
-	{	getTable().removeAllLines();
+	{	getDataPanel().setLineForeground(line,fg);
 	}
 
 	/////////////////////////////////////////////////////////////////
 	// LABELS			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	public int[] getLabelPosition(JLabel label)
-	{	return getTable().getLabelPosition(label);
+	{	return getDataPanel().getLabelPosition(label);
 	}
 	
 	public JLabel getLabel(int line, int col)
-	{	return getTable().getLabel(line,col);
+	{	return getDataPanel().getLabel(line,col);
 	}
 	
 	public void addLabel(int line, int col)
-	{	getTable().addLabel(line,col);
+	{	getDataPanel().addLabel(line,col);
 	}
 
 	public void setLabelKey(int line, int col, String key, boolean imageFlag)
-	{	getTable().setLabelKey(line,col,key,imageFlag);
+	{	getDataPanel().setLabelKey(line,col,key,imageFlag);
 	}
 
 	public void setLabelIcon(int line, int col, BufferedImage icon, String tooltip)
-	{	getTable().setLabelIcon(line,col,icon,tooltip);
+	{	getDataPanel().setLabelIcon(line,col,icon,tooltip);
 	}
 
 	public void setLabelText(int line, int col, String text, String tooltip)
-	{	getTable().setLabelText(line,col,text,tooltip);
+	{	getDataPanel().setLabelText(line,col,text,tooltip);
 	}
 	
 	public void setLabelBackground(int line, int col, Color bg)
-	{	getTable().setLabelBackground(line,col,bg);
+	{	getDataPanel().setLabelBackground(line,col,bg);
 	}
 	
 	public void setLabelForeground(int line, int col, Color fg)
-	{	getTable().setLabelForeground(line,col,fg);
+	{	getDataPanel().setLabelForeground(line,col,fg);
 	}
 
 	public int getLabelColumn(int line, JLabel label)
-	{	return getTable().getLabelColumn(line,label);
+	{	return getDataPanel().getLabelColumn(line,label);
 	}
 	
 	public void setLabelMinWidth(int line, int col, int width)
-	{	getTable().setLabelMinWidth(line,col,width);
+	{	getDataPanel().setLabelMinWidth(line,col,width);
 	}
 	public void setLabelPreferredWidth(int line, int col, int width)
-	{	getTable().setLabelPreferredWidth(line,col,width);
+	{	getDataPanel().setLabelPreferredWidth(line,col,width);
 	}
 	public void setLabelMaxWidth(int line, int col, int width)
-	{	getTable().setLabelMaxWidth(line,col,width);
+	{	getDataPanel().setLabelMaxWidth(line,col,width);
+	}
+	public void setLabelWidth(int line, int col, int width, int mode)
+	{	getDataPanel().setLabelWidth(line,col,width,mode);
 	}
 	
 	public void unsetLabelMinWidth(int line, int colSub)
-	{	getTable().unsetLabelMinWidth(line,colSub);
+	{	getDataPanel().unsetLabelMinWidth(line,colSub);
 	}
 	public void unsetLabelPreferredWidth(int line, int colSub)
-	{	getTable().unsetLabelPreferredWidth(line,colSub);
+	{	getDataPanel().unsetLabelPreferredWidth(line,colSub);
 	}
 	public void unsetLabelMaxWidth(int line, int colSub)
-	{	getTable().unsetLabelMaxWidth(line,colSub);
+	{	getDataPanel().unsetLabelMaxWidth(line,colSub);
+	}
+	public void unsetLabelWidth(int line, int col, int mode)
+	{	getDataPanel().unsetLabelWidth(line,col,mode);
 	}
 }

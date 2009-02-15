@@ -217,7 +217,7 @@ public class Column extends ContentPanel
 	public void setLabelMaxHeight(int line, int height)
 	{	setLabelHeight(line,height,2);		
 	}
-	private void setLabelHeight(int line, int height, int mode)
+	public void setLabelHeight(int line, int height, int mode)
 	{	Dimension lineDim = new Dimension(width,height);
 		JLabel label = getLabel(line);
 		switch(mode)
@@ -242,7 +242,7 @@ public class Column extends ContentPanel
 	public void unsetLabelMaxHeight(int line)
 	{	unsetLabelHeight(line,2);		
 	}
-	private void unsetLabelHeight(int line, int mode)
+	public void unsetLabelHeight(int line, int mode)
 	{	JLabel label = getLabel(line);
 		switch(mode)
 		{	case 0:
