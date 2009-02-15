@@ -84,7 +84,7 @@ public class ControlsData extends EntitledDataPanel implements MouseListener,Key
 			int cols = head.length;
 			int w = getDataWidth();
 			int h = getDataHeight();
-			keysPanel = new TableSubPanel(w,h,Mode.BORDER,cols,lines,true);
+			keysPanel = new TableSubPanel(w,h,Mode.BORDER,lines,cols,true);
 
 			// headers
 			{	ArrayList<String> keys = new ArrayList<String>();

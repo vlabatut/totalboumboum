@@ -43,12 +43,12 @@ public class ColumnsContentPanel extends ContentPanel
 		BoxLayout layout = new BoxLayout(this,BoxLayout.LINE_AXIS); 
 		setLayout(layout);
 
-		this.cols = 2; //temporary
+		this.cols = 0; //temporary
 		setDim(width,height);		
 		reinit(cols);
 	}
 
-	public void reinit(int lines)
+	public void reinit(int cols)
 	{	// content
 		removeAll();
 		this.cols = 0;
@@ -65,9 +65,16 @@ public class ColumnsContentPanel extends ContentPanel
 
 	public void setDim(int width, int height)
 	{	super.setDim(width, height);
+		
 		// size
-		colWidth = (int)((width - (cols-1)*GuiTools.subPanelMargin)/((float)cols));
+		if(cols==0)
+		{	colWidth = width;			
+		}
+		else
+		{	colWidth = (int)((width - (cols-1)*GuiTools.subPanelMargin)/((float)cols));
+		}
 		colHeight = height;
+		
 		// content
 		updateColumnsWidths();
 	}
@@ -86,7 +93,7 @@ public class ColumnsContentPanel extends ContentPanel
 	private int cols = 0;
 
 	public Column getColumn(int col)
-	{	return (Column)getComponent(col*2+1);		
+	{	return (Column)getComponent(col*2);		
 	}
 
 	public int getColumnCount()
