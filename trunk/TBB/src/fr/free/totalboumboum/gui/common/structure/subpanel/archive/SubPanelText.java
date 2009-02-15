@@ -1,4 +1,4 @@
-package fr.free.totalboumboum.gui.common.structure.subpanel.temp.fait;
+package fr.free.totalboumboum.gui.common.structure.subpanel.archive;
 
 import java.awt.Color;
 import java.awt.Component;
