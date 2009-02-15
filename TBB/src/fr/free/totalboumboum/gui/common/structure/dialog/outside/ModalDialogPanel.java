@@ -1,5 +1,6 @@
 package fr.free.totalboumboum.gui.common.structure.dialog.outside;
 
+
 /*
  * Total Boum Boum
  * Copyright 2008-2009 Vincent Labatut 
@@ -33,6 +34,7 @@ import fr.free.totalboumboum.gui.common.structure.dialog.inside.ModalDialogSubPa
 import fr.free.totalboumboum.gui.common.structure.dialog.inside.ModalDialogSubPanelListener;
 import fr.free.totalboumboum.gui.common.structure.panel.ContentPanel;
 import fr.free.totalboumboum.gui.common.structure.panel.menu.MenuPanel;
+import fr.free.totalboumboum.gui.common.structure.subpanel.BasicPanel;
 import fr.free.totalboumboum.gui.frames.NormalFrame;
 import fr.free.totalboumboum.gui.tools.GuiTools;
 
@@ -53,7 +55,7 @@ public abstract class ModalDialogPanel<T extends ModalDialogSubPanel> extends Co
 		}
 		
 		// inter panel
-		interPanel = new SubPanel(getWidth(),getHeight());
+		interPanel = new BasicPanel(getWidth(),getHeight());
 		{	BoxLayout layout = new BoxLayout(interPanel,BoxLayout.PAGE_AXIS); 
 			interPanel.setLayout(layout);
 		}
@@ -74,7 +76,7 @@ public abstract class ModalDialogPanel<T extends ModalDialogSubPanel> extends Co
 	// SUB PANEL		/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	private T subPanel;
-	private SubPanel interPanel;
+	private BasicPanel interPanel;
 	
 	public T getSubPanel()
 	{	return subPanel;
@@ -137,32 +139,27 @@ public abstract class ModalDialogPanel<T extends ModalDialogSubPanel> extends Co
 	// MOUSE LISTENER	/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	@Override
-	public void mouseClicked(MouseEvent e) {
-		// TODO Auto-generated method stub
-		
+	public void mouseClicked(MouseEvent e)
+	{	
 	}
 
 	@Override
-	public void mouseEntered(MouseEvent e) {
-		// TODO Auto-generated method stub
-		
+	public void mouseEntered(MouseEvent e)
+	{	
 	}
 
 	@Override
-	public void mouseExited(MouseEvent e) {
-		// TODO Auto-generated method stub
-		
+	public void mouseExited(MouseEvent e)
+	{	
 	}
 
 	@Override
-	public void mousePressed(MouseEvent e) {
-		// TODO Auto-generated method stub
-		
+	public void mousePressed(MouseEvent e)
+	{	
 	}
 
 	@Override
-	public void mouseReleased(MouseEvent e) {
-		// TODO Auto-generated method stub
-		
+	public void mouseReleased(MouseEvent e)
+	{	
 	}
 }
