@@ -263,12 +263,70 @@ public class TableContentPanel extends LinesContentPanel
 			label.setForeground(fg);
 		}
 	}
+
+	/////////////////////////////////////////////////////////////////
+	// LABELS			/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////	
+	public JLabel getLabel(int line, int colGroup, int colSub)
+	{	int col = colSub+colGroup*colSubs;
+		return getLabel(line,col);
+	}
+	
+	public void setLabelKey(int line, int colGroup, int colSub, String key, boolean imageFlag)
+	{	int col = colSub+colGroup*colSubs;
+		setLabelKey(line,col,key,imageFlag);
+	}
+
+	public void setLabelIcon(int line, int colGroup, int colSub, BufferedImage icon, String tooltip)
+	{	int col = colSub+colGroup*colSubs;
+		setLabelIcon(line,col,icon,tooltip);
+	}
+
+	public void setLabelText(int line, int colGroup, int colSub, String text, String tooltip)
+	{	int col = colSub+colGroup*colSubs;
+		setLabelText(line,col,text,tooltip);
+	}
+	
+	public void setLabelBackground(int line, int colGroup, int colSub, Color bg)
+	{	int col = colSub+colGroup*colSubs;
+		setLabelBackground(line,col,bg);
+	}
+	
+	public void setLabelForeground(int line, int colGroup, int colSub, Color fg)
+	{	int col = colSub+colGroup*colSubs;
+		setLabelForeground(line,col,fg);
+	}
+
+	public int[] getLabelPositionSimple(JLabel label)
+	{	return super.getLabelPosition(label);
+	}
+
+	public int[] getLabelPositionMultiple(JLabel label)
+	{	int[] result = {-1,-1,-1};
+		int line = 0;
+		while(line<getLineCount() && result[0]==-1)
+		{	int colGroup = 0;
+			while(colGroup<colGroups && result[0]==-1)
+			{	int colSub = 0;
+				while(colSub<colSubs && result[0]==-1)
+				{	JLabel l = getLabel(line,colGroup,colSub);
+					if(label == l)
+					{	result[0] = line;
+						result[1] = colGroup;
+						result[2] = colSub;
+					}
+					colSub++;
+				}
+				colGroup++;
+			}
+			line++;
+		}
+		return result;
+	}
 	
 	/////////////////////////////////////////////////////////////////
-	// XXXXX			/////////////////////////////////////////////
+	// CONTENT			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	
-//TODO les 6 suivantes très certainement à revoir	
 	public void setLineKeysSimple(int line, ArrayList<String> keys, ArrayList<Boolean> imageFlags)
 	{	ArrayList<ArrayList<String>> newKeys = new ArrayList<ArrayList<String>>();
 		newKeys.add(keys);
@@ -349,70 +407,6 @@ public class TableContentPanel extends LinesContentPanel
 			colGroup++;
 		}
 	}
-
-	/////////////////////////////////////////////////////////////////
-	// LABELS			/////////////////////////////////////////////
-	/////////////////////////////////////////////////////////////////	
-	public JLabel getLabel(int line, int colGroup, int colSub)
-	{	int col = colSub+colGroup*colSubs;
-		return getLabel(line,col);
-	}
-	
-	public void setLabelKey(int line, int colGroup, int colSub, String key, boolean imageFlag)
-	{	int col = colSub+colGroup*colSubs;
-		setLabelKey(line,col,key,imageFlag);
-	}
-
-	public void setLabelIcon(int line, int colGroup, int colSub, BufferedImage icon, String tooltip)
-	{	int col = colSub+colGroup*colSubs;
-		setLabelIcon(line,col,icon,tooltip);
-	}
-
-	public void setLabelText(int line, int colGroup, int colSub, String text, String tooltip)
-	{	int col = colSub+colGroup*colSubs;
-		setLabelText(line,col,text,tooltip);
-	}
-	
-	public void setLabelBackground(int line, int colGroup, int colSub, Color bg)
-	{	int col = colSub+colGroup*colSubs;
-		setLabelBackground(line,col,bg);
-	}
-	
-	public void setLabelForeground(int line, int colGroup, int colSub, Color fg)
-	{	int col = colSub+colGroup*colSubs;
-		setLabelForeground(line,col,fg);
-	}
-
-	public int[] getLabelPositionSimple(JLabel label)
-	{	return super.getLabelPosition(label);
-	}
-
-	public int[] getLabelPositionMultiple(JLabel label)
-	{	int[] result = {-1,-1,-1};
-		int line = 0;
-		while(line<getLineCount() && result[0]==-1)
-		{	int colGroup = 0;
-			while(colGroup<colGroups && result[0]==-1)
-			{	int colSub = 0;
-				while(colSub<colSubs && result[0]==-1)
-				{	JLabel l = getLabel(line,colGroup,colSub);
-					if(label == l)
-					{	result[0] = line;
-						result[1] = colGroup;
-						result[2] = colSub;
-					}
-					colSub++;
-				}
-				colGroup++;
-			}
-			line++;
-		}
-		return result;
-	}
-	
-	/////////////////////////////////////////////////////////////////
-	// CONTENT			/////////////////////////////////////////////
-	/////////////////////////////////////////////////////////////////
 	
 	public void setContentBySubLineKeys(ArrayList<ArrayList<String>> keys, ArrayList<ArrayList<Boolean>> imageFlags, boolean wholeLine)
 	{	if(wholeLine)

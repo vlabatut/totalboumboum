@@ -38,8 +38,10 @@ import fr.free.totalboumboum.gui.common.content.subpanel.file.PackBrowserSubPane
 import fr.free.totalboumboum.gui.common.content.subpanel.file.PackBrowserSubPanelListener;
 import fr.free.totalboumboum.gui.common.structure.panel.SplitMenuPanel;
 import fr.free.totalboumboum.gui.common.structure.panel.data.EntitledDataPanel;
-import fr.free.totalboumboum.gui.common.structure.subpanel.temp.fait.EntitledSubPanelText;
-import fr.free.totalboumboum.gui.common.structure.subpanel.temp.fait.SubPanel;
+import fr.free.totalboumboum.gui.common.structure.subpanel.BasicPanel;
+import fr.free.totalboumboum.gui.common.structure.subpanel.inside.TextContentPanel;
+import fr.free.totalboumboum.gui.common.structure.subpanel.outside.TextSubPanel;
+import fr.free.totalboumboum.gui.common.structure.subpanel.outside.SubPanel.Mode;
 import fr.free.totalboumboum.gui.tools.GuiKeys;
 import fr.free.totalboumboum.gui.tools.GuiTools;
 import fr.free.totalboumboum.tools.FileTools;
@@ -50,7 +52,7 @@ public class SelectedAiData extends EntitledDataPanel implements PackBrowserSubP
 	private static final float SPLIT_RATIO = 0.5f;
 	
 	private AiSubPanel infosPanel;
-	private EntitledSubPanelText notesPanel;
+	private TextSubPanel notesPanel;
 	private PackBrowserSubPanel packPanel;
 	
 	private AiPreview selectedAi;
@@ -60,9 +62,9 @@ public class SelectedAiData extends EntitledDataPanel implements PackBrowserSubP
 
 		// title
 		setTitleKey(GuiKeys.MENU_RESOURCES_AI_SELECT_TITLE);
-		SubPanel mainPanel;
+		BasicPanel mainPanel;
 		// data
-		{	mainPanel = new SubPanel(dataWidth,dataHeight);
+		{	mainPanel = new BasicPanel(dataWidth,dataHeight);
 			{	BoxLayout layout = new BoxLayout(mainPanel,BoxLayout.LINE_AXIS); 
 				mainPanel.setLayout(layout);
 			}
@@ -88,7 +90,7 @@ public class SelectedAiData extends EntitledDataPanel implements PackBrowserSubP
 			mainPanel.add(Box.createHorizontalGlue());
 			
 			// preview panel
-			{	SubPanel previewPanel = new SubPanel(rightWidth,dataHeight);
+			{	BasicPanel previewPanel = new BasicPanel(rightWidth,dataHeight);
 				{	BoxLayout layout = new BoxLayout(previewPanel,BoxLayout.PAGE_AXIS); 
 					previewPanel.setLayout(layout);
 				}
@@ -102,7 +104,7 @@ public class SelectedAiData extends EntitledDataPanel implements PackBrowserSubP
 
 				previewPanel.add(Box.createVerticalGlue());
 
-				notesPanel = new EntitledSubPanelText(rightWidth,downHeight);
+				notesPanel = new TextSubPanel(rightWidth,downHeight,Mode.TITLE);
 				String key = GuiKeys.MENU_RESOURCES_AI_SELECT_NOTES;
 				notesPanel.setTitleKey(key,true);
 				float fontSize = notesPanel.getTitleFontSize()/2;
@@ -121,7 +123,7 @@ public class SelectedAiData extends EntitledDataPanel implements PackBrowserSubP
 		infosPanel.setAiPreview(selectedAi);
 		// notes
 		ArrayList<String> notesValues;
-		SubPanel textPanel = notesPanel.getDataPanel();
+		TextContentPanel textPanel = notesPanel.getDataPanel();
 		// no player selected
 		if(selectedAi==null)
 		{	notesValues = new ArrayList<String>();

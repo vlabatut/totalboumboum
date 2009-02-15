@@ -48,8 +48,9 @@ import fr.free.totalboumboum.gui.common.content.subpanel.limits.LimitsSubPanel;
 import fr.free.totalboumboum.gui.common.content.subpanel.points.PointsSubPanel;
 import fr.free.totalboumboum.gui.common.structure.panel.SplitMenuPanel;
 import fr.free.totalboumboum.gui.common.structure.panel.data.EntitledDataPanel;
-import fr.free.totalboumboum.gui.common.structure.subpanel.temp.fait.SubPanel;
-import fr.free.totalboumboum.gui.common.structure.subpanel.temp.fait.UntitledSubPanelImage;
+import fr.free.totalboumboum.gui.common.structure.subpanel.BasicPanel;
+import fr.free.totalboumboum.gui.common.structure.subpanel.outside.ImageSubPanel;
+import fr.free.totalboumboum.gui.common.structure.subpanel.outside.SubPanel.Mode;
 import fr.free.totalboumboum.gui.data.configuration.GuiConfiguration;
 import fr.free.totalboumboum.gui.tools.GuiKeys;
 import fr.free.totalboumboum.gui.tools.GuiTools;
@@ -59,7 +60,7 @@ public class RoundDescription extends EntitledDataPanel implements LimitsSubPane
 	private static final long serialVersionUID = 1L;
 	private static final float SPLIT_RATIO = 0.4f;
 
-	private UntitledSubPanelImage imagePanel;
+	private ImageSubPanel imagePanel;
 	private InitialItemsSubPanel initialItemsPanel;
 	private AvailableItemsSubPanel availableItemsPanel;
 	private LimitsSubPanel<RoundLimit> limitsPanel;
@@ -75,7 +76,7 @@ public class RoundDescription extends EntitledDataPanel implements LimitsSubPane
 		}
 	
 		// data
-		{	SubPanel infoPanel = new SubPanel(dataWidth,dataHeight);
+		{	BasicPanel infoPanel = new BasicPanel(dataWidth,dataHeight);
 			{	BoxLayout layout = new BoxLayout(infoPanel,BoxLayout.LINE_AXIS); 
 				infoPanel.setLayout(layout);
 			}
@@ -98,7 +99,7 @@ public class RoundDescription extends EntitledDataPanel implements LimitsSubPane
 				
 				// image panel
 				{	int innerHeight = leftWidth;
-					imagePanel = new UntitledSubPanelImage(leftWidth,innerHeight);
+					imagePanel = new ImageSubPanel(leftWidth,innerHeight,Mode.BORDER);
 					leftPanel.add(imagePanel);
 				}
 

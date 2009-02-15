@@ -24,7 +24,7 @@ package fr.free.totalboumboum.gui.game.tournament.results;
 import fr.free.totalboumboum.game.tournament.AbstractTournament;
 import fr.free.totalboumboum.gui.common.structure.panel.SplitMenuPanel;
 import fr.free.totalboumboum.gui.common.structure.panel.data.EntitledDataPanel;
-import fr.free.totalboumboum.gui.common.structure.subpanel.temp.fait.SubPanel;
+import fr.free.totalboumboum.gui.common.structure.subpanel.BasicPanel;
 import fr.free.totalboumboum.gui.tools.GuiKeys;
 
 public abstract class TournamentResults<T extends AbstractTournament> extends EntitledDataPanel
@@ -32,7 +32,7 @@ public abstract class TournamentResults<T extends AbstractTournament> extends En
 	private static final long serialVersionUID = 1L;
 
 	@SuppressWarnings("unused")
-	private SubPanel resultsPanel;
+	private BasicPanel resultsPanel;
 	
 	public TournamentResults(SplitMenuPanel container)
 	{	super(container);

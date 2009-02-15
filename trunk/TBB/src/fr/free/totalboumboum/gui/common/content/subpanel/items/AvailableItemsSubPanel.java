@@ -43,7 +43,7 @@ public class AvailableItemsSubPanel extends TableSubPanel
 {	private static final long serialVersionUID = 1L;
 
 	public AvailableItemsSubPanel(int width, int height)
-	{	super(width,height,SubPanel.Mode.TITLE,1,1,1,false);		
+	{	super(width,height,SubPanel.Mode.TITLE,1,1,1,false);
 		// title
 		String titleKey = GuiKeys.COMMON_ITEMS_AVAILABLE_TITLE;
 		setTitleKey(titleKey,true);

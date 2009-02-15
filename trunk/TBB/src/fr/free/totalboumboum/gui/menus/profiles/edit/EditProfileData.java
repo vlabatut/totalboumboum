@@ -50,8 +50,9 @@ import fr.free.totalboumboum.configuration.profile.PredefinedColor;
 import fr.free.totalboumboum.configuration.profile.Profile;
 import fr.free.totalboumboum.gui.common.structure.panel.SplitMenuPanel;
 import fr.free.totalboumboum.gui.common.structure.panel.data.EntitledDataPanel;
-import fr.free.totalboumboum.gui.common.structure.subpanel.temp.fait.Line;
-import fr.free.totalboumboum.gui.common.structure.subpanel.temp.fait.UntitledSubPanelLines;
+import fr.free.totalboumboum.gui.common.structure.subpanel.inside.Line;
+import fr.free.totalboumboum.gui.common.structure.subpanel.outside.LinesSubPanel;
+import fr.free.totalboumboum.gui.common.structure.subpanel.outside.SubPanel.Mode;
 import fr.free.totalboumboum.gui.data.configuration.GuiConfiguration;
 import fr.free.totalboumboum.gui.menus.profiles.ais.SelectedAiSplitPanel;
 import fr.free.totalboumboum.gui.menus.profiles.heroes.SelectedHeroSplitPanel;
@@ -70,7 +71,7 @@ public class EditProfileData extends EntitledDataPanel implements MouseListener,
 	private static final int LINE_COLOR = 2;
 
 	private Profile profile;
-	private UntitledSubPanelLines editPanel;
+	private LinesSubPanel editPanel;
 	private JTextPane textPane;
 	private StyledDocument doc;
 	private SimpleAttributeSet sa;
@@ -89,7 +90,7 @@ public class EditProfileData extends EntitledDataPanel implements MouseListener,
 			int lineFontSize = GuiTools.getFontSize(lineHeight*GuiTools.FONT_RATIO);
 			int h = lineHeight*LINE_COUNT+margin*(LINE_COUNT+1);
 			int nameHeight = getDataHeight()-h-margin;
-			editPanel = new UntitledSubPanelLines(w,h,LINE_COUNT,false);
+			editPanel = new LinesSubPanel(w,h,Mode.BORDER,LINE_COUNT,1,false);
 			editPanel.setOpaque(false);
 
 			// main panel

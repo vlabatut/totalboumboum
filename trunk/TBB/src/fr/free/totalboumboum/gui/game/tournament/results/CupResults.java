@@ -31,7 +31,7 @@ import fr.free.totalboumboum.game.tournament.cup.CupTournament;
 import fr.free.totalboumboum.gui.common.content.subpanel.leg.LegSubPanel;
 import fr.free.totalboumboum.gui.common.content.subpanel.results.ResultsSubPanel;
 import fr.free.totalboumboum.gui.common.structure.panel.SplitMenuPanel;
-import fr.free.totalboumboum.gui.common.structure.subpanel.temp.fait.SubPanel;
+import fr.free.totalboumboum.gui.common.structure.subpanel.BasicPanel;
 import fr.free.totalboumboum.gui.tools.GuiTools;
 
 public class CupResults extends TournamentResults<CupTournament>
@@ -42,7 +42,7 @@ public class CupResults extends TournamentResults<CupTournament>
 	{	super(container);
 		
 		// data
-		{	SubPanel infoPanel = new SubPanel(dataWidth,dataHeight);
+		{	BasicPanel infoPanel = new BasicPanel(dataWidth,dataHeight);
 			{	BoxLayout layout = new BoxLayout(infoPanel,BoxLayout.LINE_AXIS); 
 				infoPanel.setLayout(layout);
 			}

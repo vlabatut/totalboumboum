@@ -25,7 +25,7 @@ import java.awt.Dimension;
 
 import javax.swing.JPanel;
 
-public abstract class BasicPanel extends JPanel
+public class BasicPanel extends JPanel
 {	private static final long serialVersionUID = 1L;
 	
 	public BasicPanel(int width, int height)

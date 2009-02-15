@@ -129,6 +129,27 @@ public class TableSubPanel extends SubPanel<TableContentPanel>
 	{	getDataPanel().setLineForeground(line,fg);
 	}
 
+	public void setLineKeysSimple(int line, ArrayList<String> keys, ArrayList<Boolean> imageFlags)
+	{	getDataPanel().setLineKeysSimple(line,keys,imageFlags);
+	}
+	public void setLineKeysMultiple(int line, ArrayList<ArrayList<String>> keys, ArrayList<ArrayList<Boolean>> imageFlags)
+	{	getDataPanel().setLineKeysMultiple(line,keys,imageFlags);
+	}
+	
+	public void setLineIconsSimple(int line, ArrayList<BufferedImage> icons, ArrayList<String> tooltips)
+	{	getDataPanel().setLineIconsSimple(line,icons,tooltips);
+	}
+	public void setLineIconsMultiple(int line, ArrayList<ArrayList<BufferedImage>> icons, ArrayList<ArrayList<String>> tooltips)
+	{	getDataPanel().setLineIconsMultiple(line,icons,tooltips);
+	}
+	
+	public void setLineTextsSimple(int line, ArrayList<String> texts, ArrayList<String> tooltips)
+	{	getDataPanel().setLineTextsSimple(line,texts,tooltips);
+	}
+	public void setLineTextsMultiple(int line, ArrayList<ArrayList<String>> texts, ArrayList<ArrayList<String>> tooltips)
+	{	getDataPanel().setLineTextsMultiple(line,texts,tooltips);
+	}
+
 	/////////////////////////////////////////////////////////////////
 	// LABELS			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////

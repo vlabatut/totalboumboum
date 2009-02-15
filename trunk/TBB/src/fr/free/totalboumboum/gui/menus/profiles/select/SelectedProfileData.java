@@ -39,7 +39,7 @@ import fr.free.totalboumboum.gui.common.content.subpanel.file.FileBrowserSubPane
 import fr.free.totalboumboum.gui.common.content.subpanel.profile.ProfileSubPanel;
 import fr.free.totalboumboum.gui.common.structure.panel.SplitMenuPanel;
 import fr.free.totalboumboum.gui.common.structure.panel.data.EntitledDataPanel;
-import fr.free.totalboumboum.gui.common.structure.subpanel.temp.fait.SubPanel;
+import fr.free.totalboumboum.gui.common.structure.subpanel.BasicPanel;
 import fr.free.totalboumboum.gui.tools.GuiKeys;
 import fr.free.totalboumboum.gui.tools.GuiTools;
 
@@ -54,9 +54,9 @@ public class SelectedProfileData extends EntitledDataPanel implements FileBrowse
 		// title
 		setTitleKey(GuiKeys.MENU_PROFILES_SELECT_TITLE);
 		
-		SubPanel mainPanel;
+		BasicPanel mainPanel;
 		// data
-		{	mainPanel = new SubPanel(dataWidth,dataHeight);
+		{	mainPanel = new BasicPanel(dataWidth,dataHeight);
 			{	BoxLayout layout = new BoxLayout(mainPanel,BoxLayout.LINE_AXIS); 
 				mainPanel.setLayout(layout);
 			}

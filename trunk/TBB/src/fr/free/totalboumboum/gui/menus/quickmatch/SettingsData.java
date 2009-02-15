@@ -33,7 +33,7 @@ import fr.free.totalboumboum.gui.common.content.subpanel.round.RoundQuickConfigS
 import fr.free.totalboumboum.gui.common.content.subpanel.round.RoundQuickConfigSubPanelListener;
 import fr.free.totalboumboum.gui.common.structure.panel.SplitMenuPanel;
 import fr.free.totalboumboum.gui.common.structure.panel.data.EntitledDataPanel;
-import fr.free.totalboumboum.gui.common.structure.subpanel.temp.fait.SubPanel;
+import fr.free.totalboumboum.gui.common.structure.subpanel.BasicPanel;
 import fr.free.totalboumboum.gui.tools.GuiKeys;
 import fr.free.totalboumboum.gui.tools.GuiTools;
 
@@ -50,9 +50,9 @@ public class SettingsData extends EntitledDataPanel implements MatchQuickConfigS
 		// title
 		setTitleKey(GuiKeys.MENU_QUICKMATCH_SETTINGS_TITLE);
 		
-		SubPanel mainPanel;
+		BasicPanel mainPanel;
 		// data
-		{	mainPanel = new SubPanel(dataWidth,dataHeight);
+		{	mainPanel = new BasicPanel(dataWidth,dataHeight);
 			{	BoxLayout layout = new BoxLayout(mainPanel,BoxLayout.PAGE_AXIS); 
 				mainPanel.setLayout(layout);
 			}

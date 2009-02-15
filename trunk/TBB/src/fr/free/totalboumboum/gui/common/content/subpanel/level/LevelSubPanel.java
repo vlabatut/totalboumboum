@@ -24,24 +24,19 @@ package fr.free.totalboumboum.gui.common.content.subpanel.level;
 import java.awt.Color;
 import java.util.ArrayList;
 
-import javax.swing.BoxLayout;
-
 import fr.free.totalboumboum.engine.container.level.LevelPreview;
-import fr.free.totalboumboum.gui.common.structure.subpanel.outside.EmptySubPanel;
+import fr.free.totalboumboum.gui.common.structure.subpanel.outside.SubPanel;
+import fr.free.totalboumboum.gui.common.structure.subpanel.outside.TableSubPanel;
 import fr.free.totalboumboum.gui.data.configuration.GuiConfiguration;
 import fr.free.totalboumboum.gui.tools.GuiKeys;
 import fr.free.totalboumboum.gui.tools.GuiTools;
 import fr.free.totalboumboum.tools.StringTools;
 
-public class LevelSubPanel extends EmptySubPanel
+public class LevelSubPanel extends TableSubPanel
 {	private static final long serialVersionUID = 1L;
 	
 	public LevelSubPanel(int width, int height)
-	{	super(width,height);
-		setOpaque(false);
-		
-		BoxLayout layout = new BoxLayout(this,BoxLayout.PAGE_AXIS); 
-		setLayout(layout);
+	{	super(width,height,SubPanel.Mode.BORDER,1,1,1,true);
 		
 		setLevelPreview(null,8);
 	}
@@ -64,16 +59,14 @@ public class LevelSubPanel extends EmptySubPanel
 //		int lines = 8;
 		int colSubs = 2;
 		int colGroups = 1;
-		if(innerPanel!=null)
-			remove((SubPanel)innerPanel);
 		if(showTitle)
-		{	innerPanel = new EntitledSubPanelTable(width,height,colGroups,colSubs,lines);
+		{	setMode(Mode.TITLE);
 			String titleKey = GuiKeys.COMMON_LEVEL_TITLE;
-			((EntitledSubPanelTable)innerPanel).setTitleKey(titleKey,true);
+			setTitleKey(titleKey,true);
 		}
 		else
-			innerPanel = new UntitledSubPanelTable(width,height,colGroups,colSubs,lines,true);
-		add((SubPanel)innerPanel);
+			setMode(Mode.BORDER);
+		reinit(lines,colGroups,colSubs);
 		
 		// icons
 		ArrayList<String> keys = new ArrayList<String>();
@@ -118,23 +111,23 @@ public class LevelSubPanel extends EmptySubPanel
 			for(int line=0;line<keys.size();line++)
 			{	// header
 				int colSub = 0;
-				{	innerPanel.setLabelKey(line,colSub,keys.get(line),true);
+				{	setLabelKey(line,colSub,keys.get(line),true);
 					Color bg = GuiTools.COLOR_TABLE_HEADER_BACKGROUND;
-					innerPanel.setLabelBackground(line,colSub,bg);
+					setLabelBackground(line,colSub,bg);
 					colSub++;
 				}
 				// data
 				{	String text = values.get(line);
 					String tooltip = text;
-					innerPanel.setLabelText(line,colSub,text,tooltip);
+					setLabelText(line,colSub,text,tooltip);
 					Color fg = GuiTools.COLOR_TABLE_HEADER_FOREGROUND;
-					innerPanel.setLabelForeground(line,0,fg);
+					setLabelForeground(line,0,fg);
 					Color bg;
 					if(line==0 && !showTitle)
 						bg = GuiTools.COLOR_TABLE_HEADER_BACKGROUND;
 					else
 						bg = GuiTools.COLOR_TABLE_REGULAR_BACKGROUND;
-					innerPanel.setLabelBackground(line,colSub,bg);
+					setLabelBackground(line,colSub,bg);
 					colSub++;
 				}
 			}
@@ -143,35 +136,34 @@ public class LevelSubPanel extends EmptySubPanel
 		{	for(int line=0;line<keys.size();line++)
 			{	// header
 				int colSub = 0;
-				{	innerPanel.setLabelKey(line,colSub,keys.get(line),true);
+				{	setLabelKey(line,colSub,keys.get(line),true);
 					Color bg = GuiTools.COLOR_TABLE_REGULAR_BACKGROUND;
-					innerPanel.setLabelBackground(line,colSub,bg);
+					setLabelBackground(line,colSub,bg);
 					colSub++;
 				}
 				// data
 				{	String text = null;
 					String tooltip = GuiConfiguration.getMiscConfiguration().getLanguage().getText(keys.get(line)+GuiKeys.TOOLTIP);
-					innerPanel.setLabelText(line,colSub,text,tooltip);
+					setLabelText(line,colSub,text,tooltip);
 					Color bg;
 					if(line==0 && !showTitle)
 						bg = GuiTools.COLOR_TABLE_REGULAR_BACKGROUND;
 					else
 						bg = GuiTools.COLOR_TABLE_NEUTRAL_BACKGROUND;
-					innerPanel.setLabelBackground(line,colSub,bg);
+					setLabelBackground(line,colSub,bg);
 					colSub++;
 				}
 			}
 		}
 		
-		int maxWidth = width-3*GuiTools.subPanelMargin-innerPanel.getHeaderHeight();
-		innerPanel.setColSubMaxWidth(1,maxWidth);
-		innerPanel.setColSubPreferredWidth(1,maxWidth);
+		int maxWidth = getDataWidth()-3*GuiTools.subPanelMargin-getHeaderHeight();
+		setColSubMaxWidth(1,maxWidth);
+		setColSubPreferredWidth(1,maxWidth);
 	}
 	
 	/////////////////////////////////////////////////////////////////
 	// DISPLAY			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	private SubPanelTable innerPanel;
 	private boolean showTitle = true;
 	private boolean showName = true;
 	private boolean showPack = true;

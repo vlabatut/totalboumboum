@@ -35,8 +35,9 @@ import fr.free.totalboumboum.game.tournament.AbstractTournament;
 import fr.free.totalboumboum.gui.common.content.subpanel.tournament.TournamentMiscSubPanel;
 import fr.free.totalboumboum.gui.common.structure.panel.SplitMenuPanel;
 import fr.free.totalboumboum.gui.common.structure.panel.data.EntitledDataPanel;
-import fr.free.totalboumboum.gui.common.structure.subpanel.temp.fait.SubPanel;
-import fr.free.totalboumboum.gui.common.structure.subpanel.temp.fait.UntitledSubPanelTable;
+import fr.free.totalboumboum.gui.common.structure.subpanel.BasicPanel;
+import fr.free.totalboumboum.gui.common.structure.subpanel.outside.TableSubPanel;
+import fr.free.totalboumboum.gui.common.structure.subpanel.outside.SubPanel.Mode;
 import fr.free.totalboumboum.gui.menus.tournament.select.SelectTournamentSplitPanel;
 import fr.free.totalboumboum.gui.tools.GuiKeys;
 import fr.free.totalboumboum.gui.tools.GuiTools;
@@ -47,7 +48,7 @@ public class SettingsData extends EntitledDataPanel implements MouseListener
 	private static final float SPLIT_RATIO = 0.06f;
 	
 	private TournamentMiscSubPanel miscPanel;
-	private UntitledSubPanelTable tournamentPanel;
+	private TableSubPanel tournamentPanel;
 	private int tournamentHeight;
 	private int miscHeight;
 	
@@ -57,9 +58,9 @@ public class SettingsData extends EntitledDataPanel implements MouseListener
 		// title
 		setTitleKey(GuiKeys.MENU_TOURNAMENT_SETTINGS_TITLE);
 		
-		SubPanel mainPanel;
+		BasicPanel mainPanel;
 		// data
-		{	mainPanel = new SubPanel(dataWidth,dataHeight);
+		{	mainPanel = new BasicPanel(dataWidth,dataHeight);
 			{	BoxLayout layout = new BoxLayout(mainPanel,BoxLayout.PAGE_AXIS); 
 				mainPanel.setLayout(layout);
 			}
@@ -153,11 +154,11 @@ public class SettingsData extends EntitledDataPanel implements MouseListener
 			tournamentPanel.setLabelText(0,0,null,null);
 	}
 
-	private UntitledSubPanelTable makeTournamentPanel(int width, int height)
+	private TableSubPanel makeTournamentPanel(int width, int height)
 	{	int cols = 2;
 		int lines = 1;
 		int margin = GuiTools.subPanelMargin;
-		UntitledSubPanelTable result = new UntitledSubPanelTable(width,height,cols,lines,false);
+		TableSubPanel result = new TableSubPanel(width,height,Mode.BORDER,cols,lines,false);
 		@SuppressWarnings("unused")
 		int headerHeight = result.getHeaderHeight();
 		int lineHeight = result.getLineHeight();

@@ -44,7 +44,7 @@ import fr.free.totalboumboum.gui.common.content.subpanel.match.MatchMiscSubPanel
 import fr.free.totalboumboum.gui.common.content.subpanel.points.PointsSubPanel;
 import fr.free.totalboumboum.gui.common.structure.panel.SplitMenuPanel;
 import fr.free.totalboumboum.gui.common.structure.panel.data.EntitledDataPanel;
-import fr.free.totalboumboum.gui.common.structure.subpanel.temp.fait.SubPanel;
+import fr.free.totalboumboum.gui.common.structure.subpanel.BasicPanel;
 import fr.free.totalboumboum.gui.tools.GuiKeys;
 import fr.free.totalboumboum.gui.tools.GuiTools;
 import fr.free.totalboumboum.tools.FileTools;
@@ -69,9 +69,9 @@ public class SelectedMatchData extends EntitledDataPanel implements FolderBrowse
 		// title
 		setTitleKey(GuiKeys.MENU_RESOURCES_MATCH_TITLE);
 		
-		SubPanel mainPanel;
+		BasicPanel mainPanel;
 		// data
-		{	mainPanel = new SubPanel(dataWidth,dataHeight);
+		{	mainPanel = new BasicPanel(dataWidth,dataHeight);
 			{	BoxLayout layout = new BoxLayout(mainPanel,BoxLayout.LINE_AXIS); 
 				mainPanel.setLayout(layout);
 			}
@@ -96,7 +96,7 @@ public class SelectedMatchData extends EntitledDataPanel implements FolderBrowse
 			{	int rightHeight = (int)((dataHeight - 2*margin)*0.4);
 				int previewHeight = dataHeight - 2*rightHeight - 2*margin; 
 				
-				SubPanel rightPanel = new SubPanel(rightWidth,dataHeight);
+				BasicPanel rightPanel = new BasicPanel(rightWidth,dataHeight);
 				rightPanel.setOpaque(false);
 				mainPanel.add(rightPanel);
 				{	BoxLayout layout = new BoxLayout(rightPanel,BoxLayout.PAGE_AXIS); 

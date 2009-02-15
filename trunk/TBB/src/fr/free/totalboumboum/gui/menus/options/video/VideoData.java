@@ -34,8 +34,9 @@ import fr.free.totalboumboum.configuration.Configuration;
 import fr.free.totalboumboum.configuration.video.VideoConfiguration;
 import fr.free.totalboumboum.gui.common.structure.panel.SplitMenuPanel;
 import fr.free.totalboumboum.gui.common.structure.panel.data.EntitledDataPanel;
-import fr.free.totalboumboum.gui.common.structure.subpanel.temp.fait.Line;
-import fr.free.totalboumboum.gui.common.structure.subpanel.temp.fait.UntitledSubPanelLines;
+import fr.free.totalboumboum.gui.common.structure.subpanel.inside.Line;
+import fr.free.totalboumboum.gui.common.structure.subpanel.outside.LinesSubPanel;
+import fr.free.totalboumboum.gui.common.structure.subpanel.outside.SubPanel.Mode;
 import fr.free.totalboumboum.gui.data.configuration.GuiConfiguration;
 import fr.free.totalboumboum.gui.tools.GuiKeys;
 import fr.free.totalboumboum.gui.tools.GuiTools;
@@ -52,7 +53,7 @@ public class VideoData extends EntitledDataPanel implements MouseListener
 	private static final int LINE_SMOOTH = 2;
 	private static final int LINE_FULL_SCREEN = 3;
 
-	private UntitledSubPanelLines optionsPanel;
+	private LinesSubPanel optionsPanel;
 	private VideoConfiguration videoConfiguration;
 	
 	private TreeSet<Dimension> availableResolutions;
@@ -69,7 +70,7 @@ public class VideoData extends EntitledDataPanel implements MouseListener
 		// data
 		{	int w = getDataWidth();
 			int h = getDataHeight();
-			optionsPanel = new UntitledSubPanelLines(w,h,LINE_COUNT,false);
+			optionsPanel = new LinesSubPanel(w,h,Mode.BORDER,LINE_COUNT,1,false);
 			int tWidth = (int)(w*0.66);
 			
 			videoConfiguration = Configuration.getVideoConfiguration().copy();;
