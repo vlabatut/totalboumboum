@@ -170,7 +170,7 @@ public class SettingsData extends EntitledDataPanel implements MouseListener
 			// name
 			{	// size
 				result.setColSubMinWidth(col,fileWidth);
-				result.setColSubPreferredWidth(col,fileWidth);
+				result.setColSubPrefWidth(col,fileWidth);
 				result.setColSubMaxWidth(col,fileWidth);
 				// color
 				Color bg = GuiTools.COLOR_TABLE_REGULAR_BACKGROUND;
@@ -181,7 +181,7 @@ public class SettingsData extends EntitledDataPanel implements MouseListener
 			// browse
 			{	// size
 				result.setColSubMinWidth(col,browseWidth);
-				result.setColSubPreferredWidth(col,browseWidth);
+				result.setColSubPrefWidth(col,browseWidth);
 				result.setColSubMaxWidth(col,browseWidth);
 				// icon
 				String key = GuiKeys.MENU_TOURNAMENT_SETTINGS_BUTTON_SELECT;

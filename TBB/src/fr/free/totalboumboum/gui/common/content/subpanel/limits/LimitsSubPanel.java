@@ -193,11 +193,11 @@ public class LimitsSubPanel<T extends Limit> extends TableSubPanel implements Mo
 			reinit(lines,colGroups,colSubs);
 			int iconWidth = getLineHeight();
 			setColSubMinWidth(0,iconWidth);
-			setColSubPreferredWidth(0,iconWidth);
+			setColSubPrefWidth(0,iconWidth);
 			setColSubMaxWidth(0,iconWidth);
 			int textWidth = getWidth() - iconWidth - 3*GuiTools.subPanelMargin;
 			setColSubMinWidth(1,textWidth);
-			setColSubPreferredWidth(1,textWidth);
+			setColSubPrefWidth(1,textWidth);
 			setColSubMaxWidth(1,textWidth);
 			
 			fireLimitSelectionChange();

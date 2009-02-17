@@ -58,7 +58,7 @@ public class TableContentPanel extends LinesContentPanel
 	public void setColSubMinWidth(int colSub, int width)
 	{	setColSubWidth(colSub,width,0);		
 	}
-	public void setColSubPreferredWidth(int colSub, int width)
+	public void setColSubPrefWidth(int colSub, int width)
 	{	setColSubWidth(colSub,width,1);		
 	}
 	public void setColSubMaxWidth(int colSub, int width)
@@ -80,7 +80,7 @@ public class TableContentPanel extends LinesContentPanel
 	public void unsetColSubMinWidth(int colSub)
 	{	unsetColSubWidth(colSub,0);		
 	}
-	public void unsetColSubPreferredWidth(int colSub)
+	public void unsetColSubPrefWidth(int colSub)
 	{	unsetColSubWidth(colSub,1);		
 	}
 	public void unsetColSubMaxWidth(int colSub)

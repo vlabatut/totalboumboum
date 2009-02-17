@@ -163,8 +163,8 @@ public class LinesSubPanel extends SubPanel<LinesContentPanel>
 	public void setLabelMinWidth(int line, int col, int width)
 	{	getDataPanel().setLabelMinWidth(line,col,width);
 	}
-	public void setLabelPreferredWidth(int line, int col, int width)
-	{	getDataPanel().setLabelPreferredWidth(line,col,width);
+	public void setLabelPrefWidth(int line, int col, int width)
+	{	getDataPanel().setLabelPrefWidth(line,col,width);
 	}
 	public void setLabelMaxWidth(int line, int col, int width)
 	{	getDataPanel().setLabelMaxWidth(line,col,width);
@@ -176,8 +176,8 @@ public class LinesSubPanel extends SubPanel<LinesContentPanel>
 	public void unsetLabelMinWidth(int line, int colSub)
 	{	getDataPanel().unsetLabelMinWidth(line,colSub);
 	}
-	public void unsetLabelPreferredWidth(int line, int colSub)
-	{	getDataPanel().unsetLabelPreferredWidth(line,colSub);
+	public void unsetLabelPrefWidth(int line, int colSub)
+	{	getDataPanel().unsetLabelPrefWidth(line,colSub);
 	}
 	public void unsetLabelMaxWidth(int line, int colSub)
 	{	getDataPanel().unsetLabelMaxWidth(line,colSub);

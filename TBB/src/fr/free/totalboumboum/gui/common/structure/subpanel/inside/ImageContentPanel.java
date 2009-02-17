@@ -86,8 +86,8 @@ public class ImageContentPanel extends ContentPanel
 	public void setImage(BufferedImage newImage, String tooltip)
 	{	if(newImage!=null)
 		{	// resize
-			float zoomX = width/(float)newImage.getWidth();
-			float zoomY = height/(float)newImage.getHeight();
+			float zoomX = getWidth()/(float)newImage.getWidth();
+			float zoomY = getHeight()/(float)newImage.getHeight();
 			float zoom = Math.min(zoomX,zoomY);
 			image = ImageTools.resize(newImage,zoom,true);
 			// put image

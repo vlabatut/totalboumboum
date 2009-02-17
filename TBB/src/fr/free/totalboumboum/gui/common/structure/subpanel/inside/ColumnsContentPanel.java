@@ -38,7 +38,8 @@ public class ColumnsContentPanel extends ContentPanel
 	public ColumnsContentPanel(int width, int height, int cols)
 	{	super(width,height);
 //		setBackground(GuiTools.COLOR_COMMON_BACKGROUND);
-
+		setOpaque(false);
+		
 		// layout
 		BoxLayout layout = new BoxLayout(this,BoxLayout.LINE_AXIS); 
 		setLayout(layout);
@@ -54,7 +55,7 @@ public class ColumnsContentPanel extends ContentPanel
 		this.cols = 0;
 		for(int col=0;col<cols;col++)
 			addColumn(col);
-		setDim(width,height);
+		setDim(getWidth(),getHeight());
 	}
 
 	/////////////////////////////////////////////////////////////////
@@ -210,7 +211,7 @@ public class ColumnsContentPanel extends ContentPanel
 	{	Column l = getColumn(col);
 		l.setLabelMinHeight(line,height);
 	}
-	public void setLabelPreferredHeight(int line, int col, int height)
+	public void setLabelPrefHeight(int line, int col, int height)
 	{	Column l = getColumn(col);
 		l.setLabelPreferredHeight(line,height);
 	}
@@ -227,7 +228,7 @@ public class ColumnsContentPanel extends ContentPanel
 	{	Column l = getColumn(col);
 		l.unsetLabelMinHeight(line);
 	}
-	public void unsetLabelPreferredHeight(int line, int col)
+	public void unsetLabelPrefHeight(int line, int col)
 	{	Column l = getColumn(col);
 		l.unsetLabelPreferredHeight(line);
 	}

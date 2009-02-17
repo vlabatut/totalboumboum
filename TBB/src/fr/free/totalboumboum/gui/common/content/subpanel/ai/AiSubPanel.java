@@ -136,7 +136,7 @@ public class AiSubPanel extends TableSubPanel
 		
 		int maxWidth = getDataWidth()-3*GuiTools.subPanelMargin-getHeaderHeight();
 		setColSubMaxWidth(1,maxWidth);
-		setColSubPreferredWidth(1,maxWidth);
+		setColSubPrefWidth(1,maxWidth);
 	}
 	
 	/////////////////////////////////////////////////////////////////

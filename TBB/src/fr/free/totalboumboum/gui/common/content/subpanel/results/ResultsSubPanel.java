@@ -151,7 +151,7 @@ public class ResultsSubPanel extends TableSubPanel
 			// data
 			{	setColSubMaxWidth(1,Integer.MAX_VALUE);
 				int w = getHeaderHeight();
-				setColSubPreferredWidth(1,w);
+				setColSubPrefWidth(1,w);
 			}
 	
 			StatisticBase stats = statisticHolder.getStats();
