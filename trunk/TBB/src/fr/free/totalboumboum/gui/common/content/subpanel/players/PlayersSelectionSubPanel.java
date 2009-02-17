@@ -111,7 +111,7 @@ public class PlayersSelectionSubPanel extends TableSubPanel implements MouseList
 			};
 			for(int col=0;col<keys.length;col++)
 			{	setColSubMinWidth(col,sizes[col]);
-				setColSubPreferredWidth(col,sizes[col]);
+				setColSubPrefWidth(col,sizes[col]);
 				setColSubMaxWidth(col,sizes[col]);
 				if(keys[col]!=null)
 				{	setLabelKey(0,col,keys[col],true);

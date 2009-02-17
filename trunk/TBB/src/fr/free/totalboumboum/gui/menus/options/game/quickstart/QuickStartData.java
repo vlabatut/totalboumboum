@@ -226,7 +226,7 @@ public class QuickStartData extends EntitledDataPanel implements PlayersSelectio
 			// name
 			{	// size
 				result.setColSubMinWidth(col,nameWidth);
-				result.setColSubPreferredWidth(col,nameWidth);
+				result.setColSubPrefWidth(col,nameWidth);
 				result.setColSubMaxWidth(col,nameWidth);
 				// color
 				Color bg = GuiTools.COLOR_TABLE_REGULAR_BACKGROUND;
@@ -237,7 +237,7 @@ public class QuickStartData extends EntitledDataPanel implements PlayersSelectio
 			// allowed players
 			{	// size
 				result.setColSubMinWidth(col,allowedPlayersWidth);
-				result.setColSubPreferredWidth(col,allowedPlayersWidth);
+				result.setColSubPrefWidth(col,allowedPlayersWidth);
 				result.setColSubMaxWidth(col,allowedPlayersWidth);
 				// color
 				Color bg = GuiTools.COLOR_TABLE_REGULAR_BACKGROUND;
@@ -248,7 +248,7 @@ public class QuickStartData extends EntitledDataPanel implements PlayersSelectio
 			// browse
 			{	// size
 				result.setColSubMinWidth(col,browseWidth);
-				result.setColSubPreferredWidth(col,browseWidth);
+				result.setColSubPrefWidth(col,browseWidth);
 				result.setColSubMaxWidth(col,browseWidth);
 				// icon
 				String key = GuiKeys.MENU_OPTIONS_GAME_QUICKSTART_ROUND_BROWSE;

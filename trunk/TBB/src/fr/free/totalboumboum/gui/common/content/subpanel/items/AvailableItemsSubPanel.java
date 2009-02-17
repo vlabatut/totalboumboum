@@ -73,11 +73,11 @@ public class AvailableItemsSubPanel extends TableSubPanel
 			int lineHeight = getLineHeight();
 			int iconWidth = lineHeight;
 			setColSubMinWidth(0,lineHeight);
-			setColSubPreferredWidth(0,lineHeight);
+			setColSubPrefWidth(0,lineHeight);
 			setColSubMaxWidth(0,lineHeight);
 			int textWidth = (getDataWidth() - (iconWidth*colGroups+GuiTools.subPanelMargin*(colSubs*colGroups+1)))/colGroups;
 			setColSubMinWidth(1,textWidth);
-			setColSubPreferredWidth(1,textWidth);
+			setColSubPrefWidth(1,textWidth);
 			setColSubMaxWidth(1,textWidth);			
 			
 			// data
@@ -133,7 +133,7 @@ public class AvailableItemsSubPanel extends TableSubPanel
 			// widths
 			int lineHeight = getLineHeight();
 			setColSubMinWidth(0,lineHeight);
-			setColSubPreferredWidth(0,lineHeight);
+			setColSubPrefWidth(0,lineHeight);
 			setColSubMaxWidth(0,lineHeight);
 			setColSubMaxWidth(1,Integer.MAX_VALUE);			
 		}

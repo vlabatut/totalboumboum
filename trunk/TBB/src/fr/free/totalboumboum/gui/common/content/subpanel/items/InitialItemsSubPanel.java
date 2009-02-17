@@ -69,7 +69,7 @@ public class InitialItemsSubPanel extends TableSubPanel
 			reinit(lines,colGroups,colSubs);
 			int lineHeight = getLineHeight();
 			setColSubMinWidth(0,lineHeight);
-			setColSubPreferredWidth(0,lineHeight);
+			setColSubPrefWidth(0,lineHeight);
 			setColSubMaxWidth(0,lineHeight);
 			setColSubMaxWidth(1,Integer.MAX_VALUE);			
 			
@@ -119,7 +119,7 @@ public class InitialItemsSubPanel extends TableSubPanel
 			// widths
 			int lineHeight = getLineHeight();
 			setColSubMinWidth(0,lineHeight);
-			setColSubPreferredWidth(0,lineHeight);
+			setColSubPrefWidth(0,lineHeight);
 			setColSubMaxWidth(0,lineHeight);
 			setColSubMaxWidth(1,Integer.MAX_VALUE);			
 		}

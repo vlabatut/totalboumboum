@@ -45,6 +45,7 @@ public class LinesContentPanel extends ContentPanel
 	public LinesContentPanel(int width, int height, int lines, int cols, boolean header)
 	{	super(width,height);
 //		setBackground(GuiTools.COLOR_COMMON_BACKGROUND);
+		setOpaque(false);
 		
 		this.header = header;
 
@@ -63,7 +64,7 @@ public class LinesContentPanel extends ContentPanel
 		this.lines = 0;
 		for(int line=0;line<lines;line++)
 			addLine(line,cols);
-		setDim(width,height);
+		setDim(getWidth(),getHeight());
 	}
 
 	/////////////////////////////////////////////////////////////////
@@ -300,7 +301,7 @@ public class LinesContentPanel extends ContentPanel
 	public void setLabelMinWidth(int line, int col, int width)
 	{	setLabelWidth(line,col,width,0);
 	}
-	public void setLabelPreferredWidth(int line, int col, int width)
+	public void setLabelPrefWidth(int line, int col, int width)
 	{	setLabelWidth(line,col,width,1);
 	}
 	public void setLabelMaxWidth(int line, int col, int width)
@@ -315,7 +316,7 @@ public class LinesContentPanel extends ContentPanel
 	{	Line l = getLine(line);
 		l.unsetLabelMinWidth(col);
 	}
-	public void unsetLabelPreferredWidth(int line, int col)
+	public void unsetLabelPrefWidth(int line, int col)
 	{	Line l = getLine(line);
 		l.unsetLabelPreferredWidth(col);
 	}

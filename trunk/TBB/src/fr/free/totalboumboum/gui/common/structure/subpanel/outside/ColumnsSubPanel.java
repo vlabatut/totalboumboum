@@ -131,8 +131,8 @@ public class ColumnsSubPanel extends SubPanel<ColumnsContentPanel>
 	public void setLabelMinHeight(int line, int col, int width)
 	{	getDataPanel().setLabelMinHeight(line,col,width);
 	}
-	public void setLabelPreferredHeight(int line, int col, int width)
-	{	getDataPanel().setLabelPreferredHeight(line,col,width);
+	public void setLabelPrefHeight(int line, int col, int width)
+	{	getDataPanel().setLabelPrefHeight(line,col,width);
 	}
 	public void setLabelMaxHeight(int line, int col, int width)
 	{	getDataPanel().setLabelMaxHeight(line,col,width);
@@ -144,8 +144,8 @@ public class ColumnsSubPanel extends SubPanel<ColumnsContentPanel>
 	public void unsetLabelMinHeight(int line, int colSub)
 	{	getDataPanel().unsetLabelMinHeight(line,colSub);
 	}
-	public void unsetLabelPreferredHeight(int line, int colSub)
-	{	getDataPanel().unsetLabelPreferredHeight(line,colSub);
+	public void unsetLabelPrefHeight(int line, int colSub)
+	{	getDataPanel().unsetLabelPrefHeight(line,colSub);
 	}
 	public void unsetLabelMaxHeight(int line, int colSub)
 	{	getDataPanel().unsetLabelMaxHeight(line,colSub);

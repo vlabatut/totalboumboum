@@ -161,42 +161,42 @@ public class TableSubPanel extends SubPanel<TableContentPanel>
 	}
 	
 	public JLabel getLabel(int line, int col)
-	{	return getLabel(line,1,col);
+	{	return getLabel(line,0,col);
 	}
 	public JLabel getLabel(int line, int colGroup, int colSub)
 	{	return getDataPanel().getLabel(line,colGroup,colSub);
 	}
 	
 	public void setLabelKey(int line, int col, String key, boolean imageFlag)
-	{	setLabelKey(line,1,col,key,imageFlag);
+	{	setLabelKey(line,0,col,key,imageFlag);
 	}
 	public void setLabelKey(int line, int colGroup, int colSub, String key, boolean imageFlag)
 	{	getDataPanel().setLabelKey(line,colGroup,colSub,key,imageFlag);
 	}
 
 	public void setLabelIcon(int line, int col, BufferedImage icon, String tooltip)
-	{	setLabelIcon(line,1,col,icon,tooltip);
+	{	setLabelIcon(line,0,col,icon,tooltip);
 	}
 	public void setLabelIcon(int line, int colGroup, int colSub, BufferedImage icon, String tooltip)
 	{	getDataPanel().setLabelIcon(line,colGroup,colSub,icon,tooltip);
 	}
 
 	public void setLabelText(int line, int col, String text, String tooltip)
-	{	setLabelText(line,1,col,text,tooltip);
+	{	setLabelText(line,0,col,text,tooltip);
 	}
 	public void setLabelText(int line, int colGroup, int colSub, String text, String tooltip)
 	{	getDataPanel().setLabelText(line,colGroup,colSub,text,tooltip);
 	}
 	
 	public void setLabelBackground(int line, int col, Color bg)
-	{	setLabelBackground(line,1,col,bg);
+	{	setLabelBackground(line,0,col,bg);
 	}
 	public void setLabelBackground(int line, int colGroup, int colSub, Color bg)
 	{	getDataPanel().setLabelBackground(line,colGroup,colSub,bg);
 	}
 	
 	public void setLabelForeground(int line, int col, Color fg)
-	{	setLabelForeground(line,1,col,fg);
+	{	setLabelForeground(line,0,col,fg);
 	}
 	public void setLabelForeground(int line, int colGroup, int colSub, Color fg)
 	{	getDataPanel().setLabelForeground(line,colGroup,colSub,fg);
@@ -208,8 +208,8 @@ public class TableSubPanel extends SubPanel<TableContentPanel>
 	public void setColSubMinWidth(int colSub, int width)
 	{	getDataPanel().setColSubMinWidth(colSub,width);
 	}
-	public void setColSubPreferredWidth(int colSub, int width)
-	{	getDataPanel().setColSubPreferredWidth(colSub,width);
+	public void setColSubPrefWidth(int colSub, int width)
+	{	getDataPanel().setColSubPrefWidth(colSub,width);
 	}
 	public void setColSubMaxWidth(int colSub, int width)
 	{	getDataPanel().setColSubMaxWidth(colSub,width);
@@ -221,8 +221,8 @@ public class TableSubPanel extends SubPanel<TableContentPanel>
 	public void unsetColSubMinWidth(int colSub)
 	{	getDataPanel().unsetColSubMinWidth(colSub);
 	}
-	public void unsetColSubPreferredWidth(int colSub)
-	{	getDataPanel().unsetColSubPreferredWidth(colSub);
+	public void unsetColSubPrefWidth(int colSub)
+	{	getDataPanel().unsetColSubPrefWidth(colSub);
 	}
 	public void unsetColSubMaxWidth(int colSub)
 	{	getDataPanel().unsetColSubMaxWidth(colSub);

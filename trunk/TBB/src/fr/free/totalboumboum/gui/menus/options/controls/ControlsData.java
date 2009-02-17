@@ -94,8 +94,6 @@ public class ControlsData extends EntitledDataPanel implements MouseListener,Key
 					imageFlags.add(true);
 				}
 				keysPanel.setLineKeysSimple(0,keys,imageFlags);
-				//keysPanel.setColumnWidth(0,Integer.MAX_VALUE);
-				keysPanel.setColSubMaxWidth(1,Integer.MAX_VALUE);
 			}			
 			
 			// data
@@ -124,6 +122,11 @@ public class ControlsData extends EntitledDataPanel implements MouseListener,Key
 					}
 				}
 			}
+			keysPanel.setColSubMaxWidth(0,Integer.MAX_VALUE);
+			keysPanel.setColSubMaxWidth(1,Integer.MAX_VALUE);
+			keysPanel.setColSubMinWidth(2,keysPanel.getHeaderHeight());
+			keysPanel.setColSubPrefWidth(2,keysPanel.getHeaderHeight());
+			keysPanel.setColSubMaxWidth(2,keysPanel.getHeaderHeight());
 			
 			setDataPart(keysPanel);
 			keysPanel.addKeyListener(this);

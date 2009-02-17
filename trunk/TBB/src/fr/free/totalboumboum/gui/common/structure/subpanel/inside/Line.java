@@ -169,7 +169,7 @@ public class Line extends ContentPanel
 
 	public void setLabelIcon(int col, BufferedImage icon, String tooltip)
 	{	JLabel label = getLabel(col);
-		double zoom = height/(double)icon.getHeight();
+		double zoom = getHeight()/(double)icon.getHeight();
 		icon = ImageTools.resize(icon,zoom,true);
 		ImageIcon icn = new ImageIcon(icon);
 		label.setText(null);
@@ -217,7 +217,7 @@ public class Line extends ContentPanel
 	{	setLabelWidth(col,width,2);		
 	}
 	public void setLabelWidth(int col, int width, int mode)
-	{	Dimension lineDim = new Dimension(width,height);
+	{	Dimension lineDim = new Dimension(width,getHeight());
 		JLabel label = getLabel(col);
 		switch(mode)
 		{	case 0:
@@ -279,19 +279,19 @@ public class Line extends ContentPanel
 			// minimum size
 			Dimension min = lbl.getMinimumSize();
 			if(min!=null)
-			{	Dimension dim = new Dimension(min.width,height);
+			{	Dimension dim = new Dimension(min.width,getHeight());
 				lbl.setMinimumSize(dim);
 			}
 			// preferred size
 			Dimension pref = lbl.getPreferredSize();
 			if(pref!=null)
-			{	Dimension dim = new Dimension(pref.width,height);
+			{	Dimension dim = new Dimension(pref.width,getHeight());
 				lbl.setPreferredSize(dim);
 			}
 			// maximum size
 			Dimension max = lbl.getMaximumSize();
 			if(max!=null)
-			{	Dimension dim = new Dimension(max.width,height);
+			{	Dimension dim = new Dimension(max.width,getHeight());
 				lbl.setMaximumSize(dim);
 			}
 		}		

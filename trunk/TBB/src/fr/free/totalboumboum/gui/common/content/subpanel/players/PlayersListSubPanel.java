@@ -96,7 +96,7 @@ public class PlayersListSubPanel extends TableSubPanel implements MouseListener
 			{	String key = GuiKeys.COMMON_PLAYERS_LIST_HEADER_CONTROLS;
 				setLabelKey(0,col,key,true);
 				setColSubMinWidth(col,ctrlColWidth);
-				setColSubPreferredWidth(col,ctrlColWidth);
+				setColSubPrefWidth(col,ctrlColWidth);
 				setColSubMaxWidth(col,ctrlColWidth);
 				col++;
 			}			

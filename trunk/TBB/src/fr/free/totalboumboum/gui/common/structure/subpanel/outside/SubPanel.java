@@ -71,6 +71,7 @@ public abstract class SubPanel<T extends ContentPanel> extends BasicPanel
 		}
 		
 		// dimension
+		this.mode = mode;
 		setDim(width,height);
 		setMode(mode);
 	}
@@ -78,7 +79,7 @@ public abstract class SubPanel<T extends ContentPanel> extends BasicPanel
 	public void setMode(Mode mode)
 	{	// init
 		this.mode = mode;
-		setDim(width,height);
+		setDim(getWidth(),getHeight());
 		removeAll();
 		
 		// content
@@ -113,13 +114,6 @@ public abstract class SubPanel<T extends ContentPanel> extends BasicPanel
 	/////////////////////////////////////////////////////////////////
 	// DIMENSION		/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	private int width;
-	private int height;
-	
-	public int getWidth()
-	{	return width;
-	}
-	
 	public void setDim(int width, int height)
 	{	// dimension
 		super.setDim(width,height);
@@ -136,9 +130,9 @@ public abstract class SubPanel<T extends ContentPanel> extends BasicPanel
 				dataHeight = height - 3*GuiTools.subPanelMargin - titleHeight;
 				dataWidth = titleWidth;
 				dim = new Dimension(titleWidth,titleHeight);
+				title.setMinimumSize(dim);
 				title.setPreferredSize(dim);
-				title.setPreferredSize(dim);
-				title.setPreferredSize(dim);
+				title.setMaximumSize(dim);
 				break;
 			case BORDER:
 				dataHeight = height - 2*GuiTools.subPanelMargin;
@@ -151,10 +145,6 @@ public abstract class SubPanel<T extends ContentPanel> extends BasicPanel
 		}
 		if(data!=null)
 			data.setDim(dataWidth,dataHeight);
-	}
-
-	public int getHeight()
-	{	return height;
 	}
 
 	/////////////////////////////////////////////////////////////////
