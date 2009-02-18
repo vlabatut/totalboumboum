@@ -35,11 +35,12 @@ import fr.free.totalboumboum.gui.tools.GuiTools;
 
 public class ArchiveMiscSubPanel extends TableSubPanel
 {	private static final long serialVersionUID = 1L;
+	private static final int COL_SUBS = 2;
+	private static final int COL_GROUPS = 1;
 	
 	public ArchiveMiscSubPanel(int width, int height, int lines)
-	{	super(width,height,SubPanel.Mode.BORDER,1,1,1,true);
+	{	super(width,height,SubPanel.Mode.BORDER,lines,COL_GROUPS,COL_SUBS,true);
 		
-		this.lines = lines;
 		setGameArchive(null);
 	}
 		
@@ -47,7 +48,6 @@ public class ArchiveMiscSubPanel extends TableSubPanel
 	// ARCHIVE			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	private GameArchive gameArchive;
-	private int lines;
 
 	public GameArchive getGameArchive()
 	{	return gameArchive;	
@@ -57,9 +57,7 @@ public class ArchiveMiscSubPanel extends TableSubPanel
 	{	this.gameArchive = gameArchive;
 		
 		// sizes
-		int colSubs = 2;
-		int colGroups = 1;
-		reinit(colGroups,colSubs,lines);
+		reinit(getLineCount(),COL_GROUPS,COL_SUBS);
 		
 		// icons
 		ArrayList<String> keys = new ArrayList<String>();

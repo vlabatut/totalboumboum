@@ -45,12 +45,14 @@ import fr.free.totalboumboum.tools.StringTools;
 
 public class ResultsSubPanel extends TableSubPanel
 {	private static final long serialVersionUID = 1L;
+	private static final int LINES = 16+1;
+	private static final int COLS = 0;
 	
 
 	private String prefix;
 
 	public ResultsSubPanel(int width, int height)
-	{	super(width,height,SubPanel.Mode.BORDER,1,1,1,true);
+	{	super(width,height,SubPanel.Mode.BORDER,LINES,1,1,true);
 		
 		setStatisticHolder(null);
 	}
@@ -66,11 +68,8 @@ public class ResultsSubPanel extends TableSubPanel
 	
 	public void setStatisticHolder(StatisticHolder statisticHolder)
 	{	this.statisticHolder = statisticHolder;
-		
-		// sizes
-		int lines = 16+1;
-		int cols = 0;
-		
+		int cols = COLS;
+	
 		if(statisticHolder!=null)
 		{	if(showPortrait) 
 				cols++;
@@ -87,7 +86,7 @@ public class ResultsSubPanel extends TableSubPanel
 				cols++;
 			if(showPoints) 
 				cols++;
-			reinit(cols,lines);
+			reinit(LINES,cols);
 			
 			// prefix
 			String type = null;
@@ -274,7 +273,7 @@ public class ResultsSubPanel extends TableSubPanel
 			}	
 		}
 		else
-		{	reinit(1,lines);
+		{	reinit(1,LINES);
 		}
 	}
 	

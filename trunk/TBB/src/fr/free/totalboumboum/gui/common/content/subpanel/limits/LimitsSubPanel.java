@@ -45,11 +45,14 @@ import fr.free.totalboumboum.tools.StringTools;
 
 public class LimitsSubPanel<T extends Limit> extends TableSubPanel implements MouseListener
 {	private static final long serialVersionUID = 1L;
+	private static final int COL_GROUPS = 1;
+	private static final int COL_SUBS = 2;
+	private static final int LINES = 8;
 
 	private String prefix;
 
 	public LimitsSubPanel(int width, int height, String type)
-	{	super(width,height,SubPanel.Mode.TITLE,1,1,1,false);
+	{	super(width,height,SubPanel.Mode.TITLE,LINES,COL_GROUPS,COL_SUBS,false);
 		
 		// init	
 		this.prefix = GuiKeys.COMMON_LIMIT+type;
@@ -75,9 +78,7 @@ public class LimitsSubPanel<T extends Limit> extends TableSubPanel implements Mo
 	public void setLimits(Limits<T> limits)
 	{	this.limits = limits;
 		selectedRow = -1;
-		int colGroups = 1;
-		int colSubs = 2;
-		int lines = 8;
+		int colGroups = COL_GROUPS;
 		
 		if(limits!=null)
 		{	// title
@@ -86,9 +87,9 @@ public class LimitsSubPanel<T extends Limit> extends TableSubPanel implements Mo
 			}
 	
 			// data
-			if(limits.size()>lines*colGroups)
-				colGroups = 2;
-			reinit(lines,colGroups,colSubs);
+			if(limits.size()>LINES*colGroups)
+				colGroups++;
+			reinit(LINES,colGroups,COL_SUBS);
 			setColSubMaxWidth(1,Integer.MAX_VALUE);
 			
 			NumberFormat nf = NumberFormat.getInstance();
@@ -190,7 +191,7 @@ public class LimitsSubPanel<T extends Limit> extends TableSubPanel implements Mo
 			setTitleBackground(bg);			
 			
 			// empty lines
-			reinit(lines,colGroups,colSubs);
+			reinit(LINES,colGroups,COL_SUBS);
 			int iconWidth = getLineHeight();
 			setColSubMinWidth(0,iconWidth);
 			setColSubPrefWidth(0,iconWidth);

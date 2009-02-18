@@ -45,9 +45,10 @@ import fr.free.totalboumboum.gui.tools.GuiTools;
 
 public class FolderBrowserSubPanel extends TableSubPanel implements MouseListener
 {	private static final long serialVersionUID = 1L;
+	private static final int LINES = 20;;
 
 	public FolderBrowserSubPanel(int width, int height)
-	{	super(width,height,SubPanel.Mode.BORDER,1,1,1,false);
+	{	super(width,height,SubPanel.Mode.BORDER,LINES,1,1,false);
 		
 		// pages
 		setFolder(null,new ArrayList<String>());
@@ -58,7 +59,6 @@ public class FolderBrowserSubPanel extends TableSubPanel implements MouseListene
 	/////////////////////////////////////////////////////////////////
 	private String baseFolder;
 	private ArrayList<String> targetFiles;
-	private int lines;
 	private int linePrevious;
 	private int lineParent;
 	private int lineNext;
@@ -93,10 +93,9 @@ public class FolderBrowserSubPanel extends TableSubPanel implements MouseListene
 		selectedRow = -1;fireFolderBrowserSelectionChanged();
 		
 		// size
-		lines = 20;
 		linePrevious = 0;
 		lineParent = 1;
-		lineNext = lines-1;
+		lineNext = LINES-1;
 		controlUpCount = 1;
 		if(showParent)
 			controlUpCount = 2;
@@ -108,15 +107,15 @@ public class FolderBrowserSubPanel extends TableSubPanel implements MouseListene
 		pageCount = getPageCount();
 		
 		for(int panelIndex=0;panelIndex<pageCount;panelIndex++)
-		{	TableContentPanel listPanel = new TableContentPanel(getDataWidth(),getDataHeight(),cols,lines,false);
+		{	TableContentPanel listPanel = new TableContentPanel(getDataWidth(),getDataHeight(),cols,LINES,false);
 			listPanel.setColSubMinWidth(0,textMaxWidth);
 			listPanel.setColSubPrefWidth(0,textMaxWidth);
 			listPanel.setColSubMaxWidth(0,textMaxWidth);
 		
 			// data
 			int line = controlUpCount;
-			int nameIndex = panelIndex*(lines-controlTotalCount);
-			while(line<lines && nameIndex<names.size())
+			int nameIndex = panelIndex*(LINES-controlTotalCount);
+			while(line<LINES && nameIndex<names.size())
 			{	Color bg = GuiTools.COLOR_TABLE_REGULAR_BACKGROUND;
 				String name = names.get(nameIndex);
 				listPanel.setLabelBackground(line,0,bg);
@@ -196,8 +195,8 @@ public class FolderBrowserSubPanel extends TableSubPanel implements MouseListene
 	}
 	
 	private int getPageCount()
-	{	int result = names.size()/(lines-controlTotalCount);
-		if(names.size()%(lines-controlTotalCount)>0)
+	{	int result = names.size()/(LINES-controlTotalCount);
+		if(names.size()%(LINES-controlTotalCount)>0)
 			result++;
 		else if(result==0)
 			result = 1;
@@ -207,7 +206,7 @@ public class FolderBrowserSubPanel extends TableSubPanel implements MouseListene
 	public String getSelectedName()
 	{	String result = null;
 		if(selectedRow!=-1)
-		{	int selectedIndex = (selectedRow-controlUpCount)+currentPage*(lines-controlTotalCount);
+		{	int selectedIndex = (selectedRow-controlUpCount)+currentPage*(LINES-controlTotalCount);
 			result = names.get(selectedIndex);		
 		}
 		return result;

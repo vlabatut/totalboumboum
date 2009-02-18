@@ -33,9 +33,12 @@ import fr.free.totalboumboum.gui.tools.GuiTools;
 
 public class AiSubPanel extends TableSubPanel
 {	private static final long serialVersionUID = 1L;
+	private static final int LINES = 10;
+	private static final int COL_SUBS = 2;
+	private static final int COL_GROUPS = 1;
 	
 	public AiSubPanel(int width, int height)
-	{	super(width,height,SubPanel.Mode.BORDER,1,1,1,true);
+	{	super(width,height,SubPanel.Mode.BORDER,LINES,COL_GROUPS,COL_SUBS,true);
 		
 	setAiPreview(null);
 	}
@@ -53,10 +56,7 @@ public class AiSubPanel extends TableSubPanel
 	{	this.aiPreview = selectedAi;
 		
 		// sizes
-		int lines = 10;
-		int colSubs = 2;
-		int colGroups = 1;
-		reinit(colGroups,colSubs,lines);
+		reinit(LINES,COL_GROUPS,COL_SUBS);
 		
 		// icons
 		ArrayList<String> keys = new ArrayList<String>();

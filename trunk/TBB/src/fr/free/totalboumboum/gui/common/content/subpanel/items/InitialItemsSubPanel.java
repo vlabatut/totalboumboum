@@ -38,9 +38,12 @@ import fr.free.totalboumboum.gui.tools.GuiTools;
 
 public class InitialItemsSubPanel extends TableSubPanel
 {	private static final long serialVersionUID = 1L;
+	private static final int LINES = 4;
+	private static final int COL_SUBS = 2;
+	private static final int COL_GROUPS = 1;
 
 	public InitialItemsSubPanel(int width, int height)
-	{	super(width,height,SubPanel.Mode.TITLE,1,1,1,false);
+	{	super(width,height,SubPanel.Mode.TITLE,LINES,COL_GROUPS,COL_SUBS,false);
 		
 		// title
 		String titleKey = GuiKeys.COMMON_ITEMS_INITIAL_TITLE;
@@ -55,18 +58,15 @@ public class InitialItemsSubPanel extends TableSubPanel
 	
 	public void setLevelPreview(LevelPreview levelPreview)
 	{	this.levelPreview = levelPreview;
-		
-		// init
-		int lines = 4;
-		int colSubs = 2;
-		int colGroups = 1;
-		
+		int lines = LINES;
+		int colGroups = COL_GROUPS;
+	
 		if(levelPreview!=null)
 		{	if(levelPreview.getInitialItems().size()>lines*colGroups)
 			{	lines = 8;
 				colGroups = 4;
 			}
-			reinit(lines,colGroups,colSubs);
+			reinit(lines,colGroups,COL_SUBS);
 			int lineHeight = getLineHeight();
 			setColSubMinWidth(0,lineHeight);
 			setColSubPrefWidth(0,lineHeight);
@@ -115,7 +115,7 @@ public class InitialItemsSubPanel extends TableSubPanel
 		}
 		else
 		{	//table
-			reinit(lines,colGroups,colSubs);
+			reinit(lines,colGroups,COL_SUBS);
 			// widths
 			int lineHeight = getLineHeight();
 			setColSubMinWidth(0,lineHeight);

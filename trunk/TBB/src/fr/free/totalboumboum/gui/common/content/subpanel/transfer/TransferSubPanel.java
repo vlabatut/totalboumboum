@@ -35,9 +35,10 @@ import fr.free.totalboumboum.gui.tools.GuiTools;
 
 public class TransferSubPanel extends TableSubPanel implements MouseListener
 {	private static final long serialVersionUID = 1L;
+	private static final int COLS = 1;
 	
 	public TransferSubPanel(int width, int height)
-	{	super(width,height,SubPanel.Mode.BORDER,1,1,1,false);
+	{	super(width,height,SubPanel.Mode.BORDER,1,1,COLS,false);
 	
 		init();
 	}
@@ -51,7 +52,7 @@ public class TransferSubPanel extends TableSubPanel implements MouseListener
 	public void init()
 	{	// sizes
 		int lines = 0;
-		int cols = 1;
+		int cols = COLS;
 		if(showLeft)
 		{	lineLeft = lines;
 			lines++;			
@@ -60,7 +61,7 @@ public class TransferSubPanel extends TableSubPanel implements MouseListener
 		{	lineRight = lines;
 			lines++;			
 		}
-		reinit(cols,lines);
+		reinit(lines,cols);
 
 		// icons
 		ArrayList<String> keys = new ArrayList<String>();

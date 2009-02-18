@@ -43,11 +43,14 @@ import fr.free.totalboumboum.gui.tools.GuiTools;
 
 public class PointsSubPanel extends TableSubPanel
 {	private static final long serialVersionUID = 1L;
+	private static final int LINES = 8;
+	private static final int COL_SUBS = 2;
+	private static final int COL_GROUPS = 1;
 	
 	private String prefix;
 
 	public PointsSubPanel(int width, int height, String type)
-	{	super(width,height,SubPanel.Mode.TITLE,1,1,1,false);
+	{	super(width,height,SubPanel.Mode.TITLE,LINES,COL_GROUPS,COL_SUBS,false);
 		
 		// init
 		this.prefix = GuiKeys.COMMON_POINTS+type;
@@ -76,11 +79,9 @@ public class PointsSubPanel extends TableSubPanel
 		if(pointsProcessor!=null)
 			makePointsProcessorPanel(pointsProcessor,data,tooltips);
 		
-		int lines = Math.max(8,data.size());
-		int colSubs = 2;
-		int colGroups = 1;
+		int lines = Math.max(LINES,data.size());
 
-		reinit(lines,colGroups,colSubs);
+		reinit(lines,COL_GROUPS,COL_SUBS);
 		setColSubMaxWidth(1,Integer.MAX_VALUE);
 
 		if(pointsProcessor==null)

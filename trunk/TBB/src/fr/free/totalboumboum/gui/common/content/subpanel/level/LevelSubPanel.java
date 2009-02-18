@@ -34,9 +34,12 @@ import fr.free.totalboumboum.tools.StringTools;
 
 public class LevelSubPanel extends TableSubPanel
 {	private static final long serialVersionUID = 1L;
+	private static final int LINES = 8;
+	private static final int COL_SUBS = 2;
+	private static final int COL_GROUPS = 1;
 	
 	public LevelSubPanel(int width, int height)
-	{	super(width,height,SubPanel.Mode.BORDER,1,1,1,true);
+	{	super(width,height,SubPanel.Mode.BORDER,LINES,COL_GROUPS,COL_SUBS,true);
 		
 		setLevelPreview(null,8);
 	}
@@ -45,7 +48,6 @@ public class LevelSubPanel extends TableSubPanel
 	// LEVEL			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	private LevelPreview levelPreview;
-	private int lines;
 	
 	public LevelPreview getLevelPreview()
 	{	return levelPreview;	
@@ -53,12 +55,8 @@ public class LevelSubPanel extends TableSubPanel
 	
 	public void setLevelPreview(LevelPreview levelPreview, int lines)
 	{	this.levelPreview = levelPreview;
-		this.lines = lines;
 		
 		// sizes
-//		int lines = 8;
-		int colSubs = 2;
-		int colGroups = 1;
 		if(showTitle)
 		{	setMode(Mode.TITLE);
 			String titleKey = GuiKeys.COMMON_LEVEL_TITLE;
@@ -66,7 +64,7 @@ public class LevelSubPanel extends TableSubPanel
 		}
 		else
 			setMode(Mode.BORDER);
-		reinit(lines,colGroups,colSubs);
+		reinit(lines,COL_GROUPS,COL_SUBS);
 		
 		// icons
 		ArrayList<String> keys = new ArrayList<String>();
@@ -176,7 +174,7 @@ public class LevelSubPanel extends TableSubPanel
 
 	public void setShowTitle(boolean showTitle)
 	{	this.showTitle = showTitle;
-		setLevelPreview(levelPreview,lines);
+		setLevelPreview(levelPreview,getLineCount());
 	}
 
 	public void setShowPack(boolean showPack)
