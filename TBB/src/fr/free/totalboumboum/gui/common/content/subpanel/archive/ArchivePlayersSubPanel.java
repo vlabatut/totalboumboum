@@ -33,9 +33,12 @@ import fr.free.totalboumboum.gui.tools.GuiTools;
 
 public class ArchivePlayersSubPanel extends TableSubPanel
 {	private static final long serialVersionUID = 1L;
+	private static final int COL_SUBS = 1;
+	private static final int COL_GROUPS = 1;
+	private static final int LINES = GameConstants.MAX_PROFILES_COUNT;
 	
 	public ArchivePlayersSubPanel(int width, int height)
-	{	super(width,height,SubPanel.Mode.BORDER,1,1,1,true);
+	{	super(width,height,SubPanel.Mode.BORDER,LINES,COL_GROUPS,COL_SUBS,true);
 		setGameArchive(null);
 	}
 		
@@ -52,10 +55,7 @@ public class ArchivePlayersSubPanel extends TableSubPanel
 	{	this.gameArchive = gameArchive;
 		
 		// sizes
-		int colSubs = 1;
-		int colGroups = 1;
-		int lines = GameConstants.MAX_PROFILES_COUNT;
-		reinit(colGroups,colSubs,lines);
+		reinit(LINES,COL_GROUPS,COL_SUBS);
 		
 		// header
 		int line = 0;
@@ -72,7 +72,7 @@ public class ArchivePlayersSubPanel extends TableSubPanel
 			ArrayList<String> textValues = gameArchive.getPlayers();
 			ArrayList<String> tooltipValues = textValues;
 			// content
-			while(line<lines && (line-1)<textValues.size())
+			while(line<LINES && (line-1)<textValues.size())
 			{	String text = textValues.get(line-1);
 				String tooltip = tooltipValues.get(line-1);
 				setLabelText(line,0,text,tooltip);
@@ -85,7 +85,7 @@ public class ArchivePlayersSubPanel extends TableSubPanel
 		}
 		
 		// empty lines
-		while(line<lines)
+		while(line<LINES)
 		{	String text = null;
 			String tooltip = null;
 			setLabelText(line,0,text,tooltip);

@@ -45,9 +45,10 @@ import fr.free.totalboumboum.gui.tools.GuiTools;
 
 public class PackBrowserSubPanel extends TableSubPanel implements MouseListener, FolderBrowserSubPanelListener
 {	private static final long serialVersionUID = 1L;
+	private static final int LINES = 20;
 
 	public PackBrowserSubPanel(int width, int height)
-	{	super(width,height,SubPanel.Mode.BORDER,1,1,1,false);
+	{	super(width,height,SubPanel.Mode.BORDER,LINES,1,1,false);
 		
 		// pages
 		setFolder(null,new ArrayList<String>());
@@ -58,7 +59,6 @@ public class PackBrowserSubPanel extends TableSubPanel implements MouseListener,
 	/////////////////////////////////////////////////////////////////
 	private String baseFolder;
 	private ArrayList<String> targetFiles;
-	private int lines;
 	private int linePrevious;
 	private int lineNext;
 	private int controlTotalCount;
@@ -94,9 +94,8 @@ public class PackBrowserSubPanel extends TableSubPanel implements MouseListener,
 		selectedName = null;
 		
 		// size
-		lines = 20;
 		linePrevious = 0;
-		lineNext = lines-1;
+		lineNext = LINES-1;
 		controlUpCount = 1;
 		controlTotalCount = controlUpCount+1;
 		int cols = 1;
@@ -106,15 +105,15 @@ public class PackBrowserSubPanel extends TableSubPanel implements MouseListener,
 		pageCount = getPageCount();
 		
 		for(int panelIndex=0;panelIndex<pageCount;panelIndex++)
-		{	TableContentPanel listPanel = new TableContentPanel(getDataWidth(),getDataHeight(),cols,lines,false);
+		{	TableContentPanel listPanel = new TableContentPanel(getDataWidth(),getDataHeight(),cols,LINES,false);
 			listPanel.setColSubMinWidth(0,textMaxWidth);
 			listPanel.setColSubPrefWidth(0,textMaxWidth);
 			listPanel.setColSubMaxWidth(0,textMaxWidth);
 		
 			// data
 			int line = controlUpCount;
-			int nameIndex = panelIndex*(lines-controlTotalCount);
-			while(line<lines && nameIndex<names.size())
+			int nameIndex = panelIndex*(LINES-controlTotalCount);
+			while(line<LINES && nameIndex<names.size())
 			{	Color bg = GuiTools.COLOR_TABLE_REGULAR_BACKGROUND;
 				String name = names.get(nameIndex);
 				listPanel.setLabelBackground(line,0,bg);
@@ -195,8 +194,8 @@ public class PackBrowserSubPanel extends TableSubPanel implements MouseListener,
 	}
 	
 	private int getPageCount()
-	{	int result = names.size()/(lines-controlTotalCount);
-		if(names.size()%(lines-controlTotalCount)>0)
+	{	int result = names.size()/(LINES-controlTotalCount);
+		if(names.size()%(LINES-controlTotalCount)>0)
 			result++;
 		else if(result==0)
 			result = 1;
@@ -225,7 +224,7 @@ public class PackBrowserSubPanel extends TableSubPanel implements MouseListener,
 		}
 		else
 		{	filePanel = new FolderBrowserSubPanel(getWidth(),getHeight());
-			int selectedIndex = (row-controlUpCount)+currentPage*(lines-controlTotalCount);
+			int selectedIndex = (row-controlUpCount)+currentPage*(LINES-controlTotalCount);
 			selectedName = names.get(selectedIndex);
 			String bFolder = baseFolder+File.separator+selectedName;
 			filePanel.setFolder(bFolder,targetFiles);

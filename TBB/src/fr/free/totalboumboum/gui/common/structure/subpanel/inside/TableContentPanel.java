@@ -43,26 +43,43 @@ public class TableContentPanel extends LinesContentPanel
 		
 		this.colGroups = colGroups;
 		this.colSubs = colSubs;
+		
+		for(int i=0;i<colSubs;i++)
+		{	minWidths.add(null);
+			prefWidths.add(null);
+			maxWidths.add(null);
+		}
 	}
 	
 	public void reinit(int lines,int colGroups, int colSubs)
 	{	super.reinit(lines,colGroups*colSubs);
+		minWidths.clear();
+		prefWidths.clear();
+		maxWidths.clear();
+		for(int i=0;i<colSubs;i++)
+		{	minWidths.add(null);
+			prefWidths.add(null);
+			maxWidths.add(null);
+		}
 	}
 
 	/////////////////////////////////////////////////////////////////
 	// COLUMNS			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
+	private ArrayList<Integer> minWidths = new ArrayList<Integer>();
+	private ArrayList<Integer> prefWidths = new ArrayList<Integer>();
+	private ArrayList<Integer> maxWidths = new ArrayList<Integer>();
 	private int colGroups;
 	private int colSubs;
 	
 	public void setColSubMinWidth(int colSub, int width)
-	{	setColSubWidth(colSub,width,0);		
+	{	setColSubWidth(colSub,width,0);
 	}
 	public void setColSubPrefWidth(int colSub, int width)
-	{	setColSubWidth(colSub,width,1);		
+	{	setColSubWidth(colSub,width,1);
 	}
 	public void setColSubMaxWidth(int colSub, int width)
-	{	setColSubWidth(colSub,width,2);		
+	{	setColSubWidth(colSub,width,2);
 	}
 	public void setColSubWidth(int colSub, int width, int mode)
 	{	int start = 0;
@@ -74,6 +91,17 @@ public class TableContentPanel extends LinesContentPanel
 			}
 			for(int line=start;line<getLineCount();line++)
 				setLabelWidth(line,col,getLineHeight(),mode);
+		}
+		switch(mode)
+		{	case 0:
+				minWidths.set(colSub,width);
+				break;
+			case 1:
+				prefWidths.set(colSub,width);
+				break;
+			case 2:
+				maxWidths.set(colSub,width);
+				break;
 		}
 	}	
 
@@ -96,6 +124,17 @@ public class TableContentPanel extends LinesContentPanel
 			}
 			for(int line=start;line<getLineCount();line++)
 				unsetLabelWidth(line,col,mode);
+		}
+		switch(mode)
+		{	case 0:
+				minWidths.set(colSub,null);
+				break;
+			case 1:
+				prefWidths.set(colSub,null);
+				break;
+			case 2:
+				maxWidths.set(colSub,null);
+				break;
 		}
 	}	
 
@@ -131,33 +170,46 @@ public class TableContentPanel extends LinesContentPanel
 	
 		// header
 		if(hasHeader())
-		{	start = 1;
-			for(int grp=0;grp<colGroups;grp++)
+		{	for(int grp=0;grp<colGroups;grp++)
 			{	int index = subIndex+grp*colSubs;
+				addLabel(start,index);
+				JLabel lbl = getLabel(start,index);
 				String txt = null;
-				JLabel lbl = new JLabel(txt);
+				lbl.setText(txt);
 				lbl.setFont(getHeaderFont());
 				lbl.setHorizontalAlignment(SwingConstants.CENTER);
 				lbl.setBackground(GuiTools.COLOR_TABLE_HEADER_BACKGROUND);
 				lbl.setForeground(GuiTools.COLOR_TABLE_HEADER_FOREGROUND);
 				lbl.setOpaque(true);
-				add(lbl,index);
+				if(minWidths.get(subIndex)!=null)
+					setLabelMinWidth(start,index,minWidths.get(subIndex));
+				if(prefWidths.get(subIndex)!=null)
+					setLabelPrefWidth(start,index,prefWidths.get(subIndex));
+				if(maxWidths.get(subIndex)!=null)
+					setLabelMaxWidth(start,index,maxWidths.get(subIndex));
 			}
+			start = 1;
 		}
 		
 		//data
 		for(int line=start;line<getLineCount();line++)
 		{	for(int grp=0;grp<colGroups;grp++)
 			{	int index = subIndex+grp*colSubs;
+				addLabel(line,index);
+				JLabel lbl = getLabel(line,index);
 				String txt = null;
-				JLabel lbl = new JLabel(txt);
+				lbl.setText(txt);
 				lbl.setFont(getLineFont());
 				lbl.setHorizontalAlignment(SwingConstants.CENTER);
 				lbl.setBackground(GuiTools.COLOR_TABLE_NEUTRAL_BACKGROUND);
 				lbl.setForeground(GuiTools.COLOR_TABLE_REGULAR_FOREGROUND);
 				lbl.setOpaque(true);
-				int idx = index+line*getColumnCount();
-				add(lbl,idx);
+				if(minWidths.get(subIndex)!=null)
+					setLabelMinWidth(line,index,minWidths.get(subIndex));
+				if(prefWidths.get(subIndex)!=null)
+					setLabelPrefWidth(line,index,prefWidths.get(subIndex));
+				if(maxWidths.get(subIndex)!=null)
+					setLabelMaxWidth(line,index,maxWidths.get(subIndex));
 			}
 		}
 	}
@@ -165,36 +217,49 @@ public class TableContentPanel extends LinesContentPanel
 	public void addColGroup(int groupIndex)
 	{	colGroups++;
 		int start = 0;
-	
+		
 		// header
 		if(hasHeader())
-		{	start = 1;
-			for(int sub=0;sub<colSubs;sub++)
+		{	for(int sub=0;sub<colSubs;sub++)
 			{	int index = sub+groupIndex*colSubs;
+				addLabel(start,index);
+				JLabel lbl = getLabel(start,index);
 				String txt = null;
-				JLabel lbl = new JLabel(txt);
+				lbl.setText(txt);
 				lbl.setFont(getHeaderFont());
 				lbl.setHorizontalAlignment(SwingConstants.CENTER);
 				lbl.setBackground(GuiTools.COLOR_TABLE_HEADER_BACKGROUND);
 				lbl.setForeground(GuiTools.COLOR_TABLE_HEADER_FOREGROUND);
 				lbl.setOpaque(true);
-				add(lbl,index);
+				if(minWidths.get(sub)!=null)
+					setLabelMinWidth(0,index,minWidths.get(sub));
+				if(prefWidths.get(sub)!=null)
+					setLabelPrefWidth(0,index,prefWidths.get(sub));
+				if(maxWidths.get(sub)!=null)
+					setLabelMaxWidth(0,index,maxWidths.get(sub));
 			}
+			start = 1;	
 		}
 		
 		//data
 		for(int line=start;line<getLineCount();line++)
 		{	for(int sub=0;sub<colSubs;sub++)
 			{	int index = sub+groupIndex*colSubs;
+				addLabel(line,index);
+				JLabel lbl = getLabel(line,index);
 				String txt = null;
-				JLabel lbl = new JLabel(txt);
+				lbl.setText(txt);
 				lbl.setFont(getLineFont());
 				lbl.setHorizontalAlignment(SwingConstants.CENTER);
 				lbl.setBackground(GuiTools.COLOR_TABLE_NEUTRAL_BACKGROUND);
 				lbl.setForeground(GuiTools.COLOR_TABLE_REGULAR_FOREGROUND);
 				lbl.setOpaque(true);
-				int idx = index+line*getColumnCount();
-				add(lbl,idx);
+				if(minWidths.get(sub)!=null)
+					setLabelMinWidth(line,index,minWidths.get(sub));
+				if(prefWidths.get(sub)!=null)
+					setLabelPrefWidth(line,index,prefWidths.get(sub));
+				if(maxWidths.get(sub)!=null)
+					setLabelMaxWidth(line,index,maxWidths.get(sub));
 			}
 		}
 	}

@@ -163,7 +163,10 @@ public class LinesContentPanel extends ContentPanel
 	private int lines = 0;
 
 	public Line getLine(int line)
-	{	return (Line)getComponent(line*2);		
+	{	
+if(line==6)		
+		System.out.println();
+		return (Line)getComponent(line*2);		
 	}
 
 	public int getLineCount()
@@ -264,6 +267,12 @@ public class LinesContentPanel extends ContentPanel
 	public void addLabel(int line, int col)
 	{	Line l = getLine(line);
 		l.addLabel(col);
+		Font font;
+		if(line==0 && header)
+			font = headerFont;
+		else
+			font = lineFont;
+		l.getLabel(col).setFont(font);
 	}
 
 	public void setLabelKey(int line, int col, String key, boolean imageFlag)

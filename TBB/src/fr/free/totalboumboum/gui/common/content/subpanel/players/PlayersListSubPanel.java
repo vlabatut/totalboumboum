@@ -43,12 +43,14 @@ import fr.free.totalboumboum.gui.tools.GuiTools;
 
 public class PlayersListSubPanel extends TableSubPanel implements MouseListener
 {	private static final long serialVersionUID = 1L;
+	private static final int LINES = 16+1;
+	private static final int COLS = 4;
 	
 	private ArrayList<String> controlTexts;
 	private ArrayList<String> controlTooltips;
 
 	public PlayersListSubPanel(int width, int height)
-	{	super(width,height,SubPanel.Mode.BORDER,1,1,1,true);
+	{	super(width,height,SubPanel.Mode.BORDER,LINES,1,COLS,true);
 		
 		setPlayers(null);
 	}
@@ -68,12 +70,11 @@ public class PlayersListSubPanel extends TableSubPanel implements MouseListener
 		this.players = players;
 
 		// sizes
-		int lines = 16+1;
-		int cols = 4;
+		int cols = COLS;
 		if(showControls)
 			cols++;
 
-		reinit(cols,lines);
+		reinit(LINES,cols);
 		
 		controlTexts = new ArrayList<String>();
 		controlTooltips = new ArrayList<String>();

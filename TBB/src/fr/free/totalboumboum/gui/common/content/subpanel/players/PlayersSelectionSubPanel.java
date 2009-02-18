@@ -46,9 +46,11 @@ import fr.free.totalboumboum.gui.tools.GuiTools;
 
 public class PlayersSelectionSubPanel extends TableSubPanel implements MouseListener
 {	private static final long serialVersionUID = 1L;
+	private static final int LINES = 16+1;
+	private static final int COLS = 6;
 
 	public PlayersSelectionSubPanel(int width, int height)
-	{	super(width,height,SubPanel.Mode.BORDER,1,1,1,true);
+	{	super(width,height,SubPanel.Mode.BORDER,LINES,1,COLS,true);
 		
 		// limits
 		setPlayers(null);
@@ -79,9 +81,7 @@ public class PlayersSelectionSubPanel extends TableSubPanel implements MouseList
 		colorBackgrounds = new ArrayList<Color>();
 
 		// sizes
-		cols = 6;
-		lines = 16+1;
-		reinit(cols,lines);
+		reinit(LINES,COLS);
 		int headerHeight = getHeaderHeight();
 		int lineHeight = getLineHeight();
 		int deleteWidth = lineHeight;
@@ -89,7 +89,7 @@ public class PlayersSelectionSubPanel extends TableSubPanel implements MouseList
 		int colorWidth = GuiStringTools.initColorTexts(getLineFontSize(),colorTexts,colorTooltips,colorBackgrounds);
 		int typeWidth = headerHeight;
 		int heroWidth = headerHeight;
-		int fixedSum = GuiTools.subPanelMargin*(cols+1) + deleteWidth + heroWidth + controlWidth + colorWidth + typeWidth;
+		int fixedSum = GuiTools.subPanelMargin*(COLS+1) + deleteWidth + heroWidth + controlWidth + colorWidth + typeWidth;
 		int nameWidth = getDataWidth() - fixedSum;
 		
 		// headers
@@ -122,8 +122,8 @@ public class PlayersSelectionSubPanel extends TableSubPanel implements MouseList
 		}
 		
 		// data
-		for(int line=1;line<lines;line++)
-		{	for(int col=0;col<cols;col++)
+		for(int line=1;line<LINES;line++)
+		{	for(int col=0;col<COLS;col++)
 			{	Color bg = GuiTools.COLOR_TABLE_NEUTRAL_BACKGROUND;
 				setLabelBackground(line,col,bg);
 			}
@@ -218,8 +218,8 @@ public class PlayersSelectionSubPanel extends TableSubPanel implements MouseList
 			}
 		}
 		// if there's no player on this line
-		else if(line<lines)
-		{	for(int col=0;col<cols;col++)
+		else if(line<LINES)
+		{	for(int col=0;col<COLS;col++)
 			{	JLabel lbl = getLabel(line,col);
 				lbl.setText(null);
 				lbl.setToolTipText(null);
@@ -242,7 +242,7 @@ public class PlayersSelectionSubPanel extends TableSubPanel implements MouseList
 	}
 	
 	public void refresh()
-	{	for(int line=1;line<lines;line++)
+	{	for(int line=1;line<LINES;line++)
 			refreshPlayer(line);
 	}
 
@@ -269,9 +269,6 @@ public class PlayersSelectionSubPanel extends TableSubPanel implements MouseList
 	/////////////////////////////////////////////////////////////////
 	// DISPLAY	/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	// sizes
-	private int cols = 6;
-	private int lines = 16+1;
 	// controls
 	private ArrayList<String> controlTexts;
 	private ArrayList<String> controlTooltips;

@@ -43,9 +43,10 @@ import fr.free.totalboumboum.gui.tools.GuiTools;
 
 public class FileBrowserSubPanel extends TableSubPanel implements MouseListener
 {	private static final long serialVersionUID = 1L;
+	private static final int LINES = 20;
 
 	public FileBrowserSubPanel(int width, int height)
-	{	super(width,height,SubPanel.Mode.BORDER,1,1,1,false);
+	{	super(width,height,SubPanel.Mode.BORDER,LINES,1,1,false);
 		
 		// pages
 		setFileNames(null);
@@ -56,7 +57,6 @@ public class FileBrowserSubPanel extends TableSubPanel implements MouseListener
 	/////////////////////////////////////////////////////////////////
 	private HashMap<String,String> fileNames;
 	ArrayList<Entry<String,String>> names;
-	private int lines;
 	private int linePrevious;
 	private int lineParent;
 	private int lineNext;
@@ -81,10 +81,9 @@ public class FileBrowserSubPanel extends TableSubPanel implements MouseListener
 		selectedRow = -1; fireFileBrowserSelectionChanged();
 		
 		// size
-		lines = 20;
 		linePrevious = 0;
 		lineParent = 1;
-		lineNext = lines-1;
+		lineNext = LINES-1;
 		controlUpCount = 1;
 		if(showParent)
 			controlUpCount = 2;
@@ -96,15 +95,15 @@ public class FileBrowserSubPanel extends TableSubPanel implements MouseListener
 		int textMaxWidth = getDataWidth() - 2*GuiTools.subPanelMargin;
 		
 		for(int panelIndex=0;panelIndex<pageCount;panelIndex++)
-		{	TableContentPanel listPanel = new TableContentPanel(getDataWidth(),getDataHeight(),cols,lines,false);
+		{	TableContentPanel listPanel = new TableContentPanel(getDataWidth(),getDataHeight(),cols,LINES,false);
 			listPanel.setColSubMinWidth(0,textMaxWidth);
 			listPanel.setColSubPrefWidth(0,textMaxWidth);
 			listPanel.setColSubMaxWidth(0,textMaxWidth);
 			
 			// data
 			int line = controlUpCount;
-			int nameIndex = panelIndex*(lines-controlTotalCount);
-			while(line<lines && nameIndex<names.size())
+			int nameIndex = panelIndex*(LINES-controlTotalCount);
+			while(line<LINES && nameIndex<names.size())
 			{	Color bg = GuiTools.COLOR_TABLE_REGULAR_BACKGROUND;
 				Entry<String,String> entry = names.get(nameIndex);
 				String name = entry.getValue();
@@ -162,8 +161,8 @@ public class FileBrowserSubPanel extends TableSubPanel implements MouseListener
 	}
 	
 	private int getPageCount()
-	{	int result = names.size()/(lines-controlTotalCount);
-		if(names.size()%(lines-controlTotalCount)>0)
+	{	int result = names.size()/(LINES-controlTotalCount);
+		if(names.size()%(LINES-controlTotalCount)>0)
 			result++;
 		else if(result==0)
 			result = 1;
@@ -173,7 +172,7 @@ public class FileBrowserSubPanel extends TableSubPanel implements MouseListener
 	public String getSelectedFileName()
 	{	String result = null;
 		if(selectedRow!=-1)
-		{	int selectedIndex = (selectedRow-controlUpCount)+currentPage*(lines-controlTotalCount);
+		{	int selectedIndex = (selectedRow-controlUpCount)+currentPage*(LINES-controlTotalCount);
 			Entry<String,String> entry = names.get(selectedIndex);
 			result = entry.getKey();		
 		}
@@ -192,9 +191,9 @@ public class FileBrowserSubPanel extends TableSubPanel implements MouseListener
 				index++;
 		}
 		if(found)
-		{	currentPage = index/(lines-controlTotalCount);
+		{	currentPage = index/(LINES-controlTotalCount);
 			refreshList();
-			int row = index%(lines-controlTotalCount)+controlUpCount;
+			int row = index%(LINES-controlTotalCount)+controlUpCount;
 			selectName(row);
 		}
 	}

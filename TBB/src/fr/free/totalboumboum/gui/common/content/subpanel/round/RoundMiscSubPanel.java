@@ -34,9 +34,12 @@ import fr.free.totalboumboum.tools.StringTools;
 
 public class RoundMiscSubPanel extends TableSubPanel
 {	private static final long serialVersionUID = 1L;
+	private static final int LINES = 5;
+	private static final int COL_SUBS = 2;
+	private static final int COL_GROUPS = 1;
 	
 	public RoundMiscSubPanel(int width, int height)
-	{	super(width,height,SubPanel.Mode.BORDER,1,1,1,true);
+	{	super(width,height,SubPanel.Mode.BORDER,LINES,COL_GROUPS,COL_SUBS,true);
 		
 		setRound(null);
 	}
@@ -54,10 +57,7 @@ public class RoundMiscSubPanel extends TableSubPanel
 	{	this.round = round;
 		
 		// sizes
-		int lines = 5;
-		int colSubs = 2;
-		int colGroups = 1;
-		reinit(colGroups,colSubs,lines);
+		reinit(LINES,COL_GROUPS,COL_SUBS);
 		
 		// icons
 		ArrayList<String> keys = new ArrayList<String>();

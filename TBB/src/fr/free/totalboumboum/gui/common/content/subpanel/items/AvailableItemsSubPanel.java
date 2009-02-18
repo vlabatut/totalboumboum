@@ -41,9 +41,12 @@ import fr.free.totalboumboum.tools.ImageTools;
 
 public class AvailableItemsSubPanel extends TableSubPanel
 {	private static final long serialVersionUID = 1L;
+	private static final int LINES = 4;
+	private static final int COL_SUBS = 2;
+	private static final int COL_GROUPS = 5;
 
 	public AvailableItemsSubPanel(int width, int height)
-	{	super(width,height,SubPanel.Mode.TITLE,1,1,1,false);
+	{	super(width,height,SubPanel.Mode.TITLE,LINES,COL_GROUPS,COL_SUBS,false);
 		// title
 		String titleKey = GuiKeys.COMMON_ITEMS_AVAILABLE_TITLE;
 		setTitleKey(titleKey,true);
@@ -58,24 +61,21 @@ public class AvailableItemsSubPanel extends TableSubPanel
 	public void setLevel(LevelPreview levelPreview, HollowLevel hollowLevel)
 	{	this.levelPreview = levelPreview;
 		this.hollowLevel = hollowLevel;
-	
-		// init
-		int lines = 4;
-		int colSubs = 2;
-		int colGroups = 5;
+		int lines = LINES;
+		int colGroups = COL_GROUPS;
 		
 		if(levelPreview!=null)
 		{	if(levelPreview.getItemsetPreview().size()>lines*colGroups)
 			{	lines = 5;
 				colGroups = 6;
 			}
-			reinit(lines,colGroups,colSubs);
+			reinit(lines,colGroups,COL_SUBS);
 			int lineHeight = getLineHeight();
 			int iconWidth = lineHeight;
 			setColSubMinWidth(0,lineHeight);
 			setColSubPrefWidth(0,lineHeight);
 			setColSubMaxWidth(0,lineHeight);
-			int textWidth = (getDataWidth() - (iconWidth*colGroups+GuiTools.subPanelMargin*(colSubs*colGroups+1)))/colGroups;
+			int textWidth = (getDataWidth() - (iconWidth*colGroups+GuiTools.subPanelMargin*(COL_SUBS*colGroups+1)))/colGroups;
 			setColSubMinWidth(1,textWidth);
 			setColSubPrefWidth(1,textWidth);
 			setColSubMaxWidth(1,textWidth);			
@@ -129,7 +129,7 @@ public class AvailableItemsSubPanel extends TableSubPanel
 		}
 		else
 		{	//table
-			reinit(lines,colGroups,colSubs);
+			reinit(lines,colGroups,COL_SUBS);
 			// widths
 			int lineHeight = getLineHeight();
 			setColSubMinWidth(0,lineHeight);
