@@ -116,8 +116,8 @@ public class HeroEventManager extends EventManager
 				{	Hero temp = (Hero)spr;
 					explosedBy = temp.getPlayer().getFileName();
 				}
-if(explosedBy==null)
-	System.out.println();
+//if(explosedBy==null)
+//	System.out.println();
 			}
 			// stats
 			StatisticAction statAction = StatisticAction.BOMB_PLAYER;

@@ -293,8 +293,8 @@ result = level.getTile(x, y)==this;
 	public void drawItem(Graphics g, boolean flat, boolean onGround, boolean shadow)
 	{	if(item!=null)
 		{	
-if(fires.size()>0)
-	System.out.println();
+//if(fires.size()>0)
+//	System.out.println();
 			AbstractAbility temp = item.getAbility(StateAbility.SPRITE_FLAT);
 			if(item!=null && ((temp!=null && temp.isActive()) == flat) && (item.isOnGround() == onGround))
 				if(shadow)
