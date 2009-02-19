@@ -164,8 +164,8 @@ public class LinesContentPanel extends ContentPanel
 
 	public Line getLine(int line)
 	{	
-if(line==6)		
-		System.out.println();
+if(line>=getComponentCount())		
+	System.out.println();
 		return (Line)getComponent(line*2);		
 	}
 

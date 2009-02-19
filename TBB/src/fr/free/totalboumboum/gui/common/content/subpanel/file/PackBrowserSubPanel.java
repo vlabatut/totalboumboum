@@ -105,7 +105,7 @@ public class PackBrowserSubPanel extends TableSubPanel implements MouseListener,
 		pageCount = getPageCount();
 		
 		for(int panelIndex=0;panelIndex<pageCount;panelIndex++)
-		{	TableContentPanel listPanel = new TableContentPanel(getDataWidth(),getDataHeight(),cols,LINES,false);
+		{	TableContentPanel listPanel = new TableContentPanel(getDataWidth(),getDataHeight(),LINES,cols,false);
 			listPanel.setColSubMinWidth(0,textMaxWidth);
 			listPanel.setColSubPrefWidth(0,textMaxWidth);
 			listPanel.setColSubMaxWidth(0,textMaxWidth);
