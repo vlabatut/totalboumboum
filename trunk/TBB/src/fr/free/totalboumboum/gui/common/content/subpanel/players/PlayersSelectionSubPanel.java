@@ -89,7 +89,7 @@ public class PlayersSelectionSubPanel extends TableSubPanel implements MouseList
 		int colorWidth = GuiStringTools.initColorTexts(getLineFontSize(),colorTexts,colorTooltips,colorBackgrounds);
 		int typeWidth = headerHeight;
 		int heroWidth = headerHeight;
-		int fixedSum = GuiTools.subPanelMargin*(COLS+1) + deleteWidth + heroWidth + controlWidth + colorWidth + typeWidth;
+		int fixedSum = GuiTools.subPanelMargin*(COLS-1) + deleteWidth + heroWidth + controlWidth + colorWidth + typeWidth;
 		int nameWidth = getDataWidth() - fixedSum;
 		
 		// headers

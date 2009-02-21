@@ -105,7 +105,7 @@ public class Line extends ContentPanel
 	}
 	
 	/////////////////////////////////////////////////////////////////
-	// CONTENT				/////////////////////////////////////////////
+	// CONTENT			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	public void setKeys(ArrayList<String> keys, ArrayList<Boolean> imageFlags)
 	{	Iterator<String> lineKeys = keys.iterator();
@@ -164,9 +164,11 @@ public class Line extends ContentPanel
 	public void addLabel(int col)
 	{	// separator
 		if(col>0)
-			add(Box.createRigidArea(new Dimension(GuiTools.subPanelMargin,GuiTools.subPanelMargin)),2*col-1);
+			add(Box.createGlue(),2*col-1);
+//			add(Box.createRigidArea(new Dimension(GuiTools.subPanelMargin,GuiTools.subPanelMargin)),2*col-1);
 		else if(columns>0)
-			add(Box.createRigidArea(new Dimension(GuiTools.subPanelMargin,GuiTools.subPanelMargin)),2*col);
+			add(Box.createGlue(),2*col);
+//			add(Box.createRigidArea(new Dimension(GuiTools.subPanelMargin,GuiTools.subPanelMargin)),2*col);
 		// new label
 		String txt = null;
 		JLabel lbl = new JLabel(txt);

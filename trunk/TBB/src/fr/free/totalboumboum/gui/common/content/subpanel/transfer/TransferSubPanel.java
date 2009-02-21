@@ -93,6 +93,12 @@ public class TransferSubPanel extends TableSubPanel implements MouseListener
 				col++;
 			}
 		}
+
+		// col widths
+		int iconWidth = getLineHeight();
+		setColSubMinWidth(0,iconWidth);
+		setColSubPrefWidth(0,iconWidth);
+		setColSubMaxWidth(0,iconWidth);
 	}
 	
 	/////////////////////////////////////////////////////////////////

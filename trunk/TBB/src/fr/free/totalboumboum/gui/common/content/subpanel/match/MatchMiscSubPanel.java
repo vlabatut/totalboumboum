@@ -131,9 +131,15 @@ public class MatchMiscSubPanel extends TableSubPanel
 			}
 		}
 		
-		int maxWidth = getDataWidth()-3*GuiTools.subPanelMargin-getHeaderHeight();
-		setColSubMaxWidth(1,maxWidth);
+		// col widths
+		int iconWidth = getHeaderHeight();
+		setColSubMinWidth(0,iconWidth);
+		setColSubPrefWidth(0,iconWidth);
+		setColSubMaxWidth(0,iconWidth);
+		int maxWidth = getDataWidth()-(COL_SUBS-1)*GuiTools.subPanelMargin-iconWidth;
+		setColSubMinWidth(1,maxWidth);
 		setColSubPrefWidth(1,maxWidth);
+		setColSubMaxWidth(1,maxWidth);
 	}
 	
 	/////////////////////////////////////////////////////////////////

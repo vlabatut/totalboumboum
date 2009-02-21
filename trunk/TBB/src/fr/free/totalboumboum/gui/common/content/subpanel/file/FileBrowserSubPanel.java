@@ -92,7 +92,8 @@ public class FileBrowserSubPanel extends TableSubPanel implements MouseListener
 		
 		initNames();
 		pageCount = getPageCount();
-		int textMaxWidth = getDataWidth() - 2*GuiTools.subPanelMargin;
+//		int textMaxWidth = getDataWidth() - 2*GuiTools.subPanelMargin;
+		int textMaxWidth = getDataWidth();
 		
 		for(int panelIndex=0;panelIndex<pageCount;panelIndex++)
 		{	TableContentPanel listPanel = new TableContentPanel(getDataWidth(),getDataHeight(),LINES,cols,false);
