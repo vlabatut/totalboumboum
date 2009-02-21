@@ -82,15 +82,13 @@ public class TableContentPanel extends LinesContentPanel
 	{	setColSubWidth(colSub,width,2);
 	}
 	public void setColSubWidth(int colSub, int width, int mode)
-	{	int start = 0;
-		for(int colGroup=0;colGroup<colGroups;colGroup++)
+	{	for(int colGroup=0;colGroup<colGroups;colGroup++)
 		{	int col = colGroup*colSubs + colSub;
-			if(hasHeader())
-			{	setLabelWidth(start,col,getHeaderHeight(),mode);
+			int start = 0;
+			if(!hasHeader())
 				start = 1;
-			}
 			for(int line=start;line<getLineCount();line++)
-				setLabelWidth(line,col,getLineHeight(),mode);
+				setLabelWidth(line,col,width,mode);
 		}
 		switch(mode)
 		{	case 0:

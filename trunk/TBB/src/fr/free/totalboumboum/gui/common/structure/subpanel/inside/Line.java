@@ -69,6 +69,31 @@ public class Line extends ContentPanel
 		updateLabelsHeights();
 	}
 	
+	private void updateLabelsHeights()
+	{	for(int col=0;col<columns;col++)
+		{	JLabel lbl = getLabel(col);
+			lbl.setFont(lineFont);
+			// minimum size
+			Dimension min = lbl.getMinimumSize();
+			if(min!=null)
+			{	Dimension dim = new Dimension(min.width,getHeight());
+				lbl.setMinimumSize(dim);
+			}
+			// preferred size
+			Dimension pref = lbl.getPreferredSize();
+			if(pref!=null)
+			{	Dimension dim = new Dimension(pref.width,getHeight());
+				lbl.setPreferredSize(dim);
+			}
+			// maximum size
+			Dimension max = lbl.getMaximumSize();
+			if(max!=null)
+			{	Dimension dim = new Dimension(max.width,getHeight());
+				lbl.setMaximumSize(dim);
+			}
+		}		
+	}
+	
 	/////////////////////////////////////////////////////////////////
 	// FONT				/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
@@ -79,6 +104,9 @@ public class Line extends ContentPanel
 	{	return lineFontSize;	
 	}
 	
+	/////////////////////////////////////////////////////////////////
+	// CONTENT				/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
 	public void setKeys(ArrayList<String> keys, ArrayList<Boolean> imageFlags)
 	{	Iterator<String> lineKeys = keys.iterator();
 		Iterator<Boolean> lineFlags = imageFlags.iterator();
@@ -269,31 +297,10 @@ public class Line extends ContentPanel
 		return result;
 	}
 	
+	/////////////////////////////////////////////////////////////////
+	// COLUMNS			/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
 	public int getColumnCount()
 	{	return columns;	
-	}
-	
-	private void updateLabelsHeights()
-	{	for(int col=0;col<columns;col++)
-		{	JLabel lbl = getLabel(col);
-			// minimum size
-			Dimension min = lbl.getMinimumSize();
-			if(min!=null)
-			{	Dimension dim = new Dimension(min.width,getHeight());
-				lbl.setMinimumSize(dim);
-			}
-			// preferred size
-			Dimension pref = lbl.getPreferredSize();
-			if(pref!=null)
-			{	Dimension dim = new Dimension(pref.width,getHeight());
-				lbl.setPreferredSize(dim);
-			}
-			// maximum size
-			Dimension max = lbl.getMaximumSize();
-			if(max!=null)
-			{	Dimension dim = new Dimension(max.width,getHeight());
-				lbl.setMaximumSize(dim);
-			}
-		}		
 	}
 }
