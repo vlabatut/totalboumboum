@@ -101,7 +101,8 @@ public class FolderBrowserSubPanel extends TableSubPanel implements MouseListene
 			controlUpCount = 2;
 		controlTotalCount = controlUpCount+1;
 		int cols = 1;
-		int textMaxWidth = getDataWidth() - GuiTools.subPanelMargin*2;
+//		int textMaxWidth = getDataWidth() - GuiTools.subPanelMargin*2;
+		int textMaxWidth = getDataWidth();
 		
 		initNames();
 		pageCount = getPageCount();

@@ -61,17 +61,18 @@ public class InitialItemsSubPanel extends TableSubPanel
 		int lines = LINES;
 		int colGroups = COL_GROUPS;
 	
+		// widths
+		int lineHeight = getLineHeight();
+		int iconWidth = lineHeight;
+		int textWidth = (getDataWidth() - (iconWidth*colGroups+GuiTools.subPanelMargin*(COL_SUBS*colGroups-1)))/colGroups;
+		
 		if(levelPreview!=null)
 		{	if(levelPreview.getInitialItems().size()>lines*colGroups)
 			{	lines = 8;
 				colGroups = 4;
 			}
+			// table
 			reinit(lines,colGroups,COL_SUBS);
-			int lineHeight = getLineHeight();
-			setColSubMinWidth(0,lineHeight);
-			setColSubPrefWidth(0,lineHeight);
-			setColSubMaxWidth(0,lineHeight);
-			setColSubMaxWidth(1,Integer.MAX_VALUE);			
 			
 			// data
 			NumberFormat nf = NumberFormat.getInstance();
@@ -116,13 +117,15 @@ public class InitialItemsSubPanel extends TableSubPanel
 		else
 		{	//table
 			reinit(lines,colGroups,COL_SUBS);
-			// widths
-			int lineHeight = getLineHeight();
-			setColSubMinWidth(0,lineHeight);
-			setColSubPrefWidth(0,lineHeight);
-			setColSubMaxWidth(0,lineHeight);
-			setColSubMaxWidth(1,Integer.MAX_VALUE);			
 		}
+		
+		// widths
+		setColSubMinWidth(0,lineHeight);
+		setColSubPrefWidth(0,lineHeight);
+		setColSubMaxWidth(0,lineHeight);
+		setColSubMinWidth(1,textWidth);			
+		setColSubPrefWidth(1,textWidth);			
+		setColSubMaxWidth(1,textWidth);			
 	}
 	
 	public LevelPreview getLevelPreview()

@@ -25,6 +25,7 @@ import java.awt.Color;
 import java.awt.image.BufferedImage;
 import java.text.NumberFormat;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Iterator;
 
 import fr.free.totalboumboum.configuration.profile.Portraits;
@@ -147,12 +148,17 @@ public class ResultsSubPanel extends TableSubPanel
 				}
 			}
 			
-			// data
-			{	setColSubMaxWidth(1,Integer.MAX_VALUE);
-				int w = getHeaderHeight();
-				setColSubPrefWidth(1,w);
-			}
-	
+			// col widths
+			int headerHeight = getHeaderHeight();
+			int portraitWidth = headerHeight;
+			int nameWidth = headerHeight;
+			int scoresWidth[] = {headerHeight,headerHeight,headerHeight,headerHeight};
+			int timeWidth = headerHeight;
+			int confrontationsWidth[] = new int[confrontationsCount];
+			Arrays.fill(confrontationsWidth,headerHeight);
+			int totalWidth = headerHeight;
+			int pointsWidth = headerHeight;
+			
 			StatisticBase stats = statisticHolder.getStats();
 			ArrayList<StatisticBase> confrontationStats = stats.getConfrontationStats();
 			ArrayList<Profile> players = statisticHolder.getProfiles();
@@ -210,7 +216,10 @@ public class ResultsSubPanel extends TableSubPanel
 						setLabelText(line,col,text,tooltip);
 						int alpha = GuiTools.ALPHA_TABLE_REGULAR_BACKGROUND_LEVEL1;
 						Color bg = new Color(clr.getRed(),clr.getGreen(),clr.getBlue(),alpha);
-						setLabelBackground(line,col,bg);			
+						setLabelBackground(line,col,bg);
+						int temp = GuiTools.getPixelWidth(getLineFontSize(),text);
+						if(temp>scoresWidth[j])
+							scoresWidth[j] = temp;
 						col++;
 					}
 				}			
@@ -222,11 +231,15 @@ public class ResultsSubPanel extends TableSubPanel
 					int alpha = GuiTools.ALPHA_TABLE_REGULAR_BACKGROUND_LEVEL1;
 					Color bg = new Color(clr.getRed(),clr.getGreen(),clr.getBlue(),alpha);
 					setLabelBackground(line,col,bg);			
+					int temp = GuiTools.getPixelWidth(getLineFontSize(),text);
+					if(temp>timeWidth)
+						timeWidth = temp;
 					col++;
 				}
 				// confrontations
 				if(showConfrontations && !(statisticHolder instanceof Round))
 				{	Iterator<StatisticBase> r = confrontationStats.iterator();
+					int cfrt = 0;
 					while(r.hasNext())
 					{	StatisticBase statB = r.next();
 						float pts = statB.getPoints()[profileIndex];
@@ -239,6 +252,10 @@ public class ResultsSubPanel extends TableSubPanel
 						int alpha = GuiTools.ALPHA_TABLE_REGULAR_BACKGROUND_LEVEL2;
 						Color bg = new Color(clr.getRed(),clr.getGreen(),clr.getBlue(),alpha);
 						setLabelBackground(line,col,bg);			
+						int temp = GuiTools.getPixelWidth(getLineFontSize(),text);
+						if(temp>confrontationsWidth[cfrt])
+							confrontationsWidth[cfrt] = temp;
+						cfrt++;
 						col++;
 					}
 				}
@@ -254,6 +271,9 @@ public class ResultsSubPanel extends TableSubPanel
 					int alpha = GuiTools.ALPHA_TABLE_REGULAR_BACKGROUND_LEVEL3;
 					Color bg = new Color(clr.getRed(),clr.getGreen(),clr.getBlue(),alpha);
 					setLabelBackground(line,col,bg);			
+					int temp = GuiTools.getPixelWidth(getLineFontSize(),text);
+					if(temp>totalWidth)
+						totalWidth = temp;
 					col++;
 				}
 				// points
@@ -268,9 +288,70 @@ public class ResultsSubPanel extends TableSubPanel
 					int alpha = GuiTools.ALPHA_TABLE_REGULAR_BACKGROUND_LEVEL3;
 					Color bg = new Color(clr.getRed(),clr.getGreen(),clr.getBlue(),alpha);
 					setLabelBackground(line,col,bg);			
+					int temp = GuiTools.getPixelWidth(getLineFontSize(),text);
+					if(temp>pointsWidth)
+						pointsWidth = temp;
 					col++;;
 				}
-			}	
+			}
+			
+			// col widths
+			nameWidth = getDataWidth() - (cols-1)*GuiTools.subPanelMargin;
+			col = 0;
+			if(showPortrait) 
+			{	setColSubMinWidth(col,portraitWidth);
+				setColSubPrefWidth(col,portraitWidth);
+				setColSubMaxWidth(col,portraitWidth);
+				nameWidth = nameWidth - portraitWidth;
+				col++;
+			}
+			int colName = col;
+			if(showName) 
+				col++;
+			if(showScores) 
+			{	for(int i=0;i<scoresWidth.length;i++)
+				{	setColSubMinWidth(col,scoresWidth[i]);
+					setColSubPrefWidth(col,scoresWidth[i]);
+					setColSubMaxWidth(col,scoresWidth[i]);
+					nameWidth = nameWidth - scoresWidth[i];
+					col++;
+				}
+			}
+			if(showTime) 
+			{	setColSubMinWidth(col,timeWidth);
+				setColSubPrefWidth(col,timeWidth);
+				setColSubMaxWidth(col,timeWidth);
+				nameWidth = nameWidth - timeWidth;
+				col++;
+			}
+			if(showConfrontations && !(statisticHolder instanceof Round))
+			{	for(int i=0;i<confrontationsWidth.length;i++)
+				{	setColSubMinWidth(col,confrontationsWidth[i]);
+					setColSubPrefWidth(col,confrontationsWidth[i]);
+					setColSubMaxWidth(col,confrontationsWidth[i]);
+					nameWidth = nameWidth - confrontationsWidth[i];
+					col++;
+				}
+			}
+			if(showTotal && !(statisticHolder instanceof Round))
+			{	setColSubMinWidth(col,totalWidth);
+				setColSubPrefWidth(col,totalWidth);
+				setColSubMaxWidth(col,totalWidth);
+				nameWidth = nameWidth - totalWidth;
+				col++;
+			}
+			if(showPoints) 
+			{	setColSubMinWidth(col,pointsWidth);
+				setColSubPrefWidth(col,pointsWidth);
+				setColSubMaxWidth(col,pointsWidth);
+				nameWidth = nameWidth - pointsWidth;
+				col++;
+			}
+			if(showPortrait) 
+			{	setColSubMinWidth(colName,nameWidth);
+				setColSubPrefWidth(colName,nameWidth);
+				setColSubMaxWidth(colName,nameWidth);
+			}
 		}
 		else
 		{	reinit(1,LINES);

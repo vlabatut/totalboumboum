@@ -46,9 +46,10 @@ import fr.free.totalboumboum.gui.tools.GuiTools;
 public class PackBrowserSubPanel extends TableSubPanel implements MouseListener, FolderBrowserSubPanelListener
 {	private static final long serialVersionUID = 1L;
 	private static final int LINES = 20;
+	private static final int COLS = 1;
 
 	public PackBrowserSubPanel(int width, int height)
-	{	super(width,height,SubPanel.Mode.BORDER,LINES,1,1,false);
+	{	super(width,height,SubPanel.Mode.BORDER,LINES,COLS,false);
 		
 		// pages
 		setFolder(null,new ArrayList<String>());
@@ -98,14 +99,14 @@ public class PackBrowserSubPanel extends TableSubPanel implements MouseListener,
 		lineNext = LINES-1;
 		controlUpCount = 1;
 		controlTotalCount = controlUpCount+1;
-		int cols = 1;
-		int textMaxWidth = getDataWidth() - GuiTools.subPanelMargin*2;
+//		int textMaxWidth = getDataWidth() - GuiTools.subPanelMargin*2;
+		int textMaxWidth = getDataWidth();
 		
 		initNames();
 		pageCount = getPageCount();
 		
 		for(int panelIndex=0;panelIndex<pageCount;panelIndex++)
-		{	TableContentPanel listPanel = new TableContentPanel(getDataWidth(),getDataHeight(),LINES,cols,false);
+		{	TableContentPanel listPanel = new TableContentPanel(getDataWidth(),getDataHeight(),LINES,COLS,false);
 			listPanel.setColSubMinWidth(0,textMaxWidth);
 			listPanel.setColSubPrefWidth(0,textMaxWidth);
 			listPanel.setColSubMaxWidth(0,textMaxWidth);

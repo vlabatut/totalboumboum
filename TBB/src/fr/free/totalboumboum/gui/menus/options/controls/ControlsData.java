@@ -122,11 +122,18 @@ public class ControlsData extends EntitledDataPanel implements MouseListener,Key
 					}
 				}
 			}
-			keysPanel.setColSubMaxWidth(0,Integer.MAX_VALUE);
-			keysPanel.setColSubMaxWidth(1,Integer.MAX_VALUE);
-			keysPanel.setColSubMinWidth(2,keysPanel.getHeaderHeight());
-			keysPanel.setColSubPrefWidth(2,keysPanel.getHeaderHeight());
-			keysPanel.setColSubMaxWidth(2,keysPanel.getHeaderHeight());
+			int autofireWidth = keysPanel.getHeaderHeight();
+			int commandWidth = (keysPanel.getDataWidth() - 2*GuiTools.subPanelMargin - autofireWidth)/2;
+			int keyWidth = keysPanel.getDataWidth() - 2*GuiTools.subPanelMargin - autofireWidth - commandWidth;
+			keysPanel.setColSubMinWidth(0,commandWidth);
+			keysPanel.setColSubPrefWidth(0,commandWidth);
+			keysPanel.setColSubMaxWidth(0,commandWidth);
+			keysPanel.setColSubMinWidth(1,keyWidth);
+			keysPanel.setColSubPrefWidth(1,keyWidth);
+			keysPanel.setColSubMaxWidth(1,keyWidth);
+			keysPanel.setColSubMinWidth(2,autofireWidth);
+			keysPanel.setColSubPrefWidth(2,autofireWidth);
+			keysPanel.setColSubMaxWidth(2,autofireWidth);
 			
 			setDataPart(keysPanel);
 			keysPanel.addKeyListener(this);

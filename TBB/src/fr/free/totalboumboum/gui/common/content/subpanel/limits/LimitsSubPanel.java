@@ -90,7 +90,6 @@ public class LimitsSubPanel<T extends Limit> extends TableSubPanel implements Mo
 			if(limits.size()>LINES*colGroups)
 				colGroups++;
 			reinit(LINES,colGroups,COL_SUBS);
-			setColSubMaxWidth(1,Integer.MAX_VALUE);
 			
 			NumberFormat nf = NumberFormat.getInstance();
 			nf.setMinimumFractionDigits(0);
@@ -192,18 +191,20 @@ public class LimitsSubPanel<T extends Limit> extends TableSubPanel implements Mo
 			
 			// empty lines
 			reinit(LINES,colGroups,COL_SUBS);
-			int iconWidth = getLineHeight();
-			setColSubMinWidth(0,iconWidth);
-			setColSubPrefWidth(0,iconWidth);
-			setColSubMaxWidth(0,iconWidth);
-			int textWidth = getWidth() - iconWidth - 3*GuiTools.subPanelMargin;
-			setColSubMinWidth(1,textWidth);
-			setColSubPrefWidth(1,textWidth);
-			setColSubMaxWidth(1,textWidth);
 			
 			fireLimitSelectionChange();
 		}
-	}
+
+		// col widths
+		int iconWidth = getLineHeight();
+		setColSubMinWidth(0,iconWidth);
+		setColSubPrefWidth(0,iconWidth);
+		setColSubMaxWidth(0,iconWidth);
+		int textWidth = getDataWidth()-(COL_SUBS-1)*GuiTools.subPanelMargin-iconWidth;
+		setColSubMinWidth(1,textWidth);
+		setColSubPrefWidth(1,textWidth);
+		setColSubMaxWidth(1,textWidth);
+}
 
 	private void selectLimit(int row)
 	{	// paint line

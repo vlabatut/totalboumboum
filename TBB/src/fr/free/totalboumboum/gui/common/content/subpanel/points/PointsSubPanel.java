@@ -80,24 +80,12 @@ public class PointsSubPanel extends TableSubPanel
 			makePointsProcessorPanel(pointsProcessor,data,tooltips);
 		
 		int lines = Math.max(LINES,data.size());
-
 		reinit(lines,COL_GROUPS,COL_SUBS);
-		setColSubMaxWidth(1,Integer.MAX_VALUE);
 
 		if(pointsProcessor==null)
 		{	// title
 			Color bg = GuiTools.COLOR_TABLE_REGULAR_BACKGROUND;
 			setTitleBackground(bg);
-			
-			// empty lines
-			int iconWidth = getLineHeight();
-			setColSubMinWidth(0,iconWidth);
-			setColSubPrefWidth(0,iconWidth);
-			setColSubMaxWidth(0,iconWidth);
-			int textWidth = getWidth() - iconWidth - 3*GuiTools.subPanelMargin;
-			setColSubMinWidth(1,textWidth);
-			setColSubPrefWidth(1,textWidth);
-			setColSubMaxWidth(1,textWidth);
 		}
 		else
 		{	// title
@@ -152,6 +140,17 @@ public class PointsSubPanel extends TableSubPanel
 				}
 			}
 		}
+
+		// col widths
+		int iconWidth = getLineHeight();
+		setColSubMinWidth(0,iconWidth);
+		setColSubPrefWidth(0,iconWidth);
+		setColSubMaxWidth(0,iconWidth);
+		int textWidth = getDataWidth() - (COL_SUBS-1)*GuiTools.subPanelMargin - iconWidth;
+		setColSubMinWidth(1,textWidth);
+		setColSubPrefWidth(1,textWidth);
+		setColSubMaxWidth(1,textWidth);
+
 //		validate();
 //		repaint();
 	}

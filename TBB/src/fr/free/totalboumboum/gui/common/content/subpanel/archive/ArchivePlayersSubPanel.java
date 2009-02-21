@@ -94,7 +94,7 @@ public class ArchivePlayersSubPanel extends TableSubPanel
 			line++;
 		}
 		
-		int maxWidth = getDataWidth()-2*GuiTools.subPanelMargin;
+		int maxWidth = getDataWidth();
 		setColSubMaxWidth(0,maxWidth);
 		setColSubPrefWidth(0,maxWidth);
 	}
