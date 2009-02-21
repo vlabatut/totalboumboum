@@ -228,7 +228,7 @@ if(line>=getComponentCount())
 	
 	private void updateLinesHeights()
 	{	int start = 0;
-		if(header && lines>0)
+		if(header && lines>start)
 		{	Line ln = getLine(start);
 			ln.setDim(headerWidth,headerHeight);
 			start = 1;			
