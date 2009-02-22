@@ -197,6 +197,8 @@ if(line>=getComponentCount())
 		else
 			line = new Line(lineWidth,lineHeight,cols);
 
+		line.setAlignmentX(CENTER_ALIGNMENT);
+		line.setAlignmentY(CENTER_ALIGNMENT);
 		add(line,2*index);
 	}
 	

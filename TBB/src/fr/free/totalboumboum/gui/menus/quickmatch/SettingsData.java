@@ -21,6 +21,7 @@ package fr.free.totalboumboum.gui.menus.quickmatch;
  * 
  */
 
+import java.awt.Color;
 import java.awt.Dimension;
 
 import javax.swing.Box;
@@ -95,6 +96,11 @@ public class SettingsData extends EntitledDataPanel implements MatchQuickConfigS
 	{	this.quickMatchConfiguration = quickMatchConfiguration;
 		matchPanel.setQuickMatchConfiguration(quickMatchConfiguration);
 		roundPanel.setQuickMatchConfiguration(quickMatchConfiguration);
+		
+		roundPanel.getLine(3).setBackground(Color.RED);
+		roundPanel.getLine(3).setOpaque(true);
+		roundPanel.getLine(4).setBackground(Color.RED);
+		roundPanel.getLine(4).setOpaque(true);
 	}
 	
 	public QuickMatchConfiguration getQuickMatchConfiguration()

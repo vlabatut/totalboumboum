@@ -162,8 +162,8 @@ public class SettingsData extends EntitledDataPanel implements MouseListener
 		@SuppressWarnings("unused")
 		int headerHeight = result.getHeaderHeight();
 		int lineHeight = result.getLineHeight();
-		int browseWidth = lineHeight;
-		int fileWidth = width - (browseWidth + 3*margin);		
+		int iconWidth = lineHeight;
+		int fileWidth = result.getDataWidth() - (iconWidth + (cols-1)*margin);		
 		
 		{	int line = 0;
 			int col = 0;
@@ -180,9 +180,9 @@ public class SettingsData extends EntitledDataPanel implements MouseListener
 			}
 			// browse
 			{	// size
-				result.setColSubMinWidth(col,browseWidth);
-				result.setColSubPrefWidth(col,browseWidth);
-				result.setColSubMaxWidth(col,browseWidth);
+				result.setColSubMinWidth(col,iconWidth);
+				result.setColSubPrefWidth(col,iconWidth);
+				result.setColSubMaxWidth(col,iconWidth);
 				// icon
 				String key = GuiKeys.MENU_TOURNAMENT_SETTINGS_BUTTON_SELECT;
 				result.setLabelKey(line,col,key,true);

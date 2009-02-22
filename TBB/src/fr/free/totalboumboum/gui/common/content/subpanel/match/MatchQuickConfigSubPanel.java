@@ -64,9 +64,10 @@ public class MatchQuickConfigSubPanel extends LinesSubPanel implements MouseList
 	{	this.quickMatchConfiguration = quickMatchConfiguration;
 		
 		// sizes
-		int nameWidth = (int)(getDataWidth()*0.66);
 		reinit(LINE_COUNT,1);
-
+		int iconWidth = getLineHeight();
+		int nameWidth = (int)(getDataWidth()*0.66);
+		
 		if(quickMatchConfiguration!=null)
 		{				
 			// points limit
@@ -76,28 +77,36 @@ public class MatchQuickConfigSubPanel extends LinesSubPanel implements MouseList
 				ln.addLabel(0);
 				int col = 0;
 				// name
-				{	ln.setLabelMaxWidth(col,nameWidth);
+				{	ln.setLabelMinWidth(col,nameWidth);
 					ln.setLabelPrefWidth(col,nameWidth);
+					ln.setLabelMaxWidth(col,nameWidth);
 					ln.setLabelKey(col,GuiKeys.MENU_QUICKMATCH_SETTINGS_LIMIT_POINTS_TITLE,false);
 					ln.setLabelBackground(col,GuiTools.COLOR_TABLE_HEADER_BACKGROUND);
 					ln.setLabelForeground(col,GuiTools.COLOR_TABLE_HEADER_FOREGROUND);
 					col++;
 				}
 				// minus button
-				{	ln.setLabelMaxWidth(col,ln.getHeight());
+				{	ln.setLabelMinWidth(col,iconWidth);
+					ln.setLabelPrefWidth(col,iconWidth);
+					ln.setLabelMaxWidth(col,iconWidth);
 					ln.setLabelKey(col,GuiKeys.MENU_QUICKMATCH_SETTINGS_LIMIT_POINTS_MINUS,true);
 					ln.getLabel(col).addMouseListener(this);
 					ln.setLabelBackground(col,GuiTools.COLOR_TABLE_HEADER_BACKGROUND);
 					col++;
 				}
 				// value
-				{	ln.setLabelMaxWidth(col,Integer.MAX_VALUE);
+				{	int valueWidth = getDataWidth() - 2*iconWidth - nameWidth - 3*GuiTools.subPanelMargin;
+					ln.setLabelMinWidth(col,valueWidth);
+					ln.setLabelPrefWidth(col,valueWidth);
+					ln.setLabelMaxWidth(col,valueWidth);
 					ln.setLabelBackground(col,GuiTools.COLOR_TABLE_REGULAR_BACKGROUND);
 					ln.setLabelForeground(col,GuiTools.COLOR_TABLE_REGULAR_FOREGROUND);
 					col++;
 				}
 				// plus button
-				{	ln.setLabelMaxWidth(col,ln.getHeight());
+				{	ln.setLabelMinWidth(col,iconWidth);
+					ln.setLabelPrefWidth(col,iconWidth);
+					ln.setLabelMaxWidth(col,iconWidth);
 					ln.setLabelKey(col,GuiKeys.MENU_QUICKMATCH_SETTINGS_LIMIT_POINTS_PLUS,true);
 					ln.getLabel(col).addMouseListener(this);
 					ln.setLabelBackground(col,GuiTools.COLOR_TABLE_HEADER_BACKGROUND);
@@ -112,28 +121,36 @@ public class MatchQuickConfigSubPanel extends LinesSubPanel implements MouseList
 				ln.addLabel(0);
 				int col = 0;
 				// name
-				{	ln.setLabelMaxWidth(col,nameWidth);
+				{	ln.setLabelMinWidth(col,nameWidth);
 					ln.setLabelPrefWidth(col,nameWidth);
+					ln.setLabelMaxWidth(col,nameWidth);
 					ln.setLabelKey(col,GuiKeys.MENU_QUICKMATCH_SETTINGS_LIMIT_ROUNDS_TITLE,false);
 					ln.setLabelBackground(col,GuiTools.COLOR_TABLE_HEADER_BACKGROUND);
 					ln.setLabelForeground(col,GuiTools.COLOR_TABLE_HEADER_FOREGROUND);
 					col++;
 				}
 				// minus button
-				{	ln.setLabelMaxWidth(col,ln.getHeight());
+				{	ln.setLabelMinWidth(col,iconWidth);
+					ln.setLabelPrefWidth(col,iconWidth);
+					ln.setLabelMaxWidth(col,iconWidth);
 					ln.setLabelKey(col,GuiKeys.MENU_QUICKMATCH_SETTINGS_LIMIT_ROUNDS_MINUS,true);
 					ln.getLabel(col).addMouseListener(this);
 					ln.setLabelBackground(col,GuiTools.COLOR_TABLE_HEADER_BACKGROUND);
 					col++;
 				}
 				// value
-				{	ln.setLabelMaxWidth(col,Integer.MAX_VALUE);
+				{	int valueWidth = getDataWidth() - 2*iconWidth - nameWidth - 3*GuiTools.subPanelMargin;
+					ln.setLabelMinWidth(col,valueWidth);
+					ln.setLabelPrefWidth(col,valueWidth);
+					ln.setLabelMaxWidth(col,valueWidth);
 					ln.setLabelBackground(col,GuiTools.COLOR_TABLE_REGULAR_BACKGROUND);
 					ln.setLabelForeground(col,GuiTools.COLOR_TABLE_REGULAR_FOREGROUND);
 					col++;
 				}
 				// plus button
-				{	ln.setLabelMaxWidth(col,ln.getHeight());
+				{	ln.setLabelMinWidth(col,iconWidth);
+					ln.setLabelPrefWidth(col,iconWidth);
+					ln.setLabelMaxWidth(col,iconWidth);
 					ln.setLabelKey(col,GuiKeys.MENU_QUICKMATCH_SETTINGS_LIMIT_ROUNDS_PLUS,true);
 					ln.getLabel(col).addMouseListener(this);
 					ln.setLabelBackground(col,GuiTools.COLOR_TABLE_HEADER_BACKGROUND);
