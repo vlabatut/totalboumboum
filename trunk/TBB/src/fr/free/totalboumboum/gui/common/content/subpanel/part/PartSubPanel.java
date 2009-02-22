@@ -85,14 +85,14 @@ public class PartSubPanel extends LinesSubPanel implements MouseListener
 			int col = 0;
 			// empty
 			{	ln.setLabelMaxWidth(col,buttonWidth);
-				ln.setLabelPreferredWidth(col,buttonWidth);
+				ln.setLabelPrefWidth(col,buttonWidth);
 				ln.setLabelText(col,null,null);
 				ln.getLabel(col).setOpaque(false);
 				col++;
 			}
 			// player
 			{	ln.setLabelMaxWidth(col,nameWidth);
-				ln.setLabelPreferredWidth(col,nameWidth);
+				ln.setLabelPrefWidth(col,nameWidth);
 				ln.setLabelKey(col,GuiKeys.COMMON_PART_PLAYER,true);
 				Color bg = GuiTools.COLOR_TABLE_HEADER_BACKGROUND;
 				ln.setLabelBackground(col,bg);				
@@ -100,7 +100,7 @@ public class PartSubPanel extends LinesSubPanel implements MouseListener
 			}
 			// rank
 			{	ln.setLabelMaxWidth(col,rankWidth);
-				ln.setLabelPreferredWidth(col,rankWidth);
+				ln.setLabelPrefWidth(col,rankWidth);
 				ln.setLabelKey(col,GuiKeys.COMMON_PART_RANK,true);
 				Color bg = GuiTools.COLOR_TABLE_HEADER_BACKGROUND;
 				ln.setLabelBackground(col,bg);
@@ -108,7 +108,7 @@ public class PartSubPanel extends LinesSubPanel implements MouseListener
 			}
 			// empty
 			{	ln.setLabelMaxWidth(col,buttonWidth);
-				ln.setLabelPreferredWidth(col,buttonWidth);
+				ln.setLabelPrefWidth(col,buttonWidth);
 				ln.setLabelText(col,null,null);
 				ln.getLabel(col).setOpaque(false);
 				col++;
@@ -131,7 +131,7 @@ public class PartSubPanel extends LinesSubPanel implements MouseListener
 				int col = 0;
 				// before button
 				{	ln.setLabelMaxWidth(col,buttonWidth);
-					ln.setLabelPreferredWidth(col,buttonWidth);
+					ln.setLabelPrefWidth(col,buttonWidth);
 					ln.setLabelKey(col,GuiKeys.COMMON_PART_BEFORE,true);
 					Color bg = GuiTools.COLOR_TABLE_HEADER_BACKGROUND;
 					ln.setLabelBackground(col,bg);
@@ -140,19 +140,19 @@ public class PartSubPanel extends LinesSubPanel implements MouseListener
 				}
 				// player
 				{	ln.setLabelMaxWidth(col,nameWidth);
-					ln.setLabelPreferredWidth(col,nameWidth);
+					ln.setLabelPrefWidth(col,nameWidth);
 					setPlayerName(line);
 					col++;
 				}
 				// rank
 				{	ln.setLabelMaxWidth(col,rankWidth);
-					ln.setLabelPreferredWidth(col,rankWidth);
+					ln.setLabelPrefWidth(col,rankWidth);
 					setPlayerRank(line);
 					col++;
 				}
 				// after button
 				{	ln.setLabelMaxWidth(col,buttonWidth);
-					ln.setLabelPreferredWidth(col,buttonWidth);
+					ln.setLabelPrefWidth(col,buttonWidth);
 					ln.setLabelKey(col,GuiKeys.COMMON_PART_AFTER,true);
 					Color bg = GuiTools.COLOR_TABLE_HEADER_BACKGROUND;
 					ln.setLabelBackground(col,bg);

@@ -85,22 +85,22 @@ public abstract class SubPanel<T extends ContentPanel> extends BasicPanel
 		// content
 		switch(mode)
 		{	case TITLE:
-				add(Box.createVerticalGlue());
+				add(Box.createGlue());
 				add(title);
-				add(Box.createVerticalGlue());
+				add(Box.createGlue());
 				if(data!=null)
 					add(data);
 				else
 					add(new JPanel());
-				add(Box.createVerticalGlue());
+				add(Box.createGlue());
 				break;
 			case BORDER:
-				add(Box.createVerticalGlue());
+				add(Box.createGlue());
 				if(data!=null)
 					add(data);
 				else
 					add(new JPanel());
-				add(Box.createVerticalGlue());
+				add(Box.createGlue());
 				break;
 			case NOTHING:
 				if(data!=null)

@@ -71,7 +71,8 @@ public class VideoData extends EntitledDataPanel implements MouseListener
 		{	int w = getDataWidth();
 			int h = getDataHeight();
 			optionsPanel = new LinesSubPanel(w,h,Mode.BORDER,LINE_COUNT,1,false);
-			int tWidth = (int)(w*0.66);
+			int titleWidth = (int)(optionsPanel.getDataWidth()*0.66);
+			int iconWidth = optionsPanel.getLineHeight();
 			
 			videoConfiguration = Configuration.getVideoConfiguration().copy();;
 			
@@ -83,13 +84,16 @@ public class VideoData extends EntitledDataPanel implements MouseListener
 				ln.addLabel(0);
 				int col = 0;
 				// name
-				{	ln.setLabelMaxWidth(col,tWidth);
-					ln.setLabelPreferredWidth(col,tWidth);
+				{	ln.setLabelMinWidth(col,titleWidth);
+					ln.setLabelPrefWidth(col,titleWidth);
+					ln.setLabelMaxWidth(col,titleWidth);
 					ln.setLabelKey(col,GuiKeys.MENU_OPTIONS_VIDEO_LINE_PANEL_DIMENSION,false);
 					col++;
 				}
 				// minus button
-				{	ln.setLabelMaxWidth(col,ln.getHeight());
+				{	ln.setLabelMinWidth(col,iconWidth);
+					ln.setLabelPrefWidth(col,iconWidth);
+					ln.setLabelMaxWidth(col,iconWidth);
 					ln.setLabelKey(col,GuiKeys.MENU_OPTIONS_VIDEO_LINE_MINUS,true);
 					ln.getLabel(col).addMouseListener(this);
 					col++;
@@ -108,12 +112,17 @@ public class VideoData extends EntitledDataPanel implements MouseListener
 //						}
 //						ln.setLabelMaxWidth(col,maxWidth);
 //						ln.setLabelPreferredWidth(col,maxWidth);
-					ln.setLabelMaxWidth(col,Integer.MAX_VALUE);
+					int valueWidth = optionsPanel.getDataWidth() - titleWidth - 3*GuiTools.subPanelMargin - 2*iconWidth;
+					ln.setLabelMinWidth(col,valueWidth);
+					ln.setLabelPrefWidth(col,valueWidth);
+					ln.setLabelMaxWidth(col,valueWidth);
 					setPanelDimension();
 					col++;
 				}
 				// plus button
-				{	ln.setLabelMaxWidth(col,ln.getHeight());
+				{	ln.setLabelMinWidth(col,iconWidth);
+					ln.setLabelPrefWidth(col,iconWidth);
+					ln.setLabelMaxWidth(col,iconWidth);
 					ln.setLabelKey(col,GuiKeys.MENU_OPTIONS_VIDEO_LINE_PLUS,true);
 					ln.getLabel(col).addMouseListener(this);
 					col++;
@@ -128,8 +137,9 @@ public class VideoData extends EntitledDataPanel implements MouseListener
 				ln.addLabel(0);
 				int col = 0;
 				// name
-				{	ln.setLabelMaxWidth(col,tWidth);
-					ln.setLabelPreferredWidth(col,tWidth);
+				{	ln.setLabelMinWidth(col,titleWidth);
+					ln.setLabelPrefWidth(col,titleWidth);
+					ln.setLabelMaxWidth(col,titleWidth);
 					ln.setLabelKey(col,GuiKeys.MENU_OPTIONS_VIDEO_LINE_BORDER_COLOR_TITLE,false);
 					col++;
 				}
@@ -138,7 +148,10 @@ public class VideoData extends EntitledDataPanel implements MouseListener
 //						int txtWidth = GuiTools.getPixelWidth(ln.getLineFontSize(),text);
 					String tooltip = GuiConfiguration.getMiscConfiguration().getLanguage().getText(GuiKeys.MENU_OPTIONS_VIDEO_LINE_BORDER_COLOR_TITLE+GuiKeys.TOOLTIP); 
 //						ln.setLabelMaxWidth(col,txtWidth);
-					ln.setLabelMaxWidth(col,Integer.MAX_VALUE);
+					int valueWidth = optionsPanel.getDataWidth() - titleWidth - GuiTools.subPanelMargin;
+					ln.setLabelMinWidth(col,valueWidth);
+					ln.setLabelPrefWidth(col,valueWidth);
+					ln.setLabelMaxWidth(col,valueWidth);
 					ln.setLabelText(col,text,tooltip);
 					setBorderColor();
 					ln.getLabel(col).addMouseListener(this);
@@ -154,13 +167,17 @@ public class VideoData extends EntitledDataPanel implements MouseListener
 				ln.addLabel(0);
 				int col = 0;
 				// name
-				{	ln.setLabelMaxWidth(col,tWidth);
-					ln.setLabelPreferredWidth(col,tWidth);
+				{	ln.setLabelMinWidth(col,titleWidth);
+					ln.setLabelPrefWidth(col,titleWidth);
+					ln.setLabelMaxWidth(col,titleWidth);
 					ln.setLabelKey(col,GuiKeys.MENU_OPTIONS_VIDEO_LINE_SMOOTH_GRAPHICS,false);
 					col++;
 				}
 				// value
-				{	ln.setLabelMaxWidth(col,Integer.MAX_VALUE);
+				{	int valueWidth = optionsPanel.getDataWidth() - titleWidth - GuiTools.subPanelMargin;
+					ln.setLabelMinWidth(col,valueWidth);
+					ln.setLabelPrefWidth(col,valueWidth);
+					ln.setLabelMaxWidth(col,valueWidth);
 					setSmoothGraphics();
 					ln.getLabel(col).addMouseListener(this);
 					col++;
@@ -175,13 +192,17 @@ public class VideoData extends EntitledDataPanel implements MouseListener
 				ln.addLabel(0);
 				int col = 0;
 				// name
-				{	ln.setLabelMaxWidth(col,tWidth);
-					ln.setLabelPreferredWidth(col,tWidth);
+				{	ln.setLabelMinWidth(col,titleWidth);
+					ln.setLabelPrefWidth(col,titleWidth);
+					ln.setLabelMaxWidth(col,titleWidth);
 					ln.setLabelKey(col,GuiKeys.MENU_OPTIONS_VIDEO_LINE_FULL_SCREEN,false);
 					col++;
 				}
 				// value
-				{	ln.setLabelMaxWidth(col,Integer.MAX_VALUE);
+				{	int valueWidth = optionsPanel.getDataWidth() - titleWidth - GuiTools.subPanelMargin;
+					ln.setLabelMinWidth(col,valueWidth);
+					ln.setLabelPrefWidth(col,valueWidth);
+					ln.setLabelMaxWidth(col,valueWidth);
 					setFullScreen();
 					ln.getLabel(col).addMouseListener(this);
 					col++;
@@ -194,10 +215,10 @@ public class VideoData extends EntitledDataPanel implements MouseListener
 			{	for(int line=LINE_FULL_SCREEN+1;line<LINE_COUNT;line++)
 				{	Line ln = optionsPanel.getLine(line);
 					int col = 0;
-					int mw = ln.getWidth();
-					ln.setLabelMinWidth(col,mw);
-					ln.setLabelPreferredWidth(col,mw);
-					ln.setLabelMaxWidth(col,mw);
+					int minWidth = ln.getWidth();
+					ln.setLabelMinWidth(col,minWidth);
+					ln.setLabelPrefWidth(col,minWidth);
+					ln.setLabelMaxWidth(col,minWidth);
 					col++;
 				}
 			}

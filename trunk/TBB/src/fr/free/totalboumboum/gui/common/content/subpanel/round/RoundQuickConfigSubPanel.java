@@ -88,7 +88,7 @@ public class RoundQuickConfigSubPanel extends LinesSubPanel implements MouseList
 				int col = 0;
 				// name
 				{	ln.setLabelMaxWidth(col,nameWidth);
-					ln.setLabelPreferredWidth(col,nameWidth);
+					ln.setLabelPrefWidth(col,nameWidth);
 					ln.setLabelKey(col,GuiKeys.MENU_QUICKMATCH_SETTINGS_LEVELS_ORDER_TITLE,false);
 					ln.setLabelBackground(col,GuiTools.COLOR_TABLE_HEADER_BACKGROUND);
 					ln.setLabelForeground(col,GuiTools.COLOR_TABLE_HEADER_FOREGROUND);
@@ -110,7 +110,7 @@ public class RoundQuickConfigSubPanel extends LinesSubPanel implements MouseList
 				int col = 0;
 				// name
 				{	ln.setLabelMaxWidth(col,nameWidth);
-					ln.setLabelPreferredWidth(col,nameWidth);
+					ln.setLabelPrefWidth(col,nameWidth);
 					ln.setLabelKey(col,GuiKeys.MENU_QUICKMATCH_SETTINGS_PLAYERS_LOCATION_TITLE,false);
 					ln.setLabelBackground(col,GuiTools.COLOR_TABLE_HEADER_BACKGROUND);
 					ln.setLabelForeground(col,GuiTools.COLOR_TABLE_HEADER_FOREGROUND);
@@ -134,7 +134,7 @@ public class RoundQuickConfigSubPanel extends LinesSubPanel implements MouseList
 				int col = 0;
 				// name
 				{	ln.setLabelMaxWidth(col,nameWidth);
-					ln.setLabelPreferredWidth(col,nameWidth);
+					ln.setLabelPrefWidth(col,nameWidth);
 					ln.setLabelKey(col,GuiKeys.MENU_QUICKMATCH_SETTINGS_LIMIT_TIME_TITLE,false);
 					ln.setLabelBackground(col,GuiTools.COLOR_TABLE_HEADER_BACKGROUND);
 					ln.setLabelForeground(col,GuiTools.COLOR_TABLE_HEADER_FOREGROUND);
@@ -170,7 +170,7 @@ public class RoundQuickConfigSubPanel extends LinesSubPanel implements MouseList
 				int col = 0;
 				// name
 				{	ln.setLabelMaxWidth(col,nameWidth);
-					ln.setLabelPreferredWidth(col,nameWidth);
+					ln.setLabelPrefWidth(col,nameWidth);
 					ln.setLabelKey(col,GuiKeys.MENU_QUICKMATCH_SETTINGS_POINTS_RANKS_TITLE,false);
 					ln.setLabelBackground(col,GuiTools.COLOR_TABLE_HEADER_BACKGROUND);
 					ln.setLabelForeground(col,GuiTools.COLOR_TABLE_HEADER_FOREGROUND);
@@ -186,7 +186,7 @@ public class RoundQuickConfigSubPanel extends LinesSubPanel implements MouseList
 						ln.setLabelMaxWidth(col,Integer.MAX_VALUE);
 					else
 					{	ln.setLabelMaxWidth(col,pointsRanksWidth);
-						ln.setLabelPreferredWidth(col,pointsRanksWidth);
+						ln.setLabelPrefWidth(col,pointsRanksWidth);
 					}
 					ln.setLabelBackground(col,GuiTools.COLOR_TABLE_HEADER_BACKGROUND);
 					ln.setLabelForeground(col,GuiTools.COLOR_TABLE_HEADER_FOREGROUND);
@@ -204,7 +204,7 @@ public class RoundQuickConfigSubPanel extends LinesSubPanel implements MouseList
 				int col = 0;
 				// name
 				{	ln.setLabelMaxWidth(col,nameWidth);
-					ln.setLabelPreferredWidth(col,nameWidth);
+					ln.setLabelPrefWidth(col,nameWidth);
 					ln.setLabelKey(col,GuiKeys.MENU_QUICKMATCH_SETTINGS_POINTS_VALUES_TITLE,false);
 					ln.setLabelBackground(col,GuiTools.COLOR_TABLE_HEADER_BACKGROUND);
 					ln.setLabelForeground(col,GuiTools.COLOR_TABLE_HEADER_FOREGROUND);
@@ -225,7 +225,7 @@ public class RoundQuickConfigSubPanel extends LinesSubPanel implements MouseList
 							ln.setLabelMaxWidth(col,Integer.MAX_VALUE);
 						else
 						{	ln.setLabelMaxWidth(col,pointsValuesWidth);
-							ln.setLabelPreferredWidth(col,pointsValuesWidth);
+							ln.setLabelPrefWidth(col,pointsValuesWidth);
 						}
 						ln.setLabelBackground(col,GuiTools.COLOR_TABLE_REGULAR_BACKGROUND);
 						ln.setLabelForeground(col,GuiTools.COLOR_TABLE_REGULAR_FOREGROUND);
@@ -247,7 +247,7 @@ public class RoundQuickConfigSubPanel extends LinesSubPanel implements MouseList
 				int col = 0;
 				// name
 				{	ln.setLabelMaxWidth(col,nameWidth);
-					ln.setLabelPreferredWidth(col,nameWidth);
+					ln.setLabelPrefWidth(col,nameWidth);
 					ln.setLabelKey(col,GuiKeys.MENU_QUICKMATCH_SETTINGS_POINTS_SHARE_TITLE,false);
 					ln.setLabelBackground(col,GuiTools.COLOR_TABLE_HEADER_BACKGROUND);
 					ln.setLabelForeground(col,GuiTools.COLOR_TABLE_HEADER_FOREGROUND);
@@ -269,7 +269,7 @@ public class RoundQuickConfigSubPanel extends LinesSubPanel implements MouseList
 				int col = 0;
 				// name
 				{	ln.setLabelMaxWidth(col,nameWidth);
-					ln.setLabelPreferredWidth(col,nameWidth);
+					ln.setLabelPrefWidth(col,nameWidth);
 					ln.setLabelKey(col,GuiKeys.MENU_QUICKMATCH_SETTINGS_POINTS_DRAW_TITLE,false);
 					ln.setLabelBackground(col,GuiTools.COLOR_TABLE_HEADER_BACKGROUND);
 					ln.setLabelForeground(col,GuiTools.COLOR_TABLE_HEADER_FOREGROUND);
@@ -291,7 +291,7 @@ public class RoundQuickConfigSubPanel extends LinesSubPanel implements MouseList
 					int col = 0;
 					int mw = ln.getWidth();
 					ln.setLabelMinWidth(col,mw);
-					ln.setLabelPreferredWidth(col,mw);
+					ln.setLabelPrefWidth(col,mw);
 					ln.setLabelMaxWidth(col,mw);
 					col++;
 				}
@@ -303,7 +303,7 @@ public class RoundQuickConfigSubPanel extends LinesSubPanel implements MouseList
 				int col = 0;
 				int mw = ln.getWidth();
 				ln.setLabelMinWidth(col,mw);
-				ln.setLabelPreferredWidth(col,mw);
+				ln.setLabelPrefWidth(col,mw);
 				ln.setLabelMaxWidth(col,mw);
 				col++;
 			}
