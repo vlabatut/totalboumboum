@@ -50,7 +50,9 @@ import fr.free.totalboumboum.configuration.profile.PredefinedColor;
 import fr.free.totalboumboum.configuration.profile.Profile;
 import fr.free.totalboumboum.gui.common.structure.panel.SplitMenuPanel;
 import fr.free.totalboumboum.gui.common.structure.panel.data.EntitledDataPanel;
+import fr.free.totalboumboum.gui.common.structure.subpanel.inside.EmptyContentPanel;
 import fr.free.totalboumboum.gui.common.structure.subpanel.inside.Line;
+import fr.free.totalboumboum.gui.common.structure.subpanel.outside.EmptySubPanel;
 import fr.free.totalboumboum.gui.common.structure.subpanel.outside.LinesSubPanel;
 import fr.free.totalboumboum.gui.common.structure.subpanel.outside.SubPanel.Mode;
 import fr.free.totalboumboum.gui.data.configuration.GuiConfiguration;
@@ -72,9 +74,6 @@ public class EditProfileData extends EntitledDataPanel implements MouseListener,
 
 	private Profile profile;
 	private LinesSubPanel editPanel;
-	private JTextPane textPane;
-	private StyledDocument doc;
-	private SimpleAttributeSet sa;
 	
 	public EditProfileData(SplitMenuPanel container, Profile profile)
 	{	super(container);
@@ -84,19 +83,23 @@ public class EditProfileData extends EntitledDataPanel implements MouseListener,
 		setTitleKey(GuiKeys.MENU_PROFILES_EDIT_TITLE);
 	
 		// data
-		{	int w = getDataWidth();
-			int margin = GuiTools.subPanelMargin;
-			int lineHeight = (int)((getDataHeight() - ((LINE_COUNT+1)+1)*margin)/((float)(LINE_COUNT+1)));
-			int lineFontSize = GuiTools.getFontSize(lineHeight*GuiTools.FONT_RATIO);
-			int h = lineHeight*LINE_COUNT+margin*(LINE_COUNT+1);
-			int nameHeight = getDataHeight()-h-margin;
-			editPanel = new LinesSubPanel(w,h,Mode.BORDER,LINE_COUNT,1,false);
-			editPanel.setOpaque(false);
+		{	EmptySubPanel subPanel = (EmptySubPanel)dataPart;
+			EmptyContentPanel contentPanel = subPanel.getDataPanel();
+			contentPanel.setBackground(GuiTools.COLOR_COMMON_BACKGROUND);
 
+			int lineHeightEstimation = (subPanel.getDataHeight() - (LINE_COUNT+2)*GuiTools.subPanelMargin) / (LINE_COUNT+1);
+			int heightEstimation = (lineHeightEstimation*LINE_COUNT) + (LINE_COUNT+1)*GuiTools.subPanelMargin;
+			editPanel = new LinesSubPanel(subPanel.getDataWidth(),heightEstimation,Mode.BORDER,LINE_COUNT,1,false);
+			editPanel.setOpaque(false);
+			int lineHeight = editPanel.getLineHeight();
+			int lineFontSize = editPanel.getLineFontSize();
+			int lineWidth = editPanel.getDataWidth();
+			int nameHeight = subPanel.getDataHeight() - heightEstimation - GuiTools.subPanelMargin;
+			
 			// main panel
-			{	BoxLayout layout = new BoxLayout(dataPart,BoxLayout.PAGE_AXIS); 
-				dataPart.setLayout(layout);
-				dataPart.add(Box.createRigidArea(new Dimension(margin,margin)));
+			{	BoxLayout layout = new BoxLayout(contentPanel,BoxLayout.PAGE_AXIS); 
+				contentPanel.setLayout(layout);
+				contentPanel.add(Box.createGlue());
 			}
 			
 			// NAME
@@ -104,13 +107,12 @@ public class EditProfileData extends EntitledDataPanel implements MouseListener,
 				{	BoxLayout layout = new BoxLayout(namePanel,BoxLayout.LINE_AXIS);
 					namePanel.setLayout(layout);
 					namePanel.setOpaque(false);
-					//namePanel.setBackground(GuiTools.COLOR_COMMON_BACKGROUND);
-					Dimension dim = new Dimension(w,nameHeight);
+					Dimension dim = new Dimension(subPanel.getDataWidth(),nameHeight);
 					namePanel.setMinimumSize(dim);
 					namePanel.setPreferredSize(dim);
 					namePanel.setMaximumSize(dim);		
 				}
-				namePanel.add(Box.createRigidArea(new Dimension(margin,margin)));
+				namePanel.add(Box.createGlue());
 				// icon
 				{	JLabel label = new JLabel();
 					Dimension dim = new Dimension(nameHeight,nameHeight);
@@ -131,7 +133,7 @@ public class EditProfileData extends EntitledDataPanel implements MouseListener,
 					namePanel.add(label);
 					label.setIcon(icn);		
 				}				
-				namePanel.add(Box.createRigidArea(new Dimension(margin,margin)));
+				namePanel.add(Box.createGlue());
 				// text pane
 				{	textPane = new JTextPane()
 					{	private static final long serialVersionUID = 1L;
@@ -144,9 +146,8 @@ public class EditProfileData extends EntitledDataPanel implements MouseListener,
 					};
 					textPane.setEditable(true);
 					textPane.setOpaque(true);
-					int lnH = nameHeight;
-					int lnW = w - 3*margin - nameHeight;
-					Dimension dim = new Dimension(lnW,lnH);
+					int nameWidth = lineWidth - nameHeight - GuiTools.subPanelMargin;
+					Dimension dim = new Dimension(nameWidth,nameHeight);
 					textPane.setPreferredSize(dim);
 					textPane.setMinimumSize(dim);
 					textPane.setMaximumSize(dim);
@@ -166,10 +167,11 @@ public class EditProfileData extends EntitledDataPanel implements MouseListener,
 					doc.addDocumentListener(this);
 					namePanel.add(textPane);
 				}
-				namePanel.add(Box.createRigidArea(new Dimension(margin,margin)));
-				dataPart.add(namePanel);
+				namePanel.add(Box.createGlue());
+				contentPanel.add(namePanel);
 			}
 
+			int iconWidth = lineHeight;
 			// AI
 			{	Line ln = editPanel.getLine(LINE_AI);
 				ln.addLabel(0);
@@ -177,29 +179,38 @@ public class EditProfileData extends EntitledDataPanel implements MouseListener,
 				ln.addLabel(0);
 				ln.addLabel(0);
 				int col = 0;
+				int textWidth = lineWidth - 3*iconWidth - 4*GuiTools.subPanelMargin;
+				int packWidth = textWidth/2;
+				int nameWidth = textWidth - packWidth;
 				// icon
-				{	ln.setLabelMinWidth(col,ln.getHeight());
-					ln.setLabelMaxWidth(col,ln.getHeight());
+				{	ln.setLabelMinWidth(col,iconWidth);
+					ln.setLabelPrefWidth(col,iconWidth);
+					ln.setLabelMaxWidth(col,iconWidth);
 					ln.setLabelKey(col,GuiKeys.MENU_PROFILES_EDIT_AI,true);
 					Color bg = GuiTools.COLOR_TABLE_HEADER_BACKGROUND;
 					ln.setLabelBackground(col,bg);
 					col++;
 				}
 				// pack
-				{	ln.setLabelMaxWidth(col,Integer.MAX_VALUE);
+				{	ln.setLabelMinWidth(col,packWidth);
+					ln.setLabelPrefWidth(col,packWidth);
+					ln.setLabelMaxWidth(col,packWidth);
 					Color bg = GuiTools.COLOR_TABLE_REGULAR_BACKGROUND;
 					ln.setLabelBackground(col,bg);
 					col++;
 				}
 				// name
-				{	ln.setLabelMaxWidth(col,Integer.MAX_VALUE);
+				{	ln.setLabelMinWidth(col,nameWidth);
+					ln.setLabelPrefWidth(col,nameWidth);
+					ln.setLabelMaxWidth(col,nameWidth);
 					Color bg = GuiTools.COLOR_TABLE_REGULAR_BACKGROUND;
 					ln.setLabelBackground(col,bg);
 					col++;
 				}
 				// reset
-				{	ln.setLabelMinWidth(col,ln.getHeight());
-					ln.setLabelMaxWidth(col,ln.getHeight());
+				{	ln.setLabelMinWidth(col,iconWidth);
+					ln.setLabelPrefWidth(col,iconWidth);
+					ln.setLabelMaxWidth(col,iconWidth);
 					ln.setLabelKey(col,GuiKeys.MENU_PROFILES_EDIT_AI_RESET,true);
 					Color bg = GuiTools.COLOR_TABLE_REGULAR_BACKGROUND;
 					ln.setLabelBackground(col,bg);
@@ -208,8 +219,9 @@ public class EditProfileData extends EntitledDataPanel implements MouseListener,
 					col++;
 				}
 				// change
-				{	ln.setLabelMinWidth(col,ln.getHeight());
-					ln.setLabelMaxWidth(col,ln.getHeight());
+				{	ln.setLabelMinWidth(col,iconWidth);
+					ln.setLabelPrefWidth(col,iconWidth);
+					ln.setLabelMaxWidth(col,iconWidth);
 					ln.setLabelKey(col,GuiKeys.MENU_PROFILES_EDIT_AI_CHANGE,true);
 					Color bg = GuiTools.COLOR_TABLE_REGULAR_BACKGROUND;
 					ln.setLabelBackground(col,bg);
@@ -225,29 +237,38 @@ public class EditProfileData extends EntitledDataPanel implements MouseListener,
 				ln.addLabel(0);
 				ln.addLabel(0);
 				int col = 0;
+				int textWidth = lineWidth - 2*iconWidth - 3*GuiTools.subPanelMargin;
+				int packWidth = textWidth/2;
+				int nameWidth = textWidth - packWidth;
 				// icon
-				{	ln.setLabelMinWidth(col,ln.getHeight());
-					ln.setLabelMaxWidth(col,ln.getHeight());
+				{	ln.setLabelMinWidth(col,iconWidth);
+					ln.setLabelPrefWidth(col,iconWidth);
+					ln.setLabelMaxWidth(col,iconWidth);
 					ln.setLabelKey(col,GuiKeys.MENU_PROFILES_EDIT_HERO,true);
 					Color bg = GuiTools.COLOR_TABLE_HEADER_BACKGROUND;
 					ln.setLabelBackground(col,bg);
 					col++;
 				}
 				// pack
-				{	ln.setLabelMaxWidth(col,Integer.MAX_VALUE);
+				{	ln.setLabelMinWidth(col,packWidth);
+					ln.setLabelPrefWidth(col,packWidth);
+					ln.setLabelMaxWidth(col,packWidth);
 					Color bg = GuiTools.COLOR_TABLE_REGULAR_BACKGROUND;
 					ln.setLabelBackground(col,bg);
 					col++;
 				}
 				// name
-				{	ln.setLabelMaxWidth(col,Integer.MAX_VALUE);
+				{	ln.setLabelMinWidth(col,nameWidth);
+					ln.setLabelPrefWidth(col,nameWidth);
+					ln.setLabelMaxWidth(col,nameWidth);
 					Color bg = GuiTools.COLOR_TABLE_REGULAR_BACKGROUND;
 					ln.setLabelBackground(col,bg);
 					col++;
 				}
 				// change
-				{	ln.setLabelMinWidth(col,ln.getHeight());
-					ln.setLabelMaxWidth(col,ln.getHeight());
+				{	ln.setLabelMinWidth(col,iconWidth);
+					ln.setLabelPrefWidth(col,iconWidth);
+					ln.setLabelMaxWidth(col,iconWidth);
 					ln.setLabelKey(col,GuiKeys.MENU_PROFILES_EDIT_HERO_CHANGE,true);
 					Color bg = GuiTools.COLOR_TABLE_REGULAR_BACKGROUND;
 					ln.setLabelBackground(col,bg);
@@ -263,10 +284,12 @@ public class EditProfileData extends EntitledDataPanel implements MouseListener,
 				ln.addLabel(0);
 				ln.addLabel(0);
 				ln.addLabel(0);
+				int textWidth = lineWidth - 3*iconWidth - 3*GuiTools.subPanelMargin;
 				int col = 0;
 				// icon
-				{	ln.setLabelMinWidth(col,ln.getHeight());
-					ln.setLabelMaxWidth(col,ln.getHeight());
+				{	ln.setLabelMinWidth(col,iconWidth);
+					ln.setLabelPrefWidth(col,iconWidth);
+					ln.setLabelMaxWidth(col,iconWidth);
 					String key = GuiKeys.MENU_PROFILES_EDIT_COLOR;
 					ln.setLabelKey(col,key,true);
 					Color bg = GuiTools.COLOR_TABLE_HEADER_BACKGROUND;
@@ -274,12 +297,15 @@ public class EditProfileData extends EntitledDataPanel implements MouseListener,
 					col++;
 				}
 				// value
-				{	ln.setLabelMaxWidth(col,Integer.MAX_VALUE);
+				{	ln.setLabelMinWidth(col,textWidth);
+					ln.setLabelPrefWidth(col,textWidth);
+					ln.setLabelMaxWidth(col,textWidth);
 					col++;
 				}
 				// previous
-				{	ln.setLabelMinWidth(col,ln.getHeight());
-					ln.setLabelMaxWidth(col,ln.getHeight());
+				{	ln.setLabelMinWidth(col,iconWidth);
+					ln.setLabelPrefWidth(col,iconWidth);
+					ln.setLabelMaxWidth(col,iconWidth);
 					String key = GuiKeys.MENU_PROFILES_EDIT_COLOR_PREVIOUS;
 					ln.setLabelKey(col,key,true);
 					Color bg = GuiTools.COLOR_TABLE_REGULAR_BACKGROUND;
@@ -289,8 +315,9 @@ public class EditProfileData extends EntitledDataPanel implements MouseListener,
 					col++;
 				}
 				// next
-				{	ln.setLabelMinWidth(col,ln.getHeight());
-					ln.setLabelMaxWidth(col,ln.getHeight());
+				{	ln.setLabelMinWidth(col,iconWidth);
+					ln.setLabelPrefWidth(col,iconWidth);
+					ln.setLabelMaxWidth(col,iconWidth);
 					String key = GuiKeys.MENU_PROFILES_EDIT_COLOR_NEXT;
 					ln.setLabelKey(col,key,true);
 					Color bg = GuiTools.COLOR_TABLE_REGULAR_BACKGROUND;
@@ -312,35 +339,13 @@ public class EditProfileData extends EntitledDataPanel implements MouseListener,
 					col++;
 				}
 			}
-			
+
+			contentPanel.add(editPanel);
 			refreshData();
 		}
 		
-		dataPart.add(editPanel);
 	}
 
-	private void refreshColor()
-	{	PredefinedColor color = profile.getDefaultSprite().getColor();
-		String text = null;
-		String tooltip = null;
-		Color bg = GuiTools.COLOR_TABLE_REGULAR_BACKGROUND;
-		if(color!=null)
-		{	String colorKey = color.toString();
-			colorKey = colorKey.toUpperCase().substring(0,1)+colorKey.toLowerCase().substring(1,colorKey.length());
-			colorKey = GuiKeys.COMMON_COLOR+colorKey;
-			text = GuiConfiguration.getMiscConfiguration().getLanguage().getText(colorKey); 
-			tooltip = text;
-			Color clr = color.getColor();
-			int alpha = GuiTools.ALPHA_TABLE_REGULAR_BACKGROUND_LEVEL3;
-			bg = new Color(clr.getRed(),clr.getGreen(),clr.getBlue(),alpha);
-		}
-		editPanel.setLabelText(LINE_COLOR,1,text,tooltip);
-		editPanel.setLabelBackground(LINE_COLOR,1,bg);
-	}
-	
-	
-	
-	
 	@Override
 	public void refresh()
 	{	refreshData();
@@ -430,6 +435,25 @@ public class EditProfileData extends EntitledDataPanel implements MouseListener,
 		refreshColor();
 	}
 	
+	private void refreshColor()
+	{	PredefinedColor color = profile.getDefaultSprite().getColor();
+		String text = null;
+		String tooltip = null;
+		Color bg = GuiTools.COLOR_TABLE_REGULAR_BACKGROUND;
+		if(color!=null)
+		{	String colorKey = color.toString();
+			colorKey = colorKey.toUpperCase().substring(0,1)+colorKey.toLowerCase().substring(1,colorKey.length());
+			colorKey = GuiKeys.COMMON_COLOR+colorKey;
+			text = GuiConfiguration.getMiscConfiguration().getLanguage().getText(colorKey); 
+			tooltip = text;
+			Color clr = color.getColor();
+			int alpha = GuiTools.ALPHA_TABLE_REGULAR_BACKGROUND_LEVEL3;
+			bg = new Color(clr.getRed(),clr.getGreen(),clr.getBlue(),alpha);
+		}
+		editPanel.setLabelText(LINE_COLOR,1,text,tooltip);
+		editPanel.setLabelBackground(LINE_COLOR,1,bg);
+	}
+	
 	private void refreshName()
 	{	// name
 		String text = profile.getName();
@@ -442,7 +466,7 @@ public class EditProfileData extends EntitledDataPanel implements MouseListener,
 		catch (BadLocationException e)
 		{	e.printStackTrace();
 		}
-		textPane.setToolTipText(tooltip);				
+		textPane.setToolTipText(tooltip);		
 	}
 	
 	private void refreshAi()
@@ -484,6 +508,10 @@ public class EditProfileData extends EntitledDataPanel implements MouseListener,
 	/////////////////////////////////////////////////////////////////
 	// DOCUMENT LISTENER	/////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
+	private JTextPane textPane;
+	private StyledDocument doc;
+	private SimpleAttributeSet sa;
+
 	@Override
 	public void changedUpdate(DocumentEvent e)
 	{	// not usefull here

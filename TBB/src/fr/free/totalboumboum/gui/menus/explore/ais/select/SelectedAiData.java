@@ -109,6 +109,8 @@ public class SelectedAiData extends EntitledDataPanel implements PackBrowserSubP
 				notesPanel.setTitleKey(key,true);
 				float fontSize = notesPanel.getTitleFontSize()/2;
 				notesPanel.setFontSize(fontSize);
+				TextContentPanel textPanel = notesPanel.getDataPanel();
+				textPanel.setBackground(GuiTools.COLOR_TABLE_NEUTRAL_BACKGROUND);
 				previewPanel.add(notesPanel);
 				
 				mainPanel.add(previewPanel);
