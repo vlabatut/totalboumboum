@@ -173,6 +173,8 @@ public class Line extends ContentPanel
 		String txt = null;
 		JLabel lbl = new JLabel(txt);
 		lbl.setFont(lineFont);
+		lbl.setAlignmentX(CENTER_ALIGNMENT);
+		lbl.setAlignmentY(CENTER_ALIGNMENT);
 		lbl.setHorizontalAlignment(SwingConstants.CENTER);
 		lbl.setBackground(GuiTools.COLOR_TABLE_NEUTRAL_BACKGROUND);
 		lbl.setForeground(GuiTools.COLOR_TABLE_REGULAR_FOREGROUND);

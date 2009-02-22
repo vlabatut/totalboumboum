@@ -145,6 +145,8 @@ public class Column extends ContentPanel
 		JLabel lbl = new JLabel(txt);
 		lbl.setFont(lineFont);
 		lbl.setHorizontalAlignment(SwingConstants.CENTER);
+		lbl.setAlignmentX(CENTER_ALIGNMENT);
+		lbl.setAlignmentY(CENTER_ALIGNMENT);
 		lbl.setBackground(GuiTools.COLOR_TABLE_NEUTRAL_BACKGROUND);
 		lbl.setForeground(GuiTools.COLOR_TABLE_REGULAR_FOREGROUND);
 		lbl.setOpaque(true);

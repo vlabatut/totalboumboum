@@ -223,6 +223,8 @@ public abstract class SubPanel<T extends ContentPanel> extends BasicPanel
 		remove(index);
 		data = panel;
 		data.setDim(dataWidth,dataHeight);
+		data.setAlignmentX(CENTER_ALIGNMENT);
+		data.setAlignmentY(CENTER_ALIGNMENT);
 		add(data,index);
 	}
 	

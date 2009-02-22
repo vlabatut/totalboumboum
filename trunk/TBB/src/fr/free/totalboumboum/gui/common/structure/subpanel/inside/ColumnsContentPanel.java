@@ -110,6 +110,8 @@ public class ColumnsContentPanel extends ContentPanel
 		cols++;
 		Column column;		
 		column = new Column(colWidth,colHeight,1);
+		column.setAlignmentX(CENTER_ALIGNMENT);
+		column.setAlignmentY(CENTER_ALIGNMENT);
 		add(column,2*index);
 	}
 	
