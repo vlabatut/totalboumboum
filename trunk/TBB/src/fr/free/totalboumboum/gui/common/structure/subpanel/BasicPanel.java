@@ -35,6 +35,9 @@ public class BasicPanel extends JPanel
 		setPreferredSize(dim);
 		setMaximumSize(dim);
 		setMinimumSize(dim);
+		
+		setAlignmentX(CENTER_ALIGNMENT);
+		setAlignmentY(CENTER_ALIGNMENT);
 	}
 
 	/////////////////////////////////////////////////////////////////
