@@ -307,7 +307,7 @@ public class EditProfileData extends EntitledDataPanel implements MouseListener,
 					int col = 0;
 					int mw = ln.getWidth();
 					ln.setLabelMinWidth(col,mw);
-					ln.setLabelPreferredWidth(col,mw);
+					ln.setLabelPrefWidth(col,mw);
 					ln.setLabelMaxWidth(col,mw);
 					col++;
 				}

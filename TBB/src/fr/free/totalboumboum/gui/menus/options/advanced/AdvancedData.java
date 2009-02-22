@@ -81,7 +81,8 @@ public class AdvancedData extends EntitledDataPanel implements MouseListener
 		{	int w = getDataWidth();
 			int h = getDataHeight();
 			optionsPanel = new LinesSubPanel(w,h,Mode.BORDER,LINE_COUNT,1,false);
-			int tWidth = (int)(w*0.66);
+			int titleWidth = (int)(optionsPanel.getDataWidth()*0.66);
+			int iconWidth = optionsPanel.getLineHeight();
 			
 			// data
 			{	engineConfiguration = Configuration.getEngineConfiguration().copy();;
@@ -93,24 +94,32 @@ public class AdvancedData extends EntitledDataPanel implements MouseListener
 					ln.addLabel(0);
 					int col = 0;
 					// name
-					{	ln.setLabelMaxWidth(col,tWidth);
-						ln.setLabelPreferredWidth(col,tWidth);
+					{	ln.setLabelMinWidth(col,titleWidth);
+						ln.setLabelPrefWidth(col,titleWidth);
+						ln.setLabelMaxWidth(col,titleWidth);
 						ln.setLabelKey(col,GuiKeys.MENU_OPTIONS_ADVANCED_LINE_FPS_TITLE,false);
 						col++;
 					}
 					// minus button
-					{	ln.setLabelMaxWidth(col,ln.getHeight());
+					{	ln.setLabelMinWidth(col,iconWidth);
+						ln.setLabelPrefWidth(col,iconWidth);
+						ln.setLabelMaxWidth(col,iconWidth);
 						ln.setLabelKey(col,GuiKeys.MENU_OPTIONS_ADVANCED_LINE_FPS_MINUS,true);
 						ln.getLabel(col).addMouseListener(this);
 						col++;
 					}
 					// value
-					{	ln.setLabelMaxWidth(col,Integer.MAX_VALUE);
+					{	int valueWidth = optionsPanel.getDataWidth() - titleWidth - 3*GuiTools.subPanelMargin - 2*iconWidth;
+						ln.setLabelMinWidth(col,valueWidth);
+						ln.setLabelPrefWidth(col,valueWidth);
+						ln.setLabelMaxWidth(col,valueWidth);
 						setFps();
 						col++;
 					}
 					// plus button
-					{	ln.setLabelMaxWidth(col,ln.getHeight());
+					{	ln.setLabelMinWidth(col,iconWidth);
+						ln.setLabelPrefWidth(col,iconWidth);
+						ln.setLabelMaxWidth(col,iconWidth);
 						ln.setLabelKey(col,GuiKeys.MENU_OPTIONS_ADVANCED_LINE_FPS_PLUS,true);
 						ln.getLabel(col).addMouseListener(this);
 						col++;
@@ -124,13 +133,17 @@ public class AdvancedData extends EntitledDataPanel implements MouseListener
 					ln.addLabel(0);
 					int col = 0;
 					// name
-					{	ln.setLabelMaxWidth(col,tWidth);
-						ln.setLabelPreferredWidth(col,tWidth);
+					{	ln.setLabelMinWidth(col,titleWidth);
+						ln.setLabelPrefWidth(col,titleWidth);
+						ln.setLabelMaxWidth(col,titleWidth);
 						ln.setLabelKey(col,GuiKeys.MENU_OPTIONS_ADVANCED_LINE_ADJUST_TITLE,false);
 						col++;
 					}
 					// value
-					{	ln.setLabelMaxWidth(col,Integer.MAX_VALUE);
+					{	int valueWidth = optionsPanel.getDataWidth() - titleWidth - GuiTools.subPanelMargin;
+						ln.setLabelMinWidth(col,valueWidth);
+						ln.setLabelPrefWidth(col,valueWidth);
+						ln.setLabelMaxWidth(col,valueWidth);
 						setAdjust();
 						ln.getLabel(col).addMouseListener(this);
 						col++;
@@ -146,24 +159,32 @@ public class AdvancedData extends EntitledDataPanel implements MouseListener
 					ln.addLabel(0);
 					int col = 0;
 					// name
-					{	ln.setLabelMaxWidth(col,tWidth);
-						ln.setLabelPreferredWidth(col,tWidth);
+					{	ln.setLabelMinWidth(col,titleWidth);
+						ln.setLabelPrefWidth(col,titleWidth);
+						ln.setLabelMaxWidth(col,titleWidth);
 						ln.setLabelKey(col,GuiKeys.MENU_OPTIONS_ADVANCED_LINE_SPEED_TITLE,false);
 						col++;
 					}
 					// minus button
-					{	ln.setLabelMaxWidth(col,ln.getHeight());
+					{	ln.setLabelMinWidth(col,iconWidth);
+						ln.setLabelPrefWidth(col,iconWidth);
+						ln.setLabelMaxWidth(col,iconWidth);
 						ln.setLabelKey(col,GuiKeys.MENU_OPTIONS_ADVANCED_LINE_SPEED_MINUS,true);
 						ln.getLabel(col).addMouseListener(this);
 						col++;
 					}
 					// value
-					{	ln.setLabelMaxWidth(col,Integer.MAX_VALUE);
+					{	int valueWidth = optionsPanel.getDataWidth() - titleWidth - 3*GuiTools.subPanelMargin - 2*iconWidth;
+						ln.setLabelMinWidth(col,valueWidth);
+						ln.setLabelPrefWidth(col,valueWidth);
+						ln.setLabelMaxWidth(col,valueWidth);
 						setGameSpeed();
 						col++;
 					}
 					// plus button
-					{	ln.setLabelMaxWidth(col,ln.getHeight());
+					{	ln.setLabelMinWidth(col,iconWidth);
+						ln.setLabelPrefWidth(col,iconWidth);
+						ln.setLabelMaxWidth(col,iconWidth);
 						ln.setLabelKey(col,GuiKeys.MENU_OPTIONS_ADVANCED_LINE_SPEED_PLUS,true);
 						ln.getLabel(col).addMouseListener(this);
 						col++;
@@ -176,10 +197,10 @@ public class AdvancedData extends EntitledDataPanel implements MouseListener
 				{	for(int line=LINE_SPEED+1;line<LINE_COUNT;line++)
 					{	Line ln = optionsPanel.getLine(line);
 						int col = 0;
-						int mw = ln.getWidth();
-						ln.setLabelMinWidth(col,mw);
-						ln.setLabelPreferredWidth(col,mw);
-						ln.setLabelMaxWidth(col,mw);
+						int maxWidth = ln.getWidth();
+						ln.setLabelMinWidth(col,maxWidth);
+						ln.setLabelPrefWidth(col,maxWidth);
+						ln.setLabelMaxWidth(col,maxWidth);
 						col++;
 					}
 				}

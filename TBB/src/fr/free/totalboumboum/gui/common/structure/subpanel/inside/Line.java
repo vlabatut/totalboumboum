@@ -240,7 +240,7 @@ public class Line extends ContentPanel
 	public void setLabelMinWidth(int col, int width)
 	{	setLabelWidth(col,width,0);		
 	}
-	public void setLabelPreferredWidth(int col, int width)
+	public void setLabelPrefWidth(int col, int width)
 	{	setLabelWidth(col,width,1);		
 	}
 	public void setLabelMaxWidth(int col, int width)

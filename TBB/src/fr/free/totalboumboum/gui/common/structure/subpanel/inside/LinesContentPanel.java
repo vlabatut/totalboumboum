@@ -22,7 +22,6 @@ package fr.free.totalboumboum.gui.common.structure.subpanel.inside;
  */
 
 import java.awt.Color;
-import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
@@ -179,11 +178,11 @@ if(line>=getComponentCount())
 	
 	public void addLine(int index, int cols)
 	{	if(index>0)
-			add(Box.createRigidArea(new Dimension(GuiTools.subPanelMargin,GuiTools.subPanelMargin)),2*index-1);
-//			add(Box.createVerticalGlue(),2*index);
+//			add(Box.createRigidArea(new Dimension(GuiTools.subPanelMargin,GuiTools.subPanelMargin)),2*index-1);
+			add(Box.createGlue(),2*index-1);
 		else if(lines>0)
-			add(Box.createRigidArea(new Dimension(GuiTools.subPanelMargin,GuiTools.subPanelMargin)),2*index);
-//			add(Box.createVerticalGlue(),2*index+1);
+//			add(Box.createRigidArea(new Dimension(GuiTools.subPanelMargin,GuiTools.subPanelMargin)),2*index);
+			add(Box.createGlue(),2*index);
 			
 		lines++;
 		Line line;
