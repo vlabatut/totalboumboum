@@ -78,7 +78,9 @@ public class RoundQuickConfigSubPanel extends LinesSubPanel implements MouseList
 		int iconWidth = getLineHeight();
 		int nameWidth = (int)(getDataWidth()*0.33);
 		int pointsRanksWidth = (getDataWidth() - nameWidth - 7*GuiTools.subPanelMargin) / GameConstants.CONTROL_COUNT;
-		int pointsValuesWidth = (pointsRanksWidth - 2*GuiTools.subPanelMargin - 2*iconWidth);
+		int firstPointsRankWidth = getDataWidth() - nameWidth - 7*GuiTools.subPanelMargin - (GameConstants.CONTROL_COUNT-1)*pointsRanksWidth;
+		int pointsValuesWidth = pointsRanksWidth - 2*GuiTools.subPanelMargin - 2*iconWidth;
+		int firstPointsValuesWidth = firstPointsRankWidth - 2*GuiTools.subPanelMargin - 2*iconWidth;
 
 		if(quickMatchConfiguration!=null)
 		{	
@@ -199,17 +201,14 @@ public class RoundQuickConfigSubPanel extends LinesSubPanel implements MouseList
 				{	String text = GuiConfiguration.getMiscConfiguration().getLanguage().getText(GuiKeys.MENU_QUICKMATCH_SETTINGS_POINTS_RANKS_VALUE)+i; 
 					String tooltip = GuiConfiguration.getMiscConfiguration().getLanguage().getText(GuiKeys.MENU_QUICKMATCH_SETTINGS_POINTS_RANKS_VALUE+GuiKeys.TOOLTIP)+i; 
 					ln.setLabelText(col,text,tooltip);
-					ln.setLabelMinWidth(col,pointsRanksWidth);
-					ln.setLabelPrefWidth(col,pointsRanksWidth);
-					ln.setLabelMaxWidth(col,pointsRanksWidth);
-/*					
+					int size;
 					if(i==1)
-						ln.setLabelMaxWidth(col,Integer.MAX_VALUE);
+						size = firstPointsRankWidth;
 					else
-					{	ln.setLabelMaxWidth(col,pointsRanksWidth);
-						ln.setLabelPrefWidth(col,pointsRanksWidth);
-					}
-*/					
+						size = pointsRanksWidth;
+					ln.setLabelMinWidth(col,size);
+					ln.setLabelPrefWidth(col,size);
+					ln.setLabelMaxWidth(col,size);					
 					ln.setLabelBackground(col,GuiTools.COLOR_TABLE_HEADER_BACKGROUND);
 					ln.setLabelForeground(col,GuiTools.COLOR_TABLE_HEADER_FOREGROUND);
 					col++;
@@ -246,17 +245,14 @@ public class RoundQuickConfigSubPanel extends LinesSubPanel implements MouseList
 					}
 					// value
 					{	setPointsValue(i);
-						ln.setLabelMinWidth(col,pointsValuesWidth);
-						ln.setLabelPrefWidth(col,pointsValuesWidth);
-						ln.setLabelMaxWidth(col,pointsValuesWidth);						
-/*					
-						if(i==0)
-							ln.setLabelMaxWidth(col,Integer.MAX_VALUE);
+						int size;
+						if(i==1)
+							size = firstPointsValuesWidth;
 						else
-						{	ln.setLabelMaxWidth(col,pointsValuesWidth);
-							ln.setLabelPrefWidth(col,pointsValuesWidth);
-						}
-*/						
+							size = pointsValuesWidth;
+						ln.setLabelMinWidth(col,size);
+						ln.setLabelPrefWidth(col,size);
+						ln.setLabelMaxWidth(col,size);					
 						ln.setLabelBackground(col,GuiTools.COLOR_TABLE_REGULAR_BACKGROUND);
 						ln.setLabelForeground(col,GuiTools.COLOR_TABLE_REGULAR_FOREGROUND);
 						col++;
