@@ -80,8 +80,18 @@ public class RoundQuickConfigSubPanel extends LinesSubPanel implements MouseList
 		int pointsRanksWidth = (getDataWidth() - nameWidth - 7*GuiTools.subPanelMargin) / GameConstants.CONTROL_COUNT;
 		int firstPointsRankWidth = getDataWidth() - nameWidth - 7*GuiTools.subPanelMargin - (GameConstants.CONTROL_COUNT-1)*pointsRanksWidth;
 		int pointsValuesWidth = pointsRanksWidth - 2*GuiTools.subPanelMargin - 2*iconWidth;
+
+		
+		
+		
 		int firstPointsValuesWidth = firstPointsRankWidth - 2*GuiTools.subPanelMargin - 2*iconWidth;
 
+		
+		
+		
+		
+		
+		
 		if(quickMatchConfiguration!=null)
 		{	
 			
