@@ -63,7 +63,11 @@ public class Column extends ContentPanel
 	public void setDim(int width, int height)
 	{	super.setDim(width,height);
 		// font
-		float lineHeight = (height-GuiTools.subPanelMargin*(lines-1))/lines;
+		float lineHeight;
+		if(lines<=1)
+			lineHeight = height;
+		else
+			lineHeight = (height-GuiTools.subPanelMargin*(lines-1))/lines;
 		lineFontSize = GuiTools.getFontSize(lineHeight*GuiTools.FONT_RATIO);
 		lineFont = GuiConfiguration.getMiscConfiguration().getFont().deriveFont((float)lineFontSize);
 		// content
@@ -131,7 +135,7 @@ public class Column extends ContentPanel
 	/////////////////////////////////////////////////////////////////
 	
 	public JLabel getLabel(int line)
-	{	return (JLabel)getComponent(line*2+1);
+	{	return (JLabel)getComponent(line*2);
 	}
 	
 	public void addLabel(int line)
