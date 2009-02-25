@@ -76,11 +76,12 @@ public class PlayersListSubPanel extends TableSubPanel implements MouseListener
 		reinit(LINES,cols);
 		
 		// col widths
-		int iconWidth = getLineHeight();		
+		int iconWidth = getHeaderHeight();		
 		controlTexts = new ArrayList<String>();
 		controlTooltips = new ArrayList<String>();
 		int controlWidth = GuiStringTools.initControlsTexts(getLineFontSize(),controlTexts,controlTooltips);
 		int rankWidth = getRanksWidth();
+		rankWidth = Math.max(iconWidth,rankWidth);
 		int nameWidth = getDataWidth() - (cols-1)*GuiTools.subPanelMargin - 2*iconWidth - rankWidth;
 		if(showControls)
 			nameWidth = nameWidth - controlWidth;

@@ -77,13 +77,10 @@ public class RoundQuickConfigSubPanel extends LinesSubPanel implements MouseList
 		reinit(LINE_COUNT,1);
 		int iconWidth = getLineHeight();
 		int nameWidth = (int)(getDataWidth()*0.33);
-		int pointsRanksWidth = (getDataWidth() - nameWidth - 7*GuiTools.subPanelMargin) / GameConstants.CONTROL_COUNT;
-		int firstPointsRankWidth = getDataWidth() - nameWidth - 7*GuiTools.subPanelMargin - (GameConstants.CONTROL_COUNT-1)*pointsRanksWidth;
+		int pointsRanksWidth = (getDataWidth() - nameWidth - GameConstants.CONTROL_COUNT*GuiTools.subPanelMargin) / GameConstants.CONTROL_COUNT;
+		int firstPointsRankWidth = getDataWidth() - nameWidth - GameConstants.CONTROL_COUNT*GuiTools.subPanelMargin - (GameConstants.CONTROL_COUNT-1)*pointsRanksWidth;
 		int pointsValuesWidth = pointsRanksWidth - 2*GuiTools.subPanelMargin - 2*iconWidth;
-
-		
-		
-		
+//		getDataWidth() - nameWidth - 7*GuiTools.subPanelMargin - (GameConstants.CONTROL_COUNT-1)*pointsRanksWidth;
 		int firstPointsValuesWidth = firstPointsRankWidth - 2*GuiTools.subPanelMargin - 2*iconWidth;
 
 		
@@ -256,7 +253,7 @@ public class RoundQuickConfigSubPanel extends LinesSubPanel implements MouseList
 					// value
 					{	setPointsValue(i);
 						int size;
-						if(i==1)
+						if(i==0)
 							size = firstPointsValuesWidth;
 						else
 							size = pointsValuesWidth;

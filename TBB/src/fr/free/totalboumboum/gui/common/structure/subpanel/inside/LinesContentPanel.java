@@ -147,6 +147,25 @@ public class LinesContentPanel extends ContentPanel
 				headerFontSize = 0;
 			}
 		}
+		
+/*		
+int total;
+if(header)
+	total = height - headerHeight - (lines-1)*lineHeight;
+else
+	total = height - lines*lineHeight;
+while(lines>1 && total%(lines-1)!=0)
+{	lineHeight--;
+	if(header)
+		headerHeight--;
+	//
+	if(header)
+		total = height - headerHeight - (lines-1)*lineHeight;
+	else
+		total = height - lines*lineHeight;
+}
+*/
+
 		lineFontSize = GuiTools.getFontSize(lineHeight*GuiTools.FONT_RATIO);
 		lineFont = GuiConfiguration.getMiscConfiguration().getFont().deriveFont((float)lineFontSize);
 		lineWidth = width;
