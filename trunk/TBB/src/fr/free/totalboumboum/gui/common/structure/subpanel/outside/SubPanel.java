@@ -220,7 +220,8 @@ public abstract class SubPanel<T extends ContentPanel> extends BasicPanel
 				index = 0;
 				break;
 		}
-		remove(index);
+		if(!(getComponent(index) instanceof Box.Filler))
+			remove(index);
 		data = panel;
 		data.setDim(dataWidth,dataHeight);
 		data.setAlignmentX(CENTER_ALIGNMENT);
