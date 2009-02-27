@@ -65,16 +65,19 @@ public class SpriteImageSubPanel extends ColumnsSubPanel implements MouseListene
 	{	this.spritePreview = spritePreview;
 		selectedColor = null;
 		
+		reinit(3);
+		
 		// sizes
 		PredefinedColor colorValues[] = PredefinedColor.values();		
 		lines = colorValues.length/2;
 		if(colorValues.length%2 > 0)
 			lines++;
 		lineHeight = (getDataHeight() - (lines-1)*GuiTools.subPanelMargin)/lines;
+		int firstLineHeight = getDataHeight() - (lines-1)*GuiTools.subPanelMargin - (lines-1)*lineHeight;
 		if(showColors)
-			rightWidth = getDataWidth() - 2*lineHeight - 5*GuiTools.subPanelMargin;
+			rightWidth = getDataWidth() - 2*lineHeight - 2*GuiTools.subPanelMargin;
 		else
-			rightWidth = getDataWidth() - 2*GuiTools.subPanelMargin;			
+			rightWidth = getDataWidth();
 
 		int col = 0;
 		// colors 0
@@ -83,9 +86,12 @@ public class SpriteImageSubPanel extends ColumnsSubPanel implements MouseListene
 			for(int i=1;i<lines;i++)
 				cl.addLabel(0);
 			for(int line=0;line<lines;line++)
-			{	cl.setLabelMinHeight(line,lineHeight);
-				cl.setLabelPreferredHeight(line,lineHeight);
-				cl.setLabelMaxHeight(line,lineHeight);
+			{	int h = lineHeight;
+				if(line==0)
+					h = firstLineHeight;
+				cl.setLabelMinHeight(line,h);
+				cl.setLabelPreferredHeight(line,h);
+				cl.setLabelMaxHeight(line,h);
 				JLabel label = cl.getLabel(line);
 				label.addMouseListener(this);
 			}
@@ -100,9 +106,12 @@ public class SpriteImageSubPanel extends ColumnsSubPanel implements MouseListene
 			for(int i=1;i<lines;i++)
 				cl.addLabel(0);
 			for(int line=0;line<lines;line++)
-			{	cl.setLabelMinHeight(line,lineHeight);
-				cl.setLabelPreferredHeight(line,lineHeight);
-				cl.setLabelMaxHeight(line,lineHeight);
+			{	int h = lineHeight;
+				if(line==0)
+					h = firstLineHeight;
+				cl.setLabelMinHeight(line,h);
+				cl.setLabelPreferredHeight(line,h);
+				cl.setLabelMaxHeight(line,h);
 				JLabel label = cl.getLabel(line);
 				label.addMouseListener(this);
 			}
