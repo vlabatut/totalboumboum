@@ -816,6 +816,9 @@ public class Launcher
 	 * - nouveauté : niveaux de NBM2
 	 * - nouveauté : niveaux custom pour NBM2
 	 * - modification : organisation des subpanels
+	 * - correction : bugs dans l'affichage des tables : lignes/colonnes de taille non-maximale 
+	 * - modification : calculer en dur les largeurs limites de toutes les colonnes utilisées dans toutes les tables
+	 * 
 	 * 
 	 * 
 	 * - lors du calcul des points, il faut forcer la présence d'un classement: ça facilite énormément de traitements en aval
@@ -841,8 +844,6 @@ public class Launcher
 	 * - faire le classement lexicographique gérant les signes diacritiques partout où c'est nécessaire
 	 * 
 	 * - modifier le loader d'image de manière à ce qu'une image non-trouvée soit remplacée par la croix rouge
-	 * 
-	 * - calculer en dur les largeurs limites de toutes les colonnes utilisées dans toutes les tables
 	 * 
 	 * - utiliser les tooltips pour afficher les infos trop longues : calcul de points, nombre à virgule dans la colonne des points (décimales cachées), etc.
 	 * - pb de dimension de l'image de fond en fonction de la résolution... (zones pas peintes)

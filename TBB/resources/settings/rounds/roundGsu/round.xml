@@ -12,6 +12,10 @@
 	<author value="Vincent Labatut" />
 
 	<limits>
+		<lastStanding>
+			<points local="false" name="basicSurvival" />
+			<threshold value="1" comparator="lesseq"/>
+		</lastStanding>
 		<time>
 			<points local="false" name="basicSurvival" />
  			<threshold value="90000" />

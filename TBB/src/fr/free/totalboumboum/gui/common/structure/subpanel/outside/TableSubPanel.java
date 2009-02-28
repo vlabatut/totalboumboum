@@ -86,6 +86,10 @@ public class TableSubPanel extends SubPanel<TableContentPanel>
 	{	return getDataPanel().getHeaderHeight();	
 	}
 	
+	public int getLineHeight(int line)
+	{	return getDataPanel().getLineHeight(line);	
+	}
+
 	public int getLineHeight()
 	{	return getDataPanel().getLineHeight();	
 	}
