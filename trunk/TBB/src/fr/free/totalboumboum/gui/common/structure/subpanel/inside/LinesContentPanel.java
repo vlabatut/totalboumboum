@@ -35,7 +35,6 @@ import fr.free.totalboumboum.gui.tools.GuiTools;
 
 public class LinesContentPanel extends ContentPanel
 {	private static final long serialVersionUID = 1L;
-
 	
 	public LinesContentPanel(int width, int height, int lines, boolean header)
 	{	this(width,height,lines,1,header);		
@@ -102,71 +101,72 @@ public class LinesContentPanel extends ContentPanel
 	/////////////////////////////////////////////////////////////////
 	// SIZE				/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	private int headerHeight;
+	private ArrayList<Integer> lineHeights = new ArrayList<Integer>();
 	private int headerWidth;
-	private int lineHeight;
 	private int lineWidth;
 
 	public int getHeaderHeight()
-	{	return headerHeight;	
+	{	int result = getHeight();
+		if(lineHeights.size()>0)
+			result = lineHeights.get(0);
+		return result;
+	}
+	
+	public int getLineHeight(int line)
+	{	return lineHeights.get(line);	
 	}
 	
 	public int getLineHeight()
-	{	return lineHeight;	
+	{	int result = getHeight();
+		if(lineHeights.size()>0)
+			result = lineHeights.get(lineHeights.size()-1);
+		return result;
 	}
 	
 	public void setDim(int width, int height)
 	{	super.setDim(width,height);
+		lineHeights.clear();
 		// lines
 		
 		if(lines==0)
 		{	if(header)
-			{	lineHeight = 0;
-				headerHeight = height;
-				headerFontSize = GuiTools.getFontSize(headerHeight*GuiTools.FONT_RATIO);
-			}
+				headerFontSize = GuiTools.getFontSize(getHeaderHeight()*GuiTools.FONT_RATIO);
 			else
-			{	lineHeight = height;
-				headerHeight = 0;
 				headerFontSize = 0;
-			}
 		}
 		else
-		{	if(header)
-			{	lineHeight = (int)((height - (lines-1)*GuiTools.subPanelMargin)/(lines+GuiTools.TABLE_HEADER_RATIO-1));
-				headerHeight = height - (lines-1)*GuiTools.subPanelMargin - lineHeight*(lines-1);
-				if(headerHeight-(lines-1)>=lineHeight)
-				{	headerHeight = headerHeight - (lines-1);
-					lineHeight ++;
-				}
+		{	int margins = (lines-1)*GuiTools.subPanelMargin;
+			// with header
+			if(header)
+			{	int lineHeight = (int)((height - margins)/(lines+GuiTools.TABLE_HEADER_RATIO-1));
+				int headerHeight = (int)(lineHeight*GuiTools.TABLE_HEADER_RATIO);
 				headerFontSize = GuiTools.getFontSize(headerHeight*GuiTools.FONT_RATIO);
+				lineHeights.add(headerHeight);
+				for(int i=1;i<lines;i++)
+					lineHeights.add(lineHeight);
 			}
+			// without header
 			else
-			{	lineHeight = (int)((height - (lines-1)*GuiTools.subPanelMargin)/((float)lines));
-				headerHeight = 0;
+			{	int lineHeight = (int)((height - margins)/((float)lines));
 				headerFontSize = 0;
+				for(int i=0;i<lines;i++)
+					lineHeights.add(lineHeight);
 			}
+			// adjust line heights
+			int leftOver = height - margins;
+			for(Integer lh: lineHeights)
+				leftOver = leftOver - lh;
+			int line = 0;
+			while(leftOver>0)
+			{	int lh = lineHeights.get(line);
+				lh++;
+				lineHeights.set(line,lh++);
+				leftOver--;
+				line = (line + 1) % lines;				
+			}			
 		}
-		
-/*		
-int total;
-if(header)
-	total = height - headerHeight - (lines-1)*lineHeight;
-else
-	total = height - lines*lineHeight;
-while(lines>1 && total%(lines-1)!=0)
-{	lineHeight--;
-	if(header)
-		headerHeight--;
-	//
-	if(header)
-		total = height - headerHeight - (lines-1)*lineHeight;
-	else
-		total = height - lines*lineHeight;
-}
-*/
 
-		lineFontSize = GuiTools.getFontSize(lineHeight*GuiTools.FONT_RATIO);
+		lineFontSize = GuiTools.getFontSize(getLineHeight()*GuiTools.FONT_RATIO);
 		lineFont = GuiConfiguration.getMiscConfiguration().getFont().deriveFont((float)lineFontSize);
 		lineWidth = width;
 		headerFont = GuiConfiguration.getMiscConfiguration().getFont().deriveFont((float)headerFontSize);
@@ -208,13 +208,13 @@ if(line>=getComponentCount())
 		
 		// header
 		if(header && index==0)
-		{	line = new Line(headerWidth,headerHeight,cols);
+		{	line = new Line(headerWidth,getHeaderHeight(),cols);
 			line.setBackgroundColor(GuiTools.COLOR_TABLE_HEADER_BACKGROUND);
 			line.setForegroundColor(GuiTools.COLOR_TABLE_HEADER_FOREGROUND);
 		}
 		//data
 		else
-			line = new Line(lineWidth,lineHeight,cols);
+			line = new Line(lineWidth,getLineHeight(),cols);
 
 		line.setAlignmentX(CENTER_ALIGNMENT);
 		line.setAlignmentY(CENTER_ALIGNMENT);
@@ -247,14 +247,9 @@ if(line>=getComponentCount())
 	}
 	
 	private void updateLinesHeights()
-	{	int start = 0;
-		if(header && lines>start)
-		{	Line ln = getLine(start);
-			ln.setDim(headerWidth,headerHeight);
-			start = 1;			
-		}
-		for(int line=start;line<lines;line++)
+	{	for(int line=0;line<lines;line++)
 		{	Line ln = getLine(line);
+			int lineHeight = lineHeights.get(line);
 			ln.setDim(lineWidth,lineHeight);
 		}		
 	}
