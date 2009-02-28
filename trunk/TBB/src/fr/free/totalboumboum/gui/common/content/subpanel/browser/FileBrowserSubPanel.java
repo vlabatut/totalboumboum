@@ -285,7 +285,7 @@ public class FileBrowserSubPanel extends TableSubPanel implements MouseListener
 			}
 		}
 		// select a name
-		else
+		else if(pos[0]>=0)
 		{	selectName(pos[0]);
 		}
 	}
