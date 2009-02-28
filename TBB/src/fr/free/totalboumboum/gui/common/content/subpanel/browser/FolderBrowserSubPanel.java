@@ -297,7 +297,7 @@ public class FolderBrowserSubPanel extends TableSubPanel implements MouseListene
 			}
 		}
 		// select a name
-		else
+		else if(pos[0]>=0)
 		{	selectName(pos[0]);
 		}
 	}

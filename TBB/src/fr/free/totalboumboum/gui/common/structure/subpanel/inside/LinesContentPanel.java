@@ -263,9 +263,9 @@ if(line>=getComponentCount())
 	// LABELS			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	public int[] getLabelPosition(JLabel label)
-	{	int result[] = null;
+	{	int result[] = {-1, -1};
 		int line = 0;
-		while(line<lines && result==null)
+		while(line<lines && result[0]==-1)
 		{	Line l = getLine(line);
 			int col = l.getLabelPosition(label);
 			if(col!=-1)

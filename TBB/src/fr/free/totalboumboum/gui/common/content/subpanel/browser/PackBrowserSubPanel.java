@@ -290,7 +290,7 @@ public class PackBrowserSubPanel extends TableSubPanel implements MouseListener,
 			}
 		}
 		// select a name
-		else
+		else if(pos[0]>=0)
 		{	selectPack(pos[0]);
 		}
 	}
