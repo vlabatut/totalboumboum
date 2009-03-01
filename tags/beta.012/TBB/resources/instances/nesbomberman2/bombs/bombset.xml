@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<bombset
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+	xsi:noNamespaceSchemaLocation="../../../schemas/bombset.xsd">
+
+	<bomb name="remotecontrol" folder="remotecontrol" >
+		<ability >
+			<name value="bomb-type-remotecontrol" />
+		</ability>
+	</bomb>
+	
+	<bomb name="normal" folder="normal" />
+	
+</bombset>

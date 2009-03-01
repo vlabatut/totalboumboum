@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+<xsd:include schemaLocation="_ability.xsd"/>
+
+	<xsd:complexType name="tItem">
+		<xsd:sequence>
+			<xsd:element name="ability" type="tAbility" maxOccurs="unbounded"/>
+		</xsd:sequence>
+		<xsd:attribute name="name" type="xsd:string" use="required" />
+		<xsd:attribute name="folder" type="xsd:string" use="optional" />
+	</xsd:complexType>
+
+	<xsd:complexType name="tItemset">
+		<xsd:sequence>
+			<xsd:element name="item" type="tItem" maxOccurs="unbounded"/>
+		</xsd:sequence>
+	</xsd:complexType>
+
+	<xsd:element name="itemset" type="tItemset" />
+
+</xsd:schema>
