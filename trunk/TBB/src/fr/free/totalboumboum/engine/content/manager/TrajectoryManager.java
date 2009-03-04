@@ -227,7 +227,7 @@ public class TrajectoryManager
 	 * 		- calculer la position virtuelle à ce temps là (ce qui implique de calculer le point de départ en référence)
 	 * 		- vérifier si elle colle à la position forcée
 	 * 		- si elle ne colle pas : la corriger
-	 * si on ne l'a pas encore dépassé : à peu près pareil
+	 * si on ne l'a pas encore dépassée : à peu près pareil
 	 * 		- calculer la position initiale
 	 * 		- calculer la position forcée correspondante
 	 * 		- corriger  
@@ -384,7 +384,7 @@ public class TrajectoryManager
 				currentPosY = currentPosY+oldSprite.getCurrentPosY();
 				currentPosZ = currentPosZ+oldSprite.getCurrentPosZ();
 			}
-			// avant:oui - maintenant:oui (mais pas le même)
+			// avant:oui - maintenant:oui (mais pas le même sprite)
 			else if(newSprite!=oldSprite)
 			{	currentPosX = 0;
 				currentPosY = 0;
@@ -459,8 +459,8 @@ if(previousPosX != currentPosX || previousPosY != currentPosY || previousPosZ !=
 if(moveDir!=Direction.NONE)			
 	{	
 	
-
-			
+			// COLISIONS : VERSION 2
+			//
 			// récupération des cases voisines, y compris la case courante
 			Tile tile = sprite.getTile();
 			ArrayList<Tile> neighbourTiles = sprite.getLevel().getNeighbourTiles(tile.getLine(),tile.getCol());
@@ -492,7 +492,8 @@ if(moveDir!=Direction.NONE)
 			
 			
 			
-/*			
+/*
+			// COLISIONS : VERSION 1
 			
 			// sortie de tile ?
 			Direction moveXDir = Direction.getHorizontalFromDouble(currentPosX-previousPosX);
@@ -598,7 +599,7 @@ if(moveDir!=Direction.NONE)
 		
 		
 		// normalizing an absolute position (if not bound)
-			//NOTE à placer avant, non ?
+		//NOTE à placer avant, non ?
 		if(!isBoundToSprite())
 		{	double temp[] = sprite.getLevel().normalizePosition(currentPosX, currentPosY);
 			currentPosX = temp[0];
@@ -625,36 +626,6 @@ if(moveDir!=Direction.NONE)
 			else
 				sprite.processEvent(new EngineEvent(EngineEvent.TRAJECTORY_OVER));
 		}
-	}
-	
-	private void updateTime()
-	{	double milliPeriod = Configuration.getEngineConfiguration().getMilliPeriod();
-		double delta = milliPeriod*forcedDurationCoeff*sprite.getSpeedCoeff();	
-		currentTime = currentTime + delta;
-		if(currentTime > totalDuration)
-		{	// looping the trajectory
-			if (currentTrajectory.getRepeat())
-			{	while(currentTime>totalDuration)
-					currentTime = currentTime - totalDuration;
-				relativePosX = currentTrajectory.getTotalXShift()-relativePosX;
-				relativePosY = currentTrajectory.getTotalYShift()-relativePosY;
-				relativePosZ = currentTrajectory.getTotalZShift(getBoundToSprite())-relativePosZ;
-			}
-			// or terminating the trajectory
-			else
-			{	currentTime = totalDuration;
-				double currentX = currentTrajectory.getTotalXShift(); 
-				double currentY = currentTrajectory.getTotalYShift();
-				double currentZ = currentTrajectory.getTotalZShift(getBoundToSprite());
-				shiftX = shiftX + (currentX - relativePosX);
-				shiftY = shiftY + (currentY - relativePosY);
-				shiftZ = shiftZ + (currentZ - relativePosZ);
-				relativePosX = currentX;
-				relativePosY = currentY;
-				relativePosZ = currentZ;
-				isTerminated = true;
-			}
-		}	
 	}
 	
 	private void updateRelativePos()
@@ -725,6 +696,36 @@ if(moveDir!=Direction.NONE)
 	 */
 	public double getTotalDuration()
 	{	return totalDuration;
+	}
+	
+	private void updateTime()
+	{	double milliPeriod = Configuration.getEngineConfiguration().getMilliPeriod();
+		double delta = milliPeriod*forcedDurationCoeff*sprite.getSpeedCoeff();	
+		currentTime = currentTime + delta;
+		if(currentTime > totalDuration)
+		{	// looping the trajectory
+			if (currentTrajectory.getRepeat())
+			{	while(currentTime>totalDuration)
+					currentTime = currentTime - totalDuration;
+				relativePosX = currentTrajectory.getTotalXShift()-relativePosX;
+				relativePosY = currentTrajectory.getTotalYShift()-relativePosY;
+				relativePosZ = currentTrajectory.getTotalZShift(getBoundToSprite())-relativePosZ;
+			}
+			// or terminating the trajectory
+			else
+			{	currentTime = totalDuration;
+				double currentX = currentTrajectory.getTotalXShift(); 
+				double currentY = currentTrajectory.getTotalYShift();
+				double currentZ = currentTrajectory.getTotalZShift(getBoundToSprite());
+				shiftX = shiftX + (currentX - relativePosX);
+				shiftY = shiftY + (currentY - relativePosY);
+				shiftZ = shiftZ + (currentZ - relativePosZ);
+				relativePosX = currentX;
+				relativePosY = currentY;
+				relativePosZ = currentZ;
+				isTerminated = true;
+			}
+		}	
 	}
 	
 /* ********************************
@@ -1458,5 +1459,54 @@ if(sprite instanceof Hero)
 			currentTrajectory = null;
 			sprite = null;
 		}
+	}
+	
+	/*
+	 * COLISSIONS VERSION 3
+	 */
+	
+	/**
+	 * check if the sprite is actually an obstacle for this sprite,
+	 * whose trajectory goes from source to target (along the line x = a*x + b).
+	 * it is an obstacle only if it prevent this sprite to follow the vertical
+	 * component of its trajectory.
+	 */
+	private boolean isVerticalObstacle(double sourceX, double sourceY, double targetX, double targetY, double a, double b, double spriteX, double spriteY)
+	{	boolean result = false;
+		double tileDim = getLoop().getScaledTileDimension();
+		// vertical distance between the potential obstacle and the trajectory
+		double spriteYprime = a*spriteX + b;
+		double verticalDistance = Math.abs(spriteY - spriteYprime);
+		// is it critically close to this sprite?
+		if(CalculusTools.isRelativelySmallerThan(verticalDistance,tileDim,getLoop()))
+		{	// critical horizontal limits
+			double inf = Math.min(sourceX,targetX) - tileDim;
+			double sup = Math.max(sourceX,targetX) + tileDim;
+			// is the potential obstacle in these boundaries?
+			result = targetX>inf && targetX<sup;			
+		}
+		return result;
+	}
+	/**
+	 * check if the sprite is actually an obstacle for this sprite,
+	 * whose trajectory goes from source to target (along the line x = a*x + b).
+	 * it is an obstacle only if it prevent this sprite to follow the horizontal
+	 * component of its trajectory.
+	 */
+	private boolean isHorizontalObstacle(double sourceX, double sourceY, double targetX, double targetY, double a, double b, double spriteX, double spriteY)
+	{	boolean result = false;
+		double tileDim = getLoop().getScaledTileDimension();
+		// horizontal distance between the potential obstacle and the trajectory
+		double spriteXprime = (spriteY - b)/a;
+		double horizontalDistance = Math.abs(spriteX - spriteXprime);
+		// is it critically close to this sprite?
+		if(CalculusTools.isRelativelySmallerThan(horizontalDistance,tileDim,getLoop()))
+		{	// critical vertical limits
+			double inf = Math.min(sourceY,targetY) - tileDim;
+			double sup = Math.max(sourceY,targetY) + tileDim;
+			// is the potential obstacle in these boundaries?
+			result = targetY>inf && targetY<sup;			
+		}
+		return result;
 	}
 }
