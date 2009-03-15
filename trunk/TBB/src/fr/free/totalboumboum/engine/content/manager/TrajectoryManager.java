@@ -1530,23 +1530,67 @@ if(sprite instanceof Hero)
 		/**
 		 *  Create a new move zone for a trajectory going from (x1,y1) to (x2,y2).
 		 *  The corresponding line equation is processed.
+		 *  
+		 *  @param	source	moving sprite
+		 *  @param	sourceX	starting x position
+		 *  @param	sourceY	starting y position
+		 *  @param	targetX	theoretical arriving x position  
+		 *  @param	targetY	theoretical arriving y position
+		 *  @param	level	current level
+		 *  @param	initialDirection	requested move direction
+		 *  @param	usedDirection	possibily different direction resulting from bypassing an obstacle
+		 *  @param	fuelX	remaining X distance  
+		 *  @param	fuelY	remaining Y distance  
 		 */
-		public MoveZone(Sprite source, double x1, double x2, double y1, double y2, Level level)
+		public MoveZone(Sprite source, double sourceX, double sourceY, double targetX, double targetY, Level level, Direction initialDirection, Direction usedDirection, double fuelX, double fuelY)
 		{	this.level = level;
 			this.source = source;
-			this.x1 = x1;
-			this.y1 = y1;
-			this.x2 = x2;
-			this.y2 = y2;
-			vertical = y1==y2;
+			this.initialDirection = initialDirection;
+			this.usedDirection = usedDirection;
+			this.fuelX = fuelX;
+			this.fuelY = fuelY;
+			this.currentX = sourceX;
+			this.currentY = sourceY;
+			this.sourceX = sourceX;
+			this.sourceY = sourceY;
+			this.targetX = targetX;
+			this.targetY = targetY;
+			vertical = sourceY==targetY;
 			if(vertical)
-			{	a = x1;
+			{	a = sourceX;
 				b = Double.NaN;
 			}
 			else
-			{	a = (y1-y2)/(x1-x2);
-				b = y1 - a*x1;
+			{	a = (sourceY-targetY)/(sourceX-targetX);
+				b = sourceY - a*sourceX;
 			}
+		}
+		
+		private double currentX;
+		private double currentY;
+		public double getCurrentX()
+		{	return currentX;
+		}
+		public double getCurrentY()
+		{	return currentY;
+		}
+
+		private double fuelX;
+		private double fuelY;
+		public double getFuelX()
+		{	return fuelX;
+		}
+		public double getFuelY()
+		{	return fuelY;
+		}
+
+		private Direction initialDirection;
+		private Direction usedDirection;
+		public Direction getInitialDirection()
+		{	return initialDirection;
+		}
+		public Direction getUsedDirection()
+		{	return usedDirection;
 		}
 		
 		private Sprite source;
@@ -1554,18 +1598,18 @@ if(sprite instanceof Hero)
 		{	return source;
 		}
 		
-		private double x1,y1,x2,y2;
+		private double sourceX,sourceY,targetX,targetY;
 		public double getSourceX()
-		{	return x1;
+		{	return sourceX;
 		}
 		public double getSourceY()
-		{	return y1;
+		{	return sourceY;
 		}
 		public double getTargetX()
-		{	return x2;
+		{	return targetX;
 		}
 		public double getTargetY()
-		{	return y2;
+		{	return targetY;
 		}
 		
 		private double a;
@@ -1604,10 +1648,10 @@ if(sprite instanceof Hero)
 		private ArrayList<Tile> getCrossedTiles()
 		{	ArrayList<Tile> result = new ArrayList<Tile>();
 			// init
-			double upleftX = Math.min(x1,x2) - GameConstants.STANDARD_TILE_DIMENSION;
-			double upleftY = Math.min(y1,y2) - GameConstants.STANDARD_TILE_DIMENSION;
-			double downrightX = Math.max(x1,x2) + GameConstants.STANDARD_TILE_DIMENSION;
-			double downrightY = Math.max(y1,y2) + GameConstants.STANDARD_TILE_DIMENSION;
+			double upleftX = Math.min(sourceX,targetX) - GameConstants.STANDARD_TILE_DIMENSION;
+			double upleftY = Math.min(sourceY,targetY) - GameConstants.STANDARD_TILE_DIMENSION;
+			double downrightX = Math.max(sourceX,targetX) + GameConstants.STANDARD_TILE_DIMENSION;
+			double downrightY = Math.max(sourceY,targetY) + GameConstants.STANDARD_TILE_DIMENSION;
 			Tile upleftTile = level.getTile(upleftX,upleftY);
 			Tile downrightTile = level.getTile(downrightX,downrightY);
 			// process
@@ -1666,9 +1710,18 @@ if(sprite instanceof Hero)
 				// is the potential obstacle an actual obstacle?
 				if(po.isActualObstacle())
 				{	// it must be bypassed
-					
+					bypassObstacle(po);
+					if(fuelX==0 || fuelY==0)
+						goOn = false;
 				}
 			}
+		}
+		
+		private void bypassObstacle(PotentialObstacle po)
+		{	
+			//TODO
+			
+			//TODO
 		}
 	}
 	
@@ -1753,8 +1806,7 @@ if(sprite instanceof Hero)
 		public boolean isActualObstacle()
 		{	boolean result;
 			Sprite source = moveZone.getSourceSprite();
-//TODO cette direction devrait dépendre de la move zone
-			Direction dir = source.getActualDirection();
+			Direction dir = moveZone.getInitialDirection();
 			String act = AbstractAction.MOVELOW;
 			if(!isOnGround())
 				act = AbstractAction.MOVEHIGH;
