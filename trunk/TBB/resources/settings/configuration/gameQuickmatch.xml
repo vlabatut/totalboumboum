@@ -4,7 +4,7 @@
 	<settings>
 		<levels randomOrder="true" />
 		<players randomLocation="true" />
-		<limits points="0" rounds="6" time="60000" />
+		<limits points="0" rounds="6" time="0" />
 		<points share="true" draw="none">
 			<value rank="1" points="8" />
 			<value rank="2" points="4" />
@@ -20,12 +20,7 @@
 		<player file="60" color="orange" controls="0" spritePack="superbomberman5" spriteFolder="shirobon" />
 	</players>
 	<levels>
-		<level pack="nbm2Custom" folder="battle" />
-		<level pack="nbm2Custom" folder="cave" />
-		<level pack="nbm2Custom" folder="forest" />
-		<level pack="nbm2Custom" folder="lake" />
-		<level pack="nbm2Custom" folder="mountain" />
-		<level pack="nbm2Custom" folder="prison" />
+		<level pack="sbm1Custom" folder="test3" />
 	</levels>
 </gameQuickmatch>
 

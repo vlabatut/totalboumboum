@@ -25,8 +25,12 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.Iterator;
+import java.util.LinkedList;
+import java.util.TreeSet;
 
 import fr.free.totalboumboum.configuration.Configuration;
+import fr.free.totalboumboum.configuration.GameConstants;
+import fr.free.totalboumboum.engine.container.level.Level;
 import fr.free.totalboumboum.engine.container.tile.Tile;
 import fr.free.totalboumboum.engine.content.feature.Direction;
 import fr.free.totalboumboum.engine.content.feature.GestureConstants;
@@ -1508,5 +1512,256 @@ if(sprite instanceof Hero)
 			result = targetY>inf && targetY<sup;			
 		}
 		return result;
+	}
+	
+	
+	
+	
+	
+	
+	
+	//TODO y va y avoir des problèmes de normalisation des coordonnées (utiliser mod pour fermer la zone)
+	// (valable pour les coordonnées pixel, mais aussi pour les cases !)
+	
+	private class MoveZone
+	{	private Level level;
+		private boolean vertical;
+		
+		/**
+		 *  Create a new move zone for a trajectory going from (x1,y1) to (x2,y2).
+		 *  The corresponding line equation is processed.
+		 */
+		public MoveZone(Sprite source, double x1, double x2, double y1, double y2, Level level)
+		{	this.level = level;
+			this.source = source;
+			this.x1 = x1;
+			this.y1 = y1;
+			this.x2 = x2;
+			this.y2 = y2;
+			vertical = y1==y2;
+			if(vertical)
+			{	a = x1;
+				b = Double.NaN;
+			}
+			else
+			{	a = (y1-y2)/(x1-x2);
+				b = y1 - a*x1;
+			}
+		}
+		
+		private Sprite source;
+		public Sprite getSourceSprite()
+		{	return source;
+		}
+		
+		private double x1,y1,x2,y2;
+		public double getSourceX()
+		{	return x1;
+		}
+		public double getSourceY()
+		{	return y1;
+		}
+		public double getTargetX()
+		{	return x2;
+		}
+		public double getTargetY()
+		{	return y2;
+		}
+		
+		private double a;
+		private double b;
+		public double getTrajectoryA()
+		{	return a;
+		}
+		public double getTrajectoryB()
+		{	return b;
+		}
+		
+		public double projectHorizontally(double y)
+		{	double x;
+			if(vertical)
+				x = a;
+			else if(a==0)
+				x = b;
+			else
+				x = (y-b)/a;
+			return x;
+		}
+		public double projectVertically(double x)
+		{	double y;
+			if(vertical)
+				y = Double.NaN;
+			else
+				y = a*x + b;
+			return y;
+		}
+
+		/**
+		 * Defines a list of tiles approximating the move zone,
+		 * i.e. tiles intersecting the trajectory, +/- a safe margin
+		 * corresponfing to a tile size.
+		 */
+		private ArrayList<Tile> getCrossedTiles()
+		{	ArrayList<Tile> result = new ArrayList<Tile>();
+			// init
+			double upleftX = Math.min(x1,x2) - GameConstants.STANDARD_TILE_DIMENSION;
+			double upleftY = Math.min(y1,y2) - GameConstants.STANDARD_TILE_DIMENSION;
+			double downrightX = Math.max(x1,x2) + GameConstants.STANDARD_TILE_DIMENSION;
+			double downrightY = Math.max(y1,y2) + GameConstants.STANDARD_TILE_DIMENSION;
+			Tile upleftTile = level.getTile(upleftX,upleftY);
+			Tile downrightTile = level.getTile(downrightX,downrightY);
+			// process
+			int sLine = upleftTile.getLine();
+			int tLine = downrightTile.getLine();
+			int sCol = upleftTile.getCol();
+			int tCol = downrightTile.getCol();
+			for(int line=sLine;line<=tLine;line++)
+			{	for(int col=sCol;col<=tCol;col++)
+				{	Tile temp = level.getTile(line,col);
+					result.add(temp);
+				}
+			}
+			return result;
+		}
+		
+		/**
+		 * Defines the list of potential obstacles included in the crossed tiles.
+		 * They're ordered in function of the distance to the trajectory source
+		 */
+		private ArrayList<PotentialObstacle> getCrossedSprites()
+		{	ArrayList<PotentialObstacle> result = new ArrayList<PotentialObstacle>();
+			ArrayList<Tile> tiles = getCrossedTiles();
+			for(Tile t: tiles)
+			{	ArrayList<Sprite> temp = t.getSprites();
+				for(Sprite s: temp)
+				{	PotentialObstacle o = new PotentialObstacle(s,this);
+					if(o.hasIntersection())
+						result.add(o);
+				}
+			}
+			Collections.sort(result,new Comparator<PotentialObstacle>()
+			{	@Override
+				public int compare(PotentialObstacle arg0, PotentialObstacle arg1)
+				{	int resultat;
+					double dist0 = arg0.getDistance();
+					double dist1 = arg1.getDistance();
+					if(dist0>dist1)
+						resultat = +1;
+					else if(dist0<dist1)
+						resultat = -1;
+					else
+						resultat = 0;
+					return resultat;
+				}
+			});
+			return result;
+		}
+		
+		public void applyMove()
+		{	ArrayList<PotentialObstacle> potentialObstacles = getCrossedSprites();
+			Iterator<PotentialObstacle> it = potentialObstacles.iterator();
+			boolean goOn = true;
+			while(it.hasNext() && goOn)
+			{	PotentialObstacle po = it.next();
+				// is the potential obstacle an actual obstacle?
+				if(po.isActualObstacle())
+				{	// it must be bypassed
+					
+				}
+			}
+		}
+	}
+	
+	private class PotentialObstacle
+	{	private Sprite sprite;
+		private MoveZone moveZone;
+		
+		public PotentialObstacle(Sprite sprite, MoveZone moveZone)
+		{	this.sprite = sprite;
+			this.moveZone = moveZone;
+			initIntersection();
+		}
+		
+		private double distance;
+		private double intersectionX,intersectionY;
+		public double getDistance()
+		{	return distance;		
+		}
+		public double getIntersectionX()
+		{	return intersectionX;
+		}
+		public double getIntersectionY()
+		{	return intersectionY;
+		}
+		
+		/**
+		 * Process the intersection points between this obstacle safe zone limit and the trajectory.
+		 * Only the point closest to the trajectory source is keeped.
+		 * Note that there may be no intersection point at all.
+		 */
+		private void initIntersection()
+		{	distance = Double.MAX_VALUE;
+			intersectionX = Double.NaN;
+			intersectionY = Double.NaN;
+			double posX = sprite.getCurrentPosX();
+			double posY = sprite.getCurrentPosY();
+//			double a = moveZone.getTrajectoryA();
+//			double b = moveZone.getTrajectoryB();
+			double sourceX = moveZone.getSourceX();
+			double sourceY = moveZone.getSourceY();
+			// intersection with a vertical side of the obstacle safe zone
+			{	double interX[] = {posX - GameConstants.STANDARD_TILE_DIMENSION, posX + GameConstants.STANDARD_TILE_DIMENSION};
+				// for each side
+				for(int i=0;i<interX.length;i++)
+				{	double interY = moveZone.projectVertically(interX[i]);
+					// is there an intersection point between side and trajectory 
+					if(interY!=Double.NaN)
+					{	double projectionDist = Math.abs(posY - interY);
+						double sourceDist = Math.abs(sourceX - interX[i]) + Math.abs(sourceY - interY);
+						// critical projection distance and smaller source-intersection distance 
+						if(projectionDist<GameConstants.STANDARD_TILE_DIMENSION && sourceDist<distance)
+						{	intersectionX = interX[i];
+							intersectionY = interY;
+							distance = projectionDist;
+						}
+					}
+				}
+			}
+			// intersection with an horizontal side of the obstacle safe zone
+			{	double interY[] = {posY - GameConstants.STANDARD_TILE_DIMENSION, posY + GameConstants.STANDARD_TILE_DIMENSION};
+				// for each side
+				for(int i=0;i<interY.length;i++)
+				{	double interX = moveZone.projectHorizontally(interY[i]);
+					// is there an intersection point between side and trajectory 
+					if(interX!=Double.NaN)
+					{	double projectionDist = Math.abs(posX - interX);
+						double sourceDist = Math.abs(sourceX - interX) + Math.abs(sourceY - interY[i]);
+						// critical distance, and smaller than the current distance
+						if(projectionDist<GameConstants.STANDARD_TILE_DIMENSION && sourceDist<distance)
+						{	intersectionX = interX;
+							intersectionY = interY[i];
+							distance = projectionDist;
+						}
+					}
+				}
+			}
+		}
+		private boolean hasIntersection()
+		{	return intersectionX != Double.NaN;			
+		}
+		
+		public boolean isActualObstacle()
+		{	boolean result;
+			Sprite source = moveZone.getSourceSprite();
+//TODO cette direction devrait dépendre de la move zone
+			Direction dir = source.getActualDirection();
+			String act = AbstractAction.MOVELOW;
+			if(!isOnGround())
+				act = AbstractAction.MOVEHIGH;
+			SpecificAction specificAction = new SpecificAction(act,source,null,dir);
+			ThirdPermission permission = sprite.getThirdPermission(specificAction);
+			result = permission==null;
+			return result;
+		}
 	}
 }
