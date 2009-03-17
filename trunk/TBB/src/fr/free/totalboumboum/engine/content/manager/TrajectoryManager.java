@@ -1704,14 +1704,14 @@ if(sprite instanceof Hero)
 		public void applyMove()
 		{	ArrayList<PotentialObstacle> potentialObstacles = getCrossedSprites();
 			Iterator<PotentialObstacle> it = potentialObstacles.iterator();
-			boolean goOn = true;
+			boolean goOn = usedDirection!=Direction.NONE;
 			while(it.hasNext() && goOn)
 			{	PotentialObstacle po = it.next();
 				// is the potential obstacle an actual obstacle?
 				if(po.isActualObstacle())
 				{	// it must be bypassed
 					bypassObstacle(po);
-					if(fuelX==0 || fuelY==0)
+					if(fuelX==0 || fuelY==0 || usedDirection==Direction.NONE)
 						goOn = false;
 				}
 			}

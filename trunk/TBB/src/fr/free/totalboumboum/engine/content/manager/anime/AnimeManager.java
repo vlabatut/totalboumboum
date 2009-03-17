@@ -1,4 +1,4 @@
-package fr.free.totalboumboum.engine.content.manager.control;
+package fr.free.totalboumboum.engine.content.manager.anime;
 
 /*
  * Total Boum Boum
