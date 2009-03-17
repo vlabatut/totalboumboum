@@ -31,7 +31,6 @@ import fr.free.totalboumboum.engine.content.feature.anime.AnimePack;
 import fr.free.totalboumboum.engine.content.feature.explosion.Explosion;
 import fr.free.totalboumboum.engine.content.feature.permission.PermissionPack;
 import fr.free.totalboumboum.engine.content.feature.trajectory.TrajectoryPack;
-import fr.free.totalboumboum.engine.content.manager.TrajectoryManager;
 import fr.free.totalboumboum.engine.content.manager.ability.AbilityManager;
 import fr.free.totalboumboum.engine.content.manager.anime.AnimeManager;
 import fr.free.totalboumboum.engine.content.manager.bombset.BombsetManager;
@@ -40,6 +39,7 @@ import fr.free.totalboumboum.engine.content.manager.delay.DelayManager;
 import fr.free.totalboumboum.engine.content.manager.explosion.ExplosionManager;
 import fr.free.totalboumboum.engine.content.manager.item.ItemManager;
 import fr.free.totalboumboum.engine.content.manager.permission.PermissionManager;
+import fr.free.totalboumboum.engine.content.manager.trajectory.TrajectoryManager;
 
 public abstract class SpriteFactory<T extends Sprite>
 {
