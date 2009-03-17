@@ -31,15 +31,15 @@ import fr.free.totalboumboum.engine.content.feature.anime.AnimePack;
 import fr.free.totalboumboum.engine.content.feature.explosion.Explosion;
 import fr.free.totalboumboum.engine.content.feature.permission.PermissionPack;
 import fr.free.totalboumboum.engine.content.feature.trajectory.TrajectoryPack;
-import fr.free.totalboumboum.engine.content.manager.AbilityManager;
-import fr.free.totalboumboum.engine.content.manager.AnimeManager;
-import fr.free.totalboumboum.engine.content.manager.BombsetManager;
-import fr.free.totalboumboum.engine.content.manager.ControlManager;
-import fr.free.totalboumboum.engine.content.manager.DelayManager;
-import fr.free.totalboumboum.engine.content.manager.ExplosionManager;
-import fr.free.totalboumboum.engine.content.manager.ItemManager;
-import fr.free.totalboumboum.engine.content.manager.PermissionManager;
 import fr.free.totalboumboum.engine.content.manager.TrajectoryManager;
+import fr.free.totalboumboum.engine.content.manager.ability.AbilityManager;
+import fr.free.totalboumboum.engine.content.manager.anime.AnimeManager;
+import fr.free.totalboumboum.engine.content.manager.bombset.BombsetManager;
+import fr.free.totalboumboum.engine.content.manager.control.ControlManager;
+import fr.free.totalboumboum.engine.content.manager.delay.DelayManager;
+import fr.free.totalboumboum.engine.content.manager.explosion.ExplosionManager;
+import fr.free.totalboumboum.engine.content.manager.item.ItemManager;
+import fr.free.totalboumboum.engine.content.manager.permission.PermissionManager;
 
 public abstract class SpriteFactory<T extends Sprite>
 {

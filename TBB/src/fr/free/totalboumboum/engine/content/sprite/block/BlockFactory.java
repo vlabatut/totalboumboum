@@ -22,7 +22,7 @@ package fr.free.totalboumboum.engine.content.sprite.block;
  */
 
 import fr.free.totalboumboum.engine.container.level.Level;
-import fr.free.totalboumboum.engine.content.manager.EventManager;
+import fr.free.totalboumboum.engine.content.manager.event.EventManager;
 import fr.free.totalboumboum.engine.content.sprite.SpriteFactory;
 
 

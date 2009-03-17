@@ -1,4 +1,4 @@
-package fr.free.totalboumboum.engine.content.manager;
+package fr.free.totalboumboum.engine.content.manager.item;
 
 /*
  * Total Boum Boum
