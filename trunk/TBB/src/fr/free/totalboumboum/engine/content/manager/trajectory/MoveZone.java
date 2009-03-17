@@ -229,15 +229,91 @@ public class MoveZone
 		}
 	}
 	
+	public boolean hasArrived()
+	{	return 		
+	}
+	
 	private void bypassObstacle(PotentialObstacle po)
-	{	double verticalDistance = Math.abs(po.getIntersectionY()-po.getSprite().getCurrentPosY());
+	{	// move to the contact point
+		moveToContactPoint(po);
+		// process the new direction according to the obstacle position
+		double verticalDistance = Math.abs(po.getIntersectionY()-po.getSprite().getCurrentPosY());
 		double horizontalDistance = Math.abs(po.getIntersectionX()-po.getSprite().getCurrentPosX());
 		if(verticalDistance<horizontalDistance)
 			usedDirection = usedDirection.getVerticalPrimary();
 		else
 			usedDirection = usedDirection.getHorizontalPrimary();
-		//TODO
+		// if the initital direction was composite
+		if(initialDirection.isComposite())
+		{	// if the sprite is definitely blocked
+			if(usedDirection==Direction.NONE)
+			{	
+				
+			}
+			// if the sprite is not completely blocked
+			else
+			{	// process safe position
+				double avoid[] = po.getSafePosition(currentX,currentY,usedDirection);
+				// try to avoid it
+				MoveZone mz = new MoveZone(source,currentX,currentY,avoid[0],avoid[1],level,initialDirection,usedDirection,fuelX,fuelY);
+				
+				
+			}			
+		}
+		// if the initial direction was simple
+		else
+		{	
+			
+		}
+		
+		
 		
 		//TODO
+	}
+	
+	/**
+	 * Process the move from the current position to a contact
+	 * position. The path is supposed to be obstacle-free. 
+	 * The fuel and current position variables are updated.
+	 * Note that for fuel issues, this sprite may not arrive
+	 * to the specified point.
+	 * @param po
+	 */
+	private void moveToContactPoint(PotentialObstacle po)
+	{	double interX = po.getIntersectionX();
+		double interY = po.getIntersectionY();
+		double deltaX = currentX-interX;
+		double absDeltaX = Math.abs(deltaX);
+		double deltaY = currentY-interY;
+		double absDeltaY = Math.abs(deltaY);
+		// enough fuel
+		if(fuelX>=absDeltaX && fuelY>=absDeltaY)
+		{	fuelX = fuelX - absDeltaX;
+			fuelY = fuelY - absDeltaY;
+			currentX = interX;
+			currentY = interY;
+//TODO fire event			
+		}
+		// must stop before contact
+		else
+		{	deltaX = Math.signum(deltaX)*fuelX;
+			deltaY = Math.signum(deltaY)*fuelY;
+			double yForX = deltaX*a+b;
+			double absYforX = Math.abs(yForX);
+			double xForY = (deltaY-b)/a;
+			double absXforY = Math.abs(xForY);
+			if(absYforX>fuelY)
+			{	fuelX = fuelX - absXforY;
+				fuelY = fuelY - fuelY;
+				currentX = currentX + xForY;
+				currentY = currentY + deltaY;
+			}
+			else // if(distXforY>fuelX)
+			{	fuelX = fuelX - fuelX;
+				fuelY = fuelY - absYforX;
+				currentX = currentX + deltaX;
+				currentY = currentY + yForX;
+			}
+		}
 	}
 }

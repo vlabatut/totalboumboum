@@ -111,6 +111,39 @@ public class PotentialObstacle
 	{	return intersectionX != Double.NaN;			
 	}
 	
+	/**
+	 * Process which corner of this obstacle safe zone will be reached if
+	 * following the direction "move" from the position (x,y) 
+	 * @param x	starting x position
+	 * @param y	starting y position
+	 * @param move	moving direction
+	 * @return	(x,y) position of the safe corner
+	 */
+	public double[] getSafePosition(double x, double y, Direction move)
+	{	double result[] = {0,0};
+		double down = sprite.getCurrentPosY() + GameConstants.STANDARD_TILE_DIMENSION;
+		double up = sprite.getCurrentPosY() - GameConstants.STANDARD_TILE_DIMENSION;
+		double left = sprite.getCurrentPosX() - GameConstants.STANDARD_TILE_DIMENSION;
+		double right = sprite.getCurrentPosX() + GameConstants.STANDARD_TILE_DIMENSION;
+		if(move==Direction.DOWN)
+		{	result[0] = x;
+			result[1] = down;		
+		}
+		else if(move==Direction.LEFT)
+		{	result[0] = left;
+			result[1] = y;		
+		} 
+		else if(move==Direction.RIGHT)
+		{	result[0] = right;
+			result[1] = y;		
+		} 
+		if(move==Direction.DOWN)
+		{	result[0] = x;
+			result[1] = up;		
+		} 
+		return result;
+	}
+	
 	public boolean isActualObstacle()
 	{	boolean result;
 		Sprite source = moveZone.getSourceSprite();
