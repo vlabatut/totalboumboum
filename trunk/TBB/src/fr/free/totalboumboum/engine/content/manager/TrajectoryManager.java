@@ -1718,7 +1718,12 @@ if(sprite instanceof Hero)
 		}
 		
 		private void bypassObstacle(PotentialObstacle po)
-		{	
+		{	double verticalDistance = Math.abs(po.getIntersectionY()-po.getSprite().getCurrentPosY());
+			double horizontalDistance = Math.abs(po.getIntersectionX()-po.getSprite().getCurrentPosX());
+			if(verticalDistance<horizontalDistance)
+				usedDirection = usedDirection.getVerticalPrimary();
+			else
+				usedDirection = usedDirection.getHorizontalPrimary();
 			//TODO
 			
 			//TODO
@@ -1726,14 +1731,19 @@ if(sprite instanceof Hero)
 	}
 	
 	private class PotentialObstacle
-	{	private Sprite sprite;
-		private MoveZone moveZone;
+	{	private MoveZone moveZone;
 		
 		public PotentialObstacle(Sprite sprite, MoveZone moveZone)
 		{	this.sprite = sprite;
 			this.moveZone = moveZone;
 			initIntersection();
 		}
+		
+		private Sprite sprite;
+		public Sprite getSprite()
+		{	return sprite;
+		}
+		
 		
 		private double distance;
 		private double intersectionX,intersectionY;

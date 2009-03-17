@@ -26,7 +26,7 @@ import java.util.Iterator;
 
 import fr.free.totalboumboum.engine.container.level.Level;
 import fr.free.totalboumboum.engine.content.feature.ability.AbstractAbility;
-import fr.free.totalboumboum.engine.content.manager.EventManager;
+import fr.free.totalboumboum.engine.content.manager.event.EventManager;
 import fr.free.totalboumboum.engine.content.sprite.SpriteFactory;
 import fr.free.totalboumboum.engine.content.sprite.item.ItemEventManager;
 

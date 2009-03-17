@@ -23,7 +23,7 @@ package fr.free.totalboumboum.engine.content.sprite.fire;
 
 import fr.free.totalboumboum.engine.container.fireset.Fireset;
 import fr.free.totalboumboum.engine.container.level.Level;
-import fr.free.totalboumboum.engine.content.manager.EventManager;
+import fr.free.totalboumboum.engine.content.manager.event.EventManager;
 import fr.free.totalboumboum.engine.content.sprite.SpriteFactory;
 
 public class FireFactory extends SpriteFactory<Fire>

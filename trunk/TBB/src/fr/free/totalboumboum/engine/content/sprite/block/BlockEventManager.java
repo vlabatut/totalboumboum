@@ -31,8 +31,8 @@ import fr.free.totalboumboum.engine.content.feature.action.SpecificAction;
 import fr.free.totalboumboum.engine.content.feature.event.ActionEvent;
 import fr.free.totalboumboum.engine.content.feature.event.ControlEvent;
 import fr.free.totalboumboum.engine.content.feature.event.EngineEvent;
-import fr.free.totalboumboum.engine.content.manager.DelayManager;
-import fr.free.totalboumboum.engine.content.manager.EventManager;
+import fr.free.totalboumboum.engine.content.manager.delay.DelayManager;
+import fr.free.totalboumboum.engine.content.manager.event.EventManager;
 import fr.free.totalboumboum.engine.content.sprite.item.Item;
 
 public class BlockEventManager extends EventManager
