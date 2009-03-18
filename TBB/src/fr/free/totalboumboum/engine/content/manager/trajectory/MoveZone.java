@@ -379,7 +379,7 @@ public class MoveZone
 			}
 		}
 		else
-			usedDirection = Direction.NONE;
+			usedDirection = Direction.NONE; 
 	}
 	
 	/**
