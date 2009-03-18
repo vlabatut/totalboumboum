@@ -30,7 +30,9 @@ import fr.free.totalboumboum.configuration.GameConstants;
 import fr.free.totalboumboum.engine.container.level.Level;
 import fr.free.totalboumboum.engine.container.tile.Tile;
 import fr.free.totalboumboum.engine.content.feature.Direction;
+import fr.free.totalboumboum.engine.content.feature.ability.StateAbility;
 import fr.free.totalboumboum.engine.content.sprite.Sprite;
+import fr.free.totalboumboum.tools.CalculusTools;
 
 //TODO y va y avoir des problèmes de normalisation des coordonnées (utiliser mod pour fermer la zone)
 // (valable pour les coordonnées pixel, mais aussi pour les cases !)
@@ -78,57 +80,91 @@ public class MoveZone
 		}
 	}
 	
+	/////////////////////////////////////////////////////////////////
+	// CURRENT POSITION		/////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
 	private double currentX;
 	private double currentY;
+	
 	public double getCurrentX()
 	{	return currentX;
 	}
+	
 	public double getCurrentY()
 	{	return currentY;
 	}
 
+	/////////////////////////////////////////////////////////////////
+	// FUEL				/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
 	private double fuelX;
 	private double fuelY;
+	
 	public double getFuelX()
 	{	return fuelX;
 	}
+	
 	public double getFuelY()
 	{	return fuelY;
 	}
 
+	/////////////////////////////////////////////////////////////////
+	// DIRECTIONS		/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
 	private Direction initialDirection;
 	private Direction usedDirection;
+	
 	public Direction getInitialDirection()
 	{	return initialDirection;
 	}
+	
 	public Direction getUsedDirection()
 	{	return usedDirection;
 	}
 	
+	/////////////////////////////////////////////////////////////////
+	// SOURCE			/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
 	private Sprite source;
+	
 	public Sprite getSourceSprite()
 	{	return source;
 	}
 	
-	private double sourceX,sourceY,targetX,targetY;
+	/////////////////////////////////////////////////////////////////
+	// TRAJECTORY POSITIONS	/////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	private double sourceX;
+	private double sourceY;
+	private double targetX;
+	private double targetY;
+	
 	public double getSourceX()
 	{	return sourceX;
 	}
+	
 	public double getSourceY()
 	{	return sourceY;
 	}
+	
 	public double getTargetX()
 	{	return targetX;
 	}
+	
 	public double getTargetY()
 	{	return targetY;
 	}
 	
+	/////////////////////////////////////////////////////////////////
+	// TRAJECTORY LINE	/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
 	private double a;
 	private double b;
+	
 	public double getTrajectoryA()
 	{	return a;
 	}
+	
 	public double getTrajectoryB()
 	{	return b;
 	}
@@ -143,6 +179,7 @@ public class MoveZone
 			x = (y-b)/a;
 		return x;
 	}
+	
 	public double projectVertically(double x)
 	{	double y;
 		if(vertical)
@@ -152,6 +189,9 @@ public class MoveZone
 		return y;
 	}
 
+	/////////////////////////////////////////////////////////////////
+	// PROCESS			/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
 	/**
 	 * Defines a list of tiles approximating the move zone,
 	 * i.e. tiles intersecting the trajectory, +/- a safe margin
@@ -223,52 +263,123 @@ public class MoveZone
 			if(po.isActualObstacle())
 			{	// it must be bypassed
 				bypassObstacle(po);
-				if(fuelX==0 || fuelY==0 || usedDirection==Direction.NONE)
+				if(canMove())
 					goOn = false;
 			}
 		}
 	}
 	
-	public boolean hasArrived()
-	{	return 		
+	/**
+	 * Check if the sprite can move again, depending on its previous
+	 * moves and the current direction.
+	 * @return
+	 */
+	private boolean canMove()
+	{	boolean result = usedDirection!=Direction.NONE;
+		if(result && usedDirection.getVerticalPrimary()!=Direction.NONE)
+			result = fuelY>0;
+		if(result && usedDirection.getHorizontalPrimary()!=Direction.NONE)
+			result = fuelX>0;
+		return result;
 	}
 	
+	/**
+	 * Check if the sprite has arrived to its destination yet.
+	 * @return
+	 */
+	private boolean hasArrived()
+	{	boolean result = true;
+		result = result && CalculusTools.isRelativelyEqualTo(currentX,targetX,level.getLoop());
+		result = result && CalculusTools.isRelativelyEqualTo(currentY,targetY,level.getLoop());
+		return result;
+	}
+	
+	/**
+	 * Make the sprite avoid an obstacle, if there's enough fuel and no
+	 * other critical obstacles.
+	 * @param po
+	 */
 	private void bypassObstacle(PotentialObstacle po)
 	{	// move to the contact point
 		moveToContactPoint(po);
-		// process the new direction according to the obstacle position
+		// if the sprite can still move
+		if(canMove())
+		{	// if the initital direction was composite
+			if(initialDirection.isComposite())
+				bypassObstacleCompositeDirection(po);
+			// if the initial direction was simple
+			else
+				bypassObstacleSimpleDirection(po);
+		}
+	}
+	
+	private void bypassObstacleCompositeDirection(PotentialObstacle po)
+	{	// process the new direction according to the obstacle position
 		double verticalDistance = Math.abs(po.getIntersectionY()-po.getSprite().getCurrentPosY());
 		double horizontalDistance = Math.abs(po.getIntersectionX()-po.getSprite().getCurrentPosX());
+		Direction dir;
 		if(verticalDistance<horizontalDistance)
-			usedDirection = usedDirection.getVerticalPrimary();
+			dir = usedDirection.getVerticalPrimary();
 		else
-			usedDirection = usedDirection.getHorizontalPrimary();
-		// if the initital direction was composite
-		if(initialDirection.isComposite())
-		{	// if the sprite is definitely blocked
-			if(usedDirection==Direction.NONE)
-			{	
-				
+			dir = usedDirection.getHorizontalPrimary();
+		// if the sprite is not completely blocked
+		if(dir!=Direction.NONE)
+		{	// process safe position
+			double avoid[] = po.getSafePosition(currentX,currentY,dir);
+			// try to avoid it
+			MoveZone mz = new MoveZone(source,currentX,currentY,avoid[0],avoid[1],level,initialDirection,dir,fuelX,fuelY);
+			mz.applyMove();
+			currentX = mz.getCurrentX();
+			currentY = mz.getCurrentY();
+			fuelX = mz.getFuelX();
+			fuelY = mz.getFuelY();
+			if(!hasArrived())
+				usedDirection = dir;
+		}
+		else
+			usedDirection = Direction.NONE;		
+	}
+
+	private void bypassObstacleSimpleDirection(PotentialObstacle po)
+	{	// if the sprite is not currently avoiding an obstacle
+		if(usedDirection == initialDirection)
+		{	// process the new direction (perpendicular)
+			Direction dir;
+			double dist;
+			if(usedDirection.isHorizontal())
+			{	double dy = currentY - po.getSprite().getCurrentPosY();
+				dist = Math.abs(dy);
+				dir = Direction.getVerticalFromDouble(dy);
 			}
-			// if the sprite is not completely blocked
 			else
+			{	double dx = currentX - po.getSprite().getCurrentPosX();
+				dist = Math.abs(dx);
+				dir = Direction.getVerticalFromDouble(dx);
+			}
+			// has the sprite an assistance?
+			StateAbility ability = source.computeAbility(StateAbility.SPRITE_MOVE_ASSISTANCE);
+			double tolerance = ability.getStrength();
+			double margin = tolerance*GameConstants.STANDARD_TILE_DIMENSION;
+			if(tolerance<0)
+				margin = Double.MAX_VALUE;
+			if(CalculusTools.isRelativelyGreaterThan(dist,margin,level.getLoop()))
 			{	// process safe position
-				double avoid[] = po.getSafePosition(currentX,currentY,usedDirection);
+				double avoid[] = po.getSafePosition(currentX,currentY,dir);
+				// check if it's worth moving in this direction (i.e. no obstacle coming)
+//TODO here				
 				// try to avoid it
-				MoveZone mz = new MoveZone(source,currentX,currentY,avoid[0],avoid[1],level,initialDirection,usedDirection,fuelX,fuelY);
-				
-				
-			}			
+				MoveZone mz = new MoveZone(source,currentX,currentY,avoid[0],avoid[1],level,initialDirection,dir,fuelX,fuelY);
+				mz.applyMove();
+				currentX = mz.getCurrentX();
+				currentY = mz.getCurrentY();
+				fuelX = mz.getFuelX();
+				fuelY = mz.getFuelY();
+				if(!hasArrived())
+					usedDirection = dir;
+			}
 		}
-		// if the initial direction was simple
 		else
-		{	
-			
-		}
-		
-		
-		
-		//TODO
+			usedDirection = Direction.NONE;
 	}
 	
 	/**
