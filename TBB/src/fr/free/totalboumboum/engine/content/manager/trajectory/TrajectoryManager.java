@@ -1041,9 +1041,9 @@ if(sprite instanceof Hero && tempSprite instanceof Bomb && sprite.getTile()==tem
  * 		in some fancy graphical definitions and/or speeds, 
  * 		player gets blocked at crossroads when moving in a composite direction
  * cause :
- * 		the sprite doesn't pass by central the location of the tile
+ * 		the sprite doesn't pass by the central location of the tile
  * workaround :
- * 		if this center is on the sprite trajectory, its location is rounded to this center 		
+ * 		if this center is on the sprite trajectory, the sprite location is rounded to this center 		
  */
 double tileX = sprite.getTile().getPosX();
 double tileY = sprite.getTile().getPosY();
