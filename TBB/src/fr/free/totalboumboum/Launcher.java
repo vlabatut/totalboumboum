@@ -816,8 +816,6 @@ public class Launcher
 	 * 
 	 * permissions >> modulations
 	 * 
-	 * utiliser une ability spéciale pour déterminer s'il y a aide au contournement. la force de l'ability donne la tolérance du contournement :P
-	 * 
 	 * - lors du calcul des points, il faut forcer la présence d'un classement: ça facilite énormément de traitements en aval
 	 *   au pire, si le classement est inutile (ex: simple total), on définit un classement-identité (pts utilisés pr le classement <=> pts marqués)
 	 * - ça serait bien que les joueurs soient affichés dans l'ordre relatif aux points de la limite rencontrée
