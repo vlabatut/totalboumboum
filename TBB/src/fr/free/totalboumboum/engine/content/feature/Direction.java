@@ -313,7 +313,7 @@ public enum Direction
 		return result;
 	}
 
-	public static Direction getVerticalFromDouble(double dx)
+	public static Direction getVerticalFromDouble(double dy)
 	{	Direction result = NONE;
 		if(dx>0)
 			result = DOWN;
