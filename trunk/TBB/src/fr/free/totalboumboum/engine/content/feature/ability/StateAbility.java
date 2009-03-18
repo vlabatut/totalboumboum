@@ -37,6 +37,10 @@ public class StateAbility extends AbstractAbility
 	 */
 	public static final String SPRITE_ABOVE= "sprite-above";
 	/** 
+	 * assistance lorsqu'un obstacle est rencontré en direction simple 
+	 */
+	public static final String SPRITE_MOVE_ASSISTANCE= "sprite-move-assistance";
+	/** 
 	 * capacité à traverser les bombes
 	 */
 	public static final String SPRITE_TRAVERSE_BOMB = "sprite-traverse-bomb";
