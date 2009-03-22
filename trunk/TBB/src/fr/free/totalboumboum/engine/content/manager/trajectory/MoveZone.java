@@ -25,6 +25,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.Iterator;
+import java.util.TreeSet;
 
 import fr.free.totalboumboum.configuration.GameConstants;
 import fr.free.totalboumboum.engine.container.level.Level;
@@ -38,8 +39,7 @@ import fr.free.totalboumboum.tools.CalculusTools;
 // (valable pour les coordonnées pixel, mais aussi pour les cases !)
 
 public class MoveZone
-{	private Level level;
-	private boolean vertical;
+{	private boolean vertical;
 	
 	/**
 	 *  Create a new move zone for a trajectory going from (x1,y1) to (x2,y2).
@@ -78,6 +78,16 @@ public class MoveZone
 		{	a = (sourceY-targetY)/(sourceX-targetX);
 			b = sourceY - a*sourceX;
 		}
+		collidedSprites = new TreeSet<Sprite>();
+	}
+	
+	/////////////////////////////////////////////////////////////////
+	// LEVEL				/////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	private Level level;
+	
+	public Level getLevel()
+	{	return level;	
 	}
 	
 	/////////////////////////////////////////////////////////////////
@@ -138,7 +148,7 @@ public class MoveZone
 	private double sourceY;
 	private double targetX;
 	private double targetY;
-	
+/*	
 	public double getSourceX()
 	{	return sourceX;
 	}
@@ -146,7 +156,7 @@ public class MoveZone
 	public double getSourceY()
 	{	return sourceY;
 	}
-	
+*/	
 	public double getTargetX()
 	{	return targetX;
 	}
@@ -305,6 +315,7 @@ public class MoveZone
 		// if the sprite can still move
 		if(canMove())
 		{	// if the initital direction was composite
+//TODO are these compatible with the intersection state ?			
 			if(initialDirection.isComposite())
 				bypassObstacleCompositeDirection(po);
 			// if the initial direction was simple
@@ -335,6 +346,7 @@ public class MoveZone
 			fuelY = mz.getFuelY();
 			if(!hasArrived())
 				usedDirection = dir;
+			collidedSprites.addAll(mz.getCollidedSprites());
 		}
 		else
 			usedDirection = Direction.NONE;		
@@ -365,21 +377,32 @@ public class MoveZone
 			if(CalculusTools.isRelativelyGreaterThan(dist,margin,level.getLoop()))
 			{	// process safe position
 				double avoid[] = po.getSafePosition(currentX,currentY,dir);
-				// check if it's worth moving in this direction (i.e. no obstacle coming)
-//TODO here				
-				// try to avoid it
-				MoveZone mz = new MoveZone(source,currentX,currentY,avoid[0],avoid[1],level,initialDirection,dir,fuelX,fuelY);
-				mz.applyMove();
-				currentX = mz.getCurrentX();
-				currentY = mz.getCurrentY();
-				fuelX = mz.getFuelX();
-				fuelY = mz.getFuelY();
-				if(!hasArrived())
-					usedDirection = dir;
+				// check if it's worth moving in this direction (i.e. no other obstacles in the way)
+				int d[] = initialDirection.getIntFromDirection();
+				MoveZone fake = new MoveZone(source,avoid[0],avoid[1],avoid[0]+d[0],avoid[1]+d[1],level,initialDirection,initialDirection,1,1);
+				fake.applyMove();
+				// then try to avoid the obstacle
+				if(fake.hasArrived())
+				{	MoveZone mz = new MoveZone(source,currentX,currentY,avoid[0],avoid[1],level,initialDirection,dir,fuelX,fuelY);
+					mz.applyMove();
+					currentX = mz.getCurrentX();
+					currentY = mz.getCurrentY();
+					fuelX = mz.getFuelX();
+					fuelY = mz.getFuelY();
+					if(!hasArrived())
+						usedDirection = dir;
+					collidedSprites.addAll(mz.getCollidedSprites());
+				}
 			}
 		}
 		else
 			usedDirection = Direction.NONE; 
+	}
+	
+	private TreeSet<Sprite> collidedSprites;
+	
+	public TreeSet<Sprite> getCollidedSprites()
+	{	return collidedSprites;		
 	}
 	
 	/**
@@ -403,7 +426,8 @@ public class MoveZone
 			fuelY = fuelY - absDeltaY;
 			currentX = interX;
 			currentY = interY;
-//TODO fire event			
+			Sprite s = po.getSprite();
+			collidedSprites.add(s);
 		}
 		// must stop before contact
 		else
@@ -427,4 +451,9 @@ public class MoveZone
 			}
 		}
 	}
+	
+	/*
+	 * TODO après l'exécution du déplacement, le sprite doit se mettre à jour:
+	 * position, collisions, intersections, etc
+	 */
 }
