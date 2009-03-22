@@ -22,6 +22,7 @@ package fr.free.totalboumboum.engine.content.manager.trajectory;
  */
 
 import fr.free.totalboumboum.configuration.GameConstants;
+import fr.free.totalboumboum.engine.container.tile.Tile;
 import fr.free.totalboumboum.engine.content.feature.Direction;
 import fr.free.totalboumboum.engine.content.feature.action.AbstractAction;
 import fr.free.totalboumboum.engine.content.feature.action.SpecificAction;
@@ -60,6 +61,7 @@ public class PotentialObstacle
 	/////////////////////////////////////////////////////////////////
 	private double intersectionX;
 	private double intersectionY;
+	private boolean intersectionFlag;
 	
 	public double getIntersectionX()
 	{	return intersectionX;
@@ -82,22 +84,33 @@ public class PotentialObstacle
 		double posY = sprite.getCurrentPosY();
 //		double a = moveZone.getTrajectoryA();
 //		double b = moveZone.getTrajectoryB();
-		double sourceX = moveZone.getSourceX();
-		double sourceY = moveZone.getSourceY();
-		// intersection with a vertical side of the obstacle safe zone
-		{	double interX[] = {posX - GameConstants.STANDARD_TILE_DIMENSION, posX + GameConstants.STANDARD_TILE_DIMENSION};
-			// for each side
-			for(int i=0;i<interX.length;i++)
-			{	double interY = moveZone.projectVertically(interX[i]);
-				// is there an intersection point between side and trajectory 
-				if(interY!=Double.NaN)
-				{	double projectionDist = Math.abs(posY - interY);
-					double sourceDist = Math.abs(sourceX - interX[i]) + Math.abs(sourceY - interY);
-					// critical projection distance and smaller source-intersection distance 
-					if(projectionDist<GameConstants.STANDARD_TILE_DIMENSION && sourceDist<distance)
-					{	intersectionX = interX[i];
-						intersectionY = interY;
-						distance = projectionDist;
+		double currentX = moveZone.getCurrentX();
+		double currentY = moveZone.getCurrentY();		
+		double distX = Math.abs(posX-currentX);
+		double distY = Math.abs(posY-currentY);
+		// if there's already an intersection between the sprite and this potential obstacle
+		if(distX<GameConstants.STANDARD_TILE_DIMENSION && distY<GameConstants.STANDARD_TILE_DIMENSION)
+		{	intersectionX = currentX;
+			intersectionY = currentY;
+			distance = 0;
+		}
+		// else we need to process the intersection point (contact point)
+		else
+		{	// intersection with a vertical side of the obstacle safe zone
+			{	double interX[] = {posX - GameConstants.STANDARD_TILE_DIMENSION, posX + GameConstants.STANDARD_TILE_DIMENSION};
+				// for each side
+				for(int i=0;i<interX.length;i++)
+				{	double interY = moveZone.projectVertically(interX[i]);
+					// is there an intersection point between side and trajectory 
+					if(interY!=Double.NaN)
+					{	double projectionDist = Math.abs(posY - interY);
+						double sourceDist = Math.abs(currentX - interX[i]) + Math.abs(currentY - interY);
+						// critical projection distance and smaller source-intersection distance 
+						if(projectionDist<GameConstants.STANDARD_TILE_DIMENSION && sourceDist<distance)
+						{	intersectionX = interX[i];
+							intersectionY = interY;
+							distance = projectionDist;
+						}
 					}
 				}
 			}
@@ -110,7 +123,7 @@ public class PotentialObstacle
 				// is there an intersection point between side and trajectory 
 				if(interX!=Double.NaN)
 				{	double projectionDist = Math.abs(posX - interX);
-					double sourceDist = Math.abs(sourceX - interX) + Math.abs(sourceY - interY[i]);
+					double sourceDist = Math.abs(currentX - interX) + Math.abs(currentY - interY[i]);
 					// critical distance, and smaller than the current distance
 					if(projectionDist<GameConstants.STANDARD_TILE_DIMENSION && sourceDist<distance)
 					{	intersectionX = interX;
@@ -130,7 +143,10 @@ public class PotentialObstacle
 	/////////////////////////////////////////////////////////////////
 	/**
 	 * Process which corner of this obstacle safe zone will be reached if
-	 * following the direction "move" from the position (x,y) 
+	 * following the direction "move" from the position (x,y). This position
+	 * is supposed to be a contact point, i.e. a point on the enveloppe of
+	 * this obstacle safe zone.
+	 * 
 	 * @param x	starting x position
 	 * @param y	starting y position
 	 * @param move	moving direction
@@ -161,16 +177,52 @@ public class PotentialObstacle
 		return result;
 	}
 	
+	/**
+	 * Determines if the potential obstacle is an actual obstacle.
+	 * If there's no intersection between the current MoveZone position and
+	 * the potential obstacle, the result depends on the latter permissions.
+	 * If there's intersection, it depends on their respective tiles. If they're
+	 * in the same tile, the potential obstacle is not an actual one. If they're 
+	 * in different tiles, it depends on the move direction. If the source is 
+	 * moving even partially towards the potential obstacle, it's an actual obstacle.
+	 * Else, it's not an obstacle.
+	 * 
+	 * @return
+	 */
 	public boolean isActualObstacle()
 	{	boolean result;
+		Direction usedDirection = moveZone.getUsedDirection();
 		Sprite source = moveZone.getSourceSprite();
-		Direction dir = moveZone.getInitialDirection();
-		String act = AbstractAction.MOVELOW;
-		if(!sprite.isOnGround())
-			act = AbstractAction.MOVEHIGH;
-		SpecificAction specificAction = new SpecificAction(act,source,null,dir);
-		ThirdPermission permission = sprite.getThirdPermission(specificAction);
-		result = permission==null;
+		double distX = Math.abs(sprite.getCurrentPosX()-moveZone.getCurrentX());
+		double distY = Math.abs(sprite.getCurrentPosY()-moveZone.getCurrentY());
+		// with intersection
+		if(distX<GameConstants.STANDARD_TILE_DIMENSION && distY<GameConstants.STANDARD_TILE_DIMENSION)
+		{	Tile currentTile = moveZone.getLevel().getTile(moveZone.getCurrentX(),moveZone.getCurrentY());
+			Tile spriteTile = sprite.getTile();
+			// sprite and potential obstacle in the same tile : not an obstacle
+			if(currentTile == spriteTile)
+				result = false;
+			// sprite and potential obstacle not in the same tile : depends on the direction
+			else
+			{	// moving towards the potential obstacle : it's an obstacle
+				double deltaX = sprite.getCurrentPosX()-moveZone.getCurrentX();
+				double deltaY = sprite.getCurrentPosY()-moveZone.getCurrentY();
+				Direction dir = Direction.getCompositeFromDouble(deltaX,deltaY);
+				if(dir.hasCommonComponent(usedDirection))
+					result = true;
+				else
+					result = false;
+			}
+		}
+		// no intersection : depends only on the potential obstacle properties
+		else
+		{	String act = AbstractAction.MOVELOW;
+			if(!sprite.isOnGround())
+				act = AbstractAction.MOVEHIGH;
+			SpecificAction specificAction = new SpecificAction(act,source,null,usedDirection);
+			ThirdPermission permission = sprite.getThirdPermission(specificAction);
+			result = permission==null;
+		}
 		return result;
 	}
 }

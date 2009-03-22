@@ -315,9 +315,9 @@ public enum Direction
 
 	public static Direction getVerticalFromDouble(double dy)
 	{	Direction result = NONE;
-		if(dx>0)
+		if(dy>0)
 			result = DOWN;
-		else if(dx<0)
+		else if(dy<0)
 			result = UP;
 		return result;
 	}
@@ -395,6 +395,18 @@ public enum Direction
 		return result;
 	}
 	
+	public boolean hasCommonComponent(Direction d)
+	{	boolean result = false; 
+		Direction thisH = getHorizontalPrimary();
+		Direction thisV = getVerticalPrimary();
+		Direction dH = d.getHorizontalPrimary();
+		Direction dV = d.getVerticalPrimary();
+		if(thisH==dH && thisH!=NONE)
+			result = true;
+		else if(thisV==dV && thisV!=NONE)
+			result = true;
+		return result;		
+	}
 /*	
 	public static Direction getDirectionFromString(String string)
 	{	Direction result = NONE;
