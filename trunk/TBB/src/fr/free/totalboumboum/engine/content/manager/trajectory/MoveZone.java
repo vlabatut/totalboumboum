@@ -56,29 +56,19 @@ public class MoveZone
 	 *  @param	fuelX	remaining X distance  
 	 *  @param	fuelY	remaining Y distance  
 	 */
-	public MoveZone(Sprite source, double sourceX, double sourceY, double targetX, double targetY, Level level, Direction initialDirection, Direction usedDirection, double fuelX, double fuelY)
+	public MoveZone(Sprite source, double currentX, double currentY, double targetX, double targetY, Level level, Direction initialDirection, Direction usedDirection, double fuelX, double fuelY)
 	{	this.level = level;
 		this.source = source;
 		this.initialDirection = initialDirection;
 		this.usedDirection = usedDirection;
 		this.fuelX = fuelX;
 		this.fuelY = fuelY;
-		this.currentX = sourceX;
-		this.currentY = sourceY;
-		this.sourceX = sourceX;
-		this.sourceY = sourceY;
+		this.currentX = currentX;
+		this.currentY = currentY;
 		this.targetX = targetX;
 		this.targetY = targetY;
-		vertical = sourceY==targetY;
-		if(vertical)
-		{	a = sourceX;
-			b = Double.NaN;
-		}
-		else
-		{	a = (sourceY-targetY)/(sourceX-targetX);
-			b = sourceY - a*sourceX;
-		}
 		collidedSprites = new TreeSet<Sprite>();
+		processLine();
 	}
 	
 	/////////////////////////////////////////////////////////////////
@@ -144,8 +134,8 @@ public class MoveZone
 	/////////////////////////////////////////////////////////////////
 	// TRAJECTORY POSITIONS	/////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	private double sourceX;
-	private double sourceY;
+//	private double sourceX;
+//	private double sourceY;
 	private double targetX;
 	private double targetY;
 /*	
@@ -179,6 +169,18 @@ public class MoveZone
 	{	return b;
 	}
 	
+	private void processLine()
+	{	vertical = currentY==targetY;
+		if(vertical)
+		{	a = currentX;
+			b = Double.NaN;
+		}
+		else
+		{	a = (currentY-targetY)/(currentX-targetX);
+			b = currentY - a*currentX;
+		}		
+	}
+	
 	public double projectHorizontally(double y)
 	{	double x;
 		if(vertical)
@@ -210,10 +212,10 @@ public class MoveZone
 	private ArrayList<Tile> getCrossedTiles()
 	{	ArrayList<Tile> result = new ArrayList<Tile>();
 		// init
-		double upleftX = Math.min(sourceX,targetX) - GameConstants.STANDARD_TILE_DIMENSION;
-		double upleftY = Math.min(sourceY,targetY) - GameConstants.STANDARD_TILE_DIMENSION;
-		double downrightX = Math.max(sourceX,targetX) + GameConstants.STANDARD_TILE_DIMENSION;
-		double downrightY = Math.max(sourceY,targetY) + GameConstants.STANDARD_TILE_DIMENSION;
+		double upleftX = Math.min(currentX,targetX) - GameConstants.STANDARD_TILE_DIMENSION;
+		double upleftY = Math.min(currentY,targetY) - GameConstants.STANDARD_TILE_DIMENSION;
+		double downrightX = Math.max(currentX,targetX) + GameConstants.STANDARD_TILE_DIMENSION;
+		double downrightY = Math.max(currentY,targetY) + GameConstants.STANDARD_TILE_DIMENSION;
 		Tile upleftTile = level.getTile(upleftX,upleftY);
 		Tile downrightTile = level.getTile(downrightX,downrightY);
 		// process
@@ -265,17 +267,41 @@ public class MoveZone
 	
 	public void applyMove()
 	{	ArrayList<PotentialObstacle> potentialObstacles = getCrossedSprites();
-		Iterator<PotentialObstacle> it = potentialObstacles.iterator();
 		boolean goOn = usedDirection!=Direction.NONE;
-		while(it.hasNext() && goOn)
-		{	PotentialObstacle po = it.next();
+		while(potentialObstacles.size()>0 && goOn)
+		{	PotentialObstacle po = potentialObstacles.get(0);
 			// is the potential obstacle an actual obstacle?
 			if(po.isActualObstacle())
-			{	// it must be bypassed
-				bypassObstacle(po);
-				if(canMove())
-					goOn = false;
+			{	// is it an intersected obstacle?
+				if(po.getDistance()==0)
+				{	// get all the intersected obstacles
+					ArrayList<PotentialObstacle> temp = new ArrayList<PotentialObstacle>();
+					temp.add(po);
+					potentialObstacles.remove(0);
+					boolean goOn2 = true;
+					while(potentialObstacles.size()>0 && goOn2)
+					{	PotentialObstacle po2 = potentialObstacles.get(0);
+						if(po.isActualObstacle() && po.getDistance()==0)
+						{	temp.add(po2);
+							potentialObstacles.remove(0);
+						}
+					}
+					// go through them
+					exitObstacle(temp);
+				}
+				// else the obstacle must be bypassed
+				else
+					bypassObstacle(po);
+				goOn = canMove();
+				// process the new trajectory and obstacles
+				if(goOn)
+				{	processLine();
+					potentialObstacles = getCrossedSprites();					
+				}
 			}
+		}
+		if(goOn)
+		{	//TODO il faut éventuellement continuer le déplacement jusqu'à épuisement du fuel
 		}
 	}
 	
@@ -315,13 +341,26 @@ public class MoveZone
 		// if the sprite can still move
 		if(canMove())
 		{	// if the initital direction was composite
-//TODO are these compatible with the intersection state ?			
 			if(initialDirection.isComposite())
 				bypassObstacleCompositeDirection(po);
 			// if the initial direction was simple
 			else
 				bypassObstacleSimpleDirection(po);
 		}
+	}
+	
+	private void exitObstacle(ArrayList<PotentialObstacle> pos)
+	{	// sum all the obstacles' directions relatively to the current position
+		Direction dir = Direction.NONE;
+		for(PotentialObstacle po: pos)
+		{	Sprite s = po.getSprite();
+			double dx = s.getCurrentPosX() - currentX;
+			double dy = s.getCurrentPosY() - currentY;
+			Direction d = Direction.getCompositeFromDouble(dx,dy);
+			dir.put(d);
+		}
+		// remove these directions from the current move direction
+//TODO here !		
 	}
 	
 	private void bypassObstacleCompositeDirection(PotentialObstacle po)
