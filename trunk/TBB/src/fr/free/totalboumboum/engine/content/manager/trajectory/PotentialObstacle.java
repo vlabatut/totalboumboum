@@ -61,7 +61,6 @@ public class PotentialObstacle
 	/////////////////////////////////////////////////////////////////
 	private double intersectionX;
 	private double intersectionY;
-	private boolean intersectionFlag;
 	
 	public double getIntersectionX()
 	{	return intersectionX;

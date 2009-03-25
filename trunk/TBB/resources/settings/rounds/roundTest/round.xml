@@ -12,16 +12,18 @@
 	<author value="Vincent Labatut" />
 
 	<limits>
+<!-- 	
 		<lastStanding>
 			<points local="false" name="basicSurvival" />
 			<threshold value="1" comparator="lesseq"/>
 		</lastStanding>
+-->		
 		<time>
 			<points local="false" name="basicSurvival" />
- 			<threshold value="90000" />
+ 			<threshold value="900000" />
 		</time>
-	</limits>
+ 	</limits>
 	
-	<level packname="sbm1Official" name="story_3_08" />
+	<level packname="sbm1Custom" name="part1" />
 
 </round>
