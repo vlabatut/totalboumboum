@@ -462,8 +462,10 @@ if(previousPosX != currentPosX || previousPosY != currentPosY || previousPosZ !=
 			Direction moveDir = Direction.getCompositeFromDouble(dx, dy);
 if(moveDir!=Direction.NONE)			
 	{	
-	
-			// COLISIONS : VERSION 2
+boolean v3 = true;	
+if(!v3)
+{
+			// COLLISIONS : VERSION 2
 			//
 			// récupération des cases voisines, y compris la case courante
 			Tile tile = sprite.getTile();
@@ -486,7 +488,16 @@ if(moveDir!=Direction.NONE)
 			ArrayList<Sprite> newIntersectedSprites = getIntersectedSprites(neighbourSprites);
 			// mise à jour des sprites intersected
 			updateIntersectedSprites(newIntersectedSprites);
-	
+}
+else
+{			// COLLISIONS : VERSION 3 
+			MoveZone mz = new MoveZone(sprite,previousPosX,previousPosY,currentPosX,currentPosY,sprite.getLevel(),moveDir,moveDir,Math.abs(dx),Math.abs(dy));
+			mz.applyMove();
+			currentPosX = mz.getCurrentX();
+			currentPosY = mz.getCurrentY();
+			mz.getIntersectedSprites();
+			mz.getCollidedSprites();	
+}
 			
 	}
 			
@@ -497,7 +508,7 @@ if(moveDir!=Direction.NONE)
 			
 			
 /*
-			// COLISIONS : VERSION 1
+			// COLLISIONS : VERSION 1
 			
 			// sortie de tile ?
 			Direction moveXDir = Direction.getHorizontalFromDouble(currentPosX-previousPosX);

@@ -24,7 +24,6 @@ package fr.free.totalboumboum.engine.content.manager.trajectory;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
-import java.util.Iterator;
 import java.util.TreeSet;
 
 import fr.free.totalboumboum.configuration.GameConstants;
@@ -67,7 +66,8 @@ public class MoveZone
 		this.currentY = currentY;
 		this.targetX = targetX;
 		this.targetY = targetY;
-		collidedSprites = new TreeSet<Sprite>();
+		collidedSprites = new ArrayList<Sprite>();
+		intersectedSprites = new ArrayList<Sprite>();
 		processLine();
 	}
 	
@@ -202,7 +202,35 @@ public class MoveZone
 	}
 
 	/////////////////////////////////////////////////////////////////
-	// PROCESS			/////////////////////////////////////////////
+	// COLLIDED SPRITES		/////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	private ArrayList<Sprite> collidedSprites;
+	
+	public ArrayList<Sprite> getCollidedSprites()
+	{	return collidedSprites;		
+	}
+
+	private void addCollidedSprite(Sprite s)
+	{	if(!collidedSprites.contains(s))
+		collidedSprites.add(s);		
+	}
+
+	/////////////////////////////////////////////////////////////////
+	// INTERSECTED SPRITES	/////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	private ArrayList<Sprite> intersectedSprites;
+	
+	public ArrayList<Sprite> getIntersectedSprites()
+	{	return intersectedSprites;		
+	}
+
+	private void addIntersectedSprite(Sprite s)
+	{	if(!intersectedSprites.contains(s))
+			intersectedSprites.add(s);		
+	}
+	
+	/////////////////////////////////////////////////////////////////
+	// PROCESS		/////////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	/**
 	 * Defines a list of tiles approximating the move zone,
@@ -270,10 +298,11 @@ public class MoveZone
 		boolean goOn = usedDirection!=Direction.NONE;
 		while(potentialObstacles.size()>0 && goOn)
 		{	PotentialObstacle po = potentialObstacles.get(0);
-			// is the potential obstacle an actual obstacle?
-			if(po.isActualObstacle())
-			{	// is it an intersected obstacle?
-				if(po.getDistance()==0)
+			// is it an intersected obstacle?
+			if(po.getDistance()==0)
+			{	addIntersectedSprite(po.getSprite());
+				// is the potential obstacle an actual obstacle?
+				if(po.isActualObstacle())
 				{	// get all the intersected obstacles
 					ArrayList<PotentialObstacle> temp = new ArrayList<PotentialObstacle>();
 					temp.add(po);
@@ -281,27 +310,40 @@ public class MoveZone
 					boolean goOn2 = true;
 					while(potentialObstacles.size()>0 && goOn2)
 					{	PotentialObstacle po2 = potentialObstacles.get(0);
-						if(po.isActualObstacle() && po.getDistance()==0)
-						{	temp.add(po2);
-							potentialObstacles.remove(0);
+						if(po.getDistance()==0)
+						{	addIntersectedSprite(po.getSprite());
+							if(po.isActualObstacle())
+							{	temp.add(po2);
+								potentialObstacles.remove(0);
+							}
 						}
 					}
 					// go through them
-					exitObstacle(temp);
+					updateDirection(temp);
+					goOn = canMove();
 				}
-				// else the obstacle must be bypassed
 				else
-					bypassObstacle(po);
-				goOn = canMove();
-				// process the new trajectory and obstacles
-				if(goOn)
-				{	processLine();
-					potentialObstacles = getCrossedSprites();					
+					potentialObstacles.remove(0);
+			}
+			// else the obstacle may have to be bypassed
+			else
+			{	// is the potential obstacle an actual obstacle?
+				if(po.isActualObstacle())
+				{	bypassObstacle(po);
+					goOn = canMove();
+					// process the new trajectory and obstacles
+					if(goOn)
+					{	processLine();
+						potentialObstacles = getCrossedSprites();					
+					}
 				}
+				else
+					potentialObstacles.remove(0);
 			}
 		}
 		if(goOn)
-		{	//TODO il faut éventuellement continuer le déplacement jusqu'à épuisement du fuel
+		{	// move towards the destination
+			moveToPoint(targetX,targetY);
 		}
 	}
 	
@@ -331,6 +373,71 @@ public class MoveZone
 	}
 	
 	/**
+	 * update the used direction according to the current intersected obstacles.
+	 * (their directions relatively to the sprite are dropped)
+	 * @param pos
+	 */
+	private void updateDirection(ArrayList<PotentialObstacle> pos)
+	{	// determine the closest obstacle for each primary direction
+		Sprite down = null;
+		double downDist = Double.MAX_VALUE;
+		Sprite left = null;
+		double leftDist = Double.MAX_VALUE;
+		Sprite right = null;
+		double rightDist = Double.MAX_VALUE;
+		Sprite up = null;
+		double upDist = Double.MAX_VALUE;
+		for(PotentialObstacle po: pos)
+		{	Sprite s = po.getSprite();
+			// horizontal component
+			double dx = s.getCurrentPosX() - currentX;
+			Direction dH = Direction.getHorizontalFromDouble(dx);
+			if(dH!=Direction.NONE && usedDirection.getHorizontalPrimary()==dH)
+			{	double absDelta = Math.abs(dx);
+				if(dH==Direction.LEFT && absDelta<leftDist)
+				{	leftDist = absDelta;
+					left = s;
+				}
+				else if(dH==Direction.RIGHT&& absDelta<rightDist)
+				{	rightDist = absDelta;
+					right = s;
+				}
+			}
+			// vertical component
+			double dy = s.getCurrentPosY() - currentY;
+			Direction dV = Direction.getVerticalFromDouble(dx);
+			if(dV!=Direction.NONE && usedDirection.getVerticalPrimary()==dV)
+			{	double absDelta = Math.abs(dy);
+				if(dV==Direction.DOWN && absDelta<downDist)
+				{	downDist = absDelta;
+					down = s;
+				}
+				else if(dV==Direction.UP&& absDelta<upDist)
+				{	upDist = absDelta;
+					up = s;
+				}
+			}
+		}
+		// change used direction
+		if(down!=null)
+		{	usedDirection.drop(Direction.DOWN);
+			addCollidedSprite(down);
+		}
+		if(left!=null)
+		{	usedDirection.drop(Direction.LEFT);
+			addCollidedSprite(left);
+		}
+		if(right!=null)
+		{	usedDirection.drop(Direction.RIGHT);
+			addCollidedSprite(right);
+		}
+		if(up!=null)
+		{	usedDirection.drop(Direction.UP);
+			addCollidedSprite(up);
+		}
+	}
+	
+	/**
 	 * Make the sprite avoid an obstacle, if there's enough fuel and no
 	 * other critical obstacles.
 	 * @param po
@@ -347,20 +454,6 @@ public class MoveZone
 			else
 				bypassObstacleSimpleDirection(po);
 		}
-	}
-	
-	private void exitObstacle(ArrayList<PotentialObstacle> pos)
-	{	// sum all the obstacles' directions relatively to the current position
-		Direction dir = Direction.NONE;
-		for(PotentialObstacle po: pos)
-		{	Sprite s = po.getSprite();
-			double dx = s.getCurrentPosX() - currentX;
-			double dy = s.getCurrentPosY() - currentY;
-			Direction d = Direction.getCompositeFromDouble(dx,dy);
-			dir.put(d);
-		}
-		// remove these directions from the current move direction
-//TODO here !		
 	}
 	
 	private void bypassObstacleCompositeDirection(PotentialObstacle po)
@@ -385,7 +478,10 @@ public class MoveZone
 			fuelY = mz.getFuelY();
 			if(!hasArrived())
 				usedDirection = dir;
-			collidedSprites.addAll(mz.getCollidedSprites());
+			for(Sprite s: mz.getCollidedSprites())
+				addCollidedSprite(s);
+			for(Sprite s: mz.getIntersectedSprites())
+				addIntersectedSprite(s);
 		}
 		else
 			usedDirection = Direction.NONE;		
@@ -430,18 +526,15 @@ public class MoveZone
 					fuelY = mz.getFuelY();
 					if(!hasArrived())
 						usedDirection = dir;
-					collidedSprites.addAll(mz.getCollidedSprites());
+					for(Sprite s: mz.getCollidedSprites())
+						addCollidedSprite(s);
+					for(Sprite s: mz.getIntersectedSprites())
+						addIntersectedSprite(s);
 				}
 			}
 		}
 		else
 			usedDirection = Direction.NONE; 
-	}
-	
-	private TreeSet<Sprite> collidedSprites;
-	
-	public TreeSet<Sprite> getCollidedSprites()
-	{	return collidedSprites;		
 	}
 	
 	/**
@@ -455,22 +548,39 @@ public class MoveZone
 	private void moveToContactPoint(PotentialObstacle po)
 	{	double interX = po.getIntersectionX();
 		double interY = po.getIntersectionY();
-		double deltaX = currentX-interX;
+		boolean result = moveToPoint(interX,interY);
+		if(result)
+		{	Sprite s = po.getSprite();
+			collidedSprites.add(s);
+		}
+	}
+	
+	/**
+	 * Move the sprite to the precised point,
+	 * or stop before according to the remaining fuel.
+	 * No obstacle is supposed to stand on the way.
+	 * 
+	 * @param x
+	 * @param y
+	 */
+	private boolean moveToPoint(double destX, double destY)
+	{	boolean result;
+		double deltaX = currentX-destX;
 		double absDeltaX = Math.abs(deltaX);
-		double deltaY = currentY-interY;
+		double deltaY = currentY-destY;
 		double absDeltaY = Math.abs(deltaY);
 		// enough fuel
 		if(fuelX>=absDeltaX && fuelY>=absDeltaY)
 		{	fuelX = fuelX - absDeltaX;
 			fuelY = fuelY - absDeltaY;
-			currentX = interX;
-			currentY = interY;
-			Sprite s = po.getSprite();
-			collidedSprites.add(s);
+			currentX = destX;
+			currentY = destY;
+			result = true;
 		}
 		// must stop before contact
 		else
-		{	deltaX = Math.signum(deltaX)*fuelX;
+		{	result = false;
+			deltaX = Math.signum(deltaX)*fuelX;
 			deltaY = Math.signum(deltaY)*fuelY;
 			double yForX = deltaX*a+b;
 			double absYforX = Math.abs(yForX);
@@ -489,10 +599,6 @@ public class MoveZone
 				currentY = currentY + yForX;
 			}
 		}
+		return result;
 	}
-	
-	/*
-	 * TODO après l'exécution du déplacement, le sprite doit se mettre à jour:
-	 * position, collisions, intersections, etc
-	 */
 }
