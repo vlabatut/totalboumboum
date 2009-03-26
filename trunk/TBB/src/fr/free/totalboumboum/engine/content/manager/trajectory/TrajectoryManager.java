@@ -490,13 +490,17 @@ if(!v3)
 			updateIntersectedSprites(newIntersectedSprites);
 }
 else
-{			// COLLISIONS : VERSION 3 
+{			// COLLISIONS : VERSION 3
+	
+if(sprite instanceof Hero)
+System.out.println("position:"+currentPosX+","+currentPosY+" ("+sprite.getTile().getLine()+","+sprite.getTile().getLine()+")");	
+
 			MoveZone mz = new MoveZone(sprite,previousPosX,previousPosY,currentPosX,currentPosY,sprite.getLevel(),moveDir,moveDir,Math.abs(dx),Math.abs(dy));
 			mz.applyMove();
 			currentPosX = mz.getCurrentX();
 			currentPosY = mz.getCurrentY();
 			mz.getIntersectedSprites();
-			mz.getCollidedSprites();	
+			mz.getCollidedSprites();
 }
 			
 	}
