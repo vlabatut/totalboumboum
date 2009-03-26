@@ -21,7 +21,6 @@ package fr.free.totalboumboum.engine.content.manager.trajectory;
  * 
  */
 
-import fr.free.totalboumboum.configuration.GameConstants;
 import fr.free.totalboumboum.engine.container.tile.Tile;
 import fr.free.totalboumboum.engine.content.feature.Direction;
 import fr.free.totalboumboum.engine.content.feature.action.AbstractAction;
@@ -88,7 +87,8 @@ public class PotentialObstacle
 		double distX = Math.abs(posX-currentX);
 		double distY = Math.abs(posY-currentY);
 		// if there's already an intersection between the sprite and this potential obstacle
-		if(distX<GameConstants.STANDARD_TILE_DIMENSION && distY<GameConstants.STANDARD_TILE_DIMENSION)
+		double tileDimension = moveZone.getLevel().getTileDimension();
+		if(distX<tileDimension && distY<tileDimension)
 		{	intersectionX = currentX;
 			intersectionY = currentY;
 			distance = 0;
@@ -96,7 +96,7 @@ public class PotentialObstacle
 		// else we need to process the intersection point (contact point)
 		else
 		{	// intersection with a vertical side of the obstacle safe zone
-			{	double interX[] = {posX - GameConstants.STANDARD_TILE_DIMENSION, posX + GameConstants.STANDARD_TILE_DIMENSION};
+			{	double interX[] = {posX - tileDimension, posX + tileDimension};
 				// for each side
 				for(int i=0;i<interX.length;i++)
 				{	double interY = moveZone.projectVertically(interX[i]);
@@ -105,7 +105,7 @@ public class PotentialObstacle
 					{	double projectionDist = Math.abs(posY - interY);
 						double sourceDist = Math.abs(currentX - interX[i]) + Math.abs(currentY - interY);
 						// critical projection distance and smaller source-intersection distance 
-						if(projectionDist<GameConstants.STANDARD_TILE_DIMENSION && sourceDist<distance)
+						if(projectionDist<tileDimension && sourceDist<distance)
 						{	intersectionX = interX[i];
 							intersectionY = interY;
 							distance = projectionDist;
@@ -115,7 +115,7 @@ public class PotentialObstacle
 			}
 		}
 		// intersection with an horizontal side of the obstacle safe zone
-		{	double interY[] = {posY - GameConstants.STANDARD_TILE_DIMENSION, posY + GameConstants.STANDARD_TILE_DIMENSION};
+		{	double interY[] = {posY - tileDimension, posY + tileDimension};
 			// for each side
 			for(int i=0;i<interY.length;i++)
 			{	double interX = moveZone.projectHorizontally(interY[i]);
@@ -124,7 +124,7 @@ public class PotentialObstacle
 				{	double projectionDist = Math.abs(posX - interX);
 					double sourceDist = Math.abs(currentX - interX) + Math.abs(currentY - interY[i]);
 					// critical distance, and smaller than the current distance
-					if(projectionDist<GameConstants.STANDARD_TILE_DIMENSION && sourceDist<distance)
+					if(projectionDist<tileDimension && sourceDist<distance)
 					{	intersectionX = interX;
 						intersectionY = interY[i];
 						distance = projectionDist;
@@ -153,10 +153,11 @@ public class PotentialObstacle
 	 */
 	public double[] getSafePosition(double x, double y, Direction move)
 	{	double result[] = {0,0};
-		double down = sprite.getCurrentPosY() + GameConstants.STANDARD_TILE_DIMENSION;
-		double up = sprite.getCurrentPosY() - GameConstants.STANDARD_TILE_DIMENSION;
-		double left = sprite.getCurrentPosX() - GameConstants.STANDARD_TILE_DIMENSION;
-		double right = sprite.getCurrentPosX() + GameConstants.STANDARD_TILE_DIMENSION;
+		double tileDimension = moveZone.getLevel().getTileDimension();
+		double down = sprite.getCurrentPosY() + tileDimension;
+		double up = sprite.getCurrentPosY() - tileDimension;
+		double left = sprite.getCurrentPosX() - tileDimension;
+		double right = sprite.getCurrentPosX() + tileDimension;
 		if(move==Direction.DOWN)
 		{	result[0] = x;
 			result[1] = down;		
@@ -169,7 +170,7 @@ public class PotentialObstacle
 		{	result[0] = right;
 			result[1] = y;		
 		} 
-		if(move==Direction.DOWN)
+		else if(move==Direction.UP)
 		{	result[0] = x;
 			result[1] = up;		
 		} 
@@ -195,7 +196,8 @@ public class PotentialObstacle
 		double distX = Math.abs(sprite.getCurrentPosX()-moveZone.getCurrentX());
 		double distY = Math.abs(sprite.getCurrentPosY()-moveZone.getCurrentY());
 		// with intersection
-		if(distX<GameConstants.STANDARD_TILE_DIMENSION && distY<GameConstants.STANDARD_TILE_DIMENSION)
+		double tileDimension = moveZone.getLevel().getTileDimension();
+		if(distX<tileDimension && distY<tileDimension)
 		{	Tile currentTile = moveZone.getLevel().getTile(moveZone.getCurrentX(),moveZone.getCurrentY());
 			Tile spriteTile = sprite.getTile();
 			// sprite and potential obstacle in the same tile : not an obstacle

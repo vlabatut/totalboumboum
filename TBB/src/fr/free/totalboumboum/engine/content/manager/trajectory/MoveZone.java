@@ -24,9 +24,7 @@ package fr.free.totalboumboum.engine.content.manager.trajectory;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
-import java.util.TreeSet;
 
-import fr.free.totalboumboum.configuration.GameConstants;
 import fr.free.totalboumboum.engine.container.level.Level;
 import fr.free.totalboumboum.engine.container.tile.Tile;
 import fr.free.totalboumboum.engine.content.feature.Direction;
@@ -36,6 +34,8 @@ import fr.free.totalboumboum.tools.CalculusTools;
 
 //TODO y va y avoir des problèmes de normalisation des coordonnées (utiliser mod pour fermer la zone)
 // (valable pour les coordonnées pixel, mais aussi pour les cases !)
+
+//TODO gérer le changement de case, cf la v2 du déplacement
 
 public class MoveZone
 {	private boolean vertical;
@@ -240,10 +240,11 @@ public class MoveZone
 	private ArrayList<Tile> getCrossedTiles()
 	{	ArrayList<Tile> result = new ArrayList<Tile>();
 		// init
-		double upleftX = Math.min(currentX,targetX) - GameConstants.STANDARD_TILE_DIMENSION;
-		double upleftY = Math.min(currentY,targetY) - GameConstants.STANDARD_TILE_DIMENSION;
-		double downrightX = Math.max(currentX,targetX) + GameConstants.STANDARD_TILE_DIMENSION;
-		double downrightY = Math.max(currentY,targetY) + GameConstants.STANDARD_TILE_DIMENSION;
+		double tileDimension = level.getTileDimension();
+		double upleftX = Math.min(currentX,targetX) - tileDimension;
+		double upleftY = Math.min(currentY,targetY) - tileDimension;
+		double downrightX = Math.max(currentX,targetX) + tileDimension;
+		double downrightY = Math.max(currentY,targetY) + tileDimension;
 		Tile upleftTile = level.getTile(upleftX,upleftY);
 		Tile downrightTile = level.getTile(downrightX,downrightY);
 		// process
@@ -329,7 +330,10 @@ public class MoveZone
 			else
 			{	// is the potential obstacle an actual obstacle?
 				if(po.isActualObstacle())
-				{	bypassObstacle(po);
+				{	
+System.out.println("PotentialObstacle:"+po.getSprite().getCurrentPosX()+","+po.getSprite().getCurrentPosY());					
+					
+					bypassObstacle(po);
 					goOn = canMove();
 					// process the new trajectory and obstacles
 					if(goOn)
@@ -506,7 +510,7 @@ public class MoveZone
 			// has the sprite an assistance?
 			StateAbility ability = source.computeAbility(StateAbility.SPRITE_MOVE_ASSISTANCE);
 			double tolerance = ability.getStrength();
-			double margin = tolerance*GameConstants.STANDARD_TILE_DIMENSION;
+			double margin = tolerance*level.getTileDimension();
 			if(tolerance<0)
 				margin = Double.MAX_VALUE;
 			if(CalculusTools.isRelativelyGreaterThan(dist,margin,level.getLoop()))
