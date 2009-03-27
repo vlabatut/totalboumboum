@@ -25,6 +25,10 @@ This product includes softwares developed by:
     Class fr.free.totalboumboum.gui.tools.SpringUtilities
     Copyright 1995-2008 Sun Microsystems Inc.
     http://www.sun.com
+  + JDOM Project:
+  	JDOM library
+  	Copyright 2000-2007 JDOM Project
+  	http://www.jdom.org
   + Various AI students from Galatasaray University:
     Some classes in resources/ai (see classes for details)
     Copyright 2007-2009 their respective authors
