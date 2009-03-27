@@ -493,7 +493,7 @@ else
 {			// COLLISIONS : VERSION 3
 	
 if(sprite instanceof Hero)
-System.out.println("position:"+currentPosX+","+currentPosY+" ("+sprite.getTile().getLine()+","+sprite.getTile().getLine()+")");	
+	System.out.println("position:"+previousPosX+","+previousPosY+" ("+sprite.getTile().getLine()+","+sprite.getTile().getCol()+") -> "+currentPosX+","+currentPosY+" ("+sprite.getLevel().getTile(currentPosX,currentPosY).getLine()+","+sprite.getLevel().getTile(currentPosX,currentPosY).getCol()+")");	
 
 			MoveZone mz = new MoveZone(sprite,previousPosX,previousPosY,currentPosX,currentPosY,sprite.getLevel(),moveDir,moveDir,Math.abs(dx),Math.abs(dy));
 			mz.applyMove();

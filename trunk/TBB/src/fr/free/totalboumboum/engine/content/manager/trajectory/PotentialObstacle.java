@@ -58,8 +58,8 @@ public class PotentialObstacle
 	/////////////////////////////////////////////////////////////////
 	// INTERSECTION		/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	private double intersectionX;
-	private double intersectionY;
+	private Double intersectionX;
+	private Double intersectionY;
 	
 	public double getIntersectionX()
 	{	return intersectionX;
@@ -76,14 +76,16 @@ public class PotentialObstacle
 	 */
 	private void initIntersection()
 	{	distance = Double.MAX_VALUE;
-		intersectionX = Double.NaN;
-		intersectionY = Double.NaN;
+		intersectionX = null;
+		intersectionY = null;
 		double posX = sprite.getCurrentPosX();
 		double posY = sprite.getCurrentPosY();
 //		double a = moveZone.getTrajectoryA();
 //		double b = moveZone.getTrajectoryB();
 		double currentX = moveZone.getCurrentX();
 		double currentY = moveZone.getCurrentY();		
+		double targetX = moveZone.getTargetX();
+		double targetY = moveZone.getTargetY();		
 		double distX = Math.abs(posX-currentX);
 		double distY = Math.abs(posY-currentY);
 		// if there's already an intersection between the sprite and this potential obstacle
@@ -99,42 +101,48 @@ public class PotentialObstacle
 			{	double interX[] = {posX - tileDimension, posX + tileDimension};
 				// for each side
 				for(int i=0;i<interX.length;i++)
-				{	double interY = moveZone.projectVertically(interX[i]);
-					// is there an intersection point between side and trajectory 
-					if(interY!=Double.NaN)
-					{	double projectionDist = Math.abs(posY - interY);
-						double sourceDist = Math.abs(currentX - interX[i]) + Math.abs(currentY - interY);
-						// critical projection distance and smaller source-intersection distance 
-						if(projectionDist<tileDimension && sourceDist<distance)
-						{	intersectionX = interX[i];
-							intersectionY = interY;
-							distance = projectionDist;
+				{	// the side has to be on the sprite way
+					if(Math.signum(interX[i]-currentX)==Math.signum(interX[i]-targetX))
+					{	Double interY = moveZone.projectVertically(interX[i]);
+						// is there an intersection point between side and trajectory 
+						if(interY!=null)
+						{	double projectionDist = Math.abs(posY - interY);
+							double sourceDist = Math.abs(currentX - interX[i]) + Math.abs(currentY - interY);
+							// critical projection distance and smaller source-intersection distance 
+							if(projectionDist<tileDimension && sourceDist<distance)
+							{	intersectionX = interX[i];
+								intersectionY = interY;
+								distance = projectionDist;
+							}
 						}
 					}
 				}
 			}
-		}
-		// intersection with an horizontal side of the obstacle safe zone
-		{	double interY[] = {posY - tileDimension, posY + tileDimension};
-			// for each side
-			for(int i=0;i<interY.length;i++)
-			{	double interX = moveZone.projectHorizontally(interY[i]);
-				// is there an intersection point between side and trajectory 
-				if(interX!=Double.NaN)
-				{	double projectionDist = Math.abs(posX - interX);
-					double sourceDist = Math.abs(currentX - interX) + Math.abs(currentY - interY[i]);
-					// critical distance, and smaller than the current distance
-					if(projectionDist<tileDimension && sourceDist<distance)
-					{	intersectionX = interX;
-						intersectionY = interY[i];
-						distance = projectionDist;
+			// intersection with an horizontal side of the obstacle safe zone
+			{	double interY[] = {posY - tileDimension, posY + tileDimension};
+				// for each side
+				for(int i=0;i<interY.length;i++)
+				{	// the side has to be on the sprite way
+					if(Math.signum(interY[i]-currentY)==Math.signum(interY[i]-targetY))						
+					{	Double interX = moveZone.projectHorizontally(interY[i]);
+						// is there an intersection point between side and trajectory 
+						if(interX!=null)
+						{	double projectionDist = Math.abs(posX - interX);
+							double sourceDist = Math.abs(currentX - interX) + Math.abs(currentY - interY[i]);
+							// critical distance, and smaller than the current distance
+							if(projectionDist<tileDimension && sourceDist<distance)
+							{	intersectionX = interX;
+								intersectionY = interY[i];
+								distance = projectionDist;
+							}
+						}
 					}
 				}
 			}
 		}
 	}
 	public boolean hasIntersection()
-	{	return intersectionX != Double.NaN;			
+	{	return intersectionX != null;			
 	}
 	
 	/////////////////////////////////////////////////////////////////
