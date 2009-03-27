@@ -158,8 +158,8 @@ public class MoveZone
 	/////////////////////////////////////////////////////////////////
 	// TRAJECTORY LINE	/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	private double a;
-	private double b;
+	private Double a;
+	private Double b;
 	
 	public double getTrajectoryA()
 	{	return a;
@@ -173,7 +173,7 @@ public class MoveZone
 	{	vertical = currentY==targetY;
 		if(vertical)
 		{	a = currentX;
-			b = Double.NaN;
+			b = null;
 		}
 		else
 		{	a = (currentY-targetY)/(currentX-targetX);
@@ -181,8 +181,8 @@ public class MoveZone
 		}		
 	}
 	
-	public double projectHorizontally(double y)
-	{	double x;
+	public Double projectHorizontally(double y)
+	{	Double x;
 		if(vertical)
 			x = a;
 		else if(a==0)
@@ -192,10 +192,10 @@ public class MoveZone
 		return x;
 	}
 	
-	public double projectVertically(double x)
-	{	double y;
+	public Double projectVertically(double x)
+	{	Double y;
 		if(vertical)
-			y = Double.NaN;
+			y = null;
 		else
 			y = a*x + b;
 		return y;
