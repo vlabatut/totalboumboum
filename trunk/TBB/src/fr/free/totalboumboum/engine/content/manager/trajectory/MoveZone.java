@@ -515,7 +515,7 @@ System.out.println("PotentialObstacle:"+po.getSprite().getCurrentPosX()+","+po.g
 			double margin = tolerance*level.getTileDimension();
 			if(tolerance<0)
 				margin = Double.MAX_VALUE;
-			if(CalculusTools.isRelativelyGreaterThan(dist,margin,level.getLoop()))
+			if(dir!=Direction.NONE && CalculusTools.isRelativelyGreaterThan(dist,margin,level.getLoop()))
 			{	// process safe position
 				double avoid[] = po.getSafePosition(currentX,currentY,dir);
 				// check if it's worth moving in this direction (i.e. no other obstacles in the way)
@@ -538,6 +538,8 @@ System.out.println("PotentialObstacle:"+po.getSprite().getCurrentPosX()+","+po.g
 						addIntersectedSprite(s);
 				}
 			}
+			else
+				usedDirection = Direction.NONE; 
 		}
 		else
 			usedDirection = Direction.NONE; 
@@ -554,8 +556,8 @@ System.out.println("PotentialObstacle:"+po.getSprite().getCurrentPosX()+","+po.g
 	private void moveToContactPoint(PotentialObstacle po)
 	{	double interX = po.getIntersectionX();
 		double interY = po.getIntersectionY();
-		boolean result = moveToPoint(interX,interY);
-		if(result)
+		boolean reached = moveToPoint(interX,interY);
+		if(reached)
 		{	Sprite s = po.getSprite();
 			collidedSprites.add(s);
 		}
@@ -586,23 +588,29 @@ System.out.println("PotentialObstacle:"+po.getSprite().getCurrentPosX()+","+po.g
 		// must stop before contact
 		else
 		{	result = false;
-			deltaX = Math.signum(deltaX)*fuelX;
-			deltaY = Math.signum(deltaY)*fuelY;
-			double yForX = deltaX*a+b;
-			double absYforX = Math.abs(yForX);
-			double xForY = (deltaY-b)/a;
-			double absXforY = Math.abs(xForY);
-			if(absYforX>fuelY)
-			{	fuelX = fuelX - absXforY;
-				fuelY = fuelY - fuelY;
-				currentX = currentX + xForY;
+			if(vertical)
+			{	fuelY = fuelY - absDeltaY;
 				currentY = currentY + deltaY;
 			}
-			else // if(distXforY>fuelX)
-			{	fuelX = fuelX - fuelX;
-				fuelY = fuelY - absYforX;
-				currentX = currentX + deltaX;
-				currentY = currentY + yForX;
+			else
+			{	deltaX = Math.signum(deltaX)*fuelX;
+				deltaY = Math.signum(deltaY)*fuelY;
+				double yForX = deltaX*a+b;
+				double absYforX = Math.abs(yForX);
+				double xForY = (deltaY-b)/a;
+				double absXforY = Math.abs(xForY);
+				if(absYforX>fuelY)
+				{	fuelX = fuelX - absXforY;
+					fuelY = fuelY - fuelY;
+					currentX = currentX + xForY;
+					currentY = currentY + deltaY;
+				}
+				else // if(distXforY>fuelX)
+				{	fuelX = fuelX - fuelX;
+					fuelY = fuelY - absYforX;
+					currentX = currentX + deltaX;
+					currentY = currentY + yForX;
+				}
 			}
 		}
 		return result;
