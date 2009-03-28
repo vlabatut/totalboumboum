@@ -93,7 +93,7 @@ public class PotentialObstacle
 		if(distX<tileDimension && distY<tileDimension)
 		{	intersectionX = currentX;
 			intersectionY = currentY;
-			distance = 0;
+			distance = -1;
 		}
 		// else we need to process the intersection point (contact point)
 		else
@@ -102,7 +102,11 @@ public class PotentialObstacle
 				// for each side
 				for(int i=0;i<interX.length;i++)
 				{	// the side has to be on the sprite way
-					if(Math.signum(interX[i]-currentX)==Math.signum(interX[i]-targetX))
+					double interSignum = Math.signum(interX[i]-currentX);
+					if(interSignum==0)
+						interSignum = Math.signum(posX-currentX);
+					double targetSignum = Math.signum(targetX-currentX);
+					if(interSignum==targetSignum)				
 					{	Double interY = moveZone.projectVertically(interX[i]);
 						// is there an intersection point between side and trajectory 
 						if(interY!=null)
@@ -112,7 +116,7 @@ public class PotentialObstacle
 							if(projectionDist<tileDimension && sourceDist<distance)
 							{	intersectionX = interX[i];
 								intersectionY = interY;
-								distance = projectionDist;
+								distance = sourceDist;
 							}
 						}
 					}
@@ -123,7 +127,11 @@ public class PotentialObstacle
 				// for each side
 				for(int i=0;i<interY.length;i++)
 				{	// the side has to be on the sprite way
-					if(Math.signum(interY[i]-currentY)==Math.signum(interY[i]-targetY))						
+					double interSignum = Math.signum(interY[i]-currentY);
+					if(interSignum==0)
+						interSignum = Math.signum(posY-currentY);
+					double targetSignum = Math.signum(targetY-currentY);
+					if(interSignum==targetSignum)						
 					{	Double interX = moveZone.projectHorizontally(interY[i]);
 						// is there an intersection point between side and trajectory 
 						if(interX!=null)
@@ -133,7 +141,7 @@ public class PotentialObstacle
 							if(projectionDist<tileDimension && sourceDist<distance)
 							{	intersectionX = interX;
 								intersectionY = interY[i];
-								distance = projectionDist;
+								distance = sourceDist;
 							}
 						}
 					}
