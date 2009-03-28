@@ -170,7 +170,7 @@ public class MoveZone
 	}
 	
 	private void processLine()
-	{	vertical = currentY==targetY;
+	{	vertical = currentX==targetX;
 		if(vertical)
 		{	a = currentX;
 			b = null;
@@ -271,9 +271,11 @@ public class MoveZone
 		for(Tile t: tiles)
 		{	ArrayList<Sprite> temp = t.getSprites();
 			for(Sprite s: temp)
-			{	PotentialObstacle o = new PotentialObstacle(s,this);
-				if(o.hasIntersection())
-					result.add(o);
+			{	if(s!=source)
+				{	PotentialObstacle o = new PotentialObstacle(s,this);
+					if(o.hasIntersection())
+						result.add(o);
+				}
 			}
 		}
 		Collections.sort(result,new Comparator<PotentialObstacle>()
@@ -300,7 +302,7 @@ public class MoveZone
 		while(potentialObstacles.size()>0 && goOn)
 		{	PotentialObstacle po = potentialObstacles.get(0);
 			// is it an intersected obstacle?
-			if(po.getDistance()==0)
+			if(po.getDistance()<0)
 			{	addIntersectedSprite(po.getSprite());
 				// is the potential obstacle an actual obstacle?
 				if(po.isActualObstacle())
@@ -311,7 +313,7 @@ public class MoveZone
 					boolean goOn2 = true;
 					while(potentialObstacles.size()>0 && goOn2)
 					{	PotentialObstacle po2 = potentialObstacles.get(0);
-						if(po.getDistance()==0)
+						if(po.getDistance()<0)
 						{	addIntersectedSprite(po.getSprite());
 							if(po.isActualObstacle())
 							{	temp.add(po2);
