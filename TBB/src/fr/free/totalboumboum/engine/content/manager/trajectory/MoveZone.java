@@ -55,13 +55,12 @@ public class MoveZone
 	 *  @param	fuelX	remaining X distance  
 	 *  @param	fuelY	remaining Y distance  
 	 */
-	public MoveZone(Sprite source, double currentX, double currentY, double targetX, double targetY, Level level, Direction initialDirection, Direction usedDirection, double fuelX, double fuelY)
+	public MoveZone(Sprite source, double currentX, double currentY, double targetX, double targetY, Level level, Direction initialDirection, Direction usedDirection, double fuel)
 	{	this.level = level;
 		this.source = source;
 		this.initialDirection = initialDirection;
 		this.usedDirection = usedDirection;
-		this.fuelX = fuelX;
-		this.fuelY = fuelY;
+		this.fuel = fuel;
 		this.currentX = currentX;
 		this.currentY = currentY;
 		this.targetX = targetX;
@@ -97,15 +96,10 @@ public class MoveZone
 	/////////////////////////////////////////////////////////////////
 	// FUEL				/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	private double fuelX;
-	private double fuelY;
+	private double fuel;
 	
-	public double getFuelX()
-	{	return fuelX;
-	}
-	
-	public double getFuelY()
-	{	return fuelY;
+	public double getFuel()
+	{	return fuel;
 	}
 
 	/////////////////////////////////////////////////////////////////
@@ -360,10 +354,7 @@ System.out.println("PotentialObstacle:"+po.getSprite().getCurrentPosX()+","+po.g
 	 */
 	private boolean canMove()
 	{	boolean result = usedDirection!=Direction.NONE;
-		if(result && usedDirection.getVerticalPrimary()!=Direction.NONE)
-			result = fuelY>0;
-		if(result && usedDirection.getHorizontalPrimary()!=Direction.NONE)
-			result = fuelX>0;
+		result = result && fuel>0;
 		return result;
 	}
 	
@@ -476,12 +467,11 @@ System.out.println("PotentialObstacle:"+po.getSprite().getCurrentPosX()+","+po.g
 		{	// process safe position
 			double avoid[] = po.getSafePosition(currentX,currentY,dir);
 			// try to avoid it
-			MoveZone mz = new MoveZone(source,currentX,currentY,avoid[0],avoid[1],level,initialDirection,dir,fuelX,fuelY);
+			MoveZone mz = new MoveZone(source,currentX,currentY,avoid[0],avoid[1],level,initialDirection,dir,fuel);
 			mz.applyMove();
 			currentX = mz.getCurrentX();
 			currentY = mz.getCurrentY();
-			fuelX = mz.getFuelX();
-			fuelY = mz.getFuelY();
+			fuel = mz.getFuel();
 			if(!hasArrived())
 				usedDirection = dir;
 			for(Sprite s: mz.getCollidedSprites())
@@ -520,16 +510,15 @@ System.out.println("PotentialObstacle:"+po.getSprite().getCurrentPosX()+","+po.g
 				double avoid[] = po.getSafePosition(currentX,currentY,dir);
 				// check if it's worth moving in this direction (i.e. no other obstacles in the way)
 				int d[] = initialDirection.getIntFromDirection();
-				MoveZone fake = new MoveZone(source,avoid[0],avoid[1],avoid[0]+d[0],avoid[1]+d[1],level,initialDirection,initialDirection,1,1);
+				MoveZone fake = new MoveZone(source,avoid[0],avoid[1],avoid[0]+d[0],avoid[1]+d[1],level,initialDirection,initialDirection,1);
 				fake.applyMove();
 				// then try to avoid the obstacle
 				if(fake.hasArrived())
-				{	MoveZone mz = new MoveZone(source,currentX,currentY,avoid[0],avoid[1],level,initialDirection,dir,fuelX,fuelY);
+				{	MoveZone mz = new MoveZone(source,currentX,currentY,avoid[0],avoid[1],level,initialDirection,dir,fuel);
 					mz.applyMove();
 					currentX = mz.getCurrentX();
 					currentY = mz.getCurrentY();
-					fuelX = mz.getFuelX();
-					fuelY = mz.getFuelY();
+					fuel = mz.getFuel();
 					if(!hasArrived())
 						usedDirection = dir;
 					for(Sprite s: mz.getCollidedSprites())
@@ -573,14 +562,12 @@ System.out.println("PotentialObstacle:"+po.getSprite().getCurrentPosX()+","+po.g
 	 */
 	private boolean moveToPoint(double destX, double destY)
 	{	boolean result;
-		double deltaX = currentX-destX;
-		double absDeltaX = Math.abs(deltaX);
-		double deltaY = currentY-destY;
-		double absDeltaY = Math.abs(deltaY);
+		double deltaX = destX-currentX;
+		double deltaY = destY-currentY;
+		double dist = Math.sqrt(Math.pow(deltaX,2)+Math.pow(deltaY,2));
 		// enough fuel
-		if(fuelX>=absDeltaX && fuelY>=absDeltaY)
-		{	fuelX = fuelX - absDeltaX;
-			fuelY = fuelY - absDeltaY;
+		if(fuel>=dist)
+		{	fuel = fuel - dist;
 			currentX = destX;
 			currentY = destY;
 			result = true;
@@ -588,12 +575,34 @@ System.out.println("PotentialObstacle:"+po.getSprite().getCurrentPosX()+","+po.g
 		// must stop before contact
 		else
 		{	result = false;
+			// special case : vertical trajectory
 			if(vertical)
-			{	fuelY = fuelY - absDeltaY;
+			{	deltaY = fuel*Math.signum(deltaY);
+				fuel = 0;
 				currentY = currentY + deltaY;
 			}
 			else
-			{	deltaX = Math.signum(deltaX)*fuelX;
+			{	// else : must solve equation (interstion point)
+				// 		line: y = ax + b
+				//		circle: (x-currentX)²+(y-currentY)² = fuel²
+				double discA = a*a + 1;
+				double discB = 2*a*b - 2*currentX - 2*a*currentY;
+				double discC = b*b + currentX*currentX - 2*b*currentY + currentY*currentY - fuel*fuel;
+				double discDelta = discB*discB - 4*discA*discC;
+				double x1 = (-discB + Math.sqrt(discDelta))/(2*discA);
+				double x2 = (-discB - Math.sqrt(discDelta))/(2*discA);
+				Direction moveDir = Direction.getHorizontalFromDouble(deltaX);
+				Direction tempDir = Direction.getHorizontalFromDouble(x1-currentX);
+				double solutionX = x1;
+				if(tempDir!=moveDir)
+					solutionX = x2;
+				double solutionY = a*solutionX + b;
+				// update
+				fuel = 0; 
+				currentX = solutionX;
+				currentY = solutionY;			
+/*				
+				deltaX = Math.signum(deltaX)*fuelX;
 				deltaY = Math.signum(deltaY)*fuelY;
 				double yForX = deltaX*a+b;
 				double absYforX = Math.abs(yForX);
@@ -615,6 +624,7 @@ System.out.println("PotentialObstacle:"+po.getSprite().getCurrentPosX()+","+po.g
 					currentX = currentX + deltaX;
 					currentY = currentY + yForX;
 				}
+*/				
 			}
 		}
 		return result;
