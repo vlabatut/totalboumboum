@@ -219,16 +219,26 @@ public class PotentialObstacle
 			// sprite and potential obstacle in the same tile : not an obstacle
 			if(currentTile == spriteTile)
 				result = false;
-			// sprite and potential obstacle not in the same tile : depends on the direction
+			// sprite and potential obstacle not in the same tile : depends on the ability and/or direction
 			else
-			{	// moving towards the potential obstacle : it's an obstacle
-				double deltaX = sprite.getCurrentPosX()-moveZone.getCurrentX();
-				double deltaY = sprite.getCurrentPosY()-moveZone.getCurrentY();
-				Direction dir = Direction.getCompositeFromDouble(deltaX,deltaY);
-				if(dir.hasCommonComponent(usedDirection))
-					result = true;
-				else
+			{	// non-blocking sprite : it's not an obstacle
+				String act = AbstractAction.MOVELOW;
+				if(!sprite.isOnGround())
+					act = AbstractAction.MOVEHIGH;
+				SpecificAction specificAction = new SpecificAction(act,source,null,usedDirection);
+				ThirdPermission permission = sprite.getThirdPermission(specificAction);
+				if(permission!=null)
 					result = false;
+				// blocking sprite and moving towards the potential obstacle : it's an obstacle
+				else
+				{	double deltaX = sprite.getCurrentPosX()-moveZone.getCurrentX();
+					double deltaY = sprite.getCurrentPosY()-moveZone.getCurrentY();
+					Direction dir = Direction.getCompositeFromDouble(deltaX,deltaY);
+					if(dir.hasCommonComponent(usedDirection))
+						result = true;
+					else
+						result = false;
+				}
 			}
 		}
 		// no intersection : depends only on the potential obstacle properties

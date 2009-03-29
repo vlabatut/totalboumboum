@@ -5,9 +5,13 @@
 		<!-- STATE -->
 <!--  	sprite-flat --> 
 <!--  	sprite-above --> 
-<!--	sprite-traverse-bomb --> 
-<!--	sprite-traverse-item --> 
-<!--	sprite-traverse-wall --> 
+<!-- 		sprite-move-assistance -->
+		<ability strength="0.33" frame="false" time="-1" uses="-1">
+			<name value="sprite-move-assistance"/>
+		</ability>
+<!--		sprite-traverse-bomb --> 
+<!--		sprite-traverse-item --> 
+<!--		sprite-traverse-wall --> 
 <!--  	block-spawn --> 
 <!--  	bomb-explosion-latency --> 
 <!--  	bomb-failure-maxduration --> 
