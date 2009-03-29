@@ -597,7 +597,11 @@ System.out.println("PotentialObstacle:"+po.getSprite().getCurrentPosX()+","+po.g
 				deltaY = Math.signum(deltaY)*fuelY;
 				double yForX = deltaX*a+b;
 				double absYforX = Math.abs(yForX);
-				double xForY = (deltaY-b)/a;
+				double xForY;
+				if(a==0)
+					xForY = 0;
+				else
+					xForY = (deltaY-b)/a;
 				double absXforY = Math.abs(xForY);
 				if(absYforX>fuelY)
 				{	fuelX = fuelX - absXforY;
