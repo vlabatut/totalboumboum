@@ -497,13 +497,13 @@ System.out.println("PotentialObstacle:"+po.getSprite().getCurrentPosX()+","+po.g
 			else
 			{	double dx = currentX - po.getSprite().getCurrentPosX();
 				dist = Math.abs(dx);
-				dir = Direction.getVerticalFromDouble(dx);
+				dir = Direction.getHorizontalFromDouble(dx);
 			}
 			// has the sprite an assistance?
 			StateAbility ability = source.computeAbility(StateAbility.SPRITE_MOVE_ASSISTANCE);
 			double tolerance = ability.getStrength();
 			double margin = tolerance*level.getTileDimension();
-			if(tolerance<0)
+			if(tolerance==0)
 				margin = Double.MAX_VALUE;
 			if(dir!=Direction.NONE && CalculusTools.isRelativelyGreaterThan(dist,margin,level.getLoop()))
 			{	// process safe position
