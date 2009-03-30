@@ -291,7 +291,12 @@ public class MoveZone
 	}
 	
 	public void applyMove()
-	{	ArrayList<PotentialObstacle> potentialObstacles = getCrossedSprites();
+	{	
+		
+if(initialDirection==Direction.LEFT)
+	System.out.println();;
+		
+		ArrayList<PotentialObstacle> potentialObstacles = getCrossedSprites();
 		boolean goOn = usedDirection!=Direction.NONE;
 		while(potentialObstacles.size()>0 && goOn)
 		{	PotentialObstacle po = potentialObstacles.get(0);
@@ -305,15 +310,20 @@ public class MoveZone
 					temp.add(po);
 					potentialObstacles.remove(0);
 					boolean goOn2 = true;
-					while(potentialObstacles.size()>0 && goOn2)
-					{	PotentialObstacle po2 = potentialObstacles.get(0);
-						if(po.getDistance()<0)
-						{	addIntersectedSprite(po.getSprite());
-							if(po.isActualObstacle())
+					int i = 0;
+					while(i<potentialObstacles.size() && goOn2)
+					{	PotentialObstacle po2 = potentialObstacles.get(i);
+						if(po2.getDistance()<0)
+						{	addIntersectedSprite(po2.getSprite());
+							if(po2.isActualObstacle())
 							{	temp.add(po2);
-								potentialObstacles.remove(0);
+								potentialObstacles.remove(i);
 							}
+							else
+								i++;
 						}
+						else
+							goOn2 = false;
 					}
 					// go through them
 					updateDirection(temp);
@@ -402,7 +412,7 @@ System.out.println("PotentialObstacle:"+po.getSprite().getCurrentPosX()+","+po.g
 			}
 			// vertical component
 			double dy = s.getCurrentPosY() - currentY;
-			Direction dV = Direction.getVerticalFromDouble(dx);
+			Direction dV = Direction.getVerticalFromDouble(dy);
 			if(dV!=Direction.NONE && usedDirection.getVerticalPrimary()==dV)
 			{	double absDelta = Math.abs(dy);
 				if(dV==Direction.DOWN && absDelta<downDist)
@@ -417,19 +427,19 @@ System.out.println("PotentialObstacle:"+po.getSprite().getCurrentPosX()+","+po.g
 		}
 		// change used direction
 		if(down!=null)
-		{	usedDirection.drop(Direction.DOWN);
+		{	usedDirection = usedDirection.drop(Direction.DOWN);
 			addCollidedSprite(down);
 		}
 		if(left!=null)
-		{	usedDirection.drop(Direction.LEFT);
+		{	usedDirection = usedDirection.drop(Direction.LEFT);
 			addCollidedSprite(left);
 		}
 		if(right!=null)
-		{	usedDirection.drop(Direction.RIGHT);
+		{	usedDirection = usedDirection.drop(Direction.RIGHT);
 			addCollidedSprite(right);
 		}
 		if(up!=null)
-		{	usedDirection.drop(Direction.UP);
+		{	usedDirection = usedDirection.drop(Direction.UP);
 			addCollidedSprite(up);
 		}
 	}
@@ -510,7 +520,7 @@ System.out.println("PotentialObstacle:"+po.getSprite().getCurrentPosX()+","+po.g
 				double avoid[] = po.getSafePosition(currentX,currentY,dir);
 				// check if it's worth moving in this direction (i.e. no other obstacles in the way)
 				int d[] = initialDirection.getIntFromDirection();
-				MoveZone fake = new MoveZone(source,avoid[0],avoid[1],avoid[0]+d[0],avoid[1]+d[1],level,initialDirection,initialDirection,1);
+				MoveZone fake = new MoveZone(source,avoid[0],avoid[1],avoid[0]+d[0],avoid[1]+d[1],level,initialDirection,initialDirection,2);
 				fake.applyMove();
 				// then try to avoid the obstacle
 				if(fake.hasArrived())
@@ -526,6 +536,8 @@ System.out.println("PotentialObstacle:"+po.getSprite().getCurrentPosX()+","+po.g
 					for(Sprite s: mz.getIntersectedSprites())
 						addIntersectedSprite(s);
 				}
+				else
+					usedDirection = Direction.NONE; 
 			}
 			else
 				usedDirection = Direction.NONE; 
