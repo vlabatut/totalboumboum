@@ -125,15 +125,32 @@ public class TrajectoryPackLoader
     {	TrajectoryDirection result = new TrajectoryDirection();
     	result.setRepeat(repeat);
     	result.setGestureName(gestureName);
-    	result.setXInteraction(xInteraction);
-    	result.setYInteraction(yInteraction);
-		result.setProportional(proportional);
-    	// direction
+ 		result.setProportional(proportional);
+    	
+		// direction
     	String strDirection = root.getAttribute(XmlTools.ATT_NAME).getValue().trim();
     	Direction direction = Direction.NONE;
 		if(!strDirection.equals(""))
 			direction = Direction.valueOf(strDirection.toUpperCase(Locale.ENGLISH));
 		result.setDirection(direction);
+		
+		// interaction coefficients
+		{	// X interaction coefficient
+			Attribute attribute = root.getAttribute(XmlTools.ATT_XINTERACTION);
+			if(attribute!=null)
+			{	double temp = Double.parseDouble(attribute.getValue().trim());
+				xInteraction = zoomFactor*temp;
+			}
+		   	result.setXInteraction(xInteraction);
+			// Y interaction coefficient
+			attribute = root.getAttribute(XmlTools.ATT_YINTERACTION);
+			if(attribute!=null)
+			{	double temp = Double.parseDouble(attribute.getValue().trim());
+				yInteraction = zoomFactor*temp;
+			}
+	    	result.setYInteraction(yInteraction);
+		}
+
 		// forced position
 		Element forcePosition = root.getChild(XmlTools.ELT_FORCE_POSITION);
 		if(forcePosition!=null)
@@ -168,6 +185,7 @@ public class TrajectoryPackLoader
 			result.setForceYPosition(false);
 			result.setForceZPosition(false);
 		}
+		
 		// steps
 		Element steps = root.getChild(XmlTools.ELT_STEPS);
 		if(steps!=null)
@@ -179,6 +197,7 @@ public class TrajectoryPackLoader
 				result.add(trajectoryStep);
 			}
 		}
+		
 		return result;
     }
     

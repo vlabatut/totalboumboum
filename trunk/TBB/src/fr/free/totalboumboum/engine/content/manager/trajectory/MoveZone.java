@@ -30,6 +30,7 @@ import fr.free.totalboumboum.engine.container.tile.Tile;
 import fr.free.totalboumboum.engine.content.feature.Direction;
 import fr.free.totalboumboum.engine.content.feature.ability.StateAbility;
 import fr.free.totalboumboum.engine.content.sprite.Sprite;
+import fr.free.totalboumboum.engine.loop.Loop;
 import fr.free.totalboumboum.tools.CalculusTools;
 
 //TODO y va y avoir des problèmes de normalisation des coordonnées (utiliser mod pour fermer la zone)
@@ -291,12 +292,7 @@ public class MoveZone
 	}
 	
 	public void applyMove()
-	{	
-		
-if(initialDirection==Direction.LEFT)
-	System.out.println();;
-		
-		ArrayList<PotentialObstacle> potentialObstacles = getCrossedSprites();
+	{	ArrayList<PotentialObstacle> potentialObstacles = getCrossedSprites();
 		boolean goOn = usedDirection!=Direction.NONE;
 		while(potentialObstacles.size()>0 && goOn)
 		{	PotentialObstacle po = potentialObstacles.get(0);
@@ -385,7 +381,8 @@ System.out.println("PotentialObstacle:"+po.getSprite().getCurrentPosX()+","+po.g
 	 * @param pos
 	 */
 	private void updateDirection(ArrayList<PotentialObstacle> pos)
-	{	// determine the closest obstacle for each primary direction
+	{	Loop loop = level.getLoop();
+		// determine the closest obstacle for each primary direction
 		Sprite down = null;
 		double downDist = Double.MAX_VALUE;
 		Sprite left = null;
@@ -401,11 +398,13 @@ System.out.println("PotentialObstacle:"+po.getSprite().getCurrentPosX()+","+po.g
 			Direction dH = Direction.getHorizontalFromDouble(dx);
 			if(dH!=Direction.NONE && usedDirection.getHorizontalPrimary()==dH)
 			{	double absDelta = Math.abs(dx);
-				if(dH==Direction.LEFT && absDelta<leftDist)
+				if(dH==Direction.LEFT && !CalculusTools.isRelativelyGreaterOrEqualThan(absDelta,leftDist,loop))
+				//if(dH==Direction.LEFT && absDelta<leftDist)
 				{	leftDist = absDelta;
 					left = s;
 				}
-				else if(dH==Direction.RIGHT&& absDelta<rightDist)
+				else if(dH==Direction.RIGHT && !CalculusTools.isRelativelyGreaterOrEqualThan(absDelta,rightDist,loop))
+				//else if(dH==Direction.RIGHT && absDelta<rightDist)
 				{	rightDist = absDelta;
 					right = s;
 				}
@@ -415,11 +414,13 @@ System.out.println("PotentialObstacle:"+po.getSprite().getCurrentPosX()+","+po.g
 			Direction dV = Direction.getVerticalFromDouble(dy);
 			if(dV!=Direction.NONE && usedDirection.getVerticalPrimary()==dV)
 			{	double absDelta = Math.abs(dy);
-				if(dV==Direction.DOWN && absDelta<downDist)
+				if(dV==Direction.DOWN && !CalculusTools.isRelativelyGreaterOrEqualThan(absDelta,downDist,loop))
+				//if(dV==Direction.DOWN && absDelta<downDist)
 				{	downDist = absDelta;
 					down = s;
 				}
-				else if(dV==Direction.UP&& absDelta<upDist)
+				else if(dV==Direction.UP && !CalculusTools.isRelativelyGreaterOrEqualThan(absDelta,upDist,loop))
+				//else if(dV==Direction.UP && absDelta<upDist)
 				{	upDist = absDelta;
 					up = s;
 				}
@@ -483,7 +484,7 @@ System.out.println("PotentialObstacle:"+po.getSprite().getCurrentPosX()+","+po.g
 			currentY = mz.getCurrentY();
 			fuel = mz.getFuel();
 			if(!hasArrived())
-				usedDirection = dir;
+				usedDirection = mz.getUsedDirection();
 			for(Sprite s: mz.getCollidedSprites())
 				addCollidedSprite(s);
 			for(Sprite s: mz.getIntersectedSprites())

@@ -3,26 +3,26 @@
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
 	xsi:noNamespaceSchemaLocation="../../../../schemas/trajectories.xsd">
 
-	<gesture name="pushing" xInteraction="50" yInteraction="50">
-		<direction name="down" />
-		<direction name="downleft" />
-		<direction name="downright" />
-		<direction name="left" />
-		<direction name="right" />
-		<direction name="up" />
-		<direction name="upleft" />
-		<direction name="upright" />
+	<gesture name="pushing" >
+		<direction name="down" yInteraction="50"/>
+		<direction name="downleft" xInteraction="35" yInteraction="35"/>
+		<direction name="downright" xInteraction="35" yInteraction="35"/>
+		<direction name="left" xInteraction="50" />
+		<direction name="right" xInteraction="50" />
+		<direction name="up"  yInteraction="50"/>
+		<direction name="upleft" xInteraction="35" yInteraction="35"/>
+		<direction name="upright" xInteraction="35" yInteraction="35"/>
 	</gesture>
 	
-	<gesture name="walking" xInteraction="50" yInteraction="50">
-		<direction name="down" />
-		<direction name="downleft" />
-		<direction name="downright" />
-		<direction name="left" />
-		<direction name="right" />
-		<direction name="up" />
-		<direction name="upleft" />
-		<direction name="upright" />
+	<gesture name="walking" >
+		<direction name="down" yInteraction="50"/>
+		<direction name="downleft" xInteraction="35" yInteraction="35"/>
+		<direction name="downright" xInteraction="35" yInteraction="35"/>
+		<direction name="left" xInteraction="50" />
+		<direction name="right" xInteraction="50" />
+		<direction name="up"  yInteraction="50"/>
+		<direction name="upleft" xInteraction="35" yInteraction="35"/>
+		<direction name="upright" xInteraction="35" yInteraction="35"/>
 	</gesture>
 
 </trajectories>

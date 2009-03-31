@@ -27,6 +27,8 @@ import fr.free.totalboumboum.engine.content.feature.action.AbstractAction;
 import fr.free.totalboumboum.engine.content.feature.action.SpecificAction;
 import fr.free.totalboumboum.engine.content.feature.permission.ThirdPermission;
 import fr.free.totalboumboum.engine.content.sprite.Sprite;
+import fr.free.totalboumboum.engine.loop.Loop;
+import fr.free.totalboumboum.tools.CalculusTools;
 
 public class PotentialObstacle
 {	private MoveZone moveZone;
@@ -90,7 +92,10 @@ public class PotentialObstacle
 		double distY = Math.abs(posY-currentY);
 		// if there's already an intersection between the sprite and this potential obstacle
 		double tileDimension = moveZone.getLevel().getTileDimension();
-		if(distX<tileDimension && distY<tileDimension)
+		Loop loop = moveZone.getLevel().getLoop();
+		if(!CalculusTools.isRelativelyGreaterOrEqualThan(distX,tileDimension,loop) 
+				&& !CalculusTools.isRelativelyGreaterOrEqualThan(distY,tileDimension,loop))
+		//if(distX<tileDimension && distY<tileDimension)
 		{	intersectionX = currentX;
 			intersectionY = currentY;
 			distance = -1;
@@ -113,7 +118,9 @@ public class PotentialObstacle
 						{	double projectionDist = Math.abs(posY - interY);
 							double sourceDist = Math.abs(currentX - interX[i]) + Math.abs(currentY - interY);
 							// critical projection distance and smaller source-intersection distance 
-							if(projectionDist<tileDimension && sourceDist<distance)
+							if(!CalculusTools.isRelativelyGreaterOrEqualThan(projectionDist,tileDimension,loop) 
+									&& sourceDist<distance)
+							//if(projectionDist<tileDimension && sourceDist<distance)
 							{	intersectionX = interX[i];
 								intersectionY = interY;
 								distance = sourceDist;
@@ -138,7 +145,9 @@ public class PotentialObstacle
 						{	double projectionDist = Math.abs(posX - interX);
 							double sourceDist = Math.abs(currentX - interX) + Math.abs(currentY - interY[i]);
 							// critical distance, and smaller than the current distance
-							if(projectionDist<tileDimension && sourceDist<distance)
+							if(!CalculusTools.isRelativelyGreaterOrEqualThan(projectionDist,tileDimension,loop) 
+									&& sourceDist<distance)
+							//if(projectionDist<tileDimension && sourceDist<distance)
 							{	intersectionX = interX;
 								intersectionY = interY[i];
 								distance = sourceDist;
