@@ -47,6 +47,8 @@
 		</xsd:sequence>
 		<!--  direction name -->
 		<xsd:attribute name="name" type="xsd:string" />
+		<xsd:attribute name="xInteraction" type="xsd:float" use="optional" />
+		<xsd:attribute name="yInteraction" type="xsd:float" use="optional" />
 	</xsd:complexType>
 
 	<!--  gesture -->
