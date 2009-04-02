@@ -102,7 +102,37 @@ public class PotentialObstacle
 		}
 		// else we need to process the intersection point (contact point)
 		else
-		{	// intersection with a vertical side of the obstacle safe zone
+		{	// special case : sprite located in an angle of the obstacle safe zone
+//TODO			
+			if(CalculusTools.isRelativelyEqualTo(distX,tileDimension,loop) 
+					&& CalculusTools.isRelativelyEqualTo(distY,tileDimension,loop))
+			{	double interX[] = {posX - tileDimension, posX + tileDimension};
+				double interY[] = {posY - tileDimension, posY + tileDimension};
+				double deltaX = targetX-currentX;
+				double deltaY = targetY-currentY;
+				if(CalculusTools.isRelativelyEqualTo(interX[0],currentX,loop) 
+						&& CalculusTools.isRelativelyEqualTo(interY[0],currentY,loop) 
+						&& CalculusTools.isRelativelyGreaterOrEqualThan(deltaX,0,loop)
+						&& CalculusTools.isRelativelyGreaterOrEqualThan(deltaY,0,loop)
+					|| CalculusTools.isRelativelyEqualTo(interX[0],currentX,loop) 
+						&& CalculusTools.isRelativelyEqualTo(interY[1],currentY,loop) 
+						&& CalculusTools.isRelativelyGreaterOrEqualThan(deltaX,0,loop)
+						&& CalculusTools.isRelativelySmallerOrEqualThan(deltaY,0,loop)
+					|| CalculusTools.isRelativelyEqualTo(interX[1],currentX,loop) 
+						&& CalculusTools.isRelativelyEqualTo(interY[0],currentY,loop) 
+						&& CalculusTools.isRelativelySmallerOrEqualThan(deltaX,0,loop)
+						&& CalculusTools.isRelativelyGreaterOrEqualThan(deltaY,0,loop)
+					|| CalculusTools.isRelativelyEqualTo(interX[1],currentX,loop) 
+						&& CalculusTools.isRelativelyEqualTo(interY[1],currentY,loop) 
+						&& CalculusTools.isRelativelySmallerOrEqualThan(deltaX,0,loop)
+						&& CalculusTools.isRelativelySmallerOrEqualThan(deltaY,0,loop))
+				
+				{	intersectionX = currentX;
+					intersectionY = currentY;
+					distance = 0;
+				}
+			}
+			// intersection with a vertical side of the obstacle safe zone
 			{	double interX[] = {posX - tileDimension, posX + tileDimension};
 				// for each side
 				for(int i=0;i<interX.length;i++)
