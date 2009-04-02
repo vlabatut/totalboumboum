@@ -483,8 +483,25 @@ System.out.println("PotentialObstacle:"+po.getSprite().getCurrentPosX()+","+po.g
 			currentX = mz.getCurrentX();
 			currentY = mz.getCurrentY();
 			fuel = mz.getFuel();
-			if(!hasArrived())
+			if(!mz.hasArrived())
 				usedDirection = mz.getUsedDirection();
+			else
+			{	
+/*				
+				int tmp[]=usedDirection.getIntFromDirection();
+				double tmp2[] = new double[2];
+				if(tmp[0]!=0 && tmp[1]!=0)
+				{	tmp2[0] = tmp[0]*Math.sqrt(fuel);
+					tmp2[1] = tmp[1]*Math.sqrt(fuel);
+				}
+				else
+				{	tmp2[0] = tmp[0]*fuel;
+					tmp2[1] = tmp[1]*fuel;
+				}					
+				targetX = currentX + tmp2[0];
+				targetY = currentY + tmp2[1];
+*/				
+			}
 			for(Sprite s: mz.getCollidedSprites())
 				addCollidedSprite(s);
 			for(Sprite s: mz.getIntersectedSprites())
@@ -530,8 +547,14 @@ System.out.println("PotentialObstacle:"+po.getSprite().getCurrentPosX()+","+po.g
 					currentX = mz.getCurrentX();
 					currentY = mz.getCurrentY();
 					fuel = mz.getFuel();
-					if(!hasArrived())
+					if(!mz.hasArrived())
 						usedDirection = dir;
+					else
+					{	int tmp[]=usedDirection.getIntFromDirection();
+						double tmp2[] = {tmp[0]*fuel,tmp[1]*fuel};
+						targetX = currentX + tmp2[0];
+						targetY = currentY + tmp2[1];
+					}
 					for(Sprite s: mz.getCollidedSprites())
 						addCollidedSprite(s);
 					for(Sprite s: mz.getIntersectedSprites())
