@@ -487,7 +487,7 @@ System.out.println("PotentialObstacle:"+po.getSprite().getCurrentPosX()+","+po.g
 				usedDirection = mz.getUsedDirection();
 			else
 			{	
-/*				
+/*	TODO			
 				int tmp[]=usedDirection.getIntFromDirection();
 				double tmp2[] = new double[2];
 				if(tmp[0]!=0 && tmp[1]!=0)

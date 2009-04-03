@@ -112,20 +112,20 @@ public class PotentialObstacle
 				double deltaY = targetY-currentY;
 				if(CalculusTools.isRelativelyEqualTo(interX[0],currentX,loop) 
 						&& CalculusTools.isRelativelyEqualTo(interY[0],currentY,loop) 
-						&& CalculusTools.isRelativelyGreaterOrEqualThan(deltaX,0,loop)
-						&& CalculusTools.isRelativelyGreaterOrEqualThan(deltaY,0,loop)
+						&& CalculusTools.isRelativelyGreaterThan(deltaX,0,loop)
+						&& CalculusTools.isRelativelyGreaterThan(deltaY,0,loop)
 					|| CalculusTools.isRelativelyEqualTo(interX[0],currentX,loop) 
 						&& CalculusTools.isRelativelyEqualTo(interY[1],currentY,loop) 
-						&& CalculusTools.isRelativelyGreaterOrEqualThan(deltaX,0,loop)
-						&& CalculusTools.isRelativelySmallerOrEqualThan(deltaY,0,loop)
+						&& CalculusTools.isRelativelyGreaterThan(deltaX,0,loop)
+						&& CalculusTools.isRelativelySmallerThan(deltaY,0,loop)
 					|| CalculusTools.isRelativelyEqualTo(interX[1],currentX,loop) 
 						&& CalculusTools.isRelativelyEqualTo(interY[0],currentY,loop) 
-						&& CalculusTools.isRelativelySmallerOrEqualThan(deltaX,0,loop)
-						&& CalculusTools.isRelativelyGreaterOrEqualThan(deltaY,0,loop)
+						&& CalculusTools.isRelativelySmallerThan(deltaX,0,loop)
+						&& CalculusTools.isRelativelyGreaterThan(deltaY,0,loop)
 					|| CalculusTools.isRelativelyEqualTo(interX[1],currentX,loop) 
 						&& CalculusTools.isRelativelyEqualTo(interY[1],currentY,loop) 
-						&& CalculusTools.isRelativelySmallerOrEqualThan(deltaX,0,loop)
-						&& CalculusTools.isRelativelySmallerOrEqualThan(deltaY,0,loop))
+						&& CalculusTools.isRelativelySmallerThan(deltaX,0,loop)
+						&& CalculusTools.isRelativelySmallerThan(deltaY,0,loop))
 				
 				{	intersectionX = currentX;
 					intersectionY = currentY;
