@@ -103,7 +103,6 @@ public class PotentialObstacle
 		// else we need to process the intersection point (contact point)
 		else
 		{	// special case : sprite located in an angle of the obstacle safe zone
-//TODO			
 			if(CalculusTools.isRelativelyEqualTo(distX,tileDimension,loop) 
 					&& CalculusTools.isRelativelyEqualTo(distY,tileDimension,loop))
 			{	double interX[] = {posX - tileDimension, posX + tileDimension};
