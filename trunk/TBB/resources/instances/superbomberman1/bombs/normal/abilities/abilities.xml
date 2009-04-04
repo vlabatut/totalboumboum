@@ -32,10 +32,10 @@
 			<name value="bomb-trigger-combustion" />
 		</ability>
 <!--  	bomb-trigger-control --> 
-<!--  	bomb-trigger-timer 
+<!--  	bomb-trigger-timer -->
 		<ability strength="2400" frame="false" time="-1" uses="-1">
 			<name value="bomb-trigger-timer" /> 
-		</ability> --> 
+		</ability> 
 <!--  	bomb-number --> 
 <!--  	bomb-range --> 
 <!--  	hero-punch-duration --> 

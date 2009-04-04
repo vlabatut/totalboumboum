@@ -45,6 +45,8 @@ public class Itemset
 	public Item makeItem(String name)
 	{	Item result = null;
 		ItemFactory itemFactory = itemFactories.get(name);
+if(itemFactory==null)
+	System.out.println(name);
 		result = itemFactory.makeSprite();
 		return result;
 	}
