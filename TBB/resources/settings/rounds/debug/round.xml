@@ -6,24 +6,18 @@
  	<notes>
  		<line value="Here goes a short description of the round." />
  		<line value="Author: Vincent Labatut" />
- 		<line value="Date: 15-11-2008" />
+ 		<line value="Date: 04-04-2009" />
  	</notes>
 
 	<author value="Vincent Labatut" />
 
 	<limits>
-<!-- 	
-		<lastStanding>
-			<points local="false" name="basicSurvival" />
-			<threshold value="1" comparator="lesseq"/>
-		</lastStanding>
--->		
 		<time>
 			<points local="false" name="basicSurvival" />
- 			<threshold value="90000" />
+ 			<threshold value="9000000" />
 		</time>
- 	</limits>
+	</limits>
 	
-	<level packname="sbm1Custom" name="part1" />
+	<level packname="sbm1Custom" name="debug" />
 
 </round>
