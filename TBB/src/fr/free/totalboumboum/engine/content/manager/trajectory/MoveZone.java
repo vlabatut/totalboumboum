@@ -497,13 +497,15 @@ System.out.println("PotentialObstacle:"+po.getSprite().getCurrentPosX()+","+po.g
 				usedDirection = mz.getUsedDirection();
 			else
 			{	
-				
+/*				
+if(currentX<580)
+	System.out.println();
 				
 				double dx = targetX - currentX;
 				double dy = targetY - currentY;
 				usedDirection = Direction.getCompositeFromDouble(dx, dy);
+*/				
 				
-/*				
 				int tmp[]=usedDirection.getIntFromDirection();
 				double tmp2[] = new double[2];
 				if(tmp[0]!=0 && tmp[1]!=0)
@@ -516,7 +518,7 @@ System.out.println("PotentialObstacle:"+po.getSprite().getCurrentPosX()+","+po.g
 				}					
 				targetX = currentX + tmp2[0];
 				targetY = currentY + tmp2[1];
-*/				
+				
 			}
 			for(Sprite s: mz.getCollidedSprites())
 				addCollidedSprite(s);
