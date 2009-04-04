@@ -61,6 +61,7 @@ public class MoveZone
 		this.source = source;
 		this.initialDirection = initialDirection;
 		this.usedDirection = usedDirection;
+		previousDirection = Direction.NONE;
 		this.fuel = fuel;
 		this.currentX = currentX;
 		this.currentY = currentY;
@@ -108,6 +109,8 @@ public class MoveZone
 	/////////////////////////////////////////////////////////////////
 	private Direction initialDirection;
 	private Direction usedDirection;
+	/** previously used direction. only used for ergonomic reasons, when the sprite is at some obstacle exact corner with a composite direction : which primary direction must be used?*/
+	private Direction previousDirection;
 	
 	public Direction getInitialDirection()
 	{	return initialDirection;
@@ -428,19 +431,23 @@ System.out.println("PotentialObstacle:"+po.getSprite().getCurrentPosX()+","+po.g
 		}
 		// change used direction
 		if(down!=null)
-		{	usedDirection = usedDirection.drop(Direction.DOWN);
+		{	previousDirection = usedDirection;
+			usedDirection = usedDirection.drop(Direction.DOWN);
 			addCollidedSprite(down);
 		}
 		if(left!=null)
-		{	usedDirection = usedDirection.drop(Direction.LEFT);
+		{	previousDirection = usedDirection;
+			usedDirection = usedDirection.drop(Direction.LEFT);
 			addCollidedSprite(left);
 		}
 		if(right!=null)
-		{	usedDirection = usedDirection.drop(Direction.RIGHT);
+		{	previousDirection = usedDirection;
+			usedDirection = usedDirection.drop(Direction.RIGHT);
 			addCollidedSprite(right);
 		}
 		if(up!=null)
-		{	usedDirection = usedDirection.drop(Direction.UP);
+		{	previousDirection = usedDirection;
+			usedDirection = usedDirection.drop(Direction.UP);
 			addCollidedSprite(up);
 		}
 	}
@@ -469,9 +476,11 @@ System.out.println("PotentialObstacle:"+po.getSprite().getCurrentPosX()+","+po.g
 		double verticalDistance = Math.abs(po.getIntersectionY()-po.getSprite().getCurrentPosY());
 		double horizontalDistance = Math.abs(po.getIntersectionX()-po.getSprite().getCurrentPosX());
 		Direction dir;
-		if(verticalDistance<horizontalDistance)
+		if(horizontalDistance==verticalDistance && previousDirection.isPrimary())
+			dir = usedDirection.drop(previousDirection);
+		else if(verticalDistance<horizontalDistance)
 			dir = usedDirection.getVerticalPrimary();
-		else
+		else //if(horizontalDistance<verticalDistance)
 			dir = usedDirection.getHorizontalPrimary();
 		// if the sprite is not completely blocked
 		if(dir!=Direction.NONE)
@@ -483,11 +492,18 @@ System.out.println("PotentialObstacle:"+po.getSprite().getCurrentPosX()+","+po.g
 			currentX = mz.getCurrentX();
 			currentY = mz.getCurrentY();
 			fuel = mz.getFuel();
+			previousDirection = mz.getUsedDirection();;
 			if(!mz.hasArrived())
 				usedDirection = mz.getUsedDirection();
 			else
 			{	
-/*	TODO			
+				
+				
+				double dx = targetX - currentX;
+				double dy = targetY - currentY;
+				usedDirection = Direction.getCompositeFromDouble(dx, dy);
+				
+/*				
 				int tmp[]=usedDirection.getIntFromDirection();
 				double tmp2[] = new double[2];
 				if(tmp[0]!=0 && tmp[1]!=0)
@@ -508,7 +524,9 @@ System.out.println("PotentialObstacle:"+po.getSprite().getCurrentPosX()+","+po.g
 				addIntersectedSprite(s);
 		}
 		else
-			usedDirection = Direction.NONE;		
+		{	previousDirection = usedDirection;
+			usedDirection = Direction.NONE;
+		}
 	}
 
 	private void bypassObstacleSimpleDirection(PotentialObstacle po)
@@ -547,6 +565,7 @@ System.out.println("PotentialObstacle:"+po.getSprite().getCurrentPosX()+","+po.g
 					currentX = mz.getCurrentX();
 					currentY = mz.getCurrentY();
 					fuel = mz.getFuel();
+					previousDirection = mz.getUsedDirection();;
 					if(!mz.hasArrived())
 						usedDirection = dir;
 					else
@@ -561,13 +580,19 @@ System.out.println("PotentialObstacle:"+po.getSprite().getCurrentPosX()+","+po.g
 						addIntersectedSprite(s);
 				}
 				else
-					usedDirection = Direction.NONE; 
+				{	previousDirection = usedDirection;				
+					usedDirection = Direction.NONE;				
+				}
 			}
 			else
-				usedDirection = Direction.NONE; 
+			{	previousDirection = usedDirection;
+				usedDirection = Direction.NONE;
+			}
 		}
 		else
-			usedDirection = Direction.NONE; 
+		{	previousDirection = usedDirection;
+			usedDirection = Direction.NONE;		
+		}
 	}
 	
 	/**
