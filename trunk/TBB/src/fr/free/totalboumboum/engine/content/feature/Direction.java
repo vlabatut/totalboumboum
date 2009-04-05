@@ -219,6 +219,10 @@ public enum Direction
 		return result;
 	}
 	
+	/**
+	 * returns the opposite direction (RIGHT for LEFT, UPRIGHT for DOWNLEFT, etc)
+	 * @return
+	 */
 	public Direction getOpposite()
 	{	Direction result = NONE;
 		if(this!=NONE)

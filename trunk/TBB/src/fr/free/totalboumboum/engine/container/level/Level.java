@@ -276,15 +276,87 @@ public class Level
 	public void addSprite(Sprite sprite)
 	{	sprites.add(sprite);
 	}
+	
 	public void removeSprite(Sprite sprite)
 	{	sprites.remove(sprite);
 	}
+	
 	public void addHero(Hero hero, int line, int col)
 	{	matrix[line][col].addSprite(hero);
 		hero.setCurrentPosX(matrix[line][col].getPosX());
 		hero.setCurrentPosY(matrix[line][col].getPosY());
 	}
 
+	/////////////////////////////////////////////////////////////////
+	// DIRECTIONS			/////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+
+	/**
+	 * processes the direction of s2 relatively to s1, if
+	 * considering the shortest path.
+	 */
+	public Direction getDirection(Sprite s1, Sprite s2)
+	{	double x1 = s1.getCurrentPosX();
+		double y1 = s1.getCurrentPosY();
+		double x2 = s2.getCurrentPosX();
+		double y2 = s2.getCurrentPosY();
+		Direction result = processDirection(x1,y1,x2,y2);
+		return result;
+	}
+	
+	public Direction getDirection(double x1, double y1, double x2, double y2)
+	{	x1 = normalizePositionX(x1);
+		y1 = normalizePositionY(y1);
+		x2 = normalizePositionX(x2);
+		y2 = normalizePositionY(y2);
+		Direction result = processDirection(x1,y1,x2,y2);
+		return result;
+	}
+
+	public Direction getHorizontalDirection(double x1, double x2)
+	{	x1 = normalizePositionX(x1);
+		x2 = normalizePositionX(x2);
+		Direction result = processHorizontalDirection(x1,x2);
+		return result;
+	}
+
+	public Direction getVerticalDirection(double x1, double x2)
+	{	x1 = normalizePositionX(x1);
+		x2 = normalizePositionX(x2);
+		Direction result = processHorizontalDirection(x1,x2);
+		return result;
+	}
+
+	private Direction processDirection(double x1, double y1, double x2, double y2)
+	{	Direction temp;
+		Direction result = Direction.NONE;	
+		temp = processHorizontalDirection(x1,x2);
+		result.put(temp);
+		temp = processVerticalDirection(y1,y2);
+		result.put(temp);
+		return result;
+	}
+	
+	private Direction processHorizontalDirection(double x1, double x2)
+	{	Direction result;
+		double dx = x1 - x2;
+		result = Direction.getHorizontalFromDouble(dx);
+		double hemi = ((double)globalWidth)/2;
+		if(Math.abs(dx)>hemi)
+			result = result.getOpposite();
+		return result;
+	}
+	
+	private Direction processVerticalDirection(double y1, double y2)
+	{	Direction result;
+		double dy = y1 - y2;
+		result = Direction.getVerticalFromDouble(dy);
+		double hemi = ((double)globalHeight)/2;
+		if(Math.abs(dy)>hemi)
+			result = result.getOpposite();
+		return result;
+	}
+	
 	/////////////////////////////////////////////////////////////////
 	// TILE LOCATION	/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
