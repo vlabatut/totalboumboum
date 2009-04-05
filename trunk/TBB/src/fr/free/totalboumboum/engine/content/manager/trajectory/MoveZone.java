@@ -35,6 +35,13 @@ import fr.free.totalboumboum.tools.CalculusTools;
 
 //TODO gérer le changement de case, cf la v2 du déplacement
 
+
+/**
+ * TODO
+ * - pb (?) quand on pose deux bombes en diagonale et qu'on se place dans le cadrant intérieur d'une des cases libres du même carré
+ * - pb sur le déplacement en diagonale long qui vient heurter l'angle d'un obstacle
+ */
+
 public class MoveZone
 {	private boolean vertical;
 	
@@ -245,12 +252,14 @@ public class MoveZone
 		Tile upleftTile = level.getTile(upleftX,upleftY);
 		Tile downrightTile = level.getTile(downrightX,downrightY);
 		// process
+		int width = level.getGlobalWidth();
+		int height = level.getGlobalHeight();
 		int sLine = upleftTile.getLine();
-		int tLine = downrightTile.getLine();
+		int tLine = (downrightTile.getLine()+1)%height;
 		int sCol = upleftTile.getCol();
-		int tCol = downrightTile.getCol();
-		for(int line=sLine;line<=tLine;line++)
-		{	for(int col=sCol;col<=tCol;col++)
+		int tCol = (downrightTile.getCol()+1)%width;
+		for(int line=sLine;line!=tLine;line=(line+1)%height)
+		{	for(int col=sCol;col!=tCol;col=(col+1)%width)
 			{	Tile temp = level.getTile(line,col);
 				result.add(temp);
 			}
