@@ -279,28 +279,42 @@ public class MoveZone
 		Collections.sort(result,new Comparator<PotentialObstacle>()
 		{	@Override
 			public int compare(PotentialObstacle arg0, PotentialObstacle arg1)
-			{	int resultat;
-				double dist0 = arg0.getDistance();
-				double dist1 = arg1.getDistance();
+			{	int result;
+				double dist0 = arg0.getContactDistance();
+				double dist1 = arg1.getContactDistance();
 				if(dist0>dist1)
-					resultat = +1;
+					result = +1;
 				else if(dist0<dist1)
-					resultat = -1;
-				else
-					resultat = 0;
-				return resultat;
+					result = -1;
+				else //if(dist0==dist1)
+				{	double d0 = arg0.getSpriteDistance(); 
+					double d1 = arg1.getSpriteDistance();
+					result = 0;
+					if(d0>d1)
+						result = +1;
+					else if(d0<d1)
+						result = -1;
+					else //if(d0==d1)
+						result = 0;
+				}
+				return result;
 			}
 		});
 		return result;
 	}
 	
 	public void applyMove()
-	{	ArrayList<PotentialObstacle> potentialObstacles = getCrossedSprites();
+	{	
+		
+if(currentX<168 && usedDirection==Direction.UPLEFT)
+	System.out.println();
+		
+		ArrayList<PotentialObstacle> potentialObstacles = getCrossedSprites();
 		boolean goOn = usedDirection!=Direction.NONE;
 		while(potentialObstacles.size()>0 && goOn)
 		{	PotentialObstacle po = potentialObstacles.get(0);
 			// is it an intersected obstacle?
-			if(po.getDistance()<0)
+			if(po.getContactDistance()<0)
 			{	addIntersectedSprite(po.getSprite());
 				// is the potential obstacle an actual obstacle?
 				if(po.isActualObstacle())
@@ -312,7 +326,7 @@ public class MoveZone
 					int i = 0;
 					while(i<potentialObstacles.size() && goOn2)
 					{	PotentialObstacle po2 = potentialObstacles.get(i);
-						if(po2.getDistance()<0)
+						if(po2.getContactDistance()<0)
 						{	addIntersectedSprite(po2.getSprite());
 							if(po2.isActualObstacle())
 							{	temp.add(po2);
@@ -473,8 +487,8 @@ System.out.println("PotentialObstacle:"+po.getSprite().getCurrentPosX()+","+po.g
 	
 	private void bypassObstacleCompositeDirection(PotentialObstacle po)
 	{	// process the new direction according to the obstacle position
-		double verticalDistance = Math.abs(po.getIntersectionY()-po.getSprite().getCurrentPosY());
-		double horizontalDistance = Math.abs(po.getIntersectionX()-po.getSprite().getCurrentPosX());
+		double verticalDistance = Math.abs(po.getContactY()-po.getSprite().getCurrentPosY());
+		double horizontalDistance = Math.abs(po.getContactX()-po.getSprite().getCurrentPosX());
 		Direction dir;
 		if(horizontalDistance==verticalDistance && previousDirection.isPrimary())
 			dir = usedDirection.drop(previousDirection);
@@ -496,11 +510,11 @@ System.out.println("PotentialObstacle:"+po.getSprite().getCurrentPosX()+","+po.g
 			if(!mz.hasArrived())
 				usedDirection = mz.getUsedDirection();
 			else
-			{	
-/*				
-if(currentX<580)
-	System.out.println();
+			{
+//if(currentX<168 && usedDirection==Direction.UPLEFT)
+//	System.out.println();
 				
+/*				
 				double dx = targetX - currentX;
 				double dy = targetY - currentY;
 				usedDirection = Direction.getCompositeFromDouble(dx, dy);
@@ -606,8 +620,8 @@ if(currentX<580)
 	 * @param po
 	 */
 	private void moveToContactPoint(PotentialObstacle po)
-	{	double interX = po.getIntersectionX();
-		double interY = po.getIntersectionY();
+	{	double interX = po.getContactX();
+		double interY = po.getContactY();
 		boolean reached = moveToPoint(interX,interY);
 		if(reached)
 		{	Sprite s = po.getSprite();

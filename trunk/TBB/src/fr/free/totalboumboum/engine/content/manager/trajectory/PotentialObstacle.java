@@ -36,7 +36,7 @@ public class PotentialObstacle
 	public PotentialObstacle(Sprite sprite, MoveZone moveZone)
 	{	this.sprite = sprite;
 		this.moveZone = moveZone;
-		initIntersection();
+		initContact();
 	}
 	
 	/////////////////////////////////////////////////////////////////
@@ -49,26 +49,30 @@ public class PotentialObstacle
 	}
 	
 	/////////////////////////////////////////////////////////////////
-	// DISTANCE			/////////////////////////////////////////////
+	// DISTANCES			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	private double distance;
+	private double contactDistance;
+	private double spriteDistance;
 	
-	public double getDistance()
-	{	return distance;		
+	public double getContactDistance()
+	{	return contactDistance;		
+	}
+	public double getSpriteDistance()
+	{	return spriteDistance;		
 	}
 	
 	/////////////////////////////////////////////////////////////////
-	// INTERSECTION		/////////////////////////////////////////////
+	// CONTACT		/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	private Double intersectionX;
-	private Double intersectionY;
+	private Double contactX;
+	private Double contactY;
 	
-	public double getIntersectionX()
-	{	return intersectionX;
+	public double getContactX()
+	{	return contactX;
 	}
 	
-	public double getIntersectionY()
-	{	return intersectionY;
+	public double getContactY()
+	{	return contactY;
 	}
 	
 	/**
@@ -76,10 +80,10 @@ public class PotentialObstacle
 	 * Only the point closest to the trajectory source is keeped.
 	 * Note that there may be no intersection point at all.
 	 */
-	private void initIntersection()
-	{	distance = Double.MAX_VALUE;
-		intersectionX = null;
-		intersectionY = null;
+	private void initContact()
+	{	contactDistance = Double.MAX_VALUE;
+		contactX = null;
+		contactY = null;
 		double posX = sprite.getCurrentPosX();
 		double posY = sprite.getCurrentPosY();
 //		double a = moveZone.getTrajectoryA();
@@ -90,15 +94,16 @@ public class PotentialObstacle
 		double targetY = moveZone.getTargetY();		
 		double distX = Math.abs(posX-currentX);
 		double distY = Math.abs(posY-currentY);
+		spriteDistance = distX+distY;
 		// if there's already an intersection between the sprite and this potential obstacle
 		double tileDimension = moveZone.getLevel().getTileDimension();
 		Loop loop = moveZone.getLevel().getLoop();
 		if(!CalculusTools.isRelativelyGreaterOrEqualThan(distX,tileDimension,loop) 
 				&& !CalculusTools.isRelativelyGreaterOrEqualThan(distY,tileDimension,loop))
 		//if(distX<tileDimension && distY<tileDimension)
-		{	intersectionX = currentX;
-			intersectionY = currentY;
-			distance = -1;
+		{	contactX = currentX;
+			contactY = currentY;
+			contactDistance = -1;
 		}
 		// else we need to process the intersection point (contact point)
 		else
@@ -126,9 +131,9 @@ public class PotentialObstacle
 						&& CalculusTools.isRelativelySmallerThan(deltaX,0,loop)
 						&& CalculusTools.isRelativelySmallerThan(deltaY,0,loop))
 				
-				{	intersectionX = currentX;
-					intersectionY = currentY;
-					distance = 0;
+				{	contactX = currentX;
+					contactY = currentY;
+					contactDistance = 0;
 				}
 			}
 			// intersection with a vertical side of the obstacle safe zone
@@ -148,11 +153,11 @@ public class PotentialObstacle
 							double sourceDist = Math.abs(currentX - interX[i]) + Math.abs(currentY - interY);
 							// critical projection distance and smaller source-intersection distance 
 							if(!CalculusTools.isRelativelyGreaterOrEqualThan(projectionDist,tileDimension,loop) 
-									&& sourceDist<distance)
+									&& sourceDist<contactDistance)
 							//if(projectionDist<tileDimension && sourceDist<distance)
-							{	intersectionX = interX[i];
-								intersectionY = interY;
-								distance = sourceDist;
+							{	contactX = interX[i];
+								contactY = interY;
+								contactDistance = sourceDist;
 							}
 						}
 					}
@@ -175,11 +180,11 @@ public class PotentialObstacle
 							double sourceDist = Math.abs(currentX - interX) + Math.abs(currentY - interY[i]);
 							// critical distance, and smaller than the current distance
 							if(!CalculusTools.isRelativelyGreaterOrEqualThan(projectionDist,tileDimension,loop) 
-									&& sourceDist<distance)
+									&& sourceDist<contactDistance)
 							//if(projectionDist<tileDimension && sourceDist<distance)
-							{	intersectionX = interX;
-								intersectionY = interY[i];
-								distance = sourceDist;
+							{	contactX = interX;
+								contactY = interY[i];
+								contactDistance = sourceDist;
 							}
 						}
 					}
@@ -188,7 +193,7 @@ public class PotentialObstacle
 		}
 	}
 	public boolean hasIntersection()
-	{	return intersectionX != null;			
+	{	return contactX != null;			
 	}
 	
 	/////////////////////////////////////////////////////////////////
