@@ -171,7 +171,7 @@ public class MoveZone
 			b = null;
 		}
 		else
-		{	a = (currentY-targetY)/(currentX-targetX);
+		{	a = level.getDeltaY(targetY,currentY)/level.getDeltaX(targetX,currentX);
 			b = currentY - a*currentX;
 		}		
 	}
@@ -184,6 +184,7 @@ public class MoveZone
 			x = b;
 		else
 			x = (y-b)/a;
+		x = level.normalizePositionX(x);
 		return x;
 	}
 	
@@ -193,6 +194,7 @@ public class MoveZone
 			y = null;
 		else
 			y = a*x + b;
+		y = level.normalizePositionY(y);
 		return y;
 	}
 
@@ -348,7 +350,7 @@ public class MoveZone
 			{	// is the potential obstacle an actual obstacle?
 				if(po.isActualObstacle())
 				{	
-//System.out.println("PotentialObstacle:"+po.getSprite().getCurrentPosX()+","+po.getSprite().getCurrentPosY());					
+System.out.println("PotentialObstacle:"+po.getSprite().getCurrentPosX()+","+po.getSprite().getCurrentPosY());					
 					
 					bypassObstacle(po);
 					goOn = canMove();
@@ -385,8 +387,10 @@ public class MoveZone
 	 */
 	private boolean hasArrived()
 	{	boolean result = true;
-		result = result && CalculusTools.isRelativelyEqualTo(currentX,targetX,level.getLoop());
-		result = result && CalculusTools.isRelativelyEqualTo(currentY,targetY,level.getLoop());
+		double distX = level.getHorizontalDistance(currentX,targetX);
+		result = result && CalculusTools.isRelativelyEqualTo(distX,0,level.getLoop());
+		double distY = level.getVerticalDistance(currentY,targetY);
+		result = result && CalculusTools.isRelativelyEqualTo(distY,0,level.getLoop());
 		return result;
 	}
 	
@@ -396,11 +400,7 @@ public class MoveZone
 	 * @param pos
 	 */
 	private void updateDirection(ArrayList<PotentialObstacle> pos)
-	{	
-		
-//NOTE distance ok mais pas direction		
-		
-		Loop loop = level.getLoop();
+	{	Loop loop = level.getLoop();
 		// determine the closest obstacle for each primary direction
 		Sprite down = null;
 		double downDist = Double.MAX_VALUE;
@@ -413,32 +413,32 @@ public class MoveZone
 		for(PotentialObstacle po: pos)
 		{	Sprite s = po.getSprite();
 			// horizontal component
-			double dx = s.getCurrentPosX() - currentX;
+			double dx = level.getDeltaX(currentX,s.getCurrentPosX());
 			Direction dH = Direction.getHorizontalFromDouble(dx);
 			if(dH!=Direction.NONE && usedDirection.getHorizontalPrimary()==dH)
 			{	double absDelta = Math.abs(dx);
-				if(dH==Direction.LEFT && !CalculusTools.isRelativelyGreaterOrEqualThan(absDelta,leftDist,loop))
+				if(dH==Direction.LEFT && !CalculusTools.isRelativelyGreaterOrEqualTo(absDelta,leftDist,loop))
 				//if(dH==Direction.LEFT && absDelta<leftDist)
 				{	leftDist = absDelta;
 					left = s;
 				}
-				else if(dH==Direction.RIGHT && !CalculusTools.isRelativelyGreaterOrEqualThan(absDelta,rightDist,loop))
+				else if(dH==Direction.RIGHT && !CalculusTools.isRelativelyGreaterOrEqualTo(absDelta,rightDist,loop))
 				//else if(dH==Direction.RIGHT && absDelta<rightDist)
 				{	rightDist = absDelta;
 					right = s;
 				}
 			}
 			// vertical component
-			double dy = s.getCurrentPosY() - currentY;
+			double dy = level.getDeltaY(currentY,s.getCurrentPosY());
 			Direction dV = Direction.getVerticalFromDouble(dy);
 			if(dV!=Direction.NONE && usedDirection.getVerticalPrimary()==dV)
 			{	double absDelta = Math.abs(dy);
-				if(dV==Direction.DOWN && !CalculusTools.isRelativelyGreaterOrEqualThan(absDelta,downDist,loop))
+				if(dV==Direction.DOWN && !CalculusTools.isRelativelyGreaterOrEqualTo(absDelta,downDist,loop))
 				//if(dV==Direction.DOWN && absDelta<downDist)
 				{	downDist = absDelta;
 					down = s;
 				}
-				else if(dV==Direction.UP && !CalculusTools.isRelativelyGreaterOrEqualThan(absDelta,upDist,loop))
+				else if(dV==Direction.UP && !CalculusTools.isRelativelyGreaterOrEqualTo(absDelta,upDist,loop))
 				//else if(dV==Direction.UP && absDelta<upDist)
 				{	upDist = absDelta;
 					up = s;
@@ -489,8 +489,8 @@ public class MoveZone
 	
 	private void bypassObstacleCompositeDirection(PotentialObstacle po)
 	{	// process the new direction according to the obstacle position
-		double verticalDistance = Math.abs(po.getContactY()-po.getSprite().getCurrentPosY());
-		double horizontalDistance = Math.abs(po.getContactX()-po.getSprite().getCurrentPosX());
+		double horizontalDistance = level.getHorizontalDistance(po.getContactX(),po.getSprite().getCurrentPosX());
+		double verticalDistance = level.getVerticalDistance(po.getContactY(),po.getSprite().getCurrentPosY());
 		Direction dir;
 		if(horizontalDistance==verticalDistance && previousDirection.isPrimary())
 			dir = usedDirection.drop(previousDirection);
@@ -554,12 +554,12 @@ public class MoveZone
 			Direction dir;
 			double dist;
 			if(usedDirection.isHorizontal())
-			{	double dy = currentY - po.getSprite().getCurrentPosY();
+			{	double dy = level.getDeltaY(po.getSprite().getCurrentPosY(),currentY);
 				dist = Math.abs(dy);
 				dir = Direction.getVerticalFromDouble(dy);
 			}
 			else
-			{	double dx = currentX - po.getSprite().getCurrentPosX();
+			{	double dx = level.getDeltaX(po.getSprite().getCurrentPosX(),currentX);
 				dist = Math.abs(dx);
 				dir = Direction.getHorizontalFromDouble(dx);
 			}
@@ -574,7 +574,9 @@ public class MoveZone
 				double avoid[] = po.getSafePosition(currentX,currentY,dir);
 				// check if it's worth moving in this direction (i.e. no other obstacles in the way)
 				int d[] = initialDirection.getIntFromDirection();
-				MoveZone fake = new MoveZone(source,avoid[0],avoid[1],avoid[0]+d[0],avoid[1]+d[1],level,initialDirection,initialDirection,2);
+				double tX = level.normalizePositionX(avoid[0]+d[0]);
+				double tY = level.normalizePositionY(avoid[1]+d[1]);
+				MoveZone fake = new MoveZone(source,avoid[0],avoid[1],tX,tY,level,initialDirection,initialDirection,2);
 				fake.applyMove();
 				// then try to avoid the obstacle
 				if(fake.hasArrived())
@@ -589,8 +591,8 @@ public class MoveZone
 					else
 					{	int tmp[]=usedDirection.getIntFromDirection();
 						double tmp2[] = {tmp[0]*fuel,tmp[1]*fuel};
-						targetX = currentX + tmp2[0];
-						targetY = currentY + tmp2[1];
+						targetX = level.normalizePositionX(currentX + tmp2[0]);
+						targetY = level.normalizePositionY(currentY + tmp2[1]);
 					}
 					for(Sprite s: mz.getCollidedSprites())
 						addCollidedSprite(s);
@@ -641,8 +643,8 @@ public class MoveZone
 	 */
 	private boolean moveToPoint(double destX, double destY)
 	{	boolean result;
-		double deltaX = destX-currentX;
-		double deltaY = destY-currentY;
+		double deltaX = level.getDeltaX(currentX,destX);
+		double deltaY = level.getDeltaY(currentY,destY);
 		double dist = Math.sqrt(Math.pow(deltaX,2)+Math.pow(deltaY,2));
 		// enough fuel
 		if(fuel>=dist)
@@ -658,7 +660,7 @@ public class MoveZone
 			if(vertical)
 			{	deltaY = fuel*Math.signum(deltaY);
 				fuel = 0;
-				currentY = currentY + deltaY;
+				currentY = level.normalizePositionY(currentY + deltaY);
 			}
 			else
 			{	// else : must solve equation (interstion point)
@@ -678,8 +680,8 @@ public class MoveZone
 				double solutionY = a*solutionX + b;
 				// update
 				fuel = 0; 
-				currentX = solutionX;
-				currentY = solutionY;			
+				currentX = level.normalizePositionX(solutionX);
+				currentY = level.normalizePositionY(solutionY);			
 /*				
 				deltaX = Math.signum(deltaX)*fuelX;
 				deltaY = Math.signum(deltaY)*fuelY;

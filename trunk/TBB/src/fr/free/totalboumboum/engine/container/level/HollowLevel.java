@@ -229,6 +229,7 @@ public class HollowLevel implements Serializable
 		double ratioY = (int)(sizeY/visibleHeight)/standardTileDimension;
 		double zoomFactor = Math.min(ratioX,ratioY);
 		loop.setZoomFactor(zoomFactor);
+		level.setTileDimension(loop.getScaledTileDimension());
 //configuration.setZoomFactor(1.0f);
 		
 		// position

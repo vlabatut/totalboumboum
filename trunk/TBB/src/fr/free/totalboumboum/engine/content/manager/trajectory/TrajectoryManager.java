@@ -897,7 +897,7 @@ if(sprite instanceof Hero)
 		if(strict)
 			result = CalculusTools.isRelativelySmallerThan(distance,getLoop().getScaledTileDimension(),getLoop());
 		else
-			result = CalculusTools.isRelativelySmallerOrEqualThan(distance,getLoop().getScaledTileDimension(),getLoop());
+			result = CalculusTools.isRelativelySmallerOrEqualTo(distance,getLoop().getScaledTileDimension(),getLoop());
 		return result;
 	}
 	private double computeDistance(Sprite tempSprite)
