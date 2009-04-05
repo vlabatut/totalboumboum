@@ -133,7 +133,117 @@ public class Level
 	public Tile getTile(int l, int c)
 	{	return matrix[l][c];	
 	}
+
+    /////////////////////////////////////////////////////////////////
+	// DISTANCES			/////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+
+	/**
+	 * process the manhattan distance
+	 */
+	public double getDistance(Sprite s1, Sprite s2, Direction direction)
+	{	double x1 = s1.getCurrentPosX();
+		double y1 = s1.getCurrentPosY();
+		double x2 = s2.getCurrentPosX();
+		double y2 = s2.getCurrentPosY();
+		double result = processDistance(x1,y1,x2,y2,direction);
+		return result;
+	}
+	public double getDistance(Sprite s1, Sprite s2)
+	{	return getDistance(s1,s2,Direction.NONE);
+	}
 	
+	/**
+	 * process the manhattan distance
+	 * @param x1
+	 * @param y1
+	 * @param x2
+	 * @param y2
+	 * @return
+	 */
+	public double getDistance(double x1, double y1, double x2, double y2, Direction direction)
+	{	x1 = normalizePositionX(x1);
+		y1 = normalizePositionY(y1);
+		x2 = normalizePositionX(x2);
+		y2 = normalizePositionY(y2);
+		double result = processDistance(x1,y1,x2,y2,direction);
+		return result;
+	}
+	public double getDistance(double x1, double y1, double x2, double y2)
+	{	return getDistance(x1,y1,x2,y2,Direction.NONE);
+	}
+
+	public double getHorizontalDistance(double x1, double x2, Direction direction)
+	{	x1 = normalizePositionX(x1);
+		x2 = normalizePositionX(x2);
+		double result = processHorizontalDistance(x1,x2,direction);
+		return result;
+	}
+	public double getHorizontalDistance(double x1, double x2)
+	{	return getHorizontalDistance(x1,x2,Direction.NONE);
+	}
+	
+	public double getVerticalDistance(double x1, double x2, Direction direction)
+	{	x1 = normalizePositionX(x1);
+		x2 = normalizePositionX(x2);
+		double result = processHorizontalDistance(x1,x2,direction);
+		return result;
+	}
+	public double getVerticalDistance(double x1, double x2)
+	{	return getVerticalDistance(x1,x2,Direction.NONE);
+	}
+	
+	/**
+	 * process the manhattan distance
+	 * @param x1
+	 * @param y1
+	 * @param x2
+	 * @param y2
+	 * @return
+	 */
+	private double processDistance(double x1, double y1, double x2, double y2, Direction direction)
+	{	double result = 0;
+		result = result + processHorizontalDistance(x1,x2,direction);
+		result = result + processVerticalDistance(y1,y2,direction);
+		return result;
+	}
+	
+	private double processHorizontalDistance(double x1, double x2, Direction direction)
+	{	double result;
+		double direct = Math.abs(x1-x2);
+		double indirect = globalWidth - direct;
+		Direction dir = direction.getHorizontalPrimary();
+		if(dir==Direction.NONE)
+			result = Math.min(direct,indirect);
+		else
+		{	double dx = x2-x1;
+			Direction d = Direction.getHorizontalFromDouble(dx);
+			if(dir==d)
+				result = direct;
+			else
+				result = indirect;
+		}		
+		return result;
+	}
+	
+	private double processVerticalDistance(double y1, double y2, Direction direction)
+	{	double result;
+		double direct = Math.abs(y1-y2);
+		double indirect = globalHeight - direct;
+		Direction dir = direction.getVerticalPrimary();
+		if(dir==Direction.NONE)
+			result = Math.min(direct,indirect);
+		else
+		{	double dy = y2-y1;
+			Direction d = Direction.getVerticalFromDouble(dy);
+			if(dir==d)
+				result = direct;
+			else
+				result = indirect;
+		}		
+		return result;
+	}
+
     /////////////////////////////////////////////////////////////////
 	// BOMBSET				/////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
