@@ -33,9 +33,6 @@ import fr.free.totalboumboum.engine.content.sprite.Sprite;
 import fr.free.totalboumboum.engine.loop.Loop;
 import fr.free.totalboumboum.tools.CalculusTools;
 
-//TODO y va y avoir des problèmes de normalisation des coordonnées (utiliser mod pour fermer la zone)
-// (valable pour les coordonnées pixel, mais aussi pour les cases !)
-
 //TODO gérer le changement de case, cf la v2 du déplacement
 
 public class MoveZone
@@ -210,7 +207,7 @@ public class MoveZone
 
 	private void addCollidedSprite(Sprite s)
 	{	if(!collidedSprites.contains(s))
-		collidedSprites.add(s);		
+			collidedSprites.add(s);		
 	}
 
 	/////////////////////////////////////////////////////////////////
@@ -239,10 +236,10 @@ public class MoveZone
 	{	ArrayList<Tile> result = new ArrayList<Tile>();
 		// init
 		double tileDimension = level.getTileDimension();
-		double upleftX = Math.min(currentX,targetX) - tileDimension;
-		double upleftY = Math.min(currentY,targetY) - tileDimension;
-		double downrightX = Math.max(currentX,targetX) + tileDimension;
-		double downrightY = Math.max(currentY,targetY) + tileDimension;
+		double upleftX = level.normalizePositionX(Math.min(currentX,targetX) - tileDimension);
+		double upleftY = level.normalizePositionY(Math.min(currentY,targetY) - tileDimension);
+		double downrightX = level.normalizePositionX(Math.max(currentX,targetX) + tileDimension);
+		double downrightY = level.normalizePositionY(Math.max(currentY,targetY) + tileDimension);
 		Tile upleftTile = level.getTile(upleftX,upleftY);
 		Tile downrightTile = level.getTile(downrightX,downrightY);
 		// process
@@ -262,6 +259,7 @@ public class MoveZone
 	/**
 	 * Defines the list of potential obstacles included in the crossed tiles.
 	 * They're ordered in function of the distance to the trajectory source
+	 * ( the second criterion being the distance between the sprite and the obstacle) 
 	 */
 	private ArrayList<PotentialObstacle> getCrossedSprites()
 	{	ArrayList<PotentialObstacle> result = new ArrayList<PotentialObstacle>();
@@ -306,8 +304,8 @@ public class MoveZone
 	public void applyMove()
 	{	
 		
-if(currentX<168 && usedDirection==Direction.UPLEFT)
-	System.out.println();
+//if(currentX<168 && usedDirection==Direction.UPLEFT)
+//	System.out.println();
 		
 		ArrayList<PotentialObstacle> potentialObstacles = getCrossedSprites();
 		boolean goOn = usedDirection!=Direction.NONE;
@@ -350,7 +348,7 @@ if(currentX<168 && usedDirection==Direction.UPLEFT)
 			{	// is the potential obstacle an actual obstacle?
 				if(po.isActualObstacle())
 				{	
-System.out.println("PotentialObstacle:"+po.getSprite().getCurrentPosX()+","+po.getSprite().getCurrentPosY());					
+//System.out.println("PotentialObstacle:"+po.getSprite().getCurrentPosX()+","+po.getSprite().getCurrentPosY());					
 					
 					bypassObstacle(po);
 					goOn = canMove();
@@ -398,7 +396,11 @@ System.out.println("PotentialObstacle:"+po.getSprite().getCurrentPosX()+","+po.g
 	 * @param pos
 	 */
 	private void updateDirection(ArrayList<PotentialObstacle> pos)
-	{	Loop loop = level.getLoop();
+	{	
+		
+//NOTE distance ok mais pas direction		
+		
+		Loop loop = level.getLoop();
 		// determine the closest obstacle for each primary direction
 		Sprite down = null;
 		double downDist = Double.MAX_VALUE;
