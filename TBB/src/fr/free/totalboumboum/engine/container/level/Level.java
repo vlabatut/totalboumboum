@@ -94,26 +94,38 @@ public class Level
 	/////////////////////////////////////////////////////////////////
 	private int globalWidth;
 	private int globalHeight;
-	private double globalLeftX; // pas central
-	private double globalUpY; // pas central
+	private double pixelLeftX; // pas central
+	private double pixelUpY; // pas central
+	private double tileDimension;
+	private double pixelWidth;
+	private double pixelHeight;
 
 	public void setTilePositions(int globalWidth, int globalHeight, double globalLeftX, double globalUpY)
 	{	this.globalWidth = globalWidth;
 		this.globalHeight = globalHeight;
-		this.globalLeftX = globalLeftX;
-		this.globalUpY = globalUpY;
+		this.pixelLeftX = globalLeftX;
+		this.pixelUpY = globalUpY;
+		this.pixelWidth = globalWidth*tileDimension;
+		this.pixelHeight = globalHeight*getTileDimension();
 	}
 	public double getGlobalLeftX()
-	{	return globalLeftX;
+	{	return pixelLeftX;
 	}
 	public double getGlobalUpY()
-	{	return globalUpY;
+	{	return pixelUpY;
 	}
 	public int getGlobalWidth()
 	{	return globalWidth;
 	}
 	public int getGlobalHeight()
 	{	return globalHeight;
+	}
+	
+	public double getTileDimension()
+	{	return tileDimension;	
+	}
+	public void setTileDimension(double tileDimension)
+	{	this.tileDimension = tileDimension;
 	}
 
 	/////////////////////////////////////////////////////////////////
@@ -126,9 +138,6 @@ public class Level
 	}
 	public void setMatrix(Tile matrix[][])
 	{	this.matrix = matrix;
-	}
-	public double getTileDimension()
-	{	return loop.getScaledTileDimension();	
 	}
 	public Tile getTile(int l, int c)
 	{	return matrix[l][c];	
@@ -210,14 +219,14 @@ public class Level
 	
 	private double processHorizontalDistance(double x1, double x2, Direction direction)
 	{	double result;
-		double direct = Math.abs(x1-x2);
-		double indirect = globalWidth - direct;
+		double dx = x2 - x1;
+		double direct = Math.abs(dx);
+		double indirect = pixelWidth - direct;
 		Direction dir = direction.getHorizontalPrimary();
 		if(dir==Direction.NONE)
 			result = Math.min(direct,indirect);
 		else
-		{	double dx = x2-x1;
-			Direction d = Direction.getHorizontalFromDouble(dx);
+		{	Direction d = Direction.getHorizontalFromDouble(dx);
 			if(dir==d)
 				result = direct;
 			else
@@ -228,14 +237,14 @@ public class Level
 	
 	private double processVerticalDistance(double y1, double y2, Direction direction)
 	{	double result;
-		double direct = Math.abs(y1-y2);
-		double indirect = globalHeight - direct;
+		double dy = y2 - y1;
+		double direct = Math.abs(dy);
+		double indirect = pixelHeight - direct;
 		Direction dir = direction.getVerticalPrimary();
 		if(dir==Direction.NONE)
 			result = Math.min(direct,indirect);
 		else
-		{	double dy = y2-y1;
-			Direction d = Direction.getVerticalFromDouble(dy);
+		{	Direction d = Direction.getVerticalFromDouble(dy);
 			if(dir==d)
 				result = direct;
 			else
@@ -339,9 +348,9 @@ public class Level
 	
 	private Direction processHorizontalDirection(double x1, double x2)
 	{	Direction result;
-		double dx = x1 - x2;
+		double dx = x2 - x1;
 		result = Direction.getHorizontalFromDouble(dx);
-		double hemi = ((double)globalWidth)/2;
+		double hemi = ((double)pixelWidth)/2;
 		if(Math.abs(dx)>hemi)
 			result = result.getOpposite();
 		return result;
@@ -349,22 +358,93 @@ public class Level
 	
 	private Direction processVerticalDirection(double y1, double y2)
 	{	Direction result;
-		double dy = y1 - y2;
+		double dy = y2 - y1;
 		result = Direction.getVerticalFromDouble(dy);
-		double hemi = ((double)globalHeight)/2;
+		double hemi = ((double)pixelHeight)/2;
 		if(Math.abs(dy)>hemi)
 			result = result.getOpposite();
 		return result;
 	}
-	
+
+	/////////////////////////////////////////////////////////////////
+	// DELTAS			/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	public double getDeltaX(double x1, double x2, Direction direction)
+	{	x1 = normalizePositionX(x1);
+		x2 = normalizePositionX(x2);
+		double result = processDeltaX(x1,x2,direction);
+		return result;
+	}
+	public double getDeltaX(double x1, double x2)
+	{	double result = getDeltaX(x1,x2,Direction.NONE);
+		return result;
+	}
+
+	public double getDeltaY(double y1, double y2, Direction direction)
+	{	y1 = normalizePositionY(y1);
+		y2 = normalizePositionY(y2);
+		double result = processDeltaY(y1,y2,direction);
+		return result;
+	}
+	public double getDeltaY(double y1, double y2)
+	{	double result = getDeltaY(y1,y2,Direction.NONE);
+		return result;
+	}
+
+	private double processDeltaX(double x1, double x2, Direction direction)
+	{	double result;
+		double direct = x2 - x1;
+		double absDirect = Math.abs(direct);
+		double indirect = -1*Math.signum(direct)*(pixelWidth - absDirect);
+		double absIndirect = Math.abs(indirect);
+		Direction dir = direction.getHorizontalPrimary();
+		if(dir==Direction.NONE)
+		{	if(absDirect<=absIndirect)
+				result = direct;
+			else 
+				result = indirect;		
+		}
+		else
+		{	Direction d = Direction.getHorizontalFromDouble(direct);
+			if(dir==d)
+				result = direct;
+			else
+				result = indirect;
+		}		
+		return result;
+	}
+
+	private double processDeltaY(double y1, double y2, Direction direction)
+	{	double result;
+		double direct = y2 - y1;
+		double absDirect = Math.abs(direct);
+		double indirect = -1*Math.signum(direct)*(pixelHeight - absDirect);
+		double absIndirect = Math.abs(indirect);
+		Direction dir = direction.getVerticalPrimary();
+		if(dir==Direction.NONE)
+		{	if(absDirect<=absIndirect)
+				result = direct;
+			else 
+				result = indirect;		
+		}
+		else
+		{	Direction d = Direction.getVerticalFromDouble(direct);
+			if(dir==d)
+				result = direct;
+			else
+				result = indirect;
+		}		
+		return result;
+	}
+
 	/////////////////////////////////////////////////////////////////
 	// TILE LOCATION	/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	public Tile getTile(double x, double y)
 	{	x = CalculusTools.round(x,loop);
 		y = CalculusTools.round(y,loop);
-		double difX = x-globalLeftX;
-		double difY = y-globalUpY;
+		double difX = x-pixelLeftX;
+		double difY = y-pixelUpY;
 		double rX = difX/getTileDimension();
 		double rY = difY/getTileDimension();
 		int rdX = (int)rX;//(int)Math.round(rX);
@@ -420,18 +500,18 @@ public class Level
 	}
 	public double normalizePositionX(double x)
 	{	double result = x;
-		while(result<globalLeftX)
-			result = result + globalWidth*getTileDimension();
-		while(result>globalLeftX+globalWidth*getTileDimension())
-			result = result - globalWidth*getTileDimension();
+		while(result<pixelLeftX)
+			result = result + pixelWidth;
+		while(result>pixelLeftX+pixelWidth)
+			result = result - pixelWidth;
 		return result;
 	}
 	public double normalizePositionY(double y)
 	{	double result = y;
-		while(result<globalUpY)
-			result = result + globalHeight*getTileDimension();
-		while(result>globalUpY+globalHeight*getTileDimension())
-			result = result - globalHeight*getTileDimension();
+		while(result<pixelUpY)
+			result = result + pixelHeight;
+		while(result>pixelUpY+pixelHeight)
+			result = result - pixelHeight;
 		return result;
 	}
 	public boolean isInsidePosition(double x, double y)
@@ -439,11 +519,11 @@ public class Level
 	}
 	public boolean isInsidePositionX(double x)
 	{	//NOTE comparaison relative?
-		return x>=globalLeftX && x<=globalLeftX+globalWidth*getTileDimension();
+		return x>=pixelLeftX && x<=pixelLeftX+pixelWidth;
 	}
 	public boolean isInsidePositionY(double y)
 	{	//NOTE comparaison relative?
-		return y>=globalUpY && y<=globalUpY+globalHeight*getTileDimension();
+		return y>=pixelUpY && y<=pixelUpY+pixelHeight;
 	}
 	
 	/////////////////////////////////////////////////////////////////

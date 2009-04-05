@@ -52,13 +52,13 @@ public class CalculusTools
 		return result;
 	}
 	
-	public static boolean isRelativelyGreaterOrEqualThan(double a, double b, Loop loop)
+	public static boolean isRelativelyGreaterOrEqualTo(double a, double b, Loop loop)
 	{	boolean result;
 		result = isRelativelyGreaterThan(a,b,loop) || isRelativelyEqualTo(a,b,loop);
 		return result;
 	}
 
-	public static boolean isRelativelySmallerOrEqualThan(double a, double b, Loop loop)
+	public static boolean isRelativelySmallerOrEqualTo(double a, double b, Loop loop)
 	{	boolean result;
 		result = isRelativelySmallerThan(a,b,loop) || isRelativelyEqualTo(a,b,loop);
 		return result;

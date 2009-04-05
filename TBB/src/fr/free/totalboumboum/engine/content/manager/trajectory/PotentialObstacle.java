@@ -21,6 +21,7 @@ package fr.free.totalboumboum.engine.content.manager.trajectory;
  * 
  */
 
+import fr.free.totalboumboum.engine.container.level.Level;
 import fr.free.totalboumboum.engine.container.tile.Tile;
 import fr.free.totalboumboum.engine.content.feature.Direction;
 import fr.free.totalboumboum.engine.content.feature.action.AbstractAction;
@@ -32,10 +33,14 @@ import fr.free.totalboumboum.tools.CalculusTools;
 
 public class PotentialObstacle
 {	private MoveZone moveZone;
-	
+	private Level level;
+	double tileDimension;
+
 	public PotentialObstacle(Sprite sprite, MoveZone moveZone)
 	{	this.sprite = sprite;
 		this.moveZone = moveZone;
+		level = moveZone.getLevel();
+		tileDimension = level.getTileDimension();
 		initContact();
 	}
 	
@@ -92,14 +97,13 @@ public class PotentialObstacle
 		double currentY = moveZone.getCurrentY();		
 		double targetX = moveZone.getTargetX();
 		double targetY = moveZone.getTargetY();		
-		double distX = Math.abs(posX-currentX);
-		double distY = Math.abs(posY-currentY);
+		double distX = level.getHorizontalDistance(posX,currentX);
+		double distY = level.getVerticalDistance(posY,currentY);
 		spriteDistance = distX+distY;
 		// if there's already an intersection between the sprite and this potential obstacle
-		double tileDimension = moveZone.getLevel().getTileDimension();
-		Loop loop = moveZone.getLevel().getLoop();
-		if(!CalculusTools.isRelativelyGreaterOrEqualThan(distX,tileDimension,loop) 
-				&& !CalculusTools.isRelativelyGreaterOrEqualThan(distY,tileDimension,loop))
+		Loop loop = level.getLoop();
+		if(!CalculusTools.isRelativelyGreaterOrEqualTo(distX,tileDimension,loop) 
+				&& !CalculusTools.isRelativelyGreaterOrEqualTo(distY,tileDimension,loop))
 		//if(distX<tileDimension && distY<tileDimension)
 		{	contactX = currentX;
 			contactY = currentY;
@@ -110,24 +114,26 @@ public class PotentialObstacle
 		{	// special case : sprite located in an angle of the obstacle safe zone
 			if(CalculusTools.isRelativelyEqualTo(distX,tileDimension,loop) 
 					&& CalculusTools.isRelativelyEqualTo(distY,tileDimension,loop))
-			{	double interX[] = {posX - tileDimension, posX + tileDimension};
-				double interY[] = {posY - tileDimension, posY + tileDimension};
-				double deltaX = targetX-currentX;
-				double deltaY = targetY-currentY;
-				if(CalculusTools.isRelativelyEqualTo(interX[0],currentX,loop) 
-						&& CalculusTools.isRelativelyEqualTo(interY[0],currentY,loop) 
+			{	double interX[] = {level.normalizePositionX(posX - tileDimension), level.normalizePositionX(posX + tileDimension)};
+				double interY[] = {level.normalizePositionY(posY - tileDimension), level.normalizePositionY(posY + tileDimension)};
+				double distanceX[] = {level.getHorizontalDistance(interX[0], currentX), level.getHorizontalDistance(interX[1], currentX)};
+				double distanceY[] = {level.getVerticalDistance(interY[0], currentY), level.getVerticalDistance(interY[1], currentY)};
+				double deltaX = level.getDeltaX(currentX,targetX);
+				double deltaY = level.getDeltaY(currentY,targetY);
+				if(CalculusTools.isRelativelyEqualTo(distanceX[0],0,loop) 
+						&& CalculusTools.isRelativelyEqualTo(distanceY[0],0,loop) 
 						&& CalculusTools.isRelativelyGreaterThan(deltaX,0,loop)
 						&& CalculusTools.isRelativelyGreaterThan(deltaY,0,loop)
-					|| CalculusTools.isRelativelyEqualTo(interX[0],currentX,loop) 
-						&& CalculusTools.isRelativelyEqualTo(interY[1],currentY,loop) 
+					|| CalculusTools.isRelativelyEqualTo(distanceX[0],0,loop) 
+						&& CalculusTools.isRelativelyEqualTo(distanceY[1],0,loop) 
 						&& CalculusTools.isRelativelyGreaterThan(deltaX,0,loop)
 						&& CalculusTools.isRelativelySmallerThan(deltaY,0,loop)
-					|| CalculusTools.isRelativelyEqualTo(interX[1],currentX,loop) 
-						&& CalculusTools.isRelativelyEqualTo(interY[0],currentY,loop) 
+					|| CalculusTools.isRelativelyEqualTo(distanceX[1],0,loop) 
+						&& CalculusTools.isRelativelyEqualTo(distanceY[0],0,loop) 
 						&& CalculusTools.isRelativelySmallerThan(deltaX,0,loop)
 						&& CalculusTools.isRelativelyGreaterThan(deltaY,0,loop)
-					|| CalculusTools.isRelativelyEqualTo(interX[1],currentX,loop) 
-						&& CalculusTools.isRelativelyEqualTo(interY[1],currentY,loop) 
+					|| CalculusTools.isRelativelyEqualTo(distanceX[1],0,loop) 
+						&& CalculusTools.isRelativelyEqualTo(distanceY[1],0,loop) 
 						&& CalculusTools.isRelativelySmallerThan(deltaX,0,loop)
 						&& CalculusTools.isRelativelySmallerThan(deltaY,0,loop))
 				
@@ -137,22 +143,22 @@ public class PotentialObstacle
 				}
 			}
 			// intersection with a vertical side of the obstacle safe zone
-			{	double interX[] = {posX - tileDimension, posX + tileDimension};
+			{	double interX[] = {level.normalizePositionX(posX - tileDimension), level.normalizePositionX(posX + tileDimension)};
 				// for each side
 				for(int i=0;i<interX.length;i++)
 				{	// the side has to be on the sprite way
-					double interSignum = Math.signum(interX[i]-currentX);
+					double interSignum = Math.signum(level.getDeltaX(currentX,interX[i]));
 					if(interSignum==0)
-						interSignum = Math.signum(posX-currentX);
-					double targetSignum = Math.signum(targetX-currentX);
+						interSignum = Math.signum(level.getDeltaX(currentX,posX));
+					double targetSignum = Math.signum(level.getDeltaX(currentX,targetX));
 					if(interSignum==targetSignum)				
 					{	Double interY = moveZone.projectVertically(interX[i]);
-						// is there an intersection point between side and trajectory 
+						// is there's an intersection point between the side and the trajectory 
 						if(interY!=null)
-						{	double projectionDist = Math.abs(posY - interY);
-							double sourceDist = Math.abs(currentX - interX[i]) + Math.abs(currentY - interY);
+						{	double projectionDist = level.getVerticalDistance(posY,interY);
+							double sourceDist = level.getHorizontalDistance(currentX,interX[i]) + level.getVerticalDistance(currentY,interY);
 							// critical projection distance and smaller source-intersection distance 
-							if(!CalculusTools.isRelativelyGreaterOrEqualThan(projectionDist,tileDimension,loop) 
+							if(!CalculusTools.isRelativelyGreaterOrEqualTo(projectionDist,tileDimension,loop) 
 									&& sourceDist<contactDistance)
 							//if(projectionDist<tileDimension && sourceDist<distance)
 							{	contactX = interX[i];
@@ -164,22 +170,22 @@ public class PotentialObstacle
 				}
 			}
 			// intersection with an horizontal side of the obstacle safe zone
-			{	double interY[] = {posY - tileDimension, posY + tileDimension};
+			{	double interY[] = {level.normalizePositionY(posY - tileDimension), level.normalizePositionY(posY + tileDimension)};
 				// for each side
 				for(int i=0;i<interY.length;i++)
 				{	// the side has to be on the sprite way
-					double interSignum = Math.signum(interY[i]-currentY);
+					double interSignum = Math.signum(level.getDeltaY(currentY,interY[i]));
 					if(interSignum==0)
-						interSignum = Math.signum(posY-currentY);
-					double targetSignum = Math.signum(targetY-currentY);
+						interSignum = Math.signum(level.getDeltaY(currentY,posY));
+					double targetSignum = Math.signum(level.getDeltaY(currentY,targetY));
 					if(interSignum==targetSignum)						
 					{	Double interX = moveZone.projectHorizontally(interY[i]);
 						// is there an intersection point between side and trajectory 
 						if(interX!=null)
-						{	double projectionDist = Math.abs(posX - interX);
-							double sourceDist = Math.abs(currentX - interX) + Math.abs(currentY - interY[i]);
+						{	double projectionDist = level.getHorizontalDistance(posX,interX);
+							double sourceDist = level.getHorizontalDistance(currentX,interX) + level.getVerticalDistance(currentY,interY[i]);
 							// critical distance, and smaller than the current distance
-							if(!CalculusTools.isRelativelyGreaterOrEqualThan(projectionDist,tileDimension,loop) 
+							if(!CalculusTools.isRelativelyGreaterOrEqualTo(projectionDist,tileDimension,loop) 
 									&& sourceDist<contactDistance)
 							//if(projectionDist<tileDimension && sourceDist<distance)
 							{	contactX = interX;
@@ -212,11 +218,10 @@ public class PotentialObstacle
 	 */
 	public double[] getSafePosition(double x, double y, Direction move)
 	{	double result[] = {0,0};
-		double tileDimension = moveZone.getLevel().getTileDimension();
-		double down = sprite.getCurrentPosY() + tileDimension;
-		double up = sprite.getCurrentPosY() - tileDimension;
-		double left = sprite.getCurrentPosX() - tileDimension;
-		double right = sprite.getCurrentPosX() + tileDimension;
+		double down = level.normalizePositionY(sprite.getCurrentPosY() + tileDimension);
+		double up = level.normalizePositionY(sprite.getCurrentPosY() - tileDimension);
+		double left = level.normalizePositionX(sprite.getCurrentPosX() - tileDimension);
+		double right = level.normalizePositionX(sprite.getCurrentPosX() + tileDimension);
 		if(move==Direction.DOWN)
 		{	result[0] = x;
 			result[1] = down;		
@@ -252,12 +257,13 @@ public class PotentialObstacle
 	{	boolean result;
 		Direction usedDirection = moveZone.getUsedDirection();
 		Sprite source = moveZone.getSourceSprite();
-		double distX = Math.abs(sprite.getCurrentPosX()-moveZone.getCurrentX());
-		double distY = Math.abs(sprite.getCurrentPosY()-moveZone.getCurrentY());
+		double distX = level.getHorizontalDistance(sprite.getCurrentPosX(),moveZone.getCurrentX());
+		double distY = level.getVerticalDistance(sprite.getCurrentPosY(),moveZone.getCurrentY());
+		Loop loop = level.getLoop();
 		// with intersection
-		double tileDimension = moveZone.getLevel().getTileDimension();
-		if(distX<tileDimension && distY<tileDimension)
-		{	Tile currentTile = moveZone.getLevel().getTile(moveZone.getCurrentX(),moveZone.getCurrentY());
+		if(!CalculusTools.isRelativelyGreaterOrEqualTo(distX,tileDimension,loop) && !CalculusTools.isRelativelyGreaterOrEqualTo(distY,tileDimension,loop))
+//		if(distX<tileDimension && distY<tileDimension)
+		{	Tile currentTile = level.getTile(moveZone.getCurrentX(),moveZone.getCurrentY());
 			Tile spriteTile = sprite.getTile();
 			// sprite and potential obstacle in the same tile : not an obstacle
 			if(currentTile == spriteTile)
@@ -274,8 +280,8 @@ public class PotentialObstacle
 					result = false;
 				// blocking sprite and moving towards the potential obstacle : it's an obstacle
 				else
-				{	double deltaX = sprite.getCurrentPosX()-moveZone.getCurrentX();
-					double deltaY = sprite.getCurrentPosY()-moveZone.getCurrentY();
+				{	double deltaX = level.getDeltaX(moveZone.getCurrentX(),sprite.getCurrentPosX());
+					double deltaY = level.getDeltaY(moveZone.getCurrentY(),sprite.getCurrentPosY());
 					Direction dir = Direction.getCompositeFromDouble(deltaX,deltaY);
 					if(dir.hasCommonComponent(usedDirection))
 						result = true;
