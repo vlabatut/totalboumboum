@@ -157,9 +157,10 @@ public class PotentialObstacle
 						if(interY!=null)
 						{	double projectionDist = level.getVerticalDistance(posY,interY);
 							double sourceDist = level.getHorizontalDistance(currentX,interX[i]) + level.getVerticalDistance(currentY,interY);
-							// critical projection distance and smaller source-intersection distance 
-							if(!CalculusTools.isRelativelyGreaterOrEqualTo(projectionDist,tileDimension,loop) 
-									&& sourceDist<contactDistance)
+							// smaller source-intersection distance and (critical projection distance or equal distance and diagonal trajectory) 
+							if(sourceDist<contactDistance && 
+								(!CalculusTools.isRelativelyGreaterOrEqualTo(projectionDist,tileDimension,loop)
+								|| CalculusTools.isRelativelyEqualTo(projectionDist,tileDimension,loop) && CalculusTools.isRelativelyEqualTo(level.getDeltaY(posY,interY)/level.getDeltaX(posX,interX[i]),moveZone.getTrajectoryA(),loop)))
 							//if(projectionDist<tileDimension && sourceDist<distance)
 							{	contactX = interX[i];
 								contactY = interY;
@@ -184,9 +185,10 @@ public class PotentialObstacle
 						if(interX!=null)
 						{	double projectionDist = level.getHorizontalDistance(posX,interX);
 							double sourceDist = level.getHorizontalDistance(currentX,interX) + level.getVerticalDistance(currentY,interY[i]);
-							// critical distance, and smaller than the current distance
-							if(!CalculusTools.isRelativelyGreaterOrEqualTo(projectionDist,tileDimension,loop) 
-									&& sourceDist<contactDistance)
+							// smaller source-intersection distance and (critical projection distance or equal distance and diagonal trajectory) 
+							if(sourceDist<contactDistance && 
+								(!CalculusTools.isRelativelyGreaterOrEqualTo(projectionDist,tileDimension,loop)
+								|| CalculusTools.isRelativelyEqualTo(projectionDist,tileDimension,loop) && CalculusTools.isRelativelyEqualTo(level.getDeltaY(posY,interY[i])/level.getDeltaX(posX,interX),moveZone.getTrajectoryA(),loop)))
 							//if(projectionDist<tileDimension && sourceDist<distance)
 							{	contactX = interX;
 								contactY = interY[i];

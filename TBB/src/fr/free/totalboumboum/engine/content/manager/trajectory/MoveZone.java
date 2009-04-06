@@ -39,7 +39,7 @@ import fr.free.totalboumboum.tools.CalculusTools;
 /**
  * TODO
  * - pb (?) quand on pose deux bombes en diagonale et qu'on se place dans le cadrant intérieur d'une des cases libres du même carré
- * - pb sur le déplacement en diagonale long qui vient heurter l'angle d'un obstacle
+ * - pb : blocage sur un déplacement simple quand le perso se scotche dans l'angle d'un obstacle. étudier la trace du fichier txt
  */
 
 public class MoveZone
@@ -315,8 +315,8 @@ public class MoveZone
 	public void applyMove()
 	{	
 		
-//if(currentX<168 && usedDirection==Direction.UPLEFT)
-//	System.out.println();
+if(previousDirection==Direction.UPLEFT)
+	System.out.println();
 		
 		ArrayList<PotentialObstacle> potentialObstacles = getCrossedSprites();
 		boolean goOn = usedDirection!=Direction.NONE;
