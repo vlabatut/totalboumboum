@@ -315,8 +315,8 @@ public class MoveZone
 	public void applyMove()
 	{	
 		
-if(previousDirection==Direction.UPLEFT)
-	System.out.println();
+//if(previousDirection==Direction.UPLEFT)
+//	System.out.println();
 		
 		ArrayList<PotentialObstacle> potentialObstacles = getCrossedSprites();
 		boolean goOn = usedDirection!=Direction.NONE;

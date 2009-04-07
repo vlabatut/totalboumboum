@@ -274,7 +274,7 @@ public class PotentialObstacle
 			else
 			{	// non-blocking sprite : it's not an obstacle
 				String act = AbstractAction.MOVELOW;
-				if(!sprite.isOnGround())
+				if(!source.isOnGround())
 					act = AbstractAction.MOVEHIGH;
 				SpecificAction specificAction = new SpecificAction(act,source,null,usedDirection);
 				ThirdPermission permission = sprite.getThirdPermission(specificAction);
@@ -295,7 +295,7 @@ public class PotentialObstacle
 		// no intersection : depends only on the potential obstacle properties
 		else
 		{	String act = AbstractAction.MOVELOW;
-			if(!sprite.isOnGround())
+			if(!source.isOnGround())
 				act = AbstractAction.MOVEHIGH;
 			SpecificAction specificAction = new SpecificAction(act,source,null,usedDirection);
 			ThirdPermission permission = sprite.getThirdPermission(specificAction);
