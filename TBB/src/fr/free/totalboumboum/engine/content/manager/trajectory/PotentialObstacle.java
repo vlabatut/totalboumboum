@@ -147,13 +147,13 @@ public class PotentialObstacle
 				// for each side
 				for(int i=0;i<interX.length;i++)
 				{	// the side has to be on the sprite way
-					double interSignum = Math.signum(level.getDeltaX(currentX,interX[i]));
+					double interSignum = CalculusTools.relativeSignum(level.getDeltaX(currentX,interX[i]),loop);
 					if(interSignum==0)
-						interSignum = Math.signum(level.getDeltaX(currentX,posX));
-					double targetSignum = Math.signum(level.getDeltaX(currentX,targetX));
+						interSignum = CalculusTools.relativeSignum(level.getDeltaX(currentX,posX),loop);
+					double targetSignum = CalculusTools.relativeSignum(level.getDeltaX(currentX,targetX),loop);
 					if(interSignum==targetSignum)				
 					{	Double interY = moveZone.projectVertically(interX[i]);
-						// is there's an intersection point between the side and the trajectory 
+						// if there's an intersection point between the side and the trajectory 
 						if(interY!=null)
 						{	double projectionDist = level.getVerticalDistance(posY,interY);
 							double sourceDist = level.getHorizontalDistance(currentX,interX[i]) + level.getVerticalDistance(currentY,interY);
@@ -175,10 +175,10 @@ public class PotentialObstacle
 				// for each side
 				for(int i=0;i<interY.length;i++)
 				{	// the side has to be on the sprite way
-					double interSignum = Math.signum(level.getDeltaY(currentY,interY[i]));
+					double interSignum = CalculusTools.relativeSignum(level.getDeltaY(currentY,interY[i]),loop);
 					if(interSignum==0)
-						interSignum = Math.signum(level.getDeltaY(currentY,posY));
-					double targetSignum = Math.signum(level.getDeltaY(currentY,targetY));
+						interSignum = CalculusTools.relativeSignum(level.getDeltaY(currentY,posY),loop);
+					double targetSignum = CalculusTools.relativeSignum(level.getDeltaY(currentY,targetY),loop);
 					if(interSignum==targetSignum)						
 					{	Double interX = moveZone.projectHorizontally(interY[i]);
 						// is there an intersection point between side and trajectory 
