@@ -78,6 +78,17 @@ public class CalculusTools
 			result = a;
 		return result;
 	}
+	
+	public static int relativeSignum(double a, Loop loop)
+	{	int result;
+		if(isRelativelyEqualTo(a,0,loop))
+			result = 0;
+		else if(isRelativelyGreaterThan(a,0,loop))
+			result = +1;
+		else //if(isRelativelySmallerThan(a,0,loop))
+			result = -1;
+		return result;
+	}
 
 	/////////////////////////////////////////////////////////////////
 	// COMBINATIONS		/////////////////////////////////////////////

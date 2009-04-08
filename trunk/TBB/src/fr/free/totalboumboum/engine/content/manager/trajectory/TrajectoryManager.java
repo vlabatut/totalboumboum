@@ -497,7 +497,7 @@ if(sprite instanceof Hero)
 
 			double dist = Math.sqrt(Math.pow(dx,2)+Math.pow(dy,2));
 			MoveZone mz = new MoveZone(sprite,previousPosX,previousPosY,currentPosX,currentPosY,sprite.getLevel(),moveDir,moveDir,dist);
-			mz.applyMove();
+			mz.applyMove();			
 			currentPosX = mz.getCurrentX();
 			currentPosY = mz.getCurrentY();
 			mz.getIntersectedSprites();
