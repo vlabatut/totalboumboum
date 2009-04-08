@@ -22,27 +22,17 @@ package fr.free.totalboumboum.engine.content.manager.trajectory;
  */
 
 import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
 import java.util.Iterator;
-import java.util.LinkedList;
-import java.util.TreeSet;
 
 import fr.free.totalboumboum.configuration.Configuration;
-import fr.free.totalboumboum.configuration.GameConstants;
-import fr.free.totalboumboum.engine.container.level.Level;
 import fr.free.totalboumboum.engine.container.tile.Tile;
 import fr.free.totalboumboum.engine.content.feature.Direction;
 import fr.free.totalboumboum.engine.content.feature.GestureConstants;
-import fr.free.totalboumboum.engine.content.feature.action.AbstractAction;
-import fr.free.totalboumboum.engine.content.feature.action.SpecificAction;
 import fr.free.totalboumboum.engine.content.feature.event.EngineEvent;
-import fr.free.totalboumboum.engine.content.feature.permission.ThirdPermission;
 import fr.free.totalboumboum.engine.content.feature.trajectory.TrajectoryDirection;
 import fr.free.totalboumboum.engine.content.feature.trajectory.TrajectoryPack;
 import fr.free.totalboumboum.engine.content.feature.trajectory.TrajectoryStep;
 import fr.free.totalboumboum.engine.content.sprite.Sprite;
-import fr.free.totalboumboum.engine.content.sprite.bomb.Bomb;
 import fr.free.totalboumboum.engine.content.sprite.hero.Hero;
 import fr.free.totalboumboum.engine.loop.Loop;
 import fr.free.totalboumboum.tools.CalculusTools;
@@ -118,7 +108,7 @@ public class TrajectoryManager
 	
 	// collisions
 	private ArrayList<Sprite> intersectedSprites;
-	private Sprite collidedSprites[];
+	private ArrayList<Sprite> collidedSprites;
 	
 	
 	
@@ -152,7 +142,7 @@ public class TrajectoryManager
 		shiftY = 0;
 		shiftZ = 0;
 		intersectedSprites = new ArrayList<Sprite>();
-		collidedSprites = new Sprite[2];
+		collidedSprites = new ArrayList<Sprite>();
 	}
 
 	public void setTrajectoryPack(TrajectoryPack trajectoryPack)
@@ -429,12 +419,14 @@ if(previousPosX != currentPosX || previousPosY != currentPosY || previousPosZ !=
 		previousPosX = currentPosX;
 		previousPosY = currentPosY;
 		previousPosZ = currentPosZ;
+		
 		// process the interactive (control) shift
 		long milliPeriod = Configuration.getEngineConfiguration().getMilliPeriod();
 		double speedCoeff = sprite.getSpeedCoeff();
 		shiftX = xMove*currentTrajectory.getXInteraction()*milliPeriod*speedCoeff/1000;
 		shiftY = yMove*currentTrajectory.getYInteraction()*milliPeriod*speedCoeff/1000;
 		shiftZ = 0;
+		
 		// is the trajectory terminated ?
 		Iterator<TrajectoryStep> i = currentTrajectory.getIterator();
 		if (!isTerminated && i.hasNext())
@@ -455,175 +447,33 @@ if(previousPosX != currentPosX || previousPosY != currentPosY || previousPosZ !=
 		
 		// collisions management
 		if(!isBoundToSprite())
-		{	
-			// calcul de la direction de déplacement effective du sprite par rapport à la position précédente
+		{	// calcul de la direction de déplacement effective du sprite par rapport à la position précédente
 			double dx = currentPosX-previousPosX;
 			double dy = currentPosY-previousPosY;
 			Direction moveDir = Direction.getCompositeFromDouble(dx, dy);
-if(moveDir!=Direction.NONE)			
-	{	
-boolean v3 = true;	
-if(!v3)
-{
-			// COLLISIONS : VERSION 2
-			//
-			// récupération des cases voisines, y compris la case courante
-			Tile tile = sprite.getTile();
-			ArrayList<Tile> neighbourTiles = sprite.getLevel().getNeighbourTiles(tile.getLine(),tile.getCol());
-			neighbourTiles.add(tile);
-			// récupération des sprites situés dans ces cases
-			ArrayList<Sprite> neighbourSprites = getNeighbourSprites(neighbourTiles);
-			// filtrage des sprites : distance critique, situé sur le chemin et refusant la pénétration
-			ArrayList<Sprite> obstacleSprites = getObstacleSprites(neighbourSprites);
-			// modification de la position de ce sprite
-			Sprite newCollidedSprites[] = new Sprite[2];
-			if(obstacleSprites.size()>0)
-			{	if(moveDir.isPrimary())
-					testCollisionsSimple(obstacleSprites,moveDir,newCollidedSprites,true);
-				else if(moveDir.isComposite())
-					testCollisionsComposite(obstacleSprites,moveDir,newCollidedSprites);
-			}
-			updateCollidedSprites(newCollidedSprites);
-			// on détermine quels sprites sont intersected
-			ArrayList<Sprite> newIntersectedSprites = getIntersectedSprites(neighbourSprites);
-			// mise à jour des sprites intersected
-			updateIntersectedSprites(newIntersectedSprites);
-}
-else
-{			// COLLISIONS : VERSION 3
-	
+			
+			// normalizing an absolute position (if not bound)
+			double temp[] = sprite.getLevel().normalizePosition(currentPosX, currentPosY);
+			currentPosX = temp[0];
+			currentPosY = temp[1];
+			
+			if(moveDir!=Direction.NONE)			
+			{	
 if(sprite instanceof Hero)
 	System.out.println("position:"+previousPosX+","+previousPosY+" ("+sprite.getTile().getLine()+","+sprite.getTile().getCol()+") -> "+currentPosX+","+currentPosY+" ("+sprite.getLevel().getTile(currentPosX,currentPosY).getLine()+","+sprite.getLevel().getTile(currentPosX,currentPosY).getCol()+") ["+currentDirection+"]");	
 
-			double dist = Math.sqrt(Math.pow(dx,2)+Math.pow(dy,2));
-			MoveZone mz = new MoveZone(sprite,previousPosX,previousPosY,currentPosX,currentPosY,sprite.getLevel(),moveDir,moveDir,dist);
-			mz.applyMove();			
-			currentPosX = mz.getCurrentX();
-			currentPosY = mz.getCurrentY();
-			mz.getIntersectedSprites();
-			mz.getCollidedSprites();
-}
-			
-	}
-			
-			
-			
-			
-			
-			
-			
-/*
-			// COLLISIONS : VERSION 1
-			
-			// sortie de tile ?
-			Direction moveXDir = Direction.getHorizontalFromDouble(currentPosX-previousPosX);
-			Direction moveYDir = Direction.getVerticalFromDouble(currentPosY-previousPosY);
-			Tile tile = sprite.getTile();
-			// horizontal
-			{	double dx = Math.round(currentPosX-tile.getPosX());
-				Direction dir = Direction.getHorizontalFromDouble(dx);
-				if(dir!=Direction.NONE)
-				{	Tile neighbour = tile.getNeighbour(dir);
-					Request req;
-					if(currentPosZ==0)
-						req = new Request(Request.RQST_LET_WALK_IN,dir);
-					else
-						req = new Request(Request.RQST_LET_FLY_IN,dir);
-					req.setActor(sprite);
-					boolean autorization = neighbour.answerAndRequest(req);
-					if(!autorization && moveXDir==dir)
-					{	//currentPosX = tile.getPosX();
-						currentPosX = previousPosX; //NOTE cf la note plus bas
-						sprite.putEvent(new Event(Event.ENV_BLOCKED_PATH));
-					}
-				}
+				double dist = Math.sqrt(Math.pow(dx,2)+Math.pow(dy,2));
+				MoveZone mz = new MoveZone(sprite,previousPosX,previousPosY,currentPosX,currentPosY,sprite.getLevel(),moveDir,moveDir,dist);
+				mz.applyMove();
+				//
+				currentPosX = mz.getCurrentX();
+				currentPosY = mz.getCurrentY();
+				ArrayList<Sprite> newIntersectedSprites = mz.getIntersectedSprites();
+				ArrayList<Sprite> newCollidedSprites = mz.getCollidedSprites();
+				//
+				updateCollidedSprites(newCollidedSprites);
+				updateIntersectedSprites(newIntersectedSprites);
 			}
-			// vertical
-			{	double dy = Math.round(currentPosY-tile.getPosY());
-				Direction dir = Direction.getVerticalFromDouble(dy);
-				if(dir!=Direction.NONE)
-				{	Tile neighbour = tile.getNeighbour(dir);
-					Request req;
-					if(currentPosZ==0)
-						req = new Request(Request.RQST_LET_WALK_IN,dir);
-					else
-						req = new Request(Request.RQST_LET_FLY_IN,dir);
-					req.setActor(sprite);
-					boolean autorization = neighbour.answerAndRequest(req);
-					if(!autorization && moveYDir==dir)
-					{	//currentPosY = tile.getPosY();
-						// NOTE pour éviter les pb avec les bombes : 
-						// quand on sort et qu'on revient en arrière, ça téléporte à la bonne position... 
-						// on suppose maintenant qu'on ne fera pas de déplacement trop important, 
-						// sinon le bonhomme se retrouvera bloqué loin de l'obstacle, en fait. 
-						// et faudrait recalculer sa position
-						//
-						currentPosY = previousPosY;
-						sprite.putEvent(new Event(Event.ENV_BLOCKED_PATH));
-					}
-				}
-			}
-			// diagonal
-			{	double dx = Math.round(currentPosX-tile.getPosX());
-				double dy = Math.round(currentPosY-tile.getPosY());
-				Direction dir = Direction.getCompositeFromDouble(dx, dy);
-				if(dir.isComposite())
-				{	Tile neighbour = tile.getNeighbour(dir);
-					Request req;
-					if(currentPosZ==0)
-						req = new Request(Request.RQST_LET_WALK_IN,dir);
-					else
-						req = new Request(Request.RQST_LET_FLY_IN,dir);
-					req.setActor(sprite);
-					boolean autorization = neighbour.answerAndRequest(req);
-					if(!autorization && (moveXDir==dir.getStrongPrimary() || moveYDir==dir.getWeakPrimary()))
-					{	int intDir[] = dir.getIntFromDirection();
-						// calcul de la droite délimitant la zone interdite
-						double cdTest = 0; 	
-						if(intDir[0]==intDir[1])
-							cdTest = -1;
-						else
-							cdTest = +1;
-						double oaTest = tile.getPosY() - cdTest*(tile.getPosX()+intDir[0]*sprite.getTile().getDimension()/2);
-						// est-on du mauvais côté ?
-						if((tile.getPosY()>(cdTest*tile.getPosX()+oaTest))
-								!= (currentPosY>(cdTest*currentPosX+oaTest)))
-						{	// calcul de la direction principale
-							Direction mainDir;
-							{	double dx2 = currentPosX-previousPosX;
-								double dy2 = currentPosY-previousPosY;
-								if(Math.abs(dx2)>Math.abs(dy2))
-									mainDir = Direction.getHorizontalFromDouble(dx2);
-								else if(Math.abs(dx2)<Math.abs(dy2))
-									mainDir = Direction.getVerticalFromDouble(dy2);
-								else
-								{	if(Math.abs(dx)>Math.abs(dy))
-										mainDir = Direction.getHorizontalFromDouble(dx);
-									else //if(Math.abs(dx)<Math.abs(dy))
-										mainDir = Direction.getVerticalFromDouble(dy);
-								}
-							}
-							// on limite la direction de plus petit déplacement
-							if(mainDir.isHorizontal())
-								currentPosY = cdTest*currentPosX + oaTest;
-							else //if(mainDir.isVertical())
-								currentPosX = (currentPosY - oaTest)/cdTest;
-						}
-						sprite.putEvent(new Event(Event.ENV_BLOCKED_PATH));
-					}					
-						
-				}
-			}
-*/
-		}
-		
-		
-		// normalizing an absolute position (if not bound)
-		//NOTE à placer avant, non ?
-		if(!isBoundToSprite())
-		{	double temp[] = sprite.getLevel().normalizePosition(currentPosX, currentPosY);
-			currentPosX = temp[0];
-			currentPosY = temp[1];
 		}
 		
 		// updating the flight flag
@@ -632,10 +482,7 @@ if(sprite instanceof Hero)
 		
 		// normalizing height at the end of an air move
 		if(isTerminated)
-		{	/* FIXME grosssssse bidouille:
-			 * avec les calculs il arrive que le z ne revienne pas à zéro après un saut.
-			 */
-			if(CalculusTools.isRelativelyEqualTo(currentPosZ,0,sprite.getLoop()))
+		{	if(CalculusTools.isRelativelyEqualTo(currentPosZ,0,sprite.getLoop()))
 				currentPosZ = 0;
 			//
 			if(hasFlied && currentPosZ==0)
@@ -807,486 +654,11 @@ if(sprite instanceof Hero)
 	private boolean isBoundToSprite()
 	{	return sprite.isBoundToSprite();
 	}
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	/**
-	 * dresse la liste de tous les sprites présents dans les tuiles passées en paramètres
-	 */
-	public ArrayList<Sprite> getNeighbourSprites(ArrayList<Tile> neighbourTiles)
-	{	ArrayList<Sprite> result = new ArrayList<Sprite>();
-		Iterator<Tile> iter = neighbourTiles.iterator();
-		while(iter.hasNext())
-		{	Tile temp = iter.next();
-			result.addAll(temp.getSprites());
-		}
-		return result;
-	}
-	/**
-	 * parmi les sprites de la liste passée en paramètre, 
-	 * ne garde que les sprites à la fois : 
-	 * 		- critiquement proches
-	 * 		- sur le chemin de déplacement
-	 * 		- qui constituent des obstacles (pas traversables)
-	 */
-	private ArrayList<Sprite>  getObstacleSprites(ArrayList<Sprite> sprites)
-	{	ArrayList<Sprite> result = new ArrayList<Sprite>();
-		Iterator<Sprite> iter = sprites.iterator();
-//if(previousPosX>=514f && previousPosX<515f && previousPosY>=384f && previousPosY<385f)
-//System.out.println();
-		while(iter.hasNext())
-		{	Sprite tempSprite = iter.next();
-			if(tempSprite!=sprite 
-					&& isClose(tempSprite, true) //isInCloseArea(tempSprite) 
-					&& isOnTheWay(tempSprite)
-					&& isObstacle(tempSprite))
-			{	result.add(tempSprite);
-			}
-		}
-		// on trie la liste passée en paramètre (ou ce qu'il en reste) par distance
-		Collections.sort(result,new Comparator<Sprite>()
-		{	@Override
-			public int compare(Sprite arg0, Sprite arg1)
-			{	int resultat;
-				double dist0 = computeDistance(arg0);
-				double dist1 = computeDistance(arg1);
-				if(dist0>dist1)
-					resultat = +1;
-				else if(dist0<dist1)
-					resultat = -1;
-				else
-					resultat = 0;
-				return resultat;
-			}
-		});
-		return result;
-	}
-	
-	private ArrayList<Sprite> getIntersectedSprites(ArrayList<Sprite> sprites)
-	{	ArrayList<Sprite> result = new ArrayList<Sprite>();
-		Iterator<Sprite> iter = sprites.iterator();
-		while(iter.hasNext())
-		{	Sprite tempSprite = iter.next();
-			if(tempSprite!=sprite && isClose(tempSprite,true))
-				result.add(tempSprite);
-		}
-		return result;
-	}
-	
-	/**
-	 * détermine si le sprite passé en paramètre est critiquement proche
-	 * strict : true=inégalité stricte, false=inégalité large (loose)
-	 */
-	private boolean isClose(Sprite tempSprite, boolean strict)
-	{	boolean result;
-		// calcul des distances
-		double distX = Math.abs(tempSprite.getCurrentPosX()-currentPosX);
-		double distY = Math.abs(tempSprite.getCurrentPosY()-currentPosY);
-		// calcul du résultat
-		result = isClose(distX,strict) && isClose(distY,strict);
-		return result;
-	}
-	private boolean isClose(double distance, boolean strict)
-	{	boolean result;
-		if(strict)
-			result = CalculusTools.isRelativelySmallerThan(distance,getLoop().getScaledTileDimension(),getLoop());
-		else
-			result = CalculusTools.isRelativelySmallerOrEqualTo(distance,getLoop().getScaledTileDimension(),getLoop());
-		return result;
-	}
-	private double computeDistance(Sprite tempSprite)
-	{	double result;
-		double distX = Math.abs(tempSprite.getCurrentPosX()-currentPosX);
-		double distY = Math.abs(tempSprite.getCurrentPosY()-currentPosY);
-		result = distX+distY;
-		return result;
-	}
-	/**
-	 * détermine si le sprite passé en paramètre est proche d'un des points du segment
-	 * délimité par la position courante et l'ancienne position de ce sprite.
-	 * 
-	 * @param tempSprite	le sprite à tester
-	 * @return
-	 */
-	@SuppressWarnings("unused")
-	private boolean isInCloseArea(Sprite tempSprite)
-	{	boolean result;
-		double interX=0;
-		double interY=0;
-		// déplacement horizontal
-		if(currentPosY==previousPosY)
-		{	interX = tempSprite.getCurrentPosX();
-			interY = currentPosY;
-		}
-		// déplacement vertical
-		else if(currentPosX==previousPosX)
-		{	interX = currentPosX;
-			interY = tempSprite.getCurrentPosY();
-		}
-		else
-		// cas général
-		{	// droite entre currentPos et previousPos
-			double a = (currentPosY-previousPosY)/(currentPosX-previousPosX);
-			double b = currentPosY - a*currentPosX;
-			// perpendiculaire passant par tempSprite
-			double ap = -1/a;
-			double bp = tempSprite.getCurrentPosY() - ap*tempSprite.getCurrentPosX();
-			// point d'intersection
-			interX = (bp-b)/(a-ap);
-			interY = a*interX + b;
-		}
-		// distances entre tempSprite et le point d'intersection
-		double distX = Math.abs(tempSprite.getCurrentPosX()-interX);
-		double distY = Math.abs(tempSprite.getCurrentPosY()-interY);
-		//
-		result = isClose(distX,true) && isClose(distY,true);
-		return result;
-	}
-		
-	/**
-	 * détermine si le sprite passé en paramètre est sur le chemin de déplacement
-	 */
-	private boolean isOnTheWay(Sprite tempSprite)
-	{	boolean result;
-		// sprite de référence
-		Direction hMoveDir = getActualDirection().getHorizontalPrimary();
-		Direction vMoveDir = getActualDirection().getVerticalPrimary();
-		// sprite testé
-		double tdx = tempSprite.getCurrentPosX()-previousPosX;
-		double tdy = tempSprite.getCurrentPosY()-previousPosY;
-		Direction hObstacleDir = Direction.getHorizontalFromDouble(tdx);
-		Direction vObstacleDir = Direction.getVerticalFromDouble(tdy);
-		// calcul du résultat
-		result = (vObstacleDir==vMoveDir && vObstacleDir!=Direction.NONE)
-			|| (hObstacleDir==hMoveDir && hObstacleDir!=Direction.NONE);
-		return result;
-	}
-	/**
-	 * détermine si le sprite passé en paramètre refuse ou accepte de laisser passer ce sprite
-	 */
-	private boolean isObstacle(Sprite tempSprite)
-	{	boolean result;
-/*	
-		SpecificAction specificAction;
-		if(isOnGround())
-			specificAction = new SpecificAction(AbstractAction.MOVELOW,getConfiguration());
-		else
-			specificAction = new SpecificAction(AbstractAction.MOVEHIGH,getConfiguration());
-		specificAction.setActor(sprite);
-		specificAction.setDirection(currentDirection);
-		AbstractAbility ability = sprite.computeAbility(specificAction);
-		result = !tempSprite.answerRequest(req);
- */
-	
-SpecificAction specificAction;
-if(isOnGround())
-	specificAction = new SpecificAction(AbstractAction.MOVELOW,sprite,null,currentDirection);
-else
-	specificAction = new SpecificAction(AbstractAction.MOVEHIGH,sprite,null,currentDirection);
-ThirdPermission permission = tempSprite.getThirdPermission(specificAction);
-result = permission==null;
 
-/* FIXME grosse bidouille pour éviter qu'une bombe qui vient d'être posée ne bloque un joueur.
- * à rectifier !
- */ 
-if(sprite instanceof Hero && tempSprite instanceof Bomb && sprite.getTile()==tempSprite.getTile())
-	result=false;
-
-
-		return result;
-	}
-	/**
-	 * en supposant que ce sprite et le paramètre sont en contact (pas de recouvrement toutefois)
-	 * cette fonction détermine si leurs déplacements éventuels vont les faire se rencontrer (et vraisemblablement provoquer une collision)
-	 */
-	@SuppressWarnings("unused")
-	private boolean areConverging(Sprite tempSprite)
-	{	boolean result;
-		boolean test1=false,test2=false;
-		boolean res1=true,res2=true;
-		// position relative du paramètre
-		double tdx = tempSprite.getCurrentPosX() - previousPosX;
-		double tdy = tempSprite.getCurrentPosY() - previousPosY;
-		// test horizontal
-		if(CalculusTools.isRelativelyEqualTo(Math.abs(tdx),getLoop().getScaledTileDimension(),getLoop()))
-		{	// déplacement du sprite de référence
-			Direction spriteHDir = getActualDirection().getHorizontalPrimary();
-			// déplacement du paramètre
-			Direction tempHDir = tempSprite.getActualDirection().getHorizontalPrimary();
-			// direction du paramètre relativement au sprite
-			Direction hPos = Direction.getHorizontalFromDouble(tdx);
-			// result
-			res1 = spriteHDir==hPos || tempHDir==hPos.getOpposite();
-			test1 = true;
-		}
-		if(CalculusTools.isRelativelyEqualTo(Math.abs(tdy),getLoop().getScaledTileDimension(),getLoop()))
-		{	// déplacement du sprite de référence
-			Direction spriteVDir = getActualDirection().getVerticalPrimary();
-			// déplacement du paramètre
-			Direction tempVDir = tempSprite.getActualDirection().getVerticalPrimary();
-			// direction du paramètre relativement au sprite
-			Direction vPos = Direction.getVerticalFromDouble(tdy);
-			// result
-			res2 = spriteVDir==vPos || tempVDir==vPos.getOpposite();
-			test2 = true;
-		}
-		//
-		result = (test1 || test2) && (res1 && res2);
-		return result;
-	}	
-	
-	/**
-	 * passe tous les sprites en revue, en modificant la direction de déplacement
-	 * en fonction des différentes positions.
-	 * la nouvelle position courante est ensuite éventuellement modifiée en fonction des
-	 * blocages détectés.
-	 * la fonction renvoie le(s) obstacle(s) rencontré(s).
-	 */
-	private void testCollisionsComposite(ArrayList<Sprite> sprites, Direction moveDir, Sprite newCollidedSprites[])
-	{	
-		
-/*
- * TODO very ugly workaround 
- * problem description : 
- * 		in some fancy graphical definitions and/or speeds, 
- * 		player gets blocked at crossroads when moving in a composite direction
- * cause :
- * 		the sprite doesn't pass by the central location of the tile
- * workaround :
- * 		if this center is on the sprite trajectory, the sprite location is rounded to this center 		
- */
-double tileX = sprite.getTile().getPosX();
-double tileY = sprite.getTile().getPosY();
-if((moveDir.getHorizontalPrimary()==Direction.RIGHT && tileX>previousPosX && tileX<currentPosX)
-		|| (moveDir.getHorizontalPrimary()==Direction.LEFT && tileX<previousPosX && tileX>currentPosX))
-	currentPosX = tileX;
-if((moveDir.getVerticalPrimary()==Direction.DOWN && tileY>previousPosY && tileY<currentPosY)
-		|| (moveDir.getVerticalPrimary()==Direction.UP && tileY<previousPosY && tileY>currentPosY))
-	currentPosY = tileY;
-		
-		
-		boolean debug = false;
-		Direction hDir = moveDir.getHorizontalPrimary();
-		Direction vDir = moveDir.getVerticalPrimary();
-		double newPosX = previousPosX;
-		double newPosY = previousPosY;
-		if(debug)
-		{	System.out.println("previousPos:"+previousPosX+";"+previousPosY);		
-			System.out.println("currentPos:"+currentPosX+";"+currentPosY);		
-			System.out.println("nbre sprites:"+sprites.size());		
-			System.out.println("moveDir:"+moveDir);
-		}
-		Iterator<Sprite> iter = sprites.iterator();
-		// tant que tous les déplacements n'ont pas été interdits, on passe les obstacles en revue
-		while(iter.hasNext() && (hDir!=Direction.NONE || vDir!=Direction.NONE))
-		{	Sprite temp = iter.next();
-			// on calcule les distances entre l'obstacle et la position précédente du sprite
-			double distXP = Math.abs(temp.getCurrentPosX()-previousPosX);
-			double distYP = Math.abs(temp.getCurrentPosY()-previousPosY);
-			// on calcule les distances entre l'obstacle et la position potentielle du sprite
-			double distXC = Math.abs(temp.getCurrentPosX()-currentPosX);
-			double distYC = Math.abs(temp.getCurrentPosY()-currentPosY);
-			if(debug)
-			{	System.out.println("obstacle:"+temp.getCurrentPosX()+","+temp.getCurrentPosY());			
-				System.out.println("dist obstacle/previous:"+distXP+","+distYP);			
-				System.out.println("dist obstacle/potential:"+distXC+","+distYC);			
-			}
-			// pour chacune des deux directions : le fait de ne pas la désactiver provoque-t-il la collision ?
-			// pour chacune des deux directions : le fait de ne pas la désactiver fait-il diminuer la distance ?
-//if(vDir!=Direction.NONE && isClose(distXP,true) && isClose(distYC,true) && distYC<distYP)
-			if(vDir!=Direction.NONE && isClose(distXP,true) && distYC<distYP)
-			{	// si oui on désactive la direction
-				int dir = vDir.getIntFromDirection()[1];
-				vDir = Direction.NONE;
-				// on calcule le déplacement maximal
-				double tempPosY = temp.getCurrentPosY()-dir*getLoop().getScaledTileDimension();
-				if(debug)
-				{	System.out.println("tempPosY:"+tempPosY);			
-				}
-//				if(isClose(distXP,true) && isClose(distYP,true))
-//					tempPosY = previousPosY;
-				if(debug)
-				{	System.out.println("tempPosY:"+tempPosY);			
-				}
-				// on met à jour la nouvelle position seulement si cet obstacle est plus contraignant 
-//				if(Math.abs(tempPosY-currentPosY)<Math.abs(newPosY-currentPosY))
-				{	newPosY = tempPosY;
-					newCollidedSprites[1] = temp;
-				}
-			}
-			//NOTE faudrait p-ê un else ici ? ou pas, pr le cas où on est dans un obstacle
-			if(hDir!=Direction.NONE && isClose(distYP,true) && distXC<distXP)
-			{	int dir = hDir.getIntFromDirection()[0];
-				hDir = Direction.NONE;
-				double tempPosX = temp.getCurrentPosX()-dir*getLoop().getScaledTileDimension();
-				if(debug)
-				{	System.out.println("tempPosX:"+tempPosX);			
-				}
-//				if(isClose(distXP,true) && isClose(distYP,true))
-//					tempPosX = previousPosX;
-				if(debug)
-				{	System.out.println("tempPosX:"+tempPosX);			
-				}
-//				if(Math.abs(tempPosX-currentPosY)<Math.abs(newPosY-currentPosY))
-				{	newPosX = tempPosX;
-					newCollidedSprites[0] = temp;
-				}
-			}
-		}
-		if(hDir == Direction.NONE)
-			currentPosX = newPosX;
-		if(vDir == Direction.NONE)
-			currentPosY = newPosY;
-		if(debug)
-		{	System.out.println("currentPos:"+currentPosX+","+currentPosY);			
-			System.out.println();
-		}
-	}
-
-	private void testCollisionsSimple(ArrayList<Sprite> sprites, Direction moveDir, Sprite[] newCollidedSprites, boolean help)
-	{	boolean debug = false;
-		Direction oldDir = moveDir.getHorizontalPrimary();
-		if(oldDir == Direction.NONE)
-			oldDir = moveDir.getVerticalPrimary();
-		Direction newDir = null; 
-		boolean goOn = true;
-		double newPosX=previousPosX, newPosY=previousPosY;
-		if(debug)
-		{	System.out.println("previousPos:"+previousPosX+";"+previousPosY);		
-			System.out.println("currentPos:"+currentPosX+";"+currentPosY);		
-			System.out.println("nbre sprites:"+sprites.size());		
-			System.out.println("oldDir:"+oldDir);
-		}
-		Iterator<Sprite> iter = sprites.iterator();
-		double scaledTileDim = getLoop().getScaledTileDimension();
-		// tant que tous les déplacements n'ont pas été interdits, on passe les obstacles en revue
-		while(iter.hasNext() && goOn)
-		{	Sprite temp = iter.next();
-			if(debug)
-			{	System.out.println("newDir:"+newDir);			
-				System.out.println(temp.getClass()+":"+temp.getCurrentPosX()+";"+temp.getCurrentPosY());
-			}
-			// si on n'a pas encore changé la direction, il p-e est temps de le faire
-			if(newDir == null)
-			{	// différentiel entre l'ancienne position et l'obstacle traité
-				// et direction de l'obstacle relativement à l'ancienne position
-				double delta1, delta2;
-				Direction tempDir;
-				if(oldDir.isVertical())
-				{	delta1 = previousPosX-temp.getCurrentPosX();
-					tempDir = Direction.getHorizontalFromDouble(delta1);
-					delta2 = previousPosY-temp.getCurrentPosY();
-					newCollidedSprites[1] = temp;
-				}
-				else
-				{	delta1 = previousPosY-temp.getCurrentPosY();
-					tempDir = Direction.getVerticalFromDouble(delta1);
-					delta2 = previousPosX-temp.getCurrentPosX();
-					newCollidedSprites[0] = temp;
-				}
-				// si possible, on bouge au maximum le sprite dans l'ancienne direction
-				if(Math.abs(delta2)>scaledTileDim)
-				{	double dir = delta2/Math.abs(delta2);
-					double d = dir*scaledTileDim;
-					if(oldDir.isVertical())
-						newPosY = temp.getCurrentPosY()+d;
-					else 
-						newPosX = temp.getCurrentPosX()+d;
-				}
-				// on ne modifie l'ancienne direction que si le sprite est suffisament loin du centre de l'obstacle
-				/* NOTE l'aide à la navigation est ici. à ne réserver qu'aux sprites heros ? (pas bombes et autres)... 
-				 * de toute façon, ils ne devraient jamais en avoir besoin, car ils sont censés être parfaitement centrés 
-				 */
-				if(Math.abs(delta1)>scaledTileDim/4 && help)
-				{	//de plus, il faut que le passage dans la nouvelle direction soit dégagé, sinon c'est pas la peine de bouger
-					double dir = delta1/Math.abs(delta1);
-					// on vérifie donc qu'aucun des autres sprites obstacles ne sont situés dans l'alignement de l'obstacle courant
-					Iterator<Sprite> i = sprites.iterator();
-					boolean found = false;
-					while(i.hasNext() && !found)
-					{	Sprite tp = i.next();
-						if(tp!=temp)
-						{	double d;
-							boolean test;
-//							int indx;
-							if(oldDir.isVertical())
-							{	d = dir*(tp.getCurrentPosX()-temp.getCurrentPosX());
-								test = tp.getCurrentPosY()==temp.getCurrentPosY();
-//								indx = 0;
-							}
-							else
-							{	d = dir*(tp.getCurrentPosY()-temp.getCurrentPosY());
-								test = tp.getCurrentPosX()==temp.getCurrentPosX();
-//								indx = 1;
-							}
-							if(d>=0 && d<=scaledTileDim && test)
-							{	found = true;
-//								result[indx] = tp;
-							}
-						}
-					}
-					//
-					if(!found)
-					{	if(oldDir.isVertical())
-						{	double d = Math.abs(currentPosY - previousPosY)*dir;
-							newPosX = previousPosX + d;
-							if(Math.abs(newPosX-temp.getCurrentPosX())>scaledTileDim) 
-								newPosX = temp.getCurrentPosX() + dir*scaledTileDim;
-						}
-						else
-						{	double d = Math.abs(currentPosX - previousPosX)*dir;
-							newPosY = previousPosY + d;
-							if(Math.abs(newPosY-temp.getCurrentPosY())>scaledTileDim) 
-								newPosY = temp.getCurrentPosY() + dir*scaledTileDim;
-						}
-						newDir = tempDir;							
-					}
-					else
-						newDir = Direction.NONE;
-				}
-				else
-					newDir = Direction.NONE;
-			}
-			// si on a déjà changé la direction, il faut juste vérifier la cohérence avec les obstacles restants
-			else if(newDir!=Direction.NONE)
-			{	double dist=-1;
-				int indx=-1;
-				if(newDir.isVertical())
-				{	dist = Math.abs(newPosY-temp.getCurrentPosY());
-					indx = 1;
-				}
-				else if(newDir.isHorizontal())
-				{	dist = Math.abs(newPosX-temp.getCurrentPosX());
-					indx = 0;
-				}
-				if(isClose(dist,true))
-				{	goOn = false;
-					newDir = Direction.NONE;
-					newCollidedSprites[indx] = temp;
-				}			
-			}
-		}
-		if(debug)
-			System.out.println("newDir:"+newDir);					
-		//NOTE if & else sont pareils ?
-		if(newDir == Direction.NONE)
-		{	currentPosX = newPosX;
-			currentPosY = newPosY;
-		}
-		else
-		{	currentPosX = newPosX;
-			currentPosY = newPosY;
-		}
-		if(debug)
-			System.out.println();	
-	}
-	
+/* ********************************
+ * COLLISIONS
+ * ********************************
+ */		
 	private void updateIntersectedSprites(ArrayList<Sprite> newIntersectedSprites)
 	{	Iterator<Sprite> i;
 /*	
@@ -1340,9 +712,9 @@ if(sprite instanceof Hero)
 		}
 	}
 	
-	private void updateCollidedSprites(Sprite newCollidedSprites[])
+	private void updateCollidedSprites(ArrayList<Sprite> newCollidedSprites)
 	{	//NOTE faut-il distinquer les changements de direction ?
-
+		Iterator<Sprite> i;
 		
 /*		
 //		if(newCollidedSprites.size()>0)
@@ -1379,28 +751,31 @@ if(sprite instanceof Hero)
 
 
 		// sprites no longer collided
-		for(int i=0;i<2;i++)
-		{	if(collidedSprites[i]!=null &&
-				collidedSprites[i]!=newCollidedSprites[0] && collidedSprites[i]!=newCollidedSprites[1])
-			{	EngineEvent event = new EngineEvent(EngineEvent.COLLIDED_OFF,sprite,collidedSprites[i],getActualDirection());
-				collidedSprites[i].processEvent(event);
-				event = new EngineEvent(EngineEvent.COLLIDING_OFF,sprite,collidedSprites[i],getActualDirection());
-				sprite.processEvent(event);
+		i = collidedSprites.iterator();
+		while(i.hasNext())
+		{	Sprite tempSprite = i.next();
+			if(newCollidedSprites.contains(tempSprite))
+				newCollidedSprites.remove(tempSprite);
+			else
+			{	i.remove();
+				EngineEvent event = new EngineEvent(EngineEvent.INTERSECTION_OFF,sprite,tempSprite,getActualDirection());
+				tempSprite.processEvent(event);
+				tempSprite.removeCollidedSprite(sprite);
+				event = new EngineEvent(EngineEvent.INTERSECTION_OFF,tempSprite,sprite,getActualDirection().getOpposite());
+				sprite.processEvent(event);				
 			}
 		}
 		// new collided sprites
-		for(int i=0;i<2;i++)
-		{	if(newCollidedSprites[i]!= null && 
-				newCollidedSprites[i]!=collidedSprites[0] && newCollidedSprites[i]!=collidedSprites[1])
-			{	EngineEvent event = new EngineEvent(EngineEvent.COLLIDED_ON,sprite,newCollidedSprites[i],getActualDirection());
-				newCollidedSprites[i].processEvent(event);
-				event = new EngineEvent(EngineEvent.COLLIDING_ON,sprite,newCollidedSprites[i],getActualDirection());
-				sprite.processEvent(event);
-			}
+		i = newCollidedSprites.iterator();
+		while(i.hasNext())
+		{	Sprite tempSprite = i.next();
+			collidedSprites.add(tempSprite);
+			EngineEvent event = new EngineEvent(EngineEvent.INTERSECTION_ON,sprite,tempSprite,getActualDirection());
+			tempSprite.processEvent(event);
+			tempSprite.addCollidedSprite(sprite);
+			event = new EngineEvent(EngineEvent.INTERSECTION_ON,tempSprite,sprite,getActualDirection().getOpposite());
+			sprite.processEvent(event);
 		}
-		// update collidedSPrites
-		for(int i=0;i<2;i++)
-			collidedSprites[i] = newCollidedSprites[i];
 	}
 	
 	public void addIntersectedSprite(Sprite intersectedSprite)
@@ -1409,41 +784,23 @@ if(sprite instanceof Hero)
 	public void removeIntersectedSprite(Sprite intersectedSprite)
 	{	intersectedSprites.remove(intersectedSprite);
 	}
-/*	
-	public void addCollidedSprite(AbstractSprite collidedSprite)
+	
+	public void addCollidedSprite(Sprite collidedSprite)
 	{	collidedSprites.add(collidedSprite);
 	}
-	public void removeCollidedSprite(AbstractSprite collidedSprite)
+	public void removeCollidedSprite(Sprite collidedSprite)
 	{	collidedSprites.remove(collidedSprite);
-	}
-*/	
-/*
-	public Direction getHorizontalMoveDirection()
-	{	double dx = currentPosX-previousPosX;
-		Direction result = Direction.getHorizontalFromDouble(dx);
-		return result;
-	}
-	public Direction getVerticalMoveDirection()
-	{	double dy = currentPosY-previousPosY;
-		Direction result = Direction.getVerticalFromDouble(dy);
-		return result;
-	}
-	public Direction getMoveDirection()
-	{	Direction h = getHorizontalMoveDirection();
-		Direction v = getVerticalMoveDirection();
-		Direction result = Direction.getComposite(h, v);
-		return result;
-	}
-*/
+	}	
+
 	public boolean isColliding()
-	{	return collidedSprites[0]!=null || collidedSprites[1]!=null; 
+	{	return !collidedSprites.isEmpty();
 	}
 	public boolean isCollidingSprite(Sprite s)
-	{	return collidedSprites[0]==s || collidedSprites[1]==s;		
+	{	return collidedSprites.contains(s);
 	}
 
 	public boolean isIntersectingSprite(Sprite s)
-	{	return intersectedSprites.contains(s);		
+	{	return intersectedSprites.contains(s);
 	}
 
 	public boolean isOnGround()

@@ -542,6 +542,12 @@ public abstract class Sprite
 	public void removeIntersectedSprite(Sprite intersectedSprite)
 	{	trajectoryManager.removeIntersectedSprite(intersectedSprite);
 	}
+	public void addCollidedSprite(Sprite collidedSprite)
+	{	trajectoryManager.addCollidedSprite(collidedSprite);
+	}
+	public void removeCollidedSprite(Sprite collidedSprite)
+	{	trajectoryManager.removeCollidedSprite(collidedSprite);
+	}
 	public boolean isColliding()
 	{	return trajectoryManager.isColliding();
 	}
