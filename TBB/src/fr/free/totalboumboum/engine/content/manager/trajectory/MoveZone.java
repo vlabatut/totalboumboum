@@ -359,7 +359,7 @@ public class MoveZone
 			{	// is the potential obstacle an actual obstacle?
 				if(po.isActualObstacle())
 				{	
-System.out.println("PotentialObstacle:"+po.getSprite().getCurrentPosX()+","+po.getSprite().getCurrentPosY());					
+//System.out.println("PotentialObstacle:"+po.getSprite().getCurrentPosX()+","+po.getSprite().getCurrentPosY());					
 					
 					bypassObstacle(po);
 					goOn = canMove();
