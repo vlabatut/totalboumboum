@@ -293,6 +293,9 @@ public class HeroEventManager extends EventManager
 	@Override
 	public void processEvent(EngineEvent event)
 	{	
+		
+//System.out.println(event);		
+		
 		if(event.getName().equals(EngineEvent.ANIME_OVER))
 			engAnimeOver(event);
 		else if(event.getName().equals(EngineEvent.COLLIDED_OFF))
@@ -348,7 +351,7 @@ public class HeroEventManager extends EventManager
 	}
 	
 	private void engCollidingOff(EngineEvent event)
-	{	//System.out.println(">>>SPR_COLLIDING_OFF with"+event.getSource());
+	{	//System.out.println(">>>SPR_COLLIDING_OFF with "+event.getSource());
 		if(gesture.equals(GestureConstants.PUSHING))
 		{	if(!sprite.isColliding())
 			{	gesture = GestureConstants.WALKING;
@@ -358,7 +361,7 @@ public class HeroEventManager extends EventManager
 	}
 	
 	private void engCollidingOn(EngineEvent event)
-	{	//System.out.println(">>>SPR_COLLIDING_ON with"+event.getSource());
+	{	//System.out.println(">>>SPR_COLLIDING_ON with "+event.getSource());
 		if(gesture.equals(GestureConstants.BOUNCING))
 		{	blockedDirection = blockedDirection.getOpposite();
 			sprite.setGesture(gesture,blockedDirection,blockedDirection,false);

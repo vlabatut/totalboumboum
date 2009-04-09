@@ -172,7 +172,7 @@ public class TrajectoryManager
 			if(totalDuration == 0)
 			{	isTerminated = true;
 				forcedDurationCoeff = 1;
-				sprite.processEvent(new EngineEvent(EngineEvent.TRAJECTORY_OVER)); //NOTE pertinent ?
+				sprite.processEvent(new EngineEvent(EngineEvent.TRAJECTORY_OVER));
 			}
 			else
 			{	isTerminated = false;
@@ -459,8 +459,8 @@ if(previousPosX != currentPosX || previousPosY != currentPosY || previousPosZ !=
 			
 			if(moveDir!=Direction.NONE)			
 			{	
-if(sprite instanceof Hero)
-	System.out.println("position:"+previousPosX+","+previousPosY+" ("+sprite.getTile().getLine()+","+sprite.getTile().getCol()+") -> "+currentPosX+","+currentPosY+" ("+sprite.getLevel().getTile(currentPosX,currentPosY).getLine()+","+sprite.getLevel().getTile(currentPosX,currentPosY).getCol()+") ["+currentDirection+"]");	
+//if(sprite instanceof Hero)
+//	System.out.println("position:"+previousPosX+","+previousPosY+" ("+sprite.getTile().getLine()+","+sprite.getTile().getCol()+") -> "+currentPosX+","+currentPosY+" ("+sprite.getLevel().getTile(currentPosX,currentPosY).getLine()+","+sprite.getLevel().getTile(currentPosX,currentPosY).getCol()+") ["+currentDirection+"]");	
 
 				double dist = Math.sqrt(Math.pow(dx,2)+Math.pow(dy,2));
 				MoveZone mz = new MoveZone(sprite,previousPosX,previousPosY,currentPosX,currentPosY,sprite.getLevel(),moveDir,moveDir,dist);
@@ -472,7 +472,25 @@ if(sprite instanceof Hero)
 				ArrayList<Sprite> newCollidedSprites = mz.getCollidedSprites();
 				//
 				updateCollidedSprites(newCollidedSprites);
+/*				
+System.out.print("{");
+if(collidedSprites.size()>0)
+{	for(int j=0;j<collidedSprites.size();j++)
+		System.out.print(" "+collidedSprites.get(j));
+}
+System.out.println(" }");
+//System.out.println();
+*/
 				updateIntersectedSprites(newIntersectedSprites);
+/*				
+System.out.print("[");
+if(intersectedSprites.size()>0)
+{	for(int j=0;j<intersectedSprites.size();j++)
+		System.out.print(" "+intersectedSprites.get(j));
+}
+System.out.println(" ]");
+System.out.println();
+*/
 			}
 		}
 		
@@ -730,7 +748,7 @@ if(sprite instanceof Hero)
 			}
 			System.out.println(" }");
 			//
-			System.out.print("{");qqqqq
+			System.out.print("{");
 			if(collidedSprites.size()>0)
 			{	for(int j=0;j<collidedSprites.size();j++)
 					System.out.print(" "+collidedSprites.get(j));
@@ -758,10 +776,10 @@ if(sprite instanceof Hero)
 				newCollidedSprites.remove(tempSprite);
 			else
 			{	i.remove();
-				EngineEvent event = new EngineEvent(EngineEvent.INTERSECTION_OFF,sprite,tempSprite,getActualDirection());
+				EngineEvent event = new EngineEvent(EngineEvent.COLLIDED_OFF,sprite,tempSprite,getActualDirection());
 				tempSprite.processEvent(event);
 				tempSprite.removeCollidedSprite(sprite);
-				event = new EngineEvent(EngineEvent.INTERSECTION_OFF,tempSprite,sprite,getActualDirection().getOpposite());
+				event = new EngineEvent(EngineEvent.COLLIDED_OFF,tempSprite,sprite,getActualDirection().getOpposite());
 				sprite.processEvent(event);				
 			}
 		}
@@ -770,10 +788,10 @@ if(sprite instanceof Hero)
 		while(i.hasNext())
 		{	Sprite tempSprite = i.next();
 			collidedSprites.add(tempSprite);
-			EngineEvent event = new EngineEvent(EngineEvent.INTERSECTION_ON,sprite,tempSprite,getActualDirection());
+			EngineEvent event = new EngineEvent(EngineEvent.COLLIDED_ON,sprite,tempSprite,getActualDirection());
 			tempSprite.processEvent(event);
 			tempSprite.addCollidedSprite(sprite);
-			event = new EngineEvent(EngineEvent.INTERSECTION_ON,tempSprite,sprite,getActualDirection().getOpposite());
+			event = new EngineEvent(EngineEvent.COLLIDED_ON,tempSprite,sprite,getActualDirection().getOpposite());
 			sprite.processEvent(event);
 		}
 	}

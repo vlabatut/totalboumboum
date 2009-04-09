@@ -775,16 +775,12 @@ public class Launcher
 
 	/*
 	 * TODO BUGS EN COURS
-	 *  - problème de collision : quand on vient de poser une bombe, on est bloqué dans certaines
-	 *  	directions. hypothèse: il faudrait peut être redéfinir l'action movelow/high pour la rendre transitive
-	 *  	ce qui permettrait de controler ce cas de figure dans le XML
-	 *  	>> contourné avec une truc pas très propre, à résoudre sérieusement
 	 *  - quand on balance une bombe, puis une autre, puis fait péter la première et enfin la seconde 
 	 *  	juste à la fin des flammes de la première, alors l'explosion de la 2nde est circonsrite à la
 	 *  	case où elle atterrit.
 	 *  - l'item kick ne marche pas
 	 *  - quand un mur est détruit (définitivement) par une penetration bomb, l'item n'apparait pas car
-	 *  la flamme de la bombe dure plus longtemps que l'explosion du mur, et empêche l'item d'apparaître
+	 *  la flamme de la bombe dure plus longtemps que l'explosion du mur, et détruit l'item aussitôt qu'il apparait
 	 */
 	
 	
@@ -809,9 +805,9 @@ public class Launcher
 	 * TODO
 	 * 
 	 * + beta.012
-	 * - xxx
-	 * 
-	 * 
+	 * - nouveau système de gestion des collisions dans le trajectory manager
+	 * - correction du bug d'animation/collision : push ne se déclenche pas
+	 * - 
 	 * 
 	 * 
 	 * permissions >> modulations
@@ -831,7 +827,7 @@ public class Launcher
 	 * 
 	 * - GUI : dans les tables, remplacer les labels par une classe custom qui implémenterait l'interface basicPanel
 	 * 
-	 * - pouvoir modifier l'UPS pour les IA
+	 * - pouvoir modifier l'UPS pour les IA (pour alléger le calcul)
 	 * 
 	 * - profils: simplifier, pas besoin de la double représentation default+selected.
 	 * - réorganiser par rapport aux besoins: joueur pdt le jeu, joueur chargé en dehors du jeu, joueur pas chargé ?
@@ -845,8 +841,6 @@ public class Launcher
 	 * - results panel : quand il y a trop de rounds dans un match pour que ça rentre à l'écran, ne pas tout afficher
 	 * - possibilité de donner des noms aux matches et aux rounds
 	 * 
-	 * - bug de déplacement quand on bouge en diagonale en posant plein de bombes dans un espace dégagé, on se retrouve téléporté sur une case voisine
-	 * - bug d'animation/collision : push ne se déclenche pas
 	 * - bug d'animation : quand le bonhomme va à droite et qu'on appuie sur gauche, y a une espèce de passage droite-gauche très rapide au niveau de l'animation, insuportable
 	 * 
 	 * - faire un paramètre dans les rounds qui permet de déterminer s'ils sont compatibles avec le tournoi 2007-08
