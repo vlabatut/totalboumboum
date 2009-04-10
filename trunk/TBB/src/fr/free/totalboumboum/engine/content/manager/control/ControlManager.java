@@ -95,7 +95,7 @@ public class ControlManager
 	}
 	
 	private void updateCodes()
-	{	boolean debug = false;
+	{	boolean debug = true;
 //		boolean test = controlCodes.size()>0; 
 		if(debug /*&& test*/)		
 		{	System.out.println("--"+compte+"--");
@@ -121,7 +121,7 @@ public class ControlManager
 			{	String eventName = it.next();
 				if(controlSettings.isAutofire(eventName))
 				{	ControlEvent event = new ControlEvent(eventName,true);
-					eventsList.offer(event);
+					eventsList.push(event);
 				}
 			}
 		}
@@ -170,7 +170,7 @@ public class ControlManager
 			i = eventsList.iterator();
 			while(i.hasNext())
 			{	ControlEvent temp = i.next();
-				System.out.print(temp.getName()+" ");
+				System.out.print(temp.getName()+"/"+temp.getMode()+" ");
 			}		
 			System.out.println(" ]");
 		}		
