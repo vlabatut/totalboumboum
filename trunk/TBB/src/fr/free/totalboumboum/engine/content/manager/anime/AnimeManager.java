@@ -44,8 +44,8 @@ public class AnimeManager
 	/** pas courrant */
 	private AnimeStep currentStep;
 	/** indique que l'animation est finie (on reste sur la dernière image) */
-	@SuppressWarnings("unused")
 	private boolean isTerminated;
+	
 	/** temps total écoulé de puis le début de l'animation */
 	private double currentTime;
 	/** temps normalisé écoulé de puis le début de l'animation (réinitialisé par un repeat) */
@@ -53,9 +53,9 @@ public class AnimeManager
 	/** durée totale originale de l'animation */
 	private double animeDuration;
 	/** durée totale effective de l'animation */
-	private double totalDuration;
+	private double totalDuration = 0;
 	/** coefficient de mofication du temps dû au délai imposé */
-	private double forcedDurationCoeff;
+	private double forcedDurationCoeff = 1;
 	
 /* ********************************
  * INIT
@@ -63,18 +63,12 @@ public class AnimeManager
  */	
 	public AnimeManager(Sprite sprite)
 	{	this.sprite = sprite;
-		forcedDurationCoeff = 1;
-		totalDuration = 0;
 	} 
 
 	public void setAnimePack(AnimePack animePack)
 	{	this.animePack = animePack;	
 	}
 	
-/* ********************************
- * PROCESS
- * ********************************
- */	
 	/**
 	 * Change l'animation en cours pour le sprite considéré.
 	 * Paramètres :
@@ -100,34 +94,32 @@ public class AnimeManager
 		if(reinit)
 		{	isTerminated = false;
 			animeDuration = currentAnime.getTotalDuration();
-			// independent sprite
+			// forcedDuration defined (positive or null)
 			if(forcedDuration>=0)
 			{	currentTime = 0;
 				currentStep = currentAnime.getIterator().next();
 				animeTime = 0;
 			}
-			// bound sprite
-			else
+			// forcedDuration relative to bound sprite (negative)
+			else if(isBoundToSprite())
 			{	// init with the bound sprite values
-				if(isBoundToSprite())
-				{	Sprite sprt = getBoundToSprite();
-					forcedDuration = sprt.getAnimeTotalDuration();
-					currentTime = sprt.getAnimeCurrentTime();
-					animeTime = currentTime;
-					if(currentAnime.getRepeat())
-					{	while(animeTime>animeDuration)
-							animeTime = animeTime - animeDuration;
-					}
-					updateImage();
+				Sprite sprt = getBoundToSprite();
+				forcedDuration = sprt.getAnimeTotalDuration();
+				currentTime = sprt.getAnimeCurrentTime();
+				animeTime = currentTime;
+				if(currentAnime.getRepeat())
+				{	while(animeTime>animeDuration)
+						animeTime = animeTime - animeDuration;
 				}
-				// if no bound sprite : then supposing no forcedDuration (default case)
-				else
-				{	forcedDuration = 0;
-					currentTime = 0;
-					currentStep = currentAnime.getIterator().next();
-					animeTime = 0;
-				}
-			}							
+				updateImage();
+			}
+			// no bound sprite no forcedDuration: act like forcedDuration=0
+			else
+			{	forcedDuration = 0;
+				currentTime = 0;
+				currentStep = currentAnime.getIterator().next();
+				animeTime = 0;
+			}
 			
 			// steady image
 			if(animeDuration == 0)
@@ -155,6 +147,10 @@ public class AnimeManager
 		}
 	}
 
+/* ********************************
+ * UPDATE
+ * ********************************
+ */	
 	/**
 	 * méthode appelée à chaque itération : 
 	 * met à jour l'image à afficher
@@ -247,6 +243,10 @@ public class AnimeManager
 	{	return animePack.getColor();		
 	}
 	
+	public boolean isTerminated()
+	{	return isTerminated;	
+	}
+	
 /* ********************************
  * POSITION
  * ********************************
@@ -279,6 +279,10 @@ public class AnimeManager
 
 
 
+/* ********************************
+ * FINISHED
+ * ********************************
+ */	
 	private boolean finished = false;
 	
 	public void finish()

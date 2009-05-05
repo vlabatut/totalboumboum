@@ -49,18 +49,17 @@ public class TrajectoryManager
 	/** temps normalisé écoulé de puis le début de la trajectoire */
 	private double currentTime;
 	/** durée totale de la trajectoire (soit l'originale, soit la forcée) */
-	private double totalDuration;
+	private double totalDuration = 0;
 	/** coefficient de mofication du temps dû au délai imposé */
-	private double forcedDurationCoeff;
+	private double forcedDurationCoeff = 1;
 	/** nom du geste courant */
-	@SuppressWarnings("unused")
-	private String currentGestureName;
+	private String currentGestureName = GestureConstants.NONE;
 	/** modification de position X (utilisée lors de la mise à jour de la position) */
-	double shiftX;
+	double shiftX = 0;
 	/** modification de position Y (utilisée lors de la mise à jour de la position) */
-	double shiftY;
+	double shiftY = 0;
 	/** modification de position Z (utilisée lors de la mise à jour de la position) */
-	double shiftZ;
+	double shiftZ = 0;
 
 	// position
 	/** position X relativement à la trajectoire courante */
@@ -70,11 +69,11 @@ public class TrajectoryManager
 	/** position Z relativement à la trajectoire courante */
 	private double relativePosZ;
 	/** position X absolue (en fait : soit par rapport au niveau, soit par rapport au boundToSprite) */
-	private double currentPosX;
+	private double currentPosX = 0;
 	/** position Y absolue (en fait : soit par rapport au niveau, soit par rapport au boundToSprite) */
-	private double currentPosY;
+	private double currentPosY = 0;
 	/** position Z absolue (en fait : soit par rapport au niveau, soit par rapport au boundToSprite) */
-	private double currentPosZ;
+	private double currentPosZ = 0;
 	/** position X précédente (absolue) */
 	private double previousPosX;
 	/** position Y précédente (absolue) */
@@ -83,31 +82,31 @@ public class TrajectoryManager
 	@SuppressWarnings("unused")
 	private double previousPosZ;
 	/** direction de déplacement courante */
-	private Direction currentDirection;
+	private Direction currentDirection = Direction.NONE;
 	/** niveau d'interaction X avec les commandes */
-	private double xMove;
+	private double xMove = 0;
 	/** niveau d'interaction Y avec les commandes */
-	private double yMove;
+	private double yMove = 0;
 	
 	// position imposée
 	/** deplacement X forcé total */
-	private double forcedTotalXShift;
+	private double forcedTotalXShift = 0;
 	/** deplacement Y forcé total */
-	private double forcedTotalYShift;
+	private double forcedTotalYShift = 0;
 	/** deplacement Z forcé total */
-	private double forcedTotalZShift;
+	private double forcedTotalZShift = 0;
 	/** temps imparti pour atteindre la position forcée (tient compte du délai imposé à la trajectoire) */
-	private double forcedPositionTime;
+	private double forcedPositionTime = 0;
 	/** position X exprimée relativement au centre de la case courante */
-	private double relativeForcedPosX;
+	private double relativeForcedPosX = 0;
 	/** position Y exprimée relativement au centre de la case courante */
-	private double relativeForcedPosY;
+	private double relativeForcedPosY = 0;
 	/** position Z exprimée relativement au centre de la case courante */
-	private double relativeForcedPosZ;
+	private double relativeForcedPosZ = 0;
 	
 	// collisions
-	private ArrayList<Sprite> intersectedSprites;
-	private ArrayList<Sprite> collidedSprites;
+	private final ArrayList<Sprite> intersectedSprites = new ArrayList<Sprite>();;
+	private final ArrayList<Sprite> collidedSprites = new ArrayList<Sprite>();;
 	
 	
 	
@@ -120,38 +119,13 @@ public class TrajectoryManager
  * ********************************
  */	
 	public TrajectoryManager(Sprite sprite)
-	{	this.currentPosX = 0;
-		this.currentPosY = 0;
-		this.currentPosZ = 0;
-		xMove = 0;
-		yMove = 0;
-		this.sprite = sprite;
-		forcedDurationCoeff = 1;
-		totalDuration = 0;
-		forcedTotalXShift = 0;
-		forcedTotalYShift = 0;
-		forcedTotalZShift = 0;
-		forcedPositionTime = 0;
-		relativeForcedPosX = 0;
-		relativeForcedPosY = 0;
-		relativeForcedPosZ = 0;
-		currentGestureName = GestureConstants.NONE;
-		currentDirection = Direction.NONE;
-		shiftX = 0;
-		shiftY = 0;
-		shiftZ = 0;
-		intersectedSprites = new ArrayList<Sprite>();
-		collidedSprites = new ArrayList<Sprite>();
+	{	this.sprite = sprite;
 	}
 
 	public void setTrajectoryPack(TrajectoryPack trajectoryPack)
 	{	this.trajectoryPack = trajectoryPack;	
 	}
 	
-/* ********************************
- * PROCESS
- * ********************************
- */	
 	/**
 	 * change l'animation en cours d'affichage
 	 */
@@ -201,7 +175,7 @@ public class TrajectoryManager
 			forcedPositionTime = currentTrajectory.getForcedPositionTime()*forcedDurationCoeff;
 			processForcedShifts(currentPosX, currentPosY, currentPosZ);
 		}
-		// no reset : the same gesture (or an equivalent one) goes on, but in a different direction
+		// no reinit : the same gesture (or an equivalent one) goes on, but in a different direction
 		else
 		{	// relative position is updated
 			if(totalDuration!=0)
@@ -396,6 +370,10 @@ public class TrajectoryManager
 		yMove = p[1];
 	}
 	
+/* ********************************
+ * UPDATE
+ * ********************************
+ */	
 	/**
 	 * méthode appelée à chaque itération
 	 * met à jour le déplacement et la position relative.
@@ -568,20 +546,7 @@ System.out.println();
 			}
 		}		
 	}
-	
-/* ********************************
- * TIME
- * ********************************
- */	
 
-	/**
-	 * renvoie la durée totale prévue pour la trajectoire.
-	 * @return
-	 */
-	public double getTotalDuration()
-	{	return totalDuration;
-	}
-	
 	private void updateTime()
 	{	double milliPeriod = Configuration.getEngineConfiguration().getMilliPeriod();
 		double delta = milliPeriod*forcedDurationCoeff*sprite.getSpeedCoeff();	
@@ -610,6 +575,22 @@ System.out.println();
 				isTerminated = true;
 			}
 		}	
+	}
+
+/* ********************************
+ * TIME
+ * ********************************
+ */	
+	/**
+	 * renvoie la durée totale prévue pour la trajectoire.
+	 * @return
+	 */
+	public double getTotalDuration()
+	{	return totalDuration;
+	}
+	
+	public double getCurrentTime()
+	{	return currentTime;
 	}
 	
 /* ********************************
@@ -647,7 +628,7 @@ System.out.println();
 	}
 	
 /* ********************************
- * MISC
+ * DIRECTION
  * ********************************
  */	
 	public Direction getActualDirection()
@@ -676,59 +657,6 @@ System.out.println();
  * COLLISIONS
  * ********************************
  */		
-	private void updateIntersectedSprites(ArrayList<Sprite> newIntersectedSprites)
-	{	Iterator<Sprite> i;
-/*	
-if(newCollidedSprites.size()>0)
-	System.out.println("->"+newCollidedSprites.size());
-if(collidedSprites.size()>0)
-	System.out.println("->"+newCollidedSprites.size());
-if(sprite instanceof Hero)	
-{	System.out.print("{");
-	if(newCollidedSprites.size()>0)
-	{	for(int j=0;j<newCollidedSprites.size();j++)
-			System.out.print(" "+newCollidedSprites.get(j));
-	}
-	System.out.println(" }");
-	//
-	System.out.print("{");
-	if(collidedSprites.size()>0)
-	{	for(int j=0;j<collidedSprites.size();j++)
-			System.out.print(" "+collidedSprites.get(j));
-	}
-	System.out.println(" }");
-	System.out.println();
-}
-*/
-
-		// sprites no longer intersected
-		i = intersectedSprites.iterator();
-		while(i.hasNext())
-		{	Sprite tempSprite = i.next();
-			if(newIntersectedSprites.contains(tempSprite))
-				newIntersectedSprites.remove(tempSprite);
-			else
-			{	i.remove();
-				EngineEvent event = new EngineEvent(EngineEvent.INTERSECTION_OFF,sprite,tempSprite,getActualDirection());
-				tempSprite.processEvent(event);
-				tempSprite.removeIntersectedSprite(sprite);
-				event = new EngineEvent(EngineEvent.INTERSECTION_OFF,tempSprite,sprite,getActualDirection().getOpposite());
-				sprite.processEvent(event);				
-			}
-		}
-		// new intersected sprites
-		i = newIntersectedSprites.iterator();
-		while(i.hasNext())
-		{	Sprite tempSprite = i.next();
-			intersectedSprites.add(tempSprite);
-			EngineEvent event = new EngineEvent(EngineEvent.INTERSECTION_ON,sprite,tempSprite,getActualDirection());
-			tempSprite.processEvent(event);
-			tempSprite.addIntersectedSprite(sprite);
-			event = new EngineEvent(EngineEvent.INTERSECTION_ON,tempSprite,sprite,getActualDirection().getOpposite());
-			sprite.processEvent(event);
-		}
-	}
-	
 	private void updateCollidedSprites(ArrayList<Sprite> newCollidedSprites)
 	{	//NOTE faut-il distinquer les changements de direction ?
 		Iterator<Sprite> i;
@@ -795,13 +723,6 @@ if(sprite instanceof Hero)
 		}
 	}
 	
-	public void addIntersectedSprite(Sprite intersectedSprite)
-	{	intersectedSprites.add(intersectedSprite);
-	}
-	public void removeIntersectedSprite(Sprite intersectedSprite)
-	{	intersectedSprites.remove(intersectedSprite);
-	}
-	
 	public void addCollidedSprite(Sprite collidedSprite)
 	{	collidedSprites.add(collidedSprite);
 	}
@@ -816,6 +737,70 @@ if(sprite instanceof Hero)
 	{	return collidedSprites.contains(s);
 	}
 
+/* ********************************
+ * INTERSECTIONS
+ * ********************************
+ */	
+	private void updateIntersectedSprites(ArrayList<Sprite> newIntersectedSprites)
+	{	Iterator<Sprite> i;
+/*	
+if(newCollidedSprites.size()>0)
+	System.out.println("->"+newCollidedSprites.size());
+if(collidedSprites.size()>0)
+	System.out.println("->"+newCollidedSprites.size());
+if(sprite instanceof Hero)	
+{	System.out.print("{");
+	if(newCollidedSprites.size()>0)
+	{	for(int j=0;j<newCollidedSprites.size();j++)
+			System.out.print(" "+newCollidedSprites.get(j));
+	}
+	System.out.println(" }");
+	//
+	System.out.print("{");
+	if(collidedSprites.size()>0)
+	{	for(int j=0;j<collidedSprites.size();j++)
+			System.out.print(" "+collidedSprites.get(j));
+	}
+	System.out.println(" }");
+	System.out.println();
+}
+*/
+
+		// sprites no longer intersected
+		i = intersectedSprites.iterator();
+		while(i.hasNext())
+		{	Sprite tempSprite = i.next();
+			if(newIntersectedSprites.contains(tempSprite))
+				newIntersectedSprites.remove(tempSprite);
+			else
+			{	i.remove();
+				EngineEvent event = new EngineEvent(EngineEvent.INTERSECTION_OFF,sprite,tempSprite,getActualDirection());
+				tempSprite.processEvent(event);
+				tempSprite.removeIntersectedSprite(sprite);
+				event = new EngineEvent(EngineEvent.INTERSECTION_OFF,tempSprite,sprite,getActualDirection().getOpposite());
+				sprite.processEvent(event);				
+			}
+		}
+		// new intersected sprites
+		i = newIntersectedSprites.iterator();
+		while(i.hasNext())
+		{	Sprite tempSprite = i.next();
+			intersectedSprites.add(tempSprite);
+			EngineEvent event = new EngineEvent(EngineEvent.INTERSECTION_ON,sprite,tempSprite,getActualDirection());
+			tempSprite.processEvent(event);
+			tempSprite.addIntersectedSprite(sprite);
+			event = new EngineEvent(EngineEvent.INTERSECTION_ON,tempSprite,sprite,getActualDirection().getOpposite());
+			sprite.processEvent(event);
+		}
+	}
+	
+	public void addIntersectedSprite(Sprite intersectedSprite)
+	{	intersectedSprites.add(intersectedSprite);
+	}
+	public void removeIntersectedSprite(Sprite intersectedSprite)
+	{	intersectedSprites.remove(intersectedSprite);
+	}
+	
 	public boolean isIntersectingSprite(Sprite s)
 	{	return intersectedSprites.contains(s);
 	}
@@ -824,34 +809,36 @@ if(sprite instanceof Hero)
 	{	return CalculusTools.isRelativelyEqualTo(currentPosZ,0,getLoop());
 	}
 	
-	
-	
-	public Loop getLoop()
-	{	return sprite.getLoop();
-	}
-	
+/* ********************************
+ * FINISHED
+ * ********************************
+ */	
 	private boolean finished = false;
 	
 	public void finish()
 	{	if(!finished)
 		{	finished = true;
-			// intersected sprites
-			{	Iterator<Sprite> it = intersectedSprites.iterator();
-				while(it.hasNext())
-				{	@SuppressWarnings("unused")
-					Sprite temp = it.next();
-					//temp.finish();
-					it.remove();
-				}
-			}
 			// trajectory pack
 			trajectoryPack.finish();
 			trajectoryPack = null;
 			// misc
-			collidedSprites = null;
+			collidedSprites.clear();
+			intersectedSprites.clear();
 			currentDirection = null;
 			currentTrajectory = null;
 			sprite = null;
 		}
 	}	
+
+/* ********************************
+ * MISC
+ * ********************************
+ */	
+	public Loop getLoop()
+	{	return sprite.getLoop();
+	}
+	
+	public String getCurrentGestureName()
+	{	return currentGestureName;		
+	}
 }
