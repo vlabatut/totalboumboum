@@ -353,6 +353,13 @@ public class Launcher
 	 * un classement permet de déterminer le leader provisoire
 	 */
 	
+	/*
+	 * TODO inclure dans l'API des fonction d'action prédéfinies.
+	 * par exemple des fonctions pour le déplacement, on indique où on veut aller et ça détermine à chaque itération
+	 * quelle est l'action à effectuer. étendre à d'autres actions ?
+	 * limitation pédago: on n'utilise plus A*
+	 */
+	
 // **********************************************************
 // BOMBES
 // **********************************************************
