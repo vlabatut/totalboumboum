@@ -536,33 +536,6 @@ public class Launcher
 	 */
 
 // **********************************************************
-// JOUEURS
-// **********************************************************
-
-	/*
-	 * TODO
-	 * il faut faire un système de manière à pouvoir faire varier le nombre
-	 *  de joueurs dans un tournoi sans pour autant tout reconfigurer.
-	 *  ça peut s'estimer automatiquement : 
-	 *  	- pour série/simple : 
-	 *  		- parmi tous les matches, quel est le level acceptant le moins de joueurs
-	 *  		- ->il s'agit du nombre de joueurs max du tournoi
-	 *  	- pour coupe : 
-	 *  		- on définit un match (possiblement différent) par niveau de progression
-	 *  		- donc ce nombre, pour un niveau, indique combien de matches seront nécessaires, et comment répartir les joueurs
-	 *  		- (il n'y a pas de limite théorique au nombre de joueurs)
-	 *  		- le concepteur peut configurer certains paramètres, comme le nombre min/max de joueurs pour chaque niveau de la compète
-	 *  	- pour championnat :
-	 *  		- a priori, il est possible de tout goupiller parfaitement quelles que soient les contraintes de nombre de joueurs
-	 *  
-	 */
-	
-	/*
-	 * TODO au chargement du tournoi, nécessaire de déterminer ce nombre de joueurs max
-	 * de même pour match et round
-	 */	
-	
-// **********************************************************
 // ITEMS
 // **********************************************************
 
@@ -788,13 +761,6 @@ public class Launcher
 	 *  - l'item kick ne marche pas
 	 *  - quand un mur est détruit (définitivement) par une penetration bomb, l'item n'apparait pas car
 	 *  la flamme de la bombe dure plus longtemps que l'explosion du mur, et détruit l'item aussitôt qu'il apparait
-	 */
-	
-	
-	
-	/*
-	 * TODO il faut appliquer à trajectoryMgr le même principe (durée forcée)
-	 * que pour animeMgr
 	 */
 	
 	/*
