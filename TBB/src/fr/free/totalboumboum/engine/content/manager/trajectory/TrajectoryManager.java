@@ -28,6 +28,7 @@ import fr.free.totalboumboum.configuration.Configuration;
 import fr.free.totalboumboum.engine.container.tile.Tile;
 import fr.free.totalboumboum.engine.content.feature.Direction;
 import fr.free.totalboumboum.engine.content.feature.GestureConstants;
+import fr.free.totalboumboum.engine.content.feature.anime.AnimeStep;
 import fr.free.totalboumboum.engine.content.feature.event.EngineEvent;
 import fr.free.totalboumboum.engine.content.feature.trajectory.TrajectoryDirection;
 import fr.free.totalboumboum.engine.content.feature.trajectory.TrajectoryPack;
@@ -44,14 +45,22 @@ public class TrajectoryManager
 	private TrajectoryPack trajectoryPack;
 	/** trajectoire courante */
 	private TrajectoryDirection currentTrajectory;
+	/** pas courrant */
+	private TrajectoryStep currentStep;
 	/** indique que la trajectoire est terminée (plus de déplacement) */
 	private boolean isTerminated;
-	/** temps normalisé écoulé de puis le début de la trajectoire */
+	
+	/** temps total écoulé de puis le début de la trajectoire */
 	private double currentTime;
-	/** durée totale de la trajectoire (soit l'originale, soit la forcée) */
+	/** temps normalisé écoulé de puis le début de la trajectoire */
+	private double trajectoryTime;
+	/** durée totale originale de la trajectoire */
+	private double trajectoryDuration = 0;
+	/** durée totale effective de la trajectoire */
 	private double totalDuration = 0;
 	/** coefficient de mofication du temps dû au délai imposé */
 	private double forcedDurationCoeff = 1;
+	
 	/** nom du geste courant */
 	private String currentGestureName = GestureConstants.NONE;
 	/** modification de position X (utilisée lors de la mise à jour de la position) */
@@ -79,7 +88,6 @@ public class TrajectoryManager
 	/** position Y précédente (absolue) */
 	private double previousPosY;
 	/** position Z précédente (absolue) */
-	@SuppressWarnings("unused")
 	private double previousPosZ;
 	/** direction de déplacement courante */
 	private Direction currentDirection = Direction.NONE;
@@ -130,38 +138,67 @@ public class TrajectoryManager
 	 * change l'animation en cours d'affichage
 	 */
 	public void setGesture(String gesture, Direction spriteDirection, Direction controlDirection, boolean reinit, double forcedDuration)
-	{	currentGestureName = gesture;
+	{	// init
+		currentGestureName = gesture;
 		hasFlied = getCurrentPosZ()>0;
-		@SuppressWarnings("unused")
 		Direction previousDirection = currentDirection;
 		currentDirection = controlDirection;
 		setInteractiveMove(controlDirection);
 		currentTrajectory = trajectoryPack.getTrajectoryDirection(gesture, spriteDirection);
-		// reseting the gesture
+		// reinit the gesture
 		if(reinit)
-		{	totalDuration = currentTrajectory.getTotalDuration();
+		{	trajectoryDuration = currentTrajectory.getTotalDuration();
 			currentTime = 0;
 			// isTerminated ?
-			if(totalDuration == 0)
+			if(trajectoryDuration == 0)
 			{	isTerminated = true;
 				forcedDurationCoeff = 1;
 				sprite.processEvent(new EngineEvent(EngineEvent.TRAJECTORY_OVER));
 			}
 			else
 			{	isTerminated = false;
-				// forcedDuration
-				if(forcedDuration<0)
-				{	if(isBoundToSprite())
-						forcedDuration = getBoundToSprite().getTrajectoryTotalDuration();
-					else
-						forcedDuration = 0;
-				}	
+				// forcedDuration defined (positive or null)
+				if(forcedDuration>=0)
+				{	currentTime = 0;
+					currentStep = currentTrajectory.getIterator().next();
+					trajectoryTime = 0;
+				}
+				// forcedDuration relative to bound sprite (negative)
+				else if(isBoundToSprite())
+				{	// init with the bound sprite values
+					Sprite sprt = getBoundToSprite();
+					forcedDuration = sprt.getTrajectoryTotalDuration();
+					currentTime = sprt.getTrajectoryCurrentTime();
+					trajectoryTime = currentTime;
+					if(currentTrajectory.getRepeat())
+					{	while(trajectoryTime>trajectoryDuration)
+							trajectoryTime = trajectoryTime - trajectoryDuration;
+					}
+					updateStep();
+				}
+				// no bound sprite nor forcedDuration: act like forcedDuration=0
+				else
+				{	forcedDuration = 0;
+					currentTime = 0;
+					currentStep = currentTrajectory.getIterator().next();
+					trajectoryTime = 0;
+				}			
+			
+//NOTE vérifier l'usage de totalDuration vs trajectoryDuration			
+				
 				// forcedDurationCoeff
 				if(forcedDuration == 0)
-					forcedDurationCoeff = 1;
-				else if(currentTrajectory.getProportional())
-				{	forcedDurationCoeff = forcedDuration/totalDuration;
-					totalDuration = forcedDuration;
+				{	forcedDurationCoeff = 1;
+					totalDuration = trajectoryDuration;
+				}
+				else 
+				{	totalDuration = forcedDuration;
+					// proportionnal
+					if(currentTrajectory.getProportional())
+						forcedDurationCoeff = forcedDuration/trajectoryDuration;
+					// or not proportionnal
+					else
+						forcedDurationCoeff = 1;
 				}
 			}
 			// relative position
@@ -173,15 +210,18 @@ public class TrajectoryManager
 			relativeForcedPosY = 0;
 			relativeForcedPosZ = 0;
 			forcedPositionTime = currentTrajectory.getForcedPositionTime()*forcedDurationCoeff;
+//NOTE à voir			
 			processForcedShifts(currentPosX, currentPosY, currentPosZ);
 		}
 		// no reinit : the same gesture (or an equivalent one) goes on, but in a different direction
 		else
 		{	// relative position is updated
-			if(totalDuration!=0)
+			if(trajectoryDuration!=0)
+//NOTE à voir			
 				updateRelativePos();
 			// update forced shifts
 			if(forcedPositionTime>0)
+//NOTE à voir			
 				correctForcedShifts();
 			/* NOTE en cas de trajectoire repeat : 
 			 * ne faut-il pas réinitialiser la position forcée à chaque répétition ?
@@ -325,6 +365,7 @@ public class TrajectoryManager
 		}
 	}
 	
+//NOTE fait
 	/**
 	 * modifie la position absolue courante en fonction du boundToSprite.
 	 * Cette méthode doit impérativement être appelée juste avant un changement de gesture.
@@ -360,6 +401,7 @@ public class TrajectoryManager
 		}
 	}
 	
+//NOTE fait
 	/**
 	 * Modifie le niveau d'interaction des controles du sprite
 	 * @param controlDirection
@@ -506,7 +548,7 @@ System.out.println();
 		while(nextTime<currentTime && i.hasNext());
 		// round
 		if(nextTime<currentTime)
-			nextTime = totalDuration;
+			nextTime = trajectoryDuration;
 		
 		// process the intermediate position (between two steps)
 		double previousX = nextX - nextStep.getXShift();
@@ -547,22 +589,24 @@ System.out.println();
 		}		
 	}
 
+//NOTE fait
 	private void updateTime()
 	{	double milliPeriod = Configuration.getEngineConfiguration().getMilliPeriod();
 		double delta = milliPeriod*forcedDurationCoeff*sprite.getSpeedCoeff();	
 		currentTime = currentTime + delta;
-		if(currentTime > totalDuration)
+		trajectoryTime = trajectoryTime + delta;
+		if(trajectoryTime > trajectoryDuration)
 		{	// looping the trajectory
-			if (currentTrajectory.getRepeat())
-			{	while(currentTime>totalDuration)
-					currentTime = currentTime - totalDuration;
+			if(currentTrajectory.getRepeat())
+			{	while(trajectoryTime>trajectoryDuration)
+					trajectoryTime = trajectoryTime - trajectoryDuration;
 				relativePosX = currentTrajectory.getTotalXShift()-relativePosX;
 				relativePosY = currentTrajectory.getTotalYShift()-relativePosY;
 				relativePosZ = currentTrajectory.getTotalZShift(getBoundToSprite())-relativePosZ;
 			}
 			// or terminating the trajectory
 			else
-			{	currentTime = totalDuration;
+			{	trajectoryTime = trajectoryDuration;
 				double currentX = currentTrajectory.getTotalXShift(); 
 				double currentY = currentTrajectory.getTotalYShift();
 				double currentZ = currentTrajectory.getTotalZShift(getBoundToSprite());
@@ -575,6 +619,18 @@ System.out.println();
 				isTerminated = true;
 			}
 		}	
+	}
+	
+//NOTE fait
+	private void updateStep()
+	{	// process current displayable image
+		double nextTime = 0;
+		Iterator<TrajectoryStep> i = currentTrajectory.getIterator();
+		do
+		{	currentStep = i.next(); 
+			nextTime = nextTime + currentStep.getDuration()*forcedDurationCoeff;
+		}
+		while(nextTime<trajectoryTime && i.hasNext());
 	}
 
 /* ********************************

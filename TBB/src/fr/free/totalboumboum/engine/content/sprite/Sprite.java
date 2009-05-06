@@ -536,6 +536,9 @@ public abstract class Sprite
 	public double getTrajectoryTotalDuration()
 	{	return trajectoryManager.getTotalDuration();
 	}
+	public double getTrajectoryCurrentTime()
+	{	return trajectoryManager.getCurrentTime();
+	}
 	public void addIntersectedSprite(Sprite intersectedSprite)
 	{	trajectoryManager.addIntersectedSprite(intersectedSprite);
 	}

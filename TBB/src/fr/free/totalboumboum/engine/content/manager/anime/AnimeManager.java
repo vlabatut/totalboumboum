@@ -111,9 +111,9 @@ public class AnimeManager
 				{	while(animeTime>animeDuration)
 						animeTime = animeTime - animeDuration;
 				}
-				updateImage();
+				updateStep();
 			}
-			// no bound sprite no forcedDuration: act like forcedDuration=0
+			// no bound sprite nor forcedDuration: act like forcedDuration=0
 			else
 			{	forcedDuration = 0;
 				currentTime = 0;
@@ -125,6 +125,7 @@ public class AnimeManager
 			if(animeDuration == 0)
 			{	forcedDurationCoeff = 1;
 				totalDuration = forcedDuration;
+				isTerminated = true;
 			}			
 			// actual anime
 			else
@@ -157,7 +158,7 @@ public class AnimeManager
 	 */
 	public void update()
 	{	updateTime();
-		updateImage();
+		updateStep();
 		// check if the animations is over
 		if(currentTime>totalDuration)
 		{	isTerminated = true;
@@ -165,7 +166,10 @@ public class AnimeManager
 		}
 	}
 	
-	public void updateTime()
+	/**
+	 * met à jour les différentes variables gérant le temps
+	 */
+	private void updateTime()
 	{	// update current time
 		double milliPeriod = Configuration.getEngineConfiguration().getMilliPeriod();
 		double delta = milliPeriod*forcedDurationCoeff*sprite.getSpeedCoeff();	
@@ -177,7 +181,10 @@ public class AnimeManager
 		}
 	}
 	
-	public void updateImage()
+	/**
+	 * calcule l'étape courante de l'animation, en fonction du temps courant
+	 */
+	private void updateStep()
 	{	// process current displayable image
 		double nextTime = 0;
 		Iterator<AnimeStep> i = currentAnime.getIterator();
