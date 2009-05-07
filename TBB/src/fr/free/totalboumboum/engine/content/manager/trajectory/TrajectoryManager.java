@@ -28,7 +28,6 @@ import fr.free.totalboumboum.configuration.Configuration;
 import fr.free.totalboumboum.engine.container.tile.Tile;
 import fr.free.totalboumboum.engine.content.feature.Direction;
 import fr.free.totalboumboum.engine.content.feature.GestureConstants;
-import fr.free.totalboumboum.engine.content.feature.anime.AnimeStep;
 import fr.free.totalboumboum.engine.content.feature.event.EngineEvent;
 import fr.free.totalboumboum.engine.content.feature.trajectory.TrajectoryDirection;
 import fr.free.totalboumboum.engine.content.feature.trajectory.TrajectoryPack;
@@ -88,6 +87,7 @@ public class TrajectoryManager
 	/** position Y précédente (absolue) */
 	private double previousPosY;
 	/** position Z précédente (absolue) */
+	@SuppressWarnings("unused")
 	private double previousPosZ;
 	/** direction de déplacement courante */
 	private Direction currentDirection = Direction.NONE;
@@ -141,6 +141,7 @@ public class TrajectoryManager
 	{	// init
 		currentGestureName = gesture;
 		hasFlied = getCurrentPosZ()>0;
+		@SuppressWarnings("unused")
 		Direction previousDirection = currentDirection;
 		currentDirection = controlDirection;
 		setInteractiveMove(controlDirection);
@@ -184,8 +185,6 @@ public class TrajectoryManager
 					trajectoryTime = 0;
 				}			
 			
-//NOTE vérifier l'usage de totalDuration vs trajectoryDuration			
-				
 				// forcedDurationCoeff
 				if(forcedDuration == 0)
 				{	forcedDurationCoeff = 1;
@@ -209,19 +208,16 @@ public class TrajectoryManager
 			relativeForcedPosX = 0;
 			relativeForcedPosY = 0;
 			relativeForcedPosZ = 0;
-			forcedPositionTime = currentTrajectory.getForcedPositionTime()*forcedDurationCoeff;
-//NOTE à voir			
+			forcedPositionTime = currentTrajectory.getForcedPositionTime();
 			processForcedShifts(currentPosX, currentPosY, currentPosZ);
 		}
 		// no reinit : the same gesture (or an equivalent one) goes on, but in a different direction
 		else
 		{	// relative position is updated
 			if(trajectoryDuration!=0)
-//NOTE à voir			
 				updateRelativePos();
 			// update forced shifts
 			if(forcedPositionTime>0)
-//NOTE à voir			
 				correctForcedShifts();
 			/* NOTE en cas de trajectoire repeat : 
 			 * ne faut-il pas réinitialiser la position forcée à chaque répétition ?
@@ -229,6 +225,7 @@ public class TrajectoryManager
 		}
 	}
 
+//NOTE fait
 	/**
 	 * si on a dépassé le forcedPositionDuration, il faut :  
 	 * 		- calculer la position virtuelle à ce temps là (ce qui implique de calculer le point de départ en référence)
@@ -255,18 +252,18 @@ public class TrajectoryManager
 		double nextX=0, nextY=0, nextZ=0;
 		do
 		{	TrajectoryStep trajectoryStep = i.next();
-			nextTime = nextTime + trajectoryStep.getDuration()*forcedDurationCoeff;
+			nextTime = nextTime + trajectoryStep.getDuration();
 			nextStep = trajectoryStep;
 			nextX = nextX+nextStep.getXShift();
 			nextY = nextY+nextStep.getYShift();
 			nextZ = nextZ+nextStep.getZShift(boundToSprite);
 		}
-		while(nextTime<currentTime);
+		while(nextTime<trajectoryTime);
 		// process the theoretical position
 		double previousX = nextX - nextStep.getXShift();
 		double previousY = nextY - nextStep.getYShift();
 		double previousZ = nextZ - nextStep.getZShift(boundToSprite);
-		double previousTime = nextTime - nextStep.getDuration()*forcedDurationCoeff;
+		double previousTime = nextTime - nextStep.getDuration();
 		double stepElapsedTime = forcedPositionTime - previousTime;
 		double coef = stepElapsedTime / nextStep.getDuration();
 		double theoRelX = previousX + coef*nextStep.getXShift(); 
@@ -277,8 +274,8 @@ public class TrajectoryManager
 		double theoreticalZ = theoRelZ + initZ;
 		// add the forced shift
 		double forcedCoef = 1;
-		if(currentTime<=forcedPositionTime)
-			forcedCoef = currentTime / forcedPositionTime;
+		if(trajectoryTime<=forcedPositionTime)
+			forcedCoef = trajectoryTime / forcedPositionTime;
 		if(currentTrajectory.isForceXPosition())
 			theoreticalX = theoreticalX + forcedCoef*forcedTotalXShift;
 		if(currentTrajectory.isForceYPosition())
@@ -289,7 +286,7 @@ public class TrajectoryManager
 		double gapX = theoreticalX - currentPosX;
 		double gapY = theoreticalY - currentPosY;
 		double gapZ = theoreticalZ - currentPosZ;
-		/* TODO on pourrait échelonner la correction, mais on choisit l'approche brutale
+		/* NOTE on pourrait échelonner la correction, mais on choisit l'approche brutale
 		 * quitte à affiner par la suite si nécessaire
 		 */
 		currentPosX = currentPosX + gapX;
@@ -297,6 +294,7 @@ public class TrajectoryManager
 		currentPosZ = currentPosZ + gapZ;
 	}
 	
+//NOTE fait
 	/**
 	 * 1) on calcule la position relative originale (XML) à t=forcedTime
 	 * 2) on l'utilise pour calculer la position absolue originale à t=forcedTime
@@ -317,7 +315,7 @@ public class TrajectoryManager
 			double nextX=0, nextY=0, nextZ=0;
 			do
 			{	TrajectoryStep trajectoryStep = i.next();
-				nextTime = nextTime + trajectoryStep.getDuration()*forcedDurationCoeff;
+				nextTime = nextTime + trajectoryStep.getDuration();
 				nextStep = trajectoryStep;
 				nextX = nextX+nextStep.getXShift();
 				nextY = nextY+nextStep.getYShift();
@@ -328,7 +326,7 @@ public class TrajectoryManager
 			double previousX = nextX - nextStep.getXShift();
 			double previousY = nextY - nextStep.getYShift();
 			double previousZ = nextZ - nextStep.getZShift(boundToSprite);
-			double previousTime = nextTime - nextStep.getDuration()*forcedDurationCoeff;
+			double previousTime = nextTime - nextStep.getDuration();
 			double stepElapsedTime = forcedPositionTime - previousTime;
 			double coef = stepElapsedTime / nextStep.getDuration();
 			double originalX = previousX + coef*nextStep.getXShift(); 
@@ -434,7 +432,7 @@ if(previousPosX != currentPosX || previousPosY != currentPosY || previousPosZ !=
 	System.out.println();
 }
 */
-		// keep the previous position
+		// keep trace of the previous position
 		previousPosX = currentPosX;
 		previousPosY = currentPosY;
 		previousPosZ = currentPosZ;
@@ -532,6 +530,10 @@ System.out.println();
 		}
 	}
 	
+//NOTE fait
+	/**
+	 * met à jour la position relative à la trajectoire ou au sprite liant
+	 */
 	private void updateRelativePos()
 	{	Iterator<TrajectoryStep> i = currentTrajectory.getIterator();
 		TrajectoryStep nextStep=null;
@@ -539,24 +541,24 @@ System.out.println();
 		double nextX=0, nextY=0, nextZ=0;
 		do
 		{	TrajectoryStep trajectoryStep = i.next();
-			nextTime = nextTime + trajectoryStep.getDuration()*forcedDurationCoeff;
+			nextTime = nextTime + trajectoryStep.getDuration();
 			nextStep = trajectoryStep;
 			nextX = nextX+nextStep.getXShift();
 			nextY = nextY+nextStep.getYShift();				
 			nextZ = nextZ+nextStep.getZShift(getBoundToSprite());				
 		}
-		while(nextTime<currentTime && i.hasNext());
+		while(nextTime<trajectoryTime && i.hasNext());
 		// round
-		if(nextTime<currentTime)
+		if(nextTime<trajectoryTime)
 			nextTime = trajectoryDuration;
 		
 		// process the intermediate position (between two steps)
 		double previousX = nextX - nextStep.getXShift();
 		double previousY = nextY - nextStep.getYShift();
 		double previousZ = nextZ - nextStep.getZShift(getBoundToSprite());
-		double previousTime = nextTime - nextStep.getDuration()*forcedDurationCoeff;
-		double stepElapsedTime = currentTime - previousTime;
-		double coef = stepElapsedTime / (nextStep.getDuration()*forcedDurationCoeff);
+		double previousTime = nextTime - nextStep.getDuration();
+		double stepElapsedTime = trajectoryTime - previousTime;
+		double coef = stepElapsedTime / (nextStep.getDuration());
 		double currentX = previousX + coef*nextStep.getXShift(); 
 		double currentY = previousY + coef*nextStep.getYShift();
 		double currentZ = previousZ + coef*nextStep.getZShift(getBoundToSprite());
@@ -568,9 +570,10 @@ System.out.println();
 		relativePosZ = currentZ;		
 	}
 	
+//NOTE fait
 	private void updateRelativeForcedPos()
-	{	if(currentTime<=forcedPositionTime)
-		{	double forcedCoef = currentTime / forcedPositionTime;
+	{	if(trajectoryTime<=forcedPositionTime)
+		{	double forcedCoef = trajectoryTime / forcedPositionTime;
 			if(currentTrajectory.isForceXPosition())
 			{	double forcedCurrentX = forcedCoef*forcedTotalXShift; 
 				shiftX = shiftX + (forcedCurrentX - relativeForcedPosX);
@@ -586,7 +589,7 @@ System.out.println();
 				shiftZ = shiftZ + (forcedCurrentZ - relativeForcedPosZ);
 				relativeForcedPosZ = forcedCurrentZ;
 			}
-		}		
+		}
 	}
 
 //NOTE fait
