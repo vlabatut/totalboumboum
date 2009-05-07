@@ -95,7 +95,7 @@ public class ControlManager
 	}
 	
 	private void updateCodes()
-	{	boolean debug = true;
+	{	boolean debug = false;
 //		boolean test = controlCodes.size()>0; 
 		if(debug /*&& test*/)		
 		{	System.out.println("--"+compte+"--");
