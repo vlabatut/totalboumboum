@@ -784,6 +784,9 @@ public class Launcher
 	 * - mise à niveau du gestionnaire de trajectoire
 	 * 
 	 * - à faire : bug de déplacement. apparemment quand on est juste au bord d'une bombe, ou bien quand on vient de la poser ? apparait lorsque les IA se déplacent dans la zone centrale (sans bloc) des niveaux SBM1 custom.
+	 *   ce bug est dû à l'absence d'assistance au déplacement en cas d'intersection...
+	 *   
+	 * - bug d'affichage quand les flammes se croisent au cours de plusieurs explosions: la dernière n'est pas affichée
 	 * 
 	 * permissions >> modulations
 	 * 

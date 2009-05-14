@@ -225,7 +225,6 @@ public class TrajectoryManager
 		}
 	}
 
-//NOTE fait
 	/**
 	 * si on a dépassé le forcedPositionDuration, il faut :  
 	 * 		- calculer la position virtuelle à ce temps là (ce qui implique de calculer le point de départ en référence)
@@ -294,7 +293,6 @@ public class TrajectoryManager
 		currentPosZ = currentPosZ + gapZ;
 	}
 	
-//NOTE fait
 	/**
 	 * 1) on calcule la position relative originale (XML) à t=forcedTime
 	 * 2) on l'utilise pour calculer la position absolue originale à t=forcedTime
@@ -363,7 +361,6 @@ public class TrajectoryManager
 		}
 	}
 	
-//NOTE fait
 	/**
 	 * modifie la position absolue courante en fonction du boundToSprite.
 	 * Cette méthode doit impérativement être appelée juste avant un changement de gesture.
@@ -399,7 +396,6 @@ public class TrajectoryManager
 		}
 	}
 	
-//NOTE fait
 	/**
 	 * Modifie le niveau d'interaction des controles du sprite
 	 * @param controlDirection
@@ -530,7 +526,6 @@ System.out.println();
 		}
 	}
 	
-//NOTE fait
 	/**
 	 * met à jour la position relative à la trajectoire ou au sprite liant
 	 */
@@ -570,7 +565,6 @@ System.out.println();
 		relativePosZ = currentZ;		
 	}
 	
-//NOTE fait
 	private void updateRelativeForcedPos()
 	{	if(trajectoryTime<=forcedPositionTime)
 		{	double forcedCoef = trajectoryTime / forcedPositionTime;
@@ -592,7 +586,6 @@ System.out.println();
 		}
 	}
 
-//NOTE fait
 	private void updateTime()
 	{	double milliPeriod = Configuration.getEngineConfiguration().getMilliPeriod();
 		double delta = milliPeriod*forcedDurationCoeff*sprite.getSpeedCoeff();	
@@ -624,7 +617,6 @@ System.out.println();
 		}	
 	}
 	
-//NOTE fait
 	private void updateStep()
 	{	// process current displayable image
 		double nextTime = 0;
