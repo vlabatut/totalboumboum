@@ -327,7 +327,7 @@ public class MoveZone
 			{	addIntersectedSprite(po.getSprite());
 				// is the potential obstacle an actual obstacle?
 				if(po.isActualObstacle())
-				{	// get all the intersected obstacles
+				{	// get all the other intersected obstacles
 					ArrayList<PotentialObstacle> temp = new ArrayList<PotentialObstacle>();
 					temp.add(po);
 					potentialObstacles.remove(0);

@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <gameQuickstart xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="..\..\..\resources\schemas\gameQuickstart.xsd">
-	<round name="debug" allowedPlayers="1" />
+	<round name="debug" allowedPlayers="1 2" />
 	<players>
+		<player file="59" color="blue" controls="2" spritePack="superbomberman5" spriteFolder="shirobon" />
 		<player file="1" color="cyan" controls="1" spritePack="superbomberman5" spriteFolder="assistantpirate" />
 	</players>
 </gameQuickstart>

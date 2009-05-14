@@ -6,6 +6,10 @@
 		<case players="1">
 			<location player="0" line="6" col="7" />
 		</case>
+		<case players="2">
+			<location player="0" line="6" col="8" />
+			<location player="1" line="6" col="6" />
+		</case>
 	</locations>
 	
 	<items>
