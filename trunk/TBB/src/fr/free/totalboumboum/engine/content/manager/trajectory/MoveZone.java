@@ -33,13 +33,9 @@ import fr.free.totalboumboum.engine.content.sprite.Sprite;
 import fr.free.totalboumboum.engine.loop.Loop;
 import fr.free.totalboumboum.tools.CalculusTools;
 
-//TODO gérer le changement de case, cf la v2 du déplacement
-
-
 /**
  * TODO
  * - pb (?) quand on pose deux bombes en diagonale et qu'on se place dans le cadrant intérieur d'une des cases libres du même carré
- * - pb : blocage sur un déplacement simple quand le perso se scotche dans l'angle d'un obstacle. étudier la trace du fichier txt
  */
 
 public class MoveZone
