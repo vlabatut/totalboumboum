@@ -107,7 +107,9 @@ public class MoveZone
 	/////////////////////////////////////////////////////////////////
 	// DIRECTIONS		/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
+	/** first wanted direction */ 
 	private Direction initialDirection;
+	/** direction currently used */
 	private Direction usedDirection;
 	/** previously used direction. only used for ergonomic reasons, when the sprite is at some obstacle exact corner with a composite direction : which primary direction must be used?*/
 	private Direction previousDirection;
@@ -266,7 +268,7 @@ public class MoveZone
 	/**
 	 * Defines the list of potential obstacles included in the crossed tiles.
 	 * They're ordered in function of the distance to the trajectory source
-	 * ( the second criterion being the distance between the sprite and the obstacle) 
+	 * (the secondary criterion being the distance between the sprite and the obstacle) 
 	 */
 	private ArrayList<PotentialObstacle> getCrossedSprites()
 	{	ArrayList<PotentialObstacle> result = new ArrayList<PotentialObstacle>();
@@ -406,15 +408,142 @@ public class MoveZone
 	 */
 	private void updateDirection(ArrayList<PotentialObstacle> pos)
 	{	Loop loop = level.getLoop();
-		// determine the closest obstacle for each primary direction
-		Sprite down = null;
-		double downDist = Double.MAX_VALUE;
-		Sprite left = null;
-		double leftDist = Double.MAX_VALUE;
-		Sprite right = null;
-		double rightDist = Double.MAX_VALUE;
-		Sprite up = null;
-		double upDist = Double.MAX_VALUE;
+		// processes the distance to each obstacle in the list
+		ArrayList<Double> dXs = new ArrayList<Double>();
+		ArrayList<Double> dYs = new ArrayList<Double>();
+		for(PotentialObstacle po: pos)
+		{	Sprite s = po.getSprite();
+			double dx = level.getDeltaX(currentX,s.getCurrentPosX());
+			dXs.add(dx);
+			double dy = level.getDeltaY(currentY,s.getCurrentPosY());
+			dYs.add(dy);
+		}
+		// modify current direction
+		Sprite down;
+		double downDist;
+		Sprite left;
+		double leftDist;
+		Sprite right;
+		double rightDist;
+		Sprite up;
+		double upDist;
+		do
+		{	// determines the closest obstacle for each primary direction
+			down = null;
+			downDist = Double.MAX_VALUE;
+			left = null;
+			leftDist = Double.MAX_VALUE;
+			right = null;
+			rightDist = Double.MAX_VALUE;
+			up = null;
+			upDist = Double.MAX_VALUE;
+			for(int i=0;i<pos.size();i++)
+			{	Sprite s = pos.get(i).getSprite();
+				// horizontal component
+				double dx = dXs.get(i);
+				Direction dH = Direction.getHorizontalFromDouble(dx);
+				if(dH!=Direction.NONE && usedDirection.getHorizontalPrimary()==dH)
+				{	double absDelta = Math.abs(dx);
+					if(dH==Direction.LEFT && !CalculusTools.isRelativelyGreaterOrEqualTo(absDelta,leftDist,loop))
+					//if(dH==Direction.LEFT && absDelta<leftDist)
+					{	leftDist = absDelta;
+						left = s;
+					}
+					else if(dH==Direction.RIGHT && !CalculusTools.isRelativelyGreaterOrEqualTo(absDelta,rightDist,loop))
+					//else if(dH==Direction.RIGHT && absDelta<rightDist)
+					{	rightDist = absDelta;
+						right = s;
+					}
+				}
+				// vertical component
+				double dy = dYs.get(i);
+				Direction dV = Direction.getVerticalFromDouble(dy);
+				if(dV!=Direction.NONE && usedDirection.getVerticalPrimary()==dV)
+				{	double absDelta = Math.abs(dy);
+					if(dV==Direction.DOWN && !CalculusTools.isRelativelyGreaterOrEqualTo(absDelta,downDist,loop))
+					//if(dV==Direction.DOWN && absDelta<downDist)
+					{	downDist = absDelta;
+						down = s;
+					}
+					else if(dV==Direction.UP && !CalculusTools.isRelativelyGreaterOrEqualTo(absDelta,upDist,loop))
+					//else if(dV==Direction.UP && absDelta<upDist)
+					{	upDist = absDelta;
+						up = s;
+					}
+				}
+			}
+			// change direction accordingly to the closest obstacles
+			boolean check = true;
+			// possibly inforce move assistance
+			if(initialDirection.isPrimary() && usedDirection==initialDirection)
+			{	Direction dir = Direction.NONE;
+				double dist = -1;
+				if(usedDirection.isHorizontal() && (left!=null || right!=null))
+				{	Sprite s;
+					if(left!=null)
+						s = left;
+					else //if(right!=null)
+						s = right;
+					double dy = level.getDeltaY(s.getCurrentPosY(),currentY);
+					dist = Math.abs(dy);
+					dir = Direction.getVerticalFromDouble(dy);
+				}
+				else if(down!=null || up!=null)
+				{	Sprite s;
+					if(down!=null)
+						s = down;
+					else //if(up!=null)
+						s = up;
+					double dx = level.getDeltaX(s.getCurrentPosX(),currentX);
+					dist = Math.abs(dx);
+					dir = Direction.getHorizontalFromDouble(dx);
+				}
+				if(dist<0)
+					check = false;
+				else
+				{	// has the sprite an assistance?
+					StateAbility ability = source.computeAbility(StateAbility.SPRITE_MOVE_ASSISTANCE);
+					double tolerance = ability.getStrength();
+					double margin = tolerance*level.getTileDimension();
+					if(tolerance==0)
+						margin = Double.MAX_VALUE;
+					if(CalculusTools.isRelativelyGreaterThan(dist,margin,level.getLoop()))
+					{	previousDirection = usedDirection;
+						usedDirection = dir;
+					}
+					else
+						check = false;
+				}
+			}
+			else
+				check = false;
+			// just block directions
+			if(!check)
+			{	if(down!=null)
+				{	previousDirection = usedDirection;
+					usedDirection = usedDirection.drop(Direction.DOWN);
+					addCollidedSprite(down);
+				}
+				if(left!=null)
+				{	previousDirection = usedDirection;
+					usedDirection = usedDirection.drop(Direction.LEFT);
+					addCollidedSprite(left);
+				}
+				if(right!=null)
+				{	previousDirection = usedDirection;
+					usedDirection = usedDirection.drop(Direction.RIGHT);
+					addCollidedSprite(right);
+				}
+				if(up!=null)
+				{	previousDirection = usedDirection;
+					usedDirection = usedDirection.drop(Direction.UP);
+					addCollidedSprite(up);
+				}
+			}
+		}
+		while(down!=null && left!=null && right!=null && up!=null && usedDirection!=Direction.NONE);
+// TODO : pb >> faut pas juste changer la direction autorisée, il faut changer la trajectoire du beans de manière à éviter l'obstacle...			
+/*		
 		for(PotentialObstacle po: pos)
 		{	Sprite s = po.getSprite();
 			// horizontal component
@@ -471,6 +600,7 @@ public class MoveZone
 			usedDirection = usedDirection.drop(Direction.UP);
 			addCollidedSprite(up);
 		}
+*/		
 	}
 	
 	/**
