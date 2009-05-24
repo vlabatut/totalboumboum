@@ -631,7 +631,18 @@ public class Launcher
 	 * les \ par des / : ça semble marcher tout aussi bien (du moins avec l'éditeur
 	 * d'éclipse)
 	 */
-	
+
+	// **********************************************************
+	// TRAJECTORIES
+	// **********************************************************
+		
+	/*
+	 * TODO
+	 * quand on pose deux bombes en diagonale et qu'on se place dans le cadrant intérieur d'une des cases libres du même carré
+	 * on est bloqué. ce n'est pas vraiment un pb en fait, plus un feature. mais les non-initiés peuvent prendre ça pour un bug.
+	 * (note : point mentionné dans le blog)
+	 */
+
 // **********************************************************
 // THEMES/LEVELS
 // **********************************************************
