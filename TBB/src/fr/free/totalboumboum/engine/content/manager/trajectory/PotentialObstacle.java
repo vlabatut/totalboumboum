@@ -208,15 +208,16 @@ public class PotentialObstacle
 	// PROCESS			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	/**
-	 * Process which corner of this obstacle safe zone will be reached if
-	 * following the direction "move" from the position (x,y). This position
+	 * Process which point on the limit of this obstacle safe zone will be reached if
+	 * the direction "move" is following from the position (x,y). This position
 	 * is supposed to be a contact point, i.e. a point on the enveloppe of
-	 * this obstacle safe zone.
+	 * this obstacle safe zone, or a point inside this safe zone. The direction is supposed
+	 * to be simple (not composite).
 	 * 
 	 * @param x	starting x position
 	 * @param y	starting y position
 	 * @param move	moving direction
-	 * @return	(x,y) position of the safe corner
+	 * @return	(x,y) position of the safe point
 	 */
 	public double[] getSafePosition(double x, double y, Direction move)
 	{	double result[] = {0,0};
