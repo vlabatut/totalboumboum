@@ -694,6 +694,11 @@ public class Launcher
 	 * TODO animes : il faut définir un système de substitution d'image
 	 * de manière à ce qu'il soit impossible d'être pris en défaut
 	 */
+	
+	/*
+	 * TODO introduire une anime/action supplémentaire : en jeu, un joueur
+	 * peut provoquer un autre joueur en déclenchant une animation spécifique.
+	 */
 
 // **********************************************************
 // ABILITIES
@@ -793,9 +798,6 @@ public class Launcher
 	 * - correction du bug d'animation/collision : push ne se déclenche pas
 	 * - correction du bug d'animation : quand le bonhomme va à droite et qu'on appuie sur gauche, y a une espèce de passage droite-gauche très rapide au niveau de l'animation, insuportable
 	 * - mise à niveau du gestionnaire de trajectoire
-	 * 
-	 * - à faire : bug de déplacement. apparemment quand on est juste au bord d'une bombe, ou bien quand on vient de la poser ? apparait lorsque les IA se déplacent dans la zone centrale (sans bloc) des niveaux SBM1 custom.
-	 *   ce bug est dû à l'absence d'assistance au déplacement en cas d'intersection...
 	 *   
 	 * - bug d'affichage quand les flammes se croisent au cours de plusieurs explosions: la dernière n'est pas affichée
 	 * 

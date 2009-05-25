@@ -40,7 +40,7 @@ public abstract class AbstractAbility
 	 */
 	protected boolean frame;
 	/** 
-	 * maximum number of uses of this ability
+	 * maximum number of uses for this ability
 	 * negative uses means no use limit 
 	 * */
 	protected int uses;
