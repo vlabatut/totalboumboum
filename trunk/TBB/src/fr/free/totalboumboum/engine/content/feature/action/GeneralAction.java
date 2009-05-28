@@ -1,4 +1,4 @@
-package fr.free.totalboumboum.engine.content.feature.action.general;
+package fr.free.totalboumboum.engine.content.feature.action;
 
 /*
  * Total Boum Boum
@@ -25,11 +25,6 @@ import java.util.ArrayList;
 import java.util.Iterator;
 
 import fr.free.totalboumboum.engine.content.feature.Direction;
-import fr.free.totalboumboum.engine.content.feature.action.AbstractAction;
-import fr.free.totalboumboum.engine.content.feature.action.Contact;
-import fr.free.totalboumboum.engine.content.feature.action.Orientation;
-import fr.free.totalboumboum.engine.content.feature.action.SpecificAction;
-import fr.free.totalboumboum.engine.content.feature.action.TilePosition;
 
 
 public class GeneralAction extends AbstractAction
