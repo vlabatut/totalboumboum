@@ -1,8 +1,10 @@
 package fr.free.totalboumboum.engine.content.feature.action;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 
 import fr.free.totalboumboum.engine.content.feature.Direction;
+import fr.free.totalboumboum.engine.content.feature.action.appear.GeneralAction;
 
 /*
  * Total Boum Boum
@@ -48,25 +50,6 @@ public abstract class AbstractAction
 	public ActionName getName()
 	{	return name;
 	}
-
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
 	
 	/////////////////////////////////////////////////////////////////
 	// DIRECTIONS		/////////////////////////////////////////////
@@ -172,6 +155,12 @@ public abstract class AbstractAction
 	public void finish()
 	{	if(!finished)
 		{	finished = true;
+			actors.clear();
+			contacts.clear();
+			directions.clear();
+			orientations.clear();
+			targets.clear();
+			tilePositions.clear();
 		}
 	}
 }
