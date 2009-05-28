@@ -1,4 +1,4 @@
-package fr.free.totalboumboum.engine.content.feature;
+package fr.free.totalboumboum.engine.content.feature.action;
 
 /*
  * Total Boum Boum
@@ -22,7 +22,8 @@ package fr.free.totalboumboum.engine.content.feature;
  */
 
 public enum Contact
-{
-	NONE,COLLISION,INTERSECTION;
-	
+{	
+	NONE,
+	COLLISION,
+	INTERSECTION;
 }

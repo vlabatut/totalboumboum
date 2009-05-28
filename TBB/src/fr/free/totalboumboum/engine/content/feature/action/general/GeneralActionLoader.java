@@ -1,4 +1,4 @@
-package fr.free.totalboumboum.engine.content.feature.action;
+package fr.free.totalboumboum.engine.content.feature.action.general;
 
 /*
  * Total Boum Boum
@@ -26,10 +26,11 @@ import java.util.Locale;
 import org.jdom.Attribute;
 import org.jdom.Element;
 
-import fr.free.totalboumboum.engine.content.feature.Contact;
 import fr.free.totalboumboum.engine.content.feature.Direction;
-import fr.free.totalboumboum.engine.content.feature.Orientation;
-import fr.free.totalboumboum.engine.content.feature.TilePosition;
+import fr.free.totalboumboum.engine.content.feature.action.AbstractAction;
+import fr.free.totalboumboum.engine.content.feature.action.Contact;
+import fr.free.totalboumboum.engine.content.feature.action.Orientation;
+import fr.free.totalboumboum.engine.content.feature.action.TilePosition;
 import fr.free.totalboumboum.engine.content.sprite.block.Block;
 import fr.free.totalboumboum.engine.content.sprite.bomb.Bomb;
 import fr.free.totalboumboum.engine.content.sprite.fire.Fire;

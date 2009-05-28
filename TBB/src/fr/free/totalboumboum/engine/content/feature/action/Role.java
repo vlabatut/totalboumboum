@@ -1,4 +1,4 @@
-package fr.free.totalboumboum.engine.content.feature;
+package fr.free.totalboumboum.engine.content.feature.action;
 
 /*
  * Total Boum Boum
@@ -21,8 +21,12 @@ package fr.free.totalboumboum.engine.content.feature;
  * 
  */
 
-public enum Orientation
+public enum Role
 {
-	SAME,OPPOSITE,OTHER;
-	
+	BLOCK,
+	BOMB,
+	FIRE,
+	FLOOR,
+	HERO,
+	ITEM;
 }

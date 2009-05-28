@@ -1,4 +1,4 @@
-package fr.free.totalboumboum.engine.content.feature.action;
+package fr.free.totalboumboum.engine.content.feature.action.appear;
 
 /*
  * Total Boum Boum
@@ -24,99 +24,16 @@ package fr.free.totalboumboum.engine.content.feature.action;
 import java.util.ArrayList;
 import java.util.Iterator;
 
-import fr.free.totalboumboum.engine.content.feature.Contact;
 import fr.free.totalboumboum.engine.content.feature.Direction;
-import fr.free.totalboumboum.engine.content.feature.Orientation;
-import fr.free.totalboumboum.engine.content.feature.TilePosition;
+import fr.free.totalboumboum.engine.content.feature.action.AbstractAction;
+import fr.free.totalboumboum.engine.content.feature.action.Contact;
+import fr.free.totalboumboum.engine.content.feature.action.Orientation;
+import fr.free.totalboumboum.engine.content.feature.action.SpecificAction;
+import fr.free.totalboumboum.engine.content.feature.action.TilePosition;
 
 
 public class GeneralAction extends AbstractAction
 {
-	/** 
-	 * directions of the action 
-	 */
-	private ArrayList<Direction> directions;
-	/** 
-	 * contacts between the actor and the target 
-	 */
-	private ArrayList<Contact> contacts;
-	/** 
-	 * compared directions of the target and the action  
-	 */
-	private ArrayList<Orientation> orientations;
-	/** 
-	 * positions of the target in termes of tile
-	 */
-	private ArrayList<TilePosition> tilePositions;
-	/** 
-	 * roles of the acting sprite 
-	 */
-	private ArrayList<Class<?>> actors;
-	/** 
-	 * role of the targeted sprite 
-	 */
-	private ArrayList<Class<?>> targets;
-
-	public GeneralAction(String name)
-	{	super(name);
-		directions = new ArrayList<Direction>();
-		contacts = new ArrayList<Contact>();
-		orientations = new ArrayList<Orientation>();
-		tilePositions =  new ArrayList<TilePosition>();
-		actors = new ArrayList<Class<?>>(); 		
-		targets = new ArrayList<Class<?>>();
-	}
-	
-	public ArrayList<Direction> getDirections()
-	{	return directions;
-	}
-	public void addDirection(Direction direction)
-	{	directions.add(direction);
-	}
-	
-	public ArrayList<Contact> getContacts()
-	{	return contacts;
-	}
-	public void addContact(Contact contact)
-	{	contacts.add(contact);
-	}
-	
-	public ArrayList<Orientation> getOrientations()
-	{	return orientations;
-	}
-	public void addOrientation(Orientation orientation)
-	{	orientations.add(orientation);
-	}
-	
-	public ArrayList<TilePosition> getTilePositions()
-	{	return tilePositions;
-	}
-	public void addTilePosition(TilePosition tilePosition)
-	{	tilePositions.add(tilePosition);
-	}
-
-	public ArrayList<Class<?>> getActors()
-	{	return actors;
-	}
-	public void addActor(Class<?> actor)
-	{	actors.add(actor);
-	}
-	public void setActor(Class<?> actor)
-	{	actors.clear();
-		actors.add(actor);
-	}
-	
-	public ArrayList<Class<?>> getTargets()
-	{	return targets;
-	}
-	public void addTarget(Class<?> target)
-	{	targets.add(target);
-	}
-	public void setTarget(Class<?> actor)
-	{	targets.clear();
-		targets.add(actor);
-	}
-
 	public String toString()
 	{	String result = name;
 		// actors
