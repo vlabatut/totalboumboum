@@ -23,7 +23,6 @@ package fr.free.totalboumboum.engine.content.feature.action;
 
 import fr.free.totalboumboum.engine.container.tile.Tile;
 import fr.free.totalboumboum.engine.content.feature.Direction;
-import fr.free.totalboumboum.engine.content.feature.action.general.GeneralAction;
 import fr.free.totalboumboum.engine.content.sprite.Sprite;
 
 public class SpecificAction extends AbstractAction

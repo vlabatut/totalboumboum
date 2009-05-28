@@ -22,7 +22,7 @@ package fr.free.totalboumboum.engine.content.feature.ability;
  */
 
 import fr.free.totalboumboum.engine.container.level.Level;
-import fr.free.totalboumboum.engine.content.feature.action.general.GeneralAction;
+import fr.free.totalboumboum.engine.content.feature.action.GeneralAction;
 
 public class ActionAbility extends AbstractAbility
 {	

@@ -24,7 +24,7 @@ package fr.free.totalboumboum.engine.content.feature.permission;
 import java.util.Iterator;
 
 import fr.free.totalboumboum.engine.content.feature.ability.AbstractAbility;
-import fr.free.totalboumboum.engine.content.feature.action.general.GeneralAction;
+import fr.free.totalboumboum.engine.content.feature.action.GeneralAction;
 
 public class TargetPermission extends AbstractActionPermission
 {
