@@ -1,4 +1,4 @@
-package fr.free.totalboumboum.engine.content.feature;
+package fr.free.totalboumboum.engine.content.feature.action;
 
 /*
  * Total Boum Boum
@@ -21,7 +21,9 @@ package fr.free.totalboumboum.engine.content.feature;
  * 
  */
 
-public enum TilePosition
-{
-	SAME,NEIGHBOUR,FAR;
+public enum Orientation
+{	
+	SAME,
+	OPPOSITE,
+	OTHER;
 }

@@ -1,4 +1,4 @@
-package fr.free.totalboumboum.engine.content.feature.event;
+package fr.free.totalboumboum.engine.content.feature.action;
 
 /*
  * Total Boum Boum
@@ -21,26 +21,9 @@ package fr.free.totalboumboum.engine.content.feature.event;
  * 
  */
 
-import fr.free.totalboumboum.engine.content.feature.action.SpecificAction;
-
-public class ActionEvent extends AbstractEvent
+public enum TilePosition
 {	
-	private SpecificAction action;
-	
-	public ActionEvent(SpecificAction action)
-	{	this.action = action;	
-	}
-	
-	public SpecificAction getAction()
-	{	return action;	
-	}
-	
-	public void finish()
-	{	if(!finished)
-		{	super.finish();
-			// action
-			action.finish();
-			action = null;
-		}
-	}
+	SAME,
+	NEIGHBOUR,
+	FAR;
 }
