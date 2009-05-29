@@ -137,7 +137,7 @@ public class SpecificAction0 extends AbstractAction
 				else if(actorTile.isNeighbour(targetTile))
 					tilePosition = TilePosition.NEIGHBOUR;
 				else
-					tilePosition = TilePosition.FAR;
+					tilePosition = TilePosition.REMOTE;
 			}
 		}
 	}

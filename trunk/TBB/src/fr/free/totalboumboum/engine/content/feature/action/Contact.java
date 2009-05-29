@@ -20,10 +20,16 @@ package fr.free.totalboumboum.engine.content.feature.action;
  * along with Total Boum Boum.  If not, see <http://www.gnu.org/licenses/>.
  * 
  */
-
+/**
+ * represents the kind of contact between the actor and the target during an action:
+ * 
+ */
 public enum Contact
 {	
+	/** absolutely no contact */
 	NONE,
+	/** the actor and the target are colliding (whichever is moving towards the other) */
 	COLLISION,
+	/** the actor and the target are currently intersecting */ 
 	INTERSECTION;
 }

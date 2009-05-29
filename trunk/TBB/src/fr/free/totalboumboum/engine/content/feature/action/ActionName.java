@@ -1,6 +1,7 @@
 package fr.free.totalboumboum.engine.content.feature.action;
 
-public enum ActionName {
+public enum ActionName
+{
 
 	/** 
 	 * action d'apparaitre de nulle part (suite à téléport, ou drop) 
