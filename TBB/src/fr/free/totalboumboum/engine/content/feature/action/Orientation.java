@@ -21,9 +21,17 @@ package fr.free.totalboumboum.engine.content.feature.action;
  * 
  */
 
+/**
+ * represents the compared directions of the action and of the target
+ * (the levels is closed, so the target direction has to be considered in terms of shortest distance)  
+ */
 public enum Orientation
-{	
+{	/** no orientation can be defined (there's no target) */
+	UNDEFINED,
+	/** the action is performed facing the target */
 	SAME,
+	/** the action is performed back to the target */
 	OPPOSITE,
+	/** the action is not performed facing nor back to the target */
 	OTHER;
 }

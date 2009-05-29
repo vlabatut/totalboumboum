@@ -1,5 +1,9 @@
 package fr.free.totalboumboum.engine.content.feature.action;
 
+import java.util.ArrayList;
+
+import fr.free.totalboumboum.engine.content.feature.Direction;
+
 /*
  * Total Boum Boum
  * Copyright 2008-2009 Vincent Labatut 
@@ -21,173 +25,182 @@ package fr.free.totalboumboum.engine.content.feature.action;
  * 
  */
 
-import java.util.ArrayList;
-import java.util.Iterator;
+public abstract class GeneralAction<T extends SpecificAction>
+{	
+	
+	//TODO FAR was changed into REMOTE
+	
+//TODO to be removed?	to be replaced by "any" and "nany"
+	public static final String ROLE_ALL = "all";
+	public static final String ROLE_NONE = "none";
+	public static final String DIRECTION_ALL = "all";
+	public static final String CONTACT_ALL = "all";
+	public static final String ORIENTATION_ALL = "all";
+	public static final String TILE_POSITION_ALL = "all";
 
-import fr.free.totalboumboum.engine.content.feature.Direction;
-
-
-public class GeneralAction extends AbstractAction
-{
-	/** 
-	 * directions of the action 
+	/*NOTE
+	 * - there's always a direction (the actor is always facing a direction)
+	 * - there's always an actor
+	 * - there may be no target
+	 * - in that case orientation and tile position are irrelevant
 	 */
-	private ArrayList<Direction> directions;
-	/** 
-	 * contacts between the actor and the target 
-	 */
-	private ArrayList<Contact> contacts;
-	/** 
-	 * compared directions of the target and the action  
-	 */
-	private ArrayList<Orientation> orientations;
-	/** 
-	 * positions of the target in termes of tile
-	 */
-	private ArrayList<TilePosition> tilePositions;
-	/** 
-	 * roles of the acting sprite 
-	 */
-	private ArrayList<Class<?>> actors;
-	/** 
-	 * role of the targeted sprite 
-	 */
-	private ArrayList<Class<?>> targets;
-
-	public GeneralAction(String name)
-	{	super(name);
-		directions = new ArrayList<Direction>();
-		contacts = new ArrayList<Contact>();
-		orientations = new ArrayList<Orientation>();
-		tilePositions =  new ArrayList<TilePosition>();
-		actors = new ArrayList<Class<?>>(); 		
-		targets = new ArrayList<Class<?>>();
+	
+	public GeneralAction(ActionName name)
+	{	this.name = name;
 	}
 	
-	public ArrayList<Direction> getDirections()
+	/////////////////////////////////////////////////////////////////
+	// NAME				/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	/** name of this action */
+	protected ActionName name;
+
+	public ActionName getName()
+	{	return name;
+	}
+	
+	/////////////////////////////////////////////////////////////////
+	// DIRECTIONS		/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	/** directions of the action */
+	private final ArrayList<Direction> directions = new ArrayList<Direction>();
+
+	protected ArrayList<Direction> getDirections()
 	{	return directions;
 	}
-	public void addDirection(Direction direction)
+	
+	protected void addDirection(Direction direction)
 	{	directions.add(direction);
 	}
-	
-	public ArrayList<Contact> getContacts()
+
+	/////////////////////////////////////////////////////////////////
+	// CONTACTS			/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	/** contacts between the actor and the target */
+	private final ArrayList<Contact> contacts = new ArrayList<Contact>();
+
+	protected ArrayList<Contact> getContacts()
 	{	return contacts;
 	}
-	public void addContact(Contact contact)
+
+	protected void addContact(Contact contact)
 	{	contacts.add(contact);
 	}
-	
-	public ArrayList<Orientation> getOrientations()
+
+	/////////////////////////////////////////////////////////////////
+	// ORIENTATIONS		/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	/** compared directions of the target and the action */
+	private final ArrayList<Orientation> orientations = new ArrayList<Orientation>();
+
+	protected ArrayList<Orientation> getOrientations()
 	{	return orientations;
 	}
-	public void addOrientation(Orientation orientation)
+	
+	protected void addOrientation(Orientation orientation)
 	{	orientations.add(orientation);
 	}
+
+	/////////////////////////////////////////////////////////////////
+	// TILE POSITIONS	/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	/** positions of the target in termes of tiles */
+	private final ArrayList<TilePosition> tilePositions =  new ArrayList<TilePosition>();
 	
-	public ArrayList<TilePosition> getTilePositions()
+	protected ArrayList<TilePosition> getTilePosition()
 	{	return tilePositions;
 	}
-	public void addTilePosition(TilePosition tilePosition)
+	
+	protected void addTilePosition(TilePosition tilePosition)
 	{	tilePositions.add(tilePosition);
 	}
 
-	public ArrayList<Class<?>> getActors()
+	/////////////////////////////////////////////////////////////////
+	// ACTORS			/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	/** roles of the acting sprite */
+	private final ArrayList<Role> actors = new ArrayList<Role>();
+	
+	protected ArrayList<Role> getActors()
 	{	return actors;
 	}
-	public void addActor(Class<?> actor)
+	
+	protected void addActor(Role actor)
 	{	actors.add(actor);
 	}
-	public void setActor(Class<?> actor)
+/*	
+	protected void setActor(Role actor)
 	{	actors.clear();
 		actors.add(actor);
 	}
+*/
 	
-	public ArrayList<Class<?>> getTargets()
+	/////////////////////////////////////////////////////////////////
+	// TARGETS			/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	/** role of the targeted sprite */
+	private final ArrayList<Role> targets = new ArrayList<Role>();
+	
+	protected ArrayList<Role> getTargets()
 	{	return targets;
 	}
-	public void addTarget(Class<?> target)
+	
+	protected void addTarget(Role target)
 	{	targets.add(target);
 	}
-	public void setTarget(Class<?> actor)
+/*	
+	protected void setTarget(Role actor)
 	{	targets.clear();
 		targets.add(actor);
 	}
-
-	public String toString()
-	{	String result = name;
-		// actors
-		{	result = result+" ( ";
-			Iterator<Class<?>> i = actors.iterator();
-			while(i.hasNext())
-			{	Class<?> a = i.next();
-				result = result + a + " "; 
-			}
-			result = result+">> ";			
-		}
-		// targets
-		{	Iterator<Class<?>> i = targets.iterator();
-			while(i.hasNext())
-			{	Class<?> a = i.next();
-				result = result + a + " "; 
-			}
-			result = result+") ";			
-		}
-		// directions
-		{	result = result+" [ ";
-			Iterator<Direction> i = directions.iterator();
-			while(i.hasNext())
-			{	Direction d = i.next();
-				result = result + d + " "; 
-			}
-			result = result+"] ";
-		}
-		return result;
-	}
-
-/*	
-	public GeneralAction copy()
-	{	GeneralAction result;
-		result = new GeneralAction(name);
-		result.setActor(actor);
-		result.setTarget(target);
-		result.setDirection(direction);
-		result.setContact(contact);
-		result.setOrientation(orientation);
-		result.setTilePosition(tilePosition);
-		return result;
-	}
 */
 	
-	/**
-	 * la specificAction passée en paramètre est elle généralisée par 
-	 * cette generalAction ?
-	 */
-	public boolean subsume(AbstractAction a)
-	{	boolean result;
-		if(a instanceof SpecificAction)
-		{	SpecificAction action = (SpecificAction)a;
-			// name
-			result = name.equalsIgnoreCase(action.getName());
-			// actor
-			if(result)
-				result = actors.contains(action.getActor().getClass());
-			// target
-			if(result && action.getTarget()!=null)
-				result = targets.contains(action.getTarget().getClass());
-			// direction
-			if(result)
-				result = directions.contains(action.getDirection());
-			// contact
-			if(result)
-				result = contacts.contains(action.getContact());
-			// orientation
-			if(result)
-				result = orientations.contains(action.getOrientation());
-			// tile position
-			if(result)
-				result = tilePositions.contains(action.getTilePosition());
+	/////////////////////////////////////////////////////////////////
+	// FINISHED			/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	protected boolean finished = false;
+	
+	public void finish()
+	{	if(!finished)
+		{	finished = true;
+			actors.clear();
+			contacts.clear();
+			directions.clear();
+			orientations.clear();
+			targets.clear();
+			tilePositions.clear();
 		}
+	}
+
+	/////////////////////////////////////////////////////////////////
+	// SPECIFIC ACTION	/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	/**
+	 * tests if this GeneralAction is more general than the specified SpecificAction
+	 */
+	public boolean subsume(T action)
+	{	boolean result;
+		// name
+		result = name == action.getName();
+		// actor
+		if(result)
+			result = actors.contains(action.getActor());
+		// target
+		if(result)
+			result = targets.contains(action.getTarget());
+		// direction
+		if(result)
+			result = directions.contains(action.getDirection());
+		// contact
+		if(result)
+			result = contacts.contains(action.getContact());
+		// orientation
+		if(result)
+			result = orientations.contains(action.getOrientation());
+		// tile position
+		if(result)
+			result = tilePositions.contains(action.getTilePosition());
+/*	
 		else //if(a instanceof GeneralAction)
 		{	GeneralAction action = (GeneralAction)a;
 			// name
@@ -211,67 +224,83 @@ public class GeneralAction extends AbstractAction
 			if(result)
 				result = tilePositions.containsAll(action.getTilePositions());
 		}
+*/		
 		return result;
-	}
+	}	
 
-	public void finish()
-	{	if(!finished)
-		{	super.finish();
-			// misc
-			actors = null;
-			contacts = null;
-			directions = null;
-			orientations = null;
-			targets = null;
-			tilePositions = null;
-		}
-	}
-	
-	public GeneralAction copy()
-	{	GeneralAction result = new GeneralAction(name);
+	/////////////////////////////////////////////////////////////////
+	// STRING			/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	public String toString()
+	{	String result = name.toString();
 		// actors
-		{	Iterator<Class<?>> i = actors.iterator();
-			while(i.hasNext())
-			{	Class<?> a = i.next();
-				result.addActor(a);
-			}
-		}
-		// contacts
-		{	Iterator<Contact> i = contacts.iterator();
-			while(i.hasNext())
-			{	Contact c = i.next();
-				result.addContact(c); 
-			}
-		}
-		// orientations
-		{	Iterator<Orientation> i = orientations.iterator();
-			while(i.hasNext())
-			{	Orientation o = i.next();
-				result.addOrientation(o); 
-			}
+		{	result = result+" ( ";
+			for(Role r: actors)
+				result = result + r.toString() + " "; 
+			result = result+">> ";			
 		}
 		// targets
-		{	Iterator<Class<?>> i = targets.iterator();
-			while(i.hasNext())
-			{	Class<?> t = i.next();
-				result.addTarget(t); 
-			}
+		{	for(Role r: targets)
+				result = result + r.toString() + " "; 
+			result = result+") ";			
 		}
 		// directions
-		{	Iterator<Direction> i = directions.iterator();
-			while(i.hasNext())
-			{	Direction d = i.next();
-				result.addDirection(d);
-			}
+		{	result = result+" [ ";
+			for(Direction d: directions)
+				result = result + d.toString() + " "; 
+			result = result+"] ";
+		}
+		// contacts
+		{	result = result+" [ ";
+			for(Contact c: contacts)
+				result = result + c.toString() + " "; 
+			result = result+"] ";
+		}
+		// orientations
+		{	result = result+" [ ";
+			for(Orientation o: orientations)
+				result = result + o.toString() + " "; 
+			result = result+"] ";
+		}
+		// tile
+		{	result = result+" [ ";
+			for(TilePosition t: tilePositions)
+				result = result + t.toString() + " "; 
+			result = result+"] ";
+		}
+		return result;
+	}
+	
+	/////////////////////////////////////////////////////////////////
+	// COPY				/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	public abstract T copy(T action);
+	
+	protected void copy(GeneralAction<?> or, GeneralAction<?> cp)
+	{	// actors
+		{	for(Role a: actors)
+				cp.addActor(a);
+		}
+		// contacts
+		{	for(Contact c: contacts)
+				cp.addContact(c);
+		}
+		// orientations
+		{	for(Orientation o: orientations)
+			cp.addOrientation(o);
+		}
+		// targets
+		{	for(Role t: targets)
+				cp.addActor(t);
+		}
+		// directions
+		{	for(Direction d: directions)
+				cp.addDirection(d);
 		}
 		// tile positions
-		{	Iterator<TilePosition> i = tilePositions.iterator();
-			while(i.hasNext())
-			{	TilePosition tp = i.next();
-				result.addTilePosition(tp);
-			}
+		{	for(TilePosition tp: tilePositions)
+				cp.addTilePosition(tp);
 		}
-		result.finished = finished;
-		return result;
+		cp.finished = finished;
 	}
 }

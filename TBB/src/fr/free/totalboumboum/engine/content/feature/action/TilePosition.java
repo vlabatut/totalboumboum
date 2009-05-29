@@ -21,9 +21,16 @@ package fr.free.totalboumboum.engine.content.feature.action;
  * 
  */
 
+/**
+ * relative positions of the actor and the target, expressed in terms of tiles.
+ */
 public enum TilePosition
-{	
+{	/** no position can be defined (there's no target) */
+	UNDEFINED,
+	/** the actor and target are together in the same tile */
 	SAME,
+	/** the actor and target are in neighbor tiles */
 	NEIGHBOUR,
-	FAR;
+	/** the actor and target are in remote tiles */
+	REMOTE;
 }

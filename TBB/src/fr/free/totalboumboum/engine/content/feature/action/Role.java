@@ -21,12 +21,22 @@ package fr.free.totalboumboum.engine.content.feature.action;
  * 
  */
 
+/**
+ * represents the role of the actor or the target during an action.
+ */
 public enum Role
-{
+{	/** no object required (likely: no target) */
+	NONE,
+	/** the actor or target is a block sprite */
 	BLOCK,
+	/** the actor or target is a bomb sprite */
 	BOMB,
+	/** the actor or target is a fire sprite */
 	FIRE,
+	/** the actor or target is a floor sprite */
 	FLOOR,
+	/** the actor or target is a hero sprite */
 	HERO,
+	/** the actor or target is an item sprite */
 	ITEM;
 }
