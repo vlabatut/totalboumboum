@@ -32,7 +32,7 @@ import fr.free.totalboumboum.engine.content.feature.action.SpecificAction;
 import fr.free.totalboumboum.engine.content.feature.action.TilePosition;
 
 
-public class GeneralAction extends AbstractAction
+public class GeneralAction0 extends AbstractAction
 {
 
 /*	

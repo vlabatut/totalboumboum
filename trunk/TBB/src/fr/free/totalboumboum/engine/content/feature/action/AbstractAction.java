@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.Iterator;
 
 import fr.free.totalboumboum.engine.content.feature.Direction;
-import fr.free.totalboumboum.engine.content.feature.action.appear.GeneralAction;
+import fr.free.totalboumboum.engine.content.feature.action.appear.GeneralAction0;
 
 /*
  * Total Boum Boum
