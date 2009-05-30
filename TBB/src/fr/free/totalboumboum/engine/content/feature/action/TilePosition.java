@@ -1,5 +1,8 @@
 package fr.free.totalboumboum.engine.content.feature.action;
 
+import fr.free.totalboumboum.engine.container.tile.Tile;
+import fr.free.totalboumboum.engine.content.sprite.Sprite;
+
 /*
  * Total Boum Boum
  * Copyright 2008-2009 Vincent Labatut 
@@ -25,7 +28,7 @@ package fr.free.totalboumboum.engine.content.feature.action;
  * relative positions of the actor and the target, expressed in terms of tiles.
  */
 public enum TilePosition
-{	/** no position can be defined (there's no target) */
+{	/** no position can be defined: there's no target, or it has no tile, or the actor has no tile */
 	UNDEFINED,
 	/** the actor and target are together in the same tile */
 	SAME,
@@ -33,4 +36,32 @@ public enum TilePosition
 	NEIGHBOUR,
 	/** the actor and target are in remote tiles */
 	REMOTE;
+	
+	/**
+	 * returns the relative positions of the actor and target tiles,
+	 * or SAME if the actor has no tile but the target has one,
+	 * or UNDEFINED if there's no target or if it has no tile. 
+	 */
+	public static TilePosition getTilePosition(Sprite actor, Sprite target)
+	{	TilePosition result;
+		Tile actorTile = actor.getTile();
+		Tile targetTile = null;
+		if(target!=null)
+			targetTile = target.getTile();
+		// tile position is undefined
+		if(actorTile==null || targetTile==null)
+			result = TilePosition.UNDEFINED;
+		else	
+		{	// same tile
+			if(actorTile==targetTile)
+				result = TilePosition.SAME;
+			// neighbor tiles
+			else if(actorTile.isNeighbour(targetTile))
+				result = TilePosition.NEIGHBOUR;
+			// not neighbor tiles
+			else
+				result = TilePosition.REMOTE;
+		}
+		return result;
+	}	
 }

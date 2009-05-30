@@ -1,5 +1,7 @@
 package fr.free.totalboumboum.engine.content.feature.action;
 
+import fr.free.totalboumboum.engine.content.sprite.Sprite;
+
 /*
  * Total Boum Boum
  * Copyright 2008-2009 Vincent Labatut 
@@ -26,10 +28,28 @@ package fr.free.totalboumboum.engine.content.feature.action;
  */
 public enum Contact
 {	
-	/** absolutely no contact */
+	/** absolutely no contact, or contact undefined (because there's no target) */
 	NONE,
 	/** the actor and the target are colliding (whichever is moving towards the other) */
 	COLLISION,
 	/** the actor and the target are currently intersecting */ 
 	INTERSECTION;
+	
+	/**
+	 * returns the contact type, or NONE if the target is null
+	 * 
+	 * @param actor	sprite performing the action
+	 * @param target	sprite undergoing the action
+	 * @return	contact of the action
+	 */
+	public static Contact getContact(Sprite actor, Sprite target)
+	{	Contact result;
+		if(actor.isCollidingSprite(target))
+			result = Contact.COLLISION;
+		else if((actor.isIntersectingSprite(target)))
+			result = Contact.INTERSECTION;
+		else
+			result = Contact.NONE;
+		return result;
+	}	
 }
