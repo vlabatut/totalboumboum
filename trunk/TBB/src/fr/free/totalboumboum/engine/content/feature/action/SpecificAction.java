@@ -25,40 +25,11 @@ import fr.free.totalboumboum.engine.container.tile.Tile;
 import fr.free.totalboumboum.engine.content.feature.Direction;
 import fr.free.totalboumboum.engine.content.sprite.Sprite;
 
-public class SpecificAction extends AbstractAction
+public abstract class SpecificAction<T extends GeneralAction<?>>
 {
-	/** 
-	 * direction of the action 
-	 */
-	private Direction direction;
-	/** 
-	 * contact between the actor and the target 
-	 */
-	private Contact contact;
-	/** 
-	 * compared directions of the target and the action  
-	 */
-	private Orientation orientation;
-	/** 
-	 * position of the target in termes of tile
-	 */
-	private TilePosition tilePosition;
-	/** 
-	 * role of the acting sprite 
-	 */
-	private Sprite actor;
-	/** 
-	 * role of the targeted sprite 
-	 */
-	private Sprite target;
-	/**
-	 * generalisation of this specific action
-	 */
-	private GeneralAction generalAction;
-
-	@SuppressWarnings("unused")
-	private SpecificAction(String name)
-	{	super(name);
+/*	
+	private SpecificAction(ActionName name)
+	{	this.name = name;
 		actor = null;
 		target = null;
 		direction = null;
@@ -66,84 +37,135 @@ public class SpecificAction extends AbstractAction
 		tilePosition = null;
 		orientation = null;
 	}
-	public SpecificAction(String name, Sprite actor, Sprite target, Direction direction)
-	{	super(name);
+*/
+	/**
+	 * light action, probably just used for a doability test
+	 */
+	public SpecificAction(ActionName name, Sprite actor)
+	{	this(name,actor,null);		
+	}
+
+	/**
+	 * automatic initialization
+	 * @param name
+	 * @param actor
+	 * @param target
+	 */
+	public SpecificAction(ActionName name, Sprite actor, Sprite target)
+	{	this.name = name;
 		this.actor = actor;
 		this.target = target;
-		this.direction = direction;
-		updateContact();
-		updateTilePosition();
-		updateOrientation();
-		updateGeneralAction();
+		this.direction = actor.getCurrentFacingDirection();
+		this.contact = Contact.getContact(actor,target);
+		this.tilePosition = TilePosition.getTilePosition(actor,target);
+		this.orientation = Orientation.getOrientation(actor,target);
+		initGeneralAction();
 	}
-	public SpecificAction(String name, Sprite actor, Sprite target, Direction direction, Contact contact, TilePosition tilePosition, Orientation orientation)
-	{	super(name);
+	
+	/**
+	 * manual initialization
+	 * @param name
+	 * @param actor
+	 * @param target
+	 * @param direction
+	 * @param contact
+	 * @param tilePosition
+	 * @param orientation
+	 */
+	public SpecificAction(ActionName name, Sprite actor, Sprite target, Direction direction, Contact contact, TilePosition tilePosition, Orientation orientation)
+	{	this.name = name;
 		this.actor = actor;
 		this.target = target;
 		this.direction = direction;
 		this.contact = contact;
 		this.tilePosition = tilePosition;
 		this.orientation = orientation;
-		updateGeneralAction();
+		initGeneralAction();
+	}
+
+	/////////////////////////////////////////////////////////////////
+	// NAME				/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	/** name of this action */
+	protected ActionName name;
+
+	public ActionName getName()
+	{	return name;
 	}
 	
-	/**
-	 * on met en place le type de contact.
-	 * s'il n'y a pas de cible, le contact est NONE
-	 */
-	private void updateContact()
-	{	if(actor.isCollidingSprite(target))
-			contact = Contact.COLLISION;
-		else if((actor.isIntersectingSprite(target)))
-			contact = Contact.INTERSECTION;
-		else
-			contact = Contact.NONE;
-	}	
-	
-	/**
-	 * on met en place l'orientation (comparaison de la direction de l'action et
-	 * de la directiond de la cible). s'il n'y a pas de cible, l'orientation
-	 * est NONE. si l'acteur et la cible/case sont
-	 * au même endroit, on considère qu'ils ont la même orientation (SAME).
-	 */
-	private void updateOrientation()
-	{	Direction d = Direction.getCompositeFromSprites(actor,target);
-		if(d==direction || d==Direction.NONE || 
-				(direction.isPrimary() && (d.containsPrimary(direction))))
-			orientation = Orientation.SAME;
-		else if(d == direction.getOpposite())
-			orientation = Orientation.OPPOSITE;
-		else
-			orientation = Orientation.OTHER;
-	}	
-	
-	/**
-	 * détermine la position de la case de la cible relativement à celle de l'acteur.
-	 * S'il n'y a pas de cible, on obtient SAME.
-	 * Si l'acteur n'a pas de case, on obtient aussi SAME.
-	 */
-	private void updateTilePosition()
-	{	Tile actorTile = actor.getTile();
-		if(actorTile == null)
-			tilePosition = TilePosition.SAME;
-		else
-		{	Tile targetTile = null;
-			if(target==null)
-				tilePosition = TilePosition.SAME;
-			else	
-			{	targetTile = target.getTile();
-				if(actorTile==targetTile)
-					tilePosition = TilePosition.SAME;
-				else if(actorTile.isNeighbour(targetTile))
-					tilePosition = TilePosition.NEIGHBOUR;
-				else
-					tilePosition = TilePosition.REMOTE;
-			}
-		}
+	/////////////////////////////////////////////////////////////////
+	// DIRECTION		/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	/** direction of the action */
+	private Direction direction;
+
+	public Direction getDirection()
+	{	return direction;
 	}
 	
-	private void updateGeneralAction()
+	/////////////////////////////////////////////////////////////////
+	// CONTACT			/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	/** contact between the actor and the target */
+	private Contact contact;
+
+	public Contact getContact()
+	{	return contact;
+	}
+	
+	/////////////////////////////////////////////////////////////////
+	// ORIENTATION		/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	/** compared directions of the target and the action */
+	private Orientation orientation;
+
+	public Orientation getOrientation()
+	{	return orientation;
+	}
+	
+	/////////////////////////////////////////////////////////////////
+	// TILE POSITION	/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	/** position of the target in termes of tiles */
+	private TilePosition tilePosition;
+
+	public TilePosition getTilePosition()
+	{	return tilePosition;
+	}
+
+	/////////////////////////////////////////////////////////////////
+	// ACTOR			/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	/** sprite performing the action */
+	private Sprite actor;
+
+	public Sprite getActor()
+	{	return actor;
+	}
+	
+	/////////////////////////////////////////////////////////////////
+	// TARGET			/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	/** sprite targeted by the action */
+	private Sprite target;
+
+	public Sprite getTarget()
+	{	return target;
+	}
+
+	/////////////////////////////////////////////////////////////////
+	// GENERAL ACTION	/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	/** generalisation of this specific action */
+	private T generalAction;
+
+	public T getGeneralAction()
+	{	return generalAction;
+	}
+	
+	private void initGeneralAction()
 	{	//NOTE à virer car remplacé par allowAction dans permission ?
+		//NOTE is it actually used? (we have GeneralAction.subsume)
 		generalAction = new GeneralAction(name);
 		generalAction.addActor(actor.getClass());
 		generalAction.addDirection(direction);
@@ -154,50 +176,9 @@ public class SpecificAction extends AbstractAction
 			generalAction.addTarget(target.getClass());
 	}
 	
-	public Direction getDirection()
-	{	return direction;
-	}
-	public void setDirection(Direction direction)
-	{	this.direction = direction;
-	}
-	
-	public Contact getContact()
-	{	return contact;
-	}
-	public void setContact(Contact contact)
-	{	this.contact = contact;
-	}
-	
-	public Orientation getOrientation()
-	{	return orientation;
-	}
-	public void setOrientation(Orientation orientation)
-	{	this.orientation = orientation;
-	}
-	
-	public TilePosition getTilePosition()
-	{	return tilePosition;
-	}
-	public void setTilePosition(TilePosition tilePosition)
-	{	this.tilePosition = tilePosition;
-	}
-
-	public Sprite getActor()
-	{	return actor;
-	}
-	@SuppressWarnings("unused")
-	private void setActor(Sprite actor)
-	{	this.actor = actor;		
-	}
-	
-	public Sprite getTarget()
-	{	return target;
-	}
-	@SuppressWarnings("unused")
-	private void setTarget(Sprite target)
-	{	this.target = target;		
-	}
-	
+	/////////////////////////////////////////////////////////////////
+	// COMPARISON		/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
 	public boolean equals(Object action)
 	{	boolean result = false;
 		if(action instanceof SpecificAction)
@@ -226,9 +207,17 @@ public class SpecificAction extends AbstractAction
 		return result;
 	}
 	
+	/////////////////////////////////////////////////////////////////
+	// STRING			/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
 	public String toString()
-	{	String result = name+"("+actor+">"+target;
-		result = result+","+direction+")";
+	{	String result = name + "(";
+		result = result + actor + " > ";
+		result = result + target + " ";
+		result = result + "["+direction+"] ";
+		result = result + "["+contact+"] ";
+		result = result + "["+orientation+"] ";
+		result = result + "["+tilePosition+"])";			
 		return result;
 	}
 /*	
@@ -245,21 +234,18 @@ public class SpecificAction extends AbstractAction
 		return result;
 	}
 */
-	public void setGeneralAction(GeneralAction generalAction)
-	{	this.generalAction = generalAction;
-	}
-	public GeneralAction getGeneralAction()
-	{	return generalAction;
-	}
+
+	/////////////////////////////////////////////////////////////////
+	// FINISHED			/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	protected boolean finished = false;
 
 	public void finish()
 	{	if(!finished)
-		{	super.finish();
+		{	finished = true;
 			// general action
-			if(generalAction!=null)
-			{	generalAction.finish();
-				generalAction = null;
-			}
+			generalAction.finish();
+			generalAction = null;
 			// misc
 			actor = null;
 			contact = null;

@@ -43,6 +43,8 @@ public class AnimeManager
 	private AnimeDirection currentAnime;
 	/** pas courrant */
 	private AnimeStep currentStep;
+	/** current facing direction */
+	private Direction currentDirection = Direction.NONE;
 	/** indique que l'animation est finie (on reste sur la dernière image) */
 	private boolean isTerminated;
 	
@@ -90,7 +92,8 @@ public class AnimeManager
 	 * 	- s'il n'y a pas reinit, forcedDuration n'est pas pris en compte...  
 	 */
 	public void setGesture(String gesture, Direction direction, boolean reinit, double forcedDuration)
-	{	currentAnime = animePack.getAnimeDirection(gesture, direction);
+	{	currentDirection = direction;
+		currentAnime = animePack.getAnimeDirection(gesture,currentDirection);
 		if(reinit)
 		{	isTerminated = false;
 			animeDuration = currentAnime.getTotalDuration();
@@ -252,6 +255,10 @@ public class AnimeManager
 	
 	public boolean isTerminated()
 	{	return isTerminated;	
+	}
+	
+	public Direction getCurrentDirection()
+	{	return currentDirection;		
 	}
 	
 /* ********************************

@@ -331,6 +331,9 @@ public abstract class Sprite
 	public BufferedImage getCurrentImage()
 	{	return animeManager.getCurrentImage();	
 	}
+	public Direction getCurrentFacingDirection()
+	{	return animeManager.getCurrentDirection();	
+	}
 	public boolean hasShadow()
 	{	return animeManager.hasShadow();
 	}	

@@ -25,12 +25,16 @@ import fr.free.totalboumboum.engine.content.feature.Direction;
  * 
  */
 
-public abstract class GeneralAction<T extends SpecificAction>
+public abstract class GeneralAction<T extends SpecificAction<?>>
 {	
 	
-	//TODO FAR was changed into REMOTE
+	/* NOTE in tile position: 
+	 * 	- FAR was changed into REMOTE, 
+	 * 	- the meaning of same was changed (before no tile for actor -> same), 
+	 * 	- undefined was added 
+	 */
 	
-//TODO to be removed?	to be replaced by "any" and "nany"
+	//NOTE to be removed?	to be replaced by "any" and "nany"
 	public static final String ROLE_ALL = "all";
 	public static final String ROLE_NONE = "none";
 	public static final String DIRECTION_ALL = "all";
@@ -39,7 +43,7 @@ public abstract class GeneralAction<T extends SpecificAction>
 	public static final String TILE_POSITION_ALL = "all";
 
 	/*NOTE
-	 * - there's always a direction (the actor is always facing a direction)
+	 * - there's not always a direction (the actor can perform an undirected gesture)
 	 * - there's always an actor
 	 * - there may be no target
 	 * - in that case orientation and tile position are irrelevant
@@ -228,6 +232,8 @@ public abstract class GeneralAction<T extends SpecificAction>
 		return result;
 	}	
 
+	
+	
 	/////////////////////////////////////////////////////////////////
 	// STRING			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
@@ -237,10 +243,11 @@ public abstract class GeneralAction<T extends SpecificAction>
 		{	result = result+" ( ";
 			for(Role r: actors)
 				result = result + r.toString() + " "; 
-			result = result+">> ";			
 		}
 		// targets
-		{	for(Role r: targets)
+		{	if(targets.size()>0)
+				result = result+">> ";			
+			for(Role r: targets)
 				result = result + r.toString() + " "; 
 			result = result+") ";			
 		}
@@ -274,7 +281,7 @@ public abstract class GeneralAction<T extends SpecificAction>
 	/////////////////////////////////////////////////////////////////
 	// COPY				/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	public abstract T copy(T action);
+	public abstract GeneralAction<?> copy(GeneralAction<?> action);
 	
 	protected void copy(GeneralAction<?> or, GeneralAction<?> cp)
 	{	// actors
