@@ -39,9 +39,9 @@ public abstract class SpecificAction<T extends GeneralAction<?>>
 	}
 */
 	/**
-	 * light action, probably just used for a doability test
+	 * NOTE light action, probably just used for a doability test
 	 */
-	public SpecificAction(ActionName name, Sprite actor)
+	protected SpecificAction(ActionName name, Sprite actor)
 	{	this(name,actor,null);		
 	}
 
@@ -51,7 +51,7 @@ public abstract class SpecificAction<T extends GeneralAction<?>>
 	 * @param actor
 	 * @param target
 	 */
-	public SpecificAction(ActionName name, Sprite actor, Sprite target)
+	protected SpecificAction(ActionName name, Sprite actor, Sprite target)
 	{	this.name = name;
 		this.actor = actor;
 		this.target = target;
@@ -72,7 +72,7 @@ public abstract class SpecificAction<T extends GeneralAction<?>>
 	 * @param tilePosition
 	 * @param orientation
 	 */
-	public SpecificAction(ActionName name, Sprite actor, Sprite target, Direction direction, Contact contact, TilePosition tilePosition, Orientation orientation)
+	protected SpecificAction(ActionName name, Sprite actor, Sprite target, Direction direction, Contact contact, TilePosition tilePosition, Orientation orientation)
 	{	this.name = name;
 		this.actor = actor;
 		this.target = target;
@@ -87,9 +87,9 @@ public abstract class SpecificAction<T extends GeneralAction<?>>
 	// NAME				/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	/** name of this action */
-	protected ActionName name;
+	private ActionName name;
 
-	public ActionName getName()
+	protected ActionName getName()
 	{	return name;
 	}
 	
@@ -97,9 +97,9 @@ public abstract class SpecificAction<T extends GeneralAction<?>>
 	// DIRECTION		/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	/** direction of the action */
-	private Direction direction;
+	private Direction direction = Direction.NONE;
 
-	public Direction getDirection()
+	protected Direction getDirection()
 	{	return direction;
 	}
 	
@@ -107,9 +107,9 @@ public abstract class SpecificAction<T extends GeneralAction<?>>
 	// CONTACT			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	/** contact between the actor and the target */
-	private Contact contact;
+	private Contact contact = Contact.NONE;
 
-	public Contact getContact()
+	protected Contact getContact()
 	{	return contact;
 	}
 	
@@ -117,9 +117,9 @@ public abstract class SpecificAction<T extends GeneralAction<?>>
 	// ORIENTATION		/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	/** compared directions of the target and the action */
-	private Orientation orientation;
+	private Orientation orientation = Orientation.UNDEFINED;
 
-	public Orientation getOrientation()
+	protected Orientation getOrientation()
 	{	return orientation;
 	}
 	
@@ -127,9 +127,9 @@ public abstract class SpecificAction<T extends GeneralAction<?>>
 	// TILE POSITION	/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	/** position of the target in termes of tiles */
-	private TilePosition tilePosition;
+	private TilePosition tilePosition = TilePosition.UNDEFINED;
 
-	public TilePosition getTilePosition()
+	protected TilePosition getTilePosition()
 	{	return tilePosition;
 	}
 
@@ -137,9 +137,9 @@ public abstract class SpecificAction<T extends GeneralAction<?>>
 	// ACTOR			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	/** sprite performing the action */
-	private Sprite actor;
+	private Sprite actor = null;
 
-	public Sprite getActor()
+	protected Sprite getActor()
 	{	return actor;
 	}
 	
@@ -147,9 +147,9 @@ public abstract class SpecificAction<T extends GeneralAction<?>>
 	// TARGET			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	/** sprite targeted by the action */
-	private Sprite target;
+	private Sprite target = null;
 
-	public Sprite getTarget()
+	protected Sprite getTarget()
 	{	return target;
 	}
 
@@ -163,7 +163,7 @@ public abstract class SpecificAction<T extends GeneralAction<?>>
 	{	return generalAction;
 	}
 	
-	private void initGeneralAction()
+	protected void initGeneralAction()
 	{	//NOTE à virer car remplacé par allowAction dans permission ?
 		//NOTE is it actually used? (we have GeneralAction.subsume)
 		generalAction = new GeneralAction(name);
@@ -238,9 +238,9 @@ public abstract class SpecificAction<T extends GeneralAction<?>>
 	/////////////////////////////////////////////////////////////////
 	// FINISHED			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	protected boolean finished = false;
+	private boolean finished = false;
 
-	public void finish()
+	protected void finish()
 	{	if(!finished)
 		{	finished = true;
 			// general action
