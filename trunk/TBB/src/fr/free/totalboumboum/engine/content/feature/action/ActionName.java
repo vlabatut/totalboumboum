@@ -6,37 +6,6 @@ public enum ActionName
 	/** appearing in a tile, coming from nowhere (after a teleport, a drop, at the begining of a round, etc) */
 	APPEAR,
 	
-	/** 
-	 * action de faire brûler un autre objet
-	 * TRANSITIVE
-	 * 
-	 * <p>ABILITY PERFORM
-	 * 	<br>paramètre: actor=self
-	 * 	<br>paramètre: target=oui (général: toutes les classes)
-	 * 	<br>paramètre: direction=N/D
-	 * 	<br>paramètre: strength=bool
-	 * 	<br>paramètre: kind=N/D
-	 * 	<br>paramètre: scope=N/D
-	 * 	<br>paramètre: restriction=N/D
-	 * 
-	 * <p>ABILITY REFUSE
-	 * 	<br>paramètre: actor=oui (fire?)
-	 * 	<br>paramètre: target=N/D
-	 * 	<br>paramètre: direction=N/D
-	 * 	<br>paramètre: strength=bool
-	 * 	<br>paramètre: kind=N/D
-	 * 	<br>paramètre: scope=N/D
-	 * 	<br>paramètre: restriction=N/D
-	 * 
-	 * <p>ABILITY PREVENT
-	 * 	<br>paramètre: actor=oui
-	 * 	<br>paramètre: target=oui
-	 * 	<br>paramètre: direction=N/D
-	 * 	<br>paramètre: strength=bool
-	 * 	<br>paramètre: kind=N/D
-	 * 	<br>paramètre: scope=N/D
-	 * 	<br>paramètre: restriction=N/D
-	 */	
 	/** burning another object, usually performed by fire */
 	CONSUME,
 	

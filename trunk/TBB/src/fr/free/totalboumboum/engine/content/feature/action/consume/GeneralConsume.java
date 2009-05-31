@@ -1,4 +1,4 @@
-package fr.free.totalboumboum.engine.content.feature.action.appear;
+package fr.free.totalboumboum.engine.content.feature.action.consume;
 
 /*
  * Total Boum Boum
@@ -30,40 +30,53 @@ import fr.free.totalboumboum.engine.content.feature.action.Role;
 import fr.free.totalboumboum.engine.content.feature.action.TilePosition;
 
 /** 
- * action d'apparaitre de nulle part (suite à téléport, ou drop) 
- * INTRANSITIVE
+ * action de faire brûler un autre objet
+ * TRANSITIVE
  * 
  * <p>ABILITY PERFORM
- * 	<br>N/D
- * 
- * <p>ABILITY REFUSE
- *  <br>N/D
- *  
- * <p>ABILITY PREVENT
- * 	<br>paramètre: actor=oui
- * 	<br>paramètre: target=oui (floor)
+ * 	<br>paramètre: actor=self
+ * 	<br>paramètre: target=oui (général: toutes les classes)
  * 	<br>paramètre: direction=N/D
  * 	<br>paramètre: strength=bool
  * 	<br>paramètre: kind=N/D
- * 	<br>paramètre: scope=oui
- * 	<br>paramètre: restriction=SPRITE_TRAVERSE
+ * 	<br>paramètre: scope=N/D
+ * 	<br>paramètre: restriction=N/D
+ * 
+ * <p>ABILITY REFUSE
+ * 	<br>paramètre: actor=oui (fire?)
+ * 	<br>paramètre: target=N/D
+ * 	<br>paramètre: direction=N/D
+ * 	<br>paramètre: strength=bool
+ * 	<br>paramètre: kind=N/D
+ * 	<br>paramètre: scope=N/D
+ * 	<br>paramètre: restriction=N/D
+ * 
+ * <p>ABILITY PREVENT
+ * 	<br>paramètre: actor=oui
+ * 	<br>paramètre: target=oui
+ * 	<br>paramètre: direction=N/D
+ * 	<br>paramètre: strength=bool
+ * 	<br>paramètre: kind=N/D
+ * 	<br>paramètre: scope=N/D
+ * 	<br>paramètre: restriction=N/D
  */	
 /** 
- * appearing in a tile, coming from nowhere (after a teleport, a drop, at the begining of a round, etc)
+ * putting fire to another object, usually performed by fire (but not necessarily).
+ * different from detonating, which is performed by bombs and results in the production of fire.
  * 
- * 	<br>actor: 			any
- * 	<br>target: 		any (probably a floor, but not necessarily)
+ * 	<br>actor: 			any (probably fire, but not necessarily)
+ * 	<br>target: 		any
  * 	<br>direction:		any or none
  * 	<br>contact:		any or none
  * 	<br>tilePosition:	any or undefined
  * 	<br>orientation:	any or undefined
  *  
  */
-public class GeneralAppear extends GeneralAction<SpecificAppear>
+public class GeneralConsume extends GeneralAction<SpecificConsume>
 {
 	
-	public GeneralAppear()
-	{	super(ActionName.APPEAR);
+	public GeneralConsume()
+	{	super(ActionName.CONSUME);	
 		Role[] allowedActors = {Role.BLOCK,Role.BOMB,Role.FIRE,Role.FLOOR,Role.HERO,Role.ITEM};
 		setAllowedActors(allowedActors);
 		Role[] allowedTargets = {Role.BLOCK,Role.BOMB,Role.FIRE,Role.FLOOR,Role.HERO,Role.ITEM};
@@ -75,7 +88,7 @@ public class GeneralAppear extends GeneralAction<SpecificAppear>
 		TilePosition[] allowedTilePositions = {TilePosition.UNDEFINED,TilePosition.NEIGHBOR,TilePosition.REMOTE,TilePosition.SAME};
 		setAllowedTilePositions(allowedTilePositions);
 		Orientation[] allowedOrientations = {Orientation.UNDEFINED,Orientation.OPPOSITE,Orientation.OTHER,Orientation.SAME};
-		setAllowedOrientations (allowedOrientations );
+		setAllowedOrientations(allowedOrientations);
 	}
 	
 	/////////////////////////////////////////////////////////////////

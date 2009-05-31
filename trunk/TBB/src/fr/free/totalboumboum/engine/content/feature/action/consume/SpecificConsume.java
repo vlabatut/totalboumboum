@@ -1,4 +1,4 @@
-package fr.free.totalboumboum.engine.content.feature.action.appear;
+package fr.free.totalboumboum.engine.content.feature.action.consume;
 
 /*
  * Total Boum Boum
@@ -27,19 +27,20 @@ import fr.free.totalboumboum.engine.content.feature.action.SpecificAction;
 import fr.free.totalboumboum.engine.content.sprite.Sprite;
 
 /** 
- * appearing in a tile, coming from nowhere (after a teleport, a drop, at the begining of a round, etc)
+ * putting fire to another object, usually performed by fire (but not necessarily).
+ * different from detonating, which is performed by bombs and results in the production of fire.
  * 
- * 	<br>actor: 			any
- * 	<br>target: 		any (probably a floor but not necessarily
+ * 	<br>actor: 			any (probably fire, but not necessarily)
+ * 	<br>target: 		any
  * 	<br>direction:		any or none
  * 	<br>contact:		any or none
  * 	<br>tilePosition:	any or undefined
  * 	<br>orientation:	any or undefined
  *  
  */
-public class SpecificAppear extends SpecificAction<GeneralAppear>
+public class SpecificConsume extends SpecificAction<GeneralConsume>
 {
-	public SpecificAppear(Sprite actor, Sprite target) throws IncompatibleParameterException
-	{	super(ActionName.APPEAR,actor,target);
+	public SpecificConsume(Sprite actor, Sprite target) throws IncompatibleParameterException
+	{	super(ActionName.CONSUME,actor,target);
 	}
 }
