@@ -114,10 +114,10 @@ public class Map {
 			yadversaire = b.getLine();
 			
 
-			AiBlock right = casebombe.getNeighbour(Direction.RIGHT).getBlock();
-			AiBlock up = casebombe.getNeighbour(Direction.UP).getBlock();
-			AiBlock left = casebombe.getNeighbour(Direction.LEFT).getBlock();
-			AiBlock down = casebombe.getNeighbour(Direction.DOWN).getBlock();
+			AiBlock right = casebombe.getNeighbor(Direction.RIGHT).getBlock();
+			AiBlock up = casebombe.getNeighbor(Direction.UP).getBlock();
+			AiBlock left = casebombe.getNeighbor(Direction.LEFT).getBlock();
+			AiBlock down = casebombe.getNeighbor(Direction.DOWN).getBlock();
 
 			if (left == null) {
 				for (int q = 1; q <= b.getRange(); q++) {
@@ -377,12 +377,12 @@ public class Map {
 	public void setbombeposs(int x1, int y1, int range) {
 		matrix[x1][y1] = Etat.BOMBEPOSS;
 
-		AiBlock dr = bomberman.getTile().getNeighbour(Direction.RIGHT)
+		AiBlock dr = bomberman.getTile().getNeighbor(Direction.RIGHT)
 				.getBlock();
-		AiBlock ht = bomberman.getTile().getNeighbour(Direction.UP).getBlock();
-		AiBlock gc = bomberman.getTile().getNeighbour(Direction.LEFT)
+		AiBlock ht = bomberman.getTile().getNeighbor(Direction.UP).getBlock();
+		AiBlock gc = bomberman.getTile().getNeighbor(Direction.LEFT)
 				.getBlock();
-		AiBlock bs = bomberman.getTile().getNeighbour(Direction.DOWN)
+		AiBlock bs = bomberman.getTile().getNeighbor(Direction.DOWN)
 				.getBlock();
 
 		if (gc == null) {

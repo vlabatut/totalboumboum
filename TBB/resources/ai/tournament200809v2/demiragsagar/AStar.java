@@ -44,32 +44,32 @@ public class AStar {
 		//On prend un case et on prend ces voisins qui se trouvent en HAUT,en BAS,a DROITE,a GAUCHE .
 		//Ces voisins qui ne contiennent pas de mur ,pas de feu ou pas de bombe vont etre ces fils 
 		try {
-			if (Functions.isClear(courant.getNeighbour(Direction.UP))) {
-				temp = new Node(courant.getNeighbour(Direction.UP), lastTile);
+			if (Functions.isClear(courant.getNeighbor(Direction.UP))) {
+				temp = new Node(courant.getNeighbor(Direction.UP), lastTile);
 				if(this.getParentLink(temp)==null && !temp.memeCoordonnees(new Node(firstTile)))
 				{
 					result.add(temp);
 					formeLien(courantN, temp);
 				}
 			}
-			if (Functions.isClear(courant.getNeighbour(Direction.DOWN))) {
-				temp = new Node(courant.getNeighbour(Direction.DOWN), lastTile);
+			if (Functions.isClear(courant.getNeighbor(Direction.DOWN))) {
+				temp = new Node(courant.getNeighbor(Direction.DOWN), lastTile);
 				if(this.getParentLink(temp)==null && !temp.memeCoordonnees(new Node(firstTile)))
 				{
 					result.add(temp);
 					formeLien(courantN, temp);
 				}
 			}
-			if (Functions.isClear(courant.getNeighbour(Direction.LEFT))) {
-				temp = new Node(courant.getNeighbour(Direction.LEFT), lastTile);
+			if (Functions.isClear(courant.getNeighbor(Direction.LEFT))) {
+				temp = new Node(courant.getNeighbor(Direction.LEFT), lastTile);
 				if(this.getParentLink(temp)==null && !temp.memeCoordonnees(new Node(firstTile)))
 				{
 					result.add(temp);
 					formeLien(courantN, temp);
 				}
 			}
-			if (Functions.isClear(courant.getNeighbour(Direction.RIGHT))) {
-				temp = new Node(courant.getNeighbour(Direction.RIGHT), lastTile);
+			if (Functions.isClear(courant.getNeighbor(Direction.RIGHT))) {
+				temp = new Node(courant.getNeighbor(Direction.RIGHT), lastTile);
 				if(this.getParentLink(temp)==null && !temp.memeCoordonnees(new Node(firstTile)))
 				{
 					result.add(temp);

@@ -107,7 +107,7 @@ public class Tree {
 		km.checkInterruption();
 		Vector<Link> vLink = new Vector<Link>();
 		AiTile tNode = km.getPercepts().getTile(node.getLine(), node.getCol());
-		ArrayList<AiTile> arrayTile= km.getClearNeighbours(tNode);
+		ArrayList<AiTile> arrayTile= km.getClearNeighbors(tNode);
 		if(arrayTile.size() != 1){
 		if(arrayTile.contains(node.convertToTile()))arrayTile.remove(node.convertToTile());
 		}

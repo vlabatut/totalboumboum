@@ -284,7 +284,7 @@ public class AltayBasaranoglu extends ArtificialIntelligence
 		int heroLine=ownHero.getLine();
 	    int heroCol=ownHero.getCol();
 		if (!isSafe(matriceDefence,heroLine,heroCol)){
-			Collection<AiTile> tiles=zone.getNeighbourTiles(ownHero.getTile());
+			Collection<AiTile> tiles=zone.getNeighborTiles(ownHero.getTile());
 			Iterator<AiTile> itAiTile= tiles.iterator();
 			while(itAiTile.hasNext()){
 				tile=itAiTile.next();
@@ -303,7 +303,7 @@ public class AltayBasaranoglu extends ArtificialIntelligence
 					///*
 					else if(dirOldValue==dirNewValue&&dirNewValue==0&&!tempDir.equals(dirNew)){
 						//daha acik alani sec
-						Collection<AiTile> tiles1=zone.getNeighbourTiles(zone.getNeighbourTile(ownTile, dirNew));
+						Collection<AiTile> tiles1=zone.getNeighborTiles(zone.getNeighborTile(ownTile, dirNew));
 						Iterator<AiTile> itAiTiles1=tiles1.iterator();
 						AiTile tile1;
 						while (itAiTiles1.hasNext()) {
@@ -319,7 +319,7 @@ public class AltayBasaranoglu extends ArtificialIntelligence
 		
 		
 
-		tempTile=ownTile.getNeighbour(tempDir);
+		tempTile=ownTile.getNeighbor(tempDir);
 		nextTile=tempTile;
 
 		Direction direction = zone.getDirection(currentTile,nextTile);
@@ -339,7 +339,7 @@ public class AltayBasaranoglu extends ArtificialIntelligence
 		else{	
 			markVisited(matriceDefence,aiTile.getLine(),aiTile.getCol());
 
-			Collection<AiTile> tiles=getClearNeighbours(aiTile, matriceDefence);//les voisins
+			Collection<AiTile> tiles=getClearNeighbors(aiTile, matriceDefence);//les voisins
 			Iterator<AiTile> itAiTile=tiles.iterator();
 			Collection<AiTile> processTiles = new LinkedList<AiTile>();
 			AiTile tempTile;
@@ -374,14 +374,14 @@ public class AltayBasaranoglu extends ArtificialIntelligence
 		
 	}
 	
-	private Collection<AiTile> getClearNeighbours(AiTile tile, int[][][] matriceDefence) throws StopRequestException
+	private Collection<AiTile> getClearNeighbors(AiTile tile, int[][][] matriceDefence) throws StopRequestException
 	{	checkInterruption(); //APPEL OBLIGATOIRE
 	
 		// liste des cases autour de la case de référence
-		Collection<AiTile> neighbours = getPercepts().getNeighbourTiles(tile);
+		Collection<AiTile> neighbors = getPercepts().getNeighborTiles(tile);
 		// on garde les cases sans bloc ni bombe ni feu
 		ArrayList<AiTile> result = new ArrayList<AiTile>();
-		Iterator<AiTile> it = neighbours.iterator();
+		Iterator<AiTile> it = neighbors.iterator();
 		while(it.hasNext())
 		{	checkInterruption(); //APPEL OBLIGATOIRE
 		
@@ -528,7 +528,7 @@ public class AltayBasaranoglu extends ArtificialIntelligence
 		AiTile tile;
 		AiTile ownTile=currentTile;
 		int dirOldValue=2000, dirNewValue;
-		Collection<AiTile> tiles=getClearNeighbours(currentTile, tempMatrice);
+		Collection<AiTile> tiles=getClearNeighbors(currentTile, tempMatrice);
 		Iterator<AiTile> itAiTile= tiles.iterator();
 		while(itAiTile.hasNext()){
 			tile=itAiTile.next();
@@ -563,34 +563,34 @@ public class AltayBasaranoglu extends ArtificialIntelligence
 		}
 		if(heroLine!=myLine && heroCol!=myCol){
 			if(heroLine-myLine<0){
-				tile=currentTile.getNeighbour(Direction.UP);
+				tile=currentTile.getNeighbor(Direction.UP);
 				if(isSafe(matriceDefence, tile.getLine(), tile.getCol()))
 					result=new AiAction(AiActionName.MOVE, Direction.UP);
 				else{
 					if(heroCol-myCol<0){
-						tile=currentTile.getNeighbour(Direction.LEFT);
+						tile=currentTile.getNeighbor(Direction.LEFT);
 						if(isSafe(matriceDefence, tile.getLine(), tile.getCol()))
 							result=new AiAction(AiActionName.MOVE, Direction.LEFT);
 					}
 					else if(heroCol-myCol>0){
-						tile=currentTile.getNeighbour(Direction.RIGHT);
+						tile=currentTile.getNeighbor(Direction.RIGHT);
 						if(isSafe(matriceDefence, tile.getLine(), tile.getCol()))
 							result=new AiAction(AiActionName.MOVE, Direction.RIGHT);
 					}
 				}
 			}
 			else if(heroLine-myLine>0){
-				tile=(currentTile.getNeighbour(Direction.DOWN));
+				tile=(currentTile.getNeighbor(Direction.DOWN));
 				if(isSafe(matriceDefence, tile.getLine(), tile.getCol()))
 					result=new AiAction(AiActionName.MOVE, Direction.DOWN);
 				else{
 					if(heroCol-myCol<0){
-						tile=currentTile.getNeighbour(Direction.LEFT);
+						tile=currentTile.getNeighbor(Direction.LEFT);
 						if(isSafe(matriceDefence, tile.getLine(), tile.getCol()))
 							result=new AiAction(AiActionName.MOVE, Direction.LEFT);
 					}
 					else if(heroCol-myCol>0){
-						tile=currentTile.getNeighbour(Direction.RIGHT);
+						tile=currentTile.getNeighbor(Direction.RIGHT);
 						if(isSafe(matriceDefence, tile.getLine(), tile.getCol()))
 							result=new AiAction(AiActionName.MOVE, Direction.RIGHT);
 					}
@@ -599,12 +599,12 @@ public class AltayBasaranoglu extends ArtificialIntelligence
 		}else if(myLine==heroLine||myCol==heroCol){
 			if(myLine==heroLine&&heroLine%2==1){
 				if(heroCol-myCol>4){
-					tile=currentTile.getNeighbour(Direction.RIGHT);
+					tile=currentTile.getNeighbor(Direction.RIGHT);
 					if(isSafe(matriceDefence, tile.getLine(), tile.getCol()))
 						result=new AiAction(AiActionName.MOVE, Direction.RIGHT);
 				}
 				else if(myCol-heroCol>4){
-					tile=currentTile.getNeighbour(Direction.LEFT);
+					tile=currentTile.getNeighbor(Direction.LEFT);
 					if(isSafe(matriceDefence, tile.getLine(), tile.getCol()))
 						result=new AiAction(AiActionName.MOVE, Direction.LEFT);
 				}
@@ -613,12 +613,12 @@ public class AltayBasaranoglu extends ArtificialIntelligence
 			}
 			else if(myCol==heroCol&&heroCol%2==0){
 				if(heroLine-myLine>4){
-					tile=currentTile.getNeighbour(Direction.DOWN);
+					tile=currentTile.getNeighbor(Direction.DOWN);
 					if(isSafe(matriceDefence, tile.getLine(), tile.getCol()))
 						result=new AiAction(AiActionName.MOVE, Direction.DOWN);
 				}
 				else if(myLine-heroLine>4){
-					tile=currentTile.getNeighbour(Direction.UP);
+					tile=currentTile.getNeighbor(Direction.UP);
 					if(isSafe(matriceDefence, tile.getLine(), tile.getCol()))
 						result=new AiAction(AiActionName.MOVE, Direction.UP);
 				}

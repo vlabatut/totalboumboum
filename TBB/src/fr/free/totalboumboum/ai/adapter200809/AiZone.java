@@ -235,7 +235,7 @@ public class AiZone
 	 * @param direction	direction dans laquelle le voisin se trouve
 	 * @return	le voisin de la case passée en paramètre et situé dans la direction indiquée
 	 */
-	public AiTile getNeighbourTile(AiTile tile, Direction direction)
+	public AiTile getNeighborTile(AiTile tile, Direction direction)
 	{	AiTile result = null;
 		int c,col=tile.getCol();
 		int l,line=tile.getLine();
@@ -272,14 +272,14 @@ public class AiZone
 	 * @param tile	la case dont on veut les voisins
 	 * @return	la liste des voisins situés en haut, à gauche, en bas et à droite de la case passée en paramètre
 	 */
-	public Collection<AiTile> getNeighbourTiles(AiTile tile)
+	public Collection<AiTile> getNeighborTiles(AiTile tile)
 	{	Collection<AiTile> result = new ArrayList<AiTile>();
 		ArrayList<Direction> directions = Direction.getAllPrimaries();
 		Iterator<Direction> d = directions.iterator();
 		while(d.hasNext())
 		{	Direction dir = d.next();
-			AiTile neighbour = getNeighbourTile(tile, dir);
-			result.add(neighbour);
+			AiTile neighbor = getNeighborTile(tile, dir);
+			result.add(neighbor);
 		}
 		result = Collections.unmodifiableCollection(result);
 		return result;

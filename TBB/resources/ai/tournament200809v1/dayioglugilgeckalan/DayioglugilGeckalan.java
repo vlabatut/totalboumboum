@@ -119,8 +119,8 @@ public class DayioglugilGeckalan extends ArtificialIntelligence
 				safePlace=null;
 			
 			else {
-					Collection<AiTile> neighbours=getClearNeighbours(searchNode);
-					Iterator<AiTile> i = neighbours.iterator();
+					Collection<AiTile> neighbors=getClearNeighbors(searchNode);
+					Iterator<AiTile> i = neighbors.iterator();
 					while (i.hasNext()) {
 						checkInterruption();
 						file.offer(i.next());						
@@ -178,7 +178,7 @@ public class DayioglugilGeckalan extends ArtificialIntelligence
 	private AiTile getNextTile() throws StopRequestException{
 		checkInterruption();
 		
-		ArrayList<AiTile> list = getClearNeighbours(currentTile);
+		ArrayList<AiTile> list = getClearNeighbors(currentTile);
 		Iterator<AiTile> it1 = list.iterator();
 		AiTile temp;
 	    AiTile min=it1.next();
@@ -196,7 +196,7 @@ public class DayioglugilGeckalan extends ArtificialIntelligence
 	{	checkInterruption(); //APPEL OBLIGATOIRE
 	
 		// liste des cases voisines accessibles	
-		ArrayList<AiTile> tiles = getClearNeighbours(currentTile);
+		ArrayList<AiTile> tiles = getClearNeighbors(currentTile);
 		// on sort de la liste la case d'où l'on vient (pour éviter de repasser au même endroit)
 		boolean canGoBack = false;
 		if(tiles.contains(previousTile))
@@ -210,7 +210,7 @@ public class DayioglugilGeckalan extends ArtificialIntelligence
 			AiTile tempTile = null;
 			Direction dir = getPercepts().getDirection(previousTile,currentTile);
 			if(dir!=Direction.NONE)
-			{	tempTile =  getPercepts().getNeighbourTile(currentTile, dir);
+			{	tempTile =  getPercepts().getNeighborTile(currentTile, dir);
 				if(tiles.contains(tempTile))
 					tiles.remove(tempTile);
 			}
@@ -238,14 +238,14 @@ public class DayioglugilGeckalan extends ArtificialIntelligence
 		}
 	}
 	
-	private ArrayList<AiTile> getClearNeighbours(AiTile tile) throws StopRequestException
+	private ArrayList<AiTile> getClearNeighbors(AiTile tile) throws StopRequestException
 	{	checkInterruption(); //APPEL OBLIGATOIRE
 	
 		// liste des cases autour de la case de référence
-		Collection<AiTile> neighbours = getPercepts().getNeighbourTiles(tile);
+		Collection<AiTile> neighbors = getPercepts().getNeighborTiles(tile);
 		// on garde les cases sans bloc ni bombe ni feu
 		ArrayList<AiTile> result = new ArrayList<AiTile>();
-		Iterator<AiTile> it = neighbours.iterator();
+		Iterator<AiTile> it = neighbors.iterator();
 		while(it.hasNext())
 		{	checkInterruption(); //APPEL OBLIGATOIRE
 		
@@ -273,7 +273,7 @@ public class DayioglugilGeckalan extends ArtificialIntelligence
 		// si un obstacle est apparu sur la case destination, on change de destination
 		if(!isClear(nextTile))
 		{	// liste des cases voisines accessibles	
-			ArrayList<AiTile> tiles = getClearNeighbours(currentTile);
+			ArrayList<AiTile> tiles = getClearNeighbors(currentTile);
 			// on sort l'ancienne destination (qui est maintenant bloquée) de la liste
 			if(tiles.contains(nextTile))
 				tiles.remove(nextTile);

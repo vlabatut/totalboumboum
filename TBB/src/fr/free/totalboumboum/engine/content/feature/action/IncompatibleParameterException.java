@@ -1,4 +1,4 @@
-package fr.free.totalboumboum.engine.content.feature.action.appear;
+package fr.free.totalboumboum.engine.content.feature.action;
 
 /*
  * Total Boum Boum
@@ -21,32 +21,25 @@ package fr.free.totalboumboum.engine.content.feature.action.appear;
  * 
  */
 
-import fr.free.totalboumboum.engine.content.feature.action.SpecificAction;
-import fr.free.totalboumboum.engine.content.sprite.floor.Floor;
+public class IncompatibleParameterException extends Exception
+{	private static final long serialVersionUID = 1L;
+	
+	public IncompatibleParameterException(String parameterName, String parameterValue)
+	{	this.parameterName = parameterName;	
+		this.parameterValue = parameterValue;
+	}
 
-/** 
- * action d'apparaitre de nulle part (suite à téléport, ou drop) 
- * INTRANSITIVE
- * 
- * <p>ABILITY PERFORM
- * 	<br>N/D
- * 
- * <p>ABILITY REFUSE
- *  <br>N/D
- *  
- * <p>ABILITY PREVENT
- * 	<br>paramètre: actor=oui
- * 	<br>paramètre: target=oui (floor)
- * 	<br>paramètre: direction=N/D
- * 	<br>paramètre: strength=bool
- * 	<br>paramètre: kind=N/D
- * 	<br>paramètre: scope=oui
- * 	<br>paramètre: restriction=SPRITE_TRAVERSE
- */	
-public class SpecificAppear extends SpecificAction<GeneralAppear>
-{
-	public SpecificAppear(Sprite actor, Floor target)
-	{	
-		
+	/////////////////////////////////////////////////////////////////
+	// PARAMETER		/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	private String parameterName;
+	private String parameterValue;
+
+	public String getParameterName()
+	{	return parameterName;
+	}
+	
+	public String getParameterValue()
+	{	return parameterValue;
 	}
 }

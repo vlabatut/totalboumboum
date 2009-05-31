@@ -546,16 +546,16 @@ result = level.getTile(x, y)==this;
 	{	return posY;
 	}
 	
-	public Tile getNeighbour(Direction direction)
+	public Tile getNeighbor(Direction direction)
 	{	Tile result;
-		result = level.getNeighbourTile(line,col,direction);
+		result = level.getNeighborTile(line,col,direction);
 		return result;
 	}
-	public boolean isNeighbour(Tile n)
-	{	Tile nd = getNeighbour(Direction.DOWN);
-		Tile nl = getNeighbour(Direction.LEFT);
-		Tile nr = getNeighbour(Direction.RIGHT);
-		Tile nu = getNeighbour(Direction.UP);
+	public boolean isNeighbor(Tile n)
+	{	Tile nd = getNeighbor(Direction.DOWN);
+		Tile nl = getNeighbor(Direction.LEFT);
+		Tile nr = getNeighbor(Direction.RIGHT);
+		Tile nu = getNeighbor(Direction.UP);
 		boolean result = n==nd || n==nl || n==nr || n==nu;
 		return result;
 	}

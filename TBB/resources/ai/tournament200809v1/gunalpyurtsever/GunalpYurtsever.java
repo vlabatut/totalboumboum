@@ -20,14 +20,14 @@ import fr.free.totalboumboum.engine.content.feature.Direction;
 public class GunalpYurtsever extends ArtificialIntelligence
 {
 	
-	private ArrayList<AiTile> getClearNeighbours(AiTile head, boolean fire) throws StopRequestException
+	private ArrayList<AiTile> getClearNeighbors(AiTile head, boolean fire) throws StopRequestException
 	{	checkInterruption(); //APPEL OBLIGATOIRE
 	
 		// liste des cases autour de la case de référence
-		Collection<AiTile> neighbours = getPercepts().getNeighbourTiles(head);
+		Collection<AiTile> neighbors = getPercepts().getNeighborTiles(head);
 		// on garde les cases sans bloc ni bombe ni feu
 		ArrayList<AiTile> result = new ArrayList<AiTile>();
-		Iterator<AiTile> it = neighbours.iterator();
+		Iterator<AiTile> it = neighbors.iterator();
 		while(it.hasNext())
 		{	checkInterruption(); //APPEL OBLIGATOIRE
 		
@@ -87,7 +87,7 @@ public class GunalpYurtsever extends ArtificialIntelligence
 		ArrayList<AiTile> tiles = null;
 		
 		try {
-			tiles = getClearNeighbours(head.getAiTile(),true);
+			tiles = getClearNeighbors(head.getAiTile(),true);
 		} catch (StopRequestException e) {
 			
 			e.printStackTrace();
@@ -116,9 +116,9 @@ public class GunalpYurtsever extends ArtificialIntelligence
 				costTile.setmarkVisited(true);
 				try {
 				if(costTile.getCost()>2)
-					tiles = getClearNeighbours(costTile.getAiTile(),false);
+					tiles = getClearNeighbors(costTile.getAiTile(),false);
 				else
-					tiles = getClearNeighbours(costTile.getAiTile(),true);
+					tiles = getClearNeighbors(costTile.getAiTile(),true);
 				
 				} catch (StopRequestException e) {
 				
@@ -173,7 +173,7 @@ public class GunalpYurtsever extends ArtificialIntelligence
 		head.setmarkVisited(true);
 		ArrayList<AiTile> tiles = null;
 		try {
-			tiles = getClearNeighbours(head.getAiTile(),true);
+			tiles = getClearNeighbors(head.getAiTile(),true);
 		} catch (StopRequestException e) {
 			
 			e.printStackTrace();
@@ -196,9 +196,9 @@ public class GunalpYurtsever extends ArtificialIntelligence
 				costTile.setmarkVisited(true);
 				try {
 					if(costTile.getCost()>1)
-						tiles = getClearNeighbours(costTile.getAiTile(),false);
+						tiles = getClearNeighbors(costTile.getAiTile(),false);
 					else
-						tiles = getClearNeighbours(costTile.getAiTile(),true);
+						tiles = getClearNeighbors(costTile.getAiTile(),true);
 				
 				} catch (StopRequestException e) {
 				
@@ -255,50 +255,50 @@ public class GunalpYurtsever extends ArtificialIntelligence
 		int horDif = getPercepts().getHeigh()-line;
 		if(up && right)
 			if(line<verDif)
-				if(this.isClear(targetHero.getTile().getNeighbour(Direction.DOWN)))
-					myNearestTile = targetHero.getTile().getNeighbour(Direction.DOWN);
+				if(this.isClear(targetHero.getTile().getNeighbor(Direction.DOWN)))
+					myNearestTile = targetHero.getTile().getNeighbor(Direction.DOWN);
 				else
-					myNearestTile = targetHero.getTile().getNeighbour(Direction.DOWNLEFT);
+					myNearestTile = targetHero.getTile().getNeighbor(Direction.DOWNLEFT);
 			else
-				if(this.isClear(targetHero.getTile().getNeighbour(Direction.LEFT)))
-					myNearestTile = targetHero.getTile().getNeighbour(Direction.LEFT);
+				if(this.isClear(targetHero.getTile().getNeighbor(Direction.LEFT)))
+					myNearestTile = targetHero.getTile().getNeighbor(Direction.LEFT);
 				else
-					myNearestTile = targetHero.getTile().getNeighbour(Direction.DOWNLEFT);
+					myNearestTile = targetHero.getTile().getNeighbor(Direction.DOWNLEFT);
 		if(up && !right)
 			if(line>col)
-				if(this.isClear(targetHero.getTile().getNeighbour(Direction.DOWN)))
-					myNearestTile = targetHero.getTile().getNeighbour(Direction.DOWN);
+				if(this.isClear(targetHero.getTile().getNeighbor(Direction.DOWN)))
+					myNearestTile = targetHero.getTile().getNeighbor(Direction.DOWN);
 				else
-					myNearestTile = targetHero.getTile().getNeighbour(Direction.DOWNRIGHT);
+					myNearestTile = targetHero.getTile().getNeighbor(Direction.DOWNRIGHT);
 			else
-				if(this.isClear(targetHero.getTile().getNeighbour(Direction.RIGHT)))
-					myNearestTile = targetHero.getTile().getNeighbour(Direction.RIGHT);
+				if(this.isClear(targetHero.getTile().getNeighbor(Direction.RIGHT)))
+					myNearestTile = targetHero.getTile().getNeighbor(Direction.RIGHT);
 				else
-					myNearestTile = targetHero.getTile().getNeighbour(Direction.UPRIGHT);
+					myNearestTile = targetHero.getTile().getNeighbor(Direction.UPRIGHT);
 			
 		if(!up && right)
 			if(horDif>verDif)
-				if(this.isClear(targetHero.getTile().getNeighbour(Direction.UP)))
-					myNearestTile = targetHero.getTile().getNeighbour(Direction.UP);
+				if(this.isClear(targetHero.getTile().getNeighbor(Direction.UP)))
+					myNearestTile = targetHero.getTile().getNeighbor(Direction.UP);
 				else
-					myNearestTile = targetHero.getTile().getNeighbour(Direction.UPLEFT);
+					myNearestTile = targetHero.getTile().getNeighbor(Direction.UPLEFT);
 			else
-				if(this.isClear(targetHero.getTile().getNeighbour(Direction.LEFT)))
-					myNearestTile = targetHero.getTile().getNeighbour(Direction.LEFT);
+				if(this.isClear(targetHero.getTile().getNeighbor(Direction.LEFT)))
+					myNearestTile = targetHero.getTile().getNeighbor(Direction.LEFT);
 				else
-					myNearestTile = targetHero.getTile().getNeighbour(Direction.UPLEFT);
+					myNearestTile = targetHero.getTile().getNeighbor(Direction.UPLEFT);
 		
 		if(!up && !right)
 			if(line>verDif)
-				if(this.isClear(targetHero.getTile().getNeighbour(Direction.UP)))
-					myNearestTile = targetHero.getTile().getNeighbour(Direction.UP);
+				if(this.isClear(targetHero.getTile().getNeighbor(Direction.UP)))
+					myNearestTile = targetHero.getTile().getNeighbor(Direction.UP);
 				else
-					myNearestTile = targetHero.getTile().getNeighbour(Direction.UPRIGHT);
+					myNearestTile = targetHero.getTile().getNeighbor(Direction.UPRIGHT);
 			else
-				if(this.isClear(targetHero.getTile().getNeighbour(Direction.RIGHT)))
-					myNearestTile = targetHero.getTile().getNeighbour(Direction.RIGHT);
+				if(this.isClear(targetHero.getTile().getNeighbor(Direction.RIGHT)))
+					myNearestTile = targetHero.getTile().getNeighbor(Direction.RIGHT);
 				else
-					myNearestTile = targetHero.getTile().getNeighbour(Direction.UPRIGHT);
+					myNearestTile = targetHero.getTile().getNeighbor(Direction.UPRIGHT);
 		
 		//System.out.println("neresi:"+getPercepts().getDirection(targetHero.getTile(),myNearestTile));
 		return myNearestTile;
@@ -320,8 +320,8 @@ public class GunalpYurtsever extends ArtificialIntelligence
 				AiBomb b=it.next();
 				range = b.getRange();
 				dangerTiles.add(b.getTile());
-				Collection<AiTile> bombNeighbours = getPercepts().getNeighbourTiles(b.getTile());
-				for (AiTile t : bombNeighbours) {
+				Collection<AiTile> bombNeighbors = getPercepts().getNeighborTiles(b.getTile());
+				for (AiTile t : bombNeighbors) {
 					checkInterruption(); // APPEL OBLIGATOIRE
 					
 					int i = 0;
@@ -330,7 +330,7 @@ public class GunalpYurtsever extends ArtificialIntelligence
 						checkInterruption(); // APPEL OBLIGATOIRE
 						if(!dangerTiles.contains(t))
 							dangerTiles.add(t);
-						t = getPercepts().getNeighbourTile(t, d);
+						t = getPercepts().getNeighborTile(t, d);
 						i++;
 					}
 				}
@@ -363,7 +363,7 @@ public class GunalpYurtsever extends ArtificialIntelligence
 			
 			AiTile checkingTile = newIterator.next();
 			
-			Collection<AiTile> surroundedTiles = getClearNeighbours(checkingTile,true);
+			Collection<AiTile> surroundedTiles = getClearNeighbors(checkingTile,true);
 			
 			Iterator<AiTile> surroundedIterator = surroundedTiles.iterator();
 			
@@ -423,7 +423,7 @@ public class GunalpYurtsever extends ArtificialIntelligence
 			}
 			if(resultat.getName() == AiActionName.MOVE){
 				
-				Collection<AiTile> sonkontrolTile = getClearNeighbours(zone.getOwnHero().getTile().getNeighbour(resultat.getDirection()),true);
+				Collection<AiTile> sonkontrolTile = getClearNeighbors(zone.getOwnHero().getTile().getNeighbor(resultat.getDirection()),true);
 				if(tilesinDanger.containsAll(sonkontrolTile) && zone.getOwnHero().getTile().getBombs().size() == 0 && sonkontrolTile.size() > 2)
 						resultat = new AiAction(AiActionName.NONE);
 				}
@@ -448,13 +448,13 @@ public class GunalpYurtsever extends ArtificialIntelligence
 			
 			if(
 					((targetHeroesTile.getCol() == zone.getOwnHero().getCol() &&
-					zone.getOwnHero().getTile().getNeighbour(Direction.DOWN).getBlock()==null  &&
-					zone.getOwnHero().getTile().getNeighbour(Direction.UP).getBlock()==null	
+					zone.getOwnHero().getTile().getNeighbor(Direction.DOWN).getBlock()==null  &&
+					zone.getOwnHero().getTile().getNeighbor(Direction.UP).getBlock()==null	
 					) 
 					|| 
 					(targetHeroesTile.getLine() == zone.getOwnHero().getLine() && 
-					zone.getOwnHero().getTile().getNeighbour(Direction.LEFT).getBlock()==null &&
-					zone.getOwnHero().getTile().getNeighbour(Direction.RIGHT).getBlock()==null 
+					zone.getOwnHero().getTile().getNeighbor(Direction.LEFT).getBlock()==null &&
+					zone.getOwnHero().getTile().getNeighbor(Direction.RIGHT).getBlock()==null 
 					))
 					
 				){

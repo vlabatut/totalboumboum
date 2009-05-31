@@ -38,6 +38,13 @@ import fr.free.totalboumboum.tools.XmlTools;
 
 public class GeneralActionLoader
 {	
+	//NOTE to be removed?	to be replaced by "any" and "nany"
+	public static final String ROLE_ALL = "all";
+	public static final String ROLE_NONE = "none";
+	public static final String DIRECTION_ALL = "all";
+	public static final String CONTACT_ALL = "all";
+	public static final String ORIENTATION_ALL = "all";
+	public static final String TILE_POSITION_ALL = "all";
 	
 	public static GeneralAction loadActionElement(Element root) throws ClassNotFoundException
     {	// name

@@ -412,9 +412,9 @@ public class TirtilTomruk extends ArtificialIntelligence {
 			 * DEGISTIRDIM
 			 */
 			ZoneDanger zoneD = new ZoneDanger(this.zone,this);
-			if((zoneD.getZoneArray()[caractere.getTile().getNeighbour(result.getDirection()).getCol()][caractere.getTile().getNeighbour(result.getDirection()).getLine()]
+			if((zoneD.getZoneArray()[caractere.getTile().getNeighbor(result.getDirection()).getCol()][caractere.getTile().getNeighbor(result.getDirection()).getLine()]
 			                                                                                          ==ZoneEnum.FEUPOSSIBLE_TRESDANGEREUX
-			         || zoneD.getZoneArray()[caractere.getTile().getNeighbour(result.getDirection()).getCol()][caractere.getTile().getNeighbour(result.getDirection()).getLine()]
+			         || zoneD.getZoneArray()[caractere.getTile().getNeighbor(result.getDirection()).getCol()][caractere.getTile().getNeighbor(result.getDirection()).getLine()]
 						                                                                                          ==ZoneEnum.FEU)
 					&& zoneD.getZoneArray()[caractere.getTile().getCol()][caractere.getTile().getLine()]!=ZoneEnum.FEUPOSSIBLE_TRESDANGEREUX)
 			{

@@ -134,8 +134,8 @@ public class SpecificAction0 extends AbstractAction
 			{	targetTile = target.getTile();
 				if(actorTile==targetTile)
 					tilePosition = TilePosition.SAME;
-				else if(actorTile.isNeighbour(targetTile))
-					tilePosition = TilePosition.NEIGHBOUR;
+				else if(actorTile.isNeighbor(targetTile))
+					tilePosition = TilePosition.NEIGHBOR;
 				else
 					tilePosition = TilePosition.REMOTE;
 			}

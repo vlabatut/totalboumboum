@@ -32,11 +32,11 @@ public class TileControl {
 	 * @return liste des voisins sans condition
 	 * @throws StopRequestException
 	 */
-	public ArrayList<AiTile> findAllNeighbours(AiTile tile)
+	public ArrayList<AiTile> findAllNeighbors(AiTile tile)
 			throws StopRequestException {
 		as.checkInterruption();
 
-		Iterator<AiTile> iter = as.zone.getNeighbourTiles(tile).iterator();
+		Iterator<AiTile> iter = as.zone.getNeighborTiles(tile).iterator();
 
 		ArrayList<AiTile> tiles = new ArrayList<AiTile>();
 
@@ -69,12 +69,12 @@ public class TileControl {
 	 * @return liste des voisins filtré
 	 * @throws StopRequestException
 	 */
-	public ArrayList<AiTile> filterNeighbours(AiTile tile, boolean bombDanger,
+	public ArrayList<AiTile> filterNeighbors(AiTile tile, boolean bombDanger,
 			boolean bomb, boolean fire, boolean block, boolean enemy,
 			boolean softwall, boolean bonus) throws StopRequestException {
 		as.checkInterruption();
 
-		ArrayList<AiTile> tiles = findAllNeighbours(tile);
+		ArrayList<AiTile> tiles = findAllNeighbors(tile);
 		ArrayList<AiTile> filteredTiles = new ArrayList<AiTile>();
 
 		for (AiTile tempTile : tiles) {
@@ -143,10 +143,10 @@ public class TileControl {
 	 * @return le nombre des voisins de la case donnée
 	 * @throws StopRequestException
 	 */
-	public int getNeighboursCount(AiTile tile) throws StopRequestException {
+	public int getNeighborsCount(AiTile tile) throws StopRequestException {
 		as.checkInterruption();
 
-		ArrayList<AiTile> tiles = this.filterNeighbours(tile, false, false,
+		ArrayList<AiTile> tiles = this.filterNeighbors(tile, false, false,
 				false, false, false, false, false);
 
 		return tiles.size();
@@ -273,7 +273,7 @@ public class TileControl {
 				result = true;
 				break;
 			} else
-				tile = tile.getNeighbour(dir);
+				tile = tile.getNeighbor(dir);
 
 		}
 
@@ -328,22 +328,22 @@ public class TileControl {
 
 		Direction result = null;
 
-		ArrayList<AiTile> tiles = filterNeighbours(tile, true, true, true,
+		ArrayList<AiTile> tiles = filterNeighbors(tile, true, true, true,
 				true, false, true, false);
 		if (tiles.size() == 0)
-			tiles = filterNeighbours(tile, false, true, true, true, false,
+			tiles = filterNeighbors(tile, false, true, true, true, false,
 					true, false);
 
 		for (AiTile neigh : tiles) {
 			as.checkInterruption();
 			Direction dir = null;
-			ArrayList<AiTile> neighbours = null;
+			ArrayList<AiTile> neighbors = null;
 			AiTile tempTile = neigh;
-			while ((neighbours = filterNeighbours(tempTile, false, true, true,
+			while ((neighbors = filterNeighbors(tempTile, false, true, true,
 					true, false, true, false)).size() > 0) {
 
 				as.checkInterruption();
-				Iterator<AiTile> iter = neighbours.iterator();
+				Iterator<AiTile> iter = neighbors.iterator();
 
 				while (iter.hasNext()) {
 					as.checkInterruption();
@@ -353,15 +353,15 @@ public class TileControl {
 						iter.remove();
 				}
 
-				if (neighbours.size() > 0) {
-					// neighbours = sortTiles(neighbours, false);
-					tempTile = neighbours.get(0);
+				if (neighbors.size() > 0) {
+					// neighbors = sortTiles(neighbors, false);
+					tempTile = neighbors.get(0);
 					result = as.zone.getDirection(tile, neigh);
 
 					break;
 				} else {
 					dir = as.zone.getDirection(tile, neigh);
-					tempTile = tempTile.getNeighbour(dir);
+					tempTile = tempTile.getNeighbor(dir);
 				}
 			}
 

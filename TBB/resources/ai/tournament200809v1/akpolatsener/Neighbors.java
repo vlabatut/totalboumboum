@@ -14,7 +14,7 @@ import fr.free.totalboumboum.ai.adapter200809.StopRequestException;
  * @author SenerAkpolat
  *
  */
-public class Neighbours {
+public class Neighbors {
 
 	/** colonne et ligne d'une bombe */
 	int bombCol;
@@ -39,7 +39,7 @@ public class Neighbours {
 
 	
 	/** initialise les champs */
-	public Neighbours(AkpolatSener sa, AiZone zone, AiTile tile)	throws StopRequestException 
+	public Neighbors(AkpolatSener sa, AiZone zone, AiTile tile)	throws StopRequestException 
 	{
 		sa.checkInterruption();
 		
@@ -53,11 +53,11 @@ public class Neighbours {
 	 * @return liste des voisins sans condition
 	 * @throws StopRequestException
 	 */
-	public ArrayList<AiTile> findAllNeighbours() throws StopRequestException 
+	public ArrayList<AiTile> findAllNeighbors() throws StopRequestException 
 	{
 		sa.checkInterruption();
 
-		Iterator<AiTile> iter = zone.getNeighbourTiles(currentTile).iterator();
+		Iterator<AiTile> iter = zone.getNeighborTiles(currentTile).iterator();
 
 		ArrayList<AiTile> tiles = new ArrayList<AiTile>();
 		
@@ -75,11 +75,11 @@ public class Neighbours {
 	 * @return la liste des voisins propres
 	 * @throws StopRequestException
 	 */
-	public ArrayList<AiTile> findCleanNeighbours() throws StopRequestException {
+	public ArrayList<AiTile> findCleanNeighbors() throws StopRequestException {
 		sa.checkInterruption();
 
 		//on prend toutes les voisins et on en elimine
-		ArrayList<AiTile> tiles = findAllNeighbours();
+		ArrayList<AiTile> tiles = findAllNeighbors();
 
 		ArrayList<AiTile> cleanTiles = new ArrayList<AiTile>();
 
@@ -105,7 +105,7 @@ public class Neighbours {
 	 * @return la liste des cases voisines propres qui ne sont pas dans la portée d'une bombe
 	 * @throws StopRequestException
 	 */
-	public ArrayList<AiTile> findNeighboursNotInBombRange()	throws StopRequestException
+	public ArrayList<AiTile> findNeighborsNotInBombRange()	throws StopRequestException
 	{
 		sa.checkInterruption();
 
@@ -114,7 +114,7 @@ public class Neighbours {
 		bombTiles.clear();
 		
 		//premierement on obtient les cases propres
-		ArrayList<AiTile> tiles = findCleanNeighbours();
+		ArrayList<AiTile> tiles = findCleanNeighbors();
 		Iterator<AiTile> iter = tiles.iterator();
 
 		//on considere que la portée d'une bombe est 20 cases
@@ -287,10 +287,10 @@ public class Neighbours {
 	 * @return le nombre des voisins de la case donnée
 	 * @throws StopRequestException
 	 */
-	public int getNeighboursNumber(AiTile tile) throws StopRequestException {
+	public int getNeighborsNumber(AiTile tile) throws StopRequestException {
 		sa.checkInterruption();
 		
-		Collection<AiTile> tiles = this.findCleanNeighbours();
+		Collection<AiTile> tiles = this.findCleanNeighbors();
 		
 		return tiles.size();
 	}

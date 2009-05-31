@@ -47,25 +47,25 @@ public class AStar {
 		Node temp;
 		Node courantN = new Node(courant);
 		try {
-			if (isClear(courant.getNeighbour(Direction.UP))) {
-				temp = new Node(courant.getNeighbour(Direction.UP), lastTile);
+			if (isClear(courant.getNeighbor(Direction.UP))) {
+				temp = new Node(courant.getNeighbor(Direction.UP), lastTile);
 				result.add(temp);
 				formeLien(courantN, temp);
 			}
 
-			if (isClear(courant.getNeighbour(Direction.DOWN))) {
-				temp = new Node(courant.getNeighbour(Direction.DOWN), lastTile);
+			if (isClear(courant.getNeighbor(Direction.DOWN))) {
+				temp = new Node(courant.getNeighbor(Direction.DOWN), lastTile);
 				result.add(temp);
 				formeLien(courantN, temp);
 			}
-			if (isClear(courant.getNeighbour(Direction.LEFT))) {
-				temp = new Node(courant.getNeighbour(Direction.LEFT), lastTile);
+			if (isClear(courant.getNeighbor(Direction.LEFT))) {
+				temp = new Node(courant.getNeighbor(Direction.LEFT), lastTile);
 				result.add(temp);
 				formeLien(courantN, temp);
 			}
 
-			if (isClear(courant.getNeighbour(Direction.RIGHT))) {
-				temp = new Node(courant.getNeighbour(Direction.RIGHT), lastTile);
+			if (isClear(courant.getNeighbor(Direction.RIGHT))) {
+				temp = new Node(courant.getNeighbor(Direction.RIGHT), lastTile);
 				result.add(temp);
 				formeLien(courantN, temp);
 			}

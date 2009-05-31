@@ -65,7 +65,7 @@ public class AkpolatSener extends ArtificialIntelligence {
 
 				target = new Target(this);
 
-				tiles = control.filterNeighbours(currentTile, false, true,
+				tiles = control.filterNeighbors(currentTile, false, true,
 						true, true, false, false, false);
 
 				if ((tiles.size() == 0))
@@ -93,13 +93,13 @@ public class AkpolatSener extends ArtificialIntelligence {
 					if (control.checkTile(bestTile, false, false, false, false,
 							false, true, false)) {
 
-						tiles = control.filterNeighbours(currentTile, false,
+						tiles = control.filterNeighbors(currentTile, false,
 								false, false, true, false, true, false);
 
 						Direction dir = zone.getDirection(currentTile, tiles
 								.get(0));
 
-						tiles = control.filterNeighbours(currentTile, false,
+						tiles = control.filterNeighbors(currentTile, false,
 								false, false, true, false, false, false);
 
 						if (tiles.size() > 0) {
@@ -117,7 +117,7 @@ public class AkpolatSener extends ArtificialIntelligence {
 
 						if (closestTarget instanceof AiItem) {
 							if (control
-									.getNeighboursCount(((AiItem) closestTarget)
+									.getNeighborsCount(((AiItem) closestTarget)
 											.getTile()) > 2) {
 								if (((AiItem) closestTarget).getTile() == currentTile)
 									result = new AiAction(AiActionName.PUNCH);
@@ -130,7 +130,7 @@ public class AkpolatSener extends ArtificialIntelligence {
 						} else {
 							if (target.getHypotenuseToTarget(currentTile) < 1) {
 
-								tiles = control.filterNeighbours(currentTile,
+								tiles = control.filterNeighbors(currentTile,
 										true, false, false, false, false,
 										false, false);
 

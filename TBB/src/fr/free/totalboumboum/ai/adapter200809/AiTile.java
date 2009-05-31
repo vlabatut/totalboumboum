@@ -367,9 +367,9 @@ public class AiTile
 	 * @param direction	direction dans laquelle le voisin se trouve
 	 * @return	le voisin de cette case, situé dans la direction indiquée
 	 */
-	public AiTile getNeighbour(Direction direction)
+	public AiTile getNeighbor(Direction direction)
 	{	AiTile result;
-		result = zone.getNeighbourTile(this,direction);
+		result = zone.getNeighborTile(this,direction);
 		return result;
 	}
 	

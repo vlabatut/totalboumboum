@@ -453,7 +453,7 @@ public class Level
 		int l = rdY%globalHeight;
 		return matrix[l][c];
 	}	
-	public Tile getNeighbourTile(int line, int col, Direction direction)
+	public Tile getNeighborTile(int line, int col, Direction direction)
 	{	Tile result;
 		int c,l;
 		Direction p[] = direction.getPrimaries(); 
@@ -475,16 +475,16 @@ public class Level
 		result = matrix[l][c];
 		return result;
 	}
-	public ArrayList<Tile> getNeighbourTiles(int line, int col)
+	public ArrayList<Tile> getNeighborTiles(int line, int col)
 	{	ArrayList<Tile> resultat = new ArrayList<Tile>();
-		resultat.add(getNeighbourTile(line, col, Direction.LEFT));
-		resultat.add(getNeighbourTile(line, col, Direction.DOWNLEFT));
-		resultat.add(getNeighbourTile(line, col, Direction.DOWN));
-		resultat.add(getNeighbourTile(line, col, Direction.DOWNRIGHT));
-		resultat.add(getNeighbourTile(line, col, Direction.RIGHT));
-		resultat.add(getNeighbourTile(line, col, Direction.UPRIGHT));
-		resultat.add(getNeighbourTile(line, col, Direction.UPLEFT));
-		resultat.add(getNeighbourTile(line, col, Direction.UP));		
+		resultat.add(getNeighborTile(line, col, Direction.LEFT));
+		resultat.add(getNeighborTile(line, col, Direction.DOWNLEFT));
+		resultat.add(getNeighborTile(line, col, Direction.DOWN));
+		resultat.add(getNeighborTile(line, col, Direction.DOWNRIGHT));
+		resultat.add(getNeighborTile(line, col, Direction.RIGHT));
+		resultat.add(getNeighborTile(line, col, Direction.UPRIGHT));
+		resultat.add(getNeighborTile(line, col, Direction.UPLEFT));
+		resultat.add(getNeighborTile(line, col, Direction.UP));		
 		return resultat;
 	}	
 	

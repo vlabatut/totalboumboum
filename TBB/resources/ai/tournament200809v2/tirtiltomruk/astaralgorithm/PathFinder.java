@@ -35,7 +35,7 @@ public class PathFinder {
 			if (tab[target.getCol()][target.getLine()] != ZoneEnum.BLOCDEST
 					&& tab[target.getCol()][target.getLine()] != ZoneEnum.BLOCINDEST) {
 				// Target n'est pas un bloc
-				if (!zone.getNeighbourTiles(zone.getOwnHero().getTile())
+				if (!zone.getNeighborTiles(zone.getOwnHero().getTile())
 						.contains(target)) { // Target n'est pas a cote de nous
 					findPath(tab, zone.getOwnHero().getCol(), zone.getOwnHero()
 							.getLine(), new Noeud(target.getCol(), target
@@ -67,7 +67,7 @@ public class PathFinder {
 			if (tab[target.getCol()][target.getLine()] != ZoneEnum.BLOCDEST
 					&& tab[target.getCol()][target.getLine()] != ZoneEnum.BLOCINDEST) {
 				// Target n'est pas un bloc
-				if (!zone.getNeighbourTiles(depart).contains(target)) { // Target
+				if (!zone.getNeighborTiles(depart).contains(target)) { // Target
 																		// n'est
 																		// pas a
 																		// cote
@@ -113,7 +113,7 @@ public class PathFinder {
 						&& tab[col][line] != ZoneEnum.BLOC_EXPLOSE_SIMULE
 						&& tab[col][line] != ZoneEnum.EXPLOSION_SIMULE) {
 					// Target n'est pas un bloc
-					if (!zone.getNeighbourTiles(depart).contains(target)) { // Target
+					if (!zone.getNeighborTiles(depart).contains(target)) { // Target
 						// n'est pas a cote de nous
 						findPath(tab, depart.getCol(), depart.getLine(),
 								new Noeud(target.getCol(), target.getLine(),
@@ -133,7 +133,7 @@ public class PathFinder {
 				if (tab[target.getCol()][target.getLine()] != ZoneEnum.BLOCDEST
 						&& tab[target.getCol()][target.getLine()] != ZoneEnum.BLOCINDEST) {
 					// Target n'est pas un bloc
-					if (!zone.getNeighbourTiles(depart).contains(target)) { // Target
+					if (!zone.getNeighborTiles(depart).contains(target)) { // Target
 						findPath(tab, depart.getCol(), depart.getLine(),
 								new Noeud(target.getCol(), target.getLine(),
 										tab[target.getCol()][target.getLine()],

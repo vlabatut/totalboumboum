@@ -197,11 +197,11 @@ public class KilicPala extends ArtificialIntelligence
 				
 				try{/*
 				  for(int i=0;i<possibleMoves.size();i++){
-					   if(doYouHaveEmptySideNeighbourg(x, y, possibleMoves.get(i))){
+					   if(doYouHaveEmptySideNeighbor(x, y, possibleMoves.get(i))){
 						   result=possibleMoves.get(i);
 						   break;
 					   } 
-					   else if(doYouHaveEmptyNeighbourg(x, y, possibleMoves.get(i))){
+					   else if(doYouHaveEmptyNeighbor(x, y, possibleMoves.get(i))){
 						   result=possibleMoves.get(i);
 						   break;
 					   }
@@ -217,9 +217,9 @@ public class KilicPala extends ArtificialIntelligence
 								flag=1;
 								
 							}
-							else if(doYouHaveEmptySideNeighbourg(x, y, possibleMoves.get(i)))
+							else if(doYouHaveEmptySideNeighbor(x, y, possibleMoves.get(i)))
 								result=possibleMoves.get(i);
-							else if(doYouHaveEmptyNeighbourg(x, y, possibleMoves.get(i))){
+							else if(doYouHaveEmptyNeighbor(x, y, possibleMoves.get(i))){
 								result=possibleMoves.get(i);
 								
 							}
@@ -233,9 +233,9 @@ public class KilicPala extends ArtificialIntelligence
 							
 								flag=1;
 							}
-							else if(doYouHaveEmptySideNeighbourg(x, y, possibleMoves.get(i)))
+							else if(doYouHaveEmptySideNeighbor(x, y, possibleMoves.get(i)))
 								result=possibleMoves.get(i);
-							else if(doYouHaveEmptyNeighbourg(x, y, possibleMoves.get(i))){
+							else if(doYouHaveEmptyNeighbor(x, y, possibleMoves.get(i))){
 								result=possibleMoves.get(i);
 								
 							}
@@ -249,9 +249,9 @@ public class KilicPala extends ArtificialIntelligence
 								
 								flag=1;
 							}
-							else if(doYouHaveEmptySideNeighbourg(x, y, possibleMoves.get(i)))
+							else if(doYouHaveEmptySideNeighbor(x, y, possibleMoves.get(i)))
 								result=possibleMoves.get(i);
-							else if(doYouHaveEmptyNeighbourg(x, y, possibleMoves.get(i))){
+							else if(doYouHaveEmptyNeighbor(x, y, possibleMoves.get(i))){
 								result=possibleMoves.get(i);
 								
 							}
@@ -265,9 +265,9 @@ public class KilicPala extends ArtificialIntelligence
 								
 								flag=1;
 							}
-							else if(doYouHaveEmptySideNeighbourg(x, y, possibleMoves.get(i)))
+							else if(doYouHaveEmptySideNeighbor(x, y, possibleMoves.get(i)))
 								result=possibleMoves.get(i);
-							else if(doYouHaveEmptyNeighbourg(x, y, possibleMoves.get(i))){
+							else if(doYouHaveEmptyNeighbor(x, y, possibleMoves.get(i))){
 								result=possibleMoves.get(i);
 								
 							}
@@ -498,7 +498,7 @@ public class KilicPala extends ArtificialIntelligence
 	}
 	
 	
-	private boolean doYouHaveEmptyNeighbourg(int x,int y,int move){
+	private boolean doYouHaveEmptyNeighbor(int x,int y,int move){
 		boolean result=false;
 		int xNext;
 		int yNext;
@@ -624,7 +624,7 @@ public class KilicPala extends ArtificialIntelligence
 			if(yPlayer < y1){
 				int count=y1-yPlayer;
 				for(int i=1;i<count;i++){
-					if(doYouHaveWallNeighbourg(xPlayer, yPlayer+i, AI_ACTION_GO_DOWN)){
+					if(doYouHaveWallNeighbor(xPlayer, yPlayer+i, AI_ACTION_GO_DOWN)){
 						result=true;
 						break;
 					}
@@ -634,7 +634,7 @@ public class KilicPala extends ArtificialIntelligence
 			if(yPlayer > y1){
 				int count=yPlayer-y1;
 				for(int i=1;i<count;i++){
-					if(doYouHaveWallNeighbourg(xPlayer, yPlayer-i, AI_ACTION_GO_UP)){
+					if(doYouHaveWallNeighbor(xPlayer, yPlayer-i, AI_ACTION_GO_UP)){
 						result=true;
 						break;
 					}
@@ -646,7 +646,7 @@ public class KilicPala extends ArtificialIntelligence
 			if(xPlayer<x1){
 				int count=x1-xPlayer;
 				for(int i=1;i<count;i++){
-					if(doYouHaveWallNeighbourg(xPlayer+i, yPlayer, AI_ACTION_GO_RIGHT)){
+					if(doYouHaveWallNeighbor(xPlayer+i, yPlayer, AI_ACTION_GO_RIGHT)){
 						result=true;
 						break;
 					}
@@ -655,7 +655,7 @@ public class KilicPala extends ArtificialIntelligence
 			if(xPlayer>x1){
 				int count=xPlayer-x1;
 				for(int i=1;i<count;i++){
-					if(doYouHaveWallNeighbourg(xPlayer-i, yPlayer, AI_ACTION_GO_LEFT)){
+					if(doYouHaveWallNeighbor(xPlayer-i, yPlayer, AI_ACTION_GO_LEFT)){
 						result=true;
 						break;
 					}
@@ -664,7 +664,7 @@ public class KilicPala extends ArtificialIntelligence
 		}
 		return result;
 	}
-	private boolean doYouHaveWallNeighbourg(int x,int y,int move){
+	private boolean doYouHaveWallNeighbor(int x,int y,int move){
 		boolean result=false;
 		int xNext;
 		int yNext;
@@ -715,7 +715,7 @@ public class KilicPala extends ArtificialIntelligence
 		return result;
 		
 	}
-	private boolean doYouHaveEmptySideNeighbourg(int x,int y,int move){
+	private boolean doYouHaveEmptySideNeighbor(int x,int y,int move){
 		boolean result=false;
 		int xNext;
 		int yNext;

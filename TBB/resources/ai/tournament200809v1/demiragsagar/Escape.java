@@ -116,14 +116,14 @@ public class Escape {
 		//System.out.flush();
 		while (matrice[temp.tile.getCol()][temp.tile.getLine()] != 0) {
 			//System.out.println(temp.getLine()+":"+temp.getCol()+"="+matrice[temp.getCol()][temp.getLine()]);
-			if (isClear(temp.tile.getNeighbour(Direction.DOWN)))
-				kuyruk.offer(new Node(temp.tile.getNeighbour(Direction.DOWN),temp.heuristic+1));
-			if (isClear(temp.tile.getNeighbour(Direction.LEFT)))
-				kuyruk.offer(new Node(temp.tile.getNeighbour(Direction.LEFT),temp.heuristic+1));
-			if (isClear(temp.tile.getNeighbour(Direction.UP)))
-				kuyruk.offer(new Node(temp.tile.getNeighbour(Direction.UP),temp.heuristic+1));
-			if (isClear(temp.tile.getNeighbour(Direction.RIGHT)))
-				kuyruk.offer(new Node(temp.tile.getNeighbour(Direction.RIGHT),temp.heuristic+1));
+			if (isClear(temp.tile.getNeighbor(Direction.DOWN)))
+				kuyruk.offer(new Node(temp.tile.getNeighbor(Direction.DOWN),temp.heuristic+1));
+			if (isClear(temp.tile.getNeighbor(Direction.LEFT)))
+				kuyruk.offer(new Node(temp.tile.getNeighbor(Direction.LEFT),temp.heuristic+1));
+			if (isClear(temp.tile.getNeighbor(Direction.UP)))
+				kuyruk.offer(new Node(temp.tile.getNeighbor(Direction.UP),temp.heuristic+1));
+			if (isClear(temp.tile.getNeighbor(Direction.RIGHT)))
+				kuyruk.offer(new Node(temp.tile.getNeighbor(Direction.RIGHT),temp.heuristic+1));
 			temp = kuyruk.poll();
 		}
 		//System.out.println(temp.tile.getLine()+":"+temp.tile.getCol()+"="+matrice[temp.tile.getCol()][temp.tile.getLine()]);
