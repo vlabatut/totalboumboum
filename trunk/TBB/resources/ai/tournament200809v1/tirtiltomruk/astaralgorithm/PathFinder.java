@@ -32,7 +32,7 @@ public class PathFinder {
 			path = new LinkedList<Noeud>();
 		else
 		{
-			if(!zone.getNeighbourTiles(zone.getOwnHero().getTile()).contains(target))
+			if(!zone.getNeighborTiles(zone.getOwnHero().getTile()).contains(target))
 			{		//Target n'est pas a cote de nous
 				findPath(tab,zone.getOwnHero().getCol(),zone.getOwnHero().getLine(),new Noeud(target.getCol(),target.getLine(),tab[target.getCol()][target.getLine()],source));
 			}

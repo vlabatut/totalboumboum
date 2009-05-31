@@ -33,14 +33,6 @@ public abstract class GeneralAction<T extends SpecificAction<?>>
 	 * 	- the meaning of same was changed (before no tile for actor -> same), 
 	 * 	- undefined was added 
 	 */
-	
-	//NOTE to be removed?	to be replaced by "any" and "nany"
-	public static final String ROLE_ALL = "all";
-	public static final String ROLE_NONE = "none";
-	public static final String DIRECTION_ALL = "all";
-	public static final String CONTACT_ALL = "all";
-	public static final String ORIENTATION_ALL = "all";
-	public static final String TILE_POSITION_ALL = "all";
 
 	/*NOTE
 	 * - there's not always a direction (the actor can perform an undirected gesture)
@@ -73,7 +65,7 @@ public abstract class GeneralAction<T extends SpecificAction<?>>
 	{	return directions;
 	}
 	
-	protected void addDirection(Direction direction)
+	protected void addDirection(Direction direction) throws IncompatibleParameterException
 	{	directions.add(direction);
 	}
 
@@ -87,7 +79,7 @@ public abstract class GeneralAction<T extends SpecificAction<?>>
 	{	return contacts;
 	}
 
-	protected void addContact(Contact contact)
+	protected void addContact(Contact contact) throws IncompatibleParameterException
 	{	contacts.add(contact);
 	}
 
@@ -101,7 +93,7 @@ public abstract class GeneralAction<T extends SpecificAction<?>>
 	{	return orientations;
 	}
 	
-	protected void addOrientation(Orientation orientation)
+	protected void addOrientation(Orientation orientation) throws IncompatibleParameterException
 	{	orientations.add(orientation);
 	}
 
@@ -111,11 +103,11 @@ public abstract class GeneralAction<T extends SpecificAction<?>>
 	/** positions of the target in termes of tiles */
 	private final ArrayList<TilePosition> tilePositions =  new ArrayList<TilePosition>();
 	
-	protected ArrayList<TilePosition> getTilePosition()
+	protected ArrayList<TilePosition> getTilePositions()
 	{	return tilePositions;
 	}
 	
-	protected void addTilePosition(TilePosition tilePosition)
+	protected void addTilePosition(TilePosition tilePosition) throws IncompatibleParameterException
 	{	tilePositions.add(tilePosition);
 	}
 
@@ -129,7 +121,7 @@ public abstract class GeneralAction<T extends SpecificAction<?>>
 	{	return actors;
 	}
 	
-	protected void addActor(Role actor)
+	protected void addActor(Role actor) throws IncompatibleParameterException
 	{	actors.add(actor);
 	}
 /*	
@@ -149,7 +141,7 @@ public abstract class GeneralAction<T extends SpecificAction<?>>
 	{	return targets;
 	}
 	
-	protected void addTarget(Role target)
+	protected void addTarget(Role target) throws IncompatibleParameterException
 	{	targets.add(target);
 	}
 /*	
@@ -231,8 +223,6 @@ public abstract class GeneralAction<T extends SpecificAction<?>>
 */		
 		return result;
 	}	
-
-	
 	
 	/////////////////////////////////////////////////////////////////
 	// STRING			/////////////////////////////////////////////

@@ -231,7 +231,7 @@ public class HeroEventManager extends EventManager
 			 && event.getMode())
 		{	// bomb
 			Tile tile = sprite.getTile();
-			Tile neighbour = tile.getNeighbour(spriteDirection);
+			Tile neighbor = tile.getNeighbor(spriteDirection);
 			boolean found = false;
 			// bomb in the same tile ?
 			{	ArrayList<Bomb> bombs = tile.getBombs();
@@ -253,9 +253,9 @@ public class HeroEventManager extends EventManager
 					}
 				}
 			}
-			// if not : in the neighbour tile ?
+			// if not : in the neighbor tile ?
 			if(!found)
-			{	ArrayList<Bomb> bombs = neighbour.getBombs();
+			{	ArrayList<Bomb> bombs = neighbor.getBombs();
 				Iterator<Bomb> i = bombs.iterator();
 				while(!found && i.hasNext())
 				{	Bomb bomb = i.next();

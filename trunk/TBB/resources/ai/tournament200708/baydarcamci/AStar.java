@@ -24,8 +24,8 @@ public class AStar implements PathFinder {
 	int[][] zoneMatrix = new int[15][13];
 	/** The map */
 	
-	/** A current list of neighbours. Optimized for 2D grids to begin with but it will adjust itself */
-	private ArrayList<int[]> neighbours = new ArrayList<int[]>(8);
+	/** A current list of neighbors. Optimized for 2D grids to begin with but it will adjust itself */
+	private ArrayList<int[]> neighbors = new ArrayList<int[]>(8);
 
 	/** The goal node */
 	private Node end;
@@ -223,7 +223,7 @@ public class AStar implements PathFinder {
 	private void cleanup() {
 		openList.clear();
 		closedList.clear();
-		neighbours.clear();
+		neighbors.clear();
 	}
 
 	
@@ -304,20 +304,20 @@ public class AStar implements PathFinder {
 	 */
 	private void goalNotFound(Node n) {
 
-		// We now need to generate the neighbours of this node. We ask the map for the neighbours.
-		// By passing in the parent of the current node we help the map to avoid returning a neighbour
+		// We now need to generate the neighbors of this node. We ask the map for the neighbors.
+		// By passing in the parent of the current node we help the map to avoid returning a neighbor
 		// that simply backtracks.
 	    
-		getNeighbours(n.userState, n.parent.userState , neighbours);
+		getNeighbors(n.userState, n.parent.userState , neighbors);
 
-		int numNeighbours = neighbours.size();
-		for (int i = 0; i < numNeighbours; i ++) {
-			int []newState = (int []) neighbours.get(i);
+		int numNeighbors = neighbors.size();
+		for (int i = 0; i < numNeighbors; i ++) {
+			int []newState = (int []) neighbors.get(i);
 			int newg = n.g + getCost(ownPosition, newState);
 			
 			// Now find the node on the open or closed lists. If it is on a list
 			// already but the node that is already there has a better (lower) g
-			// scrore then forget about this neighbour.
+			// scrore then forget about this neighbor.
 			
 			// First the open list:
 			Node foundOnOpenList = openList.getNode(newState);
@@ -394,7 +394,7 @@ public class AStar implements PathFinder {
 		
 	}
 
-	public void getNeighbours(int [] node, int [] parent, ArrayList<int[]> path)
+	public void getNeighbors(int [] node, int [] parent, ArrayList<int[]> path)
 	{   BaydarCamci bomber = new BaydarCamci();
 	    node=ownPosition;
 	    bomber.getPossibleMoves(ownPosition[0],ownPosition[1]);

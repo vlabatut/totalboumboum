@@ -88,11 +88,11 @@ public class AStarPathFinder implements PathFinder {
 			removeFromOpen(current);
 			addToClosed(current);
 			
-			// search through all the neighbours of the current node evaluating
+			// search through all the neighbors of the current node evaluating
 			// them as next steps
 			for (int x=-1;x<2;x++) {
 				for (int y=-1;y<2;y++) {
-					// not a neighbour, its the current tile
+					// not a neighbor, its the current tile
 					if ((x == 0) && (y == 0)) {
 						continue;
 					}
@@ -105,7 +105,7 @@ public class AStarPathFinder implements PathFinder {
 						}
 					}
 					
-					// determine the location of the neighbour and evaluate it
+					// determine the location of the neighbor and evaluate it
 					int xp = x + current.x;
 					int yp = y + current.y;
 					
@@ -114,30 +114,30 @@ public class AStarPathFinder implements PathFinder {
 						// cost to reach this node. Note that the heursitic value is only used
 						// in the sorted open list
 						float nextStepCost = current.cost + getMovementCost(current.x, current.y, xp, yp);
-						Node neighbour = nodes[xp][yp];
+						Node neighbor = nodes[xp][yp];
 						map.pathFinderVisited(xp, yp);
 						
 						// if the new cost we've determined for this node is lower than 
 						// it has been previously makes sure the node hasn't been discarded. We've
 						// determined that there might have been a better path to get to
 						// this node so it needs to be re-evaluated
-						if (nextStepCost < neighbour.cost) {
-							if (inOpenList(neighbour)) {
-								removeFromOpen(neighbour);
+						if (nextStepCost < neighbor.cost) {
+							if (inOpenList(neighbor)) {
+								removeFromOpen(neighbor);
 							}
-							if (inClosedList(neighbour)) {
-								removeFromClosed(neighbour);
+							if (inClosedList(neighbor)) {
+								removeFromClosed(neighbor);
 							}
 						}
 						
 						// if the node hasn't already been processed and discarded then
 						// reset it's cost to our current cost and add it as a next possible
 						// step (i.e. to the open list)
-						if (!inOpenList(neighbour) && !(inClosedList(neighbour))) {
-							neighbour.cost = nextStepCost;
-							neighbour.heuristic = getHeuristicCost(xp, yp, tx, ty);
-							maxDepth = Math.max(maxDepth, neighbour.setParent(current));
-							addToOpen(neighbour);
+						if (!inOpenList(neighbor) && !(inClosedList(neighbor))) {
+							neighbor.cost = nextStepCost;
+							neighbor.heuristic = getHeuristicCost(xp, yp, tx, ty);
+							maxDepth = Math.max(maxDepth, neighbor.setParent(current));
+							addToOpen(neighbor);
 						}
 					}
 				}

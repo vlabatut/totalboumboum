@@ -68,7 +68,7 @@ public class DeveciogluKorkmaz extends ArtificialIntelligence {
 			Direction direction = null;
 			int myBombs = 0;
 			boolean dontBomb = false;
-			Iterator<AiTile> iterator = getPercepts().getNeighbourTiles(
+			Iterator<AiTile> iterator = getPercepts().getNeighborTiles(
 					currentTile).iterator();
 			while (iterator.hasNext() && !dontBomb) {
 				checkInterruption();
@@ -161,9 +161,9 @@ public class DeveciogluKorkmaz extends ArtificialIntelligence {
 				found = true;
 			} else {
 				AiTile t = temp.getTile();
-				Collection<AiTile> neighbours = getClearNeighbours(t);
-				neighbours.removeAll(dangerousTiles);
-				Iterator<AiTile> i = neighbours.iterator();
+				Collection<AiTile> neighbors = getClearNeighbors(t);
+				neighbors.removeAll(dangerousTiles);
+				Iterator<AiTile> i = neighbors.iterator();
 				while (i.hasNext()) {
 					checkInterruption();
 					AiTile temp2 = i.next();
@@ -212,8 +212,8 @@ public class DeveciogluKorkmaz extends ArtificialIntelligence {
 				found = true;
 			} else {
 				AiTile t = temp.getTile();
-				Collection<AiTile> neighbours = getClearNeighbours(t);
-				Iterator<AiTile> i = neighbours.iterator();
+				Collection<AiTile> neighbors = getClearNeighbors(t);
+				Iterator<AiTile> i = neighbors.iterator();
 				while (i.hasNext()) {
 					checkInterruption();
 					AiTile temp2 = i.next();
@@ -255,7 +255,7 @@ public class DeveciogluKorkmaz extends ArtificialIntelligence {
 					solution = node;
 			} else {
 				visited.add(node);
-				i = getClearNeighbours(node).iterator();
+				i = getClearNeighbors(node).iterator();
 				while (i.hasNext()) {
 					checkInterruption();
 					AiTile temp = i.next();
@@ -282,7 +282,7 @@ public class DeveciogluKorkmaz extends ArtificialIntelligence {
 			checkInterruption();
 			AiTile node = fifo.poll();
 			visited.add(node);
-			i = getPercepts().getNeighbourTiles(node).iterator();
+			i = getPercepts().getNeighborTiles(node).iterator();
 			while (i.hasNext()) {
 				checkInterruption();
 				temp = i.next();
@@ -294,7 +294,7 @@ public class DeveciogluKorkmaz extends ArtificialIntelligence {
 			if (found) {
 				solution = node;
 			} else {
-				i = getClearNeighbours(node).iterator();
+				i = getClearNeighbors(node).iterator();
 				while (i.hasNext()) {
 					checkInterruption();
 					temp = i.next();
@@ -322,7 +322,7 @@ public class DeveciogluKorkmaz extends ArtificialIntelligence {
 				solution = node;
 			} else {
 				visited.add(node);
-				i = getClearNeighbours(node).iterator();
+				i = getClearNeighbors(node).iterator();
 				while (i.hasNext()) {
 					checkInterruption();
 					AiTile temp = i.next();
@@ -351,7 +351,7 @@ public class DeveciogluKorkmaz extends ArtificialIntelligence {
 				if (!result.contains(temp1.getTile()))
 					result.add(temp1.getTile());
 				neigbourTiles = getPercepts()
-						.getNeighbourTiles(temp1.getTile());
+						.getNeighborTiles(temp1.getTile());
 				it = neigbourTiles.iterator();
 				while (it.hasNext()) {
 					checkInterruption();
@@ -365,7 +365,7 @@ public class DeveciogluKorkmaz extends ArtificialIntelligence {
 							result.add(temp2);
 						if (temp2.getItem() != null)
 							continuer = false;
-						temp2 = zone.getNeighbourTile(temp2, d);
+						temp2 = zone.getNeighborTile(temp2, d);
 						k++;
 					}
 				}
@@ -400,7 +400,7 @@ public class DeveciogluKorkmaz extends ArtificialIntelligence {
 				solution = node;
 			} else {
 				visited.add(node);
-				i = getClearNeighbours(node).iterator();
+				i = getClearNeighbors(node).iterator();
 				while (i.hasNext()) {
 					checkInterruption();
 					AiTile temp = i.next();
@@ -421,12 +421,12 @@ public class DeveciogluKorkmaz extends ArtificialIntelligence {
 		// return Math.hypot(vertical, horizontal);
 	}
 
-	private ArrayList<AiTile> getClearNeighbours(AiTile tile)
+	private ArrayList<AiTile> getClearNeighbors(AiTile tile)
 			throws StopRequestException {
 		checkInterruption();
-		Collection<AiTile> neighbours = getPercepts().getNeighbourTiles(tile);
+		Collection<AiTile> neighbors = getPercepts().getNeighborTiles(tile);
 		ArrayList<AiTile> result = new ArrayList<AiTile>();
-		Iterator<AiTile> it = neighbours.iterator();
+		Iterator<AiTile> it = neighbors.iterator();
 		while (it.hasNext()) {
 			checkInterruption();
 			AiTile t = it.next();

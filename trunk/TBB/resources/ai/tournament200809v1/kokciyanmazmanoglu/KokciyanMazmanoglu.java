@@ -647,7 +647,7 @@ public class KokciyanMazmanoglu extends ArtificialIntelligence
 	 */
 	public  boolean isTimeToRun(AiTile tile) throws StopRequestException {
 		checkInterruption();
-		Iterator<AiTile> iterTile = zone.getNeighbourTiles(tile).iterator();
+		Iterator<AiTile> iterTile = zone.getNeighborTiles(tile).iterator();
 		boolean res = false;
 		if(isBomb(tile))
 			res= true;
@@ -748,7 +748,7 @@ public class KokciyanMazmanoglu extends ArtificialIntelligence
 	public  boolean isVoisinMur(AiTile tile,Direction d) throws StopRequestException{
 		checkInterruption();
 		boolean res=false;
-		Iterator<AiTile> iterTile = zone.getNeighbourTiles(tile).iterator();
+		Iterator<AiTile> iterTile = zone.getNeighborTiles(tile).iterator();
 		int xTemp;
 		int yTemp;
 		AiTile tileTemp;
@@ -822,7 +822,7 @@ public class KokciyanMazmanoglu extends ArtificialIntelligence
 	 */
 	public AiTile FindSafeCible(AiTile bombe, AiTile me) throws StopRequestException {
 		checkInterruption();
-		Collection<AiTile> cases = getPercepts().getNeighbourTiles(bombe);
+		Collection<AiTile> cases = getPercepts().getNeighborTiles(bombe);
 		Iterator<AiTile> iterCase = cases.iterator();
 		Vector<AiTile> liste = new Vector<AiTile>();
 		AiTile cible = null;
@@ -942,14 +942,14 @@ public class KokciyanMazmanoglu extends ArtificialIntelligence
 	 * @return
 	 * @throws StopRequestException
 	 */
-	public  ArrayList<AiTile> getClearNeighbours(AiTile tile) throws StopRequestException
+	public  ArrayList<AiTile> getClearNeighbors(AiTile tile) throws StopRequestException
 	{	checkInterruption(); //APPEL OBLIGATOIRE
 
 	// liste des cases autour de la case de référence
-	Collection<AiTile> neighbours = getPercepts().getNeighbourTiles(tile);
+	Collection<AiTile> neighbors = getPercepts().getNeighborTiles(tile);
 	// on garde les cases sans bloc ni bombe ni feu
 	ArrayList<AiTile> result = new ArrayList<AiTile>();
-	Iterator<AiTile> it = neighbours.iterator();
+	Iterator<AiTile> it = neighbors.iterator();
 	while(it.hasNext())
 	{	checkInterruption(); //APPEL OBLIGATOIRE
 

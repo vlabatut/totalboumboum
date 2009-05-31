@@ -17,7 +17,7 @@ public class XTile {
 	int blockCount;
 	
 	/** nombre des voisins vides de cette case */
-	int neighbourCount;
+	int neighborCount;
 	
 	/** distance directe entre cette case et l'enemie la plus proche */
 	double hypotenuse;
@@ -35,7 +35,7 @@ public class XTile {
 	Hero hero;
 	
 	/** voisin pour acceder aux informations sur les voisins */
-	Neighbours neighbours;
+	Neighbors neighbors;
 	
 
 	public XTile(AkpolatSener sa, AiTile tile) throws StopRequestException 
@@ -56,14 +56,14 @@ public class XTile {
 		sa.checkInterruption();
 
 		hero = new Hero(sa, sa.zone, sa.ownHero);
-		neighbours = new Neighbours(sa, sa.zone, sa.currentTile);
+		neighbors = new Neighbors(sa, sa.zone, sa.currentTile);
 
 		hypotenuse = hero.getHyponetuseToTarget(sa.enemy,tile);
-		//distanceToBomb = neighbours.getHypotenuseToBomb(tile);
+		//distanceToBomb = neighbors.getHypotenuseToBomb(tile);
 		//blockCount=hero.blockCountOnWay(sa.enemy,tile);
-		//neighbourCount=neighbours.getNeighboursNumber(tile);
+		//neighborCount=neighbors.getNeighborsNumber(tile);
 
-		double heur = blockCount - neighbourCount + hypotenuse- distanceToBomb*5;
+		double heur = blockCount - neighborCount + hypotenuse- distanceToBomb*5;
 		
 		return heur;
 	}

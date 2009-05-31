@@ -3,25 +3,6 @@ package fr.free.totalboumboum.engine.content.feature.action;
 public enum ActionName
 {
 
-	/** 
-	 * action d'apparaitre de nulle part (suite à téléport, ou drop) 
-	 * INTRANSITIVE
-	 * 
-	 * <p>ABILITY PERFORM
-	 * 	<br>N/D
-	 * 
-	 * <p>ABILITY REFUSE
-	 *  <br>N/D
-	 *  
-	 * <p>ABILITY PREVENT
-	 * 	<br>paramètre: actor=oui
-	 * 	<br>paramètre: target=oui (floor)
-	 * 	<br>paramètre: direction=N/D
-	 * 	<br>paramètre: strength=bool
-	 * 	<br>paramètre: kind=N/D
-	 * 	<br>paramètre: scope=oui
-	 * 	<br>paramètre: restriction=SPRITE_TRAVERSE
-	 */	
 	/** appearing in a tile, coming from nowhere (after a teleport, a drop, at the begining of a round, etc) */
 	APPEAR,
 	

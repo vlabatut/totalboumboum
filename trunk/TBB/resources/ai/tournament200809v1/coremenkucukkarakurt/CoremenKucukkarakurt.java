@@ -73,7 +73,7 @@ public class CoremenKucukkarakurt extends ArtificialIntelligence
 			
 			// si y'en a pas plus de deux bombes et si je  suis  en meme ligne avec un autre hero 
 			// et si je ne suis pas en meme ligne ou en meme colonne avec au autre bombe
-			else if((amIOnTheSameLine(currentTile)  ) && zone.getBombs().size()<2 && getClearNeighbours(currentTile).size()>2){
+			else if((amIOnTheSameLine(currentTile)  ) && zone.getBombs().size()<2 && getClearNeighbors(currentTile).size()>2){
 				 
 				
 				// on verifie s'il y a une seule bombes
@@ -145,14 +145,14 @@ public class CoremenKucukkarakurt extends ArtificialIntelligence
 	 * @throws StopRequestException 
 	 */
 	
-	private ArrayList<AiTile> getClearNeighbours(AiTile tile) throws StopRequestException
+	private ArrayList<AiTile> getClearNeighbors(AiTile tile) throws StopRequestException
 	{	checkInterruption(); //APPEL OBLIGATOIRE
 	
 		// liste des cases autour de la case de référence
-		Collection<AiTile> neighbours = getPercepts().getNeighbourTiles(tile);
+		Collection<AiTile> neighbors = getPercepts().getNeighborTiles(tile);
 		// on garde les cases sans bloc ni bombe ni feu
 		ArrayList<AiTile> result = new ArrayList<AiTile>();
-		Iterator<AiTile> it = neighbours.iterator();
+		Iterator<AiTile> it = neighbors.iterator();
 		while(it.hasNext())
 		{	checkInterruption(); //APPEL OBLIGATOIRE
 		
@@ -180,7 +180,7 @@ public class CoremenKucukkarakurt extends ArtificialIntelligence
 		// si un obstacle est apparu sur la case destination, on change de destination
 		if(!isClear(nextTile))
 		{	// liste des cases voisines accessibles	
-			ArrayList<AiTile> tiles = getClearNeighbours(currentTile);
+			ArrayList<AiTile> tiles = getClearNeighbors(currentTile);
 			// on sort l'ancienne destination (qui est maintenant bloquée) de la liste
 			if(tiles.contains(nextTile))
 				tiles.remove(nextTile);
@@ -200,7 +200,7 @@ public class CoremenKucukkarakurt extends ArtificialIntelligence
 		tile=currentTile;
 		for (int i=0;i<5;i++){
 			checkInterruption(); //APPEL OBLIGATOIRE
-			AiTile tempTile =  getPercepts().getNeighbourTile(tile, Direction.UP);
+			AiTile tempTile =  getPercepts().getNeighborTile(tile, Direction.UP);
 			if(tempTile.getBombs().size()!=0 && tempTile.getBlock()==null)
 				return false;
 			tile=tempTile;
@@ -208,7 +208,7 @@ public class CoremenKucukkarakurt extends ArtificialIntelligence
 		tile=currentTile;
 		for (int i=0;i<5;i++){
 			checkInterruption(); //APPEL OBLIGATOIRE
-			AiTile tempTile =  getPercepts().getNeighbourTile(tile, Direction.DOWN);
+			AiTile tempTile =  getPercepts().getNeighborTile(tile, Direction.DOWN);
 			if(tempTile.getBombs().size()!=0 && tempTile.getBlock()==null)
 				return false;
 			tile=tempTile;
@@ -216,7 +216,7 @@ public class CoremenKucukkarakurt extends ArtificialIntelligence
 		tile=currentTile;
 		for (int i=0;i<5;i++){
 			checkInterruption(); //APPEL OBLIGATOIRE
-			AiTile tempTile =  getPercepts().getNeighbourTile(tile, Direction.RIGHT);
+			AiTile tempTile =  getPercepts().getNeighborTile(tile, Direction.RIGHT);
 			if(tempTile.getBombs().size()!=0 && tempTile.getBlock()==null)
 				return false;
 			tile=tempTile;
@@ -224,7 +224,7 @@ public class CoremenKucukkarakurt extends ArtificialIntelligence
 		tile=currentTile;
 		for (int i=0;i<5;i++){
 			checkInterruption(); //APPEL OBLIGATOIRE
-			AiTile tempTile =  getPercepts().getNeighbourTile(tile, Direction.LEFT);
+			AiTile tempTile =  getPercepts().getNeighborTile(tile, Direction.LEFT);
 			if(tempTile.getBombs().size()!=0 && tempTile.getBlock()==null)
 				return false;
 			tile=tempTile;
@@ -245,7 +245,7 @@ public class CoremenKucukkarakurt extends ArtificialIntelligence
 		tile=currentTile;
 		for (int i=0;i<4;i++){
 			checkInterruption(); //APPEL OBLIGATOIRE
-			AiTile tempTile =  getPercepts().getNeighbourTile(tile, Direction.UP);
+			AiTile tempTile =  getPercepts().getNeighborTile(tile, Direction.UP);
 			if(tempTile.getHeroes().size()!=0 && tile.getBlock()==null)
 				return true;
 			tile=tempTile;
@@ -253,7 +253,7 @@ public class CoremenKucukkarakurt extends ArtificialIntelligence
 		tile=currentTile;
 		for (int i=0;i<4;i++){
 			checkInterruption(); //APPEL OBLIGATOIRE
-			AiTile tempTile =  getPercepts().getNeighbourTile(tile, Direction.DOWN);
+			AiTile tempTile =  getPercepts().getNeighborTile(tile, Direction.DOWN);
 			if(tempTile.getHeroes().size()!=0 && tile.getBlock()==null)
 				return true;
 			tile=tempTile;
@@ -261,7 +261,7 @@ public class CoremenKucukkarakurt extends ArtificialIntelligence
 		tile=currentTile;
 		for (int i=0;i<4;i++){
 			checkInterruption(); //APPEL OBLIGATOIRE
-			AiTile tempTile =  getPercepts().getNeighbourTile(tile, Direction.RIGHT);
+			AiTile tempTile =  getPercepts().getNeighborTile(tile, Direction.RIGHT);
 			if(tempTile.getHeroes().size()!=0 && tile.getBlock()==null)
 				return true;
 			tile=tempTile;
@@ -269,7 +269,7 @@ public class CoremenKucukkarakurt extends ArtificialIntelligence
 		tile=currentTile;
 		for (int i=0;i<4;i++){
 			checkInterruption(); //APPEL OBLIGATOIRE
-			AiTile tempTile =  getPercepts().getNeighbourTile(tile, Direction.LEFT);
+			AiTile tempTile =  getPercepts().getNeighborTile(tile, Direction.LEFT);
 			if(tempTile.getHeroes().size()!=0 && tile.getBlock()==null)
 				return true;
 			tile=tempTile;
@@ -384,7 +384,7 @@ public class CoremenKucukkarakurt extends ArtificialIntelligence
 	{	checkInterruption(); //APPEL OBLIGATOIRE
 	
 	// liste des cases voisines accessibles	
-	ArrayList<AiTile> tiles = getClearNeighbours(currentTile);
+	ArrayList<AiTile> tiles = getClearNeighbors(currentTile);
 	// on sort de la liste la case d'où l'on vient (pour éviter de repasser au même endroit)
 	boolean canGoBack = false;
 	if(tiles.contains(previousTile))
@@ -398,7 +398,7 @@ public class CoremenKucukkarakurt extends ArtificialIntelligence
 		AiTile tempTile = null;
 		Direction dir = getPercepts().getDirection(previousTile,currentTile);
 		if(dir!=Direction.NONE)
-		{	tempTile =  getPercepts().getNeighbourTile(currentTile, dir);
+		{	tempTile =  getPercepts().getNeighborTile(currentTile, dir);
 			if(tiles.contains(tempTile))
 				tiles.remove(tempTile);
 		}
@@ -428,7 +428,7 @@ public class CoremenKucukkarakurt extends ArtificialIntelligence
 	// la methode pour s'enfuire avec un mouvement zigzag
 	private AiTile getDirection(AiTile refTile) throws StopRequestException{
 		
-		ArrayList<AiTile> tiles = getClearNeighbours(currentTile);
+		ArrayList<AiTile> tiles = getClearNeighbors(currentTile);
 		
 		double min=10000000;
 		int k=0;

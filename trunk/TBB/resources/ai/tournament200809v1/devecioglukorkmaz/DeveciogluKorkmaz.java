@@ -103,7 +103,7 @@ public class DeveciogluKorkmaz extends ArtificialIntelligence {
 				solution = node;
 			} else {
 				visited.add(node);
-				i = getClearNeighbours(node).iterator();
+				i = getClearNeighbors(node).iterator();
 				while (i.hasNext()) {
 					checkInterruption();
 					AiTile temp = i.next();
@@ -117,11 +117,11 @@ public class DeveciogluKorkmaz extends ArtificialIntelligence {
 
 	private AiTile goToNearestSafeTile() throws StopRequestException {
 		checkInterruption();
-		Collection<AiTile> neighbours = new ArrayList<AiTile>();
+		Collection<AiTile> neighbors = new ArrayList<AiTile>();
 		AiTile closest;
 		AiTile temp;
-		neighbours = getClearNeighbours(currentTile);
-		Iterator<AiTile> i = neighbours.iterator();
+		neighbors = getClearNeighbors(currentTile);
+		Iterator<AiTile> i = neighbors.iterator();
 		closest = i.next();
 		while (i.hasNext()) {
 			checkInterruption();
@@ -138,10 +138,10 @@ public class DeveciogluKorkmaz extends ArtificialIntelligence {
 	private AiTile getCloseToEnemy() throws StopRequestException {
 		checkInterruption();
 		AiTile close = null;
-		Collection<AiTile> neighbours = new ArrayList<AiTile>();
+		Collection<AiTile> neighbors = new ArrayList<AiTile>();
 		AiTile temp;
-		neighbours = getClearNeighbours(currentTile);
-		Iterator<AiTile> i = neighbours.iterator();
+		neighbors = getClearNeighbors(currentTile);
+		Iterator<AiTile> i = neighbors.iterator();
 		close = i.next();
 		while (i.hasNext()) {
 			checkInterruption();
@@ -167,7 +167,7 @@ public class DeveciogluKorkmaz extends ArtificialIntelligence {
 				closest = node;
 			} else {
 				visited.add(node);
-				it = getClearNeighbours(node).iterator();
+				it = getClearNeighbors(node).iterator();
 				while (i.hasNext()) {
 					checkInterruption();
 					AiTile temp1 = it.next();
@@ -201,7 +201,7 @@ public class DeveciogluKorkmaz extends ArtificialIntelligence {
 				temp1 = i.next().getTile();
 				if (!result.contains(temp1))
 					result.add(temp1);
-				neigbourTiles = getClearNeighbours(temp1);
+				neigbourTiles = getClearNeighbors(temp1);
 				it = neigbourTiles.iterator();
 				while (it.hasNext()) {
 					checkInterruption();
@@ -212,7 +212,7 @@ public class DeveciogluKorkmaz extends ArtificialIntelligence {
 						checkInterruption();
 						if (!result.contains(temp2))
 							result.add(temp2);
-						temp2 = zone.getNeighbourTile(temp2, d);
+						temp2 = zone.getNeighborTile(temp2, d);
 						k++;
 					}
 				}
@@ -222,14 +222,14 @@ public class DeveciogluKorkmaz extends ArtificialIntelligence {
 		return result;
 	}
 
-	private ArrayList<AiTile> getClearNeighbours(AiTile tile)
+	private ArrayList<AiTile> getClearNeighbors(AiTile tile)
 			throws StopRequestException {
 		checkInterruption(); // APPEL OBLIGATOIRE
 		// liste des cases autour de la case de référence
-		Collection<AiTile> neighbours = getPercepts().getNeighbourTiles(tile);
+		Collection<AiTile> neighbors = getPercepts().getNeighborTiles(tile);
 		// on garde les cases sans bloc ni bombe ni feu
 		ArrayList<AiTile> result = new ArrayList<AiTile>();
-		Iterator<AiTile> it = neighbours.iterator();
+		Iterator<AiTile> it = neighbors.iterator();
 		while (it.hasNext()) {
 			checkInterruption(); // APPEL OBLIGATOIRE
 			AiTile t = it.next();

@@ -33,7 +33,7 @@ public enum TilePosition
 	/** the actor and target are together in the same tile */
 	SAME,
 	/** the actor and target are in neighbor tiles */
-	NEIGHBOUR,
+	NEIGHBOR,
 	/** the actor and target are in remote tiles */
 	REMOTE;
 	
@@ -56,8 +56,8 @@ public enum TilePosition
 			if(actorTile==targetTile)
 				result = TilePosition.SAME;
 			// neighbor tiles
-			else if(actorTile.isNeighbour(targetTile))
-				result = TilePosition.NEIGHBOUR;
+			else if(actorTile.isNeighbor(targetTile))
+				result = TilePosition.NEIGHBOR;
 			// not neighbor tiles
 			else
 				result = TilePosition.REMOTE;

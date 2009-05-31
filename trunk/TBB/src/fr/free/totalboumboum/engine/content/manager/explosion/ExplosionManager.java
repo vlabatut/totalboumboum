@@ -89,7 +89,7 @@ public class ExplosionManager
 	{	Tile tile = sprite.getTile();
 		int length = 1;
 		boolean blocking;		
-		Tile tileTemp = tile.getNeighbour(dir);
+		Tile tileTemp = tile.getNeighbor(dir);
 		AbstractAbility ability;
 		SpecificAction specificAction;
 		do
@@ -116,7 +116,7 @@ public class ExplosionManager
 				fire.setCurrentPosY(tileTemp.getPosY());
 				fire.setGesture(GestureConstants.BURNING, dir, dir, true);
 				length++;
-				tileTemp = tileTemp.getNeighbour(dir);
+				tileTemp = tileTemp.getNeighbor(dir);
 			}
 		}
 		while(!blocking && length<=power);

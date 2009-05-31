@@ -38,7 +38,7 @@ public class AkpolatSener extends ArtificialIntelligence {
 	
 	/** objet pour acceder les champs et 
 	 * les methodes concernant les cas voisins */
-	Neighbours neighbours;
+	Neighbors neighbors;
 	
 	/** direction du cas actuel vers le prochain*/
 	Direction direction;
@@ -159,19 +159,19 @@ public class AkpolatSener extends ArtificialIntelligence {
 
 		AiTile bestTile = null;
 
-		neighbours = new Neighbours(this, zone, currentTile);
+		neighbors = new Neighbors(this, zone, currentTile);
 
 		// les cases voisines propres qui ne sont pas dans la portée d'une bombe
-		possibleTiles = neighbours.findNeighboursNotInBombRange();
+		possibleTiles = neighbors.findNeighborsNotInBombRange();
 
 		// s'il n y a pas de voisins propres qui ne sont pas dans la portée d'une bombe 
 		if (possibleTiles.size() == 0)
 		{
-			if (currentTile.getBombs().isEmpty() && currentTile.getFires().isEmpty() && !neighbours.isInBombRange(currentTile, 10)) 
+			if (currentTile.getBombs().isEmpty() && currentTile.getFires().isEmpty() && !neighbors.isInBombRange(currentTile, 10)) 
 				bestTile = currentTile;
 			else 
 			{
-				possibleTiles = neighbours.findCleanNeighbours();
+				possibleTiles = neighbors.findCleanNeighbors();
 				
 				// s'il n y a pas de voisins propres /
 				if (possibleTiles.size() == 0)
@@ -226,10 +226,10 @@ public class AkpolatSener extends ArtificialIntelligence {
 
 			if (!isInXTiles) 
 			{
-				XTile xNeighbourTile = new XTile(this, tiles.get(cntTiles));
-				xNeighbourTile.visits = 1;
-				xTiles.add(xNeighbourTile);
-				prtXTile.offer(xNeighbourTile);
+				XTile xNeighborTile = new XTile(this, tiles.get(cntTiles));
+				xNeighborTile.visits = 1;
+				xTiles.add(xNeighborTile);
+				prtXTile.offer(xNeighborTile);
 			}
 
 		}

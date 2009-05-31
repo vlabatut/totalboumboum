@@ -278,14 +278,14 @@ public class Adatepe extends ArtificialIntelligence
 	}
 	
 	@SuppressWarnings("unused")
-	private ArrayList<AiTile> getClearNeighbours(AiTile tile) throws StopRequestException
+	private ArrayList<AiTile> getClearNeighbor(AiTile tile) throws StopRequestException
 	{	checkInterruption(); //APPEL OBLIGATOIRE
 	
 		// liste des cases autour de la case de référence
-		Collection<AiTile> neighbours = getPercepts().getNeighbourTiles(tile);
+		Collection<AiTile> neighbor= getPercepts().getNeighborTiles(tile);
 		// on garde les cases sans bloc ni bombe ni feu
 		ArrayList<AiTile> result = new ArrayList<AiTile>();
-		Iterator<AiTile> it = neighbours.iterator();
+		Iterator<AiTile> it = neighbor.iterator();
 		while(it.hasNext())
 		{	checkInterruption(); //APPEL OBLIGATOIRE
 		

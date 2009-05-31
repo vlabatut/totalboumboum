@@ -176,9 +176,9 @@ public class ErisikPektas extends ArtificialIntelligence {
 		// nous allons les utiliser pour dropbomb
 		int difx = xadversaire - x;
 		int dify = yadversaire - y;
-		Collection<AiTile> neighbours = getPercepts().getNeighbourTiles(
+		Collection<AiTile> neighbors = getPercepts().getNeighborTiles(
 				caseactuelle);
-		Iterator<AiTile> it = neighbours.iterator();
+		Iterator<AiTile> it = neighbors.iterator();
 
 		// de temps en temps notre fonc entre dans le premier if et par ex dit
 		// que notre x est superieur que l'adv et apres il entre
@@ -299,8 +299,8 @@ public class ErisikPektas extends ArtificialIntelligence {
 		}
 		// si libre est false nous determinons un autre case a aller
 		if (!libre) {
-			neighbours = getPercepts().getNeighbourTiles(caseactuelle);
-			it = neighbours.iterator();
+			neighbors = getPercepts().getNeighborTiles(caseactuelle);
+			it = neighbors.iterator();
 			while (it.hasNext()) {
 				checkInterruption(); // APPEL OBLIGATOIRE
 
@@ -416,10 +416,10 @@ public class ErisikPektas extends ArtificialIntelligence {
 		int reponsex = reponse.getCol();
 		int reponsey = reponse.getLine();
 
-		Collection<AiTile> neighbours = getPercepts().getNeighbourTiles(
+		Collection<AiTile> neighbors = getPercepts().getNeighborTiles(
 				caseactuelle);
-		// System.out.println(neighbours);
-		Iterator<AiTile> it = neighbours.iterator();
+		// System.out.println(neighbors);
+		Iterator<AiTile> it = neighbors.iterator();
 
 		if (reponsex < x) {
 			libre = false;
@@ -558,8 +558,8 @@ public class ErisikPektas extends ArtificialIntelligence {
 			}
 		}// 89449
 		if (!libre) {
-			neighbours = getPercepts().getNeighbourTiles(caseactuelle);
-			it = neighbours.iterator();
+			neighbors = getPercepts().getNeighborTiles(caseactuelle);
+			it = neighbors.iterator();
 			while (it.hasNext()) {
 				checkInterruption(); // APPEL OBLIGATOIRE
 
@@ -632,10 +632,10 @@ public class ErisikPektas extends ArtificialIntelligence {
 			casebombe = b.getTile();
 			// AiBombType abt = b.getType();
 
-			AiBlock right = casebombe.getNeighbour(Direction.RIGHT).getBlock();
-			AiBlock up = casebombe.getNeighbour(Direction.UP).getBlock();
-			AiBlock left = casebombe.getNeighbour(Direction.LEFT).getBlock();
-			AiBlock down = casebombe.getNeighbour(Direction.DOWN).getBlock();
+			AiBlock right = casebombe.getNeighbor(Direction.RIGHT).getBlock();
+			AiBlock up = casebombe.getNeighbor(Direction.UP).getBlock();
+			AiBlock left = casebombe.getNeighbor(Direction.LEFT).getBlock();
+			AiBlock down = casebombe.getNeighbor(Direction.DOWN).getBlock();
 
 			// s'il n'y a pas un mur a droite et si notre case voulue se trouve
 			// a droite de cette bombe et il est dans son range et
@@ -662,22 +662,22 @@ public class ErisikPektas extends ArtificialIntelligence {
 			// si nous sommes sur un bombe il faut trouver la case convenable
 			if (caseactuelle == casebombe) {
 
-				if (controle(getPercepts().getNeighbourTile(caseactuelle,
+				if (controle(getPercepts().getNeighborTile(caseactuelle,
 						Direction.RIGHT)))
-					caseprochaine = getPercepts().getNeighbourTile(
+					caseprochaine = getPercepts().getNeighborTile(
 							caseactuelle, Direction.RIGHT);
-				else if (controle(getPercepts().getNeighbourTile(caseactuelle,
+				else if (controle(getPercepts().getNeighborTile(caseactuelle,
 						Direction.DOWN)))
-					caseprochaine = getPercepts().getNeighbourTile(
+					caseprochaine = getPercepts().getNeighborTile(
 							caseactuelle, Direction.DOWN);
-				else if (controle(getPercepts().getNeighbourTile(caseactuelle,
+				else if (controle(getPercepts().getNeighborTile(caseactuelle,
 						Direction.LEFT)))
-					caseprochaine = getPercepts().getNeighbourTile(
+					caseprochaine = getPercepts().getNeighborTile(
 							caseactuelle, Direction.LEFT);
 
-				else if (controle(getPercepts().getNeighbourTile(caseactuelle,
+				else if (controle(getPercepts().getNeighborTile(caseactuelle,
 						Direction.UP)))
-					caseprochaine = getPercepts().getNeighbourTile(
+					caseprochaine = getPercepts().getNeighborTile(
 							caseactuelle, Direction.UP);
 
 			}

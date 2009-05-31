@@ -84,13 +84,13 @@ public class Functions {
 	 */
 	public static int ChildNodes(AiTile courant) {
 		int result=0;
-		if (!hasWall(courant.getNeighbour(Direction.UP)))
+		if (!hasWall(courant.getNeighbor(Direction.UP)))
 			result++;
-		if (!hasWall(courant.getNeighbour(Direction.DOWN)))
+		if (!hasWall(courant.getNeighbor(Direction.DOWN)))
 			result++;				
-		if (!hasWall(courant.getNeighbour(Direction.LEFT)))
+		if (!hasWall(courant.getNeighbor(Direction.LEFT)))
 			result++;			
-		if (!hasWall(courant.getNeighbour(Direction.RIGHT)))
+		if (!hasWall(courant.getNeighbor(Direction.RIGHT)))
 			result++;
 		return result;
 	}

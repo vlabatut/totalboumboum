@@ -169,7 +169,7 @@ public class MonIA extends ArtificialIntelligence {
 		boolean resultat = false;
 
 		if (caseHedef == null)
-			caseHedef = caseCourant.getNeighbour(d);
+			caseHedef = caseCourant.getNeighbor(d);
 		if (ownHero.getTile().equals(caseHedef)) {
 			d = Direction.NONE;
 			caseHedef = null;

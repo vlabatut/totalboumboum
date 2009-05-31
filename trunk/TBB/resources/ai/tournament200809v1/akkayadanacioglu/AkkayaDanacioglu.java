@@ -80,19 +80,19 @@ public class AkkayaDanacioglu extends ArtificialIntelligence {
 
 	private void pickNextTile() throws StopRequestException {
 		checkInterruption(); // APPEL OBLIGATOIRE
-		ArrayList<AiTile> tiles = getClearNeighbours(currentTile);
+		ArrayList<AiTile> tiles = getClearNeighbors(currentTile);
 		boolean canGoBack = false;
 		if (tiles.contains(previousTile)) {
 			tiles.remove(previousTile);
 			canGoBack = true;
 		}
 		if (tiles.size() > 0) {
-			AiTile tempTile = getPercepts().getNeighbourTile(currentTile,
+			AiTile tempTile = getPercepts().getNeighborTile(currentTile,
 					Direction.NONE);
 			Direction dir = getPercepts().getDirection(previousTile,
 					currentTile);
 			if (dir != Direction.NONE) {
-				tempTile = getPercepts().getNeighbourTile(currentTile, dir);
+				tempTile = getPercepts().getNeighborTile(currentTile, dir);
 				if (tiles.contains(tempTile))
 					tiles.remove(tempTile);
 			}
@@ -100,9 +100,9 @@ public class AkkayaDanacioglu extends ArtificialIntelligence {
 				dir = getPercepts().getDirection(currentTile,
 						selectTargetTile());
 				dir = getNewDir(dir);
-				nextTile = getPercepts().getNeighbourTile(currentTile, dir);
+				nextTile = getPercepts().getNeighborTile(currentTile, dir);
 				if (!isClear(nextTile) || isInDanger(nextTile)) {
-					ArrayList<AiTile> nTiles = getClearNeighbours(currentTile);
+					ArrayList<AiTile> nTiles = getClearNeighbors(currentTile);
 					if (nTiles.size() == 0) {
 						nextTile = currentTile;
 					} else {
@@ -127,13 +127,13 @@ public class AkkayaDanacioglu extends ArtificialIntelligence {
 		}
 	}
 
-	private ArrayList<AiTile> getClearNeighbours(AiTile tile)
+	private ArrayList<AiTile> getClearNeighbors(AiTile tile)
 			throws StopRequestException {
 		checkInterruption(); // APPEL OBLIGATOIRE
 
-		Collection<AiTile> neighbours = getPercepts().getNeighbourTiles(tile);
+		Collection<AiTile> neighbors = getPercepts().getNeighborTiles(tile);
 		ArrayList<AiTile> result = new ArrayList<AiTile>();
-		Iterator<AiTile> it = neighbours.iterator();
+		Iterator<AiTile> it = neighbors.iterator();
 		while (it.hasNext()) {
 			checkInterruption(); // APPEL OBLIGATOIRE
 
@@ -234,7 +234,7 @@ public class AkkayaDanacioglu extends ArtificialIntelligence {
 		checkInterruption(); // APPEL OBLIGATOIRE
 
 		if (!isClear(nextTile)) {
-			ArrayList<AiTile> tiles = getClearNeighbours(currentTile);
+			ArrayList<AiTile> tiles = getClearNeighbors(currentTile);
 
 			if (tiles.contains(nextTile))
 				tiles.remove(nextTile);
@@ -279,7 +279,7 @@ public class AkkayaDanacioglu extends ArtificialIntelligence {
 	private Direction getNewDir(Direction dir) throws StopRequestException {
 		checkInterruption(); // APPEL OBLIGATOIRE
 		if (dir.equals(Direction.DOWNRIGHT)) {
-			AiTile n = getPercepts().getNeighbourTile(currentTile,
+			AiTile n = getPercepts().getNeighborTile(currentTile,
 					Direction.RIGHT);
 			if ((isClear(n) || !isInDanger(n)) && n.getBlock() == null) {
 				dir = Direction.RIGHT;
@@ -287,7 +287,7 @@ public class AkkayaDanacioglu extends ArtificialIntelligence {
 				dir = Direction.DOWN;
 			}
 		} else if (dir.equals(Direction.DOWNLEFT)) {
-			AiTile n = getPercepts().getNeighbourTile(currentTile,
+			AiTile n = getPercepts().getNeighborTile(currentTile,
 					Direction.LEFT);
 			if ((isClear(n) || !isInDanger(n)) && n.getBlock() == null) {
 				dir = Direction.LEFT;
@@ -295,7 +295,7 @@ public class AkkayaDanacioglu extends ArtificialIntelligence {
 				dir = Direction.DOWN;
 			}
 		} else if (dir.equals(Direction.UPLEFT)) {
-			AiTile n = getPercepts().getNeighbourTile(currentTile,
+			AiTile n = getPercepts().getNeighborTile(currentTile,
 					Direction.LEFT);
 			if ((isClear(n) || !isInDanger(n)) && n.getBlock() == null) {
 				dir = Direction.LEFT;
@@ -303,7 +303,7 @@ public class AkkayaDanacioglu extends ArtificialIntelligence {
 				dir = Direction.UP;
 			}
 		} else if (dir.equals(Direction.UPRIGHT)) {
-			AiTile n = getPercepts().getNeighbourTile(currentTile,
+			AiTile n = getPercepts().getNeighborTile(currentTile,
 					Direction.RIGHT);
 			if ((isClear(n) || !isInDanger(n)) && n.getBlock() == null) {
 				dir = Direction.RIGHT;

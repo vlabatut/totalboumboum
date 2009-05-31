@@ -1056,14 +1056,14 @@ public class ErisikPektas extends ArtificialIntelligence {
 		checkInterruption();
 
 		boolean resultat = false;
-		if (tile.getNeighbour(Direction.RIGHT).getBombs().size() > 0
-				|| tile.getNeighbour(Direction.RIGHT).getBlock() != null) {
-			if (tile.getNeighbour(Direction.UP).getBombs().size() > 0
-					|| tile.getNeighbour(Direction.UP).getBlock() != null) {
-				if (tile.getNeighbour(Direction.DOWN).getBombs().size() > 0
-						|| tile.getNeighbour(Direction.DOWN).getBlock() != null) {
-					if (tile.getNeighbour(Direction.LEFT).getBombs().size() > 0
-							|| tile.getNeighbour(Direction.LEFT).getBlock() != null)
+		if (tile.getNeighbor(Direction.RIGHT).getBombs().size() > 0
+				|| tile.getNeighbor(Direction.RIGHT).getBlock() != null) {
+			if (tile.getNeighbor(Direction.UP).getBombs().size() > 0
+					|| tile.getNeighbor(Direction.UP).getBlock() != null) {
+				if (tile.getNeighbor(Direction.DOWN).getBombs().size() > 0
+						|| tile.getNeighbor(Direction.DOWN).getBlock() != null) {
+					if (tile.getNeighbor(Direction.LEFT).getBombs().size() > 0
+							|| tile.getNeighbor(Direction.LEFT).getBlock() != null)
 						resultat = true;
 				}
 			}
@@ -1115,21 +1115,21 @@ public class ErisikPektas extends ArtificialIntelligence {
 
 						if (securite(x, y, 0).size() != 0
 								&& getdangerous(x, y) < (bombtimer ) / 2 &&
-								(x+1<map.width &&(tous.getTile(y, x).getNeighbour(Direction.RIGHT).getBombs().size()==0
-								||(tous.getTile(y, x).getNeighbour(Direction.RIGHT).getBombs().size()>0 &&
-										tous.getTile(y, x).getNeighbour(Direction.RIGHT).getBombs().iterator().next().getColor()!=bomberman.getColor()	)))
+								(x+1<map.width &&(tous.getTile(y, x).getNeighbor(Direction.RIGHT).getBombs().size()==0
+								||(tous.getTile(y, x).getNeighbor(Direction.RIGHT).getBombs().size()>0 &&
+										tous.getTile(y, x).getNeighbor(Direction.RIGHT).getBombs().iterator().next().getColor()!=bomberman.getColor()	)))
 										 &&
-								(x-1>0 &&(tous.getTile(y, x).getNeighbour(Direction.LEFT).getBombs().size()==0
-								||(tous.getTile(y, x).getNeighbour(Direction.LEFT).getBombs().size()>0 &&
-										tous.getTile(y, x).getNeighbour(Direction.LEFT).getBombs().iterator().next().getColor()!=bomberman.getColor()	)))
+								(x-1>0 &&(tous.getTile(y, x).getNeighbor(Direction.LEFT).getBombs().size()==0
+								||(tous.getTile(y, x).getNeighbor(Direction.LEFT).getBombs().size()>0 &&
+										tous.getTile(y, x).getNeighbor(Direction.LEFT).getBombs().iterator().next().getColor()!=bomberman.getColor()	)))
 										 &&
-								(y+1<map.height &&(tous.getTile(y, x).getNeighbour(Direction.DOWN).getBombs().size()==0
-								||(tous.getTile(y, x).getNeighbour(Direction.DOWN).getBombs().size()>0 &&
-										tous.getTile(y, x).getNeighbour(Direction.DOWN).getBombs().iterator().next().getColor()!=bomberman.getColor()	)))
+								(y+1<map.height &&(tous.getTile(y, x).getNeighbor(Direction.DOWN).getBombs().size()==0
+								||(tous.getTile(y, x).getNeighbor(Direction.DOWN).getBombs().size()>0 &&
+										tous.getTile(y, x).getNeighbor(Direction.DOWN).getBombs().iterator().next().getColor()!=bomberman.getColor()	)))
 										 &&
-								(y-1>0  &&(tous.getTile(y, x).getNeighbour(Direction.UP).getBombs().size()==0
-								||(tous.getTile(y, x).getNeighbour(Direction.UP).getBombs().size()>0 &&
-										tous.getTile(y, x).getNeighbour(Direction.UP).getBombs().iterator().next().getColor()!=bomberman.getColor()	)))
+								(y-1>0  &&(tous.getTile(y, x).getNeighbor(Direction.UP).getBombs().size()==0
+								||(tous.getTile(y, x).getNeighbor(Direction.UP).getBombs().size()>0 &&
+										tous.getTile(y, x).getNeighbor(Direction.UP).getBombs().iterator().next().getColor()!=bomberman.getColor()	)))
 							) {
 
 							// System.out.println("attaque");

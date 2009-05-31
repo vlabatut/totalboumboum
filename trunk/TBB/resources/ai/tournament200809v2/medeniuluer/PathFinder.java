@@ -33,7 +33,7 @@ public class PathFinder {
 		else {
 			if (tab[target.getCol()][target.getLine()] != ZoneEnum.BLOCDESTRUCTIBLE && tab[target.getCol()][target.getLine()] != ZoneEnum.BLOCINDESTRUCTIBLE) 
 			{
-				if (!zone.getNeighbourTiles(zone.getOwnHero().getTile()).contains(target)) 
+				if (!zone.getNeighborTiles(zone.getOwnHero().getTile()).contains(target)) 
 				{ 
 					findPath(tab, zone.getOwnHero().getCol(), zone.getOwnHero().getLine(), new SearchNode(target.getCol(), target.getLine(), tab[target.getCol()][target.getLine()],mu));
 				} 
@@ -64,7 +64,7 @@ public class PathFinder {
 		{
 			if (tab[target.getCol()][target.getLine()] != ZoneEnum.BLOCDESTRUCTIBLE && tab[target.getCol()][target.getLine()] != ZoneEnum.BLOCINDESTRUCTIBLE) 
 			{
-				if (!zone.getNeighbourTiles(depart).contains(target)) 
+				if (!zone.getNeighborTiles(depart).contains(target)) 
 				{ 
 					findPath(tab, depart.getCol(), depart.getLine(), new SearchNode(target.getCol(), target.getLine(), tab[target.getCol()][target.getLine()], mu));
 				} 
@@ -102,7 +102,7 @@ public class PathFinder {
 						&& tab[col][line] != ZoneEnum.BLOC_EXPLOSE_SIMULE
 						&& tab[col][line] != ZoneEnum.EXPLOSION_SIMULE)
 				{					
-					if (!zone.getNeighbourTiles(depart).contains(target)) 
+					if (!zone.getNeighborTiles(depart).contains(target)) 
 					{ 
 						findPath(tab, depart.getCol(), depart.getLine(),new SearchNode(target.getCol(), target.getLine(),tab[target.getCol()][target.getLine()],mu));
 					} 
@@ -121,7 +121,7 @@ public class PathFinder {
 			{
 				if (tab[target.getCol()][target.getLine()] != ZoneEnum.BLOCDESTRUCTIBLE && tab[target.getCol()][target.getLine()] != ZoneEnum.BLOCINDESTRUCTIBLE) 
 				{
-					if (!zone.getNeighbourTiles(depart).contains(target)) 
+					if (!zone.getNeighborTiles(depart).contains(target)) 
 					{ 
 						findPath(tab, depart.getCol(), depart.getLine(),new SearchNode(target.getCol(), target.getLine(),tab[target.getCol()][target.getLine()],mu));
 					} 

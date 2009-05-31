@@ -103,7 +103,7 @@ public class CoremenKucukkarakurt extends ArtificialIntelligence
 			
 			// si y'en a pas plus de deux bombes et si je  suis  en meme ligne avec un autre hero 
 			// et si je ne suis pas en meme ligne ou en meme colonne avec au autre bombe
-			else if((amIOnTheSameLine(currentTile)  ) && zone.getBombs().size()<2 && getClearNeighbours(currentTile).size()>2){
+			else if((amIOnTheSameLine(currentTile)  ) && zone.getBombs().size()<2 && getClearNeighbors(currentTile).size()>2){
 				 
 				// on verifie s'il y a une seule bombes
 				 if(getPercepts().getBombs().size()>0){
@@ -181,14 +181,14 @@ public class CoremenKucukkarakurt extends ArtificialIntelligence
 	 * @throws StopRequestException 
 	 */
 	
-	private ArrayList<AiTile> getClearNeighbours(AiTile tile) throws StopRequestException
+	private ArrayList<AiTile> getClearNeighbors(AiTile tile) throws StopRequestException
 	{	checkInterruption(); //APPEL OBLIGATOIRE
 	
 		// liste des cases autour de la case de référence
-		Collection<AiTile> neighbours = getPercepts().getNeighbourTiles(tile);
+		Collection<AiTile> neighbors = getPercepts().getNeighborTiles(tile);
 		// on garde les cases sans bloc ni bombe ni feu
 		ArrayList<AiTile> result = new ArrayList<AiTile>();
-		Iterator<AiTile> it = neighbours.iterator();
+		Iterator<AiTile> it = neighbors.iterator();
 		while(it.hasNext())
 		{	checkInterruption(); //APPEL OBLIGATOIRE
 		
@@ -216,7 +216,7 @@ public class CoremenKucukkarakurt extends ArtificialIntelligence
 		// si un obstacle est apparu sur la case destination, on change de destination
 		if(!isClear(nextTile))
 		{	// liste des cases voisines accessibles	
-			ArrayList<AiTile> tiles = getClearNeighbours(currentTile);
+			ArrayList<AiTile> tiles = getClearNeighbors(currentTile);
 			// on sort l'ancienne destination (qui est maintenant bloquée) de la liste
 			if(tiles.contains(nextTile))
 				tiles.remove(nextTile);
@@ -236,7 +236,7 @@ public class CoremenKucukkarakurt extends ArtificialIntelligence
 		tile=currentTile;
 		for (int i=0;i<5;i++){
 			checkInterruption(); //APPEL OBLIGATOIRE
-			AiTile tempTile =  getPercepts().getNeighbourTile(tile, Direction.UP);
+			AiTile tempTile =  getPercepts().getNeighborTile(tile, Direction.UP);
 			if((tempTile.getBombs().size()!=0 && tempTile.getBlock()==null) || tempTile.getFires().size()>0)
 				return false;
 			tile=tempTile;
@@ -244,7 +244,7 @@ public class CoremenKucukkarakurt extends ArtificialIntelligence
 		tile=currentTile;
 		for (int i=0;i<5;i++){
 			checkInterruption(); //APPEL OBLIGATOIRE
-			AiTile tempTile =  getPercepts().getNeighbourTile(tile, Direction.DOWN);
+			AiTile tempTile =  getPercepts().getNeighborTile(tile, Direction.DOWN);
 			if((tempTile.getBombs().size()!=0 && tempTile.getBlock()==null) || tempTile.getFires().size()>0)
 				return false;
 			tile=tempTile;
@@ -252,7 +252,7 @@ public class CoremenKucukkarakurt extends ArtificialIntelligence
 		tile=currentTile;
 		for (int i=0;i<5;i++){
 			checkInterruption(); //APPEL OBLIGATOIRE
-			AiTile tempTile =  getPercepts().getNeighbourTile(tile, Direction.RIGHT);
+			AiTile tempTile =  getPercepts().getNeighborTile(tile, Direction.RIGHT);
 			if((tempTile.getBombs().size()!=0 && tempTile.getBlock()==null) || tempTile.getFires().size()>0)
 				return false;
 			tile=tempTile;
@@ -260,7 +260,7 @@ public class CoremenKucukkarakurt extends ArtificialIntelligence
 		tile=currentTile;
 		for (int i=0;i<5;i++){
 			checkInterruption(); //APPEL OBLIGATOIRE
-			AiTile tempTile =  getPercepts().getNeighbourTile(tile, Direction.LEFT);
+			AiTile tempTile =  getPercepts().getNeighborTile(tile, Direction.LEFT);
 			if((tempTile.getBombs().size()!=0 && tempTile.getBlock()==null) || tempTile.getFires().size()>0)
 				return false;
 			tile=tempTile;
@@ -279,7 +279,7 @@ public class CoremenKucukkarakurt extends ArtificialIntelligence
 		tile=currentTile;
 		for (int i=0;i<4;i++){
 			checkInterruption(); //APPEL OBLIGATOIRE
-			AiTile tempTile =  getPercepts().getNeighbourTile(tile, Direction.UP);
+			AiTile tempTile =  getPercepts().getNeighborTile(tile, Direction.UP);
 			if(tempTile.getHeroes().size()!=0 && tile.getBlock()==null)
 				return true;
 			tile=tempTile;
@@ -287,7 +287,7 @@ public class CoremenKucukkarakurt extends ArtificialIntelligence
 		tile=currentTile;
 		for (int i=0;i<4;i++){
 			checkInterruption(); //APPEL OBLIGATOIRE
-			AiTile tempTile =  getPercepts().getNeighbourTile(tile, Direction.DOWN);
+			AiTile tempTile =  getPercepts().getNeighborTile(tile, Direction.DOWN);
 			if(tempTile.getHeroes().size()!=0 && tile.getBlock()==null)
 				return true;
 			tile=tempTile;
@@ -295,7 +295,7 @@ public class CoremenKucukkarakurt extends ArtificialIntelligence
 		tile=currentTile;
 		for (int i=0;i<4;i++){
 			checkInterruption(); //APPEL OBLIGATOIRE
-			AiTile tempTile =  getPercepts().getNeighbourTile(tile, Direction.RIGHT);
+			AiTile tempTile =  getPercepts().getNeighborTile(tile, Direction.RIGHT);
 			if(tempTile.getHeroes().size()!=0 && tile.getBlock()==null)
 				return true;
 			tile=tempTile;
@@ -303,7 +303,7 @@ public class CoremenKucukkarakurt extends ArtificialIntelligence
 		tile=currentTile;
 		for (int i=0;i<4;i++){
 			checkInterruption(); //APPEL OBLIGATOIRE
-			AiTile tempTile =  getPercepts().getNeighbourTile(tile, Direction.LEFT);
+			AiTile tempTile =  getPercepts().getNeighborTile(tile, Direction.LEFT);
 			if(tempTile.getHeroes().size()!=0 && tile.getBlock()==null)
 				return true;
 			tile=tempTile;
@@ -414,7 +414,7 @@ public class CoremenKucukkarakurt extends ArtificialIntelligence
 	{	checkInterruption(); //APPEL OBLIGATOIRE
 	
 	// liste des cases voisines accessibles	
-	ArrayList<AiTile> tiles = getClearNeighbours(currentTile);
+	ArrayList<AiTile> tiles = getClearNeighbors(currentTile);
 	// on sort de la liste la case d'où l'on vient (pour éviter de repasser au même endroit)
 	boolean canGoBack = false;
 	if(tiles.contains(previousTile))
@@ -428,7 +428,7 @@ public class CoremenKucukkarakurt extends ArtificialIntelligence
 		AiTile tempTile = null;
 		Direction dir = getPercepts().getDirection(previousTile,currentTile);
 		if(dir!=Direction.NONE)
-		{	tempTile =  getPercepts().getNeighbourTile(currentTile, dir);
+		{	tempTile =  getPercepts().getNeighborTile(currentTile, dir);
 			if(tiles.contains(tempTile))
 				tiles.remove(tempTile);
 		}
@@ -459,7 +459,7 @@ public class CoremenKucukkarakurt extends ArtificialIntelligence
 	// la methode qui renvoie la direction qui n'est pas dangereuse 
 	private AiTile getDirection(AiTile refTile) throws StopRequestException{
 		
-		ArrayList<AiTile> tiles = getClearNeighbours(currentTile);
+		ArrayList<AiTile> tiles = getClearNeighbors(currentTile);
 		
 		double min=10000000;
 		int k=0;
@@ -539,25 +539,25 @@ public class CoremenKucukkarakurt extends ArtificialIntelligence
 		checkInterruption(); //APPEL OBLIGATOIRE
 		tile=currentTile;
 		
-		AiTile tempTile =  getPercepts().getNeighbourTile(tile, Direction.UP);
+		AiTile tempTile =  getPercepts().getNeighborTile(tile, Direction.UP);
 		if(tempTile.getBlock()!=null){
 			if(tempTile.getBlock().isDestructible())
 				return true;
 		}
 			
-		tempTile =  getPercepts().getNeighbourTile(tile, Direction.DOWN);
+		tempTile =  getPercepts().getNeighborTile(tile, Direction.DOWN);
 		if(tempTile.getBlock()!=null){
 			if(tempTile.getBlock().isDestructible())
 				return true;
 		}
 			
-		tempTile =  getPercepts().getNeighbourTile(tile, Direction.RIGHT);
+		tempTile =  getPercepts().getNeighborTile(tile, Direction.RIGHT);
 		if(tempTile.getBlock()!=null){
 			if(tempTile.getBlock().isDestructible())
 				return true;
 		}
 		
-		tempTile =  getPercepts().getNeighbourTile(tile, Direction.LEFT);
+		tempTile =  getPercepts().getNeighborTile(tile, Direction.LEFT);
 		if(tempTile.getBlock()!=null){
 			if(tempTile.getBlock().isDestructible())
 				return true;
@@ -577,14 +577,14 @@ public class CoremenKucukkarakurt extends ArtificialIntelligence
 		
 		for (int i=0;i<10;i++){
 			checkInterruption(); //APPEL OBLIGATOIRE
-			AiTile tempTile =  getPercepts().getNeighbourTile(tile, Direction.UP);
+			AiTile tempTile =  getPercepts().getNeighborTile(tile, Direction.UP);
 			
 			if(tempTile.getBlock()!=null ){
 				
 				break;
 			}
 			//else if(getTheNeigborgsNumber(tempTile)==1)	
-			else if(isClear(getPercepts().getNeighbourTile(tempTile, Direction.RIGHT)) || isClear(getPercepts().getNeighbourTile(tempTile, Direction.LEFT)))
+			else if(isClear(getPercepts().getNeighborTile(tempTile, Direction.RIGHT)) || isClear(getPercepts().getNeighborTile(tempTile, Direction.LEFT)))
 				return true;
 			
 			tile=tempTile;
@@ -593,14 +593,14 @@ public class CoremenKucukkarakurt extends ArtificialIntelligence
 		tile=currentTile;
 		for (int i=0;i<10;i++){
 			checkInterruption(); //APPEL OBLIGATOIRE
-			AiTile tempTile =  getPercepts().getNeighbourTile(tile, Direction.DOWN);
+			AiTile tempTile =  getPercepts().getNeighborTile(tile, Direction.DOWN);
 			
 			if(tempTile.getBlock()!=null ){
 				
 				break;
 			}
 			//else if(getTheNeigborgsNumber(tempTile)==1)
-			else if(isClear(getPercepts().getNeighbourTile(tempTile, Direction.RIGHT)) || isClear(getPercepts().getNeighbourTile(tempTile, Direction.LEFT)))
+			else if(isClear(getPercepts().getNeighborTile(tempTile, Direction.RIGHT)) || isClear(getPercepts().getNeighborTile(tempTile, Direction.LEFT)))
 				return true;
 			
 			tile=tempTile;
@@ -609,14 +609,14 @@ public class CoremenKucukkarakurt extends ArtificialIntelligence
 		tile=currentTile;
 		for (int i=0;i<10;i++){
 			checkInterruption(); //APPEL OBLIGATOIRE
-			AiTile tempTile =  getPercepts().getNeighbourTile(tile, Direction.RIGHT);
+			AiTile tempTile =  getPercepts().getNeighborTile(tile, Direction.RIGHT);
 			
 			if(tempTile.getBlock()!=null ){
 				
 				break;
 			}
 			//else if(getTheNeigborgsNumber(tempTile)==1)
-			else if(isClear(getPercepts().getNeighbourTile(tempTile, Direction.DOWN)) || isClear(getPercepts().getNeighbourTile(tempTile, Direction.UP)))
+			else if(isClear(getPercepts().getNeighborTile(tempTile, Direction.DOWN)) || isClear(getPercepts().getNeighborTile(tempTile, Direction.UP)))
 				return true;
 			 
 			tile=tempTile;
@@ -625,7 +625,7 @@ public class CoremenKucukkarakurt extends ArtificialIntelligence
 		tile=currentTile;
 		for (int i=0;i<10;i++){
 			checkInterruption(); //APPEL OBLIGATOIRE
-			AiTile tempTile =  getPercepts().getNeighbourTile(tile, Direction.LEFT);
+			AiTile tempTile =  getPercepts().getNeighborTile(tile, Direction.LEFT);
 			
 			if(tempTile.getBlock()!=null ){
 				
@@ -633,7 +633,7 @@ public class CoremenKucukkarakurt extends ArtificialIntelligence
 			}
 			
 			//else if(getTheNeigborgsNumber(tempTile)==1)
-			else if(isClear(getPercepts().getNeighbourTile(tempTile, Direction.UP)) || isClear(getPercepts().getNeighbourTile(tempTile, Direction.DOWN)))
+			else if(isClear(getPercepts().getNeighborTile(tempTile, Direction.UP)) || isClear(getPercepts().getNeighborTile(tempTile, Direction.DOWN)))
 				return true;
 			tile=tempTile;
 			
@@ -656,14 +656,14 @@ public class CoremenKucukkarakurt extends ArtificialIntelligence
 		
 		for (int i=0;i<10;i++){
 			checkInterruption(); //APPEL OBLIGATOIRE
-			AiTile tempTile =  getPercepts().getNeighbourTile(tile, Direction.UP);
+			AiTile tempTile =  getPercepts().getNeighborTile(tile, Direction.UP);
 			
 			if(tempTile.getBlock()!=null ){
 				
 				break;
 			}
 			//else if(getTheNeigborgsNumber(tempTile)==1)	
-			else if(isClear(getPercepts().getNeighbourTile(tempTile, Direction.RIGHT)) || isClear(getPercepts().getNeighbourTile(tempTile, Direction.LEFT)))
+			else if(isClear(getPercepts().getNeighborTile(tempTile, Direction.RIGHT)) || isClear(getPercepts().getNeighborTile(tempTile, Direction.LEFT)))
 				dirs.add(Direction.UP);
 			
 			tile=tempTile;
@@ -672,14 +672,14 @@ public class CoremenKucukkarakurt extends ArtificialIntelligence
 		tile=currentTile;
 		for (int i=0;i<10;i++){
 			checkInterruption(); //APPEL OBLIGATOIRE
-			AiTile tempTile =  getPercepts().getNeighbourTile(tile, Direction.DOWN);
+			AiTile tempTile =  getPercepts().getNeighborTile(tile, Direction.DOWN);
 			
 			if(tempTile.getBlock()!=null ){
 				
 				break;
 			}
 			//else if(getTheNeigborgsNumber(tempTile)==1)
-			else if(isClear(getPercepts().getNeighbourTile(tempTile, Direction.RIGHT)) || isClear(getPercepts().getNeighbourTile(tempTile, Direction.LEFT)))
+			else if(isClear(getPercepts().getNeighborTile(tempTile, Direction.RIGHT)) || isClear(getPercepts().getNeighborTile(tempTile, Direction.LEFT)))
 				dirs.add(Direction.DOWN);
 			
 			tile=tempTile;
@@ -688,14 +688,14 @@ public class CoremenKucukkarakurt extends ArtificialIntelligence
 		tile=currentTile;
 		for (int i=0;i<10;i++){
 			checkInterruption(); //APPEL OBLIGATOIRE
-			AiTile tempTile =  getPercepts().getNeighbourTile(tile, Direction.RIGHT);
+			AiTile tempTile =  getPercepts().getNeighborTile(tile, Direction.RIGHT);
 			
 			if(tempTile.getBlock()!=null ){
 				
 				break;
 			}
 			//else if(getTheNeigborgsNumber(tempTile)==1)
-			else if(isClear(getPercepts().getNeighbourTile(tempTile, Direction.DOWN)) || isClear(getPercepts().getNeighbourTile(tempTile, Direction.UP)))
+			else if(isClear(getPercepts().getNeighborTile(tempTile, Direction.DOWN)) || isClear(getPercepts().getNeighborTile(tempTile, Direction.UP)))
 				dirs.add(Direction.RIGHT);
 			 
 			tile=tempTile;
@@ -704,7 +704,7 @@ public class CoremenKucukkarakurt extends ArtificialIntelligence
 		tile=currentTile;
 		for (int i=0;i<10;i++){
 			checkInterruption(); //APPEL OBLIGATOIRE
-			AiTile tempTile =  getPercepts().getNeighbourTile(tile, Direction.LEFT);
+			AiTile tempTile =  getPercepts().getNeighborTile(tile, Direction.LEFT);
 			
 			if(tempTile.getBlock()!=null ){
 				
@@ -712,7 +712,7 @@ public class CoremenKucukkarakurt extends ArtificialIntelligence
 			}
 			
 			//else if(getTheNeigborgsNumber(tempTile)==1)
-			else if(isClear(getPercepts().getNeighbourTile(tempTile, Direction.UP)) || isClear(getPercepts().getNeighbourTile(tempTile, Direction.DOWN)))
+			else if(isClear(getPercepts().getNeighborTile(tempTile, Direction.UP)) || isClear(getPercepts().getNeighborTile(tempTile, Direction.DOWN)))
 				dirs.add(Direction.LEFT);
 			tile=tempTile;
 			
@@ -736,7 +736,7 @@ public class CoremenKucukkarakurt extends ArtificialIntelligence
 		
 		
 		// liste des cases autour de la case de référence
-		Collection<AiTile> neighborgs = getClearNeighbourTiles(currentTile);
+		Collection<AiTile> neighborgs = getClearNeighborTiles(currentTile);
 		// on garde les cases sans bloc ni bombe ni feu
 		
 	
@@ -753,15 +753,15 @@ public class CoremenKucukkarakurt extends ArtificialIntelligence
 	}
 	
 	// la methode qui renvoie la liste des voisins 
-	private Collection<AiTile> getClearNeighbourTiles(AiTile tile) throws StopRequestException
+	private Collection<AiTile> getClearNeighborTiles(AiTile tile) throws StopRequestException
 	{	Collection<AiTile> result = new ArrayList<AiTile>();
 		ArrayList<Direction> directions = Direction.getAllPrimaries();
 		Iterator<Direction> d = directions.iterator();
 		while(d.hasNext())
 		{	Direction dir = d.next();
-			AiTile neighbour = getPercepts().getNeighbourTile(tile, dir);
-			if(isClear(neighbour))
-				result.add(neighbour);
+			AiTile neighbor = getPercepts().getNeighborTile(tile, dir);
+			if(isClear(neighbor))
+				result.add(neighbor);
 		}
 		result = Collections.unmodifiableCollection(result);
 		return result;

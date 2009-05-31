@@ -258,10 +258,10 @@ public class DayioglugilGeckalan extends ArtificialIntelligence {
 			int bnx = temp.getCol();
 			int bny = temp.getLine();			
 			
-			AiBlock right = temp2.getNeighbour(Direction.RIGHT).getBlock();
-			AiBlock left = temp2.getNeighbour(Direction.LEFT).getBlock();
-			AiBlock up = temp2.getNeighbour(Direction.UP).getBlock();
-			AiBlock down = temp2.getNeighbour(Direction.DOWN).getBlock();			
+			AiBlock right = temp2.getNeighbor(Direction.RIGHT).getBlock();
+			AiBlock left = temp2.getNeighbor(Direction.LEFT).getBlock();
+			AiBlock up = temp2.getNeighbor(Direction.UP).getBlock();
+			AiBlock down = temp2.getNeighbor(Direction.DOWN).getBlock();			
 		
 			if (left == null) {
 				for (int i = 1 ; (i <= temp.getRange()) && (bnx-i > 0) ; i++ ) {	
