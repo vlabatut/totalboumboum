@@ -1,4 +1,4 @@
-package fr.free.totalboumboum.engine.content.feature.action.cry;
+package fr.free.totalboumboum.engine.content.feature.action.jump;
 
 /*
  * Total Boum Boum
@@ -27,10 +27,10 @@ import fr.free.totalboumboum.engine.content.feature.action.SpecificAction;
 import fr.free.totalboumboum.engine.content.sprite.Sprite;
 
 /** 
- * crying at the end of a round .
- * always performed by a hero (who just lost the round)
+ * begining an aerial move on its own (not peing punched)
+ * for instance: hero jumping
  * 
- * 	<br>actor: 			hero
+ * 	<br>actor: 			any (probably a hero)
  * 	<br>target: 		none
  * 	<br>direction:		any or none
  * 	<br>contact:		none
@@ -38,9 +38,9 @@ import fr.free.totalboumboum.engine.content.sprite.Sprite;
  * 	<br>orientation:	undefined
  *  
  */
-public class SpecificCry extends SpecificAction<GeneralCry>
+public class SpecificJump extends SpecificAction<GeneralJump>
 {
-	public SpecificCry(Sprite actor, Sprite target) throws IncompatibleParameterException
-	{	super(ActionName.CRY,actor,target);
+	public SpecificJump(Sprite actor, Sprite target) throws IncompatibleParameterException
+	{	super(ActionName.JUMP,actor,target);
 	}
 }

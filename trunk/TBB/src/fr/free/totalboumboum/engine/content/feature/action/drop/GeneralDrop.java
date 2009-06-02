@@ -1,4 +1,4 @@
-package fr.free.totalboumboum.engine.content.feature.action.cry;
+package fr.free.totalboumboum.engine.content.feature.action.drop;
 
 /*
  * Total Boum Boum
@@ -29,26 +29,51 @@ import fr.free.totalboumboum.engine.content.feature.action.Orientation;
 import fr.free.totalboumboum.engine.content.feature.action.Role;
 import fr.free.totalboumboum.engine.content.feature.action.TilePosition;
 
-/** 
- * crying at the end of a round .
- * always performed by a hero (who just lost the round)
+/**
+ * action de déposer un objet (une bombe)
+ * TRANSITIVE
  * 
- * 	<br>actor: 			hero
- * 	<br>target: 		none
+ * <p>ABILITY PERFORM
+ * 	<br>paramètre: actor=self
+ * 	<br>paramètre: target=oui (bomb)
+ * 	<br>paramètre: direction=N/D
+ * 	<br>paramètre: strength=bool
+ * 	<br>paramètre: kind=type de bombe
+ * 	<br>paramètre: scope=N/D
+ * 	<br>paramètre: restriction=N/D
+ *  
+ * <p>ABILITY REFUSE
+ * 	<br>N/D
+ * 
+ * <p>ABILITY PREVENT
+ * 	<br>paramètre: actor=oui (hero)
+ * 	<br>paramètre: target=oui (bomb)
+ * 	<br>paramètre: direction=N/D
+ * 	<br>paramètre: strength=bool
+ * 	<br>paramètre: kind=type de bombe
+ * 	<br>paramètre: scope=N/D
+ * 	<br>paramètre: restriction=N/D
+ */
+/** 
+ * putting an object on the ground.
+ * usually a player dropping a bomb
+ * 
+ * 	<br>actor: 			any (probably a hero)
+ * 	<br>target: 		any (probably a bomb)
  * 	<br>direction:		any or none
- * 	<br>contact:		none
+ * 	<br>contact:		none (the target is not supposed to be ongame)
  * 	<br>tilePosition:	undefined
  * 	<br>orientation:	undefined
  *  
  */
-public class GeneralCry extends GeneralAction<SpecificCry>
+public class GeneralDrop extends GeneralAction<SpecificDrop>
 {
 	
-	public GeneralCry()
-	{	super(ActionName.CRY);	
-		Role[] allowedActors = {Role.HERO};
+	public GeneralDrop()
+	{	super(ActionName.DROP);	
+		Role[] allowedActors = {Role.BLOCK,Role.BOMB,Role.FIRE,Role.FLOOR,Role.HERO,Role.ITEM};
 		setAllowedActors(allowedActors);
-		Role[] allowedTargets = {Role.NONE};
+		Role[] allowedTargets = {Role.BLOCK,Role.BOMB,Role.FIRE,Role.FLOOR,Role.HERO,Role.ITEM};
 		setAllowedTargets(allowedTargets);
 		Direction[] allowedDirections = {Direction.NONE,Direction.UP,Direction.UPRIGHT,Direction.RIGHT,Direction.DOWNRIGHT,Direction.DOWN,Direction.DOWNLEFT,Direction.LEFT,Direction.UPLEFT};
 		setAllowedDirections(allowedDirections);

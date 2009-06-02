@@ -27,10 +27,11 @@ import fr.free.totalboumboum.engine.content.feature.action.SpecificAction;
 import fr.free.totalboumboum.engine.content.sprite.Sprite;
 
 /** 
- * appearing in a tile, coming from nowhere (after a teleport, a drop, at the begining of a round, etc)
+ * appearing in a tile, coming from nowhere
+ * (after a teleport, a dropped bomb, player at the begining of a round, etc.)
  * 
  * 	<br>actor: 			any
- * 	<br>target: 		any (probably a floor but not necessarily
+ * 	<br>target: 		any (probably a floor, but not necessarily)
  * 	<br>direction:		any or none
  * 	<br>contact:		any or none
  * 	<br>tilePosition:	any or undefined

@@ -1,4 +1,4 @@
-package fr.free.totalboumboum.engine.content.feature.action.cry;
+package fr.free.totalboumboum.engine.content.feature.action.jump;
 
 /*
  * Total Boum Boum
@@ -30,10 +30,35 @@ import fr.free.totalboumboum.engine.content.feature.action.Role;
 import fr.free.totalboumboum.engine.content.feature.action.TilePosition;
 
 /** 
- * crying at the end of a round .
- * always performed by a hero (who just lost the round)
+ * action de sauter en l'air (hors déplacement sur le plan, qui est lié à movehigh)
+ * INTRANSITIVE
  * 
- * 	<br>actor: 			hero
+ * <p>ABILITY PERFORM
+ * 	<br>paramètre: actor=self
+ * 	<br>paramètre: target=N/D
+ * 	<br>paramètre: direction=N/D
+ * 	<br>paramètre: strength=bool
+ * 	<br>paramètre: kind=N/D
+ * 	<br>paramètre: scope=N/D
+ * 	<br>paramètre: restriction=N/D
+ * 
+ * <p>ABILITY REFUSE
+ * 	<br>N/D
+ * 
+ * <p>ABILITY PREVENT
+ * 	<br>paramètre: actor=oui (hero)
+ * 	<br>paramètre: target=N/D
+ * 	<br>paramètre: direction=N/D
+ * 	<br>paramètre: strength=bool
+ * 	<br>paramètre: kind=N/D
+ * 	<br>paramètre: scope=N/D
+ * 	<br>paramètre: restriction=N/D
+ */
+/** 
+ * begining an aerial move on its own (not peing punched)
+ * for instance: hero jumping
+ * 
+ * 	<br>actor: 			any (probably a hero)
  * 	<br>target: 		none
  * 	<br>direction:		any or none
  * 	<br>contact:		none
@@ -41,12 +66,12 @@ import fr.free.totalboumboum.engine.content.feature.action.TilePosition;
  * 	<br>orientation:	undefined
  *  
  */
-public class GeneralCry extends GeneralAction<SpecificCry>
+public class GeneralJump extends GeneralAction<SpecificJump>
 {
 	
-	public GeneralCry()
-	{	super(ActionName.CRY);	
-		Role[] allowedActors = {Role.HERO};
+	public GeneralJump()
+	{	super(ActionName.JUMP);	
+		Role[] allowedActors = {Role.BLOCK,Role.BOMB,Role.FIRE,Role.FLOOR,Role.HERO,Role.ITEM};
 		setAllowedActors(allowedActors);
 		Role[] allowedTargets = {Role.NONE};
 		setAllowedTargets(allowedTargets);

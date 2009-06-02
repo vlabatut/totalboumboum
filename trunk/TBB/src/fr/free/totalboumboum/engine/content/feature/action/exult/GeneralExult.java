@@ -1,4 +1,4 @@
-package fr.free.totalboumboum.engine.content.feature.action.cry;
+package fr.free.totalboumboum.engine.content.feature.action.exult;
 
 /*
  * Total Boum Boum
@@ -30,8 +30,8 @@ import fr.free.totalboumboum.engine.content.feature.action.Role;
 import fr.free.totalboumboum.engine.content.feature.action.TilePosition;
 
 /** 
- * crying at the end of a round .
- * always performed by a hero (who just lost the round)
+ * celebrating a victory at the end of a round. 
+ * always performed by a hero
  * 
  * 	<br>actor: 			hero
  * 	<br>target: 		none
@@ -41,11 +41,11 @@ import fr.free.totalboumboum.engine.content.feature.action.TilePosition;
  * 	<br>orientation:	undefined
  *  
  */
-public class GeneralCry extends GeneralAction<SpecificCry>
+public class GeneralExult extends GeneralAction<SpecificExult>
 {
 	
-	public GeneralCry()
-	{	super(ActionName.CRY);	
+	public GeneralExult()
+	{	super(ActionName.EXULT);	
 		Role[] allowedActors = {Role.HERO};
 		setAllowedActors(allowedActors);
 		Role[] allowedTargets = {Role.NONE};

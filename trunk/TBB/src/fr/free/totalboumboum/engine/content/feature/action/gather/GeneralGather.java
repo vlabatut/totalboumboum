@@ -1,4 +1,4 @@
-package fr.free.totalboumboum.engine.content.feature.action.cry;
+package fr.free.totalboumboum.engine.content.feature.action.gather;
 
 /*
  * Total Boum Boum
@@ -30,33 +30,64 @@ import fr.free.totalboumboum.engine.content.feature.action.Role;
 import fr.free.totalboumboum.engine.content.feature.action.TilePosition;
 
 /** 
- * crying at the end of a round .
- * always performed by a hero (who just lost the round)
+ * action de récolter (un item)
+ * TRANSITIVE
  * 
- * 	<br>actor: 			hero
- * 	<br>target: 		none
+ * <p>ABILITY PERFORM
+ * 	<br>paramètre: actor=self
+ * 	<br>paramètre: target=oui (item)
+ * 	<br>paramètre: direction=N/D
+ * 	<br>paramètre: strength=bool
+ * 	<br>paramètre: kind=N/D
+ * 	<br>paramètre: scope=N/D
+ * 	<br>paramètre: restriction=N/D
+ * 
+ * <p>ABILITY REFUSE (ex: item qui ne peut pas être récolté en permanence)
+ * 	<br>paramètre: actor=oui (hero)
+ * 	<br>paramètre: target=self
+ * 	<br>paramètre: direction=N/D
+ * 	<br>paramètre: strength=bool
+ * 	<br>paramètre: kind=N/D
+ * 	<br>paramètre: scope=N/D
+ * 	<br>paramètre: restriction=N/D
+ * 
+ * <p>ABILITY PREVENT (ex: un bloc qui empêche par intermitence les heros de récolter l'item)
+ * 	<br>paramètre: actor=oui (hero)
+ * 	<br>paramètre: target=oui (item)
+ * 	<br>paramètre: direction=N/D
+ * 	<br>paramètre: strength=bool
+ * 	<br>paramètre: kind=N/D
+ * 	<br>paramètre: scope=N/D
+ * 	<br>paramètre: restriction=éventuellement
+ */
+/** 
+ * picking an object just by walking on it (unlike picking a bomb to carry it). 
+ * most of the time a hero gathering an item.
+ * 
+ * 	<br>actor: 			any (probably a hero)
+ * 	<br>target: 		any (probably an item)
  * 	<br>direction:		any or none
- * 	<br>contact:		none
- * 	<br>tilePosition:	undefined
- * 	<br>orientation:	undefined
+ * 	<br>contact:		collision or intersection
+ * 	<br>tilePosition:	same
+ * 	<br>orientation:	any or undefined
  *  
  */
-public class GeneralCry extends GeneralAction<SpecificCry>
+public class GeneralGather extends GeneralAction<SpecificGather>
 {
 	
-	public GeneralCry()
-	{	super(ActionName.CRY);	
-		Role[] allowedActors = {Role.HERO};
+	public GeneralGather()
+	{	super(ActionName.GATHER);	
+		Role[] allowedActors = {Role.BLOCK,Role.BOMB,Role.FIRE,Role.FLOOR,Role.HERO,Role.ITEM};
 		setAllowedActors(allowedActors);
-		Role[] allowedTargets = {Role.NONE};
+		Role[] allowedTargets = {Role.BLOCK,Role.BOMB,Role.FIRE,Role.FLOOR,Role.HERO,Role.ITEM};
 		setAllowedTargets(allowedTargets);
 		Direction[] allowedDirections = {Direction.NONE,Direction.UP,Direction.UPRIGHT,Direction.RIGHT,Direction.DOWNRIGHT,Direction.DOWN,Direction.DOWNLEFT,Direction.LEFT,Direction.UPLEFT};
 		setAllowedDirections(allowedDirections);
-		Contact[] allowedContacts = {Contact.NONE};
+		Contact[] allowedContacts = {Contact.COLLISION,Contact.INTERSECTION};
 		setAllowedContacts(allowedContacts);
-		TilePosition[] allowedTilePositions = {TilePosition.UNDEFINED};
+		TilePosition[] allowedTilePositions = {TilePosition.SAME};
 		setAllowedTilePositions(allowedTilePositions);
-		Orientation[] allowedOrientations = {Orientation.UNDEFINED};
+		Orientation[] allowedOrientations = {Orientation.UNDEFINED,Orientation.OPPOSITE,Orientation.OTHER,Orientation.SAME};
 		setAllowedOrientations(allowedOrientations);
 	}
 	

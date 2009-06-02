@@ -1,4 +1,4 @@
-package fr.free.totalboumboum.engine.content.feature.action.cry;
+package fr.free.totalboumboum.engine.content.feature.action.detonate;
 
 /*
  * Total Boum Boum
@@ -30,10 +30,37 @@ import fr.free.totalboumboum.engine.content.feature.action.Role;
 import fr.free.totalboumboum.engine.content.feature.action.TilePosition;
 
 /** 
- * crying at the end of a round .
- * always performed by a hero (who just lost the round)
+ * action volontaire de brûler (par exemple explosion timer pr une bombe)
+ * action de créer une explosion, alors que consume = fait de brûler(?)
+ * ou detonate = bruler+explosion alors que consume=etre brulé
+ * INTRANSITIVE
+ *  
+ * <p>ABILITY PERFORM
+ * 	<br>paramètre: actor=self
+ * 	<br>paramètre: target=N/D
+ * 	<br>paramètre: direction=oui (permet de restreindre l'explosion d'une bombe ?)
+ * 	<br>paramètre: strength=bool
+ * 	<br>paramètre: kind=N/D
+ * 	<br>paramètre: scope=N/D
+ * 	<br>paramètre: restriction=N/D
  * 
- * 	<br>actor: 			hero
+ * <p>ABILITY REFUSE
+ * 	<br>N/D
+ * 
+ * <p>ABILITY PREVENT
+ * 	<br>paramètre: actor=oui
+ * 	<br>paramètre: target=N/D
+ * 	<br>paramètre: direction=N/D
+ * 	<br>paramètre: strength=bool
+ * 	<br>paramètre: kind=N/D
+ * 	<br>paramètre: scope=N/D
+ * 	<br>paramètre: restriction=N/D
+ */
+/** 
+ * producing an explosion, with flames and everything. 
+ * usually performed by a bomb (triggered bomb, etc)
+ * 
+ * 	<br>actor: 			any (probably a bomb)
  * 	<br>target: 		none
  * 	<br>direction:		any or none
  * 	<br>contact:		none
@@ -41,12 +68,12 @@ import fr.free.totalboumboum.engine.content.feature.action.TilePosition;
  * 	<br>orientation:	undefined
  *  
  */
-public class GeneralCry extends GeneralAction<SpecificCry>
+public class GeneralDetonate extends GeneralAction<SpecificDetonate>
 {
 	
-	public GeneralCry()
-	{	super(ActionName.CRY);	
-		Role[] allowedActors = {Role.HERO};
+	public GeneralDetonate()
+	{	super(ActionName.DETONATE);	
+		Role[] allowedActors = {Role.BLOCK,Role.BOMB,Role.FIRE,Role.FLOOR,Role.HERO,Role.ITEM};
 		setAllowedActors(allowedActors);
 		Role[] allowedTargets = {Role.NONE};
 		setAllowedTargets(allowedTargets);
