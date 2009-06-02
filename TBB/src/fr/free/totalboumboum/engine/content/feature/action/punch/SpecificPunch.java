@@ -1,4 +1,4 @@
-package fr.free.totalboumboum.engine.content.feature.action.cry;
+package fr.free.totalboumboum.engine.content.feature.action.punch;
 
 /*
  * Total Boum Boum
@@ -27,20 +27,20 @@ import fr.free.totalboumboum.engine.content.feature.action.SpecificAction;
 import fr.free.totalboumboum.engine.content.sprite.Sprite;
 
 /** 
- * crying at the end of a round .
- * always performed by a hero (who just lost the round)
+ * hitting an object to to send it in the air.
+ * for instance: hero punching a bomb
  * 
- * 	<br>actor: 			hero
- * 	<br>target: 		none
- * 	<br>direction:		any or none
- * 	<br>contact:		none
- * 	<br>tilePosition:	undefined
- * 	<br>orientation:	undefined
+ * 	<br>actor: 			any (probably a hero)
+ * 	<br>target: 		any (probably a bomb or another hero)
+ * 	<br>direction:		any (not none)
+ * 	<br>contact:		any or none
+ * 	<br>tilePosition:	same or neighbor
+ * 	<br>orientation:	same
  *  
  */
-public class SpecificCry extends SpecificAction<GeneralCry>
+public class SpecificPunch extends SpecificAction<GeneralPunch>
 {
-	public SpecificCry(Sprite actor, Sprite target) throws IncompatibleParameterException
-	{	super(ActionName.CRY,actor,target);
+	public SpecificPunch(Sprite actor, Sprite target) throws IncompatibleParameterException
+	{	super(ActionName.PUNCH,actor,target);
 	}
 }

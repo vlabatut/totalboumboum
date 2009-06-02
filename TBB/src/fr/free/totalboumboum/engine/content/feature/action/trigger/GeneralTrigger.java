@@ -1,4 +1,4 @@
-package fr.free.totalboumboum.engine.content.feature.action.cry;
+package fr.free.totalboumboum.engine.content.feature.action.trigger;
 
 /*
  * Total Boum Boum
@@ -30,33 +30,58 @@ import fr.free.totalboumboum.engine.content.feature.action.Role;
 import fr.free.totalboumboum.engine.content.feature.action.TilePosition;
 
 /** 
- * crying at the end of a round .
- * always performed by a hero (who just lost the round)
+ * action d'activer l'explosion d'une remote bomb
+ * TRANSITIVE
  * 
- * 	<br>actor: 			hero
- * 	<br>target: 		none
+ * <p>ABILITY PERFORM
+ * 	<br>paramètre: actor=self
+ * 	<br>paramètre: target=oui (bombe)
+ * 	<br>paramètre: direction=N/D
+ * 	<br>paramètre: strength=bool
+ * 	<br>paramètre: kind=N/D
+ * 	<br>paramètre: scope=N/D
+ * 	<br>paramètre: restriction=N/D
+ * 
+ * <p>ABILITY REFUSE (généralement pas utilisé, mais possible)
+ * 	<br>N/D
+ * 
+ * <p>ABILITY PREVENT
+ * 	<br>paramètre: actor=oui (hero)
+ * 	<br>paramètre: target=all
+ * 	<br>paramètre: direction=N/D
+ * 	<br>paramètre: strength=bool
+ * 	<br>paramètre: kind=N/D
+ * 	<br>paramètre: scope=N/D
+ * 	<br>paramètre: restriction=N/D
+ */
+/** 
+ * asking a remote bomb to explode.
+ * usually performed by a hero on.. well, on a bomb.
+ * 
+ * 	<br>actor: 			any (probably hero)
+ * 	<br>target: 		bomb
  * 	<br>direction:		any or none
- * 	<br>contact:		none
- * 	<br>tilePosition:	undefined
- * 	<br>orientation:	undefined
+ * 	<br>contact:		any or none
+ * 	<br>tilePosition:	any or undefined
+ * 	<br>orientation:	any or undefined
  *  
  */
-public class GeneralCry extends GeneralAction<SpecificCry>
+public class GeneralTrigger extends GeneralAction<SpecificTrigger>
 {
 	
-	public GeneralCry()
-	{	super(ActionName.CRY);	
-		Role[] allowedActors = {Role.HERO};
+	public GeneralTrigger()
+	{	super(ActionName.TRIGGER);	
+		Role[] allowedActors = {Role.BLOCK,Role.BOMB,Role.FIRE,Role.FLOOR,Role.HERO,Role.ITEM};
 		setAllowedActors(allowedActors);
-		Role[] allowedTargets = {Role.NONE};
+		Role[] allowedTargets = {Role.BOMB};
 		setAllowedTargets(allowedTargets);
 		Direction[] allowedDirections = {Direction.NONE,Direction.UP,Direction.UPRIGHT,Direction.RIGHT,Direction.DOWNRIGHT,Direction.DOWN,Direction.DOWNLEFT,Direction.LEFT,Direction.UPLEFT};
 		setAllowedDirections(allowedDirections);
-		Contact[] allowedContacts = {Contact.NONE};
+		Contact[] allowedContacts = {Contact.NONE,Contact.COLLISION,Contact.INTERSECTION};
 		setAllowedContacts(allowedContacts);
-		TilePosition[] allowedTilePositions = {TilePosition.UNDEFINED};
+		TilePosition[] allowedTilePositions = {TilePosition.UNDEFINED,TilePosition.NEIGHBOR,TilePosition.REMOTE,TilePosition.SAME};
 		setAllowedTilePositions(allowedTilePositions);
-		Orientation[] allowedOrientations = {Orientation.UNDEFINED};
+		Orientation[] allowedOrientations = {Orientation.UNDEFINED,Orientation.OPPOSITE,Orientation.OTHER,Orientation.SAME};
 		setAllowedOrientations(allowedOrientations);
 	}
 	

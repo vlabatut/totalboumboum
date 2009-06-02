@@ -1,4 +1,4 @@
-package fr.free.totalboumboum.engine.content.feature.action.cry;
+package fr.free.totalboumboum.engine.content.feature.action.land;
 
 /*
  * Total Boum Boum
@@ -30,10 +30,29 @@ import fr.free.totalboumboum.engine.content.feature.action.Role;
 import fr.free.totalboumboum.engine.content.feature.action.TilePosition;
 
 /** 
- * crying at the end of a round .
- * always performed by a hero (who just lost the round)
+ * action d'atterrir (hors déplacement sur le plan, qui est lié à movehigh)
+ * INTRANSITIVE
  * 
- * 	<br>actor: 			hero
+ * <p>ABILITY PERFORM
+ *	<br>N/D 
+ *
+ * <p>ABILITY REFUSE
+ * 	<br>N/D
+ * 
+ * <p>ABILITY PREVENT
+ * 	<br>paramètre: actor=oui (hero,bombe)
+ * 	<br>paramètre: target=N/D
+ * 	<br>paramètre: direction=N/D
+ * 	<br>paramètre: strength=bool
+ * 	<br>paramètre: kind=N/D
+ * 	<br>paramètre: scope=oui
+ * 	<br>paramètre: restriction=SPRITE_TRAVERSE
+ */
+/** 
+ * finishing an aerial move and landing on the floor.
+ * for instance a hero after a jump, or a bomb after having been punched
+ * 
+ * 	<br>actor: 			any (probably a hero or a bomb)
  * 	<br>target: 		none
  * 	<br>direction:		any or none
  * 	<br>contact:		none
@@ -41,12 +60,12 @@ import fr.free.totalboumboum.engine.content.feature.action.TilePosition;
  * 	<br>orientation:	undefined
  *  
  */
-public class GeneralCry extends GeneralAction<SpecificCry>
+public class GeneralLand extends GeneralAction<SpecificLand>
 {
 	
-	public GeneralCry()
-	{	super(ActionName.CRY);	
-		Role[] allowedActors = {Role.HERO};
+	public GeneralLand()
+	{	super(ActionName.LAND);	
+		Role[] allowedActors = {Role.BLOCK,Role.BOMB,Role.FIRE,Role.FLOOR,Role.HERO,Role.ITEM};
 		setAllowedActors(allowedActors);
 		Role[] allowedTargets = {Role.NONE};
 		setAllowedTargets(allowedTargets);

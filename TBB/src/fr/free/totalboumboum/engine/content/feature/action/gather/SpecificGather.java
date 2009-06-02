@@ -1,4 +1,4 @@
-package fr.free.totalboumboum.engine.content.feature.action.cry;
+package fr.free.totalboumboum.engine.content.feature.action.gather;
 
 /*
  * Total Boum Boum
@@ -27,20 +27,20 @@ import fr.free.totalboumboum.engine.content.feature.action.SpecificAction;
 import fr.free.totalboumboum.engine.content.sprite.Sprite;
 
 /** 
- * crying at the end of a round .
- * always performed by a hero (who just lost the round)
+ * picking an object just by walking on it (unlike picking a bomb to carry it). 
+ * most of the time a hero gathering an item.
  * 
- * 	<br>actor: 			hero
- * 	<br>target: 		none
+ * 	<br>actor: 			any (probably a hero)
+ * 	<br>target: 		any (probably an item)
  * 	<br>direction:		any or none
- * 	<br>contact:		none
- * 	<br>tilePosition:	undefined
- * 	<br>orientation:	undefined
+ * 	<br>contact:		collision or intersection
+ * 	<br>tilePosition:	same
+ * 	<br>orientation:	any or undefined
  *  
  */
-public class SpecificCry extends SpecificAction<GeneralCry>
+public class SpecificGather extends SpecificAction<GeneralGather>
 {
-	public SpecificCry(Sprite actor, Sprite target) throws IncompatibleParameterException
-	{	super(ActionName.CRY,actor,target);
+	public SpecificGather(Sprite actor, Sprite target) throws IncompatibleParameterException
+	{	super(ActionName.GATHER,actor,target);
 	}
 }

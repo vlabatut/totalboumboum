@@ -1,4 +1,4 @@
-package fr.free.totalboumboum.engine.content.feature.action.cry;
+package fr.free.totalboumboum.engine.content.feature.action.drop;
 
 /*
  * Total Boum Boum
@@ -27,20 +27,20 @@ import fr.free.totalboumboum.engine.content.feature.action.SpecificAction;
 import fr.free.totalboumboum.engine.content.sprite.Sprite;
 
 /** 
- * crying at the end of a round .
- * always performed by a hero (who just lost the round)
+ * putting an object on the ground.
+ * usually a player dropping a bomb
  * 
- * 	<br>actor: 			hero
- * 	<br>target: 		none
+ * 	<br>actor: 			any (probably a hero)
+ * 	<br>target: 		any (probably a bomb)
  * 	<br>direction:		any or none
- * 	<br>contact:		none
+ * 	<br>contact:		none (the target is not supposed to be ongame)
  * 	<br>tilePosition:	undefined
  * 	<br>orientation:	undefined
  *  
  */
-public class SpecificCry extends SpecificAction<GeneralCry>
+public class SpecificDrop extends SpecificAction<GeneralDrop>
 {
-	public SpecificCry(Sprite actor, Sprite target) throws IncompatibleParameterException
-	{	super(ActionName.CRY,actor,target);
+	public SpecificDrop(Sprite actor, Sprite target) throws IncompatibleParameterException
+	{	super(ActionName.DROP,actor,target);
 	}
 }

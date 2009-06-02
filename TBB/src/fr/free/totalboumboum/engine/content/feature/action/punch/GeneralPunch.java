@@ -1,4 +1,4 @@
-package fr.free.totalboumboum.engine.content.feature.action.appear;
+package fr.free.totalboumboum.engine.content.feature.action.punch;
 
 /*
  * Total Boum Boum
@@ -30,53 +30,65 @@ import fr.free.totalboumboum.engine.content.feature.action.Role;
 import fr.free.totalboumboum.engine.content.feature.action.TilePosition;
 
 /** 
- * action d'apparaitre de nulle part (suite à téléport, ou drop) 
- * INTRANSITIVE
+ * action de balancer un autre objet
+ * TRANSITIVE
  * 
  * <p>ABILITY PERFORM
- * 	<br>N/D
- * 
- * <p>ABILITY REFUSE
- *  <br>N/D
- *  
- * <p>ABILITY PREVENT
- * 	<br>paramètre: actor=oui
- * 	<br>paramètre: target=oui (floor)
- * 	<br>paramètre: direction=N/D
+ * 	<br>paramètre: actor=self
+ * 	<br>paramètre: target=oui (bomb)
+ * 	<br>paramètre: direction=oui
  * 	<br>paramètre: strength=bool
  * 	<br>paramètre: kind=N/D
- * 	<br>paramètre: scope=oui
- * 	<br>paramètre: restriction=SPRITE_TRAVERSE
- */	
-/** 
- * appearing in a tile, coming from nowhere
- * (after a teleport, a dropped bomb, player at the begining of a round, etc.)
+ * 	<br>paramètre: scope=N/D
+ * 	<br>paramètre: restriction=N/D
  * 
- * 	<br>actor: 			any
- * 	<br>target: 		any (probably a floor, but not necessarily) NOTE: is it necessary? why not like land?
- * 	<br>direction:		any or none
+ * <p>ABILITY REFUSE
+ * 	<br>paramètre: actor=oui (hero)
+ * 	<br>paramètre: target=self
+ * 	<br>paramètre: direction=oui
+ * 	<br>paramètre: strength=bool
+ * 	<br>paramètre: kind=N/D
+ * 	<br>paramètre: scope=N/D
+ * 	<br>paramètre: restriction=N/D
+ * 
+ * <p>ABILITY PREVENT
+ * 	<br>paramètre: actor=oui (hero)
+ * 	<br>paramètre: target=oui (bomb)
+ * 	<br>paramètre: direction=oui
+ * 	<br>paramètre: strength=bool
+ * 	<br>paramètre: kind=N/D
+ * 	<br>paramètre: scope=N/D
+ * 	<br>paramètre: restriction=N/D
+ */
+/** 
+ * hitting an object to to send it in the air.
+ * for instance: hero punching a bomb
+ * 
+ * 	<br>actor: 			any (probably a hero)
+ * 	<br>target: 		any (probably a bomb or another hero)
+ * 	<br>direction:		any (not none)
  * 	<br>contact:		any or none
- * 	<br>tilePosition:	any or undefined
- * 	<br>orientation:	any or undefined
+ * 	<br>tilePosition:	same or neighbor
+ * 	<br>orientation:	same
  *  
  */
-public class GeneralAppear extends GeneralAction<SpecificAppear>
+public class GeneralPunch extends GeneralAction<SpecificPunch>
 {
 	
-	public GeneralAppear()
-	{	super(ActionName.APPEAR);
+	public GeneralPunch()
+	{	super(ActionName.PUNCH);	
 		Role[] allowedActors = {Role.BLOCK,Role.BOMB,Role.FIRE,Role.FLOOR,Role.HERO,Role.ITEM};
 		setAllowedActors(allowedActors);
 		Role[] allowedTargets = {Role.BLOCK,Role.BOMB,Role.FIRE,Role.FLOOR,Role.HERO,Role.ITEM};
 		setAllowedTargets(allowedTargets);
-		Direction[] allowedDirections = {Direction.NONE,Direction.UP,Direction.UPRIGHT,Direction.RIGHT,Direction.DOWNRIGHT,Direction.DOWN,Direction.DOWNLEFT,Direction.LEFT,Direction.UPLEFT};
+		Direction[] allowedDirections = {Direction.UP,Direction.UPRIGHT,Direction.RIGHT,Direction.DOWNRIGHT,Direction.DOWN,Direction.DOWNLEFT,Direction.LEFT,Direction.UPLEFT};
 		setAllowedDirections(allowedDirections);
 		Contact[] allowedContacts = {Contact.NONE,Contact.COLLISION,Contact.INTERSECTION};
 		setAllowedContacts(allowedContacts);
-		TilePosition[] allowedTilePositions = {TilePosition.UNDEFINED,TilePosition.NEIGHBOR,TilePosition.REMOTE,TilePosition.SAME};
+		TilePosition[] allowedTilePositions = {TilePosition.NEIGHBOR,TilePosition.SAME};
 		setAllowedTilePositions(allowedTilePositions);
-		Orientation[] allowedOrientations = {Orientation.UNDEFINED,Orientation.OPPOSITE,Orientation.OTHER,Orientation.SAME};
-		setAllowedOrientations (allowedOrientations );
+		Orientation[] allowedOrientations = {Orientation.SAME};
+		setAllowedOrientations(allowedOrientations);
 	}
 	
 	/////////////////////////////////////////////////////////////////

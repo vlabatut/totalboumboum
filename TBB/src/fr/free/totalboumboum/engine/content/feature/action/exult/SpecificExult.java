@@ -1,4 +1,4 @@
-package fr.free.totalboumboum.engine.content.feature.action.cry;
+package fr.free.totalboumboum.engine.content.feature.action.exult;
 
 /*
  * Total Boum Boum
@@ -27,8 +27,8 @@ import fr.free.totalboumboum.engine.content.feature.action.SpecificAction;
 import fr.free.totalboumboum.engine.content.sprite.Sprite;
 
 /** 
- * crying at the end of a round .
- * always performed by a hero (who just lost the round)
+ * celebrating a victory at the end of a round. 
+ * always performed by a hero
  * 
  * 	<br>actor: 			hero
  * 	<br>target: 		none
@@ -38,9 +38,9 @@ import fr.free.totalboumboum.engine.content.sprite.Sprite;
  * 	<br>orientation:	undefined
  *  
  */
-public class SpecificCry extends SpecificAction<GeneralCry>
+public class SpecificExult extends SpecificAction<GeneralExult>
 {
-	public SpecificCry(Sprite actor, Sprite target) throws IncompatibleParameterException
-	{	super(ActionName.CRY,actor,target);
+	public SpecificExult(Sprite actor, Sprite target) throws IncompatibleParameterException
+	{	super(ActionName.EXULT,actor,target);
 	}
 }

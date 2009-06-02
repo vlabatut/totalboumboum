@@ -1,4 +1,4 @@
-package fr.free.totalboumboum.engine.content.feature.action.cry;
+package fr.free.totalboumboum.engine.content.feature.action.movehigh;
 
 /*
  * Total Boum Boum
@@ -27,20 +27,19 @@ import fr.free.totalboumboum.engine.content.feature.action.SpecificAction;
 import fr.free.totalboumboum.engine.content.sprite.Sprite;
 
 /** 
- * crying at the end of a round .
- * always performed by a hero (who just lost the round)
+ * in-air moving, but from a plane (x,y) perspective (no vertical, z, move)
  * 
- * 	<br>actor: 			hero
+ * 	<br>actor: 			any
  * 	<br>target: 		none
- * 	<br>direction:		any or none
+ * 	<br>direction:		any (not none)
  * 	<br>contact:		none
  * 	<br>tilePosition:	undefined
  * 	<br>orientation:	undefined
  *  
  */
-public class SpecificCry extends SpecificAction<GeneralCry>
+public class SpecificMoveHigh extends SpecificAction<GeneralMoveHigh>
 {
-	public SpecificCry(Sprite actor, Sprite target) throws IncompatibleParameterException
-	{	super(ActionName.CRY,actor,target);
+	public SpecificMoveHigh(Sprite actor, Sprite target) throws IncompatibleParameterException
+	{	super(ActionName.MOVEHIGH,actor,target);
 	}
 }

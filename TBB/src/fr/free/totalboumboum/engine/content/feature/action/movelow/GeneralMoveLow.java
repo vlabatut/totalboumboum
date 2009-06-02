@@ -1,4 +1,4 @@
-package fr.free.totalboumboum.engine.content.feature.action.cry;
+package fr.free.totalboumboum.engine.content.feature.action.movelow;
 
 /*
  * Total Boum Boum
@@ -30,27 +30,46 @@ import fr.free.totalboumboum.engine.content.feature.action.Role;
 import fr.free.totalboumboum.engine.content.feature.action.TilePosition;
 
 /** 
- * crying at the end of a round .
- * always performed by a hero (who just lost the round)
+ * action de se déplacer sur le sol
+ * INTRANSITIVE
  * 
- * 	<br>actor: 			hero
+ * <p>ABILITY PERFORM
+ * 	<br>N/D
+ * 
+ * <p>ABILITY REFUSE
+ * 	<br>N/D
+ * 
+ * <p>ABILITY PREVENT
+ * 	<br>paramètre: actor=oui (hero, bomb)
+ * 	<br>paramètre: target=N/D
+ * 	<br>paramètre: direction=oui
+ * 	<br>paramètre: strength=bool
+ * 	<br>paramètre: kind=N/D
+ * 	<br>paramètre: scope=oui
+ * 	<br>paramètre: restriction=SPRITE_TRAVERSE
+ */
+/** 
+ * on ground (normal) move.
+ * for example: hero walking, bomb sliding, etc.
+ * 
+ * 	<br>actor: 			any
  * 	<br>target: 		none
- * 	<br>direction:		any or none
+ * 	<br>direction:		any (not none)
  * 	<br>contact:		none
  * 	<br>tilePosition:	undefined
  * 	<br>orientation:	undefined
  *  
  */
-public class GeneralCry extends GeneralAction<SpecificCry>
+public class GeneralMoveLow extends GeneralAction<SpecificMoveLow>
 {
 	
-	public GeneralCry()
-	{	super(ActionName.CRY);	
-		Role[] allowedActors = {Role.HERO};
+	public GeneralMoveLow()
+	{	super(ActionName.MOVELOW);	
+		Role[] allowedActors = {Role.BLOCK,Role.BOMB,Role.FIRE,Role.FLOOR,Role.HERO,Role.ITEM};
 		setAllowedActors(allowedActors);
 		Role[] allowedTargets = {Role.NONE};
 		setAllowedTargets(allowedTargets);
-		Direction[] allowedDirections = {Direction.NONE,Direction.UP,Direction.UPRIGHT,Direction.RIGHT,Direction.DOWNRIGHT,Direction.DOWN,Direction.DOWNLEFT,Direction.LEFT,Direction.UPLEFT};
+		Direction[] allowedDirections = {Direction.UP,Direction.UPRIGHT,Direction.RIGHT,Direction.DOWNRIGHT,Direction.DOWN,Direction.DOWNLEFT,Direction.LEFT,Direction.UPLEFT};
 		setAllowedDirections(allowedDirections);
 		Contact[] allowedContacts = {Contact.NONE};
 		setAllowedContacts(allowedContacts);
