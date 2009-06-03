@@ -240,7 +240,7 @@ public abstract class SpecificAction<T extends GeneralAction<?>>
 	/////////////////////////////////////////////////////////////////
 	private boolean finished = false;
 
-	protected void finish()
+	public void finish()
 	{	if(!finished)
 		{	finished = true;
 			// general action
@@ -259,6 +259,25 @@ public abstract class SpecificAction<T extends GeneralAction<?>>
 	/////////////////////////////////////////////////////////////////
 	// EXECUTION		/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	/** try to execute the specific action */
+	/** tries to execute the specific action */
 	public abstract boolean execute();
+	
+	/** tests if this action can be performed, i.e. is consistent
+	 * with the corresponding GeneralAction.
+	 */
+	public boolean isPossible()
+	{	boolean result = false;
+		// TODO
+		return result;
+	}
+	
+	/**
+	 * tests if this action is allowed (through the modulation system)
+	 * by the actor, the target and the environment.
+	 */
+	public boolean isAllowed()
+	{	boolean result = false;
+		//TODO
+		return result;
+	}
 }

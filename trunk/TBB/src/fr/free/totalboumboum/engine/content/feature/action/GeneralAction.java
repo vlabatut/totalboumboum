@@ -46,6 +46,24 @@ public abstract class GeneralAction<T extends SpecificAction<?>>
 	{	this.name = name;
 	}
 	
+	/*NOTE
+	 * 
+	 * il semble qu'on a parfois besoin d'une position sous forme de case.
+	 * dans ce cas là, on peut passer la case (ou ses coordonnées) lors de la création de l'action,
+	 * qui initialise ses champs en conséquence.
+	 * 
+	 * il semble logique de laisser la gestion complète des autorisations de transition aux modulations
+	 * donc pas la peine de les coder en dur comme c'est actuellement fait dans les event managers
+	 * 
+	 * ability fait-elle partie de isPossible ? a priori, je dirais oui.
+	 * donc: 	isPossible=compatibilité avec l'action générale + ability
+	 * 			isAllowed=modulation
+	 * en fait non, c'est trop lié aux modulations. il vaut mieux faire:
+	 * 		isPossible=compatiblité avec l'action générale
+	 * 		isAllowed=ability modulée
+	 * 
+	 */
+	
 	/////////////////////////////////////////////////////////////////
 	// NAME				/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
