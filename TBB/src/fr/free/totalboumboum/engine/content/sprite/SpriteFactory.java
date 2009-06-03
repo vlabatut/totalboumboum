@@ -29,7 +29,7 @@ import fr.free.totalboumboum.engine.container.level.Level;
 import fr.free.totalboumboum.engine.content.feature.ability.AbstractAbility;
 import fr.free.totalboumboum.engine.content.feature.anime.AnimePack;
 import fr.free.totalboumboum.engine.content.feature.explosion.Explosion;
-import fr.free.totalboumboum.engine.content.feature.permission.PermissionPack;
+import fr.free.totalboumboum.engine.content.feature.modulation.PermissionPack;
 import fr.free.totalboumboum.engine.content.feature.trajectory.TrajectoryPack;
 import fr.free.totalboumboum.engine.content.manager.ability.AbilityManager;
 import fr.free.totalboumboum.engine.content.manager.anime.AnimeManager;

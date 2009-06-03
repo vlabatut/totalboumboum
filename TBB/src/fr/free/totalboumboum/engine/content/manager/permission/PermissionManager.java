@@ -34,11 +34,11 @@ import fr.free.totalboumboum.engine.content.feature.ability.StateAbility;
 import fr.free.totalboumboum.engine.content.feature.action.AbstractAction;
 import fr.free.totalboumboum.engine.content.feature.action.GeneralAction;
 import fr.free.totalboumboum.engine.content.feature.action.SpecificAction;
-import fr.free.totalboumboum.engine.content.feature.permission.ActorPermission;
-import fr.free.totalboumboum.engine.content.feature.permission.PermissionPack;
-import fr.free.totalboumboum.engine.content.feature.permission.StateModulation;
-import fr.free.totalboumboum.engine.content.feature.permission.TargetPermission;
-import fr.free.totalboumboum.engine.content.feature.permission.ThirdPermission;
+import fr.free.totalboumboum.engine.content.feature.modulation.ActorPermission;
+import fr.free.totalboumboum.engine.content.feature.modulation.PermissionPack;
+import fr.free.totalboumboum.engine.content.feature.modulation.StateModulation;
+import fr.free.totalboumboum.engine.content.feature.modulation.TargetPermission;
+import fr.free.totalboumboum.engine.content.feature.modulation.ThirdPermission;
 import fr.free.totalboumboum.engine.content.sprite.Sprite;
 
 public class PermissionManager

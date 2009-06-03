@@ -27,7 +27,7 @@ import fr.free.totalboumboum.engine.content.feature.action.Contact;
 import fr.free.totalboumboum.engine.content.feature.action.Orientation;
 import fr.free.totalboumboum.engine.content.feature.action.SpecificAction;
 import fr.free.totalboumboum.engine.content.feature.action.TilePosition;
-import fr.free.totalboumboum.engine.content.feature.permission.TargetPermission;
+import fr.free.totalboumboum.engine.content.feature.modulation.TargetPermission;
 import fr.free.totalboumboum.engine.content.sprite.block.Block;
 import fr.free.totalboumboum.engine.content.sprite.fire.Fire;
 

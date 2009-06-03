@@ -1,4 +1,4 @@
-package fr.free.totalboumboum.engine.content.feature.event;
+package fr.free.totalboumboum.engine.content.feature.modulation;
 
 /*
  * Total Boum Boum
@@ -21,26 +21,51 @@ package fr.free.totalboumboum.engine.content.feature.event;
  * 
  */
 
-import fr.free.totalboumboum.engine.content.feature.action.SpecificAction;
 
-public class ActionEvent extends AbstractEvent
+public abstract class AbstractPermission
 {	
-	private SpecificAction<?> action;
+	protected String gestureName; //debug
 	
-	public ActionEvent(SpecificAction<?> action)
-	{	this.action = action;	
+	/** 
+	 * modification de la force de l'abileté
+	 */
+	protected float strength;
+	/** 
+	 * masquage de la force
+	 */
+	protected boolean frame;
+	
+	public AbstractPermission()
+	{	strength = 0;
+		frame = false;
 	}
 	
-	public SpecificAction<?> getAction()
-	{	return action;	
+	public boolean getFrame()
+	{	return frame;
 	}
+	public void setFrame(boolean frame)
+	{	this.frame = frame;
+	}	
+
+	public float getStrength()
+	{	return strength;
+	}
+	public void setStrength(float strength)
+	{	this.strength = strength;
+	}
+	
+	public void setGestureName(String gestureName)
+	{	this.gestureName = gestureName;		
+	}
+	public String getGestureName()
+	{	return gestureName;		
+	}
+
+	protected boolean finished = false;
 	
 	public void finish()
 	{	if(!finished)
-		{	super.finish();
-			// action
-			action.finish();
-			action = null;
+		{	finished = true;
 		}
-	}
+	}	
 }
