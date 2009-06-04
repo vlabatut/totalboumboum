@@ -1,7 +1,6 @@
 package fr.free.totalboumboum.engine.content.feature.action;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 
 import fr.free.totalboumboum.engine.content.feature.Direction;
 
@@ -42,10 +41,6 @@ public abstract class GeneralAction<T extends SpecificAction<?>>
 	 * - in that case orientation and tile position are irrelevant
 	 */
 	
-	protected GeneralAction(ActionName name)
-	{	this.name = name;
-	}
-	
 	/*NOTE
 	 * 
 	 * il semble qu'on a parfois besoin d'une position sous forme de case.
@@ -65,179 +60,91 @@ public abstract class GeneralAction<T extends SpecificAction<?>>
 	 */
 	
 	/////////////////////////////////////////////////////////////////
-	// NAME				/////////////////////////////////////////////
-	/////////////////////////////////////////////////////////////////
-	/** name of this action */
-	private ActionName name;
-
-	protected ActionName getName()
-	{	return name;
-	}
-	
-	/////////////////////////////////////////////////////////////////
 	// DIRECTIONS		/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	/** directions of the action */
-	private final ArrayList<Direction> directions = new ArrayList<Direction>();
-	private final ArrayList<Direction> allowedDirections = new ArrayList<Direction>();
+	protected final ArrayList<Direction> directions = new ArrayList<Direction>();
 
 	protected ArrayList<Direction> getDirections()
 	{	return directions;
 	}
 	
-	public void addDirection(Direction direction) throws IncompatibleParameterException
-	{	if(!allowedDirections.contains(direction))
-			throw new IncompatibleParameterException("direction",direction.toString());
-		else
-		{	if(!getDirections().contains(direction))
-				directions.add(direction);
-		}
-	}
-	
-	protected void setAllowedDirections(Direction directions[])
-	{	allowedDirections.addAll(Arrays.asList(directions));
-	}
+	public abstract void addDirection(Direction direction) throws IncompatibleParameterException;
 
 	/////////////////////////////////////////////////////////////////
 	// CONTACTS			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	/** contacts between the actor and the target */
-	private final ArrayList<Contact> contacts = new ArrayList<Contact>();
-	private final ArrayList<Contact> allowedContacts = new ArrayList<Contact>();
+	protected final ArrayList<Contact> contacts = new ArrayList<Contact>();
 
 	protected ArrayList<Contact> getContacts()
 	{	return contacts;
 	}
 
-	public void addContact(Contact contact) throws IncompatibleParameterException
-	{	if(!allowedContacts.contains(contact))
-			throw new IncompatibleParameterException("contact",contact.toString());
-		else
-		{	if(!getContacts().contains(contact))
-				contacts.add(contact);
-		}
-	}
-
-	protected void setAllowedContacts(Contact contacts[])
-	{	allowedContacts.addAll(Arrays.asList(contacts));
-	}
+	public abstract void addContact(Contact contact) throws IncompatibleParameterException;
 
 	/////////////////////////////////////////////////////////////////
 	// ORIENTATIONS		/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	/** compared directions of the target and the action */
-	private final ArrayList<Orientation> orientations = new ArrayList<Orientation>();
-	private final ArrayList<Orientation> allowedOrientations = new ArrayList<Orientation>();
+	protected final ArrayList<Orientation> orientations = new ArrayList<Orientation>();
 
 	protected ArrayList<Orientation> getOrientations()
 	{	return orientations;
 	}
 	
-	public void addOrientation(Orientation orientation) throws IncompatibleParameterException
-	{	if(!allowedOrientations.contains(orientation))
-			throw new IncompatibleParameterException("orientation",orientation.toString());
-		else
-		{	if(!getOrientations().contains(orientation))
-				orientations.add(orientation);
-		}
-	}
-	
-	protected void setAllowedOrientations(Orientation orientations[])
-	{	allowedOrientations.addAll(Arrays.asList(orientations));
-	}
+	public abstract void addOrientation(Orientation orientation) throws IncompatibleParameterException;
 
 	/////////////////////////////////////////////////////////////////
 	// TILE POSITIONS	/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	/** positions of the target in termes of tiles */
-	private final ArrayList<TilePosition> tilePositions =  new ArrayList<TilePosition>();
-	private final ArrayList<TilePosition> allowedTilePositions =  new ArrayList<TilePosition>();
+	protected final ArrayList<TilePosition> tilePositions =  new ArrayList<TilePosition>();
 	
 	protected ArrayList<TilePosition> getTilePositions()
 	{	return tilePositions;
 	}
 	
-	public void addTilePosition(TilePosition tilePosition) throws IncompatibleParameterException
-	{	if(!allowedTilePositions.contains(tilePosition))
-			throw new IncompatibleParameterException("tilePosition",tilePosition.toString());
-		else
-		{	if(!getTilePositions().contains(tilePosition))
-				tilePositions.add(tilePosition);
-		}
-	}
-
-	protected void setAllowedTilePositions(TilePosition tilePositions[])
-	{	allowedTilePositions.addAll(Arrays.asList(tilePositions));
-	}
+	public abstract void addTilePosition(TilePosition tilePosition) throws IncompatibleParameterException;
 
 	/////////////////////////////////////////////////////////////////
 	// ACTORS			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	/** roles of the acting sprite */
-	private final ArrayList<Role> actors = new ArrayList<Role>();
-	private final ArrayList<Role> allowedActors = new ArrayList<Role>();
+	protected final ArrayList<Role> actors = new ArrayList<Role>();
 	
 	protected ArrayList<Role> getActors()
 	{	return actors;
 	}
 	
-	public void addActor(Role actor) throws IncompatibleParameterException
-	{	if(!allowedActors.contains(actor))
-			throw new IncompatibleParameterException("actor",actor.toString());
-		else
-		{	if(!getActors().contains(actor))
-				actors.add(actor);
-		}
-	}
-	
-	protected void setAllowedActors(Role actors[])
-	{	allowedActors.addAll(Arrays.asList(actors));
-	}
+	public abstract void addActor(Role actor) throws IncompatibleParameterException;
 
 	/////////////////////////////////////////////////////////////////
 	// TARGETS			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	/** role of the targeted sprite */
-	private final ArrayList<Role> targets = new ArrayList<Role>();
-	private final ArrayList<Role> allowedTargets = new ArrayList<Role>();
+	protected final ArrayList<Role> targets = new ArrayList<Role>();
 	
 	protected ArrayList<Role> getTargets()
 	{	return targets;
 	}
 	
-	public void addTarget(Role target) throws IncompatibleParameterException
-	{	if(!allowedTargets.contains(target))
-			throw new IncompatibleParameterException("target",target.toString());
-		else
-		{	if(!getTargets().contains(target))
-				targets.add(target);
-		}
-	}
-	
-	protected void setAllowedTargets(Role targets[])
-	{	allowedTargets.addAll(Arrays.asList(targets));
-	}
+	public abstract void addTarget(Role target) throws IncompatibleParameterException;
 
 	/////////////////////////////////////////////////////////////////
 	// FINISHED			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	private boolean finished = false;
+	protected boolean finished = false;
 	
 	protected void finish()
 	{	if(!finished)
 		{	finished = true;
 			actors.clear();
-			allowedActors.clear();
 			contacts.clear();
-			allowedContacts.clear();
 			directions.clear();
-			allowedDirections.clear();
 			orientations.clear();
-			allowedOrientations.clear();
 			targets.clear();
-			allowedTargets.clear();
 			tilePositions.clear();
-			allowedTilePositions.clear();
 		}
 	}
 
@@ -248,9 +155,7 @@ public abstract class GeneralAction<T extends SpecificAction<?>>
 	 * tests if this GeneralAction is more general than the specified SpecificAction
 	 */
 	public boolean subsume(T action)
-	{	boolean result;
-		// name
-		result = name == action.getName();
+	{	boolean result = true;
 		// actor
 		if(result)
 			result = actors.contains(action.getActor());
@@ -301,7 +206,7 @@ public abstract class GeneralAction<T extends SpecificAction<?>>
 	// STRING			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	public String toString()
-	{	String result = name.toString();
+	{	String result = "";
 		// actors
 		{	result = result+" ( ";
 			for(Role r: actors)
@@ -344,8 +249,8 @@ public abstract class GeneralAction<T extends SpecificAction<?>>
 	/////////////////////////////////////////////////////////////////
 	// COPY				/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	public abstract GeneralAction<?> copy(GeneralAction<?> action);
-	
+//	public abstract GeneralAction<?> copy(GeneralAction<?> action);
+/*
 	protected void copy(GeneralAction<?> or, GeneralAction<?> cp)
 	{	// actors
 		{	for(Role a: actors)
@@ -373,4 +278,5 @@ public abstract class GeneralAction<T extends SpecificAction<?>>
 		}
 		cp.finished = finished;
 	}
+*/
 }

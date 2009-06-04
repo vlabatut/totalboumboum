@@ -34,6 +34,7 @@ import fr.free.totalboumboum.engine.content.feature.action.Contact;
 import fr.free.totalboumboum.engine.content.feature.action.Orientation;
 import fr.free.totalboumboum.engine.content.feature.action.SpecificAction;
 import fr.free.totalboumboum.engine.content.feature.action.TilePosition;
+import fr.free.totalboumboum.engine.content.feature.action.drop.SpecificDrop;
 import fr.free.totalboumboum.engine.content.feature.event.ActionEvent;
 import fr.free.totalboumboum.engine.content.feature.event.ControlEvent;
 import fr.free.totalboumboum.engine.content.feature.event.EngineEvent;
@@ -190,11 +191,9 @@ public class HeroEventManager extends EventManager
 	}
 	
 	private void controlDropBomb(ControlEvent event)
-	{	if((gesture.equals(GestureConstants.PUSHING) || gesture.equals(GestureConstants.STANDING)
-			|| gesture.equals(GestureConstants.WAITING) || gesture.equals(GestureConstants.WALKING))
-			&& event.getMode())
+	{	if(event.getMode())
 		{	Bomb bomb = sprite.makeBomb();
-			SpecificAction action = new SpecificAction(AbstractAction.DROP,sprite,bomb,spriteDirection,Contact.INTERSECTION,TilePosition.SAME,Orientation.SAME);
+			SpecificDrop action = new SpecificDrop(sprite,bomb);
 			ActionAbility ability = sprite.computeAbility(action);
 			if(ability.isActive())
 			{	sprite.dropBomb(bomb);
