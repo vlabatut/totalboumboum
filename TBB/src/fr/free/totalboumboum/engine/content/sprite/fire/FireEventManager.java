@@ -23,7 +23,7 @@ package fr.free.totalboumboum.engine.content.sprite.fire;
 
 import fr.free.totalboumboum.engine.container.tile.Tile;
 import fr.free.totalboumboum.engine.content.feature.Direction;
-import fr.free.totalboumboum.engine.content.feature.GestureConstants;
+import fr.free.totalboumboum.engine.content.feature.GestureName;
 import fr.free.totalboumboum.engine.content.feature.event.ActionEvent;
 import fr.free.totalboumboum.engine.content.feature.event.ControlEvent;
 import fr.free.totalboumboum.engine.content.feature.event.EngineEvent;
@@ -37,7 +37,7 @@ public class FireEventManager extends EventManager
 	}
 	
 	public void initGesture()
-	{	gesture = GestureConstants.BURNING;
+	{	gesture = GestureName.BURNING;
 		spriteDirection = Direction.NONE;
 		sprite.setGesture(gesture,spriteDirection,Direction.NONE,true);
 	}
@@ -78,15 +78,15 @@ public class FireEventManager extends EventManager
 	}	
 
 	private void engAnimeOver(EngineEvent event)
-	{	if(gesture.equals(GestureConstants.BURNING))
-		{	gesture = GestureConstants.ENDED;
+	{	if(gesture.equals(GestureName.BURNING))
+		{	gesture = GestureName.ENDED;
 			sprite.setGesture(gesture,spriteDirection,Direction.NONE,true);
 			sprite.endSprite();
 		}
 	}
 
 	private void tileEnter(EngineEvent event)
-	{	if(gesture.equals(GestureConstants.BURNING))
+	{	if(gesture.equals(GestureName.BURNING))
 		{	Fire fire = (Fire)sprite;
 			// fire enters a new tile
 			if(event.getSource()==sprite)

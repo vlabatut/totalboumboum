@@ -22,7 +22,7 @@ package fr.free.totalboumboum.engine.content.manager.event;
  */
 
 import fr.free.totalboumboum.engine.content.feature.Direction;
-import fr.free.totalboumboum.engine.content.feature.GestureConstants;
+import fr.free.totalboumboum.engine.content.feature.GestureName;
 import fr.free.totalboumboum.engine.content.feature.event.ActionEvent;
 import fr.free.totalboumboum.engine.content.feature.event.ControlEvent;
 import fr.free.totalboumboum.engine.content.feature.event.EngineEvent;
@@ -39,7 +39,7 @@ public abstract class EventManager
 	
 	public EventManager(Sprite sprite)
 	{	this.sprite = sprite;
-		gesture = GestureConstants.NONE;
+		gesture = GestureName.NONE;
 		spriteDirection = Direction.NONE;
 	}	
 /*	

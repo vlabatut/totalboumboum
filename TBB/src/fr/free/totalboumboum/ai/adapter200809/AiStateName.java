@@ -21,7 +21,7 @@ package fr.free.totalboumboum.ai.adapter200809;
  * 
  */
 
-import fr.free.totalboumboum.engine.content.feature.GestureConstants;
+import fr.free.totalboumboum.engine.content.feature.GestureName;
 
 /**
  * représente un nom associé à un état, c'est à dire : l'action
@@ -63,28 +63,28 @@ public enum AiStateName
 	 */
 	public static AiStateName makeNameFromGesture(String gesture)
 	{	AiStateName result = null;
-		if(gesture.equalsIgnoreCase(GestureConstants.BURNING))
+		if(gesture.equalsIgnoreCase(GestureName.BURNING))
 			result = AiStateName.BURNING;
-		else if(gesture.equalsIgnoreCase(GestureConstants.BOUNCING)
-				|| gesture.equalsIgnoreCase(GestureConstants.JUMPING)
-				|| gesture.equalsIgnoreCase(GestureConstants.LANDING)
-				|| gesture.equalsIgnoreCase(GestureConstants.PUNCHED))
+		else if(gesture.equalsIgnoreCase(GestureName.BOUNCING)
+				|| gesture.equalsIgnoreCase(GestureName.JUMPING)
+				|| gesture.equalsIgnoreCase(GestureName.LANDING)
+				|| gesture.equalsIgnoreCase(GestureName.PUNCHED))
 			result = AiStateName.FLYING;
-		else if(gesture.equalsIgnoreCase(GestureConstants.APPEARING)
-				|| gesture.equalsIgnoreCase(GestureConstants.CRYING)
-				|| gesture.equalsIgnoreCase(GestureConstants.EXULTING)
-				|| gesture.equalsIgnoreCase(GestureConstants.OSCILLATING)
-				|| gesture.equalsIgnoreCase(GestureConstants.OSCILLATING_FAILING)
-				|| gesture.equalsIgnoreCase(GestureConstants.PUNCHING)
-				|| gesture.equalsIgnoreCase(GestureConstants.SPAWNING)
-				|| gesture.equalsIgnoreCase(GestureConstants.STANDING)
-				|| gesture.equalsIgnoreCase(GestureConstants.STANDING_FAILING)
-				|| gesture.equalsIgnoreCase(GestureConstants.WAITING))
+		else if(gesture.equalsIgnoreCase(GestureName.APPEARING)
+				|| gesture.equalsIgnoreCase(GestureName.CRYING)
+				|| gesture.equalsIgnoreCase(GestureName.EXULTING)
+				|| gesture.equalsIgnoreCase(GestureName.OSCILLATING)
+				|| gesture.equalsIgnoreCase(GestureName.OSCILLATING_FAILING)
+				|| gesture.equalsIgnoreCase(GestureName.PUNCHING)
+				|| gesture.equalsIgnoreCase(GestureName.SPAWNING)
+				|| gesture.equalsIgnoreCase(GestureName.STANDING)
+				|| gesture.equalsIgnoreCase(GestureName.STANDING_FAILING)
+				|| gesture.equalsIgnoreCase(GestureName.WAITING))
 			result = AiStateName.STANDING;
-		else if(gesture.equalsIgnoreCase(GestureConstants.PUSHING)
-				|| gesture.equalsIgnoreCase(GestureConstants.SLIDING)
-				|| gesture.equalsIgnoreCase(GestureConstants.SLIDING_FAILING)
-				|| gesture.equalsIgnoreCase(GestureConstants.WALKING))
+		else if(gesture.equalsIgnoreCase(GestureName.PUSHING)
+				|| gesture.equalsIgnoreCase(GestureName.SLIDING)
+				|| gesture.equalsIgnoreCase(GestureName.SLIDING_FAILING)
+				|| gesture.equalsIgnoreCase(GestureName.WALKING))
 			result = AiStateName.MOVING;		
 		return result;
 	}

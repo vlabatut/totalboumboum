@@ -26,7 +26,7 @@ import java.util.Iterator;
 
 import fr.free.totalboumboum.engine.container.tile.Tile;
 import fr.free.totalboumboum.engine.content.feature.Direction;
-import fr.free.totalboumboum.engine.content.feature.GestureConstants;
+import fr.free.totalboumboum.engine.content.feature.GestureName;
 import fr.free.totalboumboum.engine.content.feature.ability.ActionAbility;
 import fr.free.totalboumboum.engine.content.feature.ability.StateAbility;
 import fr.free.totalboumboum.engine.content.feature.action.AbstractAction;
@@ -75,12 +75,12 @@ public class HeroEventManager extends EventManager
 	{	spriteDirection = Direction.DOWN;
 		StateAbility ability = sprite.computeAbility(StateAbility.HERO_ENTRY_DURATION);
 		if(ability.isActive())
-		{	gesture = GestureConstants.APPEARING;
+		{	gesture = GestureName.APPEARING;
 			double duration = ability.getStrength();
 			sprite.setGesture(gesture,spriteDirection,Direction.NONE,true,duration);
 		}
 		else
-		{	gesture = GestureConstants.STANDING;
+		{	gesture = GestureName.STANDING;
 			sprite.setGesture(gesture,spriteDirection,Direction.NONE,true);
 		}
 	}
@@ -97,11 +97,11 @@ public class HeroEventManager extends EventManager
 	}
 	
 	private void actionConsume(ActionEvent event)
-	{	if(gesture.equals(GestureConstants.PUNCHING) 
-			|| gesture.equals(GestureConstants.PUSHING) 
-			|| gesture.equals(GestureConstants.WAITING) 
-			|| gesture.equals(GestureConstants.STANDING) 
-			|| gesture.equals(GestureConstants.WALKING))
+	{	if(gesture.equals(GestureName.PUNCHING) 
+			|| gesture.equals(GestureName.PUSHING) 
+			|| gesture.equals(GestureName.WAITING) 
+			|| gesture.equals(GestureName.STANDING) 
+			|| gesture.equals(GestureName.WALKING))
 		{	// explosed by
 			if(explosedBy==null)
 			{	Sprite spr = event.getAction().getActor();
@@ -134,7 +134,7 @@ public class HeroEventManager extends EventManager
 					player.setOut();
 			}
 			// state
-			gesture = GestureConstants.BURNING;
+			gesture = GestureName.BURNING;
 			sprite.setGesture(gesture,spriteDirection,controlDirection,true);
 		}
 	}
@@ -166,16 +166,16 @@ public class HeroEventManager extends EventManager
 		else
 			controlDirection = controlDirection.drop(dir);
 		// gesture dependant
-		if(gesture.equals(GestureConstants.JUMPING) || gesture.equals(GestureConstants.LANDING))
+		if(gesture.equals(GestureName.JUMPING) || gesture.equals(GestureName.LANDING))
 		{	//NOTE ici il faudra certainement distinguer ON et OFF
 			spriteDirection = controlDirection;
 			blockedDirection = controlDirection;
 			sprite.setGesture(gesture,spriteDirection,controlDirection,false);
 		}
-		else if(gesture.equals(GestureConstants.PUSHING) || gesture.equals(GestureConstants.WALKING))
+		else if(gesture.equals(GestureName.PUSHING) || gesture.equals(GestureName.WALKING))
 		{	if(controlDirection==Direction.NONE)
 			{	setWaitDelay();
-				gesture = GestureConstants.STANDING;
+				gesture = GestureName.STANDING;
 				sprite.setGesture(gesture, spriteDirection,controlDirection,true);			
 			}
 			else
@@ -183,9 +183,9 @@ public class HeroEventManager extends EventManager
 				sprite.setGesture(gesture, spriteDirection,controlDirection,false);
 			}
 		}
-		else if(gesture.equals(GestureConstants.STANDING) || gesture.equals(GestureConstants.WAITING))
+		else if(gesture.equals(GestureName.STANDING) || gesture.equals(GestureName.WAITING))
 		{	spriteDirection = controlDirection;
-			gesture = GestureConstants.WALKING;
+			gesture = GestureName.WALKING;
 			sprite.setGesture(gesture, spriteDirection,controlDirection,true);
 		}
 	}
@@ -197,25 +197,25 @@ public class HeroEventManager extends EventManager
 			ActionAbility ability = sprite.computeAbility(action);
 			if(ability.isActive())
 			{	sprite.dropBomb(bomb);
-				if(gesture.equals(GestureConstants.WAITING))
+				if(gesture.equals(GestureName.WAITING))
 				{	setWaitDelay();
-					gesture = GestureConstants.STANDING;
+					gesture = GestureName.STANDING;
 					sprite.setGesture(gesture,spriteDirection,controlDirection,true);					
 				}
-				else if(gesture.equals(GestureConstants.STANDING))
+				else if(gesture.equals(GestureName.STANDING))
 					setWaitDelay();
 			}
 		}
 	}
 	
 	private void controlJump(ControlEvent event)
-	{	if((gesture.equals(GestureConstants.PUSHING) || gesture.equals(GestureConstants.STANDING)
-			 || gesture.equals(GestureConstants.WAITING) || gesture.equals(GestureConstants.WALKING))
+	{	if((gesture.equals(GestureName.PUSHING) || gesture.equals(GestureName.STANDING)
+			 || gesture.equals(GestureName.WAITING) || gesture.equals(GestureName.WALKING))
 			 && event.getMode())
 		{	SpecificAction action = new SpecificAction(AbstractAction.JUMP,sprite,null,Direction.NONE);
 			ActionAbility ability = sprite.computeAbility(action);
 			if(ability.isActive())
-			{	gesture = GestureConstants.JUMPING;
+			{	gesture = GestureName.JUMPING;
 				Direction cDirection = controlDirection.getHorizontalPrimary();
 				Direction sDirection = spriteDirection.getHorizontalPrimary();
 				sprite.setGesture(gesture, sDirection,cDirection,true);
@@ -225,8 +225,8 @@ public class HeroEventManager extends EventManager
 	}
 	
 	private void controlPunchBomb(ControlEvent event)
-	{	if((gesture.equals(GestureConstants.PUSHING) || gesture.equals(GestureConstants.STANDING)
-			 || gesture.equals(GestureConstants.WAITING) || gesture.equals(GestureConstants.WALKING))
+	{	if((gesture.equals(GestureName.PUSHING) || gesture.equals(GestureName.STANDING)
+			 || gesture.equals(GestureName.WAITING) || gesture.equals(GestureName.WALKING))
 			 && event.getMode())
 		{	// bomb
 			Tile tile = sprite.getTile();
@@ -242,7 +242,7 @@ public class HeroEventManager extends EventManager
 					if(ability.isActive())
 					{	found = true;
 						// gesture
-						gesture = GestureConstants.PUNCHING;
+						gesture = GestureName.PUNCHING;
 						StateAbility a = sprite.computeCapacity(StateAbility.HERO_PUNCH_DURATION);
 						double duration = a.getStrength();
 						sprite.setGesture(gesture, spriteDirection,controlDirection,true,duration);
@@ -263,7 +263,7 @@ public class HeroEventManager extends EventManager
 					if(ability.isActive())
 					{	found = true;
 						// gesture
-						gesture = GestureConstants.PUNCHING;
+						gesture = GestureName.PUNCHING;
 						StateAbility a = sprite.computeCapacity(StateAbility.HERO_PUNCH_DURATION);
 						double duration = a.getStrength();
 						sprite.setGesture(gesture, spriteDirection,controlDirection,true,duration);
@@ -320,40 +320,40 @@ public class HeroEventManager extends EventManager
 	}	
 
 	private void engAnimeOver(EngineEvent event)
-	{	if(gesture.equals(GestureConstants.BURNING))
-		{	gesture = GestureConstants.ENDED;
+	{	if(gesture.equals(GestureName.BURNING))
+		{	gesture = GestureName.ENDED;
 			sprite.setGesture(gesture,spriteDirection,Direction.NONE,true);
 			//
 			sprite.endSprite();
 		}
-		else if(gesture.equals(GestureConstants.CRYING)
-				|| gesture.equals(GestureConstants.EXULTING))
+		else if(gesture.equals(GestureName.CRYING)
+				|| gesture.equals(GestureName.EXULTING))
 		{	//sprite.getLoop().celebrationOver();
-			gesture = GestureConstants.STANDING;
+			gesture = GestureName.STANDING;
 			sprite.setGesture(gesture,spriteDirection,controlDirection,true);
 		}
-		else if(gesture.equals(GestureConstants.APPEARING))
+		else if(gesture.equals(GestureName.APPEARING))
 		{	setWaitDelay();
-			gesture = GestureConstants.STANDING;
+			gesture = GestureName.STANDING;
 			sprite.setGesture(gesture,spriteDirection,controlDirection,true);
 		}
-		else if(gesture.equals(GestureConstants.PUNCHING))
+		else if(gesture.equals(GestureName.PUNCHING))
 		{	setWaitDelay();
-			gesture = GestureConstants.STANDING;
+			gesture = GestureName.STANDING;
 			sprite.setGesture(gesture,spriteDirection,controlDirection,true);
 		}
-		else if(gesture.equals(GestureConstants.WAITING))
+		else if(gesture.equals(GestureName.WAITING))
 		{	setWaitDelay();
-			gesture = GestureConstants.STANDING;
+			gesture = GestureName.STANDING;
 			sprite.setGesture(gesture,spriteDirection,controlDirection,true);					
 		}
 	}
 	
 	private void engCollidingOff(EngineEvent event)
 	{	//System.out.println(">>>SPR_COLLIDING_OFF with "+event.getSource());
-		if(gesture.equals(GestureConstants.PUSHING))
+		if(gesture.equals(GestureName.PUSHING))
 		{	if(!sprite.isColliding())
-			{	gesture = GestureConstants.WALKING;
+			{	gesture = GestureName.WALKING;
 				sprite.setGesture(gesture, spriteDirection,controlDirection,true);
 			}
 		}
@@ -361,12 +361,12 @@ public class HeroEventManager extends EventManager
 	
 	private void engCollidingOn(EngineEvent event)
 	{	//System.out.println(">>>SPR_COLLIDING_ON with "+event.getSource());
-		if(gesture.equals(GestureConstants.BOUNCING))
+		if(gesture.equals(GestureName.BOUNCING))
 		{	blockedDirection = blockedDirection.getOpposite();
 			sprite.setGesture(gesture,blockedDirection,blockedDirection,false);
 		}
-		else if(gesture.equals(GestureConstants.WALKING))
-		{	gesture = GestureConstants.PUSHING;
+		else if(gesture.equals(GestureName.WALKING))
+		{	gesture = GestureName.PUSHING;
 			sprite.setGesture(gesture, spriteDirection,controlDirection,true);
 		}
 	}
@@ -375,8 +375,8 @@ public class HeroEventManager extends EventManager
 	{	// wait delay
 		if(event.getStringParameter().equals(DelayManager.DL_WAIT))
 		{	// the sprite is currently standing
-			if(gesture.equals(GestureConstants.STANDING))
-			{	gesture = GestureConstants.WAITING;
+			if(gesture.equals(GestureName.STANDING))
+			{	gesture = GestureName.WAITING;
 				sprite.setGesture(gesture,spriteDirection,controlDirection,true);
 			}
 		}		
@@ -392,7 +392,7 @@ public class HeroEventManager extends EventManager
 
 	private void engTileLowEnter(EngineEvent event)
 	{	if(event.getSource()==sprite)
-		{	if(gesture.equals(GestureConstants.PUSHING) || gesture.equals(GestureConstants.STANDING) || gesture.equals(GestureConstants.WALKING))
+		{	if(gesture.equals(GestureName.PUSHING) || gesture.equals(GestureName.STANDING) || gesture.equals(GestureName.WALKING))
 			{	Item item = sprite.getTile().getItem();
 				if(item!=null)
 				{	SpecificAction action = new SpecificAction(AbstractAction.GATHER,sprite,item,event.getDirection());
@@ -421,15 +421,15 @@ public class HeroEventManager extends EventManager
 	
 	private void engTrajectoryOver(EngineEvent event)
 	{	// the sprite is currently bouncing/jumping
-		if(gesture.equals(GestureConstants.BOUNCING))
+		if(gesture.equals(GestureName.BOUNCING))
 		{	SpecificAction specificAction = new SpecificAction(AbstractAction.LAND,sprite,null,Direction.NONE);
 			ActionAbility ability = sprite.computeAbility(specificAction);
 			// the sprite is allowed to land
 			if(ability.isActive())
-				gesture = GestureConstants.LANDING;
+				gesture = GestureName.LANDING;
 			// the sprite is not allowed to land
 			else
-				gesture = GestureConstants.BOUNCING;
+				gesture = GestureName.BOUNCING;
 			// si pas de direction bloqu�e, alors celles du sprite de du controle n'ont pas chang� (sont toujours correctes)
 			if(blockedDirection==Direction.NONE)
 				sprite.setGesture(gesture,spriteDirection,controlDirection,true);
@@ -437,12 +437,12 @@ public class HeroEventManager extends EventManager
 			else
 				sprite.setGesture(gesture,blockedDirection,blockedDirection,true);
 			// on met �ventuellement � jour pour le rebond 
-			if(gesture.equals(GestureConstants.BOUNCING) && blockedDirection==Direction.NONE)
+			if(gesture.equals(GestureName.BOUNCING) && blockedDirection==Direction.NONE)
 				blockedDirection = spriteDirection;											
 		}
 		
 		// fin du saut
-		else if(gesture.equals(GestureConstants.LANDING))
+		else if(gesture.equals(GestureName.LANDING))
 		{	if(controlDirection == Direction.NONE)
 			{	if(blockedDirection!=Direction.NONE)
 					spriteDirection = blockedDirection;
@@ -450,7 +450,7 @@ public class HeroEventManager extends EventManager
 			else
 				spriteDirection = controlDirection;
 			setWaitDelay();
-			gesture = GestureConstants.STANDING;							
+			gesture = GestureName.STANDING;							
 			sprite.setGesture(gesture,spriteDirection,controlDirection,true);
 			blockedDirection = Direction.NONE;
 		}
@@ -464,7 +464,7 @@ public class HeroEventManager extends EventManager
 		if(ability.isActive())
 		{	StateAbility ablt = sprite.computeAbility(StateAbility.HERO_CELEBRATION_DURATION);
 			double duration = ablt.getStrength();
-			gesture = GestureConstants.EXULTING;							
+			gesture = GestureName.EXULTING;							
 			sprite.setGesture(gesture,spriteDirection,controlDirection,true,duration);
 		}
 		else
@@ -488,7 +488,7 @@ public class HeroEventManager extends EventManager
 		if(ability.isActive())
 		{	StateAbility ablt = sprite.computeAbility(StateAbility.HERO_CELEBRATION_DURATION);
 			double duration = ablt.getStrength();
-			gesture = GestureConstants.CRYING;
+			gesture = GestureName.CRYING;
 			sprite.setGesture(gesture,spriteDirection,controlDirection,true,duration);
 		}
 		else

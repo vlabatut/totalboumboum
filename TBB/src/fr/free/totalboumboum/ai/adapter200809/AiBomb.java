@@ -22,7 +22,7 @@ package fr.free.totalboumboum.ai.adapter200809;
  */
 
 import fr.free.totalboumboum.configuration.profile.PredefinedColor;
-import fr.free.totalboumboum.engine.content.feature.GestureConstants;
+import fr.free.totalboumboum.engine.content.feature.GestureName;
 import fr.free.totalboumboum.engine.content.feature.ability.StateAbility;
 import fr.free.totalboumboum.engine.content.sprite.bomb.Bomb;
 
@@ -143,8 +143,8 @@ public class AiBomb extends AiSprite<Bomb>
 	private void updateWorking()
 	{	Bomb sprite = getSprite();
 		String gesture = sprite.getCurrentGesture();
-		if(gesture.equalsIgnoreCase(GestureConstants.OSCILLATING_FAILING)
-			|| gesture.equalsIgnoreCase(GestureConstants.STANDING_FAILING))
+		if(gesture.equalsIgnoreCase(GestureName.OSCILLATING_FAILING)
+			|| gesture.equalsIgnoreCase(GestureName.STANDING_FAILING))
 			working = false;
 		else
 			working = true;

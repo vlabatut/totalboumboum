@@ -27,7 +27,7 @@ import java.util.TreeSet;
 import java.util.Map.Entry;
 
 import fr.free.totalboumboum.engine.content.feature.Direction;
-import fr.free.totalboumboum.engine.content.feature.GestureConstants;
+import fr.free.totalboumboum.engine.content.feature.GestureName;
 import fr.free.totalboumboum.engine.content.feature.ability.ActionAbility;
 import fr.free.totalboumboum.engine.content.feature.ability.StateAbility;
 import fr.free.totalboumboum.engine.content.feature.action.AbstractAction;
@@ -53,7 +53,7 @@ public class BombEventManager extends EventManager
 	}
 	
 	public void initGesture()
-	{	gesture = GestureConstants.STANDING;
+	{	gesture = GestureName.STANDING;
 		spriteDirection = Direction.NONE;
 		StateAbility ability = sprite.computeAbility(StateAbility.BOMB_TRIGGER_TIMER);
 		if(ability.isActive())
@@ -82,8 +82,8 @@ public class BombEventManager extends EventManager
 	}
 
 	private void actionConsume(ActionEvent event)
-	{	if(gesture.equals(GestureConstants.OSCILLATING) || gesture.equals(GestureConstants.SLIDING) || gesture.equals(GestureConstants.STANDING)
-			|| gesture.equals(GestureConstants.OSCILLATING_FAILING) || gesture.equals(GestureConstants.SLIDING) || gesture.equals(GestureConstants.STANDING_FAILING))
+	{	if(gesture.equals(GestureName.OSCILLATING) || gesture.equals(GestureName.SLIDING) || gesture.equals(GestureName.STANDING)
+			|| gesture.equals(GestureName.OSCILLATING_FAILING) || gesture.equals(GestureName.SLIDING) || gesture.equals(GestureName.STANDING_FAILING))
 		{	StateAbility a = sprite.computeAbility(StateAbility.BOMB_EXPLOSION_LATENCY);
 			if(a.isActive())
 			{	double duration = a.getStrength();
@@ -97,7 +97,7 @@ public class BombEventManager extends EventManager
 					sprite.addDelay(delayName,duration);
 			}
 			else
-			{	gesture = GestureConstants.BURNING;
+			{	gesture = GestureName.BURNING;
 				sprite.setGesture(gesture,spriteDirection,Direction.NONE,true);
 				sprite.putExplosion();							
 			}
@@ -105,8 +105,8 @@ public class BombEventManager extends EventManager
 	}
 	
 	private void actionTrigger(ActionEvent event)
-	{	if(gesture.equals(GestureConstants.OSCILLATING) || gesture.equals(GestureConstants.SLIDING) || gesture.equals(GestureConstants.STANDING)
-			|| gesture.equals(GestureConstants.OSCILLATING_FAILING) || gesture.equals(GestureConstants.SLIDING) || gesture.equals(GestureConstants.STANDING_FAILING))
+	{	if(gesture.equals(GestureName.OSCILLATING) || gesture.equals(GestureName.SLIDING) || gesture.equals(GestureName.STANDING)
+			|| gesture.equals(GestureName.OSCILLATING_FAILING) || gesture.equals(GestureName.SLIDING) || gesture.equals(GestureName.STANDING_FAILING))
 		{	long r = Math.round(Math.random()*101);
 			StateAbility b = sprite.computeAbility(StateAbility.BOMB_FAILURE_PROBABILITY);
 			if(b.isActive())
@@ -118,7 +118,7 @@ public class BombEventManager extends EventManager
 				}
 			}
 			else
-			{	gesture = GestureConstants.BURNING;
+			{	gesture = GestureName.BURNING;
 				sprite.setGesture(gesture,spriteDirection,Direction.NONE,true);
 				sprite.putExplosion();							
 			}
@@ -126,9 +126,9 @@ public class BombEventManager extends EventManager
 	}
 	
 	private void actionPunch(ActionEvent event)
-	{	if(gesture.equals(GestureConstants.OSCILLATING) || gesture.equals(GestureConstants.SLIDING) || gesture.equals(GestureConstants.STANDING)
-			|| gesture.equals(GestureConstants.OSCILLATING_FAILING) || gesture.equals(GestureConstants.SLIDING) || gesture.equals(GestureConstants.STANDING_FAILING))
-		{	gesture = GestureConstants.PUNCHED;
+	{	if(gesture.equals(GestureName.OSCILLATING) || gesture.equals(GestureName.SLIDING) || gesture.equals(GestureName.STANDING)
+			|| gesture.equals(GestureName.OSCILLATING_FAILING) || gesture.equals(GestureName.SLIDING) || gesture.equals(GestureName.STANDING_FAILING))
+		{	gesture = GestureName.PUNCHED;
 			spriteDirection = event.getAction().getDirection();
 			sprite.setGesture(gesture,spriteDirection,Direction.NONE,true);
 		}
@@ -167,8 +167,8 @@ public class BombEventManager extends EventManager
 	}	
 
 	private void engAnimeOver(EngineEvent event)
-	{	if(gesture.equals(GestureConstants.BURNING))
-		{	gesture = GestureConstants.ENDED;
+	{	if(gesture.equals(GestureName.BURNING))
+		{	gesture = GestureName.ENDED;
 			sprite.setGesture(gesture,spriteDirection,Direction.NONE,true);
 			sprite.endSprite();
 		}
@@ -176,13 +176,13 @@ public class BombEventManager extends EventManager
 
 	private void engCollidingOn(EngineEvent event)
 	{	// bouncing : bouncing on the obstacle
-		if(gesture.equals(GestureConstants.BOUNCING))
+		if(gesture.equals(GestureName.BOUNCING))
 		{	spriteDirection = spriteDirection.getOpposite();
 			sprite.setGesture(gesture,spriteDirection,Direction.NONE,false);
 		}
 		// sliding : the bomb stops in the center of the tile
-		else if(gesture.equals(GestureConstants.SLIDING) || gesture.equals(GestureConstants.SLIDING_FAILING))
-		{	gesture = GestureConstants.STANDING;
+		else if(gesture.equals(GestureName.SLIDING) || gesture.equals(GestureName.SLIDING_FAILING))
+		{	gesture = GestureName.STANDING;
 			spriteDirection = Direction.NONE;
 			sprite.center();
 			StateAbility ability = sprite.computeAbility(StateAbility.BOMB_TRIGGER_TIMER);
@@ -197,7 +197,7 @@ public class BombEventManager extends EventManager
 	
 	private void engCollidedOff(EngineEvent event)
 	{	// oscillating : the bomb stops oscillating
-		if(gesture.equals(GestureConstants.OSCILLATING) || gesture.equals(GestureConstants.OSCILLATING_FAILING))
+		if(gesture.equals(GestureName.OSCILLATING) || gesture.equals(GestureName.OSCILLATING_FAILING))
 		{	Sprite actor = event.getSource();
 			Direction dir = event.getDirection();
 			collidingSprites.get(dir).remove(actor);
@@ -210,8 +210,8 @@ public class BombEventManager extends EventManager
 						&& collidingSprites.get(Direction.LEFT).size()==0
 						&& collidingSprites.get(Direction.RIGHT).size()==0
 						&& collidingSprites.get(Direction.UP).size()==0)
-				{	if(gesture.equals(GestureConstants.OSCILLATING))
-					{	gesture = GestureConstants.STANDING;
+				{	if(gesture.equals(GestureName.OSCILLATING))
+					{	gesture = GestureName.STANDING;
 						StateAbility ability = sprite.computeAbility(StateAbility.BOMB_TRIGGER_TIMER);
 						if(ability.isActive())
 						{	double duration = ability.getStrength();
@@ -220,8 +220,8 @@ public class BombEventManager extends EventManager
 						else
 							sprite.setGesture(gesture,spriteDirection,Direction.NONE,true);
 					}
-					else if(gesture.equals(GestureConstants.OSCILLATING_FAILING))
-					{	gesture = GestureConstants.STANDING_FAILING;
+					else if(gesture.equals(GestureName.OSCILLATING_FAILING))
+					{	gesture = GestureName.STANDING_FAILING;
 						sprite.setGesture(gesture,spriteDirection,Direction.NONE,false);
 					}
 				}
@@ -231,8 +231,8 @@ public class BombEventManager extends EventManager
 
 	private void engCollidedOn(EngineEvent event)
 	{	// standing : the bomb starts oscillating
-		if(gesture.equals(GestureConstants.STANDING) || gesture.equals(GestureConstants.STANDING_FAILING)
-				|| gesture.equals(GestureConstants.OSCILLATING) || gesture.equals(GestureConstants.OSCILLATING_FAILING))
+		if(gesture.equals(GestureName.STANDING) || gesture.equals(GestureName.STANDING_FAILING)
+				|| gesture.equals(GestureName.OSCILLATING) || gesture.equals(GestureName.OSCILLATING_FAILING))
 		{	// check if the actor has the ability to push the bomb
 			Sprite actor = event.getSource();
 			Direction dir = event.getDirection();
@@ -246,7 +246,7 @@ public class BombEventManager extends EventManager
 				// check if the bomb was already collided in the same direction
 				if(sprite.hasDelay(delayName))
 				{	sprite.addDelay(delayName, dur);
-					gesture = GestureConstants.OSCILLATING;
+					gesture = GestureName.OSCILLATING;
 					spriteDirection = dir;
 					sprite.setGesture(gesture,spriteDirection,Direction.NONE,false);
 					StateAbility ability = sprite.computeAbility(StateAbility.BOMB_TRIGGER_TIMER);
@@ -271,9 +271,9 @@ public class BombEventManager extends EventManager
 				StateAbility a = sprite.computeAbility(StateAbility.BOMB_TRIGGER_TIMER);
 				if(a.isActive())
 				{	// is the bomb working ?
-					if(gesture.equals(GestureConstants.SLIDING) 
-							|| gesture.equals(GestureConstants.STANDING) 
-							|| gesture.equals(GestureConstants.OSCILLATING))
+					if(gesture.equals(GestureName.SLIDING) 
+							|| gesture.equals(GestureName.STANDING) 
+							|| gesture.equals(GestureName.OSCILLATING))
 					{	// is there a failure ?
 						long r = Math.round(Math.random()*101);
 						StateAbility b = sprite.computeAbility(StateAbility.BOMB_FAILURE_PROBABILITY);
@@ -299,15 +299,15 @@ public class BombEventManager extends EventManager
 						}
 						// else : explosion
 						else
-						{	gesture = GestureConstants.BURNING;
+						{	gesture = GestureName.BURNING;
 							sprite.setGesture(gesture,spriteDirection,Direction.NONE,true);
 							sprite.putExplosion();							
 						}
 					}
 					// is the bomb failing ?
-					else if(gesture.equals(GestureConstants.SLIDING_FAILING) || gesture.equals(GestureConstants.STANDING_FAILING) || gesture.equals(GestureConstants.OSCILLATING_FAILING))
+					else if(gesture.equals(GestureName.SLIDING_FAILING) || gesture.equals(GestureName.STANDING_FAILING) || gesture.equals(GestureName.OSCILLATING_FAILING))
 					{	// explosion
-						gesture = GestureConstants.BURNING;
+						gesture = GestureName.BURNING;
 						sprite.setGesture(gesture,spriteDirection,Direction.NONE,true);
 						sprite.putExplosion();							
 					}
@@ -321,12 +321,12 @@ public class BombEventManager extends EventManager
 		}
 		// explosion-caused explosion
 		else if(event.getStringParameter().equals(DelayManager.DL_LATENCY))
-		{	if(gesture.equals(GestureConstants.SLIDING) || gesture.equals(GestureConstants.OSCILLATING) || gesture.equals(GestureConstants.STANDING)
-				|| gesture.equals(GestureConstants.SLIDING_FAILING) || gesture.equals(GestureConstants.OSCILLATING_FAILING) || gesture.equals(GestureConstants.STANDING_FAILING))
+		{	if(gesture.equals(GestureName.SLIDING) || gesture.equals(GestureName.OSCILLATING) || gesture.equals(GestureName.STANDING)
+				|| gesture.equals(GestureName.SLIDING_FAILING) || gesture.equals(GestureName.OSCILLATING_FAILING) || gesture.equals(GestureName.STANDING_FAILING))
 			{	SpecificAction action = new SpecificAction(AbstractAction.DETONATE,sprite,null,Direction.NONE);
 				ActionAbility ablt = sprite.computeAbility(action);
 				if(ablt.isActive())
-				{	gesture = GestureConstants.BURNING;
+				{	gesture = GestureName.BURNING;
 					sprite.setGesture(gesture,spriteDirection,Direction.NONE,true);
 					sprite.putExplosion();							
 				}
@@ -336,24 +336,24 @@ public class BombEventManager extends EventManager
 
 	private void engTrajectoryOver(EngineEvent event)
 	{	// the sprite is currently bouncing
-		if(gesture.equals(GestureConstants.BOUNCING))
+		if(gesture.equals(GestureName.BOUNCING))
 		{	SpecificAction specificAction = new SpecificAction(AbstractAction.LAND,sprite,null,Direction.NONE);
 			ActionAbility ability = sprite.computeAbility(specificAction);
 			// the sprite is allowed to land
 			if(ability.isActive())
-			{	gesture = GestureConstants.LANDING;
+			{	gesture = GestureName.LANDING;
 				sprite.setGesture(gesture,spriteDirection,Direction.NONE,true);
 			}
 			// the sprite is not allowed to land
 			else
-			{	gesture = GestureConstants.BOUNCING;
+			{	gesture = GestureName.BOUNCING;
 				sprite.setGesture(gesture,spriteDirection,Direction.NONE,true);
 			}
 		}
 		// the sprite is landing
-		else if(gesture.equals(GestureConstants.LANDING))
+		else if(gesture.equals(GestureName.LANDING))
 		{	// gesture/direction
-			gesture = GestureConstants.STANDING;
+			gesture = GestureName.STANDING;
 			spriteDirection = Direction.NONE;
 			// normal delay
 			StateAbility ability = sprite.computeAbility(StateAbility.BOMB_TRIGGER_TIMER);
@@ -366,14 +366,14 @@ public class BombEventManager extends EventManager
 				sprite.setGesture(gesture,spriteDirection,Direction.NONE,true);			
 		}
 		// the sprite has been punched
-		else if(gesture.equals(GestureConstants.PUNCHED))
+		else if(gesture.equals(GestureName.PUNCHED))
 		{	SpecificAction action = new SpecificAction(AbstractAction.LAND,sprite,null,Direction.NONE);
 			ActionAbility a = sprite.computeAbility(action);
 			// the sprite is allowed to land
 			if(a.isActive())
-				gesture = GestureConstants.LANDING;
+				gesture = GestureName.LANDING;
 			else
-				gesture = GestureConstants.BOUNCING;
+				gesture = GestureName.BOUNCING;
 			sprite.setGesture(gesture,spriteDirection,Direction.NONE,true);			
 		}
 	}

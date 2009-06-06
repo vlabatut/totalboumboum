@@ -27,7 +27,7 @@ import java.util.Iterator;
 import fr.free.totalboumboum.engine.container.level.Level;
 import fr.free.totalboumboum.engine.container.tile.Tile;
 import fr.free.totalboumboum.engine.content.feature.Direction;
-import fr.free.totalboumboum.engine.content.feature.GestureConstants;
+import fr.free.totalboumboum.engine.content.feature.GestureName;
 import fr.free.totalboumboum.engine.content.feature.ability.AbstractAbility;
 import fr.free.totalboumboum.engine.content.feature.ability.ActionAbility;
 import fr.free.totalboumboum.engine.content.feature.ability.StateAbility;
@@ -52,7 +52,7 @@ public class PermissionManager
 	public PermissionManager(Sprite sprite)
 	{	this.sprite = sprite;
 		permissions = new PermissionPack();
-		currentGesture = GestureConstants.NONE;
+		currentGesture = GestureName.NONE;
 		currentDirection = Direction.NONE;
 		modulationAbilities = new ArrayList<AbstractAbility>();
 	}

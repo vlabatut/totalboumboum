@@ -27,7 +27,7 @@ import java.util.Iterator;
 import fr.free.totalboumboum.configuration.Configuration;
 import fr.free.totalboumboum.engine.container.tile.Tile;
 import fr.free.totalboumboum.engine.content.feature.Direction;
-import fr.free.totalboumboum.engine.content.feature.GestureConstants;
+import fr.free.totalboumboum.engine.content.feature.GestureName;
 import fr.free.totalboumboum.engine.content.feature.event.EngineEvent;
 import fr.free.totalboumboum.engine.content.feature.trajectory.TrajectoryDirection;
 import fr.free.totalboumboum.engine.content.feature.trajectory.TrajectoryPack;
@@ -61,7 +61,7 @@ public class TrajectoryManager
 	private double forcedDurationCoeff = 1;
 	
 	/** nom du geste courant */
-	private String currentGestureName = GestureConstants.NONE;
+	private String currentGestureName = GestureName.NONE;
 	/** modification de position X (utilisée lors de la mise à jour de la position) */
 	double shiftX = 0;
 	/** modification de position Y (utilisée lors de la mise à jour de la position) */
