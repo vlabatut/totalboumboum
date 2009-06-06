@@ -21,7 +21,7 @@ package fr.free.totalboumboum.engine.content.feature.action.drop;
  * 
  */
 
-import fr.free.totalboumboum.engine.content.feature.GestureConstants;
+import fr.free.totalboumboum.engine.content.feature.GestureName;
 import fr.free.totalboumboum.engine.content.feature.ability.ActionAbility;
 import fr.free.totalboumboum.engine.content.feature.action.AbstractAction;
 import fr.free.totalboumboum.engine.content.feature.action.ActionName;
@@ -32,13 +32,14 @@ import fr.free.totalboumboum.engine.content.feature.action.SpecificAction;
 import fr.free.totalboumboum.engine.content.feature.action.TilePosition;
 import fr.free.totalboumboum.engine.content.sprite.Sprite;
 import fr.free.totalboumboum.engine.content.sprite.bomb.Bomb;
+import fr.free.totalboumboum.engine.content.sprite.hero.Hero;
 
 /** 
  * putting an object on the ground.
  * usually a player dropping a bomb
  * 
- * 	<br>actor: 			any (probably a hero)
- * 	<br>target: 		any (probably a bomb)
+ * 	<br>actor: 			hero [any]
+ * 	<br>target: 		bomb [any]
  * 	<br>direction:		any or none
  * 	<br>contact:		none (the target is not supposed to be ongame)
  * 	<br>tilePosition:	undefined
@@ -47,35 +48,31 @@ import fr.free.totalboumboum.engine.content.sprite.bomb.Bomb;
  */
 public class SpecificDrop extends SpecificAction<GeneralDrop>
 {
-	public SpecificDrop(Sprite actor) throws IncompatibleParameterException
+	public SpecificDrop(Hero actor, Bomb target) throws IncompatibleParameterException
 	{	super(ActionName.DROP,actor,target);
 	}
 
+	/////////////////////////////////////////////////////////////////
+	// EXECUTION		/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	
 	@Override
 	public boolean execute()
-	{
-		
-		
-		if((gesture.equals(GestureConstants.PUSHING) || gesture.equals(GestureConstants.STANDING)
-				|| gesture.equals(GestureConstants.WAITING) || gesture.equals(GestureConstants.WALKING))
-				&& event.getMode())
-			{	Bomb bomb = sprite.makeBomb();
-				SpecificAction action = new SpecificAction(AbstractAction.DROP,sprite,bomb,spriteDirection,Contact.INTERSECTION,TilePosition.SAME,Orientation.SAME);
-				ActionAbility ability = sprite.computeAbility(action);
-				if(ability.isActive())
-				{	sprite.dropBomb(bomb);
-					if(gesture.equals(GestureConstants.WAITING))
-					{	setWaitDelay();
-						gesture = GestureConstants.STANDING;
-						sprite.setGesture(gesture,spriteDirection,controlDirection,true);					
-					}
-					else if(gesture.equals(GestureConstants.STANDING))
-						setWaitDelay();
-				}
+	{	//NOTE: from PUSHING, STANDING, WAITING, WALKING
+		boolean result = false;
+		if(isPossible())
+		{	Hero hero = (Hero)getActor();
+			GestureName gesture = hero.getCurrentGesture();
+			Bomb bomb = (Bomb) getTarget();
+			hero.dropBomb(bomb);
+			if(gesture.equals(GestureName.WAITING))
+			{	setWaitDelay();
+				gesture = GestureName.STANDING;
+				sprite.setGesture(gesture,spriteDirection,controlDirection,true);					
 			}
-		
-		
-		// TODO Auto-generated method stub
-		return false;
+			else if(gesture.equals(GestureName.STANDING))
+				setWaitDelay();
+		}
+		return result;
 	}
 }

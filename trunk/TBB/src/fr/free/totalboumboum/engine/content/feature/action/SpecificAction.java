@@ -21,8 +21,8 @@ package fr.free.totalboumboum.engine.content.feature.action;
  * 
  */
 
-import fr.free.totalboumboum.engine.container.tile.Tile;
 import fr.free.totalboumboum.engine.content.feature.Direction;
+import fr.free.totalboumboum.engine.content.feature.ability.ActionAbility;
 import fr.free.totalboumboum.engine.content.sprite.Sprite;
 
 public abstract class SpecificAction<T extends GeneralAction<?>>
@@ -59,7 +59,7 @@ public abstract class SpecificAction<T extends GeneralAction<?>>
 		this.contact = Contact.getContact(actor,target);
 		this.tilePosition = TilePosition.getTilePosition(actor,target);
 		this.orientation = Orientation.getOrientation(actor,target);
-		initGeneralAction();
+//		initGeneralAction();
 	}
 	
 	/**
@@ -80,7 +80,7 @@ public abstract class SpecificAction<T extends GeneralAction<?>>
 		this.contact = contact;
 		this.tilePosition = tilePosition;
 		this.orientation = orientation;
-		initGeneralAction();
+//		initGeneralAction();
 	}
 
 	/////////////////////////////////////////////////////////////////
@@ -162,7 +162,8 @@ public abstract class SpecificAction<T extends GeneralAction<?>>
 	public T getGeneralAction()
 	{	return generalAction;
 	}
-	
+/*	
+ * TODO is it necessary?
 	protected void initGeneralAction()
 	{	//NOTE à virer car remplacé par allowAction dans permission ?
 		//NOTE is it actually used? (we have GeneralAction.subsume)
@@ -175,16 +176,17 @@ public abstract class SpecificAction<T extends GeneralAction<?>>
 		if(target!=null)
 			generalAction.addTarget(target.getClass());
 	}
+*/
 	
 	/////////////////////////////////////////////////////////////////
 	// COMPARISON		/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
+/*
+ * TODO is it necessary?
 	public boolean equals(Object action)
 	{	boolean result = false;
-		if(action instanceof SpecificAction)
-		{	SpecificAction a = (SpecificAction)action;
-			// name
-			result = name.equalsIgnoreCase(a.getName());
+		if(action instanceof SpecificAction<?>)
+		{	SpecificAction<?> a = (SpecificAction<?>)action;
 			// actor
 			if(result)
 				result = actor==a.getActor();
@@ -206,6 +208,7 @@ public abstract class SpecificAction<T extends GeneralAction<?>>
 		}
 		return result;
 	}
+*/
 	
 	/////////////////////////////////////////////////////////////////
 	// STRING			/////////////////////////////////////////////
@@ -221,6 +224,7 @@ public abstract class SpecificAction<T extends GeneralAction<?>>
 		return result;
 	}
 /*	
+ * TODO is it necessary ?
 	public SpecificAction copy()
 	{	SpecificAction result;
 		result = new SpecificAction(name);
@@ -262,22 +266,14 @@ public abstract class SpecificAction<T extends GeneralAction<?>>
 	/** tries to execute the specific action */
 	public abstract boolean execute();
 	
-	/** tests if this action can be performed, i.e. is consistent
-	 * with the corresponding GeneralAction.
+	/** tests if this action is allowed (through the modulation system)
+	 * by the actor, the target and the environment.
 	 */
 	public boolean isPossible()
-	{	boolean result = false;
-		// TODO
+	{	boolean result;
+		ActionAbility ability = actor.computeAbility(this);
+		result = ability.isActive();
 		return result;
 	}
 	
-	/**
-	 * tests if this action is allowed (through the modulation system)
-	 * by the actor, the target and the environment.
-	 */
-	public boolean isAllowed()
-	{	boolean result = false;
-		//TODO
-		return result;
-	}
 }

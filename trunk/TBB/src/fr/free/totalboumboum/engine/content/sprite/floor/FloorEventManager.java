@@ -22,7 +22,7 @@ package fr.free.totalboumboum.engine.content.sprite.floor;
  */
 
 import fr.free.totalboumboum.engine.content.feature.Direction;
-import fr.free.totalboumboum.engine.content.feature.GestureConstants;
+import fr.free.totalboumboum.engine.content.feature.GestureName;
 import fr.free.totalboumboum.engine.content.feature.event.ActionEvent;
 import fr.free.totalboumboum.engine.content.feature.event.ControlEvent;
 import fr.free.totalboumboum.engine.content.feature.event.EngineEvent;
@@ -36,7 +36,7 @@ public class FloorEventManager extends EventManager
 	}
 
 	public void initGesture()
-	{	gesture = GestureConstants.STANDING;
+	{	gesture = GestureName.STANDING;
 		spriteDirection = Direction.NONE;
 		sprite.setGesture(gesture,spriteDirection,Direction.NONE,true);
 	}

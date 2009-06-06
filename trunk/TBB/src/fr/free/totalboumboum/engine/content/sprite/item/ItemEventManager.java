@@ -22,7 +22,7 @@ package fr.free.totalboumboum.engine.content.sprite.item;
  */
 
 import fr.free.totalboumboum.engine.content.feature.Direction;
-import fr.free.totalboumboum.engine.content.feature.GestureConstants;
+import fr.free.totalboumboum.engine.content.feature.GestureName;
 import fr.free.totalboumboum.engine.content.feature.action.AbstractAction;
 import fr.free.totalboumboum.engine.content.feature.event.ActionEvent;
 import fr.free.totalboumboum.engine.content.feature.event.ControlEvent;
@@ -36,7 +36,7 @@ public class ItemEventManager extends EventManager
 	}
 	
 	public void initGesture()
-	{	gesture = GestureConstants.STANDING;
+	{	gesture = GestureName.STANDING;
 		spriteDirection = Direction.NONE;
 		sprite.setGesture(gesture,spriteDirection,Direction.NONE,true);
 	}
@@ -55,8 +55,8 @@ public class ItemEventManager extends EventManager
 	}
 
 	private void actionConsume(ActionEvent event)
-	{	if(gesture.equals(GestureConstants.STANDING))
-		{	gesture = GestureConstants.BURNING;
+	{	if(gesture.equals(GestureName.STANDING))
+		{	gesture = GestureName.BURNING;
 			sprite.setGesture(gesture,spriteDirection,Direction.NONE,true);
 		}
 	}
@@ -87,8 +87,8 @@ public class ItemEventManager extends EventManager
 	}	
 
 	private void engAnimeOver(EngineEvent event)
-	{	if(gesture.equals(GestureConstants.BURNING))
-		{	gesture = GestureConstants.ENDED;
+	{	if(gesture.equals(GestureName.BURNING))
+		{	gesture = GestureName.ENDED;
 			sprite.setGesture(gesture,spriteDirection,Direction.NONE,true);
 			sprite.endSprite();
 		}

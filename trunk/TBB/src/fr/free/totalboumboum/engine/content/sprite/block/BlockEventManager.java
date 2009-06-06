@@ -23,7 +23,7 @@ package fr.free.totalboumboum.engine.content.sprite.block;
 
 import fr.free.totalboumboum.engine.container.tile.Tile;
 import fr.free.totalboumboum.engine.content.feature.Direction;
-import fr.free.totalboumboum.engine.content.feature.GestureConstants;
+import fr.free.totalboumboum.engine.content.feature.GestureName;
 import fr.free.totalboumboum.engine.content.feature.ability.AbstractAbility;
 import fr.free.totalboumboum.engine.content.feature.ability.StateAbility;
 import fr.free.totalboumboum.engine.content.feature.action.AbstractAction;
@@ -42,7 +42,7 @@ public class BlockEventManager extends EventManager
 	}
 	
 	public void initGesture()
-	{	gesture = GestureConstants.STANDING;
+	{	gesture = GestureName.STANDING;
 		spriteDirection = Direction.NONE;
 		sprite.setGesture(gesture,spriteDirection,Direction.NONE,true);
 	}
@@ -59,8 +59,8 @@ public class BlockEventManager extends EventManager
 	}
 
 	private void actionConsume(ActionEvent event)
-	{	if(gesture.equals(GestureConstants.STANDING))
-		{	gesture = GestureConstants.BURNING;
+	{	if(gesture.equals(GestureName.STANDING))
+		{	gesture = GestureName.BURNING;
 			sprite.setGesture(gesture,spriteDirection,Direction.NONE,true);
 		}
 	}
@@ -89,18 +89,18 @@ public class BlockEventManager extends EventManager
 	}		
 
 	private void engAnimeOver(EngineEvent event)
-	{	if(gesture.equals(GestureConstants.BURNING))
+	{	if(gesture.equals(GestureName.BURNING))
 		{	// spawn or not ?
 			StateAbility ablt = sprite.getAbility(StateAbility.BLOCK_SPAWN);
 			// can spawn
 			if(ablt.isActive())
 			{	sprite.addDelay(DelayManager.DL_SPAWN, ablt.getStrength());
-				gesture = GestureConstants.HIDING;
+				gesture = GestureName.HIDING;
 				sprite.setGesture(gesture,spriteDirection,Direction.NONE,true);
 			}
 			// cannot spawn
 			else
-			{	gesture = GestureConstants.ENDED;
+			{	gesture = GestureName.ENDED;
 				sprite.setGesture(gesture,spriteDirection,Direction.NONE,true);
 				sprite.endSprite();
 			}
@@ -118,20 +118,20 @@ public class BlockEventManager extends EventManager
 				}
 			}
 		}
-		else if(gesture.equals(GestureConstants.SPAWNING))
-		{	gesture = GestureConstants.STANDING;
+		else if(gesture.equals(GestureName.SPAWNING))
+		{	gesture = GestureName.STANDING;
 			sprite.setGesture(gesture,spriteDirection,Direction.NONE,true);
 		}
 	}
 
 	private void engDelayOver(EngineEvent event)
-	{	if(gesture.equals(GestureConstants.HIDING))
+	{	if(gesture.equals(GestureName.HIDING))
 		{	SpecificAction specificAction = new SpecificAction(AbstractAction.APPEAR,sprite,sprite.getTile().getFloor(),Direction.NONE);
 			AbstractAbility ability = sprite.computeAbility(specificAction);
 			if(ability.isActive())
 			{	StateAbility ablt = sprite.getAbility(StateAbility.BLOCK_SPAWN);
 				sprite.decrementUse(ablt,1);
-				gesture = GestureConstants.SPAWNING;
+				gesture = GestureName.SPAWNING;
 				sprite.setGesture(gesture,spriteDirection,Direction.NONE,true);
 			}
 			else

@@ -23,7 +23,7 @@ package fr.free.totalboumboum.engine.content.manager.explosion;
 
 import fr.free.totalboumboum.engine.container.tile.Tile;
 import fr.free.totalboumboum.engine.content.feature.Direction;
-import fr.free.totalboumboum.engine.content.feature.GestureConstants;
+import fr.free.totalboumboum.engine.content.feature.GestureName;
 import fr.free.totalboumboum.engine.content.feature.ability.AbstractAbility;
 import fr.free.totalboumboum.engine.content.feature.action.AbstractAction;
 import fr.free.totalboumboum.engine.content.feature.action.SpecificAction;
@@ -75,7 +75,7 @@ public class ExplosionManager
 		tile.addSprite(fire);
 		fire.setCurrentPosX(tile.getPosX());
 		fire.setCurrentPosY(tile.getPosY());
-		fire.setGesture(GestureConstants.BURNING, Direction.NONE, Direction.NONE, true);
+		fire.setGesture(GestureName.BURNING, Direction.NONE, Direction.NONE, true);
 		// branches
 		if(flameRange>0)
 		{	makeBranch(flameRange,Direction.DOWN);
@@ -114,7 +114,7 @@ public class ExplosionManager
 				tileTemp.addSprite(fire);
 				fire.setCurrentPosX(tileTemp.getPosX());
 				fire.setCurrentPosY(tileTemp.getPosY());
-				fire.setGesture(GestureConstants.BURNING, dir, dir, true);
+				fire.setGesture(GestureName.BURNING, dir, dir, true);
 				length++;
 				tileTemp = tileTemp.getNeighbor(dir);
 			}
