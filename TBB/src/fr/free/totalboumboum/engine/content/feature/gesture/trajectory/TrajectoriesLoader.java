@@ -49,7 +49,7 @@ public class TrajectoriesLoader
 	private String type;
 	private double zoomFactor;
 */
-	public static void loadTrajectoryPack(String individualFolder, GesturePack pack, Level level) throws ParserConfigurationException, SAXException, IOException
+	public static void loadTrajectories(String individualFolder, GesturePack pack, Level level) throws ParserConfigurationException, SAXException, IOException
 	{	File dataFile = new File(individualFolder+File.separator+FileTools.FILE_TRAJECTORIES+FileTools.EXTENSION_XML);
 		if(dataFile.exists())
 		{	// opening

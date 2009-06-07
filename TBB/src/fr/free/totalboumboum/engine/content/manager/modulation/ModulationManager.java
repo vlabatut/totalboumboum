@@ -30,12 +30,12 @@ import fr.free.totalboumboum.engine.content.feature.Direction;
 import fr.free.totalboumboum.engine.content.feature.ability.AbstractAbility;
 import fr.free.totalboumboum.engine.content.feature.ability.ActionAbility;
 import fr.free.totalboumboum.engine.content.feature.ability.StateAbility;
+import fr.free.totalboumboum.engine.content.feature.gesture.Gesture;
 import fr.free.totalboumboum.engine.content.feature.gesture.GestureName;
 import fr.free.totalboumboum.engine.content.feature.gesture.action.AbstractAction;
 import fr.free.totalboumboum.engine.content.feature.gesture.action.GeneralAction;
 import fr.free.totalboumboum.engine.content.feature.gesture.action.SpecificAction;
 import fr.free.totalboumboum.engine.content.feature.gesture.modulation.ActorModulation;
-import fr.free.totalboumboum.engine.content.feature.gesture.modulation.ModulationPack;
 import fr.free.totalboumboum.engine.content.feature.gesture.modulation.StateModulation;
 import fr.free.totalboumboum.engine.content.feature.gesture.modulation.TargetModulation;
 import fr.free.totalboumboum.engine.content.feature.gesture.modulation.ThirdModulation;
@@ -43,16 +43,14 @@ import fr.free.totalboumboum.engine.content.sprite.Sprite;
 
 public class ModulationManager
 {	private Sprite sprite;
-	private String currentGesture;
 	@SuppressWarnings("unused")
 	private Direction currentDirection;
-	private ModulationPack modulations;
 	private ArrayList<AbstractAbility> modulationAbilities;
-	
+	private Gesture currentGesture;
+
 	public ModulationManager(Sprite sprite)
 	{	this.sprite = sprite;
-		modulations = new ModulationPack();
-		currentGesture = GestureName.NONE;
+		currentGesture = null;
 		currentDirection = Direction.NONE;
 		modulationAbilities = new ArrayList<AbstractAbility>();
 	}
@@ -61,33 +59,27 @@ public class ModulationManager
 	{	return sprite.getLevel();
 	}
 	
-	public void setGesture(String gesture, Direction spriteDirection)
+	public void updateGesture(Gesture gesture, Direction spriteDirection)
 	{	if(!currentGesture.equals(gesture))
-			updateModulations(gesture);
+			updateAbilities();
 		currentGesture = gesture;
 		currentDirection = spriteDirection;
 	}
 	
-	public void setPermissionPack(ModulationPack permissions)
-	{	this.modulations = permissions;
-		permissions.setSprite(sprite);
-		updateModulations(currentGesture);
-	}
-	
 	public StateModulation getStateModulation(StateModulation modulation)
-	{	StateModulation result = modulations.getModulation(currentGesture, modulation);
+	{	StateModulation result = currentGesture.getStateModulation(modulation);
 		return result;
 	}
 	public ActorModulation getActorModulation(SpecificAction action)
-	{	ActorModulation result = modulations.getActorPermission(currentGesture, action);
+	{	ActorModulation result = currentGesture.getActorModulation(action);
 		return result;
 	}
 	public TargetModulation getTargetModulation(SpecificAction action)
-	{	TargetModulation result = modulations.getTargetPermission(currentGesture, action);
+	{	TargetModulation result = currentGesture.getTargetModulation(action);
 		return result;
 	}
 	public ThirdModulation getThirdModulation(SpecificAction action)
-	{	ThirdModulation result = modulations.getThirdPermission(currentGesture, action);
+	{	ThirdModulation result = currentGesture.getThirdModulation(action);
 		return result;
 	}
 	
@@ -167,23 +159,23 @@ public class ModulationManager
 		if(target==null)
 		{	Tile place = actor.getTile();
 			if(place!=null)
-				combineTilePermission(specificAction,ability,place);
+				combineTileModulation(specificAction,ability,place);
 		}
 		// transitive action
 		else
 		{	Tile tileA = actor.getTile();
 			if(tileA!=null) 
-				combineTilePermission(specificAction,ability,tileA);
+				combineTileModulation(specificAction,ability,tileA);
 			Tile tileT = target.getTile();
 			if(tileT!=null && tileT!=tileA && ability.isActive())
-				combineTilePermission(specificAction,ability,target.getTile());
+				combineTileModulation(specificAction,ability,target.getTile());
 		}
 	}
 
 	/**
 	 * calcule les permissions third au niveau d'une case donnée
 	 */
-	public void combineTilePermission(SpecificAction specificAction, ActionAbility ability, Tile tile)
+	public void combineTileModulation(SpecificAction specificAction, ActionAbility ability, Tile tile)
 	{	GeneralAction action = specificAction.getGeneralAction();
 		ArrayList<Sprite> sprites = tile.getSprites();
 		Iterator<Sprite> i = sprites.iterator();
@@ -242,13 +234,13 @@ public class ModulationManager
 		}
 	}
 	
-	public void updateModulations(String newGesture)
+	public void updateAbilities()
 	{	
 /*		
 if(sprite instanceof Item && sprite.getCurrentGesture()!=null && sprite.getCurrentGesture().equals("burning"))
 	System.out.println();
 */		
-		ArrayList<StateModulation> modulations = modulations.getModulations(newGesture);
+		ArrayList<StateModulation> modulations = currentGesture.getStateModulations();
 		modulationAbilities.clear();
 		Iterator<StateModulation> i = modulations.iterator();
 		while(i.hasNext())
@@ -276,9 +268,6 @@ if(sprite instanceof Item && sprite.getCurrentGesture()!=null && sprite.getCurre
 					it.remove();
 				}
 			}
-			// permission pack
-			modulations.finish();
-			modulations = null;
 			// misc
 			currentDirection = null;
 			sprite = null;

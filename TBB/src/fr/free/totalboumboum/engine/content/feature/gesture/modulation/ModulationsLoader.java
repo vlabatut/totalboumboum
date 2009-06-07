@@ -53,7 +53,7 @@ public class ModulationsLoader
 	private static final String TARGET = "target";
 	private static final String THIRD = "third";
 
-	public static void loadModulationPack(String individualFolder, GesturePack pack, Level level) throws ParserConfigurationException, SAXException, IOException, ClassNotFoundException
+	public static void loadModulations(String individualFolder, GesturePack pack, Level level) throws ParserConfigurationException, SAXException, IOException, ClassNotFoundException
 	{	File dataFile = new File(individualFolder+File.separator+FileTools.FILE_MODULATIONS+FileTools.EXTENSION_XML);
 		if(dataFile.exists())
 		{	// opening

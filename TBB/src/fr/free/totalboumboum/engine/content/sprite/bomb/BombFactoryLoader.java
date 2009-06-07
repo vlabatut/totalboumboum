@@ -36,11 +36,9 @@ import fr.free.totalboumboum.engine.container.bombset.Bombset;
 import fr.free.totalboumboum.engine.container.level.Level;
 import fr.free.totalboumboum.engine.content.feature.ability.AbilityLoader;
 import fr.free.totalboumboum.engine.content.feature.ability.AbstractAbility;
-import fr.free.totalboumboum.engine.content.feature.gesture.anime.AnimePack;
+import fr.free.totalboumboum.engine.content.feature.gesture.GesturePack;
 import fr.free.totalboumboum.engine.content.feature.gesture.anime.AnimesLoader;
-import fr.free.totalboumboum.engine.content.feature.gesture.modulation.ModulationPack;
 import fr.free.totalboumboum.engine.content.feature.gesture.modulation.ModulationsLoader;
-import fr.free.totalboumboum.engine.content.feature.gesture.trajectory.TrajectoryPack;
 import fr.free.totalboumboum.engine.content.feature.gesture.trajectory.TrajectoriesLoader;
 import fr.free.totalboumboum.engine.content.sprite.SpriteFactoryLoader;
 import fr.free.totalboumboum.tools.FileTools;
@@ -52,6 +50,8 @@ public class BombFactoryLoader extends SpriteFactoryLoader
 		BombFactory result = new BombFactory(level,bombName);
 		Element root = SpriteFactoryLoader.openFile(folderPath);
 		String folder;
+		GesturePack gesturePack = new GesturePack();
+		result.setGesturePack(gesturePack);
 		
 		// GENERAL
 		loadGeneralElement(root,result);
@@ -63,25 +63,22 @@ public class BombFactoryLoader extends SpriteFactoryLoader
 		
 		// ANIMES
 		folder = folderPath+File.separator+FileTools.FILE_ANIMES;
-		AnimePack animePack;
+		folder = folderPath+File.separator+FileTools.FILE_ANIMES;
 		if(color==null)
-			animePack = AnimesLoader.loadAnimePack(folder,level);
+			AnimesLoader.loadAnimes(folder,gesturePack,level);
 		else
-			animePack = AnimesLoader.loadAnimePack(folder,level,color);
-		result.setAnimePack(animePack);
+			AnimesLoader.loadAnimes(folder,gesturePack,level,color);
 		
 		//EXPLOSION
 		loadExplosionElement(root,level,result);
 		
-		//PERMISSIONS
-		folder = folderPath+File.separator+FileTools.FILE_PERMISSIONS;
-		ModulationPack permissionPack = ModulationsLoader.loadPermissionPack(folder,level);
-		result.setPermissionPack(permissionPack);
+		//MODULATIONS
+		folder = folderPath+File.separator+FileTools.FILE_MODULATIONS;
+		ModulationsLoader.loadModulations(folder,gesturePack,level);
 		
 		// TRAJECTORIES
 		folder = folderPath+File.separator+FileTools.FILE_TRAJECTORIES;
-		TrajectoryPack trajectoryPack = TrajectoriesLoader.loadTrajectoryPack(folder,level);
-		result.setTrajectoryPack(trajectoryPack);
+		TrajectoriesLoader.loadTrajectories(folder,gesturePack,level);
 		
 		// BOMBSET
 		result.setBombset(bombset);

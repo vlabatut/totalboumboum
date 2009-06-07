@@ -42,7 +42,7 @@ public class BombFactory extends SpriteFactory<Bomb> implements Serializable
 		Bomb result = new Bomb(level);
 		
 		// common managers
-		setCommonManager(result);
+		initSprite(result);
 	
 		// specific managers
 		// delay

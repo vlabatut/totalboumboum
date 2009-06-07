@@ -126,15 +126,18 @@ public class Gesture
 //		modulation.setGestureName(name);
 	}
 	
-	public StateModulation getModulation(StateModulation modulation)
+	public StateModulation getStateModulation(StateModulation modulation)
 	{	StateModulation result = null;
 		int index = stateModulations.indexOf(modulation);
 		if(index>=0)
 			result = stateModulations.get(index);
 		return result;
 	}
+	public ArrayList<StateModulation> getStateModulations()
+	{	return stateModulations;	
+	}
 
-	public ActorModulation getActorModulation(SpecificAction action)
+	public ActorModulation getActorModulation(SpecificAction<?> action)
 	{	ActorModulation result = null;
 		Iterator<ActorModulation> i = actorModulations.iterator();
 		while(i.hasNext() && result==null)
@@ -145,7 +148,7 @@ public class Gesture
 		return result;
 	}
 	
-	public TargetModulation getTargetPermission(SpecificAction action)
+	public TargetModulation getTargetModulation(SpecificAction<?> action)
 	{	TargetModulation result = null;
 		Iterator<TargetModulation> i = targetModulations.iterator();
 		while(i.hasNext() && result==null)
@@ -156,7 +159,7 @@ public class Gesture
 		return result;
 	}
 	
-	public ThirdModulation getThirdPermission(SpecificAction action)
+	public ThirdModulation getThirdModulation(SpecificAction<?> action)
 	{	ThirdModulation result = null;
 		Iterator<ThirdModulation> i = thirdModulations.iterator();
 		while(i.hasNext() && result==null)

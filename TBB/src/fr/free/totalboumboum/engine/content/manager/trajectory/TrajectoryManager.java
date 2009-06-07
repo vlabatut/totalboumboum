@@ -28,9 +28,8 @@ import fr.free.totalboumboum.configuration.Configuration;
 import fr.free.totalboumboum.engine.container.tile.Tile;
 import fr.free.totalboumboum.engine.content.feature.Direction;
 import fr.free.totalboumboum.engine.content.feature.event.EngineEvent;
-import fr.free.totalboumboum.engine.content.feature.gesture.GestureName;
+import fr.free.totalboumboum.engine.content.feature.gesture.Gesture;
 import fr.free.totalboumboum.engine.content.feature.gesture.trajectory.TrajectoryDirection;
-import fr.free.totalboumboum.engine.content.feature.gesture.trajectory.TrajectoryPack;
 import fr.free.totalboumboum.engine.content.feature.gesture.trajectory.TrajectoryStep;
 import fr.free.totalboumboum.engine.content.sprite.Sprite;
 import fr.free.totalboumboum.engine.loop.Loop;
@@ -40,8 +39,6 @@ public class TrajectoryManager
 {	// divers
 	/** sprite dirigé par ce TrajectoryManager */
 	private Sprite sprite;
-	/** ensemble de toutes les trajectoires disponibles */
-	private TrajectoryPack trajectoryPack;
 	/** trajectoire courante */
 	private TrajectoryDirection currentTrajectory;
 	/** pas courrant */
@@ -60,8 +57,6 @@ public class TrajectoryManager
 	/** coefficient de mofication du temps dû au délai imposé */
 	private double forcedDurationCoeff = 1;
 	
-	/** nom du geste courant */
-	private String currentGestureName = GestureName.NONE;
 	/** modification de position X (utilisée lors de la mise à jour de la position) */
 	double shiftX = 0;
 	/** modification de position Y (utilisée lors de la mise à jour de la position) */
@@ -115,9 +110,6 @@ public class TrajectoryManager
 	// collisions
 	private final ArrayList<Sprite> intersectedSprites = new ArrayList<Sprite>();;
 	private final ArrayList<Sprite> collidedSprites = new ArrayList<Sprite>();;
-	
-	
-	
 
 	/** indique si la trajectoire a impliqué (pour le moment) que le sprite ait décollé du sol */ 
 	private boolean hasFlied;
@@ -130,22 +122,17 @@ public class TrajectoryManager
 	{	this.sprite = sprite;
 	}
 
-	public void setTrajectoryPack(TrajectoryPack trajectoryPack)
-	{	this.trajectoryPack = trajectoryPack;	
-	}
-	
 	/**
 	 * change l'animation en cours d'affichage
 	 */
-	public void setGesture(String gesture, Direction spriteDirection, Direction controlDirection, boolean reinit, double forcedDuration)
+	public void updateGesture(Gesture gesture, Direction spriteDirection, Direction controlDirection, boolean reinit, double forcedDuration)
 	{	// init
-		currentGestureName = gesture;
 		hasFlied = getCurrentPosZ()>0;
 		@SuppressWarnings("unused")
 		Direction previousDirection = currentDirection;
 		currentDirection = controlDirection;
 		setInteractiveMove(controlDirection);
-		currentTrajectory = trajectoryPack.getTrajectoryDirection(gesture, spriteDirection);
+		currentTrajectory = gesture.getTrajectoryDirection(spriteDirection);
 		// reinit the gesture
 		if(reinit)
 		{	trajectoryDuration = currentTrajectory.getTotalDuration();
@@ -869,9 +856,6 @@ if(sprite instanceof Hero)
 	public void finish()
 	{	if(!finished)
 		{	finished = true;
-			// trajectory pack
-			trajectoryPack.finish();
-			trajectoryPack = null;
 			// misc
 			collidedSprites.clear();
 			intersectedSprites.clear();
@@ -887,9 +871,5 @@ if(sprite instanceof Hero)
  */	
 	public Loop getLoop()
 	{	return sprite.getLoop();
-	}
-	
-	public String getCurrentGestureName()
-	{	return currentGestureName;		
 	}
 }

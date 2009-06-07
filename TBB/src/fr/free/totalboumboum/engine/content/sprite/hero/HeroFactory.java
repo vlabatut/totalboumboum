@@ -36,7 +36,7 @@ public class HeroFactory extends SpriteFactory<Hero>
 		Hero result = new Hero(level);
 		
 		// common managers
-		setCommonManager(result);
+		initSprite(result);
 	
 		// specific managers
 		// delay
