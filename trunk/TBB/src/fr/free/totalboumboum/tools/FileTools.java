@@ -63,6 +63,7 @@ public class FileTools
 	public static final String FILE_GAME_QUICKMATCH = "gameQuickmatch";
 	public static final String FILE_GAME_QUICKSTART = "gameQuickstart";
 	public static final String FILE_GAME_TOURNAMENT = "gameTournament";
+	public static final String FILE_GESTUREMODULATIONS = "gesturemodulations";
 	public static final String FILE_GESTUREPERMISSIONS = "gesturepermissions";
 	public static final String FILE_HERO = "hero";
 	public static final String FILE_ITEM = "item";
@@ -76,6 +77,7 @@ public class FileTools
 	public static final String FILE_MATCHES = "matches";
 	public static final String FILE_MATRICES = "matrices";
 	public static final String FILE_MATRIX = "matrix";
+	public static final String FILE_MODULATIONS = "modulations";
 	public static final String FILE_PERMISSIONS = "permissions";
 	public static final String FILE_PLAYER = "player";
 	public static final String FILE_PLAYERS = "players";

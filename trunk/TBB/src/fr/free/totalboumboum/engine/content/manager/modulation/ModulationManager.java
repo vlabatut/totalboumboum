@@ -41,17 +41,17 @@ import fr.free.totalboumboum.engine.content.feature.gesture.modulation.TargetMod
 import fr.free.totalboumboum.engine.content.feature.gesture.modulation.ThirdModulation;
 import fr.free.totalboumboum.engine.content.sprite.Sprite;
 
-public class PermissionManager
+public class ModulationManager
 {	private Sprite sprite;
 	private String currentGesture;
 	@SuppressWarnings("unused")
 	private Direction currentDirection;
-	private ModulationPack permissions;
+	private ModulationPack modulations;
 	private ArrayList<AbstractAbility> modulationAbilities;
 	
-	public PermissionManager(Sprite sprite)
+	public ModulationManager(Sprite sprite)
 	{	this.sprite = sprite;
-		permissions = new ModulationPack();
+		modulations = new ModulationPack();
 		currentGesture = GestureName.NONE;
 		currentDirection = Direction.NONE;
 		modulationAbilities = new ArrayList<AbstractAbility>();
@@ -69,25 +69,25 @@ public class PermissionManager
 	}
 	
 	public void setPermissionPack(ModulationPack permissions)
-	{	this.permissions = permissions;
+	{	this.modulations = permissions;
 		permissions.setSprite(sprite);
 		updateModulations(currentGesture);
 	}
 	
-	public StateModulation getModulation(StateModulation modulation)
-	{	StateModulation result = permissions.getModulation(currentGesture, modulation);
+	public StateModulation getStateModulation(StateModulation modulation)
+	{	StateModulation result = modulations.getModulation(currentGesture, modulation);
 		return result;
 	}
-	public ActorModulation getActorPermission(SpecificAction action)
-	{	ActorModulation result = permissions.getActorPermission(currentGesture, action);
+	public ActorModulation getActorModulation(SpecificAction action)
+	{	ActorModulation result = modulations.getActorPermission(currentGesture, action);
 		return result;
 	}
-	public TargetModulation getTargetPermission(SpecificAction action)
-	{	TargetModulation result = permissions.getTargetPermission(currentGesture, action);
+	public TargetModulation getTargetModulation(SpecificAction action)
+	{	TargetModulation result = modulations.getTargetPermission(currentGesture, action);
 		return result;
 	}
-	public ThirdModulation getThirdPermission(SpecificAction action)
-	{	ThirdModulation result = permissions.getThirdPermission(currentGesture, action);
+	public ThirdModulation getThirdModulation(SpecificAction action)
+	{	ThirdModulation result = modulations.getThirdPermission(currentGesture, action);
 		return result;
 	}
 	
@@ -108,13 +108,13 @@ public class PermissionManager
 		result = (ActionAbility)capacityAbility.copy();
 		// permission of the actor
 		if(result.isActive())
-			combineActorPermission(action,result);
+			combineActorModulation(action,result);
 		// permission of the target (if there's one!)
 		if(result.isActive() && target!=null && target.getCurrentGesture()!=null)
-			combineTargetPermission(action,result);
+			combineTargetModulation(action,result);
 		// permission of the environement
 		if(result.isActive())
-			combineThirdPermission(action,result);
+			combineThirdModulation(action,result);
 		return result;
 	}
 	
@@ -124,11 +124,11 @@ public class PermissionManager
 		return result;
 	}
 	
-	public void combineActorPermission(SpecificAction specificAction, ActionAbility ability)
+	public void combineActorModulation(SpecificAction specificAction, ActionAbility ability)
 	{	GeneralAction action = specificAction.getGeneralAction();
 		ActionAbility result = new ActionAbility(action,getLevel());
 		Sprite actor = specificAction.getActor();
-		ActorModulation actorPermission = actor.getActorPermission(specificAction);
+		ActorModulation actorPermission = actor.getActorModulation(specificAction);
 		if(actorPermission==null)
 		{	result.setStrength(0);
 			result.setFrame(true);			
@@ -140,11 +140,11 @@ public class PermissionManager
 		ability.combine(result);
 	}
 
-	public void combineTargetPermission(SpecificAction specificAction, ActionAbility ability)
+	public void combineTargetModulation(SpecificAction specificAction, ActionAbility ability)
 	{	GeneralAction action = specificAction.getGeneralAction();
 		ActionAbility result = new ActionAbility(action,getLevel());
 		Sprite target = specificAction.getTarget();
-		TargetModulation targetPermission = target.getTargetPermission(specificAction);
+		TargetModulation targetPermission = target.getTargetModulation(specificAction);
 		if(targetPermission==null)
 		{	result.setStrength(0);
 			result.setFrame(true);			
@@ -160,7 +160,7 @@ public class PermissionManager
 	 * on se retreint aux cases contenant l'acteur et la cible, et on teste 
 	 * chaque sprite.
 	 */
-	public void combineThirdPermission(SpecificAction specificAction, ActionAbility ability)
+	public void combineThirdModulation(SpecificAction specificAction, ActionAbility ability)
 	{	Sprite actor = specificAction.getActor();
 		Sprite target = specificAction.getTarget();
 		// intransitive action
@@ -191,7 +191,7 @@ public class PermissionManager
 		{	Sprite tempSprite = i.next();
 			if(tempSprite!=null && tempSprite!=specificAction.getActor() && tempSprite!=specificAction.getTarget())
 			{	ActionAbility result = new ActionAbility(action,getLevel());
-				ThirdModulation thirdPermission = tempSprite.getThirdPermission(specificAction);
+				ThirdModulation thirdPermission = tempSprite.getThirdModulation(specificAction);
 				if(thirdPermission==null)
 				{	result.setStrength(0);
 					result.setFrame(true);			
@@ -231,7 +231,7 @@ public class PermissionManager
 				if(tempSprite!=null && tempSprite!=sprite)
 				{	StateAbility result = new StateAbility(name,getLevel());
 					StateModulation stateModulation = new StateModulation(name);
-					stateModulation = tempSprite.getModulation(stateModulation);
+					stateModulation = tempSprite.getStateModulation(stateModulation);
 					if(stateModulation!=null)
 					{	result.setStrength(stateModulation.getStrength());
 						result.setFrame(stateModulation.getFrame());
@@ -248,7 +248,7 @@ public class PermissionManager
 if(sprite instanceof Item && sprite.getCurrentGesture()!=null && sprite.getCurrentGesture().equals("burning"))
 	System.out.println();
 */		
-		ArrayList<StateModulation> modulations = permissions.getModulations(newGesture);
+		ArrayList<StateModulation> modulations = modulations.getModulations(newGesture);
 		modulationAbilities.clear();
 		Iterator<StateModulation> i = modulations.iterator();
 		while(i.hasNext())
@@ -277,8 +277,8 @@ if(sprite instanceof Item && sprite.getCurrentGesture()!=null && sprite.getCurre
 				}
 			}
 			// permission pack
-			permissions.finish();
-			permissions = null;
+			modulations.finish();
+			modulations = null;
 			// misc
 			currentDirection = null;
 			sprite = null;

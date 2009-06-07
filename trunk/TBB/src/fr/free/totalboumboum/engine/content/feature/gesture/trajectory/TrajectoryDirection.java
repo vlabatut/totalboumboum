@@ -25,6 +25,7 @@ import java.util.ArrayList;
 import java.util.Iterator;
 
 import fr.free.totalboumboum.engine.content.feature.Direction;
+import fr.free.totalboumboum.engine.content.feature.gesture.GestureName;
 import fr.free.totalboumboum.engine.content.sprite.Sprite;
 
 public class TrajectoryDirection
@@ -33,7 +34,7 @@ public class TrajectoryDirection
 	private boolean repeat;
 	private double xInteraction;
 	private double yInteraction;
-	private String gestureName; //debug
+	private GestureName gestureName; //debug
 	private Direction direction; //debug
 	//
 	private boolean forceXPosition;
@@ -46,7 +47,7 @@ public class TrajectoryDirection
 	private boolean proportional;
 	
 	public TrajectoryDirection()
-	{	gestureName="NA";
+	{	gestureName = null;
 		steps = new ArrayList<TrajectoryStep>(0);
 		repeat = false;
 		xInteraction = 0;
@@ -179,7 +180,7 @@ public class TrajectoryDirection
 	public String getName()
 	{	return gestureName+","+direction;
 	}
-	public void setGestureName(String gestureName)
+	public void setGestureName(GestureName gestureName)
 	{	this.gestureName = gestureName;
 	}
 	public void setDirection(Direction direction)

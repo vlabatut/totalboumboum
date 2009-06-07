@@ -86,7 +86,7 @@ public class AiBlock extends AiSprite<Block>
 	private void updateDestructible()
 	{	Block sprite = getSprite();
 		SpecificAction action = new SpecificAction(AbstractAction.CONSUME,new Fire(sprite.getLevel()),sprite,Direction.NONE,Contact.COLLISION,TilePosition.SAME,Orientation.SAME);
-		TargetModulation perm = sprite.getTargetPermission(action);
+		TargetModulation perm = sprite.getTargetModulation(action);
 		destructible = perm!=null;
 	}	
 

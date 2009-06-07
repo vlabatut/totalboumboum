@@ -36,7 +36,7 @@ import fr.free.totalboumboum.tools.XmlTools;
 public class ColormapLoader
 {
 	public static Colormap loadColormap(String individualFolder) throws IOException, ParserConfigurationException, SAXException
-	{	// oprning
+	{	// opening
 		File dataFile = new File(individualFolder+FileTools.EXTENSION_XML);
 		String schemaFolder = FileTools.getSchemasPath();
 		File schemaFile = new File(schemaFolder+File.separator+FileTools.FILE_COLORMAP+FileTools.EXTENSION_SCHEMA);

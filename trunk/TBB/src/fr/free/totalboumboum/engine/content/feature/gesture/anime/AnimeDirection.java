@@ -26,13 +26,14 @@ import java.util.ArrayList;
 import java.util.Iterator;
 
 import fr.free.totalboumboum.engine.content.feature.Direction;
+import fr.free.totalboumboum.engine.content.feature.gesture.GestureName;
 
 public class AnimeDirection
 {
 	private ArrayList<AnimeStep> steps;
 	private boolean repeat;
 	private boolean proportional;
-	private String gestureName; //debug
+	private GestureName gestureName; //debug
 	private Direction direction; //debug
 	protected double boundHeight; 
 	
@@ -45,7 +46,7 @@ public class AnimeDirection
 	}
 
 	public AnimeDirection()
-	{	gestureName="NA";
+	{	gestureName= null;
 		steps = new ArrayList<AnimeStep>(0);
 		repeat = false;
 		proportional = false;
@@ -67,7 +68,7 @@ public class AnimeDirection
 	public String getName()
 	{	return gestureName+","+direction;
 	}
-	public void setGestureName(String gestureName)
+	public void setGestureName(GestureName gestureName)
 	{	this.gestureName = gestureName;
 	}
 	public void setDirection(Direction direction)

@@ -53,7 +53,7 @@ import fr.free.totalboumboum.engine.content.manager.delay.DelayManager;
 import fr.free.totalboumboum.engine.content.manager.event.EventManager;
 import fr.free.totalboumboum.engine.content.manager.explosion.ExplosionManager;
 import fr.free.totalboumboum.engine.content.manager.item.ItemManager;
-import fr.free.totalboumboum.engine.content.manager.modulation.PermissionManager;
+import fr.free.totalboumboum.engine.content.manager.modulation.ModulationManager;
 import fr.free.totalboumboum.engine.content.manager.trajectory.TrajectoryManager;
 import fr.free.totalboumboum.engine.content.sprite.bomb.Bomb;
 import fr.free.totalboumboum.engine.content.sprite.item.Item;
@@ -78,7 +78,7 @@ public abstract class Sprite
 	protected EventManager eventManager;
 	protected ExplosionManager explosionManager;
 	protected ItemManager itemManager;
-	protected PermissionManager permissionManager;
+	protected ModulationManager modulationManager;
 	protected TrajectoryManager trajectoryManager;
 	//
 	protected String currentGesture;
@@ -182,7 +182,7 @@ public abstract class Sprite
 	public void setGesture(String gesture, Direction spriteDirection, Direction controlDirection, boolean reinit, double forcedDuration)
 	{	if(!ended)
 		{	currentGesture = gesture;
-			permissionManager.setGesture(gesture,spriteDirection);
+			modulationManager.setGesture(gesture,spriteDirection);
 			animeManager.setGesture(gesture,spriteDirection,reinit,forcedDuration);
 			trajectoryManager.setGesture(gesture,spriteDirection,controlDirection,reinit,forcedDuration);
 		}
@@ -470,48 +470,48 @@ public abstract class Sprite
 	{	return itemManager.getItemAbilities();	
 	}
 
-	// PERMISSION MANAGER		/////////////////////////////////////////////
-	public void setPermissionManager(PermissionManager permissionManager)
-	{	this.permissionManager = permissionManager;
+	// MODULATION MANAGER		/////////////////////////////////////////////
+	public void setModulationManager(ModulationManager modulationManager)
+	{	this.modulationManager = modulationManager;
 	}
-	public StateModulation getModulation(StateModulation modulation)
-	{	return permissionManager.getModulation(modulation);
+	public StateModulation getStateModulation(StateModulation modulation)
+	{	return modulationManager.getStateModulation(modulation);
 	}
-	public ActorModulation getActorPermission(SpecificAction action)
-	{	return permissionManager.getActorPermission(action);
+	public ActorModulation getActorModulation(SpecificAction action)
+	{	return modulationManager.getActorModulation(action);
 	}
-	public TargetModulation getTargetPermission(SpecificAction action)
-	{	return permissionManager.getTargetPermission(action);
+	public TargetModulation getTargetModulation(SpecificAction action)
+	{	return modulationManager.getTargetModulation(action);
 	}
-	public ThirdModulation getThirdPermission(SpecificAction action)
-	{	return permissionManager.getThirdPermission(action);
+	public ThirdModulation getThirdModulation(SpecificAction action)
+	{	return modulationManager.getThirdModulation(action);
 	}
 	public StateAbility computeAbility(String name)
-	{	return permissionManager.computeAbility(name);
+	{	return modulationManager.computeAbility(name);
 	}
 	public ActionAbility computeAbility(SpecificAction action)
-	{	return permissionManager.computeAbility(action);
+	{	return modulationManager.computeAbility(action);
 	}
 	public ActionAbility computeCapacity(AbstractAction action)
-	{	return permissionManager.computeCapacity(action);
+	{	return modulationManager.computeCapacity(action);
 	}
 	public StateAbility computeCapacity(String name)
-	{	return permissionManager.computeCapacity(name);
+	{	return modulationManager.computeCapacity(name);
 	}
-	public void combineActorPermission(SpecificAction specificAction, ActionAbility ability)
-	{	permissionManager.combineActorPermission(specificAction,ability);
+	public void combineActorModulation(SpecificAction specificAction, ActionAbility ability)
+	{	modulationManager.combineActorModulation(specificAction,ability);
 	}
-	public void combineTargetPermission(SpecificAction specificAction, ActionAbility ability)
-	{	permissionManager.combineTargetPermission(specificAction,ability);
+	public void combineTargetModulation(SpecificAction specificAction, ActionAbility ability)
+	{	modulationManager.combineTargetModulation(specificAction,ability);
 	}
-	public void combineThirdPermission(SpecificAction specificAction, ActionAbility ability)
-	{	permissionManager.combineThirdPermission(specificAction,ability);
+	public void combineThirdModulation(SpecificAction specificAction, ActionAbility ability)
+	{	modulationManager.combineThirdModulation(specificAction,ability);
 	}
 	public void combineStateModulation(String name, StateAbility ability)
-	{	permissionManager.combineStateModulation(name,ability);
+	{	modulationManager.combineStateModulation(name,ability);
 	}
 	public ArrayList<AbstractAbility> getModulationAbilities()
-	{	return permissionManager.getModulationAbilities();	
+	{	return modulationManager.getModulationAbilities();	
 	}
 	
 	// TRAJECTORY MANAGER	/////////////////////////////////////////////
@@ -626,8 +626,8 @@ public abstract class Sprite
 			explosionManager = null;
 			itemManager.finish();
 			itemManager = null;
-			permissionManager.finish();
-			permissionManager = null;
+			modulationManager.finish();
+			modulationManager = null;
 			trajectoryManager.finish();
 			trajectoryManager = null;
 			// hidden sprite

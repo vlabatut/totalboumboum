@@ -38,7 +38,7 @@ import fr.free.totalboumboum.engine.container.bombset.BombsetLoader;
 import fr.free.totalboumboum.engine.container.level.Level;
 import fr.free.totalboumboum.engine.content.feature.ability.AbstractAbility;
 import fr.free.totalboumboum.engine.content.feature.gesture.anime.AnimePack;
-import fr.free.totalboumboum.engine.content.feature.gesture.anime.AnimePackLoader;
+import fr.free.totalboumboum.engine.content.feature.gesture.anime.AnimesLoader;
 import fr.free.totalboumboum.engine.content.feature.gesture.modulation.ModulationPack;
 import fr.free.totalboumboum.engine.content.feature.gesture.trajectory.TrajectoryPack;
 import fr.free.totalboumboum.engine.content.sprite.SpriteFactoryLoader;
@@ -69,7 +69,7 @@ public class HeroFactoryLoader extends SpriteFactoryLoader
 		
 		// ANIMES
 		folder = folderPath+File.separator+FileTools.FILE_ANIMES;
-		AnimePack animePack = AnimePackLoader.loadAnimePack(folder,level,color);
+		AnimePack animePack = AnimesLoader.loadAnimePack(folder,level,color);
 		result.setAnimePack(animePack);
 		
 		//EXPLOSION

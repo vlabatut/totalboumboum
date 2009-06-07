@@ -37,11 +37,11 @@ import fr.free.totalboumboum.engine.container.level.Level;
 import fr.free.totalboumboum.engine.content.feature.ability.AbilityLoader;
 import fr.free.totalboumboum.engine.content.feature.ability.AbstractAbility;
 import fr.free.totalboumboum.engine.content.feature.gesture.anime.AnimePack;
-import fr.free.totalboumboum.engine.content.feature.gesture.anime.AnimePackLoader;
+import fr.free.totalboumboum.engine.content.feature.gesture.anime.AnimesLoader;
 import fr.free.totalboumboum.engine.content.feature.gesture.modulation.ModulationPack;
 import fr.free.totalboumboum.engine.content.feature.gesture.modulation.ModulationsLoader;
 import fr.free.totalboumboum.engine.content.feature.gesture.trajectory.TrajectoryPack;
-import fr.free.totalboumboum.engine.content.feature.gesture.trajectory.TrajectoryLoader;
+import fr.free.totalboumboum.engine.content.feature.gesture.trajectory.TrajectoriesLoader;
 import fr.free.totalboumboum.engine.content.sprite.SpriteFactoryLoader;
 import fr.free.totalboumboum.tools.FileTools;
 
@@ -65,9 +65,9 @@ public class BombFactoryLoader extends SpriteFactoryLoader
 		folder = folderPath+File.separator+FileTools.FILE_ANIMES;
 		AnimePack animePack;
 		if(color==null)
-			animePack = AnimePackLoader.loadAnimePack(folder,level);
+			animePack = AnimesLoader.loadAnimePack(folder,level);
 		else
-			animePack = AnimePackLoader.loadAnimePack(folder,level,color);
+			animePack = AnimesLoader.loadAnimePack(folder,level,color);
 		result.setAnimePack(animePack);
 		
 		//EXPLOSION
@@ -80,7 +80,7 @@ public class BombFactoryLoader extends SpriteFactoryLoader
 		
 		// TRAJECTORIES
 		folder = folderPath+File.separator+FileTools.FILE_TRAJECTORIES;
-		TrajectoryPack trajectoryPack = TrajectoryLoader.loadTrajectoryPack(folder,level);
+		TrajectoryPack trajectoryPack = TrajectoriesLoader.loadTrajectoryPack(folder,level);
 		result.setTrajectoryPack(trajectoryPack);
 		
 		// BOMBSET
