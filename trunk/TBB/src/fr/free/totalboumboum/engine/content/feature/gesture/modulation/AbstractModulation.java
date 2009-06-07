@@ -1,5 +1,7 @@
 package fr.free.totalboumboum.engine.content.feature.gesture.modulation;
 
+import fr.free.totalboumboum.engine.content.feature.gesture.GestureName;
+
 /*
  * Total Boum Boum
  * Copyright 2008-2009 Vincent Labatut 
@@ -24,7 +26,7 @@ package fr.free.totalboumboum.engine.content.feature.gesture.modulation;
 
 public abstract class AbstractModulation
 {	
-	protected String gestureName; //debug
+	protected GestureName gestureName; //debug
 	
 	/** 
 	 * modification de la force de l'abileté
@@ -54,10 +56,10 @@ public abstract class AbstractModulation
 	{	this.strength = strength;
 	}
 	
-	public void setGestureName(String gestureName)
+	public void setGestureName(GestureName gestureName)
 	{	this.gestureName = gestureName;		
 	}
-	public String getGestureName()
+	public GestureName getGestureName()
 	{	return gestureName;		
 	}
 

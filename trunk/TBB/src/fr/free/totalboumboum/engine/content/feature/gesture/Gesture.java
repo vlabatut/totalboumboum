@@ -30,13 +30,15 @@ import java.util.Map.Entry;
 
 import fr.free.totalboumboum.engine.content.feature.Direction;
 import fr.free.totalboumboum.engine.content.feature.gesture.action.ActionName;
+import fr.free.totalboumboum.engine.content.feature.gesture.action.SpecificAction;
 import fr.free.totalboumboum.engine.content.feature.gesture.anime.AnimeDirection;
+import fr.free.totalboumboum.engine.content.feature.gesture.modulation.AbstractActionModulation;
+import fr.free.totalboumboum.engine.content.feature.gesture.modulation.AbstractModulation;
 import fr.free.totalboumboum.engine.content.feature.gesture.modulation.ActorModulation;
 import fr.free.totalboumboum.engine.content.feature.gesture.modulation.StateModulation;
 import fr.free.totalboumboum.engine.content.feature.gesture.modulation.TargetModulation;
 import fr.free.totalboumboum.engine.content.feature.gesture.modulation.ThirdModulation;
 import fr.free.totalboumboum.engine.content.feature.gesture.trajectory.TrajectoryDirection;
-
 
 public class Gesture
 {	
@@ -89,17 +91,82 @@ public class Gesture
 	// MODULATIONS		/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	private final ArrayList<StateModulation> stateModulations = new ArrayList<StateModulation>();
-	private final ArrayList<ActorModulation> actorPermissions = new ArrayList<ActorModulation>();
-	private final ArrayList<TargetModulation> targetPermissions = new ArrayList<TargetModulation>();
-	private final ArrayList<ThirdModulation> thirdPermissions = new ArrayList<ThirdModulation>();
+	private final ArrayList<ActorModulation> actorModulations = new ArrayList<ActorModulation>();
+	private final ArrayList<TargetModulation> targetModulations = new ArrayList<TargetModulation>();
+	private final ArrayList<ThirdModulation> thirdModulations = new ArrayList<ThirdModulation>();
 
+	public void addModulation(AbstractModulation modulation)
+	{	if(modulation instanceof StateModulation)
+			stateModulations.add((StateModulation)modulation);
+		else if(modulation instanceof ActorModulation)
+			actorModulations.add((ActorModulation)modulation);
+		else if(modulation instanceof TargetModulation)
+			targetModulations.add((TargetModulation)modulation);
+		else if(modulation instanceof ThirdModulation)
+			thirdModulations.add((ThirdModulation)modulation);
+//		modulation.setGestureName(name);
+	}
+	
+	public StateModulation getModulation(StateModulation modulation)
+	{	StateModulation result = null;
+		int index = stateModulations.indexOf(modulation);
+		if(index>=0)
+			result = stateModulations.get(index);
+		return result;
+	}
+
+	public ActorModulation getActorModulation(SpecificAction action)
+	{	ActorModulation result = null;
+		Iterator<ActorModulation> i = actorModulations.iterator();
+		while(i.hasNext() && result==null)
+		{	ActorModulation perm = i.next();
+			if(perm.isAllowingAction(action)) //NOTE moduler directement ? ou renommer en subsume?
+				result = perm;
+		}
+		return result;
+	}
+	
+	public TargetModulation getTargetPermission(SpecificAction action)
+	{	TargetModulation result = null;
+		Iterator<TargetModulation> i = targetModulations.iterator();
+		while(i.hasNext() && result==null)
+		{	TargetModulation perm = i.next();
+			if(perm.isAllowingAction(action))
+				result = perm;
+		}
+		return result;
+	}
+	
+	public ThirdModulation getThirdPermission(SpecificAction action)
+	{	ThirdModulation result = null;
+		Iterator<ThirdModulation> i = thirdModulations.iterator();
+		while(i.hasNext() && result==null)
+		{	ThirdModulation perm = i.next();
+			if(perm.isAllowingAction(action))
+				result = perm;
+		}
+		return result;
+	}
+	
 	
 	/////////////////////////////////////////////////////////////////
 	// ACTIONS			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	private final ArrayList<ActionName> actions = new ArrayList<ActionName>();
 	
+	public void addAction(ActionName action)
+	{	if(!actions.contains(action))
+			actions.add(action);		
+	}
 	
+	public boolean isAllowedAction(ActionName action)
+	{	boolean result = actions.contains(action);
+		return result;
+	}
+	
+	/////////////////////////////////////////////////////////////////
+	// COPY				/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
 	public Gesture copy(ArrayList<BufferedImage> images, ArrayList<BufferedImage> copyImages)
 	{	Gesture result = new Gesture();
 		// animes
@@ -115,6 +182,9 @@ public class Gesture
 		return result;
 	}
 
+	/////////////////////////////////////////////////////////////////
+	// FINISHED			/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
 	private boolean finished = false;
 	
 	public void finish()
