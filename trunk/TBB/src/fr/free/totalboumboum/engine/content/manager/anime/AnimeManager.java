@@ -25,11 +25,10 @@ import java.awt.image.BufferedImage;
 import java.util.Iterator;
 
 import fr.free.totalboumboum.configuration.Configuration;
-import fr.free.totalboumboum.configuration.profile.PredefinedColor;
 import fr.free.totalboumboum.engine.content.feature.Direction;
 import fr.free.totalboumboum.engine.content.feature.event.EngineEvent;
+import fr.free.totalboumboum.engine.content.feature.gesture.Gesture;
 import fr.free.totalboumboum.engine.content.feature.gesture.anime.AnimeDirection;
-import fr.free.totalboumboum.engine.content.feature.gesture.anime.AnimePack;
 import fr.free.totalboumboum.engine.content.feature.gesture.anime.AnimeStep;
 import fr.free.totalboumboum.engine.content.sprite.Sprite;
 import fr.free.totalboumboum.engine.loop.Loop;
@@ -37,8 +36,6 @@ import fr.free.totalboumboum.engine.loop.Loop;
 public class AnimeManager
 {	/** sprite possédant ce manager */
 	private Sprite sprite;
-	/** ensemble de toutes les animations disponibles */
-	private AnimePack animePack;
 	/** animation courante */
 	private AnimeDirection currentAnime;
 	/** pas courrant */
@@ -67,10 +64,6 @@ public class AnimeManager
 	{	this.sprite = sprite;
 	} 
 
-	public void setAnimePack(AnimePack animePack)
-	{	this.animePack = animePack;	
-	}
-	
 	/**
 	 * Change l'animation en cours pour le sprite considéré.
 	 * Paramètres :
@@ -91,9 +84,9 @@ public class AnimeManager
 	 * 	- une 'animation fixe' (une seule image ou pas d'image) sera en général associée à totalDuration=0 et repeat=true.
 	 * 	- s'il n'y a pas reinit, forcedDuration n'est pas pris en compte...  
 	 */
-	public void setGesture(String gesture, Direction direction, boolean reinit, double forcedDuration)
+	public void updateGesture(Gesture gesture, Direction direction, boolean reinit, double forcedDuration)
 	{	currentDirection = direction;
-		currentAnime = animePack.getAnimeDirection(gesture,currentDirection);
+		currentAnime = gesture.getAnimeDirection(currentDirection);
 		if(reinit)
 		{	isTerminated = false;
 			animeDuration = currentAnime.getTotalDuration();
@@ -249,10 +242,6 @@ public class AnimeManager
 	{	return sprite.getLoop();
 	}
 	
-	public PredefinedColor getColor()
-	{	return animePack.getColor();		
-	}
-	
 	public boolean isTerminated()
 	{	return isTerminated;	
 	}
@@ -302,9 +291,6 @@ public class AnimeManager
 	public void finish()
 	{	if(!finished)
 		{	finished = true;
-			// anime pack
-			animePack.finish();
-			animePack = null;
 			// misc
 			currentAnime = null;
 			currentStep = null;

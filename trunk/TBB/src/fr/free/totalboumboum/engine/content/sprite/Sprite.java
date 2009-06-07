@@ -39,6 +39,9 @@ import fr.free.totalboumboum.engine.content.feature.event.AbstractEvent;
 import fr.free.totalboumboum.engine.content.feature.event.ActionEvent;
 import fr.free.totalboumboum.engine.content.feature.event.ControlEvent;
 import fr.free.totalboumboum.engine.content.feature.event.EngineEvent;
+import fr.free.totalboumboum.engine.content.feature.gesture.Gesture;
+import fr.free.totalboumboum.engine.content.feature.gesture.GestureName;
+import fr.free.totalboumboum.engine.content.feature.gesture.GesturePack;
 import fr.free.totalboumboum.engine.content.feature.gesture.action.AbstractAction;
 import fr.free.totalboumboum.engine.content.feature.gesture.action.SpecificAction;
 import fr.free.totalboumboum.engine.content.feature.gesture.modulation.ActorModulation;
@@ -68,36 +71,7 @@ import fr.free.totalboumboum.game.statistics.StatisticEvent;
  */
 
 public abstract class Sprite
-{	protected Level level;
-	// managers
-	protected AbilityManager abilityManager;
-	protected AnimeManager animeManager;
-	protected BombsetManager bombsetManager;
-	protected ControlManager controlManager;
-	protected DelayManager delayManager;
-	protected EventManager eventManager;
-	protected ExplosionManager explosionManager;
-	protected ItemManager itemManager;
-	protected ModulationManager modulationManager;
-	protected TrajectoryManager trajectoryManager;
-	//
-	protected String currentGesture;
-	protected Tile tile;
-	/** le sprite ne doit pas être mise à jour, mais il existe encore */
-	protected Sprite hiddenSprite;
-	/** le sprite est terminé, mais le Tile ne l'a pas encore effectivement supprimé*/
-	protected boolean ended;
-	protected boolean toBeRemovedFromTile;
-	protected Sprite toBeRemovedFromSprite;
-	protected Sprite boundToSprite;
-	protected Sprite owner;
-	//
-	protected ArrayList<Sprite> boundSprites;
-	//
-	protected double speedCoeff = 1;
-	// 
-	private String name;
-	
+{	
 	public Sprite(Level level)
 	{	ended = false;
 		hiddenSprite = null;
@@ -108,7 +82,71 @@ public abstract class Sprite
 		this.level = level;
 		currentGesture = null;
 	}
+
+	/////////////////////////////////////////////////////////////////
+	// NAME			/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	private String name;
 	
+	public void setName(String name)
+	{	this.name = name; 	
+	}
+	
+	public String getName()
+	{	return name;	
+	}
+
+	/////////////////////////////////////////////////////////////////
+	// GESTURE			/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	protected GesturePack gesturePack;
+	protected Gesture currentGesture;
+
+	public void setGesturePack(GesturePack gesturePack)
+	{	this.gesturePack = gesturePack;	
+	}
+	
+	/*
+	 * change le gesture, la direction de l'animation et la direction des touches
+	 * l'animation n'est réinitialisée que si le gesture est modifié
+	 */
+	public void setGesture(GestureName gesture, Direction spriteDirection, Direction controlDirection, boolean reinit, double forcedDuration)
+	{	if(!ended)
+		{	currentGesture = gesturePack.getGesture(gesture);
+			modulationManager.updateGesture(currentGesture,spriteDirection);
+			animeManager.updateGesture(currentGesture,spriteDirection,reinit,forcedDuration);
+			trajectoryManager.updateGesture(currentGesture,spriteDirection,controlDirection,reinit,forcedDuration);
+		}
+	}
+	public void setGesture(GestureName gesture, Direction spriteDirection, Direction controlDirection, boolean reinit)
+	{	setGesture(gesture, spriteDirection, controlDirection, reinit, 0);
+	}
+/*	
+	public void initGesture(String gesture, Direction spriteDirection, double forcedDuration)
+	{	if(!ended)
+		{	eventManager.initGesture(gesture, spriteDirection);
+			setGesture(gesture,spriteDirection,Direction.NONE,true,forcedDuration);
+		}
+	}
+	public void initGesture(String gesture, Direction spriteDirection)
+	{	initGesture(gesture,spriteDirection,0);		
+	}
+*/	
+	public void initGesture()
+	{	eventManager.initGesture();
+	}
+	
+	public Gesture getCurrentGesture()
+	{	return currentGesture;
+	}
+	
+	public PredefinedColor getColor()
+	{	return gesturePack.getColor();		
+	}
+		
+	/////////////////////////////////////////////////////////////////
+	// STRING			/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
 	public String toString()
 	{	String result;
 		result = getClass().getSimpleName();
@@ -118,20 +156,33 @@ public abstract class Sprite
 		return result;
 	}
 	
+	/////////////////////////////////////////////////////////////////
+	// OWNER			/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	protected Sprite owner;
+	
 	public Sprite getOwner()
 	{	return owner;
 		//NOTE à modifier pour recherche récursivement l'owner final (mais peut être est-ce déjà fait ailleurs)
 	}
+	
 	public void setOwner(Sprite owner)
 	{	this.owner = owner;
 	}
 
+	/////////////////////////////////////////////////////////////////
+	// BOUND TO SPRITE	/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	protected Sprite boundToSprite;
+	
 	public Sprite getBoundToSprite()
 	{	return boundToSprite;
 	}
+	
 	public boolean isBoundToSprite()
 	{	return boundToSprite!=null;
 	}
+	
 	public void setBoundToSprite(Sprite boundToSprite)
 	{	if(!ended)
 		{	// traitement seulement si le nouveau boundToSprite lié est différent de l'ancien
@@ -155,59 +206,44 @@ public abstract class Sprite
 		}	
 	}
 	
+	/////////////////////////////////////////////////////////////////
+	// BOUND SPRITES	/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	protected ArrayList<Sprite> boundSprites;
+	
 	public boolean hasBoundSprite()
 	{	return boundSprites.size()>0;	
 	}
+	
 	public Iterator<Sprite> getBoundSprites()
 	{	return boundSprites.iterator();	
 	}
+	
 	public void addBoundSprite(Sprite boundSprite)
 	{	boundSprites.add(boundSprite);		
 	}
+	
 	public void removeBoundSprite(Sprite boundSprite)
 	{	boundSprites.remove(boundSprite);		
 	}
 	
+	/////////////////////////////////////////////////////////////////
+	// HIDDEN			/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	/** le sprite ne doit pas être mise à jour, mais il existe encore */
+	protected Sprite hiddenSprite;
+	
 	public Sprite getHiddenSprite()
 	{	return hiddenSprite;
 	}
+	
 	public void setHiddenSprite(Sprite hiddenSprite)
 	{	this.hiddenSprite = hiddenSprite;
 	}
 	
-	/*
-	 * change le gesture, la direction de l'animation et la direction des touches
-	 * l'animation n'est réinitialisée que si le gesture est modifié
-	 */
-	public void setGesture(String gesture, Direction spriteDirection, Direction controlDirection, boolean reinit, double forcedDuration)
-	{	if(!ended)
-		{	currentGesture = gesture;
-			modulationManager.setGesture(gesture,spriteDirection);
-			animeManager.setGesture(gesture,spriteDirection,reinit,forcedDuration);
-			trajectoryManager.setGesture(gesture,spriteDirection,controlDirection,reinit,forcedDuration);
-		}
-	}
-	public void setGesture(String gesture, Direction spriteDirection, Direction controlDirection, boolean reinit)
-	{	setGesture(gesture, spriteDirection, controlDirection, reinit, 0);
-	}
-/*	
-	public void initGesture(String gesture, Direction spriteDirection, double forcedDuration)
-	{	if(!ended)
-		{	eventManager.initGesture(gesture, spriteDirection);
-			setGesture(gesture,spriteDirection,Direction.NONE,true,forcedDuration);
-		}
-	}
-	public void initGesture(String gesture, Direction spriteDirection)
-	{	initGesture(gesture,spriteDirection,0);		
-	}
-*/	
-	public void initGesture()
-	{	eventManager.initGesture();
-	}
-	public String getCurrentGesture()
-	{	return currentGesture;
-	}
-
+	/////////////////////////////////////////////////////////////////
+	// SPRITE			/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
 	// update the sprite
 	public void update()
 	{	if(!ended)
@@ -237,31 +273,56 @@ public abstract class Sprite
 		}
 	}
 	
+	/////////////////////////////////////////////////////////////////
+	// ENDED			/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	/** le sprite est terminé, mais le Tile ne l'a pas encore effectivement supprimé*/
+	protected boolean ended;
+	
 	public void endSprite()
 	{	ended = true;
 		toBeRemovedFromTile = true;
 	}
+	
 	public boolean isEnded()
 	{	return ended;	
 	}
 
+	/////////////////////////////////////////////////////////////////
+	// REMOVE FROM TILE	/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	protected boolean toBeRemovedFromTile;
+	
 	public void setToBeRemovedFromTile(boolean toBeRemovedFromTile)
 	{	this.toBeRemovedFromTile = toBeRemovedFromTile;	
 	}
+	
 	public boolean isToBeRemovedFromTile()
 	{	return toBeRemovedFromTile;	
 	}
 	
+	/////////////////////////////////////////////////////////////////
+	// REMOVE FROM SPRITE		/////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	protected Sprite toBeRemovedFromSprite;
+	
 	public void setToBeRemovedFromSprite(Sprite toBeRemovedFromSprite)
 	{	this.toBeRemovedFromSprite = toBeRemovedFromSprite;	
 	}
+	
 	public Sprite getToBeRemovedFromSprite()
 	{	return toBeRemovedFromSprite;	
 	}
 
+	/////////////////////////////////////////////////////////////////
+	// TILE				/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	protected Tile tile;
+	
 	public Tile getTile()
 	{	return tile;
 	}
+	
 	public void setTile(Tile tile)
 	{	this.tile = tile;
 		setToBeRemovedFromTile(false);
@@ -272,6 +333,11 @@ public abstract class Sprite
 		tile.spreadEvent(event);
 	}
 	
+	/////////////////////////////////////////////////////////////////
+	// LEVEL			/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	protected Level level;	
+	
 	public Level getLevel()
 	{	return level;
 	}
@@ -280,12 +346,11 @@ public abstract class Sprite
 	{	return level.getLoop();	
 	}
 	
-	public void spreadEvent(AbstractEvent e)
-	{	Iterator<Sprite> i = boundSprites.iterator();
-		while(i.hasNext())
-			i.next().processEvent(e);		
-	}
-
+	/////////////////////////////////////////////////////////////////
+	// SPEED COEFF		/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	protected double speedCoeff = 1;
+	
 	/**
 	 * S'il y  a un boundToSprite, son speedCoeff est renvoyé.
 	 * Sinon, c'est le produit entre le speedCoeff du sprite
@@ -300,130 +365,181 @@ public abstract class Sprite
 			result = boundToSprite.getSpeedCoeff();
 		return result;
 	}
+	
 	public void setSpeedCoeff(double speedCoeff)
 	{	this.speedCoeff = speedCoeff;
 	}
 
-	// ABILITY MANAGER		/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	// ABILITIES		/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	protected AbilityManager abilityManager;
+
 	public void setAbilityManager(AbilityManager abilityManager)
 	{	this.abilityManager = abilityManager;
 	}
+	
 	public StateAbility getAbility(StateAbility ability)
 	{	return abilityManager.getAbility(ability);
 	}
+	
 	public StateAbility getAbility(String name)
 	{	return abilityManager.getAbility(name);
 	}
+	
 	public ActionAbility getAbility(ActionAbility ability)
 	{	return abilityManager.getAbility(ability);
 	}
+	
 	public ActionAbility getAbility(AbstractAction action)
 	{	return abilityManager.getAbility(action);
 	}
+	
 	public void decrementUse(AbstractAbility ability, int delta)
 	{	abilityManager.decrementUse(ability, delta);
 	}
 	
-	// ANIME MANAGER		/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	// ANIMES			/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	protected AnimeManager animeManager;
+
 	public void setAnimeManager(AnimeManager animeManager)
 	{	this.animeManager = animeManager;
 	}
+	
 	public BufferedImage getCurrentImage()
 	{	return animeManager.getCurrentImage();	
 	}
+	
 	public Direction getCurrentFacingDirection()
 	{	return animeManager.getCurrentDirection();	
 	}
+	
 	public boolean hasShadow()
 	{	return animeManager.hasShadow();
-	}	
+	}
+	
 	public BufferedImage getShadow()
 	{	return animeManager.getShadow();	
 	}
+	
 	public double getXShift()
 	{	return animeManager.getXShift();
 	}
+	
 	public double getYShift()
 	{	return animeManager.getYShift();
 	}
+	
 	public double getShadowXShift()
 	{	return animeManager.getShadowXShift();
 	}
+	
 	public double getShadowYShift()
 	{	return animeManager.getShadowYShift();
 	}
+	
 	public double getBoundHeight()
 	{	return animeManager.getBoundHeight();
 	}
+	
 	public double getAnimeTotalDuration()
 	{	return animeManager.getTotalDuration();
 	}
+	
 	public double getAnimeCurrentTime()
 	{	return animeManager.getCurrentTime();
 	}
-	public PredefinedColor getColor()
-	{	return animeManager.getColor();
-	}
 
-	// BOMBSET MANAGER		/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	// BOMBSET			/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	protected BombsetManager bombsetManager;
+
 	public void setBombsetManager(BombsetManager bombsetManager)
 	{	this.bombsetManager = bombsetManager;
 	}
+	
 	public BombsetManager getBombsetManager()
 	{	return bombsetManager;	
 	}
+	
 	public Bomb makeBomb()
 	{	return bombsetManager.makeBomb();
 	}
+	
 	public void dropBomb(Bomb bomb)
 	{	if(!ended)
 			bombsetManager.dropBomb(bomb);
 	}
+	
 	public void triggerBomb()
 	{	if(!ended)
 			bombsetManager.triggerBomb();
 	}
+	
 	public LinkedList<Bomb> getDroppedBombs()
 	{	return bombsetManager.getDroppedBombs();		
 	}
 
-	// CONTROL MANAGER		/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	// CONTROLS			/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	protected ControlManager controlManager;
+
 	public void setControlManager(ControlManager controlManager)
 	{	this.controlManager = controlManager;
 	}
+	
 	public void setControlSettings(ControlSettings controlSettings)
 	{	controlManager.setControlSettings(controlSettings);
 	}
+	
 	public void putControlCode(ControlCode controlCode)
 	{	if(!ended)
 			controlManager.putControlCode(controlCode);
 	}
+	
 	public void putControlEvent(ControlEvent controlEvent)
 	{	if(!ended)
 			controlManager.putControlEvent(controlEvent);
 	}
 
-	// DELAY MANAGER		/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	// DELAYS			/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	protected DelayManager delayManager;
+
 	public void setDelayManager(DelayManager delayManager)
 	{	this.delayManager = delayManager;
 	}
+	
 	public void addDelay(String name,double duration)
 	{	delayManager.addDelay(name,duration);
 	}
+	
 	public void removeDelay(String name)
 	{	delayManager.removeDelay(name);
 	}
+	
 	public double getDelay(String name)
 	{	return delayManager.getDelay(name);
 	}
+	
 	public boolean hasDelay(String name)
 	{	return delayManager.hasDelay(name);
 	}
 	
-	// EVENT MANAGER		/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	// EVENTS			/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	protected EventManager eventManager;
+
 	public void setEventManager(EventManager eventManager)
 	{	this.eventManager = eventManager;
 	}
+	
 	public void processEvent(AbstractEvent event)
 	{	if(!ended)
 		{	if(event instanceof ActionEvent)
@@ -434,138 +550,201 @@ public abstract class Sprite
 				eventManager.processEvent((EngineEvent)event);
 		}
 	}
+	
+	public void spreadEvent(AbstractEvent e)
+	{	Iterator<Sprite> i = boundSprites.iterator();
+		while(i.hasNext())
+			i.next().processEvent(e);		
+	}
+	
+	public void addStatisticEvent(StatisticEvent event)
+	{	getLoop().addStatisticEvent(event);
+	}
 
-	// EXPLOSION MANAGER	/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	// EXPLOSIONS		/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	protected ExplosionManager explosionManager;
+
 	public void setExplosionManager(ExplosionManager explosionManager)
 	{	this.explosionManager = explosionManager;
 	}
+	
 	public void putExplosion()
 	{	if(!ended)
 			explosionManager.putExplosion();	
 	}
+	
 	public void setFlameRange(int flameRange)
 	{	explosionManager.setFlameRange(flameRange);		
 	}	
+	
 	public int getFlameRange()
 	{	return explosionManager.getFlameRange();		
 	}	
 	
-	// ITEM MANAGER		/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	// ITEMS			/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	protected ItemManager itemManager;
+
 	public void setItemManager(ItemManager itemManager)
 	{	this.itemManager = itemManager;
 	}
+	
 	public void addItem(Item item)
 	{	itemManager.addItem(item);	
 	}
+	
 	public void addInitialItem(Item item)
 	{	itemManager.addInitialItem(item);	
 	}
+	
 	public Item dropRandomItem()
 	{	return itemManager.dropRandomItem();	
 	}
+	
 	public ArrayList<Item> dropAllItems()
 	{	return itemManager.dropAllItems();
 	}
+	
 	public ArrayList<AbstractAbility> getItemAbilities()
 	{	return itemManager.getItemAbilities();	
 	}
 
-	// MODULATION MANAGER		/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	// MODULATIONS		/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	protected ModulationManager modulationManager;
+
 	public void setModulationManager(ModulationManager modulationManager)
 	{	this.modulationManager = modulationManager;
 	}
+	
 	public StateModulation getStateModulation(StateModulation modulation)
 	{	return modulationManager.getStateModulation(modulation);
 	}
+	
 	public ActorModulation getActorModulation(SpecificAction action)
 	{	return modulationManager.getActorModulation(action);
 	}
+	
 	public TargetModulation getTargetModulation(SpecificAction action)
 	{	return modulationManager.getTargetModulation(action);
 	}
+	
 	public ThirdModulation getThirdModulation(SpecificAction action)
 	{	return modulationManager.getThirdModulation(action);
 	}
+	
 	public StateAbility computeAbility(String name)
 	{	return modulationManager.computeAbility(name);
 	}
+	
 	public ActionAbility computeAbility(SpecificAction action)
 	{	return modulationManager.computeAbility(action);
 	}
+	
 	public ActionAbility computeCapacity(AbstractAction action)
 	{	return modulationManager.computeCapacity(action);
 	}
+	
 	public StateAbility computeCapacity(String name)
 	{	return modulationManager.computeCapacity(name);
 	}
+	
 	public void combineActorModulation(SpecificAction specificAction, ActionAbility ability)
 	{	modulationManager.combineActorModulation(specificAction,ability);
 	}
+	
 	public void combineTargetModulation(SpecificAction specificAction, ActionAbility ability)
 	{	modulationManager.combineTargetModulation(specificAction,ability);
 	}
+	
 	public void combineThirdModulation(SpecificAction specificAction, ActionAbility ability)
 	{	modulationManager.combineThirdModulation(specificAction,ability);
 	}
+	
 	public void combineStateModulation(String name, StateAbility ability)
 	{	modulationManager.combineStateModulation(name,ability);
 	}
+	
 	public ArrayList<AbstractAbility> getModulationAbilities()
 	{	return modulationManager.getModulationAbilities();	
 	}
 	
-	// TRAJECTORY MANAGER	/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	// TRAJECTORIES		/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	protected TrajectoryManager trajectoryManager;
+
 	public void setTrajectoryManager(TrajectoryManager trajectoryManager)
 	{	this.trajectoryManager = trajectoryManager;
 	}
+	
 	public Direction getActualDirection()
 	{	return trajectoryManager.getActualDirection();	
 	}
+	
 	public double getCurrentPosX()
 	{	return trajectoryManager.getCurrentPosX();	
 	}
 	public void setCurrentPosX(double positionX)
 	{	trajectoryManager.setCurrentPosX(positionX);
 	}
+	
 	public double getCurrentPosY()
 	{	return trajectoryManager.getCurrentPosY();	
 	}
+	
 	public void setCurrentPosY(double positionY)
 	{	trajectoryManager.setCurrentPosY(positionY);
 	}
+	
 	public double getCurrentPosZ()
 	{	return trajectoryManager.getCurrentPosZ();
 	}
+	
 	public double getTrajectoryTotalDuration()
 	{	return trajectoryManager.getTotalDuration();
 	}
+	
 	public double getTrajectoryCurrentTime()
 	{	return trajectoryManager.getCurrentTime();
 	}
+	
 	public void addIntersectedSprite(Sprite intersectedSprite)
 	{	trajectoryManager.addIntersectedSprite(intersectedSprite);
 	}
+	
 	public void removeIntersectedSprite(Sprite intersectedSprite)
 	{	trajectoryManager.removeIntersectedSprite(intersectedSprite);
 	}
+	
 	public void addCollidedSprite(Sprite collidedSprite)
 	{	trajectoryManager.addCollidedSprite(collidedSprite);
 	}
+	
 	public void removeCollidedSprite(Sprite collidedSprite)
 	{	trajectoryManager.removeCollidedSprite(collidedSprite);
 	}
+	
 	public boolean isColliding()
 	{	return trajectoryManager.isColliding();
 	}
+	
 	public boolean isCollidingSprite(Sprite sprite)
 	{	return trajectoryManager.isCollidingSprite(sprite);
 	}
+	
 	public boolean isIntersectingSprite(Sprite sprite)
 	{	return trajectoryManager.isIntersectingSprite(sprite);
 	}
+	
 	public boolean isOnGround()
 	{	return trajectoryManager.isOnGround();		
 	}
+	
 	public void center()
 	{	double posX = tile.getPosX();
 		double posY = tile.getPosY();
@@ -573,29 +752,29 @@ public abstract class Sprite
 		setCurrentPosY(posY);
 	}
 	
-	// PLAYER	/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	// PLAYER			/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
 	private Player player;
 
 	public Player getPlayer()
 	{	return player;
 	}
+	
 	public void setPlayer(Player player)
 	{	this.player = player;
 	}
 	
-	
+	/////////////////////////////////////////////////////////////////
+	// TIME			/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
 	public long getLoopTime()
 	{	return getLoop().getTotalTime();		
 	}
 	
-	public void addStatisticEvent(StatisticEvent event)
-	{	getLoop().addStatisticEvent(event);
-	}
-
-	
-	
-	
-	
+	/////////////////////////////////////////////////////////////////
+	// FINISHED			/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////	
 	protected boolean finished = false;
 	
 	public void finish()
@@ -644,12 +823,5 @@ public abstract class Sprite
 			level = null;
 			name = null;
 		}
-	}
-	
-	public void setName(String name)
-	{	this.name = name; 	
-	}
-	public String getName()
-	{	return name;	
-	}
+	}	
 }

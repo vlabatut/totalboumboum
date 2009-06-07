@@ -48,7 +48,7 @@ public class ItemFactory extends SpriteFactory<Item>
 		Item result = new Item(level);
 		
 		// common managers
-		setCommonManager(result);
+		initSprite(result);
 	
 		// specific managers
 		// item ability

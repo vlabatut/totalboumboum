@@ -28,9 +28,7 @@ import fr.free.totalboumboum.engine.container.bombset.Bombset;
 import fr.free.totalboumboum.engine.container.level.Level;
 import fr.free.totalboumboum.engine.content.feature.ability.AbstractAbility;
 import fr.free.totalboumboum.engine.content.feature.explosion.Explosion;
-import fr.free.totalboumboum.engine.content.feature.gesture.anime.AnimePack;
-import fr.free.totalboumboum.engine.content.feature.gesture.modulation.ModulationPack;
-import fr.free.totalboumboum.engine.content.feature.gesture.trajectory.TrajectoryPack;
+import fr.free.totalboumboum.engine.content.feature.gesture.GesturePack;
 import fr.free.totalboumboum.engine.content.manager.ability.AbilityManager;
 import fr.free.totalboumboum.engine.content.manager.anime.AnimeManager;
 import fr.free.totalboumboum.engine.content.manager.bombset.BombsetManager;
@@ -43,34 +41,30 @@ import fr.free.totalboumboum.engine.content.manager.trajectory.TrajectoryManager
 
 public abstract class SpriteFactory<T extends Sprite>
 {
-	// managers
-	protected AnimePack animePack;
-	protected TrajectoryPack trajectoryPack;
-	protected ModulationPack permissionPack;
-	protected Bombset bombset;
-	protected Explosion explosion;
-	protected ArrayList<AbstractAbility> abilities;
-	//
-	protected Level level;
-	protected String name;
 	
 	public SpriteFactory(Level level)
 	{	this.level = level;
 	}
 	
-	
-	protected void setCommonManager(Sprite sprite)
+	/////////////////////////////////////////////////////////////////
+	// SPRITES			/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	public abstract T makeSprite();
+
+	protected void initSprite(Sprite sprite)
 	{	// name
 		sprite.setName(name);
 		
+		// gesture pack
+		GesturePack gp = gesturePack.copy();
+		sprite.setGesturePack(gp);
+		
 		// anime
 		AnimeManager animeManager = new AnimeManager(sprite);
-		animeManager.setAnimePack(animePack);
 		sprite.setAnimeManager(animeManager);
 		
 		// trajectory
 		TrajectoryManager trajectoryManager = new TrajectoryManager(sprite);
-		trajectoryManager.setTrajectoryPack(trajectoryPack);
 		sprite.setTrajectoryManager(trajectoryManager);
 		
 		// bombset
@@ -85,7 +79,6 @@ public abstract class SpriteFactory<T extends Sprite>
 		
 		// permission
 		ModulationManager permissionManager = new ModulationManager(sprite);
-		permissionManager.setPermissionPack(permissionPack);
 		sprite.setModulationManager(permissionManager);
 		
 		// item
@@ -106,55 +99,81 @@ public abstract class SpriteFactory<T extends Sprite>
 		sprite.setControlManager(controlManager);
 	}
 	
-	public abstract T makeSprite();
+	/////////////////////////////////////////////////////////////////
+	// NAME				/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	protected String name;
 
+	public String getName()
+	{	return name;
+	}
+	
+	public void setName(String name)
+	{	this.name = name;
+	}
+	/////////////////////////////////////////////////////////////////
+	// GESTURE PACK		/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	protected GesturePack gesturePack;
 
-	public AnimePack getAnimePack()
-	{	return animePack;
+	public GesturePack getGesturePack()
+	{	return gesturePack;
 	}
-	public void setAnimePack(AnimePack animePack)
-	{	this.animePack = animePack;
-	}
-
-	public TrajectoryPack getTrajectoryPack()
-	{	return trajectoryPack;
-	}
-	public void setTrajectoryPack(TrajectoryPack trajectoryPack)
-	{	this.trajectoryPack = trajectoryPack;
+	
+	public void setGesturePack(GesturePack gesturePack)
+	{	this.gesturePack = gesturePack;
 	}
 
-	public ModulationPack getPermissionPack()
-	{	return permissionPack;
-	}
-	public void setPermissionPack(ModulationPack permissionPack)
-	{	this.permissionPack = permissionPack;
-	}
+	/////////////////////////////////////////////////////////////////
+	// BOMBSET			/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	protected Bombset bombset;
 
 	public Bombset getBombset()
 	{	return bombset;
 	}
+	
 	public void setBombset(Bombset bombset)
 	{	this.bombset = bombset;
 	}
 
+	/////////////////////////////////////////////////////////////////
+	// EXPLOSION		/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	protected Explosion explosion;
+
 	public Explosion getExplosion()
 	{	return explosion;
 	}
+	
 	public void setExplosion(Explosion explosion)
 	{	this.explosion = explosion;
 	}
 
+	/////////////////////////////////////////////////////////////////
+	// ABILITIES		/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	protected ArrayList<AbstractAbility> abilities;
+
 	public ArrayList<AbstractAbility> getAbilities()
 	{	return abilities;
 	}
+	
 	public void setAbilities(ArrayList<AbstractAbility> abilities)
 	{	this.abilities = abilities;
 	}
 
+	/////////////////////////////////////////////////////////////////
+	// LEVEL			/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	protected Level level;
 	public Level getLevel()
 	{	return level;	
 	}
 	
+	/////////////////////////////////////////////////////////////////
+	// FINISHED			/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
 	protected boolean finished = false;
 	
 	public void finish()
@@ -173,20 +192,11 @@ public abstract class SpriteFactory<T extends Sprite>
 			bombset = null;
 			explosion.finish();
 			explosion = null;
-			permissionPack.finish();
-			permissionPack = null;
-			trajectoryPack.finish();
-			trajectoryPack = null;
+			gesturePack.finish();
+			gesturePack = null;
 			// misc
 			level = null;
 			name = null;
 		}
-	}
-
-	public String getName()
-	{	return name;
-	}
-	public void setName(String name)
-	{	this.name = name;
 	}
 }

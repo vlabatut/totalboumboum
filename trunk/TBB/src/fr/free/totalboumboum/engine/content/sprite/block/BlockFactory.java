@@ -37,7 +37,7 @@ public class BlockFactory extends SpriteFactory<Block>
 		Block result = new Block(level);
 		
 		// common managers
-		setCommonManager(result);
+		initSprite(result);
 	
 		// specific managers
 		// event

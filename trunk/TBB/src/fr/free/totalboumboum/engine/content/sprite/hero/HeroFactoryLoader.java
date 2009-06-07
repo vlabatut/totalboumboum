@@ -37,20 +37,20 @@ import fr.free.totalboumboum.engine.container.bombset.Bombset;
 import fr.free.totalboumboum.engine.container.bombset.BombsetLoader;
 import fr.free.totalboumboum.engine.container.level.Level;
 import fr.free.totalboumboum.engine.content.feature.ability.AbstractAbility;
-import fr.free.totalboumboum.engine.content.feature.gesture.anime.AnimePack;
+import fr.free.totalboumboum.engine.content.feature.gesture.GesturePack;
 import fr.free.totalboumboum.engine.content.feature.gesture.anime.AnimesLoader;
-import fr.free.totalboumboum.engine.content.feature.gesture.modulation.ModulationPack;
-import fr.free.totalboumboum.engine.content.feature.gesture.trajectory.TrajectoryPack;
 import fr.free.totalboumboum.engine.content.sprite.SpriteFactoryLoader;
 import fr.free.totalboumboum.tools.FileTools;
 
 public class HeroFactoryLoader extends SpriteFactoryLoader
 {	
-	public static HeroFactory loadHeroFactory(String folderPath, Level level, PredefinedColor color, ArrayList<AbstractAbility> ablts, ModulationPack permissions, TrajectoryPack trajectories) throws ParserConfigurationException, SAXException, IOException, ClassNotFoundException
+	public static HeroFactory loadHeroFactory(String folderPath, Level level, PredefinedColor color, ArrayList<AbstractAbility> ablts, GesturePack gp) throws ParserConfigurationException, SAXException, IOException, ClassNotFoundException
 	{	// init
 		HeroFactory result = new HeroFactory(level);
 		Element root = SpriteFactoryLoader.openFile(folderPath);
 		String folder;
+		GesturePack gesturePack = gp.copy();
+		result.setGesturePack(gesturePack);
 		
 		// GENERAL
 		loadGeneralElement(root,result);
@@ -69,25 +69,18 @@ public class HeroFactoryLoader extends SpriteFactoryLoader
 		
 		// ANIMES
 		folder = folderPath+File.separator+FileTools.FILE_ANIMES;
-		AnimePack animePack = AnimesLoader.loadAnimePack(folder,level,color);
-		result.setAnimePack(animePack);
+		AnimesLoader.loadAnimes(folder,gesturePack,level);
 		
 		//EXPLOSION
-		loadExplosionElement(root,level,result);
+		loadExplosionElement(root,level,result); //TODO les explosions des players ne devraient-elles pas être chargées en commun ?
 		
-		//PERMISSIONS
-//		folder = level.getInstancePath()+File.separator+FileTools.FOLDER_HEROES;
-//		folder = folder + File.separator+FileTools.FOLDER_PERMISSIONS;
-//		PermissionPack permissionPack = PermissionPackLoader.loadPermissionPack(folder,level);
-		ModulationPack permissionPack = permissions.copy();
-		result.setPermissionPack(permissionPack);
+		//MODULATIONS
+//		folder = folderPath+File.separator+FileTools.FILE_MODULATIONS;
+//		ModulationsLoader.loadModulations(folder,gesturePack,level);
 		
 		// TRAJECTORIES
-//		folder = level.getInstancePath()+File.separator+FileTools.FOLDER_HEROES;
-//		folder = folder + File.separator+FileTools.FOLDER_TRAJECTORIES;
-//		TrajectoryPack trajectoryPack = TrajectoryPackLoader.loadTrajectoryPack(folder,level);
-		TrajectoryPack trajectoryPack = trajectories.copy();
-		result.setTrajectoryPack(trajectoryPack);
+//		folder = folderPath+File.separator+FileTools.FILE_TRAJECTORIES;
+//		TrajectoriesLoader.loadTrajectories(folder,gesturePack,level);
 		
 		// BOMBSET
 		folder = level.getInstancePath()+File.separator+FileTools.FOLDER_BOMBS;

@@ -36,7 +36,7 @@ public class FloorFactory extends SpriteFactory<Floor>
 		Floor result = new Floor(level);
 		
 		// common managers
-		setCommonManager(result);
+		initSprite(result);
 	
 		// specific managers
 		// event

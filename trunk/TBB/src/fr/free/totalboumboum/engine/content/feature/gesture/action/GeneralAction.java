@@ -25,6 +25,13 @@ import fr.free.totalboumboum.engine.content.feature.Direction;
  * 
  */
 
+/**
+ * represents a general action by specifying who can do what to who.
+ * The subclasses define what is actually possible in the game. 
+ * Instances must by subsumed by the class, they fit more strict situations,
+ * usually user-defined to be used in abilities and modulations.
+ * SpecificActions represent in-game specific situations. 
+ */
 public abstract class GeneralAction<T extends SpecificAction<?>>
 {	
 	

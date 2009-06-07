@@ -42,11 +42,12 @@ public abstract class SpriteFactoryLoader
 	{	// init
 		String schemaFolder = FileTools.getSchemasPath();
 		File schemaFile,dataFile;
+		
 		// opening
 		dataFile = new File(folderPath+File.separator+FileTools.FILE_SPRITE+FileTools.EXTENSION_XML);
 		schemaFile = new File(schemaFolder+File.separator+FileTools.FILE_SPRITE+FileTools.EXTENSION_SCHEMA);
 		Element result = XmlTools.getRootFromFile(dataFile,schemaFile);
-		//
+
 		return result;
 	}
 

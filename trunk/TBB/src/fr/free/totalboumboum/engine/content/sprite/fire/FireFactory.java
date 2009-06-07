@@ -39,7 +39,7 @@ public class FireFactory extends SpriteFactory<Fire>
 		Fire result = new Fire(level);
 		
 		// common managers
-		setCommonManager(result);
+		initSprite(result);
 	
 		// specific managers
 		// event
