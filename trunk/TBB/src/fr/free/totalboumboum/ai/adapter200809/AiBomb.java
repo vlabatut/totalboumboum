@@ -22,8 +22,8 @@ package fr.free.totalboumboum.ai.adapter200809;
  */
 
 import fr.free.totalboumboum.configuration.profile.PredefinedColor;
-import fr.free.totalboumboum.engine.content.feature.GestureName;
 import fr.free.totalboumboum.engine.content.feature.ability.StateAbility;
+import fr.free.totalboumboum.engine.content.feature.gesture.GestureName;
 import fr.free.totalboumboum.engine.content.sprite.bomb.Bomb;
 
 /**

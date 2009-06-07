@@ -23,7 +23,6 @@ package fr.free.totalboumboum.engine.content.sprite.block;
 
 import fr.free.totalboumboum.engine.container.tile.Tile;
 import fr.free.totalboumboum.engine.content.feature.Direction;
-import fr.free.totalboumboum.engine.content.feature.GestureName;
 import fr.free.totalboumboum.engine.content.feature.ability.AbstractAbility;
 import fr.free.totalboumboum.engine.content.feature.ability.StateAbility;
 import fr.free.totalboumboum.engine.content.feature.action.AbstractAction;
@@ -31,6 +30,7 @@ import fr.free.totalboumboum.engine.content.feature.action.SpecificAction;
 import fr.free.totalboumboum.engine.content.feature.event.ActionEvent;
 import fr.free.totalboumboum.engine.content.feature.event.ControlEvent;
 import fr.free.totalboumboum.engine.content.feature.event.EngineEvent;
+import fr.free.totalboumboum.engine.content.feature.gesture.GestureName;
 import fr.free.totalboumboum.engine.content.manager.delay.DelayManager;
 import fr.free.totalboumboum.engine.content.manager.event.EventManager;
 import fr.free.totalboumboum.engine.content.sprite.item.Item;
@@ -95,7 +95,7 @@ public class BlockEventManager extends EventManager
 			// can spawn
 			if(ablt.isActive())
 			{	sprite.addDelay(DelayManager.DL_SPAWN, ablt.getStrength());
-				gesture = GestureName.HIDING;
+				gesture = fr.free.totalboumboum.engine.content.feature.gesture.HIDING;
 				sprite.setGesture(gesture,spriteDirection,Direction.NONE,true);
 			}
 			// cannot spawn
@@ -125,7 +125,7 @@ public class BlockEventManager extends EventManager
 	}
 
 	private void engDelayOver(EngineEvent event)
-	{	if(gesture.equals(GestureName.HIDING))
+	{	if(gesture.equals(fr.free.totalboumboum.engine.content.feature.gesture.HIDING))
 		{	SpecificAction specificAction = new SpecificAction(AbstractAction.APPEAR,sprite,sprite.getTile().getFloor(),Direction.NONE);
 			AbstractAbility ability = sprite.computeAbility(specificAction);
 			if(ability.isActive())
