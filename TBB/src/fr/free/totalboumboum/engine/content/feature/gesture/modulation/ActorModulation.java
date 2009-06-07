@@ -26,24 +26,24 @@ import java.util.Iterator;
 import fr.free.totalboumboum.engine.content.feature.ability.AbstractAbility;
 import fr.free.totalboumboum.engine.content.feature.gesture.action.GeneralAction;
 
-public class ActorPermission extends AbstractActionPermission
+public class ActorModulation extends AbstractActionModulation
 {
-	public ActorPermission(GeneralAction action)
+	public ActorModulation(GeneralAction action)
 	{	super(action);
 	}
 
 	public boolean equals(Object o)
 	{	boolean result = false;
-		if(o instanceof ActorPermission)
-		{	ActorPermission perm = (ActorPermission) o;
+		if(o instanceof ActorModulation)
+		{	ActorModulation perm = (ActorModulation) o;
 			result = action.equals(perm.getAction());
 		}
 		return result;
 	}
 	
-	public ActorPermission copy()
+	public ActorModulation copy()
 	{	GeneralAction actionCopy = action.copy();
-		ActorPermission result = new ActorPermission(actionCopy);
+		ActorModulation result = new ActorModulation(actionCopy);
 		// actor restrictions
 		{	Iterator<AbstractAbility> it = actorRestrictions.iterator();
 			while(it.hasNext())

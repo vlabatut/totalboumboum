@@ -26,24 +26,24 @@ import java.util.Iterator;
 import fr.free.totalboumboum.engine.content.feature.ability.AbstractAbility;
 import fr.free.totalboumboum.engine.content.feature.gesture.action.GeneralAction;
 
-public class ThirdPermission extends AbstractActionPermission
+public class ThirdModulation extends AbstractActionModulation
 {
-	public ThirdPermission(GeneralAction action)
+	public ThirdModulation(GeneralAction action)
 	{	super(action);
 	}
 	
 	public boolean equals(Object o)
 	{	boolean result = false;
-		if(o instanceof ThirdPermission)
-		{	ThirdPermission perm = (ThirdPermission) o;
+		if(o instanceof ThirdModulation)
+		{	ThirdModulation perm = (ThirdModulation) o;
 			result = action.equals(perm.getAction());
 		}
 		return result;
 	}
 
-	public ThirdPermission copy()
+	public ThirdModulation copy()
 	{	GeneralAction actionCopy = action.copy();
-		ThirdPermission result = new ThirdPermission(actionCopy);
+		ThirdModulation result = new ThirdModulation(actionCopy);
 		// actor restrictions
 		{	Iterator<AbstractAbility> it = actorRestrictions.iterator();
 			while(it.hasNext())

@@ -534,6 +534,12 @@ public class Launcher
 	 * TODO sprite du bad bomberman dans SBM1
 	 * éventuellement les autres persos du monde avec le ring
 	 */
+	
+	/*
+	 * TODO
+	 * il faut mieux gérer l'accès aux méthodes, utiliser plus protected.
+	 * surtout pour protéger les classes qui devraient être inaccessibles depuis l'IA
+	 */
 
 // **********************************************************
 // ITEMS

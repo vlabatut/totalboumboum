@@ -21,7 +21,7 @@ package fr.free.totalboumboum.engine.content.feature.gesture.modulation;
  * 
  */
 
-public class StateModulation extends AbstractPermission
+public class StateModulation extends AbstractModulation
 {	
 	String name;
 	

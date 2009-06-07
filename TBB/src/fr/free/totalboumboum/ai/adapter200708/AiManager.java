@@ -37,7 +37,7 @@ import fr.free.totalboumboum.engine.content.feature.gesture.action.Contact;
 import fr.free.totalboumboum.engine.content.feature.gesture.action.Orientation;
 import fr.free.totalboumboum.engine.content.feature.gesture.action.SpecificAction;
 import fr.free.totalboumboum.engine.content.feature.gesture.action.TilePosition;
-import fr.free.totalboumboum.engine.content.feature.gesture.modulation.TargetPermission;
+import fr.free.totalboumboum.engine.content.feature.gesture.modulation.TargetModulation;
 import fr.free.totalboumboum.engine.content.sprite.Sprite;
 import fr.free.totalboumboum.engine.content.sprite.block.Block;
 import fr.free.totalboumboum.engine.content.sprite.bomb.Bomb;
@@ -162,7 +162,7 @@ public abstract class AiManager extends AbstractAiManager<Integer>
 	    		if(temp.getBlock()!=null)
 	    		{	Block b = temp.getBlock();
 	    			SpecificAction action = new SpecificAction(AbstractAction.CONSUME,new Fire(level),b,Direction.NONE,Contact.COLLISION,TilePosition.SAME,Orientation.SAME);
-	    			TargetPermission perm = b.getTargetPermission(action);
+	    			TargetModulation perm = b.getTargetPermission(action);
 	    			// mur destructible
 	    			if(perm!=null)
 	    				zoneMatrix[y][x] = ArtificialIntelligence.AI_BLOCK_WALL_SOFT;

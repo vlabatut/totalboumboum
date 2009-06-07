@@ -39,14 +39,14 @@ import fr.free.totalboumboum.engine.container.level.Level;
 import fr.free.totalboumboum.engine.content.feature.ability.AbstractAbility;
 import fr.free.totalboumboum.engine.content.feature.gesture.anime.AnimePack;
 import fr.free.totalboumboum.engine.content.feature.gesture.anime.AnimePackLoader;
-import fr.free.totalboumboum.engine.content.feature.gesture.modulation.PermissionPack;
+import fr.free.totalboumboum.engine.content.feature.gesture.modulation.ModulationPack;
 import fr.free.totalboumboum.engine.content.feature.gesture.trajectory.TrajectoryPack;
 import fr.free.totalboumboum.engine.content.sprite.SpriteFactoryLoader;
 import fr.free.totalboumboum.tools.FileTools;
 
 public class HeroFactoryLoader extends SpriteFactoryLoader
 {	
-	public static HeroFactory loadHeroFactory(String folderPath, Level level, PredefinedColor color, ArrayList<AbstractAbility> ablts, PermissionPack permissions, TrajectoryPack trajectories) throws ParserConfigurationException, SAXException, IOException, ClassNotFoundException
+	public static HeroFactory loadHeroFactory(String folderPath, Level level, PredefinedColor color, ArrayList<AbstractAbility> ablts, ModulationPack permissions, TrajectoryPack trajectories) throws ParserConfigurationException, SAXException, IOException, ClassNotFoundException
 	{	// init
 		HeroFactory result = new HeroFactory(level);
 		Element root = SpriteFactoryLoader.openFile(folderPath);
@@ -79,7 +79,7 @@ public class HeroFactoryLoader extends SpriteFactoryLoader
 //		folder = level.getInstancePath()+File.separator+FileTools.FOLDER_HEROES;
 //		folder = folder + File.separator+FileTools.FOLDER_PERMISSIONS;
 //		PermissionPack permissionPack = PermissionPackLoader.loadPermissionPack(folder,level);
-		PermissionPack permissionPack = permissions.copy();
+		ModulationPack permissionPack = permissions.copy();
 		result.setPermissionPack(permissionPack);
 		
 		// TRAJECTORIES

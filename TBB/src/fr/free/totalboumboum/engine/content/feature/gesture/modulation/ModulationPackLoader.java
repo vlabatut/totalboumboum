@@ -42,15 +42,15 @@ import fr.free.totalboumboum.tools.FileTools;
 import fr.free.totalboumboum.tools.XmlTools;
 
 
-public class PermissionPackLoader
+public class ModulationPackLoader
 {	
 //	private static final String STATE = "state";
 	private static final String ACTOR = "actor";
 	private static final String TARGET = "target";
 	private static final String THIRD = "third";
 
-	public static PermissionPack loadPermissionPack(String individualFolder, Level level) throws ParserConfigurationException, SAXException, IOException, ClassNotFoundException
-	{	PermissionPack result = new PermissionPack();
+	public static ModulationPack loadPermissionPack(String individualFolder, Level level) throws ParserConfigurationException, SAXException, IOException, ClassNotFoundException
+	{	ModulationPack result = new ModulationPack();
 		File dataFile = new File(individualFolder+File.separator+FileTools.FILE_PERMISSIONS+FileTools.EXTENSION_XML);
 		if(dataFile.exists())
 		{	// opening
@@ -64,17 +64,17 @@ public class PermissionPackLoader
 	}
 	
     @SuppressWarnings("unchecked")
-	private static void loadPermissionsElement(Element root, String individualFolder, Level level, PermissionPack result) throws IOException, ParserConfigurationException, SAXException, ClassNotFoundException
+	private static void loadPermissionsElement(Element root, String individualFolder, Level level, ModulationPack result) throws IOException, ParserConfigurationException, SAXException, ClassNotFoundException
 	{	List<Element> gesturesList = root.getChildren(XmlTools.ELT_GESTURE);
 		Iterator<Element> i = gesturesList.iterator();
 		while(i.hasNext())
 		{	Element tp = i.next();
-			PermissionGesture permissionGesture = loadGestureElement(tp,individualFolder,level);
+			ModulationGesture permissionGesture = loadGestureElement(tp,individualFolder,level);
 			result.addPermissionGesture(permissionGesture);
 		}
 	}
     
-    private static PermissionGesture loadGestureElement(Element root, String individualFolder, Level level) throws IOException, ParserConfigurationException, SAXException, ClassNotFoundException
+    private static ModulationGesture loadGestureElement(Element root, String individualFolder, Level level) throws IOException, ParserConfigurationException, SAXException, ClassNotFoundException
     {	// name
     	String gestureName = root.getAttribute(XmlTools.ATT_NAME).getValue();
     	// file
@@ -86,13 +86,13 @@ public class PermissionPackLoader
 		File schemaFile = new File(schemaFolder+File.separator+FileTools.FILE_GESTUREPERMISSIONS+FileTools.EXTENSION_SCHEMA);
 		Element elt = XmlTools.getRootFromFile(dataFile,schemaFile);
 		// loading
-		PermissionGesture result = loadGesturePermissions(elt,gestureName,level);
+		ModulationGesture result = loadGesturePermissions(elt,gestureName,level);
 		result.setName(gestureName);
 		return result;
     }
     
-    private static PermissionGesture loadGesturePermissions(Element root, String gestureName, Level level) throws IOException, ClassNotFoundException
-    {	PermissionGesture result = new PermissionGesture();
+    private static ModulationGesture loadGesturePermissions(Element root, String gestureName, Level level) throws IOException, ClassNotFoundException
+    {	ModulationGesture result = new ModulationGesture();
 		result.setName(gestureName);
     	// state modulations
 		Element stateElt = root.getChild(XmlTools.ELT_STATE_MODULATIONS);
@@ -111,18 +111,18 @@ public class PermissionPackLoader
     }
     
     @SuppressWarnings("unchecked")
-	private static void loadPermissionsElement(Element root, String type, String gestureName, Level level, PermissionGesture permissionGesture) throws IOException, ClassNotFoundException
+	private static void loadPermissionsElement(Element root, String type, String gestureName, Level level, ModulationGesture permissionGesture) throws IOException, ClassNotFoundException
     {	List<Element> permissionsList = root.getChildren(XmlTools.ELT_PERMISSION);
 		Iterator<Element> i = permissionsList.iterator();
 		while(i.hasNext())
 		{	Element tp = i.next();
-			AbstractActionPermission abstractPermission = loadActionPermissionElement(type,gestureName,tp,level);
+			AbstractActionModulation abstractPermission = loadActionPermissionElement(type,gestureName,tp,level);
 			permissionGesture.addPermission(abstractPermission);
 		}
     }
     
     @SuppressWarnings("unchecked")
-	private static void loadModulationsElement(Element root, String gestureName, Level level, PermissionGesture permissionGesture) throws IOException, ClassNotFoundException
+	private static void loadModulationsElement(Element root, String gestureName, Level level, ModulationGesture permissionGesture) throws IOException, ClassNotFoundException
     {	List<Element> modulationsList = root.getChildren(XmlTools.ELT_MODULATION);
 		Iterator<Element> i = modulationsList.iterator();
 		while(i.hasNext())
@@ -153,7 +153,7 @@ public class PermissionPackLoader
 		return result;
     }
 		
-    private static AbstractActionPermission loadActionPermissionElement(String type, String gestureName, Element root, Level level) throws IOException, ClassNotFoundException
+    private static AbstractActionModulation loadActionPermissionElement(String type, String gestureName, Element root, Level level) throws IOException, ClassNotFoundException
     {	// strength
 		String strengthStr = root.getAttribute(XmlTools.ATT_STRENGTH).getValue().trim();
 		float strength;
@@ -177,13 +177,13 @@ public class PermissionPackLoader
 		if(targetRestrElt!=null)
 			targetRestrictions = AbilityLoader.loadAbilitiesElement(targetRestrElt,level);
 		// result
-		AbstractActionPermission result;
+		AbstractActionModulation result;
 		if(type.equals(ACTOR))
-			result = new ActorPermission(action);
+			result = new ActorModulation(action);
 		else if(type.equals(TARGET))
-			result = new TargetPermission(action);
+			result = new TargetModulation(action);
 		else //if(type.equals(THIRD))
-			result = new ThirdPermission(action);
+			result = new ThirdModulation(action);
 		// misc
 		result.setFrame(frame);
 		result.setStrength(strength);
