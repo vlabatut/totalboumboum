@@ -34,7 +34,7 @@ import org.jdom.Attribute;
 import org.jdom.Element;
 import org.xml.sax.SAXException;
 
-import fr.free.totalboumboum.engine.content.feature.anime.Colormap;
+import fr.free.totalboumboum.engine.content.feature.gesture.anime.Colormap;
 import fr.free.totalboumboum.tools.FileTools;
 import fr.free.totalboumboum.tools.ImageTools;
 import fr.free.totalboumboum.tools.XmlTools;

@@ -49,8 +49,8 @@ import org.jdom.Element;
 import org.xml.sax.SAXException;
 
 import fr.free.totalboumboum.configuration.profile.PredefinedColor;
-import fr.free.totalboumboum.engine.content.feature.anime.Colormap;
-import fr.free.totalboumboum.engine.content.feature.anime.ColormapLoader;
+import fr.free.totalboumboum.engine.content.feature.gesture.anime.Colormap;
+import fr.free.totalboumboum.engine.content.feature.gesture.anime.ColormapLoader;
 
 public class ImageTools
 {

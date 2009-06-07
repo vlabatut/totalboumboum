@@ -15,7 +15,7 @@ import org.xml.sax.SAXException;
 
 import fr.free.totalboumboum.configuration.profile.PredefinedColor;
 import fr.free.totalboumboum.engine.content.feature.Direction;
-import fr.free.totalboumboum.engine.content.feature.anime.Colormap;
+import fr.free.totalboumboum.engine.content.feature.gesture.anime.Colormap;
 import fr.free.totalboumboum.tools.FileTools;
 import fr.free.totalboumboum.tools.ImageTools;
 import fr.free.totalboumboum.tools.XmlTools;

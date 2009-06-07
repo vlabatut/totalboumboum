@@ -27,10 +27,10 @@ import java.util.Iterator;
 import fr.free.totalboumboum.configuration.Configuration;
 import fr.free.totalboumboum.configuration.profile.PredefinedColor;
 import fr.free.totalboumboum.engine.content.feature.Direction;
-import fr.free.totalboumboum.engine.content.feature.anime.AnimeDirection;
-import fr.free.totalboumboum.engine.content.feature.anime.AnimePack;
-import fr.free.totalboumboum.engine.content.feature.anime.AnimeStep;
 import fr.free.totalboumboum.engine.content.feature.event.EngineEvent;
+import fr.free.totalboumboum.engine.content.feature.gesture.anime.AnimeDirection;
+import fr.free.totalboumboum.engine.content.feature.gesture.anime.AnimePack;
+import fr.free.totalboumboum.engine.content.feature.gesture.anime.AnimeStep;
 import fr.free.totalboumboum.engine.content.sprite.Sprite;
 import fr.free.totalboumboum.engine.loop.Loop;
 
