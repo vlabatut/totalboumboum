@@ -31,7 +31,7 @@ import fr.free.totalboumboum.engine.content.feature.gesture.action.GeneralAction
 import fr.free.totalboumboum.engine.content.feature.gesture.action.SpecificAction;
 import fr.free.totalboumboum.engine.content.sprite.Sprite;
 
-public abstract class AbstractActionPermission extends AbstractPermission
+public abstract class AbstractActionModulation extends AbstractModulation
 {	
 	/**
 	 * action concernée par cette permission
@@ -46,7 +46,7 @@ public abstract class AbstractActionPermission extends AbstractPermission
 	 */
 	protected ArrayList<AbstractAbility> targetRestrictions;
 	
-	public AbstractActionPermission(GeneralAction action)
+	public AbstractActionModulation(GeneralAction action)
 	{	super();
 		this.action = action;	
 		this.actorRestrictions = new ArrayList<AbstractAbility>();

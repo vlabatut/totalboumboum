@@ -27,32 +27,32 @@ import java.util.Iterator;
 import fr.free.totalboumboum.engine.content.feature.gesture.action.SpecificAction;
 import fr.free.totalboumboum.engine.content.sprite.Sprite;
 
-public class PermissionGesture
+public class ModulationGesture
 {	
 	private ArrayList<StateModulation> stateModulations;
-	private ArrayList<ActorPermission> actorPermissions;
-	private ArrayList<TargetPermission> targetPermissions;
-	private ArrayList<ThirdPermission> thirdPermissions;
+	private ArrayList<ActorModulation> actorPermissions;
+	private ArrayList<TargetModulation> targetPermissions;
+	private ArrayList<ThirdModulation> thirdPermissions;
 	private String name; //debug
 	
-	public PermissionGesture()
+	public ModulationGesture()
 	{	stateModulations = new ArrayList<StateModulation>();
-		actorPermissions = new ArrayList<ActorPermission>();
-		targetPermissions = new ArrayList<TargetPermission>();
-		thirdPermissions = new ArrayList<ThirdPermission>();
+		actorPermissions = new ArrayList<ActorModulation>();
+		targetPermissions = new ArrayList<TargetModulation>();
+		thirdPermissions = new ArrayList<ThirdModulation>();
 	}
 
 	public void addModulation(StateModulation modulation)
 	{	stateModulations.add(modulation);
 		modulation.setGestureName(name);
 	}
-	public void addPermission(AbstractActionPermission permission)
-	{	if(permission instanceof ActorPermission)
-			actorPermissions.add((ActorPermission)permission);
-		else if(permission instanceof TargetPermission)
-			targetPermissions.add((TargetPermission)permission);
-		else if(permission instanceof ThirdPermission)
-			thirdPermissions.add((ThirdPermission)permission);
+	public void addPermission(AbstractActionModulation permission)
+	{	if(permission instanceof ActorModulation)
+			actorPermissions.add((ActorModulation)permission);
+		else if(permission instanceof TargetModulation)
+			targetPermissions.add((TargetModulation)permission);
+		else if(permission instanceof ThirdModulation)
+			thirdPermissions.add((ThirdModulation)permission);
 		permission.setGestureName(name);
 	}
 
@@ -66,31 +66,31 @@ public class PermissionGesture
 	public ArrayList<StateModulation> getModulations()
 	{	return stateModulations;
 	}
-	public ActorPermission getActorPermission(SpecificAction action)
-	{	ActorPermission result = null;
-		Iterator<ActorPermission> i = actorPermissions.iterator();
+	public ActorModulation getActorPermission(SpecificAction action)
+	{	ActorModulation result = null;
+		Iterator<ActorModulation> i = actorPermissions.iterator();
 		while(i.hasNext() && result==null)
-		{	ActorPermission perm = i.next();
+		{	ActorModulation perm = i.next();
 			if(perm.isAllowingAction(action))
 				result = perm;
 		}
 		return result;
 	}
-	public TargetPermission getTargetPermission(SpecificAction action)
-	{	TargetPermission result = null;
-		Iterator<TargetPermission> i = targetPermissions.iterator();
+	public TargetModulation getTargetPermission(SpecificAction action)
+	{	TargetModulation result = null;
+		Iterator<TargetModulation> i = targetPermissions.iterator();
 		while(i.hasNext() && result==null)
-		{	TargetPermission perm = i.next();
+		{	TargetModulation perm = i.next();
 			if(perm.isAllowingAction(action))
 				result = perm;
 		}
 		return result;
 	}
-	public ThirdPermission getThirdPermission(SpecificAction action)
-	{	ThirdPermission result = null;
-		Iterator<ThirdPermission> i = thirdPermissions.iterator();
+	public ThirdModulation getThirdPermission(SpecificAction action)
+	{	ThirdModulation result = null;
+		Iterator<ThirdModulation> i = thirdPermissions.iterator();
 		while(i.hasNext() && result==null)
-		{	ThirdPermission perm = i.next();
+		{	ThirdModulation perm = i.next();
 			if(perm.isAllowingAction(action))
 				result = perm;
 		}
@@ -107,15 +107,15 @@ public class PermissionGesture
 	public void setSprite(Sprite sprite)
 	{	Class<?> c = sprite.getClass();
 		// actor
-		Iterator<ActorPermission> ia = actorPermissions.iterator();
+		Iterator<ActorModulation> ia = actorPermissions.iterator();
 		while(ia.hasNext())
-		{	ActorPermission temp = ia.next();
+		{	ActorModulation temp = ia.next();
 			temp.getAction().setActor(c);
 		}
 		// target
-		Iterator<TargetPermission> it = targetPermissions.iterator();
+		Iterator<TargetModulation> it = targetPermissions.iterator();
 		while(it.hasNext())
-		{	TargetPermission temp = it.next();
+		{	TargetModulation temp = it.next();
 			temp.getAction().setTarget(c);
 		}
 	}	
@@ -126,9 +126,9 @@ public class PermissionGesture
 	{	if(!finished)
 		{	finished = true;
 			// actor permissions
-			{	Iterator<ActorPermission> it = actorPermissions.iterator();
+			{	Iterator<ActorModulation> it = actorPermissions.iterator();
 				while(it.hasNext())
-				{	ActorPermission temp = it.next();
+				{	ActorModulation temp = it.next();
 					temp.finish();
 					it.remove();
 				}
@@ -142,17 +142,17 @@ public class PermissionGesture
 				}
 			}
 			// target permissions
-			{	Iterator<TargetPermission> it = targetPermissions.iterator();
+			{	Iterator<TargetModulation> it = targetPermissions.iterator();
 				while(it.hasNext())
-				{	TargetPermission temp = it.next();
+				{	TargetModulation temp = it.next();
 					temp.finish();
 					it.remove();
 				}
 			}
 			// third permissions
-			{	Iterator<ThirdPermission> it = thirdPermissions.iterator();
+			{	Iterator<ThirdModulation> it = thirdPermissions.iterator();
 				while(it.hasNext())
-				{	ThirdPermission temp = it.next();
+				{	ThirdModulation temp = it.next();
 					temp.finish();
 					it.remove();
 				}
@@ -160,12 +160,12 @@ public class PermissionGesture
 		}
 	}
 	
-	public PermissionGesture copy()
-	{	PermissionGesture result = new PermissionGesture();
+	public ModulationGesture copy()
+	{	ModulationGesture result = new ModulationGesture();
 		// actor permissions
-		{	Iterator<ActorPermission> it = actorPermissions.iterator();
+		{	Iterator<ActorModulation> it = actorPermissions.iterator();
 			while(it.hasNext())
-			{	ActorPermission temp = it.next().copy();
+			{	ActorModulation temp = it.next().copy();
 				result.addPermission(temp);
 			}
 		}
@@ -177,16 +177,16 @@ public class PermissionGesture
 			}
 		}
 		// target permissions
-		{	Iterator<TargetPermission> it = targetPermissions.iterator();
+		{	Iterator<TargetModulation> it = targetPermissions.iterator();
 			while(it.hasNext())
-			{	TargetPermission temp = it.next().copy();
+			{	TargetModulation temp = it.next().copy();
 				result.addPermission(temp);
 			}
 		}
 		// third permissions
-		{	Iterator<ThirdPermission> it = thirdPermissions.iterator();
+		{	Iterator<ThirdModulation> it = thirdPermissions.iterator();
 			while(it.hasNext())
-			{	ThirdPermission temp = it.next().copy();
+			{	ThirdModulation temp = it.next().copy();
 				result.addPermission(temp);
 			}
 		}

@@ -29,61 +29,61 @@ import java.util.Map.Entry;
 import fr.free.totalboumboum.engine.content.feature.gesture.action.SpecificAction;
 import fr.free.totalboumboum.engine.content.sprite.Sprite;
 
-public class PermissionPack
-{	private HashMap<String,PermissionGesture> gestures;
+public class ModulationPack
+{	private HashMap<String,ModulationGesture> gestures;
 	
-	public PermissionPack()
-	{	gestures = new HashMap<String,PermissionGesture>();
+	public ModulationPack()
+	{	gestures = new HashMap<String,ModulationGesture>();
 	}
 
 	public StateModulation getModulation(String gestureName, StateModulation permission)
-	{	PermissionGesture gesture = gestures.get(gestureName);
+	{	ModulationGesture gesture = gestures.get(gestureName);
 		StateModulation result = null;
 		if(gesture!=null)
 			result = gesture.getModulation(permission);
 		return result;
 	}
 	public ArrayList<StateModulation> getModulations(String gestureName)
-	{	PermissionGesture gesture = gestures.get(gestureName);
+	{	ModulationGesture gesture = gestures.get(gestureName);
 		ArrayList<StateModulation> result = new ArrayList<StateModulation>();
 		if(gesture!=null)
 			result = gesture.getModulations();
 		return result;
 	}
-	public ActorPermission getActorPermission(String gestureName, SpecificAction action)
-	{	PermissionGesture gesture = gestures.get(gestureName);
-		ActorPermission result = null;
+	public ActorModulation getActorPermission(String gestureName, SpecificAction action)
+	{	ModulationGesture gesture = gestures.get(gestureName);
+		ActorModulation result = null;
 		if(gesture!=null)
 			result = gesture.getActorPermission(action);
 		return result;
 	}
-	public TargetPermission getTargetPermission(String gestureName, SpecificAction action)
-	{	PermissionGesture gesture = gestures.get(gestureName);
-		TargetPermission result = null;
+	public TargetModulation getTargetPermission(String gestureName, SpecificAction action)
+	{	ModulationGesture gesture = gestures.get(gestureName);
+		TargetModulation result = null;
 		if(gesture!=null)
 			result = gesture.getTargetPermission(action);
 		return result;
 	}
-	public ThirdPermission getThirdPermission(String gestureName, SpecificAction action)
-	{	PermissionGesture gesture = gestures.get(gestureName);
-		ThirdPermission result = null;
+	public ThirdModulation getThirdPermission(String gestureName, SpecificAction action)
+	{	ModulationGesture gesture = gestures.get(gestureName);
+		ThirdModulation result = null;
 		if(gesture!=null)
 			result = gesture.getThirdPermission(action);
 		return result;
 	}
 	
-	public void addPermissionGesture(PermissionGesture permissionGesture)
+	public void addPermissionGesture(ModulationGesture permissionGesture)
 	{	gestures.put(permissionGesture.getName(), permissionGesture);
 	}
-	public void setPermissionGesture(String name,PermissionGesture permissionGesture)
+	public void setPermissionGesture(String name,ModulationGesture permissionGesture)
 	{	gestures.put(name,permissionGesture);
 	}
 	
 	public void setSprite(Sprite sprite)
-	{	Iterator<Entry<String,PermissionGesture>> i = gestures.entrySet().iterator();
+	{	Iterator<Entry<String,ModulationGesture>> i = gestures.entrySet().iterator();
 		while(i.hasNext())
-		{	Entry<String,PermissionGesture> temp = i.next();
-			PermissionGesture perm = temp.getValue();
+		{	Entry<String,ModulationGesture> temp = i.next();
+			ModulationGesture perm = temp.getValue();
 			perm.setSprite(sprite);
 		}
 	}
@@ -94,10 +94,10 @@ public class PermissionPack
 	{	if(!finished)
 		{	finished = true;
 			// gestures
-			{	Iterator<Entry<String,PermissionGesture>> it = gestures.entrySet().iterator();
+			{	Iterator<Entry<String,ModulationGesture>> it = gestures.entrySet().iterator();
 				while(it.hasNext())
-				{	Entry<String,PermissionGesture> t = it.next();
-					PermissionGesture temp = t.getValue();
+				{	Entry<String,ModulationGesture> t = it.next();
+					ModulationGesture temp = t.getValue();
 					temp.finish();
 					it.remove();
 				}
@@ -105,12 +105,12 @@ public class PermissionPack
 		}
 	}
 	
-	public PermissionPack copy()
-	{	PermissionPack result = new PermissionPack();
-		Iterator<Entry<String,PermissionGesture>> it = gestures.entrySet().iterator();
+	public ModulationPack copy()
+	{	ModulationPack result = new ModulationPack();
+		Iterator<Entry<String,ModulationGesture>> it = gestures.entrySet().iterator();
 		while(it.hasNext())
-		{	Entry<String,PermissionGesture> t = it.next();
-			PermissionGesture value = t.getValue().copy();
+		{	Entry<String,ModulationGesture> t = it.next();
+			ModulationGesture value = t.getValue().copy();
 			String key = t.getKey();
 			result.setPermissionGesture(key,value);
 		}

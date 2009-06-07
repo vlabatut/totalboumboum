@@ -26,7 +26,7 @@ import fr.free.totalboumboum.engine.container.tile.Tile;
 import fr.free.totalboumboum.engine.content.feature.Direction;
 import fr.free.totalboumboum.engine.content.feature.gesture.action.AbstractAction;
 import fr.free.totalboumboum.engine.content.feature.gesture.action.SpecificAction;
-import fr.free.totalboumboum.engine.content.feature.gesture.modulation.ThirdPermission;
+import fr.free.totalboumboum.engine.content.feature.gesture.modulation.ThirdModulation;
 import fr.free.totalboumboum.engine.content.sprite.Sprite;
 import fr.free.totalboumboum.engine.loop.Loop;
 import fr.free.totalboumboum.tools.CalculusTools;
@@ -278,7 +278,7 @@ public class PotentialObstacle
 				if(!source.isOnGround())
 					act = AbstractAction.MOVEHIGH;
 				SpecificAction specificAction = new SpecificAction(act,source,null,usedDirection);
-				ThirdPermission permission = sprite.getThirdPermission(specificAction);
+				ThirdModulation permission = sprite.getThirdPermission(specificAction);
 				if(permission!=null)
 					result = false;
 				// blocking sprite and moving towards the potential obstacle : it's an obstacle
@@ -299,7 +299,7 @@ public class PotentialObstacle
 			if(!source.isOnGround())
 				act = AbstractAction.MOVEHIGH;
 			SpecificAction specificAction = new SpecificAction(act,source,null,usedDirection);
-			ThirdPermission permission = sprite.getThirdPermission(specificAction);
+			ThirdModulation permission = sprite.getThirdPermission(specificAction);
 			result = permission==null;
 		}
 		return result;

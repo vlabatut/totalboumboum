@@ -41,10 +41,10 @@ import fr.free.totalboumboum.engine.content.feature.event.ControlEvent;
 import fr.free.totalboumboum.engine.content.feature.event.EngineEvent;
 import fr.free.totalboumboum.engine.content.feature.gesture.action.AbstractAction;
 import fr.free.totalboumboum.engine.content.feature.gesture.action.SpecificAction;
-import fr.free.totalboumboum.engine.content.feature.gesture.modulation.ActorPermission;
+import fr.free.totalboumboum.engine.content.feature.gesture.modulation.ActorModulation;
 import fr.free.totalboumboum.engine.content.feature.gesture.modulation.StateModulation;
-import fr.free.totalboumboum.engine.content.feature.gesture.modulation.TargetPermission;
-import fr.free.totalboumboum.engine.content.feature.gesture.modulation.ThirdPermission;
+import fr.free.totalboumboum.engine.content.feature.gesture.modulation.TargetModulation;
+import fr.free.totalboumboum.engine.content.feature.gesture.modulation.ThirdModulation;
 import fr.free.totalboumboum.engine.content.manager.ability.AbilityManager;
 import fr.free.totalboumboum.engine.content.manager.anime.AnimeManager;
 import fr.free.totalboumboum.engine.content.manager.bombset.BombsetManager;
@@ -477,13 +477,13 @@ public abstract class Sprite
 	public StateModulation getModulation(StateModulation modulation)
 	{	return permissionManager.getModulation(modulation);
 	}
-	public ActorPermission getActorPermission(SpecificAction action)
+	public ActorModulation getActorPermission(SpecificAction action)
 	{	return permissionManager.getActorPermission(action);
 	}
-	public TargetPermission getTargetPermission(SpecificAction action)
+	public TargetModulation getTargetPermission(SpecificAction action)
 	{	return permissionManager.getTargetPermission(action);
 	}
-	public ThirdPermission getThirdPermission(SpecificAction action)
+	public ThirdModulation getThirdPermission(SpecificAction action)
 	{	return permissionManager.getThirdPermission(action);
 	}
 	public StateAbility computeAbility(String name)

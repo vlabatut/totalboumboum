@@ -29,7 +29,7 @@ import fr.free.totalboumboum.engine.container.level.Level;
 import fr.free.totalboumboum.engine.content.feature.ability.AbstractAbility;
 import fr.free.totalboumboum.engine.content.feature.explosion.Explosion;
 import fr.free.totalboumboum.engine.content.feature.gesture.anime.AnimePack;
-import fr.free.totalboumboum.engine.content.feature.gesture.modulation.PermissionPack;
+import fr.free.totalboumboum.engine.content.feature.gesture.modulation.ModulationPack;
 import fr.free.totalboumboum.engine.content.feature.gesture.trajectory.TrajectoryPack;
 import fr.free.totalboumboum.engine.content.manager.ability.AbilityManager;
 import fr.free.totalboumboum.engine.content.manager.anime.AnimeManager;
@@ -46,7 +46,7 @@ public abstract class SpriteFactory<T extends Sprite>
 	// managers
 	protected AnimePack animePack;
 	protected TrajectoryPack trajectoryPack;
-	protected PermissionPack permissionPack;
+	protected ModulationPack permissionPack;
 	protected Bombset bombset;
 	protected Explosion explosion;
 	protected ArrayList<AbstractAbility> abilities;
@@ -123,10 +123,10 @@ public abstract class SpriteFactory<T extends Sprite>
 	{	this.trajectoryPack = trajectoryPack;
 	}
 
-	public PermissionPack getPermissionPack()
+	public ModulationPack getPermissionPack()
 	{	return permissionPack;
 	}
-	public void setPermissionPack(PermissionPack permissionPack)
+	public void setPermissionPack(ModulationPack permissionPack)
 	{	this.permissionPack = permissionPack;
 	}
 

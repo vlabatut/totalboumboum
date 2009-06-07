@@ -22,7 +22,7 @@ package fr.free.totalboumboum.engine.content.feature.gesture.modulation;
  */
 
 
-public abstract class AbstractPermission
+public abstract class AbstractModulation
 {	
 	protected String gestureName; //debug
 	
@@ -35,7 +35,7 @@ public abstract class AbstractPermission
 	 */
 	protected boolean frame;
 	
-	public AbstractPermission()
+	public AbstractModulation()
 	{	strength = 0;
 		frame = false;
 	}

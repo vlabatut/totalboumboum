@@ -27,7 +27,7 @@ import fr.free.totalboumboum.engine.content.feature.gesture.action.Contact;
 import fr.free.totalboumboum.engine.content.feature.gesture.action.Orientation;
 import fr.free.totalboumboum.engine.content.feature.gesture.action.SpecificAction;
 import fr.free.totalboumboum.engine.content.feature.gesture.action.TilePosition;
-import fr.free.totalboumboum.engine.content.feature.gesture.modulation.TargetPermission;
+import fr.free.totalboumboum.engine.content.feature.gesture.modulation.TargetModulation;
 import fr.free.totalboumboum.engine.content.sprite.block.Block;
 import fr.free.totalboumboum.engine.content.sprite.fire.Fire;
 
@@ -86,7 +86,7 @@ public class AiBlock extends AiSprite<Block>
 	private void updateDestructible()
 	{	Block sprite = getSprite();
 		SpecificAction action = new SpecificAction(AbstractAction.CONSUME,new Fire(sprite.getLevel()),sprite,Direction.NONE,Contact.COLLISION,TilePosition.SAME,Orientation.SAME);
-		TargetPermission perm = sprite.getTargetPermission(action);
+		TargetModulation perm = sprite.getTargetPermission(action);
 		destructible = perm!=null;
 	}	
 
