@@ -54,7 +54,7 @@ import fr.free.totalboumboum.engine.content.feature.event.EngineEvent;
 import fr.free.totalboumboum.engine.content.feature.gesture.modulation.ModulationPack;
 import fr.free.totalboumboum.engine.content.feature.gesture.modulation.ModulationsLoader;
 import fr.free.totalboumboum.engine.content.feature.gesture.trajectory.TrajectoryPack;
-import fr.free.totalboumboum.engine.content.feature.gesture.trajectory.TrajectoryLoader;
+import fr.free.totalboumboum.engine.content.feature.gesture.trajectory.TrajectoriesLoader;
 import fr.free.totalboumboum.engine.content.sprite.Sprite;
 import fr.free.totalboumboum.engine.content.sprite.hero.Hero;
 import fr.free.totalboumboum.engine.content.sprite.item.Item;
@@ -97,7 +97,7 @@ public class Loop implements Runnable, Serializable
 		String folder = baseFolder + File.separator+FileTools.FOLDER_ABILITIES;
 		ArrayList<AbstractAbility> abilities = AbilityLoader.loadAbilityPack(folder,level);
 		folder = baseFolder + File.separator+FileTools.FOLDER_TRAJECTORIES;
-		TrajectoryPack trajectoryPack = TrajectoryLoader.loadTrajectoryPack(folder,level);
+		TrajectoryPack trajectoryPack = TrajectoriesLoader.loadTrajectoryPack(folder,level);
 		folder = baseFolder + File.separator+FileTools.FOLDER_PERMISSIONS;
 		ModulationPack permissionPack = ModulationsLoader.loadPermissionPack(folder,level);
 //		loadStepOver();		

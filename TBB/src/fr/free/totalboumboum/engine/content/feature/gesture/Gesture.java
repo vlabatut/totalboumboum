@@ -21,7 +21,6 @@ package fr.free.totalboumboum.engine.content.feature.gesture;
  * 
  */
 
-import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -58,6 +57,13 @@ public class Gesture
 	// dans les modulations, il faut effectuer cette mise à jour au chargement des modulations, puisqu'à cet
 	// instant on connait déjà le role de sprite concerné.
 	
+	// TODO virer l'anime par défaut dans les fichiers d'anime, mais le standing down doit être toujours défini (?)
+	// de plus, les éléments doivent porter directement le nom des gestures, de manière à pouvoir contrôler leur présence directement
+	
+	// TODO définir une fonction completePack() dépendant du role du sprite concerné, et qui rajoute les animations manquantes
+	// à mon avis, ca doit aller dans la classe factory
+	
+	// TODO dans XML les permissions doivent devenir des modulations
 	
 	/////////////////////////////////////////////////////////////////
 	// NAME		/////////////////////////////////////////////
@@ -68,7 +74,7 @@ public class Gesture
 	{	return name;
 	}
 	
-	private void setName(GestureName name)
+	public void setName(GestureName name)
 	{	this.name = name;
 	}
 
@@ -182,17 +188,18 @@ public class Gesture
 	/**
 	 * returns a holllow copy, excepted for the animes: no copy at all. 
 	 */
-	public Gesture copy(ArrayList<BufferedImage> images, ArrayList<BufferedImage> copyImages)
+	public Gesture copy()
 	{	Gesture result = new Gesture();
 	
 		// name
 		result.setName(name);
 		
 		// animes
-//		for(Entry<Direction,AnimeDirection> e: animes.entrySet())
-//		{	AnimeDirection temp = e.getValue().copy(images,copyImages);
-//			result.addAnimeDirection(temp);
-//		}
+		for(Entry<Direction,AnimeDirection> e: animes.entrySet())
+		{	//AnimeDirection temp = e.getValue().copy(images,copyImages);
+			AnimeDirection temp = e.getValue();
+			result.addAnimeDirection(temp);
+		}
 		
 		// trajectories
 		for(Entry<Direction,TrajectoryDirection> e: trajectories.entrySet())

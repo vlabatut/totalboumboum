@@ -278,7 +278,7 @@ public class PotentialObstacle
 				if(!source.isOnGround())
 					act = AbstractAction.MOVEHIGH;
 				SpecificAction specificAction = new SpecificAction(act,source,null,usedDirection);
-				ThirdModulation permission = sprite.getThirdPermission(specificAction);
+				ThirdModulation permission = sprite.getThirdModulation(specificAction);
 				if(permission!=null)
 					result = false;
 				// blocking sprite and moving towards the potential obstacle : it's an obstacle
@@ -299,7 +299,7 @@ public class PotentialObstacle
 			if(!source.isOnGround())
 				act = AbstractAction.MOVEHIGH;
 			SpecificAction specificAction = new SpecificAction(act,source,null,usedDirection);
-			ThirdModulation permission = sprite.getThirdPermission(specificAction);
+			ThirdModulation permission = sprite.getThirdModulation(specificAction);
 			result = permission==null;
 		}
 		return result;

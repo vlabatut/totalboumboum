@@ -37,37 +37,37 @@ import org.xml.sax.SAXException;
 import fr.free.totalboumboum.engine.container.level.Level;
 import fr.free.totalboumboum.engine.content.feature.Direction;
 import fr.free.totalboumboum.engine.content.feature.ImageShift;
+import fr.free.totalboumboum.engine.content.feature.gesture.Gesture;
+import fr.free.totalboumboum.engine.content.feature.gesture.GestureName;
+import fr.free.totalboumboum.engine.content.feature.gesture.GesturePack;
 import fr.free.totalboumboum.tools.FileTools;
 import fr.free.totalboumboum.tools.XmlTools;
 
-public class TrajectoryLoader
+public class TrajectoriesLoader
 {	
 /*	
 	private String type;
 	private double zoomFactor;
 */
-	public static TrajectoryPack loadTrajectoryPack(String individualFolder, Level level) throws ParserConfigurationException, SAXException, IOException
-	{	TrajectoryPack result = new TrajectoryPack();
-		File dataFile = new File(individualFolder+File.separator+FileTools.FILE_TRAJECTORIES+FileTools.EXTENSION_XML);
+	public static void loadTrajectoryPack(String individualFolder, GesturePack pack, Level level) throws ParserConfigurationException, SAXException, IOException
+	{	File dataFile = new File(individualFolder+File.separator+FileTools.FILE_TRAJECTORIES+FileTools.EXTENSION_XML);
 		if(dataFile.exists())
 		{	// opening
 			String schemaFolder = FileTools.getSchemasPath();
 			File schemaFile = new File(schemaFolder+File.separator+FileTools.FILE_TRAJECTORIES+FileTools.EXTENSION_SCHEMA);
 			Element root = XmlTools.getRootFromFile(dataFile,schemaFile);
 			// loading
-			loadTrajectories(root,level,result);
+			loadTrajectories(root,pack,level);
 		}
-		return result;
 	}
 	
     @SuppressWarnings("unchecked")
-	private static void loadTrajectories(Element root, Level level, TrajectoryPack result) throws IOException
+	private static void loadTrajectories(Element root, GesturePack pack, Level level) throws IOException
 	{	List<Element> gesturesList = root.getChildren();
 		Iterator<Element> i = gesturesList.iterator();
 		while(i.hasNext())
 		{	Element tp = i.next();
-			TrajectoryGesture trajectoryGesture = loadGestureElement(tp,level);
-			result.addTrajectoryGesture(trajectoryGesture);
+			loadGestureElement(tp,pack,level);
 		}
 	}
     
@@ -75,12 +75,12 @@ public class TrajectoryLoader
      * load a gesture (and if required all the associated directions) 
      */
     @SuppressWarnings("unchecked")
-	private static TrajectoryGesture loadGestureElement(Element root, Level level) throws IOException
-    {	TrajectoryGesture result = new TrajectoryGesture();
-    	double zoomFactor = level.getLoop().getZoomFactor();
+	private static void loadGestureElement(Element root, GesturePack pack, Level level) throws IOException
+    {	double zoomFactor = level.getLoop().getZoomFactor();
     	// name
-    	String gestureName = root.getAttribute(XmlTools.ATT_NAME).getValue();
-    	result.setName(gestureName);
+		String name = root.getAttribute(XmlTools.ATT_NAME).getValue().toUpperCase(Locale.ENGLISH);
+		GestureName gestureName = GestureName.valueOf(name);
+		Gesture gesture = pack.getGesture(gestureName);
     	// repeat flag
 		String repeatStr = root.getAttribute(XmlTools.ATT_REPEAT).getValue();
 		boolean repeat = false;
@@ -111,16 +111,15 @@ public class TrajectoryLoader
 		while(i.hasNext())
 		{	Element tp = i.next();
 			TrajectoryDirection trajectoryDirection = loadDirectionElement(gestureName,tp,zoomFactor,repeat,xInteraction,yInteraction,proportional);
-			result.addTrajectoryDirection(trajectoryDirection);
+			gesture.addTrajectoryDirection(trajectoryDirection);
 		}
-		return result;
     }
 		
     /**
      * load a direction for a given gesture
      */
     @SuppressWarnings("unchecked")
-	private static TrajectoryDirection loadDirectionElement(String gestureName, Element root,double zoomFactor,
+	private static TrajectoryDirection loadDirectionElement(GestureName gestureName, Element root,double zoomFactor,
     		boolean repeat, double xInteraction, double yInteraction, boolean proportional) throws IOException
     {	TrajectoryDirection result = new TrajectoryDirection();
     	result.setRepeat(repeat);

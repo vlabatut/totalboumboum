@@ -1,4 +1,4 @@
-package fr.free.totalboumboum.engine.content.feature.gesture;
+package fr.free.totalboumboum.engine.content.feature.gesture.anime;
 
 /*
  * Total Boum Boum
@@ -28,7 +28,6 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Locale;
-import java.util.Map.Entry;
 
 import javax.xml.parsers.ParserConfigurationException;
 
@@ -42,19 +41,21 @@ import fr.free.totalboumboum.configuration.profile.PredefinedColor;
 import fr.free.totalboumboum.engine.container.level.Level;
 import fr.free.totalboumboum.engine.content.feature.Direction;
 import fr.free.totalboumboum.engine.content.feature.ImageShift;
+import fr.free.totalboumboum.engine.content.feature.gesture.Gesture;
+import fr.free.totalboumboum.engine.content.feature.gesture.GestureName;
+import fr.free.totalboumboum.engine.content.feature.gesture.GesturePack;
 import fr.free.totalboumboum.tools.FileTools;
 import fr.free.totalboumboum.tools.ImageTools;
 import fr.free.totalboumboum.tools.XmlTools;
 
-public class GesturePackLoader
+public class AnimesLoader
 {	
-	public static AnimePack loadAnimePack(String folderPath, Level level) throws IOException, ParserConfigurationException, SAXException
-	{	return loadAnimePack(folderPath,level,null);
+	public static void loadAnimes(String folderPath, GesturePack pack, Level level) throws IOException, ParserConfigurationException, SAXException
+	{	loadAnimes(folderPath,pack,level,null);
 	}
 	
-	public static AnimePack loadAnimePack(String folderPath, Level level, PredefinedColor color) throws IOException, ParserConfigurationException, SAXException
-	{	AnimePack result = new AnimePack();
-		result.setColor(color);
+	public static void loadAnimes(String folderPath, GesturePack pack, Level level, PredefinedColor color) throws IOException, ParserConfigurationException, SAXException
+	{	pack.setColor(color);
 		File dataFile = new File(folderPath+File.separator+FileTools.FILE_ANIMES+FileTools.EXTENSION_XML);
 		if(dataFile.exists())
 		{	// opening
@@ -62,12 +63,11 @@ public class GesturePackLoader
 			File schemaFile = new File(schemaFolder+File.separator+FileTools.FILE_ANIMES+FileTools.EXTENSION_SCHEMA);
 			Element root = XmlTools.getRootFromFile(dataFile,schemaFile);
 			// loading
-			loadAnimesElement(root,folderPath,level,color,result);
+			loadAnimesElement(root,folderPath,pack,level,color);
 		}
-		return result;
 	}
     
-    private static void loadAnimesElement(Element root,String individualFolder, Level level, PredefinedColor color, AnimePack result) throws IOException, ParserConfigurationException, SAXException
+    private static void loadAnimesElement(Element root, String individualFolder, GesturePack pack, Level level, PredefinedColor color) throws IOException, ParserConfigurationException, SAXException
     {	HashMap<String,BufferedImage>images = new HashMap<String, BufferedImage>();
     	HashMap<String,BufferedImage>shadows = new HashMap<String, BufferedImage>();
     	Colormap colormap = null;
@@ -82,7 +82,7 @@ public class GesturePackLoader
 		attribute = root.getAttribute(XmlTools.ATT_SCALE);
 		if(attribute!=null)
 			scale = Double.parseDouble(attribute.getValue());
-		result.setScale(scale);
+		pack.setScale(scale);
 		// bound height
 		double boundHeight = 0;
 		double zoomFactor = level.getLoop().getZoomFactor();
@@ -91,9 +91,6 @@ public class GesturePackLoader
 		{	double temp = Double.parseDouble(attribute.getValue());
 			boundHeight = zoomFactor*temp/scale;
 		}
-		// default gesture
-		String defaultGesture = root.getAttribute(XmlTools.ATT_DEFAULT).getValue();
-		result.setDefaultAnime(defaultGesture);
 		
 		// colors ?
 		Object obj;
@@ -112,23 +109,15 @@ public class GesturePackLoader
 		// shadows ?
 		elt = root.getChild(XmlTools.ELT_SHADOWS);
 		if(elt!=null)
-			loadShadowsElement(elt,localFilePath,level,images,shadows,colormap,zoomFactor,scale);
+			loadShadowsElement(elt,localFilePath,pack,level,images,shadows,colormap,zoomFactor,scale);
 		
 		// gestures
 		Element gestures = root.getChild(XmlTools.ELT_GESTURES);
-		loadGesturesElement(gestures,boundHeight,localFilePath,result,level,images,shadows,colormap,zoomFactor,scale);
-		
-		// images
-		Iterator<Entry<String,BufferedImage>> i = images.entrySet().iterator();
-		while(i.hasNext())
-		{	Entry<String,BufferedImage> temp = i.next();
-			BufferedImage tempImg = temp.getValue();
-			result.addImage(tempImg);
-		}
+		loadGesturesElement(gestures,boundHeight,localFilePath,pack,level,images,shadows,colormap,zoomFactor,scale);
 	}
     
     @SuppressWarnings("unchecked")
-	private static void loadShadowsElement(Element root, String individualFolder,
+	private static void loadShadowsElement(Element root, String individualFolder, GesturePack pack,
     		Level level,
     		HashMap<String,BufferedImage> images, HashMap<String,BufferedImage> shadows, Colormap colormap,
     		double zoomFactor, double scale) throws IOException
@@ -142,11 +131,11 @@ public class GesturePackLoader
     	Iterator<Element> i = shdws.iterator();
     	while(i.hasNext())
     	{	Element tp = i.next();
-    		loadShadowElement(tp,localFilePath,level,images,shadows,colormap,zoomFactor,scale);
+    		loadShadowElement(tp,localFilePath,pack,level,images,shadows,colormap,zoomFactor,scale);
     	}
     }
     
-    private static void loadShadowElement(Element root, String individualFolder,
+    private static void loadShadowElement(Element root, String individualFolder, GesturePack pack,
     		Level level,
     		HashMap<String,BufferedImage> images, HashMap<String,BufferedImage> shadows, Colormap colormap,
     		double zoomFactor, double scale) throws IOException
@@ -161,7 +150,7 @@ public class GesturePackLoader
     }
     
     @SuppressWarnings("unchecked")
-	private static void loadGesturesElement(Element root, double boundHeight, String filePath, AnimePack animePack,
+	private static void loadGesturesElement(Element root, double boundHeight, String filePath, GesturePack pack,
     		Level level,
     		HashMap<String,BufferedImage> images, HashMap<String,BufferedImage> shadows, Colormap colormap,
     		double zoomFactor, double scale) throws IOException
@@ -175,8 +164,7 @@ public class GesturePackLoader
     	Iterator<Element> i = gesturesList.iterator();
     	while(i.hasNext())
     	{	Element tp = i.next();
-			AnimeGesture animeGesture = loadGestureElement(tp,boundHeight,localFilePath,level,images,shadows,colormap,zoomFactor,scale);
-			animePack.addAnimeGesture(animeGesture);
+			loadGestureElement(tp,pack,boundHeight,localFilePath,level,images,shadows,colormap,zoomFactor,scale);
     	}
     }
     
@@ -184,15 +172,14 @@ public class GesturePackLoader
      * load a gesture (and if required all the associated directions) 
      */
     @SuppressWarnings("unchecked")
-	private static AnimeGesture loadGestureElement(Element root, double boundHeight, String filePath,
+	private static void loadGestureElement(Element root, GesturePack pack, double boundHeight, String filePath,
     		Level level,
     		HashMap<String,BufferedImage> images, HashMap<String,BufferedImage> shadows, Colormap colormap,
     		double zoomFactor, double scale) throws IOException
-    {	AnimeGesture result = new AnimeGesture();
-    	// name
-    	String gestureName;
-		gestureName = root.getAttribute(XmlTools.ATT_NAME).getValue();
-    	result.setName(gestureName);
+    {	// name
+    	String name = root.getAttribute(XmlTools.ATT_NAME).getValue().toUpperCase(Locale.ENGLISH);
+		GestureName gestureName = GestureName.valueOf(name);
+    	Gesture gesture = pack.getGesture(gestureName);
     	// images folder
     	String localFilePath = filePath;
     	Attribute attribute = root.getAttribute(XmlTools.ATT_FOLDER);
@@ -259,16 +246,15 @@ public class GesturePackLoader
 			AnimeDirection animeDirection = loadDirectionElement(gestureName,boundHeight,repeat,proportional,tp,localFilePath,xShift,yShift,
 					shadow,shadowXShift,shadowYShift,boundYShift
 					,level,images,shadows,colormap,zoomFactor,scale);
-			result.addAnimeDirection(animeDirection);
+			gesture.addAnimeDirection(animeDirection);
 		}
-    	return result;
     }
     
     /**
      * load a direction for a given gesture
      */
     @SuppressWarnings("unchecked")
-	private static AnimeDirection loadDirectionElement(String gestureName, double boundHeight, boolean repeat, boolean proportional, 
+	private static AnimeDirection loadDirectionElement(GestureName gestureName, double boundHeight, boolean repeat, boolean proportional, 
     		Element root, String filePath, 
     		double xShift, double yShift, 
     		BufferedImage shadow, double shadowXShift, double shadowYShift, ImageShift boundYShift,
