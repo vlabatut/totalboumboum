@@ -22,7 +22,6 @@ package fr.free.totalboumboum.engine.content.feature.gesture;
  */
 
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.Map.Entry;
 
 public class GesturePack
@@ -30,10 +29,6 @@ public class GesturePack
 	public GesturePack()
 	{	
 	}
-
-/*
- * TODO la gestion des données manquantes doit être effectuée au chargement, et pas en cours de jeu	
- */
 	
 	/////////////////////////////////////////////////////////////////
 	// GESTURES			/////////////////////////////////////////////
@@ -58,14 +53,11 @@ public class GesturePack
 	{	if(!finished)
 		{	finished = true;
 			// gestures
-			{	Iterator<Entry<String,Gesture>> it = gestures.entrySet().iterator();
-				while(it.hasNext())
-				{	Entry<String,Gesture> t = it.next();
-					Gesture temp = t.getValue();
-					temp.finish();
-					it.remove();
-				}
+			for(Entry<GestureName,Gesture> e: gestures.entrySet())
+			{	Gesture temp = e.getValue();
+				temp.finish();
 			}
+			gestures.clear();
 		}
 	}
 }
