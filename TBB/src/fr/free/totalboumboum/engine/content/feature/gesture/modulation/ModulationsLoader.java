@@ -42,7 +42,7 @@ import fr.free.totalboumboum.tools.FileTools;
 import fr.free.totalboumboum.tools.XmlTools;
 
 
-public class ModulationPackLoader
+public class ModulationsLoader
 {	
 //	private static final String STATE = "state";
 	private static final String ACTOR = "actor";

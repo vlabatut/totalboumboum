@@ -38,7 +38,7 @@ import fr.free.totalboumboum.engine.content.manager.control.ControlManager;
 import fr.free.totalboumboum.engine.content.manager.delay.DelayManager;
 import fr.free.totalboumboum.engine.content.manager.explosion.ExplosionManager;
 import fr.free.totalboumboum.engine.content.manager.item.ItemManager;
-import fr.free.totalboumboum.engine.content.manager.permission.PermissionManager;
+import fr.free.totalboumboum.engine.content.manager.modulation.PermissionManager;
 import fr.free.totalboumboum.engine.content.manager.trajectory.TrajectoryManager;
 
 public abstract class SpriteFactory<T extends Sprite>

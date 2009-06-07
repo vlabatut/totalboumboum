@@ -51,10 +51,14 @@ public class Gesture
 	// sauf que non: les animes sont différentes, elles, et pas que par la couleur (ex: différents murs)
 	// peut-être mettre une fonction statique dans la classe principale de chaque type de sprite, qui construit statiquement un gesture pack et utilise une copie vide comme base pour chaque sprite créé dans ce type?
 	
-	/*
-	 * TODO la gestion des données manquantes doit être effectuée au chargement, et pas en cours de jeu	
-	 */
+	
+	// TODO la gestion des données manquantes doit être effectuée au chargement, et pas en cours de jeu	
 
+	// TODO au lieu d'utiliser une fonction set sprite qui met à jour les roles des acteurs et targets
+	// dans les modulations, il faut effectuer cette mise à jour au chargement des modulations, puisqu'à cet
+	// instant on connait déjà le role de sprite concerné.
+	
+	
 	/////////////////////////////////////////////////////////////////
 	// NAME		/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
@@ -156,7 +160,6 @@ public class Gesture
 		}
 		return result;
 	}
-	
 	
 	/////////////////////////////////////////////////////////////////
 	// ACTIONS			/////////////////////////////////////////////

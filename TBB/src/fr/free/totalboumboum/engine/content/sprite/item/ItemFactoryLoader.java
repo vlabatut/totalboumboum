@@ -38,7 +38,7 @@ import fr.free.totalboumboum.engine.content.feature.ability.AbstractAbility;
 import fr.free.totalboumboum.engine.content.feature.gesture.anime.AnimePack;
 import fr.free.totalboumboum.engine.content.feature.gesture.anime.AnimePackLoader;
 import fr.free.totalboumboum.engine.content.feature.gesture.modulation.ModulationPack;
-import fr.free.totalboumboum.engine.content.feature.gesture.modulation.ModulationPackLoader;
+import fr.free.totalboumboum.engine.content.feature.gesture.modulation.ModulationsLoader;
 import fr.free.totalboumboum.engine.content.feature.gesture.trajectory.TrajectoryPack;
 import fr.free.totalboumboum.engine.content.feature.gesture.trajectory.TrajectoryLoader;
 import fr.free.totalboumboum.engine.content.sprite.SpriteFactoryLoader;
@@ -70,7 +70,7 @@ public class ItemFactoryLoader extends SpriteFactoryLoader
 		
 		//PERMISSIONS
 		folder = folderPath+File.separator+FileTools.FILE_PERMISSIONS;
-		ModulationPack permissionPack = ModulationPackLoader.loadPermissionPack(folder,level);
+		ModulationPack permissionPack = ModulationsLoader.loadPermissionPack(folder,level);
 		result.setPermissionPack(permissionPack);
 		
 		// TRAJECTORIES
