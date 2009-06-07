@@ -23,10 +23,10 @@ package fr.free.totalboumboum.engine.content.sprite.fire;
 
 import fr.free.totalboumboum.engine.container.tile.Tile;
 import fr.free.totalboumboum.engine.content.feature.Direction;
-import fr.free.totalboumboum.engine.content.feature.GestureName;
 import fr.free.totalboumboum.engine.content.feature.event.ActionEvent;
 import fr.free.totalboumboum.engine.content.feature.event.ControlEvent;
 import fr.free.totalboumboum.engine.content.feature.event.EngineEvent;
+import fr.free.totalboumboum.engine.content.feature.gesture.GestureName;
 import fr.free.totalboumboum.engine.content.manager.event.EventManager;
 import fr.free.totalboumboum.engine.content.sprite.Sprite;
 

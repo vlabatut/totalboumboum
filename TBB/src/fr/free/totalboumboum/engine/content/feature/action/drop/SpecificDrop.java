@@ -21,7 +21,6 @@ package fr.free.totalboumboum.engine.content.feature.action.drop;
  * 
  */
 
-import fr.free.totalboumboum.engine.content.feature.GestureName;
 import fr.free.totalboumboum.engine.content.feature.ability.ActionAbility;
 import fr.free.totalboumboum.engine.content.feature.action.AbstractAction;
 import fr.free.totalboumboum.engine.content.feature.action.ActionName;
@@ -30,6 +29,7 @@ import fr.free.totalboumboum.engine.content.feature.action.IncompatibleParameter
 import fr.free.totalboumboum.engine.content.feature.action.Orientation;
 import fr.free.totalboumboum.engine.content.feature.action.SpecificAction;
 import fr.free.totalboumboum.engine.content.feature.action.TilePosition;
+import fr.free.totalboumboum.engine.content.feature.gesture.GestureName;
 import fr.free.totalboumboum.engine.content.sprite.Sprite;
 import fr.free.totalboumboum.engine.content.sprite.bomb.Bomb;
 import fr.free.totalboumboum.engine.content.sprite.hero.Hero;

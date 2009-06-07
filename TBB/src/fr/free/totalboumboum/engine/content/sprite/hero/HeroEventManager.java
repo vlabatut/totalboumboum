@@ -26,7 +26,6 @@ import java.util.Iterator;
 
 import fr.free.totalboumboum.engine.container.tile.Tile;
 import fr.free.totalboumboum.engine.content.feature.Direction;
-import fr.free.totalboumboum.engine.content.feature.GestureName;
 import fr.free.totalboumboum.engine.content.feature.ability.ActionAbility;
 import fr.free.totalboumboum.engine.content.feature.ability.StateAbility;
 import fr.free.totalboumboum.engine.content.feature.action.AbstractAction;
@@ -38,6 +37,7 @@ import fr.free.totalboumboum.engine.content.feature.action.drop.SpecificDrop;
 import fr.free.totalboumboum.engine.content.feature.event.ActionEvent;
 import fr.free.totalboumboum.engine.content.feature.event.ControlEvent;
 import fr.free.totalboumboum.engine.content.feature.event.EngineEvent;
+import fr.free.totalboumboum.engine.content.feature.gesture.GestureName;
 import fr.free.totalboumboum.engine.content.manager.delay.DelayManager;
 import fr.free.totalboumboum.engine.content.manager.event.EventManager;
 import fr.free.totalboumboum.engine.content.sprite.Sprite;

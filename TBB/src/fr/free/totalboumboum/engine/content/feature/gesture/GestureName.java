@@ -1,4 +1,4 @@
-package fr.free.totalboumboum.engine.content.feature;
+package fr.free.totalboumboum.engine.content.feature.gesture;
 
 /*
  * Total Boum Boum

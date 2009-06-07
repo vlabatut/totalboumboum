@@ -21,7 +21,7 @@ package fr.free.totalboumboum.ai.adapter200809;
  * 
  */
 
-import fr.free.totalboumboum.engine.content.feature.GestureName;
+import fr.free.totalboumboum.engine.content.feature.gesture.GestureName;
 
 /**
  * représente un nom associé à un état, c'est à dire : l'action
