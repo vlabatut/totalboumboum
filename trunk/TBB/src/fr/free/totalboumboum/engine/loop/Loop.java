@@ -52,7 +52,7 @@ import fr.free.totalboumboum.engine.content.feature.ability.AbstractAbility;
 import fr.free.totalboumboum.engine.content.feature.ability.StateAbility;
 import fr.free.totalboumboum.engine.content.feature.event.EngineEvent;
 import fr.free.totalboumboum.engine.content.feature.gesture.modulation.ModulationPack;
-import fr.free.totalboumboum.engine.content.feature.gesture.modulation.ModulationPackLoader;
+import fr.free.totalboumboum.engine.content.feature.gesture.modulation.ModulationsLoader;
 import fr.free.totalboumboum.engine.content.feature.gesture.trajectory.TrajectoryPack;
 import fr.free.totalboumboum.engine.content.feature.gesture.trajectory.TrajectoryLoader;
 import fr.free.totalboumboum.engine.content.sprite.Sprite;
@@ -99,7 +99,7 @@ public class Loop implements Runnable, Serializable
 		folder = baseFolder + File.separator+FileTools.FOLDER_TRAJECTORIES;
 		TrajectoryPack trajectoryPack = TrajectoryLoader.loadTrajectoryPack(folder,level);
 		folder = baseFolder + File.separator+FileTools.FOLDER_PERMISSIONS;
-		ModulationPack permissionPack = ModulationPackLoader.loadPermissionPack(folder,level);
+		ModulationPack permissionPack = ModulationsLoader.loadPermissionPack(folder,level);
 //		loadStepOver();		
 		// load players : individual stuff
 		ArrayList<Profile> profiles = round.getProfiles();

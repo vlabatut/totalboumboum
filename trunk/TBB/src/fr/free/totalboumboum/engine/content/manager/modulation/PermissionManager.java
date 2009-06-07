@@ -1,4 +1,4 @@
-package fr.free.totalboumboum.engine.content.manager.permission;
+package fr.free.totalboumboum.engine.content.manager.modulation;
 
 /*
  * Total Boum Boum
