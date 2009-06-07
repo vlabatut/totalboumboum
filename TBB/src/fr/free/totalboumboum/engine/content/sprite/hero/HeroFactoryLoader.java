@@ -37,10 +37,10 @@ import fr.free.totalboumboum.engine.container.bombset.Bombset;
 import fr.free.totalboumboum.engine.container.bombset.BombsetLoader;
 import fr.free.totalboumboum.engine.container.level.Level;
 import fr.free.totalboumboum.engine.content.feature.ability.AbstractAbility;
-import fr.free.totalboumboum.engine.content.feature.anime.AnimePack;
-import fr.free.totalboumboum.engine.content.feature.anime.AnimePackLoader;
-import fr.free.totalboumboum.engine.content.feature.modulation.PermissionPack;
-import fr.free.totalboumboum.engine.content.feature.trajectory.TrajectoryPack;
+import fr.free.totalboumboum.engine.content.feature.gesture.anime.AnimePack;
+import fr.free.totalboumboum.engine.content.feature.gesture.anime.AnimePackLoader;
+import fr.free.totalboumboum.engine.content.feature.gesture.modulation.PermissionPack;
+import fr.free.totalboumboum.engine.content.feature.gesture.trajectory.TrajectoryPack;
 import fr.free.totalboumboum.engine.content.sprite.SpriteFactoryLoader;
 import fr.free.totalboumboum.tools.FileTools;
 

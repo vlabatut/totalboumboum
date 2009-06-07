@@ -22,12 +22,12 @@ package fr.free.totalboumboum.ai.adapter200809;
  */
 
 import fr.free.totalboumboum.engine.content.feature.Direction;
-import fr.free.totalboumboum.engine.content.feature.action.AbstractAction;
-import fr.free.totalboumboum.engine.content.feature.action.Contact;
-import fr.free.totalboumboum.engine.content.feature.action.Orientation;
-import fr.free.totalboumboum.engine.content.feature.action.SpecificAction;
-import fr.free.totalboumboum.engine.content.feature.action.TilePosition;
-import fr.free.totalboumboum.engine.content.feature.modulation.TargetPermission;
+import fr.free.totalboumboum.engine.content.feature.gesture.action.AbstractAction;
+import fr.free.totalboumboum.engine.content.feature.gesture.action.Contact;
+import fr.free.totalboumboum.engine.content.feature.gesture.action.Orientation;
+import fr.free.totalboumboum.engine.content.feature.gesture.action.SpecificAction;
+import fr.free.totalboumboum.engine.content.feature.gesture.action.TilePosition;
+import fr.free.totalboumboum.engine.content.feature.gesture.modulation.TargetPermission;
 import fr.free.totalboumboum.engine.content.sprite.block.Block;
 import fr.free.totalboumboum.engine.content.sprite.fire.Fire;
 

@@ -30,15 +30,15 @@ import fr.free.totalboumboum.engine.content.feature.Direction;
 import fr.free.totalboumboum.engine.content.feature.ability.AbstractAbility;
 import fr.free.totalboumboum.engine.content.feature.ability.ActionAbility;
 import fr.free.totalboumboum.engine.content.feature.ability.StateAbility;
-import fr.free.totalboumboum.engine.content.feature.action.AbstractAction;
-import fr.free.totalboumboum.engine.content.feature.action.GeneralAction;
-import fr.free.totalboumboum.engine.content.feature.action.SpecificAction;
 import fr.free.totalboumboum.engine.content.feature.gesture.GestureName;
-import fr.free.totalboumboum.engine.content.feature.modulation.ActorPermission;
-import fr.free.totalboumboum.engine.content.feature.modulation.PermissionPack;
-import fr.free.totalboumboum.engine.content.feature.modulation.StateModulation;
-import fr.free.totalboumboum.engine.content.feature.modulation.TargetPermission;
-import fr.free.totalboumboum.engine.content.feature.modulation.ThirdPermission;
+import fr.free.totalboumboum.engine.content.feature.gesture.action.AbstractAction;
+import fr.free.totalboumboum.engine.content.feature.gesture.action.GeneralAction;
+import fr.free.totalboumboum.engine.content.feature.gesture.action.SpecificAction;
+import fr.free.totalboumboum.engine.content.feature.gesture.modulation.ActorPermission;
+import fr.free.totalboumboum.engine.content.feature.gesture.modulation.PermissionPack;
+import fr.free.totalboumboum.engine.content.feature.gesture.modulation.StateModulation;
+import fr.free.totalboumboum.engine.content.feature.gesture.modulation.TargetPermission;
+import fr.free.totalboumboum.engine.content.feature.gesture.modulation.ThirdPermission;
 import fr.free.totalboumboum.engine.content.sprite.Sprite;
 
 public class PermissionManager
