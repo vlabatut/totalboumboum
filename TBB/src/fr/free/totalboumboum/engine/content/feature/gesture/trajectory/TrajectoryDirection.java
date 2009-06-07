@@ -217,7 +217,7 @@ public class TrajectoryDirection
 			direction = null;
 		}
 	}
-	
+/*	
 	public TrajectoryDirection copy()
 	{	TrajectoryDirection result = new TrajectoryDirection();
 		Iterator<TrajectoryStep> it = steps.iterator();
@@ -241,4 +241,5 @@ public class TrajectoryDirection
 		result.yInteraction = yInteraction;		
 		return result;
 	}
+*/	
 }

@@ -25,14 +25,12 @@ import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
-import java.util.Map;
 import java.util.Map.Entry;
 
 import fr.free.totalboumboum.engine.content.feature.Direction;
 import fr.free.totalboumboum.engine.content.feature.gesture.action.ActionName;
 import fr.free.totalboumboum.engine.content.feature.gesture.action.SpecificAction;
 import fr.free.totalboumboum.engine.content.feature.gesture.anime.AnimeDirection;
-import fr.free.totalboumboum.engine.content.feature.gesture.modulation.AbstractActionModulation;
 import fr.free.totalboumboum.engine.content.feature.gesture.modulation.AbstractModulation;
 import fr.free.totalboumboum.engine.content.feature.gesture.modulation.ActorModulation;
 import fr.free.totalboumboum.engine.content.feature.gesture.modulation.StateModulation;
@@ -45,6 +43,17 @@ public class Gesture
 	public Gesture()
 	{	
 	}
+
+	//TODO faut définir une liste de gestures pour chaque type de sprite...
+	// et peut être charger/construire pour chaque TYPE de sprite cette liste de gestures
+	// ensuite chaque sprite généré pour un type donné partage ces données avec ces collègues
+	// seuls certains trucs peuvent être modifiés comme les abilities, le reste est statique
+	// sauf que non: les animes sont différentes, elles, et pas que par la couleur (ex: différents murs)
+	// peut-être mettre une fonction statique dans la classe principale de chaque type de sprite, qui construit statiquement un gesture pack et utilise une copie vide comme base pour chaque sprite créé dans ce type?
+	
+	/*
+	 * TODO la gestion des données manquantes doit être effectuée au chargement, et pas en cours de jeu	
+	 */
 
 	/////////////////////////////////////////////////////////////////
 	// NAME		/////////////////////////////////////////////
@@ -167,18 +176,54 @@ public class Gesture
 	/////////////////////////////////////////////////////////////////
 	// COPY				/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
+	/**
+	 * returns a holllow copy, excepted for the animes: no copy at all. 
+	 */
 	public Gesture copy(ArrayList<BufferedImage> images, ArrayList<BufferedImage> copyImages)
 	{	Gesture result = new Gesture();
-		// animes
-		Iterator<Map.Entry<Direction,AnimeDirection>> i = animes.entrySet().iterator();
-		while(i.hasNext())
-		{	Map.Entry<Direction,AnimeDirection> temp = i.next();
-			AnimeDirection copyAd = temp.getValue().copy(images,copyImages);
-			result.setAnimeDirection(temp.getKey(),copyAd);
-		}
+	
 		// name
 		result.setName(name);
-		//
+		
+		// animes
+//		for(Entry<Direction,AnimeDirection> e: animes.entrySet())
+//		{	AnimeDirection temp = e.getValue().copy(images,copyImages);
+//			result.addAnimeDirection(temp);
+//		}
+		
+		// trajectories
+		for(Entry<Direction,TrajectoryDirection> e: trajectories.entrySet())
+		{	//TrajectoryDirection temp = e.getValue().copy();
+			TrajectoryDirection temp = e.getValue();
+			result.addTrajectoryDirection(temp);
+		}
+		
+		// actor permissions
+		for(ActorModulation e: actorModulations)
+		{	//ActorModulation temp = e.copy();
+			ActorModulation temp = e;
+			result.addModulation(temp);
+		}
+		// state permissions
+		for(StateModulation e: stateModulations)
+		{	//StateModulation temp = e.copy();
+			StateModulation temp = e;
+			result.addModulation(temp);
+		}
+		// target permissions
+		for(TargetModulation e: targetModulations)
+		{	//TargetModulation temp = e.copy();
+			TargetModulation temp = e;
+			result.addModulation(temp);
+		}
+		// third permissions
+		for(ThirdModulation e: thirdModulations)
+		{	//ThirdModulation temp = e.copy();
+			ThirdModulation temp = e;
+			result.addModulation(temp);
+		}
+		
+		result.finished = finished;
 		return result;
 	}
 
@@ -190,15 +235,38 @@ public class Gesture
 	public void finish()
 	{	if(!finished)
 		{	finished = true;
-			// gestures
-			{	Iterator<Entry<Direction,AnimeDirection>> it = animes.entrySet().iterator();
-				while(it.hasNext())
-				{	Entry<Direction,AnimeDirection> t = it.next();
-					AnimeDirection temp = t.getValue();
-					temp.finish();
-					it.remove();
-				}
+			
+			// animes
+			for(Entry<Direction,AnimeDirection> e: animes.entrySet())
+			{	AnimeDirection temp = e.getValue();
+				temp.finish();
 			}
+			animes.clear();
+			
+			
+			// trajectories
+			for(Entry<Direction,TrajectoryDirection> e: trajectories.entrySet())
+			{	TrajectoryDirection temp = e.getValue();
+				temp.finish();
+			}
+			trajectories.clear();
+			
+			// actor permissions
+			for(ActorModulation e: actorModulations)
+				e.finish();			
+			actorModulations.clear();
+			// state permissions
+			for(StateModulation e: stateModulations)
+				e.finish();			
+			stateModulations.clear();
+			// target permissions
+			for(TargetModulation e: targetModulations)
+				e.finish();			
+			targetModulations.clear();
+			// third permissions
+			for(ThirdModulation e: thirdModulations)
+				e.finish();			
+			thirdModulations.clear();
 		}
 	}
 }

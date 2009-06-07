@@ -40,7 +40,7 @@ import fr.free.totalboumboum.engine.content.feature.ImageShift;
 import fr.free.totalboumboum.tools.FileTools;
 import fr.free.totalboumboum.tools.XmlTools;
 
-public class TrajectoryPackLoader
+public class TrajectoryLoader
 {	
 /*	
 	private String type;

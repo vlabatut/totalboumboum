@@ -87,7 +87,7 @@ public class TrajectoryStep
 			boundZShift = null;
 		}
 	}
-	
+/*	
 	public TrajectoryStep copy()
 	{	TrajectoryStep result = new TrajectoryStep();
 		result.boundZShift = boundZShift;
@@ -98,4 +98,5 @@ public class TrajectoryStep
 		result.zShift = zShift;
 		return result;
 	}
+*/	
 }

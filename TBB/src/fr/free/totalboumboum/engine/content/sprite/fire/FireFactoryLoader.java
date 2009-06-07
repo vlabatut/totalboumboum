@@ -40,7 +40,7 @@ import fr.free.totalboumboum.engine.content.feature.gesture.anime.AnimePackLoade
 import fr.free.totalboumboum.engine.content.feature.gesture.modulation.ModulationPack;
 import fr.free.totalboumboum.engine.content.feature.gesture.modulation.ModulationPackLoader;
 import fr.free.totalboumboum.engine.content.feature.gesture.trajectory.TrajectoryPack;
-import fr.free.totalboumboum.engine.content.feature.gesture.trajectory.TrajectoryPackLoader;
+import fr.free.totalboumboum.engine.content.feature.gesture.trajectory.TrajectoryLoader;
 import fr.free.totalboumboum.engine.content.sprite.SpriteFactoryLoader;
 import fr.free.totalboumboum.tools.FileTools;
 
@@ -75,7 +75,7 @@ public class FireFactoryLoader extends SpriteFactoryLoader
 		
 		// TRAJECTORIES
 		folder = folderPath+File.separator+FileTools.FILE_TRAJECTORIES;
-		TrajectoryPack trajectoryPack = TrajectoryPackLoader.loadTrajectoryPack(folder,level);
+		TrajectoryPack trajectoryPack = TrajectoryLoader.loadTrajectoryPack(folder,level);
 		result.setTrajectoryPack(trajectoryPack);
 		
 		// BOMBSET
