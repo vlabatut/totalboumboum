@@ -137,35 +137,35 @@ public class Gesture
 	{	return stateModulations;	
 	}
 
-	public ActorModulation getActorModulation(SpecificAction<?> action)
+	public ActorModulation getActorModulation(SpecificAction action)
 	{	ActorModulation result = null;
 		Iterator<ActorModulation> i = actorModulations.iterator();
 		while(i.hasNext() && result==null)
-		{	ActorModulation perm = i.next();
-			if(perm.isAllowingAction(action)) //NOTE moduler directement ? ou renommer en subsume?
-				result = perm;
+		{	ActorModulation modulation = i.next();
+			if(modulation.isAllowingAction(action)) //NOTE moduler directement ? ou renommer en subsume?
+				result = modulation;
 		}
 		return result;
 	}
 	
-	public TargetModulation getTargetModulation(SpecificAction<?> action)
+	public TargetModulation getTargetModulation(SpecificAction action)
 	{	TargetModulation result = null;
 		Iterator<TargetModulation> i = targetModulations.iterator();
 		while(i.hasNext() && result==null)
-		{	TargetModulation perm = i.next();
-			if(perm.isAllowingAction(action))
-				result = perm;
+		{	TargetModulation modulation = i.next();
+			if(modulation.isAllowingAction(action))
+				result = modulation;
 		}
 		return result;
 	}
 	
-	public ThirdModulation getThirdModulation(SpecificAction<?> action)
+	public ThirdModulation getThirdModulation(SpecificAction action)
 	{	ThirdModulation result = null;
 		Iterator<ThirdModulation> i = thirdModulations.iterator();
 		while(i.hasNext() && result==null)
-		{	ThirdModulation perm = i.next();
-			if(perm.isAllowingAction(action))
-				result = perm;
+		{	ThirdModulation modulation = i.next();
+			if(modulation.isAllowingAction(action))
+				result = modulation;
 		}
 		return result;
 	}

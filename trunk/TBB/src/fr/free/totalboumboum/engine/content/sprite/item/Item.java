@@ -26,6 +26,7 @@ import java.util.Iterator;
 
 import fr.free.totalboumboum.engine.container.level.Level;
 import fr.free.totalboumboum.engine.content.feature.ability.AbstractAbility;
+import fr.free.totalboumboum.engine.content.feature.gesture.action.Role;
 import fr.free.totalboumboum.engine.content.sprite.Sprite;
 
 public class Item extends Sprite
@@ -71,4 +72,12 @@ public class Item extends Sprite
 			}
 		}
 	}
+
+	/////////////////////////////////////////////////////////////////
+	// ROLE			/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	public Role getRole()
+	{	return Role.ITEM;
+	}
+
 }

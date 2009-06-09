@@ -43,6 +43,7 @@ import fr.free.totalboumboum.engine.content.feature.gesture.Gesture;
 import fr.free.totalboumboum.engine.content.feature.gesture.GestureName;
 import fr.free.totalboumboum.engine.content.feature.gesture.GesturePack;
 import fr.free.totalboumboum.engine.content.feature.gesture.action.AbstractAction;
+import fr.free.totalboumboum.engine.content.feature.gesture.action.Role;
 import fr.free.totalboumboum.engine.content.feature.gesture.action.SpecificAction;
 import fr.free.totalboumboum.engine.content.feature.gesture.modulation.ActorModulation;
 import fr.free.totalboumboum.engine.content.feature.gesture.modulation.StateModulation;
@@ -95,6 +96,11 @@ public abstract class Sprite
 	public String getName()
 	{	return name;	
 	}
+
+	/////////////////////////////////////////////////////////////////
+	// ROLE			/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	public abstract Role getRole();
 
 	/////////////////////////////////////////////////////////////////
 	// GESTURE			/////////////////////////////////////////////
