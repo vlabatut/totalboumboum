@@ -25,7 +25,7 @@ import fr.free.totalboumboum.engine.content.feature.Direction;
 import fr.free.totalboumboum.engine.content.feature.ability.ActionAbility;
 import fr.free.totalboumboum.engine.content.sprite.Sprite;
 
-public abstract class SpecificAction<T extends GeneralAction<?>>
+public abstract class SpecificAction
 {
 /*	
 	private SpecificAction(ActionName name)
@@ -59,7 +59,7 @@ public abstract class SpecificAction<T extends GeneralAction<?>>
 		this.contact = Contact.getContact(actor,target);
 		this.tilePosition = TilePosition.getTilePosition(actor,target);
 		this.orientation = Orientation.getOrientation(actor,target);
-//		initGeneralAction();
+		initGeneralAction();
 	}
 	
 	/**
@@ -80,7 +80,7 @@ public abstract class SpecificAction<T extends GeneralAction<?>>
 		this.contact = contact;
 		this.tilePosition = tilePosition;
 		this.orientation = orientation;
-//		initGeneralAction();
+		initGeneralAction();
 	}
 
 	/////////////////////////////////////////////////////////////////
@@ -89,7 +89,7 @@ public abstract class SpecificAction<T extends GeneralAction<?>>
 	/** name of this action */
 	private ActionName name;
 
-	protected ActionName getName()
+	public ActionName getName()
 	{	return name;
 	}
 	
@@ -99,7 +99,7 @@ public abstract class SpecificAction<T extends GeneralAction<?>>
 	/** direction of the action */
 	private Direction direction = Direction.NONE;
 
-	protected Direction getDirection()
+	public Direction getDirection()
 	{	return direction;
 	}
 	
@@ -109,7 +109,7 @@ public abstract class SpecificAction<T extends GeneralAction<?>>
 	/** contact between the actor and the target */
 	private Contact contact = Contact.NONE;
 
-	protected Contact getContact()
+	public Contact getContact()
 	{	return contact;
 	}
 	
@@ -119,7 +119,7 @@ public abstract class SpecificAction<T extends GeneralAction<?>>
 	/** compared directions of the target and the action */
 	private Orientation orientation = Orientation.UNDEFINED;
 
-	protected Orientation getOrientation()
+	public Orientation getOrientation()
 	{	return orientation;
 	}
 	
@@ -129,7 +129,7 @@ public abstract class SpecificAction<T extends GeneralAction<?>>
 	/** position of the target in termes of tiles */
 	private TilePosition tilePosition = TilePosition.UNDEFINED;
 
-	protected TilePosition getTilePosition()
+	public TilePosition getTilePosition()
 	{	return tilePosition;
 	}
 
@@ -139,7 +139,7 @@ public abstract class SpecificAction<T extends GeneralAction<?>>
 	/** sprite performing the action */
 	private Sprite actor = null;
 
-	protected Sprite getActor()
+	public Sprite getActor()
 	{	return actor;
 	}
 	
@@ -149,35 +149,10 @@ public abstract class SpecificAction<T extends GeneralAction<?>>
 	/** sprite targeted by the action */
 	private Sprite target = null;
 
-	protected Sprite getTarget()
+	public Sprite getTarget()
 	{	return target;
 	}
 
-	/////////////////////////////////////////////////////////////////
-	// GENERAL ACTION	/////////////////////////////////////////////
-	/////////////////////////////////////////////////////////////////
-	/** generalisation of this specific action */
-	private T generalAction;
-
-	public T getGeneralAction()
-	{	return generalAction;
-	}
-/*	
- * TODO is it necessary?
-	protected void initGeneralAction()
-	{	//NOTE à virer car remplacé par allowAction dans permission ?
-		//NOTE is it actually used? (we have GeneralAction.subsume)
-		generalAction = new GeneralAction(name);
-		generalAction.addActor(actor.getClass());
-		generalAction.addDirection(direction);
-		generalAction.addContact(contact);
-		generalAction.addOrientation(orientation);
-		generalAction.addTilePosition(tilePosition);
-		if(target!=null)
-			generalAction.addTarget(target.getClass());
-	}
-*/
-	
 	/////////////////////////////////////////////////////////////////
 	// COMPARISON		/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
@@ -240,6 +215,28 @@ public abstract class SpecificAction<T extends GeneralAction<?>>
 */
 
 	/////////////////////////////////////////////////////////////////
+	// GENERAL ACTION	/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	public abstract GeneralAction getGeneralAction();
+	
+	protected abstract void initGeneralAction();
+	
+	protected void initGeneralAction(GeneralAction generalAction)
+	{	try
+		{	generalAction.addActor(getActor().getRole());
+			generalAction.addDirection(getDirection());
+			generalAction.addContact(getContact());
+			generalAction.addOrientation(getOrientation());
+			generalAction.addTilePosition(getTilePosition());
+			if(getTarget()!=null)
+				generalAction.addTarget(getTarget().getRole());
+		}
+		catch (IncompatibleParameterException e)
+		{	e.printStackTrace();
+		}
+	}
+	
+	/////////////////////////////////////////////////////////////////
 	// FINISHED			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	private boolean finished = false;
@@ -247,9 +244,6 @@ public abstract class SpecificAction<T extends GeneralAction<?>>
 	public void finish()
 	{	if(!finished)
 		{	finished = true;
-			// general action
-			generalAction.finish();
-			generalAction = null;
 			// misc
 			actor = null;
 			contact = null;

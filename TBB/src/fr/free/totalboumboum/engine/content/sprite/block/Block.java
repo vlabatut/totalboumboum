@@ -22,6 +22,7 @@ package fr.free.totalboumboum.engine.content.sprite.block;
  */
 
 import fr.free.totalboumboum.engine.container.level.Level;
+import fr.free.totalboumboum.engine.content.feature.gesture.action.Role;
 import fr.free.totalboumboum.engine.content.sprite.Sprite;
 
 public class Block extends Sprite
@@ -35,4 +36,12 @@ public class Block extends Sprite
 		{	super.finish();
 		}
 	}
+
+	/////////////////////////////////////////////////////////////////
+	// ROLE			/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	public Role getRole()
+	{	return Role.FIRE;
+	}
+
 }

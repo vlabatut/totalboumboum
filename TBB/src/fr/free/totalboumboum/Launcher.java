@@ -874,5 +874,22 @@ public class Launcher
 	 * - possibilité de choisir entre le fait que le round s'arrête dès que tout le monde est mort sauf 1, ou dernière flamme terminée
 	 * reformater les modes de jeu :
 	 * 	- pour paint il suffit de définir des bombes spéciales qui peignent le sol
-	 */	
+	 */
+	
+	
+	
+	
+	
+	
+	
+	
+	/*
+	 * TODO LAST
+	 * 
+	 * - la modulation d'une ability doit être réalisée dans la specificAction et non pas dans le modulation manager (?)
+	 * (son role étant seulement de distribuer les modulation recquises)
+	 * 
+	 * - définir la liste de gesture pour chaque type de sprite
+	 * - pour chaque gesture, fixer les actions autorisées 
+	 */
 }

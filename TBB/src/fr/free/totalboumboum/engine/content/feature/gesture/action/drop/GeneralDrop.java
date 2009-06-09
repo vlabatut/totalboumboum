@@ -25,6 +25,7 @@ import java.util.Arrays;
 import java.util.List;
 
 import fr.free.totalboumboum.engine.content.feature.Direction;
+import fr.free.totalboumboum.engine.content.feature.gesture.action.ActionName;
 import fr.free.totalboumboum.engine.content.feature.gesture.action.Contact;
 import fr.free.totalboumboum.engine.content.feature.gesture.action.GeneralAction;
 import fr.free.totalboumboum.engine.content.feature.gesture.action.IncompatibleParameterException;
@@ -69,8 +70,18 @@ import fr.free.totalboumboum.engine.content.feature.gesture.action.TilePosition;
  * 	<br>orientation:	undefined
  *  
  */
-public class GeneralDrop extends GeneralAction<SpecificDrop>
+public class GeneralDrop extends GeneralAction
 {
+	/////////////////////////////////////////////////////////////////
+	// NAME				/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	/** name of the action */
+	private final ActionName name = ActionName.DROP;
+
+	protected ActionName getName()
+	{	return name;	
+	}
+	
 	/////////////////////////////////////////////////////////////////
 	// ACTORS			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////

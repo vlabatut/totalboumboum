@@ -22,6 +22,7 @@ package fr.free.totalboumboum.engine.content.feature.gesture.action.exult;
  */
 
 import fr.free.totalboumboum.engine.content.feature.gesture.action.ActionName;
+import fr.free.totalboumboum.engine.content.feature.gesture.action.GeneralAction;
 import fr.free.totalboumboum.engine.content.feature.gesture.action.IncompatibleParameterException;
 import fr.free.totalboumboum.engine.content.feature.gesture.action.SpecificAction;
 import fr.free.totalboumboum.engine.content.sprite.Sprite;
@@ -38,9 +39,26 @@ import fr.free.totalboumboum.engine.content.sprite.Sprite;
  * 	<br>orientation:	undefined
  *  
  */
-public class SpecificExult extends SpecificAction<GeneralExult>
+public abstract class SpecificExult extends SpecificAction
 {
 	public SpecificExult(Sprite actor, Sprite target) throws IncompatibleParameterException
 	{	super(ActionName.EXULT,actor,target);
+	}
+	
+	/////////////////////////////////////////////////////////////////
+	// GENERAL ACTION	/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	/** generalisation of this specific action */
+	private GeneralExult generalAction;
+
+	@Override
+	public GeneralAction getGeneralAction()
+	{	return generalAction;
+	}
+	
+	@Override
+	protected void initGeneralAction() 
+	{	generalAction = new GeneralExult();
+		super.initGeneralAction(generalAction);
 	}
 }

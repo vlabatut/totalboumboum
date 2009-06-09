@@ -22,6 +22,7 @@ package fr.free.totalboumboum.engine.content.feature.gesture.action.detonate;
  */
 
 import fr.free.totalboumboum.engine.content.feature.gesture.action.ActionName;
+import fr.free.totalboumboum.engine.content.feature.gesture.action.GeneralAction;
 import fr.free.totalboumboum.engine.content.feature.gesture.action.IncompatibleParameterException;
 import fr.free.totalboumboum.engine.content.feature.gesture.action.SpecificAction;
 import fr.free.totalboumboum.engine.content.sprite.Sprite;
@@ -38,9 +39,26 @@ import fr.free.totalboumboum.engine.content.sprite.Sprite;
  * 	<br>orientation:	undefined
  *  
  */
-public class SpecificDetonate extends SpecificAction<GeneralDetonate>
+public abstract class SpecificDetonate extends SpecificAction
 {
 	public SpecificDetonate(Sprite actor, Sprite target) throws IncompatibleParameterException
 	{	super(ActionName.DETONATE,actor,target);
+	}
+	
+	/////////////////////////////////////////////////////////////////
+	// GENERAL ACTION	/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	/** generalisation of this specific action */
+	private GeneralDetonate generalAction;
+
+	@Override
+	public GeneralAction getGeneralAction()
+	{	return generalAction;
+	}
+	
+	@Override
+	protected void initGeneralAction() 
+	{	generalAction = new GeneralDetonate();
+		super.initGeneralAction(generalAction);
 	}
 }

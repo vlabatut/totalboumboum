@@ -32,7 +32,7 @@ import fr.free.totalboumboum.engine.content.feature.Direction;
  * usually user-defined to be used in abilities and modulations.
  * SpecificActions represent in-game specific situations. 
  */
-public abstract class GeneralAction<T extends SpecificAction<?>>
+public abstract class GeneralAction
 {	
 	
 	/* NOTE in tile position: 
@@ -65,6 +65,11 @@ public abstract class GeneralAction<T extends SpecificAction<?>>
 	 * 		isAllowed=ability modulée
 	 * 
 	 */
+	
+	/////////////////////////////////////////////////////////////////
+	// NAME				/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	protected abstract ActionName getName();
 	
 	/////////////////////////////////////////////////////////////////
 	// DIRECTIONS		/////////////////////////////////////////////
@@ -161,8 +166,11 @@ public abstract class GeneralAction<T extends SpecificAction<?>>
 	/**
 	 * tests if this GeneralAction is more general than the specified SpecificAction
 	 */
-	public boolean subsume(T action)
+	public boolean subsume(SpecificAction action)
 	{	boolean result = true;
+		// name
+		if(result)
+			result = getName()==action.getName();
 		// actor
 		if(result)
 			result = actors.contains(action.getActor());

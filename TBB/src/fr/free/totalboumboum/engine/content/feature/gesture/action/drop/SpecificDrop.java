@@ -23,13 +23,14 @@ package fr.free.totalboumboum.engine.content.feature.gesture.action.drop;
 
 import fr.free.totalboumboum.engine.content.feature.ability.ActionAbility;
 import fr.free.totalboumboum.engine.content.feature.gesture.GestureName;
-import fr.free.totalboumboum.engine.content.feature.gesture.action.AbstractAction;
 import fr.free.totalboumboum.engine.content.feature.gesture.action.ActionName;
 import fr.free.totalboumboum.engine.content.feature.gesture.action.Contact;
+import fr.free.totalboumboum.engine.content.feature.gesture.action.GeneralAction;
 import fr.free.totalboumboum.engine.content.feature.gesture.action.IncompatibleParameterException;
 import fr.free.totalboumboum.engine.content.feature.gesture.action.Orientation;
 import fr.free.totalboumboum.engine.content.feature.gesture.action.SpecificAction;
 import fr.free.totalboumboum.engine.content.feature.gesture.action.TilePosition;
+import fr.free.totalboumboum.engine.content.feature.gesture.action.cry.GeneralCry;
 import fr.free.totalboumboum.engine.content.sprite.Sprite;
 import fr.free.totalboumboum.engine.content.sprite.bomb.Bomb;
 import fr.free.totalboumboum.engine.content.sprite.hero.Hero;
@@ -46,10 +47,27 @@ import fr.free.totalboumboum.engine.content.sprite.hero.Hero;
  * 	<br>orientation:	undefined
  *  
  */
-public class SpecificDrop extends SpecificAction<GeneralDrop>
+public abstract class SpecificDrop extends SpecificAction
 {
 	public SpecificDrop(Hero actor, Bomb target) throws IncompatibleParameterException
 	{	super(ActionName.DROP,actor,target);
+	}
+	
+	/////////////////////////////////////////////////////////////////
+	// GENERAL ACTION	/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	/** generalisation of this specific action */
+	private GeneralDrop generalAction;
+
+	@Override
+	public GeneralAction getGeneralAction()
+	{	return generalAction;
+	}
+	
+	@Override
+	protected void initGeneralAction() 
+	{	generalAction = new GeneralDrop();
+		super.initGeneralAction(generalAction);
 	}
 
 	/////////////////////////////////////////////////////////////////
