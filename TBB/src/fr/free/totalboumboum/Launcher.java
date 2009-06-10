@@ -886,12 +886,13 @@ public class Launcher
 	/*
 	 * TODO LAST
 	 * 
-	 * - fait: modif des fichiers XML, finir le loader d'actions
+	 * - fait: modif des fichiers XML, loader d'actions
 	 * 
 	 * - la modulation d'une ability doit être réalisée dans la specificAction et non pas dans le modulation manager (?)
 	 * (son role étant seulement de distribuer les modulation recquises)
 	 * 
 	 * - définir la liste de gesture pour chaque type de sprite
 	 * - pour chaque gesture, fixer les actions autorisées 
+	 * - adapter tous les loaders au fait que les constantes exprimées en XML sont maintenant en majuscule, adapter aussi les fichiers xml
 	 */
 }

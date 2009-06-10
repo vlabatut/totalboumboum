@@ -3,10 +3,10 @@
 
 	<xsd:simpleType name="tTournamentType">
 		<xsd:restriction base="xsd:string">
-			<xsd:enumeration value="cup" />
-			<xsd:enumeration value="league" />
-			<xsd:enumeration value="sequence" />
-			<xsd:enumeration value="single" />
+			<xsd:enumeration value="CUP" />
+			<xsd:enumeration value="LEAGUE" />
+			<xsd:enumeration value="SEQUENCE" />
+			<xsd:enumeration value="SINGLE" />
 		</xsd:restriction>
 	</xsd:simpleType>
 
