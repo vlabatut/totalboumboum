@@ -3,32 +3,54 @@
 <xsd:include schemaLocation="_direction.xsd"/>
 <xsd:include schemaLocation="_role.xsd"/>
 
+	<xsd:simpleType name="tRoleList"> 
+    	<xsd:list itemType="tRole"/> 
+	</xsd:simpleType> 
+
 	<xsd:simpleType name="tContact">
 		<xsd:restriction base="xsd:string">
-			<xsd:enumeration value="none" />
-			<xsd:enumeration value="collision" />
-			<xsd:enumeration value="intersection" />
-			<xsd:enumeration value="all" />
+			<xsd:enumeration value="NONE" />
+			<xsd:enumeration value="COLLISION" />
+			<xsd:enumeration value="INTERSECTION" />
+			<xsd:enumeration value="ANY" />
 		</xsd:restriction>
 	</xsd:simpleType>
+	<xsd:simpleType name="tContactList"> 
+    	<xsd:list itemType="tContact"/> 
+	</xsd:simpleType> 
 
 	<xsd:simpleType name="tTile">
 		<xsd:restriction base="xsd:string">
-			<xsd:enumeration value="same" />
-			<xsd:enumeration value="neighbour" />
-			<xsd:enumeration value="far" />
-			<xsd:enumeration value="all" />
+			<xsd:enumeration value="UNDEFINED" />
+			<xsd:enumeration value="SAME" />
+			<xsd:enumeration value="NEIGHBOR" />
+			<xsd:enumeration value="REMOTE" />
+			<xsd:enumeration value="ANY" />
 		</xsd:restriction>
 	</xsd:simpleType>
+	<xsd:simpleType name="tTileList"> 
+    	<xsd:list itemType="tTile"/> 
+	</xsd:simpleType> 
 
 	<xsd:simpleType name="tOrientation">
 		<xsd:restriction base="xsd:string">
-			<xsd:enumeration value="same" />
-			<xsd:enumeration value="opposite" />
-			<xsd:enumeration value="other" />
-			<xsd:enumeration value="all" />
+			<xsd:enumeration value="UNDEFINED" />
+			<xsd:enumeration value="SAME" />
+			<xsd:enumeration value="OPPOSITE" />
+			<xsd:enumeration value="OTHER" />
+			<xsd:enumeration value="ANY" />
 		</xsd:restriction>
 	</xsd:simpleType>
+	<xsd:simpleType name="tOrientationList"> 
+    	<xsd:list itemType="tOrientation"/> 
+	</xsd:simpleType> 
+
+	
+	
+	
+	
+	
+	
 
 	<xsd:complexType name="tAction">
 		<xsd:attribute name="name" type="xsd:string" use="required" />
