@@ -3,6 +3,7 @@ package fr.free.totalboumboum.engine.content.feature.gesture.action;
 import java.util.ArrayList;
 
 import fr.free.totalboumboum.engine.content.feature.Direction;
+import fr.free.totalboumboum.engine.content.sprite.Sprite;
 
 /*
  * Total Boum Boum
@@ -173,10 +174,18 @@ public abstract class GeneralAction
 			result = getName()==action.getName();
 		// actor
 		if(result)
-			result = actors.contains(action.getActor());
+		{	Sprite actor = action.getActor();
+			Role actorRole = actor.getRole();
+			result = actors.contains(actorRole);		
+		}
 		// target
 		if(result)
-			result = targets.contains(action.getTarget());
+		{	Sprite target = action.getTarget();
+			Role targetRole = Role.NONE;
+			if(target!=null)
+				targetRole = target.getRole();
+			result = targets.contains(targetRole);
+		}
 		// direction
 		if(result)
 			result = directions.contains(action.getDirection());

@@ -886,6 +886,8 @@ public class Launcher
 	/*
 	 * TODO LAST
 	 * 
+	 * - fait: modif des fichiers XML, finir le loader d'actions
+	 * 
 	 * - la modulation d'une ability doit être réalisée dans la specificAction et non pas dans le modulation manager (?)
 	 * (son role étant seulement de distribuer les modulation recquises)
 	 * 

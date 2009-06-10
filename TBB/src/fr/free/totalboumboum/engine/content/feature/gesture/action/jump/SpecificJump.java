@@ -22,7 +22,6 @@ package fr.free.totalboumboum.engine.content.feature.gesture.action.jump;
  */
 
 import fr.free.totalboumboum.engine.content.feature.gesture.action.ActionName;
-import fr.free.totalboumboum.engine.content.feature.gesture.action.GeneralAction;
 import fr.free.totalboumboum.engine.content.feature.gesture.action.IncompatibleParameterException;
 import fr.free.totalboumboum.engine.content.feature.gesture.action.SpecificAction;
 import fr.free.totalboumboum.engine.content.sprite.Sprite;
@@ -44,11 +43,11 @@ public abstract class SpecificJump extends SpecificAction
 	public SpecificJump(Sprite actor, Sprite target) throws IncompatibleParameterException
 	{	super(ActionName.JUMP,actor,target);
 	}
-	
+
+/*	
 	/////////////////////////////////////////////////////////////////
 	// GENERAL ACTION	/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	/** generalisation of this specific action */
 	private GeneralJump generalAction;
 
 	@Override
@@ -61,4 +60,5 @@ public abstract class SpecificJump extends SpecificAction
 	{	generalAction = new GeneralJump();
 		super.initGeneralAction(generalAction);
 	}
+*/	
 }

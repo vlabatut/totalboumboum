@@ -22,7 +22,6 @@ package fr.free.totalboumboum.engine.content.feature.gesture.action.push;
  */
 
 import fr.free.totalboumboum.engine.content.feature.gesture.action.ActionName;
-import fr.free.totalboumboum.engine.content.feature.gesture.action.GeneralAction;
 import fr.free.totalboumboum.engine.content.feature.gesture.action.IncompatibleParameterException;
 import fr.free.totalboumboum.engine.content.feature.gesture.action.SpecificAction;
 import fr.free.totalboumboum.engine.content.sprite.Sprite;
@@ -45,10 +44,10 @@ public abstract class SpecificPush extends SpecificAction
 	{	super(ActionName.PUSH,actor,target);
 	}
 	
+/*	
 	/////////////////////////////////////////////////////////////////
 	// GENERAL ACTION	/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	/** generalisation of this specific action */
 	private GeneralPush generalAction;
 
 	@Override
@@ -61,4 +60,5 @@ public abstract class SpecificPush extends SpecificAction
 	{	generalAction = new GeneralPush();
 		super.initGeneralAction(generalAction);
 	}
+*/	
 }

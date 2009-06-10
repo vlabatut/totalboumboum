@@ -52,11 +52,10 @@ public abstract class SpecificDrop extends SpecificAction
 	public SpecificDrop(Hero actor, Bomb target) throws IncompatibleParameterException
 	{	super(ActionName.DROP,actor,target);
 	}
-	
+/*	
 	/////////////////////////////////////////////////////////////////
 	// GENERAL ACTION	/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	/** generalisation of this specific action */
 	private GeneralDrop generalAction;
 
 	@Override
@@ -69,7 +68,8 @@ public abstract class SpecificDrop extends SpecificAction
 	{	generalAction = new GeneralDrop();
 		super.initGeneralAction(generalAction);
 	}
-
+*/
+	
 	/////////////////////////////////////////////////////////////////
 	// EXECUTION		/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////

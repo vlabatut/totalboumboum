@@ -22,7 +22,6 @@ package fr.free.totalboumboum.engine.content.feature.gesture.action.movehigh;
  */
 
 import fr.free.totalboumboum.engine.content.feature.gesture.action.ActionName;
-import fr.free.totalboumboum.engine.content.feature.gesture.action.GeneralAction;
 import fr.free.totalboumboum.engine.content.feature.gesture.action.IncompatibleParameterException;
 import fr.free.totalboumboum.engine.content.feature.gesture.action.SpecificAction;
 import fr.free.totalboumboum.engine.content.sprite.Sprite;
@@ -43,11 +42,10 @@ public abstract class SpecificMoveHigh extends SpecificAction
 	public SpecificMoveHigh(Sprite actor, Sprite target) throws IncompatibleParameterException
 	{	super(ActionName.MOVEHIGH,actor,target);
 	}
-	
+/*	
 	/////////////////////////////////////////////////////////////////
 	// GENERAL ACTION	/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	/** generalisation of this specific action */
 	private GeneralMoveHigh generalAction;
 
 	@Override
@@ -60,4 +58,5 @@ public abstract class SpecificMoveHigh extends SpecificAction
 	{	generalAction = new GeneralMoveHigh();
 		super.initGeneralAction(generalAction);
 	}
+*/	
 }
