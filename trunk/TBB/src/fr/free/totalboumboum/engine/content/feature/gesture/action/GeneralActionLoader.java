@@ -37,23 +37,18 @@ import fr.free.totalboumboum.tools.ClassTools;
 import fr.free.totalboumboum.tools.XmlTools;
 
 public class GeneralActionLoader
-{	
-	//NOTE to be removed?	to be replaced by "any" and "nany"
-	public static final String ROLE_ALL = "all";
-	public static final String ROLE_NONE = "none";
-	public static final String DIRECTION_ALL = "all";
-	public static final String CONTACT_ALL = "all";
-	public static final String ORIENTATION_ALL = "all";
-	public static final String TILE_POSITION_ALL = "all";
-	
+{		
 	public static GeneralAction loadActionElement(Element root) throws ClassNotFoundException
     {	// name
-		String name = root.getAttribute(XmlTools.ATT_NAME).getValue().trim();
-		GeneralAction result = new GeneralAction(name);
+		String strName = root.getAttribute(XmlTools.ATT_NAME).getValue().trim();
+		ActionName name = ActionName.valueOf(strName);
+		GeneralAction result = name.createGeneralAction();
 		
 		// actor
 		{	Attribute attribute = root.getAttribute(XmlTools.ATT_ACTOR);
-			if(attribute!=null)
+			if(attribute==null)
+				result.addActor(Role.NONE);
+			else
 			{	String actorStr = attribute.getValue().trim();
 				if(actorStr.equals(AbstractAction.ROLE_ALL))
 				{	result.addActor(Block.class);

@@ -59,7 +59,7 @@ public abstract class SpecificAction
 		this.contact = Contact.getContact(actor,target);
 		this.tilePosition = TilePosition.getTilePosition(actor,target);
 		this.orientation = Orientation.getOrientation(actor,target);
-		initGeneralAction();
+//		initGeneralAction();
 	}
 	
 	/**
@@ -80,7 +80,7 @@ public abstract class SpecificAction
 		this.contact = contact;
 		this.tilePosition = tilePosition;
 		this.orientation = orientation;
-		initGeneralAction();
+//		initGeneralAction();
 	}
 
 	/////////////////////////////////////////////////////////////////
@@ -213,7 +213,7 @@ public abstract class SpecificAction
 		return result;
 	}
 */
-
+/*
 	/////////////////////////////////////////////////////////////////
 	// GENERAL ACTION	/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
@@ -235,7 +235,7 @@ public abstract class SpecificAction
 		{	e.printStackTrace();
 		}
 	}
-	
+*/	
 	/////////////////////////////////////////////////////////////////
 	// FINISHED			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////

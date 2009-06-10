@@ -22,7 +22,6 @@ package fr.free.totalboumboum.engine.content.feature.gesture.action.appear;
  */
 
 import fr.free.totalboumboum.engine.content.feature.gesture.action.ActionName;
-import fr.free.totalboumboum.engine.content.feature.gesture.action.GeneralAction;
 import fr.free.totalboumboum.engine.content.feature.gesture.action.IncompatibleParameterException;
 import fr.free.totalboumboum.engine.content.feature.gesture.action.SpecificAction;
 import fr.free.totalboumboum.engine.content.sprite.Sprite;
@@ -45,10 +44,10 @@ public abstract class SpecificAppear extends SpecificAction
 	{	super(ActionName.APPEAR,actor,target);
 	}
 
+/*	
 	/////////////////////////////////////////////////////////////////
 	// GENERAL ACTION	/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	/** generalisation of this specific action */
 	private GeneralAppear generalAction;
 
 	@Override
@@ -61,4 +60,5 @@ public abstract class SpecificAppear extends SpecificAction
 	{	generalAction = new GeneralAppear();
 		super.initGeneralAction(generalAction);
 	}
+*/	
 }

@@ -22,7 +22,6 @@ package fr.free.totalboumboum.engine.content.feature.gesture.action.gather;
  */
 
 import fr.free.totalboumboum.engine.content.feature.gesture.action.ActionName;
-import fr.free.totalboumboum.engine.content.feature.gesture.action.GeneralAction;
 import fr.free.totalboumboum.engine.content.feature.gesture.action.IncompatibleParameterException;
 import fr.free.totalboumboum.engine.content.feature.gesture.action.SpecificAction;
 import fr.free.totalboumboum.engine.content.sprite.Sprite;
@@ -45,10 +44,10 @@ public abstract class SpecificGather extends SpecificAction
 	{	super(ActionName.GATHER,actor,target);
 	}
 	
+/*	
 	/////////////////////////////////////////////////////////////////
 	// GENERAL ACTION	/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	/** generalisation of this specific action */
 	private GeneralGather generalAction;
 
 	@Override
@@ -61,4 +60,5 @@ public abstract class SpecificGather extends SpecificAction
 	{	generalAction = new GeneralGather();
 		super.initGeneralAction(generalAction);
 	}
+*/	
 }

@@ -22,7 +22,6 @@ package fr.free.totalboumboum.engine.content.feature.gesture.action.consume;
  */
 
 import fr.free.totalboumboum.engine.content.feature.gesture.action.ActionName;
-import fr.free.totalboumboum.engine.content.feature.gesture.action.GeneralAction;
 import fr.free.totalboumboum.engine.content.feature.gesture.action.IncompatibleParameterException;
 import fr.free.totalboumboum.engine.content.feature.gesture.action.SpecificAction;
 import fr.free.totalboumboum.engine.content.sprite.Sprite;
@@ -45,10 +44,10 @@ public abstract class SpecificConsume extends SpecificAction
 	{	super(ActionName.CONSUME,actor,target);
 	}
 
+/*	
 	/////////////////////////////////////////////////////////////////
 	// GENERAL ACTION	/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	/** generalisation of this specific action */
 	private GeneralConsume generalAction;
 
 	@Override
@@ -61,4 +60,5 @@ public abstract class SpecificConsume extends SpecificAction
 	{	generalAction = new GeneralConsume();
 		super.initGeneralAction(generalAction);
 	}
+*/	
 }

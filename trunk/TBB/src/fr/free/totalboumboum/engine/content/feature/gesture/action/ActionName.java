@@ -1,5 +1,7 @@
 package fr.free.totalboumboum.engine.content.feature.gesture.action;
 
+import fr.free.totalboumboum.engine.content.feature.gesture.action.appear.GeneralAppear;
+
 public enum ActionName
 {
 	/** appearing in a tile, coming from nowhere (after a teleport, a drop, at the begining of a round, etc) */
@@ -43,4 +45,41 @@ public enum ActionName
 
 	/** asking for a remote bomb to explode (usually performed by a hero) */
 	TRIGGER;
+	
+	/**
+	 * returns an empty GeneralAction corresponding to the specified name
+	 * @return
+	 */
+	public GeneralAction createGeneralAction()
+	{	GeneralAction result = null;
+		if(this==APPEAR)
+			result = new GeneralAppear();
+		else if(this==CONSUME)
+			result = new GeneralAppear();
+		else if(this==CRY)
+			result = new GeneralAppear();
+		else if(this==DETONATE)
+			result = new GeneralAppear();
+		else if(this==DROP)
+			result = new GeneralAppear();
+		else if(this==EXULT)
+			result = new GeneralAppear();
+		else if(this==GATHER)
+			result = new GeneralAppear();
+		else if(this==JUMP)
+			result = new GeneralAppear();
+		else if(this==LAND)
+			result = new GeneralAppear();
+		else if(this==MOVEHIGH)
+			result = new GeneralAppear();
+		else if(this==MOVELOW)
+			result = new GeneralAppear();
+		else if(this==PUNCH)
+			result = new GeneralAppear();
+		else if(this==PUSH)
+			result = new GeneralAppear();
+		else if(this==TRIGGER)
+			result = new GeneralAppear();
+		return result;
+	}
 }
