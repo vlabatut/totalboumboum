@@ -27,104 +27,138 @@ import org.jdom.Attribute;
 import org.jdom.Element;
 
 import fr.free.totalboumboum.engine.content.feature.Direction;
-import fr.free.totalboumboum.engine.content.sprite.block.Block;
-import fr.free.totalboumboum.engine.content.sprite.bomb.Bomb;
-import fr.free.totalboumboum.engine.content.sprite.fire.Fire;
-import fr.free.totalboumboum.engine.content.sprite.floor.Floor;
-import fr.free.totalboumboum.engine.content.sprite.hero.Hero;
-import fr.free.totalboumboum.engine.content.sprite.item.Item;
-import fr.free.totalboumboum.tools.ClassTools;
 import fr.free.totalboumboum.tools.XmlTools;
 
 public class GeneralActionLoader
 {		
+	public static final String ANY = "ANY";
+	
 	public static GeneralAction loadActionElement(Element root) throws ClassNotFoundException
     {	// name
-		String strName = root.getAttribute(XmlTools.ATT_NAME).getValue().trim();
+		String strName = root.getAttribute(XmlTools.ATT_NAME).getValue().trim().toUpperCase(Locale.ENGLISH);
 		ActionName name = ActionName.valueOf(strName);
 		GeneralAction result = name.createGeneralAction();
 		
-		// actor
-		{	Attribute attribute = root.getAttribute(XmlTools.ATT_ACTOR);
-			if(attribute==null)
-				result.addActor(Role.NONE);
-			else
-			{	String actorStr = attribute.getValue().trim();
-				if(actorStr.equals(AbstractAction.ROLE_ALL))
-				{	result.addActor(Block.class);
-					result.addActor(Bomb.class);
-					result.addActor(Fire.class);
-					result.addActor(Floor.class);
-					result.addActor(Hero.class);
-					result.addActor(Item.class);
+		try
+		{	// actors
+			{	Attribute attribute = root.getAttribute(XmlTools.ATT_ACTOR);
+				String actorStr = attribute.getValue().trim().toUpperCase(Locale.ENGLISH);
+				String[] actorsStr = actorStr.split(" ");
+				for(String str: actorsStr)
+				{	if(str.equalsIgnoreCase(ANY))
+					{	result.addActor(Role.BLOCK);
+						result.addActor(Role.BOMB);
+						result.addActor(Role.FIRE);
+						result.addActor(Role.FLOOR);
+						result.addActor(Role.HERO);
+						result.addActor(Role.ITEM);
+					}
+					else
+					{	Role role = Role.valueOf(str);
+						result.addActor(role);
+					}
 				}
-				else if(actorStr.equals(AbstractAction.ROLE_NONE))
-					result.addActor(null);
-				else
-					result.addActor(ClassTools.getClassFromRole(actorStr));
 			}
-		}
-		
-		// target
-		{	Attribute attribute = root.getAttribute(XmlTools.ATT_TARGET);
-			if(attribute!=null)
-			{	String targetStr = attribute.getValue().trim();
-				if(targetStr.equals(AbstractAction.ROLE_ALL))
-				{	result.addTarget(Block.class);
-					result.addTarget(Bomb.class);
-					result.addTarget(Fire.class);
-					result.addTarget(Floor.class);
-					result.addTarget(Hero.class);
-					result.addTarget(Item.class);
+			
+			// targets
+			{	Attribute attribute = root.getAttribute(XmlTools.ATT_TARGET);
+				String targetStr = attribute.getValue().trim().toUpperCase(Locale.ENGLISH);
+				String[] targetsStr = targetStr.split(" ");
+				for(String str: targetsStr)
+				{	if(str.equalsIgnoreCase(ANY))
+					{	result.addTarget(Role.BLOCK);
+						result.addTarget(Role.BOMB);
+						result.addTarget(Role.FIRE);
+						result.addTarget(Role.FLOOR);
+						result.addTarget(Role.HERO);
+						result.addTarget(Role.ITEM);
+					}
+					else
+					{	Role role = Role.valueOf(str);
+						result.addTarget(role);
+					}
 				}
-				else if(targetStr.equals(AbstractAction.ROLE_NONE))
-					result.addTarget(null);
-				else
-					result.addTarget(ClassTools.getClassFromRole(targetStr));
+			}
+			
+			// directions
+			{	Attribute attribute = root.getAttribute(XmlTools.ATT_DIRECTION);
+				String directionStr = attribute.getValue().trim().toUpperCase(Locale.ENGLISH);
+				String[] directionsStr = directionStr.split(" ");
+				for(String str: directionsStr)
+				{	if(str.equalsIgnoreCase(ANY))
+					{	result.addDirection(Direction.UP);
+						result.addDirection(Direction.UPRIGHT);
+						result.addDirection(Direction.RIGHT);
+						result.addDirection(Direction.DOWNRIGHT);
+						result.addDirection(Direction.DOWN);
+						result.addDirection(Direction.DOWNLEFT);
+						result.addDirection(Direction.LEFT);
+						result.addDirection(Direction.UPLEFT);
+					}
+					else
+					{	Direction direction = Direction.valueOf(str);
+						result.addDirection(direction);
+					}
+				}
+			}
+			
+			// contacts
+			{	Attribute attribute = root.getAttribute(XmlTools.ATT_CONTACT);
+				String contactStr = attribute.getValue().trim().toUpperCase(Locale.ENGLISH);
+				String[] contactsStr = contactStr.split(" ");
+				for(String str: contactsStr)
+				{	if(str.equalsIgnoreCase(ANY))
+					{	result.addContact(Contact.COLLISION);
+						result.addContact(Contact.INTERSECTION);
+					}
+					else
+					{	Contact contact = Contact.valueOf(str);
+						result.addContact(contact);
+					}
+				}
+			}
+			
+			// tilePositions
+			{	Attribute attribute = root.getAttribute(XmlTools.ATT_TILE_POSITION);
+				String tilePositionStr = attribute.getValue().trim().toUpperCase(Locale.ENGLISH);
+				String[] tilePositionsStr = tilePositionStr.split(" ");
+				for(String str: tilePositionsStr)
+				{	if(str.equalsIgnoreCase(ANY))
+					{	result.addTilePosition(TilePosition.NEIGHBOR);
+						result.addTilePosition(TilePosition.REMOTE);
+						result.addTilePosition(TilePosition.SAME);
+						result.addTilePosition(TilePosition.UNDEFINED);
+					}
+					else
+					{	TilePosition tilePosition = TilePosition.valueOf(str);
+						result.addTilePosition(tilePosition);
+					}
+				}
+			}
+			
+			// orientations
+			{	Attribute attribute = root.getAttribute(XmlTools.ATT_ORIENTATION);
+				String orientationStr = attribute.getValue().trim().toUpperCase(Locale.ENGLISH);
+				String[] orientationsStr = orientationStr.split(" ");
+				for(String str: orientationsStr)
+				{	if(str.equalsIgnoreCase(ANY))
+					{	result.addOrientation(Orientation.OPPOSITE);
+						result.addOrientation(Orientation.OTHER);
+						result.addOrientation(Orientation.SAME);
+						result.addOrientation(Orientation.UNDEFINED);
+					}
+					else
+					{	Orientation orientation = Orientation.valueOf(str);
+						result.addOrientation(orientation);
+					}
+				}
 			}
 		}
-		
-		// direction
-		{	String directionStr = root.getAttribute(XmlTools.ATT_DIRECTION).getValue().trim();
-			if(directionStr.equals(AbstractAction.DIRECTION_ALL))
-			{	for(Direction d : Direction.values())
-					result.addDirection(d);
-			}
-			else
-				result.addDirection(Direction.valueOf(directionStr.toUpperCase(Locale.ENGLISH)));
+		catch (IncompatibleParameterException e)
+		{	e.printStackTrace();
 		}
 		
-		// contact
-		{	String contactStr = root.getAttribute(XmlTools.ATT_CONTACT).getValue().trim();
-			if(contactStr.equals(AbstractAction.CONTACT_ALL))
-			{	for(Contact c : Contact.values())
-					result.addContact(c);
-			}
-			else
-				result.addContact(Contact.valueOf(contactStr.toUpperCase(Locale.ENGLISH)));
-		}
-		
-		// tilePosition
-		{	String tilePositionStr = root.getAttribute(XmlTools.ATT_TILE_POSITION).getValue().trim();
-			if(tilePositionStr.equals(AbstractAction.TILE_POSITION_ALL))
-			{	for(TilePosition c : TilePosition.values())
-					result.addTilePosition(c);
-			}
-			else
-				result.addTilePosition(TilePosition.valueOf(tilePositionStr.toUpperCase(Locale.ENGLISH)));
-		}
-		
-		// orientation
-		{	String orientationStr = root.getAttribute(XmlTools.ATT_ORIENTATION).getValue().trim();
-			if(orientationStr.equals(AbstractAction.ORIENTATION_ALL))
-			{	for(Orientation c : Orientation.values())
-					result.addOrientation(c);
-			}
-			else
-				result.addOrientation(Orientation.valueOf(orientationStr.toUpperCase(Locale.ENGLISH)));
-		}
-		
-		// result
+		// results
 		return result;
     }
 }

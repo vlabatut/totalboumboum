@@ -3,22 +3,22 @@
 
 	<xsd:simpleType name="tColor">
 		<xsd:restriction base="xsd:string">
-			<xsd:enumeration value="black" />
-			<xsd:enumeration value="blue" />
-			<xsd:enumeration value="brown" />
-			<xsd:enumeration value="cyan" />
-			<xsd:enumeration value="grass" />
-			<xsd:enumeration value="green" />
-			<xsd:enumeration value="grey" />
-			<xsd:enumeration value="indigo" />
-			<xsd:enumeration value="orange" />
-			<xsd:enumeration value="pink" />
-			<xsd:enumeration value="purple" />
-			<xsd:enumeration value="red" />
-			<xsd:enumeration value="rust" />
-			<xsd:enumeration value="ultramarine" />
-			<xsd:enumeration value="white" />
-			<xsd:enumeration value="yellow" />
+			<xsd:enumeration value="BLACK" />
+			<xsd:enumeration value="BLUE" />
+			<xsd:enumeration value="BROWN" />
+			<xsd:enumeration value="CYAN" />
+			<xsd:enumeration value="GRASS" />
+			<xsd:enumeration value="GREEN" />
+			<xsd:enumeration value="GREY" />
+			<xsd:enumeration value="INDIGO" />
+			<xsd:enumeration value="ORANGE" />
+			<xsd:enumeration value="PINK" />
+			<xsd:enumeration value="PURPLE" />
+			<xsd:enumeration value="RED" />
+			<xsd:enumeration value="RUST" />
+			<xsd:enumeration value="ULTRAMARINE" />
+			<xsd:enumeration value="WHITE" />
+			<xsd:enumeration value="YELLOW" />
 		</xsd:restriction>
 	</xsd:simpleType>
 
