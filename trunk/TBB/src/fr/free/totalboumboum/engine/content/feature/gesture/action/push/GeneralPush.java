@@ -84,7 +84,7 @@ public class GeneralPush extends GeneralAction
 	/** name of the action */
 	private final ActionName name = ActionName.PUSH;
 
-	protected ActionName getName()
+	public ActionName getName()
 	{	return name;	
 	}
 	

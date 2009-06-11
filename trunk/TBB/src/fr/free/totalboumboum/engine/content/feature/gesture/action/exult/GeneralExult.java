@@ -53,7 +53,7 @@ public class GeneralExult extends GeneralAction
 	/** name of the action */
 	private final ActionName name = ActionName.EXULT;
 
-	protected ActionName getName()
+	public ActionName getName()
 	{	return name;	
 	}
 	

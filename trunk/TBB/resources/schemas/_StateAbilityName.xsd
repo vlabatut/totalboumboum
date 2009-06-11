@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+
+	<xsd:simpleType name="tStateAbilityName">
+		<xsd:restriction base="xsd:string">
+			<xsd:enumeration value="SPRITE_FLAT" />
+			<xsd:enumeration value="SPRITE_ABOVE" />
+			<xsd:enumeration value="SPRITE_MOVE_ASSISTANCE" />
+			<xsd:enumeration value="SPRITE_TRAVERSE_BOMB" />
+			<xsd:enumeration value="SPRITE_TRAVERSE_ITEM" />
+			<xsd:enumeration value="SPRITE_TRAVERSE_WALL" />
+			
+			<xsd:enumeration value="BLOCK_SPAWN" />
+			
+			<xsd:enumeration value="BOMB_EXPLOSION_LATENCY" />
+			<xsd:enumeration value="BOMB_FAILURE_MAXDURATION" />
+			<xsd:enumeration value="BOMB_FAILURE_MINDURATION" />
+			<xsd:enumeration value="BOMB_FAILURE_PROBABILITY" />
+			<xsd:enumeration value="BOMB_PUSH_LATENCY" />
+			<xsd:enumeration value="BOMB_TRIGGER_COLLISION" />
+			<xsd:enumeration value="BOMB_TRIGGER_COMBUSTION" />
+			<xsd:enumeration value="BOMB_TRIGGER_CONTROL" />
+			<xsd:enumeration value="BOMB_TRIGGER_TIMER" />
+			<xsd:enumeration value="BOMB_NUMBER" />
+			<xsd:enumeration value="BOMB_RANGE" />
+			
+			<xsd:enumeration value="HERO_CELEBRATION_DURATION" />
+			<xsd:enumeration value="HERO_ENTRY_DURATION" />
+			<xsd:enumeration value="HERO_PUNCH_DURATION" />
+			<xsd:enumeration value="HERO_WAIT_DURATION" />
+		</xsd:restriction>
+	</xsd:simpleType>
+
+</xsd:schema>
+		

@@ -22,6 +22,7 @@ package fr.free.totalboumboum.engine.content.feature.ability;
  */
 
 import fr.free.totalboumboum.engine.container.level.Level;
+import fr.free.totalboumboum.engine.content.feature.gesture.action.ActionName;
 import fr.free.totalboumboum.engine.content.feature.gesture.action.GeneralAction;
 
 public class ActionAbility extends AbstractAbility
@@ -37,7 +38,7 @@ public class ActionAbility extends AbstractAbility
 	{	return action;
 	}
 
-	public String getName()
+	public ActionName getName()
 	{	return action.getName();
 	}
 /*

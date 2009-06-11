@@ -71,7 +71,7 @@ public class GeneralMoveHigh extends GeneralAction
 	/** name of the action */
 	private final ActionName name = ActionName.MOVEHIGH;
 
-	protected ActionName getName()
+	public ActionName getName()
 	{	return name;	
 	}
 	

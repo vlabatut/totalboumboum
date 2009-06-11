@@ -886,7 +886,9 @@ public class Launcher
 	/*
 	 * TODO LAST
 	 * 
-	 * - fait: modif des fichiers XML, loader d'actions
+	 * - fait: 
+	 * 		- modif des fichiers XML action, loader d'actions
+	 * 		- XML abilities, loader d'abilities
 	 * 
 	 * - la modulation d'une ability doit être réalisée dans la specificAction et non pas dans le modulation manager (?)
 	 * (son role étant seulement de distribuer les modulation recquises)
@@ -894,12 +896,13 @@ public class Launcher
 	 * - voir si on peut mettre à jour le parser XML
 	 * - définir la liste de gesture pour chaque type de sprite
 	 * - pour chaque gesture, fixer les actions autorisées 
-	 * - adapter tous les loaders au fait que les constantes exprimées en XML sont maintenant en majuscule, adapter aussi les fichiers xml
+	 * - adapter tous les loaders au fait que les constantes exprimées en XML sont maintenant en majuscules, adapter aussi les fichiers xml
+	 * 
 	 * 
 	 * - il faut mutualiser tous les fichiers de description de sprites communs (style tous les blocs durs)
 	 * 	- chargement plus rapide
 	 * 	- moins d'occupation mémoire
 	 * 	- fichiers moins chiants à gérer (moins de répétitions)
-	 * 
+	 * - il faut mener une réflexion sur ce qu'il est vraiment nécessaire de cloner et ce qui peut être partagé, ce qui permettrait d'optimiser un peu plus l'utilisation de la mémoire
 	 */
 }

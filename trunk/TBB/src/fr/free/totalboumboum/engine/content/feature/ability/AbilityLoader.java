@@ -26,6 +26,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Locale;
 
 import javax.xml.parsers.ParserConfigurationException;
 
@@ -68,7 +69,8 @@ public class AbilityLoader
 		// state ?
 		Element temp = root.getChild(XmlTools.ELT_NAME);
 		if(temp!=null)
-		{	String name = temp.getAttribute(XmlTools.ATT_VALUE).getValue();
+		{	String strName = temp.getAttribute(XmlTools.ATT_VALUE).getValue().trim().toUpperCase(Locale.ENGLISH);
+			StateAbilityName name = StateAbilityName.valueOf(strName);
 			result = new StateAbility(name,level);
 		}
 		// or action ?

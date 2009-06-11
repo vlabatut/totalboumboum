@@ -78,7 +78,7 @@ public class GeneralDrop extends GeneralAction
 	/** name of the action */
 	private final ActionName name = ActionName.DROP;
 
-	protected ActionName getName()
+	public ActionName getName()
 	{	return name;	
 	}
 	
