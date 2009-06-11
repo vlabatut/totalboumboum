@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema">
-<xsd:include schemaLocation="_colors.xsd"/>
+<xsd:include schemaLocation="_Colors.xsd"/>
 
 	<xsd:complexType name="tPlayer">
 		<xsd:attribute name="file" type="xsd:string" use="required" />

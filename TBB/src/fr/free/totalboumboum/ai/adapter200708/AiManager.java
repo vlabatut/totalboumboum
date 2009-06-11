@@ -32,7 +32,6 @@ import fr.free.totalboumboum.engine.content.feature.Direction;
 import fr.free.totalboumboum.engine.content.feature.ability.AbstractAbility;
 import fr.free.totalboumboum.engine.content.feature.ability.StateAbility;
 import fr.free.totalboumboum.engine.content.feature.event.ControlEvent;
-import fr.free.totalboumboum.engine.content.feature.gesture.action.AbstractAction;
 import fr.free.totalboumboum.engine.content.feature.gesture.action.Contact;
 import fr.free.totalboumboum.engine.content.feature.gesture.action.Orientation;
 import fr.free.totalboumboum.engine.content.feature.gesture.action.SpecificAction;
@@ -188,9 +187,12 @@ public abstract class AiManager extends AbstractAiManager<Integer>
 	    			{	Iterator<AbstractAbility> j = itemAbilities.iterator();
 		    			while(j.hasNext() && !found)
 		    			{	AbstractAbility a = j.next();
-		    				if(a.getName().equals(StateAbility.BOMB_NUMBER))
-		    				{	found = true;
-		    					zoneMatrix[y][x] = ArtificialIntelligence.AI_BLOCK_ITEM_BOMB;	
+		    				if(a instanceof StateAbility)
+		    				{	StateAbility sa = (StateAbility) a;
+		    					if(sa.getName().equals(StateAbility.BOMB_NUMBER))
+		    					{	found = true;
+		    						zoneMatrix[y][x] = ArtificialIntelligence.AI_BLOCK_ITEM_BOMB;	
+		    					}
 		    				}
 		    			}
 	    			}

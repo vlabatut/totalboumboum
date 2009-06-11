@@ -78,7 +78,7 @@ public class GeneralJump extends GeneralAction
 	/** name of the action */
 	private final ActionName name = ActionName.JUMP;
 
-	protected ActionName getName()
+	public ActionName getName()
 	{	return name;	
 	}
 	

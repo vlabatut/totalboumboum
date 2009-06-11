@@ -62,8 +62,6 @@ public abstract class AbstractAbility
 	{	this.max = max;
 	}
 	
-	public abstract String getName();
-	
 	public boolean isActive()
 	{	return strength>0;		
 	}

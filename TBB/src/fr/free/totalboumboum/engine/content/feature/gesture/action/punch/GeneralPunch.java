@@ -84,7 +84,7 @@ public class GeneralPunch extends GeneralAction
 	/** name of the action */
 	private final ActionName name = ActionName.PUNCH;
 
-	protected ActionName getName()
+	public ActionName getName()
 	{	return name;	
 	}
 	

@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema">
-<xsd:include schemaLocation="_action.xsd"/>
+<xsd:include schemaLocation="_Action.xsd"/>
+<xsd:include schemaLocation="_StateAbilityName.xsd"/>
 
 	<xsd:complexType name="tAbilityName">
-		<xsd:attribute name="value" type="xsd:string" use="required" />
+		<xsd:attribute name="value" type="tStateAbilityName" use="required" />
 	</xsd:complexType>
 
 	<xsd:complexType name="tAbility">

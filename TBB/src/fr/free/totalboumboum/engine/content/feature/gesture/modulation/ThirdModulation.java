@@ -42,7 +42,7 @@ public class ThirdModulation extends AbstractActionModulation
 	}
 
 	public ThirdModulation copy()
-	{	GeneralAction actionCopy = action.copy();
+	{	GeneralAction actionCopy = action;
 		ThirdModulation result = new ThirdModulation(actionCopy);
 		// actor restrictions
 		{	Iterator<AbstractAbility> it = actorRestrictions.iterator();

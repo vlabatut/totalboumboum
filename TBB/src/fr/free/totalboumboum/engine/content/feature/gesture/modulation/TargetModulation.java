@@ -42,7 +42,7 @@ public class TargetModulation extends AbstractActionModulation
 	}
 
 	public TargetModulation copy()
-	{	GeneralAction actionCopy = action.copy();
+	{	GeneralAction actionCopy = action;
 		TargetModulation result = new TargetModulation(actionCopy);
 		// actor restrictions
 		{	Iterator<AbstractAbility> it = actorRestrictions.iterator();

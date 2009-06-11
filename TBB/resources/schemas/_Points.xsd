@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema">
-<xsd:include schemaLocation="_score.xsd"/>
-<xsd:include schemaLocation="_notes.xsd"/>
+<xsd:include schemaLocation="_Score.xsd"/>
+<xsd:include schemaLocation="_Notes.xsd"/>
 
 	<xsd:complexType name="tPointsTotal" />
 	

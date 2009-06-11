@@ -80,7 +80,7 @@ public class GeneralDetonate extends GeneralAction
 	/** name of the action */
 	private final ActionName name = ActionName.DETONATE;
 
-	protected ActionName getName()
+	public ActionName getName()
 	{	return name;	
 	}
 	
