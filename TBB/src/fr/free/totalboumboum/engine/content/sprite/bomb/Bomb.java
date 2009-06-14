@@ -23,9 +23,9 @@ package fr.free.totalboumboum.engine.content.sprite.bomb;
 
 import fr.free.totalboumboum.engine.container.level.Level;
 import fr.free.totalboumboum.engine.content.feature.gesture.action.Role;
-import fr.free.totalboumboum.engine.content.sprite.Sprite;
+import fr.free.totalboumboum.engine.content.sprite.getModulationStateAbilities;
 
-public class Bomb extends Sprite
+public class Bomb extends getModulationStateAbilities
 {	private String bombName;
 	
 	public Bomb(Level level)

@@ -55,7 +55,7 @@ import fr.free.totalboumboum.engine.content.feature.gesture.modulation.Modulatio
 import fr.free.totalboumboum.engine.content.feature.gesture.modulation.ModulationsLoader;
 import fr.free.totalboumboum.engine.content.feature.gesture.trajectory.TrajectoryPack;
 import fr.free.totalboumboum.engine.content.feature.gesture.trajectory.TrajectoriesLoader;
-import fr.free.totalboumboum.engine.content.sprite.Sprite;
+import fr.free.totalboumboum.engine.content.sprite.getModulationStateAbilities;
 import fr.free.totalboumboum.engine.content.sprite.hero.Hero;
 import fr.free.totalboumboum.engine.content.sprite.item.Item;
 import fr.free.totalboumboum.engine.control.SystemControl;
@@ -718,16 +718,16 @@ System.out.println();
 	public void initEntryDelay()
 	{	if(players.size()>0)
 		{	Player player = players.get(0);
-			Sprite sprite = player.getSprite();
-			StateAbility ability = sprite.computeAbility(StateAbility.HERO_ENTRY_DURATION);
+			getModulationStateAbilities sprite = player.getSprite();
+			StateAbility ability = sprite.modulateAction(StateAbility.HERO_ENTRY_DURATION);
 			entryDelay = ability.getStrength();
 		}
 	}
 	public void initCelebrationDelay()
 	{	if(players.size()>0)
 		{	Player player = players.get(0);
-			Sprite sprite = player.getSprite();
-			StateAbility ability = sprite.computeAbility(StateAbility.HERO_CELEBRATION_DURATION);
+			getModulationStateAbilities sprite = player.getSprite();
+			StateAbility ability = sprite.modulateAction(StateAbility.HERO_CELEBRATION_DURATION);
 			celebrationDelay = ability.getStrength();
 		}
 		else
@@ -736,13 +736,13 @@ System.out.println();
 	
 	public void reportVictory(int index)
 	{	Player player = players.get(index);
-		Sprite sprite = player.getSprite();
+		getModulationStateAbilities sprite = player.getSprite();
 		EngineEvent event = new EngineEvent(EngineEvent.VICTORY);
 		sprite.processEvent(event);
 	}
 	public void reportDefeat(int index)
 	{	Player player = players.get(index);
-		Sprite sprite = player.getSprite();
+		getModulationStateAbilities sprite = player.getSprite();
 		EngineEvent event = new EngineEvent(EngineEvent.DEFEAT);
 		sprite.processEvent(event);
 	}

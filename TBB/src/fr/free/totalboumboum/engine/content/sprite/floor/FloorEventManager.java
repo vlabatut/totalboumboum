@@ -27,11 +27,11 @@ import fr.free.totalboumboum.engine.content.feature.event.ControlEvent;
 import fr.free.totalboumboum.engine.content.feature.event.EngineEvent;
 import fr.free.totalboumboum.engine.content.feature.gesture.GestureName;
 import fr.free.totalboumboum.engine.content.manager.event.EventManager;
-import fr.free.totalboumboum.engine.content.sprite.Sprite;
+import fr.free.totalboumboum.engine.content.sprite.getModulationStateAbilities;
 
 public class FloorEventManager extends EventManager
 {
-	public FloorEventManager(Sprite sprite)
+	public FloorEventManager(getModulationStateAbilities sprite)
 	{	super(sprite);
 	}
 

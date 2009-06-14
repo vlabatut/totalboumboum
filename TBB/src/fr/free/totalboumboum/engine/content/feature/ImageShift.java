@@ -21,13 +21,13 @@ package fr.free.totalboumboum.engine.content.feature;
  * 
  */
 
-import fr.free.totalboumboum.engine.content.sprite.Sprite;
+import fr.free.totalboumboum.engine.content.sprite.getModulationStateAbilities;
 
 public enum ImageShift
 {
 	DOWN,BOUNDHEIGHT;
 	
-	public double getValue(Sprite boundSprite)
+	public double getValue(getModulationStateAbilities boundSprite)
 	{	double result = 0;
 		switch(this)
 		{	case DOWN:

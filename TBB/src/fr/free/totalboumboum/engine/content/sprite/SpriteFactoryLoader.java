@@ -51,13 +51,13 @@ public abstract class SpriteFactoryLoader
 		return result;
 	}
 
-	protected static <T extends Sprite> void loadGeneralElement(Element root, SpriteFactory<T> result)
+	protected static <T extends getModulationStateAbilities> void loadGeneralElement(Element root, SpriteFactory<T> result)
 	{	Element elt = root.getChild(XmlTools.ELT_GENERAL);
 		String name = elt.getAttribute(XmlTools.ATT_NAME).getValue().trim();
 		result.setName(name);
 	}
 	
-	protected static <T extends Sprite> void loadExplosionElement(Element root, Level level, SpriteFactory<T> result) throws ParserConfigurationException, SAXException, IOException, ClassNotFoundException
+	protected static <T extends getModulationStateAbilities> void loadExplosionElement(Element root, Level level, SpriteFactory<T> result) throws ParserConfigurationException, SAXException, IOException, ClassNotFoundException
 	{	Explosion explosion = new Explosion();
 		Element elt = root.getChild(XmlTools.ELT_EXPLOSION);
 		if(elt!=null)

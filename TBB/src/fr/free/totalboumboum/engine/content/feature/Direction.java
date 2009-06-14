@@ -23,7 +23,7 @@ package fr.free.totalboumboum.engine.content.feature;
 
 import java.util.ArrayList;
 
-import fr.free.totalboumboum.engine.content.sprite.Sprite;
+import fr.free.totalboumboum.engine.content.sprite.getModulationStateAbilities;
 
 public enum Direction
 {
@@ -337,7 +337,7 @@ public enum Direction
 	 * renvoie la direction à prendre pour aller à s2 en partant de s1.
 	 * (ou : dans quelle direction est s2 relativement à s1).
 	 */
-	public static Direction getCompositeFromSprites(Sprite s1, Sprite s2)
+	public static Direction getCompositeFromSprites(getModulationStateAbilities s1, getModulationStateAbilities s2)
 	{	Direction result;
 		if(s1==null || s2==null)
 			result = Direction.NONE;

@@ -23,9 +23,9 @@ package fr.free.totalboumboum.engine.content.sprite.hero;
 
 import fr.free.totalboumboum.engine.container.level.Level;
 import fr.free.totalboumboum.engine.content.feature.gesture.action.Role;
-import fr.free.totalboumboum.engine.content.sprite.Sprite;
+import fr.free.totalboumboum.engine.content.sprite.getModulationStateAbilities;
 
-public class Hero extends Sprite
+public class Hero extends getModulationStateAbilities
 {	
 	public Hero(Level level)
 	{	super(level);

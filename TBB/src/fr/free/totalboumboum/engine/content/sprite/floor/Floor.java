@@ -23,9 +23,9 @@ package fr.free.totalboumboum.engine.content.sprite.floor;
 
 import fr.free.totalboumboum.engine.container.level.Level;
 import fr.free.totalboumboum.engine.content.feature.gesture.action.Role;
-import fr.free.totalboumboum.engine.content.sprite.Sprite;
+import fr.free.totalboumboum.engine.content.sprite.getModulationStateAbilities;
 
-public class Floor extends Sprite
+public class Floor extends getModulationStateAbilities
 {
 
 	public Floor(Level level)

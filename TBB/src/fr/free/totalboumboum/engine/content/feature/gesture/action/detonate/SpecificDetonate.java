@@ -24,7 +24,7 @@ package fr.free.totalboumboum.engine.content.feature.gesture.action.detonate;
 import fr.free.totalboumboum.engine.content.feature.gesture.action.ActionName;
 import fr.free.totalboumboum.engine.content.feature.gesture.action.IncompatibleParameterException;
 import fr.free.totalboumboum.engine.content.feature.gesture.action.SpecificAction;
-import fr.free.totalboumboum.engine.content.sprite.Sprite;
+import fr.free.totalboumboum.engine.content.sprite.getModulationStateAbilities;
 
 /** 
  * producing an explosion, with flames and everything. 
@@ -40,7 +40,7 @@ import fr.free.totalboumboum.engine.content.sprite.Sprite;
  */
 public abstract class SpecificDetonate extends SpecificAction
 {
-	public SpecificDetonate(Sprite actor, Sprite target) throws IncompatibleParameterException
+	public SpecificDetonate(getModulationStateAbilities actor, getModulationStateAbilities target) throws IncompatibleParameterException
 	{	super(ActionName.DETONATE,actor,target);
 	}
 /*	

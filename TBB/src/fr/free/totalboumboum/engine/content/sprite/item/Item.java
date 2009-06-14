@@ -27,9 +27,9 @@ import java.util.Iterator;
 import fr.free.totalboumboum.engine.container.level.Level;
 import fr.free.totalboumboum.engine.content.feature.ability.AbstractAbility;
 import fr.free.totalboumboum.engine.content.feature.gesture.action.Role;
-import fr.free.totalboumboum.engine.content.sprite.Sprite;
+import fr.free.totalboumboum.engine.content.sprite.getModulationStateAbilities;
 
-public class Item extends Sprite
+public class Item extends getModulationStateAbilities
 {	/** abilities given by this item */
 	private ArrayList<AbstractAbility> itemAbilities;
 	private String itemName;

@@ -24,7 +24,7 @@ package fr.free.totalboumboum.engine.content.feature.gesture.action.punch;
 import fr.free.totalboumboum.engine.content.feature.gesture.action.ActionName;
 import fr.free.totalboumboum.engine.content.feature.gesture.action.IncompatibleParameterException;
 import fr.free.totalboumboum.engine.content.feature.gesture.action.SpecificAction;
-import fr.free.totalboumboum.engine.content.sprite.Sprite;
+import fr.free.totalboumboum.engine.content.sprite.getModulationStateAbilities;
 
 /** 
  * hitting an object to to send it in the air.
@@ -40,7 +40,7 @@ import fr.free.totalboumboum.engine.content.sprite.Sprite;
  */
 public abstract class SpecificPunch extends SpecificAction
 {
-	public SpecificPunch(Sprite actor, Sprite target) throws IncompatibleParameterException
+	public SpecificPunch(getModulationStateAbilities actor, getModulationStateAbilities target) throws IncompatibleParameterException
 	{	super(ActionName.PUNCH,actor,target);
 	}
 	

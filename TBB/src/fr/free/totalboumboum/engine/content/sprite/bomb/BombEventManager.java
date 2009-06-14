@@ -37,25 +37,25 @@ import fr.free.totalboumboum.engine.content.feature.gesture.action.AbstractActio
 import fr.free.totalboumboum.engine.content.feature.gesture.action.SpecificAction;
 import fr.free.totalboumboum.engine.content.manager.delay.DelayManager;
 import fr.free.totalboumboum.engine.content.manager.event.EventManager;
-import fr.free.totalboumboum.engine.content.sprite.Sprite;
+import fr.free.totalboumboum.engine.content.sprite.getModulationStateAbilities;
 
 public class BombEventManager extends EventManager
 {	
-	HashMap<Direction,TreeSet<Sprite>> collidingSprites;
+	HashMap<Direction,TreeSet<getModulationStateAbilities>> collidingSprites;
 	
 	public BombEventManager(Bomb sprite)
 	{	super(sprite);
-		collidingSprites = new HashMap<Direction, TreeSet<Sprite>>();
-		collidingSprites.put(Direction.DOWN,new TreeSet<Sprite>());
-		collidingSprites.put(Direction.LEFT,new TreeSet<Sprite>());
-		collidingSprites.put(Direction.RIGHT,new TreeSet<Sprite>());
-		collidingSprites.put(Direction.UP,new TreeSet<Sprite>());
+		collidingSprites = new HashMap<Direction, TreeSet<getModulationStateAbilities>>();
+		collidingSprites.put(Direction.DOWN,new TreeSet<getModulationStateAbilities>());
+		collidingSprites.put(Direction.LEFT,new TreeSet<getModulationStateAbilities>());
+		collidingSprites.put(Direction.RIGHT,new TreeSet<getModulationStateAbilities>());
+		collidingSprites.put(Direction.UP,new TreeSet<getModulationStateAbilities>());
 	}
 	
 	public void initGesture()
 	{	gesture = GestureName.STANDING;
 		spriteDirection = Direction.NONE;
-		StateAbility ability = sprite.computeAbility(StateAbility.BOMB_TRIGGER_TIMER);
+		StateAbility ability = sprite.modulateAction(StateAbility.BOMB_TRIGGER_TIMER);
 		if(ability.isActive())
 		{	double duration = ability.getStrength();
 			sprite.addDelay(DelayManager.DL_EXPLOSION,duration);
@@ -84,7 +84,7 @@ public class BombEventManager extends EventManager
 	private void actionConsume(ActionEvent event)
 	{	if(gesture.equals(GestureName.OSCILLATING) || gesture.equals(GestureName.SLIDING) || gesture.equals(GestureName.STANDING)
 			|| gesture.equals(GestureName.OSCILLATING_FAILING) || gesture.equals(GestureName.SLIDING) || gesture.equals(GestureName.STANDING_FAILING))
-		{	StateAbility a = sprite.computeAbility(StateAbility.BOMB_EXPLOSION_LATENCY);
+		{	StateAbility a = sprite.modulateAction(StateAbility.BOMB_EXPLOSION_LATENCY);
 			if(a.isActive())
 			{	double duration = a.getStrength();
 				String delayName = DelayManager.DL_LATENCY;
@@ -108,7 +108,7 @@ public class BombEventManager extends EventManager
 	{	if(gesture.equals(GestureName.OSCILLATING) || gesture.equals(GestureName.SLIDING) || gesture.equals(GestureName.STANDING)
 			|| gesture.equals(GestureName.OSCILLATING_FAILING) || gesture.equals(GestureName.SLIDING) || gesture.equals(GestureName.STANDING_FAILING))
 		{	long r = Math.round(Math.random()*101);
-			StateAbility b = sprite.computeAbility(StateAbility.BOMB_FAILURE_PROBABILITY);
+			StateAbility b = sprite.modulateAction(StateAbility.BOMB_FAILURE_PROBABILITY);
 			if(b.isActive())
 			{	double value = b.getStrength();
 				// if there's a failure :  no explosion
@@ -185,7 +185,7 @@ public class BombEventManager extends EventManager
 		{	gesture = GestureName.STANDING;
 			spriteDirection = Direction.NONE;
 			sprite.center();
-			StateAbility ability = sprite.computeAbility(StateAbility.BOMB_TRIGGER_TIMER);
+			StateAbility ability = sprite.modulateAction(StateAbility.BOMB_TRIGGER_TIMER);
 			if(ability.isActive())
 			{	double duration = ability.getStrength();
 				sprite.setGesture(gesture,spriteDirection,Direction.NONE,true,duration);
@@ -198,7 +198,7 @@ public class BombEventManager extends EventManager
 	private void engCollidedOff(EngineEvent event)
 	{	// oscillating : the bomb stops oscillating
 		if(gesture.equals(GestureName.OSCILLATING) || gesture.equals(GestureName.OSCILLATING_FAILING))
-		{	Sprite actor = event.getSource();
+		{	getModulationStateAbilities actor = event.getSource();
 			Direction dir = event.getDirection();
 			collidingSprites.get(dir).remove(actor);
 			// if no more sprites pushing the bomb in this direction
@@ -212,7 +212,7 @@ public class BombEventManager extends EventManager
 						&& collidingSprites.get(Direction.UP).size()==0)
 				{	if(gesture.equals(GestureName.OSCILLATING))
 					{	gesture = GestureName.STANDING;
-						StateAbility ability = sprite.computeAbility(StateAbility.BOMB_TRIGGER_TIMER);
+						StateAbility ability = sprite.modulateAction(StateAbility.BOMB_TRIGGER_TIMER);
 						if(ability.isActive())
 						{	double duration = ability.getStrength();
 							sprite.setGesture(gesture,spriteDirection,Direction.NONE,true,duration);
@@ -234,14 +234,14 @@ public class BombEventManager extends EventManager
 		if(gesture.equals(GestureName.STANDING) || gesture.equals(GestureName.STANDING_FAILING)
 				|| gesture.equals(GestureName.OSCILLATING) || gesture.equals(GestureName.OSCILLATING_FAILING))
 		{	// check if the actor has the ability to push the bomb
-			Sprite actor = event.getSource();
+			getModulationStateAbilities actor = event.getSource();
 			Direction dir = event.getDirection();
 			SpecificAction action = new SpecificAction(AbstractAction.PUSH,actor,sprite,dir);
 			ActionAbility a = actor.computeAbility(action);
 			if(a.isActive())
 			{	collidingSprites.get(dir).add(actor);
 				String delayName = DelayManager.DL_OSCILLATION+":"+dir;
-				StateAbility b = sprite.computeAbility(StateAbility.BOMB_PUSH_LATENCY);
+				StateAbility b = sprite.modulateAction(StateAbility.BOMB_PUSH_LATENCY);
 				double dur = b.getStrength();
 				// check if the bomb was already collided in the same direction
 				if(sprite.hasDelay(delayName))
@@ -249,7 +249,7 @@ public class BombEventManager extends EventManager
 					gesture = GestureName.OSCILLATING;
 					spriteDirection = dir;
 					sprite.setGesture(gesture,spriteDirection,Direction.NONE,false);
-					StateAbility ability = sprite.computeAbility(StateAbility.BOMB_TRIGGER_TIMER);
+					StateAbility ability = sprite.modulateAction(StateAbility.BOMB_TRIGGER_TIMER);
 					if(ability.isActive())
 					{	double duration = ability.getStrength();
 						sprite.setGesture(gesture,spriteDirection,Direction.NONE,true,duration);
@@ -268,7 +268,7 @@ public class BombEventManager extends EventManager
 			ActionAbility ablt = sprite.computeAbility(action);
 			if(ablt.isActive())
 			{	// is it a time bomb ?
-				StateAbility a = sprite.computeAbility(StateAbility.BOMB_TRIGGER_TIMER);
+				StateAbility a = sprite.modulateAction(StateAbility.BOMB_TRIGGER_TIMER);
 				if(a.isActive())
 				{	// is the bomb working ?
 					if(gesture.equals(GestureName.SLIDING) 
@@ -276,18 +276,18 @@ public class BombEventManager extends EventManager
 							|| gesture.equals(GestureName.OSCILLATING))
 					{	// is there a failure ?
 						long r = Math.round(Math.random()*101);
-						StateAbility b = sprite.computeAbility(StateAbility.BOMB_FAILURE_PROBABILITY);
+						StateAbility b = sprite.modulateAction(StateAbility.BOMB_FAILURE_PROBABILITY);
 						double value = b.getStrength();
 						// if there's a failure :  no explosion
 						if(r<=value)
 						{	double regularTime = a.getStrength();
 							//
-							b = sprite.computeAbility(StateAbility.BOMB_FAILURE_MINDURATION);
+							b = sprite.modulateAction(StateAbility.BOMB_FAILURE_MINDURATION);
 							double minD = b.getStrength();
 							if(minD==0)
 								minD = regularTime;
 							//
-							b = sprite.computeAbility(StateAbility.BOMB_FAILURE_MAXDURATION);
+							b = sprite.modulateAction(StateAbility.BOMB_FAILURE_MAXDURATION);
 							double maxD = b.getStrength();
 							if(maxD==0)
 								maxD = regularTime;
@@ -356,7 +356,7 @@ public class BombEventManager extends EventManager
 			gesture = GestureName.STANDING;
 			spriteDirection = Direction.NONE;
 			// normal delay
-			StateAbility ability = sprite.computeAbility(StateAbility.BOMB_TRIGGER_TIMER);
+			StateAbility ability = sprite.modulateAction(StateAbility.BOMB_TRIGGER_TIMER);
 			if(ability.isActive())
 			{	double duration = ability.getStrength();
 				sprite.addDelay(DelayManager.DL_EXPLOSION,duration);
@@ -382,10 +382,10 @@ public class BombEventManager extends EventManager
 	{	if(!finished)
 		{	super.finish();
 			// colliding sprites
-			{	Iterator<Entry<Direction,TreeSet<Sprite>>> it = collidingSprites.entrySet().iterator();
+			{	Iterator<Entry<Direction,TreeSet<getModulationStateAbilities>>> it = collidingSprites.entrySet().iterator();
 				while(it.hasNext())
-				{	Entry<Direction,TreeSet<Sprite>> t = it.next();
-					TreeSet<Sprite> tree = t.getValue();
+				{	Entry<Direction,TreeSet<getModulationStateAbilities>> t = it.next();
+					TreeSet<getModulationStateAbilities> tree = t.getValue();
 					tree.clear();
 					it.remove();
 				}

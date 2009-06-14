@@ -28,7 +28,7 @@ import fr.free.totalboumboum.engine.content.feature.event.ControlEvent;
 import fr.free.totalboumboum.engine.content.feature.event.EngineEvent;
 import fr.free.totalboumboum.engine.content.feature.gesture.GestureName;
 import fr.free.totalboumboum.engine.content.manager.event.EventManager;
-import fr.free.totalboumboum.engine.content.sprite.Sprite;
+import fr.free.totalboumboum.engine.content.sprite.getModulationStateAbilities;
 
 public class FireEventManager extends EventManager
 {
@@ -95,7 +95,7 @@ public class FireEventManager extends EventManager
 			}
 			// another sprite enters the fire's tile
 			else
-			{	Sprite s = event.getSource();
+			{	getModulationStateAbilities s = event.getSource();
 				fire.consumeSprite(s);
 			}
 		}

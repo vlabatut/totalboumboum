@@ -30,12 +30,12 @@ import fr.free.totalboumboum.engine.content.feature.event.EngineEvent;
 import fr.free.totalboumboum.engine.content.feature.gesture.Gesture;
 import fr.free.totalboumboum.engine.content.feature.gesture.anime.AnimeDirection;
 import fr.free.totalboumboum.engine.content.feature.gesture.anime.AnimeStep;
-import fr.free.totalboumboum.engine.content.sprite.Sprite;
+import fr.free.totalboumboum.engine.content.sprite.getModulationStateAbilities;
 import fr.free.totalboumboum.engine.loop.Loop;
 
 public class AnimeManager
 {	/** sprite possédant ce manager */
-	private Sprite sprite;
+	private getModulationStateAbilities sprite;
 	/** animation courante */
 	private AnimeDirection currentAnime;
 	/** pas courrant */
@@ -60,7 +60,7 @@ public class AnimeManager
  * INIT
  * ********************************
  */	
-	public AnimeManager(Sprite sprite)
+	public AnimeManager(getModulationStateAbilities sprite)
 	{	this.sprite = sprite;
 	} 
 
@@ -99,7 +99,7 @@ public class AnimeManager
 			// forcedDuration relative to bound sprite (negative)
 			else if(isBoundToSprite())
 			{	// init with the bound sprite values
-				Sprite sprt = getBoundToSprite();
+				getModulationStateAbilities sprt = getBoundToSprite();
 				forcedDuration = sprt.getAnimeTotalDuration();
 				currentTime = sprt.getAnimeCurrentTime();
 				animeTime = currentTime;
@@ -272,7 +272,7 @@ public class AnimeManager
 	{	return currentAnime.getBoundHeight();
 	}
 
-	private Sprite getBoundToSprite()
+	private getModulationStateAbilities getBoundToSprite()
 	{	return sprite.getBoundToSprite();
 	}
 	
