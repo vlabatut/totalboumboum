@@ -61,30 +61,30 @@ public enum AiStateName
 	 * @param gesture	geste à convertir
 	 * @return	le symbole de l'action correspondante 
 	 */
-	public static AiStateName makeNameFromGesture(String gesture)
+	public static AiStateName makeNameFromGesture(GestureName gesture)
 	{	AiStateName result = null;
-		if(gesture.equalsIgnoreCase(GestureName.BURNING))
+		if(gesture==GestureName.BURNING)
 			result = AiStateName.BURNING;
-		else if(gesture.equalsIgnoreCase(GestureName.BOUNCING)
-				|| gesture.equalsIgnoreCase(GestureName.JUMPING)
-				|| gesture.equalsIgnoreCase(GestureName.LANDING)
-				|| gesture.equalsIgnoreCase(GestureName.PUNCHED))
+		else if(gesture==GestureName.BOUNCING
+				|| gesture==GestureName.JUMPING
+				|| gesture==GestureName.LANDING
+				|| gesture==GestureName.PUNCHED)
 			result = AiStateName.FLYING;
-		else if(gesture.equalsIgnoreCase(GestureName.APPEARING)
-				|| gesture.equalsIgnoreCase(GestureName.CRYING)
-				|| gesture.equalsIgnoreCase(GestureName.EXULTING)
-				|| gesture.equalsIgnoreCase(GestureName.OSCILLATING)
-				|| gesture.equalsIgnoreCase(GestureName.OSCILLATING_FAILING)
-				|| gesture.equalsIgnoreCase(GestureName.PUNCHING)
-				|| gesture.equalsIgnoreCase(GestureName.SPAWNING)
-				|| gesture.equalsIgnoreCase(GestureName.STANDING)
-				|| gesture.equalsIgnoreCase(GestureName.STANDING_FAILING)
-				|| gesture.equalsIgnoreCase(GestureName.WAITING))
+		else if(gesture==GestureName.APPEARING
+				|| gesture==GestureName.CRYING
+				|| gesture==GestureName.EXULTING
+				|| gesture==GestureName.OSCILLATING
+				|| gesture==GestureName.OSCILLATING_FAILING
+				|| gesture==GestureName.PUNCHING
+				|| gesture==GestureName.SPAWNING
+				|| gesture==GestureName.STANDING
+				|| gesture==GestureName.STANDING_FAILING
+				|| gesture==GestureName.WAITING)
 			result = AiStateName.STANDING;
-		else if(gesture.equalsIgnoreCase(GestureName.PUSHING)
-				|| gesture.equalsIgnoreCase(GestureName.SLIDING)
-				|| gesture.equalsIgnoreCase(GestureName.SLIDING_FAILING)
-				|| gesture.equalsIgnoreCase(GestureName.WALKING))
+		else if(gesture==GestureName.PUSHING
+				|| gesture==GestureName.SLIDING
+				|| gesture==GestureName.SLIDING_FAILING
+				|| gesture==GestureName.WALKING)
 			result = AiStateName.MOVING;		
 		return result;
 	}

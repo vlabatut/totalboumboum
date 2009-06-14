@@ -53,7 +53,7 @@ public enum GestureName
 	/** the sprite is being held by another sprite */
 //	HELD,
 	
-	/** the sprite is in the zone, but not visible (wall before a spawn)
+	/** the sprite is in the zone, but not visible (wall before a spawn) */
 	HIDING,
 	
 	/** the sprite is holding another sprite */

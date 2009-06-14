@@ -29,6 +29,7 @@ import fr.free.totalboumboum.engine.container.level.Level;
 import fr.free.totalboumboum.engine.container.tile.Tile;
 import fr.free.totalboumboum.engine.content.feature.Direction;
 import fr.free.totalboumboum.engine.content.feature.ability.StateAbility;
+import fr.free.totalboumboum.engine.content.feature.ability.StateAbilityName;
 import fr.free.totalboumboum.engine.content.sprite.Sprite;
 import fr.free.totalboumboum.tools.CalculusTools;
 
@@ -457,7 +458,7 @@ public class MoveZone
 				dir = Direction.getHorizontalFromDouble(dx);
 			}
 			// has the sprite an assistance?
-			StateAbility ability = source.modulateAction(StateAbility.SPRITE_MOVE_ASSISTANCE);
+			StateAbility ability = source.getAbility(StateAbilityName.SPRITE_MOVE_ASSISTANCE);
 			double tolerance = ability.getStrength();
 			double margin = tolerance*level.getTileDimension();
 			if(tolerance==0)

@@ -23,6 +23,7 @@ package fr.free.totalboumboum.ai.adapter200809;
 
 import fr.free.totalboumboum.configuration.profile.PredefinedColor;
 import fr.free.totalboumboum.engine.content.feature.ability.StateAbility;
+import fr.free.totalboumboum.engine.content.feature.ability.StateAbilityName;
 import fr.free.totalboumboum.engine.content.sprite.hero.Hero;
 
 /**
@@ -112,10 +113,10 @@ public class AiHero extends AiSprite<Hero>
 	private void updateBombParam()
 	{	Hero sprite = getSprite();
 		// bomb range
-		StateAbility ab = sprite.computeCapacity(StateAbility.BOMB_RANGE);
+		StateAbility ab = sprite.getAbility(StateAbilityName.BOMB_RANGE);
         bombRange = (int)ab.getStrength();
 		// max number of simultaneous bombs
-    	ab = sprite.computeCapacity(StateAbility.BOMB_NUMBER);
+    	ab = sprite.getAbility(StateAbilityName.BOMB_NUMBER);
     	bombNumber = (int)ab.getStrength();
         // number of bombs currently dropped
     	bombCount = sprite.getDroppedBombs().size();

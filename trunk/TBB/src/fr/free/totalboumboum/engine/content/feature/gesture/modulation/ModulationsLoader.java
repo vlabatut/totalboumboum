@@ -37,6 +37,7 @@ import org.xml.sax.SAXException;
 import fr.free.totalboumboum.engine.container.level.Level;
 import fr.free.totalboumboum.engine.content.feature.ability.AbilityLoader;
 import fr.free.totalboumboum.engine.content.feature.ability.AbstractAbility;
+import fr.free.totalboumboum.engine.content.feature.ability.StateAbilityName;
 import fr.free.totalboumboum.engine.content.feature.gesture.Gesture;
 import fr.free.totalboumboum.engine.content.feature.gesture.GestureName;
 import fr.free.totalboumboum.engine.content.feature.gesture.GesturePack;
@@ -48,10 +49,6 @@ import fr.free.totalboumboum.tools.XmlTools;
 
 public class ModulationsLoader
 {	
-	private static final String STATE = "state";
-	private static final String ACTOR = "actor";
-	private static final String TARGET = "target";
-	private static final String THIRD = "third";
 
 	public static void loadModulations(String individualFolder, GesturePack pack, Level level) throws ParserConfigurationException, SAXException, IOException, ClassNotFoundException
 	{	File dataFile = new File(individualFolder+File.separator+FileTools.FILE_MODULATIONS+FileTools.EXTENSION_XML);
@@ -95,23 +92,23 @@ public class ModulationsLoader
     private static void loadGestureModulations(Element root, Gesture gesture, Level level) throws IOException, ClassNotFoundException
     {	// state modulations
 		Element stateElt = root.getChild(XmlTools.ELT_STATE_MODULATIONS);
-		loadModulationsElement(stateElt,STATE,gesture,level);
+		loadModulationsElement(stateElt,ModType.STATE,gesture,level);
     	// actor modulations
 		Element actorElt = root.getChild(XmlTools.ELT_ACTOR_MODULATIONS);
-		loadModulationsElement(actorElt,ACTOR,gesture,level);
+		loadModulationsElement(actorElt,ModType.ACTOR,gesture,level);
 		// target modulations
 		Element targetElt = root.getChild(XmlTools.ELT_TARGET_MODULATIONS);
-		loadModulationsElement(targetElt,TARGET,gesture,level);
+		loadModulationsElement(targetElt,ModType.TARGET,gesture,level);
 		// third modulations
 		Element thirdElt = root.getChild(XmlTools.ELT_THIRD_MODULATIONS);
-		loadModulationsElement(thirdElt,THIRD,gesture,level);
+		loadModulationsElement(thirdElt,ModType.THIRD,gesture,level);
     }
     
     @SuppressWarnings("unchecked")
-	private static void loadModulationsElement(Element root, String type, Gesture gesture, Level level) throws IOException, ClassNotFoundException
+	private static void loadModulationsElement(Element root, ModType type, Gesture gesture, Level level) throws IOException, ClassNotFoundException
     {	List<Element> modulationsList = root.getChildren(XmlTools.ELT_MODULATION);
 		Iterator<Element> i = modulationsList.iterator();
-		if(type==STATE)
+		if(type==ModType.STATE)
 		{	while(i.hasNext())
 			{	Element tp = i.next();
 				StateModulation stateModulation = loadStateModulationElement(gesture.getName(),tp,level);
@@ -140,7 +137,8 @@ public class ModulationsLoader
 		boolean frame = Boolean.parseBoolean(root.getAttribute(XmlTools.ATT_FRAME).getValue());
 		// name
 		Element nameElt = root.getChild(XmlTools.ELT_NAME);
-		String name = nameElt.getAttribute(XmlTools.ATT_VALUE).getValue().trim();
+		String strName = nameElt.getAttribute(XmlTools.ATT_VALUE).getValue().trim().toUpperCase(Locale.ENGLISH);
+		StateAbilityName name = StateAbilityName.valueOf(strName);
 		// result
 		StateModulation result = new StateModulation(name);
     	result.setFrame(frame);
@@ -149,7 +147,7 @@ public class ModulationsLoader
 		return result;
     }
 		
-    private static AbstractActionModulation loadActionModulationElement(String type, GestureName gestureName, Element root, Level level) throws IOException, ClassNotFoundException
+    private static AbstractActionModulation loadActionModulationElement(ModType type, GestureName gestureName, Element root, Level level) throws IOException, ClassNotFoundException
     {	// strength
 		String strengthStr = root.getAttribute(XmlTools.ATT_STRENGTH).getValue().trim();
 		float strength;
@@ -174,11 +172,11 @@ public class ModulationsLoader
 			targetRestrictions = AbilityLoader.loadAbilitiesElement(targetRestrElt,level);
 		// result
 		AbstractActionModulation result;
-		if(type.equals(ACTOR))
+		if(type.equals(ModType.ACTOR))
 			result = new ActorModulation(action);
-		else if(type.equals(TARGET))
+		else if(type.equals(ModType.TARGET))
 			result = new TargetModulation(action);
-		else //if(type.equals(THIRD))
+		else //if(type.equals(ModType.THIRD))
 			result = new ThirdModulation(action);
 		// misc
 		result.setFrame(frame);
@@ -196,5 +194,12 @@ public class ModulationsLoader
 			result.addTargetRestriction(restriction);
 		}
 		return result;
+    }
+    
+    private enum ModType
+    {	STATE,
+    	ACTOR,
+    	TARGET,
+    	THIRD;
     }
 }

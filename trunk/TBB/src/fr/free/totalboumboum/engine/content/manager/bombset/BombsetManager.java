@@ -29,8 +29,8 @@ import fr.free.totalboumboum.engine.container.tile.Tile;
 import fr.free.totalboumboum.engine.content.feature.Direction;
 import fr.free.totalboumboum.engine.content.feature.ability.ActionAbility;
 import fr.free.totalboumboum.engine.content.feature.ability.StateAbility;
+import fr.free.totalboumboum.engine.content.feature.ability.StateAbilityName;
 import fr.free.totalboumboum.engine.content.feature.event.ActionEvent;
-import fr.free.totalboumboum.engine.content.feature.gesture.action.AbstractAction;
 import fr.free.totalboumboum.engine.content.feature.gesture.action.SpecificAction;
 import fr.free.totalboumboum.engine.content.sprite.Sprite;
 import fr.free.totalboumboum.engine.content.sprite.bomb.Bomb;
@@ -68,9 +68,9 @@ public class BombsetManager
 	}
 	
 	public void dropBomb(Bomb bomb)
-	{	StateAbility ability = sprite.getAbility(StateAbility.BOMB_RANGE);
+	{	StateAbility ability = sprite.getAbility(StateAbilityName.BOMB_RANGE);
 		int flameRange = (int)ability.getStrength();
-		ability = sprite.getAbility(StateAbility.BOMB_NUMBER);
+		ability = sprite.getAbility(StateAbilityName.BOMB_NUMBER);
 		int droppedBombLimit = (int)ability.getStrength();
 		if(droppedBombs.size()<droppedBombLimit)
 		{	if(bomb!=null)

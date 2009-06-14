@@ -228,10 +228,10 @@ public class AiTile
 	{	// block
 		{	Block b = tile.getBlock();
 			if(b!=null)
-			{	String gesture = b.getCurrentGesture();
-				if(!(gesture.equalsIgnoreCase(GestureName.NONE) 
-					|| gesture.equalsIgnoreCase(fr.free.totalboumboum.engine.content.feature.gesture.HIDING)
-					|| gesture.equalsIgnoreCase(GestureName.ENDED)))
+			{	GestureName gesture = b.getCurrentGesture().getName();
+				if(!(gesture==GestureName.NONE 
+					|| gesture==GestureName.HIDING
+					|| gesture==GestureName.ENDED))
 				{	block = zone.getBlock(b);
 					if(block==null)
 					{	block = new AiBlock(this,b);
@@ -248,10 +248,10 @@ public class AiTile
 			Iterator<Bomb> i = tile.getBombs().iterator();
 			while(i.hasNext())
 			{	Bomb b = i.next();
-				String gesture = b.getCurrentGesture();
-				if(!(gesture.equalsIgnoreCase(GestureName.NONE) 
-					|| gesture.equalsIgnoreCase(fr.free.totalboumboum.engine.content.feature.gesture.HIDING)
-					|| gesture.equalsIgnoreCase(GestureName.ENDED)))
+				GestureName gesture = b.getCurrentGesture().getName();
+				if(!(gesture==GestureName.NONE
+					|| gesture==GestureName.HIDING
+					|| gesture==GestureName.ENDED))
 				{	AiBomb bomb = zone.getBomb(b);
 					if(bomb==null)
 					{	bomb = new AiBomb(this,b);
@@ -267,10 +267,10 @@ public class AiTile
 			Iterator<Fire> i = tile.getFires().iterator();
 			while(i.hasNext())
 			{	Fire f = i.next();
-				String gesture = f.getCurrentGesture();
-				if(!(gesture.equalsIgnoreCase(GestureName.NONE) 
-					|| gesture.equalsIgnoreCase(fr.free.totalboumboum.engine.content.feature.gesture.HIDING)
-					|| gesture.equalsIgnoreCase(GestureName.ENDED)))
+				GestureName gesture = f.getCurrentGesture().getName();
+				if(!(gesture==GestureName.NONE
+					|| gesture==GestureName.HIDING
+					|| gesture==GestureName.ENDED))
 				{	AiFire fire = zone.getFire(f);
 					if(fire==null)
 					{	fire = new AiFire(this,f);
@@ -284,10 +284,10 @@ public class AiTile
 		// floor
 		{	Floor f = tile.getFloor();
 			if(f!=null)
-			{	String gesture = f.getCurrentGesture();
-				if(!(gesture.equalsIgnoreCase(GestureName.NONE) 
-					|| gesture.equalsIgnoreCase(fr.free.totalboumboum.engine.content.feature.gesture.HIDING)
-					|| gesture.equalsIgnoreCase(GestureName.ENDED)))
+			{	GestureName gesture = f.getCurrentGesture().getName();
+				if(!(gesture==GestureName.NONE
+					|| gesture==GestureName.HIDING
+					|| gesture==GestureName.ENDED))
 				{	floor = zone.getFloor(f);
 					if(floor==null)
 					{	floor = new AiFloor(this,f);
@@ -304,10 +304,10 @@ public class AiTile
 			Iterator<Hero> i = tile.getHeroes().iterator();
 			while(i.hasNext())
 			{	Hero h = i.next();
-				String gesture = h.getCurrentGesture();
-				if(!(gesture.equalsIgnoreCase(GestureName.NONE) 
-					|| gesture.equalsIgnoreCase(fr.free.totalboumboum.engine.content.feature.gesture.HIDING)
-					|| gesture.equalsIgnoreCase(GestureName.ENDED)))
+				GestureName gesture = h.getCurrentGesture().getName();
+				if(!(gesture==GestureName.NONE
+					|| gesture==GestureName.HIDING
+					|| gesture==GestureName.ENDED))
 				{	AiHero hero = zone.getHero(h);
 					if(hero==null)
 					{	hero = new AiHero(this,h);
@@ -321,10 +321,10 @@ public class AiTile
 		// item
 		{	Item i = tile.getItem();
 			if(i!=null)
-			{	String gesture = i.getCurrentGesture();
-				if(!(gesture.equalsIgnoreCase(GestureName.NONE) 
-					|| gesture.equalsIgnoreCase(fr.free.totalboumboum.engine.content.feature.gesture.HIDING)
-					|| gesture.equalsIgnoreCase(GestureName.ENDED)))
+			{	GestureName gesture = i.getCurrentGesture().getName();
+				if(!(gesture==GestureName.NONE
+					|| gesture==GestureName.HIDING
+					|| gesture==GestureName.ENDED))
 				{	item = zone.getItem(i);
 					if(item==null)
 					{	item = new AiItem(this,i);

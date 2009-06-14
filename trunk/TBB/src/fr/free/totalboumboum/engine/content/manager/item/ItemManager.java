@@ -28,6 +28,7 @@ import java.util.LinkedList;
 import fr.free.totalboumboum.engine.content.feature.ability.AbstractAbility;
 import fr.free.totalboumboum.engine.content.feature.ability.ActionAbility;
 import fr.free.totalboumboum.engine.content.feature.gesture.action.GeneralAction;
+import fr.free.totalboumboum.engine.content.feature.gesture.action.IncompatibleParameterException;
 import fr.free.totalboumboum.engine.content.sprite.Sprite;
 import fr.free.totalboumboum.engine.content.sprite.item.Item;
 import fr.free.totalboumboum.game.statistics.StatisticAction;
@@ -90,7 +91,12 @@ public class ItemManager
 		{	AbstractAbility temp = i.next();
 			if(temp instanceof ActionAbility)
 			{	GeneralAction action = ((ActionAbility)temp).getAction();
-				action.setActor(sprite.getClass());
+				try
+				{	action.addActor(sprite.getRole());
+				}
+				catch (IncompatibleParameterException e)
+				{	e.printStackTrace();//TODO exception should cause the item not to be gathered? there's something to do anyway, cause the actor was not set (and should not be)
+				}
 			}
 		}
 		// stats (doesn't count initial items)

@@ -310,6 +310,8 @@ public class XmlTools
 	public static final String ATT_YSHIFT = "yShift";
 	public static final String ATT_ZSHIFT = "zShift";
 	public static final String ATT_ZPOSITION = "zPosition";
+	// Attributes values
+	public static final String VAL_ANY = "ANY";
 	
 	public static final HashMap<String,DocumentBuilder> documentBuilders = new HashMap<String,DocumentBuilder>();
 	

@@ -31,8 +31,6 @@ import fr.free.totalboumboum.tools.XmlTools;
 
 public class GeneralActionLoader
 {		
-	public static final String ANY = "ANY";
-	
 	public static GeneralAction loadActionElement(Element root) throws ClassNotFoundException
     {	// name
 		String strName = root.getAttribute(XmlTools.ATT_NAME).getValue().trim().toUpperCase(Locale.ENGLISH);
@@ -45,7 +43,7 @@ public class GeneralActionLoader
 				String actorStr = attribute.getValue().trim().toUpperCase(Locale.ENGLISH);
 				String[] actorsStr = actorStr.split(" ");
 				for(String str: actorsStr)
-				{	if(str.equalsIgnoreCase(ANY))
+				{	if(str.equalsIgnoreCase(XmlTools.VAL_ANY))
 					{	result.addActor(Role.BLOCK);
 						result.addActor(Role.BOMB);
 						result.addActor(Role.FIRE);
@@ -65,7 +63,7 @@ public class GeneralActionLoader
 				String targetStr = attribute.getValue().trim().toUpperCase(Locale.ENGLISH);
 				String[] targetsStr = targetStr.split(" ");
 				for(String str: targetsStr)
-				{	if(str.equalsIgnoreCase(ANY))
+				{	if(str.equalsIgnoreCase(XmlTools.VAL_ANY))
 					{	result.addTarget(Role.BLOCK);
 						result.addTarget(Role.BOMB);
 						result.addTarget(Role.FIRE);
@@ -85,7 +83,7 @@ public class GeneralActionLoader
 				String directionStr = attribute.getValue().trim().toUpperCase(Locale.ENGLISH);
 				String[] directionsStr = directionStr.split(" ");
 				for(String str: directionsStr)
-				{	if(str.equalsIgnoreCase(ANY))
+				{	if(str.equalsIgnoreCase(XmlTools.VAL_ANY))
 					{	result.addDirection(Direction.UP);
 						result.addDirection(Direction.UPRIGHT);
 						result.addDirection(Direction.RIGHT);
@@ -107,7 +105,7 @@ public class GeneralActionLoader
 				String contactStr = attribute.getValue().trim().toUpperCase(Locale.ENGLISH);
 				String[] contactsStr = contactStr.split(" ");
 				for(String str: contactsStr)
-				{	if(str.equalsIgnoreCase(ANY))
+				{	if(str.equalsIgnoreCase(XmlTools.VAL_ANY))
 					{	result.addContact(Contact.COLLISION);
 						result.addContact(Contact.INTERSECTION);
 					}
@@ -123,7 +121,7 @@ public class GeneralActionLoader
 				String tilePositionStr = attribute.getValue().trim().toUpperCase(Locale.ENGLISH);
 				String[] tilePositionsStr = tilePositionStr.split(" ");
 				for(String str: tilePositionsStr)
-				{	if(str.equalsIgnoreCase(ANY))
+				{	if(str.equalsIgnoreCase(XmlTools.VAL_ANY))
 					{	result.addTilePosition(TilePosition.NEIGHBOR);
 						result.addTilePosition(TilePosition.REMOTE);
 						result.addTilePosition(TilePosition.SAME);
@@ -141,7 +139,7 @@ public class GeneralActionLoader
 				String orientationStr = attribute.getValue().trim().toUpperCase(Locale.ENGLISH);
 				String[] orientationsStr = orientationStr.split(" ");
 				for(String str: orientationsStr)
-				{	if(str.equalsIgnoreCase(ANY))
+				{	if(str.equalsIgnoreCase(XmlTools.VAL_ANY))
 					{	result.addOrientation(Orientation.OPPOSITE);
 						result.addOrientation(Orientation.OTHER);
 						result.addOrientation(Orientation.SAME);
