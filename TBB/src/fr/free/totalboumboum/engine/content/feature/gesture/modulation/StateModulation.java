@@ -1,5 +1,7 @@
 package fr.free.totalboumboum.engine.content.feature.gesture.modulation;
 
+import fr.free.totalboumboum.engine.content.feature.ability.StateAbilityName;
+
 /*
  * Total Boum Boum
  * Copyright 2008-2009 Vincent Labatut 
@@ -22,36 +24,48 @@ package fr.free.totalboumboum.engine.content.feature.gesture.modulation;
  */
 
 public class StateModulation extends AbstractModulation
-{	
-	String name;
-	
-	public StateModulation(String name)
+{		
+	public StateModulation(StateAbilityName name)
 	{	super();
 		this.name = name;
 	}
 	
-	public String getName()
+	/////////////////////////////////////////////////////////////////
+	// NAME						/////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	private StateAbilityName name;
+
+	public StateAbilityName getName()
 	{	return name;
 	}
-	public void setName(String name)
+	public void setName(StateAbilityName name)
 	{	this.name = name;
 	}	
 
+	/////////////////////////////////////////////////////////////////
+	// COMPARISON				/////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
 	public boolean equals(Object modulation)
 	{	boolean result = false;
 		if(modulation instanceof StateModulation)
 		{	StateModulation m = (StateModulation) modulation;
-			result = name.equalsIgnoreCase(m.getName());
+			result = name==m.getName();
 		}
 		return result;
 	}
 	
+	/////////////////////////////////////////////////////////////////
+	// STRING					/////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
 	public String toString()
-	{	String result = name;
+	{	String result = name.toString();
 		result = "<"+strength+","+frame+">";
 		return result;
 	}
 	
+	/////////////////////////////////////////////////////////////////
+	// COPY						/////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
 	public StateModulation copy()
 	{	StateModulation result = new StateModulation(name);
 		result.name = name;
@@ -61,5 +75,4 @@ public class StateModulation extends AbstractModulation
 		result.strength = strength;
 		return result;
 	}
-
 }

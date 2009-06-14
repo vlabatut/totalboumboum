@@ -41,119 +41,157 @@ import fr.free.totalboumboum.engine.content.feature.gesture.modulation.ThirdModu
 import fr.free.totalboumboum.engine.content.sprite.Sprite;
 
 public class ModulationManager
-{	private Sprite sprite;
-	@SuppressWarnings("unused")
-	private Direction currentDirection;
-	private ArrayList<AbstractAbility> modulationAbilities;
-	private Gesture currentGesture;
-
+{	
 	public ModulationManager(Sprite sprite)
 	{	this.sprite = sprite;
 		currentGesture = null;
 		currentDirection = Direction.NONE;
-		modulationAbilities = new ArrayList<AbstractAbility>();
+		stateAbilities = new ArrayList<AbstractAbility>();
 	}
+	
+	/////////////////////////////////////////////////////////////////
+	// SPRITE				/////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	private Sprite sprite;
 	
 	public Level getLevel()
 	{	return sprite.getLevel();
 	}
 	
+	/////////////////////////////////////////////////////////////////
+	// GESTURE				/////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	private Gesture currentGesture;
+	@SuppressWarnings("unused")
+	private Direction currentDirection;
+	
 	public void updateGesture(Gesture gesture, Direction spriteDirection)
 	{	if(!currentGesture.equals(gesture))
-			updateAbilities();
+			updateStateAbilities();
 		currentGesture = gesture;
 		currentDirection = spriteDirection;
 	}
 	
+	/////////////////////////////////////////////////////////////////
+	// STATE MODULATIONS	/////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
 	public StateModulation getStateModulation(StateModulation modulation)
 	{	StateModulation result = currentGesture.getStateModulation(modulation);
 		return result;
 	}
+
+	/////////////////////////////////////////////////////////////////
+	// ACTOR MODULATIONS	/////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
 	public ActorModulation getActorModulation(SpecificAction action)
 	{	ActorModulation result = currentGesture.getActorModulation(action);
 		return result;
 	}
+	
+	/////////////////////////////////////////////////////////////////
+	// TARGET MODULATIONS	/////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
 	public TargetModulation getTargetModulation(SpecificAction action)
 	{	TargetModulation result = currentGesture.getTargetModulation(action);
 		return result;
 	}
+	
+	/////////////////////////////////////////////////////////////////
+	// THIRD MODULATIONS	/////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
 	public ThirdModulation getThirdModulation(SpecificAction action)
 	{	ThirdModulation result = currentGesture.getThirdModulation(action);
 		return result;
 	}
 	
+	/////////////////////////////////////////////////////////////////
+	// ABILITIES			/////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	
 	/**
-	 * calcule l'ability totale pour ce sprite s'il tente d'effectuer
-	 * l'action passée en paramètre, en tenant compte de :
-	 * 	- ses capacités
-	 * 	- son auto-permission (actor)
-	 * 	- la permission de la cible (target)
-	 * 	- la permission de l'environnement (third, ici : la case ou les cases)
+	 * process the total ability for this action, considering:
+	 * 	- actor original ability
+	 * 	- actor modulation (depending on its current gesture)
+	 * 	- target modulation (same thing, and only if the target exists)
+	 * 	- environment modulation (considering all sprites in the actor and target tiles) 
 	 */
 	public ActionAbility computeAbility(SpecificAction action)
-	{	ActionAbility result = new ActionAbility(action.getGeneralAction(),getLevel());
-//		AbstractSprite actor = action.getActor();
-		Sprite target = action.getTarget();
-		// capacity of the actor
-		ActionAbility capacityAbility = computeCapacity(action);
-		result = (ActionAbility)capacityAbility.copy();
-		// permission of the actor
-		if(result.isActive())
-			combineActorModulation(action,result);
-		// permission of the target (if there's one!)
-		if(result.isActive() && target!=null && target.getCurrentGesture()!=null)
-			combineTargetModulation(action,result);
-		// permission of the environement
-		if(result.isActive())
-			combineThirdModulation(action,result);
+	{	Sprite target = action.getTarget();
+		
+		// actor original ability 
+		Sprite actor = action.getActor();
+		ActionAbility result = actor.getAbility(action); //TODO écrire getAbility(action), les autres sont-ils utiles?
+		result = (ActionAbility)result.copy(); //TODO is this copy really needed?
+		
+		// actor modulation
+		result = combineActorModulation(action,result);		
+		// target modulation (if there's one!)
+		result = combineTargetModulation(action,result);		
+		// environement modulation
+		
 		return result;
 	}
 	
-	public ActionAbility computeCapacity(AbstractAction action)
-	{	ActionAbility result;
-		result = sprite.getAbility(action);
+	public ActionAbility combineActorModulation(SpecificAction action, ActionAbility ability)
+	{	ActionAbility result = ability;
+		Sprite actor = action.getActor();
+		if(result.isActive())
+		{	ActorModulation actorModulation = actor.getActorModulation(action);
+			if(actorModulation!=null) //TODO peut être que c'est plus simple de renvoyer systmétiquement une modulation, mais avec une puissance de 0?
+				result = actorModulation.modulate(result); //TODO écrire cette méthode aussi, qui renvoie une nouvelle ability		
+		}
 		return result;
-	}
-	
-	public void combineActorModulation(SpecificAction specificAction, ActionAbility ability)
-	{	GeneralAction action = specificAction.getGeneralAction();
-		ActionAbility result = new ActionAbility(action,getLevel());
-		Sprite actor = specificAction.getActor();
-		ActorModulation actorPermission = actor.getActorModulation(specificAction);
-		if(actorPermission==null)
-		{	result.setStrength(0);
-			result.setFrame(true);			
-		}
-		else
-		{	result.setStrength(actorPermission.getStrength());
-			result.setFrame(actorPermission.getFrame());
-		}
-		ability.combine(result);
 	}
 
-	public void combineTargetModulation(SpecificAction specificAction, ActionAbility ability)
-	{	GeneralAction action = specificAction.getGeneralAction();
-		ActionAbility result = new ActionAbility(action,getLevel());
-		Sprite target = specificAction.getTarget();
-		TargetModulation targetPermission = target.getTargetModulation(specificAction);
-		if(targetPermission==null)
-		{	result.setStrength(0);
-			result.setFrame(true);			
+	public ActionAbility combineTargetModulation(SpecificAction action, ActionAbility ability)
+	{	ActionAbility result = ability;
+		Sprite target = action.getTarget();
+		if(result.isActive() && target!=null)//TODO quand on cherche une modulation pour un sprite donné, ça dépend de son gesture courant. si pas de gesture, alors il renvoie null
+		{	TargetModulation targetModulation = target.getTargetModulation(action);
+			if(targetModulation!=null)
+				result = targetModulation.modulate(result); 		
 		}
-		else
-		{	result.setStrength(targetPermission.getStrength());
-			result.setFrame(targetPermission.getFrame());
-		}
-		ability.combine(result);
+		return result;
 	}
 
 	/**
 	 * on se retreint aux cases contenant l'acteur et la cible, et on teste 
 	 * chaque sprite.
 	 */
-	public void combineThirdModulation(SpecificAction specificAction, ActionAbility ability)
-	{	Sprite actor = specificAction.getActor();
-		Sprite target = specificAction.getTarget();
+	public ActionAbility combineThirdModulation(SpecificAction action, ActionAbility ability)
+	{	ActionAbility result = ability;
+		Sprite actor = action.getActor();
+		Sprite target = action.getTarget();
+		if(result.isActive())
+		{	// list of the involved sprites
+			ArrayList<Sprite> sprites = new ArrayList<Sprite>();
+			Tile tileA = actor.getTile();
+			if(tileA!=null)
+			{	for(Sprite s: tileA.getSprites())
+				{	if(s!=target && s!=actor)
+						sprites.add(s);					
+				}
+			}
+			if(target!=null)
+			{	Tile tileT = target.getTile();
+				if(tileT!=null)
+				{	for(Sprite s: tileT.getSprites())
+					{	if(!sprites.contains(s) && s!=target && s!=actor)
+							sprites.add(s);					
+					}
+				}
+			}
+			// check each one of them
+			Iterator<Sprite> i = sprites.iterator();
+			while(i.hasNext() && result.isActive())
+			{	Sprite tempSprite = i.next();
+				ThirdModulation thirdModulation = tempSprite.getThirdModulation(action);
+				if(thirdModulation==null)
+					result = thirdModulation.modulate(result); 		
+			}
+		}
+		return result;
+/*
 		// intransitive action
 		if(target==null)
 		{	Tile place = actor.getTile();
@@ -169,12 +207,13 @@ public class ModulationManager
 			if(tileT!=null && tileT!=tileA && ability.isActive())
 				combineTileModulation(specificAction,ability,target.getTile());
 		}
+*/		
 	}
 
 	/**
 	 * calcule les permissions third au niveau d'une case donnée
 	 */
-	public void combineTileModulation(SpecificAction specificAction, ActionAbility ability, Tile tile)
+/*	public void combineTileModulation(SpecificAction specificAction, ActionAbility ability, Tile tile)
 	{	GeneralAction action = specificAction.getGeneralAction();
 		ArrayList<Sprite> sprites = tile.getSprites();
 		Iterator<Sprite> i = sprites.iterator();
@@ -195,13 +234,25 @@ public class ModulationManager
 			}
 		}
 	}
+*/
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	
 	public StateAbility computeAbility(String name)
 	{	StateAbility result = new StateAbility(name,getLevel());
 		// capacity of the actor
 		StateAbility capacityAbility = computeCapacity(name);
 		result = (StateAbility)capacityAbility.copy();
-		// modification du to the environement
+		// modification due to the environement
 		if(result.isActive())
 			combineStateModulation(name,result);
 		return result;
@@ -233,34 +284,43 @@ public class ModulationManager
 		}
 	}
 	
-	public void updateAbilities()
+	/////////////////////////////////////////////////////////////////
+	// MODULATION ABILITIES		/////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	/** list of state abilities corresponding to state modulations, to be used by the ability manager */
+	private ArrayList<AbstractAbility> stateAbilities;
+
+	public void updateStateAbilities()
 	{	
 /*		
 if(sprite instanceof Item && sprite.getCurrentGesture()!=null && sprite.getCurrentGesture().equals("burning"))
 	System.out.println();
 */		
 		ArrayList<StateModulation> modulations = currentGesture.getStateModulations();
-		modulationAbilities.clear();
+		stateAbilities.clear();
 		Iterator<StateModulation> i = modulations.iterator();
 		while(i.hasNext())
 		{	StateModulation temp = i.next();
 			StateAbility ab = new StateAbility(temp.getName(),getLevel());
 			ab.setFrame(temp.getFrame());
 			ab.setStrength(temp.getStrength());
-			modulationAbilities.add(ab);
+			stateAbilities.add(ab);
 		}
 	}
-	public ArrayList<AbstractAbility> getModulationAbilities()
-	{	return modulationAbilities;		
+	public ArrayList<AbstractAbility> getModulationStateAbilities()
+	{	return stateAbilities;		
 	}
 
+	/////////////////////////////////////////////////////////////////
+	// FINISHED				/////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
 	private boolean finished = false;
 	
 	public void finish()
 	{	if(!finished)
 		{	finished = true;
 			// modulation abilities
-			{	Iterator<AbstractAbility> it = modulationAbilities.iterator();
+			{	Iterator<AbstractAbility> it = stateAbilities.iterator();
 				while(it.hasNext())
 				{	AbstractAbility temp = it.next();
 					temp.finish();

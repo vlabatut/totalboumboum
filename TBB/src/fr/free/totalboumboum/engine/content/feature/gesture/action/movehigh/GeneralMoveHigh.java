@@ -215,7 +215,7 @@ public class GeneralMoveHigh extends GeneralAction
 	// FINISHED			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	@Override
-	protected void finish()
+	public void finish()
 	{	if(!finished)
 		{	super.finish();
 		}

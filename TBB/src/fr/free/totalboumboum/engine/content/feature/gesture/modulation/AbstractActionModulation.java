@@ -88,11 +88,12 @@ public abstract class AbstractActionModulation extends AbstractModulation
 		return result;
 	}
 	
-	public boolean isAllowingAction(SpecificAction specificAction)
+	public boolean isConcerningAction(SpecificAction specificAction)
 	{	boolean result;
 		// action
 		result = action.subsume(specificAction);
 		// actor restrictions
+		if(result)
 		{	Sprite actor = specificAction.getActor();
 			Iterator<AbstractAbility> i = actorRestrictions.iterator();
 			while(i.hasNext() && result)
@@ -105,6 +106,7 @@ public abstract class AbstractActionModulation extends AbstractModulation
 			}
 		}
 		// target restrictions
+		if(result)
 		{	Sprite target = specificAction.getTarget();
 			Iterator<AbstractAbility> i = targetRestrictions.iterator();
 			while(i.hasNext() && result)

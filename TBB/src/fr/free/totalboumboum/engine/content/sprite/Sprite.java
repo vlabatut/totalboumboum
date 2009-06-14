@@ -676,7 +676,7 @@ public abstract class Sprite
 	}
 	
 	public ArrayList<AbstractAbility> getModulationAbilities()
-	{	return modulationManager.getModulationAbilities();	
+	{	return modulationManager.getModulationStateAbilities();	
 	}
 	
 	/////////////////////////////////////////////////////////////////

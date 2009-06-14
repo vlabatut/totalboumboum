@@ -21,8 +21,15 @@ package fr.free.totalboumboum.engine.content.feature.gesture.action;
  * 
  */
 
+import java.util.ArrayList;
+import java.util.Iterator;
+
+import fr.free.totalboumboum.engine.container.tile.Tile;
 import fr.free.totalboumboum.engine.content.feature.Direction;
 import fr.free.totalboumboum.engine.content.feature.ability.ActionAbility;
+import fr.free.totalboumboum.engine.content.feature.gesture.modulation.ActorModulation;
+import fr.free.totalboumboum.engine.content.feature.gesture.modulation.TargetModulation;
+import fr.free.totalboumboum.engine.content.feature.gesture.modulation.ThirdModulation;
 import fr.free.totalboumboum.engine.content.sprite.Sprite;
 
 public abstract class SpecificAction
@@ -153,6 +160,67 @@ public abstract class SpecificAction
 	{	return target;
 	}
 
+	/////////////////////////////////////////////////////////////////
+	// MODULATION		/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	/**
+	 * process the total ability for this action, considering:
+	 * 	- actor original ability
+	 * 	- actor modulation (depending on its current gesture)
+	 * 	- target modulation (same thing, and only if the target exists)
+	 * 	- environment modulation (considering all sprites in the actor and target tiles) 
+	 */
+/*	public ActionAbility computeAbility()
+	{	// actor original ability 
+		ActionAbility result = actor.getAbility(this); //TODO écrire getAbility(action), les autres sont-ils utiles?
+		result = (ActionAbility)result.copy();
+		
+		// actor modulation
+		if(result.isActive())
+		{	ActorModulation actorModulation = actor.getActorModulation(this);
+			if(actorModulation!=null) //TODO peut être que c'est plus simple de renvoyer systmétiquement une modulation, mais avec une puissance de 0?
+				result = actorModulation.modulate(result); //TODO écrire cette méthode aussi, qui renvoie une nouvelle ability		
+		}
+		
+		// target modulation (if there's one!)
+		if(result.isActive() && target!=null)//TODO quand on cherche une modulation pour un sprite donné, ça dépend de son gesture courant. si pas de gesture, alors il renvoie null
+		{	TargetModulation targetModulation = target.getTargetModulation(this);
+			if(targetModulation!=null)
+				result = targetModulation.modulate(result); 		
+		}
+		
+		// environement modulation
+		if(result.isActive())
+		{	// list of the involved sprites
+			ArrayList<Sprite> sprites = new ArrayList<Sprite>();
+			Tile tileA = actor.getTile();
+			if(tileA!=null)
+			{	for(Sprite s: tileA.getSprites())
+				{	if(s!=target && s!=actor)
+						sprites.add(s);					
+				}
+			}
+			if(target!=null)
+			{	Tile tileT = target.getTile();
+				if(tileT!=null)
+				{	for(Sprite s: tileT.getSprites())
+					{	if(!sprites.contains(s) && s!=target && s!=actor)
+							sprites.add(s);					
+					}
+				}
+			}
+			// check each one of them
+			Iterator<Sprite> i = sprites.iterator();
+			while(i.hasNext() && result.isActive())
+			{	Sprite tempSprite = i.next();
+				ThirdModulation thirdModulation = tempSprite.getThirdModulation(this);
+				if(thirdModulation==null)
+					result = thirdModulation.modulate(result); 		
+			}
+		}
+		return result;
+	}
+*/
 	/////////////////////////////////////////////////////////////////
 	// COMPARISON		/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
