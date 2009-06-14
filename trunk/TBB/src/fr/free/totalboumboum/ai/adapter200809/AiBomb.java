@@ -198,7 +198,7 @@ public class AiBomb extends AiSprite<Bomb>
 	 */
 	private void initFuse()
 	{	// theoretic delay before explosion 
-		{	StateAbility ability = getSprite().computeAbility(StateAbility.BOMB_TRIGGER_TIMER);
+		{	StateAbility ability = getSprite().modulateAction(StateAbility.BOMB_TRIGGER_TIMER);
 			normalDuration = (long)ability.getStrength();		
 		}
 	}

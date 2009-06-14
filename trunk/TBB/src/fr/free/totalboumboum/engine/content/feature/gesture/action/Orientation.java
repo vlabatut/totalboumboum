@@ -1,7 +1,7 @@
 package fr.free.totalboumboum.engine.content.feature.gesture.action;
 
 import fr.free.totalboumboum.engine.content.feature.Direction;
-import fr.free.totalboumboum.engine.content.sprite.Sprite;
+import fr.free.totalboumboum.engine.content.sprite.getModulationStateAbilities;
 
 /*
  * Total Boum Boum
@@ -46,7 +46,7 @@ public enum Orientation
 	 * @param target	sprite undergoing the action
 	 * @return	orientation of the action
 	 */
-	public static Orientation getOrientation(Sprite actor, Sprite target)
+	public static Orientation getOrientation(getModulationStateAbilities actor, getModulationStateAbilities target)
 	{	Orientation result;
 		Direction facingDir = actor.getCurrentFacingDirection();
 		// no orientation

@@ -27,7 +27,7 @@ import fr.free.totalboumboum.engine.content.feature.Direction;
 import fr.free.totalboumboum.engine.content.feature.gesture.action.AbstractAction;
 import fr.free.totalboumboum.engine.content.feature.gesture.action.SpecificAction;
 import fr.free.totalboumboum.engine.content.feature.gesture.modulation.ThirdModulation;
-import fr.free.totalboumboum.engine.content.sprite.Sprite;
+import fr.free.totalboumboum.engine.content.sprite.getModulationStateAbilities;
 import fr.free.totalboumboum.engine.loop.Loop;
 import fr.free.totalboumboum.tools.CalculusTools;
 
@@ -36,7 +36,7 @@ public class PotentialObstacle
 	private Level level;
 	double tileDimension;
 
-	public PotentialObstacle(Sprite sprite, MoveZone moveZone)
+	public PotentialObstacle(getModulationStateAbilities sprite, MoveZone moveZone)
 	{	this.sprite = sprite;
 		this.moveZone = moveZone;
 		level = moveZone.getLevel();
@@ -47,9 +47,9 @@ public class PotentialObstacle
 	/////////////////////////////////////////////////////////////////
 	// SPRITE			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	private Sprite sprite;
+	private getModulationStateAbilities sprite;
 	
-	public Sprite getSprite()
+	public getModulationStateAbilities getSprite()
 	{	return sprite;
 	}
 	
@@ -259,7 +259,7 @@ public class PotentialObstacle
 	public boolean isActualObstacle()
 	{	boolean result;
 		Direction usedDirection = moveZone.getUsedDirection();
-		Sprite source = moveZone.getSourceSprite();
+		getModulationStateAbilities source = moveZone.getSourceSprite();
 		double distX = level.getHorizontalDistance(sprite.getCurrentPosX(),moveZone.getCurrentX());
 		double distY = level.getVerticalDistance(sprite.getCurrentPosY(),moveZone.getCurrentY());
 		Loop loop = level.getLoop();

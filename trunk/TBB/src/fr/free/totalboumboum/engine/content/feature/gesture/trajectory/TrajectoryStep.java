@@ -22,7 +22,7 @@ package fr.free.totalboumboum.engine.content.feature.gesture.trajectory;
  */
 
 import fr.free.totalboumboum.engine.content.feature.ImageShift;
-import fr.free.totalboumboum.engine.content.sprite.Sprite;
+import fr.free.totalboumboum.engine.content.sprite.getModulationStateAbilities;
 
 public class TrajectoryStep
 {
@@ -54,7 +54,7 @@ public class TrajectoryStep
 	{	yShift = shift;
 	}
 
-	public double getZShift(Sprite boundToSprite)
+	public double getZShift(getModulationStateAbilities boundToSprite)
 	{	double result = zShift;
 		if(boundToSprite!=null)
 			result = result + boundZShift.getValue(boundToSprite);

@@ -31,7 +31,7 @@ import fr.free.totalboumboum.engine.content.feature.gesture.action.Orientation;
 import fr.free.totalboumboum.engine.content.feature.gesture.action.SpecificAction;
 import fr.free.totalboumboum.engine.content.feature.gesture.action.TilePosition;
 import fr.free.totalboumboum.engine.content.feature.gesture.action.cry.GeneralCry;
-import fr.free.totalboumboum.engine.content.sprite.Sprite;
+import fr.free.totalboumboum.engine.content.sprite.getModulationStateAbilities;
 import fr.free.totalboumboum.engine.content.sprite.bomb.Bomb;
 import fr.free.totalboumboum.engine.content.sprite.hero.Hero;
 

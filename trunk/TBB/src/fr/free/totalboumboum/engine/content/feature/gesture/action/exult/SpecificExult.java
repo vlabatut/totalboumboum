@@ -24,7 +24,7 @@ package fr.free.totalboumboum.engine.content.feature.gesture.action.exult;
 import fr.free.totalboumboum.engine.content.feature.gesture.action.ActionName;
 import fr.free.totalboumboum.engine.content.feature.gesture.action.IncompatibleParameterException;
 import fr.free.totalboumboum.engine.content.feature.gesture.action.SpecificAction;
-import fr.free.totalboumboum.engine.content.sprite.Sprite;
+import fr.free.totalboumboum.engine.content.sprite.getModulationStateAbilities;
 
 /** 
  * celebrating a victory at the end of a round. 
@@ -40,7 +40,7 @@ import fr.free.totalboumboum.engine.content.sprite.Sprite;
  */
 public abstract class SpecificExult extends SpecificAction
 {
-	public SpecificExult(Sprite actor, Sprite target) throws IncompatibleParameterException
+	public SpecificExult(getModulationStateAbilities actor, getModulationStateAbilities target) throws IncompatibleParameterException
 	{	super(ActionName.EXULT,actor,target);
 	}
 

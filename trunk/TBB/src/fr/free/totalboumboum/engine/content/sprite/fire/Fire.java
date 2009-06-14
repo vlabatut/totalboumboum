@@ -32,9 +32,9 @@ import fr.free.totalboumboum.engine.content.feature.event.ActionEvent;
 import fr.free.totalboumboum.engine.content.feature.gesture.action.AbstractAction;
 import fr.free.totalboumboum.engine.content.feature.gesture.action.Role;
 import fr.free.totalboumboum.engine.content.feature.gesture.action.SpecificAction;
-import fr.free.totalboumboum.engine.content.sprite.Sprite;
+import fr.free.totalboumboum.engine.content.sprite.getModulationStateAbilities;
 
-public class Fire extends Sprite
+public class Fire extends getModulationStateAbilities
 {	
 	private String firesetName;
 	
@@ -50,15 +50,15 @@ public class Fire extends Sprite
 	}
 	
 	public void consumeTile(Tile tile)
-	{	ArrayList<Sprite> sprites = tile.getSprites();
-		Iterator<Sprite> i = sprites.iterator();
+	{	ArrayList<getModulationStateAbilities> sprites = tile.getSprites();
+		Iterator<getModulationStateAbilities> i = sprites.iterator();
 		while(i.hasNext())
-		{	Sprite ts = i.next();
+		{	getModulationStateAbilities ts = i.next();
 			consumeSprite(ts);
 		}	
 	}
 	
-	public void consumeSprite(Sprite sprite)
+	public void consumeSprite(getModulationStateAbilities sprite)
 	{	SpecificAction specificAction = new SpecificAction(AbstractAction.CONSUME,this,sprite,Direction.NONE);
 		ActionAbility ability = computeAbility(specificAction);
 		if(ability.isActive())

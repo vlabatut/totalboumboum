@@ -26,7 +26,7 @@ import java.awt.event.KeyListener;
 import java.util.HashMap;
 
 import fr.free.totalboumboum.configuration.controls.ControlSettings;
-import fr.free.totalboumboum.engine.content.sprite.Sprite;
+import fr.free.totalboumboum.engine.content.sprite.getModulationStateAbilities;
 import fr.free.totalboumboum.engine.loop.Loop;
 import fr.free.totalboumboum.engine.player.Player;
 
@@ -43,7 +43,7 @@ public class PlayerControl implements KeyListener
 	{	return player.getLoop();
 	}
 
-	public Sprite getSprite()
+	public getModulationStateAbilities getSprite()
 	{	return player.getSprite();
 	}
 	public ControlSettings getControlSettings()

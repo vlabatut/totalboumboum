@@ -27,13 +27,13 @@ import java.util.LinkedList;
 
 import fr.free.totalboumboum.configuration.controls.ControlSettings;
 import fr.free.totalboumboum.engine.content.feature.event.ControlEvent;
-import fr.free.totalboumboum.engine.content.sprite.Sprite;
+import fr.free.totalboumboum.engine.content.sprite.getModulationStateAbilities;
 import fr.free.totalboumboum.engine.control.ControlCode;
 import fr.free.totalboumboum.engine.loop.Loop;
 
 public class ControlManager
 {	/** managed sprite  */
-	protected Sprite sprite;
+	protected getModulationStateAbilities sprite;
 	/** controls waiting to be processed */
 	protected LinkedList<ControlCode> controlCodes;
 	/** events waiting to be transmitted */
@@ -46,7 +46,7 @@ public class ControlManager
 	
 	protected int compte=0;
 	
-	public ControlManager(Sprite sprite)
+	public ControlManager(getModulationStateAbilities sprite)
 	{	this.sprite = sprite;
 		controlCodes = new LinkedList<ControlCode>();
 		controlEvents = new LinkedList<ControlEvent>();
@@ -57,10 +57,10 @@ public class ControlManager
 	{	this.controlSettings = controlSettings;
 	}
 	
-	public Sprite getSprite()
+	public getModulationStateAbilities getSprite()
 	{	return sprite;
 	}
-	public void setSprite(Sprite sprite)
+	public void setSprite(getModulationStateAbilities sprite)
 	{	this.sprite = sprite;
 	}
 

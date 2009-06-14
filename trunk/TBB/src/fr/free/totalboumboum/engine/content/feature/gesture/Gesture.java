@@ -27,6 +27,7 @@ import java.util.Iterator;
 import java.util.Map.Entry;
 
 import fr.free.totalboumboum.engine.content.feature.Direction;
+import fr.free.totalboumboum.engine.content.feature.ability.StateAbilityName;
 import fr.free.totalboumboum.engine.content.feature.gesture.action.ActionName;
 import fr.free.totalboumboum.engine.content.feature.gesture.action.SpecificAction;
 import fr.free.totalboumboum.engine.content.feature.gesture.anime.AnimeDirection;
@@ -126,13 +127,17 @@ public class Gesture
 //		modulation.setGestureName(name);
 	}
 	
-	public StateModulation getStateModulation(StateModulation modulation)
+	public StateModulation getStateModulation(StateAbilityName name)
 	{	StateModulation result = null;
-		int index = stateModulations.indexOf(modulation);
-		if(index>=0)
-			result = stateModulations.get(index);
+		Iterator<StateModulation> i = stateModulations.iterator();
+		while(i.hasNext() && result==null)
+		{	StateModulation modulation = i.next();
+			if(modulation.getName()==name) //NOTE moduler directement ? ou renommer en subsume?
+				result = modulation;
+		}
 		return result;
 	}
+	
 	public ArrayList<StateModulation> getStateModulations()
 	{	return stateModulations;	
 	}

@@ -30,6 +30,7 @@ import fr.free.totalboumboum.engine.content.feature.Direction;
 import fr.free.totalboumboum.engine.content.feature.ability.AbstractAbility;
 import fr.free.totalboumboum.engine.content.feature.ability.ActionAbility;
 import fr.free.totalboumboum.engine.content.feature.ability.StateAbility;
+import fr.free.totalboumboum.engine.content.feature.ability.StateAbilityName;
 import fr.free.totalboumboum.engine.content.feature.gesture.Gesture;
 import fr.free.totalboumboum.engine.content.feature.gesture.GestureName;
 import fr.free.totalboumboum.engine.content.feature.gesture.action.GeneralAction;
@@ -38,11 +39,11 @@ import fr.free.totalboumboum.engine.content.feature.gesture.modulation.ActorModu
 import fr.free.totalboumboum.engine.content.feature.gesture.modulation.StateModulation;
 import fr.free.totalboumboum.engine.content.feature.gesture.modulation.TargetModulation;
 import fr.free.totalboumboum.engine.content.feature.gesture.modulation.ThirdModulation;
-import fr.free.totalboumboum.engine.content.sprite.Sprite;
+import fr.free.totalboumboum.engine.content.sprite.getModulationStateAbilities;
 
 public class ModulationManager
 {	
-	public ModulationManager(Sprite sprite)
+	public ModulationManager(getModulationStateAbilities sprite)
 	{	this.sprite = sprite;
 		currentGesture = null;
 		currentDirection = Direction.NONE;
@@ -52,7 +53,7 @@ public class ModulationManager
 	/////////////////////////////////////////////////////////////////
 	// SPRITE				/////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	private Sprite sprite;
+	private getModulationStateAbilities sprite;
 	
 	public Level getLevel()
 	{	return sprite.getLevel();
@@ -75,8 +76,8 @@ public class ModulationManager
 	/////////////////////////////////////////////////////////////////
 	// STATE MODULATIONS	/////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	public StateModulation getStateModulation(StateModulation modulation)
-	{	StateModulation result = currentGesture.getStateModulation(modulation);
+	public StateModulation getStateModulation(StateAbilityName name)
+	{	StateModulation result = currentGesture.getStateModulation(name);
 		return result;
 	}
 
@@ -115,13 +116,13 @@ public class ModulationManager
 	 * 	- target modulation (same thing, and only if the target exists)
 	 * 	- environment modulation (considering all sprites in the actor and target tiles) 
 	 */
-	public ActionAbility computeAbility(SpecificAction action)
-	{	Sprite target = action.getTarget();
+	public ActionAbility modulateAction(SpecificAction action)
+	{	getModulationStateAbilities target = action.getTarget();
 		
 		// actor original ability 
-		Sprite actor = action.getActor();
+		getModulationStateAbilities actor = action.getActor();
 		ActionAbility result = actor.getAbility(action); //TODO écrire getAbility(action), les autres sont-ils utiles?
-		result = (ActionAbility)result.copy(); //TODO is this copy really needed?
+//		result = (ActionAbility)result.copy(); //TODO is this copy really needed?
 		
 		// actor modulation
 		result = combineActorModulation(action,result);		
@@ -132,9 +133,9 @@ public class ModulationManager
 		return result;
 	}
 	
-	public ActionAbility combineActorModulation(SpecificAction action, ActionAbility ability)
+	private ActionAbility combineActorModulation(SpecificAction action, ActionAbility ability)
 	{	ActionAbility result = ability;
-		Sprite actor = action.getActor();
+		getModulationStateAbilities actor = action.getActor();
 		if(result.isActive())
 		{	ActorModulation actorModulation = actor.getActorModulation(action);
 			if(actorModulation!=null) //TODO peut être que c'est plus simple de renvoyer systmétiquement une modulation, mais avec une puissance de 0?
@@ -143,9 +144,9 @@ public class ModulationManager
 		return result;
 	}
 
-	public ActionAbility combineTargetModulation(SpecificAction action, ActionAbility ability)
+	private ActionAbility combineTargetModulation(SpecificAction action, ActionAbility ability)
 	{	ActionAbility result = ability;
-		Sprite target = action.getTarget();
+		getModulationStateAbilities target = action.getTarget();
 		if(result.isActive() && target!=null)//TODO quand on cherche une modulation pour un sprite donné, ça dépend de son gesture courant. si pas de gesture, alors il renvoie null
 		{	TargetModulation targetModulation = target.getTargetModulation(action);
 			if(targetModulation!=null)
@@ -158,16 +159,16 @@ public class ModulationManager
 	 * on se retreint aux cases contenant l'acteur et la cible, et on teste 
 	 * chaque sprite.
 	 */
-	public ActionAbility combineThirdModulation(SpecificAction action, ActionAbility ability)
+	private ActionAbility combineThirdModulation(SpecificAction action, ActionAbility ability)
 	{	ActionAbility result = ability;
-		Sprite actor = action.getActor();
-		Sprite target = action.getTarget();
+		getModulationStateAbilities actor = action.getActor();
+		getModulationStateAbilities target = action.getTarget();
 		if(result.isActive())
 		{	// list of the involved sprites
-			ArrayList<Sprite> sprites = new ArrayList<Sprite>();
+			ArrayList<getModulationStateAbilities> sprites = new ArrayList<getModulationStateAbilities>();
 			Tile tileA = actor.getTile();
 			if(tileA!=null)
-			{	for(Sprite s: tileA.getSprites())
+			{	for(getModulationStateAbilities s: tileA.getSprites())
 				{	if(s!=target && s!=actor)
 						sprites.add(s);					
 				}
@@ -175,16 +176,16 @@ public class ModulationManager
 			if(target!=null)
 			{	Tile tileT = target.getTile();
 				if(tileT!=null)
-				{	for(Sprite s: tileT.getSprites())
+				{	for(getModulationStateAbilities s: tileT.getSprites())
 					{	if(!sprites.contains(s) && s!=target && s!=actor)
 							sprites.add(s);					
 					}
 				}
 			}
 			// check each one of them
-			Iterator<Sprite> i = sprites.iterator();
+			Iterator<getModulationStateAbilities> i = sprites.iterator();
 			while(i.hasNext() && result.isActive())
-			{	Sprite tempSprite = i.next();
+			{	getModulationStateAbilities tempSprite = i.next();
 				ThirdModulation thirdModulation = tempSprite.getThirdModulation(action);
 				if(thirdModulation==null)
 					result = thirdModulation.modulate(result); 		
@@ -236,34 +237,38 @@ public class ModulationManager
 	}
 */
 	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	public StateAbility computeAbility(String name)
-	{	StateAbility result = new StateAbility(name,getLevel());
-		// capacity of the actor
-		StateAbility capacityAbility = computeCapacity(name);
-		result = (StateAbility)capacityAbility.copy();
-		// modification due to the environement
+	public StateAbility modulateStateAbility(StateAbilityName name)
+	{	// original ability
+		StateAbility result = sprite.getAbility(name);
+		// environment modulation
 		if(result.isActive())
-			combineStateModulation(name,result);
+		{	// list of the involved sprites
+			ArrayList<getModulationStateAbilities> sprites = new ArrayList<getModulationStateAbilities>();
+			Tile tile = sprite.getTile();
+			if(tile!=null)
+			{	for(getModulationStateAbilities s: tile.getSprites())
+				{	if(s!=sprite)
+						sprites.add(s);					
+				}
+			}
+			// check each one of them
+			Iterator<getModulationStateAbilities> i = sprites.iterator();
+			while(i.hasNext() && result.isActive())
+			{	getModulationStateAbilities tempSprite = i.next();
+				StateModulation stateModulation = tempSprite.getStateModulation(name);
+				if(stateModulation==null)
+					result = stateModulation.modulate(result); 		
+			}
+		}
 		return result;
 	}
-	
+/*	
 	public StateAbility computeCapacity(String name)
 	{	StateAbility result = sprite.getAbility(name);
 		return result;
 	}
-
-	public void combineStateModulation(String name, StateAbility ability)
+*/
+/*	private void combineStateModulation(String name, StateAbility ability)
 	{	Tile place = sprite.getTile();
 		if(place!=null)
 		{	ArrayList<Sprite> sprites = place.getSprites();
@@ -283,7 +288,7 @@ public class ModulationManager
 			}
 		}
 	}
-	
+*/	
 	/////////////////////////////////////////////////////////////////
 	// MODULATION ABILITIES		/////////////////////////////////////
 	/////////////////////////////////////////////////////////////////

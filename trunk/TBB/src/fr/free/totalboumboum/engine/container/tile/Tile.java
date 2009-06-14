@@ -36,7 +36,7 @@ import fr.free.totalboumboum.engine.content.feature.Direction;
 import fr.free.totalboumboum.engine.content.feature.ability.AbstractAbility;
 import fr.free.totalboumboum.engine.content.feature.ability.StateAbility;
 import fr.free.totalboumboum.engine.content.feature.event.AbstractEvent;
-import fr.free.totalboumboum.engine.content.sprite.Sprite;
+import fr.free.totalboumboum.engine.content.sprite.getModulationStateAbilities;
 import fr.free.totalboumboum.engine.content.sprite.block.Block;
 import fr.free.totalboumboum.engine.content.sprite.bomb.Bomb;
 import fr.free.totalboumboum.engine.content.sprite.fire.Fire;
@@ -178,7 +178,7 @@ result = level.getTile(x, y)==this;
 	/**
 	 * dessine un sprite sans son ombre
 	 */
-	private void drawSprite(Graphics g, Sprite s)
+	private void drawSprite(Graphics g, getModulationStateAbilities s)
 	{	BufferedImage image = s.getCurrentImage();
 		if(image!=null)
 		{	double pX = s.getCurrentPosX()+s.getXShift();
@@ -273,9 +273,9 @@ result = level.getTile(x, y)==this;
 		}
 		// bound sprites
 		if(s.hasBoundSprite())
-		{	Iterator<Sprite> i = s.getBoundSprites();
+		{	Iterator<getModulationStateAbilities> i = s.getBoundSprites();
 			while(i.hasNext())
-			{	Sprite temp = i.next();
+			{	getModulationStateAbilities temp = i.next();
 				drawSprite(g,temp);
 			}			
 		}
@@ -365,7 +365,7 @@ result = level.getTile(x, y)==this;
 	/**
 	 * trace l'ombre d'un sprite (et pas le sprite)
 	 */
-	private void drawShadow(Graphics g, Sprite s)
+	private void drawShadow(Graphics g, getModulationStateAbilities s)
 	{	BufferedImage image = s.getShadow();
 		if(image!=null)
 		{	double pX = s.getCurrentPosX()+s.getShadowXShift();
@@ -412,7 +412,7 @@ result = level.getTile(x, y)==this;
 		}
 	}
 	
-	public void addSprite(Sprite sprite)
+	public void addSprite(getModulationStateAbilities sprite)
 	{	if(sprite instanceof Block)
 			setBlock((Block) sprite);
 		else if(sprite instanceof Bomb)
@@ -494,8 +494,8 @@ result = level.getTile(x, y)==this;
 	}
 	
 
-	public ArrayList<Sprite> getSprites()
-	{	ArrayList<Sprite> result = new ArrayList<Sprite>();
+	public ArrayList<getModulationStateAbilities> getSprites()
+	{	ArrayList<getModulationStateAbilities> result = new ArrayList<getModulationStateAbilities>();
 		// floor
 		result.add(floor);
 		// heroes
@@ -525,10 +525,10 @@ result = level.getTile(x, y)==this;
 	}
 	
 	public void spreadEvent(AbstractEvent event)
-	{	ArrayList<Sprite> sprites = getSprites();
-		Iterator<Sprite> i = sprites.iterator();
+	{	ArrayList<getModulationStateAbilities> sprites = getSprites();
+		Iterator<getModulationStateAbilities> i = sprites.iterator();
 		while(i.hasNext())
-		{	Sprite sprt = i.next();
+		{	getModulationStateAbilities sprt = i.next();
 			sprt.processEvent(event);
 		}
 	}

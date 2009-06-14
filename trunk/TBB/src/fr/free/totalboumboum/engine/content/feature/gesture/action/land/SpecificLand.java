@@ -24,7 +24,7 @@ package fr.free.totalboumboum.engine.content.feature.gesture.action.land;
 import fr.free.totalboumboum.engine.content.feature.gesture.action.ActionName;
 import fr.free.totalboumboum.engine.content.feature.gesture.action.IncompatibleParameterException;
 import fr.free.totalboumboum.engine.content.feature.gesture.action.SpecificAction;
-import fr.free.totalboumboum.engine.content.sprite.Sprite;
+import fr.free.totalboumboum.engine.content.sprite.getModulationStateAbilities;
 
 /** 
  * finishing an aerial move and landing on the floor.
@@ -40,7 +40,7 @@ import fr.free.totalboumboum.engine.content.sprite.Sprite;
  */
 public abstract class SpecificLand extends SpecificAction
 {
-	public SpecificLand(Sprite actor, Sprite target) throws IncompatibleParameterException
+	public SpecificLand(getModulationStateAbilities actor, getModulationStateAbilities target) throws IncompatibleParameterException
 	{	super(ActionName.LAND,actor,target);
 	}
 	

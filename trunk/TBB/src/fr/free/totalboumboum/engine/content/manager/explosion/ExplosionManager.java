@@ -28,15 +28,15 @@ import fr.free.totalboumboum.engine.content.feature.explosion.Explosion;
 import fr.free.totalboumboum.engine.content.feature.gesture.GestureName;
 import fr.free.totalboumboum.engine.content.feature.gesture.action.AbstractAction;
 import fr.free.totalboumboum.engine.content.feature.gesture.action.SpecificAction;
-import fr.free.totalboumboum.engine.content.sprite.Sprite;
+import fr.free.totalboumboum.engine.content.sprite.getModulationStateAbilities;
 import fr.free.totalboumboum.engine.content.sprite.fire.Fire;
 
 public class ExplosionManager
 {	private Explosion explosion;
-	private Sprite sprite;
+	private getModulationStateAbilities sprite;
 	protected int flameRange;
 	
-	public ExplosionManager(Sprite sprite)
+	public ExplosionManager(getModulationStateAbilities sprite)
 	{	this.sprite = sprite;
 		explosion = null;
 	}
@@ -52,7 +52,7 @@ public class ExplosionManager
 	{	this.explosion = explosion;	
 	}
 	
-	public Sprite getSprite()
+	public getModulationStateAbilities getSprite()
 	{	return sprite;
 	}
 	
@@ -65,7 +65,7 @@ public class ExplosionManager
 			fire = explosion.makeFire("outside");
 		else
 			fire = explosion.makeFire("inside");
-		Sprite owner;
+		getModulationStateAbilities owner;
 		if(sprite.getOwner()==null)
 			owner = sprite;
 		else
@@ -98,7 +98,7 @@ public class ExplosionManager
 				fire = explosion.makeFire("outside");
 			else
 				fire = explosion.makeFire("inside");
-			Sprite owner;
+			getModulationStateAbilities owner;
 			if(sprite.getOwner()==null)
 				owner = sprite;
 			else

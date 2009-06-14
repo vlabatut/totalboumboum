@@ -35,6 +35,7 @@ import fr.free.totalboumboum.engine.content.feature.Direction;
 import fr.free.totalboumboum.engine.content.feature.ability.AbstractAbility;
 import fr.free.totalboumboum.engine.content.feature.ability.ActionAbility;
 import fr.free.totalboumboum.engine.content.feature.ability.StateAbility;
+import fr.free.totalboumboum.engine.content.feature.ability.StateAbilityName;
 import fr.free.totalboumboum.engine.content.feature.event.AbstractEvent;
 import fr.free.totalboumboum.engine.content.feature.event.ActionEvent;
 import fr.free.totalboumboum.engine.content.feature.event.ControlEvent;
@@ -71,12 +72,12 @@ import fr.free.totalboumboum.game.statistics.StatisticEvent;
  * softwall, hero, bomb, item...
  */
 
-public abstract class Sprite
+public abstract class getModulationStateAbilities
 {	
-	public Sprite(Level level)
+	public getModulationStateAbilities(Level level)
 	{	ended = false;
 		hiddenSprite = null;
-		boundSprites = new ArrayList<Sprite>();
+		boundSprites = new ArrayList<getModulationStateAbilities>();
 		toBeRemovedFromTile = false;
 		toBeRemovedFromSprite = null;
 		boundToSprite = null;
@@ -165,23 +166,23 @@ public abstract class Sprite
 	/////////////////////////////////////////////////////////////////
 	// OWNER			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	protected Sprite owner;
+	protected getModulationStateAbilities owner;
 	
-	public Sprite getOwner()
+	public getModulationStateAbilities getOwner()
 	{	return owner;
 		//NOTE à modifier pour recherche récursivement l'owner final (mais peut être est-ce déjà fait ailleurs)
 	}
 	
-	public void setOwner(Sprite owner)
+	public void setOwner(getModulationStateAbilities owner)
 	{	this.owner = owner;
 	}
 
 	/////////////////////////////////////////////////////////////////
 	// BOUND TO SPRITE	/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	protected Sprite boundToSprite;
+	protected getModulationStateAbilities boundToSprite;
 	
-	public Sprite getBoundToSprite()
+	public getModulationStateAbilities getBoundToSprite()
 	{	return boundToSprite;
 	}
 	
@@ -189,7 +190,7 @@ public abstract class Sprite
 	{	return boundToSprite!=null;
 	}
 	
-	public void setBoundToSprite(Sprite boundToSprite)
+	public void setBoundToSprite(getModulationStateAbilities boundToSprite)
 	{	if(!ended)
 		{	// traitement seulement si le nouveau boundToSprite lié est différent de l'ancien
 			if(this.boundToSprite!=boundToSprite)
@@ -215,21 +216,21 @@ public abstract class Sprite
 	/////////////////////////////////////////////////////////////////
 	// BOUND SPRITES	/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	protected ArrayList<Sprite> boundSprites;
+	protected ArrayList<getModulationStateAbilities> boundSprites;
 	
 	public boolean hasBoundSprite()
 	{	return boundSprites.size()>0;	
 	}
 	
-	public Iterator<Sprite> getBoundSprites()
+	public Iterator<getModulationStateAbilities> getBoundSprites()
 	{	return boundSprites.iterator();	
 	}
 	
-	public void addBoundSprite(Sprite boundSprite)
+	public void addBoundSprite(getModulationStateAbilities boundSprite)
 	{	boundSprites.add(boundSprite);		
 	}
 	
-	public void removeBoundSprite(Sprite boundSprite)
+	public void removeBoundSprite(getModulationStateAbilities boundSprite)
 	{	boundSprites.remove(boundSprite);		
 	}
 	
@@ -237,13 +238,13 @@ public abstract class Sprite
 	// HIDDEN			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	/** le sprite ne doit pas être mise à jour, mais il existe encore */
-	protected Sprite hiddenSprite;
+	protected getModulationStateAbilities hiddenSprite;
 	
-	public Sprite getHiddenSprite()
+	public getModulationStateAbilities getHiddenSprite()
 	{	return hiddenSprite;
 	}
 	
-	public void setHiddenSprite(Sprite hiddenSprite)
+	public void setHiddenSprite(getModulationStateAbilities hiddenSprite)
 	{	this.hiddenSprite = hiddenSprite;
 	}
 	
@@ -267,9 +268,9 @@ public abstract class Sprite
 			 * (raisons de synchro)
 			 */
 //System.out.println("sx,sy:"+getPositionX()+";"+getPositionY()+" - tx,ty:"+tile.getLine()+";"+tile.getCol());
-			Iterator<Sprite> i = boundSprites.iterator();
+			Iterator<getModulationStateAbilities> i = boundSprites.iterator();
 			while(i.hasNext())
-			{	Sprite temp = i.next();
+			{	getModulationStateAbilities temp = i.next();
 				temp.update();
 				if(temp.getToBeRemovedFromSprite()==this)
 				{	i.remove();
@@ -310,13 +311,13 @@ public abstract class Sprite
 	/////////////////////////////////////////////////////////////////
 	// REMOVE FROM SPRITE		/////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	protected Sprite toBeRemovedFromSprite;
+	protected getModulationStateAbilities toBeRemovedFromSprite;
 	
-	public void setToBeRemovedFromSprite(Sprite toBeRemovedFromSprite)
+	public void setToBeRemovedFromSprite(getModulationStateAbilities toBeRemovedFromSprite)
 	{	this.toBeRemovedFromSprite = toBeRemovedFromSprite;	
 	}
 	
-	public Sprite getToBeRemovedFromSprite()
+	public getModulationStateAbilities getToBeRemovedFromSprite()
 	{	return toBeRemovedFromSprite;	
 	}
 
@@ -558,7 +559,7 @@ public abstract class Sprite
 	}
 	
 	public void spreadEvent(AbstractEvent e)
-	{	Iterator<Sprite> i = boundSprites.iterator();
+	{	Iterator<getModulationStateAbilities> i = boundSprites.iterator();
 		while(i.hasNext())
 			i.next().processEvent(e);		
 	}
@@ -627,8 +628,8 @@ public abstract class Sprite
 	{	this.modulationManager = modulationManager;
 	}
 	
-	public StateModulation getStateModulation(StateModulation modulation)
-	{	return modulationManager.getStateModulation(modulation);
+	public StateModulation getStateModulation(StateAbilityName name)
+	{	return modulationManager.getStateModulation(name);
 	}
 	
 	public ActorModulation getActorModulation(SpecificAction action)
@@ -644,37 +645,37 @@ public abstract class Sprite
 	}
 	
 	public StateAbility computeAbility(String name)
-	{	return modulationManager.computeAbility(name);
+	{	return modulationManager.modulateAction(name);
 	}
 	
-	public ActionAbility computeAbility(SpecificAction action)
-	{	return modulationManager.computeAbility(action);
+	public ActionAbility modulateAction(SpecificAction action)
+	{	return modulationManager.modulateAction(action);
 	}
-	
+/*	
 	public ActionAbility computeCapacity(AbstractAction action)
 	{	return modulationManager.computeCapacity(action);
 	}
-	
-	public StateAbility computeCapacity(String name)
+*/	
+/*	public StateAbility computeCapacity(String name)
 	{	return modulationManager.computeCapacity(name);
 	}
-	
-	public void combineActorModulation(SpecificAction specificAction, ActionAbility ability)
+*/
+/*	public void combineActorModulation(SpecificAction specificAction, ActionAbility ability)
 	{	modulationManager.combineActorModulation(specificAction,ability);
 	}
-	
-	public void combineTargetModulation(SpecificAction specificAction, ActionAbility ability)
+*/	
+/*	public void combineTargetModulation(SpecificAction specificAction, ActionAbility ability)
 	{	modulationManager.combineTargetModulation(specificAction,ability);
 	}
-	
-	public void combineThirdModulation(SpecificAction specificAction, ActionAbility ability)
+*/	
+/*	public void combineThirdModulation(SpecificAction specificAction, ActionAbility ability)
 	{	modulationManager.combineThirdModulation(specificAction,ability);
 	}
-	
-	public void combineStateModulation(String name, StateAbility ability)
+*/	
+/*	public void combineStateModulation(String name, StateAbility ability)
 	{	modulationManager.combineStateModulation(name,ability);
 	}
-	
+*/	
 	public ArrayList<AbstractAbility> getModulationAbilities()
 	{	return modulationManager.getModulationStateAbilities();	
 	}
@@ -719,19 +720,19 @@ public abstract class Sprite
 	{	return trajectoryManager.getCurrentTime();
 	}
 	
-	public void addIntersectedSprite(Sprite intersectedSprite)
+	public void addIntersectedSprite(getModulationStateAbilities intersectedSprite)
 	{	trajectoryManager.addIntersectedSprite(intersectedSprite);
 	}
 	
-	public void removeIntersectedSprite(Sprite intersectedSprite)
+	public void removeIntersectedSprite(getModulationStateAbilities intersectedSprite)
 	{	trajectoryManager.removeIntersectedSprite(intersectedSprite);
 	}
 	
-	public void addCollidedSprite(Sprite collidedSprite)
+	public void addCollidedSprite(getModulationStateAbilities collidedSprite)
 	{	trajectoryManager.addCollidedSprite(collidedSprite);
 	}
 	
-	public void removeCollidedSprite(Sprite collidedSprite)
+	public void removeCollidedSprite(getModulationStateAbilities collidedSprite)
 	{	trajectoryManager.removeCollidedSprite(collidedSprite);
 	}
 	
@@ -739,11 +740,11 @@ public abstract class Sprite
 	{	return trajectoryManager.isColliding();
 	}
 	
-	public boolean isCollidingSprite(Sprite sprite)
+	public boolean isCollidingSprite(getModulationStateAbilities sprite)
 	{	return trajectoryManager.isCollidingSprite(sprite);
 	}
 	
-	public boolean isIntersectingSprite(Sprite sprite)
+	public boolean isIntersectingSprite(getModulationStateAbilities sprite)
 	{	return trajectoryManager.isIntersectingSprite(sprite);
 	}
 	
@@ -787,9 +788,9 @@ public abstract class Sprite
 	{	if(!finished)
 		{	finished = true;
 			// bound sprites
-			{	Iterator<Sprite> it = boundSprites.iterator();
+			{	Iterator<getModulationStateAbilities> it = boundSprites.iterator();
 				while(it.hasNext())
-				{	Sprite temp = it.next();
+				{	getModulationStateAbilities temp = it.next();
 					temp.finish();
 					it.remove();
 				}

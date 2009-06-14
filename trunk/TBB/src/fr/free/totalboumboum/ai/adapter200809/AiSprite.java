@@ -21,7 +21,7 @@ package fr.free.totalboumboum.ai.adapter200809;
  * 
  */
 
-import fr.free.totalboumboum.engine.content.sprite.Sprite;
+import fr.free.totalboumboum.engine.content.sprite.getModulationStateAbilities;
 
 /**
  * cette classe permet de représenter les sprites manipulés par le jeu,
@@ -34,7 +34,7 @@ import fr.free.totalboumboum.engine.content.sprite.Sprite;
  * @param <T>	type de sprite représenté
  */
 
-public abstract class AiSprite<T extends Sprite>
+public abstract class AiSprite<T extends getModulationStateAbilities>
 {	
 	/**
 	 * construit une représentation du sprite passé en paramètre

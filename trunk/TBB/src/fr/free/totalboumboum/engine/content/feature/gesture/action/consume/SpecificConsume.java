@@ -24,7 +24,7 @@ package fr.free.totalboumboum.engine.content.feature.gesture.action.consume;
 import fr.free.totalboumboum.engine.content.feature.gesture.action.ActionName;
 import fr.free.totalboumboum.engine.content.feature.gesture.action.IncompatibleParameterException;
 import fr.free.totalboumboum.engine.content.feature.gesture.action.SpecificAction;
-import fr.free.totalboumboum.engine.content.sprite.Sprite;
+import fr.free.totalboumboum.engine.content.sprite.getModulationStateAbilities;
 
 /** 
  * putting fire to another object, usually performed by fire (but not necessarily).
@@ -40,7 +40,7 @@ import fr.free.totalboumboum.engine.content.sprite.Sprite;
  */
 public abstract class SpecificConsume extends SpecificAction
 {
-	public SpecificConsume(Sprite actor, Sprite target) throws IncompatibleParameterException
+	public SpecificConsume(getModulationStateAbilities actor, getModulationStateAbilities target) throws IncompatibleParameterException
 	{	super(ActionName.CONSUME,actor,target);
 	}
 
