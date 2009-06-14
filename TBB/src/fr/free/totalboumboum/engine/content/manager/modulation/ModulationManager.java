@@ -108,7 +108,6 @@ public class ModulationManager
 	/////////////////////////////////////////////////////////////////
 	// ABILITIES			/////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	
 	/**
 	 * process the total ability for this action, considering:
 	 * 	- actor original ability
@@ -117,9 +116,7 @@ public class ModulationManager
 	 * 	- environment modulation (considering all sprites in the actor and target tiles) 
 	 */
 	public ActionAbility modulateAction(SpecificAction action)
-	{	Sprite target = action.getTarget();
-		
-		// actor original ability 
+	{	// actor original ability 
 		Sprite actor = action.getActor();
 		ActionAbility result = actor.getAbility(action); //TODO écrire getAbility(action), les autres sont-ils utiles?
 //		result = (ActionAbility)result.copy(); //TODO is this copy really needed?

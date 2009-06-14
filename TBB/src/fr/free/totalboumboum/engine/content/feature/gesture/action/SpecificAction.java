@@ -21,15 +21,8 @@ package fr.free.totalboumboum.engine.content.feature.gesture.action;
  * 
  */
 
-import java.util.ArrayList;
-import java.util.Iterator;
-
-import fr.free.totalboumboum.engine.container.tile.Tile;
 import fr.free.totalboumboum.engine.content.feature.Direction;
 import fr.free.totalboumboum.engine.content.feature.ability.ActionAbility;
-import fr.free.totalboumboum.engine.content.feature.gesture.modulation.ActorModulation;
-import fr.free.totalboumboum.engine.content.feature.gesture.modulation.TargetModulation;
-import fr.free.totalboumboum.engine.content.feature.gesture.modulation.ThirdModulation;
 import fr.free.totalboumboum.engine.content.sprite.Sprite;
 
 public abstract class SpecificAction
@@ -333,7 +326,7 @@ public abstract class SpecificAction
 	 */
 	public boolean isPossible()
 	{	boolean result;
-		ActionAbility ability = actor.computeAbility(this);
+		ActionAbility ability = actor.modulateAction(this);
 		result = ability.isActive();
 		return result;
 	}

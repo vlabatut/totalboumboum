@@ -25,13 +25,13 @@ import fr.free.totalboumboum.engine.content.feature.gesture.action.SpecificActio
 
 public class ActionEvent extends AbstractEvent
 {	
-	private SpecificAction<?> action;
+	private SpecificAction action;
 	
-	public ActionEvent(SpecificAction<?> action)
+	public ActionEvent(SpecificAction action)
 	{	this.action = action;	
 	}
 	
-	public SpecificAction<?> getAction()
+	public SpecificAction getAction()
 	{	return action;	
 	}
 	
