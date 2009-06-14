@@ -19,7 +19,7 @@
 	</xsd:complexType>
 
 	<xsd:complexType name="tThreshold">
-		<xsd:attribute name="comparator" type="tComparatorCode" use="optional"  default="greatereq" />
+		<xsd:attribute name="comparator" type="tComparatorCode" use="optional"  default="GREATEREQ" />
 	</xsd:complexType>
 
 	<xsd:complexType name="tIntegerThreshold">

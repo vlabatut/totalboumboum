@@ -891,7 +891,7 @@ public class Launcher
 	 * 		- XML abilities, loader d'abilities
 	 * 
 	 * - la modulation d'une ability doit être réalisée dans la specificAction et non pas dans le modulation manager (?)
-	 * (son role étant seulement de distribuer les modulation recquises)
+	 * (son role étant seulement de distribuer les modulations recquises)
 	 * 
 	 * - voir si on peut mettre à jour le parser XML
 	 * - définir la liste de gesture pour chaque type de sprite
@@ -904,5 +904,7 @@ public class Launcher
 	 * 	- moins d'occupation mémoire
 	 * 	- fichiers moins chiants à gérer (moins de répétitions)
 	 * - il faut mener une réflexion sur ce qu'il est vraiment nécessaire de cloner et ce qui peut être partagé, ce qui permettrait d'optimiser un peu plus l'utilisation de la mémoire
+	 * 		- les actions générales utilisées pour les abilities doivent être copiées, car elles sont définies en termes de SELF et doivent donc être adapté au sprite concerné (de toute façon, ça c'est du spécifique à un sprite. pas la peine de copier, en fait)
+	 * 
 	 */
 }

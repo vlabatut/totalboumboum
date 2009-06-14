@@ -29,55 +29,72 @@ import fr.free.totalboumboum.engine.container.level.Level;
 import fr.free.totalboumboum.engine.content.feature.ability.AbstractAbility;
 import fr.free.totalboumboum.engine.content.feature.ability.ActionAbility;
 import fr.free.totalboumboum.engine.content.feature.ability.StateAbility;
-import fr.free.totalboumboum.engine.content.feature.gesture.action.AbstractAction;
+import fr.free.totalboumboum.engine.content.feature.ability.StateAbilityName;
 import fr.free.totalboumboum.engine.content.feature.gesture.action.GeneralAction;
+import fr.free.totalboumboum.engine.content.feature.gesture.action.IncompatibleParameterException;
 import fr.free.totalboumboum.engine.content.feature.gesture.action.SpecificAction;
 import fr.free.totalboumboum.engine.content.sprite.Sprite;
 
 public class AbilityManager
-{	private Sprite sprite;
-	private ArrayList<AbstractAbility> directAbilities;
-	private ArrayList<AbstractAbility> currentAbilities;
-	
+{	
 	public AbilityManager(Sprite sprite)
 	{	this.sprite = sprite;
-		currentAbilities = new ArrayList<AbstractAbility>();
-		directAbilities = new ArrayList<AbstractAbility>();
 	}
 
+	/////////////////////////////////////////////////////////////////
+	// SPRITE			/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	private Sprite sprite;
+	
 	public Sprite getSprite()
 	{	return null;
 	}
+
 	public Level getLevel()
 	{	return sprite.getLevel();
 	}
+	
 /*	
 	public boolean hasAbility(AbstractAbility ability)
 	{	return dynamicAbilities.contains(ability);
 	}
 */
-	public void addDirectAbilities(ArrayList<AbstractAbility> abilities)
+	/////////////////////////////////////////////////////////////////
+	// DIRECT ABILITIES	/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	/** abilities provided before the begining of the round (?) */
+	private final ArrayList<AbstractAbility> directAbilities = new ArrayList<AbstractAbility>();
+	
+	public void addDirectAbilities(ArrayList<AbstractAbility> abilities) throws IncompatibleParameterException
 	{	Iterator<AbstractAbility> i = abilities.iterator();
 		while(i.hasNext())
 			addDirectAbility(i.next());
 	}
-	public void addDirectAbility(AbstractAbility ability)
+	
+	public void addDirectAbility(AbstractAbility ability) throws IncompatibleParameterException
 	{	AbstractAbility copy = ability.copy();
 		if(copy instanceof ActionAbility)
 		{	ActionAbility ab = (ActionAbility)copy;
-			ab.getAction().setActor(sprite.getClass());
+			ab.getAction().addActor(sprite.getRole());
 		}
-		directAbilities.add(copy);
+		directAbilities.add(copy);	//NOTE pourquoi toutes ces copies? la question est: qu'est-ce qui est modifié exactement dans l'ability. p-e qu'il n'est pas nécessaire de copier l'action
 		currentAbilities.add(copy.copy());
 	}
-	public StateAbility getAbility(String name)
+	
+	/////////////////////////////////////////////////////////////////
+	// CURRENT ABILITIES	/////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	/** all abilities (direct and items) */
+	private final ArrayList<AbstractAbility> currentAbilities = new ArrayList<AbstractAbility>();
+	
+	public StateAbility getAbility(StateAbilityName name)
 	{	StateAbility result = null;
 		Iterator<AbstractAbility> i = currentAbilities.iterator();
 		while(i.hasNext() && result==null)
 		{	AbstractAbility ab = i.next();
 			if(ab instanceof StateAbility)
 			{	StateAbility ablt = (StateAbility)ab;
-				if(ablt.getName().equalsIgnoreCase(name))
+				if(ablt.getName()==name)
 					result = ablt;
 			}
 		}
@@ -85,9 +102,11 @@ public class AbilityManager
 			result = new StateAbility(name,getLevel());
 		return result;
 	}
-	public StateAbility getAbility(StateAbility ability)
+	
+/*	public StateAbility getAbility(StateAbility ability)
 	{	return getAbility(ability.getName());
 	}
+*/
 	public ActionAbility getAbility(AbstractAction action)
 	{	ActionAbility result = null;
 		Iterator<AbstractAbility> i = currentAbilities.iterator();
@@ -106,10 +125,10 @@ public class AbilityManager
 				result = new ActionAbility(((GeneralAction)action),getLevel());
 		return result;
 	}
-	public ActionAbility getAbility(ActionAbility ability)
+/*	public ActionAbility getAbility(ActionAbility ability)
 	{	return getAbility(ability.getAction());
 	}
-
+*/
 	/**
 	 *  current abilities :
 	 *  	- directAbilities
