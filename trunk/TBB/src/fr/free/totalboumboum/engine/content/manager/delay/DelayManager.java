@@ -28,7 +28,7 @@ import java.util.Map.Entry;
 
 import fr.free.totalboumboum.configuration.Configuration;
 import fr.free.totalboumboum.engine.content.feature.event.EngineEvent;
-import fr.free.totalboumboum.engine.content.sprite.getModulationStateAbilities;
+import fr.free.totalboumboum.engine.content.sprite.Sprite;
 
 public class DelayManager
 {	public static final String DL_EXPLOSION = "DL_EXPLOSION";
@@ -37,12 +37,12 @@ public class DelayManager
 	public static final String DL_SPAWN = "DL_SPAWN";
 	public static final String DL_WAIT = "DL_WAIT";
 	
-	private getModulationStateAbilities sprite;
+	private Sprite sprite;
 	private HashMap<String,Double> delays;
 	private HashMap<String,Double> addedDelays;
 	private ArrayList<String> removedDelays;
 
-	public DelayManager(getModulationStateAbilities sprite)
+	public DelayManager(Sprite sprite)
 	{	this.sprite = sprite;
 		delays = new HashMap<String,Double>();
 		addedDelays = new HashMap<String,Double>();

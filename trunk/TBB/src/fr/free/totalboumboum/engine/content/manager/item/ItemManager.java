@@ -28,17 +28,17 @@ import java.util.LinkedList;
 import fr.free.totalboumboum.engine.content.feature.ability.AbstractAbility;
 import fr.free.totalboumboum.engine.content.feature.ability.ActionAbility;
 import fr.free.totalboumboum.engine.content.feature.gesture.action.GeneralAction;
-import fr.free.totalboumboum.engine.content.sprite.getModulationStateAbilities;
+import fr.free.totalboumboum.engine.content.sprite.Sprite;
 import fr.free.totalboumboum.engine.content.sprite.item.Item;
 import fr.free.totalboumboum.game.statistics.StatisticAction;
 import fr.free.totalboumboum.game.statistics.StatisticEvent;
 
 public class ItemManager
-{	private getModulationStateAbilities sprite;
+{	private Sprite sprite;
 	private LinkedList<Item> collectedItems;
 	private ArrayList<AbstractAbility> abilities;
 	
-	public ItemManager(getModulationStateAbilities sprite)
+	public ItemManager(Sprite sprite)
 	{	this.sprite = sprite;
 		collectedItems = new LinkedList<Item>();
 		abilities = new ArrayList<AbstractAbility>();

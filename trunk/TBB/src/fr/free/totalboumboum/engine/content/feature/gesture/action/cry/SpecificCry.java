@@ -24,7 +24,7 @@ package fr.free.totalboumboum.engine.content.feature.gesture.action.cry;
 import fr.free.totalboumboum.engine.content.feature.gesture.action.ActionName;
 import fr.free.totalboumboum.engine.content.feature.gesture.action.IncompatibleParameterException;
 import fr.free.totalboumboum.engine.content.feature.gesture.action.SpecificAction;
-import fr.free.totalboumboum.engine.content.sprite.getModulationStateAbilities;
+import fr.free.totalboumboum.engine.content.sprite.Sprite;
 
 /** 
  * crying at the end of a round .
@@ -40,7 +40,7 @@ import fr.free.totalboumboum.engine.content.sprite.getModulationStateAbilities;
  */
 public abstract class SpecificCry extends SpecificAction
 {
-	public SpecificCry(getModulationStateAbilities actor, getModulationStateAbilities target) throws IncompatibleParameterException
+	public SpecificCry(Sprite actor, Sprite target) throws IncompatibleParameterException
 	{	super(ActionName.CRY,actor,target);
 	}
 /*	

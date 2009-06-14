@@ -29,7 +29,7 @@ import fr.free.totalboumboum.engine.content.feature.ability.ActionAbility;
 import fr.free.totalboumboum.engine.content.feature.ability.StateAbility;
 import fr.free.totalboumboum.engine.content.feature.gesture.action.GeneralAction;
 import fr.free.totalboumboum.engine.content.feature.gesture.action.SpecificAction;
-import fr.free.totalboumboum.engine.content.sprite.getModulationStateAbilities;
+import fr.free.totalboumboum.engine.content.sprite.Sprite;
 
 public abstract class AbstractActionModulation extends AbstractModulation
 {	
@@ -94,7 +94,7 @@ public abstract class AbstractActionModulation extends AbstractModulation
 		result = action.subsume(specificAction);
 		// actor restrictions
 		if(result)
-		{	getModulationStateAbilities actor = specificAction.getActor();
+		{	Sprite actor = specificAction.getActor();
 			Iterator<AbstractAbility> i = actorRestrictions.iterator();
 			while(i.hasNext() && result)
 			{	AbstractAbility ab = i.next();
@@ -107,7 +107,7 @@ public abstract class AbstractActionModulation extends AbstractModulation
 		}
 		// target restrictions
 		if(result)
-		{	getModulationStateAbilities target = specificAction.getTarget();
+		{	Sprite target = specificAction.getTarget();
 			Iterator<AbstractAbility> i = targetRestrictions.iterator();
 			while(i.hasNext() && result)
 			{	AbstractAbility ab = i.next();

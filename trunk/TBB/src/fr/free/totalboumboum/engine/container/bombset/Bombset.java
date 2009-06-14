@@ -25,7 +25,7 @@ import java.util.ArrayList;
 import java.util.Iterator;
 
 import fr.free.totalboumboum.engine.content.feature.ability.StateAbility;
-import fr.free.totalboumboum.engine.content.sprite.getModulationStateAbilities;
+import fr.free.totalboumboum.engine.content.sprite.Sprite;
 import fr.free.totalboumboum.engine.content.sprite.bomb.Bomb;
 import fr.free.totalboumboum.engine.content.sprite.bomb.BombFactory;
 
@@ -53,7 +53,7 @@ public class Bombset
 		requiredAbilities.add(abilities);
 	}
 	
-	public Bomb makeBomb(getModulationStateAbilities sprite)
+	public Bomb makeBomb(Sprite sprite)
 	{	Bomb result = null;
 		Iterator<ArrayList<StateAbility>> i = requiredAbilities.iterator();
 		int ind = 0;

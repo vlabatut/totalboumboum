@@ -26,7 +26,7 @@ import java.util.Iterator;
 
 import fr.free.totalboumboum.engine.content.feature.Direction;
 import fr.free.totalboumboum.engine.content.feature.gesture.GestureName;
-import fr.free.totalboumboum.engine.content.sprite.getModulationStateAbilities;
+import fr.free.totalboumboum.engine.content.sprite.Sprite;
 
 public class TrajectoryDirection
 {
@@ -99,7 +99,7 @@ public class TrajectoryDirection
 			result = result + i.next().getYShift();
 		return result;
 	}
-	public double getTotalZShift(getModulationStateAbilities boundToSprite)
+	public double getTotalZShift(Sprite boundToSprite)
 	{	double result = 0;
 		Iterator<TrajectoryStep> i = steps.iterator();
 		while(i.hasNext())

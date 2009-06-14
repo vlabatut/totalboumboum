@@ -32,7 +32,7 @@ import fr.free.totalboumboum.configuration.profile.PredefinedColor;
 import fr.free.totalboumboum.engine.container.level.Level;
 import fr.free.totalboumboum.engine.container.tile.Tile;
 import fr.free.totalboumboum.engine.content.feature.Direction;
-import fr.free.totalboumboum.engine.content.sprite.getModulationStateAbilities;
+import fr.free.totalboumboum.engine.content.sprite.Sprite;
 import fr.free.totalboumboum.engine.content.sprite.block.Block;
 import fr.free.totalboumboum.engine.content.sprite.bomb.Bomb;
 import fr.free.totalboumboum.engine.content.sprite.fire.Fire;
@@ -552,7 +552,7 @@ public class AiZone
 	 * @param <T>	type de la liste à traiter
 	 * @param list	liste à traiter
 	 */
-	private <U extends getModulationStateAbilities, T extends AiSprite<?>> void uncheckAll(HashMap<U,T> list)
+	private <U extends Sprite, T extends AiSprite<?>> void uncheckAll(HashMap<U,T> list)
 	{	Iterator<Entry<U,T>> it = list.entrySet().iterator();
 		while(it.hasNext())
 		{	T temp = it.next().getValue();
@@ -566,12 +566,12 @@ public class AiZone
 	 * @param <T>	type de la liste à traiter
 	 * @param list	liste à traiter
 	 */
-	private <U extends getModulationStateAbilities, T extends AiSprite<?>> void removeUnchecked(HashMap<U,T> list)
+	private <U extends Sprite, T extends AiSprite<?>> void removeUnchecked(HashMap<U,T> list)
 	{	Iterator<Entry<U,T>> it = list.entrySet().iterator();
 		while(it.hasNext())
 		{	T temp = it.next().getValue();
 			if(!temp.isChecked())
-			{	getModulationStateAbilities sprite = temp.getSprite();
+			{	Sprite sprite = temp.getSprite();
 				if(sprite.isEnded() || sprite.isToBeRemovedFromTile())
 					it.remove();
 			}

@@ -33,20 +33,20 @@ import fr.free.totalboumboum.engine.content.feature.ability.StateAbilityName;
 import fr.free.totalboumboum.engine.content.feature.gesture.action.GeneralAction;
 import fr.free.totalboumboum.engine.content.feature.gesture.action.IncompatibleParameterException;
 import fr.free.totalboumboum.engine.content.feature.gesture.action.SpecificAction;
-import fr.free.totalboumboum.engine.content.sprite.getModulationStateAbilities;
+import fr.free.totalboumboum.engine.content.sprite.Sprite;
 
 public class AbilityManager
 {	
-	public AbilityManager(getModulationStateAbilities sprite)
+	public AbilityManager(Sprite sprite)
 	{	this.sprite = sprite;
 	}
 
 	/////////////////////////////////////////////////////////////////
 	// SPRITE			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	private getModulationStateAbilities sprite;
+	private Sprite sprite;
 	
-	public getModulationStateAbilities getSprite()
+	public Sprite getSprite()
 	{	return null;
 	}
 

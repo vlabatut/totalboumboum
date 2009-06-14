@@ -31,14 +31,14 @@ import fr.free.totalboumboum.engine.content.feature.event.EngineEvent;
 import fr.free.totalboumboum.engine.content.feature.gesture.Gesture;
 import fr.free.totalboumboum.engine.content.feature.gesture.trajectory.TrajectoryDirection;
 import fr.free.totalboumboum.engine.content.feature.gesture.trajectory.TrajectoryStep;
-import fr.free.totalboumboum.engine.content.sprite.getModulationStateAbilities;
+import fr.free.totalboumboum.engine.content.sprite.Sprite;
 import fr.free.totalboumboum.engine.loop.Loop;
 import fr.free.totalboumboum.tools.CalculusTools;
 
 public class TrajectoryManager
 {	// divers
 	/** sprite dirigé par ce TrajectoryManager */
-	private getModulationStateAbilities sprite;
+	private Sprite sprite;
 	/** trajectoire courante */
 	private TrajectoryDirection currentTrajectory;
 	/** pas courrant */
@@ -108,8 +108,8 @@ public class TrajectoryManager
 	private double relativeForcedPosZ = 0;
 	
 	// collisions
-	private final ArrayList<getModulationStateAbilities> intersectedSprites = new ArrayList<getModulationStateAbilities>();;
-	private final ArrayList<getModulationStateAbilities> collidedSprites = new ArrayList<getModulationStateAbilities>();;
+	private final ArrayList<Sprite> intersectedSprites = new ArrayList<Sprite>();;
+	private final ArrayList<Sprite> collidedSprites = new ArrayList<Sprite>();;
 
 	/** indique si la trajectoire a impliqué (pour le moment) que le sprite ait décollé du sol */ 
 	private boolean hasFlied;
@@ -118,7 +118,7 @@ public class TrajectoryManager
  * INIT
  * ********************************
  */	
-	public TrajectoryManager(getModulationStateAbilities sprite)
+	public TrajectoryManager(Sprite sprite)
 	{	this.sprite = sprite;
 	}
 
@@ -154,7 +154,7 @@ public class TrajectoryManager
 				// forcedDuration relative to bound sprite (negative)
 				else if(isBoundToSprite())
 				{	// init with the bound sprite values
-					getModulationStateAbilities sprt = getBoundToSprite();
+					Sprite sprt = getBoundToSprite();
 					forcedDuration = sprt.getTrajectoryTotalDuration();
 					currentTime = sprt.getTrajectoryCurrentTime();
 					trajectoryTime = currentTime;
@@ -230,7 +230,7 @@ public class TrajectoryManager
 		// calcul des nouvelles positions forcées
 		processForcedShifts(initX,initY,initZ);
 		// calcul des positions théoriques à l'instant présent
-		getModulationStateAbilities boundToSprite = getBoundToSprite();
+		Sprite boundToSprite = getBoundToSprite();
 		// process the step
 		Iterator<TrajectoryStep> i = currentTrajectory.getIterator();
 		TrajectoryStep nextStep=null;
@@ -292,7 +292,7 @@ public class TrajectoryManager
 		forcedTotalYShift = 0;
 		forcedTotalZShift = 0;
 		if(forcedPositionTime>0)
-		{	getModulationStateAbilities boundToSprite = getBoundToSprite();
+		{	Sprite boundToSprite = getBoundToSprite();
 			// process the step
 			Iterator<TrajectoryStep> i = currentTrajectory.getIterator();
 			TrajectoryStep nextStep=null;
@@ -353,8 +353,8 @@ public class TrajectoryManager
 	 * Cette méthode doit impérativement être appelée juste avant un changement de gesture.
 	 * @param newSprite
 	 */
-	public void setBoundToSprite(getModulationStateAbilities newSprite)
-	{	getModulationStateAbilities oldSprite = sprite.getBoundToSprite();
+	public void setBoundToSprite(Sprite newSprite)
+	{	Sprite oldSprite = sprite.getBoundToSprite();
 		if(oldSprite==null)
 		{	// avant:non - maintenant:rien
 			if(newSprite==null)
@@ -468,8 +468,8 @@ if(previousPosX != currentPosX || previousPosY != currentPosY || previousPosZ !=
 				//
 				currentPosX = mz.getCurrentX();
 				currentPosY = mz.getCurrentY();
-				ArrayList<getModulationStateAbilities> newIntersectedSprites = mz.getIntersectedSprites();
-				ArrayList<getModulationStateAbilities> newCollidedSprites = mz.getCollidedSprites();
+				ArrayList<Sprite> newIntersectedSprites = mz.getIntersectedSprites();
+				ArrayList<Sprite> newCollidedSprites = mz.getCollidedSprites();
 				//
 				updateCollidedSprites(newCollidedSprites);
 /*				
@@ -683,7 +683,7 @@ System.out.println();
  * BOUND
  * ********************************
  */	
-	private getModulationStateAbilities getBoundToSprite()
+	private Sprite getBoundToSprite()
 	{	return sprite.getBoundToSprite();
 	}
 	
@@ -695,9 +695,9 @@ System.out.println();
  * COLLISIONS
  * ********************************
  */		
-	private void updateCollidedSprites(ArrayList<getModulationStateAbilities> newCollidedSprites)
+	private void updateCollidedSprites(ArrayList<Sprite> newCollidedSprites)
 	{	//NOTE faut-il distinquer les changements de direction ?
-		Iterator<getModulationStateAbilities> i;
+		Iterator<Sprite> i;
 		
 /*		
 //		if(newCollidedSprites.size()>0)
@@ -736,7 +736,7 @@ if(sprite instanceof Hero)
 		// sprites no longer collided
 		i = collidedSprites.iterator();
 		while(i.hasNext())
-		{	getModulationStateAbilities tempSprite = i.next();
+		{	Sprite tempSprite = i.next();
 			if(newCollidedSprites.contains(tempSprite))
 				newCollidedSprites.remove(tempSprite);
 			else
@@ -751,7 +751,7 @@ if(sprite instanceof Hero)
 		// new collided sprites
 		i = newCollidedSprites.iterator();
 		while(i.hasNext())
-		{	getModulationStateAbilities tempSprite = i.next();
+		{	Sprite tempSprite = i.next();
 			collidedSprites.add(tempSprite);
 			EngineEvent event = new EngineEvent(EngineEvent.COLLIDED_ON,sprite,tempSprite,getActualDirection());
 			tempSprite.processEvent(event);
@@ -761,17 +761,17 @@ if(sprite instanceof Hero)
 		}
 	}
 	
-	public void addCollidedSprite(getModulationStateAbilities collidedSprite)
+	public void addCollidedSprite(Sprite collidedSprite)
 	{	collidedSprites.add(collidedSprite);
 	}
-	public void removeCollidedSprite(getModulationStateAbilities collidedSprite)
+	public void removeCollidedSprite(Sprite collidedSprite)
 	{	collidedSprites.remove(collidedSprite);
 	}	
 
 	public boolean isColliding()
 	{	return !collidedSprites.isEmpty();
 	}
-	public boolean isCollidingSprite(getModulationStateAbilities s)
+	public boolean isCollidingSprite(Sprite s)
 	{	return collidedSprites.contains(s);
 	}
 
@@ -779,8 +779,8 @@ if(sprite instanceof Hero)
  * INTERSECTIONS
  * ********************************
  */	
-	private void updateIntersectedSprites(ArrayList<getModulationStateAbilities> newIntersectedSprites)
-	{	Iterator<getModulationStateAbilities> i;
+	private void updateIntersectedSprites(ArrayList<Sprite> newIntersectedSprites)
+	{	Iterator<Sprite> i;
 /*	
 if(newCollidedSprites.size()>0)
 	System.out.println("->"+newCollidedSprites.size());
@@ -807,7 +807,7 @@ if(sprite instanceof Hero)
 		// sprites no longer intersected
 		i = intersectedSprites.iterator();
 		while(i.hasNext())
-		{	getModulationStateAbilities tempSprite = i.next();
+		{	Sprite tempSprite = i.next();
 			if(newIntersectedSprites.contains(tempSprite))
 				newIntersectedSprites.remove(tempSprite);
 			else
@@ -822,7 +822,7 @@ if(sprite instanceof Hero)
 		// new intersected sprites
 		i = newIntersectedSprites.iterator();
 		while(i.hasNext())
-		{	getModulationStateAbilities tempSprite = i.next();
+		{	Sprite tempSprite = i.next();
 			intersectedSprites.add(tempSprite);
 			EngineEvent event = new EngineEvent(EngineEvent.INTERSECTION_ON,sprite,tempSprite,getActualDirection());
 			tempSprite.processEvent(event);
@@ -832,14 +832,14 @@ if(sprite instanceof Hero)
 		}
 	}
 	
-	public void addIntersectedSprite(getModulationStateAbilities intersectedSprite)
+	public void addIntersectedSprite(Sprite intersectedSprite)
 	{	intersectedSprites.add(intersectedSprite);
 	}
-	public void removeIntersectedSprite(getModulationStateAbilities intersectedSprite)
+	public void removeIntersectedSprite(Sprite intersectedSprite)
 	{	intersectedSprites.remove(intersectedSprite);
 	}
 	
-	public boolean isIntersectingSprite(getModulationStateAbilities s)
+	public boolean isIntersectingSprite(Sprite s)
 	{	return intersectedSprites.contains(s);
 	}
 

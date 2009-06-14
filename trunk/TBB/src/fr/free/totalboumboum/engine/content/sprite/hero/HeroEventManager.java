@@ -40,7 +40,7 @@ import fr.free.totalboumboum.engine.content.feature.gesture.action.TilePosition;
 import fr.free.totalboumboum.engine.content.feature.gesture.action.drop.SpecificDrop;
 import fr.free.totalboumboum.engine.content.manager.delay.DelayManager;
 import fr.free.totalboumboum.engine.content.manager.event.EventManager;
-import fr.free.totalboumboum.engine.content.sprite.getModulationStateAbilities;
+import fr.free.totalboumboum.engine.content.sprite.Sprite;
 import fr.free.totalboumboum.engine.content.sprite.bomb.Bomb;
 import fr.free.totalboumboum.engine.content.sprite.fire.Fire;
 import fr.free.totalboumboum.engine.content.sprite.item.Item;
@@ -104,7 +104,7 @@ public class HeroEventManager extends EventManager
 			|| gesture.equals(GestureName.WALKING))
 		{	// explosed by
 			if(explosedBy==null)
-			{	getModulationStateAbilities spr = event.getAction().getActor();
+			{	Sprite spr = event.getAction().getActor();
 				if(spr instanceof Fire)
 				{	Fire temp = (Fire)spr;
 					spr = temp.getOwner();

@@ -1,6 +1,6 @@
 package fr.free.totalboumboum.engine.content.feature.gesture.action;
 
-import fr.free.totalboumboum.engine.content.sprite.getModulationStateAbilities;
+import fr.free.totalboumboum.engine.content.sprite.Sprite;
 
 /*
  * Total Boum Boum
@@ -42,7 +42,7 @@ public enum Contact
 	 * @param target	sprite undergoing the action
 	 * @return	contact of the action
 	 */
-	public static Contact getContact(getModulationStateAbilities actor, getModulationStateAbilities target)
+	public static Contact getContact(Sprite actor, Sprite target)
 	{	Contact result;
 		if(actor.isCollidingSprite(target))
 			result = Contact.COLLISION;

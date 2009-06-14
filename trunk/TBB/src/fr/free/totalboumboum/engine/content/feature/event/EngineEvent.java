@@ -22,7 +22,7 @@ package fr.free.totalboumboum.engine.content.feature.event;
  */
 
 import fr.free.totalboumboum.engine.content.feature.Direction;
-import fr.free.totalboumboum.engine.content.sprite.getModulationStateAbilities;
+import fr.free.totalboumboum.engine.content.sprite.Sprite;
 
 public class EngineEvent extends AbstractEvent
 {	public static final String ANIME_OVER = "ANIME_OVER";
@@ -50,8 +50,8 @@ public class EngineEvent extends AbstractEvent
 	public static final String DEFEAT = "DEFEAT";
 
 	private String name;
-	private getModulationStateAbilities source;
-	private getModulationStateAbilities target;
+	private Sprite source;
+	private Sprite target;
 	private Direction direction;
 	private String stringParameter;
 	
@@ -71,7 +71,7 @@ public class EngineEvent extends AbstractEvent
 		this.stringParameter = stringParameter;
 	}
 	
-	public EngineEvent(String name, getModulationStateAbilities source, getModulationStateAbilities target, Direction direction)
+	public EngineEvent(String name, Sprite source, Sprite target, Direction direction)
 	{	this.name = name;
 		this.source = source;
 		this.target = target;
@@ -87,17 +87,17 @@ public class EngineEvent extends AbstractEvent
 	{	return name+"("+source+">"+target+";"+direction+")";	
 	}
 
-	public getModulationStateAbilities getSource()
+	public Sprite getSource()
 	{	return source;
 	}
-	public void setSource(getModulationStateAbilities source)
+	public void setSource(Sprite source)
 	{	this.source = source;
 	}
 
-	public getModulationStateAbilities getTarget()
+	public Sprite getTarget()
 	{	return target;
 	}
-	public void setTarget(getModulationStateAbilities target)
+	public void setTarget(Sprite target)
 	{	this.target = target;
 	}
 	

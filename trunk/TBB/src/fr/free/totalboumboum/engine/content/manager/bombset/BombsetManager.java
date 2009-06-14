@@ -32,7 +32,7 @@ import fr.free.totalboumboum.engine.content.feature.ability.StateAbility;
 import fr.free.totalboumboum.engine.content.feature.event.ActionEvent;
 import fr.free.totalboumboum.engine.content.feature.gesture.action.AbstractAction;
 import fr.free.totalboumboum.engine.content.feature.gesture.action.SpecificAction;
-import fr.free.totalboumboum.engine.content.sprite.getModulationStateAbilities;
+import fr.free.totalboumboum.engine.content.sprite.Sprite;
 import fr.free.totalboumboum.engine.content.sprite.bomb.Bomb;
 import fr.free.totalboumboum.engine.loop.Loop;
 import fr.free.totalboumboum.game.statistics.StatisticAction;
@@ -40,10 +40,10 @@ import fr.free.totalboumboum.game.statistics.StatisticEvent;
 
 public class BombsetManager
 {	protected Bombset bombset;
-	protected getModulationStateAbilities sprite;
+	protected Sprite sprite;
 	protected LinkedList<Bomb> droppedBombs;
 	
-	public BombsetManager(getModulationStateAbilities sprite)
+	public BombsetManager(Sprite sprite)
 	{	this.sprite = sprite;
 		bombset = null;
 		droppedBombs = new LinkedList<Bomb>();
@@ -58,7 +58,7 @@ public class BombsetManager
 	}
 
 
-	public getModulationStateAbilities getSprite()
+	public Sprite getSprite()
 	{	return sprite;
 	}
 	

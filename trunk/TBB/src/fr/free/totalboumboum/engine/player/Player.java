@@ -41,7 +41,7 @@ import fr.free.totalboumboum.engine.container.level.Level;
 import fr.free.totalboumboum.engine.content.feature.ability.AbstractAbility;
 import fr.free.totalboumboum.engine.content.feature.gesture.modulation.ModulationPack;
 import fr.free.totalboumboum.engine.content.feature.gesture.trajectory.TrajectoryPack;
-import fr.free.totalboumboum.engine.content.sprite.getModulationStateAbilities;
+import fr.free.totalboumboum.engine.content.sprite.Sprite;
 import fr.free.totalboumboum.engine.content.sprite.hero.HeroFactory;
 import fr.free.totalboumboum.engine.content.sprite.hero.HeroFactoryLoader;
 import fr.free.totalboumboum.engine.control.PlayerControl;
@@ -52,7 +52,7 @@ public class Player
 {	
 	private Profile profile;
 	/** sprite */
-	private getModulationStateAbilities sprite;
+	private Sprite sprite;
 	/** round */
 	private Level level;
 	/** artificial intelligence */
@@ -123,7 +123,7 @@ public class Player
 	{	return ai;
 	}
 
-	public getModulationStateAbilities getSprite()
+	public Sprite getSprite()
 	{	return sprite;
 	}
 	public PredefinedColor getColor()

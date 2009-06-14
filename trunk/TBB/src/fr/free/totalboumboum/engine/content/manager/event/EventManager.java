@@ -26,18 +26,18 @@ import fr.free.totalboumboum.engine.content.feature.event.ActionEvent;
 import fr.free.totalboumboum.engine.content.feature.event.ControlEvent;
 import fr.free.totalboumboum.engine.content.feature.event.EngineEvent;
 import fr.free.totalboumboum.engine.content.feature.gesture.GestureName;
-import fr.free.totalboumboum.engine.content.sprite.getModulationStateAbilities;
+import fr.free.totalboumboum.engine.content.sprite.Sprite;
 
 public abstract class EventManager
 {	/** managed sprite  */
-	protected getModulationStateAbilities sprite;
+	protected Sprite sprite;
 	/** current gesture */
 	protected String gesture;
 	/** current direction the sprite is facing */
 	protected Direction spriteDirection;
 		
 	
-	public EventManager(getModulationStateAbilities sprite)
+	public EventManager(Sprite sprite)
 	{	this.sprite = sprite;
 		gesture = GestureName.NONE;
 		spriteDirection = Direction.NONE;
@@ -50,10 +50,10 @@ public abstract class EventManager
 */
 	public abstract void initGesture();
 	
-	public getModulationStateAbilities getSprite()
+	public Sprite getSprite()
 	{	return sprite;
 	}
-	public void setSprite(getModulationStateAbilities sprite)
+	public void setSprite(Sprite sprite)
 	{	this.sprite = sprite;
 	}
 

@@ -22,7 +22,7 @@ package fr.free.totalboumboum.ai.adapter200809;
  */
 
 import fr.free.totalboumboum.engine.content.feature.Direction;
-import fr.free.totalboumboum.engine.content.sprite.getModulationStateAbilities;
+import fr.free.totalboumboum.engine.content.sprite.Sprite;
 
 /**
  * Décrit un état dans lequel un sprite peut se trouver, c'est
@@ -38,14 +38,14 @@ import fr.free.totalboumboum.engine.content.sprite.getModulationStateAbilities;
 public class AiState 
 {
 	/** sprite dont l'état est représenté */
-	private getModulationStateAbilities sprite;
+	private Sprite sprite;
 	
 	/**
 	 * construit un objet représentant l'état du sprite passé en paramètre
 	 * 
 	 * @param sprite	sprite dont on veut représenter l'état
 	 */
-	AiState(getModulationStateAbilities sprite)
+	AiState(Sprite sprite)
 	{	this.sprite = sprite;
 	}
 	

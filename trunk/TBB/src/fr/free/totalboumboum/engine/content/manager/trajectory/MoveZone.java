@@ -29,7 +29,7 @@ import fr.free.totalboumboum.engine.container.level.Level;
 import fr.free.totalboumboum.engine.container.tile.Tile;
 import fr.free.totalboumboum.engine.content.feature.Direction;
 import fr.free.totalboumboum.engine.content.feature.ability.StateAbility;
-import fr.free.totalboumboum.engine.content.sprite.getModulationStateAbilities;
+import fr.free.totalboumboum.engine.content.sprite.Sprite;
 import fr.free.totalboumboum.tools.CalculusTools;
 
 public class MoveZone
@@ -50,7 +50,7 @@ public class MoveZone
 	 *  @param	fuelX	remaining X distance  
 	 *  @param	fuelY	remaining Y distance  
 	 */
-	public MoveZone(getModulationStateAbilities source, double currentX, double currentY, double targetX, double targetY, Level level, Direction initialDirection, Direction usedDirection, double fuel)
+	public MoveZone(Sprite source, double currentX, double currentY, double targetX, double targetY, Level level, Direction initialDirection, Direction usedDirection, double fuel)
 	{	this.level = level;
 		this.source = source;
 		this.initialDirection = initialDirection;
@@ -61,8 +61,8 @@ public class MoveZone
 		this.currentY = currentY;
 		this.targetX = targetX;
 		this.targetY = targetY;
-		collidedSprites = new ArrayList<getModulationStateAbilities>();
-		intersectedSprites = new ArrayList<getModulationStateAbilities>();
+		collidedSprites = new ArrayList<Sprite>();
+		intersectedSprites = new ArrayList<Sprite>();
 		processLine();
 	}
 	
@@ -119,9 +119,9 @@ public class MoveZone
 	/////////////////////////////////////////////////////////////////
 	// SOURCE			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	private getModulationStateAbilities source;
+	private Sprite source;
 	
-	public getModulationStateAbilities getSourceSprite()
+	public Sprite getSourceSprite()
 	{	return source;
 	}
 	
@@ -200,13 +200,13 @@ public class MoveZone
 	/////////////////////////////////////////////////////////////////
 	// COLLIDED SPRITES		/////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	private ArrayList<getModulationStateAbilities> collidedSprites;
+	private ArrayList<Sprite> collidedSprites;
 	
-	public ArrayList<getModulationStateAbilities> getCollidedSprites()
+	public ArrayList<Sprite> getCollidedSprites()
 	{	return collidedSprites;		
 	}
 
-	private void addCollidedSprite(getModulationStateAbilities s)
+	private void addCollidedSprite(Sprite s)
 	{	if(!collidedSprites.contains(s))
 			collidedSprites.add(s);		
 	}
@@ -214,13 +214,13 @@ public class MoveZone
 	/////////////////////////////////////////////////////////////////
 	// INTERSECTED SPRITES	/////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	private ArrayList<getModulationStateAbilities> intersectedSprites;
+	private ArrayList<Sprite> intersectedSprites;
 	
-	public ArrayList<getModulationStateAbilities> getIntersectedSprites()
+	public ArrayList<Sprite> getIntersectedSprites()
 	{	return intersectedSprites;		
 	}
 
-	private void addIntersectedSprite(getModulationStateAbilities s)
+	private void addIntersectedSprite(Sprite s)
 	{	if(!intersectedSprites.contains(s))
 			intersectedSprites.add(s);		
 	}
@@ -268,8 +268,8 @@ public class MoveZone
 	{	ArrayList<PotentialObstacle> result = new ArrayList<PotentialObstacle>();
 		ArrayList<Tile> tiles = getCrossedTiles();
 		for(Tile t: tiles)
-		{	ArrayList<getModulationStateAbilities> temp = t.getSprites();
-			for(getModulationStateAbilities s: temp)
+		{	ArrayList<Sprite> temp = t.getSprites();
+			for(Sprite s: temp)
 			{	if(s!=source)
 				{	PotentialObstacle o = new PotentialObstacle(s,this);
 					if(o.hasIntersection())
@@ -429,9 +429,9 @@ public class MoveZone
 				targetY = currentY + tmp2[1];
 				
 			}
-			for(getModulationStateAbilities s: mz.getCollidedSprites())
+			for(Sprite s: mz.getCollidedSprites())
 				addCollidedSprite(s);
-			for(getModulationStateAbilities s: mz.getIntersectedSprites())
+			for(Sprite s: mz.getIntersectedSprites())
 				addIntersectedSprite(s);
 		}
 		else
@@ -487,9 +487,9 @@ public class MoveZone
 						targetX = level.normalizePositionX(currentX + tmp2[0]);
 						targetY = level.normalizePositionY(currentY + tmp2[1]);
 					}
-					for(getModulationStateAbilities s: mz.getCollidedSprites())
+					for(Sprite s: mz.getCollidedSprites())
 						addCollidedSprite(s);
-					for(getModulationStateAbilities s: mz.getIntersectedSprites())
+					for(Sprite s: mz.getIntersectedSprites())
 						addIntersectedSprite(s);
 				}
 				else
@@ -521,7 +521,7 @@ public class MoveZone
 		double interY = po.getContactY();
 		boolean reached = moveToPoint(interX,interY);
 		if(reached)
-		{	getModulationStateAbilities s = po.getSprite();
+		{	Sprite s = po.getSprite();
 			addCollidedSprite(s);
 		}
 	}
