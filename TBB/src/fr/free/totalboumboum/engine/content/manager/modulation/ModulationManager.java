@@ -39,11 +39,11 @@ import fr.free.totalboumboum.engine.content.feature.gesture.modulation.ActorModu
 import fr.free.totalboumboum.engine.content.feature.gesture.modulation.StateModulation;
 import fr.free.totalboumboum.engine.content.feature.gesture.modulation.TargetModulation;
 import fr.free.totalboumboum.engine.content.feature.gesture.modulation.ThirdModulation;
-import fr.free.totalboumboum.engine.content.sprite.getModulationStateAbilities;
+import fr.free.totalboumboum.engine.content.sprite.Sprite;
 
 public class ModulationManager
 {	
-	public ModulationManager(getModulationStateAbilities sprite)
+	public ModulationManager(Sprite sprite)
 	{	this.sprite = sprite;
 		currentGesture = null;
 		currentDirection = Direction.NONE;
@@ -53,7 +53,7 @@ public class ModulationManager
 	/////////////////////////////////////////////////////////////////
 	// SPRITE				/////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	private getModulationStateAbilities sprite;
+	private Sprite sprite;
 	
 	public Level getLevel()
 	{	return sprite.getLevel();
@@ -117,10 +117,10 @@ public class ModulationManager
 	 * 	- environment modulation (considering all sprites in the actor and target tiles) 
 	 */
 	public ActionAbility modulateAction(SpecificAction action)
-	{	getModulationStateAbilities target = action.getTarget();
+	{	Sprite target = action.getTarget();
 		
 		// actor original ability 
-		getModulationStateAbilities actor = action.getActor();
+		Sprite actor = action.getActor();
 		ActionAbility result = actor.getAbility(action); //TODO écrire getAbility(action), les autres sont-ils utiles?
 //		result = (ActionAbility)result.copy(); //TODO is this copy really needed?
 		
@@ -135,7 +135,7 @@ public class ModulationManager
 	
 	private ActionAbility combineActorModulation(SpecificAction action, ActionAbility ability)
 	{	ActionAbility result = ability;
-		getModulationStateAbilities actor = action.getActor();
+		Sprite actor = action.getActor();
 		if(result.isActive())
 		{	ActorModulation actorModulation = actor.getActorModulation(action);
 			if(actorModulation!=null) //TODO peut être que c'est plus simple de renvoyer systmétiquement une modulation, mais avec une puissance de 0?
@@ -146,7 +146,7 @@ public class ModulationManager
 
 	private ActionAbility combineTargetModulation(SpecificAction action, ActionAbility ability)
 	{	ActionAbility result = ability;
-		getModulationStateAbilities target = action.getTarget();
+		Sprite target = action.getTarget();
 		if(result.isActive() && target!=null)//TODO quand on cherche une modulation pour un sprite donné, ça dépend de son gesture courant. si pas de gesture, alors il renvoie null
 		{	TargetModulation targetModulation = target.getTargetModulation(action);
 			if(targetModulation!=null)
@@ -161,14 +161,14 @@ public class ModulationManager
 	 */
 	private ActionAbility combineThirdModulation(SpecificAction action, ActionAbility ability)
 	{	ActionAbility result = ability;
-		getModulationStateAbilities actor = action.getActor();
-		getModulationStateAbilities target = action.getTarget();
+		Sprite actor = action.getActor();
+		Sprite target = action.getTarget();
 		if(result.isActive())
 		{	// list of the involved sprites
-			ArrayList<getModulationStateAbilities> sprites = new ArrayList<getModulationStateAbilities>();
+			ArrayList<Sprite> sprites = new ArrayList<Sprite>();
 			Tile tileA = actor.getTile();
 			if(tileA!=null)
-			{	for(getModulationStateAbilities s: tileA.getSprites())
+			{	for(Sprite s: tileA.getSprites())
 				{	if(s!=target && s!=actor)
 						sprites.add(s);					
 				}
@@ -176,16 +176,16 @@ public class ModulationManager
 			if(target!=null)
 			{	Tile tileT = target.getTile();
 				if(tileT!=null)
-				{	for(getModulationStateAbilities s: tileT.getSprites())
+				{	for(Sprite s: tileT.getSprites())
 					{	if(!sprites.contains(s) && s!=target && s!=actor)
 							sprites.add(s);					
 					}
 				}
 			}
 			// check each one of them
-			Iterator<getModulationStateAbilities> i = sprites.iterator();
+			Iterator<Sprite> i = sprites.iterator();
 			while(i.hasNext() && result.isActive())
-			{	getModulationStateAbilities tempSprite = i.next();
+			{	Sprite tempSprite = i.next();
 				ThirdModulation thirdModulation = tempSprite.getThirdModulation(action);
 				if(thirdModulation==null)
 					result = thirdModulation.modulate(result); 		
@@ -243,18 +243,18 @@ public class ModulationManager
 		// environment modulation
 		if(result.isActive())
 		{	// list of the involved sprites
-			ArrayList<getModulationStateAbilities> sprites = new ArrayList<getModulationStateAbilities>();
+			ArrayList<Sprite> sprites = new ArrayList<Sprite>();
 			Tile tile = sprite.getTile();
 			if(tile!=null)
-			{	for(getModulationStateAbilities s: tile.getSprites())
+			{	for(Sprite s: tile.getSprites())
 				{	if(s!=sprite)
 						sprites.add(s);					
 				}
 			}
 			// check each one of them
-			Iterator<getModulationStateAbilities> i = sprites.iterator();
+			Iterator<Sprite> i = sprites.iterator();
 			while(i.hasNext() && result.isActive())
-			{	getModulationStateAbilities tempSprite = i.next();
+			{	Sprite tempSprite = i.next();
 				StateModulation stateModulation = tempSprite.getStateModulation(name);
 				if(stateModulation==null)
 					result = stateModulation.modulate(result); 		

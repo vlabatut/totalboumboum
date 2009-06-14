@@ -1,7 +1,7 @@
 package fr.free.totalboumboum.engine.content.feature.gesture.action;
 
 import fr.free.totalboumboum.engine.container.tile.Tile;
-import fr.free.totalboumboum.engine.content.sprite.getModulationStateAbilities;
+import fr.free.totalboumboum.engine.content.sprite.Sprite;
 
 /*
  * Total Boum Boum
@@ -42,7 +42,7 @@ public enum TilePosition
 	 * or SAME if the actor has no tile but the target has one,
 	 * or UNDEFINED if there's no target or if it has no tile. 
 	 */
-	public static TilePosition getTilePosition(getModulationStateAbilities actor, getModulationStateAbilities target)
+	public static TilePosition getTilePosition(Sprite actor, Sprite target)
 	{	TilePosition result;
 		Tile actorTile = actor.getTile();
 		Tile targetTile = null;

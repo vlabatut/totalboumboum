@@ -39,7 +39,7 @@ import fr.free.totalboumboum.engine.content.manager.item.ItemManager;
 import fr.free.totalboumboum.engine.content.manager.modulation.ModulationManager;
 import fr.free.totalboumboum.engine.content.manager.trajectory.TrajectoryManager;
 
-public abstract class SpriteFactory<T extends getModulationStateAbilities>
+public abstract class SpriteFactory<T extends Sprite>
 {
 	
 	public SpriteFactory(Level level)
@@ -51,7 +51,7 @@ public abstract class SpriteFactory<T extends getModulationStateAbilities>
 	/////////////////////////////////////////////////////////////////
 	public abstract T makeSprite();
 
-	protected void initSprite(getModulationStateAbilities sprite)
+	protected void initSprite(Sprite sprite)
 	{	// name
 		sprite.setName(name);
 		

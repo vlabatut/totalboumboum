@@ -36,7 +36,7 @@ import fr.free.totalboumboum.engine.container.bombset.Bombset;
 import fr.free.totalboumboum.engine.container.itemset.Itemset;
 import fr.free.totalboumboum.engine.container.tile.Tile;
 import fr.free.totalboumboum.engine.content.feature.Direction;
-import fr.free.totalboumboum.engine.content.sprite.getModulationStateAbilities;
+import fr.free.totalboumboum.engine.content.sprite.Sprite;
 import fr.free.totalboumboum.engine.content.sprite.hero.Hero;
 import fr.free.totalboumboum.engine.loop.Loop;
 import fr.free.totalboumboum.tools.CalculusTools;
@@ -150,7 +150,7 @@ public class Level
 	/**
 	 * process the manhattan distance
 	 */
-	public double getDistance(getModulationStateAbilities s1, getModulationStateAbilities s2, Direction direction)
+	public double getDistance(Sprite s1, Sprite s2, Direction direction)
 	{	double x1 = s1.getCurrentPosX();
 		double y1 = s1.getCurrentPosY();
 		double x2 = s2.getCurrentPosX();
@@ -158,7 +158,7 @@ public class Level
 		double result = processDistance(x1,y1,x2,y2,direction);
 		return result;
 	}
-	public double getDistance(getModulationStateAbilities s1, getModulationStateAbilities s2)
+	public double getDistance(Sprite s1, Sprite s2)
 	{	return getDistance(s1,s2,Direction.NONE);
 	}
 	
@@ -280,13 +280,13 @@ public class Level
 	/////////////////////////////////////////////////////////////////
 	// SPRITES				/////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	private ArrayList<getModulationStateAbilities> sprites = new ArrayList<getModulationStateAbilities>();;
+	private ArrayList<Sprite> sprites = new ArrayList<Sprite>();;
 
-	public void addSprite(getModulationStateAbilities sprite)
+	public void addSprite(Sprite sprite)
 	{	sprites.add(sprite);
 	}
 	
-	public void removeSprite(getModulationStateAbilities sprite)
+	public void removeSprite(Sprite sprite)
 	{	sprites.remove(sprite);
 	}
 	
@@ -304,7 +304,7 @@ public class Level
 	 * processes the direction of s2 relatively to s1, if
 	 * considering the shortest path.
 	 */
-	public Direction getDirection(getModulationStateAbilities s1, getModulationStateAbilities s2)
+	public Direction getDirection(Sprite s1, Sprite s2)
 	{	double x1 = s1.getCurrentPosX();
 		double y1 = s1.getCurrentPosY();
 		double x2 = s2.getCurrentPosX();
@@ -803,9 +803,9 @@ public class Level
 				}
 			}
 			// sprites
-			Iterator<getModulationStateAbilities> it = sprites.iterator();
+			Iterator<Sprite> it = sprites.iterator();
 			while(it.hasNext())
-			{	getModulationStateAbilities temp = it.next();
+			{	Sprite temp = it.next();
 				temp.finish();
 				it.remove();
 			}

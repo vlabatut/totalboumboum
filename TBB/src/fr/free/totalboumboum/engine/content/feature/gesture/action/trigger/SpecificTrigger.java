@@ -24,7 +24,7 @@ package fr.free.totalboumboum.engine.content.feature.gesture.action.trigger;
 import fr.free.totalboumboum.engine.content.feature.gesture.action.ActionName;
 import fr.free.totalboumboum.engine.content.feature.gesture.action.IncompatibleParameterException;
 import fr.free.totalboumboum.engine.content.feature.gesture.action.SpecificAction;
-import fr.free.totalboumboum.engine.content.sprite.getModulationStateAbilities;
+import fr.free.totalboumboum.engine.content.sprite.Sprite;
 
 /** 
  * asking a remote bomb to explode.
@@ -40,7 +40,7 @@ import fr.free.totalboumboum.engine.content.sprite.getModulationStateAbilities;
  */
 public abstract class SpecificTrigger extends SpecificAction
 {
-	public SpecificTrigger(getModulationStateAbilities actor, getModulationStateAbilities target) throws IncompatibleParameterException
+	public SpecificTrigger(Sprite actor, Sprite target) throws IncompatibleParameterException
 	{	super(ActionName.TRIGGER,actor,target);
 	}
 	

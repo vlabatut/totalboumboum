@@ -37,19 +37,19 @@ import fr.free.totalboumboum.engine.content.feature.gesture.action.AbstractActio
 import fr.free.totalboumboum.engine.content.feature.gesture.action.SpecificAction;
 import fr.free.totalboumboum.engine.content.manager.delay.DelayManager;
 import fr.free.totalboumboum.engine.content.manager.event.EventManager;
-import fr.free.totalboumboum.engine.content.sprite.getModulationStateAbilities;
+import fr.free.totalboumboum.engine.content.sprite.Sprite;
 
 public class BombEventManager extends EventManager
 {	
-	HashMap<Direction,TreeSet<getModulationStateAbilities>> collidingSprites;
+	HashMap<Direction,TreeSet<Sprite>> collidingSprites;
 	
 	public BombEventManager(Bomb sprite)
 	{	super(sprite);
-		collidingSprites = new HashMap<Direction, TreeSet<getModulationStateAbilities>>();
-		collidingSprites.put(Direction.DOWN,new TreeSet<getModulationStateAbilities>());
-		collidingSprites.put(Direction.LEFT,new TreeSet<getModulationStateAbilities>());
-		collidingSprites.put(Direction.RIGHT,new TreeSet<getModulationStateAbilities>());
-		collidingSprites.put(Direction.UP,new TreeSet<getModulationStateAbilities>());
+		collidingSprites = new HashMap<Direction, TreeSet<Sprite>>();
+		collidingSprites.put(Direction.DOWN,new TreeSet<Sprite>());
+		collidingSprites.put(Direction.LEFT,new TreeSet<Sprite>());
+		collidingSprites.put(Direction.RIGHT,new TreeSet<Sprite>());
+		collidingSprites.put(Direction.UP,new TreeSet<Sprite>());
 	}
 	
 	public void initGesture()
@@ -198,7 +198,7 @@ public class BombEventManager extends EventManager
 	private void engCollidedOff(EngineEvent event)
 	{	// oscillating : the bomb stops oscillating
 		if(gesture.equals(GestureName.OSCILLATING) || gesture.equals(GestureName.OSCILLATING_FAILING))
-		{	getModulationStateAbilities actor = event.getSource();
+		{	Sprite actor = event.getSource();
 			Direction dir = event.getDirection();
 			collidingSprites.get(dir).remove(actor);
 			// if no more sprites pushing the bomb in this direction
@@ -234,7 +234,7 @@ public class BombEventManager extends EventManager
 		if(gesture.equals(GestureName.STANDING) || gesture.equals(GestureName.STANDING_FAILING)
 				|| gesture.equals(GestureName.OSCILLATING) || gesture.equals(GestureName.OSCILLATING_FAILING))
 		{	// check if the actor has the ability to push the bomb
-			getModulationStateAbilities actor = event.getSource();
+			Sprite actor = event.getSource();
 			Direction dir = event.getDirection();
 			SpecificAction action = new SpecificAction(AbstractAction.PUSH,actor,sprite,dir);
 			ActionAbility a = actor.computeAbility(action);
@@ -382,10 +382,10 @@ public class BombEventManager extends EventManager
 	{	if(!finished)
 		{	super.finish();
 			// colliding sprites
-			{	Iterator<Entry<Direction,TreeSet<getModulationStateAbilities>>> it = collidingSprites.entrySet().iterator();
+			{	Iterator<Entry<Direction,TreeSet<Sprite>>> it = collidingSprites.entrySet().iterator();
 				while(it.hasNext())
-				{	Entry<Direction,TreeSet<getModulationStateAbilities>> t = it.next();
-					TreeSet<getModulationStateAbilities> tree = t.getValue();
+				{	Entry<Direction,TreeSet<Sprite>> t = it.next();
+					TreeSet<Sprite> tree = t.getValue();
 					tree.clear();
 					it.remove();
 				}

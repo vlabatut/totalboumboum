@@ -24,7 +24,7 @@ package fr.free.totalboumboum.engine.content.feature.gesture.action.gather;
 import fr.free.totalboumboum.engine.content.feature.gesture.action.ActionName;
 import fr.free.totalboumboum.engine.content.feature.gesture.action.IncompatibleParameterException;
 import fr.free.totalboumboum.engine.content.feature.gesture.action.SpecificAction;
-import fr.free.totalboumboum.engine.content.sprite.getModulationStateAbilities;
+import fr.free.totalboumboum.engine.content.sprite.Sprite;
 
 /** 
  * picking an object just by walking on it (unlike picking a bomb to carry it). 
@@ -40,7 +40,7 @@ import fr.free.totalboumboum.engine.content.sprite.getModulationStateAbilities;
  */
 public abstract class SpecificGather extends SpecificAction
 {
-	public SpecificGather(getModulationStateAbilities actor, getModulationStateAbilities target) throws IncompatibleParameterException
+	public SpecificGather(Sprite actor, Sprite target) throws IncompatibleParameterException
 	{	super(ActionName.GATHER,actor,target);
 	}
 	

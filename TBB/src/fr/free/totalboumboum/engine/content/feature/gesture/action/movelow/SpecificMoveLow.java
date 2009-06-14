@@ -24,7 +24,7 @@ package fr.free.totalboumboum.engine.content.feature.gesture.action.movelow;
 import fr.free.totalboumboum.engine.content.feature.gesture.action.ActionName;
 import fr.free.totalboumboum.engine.content.feature.gesture.action.IncompatibleParameterException;
 import fr.free.totalboumboum.engine.content.feature.gesture.action.SpecificAction;
-import fr.free.totalboumboum.engine.content.sprite.getModulationStateAbilities;
+import fr.free.totalboumboum.engine.content.sprite.Sprite;
 
 /** 
  * on ground (normal) move.
@@ -40,7 +40,7 @@ import fr.free.totalboumboum.engine.content.sprite.getModulationStateAbilities;
  */
 public abstract class SpecificMoveLow extends SpecificAction
 {
-	public SpecificMoveLow(getModulationStateAbilities actor, getModulationStateAbilities target) throws IncompatibleParameterException
+	public SpecificMoveLow(Sprite actor, Sprite target) throws IncompatibleParameterException
 	{	super(ActionName.MOVELOW,actor,target);
 	}
 

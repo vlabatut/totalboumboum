@@ -3,7 +3,7 @@ package fr.free.totalboumboum.engine.content.feature.gesture.action;
 import java.util.ArrayList;
 
 import fr.free.totalboumboum.engine.content.feature.Direction;
-import fr.free.totalboumboum.engine.content.sprite.getModulationStateAbilities;
+import fr.free.totalboumboum.engine.content.sprite.Sprite;
 
 /*
  * Total Boum Boum
@@ -174,13 +174,13 @@ public abstract class GeneralAction
 			result = getName()==action.getName();
 		// actor
 		if(result)
-		{	getModulationStateAbilities actor = action.getActor();
+		{	Sprite actor = action.getActor();
 			Role actorRole = actor.getRole();
 			result = actors.contains(actorRole);		
 		}
 		// target
 		if(result)
-		{	getModulationStateAbilities target = action.getTarget();
+		{	Sprite target = action.getTarget();
 			Role targetRole = Role.NONE;
 			if(target!=null)
 				targetRole = target.getRole();

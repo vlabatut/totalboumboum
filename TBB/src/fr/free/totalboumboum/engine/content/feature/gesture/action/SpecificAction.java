@@ -30,7 +30,7 @@ import fr.free.totalboumboum.engine.content.feature.ability.ActionAbility;
 import fr.free.totalboumboum.engine.content.feature.gesture.modulation.ActorModulation;
 import fr.free.totalboumboum.engine.content.feature.gesture.modulation.TargetModulation;
 import fr.free.totalboumboum.engine.content.feature.gesture.modulation.ThirdModulation;
-import fr.free.totalboumboum.engine.content.sprite.getModulationStateAbilities;
+import fr.free.totalboumboum.engine.content.sprite.Sprite;
 
 public abstract class SpecificAction
 {
@@ -48,7 +48,7 @@ public abstract class SpecificAction
 	/**
 	 * NOTE light action, probably just used for a doability test
 	 */
-	protected SpecificAction(ActionName name, getModulationStateAbilities actor)
+	protected SpecificAction(ActionName name, Sprite actor)
 	{	this(name,actor,null);		
 	}
 
@@ -58,7 +58,7 @@ public abstract class SpecificAction
 	 * @param actor
 	 * @param target
 	 */
-	protected SpecificAction(ActionName name, getModulationStateAbilities actor, getModulationStateAbilities target)
+	protected SpecificAction(ActionName name, Sprite actor, Sprite target)
 	{	this.name = name;
 		this.actor = actor;
 		this.target = target;
@@ -79,7 +79,7 @@ public abstract class SpecificAction
 	 * @param tilePosition
 	 * @param orientation
 	 */
-	protected SpecificAction(ActionName name, getModulationStateAbilities actor, getModulationStateAbilities target, Direction direction, Contact contact, TilePosition tilePosition, Orientation orientation)
+	protected SpecificAction(ActionName name, Sprite actor, Sprite target, Direction direction, Contact contact, TilePosition tilePosition, Orientation orientation)
 	{	this.name = name;
 		this.actor = actor;
 		this.target = target;
@@ -144,9 +144,9 @@ public abstract class SpecificAction
 	// ACTOR			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	/** sprite performing the action */
-	private getModulationStateAbilities actor = null;
+	private Sprite actor = null;
 
-	public getModulationStateAbilities getActor()
+	public Sprite getActor()
 	{	return actor;
 	}
 	
@@ -154,9 +154,9 @@ public abstract class SpecificAction
 	// TARGET			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	/** sprite targeted by the action */
-	private getModulationStateAbilities target = null;
+	private Sprite target = null;
 
-	public getModulationStateAbilities getTarget()
+	public Sprite getTarget()
 	{	return target;
 	}
 

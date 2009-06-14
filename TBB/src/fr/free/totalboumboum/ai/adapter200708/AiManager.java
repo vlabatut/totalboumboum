@@ -37,7 +37,7 @@ import fr.free.totalboumboum.engine.content.feature.gesture.action.Orientation;
 import fr.free.totalboumboum.engine.content.feature.gesture.action.SpecificAction;
 import fr.free.totalboumboum.engine.content.feature.gesture.action.TilePosition;
 import fr.free.totalboumboum.engine.content.feature.gesture.modulation.TargetModulation;
-import fr.free.totalboumboum.engine.content.sprite.getModulationStateAbilities;
+import fr.free.totalboumboum.engine.content.sprite.Sprite;
 import fr.free.totalboumboum.engine.content.sprite.block.Block;
 import fr.free.totalboumboum.engine.content.sprite.bomb.Bomb;
 import fr.free.totalboumboum.engine.content.sprite.fire.Fire;
@@ -94,7 +94,7 @@ public abstract class AiManager extends AbstractAiManager<Integer>
     	Loop loop = player.getLoop();
     	Level level = loop.getLevel();
     	Tile[][] matrix = level.getMatrix();
-    	getModulationStateAbilities sprite = player.getSprite();
+    	Sprite sprite = player.getSprite();
     	
     	// état du shrink
 //NOTE à compléter    	
