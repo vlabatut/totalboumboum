@@ -22,6 +22,7 @@ package fr.free.totalboumboum.ai.adapter200809;
  */
 
 import fr.free.totalboumboum.engine.content.feature.Direction;
+import fr.free.totalboumboum.engine.content.feature.gesture.GestureName;
 import fr.free.totalboumboum.engine.content.sprite.Sprite;
 
 /**
@@ -56,7 +57,7 @@ public class AiState
 	{	// direction
 		this.direction = sprite.getActualDirection();
 		// name
-		String gesture = sprite.getCurrentGesture();
+		GestureName gesture = sprite.getCurrentGesture().getName();
 		name = AiStateName.makeNameFromGesture(gesture);		
 	}
 	

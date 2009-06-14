@@ -119,8 +119,7 @@ public class ModulationManager
 	{	// actor original ability 
 		Sprite actor = action.getActor();
 		ActionAbility result = actor.getAbility(action); //TODO écrire getAbility(action), les autres sont-ils utiles?
-//		result = (ActionAbility)result.copy(); //TODO is this copy really needed?
-		
+//		result = (ActionAbility)result.copy(); //TODO is this copy really needed?	
 		// actor modulation
 		result = combineActorModulation(action,result);		
 		// target modulation (if there's one!)

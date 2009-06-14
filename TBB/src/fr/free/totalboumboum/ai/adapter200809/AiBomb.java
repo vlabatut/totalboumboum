@@ -23,6 +23,7 @@ package fr.free.totalboumboum.ai.adapter200809;
 
 import fr.free.totalboumboum.configuration.profile.PredefinedColor;
 import fr.free.totalboumboum.engine.content.feature.ability.StateAbility;
+import fr.free.totalboumboum.engine.content.feature.ability.StateAbilityName;
 import fr.free.totalboumboum.engine.content.feature.gesture.GestureName;
 import fr.free.totalboumboum.engine.content.sprite.bomb.Bomb;
 
@@ -142,9 +143,9 @@ public class AiBomb extends AiSprite<Bomb>
 	 */
 	private void updateWorking()
 	{	Bomb sprite = getSprite();
-		String gesture = sprite.getCurrentGesture();
-		if(gesture.equalsIgnoreCase(GestureName.OSCILLATING_FAILING)
-			|| gesture.equalsIgnoreCase(GestureName.STANDING_FAILING))
+		GestureName gesture = sprite.getCurrentGesture().getName();
+		if(gesture==GestureName.OSCILLATING_FAILING
+			|| gesture==GestureName.STANDING_FAILING)
 			working = false;
 		else
 			working = true;
@@ -198,7 +199,7 @@ public class AiBomb extends AiSprite<Bomb>
 	 */
 	private void initFuse()
 	{	// theoretic delay before explosion 
-		{	StateAbility ability = getSprite().modulateAction(StateAbility.BOMB_TRIGGER_TIMER);
+		{	StateAbility ability = getSprite().getAbility(StateAbilityName.BOMB_TRIGGER_TIMER);
 			normalDuration = (long)ability.getStrength();		
 		}
 	}

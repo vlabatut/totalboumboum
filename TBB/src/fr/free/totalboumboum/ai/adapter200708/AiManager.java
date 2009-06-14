@@ -31,6 +31,7 @@ import fr.free.totalboumboum.engine.container.tile.Tile;
 import fr.free.totalboumboum.engine.content.feature.Direction;
 import fr.free.totalboumboum.engine.content.feature.ability.AbstractAbility;
 import fr.free.totalboumboum.engine.content.feature.ability.StateAbility;
+import fr.free.totalboumboum.engine.content.feature.ability.StateAbilityName;
 import fr.free.totalboumboum.engine.content.feature.event.ControlEvent;
 import fr.free.totalboumboum.engine.content.feature.gesture.action.Contact;
 import fr.free.totalboumboum.engine.content.feature.gesture.action.Orientation;
@@ -111,9 +112,9 @@ public abstract class AiManager extends AbstractAiManager<Integer>
         ownPosition[0] = tile.getCol();
         ownPosition[1] = tile.getLine();
         // propriétés du joueur
-        StateAbility ab = sprite.computeCapacity(StateAbility.BOMB_RANGE);
+        StateAbility ab = sprite.getAbility(StateAbilityName.BOMB_RANGE);
 		ownFirePower = (int)ab.getStrength();
-        ab = sprite.computeCapacity(StateAbility.BOMB_NUMBER);
+        ab = sprite.getAbility(StateAbilityName.BOMB_NUMBER);
 		ownBombCount = (int)ab.getStrength() - sprite.getDroppedBombs().size();
 
         // position relative de l'éventuelle bombe
@@ -189,7 +190,7 @@ public abstract class AiManager extends AbstractAiManager<Integer>
 		    			{	AbstractAbility a = j.next();
 		    				if(a instanceof StateAbility)
 		    				{	StateAbility sa = (StateAbility) a;
-		    					if(sa.getName().equals(StateAbility.BOMB_NUMBER))
+		    					if(sa.getName().equals(StateAbilityName.BOMB_NUMBER))
 		    					{	found = true;
 		    						zoneMatrix[y][x] = ArtificialIntelligence.AI_BLOCK_ITEM_BOMB;	
 		    					}
@@ -245,9 +246,9 @@ public abstract class AiManager extends AbstractAiManager<Integer>
 				int tempPlayerData[] = {tempX,tempY,tempDirAI};
 				players.add(tempPlayerData);
 				playersStates.add(!tempPlayer.getSprite().isEnded());
-		        ab = tempPlayer.getSprite().computeCapacity(StateAbility.BOMB_RANGE);
+		        ab = tempPlayer.getSprite().getAbility(StateAbilityName.BOMB_RANGE);
 		        firePowers.add((int)ab.getStrength());
-		        ab = tempPlayer.getSprite().computeCapacity(StateAbility.BOMB_NUMBER);
+		        ab = tempPlayer.getSprite().getAbility(StateAbilityName.BOMB_NUMBER);
 		        bombCounts.add((int)ab.getStrength());
 			}
 		}

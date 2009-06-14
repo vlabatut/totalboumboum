@@ -32,7 +32,7 @@ public abstract class EventManager
 {	/** managed sprite  */
 	protected Sprite sprite;
 	/** current gesture */
-	protected String gesture;
+	protected GestureName gesture;
 	/** current direction the sprite is facing */
 	protected Direction spriteDirection;
 		
@@ -57,10 +57,10 @@ public abstract class EventManager
 	{	this.sprite = sprite;
 	}
 
-	public String getGesture()
+	public GestureName getGesture()
 	{	return gesture;
 	}
-	public void setGesture(String gesture)
+	public void setGesture(GestureName gesture)
 	{	this.gesture = gesture;
 	}
 

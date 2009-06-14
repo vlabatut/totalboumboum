@@ -898,6 +898,13 @@ public class Launcher
 	 * - pour chaque gesture, fixer les actions autorisées 
 	 * - adapter tous les loaders au fait que les constantes exprimées en XML sont maintenant en majuscules, adapter aussi les fichiers xml
 	 * 
+	 * - forcément des trucs à changer sur les adapteurs d'IA, car ils attendent des permissions et pas des modulations. donc null (i.e. pas de modulation) n'a plus la même signification.
+	 * 
+	 * 
+	 * y a manifestement une différence entre GeneralAction et les actions utilisées dans les Ability et Modulation
+	 * dans ces dernières, on se place relativement au sprite, qui est actor target ou third.
+	 * surement qqchose à faire de ce coté là
+	 * 
 	 * 
 	 * - il faut mutualiser tous les fichiers de description de sprites communs (style tous les blocs durs)
 	 * 	- chargement plus rapide
