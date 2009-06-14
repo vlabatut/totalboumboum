@@ -198,31 +198,34 @@ public abstract class GeneralAction
 		// tile position
 		if(result)
 			result = tilePositions.contains(action.getTilePosition());
-/*	
-		else //if(a instanceof GeneralAction)
-		{	GeneralAction action = (GeneralAction)a;
-			// name
-			result = name.equalsIgnoreCase(action.getName());
-			// actor
-			if(result)
-				result = actors.containsAll(action.getActors());
-			// target
-			if(result)
-				result = targets.containsAll(action.getTargets());
-			// direction
-			if(result)
-				result = directions.containsAll(action.getDirections());
-			// contact
-			if(result)
-				result = contacts.containsAll(action.getContacts());
-			// orientation
-			if(result)
-				result = orientations.containsAll(action.getOrientations());
-			// tile position
-			if(result)
-				result = tilePositions.containsAll(action.getTilePositions());
-		}
-*/		
+		
+		return result;
+	}
+	
+	public boolean subsume(GeneralAction action)
+	{	boolean result = true;
+		// name
+		if(result)
+			result = getName()==action.getName();
+		// actor
+		if(result)
+			result = actors.containsAll(action.getActors());
+		// target
+		if(result)
+			result = targets.containsAll(action.getTargets());
+		// direction
+		if(result)
+			result = directions.containsAll(action.getDirections());
+		// contact
+		if(result)
+			result = contacts.containsAll(action.getContacts());
+		// orientation
+		if(result)
+			result = orientations.containsAll(action.getOrientations());
+		// tile position
+		if(result)
+			result = tilePositions.containsAll(action.getTilePositions());
+		
 		return result;
 	}	
 	

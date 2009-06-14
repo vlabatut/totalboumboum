@@ -43,7 +43,7 @@ import fr.free.totalboumboum.engine.content.feature.event.EngineEvent;
 import fr.free.totalboumboum.engine.content.feature.gesture.Gesture;
 import fr.free.totalboumboum.engine.content.feature.gesture.GestureName;
 import fr.free.totalboumboum.engine.content.feature.gesture.GesturePack;
-import fr.free.totalboumboum.engine.content.feature.gesture.action.AbstractAction;
+import fr.free.totalboumboum.engine.content.feature.gesture.action.GeneralAction;
 import fr.free.totalboumboum.engine.content.feature.gesture.action.Role;
 import fr.free.totalboumboum.engine.content.feature.gesture.action.SpecificAction;
 import fr.free.totalboumboum.engine.content.feature.gesture.modulation.ActorModulation;
@@ -386,22 +386,25 @@ public abstract class Sprite
 	{	this.abilityManager = abilityManager;
 	}
 	
-	public StateAbility getAbility(StateAbility ability)
+	public StateAbility getAbility(StateAbilityName ability)
 	{	return abilityManager.getAbility(ability);
 	}
 	
-	public StateAbility getAbility(String name)
+/*	public StateAbility getAbility(String name)
 	{	return abilityManager.getAbility(name);
 	}
-	
-	public ActionAbility getAbility(ActionAbility ability)
-	{	return abilityManager.getAbility(ability);
+*/	
+	public ActionAbility getAbility(SpecificAction action)
+	{	return abilityManager.getAbility(action);
 	}
-	
-	public ActionAbility getAbility(AbstractAction action)
+	public ActionAbility getAbility(GeneralAction action)
 	{	return abilityManager.getAbility(action);
 	}
 	
+/*	public ActionAbility getAbility(AbstractAction action)
+	{	return abilityManager.getAbility(action);
+	}
+*/	
 	public void decrementUse(AbstractAbility ability, int delta)
 	{	abilityManager.decrementUse(ability, delta);
 	}
@@ -644,8 +647,8 @@ public abstract class Sprite
 	{	return modulationManager.getThirdModulation(action);
 	}
 	
-	public StateAbility computeAbility(String name)
-	{	return modulationManager.modulateAction(name);
+	public StateAbility modulateStateAbility(StateAbilityName name)
+	{	return modulationManager.modulateStateAbility(name);
 	}
 	
 	public ActionAbility modulateAction(SpecificAction action)

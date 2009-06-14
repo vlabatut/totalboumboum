@@ -107,7 +107,7 @@ public class AbilityManager
 	{	return getAbility(ability.getName());
 	}
 */
-	public ActionAbility getAbility(AbstractAction action)
+	public ActionAbility getAbility(SpecificAction action)
 	{	ActionAbility result = null;
 		Iterator<AbstractAbility> i = currentAbilities.iterator();
 		while(i.hasNext() && result==null)
@@ -119,16 +119,26 @@ public class AbilityManager
 			}
 		}
 		if(result==null)
-			if(action instanceof SpecificAction)
-				result = new ActionAbility(((SpecificAction)action).getGeneralAction(),getLevel());
-			else // if(action instanceof GeneralAction)
-				result = new ActionAbility(((GeneralAction)action),getLevel());
+			result = new ActionAbility((action),getLevel());
 		return result;
 	}
-/*	public ActionAbility getAbility(ActionAbility ability)
-	{	return getAbility(ability.getAction());
+	
+	public ActionAbility getAbility(GeneralAction action)
+	{	ActionAbility result = null;
+		Iterator<AbstractAbility> i = currentAbilities.iterator();
+		while(i.hasNext() && result==null)
+		{	AbstractAbility ab = i.next();
+			if(ab instanceof ActionAbility)
+			{	ActionAbility ablt = (ActionAbility)ab;
+				if(ablt.getAction().subsume(action))
+					result = ablt;
+			}
+		}
+		if(result==null)
+			result = new ActionAbility((action),getLevel());
+		return result;
 	}
-*/
+
 	/**
 	 *  current abilities :
 	 *  	- directAbilities
@@ -146,6 +156,7 @@ if(modulationAbilities.size()>0)
 */
 		updateAbilities(modulationAbilities);
 	}
+	
 	public void decrementUse(AbstractAbility ability, int delta)
 	{	ArrayList<AbstractAbility> itemAbilities = sprite.getItemAbilities();
 		AbstractAbility a = null;
@@ -195,6 +206,9 @@ if(modulationAbilities.size()>0)
 		}
 	}
 
+	/////////////////////////////////////////////////////////////////
+	// FINISHED				/////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
 	private boolean finished = false;
 	
 	public void finish()

@@ -33,18 +33,6 @@ import fr.free.totalboumboum.engine.content.sprite.Sprite;
 
 public abstract class AbstractActionModulation extends AbstractModulation
 {	
-	/**
-	 * action concernée par cette permission
-	 */
-	protected GeneralAction action;
-	/** 
-	 * abilités necessaires à l'acteur pour avoir la permission  
-	 */
-	protected ArrayList<AbstractAbility> actorRestrictions;
-	/** 
-	 * abilités necessaires à la cible pour avoir la permission  
-	 */
-	protected ArrayList<AbstractAbility> targetRestrictions;
 	
 	public AbstractActionModulation(GeneralAction action)
 	{	super();
@@ -53,18 +41,39 @@ public abstract class AbstractActionModulation extends AbstractModulation
 		this.targetRestrictions = new ArrayList<AbstractAbility>();
 	}
 	
+	/////////////////////////////////////////////////////////////////
+	// ACTION		/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	/** action concernée par cette permission */
+	protected GeneralAction action;
+	
 	public GeneralAction getAction()
 	{	return action;			
 	}
+	
+	/////////////////////////////////////////////////////////////////
+	// ACTOR RESTRICTIONS	/////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	/** abilités necessaires à l'acteur pour avoir la permission */
+	protected ArrayList<AbstractAbility> actorRestrictions;
 	
 	public void addActorRestriction(AbstractAbility ability)
 	{	actorRestrictions.add(ability);
 	}
 
+	/////////////////////////////////////////////////////////////////
+	// TARGET RESTRICTIONS		/////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	/** abilités necessaires à la cible pour avoir la permission */
+	protected ArrayList<AbstractAbility> targetRestrictions;
+	
 	public void addTargetRestriction(AbstractAbility ability)
 	{	targetRestrictions.add(ability);
 	}
 	
+	/////////////////////////////////////////////////////////////////
+	// STRING					/////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
 	public String toString()
 	{	String result = action.toString();
 		result = result + "<"+strength+","+frame+">";
@@ -88,6 +97,12 @@ public abstract class AbstractActionModulation extends AbstractModulation
 		return result;
 	}
 	
+	/////////////////////////////////////////////////////////////////
+	// MODULATE					/////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	/**
+	 * tests if this modulation is related to the specified action
+	 */
 	public boolean isConcerningAction(SpecificAction specificAction)
 	{	boolean result;
 		// action
@@ -99,9 +114,9 @@ public abstract class AbstractActionModulation extends AbstractModulation
 			while(i.hasNext() && result)
 			{	AbstractAbility ab = i.next();
 				if(ab instanceof ActionAbility)
-					ab = actor.getAbility((ActionAbility)ab);
+					ab = actor.getAbility(((ActionAbility)ab).getAction());
 				else
-					ab = actor.getAbility((StateAbility)ab);
+					ab = actor.getAbility(((StateAbility)ab).getName());
 				result = ab.isActive();
 			}
 		}
@@ -112,9 +127,9 @@ public abstract class AbstractActionModulation extends AbstractModulation
 			while(i.hasNext() && result)
 			{	AbstractAbility ab = i.next();
 				if(ab instanceof ActionAbility)
-					ab = target.getAbility((ActionAbility)ab);
+					ab = target.getAbility(((ActionAbility)ab).getAction());
 				else
-					ab = target.getAbility((StateAbility)ab);
+					ab = target.getAbility(((StateAbility)ab).getName());
 				result = ab.isActive();
 			}
 		}
@@ -122,6 +137,9 @@ public abstract class AbstractActionModulation extends AbstractModulation
 		return result;		
 	}
 
+	/////////////////////////////////////////////////////////////////
+	// FINISHED					/////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
 	public void finish()
 	{	if(!finished)
 		{	super.finish();
