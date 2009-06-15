@@ -132,7 +132,7 @@ public class Gesture
 		Iterator<StateModulation> i = stateModulations.iterator();
 		while(i.hasNext() && result==null)
 		{	StateModulation modulation = i.next();
-			if(modulation.getName()==name) //NOTE moduler directement ? ou renommer en subsume?
+			if(modulation.getName()==name)
 				result = modulation;
 		}
 		return result;
@@ -147,7 +147,7 @@ public class Gesture
 		Iterator<ActorModulation> i = actorModulations.iterator();
 		while(i.hasNext() && result==null)
 		{	ActorModulation modulation = i.next();
-			if(modulation.isConcerningAction(action)) //NOTE moduler directement ? ou renommer en subsume?
+			if(modulation.isConcerningAction(action))
 				result = modulation;
 		}
 		return result;

@@ -25,10 +25,15 @@ import java.util.Iterator;
 
 import fr.free.totalboumboum.engine.content.feature.ability.AbstractAbility;
 import fr.free.totalboumboum.engine.content.feature.gesture.action.GeneralAction;
+import fr.free.totalboumboum.engine.content.feature.gesture.action.SpecificAction;
 
 public class ActorModulation extends AbstractActionModulation
 {
 	public ActorModulation(GeneralAction action)
+	{	super(action);
+	}
+
+	public ActorModulation(SpecificAction action)
 	{	super(action);
 	}
 

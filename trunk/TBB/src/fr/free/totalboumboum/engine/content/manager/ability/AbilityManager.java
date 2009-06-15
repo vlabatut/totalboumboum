@@ -119,7 +119,7 @@ public class AbilityManager
 			}
 		}
 		if(result==null)
-			result = new ActionAbility((action),getLevel());
+			result = new ActionAbility(action,getLevel());
 		return result;
 	}
 	
@@ -135,7 +135,7 @@ public class AbilityManager
 			}
 		}
 		if(result==null)
-			result = new ActionAbility((action),getLevel());
+			result = new ActionAbility(action,getLevel());
 		return result;
 	}
 

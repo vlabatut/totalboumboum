@@ -37,8 +37,10 @@ public abstract class AbstractActionModulation extends AbstractModulation
 	public AbstractActionModulation(GeneralAction action)
 	{	super();
 		this.action = action;	
-		this.actorRestrictions = new ArrayList<AbstractAbility>();
-		this.targetRestrictions = new ArrayList<AbstractAbility>();
+	}
+	
+	public AbstractActionModulation(SpecificAction action)
+	{	this(action.getGeneralAction());
 	}
 	
 	/////////////////////////////////////////////////////////////////
@@ -55,7 +57,7 @@ public abstract class AbstractActionModulation extends AbstractModulation
 	// ACTOR RESTRICTIONS	/////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	/** abilités necessaires à l'acteur pour avoir la permission */
-	protected ArrayList<AbstractAbility> actorRestrictions;
+	protected final ArrayList<AbstractAbility> actorRestrictions = new ArrayList<AbstractAbility>();
 	
 	public void addActorRestriction(AbstractAbility ability)
 	{	actorRestrictions.add(ability);
@@ -65,7 +67,7 @@ public abstract class AbstractActionModulation extends AbstractModulation
 	// TARGET RESTRICTIONS		/////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	/** abilités necessaires à la cible pour avoir la permission */
-	protected ArrayList<AbstractAbility> targetRestrictions;
+	protected final ArrayList<AbstractAbility> targetRestrictions = new ArrayList<AbstractAbility>();
 	
 	public void addTargetRestriction(AbstractAbility ability)
 	{	targetRestrictions.add(ability);
@@ -135,6 +137,24 @@ public abstract class AbstractActionModulation extends AbstractModulation
 		}
 		//	
 		return result;		
+	}
+	
+	/**
+	 * modulates the specified ability. This ability has
+	 * previously been tested with isConcerningAction and is 
+	 * supposed to concern an action subsumed by this modulation.
+	 * The returned ability is a new object, with fields similar to
+	 * the specified parameter, excepted for the strength and frame,
+	 * whitch have been modulated.
+	 */
+	public ActionAbility modulate(ActionAbility ability)
+	{	ActionAbility result = (ActionAbility)ability.copy();
+		//if(getAction().subsume(ability.getAction())) already tested
+		{	result.setStrength(getStrength());
+			result.setFrame(getFrame());
+			result.combine(ability);
+		}
+		return result;
 	}
 
 	/////////////////////////////////////////////////////////////////
