@@ -25,6 +25,7 @@ import java.util.Iterator;
 
 import fr.free.totalboumboum.engine.content.feature.ability.AbstractAbility;
 import fr.free.totalboumboum.engine.content.feature.gesture.action.GeneralAction;
+import fr.free.totalboumboum.engine.content.feature.gesture.action.SpecificAction;
 
 public class ThirdModulation extends AbstractActionModulation
 {
@@ -32,6 +33,9 @@ public class ThirdModulation extends AbstractActionModulation
 	{	super(action);
 	}
 	
+	public ThirdModulation(SpecificAction action)
+	{	super(action);
+	}
 	public boolean equals(Object o)
 	{	boolean result = false;
 		if(o instanceof ThirdModulation)

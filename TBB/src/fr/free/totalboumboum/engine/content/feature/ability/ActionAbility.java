@@ -24,7 +24,6 @@ package fr.free.totalboumboum.engine.content.feature.ability;
 import fr.free.totalboumboum.engine.container.level.Level;
 import fr.free.totalboumboum.engine.content.feature.gesture.action.ActionName;
 import fr.free.totalboumboum.engine.content.feature.gesture.action.GeneralAction;
-import fr.free.totalboumboum.engine.content.feature.gesture.action.IncompatibleParameterException;
 import fr.free.totalboumboum.engine.content.feature.gesture.action.SpecificAction;
 
 public class ActionAbility extends AbstractAbility
@@ -36,22 +35,8 @@ public class ActionAbility extends AbstractAbility
 		this.action = action;
 	}
 	
-	public ActionAbility(SpecificAction specificAction, Level level)
-	{	super(level);
-//TODO mieux vaudrait p-ê utiliser une fonction de généralisation dans SpecificAction?	
-		this.action = specificAction.getName().createGeneralAction();
-		try
-		{	action.addActor(specificAction.getActor().getRole());
-			action.addDirection(specificAction.getDirection());
-			action.addContact(specificAction.getContact());
-			action.addOrientation(specificAction.getOrientation());
-			action.addTilePosition(specificAction.getTilePosition());
-			if(specificAction.getTarget()!=null)
-				action.addTarget(specificAction.getTarget().getRole());
-		}
-		catch (IncompatibleParameterException e)
-		{	e.printStackTrace();
-		}
+	public ActionAbility(SpecificAction action, Level level)
+	{	this(action.getGeneralAction(),level);
 	}
 	
 	public GeneralAction getAction()
@@ -76,9 +61,11 @@ public class ActionAbility extends AbstractAbility
 	{	ActionAbility result;
 		GeneralAction a = action; //NOTE à copier ? (non)
 		result = new ActionAbility(a,level);
+		result.setFrame(frame);
+		result.setMax(max);
 		result.setStrength(strength);
-		result.setUses(uses);
 		result.setTime(time);
+		result.setUses(uses);
 		return result;
 	}
 

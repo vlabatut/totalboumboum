@@ -129,7 +129,7 @@ public class ModulationsLoader
     {	// strength
 		String strengthStr = root.getAttribute(XmlTools.ATT_STRENGTH).getValue().trim();
 		float strength;
-		if(strengthStr.equals(AbstractAbility.MAXIMUM_VALUE))
+		if(strengthStr.equals(XmlTools.VAL_MAX))
 			strength = Float.MAX_VALUE;
 		else
 			strength = Float.parseFloat(strengthStr);
@@ -151,7 +151,7 @@ public class ModulationsLoader
     {	// strength
 		String strengthStr = root.getAttribute(XmlTools.ATT_STRENGTH).getValue().trim();
 		float strength;
-		if(strengthStr.equals(AbstractAbility.MAXIMUM_VALUE))
+		if(strengthStr.equals(XmlTools.VAL_MAX))
 			strength = Float.MAX_VALUE;
 		else
 			strength = Float.parseFloat(strengthStr);

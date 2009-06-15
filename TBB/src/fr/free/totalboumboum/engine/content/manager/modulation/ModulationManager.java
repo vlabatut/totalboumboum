@@ -32,8 +32,6 @@ import fr.free.totalboumboum.engine.content.feature.ability.ActionAbility;
 import fr.free.totalboumboum.engine.content.feature.ability.StateAbility;
 import fr.free.totalboumboum.engine.content.feature.ability.StateAbilityName;
 import fr.free.totalboumboum.engine.content.feature.gesture.Gesture;
-import fr.free.totalboumboum.engine.content.feature.gesture.GestureName;
-import fr.free.totalboumboum.engine.content.feature.gesture.action.GeneralAction;
 import fr.free.totalboumboum.engine.content.feature.gesture.action.SpecificAction;
 import fr.free.totalboumboum.engine.content.feature.gesture.modulation.ActorModulation;
 import fr.free.totalboumboum.engine.content.feature.gesture.modulation.StateModulation;
@@ -76,32 +74,72 @@ public class ModulationManager
 	/////////////////////////////////////////////////////////////////
 	// STATE MODULATIONS	/////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
+	/**
+	 * returns the modulation corresponding to the specified StateAbilityName.
+	 * If the sprite has no gesture, or no modulation for this StateAbility
+	 * then a neutral modulation is returned.
+	 * This method always returns a modulation.
+	 */
 	public StateModulation getStateModulation(StateAbilityName name)
-	{	StateModulation result = currentGesture.getStateModulation(name);
+	{	StateModulation result = null;
+		if(currentGesture!=null)
+			result = currentGesture.getStateModulation(name);
+		if(result==null)
+			result = new StateModulation(name);
 		return result;
 	}
 
 	/////////////////////////////////////////////////////////////////
 	// ACTOR MODULATIONS	/////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
+	/**
+	 * returns the modulation corresponding to the specified SpecificAction.
+	 * If the sprite has no gesture, or no modulation for this action
+	 * then a neutral modulation is returned.
+	 * This method always returns a modulation.
+	 */
 	public ActorModulation getActorModulation(SpecificAction action)
-	{	ActorModulation result = currentGesture.getActorModulation(action);
+	{	ActorModulation result = null;
+		if(currentGesture!=null)
+			result = currentGesture.getActorModulation(action);
+		if(result==null)
+			result = new ActorModulation(action);
 		return result;
 	}
 	
 	/////////////////////////////////////////////////////////////////
 	// TARGET MODULATIONS	/////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
+	/**
+	 * returns the modulation corresponding to the specified SpecificAction.
+	 * If the sprite has no gesture, or no modulation for this action
+	 * then a neutral modulation is returned.
+	 * This method always returns a modulation.
+	 */
 	public TargetModulation getTargetModulation(SpecificAction action)
-	{	TargetModulation result = currentGesture.getTargetModulation(action);
+	{	TargetModulation result = null;
+		if(currentGesture!=null)
+			result = currentGesture.getTargetModulation(action);
+		if(result==null)
+			result = new TargetModulation(action);
 		return result;
 	}
 	
 	/////////////////////////////////////////////////////////////////
 	// THIRD MODULATIONS	/////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
+	/**
+	 * returns the modulation corresponding to the specified SpecificAction.
+	 * If the sprite has no gesture, or no modulation for this action
+	 * then a neutral modulation is returned.
+	 * This method always returns a modulation.
+	 */
 	public ThirdModulation getThirdModulation(SpecificAction action)
-	{	ThirdModulation result = currentGesture.getThirdModulation(action);
+	{	ThirdModulation result = null;
+		if(currentGesture!=null)
+			result = currentGesture.getThirdModulation(action);
+		if(result==null)
+			result = new ThirdModulation(action);
 		return result;
 	}
 	
@@ -118,14 +156,13 @@ public class ModulationManager
 	public ActionAbility modulateAction(SpecificAction action)
 	{	// actor original ability 
 		Sprite actor = action.getActor();
-		ActionAbility result = actor.getAbility(action); //TODO écrire getAbility(action), les autres sont-ils utiles?
-//		result = (ActionAbility)result.copy(); //TODO is this copy really needed?	
+		ActionAbility result = actor.getAbility(action);
 		// actor modulation
-		result = combineActorModulation(action,result);		
+		result = combineActorModulation(action,result);
 		// target modulation (if there's one!)
-		result = combineTargetModulation(action,result);		
+		result = combineTargetModulation(action,result);
 		// environement modulation
-		
+		result = combineThirdModulation(action,result);
 		return result;
 	}
 	
@@ -134,8 +171,7 @@ public class ModulationManager
 		Sprite actor = action.getActor();
 		if(result.isActive())
 		{	ActorModulation actorModulation = actor.getActorModulation(action);
-			if(actorModulation!=null) //TODO peut être que c'est plus simple de renvoyer systmétiquement une modulation, mais avec une puissance de 0?
-				result = actorModulation.modulate(result); //TODO écrire cette méthode aussi, qui renvoie une nouvelle ability		
+			result = actorModulation.modulate(result);		
 		}
 		return result;
 	}
@@ -143,10 +179,9 @@ public class ModulationManager
 	private ActionAbility combineTargetModulation(SpecificAction action, ActionAbility ability)
 	{	ActionAbility result = ability;
 		Sprite target = action.getTarget();
-		if(result.isActive() && target!=null)//TODO quand on cherche une modulation pour un sprite donné, ça dépend de son gesture courant. si pas de gesture, alors il renvoie null
+		if(result.isActive() && target!=null)
 		{	TargetModulation targetModulation = target.getTargetModulation(action);
-			if(targetModulation!=null)
-				result = targetModulation.modulate(result); 		
+			result = targetModulation.modulate(result); 		
 		}
 		return result;
 	}
@@ -183,8 +218,7 @@ public class ModulationManager
 			while(i.hasNext() && result.isActive())
 			{	Sprite tempSprite = i.next();
 				ThirdModulation thirdModulation = tempSprite.getThirdModulation(action);
-				if(thirdModulation==null)
-					result = thirdModulation.modulate(result); 		
+				result = thirdModulation.modulate(result); 		
 			}
 		}
 		return result;
@@ -252,8 +286,7 @@ public class ModulationManager
 			while(i.hasNext() && result.isActive())
 			{	Sprite tempSprite = i.next();
 				StateModulation stateModulation = tempSprite.getStateModulation(name);
-				if(stateModulation==null)
-					result = stateModulation.modulate(result); 		
+				result = stateModulation.modulate(result); 		
 			}
 		}
 		return result;

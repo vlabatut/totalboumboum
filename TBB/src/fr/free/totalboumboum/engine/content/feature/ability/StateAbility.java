@@ -55,9 +55,11 @@ public class StateAbility extends AbstractAbility
 	public AbstractAbility copy()
 	{	StateAbility result;
 		result = new StateAbility(name,level);
+		result.setFrame(frame);
+		result.setMax(max);
 		result.setStrength(strength);
-		result.setUses(uses);
 		result.setTime(time);
+		result.setUses(uses);
 		return result;
 	}
 

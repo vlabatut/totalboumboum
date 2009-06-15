@@ -1,5 +1,6 @@
 package fr.free.totalboumboum.engine.content.feature.gesture.modulation;
 
+import fr.free.totalboumboum.engine.content.feature.ability.StateAbility;
 import fr.free.totalboumboum.engine.content.feature.ability.StateAbilityName;
 
 /*
@@ -54,6 +55,26 @@ public class StateModulation extends AbstractModulation
 		return result;
 	}
 	
+	/////////////////////////////////////////////////////////////////
+	// MODULATE					/////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	/**
+	 * modulates the specified ability. This ability is 
+	 * supposed to concern the specified state ability.
+	 * The returned ability is a new object, with fields similar to
+	 * the specified parameter, excepted for the strength and frame,
+	 * whitch have been modulated.
+	 */
+	public StateAbility modulate(StateAbility ability)
+	{	StateAbility result = (StateAbility)ability.copy();
+		//if(getName()==ability.getName()) already tested
+		{	result.setStrength(getStrength());
+			result.setFrame(getFrame());
+			result.combine(ability);
+		}
+		return result;
+	}
+
 	/////////////////////////////////////////////////////////////////
 	// STRING					/////////////////////////////////////
 	/////////////////////////////////////////////////////////////////

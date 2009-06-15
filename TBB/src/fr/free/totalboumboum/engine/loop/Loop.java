@@ -50,10 +50,10 @@ import fr.free.totalboumboum.engine.container.level.Players;
 import fr.free.totalboumboum.engine.content.feature.ability.AbilityLoader;
 import fr.free.totalboumboum.engine.content.feature.ability.AbstractAbility;
 import fr.free.totalboumboum.engine.content.feature.ability.StateAbility;
+import fr.free.totalboumboum.engine.content.feature.ability.StateAbilityName;
 import fr.free.totalboumboum.engine.content.feature.event.EngineEvent;
-import fr.free.totalboumboum.engine.content.feature.gesture.modulation.ModulationPack;
+import fr.free.totalboumboum.engine.content.feature.gesture.GesturePack;
 import fr.free.totalboumboum.engine.content.feature.gesture.modulation.ModulationsLoader;
-import fr.free.totalboumboum.engine.content.feature.gesture.trajectory.TrajectoryPack;
 import fr.free.totalboumboum.engine.content.feature.gesture.trajectory.TrajectoriesLoader;
 import fr.free.totalboumboum.engine.content.sprite.Sprite;
 import fr.free.totalboumboum.engine.content.sprite.hero.Hero;
@@ -97,9 +97,10 @@ public class Loop implements Runnable, Serializable
 		String folder = baseFolder + File.separator+FileTools.FOLDER_ABILITIES;
 		ArrayList<AbstractAbility> abilities = AbilityLoader.loadAbilityPack(folder,level);
 		folder = baseFolder + File.separator+FileTools.FOLDER_TRAJECTORIES;
-		TrajectoryPack trajectoryPack = TrajectoriesLoader.loadTrajectoryPack(folder,level);
+		GesturePack gesturePack = new GesturePack();
+		TrajectoriesLoader.loadTrajectories(folder,gesturePack,level);
 		folder = baseFolder + File.separator+FileTools.FOLDER_PERMISSIONS;
-		ModulationPack permissionPack = ModulationsLoader.loadPermissionPack(folder,level);
+		ModulationsLoader.loadModulations(folder,gesturePack,level);
 //		loadStepOver();		
 		// load players : individual stuff
 		ArrayList<Profile> profiles = round.getProfiles();
@@ -124,7 +125,7 @@ public class Loop implements Runnable, Serializable
 		while(i.hasNext())
 		{	// init
 			Profile profile = i.next();
-			Player player = new Player(profile,level,abilities,permissionPack,trajectoryPack);
+			Player player = new Player(profile,level,abilities,gesturePack);
 			players.add(player);
 			Hero hero = (Hero)player.getSprite();
 			// location
@@ -719,7 +720,7 @@ System.out.println();
 	{	if(players.size()>0)
 		{	Player player = players.get(0);
 			Sprite sprite = player.getSprite();
-			StateAbility ability = sprite.modulateAction(StateAbility.HERO_ENTRY_DURATION);
+			StateAbility ability = sprite.getAbility(StateAbilityName.HERO_ENTRY_DURATION);
 			entryDelay = ability.getStrength();
 		}
 	}
@@ -727,7 +728,7 @@ System.out.println();
 	{	if(players.size()>0)
 		{	Player player = players.get(0);
 			Sprite sprite = player.getSprite();
-			StateAbility ability = sprite.modulateAction(StateAbility.HERO_CELEBRATION_DURATION);
+			StateAbility ability = sprite.getAbility(StateAbilityName.HERO_CELEBRATION_DURATION);
 			celebrationDelay = ability.getStrength();
 		}
 		else

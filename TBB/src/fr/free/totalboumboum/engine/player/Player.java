@@ -39,8 +39,7 @@ import fr.free.totalboumboum.configuration.profile.PredefinedColor;
 import fr.free.totalboumboum.configuration.profile.Profile;
 import fr.free.totalboumboum.engine.container.level.Level;
 import fr.free.totalboumboum.engine.content.feature.ability.AbstractAbility;
-import fr.free.totalboumboum.engine.content.feature.gesture.modulation.ModulationPack;
-import fr.free.totalboumboum.engine.content.feature.gesture.trajectory.TrajectoryPack;
+import fr.free.totalboumboum.engine.content.feature.gesture.GesturePack;
 import fr.free.totalboumboum.engine.content.sprite.Sprite;
 import fr.free.totalboumboum.engine.content.sprite.hero.HeroFactory;
 import fr.free.totalboumboum.engine.content.sprite.hero.HeroFactoryLoader;
@@ -64,14 +63,14 @@ public class Player
 	/** current controls */
 	private ControlSettings controlSettings;
 	
-	public Player(Profile profile, Level level, ArrayList<AbstractAbility> ablts, ModulationPack permissions, TrajectoryPack trajectories) throws ParserConfigurationException, SAXException, IOException, ClassNotFoundException
+	public Player(Profile profile, Level level, ArrayList<AbstractAbility> ablts, GesturePack gestures) throws ParserConfigurationException, SAXException, IOException, ClassNotFoundException
 	{	this.level = level;
 		this.profile = profile;
 		// sprite
 		color = this.profile.getSpriteColor();
 		String folder = FileTools.getHeroesPath()+File.separator+this.profile.getSpritePack();
 		folder = folder + File.separator+this.profile.getSpriteFolder();
-		HeroFactory tempHeroFactory = HeroFactoryLoader.loadHeroFactory(folder,level,color,ablts,permissions,trajectories);
+		HeroFactory tempHeroFactory = HeroFactoryLoader.loadHeroFactory(folder,level,color,ablts,gestures);
 		sprite = tempHeroFactory.makeSprite();
 		sprite.initGesture();
 		// control settings

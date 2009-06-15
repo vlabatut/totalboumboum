@@ -25,29 +25,16 @@ import fr.free.totalboumboum.engine.container.level.Level;
 
 public abstract class AbstractAbility
 {	
-	public static final String MAXIMUM_VALUE = "maximum";
-	
 	protected Level level;
 	
-	/** 
-	 * numeric parameter (ability is disabled if <=0) 
-	 */
+	/** numeric parameter (ability is disabled if <=0) */
 	protected float strength;
 	protected float max;
-	/** 
-	 * framing ability (true) or normal one (false)
-	 * framing means the existing ability level is framed by this ability's one 
-	 */
+	/** framing ability (true) or normal one (false) framing means the existing ability level is framed by this ability's one */
 	protected boolean frame;
-	/** 
-	 * maximum number of uses for this ability
-	 * negative uses means no use limit 
-	 * */
+	/** maximum number of uses for this ability negative uses means no use limit */
 	protected int uses;
-	/** 
-	 * time limit for using this ability
-	 * negative time means no time limit 
-	 * */
+	/** time limit for using this ability negative time means no time limit */
 	protected double time;
 
 	
