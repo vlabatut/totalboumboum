@@ -25,19 +25,6 @@ import fr.free.totalboumboum.engine.container.level.Level;
 
 public abstract class AbstractAbility
 {	
-	protected Level level;
-	
-	/** numeric parameter (ability is disabled if <=0) */
-	protected float strength;
-	protected float max;
-	/** framing ability (true) or normal one (false) framing means the existing ability level is framed by this ability's one */
-	protected boolean frame;
-	/** maximum number of uses for this ability negative uses means no use limit */
-	protected int uses;
-	/** time limit for using this ability negative time means no time limit */
-	protected double time;
-
-	
 	public AbstractAbility(Level level)
 	{	this.level = level;
 		max = Float.MAX_VALUE;
@@ -45,39 +32,74 @@ public abstract class AbstractAbility
 		time = -1;
 		uses = -1;
 	}
+
+	/////////////////////////////////////////////////////////////////
+	// LEVEL			/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	protected Level level;
+
+	/////////////////////////////////////////////////////////////////
+	// MAX				/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	protected float max;
+
 	protected void setMax(float max)
 	{	this.max = max;
 	}
 	
+	/////////////////////////////////////////////////////////////////
+	// STRENGTH			/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	/** numeric parameter (ability is disabled if <=0) */
+	protected float strength;
+
 	public boolean isActive()
 	{	return strength>0;		
 	}
+
 	public float getStrength()
 	{	float result = strength;
 		if(strength>max)
 			result = max;
 		return result;
 	}
+	
 	public void modifyStrength(float delta)
 	{	this.strength = this.strength + delta;
 	}
+	
 	public void setStrength(float strength)
 	{	this.strength = strength;
 	}
 
+	/////////////////////////////////////////////////////////////////
+	// FRAME			/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	/** framing ability (true) or normal one (false) framing means the existing ability level is framed by this ability's one */
+	protected boolean frame;
+
 	public boolean getFrame()
 	{	return frame;
 	}
+	
 	public void setFrame(boolean frame)
 	{	this.frame = frame;
 	}	
 
+	/////////////////////////////////////////////////////////////////
+	// USES				/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	/** maximum number of uses for this ability negative uses means no use limit */
+	protected int uses;
+
 	public int getUses()
 	{	return uses;
 	}
+	
 	public void setUses(int uses)
 	{	this.uses = uses;
 	}
+	
 	public void decrementUse(int delta)
 	{	if(uses>=delta)
 			uses = uses - delta;
@@ -85,12 +107,20 @@ public abstract class AbstractAbility
 			uses = 0;
 	}
 
+	/////////////////////////////////////////////////////////////////
+	// TIME				/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	/** time limit for using this ability negative time means no time limit */
+	protected double time;
+
 	public double getTime()
 	{	return time;
 	}
+	
 	public void setTime(double time)
 	{	this.time = time;
 	}
+	
 	public void decrementTime(double delta)
 	{	if(time>=delta)
 			time = time - delta;
@@ -98,8 +128,27 @@ public abstract class AbstractAbility
 			time = 0;
 	}
 
+	/////////////////////////////////////////////////////////////////
+	// COPY				/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
 	public abstract AbstractAbility copy();
 	
+	/////////////////////////////////////////////////////////////////
+	// FINISHED			/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	protected boolean finished = false;
+	
+	public void finish()
+	{	if(!finished)
+		{	finished = true;
+			// level
+			level = null;
+		}
+	}
+
+	/////////////////////////////////////////////////////////////////
+	// COMBINE			/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
 	/**
 	 * combine the strength of the Ability parameter
 	 * with the strength of this Ability,
@@ -120,15 +169,5 @@ public abstract class AbstractAbility
 			else
 				newStrength = strength+ability.getStrength();
 		strength = newStrength;
-	}
-	
-	protected boolean finished = false;
-	
-	public void finish()
-	{	if(!finished)
-		{	finished = true;
-			// level
-			level = null;
-		}
 	}
 }

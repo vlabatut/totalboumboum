@@ -194,7 +194,7 @@ public class Gesture
 	// COPY				/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	/**
-	 * returns a holllow copy, excepted for the animes: no copy at all. 
+	 * returns a hollow copy, excepted for the animes: no copy at all. 
 	 */
 	public Gesture copy()
 	{	Gesture result = new Gesture();
