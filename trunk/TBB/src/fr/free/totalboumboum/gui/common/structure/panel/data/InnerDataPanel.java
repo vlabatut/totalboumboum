@@ -41,7 +41,7 @@ public abstract class InnerDataPanel extends ContentPanel
 	/////////////////////////////////////////////////////////////////
 	protected SplitMenuPanel container;
 	
-	public SplitMenuPanel getContainer()
+	public SplitMenuPanel getMenuContainer()
 	{	return container;
 	}
 

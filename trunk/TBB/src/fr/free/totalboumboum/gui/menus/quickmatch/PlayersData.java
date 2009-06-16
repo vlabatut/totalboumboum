@@ -116,14 +116,14 @@ public class PlayersData extends EntitledDataPanel implements PlayersSelectionSu
 	@Override
 	public void playerSelectionHeroSet(int index)
 	{	Profile profile = playersPanel.getPlayer(index);
-		SelectHeroSplitPanel selectHeroPanel = new SelectHeroSplitPanel(container.getContainer(),container,profile);
-		getContainer().replaceWith(selectHeroPanel);	
+		SelectHeroSplitPanel selectHeroPanel = new SelectHeroSplitPanel(container.getMenuContainer(),container,profile);
+		getMenuContainer().replaceWith(selectHeroPanel);	
 	}
 
 	@Override
 	public void playerSelectionPlayerAdded(int index)
-	{	SelectProfileSplitPanel selectProfilePanel = new SelectProfileSplitPanel(container.getContainer(),container,index,players);
-		getContainer().replaceWith(selectProfilePanel);
+	{	SelectProfileSplitPanel selectProfilePanel = new SelectProfileSplitPanel(container.getMenuContainer(),container,index,players);
+		getMenuContainer().replaceWith(selectProfilePanel);
 	}
 
 	@Override
@@ -133,7 +133,7 @@ public class PlayersData extends EntitledDataPanel implements PlayersSelectionSu
 
 	@Override
 	public void playerSelectionProfileSet(int index)
-	{	SelectProfileSplitPanel selectProfilePanel = new SelectProfileSplitPanel(container.getContainer(),container,index,players);
-		getContainer().replaceWith(selectProfilePanel);
+	{	SelectProfileSplitPanel selectProfilePanel = new SelectProfileSplitPanel(container.getMenuContainer(),container,index,players);
+		getMenuContainer().replaceWith(selectProfilePanel);
 	}
 }

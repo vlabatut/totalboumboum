@@ -40,12 +40,12 @@ public abstract class InnerMenuPanel extends ContentPanel implements ButtonAware
 	/////////////////////////////////////////////////////////////////
 	protected SplitMenuPanel container;
 	
-	public SplitMenuPanel getContainer()
+	public SplitMenuPanel getMenuContainer()
 	{	return container;
 	}
 	
 	public void replaceWith(MenuPanel newPanel)
-	{	container.getContainer().setMenuPanel(newPanel);
+	{	container.getMenuContainer().setMenuPanel(newPanel);
 	}
 
 	/////////////////////////////////////////////////////////////////

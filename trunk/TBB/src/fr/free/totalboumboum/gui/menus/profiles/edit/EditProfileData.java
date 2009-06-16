@@ -384,14 +384,14 @@ public class EditProfileData extends EntitledDataPanel implements MouseListener,
 					refreshAi();
 				}
 				else if(pos[1]==4)
-				{	SelectedAiSplitPanel aiPanel = new SelectedAiSplitPanel(container.getContainer(),container,profile);
-					getContainer().replaceWith(aiPanel);
+				{	SelectedAiSplitPanel aiPanel = new SelectedAiSplitPanel(container.getMenuContainer(),container,profile);
+					getMenuContainer().replaceWith(aiPanel);
 				}
 				break;
 			// HERO
 			case LINE_HERO:
-				SelectedHeroSplitPanel heroPanel = new SelectedHeroSplitPanel(container.getContainer(),container,profile);
-				getContainer().replaceWith(heroPanel);
+				SelectedHeroSplitPanel heroPanel = new SelectedHeroSplitPanel(container.getMenuContainer(),container,profile);
+				getMenuContainer().replaceWith(heroPanel);
 				break;
 			// COLOR
 			case LINE_COLOR:

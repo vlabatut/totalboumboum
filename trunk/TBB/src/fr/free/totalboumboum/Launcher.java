@@ -905,6 +905,8 @@ public class Launcher
 	 * dans ces dernières, on se place relativement au sprite, qui est actor target ou third.
 	 * surement qqchose à faire de ce coté là
 	 * 
+	 * faut il utiliser getAbility pour récupérer les StateAbility, ou bien faut-il module ? (a priori: moduler)
+	 * 
 	 * 
 	 * - il faut mutualiser tous les fichiers de description de sprites communs (style tous les blocs durs)
 	 * 	- chargement plus rapide

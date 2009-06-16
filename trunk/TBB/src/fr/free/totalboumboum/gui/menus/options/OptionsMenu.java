@@ -98,7 +98,7 @@ public class OptionsMenu extends InnerMenuPanel
 	public void actionPerformed(ActionEvent e)
 	{	if(e.getActionCommand().equals(GuiKeys.MENU_OPTIONS_BUTTON_ADVANCED))
 		{	try
-			{	AdvancedSplitPanel advancedPanel = new AdvancedSplitPanel(container.getContainer(),container);
+			{	AdvancedSplitPanel advancedPanel = new AdvancedSplitPanel(container.getMenuContainer(),container);
 				replaceWith(advancedPanel);
 			}
 			catch (IllegalArgumentException e1)
@@ -125,7 +125,7 @@ public class OptionsMenu extends InnerMenuPanel
 		}
 	else if(e.getActionCommand().equals(GuiKeys.MENU_OPTIONS_BUTTON_GUI))
 		{	try
-			{	GuiSplitPanel guiPanel = new GuiSplitPanel(container.getContainer(),container);
+			{	GuiSplitPanel guiPanel = new GuiSplitPanel(container.getMenuContainer(),container);
 				replaceWith(guiPanel);
 			}
 			catch (IllegalArgumentException e1)
@@ -152,7 +152,7 @@ public class OptionsMenu extends InnerMenuPanel
 		}
 		else if(e.getActionCommand().equals(GuiKeys.MENU_OPTIONS_BUTTON_VIDEO))
 		{	try
-			{	VideoSplitPanel videoPanel = new VideoSplitPanel(container.getContainer(),container);
+			{	VideoSplitPanel videoPanel = new VideoSplitPanel(container.getMenuContainer(),container);
 				replaceWith(videoPanel);
 			}
 			catch (IllegalArgumentException e1)
@@ -179,12 +179,12 @@ public class OptionsMenu extends InnerMenuPanel
 	    }
 		else if(e.getActionCommand().equals(GuiKeys.MENU_OPTIONS_BUTTON_GAME))
 		{	// TODO certainement à compléter
-			GameSplitPanel gamePanel = new GameSplitPanel(container.getContainer(),container);
+			GameSplitPanel gamePanel = new GameSplitPanel(container.getMenuContainer(),container);
 			replaceWith(gamePanel);
 	    }
 		else if(e.getActionCommand().equals(GuiKeys.MENU_OPTIONS_BUTTON_CONTROLS))
 		{	try
-			{	ControlsSplitPanel controlsPanel = new ControlsSplitPanel(container.getContainer(),container);
+			{	ControlsSplitPanel controlsPanel = new ControlsSplitPanel(container.getMenuContainer(),container);
 				replaceWith(controlsPanel);
 			}
 			catch (IllegalArgumentException e1)

@@ -106,11 +106,11 @@ buttonInstances.setEnabled(false);
 	public void actionPerformed(ActionEvent e)
 	{	
 		if(e.getActionCommand().equals(GuiKeys.MENU_RESOURCES_BUTTON_AI))
-		{	SelectedAiSplitPanel aiMenuPanel = new SelectedAiSplitPanel(container.getContainer(),container);
+		{	SelectedAiSplitPanel aiMenuPanel = new SelectedAiSplitPanel(container.getMenuContainer(),container);
 			replaceWith(aiMenuPanel);
 	    }
 		else if(e.getActionCommand().equals(GuiKeys.MENU_RESOURCES_BUTTON_HEROES))
-		{	SelectedHeroSplitPanel heroMenuPanel = new SelectedHeroSplitPanel(container.getContainer(),container);
+		{	SelectedHeroSplitPanel heroMenuPanel = new SelectedHeroSplitPanel(container.getMenuContainer(),container);
 			replaceWith(heroMenuPanel);
 	    }
 		else if(e.getActionCommand().equals(GuiKeys.MENU_RESOURCES_BUTTON_INSTANCES))
@@ -118,19 +118,19 @@ buttonInstances.setEnabled(false);
 			//replaceWith(levelMenuPanel);
 	    }
 		else if(e.getActionCommand().equals(GuiKeys.MENU_RESOURCES_BUTTON_LEVELS))
-		{	SelectedLevelSplitPanel levelMenuPanel = new SelectedLevelSplitPanel(container.getContainer(),container);
+		{	SelectedLevelSplitPanel levelMenuPanel = new SelectedLevelSplitPanel(container.getMenuContainer(),container);
 			replaceWith(levelMenuPanel);
 	    }
 		else if(e.getActionCommand().equals(GuiKeys.MENU_RESOURCES_BUTTON_TOURNAMENTS))
-		{	SelectedTournamentSplitPanel tournamentMenuPanel = new SelectedTournamentSplitPanel(container.getContainer(),container);
+		{	SelectedTournamentSplitPanel tournamentMenuPanel = new SelectedTournamentSplitPanel(container.getMenuContainer(),container);
 			replaceWith(tournamentMenuPanel);
 	    }
 		else if(e.getActionCommand().equals(GuiKeys.MENU_RESOURCES_BUTTON_MATCHES))
-		{	SelectedMatchSplitPanel matchMenuPanel = new SelectedMatchSplitPanel(container.getContainer(),container);
+		{	SelectedMatchSplitPanel matchMenuPanel = new SelectedMatchSplitPanel(container.getMenuContainer(),container);
 			replaceWith(matchMenuPanel);
 	    }
 		else if(e.getActionCommand().equals(GuiKeys.MENU_RESOURCES_BUTTON_ROUNDS))
-		{	SelectedRoundSplitPanel roundMenuPanel = new SelectedRoundSplitPanel(container.getContainer(),container);
+		{	SelectedRoundSplitPanel roundMenuPanel = new SelectedRoundSplitPanel(container.getMenuContainer(),container);
 			replaceWith(roundMenuPanel);
 	    }
 		else if(e.getActionCommand().equals(GuiKeys.MENU_RESOURCES_BUTTON_BACK))
