@@ -57,7 +57,7 @@ public abstract class SpriteFactory<T extends Sprite>
 		sprite.setName(name);
 		
 		// gesture pack
-		GesturePack gp = gesturePack.copy(); //TODO check comment c'est copié, faut pas tout copier...
+		GesturePack gp = gesturePack;
 		sprite.setGesturePack(gp);
 		
 		// anime

@@ -8,8 +8,7 @@ public enum StateAbilityName
 	/** completely flat sprite */
 	SPRITE_FLAT,
 	
-	/** 
-	 * higher sprite, should be drawn above (i.e. after) the others */
+	/** higher sprite, should be drawn above (i.e. after) the others */
 	SPRITE_ABOVE,
 	
 	/** when an obstacle is collided, it helps avoiding it (dedicated to heroes, mainly) */

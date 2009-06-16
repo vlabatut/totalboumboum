@@ -886,13 +886,6 @@ public class Launcher
 	/*
 	 * TODO LAST
 	 * 
-	 * - fait: 
-	 * 		- modif des fichiers XML action, loader d'actions
-	 * 		- XML abilities, loader d'abilities
-	 * 
-	 * - la modulation d'une ability doit être réalisée dans la specificAction et non pas dans le modulation manager (?)
-	 * (son role étant seulement de distribuer les modulations recquises)
-	 * 
 	 * - voir si on peut mettre à jour le parser XML
 	 * - définir la liste de gesture pour chaque type de sprite
 	 * - pour chaque gesture, fixer les actions autorisées 
@@ -907,6 +900,21 @@ public class Launcher
 	 * 
 	 * faut il utiliser getAbility pour récupérer les StateAbility, ou bien faut-il module ? (a priori: moduler)
 	 * 
+	 * réelle question avec les modulations :
+	 * 	- il y a eu confusion sur les modulations d'état, qui étaient jusqu'alors interprétées comme des auto-modulation,
+	 * alors qu'en réalité il s'agit de modulation sur des tiers. non ? 
+	 * ou même les deux, par ex: un bloc qui est bas pr un gesture, et qui devient un obstacle pour un autre gesture.
+	 * ou une bombe qui n'a pas toujours la même puissance.
+	 * p-ê faut il donc définir deux types de StateModulation.
+	 * de plus, la zone d'influence est importante : où le tiers doit il être situé pour intervenir?
+	 * d'ailleurs c'est à rajouter aussi dans les modulations d'action.
+	 * et ça pose un pb d'optimisation: pour l'instant on utilise un modèle pull, ce qui est OK dans l'hypothèse d'une modulation
+	 * exclusivement locale (deux cases max: actor+target), mais si on passe en global ça va couter cher.
+	 * d'où l'intérêt de p-ê passer à un modèle push, mais ça veut dire pas mal d'adaptation à gérer.
+	 * il faudrait implémenter le système au niveau de la gestion des contacts
+	 * et un évènement de collision/changement de case provoquerait un changement dans les modulations concernant le sprite
+	 * p-ê qu'on peut mettre ce coté l'aspect global (pas de contact ni de case partagée) pour l'instant, et continuer avec le système
+	 * déjà utilisé avec les acions (à savoir: scanner la case courante, voire les sprites en contact (note: la liste en est connue à chaque instant)
 	 * 
 	 * - il faut mutualiser tous les fichiers de description de sprites communs (style tous les blocs durs)
 	 * 	- chargement plus rapide
@@ -915,5 +923,11 @@ public class Launcher
 	 * - il faut mener une réflexion sur ce qu'il est vraiment nécessaire de cloner et ce qui peut être partagé, ce qui permettrait d'optimiser un peu plus l'utilisation de la mémoire
 	 * 		- les actions générales utilisées pour les abilities doivent être copiées, car elles sont définies en termes de SELF et doivent donc être adapté au sprite concerné (de toute façon, ça c'est du spécifique à un sprite. pas la peine de copier, en fait)
 	 * 
+	 * - l'adaptation des fichiers de description de sprite XML à la mutualisation de ability et autres est simple: il suffit de remettre les éléments qui indiquaient où se situaient ces descriptions.
+	 * faudrait tester si on peut utiliser des paths dans les includes XML sans perdre la portabilité.
+	 * ou plus simplement, utiliser des mots clés comme "general" "specific"
+	 * - l'autre aspect du problème est l'adaptation des classes, en particulier celles de chargement. les sprites susceptibles d'avoir des fichiers en commun doivent être chargés depuis la même classe.
+	 * donc il va falloir intervenir sur la classe située entre thème et sprite (pour blocs, bombes, items...)
+	 * pour les héros ça me semble inutile de se prendre la tête sur l'optimisation des animes, vu qu'elles ne sont chargées qu'une seule fois par joueur (à la différence des types de blocs, qui sont parfois nombreux)
 	 */
 }
