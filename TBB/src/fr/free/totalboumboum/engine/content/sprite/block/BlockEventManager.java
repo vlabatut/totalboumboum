@@ -25,11 +25,11 @@ import fr.free.totalboumboum.engine.container.tile.Tile;
 import fr.free.totalboumboum.engine.content.feature.Direction;
 import fr.free.totalboumboum.engine.content.feature.ability.AbstractAbility;
 import fr.free.totalboumboum.engine.content.feature.ability.StateAbility;
+import fr.free.totalboumboum.engine.content.feature.ability.StateAbilityName;
 import fr.free.totalboumboum.engine.content.feature.event.ActionEvent;
 import fr.free.totalboumboum.engine.content.feature.event.ControlEvent;
 import fr.free.totalboumboum.engine.content.feature.event.EngineEvent;
 import fr.free.totalboumboum.engine.content.feature.gesture.GestureName;
-import fr.free.totalboumboum.engine.content.feature.gesture.action.AbstractAction;
 import fr.free.totalboumboum.engine.content.feature.gesture.action.SpecificAction;
 import fr.free.totalboumboum.engine.content.manager.delay.DelayManager;
 import fr.free.totalboumboum.engine.content.manager.event.EventManager;
@@ -91,11 +91,11 @@ public class BlockEventManager extends EventManager
 	private void engAnimeOver(EngineEvent event)
 	{	if(gesture.equals(GestureName.BURNING))
 		{	// spawn or not ?
-			StateAbility ablt = sprite.getAbility(StateAbility.BLOCK_SPAWN);
+			StateAbility ablt = sprite.getAbility(StateAbilityName.BLOCK_SPAWN);
 			// can spawn
 			if(ablt.isActive())
 			{	sprite.addDelay(DelayManager.DL_SPAWN, ablt.getStrength());
-				gesture = fr.free.totalboumboum.engine.content.feature.gesture.HIDING;
+				gesture = GestureName.HIDING;
 				sprite.setGesture(gesture,spriteDirection,Direction.NONE,true);
 			}
 			// cannot spawn
@@ -125,17 +125,17 @@ public class BlockEventManager extends EventManager
 	}
 
 	private void engDelayOver(EngineEvent event)
-	{	if(gesture.equals(fr.free.totalboumboum.engine.content.feature.gesture.HIDING))
+	{	if(gesture.equals(GestureName.HIDING))
 		{	SpecificAction specificAction = new SpecificAction(AbstractAction.APPEAR,sprite,sprite.getTile().getFloor(),Direction.NONE);
 			AbstractAbility ability = sprite.computeAbility(specificAction);
 			if(ability.isActive())
-			{	StateAbility ablt = sprite.getAbility(StateAbility.BLOCK_SPAWN);
+			{	StateAbility ablt = sprite.getAbility(StateAbilityName.BLOCK_SPAWN);
 				sprite.decrementUse(ablt,1);
 				gesture = GestureName.SPAWNING;
 				sprite.setGesture(gesture,spriteDirection,Direction.NONE,true);
 			}
 			else
-			{	StateAbility ablt = sprite.getAbility(StateAbility.BLOCK_SPAWN);
+			{	StateAbility ablt = sprite.getAbility(StateAbilityName.BLOCK_SPAWN);
 				sprite.addDelay(DelayManager.DL_SPAWN, ablt.getStrength());	
 			}
 		}

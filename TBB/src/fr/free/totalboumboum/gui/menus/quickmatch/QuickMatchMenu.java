@@ -93,7 +93,7 @@ public class QuickMatchMenu extends InnerMenuPanel implements DataPanelListener
 		levelsData.addListener(this);
 		settingsData = new SettingsData(container);
 		settingsData.addListener(this);
-		tournamentPanel = new TournamentSplitPanel(container.getContainer(),getMenuParent());
+		tournamentPanel = new TournamentSplitPanel(container.getMenuContainer(),getMenuParent());
 	}
 	
 	/////////////////////////////////////////////////////////////////

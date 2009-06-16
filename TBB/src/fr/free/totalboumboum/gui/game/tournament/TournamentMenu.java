@@ -284,7 +284,7 @@ buttonStatistics.setEnabled(false);
 			getFrame().setMainMenuPanel();
 	    }
 		else if(e.getActionCommand().equals(GuiKeys.GAME_TOURNAMENT_BUTTON_SAVE))
-		{	SaveSplitPanel savePanel = new SaveSplitPanel(container.getContainer(),container);
+		{	SaveSplitPanel savePanel = new SaveSplitPanel(container.getMenuContainer(),container);
 			savePanel.setTournament(tournament);
 			replaceWith(savePanel);
 	    }
@@ -310,7 +310,7 @@ buttonStatistics.setEnabled(false);
 		else if(e.getActionCommand().equals(GuiKeys.GAME_TOURNAMENT_BUTTON_CURRENT_MATCH))
 		{	Match match = tournament.getCurrentMatch();		
 			if(matchPanel==null || ((MatchSplitPanel)matchPanel).getMatch()!=match)
-			{	MatchSplitPanel mPanel = new MatchSplitPanel(container.getContainer(),container);
+			{	MatchSplitPanel mPanel = new MatchSplitPanel(container.getMenuContainer(),container);
 				matchPanel = mPanel;
 				mPanel.setMatch(match);
 			}
@@ -320,7 +320,7 @@ buttonStatistics.setEnabled(false);
 		{	Match match = tournament.getCurrentMatch();		
 			Round round = match.getCurrentRound();
 			if(matchPanel==null || ((RoundSplitPanel)matchPanel).getRound()!=round)
-			{	RoundSplitPanel rPanel = new RoundSplitPanel(container.getContainer(),container);
+			{	RoundSplitPanel rPanel = new RoundSplitPanel(container.getMenuContainer(),container);
 				matchPanel = rPanel;
 				rPanel.setRound(round);
 			}							
@@ -328,7 +328,7 @@ buttonStatistics.setEnabled(false);
 	    }
 		else if(e.getActionCommand().equals(GuiKeys.GAME_TOURNAMENT_BUTTON_NEXT_MATCH))
 		{	tournament.progress();
-			MatchSplitPanel mPanel = new MatchSplitPanel(container.getContainer(),container);
+			MatchSplitPanel mPanel = new MatchSplitPanel(container.getMenuContainer(),container);
 			matchPanel = mPanel;
 			Match match = tournament.getCurrentMatch();		
 			mPanel.setMatch(match);
@@ -363,7 +363,7 @@ buttonStatistics.setEnabled(false);
 			catch (NoSuchFieldException e1)
 			{	e1.printStackTrace();
 			}
-			RoundSplitPanel rPanel = new RoundSplitPanel(container.getContainer(),container);
+			RoundSplitPanel rPanel = new RoundSplitPanel(container.getMenuContainer(),container);
 			matchPanel = rPanel;
 			Round round = match.getCurrentRound();
 			rPanel.setRound(round);

@@ -86,15 +86,15 @@ public class GameMenu extends InnerMenuPanel
 	
 	public void actionPerformed(ActionEvent e)
 	{	if(e.getActionCommand().equals(GuiKeys.MENU_OPTIONS_GAME_BUTTON_QUICKSTART))
-		{	QuickStartSplitPanel quickstartPanel = new QuickStartSplitPanel(container.getContainer(),container);
+		{	QuickStartSplitPanel quickstartPanel = new QuickStartSplitPanel(container.getMenuContainer(),container);
 			replaceWith(quickstartPanel);
 		}
 		else if(e.getActionCommand().equals(GuiKeys.MENU_OPTIONS_GAME_BUTTON_QUICKMATCH))
-		{	QuickMatchSplitPanel quickmatchPanel = new QuickMatchSplitPanel(container.getContainer(),container);
+		{	QuickMatchSplitPanel quickmatchPanel = new QuickMatchSplitPanel(container.getMenuContainer(),container);
 			replaceWith(quickmatchPanel);
 		}
 		else if(e.getActionCommand().equals(GuiKeys.MENU_OPTIONS_GAME_BUTTON_TOURNAMENT))
-		{	TournamentSplitPanel tournamentPanel = new TournamentSplitPanel(container.getContainer(),container);
+		{	TournamentSplitPanel tournamentPanel = new TournamentSplitPanel(container.getMenuContainer(),container);
 			replaceWith(tournamentPanel);
 	    }
 		else if(e.getActionCommand().equals(GuiKeys.MENU_OPTIONS_BUTTON_BACK))

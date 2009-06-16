@@ -29,6 +29,7 @@ import fr.free.totalboumboum.engine.container.level.Level;
 import fr.free.totalboumboum.engine.content.feature.ability.AbstractAbility;
 import fr.free.totalboumboum.engine.content.feature.explosion.Explosion;
 import fr.free.totalboumboum.engine.content.feature.gesture.GesturePack;
+import fr.free.totalboumboum.engine.content.feature.gesture.action.IncompatibleParameterException;
 import fr.free.totalboumboum.engine.content.manager.ability.AbilityManager;
 import fr.free.totalboumboum.engine.content.manager.anime.AnimeManager;
 import fr.free.totalboumboum.engine.content.manager.bombset.BombsetManager;
@@ -56,7 +57,7 @@ public abstract class SpriteFactory<T extends Sprite>
 		sprite.setName(name);
 		
 		// gesture pack
-		GesturePack gp = gesturePack.copy();
+		GesturePack gp = gesturePack.copy(); //TODO check comment c'est copié, faut pas tout copier...
 		sprite.setGesturePack(gp);
 		
 		// anime
@@ -87,7 +88,12 @@ public abstract class SpriteFactory<T extends Sprite>
 		
 		// ability
 		AbilityManager abilityManager = new AbilityManager(sprite);
-		abilityManager.addDirectAbilities(abilities);
+		try
+		{	abilityManager.addDirectAbilities(abilities);
+		}
+		catch (IncompatibleParameterException e)
+		{	e.printStackTrace();
+		}
 		sprite.setAbilityManager(abilityManager);
 		
 		// delay

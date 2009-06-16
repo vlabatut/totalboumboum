@@ -127,15 +127,15 @@ buttonStats.setEnabled(false);
 	/////////////////////////////////////////////////////////////////
 	public void actionPerformed(ActionEvent e)
 	{	if(e.getActionCommand().equals(GuiKeys.MENU_MAIN_BUTTON_OPTIONS))
-		{	OptionsSplitPanel optionsMenuPanel = new OptionsSplitPanel(getContainer(),this);
+		{	OptionsSplitPanel optionsMenuPanel = new OptionsSplitPanel(getMenuContainer(),this);
 			replaceWith(optionsMenuPanel);
 	    }
 		else if(e.getActionCommand().equals(GuiKeys.MENU_MAIN_BUTTON_PROFILES))
-		{	SelectedProfileSplitPanel profilesMenuPanel = new SelectedProfileSplitPanel(getContainer(),this);
+		{	SelectedProfileSplitPanel profilesMenuPanel = new SelectedProfileSplitPanel(getMenuContainer(),this);
 			replaceWith(profilesMenuPanel);
 	    }
 		else if(e.getActionCommand().equals(GuiKeys.MENU_MAIN_BUTTON_RESOURCES))
-		{	ExploreSplitPanel exploreMenuPanel = new ExploreSplitPanel(getContainer(),this);
+		{	ExploreSplitPanel exploreMenuPanel = new ExploreSplitPanel(getMenuContainer(),this);
 			replaceWith(exploreMenuPanel);
 	    }
 		else if(e.getActionCommand().equals(GuiKeys.MENU_MAIN_BUTTON_STATISTICS))
@@ -143,7 +143,7 @@ buttonStats.setEnabled(false);
 	    }
 		else if(e.getActionCommand().equals(GuiKeys.MENU_MAIN_BUTTON_LOAD))
 		{	if(tournamentContainer==null)
-				tournamentContainer = new TournamenuContainer(getContainer(),this);
+				tournamentContainer = new TournamenuContainer(getMenuContainer(),this);
 			tournamentContainer.initLoad();
 			replaceWith(tournamentContainer);
 	    }
@@ -152,13 +152,13 @@ buttonStats.setEnabled(false);
 	    }
 		else if(e.getActionCommand().equals(GuiKeys.MENU_MAIN_BUTTON_TOURNAMENT))
 		{	if(tournamentContainer==null)
-				tournamentContainer = new TournamenuContainer(getContainer(),this);
+				tournamentContainer = new TournamenuContainer(getMenuContainer(),this);
 			tournamentContainer.initTournament();
 			replaceWith(tournamentContainer);
 	    }
 		else if(e.getActionCommand().equals(GuiKeys.MENU_MAIN_BUTTON_QUICKMATCH))
 		{	if(quickMatchContainer==null)
-				quickMatchContainer = new QuickMatchContainer(getContainer(),this);
+				quickMatchContainer = new QuickMatchContainer(getMenuContainer(),this);
 			quickMatchContainer.initTournament();
 			replaceWith(quickMatchContainer);
 	    }

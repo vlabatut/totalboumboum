@@ -38,7 +38,7 @@ public abstract class MenuPanel extends ContentPanel
 	/////////////////////////////////////////////////////////////////
 	protected MenuContainer container;
 	
-	public MenuContainer getContainer()
+	public MenuContainer getMenuContainer()
 	{	return container;
 	}
 	

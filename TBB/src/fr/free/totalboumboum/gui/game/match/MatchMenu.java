@@ -227,7 +227,7 @@ buttonStatistics.setEnabled(false);
 			getFrame().setMainMenuPanel();
 	    }
 		else if(e.getActionCommand().equals(GuiKeys.GAME_TOURNAMENT_BUTTON_SAVE))
-		{	SaveSplitPanel savePanel = new SaveSplitPanel(container.getContainer(),container);
+		{	SaveSplitPanel savePanel = new SaveSplitPanel(container.getMenuContainer(),container);
 			savePanel.setTournament(match.getTournament());
 			replaceWith(savePanel);
 	    }
@@ -252,7 +252,7 @@ buttonStatistics.setEnabled(false);
 		else if(e.getActionCommand().equals(GuiKeys.GAME_MATCH_BUTTON_CURRENT_ROUND))
 		{	Round round = match.getCurrentRound();
 			if(roundPanel==null || roundPanel.getRound()!=round)
-			{	roundPanel = new RoundSplitPanel(container.getContainer(),container);
+			{	roundPanel = new RoundSplitPanel(container.getMenuContainer(),container);
 				roundPanel.setRound(round);
 			}
 			replaceWith(roundPanel);
@@ -285,7 +285,7 @@ buttonStatistics.setEnabled(false);
 			catch (NoSuchFieldException e1)
 			{	e1.printStackTrace();
 			}
-			roundPanel = new RoundSplitPanel(container.getContainer(),container);
+			roundPanel = new RoundSplitPanel(container.getMenuContainer(),container);
 			Round round = match.getCurrentRound();		
 			roundPanel.setRound(round);
 			replaceWith(roundPanel);

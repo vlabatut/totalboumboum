@@ -28,11 +28,11 @@ import fr.free.totalboumboum.engine.container.tile.Tile;
 import fr.free.totalboumboum.engine.content.feature.Direction;
 import fr.free.totalboumboum.engine.content.feature.ability.ActionAbility;
 import fr.free.totalboumboum.engine.content.feature.ability.StateAbility;
+import fr.free.totalboumboum.engine.content.feature.ability.StateAbilityName;
 import fr.free.totalboumboum.engine.content.feature.event.ActionEvent;
 import fr.free.totalboumboum.engine.content.feature.event.ControlEvent;
 import fr.free.totalboumboum.engine.content.feature.event.EngineEvent;
 import fr.free.totalboumboum.engine.content.feature.gesture.GestureName;
-import fr.free.totalboumboum.engine.content.feature.gesture.action.AbstractAction;
 import fr.free.totalboumboum.engine.content.feature.gesture.action.Contact;
 import fr.free.totalboumboum.engine.content.feature.gesture.action.Orientation;
 import fr.free.totalboumboum.engine.content.feature.gesture.action.SpecificAction;
@@ -66,14 +66,14 @@ public class HeroEventManager extends EventManager
 	}
 	
 	private void setWaitDelay()
-	{	StateAbility ability = sprite.modulateAction(StateAbility.HERO_WAIT_DURATION);
+	{	StateAbility ability = sprite.getAbility(StateAbilityName.HERO_WAIT_DURATION);
 		double duration = ability.getStrength();
 		sprite.addDelay(DelayManager.DL_WAIT,duration);		
 	}
 
 	public void initGesture()
 	{	spriteDirection = Direction.DOWN;
-		StateAbility ability = sprite.modulateAction(StateAbility.HERO_ENTRY_DURATION);
+		StateAbility ability = sprite.getAbility(StateAbilityName.HERO_ENTRY_DURATION);
 		if(ability.isActive())
 		{	gesture = GestureName.APPEARING;
 			double duration = ability.getStrength();
@@ -462,7 +462,7 @@ public class HeroEventManager extends EventManager
 		SpecificAction specificAction = new SpecificAction(AbstractAction.EXULT,sprite,null,Direction.NONE);
 		ActionAbility ability = sprite.computeAbility(specificAction);
 		if(ability.isActive())
-		{	StateAbility ablt = sprite.modulateAction(StateAbility.HERO_CELEBRATION_DURATION);
+		{	StateAbility ablt = sprite.getAbility(StateAbilityName.HERO_CELEBRATION_DURATION);
 			double duration = ablt.getStrength();
 			gesture = GestureName.EXULTING;							
 			sprite.setGesture(gesture,spriteDirection,controlDirection,true,duration);
@@ -486,7 +486,7 @@ public class HeroEventManager extends EventManager
 		SpecificAction specificAction = new SpecificAction(AbstractAction.CRY,sprite,null,Direction.NONE);
 		ActionAbility ability = sprite.computeAbility(specificAction);
 		if(ability.isActive())
-		{	StateAbility ablt = sprite.modulateAction(StateAbility.HERO_CELEBRATION_DURATION);
+		{	StateAbility ablt = sprite.getAbility(StateAbilityName.HERO_CELEBRATION_DURATION);
 			double duration = ablt.getStrength();
 			gesture = GestureName.CRYING;
 			sprite.setGesture(gesture,spriteDirection,controlDirection,true,duration);

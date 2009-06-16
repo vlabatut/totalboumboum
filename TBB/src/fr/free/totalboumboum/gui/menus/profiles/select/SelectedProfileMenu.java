@@ -161,7 +161,7 @@ public class SelectedProfileMenu extends InnerMenuPanel implements DataPanelList
 		{	Profile profile = profileData.getSelectedProfile();
 			if(profile!=null)
 			{	String profileFile = profileData.getSelectedProfileFile();
-				EditProfileSplitPanel editPanel = new EditProfileSplitPanel(container.getContainer(),container,profile,profileFile);
+				EditProfileSplitPanel editPanel = new EditProfileSplitPanel(container.getMenuContainer(),container,profile,profileFile);
 				replaceWith(editPanel);
 			}
 	    }

@@ -120,8 +120,8 @@ public class SettingsData extends EntitledDataPanel implements MouseListener
 	
 	@Override
 	public void mousePressed(MouseEvent e)
-	{	SelectTournamentSplitPanel selectTournamentPanel = new SelectTournamentSplitPanel(container.getContainer(),container,tournamentConfiguration);
-		getContainer().replaceWith(selectTournamentPanel);
+	{	SelectTournamentSplitPanel selectTournamentPanel = new SelectTournamentSplitPanel(container.getMenuContainer(),container,tournamentConfiguration);
+		getMenuContainer().replaceWith(selectTournamentPanel);
 	}
 	
 	@Override
