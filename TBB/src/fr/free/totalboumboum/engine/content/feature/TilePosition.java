@@ -1,7 +1,14 @@
-package fr.free.totalboumboum.engine.content.feature.gesture.action;
+package fr.free.totalboumboum.engine.content.feature;
+
+import java.util.ArrayList;
+import java.util.Locale;
+
+import org.jdom.Attribute;
+import org.jdom.Element;
 
 import fr.free.totalboumboum.engine.container.tile.Tile;
 import fr.free.totalboumboum.engine.content.sprite.Sprite;
+import fr.free.totalboumboum.tools.XmlTools;
 
 /*
  * Total Boum Boum
@@ -64,4 +71,24 @@ public enum TilePosition
 		}
 		return result;
 	}	
+
+	public static ArrayList<TilePosition> loadTilePositionsAttribute(Element root, String attName)
+	{	ArrayList<TilePosition> result = new ArrayList<TilePosition>();
+		Attribute attribute = root.getAttribute(attName);
+		String tilePositionStr = attribute.getValue().trim().toUpperCase(Locale.ENGLISH);
+		String[] tilePositionsStr = tilePositionStr.split(" ");
+		for(String str: tilePositionsStr)
+		{	if(str.equalsIgnoreCase(XmlTools.VAL_ANY))
+			{	result.add(TilePosition.NEIGHBOR);
+				result.add(TilePosition.REMOTE);
+				result.add(TilePosition.SAME);
+				result.add(TilePosition.UNDEFINED);
+			}
+			else
+			{	TilePosition tilePosition = TilePosition.valueOf(str);
+				result.add(tilePosition);
+			}
+		}
+		return result;
+	}
 }

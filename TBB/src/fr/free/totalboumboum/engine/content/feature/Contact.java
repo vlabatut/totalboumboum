@@ -1,6 +1,13 @@
-package fr.free.totalboumboum.engine.content.feature.gesture.action;
+package fr.free.totalboumboum.engine.content.feature;
+
+import java.util.ArrayList;
+import java.util.Locale;
+
+import org.jdom.Attribute;
+import org.jdom.Element;
 
 import fr.free.totalboumboum.engine.content.sprite.Sprite;
+import fr.free.totalboumboum.tools.XmlTools;
 
 /*
  * Total Boum Boum
@@ -52,4 +59,22 @@ public enum Contact
 			result = Contact.NONE;
 		return result;
 	}	
+
+	public static ArrayList<Contact> loadContactsAttribute(Element root, String attName)
+	{	ArrayList<Contact> result = new ArrayList<Contact>();
+		Attribute attribute = root.getAttribute(attName);
+		String contactStr = attribute.getValue().trim().toUpperCase(Locale.ENGLISH);
+		String[] contactsStr = contactStr.split(" ");
+		for(String str: contactsStr)
+		{	if(str.equalsIgnoreCase(XmlTools.VAL_ANY))
+			{	result.add(Contact.COLLISION);
+				result.add(Contact.INTERSECTION);
+			}
+			else
+			{	Contact contact = Contact.valueOf(str);
+				result.add(contact);
+			}
+		}
+		return result;
+	}
 }

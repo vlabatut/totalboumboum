@@ -2,7 +2,11 @@ package fr.free.totalboumboum.engine.content.feature.gesture.action;
 
 import java.util.ArrayList;
 
+import fr.free.totalboumboum.engine.content.feature.Contact;
 import fr.free.totalboumboum.engine.content.feature.Direction;
+import fr.free.totalboumboum.engine.content.feature.Orientation;
+import fr.free.totalboumboum.engine.content.feature.Role;
+import fr.free.totalboumboum.engine.content.feature.TilePosition;
 import fr.free.totalboumboum.engine.content.sprite.Sprite;
 
 /*

@@ -25,8 +25,8 @@ import java.util.ArrayList;
 import java.util.Iterator;
 
 import fr.free.totalboumboum.engine.container.level.Level;
+import fr.free.totalboumboum.engine.content.feature.Role;
 import fr.free.totalboumboum.engine.content.feature.ability.AbstractAbility;
-import fr.free.totalboumboum.engine.content.feature.gesture.action.Role;
 import fr.free.totalboumboum.engine.content.sprite.Sprite;
 
 public class Item extends Sprite

@@ -24,9 +24,9 @@ import fr.free.totalboumboum.engine.content.feature.ability.StateAbilityName;
  * 
  */
 
-public class StateModulation extends AbstractModulation
+public class AbstractStateModulation extends AbstractModulation
 {		
-	public StateModulation(StateAbilityName name)
+	public AbstractStateModulation(StateAbilityName name)
 	{	super();
 		this.name = name;
 	}
@@ -34,25 +34,13 @@ public class StateModulation extends AbstractModulation
 	/////////////////////////////////////////////////////////////////
 	// NAME						/////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	private StateAbilityName name;
+	protected StateAbilityName name;
 
 	public StateAbilityName getName()
 	{	return name;
 	}
 	public void setName(StateAbilityName name)
 	{	this.name = name;
-	}	
-
-	/////////////////////////////////////////////////////////////////
-	// COMPARISON				/////////////////////////////////////
-	/////////////////////////////////////////////////////////////////
-	public boolean equals(Object modulation)
-	{	boolean result = false;
-		if(modulation instanceof StateModulation)
-		{	StateModulation m = (StateModulation) modulation;
-			result = name==m.getName();
-		}
-		return result;
 	}
 	
 	/////////////////////////////////////////////////////////////////
@@ -81,19 +69,6 @@ public class StateModulation extends AbstractModulation
 	public String toString()
 	{	String result = name.toString();
 		result = "<"+strength+","+frame+">";
-		return result;
-	}
-	
-	/////////////////////////////////////////////////////////////////
-	// COPY						/////////////////////////////////////
-	/////////////////////////////////////////////////////////////////
-	public StateModulation copy()
-	{	StateModulation result = new StateModulation(name);
-		result.name = name;
-		result.finished = finished;
-		result.frame = frame;
-		result.gestureName = gestureName;
-		result.strength = strength;
 		return result;
 	}
 }

@@ -1,5 +1,7 @@
 package fr.free.totalboumboum.engine.content.feature.gesture.modulation;
 
+import fr.free.totalboumboum.engine.content.feature.ability.StateAbilityName;
+
 /*
  * Total Boum Boum
  * Copyright 2008-2009 Vincent Labatut 
@@ -21,55 +23,30 @@ package fr.free.totalboumboum.engine.content.feature.gesture.modulation;
  * 
  */
 
-import java.util.Iterator;
-
-import fr.free.totalboumboum.engine.content.feature.ability.AbstractAbility;
-import fr.free.totalboumboum.engine.content.feature.gesture.action.GeneralAction;
-import fr.free.totalboumboum.engine.content.feature.gesture.action.SpecificAction;
-
-public class TargetModulation extends AbstractActionModulation
-{
-	public TargetModulation(GeneralAction action)
-	{	super(action);
+public class SelfModulation extends AbstractStateModulation
+{		
+	public SelfModulation(StateAbilityName name)
+	{	super(name);
 	}
-
-	public TargetModulation(SpecificAction action)
-	{	super(action);
-	}
-
+	
 	/////////////////////////////////////////////////////////////////
-	// COMPARISON		/////////////////////////////////////////////
+	// COMPARISON				/////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	public boolean equals(Object o)
+	public boolean equals(Object modulation)
 	{	boolean result = false;
-		if(o instanceof TargetModulation)
-		{	TargetModulation perm = (TargetModulation) o;
-			result = action.equals(perm.getAction());
+		if(modulation instanceof SelfModulation)
+		{	SelfModulation m = (SelfModulation) modulation;
+			result = getName()==m.getName();
 		}
 		return result;
 	}
-
+	
 	/////////////////////////////////////////////////////////////////
-	// COPY				/////////////////////////////////////////////
+	// COPY						/////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	public TargetModulation copy()
-	{	GeneralAction actionCopy = action;
-		TargetModulation result = new TargetModulation(actionCopy);
-		// actor restrictions
-		{	Iterator<AbstractAbility> it = actorRestrictions.iterator();
-			while(it.hasNext())
-			{	AbstractAbility temp = it.next().copy();
-				result.addActorRestriction(temp);
-			}
-		}
-		// target restrictions
-		{	Iterator<AbstractAbility> it = targetRestrictions.iterator();
-			while(it.hasNext())
-			{	AbstractAbility temp = it.next().copy();
-				result.addTargetRestriction(temp);
-			}
-		}
-		//
+	public SelfModulation copy()
+	{	SelfModulation result = new SelfModulation(name);
+		result.name = name;
 		result.finished = finished;
 		result.frame = frame;
 		result.gestureName = gestureName;

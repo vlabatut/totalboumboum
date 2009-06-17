@@ -141,6 +141,7 @@ public class XmlTools
 	public static final String ELT_OFF = "off";
 	public static final String ELT_OPTIONS = "options";
 	public static final String ELT_ORIGIN = "origin";
+	public static final String ELT_OTHER_MODULATIONS = "other-modulations";
 	public static final String ELT_OUTGAME = "outgame";
 	public static final String ELT_PANEL_DIMENSION = "panelDimension";
 	public static final String ELT_PART = "part";
@@ -166,6 +167,7 @@ public class XmlTools
 	public static final String ELT_SCORE = "score";
 	public static final String ELT_SCORES = "scores";
 	public static final String ELT_SELECTED = "selected";
+	public static final String ELT_SELF_MODULATIONS = "self-modulations";
 	public static final String ELT_SETTING = "setting";
 	public static final String ELT_SETTINGS = "settings";
 	public static final String ELT_SHADOW = "shadow";
@@ -178,7 +180,6 @@ public class XmlTools
 	public static final String ELT_SPEED = "speed";
 	public static final String ELT_SPRITE = "sprite";
 	public static final String ELT_START = "start";
-	public static final String ELT_STATE_MODULATIONS = "state-modulations";
 	public static final String ELT_STEP = "step";
 	public static final String ELT_STEPS = "steps";
 	public static final String ELT_SUBTRACTION = "subtraction";
@@ -210,6 +211,8 @@ public class XmlTools
 	public static final String ELT_VISIBLE_POSITION = "visiblePosition";
 	// Attributes names
 	public static final String ATT_ACTOR = "actor";
+	public static final String ATT_ACTOR_CONTACT = "actor-contact";
+	public static final String ATT_ACTOR_TILE_POSITION = "actor-tile-position";
 	public static final String ATT_AI = "ai";
 	public static final String ATT_ALLOWED_PLAYERS = "allowedPlayers";
 	public static final String ATT_AUTOFIRE = "autofire";
@@ -289,6 +292,8 @@ public class XmlTools
 	public static final String ATT_STRENGTH = "strength";
 	public static final String ATT_SUP = "sup";
 	public static final String ATT_TARGET = "target";
+	public static final String ATT_TARGET_CONTACT = "target-contact";
+	public static final String ATT_TARGET_TILE_POSITION = "target-tile-position";
 	public static final String ATT_TILE_POSITION = "tilePosition";
 	public static final String ATT_TIME = "time";
 	public static final String ATT_TIME_LIMIT = "timeLimit";

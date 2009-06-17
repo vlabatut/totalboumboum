@@ -35,6 +35,8 @@ import org.jdom.Element;
 import org.xml.sax.SAXException;
 
 import fr.free.totalboumboum.engine.container.level.Level;
+import fr.free.totalboumboum.engine.content.feature.Contact;
+import fr.free.totalboumboum.engine.content.feature.TilePosition;
 import fr.free.totalboumboum.engine.content.feature.ability.AbilityLoader;
 import fr.free.totalboumboum.engine.content.feature.ability.AbstractAbility;
 import fr.free.totalboumboum.engine.content.feature.ability.StateAbilityName;
@@ -90,9 +92,12 @@ public class ModulationsLoader
     }
     
     private static void loadGestureModulations(Element root, Gesture gesture, Level level) throws IOException, ClassNotFoundException
-    {	// state modulations
-		Element stateElt = root.getChild(XmlTools.ELT_STATE_MODULATIONS);
-		loadModulationsElement(stateElt,ModType.STATE,gesture,level);
+    {	// self modulations
+		Element selfElt = root.getChild(XmlTools.ELT_SELF_MODULATIONS);
+		loadModulationsElement(selfElt,ModType.SELF,gesture,level);
+    	// other modulations
+		Element otherElt = root.getChild(XmlTools.ELT_OTHER_MODULATIONS);
+		loadModulationsElement(otherElt,ModType.OTHER,gesture,level);
     	// actor modulations
 		Element actorElt = root.getChild(XmlTools.ELT_ACTOR_MODULATIONS);
 		loadModulationsElement(actorElt,ModType.ACTOR,gesture,level);
@@ -108,24 +113,23 @@ public class ModulationsLoader
 	private static void loadModulationsElement(Element root, ModType type, Gesture gesture, Level level) throws IOException, ClassNotFoundException
     {	List<Element> modulationsList = root.getChildren(XmlTools.ELT_MODULATION);
 		Iterator<Element> i = modulationsList.iterator();
-		if(type==ModType.STATE)
+		if(type==ModType.SELF || type==ModType.OTHER)
 		{	while(i.hasNext())
 			{	Element tp = i.next();
-				StateModulation stateModulation = loadStateModulationElement(gesture.getName(),tp,level);
+				AbstractStateModulation stateModulation = loadStateModulationElement(type,gesture.getName(),tp,level);
 				gesture.addModulation(stateModulation);
-			}
-	 			
+			}	 			
 		}
 		else
 		{	while(i.hasNext())
 			{	Element tp = i.next();
-				AbstractActionModulation abstractModulation = loadActionModulationElement(type,gesture.getName(),tp,level);
-				gesture.addModulation(abstractModulation);
+				AbstractActionModulation actionModulation = loadActionModulationElement(type,gesture.getName(),tp,level);
+				gesture.addModulation(actionModulation);
 			}
 		}
     }
     
-    private static StateModulation loadStateModulationElement(GestureName gestureName, Element root, Level level) throws IOException, ClassNotFoundException
+    private static AbstractStateModulation loadStateModulationElement(ModType type, GestureName gestureName, Element root, Level level) throws IOException, ClassNotFoundException
     {	// strength
 		String strengthStr = root.getAttribute(XmlTools.ATT_STRENGTH).getValue().trim();
 		float strength;
@@ -133,17 +137,36 @@ public class ModulationsLoader
 			strength = Float.MAX_VALUE;
 		else
 			strength = Float.parseFloat(strengthStr);
+		
 		// frame
 		boolean frame = Boolean.parseBoolean(root.getAttribute(XmlTools.ATT_FRAME).getValue());
+		
 		// name
 		Element nameElt = root.getChild(XmlTools.ELT_NAME);
 		String strName = nameElt.getAttribute(XmlTools.ATT_VALUE).getValue().trim().toUpperCase(Locale.ENGLISH);
 		StateAbilityName name = StateAbilityName.valueOf(strName);
+		
 		// result
-		StateModulation result = new StateModulation(name);
+		AbstractStateModulation result;
+		if(type.equals(ModType.SELF))
+			result = new SelfModulation(name);
+		else //if(type.equals(ModType.OTHER))
+		{	result = new OtherModulation(name);
+			// contacts
+			ArrayList<Contact> contacts = Contact.loadContactsAttribute(root,XmlTools.ATT_CONTACT);
+			for(Contact contact: contacts)
+				((OtherModulation)result).addContact(contact);
+			// tilePositions
+			ArrayList<TilePosition> tilePositions = TilePosition.loadTilePositionsAttribute(root,XmlTools.ATT_TILE_POSITION);
+			for(TilePosition tilePosition: tilePositions)
+				((OtherModulation)result).addTilePosition(tilePosition);
+		}
+
+		// misc
     	result.setFrame(frame);
     	result.setStrength(strength);
 		result.setGestureName(gestureName);
+		
 		return result;
     }
 		
@@ -155,21 +178,26 @@ public class ModulationsLoader
 			strength = Float.MAX_VALUE;
 		else
 			strength = Float.parseFloat(strengthStr);
+		
 		// frame
 		boolean frame = Boolean.parseBoolean(root.getAttribute(XmlTools.ATT_FRAME).getValue());
+		
 		// action
 		Element actionElt = root.getChild(XmlTools.ELT_ACTION);
 		GeneralAction action = GeneralActionLoader.loadActionElement(actionElt);
-    	// actor restrictions
+    	
+		// actor restrictions
 		ArrayList<AbstractAbility> actorRestrictions = new ArrayList<AbstractAbility>();
 		Element actorRestrElt = root.getChild(XmlTools.ELT_ACTOR_RESTRICTIONS);
 		if(actorRestrElt!=null)
 			actorRestrictions = AbilityLoader.loadAbilitiesElement(actorRestrElt,level);
-    	// target restrictions
+    	
+		// target restrictions
 		ArrayList<AbstractAbility> targetRestrictions = new ArrayList<AbstractAbility>();
 		Element targetRestrElt = root.getChild(XmlTools.ELT_TARGET_RESTRICTIONS);
 		if(targetRestrElt!=null)
 			targetRestrictions = AbilityLoader.loadAbilitiesElement(targetRestrElt,level);
+		
 		// result
 		AbstractActionModulation result;
 		if(type.equals(ModType.ACTOR))
@@ -177,11 +205,28 @@ public class ModulationsLoader
 		else if(type.equals(ModType.TARGET))
 			result = new TargetModulation(action);
 		else //if(type.equals(ModType.THIRD))
-			result = new ThirdModulation(action);
+		{	result = new ThirdModulation(action);
+			// contacts
+			ArrayList<Contact> actorContacts = Contact.loadContactsAttribute(root,XmlTools.ATT_ACTOR_CONTACT);
+			for(Contact actorContact: actorContacts)
+				((ThirdModulation)result).addActorContact(actorContact);
+			ArrayList<Contact> targetContacts = Contact.loadContactsAttribute(root,XmlTools.ATT_TARGET_CONTACT);
+			for(Contact targetContact: targetContacts)
+				((ThirdModulation)result).addTargetContact(targetContact);
+			// tilePositions
+			ArrayList<TilePosition> actorTilePositions = TilePosition.loadTilePositionsAttribute(root,XmlTools.ATT_ACTOR_TILE_POSITION);
+			for(TilePosition actorTilePosition: actorTilePositions)
+				((ThirdModulation)result).addActorTilePosition(actorTilePosition);
+			ArrayList<TilePosition> targetTilePositions = TilePosition.loadTilePositionsAttribute(root,XmlTools.ATT_TARGET_TILE_POSITION);
+			for(TilePosition targetTilePosition: targetTilePositions)
+				((ThirdModulation)result).addTargetTilePosition(targetTilePosition);
+		}
+		
 		// misc
 		result.setFrame(frame);
 		result.setStrength(strength);
 		result.setGestureName(gestureName);
+		
 		// restrictions
 		Iterator<AbstractAbility> j = actorRestrictions.iterator();
 		while(j.hasNext())
@@ -193,11 +238,14 @@ public class ModulationsLoader
 		{	AbstractAbility restriction = j.next();
 			result.addTargetRestriction(restriction);
 		}
+		
 		return result;
     }
     
     private enum ModType
-    {	STATE,
+    {	OTHER,
+    	SELF,
+    	
     	ACTOR,
     	TARGET,
     	THIRD;

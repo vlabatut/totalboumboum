@@ -27,9 +27,9 @@ import java.util.Iterator;
 import fr.free.totalboumboum.engine.container.level.Level;
 import fr.free.totalboumboum.engine.container.tile.Tile;
 import fr.free.totalboumboum.engine.content.feature.Direction;
+import fr.free.totalboumboum.engine.content.feature.Role;
 import fr.free.totalboumboum.engine.content.feature.ability.ActionAbility;
 import fr.free.totalboumboum.engine.content.feature.event.ActionEvent;
-import fr.free.totalboumboum.engine.content.feature.gesture.action.Role;
 import fr.free.totalboumboum.engine.content.feature.gesture.action.SpecificAction;
 import fr.free.totalboumboum.engine.content.sprite.Sprite;
 

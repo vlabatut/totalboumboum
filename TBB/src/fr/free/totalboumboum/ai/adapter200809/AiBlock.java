@@ -21,11 +21,11 @@ package fr.free.totalboumboum.ai.adapter200809;
  * 
  */
 
+import fr.free.totalboumboum.engine.content.feature.Contact;
 import fr.free.totalboumboum.engine.content.feature.Direction;
-import fr.free.totalboumboum.engine.content.feature.gesture.action.Contact;
-import fr.free.totalboumboum.engine.content.feature.gesture.action.Orientation;
+import fr.free.totalboumboum.engine.content.feature.Orientation;
+import fr.free.totalboumboum.engine.content.feature.TilePosition;
 import fr.free.totalboumboum.engine.content.feature.gesture.action.SpecificAction;
-import fr.free.totalboumboum.engine.content.feature.gesture.action.TilePosition;
 import fr.free.totalboumboum.engine.content.feature.gesture.modulation.TargetModulation;
 import fr.free.totalboumboum.engine.content.sprite.block.Block;
 import fr.free.totalboumboum.engine.content.sprite.fire.Fire;
