@@ -22,8 +22,13 @@ package fr.free.totalboumboum.engine.content.feature;
  */
 
 import java.util.ArrayList;
+import java.util.Locale;
+
+import org.jdom.Attribute;
+import org.jdom.Element;
 
 import fr.free.totalboumboum.engine.content.sprite.Sprite;
+import fr.free.totalboumboum.tools.XmlTools;
 
 public enum Direction
 {
@@ -425,4 +430,28 @@ public enum Direction
 	}
 */
 	
+	// TODO à utiliser dans tous les loaders
+	public static ArrayList<Direction> loadDirectionsAttribute(Element root, String attName)
+	{	ArrayList<Direction> result = new ArrayList<Direction>();
+		Attribute attribute = root.getAttribute(attName);
+		String directionStr = attribute.getValue().trim().toUpperCase(Locale.ENGLISH);
+		String[] directionsStr = directionStr.split(" ");
+		for(String str: directionsStr)
+		{	if(str.equalsIgnoreCase(XmlTools.VAL_ANY))
+			{	result.add(Direction.UP);
+				result.add(Direction.UPRIGHT);
+				result.add(Direction.RIGHT);
+				result.add(Direction.DOWNRIGHT);
+				result.add(Direction.DOWN);
+				result.add(Direction.DOWNLEFT);
+				result.add(Direction.LEFT);
+				result.add(Direction.UPLEFT);
+			}
+			else
+			{	Direction direction = Direction.valueOf(str);
+				result.add(direction);
+			}
+		}
+		return result;
+	}
 }

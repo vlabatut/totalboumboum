@@ -23,46 +23,58 @@ import fr.free.totalboumboum.engine.content.feature.gesture.GestureName;
  * 
  */
 
-
 public abstract class AbstractModulation
 {	
-	protected GestureName gestureName; //debug
-	
-	/** 
-	 * modification de la force de l'abileté
-	 */
-	protected float strength;
-	/** 
-	 * masquage de la force
-	 */
-	protected boolean frame;
-	
 	public AbstractModulation()
 	{	strength = 0;
 		frame = false;
 	}
-	
-	public boolean getFrame()
-	{	return frame;
-	}
-	public void setFrame(boolean frame)
-	{	this.frame = frame;
-	}	
 
-	public float getStrength()
-	{	return strength;
-	}
-	public void setStrength(float strength)
-	{	this.strength = strength;
-	}
+	/////////////////////////////////////////////////////////////////
+	// GESTURE			/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	/** the gesture whose this modulation belongs to */
+	protected GestureName gestureName; //debug
 	
 	public void setGestureName(GestureName gestureName)
 	{	this.gestureName = gestureName;		
 	}
+	
 	public GestureName getGestureName()
 	{	return gestureName;		
 	}
+	
+	/////////////////////////////////////////////////////////////////
+	// FRAME			/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	/** strength complete framing, or only modification */
+	protected boolean frame;
 
+	public boolean getFrame()
+	{	return frame;
+	}
+	
+	public void setFrame(boolean frame)
+	{	this.frame = frame;
+	}	
+
+	/////////////////////////////////////////////////////////////////
+	// STRENGTH			/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	/** ability strength modulation */
+	protected float strength;
+
+	public float getStrength()
+	{	return strength;
+	}
+	
+	public void setStrength(float strength)
+	{	this.strength = strength;
+	}
+	
+	/////////////////////////////////////////////////////////////////
+	// FINISHED			/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
 	protected boolean finished = false;
 	
 	public void finish()

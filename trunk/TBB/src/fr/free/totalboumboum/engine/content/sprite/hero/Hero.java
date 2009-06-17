@@ -22,7 +22,7 @@ package fr.free.totalboumboum.engine.content.sprite.hero;
  */
 
 import fr.free.totalboumboum.engine.container.level.Level;
-import fr.free.totalboumboum.engine.content.feature.gesture.action.Role;
+import fr.free.totalboumboum.engine.content.feature.Role;
 import fr.free.totalboumboum.engine.content.sprite.Sprite;
 
 public class Hero extends Sprite

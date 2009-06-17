@@ -37,6 +37,9 @@ public class ActorModulation extends AbstractActionModulation
 	{	super(action);
 	}
 
+	/////////////////////////////////////////////////////////////////
+	// COMPARISON		/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
 	public boolean equals(Object o)
 	{	boolean result = false;
 		if(o instanceof ActorModulation)
@@ -46,6 +49,9 @@ public class ActorModulation extends AbstractActionModulation
 		return result;
 	}
 	
+	/////////////////////////////////////////////////////////////////
+	// COPY			/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
 	public ActorModulation copy()
 	{	GeneralAction actionCopy = action; //NOTE doesn't seem necessary to copy the action (same thing for target and third modulation)
 		ActorModulation result = new ActorModulation(actionCopy);

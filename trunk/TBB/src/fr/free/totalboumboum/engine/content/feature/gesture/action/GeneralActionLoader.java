@@ -21,12 +21,16 @@ package fr.free.totalboumboum.engine.content.feature.gesture.action;
  * 
  */
 
+import java.util.ArrayList;
 import java.util.Locale;
 
-import org.jdom.Attribute;
 import org.jdom.Element;
 
+import fr.free.totalboumboum.engine.content.feature.Contact;
 import fr.free.totalboumboum.engine.content.feature.Direction;
+import fr.free.totalboumboum.engine.content.feature.Orientation;
+import fr.free.totalboumboum.engine.content.feature.Role;
+import fr.free.totalboumboum.engine.content.feature.TilePosition;
 import fr.free.totalboumboum.tools.XmlTools;
 
 public class GeneralActionLoader
@@ -39,117 +43,39 @@ public class GeneralActionLoader
 		
 		try
 		{	// actors
-			{	Attribute attribute = root.getAttribute(XmlTools.ATT_ACTOR);
-				String actorStr = attribute.getValue().trim().toUpperCase(Locale.ENGLISH);
-				String[] actorsStr = actorStr.split(" ");
-				for(String str: actorsStr)
-				{	if(str.equalsIgnoreCase(XmlTools.VAL_ANY))
-					{	result.addActor(Role.BLOCK);
-						result.addActor(Role.BOMB);
-						result.addActor(Role.FIRE);
-						result.addActor(Role.FLOOR);
-						result.addActor(Role.HERO);
-						result.addActor(Role.ITEM);
-					}
-					else
-					{	Role role = Role.valueOf(str);
-						result.addActor(role);
-					}
-				}
+			{	ArrayList<Role> actors = Role.loadRolesAttribute(root,XmlTools.ATT_ACTOR);
+				for(Role actor: actors)
+					result.addTarget(actor);
 			}
 			
 			// targets
-			{	Attribute attribute = root.getAttribute(XmlTools.ATT_TARGET);
-				String targetStr = attribute.getValue().trim().toUpperCase(Locale.ENGLISH);
-				String[] targetsStr = targetStr.split(" ");
-				for(String str: targetsStr)
-				{	if(str.equalsIgnoreCase(XmlTools.VAL_ANY))
-					{	result.addTarget(Role.BLOCK);
-						result.addTarget(Role.BOMB);
-						result.addTarget(Role.FIRE);
-						result.addTarget(Role.FLOOR);
-						result.addTarget(Role.HERO);
-						result.addTarget(Role.ITEM);
-					}
-					else
-					{	Role role = Role.valueOf(str);
-						result.addTarget(role);
-					}
-				}
+			{	ArrayList<Role> targets = Role.loadRolesAttribute(root,XmlTools.ATT_TARGET);
+				for(Role target: targets)
+					result.addTarget(target);
 			}
 			
 			// directions
-			{	Attribute attribute = root.getAttribute(XmlTools.ATT_DIRECTION);
-				String directionStr = attribute.getValue().trim().toUpperCase(Locale.ENGLISH);
-				String[] directionsStr = directionStr.split(" ");
-				for(String str: directionsStr)
-				{	if(str.equalsIgnoreCase(XmlTools.VAL_ANY))
-					{	result.addDirection(Direction.UP);
-						result.addDirection(Direction.UPRIGHT);
-						result.addDirection(Direction.RIGHT);
-						result.addDirection(Direction.DOWNRIGHT);
-						result.addDirection(Direction.DOWN);
-						result.addDirection(Direction.DOWNLEFT);
-						result.addDirection(Direction.LEFT);
-						result.addDirection(Direction.UPLEFT);
-					}
-					else
-					{	Direction direction = Direction.valueOf(str);
-						result.addDirection(direction);
-					}
-				}
+			{	ArrayList<Direction> directions = Direction.loadDirectionsAttribute(root,XmlTools.ATT_DIRECTION);
+				for(Direction direction: directions)
+					result.addDirection(direction);
 			}
 			
 			// contacts
-			{	Attribute attribute = root.getAttribute(XmlTools.ATT_CONTACT);
-				String contactStr = attribute.getValue().trim().toUpperCase(Locale.ENGLISH);
-				String[] contactsStr = contactStr.split(" ");
-				for(String str: contactsStr)
-				{	if(str.equalsIgnoreCase(XmlTools.VAL_ANY))
-					{	result.addContact(Contact.COLLISION);
-						result.addContact(Contact.INTERSECTION);
-					}
-					else
-					{	Contact contact = Contact.valueOf(str);
-						result.addContact(contact);
-					}
-				}
+			{	ArrayList<Contact> contacts = Contact.loadContactsAttribute(root,XmlTools.ATT_CONTACT);
+				for(Contact contact: contacts)
+					result.addContact(contact);
 			}
 			
 			// tilePositions
-			{	Attribute attribute = root.getAttribute(XmlTools.ATT_TILE_POSITION);
-				String tilePositionStr = attribute.getValue().trim().toUpperCase(Locale.ENGLISH);
-				String[] tilePositionsStr = tilePositionStr.split(" ");
-				for(String str: tilePositionsStr)
-				{	if(str.equalsIgnoreCase(XmlTools.VAL_ANY))
-					{	result.addTilePosition(TilePosition.NEIGHBOR);
-						result.addTilePosition(TilePosition.REMOTE);
-						result.addTilePosition(TilePosition.SAME);
-						result.addTilePosition(TilePosition.UNDEFINED);
-					}
-					else
-					{	TilePosition tilePosition = TilePosition.valueOf(str);
-						result.addTilePosition(tilePosition);
-					}
-				}
+			{	ArrayList<TilePosition> tilePositions = TilePosition.loadTilePositionsAttribute(root,XmlTools.ATT_TILE_POSITION);
+				for(TilePosition tilePosition: tilePositions)
+					result.addTilePosition(tilePosition);
 			}
 			
 			// orientations
-			{	Attribute attribute = root.getAttribute(XmlTools.ATT_ORIENTATION);
-				String orientationStr = attribute.getValue().trim().toUpperCase(Locale.ENGLISH);
-				String[] orientationsStr = orientationStr.split(" ");
-				for(String str: orientationsStr)
-				{	if(str.equalsIgnoreCase(XmlTools.VAL_ANY))
-					{	result.addOrientation(Orientation.OPPOSITE);
-						result.addOrientation(Orientation.OTHER);
-						result.addOrientation(Orientation.SAME);
-						result.addOrientation(Orientation.UNDEFINED);
-					}
-					else
-					{	Orientation orientation = Orientation.valueOf(str);
-						result.addOrientation(orientation);
-					}
-				}
+			{	ArrayList<Orientation> orientations = Orientation.loadOrientationsAttribute(root,XmlTools.ATT_ORIENTATION);
+				for(Orientation orientation: orientations)
+					result.addOrientation(orientation);
 			}
 		}
 		catch (IncompatibleParameterException e)
@@ -158,5 +84,5 @@ public class GeneralActionLoader
 		
 		// results
 		return result;
-    }
+    }	
 }

@@ -21,11 +21,13 @@ package fr.free.totalboumboum.engine.content.feature.gesture.modulation;
  * 
  */
 
-import java.util.Iterator;
+import java.util.ArrayList;
 
-import fr.free.totalboumboum.engine.content.feature.ability.AbstractAbility;
+import fr.free.totalboumboum.engine.content.feature.Contact;
+import fr.free.totalboumboum.engine.content.feature.TilePosition;
 import fr.free.totalboumboum.engine.content.feature.gesture.action.GeneralAction;
 import fr.free.totalboumboum.engine.content.feature.gesture.action.SpecificAction;
+import fr.free.totalboumboum.engine.content.sprite.Sprite;
 
 public class ThirdModulation extends AbstractActionModulation
 {
@@ -36,6 +38,84 @@ public class ThirdModulation extends AbstractActionModulation
 	public ThirdModulation(SpecificAction action)
 	{	super(action);
 	}
+	
+	/////////////////////////////////////////////////////////////////
+	// CONTACTS			/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	/** contacts between the actor and the modulating sprite */
+	protected final ArrayList<Contact> actorContacts = new ArrayList<Contact>();
+	/** contacts between the target and the modulating sprite */
+	protected final ArrayList<Contact> targetContacts = new ArrayList<Contact>();
+/*
+	protected ArrayList<Contact> getContacts()
+	{	return contacts;
+	}
+*/
+	public void addActorContact(Contact contact)
+	{	actorContacts.add(contact);		
+	}
+
+	public void addTargetContact(Contact contact)
+	{	targetContacts.add(contact);		
+	}
+
+	/////////////////////////////////////////////////////////////////
+	// TILE POSITIONS	/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	/** positions of the actor in terms of tiles */
+	protected final ArrayList<TilePosition> actorTilePositions =  new ArrayList<TilePosition>();
+	/** positions of the target in terms of tiles */
+	protected final ArrayList<TilePosition> targetTilePositions =  new ArrayList<TilePosition>();
+	
+/*	protected ArrayList<TilePosition> getTilePositions()
+	{	return tilePositions;
+	}
+*/	
+	public void addActorTilePosition(TilePosition tilePosition)
+	{	actorTilePositions.add(tilePosition);
+	}
+
+	public void addTargetTilePosition(TilePosition tilePosition)
+	{	targetTilePositions.add(tilePosition);
+	}
+
+	/////////////////////////////////////////////////////////////////
+	// MODULATE					/////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	/**
+	 * tests if this modulation is related to the specified action
+	 */
+	public boolean isConcerningAction(SpecificAction specificAction, Sprite modulator) 
+//TODO vérififier dans le mod mgr que c bien cette méthode (et pas la parente) qui est appelée
+//TODO dans le XML, mettre undefined par défaut partout
+	{	boolean result = super.isConcerningAction(specificAction);
+		Sprite actor = specificAction.getActor();
+		Sprite target = specificAction.getTarget();
+		// tile positions
+		if(result)
+		{	TilePosition actorTilePosition = TilePosition.getTilePosition(modulator,actor);
+			result = actorTilePositions.contains(actorTilePosition);
+			if(result)
+			{	TilePosition targetTilePosition = TilePosition.getTilePosition(modulator,target);
+				result = targetTilePositions.contains(targetTilePosition);
+			}
+		}
+		// contacts
+		if(result)
+		{	Contact actorContact = Contact.getContact(modulator,actor);
+			result = actorContacts.contains(actorContact);
+			if(result)
+			{	Contact targetContact = Contact.getContact(modulator,target);
+				result = targetContacts.contains(targetContact);
+			}
+		}
+		//	
+		return result;		
+	}
+
+	/////////////////////////////////////////////////////////////////
+	// COMPARISON		/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
 	public boolean equals(Object o)
 	{	boolean result = false;
 		if(o instanceof ThirdModulation)
@@ -45,24 +125,22 @@ public class ThirdModulation extends AbstractActionModulation
 		return result;
 	}
 
+	/////////////////////////////////////////////////////////////////
+	// COPY				/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
 	public ThirdModulation copy()
 	{	GeneralAction actionCopy = action;
-		ThirdModulation result = new ThirdModulation(actionCopy);
-		// actor restrictions
-		{	Iterator<AbstractAbility> it = actorRestrictions.iterator();
-			while(it.hasNext())
-			{	AbstractAbility temp = it.next().copy();
-				result.addActorRestriction(temp);
-			}
-		}
-		// target restrictions
-		{	Iterator<AbstractAbility> it = targetRestrictions.iterator();
-			while(it.hasNext())
-			{	AbstractAbility temp = it.next().copy();
-				result.addTargetRestriction(temp);
-			}
-		}
-		//
+		ThirdModulation result = new ThirdModulation(actionCopy); //NOTE why copy the action?
+		// restrictions
+		result.actorRestrictions.addAll(actorRestrictions);
+		result.targetRestrictions.addAll(targetRestrictions);
+		// contacts
+		result.actorContacts.addAll(actorContacts);
+		result.targetContacts.addAll(targetContacts);
+		// tile positions
+		result.actorTilePositions.addAll(actorTilePositions);
+		result.targetTilePositions.addAll(targetTilePositions);
+		// misc
 		result.finished = finished;
 		result.frame = frame;
 		result.gestureName = gestureName;

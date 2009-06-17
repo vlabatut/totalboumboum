@@ -1,7 +1,13 @@
-package fr.free.totalboumboum.engine.content.feature.gesture.action;
+package fr.free.totalboumboum.engine.content.feature;
 
-import fr.free.totalboumboum.engine.content.feature.Direction;
+import java.util.ArrayList;
+import java.util.Locale;
+
+import org.jdom.Attribute;
+import org.jdom.Element;
+
 import fr.free.totalboumboum.engine.content.sprite.Sprite;
+import fr.free.totalboumboum.tools.XmlTools;
 
 /*
  * Total Boum Boum
@@ -66,4 +72,24 @@ public enum Orientation
 		}
 		return result;
 	}	
+
+	public static ArrayList<Orientation> loadOrientationsAttribute(Element root, String attName)
+	{	ArrayList<Orientation> result = new ArrayList<Orientation>();
+		Attribute attribute = root.getAttribute(attName);
+		String orientationStr = attribute.getValue().trim().toUpperCase(Locale.ENGLISH);
+		String[] orientationsStr = orientationStr.split(" ");
+		for(String str: orientationsStr)
+		{	if(str.equalsIgnoreCase(XmlTools.VAL_ANY))
+			{	result.add(Orientation.OPPOSITE);
+				result.add(Orientation.OTHER);
+				result.add(Orientation.SAME);
+				result.add(Orientation.UNDEFINED);
+			}
+			else
+			{	Orientation orientation = Orientation.valueOf(str);
+				result.add(orientation);
+			}
+		}
+		return result;
+	}
 }
