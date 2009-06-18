@@ -25,5 +25,9 @@
 		<xsd:union memberTypes="tDirection tAllDirections" />
 	</xsd:simpleType>
 
+	<xsd:simpleType name="tDirectionList"> 
+    	<xsd:list itemType="tExtendedDirection"/> 
+	</xsd:simpleType> 
+
 </xsd:schema>
 		

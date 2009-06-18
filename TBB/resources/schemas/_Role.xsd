@@ -14,5 +14,9 @@
 		</xsd:restriction>
 	</xsd:simpleType>
 
+	<xsd:simpleType name="tRoleList"> 
+    	<xsd:list itemType="tRole"/> 
+	</xsd:simpleType> 
+
 </xsd:schema>
 		

@@ -1,15 +1,36 @@
 <?xml version="1.0" encoding="utf-8"?>
 <xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema">
 <xsd:include schemaLocation="_Ability.xsd"/>
+<xsd:include schemaLocation="_TilePosition.xsd"/>
+<xsd:include schemaLocation="_Contact.xsd"/>
 
-	<xsd:complexType name="tPermission">
+	<xsd:complexType name="tModulation">
 		<xsd:attribute name="frame" type="xsd:boolean" use="optional" default="false" />
 		<xsd:attribute name="strength" type="xsd:string" use="optional" default="0" />
 	</xsd:complexType>
 
-	<xsd:complexType name="tStateModulation">
+	<xsd:complexType name="tExtendedModulation">
 		<xsd:complexContent>
-			<xsd:extension base="tPermission">
+			<xsd:extension base="tModulation">
+				<xsd:attribute name="contact" type="tContactList" use="optional" default="ANY" />
+				<xsd:attribute name="tilePosition" type="tTilePositionList" use="optional" default="ANY" />
+			</xsd:extension>
+		</xsd:complexContent>
+	</xsd:complexType>
+
+	<xsd:complexType name="tSelfModulation">
+		<xsd:complexContent>
+			<xsd:extension base="tModulation">
+				<xsd:sequence>
+					<xsd:element name="name" type="tAbilityName" />
+				</xsd:sequence>
+			</xsd:extension>
+		</xsd:complexContent>
+	</xsd:complexType>
+
+	<xsd:complexType name="tOtherModulation">
+		<xsd:complexContent>
+			<xsd:extension base="tExtendedModulation">
 				<xsd:sequence>
 					<xsd:element name="name" type="tAbilityName" />
 				</xsd:sequence>
@@ -23,9 +44,9 @@
 		</xsd:sequence>
 	</xsd:complexType>
 
-	<xsd:complexType name="tActorPermission">
+	<xsd:complexType name="tActorModulation">
 		<xsd:complexContent>
-			<xsd:extension base="tPermission">
+			<xsd:extension base="tModulation">
 				<xsd:sequence>
 					<xsd:element name="action" type="tActionActor" />
 					<xsd:element name="actor-restrictions" type="tRestrictions" minOccurs="0" />
@@ -35,9 +56,9 @@
 		</xsd:complexContent>
 	</xsd:complexType>
 
-	<xsd:complexType name="tTargetPermission">
+	<xsd:complexType name="tTargetModulation">
 		<xsd:complexContent>
-			<xsd:extension base="tPermission">
+			<xsd:extension base="tModulation">
 				<xsd:sequence>
 					<xsd:element name="action" type="tActionTarget" />
 					<xsd:element name="actor-restrictions" type="tRestrictions" minOccurs="0" />
@@ -47,9 +68,9 @@
 		</xsd:complexContent>
 	</xsd:complexType>
 
-	<xsd:complexType name="tThirdPermission">
+	<xsd:complexType name="tThirdModulation">
 		<xsd:complexContent>
-			<xsd:extension base="tPermission">
+			<xsd:extension base="tExtendedModulation">
 				<xsd:sequence>
 					<xsd:element name="action" type="tActionThird" />
 					<xsd:element name="actor-restrictions" type="tRestrictions" minOccurs="0" />
@@ -59,39 +80,46 @@
 		</xsd:complexContent>
 	</xsd:complexType>
 
-	<xsd:complexType name="tStateModulations">
+	<xsd:complexType name="tSelfModulations">
 		<xsd:sequence>
-			<xsd:element name="modulation" type="tStateModulation" minOccurs="0" maxOccurs="unbounded" />
+			<xsd:element name="modulation" type="tSelfModulation" minOccurs="0" maxOccurs="unbounded" />
 		</xsd:sequence>
 	</xsd:complexType>
 
-	<xsd:complexType name="tActorPermissions">
+	<xsd:complexType name="tOtherModulations">
 		<xsd:sequence>
-			<xsd:element name="permission" type="tActorPermission" minOccurs="0" maxOccurs="unbounded" />
+			<xsd:element name="modulation" type="tOtherModulation" minOccurs="0" maxOccurs="unbounded" />
 		</xsd:sequence>
 	</xsd:complexType>
 
-	<xsd:complexType name="tTargetPermissions">
+	<xsd:complexType name="tActorModulations">
 		<xsd:sequence>
-			<xsd:element name="permission" type="tTargetPermission" minOccurs="0" maxOccurs="unbounded" />
+			<xsd:element name="modulation" type="tActorModulation" minOccurs="0" maxOccurs="unbounded" />
 		</xsd:sequence>
 	</xsd:complexType>
 
-	<xsd:complexType name="tThirdPermissions">
+	<xsd:complexType name="tTargetModulations">
 		<xsd:sequence>
-			<xsd:element name="permission" type="tThirdPermission" minOccurs="0" maxOccurs="unbounded" />
+			<xsd:element name="modulation" type="tTargetModulation" minOccurs="0" maxOccurs="unbounded" />
 		</xsd:sequence>
 	</xsd:complexType>
 
-	<xsd:complexType name="tGesturePermissions">
+	<xsd:complexType name="tThirdModulations">
 		<xsd:sequence>
-			<xsd:element name="state-modulations" type="tStateModulations" minOccurs="0" />
-			<xsd:element name="actor-permissions" type="tActorPermissions" minOccurs="0" />
-			<xsd:element name="target-permissions" type="tTargetPermissions" minOccurs="0" />
-			<xsd:element name="third-permissions" type="tThirdPermissions" minOccurs="0" />
+			<xsd:element name="modulation" type="tThirdModulation" minOccurs="0" maxOccurs="unbounded" />
 		</xsd:sequence>
 	</xsd:complexType>
 
-	<xsd:element name="gesture-permissions" type="tGesturePermissions" />
+	<xsd:complexType name="tGestureModulations">
+		<xsd:sequence>
+			<xsd:element name="self-modulations" type="tSelfModulations" minOccurs="0" />
+			<xsd:element name="other-modulations" type="tOtherModulations" minOccurs="0" />
+			<xsd:element name="actor-modulations" type="tActorModulations" minOccurs="0" />
+			<xsd:element name="target-modulations" type="tTargetModulations" minOccurs="0" />
+			<xsd:element name="third-modulations" type="tThirdModulations" minOccurs="0" />
+		</xsd:sequence>
+	</xsd:complexType>
+
+	<xsd:element name="gesture-modulations" type="tGestureModulations" />
 
 </xsd:schema>
