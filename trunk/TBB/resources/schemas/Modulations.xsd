@@ -6,12 +6,12 @@
 		<xsd:attribute name="file" type="xsd:string" use="required" />
 	</xsd:complexType>
 
-	<xsd:complexType name="tPermissions">
+	<xsd:complexType name="tModulations">
 		<xsd:sequence>
 			<xsd:element name="gesture" type="tGesture" minOccurs="0" maxOccurs="unbounded" />
 		</xsd:sequence>
 	</xsd:complexType>
 
-	<xsd:element name="permissions" type="tPermissions" />
+	<xsd:element name="modulations" type="tModulations" />
 
 </xsd:schema>

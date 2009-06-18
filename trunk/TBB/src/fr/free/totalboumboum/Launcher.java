@@ -917,7 +917,7 @@ public class Launcher
 	 * déjà utilisé avec les acions (à savoir: scanner la case courante, voire les sprites en contact (note: la liste en est connue à chaque instant)
 	 * 	X	1) introduire la notion de position dans 3rdMod et statMod
 	 * 	X	2) introduire la notion d'autoStatMod
-	 * 		3) modifier les fichiers XML en conséquence, et voir si les actions et d'autres trucs plus anciens ne peuvent pas être simplifiés en utilisant les listes d'attributs
+	 * 	X	3) modifier les fichiers XML en conséquence, et voir si les actions et d'autres trucs plus anciens ne peuvent pas être simplifiés en utilisant les listes d'attributs
 	 * 	X	4) modifier les loaders en conséquence
 	 * 		5) adapter le traitement (test de pertinence de la modulation en conséquence)
 	 * idée pour centraliser le traitement en cas de portée sans limite:
