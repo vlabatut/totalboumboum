@@ -458,7 +458,7 @@ public class MoveZone
 				dir = Direction.getHorizontalFromDouble(dx);
 			}
 			// has the sprite an assistance?
-			StateAbility ability = source.getAbility(StateAbilityName.SPRITE_MOVE_ASSISTANCE);
+			StateAbility ability = source.modulateStateAbility(StateAbilityName.SPRITE_MOVE_ASSISTANCE);
 			double tolerance = ability.getStrength();
 			double margin = tolerance*level.getTileDimension();
 			if(tolerance==0)

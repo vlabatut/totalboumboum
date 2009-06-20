@@ -91,7 +91,7 @@ public class BlockEventManager extends EventManager
 	private void engAnimeOver(EngineEvent event)
 	{	if(gesture.equals(GestureName.BURNING))
 		{	// spawn or not ?
-			StateAbility ablt = sprite.getAbility(StateAbilityName.BLOCK_SPAWN);
+			StateAbility ablt = sprite.modulateStateAbility(StateAbilityName.BLOCK_SPAWN);
 			// can spawn
 			if(ablt.isActive())
 			{	sprite.addDelay(DelayManager.DL_SPAWN, ablt.getStrength());
@@ -129,13 +129,13 @@ public class BlockEventManager extends EventManager
 		{	SpecificAction specificAction = new SpecificAction(AbstractAction.APPEAR,sprite,sprite.getTile().getFloor(),Direction.NONE);
 			AbstractAbility ability = sprite.computeAbility(specificAction);
 			if(ability.isActive())
-			{	StateAbility ablt = sprite.getAbility(StateAbilityName.BLOCK_SPAWN);
+			{	StateAbility ablt = sprite.modulateStateAbility(StateAbilityName.BLOCK_SPAWN);
 				sprite.decrementUse(ablt,1);
 				gesture = GestureName.SPAWNING;
 				sprite.setGesture(gesture,spriteDirection,Direction.NONE,true);
 			}
 			else
-			{	StateAbility ablt = sprite.getAbility(StateAbilityName.BLOCK_SPAWN);
+			{	StateAbility ablt = sprite.modulateStateAbility(StateAbilityName.BLOCK_SPAWN);
 				sprite.addDelay(DelayManager.DL_SPAWN, ablt.getStrength());	
 			}
 		}

@@ -68,9 +68,9 @@ public class BombsetManager
 	}
 	
 	public void dropBomb(Bomb bomb)
-	{	StateAbility ability = sprite.getAbility(StateAbilityName.BOMB_RANGE);
+	{	StateAbility ability = sprite.modulateStateAbility(StateAbilityName.BOMB_RANGE);
 		int flameRange = (int)ability.getStrength();
-		ability = sprite.getAbility(StateAbilityName.BOMB_NUMBER);
+		ability = sprite.modulateStateAbility(StateAbilityName.BOMB_NUMBER);
 		int droppedBombLimit = (int)ability.getStrength();
 		if(droppedBombs.size()<droppedBombLimit)
 		{	if(bomb!=null)

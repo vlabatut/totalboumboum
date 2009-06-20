@@ -47,7 +47,8 @@ import fr.free.totalboumboum.engine.content.feature.gesture.GesturePack;
 import fr.free.totalboumboum.engine.content.feature.gesture.action.GeneralAction;
 import fr.free.totalboumboum.engine.content.feature.gesture.action.SpecificAction;
 import fr.free.totalboumboum.engine.content.feature.gesture.modulation.ActorModulation;
-import fr.free.totalboumboum.engine.content.feature.gesture.modulation.StateModulation;
+import fr.free.totalboumboum.engine.content.feature.gesture.modulation.OtherModulation;
+import fr.free.totalboumboum.engine.content.feature.gesture.modulation.SelfModulation;
 import fr.free.totalboumboum.engine.content.feature.gesture.modulation.TargetModulation;
 import fr.free.totalboumboum.engine.content.feature.gesture.modulation.ThirdModulation;
 import fr.free.totalboumboum.engine.content.manager.ability.AbilityManager;
@@ -631,8 +632,12 @@ public abstract class Sprite
 	{	this.modulationManager = modulationManager;
 	}
 	
-	public StateModulation getStateModulation(StateAbilityName name)
-	{	return modulationManager.getStateModulation(name);
+	public SelfModulation getSelfModulation(StateAbilityName name)
+	{	return modulationManager.getSelfModulation(name);
+	}
+	
+	public OtherModulation getOtherModulation(StateAbilityName name, Sprite modulated)
+	{	return modulationManager.getOtherModulation(name,modulated);
 	}
 	
 	public ActorModulation getActorModulation(SpecificAction action)
@@ -679,10 +684,10 @@ public abstract class Sprite
 	{	modulationManager.combineStateModulation(name,ability);
 	}
 */	
-	public ArrayList<AbstractAbility> getModulationAbilities()
+/*	public ArrayList<AbstractAbility> getModulationAbilities()
 	{	return modulationManager.getModulationStateAbilities();	
 	}
-	
+*/	
 	/////////////////////////////////////////////////////////////////
 	// TRAJECTORIES		/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////

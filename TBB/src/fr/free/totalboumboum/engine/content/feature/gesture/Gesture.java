@@ -33,10 +33,12 @@ import fr.free.totalboumboum.engine.content.feature.gesture.action.SpecificActio
 import fr.free.totalboumboum.engine.content.feature.gesture.anime.AnimeDirection;
 import fr.free.totalboumboum.engine.content.feature.gesture.modulation.AbstractModulation;
 import fr.free.totalboumboum.engine.content.feature.gesture.modulation.ActorModulation;
-import fr.free.totalboumboum.engine.content.feature.gesture.modulation.StateModulation;
+import fr.free.totalboumboum.engine.content.feature.gesture.modulation.OtherModulation;
+import fr.free.totalboumboum.engine.content.feature.gesture.modulation.SelfModulation;
 import fr.free.totalboumboum.engine.content.feature.gesture.modulation.TargetModulation;
 import fr.free.totalboumboum.engine.content.feature.gesture.modulation.ThirdModulation;
 import fr.free.totalboumboum.engine.content.feature.gesture.trajectory.TrajectoryDirection;
+import fr.free.totalboumboum.engine.content.sprite.Sprite;
 
 public class Gesture
 {	
@@ -110,14 +112,17 @@ public class Gesture
 	/////////////////////////////////////////////////////////////////
 	// MODULATIONS		/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	private final ArrayList<StateModulation> stateModulations = new ArrayList<StateModulation>();
+	private final ArrayList<SelfModulation> selfModulations = new ArrayList<SelfModulation>();
+	private final ArrayList<OtherModulation> otherModulations = new ArrayList<OtherModulation>();
 	private final ArrayList<ActorModulation> actorModulations = new ArrayList<ActorModulation>();
 	private final ArrayList<TargetModulation> targetModulations = new ArrayList<TargetModulation>();
 	private final ArrayList<ThirdModulation> thirdModulations = new ArrayList<ThirdModulation>();
 
 	public void addModulation(AbstractModulation modulation)
-	{	if(modulation instanceof StateModulation)
-			stateModulations.add((StateModulation)modulation);
+	{	if(modulation instanceof SelfModulation)
+			selfModulations.add((SelfModulation)modulation);
+		if(modulation instanceof OtherModulation)
+			otherModulations.add((OtherModulation)modulation);
 		else if(modulation instanceof ActorModulation)
 			actorModulations.add((ActorModulation)modulation);
 		else if(modulation instanceof TargetModulation)
@@ -127,19 +132,31 @@ public class Gesture
 //		modulation.setGestureName(name);
 	}
 	
-	public StateModulation getStateModulation(StateAbilityName name)
-	{	StateModulation result = null;
-		Iterator<StateModulation> i = stateModulations.iterator();
+	public SelfModulation getSelfModulation(StateAbilityName name)
+	{	SelfModulation result = null;
+		Iterator<SelfModulation> i = selfModulations.iterator();
 		while(i.hasNext() && result==null)
-		{	StateModulation modulation = i.next();
+		{	SelfModulation modulation = i.next();
 			if(modulation.getName()==name)
 				result = modulation;
 		}
 		return result;
 	}
-	
+/*	
 	public ArrayList<StateModulation> getStateModulations()
 	{	return stateModulations;	
+	}
+*/
+
+	public OtherModulation getOtherModulation(StateAbilityName name, Sprite modulator, Sprite modulated)
+	{	OtherModulation result = null;
+		Iterator<OtherModulation> i = otherModulations.iterator();
+		while(i.hasNext() && result==null)
+		{	OtherModulation modulation = i.next();
+			if(modulation.getName()==name && modulation.isConcerningSituation(modulator,modulated))
+				result = modulation;
+		}
+		return result;
 	}
 
 	public ActorModulation getActorModulation(SpecificAction action)
@@ -216,16 +233,23 @@ public class Gesture
 			result.addTrajectoryDirection(temp);
 		}
 		
+		// self permissions
+		for(SelfModulation e: selfModulations)
+		{	//SelfModulation temp = e.copy();
+			SelfModulation temp = e;
+			result.addModulation(temp);
+		}
+		// other permissions
+		for(OtherModulation e: otherModulations)
+		{	//OtherModulation temp = e.copy();
+			OtherModulation temp = e;
+			result.addModulation(temp);
+		}
+		
 		// actor permissions
 		for(ActorModulation e: actorModulations)
 		{	//ActorModulation temp = e.copy();
 			ActorModulation temp = e;
-			result.addModulation(temp);
-		}
-		// state permissions
-		for(StateModulation e: stateModulations)
-		{	//StateModulation temp = e.copy();
-			StateModulation temp = e;
 			result.addModulation(temp);
 		}
 		// target permissions
@@ -269,14 +293,18 @@ public class Gesture
 			}
 			trajectories.clear();
 			
+			// state permissions
+			for(SelfModulation e: selfModulations)
+				e.finish();			
+			selfModulations.clear();
+			// other permissions
+			for(OtherModulation e: otherModulations)
+				e.finish();			
+			otherModulations.clear();
 			// actor permissions
 			for(ActorModulation e: actorModulations)
 				e.finish();			
 			actorModulations.clear();
-			// state permissions
-			for(StateModulation e: stateModulations)
-				e.finish();			
-			stateModulations.clear();
 			// target permissions
 			for(TargetModulation e: targetModulations)
 				e.finish();			
