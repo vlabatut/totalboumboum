@@ -149,12 +149,12 @@ public class AbilityManager
 		updateAbilities(directAbilities);
 		ArrayList<AbstractAbility> itemAbilities = sprite.getItemAbilities();
 		updateAbilities(itemAbilities);
-		ArrayList<AbstractAbility> modulationAbilities = sprite.getModulationAbilities();
+//		ArrayList<AbstractAbility> modulationAbilities = sprite.getModulationAbilities();
 /*		
 if(modulationAbilities.size()>0)
 	System.out.println();
 */
-		updateAbilities(modulationAbilities);
+//		updateAbilities(modulationAbilities);
 	}
 	
 	public void decrementUse(AbstractAbility ability, int delta)

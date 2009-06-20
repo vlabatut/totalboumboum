@@ -118,7 +118,7 @@ public abstract class AbstractActionModulation extends AbstractModulation
 				if(ab instanceof ActionAbility)
 					ab = actor.getAbility(((ActionAbility)ab).getAction());
 				else
-					ab = actor.getAbility(((StateAbility)ab).getName());
+					ab = actor.modulateStateAbility(((StateAbility)ab).getName());
 				result = ab.isActive();
 			}
 		}
@@ -131,7 +131,7 @@ public abstract class AbstractActionModulation extends AbstractModulation
 				if(ab instanceof ActionAbility)
 					ab = target.getAbility(((ActionAbility)ab).getAction());
 				else
-					ab = target.getAbility(((StateAbility)ab).getName());
+					ab = target.modulateStateAbility(((StateAbility)ab).getName());
 				result = ab.isActive();
 			}
 		}

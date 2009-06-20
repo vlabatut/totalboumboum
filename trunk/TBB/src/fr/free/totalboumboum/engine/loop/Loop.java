@@ -720,7 +720,7 @@ System.out.println();
 	{	if(players.size()>0)
 		{	Player player = players.get(0);
 			Sprite sprite = player.getSprite();
-			StateAbility ability = sprite.getAbility(StateAbilityName.HERO_ENTRY_DURATION);
+			StateAbility ability = sprite.modulateStateAbility(StateAbilityName.HERO_ENTRY_DURATION);
 			entryDelay = ability.getStrength();
 		}
 	}
@@ -728,7 +728,7 @@ System.out.println();
 	{	if(players.size()>0)
 		{	Player player = players.get(0);
 			Sprite sprite = player.getSprite();
-			StateAbility ability = sprite.getAbility(StateAbilityName.HERO_CELEBRATION_DURATION);
+			StateAbility ability = sprite.modulateStateAbility(StateAbilityName.HERO_CELEBRATION_DURATION);
 			celebrationDelay = ability.getStrength();
 		}
 		else

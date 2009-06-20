@@ -112,9 +112,9 @@ public abstract class AiManager extends AbstractAiManager<Integer>
         ownPosition[0] = tile.getCol();
         ownPosition[1] = tile.getLine();
         // propriétés du joueur
-        StateAbility ab = sprite.getAbility(StateAbilityName.BOMB_RANGE);
+        StateAbility ab = sprite.modulateStateAbility(StateAbilityName.BOMB_RANGE);
 		ownFirePower = (int)ab.getStrength();
-        ab = sprite.getAbility(StateAbilityName.BOMB_NUMBER);
+        ab = sprite.modulateStateAbility(StateAbilityName.BOMB_NUMBER);
 		ownBombCount = (int)ab.getStrength() - sprite.getDroppedBombs().size();
 
         // position relative de l'éventuelle bombe
@@ -246,9 +246,9 @@ public abstract class AiManager extends AbstractAiManager<Integer>
 				int tempPlayerData[] = {tempX,tempY,tempDirAI};
 				players.add(tempPlayerData);
 				playersStates.add(!tempPlayer.getSprite().isEnded());
-		        ab = tempPlayer.getSprite().getAbility(StateAbilityName.BOMB_RANGE);
+		        ab = tempPlayer.getSprite().modulateStateAbility(StateAbilityName.BOMB_RANGE);
 		        firePowers.add((int)ab.getStrength());
-		        ab = tempPlayer.getSprite().getAbility(StateAbilityName.BOMB_NUMBER);
+		        ab = tempPlayer.getSprite().modulateStateAbility(StateAbilityName.BOMB_NUMBER);
 		        bombCounts.add((int)ab.getStrength());
 			}
 		}

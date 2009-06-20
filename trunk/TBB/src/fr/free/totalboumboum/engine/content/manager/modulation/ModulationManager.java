@@ -27,14 +27,14 @@ import java.util.Iterator;
 import fr.free.totalboumboum.engine.container.level.Level;
 import fr.free.totalboumboum.engine.container.tile.Tile;
 import fr.free.totalboumboum.engine.content.feature.Direction;
-import fr.free.totalboumboum.engine.content.feature.ability.AbstractAbility;
 import fr.free.totalboumboum.engine.content.feature.ability.ActionAbility;
 import fr.free.totalboumboum.engine.content.feature.ability.StateAbility;
 import fr.free.totalboumboum.engine.content.feature.ability.StateAbilityName;
 import fr.free.totalboumboum.engine.content.feature.gesture.Gesture;
 import fr.free.totalboumboum.engine.content.feature.gesture.action.SpecificAction;
 import fr.free.totalboumboum.engine.content.feature.gesture.modulation.ActorModulation;
-import fr.free.totalboumboum.engine.content.feature.gesture.modulation.StateModulation;
+import fr.free.totalboumboum.engine.content.feature.gesture.modulation.OtherModulation;
+import fr.free.totalboumboum.engine.content.feature.gesture.modulation.SelfModulation;
 import fr.free.totalboumboum.engine.content.feature.gesture.modulation.TargetModulation;
 import fr.free.totalboumboum.engine.content.feature.gesture.modulation.ThirdModulation;
 import fr.free.totalboumboum.engine.content.sprite.Sprite;
@@ -44,8 +44,7 @@ public class ModulationManager
 	public ModulationManager(Sprite sprite)
 	{	this.sprite = sprite;
 		currentGesture = null;
-		currentDirection = Direction.NONE;
-		stateAbilities = new ArrayList<AbstractAbility>();
+		currentDirection = Direction.NONE;	
 	}
 	
 	/////////////////////////////////////////////////////////////////
@@ -65,27 +64,46 @@ public class ModulationManager
 	private Direction currentDirection;
 	
 	public void updateGesture(Gesture gesture, Direction spriteDirection)
-	{	if(!currentGesture.equals(gesture))
-			updateStateAbilities();
+	{	
+//		if(!currentGesture.equals(gesture))
+//			updateStateAbilities();
 		currentGesture = gesture;
 		currentDirection = spriteDirection;
 	}
 	
 	/////////////////////////////////////////////////////////////////
-	// STATE MODULATIONS	/////////////////////////////////////////
+	// SELF MODULATIONS	/////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	/**
-	 * returns the modulation corresponding to the specified StateAbilityName.
+	 * returns the self-modulation corresponding to the specified StateAbilityName.
 	 * If the sprite has no gesture, or no modulation for this StateAbility
 	 * then a neutral modulation is returned.
 	 * This method always returns a modulation.
 	 */
-	public StateModulation getStateModulation(StateAbilityName name)
-	{	StateModulation result = null;
+	public SelfModulation getSelfModulation(StateAbilityName name)
+	{	SelfModulation result = null;
 		if(currentGesture!=null)
-			result = currentGesture.getStateModulation(name);
+			result = currentGesture.getSelfModulation(name);
 		if(result==null)
-			result = new StateModulation(name);
+			result = new SelfModulation(name);
+		return result;
+	}
+
+	/////////////////////////////////////////////////////////////////
+	// OTHER MODULATIONS	/////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	/**
+	 * returns the state ability modulation corresponding to the specified StateAbilityName.
+	 * If the sprite has no gesture, or no modulation for this StateAbility
+	 * then a neutral modulation is returned.
+	 * This method always returns a modulation.
+	 */
+	public OtherModulation getOtherModulation(StateAbilityName name, Sprite modulated)
+	{	OtherModulation result = null;
+		if(currentGesture!=null)
+			result = currentGesture.getOtherModulation(name,sprite,modulated);
+		if(result==null)
+			result = new OtherModulation(name);
 		return result;
 	}
 
@@ -270,7 +288,28 @@ public class ModulationManager
 	public StateAbility modulateStateAbility(StateAbilityName name)
 	{	// original ability
 		StateAbility result = sprite.getAbility(name);
-		// environment modulation
+		// self modulation
+		result = combineSelfModulation(result);
+		// environement modulation
+		result = combineOtherModulation(result);
+		return result;
+	}	
+		
+	private StateAbility combineSelfModulation(StateAbility ability)
+	{	StateAbility result = ability;
+		if(result.isActive())
+		{	SelfModulation selfModulation = getSelfModulation(ability.getName());
+			result = selfModulation.modulate(result);		
+		}
+		return result;
+	}
+		
+	/**
+	 * on se retreint aux cases contenant l'acteur et la cible, et on teste 
+	 * chaque sprite.
+	 */
+	private StateAbility combineOtherModulation(StateAbility ability)
+	{	StateAbility result = ability;
 		if(result.isActive())
 		{	// list of the involved sprites
 			ArrayList<Sprite> sprites = new ArrayList<Sprite>();
@@ -285,12 +324,13 @@ public class ModulationManager
 			Iterator<Sprite> i = sprites.iterator();
 			while(i.hasNext() && result.isActive())
 			{	Sprite tempSprite = i.next();
-				StateModulation stateModulation = tempSprite.getStateModulation(name);
-				result = stateModulation.modulate(result); 		
+				OtherModulation otherModulation = tempSprite.getOtherModulation(ability.getName(),sprite);
+				result = otherModulation.modulate(result); 		
 			}
 		}
 		return result;
 	}
+	
 /*	
 	public StateAbility computeCapacity(String name)
 	{	StateAbility result = sprite.getAbility(name);
@@ -322,28 +362,28 @@ public class ModulationManager
 	// MODULATION ABILITIES		/////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	/** list of state abilities corresponding to state modulations, to be used by the ability manager */
-	private ArrayList<AbstractAbility> stateAbilities;
+//	private ArrayList<AbstractAbility> stateAbilities = new ArrayList<AbstractAbility>();
 
-	public void updateStateAbilities()
-	{	
+//	public void updateStateAbilities()
+//	{	
 /*		
 if(sprite instanceof Item && sprite.getCurrentGesture()!=null && sprite.getCurrentGesture().equals("burning"))
 	System.out.println();
 */		
-		ArrayList<StateModulation> modulations = currentGesture.getStateModulations();
-		stateAbilities.clear();
-		Iterator<StateModulation> i = modulations.iterator();
-		while(i.hasNext())
-		{	StateModulation temp = i.next();
-			StateAbility ab = new StateAbility(temp.getName(),getLevel());
-			ab.setFrame(temp.getFrame());
-			ab.setStrength(temp.getStrength());
-			stateAbilities.add(ab);
-		}
-	}
-	public ArrayList<AbstractAbility> getModulationStateAbilities()
-	{	return stateAbilities;		
-	}
+//		ArrayList<StateModulation> modulations = currentGesture.getStateModulations();
+//		stateAbilities.clear();
+//		Iterator<StateModulation> i = modulations.iterator();
+//		while(i.hasNext())
+//		{	StateModulation temp = i.next();
+//			StateAbility ab = new StateAbility(temp.getName(),getLevel());
+//			ab.setFrame(temp.getFrame());
+//			ab.setStrength(temp.getStrength());
+//			stateAbilities.add(ab);
+//		}
+//	}
+//	public ArrayList<AbstractAbility> getModulationStateAbilities()
+//	{	return stateAbilities;		
+//	}
 
 	/////////////////////////////////////////////////////////////////
 	// FINISHED				/////////////////////////////////////////
@@ -354,13 +394,13 @@ if(sprite instanceof Item && sprite.getCurrentGesture()!=null && sprite.getCurre
 	{	if(!finished)
 		{	finished = true;
 			// modulation abilities
-			{	Iterator<AbstractAbility> it = stateAbilities.iterator();
-				while(it.hasNext())
-				{	AbstractAbility temp = it.next();
-					temp.finish();
-					it.remove();
-				}
-			}
+//			{	Iterator<AbstractAbility> it = stateAbilities.iterator();
+//				while(it.hasNext())
+//				{	AbstractAbility temp = it.next();
+//					temp.finish();
+//					it.remove();
+//				}
+//			}
 			// misc
 			currentDirection = null;
 			sprite = null;
