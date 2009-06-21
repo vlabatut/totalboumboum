@@ -31,6 +31,7 @@ import fr.free.totalboumboum.engine.content.feature.event.ControlEvent;
 import fr.free.totalboumboum.engine.content.feature.event.EngineEvent;
 import fr.free.totalboumboum.engine.content.feature.gesture.GestureName;
 import fr.free.totalboumboum.engine.content.feature.gesture.action.SpecificAction;
+import fr.free.totalboumboum.engine.content.feature.gesture.action.consume.SpecificConsume;
 import fr.free.totalboumboum.engine.content.manager.delay.DelayManager;
 import fr.free.totalboumboum.engine.content.manager.event.EventManager;
 import fr.free.totalboumboum.engine.content.sprite.item.Item;
@@ -54,7 +55,7 @@ public class BlockEventManager extends EventManager
  */	
 	@Override
 	public void processEvent(ActionEvent event)
-	{	if(event.getAction().getName().equals(AbstractAction.CONSUME))
+	{	if(event.getAction() instanceof SpecificConsume)
 			actionConsume(event);
 	}
 
@@ -110,7 +111,7 @@ public class BlockEventManager extends EventManager
 			Tile tile = sprite.getTile(); 
 			if(hs!=null)
 			{	SpecificAction action = new SpecificAction(AbstractAction.APPEAR,hs,tile.getFloor(),Direction.NONE);
-				AbstractAbility ab = hs.computeAbility(action);
+				AbstractAbility ab = hs.modulateAction(action);
 				if(ab.isActive())
 				{	hs.initGesture();
 					tile.addSprite(hs);
@@ -127,7 +128,7 @@ public class BlockEventManager extends EventManager
 	private void engDelayOver(EngineEvent event)
 	{	if(gesture.equals(GestureName.HIDING))
 		{	SpecificAction specificAction = new SpecificAction(AbstractAction.APPEAR,sprite,sprite.getTile().getFloor(),Direction.NONE);
-			AbstractAbility ability = sprite.computeAbility(specificAction);
+			AbstractAbility ability = sprite.modulateAction(specificAction);
 			if(ability.isActive())
 			{	StateAbility ablt = sprite.modulateStateAbility(StateAbilityName.BLOCK_SPAWN);
 				sprite.decrementUse(ablt,1);

@@ -59,7 +59,7 @@ public class Fire extends Sprite
 	
 	public void consumeSprite(Sprite sprite)
 	{	SpecificAction specificAction = new SpecificAction(AbstractAction.CONSUME,this,sprite,Direction.NONE);
-		ActionAbility ability = computeAbility(specificAction);
+		ActionAbility ability = modulateAction(specificAction);
 		if(ability.isActive())
 		{	ActionEvent e = new ActionEvent(specificAction);
 			sprite.processEvent(e);

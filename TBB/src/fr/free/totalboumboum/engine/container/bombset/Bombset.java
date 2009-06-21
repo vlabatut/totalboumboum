@@ -63,7 +63,7 @@ public class Bombset
 			boolean goOn = true;
 			while(goOn && j.hasNext())
 			{	StateAbility ability = j.next();
-				StateAbility tp = sprite.getAbility(ability);
+				StateAbility tp = sprite.modulateStateAbility(ability.getName());
 				if(tp==null || !tp.isActive())
 					goOn = false;
 			}

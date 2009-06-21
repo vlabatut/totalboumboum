@@ -277,8 +277,9 @@ public class PotentialObstacle
 				if(!source.isOnGround())
 					act = AbstractAction.MOVEHIGH;
 				SpecificAction specificAction = new SpecificAction(act,source,null,usedDirection);
-				ThirdModulation permission = sprite.getThirdModulation(specificAction);
-				if(permission!=null)
+//TODO ici ça va pas, il ne faut pas utiliser directement getModulation, seul le modulationMgr peut faire ça. il faut utiliser modulateAction() à la place.				
+				ThirdModulation modulation = sprite.getThirdModulation(specificAction);
+				if(modulation!=null)
 					result = false;
 				// blocking sprite and moving towards the potential obstacle : it's an obstacle
 				else

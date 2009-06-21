@@ -391,7 +391,8 @@ public class XmlTools
 		{	tempFile = tempFile.getParentFile();
 			schemaPath = ".."+File.separator+schemaPath;
 		}
-		Namespace sch = Namespace.getNamespace("xsi","http://www.w3.org/2001/XMLSchema-instance");
+		// Namespace sch = Namespace.getNamespace("xsi","http://www.w3.org/2001/XMLSchema-instance");
+	    Namespace sch = Namespace.getNamespace("xsi",XMLConstants.W3C_XML_SCHEMA_INSTANCE_NS_URI);
 		root.addNamespaceDeclaration(sch);
 		root.setAttribute("noNamespaceSchemaLocation",schemaPath,sch);
 		// define output format

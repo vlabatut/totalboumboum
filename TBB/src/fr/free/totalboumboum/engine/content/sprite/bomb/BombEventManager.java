@@ -35,6 +35,9 @@ import fr.free.totalboumboum.engine.content.feature.event.ControlEvent;
 import fr.free.totalboumboum.engine.content.feature.event.EngineEvent;
 import fr.free.totalboumboum.engine.content.feature.gesture.GestureName;
 import fr.free.totalboumboum.engine.content.feature.gesture.action.SpecificAction;
+import fr.free.totalboumboum.engine.content.feature.gesture.action.consume.SpecificConsume;
+import fr.free.totalboumboum.engine.content.feature.gesture.action.punch.SpecificPunch;
+import fr.free.totalboumboum.engine.content.feature.gesture.action.trigger.SpecificTrigger;
 import fr.free.totalboumboum.engine.content.manager.delay.DelayManager;
 import fr.free.totalboumboum.engine.content.manager.event.EventManager;
 import fr.free.totalboumboum.engine.content.sprite.Sprite;
@@ -73,11 +76,11 @@ public class BombEventManager extends EventManager
  */	
 	@Override
 	public void processEvent(ActionEvent event)
-	{	if(event.getAction().getName().equals(AbstractAction.CONSUME))
+	{	if(event.getAction() instanceof SpecificConsume)
 			actionConsume(event);
-		else if(event.getAction().getName().equals(AbstractAction.PUNCH))
+		else if(event.getAction() instanceof SpecificPunch)
 			actionPunch(event);
-		else if(event.getAction().getName().equals(AbstractAction.TRIGGER))
+		else if(event.getAction() instanceof SpecificTrigger)
 			actionTrigger(event);
 	}
 
@@ -237,7 +240,7 @@ public class BombEventManager extends EventManager
 			Sprite actor = event.getSource();
 			Direction dir = event.getDirection();
 			SpecificAction action = new SpecificAction(AbstractAction.PUSH,actor,sprite,dir);
-			ActionAbility a = actor.computeAbility(action);
+			ActionAbility a = actor.modulateAction(action);
 			if(a.isActive())
 			{	collidingSprites.get(dir).add(actor);
 				String delayName = DelayManager.DL_OSCILLATION+":"+dir;
@@ -265,7 +268,7 @@ public class BombEventManager extends EventManager
 	{	// regular explosion
 		if(event.getStringParameter().equals(DelayManager.DL_EXPLOSION))
 		{	SpecificAction action = new SpecificAction(AbstractAction.DETONATE,sprite,null,Direction.NONE);
-			ActionAbility ablt = sprite.computeAbility(action);
+			ActionAbility ablt = sprite.modulateAction(action);
 			if(ablt.isActive())
 			{	// is it a time bomb ?
 				StateAbility a = sprite.modulateStateAbility(StateAbilityName.BOMB_TRIGGER_TIMER);
@@ -294,7 +297,7 @@ public class BombEventManager extends EventManager
 							//
 							double failureDuration = Math.random()*(maxD-minD)+minD;
 							sprite.addDelay(DelayManager.DL_EXPLOSION,failureDuration);
-							gesture = gesture+"-failing";
+							gesture = GestureName.valueOf(gesture.toString()+"_FAILING");
 							sprite.setGesture(gesture,spriteDirection,Direction.NONE,true);
 						}
 						// else : explosion
@@ -324,7 +327,7 @@ public class BombEventManager extends EventManager
 		{	if(gesture.equals(GestureName.SLIDING) || gesture.equals(GestureName.OSCILLATING) || gesture.equals(GestureName.STANDING)
 				|| gesture.equals(GestureName.SLIDING_FAILING) || gesture.equals(GestureName.OSCILLATING_FAILING) || gesture.equals(GestureName.STANDING_FAILING))
 			{	SpecificAction action = new SpecificAction(AbstractAction.DETONATE,sprite,null,Direction.NONE);
-				ActionAbility ablt = sprite.computeAbility(action);
+				ActionAbility ablt = sprite.modulateAction(action);
 				if(ablt.isActive())
 				{	gesture = GestureName.BURNING;
 					sprite.setGesture(gesture,spriteDirection,Direction.NONE,true);
@@ -338,7 +341,7 @@ public class BombEventManager extends EventManager
 	{	// the sprite is currently bouncing
 		if(gesture.equals(GestureName.BOUNCING))
 		{	SpecificAction specificAction = new SpecificAction(AbstractAction.LAND,sprite,null,Direction.NONE);
-			ActionAbility ability = sprite.computeAbility(specificAction);
+			ActionAbility ability = sprite.modulateAction(specificAction);
 			// the sprite is allowed to land
 			if(ability.isActive())
 			{	gesture = GestureName.LANDING;
@@ -368,7 +371,7 @@ public class BombEventManager extends EventManager
 		// the sprite has been punched
 		else if(gesture.equals(GestureName.PUNCHED))
 		{	SpecificAction action = new SpecificAction(AbstractAction.LAND,sprite,null,Direction.NONE);
-			ActionAbility a = sprite.computeAbility(action);
+			ActionAbility a = sprite.modulateAction(action);
 			// the sprite is allowed to land
 			if(a.isActive())
 				gesture = GestureName.LANDING;

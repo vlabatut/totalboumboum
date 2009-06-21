@@ -44,14 +44,11 @@ public class ItemFactory extends SpriteFactory<Item>
 	/////////////////////////////////////////////////////////////////
 	private static final HashMap<GestureName,GestureName> animeReplacements = new HashMap<GestureName,GestureName>();		
 	static
-	{	// NONE
-		animeReplacements.put(GestureName.NONE,null);
-		// APPEARING
+	{	// APPEARING
 		// BOUNCING
 		// BURNING
 		animeReplacements.put(GestureName.BURNING,null);
 		// CRYING
-		// ENDED
 		// EXULTING
 		// HIDING
 		// JUMPING

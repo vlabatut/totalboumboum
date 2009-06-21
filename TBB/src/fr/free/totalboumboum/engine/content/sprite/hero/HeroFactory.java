@@ -39,9 +39,7 @@ public class HeroFactory extends SpriteFactory<Hero>
 	/////////////////////////////////////////////////////////////////
 	private static final HashMap<GestureName,GestureName> animeReplacements = new HashMap<GestureName,GestureName>();		
 	static
-	{	// NONE
-		animeReplacements.put(GestureName.NONE,null);
-		// APPEARING
+	{	// APPEARING
 		animeReplacements.put(GestureName.APPEARING,GestureName.STANDING);
 		// BOUNCING
 		animeReplacements.put(GestureName.BOUNCING,GestureName.STANDING);
@@ -49,8 +47,6 @@ public class HeroFactory extends SpriteFactory<Hero>
 		animeReplacements.put(GestureName.BURNING,null);
 		// CRYING
 		animeReplacements.put(GestureName.CRYING,GestureName.BURNING);
-		// ENDED
-		animeReplacements.put(GestureName.ENDED,null);
 		// EXULTING
 		animeReplacements.put(GestureName.EXULTING,GestureName.JUMPING);
 		// HIDING

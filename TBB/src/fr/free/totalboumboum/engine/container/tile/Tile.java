@@ -34,7 +34,7 @@ import java.util.Iterator;
 import fr.free.totalboumboum.engine.container.level.Level;
 import fr.free.totalboumboum.engine.content.feature.Direction;
 import fr.free.totalboumboum.engine.content.feature.ability.AbstractAbility;
-import fr.free.totalboumboum.engine.content.feature.ability.StateAbility;
+import fr.free.totalboumboum.engine.content.feature.ability.StateAbilityName;
 import fr.free.totalboumboum.engine.content.feature.event.AbstractEvent;
 import fr.free.totalboumboum.engine.content.sprite.Sprite;
 import fr.free.totalboumboum.engine.content.sprite.block.Block;
@@ -282,7 +282,7 @@ result = level.getTile(x, y)==this;
 	}
 	
 	public void drawFloor(Graphics g, boolean flat, boolean onGround, boolean shadow)
-	{	AbstractAbility temp = floor.getAbility(StateAbility.SPRITE_FLAT);
+	{	AbstractAbility temp = floor.modulateStateAbility(StateAbilityName.SPRITE_FLAT);
 		if(floor!=null && ((temp!=null && temp.isActive()) == flat) && (floor.isOnGround() == onGround))
 		{	if(shadow)
 				drawShadow(g,floor);
@@ -295,7 +295,7 @@ result = level.getTile(x, y)==this;
 		{	
 //if(fires.size()>0)
 //	System.out.println();
-			AbstractAbility temp = item.getAbility(StateAbility.SPRITE_FLAT);
+			AbstractAbility temp = item.modulateStateAbility(StateAbilityName.SPRITE_FLAT);
 			if(item!=null && ((temp!=null && temp.isActive()) == flat) && (item.isOnGround() == onGround))
 				if(shadow)
 					drawShadow(g,item);
@@ -305,7 +305,7 @@ result = level.getTile(x, y)==this;
 	}
 	public void drawBlock(Graphics g, boolean flat, boolean onGround, boolean shadow)
 	{	if(block!=null)
-		{	AbstractAbility temp = block.getAbility(StateAbility.SPRITE_FLAT);
+		{	AbstractAbility temp = block.modulateStateAbility(StateAbilityName.SPRITE_FLAT);
 			if(block!=null && ((temp!=null && temp.isActive()) == flat) && (block.isOnGround() == onGround))
 				if(shadow && line!=level.getGlobalHeight()-1) //NOTE a préciser : permet d'éviter que l'ombre de la dernière ligne de blocs soit portée sur la première
 					drawShadow(g,block);
@@ -316,7 +316,7 @@ result = level.getTile(x, y)==this;
 	public void drawFires(Graphics g, boolean flat, boolean onGround, boolean shadow)
 	{	for(int i=0;i<fires.size();i++)
 		{	Fire tempS = fires.get(i);
-			AbstractAbility temp = tempS.getAbility(StateAbility.SPRITE_FLAT);
+			AbstractAbility temp = tempS.modulateStateAbility(StateAbilityName.SPRITE_FLAT);
 			if(((temp!=null && temp.isActive()) == flat) && (tempS.isOnGround() == onGround))
 				if(shadow)
 					drawShadow(g,tempS);
@@ -327,7 +327,7 @@ result = level.getTile(x, y)==this;
 	public void drawBombs(Graphics g, boolean flat, boolean onGround, boolean shadow)
 	{	for(int i=0;i<bombs.size();i++)
 		{	Bomb tempS = bombs.get(i);
-			AbstractAbility temp = tempS.getAbility(StateAbility.SPRITE_FLAT);
+			AbstractAbility temp = tempS.modulateStateAbility(StateAbilityName.SPRITE_FLAT);
 			if(((temp.isActive()) == flat) && (tempS.isOnGround() == onGround))
 				if(shadow)
 					drawShadow(g,tempS);
@@ -338,7 +338,7 @@ result = level.getTile(x, y)==this;
 	public void drawHeroes(Graphics g, boolean flat, boolean onGround, boolean shadow)
 	{	for(int i=0;i<heroes.size();i++)
 		{	Hero tempS = heroes.get(i);
-			AbstractAbility temp = tempS.getAbility(StateAbility.SPRITE_FLAT);
+			AbstractAbility temp = tempS.modulateStateAbility(StateAbilityName.SPRITE_FLAT);
 			if(((temp.isActive()) == flat) && (tempS.isOnGround() == onGround))
 				if(shadow)
 					drawShadow(g,tempS);

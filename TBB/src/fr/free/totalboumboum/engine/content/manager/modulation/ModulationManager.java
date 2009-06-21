@@ -80,7 +80,7 @@ public class ModulationManager
 	 * then a neutral modulation is returned.
 	 * This method always returns a modulation.
 	 */
-	public SelfModulation getSelfModulation(StateAbilityName name)
+	private SelfModulation getSelfModulation(StateAbilityName name)
 	{	SelfModulation result = null;
 		if(currentGesture!=null)
 			result = currentGesture.getSelfModulation(name);
@@ -173,8 +173,8 @@ public class ModulationManager
 	 */
 	public ActionAbility modulateAction(SpecificAction action)
 	{	// actor original ability 
-		Sprite actor = action.getActor();
-		ActionAbility result = actor.getAbility(action);
+		//Sprite actor = action.getActor();
+		ActionAbility result = sprite.getAbility(action);
 		// actor modulation
 		result = combineActorModulation(action,result);
 		// target modulation (if there's one!)
@@ -186,9 +186,9 @@ public class ModulationManager
 	
 	private ActionAbility combineActorModulation(SpecificAction action, ActionAbility ability)
 	{	ActionAbility result = ability;
-		Sprite actor = action.getActor();
+		//Sprite actor = action.getActor();
 		if(result.isActive())
-		{	ActorModulation actorModulation = actor.getActorModulation(action);
+		{	ActorModulation actorModulation = getActorModulation(action);
 			result = actorModulation.modulate(result);		
 		}
 		return result;
@@ -210,15 +210,15 @@ public class ModulationManager
 	 */
 	private ActionAbility combineThirdModulation(SpecificAction action, ActionAbility ability)
 	{	ActionAbility result = ability;
-		Sprite actor = action.getActor();
+		//Sprite actor = action.getActor();
 		Sprite target = action.getTarget();
 		if(result.isActive())
 		{	// list of the involved sprites
 			ArrayList<Sprite> sprites = new ArrayList<Sprite>();
-			Tile tileA = actor.getTile();
+			Tile tileA = sprite.getTile();
 			if(tileA!=null)
 			{	for(Sprite s: tileA.getSprites())
-				{	if(s!=target && s!=actor)
+				{	if(s!=target && s!=sprite)
 						sprites.add(s);					
 				}
 			}
@@ -226,7 +226,7 @@ public class ModulationManager
 			{	Tile tileT = target.getTile();
 				if(tileT!=null)
 				{	for(Sprite s: tileT.getSprites())
-					{	if(!sprites.contains(s) && s!=target && s!=actor)
+					{	if(!sprites.contains(s) && s!=target && s!=sprite)
 							sprites.add(s);					
 					}
 				}

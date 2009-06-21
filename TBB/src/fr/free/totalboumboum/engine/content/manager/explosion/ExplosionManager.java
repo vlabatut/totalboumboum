@@ -104,7 +104,7 @@ public class ExplosionManager
 				owner = sprite.getOwner();
 			fire.setOwner(owner);
 			specificAction = new SpecificAction(AbstractAction.APPEAR,fire,tileTemp.getFloor(),Direction.NONE);
-			ability = fire.computeAbility(specificAction);
+			ability = fire.modulateAction(specificAction);
 			blocking = !ability.isActive();
 			if(blocking)
 				fire.consumeTile(tileTemp);

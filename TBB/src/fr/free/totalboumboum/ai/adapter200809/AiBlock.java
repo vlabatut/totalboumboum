@@ -85,6 +85,7 @@ public class AiBlock extends AiSprite<Block>
 	private void updateDestructible()
 	{	Block sprite = getSprite();
 		SpecificAction action = new SpecificAction(AbstractAction.CONSUME,new Fire(sprite.getLevel()),sprite,Direction.NONE,Contact.COLLISION,TilePosition.SAME,Orientation.SAME);
+//TODO utilisation directe de la modulation, pas bon (fonction modulateAction() à la place)		
 		TargetModulation perm = sprite.getTargetModulation(action);
 		destructible = perm!=null;
 	}	

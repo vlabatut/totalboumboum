@@ -932,6 +932,17 @@ public class Launcher
 	 * il faut aussi typer les noms d'action et de gesture, car tous les sprites n'ont pas accès à tous.
 	 * difficile vu qu'on ne peut pas sousclasser les types enum
 	 * 
+	 * getTargetMod et getThirdMod ne sont pas utilisées correctement (en théorie, devraient l'être seulement par le modMgr) 
+	 * 
 	 * tester le système qui complète les animations automatiquement quand elles sont manquantes dans le fichier XML.
+	 * 
+	 * le XML des animes doit avoir soit :
+	 * 	- NONE seule
+	 *  - primaries seules
+	 *  - primaries+NONE
+	 *  - primaries+COMPOSITES
+	 *  - primaries+NONE+composite
+	 * et les gestures définis doivent au moins contenir les nécessaires, et au plus les autorisés
+	 *  il va falloir utiliser XSD 1.1 quand ça sera possible, avec les assertions et associations, cf l'email.
 	 */
 }
