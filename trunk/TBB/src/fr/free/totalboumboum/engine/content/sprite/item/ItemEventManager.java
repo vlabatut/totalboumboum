@@ -26,6 +26,8 @@ import fr.free.totalboumboum.engine.content.feature.event.ActionEvent;
 import fr.free.totalboumboum.engine.content.feature.event.ControlEvent;
 import fr.free.totalboumboum.engine.content.feature.event.EngineEvent;
 import fr.free.totalboumboum.engine.content.feature.gesture.GestureName;
+import fr.free.totalboumboum.engine.content.feature.gesture.action.consume.SpecificConsume;
+import fr.free.totalboumboum.engine.content.feature.gesture.action.gather.SpecificGather;
 import fr.free.totalboumboum.engine.content.manager.event.EventManager;
 
 public class ItemEventManager extends EventManager
@@ -47,9 +49,9 @@ public class ItemEventManager extends EventManager
  */	
 	@Override
 	public void processEvent(ActionEvent event)
-	{	if(event.getAction().getName().equals(AbstractAction.CONSUME))
+	{	if(event.getAction() instanceof SpecificConsume)
 			actionConsume(event);
-		else if(event.getAction().getName().equals(AbstractAction.GATHER))
+		else if(event.getAction() instanceof SpecificGather)
 			actionGather(event); 
 	}
 

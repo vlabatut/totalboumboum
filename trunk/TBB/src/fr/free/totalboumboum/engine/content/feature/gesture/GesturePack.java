@@ -33,7 +33,7 @@ public class GesturePack
 		for(GestureName name: GestureName.values())
 		{	Gesture gesture = new Gesture();
 			gesture.setName(name);
-			addGesture(gesture);			
+			addGesture(gesture,name);			
 		}
 	}
 	
@@ -73,8 +73,8 @@ public class GesturePack
 		return result;
 	}
 
-	public void addGesture(Gesture gesture)
-	{	gestures.put(gesture.getName(),gesture);
+	public void addGesture(Gesture gesture, GestureName name)
+	{	gestures.put(name,gesture);
 	}
 	
 	public boolean containsGesture(GestureName name)
@@ -87,9 +87,10 @@ public class GesturePack
 	public GesturePack copy()
 	{	GesturePack result = new GesturePack();
 		// gestures
-		for(Gesture g: gestures.values())
-		{	Gesture cp = g.copy();
-			result.addGesture(cp);
+		for(Entry<GestureName,Gesture> e: gestures.entrySet())
+		{	Gesture cp = e.getValue().copy();
+			GestureName nm = e.getKey();
+			result.addGesture(cp,nm);
 		}
 		// misc
 		

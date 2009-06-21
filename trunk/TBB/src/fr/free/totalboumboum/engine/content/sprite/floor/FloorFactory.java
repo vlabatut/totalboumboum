@@ -39,32 +39,19 @@ public class FloorFactory extends SpriteFactory<Floor>
 	/////////////////////////////////////////////////////////////////
 	private static final HashMap<GestureName,GestureName> animeReplacements = new HashMap<GestureName,GestureName>();		
 	static
-	{	// NONE
-		animeReplacements.put(GestureName.NONE,null);
-		// APPEARING
-		animeReplacements.put(GestureName.APPEARING,GestureName.STANDING);
+	{	// APPEARING
 		// BOUNCING
-		animeReplacements.put(GestureName.BOUNCING,GestureName.STANDING);
 		// BURNING
-		animeReplacements.put(GestureName.BURNING,null);
 		// CRYING
-		animeReplacements.put(GestureName.CRYING,GestureName.BURNING);
-		// ENDED
-		animeReplacements.put(GestureName.ENDED,null);
 		// EXULTING
-		animeReplacements.put(GestureName.EXULTING,GestureName.JUMPING);
 		// HIDING
 		// JUMPING
-		animeReplacements.put(GestureName.JUMPING,GestureName.STANDING);
 		// LANDING
-		animeReplacements.put(GestureName.LANDING,GestureName.STANDING);
 		// OSCILLATING
 		// OSCILLATING_FAILING
 		// PUNCHED
 		// PUNCHING
-		animeReplacements.put(GestureName.PUNCHING,GestureName.STANDING);
 		// PUSHING
-		animeReplacements.put(GestureName.PUSHING,GestureName.WALKING);
 		// SLIDING
 		// SLIDING_FAILING
 		// SPAWNING
@@ -72,9 +59,7 @@ public class FloorFactory extends SpriteFactory<Floor>
 		animeReplacements.put(GestureName.STANDING,null);
 		// STANDING_FAILING
 		// WAITING
-		animeReplacements.put(GestureName.WAITING,GestureName.STANDING);
 		// WALKING		
-		animeReplacements.put(GestureName.WALKING,null);
 	}
 	
 	public static HashMap<GestureName,GestureName> getAnimeReplacements()

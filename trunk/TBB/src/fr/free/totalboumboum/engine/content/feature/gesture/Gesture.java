@@ -68,8 +68,8 @@ public class Gesture
 		return result;
 	}
 	
-	public void addAnimeDirection(AnimeDirection anime)
-	{	animes.put(anime.getDirection(),anime);
+	public void addAnimeDirection(AnimeDirection anime, Direction direction)
+	{	animes.put(direction,anime);
 	}
 	
 	public boolean hasNoAnimes()
@@ -78,7 +78,10 @@ public class Gesture
 	
 	public void setAnimes(Gesture gesture)
 	{	for(Entry<Direction,AnimeDirection> e: gesture.animes.entrySet())
-			addAnimeDirection(e.getValue());
+		{	Direction direction = e.getKey();
+			AnimeDirection anime = e.getValue();
+			addAnimeDirection(anime,direction);		
+		}
 	}
 	
 	/////////////////////////////////////////////////////////////////
@@ -193,8 +196,9 @@ public class Gesture
 		// animes
 		for(Entry<Direction,AnimeDirection> e: animes.entrySet())
 		{	//AnimeDirection temp = e.getValue().copy(images,copyImages);
-			AnimeDirection temp = e.getValue();
-			result.addAnimeDirection(temp);
+			AnimeDirection anime = e.getValue();
+			Direction direction = e.getKey();
+			result.addAnimeDirection(anime,direction);
 		}
 		
 		// trajectories

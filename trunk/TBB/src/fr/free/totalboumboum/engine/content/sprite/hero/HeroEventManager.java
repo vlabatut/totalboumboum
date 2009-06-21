@@ -37,6 +37,7 @@ import fr.free.totalboumboum.engine.content.feature.event.ControlEvent;
 import fr.free.totalboumboum.engine.content.feature.event.EngineEvent;
 import fr.free.totalboumboum.engine.content.feature.gesture.GestureName;
 import fr.free.totalboumboum.engine.content.feature.gesture.action.SpecificAction;
+import fr.free.totalboumboum.engine.content.feature.gesture.action.consume.SpecificConsume;
 import fr.free.totalboumboum.engine.content.feature.gesture.action.drop.SpecificDrop;
 import fr.free.totalboumboum.engine.content.manager.delay.DelayManager;
 import fr.free.totalboumboum.engine.content.manager.event.EventManager;
@@ -92,7 +93,7 @@ public class HeroEventManager extends EventManager
  */	
 	@Override
 	public void processEvent(ActionEvent event)
-	{	if(event.getAction().getName().equals(AbstractAction.CONSUME))
+	{	if(event.getAction() instanceof SpecificConsume)
 			actionConsume(event);
 	}
 	
@@ -194,7 +195,7 @@ public class HeroEventManager extends EventManager
 	{	if(event.getMode())
 		{	Bomb bomb = sprite.makeBomb();
 			SpecificDrop action = new SpecificDrop(sprite,bomb);
-			ActionAbility ability = sprite.computeAbility(action);
+			ActionAbility ability = sprite.modulateAction(action);
 			if(ability.isActive())
 			{	sprite.dropBomb(bomb);
 				if(gesture.equals(GestureName.WAITING))
@@ -213,7 +214,7 @@ public class HeroEventManager extends EventManager
 			 || gesture.equals(GestureName.WAITING) || gesture.equals(GestureName.WALKING))
 			 && event.getMode())
 		{	SpecificAction action = new SpecificAction(AbstractAction.JUMP,sprite,null,Direction.NONE);
-			ActionAbility ability = sprite.computeAbility(action);
+			ActionAbility ability = sprite.modulateAction(action);
 			if(ability.isActive())
 			{	gesture = GestureName.JUMPING;
 				Direction cDirection = controlDirection.getHorizontalPrimary();
@@ -238,12 +239,12 @@ public class HeroEventManager extends EventManager
 				while(!found && i.hasNext())
 				{	Bomb bomb = i.next();
 					SpecificAction action = new SpecificAction(AbstractAction.PUNCH,sprite,bomb,spriteDirection);
-					ActionAbility ability = sprite.computeAbility(action);
+					ActionAbility ability = sprite.modulateAction(action);
 					if(ability.isActive())
 					{	found = true;
 						// gesture
 						gesture = GestureName.PUNCHING;
-						StateAbility a = sprite.computeCapacity(StateAbility.HERO_PUNCH_DURATION);
+						StateAbility a = sprite.modulateStateAbility(StateAbilityName.HERO_PUNCH_DURATION);
 						double duration = a.getStrength();
 						sprite.setGesture(gesture, spriteDirection,controlDirection,true,duration);
 						// action
@@ -259,12 +260,12 @@ public class HeroEventManager extends EventManager
 				while(!found && i.hasNext())
 				{	Bomb bomb = i.next();
 					SpecificAction action = new SpecificAction(AbstractAction.PUNCH,sprite,bomb,spriteDirection);
-					ActionAbility ability = sprite.computeAbility(action);
+					ActionAbility ability = sprite.modulateAction(action);
 					if(ability.isActive())
 					{	found = true;
 						// gesture
 						gesture = GestureName.PUNCHING;
-						StateAbility a = sprite.computeCapacity(StateAbility.HERO_PUNCH_DURATION);
+						StateAbility a = sprite.modulateStateAbility(StateAbilityName.HERO_PUNCH_DURATION);
 						double duration = a.getStrength();
 						sprite.setGesture(gesture, spriteDirection,controlDirection,true,duration);
 						// action
@@ -396,7 +397,7 @@ public class HeroEventManager extends EventManager
 			{	Item item = sprite.getTile().getItem();
 				if(item!=null)
 				{	SpecificAction action = new SpecificAction(AbstractAction.GATHER,sprite,item,event.getDirection());
-					ActionAbility ability = sprite.computeAbility(action);
+					ActionAbility ability = sprite.modulateAction(action);
 					if(ability.isActive())
 					{	sprite.addItem(item);
 						//TODO c'est bizarre : le gesture de l'item n'est pas mis à HIDDING au cours de l'opération (?)
@@ -411,7 +412,7 @@ public class HeroEventManager extends EventManager
 		{	Item item = sprite.getTile().getItem();
 			if(item!=null)
 			{	SpecificAction action = new SpecificAction(AbstractAction.GATHER,sprite,item,event.getDirection());
-				ActionAbility ability = sprite.computeAbility(action);
+				ActionAbility ability = sprite.modulateAction(action);
 				if(ability.isActive())
 				{	sprite.addItem(item);
 				}
@@ -423,7 +424,7 @@ public class HeroEventManager extends EventManager
 	{	// the sprite is currently bouncing/jumping
 		if(gesture.equals(GestureName.BOUNCING))
 		{	SpecificAction specificAction = new SpecificAction(AbstractAction.LAND,sprite,null,Direction.NONE);
-			ActionAbility ability = sprite.computeAbility(specificAction);
+			ActionAbility ability = sprite.modulateAction(specificAction);
 			// the sprite is allowed to land
 			if(ability.isActive())
 				gesture = GestureName.LANDING;
@@ -460,7 +461,7 @@ public class HeroEventManager extends EventManager
 	{	
 		
 		SpecificAction specificAction = new SpecificAction(AbstractAction.EXULT,sprite,null,Direction.NONE);
-		ActionAbility ability = sprite.computeAbility(specificAction);
+		ActionAbility ability = sprite.modulateAction(specificAction);
 		if(ability.isActive())
 		{	StateAbility ablt = sprite.modulateStateAbility(StateAbilityName.HERO_CELEBRATION_DURATION);
 			double duration = ablt.getStrength();
@@ -484,7 +485,7 @@ public class HeroEventManager extends EventManager
 	private void engDefeat(EngineEvent event)
 	{	
 		SpecificAction specificAction = new SpecificAction(AbstractAction.CRY,sprite,null,Direction.NONE);
-		ActionAbility ability = sprite.computeAbility(specificAction);
+		ActionAbility ability = sprite.modulateAction(specificAction);
 		if(ability.isActive())
 		{	StateAbility ablt = sprite.modulateStateAbility(StateAbilityName.HERO_CELEBRATION_DURATION);
 			double duration = ablt.getStrength();

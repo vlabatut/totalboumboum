@@ -77,7 +77,7 @@ public class BombsetManager
 			{	bomb.setFlameRange(flameRange);
 				Tile tile = sprite.getTile();
 				SpecificAction specificAction = new SpecificAction(AbstractAction.APPEAR,bomb,tile.getFloor(),Direction.NONE);
-				ActionAbility ablt = bomb.computeAbility(specificAction);
+				ActionAbility ablt = bomb.modulateAction(specificAction);
 				if(ablt.isActive())
 				{	bomb.initGesture();
 					tile.addSprite(bomb);
@@ -114,7 +114,7 @@ public class BombsetManager
 		while(!found && b.hasNext())
 		{	Bomb bomb = b.next();
 			SpecificAction action = new SpecificAction(AbstractAction.DETONATE,bomb,null,Direction.NONE);
-			if(bomb.getAbility(StateAbility.BOMB_TRIGGER_CONTROL).isActive() && bomb.computeAbility(action).isActive())
+			if(bomb.modulateStateAbility(StateAbilityName.BOMB_TRIGGER_CONTROL).isActive() && bomb.modulateAction(action).isActive())
 			{	SpecificAction specificAction = new SpecificAction(AbstractAction.TRIGGER,sprite,bomb,Direction.NONE);
 				ActionEvent event = new ActionEvent(specificAction);
 				bomb.processEvent(event);

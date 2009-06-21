@@ -249,8 +249,9 @@ public class AnimesLoader
 			AnimeDirection animeDirection = loadDirectionElement(gestureName,boundHeight,repeat,proportional,tp,localFilePath,xShift,yShift,
 					shadow,shadowXShift,shadowYShift,boundYShift
 					,level,images,shadows,colormap,zoomFactor,scale);
-			gesture.addAnimeDirection(animeDirection);
+			gesture.addAnimeDirection(animeDirection,animeDirection.getDirection());
 		}
+    	completeDirections(gesture);
     }
     
     /**
@@ -415,20 +416,14 @@ public class AnimesLoader
     	return result;
     }
     
+    /**
+     * complete the missing gestures (i.e those not defined in the XML file but
+     * necessary for the game) by using the existing ones.
+     * @param pack
+     * @param animesReplacements
+     */
     private static void completeAnimes(GesturePack pack, HashMap<GestureName,GestureName> animesReplacements)
-    {	// special gestures (without anime)
-    	if(!pack.containsGesture(GestureName.NONE))
-    	{	Gesture gesture = new Gesture();
-    		gesture.setName(GestureName.NONE);
-    		pack.addGesture(gesture);
-    	}
-    	if(!pack.containsGesture(GestureName.ENDED))
-    	{	Gesture gesture = new Gesture();
-    		gesture.setName(GestureName.ENDED);
-    		pack.addGesture(gesture);
-    	}
-    	// complete the missing animes
-    	for(Entry<GestureName,GestureName> e: animesReplacements.entrySet())
+    {	for(Entry<GestureName,GestureName> e: animesReplacements.entrySet())
     	{	GestureName gest = e.getKey();
     		GestureName repl = e.getValue();
     		completeAnime(pack,animesReplacements,gest,repl);
@@ -437,12 +432,6 @@ public class AnimesLoader
     
     private static void completeAnime(GesturePack pack, HashMap<GestureName,GestureName> animesReplacements, GestureName gest, GestureName repl)
     {	Gesture gesture = pack.getGesture(gest);
-    	// create the gesture if necessary
-    	if(gesture==null)
-    	{	gesture = new Gesture();
-    		gesture.setName(gest);
-			pack.addGesture(gesture);			
-    	}
     	// complete its animes if necessary
     	if(gesture.hasNoAnimes())
     	{	// get the replacement animes
@@ -453,4 +442,37 @@ public class AnimesLoader
 			gesture.setAnimes(gesture2);
     	}
     }
+    
+    /**
+     * complete the missing directions in a given gesture (i.e those not defined in the XML file but
+     * necessary for the game) by using the existing ones.
+     * @param pack
+     * @param animesReplacements
+     */
+	private static void completeDirections(Gesture gesture)
+	{	if(!gesture.hasNoAnimes())
+		{	Direction directions[] = Direction.values();
+			for(Direction direction: directions)
+				completeDirection(gesture,direction);
+		}
+    }
+    
+    private static void completeDirection(Gesture gesture, Direction direction)
+    {	if(gesture.getAnimeDirection(direction)==null)
+    	{	if(direction==Direction.NONE)
+		    {	AnimeDirection anime = gesture.getAnimeDirection(Direction.DOWN);
+		    	gesture.addAnimeDirection(anime,Direction.NONE);
+		    }
+	    	else if(direction.isPrimary())
+	    	{	AnimeDirection anime = gesture.getAnimeDirection(Direction.NONE);
+	    		gesture.addAnimeDirection(anime,direction);
+	    	}
+	    	else // composite
+	    	{	Direction primary = direction.getHorizontalPrimary();
+	    		completeDirection(gesture,primary);
+	    		AnimeDirection anime = gesture.getAnimeDirection(primary);
+	    		gesture.addAnimeDirection(anime,direction);
+	    	}
+	    }
+    }    
 }
