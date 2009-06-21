@@ -28,6 +28,7 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Locale;
+import java.util.Map.Entry;
 
 import javax.xml.parsers.ParserConfigurationException;
 
@@ -50,11 +51,11 @@ import fr.free.totalboumboum.tools.XmlTools;
 
 public class AnimesLoader
 {	
-	public static void loadAnimes(String folderPath, GesturePack pack, Level level) throws IOException, ParserConfigurationException, SAXException
+	public static void loadAnimes(String folderPath, GesturePack pack, Level level, HashMap<GestureName,GestureName> animesReplacements) throws IOException, ParserConfigurationException, SAXException
 	{	loadAnimes(folderPath,pack,level,null);
 	}
 	
-	public static void loadAnimes(String folderPath, GesturePack pack, Level level, PredefinedColor color) throws IOException, ParserConfigurationException, SAXException
+	public static void loadAnimes(String folderPath, GesturePack pack, Level level, PredefinedColor color, HashMap<GestureName,GestureName> animesReplacements) throws IOException, ParserConfigurationException, SAXException
 	{	pack.setColor(color);
 		File dataFile = new File(folderPath+File.separator+FileTools.FILE_ANIMES+FileTools.EXTENSION_XML);
 		if(dataFile.exists())
@@ -64,6 +65,8 @@ public class AnimesLoader
 			Element root = XmlTools.getRootFromFile(dataFile,schemaFile);
 			// loading
 			loadAnimesElement(root,folderPath,pack,level,color);
+			// completing
+			completeAnimes(pack,animesReplacements);
 		}
 	}
     
@@ -410,5 +413,44 @@ public class AnimesLoader
 			images.put(imgPath,result);
     	}
     	return result;
+    }
+    
+    private static void completeAnimes(GesturePack pack, HashMap<GestureName,GestureName> animesReplacements)
+    {	// special gestures (without anime)
+    	if(!pack.containsGesture(GestureName.NONE))
+    	{	Gesture gesture = new Gesture();
+    		gesture.setName(GestureName.NONE);
+    		pack.addGesture(gesture);
+    	}
+    	if(!pack.containsGesture(GestureName.ENDED))
+    	{	Gesture gesture = new Gesture();
+    		gesture.setName(GestureName.ENDED);
+    		pack.addGesture(gesture);
+    	}
+    	// complete the missing animes
+    	for(Entry<GestureName,GestureName> e: animesReplacements.entrySet())
+    	{	GestureName gest = e.getKey();
+    		GestureName repl = e.getValue();
+    		completeAnime(pack,animesReplacements,gest,repl);
+    	}    	
+    }
+    
+    private static void completeAnime(GesturePack pack, HashMap<GestureName,GestureName> animesReplacements, GestureName gest, GestureName repl)
+    {	Gesture gesture = pack.getGesture(gest);
+    	// create the gesture if necessary
+    	if(gesture==null)
+    	{	gesture = new Gesture();
+    		gesture.setName(gest);
+			pack.addGesture(gesture);			
+    	}
+    	// complete its animes if necessary
+    	if(gesture.hasNoAnimes())
+    	{	// get the replacement animes
+    		GestureName repl2 = animesReplacements.get(repl);
+			completeAnime(pack,animesReplacements,repl,repl2);
+			Gesture gesture2 = pack.getGesture(repl);
+			// set it in the considered gesture
+			gesture.setAnimes(gesture2);
+    	}
     }
 }

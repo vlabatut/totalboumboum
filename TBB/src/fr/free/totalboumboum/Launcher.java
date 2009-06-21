@@ -435,11 +435,7 @@ public class Launcher
 // **********************************************************
 // GENERAL
 // **********************************************************
-	/*
-	 * TODO
-	 * renommer Bomber tout ce qui concerne Hero ?
-	 */
-	
+
 	/*
 	 * TODO getClass().getResource(IMAGE_DIR + fnm)
 	 * permettrait de trouver un path de façon plus propre ? 
@@ -638,15 +634,27 @@ public class Launcher
 	 * d'éclipse)
 	 */
 
-	// **********************************************************
-	// TRAJECTORIES
-	// **********************************************************
+// **********************************************************
+// TRAJECTORIES
+// **********************************************************
 		
 	/*
 	 * TODO
 	 * quand on pose deux bombes en diagonale et qu'on se place dans le cadrant intérieur d'une des cases libres du même carré
 	 * on est bloqué. ce n'est pas vraiment un pb en fait, plus un feature. mais les non-initiés peuvent prendre ça pour un bug.
 	 * (note : point mentionné dans le blog)
+	 */
+
+// **********************************************************
+// MODULATIONS
+// **********************************************************
+	/* 
+	 * TODO
+	 * dans les modulations third et other, la portée est limitée à la case (ou aux cases). le contact et surtout le remote ne sont pas encore gérés.
+	 * idée pour centraliser le traitement en cas de portée sans limite:
+	 * 	- dès qu'un sprite change de gesture, ses nouvelles modulations sont analysées
+	 * 	- toutes celles qui sont sans limite de portée sont stockées dans un vecteur situé dans Level (et toutes celles de l'état précédent sont retirées de ce même vecteur)
+	 * 	- lors de la validation de 3rdMod, ce vecteur est systématiquement testé en plus des sprites situés près de l'acteur et de la cible 
 	 */
 
 // **********************************************************
@@ -884,7 +892,14 @@ public class Launcher
 	
 	
 	/*
-	 * TODO LAST
+	 * TODO recent stuff
+	 * 
+	 * TODO au lieu d'utiliser une fonction set sprite qui met à jour les roles des acteurs et targets
+	 * dans les modulations, il faut effectuer cette mise à jour au chargement des modulations, puisqu'à cet
+	 * instant on connait déjà le role de sprite concerné.
+	 * 
+	 * TODO virer l'anime par défaut dans les fichiers d'anime
+	 * les éléments doivent porter directement le nom des gestures, de manière à pouvoir contrôler leur présence directement
 	 * 
 	 * - voir si on peut mettre à jour le parser XML
 	 * - définir la liste de gesture pour chaque type de sprite
@@ -893,32 +908,9 @@ public class Launcher
 	 * 
 	 * - forcément des trucs à changer sur les adapteurs d'IA, car ils attendent des permissions et pas des modulations. donc null (i.e. pas de modulation) n'a plus la même signification.
 	 * 
-	 * 
 	 * y a manifestement une différence entre GeneralAction et les actions utilisées dans les Ability et Modulation
 	 * dans ces dernières, on se place relativement au sprite, qui est actor target ou third.
 	 * surement qqchose à faire de ce coté là
-	 * 
-	 * faut il utiliser getAbility pour récupérer les StateAbility, ou bien faut-il module ? (a priori: moduler)
-	 * 
-	 * réelle question avec les modulations :
-	 * 	- il y a eu confusion sur les modulations d'état, qui étaient jusqu'alors interprétées comme des auto-modulation,
-	 * alors qu'en réalité il s'agit de modulation sur des tiers. non ? 
-	 * ou même les deux, par ex: un bloc qui est bas pr un gesture, et qui devient un obstacle pour un autre gesture.
-	 * ou une bombe qui n'a pas toujours la même puissance.
-	 * p-ê faut il donc définir deux types de StateModulation.
-	 * de plus, la zone d'influence est importante : où le tiers doit il être situé pour intervenir?
-	 * d'ailleurs c'est à rajouter aussi dans les modulations d'action.
-	 * et ça pose un pb d'optimisation: pour l'instant on utilise un modèle pull, ce qui est OK dans l'hypothèse d'une modulation
-	 * exclusivement locale (deux cases max: actor+target), mais si on passe en global ça va couter cher.
-	 * d'où l'intérêt de p-ê passer à un modèle push, mais ça veut dire pas mal d'adaptation à gérer.
-	 * il faudrait implémenter le système au niveau de la gestion des contacts
-	 * et un évènement de collision/changement de case provoquerait un changement dans les modulations concernant le sprite
-	 * p-ê qu'on peut mettre ce coté l'aspect global (pas de contact ni de case partagée) pour l'instant, et continuer avec le système
-	 * déjà utilisé avec les acions (à savoir: scanner la case courante, voire les sprites en contact (note: la liste en est connue à chaque instant)
-	 * idée pour centraliser le traitement en cas de portée sans limite:
-	 * 	- dès qu'un sprite change de gesture, ses nouvelles modulations sont analysées
-	 * 	- toutes celles qui sont sans limite de portée sont stockées dans un vecteur situé dans Level (et toutes celles de l'état précédent sont retirées de ce même vecteur)
-	 * 	- lors de la validation de 3rdMod, ce vecteur est systématiquement testé en plus des sprites situés près de l'acteur et de la cible 
 	 * 
 	 * - il faut mutualiser tous les fichiers de description de sprites communs (style tous les blocs durs)
 	 * 	- chargement plus rapide
@@ -933,5 +925,13 @@ public class Launcher
 	 * - l'autre aspect du problème est l'adaptation des classes, en particulier celles de chargement. les sprites susceptibles d'avoir des fichiers en commun doivent être chargés depuis la même classe.
 	 * donc il va falloir intervenir sur la classe située entre thème et sprite (pour blocs, bombes, items...)
 	 * pour les héros ça me semble inutile de se prendre la tête sur l'optimisation des animes, vu qu'elles ne sont chargées qu'une seule fois par joueur (à la différence des types de blocs, qui sont parfois nombreux)
+	 * 
+	 * il faut très certainement aussi mutualiser les firesets, puisque les flammes sont les mêmes pour tout le monde.
+	 * et aussi les explosions, pour les mêmes raisons.
+	 * 
+	 * il faut aussi typer les noms d'action et de gesture, car tous les sprites n'ont pas accès à tous.
+	 * difficile vu qu'on ne peut pas sousclasser les types enum
+	 * 
+	 * tester le système qui complète les animations automatiquement quand elles sont manquantes dans le fichier XML.
 	 */
 }

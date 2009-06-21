@@ -22,26 +22,72 @@ package fr.free.totalboumboum.engine.content.sprite.item;
  */
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Iterator;
 
 import fr.free.totalboumboum.engine.container.level.Level;
 import fr.free.totalboumboum.engine.content.feature.ability.AbstractAbility;
+import fr.free.totalboumboum.engine.content.feature.gesture.GestureName;
 import fr.free.totalboumboum.engine.content.manager.event.EventManager;
 import fr.free.totalboumboum.engine.content.sprite.SpriteFactory;
 import fr.free.totalboumboum.engine.content.sprite.item.ItemEventManager;
 
 public class ItemFactory extends SpriteFactory<Item>
-{	private ArrayList<AbstractAbility> itemAbilities;
-	private String itemName;
-	
+{	
 	public ItemFactory(Level level, String itemName)
 	{	super(level);
 		this.itemName = itemName;
 	}
 	
+	/////////////////////////////////////////////////////////////////
+	// GESTURE PACK		/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	private static final HashMap<GestureName,GestureName> animeReplacements = new HashMap<GestureName,GestureName>();		
+	static
+	{	// NONE
+		animeReplacements.put(GestureName.NONE,null);
+		// APPEARING
+		// BOUNCING
+		// BURNING
+		animeReplacements.put(GestureName.BURNING,null);
+		// CRYING
+		// ENDED
+		// EXULTING
+		// HIDING
+		// JUMPING
+		// LANDING
+		// OSCILLATING
+		// OSCILLATING_FAILING
+		// PUNCHED
+		// PUNCHING
+		// PUSHING
+		// SLIDING
+		// SLIDING_FAILING
+		// SPAWNING
+		// STANDING
+		animeReplacements.put(GestureName.STANDING,null);
+		// STANDING_FAILING
+		// WAITING
+		// WALKING		
+	}
+	
+	public static HashMap<GestureName,GestureName> getAnimeReplacements()
+	{	return animeReplacements;
+	}
+
+	/////////////////////////////////////////////////////////////////
+	// ABILITIES		/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	private ArrayList<AbstractAbility> itemAbilities;
+	
 	public void setItemAbilities(ArrayList<AbstractAbility> itemAbilities)
 	{	this.itemAbilities = itemAbilities;
 	}
+	
+	/////////////////////////////////////////////////////////////////
+	// SPRITES			/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	private String itemName;
 	
 	public Item makeSprite()
 	{	// init
@@ -62,6 +108,9 @@ public class ItemFactory extends SpriteFactory<Item>
 		return result;
 	}
 
+	/////////////////////////////////////////////////////////////////
+	// FINISHED			/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
 	public void finish()
 	{	if(!finished)
 		{	super.finish();

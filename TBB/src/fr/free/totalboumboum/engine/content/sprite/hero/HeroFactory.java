@@ -21,14 +21,10 @@ package fr.free.totalboumboum.engine.content.sprite.hero;
  * 
  */
 
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.HashMap;
-import java.util.List;
 
 import fr.free.totalboumboum.engine.container.level.Level;
 import fr.free.totalboumboum.engine.content.feature.gesture.GestureName;
-import fr.free.totalboumboum.engine.content.feature.gesture.action.ActionName;
 import fr.free.totalboumboum.engine.content.manager.event.EventManager;
 import fr.free.totalboumboum.engine.content.sprite.SpriteFactory;
 
@@ -39,329 +35,52 @@ public class HeroFactory extends SpriteFactory<Hero>
 	}	
 	
 	/////////////////////////////////////////////////////////////////
-	// ACTIONS			/////////////////////////////////////////////
+	// GESTURE PACK		/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	protected static final HashMap<GestureName,List<ActionName>> actions = new HashMap<GestureName, List<ActionName>>();		
+	private static final HashMap<GestureName,GestureName> animeReplacements = new HashMap<GestureName,GestureName>();		
 	static
-	{	List<ActionName> value;
-		GestureName key;
-		// NONE
-		{	key = GestureName.NONE;
-			value = Arrays.asList(new ActionName[]
-			{	ActionName.APPEAR,
-				ActionName.LAND
-			});
-			actions.put(key,value);
-		}
-		
-		
-// TODO distinguer les actions qu'on peut faire et celles qu'on peut subir?
-// ça serait p-ê plus simple (bien que moins logique) à définir dans un fichier séparé ?
-// contre: rallonge temps de chargement déjà long
-		
-/* NOTE idée générale:
- *  - un évènement agit sur ou provoque l'action du sprite considéré
- *  - test automatique pr savoir si l'action est possible ou pas dans l'absolu
- *  - si possible, le manager tente de la mettre en oeuvre
- *  - dans tous les cas, il faut que l'acteur connaisse le résultat de cette action, donc on doit renvoyer d'une façon ou d'une autre un booleen pour l'indiquer
- */
-		
-		
-		
+	{	// NONE
+		animeReplacements.put(GestureName.NONE,null);
 		// APPEARING
-		{	key = GestureName.APPEARING;
-			value = Arrays.asList(new ActionName[]
-			{	ActionName.APPEAR,
-				ActionName.CONSUME,
-				ActionName.CRY,
-				ActionName.DETONATE,
-				ActionName.DROP,
-				ActionName.EXULT,
-				ActionName.GATHER,
-				ActionName.JUMP,
-				ActionName.LAND,
-				ActionName.MOVEHIGH,
-				ActionName.MOVELOW,
-				ActionName.PUNCH,
-				ActionName.PUSH,
-				ActionName.TRIGGER
-			});
-			actions.put(key,value);
-		}
+		animeReplacements.put(GestureName.APPEARING,GestureName.STANDING);
 		// BOUNCING
-		{	key = GestureName.XXXXXXX;
-			value = Arrays.asList(new ActionName[]
-			{	ActionName.APPEAR,
-				ActionName.CONSUME,
-				ActionName.CRY,
-				ActionName.DETONATE,
-				ActionName.DROP,
-				ActionName.EXULT,
-				ActionName.GATHER,
-				ActionName.JUMP,
-				ActionName.LAND,
-				ActionName.MOVEHIGH,
-				ActionName.MOVELOW,
-				ActionName.PUNCH,
-				ActionName.PUSH,
-				ActionName.TRIGGER
-			});
-			actions.put(key,value);
-		}
+		animeReplacements.put(GestureName.BOUNCING,GestureName.STANDING);
 		// BURNING
-		{	key = GestureName.XXXXXXX;
-			value = Arrays.asList(new ActionName[]
-			{	ActionName.APPEAR,
-				ActionName.CONSUME,
-				ActionName.CRY,
-				ActionName.DETONATE,
-				ActionName.DROP,
-				ActionName.EXULT,
-				ActionName.GATHER,
-				ActionName.JUMP,
-				ActionName.LAND,
-				ActionName.MOVEHIGH,
-				ActionName.MOVELOW,
-				ActionName.PUNCH,
-				ActionName.PUSH,
-				ActionName.TRIGGER
-			});
-			actions.put(key,value);
-		}
+		animeReplacements.put(GestureName.BURNING,null);
 		// CRYING
-		{	key = GestureName.XXXXXXX;
-			value = Arrays.asList(new ActionName[]
-			{	ActionName.APPEAR,
-				ActionName.CONSUME,
-				ActionName.CRY,
-				ActionName.DETONATE,
-				ActionName.DROP,
-				ActionName.EXULT,
-				ActionName.GATHER,
-				ActionName.JUMP,
-				ActionName.LAND,
-				ActionName.MOVEHIGH,
-				ActionName.MOVELOW,
-				ActionName.PUNCH,
-				ActionName.PUSH,
-				ActionName.TRIGGER
-			});
-			actions.put(key,value);
-		}
+		animeReplacements.put(GestureName.CRYING,GestureName.BURNING);
 		// ENDED
-		{	key = GestureName.XXXXXXX;
-			value = Arrays.asList(new ActionName[]
-			{	ActionName.APPEAR,
-				ActionName.CONSUME,
-				ActionName.CRY,
-				ActionName.DETONATE,
-				ActionName.DROP,
-				ActionName.EXULT,
-				ActionName.GATHER,
-				ActionName.JUMP,
-				ActionName.LAND,
-				ActionName.MOVEHIGH,
-				ActionName.MOVELOW,
-				ActionName.PUNCH,
-				ActionName.PUSH,
-				ActionName.TRIGGER
-			});
-			actions.put(key,value);
-		}
+		animeReplacements.put(GestureName.ENDED,null);
 		// EXULTING
-		{	key = GestureName.XXXXXXX;
-			value = Arrays.asList(new ActionName[]
-			{	ActionName.APPEAR,
-				ActionName.CONSUME,
-				ActionName.CRY,
-				ActionName.DETONATE,
-				ActionName.DROP,
-				ActionName.EXULT,
-				ActionName.GATHER,
-				ActionName.JUMP,
-				ActionName.LAND,
-				ActionName.MOVEHIGH,
-				ActionName.MOVELOW,
-				ActionName.PUNCH,
-				ActionName.PUSH,
-				ActionName.TRIGGER
-			});
-			actions.put(key,value);
-		}
+		animeReplacements.put(GestureName.EXULTING,GestureName.JUMPING);
 		// HIDING
-		{	key = GestureName.XXXXXXX;
-			value = Arrays.asList(new ActionName[]
-			{	ActionName.APPEAR,
-				ActionName.CONSUME,
-				ActionName.CRY,
-				ActionName.DETONATE,
-				ActionName.DROP,
-				ActionName.EXULT,
-				ActionName.GATHER,
-				ActionName.JUMP,
-				ActionName.LAND,
-				ActionName.MOVEHIGH,
-				ActionName.MOVELOW,
-				ActionName.PUNCH,
-				ActionName.PUSH,
-				ActionName.TRIGGER
-			});
-			actions.put(key,value);
-		}
 		// JUMPING
-		{	key = GestureName.XXXXXXX;
-			value = Arrays.asList(new ActionName[]
-			{	ActionName.APPEAR,
-				ActionName.CONSUME,
-				ActionName.CRY,
-				ActionName.DETONATE,
-				ActionName.DROP,
-				ActionName.EXULT,
-				ActionName.GATHER,
-				ActionName.JUMP,
-				ActionName.LAND,
-				ActionName.MOVEHIGH,
-				ActionName.MOVELOW,
-				ActionName.PUNCH,
-				ActionName.PUSH,
-				ActionName.TRIGGER
-			});
-			actions.put(key,value);
-		}
+		animeReplacements.put(GestureName.JUMPING,GestureName.STANDING);
 		// LANDING
-		{	key = GestureName.XXXXXXX;
-			value = Arrays.asList(new ActionName[]
-			{	ActionName.APPEAR,
-				ActionName.CONSUME,
-				ActionName.CRY,
-				ActionName.DETONATE,
-				ActionName.DROP,
-				ActionName.EXULT,
-				ActionName.GATHER,
-				ActionName.JUMP,
-				ActionName.LAND,
-				ActionName.MOVEHIGH,
-				ActionName.MOVELOW,
-				ActionName.PUNCH,
-				ActionName.PUSH,
-				ActionName.TRIGGER
-			});
-			actions.put(key,value);
-		}
+		animeReplacements.put(GestureName.LANDING,GestureName.STANDING);
 		// OSCILLATING
 		// OSCILLATING_FAILING
 		// PUNCHED
 		// PUNCHING
-		{	key = GestureName.XXXXXXX;
-			value = Arrays.asList(new ActionName[]
-			{	ActionName.APPEAR,
-				ActionName.CONSUME,
-				ActionName.CRY,
-				ActionName.DETONATE,
-				ActionName.DROP,
-				ActionName.EXULT,
-				ActionName.GATHER,
-				ActionName.JUMP,
-				ActionName.LAND,
-				ActionName.MOVEHIGH,
-				ActionName.MOVELOW,
-				ActionName.PUNCH,
-				ActionName.PUSH,
-				ActionName.TRIGGER
-			});
-			actions.put(key,value);
-		}
+		animeReplacements.put(GestureName.PUNCHING,GestureName.STANDING);
 		// PUSHING
-		{	key = GestureName.XXXXXXX;
-			value = Arrays.asList(new ActionName[]
-			{	ActionName.APPEAR,
-				ActionName.CONSUME,
-				ActionName.CRY,
-				ActionName.DETONATE,
-				ActionName.DROP,
-				ActionName.EXULT,
-				ActionName.GATHER,
-				ActionName.JUMP,
-				ActionName.LAND,
-				ActionName.MOVEHIGH,
-				ActionName.MOVELOW,
-				ActionName.PUNCH,
-				ActionName.PUSH,
-				ActionName.TRIGGER
-			});
-			actions.put(key,value);
-		}
+		animeReplacements.put(GestureName.PUSHING,GestureName.WALKING);
 		// SLIDING
 		// SLIDING_FAILING
 		// SPAWNING
 		// STANDING
-		{	key = GestureName.XXXXXXX;
-			value = Arrays.asList(new ActionName[]
-			{	ActionName.APPEAR,
-				ActionName.CONSUME,
-				ActionName.CRY,
-				ActionName.DETONATE,
-				ActionName.DROP,
-				ActionName.EXULT,
-				ActionName.GATHER,
-				ActionName.JUMP,
-				ActionName.LAND,
-				ActionName.MOVEHIGH,
-				ActionName.MOVELOW,
-				ActionName.PUNCH,
-				ActionName.PUSH,
-				ActionName.TRIGGER
-			});
-			actions.put(key,value);
-		}
+		animeReplacements.put(GestureName.STANDING,null);
 		// STANDING_FAILING
 		// WAITING
-		{	key = GestureName.XXXXXXX;
-			value = Arrays.asList(new ActionName[]
-			{	ActionName.APPEAR,
-				ActionName.CONSUME,
-				ActionName.CRY,
-				ActionName.DETONATE,
-				ActionName.DROP,
-				ActionName.EXULT,
-				ActionName.GATHER,
-				ActionName.JUMP,
-				ActionName.LAND,
-				ActionName.MOVEHIGH,
-				ActionName.MOVELOW,
-				ActionName.PUNCH,
-				ActionName.PUSH,
-				ActionName.TRIGGER
-			});
-			actions.put(key,value);
-		}
-		// WALKING
-		{	key = GestureName.XXXXXXX;
-			value = Arrays.asList(new ActionName[]
-			{	ActionName.APPEAR,
-				ActionName.CONSUME,
-				ActionName.CRY,
-				ActionName.DETONATE,
-				ActionName.DROP,
-				ActionName.EXULT,
-				ActionName.GATHER,
-				ActionName.JUMP,
-				ActionName.LAND,
-				ActionName.MOVEHIGH,
-				ActionName.MOVELOW,
-				ActionName.PUNCH,
-				ActionName.PUSH,
-				ActionName.TRIGGER
-			});
-			actions.put(key,value);
-		}
+		animeReplacements.put(GestureName.WAITING,GestureName.STANDING);
+		// WALKING		
+		animeReplacements.put(GestureName.WALKING,null);
 	}
 	
-	@Override
-	public HashMap<GestureName, List<ActionName>> getActions()
-	{	return actions;
+	public static HashMap<GestureName,GestureName> getAnimeReplacements()
+	{	return animeReplacements;
 	}
-	
+
 	/////////////////////////////////////////////////////////////////
 	// SPRITES			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
@@ -393,27 +112,4 @@ public class HeroFactory extends SpriteFactory<Hero>
 		{	super.finish();
 		}
 	}
-
-	/*
-	{	key = GestureName.XXXXXXX;
-		value = Arrays.asList(new ActionName[]
-		{	ActionName.APPEAR,
-			ActionName.CONSUME,
-			ActionName.CRY,
-			ActionName.DETONATE,
-			ActionName.DROP,
-			ActionName.EXULT,
-			ActionName.GATHER,
-			ActionName.JUMP,
-			ActionName.LAND,
-			ActionName.MOVEHIGH,
-			ActionName.MOVELOW,
-			ActionName.PUNCH,
-			ActionName.PUSH,
-			ActionName.TRIGGER
-		});
-		actions.put(key,value);
-	}
-	 */
-	
 }
