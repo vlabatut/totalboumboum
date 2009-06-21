@@ -63,11 +63,10 @@ public class BombFactoryLoader extends SpriteFactoryLoader
 		
 		// ANIMES
 		folder = folderPath+File.separator+FileTools.FILE_ANIMES;
-		folder = folderPath+File.separator+FileTools.FILE_ANIMES;
 		if(color==null)
-			AnimesLoader.loadAnimes(folder,gesturePack,level);
+			AnimesLoader.loadAnimes(folder,gesturePack,level,BombFactory.getAnimeReplacements());
 		else
-			AnimesLoader.loadAnimes(folder,gesturePack,level,color);
+			AnimesLoader.loadAnimes(folder,gesturePack,level,color,BombFactory.getAnimeReplacements());
 		
 		//EXPLOSION
 		loadExplosionElement(root,level,result);

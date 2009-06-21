@@ -69,7 +69,7 @@ public class HeroFactoryLoader extends SpriteFactoryLoader
 		
 		// ANIMES
 		folder = folderPath+File.separator+FileTools.FILE_ANIMES;
-		AnimesLoader.loadAnimes(folder,gesturePack,level);
+		AnimesLoader.loadAnimes(folder,gesturePack,level,HeroFactory.getAnimeReplacements());
 		
 		//EXPLOSION
 		loadExplosionElement(root,level,result); //TODO les explosions des players ne devraient-elles pas être chargées en commun ?

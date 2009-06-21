@@ -21,19 +21,70 @@ package fr.free.totalboumboum.engine.content.sprite.fire;
  * 
  */
 
+import java.util.HashMap;
+
 import fr.free.totalboumboum.engine.container.fireset.Fireset;
 import fr.free.totalboumboum.engine.container.level.Level;
+import fr.free.totalboumboum.engine.content.feature.gesture.GestureName;
 import fr.free.totalboumboum.engine.content.manager.event.EventManager;
 import fr.free.totalboumboum.engine.content.sprite.SpriteFactory;
 
 public class FireFactory extends SpriteFactory<Fire>
 {	
-	private Fireset fireset;
-	
 	public FireFactory(Level level)
 	{	super(level);
 	}	
 	
+	/////////////////////////////////////////////////////////////////
+	// GESTURE PACK		/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	private static final HashMap<GestureName,GestureName> animeReplacements = new HashMap<GestureName,GestureName>();		
+	static
+	{	// NONE
+		animeReplacements.put(GestureName.NONE,null);
+		// APPEARING
+		animeReplacements.put(GestureName.APPEARING,GestureName.STANDING);
+		// BOUNCING
+		animeReplacements.put(GestureName.BOUNCING,GestureName.STANDING);
+		// BURNING
+		animeReplacements.put(GestureName.BURNING,null);
+		// CRYING
+		animeReplacements.put(GestureName.CRYING,GestureName.BURNING);
+		// ENDED
+		animeReplacements.put(GestureName.ENDED,null);
+		// EXULTING
+		animeReplacements.put(GestureName.EXULTING,GestureName.JUMPING);
+		// HIDING
+		// JUMPING
+		animeReplacements.put(GestureName.JUMPING,GestureName.STANDING);
+		// LANDING
+		animeReplacements.put(GestureName.LANDING,GestureName.STANDING);
+		// OSCILLATING
+		// OSCILLATING_FAILING
+		// PUNCHED
+		// PUNCHING
+		animeReplacements.put(GestureName.PUNCHING,GestureName.STANDING);
+		// PUSHING
+		animeReplacements.put(GestureName.PUSHING,GestureName.WALKING);
+		// SLIDING
+		// SLIDING_FAILING
+		// SPAWNING
+		// STANDING
+		animeReplacements.put(GestureName.STANDING,null);
+		// STANDING_FAILING
+		// WAITING
+		animeReplacements.put(GestureName.WAITING,GestureName.STANDING);
+		// WALKING		
+		animeReplacements.put(GestureName.WALKING,null);
+	}
+	
+	public static HashMap<GestureName,GestureName> getAnimeReplacements()
+	{	return animeReplacements;
+	}
+
+	/////////////////////////////////////////////////////////////////
+	// SPRITES			/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
 	public Fire makeSprite()
 	{	// init
 		Fire result = new Fire(level);
@@ -53,6 +104,11 @@ public class FireFactory extends SpriteFactory<Fire>
 		return result;
 	}
 
+	/////////////////////////////////////////////////////////////////
+	// FIRESET			/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	private Fireset fireset;
+
 	public void setFireset(Fireset fireset)
 	{	this.fireset = fireset;	
 	}
@@ -61,6 +117,9 @@ public class FireFactory extends SpriteFactory<Fire>
 	{	return fireset;			
 	}
 	
+	/////////////////////////////////////////////////////////////////
+	// FINISHED			/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
 	public void finish()
 	{	if(!finished)
 		{	super.finish();

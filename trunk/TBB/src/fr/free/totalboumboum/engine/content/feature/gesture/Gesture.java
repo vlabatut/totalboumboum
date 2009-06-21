@@ -28,7 +28,6 @@ import java.util.Map.Entry;
 
 import fr.free.totalboumboum.engine.content.feature.Direction;
 import fr.free.totalboumboum.engine.content.feature.ability.StateAbilityName;
-import fr.free.totalboumboum.engine.content.feature.gesture.action.ActionName;
 import fr.free.totalboumboum.engine.content.feature.gesture.action.SpecificAction;
 import fr.free.totalboumboum.engine.content.feature.gesture.anime.AnimeDirection;
 import fr.free.totalboumboum.engine.content.feature.gesture.modulation.AbstractModulation;
@@ -45,28 +44,6 @@ public class Gesture
 	public Gesture()
 	{	
 	}
-
-	//TODO faut définir une liste de gestures pour chaque type de sprite...
-	// et peut être charger/construire pour chaque TYPE de sprite cette liste de gestures
-	// ensuite chaque sprite généré pour un type donné partage ces données avec ces collègues
-	// seuls certains trucs peuvent être modifiés comme les abilities, le reste est statique
-	// sauf que non: les animes sont différentes, elles, et pas que par la couleur (ex: différents murs)
-	// peut-être mettre une fonction statique dans la classe principale de chaque type de sprite, qui construit statiquement un gesture pack et utilise une copie vide comme base pour chaque sprite créé dans ce type?
-	
-	
-	// TODO la gestion des données manquantes doit être effectuée au chargement, et pas en cours de jeu	
-
-	// TODO au lieu d'utiliser une fonction set sprite qui met à jour les roles des acteurs et targets
-	// dans les modulations, il faut effectuer cette mise à jour au chargement des modulations, puisqu'à cet
-	// instant on connait déjà le role de sprite concerné.
-	
-	// TODO virer l'anime par défaut dans les fichiers d'anime, mais le standing down doit être toujours défini (?)
-	// de plus, les éléments doivent porter directement le nom des gestures, de manière à pouvoir contrôler leur présence directement
-	
-	// TODO définir une fonction completePack() dépendant du role du sprite concerné, et qui rajoute les animations manquantes
-	// à mon avis, ca doit aller dans la classe factory
-	
-	// TODO dans XML les permissions doivent devenir des modulations
 	
 	/////////////////////////////////////////////////////////////////
 	// NAME		/////////////////////////////////////////////
@@ -93,6 +70,15 @@ public class Gesture
 	
 	public void addAnimeDirection(AnimeDirection anime)
 	{	animes.put(anime.getDirection(),anime);
+	}
+	
+	public boolean hasNoAnimes()
+	{	return animes.isEmpty();		
+	}
+	
+	public void setAnimes(Gesture gesture)
+	{	for(Entry<Direction,AnimeDirection> e: gesture.animes.entrySet())
+			addAnimeDirection(e.getValue());
 	}
 	
 	/////////////////////////////////////////////////////////////////
@@ -189,21 +175,6 @@ public class Gesture
 			if(modulation.isConcerningAction(action))
 				result = modulation;
 		}
-		return result;
-	}
-	
-	/////////////////////////////////////////////////////////////////
-	// ACTIONS			/////////////////////////////////////////////
-	/////////////////////////////////////////////////////////////////
-	private final ArrayList<ActionName> actions = new ArrayList<ActionName>();
-	
-	public void addAction(ActionName action)
-	{	if(!actions.contains(action))
-			actions.add(action);		
-	}
-	
-	public boolean isAllowedAction(ActionName action)
-	{	boolean result = actions.contains(action);
 		return result;
 	}
 	

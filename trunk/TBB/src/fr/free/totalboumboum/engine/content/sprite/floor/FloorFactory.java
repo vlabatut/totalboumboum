@@ -21,7 +21,10 @@ package fr.free.totalboumboum.engine.content.sprite.floor;
  * 
  */
 
+import java.util.HashMap;
+
 import fr.free.totalboumboum.engine.container.level.Level;
+import fr.free.totalboumboum.engine.content.feature.gesture.GestureName;
 import fr.free.totalboumboum.engine.content.manager.event.EventManager;
 import fr.free.totalboumboum.engine.content.sprite.SpriteFactory;
 
@@ -31,6 +34,56 @@ public class FloorFactory extends SpriteFactory<Floor>
 	{	super(level);
 	}	
 	
+	/////////////////////////////////////////////////////////////////
+	// GESTURE PACK		/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	private static final HashMap<GestureName,GestureName> animeReplacements = new HashMap<GestureName,GestureName>();		
+	static
+	{	// NONE
+		animeReplacements.put(GestureName.NONE,null);
+		// APPEARING
+		animeReplacements.put(GestureName.APPEARING,GestureName.STANDING);
+		// BOUNCING
+		animeReplacements.put(GestureName.BOUNCING,GestureName.STANDING);
+		// BURNING
+		animeReplacements.put(GestureName.BURNING,null);
+		// CRYING
+		animeReplacements.put(GestureName.CRYING,GestureName.BURNING);
+		// ENDED
+		animeReplacements.put(GestureName.ENDED,null);
+		// EXULTING
+		animeReplacements.put(GestureName.EXULTING,GestureName.JUMPING);
+		// HIDING
+		// JUMPING
+		animeReplacements.put(GestureName.JUMPING,GestureName.STANDING);
+		// LANDING
+		animeReplacements.put(GestureName.LANDING,GestureName.STANDING);
+		// OSCILLATING
+		// OSCILLATING_FAILING
+		// PUNCHED
+		// PUNCHING
+		animeReplacements.put(GestureName.PUNCHING,GestureName.STANDING);
+		// PUSHING
+		animeReplacements.put(GestureName.PUSHING,GestureName.WALKING);
+		// SLIDING
+		// SLIDING_FAILING
+		// SPAWNING
+		// STANDING
+		animeReplacements.put(GestureName.STANDING,null);
+		// STANDING_FAILING
+		// WAITING
+		animeReplacements.put(GestureName.WAITING,GestureName.STANDING);
+		// WALKING		
+		animeReplacements.put(GestureName.WALKING,null);
+	}
+	
+	public static HashMap<GestureName,GestureName> getAnimeReplacements()
+	{	return animeReplacements;
+	}
+
+	/////////////////////////////////////////////////////////////////
+	// SPRITES			/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
 	public Floor makeSprite()
 	{	// init
 		Floor result = new Floor(level);
@@ -48,6 +101,9 @@ public class FloorFactory extends SpriteFactory<Floor>
 		return result;
 	}
 
+	/////////////////////////////////////////////////////////////////
+	// FINISHED			/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
 	public void finish()
 	{	if(!finished)
 		{	super.finish();

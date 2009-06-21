@@ -76,6 +76,10 @@ public class GesturePack
 	public void addGesture(Gesture gesture)
 	{	gestures.put(gesture.getName(),gesture);
 	}
+	
+	public boolean containsGesture(GestureName name)
+	{	return gestures.containsKey(name);		
+	}
 
 	/////////////////////////////////////////////////////////////////
 	// COPY				/////////////////////////////////////////////

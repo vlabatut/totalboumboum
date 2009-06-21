@@ -24,7 +24,6 @@ package fr.free.totalboumboum.engine.content.sprite;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
-import java.util.List;
 
 import fr.free.totalboumboum.engine.container.bombset.Bombset;
 import fr.free.totalboumboum.engine.container.level.Level;
@@ -32,7 +31,6 @@ import fr.free.totalboumboum.engine.content.feature.ability.AbstractAbility;
 import fr.free.totalboumboum.engine.content.feature.explosion.Explosion;
 import fr.free.totalboumboum.engine.content.feature.gesture.GestureName;
 import fr.free.totalboumboum.engine.content.feature.gesture.GesturePack;
-import fr.free.totalboumboum.engine.content.feature.gesture.action.ActionName;
 import fr.free.totalboumboum.engine.content.feature.gesture.action.IncompatibleParameterException;
 import fr.free.totalboumboum.engine.content.manager.ability.AbilityManager;
 import fr.free.totalboumboum.engine.content.manager.anime.AnimeManager;
@@ -121,6 +119,7 @@ public abstract class SpriteFactory<T extends Sprite>
 	public void setName(String name)
 	{	this.name = name;
 	}
+	
 	/////////////////////////////////////////////////////////////////
 	// GESTURE PACK		/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
@@ -133,7 +132,7 @@ public abstract class SpriteFactory<T extends Sprite>
 	public void setGesturePack(GesturePack gesturePack)
 	{	this.gesturePack = gesturePack;
 	}
-
+	
 	/////////////////////////////////////////////////////////////////
 	// BOMBSET			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
@@ -173,11 +172,6 @@ public abstract class SpriteFactory<T extends Sprite>
 	{	this.abilities = abilities;
 	}
 
-	/////////////////////////////////////////////////////////////////
-	// ACTIONS			/////////////////////////////////////////////
-	/////////////////////////////////////////////////////////////////
-	public abstract HashMap<GestureName,List<ActionName>> getActions();
-	
 	/////////////////////////////////////////////////////////////////
 	// LEVEL			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////

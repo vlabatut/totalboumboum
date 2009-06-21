@@ -62,7 +62,7 @@ public class BlockFactoryLoader extends SpriteFactoryLoader
 		
 		// ANIMES
 		folder = folderPath+File.separator+FileTools.FILE_ANIMES;
-		AnimesLoader.loadAnimes(folder,gesturePack,level);
+		AnimesLoader.loadAnimes(folder,gesturePack,level,BlockFactory.getAnimeReplacements());
 		
 		//EXPLOSION
 		loadExplosionElement(root,level,result);
