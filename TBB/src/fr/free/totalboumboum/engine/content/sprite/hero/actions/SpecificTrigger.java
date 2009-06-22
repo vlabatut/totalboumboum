@@ -1,4 +1,4 @@
-package fr.free.totalboumboum.engine.content.feature.gesture.action.drop;
+package fr.free.totalboumboum.engine.content.sprite.hero.actions;
 
 /*
  * Total Boum Boum
@@ -24,31 +24,31 @@ package fr.free.totalboumboum.engine.content.feature.gesture.action.drop;
 import fr.free.totalboumboum.engine.content.feature.gesture.action.ActionName;
 import fr.free.totalboumboum.engine.content.feature.gesture.action.IncompatibleParameterException;
 import fr.free.totalboumboum.engine.content.feature.gesture.action.SpecificAction;
-import fr.free.totalboumboum.engine.content.sprite.bomb.Bomb;
-import fr.free.totalboumboum.engine.content.sprite.hero.Hero;
+import fr.free.totalboumboum.engine.content.sprite.Sprite;
 
 /** 
- * putting an object on the ground.
- * usually a player dropping a bomb
+ * asking a remote bomb to explode.
+ * usually performed by a hero on.. well, on a bomb.
  * 
- * 	<br>actor: 			hero [any]
- * 	<br>target: 		bomb [any]
+ * 	<br>actor: 			any (probably hero)
+ * 	<br>target: 		bomb
  * 	<br>direction:		any or none
- * 	<br>contact:		none (the target is not supposed to be ongame)
- * 	<br>tilePosition:	undefined
- * 	<br>orientation:	undefined
+ * 	<br>contact:		any or none
+ * 	<br>tilePosition:	any or undefined
+ * 	<br>orientation:	any or undefined
  *  
  */
-public abstract class SpecificDrop extends SpecificAction
+public abstract class SpecificTrigger extends SpecificAction
 {
-	public SpecificDrop(Hero actor, Bomb target) throws IncompatibleParameterException
-	{	super(ActionName.DROP,actor,target);
+	public SpecificTrigger(Sprite actor, Sprite target) throws IncompatibleParameterException
+	{	super(ActionName.TRIGGER,actor,target);
 	}
+	
 /*	
 	/////////////////////////////////////////////////////////////////
 	// GENERAL ACTION	/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	private GeneralDrop generalAction;
+	private GeneralTrigger generalAction;
 
 	@Override
 	public GeneralAction getGeneralAction()
@@ -57,8 +57,8 @@ public abstract class SpecificDrop extends SpecificAction
 	
 	@Override
 	protected void initGeneralAction() 
-	{	generalAction = new GeneralDrop();
+	{	generalAction = new GeneralTrigger();
 		super.initGeneralAction(generalAction);
 	}
-*/
+*/	
 }

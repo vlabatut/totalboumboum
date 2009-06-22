@@ -1,4 +1,4 @@
-package fr.free.totalboumboum.engine.content.feature.gesture.action.drop;
+package fr.free.totalboumboum.engine.content.sprite.hero.actions;
 
 /*
  * Total Boum Boum
@@ -24,31 +24,31 @@ package fr.free.totalboumboum.engine.content.feature.gesture.action.drop;
 import fr.free.totalboumboum.engine.content.feature.gesture.action.ActionName;
 import fr.free.totalboumboum.engine.content.feature.gesture.action.IncompatibleParameterException;
 import fr.free.totalboumboum.engine.content.feature.gesture.action.SpecificAction;
-import fr.free.totalboumboum.engine.content.sprite.bomb.Bomb;
-import fr.free.totalboumboum.engine.content.sprite.hero.Hero;
+import fr.free.totalboumboum.engine.content.sprite.Sprite;
 
 /** 
- * putting an object on the ground.
- * usually a player dropping a bomb
+ * pushing an object to make it move on the ground (unlink a punch, which aims at moving it in the air)
+ * for instance: a hero pushing a bomb to make it slide
  * 
- * 	<br>actor: 			hero [any]
- * 	<br>target: 		bomb [any]
- * 	<br>direction:		any or none
- * 	<br>contact:		none (the target is not supposed to be ongame)
- * 	<br>tilePosition:	undefined
- * 	<br>orientation:	undefined
+ * 	<br>actor: 			any (probably a hero)
+ * 	<br>target: 		any (probably a bomb or a wall)
+ * 	<br>direction:		any (not none)
+ * 	<br>contact:		intersection or collision
+ * 	<br>tilePosition:	same or neighbor
+ * 	<br>orientation:	same
  *  
  */
-public abstract class SpecificDrop extends SpecificAction
+public abstract class SpecificPush extends SpecificAction
 {
-	public SpecificDrop(Hero actor, Bomb target) throws IncompatibleParameterException
-	{	super(ActionName.DROP,actor,target);
+	public SpecificPush(Sprite actor, Sprite target) throws IncompatibleParameterException
+	{	super(ActionName.PUSH,actor,target);
 	}
+	
 /*	
 	/////////////////////////////////////////////////////////////////
 	// GENERAL ACTION	/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	private GeneralDrop generalAction;
+	private GeneralPush generalAction;
 
 	@Override
 	public GeneralAction getGeneralAction()
@@ -57,8 +57,8 @@ public abstract class SpecificDrop extends SpecificAction
 	
 	@Override
 	protected void initGeneralAction() 
-	{	generalAction = new GeneralDrop();
+	{	generalAction = new GeneralPush();
 		super.initGeneralAction(generalAction);
 	}
-*/
+*/	
 }

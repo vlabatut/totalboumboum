@@ -1,4 +1,4 @@
-package fr.free.totalboumboum.engine.content.feature.gesture.action.drop;
+package fr.free.totalboumboum.engine.content.sprite.hero.actions;
 
 /*
  * Total Boum Boum
@@ -24,31 +24,31 @@ package fr.free.totalboumboum.engine.content.feature.gesture.action.drop;
 import fr.free.totalboumboum.engine.content.feature.gesture.action.ActionName;
 import fr.free.totalboumboum.engine.content.feature.gesture.action.IncompatibleParameterException;
 import fr.free.totalboumboum.engine.content.feature.gesture.action.SpecificAction;
-import fr.free.totalboumboum.engine.content.sprite.bomb.Bomb;
-import fr.free.totalboumboum.engine.content.sprite.hero.Hero;
+import fr.free.totalboumboum.engine.content.sprite.Sprite;
 
 /** 
- * putting an object on the ground.
- * usually a player dropping a bomb
+ * finishing an aerial move and landing on the floor.
+ * for instance a hero after a jump, or a bomb after having been punched
  * 
- * 	<br>actor: 			hero [any]
- * 	<br>target: 		bomb [any]
+ * 	<br>actor: 			any (probably a hero or a bomb)
+ * 	<br>target: 		none
  * 	<br>direction:		any or none
- * 	<br>contact:		none (the target is not supposed to be ongame)
+ * 	<br>contact:		none
  * 	<br>tilePosition:	undefined
  * 	<br>orientation:	undefined
  *  
  */
-public abstract class SpecificDrop extends SpecificAction
+public abstract class SpecificLand extends SpecificAction
 {
-	public SpecificDrop(Hero actor, Bomb target) throws IncompatibleParameterException
-	{	super(ActionName.DROP,actor,target);
+	public SpecificLand(Sprite actor, Sprite target) throws IncompatibleParameterException
+	{	super(ActionName.LAND,actor,target);
 	}
+	
 /*	
 	/////////////////////////////////////////////////////////////////
 	// GENERAL ACTION	/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	private GeneralDrop generalAction;
+	private GeneralLand generalAction;
 
 	@Override
 	public GeneralAction getGeneralAction()
@@ -57,8 +57,8 @@ public abstract class SpecificDrop extends SpecificAction
 	
 	@Override
 	protected void initGeneralAction() 
-	{	generalAction = new GeneralDrop();
+	{	generalAction = new GeneralLand();
 		super.initGeneralAction(generalAction);
 	}
-*/
+*/	
 }

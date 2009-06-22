@@ -1,4 +1,4 @@
-package fr.free.totalboumboum.engine.content.feature.gesture.action.drop;
+package fr.free.totalboumboum.engine.content.sprite.hero.actions;
 
 /*
  * Total Boum Boum
@@ -24,31 +24,31 @@ package fr.free.totalboumboum.engine.content.feature.gesture.action.drop;
 import fr.free.totalboumboum.engine.content.feature.gesture.action.ActionName;
 import fr.free.totalboumboum.engine.content.feature.gesture.action.IncompatibleParameterException;
 import fr.free.totalboumboum.engine.content.feature.gesture.action.SpecificAction;
-import fr.free.totalboumboum.engine.content.sprite.bomb.Bomb;
-import fr.free.totalboumboum.engine.content.sprite.hero.Hero;
+import fr.free.totalboumboum.engine.content.sprite.Sprite;
 
 /** 
- * putting an object on the ground.
- * usually a player dropping a bomb
+ * on ground (normal) move.
+ * for example: hero walking, bomb sliding, etc.
  * 
- * 	<br>actor: 			hero [any]
- * 	<br>target: 		bomb [any]
- * 	<br>direction:		any or none
- * 	<br>contact:		none (the target is not supposed to be ongame)
+ * 	<br>actor: 			any
+ * 	<br>target: 		none
+ * 	<br>direction:		any (not none)
+ * 	<br>contact:		none
  * 	<br>tilePosition:	undefined
  * 	<br>orientation:	undefined
  *  
  */
-public abstract class SpecificDrop extends SpecificAction
+public abstract class SpecificMoveLow extends SpecificAction
 {
-	public SpecificDrop(Hero actor, Bomb target) throws IncompatibleParameterException
-	{	super(ActionName.DROP,actor,target);
+	public SpecificMoveLow(Sprite actor, Sprite target) throws IncompatibleParameterException
+	{	super(ActionName.MOVELOW,actor,target);
 	}
+
 /*	
 	/////////////////////////////////////////////////////////////////
 	// GENERAL ACTION	/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	private GeneralDrop generalAction;
+	private GeneralMoveLow generalAction;
 
 	@Override
 	public GeneralAction getGeneralAction()
@@ -57,8 +57,8 @@ public abstract class SpecificDrop extends SpecificAction
 	
 	@Override
 	protected void initGeneralAction() 
-	{	generalAction = new GeneralDrop();
+	{	generalAction = new GeneralMoveLow();
 		super.initGeneralAction(generalAction);
 	}
-*/
+*/	
 }
