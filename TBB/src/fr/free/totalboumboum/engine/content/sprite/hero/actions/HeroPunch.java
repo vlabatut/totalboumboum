@@ -27,28 +27,28 @@ import fr.free.totalboumboum.engine.content.feature.gesture.action.SpecificActio
 import fr.free.totalboumboum.engine.content.sprite.Sprite;
 
 /** 
- * picking an object just by walking on it (unlike picking a bomb to carry it). 
- * most of the time a hero gathering an item.
+ * hitting an object to to send it in the air.
+ * for instance: hero punching a bomb
  * 
  * 	<br>actor: 			any (probably a hero)
- * 	<br>target: 		any (probably an item)
- * 	<br>direction:		any or none
- * 	<br>contact:		collision or intersection
- * 	<br>tilePosition:	same
- * 	<br>orientation:	any or undefined
+ * 	<br>target: 		any (probably a bomb or another hero)
+ * 	<br>direction:		any (not none)
+ * 	<br>contact:		any or none
+ * 	<br>tilePosition:	same or neighbor
+ * 	<br>orientation:	same
  *  
  */
-public abstract class SpecificGather extends SpecificAction
+public abstract class HeroPunch extends SpecificAction
 {
-	public SpecificGather(Sprite actor, Sprite target) throws IncompatibleParameterException
-	{	super(ActionName.GATHER,actor,target);
+	public HeroPunch(Sprite actor, Sprite target) throws IncompatibleParameterException
+	{	super(ActionName.PUNCH,actor,target);
 	}
 	
 /*	
 	/////////////////////////////////////////////////////////////////
 	// GENERAL ACTION	/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	private GeneralGather generalAction;
+	private GeneralPunch generalAction;
 
 	@Override
 	public GeneralAction getGeneralAction()
@@ -57,7 +57,7 @@ public abstract class SpecificGather extends SpecificAction
 	
 	@Override
 	protected void initGeneralAction() 
-	{	generalAction = new GeneralGather();
+	{	generalAction = new GeneralPunch();
 		super.initGeneralAction(generalAction);
 	}
 */	

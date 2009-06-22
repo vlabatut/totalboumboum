@@ -27,28 +27,28 @@ import fr.free.totalboumboum.engine.content.feature.gesture.action.SpecificActio
 import fr.free.totalboumboum.engine.content.sprite.Sprite;
 
 /** 
- * on ground (normal) move.
- * for example: hero walking, bomb sliding, etc.
+ * appearing in a tile, coming from nowhere
+ * (after a teleport, a dropped bomb, player at the begining of a round, etc.)
  * 
  * 	<br>actor: 			any
- * 	<br>target: 		none
- * 	<br>direction:		any (not none)
- * 	<br>contact:		none
- * 	<br>tilePosition:	undefined
- * 	<br>orientation:	undefined
+ * 	<br>target: 		any (probably a floor, but not necessarily)
+ * 	<br>direction:		any or none
+ * 	<br>contact:		any or none
+ * 	<br>tilePosition:	any or undefined
+ * 	<br>orientation:	any or undefined
  *  
  */
-public abstract class SpecificMoveLow extends SpecificAction
+public abstract class HeroAppear extends SpecificAction
 {
-	public SpecificMoveLow(Sprite actor, Sprite target) throws IncompatibleParameterException
-	{	super(ActionName.MOVELOW,actor,target);
+	public HeroAppear(Sprite actor, Sprite target) throws IncompatibleParameterException
+	{	super(ActionName.APPEAR,actor,target);
 	}
 
 /*	
 	/////////////////////////////////////////////////////////////////
 	// GENERAL ACTION	/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	private GeneralMoveLow generalAction;
+	private GeneralAppear generalAction;
 
 	@Override
 	public GeneralAction getGeneralAction()
@@ -57,7 +57,7 @@ public abstract class SpecificMoveLow extends SpecificAction
 	
 	@Override
 	protected void initGeneralAction() 
-	{	generalAction = new GeneralMoveLow();
+	{	generalAction = new GeneralAppear();
 		super.initGeneralAction(generalAction);
 	}
 */	

@@ -27,28 +27,28 @@ import fr.free.totalboumboum.engine.content.feature.gesture.action.SpecificActio
 import fr.free.totalboumboum.engine.content.sprite.Sprite;
 
 /** 
- * appearing in a tile, coming from nowhere
- * (after a teleport, a dropped bomb, player at the begining of a round, etc.)
+ * picking an object just by walking on it (unlike picking a bomb to carry it). 
+ * most of the time a hero gathering an item.
  * 
- * 	<br>actor: 			any
- * 	<br>target: 		any (probably a floor, but not necessarily)
+ * 	<br>actor: 			any (probably a hero)
+ * 	<br>target: 		any (probably an item)
  * 	<br>direction:		any or none
- * 	<br>contact:		any or none
- * 	<br>tilePosition:	any or undefined
+ * 	<br>contact:		collision or intersection
+ * 	<br>tilePosition:	same
  * 	<br>orientation:	any or undefined
  *  
  */
-public abstract class SpecificAppear extends SpecificAction
+public abstract class HeroGather extends SpecificAction
 {
-	public SpecificAppear(Sprite actor, Sprite target) throws IncompatibleParameterException
-	{	super(ActionName.APPEAR,actor,target);
+	public HeroGather(Sprite actor, Sprite target) throws IncompatibleParameterException
+	{	super(ActionName.GATHER,actor,target);
 	}
-
+	
 /*	
 	/////////////////////////////////////////////////////////////////
 	// GENERAL ACTION	/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	private GeneralAppear generalAction;
+	private GeneralGather generalAction;
 
 	@Override
 	public GeneralAction getGeneralAction()
@@ -57,7 +57,7 @@ public abstract class SpecificAppear extends SpecificAction
 	
 	@Override
 	protected void initGeneralAction() 
-	{	generalAction = new GeneralAppear();
+	{	generalAction = new GeneralGather();
 		super.initGeneralAction(generalAction);
 	}
 */	

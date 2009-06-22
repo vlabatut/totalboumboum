@@ -27,10 +27,10 @@ import fr.free.totalboumboum.engine.content.feature.gesture.action.SpecificActio
 import fr.free.totalboumboum.engine.content.sprite.Sprite;
 
 /** 
- * celebrating a victory at the end of a round. 
- * always performed by a hero
+ * finishing an aerial move and landing on the floor.
+ * for instance a hero after a jump, or a bomb after having been punched
  * 
- * 	<br>actor: 			hero
+ * 	<br>actor: 			any (probably a hero or a bomb)
  * 	<br>target: 		none
  * 	<br>direction:		any or none
  * 	<br>contact:		none
@@ -38,17 +38,17 @@ import fr.free.totalboumboum.engine.content.sprite.Sprite;
  * 	<br>orientation:	undefined
  *  
  */
-public abstract class SpecificExult extends SpecificAction
+public abstract class HeroLand extends SpecificAction
 {
-	public SpecificExult(Sprite actor, Sprite target) throws IncompatibleParameterException
-	{	super(ActionName.EXULT,actor,target);
+	public HeroLand(Sprite actor, Sprite target) throws IncompatibleParameterException
+	{	super(ActionName.LAND,actor,target);
 	}
-
+	
 /*	
 	/////////////////////////////////////////////////////////////////
 	// GENERAL ACTION	/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	private GeneralExult generalAction;
+	private GeneralLand generalAction;
 
 	@Override
 	public GeneralAction getGeneralAction()
@@ -57,8 +57,8 @@ public abstract class SpecificExult extends SpecificAction
 	
 	@Override
 	protected void initGeneralAction() 
-	{	generalAction = new GeneralExult();
+	{	generalAction = new GeneralLand();
 		super.initGeneralAction(generalAction);
 	}
-*/
+*/	
 }

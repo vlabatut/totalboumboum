@@ -27,28 +27,26 @@ import fr.free.totalboumboum.engine.content.feature.gesture.action.SpecificActio
 import fr.free.totalboumboum.engine.content.sprite.Sprite;
 
 /** 
- * finishing an aerial move and landing on the floor.
- * for instance a hero after a jump, or a bomb after having been punched
+ * in-air moving, but from a plane (x,y) perspective (no vertical, z, move)
  * 
- * 	<br>actor: 			any (probably a hero or a bomb)
+ * 	<br>actor: 			any
  * 	<br>target: 		none
- * 	<br>direction:		any or none
+ * 	<br>direction:		any (not none)
  * 	<br>contact:		none
  * 	<br>tilePosition:	undefined
  * 	<br>orientation:	undefined
  *  
  */
-public abstract class SpecificLand extends SpecificAction
+public abstract class HeroMoveHigh extends SpecificAction
 {
-	public SpecificLand(Sprite actor, Sprite target) throws IncompatibleParameterException
-	{	super(ActionName.LAND,actor,target);
+	public HeroMoveHigh(Sprite actor, Sprite target) throws IncompatibleParameterException
+	{	super(ActionName.MOVEHIGH,actor,target);
 	}
-	
 /*	
 	/////////////////////////////////////////////////////////////////
 	// GENERAL ACTION	/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	private GeneralLand generalAction;
+	private GeneralMoveHigh generalAction;
 
 	@Override
 	public GeneralAction getGeneralAction()
@@ -57,7 +55,7 @@ public abstract class SpecificLand extends SpecificAction
 	
 	@Override
 	protected void initGeneralAction() 
-	{	generalAction = new GeneralLand();
+	{	generalAction = new GeneralMoveHigh();
 		super.initGeneralAction(generalAction);
 	}
 */	

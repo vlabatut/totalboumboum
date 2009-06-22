@@ -27,28 +27,28 @@ import fr.free.totalboumboum.engine.content.feature.gesture.action.SpecificActio
 import fr.free.totalboumboum.engine.content.sprite.Sprite;
 
 /** 
- * begining an aerial move on its own (not peing punched)
- * for instance: hero jumping
+ * asking a remote bomb to explode.
+ * usually performed by a hero on.. well, on a bomb.
  * 
- * 	<br>actor: 			any (probably a hero)
- * 	<br>target: 		none
+ * 	<br>actor: 			any (probably hero)
+ * 	<br>target: 		bomb
  * 	<br>direction:		any or none
- * 	<br>contact:		none
- * 	<br>tilePosition:	undefined
- * 	<br>orientation:	undefined
+ * 	<br>contact:		any or none
+ * 	<br>tilePosition:	any or undefined
+ * 	<br>orientation:	any or undefined
  *  
  */
-public abstract class SpecificJump extends SpecificAction
+public abstract class HeroTrigger extends SpecificAction
 {
-	public SpecificJump(Sprite actor, Sprite target) throws IncompatibleParameterException
-	{	super(ActionName.JUMP,actor,target);
+	public HeroTrigger(Sprite actor, Sprite target) throws IncompatibleParameterException
+	{	super(ActionName.TRIGGER,actor,target);
 	}
-
+	
 /*	
 	/////////////////////////////////////////////////////////////////
 	// GENERAL ACTION	/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	private GeneralJump generalAction;
+	private GeneralTrigger generalAction;
 
 	@Override
 	public GeneralAction getGeneralAction()
@@ -57,7 +57,7 @@ public abstract class SpecificJump extends SpecificAction
 	
 	@Override
 	protected void initGeneralAction() 
-	{	generalAction = new GeneralJump();
+	{	generalAction = new GeneralTrigger();
 		super.initGeneralAction(generalAction);
 	}
 */	

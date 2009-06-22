@@ -27,28 +27,28 @@ import fr.free.totalboumboum.engine.content.feature.gesture.action.SpecificActio
 import fr.free.totalboumboum.engine.content.sprite.Sprite;
 
 /** 
- * pushing an object to make it move on the ground (unlink a punch, which aims at moving it in the air)
- * for instance: a hero pushing a bomb to make it slide
+ * on ground (normal) move.
+ * for example: hero walking, bomb sliding, etc.
  * 
- * 	<br>actor: 			any (probably a hero)
- * 	<br>target: 		any (probably a bomb or a wall)
+ * 	<br>actor: 			any
+ * 	<br>target: 		none
  * 	<br>direction:		any (not none)
- * 	<br>contact:		intersection or collision
- * 	<br>tilePosition:	same or neighbor
- * 	<br>orientation:	same
+ * 	<br>contact:		none
+ * 	<br>tilePosition:	undefined
+ * 	<br>orientation:	undefined
  *  
  */
-public abstract class SpecificPush extends SpecificAction
+public abstract class HeroMoveLow extends SpecificAction
 {
-	public SpecificPush(Sprite actor, Sprite target) throws IncompatibleParameterException
-	{	super(ActionName.PUSH,actor,target);
+	public HeroMoveLow(Sprite actor, Sprite target) throws IncompatibleParameterException
+	{	super(ActionName.MOVELOW,actor,target);
 	}
-	
+
 /*	
 	/////////////////////////////////////////////////////////////////
 	// GENERAL ACTION	/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	private GeneralPush generalAction;
+	private GeneralMoveLow generalAction;
 
 	@Override
 	public GeneralAction getGeneralAction()
@@ -57,7 +57,7 @@ public abstract class SpecificPush extends SpecificAction
 	
 	@Override
 	protected void initGeneralAction() 
-	{	generalAction = new GeneralPush();
+	{	generalAction = new GeneralMoveLow();
 		super.initGeneralAction(generalAction);
 	}
 */	

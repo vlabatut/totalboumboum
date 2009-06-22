@@ -27,26 +27,28 @@ import fr.free.totalboumboum.engine.content.feature.gesture.action.SpecificActio
 import fr.free.totalboumboum.engine.content.sprite.Sprite;
 
 /** 
- * in-air moving, but from a plane (x,y) perspective (no vertical, z, move)
+ * celebrating a victory at the end of a round. 
+ * always performed by a hero
  * 
- * 	<br>actor: 			any
+ * 	<br>actor: 			hero
  * 	<br>target: 		none
- * 	<br>direction:		any (not none)
+ * 	<br>direction:		any or none
  * 	<br>contact:		none
  * 	<br>tilePosition:	undefined
  * 	<br>orientation:	undefined
  *  
  */
-public abstract class SpecificMoveHigh extends SpecificAction
+public abstract class HeroExult extends SpecificAction
 {
-	public SpecificMoveHigh(Sprite actor, Sprite target) throws IncompatibleParameterException
-	{	super(ActionName.MOVEHIGH,actor,target);
+	public HeroExult(Sprite actor, Sprite target) throws IncompatibleParameterException
+	{	super(ActionName.EXULT,actor,target);
 	}
+
 /*	
 	/////////////////////////////////////////////////////////////////
 	// GENERAL ACTION	/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	private GeneralMoveHigh generalAction;
+	private GeneralExult generalAction;
 
 	@Override
 	public GeneralAction getGeneralAction()
@@ -55,8 +57,8 @@ public abstract class SpecificMoveHigh extends SpecificAction
 	
 	@Override
 	protected void initGeneralAction() 
-	{	generalAction = new GeneralMoveHigh();
+	{	generalAction = new GeneralExult();
 		super.initGeneralAction(generalAction);
 	}
-*/	
+*/
 }
