@@ -1,4 +1,4 @@
-package fr.free.totalboumboum.engine.content.feature.gesture.action.drop;
+package fr.free.totalboumboum.engine.content.sprite.hero.actions;
 
 /*
  * Total Boum Boum
@@ -21,9 +21,17 @@ package fr.free.totalboumboum.engine.content.feature.gesture.action.drop;
  * 
  */
 
+import fr.free.totalboumboum.engine.content.feature.Contact;
+import fr.free.totalboumboum.engine.content.feature.Orientation;
+import fr.free.totalboumboum.engine.content.feature.TilePosition;
+import fr.free.totalboumboum.engine.content.feature.ability.ActionAbility;
+import fr.free.totalboumboum.engine.content.feature.gesture.GestureName;
 import fr.free.totalboumboum.engine.content.feature.gesture.action.ActionName;
+import fr.free.totalboumboum.engine.content.feature.gesture.action.GeneralAction;
 import fr.free.totalboumboum.engine.content.feature.gesture.action.IncompatibleParameterException;
 import fr.free.totalboumboum.engine.content.feature.gesture.action.SpecificAction;
+import fr.free.totalboumboum.engine.content.feature.gesture.action.cry.GeneralCry;
+import fr.free.totalboumboum.engine.content.sprite.Sprite;
 import fr.free.totalboumboum.engine.content.sprite.bomb.Bomb;
 import fr.free.totalboumboum.engine.content.sprite.hero.Hero;
 
@@ -61,4 +69,28 @@ public abstract class SpecificDrop extends SpecificAction
 		super.initGeneralAction(generalAction);
 	}
 */
+	
+	/////////////////////////////////////////////////////////////////
+	// EXECUTION		/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	
+	@Override
+	public boolean execute()
+	{	//NOTE: from PUSHING, STANDING, WAITING, WALKING
+		boolean result = false;
+		if(isPossible())
+		{	Hero hero = (Hero)getActor();
+			GestureName gesture = hero.getCurrentGesture();
+			Bomb bomb = (Bomb) getTarget();
+			hero.dropBomb(bomb);
+			if(gesture.equals(GestureName.WAITING))
+			{	setWaitDelay();
+				gesture = GestureName.STANDING;
+				sprite.setGesture(gesture,spriteDirection,controlDirection,true);					
+			}
+			else if(gesture.equals(GestureName.STANDING))
+				setWaitDelay();
+		}
+		return result;
+	}
 }
