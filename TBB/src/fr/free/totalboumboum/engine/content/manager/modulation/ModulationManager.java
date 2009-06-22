@@ -285,6 +285,23 @@ public class ModulationManager
 	}
 */
 	
+	/**
+	 * check if this sprite modulation is preventing the specified action to happen
+	 */
+	public boolean isThirdPreventing(SpecificAction action)
+	{	boolean result = false;
+		ThirdModulation thirdModulation = sprite.getThirdModulation(action);
+		result = !(thirdModulation.getFrame() && thirdModulation.getStrength()<0);
+		return result;
+	}
+	
+	public boolean isTargetPreventing(SpecificAction action)
+	{	boolean result = false;
+		TargetModulation targetModulation = sprite.getTargetModulation(action);
+		result = !(targetModulation.getFrame() && targetModulation.getStrength()<0);
+		return result;
+	}
+	
 	public StateAbility modulateStateAbility(StateAbilityName name)
 	{	// original ability
 		StateAbility result = sprite.getAbility(name);

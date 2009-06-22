@@ -162,13 +162,12 @@ public abstract class AiManager extends AbstractAiManager<Integer>
 	    		if(temp.getBlock()!=null)
 	    		{	Block b = temp.getBlock();
 	    			SpecificAction action = new SpecificAction(AbstractAction.CONSUME,new Fire(level),b,Direction.NONE,Contact.COLLISION,TilePosition.SAME,Orientation.SAME);
-	    			TargetModulation perm = b.getTargetModulation(action);
-	    			// mur destructible
-	    			if(perm!=null)
-	    				zoneMatrix[y][x] = ArtificialIntelligence.AI_BLOCK_WALL_SOFT;
 	    			// mur indestructible
-	    			else
+	    			if(sprite.isTargetPreventing(action))
 	    				zoneMatrix[y][x] = ArtificialIntelligence.AI_BLOCK_WALL_HARD;
+	    			// mur destructible
+	    			else
+	    				zoneMatrix[y][x] = ArtificialIntelligence.AI_BLOCK_WALL_SOFT;
 	    		}
 	    		// bombe
 	    		else if(temp.getBombs().size()>0)
