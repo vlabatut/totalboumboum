@@ -38,7 +38,7 @@ import fr.free.totalboumboum.engine.content.sprite.Sprite;
  * 	<br>orientation:	same
  *  
  */
-public abstract class HeroPunch extends SpecificAction
+public class HeroPunch extends SpecificAction
 {
 	public HeroPunch(Sprite actor, Sprite target) throws IncompatibleParameterException
 	{	super(ActionName.PUNCH,actor,target);

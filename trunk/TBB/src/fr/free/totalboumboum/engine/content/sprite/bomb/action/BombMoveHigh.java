@@ -1,4 +1,4 @@
-package fr.free.totalboumboum.engine.content.sprite.hero.actions;
+package fr.free.totalboumboum.engine.content.sprite.bomb.action;
 
 /*
  * Total Boum Boum
@@ -27,28 +27,26 @@ import fr.free.totalboumboum.engine.content.feature.gesture.action.SpecificActio
 import fr.free.totalboumboum.engine.content.sprite.Sprite;
 
 /** 
- * begining an aerial move on its own (not peing punched)
- * for instance: hero jumping
+ * in-air moving, but from a plane (x,y) perspective (no vertical, z, move)
  * 
- * 	<br>actor: 			any (probably a hero)
+ * 	<br>actor: 			any
  * 	<br>target: 		none
- * 	<br>direction:		any or none
+ * 	<br>direction:		any (not none)
  * 	<br>contact:		none
  * 	<br>tilePosition:	undefined
  * 	<br>orientation:	undefined
  *  
  */
-public class HeroJump extends SpecificAction
+public class BombMoveHigh extends SpecificAction
 {
-	public HeroJump(Sprite actor, Sprite target) throws IncompatibleParameterException
-	{	super(ActionName.JUMP,actor,target);
+	public BombMoveHigh(Sprite actor, Sprite target) throws IncompatibleParameterException
+	{	super(ActionName.MOVEHIGH,actor,target);
 	}
-
 /*	
 	/////////////////////////////////////////////////////////////////
 	// GENERAL ACTION	/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	private GeneralJump generalAction;
+	private GeneralMoveHigh generalAction;
 
 	@Override
 	public GeneralAction getGeneralAction()
@@ -57,7 +55,7 @@ public class HeroJump extends SpecificAction
 	
 	@Override
 	protected void initGeneralAction() 
-	{	generalAction = new GeneralJump();
+	{	generalAction = new GeneralMoveHigh();
 		super.initGeneralAction(generalAction);
 	}
 */	

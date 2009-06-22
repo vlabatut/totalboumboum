@@ -38,7 +38,7 @@ import fr.free.totalboumboum.engine.content.sprite.Sprite;
  * 	<br>orientation:	undefined
  *  
  */
-public abstract class HeroMoveLow extends SpecificAction
+public class HeroMoveLow extends SpecificAction
 {
 	public HeroMoveLow(Sprite actor, Sprite target) throws IncompatibleParameterException
 	{	super(ActionName.MOVELOW,actor,target);
