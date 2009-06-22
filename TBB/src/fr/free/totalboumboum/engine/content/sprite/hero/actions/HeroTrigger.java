@@ -38,7 +38,7 @@ import fr.free.totalboumboum.engine.content.sprite.Sprite;
  * 	<br>orientation:	any or undefined
  *  
  */
-public abstract class HeroTrigger extends SpecificAction
+public class HeroTrigger extends SpecificAction
 {
 	public HeroTrigger(Sprite actor, Sprite target) throws IncompatibleParameterException
 	{	super(ActionName.TRIGGER,actor,target);

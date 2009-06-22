@@ -38,7 +38,7 @@ import fr.free.totalboumboum.engine.content.sprite.Sprite;
  * 	<br>orientation:	any or undefined
  *  
  */
-public abstract class HeroGather extends SpecificAction
+public class HeroGather extends SpecificAction
 {
 	public HeroGather(Sprite actor, Sprite target) throws IncompatibleParameterException
 	{	super(ActionName.GATHER,actor,target);

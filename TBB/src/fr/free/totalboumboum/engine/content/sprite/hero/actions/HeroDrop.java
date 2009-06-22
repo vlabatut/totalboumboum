@@ -47,7 +47,7 @@ import fr.free.totalboumboum.engine.content.sprite.hero.Hero;
  * 	<br>orientation:	undefined
  *  
  */
-public abstract class HeroDrop extends SpecificAction
+public class HeroDrop extends SpecificAction
 {
 	public HeroDrop(Hero actor, Bomb target) throws IncompatibleParameterException
 	{	super(ActionName.DROP,actor,target);

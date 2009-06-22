@@ -1,4 +1,4 @@
-package fr.free.totalboumboum.engine.content.sprite.hero.actions;
+package fr.free.totalboumboum.engine.content.sprite.fire.actions;
 
 /*
  * Total Boum Boum
@@ -27,28 +27,28 @@ import fr.free.totalboumboum.engine.content.feature.gesture.action.SpecificActio
 import fr.free.totalboumboum.engine.content.sprite.Sprite;
 
 /** 
- * begining an aerial move on its own (not peing punched)
- * for instance: hero jumping
+ * putting fire to another object, usually performed by fire (but not necessarily).
+ * different from detonating, which is performed by bombs and results in the production of fire.
  * 
- * 	<br>actor: 			any (probably a hero)
- * 	<br>target: 		none
+ * 	<br>actor: 			any (probably fire, but not necessarily)
+ * 	<br>target: 		any
  * 	<br>direction:		any or none
- * 	<br>contact:		none
- * 	<br>tilePosition:	undefined
- * 	<br>orientation:	undefined
+ * 	<br>contact:		any or none
+ * 	<br>tilePosition:	any or undefined
+ * 	<br>orientation:	any or undefined
  *  
  */
-public class HeroJump extends SpecificAction
+public class FireConsume extends SpecificAction
 {
-	public HeroJump(Sprite actor, Sprite target) throws IncompatibleParameterException
-	{	super(ActionName.JUMP,actor,target);
+	public FireConsume(Sprite actor, Sprite target) throws IncompatibleParameterException
+	{	super(ActionName.CONSUME,actor,target);
 	}
 
 /*	
 	/////////////////////////////////////////////////////////////////
 	// GENERAL ACTION	/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	private GeneralJump generalAction;
+	private GeneralConsume generalAction;
 
 	@Override
 	public GeneralAction getGeneralAction()
@@ -57,7 +57,7 @@ public class HeroJump extends SpecificAction
 	
 	@Override
 	protected void initGeneralAction() 
-	{	generalAction = new GeneralJump();
+	{	generalAction = new GeneralConsume();
 		super.initGeneralAction(generalAction);
 	}
 */	

@@ -932,6 +932,8 @@ public class Launcher
 	 * il faut aussi typer les noms d'action et de gesture, car tous les sprites n'ont pas accès à tous.
 	 * difficile vu qu'on ne peut pas sousclasser les types enum
 	 * 
+	 * TODO inclure les constructeurs anonymes dans les actions spéci-spécifiques, de manière à pouvoir les substituer là où y a des errerus de compile
+	 * 
 	 * tester le système qui complète les animations automatiquement quand elles sont manquantes dans le fichier XML.
 	 * 
 	 * le XML des animes doit avoir soit :

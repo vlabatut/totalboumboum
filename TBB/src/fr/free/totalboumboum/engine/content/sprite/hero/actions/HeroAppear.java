@@ -38,7 +38,7 @@ import fr.free.totalboumboum.engine.content.sprite.Sprite;
  * 	<br>orientation:	any or undefined
  *  
  */
-public abstract class HeroAppear extends SpecificAction
+public class HeroAppear extends SpecificAction
 {
 	public HeroAppear(Sprite actor, Sprite target) throws IncompatibleParameterException
 	{	super(ActionName.APPEAR,actor,target);

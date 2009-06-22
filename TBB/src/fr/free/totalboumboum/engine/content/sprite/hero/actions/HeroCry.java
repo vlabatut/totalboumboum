@@ -38,7 +38,7 @@ import fr.free.totalboumboum.engine.content.sprite.Sprite;
  * 	<br>orientation:	undefined
  *  
  */
-public abstract class HeroCry extends SpecificAction
+public class HeroCry extends SpecificAction
 {
 	public HeroCry(Sprite actor, Sprite target) throws IncompatibleParameterException
 	{	super(ActionName.CRY,actor,target);
