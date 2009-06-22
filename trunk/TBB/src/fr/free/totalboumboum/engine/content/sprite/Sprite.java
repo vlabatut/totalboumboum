@@ -657,6 +657,15 @@ public abstract class Sprite
 	public ActionAbility modulateAction(SpecificAction action)
 	{	return modulationManager.modulateAction(action);
 	}
+	
+	public boolean isTargetPreventing(SpecificAction action)
+	{	return modulationManager.isTargetPreventing(action);
+	}
+
+	public boolean isThirdPreventing(SpecificAction action)
+	{	return modulationManager.isThirdPreventing(action);
+	}
+	
 /*	
 	public ActionAbility computeCapacity(AbstractAction action)
 	{	return modulationManager.computeCapacity(action);
