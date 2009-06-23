@@ -25,6 +25,7 @@ import fr.free.totalboumboum.engine.content.feature.gesture.action.ActionName;
 import fr.free.totalboumboum.engine.content.feature.gesture.action.IncompatibleParameterException;
 import fr.free.totalboumboum.engine.content.feature.gesture.action.SpecificAction;
 import fr.free.totalboumboum.engine.content.sprite.Sprite;
+import fr.free.totalboumboum.engine.content.sprite.hero.Hero;
 
 /** 
  * pushing an object to make it move on the ground (unlink a punch, which aims at moving it in the air)
@@ -40,7 +41,7 @@ import fr.free.totalboumboum.engine.content.sprite.Sprite;
  */
 public class HeroPush extends SpecificAction
 {
-	public HeroPush(Sprite actor, Sprite target) throws IncompatibleParameterException
+	public HeroPush(Hero actor, Sprite target) throws IncompatibleParameterException
 	{	super(ActionName.PUSH,actor,target);
 	}
 	

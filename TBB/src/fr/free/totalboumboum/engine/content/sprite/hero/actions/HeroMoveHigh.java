@@ -25,6 +25,7 @@ import fr.free.totalboumboum.engine.content.feature.gesture.action.ActionName;
 import fr.free.totalboumboum.engine.content.feature.gesture.action.IncompatibleParameterException;
 import fr.free.totalboumboum.engine.content.feature.gesture.action.SpecificAction;
 import fr.free.totalboumboum.engine.content.sprite.Sprite;
+import fr.free.totalboumboum.engine.content.sprite.hero.Hero;
 
 /** 
  * in-air moving, but from a plane (x,y) perspective (no vertical, z, move)
@@ -39,7 +40,7 @@ import fr.free.totalboumboum.engine.content.sprite.Sprite;
  */
 public class HeroMoveHigh extends SpecificAction
 {
-	public HeroMoveHigh(Sprite actor, Sprite target) throws IncompatibleParameterException
+	public HeroMoveHigh(Hero actor, Sprite target) throws IncompatibleParameterException
 	{	super(ActionName.MOVEHIGH,actor,target);
 	}
 /*	

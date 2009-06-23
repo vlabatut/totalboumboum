@@ -25,6 +25,7 @@ import fr.free.totalboumboum.engine.content.feature.gesture.action.ActionName;
 import fr.free.totalboumboum.engine.content.feature.gesture.action.IncompatibleParameterException;
 import fr.free.totalboumboum.engine.content.feature.gesture.action.SpecificAction;
 import fr.free.totalboumboum.engine.content.sprite.Sprite;
+import fr.free.totalboumboum.engine.content.sprite.bomb.Bomb;
 
 /** 
  * producing an explosion, with flames and everything. 
@@ -40,7 +41,7 @@ import fr.free.totalboumboum.engine.content.sprite.Sprite;
  */
 public class BombDetonate extends SpecificAction
 {
-	public BombDetonate(Sprite actor, Sprite target) throws IncompatibleParameterException
+	public BombDetonate(Bomb actor, Sprite target) throws IncompatibleParameterException
 	{	super(ActionName.DETONATE,actor,target);
 	}
 /*	

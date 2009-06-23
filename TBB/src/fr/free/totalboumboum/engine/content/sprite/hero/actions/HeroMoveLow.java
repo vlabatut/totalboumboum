@@ -25,6 +25,7 @@ import fr.free.totalboumboum.engine.content.feature.gesture.action.ActionName;
 import fr.free.totalboumboum.engine.content.feature.gesture.action.IncompatibleParameterException;
 import fr.free.totalboumboum.engine.content.feature.gesture.action.SpecificAction;
 import fr.free.totalboumboum.engine.content.sprite.Sprite;
+import fr.free.totalboumboum.engine.content.sprite.hero.Hero;
 
 /** 
  * on ground (normal) move.
@@ -40,7 +41,7 @@ import fr.free.totalboumboum.engine.content.sprite.Sprite;
  */
 public class HeroMoveLow extends SpecificAction
 {
-	public HeroMoveLow(Sprite actor, Sprite target) throws IncompatibleParameterException
+	public HeroMoveLow(Hero actor, Sprite target) throws IncompatibleParameterException
 	{	super(ActionName.MOVELOW,actor,target);
 	}
 

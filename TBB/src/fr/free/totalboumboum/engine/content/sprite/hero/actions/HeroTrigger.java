@@ -25,6 +25,7 @@ import fr.free.totalboumboum.engine.content.feature.gesture.action.ActionName;
 import fr.free.totalboumboum.engine.content.feature.gesture.action.IncompatibleParameterException;
 import fr.free.totalboumboum.engine.content.feature.gesture.action.SpecificAction;
 import fr.free.totalboumboum.engine.content.sprite.Sprite;
+import fr.free.totalboumboum.engine.content.sprite.hero.Hero;
 
 /** 
  * asking a remote bomb to explode.
@@ -40,7 +41,7 @@ import fr.free.totalboumboum.engine.content.sprite.Sprite;
  */
 public class HeroTrigger extends SpecificAction
 {
-	public HeroTrigger(Sprite actor, Sprite target) throws IncompatibleParameterException
+	public HeroTrigger(Hero actor, Sprite target) throws IncompatibleParameterException
 	{	super(ActionName.TRIGGER,actor,target);
 	}
 	

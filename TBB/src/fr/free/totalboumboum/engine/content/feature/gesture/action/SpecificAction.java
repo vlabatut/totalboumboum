@@ -83,7 +83,7 @@ public abstract class SpecificAction
 		this.contact = contact;
 		this.tilePosition = tilePosition;
 		this.orientation = orientation;
-//		initGeneralAction();
+		initGeneralAction();
 	}
 
 	/////////////////////////////////////////////////////////////////
