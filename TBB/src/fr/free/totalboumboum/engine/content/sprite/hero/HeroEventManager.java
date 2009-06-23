@@ -44,6 +44,7 @@ import fr.free.totalboumboum.engine.content.manager.event.EventManager;
 import fr.free.totalboumboum.engine.content.sprite.Sprite;
 import fr.free.totalboumboum.engine.content.sprite.bomb.Bomb;
 import fr.free.totalboumboum.engine.content.sprite.fire.Fire;
+import fr.free.totalboumboum.engine.content.sprite.hero.actions.HeroDrop;
 import fr.free.totalboumboum.engine.content.sprite.item.Item;
 import fr.free.totalboumboum.engine.player.Player;
 import fr.free.totalboumboum.game.statistics.StatisticAction;
@@ -194,7 +195,7 @@ public class HeroEventManager extends EventManager
 	private void controlDropBomb(ControlEvent event)
 	{	if(event.getMode())
 		{	Bomb bomb = sprite.makeBomb();
-			SpecificDrop action = new SpecificDrop(sprite,bomb);
+			SpecificDrop action = new HeroDrop((Hero)sprite,bomb);
 			ActionAbility ability = sprite.modulateAction(action);
 			if(ability.isActive())
 			{	sprite.dropBomb(bomb);

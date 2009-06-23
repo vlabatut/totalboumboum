@@ -324,16 +324,30 @@ public abstract class SpecificAction
 	/////////////////////////////////////////////////////////////////
 	// EXECUTION		/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
+	protected ActionAbility actionAbility = null;
+	
 	/** tries to execute the specific action */
 	public abstract boolean execute();
+	
+	private void initActionAbility()
+	{	if(actionAbility == null)	
+			actionAbility = actor.modulateAction(this);
+	}
+	
+	public float getStrength()
+	{	float result;
+		initActionAbility();
+		result = actionAbility.getStrength();
+		return result;
+	}
 	
 	/** tests if this action is allowed (through the modulation system)
 	 * by the actor, the target and the environment.
 	 */
 	public boolean isPossible()
 	{	boolean result;
-		ActionAbility ability = actor.modulateAction(this);
-		result = ability.isActive();
+		initActionAbility();
+		result = actionAbility.isActive();
 		return result;
 	}
 	
