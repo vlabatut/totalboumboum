@@ -25,6 +25,7 @@ import fr.free.totalboumboum.engine.content.feature.gesture.action.ActionName;
 import fr.free.totalboumboum.engine.content.feature.gesture.action.IncompatibleParameterException;
 import fr.free.totalboumboum.engine.content.feature.gesture.action.SpecificAction;
 import fr.free.totalboumboum.engine.content.sprite.Sprite;
+import fr.free.totalboumboum.engine.content.sprite.hero.Hero;
 
 /** 
  * begining an aerial move on its own (not peing punched)
@@ -40,7 +41,7 @@ import fr.free.totalboumboum.engine.content.sprite.Sprite;
  */
 public class HeroJump extends SpecificAction
 {
-	public HeroJump(Sprite actor, Sprite target) throws IncompatibleParameterException
+	public HeroJump(Hero actor, Sprite target) throws IncompatibleParameterException
 	{	super(ActionName.JUMP,actor,target);
 	}
 

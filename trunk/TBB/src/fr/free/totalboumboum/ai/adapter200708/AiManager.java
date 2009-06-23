@@ -28,20 +28,16 @@ import java.util.Vector;
 import fr.free.totalboumboum.ai.AbstractAiManager;
 import fr.free.totalboumboum.engine.container.level.Level;
 import fr.free.totalboumboum.engine.container.tile.Tile;
-import fr.free.totalboumboum.engine.content.feature.Contact;
 import fr.free.totalboumboum.engine.content.feature.Direction;
-import fr.free.totalboumboum.engine.content.feature.Orientation;
-import fr.free.totalboumboum.engine.content.feature.TilePosition;
 import fr.free.totalboumboum.engine.content.feature.ability.AbstractAbility;
 import fr.free.totalboumboum.engine.content.feature.ability.StateAbility;
 import fr.free.totalboumboum.engine.content.feature.ability.StateAbilityName;
 import fr.free.totalboumboum.engine.content.feature.event.ControlEvent;
 import fr.free.totalboumboum.engine.content.feature.gesture.action.SpecificAction;
-import fr.free.totalboumboum.engine.content.feature.gesture.modulation.TargetModulation;
 import fr.free.totalboumboum.engine.content.sprite.Sprite;
 import fr.free.totalboumboum.engine.content.sprite.block.Block;
 import fr.free.totalboumboum.engine.content.sprite.bomb.Bomb;
-import fr.free.totalboumboum.engine.content.sprite.fire.Fire;
+import fr.free.totalboumboum.engine.content.sprite.fire.actions.FireConsume;
 import fr.free.totalboumboum.engine.loop.Loop;
 import fr.free.totalboumboum.engine.player.Player;
 
@@ -161,7 +157,7 @@ public abstract class AiManager extends AbstractAiManager<Integer>
 	    		// mur
 	    		if(temp.getBlock()!=null)
 	    		{	Block b = temp.getBlock();
-	    			SpecificAction action = new SpecificAction(AbstractAction.CONSUME,new Fire(level),b,Direction.NONE,Contact.COLLISION,TilePosition.SAME,Orientation.SAME);
+	    			SpecificAction action = new FireConsume(b);
 	    			// mur indestructible
 	    			if(sprite.isTargetPreventing(action))
 	    				zoneMatrix[y][x] = ArtificialIntelligence.AI_BLOCK_WALL_HARD;

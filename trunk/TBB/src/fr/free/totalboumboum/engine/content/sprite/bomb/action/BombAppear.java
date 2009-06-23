@@ -25,6 +25,7 @@ import fr.free.totalboumboum.engine.content.feature.gesture.action.ActionName;
 import fr.free.totalboumboum.engine.content.feature.gesture.action.IncompatibleParameterException;
 import fr.free.totalboumboum.engine.content.feature.gesture.action.SpecificAction;
 import fr.free.totalboumboum.engine.content.sprite.Sprite;
+import fr.free.totalboumboum.engine.content.sprite.bomb.Bomb;
 
 /** 
  * appearing in a tile, coming from nowhere
@@ -40,7 +41,7 @@ import fr.free.totalboumboum.engine.content.sprite.Sprite;
  */
 public class BombAppear extends SpecificAction
 {
-	public BombAppear(Sprite actor, Sprite target) throws IncompatibleParameterException
+	public BombAppear(Bomb actor, Sprite target) throws IncompatibleParameterException
 	{	super(ActionName.APPEAR,actor,target);
 	}
 

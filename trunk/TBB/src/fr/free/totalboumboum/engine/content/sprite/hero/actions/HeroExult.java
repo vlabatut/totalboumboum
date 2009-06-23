@@ -25,6 +25,7 @@ import fr.free.totalboumboum.engine.content.feature.gesture.action.ActionName;
 import fr.free.totalboumboum.engine.content.feature.gesture.action.IncompatibleParameterException;
 import fr.free.totalboumboum.engine.content.feature.gesture.action.SpecificAction;
 import fr.free.totalboumboum.engine.content.sprite.Sprite;
+import fr.free.totalboumboum.engine.content.sprite.hero.Hero;
 
 /** 
  * celebrating a victory at the end of a round. 
@@ -40,7 +41,7 @@ import fr.free.totalboumboum.engine.content.sprite.Sprite;
  */
 public class HeroExult extends SpecificAction
 {
-	public HeroExult(Sprite actor, Sprite target) throws IncompatibleParameterException
+	public HeroExult(Hero actor, Sprite target) throws IncompatibleParameterException
 	{	super(ActionName.EXULT,actor,target);
 	}
 

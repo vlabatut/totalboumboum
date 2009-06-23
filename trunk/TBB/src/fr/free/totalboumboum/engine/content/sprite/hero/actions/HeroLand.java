@@ -25,6 +25,7 @@ import fr.free.totalboumboum.engine.content.feature.gesture.action.ActionName;
 import fr.free.totalboumboum.engine.content.feature.gesture.action.IncompatibleParameterException;
 import fr.free.totalboumboum.engine.content.feature.gesture.action.SpecificAction;
 import fr.free.totalboumboum.engine.content.sprite.Sprite;
+import fr.free.totalboumboum.engine.content.sprite.hero.Hero;
 
 /** 
  * finishing an aerial move and landing on the floor.
@@ -40,7 +41,7 @@ import fr.free.totalboumboum.engine.content.sprite.Sprite;
  */
 public class HeroLand extends SpecificAction
 {
-	public HeroLand(Sprite actor, Sprite target) throws IncompatibleParameterException
+	public HeroLand(Hero actor, Sprite target) throws IncompatibleParameterException
 	{	super(ActionName.LAND,actor,target);
 	}
 	
