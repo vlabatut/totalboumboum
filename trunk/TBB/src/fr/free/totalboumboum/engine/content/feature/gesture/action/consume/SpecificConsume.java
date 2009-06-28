@@ -21,9 +21,14 @@ package fr.free.totalboumboum.engine.content.feature.gesture.action.consume;
  * 
  */
 
+import fr.free.totalboumboum.engine.content.feature.Contact;
+import fr.free.totalboumboum.engine.content.feature.Direction;
+import fr.free.totalboumboum.engine.content.feature.Orientation;
+import fr.free.totalboumboum.engine.content.feature.TilePosition;
 import fr.free.totalboumboum.engine.content.feature.gesture.action.ActionName;
 import fr.free.totalboumboum.engine.content.feature.gesture.action.SpecificAction;
 import fr.free.totalboumboum.engine.content.sprite.Sprite;
+import fr.free.totalboumboum.engine.content.sprite.fire.Fire;
 
 /** 
  * putting fire to another object, usually performed by fire (but not necessarily).
@@ -41,6 +46,13 @@ public class SpecificConsume extends SpecificAction
 {
 	public SpecificConsume(Sprite actor, Sprite target)
 	{	super(ActionName.CONSUME,actor,target);
+	}
+
+	/**
+	 * anonym action, just for test purposes
+	 */
+	public SpecificConsume(Sprite target)
+	{	super(ActionName.CONSUME,new Fire(target.getLevel()),target,Direction.NONE,Contact.COLLISION,TilePosition.SAME,Orientation.SAME);
 	}
 
 /*	

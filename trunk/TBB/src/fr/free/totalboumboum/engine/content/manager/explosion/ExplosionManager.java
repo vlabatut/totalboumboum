@@ -23,12 +23,13 @@ package fr.free.totalboumboum.engine.content.manager.explosion;
 
 import fr.free.totalboumboum.engine.container.tile.Tile;
 import fr.free.totalboumboum.engine.content.feature.Direction;
+import fr.free.totalboumboum.engine.content.feature.ability.AbstractAbility;
 import fr.free.totalboumboum.engine.content.feature.explosion.Explosion;
 import fr.free.totalboumboum.engine.content.feature.gesture.GestureName;
 import fr.free.totalboumboum.engine.content.feature.gesture.action.SpecificAction;
+import fr.free.totalboumboum.engine.content.feature.gesture.action.appear.SpecificAppear;
 import fr.free.totalboumboum.engine.content.sprite.Sprite;
 import fr.free.totalboumboum.engine.content.sprite.fire.Fire;
-import fr.free.totalboumboum.engine.content.sprite.fire.actions.FireAppear;
 
 public class ExplosionManager
 {	
@@ -115,10 +116,20 @@ public class ExplosionManager
 			else
 				owner = sprite.getOwner();
 			fire.setOwner(owner);
-			specificAction = new FireAppear(fire,tileTemp,dir);
-			blocking = !specificAction.execute();
-			length++;
-			tileTemp = tileTemp.getNeighbor(dir);
+			specificAction = new SpecificAppear(fire,tileTemp,dir);
+			AbstractAbility ability = fire.modulateAction(specificAction);
+			blocking = !ability.isActive();
+			if(blocking)
+				fire.consumeTile(tileTemp);
+			else
+			{	fire.initGesture();
+			tileTemp.addSprite(fire);
+				fire.setCurrentPosX(tileTemp.getPosX());
+				fire.setCurrentPosY(tileTemp.getPosY());
+				fire.setGesture(GestureName.BURNING,dir,dir, true);
+				length++;
+				tileTemp = tileTemp.getNeighbor(dir);
+			}
 		}
 		while(!blocking && length<=power);
 	}
