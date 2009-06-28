@@ -41,6 +41,8 @@ import fr.free.totalboumboum.engine.content.feature.gesture.action.trigger.Speci
 import fr.free.totalboumboum.engine.content.manager.delay.DelayManager;
 import fr.free.totalboumboum.engine.content.manager.event.EventManager;
 import fr.free.totalboumboum.engine.content.sprite.Sprite;
+import fr.free.totalboumboum.engine.content.sprite.hero.Hero;
+import fr.free.totalboumboum.engine.content.sprite.hero.actions.HeroPush;
 
 public class BombEventManager extends EventManager
 {	
@@ -85,8 +87,9 @@ public class BombEventManager extends EventManager
 	}
 
 	private void actionConsume(ActionEvent event)
-	{	if(gesture.equals(GestureName.OSCILLATING) || gesture.equals(GestureName.SLIDING) || gesture.equals(GestureName.STANDING)
-			|| gesture.equals(GestureName.OSCILLATING_FAILING) || gesture.equals(GestureName.SLIDING) || gesture.equals(GestureName.STANDING_FAILING))
+	{	if(gesture.equals(GestureName.OSCILLATING) || gesture.equals(GestureName.OSCILLATING_FAILING) 
+			|| gesture.equals(GestureName.SLIDING) || gesture.equals(GestureName.SLIDING) 
+			|| gesture.equals(GestureName.STANDING) || gesture.equals(GestureName.STANDING_FAILING))
 		{	StateAbility a = sprite.modulateStateAbility(StateAbilityName.BOMB_EXPLOSION_LATENCY);
 			if(a.isActive())
 			{	double duration = a.getStrength();
@@ -102,14 +105,15 @@ public class BombEventManager extends EventManager
 			else
 			{	gesture = GestureName.BURNING;
 				sprite.setGesture(gesture,spriteDirection,Direction.NONE,true);
-				sprite.putExplosion();							
+				sprite.putExplosion();
 			}
 		}
 	}
 	
 	private void actionTrigger(ActionEvent event)
-	{	if(gesture.equals(GestureName.OSCILLATING) || gesture.equals(GestureName.SLIDING) || gesture.equals(GestureName.STANDING)
-			|| gesture.equals(GestureName.OSCILLATING_FAILING) || gesture.equals(GestureName.SLIDING) || gesture.equals(GestureName.STANDING_FAILING))
+	{	if(gesture.equals(GestureName.OSCILLATING) || gesture.equals(GestureName.OSCILLATING_FAILING) 
+			|| gesture.equals(GestureName.SLIDING) || gesture.equals(GestureName.SLIDING_FAILING) 
+			|| gesture.equals(GestureName.STANDING) || gesture.equals(GestureName.STANDING_FAILING))
 		{	long r = Math.round(Math.random()*101);
 			StateAbility b = sprite.modulateStateAbility(StateAbilityName.BOMB_FAILURE_PROBABILITY);
 			if(b.isActive())
@@ -129,8 +133,9 @@ public class BombEventManager extends EventManager
 	}
 	
 	private void actionPunch(ActionEvent event)
-	{	if(gesture.equals(GestureName.OSCILLATING) || gesture.equals(GestureName.SLIDING) || gesture.equals(GestureName.STANDING)
-			|| gesture.equals(GestureName.OSCILLATING_FAILING) || gesture.equals(GestureName.SLIDING) || gesture.equals(GestureName.STANDING_FAILING))
+	{	if(gesture.equals(GestureName.OSCILLATING) || gesture.equals(GestureName.OSCILLATING_FAILING)
+			|| gesture.equals(GestureName.STANDING) || gesture.equals(GestureName.STANDING_FAILING)
+			|| gesture.equals(GestureName.SLIDING) || gesture.equals(GestureName.SLIDING_FAILING)) 
 		{	gesture = GestureName.PUNCHED;
 			spriteDirection = event.getAction().getDirection();
 			sprite.setGesture(gesture,spriteDirection,Direction.NONE,true);
@@ -239,7 +244,7 @@ public class BombEventManager extends EventManager
 		{	// check if the actor has the ability to push the bomb
 			Sprite actor = event.getSource();
 			Direction dir = event.getDirection();
-			SpecificAction action = new SpecificAction(AbstractAction.PUSH,actor,sprite,dir);
+			SpecificAction action = new HeroPush((Hero)actor,sprite);
 			ActionAbility a = actor.modulateAction(action);
 			if(a.isActive())
 			{	collidingSprites.get(dir).add(actor);

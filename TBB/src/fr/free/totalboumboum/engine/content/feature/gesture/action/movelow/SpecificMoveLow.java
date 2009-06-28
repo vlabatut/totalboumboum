@@ -22,7 +22,6 @@ package fr.free.totalboumboum.engine.content.feature.gesture.action.movelow;
  */
 
 import fr.free.totalboumboum.engine.content.feature.gesture.action.ActionName;
-import fr.free.totalboumboum.engine.content.feature.gesture.action.IncompatibleParameterException;
 import fr.free.totalboumboum.engine.content.feature.gesture.action.SpecificAction;
 import fr.free.totalboumboum.engine.content.sprite.Sprite;
 
@@ -38,9 +37,9 @@ import fr.free.totalboumboum.engine.content.sprite.Sprite;
  * 	<br>orientation:	undefined
  *  
  */
-public abstract class SpecificMoveLow extends SpecificAction
+public class SpecificMoveLow extends SpecificAction
 {
-	public SpecificMoveLow(Sprite actor, Sprite target) throws IncompatibleParameterException
+	public SpecificMoveLow(Sprite actor, Sprite target)
 	{	super(ActionName.MOVELOW,actor,target);
 	}
 

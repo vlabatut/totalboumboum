@@ -71,7 +71,7 @@ public class ExplosionManager
 	public void putExplosion()
 	{	Tile tile = sprite.getTile();
 		// center
-	//NOTE tester l'autorisation d'apparition pour le centre comme on le fait pour les autres parties de l'explosion ?		
+//NOTE tester l'autorisation d'apparition pour le centre comme on le fait pour les autres parties de l'explosion ?		
 		Fire fire;
 		if(flameRange==0)
 			fire = explosion.makeFire("outside");
