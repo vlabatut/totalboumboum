@@ -21,6 +21,8 @@ package fr.free.totalboumboum.engine.content.feature.gesture.action.appear;
  * 
  */
 
+import fr.free.totalboumboum.engine.container.tile.Tile;
+import fr.free.totalboumboum.engine.content.feature.Direction;
 import fr.free.totalboumboum.engine.content.feature.gesture.action.ActionName;
 import fr.free.totalboumboum.engine.content.feature.gesture.action.SpecificAction;
 import fr.free.totalboumboum.engine.content.sprite.Sprite;
@@ -39,8 +41,9 @@ import fr.free.totalboumboum.engine.content.sprite.Sprite;
  */
 public class SpecificAppear extends SpecificAction
 {
-	public SpecificAppear(Sprite actor, Sprite target)
-	{	super(ActionName.APPEAR,actor,target);
+	public SpecificAppear(Sprite actor, Tile tile,Direction direction)
+	{	super(ActionName.APPEAR,actor,tile);
+		setDirection(direction);
 	}
 
 /*	
