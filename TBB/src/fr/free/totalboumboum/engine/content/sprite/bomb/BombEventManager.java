@@ -36,13 +36,14 @@ import fr.free.totalboumboum.engine.content.feature.event.EngineEvent;
 import fr.free.totalboumboum.engine.content.feature.gesture.GestureName;
 import fr.free.totalboumboum.engine.content.feature.gesture.action.SpecificAction;
 import fr.free.totalboumboum.engine.content.feature.gesture.action.consume.SpecificConsume;
+import fr.free.totalboumboum.engine.content.feature.gesture.action.detonate.SpecificDetonate;
+import fr.free.totalboumboum.engine.content.feature.gesture.action.land.SpecificLand;
 import fr.free.totalboumboum.engine.content.feature.gesture.action.punch.SpecificPunch;
+import fr.free.totalboumboum.engine.content.feature.gesture.action.push.SpecificPush;
 import fr.free.totalboumboum.engine.content.feature.gesture.action.trigger.SpecificTrigger;
 import fr.free.totalboumboum.engine.content.manager.delay.DelayManager;
 import fr.free.totalboumboum.engine.content.manager.event.EventManager;
 import fr.free.totalboumboum.engine.content.sprite.Sprite;
-import fr.free.totalboumboum.engine.content.sprite.hero.Hero;
-import fr.free.totalboumboum.engine.content.sprite.hero.actions.HeroPush;
 
 public class BombEventManager extends EventManager
 {	
@@ -244,7 +245,7 @@ public class BombEventManager extends EventManager
 		{	// check if the actor has the ability to push the bomb
 			Sprite actor = event.getSource();
 			Direction dir = event.getDirection();
-			SpecificAction action = new HeroPush((Hero)actor,sprite);
+			SpecificAction action = new SpecificPush(actor,sprite);
 			ActionAbility a = actor.modulateAction(action);
 			if(a.isActive())
 			{	collidingSprites.get(dir).add(actor);
@@ -272,7 +273,7 @@ public class BombEventManager extends EventManager
 	private void engDelayOver(EngineEvent event)
 	{	// regular explosion
 		if(event.getStringParameter().equals(DelayManager.DL_EXPLOSION))
-		{	SpecificAction action = new SpecificAction(AbstractAction.DETONATE,sprite,null,Direction.NONE);
+		{	SpecificAction action = new SpecificDetonate(sprite);
 			ActionAbility ablt = sprite.modulateAction(action);
 			if(ablt.isActive())
 			{	// is it a time bomb ?
@@ -331,7 +332,7 @@ public class BombEventManager extends EventManager
 		else if(event.getStringParameter().equals(DelayManager.DL_LATENCY))
 		{	if(gesture.equals(GestureName.SLIDING) || gesture.equals(GestureName.OSCILLATING) || gesture.equals(GestureName.STANDING)
 				|| gesture.equals(GestureName.SLIDING_FAILING) || gesture.equals(GestureName.OSCILLATING_FAILING) || gesture.equals(GestureName.STANDING_FAILING))
-			{	SpecificAction action = new SpecificAction(AbstractAction.DETONATE,sprite,null,Direction.NONE);
+			{	SpecificAction action = new SpecificDetonate(sprite);
 				ActionAbility ablt = sprite.modulateAction(action);
 				if(ablt.isActive())
 				{	gesture = GestureName.BURNING;
@@ -345,7 +346,7 @@ public class BombEventManager extends EventManager
 	private void engTrajectoryOver(EngineEvent event)
 	{	// the sprite is currently bouncing
 		if(gesture.equals(GestureName.BOUNCING))
-		{	SpecificAction specificAction = new SpecificAction(AbstractAction.LAND,sprite,null,Direction.NONE);
+		{	SpecificAction specificAction = new SpecificLand(sprite);
 			ActionAbility ability = sprite.modulateAction(specificAction);
 			// the sprite is allowed to land
 			if(ability.isActive())
@@ -375,7 +376,7 @@ public class BombEventManager extends EventManager
 		}
 		// the sprite has been punched
 		else if(gesture.equals(GestureName.PUNCHED))
-		{	SpecificAction action = new SpecificAction(AbstractAction.LAND,sprite,null,Direction.NONE);
+		{	SpecificAction action = new SpecificLand(sprite);
 			ActionAbility a = sprite.modulateAction(action);
 			// the sprite is allowed to land
 			if(a.isActive())

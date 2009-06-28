@@ -39,8 +39,8 @@ import fr.free.totalboumboum.engine.content.sprite.Sprite;
  */
 public class SpecificDetonate extends SpecificAction
 {
-	public SpecificDetonate(Sprite actor, Sprite target)
-	{	super(ActionName.DETONATE,actor,target);
+	public SpecificDetonate(Sprite actor)
+	{	super(ActionName.DETONATE,actor);
 	}
 /*	
 	/////////////////////////////////////////////////////////////////

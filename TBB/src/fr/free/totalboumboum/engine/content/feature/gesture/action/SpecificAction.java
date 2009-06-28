@@ -31,27 +31,18 @@ import fr.free.totalboumboum.engine.content.sprite.Sprite;
 
 public abstract class SpecificAction
 {
-/*	
-	private SpecificAction(ActionName name)
-	{	this.name = name;
-		actor = null;
-		target = null;
-		direction = null;
-		contact = null;
-		tilePosition = null;
-		orientation = null;
-	}
-*/
 	protected SpecificAction(ActionName name, Sprite actor)
-	{	this(name,actor,(Sprite)null);		
+	{	this.name = name;
+		this.actor = actor;
+		this.target = null;
+		this.direction = actor.getCurrentFacingDirection();
+		this.contact = Contact.getContact(actor,target);
+		this.tilePosition = TilePosition.getTilePosition(actor,target);
+		this.orientation = Orientation.getOrientation(actor,target);
+		this.tile = actor.getTile();
+		initGeneralAction();
 	}
 
-	/**
-	 * automatic initialization
-	 * @param name
-	 * @param actor
-	 * @param target
-	 */
 	protected SpecificAction(ActionName name, Sprite actor, Sprite target)
 	{	this.name = name;
 		this.actor = actor;
@@ -76,16 +67,6 @@ public abstract class SpecificAction
 		initGeneralAction();
 	}
 
-	/**
-	 * manual initialization
-	 * @param name
-	 * @param actor
-	 * @param target
-	 * @param direction
-	 * @param contact
-	 * @param tilePosition
-	 * @param orientation
-	 */
 	protected SpecificAction(ActionName name, Sprite actor, Sprite target, Direction direction, Contact contact, TilePosition tilePosition, Orientation orientation)
 	{	this.name = name;
 		this.actor = actor;

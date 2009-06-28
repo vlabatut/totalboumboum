@@ -26,16 +26,16 @@ import java.util.LinkedList;
 
 import fr.free.totalboumboum.engine.container.bombset.Bombset;
 import fr.free.totalboumboum.engine.container.tile.Tile;
+import fr.free.totalboumboum.engine.content.feature.ability.ActionAbility;
 import fr.free.totalboumboum.engine.content.feature.ability.StateAbility;
 import fr.free.totalboumboum.engine.content.feature.ability.StateAbilityName;
 import fr.free.totalboumboum.engine.content.feature.event.ActionEvent;
 import fr.free.totalboumboum.engine.content.feature.gesture.action.SpecificAction;
+import fr.free.totalboumboum.engine.content.feature.gesture.action.appear.SpecificAppear;
+import fr.free.totalboumboum.engine.content.feature.gesture.action.detonate.SpecificDetonate;
+import fr.free.totalboumboum.engine.content.feature.gesture.action.trigger.SpecificTrigger;
 import fr.free.totalboumboum.engine.content.sprite.Sprite;
 import fr.free.totalboumboum.engine.content.sprite.bomb.Bomb;
-import fr.free.totalboumboum.engine.content.sprite.bomb.action.BombAppear;
-import fr.free.totalboumboum.engine.content.sprite.bomb.action.BombDetonate;
-import fr.free.totalboumboum.engine.content.sprite.hero.Hero;
-import fr.free.totalboumboum.engine.content.sprite.hero.actions.HeroTrigger;
 import fr.free.totalboumboum.engine.loop.Loop;
 import fr.free.totalboumboum.game.statistics.StatisticAction;
 import fr.free.totalboumboum.game.statistics.StatisticEvent;
@@ -96,10 +96,14 @@ public class BombsetManager
 		{	if(bomb!=null)
 			{	bomb.setFlameRange(flameRange);
 				Tile tile = sprite.getTile();
-				SpecificAction specificAction = new BombAppear(bomb,tile);
-				boolean result = specificAction.execute();
-				if(result)
-				{	droppedBombs.offer(bomb);
+				SpecificAction specificAction = new SpecificAppear(bomb,tile);
+				ActionAbility ablt = bomb.modulateAction(specificAction);
+				if(ablt.isActive())
+				{	bomb.initGesture();
+					tile.addSprite(bomb);
+					bomb.setCurrentPosX(tile.getPosX());
+					bomb.setCurrentPosY(tile.getPosY());
+					droppedBombs.offer(bomb);
 					// stats
 					StatisticAction statAction = StatisticAction.DROP_BOMB;
 					long statTime = sprite.getLoopTime();
@@ -129,10 +133,10 @@ public class BombsetManager
 		Iterator<Bomb> b = droppedBombs.iterator();
 		while(!found && b.hasNext())
 		{	Bomb bomb = b.next();
-			SpecificAction action = new BombDetonate(bomb);
+			SpecificAction action = new SpecificDetonate(bomb);
 			if(bomb.modulateStateAbility(StateAbilityName.BOMB_TRIGGER_CONTROL).isActive() && bomb.modulateAction(action).isActive())
 			{	found = true;
-				SpecificAction specificAction = new HeroTrigger((Hero)sprite,bomb);
+				SpecificAction specificAction = new SpecificTrigger(sprite,bomb);
 				ActionEvent event = new ActionEvent(specificAction);
 				bomb.processEvent(event);				
 			}

@@ -25,7 +25,8 @@ import fr.free.totalboumboum.engine.container.level.Level;
 import fr.free.totalboumboum.engine.container.tile.Tile;
 import fr.free.totalboumboum.engine.content.feature.Direction;
 import fr.free.totalboumboum.engine.content.feature.gesture.action.SpecificAction;
-import fr.free.totalboumboum.engine.content.feature.gesture.modulation.ThirdModulation;
+import fr.free.totalboumboum.engine.content.feature.gesture.action.movehigh.SpecificMoveHigh;
+import fr.free.totalboumboum.engine.content.feature.gesture.action.movelow.SpecificMoveLow;
 import fr.free.totalboumboum.engine.content.sprite.Sprite;
 import fr.free.totalboumboum.engine.loop.Loop;
 import fr.free.totalboumboum.tools.CalculusTools;
@@ -273,10 +274,11 @@ public class PotentialObstacle
 			// sprite and potential obstacle not in the same tile : depends on the ability and/or direction
 			else
 			{	// non-blocking sprite : it's not an obstacle
-				String act = AbstractAction.MOVELOW;
-				if(!source.isOnGround())
-					act = AbstractAction.MOVEHIGH;
-				SpecificAction specificAction = new SpecificAction(act,source,null,usedDirection);
+				SpecificAction specificAction;
+				if(source.isOnGround())
+					specificAction = new SpecificMoveLow(source,usedDirection);
+				else
+					specificAction = new SpecificMoveHigh(source,usedDirection);
 				/*
 				 *  TODO ça serait plus logique d'utiliser le résultat de la modulation (ça tiendrait
 				 *  compte d'interactions entre les différents modulateurs). mais ça serait aussi plus long,
@@ -298,10 +300,11 @@ public class PotentialObstacle
 		}
 		// no intersection : depends only on the potential obstacle properties
 		else
-		{	String act = AbstractAction.MOVELOW;
-			if(!source.isOnGround())
-				act = AbstractAction.MOVEHIGH;
-			SpecificAction specificAction = new SpecificAction(act,source,null,usedDirection);
+		{	SpecificAction specificAction;
+			if(source.isOnGround())
+				specificAction = new SpecificMoveLow(source,usedDirection);
+			else
+				specificAction = new SpecificMoveHigh(source,usedDirection);
 			result = sprite.isThirdPreventing(specificAction);
 		}
 		return result;

@@ -21,6 +21,7 @@ package fr.free.totalboumboum.engine.content.feature.gesture.action.movehigh;
  * 
  */
 
+import fr.free.totalboumboum.engine.content.feature.Direction;
 import fr.free.totalboumboum.engine.content.feature.gesture.action.ActionName;
 import fr.free.totalboumboum.engine.content.feature.gesture.action.SpecificAction;
 import fr.free.totalboumboum.engine.content.sprite.Sprite;
@@ -38,9 +39,11 @@ import fr.free.totalboumboum.engine.content.sprite.Sprite;
  */
 public class SpecificMoveHigh extends SpecificAction
 {
-	public SpecificMoveHigh(Sprite actor, Sprite target)
-	{	super(ActionName.MOVEHIGH,actor,target);
+	public SpecificMoveHigh(Sprite actor, Direction direction)
+	{	super(ActionName.MOVEHIGH,actor);
+		setDirection(direction);
 	}
+	
 /*	
 	/////////////////////////////////////////////////////////////////
 	// GENERAL ACTION	/////////////////////////////////////////////

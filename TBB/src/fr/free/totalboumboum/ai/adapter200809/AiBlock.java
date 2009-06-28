@@ -22,8 +22,8 @@ package fr.free.totalboumboum.ai.adapter200809;
  */
 
 import fr.free.totalboumboum.engine.content.feature.gesture.action.SpecificAction;
+import fr.free.totalboumboum.engine.content.feature.gesture.action.consume.SpecificConsume;
 import fr.free.totalboumboum.engine.content.sprite.block.Block;
-import fr.free.totalboumboum.engine.content.sprite.fire.actions.FireConsume;
 
 /**
  * Représente un bloc du jeu, c'est à dire généralement un mur
@@ -79,7 +79,7 @@ public class AiBlock extends AiSprite<Block>
 	 */
 	private void updateDestructible()
 	{	Block sprite = getSprite();
-		SpecificAction action = new FireConsume(sprite);
+		SpecificAction action = new SpecificConsume(sprite);
 		destructible = sprite.isTargetPreventing(action);
 	}	
 
