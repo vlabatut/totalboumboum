@@ -41,8 +41,12 @@ import fr.free.totalboumboum.engine.content.sprite.Sprite;
  */
 public class SpecificAppear extends SpecificAction
 {
-	public SpecificAppear(Sprite actor, Tile tile,Direction direction)
+	public SpecificAppear(Sprite actor, Tile tile)
 	{	super(ActionName.APPEAR,actor,tile);
+	}
+
+	public SpecificAppear(Sprite actor, Tile tile, Direction direction)
+	{	this(actor,tile);
 		setDirection(direction);
 	}
 

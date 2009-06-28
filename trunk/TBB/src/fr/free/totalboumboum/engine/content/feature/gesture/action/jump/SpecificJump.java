@@ -39,8 +39,8 @@ import fr.free.totalboumboum.engine.content.sprite.Sprite;
  */
 public class SpecificJump extends SpecificAction
 {
-	public SpecificJump(Sprite actor, Sprite target)
-	{	super(ActionName.JUMP,actor,target);
+	public SpecificJump(Sprite actor)
+	{	super(ActionName.JUMP,actor);
 	}
 
 /*	

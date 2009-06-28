@@ -25,10 +25,7 @@ import java.util.ArrayList;
 import java.util.Iterator;
 
 import fr.free.totalboumboum.engine.container.tile.Tile;
-import fr.free.totalboumboum.engine.content.feature.Contact;
 import fr.free.totalboumboum.engine.content.feature.Direction;
-import fr.free.totalboumboum.engine.content.feature.Orientation;
-import fr.free.totalboumboum.engine.content.feature.TilePosition;
 import fr.free.totalboumboum.engine.content.feature.ability.ActionAbility;
 import fr.free.totalboumboum.engine.content.feature.ability.StateAbility;
 import fr.free.totalboumboum.engine.content.feature.ability.StateAbilityName;
@@ -38,13 +35,18 @@ import fr.free.totalboumboum.engine.content.feature.event.EngineEvent;
 import fr.free.totalboumboum.engine.content.feature.gesture.GestureName;
 import fr.free.totalboumboum.engine.content.feature.gesture.action.SpecificAction;
 import fr.free.totalboumboum.engine.content.feature.gesture.action.consume.SpecificConsume;
+import fr.free.totalboumboum.engine.content.feature.gesture.action.cry.SpecificCry;
 import fr.free.totalboumboum.engine.content.feature.gesture.action.drop.SpecificDrop;
+import fr.free.totalboumboum.engine.content.feature.gesture.action.exult.SpecificExult;
+import fr.free.totalboumboum.engine.content.feature.gesture.action.gather.SpecificGather;
+import fr.free.totalboumboum.engine.content.feature.gesture.action.jump.SpecificJump;
+import fr.free.totalboumboum.engine.content.feature.gesture.action.land.SpecificLand;
+import fr.free.totalboumboum.engine.content.feature.gesture.action.punch.SpecificPunch;
 import fr.free.totalboumboum.engine.content.manager.delay.DelayManager;
 import fr.free.totalboumboum.engine.content.manager.event.EventManager;
 import fr.free.totalboumboum.engine.content.sprite.Sprite;
 import fr.free.totalboumboum.engine.content.sprite.bomb.Bomb;
 import fr.free.totalboumboum.engine.content.sprite.fire.Fire;
-import fr.free.totalboumboum.engine.content.sprite.hero.actions.HeroDrop;
 import fr.free.totalboumboum.engine.content.sprite.item.Item;
 import fr.free.totalboumboum.engine.player.Player;
 import fr.free.totalboumboum.game.statistics.StatisticAction;
@@ -195,7 +197,7 @@ public class HeroEventManager extends EventManager
 	private void controlDropBomb(ControlEvent event)
 	{	if(event.getMode())
 		{	Bomb bomb = sprite.makeBomb();
-			SpecificDrop action = new HeroDrop((Hero)sprite,bomb);
+			SpecificDrop action = new SpecificDrop(sprite,bomb);
 			ActionAbility ability = sprite.modulateAction(action);
 			if(ability.isActive())
 			{	sprite.dropBomb(bomb);
@@ -214,7 +216,7 @@ public class HeroEventManager extends EventManager
 	{	if((gesture.equals(GestureName.PUSHING) || gesture.equals(GestureName.STANDING)
 			 || gesture.equals(GestureName.WAITING) || gesture.equals(GestureName.WALKING))
 			 && event.getMode())
-		{	SpecificAction action = new SpecificAction(AbstractAction.JUMP,sprite,null,Direction.NONE);
+		{	SpecificAction action = new SpecificJump(sprite);
 			ActionAbility ability = sprite.modulateAction(action);
 			if(ability.isActive())
 			{	gesture = GestureName.JUMPING;
@@ -239,7 +241,7 @@ public class HeroEventManager extends EventManager
 				Iterator<Bomb> i = bombs.iterator();
 				while(!found && i.hasNext())
 				{	Bomb bomb = i.next();
-					SpecificAction action = new SpecificAction(AbstractAction.PUNCH,sprite,bomb,spriteDirection);
+					SpecificAction action = new SpecificPunch(sprite,bomb);
 					ActionAbility ability = sprite.modulateAction(action);
 					if(ability.isActive())
 					{	found = true;
@@ -260,7 +262,7 @@ public class HeroEventManager extends EventManager
 				Iterator<Bomb> i = bombs.iterator();
 				while(!found && i.hasNext())
 				{	Bomb bomb = i.next();
-					SpecificAction action = new SpecificAction(AbstractAction.PUNCH,sprite,bomb,spriteDirection);
+					SpecificAction action = new SpecificPunch(sprite,bomb);
 					ActionAbility ability = sprite.modulateAction(action);
 					if(ability.isActive())
 					{	found = true;
@@ -397,7 +399,7 @@ public class HeroEventManager extends EventManager
 		{	if(gesture.equals(GestureName.PUSHING) || gesture.equals(GestureName.STANDING) || gesture.equals(GestureName.WALKING))
 			{	Item item = sprite.getTile().getItem();
 				if(item!=null)
-				{	SpecificAction action = new SpecificAction(AbstractAction.GATHER,sprite,item,event.getDirection());
+				{	SpecificAction action = new SpecificGather(sprite,item);
 					ActionAbility ability = sprite.modulateAction(action);
 					if(ability.isActive())
 					{	sprite.addItem(item);
@@ -412,7 +414,7 @@ public class HeroEventManager extends EventManager
 	{	//if(gesture.equals(GestureConstants.LANDING))
 		{	Item item = sprite.getTile().getItem();
 			if(item!=null)
-			{	SpecificAction action = new SpecificAction(AbstractAction.GATHER,sprite,item,event.getDirection());
+			{	SpecificAction action = new SpecificGather(sprite,item);
 				ActionAbility ability = sprite.modulateAction(action);
 				if(ability.isActive())
 				{	sprite.addItem(item);
@@ -424,7 +426,7 @@ public class HeroEventManager extends EventManager
 	private void engTrajectoryOver(EngineEvent event)
 	{	// the sprite is currently bouncing/jumping
 		if(gesture.equals(GestureName.BOUNCING))
-		{	SpecificAction specificAction = new SpecificAction(AbstractAction.LAND,sprite,null,Direction.NONE);
+		{	SpecificAction specificAction = new SpecificLand(sprite);
 			ActionAbility ability = sprite.modulateAction(specificAction);
 			// the sprite is allowed to land
 			if(ability.isActive())
@@ -461,7 +463,7 @@ public class HeroEventManager extends EventManager
 	private void engVictory(EngineEvent event)
 	{	
 		
-		SpecificAction specificAction = new SpecificAction(AbstractAction.EXULT,sprite,null,Direction.NONE);
+		SpecificAction specificAction = new SpecificExult(sprite);
 		ActionAbility ability = sprite.modulateAction(specificAction);
 		if(ability.isActive())
 		{	StateAbility ablt = sprite.modulateStateAbility(StateAbilityName.HERO_CELEBRATION_DURATION);
@@ -485,7 +487,7 @@ public class HeroEventManager extends EventManager
 	
 	private void engDefeat(EngineEvent event)
 	{	
-		SpecificAction specificAction = new SpecificAction(AbstractAction.CRY,sprite,null,Direction.NONE);
+		SpecificAction specificAction = new SpecificCry(sprite);
 		ActionAbility ability = sprite.modulateAction(specificAction);
 		if(ability.isActive())
 		{	StateAbility ablt = sprite.modulateStateAbility(StateAbilityName.HERO_CELEBRATION_DURATION);

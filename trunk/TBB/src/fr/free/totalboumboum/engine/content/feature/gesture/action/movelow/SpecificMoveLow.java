@@ -21,6 +21,7 @@ package fr.free.totalboumboum.engine.content.feature.gesture.action.movelow;
  * 
  */
 
+import fr.free.totalboumboum.engine.content.feature.Direction;
 import fr.free.totalboumboum.engine.content.feature.gesture.action.ActionName;
 import fr.free.totalboumboum.engine.content.feature.gesture.action.SpecificAction;
 import fr.free.totalboumboum.engine.content.sprite.Sprite;
@@ -39,8 +40,9 @@ import fr.free.totalboumboum.engine.content.sprite.Sprite;
  */
 public class SpecificMoveLow extends SpecificAction
 {
-	public SpecificMoveLow(Sprite actor, Sprite target)
-	{	super(ActionName.MOVELOW,actor,target);
+	public SpecificMoveLow(Sprite actor, Direction direction)
+	{	super(ActionName.MOVELOW,actor);
+		setDirection(direction);
 	}
 
 /*	

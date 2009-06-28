@@ -39,8 +39,8 @@ import fr.free.totalboumboum.engine.content.sprite.Sprite;
  */
 public class SpecificExult extends SpecificAction
 {
-	public SpecificExult(Sprite actor, Sprite target)
-	{	super(ActionName.EXULT,actor,target);
+	public SpecificExult(Sprite actor)
+	{	super(ActionName.EXULT,actor);
 	}
 
 /*	

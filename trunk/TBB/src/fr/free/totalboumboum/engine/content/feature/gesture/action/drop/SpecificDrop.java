@@ -23,8 +23,7 @@ package fr.free.totalboumboum.engine.content.feature.gesture.action.drop;
 
 import fr.free.totalboumboum.engine.content.feature.gesture.action.ActionName;
 import fr.free.totalboumboum.engine.content.feature.gesture.action.SpecificAction;
-import fr.free.totalboumboum.engine.content.sprite.bomb.Bomb;
-import fr.free.totalboumboum.engine.content.sprite.hero.Hero;
+import fr.free.totalboumboum.engine.content.sprite.Sprite;
 
 /** 
  * putting an object on the ground.
@@ -40,7 +39,7 @@ import fr.free.totalboumboum.engine.content.sprite.hero.Hero;
  */
 public class SpecificDrop extends SpecificAction
 {
-	public SpecificDrop(Hero actor, Bomb target)
+	public SpecificDrop(Sprite actor, Sprite target)
 	{	super(ActionName.DROP,actor,target);
 	}
 /*	

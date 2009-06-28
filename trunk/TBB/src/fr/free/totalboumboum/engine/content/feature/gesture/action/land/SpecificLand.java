@@ -37,10 +37,10 @@ import fr.free.totalboumboum.engine.content.sprite.Sprite;
  * 	<br>orientation:	undefined
  *  
  */
-public abstract class SpecificLand extends SpecificAction
+public class SpecificLand extends SpecificAction
 {
-	public SpecificLand(Sprite actor, Sprite target)
-	{	super(ActionName.LAND,actor,target);
+	public SpecificLand(Sprite actor)
+	{	super(ActionName.LAND,actor);
 	}
 	
 /*	

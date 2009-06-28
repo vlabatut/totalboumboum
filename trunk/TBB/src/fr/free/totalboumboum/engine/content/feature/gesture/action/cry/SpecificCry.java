@@ -39,8 +39,8 @@ import fr.free.totalboumboum.engine.content.sprite.Sprite;
  */
 public class SpecificCry extends SpecificAction
 {
-	public SpecificCry(Sprite actor, Sprite target)
-	{	super(ActionName.CRY,actor,target);
+	public SpecificCry(Sprite actor)
+	{	super(ActionName.CRY,actor);
 	}
 /*	
 	/////////////////////////////////////////////////////////////////
