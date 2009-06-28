@@ -22,7 +22,6 @@ package fr.free.totalboumboum.engine.content.feature.gesture.action.drop;
  */
 
 import fr.free.totalboumboum.engine.content.feature.gesture.action.ActionName;
-import fr.free.totalboumboum.engine.content.feature.gesture.action.IncompatibleParameterException;
 import fr.free.totalboumboum.engine.content.feature.gesture.action.SpecificAction;
 import fr.free.totalboumboum.engine.content.sprite.bomb.Bomb;
 import fr.free.totalboumboum.engine.content.sprite.hero.Hero;
@@ -39,9 +38,9 @@ import fr.free.totalboumboum.engine.content.sprite.hero.Hero;
  * 	<br>orientation:	undefined
  *  
  */
-public abstract class SpecificDrop extends SpecificAction
+public class SpecificDrop extends SpecificAction
 {
-	public SpecificDrop(Hero actor, Bomb target) throws IncompatibleParameterException
+	public SpecificDrop(Hero actor, Bomb target)
 	{	super(ActionName.DROP,actor,target);
 	}
 /*	

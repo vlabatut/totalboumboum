@@ -22,7 +22,6 @@ package fr.free.totalboumboum.engine.content.feature.gesture.action.movehigh;
  */
 
 import fr.free.totalboumboum.engine.content.feature.gesture.action.ActionName;
-import fr.free.totalboumboum.engine.content.feature.gesture.action.IncompatibleParameterException;
 import fr.free.totalboumboum.engine.content.feature.gesture.action.SpecificAction;
 import fr.free.totalboumboum.engine.content.sprite.Sprite;
 
@@ -37,9 +36,9 @@ import fr.free.totalboumboum.engine.content.sprite.Sprite;
  * 	<br>orientation:	undefined
  *  
  */
-public abstract class SpecificMoveHigh extends SpecificAction
+public class SpecificMoveHigh extends SpecificAction
 {
-	public SpecificMoveHigh(Sprite actor, Sprite target) throws IncompatibleParameterException
+	public SpecificMoveHigh(Sprite actor, Sprite target)
 	{	super(ActionName.MOVEHIGH,actor,target);
 	}
 /*	

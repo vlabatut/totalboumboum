@@ -41,7 +41,7 @@ import fr.free.totalboumboum.engine.content.sprite.hero.Hero;
  */
 public class HeroPush extends SpecificAction
 {
-	public HeroPush(Hero actor, Sprite target) throws IncompatibleParameterException
+	public HeroPush(Hero actor, Sprite target)
 	{	super(ActionName.PUSH,actor,target);
 	}
 	

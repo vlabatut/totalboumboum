@@ -22,7 +22,6 @@ package fr.free.totalboumboum.engine.content.feature.gesture.action.push;
  */
 
 import fr.free.totalboumboum.engine.content.feature.gesture.action.ActionName;
-import fr.free.totalboumboum.engine.content.feature.gesture.action.IncompatibleParameterException;
 import fr.free.totalboumboum.engine.content.feature.gesture.action.SpecificAction;
 import fr.free.totalboumboum.engine.content.sprite.Sprite;
 
@@ -38,9 +37,9 @@ import fr.free.totalboumboum.engine.content.sprite.Sprite;
  * 	<br>orientation:	same
  *  
  */
-public abstract class SpecificPush extends SpecificAction
+public class SpecificPush extends SpecificAction
 {
-	public SpecificPush(Sprite actor, Sprite target) throws IncompatibleParameterException
+	public SpecificPush(Sprite actor, Sprite target)
 	{	super(ActionName.PUSH,actor,target);
 	}
 	

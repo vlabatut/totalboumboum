@@ -934,6 +934,11 @@ public class Launcher
 	 * 
 	 * ça ne me plait pas beaucoup ces actions bidons pour tester les abilities de certains sprites. faut réfléchir à un truc plus propre
 	 * 
+	 * le fait d'implémenter l'exécution d'une action dans la SpecificAction correspondante pose des problèmes car la réalisation
+	 * de l'action dépend généralement d'un contexte situé dans l'event manager ou un autre manager.
+	 * il faudrait donc plutot utiliser des méthodes localisées dans ces managers.
+	 * ça implique que les SpecificAction ne sont pas à spécialiser pour chaque role 
+	 * 
 	 * tester le système qui complète les animations automatiquement quand elles sont manquantes dans le fichier XML.
 	 * 
 	 * le XML des animes doit avoir soit :

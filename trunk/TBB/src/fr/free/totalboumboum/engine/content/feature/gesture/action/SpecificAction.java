@@ -351,9 +351,6 @@ public abstract class SpecificAction
 	/////////////////////////////////////////////////////////////////
 	protected ActionAbility actionAbility = null;
 	
-	/** tries to execute the specific action */
-	public abstract boolean execute();
-	
 	private void initActionAbility()
 	{	if(actionAbility == null)	
 			actionAbility = actor.modulateAction(this);

@@ -22,7 +22,6 @@ package fr.free.totalboumboum.engine.content.feature.gesture.action.cry;
  */
 
 import fr.free.totalboumboum.engine.content.feature.gesture.action.ActionName;
-import fr.free.totalboumboum.engine.content.feature.gesture.action.IncompatibleParameterException;
 import fr.free.totalboumboum.engine.content.feature.gesture.action.SpecificAction;
 import fr.free.totalboumboum.engine.content.sprite.Sprite;
 
@@ -38,9 +37,9 @@ import fr.free.totalboumboum.engine.content.sprite.Sprite;
  * 	<br>orientation:	undefined
  *  
  */
-public abstract class SpecificCry extends SpecificAction
+public class SpecificCry extends SpecificAction
 {
-	public SpecificCry(Sprite actor, Sprite target) throws IncompatibleParameterException
+	public SpecificCry(Sprite actor, Sprite target)
 	{	super(ActionName.CRY,actor,target);
 	}
 /*	
