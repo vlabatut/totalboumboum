@@ -932,7 +932,7 @@ public class Launcher
 	 * il faut aussi typer les noms d'action et de gesture, car tous les sprites n'ont pas accès à tous.
 	 * difficile vu qu'on ne peut pas sousclasser les types enum
 	 * 
-	 * ça ne me plait pas beaucoup ces actions bidons pour testerles abilities de certains sprites. faut réfléchir à un truc plus propre
+	 * ça ne me plait pas beaucoup ces actions bidons pour tester les abilities de certains sprites. faut réfléchir à un truc plus propre
 	 * 
 	 * tester le système qui complète les animations automatiquement quand elles sont manquantes dans le fichier XML.
 	 * 

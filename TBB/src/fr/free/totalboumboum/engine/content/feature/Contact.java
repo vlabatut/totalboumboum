@@ -6,6 +6,7 @@ import java.util.Locale;
 import org.jdom.Attribute;
 import org.jdom.Element;
 
+import fr.free.totalboumboum.engine.container.tile.Tile;
 import fr.free.totalboumboum.engine.content.sprite.Sprite;
 import fr.free.totalboumboum.tools.XmlTools;
 
@@ -57,6 +58,12 @@ public enum Contact
 			result = Contact.INTERSECTION;
 		else
 			result = Contact.NONE;
+		return result;
+	}
+	
+	public static Contact getContact(Sprite actor, Tile tile)
+	{	Sprite target = tile.getFloor();
+		Contact result = getContact(actor,target);
 		return result;
 	}	
 

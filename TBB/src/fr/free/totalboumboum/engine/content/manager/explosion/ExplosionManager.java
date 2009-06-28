@@ -23,36 +23,49 @@ package fr.free.totalboumboum.engine.content.manager.explosion;
 
 import fr.free.totalboumboum.engine.container.tile.Tile;
 import fr.free.totalboumboum.engine.content.feature.Direction;
-import fr.free.totalboumboum.engine.content.feature.ability.AbstractAbility;
 import fr.free.totalboumboum.engine.content.feature.explosion.Explosion;
 import fr.free.totalboumboum.engine.content.feature.gesture.GestureName;
 import fr.free.totalboumboum.engine.content.feature.gesture.action.SpecificAction;
 import fr.free.totalboumboum.engine.content.sprite.Sprite;
 import fr.free.totalboumboum.engine.content.sprite.fire.Fire;
+import fr.free.totalboumboum.engine.content.sprite.fire.actions.FireAppear;
 
 public class ExplosionManager
-{	private Explosion explosion;
-	private Sprite sprite;
-	protected int flameRange;
-	
+{	
 	public ExplosionManager(Sprite sprite)
 	{	this.sprite = sprite;
 		explosion = null;
 	}
 	
+	/////////////////////////////////////////////////////////////////
+	// SPRITE			/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	private Sprite sprite;
+	
+	public Sprite getSprite()
+	{	return sprite;
+	}
+	
+	/////////////////////////////////////////////////////////////////
+	// FLAME RANGE		/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	protected int flameRange;
+	
 	public int getFlameRange()
 	{	return flameRange;
 	}
+	
 	public void setFlameRange(int flameRange)
 	{	this.flameRange = flameRange;
 	}
 	
+	/////////////////////////////////////////////////////////////////
+	// EXPLOSION		/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	private Explosion explosion;
+	
 	public void setExplosion(Explosion explosion)
 	{	this.explosion = explosion;	
-	}
-	
-	public Sprite getSprite()
-	{	return sprite;
 	}
 	
 	public void putExplosion()
@@ -89,12 +102,11 @@ public class ExplosionManager
 		int length = 1;
 		boolean blocking;		
 		Tile tileTemp = tile.getNeighbor(dir);
-		AbstractAbility ability;
 		SpecificAction specificAction;
 		do
 		{	Fire fire;
 			if(length==power)
-				fire = explosion.makeFire("outside");
+				fire = explosion.makeFire("outside"); //TODO remplacer ces chaines de caractères par des valeurs énumérées
 			else
 				fire = explosion.makeFire("inside");
 			Sprite owner;
@@ -103,24 +115,17 @@ public class ExplosionManager
 			else
 				owner = sprite.getOwner();
 			fire.setOwner(owner);
-			specificAction = new SpecificAction(AbstractAction.APPEAR,fire,tileTemp.getFloor(),Direction.NONE);
-			ability = fire.modulateAction(specificAction);
-			blocking = !ability.isActive();
-			if(blocking)
-				fire.consumeTile(tileTemp);
-			else
-			{	fire.initGesture();
-				tileTemp.addSprite(fire);
-				fire.setCurrentPosX(tileTemp.getPosX());
-				fire.setCurrentPosY(tileTemp.getPosY());
-				fire.setGesture(GestureName.BURNING, dir, dir, true);
-				length++;
-				tileTemp = tileTemp.getNeighbor(dir);
-			}
+			specificAction = new FireAppear(fire,tileTemp,dir);
+			blocking = !specificAction.execute();
+			length++;
+			tileTemp = tileTemp.getNeighbor(dir);
 		}
 		while(!blocking && length<=power);
 	}
 	
+	/////////////////////////////////////////////////////////////////
+	// FINISHED			/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
 	private boolean finished = false;
 	
 	public void finish()

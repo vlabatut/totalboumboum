@@ -21,10 +21,10 @@ package fr.free.totalboumboum.engine.content.sprite.bomb.action;
  * 
  */
 
+import fr.free.totalboumboum.engine.container.tile.Tile;
+import fr.free.totalboumboum.engine.content.feature.ability.ActionAbility;
 import fr.free.totalboumboum.engine.content.feature.gesture.action.ActionName;
-import fr.free.totalboumboum.engine.content.feature.gesture.action.IncompatibleParameterException;
 import fr.free.totalboumboum.engine.content.feature.gesture.action.SpecificAction;
-import fr.free.totalboumboum.engine.content.sprite.Sprite;
 import fr.free.totalboumboum.engine.content.sprite.bomb.Bomb;
 
 /** 
@@ -41,8 +41,27 @@ import fr.free.totalboumboum.engine.content.sprite.bomb.Bomb;
  */
 public class BombAppear extends SpecificAction
 {
-	public BombAppear(Bomb actor, Sprite target) throws IncompatibleParameterException
-	{	super(ActionName.APPEAR,actor,target);
+	public BombAppear(Bomb actor, Tile tile)
+	{	super(ActionName.APPEAR,actor,tile);
+	}
+
+	/////////////////////////////////////////////////////////////////
+	// EXECUTION		/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	@Override
+	public boolean execute()
+	{	boolean result = false;
+		ActionAbility ablt = getActor().modulateAction(this);
+		if(ablt.isActive())
+		{	result = true;
+			Bomb bomb = (Bomb)getActor();
+			//
+			bomb.initGesture();
+			getTile().addSprite(bomb);
+			bomb.setCurrentPosX(getTile().getPosX());
+			bomb.setCurrentPosY(getTile().getPosY());
+		}
+		return result;
 	}
 
 /*	

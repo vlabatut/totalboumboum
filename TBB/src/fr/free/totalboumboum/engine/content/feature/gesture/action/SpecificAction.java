@@ -21,6 +21,7 @@ package fr.free.totalboumboum.engine.content.feature.gesture.action;
  * 
  */
 
+import fr.free.totalboumboum.engine.container.tile.Tile;
 import fr.free.totalboumboum.engine.content.feature.Contact;
 import fr.free.totalboumboum.engine.content.feature.Direction;
 import fr.free.totalboumboum.engine.content.feature.Orientation;
@@ -41,11 +42,8 @@ public abstract class SpecificAction
 		orientation = null;
 	}
 */
-	/**
-	 * NOTE light action, probably just used for a doability test
-	 */
 	protected SpecificAction(ActionName name, Sprite actor)
-	{	this(name,actor,null);		
+	{	this(name,actor,(Sprite)null);		
 	}
 
 	/**
@@ -62,9 +60,22 @@ public abstract class SpecificAction
 		this.contact = Contact.getContact(actor,target);
 		this.tilePosition = TilePosition.getTilePosition(actor,target);
 		this.orientation = Orientation.getOrientation(actor,target);
+		this.tile = null;
 		initGeneralAction();
 	}
-	
+
+	protected SpecificAction(ActionName name, Sprite actor, Tile tile)
+	{	this.name = name;
+		this.actor = actor;
+		this.target = null;
+		this.direction = actor.getCurrentFacingDirection();
+		this.contact = Contact.getContact(actor,tile);
+		this.tilePosition = TilePosition.getTilePosition(actor,tile);
+		this.orientation = Orientation.getOrientation(actor,tile);
+		this.tile = tile;
+		initGeneralAction();
+	}
+
 	/**
 	 * manual initialization
 	 * @param name
@@ -104,6 +115,10 @@ public abstract class SpecificAction
 
 	public Direction getDirection()
 	{	return direction;
+	}
+	
+	protected void setDirection(Direction direction)
+	{	this.direction = direction;		
 	}
 	
 	/////////////////////////////////////////////////////////////////
@@ -154,6 +169,16 @@ public abstract class SpecificAction
 
 	public Sprite getTarget()
 	{	return target;
+	}
+
+	/////////////////////////////////////////////////////////////////
+	// TILE			/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	/** tile targeted by the action */
+	private Tile tile = null;
+
+	public Tile getTile()
+	{	return tile;
 	}
 
 	/////////////////////////////////////////////////////////////////
