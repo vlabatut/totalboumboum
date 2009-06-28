@@ -71,6 +71,12 @@ public enum TilePosition
 		}
 		return result;
 	}	
+	
+	public static TilePosition getTilePosition(Sprite actor, Tile tile)
+	{	Sprite target = tile.getFloor();
+		TilePosition result = getTilePosition(actor,target);
+		return result;
+	}	
 
 	public static ArrayList<TilePosition> loadTilePositionsAttribute(Element root, String attName)
 	{	ArrayList<TilePosition> result = new ArrayList<TilePosition>();

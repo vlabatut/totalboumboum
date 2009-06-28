@@ -6,6 +6,7 @@ import java.util.Locale;
 import org.jdom.Attribute;
 import org.jdom.Element;
 
+import fr.free.totalboumboum.engine.container.tile.Tile;
 import fr.free.totalboumboum.engine.content.sprite.Sprite;
 import fr.free.totalboumboum.tools.XmlTools;
 
@@ -70,6 +71,12 @@ public enum Orientation
 			else
 				result = Orientation.OTHER;
 		}
+		return result;
+	}	
+
+	public static Orientation getOrientation(Sprite actor, Tile tile)
+	{	Sprite target = tile.getFloor();
+		Orientation result = getOrientation(actor,target);
 		return result;
 	}	
 

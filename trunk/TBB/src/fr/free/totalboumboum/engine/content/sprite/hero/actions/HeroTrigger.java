@@ -22,9 +22,8 @@ package fr.free.totalboumboum.engine.content.sprite.hero.actions;
  */
 
 import fr.free.totalboumboum.engine.content.feature.gesture.action.ActionName;
-import fr.free.totalboumboum.engine.content.feature.gesture.action.IncompatibleParameterException;
 import fr.free.totalboumboum.engine.content.feature.gesture.action.SpecificAction;
-import fr.free.totalboumboum.engine.content.sprite.Sprite;
+import fr.free.totalboumboum.engine.content.sprite.bomb.Bomb;
 import fr.free.totalboumboum.engine.content.sprite.hero.Hero;
 
 /** 
@@ -41,8 +40,18 @@ import fr.free.totalboumboum.engine.content.sprite.hero.Hero;
  */
 public class HeroTrigger extends SpecificAction
 {
-	public HeroTrigger(Hero actor, Sprite target) throws IncompatibleParameterException
+	public HeroTrigger(Hero actor, Bomb target)
 	{	super(ActionName.TRIGGER,actor,target);
+	}
+
+	/////////////////////////////////////////////////////////////////
+	// EXECUTION		/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	@Override
+	public boolean execute()
+	{	boolean result = false;
+		
+		return result;
 	}
 	
 /*	

@@ -1,4 +1,4 @@
-package fr.free.totalboumboum.engine.content.sprite.bomb.action;
+package fr.free.totalboumboum.engine.content.sprite.fire.actions;
 
 /*
  * Total Boum Boum
@@ -21,27 +21,31 @@ package fr.free.totalboumboum.engine.content.sprite.bomb.action;
  * 
  */
 
+import fr.free.totalboumboum.engine.container.tile.Tile;
+import fr.free.totalboumboum.engine.content.feature.Direction;
+import fr.free.totalboumboum.engine.content.feature.ability.AbstractAbility;
+import fr.free.totalboumboum.engine.content.feature.gesture.GestureName;
 import fr.free.totalboumboum.engine.content.feature.gesture.action.ActionName;
 import fr.free.totalboumboum.engine.content.feature.gesture.action.SpecificAction;
-import fr.free.totalboumboum.engine.content.sprite.Sprite;
-import fr.free.totalboumboum.engine.content.sprite.bomb.Bomb;
+import fr.free.totalboumboum.engine.content.sprite.fire.Fire;
 
 /** 
- * producing an explosion, with flames and everything. 
- * usually performed by a bomb (triggered bomb, etc)
+ * appearing in a tile, coming from nowhere
+ * (after a teleport, a dropped bomb, player at the begining of a round, etc.)
  * 
- * 	<br>actor: 			any (probably a bomb)
- * 	<br>target: 		none
+ * 	<br>actor: 			any
+ * 	<br>target: 		any (probably a floor, but not necessarily)
  * 	<br>direction:		any or none
- * 	<br>contact:		none
- * 	<br>tilePosition:	undefined
- * 	<br>orientation:	undefined
+ * 	<br>contact:		any or none
+ * 	<br>tilePosition:	any or undefined
+ * 	<br>orientation:	any or undefined
  *  
  */
-public class BombDetonate extends SpecificAction
+public class FireAppear extends SpecificAction
 {
-	public BombDetonate(Bomb actor)
-	{	super(ActionName.DETONATE,actor,(Sprite)null);
+	public FireAppear(Fire actor, Tile tile,Direction direction)
+	{	super(ActionName.APPEAR,actor,tile);
+		setDirection(direction);
 	}
 
 	/////////////////////////////////////////////////////////////////
@@ -49,16 +53,27 @@ public class BombDetonate extends SpecificAction
 	/////////////////////////////////////////////////////////////////
 	@Override
 	public boolean execute()
-	{	boolean result = false;
-		
+	{	boolean result;
+		Fire fire = (Fire)getActor();
+		AbstractAbility ability = fire.modulateAction(this);
+		result = ability.isActive();
+		if(result)
+		{	fire.initGesture();
+			getTile().addSprite(fire);
+			fire.setCurrentPosX(getTile().getPosX());
+			fire.setCurrentPosY(getTile().getPosY());
+			fire.setGesture(GestureName.BURNING,getDirection(),getDirection(), true);
+		}
+		else
+			fire.consumeTile(getTile());
 		return result;
 	}
-	
+
 /*	
 	/////////////////////////////////////////////////////////////////
 	// GENERAL ACTION	/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	private GeneralDetonate generalAction;
+	private GeneralAppear generalAction;
 
 	@Override
 	public GeneralAction getGeneralAction()
@@ -67,7 +82,7 @@ public class BombDetonate extends SpecificAction
 	
 	@Override
 	protected void initGeneralAction() 
-	{	generalAction = new GeneralDetonate();
+	{	generalAction = new GeneralAppear();
 		super.initGeneralAction(generalAction);
 	}
 */	
