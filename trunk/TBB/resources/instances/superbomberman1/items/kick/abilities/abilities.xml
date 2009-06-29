@@ -5,7 +5,7 @@
 		<!-- STATE -->
 <!--  	sprite-flat --> 
 		<ability strength="1" frame="false" time="-1" uses="-1">
-			<name value="sprite-flat" />
+			<name value="SPRITE_FLAT" />
 		</ability>
 <!--  	sprite-above --> 
 <!--	sprite-traverse-bomb --> 
@@ -29,8 +29,8 @@
 		<!-- ACTION -->
 <!--  	appear -->
 		<ability strength="1" frame="false" time="-1" uses="-1">
-			<action name="appear" contact="all" direction="all"
-				orientation="all" target="all" tilePosition="all" />
+			<action name="APPEAR" contact="NONE" direction="ANY NONE"
+				orientation="ANY" target="NONE" tilePosition="ANY" />
 		</ability>
 <!--  	consume --> 
 <!--  	detonate --> 
