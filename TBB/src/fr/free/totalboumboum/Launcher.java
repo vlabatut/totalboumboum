@@ -388,6 +388,13 @@ public class Launcher
 	 * qui sont en train de la pousser, et non pas en simple contact.
 	 * de plus, il faut que les sprites aient le pouvoir de pousser, sinon ils ne comptent pas.
 	 */
+	
+	/*
+	 * TODO
+	 * quand des sprites de plusieurs cases seront définis, peut-être que les explosions
+	 * devront être définies en tant que sprites (paramétrables pour leur taille) de ce type ?
+	 * ce qui permettrait de les faire se déplacer.
+	 */
 
 // **********************************************************
 // COMMANDES
@@ -942,6 +949,12 @@ public class Launcher
 	 * tester le système qui complète les animations automatiquement quand elles sont manquantes dans le fichier XML.
 	 * 
 	 * gérer les changements (passage aux types énum) dans l'enregistrement de données XML
+	 * 
+	 * 
+	 * >>il faut autoriser le concepteur à rajouter les stateab qu'il veut<<
+	 * (en préfixant par exemple par CUSTOM_). en java on doit donc manipuler du string, finalement...
+	 * 
+	 * 
 	 * 
 	 * le XML des animes doit avoir soit :
 	 * 	- NONE seule
