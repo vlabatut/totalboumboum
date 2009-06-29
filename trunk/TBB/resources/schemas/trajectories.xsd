@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+<xsd:include schemaLocation="_direction.xsd"/>
+<xsd:include schemaLocation="_gesture_name.xsd"/>
 
 	<xsd:simpleType name="tBaseZPosition">
 		<xsd:restriction base="xsd:string">
@@ -38,7 +40,7 @@
 	</xsd:complexType>
 
 	<!--  forced position and steps sequence defining a move in one direction -->
-	<xsd:complexType name="tDirection">
+	<xsd:complexType name="tDirectionGesture">
 		<xsd:sequence>
 			<!--  steps sequence -->
 			<xsd:element name="forcePosition" type="tForcePosition" minOccurs="0" />
@@ -46,7 +48,7 @@
 			<xsd:element name="steps" type="tSteps" minOccurs="0" />
 		</xsd:sequence>
 		<!--  direction name -->
-		<xsd:attribute name="name" type="xsd:string" />
+		<xsd:attribute name="name" type="tDirection" />
 		<xsd:attribute name="xInteraction" type="xsd:float" use="optional" />
 		<xsd:attribute name="yInteraction" type="xsd:float" use="optional" />
 	</xsd:complexType>
@@ -55,10 +57,10 @@
 	<xsd:complexType name="tGesture">
 		<!--  several moves in various directions -->		
 		<xsd:sequence>
-			<xsd:element name="direction" type="tDirection" maxOccurs="unbounded" />
+			<xsd:element name="direction" type="tDirectionGesture" maxOccurs="unbounded" />
 		</xsd:sequence>
 		<!--  gesture name -->
-		<xsd:attribute name="name" type="xsd:string" />
+		<xsd:attribute name="name" type="tGestureName" />
 		<!--  if true, the gesture will be repeated (no limit) -->
 		<xsd:attribute name="repeat" type="xsd:boolean" use="optional" default="false" />
 		<!--  some events may change the horizontal trajectory : vitesse en pixels/seconde-->

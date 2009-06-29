@@ -3,26 +3,26 @@
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
 	xsi:noNamespaceSchemaLocation="../../../../schemas/trajectories.xsd">
 
-	<gesture name="pushing" >
-		<direction name="down" yInteraction="50"/>
-		<direction name="downleft" xInteraction="35" yInteraction="35"/>
-		<direction name="downright" xInteraction="35" yInteraction="35"/>
-		<direction name="left" xInteraction="50" />
-		<direction name="right" xInteraction="50" />
-		<direction name="up"  yInteraction="50"/>
-		<direction name="upleft" xInteraction="35" yInteraction="35"/>
-		<direction name="upright" xInteraction="35" yInteraction="35"/>
+	<gesture name="PUSHING" >
+		<direction name="DOWN" yInteraction="50"/>
+		<direction name="DOWNLEFT" xInteraction="35" yInteraction="35"/>
+		<direction name="DOWNRIGHT" xInteraction="35" yInteraction="35"/>
+		<direction name="LEFT" xInteraction="50" />
+		<direction name="RIGHT" xInteraction="50" />
+		<direction name="UP"  yInteraction="50"/>
+		<direction name="UPLEFT" xInteraction="35" yInteraction="35"/>
+		<direction name="UPRIGHT" xInteraction="35" yInteraction="35"/>
 	</gesture>
 	
-	<gesture name="walking" >
-		<direction name="down" yInteraction="50"/>
-		<direction name="downleft" xInteraction="35" yInteraction="35"/>
-		<direction name="downright" xInteraction="35" yInteraction="35"/>
-		<direction name="left" xInteraction="50" />
-		<direction name="right" xInteraction="50" />
-		<direction name="up"  yInteraction="50"/>
-		<direction name="upleft" xInteraction="35" yInteraction="35"/>
-		<direction name="upright" xInteraction="35" yInteraction="35"/>
+	<gesture name="WALKING" >
+		<direction name="DOWN" yInteraction="50"/>
+		<direction name="DOWNLEFT" xInteraction="35" yInteraction="35"/>
+		<direction name="DOWNRIGHT" xInteraction="35" yInteraction="35"/>
+		<direction name="LEFT" xInteraction="50" />
+		<direction name="RIGHT" xInteraction="50" />
+		<direction name="UP"  yInteraction="50"/>
+		<direction name="UPLEFT" xInteraction="35" yInteraction="35"/>
+		<direction name="UPRIGHT" xInteraction="35" yInteraction="35"/>
 	</gesture>
 
 </trajectories>
