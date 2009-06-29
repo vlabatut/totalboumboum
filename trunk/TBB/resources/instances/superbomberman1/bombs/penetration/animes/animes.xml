@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <animes xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
 		xsi:noNamespaceSchemaLocation="../../../../../schemas/animes.xsd" 
-		scale="1" default="standing" >
+		scale="1" >
 		
 	<colors folder="colormaps" >
 		<colormap name="BLACK" file="black" />
@@ -27,8 +27,8 @@
 	</shadows>
 	
 	<gestures folder="pictures">
-		<gesture name="bouncing" repeat="true" shadow="shadow" shadowYShift="-3">
-			<direction name="none">
+		<gesture name="BOUNCING" repeat="true" shadow="shadow" shadowYShift="-3">
+			<direction name="NONE">
 				<step duration="300" file="2.gif" />
 				<step duration="300" file="3.gif" />
 				<step duration="300" file="2.gif" />
@@ -36,14 +36,14 @@
 			</direction>
 		</gesture>
 		
-		<gesture name="burning" repeat="false">
-			<direction name="none">
+		<gesture name="BURNING" repeat="false">
+			<direction name="NONE">
 				<step duration="100" />
 			</direction>
 		</gesture>
 		
-		<gesture name="landing" repeat="true" shadow="shadow" >
-			<direction name="none">
+		<gesture name="LANDING" repeat="true" shadow="shadow" >
+			<direction name="NONE">
 				<step duration="300" file="2.gif" />
 				<step duration="300" file="3.gif" />
 				<step duration="300" file="2.gif" />
@@ -51,8 +51,8 @@
 			</direction>
 		</gesture>
 		
-		<gesture name="sliding" repeat="true" shadow="shadow">
-			<direction name="none">
+		<gesture name="SLIDING" repeat="true" shadow="shadow">
+			<direction name="NONE">
 				<step duration="300" file="2.gif" />
 				<step duration="300" file="3.gif" />
 				<step duration="300" file="2.gif" />
@@ -60,8 +60,8 @@
 			</direction>
 		</gesture>
 		
-		<gesture name="sliding-failing" repeat="true" shadow="shadow">
-			<direction name="none">
+		<gesture name="SLIDING_FAILING" repeat="true" shadow="shadow">
+			<direction name="NONE">
 				<step duration="300" file="3.gif" />
 				<step duration="300" file="3.gif" />
 				<step duration="300" file="3.gif" />
@@ -69,8 +69,8 @@
 			</direction>
 		</gesture>
 		
-		<gesture name="standing" repeat="true" shadow="shadow" >
-			<direction name="none">
+		<gesture name="STANDING" repeat="true" shadow="shadow" >
+			<direction name="NONE">
 				<step duration="300" file="2.gif" />
 				<step duration="300" file="3.gif" />
 				<step duration="300" file="2.gif" />
@@ -78,8 +78,8 @@
 			</direction>
 		</gesture>
 		
-		<gesture name="standing-failing" repeat="true" shadow="shadow">
-			<direction name="none">
+		<gesture name="STANDING_FAILING" repeat="true" shadow="shadow">
+			<direction name="NONE">
 				<step duration="300" file="3.gif" />
 				<step duration="300" file="3.gif" />
 				<step duration="300" file="3.gif" />

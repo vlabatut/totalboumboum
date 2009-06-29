@@ -6,21 +6,27 @@
 			<xsd:enumeration value="APPEARING" />
 			<xsd:enumeration value="BOUNCING" />
 			<xsd:enumeration value="BURNING" />
+			<xsd:enumeration value="CARRYING" />
 			<xsd:enumeration value="CRYING" />
+			<xsd:enumeration value="DISAPPEARING" />
 			<xsd:enumeration value="EXULTING" />
 			<xsd:enumeration value="HIDING" />
+			<xsd:enumeration value="HOLDING" />
 			<xsd:enumeration value="JUMPING" />
 			<xsd:enumeration value="LANDING" />
 			<xsd:enumeration value="OSCILLATING" />
 			<xsd:enumeration value="OSCILLATING_FAILING" />
+			<xsd:enumeration value="PICKING" />
 			<xsd:enumeration value="PUNCHED" />
 			<xsd:enumeration value="PUNCHING" />
 			<xsd:enumeration value="PUSHING" />
 			<xsd:enumeration value="SLIDING" />
 			<xsd:enumeration value="SLIDING_FAILING" />
 			<xsd:enumeration value="SPAWNING" />
+			<xsd:enumeration value="STAGGERING" />
 			<xsd:enumeration value="STANDING" />
 			<xsd:enumeration value="STANDING_FAILING" />
+			<xsd:enumeration value="THROWING" />
 			<xsd:enumeration value="WAITING" />
 			<xsd:enumeration value="WALKING" />
 		</xsd:restriction>

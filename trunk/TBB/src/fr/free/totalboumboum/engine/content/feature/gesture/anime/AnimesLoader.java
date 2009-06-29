@@ -75,17 +75,20 @@ public class AnimesLoader
     	HashMap<String,BufferedImage>shadows = new HashMap<String, BufferedImage>();
     	Colormap colormap = null;
     	String colorFolder = null;
-		// local folder
+		
+    	// local folder
     	String localFilePath = individualFolder;
 		Attribute attribute = root.getAttribute(XmlTools.ATT_FOLDER);
 		if(attribute!=null)
 			localFilePath = localFilePath+File.separator+attribute.getValue();
+		
 		// scale
 		double scale = 1;
 		attribute = root.getAttribute(XmlTools.ATT_SCALE);
 		if(attribute!=null)
 			scale = Double.parseDouble(attribute.getValue());
 		pack.setScale(scale);
+		
 		// bound height
 		double boundHeight = 0;
 		double zoomFactor = level.getLoop().getZoomFactor();
