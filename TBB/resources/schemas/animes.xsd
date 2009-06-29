@@ -78,7 +78,6 @@
 			<xsd:element name="gestures" type="tGestures" />
 		</xsd:sequence>
 		<xsd:attribute name="scale" type="xsd:integer" use="optional" default="1" />
-		<xsd:attribute name="default" type="xsd:string" use="required" />
 		<xsd:attribute name="boundHeight" type="xsd:integer" use="optional" default="0" />
 	</xsd:complexType>
 

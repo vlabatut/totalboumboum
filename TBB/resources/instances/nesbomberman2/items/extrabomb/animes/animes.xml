@@ -1,17 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <animes xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
 		xsi:noNamespaceSchemaLocation="../../../../../schemas/animes.xsd" 
-		scale="1" default="standing" >
+		scale="1" >
 
 	<gestures>
-		<gesture name="standing" >
-			<direction name="none">
-				<step file="standing.gif" />
-			</direction>
-		</gesture>
-		
-		<gesture name="burning" repeat="false" folder="burning">
-			<direction name="none">
+	
+		<gesture name="BURNING" repeat="false" folder="burning">
+			<direction name="NONE">
 				<step duration="140" file="1.gif" />
 				<step duration="70" file="2.gif" />
 				<step duration="60" file="3.gif" />
@@ -20,5 +15,12 @@
 				<step duration="70" file="6.gif" />
 			</direction>
 		</gesture>
+
+		<gesture name="STANDING" >
+			<direction name="NONE">
+				<step file="standing.gif" />
+			</direction>
+		</gesture>
+
 	</gestures>		
 </animes>
