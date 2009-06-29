@@ -941,6 +941,8 @@ public class Launcher
 	 * 
 	 * tester le système qui complète les animations automatiquement quand elles sont manquantes dans le fichier XML.
 	 * 
+	 * gérer les changements (passage aux types énum) dans l'enregistrement de données XML
+	 * 
 	 * le XML des animes doit avoir soit :
 	 * 	- NONE seule
 	 *  - primaries seules

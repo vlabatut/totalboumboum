@@ -2,6 +2,6 @@
 <profile xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../resources/schemas/profile.xsd">
 	<general name="0809v2.Medeni+Uluer" />
 	<ai name="medeniuluer" pack="tournament200809v2" />
-	<character name="shirobon" packname="superbomberman5" color="cyan" />
+	<character name="shirobon" packname="superbomberman5" color="CYAN" />
 </profile>
 

@@ -2,6 +2,6 @@
 <profile xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../resources/schemas/profile.xsd">
 
 	<general name="Joueur humain" />
-	<character name="assistantpirate" packname="superbomberman5" color="cyan"/>
+	<character name="assistantpirate" packname="superbomberman5" color="CYAN"/>
 
 </profile>

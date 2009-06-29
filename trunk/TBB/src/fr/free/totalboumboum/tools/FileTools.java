@@ -60,11 +60,11 @@ public class FileTools
 	public static final String FILE_FIRESETS = "firesets";
 	public static final String FILE_FLOOR = "floor";
 	public static final String FILE_GAME = "game";
-	public static final String FILE_GAME_QUICKMATCH = "gameQuickmatch";
-	public static final String FILE_GAME_QUICKSTART = "gameQuickstart";
-	public static final String FILE_GAME_TOURNAMENT = "gameTournament";
-	public static final String FILE_GESTUREMODULATIONS = "gesturemodulations";
-	public static final String FILE_GESTUREPERMISSIONS = "gesturepermissions";
+	public static final String FILE_GAME_QUICKMATCH = "game_quickmatch";
+	public static final String FILE_GAME_QUICKSTART = "game_quickstart";
+	public static final String FILE_GAME_TOURNAMENT = "game_tournament";
+	public static final String FILE_GESTUREMODULATIONS = "gesture_modulations";
+	public static final String FILE_GESTUREPERMISSIONS = "gesture_permissions";
 	public static final String FILE_HERO = "hero";
 	public static final String FILE_ITEM = "item";
 	public static final String FILE_ITEMS = "items";

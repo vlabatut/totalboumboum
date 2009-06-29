@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema">
-<xsd:include schemaLocation="_TournamentTypes.xsd"/>
+<xsd:include schemaLocation="_tournament_types.xsd"/>
 
 	<xsd:complexType name="tTournament">
 		<xsd:attribute name="name" type="xsd:string" use="required" />

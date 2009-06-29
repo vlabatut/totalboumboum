@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema">
-<xsd:include schemaLocation="_Ability.xsd"/>
-<xsd:include schemaLocation="_TilePosition.xsd"/>
-<xsd:include schemaLocation="_Contact.xsd"/>
+<xsd:include schemaLocation="_ability.xsd"/>
+<xsd:include schemaLocation="_tile_position.xsd"/>
+<xsd:include schemaLocation="_contact.xsd"/>
 
 	<xsd:complexType name="tModulation">
 		<xsd:attribute name="frame" type="xsd:boolean" use="optional" default="false" />

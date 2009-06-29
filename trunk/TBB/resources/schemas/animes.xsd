@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema">
-<xsd:include schemaLocation="_Direction.xsd"/>
-<xsd:include schemaLocation="_Colors.xsd"/>
-<xsd:include schemaLocation="_GestureName.xsd"/>
+<xsd:include schemaLocation="_direction.xsd"/>
+<xsd:include schemaLocation="_colors.xsd"/>
+<xsd:include schemaLocation="_gesture_name.xsd"/>
 
 	<xsd:simpleType name="tBasePosition">
 		<xsd:restriction base="xsd:string">
@@ -75,7 +75,7 @@
 		<xsd:sequence>
 			<xsd:element name="colors" type="tColors" minOccurs="0" />
 			<xsd:element name="shadows" type="tShadows" minOccurs="0" />
-			<xsd:element name="gestures" type="tGesture" />
+			<xsd:element name="gestures" type="tGestures" />
 		</xsd:sequence>
 		<xsd:attribute name="scale" type="xsd:integer" use="optional" default="1" />
 		<xsd:attribute name="default" type="xsd:string" use="required" />

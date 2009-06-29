@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema">
-<xsd:include schemaLocation="_Contact.xsd"/>
-<xsd:include schemaLocation="_Direction.xsd"/>
-<xsd:include schemaLocation="_Role.xsd"/>
-<xsd:include schemaLocation="_ActionName.xsd"/>
-<xsd:include schemaLocation="_TilePosition.xsd"/>
-<xsd:include schemaLocation="_Orientation.xsd"/>
+<xsd:include schemaLocation="_contact.xsd"/>
+<xsd:include schemaLocation="_direction.xsd"/>
+<xsd:include schemaLocation="_role.xsd"/>
+<xsd:include schemaLocation="_action_name.xsd"/>
+<xsd:include schemaLocation="_tile_position.xsd"/>
+<xsd:include schemaLocation="_orientation.xsd"/>
 
 	<xsd:complexType name="tAction">
 		<xsd:attribute name="name" type="tActionName" use="required" />

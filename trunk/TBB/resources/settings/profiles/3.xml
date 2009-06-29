@@ -5,6 +5,6 @@
 	
  	<general name="0708.Baydar+Camcı"  />
  	<ai name="baydarcamci" pack="tournament200708" />
- 	<character name="shirobon" packname="superbomberman1"  color="grass"/>     
+ 	<character name="shirobon" packname="superbomberman1"  color="GRASS"/>     
 	
 </profile>
