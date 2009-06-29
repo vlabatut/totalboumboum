@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema">
-<xsd:include schemaLocation="_Limit.xsd"/>
-<xsd:include schemaLocation="_Notes.xsd"/>
+<xsd:include schemaLocation="_limit.xsd"/>
+<xsd:include schemaLocation="_notes.xsd"/>
 
 	<xsd:complexType name="tAuthor">
 		<xsd:attribute name="value" type="xsd:string" use="required" />

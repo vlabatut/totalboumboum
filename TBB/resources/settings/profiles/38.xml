@@ -2,6 +2,6 @@
 <profile xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../resources/schemas/profile.xsd">
 	<general name="0809v1.Günalp+Yürtsever" />
 	<ai name="gunalpyurtsever" pack="tournament200809v1" />
-	<character name="shirobon" packname="superbomberman5" color="orange"/>
+	<character name="shirobon" packname="superbomberman5" color="ORANGE"/>
 </profile>
 

@@ -3,22 +3,22 @@
 		xsi:noNamespaceSchemaLocation="../../../../schemas/portraits.xsd">
 	
 	<colors folder="colormaps" >
-		<colormap name="black" file="black" />
-		<colormap name="blue" file="blue" />
-		<colormap name="brown" file="brown" />
-		<colormap name="cyan" file="cyan" />
-		<colormap name="grass" file="grass" />
-		<colormap name="green" file="green" />
-		<colormap name="grey" file="grey" />
-		<colormap name="indigo" file="indigo" />
-		<colormap name="orange" file="orange" />
-		<colormap name="pink" file="pink" />
-		<colormap name="purple" file="purple" />
-		<colormap name="red" file="red" />
-		<colormap name="rust" file="rust" />
-		<colormap name="ultramarine" file="ultramarine" />
-		<colormap name="white" file="white" />
-		<colormap name="yellow" file="yellow" />
+		<colormap name="BLACK" file="black" />
+		<colormap name="BLUE" file="blue" />
+		<colormap name="BROWN" file="brown" />
+		<colormap name="CYAN" file="cyan" />
+		<colormap name="GRASS" file="grass" />
+		<colormap name="GREEN" file="green" />
+		<colormap name="GREY" file="grey" />
+		<colormap name="INDIGO" file="indigo" />
+		<colormap name="ORANGE" file="orange" />
+		<colormap name="PINK" file="pink" />
+		<colormap name="PURPLE" file="purple" />
+		<colormap name="RED" file="red" />
+		<colormap name="RUST" file="rust" />
+		<colormap name="ULTRAMARINE" file="ultramarine" />
+		<colormap name="WHITE" file="white" />
+		<colormap name="YELLOW" file="yellow" />
 	</colors>
 	
 	<ingame >

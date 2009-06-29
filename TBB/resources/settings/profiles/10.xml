@@ -5,6 +5,6 @@
 	
  	<general name="0708.Göksay+Köse" /> 
  	<ai name="goksaykose" pack="tournament200708" />
- 	<character name="shirobon" packname="superbomberman1" color="pink" />     
+ 	<character name="shirobon" packname="superbomberman1" color="PINK" />     
 	
 </profile>
