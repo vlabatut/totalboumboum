@@ -11,30 +11,30 @@
 <!--  	block-spawn --> 
 <!--  	bomb-explosion-latency --> 
 		<ability strength="140" frame="false" time="-1" uses="-1">
-			<name value="bomb-explosion-latency" />
+			<name value="BOMB_EXPLOSION_LATENCY" />
 		</ability>
 <!--  	bomb-failure-maxduration --> 
 		<ability strength="5000" frame="false" time="-1" uses="-1">
-			<name value="bomb-failure-maxduration" />
+			<name value="BOMB_FAILURE_MAXDURATION" />
 		</ability>
 <!--  	bomb-failure-minduration --> 
 		<ability strength="1000" frame="false" time="-1" uses="-1">
-			<name value="bomb-failure-minduration" />
+			<name value="BOMB_FAILURE_MINDURATION" />
 		</ability>
 <!--  	bomb-failure-probability --> 
 		<ability strength="5" frame="false" time="-1" uses="-1">
-			<name value="bomb-failure-probability" />
+			<name value="BOMB_FAILURE_PROBABILITY" />
 		</ability>
 <!--  	bomb-push-latency --> 
 <!--  	bomb-trigger-collision --> 
 <!--  	bomb-trigger-combustion --> 
 		<ability strength="1" frame="false" time="-1" uses="-1">
-			<name value="bomb-trigger-combustion" />
+			<name value="BOMB_TRIGGER_COMBUSTION" />
 		</ability>
 <!--  	bomb-trigger-control --> 
 <!--  	bomb-trigger-timer -->
 		<ability strength="2400" frame="false" time="-1" uses="-1">
-			<name value="bomb-trigger-timer" /> 
+			<name value="BOMB_TRIGGER_TIMER" /> 
 		</ability> 
 <!--  	bomb-number --> 
 <!--  	bomb-range --> 
@@ -44,32 +44,32 @@
 		<!-- ACTION -->
 <!--  	appear --> 
 		<ability frame="false" strength="1" time="-1" uses="-1" >
-			<action name="appear" direction="all" contact="all"
-				tilePosition="all" orientation="all" target="all" />
+			<action name="APPEAR" direction="ANY" contact="ANY"
+				tilePosition="ANY" orientation="ANY" target="ANY" />
 		</ability> 
 <!--  	consume --> 
 <!--  	detonate --> 
 		<ability frame="false" strength="1" time="-1" uses="-1" >
-			<action name="detonate" direction="all" contact="all"
-				tilePosition="all" orientation="all" />
+			<action name="DETONATE" direction="ANY" contact="ANY"
+				tilePosition="ANY" orientation="ANY" />
 		</ability> 
 <!--  	drop --> 
 <!--  	gather --> 
 <!--  	jump --> 
 <!--  	land --> 
 		<ability frame="false" strength="1" time="-1" uses="-1" >
-			<action name="land" direction="all" contact="all"
-				tilePosition="all" orientation="all" />
+			<action name="LAND" direction="ANY" contact="ANY"
+				tilePosition="ANY" orientation="ANY" />
 		</ability> 
 <!--  	movehigh --> 
 		<ability frame="false" strength="1" time="-1" uses="-1" >
-			<action name="movehigh" direction="all" contact="all"
-				tilePosition="all" orientation="all" />
+			<action name="MOVEHIGH" direction="ANY" contact="ANY"
+				tilePosition="ANY" orientation="ANY" />
 		</ability> 
 <!--  	movelow --> 
 		<ability frame="false" strength="1" time="-1" uses="-1" >
-			<action name="movelow" direction="all" contact="all"
-				tilePosition="all" orientation="all" />
+			<action name="MOVELOW" direction="ANY" contact="ANY"
+				tilePosition="ANY" orientation="ANY" />
 		</ability> 
 <!--  	punch --> 
 <!--  	push --> 
