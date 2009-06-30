@@ -953,7 +953,7 @@ public class Launcher
 	 * 
 	 * >>il faut autoriser le concepteur à rajouter les stateab qu'il veut<<
 	 * (en préfixant par exemple par CUSTOM_). en java on doit donc manipuler du string, finalement...
-	 * 
+	 *  
 	 * 
 	 * 
 	 * le XML des animes doit avoir soit :
