@@ -4,7 +4,6 @@ import java.util.ArrayList;
 
 import fr.free.totalboumboum.engine.content.feature.Contact;
 import fr.free.totalboumboum.engine.content.feature.TilePosition;
-import fr.free.totalboumboum.engine.content.feature.ability.StateAbilityName;
 import fr.free.totalboumboum.engine.content.sprite.Sprite;
 
 /*
@@ -30,7 +29,7 @@ import fr.free.totalboumboum.engine.content.sprite.Sprite;
 
 public class OtherModulation extends AbstractStateModulation
 {		
-	public OtherModulation(StateAbilityName name)
+	public OtherModulation(String name)
 	{	super(name);
 	}
 	
@@ -91,7 +90,7 @@ public class OtherModulation extends AbstractStateModulation
 	{	boolean result = false;
 		if(modulation instanceof OtherModulation)
 		{	OtherModulation m = (OtherModulation) modulation;
-			result = getName()==m.getName();
+			result = getName().equals(m.getName());
 		}
 		return result;
 	}

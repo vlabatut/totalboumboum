@@ -27,7 +27,6 @@ import java.util.Iterator;
 import java.util.Map.Entry;
 
 import fr.free.totalboumboum.engine.content.feature.Direction;
-import fr.free.totalboumboum.engine.content.feature.ability.StateAbilityName;
 import fr.free.totalboumboum.engine.content.feature.gesture.action.SpecificAction;
 import fr.free.totalboumboum.engine.content.feature.gesture.anime.AnimeDirection;
 import fr.free.totalboumboum.engine.content.feature.gesture.modulation.AbstractModulation;
@@ -121,12 +120,12 @@ public class Gesture
 //		modulation.setGestureName(name);
 	}
 	
-	public SelfModulation getSelfModulation(StateAbilityName name)
+	public SelfModulation getSelfModulation(String name)
 	{	SelfModulation result = null;
 		Iterator<SelfModulation> i = selfModulations.iterator();
 		while(i.hasNext() && result==null)
 		{	SelfModulation modulation = i.next();
-			if(modulation.getName()==name)
+			if(modulation.getName().equals(name))
 				result = modulation;
 		}
 		return result;
@@ -137,12 +136,12 @@ public class Gesture
 	}
 */
 
-	public OtherModulation getOtherModulation(StateAbilityName name, Sprite modulator, Sprite modulated)
+	public OtherModulation getOtherModulation(String name, Sprite modulator, Sprite modulated)
 	{	OtherModulation result = null;
 		Iterator<OtherModulation> i = otherModulations.iterator();
 		while(i.hasNext() && result==null)
 		{	OtherModulation modulation = i.next();
-			if(modulation.getName()==name && modulation.isConcerningSituation(modulator,modulated))
+			if(modulation.getName().equals(name) && modulation.isConcerningSituation(modulator,modulated))
 				result = modulation;
 		}
 		return result;

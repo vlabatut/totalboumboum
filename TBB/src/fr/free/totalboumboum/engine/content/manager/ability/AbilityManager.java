@@ -29,7 +29,6 @@ import fr.free.totalboumboum.engine.container.level.Level;
 import fr.free.totalboumboum.engine.content.feature.ability.AbstractAbility;
 import fr.free.totalboumboum.engine.content.feature.ability.ActionAbility;
 import fr.free.totalboumboum.engine.content.feature.ability.StateAbility;
-import fr.free.totalboumboum.engine.content.feature.ability.StateAbilityName;
 import fr.free.totalboumboum.engine.content.feature.gesture.action.GeneralAction;
 import fr.free.totalboumboum.engine.content.feature.gesture.action.IncompatibleParameterException;
 import fr.free.totalboumboum.engine.content.feature.gesture.action.SpecificAction;
@@ -87,14 +86,14 @@ public class AbilityManager
 	/** all abilities (direct and items) */
 	private final ArrayList<AbstractAbility> currentAbilities = new ArrayList<AbstractAbility>();
 	
-	public StateAbility getAbility(StateAbilityName name)
+	public StateAbility getAbility(String name)
 	{	StateAbility result = null;
 		Iterator<AbstractAbility> i = currentAbilities.iterator();
 		while(i.hasNext() && result==null)
 		{	AbstractAbility ab = i.next();
 			if(ab instanceof StateAbility)
 			{	StateAbility ablt = (StateAbility)ab;
-				if(ablt.getName()==name)
+				if(ablt.getName().equals(name))
 					result = ablt;
 			}
 		}

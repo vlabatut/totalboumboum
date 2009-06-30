@@ -69,8 +69,7 @@ public class AbilityLoader
 		// state ?
 		Element temp = root.getChild(XmlTools.ELT_NAME);
 		if(temp!=null)
-		{	String strName = temp.getAttribute(XmlTools.ATT_VALUE).getValue().trim().toUpperCase(Locale.ENGLISH);
-			StateAbilityName name = StateAbilityName.valueOf(strName);
+		{	String name = temp.getAttribute(XmlTools.ATT_VALUE).getValue().trim().toUpperCase(Locale.ENGLISH);
 			result = new StateAbility(name,level);
 		}
 		// or action ?

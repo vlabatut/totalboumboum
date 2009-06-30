@@ -25,7 +25,7 @@ import fr.free.totalboumboum.engine.container.level.Level;
 
 public class StateAbility extends AbstractAbility
 {	
-	public StateAbility(StateAbilityName name, Level level)
+	public StateAbility(String name, Level level)
 	{	super(level);
 		this.name = name;
 	}
@@ -34,12 +34,12 @@ public class StateAbility extends AbstractAbility
 	// NAME				/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	/** name of the ability */
-	private StateAbilityName name;
+	private String name;
 	
-	public StateAbilityName getName()
+	public String getName()
 	{	return name;
 	}
-	public void setName(StateAbilityName name)
+	public void setName(String name)
 	{	this.name = name;
 	}
 
@@ -51,7 +51,7 @@ public class StateAbility extends AbstractAbility
 		if(ability instanceof StateAbility)
 		{	StateAbility ab = (StateAbility)ability;
 			// name
-			result = name == ab.getName();
+			result = name.equals(ab.getName());
 		}
 		return result;
 	}

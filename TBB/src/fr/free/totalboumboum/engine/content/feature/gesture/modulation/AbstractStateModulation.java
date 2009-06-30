@@ -1,7 +1,6 @@
 package fr.free.totalboumboum.engine.content.feature.gesture.modulation;
 
 import fr.free.totalboumboum.engine.content.feature.ability.StateAbility;
-import fr.free.totalboumboum.engine.content.feature.ability.StateAbilityName;
 
 /*
  * Total Boum Boum
@@ -26,7 +25,7 @@ import fr.free.totalboumboum.engine.content.feature.ability.StateAbilityName;
 
 public class AbstractStateModulation extends AbstractModulation
 {		
-	public AbstractStateModulation(StateAbilityName name)
+	public AbstractStateModulation(String name)
 	{	super();
 		this.name = name;
 	}
@@ -34,12 +33,12 @@ public class AbstractStateModulation extends AbstractModulation
 	/////////////////////////////////////////////////////////////////
 	// NAME						/////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	protected StateAbilityName name;
+	protected String name;
 
-	public StateAbilityName getName()
+	public String getName()
 	{	return name;
 	}
-	public void setName(StateAbilityName name)
+	public void setName(String name)
 	{	this.name = name;
 	}
 	

@@ -1,7 +1,5 @@
 package fr.free.totalboumboum.engine.content.feature.gesture.modulation;
 
-import fr.free.totalboumboum.engine.content.feature.ability.StateAbilityName;
-
 /*
  * Total Boum Boum
  * Copyright 2008-2009 Vincent Labatut 
@@ -25,7 +23,7 @@ import fr.free.totalboumboum.engine.content.feature.ability.StateAbilityName;
 
 public class SelfModulation extends AbstractStateModulation
 {		
-	public SelfModulation(StateAbilityName name)
+	public SelfModulation(String name)
 	{	super(name);
 	}
 	
@@ -36,7 +34,7 @@ public class SelfModulation extends AbstractStateModulation
 	{	boolean result = false;
 		if(modulation instanceof SelfModulation)
 		{	SelfModulation m = (SelfModulation) modulation;
-			result = getName()==m.getName();
+			result = getName().equals(m.getName());
 		}
 		return result;
 	}
