@@ -29,7 +29,6 @@ import fr.free.totalboumboum.engine.container.tile.Tile;
 import fr.free.totalboumboum.engine.content.feature.Direction;
 import fr.free.totalboumboum.engine.content.feature.ability.ActionAbility;
 import fr.free.totalboumboum.engine.content.feature.ability.StateAbility;
-import fr.free.totalboumboum.engine.content.feature.ability.StateAbilityName;
 import fr.free.totalboumboum.engine.content.feature.gesture.Gesture;
 import fr.free.totalboumboum.engine.content.feature.gesture.action.SpecificAction;
 import fr.free.totalboumboum.engine.content.feature.gesture.modulation.ActorModulation;
@@ -80,7 +79,7 @@ public class ModulationManager
 	 * then a neutral modulation is returned.
 	 * This method always returns a modulation.
 	 */
-	private SelfModulation getSelfModulation(StateAbilityName name)
+	private SelfModulation getSelfModulation(String name)
 	{	SelfModulation result = null;
 		if(currentGesture!=null)
 			result = currentGesture.getSelfModulation(name);
@@ -98,7 +97,7 @@ public class ModulationManager
 	 * then a neutral modulation is returned.
 	 * This method always returns a modulation.
 	 */
-	public OtherModulation getOtherModulation(StateAbilityName name, Sprite modulated)
+	public OtherModulation getOtherModulation(String name, Sprite modulated)
 	{	OtherModulation result = null;
 		if(currentGesture!=null)
 			result = currentGesture.getOtherModulation(name,sprite,modulated);
@@ -302,7 +301,7 @@ public class ModulationManager
 		return result;
 	}
 	
-	public StateAbility modulateStateAbility(StateAbilityName name)
+	public StateAbility modulateStateAbility(String name)
 	{	// original ability
 		StateAbility result = sprite.getAbility(name);
 		// self modulation

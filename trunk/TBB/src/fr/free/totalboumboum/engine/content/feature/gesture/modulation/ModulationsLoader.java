@@ -30,7 +30,6 @@ import java.util.Locale;
 
 import javax.xml.parsers.ParserConfigurationException;
 
-
 import org.jdom.Element;
 import org.xml.sax.SAXException;
 
@@ -39,7 +38,6 @@ import fr.free.totalboumboum.engine.content.feature.Contact;
 import fr.free.totalboumboum.engine.content.feature.TilePosition;
 import fr.free.totalboumboum.engine.content.feature.ability.AbilityLoader;
 import fr.free.totalboumboum.engine.content.feature.ability.AbstractAbility;
-import fr.free.totalboumboum.engine.content.feature.ability.StateAbilityName;
 import fr.free.totalboumboum.engine.content.feature.gesture.Gesture;
 import fr.free.totalboumboum.engine.content.feature.gesture.GestureName;
 import fr.free.totalboumboum.engine.content.feature.gesture.GesturePack;
@@ -47,7 +45,6 @@ import fr.free.totalboumboum.engine.content.feature.gesture.action.GeneralAction
 import fr.free.totalboumboum.engine.content.feature.gesture.action.GeneralActionLoader;
 import fr.free.totalboumboum.tools.FileTools;
 import fr.free.totalboumboum.tools.XmlTools;
-
 
 public class ModulationsLoader
 {	
@@ -143,8 +140,7 @@ public class ModulationsLoader
 		
 		// name
 		Element nameElt = root.getChild(XmlTools.ELT_NAME);
-		String strName = nameElt.getAttribute(XmlTools.ATT_VALUE).getValue().trim().toUpperCase(Locale.ENGLISH);
-		StateAbilityName name = StateAbilityName.valueOf(strName);
+		String name = nameElt.getAttribute(XmlTools.ATT_VALUE).getValue().trim().toUpperCase(Locale.ENGLISH);
 		
 		// result
 		AbstractStateModulation result;

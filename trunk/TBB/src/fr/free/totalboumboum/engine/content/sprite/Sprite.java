@@ -36,7 +36,6 @@ import fr.free.totalboumboum.engine.content.feature.Role;
 import fr.free.totalboumboum.engine.content.feature.ability.AbstractAbility;
 import fr.free.totalboumboum.engine.content.feature.ability.ActionAbility;
 import fr.free.totalboumboum.engine.content.feature.ability.StateAbility;
-import fr.free.totalboumboum.engine.content.feature.ability.StateAbilityName;
 import fr.free.totalboumboum.engine.content.feature.event.AbstractEvent;
 import fr.free.totalboumboum.engine.content.feature.event.ActionEvent;
 import fr.free.totalboumboum.engine.content.feature.event.ControlEvent;
@@ -385,7 +384,7 @@ public abstract class Sprite
 	{	this.abilityManager = abilityManager;
 	}
 	
-	public StateAbility getAbility(StateAbilityName ability)
+	public StateAbility getAbility(String ability)
 	{	return abilityManager.getAbility(ability);
 	}
 	
@@ -634,7 +633,7 @@ public abstract class Sprite
 	{	return modulationManager.getSelfModulation(name);
 	}
 */	
-	public OtherModulation getOtherModulation(StateAbilityName name, Sprite modulated)
+	public OtherModulation getOtherModulation(String name, Sprite modulated)
 	{	return modulationManager.getOtherModulation(name,modulated);
 	}
 	
@@ -650,7 +649,7 @@ public abstract class Sprite
 	{	return modulationManager.getThirdModulation(action);
 	}
 	
-	public StateAbility modulateStateAbility(StateAbilityName name)
+	public StateAbility modulateStateAbility(String name)
 	{	return modulationManager.modulateStateAbility(name);
 	}
 	
