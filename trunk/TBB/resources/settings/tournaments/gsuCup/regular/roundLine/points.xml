@@ -10,10 +10,10 @@
 
 	<rankpoints exaequoShare="true">
 		<rankings>
-			<scores type="time" />
-			<scores type="bombings"/>
-			<scores type="items"/>
-			<scores type="bombs"/>
+			<scores type="TIME" />
+			<scores type="BOMBINGS"/>
+			<scores type="ITEMS"/>
+			<scores type="BOMBS"/>
 		</rankings>
 		<values>
 			<value value="8"/>

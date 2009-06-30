@@ -26,7 +26,7 @@
 	</item>
 	<item name="penetration" folder="penetration" >
 		<ability >
-			<name value="BOMB_TYPE_PENETRATION" />
+			<name value="CUSTOM_BOMB_TYPE_PENETRATION" />
 		</ability>
 	</item>
 	<item name="punch" folder="punch" >
@@ -37,7 +37,7 @@
 	</item>
 	<item name="remotecontrol" folder="remotecontrol" >
 		<ability >
-			<name value="BOMB_TYPE_REMOTE_CONTROL" />
+			<name value="CUSTOM_BOMB_TYPE_REMOTE_CONTROL" />
 		</ability>
 	</item>
 	<item name="throughbombs" folder="throughbombs" >

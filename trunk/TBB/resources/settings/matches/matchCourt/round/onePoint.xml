@@ -11,7 +11,7 @@
 
 	<rankpoints invert="false" exaequoShare="true">
 		<rankings>
-			<scores type="time" />
+			<scores type="TIME" />
 		</rankings>	
 		<values>
 			<value value="1" />

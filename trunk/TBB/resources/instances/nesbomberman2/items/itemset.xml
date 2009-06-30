@@ -5,27 +5,27 @@
 
 	<item name="extrabomb" folder="extrabomb">	
 		<ability >
-			<name value="bomb-number" />
+			<name value="BOMB_NUMBER" />
 		</ability>
 	</item>
 	<item name="extraflame" folder="extraflame">
 		<ability >
-			<name value="bomb-range" />
+			<name value="BOMB_RANGE" />
 		</ability>
 	</item>
 	<item name="remotecontrol" folder="remotecontrol" >
 		<ability >
-			<name value="bomb-type-remotecontrol" />
+			<name value="CUSTOM_BOMB_TYPE_REMOTECONTROL" />
 		</ability>
 	</item>
 	<item name="throughbombs" folder="throughbombs" >
 		<ability >
-			<name value="sprite-traverse-bomb" />
+			<name value="SPRITE_TRAVERSE_BOMB" />
 		</ability>
 	</item>
 	<item name="throughwalls" folder="throughwalls" >
 		<ability >
-			<name value="sprite-traverse-wall" />
+			<name value="SPRITE_TRAVERSE_WALL" />
 		</ability>
 	</item>
 

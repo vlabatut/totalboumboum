@@ -5,7 +5,7 @@
 
 	<bomb name="remotecontrol" folder="remotecontrol" >
 		<ability >
-			<name value="bomb-type-remotecontrol" />
+			<name value="CUSTOM_BOMB_TYPE_REMOTECONTROL" />
 		</ability>
 	</bomb>
 	

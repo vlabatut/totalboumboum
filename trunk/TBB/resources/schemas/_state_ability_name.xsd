@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema">
 
-	<xsd:simpleType name="tStateAbilityName">
+	<xsd:simpleType name="tStateAbilityPredefined">
 		<xsd:restriction base="xsd:string">
 			<xsd:enumeration value="SPRITE_FLAT" />
 			<xsd:enumeration value="SPRITE_ABOVE" />
@@ -31,5 +31,16 @@
 		</xsd:restriction>
 	</xsd:simpleType>
 
+	<xsd:simpleType name="tStateAbilityCustom" >
+		<xsd:restriction base="xsd:string" >
+			<xsd:pattern value="CUSTOM(_[A-Z]*)+" />
+			<!-- should actually start with a '^'...but doesn't work-->
+		</xsd:restriction>
+	</xsd:simpleType>
+
+	<xsd:simpleType name="tStateAbilityName" >
+		<xsd:union memberTypes="tStateAbilityPredefined tStateAbilityCustom" />
+	</xsd:simpleType>
+	
 </xsd:schema>
 		
