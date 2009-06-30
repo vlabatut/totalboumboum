@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <archive xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="..\..\..\resources\schemas\archive.xsd">
-	<tournament name="Tournoi de Galatasaray 2" type="cup" />
+	<tournament name="Tournoi de Galatasaray 2" type="CUP" />
 	<played matches="0" rounds="0" />
 	<dates start="2009-01-09T14:43:11" save="2009-01-09T14:43:22" />
 	<players>

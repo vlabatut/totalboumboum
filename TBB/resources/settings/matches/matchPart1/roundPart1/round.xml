@@ -14,12 +14,12 @@
 	<limits>
 		<lastStanding>
 			<points local="true" name="zeroPoint" />
-			<threshold value="0" comparator="equal"/>
+			<threshold value="0" comparator="EQUAL"/>
 		</lastStanding>
 
 		<lastStanding>
 			<points local="true" name="onePoint" />
-			<threshold value="1" comparator="equal"/>
+			<threshold value="1" comparator="EQUAL"/>
 		</lastStanding>
 
 		<time>

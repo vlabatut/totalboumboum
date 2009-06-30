@@ -18,9 +18,9 @@
 				<match local="true" name="regular" />
 				<tieBreak>
 					<rankings>
-						<scores type="bombings"/>
-						<scores type="items"/>
-						<scores type="bombs"/>
+						<scores type="BOMBINGS"/>
+						<scores type="ITEMS"/>
+						<scores type="BOMBS"/>
 					</rankings>
 					<match local="true" name="tieBreak" />
 				</tieBreak>
@@ -35,9 +35,9 @@
 				<match local="true" name="regular" />
 				<tieBreak>
 					<rankings>
-						<scores type="bombings"/>
-						<scores type="items"/>
-						<scores type="bombs"/>
+						<scores type="BOMBINGS"/>
+						<scores type="ITEMS"/>
+						<scores type="BOMBS"/>
 					</rankings>
 					<match local="true" name="tieBreak" />
 				</tieBreak>
@@ -52,9 +52,9 @@
 				<match local="true" name="regular" />
 				<tieBreak>
 					<rankings>
-						<scores type="bombings"/>
-						<scores type="items"/>
-						<scores type="bombs"/>
+						<scores type="BOMBINGS"/>
+						<scores type="ITEMS"/>
+						<scores type="BOMBS"/>
 					</rankings>
 					<match local="true" name="tieBreak" />
 				</tieBreak>
@@ -69,9 +69,9 @@
 				<match local="true" name="regular" />
 				<tieBreak>
 					<rankings>
-						<scores type="bombings"/>
-						<scores type="items"/>
-						<scores type="bombs"/>
+						<scores type="BOMBINGS"/>
+						<scores type="ITEMS"/>
+						<scores type="BOMBS"/>
 					</rankings>
 					<match local="true" name="tieBreak" />
 				</tieBreak>
@@ -89,9 +89,9 @@
 				<match local="true" name="regular" />
 				<tieBreak>
 					<rankings>
-						<scores type="bombings"/>
-						<scores type="items"/>
-						<scores type="bombs"/>
+						<scores type="BOMBINGS"/>
+						<scores type="ITEMS"/>
+						<scores type="BOMBS"/>
 					</rankings>
 					<match local="true" name="tieBreak" />
 				</tieBreak>
@@ -106,9 +106,9 @@
 				<match local="true" name="regular" />
 				<tieBreak>
 					<rankings>
-						<scores type="bombings"/>
-						<scores type="items"/>
-						<scores type="bombs"/>
+						<scores type="BOMBINGS"/>
+						<scores type="ITEMS"/>
+						<scores type="BOMBS"/>
 					</rankings>
 					<match local="true" name="tieBreak" />
 				</tieBreak>
@@ -123,9 +123,9 @@
 				<match local="true" name="regular" />
 				<tieBreak>
 					<rankings>
-						<scores type="bombings"/>
-						<scores type="items"/>
-						<scores type="bombs"/>
+						<scores type="BOMBINGS"/>
+						<scores type="ITEMS"/>
+						<scores type="BOMBS"/>
 					</rankings>
 					<match local="true" name="tieBreak" />
 				</tieBreak>
@@ -140,9 +140,9 @@
 				<match local="true" name="regular" />
 				<tieBreak>
 					<rankings>
-						<scores type="bombings"/>
-						<scores type="items"/>
-						<scores type="bombs"/>
+						<scores type="BOMBINGS"/>
+						<scores type="ITEMS"/>
+						<scores type="BOMBS"/>
 					</rankings>
 					<match local="true" name="tieBreak" />
 				</tieBreak>
@@ -160,9 +160,9 @@
 				<match local="true" name="regular" />
 				<tieBreak>
 					<rankings>
-						<scores type="bombings"/>
-						<scores type="items"/>
-						<scores type="bombs"/>
+						<scores type="BOMBINGS"/>
+						<scores type="ITEMS"/>
+						<scores type="BOMBS"/>
 					</rankings>
 					<match local="true" name="tieBreak" />
 				</tieBreak>
@@ -177,9 +177,9 @@
 				<match local="true" name="regular" />
 				<tieBreak>
 					<rankings>
-						<scores type="bombings"/>
-						<scores type="items"/>
-						<scores type="bombs"/>
+						<scores type="BOMBINGS"/>
+						<scores type="ITEMS"/>
+						<scores type="BOMBS"/>
 					</rankings>
 					<match local="true" name="tieBreak" />
 				</tieBreak>
@@ -194,9 +194,9 @@
 				<match local="true" name="regular" />
 				<tieBreak>
 					<rankings>
-						<scores type="bombings"/>
-						<scores type="items"/>
-						<scores type="bombs"/>
+						<scores type="BOMBINGS"/>
+						<scores type="ITEMS"/>
+						<scores type="BOMBS"/>
 					</rankings>
 					<match local="true" name="tieBreak" />
 				</tieBreak>
@@ -211,9 +211,9 @@
 				<match local="true" name="regular" />
 				<tieBreak>
 					<rankings>
-						<scores type="bombings"/>
-						<scores type="items"/>
-						<scores type="bombs"/>
+						<scores type="BOMBINGS"/>
+						<scores type="ITEMS"/>
+						<scores type="BOMBS"/>
 					</rankings>
 					<match local="true" name="tieBreak" />
 				</tieBreak>

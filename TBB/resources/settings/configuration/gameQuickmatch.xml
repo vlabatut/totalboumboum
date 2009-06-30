@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<gameQuickmatch xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="..\..\..\resources\schemas\gameQuickmatch.xsd">
+<gameQuickmatch xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="..\..\..\resources\schemas\game_quickmatch.xsd">
 	<options useLastPlayers="true" useLastLevels="true" useLastSettings="true" />
 	<settings>
 		<levels randomOrder="true" />
@@ -14,10 +14,10 @@
 		</points>
 	</settings>
 	<players>
-		<player file="1" color="cyan" controls="1" spritePack="nesbomberman2" spriteFolder="shirobon" />
-		<player file="53" color="red" controls="0" spritePack="superbomberman5" spriteFolder="shirobon" />
-		<player file="59" color="blue" controls="0" spritePack="superbomberman5" spriteFolder="shirobon" />
-		<player file="60" color="orange" controls="0" spritePack="superbomberman5" spriteFolder="shirobon" />
+		<player file="1" color="CYAN" controls="1" spritePack="nesbomberman2" spriteFolder="shirobon" />
+		<player file="53" color="RED" controls="0" spritePack="superbomberman5" spriteFolder="shirobon" />
+		<player file="59" color="BLUE" controls="0" spritePack="superbomberman5" spriteFolder="shirobon" />
+		<player file="60" color="ORANGE" controls="0" spritePack="superbomberman5" spriteFolder="shirobon" />
 	</players>
 	<levels>
 		<level pack="sbm1Custom" folder="test3" />

@@ -13,7 +13,7 @@
 	<limits>
 		<lastStanding>
 			<points local="true" name="points" />
-			<threshold value="1" comparator="lesseq"/>
+			<threshold value="1" comparator="LESSEQ"/>
 		</lastStanding>
 		<time>
 			<points local="true" name="points" />

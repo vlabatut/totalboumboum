@@ -5,22 +5,22 @@
 
 	<bomb name="remotepenetration" folder="remotepenetration">
 		<ability >
-			<name value="bomb-type-remotecontrol" />
+			<name value="CUSTOM_BOMB_TYPE_REMOTE_CONTROL" />
 		</ability>
 		<ability >
-			<name value="bomb-type-penetration" />
+			<name value="CUSTOM_BOMB_TYPE_PENETRATION" />
 		</ability>
 	</bomb>
 	
 	<bomb name="penetration" folder="penetration" >
 		<ability >
-			<name value="bomb-type-penetration" />
+			<name value="CUSTOM_BOMB_TYPE_PENETRATION" />
 		</ability>
 	</bomb>
 	
 	<bomb name="remotecontrol" folder="remotecontrol" >
 		<ability >
-			<name value="bomb-type-remotecontrol" />
+			<name value="CUSTOM_BOMB_TYPE_REMOTE_CONTROL" />
 		</ability>
 	</bomb>
 	
