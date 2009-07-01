@@ -951,9 +951,9 @@ public class Launcher
 	 * gérer les changements (passage aux types énum) dans l'enregistrement de données XML
 	 * 
 	 * 
-	 * >>il faut autoriser le concepteur à rajouter les stateab qu'il veut<<
-	 * (en préfixant par exemple par CUSTOM_). en java on doit donc manipuler du string, finalement...
-	 *  
+	 *  >> pr la mutualisation de certains aspects des sprites, suffit de rendre explicite
+	 *  dans le fichier sprite.xml la localisation des composants (animes, traj, etc) avec
+	 *  la possibilité de les foutre en amont. apriori, seulement valable pr bombes, items et themes
 	 * 
 	 * 
 	 * le XML des animes doit avoir soit :

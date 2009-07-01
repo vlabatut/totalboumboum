@@ -9,11 +9,13 @@
 			<xsd:enumeration value="CARRYING" />
 			<xsd:enumeration value="CRYING" />
 			<xsd:enumeration value="DISAPPEARING" />
+			<xsd:enumeration value="ENDED" />
 			<xsd:enumeration value="EXULTING" />
 			<xsd:enumeration value="HIDING" />
 			<xsd:enumeration value="HOLDING" />
 			<xsd:enumeration value="JUMPING" />
 			<xsd:enumeration value="LANDING" />
+			<xsd:enumeration value="NONE" />
 			<xsd:enumeration value="OSCILLATING" />
 			<xsd:enumeration value="OSCILLATING_FAILING" />
 			<xsd:enumeration value="PICKING" />
@@ -35,7 +37,9 @@
 	<xsd:simpleType name="tGestureNameBlock">
 		<xsd:restriction base="xsd:string">
 			<xsd:enumeration value="BURNING" />
+			<xsd:enumeration value="ENDED" />
 			<xsd:enumeration value="HIDING" />
+			<xsd:enumeration value="NONE" />
 			<xsd:enumeration value="SPAWNING" />
 			<xsd:enumeration value="STANDING" />
 		</xsd:restriction>
@@ -44,7 +48,9 @@
 	<xsd:simpleType name="tGestureNameBomb">
 		<xsd:restriction base="xsd:string">
 			<xsd:enumeration value="BURNING" />
+			<xsd:enumeration value="ENDED" />
 			<xsd:enumeration value="LANDING" />
+			<xsd:enumeration value="NONE" />
 			<xsd:enumeration value="OSCILLATING" />
 			<xsd:enumeration value="OSCILLATING_FAILING" />
 			<xsd:enumeration value="PUNCHED" />
@@ -58,11 +64,15 @@
 	<xsd:simpleType name="tGestureNameFire">
 		<xsd:restriction base="xsd:string">
 			<xsd:enumeration value="BURNING" />
+			<xsd:enumeration value="ENDED" />
+			<xsd:enumeration value="NONE" />
 		</xsd:restriction>
 	</xsd:simpleType>
 
 	<xsd:simpleType name="tGestureNameFloor">
 		<xsd:restriction base="xsd:string">
+			<xsd:enumeration value="ENDED" />
+			<xsd:enumeration value="NONE" />
 			<xsd:enumeration value="STANDING" />
 		</xsd:restriction>
 	</xsd:simpleType>
@@ -73,10 +83,12 @@
 			<xsd:enumeration value="BOUNCING" />
 			<xsd:enumeration value="BURNING" />
 			<xsd:enumeration value="CRYING" />
+			<xsd:enumeration value="ENDED" />
 			<xsd:enumeration value="EXULTING" />
 			<xsd:enumeration value="HIDING" />
 			<xsd:enumeration value="JUMPING" />
 			<xsd:enumeration value="LANDING" />
+			<xsd:enumeration value="NONE" />
 			<xsd:enumeration value="PUNCHING" />
 			<xsd:enumeration value="PUSHING" />
 			<xsd:enumeration value="STANDING" />
@@ -88,6 +100,8 @@
 	<xsd:simpleType name="tGestureNameItem">
 		<xsd:restriction base="xsd:string">
 			<xsd:enumeration value="BURNING" />
+			<xsd:enumeration value="ENDED" />
+			<xsd:enumeration value="NONE" />
 			<xsd:enumeration value="STANDING" />
 		</xsd:restriction>
 	</xsd:simpleType>
