@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
-<permissions xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
-		xsi:noNamespaceSchemaLocation="../../../../../schemas/permissions.xsd" >
+<modulations xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+		xsi:noNamespaceSchemaLocation="../../../../../schemas/modulations.xsd" >
 	
-	<gesture name="none" file="none.xml" />
-	<gesture name="ended" file="ended.xml" />
+	<gesture name="NONE" file="none.xml" />
+	<gesture name="ENDED" file="ended.xml" />
 	
-	<gesture name="burning" file="burning.xml" />
-	<gesture name="standing" file="standing.xml" />
-	<gesture name="standing-failing" file="standingfailing.xml" />
+	<gesture name="BURNING" file="burning.xml" />
+	<gesture name="STANDING" file="standing.xml" />
+	<gesture name="STANDING_FAILING" file="standingfailing.xml" />
 
-</permissions>
+</modulations>
