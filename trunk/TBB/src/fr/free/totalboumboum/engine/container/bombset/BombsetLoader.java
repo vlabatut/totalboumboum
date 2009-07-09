@@ -24,6 +24,7 @@ package fr.free.totalboumboum.engine.container.bombset;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 
@@ -45,6 +46,10 @@ import fr.free.totalboumboum.tools.XmlTools;
 
 public class BombsetLoader
 {	
+	/////////////////////////////////////////////////////////////////
+	// LOAD ALL BUT ANIMES	/////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+
 	public static Bombset loadBombset(String folderPath, Level level) throws ParserConfigurationException, SAXException, IOException, ClassNotFoundException
 	{	// init
 		String schemaFolder = FileTools.getSchemasPath();
@@ -60,35 +65,35 @@ public class BombsetLoader
 		return result;
 	}
 	
-    @SuppressWarnings("unchecked")
     private static Bombset loadBombsetElement(Element root, String folder, Level level) throws ParserConfigurationException, SAXException, IOException, ClassNotFoundException
     {	// init
     	Bombset result = new Bombset();
 
     	// abstract bombs
-    	Element abstractBombs = root.getChild(XmlTools.ELT_ABSTRACT_BOMBS);
-    	if(abstractBombs!=null)
-    		loadBombsElement(abstractBombs,folder,level,result,Type.ABSTRACT);
+    	HashMap<String,BombFactory> abstractBombs = new HashMap<String,BombFactory>();
+    	Element abstractBombsElt = root.getChild(XmlTools.ELT_ABSTRACT_BOMBS);
+    	if(abstractBombsElt!=null)
+    		loadBombsElement(abstractBombsElt,folder,level,result,abstractBombs,Type.ABSTRACT);
     	
     	// concrete bombs
-    	Element concreteBombs = root.getChild(XmlTools.ELT_CONCRETE_BOMBS);
-		loadBombsElement(concreteBombs,folder,level,result,Type.ABSTRACT);
+    	Element concreteBombsElt = root.getChild(XmlTools.ELT_CONCRETE_BOMBS);
+		loadBombsElement(concreteBombsElt,folder,level,result,abstractBombs,Type.CONCRETE);
     	
     	return result;
     }
     
     @SuppressWarnings("unchecked")
-    private static void loadBombsElement(Element root, String folder, Level level, Bombset result, Type type) throws ParserConfigurationException, SAXException, IOException, ClassNotFoundException
+    private static void loadBombsElement(Element root, String folder, Level level, Bombset result, HashMap<String,BombFactory> abstractBombs, Type type) throws ParserConfigurationException, SAXException, IOException, ClassNotFoundException
     {	String individualFolder = folder;
     	List<Element> bombs = root.getChildren(XmlTools.ELT_BOMB);
     	Iterator<Element> i = bombs.iterator();
     	while(i.hasNext())
     	{	Element temp = i.next();
-    		loadBombElement(temp,individualFolder,level,result,type);
+    		loadBombElement(temp,individualFolder,level,result,abstractBombs,type);
     	}
     }
     
-    private static void loadBombElement(Element root, String folder, Level level, Bombset bombset, Type type) throws ParserConfigurationException, SAXException, IOException, ClassNotFoundException
+    private static void loadBombElement(Element root, String folder, Level level, Bombset bombset, HashMap<String,BombFactory> abstractBombs, Type type) throws ParserConfigurationException, SAXException, IOException, ClassNotFoundException
     {	// name
 		String name = root.getAttribute(XmlTools.ATT_NAME).getValue().trim();
 
@@ -110,26 +115,19 @@ public class BombsetLoader
 			}
 		
 			// result
-			BombFactory bombFactory = BombFactoryLoader.loadBombFactory(individualFolder,level,name);
+			BombFactory bombFactory = BombFactoryLoader.loadBombFactory(individualFolder,level,name,abstractBombs);
 			bombset.addBombFactory(bombFactory,abilities);
 		}
 		else
-		{	
-			//TODO
+		{	BombFactory bombFactory = BombFactoryLoader.loadBombFactory(individualFolder,level,name,abstractBombs);
+			abstractBombs.put(name,bombFactory);
 		}
-		
     }
     
-    
-    
-    
-    
-    
-    
-    
-    
-    
-	public static Bombset loadBombset(String folderPath, Level level, PredefinedColor color) throws ParserConfigurationException, SAXException, IOException, ClassNotFoundException
+	/////////////////////////////////////////////////////////////////
+	// LOAD ONLY ANIMES	/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	public static Bombset loadBombset(String folderPath, Level level, PredefinedColor color, Bombset result) throws ParserConfigurationException, SAXException, IOException, ClassNotFoundException
 	{	// init
 		String schemaFolder = FileTools.getSchemasPath();
 		String individualFolder = folderPath;
@@ -140,42 +138,37 @@ public class BombsetLoader
 		schemaFile = new File(schemaFolder+File.separator+FileTools.FILE_BOMBSET+FileTools.EXTENSION_SCHEMA);
 		Element root = XmlTools.getRootFromFile(dataFile,schemaFile);
 		
-		Bombset result = loadBombsetElement(root,individualFolder,color,level);
+		loadBombsetElement(root,individualFolder,color,level,result);
 		return result;
 	}
 	
-    @SuppressWarnings("unchecked")
-	private static Bombset loadBombsetElement(Element root, String folder, PredefinedColor color, Level level) throws ParserConfigurationException, SAXException, IOException, ClassNotFoundException
-    {	// init
-    	Bombset result = new Bombset();
-
-    	// abstract bombs
-    	Element abstractBombs = root.getChild(XmlTools.ELT_ABSTRACT_BOMBS);
-    	if(abstractBombs!=null)
-    		loadBombsElement(abstractBombs,folder,color,level,result,Type.ABSTRACT);
+	private static void loadBombsetElement(Element root, String folder, PredefinedColor color, Level level, Bombset result) throws ParserConfigurationException, SAXException, IOException, ClassNotFoundException
+    {	// abstract bombs
+    	HashMap<String,BombFactory> abstractBombs = new HashMap<String,BombFactory>();
+    	Element abstractBombsElt = root.getChild(XmlTools.ELT_ABSTRACT_BOMBS);
+    	if(abstractBombsElt!=null)
+    		loadBombsElement(abstractBombsElt,folder,color,level,result,abstractBombs,Type.ABSTRACT);
     	
     	// concrete bombs
-    	Element concreteBombs = root.getChild(XmlTools.ELT_CONCRETE_BOMBS);
-		loadBombsElement(concreteBombs,folder,color,level,result,Type.ABSTRACT);
-    	
-    	return result;
+    	Element concreteBombsElt = root.getChild(XmlTools.ELT_CONCRETE_BOMBS);
+		loadBombsElement(concreteBombsElt,folder,color,level,result,abstractBombs,Type.ABSTRACT);
 	}
     
     @SuppressWarnings("unchecked")
-	private static void loadBombsElement(Element root, String folder, PredefinedColor color, Level level, Bombset result, Type type) throws ParserConfigurationException, SAXException, IOException, ClassNotFoundException
+	private static void loadBombsElement(Element root, String folder, PredefinedColor color, Level level, Bombset result, HashMap<String,BombFactory> abstractBombs, Type type) throws ParserConfigurationException, SAXException, IOException, ClassNotFoundException
     {	String individualFolder = folder;
     	List<Element> bombs = root.getChildren(XmlTools.ELT_BOMB);
     	Iterator<Element> i = bombs.iterator();
     	while(i.hasNext())
     	{	Element temp = i.next();
-    		loadBombElement(temp,individualFolder,color,level,result,type);
+    		loadBombElement(temp,individualFolder,color,level,result,abstractBombs,type);
     	}
     }
     
-	private static void loadBombElement(Element root, String folder, PredefinedColor color, Level level, Bombset bombset, Type type) throws ParserConfigurationException, SAXException, IOException, ClassNotFoundException
+	private static void loadBombElement(Element root, String folder, PredefinedColor color, Level level, Bombset bombset, HashMap<String,BombFactory> abstractBombs, Type type) throws ParserConfigurationException, SAXException, IOException, ClassNotFoundException
     {	// name
 		String name = root.getAttribute(XmlTools.ATT_NAME).getValue().trim();
-
+		
 		// folder
     	String individualFolder = folder;
 		Attribute attribute = root.getAttribute(XmlTools.ATT_FOLDER);
@@ -183,36 +176,17 @@ public class BombsetLoader
 			individualFolder = individualFolder+File.separator+attribute.getValue().trim();
 		
 		// required abilities
+		BombFactory bombFactory;
 		if(type==Type.CONCRETE)
-		{	ArrayList<AbstractAbility> requiredAbilities = AbilityLoader.loadAbilitiesElement(root,level);
-			Iterator<AbstractAbility> i = requiredAbilities.iterator();
-			ArrayList<StateAbility> abilities = new ArrayList<StateAbility>();
-			while(i.hasNext())
-			{	AbstractAbility ablt = i.next();
-				if(ablt instanceof StateAbility)
-					abilities.add((StateAbility)ablt);
-			}
-		
-			// result
-			BombFactory bombFactory = BombFactoryLoader.loadBombFactory(individualFolder,level,name,color,bombset);
-			bombset.addBombFactory(bombFactory,abilities);
-		}
+			bombFactory = bombset.getBombFactory(name);		
 		else
-		{	
-			//TODO
-		}
-		
+			bombFactory = abstractBombs.get(name);
+		BombFactoryLoader.completeBombFactory(bombFactory,individualFolder,level,color,bombset,abstractBombs);
     }
 
-    
-    
-    
-    
-    
-    
-    
-    
-    
+	/////////////////////////////////////////////////////////////////
+	// LOADING TYPE		/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
     private enum Type
     {
     	ABSTRACT,

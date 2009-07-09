@@ -86,6 +86,17 @@ public class Bombset
 		return result;
 	}
 
+	public BombFactory getBombFactory(String name)
+	{	BombFactory result = null;
+		Iterator<BombFactory> i = bombFactories.iterator();
+		while(i.hasNext() && result==null)
+		{	BombFactory temp = i.next();
+			if(temp.getName().equalsIgnoreCase(name))
+				result = temp;
+		}
+		return result;
+	}
+	
 	/////////////////////////////////////////////////////////////////
 	// COPY				/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////

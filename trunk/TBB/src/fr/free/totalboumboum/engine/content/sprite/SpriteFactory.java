@@ -24,6 +24,7 @@ package fr.free.totalboumboum.engine.content.sprite;
 import java.util.ArrayList;
 import java.util.Iterator;
 
+import fr.free.totalboumboum.configuration.profile.PredefinedColor;
 import fr.free.totalboumboum.engine.container.bombset.Bombset;
 import fr.free.totalboumboum.engine.container.level.Level;
 import fr.free.totalboumboum.engine.content.feature.ability.AbstractAbility;
@@ -116,6 +117,19 @@ public abstract class SpriteFactory<T extends Sprite>
 	
 	public void setName(String name)
 	{	this.name = name;
+	}
+	
+	/////////////////////////////////////////////////////////////////
+	// BASE				/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	protected String base;
+
+	public String getBase()
+	{	return base;
+	}
+	
+	public void setBase(String base)
+	{	this.base = base;
 	}
 	
 	/////////////////////////////////////////////////////////////////

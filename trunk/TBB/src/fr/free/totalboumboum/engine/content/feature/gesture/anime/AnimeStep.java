@@ -22,21 +22,11 @@ package fr.free.totalboumboum.engine.content.feature.gesture.anime;
  */
 
 import java.awt.image.BufferedImage;
-import java.util.ArrayList;
 
 import fr.free.totalboumboum.engine.content.feature.ImageShift;
 
 public class AnimeStep
 {
-	private BufferedImage image;
-	private long duration;
-	private double xShift;
-	private double yShift;
-	private BufferedImage shadow;
-	private double shadowXShift;
-	private double shadowYShift;
-	private ImageShift boundYShift;
-	
 	public AnimeStep()
 	{	image = null;
 		duration = 0;
@@ -48,20 +38,108 @@ public class AnimeStep
 		boundYShift = ImageShift.DOWN;
 	}
 	
+	/////////////////////////////////////////////////////////////////
+	// IMAGE			/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	private BufferedImage image;
+
 	public BufferedImage getImage()
 	{	return image;
 	}
+	
 	public void setImage(BufferedImage image)
 	{	this.image = image;
 	}
 	
+	/////////////////////////////////////////////////////////////////
+	// DURATION			/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	private long duration;
+
 	public long getDuration()
 	{	return duration;
 	}
+	
 	public void setDuration(long duration)
 	{	this.duration = duration;
 	}
 	
+	/////////////////////////////////////////////////////////////////
+	// SHIFTS			/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	private double xShift;
+	private double yShift;
+
+	public double getXShift()
+	{	return xShift;
+	}
+	
+	public void setXShift(double xShift)
+	{	this.xShift = xShift;
+	}
+
+	public double getYShift()
+	{	return yShift;
+	}
+	
+	public void setYShift(double yShift)
+	{	this.yShift = yShift;
+	}
+
+	/////////////////////////////////////////////////////////////////
+	// SHADOW			/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	private BufferedImage shadow;
+
+	public boolean hasShadow()
+	{	return shadow != null;
+	}
+	
+	public void setShadow(BufferedImage shadow)
+	{	this.shadow = shadow;
+	}
+	
+	public BufferedImage getShadow()
+	{	return shadow;
+	}
+
+	/////////////////////////////////////////////////////////////////
+	// SHADOW SHIFTS	/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	private double shadowXShift;
+	private double shadowYShift;
+
+	public double getShadowXShift()
+	{	return shadowXShift;
+	}
+	public void setShadowXShift(double shadowXShift)
+	{	this.shadowXShift = shadowXShift;
+	}
+
+	public double getShadowYShift()
+	{	return shadowYShift;
+	}
+	public void setShadowYShift(double shadowYShift)
+	{	this.shadowYShift = shadowYShift;
+	}
+
+	/////////////////////////////////////////////////////////////////
+	// BOUND SHIFTS		/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	private ImageShift boundYShift;
+
+	public ImageShift getBoundYShift()
+	{	return boundYShift;
+	}
+	
+	public void setBoundYShift(ImageShift boundYShift)
+	{	this.boundYShift = boundYShift;
+	}
+	
+	/////////////////////////////////////////////////////////////////
+	// COPY				/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+/*	
 	public AnimeStep copy(ArrayList<BufferedImage> images, ArrayList<BufferedImage> copyImages)
 	{	AnimeStep result = new AnimeStep();
 		// image
@@ -88,54 +166,31 @@ public class AnimeStep
 		//
 		return result;
 	}
-
-	public double getXShift()
-	{	return xShift;
-	}
-	public void setXShift(double xShift)
-	{	this.xShift = xShift;
-	}
-
-	public double getYShift()
-	{	return yShift;
-	}
-	public void setYShift(double yShift)
-	{	this.yShift = yShift;
-	}
-
-	public boolean hasShadow()
-	{	return shadow != null;
-	}
-	public void setShadow(BufferedImage shadow)
-	{	this.shadow = shadow;
-	}
-	public BufferedImage getShadow()
-	{	return shadow;
+*/
+	public AnimeStep copy()
+	{	AnimeStep result = new AnimeStep();
+		// image
+		result.setImage(image);
+		// duration
+		result.setDuration(duration);
+		// shifts
+		result.setXShift(xShift);
+		result.setYShift(yShift);
+		// shadow
+		result.setShadow(shadow);
+		result.setShadowXShift(shadowXShift);
+		result.setShadowYShift(shadowYShift);
+		// bound
+		result.setBoundYShift(boundYShift);
+		//
+		return result;
 	}
 
-	public double getShadowXShift()
-	{	return shadowXShift;
-	}
-	public void setShadowXShift(double shadowXShift)
-	{	this.shadowXShift = shadowXShift;
-	}
-
-	public double getShadowYShift()
-	{	return shadowYShift;
-	}
-	public void setShadowYShift(double shadowYShift)
-	{	this.shadowYShift = shadowYShift;
-	}
-
-	public ImageShift getBoundYShift()
-	{	return boundYShift;
-	}
-	public void setBoundYShift(ImageShift boundYShift)
-	{	this.boundYShift = boundYShift;
-	}
-
+	/////////////////////////////////////////////////////////////////
+	// FINISHED			/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
 	private boolean finished = false;
-	
+
 	public void finish()
 	{	if(!finished)
 		{	finished = true;

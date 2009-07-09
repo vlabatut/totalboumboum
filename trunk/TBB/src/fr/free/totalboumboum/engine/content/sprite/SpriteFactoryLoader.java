@@ -53,12 +53,17 @@ public abstract class SpriteFactoryLoader
 
 	protected static <T extends Sprite> void loadGeneralElement(Element root, SpriteFactory<T> result)
 	{	Element elt = root.getChild(XmlTools.ELT_GENERAL);
+		// name
 		String name = elt.getAttribute(XmlTools.ATT_NAME).getValue().trim();
 		result.setName(name);
+		// base
+		String base = elt.getAttributeValue(XmlTools.ATT_BASE);
+		if(base!=null)
+			result.setBase(base);
 	}
 	
-	protected static <T extends Sprite> void loadExplosionElement(Element root, Level level, SpriteFactory<T> result) throws ParserConfigurationException, SAXException, IOException, ClassNotFoundException
-	{	Explosion explosion = new Explosion();
+	protected static <T extends Sprite> Explosion loadExplosionElement(Element root, Level level) throws ParserConfigurationException, SAXException, IOException, ClassNotFoundException
+	{	Explosion explosion = null;
 		Element elt = root.getChild(XmlTools.ELT_EXPLOSION);
 		if(elt!=null)
 		{	String name = elt.getAttribute(XmlTools.ATT_NAME).getValue().trim();
@@ -66,6 +71,6 @@ public abstract class SpriteFactoryLoader
 			folder = folder + File.separator+name;
 			explosion = ExplosionLoader.loadExplosion(folder,level);
 		}
-		result.setExplosion(explosion);
+		return explosion;
 	}
 }

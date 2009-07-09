@@ -242,6 +242,15 @@ public class Gesture
 		result.finished = finished;
 		return result;
 	}
+	
+	public void copyAnimesFrom(Gesture gesture)
+	{	for(Entry<Direction,AnimeDirection> e: animes.entrySet())
+		{	AnimeDirection anime = e.getValue();
+			Direction direction = e.getKey();
+			AnimeDirection anime0 = anime/*.copy()*/;
+			gesture.addAnimeDirection(anime0,direction);
+		}		
+	}
 
 	/////////////////////////////////////////////////////////////////
 	// FINISHED			/////////////////////////////////////////////

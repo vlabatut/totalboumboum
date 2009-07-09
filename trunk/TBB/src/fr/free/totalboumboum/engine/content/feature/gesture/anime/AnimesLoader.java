@@ -99,6 +99,7 @@ public class AnimesLoader
 		}
 		
 		// colors ?
+		pack.setColor(color);
 		Object obj;
 		Element elt = root.getChild(XmlTools.ELT_COLORS);
 		if(elt!=null && color!=null)
@@ -132,6 +133,7 @@ public class AnimesLoader
 		Attribute attribute = root.getAttribute(XmlTools.ATT_FOLDER);
 		if(attribute!=null)
 			localFilePath = localFilePath+File.separator+attribute.getValue();
+		
 		// shadows
     	List<Element> shdws = root.getChildren(XmlTools.ELT_SHADOW);
     	Iterator<Element> i = shdws.iterator();
@@ -149,9 +151,11 @@ public class AnimesLoader
     	String localPath = individualFolder+File.separator;
     	localPath = localPath + root.getAttribute(XmlTools.ATT_FILE).getValue().trim();
     	BufferedImage shadow = loadImage(localPath,level,images,colormap,zoomFactor,scale);
+    	
     	// name
     	String name = root.getAttribute(XmlTools.ATT_NAME).getValue().trim();
-		//
+		
+    	// result
     	shadows.put(name,shadow);
     }
     
@@ -165,6 +169,7 @@ public class AnimesLoader
 		Attribute attribute = root.getAttribute(XmlTools.ATT_FOLDER);
 		if(attribute!=null)
 			localFilePath = localFilePath+File.separator+attribute.getValue();
+		
 		// gestures
     	List<Element> gesturesList = root.getChildren();
     	Iterator<Element> i = gesturesList.iterator();
@@ -186,21 +191,25 @@ public class AnimesLoader
     	String name = root.getAttribute(XmlTools.ATT_NAME).getValue().toUpperCase(Locale.ENGLISH);
 		GestureName gestureName = GestureName.valueOf(name);
     	Gesture gesture = pack.getGesture(gestureName);
+    	
     	// images folder
     	String localFilePath = filePath;
     	Attribute attribute = root.getAttribute(XmlTools.ATT_FOLDER);
     	if(attribute!=null)
 			localFilePath = localFilePath+File.separator+attribute.getValue();
-		// repeat flag
+		
+    	// repeat flag
 		String repeatStr = root.getAttribute(XmlTools.ATT_REPEAT).getValue();
 		boolean repeat = false;
 		if(!repeatStr.equals(""))
 			repeat = Boolean.parseBoolean(repeatStr);
+		
 		// proportional flag
 		boolean proportional = false;
 		attribute = root.getAttribute(XmlTools.ATT_PROPORTIONAL);
 		if(attribute!=null)
 			proportional = Boolean.parseBoolean(attribute.getValue());
+		
 		// horizontal shift
 		double xShift = 0;
 		attribute = root.getAttribute(XmlTools.ATT_XSHIFT);
@@ -215,6 +224,7 @@ public class AnimesLoader
 		{	double temp = Double.parseDouble(attribute.getValue());
 			yShift = zoomFactor*temp/scale;
 		}
+		
 		// shadow
 		BufferedImage shadow = null;
 		attribute = root.getAttribute(XmlTools.ATT_SHADOW);
@@ -225,6 +235,7 @@ public class AnimesLoader
 				shadow = loadImage(imgPath,level,images,colormap,zoomFactor,scale);
 			}
 		}
+		
 		// shadow horizontal shift
 		double shadowXShift = 0;
 		attribute = root.getAttribute(XmlTools.ATT_SHADOW_XSHIFT);
@@ -232,6 +243,7 @@ public class AnimesLoader
 		{	double temp = Double.parseDouble(attribute.getValue());
 			shadowXShift = zoomFactor*temp/scale;
 		}
+		
 		// shadow vertical shift
 		double shadowYShift = 0;
 		attribute = root.getAttribute(XmlTools.ATT_SHADOW_YSHIFT);
@@ -239,11 +251,13 @@ public class AnimesLoader
 		{	double temp = Double.parseDouble(attribute.getValue());
 			shadowYShift = zoomFactor*temp/scale;
 		}
+		
 		// bound shift
 		ImageShift boundYShift = ImageShift.DOWN;
 		attribute = root.getAttribute(XmlTools.ATT_BOUND_YSHIFT);
 		if(attribute!=null)
 			boundYShift = ImageShift.valueOf(attribute.getValue().trim().toUpperCase(Locale.ENGLISH));
+		
 		// directions
 		List<Element> directionsList = root.getChildren(XmlTools.ELT_DIRECTION);
     	Iterator<Element> i = directionsList.iterator();
@@ -269,7 +283,8 @@ public class AnimesLoader
     		HashMap<String,BufferedImage> images, HashMap<String,BufferedImage> shadows, Colormap colormap,
     		double zoomFactor, double scale) throws IOException
     {	AnimeDirection result = new AnimeDirection();
-		// direction
+		
+    	// direction
 		String strDirection = root.getAttribute(XmlTools.ATT_NAME).getValue().trim();
 		Direction direction = Direction.NONE;
 		if(!strDirection.equals(""))
@@ -279,23 +294,27 @@ public class AnimesLoader
     	result.setBoundHeight(boundHeight);
     	result.setRepeat(repeat);
     	result.setProportional(proportional);
-		// folder
+		
+    	// folder
     	String localFilePath = filePath;
     	Attribute attribute = root.getAttribute(XmlTools.ATT_FOLDER);
     	if(attribute!=null)
 			localFilePath = localFilePath+File.separator+attribute.getValue();
-		// horizontal shift
+		
+    	// horizontal shift
 		attribute = root.getAttribute(XmlTools.ATT_XSHIFT);
 		if(attribute!=null)
 		{	double temp = Double.parseDouble(attribute.getValue());
 			xShift = zoomFactor*temp/scale;
 		}
+		
 		// vertical shift
 		attribute = root.getAttribute(XmlTools.ATT_YSHIFT);
 		if(attribute!=null)
 		{	double temp = Double.parseDouble(attribute.getValue());
 			yShift = zoomFactor*temp/scale;
 		}
+		
 		// shadow
 		attribute = root.getAttribute(XmlTools.ATT_SHADOW);
 		if(attribute!=null)
@@ -305,23 +324,27 @@ public class AnimesLoader
 				shadow = loadImage(imgPath,level,images,colormap,zoomFactor,scale);
 			}
 		}
+		
 		// shadow horizontal shift
 		attribute = root.getAttribute(XmlTools.ATT_SHADOW_XSHIFT);
 		if(attribute!=null)
 		{	double temp = Double.parseDouble(attribute.getValue());
 			shadowXShift = zoomFactor*temp/scale;
 		}
+		
 		// shadow vertical shift
 		attribute = root.getAttribute(XmlTools.ATT_SHADOW_YSHIFT);
 		if(attribute!=null)
 		{	double temp = Double.parseDouble(attribute.getValue());
 			shadowYShift = zoomFactor*temp/scale;
 		}
+		
 		// bound shift
 		attribute = root.getAttribute(XmlTools.ATT_BOUND_YSHIFT);
 		if(attribute!=null)
 			boundYShift = ImageShift.valueOf(attribute.getValue().trim());
-    	// steps
+    	
+		// steps
 	    List<Element> stepsList = root.getChildren(XmlTools.ELT_STEP);
     	Iterator<Element> i = stepsList.iterator();
     	while(i.hasNext())
@@ -342,11 +365,13 @@ public class AnimesLoader
     		HashMap<String,BufferedImage> images, HashMap<String,BufferedImage> shadows, Colormap colormap,
     		double zoomFactor, double scale) throws IOException
     {	AnimeStep result = new AnimeStep();    	
+    	
     	// duration
     	int duration = 0;
     	Attribute attribute = root.getAttribute(XmlTools.ATT_DURATION);
     	if(attribute!=null)
     		duration = Integer.parseInt(attribute.getValue());
+    	
     	// image
     	BufferedImage img = null;    	
     	attribute = root.getAttribute(XmlTools.ATT_FILE);
@@ -355,18 +380,21 @@ public class AnimesLoader
     		String imgPath = filePath+File.separator+strImage;
     		img = loadImage(imgPath,level,images,colormap,zoomFactor,scale);
     	}
-		// horizontal shift
+		
+    	// horizontal shift
 		attribute = root.getAttribute(XmlTools.ATT_XSHIFT);
 		if(attribute!=null)
 		{	double temp = Double.parseDouble(attribute.getValue());
 			xShift = zoomFactor*temp/scale;
 		}
+		
 		// vertical shift
 		attribute = root.getAttribute(XmlTools.ATT_YSHIFT);
 		if(attribute!=null)
 		{	double temp = Double.parseDouble(attribute.getValue());
 			yShift = zoomFactor*temp/scale;
 		}
+		
 		// shadow
 		attribute = root.getAttribute(XmlTools.ATT_SHADOW);
 		if(attribute!=null)
@@ -376,22 +404,26 @@ public class AnimesLoader
 				shadow = loadImage(imgPath,level,images,colormap,zoomFactor,scale);
 			}
 		}
+		
 		// shadow horizontal shift
 		attribute = root.getAttribute(XmlTools.ATT_SHADOW_XSHIFT);
 		if(attribute!=null)
 		{	double temp = Double.parseDouble(attribute.getValue());
 			shadowXShift = zoomFactor*temp/scale;
 		}
+		
 		// shadow vertical shift
 		attribute = root.getAttribute(XmlTools.ATT_SHADOW_YSHIFT);
 		if(attribute!=null)
 		{	double temp = Double.parseDouble(attribute.getValue());
 			shadowYShift = zoomFactor*temp/scale;
 		}
+		
 		// bound shift
 		attribute = root.getAttribute(XmlTools.ATT_BOUND_YSHIFT);
 		if(attribute!=null)
 			boundYShift = ImageShift.valueOf(attribute.getValue().trim());
+		
 		// anime
 		result.setDuration(duration);
 		result.setImage(img);
