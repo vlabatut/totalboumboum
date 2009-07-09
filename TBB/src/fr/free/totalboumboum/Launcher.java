@@ -899,21 +899,14 @@ public class Launcher
 	
 	
 	/*
-	 * TODO recent stuff
-	 * 
 	 * TODO au lieu d'utiliser une fonction set sprite qui met à jour les roles des acteurs et targets
 	 * dans les modulations, il faut effectuer cette mise à jour au chargement des modulations, puisqu'à cet
 	 * instant on connait déjà le role de sprite concerné.
-	 * 
-	 * TODO virer l'anime par défaut dans les fichiers d'anime
-	 * les éléments doivent porter directement le nom des gestures, de manière à pouvoir contrôler leur présence directement
 	 * 
 	 * - voir si on peut mettre à jour le parser XML
 	 * - définir la liste de gesture pour chaque type de sprite
 	 * - pour chaque gesture, fixer les actions autorisées 
 	 * - adapter tous les loaders au fait que les constantes exprimées en XML sont maintenant en majuscules, adapter aussi les fichiers xml
-	 * 
-	 * - forcément des trucs à changer sur les adapteurs d'IA, car ils attendent des permissions et pas des modulations. donc null (i.e. pas de modulation) n'a plus la même signification.
 	 * 
 	 * y a manifestement une différence entre GeneralAction et les actions utilisées dans les Ability et Modulation
 	 * dans ces dernières, on se place relativement au sprite, qui est actor target ou third.
@@ -948,8 +941,11 @@ public class Launcher
 	 * 
 	 * tester le système qui complète les animations automatiquement quand elles sont manquantes dans le fichier XML.
 	 * 
-	 * gérer les changements (passage aux types énum) dans l'enregistrement de données XML
+	 * gérer les changements (passage aux types énum) dans l'enregistrement de données XML (profils)
 	 * 
+	 * il faudrait documenter le comportement par défaut du moteur, i.e. pour chaque type de sprite:
+	 * qu'est-ce qu'il peut faire comme action? quelles sont les transitions? qu'est-ce qui est interdit ?
+	 * ça permettra de savoir ce qui peut être modulé et ce qui ne peut pas l'être
 	 * 
 	 *  >> pr la mutualisation de certains aspects des sprites, suffit de rendre explicite
 	 *  dans le fichier sprite.xml la localisation des composants (animes, traj, etc) avec
@@ -973,5 +969,10 @@ public class Launcher
 	 *  - primaries+NONE+composite
 	 * et les gestures définis doivent au moins contenir les nécessaires, et au plus les autorisés
 	 *  il va falloir utiliser XSD 1.1 quand ça sera possible, avec les assertions et associations, cf l'email.
+	 *  
+	 *  NOTE gestion des collisions
+	 *  normalement, le système de modulation doit permettre de parfaitement gérer le déplacement dans les bombes.
+	 *  a voir s'il n'est pas possible d'utiliser ça pour simplifier la gestion actuelle des collisions.
+	 *  
 	 */
 }
