@@ -97,7 +97,8 @@ public class Loop implements Runnable, Serializable
 		// load players : common stuff
 		String baseFolder = level.getInstancePath()+File.separator+FileTools.FOLDER_HEROES;
 		String folder = baseFolder + File.separator+FileTools.FOLDER_ABILITIES;
-		ArrayList<AbstractAbility> abilities = AbilityLoader.loadAbilityPack(folder,level);
+		ArrayList<AbstractAbility> abilities = new ArrayList<AbstractAbility>();
+		AbilityLoader.loadAbilityPack(folder,level,abilities);
 		folder = baseFolder + File.separator+FileTools.FOLDER_TRAJECTORIES;
 		GesturePack gesturePack = new GesturePack();
 		TrajectoriesLoader.loadTrajectories(folder,gesturePack,level);

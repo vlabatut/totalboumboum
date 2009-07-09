@@ -92,9 +92,21 @@ public class GesturePack
 			GestureName nm = e.getKey();
 			result.addGesture(cp,nm);
 		}
-		// misc
-		
 		return result;
+	}
+	
+	public void copyAnimesFrom(GesturePack gesturePack)
+	{	for(Entry<GestureName,Gesture> e: gestures.entrySet())
+		{	Gesture cp = e.getValue();
+			GestureName nm = e.getKey();
+			Gesture cp0 = getGesture(nm);
+			if(cp0==null) //should not happen
+			{	cp0 = new Gesture();
+				cp0.setName(nm);
+				addGesture(cp0,nm);
+			}
+			cp0.copyAnimesFrom(cp);
+		}		
 	}
 	
 	/////////////////////////////////////////////////////////////////

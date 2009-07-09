@@ -35,6 +35,7 @@ import fr.free.totalboumboum.engine.container.bombset.Bombset;
 import fr.free.totalboumboum.engine.container.level.Level;
 import fr.free.totalboumboum.engine.content.feature.ability.AbilityLoader;
 import fr.free.totalboumboum.engine.content.feature.ability.AbstractAbility;
+import fr.free.totalboumboum.engine.content.feature.explosion.Explosion;
 import fr.free.totalboumboum.engine.content.feature.gesture.GesturePack;
 import fr.free.totalboumboum.engine.content.feature.gesture.anime.AnimesLoader;
 import fr.free.totalboumboum.engine.content.feature.gesture.modulation.ModulationsLoader;
@@ -57,7 +58,8 @@ public class FloorFactoryLoader extends SpriteFactoryLoader
 		
 		// ABILITIES
 		folder = folderPath+File.separator+FileTools.FILE_ABILITIES;
-		ArrayList<AbstractAbility> abilities = AbilityLoader.loadAbilityPack(folder,level);
+		ArrayList<AbstractAbility> abilities = new ArrayList<AbstractAbility>();
+		AbilityLoader.loadAbilityPack(folder,level,abilities);
 		result.setAbilities(abilities);
 		
 		// ANIMES
@@ -65,7 +67,8 @@ public class FloorFactoryLoader extends SpriteFactoryLoader
 		AnimesLoader.loadAnimes(folder,gesturePack,level,FloorFactory.getAnimeReplacements());
 		
 		//EXPLOSION
-		loadExplosionElement(root,level,result);
+		Explosion explosion = loadExplosionElement(root,level);
+		result.setExplosion(explosion);
 		
 		//MODULATIONS
 		folder = folderPath+File.separator+FileTools.FILE_MODULATIONS;

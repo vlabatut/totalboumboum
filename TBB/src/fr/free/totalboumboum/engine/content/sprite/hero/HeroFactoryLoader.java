@@ -37,6 +37,7 @@ import fr.free.totalboumboum.engine.container.bombset.Bombset;
 import fr.free.totalboumboum.engine.container.bombset.BombsetMap;
 import fr.free.totalboumboum.engine.container.level.Level;
 import fr.free.totalboumboum.engine.content.feature.ability.AbstractAbility;
+import fr.free.totalboumboum.engine.content.feature.explosion.Explosion;
 import fr.free.totalboumboum.engine.content.feature.gesture.GesturePack;
 import fr.free.totalboumboum.engine.content.feature.gesture.anime.AnimesLoader;
 import fr.free.totalboumboum.engine.content.sprite.SpriteFactoryLoader;
@@ -72,7 +73,8 @@ public class HeroFactoryLoader extends SpriteFactoryLoader
 		AnimesLoader.loadAnimes(folder,gesturePack,level,HeroFactory.getAnimeReplacements());
 		
 		//EXPLOSION
-		loadExplosionElement(root,level,result); //TODO les explosions des players ne devraient-elles pas être chargées en commun ?
+		Explosion explosion = loadExplosionElement(root,level); //TODO les explosions des players ne devraient-elles pas être chargées en commun ?
+		result.setExplosion(explosion);
 		
 		//MODULATIONS
 //		folder = folderPath+File.separator+FileTools.FILE_MODULATIONS;

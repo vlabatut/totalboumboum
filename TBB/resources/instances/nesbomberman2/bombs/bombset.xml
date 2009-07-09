@@ -4,7 +4,7 @@
 	xsi:noNamespaceSchemaLocation="../../../schemas/bombset.xsd">
 
 	<abstract-bombs>
-		<bomb name="common" folder="common" />
+		<bomb name="common" folder="_common" />
 	</abstract-bombs>
 
 	<concrete-bombs>

@@ -21,7 +21,6 @@ package fr.free.totalboumboum.engine.content.feature.gesture.anime;
  * 
  */
 
-import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 import java.util.Iterator;
 
@@ -30,13 +29,17 @@ import fr.free.totalboumboum.engine.content.feature.gesture.GestureName;
 
 public class AnimeDirection
 {
-	private ArrayList<AnimeStep> steps;
-	private boolean repeat;
-	private boolean proportional;
-	private GestureName gestureName; //debug
-	private Direction direction; //debug
-	protected double boundHeight; 
+	public AnimeDirection()
+	{	gestureName= null;
+		steps = new ArrayList<AnimeStep>(0);
+		repeat = false;
+		proportional = false;
+	}
 	
+	/////////////////////////////////////////////////////////////////
+	// HEIGHT			/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	protected double boundHeight; 
 
 	public double getBoundHeight()
 	{	return boundHeight;
@@ -45,39 +48,56 @@ public class AnimeDirection
 	{	this.boundHeight = boundHeight;
 	}
 
-	public AnimeDirection()
-	{	gestureName= null;
-		steps = new ArrayList<AnimeStep>(0);
-		repeat = false;
-		proportional = false;
-	}
-	
+	/////////////////////////////////////////////////////////////////
+	// STEPS			/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	private ArrayList<AnimeStep> steps;
+
 	public Iterator<AnimeStep> getIterator()
 	{	return steps.iterator();		
 	}
+	
 	public void add(AnimeStep as)
 	{	steps.add(as);		
 	}
+	
 	public void addAll(ArrayList<AnimeStep> l)
 	{	steps.addAll(l);		
 	}
+	
 	public int getLength()
 	{	return steps.size();
 	}
 
+	/////////////////////////////////////////////////////////////////
+	// NAME			/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	private GestureName gestureName; //debug
+
 	public String getName()
 	{	return gestureName+","+direction;
 	}
+	
 	public void setGestureName(GestureName gestureName)
 	{	this.gestureName = gestureName;
 	}
+	
+	/////////////////////////////////////////////////////////////////
+	// DIRECTION		/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	private Direction direction; //debug
+
 	public void setDirection(Direction direction)
 	{	this.direction = direction;
 	}
+	
 	public Direction getDirection()
 	{	return direction;
 	}
 	
+	/////////////////////////////////////////////////////////////////
+	// DURATION			/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
 	/**
 	 * Computes the total duration of the animation.
 	 * The result is 0 if there is no time limit. 
@@ -91,20 +111,36 @@ public class AnimeDirection
 		return result;
 	}
 
+	/////////////////////////////////////////////////////////////////
+	// REPEAT			/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	private boolean repeat;
+
 	public boolean getRepeat()
 	{	return repeat;
 	}
+	
 	public void setRepeat(boolean repeat)
 	{	this.repeat = repeat;
 	}
 
+	/////////////////////////////////////////////////////////////////
+	// PROPORTIONNAL	/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	private boolean proportional;
+
 	public boolean getProportional()
 	{	return proportional;
 	}
+	
 	public void setProportional(boolean proportional)
 	{	this.proportional = proportional;
 	}
-
+	
+	/////////////////////////////////////////////////////////////////
+	// COPY				/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////	
+/*
 	public AnimeDirection copy(ArrayList<BufferedImage> images, ArrayList<BufferedImage> copyImages)
 	{	AnimeDirection result = new AnimeDirection();
 		// steps
@@ -122,7 +158,28 @@ public class AnimeDirection
 		//
 		return result;
 	}
-	
+*/
+	public AnimeDirection copy()
+	{	AnimeDirection result = new AnimeDirection();
+		// steps
+		Iterator<AnimeStep> i = getIterator();
+		while(i.hasNext())
+		{	AnimeStep copyStep = i.next().copy(); 
+			result.add(copyStep);		
+		}
+		// various fields
+		result.setGestureName(gestureName);
+		result.setDirection(direction);
+		result.setRepeat(repeat);
+		result.setProportional(proportional);
+		result.setBoundHeight(boundHeight);
+		//
+		return result;
+	}
+
+	/////////////////////////////////////////////////////////////////
+	// FINISHED			/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
 	private boolean finished = false;
 	
 	public void finish()

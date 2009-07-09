@@ -99,15 +99,13 @@ public class AbilityLoader
 		return result;
     }
     
-	public static ArrayList<AbstractAbility> loadAbilityPack(String folderPath, Level level) throws ParserConfigurationException, SAXException, IOException, ClassNotFoundException
-	{	ArrayList<AbstractAbility> result = new ArrayList<AbstractAbility>();
-		File dataFile = new File(folderPath+File.separator+FileTools.FILE_ABILITIES+FileTools.EXTENSION_XML);
+	public static void loadAbilityPack(String folderPath, Level level, ArrayList<AbstractAbility> result) throws ParserConfigurationException, SAXException, IOException, ClassNotFoundException
+	{	File dataFile = new File(folderPath+File.separator+FileTools.FILE_ABILITIES+FileTools.EXTENSION_XML);
 		if(dataFile.exists())
 		{	String schemaFolder = FileTools.getSchemasPath();
 			File schemaFile = new File(schemaFolder+File.separator+FileTools.FILE_ABILITIES+FileTools.EXTENSION_SCHEMA);
 			Element root = XmlTools.getRootFromFile(dataFile,schemaFile);
 			result = loadAbilitiesElement(root,level);
 		}
-		return result;
 	}
 }
