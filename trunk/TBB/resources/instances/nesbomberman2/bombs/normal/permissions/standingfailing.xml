@@ -3,30 +3,9 @@
 		xsi:noNamespaceSchemaLocation="../../../../../schemas/gesture_modulations.xsd" >
 
 	<self-modulations>
-<!--  	sprite-flat --> 
-<!--  	sprite-above --> 
-<!--	sprite-traverse-bomb --> 
-<!--	sprite-traverse-item --> 
-<!--	sprite-traverse-wall --> 
-<!--  	block-spawn --> 
-<!--  	bomb-explosion-latency --> 
-<!--  	bomb-failure-maxduration --> 
-<!--  	bomb-failure-minduration --> 
-<!--  	bomb-failure-probability --> 
-<!--  	bomb-push-latency --> 
-<!--  	bomb-trigger-collision --> 
-<!--  	bomb-trigger-combustion --> 
-<!--  	bomb-trigger-control --> 
-<!--  	bomb-trigger-timer --> 
-<!--  	bomb-number --> 
-<!--  	bomb-range --> 
-<!--  	hero-punch-duration --> 
-<!--  	hero-wait-duration --> 
 	</self-modulations>
 	
 	<actor-modulations>
-<!--  	appear --> 
-<!--  	consume --> 
 <!--  	detonate --> 
 		<modulation frame="true" strength="1" >
 			<action name="detonate" direction="all" contact="all"
@@ -34,19 +13,9 @@
 			<actor-restrictions />
 			<target-restrictions />
 		</modulation>
-<!--  	drop --> 
-<!--  	gather --> 
-<!--  	jump --> 
-<!--  	land --> 
-<!--  	movehigh --> 
-<!--  	movelow --> 
-<!--  	punch --> 
-<!--  	push --> 
-<!--  	trigger --> 
 	</actor-modulations>
 	
 	<target-modulations>
-<!--  	appear --> 
 <!--  	consume --> 
 		<modulation frame="true" strength="1" >
 			<action name="consume" direction="all" contact="all"
@@ -54,8 +23,6 @@
 			<actor-restrictions />
 			<target-restrictions />
 		</modulation>
-<!--  	drop --> 
-<!--  	gather --> 
 <!--  	punch --> 
 		<modulation frame="true" strength="1" >
 			<action name="punch" direction="all" contact="all"
@@ -74,7 +41,6 @@
 	</target-modulations>
 	
 	<third-modulations>
-<!--  	appear --> 
 <!--  	consume --> 
 		<modulation frame="true" strength="1" >
 			<action name="consume" direction="all" contact="all"
