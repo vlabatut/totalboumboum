@@ -43,6 +43,7 @@ import org.xml.sax.SAXException;
 import fr.free.totalboumboum.configuration.Configuration;
 import fr.free.totalboumboum.configuration.GameConstants;
 import fr.free.totalboumboum.configuration.profile.Profile;
+import fr.free.totalboumboum.engine.container.bombset.BombsetMap;
 import fr.free.totalboumboum.engine.container.itemset.Itemset;
 import fr.free.totalboumboum.engine.container.level.HollowLevel;
 import fr.free.totalboumboum.engine.container.level.Level;
@@ -84,7 +85,8 @@ public class Loop implements Runnable, Serializable
 		// load level
 		HollowLevel hollowLevel = round.getHollowLevel();
 		hollowLevel.initLevel(this);
-		hollowLevel.loadBombset();
+		hollowLevel.loadBombsets();
+		BombsetMap bombsetMap = hollowLevel.getBombsetMap();
 		loadStepOver();
 		hollowLevel.loadItemset();
 		loadStepOver();
@@ -125,7 +127,7 @@ public class Loop implements Runnable, Serializable
 		while(i.hasNext())
 		{	// init
 			Profile profile = i.next();
-			Player player = new Player(profile,level,abilities,gesturePack);
+			Player player = new Player(profile,level,abilities,gesturePack,bombsetMap);
 			players.add(player);
 			Hero hero = (Hero)player.getSprite();
 			// location
@@ -152,6 +154,9 @@ public class Loop implements Runnable, Serializable
 	{	round.loadStepOver();
 	}
 	
+	/////////////////////////////////////////////////////////////////
+	// FINISHED			/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
 	private boolean finished = false;
 	
 	public void finish()

@@ -31,23 +31,31 @@ import fr.free.totalboumboum.engine.content.sprite.bomb.BombFactory;
 
 public class Bombset
 {	
-	private ArrayList<BombFactory> bombFactories;
-	private ArrayList<ArrayList<StateAbility>> requiredAbilities;
-	
 	public Bombset()
 	{	bombFactories = new ArrayList<BombFactory>();
 		requiredAbilities = new ArrayList<ArrayList<StateAbility>>();
 	}
 	
-	@SuppressWarnings("unused")
-	private void setBombFactories(ArrayList<BombFactory> bombFactories)
-	{	this.bombFactories = bombFactories;
-	}
+	/////////////////////////////////////////////////////////////////
+	// REQUIRED ABILITIES		/////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	private ArrayList<ArrayList<StateAbility>> requiredAbilities;
+	
 	@SuppressWarnings("unused")
 	private void setRequiredAbilities(ArrayList<ArrayList<StateAbility>> requiredAbilities)
 	{	this.requiredAbilities = requiredAbilities;
 	}
 		
+	/////////////////////////////////////////////////////////////////
+	// BOMB FACTORIES	/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	private ArrayList<BombFactory> bombFactories;
+	
+	@SuppressWarnings("unused")
+	private void setBombFactories(ArrayList<BombFactory> bombFactories)
+	{	this.bombFactories = bombFactories;
+	}
+	
 	public void addBombFactory(BombFactory bombFactory, ArrayList<StateAbility> abilities)
 	{	bombFactories.add(bombFactory);
 		requiredAbilities.add(abilities);
@@ -77,7 +85,23 @@ public class Bombset
 		}
 		return result;
 	}
+
+	/////////////////////////////////////////////////////////////////
+	// COPY				/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	public Bombset copy()
+	{	Bombset result = new Bombset();
+		for(int i=0;i<bombFactories.size();i++)
+		{	BombFactory bf = bombFactories.get(i).copy();
+			ArrayList<StateAbility> ra = requiredAbilities.get(i);
+			result.addBombFactory(bf,ra);
+		}
+		return result;
+	}
 	
+	/////////////////////////////////////////////////////////////////
+	// FINISHED			/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
 	private boolean finished = false;
 	
 	public void finish()
