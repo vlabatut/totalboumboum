@@ -10,19 +10,19 @@
 	
 	<actor-modulations>
 <!--  	APPEAR --> 
-		<permission frame="true" strength="1" >
+		<modulation frame="true" strength="1" >
 			<action name="appear" direction="all" contact="all"
 				tilePosition="all" orientation="all" target="all" />
 			<actor-restrictions />
 			<target-restrictions />
-		</permission>
+		</modulation>
 <!--  	CONSUME --> 
-		<permission frame="true" strength="1" >
+		<modulation frame="true" strength="1" >
 			<action name="consume" direction="all" contact="all"
 				tilePosition="all" orientation="all" target="all" />
 			<actor-restrictions />
 			<target-restrictions />
-		</permission>
+		</modulation>
 	</actor-modulations>
 	
 	<target-modulations>

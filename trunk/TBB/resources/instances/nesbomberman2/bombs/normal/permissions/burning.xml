@@ -16,103 +16,103 @@
 	
 	<third-modulations>
 <!--  	APPEAR --> 
-		<permission frame="true" strength="1" >
+		<modulation frame="true" strength="1" >
 			<action name="appear" direction="all" contact="all"
 				tilePosition="all" orientation="all" actor="all" target="all" />
 			<actor-restrictions />
 			<target-restrictions />
-		</permission>
+		</modulation>
 <!--  	CONSUME --> 
-		<permission frame="true" strength="1" >
+		<modulation frame="true" strength="1" >
 			<action name="consume" direction="all" contact="all"
 				tilePosition="all" orientation="all" actor="all" target="all" />
 			<actor-restrictions />
 			<target-restrictions />
-		</permission>
+		</modulation>
 <!--  	CRY --> 
-		<permission frame="true" strength="1" >
+		<modulation frame="true" strength="1" >
 			<action name="cry" direction="all" contact="all"
 				tilePosition="all" orientation="all" actor="all" />
 			<actor-restrictions />
 			<target-restrictions />
-		</permission>
+		</modulation>
 <!--  	DETONATE --> 
-		<permission frame="true" strength="1" >
+		<modulation frame="true" strength="1" >
 			<action name="detonate" direction="all" contact="all"
 				tilePosition="all" orientation="all" actor="all" />
 			<actor-restrictions />
 			<target-restrictions />
-		</permission>
+		</modulation>
 <!--  	DROP --> 
-		<permission frame="true" strength="1" >
+		<modulation frame="true" strength="1" >
 			<action name="drop" direction="all" contact="all"
 				tilePosition="all" orientation="all" actor="all" target="all" />
 			<actor-restrictions />
 			<target-restrictions />
-		</permission>
+		</modulation>
 <!--  	EXULT --> 
-		<permission frame="true" strength="1" >
+		<modulation frame="true" strength="1" >
 			<action name="exult" direction="all" contact="all"
 				tilePosition="all" orientation="all" actor="all" />
 			<actor-restrictions />
 			<target-restrictions />
-		</permission>
+		</modulation>
 <!--  	GATHER --> 
-		<permission frame="true" strength="1" >
+		<modulation frame="true" strength="1" >
 			<action name="gather" direction="all" contact="all"
 				tilePosition="all" orientation="all" actor="all" target="all" />
 			<actor-restrictions />
 			<target-restrictions />
-		</permission>
+		</modulation>
 <!--  	JUMP --> 
-		<permission frame="true" strength="1" >
+		<modulation frame="true" strength="1" >
 			<action name="jump" direction="all" contact="all"
 				tilePosition="all" orientation="all" actor="all" />
 			<actor-restrictions />
 			<target-restrictions />
-		</permission>
+		</modulation>
 <!--  	LAND --> 
-		<permission frame="true" strength="1" >
+		<modulation frame="true" strength="1" >
 			<action name="land" direction="all" contact="all"
 				tilePosition="all" orientation="all" actor="all" />
 			<actor-restrictions />
 			<target-restrictions />
-		</permission>
+		</modulation>
 <!--  	MOVEHIGH --> 
-		<permission frame="true" strength="1" >
+		<modulation frame="true" strength="1" >
 			<action name="movehigh" direction="all" contact="all"
 				tilePosition="all" orientation="all" actor="all" />
 			<actor-restrictions />
 			<target-restrictions />
-		</permission>
+		</modulation>
 <!--  	MOVELOW --> 
-		<permission frame="true" strength="1" >
+		<modulation frame="true" strength="1" >
 			<action name="movelow" direction="all" contact="all"
 				tilePosition="all" orientation="all" actor="all" />
 			<actor-restrictions />
 			<target-restrictions />
-		</permission>
+		</modulation>
 <!--  	PUNCH --> 
-		<permission frame="true" strength="1" >
+		<modulation frame="true" strength="1" >
 			<action name="punch" direction="all" contact="all"
 				tilePosition="all" orientation="all" actor="all" target="all" />
 			<actor-restrictions />
 			<target-restrictions />
-		</permission>
+		</modulation>
 <!--  	PUSH --> 
-		<permission frame="true" strength="1" >
+		<modulation frame="true" strength="1" >
 			<action name="push" direction="all" contact="all"
 				tilePosition="all" orientation="all" actor="all" target="all" />
 			<actor-restrictions />
 			<target-restrictions />
-		</permission>
+		</modulation>
 <!--  	TRIGGER --> 
-		<permission frame="true" strength="1" >
+		<modulation frame="true" strength="1" >
 			<action name="trigger" direction="all" contact="all"
 				tilePosition="all" orientation="all" actor="all" target="all" />
 			<actor-restrictions />
 			<target-restrictions />
-		</permission>
+		</modulation>
 	</third-modulations>
 
 </gesture-modulations>
