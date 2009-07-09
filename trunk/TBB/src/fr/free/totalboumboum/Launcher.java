@@ -955,7 +955,14 @@ public class Launcher
 	 *  dans le fichier sprite.xml la localisation des composants (animes, traj, etc) avec
 	 *  la possibilité de les foutre en amont. apriori, seulement valable pr bombes, items et themes
 	 *  >>>plus simple: possibilité de réutiliser un autre sprite, en (re)définissant certains de ses composants
-	 * 
+	 * 	pb:
+	 * 		- ordre de chargement des sprites. les modeles doivent être chargés en premier. seule méthode pour ça : scanner tous les sprites dans le dossier (> p-ê long)
+	 * 		  ou alors faire un chargement récursif (si un sprite demandé n'a pas encore été chargé, on le fait desuite >> pose de pb de réorganisation hiérarchique du chargement)
+	 * 		- redéfinition des éléments déjà définis (?)
+	 *  >>>> définir les sprites réutilisables à part, comme des sprites abstraits bien distincts des autres
+	 *  	- pour bombset : 1) charger tous les composants communs
+	 *  					 2) pour les animes, charger seulement les infos nécessaires
+	 *  					 3) écrire dans bombset (ou la structure plus générale) une fonction d'instanciation permettant de charger la couleur voulue
 	 * 
 	 * 
 	 * le XML des animes doit avoir soit :

@@ -3,12 +3,18 @@
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
 	xsi:noNamespaceSchemaLocation="../../../schemas/bombset.xsd">
 
-	<bomb name="remotecontrol" folder="remotecontrol" >
-		<ability >
-			<name value="CUSTOM_BOMB_TYPE_REMOTECONTROL" />
-		</ability>
-	</bomb>
-	
-	<bomb name="normal" folder="normal" />
+	<abstract-bombs>
+		<bomb name="common" folder="common" />
+	</abstract-bombs>
+
+	<concrete-bombs>
+		<bomb name="remotecontrol" folder="remotecontrol" >
+			<ability >
+				<name value="CUSTOM_BOMB_TYPE_REMOTECONTROL" />
+			</ability>
+		</bomb>
+		
+		<bomb name="normal" folder="normal" />
+	</concrete-bombs>
 	
 </bombset>

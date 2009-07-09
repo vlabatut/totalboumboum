@@ -53,6 +53,7 @@ public class BombsetLoader
 		String schemaFolder = FileTools.getSchemasPath();
 		String individualFolder = folderPath;
 		File schemaFile,dataFile;
+		
 		// loading components
 		dataFile = new File(individualFolder+File.separator+FileTools.FILE_BOMBSET+FileTools.EXTENSION_XML);
 		schemaFile = new File(schemaFolder+File.separator+FileTools.FILE_BOMBSET+FileTools.EXTENSION_SCHEMA);
@@ -64,37 +65,67 @@ public class BombsetLoader
 	
     @SuppressWarnings("unchecked")
     private static Bombset loadBombsetElement(Element root, String folder, PredefinedColor color, Level level) throws ParserConfigurationException, SAXException, IOException, ClassNotFoundException
-    {	Bombset result = new Bombset();
-    	String individualFolder = folder;
+    {	// init
+    	Bombset result = new Bombset();
+
+    	// abstract bombs
+    	Element abstractBombs = root.getChild(XmlTools.ELT_ABSTRACT_BOMBS);
+    	if(abstractBombs!=null)
+    		loadBombsElement(abstractBombs,folder,color,level,result,Type.ABSTRACT);
+    	
+    	// concrete bombs
+    	Element concreteBombs = root.getChild(XmlTools.ELT_CONCRETE_BOMBS);
+		loadBombsElement(concreteBombs,folder,color,level,result,Type.ABSTRACT);
+    	
+    	return result;
+    }
+    
+    @SuppressWarnings("unchecked")
+    private static void loadBombsElement(Element root, String folder, PredefinedColor color, Level level, Bombset result, Type type) throws ParserConfigurationException, SAXException, IOException, ClassNotFoundException
+    {	String individualFolder = folder;
     	List<Element> bombs = root.getChildren(XmlTools.ELT_BOMB);
     	Iterator<Element> i = bombs.iterator();
     	while(i.hasNext())
     	{	Element temp = i.next();
-    		loadBombElement(temp,individualFolder,color,level,result);
+    		loadBombElement(temp,individualFolder,color,level,result,type);
     	}
-    	return result;
     }
     
-    private static void loadBombElement(Element root, String folder, PredefinedColor color, Level level, Bombset bombset) throws ParserConfigurationException, SAXException, IOException, ClassNotFoundException
+    private static void loadBombElement(Element root, String folder, PredefinedColor color, Level level, Bombset bombset, Type type) throws ParserConfigurationException, SAXException, IOException, ClassNotFoundException
     {	// name
 		String name = root.getAttribute(XmlTools.ATT_NAME).getValue().trim();
-    	// folder
+
+		// folder
     	String individualFolder = folder;
 		Attribute attribute = root.getAttribute(XmlTools.ATT_FOLDER);
 		if(attribute!=null)
 			individualFolder = individualFolder+File.separator+attribute.getValue().trim();
+		
 		// required abilities
-		ArrayList<AbstractAbility> requiredAbilities = AbilityLoader.loadAbilitiesElement(root,level);
-		Iterator<AbstractAbility> i = requiredAbilities.iterator();
-		ArrayList<StateAbility> abilities = new ArrayList<StateAbility>();
-		while(i.hasNext())
-		{	AbstractAbility ablt = i.next();
-			if(ablt instanceof StateAbility)
-				abilities.add((StateAbility)ablt);
+		if(type==Type.CONCRETE)
+		{	ArrayList<AbstractAbility> requiredAbilities = AbilityLoader.loadAbilitiesElement(root,level);
+			Iterator<AbstractAbility> i = requiredAbilities.iterator();
+			ArrayList<StateAbility> abilities = new ArrayList<StateAbility>();
+			while(i.hasNext())
+			{	AbstractAbility ablt = i.next();
+				if(ablt instanceof StateAbility)
+					abilities.add((StateAbility)ablt);
+			}
+		
+			// result
+			BombFactory bombFactory = BombFactoryLoader.loadBombFactory(individualFolder,level,name,color,bombset);
+			bombset.addBombFactory(bombFactory,abilities);
 		}
-		//
-		BombFactory bombFactory = BombFactoryLoader.loadBombFactory(individualFolder,level,name,color,bombset);
-		bombset.addBombFactory(bombFactory,abilities);
+		else
+		{	
+			//TODO
+		}
+		
     }
     
+    private enum Type
+    {
+    	ABSTRACT,
+    	CONCRETE;
+    }
 }
