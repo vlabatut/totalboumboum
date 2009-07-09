@@ -6,23 +6,9 @@
 	</self-modulations>
 	
 	<actor-modulations>
-<!--  	appear --> 
-		<modulation frame="true" strength="1" >
-			<action name="appear" direction="all" contact="all"
-				tilePosition="all" orientation="all" target="all" />
-			<actor-restrictions />
-			<target-restrictions />
-		</modulation>
 	</actor-modulations>
 	
 	<target-modulations>
-<!--  	drop --> 
-		<modulation frame="true" strength="1" >
-			<action name="drop" direction="all" contact="all"
-				tilePosition="all" orientation="all" actor="all" />
-			<actor-restrictions />
-			<target-restrictions />
-		</modulation>
 	</target-modulations>
 	
 	<third-modulations>
