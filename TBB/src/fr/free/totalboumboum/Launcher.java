@@ -946,6 +946,7 @@ public class Launcher
 	 * il faudrait documenter le comportement par défaut du moteur, i.e. pour chaque type de sprite:
 	 * qu'est-ce qu'il peut faire comme action? quelles sont les transitions? qu'est-ce qui est interdit ?
 	 * ça permettra de savoir ce qui peut être modulé et ce qui ne peut pas l'être
+	 * 		- un sprite n'est a priori pas un obstacle, tout est géré par modulation (y compris pour le feu)
 	 * 
 	 *  >> pr la mutualisation de certains aspects des sprites, suffit de rendre explicite
 	 *  dans le fichier sprite.xml la localisation des composants (animes, traj, etc) avec
