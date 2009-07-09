@@ -3,6 +3,7 @@
 
 	<xsd:complexType name="tGeneral">
 		<xsd:attribute name="name" type="xsd:string" use="required" />
+		<xsd:attribute name="base" type="xsd:string" use="optional" />
 	</xsd:complexType>
 
 	<xsd:complexType name="tAuthor">

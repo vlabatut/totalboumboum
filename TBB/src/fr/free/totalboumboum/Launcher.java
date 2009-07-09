@@ -954,6 +954,8 @@ public class Launcher
 	 *  >> pr la mutualisation de certains aspects des sprites, suffit de rendre explicite
 	 *  dans le fichier sprite.xml la localisation des composants (animes, traj, etc) avec
 	 *  la possibilité de les foutre en amont. apriori, seulement valable pr bombes, items et themes
+	 *  >>>plus simple: possibilité de réutiliser un autre sprite, en (re)définissant certains de ses composants
+	 * 
 	 * 
 	 * 
 	 * le XML des animes doit avoir soit :

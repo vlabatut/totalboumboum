@@ -26,19 +26,19 @@
 	
 	<actor-modulations>
 <!--  	appear --> 
-		<permission frame="true" strength="1" >
+		<modulation frame="true" strength="1" >
 			<action name="appear" direction="all" contact="all"
 				tilePosition="all" orientation="all" target="all" />
 			<actor-restrictions />
 			<target-restrictions />
-		</permission>
+		</modulation>
 <!--  	consume --> 
-		<permission frame="true" strength="1" >
+		<modulation frame="true" strength="1" >
 			<action name="consume" direction="all" contact="all"
 				tilePosition="all" orientation="all" target="all" />
 			<actor-restrictions />
 			<target-restrictions />
-		</permission>
+		</modulation>
 <!--  	detonate --> 
 <!--  	drop --> 
 <!--  	gather --> 
