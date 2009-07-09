@@ -47,6 +47,7 @@ public class XmlTools
 {	// Elements names
 	public static final String ELT_ABILITY = "ability";
 	public static final String ELT_ABILITIES = "abilities";
+	public static final String ELT_ABSTRACT_BOMBS = "abstract-bombs";
 	public static final String ELT_ACTION = "action";
 	public static final String ELT_ACTOR_MODULATIONS = "actor-modulations";
 	public static final String ELT_ACTOR_RESTRICTIONS = "actor-restrictions";
@@ -72,6 +73,7 @@ public class XmlTools
 	public static final String ELT_COLORS = "colors";
 	public static final String ELT_COLORMAP = "colormap";
 	public static final String ELT_COLORSPRITE = "colorsprite";
+	public static final String ELT_CONCRETE_BOMBS = "concrete-bombs";
 	public static final String ELT_CONFRONTATION = "confrontation";
 	public static final String ELT_CONSTANT = "constant";
 	public static final String ELT_CONTROL = "control";
