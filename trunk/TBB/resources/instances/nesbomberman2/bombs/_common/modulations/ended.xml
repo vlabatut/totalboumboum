@@ -6,28 +6,9 @@
 	</self-modulations>
 	
 	<actor-modulations>
-<!--  	appear --> 
-<!--  	consume --> 
-<!--  	detonate --> 
-<!--  	drop --> 
-<!--  	gather --> 
-<!--  	jump --> 
-<!--  	land --> 
-<!--  	movehigh --> 
-<!--  	movelow --> 
-<!--  	punch --> 
-<!--  	push --> 
-<!--  	trigger --> 
 	</actor-modulations>
 	
 	<target-modulations>
-<!--  	appear --> 
-<!--  	consume --> 
-<!--  	drop --> 
-<!--  	gather --> 
-<!--  	punch --> 
-<!--  	push --> 
-<!--  	trigger --> 
 	</target-modulations>
 	
 	<third-modulations>
