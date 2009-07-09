@@ -3,55 +3,11 @@
 		xsi:noNamespaceSchemaLocation="../../../../../schemas/abilities.xsd" >
 
 		<!-- STATE -->
-<!--  	sprite-flat --> 
-<!--  	sprite-above --> 
-<!--	sprite-traverse-bomb --> 
-<!--	sprite-traverse-item --> 
-<!--	sprite-traverse-wall --> 
-<!--  	block-spawn --> 
-<!--  	bomb-explosion-latency --> 
-		<ability strength="70" frame="false" time="-1" uses="-1">
-			<name value="BOMB_EXPLOSION_LATENCY" />
-		</ability>
-<!--  	bomb-failure-maxduration --> 
-<!--  	bomb-failure-minduration --> 
-<!--  	bomb-failure-probability --> 
-<!--  	bomb-push-latency --> 
-<!--  	bomb-trigger-collision --> 
-<!--  	bomb-trigger-combustion --> 
-		<ability strength="1" frame="false" time="-1" uses="-1">
-			<name value="BOMB_TRIGGER_COMBUSTION" />
-		</ability>
-<!--  	bomb-trigger-control --> 
-<!--  	bomb-trigger-timer --> 
+<!--  	BOMB_TRIGGER_TIMER --> 
 		<ability strength="2000" frame="false" time="-1" uses="-1">
 			<name value="BOMB_TRIGGER_TIMER" />
 		</ability>
-<!--  	bomb-number --> 
-<!--  	bomb-range --> 
-<!--  	hero-punch-duration --> 
-<!--  	hero-wait-duration --> 
 			
 		<!-- ACTION -->
-<!--  	appear --> 
-		<ability frame="false" strength="1" time="-1" uses="-1" >
-			<action name="APPEAR" direction="ANY" contact="ANY"
-				tilePosition="ANY" orientation="ANY" target="ANY" />
-		</ability> 
-<!--  	consume --> 
-<!--  	detonate --> 
-		<ability frame="false" strength="1" time="-1" uses="-1" >
-			<action name="DETONATE" direction="ANY" contact="ANY"
-				tilePosition="ANY" orientation="ANY" />
-		</ability> 
-<!--  	drop --> 
-<!--  	gather --> 
-<!--  	jump --> 
-<!--  	land --> 
-<!--  	movehigh --> 
-<!--  	movelow --> 
-<!--  	punch --> 
-<!--  	push --> 
-<!--  	trigger --> 
 
 </abilities>

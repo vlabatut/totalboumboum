@@ -5,7 +5,6 @@ import java.util.HashMap;
 
 import javax.xml.parsers.ParserConfigurationException;
 
-import org.jdom.Element;
 import org.xml.sax.SAXException;
 
 import fr.free.totalboumboum.configuration.profile.PredefinedColor;
@@ -23,7 +22,7 @@ public class BombsetMap
 	{	bombset = BombsetLoader.loadBombset(folderPath,level);
 	}
 
-	public Bombset loadBombset(String folderPath, Level level, PredefinedColor color)
+	public Bombset loadBombset(String folderPath, Level level, PredefinedColor color) throws ParserConfigurationException, SAXException, IOException, ClassNotFoundException
 	{	Bombset result = bombsets.get(color);
 		if(result==null)
 		{	result = bombset.copy();
