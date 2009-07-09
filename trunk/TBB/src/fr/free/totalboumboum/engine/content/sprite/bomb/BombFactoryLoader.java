@@ -31,13 +31,10 @@ import javax.xml.parsers.ParserConfigurationException;
 import org.jdom.Element;
 import org.xml.sax.SAXException;
 
-import fr.free.totalboumboum.configuration.profile.PredefinedColor;
-import fr.free.totalboumboum.engine.container.bombset.Bombset;
 import fr.free.totalboumboum.engine.container.level.Level;
 import fr.free.totalboumboum.engine.content.feature.ability.AbilityLoader;
 import fr.free.totalboumboum.engine.content.feature.ability.AbstractAbility;
 import fr.free.totalboumboum.engine.content.feature.gesture.GesturePack;
-import fr.free.totalboumboum.engine.content.feature.gesture.anime.AnimesLoader;
 import fr.free.totalboumboum.engine.content.feature.gesture.modulation.ModulationsLoader;
 import fr.free.totalboumboum.engine.content.feature.gesture.trajectory.TrajectoriesLoader;
 import fr.free.totalboumboum.engine.content.sprite.SpriteFactoryLoader;
@@ -45,7 +42,7 @@ import fr.free.totalboumboum.tools.FileTools;
 
 public class BombFactoryLoader extends SpriteFactoryLoader
 {	
-	public static BombFactory loadBombFactory(String folderPath, Level level, String bombName, PredefinedColor color, Bombset bombset) throws ParserConfigurationException, SAXException, IOException, ClassNotFoundException
+	public static BombFactory loadBombFactory(String folderPath, Level level, String bombName/*, PredefinedColor color, Bombset bombset*/) throws ParserConfigurationException, SAXException, IOException, ClassNotFoundException
 	{	// init
 		BombFactory result = new BombFactory(level,bombName);
 		Element root = SpriteFactoryLoader.openFile(folderPath);
@@ -62,11 +59,11 @@ public class BombFactoryLoader extends SpriteFactoryLoader
 		result.setAbilities(abilities);
 		
 		// ANIMES
-		folder = folderPath+File.separator+FileTools.FILE_ANIMES;
-		if(color==null)
-			AnimesLoader.loadAnimes(folder,gesturePack,level,BombFactory.getAnimeReplacements());
-		else
-			AnimesLoader.loadAnimes(folder,gesturePack,level,color,BombFactory.getAnimeReplacements());
+//		folder = folderPath+File.separator+FileTools.FILE_ANIMES;
+//		if(color==null)
+//			AnimesLoader.loadAnimes(folder,gesturePack,level,BombFactory.getAnimeReplacements());
+//		else
+//			AnimesLoader.loadAnimes(folder,gesturePack,level,color,BombFactory.getAnimeReplacements());
 		
 		//EXPLOSION
 		loadExplosionElement(root,level,result);
@@ -80,7 +77,7 @@ public class BombFactoryLoader extends SpriteFactoryLoader
 		TrajectoriesLoader.loadTrajectories(folder,gesturePack,level);
 		
 		// BOMBSET
-		result.setBombset(bombset);
+//		result.setBombset(bombset);
 
 		// result
 		return result;

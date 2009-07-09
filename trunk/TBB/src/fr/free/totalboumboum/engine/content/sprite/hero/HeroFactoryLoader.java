@@ -34,7 +34,7 @@ import org.xml.sax.SAXException;
 
 import fr.free.totalboumboum.configuration.profile.PredefinedColor;
 import fr.free.totalboumboum.engine.container.bombset.Bombset;
-import fr.free.totalboumboum.engine.container.bombset.BombsetLoader;
+import fr.free.totalboumboum.engine.container.bombset.BombsetMap;
 import fr.free.totalboumboum.engine.container.level.Level;
 import fr.free.totalboumboum.engine.content.feature.ability.AbstractAbility;
 import fr.free.totalboumboum.engine.content.feature.gesture.GesturePack;
@@ -44,7 +44,7 @@ import fr.free.totalboumboum.tools.FileTools;
 
 public class HeroFactoryLoader extends SpriteFactoryLoader
 {	
-	public static HeroFactory loadHeroFactory(String folderPath, Level level, PredefinedColor color, ArrayList<AbstractAbility> ablts, GesturePack gp) throws ParserConfigurationException, SAXException, IOException, ClassNotFoundException
+	public static HeroFactory loadHeroFactory(String folderPath, Level level, PredefinedColor color, ArrayList<AbstractAbility> ablts, GesturePack gp, BombsetMap bombsetMap) throws ParserConfigurationException, SAXException, IOException, ClassNotFoundException
 	{	// init
 		HeroFactory result = new HeroFactory(level);
 		Element root = SpriteFactoryLoader.openFile(folderPath);
@@ -84,7 +84,7 @@ public class HeroFactoryLoader extends SpriteFactoryLoader
 		
 		// BOMBSET
 		folder = level.getInstancePath()+File.separator+FileTools.FOLDER_BOMBS;
-		Bombset bombset = BombsetLoader.loadBombset(folder,level,color);
+		Bombset bombset = bombsetMap.loadBombset(folder,level,color);
 		result.setBombset(bombset);
 
 		// result
