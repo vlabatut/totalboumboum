@@ -32,7 +32,6 @@ import fr.free.totalboumboum.engine.content.feature.gesture.Gesture;
 import fr.free.totalboumboum.engine.content.feature.gesture.trajectory.TrajectoryDirection;
 import fr.free.totalboumboum.engine.content.feature.gesture.trajectory.TrajectoryStep;
 import fr.free.totalboumboum.engine.content.sprite.Sprite;
-import fr.free.totalboumboum.engine.loop.Loop;
 import fr.free.totalboumboum.tools.CalculusTools;
 
 public class TrajectoryManager
@@ -500,7 +499,7 @@ System.out.println();
 		
 		// normalizing height at the end of an air move
 		if(isTerminated)
-		{	if(CalculusTools.isRelativelyEqualTo(currentPosZ,0,sprite.getLoop()))
+		{	if(CalculusTools.isRelativelyEqualTo(currentPosZ,0))
 				currentPosZ = 0;
 			//
 			if(hasFlied && currentPosZ==0)
@@ -844,7 +843,7 @@ if(sprite instanceof Hero)
 	}
 
 	public boolean isOnGround()
-	{	return CalculusTools.isRelativelyEqualTo(currentPosZ,0,getLoop());
+	{	return CalculusTools.isRelativelyEqualTo(currentPosZ,0);
 	}
 	
 /* ********************************
@@ -865,11 +864,4 @@ if(sprite instanceof Hero)
 		}
 	}	
 
-/* ********************************
- * MISC
- * ********************************
- */	
-	public Loop getLoop()
-	{	return sprite.getLoop();
-	}
 }

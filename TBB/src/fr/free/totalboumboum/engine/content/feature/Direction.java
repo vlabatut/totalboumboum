@@ -28,6 +28,7 @@ import org.jdom.Attribute;
 import org.jdom.Element;
 
 import fr.free.totalboumboum.engine.content.sprite.Sprite;
+import fr.free.totalboumboum.tools.CalculusTools;
 import fr.free.totalboumboum.tools.XmlTools;
 
 public enum Direction
@@ -339,8 +340,9 @@ public enum Direction
 	}
 	
 	/*
-	 * renvoie la direction à prendre pour aller à s2 en partant de s1.
-	 * (ou : dans quelle direction est s2 relativement à s1).
+	 * direction from s1 to s2.
+	 * warning: consider approximate distance, i.e. will be NONE
+	 * if s1 and s2 are relatively close.
 	 */
 	public static Direction getCompositeFromSprites(Sprite s1, Sprite s2)
 	{	Direction result;
@@ -349,7 +351,10 @@ public enum Direction
 		else
 		{	double dx = s2.getCurrentPosX()-s1.getCurrentPosX();
 			double dy = s2.getCurrentPosY()-s1.getCurrentPosY();
-			result = getCompositeFromDouble(dx, dy);
+			if(CalculusTools.isRelativelyEqualTo(dx,0) && CalculusTools.isRelativelyEqualTo(dy,0))
+				result = Direction.NONE;
+			else
+				result = getCompositeFromDouble(dx,dy);
 		}
 		return result;
 	}

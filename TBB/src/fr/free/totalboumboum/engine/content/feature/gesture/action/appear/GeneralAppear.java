@@ -155,9 +155,9 @@ public class GeneralAppear extends GeneralAction
 	/////////////////////////////////////////////////////////////////
 	/** contacts between the actor and the target */
 	private static final List<Contact> allowedContacts = Arrays.asList(new Contact[]{
-		Contact.NONE,
-		Contact.COLLISION,
-		Contact.INTERSECTION
+		Contact.NONE
+//		Contact.COLLISION,
+//		Contact.INTERSECTION
     });
 
 	@Override
@@ -175,10 +175,10 @@ public class GeneralAppear extends GeneralAction
 	/////////////////////////////////////////////////////////////////
 	/** positions of the target in termes of tiles */
 	private static final List<TilePosition> allowedTilePositions = Arrays.asList(new TilePosition[]{
-		TilePosition.UNDEFINED,
-		TilePosition.NEIGHBOR,
-		TilePosition.REMOTE,
-		TilePosition.SAME
+		TilePosition.UNDEFINED
+//		TilePosition.NEIGHBOR,
+//		TilePosition.REMOTE,
+//		TilePosition.SAME
     });
 	
 	@Override
@@ -196,10 +196,11 @@ public class GeneralAppear extends GeneralAction
 	/////////////////////////////////////////////////////////////////
 	/** compared directions of the target and the action */
 	private static final List<Orientation> allowedOrientations = Arrays.asList(new Orientation[]{
-		Orientation.UNDEFINED,
-		Orientation.OPPOSITE,
-		Orientation.OTHER,
-		Orientation.SAME
+		Orientation.UNDEFINED
+//		Orientation.BACK,
+//		Orientation.OTHER,
+//		Orientation.FACE,
+//		Orientation.NONE
     });
 
 	@Override

@@ -352,9 +352,9 @@ public class MoveZone
 	private boolean hasArrived()
 	{	boolean result = true;
 		double distX = level.getHorizontalDistance(currentX,targetX);
-		result = result && CalculusTools.isRelativelyEqualTo(distX,0,level.getLoop());
+		result = result && CalculusTools.isRelativelyEqualTo(distX,0);
 		double distY = level.getVerticalDistance(currentY,targetY);
-		result = result && CalculusTools.isRelativelyEqualTo(distY,0,level.getLoop());
+		result = result && CalculusTools.isRelativelyEqualTo(distY,0);
 		return result;
 	}
 		
@@ -463,7 +463,7 @@ public class MoveZone
 			double margin = tolerance*level.getTileDimension();
 			if(tolerance==0)
 				margin = Double.MAX_VALUE;
-			if(dir!=Direction.NONE && CalculusTools.isRelativelyGreaterThan(dist,margin,level.getLoop()))
+			if(dir!=Direction.NONE && CalculusTools.isRelativelyGreaterThan(dist,margin))
 			{	// process safe position
 				double avoid[] = po.getSafePosition(currentX,currentY,dir);
 				// check if it's worth moving in this direction (i.e. no other obstacles in the way)

@@ -36,16 +36,22 @@ import fr.free.totalboumboum.tools.XmlTools;
  * (the levels is closed, so the target direction has to be considered in terms of shortest distance)  
  */
 public enum Orientation
-{	/** no orientation can be defined: there's no target or there's no action direction */
+{	/** no target or no action direction */
 	UNDEFINED,
 	/** the action is performed facing the target, or the action and the target are exactly on the same spot */
-	SAME,
+	FACE,
 	/** the action is performed back to the target */
-	OPPOSITE,
+	BACK,
 	/** the action is not performed facing nor back to the target */
-	OTHER;
+	OTHER,
+	/** the actor and target are exactly at the same place */
+	NONE;
 //SAME>>FACE, OPPOSITE>>BACK, nouvelle:NONE
 // adapter java et XML
+	
+// TODO init le zoom en static une fois pour toutes, ce qui permettra de virer l'appel à loop dans les calculs approchés
+// et peut être de virer l'utilisation du level dans le chargement des sprites (?)
+	
 	/**
 	 * returns the orientation, or UNDEFINED if the target is null or if the action is not directed.
 	 * If the actor and the target are exactly on the same spot, the result is SAME.
@@ -63,11 +69,14 @@ public enum Orientation
 		else
 		{	Direction relativeDir = Direction.getCompositeFromSprites(actor,target);
 			// actor facing target
-			if(relativeDir==Direction.NONE || relativeDir.hasCommonComponent(facingDir))
-				result = Orientation.SAME;
+			if(relativeDir.hasCommonComponent(facingDir))
+				result = Orientation.FACE;
 			// actor back to target
 			else if(relativeDir.hasCommonComponent(facingDir.getOpposite()))
-				result = Orientation.OPPOSITE;
+				result = Orientation.BACK;
+			// no direction
+			else if(relativeDir==Direction.NONE)
+				result = Orientation.NONE;
 			// other directions
 			else
 				result = Orientation.OTHER;
@@ -88,10 +97,11 @@ public enum Orientation
 		String[] orientationsStr = orientationStr.split(" ");
 		for(String str: orientationsStr)
 		{	if(str.equalsIgnoreCase(XmlTools.VAL_ANY))
-			{	result.add(Orientation.OPPOSITE);
+			{	result.add(Orientation.BACK);
 				result.add(Orientation.OTHER);
-				result.add(Orientation.SAME);
+				result.add(Orientation.FACE);
 				result.add(Orientation.UNDEFINED);
+				result.add(Orientation.NONE);
 			}
 			else
 			{	Orientation orientation = Orientation.valueOf(str);

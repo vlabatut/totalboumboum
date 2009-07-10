@@ -211,7 +211,8 @@ public class GeneralPush extends GeneralAction
 //		Orientation.UNDEFINED,
 //		Orientation.OPPOSITE,
 //		Orientation.OTHER,
-		Orientation.SAME
+		Orientation.FACE
+//		Orientation.NONE
     });
 
 	@Override
