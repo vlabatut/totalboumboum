@@ -441,8 +441,8 @@ public class Level
 	// TILE LOCATION	/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	public Tile getTile(double x, double y)
-	{	x = CalculusTools.round(x,loop);
-		y = CalculusTools.round(y,loop);
+	{	x = CalculusTools.round(x);
+		y = CalculusTools.round(y);
 		double difX = x-pixelLeftX;
 		double difY = y-pixelUpY;
 		double rX = difX/getTileDimension();

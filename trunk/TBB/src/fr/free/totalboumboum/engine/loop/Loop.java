@@ -64,6 +64,7 @@ import fr.free.totalboumboum.engine.player.Player;
 import fr.free.totalboumboum.engine.player.PlayerLocation;
 import fr.free.totalboumboum.game.round.Round;
 import fr.free.totalboumboum.game.statistics.StatisticEvent;
+import fr.free.totalboumboum.tools.CalculusTools;
 import fr.free.totalboumboum.tools.FileTools;
 
 public class Loop implements Runnable, Serializable
@@ -701,6 +702,7 @@ System.out.println();
 	public void setZoomFactor(double zoomFactor)
 	{	this.zoomFactor = zoomFactor;
 		updateScaledTileDimension();
+		CalculusTools.updateCoefficient(zoomFactor);
 	}
 
 	public double getScaledTileDimension()

@@ -209,9 +209,10 @@ public class GeneralGather extends GeneralAction
 	/** compared directions of the target and the action */
 	private static final List<Orientation> allowedOrientations = Arrays.asList(new Orientation[]{
 		Orientation.UNDEFINED,
-		Orientation.OPPOSITE,
+		Orientation.BACK,
 		Orientation.OTHER,
-		Orientation.SAME
+		Orientation.FACE,
+		Orientation.NONE
     });
 
 	@Override

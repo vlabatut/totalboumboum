@@ -24,47 +24,51 @@ package fr.free.totalboumboum.tools;
 import java.util.ArrayList;
 
 import fr.free.totalboumboum.configuration.GameConstants;
-import fr.free.totalboumboum.engine.loop.Loop;
 
 public class CalculusTools
-{	
+{	private static double coefficient = 1;
+
+	public static void updateCoefficient(double zoomFactor)
+	{	coefficient = zoomFactor*GameConstants.TOLERANCE;		
+	}
+	
 	/////////////////////////////////////////////////////////////////
 	// APPROXIMATIONS	/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	public static boolean isRelativelySmallerThan(double a, double b, Loop loop)
+	public static boolean isRelativelySmallerThan(double a, double b)
 	{	boolean result = false;
 		double temp = b-a;
-		result = temp>loop.getZoomFactor()*GameConstants.TOLERANCE;
+		result = temp>coefficient;
 		return result;
 	}
 
-	public static boolean isRelativelyGreaterThan(double a, double b, Loop loop)
+	public static boolean isRelativelyGreaterThan(double a, double b)
 	{	boolean result = false;
 		double temp = a-b;
-		result = temp>loop.getZoomFactor()*GameConstants.TOLERANCE;
+		result = temp>coefficient;
 		return result;
 	}
 	
-	public static boolean isRelativelyEqualTo(double a, double b, Loop loop)
+	public static boolean isRelativelyEqualTo(double a, double b)
 	{	boolean result = false;
 		double temp = Math.abs(b-a);
-		result = temp<=loop.getZoomFactor()*GameConstants.TOLERANCE;
+		result = temp<=coefficient;
 		return result;
 	}
 	
-	public static boolean isRelativelyGreaterOrEqualTo(double a, double b, Loop loop)
+	public static boolean isRelativelyGreaterOrEqualTo(double a, double b)
 	{	boolean result;
-		result = isRelativelyGreaterThan(a,b,loop) || isRelativelyEqualTo(a,b,loop);
+		result = isRelativelyGreaterThan(a,b) || isRelativelyEqualTo(a,b);
 		return result;
 	}
 
-	public static boolean isRelativelySmallerOrEqualTo(double a, double b, Loop loop)
+	public static boolean isRelativelySmallerOrEqualTo(double a, double b)
 	{	boolean result;
-		result = isRelativelySmallerThan(a,b,loop) || isRelativelyEqualTo(a,b,loop);
+		result = isRelativelySmallerThan(a,b) || isRelativelyEqualTo(a,b);
 		return result;
 	}
 
-	public static double round(double a, Loop loop)
+	public static double round(double a)
 	{	double result;
 /*	
 		result = a/(configuration.getZoomFactor()*configuration.getTolerance());
@@ -72,18 +76,18 @@ public class CalculusTools
 		result = result*(configuration.getZoomFactor()*configuration.getTolerance());
 */	
 		double temp = Math.round(a);
-		if(isRelativelyEqualTo(a,temp,loop))
+		if(isRelativelyEqualTo(a,temp))
 			result = temp;
 		else
 			result = a;
 		return result;
 	}
 	
-	public static int relativeSignum(double a, Loop loop)
+	public static int relativeSignum(double a)
 	{	int result;
-		if(isRelativelyEqualTo(a,0,loop))
+		if(isRelativelyEqualTo(a,0))
 			result = 0;
-		else if(isRelativelyGreaterThan(a,0,loop))
+		else if(isRelativelyGreaterThan(a,0))
 			result = +1;
 		else //if(isRelativelySmallerThan(a,0,loop))
 			result = -1;
@@ -138,7 +142,8 @@ public class CalculusTools
 	
 	/**
 	 * process all possible permutations for the integer list in input,
-	 * according to Johnson's algorithm. cf http://en.wikipedia.org/wiki/Steinhaus-Johnson-Trotter_algorithm
+	 * according to Johnson's algorithm. 
+	 * cf http://en.wikipedia.org/wiki/Steinhaus-Johnson-Trotter_algorithm
 	 * @param values
 	 * @return
 	 */
@@ -199,5 +204,4 @@ public class CalculusTools
 		
 		return result;
 	}
-	
 }
