@@ -961,6 +961,10 @@ public class Launcher
 	 *  					 2) pour les animes, charger seulement les infos nécessaires
 	 *  					 3) écrire dans bombset (ou la structure plus générale) une fonction d'instanciation permettant de charger la couleur voulue
 	 * 
+	 * NOTE: les modulations sont ordonnées par priorité dans le fichier XML.
+	 * dans le cas où plusieurs modulations peuvent être appliquées à une action, 
+	 * c'est la première définie dans le fichier XML qui est utilisée.
+	 * il faut donc l'organiser du plus spécifique au plus général.
 	 * 
 	 * le XML des animes doit avoir soit :
 	 * 	- NONE seule
@@ -974,6 +978,8 @@ public class Launcher
 	 *  NOTE gestion des collisions
 	 *  normalement, le système de modulation doit permettre de parfaitement gérer le déplacement dans les bombes.
 	 *  a voir s'il n'est pas possible d'utiliser ça pour simplifier la gestion actuelle des collisions.
+	 *  rque: comme on teste les sprites sur des positions virtuelles, qu'ils n'occupent pas encore,
+	 *  il faudra construire les actions à tester manuellement (tous les paramètres de type contact, orientation, etc) dans le trajectoryManager
 	 *  
 	 */
 }

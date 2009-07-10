@@ -44,7 +44,8 @@ public enum Orientation
 	OPPOSITE,
 	/** the action is not performed facing nor back to the target */
 	OTHER;
-
+//SAME>>FACE, OPPOSITE>>BACK, nouvelle:NONE
+// adapter java et XML
 	/**
 	 * returns the orientation, or UNDEFINED if the target is null or if the action is not directed.
 	 * If the actor and the target are exactly on the same spot, the result is SAME.
