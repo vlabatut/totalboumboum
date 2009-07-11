@@ -5,6 +5,9 @@
 	<self-modulations>
 	</self-modulations>
 	
+	<other-modulations>
+	</other-modulations>
+	
 	<actor-modulations>
 	</actor-modulations>
 	
@@ -23,21 +26,6 @@
 		</modulation>
 		<modulation frame="true" strength="0" >
 			<action name="APPEAR" direction="ANY" contact="ANY"
-				tilePosition="ANY" orientation="ANY" actor="ANY" />
-			<actor-restrictions />
-			<target-restrictions />
-		</modulation>
-<!--  	LAND --> 
-		<modulation frame="true" strength="1" >
-			<action name="LAND" direction="ANY" contact="ANY"
-				tilePosition="ANY" orientation="ANY" actor="ANY" />
-			<actor-restrictions>
-				<ability><name value="SPRITE_TRAVERSE_BOMB" /></ability>
-			</actor-restrictions>
-			<target-restrictions />
-		</modulation>
-		<modulation frame="true" strength="0" >
-			<action name="LAND" direction="ANY" contact="ANY"
 				tilePosition="ANY" orientation="ANY" actor="ANY" />
 			<actor-restrictions />
 			<target-restrictions />
@@ -80,7 +68,6 @@
 			<actor-restrictions />
 			<target-restrictions />
 		</modulation>
-		
 	</third-modulations>
 
 </gesture-modulations>
