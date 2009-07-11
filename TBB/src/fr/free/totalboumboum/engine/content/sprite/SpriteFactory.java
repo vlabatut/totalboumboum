@@ -25,7 +25,6 @@ import java.util.ArrayList;
 import java.util.Iterator;
 
 import fr.free.totalboumboum.engine.container.bombset.Bombset;
-import fr.free.totalboumboum.engine.container.level.Level;
 import fr.free.totalboumboum.engine.content.feature.ability.AbstractAbility;
 import fr.free.totalboumboum.engine.content.feature.explosion.Explosion;
 import fr.free.totalboumboum.engine.content.feature.gesture.GesturePack;
@@ -41,12 +40,7 @@ import fr.free.totalboumboum.engine.content.manager.modulation.ModulationManager
 import fr.free.totalboumboum.engine.content.manager.trajectory.TrajectoryManager;
 
 public abstract class SpriteFactory<T extends Sprite>
-{
-	
-	public SpriteFactory(Level level)
-	{	this.level = level;
-	}
-	
+{	
 	/////////////////////////////////////////////////////////////////
 	// SPRITES			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
@@ -184,14 +178,6 @@ public abstract class SpriteFactory<T extends Sprite>
 	}
 
 	/////////////////////////////////////////////////////////////////
-	// LEVEL			/////////////////////////////////////////////
-	/////////////////////////////////////////////////////////////////
-	protected Level level;
-	public Level getLevel()
-	{	return level;	
-	}
-	
-	/////////////////////////////////////////////////////////////////
 	// FINISHED			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	protected boolean finished = false;
@@ -215,7 +201,6 @@ public abstract class SpriteFactory<T extends Sprite>
 			gesturePack.finish();
 			gesturePack = null;
 			// misc
-			level = null;
 			name = null;
 		}
 	}

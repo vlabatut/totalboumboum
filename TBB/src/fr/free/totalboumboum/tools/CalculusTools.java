@@ -23,36 +23,31 @@ package fr.free.totalboumboum.tools;
 
 import java.util.ArrayList;
 
-import fr.free.totalboumboum.configuration.GameConstants;
+import fr.free.totalboumboum.configuration.GameVariables;
 
 public class CalculusTools
-{	private static double coefficient = 1;
-
-	public static void updateCoefficient(double zoomFactor)
-	{	coefficient = zoomFactor*GameConstants.TOLERANCE;		
-	}
-	
+{	
 	/////////////////////////////////////////////////////////////////
 	// APPROXIMATIONS	/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	public static boolean isRelativelySmallerThan(double a, double b)
 	{	boolean result = false;
 		double temp = b-a;
-		result = temp>coefficient;
+		result = temp>GameVariables.toleranceCoefficient;
 		return result;
 	}
 
 	public static boolean isRelativelyGreaterThan(double a, double b)
 	{	boolean result = false;
 		double temp = a-b;
-		result = temp>coefficient;
+		result = temp>GameVariables.toleranceCoefficient;
 		return result;
 	}
 	
 	public static boolean isRelativelyEqualTo(double a, double b)
 	{	boolean result = false;
 		double temp = Math.abs(b-a);
-		result = temp<=coefficient;
+		result = temp<=GameVariables.toleranceCoefficient;
 		return result;
 	}
 	

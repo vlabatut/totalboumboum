@@ -21,14 +21,13 @@ package fr.free.totalboumboum.engine.content.sprite.block;
  * 
  */
 
-import fr.free.totalboumboum.engine.container.level.Level;
 import fr.free.totalboumboum.engine.content.feature.Role;
 import fr.free.totalboumboum.engine.content.sprite.Sprite;
 
 public class Block extends Sprite
 {
-	public Block(Level level)
-	{	super(level);
+	public Block()
+	{	super();
 	}	
 
 	public void finish()

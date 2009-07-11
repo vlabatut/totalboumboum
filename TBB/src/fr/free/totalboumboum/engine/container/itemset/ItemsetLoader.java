@@ -34,7 +34,6 @@ import org.jdom.Attribute;
 import org.jdom.Element;
 import org.xml.sax.SAXException;
 
-import fr.free.totalboumboum.engine.container.level.Level;
 import fr.free.totalboumboum.engine.content.feature.ability.AbilityLoader;
 import fr.free.totalboumboum.engine.content.feature.ability.AbstractAbility;
 import fr.free.totalboumboum.engine.content.sprite.item.ItemFactory;
@@ -44,7 +43,7 @@ import fr.free.totalboumboum.tools.XmlTools;
 
 public class ItemsetLoader
 {	
-	public static Itemset loadItemset(String folderPath, Level level) throws ParserConfigurationException, SAXException, IOException, ClassNotFoundException
+	public static Itemset loadItemset(String folderPath) throws ParserConfigurationException, SAXException, IOException, ClassNotFoundException
 	{	// init
 		String schemaFolder = FileTools.getSchemasPath();
 		String individualFolder = folderPath;
@@ -54,25 +53,25 @@ public class ItemsetLoader
 		schemaFile = new File(schemaFolder+File.separator+FileTools.FILE_ITEMSET+FileTools.EXTENSION_SCHEMA);
 		Element root = XmlTools.getRootFromFile(dataFile,schemaFile);
 		// loading
-		HashMap<String,ItemFactory> itemFactories = loadItemsetElement(root,individualFolder,level);
+		HashMap<String,ItemFactory> itemFactories = loadItemsetElement(root,individualFolder);
 		Itemset result = new Itemset(itemFactories);
 		return result;
     }
     
     @SuppressWarnings("unchecked")
-    private static HashMap<String,ItemFactory> loadItemsetElement(Element root, String folder, Level level) throws IOException, ParserConfigurationException, SAXException, ClassNotFoundException
+    private static HashMap<String,ItemFactory> loadItemsetElement(Element root, String folder) throws IOException, ParserConfigurationException, SAXException, ClassNotFoundException
 	{	HashMap<String,ItemFactory> result = new HashMap<String,ItemFactory>();
     	String individualFolder = folder;
 		List<Element> items = root.getChildren(XmlTools.ELT_ITEM);	
 		Iterator<Element> i = items.iterator();
 		while(i.hasNext())
 		{	Element temp = i.next();
-			loadItemElement(temp,individualFolder,level,result);
+			loadItemElement(temp,individualFolder,result);
 		}
 		return result;
 	}
     
-    private static void loadItemElement(Element root, String folder, Level level, HashMap<String,ItemFactory> itemFactories) throws ParserConfigurationException, SAXException, IOException, ClassNotFoundException
+    private static void loadItemElement(Element root, String folder, HashMap<String,ItemFactory> itemFactories) throws ParserConfigurationException, SAXException, IOException, ClassNotFoundException
     {	// folder
     	String individualFolder = folder;
 		Attribute attribute = root.getAttribute(XmlTools.ATT_FOLDER);
@@ -81,9 +80,9 @@ public class ItemsetLoader
 		// name
 		String name = root.getAttribute(XmlTools.ATT_NAME).getValue().trim();
 		// abilities
-		ArrayList<AbstractAbility> abilities = AbilityLoader.loadAbilitiesElement(root,level);
+		ArrayList<AbstractAbility> abilities = AbilityLoader.loadAbilitiesElement(root);
 		// factory
-		ItemFactory itemFactory = ItemFactoryLoader.loadItemFactory(individualFolder,level,name,abilities); 
+		ItemFactory itemFactory = ItemFactoryLoader.loadItemFactory(individualFolder,name,abilities); 
 		itemFactories.put(name,itemFactory);
     }     
 }

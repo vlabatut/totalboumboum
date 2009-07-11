@@ -24,6 +24,7 @@ package fr.free.totalboumboum.ai.adapter200809;
 import java.util.ArrayList;
 
 import fr.free.totalboumboum.ai.AbstractAiManager;
+import fr.free.totalboumboum.configuration.GameVariables;
 import fr.free.totalboumboum.engine.container.level.Level;
 import fr.free.totalboumboum.engine.content.feature.Direction;
 import fr.free.totalboumboum.engine.content.feature.event.ControlEvent;
@@ -79,8 +80,8 @@ public abstract class AiManager extends AbstractAiManager<AiAction>
 	@Override
 	public void init(String instance, Player player)
 	{	super.init(instance,player);
-		loop = player.getLoop();
-		level = loop.getLevel();
+		loop = GameVariables.loop;
+		level = GameVariables.level;
 		percepts = new AiZone(level,player);
 		ArtificialIntelligence ai = ((ArtificialIntelligence)getAi());
 		ai.setPercepts(percepts);

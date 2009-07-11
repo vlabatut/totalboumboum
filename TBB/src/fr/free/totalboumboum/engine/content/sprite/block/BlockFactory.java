@@ -23,18 +23,12 @@ package fr.free.totalboumboum.engine.content.sprite.block;
 
 import java.util.HashMap;
 
-import fr.free.totalboumboum.engine.container.level.Level;
 import fr.free.totalboumboum.engine.content.feature.gesture.GestureName;
 import fr.free.totalboumboum.engine.content.manager.event.EventManager;
 import fr.free.totalboumboum.engine.content.sprite.SpriteFactory;
 
-
 public class BlockFactory extends SpriteFactory<Block>
 {	
-	public BlockFactory(Level level)
-	{	super(level);
-	}	
-	
 	/////////////////////////////////////////////////////////////////
 	// GESTURE PACK		/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
@@ -75,7 +69,7 @@ public class BlockFactory extends SpriteFactory<Block>
 	/////////////////////////////////////////////////////////////////
 	public Block makeSprite()
 	{	// init
-		Block result = new Block(level);
+		Block result = new Block();
 		
 		// common managers
 		initSprite(result);

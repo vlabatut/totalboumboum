@@ -21,15 +21,14 @@ package fr.free.totalboumboum.engine.content.sprite.bomb;
  * 
  */
 
-import fr.free.totalboumboum.engine.container.level.Level;
 import fr.free.totalboumboum.engine.content.feature.Role;
 import fr.free.totalboumboum.engine.content.sprite.Sprite;
 
 public class Bomb extends Sprite
 {	private String bombName;
 	
-	public Bomb(Level level)
-	{	super(level);
+	public Bomb()
+	{	super();
 	}
 
 	public String getBombName()

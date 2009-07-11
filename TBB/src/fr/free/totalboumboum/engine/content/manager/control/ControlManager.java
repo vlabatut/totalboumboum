@@ -29,7 +29,6 @@ import fr.free.totalboumboum.configuration.controls.ControlSettings;
 import fr.free.totalboumboum.engine.content.feature.event.ControlEvent;
 import fr.free.totalboumboum.engine.content.sprite.Sprite;
 import fr.free.totalboumboum.engine.control.ControlCode;
-import fr.free.totalboumboum.engine.loop.Loop;
 
 public class ControlManager
 {	/** managed sprite  */
@@ -64,10 +63,6 @@ public class ControlManager
 	{	this.sprite = sprite;
 	}
 
-	public Loop getLoop()
-	{	return sprite.getLoop();
-	}
-	
 	public synchronized void putControlCode(ControlCode controlCode)
 	{	controlCodes.offer(controlCode);	
 	}

@@ -25,7 +25,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
 
-import fr.free.totalboumboum.engine.container.level.Level;
 import fr.free.totalboumboum.engine.content.feature.ability.AbstractAbility;
 import fr.free.totalboumboum.engine.content.feature.gesture.GestureName;
 import fr.free.totalboumboum.engine.content.manager.event.EventManager;
@@ -34,9 +33,8 @@ import fr.free.totalboumboum.engine.content.sprite.item.ItemEventManager;
 
 public class ItemFactory extends SpriteFactory<Item>
 {	
-	public ItemFactory(Level level, String itemName)
-	{	super(level);
-		this.itemName = itemName;
+	public ItemFactory(String itemName)
+	{	this.itemName = itemName;
 	}
 	
 	/////////////////////////////////////////////////////////////////
@@ -88,7 +86,7 @@ public class ItemFactory extends SpriteFactory<Item>
 	
 	public Item makeSprite()
 	{	// init
-		Item result = new Item(level);
+		Item result = new Item();
 		
 		// common managers
 		initSprite(result);

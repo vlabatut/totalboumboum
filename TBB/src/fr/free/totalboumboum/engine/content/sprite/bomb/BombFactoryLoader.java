@@ -34,7 +34,6 @@ import org.xml.sax.SAXException;
 
 import fr.free.totalboumboum.configuration.profile.PredefinedColor;
 import fr.free.totalboumboum.engine.container.bombset.Bombset;
-import fr.free.totalboumboum.engine.container.level.Level;
 import fr.free.totalboumboum.engine.content.feature.ability.AbilityLoader;
 import fr.free.totalboumboum.engine.content.feature.ability.AbstractAbility;
 import fr.free.totalboumboum.engine.content.feature.explosion.Explosion;
@@ -52,9 +51,9 @@ public class BombFactoryLoader extends SpriteFactoryLoader
 	 * because the bombset is always loaded in a neutral way, without graphics.
 	 * it is then completed depending on the needed colors (but the rest of the features stay the same) 
 	 */
-	public static BombFactory loadBombFactory(String folderPath, Level level, String bombName/*, PredefinedColor color, Bombset bombset*/, HashMap<String,BombFactory> abstractBombs) throws ParserConfigurationException, SAXException, IOException, ClassNotFoundException
+	public static BombFactory loadBombFactory(String folderPath, String bombName/*, PredefinedColor color, Bombset bombset*/, HashMap<String,BombFactory> abstractBombs) throws ParserConfigurationException, SAXException, IOException, ClassNotFoundException
 	{	// init
-		BombFactory result = new BombFactory(level,bombName);
+		BombFactory result = new BombFactory(bombName);
 		Element root = SpriteFactoryLoader.openFile(folderPath);
 		String folder;
 		
@@ -81,20 +80,20 @@ public class BombFactoryLoader extends SpriteFactoryLoader
 		
 		// ABILITIES
 		folder = folderPath+File.separator+FileTools.FILE_ABILITIES;
-		AbilityLoader.loadAbilityPack(folder,level,abilities);
+		AbilityLoader.loadAbilityPack(folder,abilities);
 		
 		//EXPLOSION
-		Explosion exp = loadExplosionElement(root,level);
+		Explosion exp = loadExplosionElement(root);
 		if(exp!=null)
 			result.setExplosion(exp); 
 		
 		//MODULATIONS
 		folder = folderPath+File.separator+FileTools.FILE_MODULATIONS;
-		ModulationsLoader.loadModulations(folder,gesturePack,level);
+		ModulationsLoader.loadModulations(folder,gesturePack);
 		
 		// TRAJECTORIES
 		folder = folderPath+File.separator+FileTools.FILE_TRAJECTORIES;
-		TrajectoriesLoader.loadTrajectories(folder,gesturePack,level);
+		TrajectoriesLoader.loadTrajectories(folder,gesturePack);
 		
 		// result
 		return result;
@@ -104,7 +103,7 @@ public class BombFactoryLoader extends SpriteFactoryLoader
 	 * load the animes only
 	 * (complete the sprite depending on the specified color)
 	 */
-	public static void completeBombFactory(BombFactory result, String folderPath, Level level, PredefinedColor color, Bombset bombset, HashMap<String,BombFactory> abstractBombs) throws ParserConfigurationException, SAXException, IOException, ClassNotFoundException
+	public static void completeBombFactory(BombFactory result, String folderPath, PredefinedColor color, Bombset bombset, HashMap<String,BombFactory> abstractBombs) throws ParserConfigurationException, SAXException, IOException, ClassNotFoundException
 	{	String folder;
 		
 		// GENERAL
@@ -119,9 +118,9 @@ public class BombFactoryLoader extends SpriteFactoryLoader
 		// ANIMES
 		folder = folderPath+File.separator+FileTools.FILE_ANIMES;
 		if(color==null)
-			AnimesLoader.loadAnimes(folder,gesturePack,level,BombFactory.getAnimeReplacements());
+			AnimesLoader.loadAnimes(folder,gesturePack,BombFactory.getAnimeReplacements());
 		else
-			AnimesLoader.loadAnimes(folder,gesturePack,level,color,BombFactory.getAnimeReplacements());
+			AnimesLoader.loadAnimes(folder,gesturePack,color,BombFactory.getAnimeReplacements());
 		
 		// BOMBSET
 		result.setBombset(bombset);

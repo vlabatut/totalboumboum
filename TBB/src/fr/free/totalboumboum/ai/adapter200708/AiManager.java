@@ -26,7 +26,7 @@ import java.util.Iterator;
 import java.util.Vector;
 
 import fr.free.totalboumboum.ai.AbstractAiManager;
-import fr.free.totalboumboum.engine.container.level.Level;
+import fr.free.totalboumboum.configuration.GameVariables;
 import fr.free.totalboumboum.engine.container.tile.Tile;
 import fr.free.totalboumboum.engine.content.feature.Direction;
 import fr.free.totalboumboum.engine.content.feature.ability.AbstractAbility;
@@ -88,9 +88,8 @@ public abstract class AiManager extends AbstractAiManager<Integer>
 	public void updatePercepts()
 	{	// compute all the percepts
     	Player player = getPlayer(); 
-    	Loop loop = player.getLoop();
-    	Level level = loop.getLevel();
-    	Tile[][] matrix = level.getMatrix();
+    	Loop loop = GameVariables.loop;
+    	Tile[][] matrix = GameVariables.level.getMatrix();
     	Sprite sprite = player.getSprite();
     	
     	// état du shrink

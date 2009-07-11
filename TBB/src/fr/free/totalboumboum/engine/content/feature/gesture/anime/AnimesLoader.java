@@ -38,8 +38,8 @@ import org.jdom.Element;
 import org.xml.sax.SAXException;
 
 import fr.free.totalboumboum.configuration.Configuration;
+import fr.free.totalboumboum.configuration.GameVariables;
 import fr.free.totalboumboum.configuration.profile.PredefinedColor;
-import fr.free.totalboumboum.engine.container.level.Level;
 import fr.free.totalboumboum.engine.content.feature.Direction;
 import fr.free.totalboumboum.engine.content.feature.ImageShift;
 import fr.free.totalboumboum.engine.content.feature.gesture.Gesture;
@@ -51,11 +51,11 @@ import fr.free.totalboumboum.tools.XmlTools;
 
 public class AnimesLoader
 {	
-	public static void loadAnimes(String folderPath, GesturePack pack, Level level, HashMap<GestureName,GestureName> animesReplacements) throws IOException, ParserConfigurationException, SAXException
-	{	loadAnimes(folderPath,pack,level,null);
+	public static void loadAnimes(String folderPath, GesturePack pack, HashMap<GestureName,GestureName> animesReplacements) throws IOException, ParserConfigurationException, SAXException
+	{	loadAnimes(folderPath,pack,null);
 	}
 	
-	public static void loadAnimes(String folderPath, GesturePack pack, Level level, PredefinedColor color, HashMap<GestureName,GestureName> animesReplacements) throws IOException, ParserConfigurationException, SAXException
+	public static void loadAnimes(String folderPath, GesturePack pack, PredefinedColor color, HashMap<GestureName,GestureName> animesReplacements) throws IOException, ParserConfigurationException, SAXException
 	{	pack.setColor(color);
 		File dataFile = new File(folderPath+File.separator+FileTools.FILE_ANIMES+FileTools.EXTENSION_XML);
 		if(dataFile.exists())
@@ -64,13 +64,13 @@ public class AnimesLoader
 			File schemaFile = new File(schemaFolder+File.separator+FileTools.FILE_ANIMES+FileTools.EXTENSION_SCHEMA);
 			Element root = XmlTools.getRootFromFile(dataFile,schemaFile);
 			// loading
-			loadAnimesElement(root,folderPath,pack,level,color);
+			loadAnimesElement(root,folderPath,pack,color);
 			// completing
 			completeAnimes(pack,animesReplacements);
 		}
 	}
     
-    private static void loadAnimesElement(Element root, String individualFolder, GesturePack pack, Level level, PredefinedColor color) throws IOException, ParserConfigurationException, SAXException
+    private static void loadAnimesElement(Element root, String individualFolder, GesturePack pack, PredefinedColor color) throws IOException, ParserConfigurationException, SAXException
     {	HashMap<String,BufferedImage>images = new HashMap<String, BufferedImage>();
     	HashMap<String,BufferedImage>shadows = new HashMap<String, BufferedImage>();
     	Colormap colormap = null;
@@ -91,7 +91,7 @@ public class AnimesLoader
 		
 		// bound height
 		double boundHeight = 0;
-		double zoomFactor = level.getLoop().getZoomFactor();
+		double zoomFactor = GameVariables.zoomFactor;
 		attribute = root.getAttribute(XmlTools.ATT_BOUND_HEIGHT);
 		if(attribute!=null)
 		{	double temp = Double.parseDouble(attribute.getValue());
@@ -116,16 +116,15 @@ public class AnimesLoader
 		// shadows ?
 		elt = root.getChild(XmlTools.ELT_SHADOWS);
 		if(elt!=null)
-			loadShadowsElement(elt,localFilePath,pack,level,images,shadows,colormap,zoomFactor,scale);
+			loadShadowsElement(elt,localFilePath,pack,images,shadows,colormap,zoomFactor,scale);
 		
 		// gestures
 		Element gestures = root.getChild(XmlTools.ELT_GESTURES);
-		loadGesturesElement(gestures,boundHeight,localFilePath,pack,level,images,shadows,colormap,zoomFactor,scale);
+		loadGesturesElement(gestures,boundHeight,localFilePath,pack,images,shadows,colormap,zoomFactor,scale);
 	}
     
     @SuppressWarnings("unchecked")
 	private static void loadShadowsElement(Element root, String individualFolder, GesturePack pack,
-    		Level level,
     		HashMap<String,BufferedImage> images, HashMap<String,BufferedImage> shadows, Colormap colormap,
     		double zoomFactor, double scale) throws IOException
     {	// folder
@@ -139,18 +138,17 @@ public class AnimesLoader
     	Iterator<Element> i = shdws.iterator();
     	while(i.hasNext())
     	{	Element tp = i.next();
-    		loadShadowElement(tp,localFilePath,pack,level,images,shadows,colormap,zoomFactor,scale);
+    		loadShadowElement(tp,localFilePath,pack,images,shadows,colormap,zoomFactor,scale);
     	}
     }
     
     private static void loadShadowElement(Element root, String individualFolder, GesturePack pack,
-    		Level level,
     		HashMap<String,BufferedImage> images, HashMap<String,BufferedImage> shadows, Colormap colormap,
     		double zoomFactor, double scale) throws IOException
     {	// file
     	String localPath = individualFolder+File.separator;
     	localPath = localPath + root.getAttribute(XmlTools.ATT_FILE).getValue().trim();
-    	BufferedImage shadow = loadImage(localPath,level,images,colormap,zoomFactor,scale);
+    	BufferedImage shadow = loadImage(localPath,images,colormap,zoomFactor,scale);
     	
     	// name
     	String name = root.getAttribute(XmlTools.ATT_NAME).getValue().trim();
@@ -161,7 +159,6 @@ public class AnimesLoader
     
     @SuppressWarnings("unchecked")
 	private static void loadGesturesElement(Element root, double boundHeight, String filePath, GesturePack pack,
-    		Level level,
     		HashMap<String,BufferedImage> images, HashMap<String,BufferedImage> shadows, Colormap colormap,
     		double zoomFactor, double scale) throws IOException
     {	// folder
@@ -175,7 +172,7 @@ public class AnimesLoader
     	Iterator<Element> i = gesturesList.iterator();
     	while(i.hasNext())
     	{	Element tp = i.next();
-			loadGestureElement(tp,pack,boundHeight,localFilePath,level,images,shadows,colormap,zoomFactor,scale);
+			loadGestureElement(tp,pack,boundHeight,localFilePath,images,shadows,colormap,zoomFactor,scale);
     	}
     }
     
@@ -184,7 +181,6 @@ public class AnimesLoader
      */
     @SuppressWarnings("unchecked")
 	private static void loadGestureElement(Element root, GesturePack pack, double boundHeight, String filePath,
-    		Level level,
     		HashMap<String,BufferedImage> images, HashMap<String,BufferedImage> shadows, Colormap colormap,
     		double zoomFactor, double scale) throws IOException
     {	// name
@@ -232,7 +228,7 @@ public class AnimesLoader
 		{	shadow = shadows.get(attribute.getValue().trim());
 			if(shadow==null)
 			{	String imgPath = localFilePath+File.separator+root.getAttribute(XmlTools.ATT_SHADOW).getValue().trim();
-				shadow = loadImage(imgPath,level,images,colormap,zoomFactor,scale);
+				shadow = loadImage(imgPath,images,colormap,zoomFactor,scale);
 			}
 		}
 		
@@ -265,7 +261,7 @@ public class AnimesLoader
     	{	Element tp = i.next();
 			AnimeDirection animeDirection = loadDirectionElement(gestureName,boundHeight,repeat,proportional,tp,localFilePath,xShift,yShift,
 					shadow,shadowXShift,shadowYShift,boundYShift
-					,level,images,shadows,colormap,zoomFactor,scale);
+					,images,shadows,colormap,zoomFactor,scale);
 			gesture.addAnimeDirection(animeDirection,animeDirection.getDirection());
 		}
     	completeDirections(gesture);
@@ -279,7 +275,6 @@ public class AnimesLoader
     		Element root, String filePath, 
     		double xShift, double yShift, 
     		BufferedImage shadow, double shadowXShift, double shadowYShift, ImageShift boundYShift,
-    		Level level,
     		HashMap<String,BufferedImage> images, HashMap<String,BufferedImage> shadows, Colormap colormap,
     		double zoomFactor, double scale) throws IOException
     {	AnimeDirection result = new AnimeDirection();
@@ -321,7 +316,7 @@ public class AnimesLoader
 		{	shadow = shadows.get(attribute.getValue().trim());
 			if(shadow==null)
 			{	String imgPath = localFilePath+File.separator+root.getAttribute(XmlTools.ATT_SHADOW).getValue().trim();
-				shadow = loadImage(imgPath,level,images,colormap,zoomFactor,scale);
+				shadow = loadImage(imgPath,images,colormap,zoomFactor,scale);
 			}
 		}
 		
@@ -349,7 +344,7 @@ public class AnimesLoader
     	Iterator<Element> i = stepsList.iterator();
     	while(i.hasNext())
     	{	Element tp = i.next();
-    		AnimeStep animeStep = loadStepElement(tp,localFilePath,xShift,yShift,shadow,shadowXShift,shadowYShift,boundYShift,level,images,shadows,colormap,zoomFactor,scale);
+    		AnimeStep animeStep = loadStepElement(tp,localFilePath,xShift,yShift,shadow,shadowXShift,shadowYShift,boundYShift,images,shadows,colormap,zoomFactor,scale);
     		result.add(animeStep);
     	}
     	return result;
@@ -361,7 +356,6 @@ public class AnimesLoader
     private static AnimeStep loadStepElement(Element root, String filePath, 
     		double xShift, double yShift, 
     		BufferedImage shadow, double shadowXShift, double shadowYShift, ImageShift boundYShift,
-    		Level level,
     		HashMap<String,BufferedImage> images, HashMap<String,BufferedImage> shadows, Colormap colormap,
     		double zoomFactor, double scale) throws IOException
     {	AnimeStep result = new AnimeStep();    	
@@ -378,7 +372,7 @@ public class AnimesLoader
     	if(attribute!=null)
     	{	String strImage = attribute.getValue().trim();
     		String imgPath = filePath+File.separator+strImage;
-    		img = loadImage(imgPath,level,images,colormap,zoomFactor,scale);
+    		img = loadImage(imgPath,images,colormap,zoomFactor,scale);
     	}
 		
     	// horizontal shift
@@ -401,7 +395,7 @@ public class AnimesLoader
 		{	shadow = shadows.get(attribute.getValue().trim());
 			if(shadow==null)
 			{	String imgPath = filePath+File.separator+attribute.getValue().trim();
-				shadow = loadImage(imgPath,level,images,colormap,zoomFactor,scale);
+				shadow = loadImage(imgPath,images,colormap,zoomFactor,scale);
 			}
 		}
 		
@@ -436,7 +430,7 @@ public class AnimesLoader
 		return result;
     }	
    
-    private static BufferedImage loadImage(String imgPath, Level level,
+    private static BufferedImage loadImage(String imgPath,
     		HashMap<String,BufferedImage> images, Colormap colormap,
     		double zoomFactor, double scale) throws IOException
     {	BufferedImage result;

@@ -26,12 +26,12 @@ import java.awt.Font;
 import java.awt.FontMetrics;
 import java.awt.Graphics;
 import java.awt.geom.Rectangle2D;
-import java.io.File;
 import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.Iterator;
 
 import fr.free.totalboumboum.configuration.Configuration;
+import fr.free.totalboumboum.configuration.GameVariables;
 import fr.free.totalboumboum.engine.container.bombset.Bombset;
 import fr.free.totalboumboum.engine.container.itemset.Itemset;
 import fr.free.totalboumboum.engine.container.tile.Tile;
@@ -40,7 +40,6 @@ import fr.free.totalboumboum.engine.content.sprite.Sprite;
 import fr.free.totalboumboum.engine.content.sprite.hero.Hero;
 import fr.free.totalboumboum.engine.loop.Loop;
 import fr.free.totalboumboum.tools.CalculusTools;
-import fr.free.totalboumboum.tools.FileTools;
 import fr.free.totalboumboum.tools.StringTools;
 
 public class Level
@@ -48,23 +47,7 @@ public class Level
 	{	this.loop = loop;
 	}
 	
-    /////////////////////////////////////////////////////////////////
-	// INSTANCE PATH		/////////////////////////////////////////
-	/////////////////////////////////////////////////////////////////
-	private String instance;
-	
-    public String getInstance()
-    {	return instance;
-    }
-    public String getInstancePath()
-    {	String result = FileTools.getInstancesPath()+File.separator+instance;
-    	return result;
-    }
-    public void setInstancePath(String instance)
-    {	this.instance = instance;
-    }
-
-    /////////////////////////////////////////////////////////////////
+     /////////////////////////////////////////////////////////////////
 	// LOOP					/////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	private Loop loop;
@@ -96,7 +79,6 @@ public class Level
 	private int globalHeight;
 	private double pixelLeftX; // pas central
 	private double pixelUpY; // pas central
-	private double tileDimension;
 	private double pixelWidth;
 	private double pixelHeight;
 
@@ -105,8 +87,8 @@ public class Level
 		this.globalHeight = globalHeight;
 		this.pixelLeftX = globalLeftX;
 		this.pixelUpY = globalUpY;
-		this.pixelWidth = globalWidth*tileDimension;
-		this.pixelHeight = globalHeight*getTileDimension();
+		this.pixelWidth = globalWidth*GameVariables.scaledTileDimension;
+		this.pixelHeight = globalHeight*GameVariables.scaledTileDimension;
 	}
 	public double getGlobalLeftX()
 	{	return pixelLeftX;
@@ -121,13 +103,6 @@ public class Level
 	{	return globalHeight;
 	}
 	
-	public double getTileDimension()
-	{	return tileDimension;	
-	}
-	public void setTileDimension(double tileDimension)
-	{	this.tileDimension = tileDimension;
-	}
-
 	/////////////////////////////////////////////////////////////////
 	// TILES MATRIX		/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
@@ -146,7 +121,6 @@ public class Level
     /////////////////////////////////////////////////////////////////
 	// DISTANCES			/////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-
 	/**
 	 * process the manhattan distance
 	 */
@@ -299,7 +273,6 @@ public class Level
 	/////////////////////////////////////////////////////////////////
 	// DIRECTIONS			/////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-
 	/**
 	 * processes the direction of s2 relatively to s1, if
 	 * considering the shortest path.
@@ -445,8 +418,8 @@ public class Level
 		y = CalculusTools.round(y);
 		double difX = x-pixelLeftX;
 		double difY = y-pixelUpY;
-		double rX = difX/getTileDimension();
-		double rY = difY/getTileDimension();
+		double rX = difX/GameVariables.scaledTileDimension;
+		double rY = difY/GameVariables.scaledTileDimension;
 		int rdX = (int)rX;//(int)Math.round(rX);
 		int rdY = (int)rY;//(int)Math.round(rY);
 		int c = rdX%globalWidth;
@@ -664,7 +637,7 @@ public class Level
 			for(int col=0;col<globalWidth;col++)
 			{	Tile temp = matrix[line][col];
 				g.drawLine((int)temp.getPosX(), (int)temp.getPosY(), (int)temp.getPosX(), (int)temp.getPosY());
-				g.drawRect((int)(temp.getPosX()-getTileDimension()/2), (int)(temp.getPosY()-getTileDimension()/2), (int)getTileDimension(), (int)getTileDimension());
+				g.drawRect((int)(temp.getPosX()-GameVariables.scaledTileDimension/2), (int)(temp.getPosY()-GameVariables.scaledTileDimension/2), (int)GameVariables.scaledTileDimension, (int)GameVariables.scaledTileDimension);
 			}
 	}
 

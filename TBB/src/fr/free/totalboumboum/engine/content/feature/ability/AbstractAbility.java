@@ -21,22 +21,14 @@ package fr.free.totalboumboum.engine.content.feature.ability;
  * 
  */
 
-import fr.free.totalboumboum.engine.container.level.Level;
-
 public abstract class AbstractAbility
 {	
-	public AbstractAbility(Level level)
-	{	this.level = level;
-		max = Float.MAX_VALUE;
+	public AbstractAbility()
+	{	max = Float.MAX_VALUE;
 		strength = 0;
 		time = -1;
 		uses = -1;
 	}
-
-	/////////////////////////////////////////////////////////////////
-	// LEVEL			/////////////////////////////////////////////
-	/////////////////////////////////////////////////////////////////
-	protected Level level;
 
 	/////////////////////////////////////////////////////////////////
 	// MAX				/////////////////////////////////////////////
@@ -141,8 +133,6 @@ public abstract class AbstractAbility
 	public void finish()
 	{	if(!finished)
 		{	finished = true;
-			// level
-			level = null;
 		}
 	}
 

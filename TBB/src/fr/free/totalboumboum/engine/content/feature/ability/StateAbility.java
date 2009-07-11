@@ -21,12 +21,10 @@ package fr.free.totalboumboum.engine.content.feature.ability;
  * 
  */
 
-import fr.free.totalboumboum.engine.container.level.Level;
-
 public class StateAbility extends AbstractAbility
 {	
-	public StateAbility(String name, Level level)
-	{	super(level);
+	public StateAbility(String name)
+	{	super();
 		this.name = name;
 	}
 	
@@ -61,7 +59,7 @@ public class StateAbility extends AbstractAbility
 	/////////////////////////////////////////////////////////////////
 	public AbstractAbility copy()
 	{	StateAbility result;
-		result = new StateAbility(name,level);
+		result = new StateAbility(name);
 		result.setFrame(frame);
 		result.setMax(max);
 		result.setStrength(strength);

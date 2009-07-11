@@ -24,7 +24,6 @@ package fr.free.totalboumboum.engine.content.manager.modulation;
 import java.util.ArrayList;
 import java.util.Iterator;
 
-import fr.free.totalboumboum.engine.container.level.Level;
 import fr.free.totalboumboum.engine.container.tile.Tile;
 import fr.free.totalboumboum.engine.content.feature.Direction;
 import fr.free.totalboumboum.engine.content.feature.ability.ActionAbility;
@@ -50,10 +49,6 @@ public class ModulationManager
 	// SPRITE				/////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	private Sprite sprite;
-	
-	public Level getLevel()
-	{	return sprite.getLevel();
-	}
 	
 	/////////////////////////////////////////////////////////////////
 	// GESTURE				/////////////////////////////////////////

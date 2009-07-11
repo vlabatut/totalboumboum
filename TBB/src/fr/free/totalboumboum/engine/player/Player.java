@@ -34,18 +34,17 @@ import org.xml.sax.SAXException;
 import fr.free.totalboumboum.ai.AbstractAiManager;
 import fr.free.totalboumboum.ai.AiLoader;
 import fr.free.totalboumboum.configuration.Configuration;
+import fr.free.totalboumboum.configuration.GameVariables;
 import fr.free.totalboumboum.configuration.controls.ControlSettings;
 import fr.free.totalboumboum.configuration.profile.PredefinedColor;
 import fr.free.totalboumboum.configuration.profile.Profile;
 import fr.free.totalboumboum.engine.container.bombset.BombsetMap;
-import fr.free.totalboumboum.engine.container.level.Level;
 import fr.free.totalboumboum.engine.content.feature.ability.AbstractAbility;
 import fr.free.totalboumboum.engine.content.feature.gesture.GesturePack;
 import fr.free.totalboumboum.engine.content.sprite.Sprite;
 import fr.free.totalboumboum.engine.content.sprite.hero.HeroFactory;
 import fr.free.totalboumboum.engine.content.sprite.hero.HeroFactoryLoader;
 import fr.free.totalboumboum.engine.control.PlayerControl;
-import fr.free.totalboumboum.engine.loop.Loop;
 import fr.free.totalboumboum.tools.FileTools;
 
 public class Player
@@ -53,8 +52,6 @@ public class Player
 	private Profile profile;
 	/** sprite */
 	private Sprite sprite;
-	/** round */
-	private Level level;
 	/** artificial intelligence */
 	private AbstractAiManager<?> ai = null;
 	/** control */
@@ -64,14 +61,13 @@ public class Player
 	/** current controls */
 	private ControlSettings controlSettings;
 	
-	public Player(Profile profile, Level level, ArrayList<AbstractAbility> ablts, GesturePack gestures, BombsetMap bombsetMap) throws ParserConfigurationException, SAXException, IOException, ClassNotFoundException
-	{	this.level = level;
-		this.profile = profile;
+	public Player(Profile profile, ArrayList<AbstractAbility> ablts, GesturePack gestures, BombsetMap bombsetMap) throws ParserConfigurationException, SAXException, IOException, ClassNotFoundException
+	{	this.profile = profile;
 		// sprite
 		color = this.profile.getSpriteColor();
 		String folder = FileTools.getHeroesPath()+File.separator+this.profile.getSpritePack();
 		folder = folder + File.separator+this.profile.getSpriteFolder();
-		HeroFactory tempHeroFactory = HeroFactoryLoader.loadHeroFactory(folder,level,color,ablts,gestures.copy(),bombsetMap);
+		HeroFactory tempHeroFactory = HeroFactoryLoader.loadHeroFactory(folder,color,ablts,gestures.copy(),bombsetMap);
 		sprite = tempHeroFactory.makeSprite();
 		sprite.initGesture();
 		// control settings
@@ -89,16 +85,8 @@ public class Player
 	{	// artificial intelligence
     	if(this.profile.getAiName() != null)
     	{	ai = AiLoader.loadAi(profile.getAiName(), profile.getAiPackname());
-    		ai.init(level.getInstance(),this);
+    		ai.init(GameVariables.instanceName,this);
     	}
-	}
-	
-	public Loop getLoop()
-	{	return level.getLoop();	
-	}
-	
-	public Level getLevel()
-	{	return level;	
 	}
 	
 	public void update()
@@ -134,7 +122,7 @@ public class Player
 	
 	public void setOut()
 	{	playerOut = true;
-		getLoop().playerOut(this);	
+		GameVariables.loop.playerOut(this);	
 	}
 	public boolean isOut()
 	{	return playerOut;	
@@ -156,7 +144,6 @@ public class Player
 			// misc
 			controlSettings = null;
 			color = null;
-			level = null;
 			profile = null;
 			sprite = null;
 		}

@@ -132,7 +132,7 @@ public class HeroEventManager extends EventManager
 			StatisticEvent statEvent = new StatisticEvent(statActor,statAction,statTarget,statTime);
 			sprite.addStatisticEvent(statEvent);
 			// player out NOTE à modifier pour autres PlayModes
-//			if(sprite.getLoop().getPlayMode() == PlayMode.SURVIVAL)
+//			if(GameVariables.loop.getPlayMode() == PlayMode.SURVIVAL)
 			{	Player player = sprite.getPlayer(); 
 				if(player!=null)
 					player.setOut();
@@ -332,7 +332,7 @@ public class HeroEventManager extends EventManager
 		}
 		else if(gesture.equals(GestureName.CRYING)
 				|| gesture.equals(GestureName.EXULTING))
-		{	//sprite.getLoop().celebrationOver();
+		{	//GameVariables.loop.celebrationOver();
 			gesture = GestureName.STANDING;
 			sprite.setGesture(gesture,spriteDirection,controlDirection,true);
 		}

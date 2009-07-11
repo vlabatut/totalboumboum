@@ -34,6 +34,7 @@ import org.xml.sax.SAXException;
 
 import fr.free.totalboumboum.configuration.Configuration;
 import fr.free.totalboumboum.configuration.GameConstants;
+import fr.free.totalboumboum.configuration.GameVariables;
 import fr.free.totalboumboum.engine.container.bombset.Bombset;
 import fr.free.totalboumboum.engine.container.bombset.BombsetMap;
 import fr.free.totalboumboum.engine.container.itemset.Itemset;
@@ -76,7 +77,7 @@ public class HollowLevel implements Serializable
 	public void initLevel(Loop loop)
 	{	// init
     	level = new Level(loop);
-    	level.setInstancePath(instanceName);
+    	GameVariables.setInstanceName(instanceName);
 		Dimension panelDim = Configuration.getVideoConfiguration().getPanelDimension();
     	double sizeX = panelDim.width;
     	double sizeY = panelDim.height;
@@ -100,20 +101,18 @@ public class HollowLevel implements Serializable
 		double ratioX = (int)(sizeX/visibleWidth)/standardTileDimension;
 		double ratioY = (int)(sizeY/visibleHeight)/standardTileDimension;
 		double zoomFactor = Math.min(ratioX,ratioY);
-		loop.setZoomFactor(zoomFactor);
-		level.setTileDimension(loop.getScaledTileDimension());
+		GameVariables.setZoomFactor(zoomFactor);
 //configuration.setZoomFactor(1.0f);
 		
 		// position
 		double posX = sizeX/2;
 		double posY = sizeY/2;
-		double tileDimension = level.getTileDimension();
-		double visibleLeftX = posX - visibleWidth*tileDimension/2/* + tileDimension/2*/;
-		double visibleUpY = posY - visibleHeight*tileDimension/2 /*+ tileDimension/2*/;
+		double visibleLeftX = posX - visibleWidth*GameVariables.scaledTileDimension/2/* + tileDimension/2*/;
+		double visibleUpY = posY - visibleHeight*GameVariables.scaledTileDimension/2 /*+ tileDimension/2*/;
 //		double globalLeftX = posX - globalWidth*tileDimension/2;
 //		double globalUpY = posY - globalHeight*tileDimension/2;
-		double globalLeftX = posX - (visibleLeftCol+visibleWidth/2.0)*tileDimension;
-		double globalUpY = posY - (visibleUpLine+visibleHeight/2.0)*tileDimension;
+		double globalLeftX = posX - (visibleLeftCol+visibleWidth/2.0)*GameVariables.scaledTileDimension;
+		double globalUpY = posY - (visibleUpLine+visibleHeight/2.0)*GameVariables.scaledTileDimension;
     	level.setTilePositions(globalWidth,globalHeight,globalLeftX,globalUpY);
 		
 //NOTE il y a une ligne horizontale dans les borders au dessus du niveau (forcer le zoomFactor à 1 pour la faire apparaitre)		
@@ -129,13 +128,13 @@ public class HollowLevel implements Serializable
 		double upBorderY = 0;
 		double horizontalBorderWidth = sizeX;
 		if(displayMaximize)
-		{	downBorderY = globalUpY+globalHeight*tileDimension+1;
+		{	downBorderY = globalUpY+globalHeight*GameVariables.scaledTileDimension+1;
 			if(globalUpY>0)
 				horizontalBorderHeight = globalUpY;
 			else
 				horizontalBorderHeight = 0;
 			verticalBorderY = horizontalBorderHeight+1;
-			rightBorderX = globalLeftX+globalWidth*tileDimension+1;
+			rightBorderX = globalLeftX+globalWidth*GameVariables.scaledTileDimension+1;
 			if(globalLeftX>0)
 				verticalBorderWidth = globalLeftX;
 			else
@@ -143,10 +142,10 @@ public class HollowLevel implements Serializable
 			verticalBorderHeight = sizeY-2*horizontalBorderHeight+1;
 		}
 		else
-		{	downBorderY = visibleUpY+visibleHeight*tileDimension+1;
+		{	downBorderY = visibleUpY+visibleHeight*GameVariables.scaledTileDimension+1;
 			horizontalBorderHeight = visibleUpY;
 			verticalBorderY = visibleUpY;
-			rightBorderX = visibleLeftX+visibleWidth*tileDimension+1;
+			rightBorderX = visibleLeftX+visibleWidth*GameVariables.scaledTileDimension+1;
 			verticalBorderWidth = visibleLeftX;
 			verticalBorderHeight = sizeY-2*horizontalBorderHeight+1;
 		}
@@ -256,14 +255,13 @@ public class HollowLevel implements Serializable
 
     public void loadTheme() throws ParserConfigurationException, SAXException, IOException, ClassNotFoundException
     {	// theme
-    	Theme theme = ThemeLoader.loadTheme(themePath,level);
+    	Theme theme = ThemeLoader.loadTheme(themePath);
 //		level.setTheme(theme);
 		// init zone
 		Tile[][] matrix = level.getMatrix();
 		Itemset itemset = level.getItemset();
 		double globalLeftX = level.getGlobalLeftX();
 		double globalUpY = level.getGlobalUpY();
-		double tileDimension = level.getTileDimension();
 		ArrayList<String[][]> matrices = zone.getMatrices();
     	String[][] mFloors = matrices.get(0);
 		String[][] mBlocks = matrices.get(1);
@@ -271,8 +269,8 @@ public class HollowLevel implements Serializable
 		// init tiles
 		for(int line=0;line<globalHeight;line++)
 		{	for(int col=0;col<globalWidth;col++)
-			{	double x = globalLeftX + tileDimension/2 + col*tileDimension;
-				double y = globalUpY + tileDimension/2 + line*tileDimension;
+			{	double x = globalLeftX + GameVariables.scaledTileDimension/2 + col*GameVariables.scaledTileDimension;
+				double y = globalUpY + GameVariables.scaledTileDimension/2 + line*GameVariables.scaledTileDimension;
 				if(mFloors[line][col]==null)
 					matrix[line][col] = new Tile(level,line,col,x,y,theme.makeFloor());
 				else
@@ -339,10 +337,10 @@ public class HollowLevel implements Serializable
 	public void loadBombsets() throws ParserConfigurationException, SAXException, IOException, ClassNotFoundException
     {	// bombsets map
 		bombsetMap = new BombsetMap();
-    	bombsetMap.loadBombset(bombsetPath,level);
+    	bombsetMap.loadBombset(bombsetPath);
 		
     	// level bombset
-    	Bombset bombset = bombsetMap.loadBombset(bombsetPath,level,null);
+    	Bombset bombset = bombsetMap.loadBombset(bombsetPath,null);
 		level.setBombset(bombset);
     }
 	
@@ -356,7 +354,7 @@ public class HollowLevel implements Serializable
 	private String itemPath;
 
 	public void loadItemset() throws ParserConfigurationException, SAXException, IOException, ClassNotFoundException
-    {	Itemset itemset = ItemsetLoader.loadItemset(itemPath,level);
+    {	Itemset itemset = ItemsetLoader.loadItemset(itemPath);
 		level.setItemset(itemset);
     }
 

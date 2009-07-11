@@ -31,8 +31,8 @@ import javax.xml.parsers.ParserConfigurationException;
 import org.jdom.Element;
 import org.xml.sax.SAXException;
 
+import fr.free.totalboumboum.configuration.GameVariables;
 import fr.free.totalboumboum.engine.container.bombset.Bombset;
-import fr.free.totalboumboum.engine.container.level.Level;
 import fr.free.totalboumboum.engine.content.feature.ability.AbilityLoader;
 import fr.free.totalboumboum.engine.content.feature.ability.AbstractAbility;
 import fr.free.totalboumboum.engine.content.feature.explosion.Explosion;
@@ -45,9 +45,9 @@ import fr.free.totalboumboum.tools.FileTools;
 
 public class BlockFactoryLoader extends SpriteFactoryLoader
 {	
-	public static BlockFactory loadBlockFactory(String folderPath, Level level) throws ParserConfigurationException, SAXException, IOException, ClassNotFoundException
+	public static BlockFactory loadBlockFactory(String folderPath) throws ParserConfigurationException, SAXException, IOException, ClassNotFoundException
 	{	// init
-		BlockFactory result = new BlockFactory(level);
+		BlockFactory result = new BlockFactory();
 		Element root = SpriteFactoryLoader.openFile(folderPath);
 		String folder;
 		GesturePack gesturePack = new GesturePack();
@@ -59,27 +59,27 @@ public class BlockFactoryLoader extends SpriteFactoryLoader
 		// ABILITIES
 		folder = folderPath+File.separator+FileTools.FILE_ABILITIES;
 		ArrayList<AbstractAbility> abilities = new ArrayList<AbstractAbility>();
-		AbilityLoader.loadAbilityPack(folder,level,abilities);
+		AbilityLoader.loadAbilityPack(folder,abilities);
 		result.setAbilities(abilities);
 		
 		// ANIMES
 		folder = folderPath+File.separator+FileTools.FILE_ANIMES;
-		AnimesLoader.loadAnimes(folder,gesturePack,level,BlockFactory.getAnimeReplacements());
+		AnimesLoader.loadAnimes(folder,gesturePack,BlockFactory.getAnimeReplacements());
 		
 		//EXPLOSION
-		Explosion explosion = loadExplosionElement(root,level);
+		Explosion explosion = loadExplosionElement(root);
 		result.setExplosion(explosion);
 		
 		//MODULATIONS
 		folder = folderPath+File.separator+FileTools.FILE_MODULATIONS;
-		ModulationsLoader.loadModulations(folder,gesturePack,level);
+		ModulationsLoader.loadModulations(folder,gesturePack);
 		
 		// TRAJECTORIES
 		folder = folderPath+File.separator+FileTools.FILE_TRAJECTORIES;
-		TrajectoriesLoader.loadTrajectories(folder,gesturePack,level);
+		TrajectoriesLoader.loadTrajectories(folder,gesturePack);
 		
 		// BOMBSET
-		Bombset bombset = level.getBombset();
+		Bombset bombset = GameVariables.level.getBombset();
 		result.setBombset(bombset);
 
 		// result

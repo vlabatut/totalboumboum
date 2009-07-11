@@ -21,20 +21,19 @@ package fr.free.totalboumboum.engine.content.feature.ability;
  * 
  */
 
-import fr.free.totalboumboum.engine.container.level.Level;
 import fr.free.totalboumboum.engine.content.feature.gesture.action.ActionName;
 import fr.free.totalboumboum.engine.content.feature.gesture.action.GeneralAction;
 import fr.free.totalboumboum.engine.content.feature.gesture.action.SpecificAction;
 
 public class ActionAbility extends AbstractAbility
 {	
-	public ActionAbility(GeneralAction action, Level level)
-	{	super(level);
+	public ActionAbility(GeneralAction action)
+	{	super();
 		this.action = action;
 	}
 	
-	public ActionAbility(SpecificAction action, Level level)
-	{	this(action.getGeneralAction(),level);
+	public ActionAbility(SpecificAction action)
+	{	this(action.getGeneralAction());
 	}
 	
 	/////////////////////////////////////////////////////////////////
@@ -75,7 +74,7 @@ public class ActionAbility extends AbstractAbility
 	public AbstractAbility copy()
 	{	ActionAbility result;
 		GeneralAction a = action; //NOTE à copier ? (non)
-		result = new ActionAbility(a,level);
+		result = new ActionAbility(a);
 		result.setFrame(frame);
 		result.setMax(max);
 		result.setStrength(strength);

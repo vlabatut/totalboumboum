@@ -25,6 +25,7 @@ import java.util.ArrayList;
 import java.util.Iterator;
 
 import fr.free.totalboumboum.configuration.Configuration;
+import fr.free.totalboumboum.configuration.GameVariables;
 import fr.free.totalboumboum.engine.container.tile.Tile;
 import fr.free.totalboumboum.engine.content.feature.Direction;
 import fr.free.totalboumboum.engine.content.feature.event.EngineEvent;
@@ -326,7 +327,7 @@ public class TrajectoryManager
 			}
 			else
 			{	// or relative to a tile ?
-				Tile tempTile = sprite.getLevel().getTile(initX, initY);
+				Tile tempTile = GameVariables.level.getTile(initX, initY);
 				double futureX = initX + originalX;
 				double centerX = tempTile.getPosX();
 				relativeX = futureX - centerX;
@@ -452,7 +453,7 @@ if(previousPosX != currentPosX || previousPosY != currentPosY || previousPosZ !=
 			Direction moveDir = Direction.getCompositeFromDouble(dx, dy);
 			
 			// normalizing an absolute position (if not bound)
-			double temp[] = sprite.getLevel().normalizePosition(currentPosX, currentPosY);
+			double temp[] = GameVariables.level.normalizePosition(currentPosX, currentPosY);
 			currentPosX = temp[0];
 			currentPosY = temp[1];
 			
@@ -462,7 +463,7 @@ if(previousPosX != currentPosX || previousPosY != currentPosY || previousPosZ !=
 //	System.out.println("position:"+previousPosX+","+previousPosY+" ("+sprite.getTile().getLine()+","+sprite.getTile().getCol()+") -> "+currentPosX+","+currentPosY+" ("+sprite.getLevel().getTile(currentPosX,currentPosY).getLine()+","+sprite.getLevel().getTile(currentPosX,currentPosY).getCol()+") ["+currentDirection+"]");	
 
 				double dist = Math.sqrt(Math.pow(dx,2)+Math.pow(dy,2));
-				MoveZone mz = new MoveZone(sprite,previousPosX,previousPosY,currentPosX,currentPosY,sprite.getLevel(),moveDir,moveDir,dist);
+				MoveZone mz = new MoveZone(sprite,previousPosX,previousPosY,currentPosX,currentPosY,moveDir,moveDir,dist);
 				mz.applyMove();
 				//
 				currentPosX = mz.getCurrentX();
