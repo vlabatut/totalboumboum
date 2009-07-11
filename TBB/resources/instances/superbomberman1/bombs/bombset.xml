@@ -3,27 +3,33 @@
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
 	xsi:noNamespaceSchemaLocation="../../../schemas/bombset.xsd">
 
-	<bomb name="remotepenetration" folder="remotepenetration">
-		<ability >
-			<name value="CUSTOM_BOMB_TYPE_REMOTE_CONTROL" />
-		</ability>
-		<ability >
-			<name value="CUSTOM_BOMB_TYPE_PENETRATION" />
-		</ability>
-	</bomb>
-	
-	<bomb name="penetration" folder="penetration" >
-		<ability >
-			<name value="CUSTOM_BOMB_TYPE_PENETRATION" />
-		</ability>
-	</bomb>
-	
-	<bomb name="remotecontrol" folder="remotecontrol" >
-		<ability >
-			<name value="CUSTOM_BOMB_TYPE_REMOTE_CONTROL" />
-		</ability>
-	</bomb>
-	
-	<bomb name="normal" folder="normal" />
+	<abstract-bombs>
+		<bomb name="common" folder="_common" />
+	</abstract-bombs>
+
+	<concrete-bombs>
+		<bomb name="remotepenetration" folder="remotepenetration">
+			<ability >
+				<name value="CUSTOM_BOMB_TYPE_REMOTE_CONTROL" />
+			</ability>
+			<ability >
+				<name value="CUSTOM_BOMB_TYPE_PENETRATION" />
+			</ability>
+		</bomb>
+		
+		<bomb name="penetration" folder="penetration" >
+			<ability >
+				<name value="CUSTOM_BOMB_TYPE_PENETRATION" />
+			</ability>
+		</bomb>
+		
+		<bomb name="remotecontrol" folder="remotecontrol" >
+			<ability >
+				<name value="CUSTOM_BOMB_TYPE_REMOTE_CONTROL" />
+			</ability>
+		</bomb>
+		
+		<bomb name="normal" folder="normal" />
+	</concrete-bombs>
 	
 </bombset>

@@ -43,6 +43,7 @@
 			<target-restrictions />
 		</modulation>
 <!--  	MOVELOW --> 
+		<!-- ability to go through bombs -> not an obstacle -->
 		<modulation frame="true" strength="1" >
 			<action name="MOVELOW" direction="ANY" contact="ANY"
 				tilePosition="ANY" orientation="ANY" actor="ANY" />
@@ -58,17 +59,17 @@
 			<actor-restrictions />
 			<target-restrictions />
 		</modulation>
-		<!-- intersection, different tile -> same orientation -> obstacle -->
+		<!-- intersection, different tile, same orientation -> obstacle -->
 		<modulation frame="true" strength="0" >
 			<action name="MOVELOW" direction="ANY" contact="INTERSECTION"
-				tilePosition="NEIGHBOR" orientation="SAME" actor="ANY" />
+				tilePosition="NEIGHBOR" orientation="FACE" actor="ANY" />
 			<actor-restrictions />
 			<target-restrictions />
 		</modulation>
 		<!-- intersection, different tile, different orientation -> not an obstacle -->
 		<modulation frame="true" strength="1" >
 			<action name="MOVELOW" direction="ANY" contact="INTERSECTION"
-				tilePosition="NEIGHBOR" orientation="OPPOSITE OTHER" actor="ANY" />
+				tilePosition="NEIGHBOR" orientation="BACK NONE OTHER" actor="ANY" />
 			<actor-restrictions />
 			<target-restrictions />
 		</modulation>

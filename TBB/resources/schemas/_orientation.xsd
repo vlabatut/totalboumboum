@@ -4,9 +4,10 @@
 	<xsd:simpleType name="tOrientation">
 		<xsd:restriction base="xsd:string">
 			<xsd:enumeration value="UNDEFINED" />
-			<xsd:enumeration value="SAME" />
-			<xsd:enumeration value="OPPOSITE" />
+			<xsd:enumeration value="FACE" />
+			<xsd:enumeration value="BACK" />
 			<xsd:enumeration value="OTHER" />
+			<xsd:enumeration value="NONE" />
 			<xsd:enumeration value="ANY" />
 		</xsd:restriction>
 	</xsd:simpleType>

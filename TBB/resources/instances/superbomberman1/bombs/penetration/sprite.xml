@@ -3,7 +3,7 @@
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
 	xsi:noNamespaceSchemaLocation="../../../../schemas/sprite.xsd">
 
-	<general name="Penetration bomb" />
+	<general name="Penetration bomb" base="common" />
 
 	<explosion name="penetration" />
 

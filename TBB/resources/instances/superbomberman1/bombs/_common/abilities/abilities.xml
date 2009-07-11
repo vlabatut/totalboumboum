@@ -3,67 +3,40 @@
 		xsi:noNamespaceSchemaLocation="../../../../../schemas/abilities.xsd" >
 
 		<!-- STATE -->
-<!--  	sprite-flat --> 
-<!--  	sprite-above --> 
-<!--	sprite-traverse-bomb --> 
-<!--	sprite-traverse-item --> 
-<!--	sprite-traverse-wall --> 
-<!--  	block-spawn --> 
-<!--  	bomb-explosion-latency --> 
-		<ability strength="70" frame="false" time="-1" uses="-1">
+<!--  	BOMB_EXPLOSION_LATENCY --> 
+		<ability strength="140" frame="false" time="-1" uses="-1">
 			<name value="BOMB_EXPLOSION_LATENCY" />
 		</ability>
-<!--  	bomb-failure-maxduration --> 
-<!--  	bomb-failure-minduration --> 
-<!--  	bomb-failure-probability --> 
-<!--  	bomb-push-latency --> 
-<!--  	bomb-trigger-collision --> 
-<!--  	bomb-trigger-combustion --> 
+<!--  	BOMB_TRIGGER_COMBUSTION --> 
 		<ability strength="1" frame="false" time="-1" uses="-1">
 			<name value="BOMB_TRIGGER_COMBUSTION" />
 		</ability>
-<!--  	bomb-trigger-control --> 
-		<ability strength="1" frame="false" time="-1" uses="-1">
-			<name value="BOMB_TRIGGER_CONTROL" />
-		</ability>
-<!--  	bomb-trigger-timer --> 
-<!--  	bomb-number --> 
-<!--  	bomb-range --> 
-<!--  	hero-punch-duration --> 
-<!--  	hero-wait-duration --> 
 			
 		<!-- ACTION -->
-<!--  	appear --> 
+<!--  	APPEAR --> 
 		<ability frame="false" strength="1" time="-1" uses="-1" >
 			<action name="APPEAR" direction="ANY" contact="ANY"
 				tilePosition="ANY" orientation="ANY" target="ANY" />
 		</ability> 
-<!--  	consume --> 
-<!--  	detonate --> 
+<!--  	DETONATE --> 
 		<ability frame="false" strength="1" time="-1" uses="-1" >
 			<action name="DETONATE" direction="ANY" contact="ANY"
 				tilePosition="ANY" orientation="ANY" />
 		</ability> 
-<!--  	drop --> 
-<!--  	gather --> 
-<!--  	jump --> 
-<!--  	land --> 
+<!--  	LAND --> 
 		<ability frame="false" strength="1" time="-1" uses="-1" >
 			<action name="LAND" direction="ANY" contact="ANY"
 				tilePosition="ANY" orientation="ANY" />
 		</ability> 
-<!--  	movehigh --> 
+<!--  	MOVEHIGH --> 
 		<ability frame="false" strength="1" time="-1" uses="-1" >
 			<action name="MOVEHIGH" direction="ANY" contact="ANY"
 				tilePosition="ANY" orientation="ANY" />
 		</ability> 
-<!--  	movelow --> 
+<!--  	MOVELOW --> 
 		<ability frame="false" strength="1" time="-1" uses="-1" >
 			<action name="MOVELOW" direction="ANY" contact="ANY"
 				tilePosition="ANY" orientation="ANY" />
 		</ability> 
-<!--  	punch --> 
-<!--  	push --> 
-<!--  	trigger --> 
 
 </abilities>
