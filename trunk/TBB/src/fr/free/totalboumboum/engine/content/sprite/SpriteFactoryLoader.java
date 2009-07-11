@@ -30,7 +30,7 @@ import javax.xml.parsers.ParserConfigurationException;
 import org.jdom.Element;
 import org.xml.sax.SAXException;
 
-import fr.free.totalboumboum.engine.container.level.Level;
+import fr.free.totalboumboum.configuration.GameVariables;
 import fr.free.totalboumboum.engine.content.feature.explosion.Explosion;
 import fr.free.totalboumboum.engine.content.feature.explosion.ExplosionLoader;
 import fr.free.totalboumboum.tools.FileTools;
@@ -62,14 +62,14 @@ public abstract class SpriteFactoryLoader
 			result.setBase(base);
 	}
 	
-	protected static <T extends Sprite> Explosion loadExplosionElement(Element root, Level level) throws ParserConfigurationException, SAXException, IOException, ClassNotFoundException
+	protected static <T extends Sprite> Explosion loadExplosionElement(Element root) throws ParserConfigurationException, SAXException, IOException, ClassNotFoundException
 	{	Explosion explosion = null;
 		Element elt = root.getChild(XmlTools.ELT_EXPLOSION);
 		if(elt!=null)
 		{	String name = elt.getAttribute(XmlTools.ATT_NAME).getValue().trim();
-			String folder = level.getInstancePath()+File.separator+FileTools.FOLDER_EXPLOSIONS;
+			String folder = GameVariables.instancePath+File.separator+FileTools.FOLDER_EXPLOSIONS;
 			folder = folder + File.separator+name;
-			explosion = ExplosionLoader.loadExplosion(folder,level);
+			explosion = ExplosionLoader.loadExplosion(folder);
 		}
 		return explosion;
 	}

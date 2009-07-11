@@ -31,7 +31,6 @@ import fr.free.totalboumboum.engine.content.feature.gesture.Gesture;
 import fr.free.totalboumboum.engine.content.feature.gesture.anime.AnimeDirection;
 import fr.free.totalboumboum.engine.content.feature.gesture.anime.AnimeStep;
 import fr.free.totalboumboum.engine.content.sprite.Sprite;
-import fr.free.totalboumboum.engine.loop.Loop;
 
 public class AnimeManager
 {	/** sprite possédant ce manager */
@@ -238,10 +237,6 @@ public class AnimeManager
 	{	return currentStep.getImage();
 	}
 
-	public Loop getLoop()
-	{	return sprite.getLoop();
-	}
-	
 	public boolean isTerminated()
 	{	return isTerminated;	
 	}

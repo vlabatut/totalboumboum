@@ -24,7 +24,6 @@ package fr.free.totalboumboum.engine.content.sprite.item;
 import java.util.ArrayList;
 import java.util.Iterator;
 
-import fr.free.totalboumboum.engine.container.level.Level;
 import fr.free.totalboumboum.engine.content.feature.Role;
 import fr.free.totalboumboum.engine.content.feature.ability.AbstractAbility;
 import fr.free.totalboumboum.engine.content.sprite.Sprite;
@@ -34,9 +33,9 @@ public class Item extends Sprite
 	private ArrayList<AbstractAbility> itemAbilities;
 	private String itemName;
 	
-	public Item(Level level)
-	{	super(level);
-	itemAbilities = new ArrayList<AbstractAbility>();
+	public Item()
+	{	super();
+		itemAbilities = new ArrayList<AbstractAbility>();
 	}
 
 	public ArrayList<AbstractAbility> getItemAbilities()

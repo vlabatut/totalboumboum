@@ -21,15 +21,14 @@ package fr.free.totalboumboum.engine.content.sprite.floor;
  * 
  */
 
-import fr.free.totalboumboum.engine.container.level.Level;
 import fr.free.totalboumboum.engine.content.feature.Role;
 import fr.free.totalboumboum.engine.content.sprite.Sprite;
 
 public class Floor extends Sprite
 {
 
-	public Floor(Level level)
-	{	super(level);
+	public Floor()
+	{	super();
 	}	
 	
 	public void finish()

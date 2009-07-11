@@ -27,9 +27,9 @@ import java.util.Iterator;
 import java.util.LinkedList;
 
 import fr.free.totalboumboum.configuration.Configuration;
+import fr.free.totalboumboum.configuration.GameVariables;
 import fr.free.totalboumboum.configuration.controls.ControlSettings;
 import fr.free.totalboumboum.configuration.profile.PredefinedColor;
-import fr.free.totalboumboum.engine.container.level.Level;
 import fr.free.totalboumboum.engine.container.tile.Tile;
 import fr.free.totalboumboum.engine.content.feature.Direction;
 import fr.free.totalboumboum.engine.content.feature.Role;
@@ -61,7 +61,6 @@ import fr.free.totalboumboum.engine.content.manager.trajectory.TrajectoryManager
 import fr.free.totalboumboum.engine.content.sprite.bomb.Bomb;
 import fr.free.totalboumboum.engine.content.sprite.item.Item;
 import fr.free.totalboumboum.engine.control.ControlCode;
-import fr.free.totalboumboum.engine.loop.Loop;
 import fr.free.totalboumboum.engine.player.Player;
 import fr.free.totalboumboum.game.statistics.StatisticEvent;
 
@@ -72,14 +71,13 @@ import fr.free.totalboumboum.game.statistics.StatisticEvent;
 
 public abstract class Sprite
 {	
-	public Sprite(Level level)
+	public Sprite()
 	{	ended = false;
 		hiddenSprite = null;
 		boundSprites = new ArrayList<Sprite>();
 		toBeRemovedFromTile = false;
 		toBeRemovedFromSprite = null;
 		boundToSprite = null;
-		this.level = level;
 		currentGesture = null;
 	}
 
@@ -202,7 +200,7 @@ public abstract class Sprite
 					setToBeRemovedFromSprite(this.boundToSprite);
 				// s'il n'y a pas de nouveau boundToSprite : on connecte ce sprite à une Tile
 				if(boundToSprite==null)
-					getLevel().getTile(getCurrentPosX(), getCurrentPosY()).addSprite(this);
+					GameVariables.level.getTile(getCurrentPosX(), getCurrentPosY()).addSprite(this);
 				// s'il y a un nouveau boundToSprite : on connecte ce sprite à ce boundToSprite
 				else
 					boundToSprite.addBoundSprite(this);
@@ -336,19 +334,6 @@ public abstract class Sprite
 			eventName = EngineEvent.TILE_HIGHENTER;
 		EngineEvent event = new EngineEvent(eventName,this,null,trajectoryManager.getActualDirection());
 		tile.spreadEvent(event);
-	}
-	
-	/////////////////////////////////////////////////////////////////
-	// LEVEL			/////////////////////////////////////////////
-	/////////////////////////////////////////////////////////////////
-	protected Level level;	
-	
-	public Level getLevel()
-	{	return level;
-	}
-	
-	public Loop getLoop()
-	{	return level.getLoop();	
 	}
 	
 	/////////////////////////////////////////////////////////////////
@@ -566,7 +551,7 @@ public abstract class Sprite
 	}
 	
 	public void addStatisticEvent(StatisticEvent event)
-	{	getLoop().addStatisticEvent(event);
+	{	GameVariables.loop.addStatisticEvent(event);
 	}
 
 	/////////////////////////////////////////////////////////////////
@@ -790,7 +775,7 @@ public abstract class Sprite
 	// TIME			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	public long getLoopTime()
-	{	return getLoop().getTotalTime();		
+	{	return GameVariables.loop.getTotalTime();		
 	}
 	
 	/////////////////////////////////////////////////////////////////
@@ -841,7 +826,6 @@ public abstract class Sprite
 			toBeRemovedFromSprite = null;
 			owner = null;
 			player = null;
-			level = null;
 			name = null;
 		}
 	}	

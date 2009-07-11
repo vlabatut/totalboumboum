@@ -29,15 +29,15 @@ import javax.xml.parsers.ParserConfigurationException;
 import org.jdom.Element;
 import org.xml.sax.SAXException;
 
+import fr.free.totalboumboum.configuration.GameVariables;
 import fr.free.totalboumboum.engine.container.fireset.Fireset;
 import fr.free.totalboumboum.engine.container.fireset.FiresetLoader;
-import fr.free.totalboumboum.engine.container.level.Level;
 import fr.free.totalboumboum.tools.FileTools;
 import fr.free.totalboumboum.tools.XmlTools;
 
 public class ExplosionLoader
 {	
-	public static Explosion loadExplosion(String pathFolder, Level level) throws ParserConfigurationException, SAXException, IOException, ClassNotFoundException
+	public static Explosion loadExplosion(String pathFolder) throws ParserConfigurationException, SAXException, IOException, ClassNotFoundException
 	{	// init
 		String individualFolder = pathFolder;
 		String schemaFolder = FileTools.getSchemasPath();
@@ -47,25 +47,25 @@ public class ExplosionLoader
 		schemaFile = new File(schemaFolder+File.separator+FileTools.FILE_EXPLOSION+FileTools.EXTENSION_SCHEMA);
 		Element root = XmlTools.getRootFromFile(dataFile,schemaFile);
 		// loading
-		Explosion result = loadExplosionElement(root,level);
+		Explosion result = loadExplosionElement(root);
 		return result;
 	}
 	
-    private static Explosion loadExplosionElement(Element root, Level level) throws ParserConfigurationException, SAXException, IOException, ClassNotFoundException
+    private static Explosion loadExplosionElement(Element root) throws ParserConfigurationException, SAXException, IOException, ClassNotFoundException
     {	Explosion result = new Explosion();
     	// fire
     	Element elt = root.getChild(XmlTools.ELT_FIRESET);
-    	Fireset fireset = loadFiresetElement(elt,level);
+    	Fireset fireset = loadFiresetElement(elt);
     	//
     	result.setFireset(fireset);
     	return result;
     }
     
-    private static Fireset loadFiresetElement(Element root, Level level) throws ParserConfigurationException, SAXException, IOException, ClassNotFoundException
+    private static Fireset loadFiresetElement(Element root) throws ParserConfigurationException, SAXException, IOException, ClassNotFoundException
     {	String name = root.getAttribute(XmlTools.ATT_NAME).getValue().trim();
-		String folder = level.getInstancePath()+File.separator+FileTools.FOLDER_FIRES;
+		String folder = GameVariables.instancePath+File.separator+FileTools.FOLDER_FIRES;
 		folder = folder + File.separator+name;
-    	Fireset result = FiresetLoader.loadFireset(folder,level);
+    	Fireset result = FiresetLoader.loadFireset(folder);
     	return result;
     }
 }

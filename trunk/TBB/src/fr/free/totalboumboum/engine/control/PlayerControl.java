@@ -25,9 +25,9 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.util.HashMap;
 
+import fr.free.totalboumboum.configuration.GameVariables;
 import fr.free.totalboumboum.configuration.controls.ControlSettings;
 import fr.free.totalboumboum.engine.content.sprite.Sprite;
-import fr.free.totalboumboum.engine.loop.Loop;
 import fr.free.totalboumboum.engine.player.Player;
 
 public class PlayerControl implements KeyListener
@@ -39,13 +39,10 @@ public class PlayerControl implements KeyListener
 	{	this.player = player;
 	}
 	
-	public Loop getLoop()
-	{	return player.getLoop();
-	}
-
 	public Sprite getSprite()
 	{	return player.getSprite();
 	}
+	
 	public ControlSettings getControlSettings()
 	{	return player.getControlSettings();
 	}
@@ -55,7 +52,7 @@ public class PlayerControl implements KeyListener
 	{	int keyCode = e.getKeyCode();
 		if(!keysPressed.containsKey(keyCode) || !keysPressed.get(keyCode))
 		{	keysPressed.put(keyCode, true);
-			if (!getLoop().isPaused() && getControlSettings().containsOnKey(keyCode))
+			if (!GameVariables.loop.isPaused() && getControlSettings().containsOnKey(keyCode))
 		    {	ControlCode controlCode = new ControlCode(keyCode,true);
 				getSprite().putControlCode(controlCode);				
 		    }
@@ -66,7 +63,7 @@ public class PlayerControl implements KeyListener
 	public void keyReleased(KeyEvent e)
 	{	int keyCode = e.getKeyCode();
 		keysPressed.put(keyCode,false);	
-		if (!getLoop().isPaused() && getControlSettings().containsOffKey(keyCode))
+		if (!GameVariables.loop.isPaused() && getControlSettings().containsOffKey(keyCode))
 	    {	ControlCode controlCode = new ControlCode(keyCode,false);
 			getSprite().putControlCode(controlCode);				
 	    }

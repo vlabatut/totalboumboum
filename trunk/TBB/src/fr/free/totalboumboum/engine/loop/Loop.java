@@ -41,7 +41,7 @@ import javax.xml.parsers.ParserConfigurationException;
 import org.xml.sax.SAXException;
 
 import fr.free.totalboumboum.configuration.Configuration;
-import fr.free.totalboumboum.configuration.GameConstants;
+import fr.free.totalboumboum.configuration.GameVariables;
 import fr.free.totalboumboum.configuration.profile.Profile;
 import fr.free.totalboumboum.engine.container.bombset.BombsetMap;
 import fr.free.totalboumboum.engine.container.itemset.Itemset;
@@ -64,7 +64,6 @@ import fr.free.totalboumboum.engine.player.Player;
 import fr.free.totalboumboum.engine.player.PlayerLocation;
 import fr.free.totalboumboum.game.round.Round;
 import fr.free.totalboumboum.game.statistics.StatisticEvent;
-import fr.free.totalboumboum.tools.CalculusTools;
 import fr.free.totalboumboum.tools.FileTools;
 
 public class Loop implements Runnable, Serializable
@@ -94,17 +93,18 @@ public class Loop implements Runnable, Serializable
 		hollowLevel.loadTheme();
 		loadStepOver();
 		level = hollowLevel.getLevel();
+		GameVariables.setLoop(this);
 
 		// load players : common stuff
-		String baseFolder = level.getInstancePath()+File.separator+FileTools.FOLDER_HEROES;
+		String baseFolder = GameVariables.instancePath+File.separator+FileTools.FOLDER_HEROES;
 		String folder = baseFolder + File.separator+FileTools.FOLDER_ABILITIES;
 		ArrayList<AbstractAbility> abilities = new ArrayList<AbstractAbility>();
-		AbilityLoader.loadAbilityPack(folder,level,abilities);
+		AbilityLoader.loadAbilityPack(folder,abilities);
 		folder = baseFolder + File.separator+FileTools.FOLDER_TRAJECTORIES;
 		GesturePack gesturePack = new GesturePack();
-		TrajectoriesLoader.loadTrajectories(folder,gesturePack,level);
+		TrajectoriesLoader.loadTrajectories(folder,gesturePack);
 		folder = baseFolder + File.separator+FileTools.FOLDER_PERMISSIONS;
-		ModulationsLoader.loadModulations(folder,gesturePack,level);
+		ModulationsLoader.loadModulations(folder,gesturePack);
 //		loadStepOver();		
 		// load players : individual stuff
 		ArrayList<Profile> profiles = round.getProfiles();
@@ -129,7 +129,7 @@ public class Loop implements Runnable, Serializable
 		while(i.hasNext())
 		{	// init
 			Profile profile = i.next();
-			Player player = new Player(profile,level,abilities,gesturePack,bombsetMap);
+			Player player = new Player(profile,abilities,gesturePack,bombsetMap);
 			players.add(player);
 			Hero hero = (Hero)player.getSprite();
 			// location
@@ -562,7 +562,7 @@ System.out.println();
 				entryDelay = entryDelay - (milliPeriod*Configuration.getEngineConfiguration().getSpeedCoeff());
 					
 			// normal update (level and AI)
-			getLevel().update();
+			level.update();
 			Iterator<Player> i = players.iterator();
 			while(i.hasNext() && entryDelay<0)
 			{	Player temp = i.next();
@@ -672,15 +672,11 @@ System.out.println();
 	// LEVEL 			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	private Level level;
-
+	
 	public Level getLevel()
 	{	return level;	
 	}
-	
-	public String getInstancePath()
-	{	return level.getInstancePath();
-	}
-	
+
 	/////////////////////////////////////////////////////////////////
 	// PLAYERS 			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
@@ -691,28 +687,8 @@ System.out.println();
 	}
 
 	/////////////////////////////////////////////////////////////////
-	// SCALE			/////////////////////////////////////////////
+	// ROUND			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	private double zoomFactor;	
-	private double scaledTileDimension;
-
-	public double getZoomFactor()
-	{	return zoomFactor;
-	}
-	public void setZoomFactor(double zoomFactor)
-	{	this.zoomFactor = zoomFactor;
-		updateScaledTileDimension();
-		CalculusTools.updateCoefficient(zoomFactor);
-	}
-
-	public double getScaledTileDimension()
-	{	return scaledTileDimension;
-	}
-	public void updateScaledTileDimension()
-	{	scaledTileDimension = GameConstants.STANDARD_TILE_DIMENSION*zoomFactor;
-	}
-	
-
 	public Round getRound()
 	{	return round;	
 	}

@@ -34,7 +34,6 @@ import org.jdom.Attribute;
 import org.jdom.Element;
 import org.xml.sax.SAXException;
 
-import fr.free.totalboumboum.engine.container.level.Level;
 import fr.free.totalboumboum.engine.content.feature.gesture.action.GeneralAction;
 import fr.free.totalboumboum.engine.content.feature.gesture.action.GeneralActionLoader;
 import fr.free.totalboumboum.tools.FileTools;
@@ -43,7 +42,7 @@ import fr.free.totalboumboum.tools.XmlTools;
 public class AbilityLoader
 {	
 	
-    private static AbstractAbility loadAbilityElement(Element root, Level level) throws ClassNotFoundException
+    private static AbstractAbility loadAbilityElement(Element root) throws ClassNotFoundException
     {	AbstractAbility result = null;
 		// max
 		float max = Float.MAX_VALUE;
@@ -70,13 +69,13 @@ public class AbilityLoader
 		Element temp = root.getChild(XmlTools.ELT_NAME);
 		if(temp!=null)
 		{	String name = temp.getAttribute(XmlTools.ATT_VALUE).getValue().trim().toUpperCase(Locale.ENGLISH);
-			result = new StateAbility(name,level);
+			result = new StateAbility(name);
 		}
 		// or action ?
 		else
 		{	temp = root.getChild(XmlTools.ELT_ACTION);
 			GeneralAction action = GeneralActionLoader.loadActionElement(temp);
-			result = new ActionAbility(action,level);				
+			result = new ActionAbility(action);				
 		}
 		result.setMax(max);
 		result.setStrength(strength);
@@ -87,25 +86,25 @@ public class AbilityLoader
     }
     
     @SuppressWarnings("unchecked")
-	public static ArrayList<AbstractAbility> loadAbilitiesElement(Element root, Level level) throws ClassNotFoundException
+	public static ArrayList<AbstractAbility> loadAbilitiesElement(Element root) throws ClassNotFoundException
     {	ArrayList<AbstractAbility> result = new ArrayList<AbstractAbility>();
     	List<Element> abilitiesElts = root.getChildren(XmlTools.ELT_ABILITY);
 		Iterator<Element> i = abilitiesElts.iterator();
 		while(i.hasNext())
 		{	Element elt = i.next();
-			AbstractAbility ability = loadAbilityElement(elt,level);
+			AbstractAbility ability = loadAbilityElement(elt);
 			result.add(ability);
 		}
 		return result;
     }
     
-	public static void loadAbilityPack(String folderPath, Level level, ArrayList<AbstractAbility> result) throws ParserConfigurationException, SAXException, IOException, ClassNotFoundException
+	public static void loadAbilityPack(String folderPath, ArrayList<AbstractAbility> result) throws ParserConfigurationException, SAXException, IOException, ClassNotFoundException
 	{	File dataFile = new File(folderPath+File.separator+FileTools.FILE_ABILITIES+FileTools.EXTENSION_XML);
 		if(dataFile.exists())
 		{	String schemaFolder = FileTools.getSchemasPath();
 			File schemaFile = new File(schemaFolder+File.separator+FileTools.FILE_ABILITIES+FileTools.EXTENSION_SCHEMA);
 			Element root = XmlTools.getRootFromFile(dataFile,schemaFile);
-			result = loadAbilitiesElement(root,level);
+			result = loadAbilitiesElement(root);
 		}
 	}
 }

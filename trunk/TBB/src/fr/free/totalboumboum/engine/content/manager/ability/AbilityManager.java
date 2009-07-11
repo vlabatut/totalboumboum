@@ -25,7 +25,6 @@ import java.util.ArrayList;
 import java.util.Iterator;
 
 import fr.free.totalboumboum.configuration.Configuration;
-import fr.free.totalboumboum.engine.container.level.Level;
 import fr.free.totalboumboum.engine.content.feature.ability.AbstractAbility;
 import fr.free.totalboumboum.engine.content.feature.ability.ActionAbility;
 import fr.free.totalboumboum.engine.content.feature.ability.StateAbility;
@@ -49,10 +48,6 @@ public class AbilityManager
 	{	return null;
 	}
 
-	public Level getLevel()
-	{	return sprite.getLevel();
-	}
-	
 /*	
 	public boolean hasAbility(AbstractAbility ability)
 	{	return dynamicAbilities.contains(ability);
@@ -98,7 +93,7 @@ public class AbilityManager
 			}
 		}
 		if(result==null)
-			result = new StateAbility(name,getLevel());
+			result = new StateAbility(name);
 		return result;
 	}
 	
@@ -118,7 +113,7 @@ public class AbilityManager
 			}
 		}
 		if(result==null)
-			result = new ActionAbility(action,getLevel());
+			result = new ActionAbility(action);
 		return result;
 	}
 	
@@ -134,7 +129,7 @@ public class AbilityManager
 			}
 		}
 		if(result==null)
-			result = new ActionAbility(action,getLevel());
+			result = new ActionAbility(action);
 		return result;
 	}
 

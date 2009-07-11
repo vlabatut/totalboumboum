@@ -24,17 +24,12 @@ package fr.free.totalboumboum.engine.content.sprite.fire;
 import java.util.HashMap;
 
 import fr.free.totalboumboum.engine.container.fireset.Fireset;
-import fr.free.totalboumboum.engine.container.level.Level;
 import fr.free.totalboumboum.engine.content.feature.gesture.GestureName;
 import fr.free.totalboumboum.engine.content.manager.event.EventManager;
 import fr.free.totalboumboum.engine.content.sprite.SpriteFactory;
 
 public class FireFactory extends SpriteFactory<Fire>
 {	
-	public FireFactory(Level level)
-	{	super(level);
-	}	
-	
 	/////////////////////////////////////////////////////////////////
 	// GESTURE PACK		/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
@@ -72,7 +67,7 @@ public class FireFactory extends SpriteFactory<Fire>
 	/////////////////////////////////////////////////////////////////
 	public Fire makeSprite()
 	{	// init
-		Fire result = new Fire(level);
+		Fire result = new Fire();
 		
 		// common managers
 		initSprite(result);

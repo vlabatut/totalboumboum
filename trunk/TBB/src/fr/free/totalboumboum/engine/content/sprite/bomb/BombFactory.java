@@ -24,7 +24,6 @@ package fr.free.totalboumboum.engine.content.sprite.bomb;
 import java.io.Serializable;
 import java.util.HashMap;
 
-import fr.free.totalboumboum.engine.container.level.Level;
 import fr.free.totalboumboum.engine.content.feature.gesture.GestureName;
 import fr.free.totalboumboum.engine.content.manager.event.EventManager;
 import fr.free.totalboumboum.engine.content.sprite.SpriteFactory;
@@ -32,9 +31,8 @@ import fr.free.totalboumboum.engine.content.sprite.SpriteFactory;
 public class BombFactory extends SpriteFactory<Bomb> implements Serializable
 {	private static final long serialVersionUID = 1L;
 
-	public BombFactory(Level level, String bombName)
-	{	super(level);
-		this.bombName = bombName;
+	public BombFactory(String bombName)
+	{	this.bombName = bombName;
 	}	
 	
 	/////////////////////////////////////////////////////////////////
@@ -84,7 +82,7 @@ public class BombFactory extends SpriteFactory<Bomb> implements Serializable
 
 	public Bomb makeSprite()
 	{	// init
-		Bomb result = new Bomb(level);
+		Bomb result = new Bomb();
 		
 		// common managers
 		initSprite(result);
@@ -107,7 +105,7 @@ public class BombFactory extends SpriteFactory<Bomb> implements Serializable
 	// COPY				/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	public BombFactory copy()
-	{	BombFactory result = new BombFactory(level,bombName);
+	{	BombFactory result = new BombFactory(bombName);
 		result.setAbilities(abilities);
 		result.setBombset(null); //TODO to be completed later (?)
 		result.setExplosion(explosion);

@@ -36,7 +36,6 @@ import fr.free.totalboumboum.engine.content.feature.gesture.action.detonate.Spec
 import fr.free.totalboumboum.engine.content.feature.gesture.action.trigger.SpecificTrigger;
 import fr.free.totalboumboum.engine.content.sprite.Sprite;
 import fr.free.totalboumboum.engine.content.sprite.bomb.Bomb;
-import fr.free.totalboumboum.engine.loop.Loop;
 import fr.free.totalboumboum.game.statistics.StatisticAction;
 import fr.free.totalboumboum.game.statistics.StatisticEvent;
 
@@ -46,13 +45,6 @@ public class BombsetManager
 	{	this.sprite = sprite;
 		bombset = null;
 		droppedBombs = new LinkedList<Bomb>();
-	}
-	
-	/////////////////////////////////////////////////////////////////
-	// LOOP				/////////////////////////////////////////////
-	/////////////////////////////////////////////////////////////////
-	public Loop getLoop()
-	{	return sprite.getLoop();
 	}
 	
 	/////////////////////////////////////////////////////////////////

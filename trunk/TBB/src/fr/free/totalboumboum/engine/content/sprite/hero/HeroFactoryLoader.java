@@ -32,10 +32,10 @@ import javax.xml.parsers.ParserConfigurationException;
 import org.jdom.Element;
 import org.xml.sax.SAXException;
 
+import fr.free.totalboumboum.configuration.GameVariables;
 import fr.free.totalboumboum.configuration.profile.PredefinedColor;
 import fr.free.totalboumboum.engine.container.bombset.Bombset;
 import fr.free.totalboumboum.engine.container.bombset.BombsetMap;
-import fr.free.totalboumboum.engine.container.level.Level;
 import fr.free.totalboumboum.engine.content.feature.ability.AbstractAbility;
 import fr.free.totalboumboum.engine.content.feature.explosion.Explosion;
 import fr.free.totalboumboum.engine.content.feature.gesture.GesturePack;
@@ -45,9 +45,9 @@ import fr.free.totalboumboum.tools.FileTools;
 
 public class HeroFactoryLoader extends SpriteFactoryLoader
 {	
-	public static HeroFactory loadHeroFactory(String folderPath, Level level, PredefinedColor color, ArrayList<AbstractAbility> ablts, GesturePack gp, BombsetMap bombsetMap) throws ParserConfigurationException, SAXException, IOException, ClassNotFoundException
+	public static HeroFactory loadHeroFactory(String folderPath, PredefinedColor color, ArrayList<AbstractAbility> ablts, GesturePack gp, BombsetMap bombsetMap) throws ParserConfigurationException, SAXException, IOException, ClassNotFoundException
 	{	// init
-		HeroFactory result = new HeroFactory(level);
+		HeroFactory result = new HeroFactory();
 		Element root = SpriteFactoryLoader.openFile(folderPath);
 		String folder;
 		GesturePack gesturePack = gp.copy();
@@ -70,10 +70,10 @@ public class HeroFactoryLoader extends SpriteFactoryLoader
 		
 		// ANIMES
 		folder = folderPath+File.separator+FileTools.FILE_ANIMES;
-		AnimesLoader.loadAnimes(folder,gesturePack,level,HeroFactory.getAnimeReplacements());
+		AnimesLoader.loadAnimes(folder,gesturePack,HeroFactory.getAnimeReplacements());
 		
 		//EXPLOSION
-		Explosion explosion = loadExplosionElement(root,level); //TODO les explosions des players ne devraient-elles pas être chargées en commun ?
+		Explosion explosion = loadExplosionElement(root); //TODO les explosions des players ne devraient-elles pas être chargées en commun ?
 		result.setExplosion(explosion);
 		
 		//MODULATIONS
@@ -85,8 +85,8 @@ public class HeroFactoryLoader extends SpriteFactoryLoader
 //		TrajectoriesLoader.loadTrajectories(folder,gesturePack,level);
 		
 		// BOMBSET
-		folder = level.getInstancePath()+File.separator+FileTools.FOLDER_BOMBS;
-		Bombset bombset = bombsetMap.loadBombset(folder,level,color);
+		folder = GameVariables.instancePath+File.separator+FileTools.FOLDER_BOMBS;
+		Bombset bombset = bombsetMap.loadBombset(folder,color);
 		result.setBombset(bombset);
 
 		// result

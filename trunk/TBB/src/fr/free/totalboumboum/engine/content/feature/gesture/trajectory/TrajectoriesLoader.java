@@ -34,7 +34,7 @@ import org.jdom.Attribute;
 import org.jdom.Element;
 import org.xml.sax.SAXException;
 
-import fr.free.totalboumboum.engine.container.level.Level;
+import fr.free.totalboumboum.configuration.GameVariables;
 import fr.free.totalboumboum.engine.content.feature.Direction;
 import fr.free.totalboumboum.engine.content.feature.ImageShift;
 import fr.free.totalboumboum.engine.content.feature.gesture.Gesture;
@@ -49,7 +49,7 @@ public class TrajectoriesLoader
 	private String type;
 	private double zoomFactor;
 */
-	public static void loadTrajectories(String individualFolder, GesturePack pack, Level level) throws ParserConfigurationException, SAXException, IOException
+	public static void loadTrajectories(String individualFolder, GesturePack pack) throws ParserConfigurationException, SAXException, IOException
 	{	File dataFile = new File(individualFolder+File.separator+FileTools.FILE_TRAJECTORIES+FileTools.EXTENSION_XML);
 		if(dataFile.exists())
 		{	// opening
@@ -57,17 +57,17 @@ public class TrajectoriesLoader
 			File schemaFile = new File(schemaFolder+File.separator+FileTools.FILE_TRAJECTORIES+FileTools.EXTENSION_SCHEMA);
 			Element root = XmlTools.getRootFromFile(dataFile,schemaFile);
 			// loading
-			loadTrajectories(root,pack,level);
+			loadTrajectories(root,pack);
 		}
 	}
 	
     @SuppressWarnings("unchecked")
-	private static void loadTrajectories(Element root, GesturePack pack, Level level) throws IOException
+	private static void loadTrajectories(Element root, GesturePack pack) throws IOException
 	{	List<Element> gesturesList = root.getChildren();
 		Iterator<Element> i = gesturesList.iterator();
 		while(i.hasNext())
 		{	Element tp = i.next();
-			loadGestureElement(tp,pack,level);
+			loadGestureElement(tp,pack);
 		}
 	}
     
@@ -75,8 +75,8 @@ public class TrajectoriesLoader
      * load a gesture (and if required all the associated directions) 
      */
     @SuppressWarnings("unchecked")
-	private static void loadGestureElement(Element root, GesturePack pack, Level level) throws IOException
-    {	double zoomFactor = level.getLoop().getZoomFactor();
+	private static void loadGestureElement(Element root, GesturePack pack) throws IOException
+    {	double zoomFactor = GameVariables.zoomFactor;
     	// name
 		String name = root.getAttribute(XmlTools.ATT_NAME).getValue().toUpperCase(Locale.ENGLISH);
 		GestureName gestureName = GestureName.valueOf(name);

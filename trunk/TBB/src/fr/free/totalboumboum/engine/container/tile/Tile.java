@@ -31,6 +31,7 @@ import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.Iterator;
 
+import fr.free.totalboumboum.configuration.GameVariables;
 import fr.free.totalboumboum.engine.container.level.Level;
 import fr.free.totalboumboum.engine.content.feature.Direction;
 import fr.free.totalboumboum.engine.content.feature.ability.AbstractAbility;
@@ -45,17 +46,7 @@ import fr.free.totalboumboum.engine.content.sprite.hero.Hero;
 import fr.free.totalboumboum.engine.content.sprite.item.Item;
 
 public class Tile
-{	private int line,col;
-	private double posX,posY;
-	
-	private Level level;
-	private Floor floor;
-	private Block block;
-	private ArrayList<Bomb> bombs;
-	private ArrayList<Hero> heroes;
-	private ArrayList<Fire> fires;
-	private Item item;
-	
+{		
 	public Tile(Level level,int line, int col, double posX, double posY, Floor floor)
 	{	this.level = level;
 		this.posX = posX;
@@ -71,18 +62,9 @@ public class Tile
 		setFloor(floor);
 	}
 		
-	public boolean containsPoint(double x, double y)
-	{	boolean result;
-result = level.getTile(x, y)==this;
-/*	
-		result = CalculusTools.isRelativelyGreaterOrEqualThan(x,posX-getDimension()/2);
-		result = result && CalculusTools.isRelativelySmallerThan(x,posX+getDimension()/2); 
-		result = result && CalculusTools.isRelativelyGreaterOrEqualThan(y,posY-getDimension()/2); 
-		result = result && CalculusTools.isRelativelySmallerThan(y,posY+getDimension()/2);
-*/		 
-		return result;
-	}
-	
+    /////////////////////////////////////////////////////////////////
+	// UPDATE				/////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
 	public void update()
 	{	// floor?
 		floor.update();
@@ -174,6 +156,231 @@ result = level.getTile(x, y)==this;
 			}
 		}		
 	}
+		
+    /////////////////////////////////////////////////////////////////
+	// HERO		/////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	private ArrayList<Hero> heroes;
+
+	private void addHero(Hero hero)
+	{	heroes.add(hero);		
+		hero.setTile(this);
+		level.addSprite(hero);
+	}
+	
+	public ArrayList<Hero> getHeroes()
+	{	return heroes;
+	}
+
+	public void drawHeroes(Graphics g, boolean flat, boolean onGround, boolean shadow)
+	{	for(int i=0;i<heroes.size();i++)
+		{	Hero tempS = heroes.get(i);
+			AbstractAbility temp = tempS.modulateStateAbility(StateAbilityName.SPRITE_FLAT);
+			if(((temp.isActive()) == flat) && (tempS.isOnGround() == onGround))
+				if(shadow)
+					drawShadow(g,tempS);
+				else
+					drawSprite(g,tempS);
+		}
+	}
+	
+
+    /////////////////////////////////////////////////////////////////
+	// BOMB					/////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	private ArrayList<Bomb> bombs;
+
+	private void addBomb(Bomb bomb)
+	{	bombs.add(bomb);		
+		bomb.setTile(this);
+		level.addSprite(bomb);
+	}
+	
+	public ArrayList<Bomb> getBombs()
+	{	return bombs;
+	}
+	
+	public void drawBombs(Graphics g, boolean flat, boolean onGround, boolean shadow)
+	{	for(int i=0;i<bombs.size();i++)
+		{	Bomb tempS = bombs.get(i);
+			AbstractAbility temp = tempS.modulateStateAbility(StateAbilityName.SPRITE_FLAT);
+			if(((temp.isActive()) == flat) && (tempS.isOnGround() == onGround))
+				if(shadow)
+					drawShadow(g,tempS);
+				else
+					drawSprite(g, tempS);
+		}
+	}
+
+	/////////////////////////////////////////////////////////////////
+	// FIRE					/////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	private ArrayList<Fire> fires;
+
+	private void addFire(Fire fire)
+	{	fires.add(fire);
+		fire.setTile(this);
+		level.addSprite(fire);
+	}
+	
+	public ArrayList<Fire> getFires()
+	{	return fires;
+	}
+
+	public void drawFires(Graphics g, boolean flat, boolean onGround, boolean shadow)
+	{	for(int i=0;i<fires.size();i++)
+		{	Fire tempS = fires.get(i);
+			AbstractAbility temp = tempS.modulateStateAbility(StateAbilityName.SPRITE_FLAT);
+			if(((temp!=null && temp.isActive()) == flat) && (tempS.isOnGround() == onGround))
+				if(shadow)
+					drawShadow(g,tempS);
+				else
+					drawSprite(g, tempS);
+		}
+	}
+
+	/////////////////////////////////////////////////////////////////
+	// BLOCK				/////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	private Block block;
+
+	private void setBlock(Block block)
+	{	this.block = block;
+		block.setCurrentPosX(posX);
+		block.setCurrentPosY(posY);
+		block.setTile(this);
+		level.addSprite(block);
+	}
+	
+	public Block getBlock()
+	{	return block;
+	}
+	
+	public boolean hasBlock()
+	{	return block!=null;
+	}
+
+	public void drawBlock(Graphics g, boolean flat, boolean onGround, boolean shadow)
+	{	if(block!=null)
+		{	AbstractAbility temp = block.modulateStateAbility(StateAbilityName.SPRITE_FLAT);
+			if(block!=null && ((temp!=null && temp.isActive()) == flat) && (block.isOnGround() == onGround))
+				if(shadow && line!=level.getGlobalHeight()-1) //NOTE a préciser : permet d'éviter que l'ombre de la dernière ligne de blocs soit portée sur la première
+					drawShadow(g,block);
+				else
+					drawSprite(g, block);
+		}
+	}
+
+	/////////////////////////////////////////////////////////////////
+	// ITEM					/////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	private Item item;
+
+	public Item getItem()
+	{	return item;
+	}
+	
+	private void setItem(Item item)
+	{	this.item = item;
+		item.setCurrentPosX(posX);
+		item.setCurrentPosY(posY);
+		item.setTile(this);
+		level.addSprite(item);
+	}
+/*	
+	public void removeItem()
+	{	item = null;		
+	}
+*/
+	
+	public void drawItem(Graphics g, boolean flat, boolean onGround, boolean shadow)
+	{	if(item!=null)
+		{	
+//if(fires.size()>0)
+//	System.out.println();
+			AbstractAbility temp = item.modulateStateAbility(StateAbilityName.SPRITE_FLAT);
+			if(item!=null && ((temp!=null && temp.isActive()) == flat) && (item.isOnGround() == onGround))
+				if(shadow)
+					drawShadow(g,item);
+				else
+					drawSprite(g, item);
+		}
+	}
+
+	/////////////////////////////////////////////////////////////////
+	// FLOOR				/////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	private Floor floor;
+
+	public Floor getFloor()
+	{	return floor;
+	}
+	
+	private void setFloor(Floor floor)
+	{	this.floor = floor;
+		floor.setCurrentPosX(posX);
+		floor.setCurrentPosY(posY);
+		floor.setTile(this);
+//		level.addSprite(floor);
+	}
+	
+	public void drawFloor(Graphics g, boolean flat, boolean onGround, boolean shadow)
+	{	AbstractAbility temp = floor.modulateStateAbility(StateAbilityName.SPRITE_FLAT);
+		if(floor!=null && ((temp!=null && temp.isActive()) == flat) && (floor.isOnGround() == onGround))
+		{	if(shadow)
+				drawShadow(g,floor);
+			else
+				drawSprite(g,floor);
+		}
+	}
+
+	/////////////////////////////////////////////////////////////////
+	// GENERAL SPRITES		/////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	public void addSprite(Sprite sprite)
+	{	if(sprite instanceof Block)
+			setBlock((Block) sprite);
+		else if(sprite instanceof Bomb)
+			addBomb((Bomb) sprite);		
+		else if(sprite instanceof Fire)
+			addFire((Fire) sprite);		
+		else if(sprite instanceof Floor)
+			setFloor((Floor) sprite);
+		else if(sprite instanceof Hero)
+			addHero((Hero) sprite);
+		else if(sprite instanceof Item)
+			setItem((Item) sprite);
+	}
+
+	public ArrayList<Sprite> getSprites()
+	{	ArrayList<Sprite> result = new ArrayList<Sprite>();
+		// floor
+		result.add(floor);
+		// heroes
+		{	Iterator<Hero> i = heroes.iterator();
+			while(i.hasNext())
+				result.add(i.next());
+		}
+		// bombs
+		{	Iterator<Bomb> i = bombs.iterator();
+			while(i.hasNext())
+				result.add(i.next());
+		}
+		// fires
+		{	Iterator<Fire> i = fires.iterator();
+			while(i.hasNext())
+				result.add(i.next());
+		}
+		// block
+		if(block!=null)
+		{	result.add(block);
+		}		
+		// item
+		if(item!=null)
+		{	result.add(item);
+		}		
+		return result;
+	}
 	
 	/**
 	 * dessine un sprite sans son ombre
@@ -185,7 +392,7 @@ result = level.getTile(x, y)==this;
 			double pY = s.getCurrentPosY()+s.getYShift();
 			double pZ = s.getCurrentPosZ();
 			pX = pX - ((double)image.getWidth())/2;
-			pY = pY - image.getHeight() + getDimension()/2;
+			pY = pY - image.getHeight() + GameVariables.scaledTileDimension/2;
 			//
 			ArrayList<Double> listX = new ArrayList<Double>(0);
 			ArrayList<Double> listY = new ArrayList<Double>(0);
@@ -237,7 +444,7 @@ result = level.getTile(x, y)==this;
 				g.setColor(Color.WHITE);
 			else if(s instanceof Fire)
 				g.setColor(Color.BLACK);
-			if(getLevel().getLoop().getShowSpritesPositions()==1)
+			if(GameVariables.loop.getShowSpritesPositions()==1)
 			{	// coordonnées
 				Font font = new Font("Dialog", Font.BOLD, 12);
 				g.setFont(font);
@@ -248,7 +455,7 @@ result = level.getTile(x, y)==this;
 				int y = (int)Math.round(s.getCurrentPosY()+box.getHeight()/2);
 				g.drawString(text, x, y);
 			}
-			else if(getLevel().getLoop().getShowSpritesPositions()==2)
+			else if(GameVariables.loop.getShowSpritesPositions()==2)
 			{	// coordonnées
 				Font font = new Font("Dialog", Font.BOLD, 12);
 				g.setFont(font);
@@ -280,73 +487,7 @@ result = level.getTile(x, y)==this;
 			}			
 		}
 	}
-	
-	public void drawFloor(Graphics g, boolean flat, boolean onGround, boolean shadow)
-	{	AbstractAbility temp = floor.modulateStateAbility(StateAbilityName.SPRITE_FLAT);
-		if(floor!=null && ((temp!=null && temp.isActive()) == flat) && (floor.isOnGround() == onGround))
-		{	if(shadow)
-				drawShadow(g,floor);
-			else
-				drawSprite(g,floor);
-		}
-	}
-	public void drawItem(Graphics g, boolean flat, boolean onGround, boolean shadow)
-	{	if(item!=null)
-		{	
-//if(fires.size()>0)
-//	System.out.println();
-			AbstractAbility temp = item.modulateStateAbility(StateAbilityName.SPRITE_FLAT);
-			if(item!=null && ((temp!=null && temp.isActive()) == flat) && (item.isOnGround() == onGround))
-				if(shadow)
-					drawShadow(g,item);
-				else
-					drawSprite(g, item);
-		}
-	}
-	public void drawBlock(Graphics g, boolean flat, boolean onGround, boolean shadow)
-	{	if(block!=null)
-		{	AbstractAbility temp = block.modulateStateAbility(StateAbilityName.SPRITE_FLAT);
-			if(block!=null && ((temp!=null && temp.isActive()) == flat) && (block.isOnGround() == onGround))
-				if(shadow && line!=level.getGlobalHeight()-1) //NOTE a préciser : permet d'éviter que l'ombre de la dernière ligne de blocs soit portée sur la première
-					drawShadow(g,block);
-				else
-					drawSprite(g, block);
-		}
-	}
-	public void drawFires(Graphics g, boolean flat, boolean onGround, boolean shadow)
-	{	for(int i=0;i<fires.size();i++)
-		{	Fire tempS = fires.get(i);
-			AbstractAbility temp = tempS.modulateStateAbility(StateAbilityName.SPRITE_FLAT);
-			if(((temp!=null && temp.isActive()) == flat) && (tempS.isOnGround() == onGround))
-				if(shadow)
-					drawShadow(g,tempS);
-				else
-					drawSprite(g, tempS);
-		}
-	}
-	public void drawBombs(Graphics g, boolean flat, boolean onGround, boolean shadow)
-	{	for(int i=0;i<bombs.size();i++)
-		{	Bomb tempS = bombs.get(i);
-			AbstractAbility temp = tempS.modulateStateAbility(StateAbilityName.SPRITE_FLAT);
-			if(((temp.isActive()) == flat) && (tempS.isOnGround() == onGround))
-				if(shadow)
-					drawShadow(g,tempS);
-				else
-					drawSprite(g, tempS);
-		}
-	}
-	public void drawHeroes(Graphics g, boolean flat, boolean onGround, boolean shadow)
-	{	for(int i=0;i<heroes.size();i++)
-		{	Hero tempS = heroes.get(i);
-			AbstractAbility temp = tempS.modulateStateAbility(StateAbilityName.SPRITE_FLAT);
-			if(((temp.isActive()) == flat) && (tempS.isOnGround() == onGround))
-				if(shadow)
-					drawShadow(g,tempS);
-				else
-					drawSprite(g,tempS);
-		}
-	}
-	
+
 	public void drawSelection(Graphics g, boolean flat, boolean onGround, boolean shadow)
 	{	// floor
 		drawFloor(g,flat,onGround,shadow);
@@ -361,7 +502,7 @@ result = level.getTile(x, y)==this;
 		// heroes
 		drawHeroes(g,flat,onGround,shadow);
 	}	
-	
+
 	/**
 	 * trace l'ombre d'un sprite (et pas le sprite)
 	 */
@@ -371,7 +512,7 @@ result = level.getTile(x, y)==this;
 		{	double pX = s.getCurrentPosX()+s.getShadowXShift();
 			double pY = s.getCurrentPosY()+s.getShadowYShift();
 			pX = pX - ((double)image.getWidth())/2;
-			pY = pY - image.getHeight() + getDimension()/2;
+			pY = pY - image.getHeight() + GameVariables.scaledTileDimension/2;
 			//
 			ArrayList<Double> listX = new ArrayList<Double>(0);
 			ArrayList<Double> listY = new ArrayList<Double>(0);
@@ -411,119 +552,10 @@ result = level.getTile(x, y)==this;
 				g.drawImage(image, new Double(listX.get(i)).intValue(), new Double(listY.get(i)).intValue(), null);		
 		}
 	}
-	
-	public void addSprite(Sprite sprite)
-	{	if(sprite instanceof Block)
-			setBlock((Block) sprite);
-		else if(sprite instanceof Bomb)
-			addBomb((Bomb) sprite);		
-		else if(sprite instanceof Fire)
-			addFire((Fire) sprite);		
-		else if(sprite instanceof Floor)
-			setFloor((Floor) sprite);
-		else if(sprite instanceof Hero)
-			addHero((Hero) sprite);
-		else if(sprite instanceof Item)
-			setItem((Item) sprite);
-	}
-	private void addHero(Hero hero)
-	{	heroes.add(hero);		
-		hero.setTile(this);
-		level.addSprite(hero);
-	}
-	public ArrayList<Hero> getHeroes()
-	{	return heroes;
-	}
-
-	private void addBomb(Bomb bomb)
-	{	bombs.add(bomb);		
-		bomb.setTile(this);
-		level.addSprite(bomb);
-	}
-	public ArrayList<Bomb> getBombs()
-	{	return bombs;
-	}
-	
-	private void addFire(Fire fire)
-	{	fires.add(fire);
-		fire.setTile(this);
-		level.addSprite(fire);
-	}
-	public ArrayList<Fire> getFires()
-	{	return fires;
-	}
-
-	private void setBlock(Block block)
-	{	this.block = block;
-		block.setCurrentPosX(posX);
-		block.setCurrentPosY(posY);
-		block.setTile(this);
-		level.addSprite(block);
-	}
-	public Block getBlock()
-	{	return block;
-	}
-	public boolean hasBlock()
-	{	return block!=null;
-	}
-
-	public Item getItem()
-	{	return item;
-	}
-	private void setItem(Item item)
-	{	this.item = item;
-		item.setCurrentPosX(posX);
-		item.setCurrentPosY(posY);
-		item.setTile(this);
-		level.addSprite(item);
-	}
-/*	
-	public void removeItem()
-	{	item = null;		
-	}
-*/
-	public Floor getFloor()
-	{	return floor;
-	}
-	private void setFloor(Floor floor)
-	{	this.floor = floor;
-		floor.setCurrentPosX(posX);
-		floor.setCurrentPosY(posY);
-		floor.setTile(this);
-//		level.addSprite(floor);
-	}
-	
-
-	public ArrayList<Sprite> getSprites()
-	{	ArrayList<Sprite> result = new ArrayList<Sprite>();
-		// floor
-		result.add(floor);
-		// heroes
-		{	Iterator<Hero> i = heroes.iterator();
-			while(i.hasNext())
-				result.add(i.next());
-		}
-		// bombs
-		{	Iterator<Bomb> i = bombs.iterator();
-			while(i.hasNext())
-				result.add(i.next());
-		}
-		// fires
-		{	Iterator<Fire> i = fires.iterator();
-			while(i.hasNext())
-				result.add(i.next());
-		}
-		// block
-		if(block!=null)
-		{	result.add(block);
-		}		
-		// item
-		if(item!=null)
-		{	result.add(item);
-		}		
-		return result;
-	}
-	
+		
+	/////////////////////////////////////////////////////////////////
+	// EVENTS				/////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
 	public void spreadEvent(AbstractEvent event)
 	{	ArrayList<Sprite> sprites = getSprites();
 		Iterator<Sprite> i = sprites.iterator();
@@ -533,17 +565,18 @@ result = level.getTile(x, y)==this;
 		}
 	}
 
+    /////////////////////////////////////////////////////////////////
+	// MATRIX POSITION		/////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	private int line;
+	private int col;
+	
 	public int getLine()
 	{	return line;
 	}
+	
 	public int getCol()
 	{	return col;
-	}
-	public double getPosX()
-	{	return posX;
-	}
-	public double getPosY()
-	{	return posY;
 	}
 	
 	public Tile getNeighbor(Direction direction)
@@ -551,6 +584,7 @@ result = level.getTile(x, y)==this;
 		result = level.getNeighborTile(line,col,direction);
 		return result;
 	}
+	
 	public boolean isNeighbor(Tile n)
 	{	Tile nd = getNeighbor(Direction.DOWN);
 		Tile nl = getNeighbor(Direction.LEFT);
@@ -559,15 +593,41 @@ result = level.getTile(x, y)==this;
 		boolean result = n==nd || n==nl || n==nr || n==nu;
 		return result;
 	}
+
+	/////////////////////////////////////////////////////////////////
+	// PIXEL POSITION		/////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	private double posX;
+	private double posY;
 	
-	public Level getLevel()
-	{	return level;		
+	public double getPosX()
+	{	return posX;
 	}
 	
-	public double getDimension()
-	{	return level.getTileDimension();		
+	public double getPosY()
+	{	return posY;
 	}
-		
+
+	public boolean containsPoint(double x, double y)
+	{	boolean result;
+result = level.getTile(x, y)==this;
+/*	
+		result = CalculusTools.isRelativelyGreaterOrEqualThan(x,posX-getDimension()/2);
+		result = result && CalculusTools.isRelativelySmallerThan(x,posX+getDimension()/2); 
+		result = result && CalculusTools.isRelativelyGreaterOrEqualThan(y,posY-getDimension()/2); 
+		result = result && CalculusTools.isRelativelySmallerThan(y,posY+getDimension()/2);
+*/		 
+		return result;
+	}
+	
+    /////////////////////////////////////////////////////////////////
+	// LEVEL		/////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	private Level level;
+	
+    /////////////////////////////////////////////////////////////////
+	// STRING		/////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
 	public String toString()
 	{	String result;
 		result = getClass().getSimpleName();
@@ -576,7 +636,9 @@ result = level.getTile(x, y)==this;
 		return result;
 	}
 	
-
+    /////////////////////////////////////////////////////////////////
+	// FINISHED		/////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
 	private boolean finished = false;
 	
 	public void finish()

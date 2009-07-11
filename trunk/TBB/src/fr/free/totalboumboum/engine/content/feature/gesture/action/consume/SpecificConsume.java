@@ -52,7 +52,7 @@ public class SpecificConsume extends SpecificAction
 	 * anonym action, just for test purposes
 	 */
 	public SpecificConsume(Sprite target)
-	{	super(ActionName.CONSUME,new Fire(target.getLevel()),target,Direction.NONE,Contact.COLLISION,TilePosition.SAME,Orientation.FACE);
+	{	super(ActionName.CONSUME,new Fire(),target,Direction.NONE,Contact.COLLISION,TilePosition.SAME,Orientation.FACE);
 	}
 
 /*	

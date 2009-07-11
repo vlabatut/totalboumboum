@@ -24,7 +24,6 @@ package fr.free.totalboumboum.engine.content.sprite.fire;
 import java.util.ArrayList;
 import java.util.Iterator;
 
-import fr.free.totalboumboum.engine.container.level.Level;
 import fr.free.totalboumboum.engine.container.tile.Tile;
 import fr.free.totalboumboum.engine.content.feature.Role;
 import fr.free.totalboumboum.engine.content.feature.ability.ActionAbility;
@@ -37,8 +36,8 @@ public class Fire extends Sprite
 {	
 	private String firesetName;
 	
-	public Fire(Level level)
-	{	super(level);
+	public Fire()
+	{	super();
 	}	
 
 	public String getFiresetName()

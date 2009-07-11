@@ -49,9 +49,6 @@ public enum Orientation
 //SAME>>FACE, OPPOSITE>>BACK, nouvelle:NONE
 // adapter java et XML
 	
-// TODO init le zoom en static une fois pour toutes, ce qui permettra de virer l'appel à loop dans les calculs approchés
-// et peut être de virer l'utilisation du level dans le chargement des sprites (?)
-	
 	/**
 	 * returns the orientation, or UNDEFINED if the target is null or if the action is not directed.
 	 * If the actor and the target are exactly on the same spot, the result is SAME.
