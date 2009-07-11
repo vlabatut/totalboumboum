@@ -16,7 +16,7 @@
 	
 	<third-modulations>
 <!--  	APPEAR --> 
-		<modulation frame="true" strength="1" >
+		<modulation frame="false" strength="0" >
 			<action name="APPEAR" direction="ANY" contact="ANY"
 				tilePosition="ANY" orientation="ANY" actor="ANY" />
 			<actor-restrictions>
@@ -31,7 +31,7 @@
 			<target-restrictions />
 		</modulation>
 <!--  	LAND --> 
-		<modulation frame="true" strength="1" >
+		<modulation frame="false" strength="0" >
 			<action name="LAND" direction="ANY" contact="ANY"
 				tilePosition="ANY" orientation="ANY" actor="ANY" />
 			<actor-restrictions>
@@ -47,7 +47,7 @@
 		</modulation>
 <!--  	MOVELOW --> 
 		<!-- ability to go through bombs -> not an obstacle -->
-		<modulation frame="true" strength="1" >
+		<modulation frame="false" strength="0" >
 			<action name="MOVELOW" direction="ANY" contact="ANY"
 				tilePosition="ANY" orientation="ANY" actor="ANY" />
 			<actor-restrictions>
@@ -56,7 +56,7 @@
 			<target-restrictions />
 		</modulation>
 		<!-- intersection, same tile -> not an obstacle -->
-		<modulation frame="true" strength="1" >
+		<modulation frame="false" strength="0" >
 			<action name="MOVELOW" direction="ANY" contact="INTERSECTION"
 				tilePosition="SAME" orientation="ANY" actor="ANY" />
 			<actor-restrictions />
@@ -70,7 +70,7 @@
 			<target-restrictions />
 		</modulation>
 		<!-- intersection, different tile, different orientation -> not an obstacle -->
-		<modulation frame="true" strength="1" >
+		<modulation frame="false" strength="0" >
 			<action name="MOVELOW" direction="ANY" contact="INTERSECTION"
 				tilePosition="NEIGHBOR" orientation="BACK NONE OTHER" actor="ANY" />
 			<actor-restrictions />
