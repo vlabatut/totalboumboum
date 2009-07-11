@@ -819,6 +819,7 @@ public class Launcher
 	 * - correction du bug d'animation/collision : push ne se déclenche pas
 	 * - correction du bug d'animation : quand le bonhomme va à droite et qu'on appuie sur gauche, y a une espèce de passage droite-gauche très rapide au niveau de l'animation, insuportable
 	 * - mise à niveau du gestionnaire de trajectoire
+	 * - simplification de la structure du moteur du jeu( Loop et Level accessibles de façon statique)
 	 *   
 	 * - bug d'affichage quand les flammes se croisent au cours de plusieurs explosions: la dernière n'est pas affichée
 	 * 
