@@ -982,5 +982,6 @@ public class Launcher
 	 *  rque: comme on teste les sprites sur des positions virtuelles, qu'ils n'occupent pas encore,
 	 *  il faudra construire les actions à tester manuellement (tous les paramètres de type contact, orientation, etc) dans le trajectoryManager
 	 *  
+	 *  le chargement du feu doit etre aussi mutualisé, au niveau du thème (comme les bombes)
 	 */
 }

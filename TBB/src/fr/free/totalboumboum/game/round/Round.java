@@ -33,6 +33,7 @@ import javax.xml.parsers.ParserConfigurationException;
 
 import org.xml.sax.SAXException;
 
+import fr.free.totalboumboum.configuration.GameVariables;
 import fr.free.totalboumboum.configuration.profile.Profile;
 import fr.free.totalboumboum.engine.container.level.HollowLevel;
 import fr.free.totalboumboum.engine.loop.Loop;
@@ -114,6 +115,8 @@ public class Round implements StatisticHolder, Serializable
 		panel = null;
 		playersStatus.clear();
 		stats = null;
+		GameVariables.level = null;
+		GameVariables.loop = null;
 		// garbage collect
 		Runtime rt = Runtime.getRuntime();
 		rt.gc(); 
