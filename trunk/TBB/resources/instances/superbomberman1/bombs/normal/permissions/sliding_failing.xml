@@ -7,7 +7,7 @@
 	
 	<other-modulations>
 	</other-modulations>
-	
+
 	<actor-modulations>
 	</actor-modulations>
 	
@@ -18,7 +18,7 @@
 <!--  	APPEAR --> 
 		<modulation frame="false" strength="0" >
 			<action name="APPEAR" direction="ANY" contact="ANY"
-				tilePosition="ANY" orientation="ANY" actor="ANY" />
+				tilePosition="SAME" orientation="ANY" actor="ANY" />
 			<actor-restrictions>
 				<ability><name value="SPRITE_TRAVERSE_BOMB" /></ability>
 			</actor-restrictions>
@@ -26,7 +26,22 @@
 		</modulation>
 		<modulation frame="true" strength="0" >
 			<action name="APPEAR" direction="ANY" contact="ANY"
-				tilePosition="ANY" orientation="ANY" actor="ANY" />
+				tilePosition="SAME" orientation="ANY" actor="ANY" />
+			<actor-restrictions />
+			<target-restrictions />
+		</modulation>
+<!--  	LAND --> 
+		<modulation frame="false" strength="0" >
+			<action name="LAND" direction="ANY" contact="ANY"
+				tilePosition="SAME" orientation="ANY" actor="ANY" />
+			<actor-restrictions>
+				<ability><name value="SPRITE_TRAVERSE_BOMB" /></ability>
+			</actor-restrictions>
+			<target-restrictions />
+		</modulation>
+		<modulation frame="true" strength="0" >
+			<action name="LAND" direction="ANY" contact="ANY"
+				tilePosition="SAME" orientation="ANY" actor="ANY" />
 			<actor-restrictions />
 			<target-restrictions />
 		</modulation>
