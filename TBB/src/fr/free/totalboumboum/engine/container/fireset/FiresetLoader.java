@@ -44,10 +44,12 @@ public class FiresetLoader
 		String individualFolder = folderPath;
 		String schemaFolder = FileTools.getSchemasPath();
 		File schemaFile,dataFile;
+		
 		// opening
 		dataFile = new File(individualFolder+File.separator+FileTools.FILE_FIRESET+FileTools.EXTENSION_XML);
 		schemaFile = new File(schemaFolder+File.separator+FileTools.FILE_FIRESET+FileTools.EXTENSION_SCHEMA);
 		Element root = XmlTools.getRootFromFile(dataFile,schemaFile);
+		
 		// loading
 		Fireset result = loadFiresetElement(individualFolder,root);
 		return result;
@@ -56,10 +58,12 @@ public class FiresetLoader
     @SuppressWarnings("unchecked")
     private static Fireset loadFiresetElement(String folder, Element root) throws ParserConfigurationException, SAXException, IOException, ClassNotFoundException
     {	Fireset result = new Fireset();
-		// name
+		
+    	// name
 		String firesetName = root.getAttribute(XmlTools.ATT_NAME).getValue().trim();
 		result.setName(firesetName);
-    	// fires
+    	
+		// fires
     	List<Element> elts = root.getChildren(XmlTools.ELT_FIRE);
     	Iterator<Element> i = elts.iterator();
     	while(i.hasNext())
@@ -68,6 +72,7 @@ public class FiresetLoader
     		FireFactory fireFactory = loadFireElement(folder,temp);
     		result.addFireFactory(name, fireFactory);
     	}
+    	
     	return result;
     }
     
