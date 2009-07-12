@@ -1,9 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<fireset name="normal"
+<fireset
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
 	xsi:noNamespaceSchemaLocation="../../../../schemas/fireset.xsd">
 
-	<fire name="inside" folder="inside" />
-	<fire name="outside" folder="outside" />
+	<concrete-fires>
+		<fire name="inside" folder="inside" />
+		<fire name="outside" folder="outside" />
+	</concrete-fires>
 
 </fireset>
