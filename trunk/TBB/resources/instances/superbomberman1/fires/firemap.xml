@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<firemap
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+	xsi:noNamespaceSchemaLocation="../../../schemas/firemap.xsd">
+
+	<abstract-firesets>
+		<fire name="common" folder="_common" />
+	</abstract-firesets>
+
+	<concrete-firesets>
+		<fireset name="normal" folder="normal" />
+	</concrete-firesets>
+
+</firemap>

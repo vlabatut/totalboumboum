@@ -3,6 +3,10 @@
 		xsi:noNamespaceSchemaLocation="../../../../../../schemas/abilities.xsd" >
 
 		<!-- STATE -->
+<!--	SPRITE_TRAVERSE_BOMB --> 
+		<ability strength="1" frame="false" time="-1" uses="-1">
+			<name value="SPRITE_TRAVERSE_BOMB" />
+		</ability>
 <!--	SPRITE_TRAVERSE_ITEM --> 
 		<ability strength="1" frame="false" time="-1" uses="-1">
 			<name value="SPRITE_TRAVERSE_ITEM" />
