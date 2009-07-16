@@ -5,18 +5,6 @@
 
 	<gestures>
 
-		<gesture name="BURNING" repeat="false" folder="burning">
-			<direction name="NONE">
-				<step duration="250" file="1.gif" />
-				<step duration="200" file="2.gif" />
-				<step duration="150" file="3.gif" />
-				<step duration="125" file="4.gif" />
-				<step duration="75" file="5.gif" />
-				<step duration="50" file="6.gif" />
-				<step duration="50" file="7.gif" />
-			</direction>
-		</gesture>
-		
 		<gesture name="STANDING" repeat="true" folder="standing">
 			<direction name="NONE">
 				<step duration="50" file="red.gif" />
