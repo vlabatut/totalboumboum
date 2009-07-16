@@ -496,8 +496,9 @@
 			</group>
 			<group name="Progressbar">
 				<text name="Bombset" value="Bombes"  />
+				<text name="Firesetmap" value="Feux"  />
 				<text name="Itemset" value="Items"  />
-				<text name="Theme" value="Theme"  />
+				<text name="Theme" value="Thème"  />
 				<text name="Player" value="Personnage"  />
 				<text name="Complete" value="Fini"  />
 			</group>

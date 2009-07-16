@@ -91,6 +91,7 @@ public class XmlTools
 	public static final String ELT_EXPLOSION = "explosion";
 	public static final String ELT_FIRE = "fire";
 	public static final String ELT_FIRESET = "fireset";
+	public static final String ELT_FIRESETS = "firesets";
 	public static final String ELT_FLOOR = "floor";
 	public static final String ELT_FLOORS = "floors";
 	public static final String ELT_FONT = "font";

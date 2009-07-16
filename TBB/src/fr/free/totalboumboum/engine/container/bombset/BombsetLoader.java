@@ -99,8 +99,7 @@ public class BombsetLoader
 		// folder
     	String individualFolder = folder;
 		Attribute attribute = root.getAttribute(XmlTools.ATT_FOLDER);
-		if(attribute!=null)
-			individualFolder = individualFolder+File.separator+attribute.getValue().trim();
+		individualFolder = individualFolder+File.separator+attribute.getValue().trim();
 		
 		// required abilities
 		if(type==Type.CONCRETE)
@@ -171,8 +170,7 @@ public class BombsetLoader
 		// folder
     	String individualFolder = folder;
 		Attribute attribute = root.getAttribute(XmlTools.ATT_FOLDER);
-		if(attribute!=null)
-			individualFolder = individualFolder+File.separator+attribute.getValue().trim();
+		individualFolder = individualFolder+File.separator+attribute.getValue().trim();
 		
 		// required abilities
 		BombFactory bombFactory;

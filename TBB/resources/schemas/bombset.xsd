@@ -4,7 +4,7 @@
 
 	<xsd:complexType name="tBomb">
 		<xsd:attribute name="name" type="xsd:string" use="required" />
-		<xsd:attribute name="folder" type="xsd:string" use="optional" />
+		<xsd:attribute name="folder" type="xsd:string" use="required" />
 	</xsd:complexType>
 
 	<xsd:complexType name="tConcreteBomb">

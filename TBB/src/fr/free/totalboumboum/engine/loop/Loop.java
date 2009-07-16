@@ -88,6 +88,8 @@ public class Loop implements Runnable, Serializable
 		hollowLevel.loadBombsets();
 		BombsetMap bombsetMap = hollowLevel.getBombsetMap();
 		loadStepOver();
+		hollowLevel.loadFiresetMap();
+		loadStepOver();
 		hollowLevel.loadItemset();
 		loadStepOver();
 		hollowLevel.loadTheme();

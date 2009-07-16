@@ -85,6 +85,7 @@ public class GuiKeys
 	public static final String FALSE = "False";
 	public static final String FILE = "File";
 	public static final String FINISH = "Finish";
+	public static final String FIRESETMAP = "Firesetmap";
 	public static final String FIXED = "Fixed";
 	public static final String FOLDER = "Folder";
 	public static final String GAME = "Game";
@@ -626,6 +627,7 @@ public class GuiKeys
 			public static final String GAME_ROUND_PROGRESSBAR = GAME_ROUND+PROGRESSBAR;
 			public static final String GAME_ROUND_PROGRESSBAR_BOMBSET = GAME_ROUND_PROGRESSBAR+BOMBSET;
 			public static final String GAME_ROUND_PROGRESSBAR_COMPLETE = GAME_ROUND_PROGRESSBAR+COMPLETE;
+			public static final String GAME_ROUND_PROGRESSBAR_FIRESETMAP = GAME_ROUND_PROGRESSBAR+FIRESETMAP;
 			public static final String GAME_ROUND_PROGRESSBAR_ITEMSET = GAME_ROUND_PROGRESSBAR+ITEMSET;
 			public static final String GAME_ROUND_PROGRESSBAR_PLAYER = GAME_ROUND_PROGRESSBAR+PLAYER;
 			public static final String GAME_ROUND_PROGRESSBAR_THEME = GAME_ROUND_PROGRESSBAR+THEME;

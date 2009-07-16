@@ -31,7 +31,6 @@ import org.xml.sax.SAXException;
 
 import fr.free.totalboumboum.configuration.GameVariables;
 import fr.free.totalboumboum.engine.container.fireset.Fireset;
-import fr.free.totalboumboum.engine.container.fireset.FiresetLoader;
 import fr.free.totalboumboum.tools.FileTools;
 import fr.free.totalboumboum.tools.XmlTools;
 
@@ -55,17 +54,10 @@ public class ExplosionLoader
     {	Explosion result = new Explosion();
     	// fire
     	Element elt = root.getChild(XmlTools.ELT_FIRESET);
-    	Fireset fireset = loadFiresetElement(elt);
+    	String name = elt.getAttribute(XmlTools.ATT_NAME).getValue().trim();
+		Fireset fireset = GameVariables.level.getFiresetMap().getFireset(name);
     	//
     	result.setFireset(fireset);
-    	return result;
-    }
-    
-    private static Fireset loadFiresetElement(Element root) throws ParserConfigurationException, SAXException, IOException, ClassNotFoundException
-    {	String name = root.getAttribute(XmlTools.ATT_NAME).getValue().trim();
-		String folder = GameVariables.instancePath+File.separator+FileTools.FOLDER_FIRES;
-		folder = folder + File.separator+name;
-    	Fireset result = FiresetLoader.loadFireset(folder);
     	return result;
     }
 }

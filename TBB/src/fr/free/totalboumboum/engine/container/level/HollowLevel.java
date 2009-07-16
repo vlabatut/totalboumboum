@@ -37,6 +37,8 @@ import fr.free.totalboumboum.configuration.GameConstants;
 import fr.free.totalboumboum.configuration.GameVariables;
 import fr.free.totalboumboum.engine.container.bombset.Bombset;
 import fr.free.totalboumboum.engine.container.bombset.BombsetMap;
+import fr.free.totalboumboum.engine.container.fireset.FiresetLoader;
+import fr.free.totalboumboum.engine.container.fireset.FiresetMap;
 import fr.free.totalboumboum.engine.container.itemset.Itemset;
 import fr.free.totalboumboum.engine.container.itemset.ItemsetLoader;
 import fr.free.totalboumboum.engine.container.theme.Theme;
@@ -200,6 +202,9 @@ public class HollowLevel implements Serializable
 		bombsetPath = instancePath + File.separator+FileTools.FOLDER_BOMBS;
 
 		// itemset
+		firePath = instancePath + File.separator+FileTools.FOLDER_FIRES;
+
+		// itemset
 		itemPath = instancePath + File.separator+FileTools.FOLDER_ITEMS;
 
 		// theme
@@ -351,6 +356,16 @@ public class HollowLevel implements Serializable
 	/////////////////////////////////////////////////////////////////
 	// ITEMSET			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
+	private String firePath;
+
+	public void loadFiresetMap() throws ParserConfigurationException, SAXException, IOException, ClassNotFoundException
+    {	FiresetMap firesetMap = FiresetLoader.loadFiresetMap(firePath);
+		level.setFiresetMap(firesetMap);
+    }
+
+	/////////////////////////////////////////////////////////////////
+	// ITEMSET			/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
 	private String itemPath;
 
 	public void loadItemset() throws ParserConfigurationException, SAXException, IOException, ClassNotFoundException
@@ -404,6 +419,7 @@ public class HollowLevel implements Serializable
 	    {	// misc
 	    	bombsetPath = null;
 	    	instancePath = null;
+	    	firePath = null;
 	    	itemPath = null;
 	    	level = null;
 	    	players = null;

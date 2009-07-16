@@ -3,7 +3,7 @@
 
 	<xsd:complexType name="tFire">
 		<xsd:attribute name="name" type="xsd:string" use="required" />
-		<xsd:attribute name="folder" type="xsd:string" use="optional" />
+		<xsd:attribute name="folder" type="xsd:string" use="required" />
 	</xsd:complexType>
 
 	<xsd:complexType name="tFires">
@@ -14,7 +14,7 @@
 
 	<xsd:complexType name="tFireset">
 		<xsd:attribute name="name" type="xsd:string" use="required" />
-		<xsd:attribute name="folder" type="xsd:string" use="optional" />
+		<xsd:attribute name="folder" type="xsd:string" use="required" />
 	</xsd:complexType>
 
 	<xsd:complexType name="tFiresets">
@@ -23,13 +23,13 @@
 		</xsd:sequence>
 	</xsd:complexType>
 
-	<xsd:complexType name="tFiremap">
+	<xsd:complexType name="tFiresetmap">
 		<xsd:sequence>
-			<xsd:element name="abstract-firesets" type="tFires" minOccurs="0"/>
-			<xsd:element name="concrete-firesets" type="tFiresets" />
+			<xsd:element name="abstract-fires" type="tFires" minOccurs="0"/>
+			<xsd:element name="firesets" type="tFiresets" />
 		</xsd:sequence>
 	</xsd:complexType>
 
-	<xsd:element name="firemap" type="tFiremap" />
+	<xsd:element name="firesetmap" type="tFiresetmap" />
 
 </xsd:schema>
