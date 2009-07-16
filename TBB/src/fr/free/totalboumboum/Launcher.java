@@ -982,7 +982,7 @@ public class Launcher
 	 *  rque: comme on teste les sprites sur des positions virtuelles, qu'ils n'occupent pas encore,
 	 *  il faudra construire les actions à tester manuellement (tous les paramètres de type contact, orientation, etc) dans le trajectoryManager
 	 *  
-	 *  le chargement du feu doit etre aussi mutualisé, au niveau du thème (comme les bombes)
-	 *  peut être faudrait il le stocker, ainsi que le bombsetMap, dans le hollowlevel, ou dans une structure spéciale?
+	 *  le sprite de base ne doit pas être donné dans le fichier sprite, mais dans le XxxxSet
+	 *  car il n'est utile que dans ce cas de figure et pas autrement.
 	 */
 }

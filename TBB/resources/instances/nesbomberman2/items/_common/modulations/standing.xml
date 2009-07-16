@@ -5,6 +5,9 @@
 	<self-modulations>
 	</self-modulations>
 	
+	<other-modulations>
+	</other-modulations>
+	
 	<actor-modulations>
 	</actor-modulations>
 	
@@ -13,49 +16,56 @@
 	
 	<third-modulations>
 <!--  	APPEAR --> 
-		<modulation frame="true" strength="1" >
-			<action name="APPEAR" direction="all" contact="all"
-				tilePosition="all" orientation="all" actor="fire" target="all" />
+		<modulation frame="false" strength="0" >
+			<action name="APPEAR" direction="ANY" contact="ANY"
+				tilePosition="ANY" orientation="ANY" actor="ANY" />
 			<actor-restrictions>
-				<ability><name value="sprite-traverse-item" /></ability>
+				<ability><name value="SPRITE_TRAVERSE_ITEM" /></ability>
 			</actor-restrictions>
 			<target-restrictions />
 		</modulation>
-<!--  	DROP --> 
-		<modulation frame="true" strength="1" >
-			<action name="DROP" direction="all" contact="all"
-				tilePosition="all" orientation="all" actor="all" target="all" />
+		<modulation frame="true" strength="0" >
+			<action name="APPEAR" direction="ANY" contact="ANY"
+				tilePosition="ANY" orientation="ANY" actor="ANY" />
 			<actor-restrictions />
-			<target-restrictions />
-		</modulation>
-<!--  	LAND --> 
-		<modulation frame="true" strength="1" >
-			<action name="LAND" direction="all" contact="all"
-				tilePosition="all" orientation="all" actor="hero" />
-			<actor-restrictions />
-			<target-restrictions />
-		</modulation>
-		<modulation frame="true" strength="1" >
-			<action name="LAND" direction="all" contact="all"
-				tilePosition="all" orientation="all" actor="fire" />
-			<actor-restrictions>
-				<ability><name value="sprite-traverse-item" /></ability>
-			</actor-restrictions>
 			<target-restrictions />
 		</modulation>
 <!--  	MOVELOW --> 
-		<modulation frame="true" strength="1" >
-			<action name="MOVELOW" direction="all" contact="all"
-				tilePosition="all" orientation="all" actor="hero" />
+		<!-- ability to go through bombs -> not an obstacle -->
+		<modulation frame="false" strength="0" >
+			<action name="MOVELOW" direction="ANY" contact="ANY"
+				tilePosition="ANY" orientation="ANY" actor="ANY" />
+			<actor-restrictions>
+				<ability><name value="SPRITE_TRAVERSE_ITEM" /></ability>
+			</actor-restrictions>
+			<target-restrictions />
+		</modulation>
+		<!-- intersection, same tile -> not an obstacle -->
+		<modulation frame="false" strength="0" >
+			<action name="MOVELOW" direction="ANY" contact="INTERSECTION"
+				tilePosition="SAME" orientation="ANY" actor="ANY" />
 			<actor-restrictions />
 			<target-restrictions />
 		</modulation>
-		<modulation frame="true" strength="1" >
-			<action name="MOVELOW" direction="all" contact="all"
-				tilePosition="all" orientation="all" actor="fire" />
-			<actor-restrictions>
-				<ability><name value="sprite-traverse-item" /></ability>
-			</actor-restrictions>
+		<!-- intersection, different tile, same orientation -> obstacle -->
+		<modulation frame="true" strength="0" >
+			<action name="MOVELOW" direction="ANY" contact="INTERSECTION"
+				tilePosition="NEIGHBOR" orientation="FACE" actor="ANY" />
+			<actor-restrictions />
+			<target-restrictions />
+		</modulation>
+		<!-- intersection, different tile, different orientation -> not an obstacle -->
+		<modulation frame="false" strength="0" >
+			<action name="MOVELOW" direction="ANY" contact="INTERSECTION"
+				tilePosition="NEIGHBOR" orientation="BACK NONE OTHER" actor="ANY" />
+			<actor-restrictions />
+			<target-restrictions />
+		</modulation>
+		<!-- other -> obstacle -->
+		<modulation frame="true" strength="0" >
+			<action name="MOVELOW" direction="ANY" contact="COLLISION INTERSECTION"
+				tilePosition="NEIGHBOR SAME" orientation="ANY" actor="ANY" />
+			<actor-restrictions />
 			<target-restrictions />
 		</modulation>
 	</third-modulations>
