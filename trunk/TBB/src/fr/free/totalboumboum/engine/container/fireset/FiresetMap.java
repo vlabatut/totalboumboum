@@ -1,13 +1,28 @@
 package fr.free.totalboumboum.engine.container.fireset;
 
-import java.io.IOException;
+/*
+ * Total Boum Boum
+ * Copyright 2008-2009 Vincent Labatut 
+ * 
+ * This file is part of Total Boum Boum.
+ * 
+ * Total Boum Boum is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 2 of the License, or
+ * (at your option) any later version.
+ * 
+ * Total Boum Boum is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ * 
+ * You should have received a copy of the GNU General Public License
+ * along with Total Boum Boum.  If not, see <http://www.gnu.org/licenses/>.
+ * 
+ */
+
 import java.util.HashMap;
-
-import javax.xml.parsers.ParserConfigurationException;
-
-import org.xml.sax.SAXException;
-
-import fr.free.totalboumboum.configuration.profile.PredefinedColor;
+import java.util.Map.Entry;
 
 public class FiresetMap
 {
@@ -16,13 +31,24 @@ public class FiresetMap
 	/////////////////////////////////////////////////////////////////
 	private final HashMap<String,Fireset> firesets = new HashMap<String, Fireset>();
 	
-	public Fireset loadFireset(String folderPath, String name) throws ParserConfigurationException, SAXException, IOException, ClassNotFoundException
-	{	Fireset result = firesets.get(name);
-		if(result==null)
-		{	result = FiresetLoader.loadFireset(folderPath,firesets);
-			result.setName(name);
-			firesets.put(name,result);
+	public void addFireset(String name, Fireset fireset)
+	{	firesets.put(name,fireset);		
+	}
+	
+	public Fireset getFireset(String name)
+	{	return firesets.get(name);		
+	}
+
+	/////////////////////////////////////////////////////////////////
+	// FINISHED			/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	private boolean finished = false;
+	
+	public void finish()
+	{	if(!finished)
+		{	for(Entry<String,Fireset> e: firesets.entrySet())
+				e.getValue().finish();
+			firesets.clear();
 		}
-		return result;
 	}
 }

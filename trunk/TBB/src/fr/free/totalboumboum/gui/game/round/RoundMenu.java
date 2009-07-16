@@ -199,7 +199,7 @@ buttonStatistics.setEnabled(false);
 			buttonQuit.setEnabled(false);
 			buttonSave.setEnabled(false);
 			buttonMatch.setEnabled(false);
-			int limit = round.getProfiles().size()+3;
+			int limit = round.getProfiles().size()+4;
 			loadProgressBar = new JProgressBar(0,limit);
 			int fontSize = GuiTools.getFontSize(getHeight()*0.6);
 			Font font = GuiConfiguration.getMiscConfiguration().getFont().deriveFont((float)fontSize);
@@ -279,21 +279,27 @@ buttonStatistics.setEnabled(false);
 	{	int val = loadProgressBar.getValue();
 		String text;
 		switch(val)
-		{	// itemset
+		{	// firesetmap
 			case 0:
+				text = GuiConfiguration.getMiscConfiguration().getLanguage().getText(GuiKeys.GAME_ROUND_PROGRESSBAR_FIRESETMAP);
+				loadProgressBar.setString(text);
+				loadProgressBar.repaint();
+				break;
+			// itemset
+			case 1:
 				text = GuiConfiguration.getMiscConfiguration().getLanguage().getText(GuiKeys.GAME_ROUND_PROGRESSBAR_ITEMSET);
 				loadProgressBar.setString(text);
 				loadProgressBar.repaint();
 				break;
 			// theme
-			case 1:
+			case 2:
 				text = GuiConfiguration.getMiscConfiguration().getLanguage().getText(GuiKeys.GAME_ROUND_PROGRESSBAR_THEME);
 				loadProgressBar.setString(text);
 				loadProgressBar.repaint();
 				break;
 			// players
 			default:
-				if(val==round.getProfiles().size()+2)
+				if(val==round.getProfiles().size()+3)
 				{	text = GuiConfiguration.getMiscConfiguration().getLanguage().getText(GuiKeys.GAME_ROUND_PROGRESSBAR_COMPLETE);
 					loadProgressBar.setString(text);
 					loadProgressBar.repaint();
@@ -302,7 +308,7 @@ buttonStatistics.setEnabled(false);
 					loopPanel.start();
 				}
 				else
-				{	text = GuiConfiguration.getMiscConfiguration().getLanguage().getText(GuiKeys.GAME_ROUND_PROGRESSBAR_PLAYER)+" "+(val-1);
+				{	text = GuiConfiguration.getMiscConfiguration().getLanguage().getText(GuiKeys.GAME_ROUND_PROGRESSBAR_PLAYER)+" "+(val-2);
 					loadProgressBar.setString(text);
 					loadProgressBar.repaint();
 				}

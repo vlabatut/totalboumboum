@@ -33,6 +33,7 @@ import java.util.Iterator;
 import fr.free.totalboumboum.configuration.Configuration;
 import fr.free.totalboumboum.configuration.GameVariables;
 import fr.free.totalboumboum.engine.container.bombset.Bombset;
+import fr.free.totalboumboum.engine.container.fireset.FiresetMap;
 import fr.free.totalboumboum.engine.container.itemset.Itemset;
 import fr.free.totalboumboum.engine.container.tile.Tile;
 import fr.free.totalboumboum.engine.content.feature.Direction;
@@ -237,6 +238,18 @@ public class Level
 	}
 	public void setBombset(Bombset bombset)
 	{	this.bombset = bombset;
+	}
+	
+	/////////////////////////////////////////////////////////////////
+	// FIRESET MAP			/////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	private FiresetMap firesetMap;
+
+	public FiresetMap getFiresetMap()
+	{	return firesetMap;	
+	}
+	public void setFiresetMap(FiresetMap firesetMap)
+	{	this.firesetMap = firesetMap;
 	}
 	
 	/////////////////////////////////////////////////////////////////
@@ -765,6 +778,9 @@ public class Level
 			// bombset
 			bombset.finish();
 			bombset = null;
+			// fireset map
+			firesetMap.finish();
+			firesetMap = null;
 			// itemset
 			itemset.finish();
 			itemset = null;
