@@ -23,6 +23,7 @@ package fr.free.totalboumboum.engine.container.fireset;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 
@@ -39,7 +40,8 @@ import fr.free.totalboumboum.tools.XmlTools;
 
 public class FiresetLoader
 {	
-	public static Fireset loadFireset(String folderPath) throws ParserConfigurationException, SAXException, IOException, ClassNotFoundException
+	@SuppressWarnings("unchecked")
+	public static Fireset loadFireset(String folderPath, HashMap<String,FireFactory> abstractFires) throws ParserConfigurationException, SAXException, IOException, ClassNotFoundException
 	{	// init
 		String individualFolder = folderPath;
 		String schemaFolder = FileTools.getSchemasPath();
@@ -51,40 +53,66 @@ public class FiresetLoader
 		Element root = XmlTools.getRootFromFile(dataFile,schemaFile);
 		
 		// loading
-		Fireset result = loadFiresetElement(individualFolder,root);
+		HashMap<String,FireFactory> abstractFiresCpy = (HashMap<String,FireFactory>) abstractFires.clone(); 
+		Fireset result = loadFiresetElement(individualFolder,root,abstractFiresCpy);
+		//firesets.put(result.getName(),result);
 		return result;
 	}
 	
-    @SuppressWarnings("unchecked")
-    private static Fireset loadFiresetElement(String folder, Element root) throws ParserConfigurationException, SAXException, IOException, ClassNotFoundException
+    private static Fireset loadFiresetElement(String folder, Element root, HashMap<String,FireFactory> abstractFires) throws ParserConfigurationException, SAXException, IOException, ClassNotFoundException
     {	Fireset result = new Fireset();
 		
     	// name
 		String firesetName = root.getAttribute(XmlTools.ATT_NAME).getValue().trim();
 		result.setName(firesetName);
     	
-		// fires
+    	// abstract fires
+    	Element abstractFiresElt = root.getChild(XmlTools.ELT_ABSTRACT_FIRES);
+    	if(abstractFiresElt!=null)
+    		loadFiresElement(folder,abstractFiresElt,result,abstractFires,Type.ABSTRACT);
+
+    	// concrete fires
+    	Element concreteFiresElt = root.getChild(XmlTools.ELT_CONCRETE_FIRES);
+		loadFiresElement(folder,concreteFiresElt,result,abstractFires,Type.CONCRETE);
+    	
+    	return result;
+    }
+
+    @SuppressWarnings("unchecked")
+    private static void loadFiresElement(String folder, Element root, Fireset result, HashMap<String,FireFactory> abstractFires, Type type) throws ParserConfigurationException, SAXException, IOException, ClassNotFoundException
+    {	String individualFolder = folder;
     	List<Element> elts = root.getChildren(XmlTools.ELT_FIRE);
     	Iterator<Element> i = elts.iterator();
     	while(i.hasNext())
     	{	Element temp = i.next();
-			String name = temp.getAttribute(XmlTools.ATT_NAME).getValue().trim();
-    		FireFactory fireFactory = loadFireElement(folder,temp);
-    		result.addFireFactory(name, fireFactory);
+			loadFireElement(individualFolder,temp,result,abstractFires,type);
     	}
-    	
-    	return result;
     }
     
-    private static FireFactory loadFireElement(String folder, Element root) throws ParserConfigurationException, SAXException, IOException, ClassNotFoundException
-    {	String individualFolder = folder;
+    private static void loadFireElement(String folder, Element root, Fireset result, HashMap<String,FireFactory> abstractFires, Type type) throws ParserConfigurationException, SAXException, IOException, ClassNotFoundException
+    {	// name
+		String name = root.getAttribute(XmlTools.ATT_NAME).getValue().trim();
+		
+		// folder
+    	String individualFolder = folder;
 		Attribute attribute = root.getAttribute(XmlTools.ATT_FOLDER);
 		if(attribute!=null)
-		{	String f = attribute.getValue().trim();
-			individualFolder = folder+File.separator+f;
-		}    	
-    	//
-    	FireFactory result = FireFactoryLoader.loadFireFactory(individualFolder);
-    	return result;
+			individualFolder = individualFolder+File.separator+attribute.getValue().trim();
+		
+		// fire factory
+		FireFactory fireFactory = FireFactoryLoader.loadFireFactory(individualFolder);
+		if(type==Type.CONCRETE)
+			result.addFireFactory(name,fireFactory);
+		else
+			abstractFires.put(name,fireFactory);
+    }
+
+	/////////////////////////////////////////////////////////////////
+	// LOADING TYPE		/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+    private enum Type
+    {
+    	ABSTRACT,
+    	CONCRETE;
     }
 }

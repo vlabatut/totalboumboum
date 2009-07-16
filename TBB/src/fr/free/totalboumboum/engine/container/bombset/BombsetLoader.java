@@ -95,7 +95,7 @@ public class BombsetLoader
     private static void loadBombElement(Element root, String folder, Bombset bombset, HashMap<String,BombFactory> abstractBombs, Type type) throws ParserConfigurationException, SAXException, IOException, ClassNotFoundException
     {	// name
 		String name = root.getAttribute(XmlTools.ATT_NAME).getValue().trim();
-
+		
 		// folder
     	String individualFolder = folder;
 		Attribute attribute = root.getAttribute(XmlTools.ATT_FOLDER);
