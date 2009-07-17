@@ -34,8 +34,13 @@ import org.jdom.Attribute;
 import org.jdom.Element;
 import org.xml.sax.SAXException;
 
+import fr.free.totalboumboum.engine.container.bombset.Bombset;
+import fr.free.totalboumboum.engine.container.bombset.BombsetLoader.Type;
 import fr.free.totalboumboum.engine.content.feature.ability.AbilityLoader;
 import fr.free.totalboumboum.engine.content.feature.ability.AbstractAbility;
+import fr.free.totalboumboum.engine.content.feature.ability.StateAbility;
+import fr.free.totalboumboum.engine.content.sprite.bomb.BombFactory;
+import fr.free.totalboumboum.engine.content.sprite.bomb.BombFactoryLoader;
 import fr.free.totalboumboum.engine.content.sprite.item.ItemFactory;
 import fr.free.totalboumboum.engine.content.sprite.item.ItemFactoryLoader;
 import fr.free.totalboumboum.tools.FileTools;
@@ -43,52 +48,84 @@ import fr.free.totalboumboum.tools.XmlTools;
 
 public class ItemsetLoader
 {	
+	/////////////////////////////////////////////////////////////////
+	// LOAD ALL				/////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
 	public static Itemset loadItemset(String folderPath) throws ParserConfigurationException, SAXException, IOException, ClassNotFoundException
 	{	// init
 		String schemaFolder = FileTools.getSchemasPath();
 		String individualFolder = folderPath;
 		File schemaFile,dataFile;
+		
 		// opening
 		dataFile = new File(individualFolder+File.separator+FileTools.FILE_ITEMSET+FileTools.EXTENSION_XML);
 		schemaFile = new File(schemaFolder+File.separator+FileTools.FILE_ITEMSET+FileTools.EXTENSION_SCHEMA);
 		Element root = XmlTools.getRootFromFile(dataFile,schemaFile);
+		
 		// loading
-		HashMap<String,ItemFactory> itemFactories = loadItemsetElement(root,individualFolder);
-		Itemset result = new Itemset(itemFactories);
+		Itemset result = loadItemsetElement(root,individualFolder);
 		return result;
     }
     
     @SuppressWarnings("unchecked")
-    private static HashMap<String,ItemFactory> loadItemsetElement(Element root, String folder) throws IOException, ParserConfigurationException, SAXException, ClassNotFoundException
-	{	HashMap<String,ItemFactory> result = new HashMap<String,ItemFactory>();
-    	String individualFolder = folder;
-		List<Element> items = root.getChildren(XmlTools.ELT_ITEM);	
-		Iterator<Element> i = items.iterator();
-		while(i.hasNext())
-		{	Element temp = i.next();
-			loadItemElement(temp,individualFolder,result);
-		}
+    private static Itemset loadItemsetElement(Element root, String folder) throws IOException, ParserConfigurationException, SAXException, ClassNotFoundException
+	{	// init
+		Itemset result = new Itemset();
+
+		// abstract items
+    	HashMap<String,ItemFactory> abstractItems = new HashMap<String,ItemFactory>();
+    	Element abstractItemsElt = root.getChild(XmlTools.ELT_ABSTRACT_ITEMS);
+    	if(abstractItemsElt!=null)
+    		loadItemsElement(abstractItemsElt,folder,result,abstractItems,Type.ABSTRACT);
+    	
+    	// concrete items
+    	Element concreteItemsElt = root.getChild(XmlTools.ELT_CONCRETE_BOMBS);
+		loadItemsElement(concreteItemsElt,folder,result,abstractItems,Type.CONCRETE);
+		
 		return result;
 	}
     
-    private static void loadItemElement(Element root, String folder, HashMap<String,ItemFactory> itemFactories) throws ParserConfigurationException, SAXException, IOException, ClassNotFoundException
-    {	// folder
+	@SuppressWarnings("unchecked")
+	private static void loadItemsElement(Element root, String folder, Itemset result, HashMap<String,ItemFactory> abstractItems, Type type) throws ParserConfigurationException, SAXException, IOException, ClassNotFoundException
+	{	String individualFolder = folder;
+    	List<Element> items = root.getChildren(XmlTools.ELT_ITEM);
+    	Iterator<Element> i = items.iterator();
+    	while(i.hasNext())
+    	{	Element temp = i.next();
+    		loadItemElement(temp,individualFolder,result,abstractItems,type);
+    	}
+	}
+    
+	private static void loadItemElement(Element root, String folder, Itemset itemset, HashMap<String,ItemFactory> abstractItems, Type type) throws ParserConfigurationException, SAXException, IOException, ClassNotFoundException
+    {	// name
+		String name = root.getAttribute(XmlTools.ATT_NAME).getValue().trim();
+		
+		// folder
     	String individualFolder = folder;
 		Attribute attribute = root.getAttribute(XmlTools.ATT_FOLDER);
-		if(attribute!=null)
-			individualFolder = individualFolder+File.separator+attribute.getValue().trim();
-		// name
-		String name = root.getAttribute(XmlTools.ATT_NAME).getValue().trim();
+		individualFolder = individualFolder+File.separator+attribute.getValue().trim();
+		
 		// abilities
-		ArrayList<AbstractAbility> abilities = AbilityLoader.loadAbilitiesElement(root);
-		// factory
-		ItemFactory itemFactory = ItemFactoryLoader.loadItemFactory(individualFolder,name,abilities); 
-		itemFactories.put(name,itemFactory);
-    }     
+		ArrayList<AbstractAbility> abilities = new ArrayList<AbstractAbility>();
+		if(type==Type.CONCRETE)
+		{	abilities = AbilityLoader.loadAbilitiesElement(root);
+			// factory
+			ItemFactory itemFactory = ItemFactoryLoader.loadItemFactory(individualFolder,name,abilities,abstractItems);
+			itemset.addItemFactory(name,itemFactory);
+		}
+		else
+		{	// factory
+			ItemFactory itemFactory = ItemFactoryLoader.loadItemFactory(individualFolder,name,abilities,abstractItems);
+			abstractItems.put(name,itemFactory);
+		}
+    }
+
+	/////////////////////////////////////////////////////////////////
+	// LOADING TYPE		/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+    private enum Type
+    {
+    	ABSTRACT,
+    	CONCRETE;
+    }
 }
-
-
-
-
-
-
