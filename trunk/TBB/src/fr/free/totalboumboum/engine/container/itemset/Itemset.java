@@ -35,11 +35,18 @@ import fr.free.totalboumboum.engine.content.sprite.item.ItemFactory;
 
 
 public class Itemset
-{	// components
-	private HashMap<String,ItemFactory> itemFactories;
+{	
+	public Itemset() throws ParserConfigurationException, SAXException, IOException, ClassNotFoundException
+	{	
+	}
+	
+	/////////////////////////////////////////////////////////////////
+	// ITEM FACTORIES	/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	private final HashMap<String,ItemFactory> itemFactories = new HashMap<String, ItemFactory>();
 
-	public Itemset(HashMap<String,ItemFactory> itemFactories) throws ParserConfigurationException, SAXException, IOException, ClassNotFoundException
-	{	this.itemFactories = itemFactories;
+	public void addItemFactory(String name, ItemFactory itemFactory)
+	{	itemFactories.put(name,itemFactory);		
 	}
 	
 	public Item makeItem(String name)
@@ -51,6 +58,9 @@ if(itemFactory==null)
 		return result;
 	}
 
+	/////////////////////////////////////////////////////////////////
+	// FINISHED			/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
 	private boolean finished = false;
 	
 	public void finish()

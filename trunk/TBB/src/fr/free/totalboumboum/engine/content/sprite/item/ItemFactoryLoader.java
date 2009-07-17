@@ -24,6 +24,7 @@ package fr.free.totalboumboum.engine.content.sprite.item;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import javax.xml.parsers.ParserConfigurationException;
 
@@ -41,20 +42,41 @@ import fr.free.totalboumboum.engine.content.feature.gesture.anime.AnimesLoader;
 import fr.free.totalboumboum.engine.content.feature.gesture.modulation.ModulationsLoader;
 import fr.free.totalboumboum.engine.content.feature.gesture.trajectory.TrajectoriesLoader;
 import fr.free.totalboumboum.engine.content.sprite.SpriteFactoryLoader;
+import fr.free.totalboumboum.engine.content.sprite.bomb.BombFactory;
 import fr.free.totalboumboum.tools.FileTools;
 
 public class ItemFactoryLoader extends SpriteFactoryLoader
 {	
-	public static ItemFactory loadItemFactory(String folderPath, String itemName, ArrayList<AbstractAbility> itemAbilities) throws ParserConfigurationException, SAXException, IOException, ClassNotFoundException
+	public static ItemFactory loadItemFactory(String folderPath, String itemName, ArrayList<AbstractAbility> itemAbilities, HashMap<String,ItemFactory> abstractItems) throws ParserConfigurationException, SAXException, IOException, ClassNotFoundException
 	{	// init
 		ItemFactory result = new ItemFactory(itemName);
 		Element root = SpriteFactoryLoader.openFile(folderPath);
 		String folder;
-		GesturePack gesturePack = new GesturePack();
-		result.setGesturePack(gesturePack);
 		
 		// GENERAL
 		loadGeneralElement(root,result);
+		String baseStr = result.getBase();
+		GesturePack gesturePack;
+		ArrayList<AbstractAbility> abilities;
+		Explosion explosion;
+		if(baseStr!=null)
+		{	ItemFactory base = abstractItems.get(baseStr);
+			gesturePack = base.getGesturePack().copy();
+			abilities = base.getAbilities();
+			explosion = base.getExplosion();
+		}
+		else
+		{	gesturePack = new GesturePack();
+			abilities = new ArrayList<AbstractAbility>();
+			explosion = new Explosion();
+		}
+		result.setGesturePack(gesturePack);
+		result.setAbilities(abilities);
+		result.setExplosion(explosion);
+		
+//TODO généraliser tout ça dans spriteFactoryLoader
+//TODO vérifier que ça a été fait pour les fire (et autres ?)
+//TODO définir la clé associée au sprite dans le set plutot que dans le fichier indiv du sprite
 		
 		// ABILITIES
 		folder = folderPath+File.separator+FileTools.FILE_ABILITIES;

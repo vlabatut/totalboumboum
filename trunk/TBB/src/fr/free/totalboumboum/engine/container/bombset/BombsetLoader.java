@@ -48,18 +48,18 @@ public class BombsetLoader
 	/////////////////////////////////////////////////////////////////
 	// LOAD ALL BUT ANIMES	/////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-
 	public static Bombset loadBombset(String folderPath) throws ParserConfigurationException, SAXException, IOException, ClassNotFoundException
 	{	// init
 		String schemaFolder = FileTools.getSchemasPath();
 		String individualFolder = folderPath;
 		File schemaFile,dataFile;
 		
-		// loading components
+		// opening
 		dataFile = new File(individualFolder+File.separator+FileTools.FILE_BOMBSET+FileTools.EXTENSION_XML);
 		schemaFile = new File(schemaFolder+File.separator+FileTools.FILE_BOMBSET+FileTools.EXTENSION_SCHEMA);
 		Element root = XmlTools.getRootFromFile(dataFile,schemaFile);
 		
+		// loading
 		Bombset result = loadBombsetElement(root,individualFolder);
 		return result;
 	}
@@ -81,18 +81,18 @@ public class BombsetLoader
     	return result;
     }
     
-    @SuppressWarnings("unchecked")
-    private static void loadBombsElement(Element root, String folder, Bombset result, HashMap<String,BombFactory> abstractBombs, Type type) throws ParserConfigurationException, SAXException, IOException, ClassNotFoundException
-    {	String individualFolder = folder;
+	@SuppressWarnings("unchecked")
+	private static void loadBombsElement(Element root, String folder, Bombset result, HashMap<String,BombFactory> abstractBombs, Type type) throws ParserConfigurationException, SAXException, IOException, ClassNotFoundException
+	{	String individualFolder = folder;
     	List<Element> bombs = root.getChildren(XmlTools.ELT_BOMB);
     	Iterator<Element> i = bombs.iterator();
     	while(i.hasNext())
     	{	Element temp = i.next();
     		loadBombElement(temp,individualFolder,result,abstractBombs,type);
     	}
-    }
-    
-    private static void loadBombElement(Element root, String folder, Bombset bombset, HashMap<String,BombFactory> abstractBombs, Type type) throws ParserConfigurationException, SAXException, IOException, ClassNotFoundException
+	}
+
+	private static void loadBombElement(Element root, String folder, Bombset bombset, HashMap<String,BombFactory> abstractBombs, Type type) throws ParserConfigurationException, SAXException, IOException, ClassNotFoundException
     {	// name
 		String name = root.getAttribute(XmlTools.ATT_NAME).getValue().trim();
 		
