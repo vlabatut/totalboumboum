@@ -148,7 +148,7 @@ public class FiresetLoader
 		individualFolder = individualFolder+File.separator+attribute.getValue().trim();
 		
 		// fire factory
-		FireFactory fireFactory = FireFactoryLoader.loadFireFactory(individualFolder);
+		FireFactory fireFactory = FireFactoryLoader.loadFireFactory(individualFolder,abstractFires);
 		if(type==Type.CONCRETE)
 			result.addFireFactory(name,fireFactory);
 		else

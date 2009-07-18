@@ -42,7 +42,6 @@ import fr.free.totalboumboum.engine.content.feature.gesture.anime.AnimesLoader;
 import fr.free.totalboumboum.engine.content.feature.gesture.modulation.ModulationsLoader;
 import fr.free.totalboumboum.engine.content.feature.gesture.trajectory.TrajectoriesLoader;
 import fr.free.totalboumboum.engine.content.sprite.SpriteFactoryLoader;
-import fr.free.totalboumboum.engine.content.sprite.bomb.BombFactory;
 import fr.free.totalboumboum.tools.FileTools;
 
 public class ItemFactoryLoader extends SpriteFactoryLoader
@@ -54,43 +53,22 @@ public class ItemFactoryLoader extends SpriteFactoryLoader
 		String folder;
 		
 		// GENERAL
-		loadGeneralElement(root,result);
-		String baseStr = result.getBase();
-		GesturePack gesturePack;
-		ArrayList<AbstractAbility> abilities;
-		Explosion explosion;
-		if(baseStr!=null)
-		{	ItemFactory base = abstractItems.get(baseStr);
-			gesturePack = base.getGesturePack().copy();
-			abilities = base.getAbilities();
-			explosion = base.getExplosion();
-		}
-		else
-		{	gesturePack = new GesturePack();
-			abilities = new ArrayList<AbstractAbility>();
-			explosion = new Explosion();
-		}
-		result.setGesturePack(gesturePack);
-		result.setAbilities(abilities);
-		result.setExplosion(explosion);
-		
-//TODO généraliser tout ça dans spriteFactoryLoader
-//TODO vérifier que ça a été fait pour les fire (et autres ?)
-//TODO définir la clé associée au sprite dans le set plutot que dans le fichier indiv du sprite
-		
+		loadGeneralElement(root,result,abstractItems);
+		GesturePack gesturePack = result.getGesturePack();
+		ArrayList<AbstractAbility> abilities = result.getAbilities();
+				
 		// ABILITIES
 		folder = folderPath+File.separator+FileTools.FILE_ABILITIES;
-		ArrayList<AbstractAbility> abilities = new ArrayList<AbstractAbility>();
 		AbilityLoader.loadAbilityPack(folder,abilities);
-		result.setAbilities(abilities);
 		
 		// ANIMES
 		folder = folderPath+File.separator+FileTools.FILE_ANIMES;
 		AnimesLoader.loadAnimes(folder,gesturePack,ItemFactory.getAnimeReplacements());
 		
 		//EXPLOSION
-		Explosion explosion = loadExplosionElement(root);
-		result.setExplosion(explosion);
+		Explosion exp = loadExplosionElement(root);
+		if(exp!=null)
+			result.setExplosion(exp); 
 		
 		//MODULATIONS
 		folder = folderPath+File.separator+FileTools.FILE_MODULATIONS;

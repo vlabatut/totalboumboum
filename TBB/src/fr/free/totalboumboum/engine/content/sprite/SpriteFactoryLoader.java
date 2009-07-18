@@ -23,6 +23,8 @@ package fr.free.totalboumboum.engine.content.sprite;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.HashMap;
 
 import javax.xml.parsers.ParserConfigurationException;
 
@@ -31,8 +33,10 @@ import org.jdom.Element;
 import org.xml.sax.SAXException;
 
 import fr.free.totalboumboum.configuration.GameVariables;
+import fr.free.totalboumboum.engine.content.feature.ability.AbstractAbility;
 import fr.free.totalboumboum.engine.content.feature.explosion.Explosion;
 import fr.free.totalboumboum.engine.content.feature.explosion.ExplosionLoader;
+import fr.free.totalboumboum.engine.content.feature.gesture.GesturePack;
 import fr.free.totalboumboum.tools.FileTools;
 import fr.free.totalboumboum.tools.XmlTools;
 
@@ -51,15 +55,35 @@ public abstract class SpriteFactoryLoader
 		return result;
 	}
 
-	protected static <T extends Sprite> void loadGeneralElement(Element root, SpriteFactory<T> result)
+	protected static <T extends Sprite, U extends SpriteFactory<T>> void loadGeneralElement(Element root, SpriteFactory<T> result, HashMap<String,U> abstractSprites)
 	{	Element elt = root.getChild(XmlTools.ELT_GENERAL);
+		
 		// name
 		String name = elt.getAttribute(XmlTools.ATT_NAME).getValue().trim();
 		result.setName(name);
+		
 		// base
-		String base = elt.getAttributeValue(XmlTools.ATT_BASE);
-		if(base!=null)
-			result.setBase(base);
+		String baseStr = elt.getAttributeValue(XmlTools.ATT_BASE);
+		result.setBase(baseStr);
+		
+		// init
+		GesturePack gesturePack;
+		ArrayList<AbstractAbility> abilities;
+		Explosion explosion;
+		if(baseStr!=null)
+		{	SpriteFactory<T> base = abstractSprites.get(baseStr);
+			gesturePack = base.getGesturePack().copy();
+			abilities = base.getAbilities();
+			explosion = base.getExplosion();
+		}
+		else
+		{	gesturePack = new GesturePack();
+			abilities = new ArrayList<AbstractAbility>();
+			explosion = new Explosion();
+		}
+		result.setGesturePack(gesturePack);
+		result.setAbilities(abilities);
+		result.setExplosion(explosion);
 	}
 	
 	protected static <T extends Sprite> Explosion loadExplosionElement(Element root) throws ParserConfigurationException, SAXException, IOException, ClassNotFoundException

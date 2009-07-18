@@ -24,6 +24,7 @@ package fr.free.totalboumboum.engine.content.sprite.fire;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import javax.xml.parsers.ParserConfigurationException;
 
@@ -44,22 +45,20 @@ import fr.free.totalboumboum.tools.FileTools;
 
 public class FireFactoryLoader extends SpriteFactoryLoader
 {	
-	public static FireFactory loadFireFactory(String folderPath) throws ParserConfigurationException, SAXException, IOException, ClassNotFoundException
+	public static FireFactory loadFireFactory(String folderPath, HashMap<String, FireFactory> abstractFires) throws ParserConfigurationException, SAXException, IOException, ClassNotFoundException
 	{	// init
 		FireFactory result = new FireFactory();
 		Element root = SpriteFactoryLoader.openFile(folderPath);
 		String folder;
-		GesturePack gesturePack = new GesturePack();
-		result.setGesturePack(gesturePack);
 		
 		// GENERAL
-		loadGeneralElement(root,result);
+		loadGeneralElement(root,result,abstractFires);
+		GesturePack gesturePack = result.getGesturePack();
+		ArrayList<AbstractAbility> abilities = result.getAbilities();
 		
 		// ABILITIES
 		folder = folderPath+File.separator+FileTools.FILE_ABILITIES;
-		ArrayList<AbstractAbility> abilities = new ArrayList<AbstractAbility>();
 		AbilityLoader.loadAbilityPack(folder,abilities);
-		result.setAbilities(abilities);
 		
 		// ANIMES
 		folder = folderPath+File.separator+FileTools.FILE_ANIMES;

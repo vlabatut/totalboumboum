@@ -34,13 +34,8 @@ import org.jdom.Attribute;
 import org.jdom.Element;
 import org.xml.sax.SAXException;
 
-import fr.free.totalboumboum.engine.container.bombset.Bombset;
-import fr.free.totalboumboum.engine.container.bombset.BombsetLoader.Type;
 import fr.free.totalboumboum.engine.content.feature.ability.AbilityLoader;
 import fr.free.totalboumboum.engine.content.feature.ability.AbstractAbility;
-import fr.free.totalboumboum.engine.content.feature.ability.StateAbility;
-import fr.free.totalboumboum.engine.content.sprite.bomb.BombFactory;
-import fr.free.totalboumboum.engine.content.sprite.bomb.BombFactoryLoader;
 import fr.free.totalboumboum.engine.content.sprite.item.ItemFactory;
 import fr.free.totalboumboum.engine.content.sprite.item.ItemFactoryLoader;
 import fr.free.totalboumboum.tools.FileTools;
@@ -67,8 +62,7 @@ public class ItemsetLoader
 		return result;
     }
     
-    @SuppressWarnings("unchecked")
-    private static Itemset loadItemsetElement(Element root, String folder) throws IOException, ParserConfigurationException, SAXException, ClassNotFoundException
+	private static Itemset loadItemsetElement(Element root, String folder) throws IOException, ParserConfigurationException, SAXException, ClassNotFoundException
 	{	// init
 		Itemset result = new Itemset();
 
@@ -96,7 +90,7 @@ public class ItemsetLoader
     	}
 	}
     
-	private static void loadItemElement(Element root, String folder, Itemset itemset, HashMap<String,ItemFactory> abstractItems, Type type) throws ParserConfigurationException, SAXException, IOException, ClassNotFoundException
+	private static void loadItemElement(Element root, String folder, Itemset result, HashMap<String,ItemFactory> abstractItems, Type type) throws ParserConfigurationException, SAXException, IOException, ClassNotFoundException
     {	// name
 		String name = root.getAttribute(XmlTools.ATT_NAME).getValue().trim();
 		
@@ -111,7 +105,7 @@ public class ItemsetLoader
 		{	abilities = AbilityLoader.loadAbilitiesElement(root);
 			// factory
 			ItemFactory itemFactory = ItemFactoryLoader.loadItemFactory(individualFolder,name,abilities,abstractItems);
-			itemset.addItemFactory(name,itemFactory);
+			result.addItemFactory(name,itemFactory);
 		}
 		else
 		{	// factory
