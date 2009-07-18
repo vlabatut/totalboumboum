@@ -4,11 +4,9 @@
 	
 	<gesture name="ENDED" file="ended.xml" />
 
-	<gesture name="BOUNCING" file="bouncing.xml" />
 	<gesture name="BURNING" file="burning.xml" />
 	<gesture name="CRYING" file="burning.xml" />
 	<gesture name="EXULTING" file="burning.xml" />
-	<gesture name="LANDING" file="landing.xml" />
 	<gesture name="PUSHING" file="pushing.xml" />
 	<gesture name="STANDING" file="standing.xml" />
 	<gesture name="WAITING" file="waiting.xml" />
