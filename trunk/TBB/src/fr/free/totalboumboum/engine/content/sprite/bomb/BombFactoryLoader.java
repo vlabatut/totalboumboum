@@ -58,25 +58,9 @@ public class BombFactoryLoader extends SpriteFactoryLoader
 		String folder;
 		
 		// GENERAL
-		loadGeneralElement(root,result);
-		String baseStr = result.getBase();
-		GesturePack gesturePack;
-		ArrayList<AbstractAbility> abilities;
-		Explosion explosion;
-		if(baseStr!=null)
-		{	BombFactory base = abstractBombs.get(baseStr);
-			gesturePack = base.getGesturePack().copy();
-			abilities = base.getAbilities();
-			explosion = base.getExplosion();
-		}
-		else
-		{	gesturePack = new GesturePack();
-			abilities = new ArrayList<AbstractAbility>();
-			explosion = new Explosion();
-		}
-		result.setGesturePack(gesturePack);
-		result.setAbilities(abilities);
-		result.setExplosion(explosion);
+		loadGeneralElement(root,result,abstractBombs);
+		GesturePack gesturePack = result.getGesturePack();
+		ArrayList<AbstractAbility> abilities = result.getAbilities();
 		
 		// ABILITIES
 		folder = folderPath+File.separator+FileTools.FILE_ABILITIES;

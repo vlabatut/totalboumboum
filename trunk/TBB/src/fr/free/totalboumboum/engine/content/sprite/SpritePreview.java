@@ -23,6 +23,7 @@ package fr.free.totalboumboum.engine.content.sprite;
 
 import java.awt.image.BufferedImage;
 import java.util.HashMap;
+import java.util.Map.Entry;
 
 import fr.free.totalboumboum.configuration.profile.PredefinedColor;
 
@@ -70,7 +71,7 @@ public class SpritePreview
 	/////////////////////////////////////////////////////////////////
 	// IMAGES			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	private HashMap<PredefinedColor,BufferedImage> coloredImages = new HashMap<PredefinedColor, BufferedImage>();
+	private final HashMap<PredefinedColor,BufferedImage> coloredImages = new HashMap<PredefinedColor, BufferedImage>();
 	private BufferedImage normalImage;
 
 	public BufferedImage getImage(PredefinedColor color)
@@ -118,4 +119,21 @@ public class SpritePreview
 	{	this.folder = folder;
 	}
 	
+	/////////////////////////////////////////////////////////////////
+	// COPY				/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	public SpritePreview copy()
+	{	SpritePreview result = new SpritePreview();
+		// images
+		result.normalImage = normalImage;
+		for(Entry<PredefinedColor,BufferedImage> e: coloredImages.entrySet())
+			result.setImage(e.getKey(),e.getValue());
+		// misc
+		result.setName(name);
+		result.setAuthor(author);
+		result.setSource(source);
+		result.setPack(pack);
+		result.setFolder(folder);
+		return result;
+	}
 }
