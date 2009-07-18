@@ -42,6 +42,9 @@ import fr.free.totalboumboum.tools.XmlTools;
 
 public abstract class SpriteFactoryLoader
 {	
+	/////////////////////////////////////////////////////////////////
+	// FILE OPENING			/////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
 	public static Element openFile(String folderPath) throws ParserConfigurationException, SAXException, IOException, ClassNotFoundException
 	{	// init
 		String schemaFolder = FileTools.getSchemasPath();
@@ -55,6 +58,9 @@ public abstract class SpriteFactoryLoader
 		return result;
 	}
 
+	/////////////////////////////////////////////////////////////////
+	// GENERAL ELEMENT LOADING		/////////////////////////////////
+	/////////////////////////////////////////////////////////////////
 	protected static <T extends Sprite, U extends SpriteFactory<T>> void loadGeneralElement(Element root, SpriteFactory<T> result, HashMap<String,U> abstractSprites)
 	{	Element elt = root.getChild(XmlTools.ELT_GENERAL);
 		
@@ -72,20 +78,42 @@ public abstract class SpriteFactoryLoader
 		Explosion explosion;
 		if(baseStr!=null)
 		{	SpriteFactory<T> base = abstractSprites.get(baseStr);
-			gesturePack = base.getGesturePack().copy();
-			abilities = base.getAbilities();
-			explosion = base.getExplosion();
+			loadGeneralElement(result,base);
 		}
 		else
 		{	gesturePack = new GesturePack();
 			abilities = new ArrayList<AbstractAbility>();
 			explosion = new Explosion();
+			result.setGesturePack(gesturePack);
+			result.setAbilities(abilities);
+			result.setExplosion(explosion);
 		}
-		result.setGesturePack(gesturePack);
-		result.setAbilities(abilities);
+	}
+	
+	protected static <T extends Sprite> void loadGeneralElement(Element root, SpriteFactory<T> result, SpriteFactory<T> base)
+	{	Element elt = root.getChild(XmlTools.ELT_GENERAL);
+	
+		// name
+		String name = elt.getAttribute(XmlTools.ATT_NAME).getValue().trim();
+		result.setName(name);
+		
+		loadGeneralElement(result,base);
+	}
+	
+	@SuppressWarnings("unchecked")
+	private static <T extends Sprite> void loadGeneralElement(SpriteFactory<T> result, SpriteFactory<T> base)
+	{	GesturePack gesturePack = base.getGesturePack().copy();
+		ArrayList<AbstractAbility> abilities = base.getAbilities();
+		Explosion explosion = base.getExplosion();
+		//
+		result.setGesturePack(gesturePack.copy());
+		result.setAbilities((ArrayList<AbstractAbility>)abilities.clone());
 		result.setExplosion(explosion);
 	}
 	
+	/////////////////////////////////////////////////////////////////
+	// EPLOSION LOADING		/////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
 	protected static <T extends Sprite> Explosion loadExplosionElement(Element root) throws ParserConfigurationException, SAXException, IOException, ClassNotFoundException
 	{	Explosion explosion = null;
 		Element elt = root.getChild(XmlTools.ELT_EXPLOSION);

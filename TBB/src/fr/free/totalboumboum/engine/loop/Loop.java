@@ -48,16 +48,13 @@ import fr.free.totalboumboum.engine.container.itemset.Itemset;
 import fr.free.totalboumboum.engine.container.level.HollowLevel;
 import fr.free.totalboumboum.engine.container.level.Level;
 import fr.free.totalboumboum.engine.container.level.Players;
-import fr.free.totalboumboum.engine.content.feature.ability.AbilityLoader;
-import fr.free.totalboumboum.engine.content.feature.ability.AbstractAbility;
 import fr.free.totalboumboum.engine.content.feature.ability.StateAbility;
 import fr.free.totalboumboum.engine.content.feature.ability.StateAbilityName;
 import fr.free.totalboumboum.engine.content.feature.event.EngineEvent;
-import fr.free.totalboumboum.engine.content.feature.gesture.GesturePack;
-import fr.free.totalboumboum.engine.content.feature.gesture.modulation.ModulationsLoader;
-import fr.free.totalboumboum.engine.content.feature.gesture.trajectory.TrajectoriesLoader;
 import fr.free.totalboumboum.engine.content.sprite.Sprite;
 import fr.free.totalboumboum.engine.content.sprite.hero.Hero;
+import fr.free.totalboumboum.engine.content.sprite.hero.HeroFactory;
+import fr.free.totalboumboum.engine.content.sprite.hero.HeroFactoryLoader;
 import fr.free.totalboumboum.engine.content.sprite.item.Item;
 import fr.free.totalboumboum.engine.control.SystemControl;
 import fr.free.totalboumboum.engine.player.Player;
@@ -99,14 +96,7 @@ public class Loop implements Runnable, Serializable
 
 		// load players : common stuff
 		String baseFolder = GameVariables.instancePath+File.separator+FileTools.FOLDER_HEROES;
-		String folder = baseFolder + File.separator+FileTools.FOLDER_ABILITIES;
-		ArrayList<AbstractAbility> abilities = new ArrayList<AbstractAbility>();
-		AbilityLoader.loadAbilityPack(folder,abilities);
-		folder = baseFolder + File.separator+FileTools.FOLDER_TRAJECTORIES;
-		GesturePack gesturePack = new GesturePack();
-		TrajectoriesLoader.loadTrajectories(folder,gesturePack);
-		folder = baseFolder + File.separator+FileTools.FOLDER_PERMISSIONS;
-		ModulationsLoader.loadModulations(folder,gesturePack);
+		HeroFactory base = HeroFactoryLoader.loadHeroFactory(baseFolder,bombsetMap);
 //		loadStepOver();		
 		// load players : individual stuff
 		ArrayList<Profile> profiles = round.getProfiles();
@@ -131,7 +121,7 @@ public class Loop implements Runnable, Serializable
 		while(i.hasNext())
 		{	// init
 			Profile profile = i.next();
-			Player player = new Player(profile,abilities,gesturePack,bombsetMap);
+			Player player = new Player(profile,base,bombsetMap);
 			players.add(player);
 			Hero hero = (Hero)player.getSprite();
 			// location
