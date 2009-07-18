@@ -24,7 +24,7 @@ package fr.free.totalboumboum.engine.content.sprite.hero;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Iterator;
+import java.util.HashMap;
 
 import javax.xml.parsers.ParserConfigurationException;
 
@@ -36,53 +36,34 @@ import fr.free.totalboumboum.configuration.GameVariables;
 import fr.free.totalboumboum.configuration.profile.PredefinedColor;
 import fr.free.totalboumboum.engine.container.bombset.Bombset;
 import fr.free.totalboumboum.engine.container.bombset.BombsetMap;
+import fr.free.totalboumboum.engine.content.feature.ability.AbilityLoader;
 import fr.free.totalboumboum.engine.content.feature.ability.AbstractAbility;
 import fr.free.totalboumboum.engine.content.feature.explosion.Explosion;
 import fr.free.totalboumboum.engine.content.feature.gesture.GesturePack;
 import fr.free.totalboumboum.engine.content.feature.gesture.anime.AnimesLoader;
+import fr.free.totalboumboum.engine.content.feature.gesture.modulation.ModulationsLoader;
+import fr.free.totalboumboum.engine.content.feature.gesture.trajectory.TrajectoriesLoader;
 import fr.free.totalboumboum.engine.content.sprite.SpriteFactoryLoader;
 import fr.free.totalboumboum.tools.FileTools;
 
 public class HeroFactoryLoader extends SpriteFactoryLoader
 {	
-	public static HeroFactory loadHeroFactory(String folderPath, PredefinedColor color, ArrayList<AbstractAbility> ablts, GesturePack gp, BombsetMap bombsetMap) throws ParserConfigurationException, SAXException, IOException, ClassNotFoundException
+	/*
+	 * complete the base HeroFactory with graphics and bombset
+	 */
+	public static HeroFactory loadHeroFactory(String folderPath, PredefinedColor color, HeroFactory base, BombsetMap bombsetMap) throws ParserConfigurationException, SAXException, IOException, ClassNotFoundException
 	{	// init
 		HeroFactory result = new HeroFactory();
 		Element root = SpriteFactoryLoader.openFile(folderPath);
 		String folder;
-		GesturePack gesturePack = gp.copy();
-		result.setGesturePack(gesturePack);
 		
 		// GENERAL
-		loadGeneralElement(root,result);
-		
-		// ABILITIES
-//		folder = level.getInstancePath()+File.separator+FileTools.FOLDER_HEROES;
-//		folder = folder + File.separator+FileTools.FOLDER_ABILITIES;
-//		ArrayList<AbstractAbility> abilities = AbilityLoader.loadAbilityPack(folder,level);
-		ArrayList<AbstractAbility> abilities = new ArrayList<AbstractAbility>();
-		Iterator<AbstractAbility> i = ablts.iterator();
-		while (i.hasNext())
-		{	AbstractAbility temp = i.next().copy();
-			abilities.add(temp);
-		}
-		result.setAbilities(abilities);
+		loadGeneralElement(root,result,base);
+		GesturePack gesturePack = result.getGesturePack();
 		
 		// ANIMES
 		folder = folderPath+File.separator+FileTools.FILE_ANIMES;
 		AnimesLoader.loadAnimes(folder,gesturePack,HeroFactory.getAnimeReplacements());
-		
-		//EXPLOSION
-		Explosion explosion = loadExplosionElement(root); //TODO les explosions des players ne devraient-elles pas être chargées en commun ?
-		result.setExplosion(explosion);
-		
-		//MODULATIONS
-//		folder = folderPath+File.separator+FileTools.FILE_MODULATIONS;
-//		ModulationsLoader.loadModulations(folder,gesturePack,level);
-		
-		// TRAJECTORIES
-//		folder = folderPath+File.separator+FileTools.FILE_TRAJECTORIES;
-//		TrajectoriesLoader.loadTrajectories(folder,gesturePack,level);
 		
 		// BOMBSET
 		folder = GameVariables.instancePath+File.separator+FileTools.FOLDER_BOMBS;
@@ -91,5 +72,40 @@ public class HeroFactoryLoader extends SpriteFactoryLoader
 
 		// result
 		return result;
-	}	
+	}
+
+	/* 
+	 * load the base HeroFactory (i.e. no graphics nor bombset)
+	 */
+	public static HeroFactory loadHeroFactory(String folderPath, BombsetMap bombsetMap) throws ParserConfigurationException, SAXException, IOException, ClassNotFoundException
+	{	// init
+		HeroFactory result = new HeroFactory();
+		Element root = SpriteFactoryLoader.openFile(folderPath);
+		String folder;
+		
+		// GENERAL
+		loadGeneralElement(root,result,new HashMap<String,HeroFactory>());
+		GesturePack gesturePack = result.getGesturePack();
+		ArrayList<AbstractAbility> abilities = result.getAbilities();
+
+		// ABILITIES
+		folder = folderPath + File.separator+FileTools.FOLDER_ABILITIES;
+		AbilityLoader.loadAbilityPack(folder,abilities);
+
+		//EXPLOSION
+		Explosion explosion = loadExplosionElement(root);
+		result.setExplosion(explosion);
+		
+		//MODULATIONS
+		folder = folderPath+File.separator+FileTools.FILE_MODULATIONS;
+		ModulationsLoader.loadModulations(folder,gesturePack);
+		
+		// TRAJECTORIES
+		folder = folderPath+File.separator+FileTools.FILE_TRAJECTORIES;
+		TrajectoriesLoader.loadTrajectories(folder,gesturePack);
+		
+		// result
+		return result;
+	}
+
 }
