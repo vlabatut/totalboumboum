@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<floorset 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+		xsi:noNamespaceSchemaLocation="../../../../../schemas/floorset.xsd" >
+
+	<concrete-floors>
+		<floor name="regular" folder="regular" />
+	</concrete-floors>
+
+</floorset>

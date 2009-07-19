@@ -984,5 +984,9 @@ public class Launcher
 	 *  
 	 *  le sprite de base ne doit pas être donné dans le fichier sprite, mais dans le XxxxSet
 	 *  car il n'est utile que dans ce cas de figure et pas autrement.
+	 *  >> ben si, on l'utilise aussi lors de la preview, qui selon toute vraisemblance peut partir du sprite direc (et pas du set). non ?
+	 *  
+	 *  il faut vérifier que dans le loader de floors du theme, le folder de chaque floor est obligatoire (et non pas optionnel)
+	 *  dc pas la peine de faire de if null, il y a forcément un attribut)
 	 */
 }
