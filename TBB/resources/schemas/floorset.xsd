@@ -10,7 +10,6 @@
 		<xsd:sequence>
 			<xsd:element name="floor" type="tFloor" maxOccurs="unbounded" />
 		</xsd:sequence>
-		<xsd:attribute name="folder" type="xsd:string" use="optional" />
 	</xsd:complexType>
 
 	<xsd:complexType name="tFloorset">
