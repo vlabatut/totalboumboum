@@ -25,7 +25,6 @@ import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.List;
 
 import javax.xml.parsers.ParserConfigurationException;
@@ -73,7 +72,7 @@ public class ItemsetLoader
     		loadItemsElement(abstractItemsElt,folder,result,abstractItems,Type.ABSTRACT);
     	
     	// concrete items
-    	Element concreteItemsElt = root.getChild(XmlTools.ELT_CONCRETE_BOMBS);
+    	Element concreteItemsElt = root.getChild(XmlTools.ELT_CONCRETE_ITEMS);
 		loadItemsElement(concreteItemsElt,folder,result,abstractItems,Type.CONCRETE);
 		
 		return result;
@@ -83,11 +82,8 @@ public class ItemsetLoader
 	private static void loadItemsElement(Element root, String folder, Itemset result, HashMap<String,ItemFactory> abstractItems, Type type) throws ParserConfigurationException, SAXException, IOException, ClassNotFoundException
 	{	String individualFolder = folder;
     	List<Element> items = root.getChildren(XmlTools.ELT_ITEM);
-    	Iterator<Element> i = items.iterator();
-    	while(i.hasNext())
-    	{	Element temp = i.next();
+		for(Element temp: items)
     		loadItemElement(temp,individualFolder,result,abstractItems,type);
-    	}
 	}
     
 	private static void loadItemElement(Element root, String folder, Itemset result, HashMap<String,ItemFactory> abstractItems, Type type) throws ParserConfigurationException, SAXException, IOException, ClassNotFoundException

@@ -47,8 +47,10 @@ public class XmlTools
 {	// Elements names
 	public static final String ELT_ABILITY = "ability";
 	public static final String ELT_ABILITIES = "abilities";
+	public static final String ELT_ABSTRACT_BLOCKS = "abstract-blocks";
 	public static final String ELT_ABSTRACT_BOMBS = "abstract-bombs";
 	public static final String ELT_ABSTRACT_FIRES = "abstract-fires";
+	public static final String ELT_ABSTRACT_FLOORS = "abstract-floors";
 	public static final String ELT_ABSTRACT_ITEMS = "abstract-items";
 	public static final String ELT_ACTION = "action";
 	public static final String ELT_ACTOR_MODULATIONS = "actor-modulations";
@@ -75,8 +77,10 @@ public class XmlTools
 	public static final String ELT_COLORS = "colors";
 	public static final String ELT_COLORMAP = "colormap";
 	public static final String ELT_COLORSPRITE = "colorsprite";
+	public static final String ELT_CONCRETE_BLOCKS = "concrete-blocks";
 	public static final String ELT_CONCRETE_BOMBS = "concrete-bombs";
 	public static final String ELT_CONCRETE_FIRES = "concrete-fires";
+	public static final String ELT_CONCRETE_FLOORS = "concrete-floors";
 	public static final String ELT_CONCRETE_ITEMS = "concrete-items";
 	public static final String ELT_CONFRONTATION = "confrontation";
 	public static final String ELT_CONSTANT = "constant";
@@ -313,6 +317,7 @@ public class XmlTools
 	public static final String ATT_USE_LAST_TOURNAMENT = "useLastTournament";
 	public static final String ATT_USES = "uses";
 	public static final String ATT_VALUE = "value";
+	public static final String ATT_VERSION = "version";
 	public static final String ATT_WIDTH = "width";
 	public static final String ATT_WIN = "win";
 	public static final String ATT_XINTERACTION = "xInteraction";

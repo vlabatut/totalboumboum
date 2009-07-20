@@ -34,16 +34,66 @@ public class Theme
 {	
 	public static final String DEFAULT_GROUP = "default";
 	public static final String GROUP_SEPARATOR = ".";
+
+	/////////////////////////////////////////////////////////////////
+	// NAME				/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	private String version;
 	
-	// components
-	private HashMap<String,BlockFactory> blocks;
+	public String getVersion()
+	{	return version;
+	}
+	
+	public void setVersion(String version)
+	{	this.version = version;
+	}
+	
+	/////////////////////////////////////////////////////////////////
+	// VERSION			/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	private String name;
+	
+	public String getName()
+	{	return name;
+	}
+	
+	public void setName(String name)
+	{	this.name = name;
+	}
+	
+	/////////////////////////////////////////////////////////////////
+	// AUTHOR			/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	private String author;
+	
+	public String getAuthor()
+	{	return author;
+	}
+	
+	public void setAuthor(String author)
+	{	this.author = author;
+	}
+	
+	/////////////////////////////////////////////////////////////////
+	// SOURCE			/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	private String source;
+	
+	public String getSource()
+	{	return source;
+	}
+	
+	public void setSource(String source)
+	{	this.source = source;
+	}
+	
+	/////////////////////////////////////////////////////////////////
+	// FLOORS				/////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
 	private HashMap<String,FloorFactory> floors;
-	/*
-	 * folder devrait en fait correspondre au nom du thème
-	 */
-	public Theme(HashMap<String,BlockFactory> blocks, HashMap<String,FloorFactory> floors)
-	{	this.blocks = blocks; 
-		this.floors = floors; 
+
+	public void addFloorFactory(String name, FloorFactory floorFactory)
+	{	floors.put(name,floorFactory);
 	}
 	
 	public Floor makeFloor()
@@ -52,6 +102,7 @@ public class Theme
 		result.initGesture();
 		return result;
 	}
+	
 	public Floor makeFloor(String name)
 	{	FloorFactory ff = floors.get(name);
 if(ff==null)
@@ -59,6 +110,15 @@ if(ff==null)
 		Floor result = ff.makeSprite();
 		result.initGesture();
 		return result;
+	}
+	
+	/////////////////////////////////////////////////////////////////
+	// BLOCKS				/////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	private HashMap<String,BlockFactory> blocks;
+
+	public void addBlockFactory(String name, BlockFactory blocFactory)
+	{	blocks.put(name,blocFactory);
 	}
 	
 	public Block makeBlock(String name)
@@ -71,6 +131,9 @@ if(bf==null)
 		return result;
 	}
 
+	/////////////////////////////////////////////////////////////////
+	// FINISHED				/////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
 	private boolean finished = false;
 	
 	public void finish()

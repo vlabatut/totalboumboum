@@ -24,6 +24,7 @@ package fr.free.totalboumboum.engine.content.sprite.block;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import javax.xml.parsers.ParserConfigurationException;
 
@@ -45,30 +46,29 @@ import fr.free.totalboumboum.tools.FileTools;
 
 public class BlockFactoryLoader extends SpriteFactoryLoader
 {	
-	public static BlockFactory loadBlockFactory(String folderPath) throws ParserConfigurationException, SAXException, IOException, ClassNotFoundException
+	public static BlockFactory loadBlockFactory(String folderPath, HashMap<String,BlockFactory> abstractBlocks) throws ParserConfigurationException, SAXException, IOException, ClassNotFoundException
 	{	// init
 		BlockFactory result = new BlockFactory();
 		Element root = SpriteFactoryLoader.openFile(folderPath);
 		String folder;
-		GesturePack gesturePack = new GesturePack();
-		result.setGesturePack(gesturePack);
 		
 		// GENERAL
-		loadGeneralElement(root,result);
+		loadGeneralElement(root,result,abstractBlocks);	
+		GesturePack gesturePack = result.getGesturePack();
+		ArrayList<AbstractAbility> abilities = result.getAbilities();
 		
 		// ABILITIES
 		folder = folderPath+File.separator+FileTools.FILE_ABILITIES;
-		ArrayList<AbstractAbility> abilities = new ArrayList<AbstractAbility>();
 		AbilityLoader.loadAbilityPack(folder,abilities);
-		result.setAbilities(abilities);
 		
 		// ANIMES
 		folder = folderPath+File.separator+FileTools.FILE_ANIMES;
 		AnimesLoader.loadAnimes(folder,gesturePack,BlockFactory.getAnimeReplacements());
 		
 		//EXPLOSION
-		Explosion explosion = loadExplosionElement(root);
-		result.setExplosion(explosion);
+		Explosion exp = loadExplosionElement(root);
+		if(exp!=null)
+			result.setExplosion(exp); 
 		
 		//MODULATIONS
 		folder = folderPath+File.separator+FileTools.FILE_MODULATIONS;

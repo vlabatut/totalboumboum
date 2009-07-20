@@ -104,6 +104,7 @@ public class FileTools
 	//
 	public static final String FOLDER_ABILITIES = "abilities";
 	public static final String FOLDER_AI = "ai";
+	public static final String FOLDER_BLOCKS = "blocks";
 	public static final String FOLDER_BOMBS = "bombs";
 	public static final String FOLDER_CHARACTERS = "characters";
 	public static final String FOLDER_CONFIGURATION = "configuration";
@@ -114,6 +115,7 @@ public class FileTools
 	public static final String FOLDER_EXPLOSIONS = "explosions";
 	public static final String FOLDER_FIRE = "fire";
 	public static final String FOLDER_FIRES = "fires";
+	public static final String FOLDER_FLOORS = "floors";
 	public static final String FOLDER_GAMES = "games";
 	public static final String FOLDER_GRAPHICS = "graphics";
 	public static final String FOLDER_HEROES = "heroes";
