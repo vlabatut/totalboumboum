@@ -16,7 +16,7 @@
 		<group name="hardwalls" folder="hardwalls">
 			<block name="regular" folder="regular"/>
 			
-			<block name="border" folder="border"/>
+			<block folder="border" name="border" />
 		</group>
 	</concrete-blocks>
 	

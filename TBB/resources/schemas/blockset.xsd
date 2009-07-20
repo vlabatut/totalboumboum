@@ -10,7 +10,7 @@
 	<xsd:simpleType name="tGroupName">
 		<xsd:restriction base="xsd:string">
 			<!-- anything but the string "defaulg" (or an uppercase/lowercase variant) -->
-			<xsd:pattern value="([^Dd][^Ee][^Ff][^Aa][^Uu][^Ll][^Tt]).*" />
+			<xsd:pattern value="([^Dd]|[Dd][^Ee]|[Dd][Ee][^Ff]|[Dd][Ee][Ff][^Aa]|[Dd][Ee][Ff][Aa][^Uu]|[Dd][Ee][Ff][Aa][Uu][^Ll]|[Dd][Ee][Ff][Aa][Uu][Ll][^Tt]|[^Dd][^Ee][^Ff][^Aa][^Uu][^Ll][^Tt]).*" />
 		</xsd:restriction>
 	</xsd:simpleType>
 
