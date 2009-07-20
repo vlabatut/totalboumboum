@@ -16,7 +16,18 @@
 		<group name="hardwalls" folder="hardwalls">
 			<block name="regular" folder="regular"/>
 			
-			<block name="border" folder="border"/>
+			<block name="inDown" folder="inDown"/>
+			<block name="inDownleft" folder="inDownleft"/>
+			<block name="inDownright" folder="inDownright"/>
+			<block name="inLeftA" folder="inLeftA"/>
+			<block name="inLeftB" folder="inLeftB"/>
+			<block name="inRightA" folder="inRightA"/>
+			<block name="inRightB" folder="inRightB"/>
+			<block name="inUp" folder="inUp"/>
+			<block name="inUpleft" folder="inUpleft"/>
+			<block name="inUpright" folder="inUpright"/>
+			<block name="outLeft" folder="outLeft"/>
+			<block name="outRight" folder="outRight"/>
 		</group>
 	</concrete-blocks>
 	
