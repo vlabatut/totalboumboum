@@ -2,7 +2,7 @@
 <modulations xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
 		xsi:noNamespaceSchemaLocation="../../../../../../../../schemas/modulations.xsd" >
 	
-	<gesture name="hiding" file="hiding.xml" />
-	<gesture name="spawning" file="spawning.xml" />
+	<gesture name="HIDING" file="hiding.xml" />
+	<gesture name="SPAWNING" file="spawning.xml" />
 
 </modulations>
