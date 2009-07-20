@@ -100,7 +100,7 @@ public class BlocksetLoader
     
     private static void loadBlockElement(Element root, String individualFolder, String groupName, Theme result, HashMap<String,BlockFactory> abstractBlocks, Type type) throws IOException, ParserConfigurationException, SAXException, ClassNotFoundException
     {	// name
-		String name = groupName+Theme.GROUP_SEPARATOR+root.getAttribute(XmlTools.ATT_NAME).getValue();
+		String name = root.getAttribute(XmlTools.ATT_NAME).getValue();
 		
 		// folder
     	String localFilePath = individualFolder;
@@ -110,7 +110,9 @@ public class BlocksetLoader
 		// components
 		BlockFactory blockFactory = BlockFactoryLoader.loadBlockFactory(localFilePath,abstractBlocks);
 		if(type==Type.CONCRETE)
-			result.addBlockFactory(name,blockFactory);
+		{	String fullname = groupName+Theme.GROUP_SEPARATOR+name;
+			result.addBlockFactory(fullname,blockFactory);		
+		}
 		else
 			abstractBlocks.put(name,blockFactory);
     }

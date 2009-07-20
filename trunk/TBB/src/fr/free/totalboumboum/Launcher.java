@@ -819,11 +819,10 @@ public class Launcher
 	 * - correction du bug d'animation/collision : push ne se déclenche pas
 	 * - correction du bug d'animation : quand le bonhomme va à droite et qu'on appuie sur gauche, y a une espèce de passage droite-gauche très rapide au niveau de l'animation, insuportable
 	 * - mise à niveau du gestionnaire de trajectoire
-	 * - simplification de la structure du moteur du jeu( Loop et Level accessibles de façon statique)
+	 * - simplification de la structure du moteur du jeu (Loop et Level accessibles de façon statique)
+	 * - optimisation de l'organisation des sprites dans les ressources : gain de place sur disque, gain de mémoire en cours de jeu et gain de temps lors du chargement
 	 *   
 	 * - bug d'affichage quand les flammes se croisent au cours de plusieurs explosions: la dernière n'est pas affichée
-	 * 
-	 * permissions >> modulations
 	 * 
 	 * - lors du calcul des points, il faut forcer la présence d'un classement: ça facilite énormément de traitements en aval
 	 *   au pire, si le classement est inutile (ex: simple total), on définit un classement-identité (pts utilisés pr le classement <=> pts marqués)
@@ -984,9 +983,7 @@ public class Launcher
 	 *  
 	 *  le sprite de base ne doit pas être donné dans le fichier sprite, mais dans le XxxxSet
 	 *  car il n'est utile que dans ce cas de figure et pas autrement.
-	 *  >> ben si, on l'utilise aussi lors de la preview, qui selon toute vraisemblance peut partir du sprite direc (et pas du set). non ?
+	 *  >> ben si, on l'utilise aussi lors de la preview, qui selon toute vraisemblance peut partir du sprite direct (et pas du set). non ?
 	 *  
-	 *  il faut vérifier que dans le loader de floors du theme, le folder de chaque floor est obligatoire (et non pas optionnel)
-	 *  dc pas la peine de faire de if null, il y a forcément un attribut)
 	 */
 }
