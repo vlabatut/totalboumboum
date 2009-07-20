@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <animes xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
-		xsi:noNamespaceSchemaLocation="../../../../../../../schemas/animes.xsd" 
-		scale="1" default="standing">
+		xsi:noNamespaceSchemaLocation="../../../../../../../../schemas/animes.xsd" 
+		scale="1" >
 		
 	<shadows>
 		<shadow name="standShadow" file="shadow.png" />
 	</shadows>
 	
 	<gestures>
-		<gesture name="burning" folder="burning">
-			<direction name="none">
+		<gesture name="BURNING" folder="burning">
+			<direction name="NONE">
 				<step duration="150" file="1.gif" />
 				<step duration="75" file="2.gif" />
 				<step duration="75" file="3.gif" />
@@ -19,14 +19,14 @@
 			</direction>
 		</gesture>
 		
-		<gesture name="hiding" >
-			<direction name="none">
+		<gesture name="HIDING" >
+			<direction name="NONE">
 				<step />
 			</direction>
 		</gesture>
 
-		<gesture name="spawning" folder="spawning">
-			<direction name="none">
+		<gesture name="SPAWNING" folder="spawning">
+			<direction name="NONE">
 				<step duration="100" file="1.gif" />
 				<step duration="100" file="2.gif" />
 				<step duration="100" file="3.gif" />
@@ -36,8 +36,8 @@
 			</direction>
 		</gesture>
 
-		<gesture name="standing" folder="standing" repeat="true" shadow="standShadow" shadowYShift="3">
-			<direction name="none">
+		<gesture name="STANDING" folder="standing" repeat="true" shadow="standShadow" shadowYShift="3">
+			<direction name="NONE">
 				<step duration="100" file="1.gif" />
 				<step duration="100" file="2.gif" />
 				<step duration="100" file="1.gif" />

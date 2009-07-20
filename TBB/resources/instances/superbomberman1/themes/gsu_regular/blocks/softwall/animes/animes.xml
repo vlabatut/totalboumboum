@@ -1,20 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
 <animes xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
-		xsi:noNamespaceSchemaLocation="../../../../../../schemas/animes.xsd" 
-		scale="1" default="standing">
+		xsi:noNamespaceSchemaLocation="../../../../../../../schemas/animes.xsd" 
+		scale="1" >
 		
 	<shadows>
 		<shadow name="standShadow" file="shadow.png" />
 	</shadows>
 	
 	<gestures>
-		<gesture name="standing" shadow="standShadow" shadowYShift="5">
-			<direction name="none">
+		<gesture name="STANDING" shadow="standShadow" shadowYShift="5">
+			<direction name="NONE">
 				<step file="standing.gif" />
 			</direction>
 		</gesture>
-		<gesture name="burning" folder="burning">
-			<direction name="none">
+		<gesture name="BURNING" folder="burning">
+			<direction name="NONE">
 				<step duration="150" file="1.gif" />
 				<step duration="75" file="2.gif" />
 				<step duration="75" file="3.gif" />
