@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <blockset 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
-		xsi:noNamespaceSchemaLocation="../../../../schemas/blockset.xsd" >
+		xsi:noNamespaceSchemaLocation="../../../../../schemas/blockset.xsd" >
 	<abstract-blocks >
 		<block name="common" folder="_common" />
 		<group name="hardwalls" folder="hardwalls">
