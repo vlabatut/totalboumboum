@@ -41,10 +41,12 @@ public class ExplosionLoader
 		String individualFolder = pathFolder;
 		String schemaFolder = FileTools.getSchemasPath();
 		File schemaFile,dataFile;
+		
 		// opening
 		dataFile = new File(individualFolder+File.separator+FileTools.FILE_EXPLOSION+FileTools.EXTENSION_XML);
 		schemaFile = new File(schemaFolder+File.separator+FileTools.FILE_EXPLOSION+FileTools.EXTENSION_SCHEMA);
 		Element root = XmlTools.getRootFromFile(dataFile,schemaFile);
+		
 		// loading
 		Explosion result = loadExplosionElement(root);
 		return result;
@@ -52,11 +54,13 @@ public class ExplosionLoader
 	
     private static Explosion loadExplosionElement(Element root) throws ParserConfigurationException, SAXException, IOException, ClassNotFoundException
     {	Explosion result = new Explosion();
+    	
     	// fire
     	Element elt = root.getChild(XmlTools.ELT_FIRESET);
     	String name = elt.getAttribute(XmlTools.ATT_NAME).getValue().trim();
 		Fireset fireset = GameVariables.level.getFiresetMap().getFireset(name);
-    	//
+    	
+		//
     	result.setFireset(fireset);
     	return result;
     }

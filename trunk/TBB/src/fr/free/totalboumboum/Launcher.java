@@ -912,20 +912,6 @@ public class Launcher
 	 * dans ces dernières, on se place relativement au sprite, qui est actor target ou third.
 	 * surement qqchose à faire de ce coté là
 	 * 
-	 * - il faut mutualiser tous les fichiers de description de sprites communs (style tous les blocs durs)
-	 * 	- chargement plus rapide
-	 * 	- moins d'occupation mémoire
-	 * 	- fichiers moins chiants à gérer (moins de répétitions)
-	 * - il faut mener une réflexion sur ce qu'il est vraiment nécessaire de cloner et ce qui peut être partagé, ce qui permettrait d'optimiser un peu plus l'utilisation de la mémoire
-	 * 		- les actions générales utilisées pour les abilities doivent être copiées, car elles sont définies en termes de SELF et doivent donc être adapté au sprite concerné (de toute façon, ça c'est du spécifique à un sprite. pas la peine de copier, en fait)
-	 * 
-	 * - l'adaptation des fichiers de description de sprite XML à la mutualisation de ability et autres est simple: il suffit de remettre les éléments qui indiquaient où se situaient ces descriptions.
-	 * faudrait tester si on peut utiliser des paths dans les includes XML sans perdre la portabilité.
-	 * ou plus simplement, utiliser des mots clés comme "general" "specific"
-	 * - l'autre aspect du problème est l'adaptation des classes, en particulier celles de chargement. les sprites susceptibles d'avoir des fichiers en commun doivent être chargés depuis la même classe.
-	 * donc il va falloir intervenir sur la classe située entre thème et sprite (pour blocs, bombes, items...)
-	 * pour les héros ça me semble inutile de se prendre la tête sur l'optimisation des animes, vu qu'elles ne sont chargées qu'une seule fois par joueur (à la différence des types de blocs, qui sont parfois nombreux)
-	 * 
 	 * il faut très certainement aussi mutualiser les firesets, puisque les flammes sont les mêmes pour tout le monde.
 	 * et aussi les explosions, pour les mêmes raisons.
 	 * 
@@ -940,8 +926,6 @@ public class Launcher
 	 * ça implique que les SpecificAction ne sont pas à spécialiser pour chaque role 
 	 * 
 	 * tester le système qui complète les animations automatiquement quand elles sont manquantes dans le fichier XML.
-	 * 
-	 * gérer les changements (passage aux types énum) dans l'enregistrement de données XML (profils)
 	 * 
 	 * il faudrait documenter le comportement par défaut du moteur, i.e. pour chaque type de sprite:
 	 * qu'est-ce qu'il peut faire comme action? quelles sont les transitions? qu'est-ce qui est interdit ?
@@ -980,10 +964,6 @@ public class Launcher
 	 *  a voir s'il n'est pas possible d'utiliser ça pour simplifier la gestion actuelle des collisions.
 	 *  rque: comme on teste les sprites sur des positions virtuelles, qu'ils n'occupent pas encore,
 	 *  il faudra construire les actions à tester manuellement (tous les paramètres de type contact, orientation, etc) dans le trajectoryManager
-	 *  
-	 *  le sprite de base ne doit pas être donné dans le fichier sprite, mais dans le XxxxSet
-	 *  car il n'est utile que dans ce cas de figure et pas autrement.
-	 *  >> ben si, on l'utilise aussi lors de la preview, qui selon toute vraisemblance peut partir du sprite direct (et pas du set). non ?
 	 *  
 	 */
 }

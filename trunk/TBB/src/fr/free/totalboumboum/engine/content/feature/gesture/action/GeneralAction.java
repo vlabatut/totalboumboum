@@ -86,7 +86,7 @@ public abstract class GeneralAction
 	{	return directions;
 	}
 	
-	public abstract void addDirection(Direction direction) throws IncompatibleParameterException;
+	public abstract void addDirection(Direction direction);
 
 	/////////////////////////////////////////////////////////////////
 	// CONTACTS			/////////////////////////////////////////////
@@ -98,7 +98,7 @@ public abstract class GeneralAction
 	{	return contacts;
 	}
 
-	public abstract void addContact(Contact contact) throws IncompatibleParameterException;
+	public abstract void addContact(Contact contact);
 
 	/////////////////////////////////////////////////////////////////
 	// ORIENTATIONS		/////////////////////////////////////////////
@@ -110,7 +110,7 @@ public abstract class GeneralAction
 	{	return orientations;
 	}
 	
-	public abstract void addOrientation(Orientation orientation) throws IncompatibleParameterException;
+	public abstract void addOrientation(Orientation orientation);
 
 	/////////////////////////////////////////////////////////////////
 	// TILE POSITIONS	/////////////////////////////////////////////
@@ -122,7 +122,7 @@ public abstract class GeneralAction
 	{	return tilePositions;
 	}
 	
-	public abstract void addTilePosition(TilePosition tilePosition) throws IncompatibleParameterException;
+	public abstract void addTilePosition(TilePosition tilePosition);
 
 	/////////////////////////////////////////////////////////////////
 	// ACTORS			/////////////////////////////////////////////
@@ -134,7 +134,7 @@ public abstract class GeneralAction
 	{	return actors;
 	}
 	
-	public abstract void addActor(Role actor) throws IncompatibleParameterException;
+	public abstract void addActor(Role actor);
 
 	/////////////////////////////////////////////////////////////////
 	// TARGETS			/////////////////////////////////////////////
@@ -146,7 +146,7 @@ public abstract class GeneralAction
 	{	return targets;
 	}
 	
-	public abstract void addTarget(Role target) throws IncompatibleParameterException;
+	public abstract void addTarget(Role target);
 
 	/////////////////////////////////////////////////////////////////
 	// FINISHED			/////////////////////////////////////////////

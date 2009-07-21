@@ -21,8 +21,6 @@ package fr.free.totalboumboum.configuration.profile;
  * 
  */
 
-import java.util.Locale;
-
 import org.jdom.Element;
 
 import fr.free.totalboumboum.tools.XmlTools;
@@ -45,7 +43,7 @@ public class ProfilesSelectionSaver
 		result.setAttribute(XmlTools.ATT_FILE,fileName);
 		
 		// color
-		String color = profilesSelection.getColor(index).toString().toLowerCase(Locale.ENGLISH);
+		String color = profilesSelection.getColor(index).toString();
 		result.setAttribute(XmlTools.ATT_COLOR,color);
 		
 		// controls

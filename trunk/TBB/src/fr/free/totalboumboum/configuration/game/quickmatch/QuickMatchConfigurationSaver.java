@@ -24,7 +24,6 @@ package fr.free.totalboumboum.configuration.game.quickmatch;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Locale;
 
 import javax.xml.parsers.ParserConfigurationException;
 
@@ -130,7 +129,7 @@ public class QuickMatchConfigurationSaver
 			String share = Boolean.toString(quickMatchConfiguration.getPointsShare());
 			pointsElement.setAttribute(XmlTools.ATT_SHARE,share);
 			// draw
-			String draw = quickMatchConfiguration.getPointsDraw().toString().toLowerCase(Locale.ENGLISH);
+			String draw = quickMatchConfiguration.getPointsDraw().toString();
 			pointsElement.setAttribute(XmlTools.ATT_DRAW,draw);
 			// values
 			ArrayList<Integer> values = quickMatchConfiguration.getPoints();

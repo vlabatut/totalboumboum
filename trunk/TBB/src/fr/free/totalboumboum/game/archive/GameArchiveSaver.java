@@ -25,7 +25,6 @@ import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.Locale;
 
 import javax.xml.parsers.ParserConfigurationException;
 
@@ -81,7 +80,7 @@ public class GameArchiveSaver
 
 		// type
 		TournamentType type = gameArchive.getType();
-		String typeStr = type.toString().toLowerCase(Locale.ENGLISH);
+		String typeStr = type.toString();
 		result.setAttribute(XmlTools.ATT_TYPE,typeStr);
 		
 		return result;

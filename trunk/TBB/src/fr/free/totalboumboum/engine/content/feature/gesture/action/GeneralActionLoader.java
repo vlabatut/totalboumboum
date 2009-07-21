@@ -41,45 +41,40 @@ public class GeneralActionLoader
 		ActionName name = ActionName.valueOf(strName);
 		GeneralAction result = name.createGeneralAction();
 		
-		try
-		{	// actors
-			{	ArrayList<Role> actors = Role.loadRolesAttribute(root,XmlTools.ATT_ACTOR);
-				for(Role actor: actors)
-					result.addTarget(actor);
-			}
-			
-			// targets
-			{	ArrayList<Role> targets = Role.loadRolesAttribute(root,XmlTools.ATT_TARGET);
-				for(Role target: targets)
-					result.addTarget(target);
-			}
-			
-			// directions
-			{	ArrayList<Direction> directions = Direction.loadDirectionsAttribute(root,XmlTools.ATT_DIRECTION);
-				for(Direction direction: directions)
-					result.addDirection(direction);
-			}
-			
-			// contacts
-			{	ArrayList<Contact> contacts = Contact.loadContactsAttribute(root,XmlTools.ATT_CONTACT);
-				for(Contact contact: contacts)
-					result.addContact(contact);
-			}
-			
-			// tilePositions
-			{	ArrayList<TilePosition> tilePositions = TilePosition.loadTilePositionsAttribute(root,XmlTools.ATT_TILE_POSITION);
-				for(TilePosition tilePosition: tilePositions)
-					result.addTilePosition(tilePosition);
-			}
-			
-			// orientations
-			{	ArrayList<Orientation> orientations = Orientation.loadOrientationsAttribute(root,XmlTools.ATT_ORIENTATION);
-				for(Orientation orientation: orientations)
-					result.addOrientation(orientation);
-			}
+		// actors
+		{	ArrayList<Role> actors = Role.loadRolesAttribute(root,XmlTools.ATT_ACTOR);
+			for(Role actor: actors)
+				result.addActor(actor);
 		}
-		catch (IncompatibleParameterException e)
-		{	e.printStackTrace();
+		
+		// targets
+		{	ArrayList<Role> targets = Role.loadRolesAttribute(root,XmlTools.ATT_TARGET);
+			for(Role target: targets)
+				result.addTarget(target);
+		}
+		
+		// directions
+		{	ArrayList<Direction> directions = Direction.loadDirectionsAttribute(root,XmlTools.ATT_DIRECTION);
+			for(Direction direction: directions)
+				result.addDirection(direction);
+		}
+		
+		// contacts
+		{	ArrayList<Contact> contacts = Contact.loadContactsAttribute(root,XmlTools.ATT_CONTACT);
+			for(Contact contact: contacts)
+				result.addContact(contact);
+		}
+		
+		// tilePositions
+		{	ArrayList<TilePosition> tilePositions = TilePosition.loadTilePositionsAttribute(root,XmlTools.ATT_TILE_POSITION);
+			for(TilePosition tilePosition: tilePositions)
+				result.addTilePosition(tilePosition);
+		}
+		
+		// orientations
+		{	ArrayList<Orientation> orientations = Orientation.loadOrientationsAttribute(root,XmlTools.ATT_ORIENTATION);
+			for(Orientation orientation: orientations)
+				result.addOrientation(orientation);
 		}
 		
 		// results

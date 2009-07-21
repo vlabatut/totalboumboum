@@ -23,7 +23,6 @@ package fr.free.totalboumboum.configuration.profile;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.Locale;
 
 import org.jdom.Element;
 
@@ -91,7 +90,7 @@ public class ProfileSaver
 		String packname = profile.getSpritePack();
 		result.setAttribute(XmlTools.ATT_PACKNAME,packname);
 		// colors
-		String defaultColor = profile.getDefaultSprite().getColor().toString().toLowerCase(Locale.ENGLISH);
+		String defaultColor = profile.getDefaultSprite().getColor().toString();
 		result.setAttribute(XmlTools.ATT_COLOR,defaultColor);
 		//
 		return result;

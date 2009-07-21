@@ -31,7 +31,6 @@ import fr.free.totalboumboum.engine.content.feature.Role;
 import fr.free.totalboumboum.engine.content.feature.TilePosition;
 import fr.free.totalboumboum.engine.content.feature.gesture.action.ActionName;
 import fr.free.totalboumboum.engine.content.feature.gesture.action.GeneralAction;
-import fr.free.totalboumboum.engine.content.feature.gesture.action.IncompatibleParameterException;
 
 /** 
  * action de pousser un autre objet (peut être un kick)
@@ -103,10 +102,8 @@ public class GeneralPush extends GeneralAction
     });
 	
 	@Override
-	public void addActor(Role actor) throws IncompatibleParameterException
-	{	if(!allowedActors.contains(actor))
-			throw new IncompatibleParameterException("actor",actor.toString());
-		else
+	public void addActor(Role actor)
+	{	if(allowedActors.contains(actor))
 		{	if(!getActors().contains(actor))
 				actors.add(actor);
 		}
@@ -127,10 +124,8 @@ public class GeneralPush extends GeneralAction
     });
 	
 	@Override
-	public void addTarget(Role target) throws IncompatibleParameterException
-	{	if(!allowedTargets.contains(target))
-			throw new IncompatibleParameterException("target",target.toString());
-		else
+	public void addTarget(Role target)
+	{	if(allowedTargets.contains(target))
 		{	if(!targets.contains(target))
 				targets.add(target);
 		}
@@ -153,10 +148,8 @@ public class GeneralPush extends GeneralAction
 	});
 
 	@Override
-	public void addDirection(Direction direction) throws IncompatibleParameterException
-	{	if(!allowedDirections.contains(direction))
-			throw new IncompatibleParameterException("direction",direction.toString());
-		else
+	public void addDirection(Direction direction)
+	{	if(allowedDirections.contains(direction))
 		{	if(!directions.contains(direction))
 				directions.add(direction);
 		}
@@ -173,10 +166,8 @@ public class GeneralPush extends GeneralAction
     });
 
 	@Override
-	public void addContact(Contact contact) throws IncompatibleParameterException
-	{	if(!allowedContacts.contains(contact))
-			throw new IncompatibleParameterException("contact",contact.toString());
-		else
+	public void addContact(Contact contact)
+	{	if(allowedContacts.contains(contact))
 		{	if(!contacts.contains(contact))
 				contacts.add(contact);
 		}
@@ -194,10 +185,8 @@ public class GeneralPush extends GeneralAction
     });
 	
 	@Override
-	public void addTilePosition(TilePosition tilePosition) throws IncompatibleParameterException
-	{	if(!allowedTilePositions.contains(tilePosition))
-			throw new IncompatibleParameterException("tilePosition",tilePosition.toString());
-		else
+	public void addTilePosition(TilePosition tilePosition)
+	{	if(allowedTilePositions.contains(tilePosition))
 		{	if(!getTilePositions().contains(tilePosition))
 				tilePositions.add(tilePosition);
 		}
@@ -216,10 +205,8 @@ public class GeneralPush extends GeneralAction
     });
 
 	@Override
-	public void addOrientation(Orientation orientation) throws IncompatibleParameterException
-	{	if(!allowedOrientations.contains(orientation))
-			throw new IncompatibleParameterException("orientation",orientation.toString());
-		else
+	public void addOrientation(Orientation orientation)
+	{	if(allowedOrientations.contains(orientation))
 		{	if(!orientations.contains(orientation))
 				orientations.add(orientation);
 		}
