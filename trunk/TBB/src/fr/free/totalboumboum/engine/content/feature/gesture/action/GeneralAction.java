@@ -89,40 +89,51 @@ public abstract class GeneralAction
 	public abstract void addDirection(Direction direction);
 
 	/////////////////////////////////////////////////////////////////
-	// CONTACTS			/////////////////////////////////////////////
+	// CIRCUMSTANCES	/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	/** contacts between the actor and the target */
-	protected final ArrayList<Contact> contacts = new ArrayList<Contact>();
+	protected final Circumstance circumstance = new Circumstance();
 
 	protected ArrayList<Contact> getContacts()
-	{	return contacts;
+	{	return circumstance.getContacts();
 	}
 
 	public abstract void addContact(Contact contact);
+	
+	public boolean containsContact(Contact contact)
+	{	return circumstance.containsContact(contact);
+	}
 
-	/////////////////////////////////////////////////////////////////
-	// ORIENTATIONS		/////////////////////////////////////////////
-	/////////////////////////////////////////////////////////////////
-	/** compared directions of the target and the action */
-	protected final ArrayList<Orientation> orientations = new ArrayList<Orientation>();
+	public boolean containsAllContacts(ArrayList<Contact> contacts)
+	{	return circumstance.containsAllContacts(contacts);
+	}
 
 	protected ArrayList<Orientation> getOrientations()
-	{	return orientations;
+	{	return circumstance.getOrientations();
 	}
 	
 	public abstract void addOrientation(Orientation orientation);
-
-	/////////////////////////////////////////////////////////////////
-	// TILE POSITIONS	/////////////////////////////////////////////
-	/////////////////////////////////////////////////////////////////
-	/** positions of the target in termes of tiles */
-	protected final ArrayList<TilePosition> tilePositions =  new ArrayList<TilePosition>();
 	
+	public boolean containsOrientation(Orientation orientation)
+	{	return circumstance.containsOrientation(orientation);
+	}
+
+	public boolean containsAllOrientations(ArrayList<Orientation> orientations)
+	{	return circumstance.containsAllOrientations(orientations);
+	}
+
 	protected ArrayList<TilePosition> getTilePositions()
-	{	return tilePositions;
+	{	return circumstance.getTilePositions();
 	}
 	
 	public abstract void addTilePosition(TilePosition tilePosition);
+	
+	public boolean containsTilePosition(TilePosition tilePosition)
+	{	return circumstance.containsTilePosition(tilePosition);
+	}
+
+	public boolean containsAllTilePositions(ArrayList<TilePosition> tilePositions)
+	{	return circumstance.containsAllTilePositions(tilePositions);
+	}
 
 	/////////////////////////////////////////////////////////////////
 	// ACTORS			/////////////////////////////////////////////
@@ -157,11 +168,9 @@ public abstract class GeneralAction
 	{	if(!finished)
 		{	finished = true;
 			actors.clear();
-			contacts.clear();
 			directions.clear();
-			orientations.clear();
 			targets.clear();
-			tilePositions.clear();
+			circumstance.finish();
 		}
 	}
 
@@ -195,13 +204,13 @@ public abstract class GeneralAction
 			result = directions.contains(action.getDirection());
 		// contact
 		if(result)
-			result = contacts.contains(action.getContact());
+			result = containsContact(action.getContact());
 		// orientation
 		if(result)
-			result = orientations.contains(action.getOrientation());
+			result = containsOrientation(action.getOrientation());
 		// tile position
 		if(result)
-			result = tilePositions.contains(action.getTilePosition());
+			result = containsTilePosition(action.getTilePosition());
 		
 		return result;
 	}
@@ -222,13 +231,13 @@ public abstract class GeneralAction
 			result = directions.containsAll(action.getDirections());
 		// contact
 		if(result)
-			result = contacts.containsAll(action.getContacts());
+			result = containsAllContacts(action.getContacts());
 		// orientation
 		if(result)
-			result = orientations.containsAll(action.getOrientations());
+			result = containsAllOrientations(action.getOrientations());
 		// tile position
 		if(result)
-			result = tilePositions.containsAll(action.getTilePositions());
+			result = containsAllTilePositions(action.getTilePositions());
 		
 		return result;
 	}	
@@ -258,19 +267,19 @@ public abstract class GeneralAction
 		}
 		// contacts
 		{	result = result+" [ ";
-			for(Contact c: contacts)
+			for(Contact c: getContacts())
 				result = result + c.toString() + " "; 
 			result = result+"] ";
 		}
 		// orientations
 		{	result = result+" [ ";
-			for(Orientation o: orientations)
+			for(Orientation o: getOrientations())
 				result = result + o.toString() + " "; 
 			result = result+"] ";
 		}
 		// tile
 		{	result = result+" [ ";
-			for(TilePosition t: tilePositions)
+			for(TilePosition t: getTilePositions())
 				result = result + t.toString() + " "; 
 			result = result+"] ";
 		}

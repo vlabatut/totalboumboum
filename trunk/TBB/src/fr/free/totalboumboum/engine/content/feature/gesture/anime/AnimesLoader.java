@@ -52,7 +52,7 @@ import fr.free.totalboumboum.tools.XmlTools;
 public class AnimesLoader
 {	
 	public static void loadAnimes(String folderPath, GesturePack pack, HashMap<GestureName,GestureName> animesReplacements) throws IOException, ParserConfigurationException, SAXException
-	{	loadAnimes(folderPath,pack,null);
+	{	loadAnimes(folderPath,pack,null,animesReplacements);
 	}
 	
 	public static void loadAnimes(String folderPath, GesturePack pack, PredefinedColor color, HashMap<GestureName,GestureName> animesReplacements) throws IOException, ParserConfigurationException, SAXException

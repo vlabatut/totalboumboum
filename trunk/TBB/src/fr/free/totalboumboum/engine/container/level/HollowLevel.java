@@ -201,7 +201,7 @@ public class HollowLevel implements Serializable
 		// bombset
 		bombsetPath = instancePath + File.separator+FileTools.FOLDER_BOMBS;
 
-		// itemset
+		// fireset
 		firePath = instancePath + File.separator+FileTools.FOLDER_FIRES;
 
 		// itemset
@@ -400,6 +400,7 @@ public class HollowLevel implements Serializable
     	result.themePath = themePath;
     	result.itemPath = itemPath;
     	result.bombsetPath = bombsetPath;
+    	result.firePath = firePath;
     	result.players = players;
       	result.instanceName = instanceName;
     	result.themeName = themeName;

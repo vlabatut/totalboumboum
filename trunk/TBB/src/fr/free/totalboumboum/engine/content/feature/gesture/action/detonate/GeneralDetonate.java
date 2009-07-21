@@ -164,8 +164,8 @@ public class GeneralDetonate extends GeneralAction
 	@Override
 	public void addContact(Contact contact)
 	{	if(allowedContacts.contains(contact))
-		{	if(!contacts.contains(contact))
-				contacts.add(contact);
+		{	if(!containsContact(contact))
+				addContact(contact);
 		}
 	}
 
@@ -183,8 +183,8 @@ public class GeneralDetonate extends GeneralAction
 	@Override
 	public void addTilePosition(TilePosition tilePosition)
 	{	if(allowedTilePositions.contains(tilePosition))
-		{	if(!getTilePositions().contains(tilePosition))
-				tilePositions.add(tilePosition);
+		{	if(!containsTilePosition(tilePosition))
+				addTilePosition(tilePosition);
 		}
 	}
 
@@ -202,8 +202,8 @@ public class GeneralDetonate extends GeneralAction
 	@Override
 	public void addOrientation(Orientation orientation)
 	{	if(allowedOrientations.contains(orientation))
-		{	if(!orientations.contains(orientation))
-				orientations.add(orientation);
+		{	if(!containsOrientation(orientation))
+				addOrientation(orientation);
 		}
 	}
 
