@@ -201,18 +201,19 @@ public class ModulationsLoader
 			result = new TargetModulation(action);
 		else //if(type.equals(ModType.THIRD))
 		{	result = new ThirdModulation(action);
+			Element thirdParamElt = root.getChild(XmlTools.ELT_THIRD_PARAMETERS);
 			// contacts
-			ArrayList<Contact> actorContacts = Contact.loadContactsAttribute(root,XmlTools.ATT_ACTOR_CONTACT);
+			ArrayList<Contact> actorContacts = Contact.loadContactsAttribute(thirdParamElt,XmlTools.ATT_ACTOR_CONTACT);
 			for(Contact actorContact: actorContacts)
 				((ThirdModulation)result).addActorContact(actorContact);
-			ArrayList<Contact> targetContacts = Contact.loadContactsAttribute(root,XmlTools.ATT_TARGET_CONTACT);
+			ArrayList<Contact> targetContacts = Contact.loadContactsAttribute(thirdParamElt,XmlTools.ATT_TARGET_CONTACT);
 			for(Contact targetContact: targetContacts)
 				((ThirdModulation)result).addTargetContact(targetContact);
 			// tilePositions
-			ArrayList<TilePosition> actorTilePositions = TilePosition.loadTilePositionsAttribute(root,XmlTools.ATT_ACTOR_TILE_POSITION);
+			ArrayList<TilePosition> actorTilePositions = TilePosition.loadTilePositionsAttribute(thirdParamElt,XmlTools.ATT_ACTOR_TILE_POSITION);
 			for(TilePosition actorTilePosition: actorTilePositions)
 				((ThirdModulation)result).addActorTilePosition(actorTilePosition);
-			ArrayList<TilePosition> targetTilePositions = TilePosition.loadTilePositionsAttribute(root,XmlTools.ATT_TARGET_TILE_POSITION);
+			ArrayList<TilePosition> targetTilePositions = TilePosition.loadTilePositionsAttribute(thirdParamElt,XmlTools.ATT_TARGET_TILE_POSITION);
 			for(TilePosition targetTilePosition: targetTilePositions)
 				((ThirdModulation)result).addTargetTilePosition(targetTilePosition);
 		}

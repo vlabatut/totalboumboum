@@ -18,17 +18,19 @@
 <!--  	APPEAR --> 
 		<modulation frame="false" strength="0" >
 			<action name="APPEAR" direction="ANY" contact="ANY"
-				tilePosition="SAME" orientation="ANY" actor="ANY" />
+				tilePosition="ANY" orientation="ANY" actor="ANY" />
 			<actor-restrictions>
 				<ability><name value="SPRITE_TRAVERSE_BOMB" /></ability>
 			</actor-restrictions>
 			<target-restrictions />
+			<third-parameters actor-tile-position="SAME" target-tile-position="SAME" />
 		</modulation>
 		<modulation frame="true" strength="0" >
 			<action name="APPEAR" direction="ANY" contact="ANY"
-				tilePosition="SAME" orientation="ANY" actor="ANY" />
+				tilePosition="ANY" orientation="ANY" actor="ANY" />
 			<actor-restrictions />
 			<target-restrictions />
+			<third-parameters actor-tile-position="SAME" target-tile-position="SAME" />
 		</modulation>
 <!--  	MOVELOW --> 
 		<!-- ability to go through bombs -> not an obstacle -->

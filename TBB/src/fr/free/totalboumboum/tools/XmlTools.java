@@ -200,6 +200,7 @@ public class XmlTools
 	public static final String ELT_TEXT = "text";
 	public static final String ELT_THEME = "theme";
 	public static final String ELT_THIRD_MODULATIONS = "third-modulations";
+	public static final String ELT_THIRD_PARAMETERS = "third-parameters";
 	public static final String ELT_THIRD_RESTRICTIONS = "third-restrictions";
 	public static final String ELT_THRESHOLD = "threshold";
 	public static final String ELT_THRESHOLDS = "thresholds";
