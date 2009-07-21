@@ -92,11 +92,11 @@ public class HeroFactoryLoader extends SpriteFactoryLoader
 		folder = folderPath + File.separator+FileTools.FOLDER_ABILITIES;
 		AbilityLoader.loadAbilityPack(folder,abilities);
 
-		//EXPLOSION
+		// EXPLOSION
 		Explosion explosion = loadExplosionElement(root);
 		result.setExplosion(explosion);
 		
-		//MODULATIONS
+		// MODULATIONS
 		folder = folderPath+File.separator+FileTools.FILE_MODULATIONS;
 		ModulationsLoader.loadModulations(folder,gesturePack);
 		

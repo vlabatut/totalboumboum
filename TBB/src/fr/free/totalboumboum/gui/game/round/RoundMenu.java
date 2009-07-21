@@ -205,7 +205,7 @@ buttonStatistics.setEnabled(false);
 			Font font = GuiConfiguration.getMiscConfiguration().getFont().deriveFont((float)fontSize);
 			loadProgressBar.setFont(font);
 			loadProgressBar.setStringPainted(true); 
-			String text = GuiConfiguration.getMiscConfiguration().getLanguage().getText(GuiKeys.GAME_ROUND_PROGRESSBAR_BOMBSET);
+			String text = GuiConfiguration.getMiscConfiguration().getLanguage().getText(GuiKeys.GAME_ROUND_PROGRESSBAR_FIRESETMAP);
 			loadProgressBar.setString(text);
 			int width = Integer.MAX_VALUE;
 			int height = getHeight();
@@ -281,7 +281,7 @@ buttonStatistics.setEnabled(false);
 		switch(val)
 		{	// firesetmap
 			case 0:
-				text = GuiConfiguration.getMiscConfiguration().getLanguage().getText(GuiKeys.GAME_ROUND_PROGRESSBAR_FIRESETMAP);
+				text = GuiConfiguration.getMiscConfiguration().getLanguage().getText(GuiKeys.GAME_ROUND_PROGRESSBAR_BOMBSET);
 				loadProgressBar.setString(text);
 				loadProgressBar.repaint();
 				break;
