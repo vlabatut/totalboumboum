@@ -5,7 +5,7 @@
 		<levels randomOrder="true" />
 		<players randomLocation="true" />
 		<limits points="0" rounds="6" time="0" />
-		<points share="true" draw="none">
+		<points share="true" draw="NONE">
 			<value rank="1" points="8" />
 			<value rank="2" points="4" />
 			<value rank="3" points="2" />
@@ -20,7 +20,12 @@
 		<player file="60" color="ORANGE" controls="0" spritePack="superbomberman5" spriteFolder="shirobon" />
 	</players>
 	<levels>
-		<level pack="sbm1Custom" folder="test3" />
+		<level pack="gsuTournament" folder="carrefour" />
+		<level pack="gsuTournament" folder="classic" />
+		<level pack="gsuTournament" folder="items" />
+		<level pack="gsuTournament" folder="line" />
+		<level pack="gsuTournament" folder="pasaj" />
+		<level pack="gsuTournament" folder="power" />
 	</levels>
 </gameQuickmatch>
 

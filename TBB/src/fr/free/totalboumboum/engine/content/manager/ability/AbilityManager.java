@@ -29,7 +29,6 @@ import fr.free.totalboumboum.engine.content.feature.ability.AbstractAbility;
 import fr.free.totalboumboum.engine.content.feature.ability.ActionAbility;
 import fr.free.totalboumboum.engine.content.feature.ability.StateAbility;
 import fr.free.totalboumboum.engine.content.feature.gesture.action.GeneralAction;
-import fr.free.totalboumboum.engine.content.feature.gesture.action.IncompatibleParameterException;
 import fr.free.totalboumboum.engine.content.feature.gesture.action.SpecificAction;
 import fr.free.totalboumboum.engine.content.sprite.Sprite;
 
@@ -59,13 +58,13 @@ public class AbilityManager
 	/** abilities provided before the begining of the round (?) */
 	private final ArrayList<AbstractAbility> directAbilities = new ArrayList<AbstractAbility>();
 	
-	public void addDirectAbilities(ArrayList<AbstractAbility> abilities) throws IncompatibleParameterException
+	public void addDirectAbilities(ArrayList<AbstractAbility> abilities)
 	{	Iterator<AbstractAbility> i = abilities.iterator();
 		while(i.hasNext())
 			addDirectAbility(i.next());
 	}
 	
-	public void addDirectAbility(AbstractAbility ability) throws IncompatibleParameterException
+	public void addDirectAbility(AbstractAbility ability)
 	{	AbstractAbility copy = ability.copy();
 		if(copy instanceof ActionAbility)
 		{	ActionAbility ab = (ActionAbility)copy;

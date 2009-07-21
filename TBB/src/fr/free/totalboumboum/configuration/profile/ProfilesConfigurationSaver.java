@@ -40,6 +40,7 @@ public class ProfilesConfigurationSaver
 	public static void saveProfilesConfiguration(ProfilesConfiguration profilesConfiguration) throws ParserConfigurationException, SAXException, IOException
 	{	// build document
 		Element root = saveProfilesElement(profilesConfiguration);	
+		
 		// save file
 		String engineFile = FileTools.getConfigurationPath()+File.separator+FileTools.FILE_PROFILES+FileTools.EXTENSION_XML;
 		File dataFile = new File(engineFile);

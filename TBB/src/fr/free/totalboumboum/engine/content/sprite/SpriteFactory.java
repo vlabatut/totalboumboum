@@ -28,7 +28,6 @@ import fr.free.totalboumboum.engine.container.bombset.Bombset;
 import fr.free.totalboumboum.engine.content.feature.ability.AbstractAbility;
 import fr.free.totalboumboum.engine.content.feature.explosion.Explosion;
 import fr.free.totalboumboum.engine.content.feature.gesture.GesturePack;
-import fr.free.totalboumboum.engine.content.feature.gesture.action.IncompatibleParameterException;
 import fr.free.totalboumboum.engine.content.manager.ability.AbilityManager;
 import fr.free.totalboumboum.engine.content.manager.anime.AnimeManager;
 import fr.free.totalboumboum.engine.content.manager.bombset.BombsetManager;
@@ -82,12 +81,7 @@ public abstract class SpriteFactory<T extends Sprite>
 		
 		// ability
 		AbilityManager abilityManager = new AbilityManager(sprite);
-		try
-		{	abilityManager.addDirectAbilities(abilities);
-		}
-		catch (IncompatibleParameterException e)
-		{	e.printStackTrace();
-		}
+		abilityManager.addDirectAbilities(abilities);
 		sprite.setAbilityManager(abilityManager);
 		
 		// delay

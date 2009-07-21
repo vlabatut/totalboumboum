@@ -295,18 +295,13 @@ public abstract class SpecificAction
 		
 	private void initGeneralAction()
 	{	generalAction = getName().createGeneralAction();
-		try
-		{	generalAction.addActor(getActor().getRole());
-			generalAction.addDirection(getDirection());
-			generalAction.addContact(getContact());
-			generalAction.addOrientation(getOrientation());
-			generalAction.addTilePosition(getTilePosition());
-			if(getTarget()!=null)
-				generalAction.addTarget(getTarget().getRole());
-		}
-		catch (IncompatibleParameterException e)
-		{	e.printStackTrace();
-		}
+		generalAction.addActor(getActor().getRole());
+		generalAction.addDirection(getDirection());
+		generalAction.addContact(getContact());
+		generalAction.addOrientation(getOrientation());
+		generalAction.addTilePosition(getTilePosition());
+		if(getTarget()!=null)
+			generalAction.addTarget(getTarget().getRole());
 	}
 	
 	/////////////////////////////////////////////////////////////////

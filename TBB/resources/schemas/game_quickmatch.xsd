@@ -40,10 +40,10 @@
 
 	<xsd:simpleType name="tSettingsDraw">
 		<xsd:restriction base="xsd:string">
-			<xsd:enumeration value="none" />
-			<xsd:enumeration value="both" />
-			<xsd:enumeration value="time" />
-			<xsd:enumeration value="autokill" />
+			<xsd:enumeration value="NONE" />
+			<xsd:enumeration value="BOTH" />
+			<xsd:enumeration value="TIME" />
+			<xsd:enumeration value="AUTOKILL" />
 		</xsd:restriction>
 	</xsd:simpleType>
 

@@ -70,7 +70,7 @@ public class ItemsetPreviewLoader
     		loadItemsElement(abstractItemsElt,folder,result,abstractItems,Type.ABSTRACT);
     	
     	// concrete items
-    	Element concreteItemsElt = root.getChild(XmlTools.ELT_CONCRETE_BOMBS);
+    	Element concreteItemsElt = root.getChild(XmlTools.ELT_CONCRETE_ITEMS);
 		loadItemsElement(concreteItemsElt,folder,result,abstractItems,Type.CONCRETE);
 		
 		return result;

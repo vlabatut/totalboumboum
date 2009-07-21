@@ -379,10 +379,21 @@ public class XmlTools
 		}
 	}
 	
-	public static Element getRootFromFile(File dataFile, File schemaFile) throws ParserConfigurationException, SAXException, IOException
+	public static Element getRootFromFile(File dataFile, File schemaFile) throws SAXException, IOException
 	{	// JAXP
 		DocumentBuilder bldr = documentBuilders.get(schemaFile.getName());
-		org.w3c.dom.Document doc = bldr.parse(dataFile);
+		org.w3c.dom.Document doc;
+		try
+		{	doc = bldr.parse(dataFile);
+		}
+		catch (SAXException e)
+		{	System.out.println(dataFile+" : "+schemaFile);
+			throw e;
+		}
+		catch (IOException e)
+		{	System.out.println(dataFile+" : "+schemaFile);
+			throw e;
+		}
 		// JDOM
 		DOMBuilder builder = new DOMBuilder();
         Document document = builder.build(doc);

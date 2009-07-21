@@ -75,9 +75,11 @@ public class SpritePreviewLoader
 	{	// init
 		Element elt = root.getChild(XmlTools.ELT_GENERAL);
 		String baseStr = elt.getAttributeValue(XmlTools.ATT_BASE);
-		SpritePreview result = abstractPreviews.get(baseStr).copy();
+		SpritePreview result = abstractPreviews.get(baseStr);
 		if(result==null)
 			result = new SpritePreview();
+		else
+			result = result.copy();
 		
 		// load
 		if(loadName)

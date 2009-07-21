@@ -51,20 +51,22 @@ public enum Role
 	public static ArrayList<Role> loadRolesAttribute(Element root, String attName)
 	{	ArrayList<Role> result = new ArrayList<Role>();
 		Attribute attribute = root.getAttribute(attName);
-		String roleStr = attribute.getValue().trim().toUpperCase(Locale.ENGLISH);
-		String[] rolesStr = roleStr.split(" ");
-		for(String str: rolesStr)
-		{	if(str.equalsIgnoreCase(XmlTools.VAL_ANY))
-			{	result.add(Role.BLOCK);
-				result.add(Role.BOMB);
-				result.add(Role.FIRE);
-				result.add(Role.FLOOR);
-				result.add(Role.HERO);
-				result.add(Role.ITEM);
-			}
-			else
-			{	Role role = Role.valueOf(str);
-				result.add(role);
+		if(attribute!=null)
+		{	String roleStr = attribute.getValue().trim().toUpperCase(Locale.ENGLISH);
+			String[] rolesStr = roleStr.split(" ");
+			for(String str: rolesStr)
+			{	if(str.equalsIgnoreCase(XmlTools.VAL_ANY))
+				{	result.add(Role.BLOCK);
+					result.add(Role.BOMB);
+					result.add(Role.FIRE);
+					result.add(Role.FLOOR);
+					result.add(Role.HERO);
+					result.add(Role.ITEM);
+				}
+				else
+				{	Role role = Role.valueOf(str);
+					result.add(role);
+				}
 			}
 		}
 		return result;

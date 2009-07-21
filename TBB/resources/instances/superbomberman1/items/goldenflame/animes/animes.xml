@@ -7,8 +7,7 @@
 
 		<gesture name="STANDING" repeat="true" folder="standing">
 			<direction name="NONE">
-				<step duration="50" file="red.gif" />
-				<step duration="50" file="blue.gif" />
+				<step file="standing.gif" />
 			</direction>
 		</gesture>
 		

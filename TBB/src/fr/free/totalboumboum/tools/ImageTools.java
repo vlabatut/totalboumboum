@@ -108,7 +108,14 @@ public class ImageTools
     */
 	
     public static BufferedImage loadImage(String path, Colormap colormap) throws IOException
-    {	BufferedImage image = ImageIO.read(new File(path));
+    {	BufferedImage image;
+		try
+		{	image = ImageIO.read(new File(path));
+		}
+		catch (IOException e)
+		{	System.out.println(path);
+			throw e;
+		}
     	if(colormap!=null)
     	{	image = getColoredImage(image,colormap);    	
     	}
