@@ -32,7 +32,7 @@ public class Circumstance
 	/////////////////////////////////////////////////////////////////
 	// ORIENTATION		/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	private ArrayList<Orientation> orientations;
+	private final ArrayList<Orientation> orientations = new ArrayList<Orientation>();
 
 	public Orientation getOrientation()
 	{	Orientation result = null;
@@ -65,7 +65,7 @@ public class Circumstance
 	/////////////////////////////////////////////////////////////////
 	// TILE POSITION	/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	private ArrayList<TilePosition> tilePositions;
+	private final ArrayList<TilePosition> tilePositions = new ArrayList<TilePosition>();
 
 	public TilePosition getTilePosition()
 	{	TilePosition result = null;
@@ -98,7 +98,7 @@ public class Circumstance
 	/////////////////////////////////////////////////////////////////
 	// CONTACT			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	private ArrayList<Contact> contacts;
+	private final ArrayList<Contact> contacts = new ArrayList<Contact>();
 
 	public Contact getContact()
 	{	Contact result = null;

@@ -118,11 +118,11 @@
 
 	<xsd:complexType name="tGestureModulations">
 		<xsd:sequence>
-			<xsd:element name="self-modulations" type="tSelfModulations" minOccurs="0" />
-			<xsd:element name="other-modulations" type="tOtherModulations" minOccurs="0" />
-			<xsd:element name="actor-modulations" type="tActorModulations" minOccurs="0" />
-			<xsd:element name="target-modulations" type="tTargetModulations" minOccurs="0" />
-			<xsd:element name="third-modulations" type="tThirdModulations" minOccurs="0" />
+			<xsd:element name="self-modulations" type="tSelfModulations" />
+			<xsd:element name="other-modulations" type="tOtherModulations" />
+			<xsd:element name="actor-modulations" type="tActorModulations" />
+			<xsd:element name="target-modulations" type="tTargetModulations" />
+			<xsd:element name="third-modulations" type="tThirdModulations" />
 		</xsd:sequence>
 	</xsd:complexType>
 

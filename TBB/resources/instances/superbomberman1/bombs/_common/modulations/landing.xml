@@ -5,6 +5,9 @@
 	<self-modulations>
 	</self-modulations>
 	
+	<other-modulations>
+	</other-modulations>
+	
 	<actor-modulations>
 <!--  	DETONATE -->
 		<modulation frame="true" strength="0" >
