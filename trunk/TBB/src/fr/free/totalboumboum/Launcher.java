@@ -869,6 +869,12 @@ public class Launcher
 	 * 		- cliquer sur le bouton d'action fait réagir quelque chose dans la ligne du joueur correspondant
 	 * 		- permet de vérifier qu'on a pris les bonnes commandes (celles qu'on pensait avoir prises)
 	 * 
+	 * - il faudrait séparer les joueurs IA et les joueurs humain dans leur gestion.
+	 * ca permettrait de sélectionner directement l'IA, au lieu du joueur, et donc de ne pas avoir à créer plusieurs
+	 * joueurs avec la même IA quand on veut jouer contre plusieurs versions de la même IA.
+	 * voire limiter le nombre de joueurs pour une IA à 1 seul, mais sélectionnable plusieurs fois ?
+	 * à voir...
+	 * 
 	 * -------------------------------------------------------------------
 	 * - calcul de points : introduire des variables comme le nombre de joueurs (pour définir un bonus pr le joueur qui fait un perfect en survival)
 	 * - gérer le shrink

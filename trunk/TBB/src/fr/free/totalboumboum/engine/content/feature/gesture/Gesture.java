@@ -29,6 +29,7 @@ import java.util.Map.Entry;
 import fr.free.totalboumboum.engine.content.feature.Direction;
 import fr.free.totalboumboum.engine.content.feature.gesture.action.SpecificAction;
 import fr.free.totalboumboum.engine.content.feature.gesture.anime.AnimeDirection;
+import fr.free.totalboumboum.engine.content.feature.gesture.anime.AnimeStep;
 import fr.free.totalboumboum.engine.content.feature.gesture.modulation.AbstractModulation;
 import fr.free.totalboumboum.engine.content.feature.gesture.modulation.ActorModulation;
 import fr.free.totalboumboum.engine.content.feature.gesture.modulation.OtherModulation;
@@ -64,6 +65,14 @@ public class Gesture
 	
 	public AnimeDirection getAnimeDirection(Direction direction)
 	{	AnimeDirection result = animes.get(direction);
+		if(result==null)
+		{	result = new AnimeDirection();
+			result.setDirection(direction);
+			result.setGestureName(name);
+			AnimeStep as = new AnimeStep();
+			result.add(as);
+			animes.put(direction,result);
+		}
 		return result;
 	}
 	
@@ -90,6 +99,12 @@ public class Gesture
 
 	public TrajectoryDirection getTrajectoryDirection(Direction direction)
 	{	TrajectoryDirection result = trajectories.get(direction);
+		if(result==null)
+		{	result = new TrajectoryDirection();
+			result.setDirection(direction);
+			result.setGestureName(name);
+			trajectories.put(direction,result);
+		}
 		return result;
 	}
 	

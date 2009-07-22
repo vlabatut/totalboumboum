@@ -45,6 +45,7 @@ public class FileTools
 	public static final String FILE_ANIMES = "animes";
 	public static final String FILE_ARCHIVE = "archive";
 	public static final String FILE_BLOCK = "block";
+	public static final String FILE_BLOCKSET = "blockset";
 	public static final String FILE_BOMB = "bomb";
 	public static final String FILE_BOMBSET = "bombset";
 	public static final String FILE_BOMBSETS = "bombsets";
@@ -60,6 +61,7 @@ public class FileTools
 	public static final String FILE_FIRESETMAP = "firesetmap";
 	public static final String FILE_FIRESETS = "firesets";
 	public static final String FILE_FLOOR = "floor";
+	public static final String FILE_FLOORSET = "floorset";
 	public static final String FILE_GAME = "game";
 	public static final String FILE_GAME_QUICKMATCH = "game_quickmatch";
 	public static final String FILE_GAME_QUICKSTART = "game_quickstart";
