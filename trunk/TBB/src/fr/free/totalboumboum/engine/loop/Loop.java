@@ -82,6 +82,8 @@ public class Loop implements Runnable, Serializable
 		// load level
 		HollowLevel hollowLevel = round.getHollowLevel();
 		hollowLevel.initLevel(this);
+		level = hollowLevel.getLevel();
+		GameVariables.setLoop(this);
 		hollowLevel.loadFiresetMap();
 		loadStepOver();
 		hollowLevel.loadBombsets();
@@ -91,8 +93,6 @@ public class Loop implements Runnable, Serializable
 		loadStepOver();
 		hollowLevel.loadTheme();
 		loadStepOver();
-		level = hollowLevel.getLevel();
-		GameVariables.setLoop(this);
 
 		// load players : common stuff
 		String baseFolder = GameVariables.instancePath+File.separator+FileTools.FOLDER_HEROES;
