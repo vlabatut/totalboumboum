@@ -21,10 +21,10 @@ package fr.free.totalboumboum.engine.content.feature.gesture.modulation;
  * 
  */
 
-import java.util.ArrayList;
-
 import fr.free.totalboumboum.engine.content.feature.Contact;
+import fr.free.totalboumboum.engine.content.feature.Orientation;
 import fr.free.totalboumboum.engine.content.feature.TilePosition;
+import fr.free.totalboumboum.engine.content.feature.gesture.Circumstance;
 import fr.free.totalboumboum.engine.content.feature.gesture.action.GeneralAction;
 import fr.free.totalboumboum.engine.content.feature.gesture.action.SpecificAction;
 import fr.free.totalboumboum.engine.content.sprite.Sprite;
@@ -40,43 +40,47 @@ public class ThirdModulation extends AbstractActionModulation
 	}
 	
 	/////////////////////////////////////////////////////////////////
-	// CONTACTS			/////////////////////////////////////////////
+	// ACTOR CIRCUMSTANCE	/////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	/** contacts between the actor and the modulating sprite */
-	protected final ArrayList<Contact> actorContacts = new ArrayList<Contact>();
-	/** contacts between the target and the modulating sprite */
-	protected final ArrayList<Contact> targetContacts = new ArrayList<Contact>();
-/*
-	protected ArrayList<Contact> getContacts()
-	{	return contacts;
-	}
-*/
-	public void addActorContact(Contact contact)
-	{	actorContacts.add(contact);		
-	}
+	/** circumstances between the actor and the modulating sprite */
+	private final Circumstance actorCircumstance = new Circumstance();
 
-	public void addTargetContact(Contact contact)
-	{	targetContacts.add(contact);		
+	public Circumstance getActorCircumstance()
+	{	return actorCircumstance;	
 	}
-
-	/////////////////////////////////////////////////////////////////
-	// TILE POSITIONS	/////////////////////////////////////////////
-	/////////////////////////////////////////////////////////////////
-	/** positions of the actor in terms of tiles */
-	protected final ArrayList<TilePosition> actorTilePositions =  new ArrayList<TilePosition>();
-	/** positions of the target in terms of tiles */
-	protected final ArrayList<TilePosition> targetTilePositions =  new ArrayList<TilePosition>();
 	
-/*	protected ArrayList<TilePosition> getTilePositions()
-	{	return tilePositions;
+	public void addActorContact(Contact contact)
+	{	actorCircumstance.addContact(contact);		
 	}
-*/	
+
 	public void addActorTilePosition(TilePosition tilePosition)
-	{	actorTilePositions.add(tilePosition);
+	{	actorCircumstance.addTilePosition(tilePosition);
+	}
+
+	public void addActorOrientation(Orientation orientation)
+	{	actorCircumstance.addOrientation(orientation);
+	}
+
+	/////////////////////////////////////////////////////////////////
+	// TARGET CIRCUMSTANCE	/////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	/** circumstances between the actor and the modulating sprite */
+	private final Circumstance targetCircumstance = new Circumstance();
+
+	public Circumstance getTargetCircumstance()
+	{	return targetCircumstance;	
+	}
+	
+	public void addTargetContact(Contact contact)
+	{	targetCircumstance.addContact(contact);		
 	}
 
 	public void addTargetTilePosition(TilePosition tilePosition)
-	{	targetTilePositions.add(tilePosition);
+	{	targetCircumstance.addTilePosition(tilePosition);
+	}
+
+	public void addTargetOrientation(Orientation orientation)
+	{	targetCircumstance.addOrientation(orientation);
 	}
 
 	/////////////////////////////////////////////////////////////////
@@ -87,26 +91,34 @@ public class ThirdModulation extends AbstractActionModulation
 	 */
 	public boolean isConcerningAction(SpecificAction specificAction, Sprite modulator) 
 //TODO vérififier dans le mod mgr que c bien cette méthode (et pas la parente) qui est appelée
-//TODO dans le XML, mettre undefined par défaut partout
 	{	boolean result = super.isConcerningAction(specificAction);
 		Sprite actor = specificAction.getActor();
 		Sprite target = specificAction.getTarget();
 		// tile positions
 		if(result)
 		{	TilePosition actorTilePosition = TilePosition.getTilePosition(modulator,actor);
-			result = actorTilePositions.contains(actorTilePosition);
+			result = actorCircumstance.containsTilePosition(actorTilePosition);
 			if(result)
 			{	TilePosition targetTilePosition = TilePosition.getTilePosition(modulator,target);
-				result = targetTilePositions.contains(targetTilePosition);
+				result = targetCircumstance.containsTilePosition(targetTilePosition);
 			}
 		}
 		// contacts
 		if(result)
 		{	Contact actorContact = Contact.getContact(modulator,actor);
-			result = actorContacts.contains(actorContact);
+			result = actorCircumstance.containsContact(actorContact);
 			if(result)
 			{	Contact targetContact = Contact.getContact(modulator,target);
-				result = targetContacts.contains(targetContact);
+				result = targetCircumstance.containsContact(targetContact);
+			}
+		}
+		// orientations
+		if(result)
+		{	Orientation actorOrientation = Orientation.getOrientation(modulator,actor);
+			result = actorCircumstance.containsOrientation(actorOrientation);
+			if(result)
+			{	Orientation targetOrientation = Orientation.getOrientation(modulator,target);
+				result = targetCircumstance.containsOrientation(targetOrientation);
 			}
 		}
 		//	
@@ -135,11 +147,20 @@ public class ThirdModulation extends AbstractActionModulation
 		result.actorRestrictions.addAll(actorRestrictions);
 		result.targetRestrictions.addAll(targetRestrictions);
 		// contacts
-		result.actorContacts.addAll(actorContacts);
-		result.targetContacts.addAll(targetContacts);
+		for(Contact c: actorCircumstance.getContacts())
+			result.addActorContact(c);
+		for(Contact c: targetCircumstance.getContacts())
+			result.addTargetContact(c);
 		// tile positions
-		result.actorTilePositions.addAll(actorTilePositions);
-		result.targetTilePositions.addAll(targetTilePositions);
+		for(TilePosition tp: actorCircumstance.getTilePositions())
+			result.addActorTilePosition(tp);
+		for(TilePosition tp: targetCircumstance.getTilePositions())
+			result.addTargetTilePosition(tp);
+		// orientations
+		for(Orientation o: actorCircumstance.getOrientations())
+			result.addActorOrientation(o);
+		for(Orientation o: targetCircumstance.getOrientations())
+			result.addTargetOrientation(o);
 		// misc
 		result.finished = finished;
 		result.frame = frame;

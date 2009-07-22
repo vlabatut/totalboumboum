@@ -26,11 +26,9 @@ import java.util.Locale;
 
 import org.jdom.Element;
 
-import fr.free.totalboumboum.engine.content.feature.Contact;
 import fr.free.totalboumboum.engine.content.feature.Direction;
-import fr.free.totalboumboum.engine.content.feature.Orientation;
 import fr.free.totalboumboum.engine.content.feature.Role;
-import fr.free.totalboumboum.engine.content.feature.TilePosition;
+import fr.free.totalboumboum.engine.content.feature.gesture.CircumstanceLoader;
 import fr.free.totalboumboum.tools.XmlTools;
 
 public class GeneralActionLoader
@@ -59,23 +57,8 @@ public class GeneralActionLoader
 				result.addDirection(direction);
 		}
 		
-		// contacts
-		{	ArrayList<Contact> contacts = Contact.loadContactsAttribute(root,XmlTools.ATT_CONTACT);
-			for(Contact contact: contacts)
-				result.addContact(contact);
-		}
-		
-		// tilePositions
-		{	ArrayList<TilePosition> tilePositions = TilePosition.loadTilePositionsAttribute(root,XmlTools.ATT_TILE_POSITION);
-			for(TilePosition tilePosition: tilePositions)
-				result.addTilePosition(tilePosition);
-		}
-		
-		// orientations
-		{	ArrayList<Orientation> orientations = Orientation.loadOrientationsAttribute(root,XmlTools.ATT_ORIENTATION);
-			for(Orientation orientation: orientations)
-				result.addOrientation(orientation);
-		}
+		// circumstances
+		CircumstanceLoader.loadCircumstanceElement(root,result.getCircumstance());
 		
 		// results
 		return result;

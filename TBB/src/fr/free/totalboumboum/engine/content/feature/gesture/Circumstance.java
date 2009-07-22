@@ -1,4 +1,4 @@
-package fr.free.totalboumboum.engine.content.feature.gesture.action;
+package fr.free.totalboumboum.engine.content.feature.gesture;
 
 import java.util.ArrayList;
 

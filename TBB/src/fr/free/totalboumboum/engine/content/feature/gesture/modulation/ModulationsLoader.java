@@ -37,6 +37,8 @@ import fr.free.totalboumboum.engine.content.feature.Contact;
 import fr.free.totalboumboum.engine.content.feature.TilePosition;
 import fr.free.totalboumboum.engine.content.feature.ability.AbilityLoader;
 import fr.free.totalboumboum.engine.content.feature.ability.AbstractAbility;
+import fr.free.totalboumboum.engine.content.feature.gesture.Circumstance;
+import fr.free.totalboumboum.engine.content.feature.gesture.CircumstanceLoader;
 import fr.free.totalboumboum.engine.content.feature.gesture.Gesture;
 import fr.free.totalboumboum.engine.content.feature.gesture.GestureName;
 import fr.free.totalboumboum.engine.content.feature.gesture.GesturePack;
@@ -91,15 +93,19 @@ public class ModulationsLoader
     {	// self modulations
 		Element selfElt = root.getChild(XmlTools.ELT_SELF_MODULATIONS);
 		loadModulationsElement(selfElt,ModType.SELF,gesture);
-    	// other modulations
+    	
+		// other modulations
 		Element otherElt = root.getChild(XmlTools.ELT_OTHER_MODULATIONS);
 		loadModulationsElement(otherElt,ModType.OTHER,gesture);
-    	// actor modulations
+    	
+		// actor modulations
 		Element actorElt = root.getChild(XmlTools.ELT_ACTOR_MODULATIONS);
 		loadModulationsElement(actorElt,ModType.ACTOR,gesture);
+		
 		// target modulations
 		Element targetElt = root.getChild(XmlTools.ELT_TARGET_MODULATIONS);
 		loadModulationsElement(targetElt,ModType.TARGET,gesture);
+		
 		// third modulations
 		Element thirdElt = root.getChild(XmlTools.ELT_THIRD_MODULATIONS);
 		loadModulationsElement(thirdElt,ModType.THIRD,gesture);
@@ -201,21 +207,14 @@ public class ModulationsLoader
 			result = new TargetModulation(action);
 		else //if(type.equals(ModType.THIRD))
 		{	result = new ThirdModulation(action);
-			Element thirdParamElt = root.getChild(XmlTools.ELT_THIRD_PARAMETERS);
-			// contacts
-			ArrayList<Contact> actorContacts = Contact.loadContactsAttribute(thirdParamElt,XmlTools.ATT_ACTOR_CONTACT);
-			for(Contact actorContact: actorContacts)
-				((ThirdModulation)result).addActorContact(actorContact);
-			ArrayList<Contact> targetContacts = Contact.loadContactsAttribute(thirdParamElt,XmlTools.ATT_TARGET_CONTACT);
-			for(Contact targetContact: targetContacts)
-				((ThirdModulation)result).addTargetContact(targetContact);
-			// tilePositions
-			ArrayList<TilePosition> actorTilePositions = TilePosition.loadTilePositionsAttribute(thirdParamElt,XmlTools.ATT_ACTOR_TILE_POSITION);
-			for(TilePosition actorTilePosition: actorTilePositions)
-				((ThirdModulation)result).addActorTilePosition(actorTilePosition);
-			ArrayList<TilePosition> targetTilePositions = TilePosition.loadTilePositionsAttribute(thirdParamElt,XmlTools.ATT_TARGET_TILE_POSITION);
-			for(TilePosition targetTilePosition: targetTilePositions)
-				((ThirdModulation)result).addTargetTilePosition(targetTilePosition);
+			// actor circumstance
+			Element actorCircElt = root.getChild(XmlTools.ELT_ACTOR_CIRCUMSTANCES);
+			Circumstance actorCircumstance = ((ThirdModulation)result).getActorCircumstance();
+			CircumstanceLoader.loadCircumstanceElement(actorCircElt,actorCircumstance);
+			// target circumstance
+			Element targetCircElt = root.getChild(XmlTools.ELT_TARGET_CIRCUMSTANCES);
+			Circumstance targetCircumstance = ((ThirdModulation)result).getTargetCircumstance();
+			CircumstanceLoader.loadCircumstanceElement(targetCircElt,targetCircumstance);
 		}
 		
 		// misc

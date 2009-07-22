@@ -66,11 +66,10 @@
 		</xsd:complexContent>
 	</xsd:complexType>
 
-	<xsd:complexType name="tParameters">
-		<xsd:attribute name="actor-contact" type="tContactList" use="optional" default="ANY" />
-		<xsd:attribute name="target-contact" type="tContactList" use="optional" default="ANY" />
-		<xsd:attribute name="actor-tile-position" type="tTilePositionList" use="optional" default="ANY" />
-		<xsd:attribute name="target-tile-position" type="tTilePositionList" use="optional" default="ANY" />
+	<xsd:complexType name="tCircumstances">
+		<xsd:attribute name="contact" type="tContactList" use="optional" default="ANY" />
+		<xsd:attribute name="tilePosition" type="tTilePositionList" use="optional" default="ANY" />
+		<xsd:attribute name="orientation" type="tOrientationList" use="optional" default="ANY" />
 	</xsd:complexType>
 
 	<xsd:complexType name="tThirdModulation">
@@ -80,7 +79,8 @@
 					<xsd:element name="action" type="tActionThird" />
 					<xsd:element name="actor-restrictions" type="tRestrictions" minOccurs="0" />
 					<xsd:element name="target-restrictions" type="tRestrictions" minOccurs="0" />
-					<xsd:element name="third-parameters" type="tParameters" />
+					<xsd:element name="actor-circumstances" type="tCircumstances" />
+					<xsd:element name="target-circumstances" type="tCircumstances" />
 				</xsd:sequence>
 			</xsd:extension>
 		</xsd:complexContent>

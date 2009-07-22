@@ -7,6 +7,7 @@ import fr.free.totalboumboum.engine.content.feature.Direction;
 import fr.free.totalboumboum.engine.content.feature.Orientation;
 import fr.free.totalboumboum.engine.content.feature.Role;
 import fr.free.totalboumboum.engine.content.feature.TilePosition;
+import fr.free.totalboumboum.engine.content.feature.gesture.Circumstance;
 import fr.free.totalboumboum.engine.content.sprite.Sprite;
 
 /*
@@ -93,6 +94,10 @@ public abstract class GeneralAction
 	/////////////////////////////////////////////////////////////////
 	protected final Circumstance circumstance = new Circumstance();
 
+	protected Circumstance getCircumstance()
+	{	return circumstance;	
+	}
+	
 	protected ArrayList<Contact> getContacts()
 	{	return circumstance.getContacts();
 	}
