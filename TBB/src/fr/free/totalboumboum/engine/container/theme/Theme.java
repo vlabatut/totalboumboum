@@ -90,7 +90,7 @@ public class Theme
 	/////////////////////////////////////////////////////////////////
 	// FLOORS				/////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	private HashMap<String,FloorFactory> floors;
+	private final HashMap<String,FloorFactory> floors = new HashMap<String, FloorFactory>();
 
 	public void addFloorFactory(String name, FloorFactory floorFactory)
 	{	floors.put(name,floorFactory);
@@ -115,7 +115,7 @@ if(ff==null)
 	/////////////////////////////////////////////////////////////////
 	// BLOCKS				/////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	private HashMap<String,BlockFactory> blocks;
+	private final HashMap<String,BlockFactory> blocks = new HashMap<String, BlockFactory>();
 
 	public void addBlockFactory(String name, BlockFactory blocFactory)
 	{	blocks.put(name,blocFactory);

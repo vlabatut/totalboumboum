@@ -38,6 +38,7 @@ import fr.free.totalboumboum.configuration.profile.PredefinedColor;
 import fr.free.totalboumboum.engine.content.feature.ability.AbilityLoader;
 import fr.free.totalboumboum.engine.content.feature.ability.AbstractAbility;
 import fr.free.totalboumboum.engine.content.feature.ability.StateAbility;
+import fr.free.totalboumboum.engine.content.feature.gesture.GesturePack;
 import fr.free.totalboumboum.engine.content.sprite.bomb.BombFactory;
 import fr.free.totalboumboum.engine.content.sprite.bomb.BombFactoryLoader;
 import fr.free.totalboumboum.tools.FileTools;
@@ -177,7 +178,10 @@ public class BombsetLoader
 		if(type==Type.CONCRETE)
 			bombFactory = bombset.getBombFactory(name);		
 		else
-			bombFactory = abstractBombs.get(name);
+		{	bombFactory = new BombFactory(name);
+			bombFactory.setGesturePack(new GesturePack());
+			abstractBombs.put(name,bombFactory);
+		}
 		BombFactoryLoader.completeBombFactory(bombFactory,individualFolder,color,bombset,abstractBombs);
     }
 

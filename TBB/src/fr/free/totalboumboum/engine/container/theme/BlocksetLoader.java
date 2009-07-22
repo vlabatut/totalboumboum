@@ -49,8 +49,8 @@ public class BlocksetLoader
 		File schemaFile,dataFile;
 		
 		// opening
-		dataFile = new File(individualFolder+File.separator+FileTools.FILE_THEME+FileTools.EXTENSION_XML);
-		schemaFile = new File(schemaFolder+File.separator+FileTools.FILE_THEME+FileTools.EXTENSION_SCHEMA);
+		dataFile = new File(individualFolder+File.separator+FileTools.FILE_BLOCKSET+FileTools.EXTENSION_XML);
+		schemaFile = new File(schemaFolder+File.separator+FileTools.FILE_BLOCKSET+FileTools.EXTENSION_SCHEMA);
 		Element root = XmlTools.getRootFromFile(dataFile,schemaFile);
 		
 		// loading
@@ -71,15 +71,15 @@ public class BlocksetLoader
 
 	@SuppressWarnings("unchecked")
 	private static void loadBlocksElement(Element root, String folder, Theme result, HashMap<String,BlockFactory> abstractBlocks, Type type) throws ParserConfigurationException, SAXException, IOException, ClassNotFoundException
-	{	// groups
-		List<Element> grpsCmpnts = root.getChildren(XmlTools.ELT_GROUP);
-		for(Element temp: grpsCmpnts)
-			loadGroupElement(temp,folder,result,abstractBlocks,type);
-		
-		// blocks
+	{	// blocks
 		List<Element> blcksCmpnts = root.getChildren(XmlTools.ELT_BLOCK);
 		for(Element temp: blcksCmpnts)
 			loadBlockElement(temp,folder,Theme.DEFAULT_GROUP,result,abstractBlocks,type);
+
+		// groups
+		List<Element> grpsCmpnts = root.getChildren(XmlTools.ELT_GROUP);
+		for(Element temp: grpsCmpnts)
+			loadGroupElement(temp,folder,result,abstractBlocks,type);
 	}
     
     @SuppressWarnings("unchecked")

@@ -50,7 +50,7 @@ public class AbilityLoader
 		if(attribute!=null)
 			max = Float.parseFloat(attribute.getValue());
     	// strength
-		String strengthStr = root.getAttribute(XmlTools.ATT_STRENGTH).getValue().trim();
+		String strengthStr = root.getAttribute(XmlTools.ATT_STRENGTH).getValue().trim().toUpperCase(Locale.ENGLISH);
 		float strength;
 		if(strengthStr.equals(XmlTools.VAL_MAX))
 			strength = Float.MAX_VALUE; //NOTE format de données à inclure dans le XSD
@@ -104,7 +104,7 @@ public class AbilityLoader
 		{	String schemaFolder = FileTools.getSchemasPath();
 			File schemaFile = new File(schemaFolder+File.separator+FileTools.FILE_ABILITIES+FileTools.EXTENSION_SCHEMA);
 			Element root = XmlTools.getRootFromFile(dataFile,schemaFile);
-			result = loadAbilitiesElement(root);
+			result.addAll(loadAbilitiesElement(root));
 		}
 	}
 }

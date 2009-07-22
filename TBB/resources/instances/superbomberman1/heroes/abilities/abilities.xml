@@ -3,95 +3,74 @@
 		xsi:noNamespaceSchemaLocation="../../../../schemas/abilities.xsd" >
 
 		<!-- STATE -->
-<!--  	sprite-flat --> 
-<!--  	sprite-above --> 
-<!-- 		sprite-move-assistance -->
+<!-- 	SPRITE_MOVE_ASSISTANCE -->
 		<ability strength="0.33" frame="false" time="-1" uses="-1">
 			<name value="SPRITE_MOVE_ASSISTANCE"/>
 		</ability>
-<!--		sprite-traverse-bomb --> 
-<!--		sprite-traverse-item --> 
-<!--		sprite-traverse-wall --> 
-<!--  	block-spawn --> 
-<!--  	bomb-explosion-latency --> 
-<!--  	bomb-failure-maxduration --> 
-<!--  	bomb-failure-minduration --> 
-<!--  	bomb-failure-probability --> 
-<!--  	bomb-push-latency --> 
-<!--  	bomb-trigger-collision --> 
-<!--  	bomb-trigger-combustion --> 
-<!--  	bomb-trigger-control --> 
-<!--  	bomb-trigger-timer --> 
-<!--  	bomb-number --> 
-<!--  	bomb-range --> 
-<!--  	hero-celebration-duration --> 
+<!--  	HERO_CELEBRATION_DURATION --> 
 		<ability strength="4000" frame="false" time="-1" uses="-1">
 			<name value="HERO_CELEBRATION_DURATION" />
 		</ability>
-<!--  	hero-entry-duration --> 
+<!--  	HERO_ENTRY_DURATION --> 
 		<ability strength="3000" frame="false" time="-1" uses="-1">
 			<name value="HERO_ENTRY_DURATION" />
 		</ability>
-<!--  	hero-punch-duration --> 
+<!--  	HERO_PUNCH_DURATION --> 
 		<ability strength="230" frame="false" time="-1" uses="-1">
 			<name value="HERO_PUNCH_DURATION" />
 		</ability>
-<!--  	hero-wait-duration --> 
+<!--  	HERO_WAIT_DURATION --> 
 		<ability strength="4000" frame="false" time="-1" uses="-1">
 			<name value="HERO_WAIT_DURATION" />
 		</ability>
 			
 		<!-- ACTION -->
-<!--  	appear --> 
+<!--  	APPEAR --> 
 		<ability strength="1" frame="false" time="-1" uses="-1">
 			<action name="APPEAR" contact="NONE" direction="ANY NONE"
 				orientation="UNDEFINED" target="NONE" tilePosition="UNDEFINED" />
 		</ability>
-<!--  	consume --> 
-<!--  	cry --> 
+<!--  	CRY --> 
 		<ability strength="1" frame="false" time="-1" uses="-1">
 			<action name="CRY" contact="NONE" direction="ANY NONE"
 				orientation="UNDEFINED" target="NONE" tilePosition="UNDEFINED" />
 		</ability>
-<!--  	detonate --> 
-<!--  	drop --> 
+<!--  	DROP --> 
 		<ability strength="1" frame="false" time="-1" uses="-1">
 			<action name="DROP" contact="ANY NONE" direction="ANY NONE"
 				orientation="ANY" target="BOMB" tilePosition="SAME" />
 		</ability>
-<!--  	exult --> 
+<!--  	EXULT --> 
 		<ability strength="1" frame="false" time="-1" uses="-1">
 			<action name="EXULT" contact="NONE" direction="ANY NONE"
 				orientation="UNDEFINED" target="NONE" tilePosition="UNDEFINED" />
 		</ability>
-<!--  	gather --> 
+<!--  	GATHER --> 
 		<ability strength="1" frame="false" time="-1" uses="-1">
 			<action name="GATHER" contact="ANY NONE" direction="ANY NONE"
 				orientation="ANY" target="ITEM" tilePosition="SAME" />
 		</ability>
-<!--  	jump --> 
+<!--  	JUMP --> 
 		<ability strength="1" frame="false" time="-1" uses="-1">
 			<action name="JUMP" contact="NONE" direction="ANY NONE"
 				orientation="UNDEFINED" target="NONE" tilePosition="UNDEFINED" />
 		</ability>
-<!--  	land --> 
+<!--  	LAND --> 
 		<ability strength="1" frame="false" time="-1" uses="-1">
 			<action name="LAND" contact="NONE" direction="ANY NONE"
 				orientation="UNDEFINED" target="NONE" tilePosition="UNDEFINED" />
 		</ability>
-<!--  	movehigh --> 
+<!--  	MOVEHIGH --> 
 		<ability strength="1" frame="false" time="-1" uses="-1">
 			<action name="MOVEHIGH" contact="NONE" direction="ANY NONE"
 				orientation="UNDEFINED" target="NONE" tilePosition="UNDEFINED" />
 		</ability>
-<!--  	movelow --> 
+<!--  	MOVELOW --> 
 		<ability strength="1" frame="false" time="-1" uses="-1">
 			<action name="MOVELOW" contact="NONE" direction="ANY NONE"
 				orientation="UNDEFINED" target="NONE" tilePosition="UNDEFINED" />
 		</ability>
-<!--  	punch --> 
-<!--  	push --> 
-<!--  	trigger --> 
+<!--  	TRIGGER --> 
 		<ability strength="1" frame="false" time="-1" uses="-1">
 			<action name="TRIGGER" contact="ANY NONE" direction="ANY NONE"
 				orientation="ANY" target="BOMB" tilePosition="ANY" />

@@ -461,14 +461,22 @@ public class AnimesLoader
     
     private static void completeAnime(GesturePack pack, HashMap<GestureName,GestureName> animesReplacements, GestureName gest, GestureName repl)
     {	Gesture gesture = pack.getGesture(gest);
+    	// create the gesture if necessary
+    	if(gesture==null)
+    	{	gesture = new Gesture();
+    		gesture.setName(gest);
+    	}
     	// complete its animes if necessary
     	if(gesture.hasNoAnimes())
     	{	// get the replacement animes
     		GestureName repl2 = animesReplacements.get(repl);
-			completeAnime(pack,animesReplacements,repl,repl2);
-			Gesture gesture2 = pack.getGesture(repl);
-			// set it in the considered gesture
-			gesture.setAnimes(gesture2);
+        	// TODO if a compulsory anime is missing, should be detected here (except for abstract sprite, where it doesn't matter)
+    		if(repl2!=null)
+			{	completeAnime(pack,animesReplacements,repl,repl2);
+				Gesture gesture2 = pack.getGesture(repl);
+				// set it in the considered gesture
+				gesture.setAnimes(gesture2);
+			}
     	}
     }
     

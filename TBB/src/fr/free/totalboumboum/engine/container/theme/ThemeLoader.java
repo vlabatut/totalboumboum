@@ -68,7 +68,7 @@ public class ThemeLoader
     	BlocksetLoader.loadBlockset(folder,result);
     	
 		// floors
-    	folder = individualFolder + File.separator + FileTools.FOLDER_BLOCKS;
+    	folder = individualFolder + File.separator + FileTools.FOLDER_FLOORS;
     	FloorsetLoader.loadFloorset(folder,result);		
     	
 		// result

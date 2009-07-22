@@ -36,13 +36,16 @@ public enum GestureName
 	BURNING,
 
 	/** the sprite is carrying something */
-//	CARRYING,
+	CARRYING,
 	
 	/** the sprite is putting fire to something else */
 //	CONSUMING,
 	
 	/** the sprite is expressing its sadness (hero losing a round) */
 	CRYING,
+	
+	/** the sprite is suddenly disappearing from the zone */
+	DISAPPEARING,
 	
 	/** the sprite is not ingame anymore */
 	ENDED,
@@ -57,7 +60,7 @@ public enum GestureName
 	HIDING,
 	
 	/** the sprite is holding another sprite */
-//	HOLDING,
+	HOLDING,
 	
 	/** the sprite is going up on its own */
 	JUMPING,
@@ -75,7 +78,7 @@ public enum GestureName
 //	PICKED,
 	
 	/** the sprite is picking another sprite */
-//	PICKING,
+	PICKING,
 	
 	/** the sprite is being sent in the air by another sprite */
 	PUNCHED,
@@ -95,6 +98,9 @@ public enum GestureName
 	/** the sprite is re-appearing (for a wall) */ 
 	SPAWNING,
 	
+	/** the sprite is experiencing difficulties to walk/stand */
+	STAGGERING,
+	
 	/** the sprite is just standing, doing nothing special */
 	STANDING,
 	
@@ -102,7 +108,7 @@ public enum GestureName
 	STANDING_FAILING,
 	
 	/** the sprite is throwing a sprite is was previously carrying or holding */
-//	THROWING,
+	THROWING,
 	
 	/** the sprite is being thrown by another sprite (which was previously carrying or holding it) */
 //	THROWN,
