@@ -27,6 +27,7 @@ import fr.free.totalboumboum.engine.content.feature.Direction;
 import fr.free.totalboumboum.engine.content.feature.Orientation;
 import fr.free.totalboumboum.engine.content.feature.TilePosition;
 import fr.free.totalboumboum.engine.content.feature.ability.ActionAbility;
+import fr.free.totalboumboum.engine.content.feature.gesture.Circumstance;
 import fr.free.totalboumboum.engine.content.sprite.Sprite;
 
 public abstract class SpecificAction
@@ -36,9 +37,9 @@ public abstract class SpecificAction
 		this.actor = actor;
 		this.target = null;
 		this.direction = actor.getCurrentFacingDirection();
-		this.contact = Contact.getContact(actor,target);
-		this.tilePosition = TilePosition.getTilePosition(actor,target);
-		this.orientation = Orientation.getOrientation(actor,target);
+		circumstance.setContact(Contact.getContact(actor,target));
+		circumstance.setTilePosition(TilePosition.getTilePosition(actor,target));
+		circumstance.setOrientation(Orientation.getOrientation(actor,target));
 		this.tile = actor.getTile();
 		initGeneralAction();
 	}
@@ -48,9 +49,9 @@ public abstract class SpecificAction
 		this.actor = actor;
 		this.target = target;
 		this.direction = actor.getCurrentFacingDirection();
-		this.contact = Contact.getContact(actor,target);
-		this.tilePosition = TilePosition.getTilePosition(actor,target);
-		this.orientation = Orientation.getOrientation(actor,target);
+		circumstance.setContact(Contact.getContact(actor,target));
+		circumstance.setTilePosition(TilePosition.getTilePosition(actor,target));
+		circumstance.setOrientation(Orientation.getOrientation(actor,target));
 		this.tile = null;
 		initGeneralAction();
 	}
@@ -60,9 +61,9 @@ public abstract class SpecificAction
 		this.actor = actor;
 		this.target = null;
 		this.direction = actor.getCurrentFacingDirection();
-		this.contact = Contact.getContact(actor,tile);
-		this.tilePosition = TilePosition.getTilePosition(actor,tile);
-		this.orientation = Orientation.getOrientation(actor,tile);
+		circumstance.setContact(Contact.getContact(actor,tile));
+		circumstance.setTilePosition(TilePosition.getTilePosition(actor,tile));
+		circumstance.setOrientation(Orientation.getOrientation(actor,tile));
 		this.tile = tile;
 		initGeneralAction();
 	}
@@ -72,9 +73,9 @@ public abstract class SpecificAction
 		this.actor = actor;
 		this.target = target;
 		this.direction = direction;
-		this.contact = contact;
-		this.tilePosition = tilePosition;
-		this.orientation = orientation;
+		circumstance.setContact(contact);
+		circumstance.setTilePosition(tilePosition);
+		circumstance.setOrientation(orientation);
 		initGeneralAction();
 	}
 
@@ -103,33 +104,20 @@ public abstract class SpecificAction
 	}
 	
 	/////////////////////////////////////////////////////////////////
-	// CONTACT			/////////////////////////////////////////////
+	// CIRCUMSTANCE		/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	/** contact between the actor and the target */
-	private Contact contact = Contact.NONE;
+	private Circumstance circumstance = new Circumstance();
 
 	public Contact getContact()
-	{	return contact;
+	{	return circumstance.getContact();
 	}
 	
-	/////////////////////////////////////////////////////////////////
-	// ORIENTATION		/////////////////////////////////////////////
-	/////////////////////////////////////////////////////////////////
-	/** compared directions of the target and the action */
-	private Orientation orientation = Orientation.UNDEFINED;
-
 	public Orientation getOrientation()
-	{	return orientation;
+	{	return circumstance.getOrientation();
 	}
 	
-	/////////////////////////////////////////////////////////////////
-	// TILE POSITION	/////////////////////////////////////////////
-	/////////////////////////////////////////////////////////////////
-	/** position of the target in termes of tiles */
-	private TilePosition tilePosition = TilePosition.UNDEFINED;
-
 	public TilePosition getTilePosition()
-	{	return tilePosition;
+	{	return circumstance.getTilePosition();
 	}
 
 	/////////////////////////////////////////////////////////////////
@@ -263,9 +251,9 @@ public abstract class SpecificAction
 		result = result + actor + " > ";
 		result = result + target + " ";
 		result = result + "["+direction+"] ";
-		result = result + "["+contact+"] ";
-		result = result + "["+orientation+"] ";
-		result = result + "["+tilePosition+"])";			
+		result = result + "["+circumstance.getContact()+"] ";
+		result = result + "["+circumstance.getOrientation()+"] ";
+		result = result + "["+circumstance.getTilePosition()+"])";			
 		return result;
 	}
 /*	
@@ -313,12 +301,10 @@ public abstract class SpecificAction
 	{	if(!finished)
 		{	finished = true;
 			// misc
+			circumstance.finish();
 			actor = null;
-			contact = null;
 			direction = null;
-			orientation = null;
 			target = null;
-			tilePosition = null;
 		}
 	}
 

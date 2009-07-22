@@ -53,6 +53,7 @@ public class XmlTools
 	public static final String ELT_ABSTRACT_FLOORS = "abstract-floors";
 	public static final String ELT_ABSTRACT_ITEMS = "abstract-items";
 	public static final String ELT_ACTION = "action";
+	public static final String ELT_ACTOR_CIRCUMSTANCES = "actor-circumstances";
 	public static final String ELT_ACTOR_MODULATIONS = "actor-modulations";
 	public static final String ELT_ACTOR_RESTRICTIONS = "actor-restrictions";
 	public static final String ELT_ADDITION = "addition";
@@ -195,12 +196,12 @@ public class XmlTools
 	public static final String ELT_STEPS = "steps";
 	public static final String ELT_SUBTRACTION = "subtraction";
 	public static final String ELT_SUMMATION = "summation";
+	public static final String ELT_TARGET_CIRCUMSTANCES = "target-circumstances";
 	public static final String ELT_TARGET_MODULATIONS = "target-modulations";
 	public static final String ELT_TARGET_RESTRICTIONS = "target-restrictions";
 	public static final String ELT_TEXT = "text";
 	public static final String ELT_THEME = "theme";
 	public static final String ELT_THIRD_MODULATIONS = "third-modulations";
-	public static final String ELT_THIRD_PARAMETERS = "third-parameters";
 	public static final String ELT_THIRD_RESTRICTIONS = "third-restrictions";
 	public static final String ELT_THRESHOLD = "threshold";
 	public static final String ELT_THRESHOLDS = "thresholds";
