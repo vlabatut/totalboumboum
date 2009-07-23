@@ -62,7 +62,7 @@ public enum Orientation
 		Direction facingDir = actor.getCurrentFacingDirection();
 		// no orientation
 		if(facingDir==Direction.NONE || target==null)
-			result = UNDEFINED;
+			result = Orientation.UNDEFINED;
 		else
 		{	Direction relativeDir = Direction.getCompositeFromSprites(actor,target);
 			// actor facing target

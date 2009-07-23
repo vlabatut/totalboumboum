@@ -23,7 +23,10 @@ package fr.free.totalboumboum.engine.content.manager.trajectory;
 
 import fr.free.totalboumboum.configuration.GameVariables;
 import fr.free.totalboumboum.engine.container.tile.Tile;
+import fr.free.totalboumboum.engine.content.feature.Contact;
 import fr.free.totalboumboum.engine.content.feature.Direction;
+import fr.free.totalboumboum.engine.content.feature.Orientation;
+import fr.free.totalboumboum.engine.content.feature.TilePosition;
 import fr.free.totalboumboum.engine.content.feature.gesture.action.SpecificAction;
 import fr.free.totalboumboum.engine.content.feature.gesture.action.movehigh.SpecificMoveHigh;
 import fr.free.totalboumboum.engine.content.feature.gesture.action.movelow.SpecificMoveLow;
@@ -253,11 +256,60 @@ public class PotentialObstacle
 	 * @return
 	 */
 	public boolean isActualObstacle()
-	{	boolean result;
+	{	// init
+		boolean result;
 		Direction usedDirection = moveZone.getUsedDirection();
 		Sprite source = moveZone.getSourceSprite();
+		
+		// contact
 		double distX = GameVariables.level.getHorizontalDistance(sprite.getCurrentPosX(),moveZone.getCurrentX());
 		double distY = GameVariables.level.getVerticalDistance(sprite.getCurrentPosY(),moveZone.getCurrentY());
+		Contact contact = Contact.COLLISION;
+		if(!CalculusTools.isRelativelyGreaterOrEqualTo(distX,tileDimension) && !CalculusTools.isRelativelyGreaterOrEqualTo(distY,tileDimension))
+			// intersection iff the distance is relatively smaller than the tile size  
+			contact = Contact.INTERSECTION;
+		
+		// tile position
+		Tile currentTile = GameVariables.level.getTile(moveZone.getCurrentX(),moveZone.getCurrentY());
+		Tile spriteTile = sprite.getTile();
+		TilePosition tilePosition = TilePosition.NEIGHBOR;
+		if(currentTile == spriteTile)
+			tilePosition = TilePosition.SAME;
+		
+		// orientation
+		Orientation orientation;
+		if(usedDirection==Direction.NONE)
+			orientation = Orientation.UNDEFINED;
+		else
+		{	Direction relativeDir = Direction.getCompositeFromSprites(source,sprite);
+			// actor facing target
+			if(relativeDir.hasCommonComponent(usedDirection))
+				orientation = Orientation.FACE;
+			// actor back to target
+			else if(relativeDir.hasCommonComponent(usedDirection.getOpposite()))
+				orientation = Orientation.BACK;
+			// no direction
+			else if(relativeDir==Direction.NONE)
+				orientation = Orientation.NONE;
+			// other directions
+			else
+				orientation = Orientation.OTHER;
+		}
+		
+		// action
+		SpecificAction specificAction;
+		if(source.isOnGround())
+			specificAction = new SpecificMoveLow(source,usedDirection,contact,tilePosition,orientation);
+		else
+			specificAction = new SpecificMoveHigh(source,usedDirection,contact,tilePosition,orientation);
+		
+		// testing the action
+		//	TODO ça serait plus logique d'utiliser le résultat de la modulation
+		//	(ça tiendrait compte d'interactions entre les différents modulateurs). 
+		//	mais ça serait aussi plus long, donc à voir...
+		result = sprite.isThirdPreventing(specificAction);
+				
+/* NOTE OLD VERSION		
 		// with intersection
 		if(!CalculusTools.isRelativelyGreaterOrEqualTo(distX,tileDimension) && !CalculusTools.isRelativelyGreaterOrEqualTo(distY,tileDimension))
 //		if(distX<tileDimension && distY<tileDimension)
@@ -274,11 +326,9 @@ public class PotentialObstacle
 					specificAction = new SpecificMoveLow(source,usedDirection);
 				else
 					specificAction = new SpecificMoveHigh(source,usedDirection);
-				/*
-				 *  TODO ça serait plus logique d'utiliser le résultat de la modulation (ça tiendrait
-				 *  compte d'interactions entre les différents modulateurs). mais ça serait aussi plus long,
-				 *  donc à voir... (même remarque 20 lignes dessous)
-				 */
+				//  TODO ça serait plus logique d'utiliser le résultat de la modulation (ça tiendrait
+				//  compte d'interactions entre les différents modulateurs). mais ça serait aussi plus long,
+				//  donc à voir... (même remarque 20 lignes dessous)
 				if(sprite.isThirdPreventing(specificAction))
 				{	double deltaX = GameVariables.level.getDeltaX(moveZone.getCurrentX(),sprite.getCurrentPosX());
 					double deltaY = GameVariables.level.getDeltaY(moveZone.getCurrentY(),sprite.getCurrentPosY());
@@ -302,6 +352,8 @@ public class PotentialObstacle
 				specificAction = new SpecificMoveHigh(source,usedDirection);
 			result = sprite.isThirdPreventing(specificAction);
 		}
+*/
+		
 		return result;
 	}
 }
