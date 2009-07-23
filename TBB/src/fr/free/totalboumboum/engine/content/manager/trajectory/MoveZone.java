@@ -304,19 +304,19 @@ public class MoveZone
 			if(po.getContactDistance()<0)
 				addIntersectedSprite(po.getSprite());
 			// is the potential obstacle an actual obstacle?
-				if(po.isActualObstacle())
-				{	
+			if(po.isActualObstacle())
+			{	
 //System.out.println("PotentialObstacle:"+po.getSprite().getCurrentPosX()+","+po.getSprite().getCurrentPosY());					
-					bypassObstacle(po);
-					goOn = canMove();
-					// process the new trajectory and obstacles
-					if(goOn)
-					{	processLine();
-						potentialObstacles = getCrossedSprites();					
-					}
+				bypassObstacle(po);
+				goOn = canMove();
+				// process the new trajectory and obstacles
+				if(goOn)
+				{	processLine();
+					potentialObstacles = getCrossedSprites();					
 				}
-				else
-					potentialObstacles.remove(0);
+			}
+			else
+				potentialObstacles.remove(0);
 		}
 		if(goOn)
 		{	// move towards the destination
