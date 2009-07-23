@@ -498,6 +498,13 @@ public class AnimesLoader
     {	if(gesture.getAnimeDirection(direction)==null)
     	{	if(direction==Direction.NONE)
 		    {	AnimeDirection anime = gesture.getAnimeDirection(Direction.DOWN);
+		    	if(anime==null)
+	    		{	anime = new AnimeDirection();
+	    			anime.setDirection(direction);
+	    			anime.setGestureName(gesture.getName());
+	    			AnimeStep as = new AnimeStep();
+	    			anime.add(as);
+	    		}
 		    	gesture.addAnimeDirection(anime,Direction.NONE);
 		    }
 	    	else if(direction.isPrimary())
