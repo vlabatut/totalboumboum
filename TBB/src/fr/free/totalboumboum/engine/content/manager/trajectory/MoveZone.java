@@ -306,7 +306,7 @@ public class MoveZone
 			// is the potential obstacle an actual obstacle?
 			if(po.isActualObstacle())
 			{	
-//System.out.println("PotentialObstacle:"+po.getSprite().getCurrentPosX()+","+po.getSprite().getCurrentPosY());					
+System.out.println("PotentialObstacle:"+po.getSprite().getCurrentPosX()+","+po.getSprite().getCurrentPosY()+"("+po.getSprite().getRole()+")");					
 				bypassObstacle(po);
 				goOn = canMove();
 				// process the new trajectory and obstacles

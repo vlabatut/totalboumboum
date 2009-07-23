@@ -26,7 +26,6 @@ import fr.free.totalboumboum.engine.content.feature.Contact;
 import fr.free.totalboumboum.engine.content.feature.Direction;
 import fr.free.totalboumboum.engine.content.feature.Orientation;
 import fr.free.totalboumboum.engine.content.feature.TilePosition;
-import fr.free.totalboumboum.engine.content.feature.ability.ActionAbility;
 import fr.free.totalboumboum.engine.content.feature.gesture.Circumstance;
 import fr.free.totalboumboum.engine.content.sprite.Sprite;
 
@@ -311,28 +310,28 @@ public abstract class SpecificAction
 	/////////////////////////////////////////////////////////////////
 	// EXECUTION		/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	protected ActionAbility actionAbility = null;
+//	protected ActionAbility actionAbility = null;
 	
-	private void initActionAbility()
-	{	if(actionAbility == null)	
-			actionAbility = actor.modulateAction(this);
-	}
+//	private void initActionAbility()
+//	{	if(actionAbility == null)	
+//			actionAbility = actor.modulateAction(this);
+//	}
 	
-	public float getStrength()
-	{	float result;
-		initActionAbility();
-		result = actionAbility.getStrength();
-		return result;
-	}
+//	public float getStrength()
+//	{	float result;
+//		initActionAbility();
+//		result = actionAbility.getStrength();
+//		return result;
+//	}
 	
 	/** tests if this action is allowed (through the modulation system)
 	 * by the actor, the target and the environment.
 	 */
-	public boolean isPossible()
-	{	boolean result;
-		initActionAbility();
-		result = actionAbility.isActive();
-		return result;
-	}
+//	public boolean isPossible()
+//	{	boolean result;
+//		initActionAbility();
+//		result = actionAbility.isActive();
+//		return result;
+//	}
 	
 }

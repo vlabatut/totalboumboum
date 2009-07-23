@@ -1,6 +1,19 @@
 package fr.free.totalboumboum.engine.content.feature.gesture.action;
 
 import fr.free.totalboumboum.engine.content.feature.gesture.action.appear.GeneralAppear;
+import fr.free.totalboumboum.engine.content.feature.gesture.action.consume.GeneralConsume;
+import fr.free.totalboumboum.engine.content.feature.gesture.action.cry.GeneralCry;
+import fr.free.totalboumboum.engine.content.feature.gesture.action.detonate.GeneralDetonate;
+import fr.free.totalboumboum.engine.content.feature.gesture.action.drop.GeneralDrop;
+import fr.free.totalboumboum.engine.content.feature.gesture.action.exult.GeneralExult;
+import fr.free.totalboumboum.engine.content.feature.gesture.action.gather.GeneralGather;
+import fr.free.totalboumboum.engine.content.feature.gesture.action.jump.GeneralJump;
+import fr.free.totalboumboum.engine.content.feature.gesture.action.land.GeneralLand;
+import fr.free.totalboumboum.engine.content.feature.gesture.action.movehigh.GeneralMoveHigh;
+import fr.free.totalboumboum.engine.content.feature.gesture.action.movelow.GeneralMoveLow;
+import fr.free.totalboumboum.engine.content.feature.gesture.action.punch.GeneralPunch;
+import fr.free.totalboumboum.engine.content.feature.gesture.action.push.GeneralPush;
+import fr.free.totalboumboum.engine.content.feature.gesture.action.trigger.GeneralTrigger;
 
 public enum ActionName
 {
@@ -55,31 +68,31 @@ public enum ActionName
 		if(this==APPEAR)
 			result = new GeneralAppear();
 		else if(this==CONSUME)
-			result = new GeneralAppear();
+			result = new GeneralConsume();
 		else if(this==CRY)
-			result = new GeneralAppear();
+			result = new GeneralCry();
 		else if(this==DETONATE)
-			result = new GeneralAppear();
+			result = new GeneralDetonate();
 		else if(this==DROP)
-			result = new GeneralAppear();
+			result = new GeneralDrop();
 		else if(this==EXULT)
-			result = new GeneralAppear();
+			result = new GeneralExult();
 		else if(this==GATHER)
-			result = new GeneralAppear();
+			result = new GeneralGather();
 		else if(this==JUMP)
-			result = new GeneralAppear();
+			result = new GeneralJump();
 		else if(this==LAND)
-			result = new GeneralAppear();
+			result = new GeneralLand();
 		else if(this==MOVEHIGH)
-			result = new GeneralAppear();
+			result = new GeneralMoveHigh();
 		else if(this==MOVELOW)
-			result = new GeneralAppear();
+			result = new GeneralMoveLow();
 		else if(this==PUNCH)
-			result = new GeneralAppear();
+			result = new GeneralPunch();
 		else if(this==PUSH)
-			result = new GeneralAppear();
+			result = new GeneralPush();
 		else if(this==TRIGGER)
-			result = new GeneralAppear();
+			result = new GeneralTrigger();
 		return result;
 	}
 }
