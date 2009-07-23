@@ -285,14 +285,14 @@ public class ModulationManager
 	public boolean isThirdPreventing(SpecificAction action)
 	{	boolean result = false;
 		ThirdModulation thirdModulation = sprite.getThirdModulation(action);
-		result = !(thirdModulation.getFrame() && thirdModulation.getStrength()<0);
+		result = thirdModulation.getFrame() && thirdModulation.getStrength()<=0;
 		return result;
 	}
 	
 	public boolean isTargetPreventing(SpecificAction action)
 	{	boolean result = false;
 		TargetModulation targetModulation = sprite.getTargetModulation(action);
-		result = !(targetModulation.getFrame() && targetModulation.getStrength()<0);
+		result = targetModulation.getFrame() && targetModulation.getStrength()<=0;
 		return result;
 	}
 	
