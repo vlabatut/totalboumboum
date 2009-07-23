@@ -163,18 +163,22 @@ public class QuickFrame extends AbstractFrame implements ActionListener, LoopRen
 	{	int val = loadProgressBar.getValue();
 		loadProgressBar.setValue(val+1);
 		switch(val)
-		{	// itemset
+		{	// firesetmap
 			case 0:
 				loadProgressBar.repaint();
 				break;
-			// theme
+			// itemset
 			case 1:
+				loadProgressBar.repaint();
+				break;
+			// theme
+			case 2:
 				loadProgressBar.repaint();
 				break;
 			// players
 			default:
 				Round round = tournament.getCurrentMatch().getCurrentRound();
-				if(val==round.getProfiles().size()+2)
+				if(val==round.getProfiles().size()+3)
 				{	// progress bar
 					loadProgressBar.repaint();
 					getContentPane().remove(loadProgressBar);
