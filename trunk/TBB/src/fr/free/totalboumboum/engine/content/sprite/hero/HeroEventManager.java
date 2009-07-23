@@ -461,9 +461,7 @@ public class HeroEventManager extends EventManager
 	}
 	
 	private void engVictory(EngineEvent event)
-	{	
-		
-		SpecificAction specificAction = new SpecificExult(sprite);
+	{	SpecificAction specificAction = new SpecificExult(sprite);
 		ActionAbility ability = sprite.modulateAction(specificAction);
 		if(ability.isActive())
 		{	StateAbility ablt = sprite.modulateStateAbility(StateAbilityName.HERO_CELEBRATION_DURATION);
@@ -473,7 +471,7 @@ public class HeroEventManager extends EventManager
 		}
 		else
 		{
-			//NOTE programmer l'action (ex�cution retard�e) quand ce sera possible
+			//NOTE programmer l'action (execution retardee) quand ce sera possible
 		}
 		
 		
@@ -486,8 +484,7 @@ public class HeroEventManager extends EventManager
 	}
 	
 	private void engDefeat(EngineEvent event)
-	{	
-		SpecificAction specificAction = new SpecificCry(sprite);
+	{	SpecificAction specificAction = new SpecificCry(sprite);
 		ActionAbility ability = sprite.modulateAction(specificAction);
 		if(ability.isActive())
 		{	StateAbility ablt = sprite.modulateStateAbility(StateAbilityName.HERO_CELEBRATION_DURATION);
