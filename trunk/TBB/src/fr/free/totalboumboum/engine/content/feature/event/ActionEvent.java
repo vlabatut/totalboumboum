@@ -21,7 +21,7 @@ package fr.free.totalboumboum.engine.content.feature.event;
  * 
  */
 
-import fr.free.totalboumboum.engine.content.feature.gesture.action.SpecificAction;
+import fr.free.totalboumboum.engine.content.feature.action.SpecificAction;
 
 public class ActionEvent extends AbstractEvent
 {	

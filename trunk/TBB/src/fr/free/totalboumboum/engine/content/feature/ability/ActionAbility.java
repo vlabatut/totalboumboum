@@ -21,9 +21,9 @@ package fr.free.totalboumboum.engine.content.feature.ability;
  * 
  */
 
-import fr.free.totalboumboum.engine.content.feature.gesture.action.ActionName;
-import fr.free.totalboumboum.engine.content.feature.gesture.action.GeneralAction;
-import fr.free.totalboumboum.engine.content.feature.gesture.action.SpecificAction;
+import fr.free.totalboumboum.engine.content.feature.action.ActionName;
+import fr.free.totalboumboum.engine.content.feature.action.GeneralAction;
+import fr.free.totalboumboum.engine.content.feature.action.SpecificAction;
 
 public class ActionAbility extends AbstractAbility
 {	

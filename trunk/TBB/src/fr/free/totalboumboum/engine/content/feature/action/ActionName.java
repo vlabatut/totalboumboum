@@ -1,19 +1,19 @@
-package fr.free.totalboumboum.engine.content.feature.gesture.action;
+package fr.free.totalboumboum.engine.content.feature.action;
 
-import fr.free.totalboumboum.engine.content.feature.gesture.action.appear.GeneralAppear;
-import fr.free.totalboumboum.engine.content.feature.gesture.action.consume.GeneralConsume;
-import fr.free.totalboumboum.engine.content.feature.gesture.action.cry.GeneralCry;
-import fr.free.totalboumboum.engine.content.feature.gesture.action.detonate.GeneralDetonate;
-import fr.free.totalboumboum.engine.content.feature.gesture.action.drop.GeneralDrop;
-import fr.free.totalboumboum.engine.content.feature.gesture.action.exult.GeneralExult;
-import fr.free.totalboumboum.engine.content.feature.gesture.action.gather.GeneralGather;
-import fr.free.totalboumboum.engine.content.feature.gesture.action.jump.GeneralJump;
-import fr.free.totalboumboum.engine.content.feature.gesture.action.land.GeneralLand;
-import fr.free.totalboumboum.engine.content.feature.gesture.action.movehigh.GeneralMoveHigh;
-import fr.free.totalboumboum.engine.content.feature.gesture.action.movelow.GeneralMoveLow;
-import fr.free.totalboumboum.engine.content.feature.gesture.action.punch.GeneralPunch;
-import fr.free.totalboumboum.engine.content.feature.gesture.action.push.GeneralPush;
-import fr.free.totalboumboum.engine.content.feature.gesture.action.trigger.GeneralTrigger;
+import fr.free.totalboumboum.engine.content.feature.action.appear.GeneralAppear;
+import fr.free.totalboumboum.engine.content.feature.action.consume.GeneralConsume;
+import fr.free.totalboumboum.engine.content.feature.action.cry.GeneralCry;
+import fr.free.totalboumboum.engine.content.feature.action.detonate.GeneralDetonate;
+import fr.free.totalboumboum.engine.content.feature.action.drop.GeneralDrop;
+import fr.free.totalboumboum.engine.content.feature.action.exult.GeneralExult;
+import fr.free.totalboumboum.engine.content.feature.action.gather.GeneralGather;
+import fr.free.totalboumboum.engine.content.feature.action.jump.GeneralJump;
+import fr.free.totalboumboum.engine.content.feature.action.land.GeneralLand;
+import fr.free.totalboumboum.engine.content.feature.action.movehigh.GeneralMoveHigh;
+import fr.free.totalboumboum.engine.content.feature.action.movelow.GeneralMoveLow;
+import fr.free.totalboumboum.engine.content.feature.action.punch.GeneralPunch;
+import fr.free.totalboumboum.engine.content.feature.action.push.GeneralPush;
+import fr.free.totalboumboum.engine.content.feature.action.trigger.GeneralTrigger;
 
 public enum ActionName
 {

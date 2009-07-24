@@ -27,9 +27,9 @@ import fr.free.totalboumboum.engine.content.feature.Contact;
 import fr.free.totalboumboum.engine.content.feature.Direction;
 import fr.free.totalboumboum.engine.content.feature.Orientation;
 import fr.free.totalboumboum.engine.content.feature.TilePosition;
-import fr.free.totalboumboum.engine.content.feature.gesture.action.SpecificAction;
-import fr.free.totalboumboum.engine.content.feature.gesture.action.movehigh.SpecificMoveHigh;
-import fr.free.totalboumboum.engine.content.feature.gesture.action.movelow.SpecificMoveLow;
+import fr.free.totalboumboum.engine.content.feature.action.SpecificAction;
+import fr.free.totalboumboum.engine.content.feature.action.movehigh.SpecificMoveHigh;
+import fr.free.totalboumboum.engine.content.feature.action.movelow.SpecificMoveLow;
 import fr.free.totalboumboum.engine.content.sprite.Sprite;
 import fr.free.totalboumboum.tools.CalculusTools;
 
