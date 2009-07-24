@@ -36,9 +36,7 @@ public abstract class SpecificAction
 		this.actor = actor;
 		this.target = null;
 		this.direction = actor.getCurrentFacingDirection();
-		circumstance.setContact(Contact.getContact(actor,target));
-		circumstance.setTilePosition(TilePosition.getTilePosition(actor,target));
-		circumstance.setOrientation(Orientation.getOrientation(actor,target));
+		circumstance.initCircumstance(actor,target);
 		this.tile = actor.getTile();
 		initGeneralAction();
 	}
@@ -48,9 +46,7 @@ public abstract class SpecificAction
 		this.actor = actor;
 		this.target = target;
 		this.direction = actor.getCurrentFacingDirection();
-		circumstance.setContact(Contact.getContact(actor,target));
-		circumstance.setTilePosition(TilePosition.getTilePosition(actor,target));
-		circumstance.setOrientation(Orientation.getOrientation(actor,target));
+		circumstance.initCircumstance(actor,target);
 		this.tile = null;
 		initGeneralAction();
 	}
@@ -60,9 +56,7 @@ public abstract class SpecificAction
 		this.actor = actor;
 		this.target = null;
 		this.direction = actor.getCurrentFacingDirection();
-		circumstance.setContact(Contact.getContact(actor,tile));
-		circumstance.setTilePosition(TilePosition.getTilePosition(actor,tile));
-		circumstance.setOrientation(Orientation.getOrientation(actor,tile));
+		circumstance.initCircumstance(actor,target);
 		this.tile = tile;
 		initGeneralAction();
 	}
@@ -107,6 +101,10 @@ public abstract class SpecificAction
 	/////////////////////////////////////////////////////////////////
 	private Circumstance circumstance = new Circumstance();
 
+	public Circumstance getCircumstance()
+	{	return circumstance;
+	}
+	
 	public Contact getContact()
 	{	return circumstance.getContact();
 	}

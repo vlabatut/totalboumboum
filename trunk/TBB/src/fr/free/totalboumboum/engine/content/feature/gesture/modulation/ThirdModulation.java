@@ -27,7 +27,6 @@ import fr.free.totalboumboum.engine.content.feature.TilePosition;
 import fr.free.totalboumboum.engine.content.feature.action.GeneralAction;
 import fr.free.totalboumboum.engine.content.feature.action.SpecificAction;
 import fr.free.totalboumboum.engine.content.feature.gesture.Circumstance;
-import fr.free.totalboumboum.engine.content.sprite.Sprite;
 
 public class ThirdModulation extends AbstractActionModulation
 {
@@ -89,12 +88,14 @@ public class ThirdModulation extends AbstractActionModulation
 	/**
 	 * tests if this modulation is related to the specified action
 	 */
-	public boolean isConcerningAction(SpecificAction specificAction, Sprite modulator) 
+	public boolean isConcerningAction(SpecificAction specificAction, Circumstance actorCircumstances, Circumstance targetCircumstances) 
 //TODO vérififier dans le mod mgr que c bien cette méthode (et pas la parente) qui est appelée
 	{	boolean result = super.isConcerningAction(specificAction);
-		Sprite actor = specificAction.getActor();
-		Sprite target = specificAction.getTarget();
-		// tile positions
+		if(result)
+			result = this.actorCircumstance.subsume(actorCircumstances);
+		if(result)
+			result = this.targetCircumstance.subsume(targetCircumstances);
+/*		// tile positions
 		if(result)
 		{	TilePosition actorTilePosition = TilePosition.getTilePosition(modulator,actor);
 			result = actorCircumstance.containsTilePosition(actorTilePosition);
@@ -121,7 +122,7 @@ public class ThirdModulation extends AbstractActionModulation
 				result = targetCircumstance.containsOrientation(targetOrientation);
 			}
 		}
-		//	
+*/		//	
 		return result;		
 	}
 

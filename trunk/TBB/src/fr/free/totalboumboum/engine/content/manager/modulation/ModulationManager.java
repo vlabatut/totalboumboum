@@ -29,6 +29,7 @@ import fr.free.totalboumboum.engine.content.feature.Direction;
 import fr.free.totalboumboum.engine.content.feature.ability.ActionAbility;
 import fr.free.totalboumboum.engine.content.feature.ability.StateAbility;
 import fr.free.totalboumboum.engine.content.feature.action.SpecificAction;
+import fr.free.totalboumboum.engine.content.feature.gesture.Circumstance;
 import fr.free.totalboumboum.engine.content.feature.gesture.Gesture;
 import fr.free.totalboumboum.engine.content.feature.gesture.modulation.ActorModulation;
 import fr.free.totalboumboum.engine.content.feature.gesture.modulation.OtherModulation;
@@ -146,10 +147,10 @@ public class ModulationManager
 	 * then a neutral modulation is returned.
 	 * This method always returns a modulation.
 	 */
-	public ThirdModulation getThirdModulation(SpecificAction action)
+	public ThirdModulation getThirdModulation(SpecificAction action, Circumstance actorCircumstances, Circumstance targetCircumstances)
 	{	ThirdModulation result = null;
 		if(currentGesture!=null)
-			result = currentGesture.getThirdModulation(action);
+			result = currentGesture.getThirdModulation(action,actorCircumstances,targetCircumstances);
 		if(result==null)
 			result = new ThirdModulation(action);
 		return result;
@@ -199,8 +200,8 @@ public class ModulationManager
 	}
 
 	/**
-	 * on se retreint aux cases contenant l'acteur et la cible, et on teste 
-	 * chaque sprite.
+	 * on se retreint aux cases contenant l'acteur et la cible, et on teste chaque sprite.
+	 * NOTE: en réalité, il ne faudrait pas se limiter à ces cases et tester toutes les cases concernées...
 	 */
 	private ActionAbility combineThirdModulation(SpecificAction action, ActionAbility ability)
 	{	ActionAbility result = ability;
@@ -229,7 +230,9 @@ public class ModulationManager
 			Iterator<Sprite> i = sprites.iterator();
 			while(i.hasNext() && result.isActive())
 			{	Sprite tempSprite = i.next();
-				ThirdModulation thirdModulation = tempSprite.getThirdModulation(action);
+				Circumstance actorCircumstances = new Circumstance(tempSprite,sprite);
+				Circumstance targetCircumstances = new Circumstance(tempSprite,target);
+				ThirdModulation thirdModulation = tempSprite.getThirdModulation(action,actorCircumstances,targetCircumstances);
 				result = thirdModulation.modulate(result); 		
 			}
 		}
@@ -282,9 +285,9 @@ public class ModulationManager
 	/**
 	 * check if this sprite modulation is preventing the specified action to happen
 	 */
-	public boolean isThirdPreventing(SpecificAction action)
+	public boolean isThirdPreventing(SpecificAction action, Circumstance actorCircumstances, Circumstance targetCircumstances)
 	{	boolean result = false;
-		ThirdModulation thirdModulation = sprite.getThirdModulation(action);
+		ThirdModulation thirdModulation = sprite.getThirdModulation(action,actorCircumstances,targetCircumstances);
 		result = thirdModulation.getFrame() && thirdModulation.getStrength()<=0;
 		return result;
 	}
