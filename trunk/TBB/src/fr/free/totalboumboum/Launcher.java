@@ -178,8 +178,6 @@ public class Launcher
 		// done
 		System.out.println(GuiTools.STARTUP_MESSAGES[GuiTools.STARTUP_DONE]);
 		
-		
-
 		// create GUI
 		SwingUtilities.invokeLater(new Runnable()
 		{	public void run()
