@@ -27,47 +27,47 @@
 		<!-- ACTION -->
 <!--  	APPEAR --> 
 		<ability strength="1" frame="false" time="-1" uses="-1">
-			<action name="APPEAR" contact="NONE" direction="ANY NONE"
-				orientation="UNDEFINED" target="NONE" tilePosition="UNDEFINED" />
+			<action name="APPEAR" contact="NONE" direction="ANY"
+				orientation="NONE" target="NONE" tilePosition="NONE" />
 		</ability>
 <!--  	CRY --> 
 		<ability strength="1" frame="false" time="-1" uses="-1">
-			<action name="CRY" contact="NONE" direction="ANY NONE"
-				orientation="UNDEFINED" target="NONE" tilePosition="UNDEFINED" />
+			<action name="CRY" contact="NONE" direction="ANY"
+				orientation="NONE" target="NONE" tilePosition="NONE" />
 		</ability>
 <!--  	DROP --> 
 		<ability strength="1" frame="false" time="-1" uses="-1">
-			<action name="DROP" contact="ANY NONE" direction="ANY NONE"
+			<action name="DROP" contact="ANY NONE" direction="ANY"
 				orientation="ANY" target="BOMB" tilePosition="SAME" />
 		</ability>
 <!--  	EXULT --> 
 		<ability strength="1" frame="false" time="-1" uses="-1">
-			<action name="EXULT" contact="ANY NONE" direction="ANY NONE"
+			<action name="EXULT" contact="ANY NONE" direction="ANY"
 				orientation="ANY" target="NONE" tilePosition="ANY" />
 		</ability>
 <!--  	GATHER --> 
 		<ability strength="1" frame="false" time="-1" uses="-1">
-			<action name="GATHER" contact="ANY NONE" direction="ANY NONE"
+			<action name="GATHER" contact="ANY NONE" direction="ANY"
 				orientation="ANY" target="ITEM" tilePosition="SAME" />
 		</ability>
 <!--  	LAND --> 
 		<ability strength="1" frame="false" time="-1" uses="-1">
-			<action name="LAND" contact="NONE" direction="ANY NONE"
-				orientation="UNDEFINED" target="NONE" tilePosition="UNDEFINED" />
+			<action name="LAND" contact="NONE" direction="ANY"
+				orientation="NONE" target="NONE" tilePosition="NONE" />
 		</ability>
 <!--  	MOVEHIGH --> 
 		<ability strength="1" frame="false" time="-1" uses="-1">
-			<action name="MOVEHIGH" contact="NONE" direction="ANY NONE"
-				orientation="UNDEFINED" target="NONE" tilePosition="UNDEFINED" />
+			<action name="MOVEHIGH" contact="NONE" direction="ANY"
+				orientation="NONE" target="NONE" tilePosition="NONE" />
 		</ability>
 <!--  	MOVELOW --> 
 		<ability strength="1" frame="false" time="-1" uses="-1">
-			<action name="MOVELOW" contact="NONE" direction="ANY NONE"
-				orientation="UNDEFINED" target="NONE" tilePosition="UNDEFINED" />
+			<action name="MOVELOW" contact="NONE" direction="ANY"
+				orientation="NONE" target="NONE" tilePosition="NONE" />
 		</ability>
 <!--  	TRIGGER --> 
 		<ability strength="1" frame="false" time="-1" uses="-1">
-			<action name="TRIGGER" contact="ANY NONE" direction="ANY NONE"
+			<action name="TRIGGER" contact="ANY NONE" direction="ANY"
 				orientation="ANY" target="BOMB" tilePosition="ANY" />
 		</ability>
 

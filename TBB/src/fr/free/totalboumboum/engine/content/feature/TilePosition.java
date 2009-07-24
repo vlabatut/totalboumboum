@@ -36,7 +36,7 @@ import fr.free.totalboumboum.tools.XmlTools;
  */
 public enum TilePosition
 {	/** no position can be defined: there's no target, or it has no tile, or the actor has no tile */
-	UNDEFINED,
+	NONE,
 	/** the actor and target are together in the same tile */
 	SAME,
 	/** the actor and target are in neighbor tiles */
@@ -57,7 +57,7 @@ public enum TilePosition
 			targetTile = target.getTile();
 		// tile position is undefined
 		if(actorTile==null || targetTile==null)
-			result = TilePosition.UNDEFINED;
+			result = TilePosition.NONE;
 		else	
 		{	// same tile
 			if(actorTile==targetTile)
@@ -78,17 +78,27 @@ public enum TilePosition
 		return result;
 	}	
 
+	/**
+	 * load a tile position value.
+	 * the XML value SOME represents any tile position except NONE. 
+	 * the XML value ANY represents any tile position including NONE. 
+	 */
 	public static ArrayList<TilePosition> loadTilePositionsAttribute(Element root, String attName)
 	{	ArrayList<TilePosition> result = new ArrayList<TilePosition>();
 		Attribute attribute = root.getAttribute(attName);
 		String tilePositionStr = attribute.getValue().trim().toUpperCase(Locale.ENGLISH);
 		String[] tilePositionsStr = tilePositionStr.split(" ");
 		for(String str: tilePositionsStr)
-		{	if(str.equalsIgnoreCase(XmlTools.VAL_ANY))
+		{	if(str.equalsIgnoreCase(XmlTools.VAL_SOME))
 			{	result.add(TilePosition.NEIGHBOR);
 				result.add(TilePosition.REMOTE);
 				result.add(TilePosition.SAME);
-				result.add(TilePosition.UNDEFINED);
+				result.add(TilePosition.NONE);
+			}
+			else if(str.equalsIgnoreCase(XmlTools.VAL_ANY))
+			{	result.add(TilePosition.NEIGHBOR);
+				result.add(TilePosition.REMOTE);
+				result.add(TilePosition.SAME);
 			}
 			else
 			{	TilePosition tilePosition = TilePosition.valueOf(str);

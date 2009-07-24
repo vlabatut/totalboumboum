@@ -67,15 +67,25 @@ public enum Contact
 		return result;
 	}	
 
+	/**
+	 * load a contact value.
+	 * the XML value SOME represents any contact except NONE. 
+	 * the XML value ANY represents any contact including NONE. 
+	 */
 	public static ArrayList<Contact> loadContactsAttribute(Element root, String attName)
 	{	ArrayList<Contact> result = new ArrayList<Contact>();
 		Attribute attribute = root.getAttribute(attName);
 		String contactStr = attribute.getValue().trim().toUpperCase(Locale.ENGLISH);
 		String[] contactsStr = contactStr.split(" ");
 		for(String str: contactsStr)
-		{	if(str.equalsIgnoreCase(XmlTools.VAL_ANY))
+		{	if(str.equalsIgnoreCase(XmlTools.VAL_SOME))
 			{	result.add(Contact.COLLISION);
 				result.add(Contact.INTERSECTION);
+			}
+			else if(str.equalsIgnoreCase(XmlTools.VAL_ANY))
+			{	result.add(Contact.COLLISION);
+				result.add(Contact.INTERSECTION);
+				result.add(Contact.NONE);
 			}
 			else
 			{	Contact contact = Contact.valueOf(str);

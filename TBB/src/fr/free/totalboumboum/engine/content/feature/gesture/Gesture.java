@@ -214,32 +214,32 @@ public class Gesture
 			result.addTrajectoryDirection(temp);
 		}
 		
-		// self permissions
+		// self modulations
 		for(SelfModulation e: selfModulations)
 		{	//SelfModulation temp = e.copy();
 			SelfModulation temp = e;
 			result.addModulation(temp);
 		}
-		// other permissions
+		// other modulations
 		for(OtherModulation e: otherModulations)
 		{	//OtherModulation temp = e.copy();
 			OtherModulation temp = e;
 			result.addModulation(temp);
 		}
 		
-		// actor permissions
+		// actor modulations
 		for(ActorModulation e: actorModulations)
 		{	//ActorModulation temp = e.copy();
 			ActorModulation temp = e;
 			result.addModulation(temp);
 		}
-		// target permissions
+		// target modulations
 		for(TargetModulation e: targetModulations)
 		{	//TargetModulation temp = e.copy();
 			TargetModulation temp = e;
 			result.addModulation(temp);
 		}
-		// third permissions
+		// third modulations
 		for(ThirdModulation e: thirdModulations)
 		{	//ThirdModulation temp = e.copy();
 			ThirdModulation temp = e;

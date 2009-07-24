@@ -43,7 +43,7 @@ public class Circumstance
 		setOrientation(orientation);
 		Contact contact = Contact.NONE;
 		setContact(contact);
-		TilePosition tilePosition = TilePosition.UNDEFINED;
+		TilePosition tilePosition = TilePosition.NONE;
 		setTilePosition(tilePosition);		
 	}
 

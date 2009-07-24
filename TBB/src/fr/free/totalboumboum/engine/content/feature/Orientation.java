@@ -34,7 +34,7 @@ import fr.free.totalboumboum.tools.XmlTools;
 /**
  * represents the compared directions of the action and of the target
  * (the levels is closed, so the target direction has to be considered in terms of shortest distance)  
- */
+ */ 
 public enum Orientation
 {	/** no target or no action direction */
 	NONE,
