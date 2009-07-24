@@ -24,9 +24,9 @@ package fr.free.totalboumboum.engine.content.feature.gesture.modulation;
 import fr.free.totalboumboum.engine.content.feature.Contact;
 import fr.free.totalboumboum.engine.content.feature.Orientation;
 import fr.free.totalboumboum.engine.content.feature.TilePosition;
+import fr.free.totalboumboum.engine.content.feature.action.Circumstance;
 import fr.free.totalboumboum.engine.content.feature.action.GeneralAction;
 import fr.free.totalboumboum.engine.content.feature.action.SpecificAction;
-import fr.free.totalboumboum.engine.content.feature.gesture.Circumstance;
 
 public class ThirdModulation extends AbstractActionModulation
 {
