@@ -169,7 +169,7 @@ public class GeneralGather extends GeneralAction
 	public void addContact(Contact contact)
 	{	if(allowedContacts.contains(contact))
 		{	if(!containsContact(contact))
-				addContact(contact);
+				circumstance.addContact(contact);
 		}
 	}
 
@@ -188,7 +188,7 @@ public class GeneralGather extends GeneralAction
 	public void addTilePosition(TilePosition tilePosition)
 	{	if(allowedTilePositions.contains(tilePosition))
 		{	if(!containsTilePosition(tilePosition))
-				addTilePosition(tilePosition);
+				circumstance.addTilePosition(tilePosition);
 		}
 	}
 
@@ -197,18 +197,18 @@ public class GeneralGather extends GeneralAction
 	/////////////////////////////////////////////////////////////////
 	/** compared directions of the target and the action */
 	private static final List<Orientation> allowedOrientations = Arrays.asList(new Orientation[]{
-		Orientation.UNDEFINED,
+		Orientation.NONE,
 		Orientation.BACK,
 		Orientation.OTHER,
 		Orientation.FACE,
-		Orientation.NONE
+		Orientation.NEUTRAL
     });
 
 	@Override
 	public void addOrientation(Orientation orientation)
 	{	if(allowedOrientations.contains(orientation))
 		{	if(!containsOrientation(orientation))
-				addOrientation(orientation);
+				circumstance.addOrientation(orientation);
 		}
 	}
 

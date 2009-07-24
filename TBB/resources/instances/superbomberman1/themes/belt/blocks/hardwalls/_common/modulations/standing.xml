@@ -58,7 +58,7 @@
 				tilePosition="ANY" orientation="ANY" actor="ANY" />
 			<actor-restrictions />
 			<target-restrictions />
-			<actor-circumstances contact="INTERSECTION" tilePosition="NEIGHBOR" orientation="BACK NONE OTHER" />
+			<actor-circumstances contact="INTERSECTION" tilePosition="NEIGHBOR" orientation="BACK NEUTRAL OTHER" />
 			<target-circumstances  />
 		</modulation>
 		<!-- other -> obstacle -->

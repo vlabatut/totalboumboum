@@ -156,7 +156,7 @@ public class GeneralMoveHigh extends GeneralAction
 	public void addContact(Contact contact)
 	{	if(allowedContacts.contains(contact))
 		{	if(!containsContact(contact))
-				addContact(contact);
+				circumstance.addContact(contact);
 		}
 	}
 
@@ -175,7 +175,7 @@ public class GeneralMoveHigh extends GeneralAction
 	public void addTilePosition(TilePosition tilePosition)
 	{	if(allowedTilePositions.contains(tilePosition))
 		{	if(!containsTilePosition(tilePosition))
-				addTilePosition(tilePosition);
+				circumstance.addTilePosition(tilePosition);
 		}
 	}
 
@@ -184,7 +184,7 @@ public class GeneralMoveHigh extends GeneralAction
 	/////////////////////////////////////////////////////////////////
 	/** compared directions of the target and the action */
 	private static final List<Orientation> allowedOrientations = Arrays.asList(new Orientation[]{
-		Orientation.UNDEFINED
+		Orientation.NONE
 //		Orientation.OPPOSITE,
 //		Orientation.OTHER,
 //		Orientation.SAME
@@ -194,7 +194,7 @@ public class GeneralMoveHigh extends GeneralAction
 	public void addOrientation(Orientation orientation)
 	{	if(allowedOrientations.contains(orientation))
 		{	if(!containsOrientation(orientation))
-				addOrientation(orientation);
+				circumstance.addOrientation(orientation);
 		}
 	}
 
