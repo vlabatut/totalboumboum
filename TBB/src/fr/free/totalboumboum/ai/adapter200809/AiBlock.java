@@ -21,8 +21,8 @@ package fr.free.totalboumboum.ai.adapter200809;
  * 
  */
 
-import fr.free.totalboumboum.engine.content.feature.gesture.action.SpecificAction;
-import fr.free.totalboumboum.engine.content.feature.gesture.action.consume.SpecificConsume;
+import fr.free.totalboumboum.engine.content.feature.action.SpecificAction;
+import fr.free.totalboumboum.engine.content.feature.action.consume.SpecificConsume;
 import fr.free.totalboumboum.engine.content.sprite.block.Block;
 
 /**

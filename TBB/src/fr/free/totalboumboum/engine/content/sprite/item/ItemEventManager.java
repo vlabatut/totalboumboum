@@ -22,12 +22,12 @@ package fr.free.totalboumboum.engine.content.sprite.item;
  */
 
 import fr.free.totalboumboum.engine.content.feature.Direction;
+import fr.free.totalboumboum.engine.content.feature.action.consume.SpecificConsume;
+import fr.free.totalboumboum.engine.content.feature.action.gather.SpecificGather;
 import fr.free.totalboumboum.engine.content.feature.event.ActionEvent;
 import fr.free.totalboumboum.engine.content.feature.event.ControlEvent;
 import fr.free.totalboumboum.engine.content.feature.event.EngineEvent;
 import fr.free.totalboumboum.engine.content.feature.gesture.GestureName;
-import fr.free.totalboumboum.engine.content.feature.gesture.action.consume.SpecificConsume;
-import fr.free.totalboumboum.engine.content.feature.gesture.action.gather.SpecificGather;
 import fr.free.totalboumboum.engine.content.manager.event.EventManager;
 
 public class ItemEventManager extends EventManager
