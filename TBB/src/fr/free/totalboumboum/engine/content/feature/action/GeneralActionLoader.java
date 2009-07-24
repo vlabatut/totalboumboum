@@ -28,7 +28,6 @@ import org.jdom.Element;
 
 import fr.free.totalboumboum.engine.content.feature.Direction;
 import fr.free.totalboumboum.engine.content.feature.Role;
-import fr.free.totalboumboum.engine.content.feature.gesture.CircumstanceLoader;
 import fr.free.totalboumboum.tools.XmlTools;
 
 public class GeneralActionLoader
