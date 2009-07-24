@@ -6,7 +6,9 @@
 			<xsd:enumeration value="NONE" />
 			<xsd:enumeration value="COLLISION" />
 			<xsd:enumeration value="INTERSECTION" />
-			<xsd:enumeration value="ANY" />
+			
+			<xsd:enumeration value="SOME" /> <!-- represents any value but NONE -->
+			<xsd:enumeration value="ANY" /> <!-- represents any value -->
 		</xsd:restriction>
 	</xsd:simpleType>
 	

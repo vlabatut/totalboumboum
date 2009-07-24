@@ -39,7 +39,7 @@ public class Circumstance
 	}
 	
 	public void initCircumstance()
-	{	Orientation orientation = Orientation.UNDEFINED;
+	{	Orientation orientation = Orientation.NONE;
 		setOrientation(orientation);
 		Contact contact = Contact.NONE;
 		setContact(contact);
@@ -75,6 +75,8 @@ public class Circumstance
 	public void setOrientation(Orientation orientation)
 	{	if(orientations.size()>0)
 			orientations.set(0,orientation);
+		else
+			orientations.add(orientation);
 	}
 	
 	public void addOrientation(Orientation orientation)
@@ -108,6 +110,8 @@ public class Circumstance
 	public void setTilePosition(TilePosition tilePosition)
 	{	if(tilePositions.size()>0)
 			tilePositions.set(0,tilePosition);
+		else
+			tilePositions.add(tilePosition);
 	}
 
 	public void addTilePosition(TilePosition tilePosition)
@@ -141,6 +145,8 @@ public class Circumstance
 	public void setContact(Contact contact)
 	{	if(contacts.size()>0)
 			contacts.set(0,contact);
+		else
+			contacts.add(contact);
 	}
 
 	public void addContact(Contact contact)

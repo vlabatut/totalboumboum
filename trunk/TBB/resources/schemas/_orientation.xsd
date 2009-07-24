@@ -7,8 +7,10 @@
 			<xsd:enumeration value="FACE" />
 			<xsd:enumeration value="BACK" />
 			<xsd:enumeration value="OTHER" />
-			<xsd:enumeration value="NONE" />
-			<xsd:enumeration value="ANY" />
+			<xsd:enumeration value="NEUTRAL" />
+			
+			<xsd:enumeration value="SOME" /> <!-- represents any value but NONE -->
+			<xsd:enumeration value="ANY" /> <!-- represents any value -->
 		</xsd:restriction>
 	</xsd:simpleType>
 	

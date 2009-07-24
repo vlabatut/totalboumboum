@@ -37,7 +37,7 @@ import fr.free.totalboumboum.tools.XmlTools;
  */
 public enum Orientation
 {	/** no target or no action direction */
-	UNDEFINED,
+	NONE,
 	/** the action is performed facing the target, or the action and the target are exactly on the same spot */
 	FACE,
 	/** the action is performed back to the target */
@@ -45,9 +45,7 @@ public enum Orientation
 	/** the action is not performed facing nor back to the target */
 	OTHER,
 	/** the actor and target are exactly at the same place */
-	NONE;
-//SAME>>FACE, OPPOSITE>>BACK, nouvelle:NONE
-// adapter java et XML
+	NEUTRAL;
 	
 	/**
 	 * returns the orientation, or UNDEFINED if the target is null or if the action is not directed.
@@ -62,7 +60,7 @@ public enum Orientation
 		Direction facingDir = actor.getCurrentFacingDirection();
 		// no orientation
 		if(facingDir==Direction.NONE || target==null)
-			result = Orientation.UNDEFINED;
+			result = Orientation.NONE;
 		else
 		{	Direction relativeDir = Direction.getCompositeFromSprites(actor,target);
 			// actor facing target
@@ -73,7 +71,7 @@ public enum Orientation
 				result = Orientation.BACK;
 			// no direction
 			else if(relativeDir==Direction.NONE)
-				result = Orientation.NONE;
+				result = Orientation.NEUTRAL;
 			// other directions
 			else
 				result = Orientation.OTHER;
@@ -87,17 +85,28 @@ public enum Orientation
 		return result;
 	}	
 
+	/**
+	 * load an orientation value.
+	 * the XML value SOME represents any orientation except NONE. 
+	 * the XML value ANY represents any orientation including NONE. 
+	 */
 	public static ArrayList<Orientation> loadOrientationsAttribute(Element root, String attName)
 	{	ArrayList<Orientation> result = new ArrayList<Orientation>();
 		Attribute attribute = root.getAttribute(attName);
 		String orientationStr = attribute.getValue().trim().toUpperCase(Locale.ENGLISH);
 		String[] orientationsStr = orientationStr.split(" ");
 		for(String str: orientationsStr)
-		{	if(str.equalsIgnoreCase(XmlTools.VAL_ANY))
+		{	if(str.equalsIgnoreCase(XmlTools.VAL_SOME))
 			{	result.add(Orientation.BACK);
 				result.add(Orientation.OTHER);
 				result.add(Orientation.FACE);
-				result.add(Orientation.UNDEFINED);
+				result.add(Orientation.NEUTRAL);
+			}
+			else if(str.equalsIgnoreCase(XmlTools.VAL_ANY))
+			{	result.add(Orientation.BACK);
+				result.add(Orientation.OTHER);
+				result.add(Orientation.FACE);
+				result.add(Orientation.NEUTRAL);
 				result.add(Orientation.NONE);
 			}
 			else
