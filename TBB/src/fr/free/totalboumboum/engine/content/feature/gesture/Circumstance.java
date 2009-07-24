@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import fr.free.totalboumboum.engine.content.feature.Contact;
 import fr.free.totalboumboum.engine.content.feature.Orientation;
 import fr.free.totalboumboum.engine.content.feature.TilePosition;
+import fr.free.totalboumboum.engine.content.sprite.Sprite;
 
 /*
  * Total Boum Boum
@@ -29,6 +30,32 @@ import fr.free.totalboumboum.engine.content.feature.TilePosition;
 
 public class Circumstance
 {	
+	public Circumstance()
+	{			
+	}
+	
+	public Circumstance(Sprite reference, Sprite other)
+	{	initCircumstance(reference,other);		
+	}
+	
+	public void initCircumstance()
+	{	Orientation orientation = Orientation.UNDEFINED;
+		setOrientation(orientation);
+		Contact contact = Contact.NONE;
+		setContact(contact);
+		TilePosition tilePosition = TilePosition.UNDEFINED;
+		setTilePosition(tilePosition);		
+	}
+
+	public void initCircumstance(Sprite reference, Sprite other)
+	{	Orientation orientation = Orientation.getOrientation(reference,other);
+		setOrientation(orientation);
+		Contact contact = Contact.getContact(reference,other);
+		setContact(contact);
+		TilePosition tilePosition = TilePosition.getTilePosition(reference,other);
+		setTilePosition(tilePosition);		
+	}
+	
 	/////////////////////////////////////////////////////////////////
 	// ORIENTATION		/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
@@ -58,10 +85,10 @@ public class Circumstance
 	{	return orientations.contains(orientation);	
 	}
 
-	public boolean containsAllOrientations(ArrayList<Orientation> orientations)
+/*	public boolean containsAllOrientations(ArrayList<Orientation> orientations)
 	{	return orientations.containsAll(orientations);	
 	}
-
+*/
 	/////////////////////////////////////////////////////////////////
 	// TILE POSITION	/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
@@ -91,10 +118,10 @@ public class Circumstance
 	{	return tilePositions.contains(tilePosition);	
 	}
 
-	public boolean containsAllTilePositions(ArrayList<TilePosition> tilePositions)
+/*	public boolean containsAllTilePositions(ArrayList<TilePosition> tilePositions)
 	{	return tilePositions.containsAll(tilePositions);	
 	}
-
+*/
 	/////////////////////////////////////////////////////////////////
 	// CONTACT			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
@@ -124,10 +151,27 @@ public class Circumstance
 	{	return contacts.contains(contact);	
 	}
 
-	public boolean containsAllContacts(ArrayList<Contact> contact)
+/*	public boolean containsAllContacts(ArrayList<Contact> contact)
 	{	return contacts.containsAll(contacts);	
 	}
-
+*/
+	/////////////////////////////////////////////////////////////////
+	// COMPARISON		/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	public boolean subsume(Circumstance circumstance)
+	{	boolean result = true;
+		// contact
+		if(result)
+			result = contacts.containsAll(circumstance.getContacts());
+		// orientation
+		if(result)
+			result = orientations.containsAll(circumstance.getOrientations());
+		// tile position
+		if(result)
+			result = tilePositions.containsAll(circumstance.getTilePositions());
+		return result;
+	}
+	
 	/////////////////////////////////////////////////////////////////
 	// FINISHED			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////

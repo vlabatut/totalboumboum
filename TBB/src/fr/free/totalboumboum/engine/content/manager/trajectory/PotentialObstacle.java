@@ -30,6 +30,7 @@ import fr.free.totalboumboum.engine.content.feature.TilePosition;
 import fr.free.totalboumboum.engine.content.feature.action.SpecificAction;
 import fr.free.totalboumboum.engine.content.feature.action.movehigh.SpecificMoveHigh;
 import fr.free.totalboumboum.engine.content.feature.action.movelow.SpecificMoveLow;
+import fr.free.totalboumboum.engine.content.feature.gesture.Circumstance;
 import fr.free.totalboumboum.engine.content.sprite.Sprite;
 import fr.free.totalboumboum.tools.CalculusTools;
 
@@ -260,6 +261,9 @@ public class PotentialObstacle
 		boolean result;
 		Direction usedDirection = moveZone.getUsedDirection();
 		Sprite source = moveZone.getSourceSprite();
+		Circumstance actorCircumstance = new Circumstance();
+		Circumstance targetCircumstance = new Circumstance();
+		targetCircumstance.initCircumstance();
 		
 		// contact
 		double distX = GameVariables.level.getHorizontalDistance(sprite.getCurrentPosX(),moveZone.getCurrentX());
@@ -268,6 +272,7 @@ public class PotentialObstacle
 		if(!CalculusTools.isRelativelyGreaterOrEqualTo(distX,tileDimension) && !CalculusTools.isRelativelyGreaterOrEqualTo(distY,tileDimension))
 			// intersection iff the distance is relatively smaller than the tile size  
 			contact = Contact.INTERSECTION;
+		actorCircumstance.setContact(contact);
 		
 		// tile position
 		Tile currentTile = GameVariables.level.getTile(moveZone.getCurrentX(),moveZone.getCurrentY());
@@ -275,7 +280,8 @@ public class PotentialObstacle
 		TilePosition tilePosition = TilePosition.NEIGHBOR;
 		if(currentTile == spriteTile)
 			tilePosition = TilePosition.SAME;
-		
+		actorCircumstance.setTilePosition(tilePosition);
+
 		// orientation
 		Orientation orientation;
 		if(usedDirection==Direction.NONE)
@@ -295,19 +301,20 @@ public class PotentialObstacle
 			else
 				orientation = Orientation.OTHER;
 		}
+		actorCircumstance.setOrientation(orientation);
 		
 		// action
 		SpecificAction specificAction;
 		if(source.isOnGround())
-			specificAction = new SpecificMoveLow(source,usedDirection,contact,tilePosition,orientation);
+			specificAction = new SpecificMoveLow(source,usedDirection);
 		else
-			specificAction = new SpecificMoveHigh(source,usedDirection,contact,tilePosition,orientation);
+			specificAction = new SpecificMoveHigh(source,usedDirection);
 		
 		// testing the action
 		//	TODO ça serait plus logique d'utiliser le résultat de la modulation
 		//	(ça tiendrait compte d'interactions entre les différents modulateurs). 
 		//	mais ça serait aussi plus long, donc à voir...
-		result = sprite.isThirdPreventing(specificAction);
+		result = sprite.isThirdPreventing(specificAction,actorCircumstance,targetCircumstance);
 				
 /* NOTE OLD VERSION		
 		// with intersection

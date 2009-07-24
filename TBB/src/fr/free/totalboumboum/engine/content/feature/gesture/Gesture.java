@@ -175,12 +175,12 @@ public class Gesture
 		return result;
 	}
 	
-	public ThirdModulation getThirdModulation(SpecificAction action)
+	public ThirdModulation getThirdModulation(SpecificAction action, Circumstance actorCircumstances, Circumstance targetCircumstances)
 	{	ThirdModulation result = null;
 		Iterator<ThirdModulation> i = thirdModulations.iterator();
 		while(i.hasNext() && result==null)
 		{	ThirdModulation modulation = i.next();
-			if(modulation.isConcerningAction(action))
+			if(modulation.isConcerningAction(action,actorCircumstances,targetCircumstances))
 				result = modulation;
 		}
 		return result;

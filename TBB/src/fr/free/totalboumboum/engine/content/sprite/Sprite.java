@@ -42,6 +42,7 @@ import fr.free.totalboumboum.engine.content.feature.event.AbstractEvent;
 import fr.free.totalboumboum.engine.content.feature.event.ActionEvent;
 import fr.free.totalboumboum.engine.content.feature.event.ControlEvent;
 import fr.free.totalboumboum.engine.content.feature.event.EngineEvent;
+import fr.free.totalboumboum.engine.content.feature.gesture.Circumstance;
 import fr.free.totalboumboum.engine.content.feature.gesture.Gesture;
 import fr.free.totalboumboum.engine.content.feature.gesture.GestureName;
 import fr.free.totalboumboum.engine.content.feature.gesture.GesturePack;
@@ -630,8 +631,8 @@ public abstract class Sprite
 	{	return modulationManager.getTargetModulation(action);
 	}
 	
-	public ThirdModulation getThirdModulation(SpecificAction action)
-	{	return modulationManager.getThirdModulation(action);
+	public ThirdModulation getThirdModulation(SpecificAction action, Circumstance actorCircumstances, Circumstance targetCircumstances)
+	{	return modulationManager.getThirdModulation(action,actorCircumstances,targetCircumstances);
 	}
 	
 	public StateAbility modulateStateAbility(String name)
@@ -646,8 +647,8 @@ public abstract class Sprite
 	{	return modulationManager.isTargetPreventing(action);
 	}
 
-	public boolean isThirdPreventing(SpecificAction action)
-	{	return modulationManager.isThirdPreventing(action);
+	public boolean isThirdPreventing(SpecificAction action, Circumstance actorCircumstances, Circumstance targetCircumstances)
+	{	return modulationManager.isThirdPreventing(action,actorCircumstances,targetCircumstances);
 	}
 	
 /*	

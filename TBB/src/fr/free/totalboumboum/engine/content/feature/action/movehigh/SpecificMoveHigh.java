@@ -21,10 +21,7 @@ package fr.free.totalboumboum.engine.content.feature.action.movehigh;
  * 
  */
 
-import fr.free.totalboumboum.engine.content.feature.Contact;
 import fr.free.totalboumboum.engine.content.feature.Direction;
-import fr.free.totalboumboum.engine.content.feature.Orientation;
-import fr.free.totalboumboum.engine.content.feature.TilePosition;
 import fr.free.totalboumboum.engine.content.feature.action.ActionName;
 import fr.free.totalboumboum.engine.content.feature.action.SpecificAction;
 import fr.free.totalboumboum.engine.content.sprite.Sprite;
@@ -45,10 +42,6 @@ public class SpecificMoveHigh extends SpecificAction
 	public SpecificMoveHigh(Sprite actor, Direction direction)
 	{	super(ActionName.MOVEHIGH,actor);
 		setDirection(direction);
-	}
-
-	public SpecificMoveHigh(Sprite actor, Direction direction, Contact contact, TilePosition tilePosition, Orientation orientation)
-	{	super(ActionName.MOVEHIGH,actor,null,direction,contact,tilePosition,orientation);
 	}
 
 /*	
