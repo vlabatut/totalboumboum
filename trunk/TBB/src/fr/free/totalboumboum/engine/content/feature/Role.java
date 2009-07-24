@@ -48,6 +48,11 @@ public enum Role
 	/** the actor or target is an item sprite */
 	ITEM;
 
+	/**
+	 * load a role value.
+	 * the XML value SOME represents any role except NONE. 
+	 * the XML value ANY represents any role including NONE. 
+	 */
 	public static ArrayList<Role> loadRolesAttribute(Element root, String attName)
 	{	ArrayList<Role> result = new ArrayList<Role>();
 		Attribute attribute = root.getAttribute(attName);
@@ -55,13 +60,22 @@ public enum Role
 		{	String roleStr = attribute.getValue().trim().toUpperCase(Locale.ENGLISH);
 			String[] rolesStr = roleStr.split(" ");
 			for(String str: rolesStr)
-			{	if(str.equalsIgnoreCase(XmlTools.VAL_ANY))
+			{	if(str.equalsIgnoreCase(XmlTools.VAL_SOME))
 				{	result.add(Role.BLOCK);
 					result.add(Role.BOMB);
 					result.add(Role.FIRE);
 					result.add(Role.FLOOR);
 					result.add(Role.HERO);
 					result.add(Role.ITEM);
+				}
+				else if(str.equalsIgnoreCase(XmlTools.VAL_ANY))
+				{	result.add(Role.BLOCK);
+					result.add(Role.BOMB);
+					result.add(Role.FIRE);
+					result.add(Role.FLOOR);
+					result.add(Role.HERO);
+					result.add(Role.ITEM);
+					result.add(Role.NONE);
 				}
 				else
 				{	Role role = Role.valueOf(str);

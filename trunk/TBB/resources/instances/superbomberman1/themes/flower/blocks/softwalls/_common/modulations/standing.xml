@@ -18,7 +18,7 @@
 <!--  	APPEAR --> 
 		<modulation frame="false" strength="0" >
 			<action name="APPEAR" direction="ANY" contact="ANY"
-				tilePosition="ANY" orientation="ANY" actor="ANY" />
+				tilePosition="ANY" orientation="ANY" actor="SOME" />
 			<actor-restrictions>
 				<ability><name value="SPRITE_TRAVERSE_BOMB" /></ability>
 			</actor-restrictions>
@@ -28,7 +28,7 @@
 		</modulation>
 		<modulation frame="true" strength="0" >
 			<action name="APPEAR" direction="ANY" contact="ANY"
-				tilePosition="ANY" orientation="ANY" actor="ANY" />
+				tilePosition="ANY" orientation="ANY" actor="SOME" />
 			<actor-restrictions />
 			<target-restrictions />
 			<actor-circumstances contact="ANY" tilePosition="ANY" orientation="ANY" />
@@ -37,7 +37,7 @@
 <!--  	LAND --> 
 		<modulation frame="false" strength="0" >
 			<action name="LAND" direction="ANY" contact="ANY"
-				tilePosition="ANY" orientation="ANY" actor="ANY" />
+				tilePosition="ANY" orientation="ANY" actor="SOME" />
 			<actor-restrictions>
 				<ability><name value="SPRITE_TRAVERSE_BOMB" /></ability>
 			</actor-restrictions>
@@ -47,7 +47,7 @@
 		</modulation>
 		<modulation frame="true" strength="0" >
 			<action name="LAND" direction="ANY" contact="ANY"
-				tilePosition="ANY" orientation="ANY" actor="ANY" />
+				tilePosition="ANY" orientation="ANY" actor="SOME" />
 			<actor-restrictions />
 			<target-restrictions />
 			<actor-circumstances contact="ANY" tilePosition="ANY" orientation="ANY" />
@@ -57,7 +57,7 @@
 		<!-- ability to go through bombs -> not an obstacle -->
 		<modulation frame="false" strength="0" >
 			<action name="MOVELOW" direction="ANY" contact="ANY"
-				tilePosition="ANY" orientation="ANY" actor="ANY" />
+				tilePosition="ANY" orientation="ANY" actor="SOME" />
 			<actor-restrictions>
 				<ability><name value="SPRITE_TRAVERSE_BOMB" /></ability>
 			</actor-restrictions>
@@ -68,7 +68,7 @@
 		<!-- intersection, same tile -> not an obstacle -->
 		<modulation frame="false" strength="0" >
 			<action name="MOVELOW" direction="ANY" contact="ANY"
-				tilePosition="SAME" orientation="ANY" actor="ANY" />
+				tilePosition="SAME" orientation="ANY" actor="SOME" />
 			<actor-restrictions />
 			<target-restrictions />
 			<actor-circumstances contact="INTERSECTION" tilePosition="SAME" orientation="ANY" />
@@ -77,7 +77,7 @@
 		<!-- intersection, different tile, same orientation -> obstacle -->
 		<modulation frame="true" strength="0" >
 			<action name="MOVELOW" direction="ANY" contact="ANY"
-				tilePosition="ANY" orientation="ANY" actor="ANY" />
+				tilePosition="ANY" orientation="ANY" actor="SOME" />
 			<actor-restrictions />
 			<target-restrictions />
 			<actor-circumstances contact="INTERSECTION" tilePosition="NEIGHBOR" orientation="FACE" />
@@ -86,7 +86,7 @@
 		<!-- intersection, different tile, different orientation -> not an obstacle -->
 		<modulation frame="false" strength="0" >
 			<action name="MOVELOW" direction="ANY" contact="ANY"
-				tilePosition="ANY" orientation="ANY" actor="ANY" />
+				tilePosition="ANY" orientation="ANY" actor="SOME" />
 			<actor-restrictions />
 			<target-restrictions />
 			<actor-circumstances contact="INTERSECTION" tilePosition="NEIGHBOR" orientation="BACK NEUTRAL OTHER" />
@@ -95,7 +95,7 @@
 		<!-- other -> obstacle -->
 		<modulation frame="true" strength="0" >
 			<action name="MOVELOW" direction="ANY" contact="ANY"
-				tilePosition="ANY" orientation="ANY" actor="ANY" />
+				tilePosition="ANY" orientation="ANY" actor="SOME" />
 			<actor-restrictions />
 			<target-restrictions />
 			<actor-circumstances contact="COLLISION INTERSECTION" tilePosition="NEIGHBOR SAME" orientation="ANY" />

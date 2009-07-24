@@ -3,14 +3,16 @@
 
 	<xsd:simpleType name="tRole">
 		<xsd:restriction base="xsd:string">
+			<xsd:enumeration value="NONE" />
 			<xsd:enumeration value="BLOCK" />
 			<xsd:enumeration value="BOMB" />
 			<xsd:enumeration value="FIRE" />
 			<xsd:enumeration value="FLOOR" />
 			<xsd:enumeration value="HERO" />
 			<xsd:enumeration value="ITEM" />
-			<xsd:enumeration value="NONE" />
-			<xsd:enumeration value="ANY" />
+
+			<xsd:enumeration value="SOME" /> <!-- represents any value but NONE -->
+			<xsd:enumeration value="ANY" /> <!-- represents any value including NONE -->
 		</xsd:restriction>
 	</xsd:simpleType>
 

@@ -166,7 +166,7 @@ public class GeneralAppear extends GeneralAction
 	/////////////////////////////////////////////////////////////////
 	/** positions of the target in termes of tiles */
 	private static final List<TilePosition> allowedTilePositions = Arrays.asList(new TilePosition[]{
-		TilePosition.UNDEFINED
+		TilePosition.NONE
 //		TilePosition.NEIGHBOR,
 //		TilePosition.REMOTE,
 //		TilePosition.SAME

@@ -3,14 +3,14 @@
 
 	<xsd:simpleType name="tOrientation">
 		<xsd:restriction base="xsd:string">
-			<xsd:enumeration value="UNDEFINED" />
+			<xsd:enumeration value="NONE" />
 			<xsd:enumeration value="FACE" />
 			<xsd:enumeration value="BACK" />
 			<xsd:enumeration value="OTHER" />
 			<xsd:enumeration value="NEUTRAL" />
 			
 			<xsd:enumeration value="SOME" /> <!-- represents any value but NONE -->
-			<xsd:enumeration value="ANY" /> <!-- represents any value -->
+			<xsd:enumeration value="ANY" /> <!-- represents any value including NONE -->
 		</xsd:restriction>
 	</xsd:simpleType>
 	

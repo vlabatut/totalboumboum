@@ -3,11 +3,13 @@
 
 	<xsd:simpleType name="tTilePosition">
 		<xsd:restriction base="xsd:string">
-			<xsd:enumeration value="UNDEFINED" />
+			<xsd:enumeration value="NONE" />
 			<xsd:enumeration value="SAME" />
 			<xsd:enumeration value="NEIGHBOR" />
 			<xsd:enumeration value="REMOTE" />
-			<xsd:enumeration value="ANY" />
+			
+			<xsd:enumeration value="SOME" /> <!-- represents any value but NONE -->
+			<xsd:enumeration value="ANY" /> <!-- represents any value including NONE -->
 		</xsd:restriction>
 	</xsd:simpleType>
 	

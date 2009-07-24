@@ -436,13 +436,18 @@ public enum Direction
 */
 	
 	// TODO à utiliser dans tous les loaders
+	/**
+	 * load a direction value.
+	 * the XML value SOME represents any direction except NONE. 
+	 * the XML value ANY represents any direction including NONE. 
+	 */
 	public static ArrayList<Direction> loadDirectionsAttribute(Element root, String attName)
 	{	ArrayList<Direction> result = new ArrayList<Direction>();
 		Attribute attribute = root.getAttribute(attName);
 		String directionStr = attribute.getValue().trim().toUpperCase(Locale.ENGLISH);
 		String[] directionsStr = directionStr.split(" ");
 		for(String str: directionsStr)
-		{	if(str.equalsIgnoreCase(XmlTools.VAL_ANY))
+		{	if(str.equalsIgnoreCase(XmlTools.VAL_SOME))
 			{	result.add(Direction.UP);
 				result.add(Direction.UPRIGHT);
 				result.add(Direction.RIGHT);
@@ -451,6 +456,17 @@ public enum Direction
 				result.add(Direction.DOWNLEFT);
 				result.add(Direction.LEFT);
 				result.add(Direction.UPLEFT);
+			}
+			else if(str.equalsIgnoreCase(XmlTools.VAL_ANY))
+			{	result.add(Direction.UP);
+				result.add(Direction.UPRIGHT);
+				result.add(Direction.RIGHT);
+				result.add(Direction.DOWNRIGHT);
+				result.add(Direction.DOWN);
+				result.add(Direction.DOWNLEFT);
+				result.add(Direction.LEFT);
+				result.add(Direction.UPLEFT);
+				result.add(Direction.NONE);
 			}
 			else
 			{	Direction direction = Direction.valueOf(str);

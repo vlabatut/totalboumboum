@@ -18,7 +18,7 @@
 	<xsd:simpleType name="tAllDirections">
 		<xsd:restriction base="xsd:string">
 			<xsd:enumeration value="SOME" /> <!-- represents any value but NONE -->
-			<xsd:enumeration value="ANY" /> <!-- represents any value -->
+			<xsd:enumeration value="ANY" /> <!-- represents any value including NONE -->
 		</xsd:restriction>
 	</xsd:simpleType>
 
