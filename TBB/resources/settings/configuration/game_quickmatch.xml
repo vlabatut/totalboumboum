@@ -15,17 +15,10 @@
 	</settings>
 	<players>
 		<player file="1" color="CYAN" controls="1" spritePack="nesbomberman2" spriteFolder="shirobon" />
-		<player file="53" color="RED" controls="0" spritePack="superbomberman5" spriteFolder="shirobon" />
-		<player file="59" color="BLUE" controls="0" spritePack="superbomberman5" spriteFolder="shirobon" />
-		<player file="60" color="ORANGE" controls="0" spritePack="superbomberman5" spriteFolder="shirobon" />
+		<player file="64" color="YELLOW" controls="2" spritePack="superbomberman1" spriteFolder="shirobon" />
 	</players>
 	<levels>
-		<level pack="gsuTournament" folder="carrefour" />
-		<level pack="gsuTournament" folder="classic" />
-		<level pack="gsuTournament" folder="items" />
-		<level pack="gsuTournament" folder="line" />
-		<level pack="gsuTournament" folder="pasaj" />
-		<level pack="gsuTournament" folder="power" />
+		<level pack="sbm1Custom" folder="debug" />
 	</levels>
 </gameQuickmatch>
 

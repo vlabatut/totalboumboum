@@ -979,7 +979,6 @@ public class Launcher
 	
 	/*TODO BUGS
 	 * - il semblerait que la direction dans la SpecificAction et dans la GeneralAction correspondante ne soit pas la même...
-	 * - flamme normale explose tous les items comme une penetration bomb
 	 * - impossible de bouger de la bombe une fois qu'elle a été posée (exception)
 	 */
 }
