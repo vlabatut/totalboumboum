@@ -71,7 +71,7 @@ public abstract class SpriteFactory<T extends Sprite>
 		explosionManager.setExplosion(explosion);
 		sprite.setExplosionManager(explosionManager);
 		
-		// permission
+		// modulations
 		ModulationManager permissionManager = new ModulationManager(sprite);
 		sprite.setModulationManager(permissionManager);
 		
