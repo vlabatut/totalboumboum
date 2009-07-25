@@ -20,7 +20,7 @@
 			<action name="APPEAR" direction="ANY" contact="ANY"
 				tilePosition="ANY" orientation="ANY" actor="SOME" />
 			<actor-restrictions>
-				<ability><name value="SPRITE_TRAVERSE_BOMB" /></ability>
+				<ability><name value="SPRITE_TRAVERSE_ITEM" /></ability>
 			</actor-restrictions>
 			<target-restrictions />
 			<actor-circumstances contact="ANY" tilePosition="ANY" orientation="ANY" />
@@ -39,7 +39,7 @@
 			<action name="LAND" direction="ANY" contact="ANY"
 				tilePosition="ANY" orientation="ANY" actor="SOME" />
 			<actor-restrictions>
-				<ability><name value="SPRITE_TRAVERSE_BOMB" /></ability>
+				<ability><name value="SPRITE_TRAVERSE_ITEM" /></ability>
 			</actor-restrictions>
 			<target-restrictions />
 			<actor-circumstances contact="ANY" tilePosition="ANY" orientation="ANY" />
@@ -59,7 +59,7 @@
 			<action name="MOVELOW" direction="ANY" contact="ANY"
 				tilePosition="ANY" orientation="ANY" actor="SOME" />
 			<actor-restrictions>
-				<ability><name value="SPRITE_TRAVERSE_BOMB" /></ability>
+				<ability><name value="SPRITE_TRAVERSE_ITEM" /></ability>
 			</actor-restrictions>
 			<target-restrictions />
 			<actor-circumstances contact="ANY" tilePosition="ANY" orientation="ANY" />
