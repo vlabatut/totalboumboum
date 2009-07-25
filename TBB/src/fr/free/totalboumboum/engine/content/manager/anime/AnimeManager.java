@@ -86,6 +86,14 @@ public class AnimeManager
 	public void updateGesture(Gesture gesture, Direction direction, boolean reinit, double forcedDuration)
 	{	currentDirection = direction;
 		currentAnime = gesture.getAnimeDirection(currentDirection);
+		if(currentAnime==null)
+		{	currentAnime = new AnimeDirection();
+			currentAnime.setDirection(direction);
+			currentAnime.setGestureName(gesture.getName());
+			AnimeStep as = new AnimeStep();
+			currentAnime.add(as);
+			//TODO à supprimer si le chargement d'animations est finalisé de manière à éviter cette situation (= anime vide)
+		}
 		if(reinit)
 		{	isTerminated = false;
 			animeDuration = currentAnime.getTotalDuration();

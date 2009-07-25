@@ -297,7 +297,7 @@ public class MoveZone
 	
 	public void applyMove()
 	{	ArrayList<PotentialObstacle> potentialObstacles = getCrossedSprites();
-System.out.println(potentialObstacles.size());	
+//System.out.println(potentialObstacles.size());	
 		boolean goOn = usedDirection!=Direction.NONE;
 		while(potentialObstacles.size()>0 && goOn)
 		{	PotentialObstacle po = potentialObstacles.get(0);

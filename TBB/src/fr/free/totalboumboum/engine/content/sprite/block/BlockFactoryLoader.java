@@ -34,6 +34,7 @@ import org.xml.sax.SAXException;
 
 import fr.free.totalboumboum.configuration.GameVariables;
 import fr.free.totalboumboum.engine.container.bombset.Bombset;
+import fr.free.totalboumboum.engine.content.feature.Role;
 import fr.free.totalboumboum.engine.content.feature.ability.AbilityLoader;
 import fr.free.totalboumboum.engine.content.feature.ability.AbstractAbility;
 import fr.free.totalboumboum.engine.content.feature.explosion.Explosion;
@@ -72,7 +73,7 @@ public class BlockFactoryLoader extends SpriteFactoryLoader
 		
 		//MODULATIONS
 		folder = folderPath+File.separator+FileTools.FILE_MODULATIONS;
-		ModulationsLoader.loadModulations(folder,gesturePack);
+		ModulationsLoader.loadModulations(folder,gesturePack,Role.BLOCK);
 		
 		// TRAJECTORIES
 		folder = folderPath+File.separator+FileTools.FILE_TRAJECTORIES;

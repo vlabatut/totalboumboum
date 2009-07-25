@@ -91,7 +91,7 @@ public class Bombset
 		Iterator<BombFactory> i = bombFactories.iterator();
 		while(i.hasNext() && result==null)
 		{	BombFactory temp = i.next();
-			if(temp.getName().equalsIgnoreCase(name))
+			if(temp.getBombName().equalsIgnoreCase(name))
 				result = temp;
 		}
 		return result;

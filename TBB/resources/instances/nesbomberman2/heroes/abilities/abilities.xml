@@ -37,17 +37,17 @@
 		</ability>
 <!--  	DROP --> 
 		<ability strength="1" frame="false" time="-1" uses="-1">
-			<action name="DROP" contact="ANY NONE" direction="ANY"
-				orientation="ANY" target="BOMB" tilePosition="SAME" />
+			<action name="DROP" contact="ANY" direction="ANY"
+				orientation="ANY" target="BOMB" tilePosition="ANY" />
 		</ability>
 <!--  	EXULT --> 
 		<ability strength="1" frame="false" time="-1" uses="-1">
-			<action name="EXULT" contact="ANY NONE" direction="ANY"
+			<action name="EXULT" contact="ANY" direction="ANY"
 				orientation="ANY" target="NONE" tilePosition="ANY" />
 		</ability>
 <!--  	GATHER --> 
 		<ability strength="1" frame="false" time="-1" uses="-1">
-			<action name="GATHER" contact="ANY NONE" direction="ANY"
+			<action name="GATHER" contact="ANY" direction="ANY"
 				orientation="ANY" target="ITEM" tilePosition="SAME" />
 		</ability>
 <!--  	LAND --> 
@@ -67,7 +67,7 @@
 		</ability>
 <!--  	TRIGGER --> 
 		<ability strength="1" frame="false" time="-1" uses="-1">
-			<action name="TRIGGER" contact="ANY NONE" direction="ANY"
+			<action name="TRIGGER" contact="ANY" direction="ANY"
 				orientation="ANY" target="BOMB" tilePosition="ANY" />
 		</ability>
 

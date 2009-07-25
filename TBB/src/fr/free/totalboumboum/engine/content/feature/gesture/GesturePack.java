@@ -81,7 +81,12 @@ public class GesturePack
 	public boolean containsGesture(GestureName name)
 	{	return gestures.containsKey(name);		
 	}
-
+	
+/*	public void completeModulations(Role role)
+	{	for(Gesture g: gestures.values())
+			g.completeModulations(role);		
+	}
+*/
 	/////////////////////////////////////////////////////////////////
 	// COPY				/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////

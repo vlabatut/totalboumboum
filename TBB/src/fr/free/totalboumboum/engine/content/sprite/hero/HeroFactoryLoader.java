@@ -36,6 +36,7 @@ import fr.free.totalboumboum.configuration.GameVariables;
 import fr.free.totalboumboum.configuration.profile.PredefinedColor;
 import fr.free.totalboumboum.engine.container.bombset.Bombset;
 import fr.free.totalboumboum.engine.container.bombset.BombsetMap;
+import fr.free.totalboumboum.engine.content.feature.Role;
 import fr.free.totalboumboum.engine.content.feature.ability.AbilityLoader;
 import fr.free.totalboumboum.engine.content.feature.ability.AbstractAbility;
 import fr.free.totalboumboum.engine.content.feature.explosion.Explosion;
@@ -63,7 +64,7 @@ public class HeroFactoryLoader extends SpriteFactoryLoader
 		
 		// ANIMES
 		folder = folderPath+File.separator+FileTools.FILE_ANIMES;
-		AnimesLoader.loadAnimes(folder,gesturePack,HeroFactory.getAnimeReplacements());
+		AnimesLoader.loadAnimes(folder,gesturePack,color,HeroFactory.getAnimeReplacements());
 		
 		// BOMBSET
 		folder = GameVariables.instancePath+File.separator+FileTools.FOLDER_BOMBS;
@@ -98,7 +99,7 @@ public class HeroFactoryLoader extends SpriteFactoryLoader
 		
 		// MODULATIONS
 		folder = folderPath+File.separator+FileTools.FILE_MODULATIONS;
-		ModulationsLoader.loadModulations(folder,gesturePack);
+		ModulationsLoader.loadModulations(folder,gesturePack,Role.HERO);
 		
 		// TRAJECTORIES
 		folder = folderPath+File.separator+FileTools.FILE_TRAJECTORIES;

@@ -187,6 +187,15 @@ public class Gesture
 		return result;
 	}
 	
+/*	public void completeModulations(Role role)
+	{	// actor modulations
+		for(ActorModulation m: actorModulations)
+			m.getAction().addActor(role);
+		// target modulations
+		for(TargetModulation m: targetModulations)
+			m.getAction().addTarget(role);
+	}
+*/	
 	/////////////////////////////////////////////////////////////////
 	// COPY				/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////

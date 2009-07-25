@@ -210,7 +210,7 @@ public class ModulationManager
 		if(result.isActive())
 		{	// list of the involved sprites
 			ArrayList<Sprite> sprites = new ArrayList<Sprite>();
-			Tile tileA = sprite.getTile();
+			Tile tileA = action.getTile();
 			if(tileA!=null)
 			{	for(Sprite s: tileA.getSprites())
 				{	if(s!=target && s!=sprite)
@@ -319,8 +319,7 @@ public class ModulationManager
 	}
 		
 	/**
-	 * on se retreint aux cases contenant l'acteur et la cible, et on teste 
-	 * chaque sprite.
+	 * on se retreint aux cases contenant le sprite concerné.
 	 */
 	private StateAbility combineOtherModulation(StateAbility ability)
 	{	StateAbility result = ability;
