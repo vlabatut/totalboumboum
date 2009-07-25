@@ -34,6 +34,7 @@ import org.jdom.Element;
 import org.xml.sax.SAXException;
 
 import fr.free.totalboumboum.engine.content.feature.Contact;
+import fr.free.totalboumboum.engine.content.feature.Role;
 import fr.free.totalboumboum.engine.content.feature.TilePosition;
 import fr.free.totalboumboum.engine.content.feature.ability.AbilityLoader;
 import fr.free.totalboumboum.engine.content.feature.ability.AbstractAbility;
@@ -50,7 +51,7 @@ import fr.free.totalboumboum.tools.XmlTools;
 public class ModulationsLoader
 {	
 
-	public static void loadModulations(String individualFolder, GesturePack pack) throws ParserConfigurationException, SAXException, IOException, ClassNotFoundException
+	public static void loadModulations(String individualFolder, GesturePack pack, Role role) throws ParserConfigurationException, SAXException, IOException, ClassNotFoundException
 	{	File dataFile = new File(individualFolder+File.separator+FileTools.FILE_MODULATIONS+FileTools.EXTENSION_XML);
 		if(dataFile.exists())
 		{	// opening
@@ -58,21 +59,21 @@ public class ModulationsLoader
 			File schemaFile = new File(schemaFolder+File.separator+FileTools.FILE_MODULATIONS+FileTools.EXTENSION_SCHEMA);
 			Element root = XmlTools.getRootFromFile(dataFile,schemaFile);
 			// loading
-			loadModulationsElement(root,individualFolder,pack);
+			loadModulationsElement(root,individualFolder,pack,role);
 		}
 	}
 	
     @SuppressWarnings("unchecked")
-	private static void loadModulationsElement(Element root, String individualFolder, GesturePack pack) throws IOException, ParserConfigurationException, SAXException, ClassNotFoundException
+	private static void loadModulationsElement(Element root, String individualFolder, GesturePack pack, Role role) throws IOException, ParserConfigurationException, SAXException, ClassNotFoundException
 	{	List<Element> gesturesList = root.getChildren(XmlTools.ELT_GESTURE);
 		Iterator<Element> i = gesturesList.iterator();
 		while(i.hasNext())
 		{	Element tp = i.next();
-			loadGestureElement(tp,individualFolder,pack);
+			loadGestureElement(tp,individualFolder,pack,role);
 		}
 	}
     
-    private static void loadGestureElement(Element root, String individualFolder, GesturePack pack) throws IOException, ParserConfigurationException, SAXException, ClassNotFoundException
+    private static void loadGestureElement(Element root, String individualFolder, GesturePack pack, Role role) throws IOException, ParserConfigurationException, SAXException, ClassNotFoundException
     {	// name
     	String name = root.getAttribute(XmlTools.ATT_NAME).getValue().toUpperCase(Locale.ENGLISH);
 		GestureName gestureName = GestureName.valueOf(name);
@@ -89,33 +90,33 @@ public class ModulationsLoader
 		Element elt = XmlTools.getRootFromFile(dataFile,schemaFile);
 		
 		// loading
-		loadGestureModulations(elt,gesture);
+		loadGestureModulations(elt,gesture,role);
     }
     
-    private static void loadGestureModulations(Element root, Gesture gesture) throws IOException, ClassNotFoundException
+    private static void loadGestureModulations(Element root, Gesture gesture, Role role) throws IOException, ClassNotFoundException
     {	// self modulations
 		Element selfElt = root.getChild(XmlTools.ELT_SELF_MODULATIONS);
-		loadModulationsElement(selfElt,ModType.SELF,gesture);
+		loadModulationsElement(selfElt,ModType.SELF,gesture,role);
     	
 		// other modulations
 		Element otherElt = root.getChild(XmlTools.ELT_OTHER_MODULATIONS);
-		loadModulationsElement(otherElt,ModType.OTHER,gesture);
+		loadModulationsElement(otherElt,ModType.OTHER,gesture,role);
     	
 		// actor modulations
 		Element actorElt = root.getChild(XmlTools.ELT_ACTOR_MODULATIONS);
-		loadModulationsElement(actorElt,ModType.ACTOR,gesture);
+		loadModulationsElement(actorElt,ModType.ACTOR,gesture,role);
 		
 		// target modulations
 		Element targetElt = root.getChild(XmlTools.ELT_TARGET_MODULATIONS);
-		loadModulationsElement(targetElt,ModType.TARGET,gesture);
+		loadModulationsElement(targetElt,ModType.TARGET,gesture,role);
 		
 		// third modulations
 		Element thirdElt = root.getChild(XmlTools.ELT_THIRD_MODULATIONS);
-		loadModulationsElement(thirdElt,ModType.THIRD,gesture);
+		loadModulationsElement(thirdElt,ModType.THIRD,gesture,role);
     }
     
     @SuppressWarnings("unchecked")
-	private static void loadModulationsElement(Element root, ModType type, Gesture gesture) throws IOException, ClassNotFoundException
+	private static void loadModulationsElement(Element root, ModType type, Gesture gesture, Role role) throws IOException, ClassNotFoundException
     {	List<Element> modulationsList = root.getChildren(XmlTools.ELT_MODULATION);
 		Iterator<Element> i = modulationsList.iterator();
 		if(type==ModType.SELF || type==ModType.OTHER)
@@ -128,7 +129,7 @@ public class ModulationsLoader
 		else
 		{	while(i.hasNext())
 			{	Element tp = i.next();
-				AbstractActionModulation actionModulation = loadActionModulationElement(type,gesture.getName(),tp);
+				AbstractActionModulation actionModulation = loadActionModulationElement(type,gesture.getName(),tp,role);
 				gesture.addModulation(actionModulation);
 			}
 		}
@@ -174,7 +175,7 @@ public class ModulationsLoader
 		return result;
     }
 		
-    private static AbstractActionModulation loadActionModulationElement(ModType type, GestureName gestureName, Element root) throws IOException, ClassNotFoundException
+    private static AbstractActionModulation loadActionModulationElement(ModType type, GestureName gestureName, Element root, Role role) throws IOException, ClassNotFoundException
     {	// strength
 		String strengthStr = root.getAttribute(XmlTools.ATT_STRENGTH).getValue().trim();
 		float strength;
@@ -189,6 +190,10 @@ public class ModulationsLoader
 		// action
 		Element actionElt = root.getChild(XmlTools.ELT_ACTION);
 		GeneralAction action = GeneralActionLoader.loadActionElement(actionElt);
+		if(type==ModType.ACTOR)
+			action.addActor(role);
+		else if(type==ModType.TARGET);
+			action.addTarget(role);
     	
 		// actor restrictions
 		ArrayList<AbstractAbility> actorRestrictions = new ArrayList<AbstractAbility>();

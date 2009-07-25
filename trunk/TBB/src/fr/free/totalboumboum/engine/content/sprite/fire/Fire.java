@@ -25,7 +25,11 @@ import java.util.ArrayList;
 import java.util.Iterator;
 
 import fr.free.totalboumboum.engine.container.tile.Tile;
+import fr.free.totalboumboum.engine.content.feature.Contact;
+import fr.free.totalboumboum.engine.content.feature.Direction;
+import fr.free.totalboumboum.engine.content.feature.Orientation;
 import fr.free.totalboumboum.engine.content.feature.Role;
+import fr.free.totalboumboum.engine.content.feature.TilePosition;
 import fr.free.totalboumboum.engine.content.feature.ability.ActionAbility;
 import fr.free.totalboumboum.engine.content.feature.action.SpecificAction;
 import fr.free.totalboumboum.engine.content.feature.action.consume.SpecificConsume;
@@ -57,7 +61,7 @@ public class Fire extends Sprite
 	}
 	
 	public void consumeSprite(Sprite sprite)
-	{	SpecificAction specificAction = new SpecificConsume(this,sprite);
+	{	SpecificAction specificAction = new SpecificConsume(this,sprite,Direction.NONE,Contact.INTERSECTION,TilePosition.SAME,Orientation.NEUTRAL);
 		ActionAbility ability = modulateAction(specificAction);
 		if(ability.isActive())
 		{	ActionEvent e = new ActionEvent(specificAction);

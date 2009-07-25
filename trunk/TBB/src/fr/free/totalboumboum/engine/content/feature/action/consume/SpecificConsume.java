@@ -48,6 +48,10 @@ public class SpecificConsume extends SpecificAction
 	{	super(ActionName.CONSUME,actor,target);
 	}
 
+	public SpecificConsume(Sprite actor, Sprite target, Direction direction, Contact contact, TilePosition tilePosition, Orientation orientation)
+	{	super(ActionName.CONSUME,actor,target,direction,contact,tilePosition,orientation);		
+	}
+	
 	/**
 	 * anonym action, just for test purposes
 	 */

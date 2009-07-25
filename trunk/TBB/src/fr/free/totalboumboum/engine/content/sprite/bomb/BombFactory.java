@@ -80,6 +80,10 @@ public class BombFactory extends SpriteFactory<Bomb> implements Serializable
 	/////////////////////////////////////////////////////////////////
 	private String bombName;
 
+	public String getBombName()
+	{	return bombName;	
+	}
+	
 	public Bomb makeSprite()
 	{	// init
 		Bomb result = new Bomb();

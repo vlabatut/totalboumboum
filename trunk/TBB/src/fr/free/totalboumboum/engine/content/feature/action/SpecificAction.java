@@ -46,7 +46,7 @@ public abstract class SpecificAction
 		this.target = target;
 		this.direction = actor.getCurrentFacingDirection();
 		circumstance.initCircumstance(actor,target);
-		this.tile = null;
+		this.tile = actor.getTile();
 		initGeneralAction();
 	}
 
@@ -68,6 +68,7 @@ public abstract class SpecificAction
 		circumstance.setContact(contact);
 		circumstance.setTilePosition(tilePosition);
 		circumstance.setOrientation(orientation);
+		this.tile = actor.getTile();
 		initGeneralAction();
 	}
 

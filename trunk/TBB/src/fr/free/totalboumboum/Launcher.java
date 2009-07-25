@@ -969,5 +969,17 @@ public class Launcher
 	 *  rque: comme on teste les sprites sur des positions virtuelles, qu'ils n'occupent pas encore,
 	 *  il faudra construire les actions à tester manuellement (tous les paramètres de type contact, orientation, etc) dans le trajectoryManager
 	 *  
+	 *  DROP ne devrait pas être transitif, mais automatiquement s'appliquer à une bombe.
+	 *  ça permettrait de bien séparer DROP et APPEAR dans l'action (la première pour le sprite posant
+	 *  la bombe et la seconde pour la bombe elle même) et en même temps ça permet
+	 *  de ne pas avoir à créer la bombe avant de la poser, ce qui parait anti-pratique et pas logique du tout.
+	 *  
+	 *  faudra mettre en place un système de remplacement (croix rouge?) pr quand une anime nécessaire n'est pas trouvée
+	 */
+	
+	/*TODO BUGS
+	 * - il semblerait que la direction dans la SpecificAction et dans la GeneralAction correspondante ne soit pas la même...
+	 * - flamme normale explose tous les items comme une penetration bomb
+	 * - impossible de bouger de la bombe une fois qu'elle a été posée (exception)
 	 */
 }

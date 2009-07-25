@@ -150,7 +150,7 @@ public class BombsetLoader
     	
     	// concrete bombs
     	Element concreteBombsElt = root.getChild(XmlTools.ELT_CONCRETE_BOMBS);
-		loadBombsElement(concreteBombsElt,folder,color,result,abstractBombs,Type.ABSTRACT);
+		loadBombsElement(concreteBombsElt,folder,color,result,abstractBombs,Type.CONCRETE);
 	}
     
     @SuppressWarnings("unchecked")

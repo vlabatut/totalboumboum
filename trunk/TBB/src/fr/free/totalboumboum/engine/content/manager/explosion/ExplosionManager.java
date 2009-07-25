@@ -123,7 +123,7 @@ public class ExplosionManager
 				fire.consumeTile(tileTemp);
 			else
 			{	fire.initGesture();
-			tileTemp.addSprite(fire);
+				tileTemp.addSprite(fire);
 				fire.setCurrentPosX(tileTemp.getPosX());
 				fire.setCurrentPosY(tileTemp.getPosY());
 				fire.setGesture(GestureName.BURNING,dir,dir, true);

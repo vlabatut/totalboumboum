@@ -168,13 +168,19 @@ public class Circumstance
 	{	boolean result = true;
 		// contact
 		if(result)
-			result = contacts.containsAll(circumstance.getContacts());
+		{	ArrayList<Contact> cts = circumstance.getContacts();
+			result = contacts.containsAll(cts);		
+		}
 		// orientation
 		if(result)
-			result = orientations.containsAll(circumstance.getOrientations());
+		{	ArrayList<Orientation> orts = circumstance.getOrientations();
+			result = orientations.containsAll(orts);
+		}
 		// tile position
 		if(result)
-			result = tilePositions.containsAll(circumstance.getTilePositions());
+		{	ArrayList<TilePosition> tpos = circumstance.getTilePositions();
+			result = tilePositions.containsAll(tpos);		
+		}
 		return result;
 	}
 	
