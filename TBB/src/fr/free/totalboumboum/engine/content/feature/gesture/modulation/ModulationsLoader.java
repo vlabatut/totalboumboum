@@ -77,14 +77,17 @@ public class ModulationsLoader
     	String name = root.getAttribute(XmlTools.ATT_NAME).getValue().toUpperCase(Locale.ENGLISH);
 		GestureName gestureName = GestureName.valueOf(name);
     	Gesture gesture = pack.getGesture(gestureName);
+    	
     	// file
     	String fileName = root.getAttribute(XmlTools.ATT_FILE).getValue();
     	String localFilePath = individualFolder+File.separator+fileName;
+    	
     	// opening
 		File dataFile = new File(localFilePath);
 		String schemaFolder = FileTools.getSchemasPath();
 		File schemaFile = new File(schemaFolder+File.separator+FileTools.FILE_GESTUREMODULATIONS+FileTools.EXTENSION_SCHEMA);
 		Element elt = XmlTools.getRootFromFile(dataFile,schemaFile);
+		
 		// loading
 		loadGestureModulations(elt,gesture);
     }

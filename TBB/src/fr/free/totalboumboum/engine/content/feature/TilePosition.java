@@ -93,12 +93,12 @@ public enum TilePosition
 			{	result.add(TilePosition.NEIGHBOR);
 				result.add(TilePosition.REMOTE);
 				result.add(TilePosition.SAME);
-				result.add(TilePosition.NONE);
 			}
 			else if(str.equalsIgnoreCase(XmlTools.VAL_ANY))
 			{	result.add(TilePosition.NEIGHBOR);
 				result.add(TilePosition.REMOTE);
 				result.add(TilePosition.SAME);
+				result.add(TilePosition.NONE);
 			}
 			else
 			{	TilePosition tilePosition = TilePosition.valueOf(str);
