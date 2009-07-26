@@ -979,8 +979,8 @@ public class Launcher
 	
 	/*TODO BUGS
 	 * - il semblerait que la direction dans la SpecificAction et dans la GeneralAction correspondante ne soit pas la même...
-	 * - impossible de bouger de la bombe une fois qu'elle a été posée (exception)
-	 * - impossible de marcher sur les items
+	 * - le items n'apparaissent plus à la destruction des murs
+	 * - impossible de poser une bombe quand on est en train de buter contre un mur en direction upleft
 	 * - quand le perso meurt, il ne brule pas
 	 */
 }
