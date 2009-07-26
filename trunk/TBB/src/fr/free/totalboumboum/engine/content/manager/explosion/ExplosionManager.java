@@ -143,6 +143,8 @@ public class ExplosionManager
 	{	if(!finished)
 		{	finished = true;
 			// explosion
+if(explosion==null)
+	System.out.println(sprite.getName());
 			explosion.finish();
 			explosion = null;
 			// misc

@@ -67,6 +67,8 @@ public abstract class SpriteFactoryLoader
 		// name
 		String name = elt.getAttribute(XmlTools.ATT_NAME).getValue().trim();
 		result.setName(name);
+if(name.equalsIgnoreCase("Abstract fire"))
+	System.out.println();
 		
 		// base
 		String baseStr = elt.getAttributeValue(XmlTools.ATT_BASE);
@@ -88,6 +90,8 @@ public abstract class SpriteFactoryLoader
 			result.setAbilities(abilities);
 			result.setExplosion(explosion);
 		}
+if(result.getExplosion()==null)
+		System.out.println(name);
 	}
 	
 	protected static <T extends Sprite> void loadGeneralElement(Element root, SpriteFactory<T> result, SpriteFactory<T> base)

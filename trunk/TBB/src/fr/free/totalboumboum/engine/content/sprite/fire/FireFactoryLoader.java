@@ -66,8 +66,9 @@ public class FireFactoryLoader extends SpriteFactoryLoader
 		AnimesLoader.loadAnimes(folder,gesturePack,FireFactory.getAnimeReplacements());
 		
 		//EXPLOSION
-		Explosion explosion = loadExplosionElement(root);
-		result.setExplosion(explosion);
+		Explosion exp = loadExplosionElement(root);
+		if(exp!=null)
+			result.setExplosion(exp); 
 		
 		//MODULATIONS
 		folder = folderPath+File.separator+FileTools.FILE_MODULATIONS;
