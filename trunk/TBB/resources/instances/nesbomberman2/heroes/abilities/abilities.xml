@@ -7,6 +7,10 @@
 		<ability strength="0.33" frame="false" time="-1" uses="-1">
 			<name value="SPRITE_MOVE_ASSISTANCE"/>
 		</ability>
+<!-- 	SPRITE_TRAVERSE_ITEM -->
+		<ability strength="1" frame="false" time="-1" uses="-1">
+			<name value="SPRITE_TRAVERSE_ITEM"/>
+		</ability>
 <!--  	HERO_CELEBRATION_DURATION --> 
 		<ability strength="4000" frame="false" time="-1" uses="-1">
 			<name value="HERO_CELEBRATION_DURATION" />
