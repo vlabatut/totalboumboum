@@ -9,6 +9,41 @@
 	</other-modulations>
 	
 	<actor-modulations>
+<!--  	DROP --> 
+		<modulation frame="true" strength="0" >
+			<action name="DROP" direction="ANY" contact="ANY"
+				tilePosition="ANY" orientation="ANY" target="ANY" />
+			<actor-restrictions />
+			<target-restrictions />
+		</modulation>
+<!--  	MOVELOW --> 
+		<modulation frame="true" strength="0" >
+			<action name="MOVELOW" direction="ANY" contact="ANY"
+				tilePosition="ANY" orientation="ANY" target="ANY" />
+			<actor-restrictions />
+			<target-restrictions />
+		</modulation>
+<!--  	PUNCH --> 
+		<modulation frame="true" strength="0" >
+			<action name="PUNCH" direction="ANY" contact="ANY"
+				tilePosition="ANY" orientation="ANY" target="ANY" />
+			<actor-restrictions />
+			<target-restrictions />
+		</modulation>
+<!--  	PUSH --> 
+		<modulation frame="true" strength="0" >
+			<action name="PUSH" direction="ANY" contact="ANY"
+				tilePosition="ANY" orientation="ANY" target="ANY" />
+			<actor-restrictions />
+			<target-restrictions />
+		</modulation>
+<!--  	TRIGGER --> 
+		<modulation frame="true" strength="0" >
+			<action name="TRIGGER" direction="ANY" contact="ANY"
+				tilePosition="ANY" orientation="ANY" target="ANY" />
+			<actor-restrictions />
+			<target-restrictions />
+		</modulation>
 	</actor-modulations>
 	
 	<target-modulations>
