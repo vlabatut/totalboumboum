@@ -461,20 +461,20 @@ public class HeroEventManager extends EventManager
 	}
 	
 	private void engVictory(EngineEvent event)
-	{	SpecificAction specificAction = new SpecificExult(sprite);
-		ActionAbility ability = sprite.modulateAction(specificAction);
-		if(ability.isActive())
-		{	StateAbility ablt = sprite.modulateStateAbility(StateAbilityName.HERO_CELEBRATION_DURATION);
-			double duration = ablt.getStrength();
-			gesture = GestureName.EXULTING;							
-			sprite.setGesture(gesture,spriteDirection,controlDirection,true,duration);
+	{	if(!gesture.equals(GestureName.BURNING))
+		{	SpecificAction specificAction = new SpecificExult(sprite);
+			ActionAbility ability = sprite.modulateAction(specificAction);
+			if(ability.isActive())
+			{	StateAbility ablt = sprite.modulateStateAbility(StateAbilityName.HERO_CELEBRATION_DURATION);
+				double duration = ablt.getStrength();
+				gesture = GestureName.EXULTING;							
+				sprite.setGesture(gesture,spriteDirection,controlDirection,true,duration);
+			}
+			else
+			{
+				//NOTE programmer l'action (execution retardee) quand ce sera possible
+			}		
 		}
-		else
-		{
-			//NOTE programmer l'action (execution retardee) quand ce sera possible
-		}
-		
-		
 /*		
 		StateAbility ability = sprite.computeAbility(StateAbility.HERO_CELEBRATION_DURATION);
 		double duration = ability.getStrength();
@@ -484,20 +484,20 @@ public class HeroEventManager extends EventManager
 	}
 	
 	private void engDefeat(EngineEvent event)
-	{	SpecificAction specificAction = new SpecificCry(sprite);
-		ActionAbility ability = sprite.modulateAction(specificAction);
-		if(ability.isActive())
-		{	StateAbility ablt = sprite.modulateStateAbility(StateAbilityName.HERO_CELEBRATION_DURATION);
-			double duration = ablt.getStrength();
-			gesture = GestureName.CRYING;
-			sprite.setGesture(gesture,spriteDirection,controlDirection,true,duration);
-		}
-		else
-		{
-			//NOTE programmer l'action quand ce sera possible
-		}
-		
-		
+	{	if(!gesture.equals(GestureName.BURNING))
+		{	SpecificAction specificAction = new SpecificCry(sprite);
+			ActionAbility ability = sprite.modulateAction(specificAction);
+			if(ability.isActive())
+			{	StateAbility ablt = sprite.modulateStateAbility(StateAbilityName.HERO_CELEBRATION_DURATION);
+				double duration = ablt.getStrength();
+				gesture = GestureName.CRYING;
+				sprite.setGesture(gesture,spriteDirection,controlDirection,true,duration);
+			}
+			else
+			{
+				//NOTE programmer l'action quand ce sera possible
+			}
+		}		
 /*		
 		StateAbility ability = sprite.computeAbility(StateAbility.HERO_CELEBRATION_DURATION);
 		double duration = ability.getStrength();

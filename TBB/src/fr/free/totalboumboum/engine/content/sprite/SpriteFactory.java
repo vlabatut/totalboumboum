@@ -190,7 +190,7 @@ public abstract class SpriteFactory<T extends Sprite>
 			// packs & sets
 			bombset.finish();
 			bombset = null;
-			explosion.finish();
+			explosion.finish();	
 			explosion = null;
 			gesturePack.finish();
 			gesturePack = null;
