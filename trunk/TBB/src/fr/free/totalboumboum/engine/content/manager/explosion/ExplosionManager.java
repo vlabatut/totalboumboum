@@ -21,6 +21,7 @@ package fr.free.totalboumboum.engine.content.manager.explosion;
  * 
  */
 
+import fr.free.totalboumboum.configuration.GameVariables;
 import fr.free.totalboumboum.engine.container.tile.Tile;
 import fr.free.totalboumboum.engine.content.feature.Direction;
 import fr.free.totalboumboum.engine.content.feature.ability.AbstractAbility;
@@ -91,10 +92,18 @@ public class ExplosionManager
 		fire.setGesture(GestureName.BURNING, Direction.NONE, Direction.NONE, true);
 		// branches
 		if(flameRange>0)
-		{	makeBranch(flameRange,Direction.DOWN);
-			makeBranch(flameRange,Direction.LEFT);
-			makeBranch(flameRange,Direction.RIGHT);
-			makeBranch(flameRange,Direction.UP);
+		{	int hFlameRange = flameRange;
+			int vFlameRange = flameRange;
+			int levelWidth = GameVariables.level.getGlobalWidth();
+			int levelHeight = GameVariables.level.getGlobalHeight();
+			if(flameRange>=levelWidth)
+				hFlameRange = levelWidth-1;
+			if(flameRange>=levelHeight)
+				vFlameRange = levelHeight-1;
+			makeBranch(vFlameRange,Direction.DOWN);
+			makeBranch(hFlameRange,Direction.LEFT);
+			makeBranch(hFlameRange,Direction.RIGHT);
+			makeBranch(vFlameRange,Direction.UP);
 		}
 	}	
 	
