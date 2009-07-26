@@ -67,8 +67,6 @@ public abstract class SpriteFactoryLoader
 		// name
 		String name = elt.getAttribute(XmlTools.ATT_NAME).getValue().trim();
 		result.setName(name);
-if(name.equalsIgnoreCase("Abstract fire"))
-	System.out.println();
 		
 		// base
 		String baseStr = elt.getAttributeValue(XmlTools.ATT_BASE);

@@ -47,6 +47,8 @@ public class Fireset
 	public Fire makeFire(String name)
 	{	Fire result = null;
 		FireFactory fireFactory = fireFactories.get(name);
+if(fireFactory==null)
+	System.out.println(name);
 		result = fireFactory.makeSprite();
 		return result;
 	}
