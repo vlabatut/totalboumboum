@@ -166,21 +166,25 @@ public class Circumstance
 	/////////////////////////////////////////////////////////////////
 	public boolean subsume(Circumstance circumstance)
 	{	boolean result = true;
+		
 		// contact
 		if(result)
 		{	ArrayList<Contact> cts = circumstance.getContacts();
 			result = contacts.containsAll(cts);		
 		}
+		
 		// orientation
 		if(result)
 		{	ArrayList<Orientation> orts = circumstance.getOrientations();
 			result = orientations.containsAll(orts);
 		}
+		
 		// tile position
 		if(result)
 		{	ArrayList<TilePosition> tpos = circumstance.getTilePositions();
 			result = tilePositions.containsAll(tpos);		
 		}
+		
 		return result;
 	}
 	

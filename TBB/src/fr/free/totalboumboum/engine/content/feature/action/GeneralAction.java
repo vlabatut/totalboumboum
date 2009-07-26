@@ -206,7 +206,10 @@ public abstract class GeneralAction
 		}
 		// direction
 		if(result)
-			result = directions.contains(action.getDirection());
+		{	Direction d = action.getDirection();
+			result = directions.contains(d);
+		
+		}
 		// circumstances
 		if(result)
 			result = circumstance.subsume(action.getCircumstance());
