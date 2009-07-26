@@ -973,13 +973,14 @@ public class Launcher
 	 *  ça permettrait de bien séparer DROP et APPEAR dans l'action (la première pour le sprite posant
 	 *  la bombe et la seconde pour la bombe elle même) et en même temps ça permet
 	 *  de ne pas avoir à créer la bombe avant de la poser, ce qui parait anti-pratique et pas logique du tout.
+	 *  >> connexe: vérifier qu'avant d'exécuter une action, on vérifie si le sprite concerné (actor) possède bien l'ability
 	 *  
 	 *  faudra mettre en place un système de remplacement (croix rouge?) pr quand une anime nécessaire n'est pas trouvée
 	 */
 	
 	/*TODO BUGS
 	 * - il semblerait que la direction dans la SpecificAction et dans la GeneralAction correspondante ne soit pas la même...
-	 * - le items n'apparaissent plus à la destruction des murs
 	 * - impossible de poser une bombe quand on est en train de buter contre un mur en direction upleft
+	 * 
 	 */
 }

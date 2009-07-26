@@ -9,5 +9,10 @@
 		</ability>
 			
 		<!-- ACTION -->
+<!--  	APPEAR -->
+		<ability frame="false" strength="1" time="-1" uses="-1" >
+			<action name="APPEAR" direction="ANY" contact="ANY"
+				tilePosition="ANY" orientation="ANY" target="ANY" />
+		</ability> 
 
 </abilities>
