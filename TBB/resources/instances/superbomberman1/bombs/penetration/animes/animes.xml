@@ -51,6 +51,15 @@
 			</direction>
 		</gesture>
 		
+		<gesture name="PUNCHED" repeat="true" shadow="shadow">
+			<direction name="NONE">
+				<step duration="300" file="2.gif" />
+				<step duration="300" file="3.gif" />
+				<step duration="300" file="2.gif" />
+				<step duration="300" file="1.gif" />
+			</direction>
+		</gesture>
+		
 		<gesture name="SLIDING" repeat="true" shadow="shadow">
 			<direction name="NONE">
 				<step duration="300" file="2.gif" />
