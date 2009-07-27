@@ -46,7 +46,6 @@ import fr.free.totalboumboum.engine.container.theme.ThemeLoader;
 import fr.free.totalboumboum.engine.container.tile.Tile;
 import fr.free.totalboumboum.engine.container.zone.Zone;
 import fr.free.totalboumboum.engine.container.zone.ZoneLoader;
-import fr.free.totalboumboum.engine.content.sprite.item.Item;
 import fr.free.totalboumboum.engine.loop.Loop;
 import fr.free.totalboumboum.tools.FileTools;
 import fr.free.totalboumboum.tools.XmlTools;
@@ -283,14 +282,7 @@ public class HollowLevel implements Serializable
 				if(mBlocks[line][col]!=null)
 					matrix[line][col].addSprite(theme.makeBlock(mBlocks[line][col]));
 				if(mItems[line][col]!=null)
-				{	Item item = itemset.makeItem(mItems[line][col]);
-					if(matrix[line][col].hasBlock())
-						matrix[line][col].getBlock().setHiddenSprite(item);
-					else
-					{	matrix[line][col].addSprite(item);
-						item.initGesture();
-					}
-				}
+					matrix[line][col].addSprite(itemset.makeItem(mItems[line][col]));
 			}
 		}
 	}

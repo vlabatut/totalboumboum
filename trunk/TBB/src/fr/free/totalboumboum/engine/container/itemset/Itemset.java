@@ -55,6 +55,7 @@ public class Itemset
 if(itemFactory==null)
 	System.out.println(name);
 		result = itemFactory.makeSprite();
+		result.initGesture();
 		return result;
 	}
 

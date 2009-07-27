@@ -6,6 +6,7 @@
 	<gesture name="ENDED" file="ended.xml" />
 
 	<gesture name="BURNING" file="burning.xml" />
+	<gesture name="HIDING" file="hiding.xml" />
 	<gesture name="STANDING" file="standing.xml" />
 
 </modulations>
