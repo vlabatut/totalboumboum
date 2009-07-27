@@ -9,7 +9,7 @@
 
 	<firesets>
 		<fireset name="normal" folder="normal" />
-		<fireset name="penetration" folder="normal" />
+		<fireset name="penetration" folder="penetration" />
 	</firesets>
 
 </firesetmap>
