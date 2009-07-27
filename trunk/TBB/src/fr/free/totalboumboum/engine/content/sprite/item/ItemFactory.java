@@ -97,6 +97,7 @@ public class ItemFactory extends SpriteFactory<Item>
 		// event
 		EventManager eventManager = new ItemEventManager(result);
 		result.setEventManager(eventManager);
+		
 		// result
 //		result.initGesture();
 		result.setItemName(itemName);

@@ -982,5 +982,6 @@ public class Launcher
 	 * - il semblerait que la direction dans la SpecificAction et dans la GeneralAction correspondante ne soit pas la même...
 	 * - impossible de poser une bombe quand on est en train de buter contre un mur en direction upleft
 	 * - la penetration ne passe pas à travers les blocs (ou est-ce les items?)
+	 * - les penetrations bombs génèrent du feu normal
 	 */
 }

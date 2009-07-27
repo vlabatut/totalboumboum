@@ -3,6 +3,10 @@
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
 	xsi:noNamespaceSchemaLocation="../../../../schemas/fireset.xsd">
 
+	<abstract-fires>
+		<fire name="common_penetration" folder="_common" />
+	</abstract-fires>
+
 	<concrete-fires>
 		<fire name="inside" folder="inside" />	
 		<fire name="outside" folder="outside" />
