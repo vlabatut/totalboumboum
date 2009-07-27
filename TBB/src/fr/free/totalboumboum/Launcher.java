@@ -985,6 +985,6 @@ public class Launcher
 	 * 	>> ne plus lier les items aux murs
 	 * 		- l'item commence en état none ou hidding
 	 * 		- il essaie d'apparaître à chaque itération
-	 * 		- dès qu'il peut (ie. pas de bloc ni flamme ni joueur?) il apparait
+	 * 		- dès qu'il peut (ie. pas de bloc ni flamme ni joueur?) il apparait 
 	 */
 }
