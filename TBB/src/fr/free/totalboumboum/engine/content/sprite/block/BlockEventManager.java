@@ -21,7 +21,6 @@ package fr.free.totalboumboum.engine.content.sprite.block;
  * 
  */
 
-import fr.free.totalboumboum.engine.container.tile.Tile;
 import fr.free.totalboumboum.engine.content.feature.Direction;
 import fr.free.totalboumboum.engine.content.feature.ability.AbstractAbility;
 import fr.free.totalboumboum.engine.content.feature.ability.StateAbility;
@@ -35,7 +34,6 @@ import fr.free.totalboumboum.engine.content.feature.event.EngineEvent;
 import fr.free.totalboumboum.engine.content.feature.gesture.GestureName;
 import fr.free.totalboumboum.engine.content.manager.delay.DelayManager;
 import fr.free.totalboumboum.engine.content.manager.event.EventManager;
-import fr.free.totalboumboum.engine.content.sprite.item.Item;
 
 public class BlockEventManager extends EventManager
 {
@@ -108,7 +106,7 @@ public class BlockEventManager extends EventManager
 			}
 			
 			// item ?
-			Item hs = (Item)sprite.getHiddenSprite();
+/*			Item hs = (Item)sprite.getHiddenSprite();
 			Tile tile = sprite.getTile(); 
 			if(hs!=null)
 			{	SpecificAction action = new SpecificAppear(hs,tile);
@@ -119,7 +117,7 @@ public class BlockEventManager extends EventManager
 					sprite.setHiddenSprite(null);
 				}
 			}
-		}
+*/		}
 		else if(gesture.equals(GestureName.SPAWNING))
 		{	gesture = GestureName.STANDING;
 			sprite.setGesture(gesture,spriteDirection,Direction.NONE,true);

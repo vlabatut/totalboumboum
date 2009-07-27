@@ -74,7 +74,6 @@ public abstract class Sprite
 {	
 	public Sprite()
 	{	ended = false;
-		hiddenSprite = null;
 		boundSprites = new ArrayList<Sprite>();
 		toBeRemovedFromTile = false;
 		toBeRemovedFromSprite = null;
@@ -229,20 +228,6 @@ public abstract class Sprite
 	
 	public void removeBoundSprite(Sprite boundSprite)
 	{	boundSprites.remove(boundSprite);		
-	}
-	
-	/////////////////////////////////////////////////////////////////
-	// HIDDEN			/////////////////////////////////////////////
-	/////////////////////////////////////////////////////////////////
-	/** le sprite ne doit pas être mise à jour, mais il existe encore */
-	protected Sprite hiddenSprite;
-	
-	public Sprite getHiddenSprite()
-	{	return hiddenSprite;
-	}
-	
-	public void setHiddenSprite(Sprite hiddenSprite)
-	{	this.hiddenSprite = hiddenSprite;
 	}
 	
 	/////////////////////////////////////////////////////////////////
@@ -511,6 +496,10 @@ public abstract class Sprite
 	
 	public void addDelay(String name,double duration)
 	{	delayManager.addDelay(name,duration);
+	}
+
+	public void addIterDelay(String name, int iterations)
+	{	delayManager.addIterDelay(name,iterations);
 	}
 	
 	public void removeDelay(String name)
@@ -816,14 +805,8 @@ public abstract class Sprite
 			modulationManager = null;
 			trajectoryManager.finish();
 			trajectoryManager = null;
-			// hidden sprite
-			if(hiddenSprite!=null)
-			{	hiddenSprite.finish();
-				hiddenSprite = null;
-			}
 			// misc
 			boundToSprite = null;
-			hiddenSprite = null;
 			toBeRemovedFromSprite = null;
 			owner = null;
 			player = null;

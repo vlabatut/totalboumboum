@@ -22,12 +22,16 @@ package fr.free.totalboumboum.engine.content.sprite.item;
  */
 
 import fr.free.totalboumboum.engine.content.feature.Direction;
+import fr.free.totalboumboum.engine.content.feature.ability.ActionAbility;
+import fr.free.totalboumboum.engine.content.feature.action.SpecificAction;
+import fr.free.totalboumboum.engine.content.feature.action.appear.SpecificAppear;
 import fr.free.totalboumboum.engine.content.feature.action.consume.SpecificConsume;
 import fr.free.totalboumboum.engine.content.feature.action.gather.SpecificGather;
 import fr.free.totalboumboum.engine.content.feature.event.ActionEvent;
 import fr.free.totalboumboum.engine.content.feature.event.ControlEvent;
 import fr.free.totalboumboum.engine.content.feature.event.EngineEvent;
 import fr.free.totalboumboum.engine.content.feature.gesture.GestureName;
+import fr.free.totalboumboum.engine.content.manager.delay.DelayManager;
 import fr.free.totalboumboum.engine.content.manager.event.EventManager;
 
 public class ItemEventManager extends EventManager
@@ -37,9 +41,10 @@ public class ItemEventManager extends EventManager
 	}
 	
 	public void initGesture()
-	{	gesture = GestureName.STANDING;
+	{	gesture = GestureName.HIDING;
 		spriteDirection = Direction.NONE;
 		sprite.setGesture(gesture,spriteDirection,Direction.NONE,true);
+		sprite.addIterDelay(DelayManager.DL_APPEAR,1);
 	}
 
 /*
@@ -85,6 +90,8 @@ public class ItemEventManager extends EventManager
 	public void processEvent(EngineEvent event)
 	{	if(event.getName().equals(EngineEvent.ANIME_OVER))
 			engAnimeOver(event);
+		else if(event.getName().equals(EngineEvent.DELAY_OVER))
+			engDelayOver(event);
 	}	
 
 	private void engAnimeOver(EngineEvent event)
@@ -95,6 +102,22 @@ public class ItemEventManager extends EventManager
 		}
 	}
 
+	private void engDelayOver(EngineEvent event)
+	{	if(gesture.equals(GestureName.HIDING) && event.getStringParameter().equals(DelayManager.DL_APPEAR))
+		{	SpecificAction action = new SpecificAppear(sprite,sprite.getTile());
+			ActionAbility ability = sprite.modulateAction(action);
+			// can appear >> appears
+			if(ability.isActive())
+			{	gesture = GestureName.STANDING;
+				sprite.setGesture(gesture,spriteDirection,Direction.NONE,true);
+			}
+			// cannot appear >> wait for next iteration
+			else
+			{	sprite.addIterDelay(DelayManager.DL_APPEAR,1);
+			}
+		}
+	}
+	
 	public void finish()
 	{	if(!finished)
 		{	super.finish();

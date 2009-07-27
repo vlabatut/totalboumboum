@@ -31,16 +31,14 @@ import fr.free.totalboumboum.engine.content.feature.event.EngineEvent;
 import fr.free.totalboumboum.engine.content.sprite.Sprite;
 
 public class DelayManager
-{	public static final String DL_EXPLOSION = "DL_EXPLOSION";
+{	
+	public static final String DL_APPEAR = "DL_APPEAR";
+	public static final String DL_EXPLOSION = "DL_EXPLOSION";
 	public static final String DL_LATENCY = "DL_LATENCY";
 	public static final String DL_OSCILLATION = "DL_OSCILLATION";
 	public static final String DL_SPAWN = "DL_SPAWN";
 	public static final String DL_WAIT = "DL_WAIT";
 	
-	private Sprite sprite;
-	private HashMap<String,Double> delays;
-	private HashMap<String,Double> addedDelays;
-	private ArrayList<String> removedDelays;
 
 	public DelayManager(Sprite sprite)
 	{	this.sprite = sprite;
@@ -49,6 +47,54 @@ public class DelayManager
 		removedDelays = new ArrayList<String>();
 	}
 
+	/////////////////////////////////////////////////////////////////
+	// SPRITE			/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	private Sprite sprite;
+
+	/////////////////////////////////////////////////////////////////
+	// DELAYS			/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	private HashMap<String,Double> delays;
+	private HashMap<String,Double> addedDelays;
+	private ArrayList<String> removedDelays;
+
+	public void addDelay(String name, double duration)
+	{	addedDelays.put(name, duration);		
+	}
+	
+	public void addIterDelay(String name, int iterations)
+	{	double period = Configuration.getEngineConfiguration().getMilliPeriod();
+		double speedCoeff = Configuration.getEngineConfiguration().getSpeedCoeff();
+		double duration = iterations*period*speedCoeff;
+		addDelay(name,duration);
+	}
+	
+	public void removeDelay(String name)
+	{	removedDelays.add(name);		
+	}
+	
+	/**
+	 * returns the current delay associated to the name parameter,
+	 * or a negative value if no delay is associated to the name. 
+	 * @param name
+	 * @return	a double corresponding to a delay
+	 */
+	public double getDelay(String name)
+	{	double result = -1;
+		if(delays.containsKey(name))
+			result = delays.get(name);
+		else if(addedDelays.containsKey(name))
+			result = addedDelays.get(name);
+		return result;
+	}
+	public boolean hasDelay(String name)
+	{	return delays.containsKey(name) || addedDelays.containsKey(name);		
+	}
+
+	/////////////////////////////////////////////////////////////////
+	// EXECUTION		/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
 	public void update()
 	{	
 //if(sprite instanceof Bomb)
@@ -74,14 +120,13 @@ public class DelayManager
 		}
 		
 		// update remaining delays
-		{	Iterator<Entry<String,Double>> i = delays.entrySet().iterator();
+		{	double period = Configuration.getEngineConfiguration().getMilliPeriod();
+			double speedCoeff = Configuration.getEngineConfiguration().getSpeedCoeff();
+			Iterator<Entry<String,Double>> i = delays.entrySet().iterator();
 			while(i.hasNext())
 			{	Entry<String,Double> temp = i.next();
 				String name = temp.getKey();
-				double duration = temp.getValue();
-				double period = Configuration.getEngineConfiguration().getMilliPeriod();
-				double speedCoeff = Configuration.getEngineConfiguration().getSpeedCoeff();
-				duration = duration - period*speedCoeff;
+				double duration = temp.getValue() - period*speedCoeff;
 				if(duration<=0)
 				{	i.remove();
 					sprite.processEvent(new EngineEvent(EngineEvent.DELAY_OVER,name));
@@ -92,30 +137,9 @@ public class DelayManager
 		}
 	}
 	
-	public void addDelay(String name, double duration)
-	{	addedDelays.put(name, duration);		
-	}
-	public void removeDelay(String name)
-	{	removedDelays.add(name);		
-	}
-	/**
-	 * returns the current delay associated to the name parameter,
-	 * or a negative value if no delay is associated to the name. 
-	 * @param name
-	 * @return	a double corresponding to a delay
-	 */
-	public double getDelay(String name)
-	{	double result = -1;
-		if(delays.containsKey(name))
-			result = delays.get(name);
-		else if(addedDelays.containsKey(name))
-			result = addedDelays.get(name);
-		return result;
-	}
-	public boolean hasDelay(String name)
-	{	return delays.containsKey(name) || addedDelays.containsKey(name);		
-	}
-
+	/////////////////////////////////////////////////////////////////
+	// FINISHED			/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
 	private boolean finished = false;
 	
 	public void finish()
