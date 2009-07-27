@@ -981,10 +981,5 @@ public class Launcher
 	/*TODO BUGS
 	 * - il semblerait que la direction dans la SpecificAction et dans la GeneralAction correspondante ne soit pas la même...
 	 * - impossible de poser une bombe quand on est en train de buter contre un mur en direction upleft
-	 * - la penetration détruit les items avec les murs
-	 * 	>> ne plus lier les items aux murs
-	 * 		- l'item commence en état none ou hidding
-	 * 		- il essaie d'apparaître à chaque itération
-	 * 		- dès qu'il peut (ie. pas de bloc ni flamme ni joueur?) il apparait 
 	 */
 }
