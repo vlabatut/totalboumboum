@@ -109,5 +109,7 @@ public class BombFactoryLoader extends SpriteFactoryLoader
 		
 		// BOMBSET
 		result.setBombset(bombset);
+//if(result.getName()==null)
+//	System.out.println();
 	}	
 }

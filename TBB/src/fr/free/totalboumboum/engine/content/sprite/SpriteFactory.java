@@ -48,7 +48,9 @@ public abstract class SpriteFactory<T extends Sprite>
 	protected void initSprite(Sprite sprite)
 	{	// name
 		sprite.setName(name);
-		
+if(name==null)
+	System.out.println();
+
 		// gesture pack
 		GesturePack gp = gesturePack;
 		sprite.setGesturePack(gp);

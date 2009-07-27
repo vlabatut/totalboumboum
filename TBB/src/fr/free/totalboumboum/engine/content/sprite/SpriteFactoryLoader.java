@@ -67,7 +67,9 @@ public abstract class SpriteFactoryLoader
 		// name
 		String name = elt.getAttribute(XmlTools.ATT_NAME).getValue().trim();
 		result.setName(name);
-		
+//if(name==null)
+//	System.out.println();
+
 		// base
 		String baseStr = elt.getAttributeValue(XmlTools.ATT_BASE);
 		result.setBase(baseStr);
