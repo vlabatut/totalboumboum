@@ -378,6 +378,8 @@ public class MoveZone
 			double deltaY = GameVariables.level.getDeltaY(currentY,po.getSprite().getCurrentPosY());
 			Direction d = Direction.getCompositeFromDouble(deltaX,deltaY);
 			dir = usedDirection.drop(d);
+if(dir.isComposite())
+	System.out.println();
 		}
 		else
 		{	if(horizontalDistance==verticalDistance && previousDirection.isPrimary()) //workaround, for ergonomics purpose

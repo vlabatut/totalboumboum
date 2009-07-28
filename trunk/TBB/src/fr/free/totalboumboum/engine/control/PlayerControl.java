@@ -31,27 +31,39 @@ import fr.free.totalboumboum.engine.content.sprite.Sprite;
 import fr.free.totalboumboum.engine.player.Player;
 
 public class PlayerControl implements KeyListener
-{	private Player player;
-	// nécessaire pour éviter d'émettre des évènements de façon répétitive pour un seul pressage de touche
-	private final HashMap<Integer,Boolean> keysPressed = new HashMap<Integer,Boolean>();
-	
+{	
 	public PlayerControl(Player player)
 	{	this.player = player;
 	}
+	
+	/////////////////////////////////////////////////////////////////
+	// SPRITE			/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	private Player player;
 	
 	public Sprite getSprite()
 	{	return player.getSprite();
 	}
 	
+	/////////////////////////////////////////////////////////////////
+	// SETTINGS			/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
 	public ControlSettings getControlSettings()
 	{	return player.getControlSettings();
 	}
 	
+	/////////////////////////////////////////////////////////////////
+	// KEYS				/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	// nécessaire pour éviter d'émettre des évènements de façon répétitive pour un seul pressage de touche
+	private final HashMap<Integer,Boolean> pressedKeys = new HashMap<Integer,Boolean>();
+	
 	@Override
 	public void keyPressed(KeyEvent e)
 	{	int keyCode = e.getKeyCode();
-		if(!keysPressed.containsKey(keyCode) || !keysPressed.get(keyCode))
-		{	keysPressed.put(keyCode, true);
+//System.out.println(player.getName()+":"+e.getKeyChar());	
+		if(!pressedKeys.containsKey(keyCode) || !pressedKeys.get(keyCode))
+		{	pressedKeys.put(keyCode, true);
 			if (!GameVariables.loop.isPaused() && getControlSettings().containsOnKey(keyCode))
 		    {	ControlCode controlCode = new ControlCode(keyCode,true);
 				getSprite().putControlCode(controlCode);				
@@ -62,7 +74,7 @@ public class PlayerControl implements KeyListener
 	@Override
 	public void keyReleased(KeyEvent e)
 	{	int keyCode = e.getKeyCode();
-		keysPressed.put(keyCode,false);	
+		pressedKeys.put(keyCode,false);	
 		if (!GameVariables.loop.isPaused() && getControlSettings().containsOffKey(keyCode))
 	    {	ControlCode controlCode = new ControlCode(keyCode,false);
 			getSprite().putControlCode(controlCode);				
@@ -74,6 +86,9 @@ public class PlayerControl implements KeyListener
 	{	// NOTE a priori inutile ici
 	}
 	
+	/////////////////////////////////////////////////////////////////
+	// FINISHED			/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
 	private boolean finished = false;
 	
 	public void finish()

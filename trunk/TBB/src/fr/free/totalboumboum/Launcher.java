@@ -980,6 +980,6 @@ public class Launcher
 	
 	/*TODO BUGS
 	 * - il semblerait que la direction dans la SpecificAction et dans la GeneralAction correspondante ne soit pas la même...
-	 * - impossible de poser une bombe quand on est en train de buter contre un mur en direction upleft
+	 * - impossible de poser une bombe quand on est en train de buter contre un mur en direction upleft (et uniquement cette direction pr NES2) et downleft (pr SBM1)
 	 */
 }
