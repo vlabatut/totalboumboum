@@ -819,6 +819,8 @@ public class Launcher
 	 * - mise à niveau du gestionnaire de trajectoire
 	 * - simplification de la structure du moteur du jeu (Loop et Level accessibles de façon statique)
 	 * - optimisation de l'organisation des sprites dans les ressources : gain de place sur disque, gain de mémoire en cours de jeu et gain de temps lors du chargement
+	 * - les permissions des sprites sont devenues des modulations
+	 * - simplification et externalisation partielle (XML) de la gestion des collisions 
 	 *   
 	 * - bug d'affichage quand les flammes se croisent au cours de plusieurs explosions: la dernière n'est pas affichée
 	 * 
