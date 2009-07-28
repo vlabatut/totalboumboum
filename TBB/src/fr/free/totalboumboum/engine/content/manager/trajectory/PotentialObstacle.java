@@ -287,7 +287,7 @@ public class PotentialObstacle
 		if(usedDirection==Direction.NONE)
 			orientation = Orientation.NONE;
 		else
-		{	Direction relativeDir = Direction.getCompositeFromSprites(source,sprite);
+		{	Direction relativeDir = Direction.getCompositeFromSprites(moveZone,sprite);
 			// actor facing target
 			if(relativeDir.hasCommonComponent(usedDirection))
 				orientation = Orientation.FACE;

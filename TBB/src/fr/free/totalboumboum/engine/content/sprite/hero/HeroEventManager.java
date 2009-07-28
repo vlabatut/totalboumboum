@@ -358,7 +358,7 @@ public class HeroEventManager extends EventManager
 		if(gesture.equals(GestureName.PUSHING))
 		{	if(!sprite.isColliding())
 			{	gesture = GestureName.WALKING;
-				sprite.setGesture(gesture, spriteDirection,controlDirection,true);
+				sprite.setGesture(gesture, spriteDirection,controlDirection,false);
 			}
 		}
 	}
@@ -371,7 +371,7 @@ public class HeroEventManager extends EventManager
 		}
 		else if(gesture.equals(GestureName.WALKING))
 		{	gesture = GestureName.PUSHING;
-			sprite.setGesture(gesture, spriteDirection,controlDirection,true);
+			sprite.setGesture(gesture, spriteDirection,controlDirection,false);
 		}
 	}
 	

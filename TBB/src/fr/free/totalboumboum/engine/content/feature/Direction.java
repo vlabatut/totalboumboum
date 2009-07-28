@@ -27,6 +27,7 @@ import java.util.Locale;
 import org.jdom.Attribute;
 import org.jdom.Element;
 
+import fr.free.totalboumboum.engine.content.manager.trajectory.MoveZone;
 import fr.free.totalboumboum.engine.content.sprite.Sprite;
 import fr.free.totalboumboum.tools.CalculusTools;
 import fr.free.totalboumboum.tools.XmlTools;
@@ -358,6 +359,21 @@ public enum Direction
 		}
 		return result;
 	}
+	public static Direction getCompositeFromSprites(MoveZone mz, Sprite obstacle)
+	{	Direction result;
+		if(obstacle==null)
+			result = Direction.NONE;
+		else
+		{	double dx = obstacle.getCurrentPosX()-mz.getCurrentX();
+			double dy = obstacle.getCurrentPosY()-mz.getCurrentY();
+			if(CalculusTools.isRelativelyEqualTo(dx,0) && CalculusTools.isRelativelyEqualTo(dy,0))
+				result = Direction.NONE;
+			else
+				result = getCompositeFromDouble(dx,dy);
+		}
+		return result;
+	}
+	
 /*	
 	public static Direction getCompositeFromSprite(AbstractSprite s, Tile tile)
 	{	Direction result;
