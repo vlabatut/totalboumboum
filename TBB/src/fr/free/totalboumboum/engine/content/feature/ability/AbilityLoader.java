@@ -40,8 +40,7 @@ import fr.free.totalboumboum.tools.FileTools;
 import fr.free.totalboumboum.tools.XmlTools;
 
 public class AbilityLoader
-{	
-	
+{		
     private static AbstractAbility loadAbilityElement(Element root) throws ClassNotFoundException
     {	AbstractAbility result = null;
 		// max

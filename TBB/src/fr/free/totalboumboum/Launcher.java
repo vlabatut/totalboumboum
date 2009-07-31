@@ -817,6 +817,7 @@ public class Launcher
 	 * - correction d'un bug lors du chargement des animations mutualisées
 	 * - modification d'un thème de NES-BM2 (thème battle, nouveau sol plus lisible)
 	 * - correction dans les bombes de NES-BM2 (couleur du reflet de la bombe jaune)
+	 * - modification dans le moteur : un sprite dans l'état NONE est quand même associé à une case, ce qui permet de simplifier le traitement des actions. par contre il n'a pas de position en pixels
 	 *   
 	 * - bug d'affichage quand les flammes se croisent au cours de plusieurs explosions: la dernière n'est pas affichée
 	 * 
