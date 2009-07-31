@@ -824,6 +824,9 @@ public class Launcher
 	 *   
 	 * - bug d'affichage quand les flammes se croisent au cours de plusieurs explosions: la dernière n'est pas affichée
 	 * 
+	 * - sbm1 : le délai de retardement n'est pas réinitialisé a la suite d'un punch
+	 * en fait ça reprend exactement où ça ne était au moment ou la bombe touche le sol
+	 * 
 	 * - lors du calcul des points, il faut forcer la présence d'un classement: ça facilite énormément de traitements en aval
 	 *   au pire, si le classement est inutile (ex: simple total), on définit un classement-identité (pts utilisés pr le classement <=> pts marqués)
 	 * - ça serait bien que les joueurs soient affichés dans l'ordre relatif aux points de la limite rencontrée
@@ -983,5 +986,14 @@ public class Launcher
 	/*TODO BUGS
 	 * - il semblerait que la direction dans la SpecificAction et dans la GeneralAction correspondante ne soit pas la même...
 	 * - impossible de poser une bombe quand on est en train de buter contre un mur en direction upleft (et uniquement cette direction pr NES2) et downleft (pr SBM1)
+	 */
+	
+	/*TODO instance NES BM2
+	 * - item veste ignifugée
+	 * - item mystère
+	 * - item accélérateur
+	 * - item shirobon (vie)
+	 * - item bouclier
+	 * - item malus
 	 */
 }
