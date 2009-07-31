@@ -2,9 +2,6 @@
 <modulations xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
 		xsi:noNamespaceSchemaLocation="../../../../../../schemas/modulations.xsd" >
 	
-	<gesture name="NONE" file="none.xml" />
-	<gesture name="ENDED" file="ended.xml" />
-
 	<gesture name="BURNING" file="burning.xml" />
 
 </modulations>
