@@ -98,23 +98,25 @@ public class GesturePack
 			GestureName nm = e.getKey();
 			result.addGesture(cp,nm);
 		}
+		// misc
+		result.scale = scale;
 		return result;
 	}
 	
-	public void copyAnimesFrom(GesturePack gesturePack)
-	{	for(Entry<GestureName,Gesture> e: gestures.entrySet())
+/*	public void copyAnimesFrom(GesturePack gesturePack)
+	{	for(Entry<GestureName,Gesture> e: gesturePack.gestures.entrySet())
 		{	Gesture cp = e.getValue();
 			GestureName nm = e.getKey();
-			Gesture cp0 = getGesture(nm);
-			if(cp0==null) //should not happen
-			{	cp0 = new Gesture();
-				cp0.setName(nm);
-				addGesture(cp0,nm);
+			Gesture gest = getGesture(nm);
+			if(gest==null) //should not happen
+			{	gest = new Gesture();
+				gest.setName(nm);
+				addGesture(gest,nm);
 			}
-			cp0.copyAnimesFrom(cp);
+			gest.copyAnimesFrom(cp);
 		}		
 	}
-	
+*/	
 	/////////////////////////////////////////////////////////////////
 	// FINISHED			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////

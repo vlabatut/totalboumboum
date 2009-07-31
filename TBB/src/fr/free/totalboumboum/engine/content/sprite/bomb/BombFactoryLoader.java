@@ -64,7 +64,7 @@ public class BombFactoryLoader extends SpriteFactoryLoader
 		ArrayList<AbstractAbility> abilities = result.getAbilities();
 		
 		// ABILITIES
-		folder = folderPath+File.separator+FileTools.FILE_ABILITIES;
+		folder = folderPath+File.separator+FileTools.FOLDER_ABILITIES;
 		AbilityLoader.loadAbilityPack(folder,abilities);
 		
 		//EXPLOSION
@@ -73,11 +73,11 @@ public class BombFactoryLoader extends SpriteFactoryLoader
 			result.setExplosion(exp); 
 		
 		//MODULATIONS
-		folder = folderPath+File.separator+FileTools.FILE_MODULATIONS;
+		folder = folderPath+File.separator+FileTools.FOLDER_MODULATIONS;
 		ModulationsLoader.loadModulations(folder,gesturePack,Role.BOMB);
 		
 		// TRAJECTORIES
-		folder = folderPath+File.separator+FileTools.FILE_TRAJECTORIES;
+		folder = folderPath+File.separator+FileTools.FOLDER_TRAJECTORIES;
 		TrajectoriesLoader.loadTrajectories(folder,gesturePack);
 		
 		// result
@@ -88,20 +88,23 @@ public class BombFactoryLoader extends SpriteFactoryLoader
 	 * load the animes only
 	 * (complete the sprite depending on the specified color)
 	 */
-	public static void completeBombFactory(BombFactory result, String folderPath, PredefinedColor color, Bombset bombset, HashMap<String,BombFactory> abstractBombs) throws ParserConfigurationException, SAXException, IOException, ClassNotFoundException
+	public static void completeBombFactory(BombFactory result, String folderPath, PredefinedColor color, Bombset bombset, HashMap<String,String> abstractBombs) throws ParserConfigurationException, SAXException, IOException, ClassNotFoundException
 	{	String folder;
 		
 		// GENERAL
 		GesturePack gesturePack = result.getGesturePack();
 		String baseStr = result.getBase();
 		if(baseStr!=null)
-		{	BombFactory base = abstractBombs.get(baseStr);
-			GesturePack gp = base.getGesturePack();
-			gesturePack.copyAnimesFrom(gp);
+		{	String path = abstractBombs.get(baseStr)+File.separator+FileTools.FOLDER_ANIMES;
+			// NOTE this won't work in case of multiple inheritance (only the direct parent's animation will be loaded)
+			if(color==null)
+				AnimesLoader.loadAnimes(path,gesturePack,BombFactory.getAnimeReplacements());
+			else
+				AnimesLoader.loadAnimes(path,gesturePack,color,BombFactory.getAnimeReplacements());
 		}
 		
 		// ANIMES
-		folder = folderPath+File.separator+FileTools.FILE_ANIMES;
+		folder = folderPath+File.separator+FileTools.FOLDER_ANIMES;
 		if(color==null)
 			AnimesLoader.loadAnimes(folder,gesturePack,BombFactory.getAnimeReplacements());
 		else
