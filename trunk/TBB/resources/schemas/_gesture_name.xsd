@@ -9,13 +9,11 @@
 			<xsd:enumeration value="CARRYING" />
 			<xsd:enumeration value="CRYING" />
 			<xsd:enumeration value="DISAPPEARING" />
-			<xsd:enumeration value="ENDED" />
 			<xsd:enumeration value="EXULTING" />
 			<xsd:enumeration value="HIDING" />
 			<xsd:enumeration value="HOLDING" />
 			<xsd:enumeration value="JUMPING" />
 			<xsd:enumeration value="LANDING" />
-			<xsd:enumeration value="NONE" />
 			<xsd:enumeration value="OSCILLATING" />
 			<xsd:enumeration value="OSCILLATING_FAILING" />
 			<xsd:enumeration value="PICKING" />
