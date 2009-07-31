@@ -1,0 +1,207 @@
+<?xml version="1.0" encoding="utf-8"?>
+<zone xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+		xsi:noNamespaceSchemaLocation="../../../schemas/zone.xsd" >
+	
+	<variable-tiles>
+		<variable-tile name="tile1">
+			<value proba="0.3" >
+				<block name="softwall" />
+			</value>
+			<value proba="0.1" >
+				<block name="softwall" />
+				<item type="extrabomb" />
+			</value>
+			<value proba="0.1" >
+				<block name="softwall" />
+				<item type="extraflame" />
+			</value>
+			<value proba="0.01" >
+				<block name="softwall" />
+				<item type="remotecontrol" />
+			</value>
+			<value proba="0.04" >
+				<block name="softwall" />
+				<item type="throughbombs" />
+			</value>
+			<value proba="0.05" >
+				<block name="softwall" />
+				<item type="throughwalls" />
+			</value>
+			<value proba="0.4" >
+			</value>
+		</variable-tile>
+	</variable-tiles>
+	
+	<matrix>
+		<line pos="0">
+			<tile pos="0" >
+			</tile>
+			<tile pos="1" >
+				<item type="extrabomb" />
+			</tile>
+			<tile pos="2" >
+				<item type="extraflame" />
+			</tile>
+			<tile pos="3" >
+			</tile>
+			<tile pos="4" >
+			</tile>
+			<tile pos="5" >
+			</tile>
+			<tile pos="6" >
+			</tile>
+			<tile pos="7" >
+			</tile>
+			<tile pos="8" >
+			</tile>
+		</line>
+		
+		<line pos="1">
+			<tile pos="0" >
+				<item type="remotecontrol" />
+			</tile>
+			<tile pos="1" >
+			</tile>
+			<tile pos="2" >
+				<item type="throughbombs" />
+			</tile>
+			<tile pos="3" >
+				<item type="throughwalls" />
+			</tile>
+			<tile pos="4" >
+			</tile>
+			<tile pos="5" >
+			</tile>
+			<tile pos="6" >
+			</tile>
+			<tile pos="7" >
+			</tile>
+			<tile pos="8" >
+			</tile>
+		</line>
+		
+		<line pos="2">
+			<tile pos="0" >
+			</tile>
+			<tile pos="1" >
+			</tile>
+			<tile pos="2" >
+			</tile>
+			<tile pos="3" >
+			</tile>
+			<tile pos="4" >
+			</tile>
+			<tile pos="5" >
+			</tile>
+			<tile pos="6" >
+			</tile>
+			<tile pos="7" >
+			</tile>
+			<tile pos="8" >
+			</tile>
+		</line>
+		
+		<line pos="3">
+			<tile pos="0" >
+			</tile>
+			<tile pos="1" >
+				<block group="hardwalls" name="regular" />
+			</tile>
+			<tile pos="2" >
+			</tile>
+			<tile pos="3" >
+				<block group="hardwalls" name="regular" />
+			</tile>
+			<tile pos="4" >
+			</tile>
+			<tile pos="5" >
+				<block group="hardwalls" name="regular" />
+			</tile>
+			<tile pos="6" >
+			</tile>
+			<tile pos="7" >
+				<block group="hardwalls" name="regular" />
+			</tile>
+			<tile pos="8" >
+			</tile>
+		</line>
+		
+		<line pos="4">
+			<tile pos="0" >
+			</tile>
+			<tile pos="1" >
+				<reference name="tile1" />
+			</tile>
+			<tile pos="2" >
+				<reference name="tile1" />
+			</tile>
+			<tile pos="3" >
+				<reference name="tile1" />
+			</tile>
+			<tile pos="4" >
+				<reference name="tile1" />
+			</tile>
+			<tile pos="5" >
+				<reference name="tile1" />
+			</tile>
+			<tile pos="6" >
+				<reference name="tile1" />
+			</tile>
+			<tile pos="7" >
+				<reference name="tile1" />
+			</tile>
+			<tile pos="8" >
+			</tile>
+		</line>
+		
+		<line pos="5">
+			<tile pos="0" >
+			</tile>
+			<tile pos="1" >
+				<block group="hardwalls" name="regular" />
+			</tile>
+			<tile pos="2" >
+				<reference name="tile1" />
+			</tile>
+			<tile pos="3" >
+				<block group="hardwalls" name="regular" />
+			</tile>
+			<tile pos="4" >
+				<reference name="tile1" />
+			</tile>
+			<tile pos="5" >
+				<block group="hardwalls" name="regular" />
+			</tile>
+			<tile pos="6" >
+				<reference name="tile1" />
+			</tile>
+			<tile pos="7" >
+				<block group="hardwalls" name="regular" />
+			</tile>
+			<tile pos="8" >
+			</tile>
+		</line>
+		
+		<line pos="6">
+			<tile pos="0" >
+			</tile>
+			<tile pos="1" >
+			</tile>
+			<tile pos="2" >
+			</tile>
+			<tile pos="3" >
+			</tile>
+			<tile pos="4" >
+			</tile>
+			<tile pos="5" >
+			</tile>
+			<tile pos="6" >
+			</tile>
+			<tile pos="7" >
+			</tile>
+			<tile pos="8" >
+			</tile>
+		</line>
+	</matrix>
+
+</zone>
