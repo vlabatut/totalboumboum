@@ -75,6 +75,7 @@ public class FloorFactoryLoader extends SpriteFactoryLoader
 		//MODULATIONS
 		folder = folderPath+File.separator+FileTools.FOLDER_MODULATIONS;
 		ModulationsLoader.loadModulations(folder,gesturePack,Role.FLOOR);
+		initDefaultGesture(gesturePack,Role.FLOOR);
 		
 		// TRAJECTORIES
 		folder = folderPath+File.separator+FileTools.FILE_TRAJECTORIES;

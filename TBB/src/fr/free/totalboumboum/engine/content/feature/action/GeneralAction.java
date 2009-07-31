@@ -103,6 +103,11 @@ public abstract class GeneralAction
 */
 	public abstract void addContact(Contact contact);
 	
+	public void addAnyContacts()
+	{	for(Contact c: Contact.values())
+			addContact(c);
+	}
+
 	public boolean containsContact(Contact contact)
 	{	return circumstance.containsContact(contact);
 	}
@@ -117,6 +122,11 @@ public abstract class GeneralAction
 */	
 	public abstract void addOrientation(Orientation orientation);
 	
+	public void addAnyOrientations()
+	{	for(Orientation o: Orientation.values())
+			addOrientation(o);
+	}
+
 	public boolean containsOrientation(Orientation orientation)
 	{	return circumstance.containsOrientation(orientation);
 	}
@@ -131,6 +141,10 @@ public abstract class GeneralAction
 */	
 	public abstract void addTilePosition(TilePosition tilePosition);
 	
+	public void addAnyTilePositions()
+	{	for(TilePosition tp: TilePosition.values())
+			addTilePosition(tp);
+	}
 	public boolean containsTilePosition(TilePosition tilePosition)
 	{	return circumstance.containsTilePosition(tilePosition);
 	}
@@ -151,6 +165,11 @@ public abstract class GeneralAction
 	}
 	
 	public abstract void addActor(Role actor);
+	
+	public void addAnyActors()
+	{	for(Role r: Role.values())
+			addActor(r);
+	}
 
 	/////////////////////////////////////////////////////////////////
 	// TARGETS			/////////////////////////////////////////////
@@ -163,6 +182,11 @@ public abstract class GeneralAction
 	}
 	
 	public abstract void addTarget(Role target);
+
+	public void addAnyTargets()
+	{	for(Role r: Role.values())
+			addTarget(r);
+	}
 
 	/////////////////////////////////////////////////////////////////
 	// FINISHED			/////////////////////////////////////////////

@@ -817,11 +817,14 @@ public class Launcher
 	 * - correction d'un bug lors du chargement des animations mutualisées
 	 * - modification d'un thème de NES-BM2 (thème battle, nouveau sol plus lisible)
 	 * - correction dans les bombes de NES-BM2 (couleur du reflet de la bombe jaune)
+	 * - le gesture ENDED n'est plus défini en XML, mais en dur car il est constant : pas d'animation, pas de trajectoire, modulations acteur/target toutes négatives, aucune autre modulation
+	 * - pareil pour NONE, sauf que l'action APPEAR est autorisée (en tant qu'acteur)
+	 * 
 	 * - modification dans le moteur : un sprite dans l'état NONE est quand même associé à une case, ce qui permet de simplifier le traitement des actions. par contre il n'a pas de position en pixels
 	 *   
-	 * - bug d'affichage quand les flammes se croisent au cours de plusieurs explosions: la dernière n'est pas affichée
 	 * 
-	 * - sbm1 : le délai de retardement n'est pas réinitialisé a la suite d'un punch
+	 * - bug d'affichage quand les flammes se croisent au cours de plusieurs explosions: la dernière n'est pas affichée
+	 * - sbm1 : le délai de retardement ne doit pas être réinitialisé a la suite d'un punch
 	 * en fait ça reprend exactement où ça ne était au moment ou la bombe touche le sol
 	 * 
 	 * - lors du calcul des points, il faut forcer la présence d'un classement: ça facilite énormément de traitements en aval
@@ -833,6 +836,7 @@ public class Launcher
 	 * 		- afficher par défaut les 4 scores de base
 	 * 		- plus les scores utilisés dans les points et/ou les limites
 	 * 		- si les limites utilisent des points custom, les afficher aussi
+	 * 
 	 * *******************************************************
 	 * *********************** A FAIRE ***********************
 	 * *******************************************************
@@ -985,7 +989,7 @@ public class Launcher
 	 * - impossible de poser une bombe quand on est en train de buter contre un mur en direction upleft (et uniquement cette direction pr NES2) et downleft (pr SBM1)
 	 * 
 	 * - NES-BM2: quand on apparait dans un mur, on ne peut pas bouger (on devrait pouvoir en sortir)
-	 * - NES-BM2: on ne semble pas pouvoir poser plusieurs bombes en même temps
+	 * - NES-BM2: on ne semble pas pouvoir poser plusieurs bombes en même temps (en fait on les poses toutes au même endroit car pb dans la gestion tile+modulation : etat none = pas de tile)
 	 */
 	
 	/*TODO instance NES BM2
