@@ -170,12 +170,16 @@ public class ModulationManager
 	{	// actor original ability 
 		//Sprite actor = action.getActor();
 		ActionAbility result = sprite.getAbility(action);
+		
 		// actor modulation
 		result = combineActorModulation(action,result);
+		
 		// target modulation (if there's one!)
 		result = combineTargetModulation(action,result);
+		
 		// environement modulation
 		result = combineThirdModulation(action,result);
+		
 		return result;
 	}
 	
@@ -302,10 +306,13 @@ public class ModulationManager
 	public StateAbility modulateStateAbility(String name)
 	{	// original ability
 		StateAbility result = sprite.getAbility(name);
+		
 		// self modulation
 		result = combineSelfModulation(result);
+		
 		// environement modulation
 		result = combineOtherModulation(result);
+		
 		return result;
 	}	
 		
