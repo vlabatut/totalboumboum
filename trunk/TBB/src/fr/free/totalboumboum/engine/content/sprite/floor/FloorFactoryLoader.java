@@ -60,11 +60,11 @@ public class FloorFactoryLoader extends SpriteFactoryLoader
 		ArrayList<AbstractAbility> abilities = result.getAbilities();
 		
 		// ABILITIES
-		folder = folderPath+File.separator+FileTools.FILE_ABILITIES;
+		folder = folderPath+File.separator+FileTools.FOLDER_ABILITIES;
 		AbilityLoader.loadAbilityPack(folder,abilities);
 		
 		// ANIMES
-		folder = folderPath+File.separator+FileTools.FILE_ANIMES;
+		folder = folderPath+File.separator+FileTools.FOLDER_ANIMES;
 		AnimesLoader.loadAnimes(folder,gesturePack,ItemFactory.getAnimeReplacements());
 		
 		//EXPLOSION
@@ -73,7 +73,7 @@ public class FloorFactoryLoader extends SpriteFactoryLoader
 			result.setExplosion(exp); 
 		
 		//MODULATIONS
-		folder = folderPath+File.separator+FileTools.FILE_MODULATIONS;
+		folder = folderPath+File.separator+FileTools.FOLDER_MODULATIONS;
 		ModulationsLoader.loadModulations(folder,gesturePack,Role.FLOOR);
 		
 		// TRAJECTORIES

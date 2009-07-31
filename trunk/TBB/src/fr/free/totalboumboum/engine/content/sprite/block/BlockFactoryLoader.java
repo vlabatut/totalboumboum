@@ -59,11 +59,11 @@ public class BlockFactoryLoader extends SpriteFactoryLoader
 		ArrayList<AbstractAbility> abilities = result.getAbilities();
 		
 		// ABILITIES
-		folder = folderPath+File.separator+FileTools.FILE_ABILITIES;
+		folder = folderPath+File.separator+FileTools.FOLDER_ABILITIES;
 		AbilityLoader.loadAbilityPack(folder,abilities);
 		
 		// ANIMES
-		folder = folderPath+File.separator+FileTools.FILE_ANIMES;
+		folder = folderPath+File.separator+FileTools.FOLDER_ANIMES;
 		AnimesLoader.loadAnimes(folder,gesturePack,BlockFactory.getAnimeReplacements());
 		
 		//EXPLOSION
@@ -72,11 +72,11 @@ public class BlockFactoryLoader extends SpriteFactoryLoader
 			result.setExplosion(exp); 
 		
 		//MODULATIONS
-		folder = folderPath+File.separator+FileTools.FILE_MODULATIONS;
+		folder = folderPath+File.separator+FileTools.FOLDER_MODULATIONS;
 		ModulationsLoader.loadModulations(folder,gesturePack,Role.BLOCK);
 		
 		// TRAJECTORIES
-		folder = folderPath+File.separator+FileTools.FILE_TRAJECTORIES;
+		folder = folderPath+File.separator+FileTools.FOLDER_TRAJECTORIES;
 		TrajectoriesLoader.loadTrajectories(folder,gesturePack);
 		
 		// BOMBSET

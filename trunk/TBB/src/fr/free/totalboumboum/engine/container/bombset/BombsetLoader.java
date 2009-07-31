@@ -38,7 +38,6 @@ import fr.free.totalboumboum.configuration.profile.PredefinedColor;
 import fr.free.totalboumboum.engine.content.feature.ability.AbilityLoader;
 import fr.free.totalboumboum.engine.content.feature.ability.AbstractAbility;
 import fr.free.totalboumboum.engine.content.feature.ability.StateAbility;
-import fr.free.totalboumboum.engine.content.feature.gesture.GesturePack;
 import fr.free.totalboumboum.engine.content.sprite.bomb.BombFactory;
 import fr.free.totalboumboum.engine.content.sprite.bomb.BombFactoryLoader;
 import fr.free.totalboumboum.tools.FileTools;
@@ -143,7 +142,7 @@ public class BombsetLoader
 	
 	private static void loadBombsetElement(Element root, String folder, PredefinedColor color, Bombset result) throws ParserConfigurationException, SAXException, IOException, ClassNotFoundException
     {	// abstract bombs
-    	HashMap<String,BombFactory> abstractBombs = new HashMap<String,BombFactory>();
+    	HashMap<String,String> abstractBombs = new HashMap<String,String>();
     	Element abstractBombsElt = root.getChild(XmlTools.ELT_ABSTRACT_BOMBS);
     	if(abstractBombsElt!=null)
     		loadBombsElement(abstractBombsElt,folder,color,result,abstractBombs,Type.ABSTRACT);
@@ -154,7 +153,7 @@ public class BombsetLoader
 	}
     
     @SuppressWarnings("unchecked")
-	private static void loadBombsElement(Element root, String folder, PredefinedColor color, Bombset result, HashMap<String,BombFactory> abstractBombs, Type type) throws ParserConfigurationException, SAXException, IOException, ClassNotFoundException
+	private static void loadBombsElement(Element root, String folder, PredefinedColor color, Bombset result, HashMap<String,String> abstractBombs, Type type) throws ParserConfigurationException, SAXException, IOException, ClassNotFoundException
     {	String individualFolder = folder;
     	List<Element> bombs = root.getChildren(XmlTools.ELT_BOMB);
     	Iterator<Element> i = bombs.iterator();
@@ -164,7 +163,7 @@ public class BombsetLoader
     	}
     }
     
-	private static void loadBombElement(Element root, String folder, PredefinedColor color, Bombset bombset, HashMap<String,BombFactory> abstractBombs, Type type) throws ParserConfigurationException, SAXException, IOException, ClassNotFoundException
+	private static void loadBombElement(Element root, String folder, PredefinedColor color, Bombset bombset, HashMap<String,String> abstractBombs, Type type) throws ParserConfigurationException, SAXException, IOException, ClassNotFoundException
     {	// name
 		String name = root.getAttribute(XmlTools.ATT_NAME).getValue().trim();
 		
@@ -176,13 +175,11 @@ public class BombsetLoader
 		// required abilities
 		BombFactory bombFactory;
 		if(type==Type.CONCRETE)
-			bombFactory = bombset.getBombFactory(name);		
-		else
-		{	bombFactory = new BombFactory(name);
-			bombFactory.setGesturePack(new GesturePack());
-			abstractBombs.put(name,bombFactory);
+		{	bombFactory = bombset.getBombFactory(name);		
+			BombFactoryLoader.completeBombFactory(bombFactory,individualFolder,color,bombset,abstractBombs);
 		}
-		BombFactoryLoader.completeBombFactory(bombFactory,individualFolder,color,bombset,abstractBombs);
+		else
+			abstractBombs.put(name,individualFolder);
     }
 
 	/////////////////////////////////////////////////////////////////

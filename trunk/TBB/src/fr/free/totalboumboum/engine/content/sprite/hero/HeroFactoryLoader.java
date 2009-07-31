@@ -63,7 +63,7 @@ public class HeroFactoryLoader extends SpriteFactoryLoader
 		GesturePack gesturePack = result.getGesturePack();
 		
 		// ANIMES
-		folder = folderPath+File.separator+FileTools.FILE_ANIMES;
+		folder = folderPath+File.separator+FileTools.FOLDER_ANIMES;
 		AnimesLoader.loadAnimes(folder,gesturePack,color,HeroFactory.getAnimeReplacements());
 		
 		// BOMBSET
@@ -99,11 +99,11 @@ public class HeroFactoryLoader extends SpriteFactoryLoader
 			result.setExplosion(exp); 
 		
 		// MODULATIONS
-		folder = folderPath+File.separator+FileTools.FILE_MODULATIONS;
+		folder = folderPath+File.separator+FileTools.FOLDER_MODULATIONS;
 		ModulationsLoader.loadModulations(folder,gesturePack,Role.HERO);
 		
 		// TRAJECTORIES
-		folder = folderPath+File.separator+FileTools.FILE_TRAJECTORIES;
+		folder = folderPath+File.separator+FileTools.FOLDER_TRAJECTORIES;
 		TrajectoriesLoader.loadTrajectories(folder,gesturePack);
 		
 		// result

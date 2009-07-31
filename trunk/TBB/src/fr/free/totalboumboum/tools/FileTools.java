@@ -105,6 +105,7 @@ public class FileTools
 	public static final String FILE_ZONES = "zones";
 	//
 	public static final String FOLDER_ABILITIES = "abilities";
+	public static final String FOLDER_ANIMES = "animes";
 	public static final String FOLDER_AI = "ai";
 	public static final String FOLDER_BLOCKS = "blocks";
 	public static final String FOLDER_BOMBS = "bombs";
@@ -126,6 +127,7 @@ public class FileTools
 	public static final String FOLDER_LEVELS = "levels";
 	public static final String FOLDER_MATCHES = "matches";
 	public static final String FOLDER_MINE = "mine";
+	public static final String FOLDER_MODULATIONS = "modulations";
 	public static final String FOLDER_NORMAL = "normal";
 	public static final String FOLDER_PENETRATION = "penetration";
 	public static final String FOLDER_PERMISSIONS = "permissions";

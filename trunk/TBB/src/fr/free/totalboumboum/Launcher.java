@@ -813,6 +813,10 @@ public class Launcher
 	 * TODO
 	 * 
 	 * + beta.013
+	 * - correction d'un bug lors du chargement des animations des bombes
+	 * - correction d'un bug lors du chargement des animations mutualisées
+	 * - modification d'un thème de NES-BM2 (thème battle, nouveau sol plus lisible)
+	 * - correction dans les bombes de NES-BM2 (couleur du reflet de la bombe jaune)
 	 *   
 	 * - bug d'affichage quand les flammes se croisent au cours de plusieurs explosions: la dernière n'est pas affichée
 	 * 
@@ -978,6 +982,9 @@ public class Launcher
 	/*TODO BUGS
 	 * - il semblerait que la direction dans la SpecificAction et dans la GeneralAction correspondante ne soit pas la même...
 	 * - impossible de poser une bombe quand on est en train de buter contre un mur en direction upleft (et uniquement cette direction pr NES2) et downleft (pr SBM1)
+	 * 
+	 * - NES-BM2: quand on apparait dans un mur, on ne peut pas bouger (on devrait pouvoir en sortir)
+	 * - NES-BM2: on ne semble pas pouvoir poser plusieurs bombes en même temps
 	 */
 	
 	/*TODO instance NES BM2

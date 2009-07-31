@@ -84,6 +84,16 @@ public class Gesture
 		}
 	}
 	
+/*	public void copyAnimesFrom(Gesture gesture)
+	{	for(Entry<Direction,AnimeDirection> e: gesture.animes.entrySet())
+		{	AnimeDirection cp = e.getValue();
+			Direction direction = e.getKey();
+			//AnimeDirection anime = cp.copy();
+			AnimeDirection anime = cp;
+			gesture.addAnimeDirection(anime,direction);
+		}		
+	}
+*/
 	/////////////////////////////////////////////////////////////////
 	// TRAJECTORIES		/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
@@ -259,15 +269,6 @@ public class Gesture
 		return result;
 	}
 	
-	public void copyAnimesFrom(Gesture gesture)
-	{	for(Entry<Direction,AnimeDirection> e: animes.entrySet())
-		{	AnimeDirection anime = e.getValue();
-			Direction direction = e.getKey();
-			AnimeDirection anime0 = anime/*.copy()*/;
-			gesture.addAnimeDirection(anime0,direction);
-		}		
-	}
-
 	/////////////////////////////////////////////////////////////////
 	// FINISHED			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
