@@ -33,10 +33,16 @@ import org.jdom.Element;
 import org.xml.sax.SAXException;
 
 import fr.free.totalboumboum.configuration.GameVariables;
+import fr.free.totalboumboum.engine.content.feature.Role;
 import fr.free.totalboumboum.engine.content.feature.ability.AbstractAbility;
+import fr.free.totalboumboum.engine.content.feature.action.ActionName;
+import fr.free.totalboumboum.engine.content.feature.action.GeneralAction;
 import fr.free.totalboumboum.engine.content.feature.explosion.Explosion;
 import fr.free.totalboumboum.engine.content.feature.explosion.ExplosionLoader;
+import fr.free.totalboumboum.engine.content.feature.gesture.Gesture;
+import fr.free.totalboumboum.engine.content.feature.gesture.GestureName;
 import fr.free.totalboumboum.engine.content.feature.gesture.GesturePack;
+import fr.free.totalboumboum.engine.content.feature.gesture.modulation.ActorModulation;
 import fr.free.totalboumboum.tools.FileTools;
 import fr.free.totalboumboum.tools.XmlTools;
 
@@ -83,15 +89,18 @@ public abstract class SpriteFactoryLoader
 			loadGeneralElement(result,base);
 		}
 		else
-		{	gesturePack = new GesturePack();
-			abilities = new ArrayList<AbstractAbility>();
-			explosion = new Explosion();
+		{	// gestures pack
+			gesturePack = new GesturePack();
 			result.setGesturePack(gesturePack);
+			// abilities
+			abilities = new ArrayList<AbstractAbility>();
 			result.setAbilities(abilities);
+			// explosions
+			explosion = new Explosion();
 			result.setExplosion(explosion);
 		}
-if(result.getExplosion()==null)
-		System.out.println(name);
+//if(result.getExplosion()==null)
+//		System.out.println(name);
 	}
 	
 	protected static <T extends Sprite> void loadGeneralElement(Element root, SpriteFactory<T> result, SpriteFactory<T> base)
@@ -114,6 +123,77 @@ if(result.getExplosion()==null)
 		result.setAbilities((ArrayList<AbstractAbility>)abilities.clone());
 		result.setExplosion(explosion);
 	}
+	
+	protected static void initDefaultGesture(GesturePack gesturePack, Role role)
+	{	{	// gesture NONE
+			Gesture gesture = new Gesture();
+			GestureName gestureName = GestureName.NONE;
+			gesture.setName(gestureName);
+			gesturePack.addGesture(gesture,gestureName);
+			for(ActionName an: ActionName.values())
+			{	// any action forbidden as an actor except APPEAR (which can be instant, i.e. without anime nor trajectory)
+				if(an!=ActionName.APPEAR)
+				{	GeneralAction ga = an.createGeneralAction();
+					ga.addActor(role);
+					ga.addAnyTargets();
+					ga.addAnyContacts();
+					ga.addAnyOrientations();
+					ga.addAnyTilePositions();
+					ActorModulation am = new ActorModulation(ga);
+					am.setFrame(true);
+					am.setStrength(0);
+					am.setGestureName(gestureName);
+				}
+				// any action forbidden as a target
+				{	GeneralAction ga = an.createGeneralAction();
+					ga.addAnyActors();
+					ga.addTarget(role);
+					ga.addAnyContacts();
+					ga.addAnyOrientations();
+					ga.addAnyTilePositions();
+					ActorModulation am = new ActorModulation(ga);
+					am.setFrame(true);
+					am.setStrength(0);
+					am.setGestureName(gestureName);
+				}
+				// no modulation for the rest
+			}
+		}
+		{	// gesture ENDED
+			Gesture gesture = new Gesture();
+			GestureName gestureName = GestureName.ENDED;
+			gesture.setName(gestureName);
+			gesturePack.addGesture(gesture,gestureName);
+			for(ActionName an: ActionName.values())
+			{	// any action forbidden as an actor
+				{	GeneralAction ga = an.createGeneralAction();
+					ga.addActor(role);
+					ga.addAnyTargets();
+					ga.addAnyContacts();
+					ga.addAnyOrientations();
+					ga.addAnyTilePositions();
+					ActorModulation am = new ActorModulation(ga);
+					am.setFrame(true);
+					am.setStrength(0);
+					am.setGestureName(gestureName);
+				}
+				// any action forbidden as a target
+				{	GeneralAction ga = an.createGeneralAction();
+					ga.addAnyActors();
+					ga.addTarget(role);
+					ga.addAnyContacts();
+					ga.addAnyOrientations();
+					ga.addAnyTilePositions();
+					ActorModulation am = new ActorModulation(ga);
+					am.setFrame(true);
+					am.setStrength(0);
+					am.setGestureName(gestureName);
+				}
+				// no modulation for the rest
+			}
+		}
+	}
+	
 	
 	/////////////////////////////////////////////////////////////////
 	// EPLOSION LOADING		/////////////////////////////////////////

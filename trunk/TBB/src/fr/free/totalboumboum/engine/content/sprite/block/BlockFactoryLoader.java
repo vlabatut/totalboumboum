@@ -74,6 +74,7 @@ public class BlockFactoryLoader extends SpriteFactoryLoader
 		//MODULATIONS
 		folder = folderPath+File.separator+FileTools.FOLDER_MODULATIONS;
 		ModulationsLoader.loadModulations(folder,gesturePack,Role.BLOCK);
+		initDefaultGesture(gesturePack,Role.BLOCK);
 		
 		// TRAJECTORIES
 		folder = folderPath+File.separator+FileTools.FOLDER_TRAJECTORIES;

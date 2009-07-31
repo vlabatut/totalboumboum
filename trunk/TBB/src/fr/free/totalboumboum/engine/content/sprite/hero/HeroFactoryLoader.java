@@ -101,6 +101,7 @@ public class HeroFactoryLoader extends SpriteFactoryLoader
 		// MODULATIONS
 		folder = folderPath+File.separator+FileTools.FOLDER_MODULATIONS;
 		ModulationsLoader.loadModulations(folder,gesturePack,Role.HERO);
+		initDefaultGesture(gesturePack,Role.HERO);
 		
 		// TRAJECTORIES
 		folder = folderPath+File.separator+FileTools.FOLDER_TRAJECTORIES;
