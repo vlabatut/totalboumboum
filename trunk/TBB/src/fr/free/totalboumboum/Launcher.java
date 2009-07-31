@@ -821,6 +821,7 @@ public class Launcher
 	 * - pareil pour NONE, sauf que l'action APPEAR est autorisée (en tant qu'acteur)
 	 * 
 	 * - modification dans le moteur : un sprite dans l'état NONE est quand même associé à une case, ce qui permet de simplifier le traitement des actions. par contre il n'a pas de position en pixels
+	 * - en obligeant tous les sprites à passer par APPEAR, on peut faire apparaître tout le niveau (les blocs) dans une animation sympa
 	 *   
 	 * 
 	 * - bug d'affichage quand les flammes se croisent au cours de plusieurs explosions: la dernière n'est pas affichée
