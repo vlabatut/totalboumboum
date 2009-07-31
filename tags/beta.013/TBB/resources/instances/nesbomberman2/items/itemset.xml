@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<itemset
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+	xsi:noNamespaceSchemaLocation="../../../schemas/itemset.xsd">
+
+	<abstract-items>
+		<item name="common" folder="_common" />	
+	</abstract-items>
+	
+	<concrete-items>	
+		<item name="extrabomb" folder="extrabomb">	
+			<ability >
+				<name value="BOMB_NUMBER" />
+			</ability>
+		</item>
+		<item name="extraflame" folder="extraflame">
+			<ability >
+				<name value="BOMB_RANGE" />
+			</ability>
+		</item>
+		<item name="remotecontrol" folder="remotecontrol" >
+			<ability >
+				<name value="CUSTOM_BOMB_TYPE_REMOTECONTROL" />
+			</ability>
+		</item>
+		<item name="throughbombs" folder="throughbombs" >
+			<ability >
+				<name value="SPRITE_TRAVERSE_BOMB" />
+			</ability>
+		</item>
+		<item name="throughwalls" folder="throughwalls" >
+			<ability >
+				<name value="SPRITE_TRAVERSE_WALL" />
+			</ability>
+		</item>
+	</concrete-items>
+
+</itemset>

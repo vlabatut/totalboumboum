@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<gameTournament xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="..\..\..\resources\schemas\game_tournament.xsd">
+	<options useLastPlayers="true" useLastTournament="true" autoload="false" autosave="true" />
+	<tournament name="singleTest" />
+	<players>
+		<player file="53" color="RED" controls="0" spritePack="superbomberman5" spriteFolder="shirobon" />
+		<player file="59" color="BLUE" controls="0" spritePack="superbomberman5" spriteFolder="shirobon" />
+		<player file="60" color="ORANGE" controls="0" spritePack="superbomberman5" spriteFolder="shirobon" />
+		<player file="1" color="GRASS" controls="1" spritePack="nesbomberman2" spriteFolder="shirobon" />
+	</players>
+</gameTournament>
+

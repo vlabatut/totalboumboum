@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<abilities xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+		xsi:noNamespaceSchemaLocation="../../../../schemas/abilities.xsd" >
+
+		<!-- STATE -->
+<!-- 	SPRITE_MOVE_ASSISTANCE -->
+		<ability strength="0.33" frame="false" time="-1" uses="-1">
+			<name value="SPRITE_MOVE_ASSISTANCE"/>
+		</ability>
+<!-- 	SPRITE_TRAVERSE_ITEM -->
+		<ability strength="1" frame="false" time="-1" uses="-1">
+			<name value="SPRITE_TRAVERSE_ITEM"/>
+		</ability>
+<!--  	HERO_CELEBRATION_DURATION --> 
+		<ability strength="4000" frame="false" time="-1" uses="-1">
+			<name value="HERO_CELEBRATION_DURATION" />
+		</ability>
+<!--  	HERO_ENTRY_DURATION --> 
+		<ability strength="3000" frame="false" time="-1" uses="-1">
+			<name value="HERO_ENTRY_DURATION" />
+		</ability>
+<!--  	HERO_PUNCH_DURATION --> 
+		<ability strength="230" frame="false" time="-1" uses="-1">
+			<name value="HERO_PUNCH_DURATION" />
+		</ability>
+<!--  	HERO_WAIT_DURATION --> 
+		<ability strength="4000" frame="false" time="-1" uses="-1">
+			<name value="HERO_WAIT_DURATION" />
+		</ability>
+			
+		<!-- ACTION -->
+<!--  	APPEAR --> 
+		<ability strength="1" frame="false" time="-1" uses="-1">
+			<action name="APPEAR" contact="NONE" direction="ANY"
+				orientation="NONE" target="NONE" tilePosition="NONE" />
+		</ability>
+<!--  	CRY --> 
+		<ability strength="1" frame="false" time="-1" uses="-1">
+			<action name="CRY" contact="NONE" direction="ANY"
+				orientation="NONE" target="NONE" tilePosition="NONE" />
+		</ability>
+<!--  	DROP --> 
+		<ability strength="1" frame="false" time="-1" uses="-1">
+			<action name="DROP" contact="ANY" direction="ANY"
+				orientation="ANY" target="BOMB" tilePosition="ANY" />
+		</ability>
+<!--  	EXULT --> 
+		<ability strength="1" frame="false" time="-1" uses="-1">
+			<action name="EXULT" contact="NONE" direction="ANY"
+				orientation="NONE" target="NONE" tilePosition="NONE" />
+		</ability>
+<!--  	GATHER --> 
+		<ability strength="1" frame="false" time="-1" uses="-1">
+			<action name="GATHER" contact="ANY" direction="ANY"
+				orientation="ANY" target="ITEM" tilePosition="SAME" />
+		</ability>
+<!--  	JUMP --> 
+		<ability strength="1" frame="false" time="-1" uses="-1">
+			<action name="JUMP" contact="NONE" direction="ANY"
+				orientation="NONE" target="NONE" tilePosition="NONE" />
+		</ability>
+<!--  	LAND --> 
+		<ability strength="1" frame="false" time="-1" uses="-1">
+			<action name="LAND" contact="NONE" direction="ANY"
+				orientation="NONE" target="NONE" tilePosition="NONE" />
+		</ability>
+<!--  	MOVEHIGH --> 
+		<ability strength="1" frame="false" time="-1" uses="-1">
+			<action name="MOVEHIGH" contact="NONE" direction="ANY"
+				orientation="NONE" target="NONE" tilePosition="NONE" />
+		</ability>
+<!--  	MOVELOW --> 
+		<ability strength="1" frame="false" time="-1" uses="-1">
+			<action name="MOVELOW" contact="NONE" direction="ANY"
+				orientation="NONE" target="NONE" tilePosition="NONE" />
+		</ability>
+<!--  	TRIGGER --> 
+		<ability strength="1" frame="false" time="-1" uses="-1">
+			<action name="TRIGGER" contact="ANY" direction="ANY"
+				orientation="ANY" target="BOMB" tilePosition="ANY" />
+		</ability>
+
+</abilities>

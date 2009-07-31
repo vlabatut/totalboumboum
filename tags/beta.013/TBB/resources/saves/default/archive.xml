@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<archive xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="..\..\..\resources\schemas\archive.xsd">
+	<tournament name="Tournament-simple de test" type="SINGLE" />
+	<played matches="0" rounds="3" />
+	<dates start="2009-05-07T22:12:58" save="2009-05-07T22:16:55" />
+	<players>
+		<player name="0809v2.Altay+Basaranoğlu" />
+		<player name="0809v2.Erişik+Pektaş" />
+		<player name="0809v2.Günalp+Yürtsever" />
+		<player name="Joueur humain" />
+	</players>
+</archive>
+

@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<points
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+	xsi:noNamespaceSchemaLocation="../../schemas/point.xsd">
+	
+	<notes />
+
+	<subtraction>
+		<scores type="BOMBINGS"/>
+		<scores type="BOMBEDS"/>
+	</subtraction>
+	
+</points>

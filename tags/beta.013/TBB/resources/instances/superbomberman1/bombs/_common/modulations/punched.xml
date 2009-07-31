@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<gesture-modulations xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+		xsi:noNamespaceSchemaLocation="../../../../../schemas/gesture_modulations.xsd" >
+
+	<self-modulations>
+	</self-modulations>
+
+	<other-modulations>
+	</other-modulations>
+	
+	<actor-modulations>
+<!--  	DETONATE -->
+		<modulation frame="true" strength="0" >
+			<action name="DETONATE" direction="ANY" contact="ANY"
+				tilePosition="ANY" orientation="ANY" />
+			<actor-restrictions />
+			<target-restrictions />
+		</modulation>
+	</actor-modulations>
+	
+	<target-modulations>
+<!--  	CONSUME -->
+		<modulation frame="true" strength="0" >
+			<action name="CONSUME" direction="ANY" contact="ANY"
+				tilePosition="ANY" orientation="ANY" actor="SOME" />
+			<actor-restrictions />
+			<target-restrictions />
+		</modulation>
+<!--  	PUNCH -->
+		<modulation frame="true" strength="0" >
+			<action name="PUNCH" direction="ANY" contact="ANY"
+				tilePosition="ANY" orientation="ANY" actor="SOME" />
+			<actor-restrictions />
+			<target-restrictions />
+		</modulation>
+	</target-modulations>
+	
+	<third-modulations>
+	</third-modulations>
+
+</gesture-modulations>

@@ -1,0 +1,170 @@
+<?xml version="1.0" encoding="utf-8"?>
+<animes xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+		xsi:noNamespaceSchemaLocation="../../../../../schemas/animes.xsd" 
+		scale="1" >
+		
+	<colors folder="colormaps" >
+		<colormap name="BLACK" file="black" />
+		<colormap name="BLUE" file="blue" />
+		<colormap name="BROWN" file="brown" />
+		<colormap name="CYAN" file="cyan" />
+		<colormap name="GRASS" file="grass" />
+		<colormap name="GREEN" file="green" />
+		<colormap name="GREY" file="grey" />
+		<colormap name="INDIGO" file="indigo" />
+		<colormap name="ORANGE" file="orange" />
+		<colormap name="PINK" file="pink" />
+		<colormap name="PURPLE" file="purple" />
+		<colormap name="RED" file="red" />
+		<colormap name="RUST" file="rust" />
+		<colormap name="ULTRAMARINE" file="ultramarine" />
+		<colormap name="WHITE" file="white" />
+		<colormap name="YELLOW" file="yellow" />
+	</colors>
+	
+	
+	<shadows folder="pictures">
+ 		<shadow name="shadow" file="shadow.png" />
+	</shadows>
+	
+	<gestures folder="pictures">
+		<gesture name="BOUNCING" repeat="true" shadow="shadow" shadowYShift="-3">
+			<direction name="NONE">
+				<step duration="300" file="2.gif" />
+				<step duration="300" file="3.gif" />
+				<step duration="300" file="2.gif" />
+				<step duration="300" file="1.gif" />
+			</direction>
+		</gesture>
+		
+		<gesture name="BURNING" repeat="false">
+			<direction name="NONE">
+				<step duration="100" />
+			</direction>
+		</gesture>
+		<gesture name="LANDING" repeat="true" shadow="shadow" >
+			<direction name="NONE">
+				<step duration="300" file="2.gif" />
+				<step duration="300" file="3.gif" />
+				<step duration="300" file="2.gif" />
+				<step duration="300" file="1.gif" />
+			</direction>
+		</gesture>
+		
+		<gesture name="OSCILLATING" repeat="true" shadow="shadow" >
+			<direction name="DOWN">
+				<step duration="150" file="2.gif" yShift="-1" />
+				<step duration="150" file="2.gif" yShift="1" />
+				<step duration="150" file="3.gif" yShift="-1" />
+				<step duration="150" file="3.gif" yShift="1" />
+				<step duration="150" file="2.gif" yShift="-1" />
+				<step duration="150" file="2.gif" yShift="1" />
+				<step duration="150" file="1.gif" yShift="-1" />
+				<step duration="150" file="1.gif" yShift="1" />
+			</direction>
+			<direction name="LEFT">
+				<step duration="150" file="2.gif" xShift="-1" />
+				<step duration="150" file="2.gif" xShift="1" />
+				<step duration="150" file="3.gif" xShift="-1" />
+				<step duration="150" file="3.gif" xShift="1" />
+				<step duration="150" file="2.gif" xShift="-1" />
+				<step duration="150" file="2.gif" xShift="1" />
+				<step duration="150" file="1.gif" xShift="-1" />
+				<step duration="150" file="1.gif" xShift="1" />
+			</direction>
+			<direction name="RIGHT">
+				<step duration="150" file="2.gif" xShift="-1" />
+				<step duration="150" file="2.gif" xShift="1" />
+				<step duration="150" file="3.gif" xShift="-1" />
+				<step duration="150" file="3.gif" xShift="1" />
+				<step duration="150" file="2.gif" xShift="-1" />
+				<step duration="150" file="2.gif" xShift="1" />
+				<step duration="150" file="1.gif" xShift="-1" />
+				<step duration="150" file="1.gif" xShift="1" />
+			</direction>
+			<direction name="UP">
+				<step duration="150" file="2.gif" yShift="-1" />
+				<step duration="150" file="2.gif" yShift="1" />
+				<step duration="150" file="3.gif" yShift="-1" />
+				<step duration="150" file="3.gif" yShift="1" />
+				<step duration="150" file="2.gif" yShift="-1" />
+				<step duration="150" file="2.gif" yShift="1" />
+				<step duration="150" file="1.gif" yShift="-1" />
+				<step duration="150" file="1.gif" yShift="1" />
+			</direction>
+		</gesture>
+
+		<gesture name="OSCILLATING_FAILING" repeat="true" shadow="shadow" >
+			<direction name="DOWN">
+				<step duration="300" file="3.gif" yShift="-1" />
+				<step duration="300" file="3.gif" yShift="1" />
+				<step duration="300" file="2.gif" yShift="-1" />
+				<step duration="300" file="3.gif" yShift="1" />
+			</direction>
+			<direction name="LEFT">
+				<step duration="300" file="3.gif" xShift="-1" />
+				<step duration="300" file="3.gif" xShift="1" />
+				<step duration="300" file="3.gif" xShift="-1" />
+				<step duration="300" file="3.gif" xShift="1" />
+			</direction>
+			<direction name="RIGHT">
+				<step duration="300" file="3.gif" xShift="-1" />
+				<step duration="300" file="3.gif" xShift="1" />
+				<step duration="300" file="3.gif" xShift="-1" />
+				<step duration="300" file="3.gif" xShift="1" />
+			</direction>
+			<direction name="UP">
+				<step duration="300" file="3.gif" yShift="-1" />
+				<step duration="300" file="3.gif" yShift="1" />
+				<step duration="300" file="3.gif" yShift="-1" />
+				<step duration="300" file="3.gif" yShift="1" />
+			</direction>
+		</gesture>
+
+		<gesture name="PUNCHED" repeat="true" shadow="shadow" >
+			<direction name="NONE">
+				<step duration="300" file="2.gif" />
+				<step duration="300" file="3.gif" />
+				<step duration="300" file="2.gif" />
+				<step duration="300" file="1.gif" />
+			</direction>
+		</gesture>
+		
+		<gesture name="SLIDING" repeat="true" shadow="shadow">
+			<direction name="NONE">
+				<step duration="300" file="2.gif" />
+				<step duration="300" file="3.gif" />
+				<step duration="300" file="2.gif" />
+				<step duration="300" file="1.gif" />
+			</direction>
+		</gesture>
+		
+		<gesture name="SLIDING_FAILING" repeat="true" shadow="shadow">
+			<direction name="NONE">
+				<step duration="300" file="3.gif" />
+				<step duration="300" file="3.gif" />
+				<step duration="300" file="3.gif" />
+				<step duration="300" file="3.gif" />
+			</direction>
+		</gesture>
+		
+		<gesture name="STANDING" repeat="true" shadow="shadow" >
+			<direction name="NONE">
+				<step duration="300" file="2.gif" />
+				<step duration="300" file="3.gif" />
+				<step duration="300" file="2.gif" />
+				<step duration="300" file="1.gif" />
+			</direction>
+		</gesture>
+		
+		<gesture name="STANDING_FAILING" repeat="true" shadow="shadow">
+			<direction name="NONE">
+				<step duration="300" file="3.gif" />
+				<step duration="300" file="3.gif" />
+				<step duration="300" file="3.gif" />
+				<step duration="300" file="3.gif" />
+			</direction>
+		</gesture>
+		
+	</gestures>		
+</animes>
