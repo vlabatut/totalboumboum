@@ -812,15 +812,7 @@ public class Launcher
 	/*
 	 * TODO
 	 * 
-	 * + beta.012
-	 * - nouveau système de gestion des collisions dans le trajectory manager
-	 * - correction du bug d'animation/collision : push ne se déclenche pas
-	 * - correction du bug d'animation : quand le bonhomme va à droite et qu'on appuie sur gauche, y a une espèce de passage droite-gauche très rapide au niveau de l'animation, insuportable
-	 * - mise à niveau du gestionnaire de trajectoire
-	 * - simplification de la structure du moteur du jeu (Loop et Level accessibles de façon statique)
-	 * - optimisation de l'organisation des sprites dans les ressources : gain de place sur disque, gain de mémoire en cours de jeu et gain de temps lors du chargement
-	 * - les permissions des sprites sont devenues des modulations
-	 * - simplification et externalisation partielle (XML) de la gestion des collisions 
+	 * + beta.013
 	 *   
 	 * - bug d'affichage quand les flammes se croisent au cours de plusieurs explosions: la dernière n'est pas affichée
 	 * 
