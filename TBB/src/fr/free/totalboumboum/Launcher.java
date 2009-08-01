@@ -815,7 +815,7 @@ public class Launcher
 	 * + beta.013
 	 * - correction d'un bug lors du chargement des animations des bombes
 	 * - correction d'un bug lors du chargement des animations mutualisées
-	 * - modification d'un thème de NES-BM2 (thème battle, nouveau sol plus lisible)
+	 * - modification d'un thème de NES-BM2 (thème battle, nouveau sol plus lisible, animations d'apparition)
 	 * - correction dans les bombes de NES-BM2 (couleur du reflet de la bombe jaune)
 	 * - le gesture ENDED n'est plus défini en XML, mais en dur car il est constant : pas d'animation, pas de trajectoire, modulations acteur/target toutes négatives, aucune autre modulation
 	 * - pareil pour NONE, sauf que l'action APPEAR est autorisée (en tant qu'acteur)
