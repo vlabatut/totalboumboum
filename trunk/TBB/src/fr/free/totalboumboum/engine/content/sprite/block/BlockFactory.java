@@ -35,6 +35,7 @@ public class BlockFactory extends SpriteFactory<Block>
 	private static final HashMap<GestureName,GestureName> animeReplacements = new HashMap<GestureName,GestureName>();		
 	static
 	{	// APPEARING
+		animeReplacements.put(GestureName.APPEARING,GestureName.STANDING);
 		// BOUNCING
 		// BURNING
 		animeReplacements.put(GestureName.BURNING,null);
@@ -52,7 +53,7 @@ public class BlockFactory extends SpriteFactory<Block>
 		// SLIDING
 		// SLIDING_FAILING
 		// SPAWNING
-		animeReplacements.put(GestureName.SPAWNING,GestureName.STANDING);
+		animeReplacements.put(GestureName.SPAWNING,GestureName.APPEARING);
 		// STANDING
 		animeReplacements.put(GestureName.STANDING,null);
 		// STANDING_FAILING

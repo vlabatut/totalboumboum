@@ -819,6 +819,7 @@ public class Launcher
 	 * - correction dans les bombes de NES-BM2 (couleur du reflet de la bombe jaune)
 	 * - le gesture ENDED n'est plus défini en XML, mais en dur car il est constant : pas d'animation, pas de trajectoire, modulations acteur/target toutes négatives, aucune autre modulation
 	 * - pareil pour NONE, sauf que l'action APPEAR est autorisée (en tant qu'acteur)
+	 * - la gesture APPEAR devient imposée, remplacement d'animation complété conséquence
 	 * 
 	 * - modification dans le moteur : un sprite dans l'état NONE est quand même associé à une case, ce qui permet de simplifier le traitement des actions. par contre il n'a pas de position en pixels
 	 * - en obligeant tous les sprites à passer par APPEAR, on peut faire apparaître tout le niveau (les blocs) dans une animation sympa
