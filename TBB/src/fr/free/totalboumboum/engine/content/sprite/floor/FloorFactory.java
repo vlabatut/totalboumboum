@@ -35,6 +35,7 @@ public class FloorFactory extends SpriteFactory<Floor>
 	private static final HashMap<GestureName,GestureName> animeReplacements = new HashMap<GestureName,GestureName>();		
 	static
 	{	// APPEARING
+		animeReplacements.put(GestureName.APPEARING,GestureName.STANDING);
 		// BOUNCING
 		// BURNING
 		// CRYING
