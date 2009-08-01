@@ -421,11 +421,11 @@ public class Loop implements Runnable, Serializable
 		loadLock.unlock(); //NOTE modif
 	}
 	
-long totalUpdateTime=0;
-long totalDrawTime=0;
-long totalMakeupTime=0;
-long totalTtime=0;
-float nbrUpdates=0;
+//long totalUpdateTime=0;
+//long totalDrawTime=0;
+//long totalMakeupTime=0;
+//long totalTtime=0;
+//float nbrUpdates=0;
 	
 	public void process()
 	{	long beforeTime,afterTime,timeDiff,sleepTime,lastTime;
@@ -450,11 +450,11 @@ float nbrUpdates=0;
 			milliPeriod = Configuration.getEngineConfiguration().getMilliPeriod();
 			
 			// cycle
-long a = System.currentTimeMillis();
+//long a = System.currentTimeMillis();
 			update();
-long b = System.currentTimeMillis();
+//long b = System.currentTimeMillis();
 			panel.paintScreen();
-long c = System.currentTimeMillis();
+//long c = System.currentTimeMillis();
 			// time process
 			lastTime = afterTime;
 			afterTime = System.currentTimeMillis();
@@ -502,17 +502,17 @@ long c = System.currentTimeMillis();
 			framesSkipped = framesSkipped + skips;
 			storeStats( );
 			
-long d = System.currentTimeMillis();
+//long d = System.currentTimeMillis();
 			
-long updateTime = b-a;
-long drawTime = c-b;
-long makeupTime = d-c;
-long ttime = d-a;
-totalUpdateTime = totalUpdateTime+updateTime; 
-totalDrawTime = totalDrawTime+drawTime; 
-totalMakeupTime = totalMakeupTime+makeupTime; 
-totalTtime = totalTtime+ttime; 
-nbrUpdates++;
+//long updateTime = b-a;
+//long drawTime = c-b;
+//long makeupTime = d-c;
+//long ttime = d-a;
+//totalUpdateTime = totalUpdateTime+updateTime; 
+//totalDrawTime = totalDrawTime+drawTime; 
+//totalMakeupTime = totalMakeupTime+makeupTime; 
+//totalTtime = totalTtime+ttime; 
+//nbrUpdates++;
 /*
 System.out.println("update: "+updateTime+"("+(totalUpdateTime/nbrUpdates)+")");
 System.out.println("draw: "+drawTime+"("+(totalDrawTime/nbrUpdates)+")");
