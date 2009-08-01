@@ -24,6 +24,7 @@ package fr.free.totalboumboum.engine.container.bombset;
 import java.util.ArrayList;
 import java.util.Iterator;
 
+import fr.free.totalboumboum.engine.container.tile.Tile;
 import fr.free.totalboumboum.engine.content.feature.ability.StateAbility;
 import fr.free.totalboumboum.engine.content.sprite.Sprite;
 import fr.free.totalboumboum.engine.content.sprite.bomb.Bomb;
@@ -63,6 +64,7 @@ public class Bombset
 	
 	public Bomb makeBomb(Sprite sprite)
 	{	Bomb result = null;
+		Tile tile = sprite.getTile();
 		Iterator<ArrayList<StateAbility>> i = requiredAbilities.iterator();
 		int ind = 0;
 		while(result==null && i.hasNext())
@@ -77,7 +79,7 @@ public class Bombset
 			}
 			if(goOn)
 			{	BombFactory bf = bombFactories.get(ind);
-				result = bf.makeSprite();
+				result = bf.makeSprite(tile);
 				result.setOwner(sprite);
 			}
 			else

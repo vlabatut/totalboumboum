@@ -68,32 +68,10 @@ public class HeroEventManager extends EventManager
 		blockedDirection = Direction.NONE;
 		setWaitDelay();
 	}
-	
-	private void setWaitDelay()
-	{	StateAbility ability = sprite.modulateStateAbility(StateAbilityName.HERO_WAIT_DURATION);
-		double duration = ability.getStrength();
-		sprite.addDelay(DelayManager.DL_WAIT,duration);		
-	}
 
-	public void initGesture()
-	{	spriteDirection = Direction.DOWN;
-		StateAbility ability = sprite.modulateStateAbility(StateAbilityName.HERO_ENTRY_DURATION);
-		if(ability.isActive())
-		{	gesture = GestureName.APPEARING;
-			double duration = ability.getStrength();
-			sprite.setGesture(gesture,spriteDirection,Direction.NONE,true,duration);
-		}
-		else
-		{	gesture = GestureName.STANDING;
-			sprite.setGesture(gesture,spriteDirection,Direction.NONE,true);
-		}
-	}
-
-/*
- * *****************************************************************
- * ACTION EVENTS
- * *****************************************************************
- */	
+	/////////////////////////////////////////////////////////////////
+	// ACTION EVENTS	/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
 	@Override
 	public void processEvent(ActionEvent event)
 	{	if(event.getAction() instanceof SpecificConsume)
@@ -143,11 +121,9 @@ public class HeroEventManager extends EventManager
 		}
 	}
 
-/*
- * *****************************************************************
- * CONTROL EVENTS
- * *****************************************************************
- */
+	/////////////////////////////////////////////////////////////////
+	// CONTROL EVENTS	/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
 	@Override
 	public void processEvent(ControlEvent event)
 	{	if(event.getName().equals(ControlEvent.DOWN) || event.getName().equals(ControlEvent.LEFT) || event.getName().equals(ControlEvent.RIGHT) || event.getName().equals(ControlEvent.UP))
@@ -288,11 +264,9 @@ public class HeroEventManager extends EventManager
 		}
 	}
 	
-/*
- * *****************************************************************
- * ENGINE EVENTS
- * *****************************************************************
- */
+	/////////////////////////////////////////////////////////////////
+	// ENGINE EVENTS	/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
 	@Override
 	public void processEvent(EngineEvent event)
 	{	
@@ -506,7 +480,37 @@ public class HeroEventManager extends EventManager
 */		
 	}
 	
+	/////////////////////////////////////////////////////////////////
+	// ACTIONS			/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	private void setWaitDelay()
+	{	StateAbility ability = sprite.modulateStateAbility(StateAbilityName.HERO_WAIT_DURATION);
+		double duration = ability.getStrength();
+		sprite.addDelay(DelayManager.DL_WAIT,duration);		
+	}
 
+	/*
+	 * the action is supposed to be allowes (hence previously tested)
+	 * maybe it'd be better to use a function performing both test and action,
+	 * sending back a boolean value indicating success or failure. 
+	 */
+	public void appear(Direction dir)
+	{	spriteDirection = dir;
+		StateAbility ability = sprite.modulateStateAbility(StateAbilityName.HERO_ENTRY_DURATION);
+		if(ability.isActive())
+		{	gesture = GestureName.APPEARING;
+			double duration = ability.getStrength();
+			sprite.setGesture(gesture,spriteDirection,Direction.NONE,true,duration);
+		}
+		else
+		{	gesture = GestureName.STANDING;
+			sprite.setGesture(gesture,spriteDirection,Direction.NONE,true);
+		}
+	}
+
+	/////////////////////////////////////////////////////////////////
+	// FINISHED			/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
 	public void finish()
 	{	if(!finished)
 		{	super.finish();

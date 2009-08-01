@@ -35,42 +35,55 @@ public class FloorEventManager extends EventManager
 	{	super(sprite);
 	}
 
-	public void initGesture()
-	{	gesture = GestureName.STANDING;
-		spriteDirection = Direction.NONE;
-		sprite.setGesture(gesture,spriteDirection,Direction.NONE,true);
-	}
-
-/*
- * *****************************************************************
- * ACTION EVENTS
- * *****************************************************************
- */	
+	/////////////////////////////////////////////////////////////////
+	// ACTION EVENTS	/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
 	@Override
 	public void processEvent(ActionEvent event)
 	{	
 	}
 
-/*
- * *****************************************************************
- * CONTROL EVENTS
- * *****************************************************************
- */
+	/////////////////////////////////////////////////////////////////
+	// CONTROL EVENTS	/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
 	@Override
 	public void processEvent(ControlEvent event)
 	{	
 	}
 
-/*
- * *****************************************************************
- * ENGINE EVENTS
- * *****************************************************************
- */
+	/////////////////////////////////////////////////////////////////
+	// ENGINE EVENTS	/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
 	@Override
 	public void processEvent(EngineEvent event)
-	{	
+	{	if(event.getName().equals(EngineEvent.ANIME_OVER))
+			engAnimeOver(event);
 	}	
 
+	private void engAnimeOver(EngineEvent event)
+	{	if(gesture.equals(GestureName.APPEARING))
+		{	gesture = GestureName.STANDING;
+			sprite.setGesture(gesture,spriteDirection,Direction.NONE,true);
+		}
+	}
+
+	/////////////////////////////////////////////////////////////////
+	// ACTIONS			/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	/*
+	 * the action is supposed to be allowes (hence previously tested)
+	 * maybe it'd be better to use a function performing both test and action,
+	 * sending back a boolean value indicating success or failure. 
+	 */
+	public void appear(Direction dir)
+	{	gesture = GestureName.APPEARING;
+		spriteDirection = dir;
+		sprite.setGesture(gesture,spriteDirection,Direction.NONE,true);
+	}
+
+	/////////////////////////////////////////////////////////////////
+	// FINISHED			/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
 	public void finish()
 	{	if(!finished)
 		{	super.finish();

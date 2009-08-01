@@ -24,6 +24,7 @@ package fr.free.totalboumboum.engine.content.sprite.bomb;
 import java.io.Serializable;
 import java.util.HashMap;
 
+import fr.free.totalboumboum.engine.container.tile.Tile;
 import fr.free.totalboumboum.engine.content.feature.gesture.GestureName;
 import fr.free.totalboumboum.engine.content.manager.event.EventManager;
 import fr.free.totalboumboum.engine.content.sprite.SpriteFactory;
@@ -85,7 +86,7 @@ public class BombFactory extends SpriteFactory<Bomb> implements Serializable
 	{	return bombName;	
 	}
 	
-	public Bomb makeSprite()
+	public Bomb makeSprite(Tile tile)
 	{	// init
 		Bomb result = new Bomb();
 		
@@ -101,8 +102,8 @@ public class BombFactory extends SpriteFactory<Bomb> implements Serializable
 		result.setEventManager(eventManager);
 		
 		// result
-//		result.initGesture();
 		result.setBombName(bombName);
+		result.initSprite(tile);
 		return result;
 	}
 

@@ -273,16 +273,17 @@ public class HollowLevel implements Serializable
 		// init tiles
 		for(int line=0;line<globalHeight;line++)
 		{	for(int col=0;col<globalWidth;col++)
-			{	double x = globalLeftX + GameVariables.scaledTileDimension/2 + col*GameVariables.scaledTileDimension;
+			{	Tile tile = matrix[line][col];
+				double x = globalLeftX + GameVariables.scaledTileDimension/2 + col*GameVariables.scaledTileDimension;
 				double y = globalUpY + GameVariables.scaledTileDimension/2 + line*GameVariables.scaledTileDimension;
 				if(mFloors[line][col]==null)
-					matrix[line][col] = new Tile(level,line,col,x,y,theme.makeFloor());
+					matrix[line][col] = new Tile(level,line,col,x,y,theme.makeFloor(tile));
 				else
-					matrix[line][col] = new Tile(level,line,col,x,y,theme.makeFloor(mFloors[line][col]));
+					matrix[line][col] = new Tile(level,line,col,x,y,theme.makeFloor(mFloors[line][col],tile));
 				if(mBlocks[line][col]!=null)
-					matrix[line][col].addSprite(theme.makeBlock(mBlocks[line][col]));
+					matrix[line][col].addSprite(theme.makeBlock(mBlocks[line][col],tile));
 				if(mItems[line][col]!=null)
-					matrix[line][col].addSprite(itemset.makeItem(mItems[line][col]));
+					matrix[line][col].addSprite(itemset.makeItem(mItems[line][col],tile));
 			}
 		}
 	}

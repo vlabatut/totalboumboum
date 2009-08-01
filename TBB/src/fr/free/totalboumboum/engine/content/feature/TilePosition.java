@@ -35,7 +35,7 @@ import fr.free.totalboumboum.tools.XmlTools;
  * relative positions of the actor and the target, expressed in terms of tiles.
  */
 public enum TilePosition
-{	/** no position can be defined: there's no target, or it has no tile, or the actor has no tile */
+{	/** no position can be defined: there's no target */
 	NONE,
 	/** the actor and target are together in the same tile */
 	SAME,

@@ -41,17 +41,9 @@ public class BlockEventManager extends EventManager
 	{	super(sprite);
 	}
 	
-	public void initGesture()
-	{	gesture = GestureName.STANDING;
-		spriteDirection = Direction.NONE;
-		sprite.setGesture(gesture,spriteDirection,Direction.NONE,true);
-	}
-
-/*
- * *****************************************************************
- * ACTION EVENTS
- * *****************************************************************
- */	
+	/////////////////////////////////////////////////////////////////
+	// ACTION EVENTS	/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
 	@Override
 	public void processEvent(ActionEvent event)
 	{	if(event.getAction() instanceof SpecificConsume)
@@ -65,21 +57,17 @@ public class BlockEventManager extends EventManager
 		}
 	}
 
-/*
- * *****************************************************************
- * CONTROL EVENTS
- * *****************************************************************
- */
+	/////////////////////////////////////////////////////////////////
+	// CONTROL EVENTS	/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
 	@Override
 	public void processEvent(ControlEvent event)
 	{	
 	}
 
-/*
- * *****************************************************************
- * ENGINE EVENTS
- * *****************************************************************
- */
+	/////////////////////////////////////////////////////////////////
+	// ENGINE EVENTS	/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
 	@Override
 	public void processEvent(EngineEvent event)
 	{	if(event.getName().equals(EngineEvent.ANIME_OVER))
@@ -89,7 +77,11 @@ public class BlockEventManager extends EventManager
 	}		
 
 	private void engAnimeOver(EngineEvent event)
-	{	if(gesture.equals(GestureName.BURNING))
+	{	if(gesture.equals(GestureName.APPEARING))
+		{	gesture = GestureName.STANDING;
+			sprite.setGesture(gesture,spriteDirection,Direction.NONE,true);
+		}
+		else if(gesture.equals(GestureName.BURNING))
 		{	// spawn or not ?
 			StateAbility ablt = sprite.modulateStateAbility(StateAbilityName.BLOCK_SPAWN);
 			// can spawn
@@ -141,6 +133,23 @@ public class BlockEventManager extends EventManager
 		}
 	}
 
+	/////////////////////////////////////////////////////////////////
+	// ACTIONS			/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	/*
+	 * the action is supposed to be allowes (hence previously tested)
+	 * maybe it'd be better to use a function performing both test and action,
+	 * sending back a boolean value indicating success or failure. 
+	 */
+	public void appear(Direction dir)
+	{	gesture = GestureName.APPEARING;
+		spriteDirection = dir;
+		sprite.setGesture(gesture,spriteDirection,Direction.NONE,true);
+	}
+
+	/////////////////////////////////////////////////////////////////
+	// FINISHED			/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
 	public void finish()
 	{	if(!finished)
 		{	super.finish();

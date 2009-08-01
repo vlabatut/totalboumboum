@@ -30,6 +30,7 @@ import javax.xml.parsers.ParserConfigurationException;
 
 import org.xml.sax.SAXException;
 
+import fr.free.totalboumboum.engine.container.tile.Tile;
 import fr.free.totalboumboum.engine.content.sprite.item.Item;
 import fr.free.totalboumboum.engine.content.sprite.item.ItemFactory;
 
@@ -49,13 +50,13 @@ public class Itemset
 	{	itemFactories.put(name,itemFactory);		
 	}
 	
-	public Item makeItem(String name)
+	public Item makeItem(String name, Tile tile)
 	{	Item result = null;
 		ItemFactory itemFactory = itemFactories.get(name);
 if(itemFactory==null)
 	System.out.println(name);
-		result = itemFactory.makeSprite();
-		result.initGesture();
+		result = itemFactory.makeSprite(tile);
+		//result.initGesture();
 		return result;
 	}
 
