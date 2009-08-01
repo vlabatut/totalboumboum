@@ -122,8 +122,17 @@ public class ItemEventManager extends EventManager
 		//sprite.setGesture(gesture,spriteDirection,Direction.NONE,true);
 		sprite.addIterDelay(DelayManager.DL_APPEAR,1);
 	}
-	//TODO 2) l'inclure dans l'init du niveau 3) réformer les actions spécifiques paramétrées par tile
-	
+//TODO 2) l'inclure dans l'init du niveau 3) réformer les actions spécifiques paramétrées par tile
+/*
+ * TODO
+ * virer la possibilité que le joueur n'ai pas d'ability d'apparition
+ * l'ability d'apparition (et toutes les necessaires) sont à initialiser en dur (au cas où)
+ * 
+ * pr thème: faut calculer le temps d'apparition max pour les floors, blocs, items, bombs
+ * ca permet de savoir quand lancer l'affichage. on finit par les personnages
+ * ça permettra aussi de faire commencer le décompte du temps non pas dès le début, mais dès que les persos sont prêts
+ * voire faire apparaître du texte (ready, set, go)
+ */
 	/////////////////////////////////////////////////////////////////
 	// FINISHED			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
