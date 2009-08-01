@@ -25,6 +25,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
 
+import fr.free.totalboumboum.engine.container.tile.Tile;
 import fr.free.totalboumboum.engine.content.feature.ability.AbstractAbility;
 import fr.free.totalboumboum.engine.content.feature.gesture.GestureName;
 import fr.free.totalboumboum.engine.content.manager.event.EventManager;
@@ -85,7 +86,7 @@ public class ItemFactory extends SpriteFactory<Item>
 	/////////////////////////////////////////////////////////////////
 	private String itemName;
 	
-	public Item makeSprite()
+	public Item makeSprite(Tile tile)
 	{	// init
 		Item result = new Item();
 		
@@ -100,8 +101,8 @@ public class ItemFactory extends SpriteFactory<Item>
 		result.setEventManager(eventManager);
 		
 		// result
-//		result.initGesture();
 		result.setItemName(itemName);
+		result.initSprite(tile);
 		return result;
 	}
 

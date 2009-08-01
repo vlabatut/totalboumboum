@@ -25,6 +25,7 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map.Entry;
 
+import fr.free.totalboumboum.engine.container.tile.Tile;
 import fr.free.totalboumboum.engine.content.sprite.fire.Fire;
 import fr.free.totalboumboum.engine.content.sprite.fire.FireFactory;
 
@@ -44,12 +45,12 @@ public class Fireset
 		fireFactory.setFireset(this);
 	}
 	
-	public Fire makeFire(String name)
+	public Fire makeFire(String name, Tile tile)
 	{	Fire result = null;
 		FireFactory fireFactory = fireFactories.get(name);
 if(fireFactory==null)
 	System.out.println(name);
-		result = fireFactory.makeSprite();
+		result = fireFactory.makeSprite(tile);
 		return result;
 	}
 

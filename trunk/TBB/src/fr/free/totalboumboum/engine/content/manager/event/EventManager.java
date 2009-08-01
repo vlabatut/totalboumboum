@@ -29,53 +29,76 @@ import fr.free.totalboumboum.engine.content.feature.gesture.GestureName;
 import fr.free.totalboumboum.engine.content.sprite.Sprite;
 
 public abstract class EventManager
-{	/** managed sprite  */
-	protected Sprite sprite;
-	/** current gesture */
-	protected GestureName gesture;
-	/** current direction the sprite is facing */
-	protected Direction spriteDirection;
-		
-	
+{		
 	public EventManager(Sprite sprite)
 	{	this.sprite = sprite;
 		gesture = GestureName.NONE;
 		spriteDirection = Direction.NONE;
 	}	
-/*	
-	public void initGesture(String gesture, Direction direction)
-	{	this.gesture = gesture;
-		spriteDirection = direction;
-	}
-*/
-	public abstract void initGesture();
+
+	/////////////////////////////////////////////////////////////////
+	// SPRITE			/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	/** managed sprite  */
+	protected Sprite sprite;
 	
 	public Sprite getSprite()
 	{	return sprite;
 	}
+	
 	public void setSprite(Sprite sprite)
 	{	this.sprite = sprite;
 	}
 
+	/////////////////////////////////////////////////////////////////
+	// GESTURE			/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	/** current gesture */
+	protected GestureName gesture;
+	
+	public void initGesture()
+	{	gesture = GestureName.NONE;
+		spriteDirection = Direction.NONE;
+		sprite.setGesture(gesture,spriteDirection,Direction.NONE,true);
+	}
+	
 	public GestureName getGesture()
 	{	return gesture;
 	}
+	
 	public void setGesture(GestureName gesture)
 	{	this.gesture = gesture;
 	}
 
+	/////////////////////////////////////////////////////////////////
+	// DIRECTION		/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	/** current direction the sprite is facing */
+	protected Direction spriteDirection;
+	
 	public Direction getSpriteDirection()
 	{	return spriteDirection;
 	}
+	
 	public void setSpriteDirection(Direction spriteDirection)
 	{	this.spriteDirection = spriteDirection;
 	}
 	
+	/////////////////////////////////////////////////////////////////
+	// EVENTS PROCESSING	/////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
 	public abstract void processEvent(ActionEvent event);
 	public abstract void processEvent(ControlEvent event);
 	public abstract void processEvent(EngineEvent event);
+		
+	/////////////////////////////////////////////////////////////////
+	// EXECUTION		/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	public abstract void appear(Direction dir);
 	
-	
+	/////////////////////////////////////////////////////////////////
+	// FINISHED			/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
 	protected boolean finished = false;
 	
 	public void finish()

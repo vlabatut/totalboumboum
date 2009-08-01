@@ -48,6 +48,7 @@ import fr.free.totalboumboum.engine.container.itemset.Itemset;
 import fr.free.totalboumboum.engine.container.level.HollowLevel;
 import fr.free.totalboumboum.engine.container.level.Level;
 import fr.free.totalboumboum.engine.container.level.Players;
+import fr.free.totalboumboum.engine.container.tile.Tile;
 import fr.free.totalboumboum.engine.content.feature.ability.StateAbility;
 import fr.free.totalboumboum.engine.content.feature.ability.StateAbilityName;
 import fr.free.totalboumboum.engine.content.feature.event.EngineEvent;
@@ -119,19 +120,21 @@ public class Loop implements Runnable, Serializable
 		Iterator<Profile> i = profiles.iterator();
 		int j=0;
 		while(i.hasNext())
-		{	// init
-			Profile profile = i.next();
-			Player player = new Player(profile,base,bombsetMap);
-			players.add(player);
-			Hero hero = (Hero)player.getSprite();
-			// location
+		{	// location
 			PlayerLocation pl = initialPositions[j];
+			Tile tile = level.getTile(pl.getLine(),pl.getCol());
+			// sprite
+			Profile profile = i.next();
+			Player player = new Player(profile,base,bombsetMap,tile);
+			players.add(player);
+			// level
+			Hero hero = (Hero)player.getSprite();
 			level.addHero(hero,pl.getLine(),pl.getCol());
 			// initial items
 			Iterator<String> it = items.iterator();
 			while(it.hasNext())
 			{	String name = it.next();
-				Item item = itemset.makeItem(name);
+				Item item = itemset.makeItem(name,tile);
 				hero.addInitialItem(item);
 			}
 			// ai

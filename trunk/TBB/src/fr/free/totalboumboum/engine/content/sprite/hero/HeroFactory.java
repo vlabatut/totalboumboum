@@ -23,6 +23,7 @@ package fr.free.totalboumboum.engine.content.sprite.hero;
 
 import java.util.HashMap;
 
+import fr.free.totalboumboum.engine.container.tile.Tile;
 import fr.free.totalboumboum.engine.content.feature.gesture.GestureName;
 import fr.free.totalboumboum.engine.content.manager.event.EventManager;
 import fr.free.totalboumboum.engine.content.sprite.SpriteFactory;
@@ -75,7 +76,7 @@ public class HeroFactory extends SpriteFactory<Hero>
 	/////////////////////////////////////////////////////////////////
 	// SPRITES			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	public Hero makeSprite()
+	public Hero makeSprite(Tile tile)
 	{	// init
 		Hero result = new Hero();
 		
@@ -91,7 +92,7 @@ public class HeroFactory extends SpriteFactory<Hero>
 		result.setEventManager(eventManager);
 		
 		// result
-//		result.initGesture();
+		result.initSprite(tile);
 		return result;
 	}
 

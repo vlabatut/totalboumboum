@@ -73,19 +73,20 @@ public class ExplosionManager
 	public void putExplosion()
 	{	Tile tile = sprite.getTile();
 		// center
-//NOTE tester l'autorisation d'apparition pour le centre comme on le fait pour les autres parties de l'explosion ?		
+//NOTE tester l'autorisation d'apparition pour le centre comme on le fait pour les autres parties de l'explosion
+//(la bombe peut avoir le droit d'exploser sans que le feu n'ait le droit d'apparaître)
 		Fire fire;
 		if(flameRange==0)
-			fire = explosion.makeFire("outside");
+			fire = explosion.makeFire("outside",tile);
 		else
-			fire = explosion.makeFire("inside");
+			fire = explosion.makeFire("inside",tile);
 		Sprite owner;
 		if(sprite.getOwner()==null)
 			owner = sprite;
 		else
 			owner = sprite.getOwner();
 		fire.setOwner(owner);
-		fire.initGesture();
+		fire.appear();
 		tile.addSprite(fire);
 		fire.setCurrentPosX(tile.getPosX());
 		fire.setCurrentPosY(tile.getPosY());
@@ -116,9 +117,9 @@ public class ExplosionManager
 		do
 		{	Fire fire;
 			if(length==power)
-				fire = explosion.makeFire("outside"); //TODO remplacer ces chaines de caractères par des valeurs énumérées
+				fire = explosion.makeFire("outside",tileTemp); //TODO remplacer ces chaines de caractères par des valeurs énumérées
 			else
-				fire = explosion.makeFire("inside");
+				fire = explosion.makeFire("inside",tileTemp);
 			Sprite owner;
 			if(sprite.getOwner()==null)
 				owner = sprite;
@@ -131,7 +132,7 @@ public class ExplosionManager
 			if(blocking)
 				fire.consumeTile(tileTemp);
 			else
-			{	fire.initGesture();
+			{	fire.appear(dir);
 				tileTemp.addSprite(fire);
 				fire.setCurrentPosX(tileTemp.getPosX());
 				fire.setCurrentPosY(tileTemp.getPosY());

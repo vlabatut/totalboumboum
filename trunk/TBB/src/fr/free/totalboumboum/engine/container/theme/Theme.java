@@ -25,6 +25,7 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map.Entry;
 
+import fr.free.totalboumboum.engine.container.tile.Tile;
 import fr.free.totalboumboum.engine.content.sprite.block.Block;
 import fr.free.totalboumboum.engine.content.sprite.block.BlockFactory;
 import fr.free.totalboumboum.engine.content.sprite.floor.Floor;
@@ -96,19 +97,19 @@ public class Theme
 	{	floors.put(name,floorFactory);
 	}
 	
-	public Floor makeFloor()
+	public Floor makeFloor(Tile tile)
 	{	Entry<String,FloorFactory> entry = floors.entrySet().iterator().next();
-		Floor result = entry.getValue().makeSprite();
-		result.initGesture();
+		Floor result = entry.getValue().makeSprite(tile);
+		//result.initGesture();
 		return result;
 	}
 	
-	public Floor makeFloor(String name)
+	public Floor makeFloor(String name, Tile tile)
 	{	FloorFactory ff = floors.get(name);
 if(ff==null)
 	System.out.println(name);
-		Floor result = ff.makeSprite();
-		result.initGesture();
+		Floor result = ff.makeSprite(tile);
+		//result.initGesture();
 		return result;
 	}
 	
@@ -121,13 +122,13 @@ if(ff==null)
 	{	blocks.put(name,blocFactory);
 	}
 	
-	public Block makeBlock(String name)
+	public Block makeBlock(String name, Tile tile)
 	{	BlockFactory bf = blocks.get(name);
 if(bf==null)
 	System.out.println(name);
-		Block result = bf.makeSprite();
+		Block result = bf.makeSprite(tile);
 //NOTE dans ce type de méthode, il faut tester si le nom passé en paramètre a bien été trouvé !	
-		result.initGesture();
+		//result.initGesture();
 		return result;
 	}
 

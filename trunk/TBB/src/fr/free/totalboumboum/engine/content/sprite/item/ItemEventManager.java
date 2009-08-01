@@ -39,19 +39,10 @@ public class ItemEventManager extends EventManager
 	public ItemEventManager(Item sprite)
 	{	super(sprite);
 	}
-	
-	public void initGesture()
-	{	gesture = GestureName.HIDING;
-		spriteDirection = Direction.NONE;
-		sprite.setGesture(gesture,spriteDirection,Direction.NONE,true);
-		sprite.addIterDelay(DelayManager.DL_APPEAR,1);
-	}
 
-/*
- * *****************************************************************
- * ACTION EVENTS
- * *****************************************************************
- */	
+	/////////////////////////////////////////////////////////////////
+	// ACTION EVENTS	/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
 	@Override
 	public void processEvent(ActionEvent event)
 	{	if(event.getAction() instanceof SpecificConsume)
@@ -71,21 +62,17 @@ public class ItemEventManager extends EventManager
 	{	//NOTE traitement effectué par l'itemMgr du sprite qui ramasse
 	}
 		
-/*
- * *****************************************************************
- * CONTROL EVENTS
- * *****************************************************************
- */
+	/////////////////////////////////////////////////////////////////
+	// CONTROL EVENTS	/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
 	@Override
 	public void processEvent(ControlEvent event)
 	{	
 	}
 
-/*
- * *****************************************************************
- * ENGINE EVENTS
- * *****************************************************************
- */
+	/////////////////////////////////////////////////////////////////
+	// ENGINE EVENTS	/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
 	@Override
 	public void processEvent(EngineEvent event)
 	{	if(event.getName().equals(EngineEvent.ANIME_OVER))
@@ -95,7 +82,11 @@ public class ItemEventManager extends EventManager
 	}	
 
 	private void engAnimeOver(EngineEvent event)
-	{	if(gesture.equals(GestureName.BURNING))
+	{	if(gesture.equals(GestureName.APPEARING))
+		{	gesture = GestureName.STANDING;
+			sprite.setGesture(gesture,spriteDirection,Direction.NONE,true);
+		}
+		else if(gesture.equals(GestureName.BURNING))
 		{	gesture = GestureName.ENDED;
 			sprite.setGesture(gesture,spriteDirection,Direction.NONE,true);
 			sprite.endSprite();
@@ -103,7 +94,7 @@ public class ItemEventManager extends EventManager
 	}
 
 	private void engDelayOver(EngineEvent event)
-	{	if(gesture.equals(GestureName.HIDING) && event.getStringParameter().equals(DelayManager.DL_APPEAR))
+	{	if(gesture.equals(GestureName.NONE) && event.getStringParameter().equals(DelayManager.DL_APPEAR))
 		{	SpecificAction action = new SpecificAppear(sprite,sprite.getTile());
 			ActionAbility ability = sprite.modulateAction(action);
 			// can appear >> appears
@@ -118,6 +109,24 @@ public class ItemEventManager extends EventManager
 		}
 	}
 	
+	/////////////////////////////////////////////////////////////////
+	// ACTIONS			/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	/*
+	 * the action always succeeds, because if not possible, the item
+	 * will appear later (as soon as possible, actually). 
+	 */
+	public void appear(Direction dir)
+	{	//gesture = GestureName.NONE;
+		//spriteDirection = Direction.NONE;
+		//sprite.setGesture(gesture,spriteDirection,Direction.NONE,true);
+		sprite.addIterDelay(DelayManager.DL_APPEAR,1);
+	}
+	//TODO 2) l'inclure dans l'init du niveau 3) réformer les actions spécifiques paramétrées par tile
+	
+	/////////////////////////////////////////////////////////////////
+	// FINISHED			/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
 	public void finish()
 	{	if(!finished)
 		{	super.finish();

@@ -22,6 +22,7 @@ package fr.free.totalboumboum.engine.content.feature.explosion;
  */
 
 import fr.free.totalboumboum.engine.container.fireset.Fireset;
+import fr.free.totalboumboum.engine.container.tile.Tile;
 import fr.free.totalboumboum.engine.content.sprite.fire.Fire;
 
 public class Explosion
@@ -40,9 +41,9 @@ public class Explosion
 	{	this.fireset = fireset;	
 	}
 	
-	public Fire makeFire(String name)
+	public Fire makeFire(String name, Tile tile)
 	{	Fire result = null;
-		result = fireset.makeFire(name);
+		result = fireset.makeFire(name,tile);
 		return result;
 	}
 
