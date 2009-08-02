@@ -117,6 +117,13 @@ public class ItemEventManager extends EventManager
 		}
 	}
 	
+	private void engEnter(EngineEvent event)
+	{	if(gesture.equals(GestureName.NONE))
+		{	gesture = GestureName.STANDING;
+			sprite.setGesture(gesture,spriteDirection,Direction.NONE,true);
+		}
+	}
+	
 	private void engStart(EngineEvent event)
 	{	if(gesture.equals(GestureName.PREPARED))
 		{	gesture = GestureName.STANDING;
@@ -149,7 +156,7 @@ public class ItemEventManager extends EventManager
 		}
 	}
 	
-//TODO 2) l'inclure dans l'init du niveau 3) réformer les actions spécifiques paramétrées par tile
+//TODO 3) réformer les actions spécifiques paramétrées par tile
 /*
  * TODO
  * 

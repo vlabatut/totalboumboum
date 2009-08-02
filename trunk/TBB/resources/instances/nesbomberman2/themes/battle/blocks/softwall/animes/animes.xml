@@ -27,7 +27,7 @@
 			</direction>
 		</gesture>
 
-		<gesture name="STANDING" folder="stansing">
+		<gesture name="STANDING" folder="standing">
 			<direction name="NONE">
 				<step file="standing.gif" />
 			</direction>
