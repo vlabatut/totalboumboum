@@ -161,19 +161,21 @@ public class AnimeDirection
 */
 	public AnimeDirection copy()
 	{	AnimeDirection result = new AnimeDirection();
+		
 		// steps
 		Iterator<AnimeStep> i = getIterator();
 		while(i.hasNext())
 		{	AnimeStep copyStep = i.next().copy(); 
 			result.add(copyStep);		
 		}
+		
 		// various fields
 		result.setGestureName(gestureName);
 		result.setDirection(direction);
 		result.setRepeat(repeat);
 		result.setProportional(proportional);
 		result.setBoundHeight(boundHeight);
-		//
+
 		return result;
 	}
 

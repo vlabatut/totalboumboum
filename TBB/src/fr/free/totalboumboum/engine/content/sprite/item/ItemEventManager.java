@@ -154,6 +154,8 @@ public class ItemEventManager extends EventManager
 //TODO 3) réformer les actions spécifiques paramétrées par tile
 /*
  * TODO
+ * les items apparaissent avant la fin de l'apparition des blocks, p-ê juste une question de 1 iteration
+ * l'anime de victoire ne boucle plus (mais le temps est respecté)
  * 
  * tant qu'on y est, on va mettre ready-set-go, ce qui implique une durée minimale avant le début du match
  * p-ê à faire en même temps que le niveau apparait ? ou bien après ? ou pendant l'apparition des joueurs ?

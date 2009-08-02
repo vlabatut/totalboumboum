@@ -85,8 +85,12 @@ public class AnimeManager
 	 */
 	public void updateGesture(Gesture gesture, Direction direction, boolean reinit, double forcedDuration)
 	{	currentDirection = direction;
-//if(sprite instanceof Hero)
-//	System.out.println(gesture.getName());
+	
+//if(currentDirection==null)
+//	while(true)System.out.println("null direction");
+//if(sprite instanceof Floor && gesture.getName()==GestureName.ENTERING)
+//	System.out.println(">>totalTime="+GameVariables.loop.getTotalTime()+" forcedDuration="+forcedDuration);
+
 		currentAnime = gesture.getAnimeDirection(currentDirection);
 		if(currentAnime==null)
 		{	currentAnime = new AnimeDirection();
@@ -130,7 +134,7 @@ public class AnimeManager
 			if(animeDuration == 0)
 			{	forcedDurationCoeff = 1;
 				totalDuration = forcedDuration;
-				isTerminated = true;
+				isTerminated = false; //NOTE was true, but should not : it's supposed to be over only when the forcedDuration is over
 			}			
 			// actual anime
 			else
@@ -141,10 +145,10 @@ public class AnimeManager
 				}
 				// with forced duration
 				else 
-				{	totalDuration = forcedDuration;
+				{	totalDuration = animeDuration;
 					// proportionnal
 					if(currentAnime.getProportional())
-						forcedDurationCoeff = forcedDuration/totalDuration;
+						forcedDurationCoeff = animeDuration/forcedDuration;
 					// or not proportionnal
 					else 
 						forcedDurationCoeff = 1;
@@ -163,11 +167,15 @@ public class AnimeManager
 	 */
 	public void update()
 	{	updateTime();
+//if(sprite instanceof Floor)
+//	System.out.println("  totalTime="+GameVariables.loop.getTotalTime()+" currentTime="+currentTime);
 		updateStep();
 		// check if the animations is over
 		if(currentTime>totalDuration)
 		{	isTerminated = true;
 			sprite.processEvent(new EngineEvent(EngineEvent.ANIME_OVER));
+//if(sprite instanceof Floor)
+//	System.out.println("<<totalTime="+GameVariables.loop.getTotalTime()+" currentTime="+currentTime);
 		}
 	}
 	
@@ -195,7 +203,7 @@ public class AnimeManager
 		Iterator<AnimeStep> i = currentAnime.getIterator();
 		do
 		{	currentStep = i.next(); 
-			nextTime = nextTime + currentStep.getDuration()*forcedDurationCoeff;
+			nextTime = nextTime + currentStep.getDuration()/**forcedDurationCoeff*/;
 		}
 		while(nextTime<animeTime && i.hasNext());
 	}

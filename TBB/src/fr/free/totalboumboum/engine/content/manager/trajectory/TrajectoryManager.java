@@ -178,10 +178,10 @@ public class TrajectoryManager
 					totalDuration = trajectoryDuration;
 				}
 				else 
-				{	totalDuration = forcedDuration;
+				{	totalDuration = trajectoryDuration;
 					// proportionnal
 					if(currentTrajectory.getProportional())
-						forcedDurationCoeff = forcedDuration/trajectoryDuration;
+						forcedDurationCoeff = trajectoryDuration/forcedDuration;
 					// or not proportionnal
 					else
 						forcedDurationCoeff = 1;
@@ -610,7 +610,7 @@ System.out.println();
 		Iterator<TrajectoryStep> i = currentTrajectory.getIterator();
 		do
 		{	currentStep = i.next(); 
-			nextTime = nextTime + currentStep.getDuration()*forcedDurationCoeff;
+			nextTime = nextTime + currentStep.getDuration()/**forcedDurationCoeff*/;
 		}
 		while(nextTime<trajectoryTime && i.hasNext());
 	}

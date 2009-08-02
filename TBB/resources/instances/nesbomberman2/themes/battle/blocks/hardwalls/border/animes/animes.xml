@@ -4,7 +4,7 @@
 		scale="1" >
 		
 	<gestures>	
-		<gesture name="APPEARING" folder="appearing" >
+		<gesture name="APPEARING" folder="appearing" proportional="true" >
 			<direction name="NONE">
 				<step file="01.gif" duration="100" />
 				<step file="02.gif" duration="100" />

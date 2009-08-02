@@ -169,20 +169,25 @@ public class AnimeStep
 */
 	public AnimeStep copy()
 	{	AnimeStep result = new AnimeStep();
+		
 		// image
 		result.setImage(image);
+		
 		// duration
 		result.setDuration(duration);
+		
 		// shifts
 		result.setXShift(xShift);
 		result.setYShift(yShift);
+		
 		// shadow
 		result.setShadow(shadow);
 		result.setShadowXShift(shadowXShift);
 		result.setShadowYShift(shadowYShift);
+		
 		// bound
 		result.setBoundYShift(boundYShift);
-		//
+
 		return result;
 	}
 
