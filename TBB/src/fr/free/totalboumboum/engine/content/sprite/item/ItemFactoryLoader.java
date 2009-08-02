@@ -74,7 +74,6 @@ public class ItemFactoryLoader extends SpriteFactoryLoader
 		//MODULATIONS
 		folder = folderPath+File.separator+FileTools.FOLDER_MODULATIONS;
 		ModulationsLoader.loadModulations(folder,gesturePack,Role.ITEM);
-		initDefaultGesture(gesturePack,Role.ITEM);
 		
 		// TRAJECTORIES
 		folder = folderPath+File.separator+FileTools.FOLDER_TRAJECTORIES;
@@ -88,6 +87,7 @@ public class ItemFactoryLoader extends SpriteFactoryLoader
 		result.setItemAbilities(itemAbilities);
 		
 		// result
+		initDefaultGestures(gesturePack,Role.ITEM);
 		return result;
 	}	
 }

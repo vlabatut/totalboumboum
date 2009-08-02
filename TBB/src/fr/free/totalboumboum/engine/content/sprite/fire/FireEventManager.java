@@ -23,6 +23,8 @@ package fr.free.totalboumboum.engine.content.sprite.fire;
 
 import fr.free.totalboumboum.engine.container.tile.Tile;
 import fr.free.totalboumboum.engine.content.feature.Direction;
+import fr.free.totalboumboum.engine.content.feature.ability.StateAbility;
+import fr.free.totalboumboum.engine.content.feature.ability.StateAbilityName;
 import fr.free.totalboumboum.engine.content.feature.event.ActionEvent;
 import fr.free.totalboumboum.engine.content.feature.event.ControlEvent;
 import fr.free.totalboumboum.engine.content.feature.event.EngineEvent;
@@ -63,17 +65,23 @@ public class FireEventManager extends EventManager
 			tileEnter(event);
 		else if(event.getName().equals(EngineEvent.TOUCH_GROUND))
 			tileEnter(event);
+		else if(event.getName().equals(EngineEvent.START))
+			engStart(event);
 	}	
 
 	private void engAnimeOver(EngineEvent event)
 	{	if(gesture.equals(GestureName.APPEARING))
-		{	gesture = GestureName.STANDING;
+		{	gesture = GestureName.BURNING;
 			sprite.setGesture(gesture,spriteDirection,Direction.NONE,true);
 		}
 		else if(gesture.equals(GestureName.BURNING))
 		{	gesture = GestureName.ENDED;
 			sprite.setGesture(gesture,spriteDirection,Direction.NONE,true);
 			sprite.endSprite();
+		}
+		else if(gesture.equals(GestureName.ENTERING))
+		{	gesture = GestureName.PREPARED;
+			sprite.setGesture(gesture,spriteDirection,Direction.NONE,true);
 		}
 	}
 
@@ -92,19 +100,30 @@ public class FireEventManager extends EventManager
 			}
 		}
 	}
+	
+	private void engStart(EngineEvent event)
+	{	if(gesture.equals(GestureName.PREPARED))
+		{	gesture = GestureName.STANDING;
+			sprite.setGesture(gesture,spriteDirection,Direction.NONE,true);
+		}
+	}
 
 	/////////////////////////////////////////////////////////////////
 	// ACTIONS			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	/*
-	 * the action is supposed to be allowes (hence previously tested)
+	 * the action is supposed to be allowed (hence previously tested)
 	 * maybe it'd be better to use a function performing both test and action,
 	 * sending back a boolean value indicating success or failure. 
 	 */
-	public void appear(Direction dir)
-	{	gesture = GestureName.BURNING;
+	public void enterRound(Direction dir)
+	{	gesture = GestureName.ENTERING;
 		spriteDirection = dir;
-		sprite.setGesture(gesture,spriteDirection,Direction.NONE,true);
+		StateAbility ability = sprite.modulateStateAbility(StateAbilityName.SPRITE_ENTRY_DURATION);
+		double duration = ability.getStrength();
+		if(duration<=0)
+			duration = 1;
+		sprite.setGesture(gesture,spriteDirection,Direction.NONE,true,duration);
 	}
 
 	/////////////////////////////////////////////////////////////////

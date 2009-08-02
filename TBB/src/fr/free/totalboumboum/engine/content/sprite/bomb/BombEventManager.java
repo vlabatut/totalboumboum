@@ -31,6 +31,7 @@ import fr.free.totalboumboum.engine.content.feature.ability.ActionAbility;
 import fr.free.totalboumboum.engine.content.feature.ability.StateAbility;
 import fr.free.totalboumboum.engine.content.feature.ability.StateAbilityName;
 import fr.free.totalboumboum.engine.content.feature.action.SpecificAction;
+import fr.free.totalboumboum.engine.content.feature.action.appear.SpecificAppear;
 import fr.free.totalboumboum.engine.content.feature.action.consume.SpecificConsume;
 import fr.free.totalboumboum.engine.content.feature.action.detonate.SpecificDetonate;
 import fr.free.totalboumboum.engine.content.feature.action.land.SpecificLand;
@@ -152,18 +153,22 @@ public class BombEventManager extends EventManager
 			engDelayOver(event);
 		else if(event.getName().equals(EngineEvent.TRAJECTORY_OVER))
 			engTrajectoryOver(event);
-		
+		else if(event.getName().equals(EngineEvent.START))
+			engStart(event);
 	}	
 
 	private void engAnimeOver(EngineEvent event)
 	{	if(gesture.equals(GestureName.APPEARING))
-		{	gesture = GestureName.STANDING;
-			sprite.setGesture(gesture,spriteDirection,Direction.NONE,true);
+		{	stand();
 		}
 		else if(gesture.equals(GestureName.BURNING))
 		{	gesture = GestureName.ENDED;
 			sprite.setGesture(gesture,spriteDirection,Direction.NONE,true);
 			sprite.endSprite();
+		}
+		else if(gesture.equals(GestureName.ENTERING))
+		{	gesture = GestureName.PREPARED;
+			sprite.setGesture(gesture,spriteDirection,Direction.NONE,true);
 		}
 	}
 
@@ -255,8 +260,22 @@ public class BombEventManager extends EventManager
 	}
 
 	private void engDelayOver(EngineEvent event)
-	{	// regular explosion
-		if(event.getStringParameter().equals(DelayManager.DL_EXPLOSION))
+	{	// end of entering
+		if(gesture.equals(GestureName.NONE) && event.getStringParameter().equals(DelayManager.DL_ENTER))
+		{	SpecificAction action = new SpecificAppear(sprite,sprite.getTile());
+			ActionAbility actionAbility = sprite.modulateAction(action);
+			// can appear >> appears
+			if(actionAbility.isActive())
+			{	gesture = GestureName.APPEARING;
+				sprite.setGesture(gesture,spriteDirection,Direction.NONE,true);
+			}
+			// cannot appear >> wait for next iteration
+			else
+			{	sprite.addIterDelay(DelayManager.DL_ENTER,1);
+			}
+		}		
+		// regular explosion
+		else if(event.getStringParameter().equals(DelayManager.DL_EXPLOSION))
 		{	SpecificAction action = new SpecificDetonate(sprite);
 			ActionAbility ablt = sprite.modulateAction(action);
 			if(ablt.isActive())
@@ -312,7 +331,7 @@ public class BombEventManager extends EventManager
 				// sauf que certains états prévoient une réinit du timer au changement d'état (ex : bouncing)
 			}
 		}
-		// explosion-caused explosion
+		// flame-caused explosion
 		else if(event.getStringParameter().equals(DelayManager.DL_LATENCY))
 		{	if(gesture.equals(GestureName.SLIDING) || gesture.equals(GestureName.OSCILLATING) || gesture.equals(GestureName.STANDING)
 				|| gesture.equals(GestureName.SLIDING_FAILING) || gesture.equals(GestureName.OSCILLATING_FAILING) || gesture.equals(GestureName.STANDING_FAILING))
@@ -345,18 +364,8 @@ public class BombEventManager extends EventManager
 		}
 		// the sprite is landing
 		else if(gesture.equals(GestureName.LANDING))
-		{	// gesture/direction
-			gesture = GestureName.STANDING;
-			spriteDirection = Direction.NONE;
-			// normal delay
-			StateAbility ability = sprite.modulateStateAbility(StateAbilityName.BOMB_TRIGGER_TIMER);
-			if(ability.isActive())
-			{	double duration = ability.getStrength();
-				sprite.addDelay(DelayManager.DL_EXPLOSION,duration);
-				sprite.setGesture(gesture,spriteDirection,Direction.NONE,true,duration);
-			}
-			else
-				sprite.setGesture(gesture,spriteDirection,Direction.NONE,true);			
+		{	//spriteDirection = Direction.NONE;
+			stand();
 		}
 		// the sprite has been punched
 		else if(gesture.equals(GestureName.PUNCHED))
@@ -370,27 +379,50 @@ public class BombEventManager extends EventManager
 			sprite.setGesture(gesture,spriteDirection,Direction.NONE,true);			
 		}
 	}
+	
+	private void engStart(EngineEvent event)
+	{	if(gesture.equals(GestureName.PREPARED))
+		{	stand();
+		}
+	}
 
 	/////////////////////////////////////////////////////////////////
 	// ACTIONS			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	/*
-	 * the action is supposed to be allowes (hence previously tested)
+	 * the action is supposed to be allowed (hence previously tested)
 	 * maybe it'd be better to use a function performing both test and action,
 	 * sending back a boolean value indicating success or failure. 
 	 */
-	public void appear(Direction dir)
+	public void enterRound(Direction dir)
+	{	spriteDirection = dir;
+		SpecificAction action = new SpecificAppear(sprite,sprite.getTile());
+		ActionAbility actionAbility = sprite.modulateAction(action);
+		// can appear >> appears
+		if(actionAbility.isActive())
+		{	gesture = GestureName.ENTERING;
+			StateAbility stateAbility = sprite.modulateStateAbility(StateAbilityName.SPRITE_ENTRY_DURATION);
+			double duration = stateAbility.getStrength();
+			if(duration<=0)
+				duration = 1;
+			sprite.setGesture(gesture,spriteDirection,Direction.NONE,true,duration);
+		}
+		// cannot appear >> wait for next iteration
+		else
+		{	sprite.addIterDelay(DelayManager.DL_ENTER,1);
+		}
+	}
+	
+	private void stand()
 	{	gesture = GestureName.STANDING;
-		spriteDirection = dir;
 		StateAbility ability = sprite.modulateStateAbility(StateAbilityName.BOMB_TRIGGER_TIMER);
 		if(ability.isActive())
 		{	double duration = ability.getStrength();
 			sprite.addDelay(DelayManager.DL_EXPLOSION,duration);
-			sprite.setGesture(gesture, spriteDirection, Direction.NONE, true, duration);
+			sprite.setGesture(gesture,spriteDirection,Direction.NONE,true,duration);
 		}
 		else
-			sprite.setGesture(gesture,spriteDirection,Direction.NONE,true);
-			
+			sprite.setGesture(gesture,spriteDirection,Direction.NONE,true);		
 	}
 
 	/////////////////////////////////////////////////////////////////

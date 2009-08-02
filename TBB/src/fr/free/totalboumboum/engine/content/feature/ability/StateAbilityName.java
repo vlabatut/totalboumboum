@@ -32,11 +32,14 @@ public class StateAbilityName
 	/////////////////////////////////////////////////////////////////
 	// GENERAL ABILITIES		/////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	/** completely flat sprite */
-	public static final String SPRITE_FLAT = "SPRITE_FLAT";
-	
 	/** higher sprite, should be drawn above (i.e. after) the others */
 	public static final String SPRITE_ABOVE = "SPRITE_ABOVE";
+	
+	/** gesture duration for when the sprite enter a round */
+	public static final String SPRITE_ENTRY_DURATION = "SPRITE_ENTRY_DURATION";
+	
+	/** completely flat sprite */
+	public static final String SPRITE_FLAT = "SPRITE_FLAT";
 	
 	/** when an obstacle is collided, it helps avoiding it (dedicated to heroes, mainly) */
 	public static final String SPRITE_MOVE_ASSISTANCE = "SPRITE_MOVE_ASSISTANCE";
@@ -97,9 +100,6 @@ public class StateAbilityName
 	/////////////////////////////////////////////////////////////////
 	/** gesture duration when the hero cries or exults at the end of a round */
 	public static final String HERO_CELEBRATION_DURATION = "HERO_CELEBRATION_DURATION";
-	
-	/** gesture duration when the heroes enter a round */
-	public static final String HERO_ENTRY_DURATION = "HERO_ENTRY_DURATION";
 	
 	/** gesture duration when a hero punches (a bomb for instance) */
 	public static final String HERO_PUNCH_DURATION = "HERO_PUNCH_DURATION";

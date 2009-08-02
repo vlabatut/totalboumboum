@@ -86,7 +86,7 @@ public class ExplosionManager
 		else
 			owner = sprite.getOwner();
 		fire.setOwner(owner);
-		fire.appear();
+		fire.enterRound();
 		tile.addSprite(fire);
 		fire.setCurrentPosX(tile.getPosX());
 		fire.setCurrentPosY(tile.getPosY());

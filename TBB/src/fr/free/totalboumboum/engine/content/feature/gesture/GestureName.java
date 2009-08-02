@@ -23,7 +23,7 @@ package fr.free.totalboumboum.engine.content.feature.gesture;
 
 public enum GestureName
 {	
-	/** the sprite is not performing any action (hasn't join the zone yet) */
+	/** the sprite is not performing any action (hasn't join the zone yet) (automatically generated gesture) */
 	NONE,
 	
 	/** the sprite is suddenly appearing in the zone */
@@ -47,8 +47,11 @@ public enum GestureName
 	/** the sprite is suddenly disappearing from the zone */
 	DISAPPEARING,
 	
-	/** the sprite is not ingame anymore */
+	/** the sprite is not ingame anymore (automatically generated gesture) */
 	ENDED,
+	
+	/** the sprite is entering the round (kind of like a first APPEARING) (automatically generated gesture) */
+	ENTERING,
 	
 	/** the sprite is expressing its joy (hero winning a round) */
 	EXULTING,
@@ -79,6 +82,9 @@ public enum GestureName
 	
 	/** the sprite is picking another sprite */
 	PICKING,
+	
+	/** the sprite has finished ENTERING the round and is waiting for it to actually start (automatically generated gesture) */
+	PREPARED,
 	
 	/** the sprite is being sent in the air by another sprite */
 	PUNCHED,

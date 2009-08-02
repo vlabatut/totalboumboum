@@ -43,6 +43,7 @@ import fr.free.totalboumboum.engine.content.feature.gesture.Gesture;
 import fr.free.totalboumboum.engine.content.feature.gesture.GestureName;
 import fr.free.totalboumboum.engine.content.feature.gesture.GesturePack;
 import fr.free.totalboumboum.engine.content.feature.gesture.modulation.ActorModulation;
+import fr.free.totalboumboum.engine.content.feature.gesture.modulation.TargetModulation;
 import fr.free.totalboumboum.tools.FileTools;
 import fr.free.totalboumboum.tools.XmlTools;
 
@@ -124,12 +125,10 @@ public abstract class SpriteFactoryLoader
 		result.setExplosion(explosion);
 	}
 	
-	protected static void initDefaultGesture(GesturePack gesturePack, Role role)
+	protected static void initDefaultGestures(GesturePack gesturePack, Role role)
 	{	{	// gesture NONE
-			Gesture gesture = new Gesture();
 			GestureName gestureName = GestureName.NONE;
-			gesture.setName(gestureName);
-			gesturePack.addGesture(gesture,gestureName);
+			Gesture gesture = gesturePack.getGesture(gestureName);
 			for(ActionName an: ActionName.values())
 			{	// any action forbidden as an actor except APPEAR (which can be instant, i.e. without anime nor trajectory)
 				if(an!=ActionName.APPEAR)
@@ -143,6 +142,7 @@ public abstract class SpriteFactoryLoader
 					am.setFrame(true);
 					am.setStrength(0);
 					am.setGestureName(gestureName);
+					gesture.addModulation(am);
 				}
 				// any action forbidden as a target
 				{	GeneralAction ga = an.createGeneralAction();
@@ -151,19 +151,18 @@ public abstract class SpriteFactoryLoader
 					ga.addAnyContacts();
 					ga.addAnyOrientations();
 					ga.addAnyTilePositions();
-					ActorModulation am = new ActorModulation(ga);
-					am.setFrame(true);
-					am.setStrength(0);
-					am.setGestureName(gestureName);
+					TargetModulation tm = new TargetModulation(ga);
+					tm.setFrame(true);
+					tm.setStrength(0);
+					tm.setGestureName(gestureName);
+					gesture.addModulation(tm);
 				}
 				// no modulation for the rest
 			}
 		}
 		{	// gesture ENDED
-			Gesture gesture = new Gesture();
-			GestureName gestureName = GestureName.ENDED;
-			gesture.setName(gestureName);
-			gesturePack.addGesture(gesture,gestureName);
+			GestureName gestureName = GestureName.NONE;
+			Gesture gesture = gesturePack.getGesture(gestureName);
 			for(ActionName an: ActionName.values())
 			{	// any action forbidden as an actor
 				{	GeneralAction ga = an.createGeneralAction();
@@ -176,6 +175,7 @@ public abstract class SpriteFactoryLoader
 					am.setFrame(true);
 					am.setStrength(0);
 					am.setGestureName(gestureName);
+					gesture.addModulation(am);
 				}
 				// any action forbidden as a target
 				{	GeneralAction ga = an.createGeneralAction();
@@ -184,13 +184,33 @@ public abstract class SpriteFactoryLoader
 					ga.addAnyContacts();
 					ga.addAnyOrientations();
 					ga.addAnyTilePositions();
-					ActorModulation am = new ActorModulation(ga);
-					am.setFrame(true);
-					am.setStrength(0);
-					am.setGestureName(gestureName);
+					TargetModulation tm = new TargetModulation(ga);
+					tm.setFrame(true);
+					tm.setStrength(0);
+					tm.setGestureName(gestureName);
+					gesture.addModulation(tm);
 				}
 				// no modulation for the rest
 			}
+		}
+		{	// gesture ENTERING
+			Gesture temp = gesturePack.getGesture(GestureName.APPEARING);
+			// copy of APPEARING
+			Gesture gesture = temp.copy();
+			// but animes are taken from STANDING if there's no anime for APPEARING
+			if(temp.hasNoAnimes())
+				temp = gesturePack.getGesture(GestureName.STANDING);
+			gesture.setAnimes(temp);
+			gesturePack.addGesture(gesture,GestureName.ENTERING);
+		}
+		{	// gesture PREPARED
+			Gesture temp = gesturePack.getGesture(GestureName.APPEARING);
+			// copy of APPEARING
+			Gesture gesture = temp.copy();
+			// with the animes of STANDING
+			temp = gesturePack.getGesture(GestureName.STANDING);
+			gesture.setAnimes(temp);			
+			gesturePack.addGesture(gesture,GestureName.ENTERING);
 		}
 	}
 	

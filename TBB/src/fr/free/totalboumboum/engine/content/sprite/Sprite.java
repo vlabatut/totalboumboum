@@ -773,11 +773,11 @@ public abstract class Sprite
 	// EXECUTION		/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	public void appear(Direction dir)
-	{	eventManager.appear(dir);		
+	{	eventManager.enterRound(dir);		
 	}
 	
-	public void appear()
-	{	eventManager.appear(Direction.NONE);
+	public void enterRound()
+	{	eventManager.enterRound(Direction.NONE);
 	}
 	
 	/////////////////////////////////////////////////////////////////
