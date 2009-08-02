@@ -279,7 +279,7 @@ public class HeroEventManager extends EventManager
 			engCollidingOff(event);
 		else if(event.getName().equals(EngineEvent.COLLIDED_ON))
 			engCollidingOn(event);
-		else if(event.getName().equals(EngineEvent.DEFEAT))
+		else if(event.getName().equals(EngineEvent.CELEBRATION_DEFEAT))
 			engDefeat(event);
 		else if(event.getName().equals(EngineEvent.DELAY_OVER))
 			engDelayOver(event);
@@ -293,9 +293,9 @@ public class HeroEventManager extends EventManager
 			engTouchGround(event);
 		else if(event.getName().equals(EngineEvent.TRAJECTORY_OVER))
 			engTrajectoryOver(event);
-		else if(event.getName().equals(EngineEvent.VICTORY))
+		else if(event.getName().equals(EngineEvent.CELEBRATION_VICTORY))
 			engVictory(event);
-		else if(event.getName().equals(EngineEvent.START))
+		else if(event.getName().equals(EngineEvent.ROUND_START))
 			engStart(event);
 	}	
 

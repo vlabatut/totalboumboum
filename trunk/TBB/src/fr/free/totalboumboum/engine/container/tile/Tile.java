@@ -34,6 +34,7 @@ import java.util.Iterator;
 import fr.free.totalboumboum.configuration.GameVariables;
 import fr.free.totalboumboum.engine.container.level.Level;
 import fr.free.totalboumboum.engine.content.feature.Direction;
+import fr.free.totalboumboum.engine.content.feature.Role;
 import fr.free.totalboumboum.engine.content.feature.ability.AbstractAbility;
 import fr.free.totalboumboum.engine.content.feature.ability.StateAbilityName;
 import fr.free.totalboumboum.engine.content.feature.event.AbstractEvent;
@@ -381,7 +382,30 @@ public class Tile
 		}		
 		return result;
 	}
-	
+
+	public ArrayList<Sprite> getSprites(Role role)
+	{	ArrayList<Sprite> result = new ArrayList<Sprite>();
+		// floor
+		if(role==Role.FLOOR)
+			result.add(floor);
+		// heroes
+		else if(role==Role.HERO)
+			result.addAll(heroes);
+		// bombs
+		else if(role==Role.BOMB)
+			result.addAll(bombs);
+		// fires
+		else if(role==Role.FIRE)
+			result.addAll(fires);
+		// block
+		else if(role==Role.BLOCK && block!=null)
+			result.add(block);
+		// item
+		else if(role==Role.ITEM && item!=null)
+			result.add(item);
+		return result;
+	}
+
 	/**
 	 * dessine un sprite sans son ombre
 	 */
@@ -557,12 +581,32 @@ public class Tile
 	// EVENTS				/////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	public void spreadEvent(AbstractEvent event)
-	{	ArrayList<Sprite> sprites = getSprites();
-		Iterator<Sprite> i = sprites.iterator();
-		while(i.hasNext())
-		{	Sprite sprt = i.next();
-			sprt.processEvent(event);
-		}
+	{	for(Role role: Role.values())
+			spreadEvent(event,role);
+	}
+
+	public void spreadEvent(AbstractEvent event, Role role)
+	{	// floor
+		if(role==Role.FLOOR)
+			floor.processEvent(event);
+		// heroes
+		else if(role==Role.HERO)
+			for(Sprite sprite: heroes)
+				sprite.processEvent(event);
+		// bombs
+		else if(role==Role.BOMB)
+			for(Sprite sprite: bombs)
+				sprite.processEvent(event);
+		// fires
+		else if(role==Role.FIRE)
+			for(Sprite sprite: fires)
+				sprite.processEvent(event);
+		// block
+		else if(role==Role.BLOCK && block!=null)
+			block.processEvent(event);
+		// item
+		else if(role==Role.ITEM && item!=null)
+			item.processEvent(event);
 	}
 
     /////////////////////////////////////////////////////////////////

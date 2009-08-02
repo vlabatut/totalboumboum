@@ -81,7 +81,7 @@ public class ItemEventManager extends EventManager
 			engAnimeOver(event);
 		else if(event.getName().equals(EngineEvent.DELAY_OVER))
 			engDelayOver(event);
-		else if(event.getName().equals(EngineEvent.START))
+		else if(event.getName().equals(EngineEvent.ROUND_START))
 			engStart(event);
 	}	
 
