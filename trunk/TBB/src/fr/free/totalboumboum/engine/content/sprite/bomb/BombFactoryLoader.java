@@ -75,7 +75,6 @@ public class BombFactoryLoader extends SpriteFactoryLoader
 		//MODULATIONS
 		folder = folderPath+File.separator+FileTools.FOLDER_MODULATIONS;
 		ModulationsLoader.loadModulations(folder,gesturePack,Role.BOMB);
-		initDefaultGesture(gesturePack,Role.BOMB);
 		
 		// TRAJECTORIES
 		folder = folderPath+File.separator+FileTools.FOLDER_TRAJECTORIES;
@@ -115,5 +114,7 @@ public class BombFactoryLoader extends SpriteFactoryLoader
 		result.setBombset(bombset);
 //if(result.getName()==null)
 //	System.out.println();
+		
+		initDefaultGestures(gesturePack,Role.BOMB);
 	}	
 }

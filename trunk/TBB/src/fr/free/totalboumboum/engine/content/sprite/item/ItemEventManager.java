@@ -23,6 +23,8 @@ package fr.free.totalboumboum.engine.content.sprite.item;
 
 import fr.free.totalboumboum.engine.content.feature.Direction;
 import fr.free.totalboumboum.engine.content.feature.ability.ActionAbility;
+import fr.free.totalboumboum.engine.content.feature.ability.StateAbility;
+import fr.free.totalboumboum.engine.content.feature.ability.StateAbilityName;
 import fr.free.totalboumboum.engine.content.feature.action.SpecificAction;
 import fr.free.totalboumboum.engine.content.feature.action.appear.SpecificAppear;
 import fr.free.totalboumboum.engine.content.feature.action.consume.SpecificConsume;
@@ -79,6 +81,8 @@ public class ItemEventManager extends EventManager
 			engAnimeOver(event);
 		else if(event.getName().equals(EngineEvent.DELAY_OVER))
 			engDelayOver(event);
+		else if(event.getName().equals(EngineEvent.START))
+			engStart(event);
 	}	
 
 	private void engAnimeOver(EngineEvent event)
@@ -91,21 +95,32 @@ public class ItemEventManager extends EventManager
 			sprite.setGesture(gesture,spriteDirection,Direction.NONE,true);
 			sprite.endSprite();
 		}
+		else if(gesture.equals(GestureName.ENTERING))
+		{	gesture = GestureName.PREPARED;
+			sprite.setGesture(gesture,spriteDirection,Direction.NONE,true);
+		}
 	}
 
 	private void engDelayOver(EngineEvent event)
-	{	if(gesture.equals(GestureName.NONE) && event.getStringParameter().equals(DelayManager.DL_APPEAR))
+	{	if(gesture.equals(GestureName.NONE) && event.getStringParameter().equals(DelayManager.DL_ENTER))
 		{	SpecificAction action = new SpecificAppear(sprite,sprite.getTile());
-			ActionAbility ability = sprite.modulateAction(action);
+			ActionAbility actionAbility = sprite.modulateAction(action);
 			// can appear >> appears
-			if(ability.isActive())
-			{	gesture = GestureName.STANDING;
+			if(actionAbility.isActive())
+			{	gesture = GestureName.APPEARING;
 				sprite.setGesture(gesture,spriteDirection,Direction.NONE,true);
 			}
 			// cannot appear >> wait for next iteration
 			else
-			{	sprite.addIterDelay(DelayManager.DL_APPEAR,1);
+			{	sprite.addIterDelay(DelayManager.DL_ENTER,1);
 			}
+		}
+	}
+	
+	private void engStart(EngineEvent event)
+	{	if(gesture.equals(GestureName.PREPARED))
+		{	gesture = GestureName.STANDING;
+			sprite.setGesture(gesture,spriteDirection,Direction.NONE,true);
 		}
 	}
 	
@@ -116,22 +131,36 @@ public class ItemEventManager extends EventManager
 	 * the action always succeeds, because if not possible, the item
 	 * will appear later (as soon as possible, actually). 
 	 */
-	public void appear(Direction dir)
-	{	//gesture = GestureName.NONE;
-		//spriteDirection = Direction.NONE;
-		//sprite.setGesture(gesture,spriteDirection,Direction.NONE,true);
-		sprite.addIterDelay(DelayManager.DL_APPEAR,1);
+	public void enterRound(Direction dir)
+	{	SpecificAction action = new SpecificAppear(sprite,sprite.getTile());
+		ActionAbility actionAbility = sprite.modulateAction(action);
+		// can appear >> appears
+		if(actionAbility.isActive())
+		{	gesture = GestureName.ENTERING;
+			StateAbility stateAbility = sprite.modulateStateAbility(StateAbilityName.SPRITE_ENTRY_DURATION);
+			double duration = stateAbility.getStrength();
+			if(duration<=0)
+				duration = 1;
+			sprite.setGesture(gesture,spriteDirection,Direction.NONE,true,duration);
+		}
+		// cannot appear >> wait for next iteration
+		else
+		{	sprite.addIterDelay(DelayManager.DL_ENTER,1);
+		}
 	}
+	
 //TODO 2) l'inclure dans l'init du niveau 3) réformer les actions spécifiques paramétrées par tile
 /*
  * TODO
- * virer la possibilité que le joueur n'ai pas d'ability d'apparition
- * l'ability d'apparition (et toutes les necessaires) sont à initialiser en dur (au cas où)
  * 
  * pr thème: faut calculer le temps d'apparition max pour les floors, blocs, items, bombs
  * ca permet de savoir quand lancer l'affichage. on finit par les personnages
  * ça permettra aussi de faire commencer le décompte du temps non pas dès le début, mais dès que les persos sont prêts
  * voire faire apparaître du texte (ready, set, go)
+ * 
+ * tant qu'on y est, on va mettre ready-set-go, ce qui implique une durée minimale avant le début du match
+ * p-ê à faire en même temps que le niveau apparait ? ou bien après ? ou pendant l'apparition des joueurs ?
+ * 
  */
 	/////////////////////////////////////////////////////////////////
 	// FINISHED			/////////////////////////////////////////////

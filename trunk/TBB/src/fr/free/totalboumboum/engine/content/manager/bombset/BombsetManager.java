@@ -91,7 +91,7 @@ public class BombsetManager
 				SpecificAction specificAction = new SpecificAppear(bomb,tile);
 				ActionAbility ablt = bomb.modulateAction(specificAction);
 				if(ablt.isActive())
-				{	bomb.appear();
+				{	bomb.enterRound();
 					tile.addSprite(bomb);
 					bomb.setCurrentPosX(tile.getPosX());
 					bomb.setCurrentPosY(tile.getPosY());

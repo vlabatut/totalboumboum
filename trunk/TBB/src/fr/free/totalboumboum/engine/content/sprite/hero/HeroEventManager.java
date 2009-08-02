@@ -295,10 +295,17 @@ public class HeroEventManager extends EventManager
 			engTrajectoryOver(event);
 		else if(event.getName().equals(EngineEvent.VICTORY))
 			engVictory(event);
+		else if(event.getName().equals(EngineEvent.START))
+			engStart(event);
 	}	
 
 	private void engAnimeOver(EngineEvent event)
-	{	if(gesture.equals(GestureName.BURNING))
+	{	if(gesture.equals(GestureName.APPEARING))
+		{	setWaitDelay();
+			gesture = GestureName.STANDING;
+			sprite.setGesture(gesture,spriteDirection,controlDirection,true);
+		}
+		else if(gesture.equals(GestureName.BURNING))
 		{	gesture = GestureName.ENDED;
 			sprite.setGesture(gesture,spriteDirection,Direction.NONE,true);
 			//
@@ -310,10 +317,9 @@ public class HeroEventManager extends EventManager
 			gesture = GestureName.STANDING;
 			sprite.setGesture(gesture,spriteDirection,controlDirection,true);
 		}
-		else if(gesture.equals(GestureName.APPEARING))
-		{	setWaitDelay();
-			gesture = GestureName.STANDING;
-			sprite.setGesture(gesture,spriteDirection,controlDirection,true);
+		else if(gesture.equals(GestureName.ENTERING))
+		{	gesture = GestureName.PREPARED;
+			sprite.setGesture(gesture,spriteDirection,Direction.NONE,true);
 		}
 		else if(gesture.equals(GestureName.PUNCHING))
 		{	setWaitDelay();
@@ -480,6 +486,13 @@ public class HeroEventManager extends EventManager
 */		
 	}
 	
+	private void engStart(EngineEvent event)
+	{	if(gesture.equals(GestureName.PREPARED))
+		{	gesture = GestureName.STANDING;
+			sprite.setGesture(gesture,spriteDirection,Direction.NONE,true);
+		}
+	}
+	
 	/////////////////////////////////////////////////////////////////
 	// ACTIONS			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
@@ -494,18 +507,14 @@ public class HeroEventManager extends EventManager
 	 * maybe it'd be better to use a function performing both test and action,
 	 * sending back a boolean value indicating success or failure. 
 	 */
-	public void appear(Direction dir)
-	{	spriteDirection = dir;
-		StateAbility ability = sprite.modulateStateAbility(StateAbilityName.HERO_ENTRY_DURATION);
-		if(ability.isActive())
-		{	gesture = GestureName.APPEARING;
-			double duration = ability.getStrength();
-			sprite.setGesture(gesture,spriteDirection,Direction.NONE,true,duration);
-		}
-		else
-		{	gesture = GestureName.STANDING;
-			sprite.setGesture(gesture,spriteDirection,Direction.NONE,true);
-		}
+	public void enterRound(Direction dir)
+	{	gesture = GestureName.ENTERING;
+		spriteDirection = dir;
+		StateAbility ability = sprite.modulateStateAbility(StateAbilityName.SPRITE_ENTRY_DURATION);
+		double duration = ability.getStrength();
+		if(duration<=0)
+			duration = 1;
+		sprite.setGesture(gesture,spriteDirection,Direction.NONE,true,duration);
 	}
 
 	/////////////////////////////////////////////////////////////////

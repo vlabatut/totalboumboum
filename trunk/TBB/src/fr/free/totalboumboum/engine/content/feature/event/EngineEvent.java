@@ -46,8 +46,9 @@ public class EngineEvent extends AbstractEvent
 	public static final String TILE_HIGHENTER = "TILE_HIGHENTER";
 	public static final String TOUCH_GROUND = "TOUCH_GROUND";
 
-	public static final String VICTORY = "VICTORY";
 	public static final String DEFEAT = "DEFEAT";
+	public static final String VICTORY = "VICTORY";
+	public static final String START = "START";
 
 	private String name;
 	private Sprite source;

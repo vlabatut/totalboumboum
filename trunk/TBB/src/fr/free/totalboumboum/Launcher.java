@@ -819,10 +819,13 @@ public class Launcher
 	 * - correction dans les bombes de NES-BM2 (couleur du reflet de la bombe jaune)
 	 * - le gesture ENDED n'est plus défini en XML, mais en dur car il est constant : pas d'animation, pas de trajectoire, modulations acteur/target toutes négatives, aucune autre modulation
 	 * - pareil pour NONE, sauf que l'action APPEAR est autorisée (en tant qu'acteur)
-	 * - la gesture APPEAR devient imposée, remplacement d'animation complété conséquence
-	 * 
+	 * - introduction des gestures ENTERING et PREPARED, correspondant à APPEARING et STANDING, mais seulement utilisés pour le début du round
+	 * - généralisation (aux autres sprites) de l'Ability permettant de contraindre le temps mis par les heros pour apparaitre au début de la partie.
 	 * - modification dans le moteur : un sprite dans l'état NONE est quand même associé à une case, ce qui permet de simplifier le traitement des actions. par contre il n'a pas de position en pixels
-	 * - en obligeant tous les sprites à passer par APPEAR, on peut faire apparaître tout le niveau (les blocs) dans une animation sympa
+	 * 
+	 * - définition d'un système permettant au niveau d'apparaître graduellement au début du round
+	 * - simplification de l'initialisation des actions afin de ne plus avoir à spécifier une tile (le cas où la tile manquait a été supprimé)
+	 * 
 	 *   
 	 * 
 	 * - bug d'affichage quand les flammes se croisent au cours de plusieurs explosions: la dernière n'est pas affichée
