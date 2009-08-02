@@ -3,8 +3,9 @@
 
 	<xsd:simpleType name="tStateAbilityPredefined">
 		<xsd:restriction base="xsd:string">
-			<xsd:enumeration value="SPRITE_FLAT" />
 			<xsd:enumeration value="SPRITE_ABOVE" />
+			<xsd:enumeration value="SPRITE_ENTRY_DURATION" />
+			<xsd:enumeration value="SPRITE_FLAT" />
 			<xsd:enumeration value="SPRITE_MOVE_ASSISTANCE" />
 			<xsd:enumeration value="SPRITE_TRAVERSE_BOMB" />
 			<xsd:enumeration value="SPRITE_TRAVERSE_ITEM" />
@@ -25,7 +26,6 @@
 			<xsd:enumeration value="BOMB_RANGE" />
 			
 			<xsd:enumeration value="HERO_CELEBRATION_DURATION" />
-			<xsd:enumeration value="HERO_ENTRY_DURATION" />
 			<xsd:enumeration value="HERO_PUNCH_DURATION" />
 			<xsd:enumeration value="HERO_WAIT_DURATION" />
 		</xsd:restriction>

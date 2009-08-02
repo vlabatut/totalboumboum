@@ -3,6 +3,10 @@
 		xsi:noNamespaceSchemaLocation="../../../../schemas/abilities.xsd" >
 
 		<!-- STATE -->
+<!--  	SPRITE_ENTRY_DURATION --> 
+		<ability strength="3000" frame="false" time="-1" uses="-1">
+			<name value="SPRITE_ENTRY_DURATION" />
+		</ability>
 <!-- 	SPRITE_MOVE_ASSISTANCE -->
 		<ability strength="0.33" frame="false" time="-1" uses="-1">
 			<name value="SPRITE_MOVE_ASSISTANCE"/>
@@ -14,10 +18,6 @@
 <!--  	HERO_CELEBRATION_DURATION --> 
 		<ability strength="4000" frame="false" time="-1" uses="-1">
 			<name value="HERO_CELEBRATION_DURATION" />
-		</ability>
-<!--  	HERO_ENTRY_DURATION --> 
-		<ability strength="3000" frame="false" time="-1" uses="-1">
-			<name value="HERO_ENTRY_DURATION" />
 		</ability>
 <!--  	HERO_PUNCH_DURATION --> 
 		<ability strength="230" frame="false" time="-1" uses="-1">
