@@ -60,6 +60,8 @@ public class FloorEventManager extends EventManager
 	public void processEvent(EngineEvent event)
 	{	if(event.getName().equals(EngineEvent.ANIME_OVER))
 			engAnimeOver(event);
+		else if(event.getName().equals(EngineEvent.ROUND_ENTER))
+			engEnter(event);
 		else if(event.getName().equals(EngineEvent.ROUND_START))
 			engStart(event);
 	}	
@@ -75,6 +77,16 @@ public class FloorEventManager extends EventManager
 		}
 	}
 	
+	private void engEnter(EngineEvent event)
+	{	gesture = GestureName.ENTERING;
+		spriteDirection = event.getDirection();
+		StateAbility ability = sprite.modulateStateAbility(StateAbilityName.SPRITE_ENTRY_DURATION);
+		double duration = ability.getStrength();
+		if(duration<=0)
+			duration = 1;
+		sprite.setGesture(gesture,spriteDirection,Direction.NONE,true,duration);		
+	}
+
 	private void engStart(EngineEvent event)
 	{	if(gesture.equals(GestureName.PREPARED))
 		{	gesture = GestureName.STANDING;
@@ -85,20 +97,6 @@ public class FloorEventManager extends EventManager
 	/////////////////////////////////////////////////////////////////
 	// ACTIONS			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	/*
-	 * the action is supposed to be allowed (hence previously tested)
-	 * maybe it'd be better to use a function performing both test and action,
-	 * sending back a boolean value indicating success or failure. 
-	 */
-	public void enterRound(Direction dir)
-	{	gesture = GestureName.ENTERING;
-		spriteDirection = dir;
-		StateAbility ability = sprite.modulateStateAbility(StateAbilityName.SPRITE_ENTRY_DURATION);
-		double duration = ability.getStrength();
-		if(duration<=0)
-			duration = 1;
-		sprite.setGesture(gesture,spriteDirection,Direction.NONE,true,duration);
-	}
 
 	/////////////////////////////////////////////////////////////////
 	// FINISHED			/////////////////////////////////////////////

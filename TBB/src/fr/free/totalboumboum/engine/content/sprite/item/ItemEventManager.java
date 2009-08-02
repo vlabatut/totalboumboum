@@ -81,6 +81,8 @@ public class ItemEventManager extends EventManager
 			engAnimeOver(event);
 		else if(event.getName().equals(EngineEvent.DELAY_OVER))
 			engDelayOver(event);
+		else if(event.getName().equals(EngineEvent.ROUND_ENTER))
+			engEnter(event);
 		else if(event.getName().equals(EngineEvent.ROUND_START))
 			engStart(event);
 	}	
@@ -119,8 +121,22 @@ public class ItemEventManager extends EventManager
 	
 	private void engEnter(EngineEvent event)
 	{	if(gesture.equals(GestureName.NONE))
-		{	gesture = GestureName.STANDING;
-			sprite.setGesture(gesture,spriteDirection,Direction.NONE,true);
+		{	spriteDirection = event.getDirection();
+			SpecificAction action = new SpecificAppear(sprite,sprite.getTile());
+			ActionAbility actionAbility = sprite.modulateAction(action);
+			// can appear >> appears
+			if(actionAbility.isActive())
+			{	gesture = GestureName.ENTERING;
+				StateAbility stateAbility = sprite.modulateStateAbility(StateAbilityName.SPRITE_ENTRY_DURATION);
+				double duration = stateAbility.getStrength();
+				if(duration<=0)
+					duration = 1;
+				sprite.setGesture(gesture,spriteDirection,Direction.NONE,true,duration);
+			}
+			// cannot appear >> wait for next iteration
+			else
+			{	sprite.addIterDelay(DelayManager.DL_ENTER,1);
+			}
 		}
 	}
 	
@@ -134,27 +150,6 @@ public class ItemEventManager extends EventManager
 	/////////////////////////////////////////////////////////////////
 	// ACTIONS			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	/*
-	 * the action always succeeds, because if not possible, the item
-	 * will appear later (as soon as possible, actually). 
-	 */
-	public void enterRound(Direction dir)
-	{	SpecificAction action = new SpecificAppear(sprite,sprite.getTile());
-		ActionAbility actionAbility = sprite.modulateAction(action);
-		// can appear >> appears
-		if(actionAbility.isActive())
-		{	gesture = GestureName.ENTERING;
-			StateAbility stateAbility = sprite.modulateStateAbility(StateAbilityName.SPRITE_ENTRY_DURATION);
-			double duration = stateAbility.getStrength();
-			if(duration<=0)
-				duration = 1;
-			sprite.setGesture(gesture,spriteDirection,Direction.NONE,true,duration);
-		}
-		// cannot appear >> wait for next iteration
-		else
-		{	sprite.addIterDelay(DelayManager.DL_ENTER,1);
-		}
-	}
 	
 //TODO 3) réformer les actions spécifiques paramétrées par tile
 /*

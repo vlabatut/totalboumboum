@@ -49,6 +49,7 @@ import fr.free.totalboumboum.engine.container.level.HollowLevel;
 import fr.free.totalboumboum.engine.container.level.Level;
 import fr.free.totalboumboum.engine.container.level.Players;
 import fr.free.totalboumboum.engine.container.tile.Tile;
+import fr.free.totalboumboum.engine.content.feature.Direction;
 import fr.free.totalboumboum.engine.content.feature.Role;
 import fr.free.totalboumboum.engine.content.feature.ability.StateAbility;
 import fr.free.totalboumboum.engine.content.feature.ability.StateAbilityName;
@@ -720,6 +721,7 @@ System.out.println();
 				// show next sprites
 				if(entryIndex<entryDurations.length)
 				{	EngineEvent event = new EngineEvent(EngineEvent.ROUND_ENTER);
+					event.setDirection(Direction.NONE);
 					level.spreadEvent(event,entryRoles[entryIndex]);
 				}
 				// start the game

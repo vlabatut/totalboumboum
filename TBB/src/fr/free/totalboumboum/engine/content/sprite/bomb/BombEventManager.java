@@ -153,6 +153,8 @@ public class BombEventManager extends EventManager
 			engDelayOver(event);
 		else if(event.getName().equals(EngineEvent.TRAJECTORY_OVER))
 			engTrajectoryOver(event);
+		else if(event.getName().equals(EngineEvent.ROUND_ENTER))
+			engEnter(event);
 		else if(event.getName().equals(EngineEvent.ROUND_START))
 			engStart(event);
 	}	
@@ -380,22 +382,8 @@ public class BombEventManager extends EventManager
 		}
 	}
 	
-	private void engStart(EngineEvent event)
-	{	if(gesture.equals(GestureName.PREPARED))
-		{	stand();
-		}
-	}
-
-	/////////////////////////////////////////////////////////////////
-	// ACTIONS			/////////////////////////////////////////////
-	/////////////////////////////////////////////////////////////////
-	/*
-	 * the action is supposed to be allowed (hence previously tested)
-	 * maybe it'd be better to use a function performing both test and action,
-	 * sending back a boolean value indicating success or failure. 
-	 */
-	public void enterRound(Direction dir)
-	{	spriteDirection = dir;
+	private void engEnter(EngineEvent event)
+	{	spriteDirection = event.getDirection();
 		SpecificAction action = new SpecificAppear(sprite,sprite.getTile());
 		ActionAbility actionAbility = sprite.modulateAction(action);
 		// can appear >> appears
@@ -409,8 +397,26 @@ public class BombEventManager extends EventManager
 		}
 		// cannot appear >> wait for next iteration
 		else
-		{	sprite.addIterDelay(DelayManager.DL_ENTER,1);
+		{	sprite.addIterDelay(DelayManager.DL_ENTER,1);		
 		}
+	}
+	
+	private void engStart(EngineEvent event)
+	{	if(gesture.equals(GestureName.PREPARED))
+		{	stand();
+		}
+	}
+
+	/////////////////////////////////////////////////////////////////
+	// ACTIONS			/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	/*
+	 * action supposedly already tested
+	 */
+	public void appear(Direction direction)
+	{	gesture = GestureName.APPEARING;
+		spriteDirection = direction;
+		sprite.setGesture(gesture,spriteDirection,Direction.NONE,true);
 	}
 	
 	private void stand()
