@@ -218,7 +218,7 @@ public class Round implements StatisticHolder, Serializable
 		celebrate();		
 	}
 	private void celebrate()
-	{	loop.initCelebrationDelay();
+	{	loop.initCelebrationDuration();
 		ArrayList<Integer> winners = getWinners();
 		// celebration time !
 		for(int i=0;i<getProfiles().size();i++)

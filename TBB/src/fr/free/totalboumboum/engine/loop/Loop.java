@@ -49,6 +49,7 @@ import fr.free.totalboumboum.engine.container.level.HollowLevel;
 import fr.free.totalboumboum.engine.container.level.Level;
 import fr.free.totalboumboum.engine.container.level.Players;
 import fr.free.totalboumboum.engine.container.tile.Tile;
+import fr.free.totalboumboum.engine.content.feature.Role;
 import fr.free.totalboumboum.engine.content.feature.ability.StateAbility;
 import fr.free.totalboumboum.engine.content.feature.ability.StateAbilityName;
 import fr.free.totalboumboum.engine.content.feature.event.EngineEvent;
@@ -144,43 +145,11 @@ public class Loop implements Runnable, Serializable
 			j++;
 		}
 		
-		initEntryDelay();
+		initEntryDurations();
 	}
 	
 	public void loadStepOver()
 	{	round.loadStepOver();
-	}
-	
-	/////////////////////////////////////////////////////////////////
-	// FINISHED			/////////////////////////////////////////////
-	/////////////////////////////////////////////////////////////////
-	private boolean finished = false;
-	
-	public void finish()
-	{	if(!finished)
-		{	finished = true;	
-			// system listener
-			panel.removeKeyListener(systemControl);
-			// players
-			Iterator<Player> i = players.iterator();
-			while(i.hasNext())
-			{	Player temp = i.next();
-				panel.removeKeyListener(temp.getSpriteControl());
-				temp.finish();
-				i.remove();
-			}
-			// panel
-//			panel.finish();
-			panel = null;
-			// level
-			level.finish();
-			level = null;
-			// round
-			round = null;
-			// controm
-			systemControl.finish();
-			systemControl = null;
-		}		
 	}
 	
 	/////////////////////////////////////////////////////////////////
@@ -545,21 +514,21 @@ System.out.println();
 	private void update()
 	{	if(!isPaused)
 		{	long milliPeriod = Configuration.getEngineConfiguration().getMilliPeriod();
-			// celebration ?
-			if(celebrationDelay>0)
-			{	celebrationDelay = celebrationDelay - (milliPeriod*Configuration.getEngineConfiguration().getSpeedCoeff());
-				if(celebrationDelay<=0)
+			
+		// celebration ?
+			if(celebrationDuration>0)
+			{	celebrationDuration = celebrationDuration - (milliPeriod*Configuration.getEngineConfiguration().getSpeedCoeff());
+				if(celebrationDuration<=0)
 					setOver(true);
 			}
 			
-			// entry ?
-			if(entryDelay>=0)
-				entryDelay = entryDelay - (milliPeriod*Configuration.getEngineConfiguration().getSpeedCoeff());
-					
+			// entry
+			manageEntry();
+			
 			// normal update (level and AI)
 			level.update();
 			Iterator<Player> i = players.iterator();
-			while(i.hasNext() && entryDelay<0)
+			while(i.hasNext()/* && entryDelay<0*/)
 			{	Player temp = i.next();
 				if(!temp.isOut())
 					temp.update();
@@ -688,42 +657,139 @@ System.out.println();
 	{	return round;	
 	}
 	
+	/////////////////////////////////////////////////////////////////
+	// STATISTICS		/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
 	public void addStatisticEvent(StatisticEvent event)
 	{	round.addStatisticEvent(event);
 	}
 	
-	double celebrationDelay = -1;
-	double entryDelay = -1;
-
-	public void initEntryDelay()
-	{	if(players.size()>0)
-		{	Player player = players.get(0);
-			Sprite sprite = player.getSprite();
-			StateAbility ability = sprite.modulateStateAbility(StateAbilityName.HERO_ENTRY_DURATION);
-			entryDelay = ability.getStrength();
+	/////////////////////////////////////////////////////////////////
+	// ENTRY			/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	private Role[] entryRoles = new Role[Role.values().length];
+	private Double[] entryDurations = new Double[Role.values().length];
+	private int durationIndex = -1;
+	
+	private void initEntryDurations()
+	{	durationIndex = -1;
+		Role[] temp = {Role.FLOOR,Role.BLOCK,Role.ITEM,Role.BOMB,Role.HERO};
+		for(int i=0;i<temp.length;i++)
+		{	Role role = temp[i];
+			entryRoles[i] = role;
+			double duration = level.getEntryDuration(role);
+			entryDurations[i] = duration;
 		}
 	}
-	public void initCelebrationDelay()
+	
+/*	private boolean entryStarted = false;
+	private double floorsEntryDuration = 0;
+	private double blocksEntryDuration = 0;
+	private double itemsEntryDuration = 0;
+	private double bombsEntryDuration = 0;
+	private double heroesEntryDuration = 0;
+
+	private void initEntryDurations()
+	{	entryStarted = false;
+		// level
+		floorsEntryDuration = level.getEntryDuration(Role.FLOOR);
+		blocksEntryDuration = level.getEntryDuration(Role.BLOCK);
+		itemsEntryDuration = level.getEntryDuration(Role.ITEM);
+		bombsEntryDuration = level.getEntryDuration(Role.BOMB);
+		// players
+		if(players.size()>0)
+		{	Player player = players.get(0);
+			Sprite sprite = player.getSprite();
+			StateAbility ability = sprite.modulateStateAbility(StateAbilityName.SPRITE_ENTRY_DURATION);
+			heroesEntryDuration = ability.getStrength();
+		}
+	}
+*/	
+	private void manageEntry()
+	{	// first time
+		if(durationIndex==-1)
+		{	durationIndex ++;
+			EngineEvent event = new EngineEvent(EngineEvent.ROUND_ENTER);
+			level.spreadEvent(event,entryRoles[durationIndex]);
+		}
+		// general case
+		else if(entryDurations[durationIndex]>0)
+		{	entryDurations[durationIndex] = entryDurations[durationIndex] - (milliPeriod*Configuration.getEngineConfiguration().getSpeedCoeff());
+			if(entryDurations[durationIndex]<=0)
+			{	durationIndex++;
+				// show next sprites
+				if(durationIndex<entryDurations.length)
+				{	EngineEvent event = new EngineEvent(EngineEvent.ROUND_ENTER);
+					level.spreadEvent(event,entryRoles[durationIndex]);
+				}
+				// start the game
+				else 
+				{	EngineEvent event = new EngineEvent(EngineEvent.ROUND_START);
+					level.spreadEvent(event);
+				}
+			}
+		}
+	}
+	
+	/////////////////////////////////////////////////////////////////
+	// CELEBRATION		/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	double celebrationDuration = -1;
+
+	public void initCelebrationDuration()
 	{	if(players.size()>0)
 		{	Player player = players.get(0);
 			Sprite sprite = player.getSprite();
 			StateAbility ability = sprite.modulateStateAbility(StateAbilityName.HERO_CELEBRATION_DURATION);
-			celebrationDelay = ability.getStrength();
+			celebrationDuration = ability.getStrength();
 		}
 		else
-			celebrationDelay = 1;
+			celebrationDuration = 1;
 	}
 	
 	public void reportVictory(int index)
 	{	Player player = players.get(index);
 		Sprite sprite = player.getSprite();
-		EngineEvent event = new EngineEvent(EngineEvent.VICTORY);
+		EngineEvent event = new EngineEvent(EngineEvent.CELEBRATION_VICTORY);
 		sprite.processEvent(event);
 	}
+	
 	public void reportDefeat(int index)
 	{	Player player = players.get(index);
 		Sprite sprite = player.getSprite();
-		EngineEvent event = new EngineEvent(EngineEvent.DEFEAT);
+		EngineEvent event = new EngineEvent(EngineEvent.CELEBRATION_DEFEAT);
 		sprite.processEvent(event);
 	}
+
+	/////////////////////////////////////////////////////////////////
+	// FINISHED			/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	private boolean finished = false;
+	
+	public void finish()
+	{	if(!finished)
+		{	finished = true;	
+			// system listener
+			panel.removeKeyListener(systemControl);
+			// players
+			Iterator<Player> i = players.iterator();
+			while(i.hasNext())
+			{	Player temp = i.next();
+				panel.removeKeyListener(temp.getSpriteControl());
+				temp.finish();
+				i.remove();
+			}
+			// panel
+//			panel.finish();
+			panel = null;
+			// level
+			level.finish();
+			level = null;
+			// round
+			round = null;
+			// controm
+			systemControl.finish();
+			systemControl = null;
+		}		
+	}	
 }

@@ -37,6 +37,10 @@ import fr.free.totalboumboum.engine.container.fireset.FiresetMap;
 import fr.free.totalboumboum.engine.container.itemset.Itemset;
 import fr.free.totalboumboum.engine.container.tile.Tile;
 import fr.free.totalboumboum.engine.content.feature.Direction;
+import fr.free.totalboumboum.engine.content.feature.Role;
+import fr.free.totalboumboum.engine.content.feature.ability.StateAbility;
+import fr.free.totalboumboum.engine.content.feature.ability.StateAbilityName;
+import fr.free.totalboumboum.engine.content.feature.event.AbstractEvent;
 import fr.free.totalboumboum.engine.content.sprite.Sprite;
 import fr.free.totalboumboum.engine.content.sprite.hero.Hero;
 import fr.free.totalboumboum.engine.loop.Loop;
@@ -767,6 +771,47 @@ public class Level
 		g.drawString(text, x, y);
 	}
 
+	/////////////////////////////////////////////////////////////////
+	// EVENTS				/////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	public void spreadEvent(AbstractEvent event)
+	{	for(int line=0;line<globalHeight;line++)
+		{	for(int col=0;col<globalWidth;col++)
+			{	Tile tile = matrix[line][col];
+				tile.spreadEvent(event);
+			}
+		}
+	}
+
+	public void spreadEvent(AbstractEvent event, Role role)
+	{	for(int line=0;line<globalHeight;line++)
+		{	for(int col=0;col<globalWidth;col++)
+			{	Tile tile = matrix[line][col];
+				tile.spreadEvent(event,role);
+			}
+		}
+	}
+
+	/////////////////////////////////////////////////////////////////
+	// ENTRY				/////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	public double getEntryDuration(Role role)
+	{	double result = 0;
+		for(int line=0;line<globalHeight;line++)
+		{	for(int col=0;col<globalWidth;col++)
+			{	Tile tile = matrix[line][col];
+				ArrayList<Sprite> list = tile.getSprites(role);
+				for(Sprite sprite: list)
+				{	StateAbility ability = sprite.modulateStateAbility(StateAbilityName.SPRITE_ENTRY_DURATION);
+					double duration = ability.getStrength();
+					if(duration>result)
+						result = duration;
+				}
+			}
+		}
+		return result;
+	}	
+	
 	/////////////////////////////////////////////////////////////////
 	// FINISHED				/////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////

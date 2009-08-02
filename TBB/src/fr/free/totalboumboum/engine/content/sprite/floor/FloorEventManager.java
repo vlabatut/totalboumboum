@@ -60,7 +60,7 @@ public class FloorEventManager extends EventManager
 	public void processEvent(EngineEvent event)
 	{	if(event.getName().equals(EngineEvent.ANIME_OVER))
 			engAnimeOver(event);
-		else if(event.getName().equals(EngineEvent.START))
+		else if(event.getName().equals(EngineEvent.ROUND_START))
 			engStart(event);
 	}	
 

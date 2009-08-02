@@ -153,7 +153,7 @@ public class BombEventManager extends EventManager
 			engDelayOver(event);
 		else if(event.getName().equals(EngineEvent.TRAJECTORY_OVER))
 			engTrajectoryOver(event);
-		else if(event.getName().equals(EngineEvent.START))
+		else if(event.getName().equals(EngineEvent.ROUND_START))
 			engStart(event);
 	}	
 
