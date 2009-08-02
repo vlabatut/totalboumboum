@@ -416,13 +416,13 @@ public class HeroEventManager extends EventManager
 			// the sprite is not allowed to land
 			else
 				gesture = GestureName.BOUNCING;
-			// si pas de direction bloquï¿½e, alors celles du sprite de du controle n'ont pas changï¿½ (sont toujours correctes)
+			// si pas de direction bloquée, alors celles du sprite de du controle n'ont pas changï¿½ (sont toujours correctes)
 			if(blockedDirection==Direction.NONE)
 				sprite.setGesture(gesture,spriteDirection,controlDirection,true);
-			// sinon on prend celle qui est bloquï¿½e, car celles du controle/sprite ont pu changer
+			// sinon on prend celle qui est bloquée, car celles du controle/sprite ont pu changer
 			else
 				sprite.setGesture(gesture,blockedDirection,blockedDirection,true);
-			// on met ï¿½ventuellement ï¿½ jour pour le rebond 
+			// on met ï¿½ventuellement à jour pour le rebond 
 			if(gesture.equals(GestureName.BOUNCING) && blockedDirection==Direction.NONE)
 				blockedDirection = spriteDirection;											
 		}

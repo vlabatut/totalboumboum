@@ -4,7 +4,7 @@
 
 		<!-- STATE -->
 <!--  	SPRITE_ENTRY_DURATION --> 
-		<ability strength="3000" frame="false" time="-1" uses="-1">
+		<ability strength="1000" frame="false" time="-1" uses="-1">
 			<name value="SPRITE_ENTRY_DURATION" />
 		</ability>
 <!-- 	SPRITE_MOVE_ASSISTANCE -->

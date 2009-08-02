@@ -197,6 +197,7 @@ public abstract class SpriteFactoryLoader
 			Gesture temp = gesturePack.getGesture(GestureName.APPEARING);
 			// copy of APPEARING
 			Gesture gesture = temp.copy();
+			gesture.setName(GestureName.ENTERING);
 			// but animes are taken from STANDING if there's no anime for APPEARING
 			if(temp.hasNoAnimes())
 				temp = gesturePack.getGesture(GestureName.STANDING);
@@ -207,10 +208,11 @@ public abstract class SpriteFactoryLoader
 			Gesture temp = gesturePack.getGesture(GestureName.APPEARING);
 			// copy of APPEARING
 			Gesture gesture = temp.copy();
+			gesture.setName(GestureName.PREPARED);
 			// with the animes of STANDING
 			temp = gesturePack.getGesture(GestureName.STANDING);
 			gesture.setAnimes(temp);			
-			gesturePack.addGesture(gesture,GestureName.ENTERING);
+			gesturePack.addGesture(gesture,GestureName.PREPARED);
 		}
 	}
 	

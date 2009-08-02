@@ -83,6 +83,7 @@ public abstract class Sprite
 
 	public void initSprite(Tile tile)
 	{	this.tile = tile;
+		center();
 		eventManager.initGesture();
 	}
 	
@@ -393,7 +394,10 @@ public abstract class Sprite
 	}
 	
 	public Direction getCurrentFacingDirection()
-	{	return animeManager.getCurrentDirection();	
+	{	
+//if(animeManager.getCurrentDirection()==null)
+//	while(true)System.out.println(name);
+		return animeManager.getCurrentDirection();
 	}
 	
 	public boolean hasShadow()

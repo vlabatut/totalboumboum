@@ -46,6 +46,9 @@ import fr.free.totalboumboum.engine.container.theme.ThemeLoader;
 import fr.free.totalboumboum.engine.container.tile.Tile;
 import fr.free.totalboumboum.engine.container.zone.Zone;
 import fr.free.totalboumboum.engine.container.zone.ZoneLoader;
+import fr.free.totalboumboum.engine.content.sprite.block.Block;
+import fr.free.totalboumboum.engine.content.sprite.floor.Floor;
+import fr.free.totalboumboum.engine.content.sprite.item.Item;
 import fr.free.totalboumboum.engine.loop.Loop;
 import fr.free.totalboumboum.tools.FileTools;
 import fr.free.totalboumboum.tools.XmlTools;
@@ -273,17 +276,26 @@ public class HollowLevel implements Serializable
 		// init tiles
 		for(int line=0;line<globalHeight;line++)
 		{	for(int col=0;col<globalWidth;col++)
-			{	Tile tile = matrix[line][col];
-				double x = globalLeftX + GameVariables.scaledTileDimension/2 + col*GameVariables.scaledTileDimension;
+			{	double x = globalLeftX + GameVariables.scaledTileDimension/2 + col*GameVariables.scaledTileDimension;
 				double y = globalUpY + GameVariables.scaledTileDimension/2 + line*GameVariables.scaledTileDimension;
+				matrix[line][col] = new Tile(level,line,col,x,y);
 				if(mFloors[line][col]==null)
-					matrix[line][col] = new Tile(level,line,col,x,y,theme.makeFloor(tile));
+				{	Floor floor = theme.makeFloor(matrix[line][col]);
+					matrix[line][col].setFloor(floor);
+				}
 				else
-					matrix[line][col] = new Tile(level,line,col,x,y,theme.makeFloor(mFloors[line][col],tile));
+				{	Floor floor = theme.makeFloor(mFloors[line][col],matrix[line][col]);
+					matrix[line][col].setFloor(floor);
+				}
 				if(mBlocks[line][col]!=null)
-					matrix[line][col].addSprite(theme.makeBlock(mBlocks[line][col],tile));
+				{	Block block = theme.makeBlock(mBlocks[line][col],matrix[line][col]);
+					matrix[line][col].addSprite(block);
+				
+				}
 				if(mItems[line][col]!=null)
-					matrix[line][col].addSprite(itemset.makeItem(mItems[line][col],tile));
+				{	Item item = itemset.makeItem(mItems[line][col],matrix[line][col]);
+					matrix[line][col].addSprite(item);				
+				}
 			}
 		}
 	}

@@ -48,7 +48,7 @@ import fr.free.totalboumboum.engine.content.sprite.item.Item;
 
 public class Tile
 {		
-	public Tile(Level level,int line, int col, double posX, double posY, Floor floor)
+	public Tile(Level level,int line, int col, double posX, double posY)
 	{	this.level = level;
 		this.posX = posX;
 		this.posY = posY;
@@ -60,7 +60,6 @@ public class Tile
 		fires = new ArrayList<Fire>(0);
 		block = null;
 		item = null;
-		setFloor(floor);
 	}
 		
     /////////////////////////////////////////////////////////////////
@@ -317,7 +316,7 @@ public class Tile
 	{	return floor;
 	}
 	
-	private void setFloor(Floor floor)
+	public void setFloor(Floor floor)
 	{	this.floor = floor;
 		floor.setCurrentPosX(posX);
 		floor.setCurrentPosY(posY);
