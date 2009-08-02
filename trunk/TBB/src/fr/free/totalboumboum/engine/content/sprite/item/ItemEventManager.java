@@ -155,11 +155,6 @@ public class ItemEventManager extends EventManager
 /*
  * TODO
  * 
- * pr thème: faut calculer le temps d'apparition max pour les floors, blocs, items, bombs
- * ca permet de savoir quand lancer l'affichage. on finit par les personnages
- * ça permettra aussi de faire commencer le décompte du temps non pas dès le début, mais dès que les persos sont prêts
- * voire faire apparaître du texte (ready, set, go)
- * 
  * tant qu'on y est, on va mettre ready-set-go, ce qui implique une durée minimale avant le début du match
  * p-ê à faire en même temps que le niveau apparait ? ou bien après ? ou pendant l'apparition des joueurs ?
  * 
