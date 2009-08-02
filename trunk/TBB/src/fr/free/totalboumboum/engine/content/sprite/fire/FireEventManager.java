@@ -65,6 +65,8 @@ public class FireEventManager extends EventManager
 			tileEnter(event);
 		else if(event.getName().equals(EngineEvent.TOUCH_GROUND))
 			tileEnter(event);
+		else if(event.getName().equals(EngineEvent.ROUND_ENTER))
+			engEnter(event);
 		else if(event.getName().equals(EngineEvent.ROUND_START))
 			engStart(event);
 	}	
@@ -101,6 +103,16 @@ public class FireEventManager extends EventManager
 		}
 	}
 	
+	private void engEnter(EngineEvent event)
+	{	gesture = GestureName.ENTERING;
+		spriteDirection = event.getDirection();
+		StateAbility ability = sprite.modulateStateAbility(StateAbilityName.SPRITE_ENTRY_DURATION);
+		double duration = ability.getStrength();
+		if(duration<=0)
+			duration = 1;
+		sprite.setGesture(gesture,spriteDirection,Direction.NONE,true,duration);
+	}
+	
 	private void engStart(EngineEvent event)
 	{	if(gesture.equals(GestureName.PREPARED))
 		{	gesture = GestureName.STANDING;
@@ -112,20 +124,14 @@ public class FireEventManager extends EventManager
 	// ACTIONS			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	/*
-	 * the action is supposed to be allowed (hence previously tested)
-	 * maybe it'd be better to use a function performing both test and action,
-	 * sending back a boolean value indicating success or failure. 
+	 * action supposedly already tested
 	 */
-	public void enterRound(Direction dir)
-	{	gesture = GestureName.ENTERING;
-		spriteDirection = dir;
-		StateAbility ability = sprite.modulateStateAbility(StateAbilityName.SPRITE_ENTRY_DURATION);
-		double duration = ability.getStrength();
-		if(duration<=0)
-			duration = 1;
-		sprite.setGesture(gesture,spriteDirection,Direction.NONE,true,duration);
+	public void appear(Direction direction)
+	{	gesture = GestureName.APPEARING;
+		spriteDirection = direction;
+		sprite.setGesture(gesture,spriteDirection,Direction.NONE,true);
 	}
-
+	
 	/////////////////////////////////////////////////////////////////
 	// FINISHED			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////

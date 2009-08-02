@@ -295,10 +295,12 @@ public class HeroEventManager extends EventManager
 			engTrajectoryOver(event);
 		else if(event.getName().equals(EngineEvent.CELEBRATION_VICTORY))
 			engVictory(event);
+		else if(event.getName().equals(EngineEvent.ROUND_ENTER))
+			engEnter(event);
 		else if(event.getName().equals(EngineEvent.ROUND_START))
 			engStart(event);
-	}	
-
+	}
+	
 	private void engAnimeOver(EngineEvent event)
 	{	if(gesture.equals(GestureName.APPEARING))
 		{	setWaitDelay();
@@ -486,6 +488,16 @@ public class HeroEventManager extends EventManager
 */		
 	}
 	
+	private void engEnter(EngineEvent event)
+	{	gesture = GestureName.ENTERING;
+		spriteDirection = event.getDirection();
+		StateAbility ability = sprite.modulateStateAbility(StateAbilityName.SPRITE_ENTRY_DURATION);
+		double duration = ability.getStrength();
+		if(duration<=0)
+			duration = 1;
+		sprite.setGesture(gesture,spriteDirection,Direction.NONE,true,duration);		
+	}
+
 	private void engStart(EngineEvent event)
 	{	if(gesture.equals(GestureName.PREPARED))
 		{	gesture = GestureName.STANDING;
@@ -500,21 +512,6 @@ public class HeroEventManager extends EventManager
 	{	StateAbility ability = sprite.modulateStateAbility(StateAbilityName.HERO_WAIT_DURATION);
 		double duration = ability.getStrength();
 		sprite.addDelay(DelayManager.DL_WAIT,duration);		
-	}
-
-	/*
-	 * the action is supposed to be allowes (hence previously tested)
-	 * maybe it'd be better to use a function performing both test and action,
-	 * sending back a boolean value indicating success or failure. 
-	 */
-	public void enterRound(Direction dir)
-	{	gesture = GestureName.ENTERING;
-		spriteDirection = dir;
-		StateAbility ability = sprite.modulateStateAbility(StateAbilityName.SPRITE_ENTRY_DURATION);
-		double duration = ability.getStrength();
-		if(duration<=0)
-			duration = 1;
-		sprite.setGesture(gesture,spriteDirection,Direction.NONE,true,duration);
 	}
 
 	/////////////////////////////////////////////////////////////////

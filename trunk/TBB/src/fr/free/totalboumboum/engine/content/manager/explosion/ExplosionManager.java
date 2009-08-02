@@ -28,7 +28,6 @@ import fr.free.totalboumboum.engine.content.feature.ability.AbstractAbility;
 import fr.free.totalboumboum.engine.content.feature.action.SpecificAction;
 import fr.free.totalboumboum.engine.content.feature.action.appear.SpecificAppear;
 import fr.free.totalboumboum.engine.content.feature.explosion.Explosion;
-import fr.free.totalboumboum.engine.content.feature.gesture.GestureName;
 import fr.free.totalboumboum.engine.content.sprite.Sprite;
 import fr.free.totalboumboum.engine.content.sprite.fire.Fire;
 
@@ -86,11 +85,10 @@ public class ExplosionManager
 		else
 			owner = sprite.getOwner();
 		fire.setOwner(owner);
-		fire.enterRound();
 		tile.addSprite(fire);
 		fire.setCurrentPosX(tile.getPosX());
 		fire.setCurrentPosY(tile.getPosY());
-		fire.setGesture(GestureName.BURNING, Direction.NONE, Direction.NONE, true);
+		fire.appear(Direction.NONE);
 		// branches
 		if(flameRange>0)
 		{	int hFlameRange = flameRange;
@@ -132,11 +130,10 @@ public class ExplosionManager
 			if(blocking)
 				fire.consumeTile(tileTemp);
 			else
-			{	fire.appear(dir);
-				tileTemp.addSprite(fire);
+			{	tileTemp.addSprite(fire);
 				fire.setCurrentPosX(tileTemp.getPosX());
 				fire.setCurrentPosY(tileTemp.getPosY());
-				fire.setGesture(GestureName.BURNING,dir,dir, true);
+				fire.appear(dir);
 				length++;
 				tileTemp = tileTemp.getNeighbor(dir);
 			}

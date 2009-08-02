@@ -26,6 +26,7 @@ import java.util.LinkedList;
 
 import fr.free.totalboumboum.engine.container.bombset.Bombset;
 import fr.free.totalboumboum.engine.container.tile.Tile;
+import fr.free.totalboumboum.engine.content.feature.Direction;
 import fr.free.totalboumboum.engine.content.feature.ability.ActionAbility;
 import fr.free.totalboumboum.engine.content.feature.ability.StateAbility;
 import fr.free.totalboumboum.engine.content.feature.ability.StateAbilityName;
@@ -82,6 +83,7 @@ public class BombsetManager
 	public void dropBomb(Bomb bomb)
 	{	StateAbility ability = sprite.modulateStateAbility(StateAbilityName.BOMB_RANGE);
 		int flameRange = (int)ability.getStrength();
+		Direction direction = sprite.getCurrentFacingDirection();
 		ability = sprite.modulateStateAbility(StateAbilityName.BOMB_NUMBER);
 		int droppedBombLimit = (int)ability.getStrength();
 		if(droppedBombs.size()<droppedBombLimit)
@@ -91,10 +93,10 @@ public class BombsetManager
 				SpecificAction specificAction = new SpecificAppear(bomb,tile);
 				ActionAbility ablt = bomb.modulateAction(specificAction);
 				if(ablt.isActive())
-				{	bomb.enterRound();
-					tile.addSprite(bomb);
+				{	tile.addSprite(bomb);
 					bomb.setCurrentPosX(tile.getPosX());
 					bomb.setCurrentPosY(tile.getPosY());
+					bomb.appear(direction);
 					droppedBombs.offer(bomb);
 					// stats
 					StatisticAction statAction = StatisticAction.DROP_BOMB;
