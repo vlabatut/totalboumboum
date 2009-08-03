@@ -21,7 +21,8 @@ package fr.free.totalboumboum.engine.content.manager.explosion;
  * 
  */
 
-import fr.free.totalboumboum.configuration.GameVariables;
+import java.util.ArrayList;
+
 import fr.free.totalboumboum.engine.container.tile.Tile;
 import fr.free.totalboumboum.engine.content.feature.Direction;
 import fr.free.totalboumboum.engine.content.feature.ability.AbstractAbility;
@@ -85,28 +86,55 @@ public class ExplosionManager
 		else
 			owner = sprite.getOwner();
 		fire.setOwner(owner);
-		tile.addSprite(fire);
 		fire.setCurrentPosX(tile.getPosX());
 		fire.setCurrentPosY(tile.getPosY());
 		fire.appear(Direction.NONE);
+		
 		// branches
-		if(flameRange>0)
-		{	int hFlameRange = flameRange;
-			int vFlameRange = flameRange;
-			int levelWidth = GameVariables.level.getGlobalWidth();
-			int levelHeight = GameVariables.level.getGlobalHeight();
-			if(flameRange>=levelWidth)
-				hFlameRange = levelWidth-1;
-			if(flameRange>=levelHeight)
-				vFlameRange = levelHeight-1;
-			makeBranch(vFlameRange,Direction.DOWN);
-			makeBranch(hFlameRange,Direction.LEFT);
-			makeBranch(hFlameRange,Direction.RIGHT);
-			makeBranch(vFlameRange,Direction.UP);
+		boolean blocked[] = {false,false,false,false};
+		Tile tiles[] = {tile,tile,tile,tile};
+		Direction directions[] = {Direction.DOWN, Direction.LEFT, Direction.RIGHT, Direction.UP};
+		ArrayList<Tile> processed = new ArrayList<Tile>();
+		processed.add(tile);
+		boolean goOn = true;
+		int length = 1;
+		while(goOn && length<=flameRange)
+		{	goOn = false;
+			// increase the explosion
+			for(int i=0;i<directions.length;i++)
+			{	if(!blocked[i])
+				{	// get the tile
+					Direction direction = directions[i];
+					Tile tempTile = tiles[i].getNeighbor(direction);
+					tiles[i] = tempTile;
+					if(!processed.contains(tempTile))
+					{	processed.add(tempTile);
+						if(length==flameRange)
+							fire = explosion.makeFire("outside",tempTile); //TODO remplacer ces chaines de caractères par des valeurs énumérées
+						else
+							fire = explosion.makeFire("inside",tempTile);
+						fire.setOwner(owner);
+						SpecificAction specificAction = new SpecificAppear(fire,tempTile,direction);
+						AbstractAbility ability = fire.modulateAction(specificAction);
+						blocked[i] = !ability.isActive();
+						if(blocked[i])
+						{	fire.consumeTile(tempTile);
+							blocked[i] = true;
+						}
+						else
+						{	goOn = true;
+							fire.setCurrentPosX(tempTile.getPosX());
+							fire.setCurrentPosY(tempTile.getPosY());
+							fire.appear(direction);
+						}
+					}
+				}
+			}
+			length++;
 		}
 	}	
 	
-	private void makeBranch(int power, Direction dir)
+/*	private void makeBranch(int power, Direction dir)
 	{	Tile tile = sprite.getTile();
 		int length = 1;
 		boolean blocking;		
@@ -140,7 +168,7 @@ public class ExplosionManager
 		}
 		while(!blocking && length<=power);
 	}
-	
+*/	
 	/////////////////////////////////////////////////////////////////
 	// FINISHED			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////

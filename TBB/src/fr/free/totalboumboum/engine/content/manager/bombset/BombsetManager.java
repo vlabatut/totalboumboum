@@ -93,8 +93,7 @@ public class BombsetManager
 				SpecificAction specificAction = new SpecificAppear(bomb,tile);
 				ActionAbility ablt = bomb.modulateAction(specificAction);
 				if(ablt.isActive())
-				{	tile.addSprite(bomb);
-					bomb.setCurrentPosX(tile.getPosX());
+				{	bomb.setCurrentPosX(tile.getPosX());
 					bomb.setCurrentPosY(tile.getPosY());
 					bomb.appear(direction);
 					droppedBombs.offer(bomb);

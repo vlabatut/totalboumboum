@@ -823,8 +823,9 @@ public class Launcher
 	 * - généralisation (aux autres sprites) de l'Ability permettant de contraindre le temps mis par les heros pour apparaitre au début de la partie.
 	 * - modification dans le moteur : un sprite dans l'état NONE est quand même associé à une case, ce qui permet de simplifier le traitement des actions. par contre il n'a pas de position en pixels
 	 * - correction d'un bug dans la gestion des animations et trajectoires proportionnelles
-	 * 
+	 * - correction d'un bug dans la génération des explosions en croix (flamme trop longue)
 	 * - définition d'un système permettant au niveau d'apparaître graduellement au début du round
+	 * 
 	 * - simplification de l'initialisation des actions afin de ne plus avoir à spécifier une tile (le cas où la tile manquait a été supprimé)
 	 * 
 	 *   

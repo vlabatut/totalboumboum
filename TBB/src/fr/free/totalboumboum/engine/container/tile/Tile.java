@@ -580,7 +580,8 @@ public class Tile
 	// EVENTS				/////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	public void spreadEvent(AbstractEvent event)
-	{	for(Role role: Role.values())
+	{	Role[] roles = {Role.FLOOR,Role.HERO,Role.BOMB,Role.FIRE,Role.BLOCK,Role.ITEM}; 
+		for(Role role: roles)
 			spreadEvent(event,role);
 	}
 
