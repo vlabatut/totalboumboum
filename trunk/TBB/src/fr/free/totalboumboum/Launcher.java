@@ -994,7 +994,6 @@ public class Launcher
 	 * - impossible de poser une bombe quand on est en train de buter contre un mur en direction upleft (et uniquement cette direction pr NES2) et downleft (pr SBM1)
 	 * 
 	 * - NES-BM2: quand on apparait dans un mur, on ne peut pas bouger (on devrait pouvoir en sortir)
-	 * - NES-BM2: on ne semble pas pouvoir poser plusieurs bombes en même temps (en fait on les poses toutes au même endroit car pb dans la gestion tile+modulation : etat none = pas de tile)
 	 */
 	
 	/*TODO instance NES BM2

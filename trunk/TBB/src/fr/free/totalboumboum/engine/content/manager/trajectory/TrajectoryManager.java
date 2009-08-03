@@ -178,7 +178,7 @@ public class TrajectoryManager
 					totalDuration = trajectoryDuration;
 				}
 				else 
-				{	totalDuration = trajectoryDuration;
+				{	totalDuration = forcedDuration;
 					// proportionnal
 					if(currentTrajectory.getProportional())
 						forcedDurationCoeff = trajectoryDuration/forcedDuration;
@@ -575,9 +575,9 @@ System.out.println();
 
 	private void updateTime()
 	{	double milliPeriod = Configuration.getEngineConfiguration().getMilliPeriod();
-		double delta = milliPeriod*forcedDurationCoeff*sprite.getSpeedCoeff();	
+		double delta = milliPeriod*sprite.getSpeedCoeff();	
 		currentTime = currentTime + delta;
-		trajectoryTime = trajectoryTime + delta;
+		trajectoryTime = trajectoryTime + delta*forcedDurationCoeff;
 		if(trajectoryTime > trajectoryDuration)
 		{	// looping the trajectory
 			if(currentTrajectory.getRepeat())

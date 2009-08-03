@@ -154,7 +154,9 @@ public class ItemEventManager extends EventManager
 //TODO 3) réformer les actions spécifiques paramétrées par tile
 /*
  * TODO
- * l'anime de victoire ne boucle plus (mais le temps est respecté)
+ * on peut bouger pendant l'apparition (pas reproductible, résolu ?)
+ * une fois (pas reproductible) : flamme ne faisait mourir aucun perso
+ * on ne peut pas bouger quand on apparait dans un mur
  * 
  * tant qu'on y est, on va mettre ready-set-go, ce qui implique une durée minimale avant le début du match
  * p-ê à faire en même temps que le niveau apparait ? ou bien après ? ou pendant l'apparition des joueurs ?
