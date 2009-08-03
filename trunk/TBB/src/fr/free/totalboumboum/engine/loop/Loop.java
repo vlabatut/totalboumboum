@@ -669,18 +669,21 @@ System.out.println();
 	// ENTRY			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	private Role[] entryRoles;
-	private Double[] entryDurations;
+	private Double[] entryDelays;
 	private int entryIndex = -1;
 	
 	private void initEntryDurations()
 	{	entryIndex = -1;
 		entryRoles = new Role[]{Role.FLOOR,Role.BLOCK,Role.ITEM,Role.BOMB,Role.HERO};
-		entryDurations = new Double[entryRoles.length];
+		entryDelays = new Double[entryRoles.length];
 		for(int i=0;i<entryRoles.length;i++)
 		{	double duration = level.getEntryDuration(entryRoles[i]);
-			entryDurations[i] = duration;
-System.out.println("entryDurations["+i+"]="+entryDurations[i]);
+			if(i<entryRoles.length-1)
+				duration = duration/2; //so that sprites appear almost at the same time
+			entryDelays[i] = duration;
+//System.out.println("entryDurations["+i+"]="+entryDelays[i]);
 		}
+		
 	}
 	
 /*	private boolean entryStarted = false;
@@ -716,13 +719,13 @@ System.out.println("entryDurations["+i+"]="+entryDurations[i]);
 			level.spreadEvent(event,entryRoles[entryIndex]);
 		}
 		// general case
-		else if(entryIndex<entryDurations.length)// if(entryDurations[entryIndex]>0)
-		{	entryDurations[entryIndex] = entryDurations[entryIndex] - (milliPeriod*Configuration.getEngineConfiguration().getSpeedCoeff());
-			if(entryDurations[entryIndex]<=0)
+		else if(entryIndex<entryDelays.length)// if(entryDurations[entryIndex]>0)
+		{	entryDelays[entryIndex] = entryDelays[entryIndex] - (milliPeriod*Configuration.getEngineConfiguration().getSpeedCoeff());
+			if(entryDelays[entryIndex]<=0)
 			{	entryIndex++;
 //System.out.println(totalTime);		
 				// show next sprites
-				if(entryIndex<entryDurations.length)
+				if(entryIndex<entryDelays.length)
 				{	EngineEvent event = new EngineEvent(EngineEvent.ROUND_ENTER);
 					event.setDirection(Direction.NONE);
 					level.spreadEvent(event,entryRoles[entryIndex]);
