@@ -822,6 +822,7 @@ public class Launcher
 	 * - introduction des gestures ENTERING et PREPARED, correspondant à APPEARING et STANDING, mais seulement utilisés pour le début du round
 	 * - généralisation (aux autres sprites) de l'Ability permettant de contraindre le temps mis par les heros pour apparaitre au début de la partie.
 	 * - modification dans le moteur : un sprite dans l'état NONE est quand même associé à une case, ce qui permet de simplifier le traitement des actions. par contre il n'a pas de position en pixels
+	 * - correction d'un bug dans la gestion des animations et trajectoires proportionnelles
 	 * 
 	 * - définition d'un système permettant au niveau d'apparaître graduellement au début du round
 	 * - simplification de l'initialisation des actions afin de ne plus avoir à spécifier une tile (le cas où la tile manquait a été supprimé)
@@ -993,7 +994,6 @@ public class Launcher
 	 * - il semblerait que la direction dans la SpecificAction et dans la GeneralAction correspondante ne soit pas la même...
 	 * - impossible de poser une bombe quand on est en train de buter contre un mur en direction upleft (et uniquement cette direction pr NES2) et downleft (pr SBM1)
 	 * 
-	 * - NES-BM2: quand on apparait dans un mur, on ne peut pas bouger (on devrait pouvoir en sortir)
 	 */
 	
 	/*TODO instance NES BM2

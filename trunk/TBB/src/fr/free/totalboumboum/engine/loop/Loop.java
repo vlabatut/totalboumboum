@@ -723,7 +723,7 @@ System.out.println();
 		{	entryDelays[entryIndex] = entryDelays[entryIndex] - (milliPeriod*Configuration.getEngineConfiguration().getSpeedCoeff());
 			if(entryDelays[entryIndex]<=0)
 			{	entryIndex++;
-System.out.println(totalTime);		
+//System.out.println(totalTime);		
 				// show next sprites
 				if(entryIndex<entryDelays.length)
 				{	EngineEvent event = new EngineEvent(EngineEvent.ROUND_ENTER);

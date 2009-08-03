@@ -99,8 +99,8 @@ public class AnimeManager
 //	System.out.println("B>>totalTime="+GameVariables.loop.getTotalTime()+" forcedDuration="+forcedDuration);
 //if(sprite instanceof Hero && gesture.getName()==GestureName.EXULTING)
 //	System.out.println("H>>totalTime="+GameVariables.loop.getTotalTime()+" forcedDuration="+forcedDuration);
-if(sprite instanceof Hero)
-	System.out.println("H>>"+gesture.getName());
+//if(sprite instanceof Hero)
+//	System.out.println("H>>"+gesture.getName());
 
 		currentAnime = gesture.getAnimeDirection(currentDirection);
 		if(currentAnime==null)
