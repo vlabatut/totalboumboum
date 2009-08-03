@@ -680,7 +680,7 @@ System.out.println();
 		{	double duration = level.getEntryDuration(entryRoles[i]);
 			if(i<entryRoles.length-1)
 				duration = duration/2; //so that sprites appear almost at the same time
-			entryDelays[i] = duration;
+			entryDelays[i] = duration+Configuration.getEngineConfiguration().getMilliPeriod();//NOTE a little more time, just too be sure it goes OK
 //System.out.println("entryDurations["+i+"]="+entryDelays[i]);
 		}
 		
@@ -723,7 +723,7 @@ System.out.println();
 		{	entryDelays[entryIndex] = entryDelays[entryIndex] - (milliPeriod*Configuration.getEngineConfiguration().getSpeedCoeff());
 			if(entryDelays[entryIndex]<=0)
 			{	entryIndex++;
-//System.out.println(totalTime);		
+System.out.println(totalTime);		
 				// show next sprites
 				if(entryIndex<entryDelays.length)
 				{	EngineEvent event = new EngineEvent(EngineEvent.ROUND_ENTER);

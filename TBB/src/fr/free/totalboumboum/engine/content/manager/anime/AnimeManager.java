@@ -35,6 +35,7 @@ import fr.free.totalboumboum.engine.content.feature.gesture.anime.AnimeStep;
 import fr.free.totalboumboum.engine.content.sprite.Sprite;
 import fr.free.totalboumboum.engine.content.sprite.block.Block;
 import fr.free.totalboumboum.engine.content.sprite.floor.Floor;
+import fr.free.totalboumboum.engine.content.sprite.hero.Hero;
 
 public class AnimeManager
 {	/** sprite possédant ce manager */
@@ -96,6 +97,10 @@ public class AnimeManager
 //	System.out.println("F>>totalTime="+GameVariables.loop.getTotalTime()+" forcedDuration="+forcedDuration);
 //if(sprite instanceof Block && gesture.getName()==GestureName.ENTERING)
 //	System.out.println("B>>totalTime="+GameVariables.loop.getTotalTime()+" forcedDuration="+forcedDuration);
+//if(sprite instanceof Hero && gesture.getName()==GestureName.EXULTING)
+//	System.out.println("H>>totalTime="+GameVariables.loop.getTotalTime()+" forcedDuration="+forcedDuration);
+if(sprite instanceof Hero)
+	System.out.println("H>>"+gesture.getName());
 
 		currentAnime = gesture.getAnimeDirection(currentDirection);
 		if(currentAnime==null)
@@ -151,7 +156,7 @@ public class AnimeManager
 				}
 				// with forced duration
 				else 
-				{	totalDuration = animeDuration;
+				{	totalDuration = forcedDuration;
 					// proportionnal
 					if(currentAnime.getProportional())
 						forcedDurationCoeff = animeDuration/forcedDuration;
@@ -177,6 +182,8 @@ public class AnimeManager
 //	System.out.println("F  totalTime="+GameVariables.loop.getTotalTime()+" currentTime="+currentTime);
 //if(sprite instanceof Block)
 //	System.out.println("B  totalTime="+GameVariables.loop.getTotalTime()+" currentTime="+currentTime);
+//if(sprite instanceof Hero)
+//	System.out.println("H  totalTime="+GameVariables.loop.getTotalTime()+" currentTime="+currentTime+" animeTime="+animeTime);
 		updateStep();
 		// check if the animations is over
 		if(currentTime>totalDuration)
@@ -194,10 +201,12 @@ public class AnimeManager
 	 */
 	private void updateTime()
 	{	// update current time
+//if(sprite instanceof Hero && currentAnime.getName().startsWith(GestureName.EXULTING.toString()))
+//		System.out.println();
 		double milliPeriod = Configuration.getEngineConfiguration().getMilliPeriod();
-		double delta = milliPeriod*forcedDurationCoeff*sprite.getSpeedCoeff();	
+		double delta = milliPeriod*sprite.getSpeedCoeff();	
 		currentTime = currentTime + delta;
-		animeTime = animeTime + delta;
+		animeTime = animeTime + delta*forcedDurationCoeff;
 		if(currentAnime.getRepeat() && animeDuration>0)
 		{	while(animeTime>animeDuration)
 				animeTime = animeTime - animeDuration;
