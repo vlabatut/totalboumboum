@@ -25,12 +25,16 @@ import java.awt.image.BufferedImage;
 import java.util.Iterator;
 
 import fr.free.totalboumboum.configuration.Configuration;
+import fr.free.totalboumboum.configuration.GameVariables;
 import fr.free.totalboumboum.engine.content.feature.Direction;
 import fr.free.totalboumboum.engine.content.feature.event.EngineEvent;
 import fr.free.totalboumboum.engine.content.feature.gesture.Gesture;
+import fr.free.totalboumboum.engine.content.feature.gesture.GestureName;
 import fr.free.totalboumboum.engine.content.feature.gesture.anime.AnimeDirection;
 import fr.free.totalboumboum.engine.content.feature.gesture.anime.AnimeStep;
 import fr.free.totalboumboum.engine.content.sprite.Sprite;
+import fr.free.totalboumboum.engine.content.sprite.block.Block;
+import fr.free.totalboumboum.engine.content.sprite.floor.Floor;
 
 public class AnimeManager
 {	/** sprite possédant ce manager */
@@ -89,7 +93,9 @@ public class AnimeManager
 //if(currentDirection==null)
 //	while(true)System.out.println("null direction");
 //if(sprite instanceof Floor && gesture.getName()==GestureName.ENTERING)
-//	System.out.println(">>totalTime="+GameVariables.loop.getTotalTime()+" forcedDuration="+forcedDuration);
+//	System.out.println("F>>totalTime="+GameVariables.loop.getTotalTime()+" forcedDuration="+forcedDuration);
+//if(sprite instanceof Block && gesture.getName()==GestureName.ENTERING)
+//	System.out.println("B>>totalTime="+GameVariables.loop.getTotalTime()+" forcedDuration="+forcedDuration);
 
 		currentAnime = gesture.getAnimeDirection(currentDirection);
 		if(currentAnime==null)
@@ -168,14 +174,18 @@ public class AnimeManager
 	public void update()
 	{	updateTime();
 //if(sprite instanceof Floor)
-//	System.out.println("  totalTime="+GameVariables.loop.getTotalTime()+" currentTime="+currentTime);
+//	System.out.println("F  totalTime="+GameVariables.loop.getTotalTime()+" currentTime="+currentTime);
+//if(sprite instanceof Block)
+//	System.out.println("B  totalTime="+GameVariables.loop.getTotalTime()+" currentTime="+currentTime);
 		updateStep();
 		// check if the animations is over
 		if(currentTime>totalDuration)
 		{	isTerminated = true;
 			sprite.processEvent(new EngineEvent(EngineEvent.ANIME_OVER));
 //if(sprite instanceof Floor)
-//	System.out.println("<<totalTime="+GameVariables.loop.getTotalTime()+" currentTime="+currentTime);
+//	System.out.println("F<<totalTime="+GameVariables.loop.getTotalTime()+" currentTime="+currentTime);
+//if(sprite instanceof Block)
+//	System.out.println("B<<totalTime="+GameVariables.loop.getTotalTime()+" currentTime="+currentTime);
 		}
 	}
 	

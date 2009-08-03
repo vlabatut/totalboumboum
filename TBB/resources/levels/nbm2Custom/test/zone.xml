@@ -58,10 +58,10 @@
 				<floor name="marked" />
 			</tile>
 			<tile pos="7" >
-				<floor name="marked" />
+				<floor name="regular" />
 			</tile>
 			<tile pos="8" >
-				<floor name="marked" />
+				<floor name="regular" />
 			</tile>
 		</line>
 		
@@ -91,10 +91,10 @@
 				<floor name="marked" />
 			</tile>
 			<tile pos="7" >
-				<floor name="marked" />
+				<floor name="regular" />
 			</tile>
 			<tile pos="8" >
-				<floor name="marked" />
+				<floor name="regular" />
 			</tile>
 		</line>
 		
