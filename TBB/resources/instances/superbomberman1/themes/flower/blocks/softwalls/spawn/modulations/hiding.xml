@@ -15,7 +15,7 @@
 <!--  	CONSUME --> 
 		<modulation frame="true" strength="0" >
 			<action name="CONSUME" direction="ANY" contact="ANY"
-				tilePosition="SAME" orientation="ANY" actor="SOME" />
+				tilePosition="ANY" orientation="ANY" actor="SOME" />
 			<actor-restrictions />
 			<target-restrictions />
 		</modulation>

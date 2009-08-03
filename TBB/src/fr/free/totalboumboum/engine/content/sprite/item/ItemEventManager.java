@@ -156,7 +156,7 @@ public class ItemEventManager extends EventManager
  * TODO
  * on peut bouger pendant l'apparition (pas reproductible, résolu ?)
  * une fois (pas reproductible) : flamme ne faisait mourir aucun perso
- * on ne peut pas bouger quand on apparait dans un mur
+ * il faut limiter différemment la portée de la bombe (en cas d'inifini) : il est possible qu'un obstacle empêche une branche de faire un tour complet, dans ce cas là l'autre branche ne doit pas être limitée...
  * 
  * tant qu'on y est, on va mettre ready-set-go, ce qui implique une durée minimale avant le début du match
  * p-ê à faire en même temps que le niveau apparait ? ou bien après ? ou pendant l'apparition des joueurs ?

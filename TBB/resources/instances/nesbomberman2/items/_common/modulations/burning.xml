@@ -52,7 +52,7 @@
 		<!-- intersection, same tile -> not an obstacle -->
 		<modulation frame="false" strength="0" >
 			<action name="MOVELOW" direction="ANY" contact="ANY"
-				tilePosition="SAME" orientation="ANY" actor="SOME" />
+				tilePosition="ANY" orientation="ANY" actor="SOME" />
 			<actor-restrictions />
 			<target-restrictions />
 			<actor-circumstances contact="INTERSECTION" tilePosition="SAME" orientation="ANY" />
