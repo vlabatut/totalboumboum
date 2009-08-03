@@ -88,7 +88,7 @@ public class FireEventManager extends EventManager
 	}
 
 	private void tileEnter(EngineEvent event)
-	{	if(gesture.equals(GestureName.BURNING))
+	{	if(gesture.equals(GestureName.BURNING) || gesture.equals(GestureName.APPEARING))
 		{	Fire fire = (Fire)sprite;
 			// fire enters a new tile
 			if(event.getSource()==sprite)
@@ -130,6 +130,7 @@ public class FireEventManager extends EventManager
 	{	gesture = GestureName.APPEARING;
 		spriteDirection = direction;
 		sprite.setGesture(gesture,spriteDirection,Direction.NONE,true);
+		sprite.getTile().addSprite(sprite);	
 	}
 	
 	/////////////////////////////////////////////////////////////////

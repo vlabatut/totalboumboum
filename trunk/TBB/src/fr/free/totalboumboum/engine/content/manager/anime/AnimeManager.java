@@ -25,17 +25,12 @@ import java.awt.image.BufferedImage;
 import java.util.Iterator;
 
 import fr.free.totalboumboum.configuration.Configuration;
-import fr.free.totalboumboum.configuration.GameVariables;
 import fr.free.totalboumboum.engine.content.feature.Direction;
 import fr.free.totalboumboum.engine.content.feature.event.EngineEvent;
 import fr.free.totalboumboum.engine.content.feature.gesture.Gesture;
-import fr.free.totalboumboum.engine.content.feature.gesture.GestureName;
 import fr.free.totalboumboum.engine.content.feature.gesture.anime.AnimeDirection;
 import fr.free.totalboumboum.engine.content.feature.gesture.anime.AnimeStep;
 import fr.free.totalboumboum.engine.content.sprite.Sprite;
-import fr.free.totalboumboum.engine.content.sprite.block.Block;
-import fr.free.totalboumboum.engine.content.sprite.floor.Floor;
-import fr.free.totalboumboum.engine.content.sprite.hero.Hero;
 
 public class AnimeManager
 {	/** sprite possédant ce manager */
