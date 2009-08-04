@@ -90,7 +90,7 @@ public class BombsetManager
 		{	if(bomb!=null)
 			{	bomb.setFlameRange(flameRange);
 				Tile tile = sprite.getTile();
-				SpecificAction specificAction = new SpecificAppear(bomb,tile);
+				SpecificAction specificAction = new SpecificAppear(bomb);
 				ActionAbility ablt = bomb.modulateAction(specificAction);
 				if(ablt.isActive())
 				{	bomb.setCurrentPosX(tile.getPosX());

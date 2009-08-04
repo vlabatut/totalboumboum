@@ -114,7 +114,7 @@ public class ExplosionManager
 						else
 							fire = explosion.makeFire("inside",tempTile);
 						fire.setOwner(owner);
-						SpecificAction specificAction = new SpecificAppear(fire,tempTile,direction);
+						SpecificAction specificAction = new SpecificAppear(fire,direction);
 						AbstractAbility ability = fire.modulateAction(specificAction);
 						blocked[i] = !ability.isActive();
 						if(blocked[i])

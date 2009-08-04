@@ -105,7 +105,7 @@ public class ItemEventManager extends EventManager
 
 	private void engDelayOver(EngineEvent event)
 	{	if(gesture.equals(GestureName.NONE) && event.getStringParameter().equals(DelayManager.DL_ENTER))
-		{	SpecificAction action = new SpecificAppear(sprite,sprite.getTile());
+		{	SpecificAction action = new SpecificAppear(sprite);
 			ActionAbility actionAbility = sprite.modulateAction(action);
 			// can appear >> appears
 			if(actionAbility.isActive())
@@ -122,7 +122,7 @@ public class ItemEventManager extends EventManager
 	private void engEnter(EngineEvent event)
 	{	if(gesture.equals(GestureName.NONE))
 		{	spriteDirection = event.getDirection();
-			SpecificAction action = new SpecificAppear(sprite,sprite.getTile());
+			SpecificAction action = new SpecificAppear(sprite);
 			ActionAbility actionAbility = sprite.modulateAction(action);
 			// can appear >> appears
 			if(actionAbility.isActive())
@@ -151,16 +151,6 @@ public class ItemEventManager extends EventManager
 	// ACTIONS			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	
-//TODO 3) réformer les actions spécifiques paramétrées par tile
-/*
- * TODO
- * on peut bouger pendant l'apparition (pas reproductible, résolu ?)
- * 
- * tant qu'on y est, on va mettre ready-set-go, ce qui implique une durée minimale avant le début du match
- * p-ê à faire en même temps que le niveau apparait ? ou bien après ? ou pendant l'apparition des joueurs ?
- * 
- * faire apparaitre des bombes d'entrée dans le level
- */
 	/////////////////////////////////////////////////////////////////
 	// FINISHED			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////

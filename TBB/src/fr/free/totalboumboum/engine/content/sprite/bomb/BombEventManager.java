@@ -264,7 +264,7 @@ public class BombEventManager extends EventManager
 	private void engDelayOver(EngineEvent event)
 	{	// end of entering
 		if(gesture.equals(GestureName.NONE) && event.getStringParameter().equals(DelayManager.DL_ENTER))
-		{	SpecificAction action = new SpecificAppear(sprite,sprite.getTile());
+		{	SpecificAction action = new SpecificAppear(sprite);
 			ActionAbility actionAbility = sprite.modulateAction(action);
 			// can appear >> appears
 			if(actionAbility.isActive())
@@ -384,7 +384,7 @@ public class BombEventManager extends EventManager
 	
 	private void engEnter(EngineEvent event)
 	{	spriteDirection = event.getDirection();
-		SpecificAction action = new SpecificAppear(sprite,sprite.getTile());
+		SpecificAction action = new SpecificAppear(sprite);
 		ActionAbility actionAbility = sprite.modulateAction(action);
 		// can appear >> appears
 		if(actionAbility.isActive())
