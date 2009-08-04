@@ -41,6 +41,7 @@ import javax.xml.parsers.ParserConfigurationException;
 import org.xml.sax.SAXException;
 
 import fr.free.totalboumboum.configuration.Configuration;
+import fr.free.totalboumboum.configuration.GameConstants;
 import fr.free.totalboumboum.configuration.GameVariables;
 import fr.free.totalboumboum.configuration.profile.Profile;
 import fr.free.totalboumboum.engine.container.bombset.BombsetMap;
@@ -670,20 +671,28 @@ System.out.println();
 	/////////////////////////////////////////////////////////////////
 	private Role[] entryRoles;
 	private Double[] entryDelays;
+	private String[] entryTexts;
 	private int entryIndex = -1;
 	
 	private void initEntryDurations()
 	{	entryIndex = -1;
 		entryRoles = new Role[]{Role.FLOOR,Role.BLOCK,Role.ITEM,Role.BOMB,Role.HERO};
-		entryDelays = new Double[entryRoles.length];
+		entryDelays = new Double[]{0d,0d,0d,0d,0d,GameConstants.READY_TIME,GameConstants.SET_TIME,GameConstants.GO_TIME};
+		entryTexts = new String[]{"","","","","",panel.getMessageTextReady(),panel.getMessageTextSet(),panel.getMessageTextGo()};
+		// set the roles
 		for(int i=0;i<entryRoles.length;i++)
 		{	double duration = level.getEntryDuration(entryRoles[i]);
 			if(i<entryRoles.length-1)
 				duration = duration/2; //so that sprites appear almost at the same time
 			entryDelays[i] = duration+Configuration.getEngineConfiguration().getMilliPeriod();//NOTE a little more time, just too be sure it goes OK
+			entryTexts[i] = entryRoles[i].toString(); //actually not used, but hey...
 //System.out.println("entryDurations["+i+"]="+entryDelays[i]);
 		}
-		
+		// unset the messages (for quicklaunch)
+		for(int i=entryRoles.length;i<entryDelays.length;i++)
+		{	if(entryTexts[i]==null)
+				entryDelays[i] = 0d;			
+		}
 	}
 	
 /*	private boolean entryStarted = false;
@@ -725,14 +734,18 @@ System.out.println();
 			{	entryIndex++;
 //System.out.println(totalTime);		
 				// show next sprites
-				if(entryIndex<entryDelays.length)
+				if(entryIndex<entryRoles.length)
 				{	EngineEvent event = new EngineEvent(EngineEvent.ROUND_ENTER);
 					event.setDirection(Direction.NONE);
 					level.spreadEvent(event,entryRoles[entryIndex]);
 				}
+				// show "ready"
+				else if(entryIndex<entryDelays.length)
+					level.setDisplayedText(entryTexts[entryIndex]);
 				// start the game
 				else 
-				{	EngineEvent event = new EngineEvent(EngineEvent.ROUND_START);
+				{	level.setDisplayedText(null);
+					EngineEvent event = new EngineEvent(EngineEvent.ROUND_START);
 					level.spreadEvent(event);
 				}
 			}

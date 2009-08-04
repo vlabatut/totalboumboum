@@ -44,6 +44,7 @@ import fr.free.totalboumboum.engine.content.feature.event.AbstractEvent;
 import fr.free.totalboumboum.engine.content.sprite.Sprite;
 import fr.free.totalboumboum.engine.content.sprite.hero.Hero;
 import fr.free.totalboumboum.engine.loop.Loop;
+import fr.free.totalboumboum.gui.tools.MessageDisplayer;
 import fr.free.totalboumboum.tools.CalculusTools;
 import fr.free.totalboumboum.tools.StringTools;
 
@@ -83,7 +84,7 @@ public class Level
 	private int globalWidth;
 	private int globalHeight;
 	private double pixelLeftX; // pas central
-	private double pixelUpY; // pas central
+	private double pixelTopY; // pas central
 	private double pixelWidth;
 	private double pixelHeight;
 
@@ -91,7 +92,7 @@ public class Level
 	{	this.globalWidth = globalWidth;
 		this.globalHeight = globalHeight;
 		this.pixelLeftX = globalLeftX;
-		this.pixelUpY = globalUpY;
+		this.pixelTopY = globalUpY;
 		this.pixelWidth = globalWidth*GameVariables.scaledTileDimension;
 		this.pixelHeight = globalHeight*GameVariables.scaledTileDimension;
 	}
@@ -99,7 +100,7 @@ public class Level
 	{	return pixelLeftX;
 	}
 	public double getGlobalUpY()
-	{	return pixelUpY;
+	{	return pixelTopY;
 	}
 	public int getGlobalWidth()
 	{	return globalWidth;
@@ -434,7 +435,7 @@ public class Level
 	{	x = CalculusTools.round(x);
 		y = CalculusTools.round(y);
 		double difX = x-pixelLeftX;
-		double difY = y-pixelUpY;
+		double difY = y-pixelTopY;
 		double rX = difX/GameVariables.scaledTileDimension;
 		double rY = difY/GameVariables.scaledTileDimension;
 		int rdX = (int)rX;//(int)Math.round(rX);
@@ -498,9 +499,9 @@ public class Level
 	}
 	public double normalizePositionY(double y)
 	{	double result = y;
-		while(result<pixelUpY)
+		while(result<pixelTopY)
 			result = result + pixelHeight;
-		while(result>pixelUpY+pixelHeight)
+		while(result>pixelTopY+pixelHeight)
 			result = result - pixelHeight;
 		return result;
 	}
@@ -513,7 +514,7 @@ public class Level
 	}
 	public boolean isInsidePositionY(double y)
 	{	//NOTE comparaison relative?
-		return y>=pixelUpY && y<=pixelUpY+pixelHeight;
+		return y>=pixelTopY && y<=pixelTopY+pixelHeight;
 	}
 	
 	/////////////////////////////////////////////////////////////////
@@ -581,6 +582,8 @@ public class Level
 			drawTime(g);
 		if(loop.getShowFPS())
 			drawFPS(g);
+		if(displayedText!=null)
+			drawDisplayedText(g);
 	}
 
 	//NOTE optimisation : à effectuer seulement pour les tiles visibles
@@ -812,6 +815,35 @@ public class Level
 		return result;
 	}	
 	
+	/////////////////////////////////////////////////////////////////
+	// DISPLAYED TEXT		/////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	private String displayedText = null;
+	private MessageDisplayer messageDisplayer;
+	private Font displayedTextFont;
+	
+	public void setDisplayedText(String text)
+	{	displayedTextFont = loop.getPanel().getMessageFont(pixelWidth,pixelHeight);
+		displayedTextFont = displayedTextFont.deriveFont(Font.BOLD);
+		this.displayedText = text;
+		int xc = (int)Math.round(pixelLeftX+pixelWidth/2);
+		int yc = (int)Math.round(pixelTopY+pixelHeight/2);
+		messageDisplayer = new MessageDisplayer(displayedText,displayedTextFont,xc,yc);
+	}
+	
+	private void drawDisplayedText(Graphics g)
+	{	// basic
+//		g.setColor(Color.WHITE);
+//		g.setFont(displayedTextFont);
+//		FontMetrics metrics = g.getFontMetrics(displayedTextFont);
+//		Rectangle2D box = metrics.getStringBounds(displayedText,g);
+//		int x = (int)Math.round(pixelLeftX+pixelWidth/2-box.getWidth()/2);
+//		int y = (int)Math.round(pixelTopY+pixelHeight/2+box.getHeight()/2);
+//		g.drawString(displayedText,x,y);
+		// effects
+		messageDisplayer.paint(g);
+	}
+
 	/////////////////////////////////////////////////////////////////
 	// FINISHED				/////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////

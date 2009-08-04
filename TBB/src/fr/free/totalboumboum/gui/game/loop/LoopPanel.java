@@ -24,6 +24,7 @@ package fr.free.totalboumboum.gui.game.loop;
 import java.awt.Canvas;
 import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.GraphicsConfiguration;
 import java.awt.Image;
@@ -33,6 +34,8 @@ import java.awt.event.ActionEvent;
 import java.awt.image.BufferStrategy;
 import java.awt.image.BufferedImage;
 import java.awt.image.VolatileImage;
+import java.util.Arrays;
+import java.util.List;
 
 import javax.swing.SwingUtilities;
 
@@ -43,6 +46,8 @@ import fr.free.totalboumboum.gui.common.structure.MenuContainer;
 import fr.free.totalboumboum.gui.common.structure.panel.menu.MenuPanel;
 import fr.free.totalboumboum.gui.common.structure.panel.menu.SimpleMenuPanel;
 import fr.free.totalboumboum.gui.data.configuration.GuiConfiguration;
+import fr.free.totalboumboum.gui.tools.GuiKeys;
+import fr.free.totalboumboum.gui.tools.GuiTools;
 
 public class LoopPanel extends SimpleMenuPanel implements LoopRenderPanel
 {	private static final long serialVersionUID = 1L;
@@ -197,5 +202,36 @@ public class LoopPanel extends SimpleMenuPanel implements LoopRenderPanel
 	@Override
 	public void actionPerformed(ActionEvent arg0)
 	{	
+	}
+
+	/////////////////////////////////////////////////////////////////
+	// READY-SET-GO			/////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	@Override
+	public String getMessageTextGo()
+	{	String result = GuiConfiguration.getMiscConfiguration().getLanguage().getText(GuiKeys.GAME_ROUND_MESSAGES_GO);
+		return result;
+	}
+
+	@Override
+	public String getMessageTextReady() 
+	{	String result = GuiConfiguration.getMiscConfiguration().getLanguage().getText(GuiKeys.GAME_ROUND_MESSAGES_READY);
+		return result;
+	}
+
+	@Override
+	public String getMessageTextSet()
+	{	String result = GuiConfiguration.getMiscConfiguration().getLanguage().getText(GuiKeys.GAME_ROUND_MESSAGES_SET);
+		return result;
+	}
+
+	@Override
+	public Font getMessageFont(double width, double height)
+	{	String txts[] = {getMessageTextGo(),getMessageTextReady(),getMessageTextSet()};
+		List<String> texts = Arrays.asList(txts);
+		Font result = GuiConfiguration.getMiscConfiguration().getFont();
+		float fontSize = GuiTools.getOptimalFontSize(width,height,texts);
+		result = result.deriveFont(fontSize);
+		return result;
 	}
 }

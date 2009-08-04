@@ -512,6 +512,11 @@
 			<group name="Statistics">
 				<text name="Title" value="Round statistics"  tooltip="Round statistics" />
 			</group>
+			<group name="Messages">
+				<text name="Ready" value="Ready?" />
+				<text name="Set" value="Set?" />
+				<text name="Go" value="Boom!" />
+			</group>
 		</group>
 		
 	</group>

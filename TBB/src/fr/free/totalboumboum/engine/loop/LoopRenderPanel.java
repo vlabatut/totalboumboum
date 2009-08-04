@@ -21,6 +21,7 @@ package fr.free.totalboumboum.engine.loop;
  * 
  */
 
+import java.awt.Font;
 import java.awt.event.KeyListener;
 
 public interface LoopRenderPanel
@@ -31,4 +32,9 @@ public interface LoopRenderPanel
 	
 	public void addKeyListener(KeyListener listener);
 	public void removeKeyListener(KeyListener listener);
+	
+	public String getMessageTextReady();
+	public String getMessageTextSet();
+	public String getMessageTextGo();
+	public Font getMessageFont(double width, double height);
 }

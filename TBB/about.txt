@@ -21,6 +21,10 @@ This product includes softwares developed by:
     Copyright 2005 Chris Adamson & Joshua Marinacci 
     http://weblogs.java.net/blog/invalidname
     http://weblogs.java.net/blog/joshy
+  + Adam Walker:
+    Class fr.free.totalboumboum.gui.tools.MessageDisplayer
+    Copyright 2005 Adam Walker
+    http://www.walkersoftware.net/articles/text-effects-in-java
   + Sun Microsystems Inc: 
     Class fr.free.totalboumboum.gui.tools.SpringUtilities
     Copyright 1995-2008 Sun Microsystems Inc.

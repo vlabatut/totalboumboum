@@ -48,6 +48,7 @@ import java.awt.BorderLayout;
 import java.awt.Canvas;
 import java.awt.Container;
 import java.awt.Dimension;
+import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
@@ -221,5 +222,34 @@ public class QuickFrame extends AbstractFrame implements ActionListener, LoopRen
 	@Override
 	public void actionPerformed(ActionEvent e)
 	{	exit();
+	}
+
+	/////////////////////////////////////////////////////////////////
+	// READY-SET-GO			/////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	@Override
+	public String getMessageTextGo()
+	{	String result = null;
+		return result;
+	}
+
+	@Override
+	public String getMessageTextReady() 
+	{	String result = null;
+		return result;
+	}
+
+	@Override
+	public String getMessageTextSet()
+	{	String result = null;
+		return result;
+	}
+
+	@Override
+	public Font getMessageFont(double width, double height)
+	{	Font result = GuiConfiguration.getMiscConfiguration().getFont();
+		float fontSize = (float)height/4;
+		result = result.deriveFont(fontSize);
+		return result;
 	}
 }
