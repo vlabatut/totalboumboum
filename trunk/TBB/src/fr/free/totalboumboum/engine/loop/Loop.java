@@ -147,7 +147,7 @@ public class Loop implements Runnable, Serializable
 			j++;
 		}
 		
-		initEntryDurations();
+		initEntries();
 	}
 	
 	public void loadStepOver()
@@ -525,7 +525,7 @@ System.out.println();
 			}
 			
 			// entry
-			manageEntry();
+			manageEntries();
 			
 			// normal update (level and AI)
 			level.update();
@@ -671,14 +671,13 @@ System.out.println();
 	/////////////////////////////////////////////////////////////////
 	private Role[] entryRoles;
 	private Double[] entryDelays;
-	private String[] entryTexts;
 	private int entryIndex = -1;
 	
-	private void initEntryDurations()
+	private void initEntries()
 	{	entryIndex = -1;
 		entryRoles = new Role[]{Role.FLOOR,Role.BLOCK,Role.ITEM,Role.BOMB,Role.HERO};
 		entryDelays = new Double[]{0d,0d,0d,0d,0d,GameConstants.READY_TIME,GameConstants.SET_TIME,GameConstants.GO_TIME};
-		entryTexts = new String[]{"","","","","",panel.getMessageTextReady(),panel.getMessageTextSet(),panel.getMessageTextGo()};
+		String[] entryTexts = new String[]{null,null,null,null,null,panel.getMessageTextReady(),panel.getMessageTextSet(),panel.getMessageTextGo()};
 		// set the roles
 		for(int i=0;i<entryRoles.length;i++)
 		{	double duration = level.getEntryDuration(entryRoles[i]);
@@ -693,6 +692,8 @@ System.out.println();
 		{	if(entryTexts[i]==null)
 				entryDelays[i] = 0d;			
 		}
+		// init the message displayers
+		level.initMessageDisplayers(entryTexts);
 	}
 	
 /*	private boolean entryStarted = false;
@@ -702,7 +703,7 @@ System.out.println();
 	private double bombsEntryDuration = 0;
 	private double heroesEntryDuration = 0;
 
-	private void initEntryDurations()
+	private void initEntries()
 	{	entryStarted = false;
 		// level
 		floorsEntryDuration = level.getEntryDuration(Role.FLOOR);
@@ -718,7 +719,7 @@ System.out.println();
 		}
 	}
 */	
-	private void manageEntry()
+	private void manageEntries()
 	{	// first time
 		if(entryIndex==-1)
 		{	entryIndex ++;
@@ -739,12 +740,14 @@ System.out.println();
 					event.setDirection(Direction.NONE);
 					level.spreadEvent(event,entryRoles[entryIndex]);
 				}
-				// show "ready"
+				// show ready-set-go
 				else if(entryIndex<entryDelays.length)
-					level.setDisplayedText(entryTexts[entryIndex]);
+				{	level.updateMessageDisplayer(entryIndex);
+//System.out.println(totalTime);				
+				}
 				// start the game
 				else 
-				{	level.setDisplayedText(null);
+				{	level.updateMessageDisplayer(-1);
 					EngineEvent event = new EngineEvent(EngineEvent.ROUND_START);
 					level.spreadEvent(event);
 				}

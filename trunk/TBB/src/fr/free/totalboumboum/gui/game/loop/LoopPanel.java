@@ -230,7 +230,7 @@ public class LoopPanel extends SimpleMenuPanel implements LoopRenderPanel
 	{	String txts[] = {getMessageTextGo(),getMessageTextReady(),getMessageTextSet()};
 		List<String> texts = Arrays.asList(txts);
 		Font result = GuiConfiguration.getMiscConfiguration().getFont();
-		float fontSize = GuiTools.getOptimalFontSize(width,height,texts);
+		float fontSize = GuiTools.getOptimalFontSize(width*0.9,height*0.9,texts);
 		result = result.deriveFont(fontSize);
 		return result;
 	}

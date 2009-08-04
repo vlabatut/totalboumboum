@@ -958,6 +958,10 @@ public class GuiTools
 	public final static float FONT_RATIO = 0.8f; // font height relatively to the containing label (or component)
 	public final static float FONT_TEXT_RATIO = 0.75f; // font height relatively to the container title font 
 
+	public static Graphics getGraphics()
+	{	return graphics;	
+	}
+	
 	private static void initFonts()
 	{	BufferedImage img = new BufferedImage(10,10,BufferedImage.TYPE_INT_ARGB);
 		graphics = img.getGraphics();			
