@@ -825,14 +825,19 @@ public class Launcher
 	 * - correction d'un bug dans la gestion des animations et trajectoires proportionnelles
 	 * - correction d'un bug dans la génération des explosions en croix (flamme trop longue)
 	 * - définition d'un système permettant au niveau d'apparaître graduellement au début du round
-	 * 
 	 * - simplification de l'initialisation des actions afin de ne plus avoir à spécifier une tile (le cas où la tile manquait a été supprimé)
 	 * 
-	 *   
+	 * 
+	 * tant qu'on y est, on va mettre ready-set-go, ce qui implique une durée minimale avant le début du match
+	 * p-ê à faire en même temps que le niveau apparait ? ou bien après ? ou pendant l'apparition des joueurs ?
+	 * 
+	 * faire apparaitre des bombes d'entrée dans le level
 	 * 
 	 * - bug d'affichage quand les flammes se croisent au cours de plusieurs explosions: la dernière n'est pas affichée
 	 * - sbm1 : le délai de retardement ne doit pas être réinitialisé a la suite d'un punch
 	 * en fait ça reprend exactement où ça ne était au moment ou la bombe touche le sol
+	 * - il y a visiblement un bug dans la GUI quand on commence une partie rapide puis revient au menu principal et en recommence une autre : la précédente ne semble pas complètement réinitialisée
+	 *  >> à voir : p-ê simplement une fausse manip. faire : choisir un seul niveau, commencer, recommencer avec un niveau de plus et voir si le nouveau niveau apparait bien dans la nouvelle partie
 	 * 
 	 * - lors du calcul des points, il faut forcer la présence d'un classement: ça facilite énormément de traitements en aval
 	 *   au pire, si le classement est inutile (ex: simple total), on définit un classement-identité (pts utilisés pr le classement <=> pts marqués)

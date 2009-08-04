@@ -126,7 +126,7 @@ public class BlockEventManager extends EventManager
 
 	private void engDelayOver(EngineEvent event)
 	{	if(gesture.equals(GestureName.HIDING))
-		{	SpecificAction specificAction = new SpecificAppear(sprite,sprite.getTile(),Direction.NONE);
+		{	SpecificAction specificAction = new SpecificAppear(sprite,Direction.NONE);
 			AbstractAbility ability = sprite.modulateAction(specificAction);
 			if(ability.isActive())
 			{	StateAbility ablt = sprite.modulateStateAbility(StateAbilityName.BLOCK_SPAWN);

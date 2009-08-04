@@ -49,7 +49,7 @@ public abstract class SpecificAction
 		this.tile = actor.getTile();
 		initGeneralAction();
 	}
-
+/*
 	protected SpecificAction(ActionName name, Sprite actor, Tile tile)
 	{	this.name = name;
 		this.actor = actor;
@@ -59,7 +59,7 @@ public abstract class SpecificAction
 		this.tile = tile;
 		initGeneralAction();
 	}
-
+*/
 	protected SpecificAction(ActionName name, Sprite actor, Sprite target, Direction direction, Contact contact, TilePosition tilePosition, Orientation orientation)
 	{	this.name = name;
 		this.actor = actor;
