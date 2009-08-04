@@ -24,9 +24,8 @@ import java.util.Random;
  */
 public class MessageDisplayer
 {
-	public MessageDisplayer(String text, Font font, int xc, int yc)
+	public MessageDisplayer(Font font, int xc, int yc)
 	{	setRenderingHints();
-		this.text = text;
 		this.font = font;
 		this.xc = xc;
 		this.yc = yc;
@@ -41,16 +40,65 @@ public class MessageDisplayer
 	/////////////////////////////////////////////////////////////////
 	// SHAPES			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	private Shape shape = null;
-	private Shape outline = null;
+	private Shape shape;
+	private Shape outline;
 
 	/////////////////////////////////////////////////////////////////
 	// TEXT				/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	private String text = "Default";
 	private Color textColor = new Color(175,175,180);
 	private Font font;
 
+	public void updateText(String text)
+	{	shape = null;
+		outline = null;
+		
+		Graphics2D g = (Graphics2D)GuiTools.getGraphics();
+		Stroke bs = new BasicStroke(fatten);
+		GlyphVector gv = font.createGlyphVector(g.getFontRenderContext(),text);
+		GeneralPath path = new GeneralPath();
+		Random random = new Random();
+		
+		if(jiggle)
+		{	for(int i=0;i<gv.getNumGlyphs();i++)
+			{	// 1 degrees = 0.0174532925 radians
+				double r = (random.nextInt(2*maxTilt)-maxTilt)*0.0174532925;
+				AffineTransform trans = gv.getGlyphTransform(i);
+				Shape sh = gv.getGlyphOutline(i);
+				Rectangle shr = sh.getBounds();
+				double cx = shr.getCenterX();
+				double cy = shr.getCenterY();
+				// jdk1.5 return null???
+				if(trans==null)
+					trans = new AffineTransform();
+				trans.rotate(r,cx,cy);
+				path.transform(trans);
+				path.append(sh,false);
+				try
+				{	path.transform(trans.createInverse());
+				}
+				catch(Exception e)
+				{	System.out.println("foo");
+				}
+			}
+		}
+		else
+		{	path.append(gv.getOutline(),false);
+		}
+		
+		if(fatten==0)
+		{	shape = path;
+		}
+		else
+		{	// What we need is something like photoshop's expand selection.
+			Area area = new Area(path);
+			area.add(new Area(bs.createStrokedShape(path)));
+			shape = area;
+		}
+		Stroke stroke = new BasicStroke(2);
+		outline = stroke.createStrokedShape(shape);
+	}
+	
 	public void setTextColor(Color textColor)
 	{	this.textColor = textColor;
 	}
@@ -83,7 +131,8 @@ public class MessageDisplayer
 	// JIGGLE			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	private boolean jiggle = true;
-
+	private int maxTilt = 30;
+	
 	public void setJiggle(boolean jiggle)
 	{	this.jiggle = jiggle;
 	}
@@ -152,7 +201,7 @@ public class MessageDisplayer
 	/////////////////////////////////////////////////////////////////
 	// FATTEN			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	private float fatten = 1.3f;
+	private float fatten = 1f;
 
 	public void setFatten(float fatten)
 	{	this.fatten = fatten;
@@ -222,52 +271,6 @@ public class MessageDisplayer
 	{	Graphics2D g = (Graphics2D)go;
 		g.setRenderingHints(renderingHints);
 	
-		if(shape==null)
-		{	Stroke bs = new BasicStroke(fatten);
-			GlyphVector gv = font.createGlyphVector(g.getFontRenderContext(),text);
-			int maxTilt = 20;
-			GeneralPath path = new GeneralPath();
-			Random random = new Random();
-			
-			if(jiggle)
-			{	for(int i=0;i<gv.getNumGlyphs();i++)
-				{	// 1 degrees = 0.0174532925 radians
-					double r = (random.nextInt(2*maxTilt)-maxTilt)*0.0174532925;
-					AffineTransform trans = gv.getGlyphTransform(i);
-					Shape sh = gv.getGlyphOutline(i);
-					Rectangle shr = sh.getBounds();
-					double cx = shr.getCenterX();
-					double cy = shr.getCenterY();
-					// jdk1.5 return null???
-					if(trans==null)
-						trans = new AffineTransform();
-					trans.rotate(r,cx,cy);
-					path.transform(trans);
-					path.append(sh,false);
-					try
-					{	path.transform(trans.createInverse());
-					}
-					catch(Exception e)
-					{	System.out.println("foo");
-					}
-				}
-			}
-			else
-			{	path.append(gv.getOutline(),false);
-			}
-			
-			if(fatten==0)
-			{	shape = path;
-			}
-			else
-			{	// What we need is something like photoshop's expand selection.
-				Area area = new Area(path);
-				area.add(new Area(bs.createStrokedShape(path)));
-				shape = area;
-			}
-			Stroke stroke = new BasicStroke(2);
-			outline = stroke.createStrokedShape(shape);
-		}
 		Rectangle r = shape.getBounds();
 		int x = xc - r.width/2;
 		int y = yc + r.height/2;

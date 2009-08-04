@@ -826,10 +826,9 @@ public class Launcher
 	 * - correction d'un bug dans la génération des explosions en croix (flamme trop longue)
 	 * - définition d'un système permettant au niveau d'apparaître graduellement au début du round
 	 * - simplification de l'initialisation des actions afin de ne plus avoir à spécifier une tile (le cas où la tile manquait a été supprimé)
-	 * - apparition de messages au début du round (ready-set-go)
+	 * - apparition de messages au début du round (ready-set-go), avec graphismes basiques puis améliorés
 	 * 
 	 * faire apparaitre des bombes d'entrée dans le level
-	 * améliorer le ready-set-go (font doit être bold ?)
 	 * 
 	 * - bug d'affichage quand les flammes se croisent au cours de plusieurs explosions: la dernière n'est pas affichée
 	 * - sbm1 : le délai de retardement ne doit pas être réinitialisé a la suite d'un punch
@@ -997,6 +996,7 @@ public class Launcher
 	/*TODO BUGS
 	 * - il semblerait que la direction dans la SpecificAction et dans la GeneralAction correspondante ne soit pas la même...
 	 * - impossible de poser une bombe quand on est en train de buter contre un mur en direction upleft (et uniquement cette direction pr NES2) et downleft (pr SBM1)
+	 * 	>> viendrait de swing ou du clavier (pb matériel)
 	 * 
 	 */
 	
