@@ -1044,7 +1044,7 @@ public class GuiTools
 	 * @param texts
 	 * @return
 	 */
-	public static int getOptimalFontSize(double width, double height, ArrayList<String> texts)
+	public static int getOptimalFontSize(double width, double height, List<String> texts)
 	{	int result;
 		Iterator<String> it = texts.iterator();
 		int longest = 0;

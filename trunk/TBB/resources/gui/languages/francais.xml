@@ -512,6 +512,11 @@
 			<group name="Statistics">
 				<text name="Title" value="Statistiques de la manche"  tooltip="Statistiques de la manche" />
 			</group>
+			<group name="Messages">
+				<text name="Ready" value="A vos marques !" />
+				<text name="Set" value="Prêt ?" />
+				<text name="Go" value="Boum !" />
+			</group>
 		</group>
 	</group>
 

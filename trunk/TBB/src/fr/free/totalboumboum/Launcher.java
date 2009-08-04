@@ -826,12 +826,10 @@ public class Launcher
 	 * - correction d'un bug dans la génération des explosions en croix (flamme trop longue)
 	 * - définition d'un système permettant au niveau d'apparaître graduellement au début du round
 	 * - simplification de l'initialisation des actions afin de ne plus avoir à spécifier une tile (le cas où la tile manquait a été supprimé)
-	 * 
-	 * 
-	 * tant qu'on y est, on va mettre ready-set-go, ce qui implique une durée minimale avant le début du match
-	 * p-ê à faire en même temps que le niveau apparait ? ou bien après ? ou pendant l'apparition des joueurs ?
+	 * - apparition de messages au début du round (ready-set-go)
 	 * 
 	 * faire apparaitre des bombes d'entrée dans le level
+	 * améliorer le ready-set-go (font doit être bold ?)
 	 * 
 	 * - bug d'affichage quand les flammes se croisent au cours de plusieurs explosions: la dernière n'est pas affichée
 	 * - sbm1 : le délai de retardement ne doit pas être réinitialisé a la suite d'un punch

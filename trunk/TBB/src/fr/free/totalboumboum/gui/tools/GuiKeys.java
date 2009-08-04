@@ -89,6 +89,7 @@ public class GuiKeys
 	public static final String FIXED = "Fixed";
 	public static final String FOLDER = "Folder";
 	public static final String GAME = "Game";
+	public static final String GO = "Go";
 	public static final String GRASS = "Grass";
 	public static final String GREEN = "Green";
 	public static final String GREY = "Grey";
@@ -117,6 +118,7 @@ public class GuiKeys
 	public static final String MATCH = "Match";
 	public static final String MATCHES = "Matches";
 	public static final String MENU = "Menu";
+	public static final String MESSAGES = "Messages";
 	public static final String MINUS = "Minus";
 	public static final String NAME = "Name";
 	public static final String NEW = "New";
@@ -156,6 +158,7 @@ public class GuiKeys
 	public static final String RANKS = "Ranks";
 	public static final String RANKINGS = "Rankings";
 	public static final String RANKPOINTS = "Rankpoints";
+	public static final String READY = "Ready";
 	public static final String RED = "Red";
 	public static final String REGULAR = "Regular";
 	public static final String RESOURCES = "Resources";
@@ -167,6 +170,7 @@ public class GuiKeys
 	public static final String SAVE = "Save";
 	public static final String SELECT = "Select";
 	public static final String SEQUENCE = "Sequence";
+	public static final String SET = "Set";
 	public static final String SETTINGS = "Settings";
 	public static final String SINGLE = "Single";
 	public static final String SPRITE = "Sprite";
@@ -641,6 +645,11 @@ public class GuiKeys
 			/* STATISTICS */
 			public static final String GAME_ROUND_STATISTICS = GAME_ROUND+STATISTICS;
 			public static final String GAME_ROUND_STATISTICS_TITLE = GAME_ROUND_STATISTICS+TITLE;
+			/* MESSAGES */
+			public static final String GAME_ROUND_MESSAGES = GAME_ROUND+MESSAGES;
+			public static final String GAME_ROUND_MESSAGES_READY = GAME_ROUND_MESSAGES+READY;
+			public static final String GAME_ROUND_MESSAGES_SET = GAME_ROUND_MESSAGES+SET;
+			public static final String GAME_ROUND_MESSAGES_GO = GAME_ROUND_MESSAGES+GO;
 		
 	/////////////////////////////////////////////////////////////////
 	// COMMON CONTENT	/////////////////////////////////////////////
