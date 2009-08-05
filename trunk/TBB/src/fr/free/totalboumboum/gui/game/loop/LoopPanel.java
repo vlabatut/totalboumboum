@@ -62,6 +62,7 @@ public class LoopPanel extends SimpleMenuPanel implements LoopRenderPanel
 	
 	public LoopPanel(MenuContainer container, MenuPanel parent, Loop loop)
 	{	super(container,parent);
+		setBackground(Color.BLACK);
     	setIgnoreRepaint(true);
 
 		// background image

@@ -48,14 +48,17 @@ public class ZoneLoader
 		String schemaFolder = FileTools.getSchemasPath();
 		String individualFolder = folder;
 		File schemaFile,dataFile;
+		
 		// opening
 		dataFile = new File(individualFolder+File.separator+FileTools.FILE_ZONE+FileTools.EXTENSION_XML);
 		schemaFile = new File(schemaFolder+File.separator+FileTools.FILE_ZONE+FileTools.EXTENSION_SCHEMA);
 		root = XmlTools.getRootFromFile(dataFile,schemaFile);
+		
 		// tiles random variable
 		Element variables = root.getChild(XmlTools.ELT_VARIABLE_TILES);
 		HashMap<String,VariableTile> variableTiles = VariableTilesLoader.loadVariableTilesElement(variables);
 		result.setVariableTiles(variableTiles);
+		
 		// matrix
 		Element matrx = root.getChild(XmlTools.ELT_MATRIX);
 		loadMatrixElement(matrx,globalHeight,globalWidth,result);
@@ -74,7 +77,7 @@ public class ZoneLoader
     		List<Element> elementsL = line.getChildren(XmlTools.ELT_TILE);
         	Iterator<Element> iL = elementsL.iterator();
         	while(iL.hasNext())
-        	{	String[] content = {null,null,null};
+        	{	String[] content = {null,null,null,null};
         		Element tile = iL.next();
         		int posT = Integer.parseInt(tile.getAttribute(XmlTools.ATT_POSITION).getValue().trim());
         		ZoneTile zt = new ZoneTile(posL,posT);
@@ -88,7 +91,10 @@ public class ZoneLoader
     				zt.setBlock(content[1]);
     			// items
     			if(content[2]!=null)
-    				zt.setItem(content[2]);        		
+    				zt.setItem(content[2]);
+    			// bombs
+    			if(content[3]!=null)
+    				zt.setBomb(content[3]);        		
         		// variable part
         		Element elt = tile.getChild(XmlTools.ELT_REFERENCE);
         		if(elt!=null)
@@ -104,13 +110,15 @@ public class ZoneLoader
     
     @SuppressWarnings("unchecked")
     public static String[] loadBasicTileElement(Element root)
-    {	String[] result = new String[3];
-		// floor
+    {	String[] result = new String[4];
+		
+    	// floor
 		List<Element> elementsT = root.getChildren(XmlTools.ELT_FLOOR);
 		if(elementsT.size()>0)
 		{	String name = elementsT.get(0).getAttribute(XmlTools.ATT_NAME).getValue();
 			result[0] = name;
 		}
+		
 		// block
 		elementsT = root.getChildren(XmlTools.ELT_BLOCK);
 		if(elementsT.size()>0)
@@ -123,13 +131,22 @@ public class ZoneLoader
 				group = Theme.DEFAULT_GROUP;
 			result[1] = group+Theme.GROUP_SEPARATOR+name;
 		}
+		
 		// item
 		elementsT = root.getChildren(XmlTools.ELT_ITEM);
 		if(elementsT.size()>0)
-		{	String type = elementsT.get(0).getAttribute(XmlTools.ATT_TYPE).getValue();
-			result[2] = type;
+		{	String name = elementsT.get(0).getAttribute(XmlTools.ATT_NAME).getValue();
+			result[2] = name;
 		}
-		//
+
+		// bomb
+		elementsT = root.getChildren(XmlTools.ELT_BOMB);
+		if(elementsT.size()>0)
+		{	String name = elementsT.get(0).getAttribute(XmlTools.ATT_NAME).getValue();
+			String range = elementsT.get(0).getAttribute(XmlTools.ATT_RANGE).getValue();
+			result[3] = name+":"+range;
+		}
+
 		return result;
     }
 }

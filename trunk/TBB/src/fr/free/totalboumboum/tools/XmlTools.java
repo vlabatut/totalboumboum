@@ -288,6 +288,7 @@ public class XmlTools
 	public static final String ATT_RANDOMIZE_LEGS = "randomizeLegs"; 
 	public static final String ATT_RANDOMIZE_PARTS = "randomizeParts"; 
 	public static final String ATT_RANDOMIZE_PLAYERS = "randomizePlayers"; 
+	public static final String ATT_RANGE = "range";
 	public static final String ATT_RANK = "rank";
 	public static final String ATT_RANKING = "ranking";
 	public static final String ATT_RED = "red";

@@ -12,10 +12,10 @@
 		</variable-tile>
 		<variable-tile name="itemTile">
 			<value proba="0.5" >
-				<item type="extrabomb" />
+				<item name="extrabomb" />
 			</value>
 			<value proba="0.5" >
-				<item type="extraflame" />
+				<item name="extraflame" />
 			</value>
 		</variable-tile>
 	</variable-tiles>

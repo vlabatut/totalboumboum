@@ -25,20 +25,53 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Iterator;
 
-
 public class VariableTile implements Serializable
 {	private static final long serialVersionUID = 1L;
-
-	private ArrayList<ValueTile> values = new ArrayList<ValueTile>();
-	private ArrayList<Integer> counts;
-	private String name;//debug
-	private int totalCount;
-	private int totalOccurrences = 0;
 	
 	public VariableTile(String name)
 	{	this.name = name;
 	}
 	
+	/////////////////////////////////////////////////////////////////
+	// NAME				/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	private String name;//debug
+
+	public String getName()
+	{	return name;
+	}
+
+	/////////////////////////////////////////////////////////////////
+	// VALUES			/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	private ArrayList<ValueTile> values = new ArrayList<ValueTile>();
+
+	public ArrayList<ValueTile> getValues()
+	{	return values;
+	}
+	
+	public void addValue(ValueTile valueItem)
+	{	values.add(valueItem);		
+	}
+	
+	/////////////////////////////////////////////////////////////////
+	// PROBAS			/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	public void setProba(int index, float proba)
+	{	values.get(index).setProba(proba);				
+	}
+	
+	public float getProba(int index)
+	{	return values.get(index).getProba();				
+	}
+
+	/////////////////////////////////////////////////////////////////
+	// OCCURRENCES		/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	private ArrayList<Integer> counts;
+	private int totalCount;
+	private int totalOccurrences = 0;
+
 	public void incrementOccurrencesCount()
 	{	totalOccurrences++;
 	}
@@ -50,6 +83,9 @@ public class VariableTile implements Serializable
 		totalCount = 0;
 	}
 	
+	/////////////////////////////////////////////////////////////////
+	// GENERATION		/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
 	/**
 	 * Gets the next value for this variable, according to its probability distribution.
 	 * At first, I used Math.random() directly, but since the length of the series was too short,
@@ -67,6 +103,7 @@ public class VariableTile implements Serializable
 			result = getNextRandomly();
 		return result;
 	}
+	
 	private ValueTile getNextControlled()
 	{	ValueTile result;
 		// count frequencies
@@ -134,22 +171,5 @@ public class VariableTile implements Serializable
 				j++;
 		}
 		return result;
-	}
-	
-	public ArrayList<ValueTile> getValues()
-	{	return values;
-	}
-	public void addValue(ValueTile valueItem)
-	{	values.add(valueItem);		
-	}
-	public void setProba(int index, float proba)
-	{	values.get(index).setProba(proba);				
-	}
-	public float getProba(int index)
-	{	return values.get(index).getProba();				
-	}
-
-	public String getName()
-	{	return name;
 	}
 }

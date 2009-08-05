@@ -47,6 +47,7 @@ import fr.free.totalboumboum.engine.container.tile.Tile;
 import fr.free.totalboumboum.engine.container.zone.Zone;
 import fr.free.totalboumboum.engine.container.zone.ZoneLoader;
 import fr.free.totalboumboum.engine.content.sprite.block.Block;
+import fr.free.totalboumboum.engine.content.sprite.bomb.Bomb;
 import fr.free.totalboumboum.engine.content.sprite.floor.Floor;
 import fr.free.totalboumboum.engine.content.sprite.item.Item;
 import fr.free.totalboumboum.engine.loop.Loop;
@@ -264,7 +265,8 @@ public class HollowLevel implements Serializable
     {	// theme
     	Theme theme = ThemeLoader.loadTheme(themePath);
 //		level.setTheme(theme);
-		// init zone
+		
+    	// init zone
 		Tile[][] matrix = level.getMatrix();
 		Itemset itemset = level.getItemset();
 		double globalLeftX = level.getGlobalLeftX();
@@ -273,6 +275,8 @@ public class HollowLevel implements Serializable
     	String[][] mFloors = matrices.get(0);
 		String[][] mBlocks = matrices.get(1);
 		String[][] mItems = matrices.get(2);
+		String[][] mBombs = matrices.get(3);
+		
 		// init tiles
 		for(int line=0;line<globalHeight;line++)
 		{	for(int col=0;col<globalWidth;col++)
@@ -295,6 +299,15 @@ public class HollowLevel implements Serializable
 				if(mItems[line][col]!=null)
 				{	Item item = itemset.makeItem(mItems[line][col],matrix[line][col]);
 					matrix[line][col].addSprite(item);				
+				}
+				if(mBombs[line][col]!=null)
+				{	String temp[] = mBombs[line][col].split(":");
+					int range = Integer.parseInt(temp[temp.length-1]);
+					String name = "";
+					for(int i=0;i<temp.length-1;i++)
+						name = name+temp[i];
+					Bomb bomb = bombset.makeBomb(name,matrix[line][col],range);
+					matrix[line][col].addSprite(bomb);				
 				}
 			}
 		}
@@ -343,6 +356,7 @@ public class HollowLevel implements Serializable
 	/////////////////////////////////////////////////////////////////
 	private String bombsetPath;
 	private BombsetMap bombsetMap;
+	private Bombset bombset;
 
 	public void loadBombsets() throws ParserConfigurationException, SAXException, IOException, ClassNotFoundException
     {	// bombsets map
@@ -350,7 +364,7 @@ public class HollowLevel implements Serializable
     	bombsetMap.loadBombset(bombsetPath);
 		
     	// level bombset
-    	Bombset bombset = bombsetMap.loadBombset(bombsetPath,null);
+    	bombset = bombsetMap.loadBombset(bombsetPath,null);
 		level.setBombset(bombset);
     }
 	

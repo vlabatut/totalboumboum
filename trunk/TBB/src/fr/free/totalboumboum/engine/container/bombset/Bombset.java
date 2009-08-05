@@ -62,6 +62,11 @@ public class Bombset
 		requiredAbilities.add(abilities);
 	}
 	
+	/**
+	 * only for player-generated bombs
+	 * @param sprite
+	 * @return
+	 */
 	public Bomb makeBomb(Sprite sprite)
 	{	Bomb result = null;
 		Tile tile = sprite.getTile();
@@ -84,6 +89,25 @@ public class Bombset
 			}
 			else
 				ind++;
+		}
+		return result;
+	}
+
+	/**
+	 * only for level-generated bombs
+	 * @param tile
+	 * @param name
+	 * @return
+	 */
+	public Bomb makeBomb(String name, Tile tile, int flameRange)
+	{	Bomb result = null;
+		Iterator<BombFactory> it = bombFactories.iterator();
+		while(it.hasNext() && result==null)
+		{	BombFactory bombFactory = it.next();
+			if(bombFactory.getBombName().equalsIgnoreCase(name))
+			{	result = bombFactory.makeSprite(tile);
+				result.setFlameRange(flameRange); //NOTE this is performed in BombsetManager.dropBomb() for the Heroes. Maybe should it be normalized ? use an ability ? (cf note in BombsetMgr)
+			}
 		}
 		return result;
 	}

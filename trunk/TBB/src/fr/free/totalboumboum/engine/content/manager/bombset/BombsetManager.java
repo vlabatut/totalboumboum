@@ -88,7 +88,7 @@ public class BombsetManager
 		int droppedBombLimit = (int)ability.getStrength();
 		if(droppedBombs.size()<droppedBombLimit)
 		{	if(bomb!=null)
-			{	bomb.setFlameRange(flameRange);
+			{	bomb.setFlameRange(flameRange); //NOTE maybe it should be more consistent to use a specific StateAbility, initialized automatically from the owner when the bomb is made (by the bombfactory)?
 				Tile tile = sprite.getTile();
 				SpecificAction specificAction = new SpecificAppear(bomb);
 				ActionAbility ablt = bomb.modulateAction(specificAction);

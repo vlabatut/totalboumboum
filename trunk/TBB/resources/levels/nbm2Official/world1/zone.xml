@@ -9,11 +9,11 @@
 			</value>
 			<value proba="0.1" >
 				<block group="softwalls" name="regular"/>
-				<item type="extrabomb" />
+				<item name="extrabomb" />
 			</value>
 			<value proba="0.2" >
 				<block group="softwalls" name="regular"/>
-				<item type="extraflame" />
+				<item name="extraflame" />
 			</value>
 			<value proba="0.4" >
 			</value>
