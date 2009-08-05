@@ -11,7 +11,12 @@
 	</xsd:complexType>
 
 	<xsd:complexType name="tItem">
-		<xsd:attribute name="type" type="xsd:string" use="required"/>
+		<xsd:attribute name="name" type="xsd:string" use="required"/>
+	</xsd:complexType>
+
+	<xsd:complexType name="tBomb">
+		<xsd:attribute name="name" type="xsd:string" use="required"/>
+		<xsd:attribute name="range" type="xsd:integer" use="optional" default="0" />
 	</xsd:complexType>
 
 	<xsd:group name="gBasicTile">
@@ -22,6 +27,7 @@
 			<xsd:element name="block" type="tBlock" minOccurs="0" />
 			<!--  peut aussi y a voir des bombes, bonus, etc -->
 			<xsd:element name="item" type="tItem" minOccurs="0" />
+			<xsd:element name="bomb" type="tBomb" minOccurs="0" />
 		</xsd:sequence>
 	</xsd:group>
 

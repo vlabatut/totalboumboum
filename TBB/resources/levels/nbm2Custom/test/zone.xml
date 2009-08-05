@@ -9,23 +9,23 @@
 			</value>
 			<value proba="0.1" >
 				<block name="softwall" />
-				<item type="extrabomb" />
+				<item name="extrabomb" />
 			</value>
 			<value proba="0.1" >
 				<block name="softwall" />
-				<item type="extraflame" />
+				<item name="extraflame" />
 			</value>
 			<value proba="0.01" >
 				<block name="softwall" />
-				<item type="remotecontrol" />
+				<item name="remotecontrol" />
 			</value>
 			<value proba="0.04" >
 				<block name="softwall" />
-				<item type="throughbombs" />
+				<item name="throughbombs" />
 			</value>
 			<value proba="0.05" >
 				<block name="softwall" />
-				<item type="throughwalls" />
+				<item name="throughwalls" />
 			</value>
 			<value proba="0.4" >
 			</value>
@@ -39,11 +39,11 @@
 			</tile>
 			<tile pos="1" >
 				<floor name="marked" />
-				<item type="extrabomb" />
+				<item name="extrabomb" />
 			</tile>
 			<tile pos="2" >
 				<floor name="marked" />
-				<item type="extraflame" />
+				<item name="extraflame" />
 			</tile>
 			<tile pos="3" >
 				<floor name="marked" />
@@ -68,18 +68,18 @@
 		<line pos="1">
 			<tile pos="0" >
 				<floor name="marked" />
-				<item type="remotecontrol" />
+				<item name="remotecontrol" />
 			</tile>
 			<tile pos="1" >
 				<floor name="marked" />
 			</tile>
 			<tile pos="2" >
 				<floor name="marked" />
-				<item type="throughbombs" />
+				<item name="throughbombs" />
 			</tile>
 			<tile pos="3" >
 				<floor name="marked" />
-				<item type="throughwalls" />
+				<item name="throughwalls" />
 			</tile>
 			<tile pos="4" >
 				<floor name="marked" />
@@ -225,7 +225,8 @@
 			</tile>
 			<tile pos="6" >
 				<floor name="marked" />
-				<reference name="tile1" />
+				<block name="softwall" />
+				<bomb name="normal" range="2" />
 			</tile>
 			<tile pos="7" >
 				<floor name="marked" />
@@ -233,6 +234,7 @@
 			</tile>
 			<tile pos="8" >
 				<floor name="marked" />
+				<bomb name="normal" range="6" />
 			</tile>
 		</line>
 		

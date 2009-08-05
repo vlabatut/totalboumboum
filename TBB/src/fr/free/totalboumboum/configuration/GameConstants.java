@@ -49,5 +49,5 @@ public class GameConstants
 	/////////////////////////////////////////////////////////////////
 	public static final double READY_TIME = 1000;
 	public static final double SET_TIME = 1000;
-	public static final double GO_TIME = 500;
+	public static final double GO_TIME = 750;
 }

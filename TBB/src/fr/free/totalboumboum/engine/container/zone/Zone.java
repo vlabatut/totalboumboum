@@ -76,11 +76,13 @@ public class Zone implements Serializable
 		String[][] floors = new String[globalHeight][globalWidth];
 		String[][] blocks = new String[globalHeight][globalWidth];
 		String[][] items = new String[globalHeight][globalWidth];
+		String[][] bombs = new String[globalHeight][globalWidth];
 		for(int i=0;i<globalHeight;i++)
 		{	for(int j=0;j<globalWidth;j++)
 			{	floors[i][j] = null;
 	        	blocks[i][j] = null;
 	        	items[i][j] = null;
+	        	bombs[i][j] = null;
 			}
 		}
 		
@@ -94,7 +96,7 @@ public class Zone implements Serializable
 		// matrix
     	Iterator<ZoneTile> it = tiles.iterator();
     	while(it.hasNext())
-    	{	String[] content = {null,null,null};
+    	{	String[] content = {null,null,null,null};
     		ZoneTile tile = it.next();
     		int col = tile.getCol();
     		int line = tile.getLine();
@@ -102,6 +104,7 @@ public class Zone implements Serializable
     		content[0] = tile.getFloor();
    			content[1] = tile.getBlock();
    			content[2] = tile.getItem();     			
+   			content[3] = tile.getBomb();     			
     		// variable part
     		String name = tile.getVariable();
     		if(name!=null)
@@ -110,12 +113,15 @@ public class Zone implements Serializable
     			String itm = vit.getItem();
 				String blck = vit.getBlock();
 				String flr = vit.getFloor();
+				String bmb = vit.getBomb();
 				if(content[0]==null)
 					content[0] = flr;
 				if(content[1]==null)
 					content[1] = blck;
 				if(content[2]==null)
 					content[2] = itm;
+				if(content[3]==null)
+					content[3] = bmb;
     		}
     		// values
 			{	// floor
@@ -124,6 +130,8 @@ public class Zone implements Serializable
 				blocks[line][col] = content[1];
 				// item
 				items[line][col] = content[2];
+				// bomb
+				bombs[line][col] = content[3];
     		}
     	}
 		
@@ -131,6 +139,7 @@ public class Zone implements Serializable
     	matrices.add(floors);
     	matrices.add(blocks);
     	matrices.add(items);
+    	matrices.add(bombs);
 	}
 	
 	public HashMap<String,Integer> getItemCount()

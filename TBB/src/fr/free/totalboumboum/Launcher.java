@@ -827,8 +827,9 @@ public class Launcher
 	 * - définition d'un système permettant au niveau d'apparaître graduellement au début du round
 	 * - simplification de l'initialisation des actions afin de ne plus avoir à spécifier une tile (le cas où la tile manquait a été supprimé)
 	 * - apparition de messages au début du round (ready-set-go), avec graphismes basiques puis améliorés
+	 * - mise en place d'un fond noir dans le loop panel avant que le niveau ne commence à apparaitre (juste avant le chargement)
+	 * - possibilité de définir des niveaux contenant des bombes, soit directement sur le sol, soit dans des blocks
 	 * 
-	 * faire apparaitre des bombes d'entrée dans le level
 	 * 
 	 * - bug d'affichage quand les flammes se croisent au cours de plusieurs explosions: la dernière n'est pas affichée
 	 * - sbm1 : le délai de retardement ne doit pas être réinitialisé a la suite d'un punch

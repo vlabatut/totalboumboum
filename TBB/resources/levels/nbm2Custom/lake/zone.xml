@@ -9,23 +9,23 @@
 			</value>
 			<value proba="0.1" >
 				<block name="softwall" />
-				<item type="extrabomb" />
+				<item name="extrabomb" />
 			</value>
 			<value proba="0.1" >
 				<block name="softwall" />
-				<item type="extraflame" />
+				<item name="extraflame" />
 			</value>
 			<value proba="0.01" >
 				<block name="softwall" />
-				<item type="remotecontrol" />
+				<item name="remotecontrol" />
 			</value>
 			<value proba="0.04" >
 				<block name="softwall" />
-				<item type="throughbombs" />
+				<item name="throughbombs" />
 			</value>
 			<value proba="0.05" >
 				<block name="softwall" />
-				<item type="throughwalls" />
+				<item name="throughwalls" />
 			</value>
 			<value proba="0.4" >
 			</value>
