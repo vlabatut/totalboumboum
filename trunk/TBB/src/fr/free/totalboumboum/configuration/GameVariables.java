@@ -1,9 +1,13 @@
 package fr.free.totalboumboum.configuration;
 
+import java.awt.Color;
+import java.awt.Dimension;
+import java.awt.Font;
 import java.io.File;
 
 import fr.free.totalboumboum.engine.container.level.Level;
 import fr.free.totalboumboum.engine.loop.Loop;
+import fr.free.totalboumboum.gui.tools.MessageDisplayer;
 import fr.free.totalboumboum.tools.FileTools;
 
 /*
@@ -64,5 +68,31 @@ public class GameVariables
 		scaledTileDimension = GameConstants.STANDARD_TILE_DIMENSION*zoomFactor;
 	}
 
+	/////////////////////////////////////////////////////////////////
+	// PRE-ROUND MESSAGES	/////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	public static MessageDisplayer messageDisplayers[] = null;
 	
+	public static void initMessageDisplayers(String texts[])
+	{	if(messageDisplayers == null)
+		{	messageDisplayers = new MessageDisplayer[texts.length];
+			Dimension dim = Configuration.getVideoConfiguration().getPanelDimension();
+			double coef = 0.9;
+			Font displayedTextFont = loop.getPanel().getMessageFont(dim.width*coef,dim.height*coef);
+			displayedTextFont = displayedTextFont.deriveFont(Font.BOLD);
+			int xc = (int)Math.round(dim.width/2);
+			int yc = (int)Math.round(dim.height/2);
+			for(int i=0;i<texts.length;i++)
+			{	if(texts[i]!=null)
+				{	MessageDisplayer temp = new MessageDisplayer(displayedTextFont,xc,yc);
+					temp.setFatten(3);
+					temp.setTextColor(new Color(204, 18,128));
+					temp.updateText(texts[i]);
+					messageDisplayers[i] = temp;
+				}
+				else
+					messageDisplayers[i] = null;
+			}
+		}
+	}
 }

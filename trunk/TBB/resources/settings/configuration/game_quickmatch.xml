@@ -20,6 +20,7 @@
 	<levels>
 		<level pack="nbm2Custom" folder="test" />
 		<level pack="gsuTournament" folder="carrefour" />
+		<level pack="gsuTournament" folder="classic" />
 	</levels>
 </gameQuickmatch>
 

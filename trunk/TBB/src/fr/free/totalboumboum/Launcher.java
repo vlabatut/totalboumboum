@@ -1012,8 +1012,6 @@ public class Launcher
 	 */
 	
 	/*TODO
-	 * - pq l'écran noir juste avant l'apparition du round dure si longtemps ? p-ê c'est la création des texte qui prend du temps >> tester avec des textes très courts. voire texte à créer une fois pour toutes au chargement du jeu ?
 	 * - site : parler de la possibilité d'inclure des bombes dans le niveau, de base (pas vu dans BM officiel, mais très utilisé dans X-Blast)
-	 * - adapter les autres themes de NESBM2 à l'apparition progressive
 	 */
 }
