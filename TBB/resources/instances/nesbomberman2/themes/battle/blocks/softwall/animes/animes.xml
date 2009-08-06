@@ -4,15 +4,15 @@
 		scale="1" >
 
 	<gestures>
-		<gesture name="APPEARING" folder="appearing">
+		<gesture name="APPEARING" folder="appearing" proportional="true">
 			<direction name="NONE">
-				<step duration="100" file="01.gif" />
-				<step duration="100" file="02.gif" />
-				<step duration="100" file="03.gif" />
-				<step duration="100" file="04.gif" />
-				<step duration="100" file="05.gif" />
-				<step duration="100" file="06.gif" />
-				<step duration="100" file="07.gif" />
+				<step duration="100" file="1.gif" />
+				<step duration="100" file="2.gif" />
+				<step duration="100" file="3.gif" />
+				<step duration="100" file="4.gif" />
+				<step duration="100" file="5.gif" />
+				<step duration="100" file="6.gif" />
+				<step duration="100" file="7.gif" />
 			</direction>
 		</gesture>
 

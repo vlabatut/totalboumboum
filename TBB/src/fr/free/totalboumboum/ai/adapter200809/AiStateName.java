@@ -45,7 +45,7 @@ public enum AiStateName
 	// equivalent gesture: BOUNCING, JUMPING, LANDING, PUNCHED
 	/** le sprite est en l'air (en train de sauter ou de rebondir sur les murs) */
 	FLYING,
-	// equivalent gesture: APPEARING, CRYING, EXULTING, OSCILLATING, OSCILLATING_FAILING, PUNCHING, SPAWNING, STANDING, STANDING_FAILING, WAITING
+	// equivalent gesture: APPEARING, CRYING, ENTERING, EXULTING, OSCILLATING, OSCILLATING_FAILING, PREPARED, PUNCHING, STANDING, STANDING_FAILING, WAITING
 	/** le sprite ne fait rien ou bien réalise une action qui ne nécessite pas de déplacement */ 
 	STANDING,
 	// equivalent gesture: PUSHING, SLIDING, SLIDING_FAILING, WALKING
@@ -72,11 +72,12 @@ public enum AiStateName
 			result = AiStateName.FLYING;
 		else if(gesture==GestureName.APPEARING
 				|| gesture==GestureName.CRYING
+				|| gesture==GestureName.ENTERING
 				|| gesture==GestureName.EXULTING
 				|| gesture==GestureName.OSCILLATING
 				|| gesture==GestureName.OSCILLATING_FAILING
+				|| gesture==GestureName.PREPARED
 				|| gesture==GestureName.PUNCHING
-				|| gesture==GestureName.SPAWNING
 				|| gesture==GestureName.STANDING
 				|| gesture==GestureName.STANDING_FAILING
 				|| gesture==GestureName.WAITING)

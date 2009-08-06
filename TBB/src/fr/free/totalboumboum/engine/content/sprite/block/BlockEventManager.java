@@ -118,10 +118,6 @@ public class BlockEventManager extends EventManager
 		{	gesture = GestureName.PREPARED;
 			sprite.setGesture(gesture,spriteDirection,Direction.NONE,true);
 		}
-		else if(gesture.equals(GestureName.SPAWNING))
-		{	gesture = GestureName.STANDING;
-			sprite.setGesture(gesture,spriteDirection,Direction.NONE,true);
-		}
 	}
 
 	private void engDelayOver(EngineEvent event)
@@ -131,7 +127,7 @@ public class BlockEventManager extends EventManager
 			if(ability.isActive())
 			{	StateAbility ablt = sprite.modulateStateAbility(StateAbilityName.BLOCK_SPAWN);
 				sprite.decrementUse(ablt,1);
-				gesture = GestureName.SPAWNING;
+				gesture = GestureName.APPEARING;
 				sprite.setGesture(gesture,spriteDirection,Direction.NONE,true);
 			}
 			else

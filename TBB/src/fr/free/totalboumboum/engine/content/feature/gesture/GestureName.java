@@ -101,9 +101,6 @@ public enum GestureName
 	/** the sprite is both sliding and failing to explore (for a bomb) */
 	SLIDING_FAILING,
 	
-	/** the sprite is re-appearing (for a wall) */ 
-	SPAWNING,
-	
 	/** the sprite is experiencing difficulties to walk/stand */
 	STAGGERING,
 	

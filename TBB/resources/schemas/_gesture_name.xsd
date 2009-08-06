@@ -22,7 +22,6 @@
 			<xsd:enumeration value="PUSHING" />
 			<xsd:enumeration value="SLIDING" />
 			<xsd:enumeration value="SLIDING_FAILING" />
-			<xsd:enumeration value="SPAWNING" />
 			<xsd:enumeration value="STAGGERING" />
 			<xsd:enumeration value="STANDING" />
 			<xsd:enumeration value="STANDING_FAILING" />
