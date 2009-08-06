@@ -829,6 +829,7 @@ public class Launcher
 	 * - apparition de messages au début du round (ready-set-go), avec graphismes basiques puis améliorés
 	 * - mise en place d'un fond noir dans le loop panel avant que le niveau ne commence à apparaitre (juste avant le chargement)
 	 * - possibilité de définir des niveaux contenant des bombes, soit directement sur le sol, soit dans des blocks
+	 * - définition des animations d'apparition pour tous les thèmes de SBM1 et NBM2
 	 * 
 	 * 
 	 * - bug d'affichage quand les flammes se croisent au cours de plusieurs explosions: la dernière n'est pas affichée

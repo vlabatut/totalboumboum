@@ -52,8 +52,6 @@ public class BlockFactory extends SpriteFactory<Block>
 		// PUSHING
 		// SLIDING
 		// SLIDING_FAILING
-		// SPAWNING
-		animeReplacements.put(GestureName.SPAWNING,GestureName.APPEARING);
 		// STANDING
 		animeReplacements.put(GestureName.STANDING,null);
 		// STANDING_FAILING
