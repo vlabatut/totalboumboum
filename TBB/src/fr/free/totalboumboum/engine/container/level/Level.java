@@ -819,30 +819,10 @@ public class Level
 	// DISPLAYED TEXT		/////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	private MessageDisplayer messageDisplayer = null;
-	private MessageDisplayer messageDisplayers[];
-	
-	public void initMessageDisplayers(String texts[])
-	{	messageDisplayers = new MessageDisplayer[texts.length];
-		Font displayedTextFont = loop.getPanel().getMessageFont(pixelWidth,pixelHeight);
-		displayedTextFont = displayedTextFont.deriveFont(Font.BOLD);
-		int xc = (int)Math.round(pixelLeftX+pixelWidth/2);
-		int yc = (int)Math.round(pixelTopY+pixelHeight/2);
-		for(int i=0;i<texts.length;i++)
-		{	if(texts[i]!=null)
-			{	MessageDisplayer temp = new MessageDisplayer(displayedTextFont,xc,yc);
-				temp.setFatten(3);
-				temp.setTextColor(new Color(204, 18,128));
-				temp.updateText(texts[i]);
-				messageDisplayers[i] = temp;
-			}
-			else
-				messageDisplayers[i] = null;
-		}
-	}
-	
+
 	public void updateMessageDisplayer(int index)
 	{	if(index>=0)
-			messageDisplayer = messageDisplayers[index];
+			messageDisplayer = GameVariables.messageDisplayers[index];
 		else
 			messageDisplayer = null;
 	}

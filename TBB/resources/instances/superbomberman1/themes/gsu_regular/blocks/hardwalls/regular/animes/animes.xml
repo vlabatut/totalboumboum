@@ -10,13 +10,15 @@
 	<gestures>	
 		<gesture name="APPEARING" folder="appearing" proportional="true">
 			<direction name="NONE">
-				<step duration="150" file="1.gif" />
-				<step duration="75" file="2.gif" />
+				<step duration="100" file="1.gif" />
+				<step duration="150" file="2.gif" />
 				<step duration="75" file="3.gif" />
 				<step duration="75" file="4.gif" />
 				<step duration="75" file="5.gif" />
 				<step duration="75" file="6.gif" />
 				<step duration="75" file="7.gif" />
+				<step duration="75" file="8.gif" />
+				<step duration="75" file="9.gif" />
 			</direction>
 		</gesture>
 

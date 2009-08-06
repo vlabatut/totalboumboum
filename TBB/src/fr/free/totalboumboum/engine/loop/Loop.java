@@ -671,85 +671,65 @@ System.out.println();
 	/////////////////////////////////////////////////////////////////
 	private Role[] entryRoles;
 	private Double[] entryDelays;
-	private int entryIndex = -1;
+	private int entryIndex = 0;
 	
 	private void initEntries()
-	{	entryIndex = -1;
+	{	entryIndex = 0;
 		entryRoles = new Role[]{Role.FLOOR,Role.BLOCK,Role.ITEM,Role.BOMB,Role.HERO};
-		entryDelays = new Double[]{0d,0d,0d,0d,0d,GameConstants.READY_TIME,GameConstants.SET_TIME,GameConstants.GO_TIME};
+		entryDelays = new Double[]{0d,0d,0d,0d,0d,0d,GameConstants.READY_TIME,GameConstants.SET_TIME,GameConstants.GO_TIME};
 		String[] entryTexts = new String[]{null,null,null,null,null,panel.getMessageTextReady(),panel.getMessageTextSet(),panel.getMessageTextGo()};
 		// set the roles
 		for(int i=0;i<entryRoles.length;i++)
 		{	double duration = level.getEntryDuration(entryRoles[i]);
+//System.out.println(entryRoles[i]+":"+duration);
 			if(i<entryRoles.length-1)
 				duration = duration/2; //so that sprites appear almost at the same time
-			entryDelays[i] = duration+Configuration.getEngineConfiguration().getMilliPeriod();//NOTE a little more time, just too be sure it goes OK
+			entryDelays[i+1] = duration/*+Configuration.getEngineConfiguration().getMilliPeriod()*/;//NOTE a little more time, just too be sure it goes OK
 			entryTexts[i] = entryRoles[i].toString(); //actually not used, but hey...
-//System.out.println("entryDurations["+i+"]="+entryDelays[i]);
 		}
 		// unset the messages (for quicklaunch)
-		for(int i=entryRoles.length;i<entryDelays.length;i++)
+		for(int i=entryRoles.length;i<entryTexts.length;i++)
 		{	if(entryTexts[i]==null)
-				entryDelays[i] = 0d;			
+				entryDelays[i+1] = 0d;			
 		}
-		// init the message displayers
-		level.initMessageDisplayers(entryTexts);
-	}
+//for(int i=0;i<entryDelays.length;i++)
+//	System.out.println("entryDelays["+i+"]="+entryDelays[i]);
 	
-/*	private boolean entryStarted = false;
-	private double floorsEntryDuration = 0;
-	private double blocksEntryDuration = 0;
-	private double itemsEntryDuration = 0;
-	private double bombsEntryDuration = 0;
-	private double heroesEntryDuration = 0;
-
-	private void initEntries()
-	{	entryStarted = false;
-		// level
-		floorsEntryDuration = level.getEntryDuration(Role.FLOOR);
-		blocksEntryDuration = level.getEntryDuration(Role.BLOCK);
-		itemsEntryDuration = level.getEntryDuration(Role.ITEM);
-		bombsEntryDuration = level.getEntryDuration(Role.BOMB);
-		// players
-		if(players.size()>0)
-		{	Player player = players.get(0);
-			Sprite sprite = player.getSprite();
-			StateAbility ability = sprite.modulateStateAbility(StateAbilityName.SPRITE_ENTRY_DURATION);
-			heroesEntryDuration = ability.getStrength();
-		}
+		// init the message displayers
+		GameVariables.initMessageDisplayers(entryTexts);
 	}
-*/	
+
 	private void manageEntries()
-	{	// first time
-		if(entryIndex==-1)
-		{	entryIndex ++;
-//System.out.println(totalTime);		
-			EngineEvent event = new EngineEvent(EngineEvent.ROUND_ENTER);
-			event.setDirection(Direction.NONE);
-			level.spreadEvent(event,entryRoles[entryIndex]);
-		}
-		// general case
-		else if(entryIndex<entryDelays.length)// if(entryDurations[entryIndex]>0)
-		{	entryDelays[entryIndex] = entryDelays[entryIndex] - (milliPeriod*Configuration.getEngineConfiguration().getSpeedCoeff());
-			if(entryDelays[entryIndex]<=0)
-			{	entryIndex++;
-//System.out.println(totalTime);		
-				// show next sprites
-				if(entryIndex<entryRoles.length)
-				{	EngineEvent event = new EngineEvent(EngineEvent.ROUND_ENTER);
-					event.setDirection(Direction.NONE);
-					level.spreadEvent(event,entryRoles[entryIndex]);
+	{	// general case
+		if(entryIndex<entryDelays.length)
+		{	boolean done = false;
+			while(!done)
+			{	if(entryDelays[entryIndex]>0)
+				{	entryDelays[entryIndex] = entryDelays[entryIndex] - (milliPeriod*Configuration.getEngineConfiguration().getSpeedCoeff());
+					done = true;
 				}
-				// show ready-set-go
-				else if(entryIndex<entryDelays.length)
-				{	level.updateMessageDisplayer(entryIndex);
-//System.out.println(totalTime);				
-				}
-				// start the game
-				else 
-				{	level.updateMessageDisplayer(-1);
-					EngineEvent event = new EngineEvent(EngineEvent.ROUND_START);
-					level.spreadEvent(event);
+				else
+				{	// show next sprites
+					if(entryIndex<entryRoles.length)
+					{	EngineEvent event = new EngineEvent(EngineEvent.ROUND_ENTER);
+//System.out.println(totalTime+": "+entryRoles[entryIndex]);		
+						event.setDirection(Direction.NONE);
+						level.spreadEvent(event,entryRoles[entryIndex]);
+					}
+					// show ready-set-go
+					else if(entryIndex<entryDelays.length-1)
+					{	level.updateMessageDisplayer(entryIndex);
+//System.out.println(totalTime+": message");				
+					}
+					// start the game
+					else //if(entryIndex==entryDelays.length-1) 
+					{	level.updateMessageDisplayer(-1);
+//System.out.println(totalTime+": start");				
+						EngineEvent event = new EngineEvent(EngineEvent.ROUND_START);
+						level.spreadEvent(event);
+						done = true;
+					}
+					entryIndex++;
 				}
 			}
 		}
