@@ -15,6 +15,14 @@
 		<ability strength="1" frame="false" time="-1" uses="-1">
 			<name value="SPRITE_TRAVERSE_ITEM"/>
 		</ability>
+<!-- 	SPRITE_TWINKLE_HIDE -->
+		<ability strength="250" frame="false" time="-1" uses="-1">
+			<name value="SPRITE_TWINKLE_HIDE"/>
+		</ability>
+<!-- 	SPRITE_TWINKLE_SHOW -->
+		<ability strength="500" frame="false" time="-1" uses="-1">
+			<name value="SPRITE_TWINKLE_SHOW"/>
+		</ability>
 <!--  	HERO_CELEBRATION_DURATION --> 
 		<ability strength="4000" frame="false" time="-1" uses="-1">
 			<name value="HERO_CELEBRATION_DURATION" />

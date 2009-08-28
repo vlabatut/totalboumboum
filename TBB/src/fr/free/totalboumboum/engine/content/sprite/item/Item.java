@@ -29,10 +29,7 @@ import fr.free.totalboumboum.engine.content.feature.ability.AbstractAbility;
 import fr.free.totalboumboum.engine.content.sprite.Sprite;
 
 public class Item extends Sprite
-{	/** abilities given by this item */
-	private ArrayList<AbstractAbility> itemAbilities;
-	private String itemName;
-	
+{	
 	public Item()
 	{	super();
 		itemAbilities = new ArrayList<AbstractAbility>();
@@ -48,6 +45,9 @@ public class Item extends Sprite
 	/////////////////////////////////////////////////////////////////
 	// ITEM ABILITIES	/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
+	/** abilities given by this item */
+	private ArrayList<AbstractAbility> itemAbilities;
+	
 	public ArrayList<AbstractAbility> getItemAbilities()
 	{	return itemAbilities;
 	}
@@ -57,7 +57,7 @@ public class Item extends Sprite
 		while(i.hasNext())
 			addItemAbility(i.next());
 	}
-	
+//TODO pb: l'ability s'applique à l'item comme si elle n'était pas distinguée des abilities appartenant effectivement à l'item	
 	public void addItemAbility(AbstractAbility ability)
 	{	AbstractAbility copy = ability.copy();
 		itemAbilities.add(copy);
@@ -66,6 +66,8 @@ public class Item extends Sprite
 	/////////////////////////////////////////////////////////////////
 	// ITEM NAME		/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
+	private String itemName;
+	
 	public String getItemName()
 	{	return itemName;
 	}
