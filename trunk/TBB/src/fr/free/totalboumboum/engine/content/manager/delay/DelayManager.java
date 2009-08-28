@@ -36,6 +36,7 @@ public class DelayManager
 	public static final String DL_EXPLOSION = "DL_EXPLOSION";
 	public static final String DL_LATENCY = "DL_LATENCY";
 	public static final String DL_OSCILLATION = "DL_OSCILLATION";
+	public static final String DL_REBIRTH = "DL_REBIRTH";
 	public static final String DL_SPAWN = "DL_SPAWN";
 	public static final String DL_WAIT = "DL_WAIT";
 	

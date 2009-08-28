@@ -101,8 +101,14 @@ public class StateAbilityName
 	/** gesture duration when the hero cries or exults at the end of a round */
 	public static final String HERO_CELEBRATION_DURATION = "HERO_CELEBRATION_DURATION";
 	
+	/** number of times the hero can be bombed before being eliminated */
+	public static final String HERO_LIFE = "HERO_LIFE";
+
 	/** gesture duration when a hero punches (a bomb for instance) */
 	public static final String HERO_PUNCH_DURATION = "HERO_PUNCH_DURATION";
+	
+	/** delay before a hero rebirth after he has been bombed */
+	public static final String HERO_REBIRTH_DELAY = "HERO_REBIRTH_DELAY";
 	
 	/** delay before an idle hero switch to its waiting gesture */
 	public static final String HERO_WAIT_DURATION = "HERO_WAIT_DURATION";

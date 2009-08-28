@@ -92,10 +92,9 @@ public abstract class AbstractAbility
 	{	this.uses = uses;
 	}
 	
-	public void decrementUse(int delta)
-	{	if(uses>=delta)
-			uses = uses - delta;
-		else if(uses>0)
+	public void modifyUse(int delta)
+	{	uses = uses + delta;
+		if(uses<0)
 			uses = 0;
 	}
 

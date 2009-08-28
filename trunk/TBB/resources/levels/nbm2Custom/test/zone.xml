@@ -50,6 +50,7 @@
 			</tile>
 			<tile pos="4" >
 				<floor name="marked" />
+				<item name="life" />
 			</tile>
 			<tile pos="5" >
 				<floor name="marked" />

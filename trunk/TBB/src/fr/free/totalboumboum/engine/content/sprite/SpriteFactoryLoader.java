@@ -214,6 +214,40 @@ public abstract class SpriteFactoryLoader
 			gesture.setAnimes(temp);			
 			gesturePack.addGesture(gesture,GestureName.PREPARED);
 		}
+		{	// gesture HIDING
+			GestureName gestureName = GestureName.HIDING;
+			Gesture gesture = gesturePack.getGesture(gestureName);
+			for(ActionName an: ActionName.values())
+			{	// any action forbidden as an actor except APPEAR (which can be instant, i.e. without anime nor trajectory)
+				if(an!=ActionName.APPEAR)
+				{	GeneralAction ga = an.createGeneralAction();
+					ga.addActor(role);
+					ga.addAnyTargets();
+					ga.addAnyContacts();
+					ga.addAnyOrientations();
+					ga.addAnyTilePositions();
+					ActorModulation am = new ActorModulation(ga);
+					am.setFrame(true);
+					am.setStrength(0);
+					am.setGestureName(gestureName);
+					gesture.addModulation(am);
+				}
+				// any action forbidden as a target
+				{	GeneralAction ga = an.createGeneralAction();
+					ga.addAnyActors();
+					ga.addTarget(role);
+					ga.addAnyContacts();
+					ga.addAnyOrientations();
+					ga.addAnyTilePositions();
+					TargetModulation tm = new TargetModulation(ga);
+					tm.setFrame(true);
+					tm.setStrength(0);
+					tm.setGestureName(gestureName);
+					gesture.addModulation(tm);
+				}
+				// no modulation for the rest
+			}
+		}	
 	}
 	
 	

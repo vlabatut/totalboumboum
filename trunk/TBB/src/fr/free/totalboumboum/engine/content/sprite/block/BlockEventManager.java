@@ -126,7 +126,7 @@ public class BlockEventManager extends EventManager
 			AbstractAbility ability = sprite.modulateAction(specificAction);
 			if(ability.isActive())
 			{	StateAbility ablt = sprite.modulateStateAbility(StateAbilityName.BLOCK_SPAWN);
-				sprite.decrementUse(ablt,1);
+				sprite.modifyUse(ablt,-1);
 				gesture = GestureName.APPEARING;
 				sprite.setGesture(gesture,spriteDirection,Direction.NONE,true);
 			}

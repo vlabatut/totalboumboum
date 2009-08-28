@@ -109,8 +109,13 @@ public class HeroEventManager extends EventManager
 			String statTarget = sprite.getPlayer().getFileName();
 			StatisticEvent statEvent = new StatisticEvent(statActor,statAction,statTarget,statTime);
 			sprite.addStatisticEvent(statEvent);
-			// player out NOTE à modifier pour autres PlayModes
-//			if(GameVariables.loop.getPlayMode() == PlayMode.SURVIVAL)
+			// other lifes remaining?
+			StateAbility stateAbility = sprite.modulateStateAbility(StateAbilityName.HERO_LIFE);
+			if(stateAbility.isActive())
+			{	// if the life ability is present, then its use is necessarily >0 (else the manager would've removed it
+				sprite.modifyUse(stateAbility,-1);
+			}
+			else
 			{	Player player = sprite.getPlayer(); 
 				if(player!=null)
 					player.setOut();
@@ -308,10 +313,22 @@ public class HeroEventManager extends EventManager
 			sprite.setGesture(gesture,spriteDirection,controlDirection,true);
 		}
 		else if(gesture.equals(GestureName.BURNING))
-		{	gesture = GestureName.ENDED;
-			sprite.setGesture(gesture,spriteDirection,Direction.NONE,true);
-			//
-			sprite.endSprite();
+		{	// the player is definitely out
+			if(sprite.getPlayer().isOut())
+			{	gesture = GestureName.ENDED;
+				sprite.setGesture(gesture,spriteDirection,Direction.NONE,true);
+				sprite.endSprite();
+			}
+			// the player still's got some lives
+			else
+			{	// put a delay before the rebirth
+				StateAbility ability = sprite.modulateStateAbility(StateAbilityName.HERO_REBIRTH_DELAY);
+				double duration = ability.getStrength();
+				sprite.addDelay(DelayManager.DL_REBIRTH,duration);
+				// hide the sprite
+				gesture = GestureName.HIDING;
+				sprite.setGesture(gesture,spriteDirection,Direction.NONE,true);
+			}
 		}
 		else if(gesture.equals(GestureName.CRYING)
 				|| gesture.equals(GestureName.EXULTING))
@@ -358,14 +375,22 @@ public class HeroEventManager extends EventManager
 	}
 	
 	private void engDelayOver(EngineEvent event)
-	{	// wait delay
+	{	// wait delay (only in standing gesture)
 		if(event.getStringParameter().equals(DelayManager.DL_WAIT))
 		{	// the sprite is currently standing
 			if(gesture.equals(GestureName.STANDING))
 			{	gesture = GestureName.WAITING;
 				sprite.setGesture(gesture,spriteDirection,controlDirection,true);
 			}
-		}		
+		}
+		// rebirth delay (only in hiding gesture)
+		else if(event.getStringParameter().equals(DelayManager.DL_REBIRTH))
+		{	// the sprite is currently hiding
+			if(gesture.equals(GestureName.HIDING))
+			{	gesture = GestureName.APPEARING;
+				sprite.setGesture(gesture,spriteDirection,controlDirection,true);
+			}	
+		}
 	}
 
 	private void engIntersectionOff(EngineEvent event)
@@ -385,7 +410,7 @@ public class HeroEventManager extends EventManager
 					ActionAbility ability = sprite.modulateAction(action);
 					if(ability.isActive())
 					{	sprite.addItem(item);
-						//TODO c'est bizarre : le gesture de l'item n'est pas mis à HIDDING au cours de l'opération (?)
+						//TODO c'est bizarre : le gesture de l'item n'est pas mis à HIDING au cours de l'opération (?)
 					}
 				}
 			}
