@@ -140,7 +140,7 @@ public class AbilityManager
 	public void update()
 	{	currentAbilities.clear();
 		updateAbilities(directAbilities);
-		ArrayList<AbstractAbility> itemAbilities = sprite.getItemAbilities();
+		ArrayList<AbstractAbility> itemAbilities = sprite.getItemsAbilities();
 		updateAbilities(itemAbilities);
 //		ArrayList<AbstractAbility> modulationAbilities = sprite.getModulationAbilities();
 /*		
@@ -151,7 +151,7 @@ if(modulationAbilities.size()>0)
 	}
 	
 	public void modifyUse(AbstractAbility ability, int delta)
-	{	ArrayList<AbstractAbility> itemAbilities = sprite.getItemAbilities();
+	{	ArrayList<AbstractAbility> itemAbilities = sprite.getItemsAbilities();
 		AbstractAbility a = null;
 		if(itemAbilities.contains(ability))
 			a = itemAbilities.get(itemAbilities.indexOf(ability));

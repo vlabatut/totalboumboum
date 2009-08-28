@@ -84,45 +84,48 @@ public class HeroEventManager extends EventManager
 			|| gesture.equals(GestureName.WAITING) 
 			|| gesture.equals(GestureName.STANDING) 
 			|| gesture.equals(GestureName.WALKING))
-		{	// explosed by
-			if(explosedBy==null)
-			{	Sprite spr = event.getAction().getActor();
-				if(spr instanceof Fire)
-				{	Fire temp = (Fire)spr;
-					spr = temp.getOwner();
-				}
-				if(spr instanceof Bomb)
-				{	Bomb temp = (Bomb)spr;
-					spr = temp.getOwner();
-				}
-				if(spr instanceof Hero)
-				{	Hero temp = (Hero)spr;
-					explosedBy = temp.getPlayer().getFileName();
-				}
+		{	StateAbility ability = sprite.modulateStateAbility(StateAbilityName.HERO_FIRE_PROTECTION);
+			if(!ability.isActive())
+			{	// explosed by
+				if(explosedBy==null)
+				{	Sprite spr = event.getAction().getActor();
+					if(spr instanceof Fire)
+					{	Fire temp = (Fire)spr;
+						spr = temp.getOwner();
+					}
+					if(spr instanceof Bomb)
+					{	Bomb temp = (Bomb)spr;
+						spr = temp.getOwner();
+					}
+					if(spr instanceof Hero)
+					{	Hero temp = (Hero)spr;
+						explosedBy = temp.getPlayer().getFileName();
+					}
 //if(explosedBy==null)
 //	System.out.println();
+				}
+				// stats
+				StatisticAction statAction = StatisticAction.BOMB_PLAYER;
+				long statTime = sprite.getLoopTime();
+				String statActor = explosedBy;
+				String statTarget = sprite.getPlayer().getFileName();
+				StatisticEvent statEvent = new StatisticEvent(statActor,statAction,statTarget,statTime);
+				sprite.addStatisticEvent(statEvent);
+				// other lifes remaining?
+				StateAbility stateAbility = sprite.modulateStateAbility(StateAbilityName.HERO_LIFE);
+				if(stateAbility.isActive())
+				{	// if the life ability is present, then its use is necessarily >0 (else the manager would've removed it
+					sprite.modifyUse(stateAbility,-1);
+				}
+				else
+				{	Player player = sprite.getPlayer(); 
+					if(player!=null)
+						player.setOut();
+				}
+				// state
+				gesture = GestureName.BURNING;
+				sprite.setGesture(gesture,spriteDirection,controlDirection,true);
 			}
-			// stats
-			StatisticAction statAction = StatisticAction.BOMB_PLAYER;
-			long statTime = sprite.getLoopTime();
-			String statActor = explosedBy;
-			String statTarget = sprite.getPlayer().getFileName();
-			StatisticEvent statEvent = new StatisticEvent(statActor,statAction,statTarget,statTime);
-			sprite.addStatisticEvent(statEvent);
-			// other lifes remaining?
-			StateAbility stateAbility = sprite.modulateStateAbility(StateAbilityName.HERO_LIFE);
-			if(stateAbility.isActive())
-			{	// if the life ability is present, then its use is necessarily >0 (else the manager would've removed it
-				sprite.modifyUse(stateAbility,-1);
-			}
-			else
-			{	Player player = sprite.getPlayer(); 
-				if(player!=null)
-					player.setOut();
-			}
-			// state
-			gesture = GestureName.BURNING;
-			sprite.setGesture(gesture,spriteDirection,controlDirection,true);
 		}
 	}
 
