@@ -10,7 +10,10 @@
 			<xsd:enumeration value="SPRITE_TRAVERSE_BOMB" />
 			<xsd:enumeration value="SPRITE_TRAVERSE_ITEM" />
 			<xsd:enumeration value="SPRITE_TRAVERSE_WALL" />
-			
+			<xsd:enumeration value="SPRITE_TWINKLE" />
+			<xsd:enumeration value="SPRITE_TWINKLE_HIDE" />
+			<xsd:enumeration value="SPRITE_TWINKLE_SHOW" />
+
 			<xsd:enumeration value="BLOCK_SPAWN" />
 			
 			<xsd:enumeration value="BOMB_EXPLOSION_LATENCY" />
@@ -26,6 +29,7 @@
 			<xsd:enumeration value="BOMB_RANGE" />
 			
 			<xsd:enumeration value="HERO_CELEBRATION_DURATION" />
+			<xsd:enumeration value="HERO_FIRE_PROTECTION" />
 			<xsd:enumeration value="HERO_LIFE" />
 			<xsd:enumeration value="HERO_PUNCH_DURATION" />
 			<xsd:enumeration value="HERO_REBIRTH_DELAY" />

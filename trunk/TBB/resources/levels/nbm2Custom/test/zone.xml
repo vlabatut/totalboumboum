@@ -47,6 +47,7 @@
 			</tile>
 			<tile pos="3" >
 				<floor name="marked" />
+				<item name="fireproof" />
 			</tile>
 			<tile pos="4" >
 				<floor name="marked" />

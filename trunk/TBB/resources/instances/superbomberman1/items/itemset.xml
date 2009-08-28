@@ -29,6 +29,11 @@
 				contact="COLLISION" orientation="FACE" tilePosition="NEIGHBOR"/>
 			</ability>
 		</item>
+		<item name="life" folder="life">
+			<ability uses="1">
+				<name value="HERO_LIFE" />
+			</ability>
+		</item>
 		<item name="penetration" folder="penetration" >
 			<ability >
 				<name value="CUSTOM_BOMB_TYPE_PENETRATION" />
@@ -53,6 +58,14 @@
 		<item name="throughwalls" folder="throughwalls" >
 			<ability >
 				<name value="SPRITE_TRAVERSE_WALL" />
+			</ability>
+		</item>
+		<item name="vest" folder="vest">
+			<ability time="15000">
+				<name value="HERO_FIRE_PROTECTION" />
+			</ability>
+			<ability time="15000" >
+				<name value="SPRITE_TWINKLE" />
 			</ability>
 		</item>
 	</concrete-items>

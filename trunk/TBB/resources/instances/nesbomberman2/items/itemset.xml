@@ -18,6 +18,14 @@
 				<name value="BOMB_RANGE" />
 			</ability>
 		</item>
+		<item name="fireproof" folder="fireproof">
+			<ability time="15000">
+				<name value="HERO_FIRE_PROTECTION" />
+			</ability>
+			<ability time="15000" >
+				<name value="SPRITE_TWINKLE" />
+			</ability>
+		</item>
 		<item name="life" folder="life">
 			<ability uses="1">
 				<name value="HERO_LIFE" />

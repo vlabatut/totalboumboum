@@ -53,6 +53,15 @@ public class StateAbilityName
 	/** cross (some?) walls */
 	public static final String SPRITE_TRAVERSE_WALL = "SPRITE_TRAVERSE_WALL";
 	
+	/** the sprite is twinkling, the strenght corresponds to a speed coefficient */
+	public static final String SPRITE_TWINKLE = "SPRITE_TWINKLE";
+	
+	/** time the sprite is hidden when twinkling (for a x1 coefficient) */
+	public static final String SPRITE_TWINKLE_HIDE = "SPRITE_TWINKLE_HIDE";
+	
+	/** time the sprite is shown when twinkling (for a x1 coefficient) */
+	public static final String SPRITE_TWINKLE_SHOW = "SPRITE_TWINKLE_SHOW";
+	
 	/////////////////////////////////////////////////////////////////
 	// BLOCKS ABILITIES			/////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
@@ -112,5 +121,8 @@ public class StateAbilityName
 	
 	/** delay before an idle hero switch to its waiting gesture */
 	public static final String HERO_WAIT_DURATION = "HERO_WAIT_DURATION";
+
+	/** the hero is protected from fire */
+	public static final String HERO_FIRE_PROTECTION = "HERO_FIRE_PROTECTION";
 
 }

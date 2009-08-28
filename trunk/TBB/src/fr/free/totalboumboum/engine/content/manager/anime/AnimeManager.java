@@ -26,6 +26,8 @@ import java.util.Iterator;
 
 import fr.free.totalboumboum.configuration.Configuration;
 import fr.free.totalboumboum.engine.content.feature.Direction;
+import fr.free.totalboumboum.engine.content.feature.ability.StateAbility;
+import fr.free.totalboumboum.engine.content.feature.ability.StateAbilityName;
 import fr.free.totalboumboum.engine.content.feature.event.EngineEvent;
 import fr.free.totalboumboum.engine.content.feature.gesture.Gesture;
 import fr.free.totalboumboum.engine.content.feature.gesture.anime.AnimeDirection;
@@ -54,6 +56,9 @@ public class AnimeManager
 	private double totalDuration = 0;
 	/** coefficient de mofication du temps dû au délai imposé */
 	private double forcedDurationCoeff = 1;
+	
+	/** indicates if the sprite should be hidden because of some twinkle going on */
+	private boolean twinkleHide;
 	
 /* ********************************
  * INIT
@@ -85,6 +90,7 @@ public class AnimeManager
 	 */
 	public void updateGesture(Gesture gesture, Direction direction, boolean reinit, double forcedDuration)
 	{	currentDirection = direction;
+		twinkleHide = false;
 	
 //if(currentDirection==null)
 //	while(true)System.out.println("null direction");
@@ -201,10 +207,38 @@ public class AnimeManager
 		double milliPeriod = Configuration.getEngineConfiguration().getMilliPeriod();
 		double delta = milliPeriod*sprite.getSpeedCoeff();	
 		currentTime = currentTime + delta;
+		// anime time
 		animeTime = animeTime + delta*forcedDurationCoeff;
 		if(currentAnime.getRepeat() && animeDuration>0)
 		{	while(animeTime>animeDuration)
 				animeTime = animeTime - animeDuration;
+		}
+		// twinkle?
+		StateAbility ability = sprite.modulateStateAbility(StateAbilityName.SPRITE_TWINKLE);
+		if(ability.isActive())
+		{	// get coef
+			double coef = ability.getStrength();
+			if(coef<=0)
+				coef = 1;
+			// get time values
+			ability = sprite.modulateStateAbility(StateAbilityName.SPRITE_TWINKLE_SHOW);
+			double showDuration = ability.getStrength();
+			ability = sprite.modulateStateAbility(StateAbilityName.SPRITE_TWINKLE_HIDE);
+			double hideDuration = ability.getStrength();
+			if(showDuration<=0)
+			{	if(hideDuration<=0)
+					hideDuration = 500; // NOTE arbitrary value
+				showDuration = hideDuration;
+			}
+			else
+			{	if(hideDuration<=0)
+					hideDuration = showDuration;
+			}
+			double twinkleDuration = hideDuration+showDuration;
+			// NOTE all the previous processing stuff could be done once and for all, if we suppose these abilities don't change
+			// process current twinkle state
+			long mod = ((long)currentTime) % ((long)twinkleDuration);
+			twinkleHide = mod>showDuration;
 		}
 	}
 	
@@ -266,7 +300,10 @@ public class AnimeManager
 	 * @return
 	 */
 	public BufferedImage getCurrentImage()
-	{	return currentStep.getImage();
+	{	BufferedImage result = null;
+		if(!twinkleHide)
+			result = currentStep.getImage();
+		return result;
 	}
 
 	public boolean isTerminated()
