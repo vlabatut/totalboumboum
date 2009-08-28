@@ -26,7 +26,9 @@
 			<xsd:enumeration value="BOMB_RANGE" />
 			
 			<xsd:enumeration value="HERO_CELEBRATION_DURATION" />
+			<xsd:enumeration value="HERO_LIFE" />
 			<xsd:enumeration value="HERO_PUNCH_DURATION" />
+			<xsd:enumeration value="HERO_REBIRTH_DELAY" />
 			<xsd:enumeration value="HERO_WAIT_DURATION" />
 		</xsd:restriction>
 	</xsd:simpleType>

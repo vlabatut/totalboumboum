@@ -376,8 +376,8 @@ public abstract class Sprite
 	{	return abilityManager.getAbility(action);
 	}
 */	
-	public void decrementUse(AbstractAbility ability, int delta)
-	{	abilityManager.decrementUse(ability, delta);
+	public void modifyUse(AbstractAbility ability, int delta)
+	{	abilityManager.modifyUse(ability, delta);
 	}
 	
 	/////////////////////////////////////////////////////////////////

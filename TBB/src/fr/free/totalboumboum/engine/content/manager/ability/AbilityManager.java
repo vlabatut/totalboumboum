@@ -150,15 +150,15 @@ if(modulationAbilities.size()>0)
 //		updateAbilities(modulationAbilities);
 	}
 	
-	public void decrementUse(AbstractAbility ability, int delta)
+	public void modifyUse(AbstractAbility ability, int delta)
 	{	ArrayList<AbstractAbility> itemAbilities = sprite.getItemAbilities();
 		AbstractAbility a = null;
 		if(itemAbilities.contains(ability))
 			a = itemAbilities.get(itemAbilities.indexOf(ability));
 		else if(directAbilities.contains(ability))
-			a = directAbilities.get(directAbilities.indexOf(ability));
+			a = directAbilities.get(directAbilities.indexOf(ability)); //TODO questionable
 		if(a!=null)
-			a.decrementUse(delta);
+			a.modifyUse(delta);
 	}
 	
 	private void updateAbilities(ArrayList<AbstractAbility> abilities)

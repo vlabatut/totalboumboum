@@ -18,6 +18,11 @@
 				<name value="BOMB_RANGE" />
 			</ability>
 		</item>
+		<item name="life" folder="life">
+			<ability uses="1">
+				<name value="HERO_LIFE" />
+			</ability>
+		</item>
 		<item name="remotecontrol" folder="remotecontrol" >
 			<ability >
 				<name value="CUSTOM_BOMB_TYPE_REMOTECONTROL" />
