@@ -596,7 +596,7 @@ public abstract class Sprite
 	{	return itemManager.dropAllItems();
 	}
 	
-	public ArrayList<AbstractAbility> getItemAbilities()
+	public ArrayList<AbstractAbility> getItemsAbilities()
 	{	return itemManager.getItemAbilities();	
 	}
 

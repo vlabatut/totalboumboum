@@ -59,6 +59,8 @@ public class AnimeManager
 	
 	/** indicates if the sprite should be hidden because of some twinkle going on */
 	private boolean twinkleHide;
+	/** indicates how long the sprite has been twinkling */
+	private double twinkleTime;
 	
 /* ********************************
  * INIT
@@ -216,7 +218,8 @@ public class AnimeManager
 		// twinkle?
 		StateAbility ability = sprite.modulateStateAbility(StateAbilityName.SPRITE_TWINKLE);
 		if(ability.isActive())
-		{	// get coef
+		{	twinkleTime = twinkleTime + delta;
+			// get coef
 			double coef = ability.getStrength();
 			if(coef<=0)
 				coef = 1;
@@ -237,8 +240,12 @@ public class AnimeManager
 			double twinkleDuration = hideDuration+showDuration;
 			// NOTE all the previous processing stuff could be done once and for all, if we suppose these abilities don't change
 			// process current twinkle state
-			long mod = ((long)currentTime) % ((long)twinkleDuration);
+			long mod = ((long)twinkleTime) % ((long)twinkleDuration);
 			twinkleHide = mod>showDuration;
+		}
+		else
+		{	twinkleHide = false;
+			twinkleTime = 0;
 		}
 	}
 	

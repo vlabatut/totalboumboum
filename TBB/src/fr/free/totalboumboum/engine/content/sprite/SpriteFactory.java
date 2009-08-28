@@ -49,7 +49,7 @@ public abstract class SpriteFactory<T extends Sprite>
 	protected void initSprite(Sprite sprite)
 	{	// name
 		sprite.setName(name);
-if(name==null)
+if(name.equalsIgnoreCase("fireproof"))
 	System.out.println();
 
 		// gesture pack

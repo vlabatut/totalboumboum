@@ -1007,12 +1007,13 @@ public class Launcher
 	 * - item mystère
 	 * - item accélérateur
 	 * x item shirobon (vie)
-	 * - item bouclier
+	 * x item bouclier
 	 * - item malus
 	 */
 	
 	/*TODO
 	 * - site : parler de la possibilité d'inclure des bombes dans le niveau, de base (pas vu dans BM officiel, mais très utilisé dans X-Blast)
 	 * - 		bonus vie
+	 * -		bonus bouclier
 	 */
 }
