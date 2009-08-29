@@ -1016,4 +1016,8 @@ public class Launcher
 	 * - 		bonus vie
 	 * -		bonus bouclier
 	 */
+	
+	// accélerer le clignotement?
+	// implémenter le coef de vitesse
+	// rajouter la protec pr rebirth
 }
