@@ -16,11 +16,11 @@
 			<name value="SPRITE_TRAVERSE_ITEM"/>
 		</ability>
 <!-- 	SPRITE_TWINKLE_HIDE -->
-		<ability strength="125" frame="false" time="-1" uses="-1">
+		<ability strength="25" frame="false" time="-1" uses="-1">
 			<name value="SPRITE_TWINKLE_HIDE"/>
 		</ability>
 <!-- 	SPRITE_TWINKLE_SHOW -->
-		<ability strength="250" frame="false" time="-1" uses="-1">
+		<ability strength="25" frame="false" time="-1" uses="-1">
 			<name value="SPRITE_TWINKLE_SHOW"/>
 		</ability>
 <!--  	HERO_CELEBRATION_DURATION --> 
