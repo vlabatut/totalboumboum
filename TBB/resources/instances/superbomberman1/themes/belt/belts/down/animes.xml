@@ -2,6 +2,7 @@
 <animes xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
 		xsi:noNamespaceSchemaLocation="../../../../../../schemas/animes.xsd" 
 		scale="1" >
+	
 	<gestures>
 		<gesture name="STANDING" folder="standing" repeat="true" >
 			<direction name="NONE">
