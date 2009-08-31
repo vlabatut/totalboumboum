@@ -65,6 +65,12 @@ public class StateAbilityName
 	/** change the sprite speed  */
 	public static final String SPRITE_WALK_SPEED_MODULATION = "SPRITE_WALK_SPEED_MODULATION";
 	
+	/** coefficient associated to a positive speed  */
+	public static final String SPRITE_WALK_SPEED_P = "SPRITE_WALK_SPEED_P";
+
+	/** coefficient associated to a negative speed  */
+	public static final String SPRITE_WALK_SPEED_M = "SPRITE_WALK_SPEED_M";
+	
 	/////////////////////////////////////////////////////////////////
 	// BLOCKS ABILITIES			/////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
@@ -131,4 +137,15 @@ public class StateAbilityName
 	/** the hero is protected from fire */
 	public static final String HERO_FIRE_PROTECTION = "HERO_FIRE_PROTECTION";
 
+	
+	public static String getSpriteWalkSpeed(int speed)
+	{	String result = null;
+		if(speed<0)
+			result = SPRITE_WALK_SPEED_M;
+		else if(speed>0)
+			result = SPRITE_WALK_SPEED_P;
+		if(result!=null)
+			result = result+Math.abs(speed);
+		return result;
+	}
 }
