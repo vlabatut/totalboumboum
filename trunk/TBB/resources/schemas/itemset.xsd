@@ -2,6 +2,13 @@
 <xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema">
 <xsd:include schemaLocation="_ability.xsd"/>
 
+	<xsd:complexType name="tAbilities">
+		<xsd:sequence>
+			<xsd:element name="ability" type="tAbility" maxOccurs="unbounded"/>
+		</xsd:sequence>
+		<xsd:attribute name="proba" type="xsd:float" use="optional" default="1"/>
+	</xsd:complexType>
+
 	<xsd:complexType name="tItem">
 		<xsd:attribute name="name" type="xsd:string" use="required" />
 		<xsd:attribute name="folder" type="xsd:string" use="required" />
@@ -11,7 +18,7 @@
 		<xsd:complexContent>
 			<xsd:extension base="tItem">
 				<xsd:sequence>
-					<xsd:element name="ability" type="tAbility" maxOccurs="unbounded"/>
+					<xsd:element name="abilities" type="tAbilities" maxOccurs="unbounded"/>
 				</xsd:sequence>
 			</xsd:extension>
 		</xsd:complexContent>

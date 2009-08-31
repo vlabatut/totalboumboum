@@ -86,6 +86,7 @@ public class ItemsetLoader
     		loadItemElement(temp,individualFolder,result,abstractItems,type);
 	}
     
+	@SuppressWarnings("unchecked")
 	private static void loadItemElement(Element root, String folder, Itemset result, HashMap<String,ItemFactory> abstractItems, Type type) throws ParserConfigurationException, SAXException, IOException, ClassNotFoundException
     {	// name
 		String name = root.getAttribute(XmlTools.ATT_NAME).getValue().trim();
@@ -96,19 +97,32 @@ public class ItemsetLoader
 		individualFolder = individualFolder+File.separator+attribute.getValue().trim();
 		
 		// abilities
-		ArrayList<AbstractAbility> abilities = new ArrayList<AbstractAbility>();
+		ArrayList<ArrayList<AbstractAbility>> abilities = new ArrayList<ArrayList<AbstractAbility>>();
+		ArrayList<Float> probabilities = new ArrayList<Float>();
+		List<Element> elements = root.getChildren(XmlTools.ELT_ABILITIES);
+		for(Element e: elements)
+			loadAbilitiesElement(e,abilities,probabilities);
+		
+		// item factory
+		ItemFactory itemFactory = ItemFactoryLoader.loadItemFactory(individualFolder,name,abilities,probabilities,abstractItems);
 		if(type==Type.CONCRETE)
-		{	abilities = AbilityLoader.loadAbilitiesElement(root);
-			// factory
-			ItemFactory itemFactory = ItemFactoryLoader.loadItemFactory(individualFolder,name,abilities,abstractItems);
-			result.addItemFactory(name,itemFactory);
+		{	result.addItemFactory(name,itemFactory);
 		}
 		else
-		{	// factory
-			ItemFactory itemFactory = ItemFactoryLoader.loadItemFactory(individualFolder,name,abilities,abstractItems);
-			abstractItems.put(name,itemFactory);
+		{	abstractItems.put(name,itemFactory);
 		}
     }
+	
+	private static void loadAbilitiesElement(Element root, ArrayList<ArrayList<AbstractAbility>> abilities, ArrayList<Float> probabilities) throws ClassNotFoundException
+	{	// abilities
+		ArrayList<AbstractAbility> list = AbilityLoader.loadAbilitiesElement(root);
+		abilities.add(list);
+		
+		// probabilities
+		String probaStr = root.getAttributeValue(XmlTools.ATT_PROBA).trim();
+		float proba = Float.parseFloat(probaStr);
+		probabilities.add(proba);
+	}
 
 	/////////////////////////////////////////////////////////////////
 	// LOADING TYPE		/////////////////////////////////////////////

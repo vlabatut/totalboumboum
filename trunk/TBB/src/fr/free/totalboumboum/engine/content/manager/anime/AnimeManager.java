@@ -237,7 +237,7 @@ public class AnimeManager
 			{	if(hideDuration<=0)
 					hideDuration = showDuration;
 			}
-			double twinkleDuration = hideDuration+showDuration;
+			double twinkleDuration = (hideDuration+showDuration)/coef;
 			// NOTE all the previous processing stuff could be done once and for all, if we suppose these abilities don't change
 			// process current twinkle state
 			long mod = ((long)twinkleTime) % ((long)twinkleDuration);

@@ -59,7 +59,6 @@ public class HeroEventManager extends EventManager
 	/** current interactive move direction*/
 	protected Direction controlDirection;
 	
-	// NOTE a initialiser a chaque reincarnation
 	protected String explosedBy = null;
 
 	public HeroEventManager(Hero sprite)
@@ -390,7 +389,21 @@ public class HeroEventManager extends EventManager
 		else if(event.getStringParameter().equals(DelayManager.DL_REBIRTH))
 		{	// the sprite is currently hiding
 			if(gesture.equals(GestureName.HIDING))
-			{	gesture = GestureName.APPEARING;
+			{	// reinit the exploser
+				explosedBy = null;
+				// put the protection on
+				StateAbility ability = sprite.modulateStateAbility(StateAbilityName.HERO_REBIRTH_DURATION);
+				double duration = ability.getStrength();
+				ability = new StateAbility(StateAbilityName.HERO_FIRE_PROTECTION);
+				ability.setStrength(1);
+				ability.setTime(duration);
+				sprite.addDirectAbility(ability);
+				ability = new StateAbility(StateAbilityName.SPRITE_TWINKLE);
+				ability.setStrength(1);
+				ability.setTime(duration);
+				sprite.addDirectAbility(ability);
+				// make the sprite to appear
+				gesture = GestureName.APPEARING;
 				sprite.setGesture(gesture,spriteDirection,controlDirection,true);
 			}	
 		}
