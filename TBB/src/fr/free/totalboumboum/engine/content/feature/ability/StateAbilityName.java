@@ -62,6 +62,9 @@ public class StateAbilityName
 	/** time the sprite is shown when twinkling (for a x1 coefficient) */
 	public static final String SPRITE_TWINKLE_SHOW = "SPRITE_TWINKLE_SHOW";
 	
+	/** change the sprite speed  */
+	public static final String SPRITE_WALK_SPEED_MODULATION = "SPRITE_WALK_SPEED_MODULATION";
+	
 	/////////////////////////////////////////////////////////////////
 	// BLOCKS ABILITIES			/////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
@@ -116,8 +119,11 @@ public class StateAbilityName
 	/** gesture duration when a hero punches (a bomb for instance) */
 	public static final String HERO_PUNCH_DURATION = "HERO_PUNCH_DURATION";
 	
-	/** delay before a hero rebirth after he has been bombed */
+	/** delay before a hero is reborn after he has been bombed */
 	public static final String HERO_REBIRTH_DELAY = "HERO_REBIRTH_DELAY";
+	
+	/** protection duration after a hero has just reborn */
+	public static final String HERO_REBIRTH_DURATION = "HERO_REBIRTH_DURATION";
 	
 	/** delay before an idle hero switch to its waiting gesture */
 	public static final String HERO_WAIT_DURATION = "HERO_WAIT_DURATION";

@@ -36,6 +36,7 @@ import fr.free.totalboumboum.engine.content.feature.Role;
 import fr.free.totalboumboum.engine.content.feature.ability.AbstractAbility;
 import fr.free.totalboumboum.engine.content.feature.ability.ActionAbility;
 import fr.free.totalboumboum.engine.content.feature.ability.StateAbility;
+import fr.free.totalboumboum.engine.content.feature.ability.StateAbilityName;
 import fr.free.totalboumboum.engine.content.feature.action.Circumstance;
 import fr.free.totalboumboum.engine.content.feature.action.GeneralAction;
 import fr.free.totalboumboum.engine.content.feature.action.SpecificAction;
@@ -338,7 +339,12 @@ public abstract class Sprite
 	public double getSpeedCoeff()
 	{	double result;
 		if(boundToSprite==null)
-			result = speedCoeff*Configuration.getEngineConfiguration().getSpeedCoeff();
+		{	result = speedCoeff*Configuration.getEngineConfiguration().getSpeedCoeff();
+			StateAbility ability = modulateStateAbility(StateAbilityName.SPRITE_WALK_SPEED_MODULATION);
+			// NOTE limitation to WALKING, or not?
+			if(ability.isActive() && currentGesture.getName()==GestureName.WALKING)
+				result = result*ability.getStrength();
+		}
 		else
 			result = boundToSprite.getSpeedCoeff();
 		return result;
@@ -378,6 +384,10 @@ public abstract class Sprite
 */	
 	public void modifyUse(AbstractAbility ability, int delta)
 	{	abilityManager.modifyUse(ability, delta);
+	}
+	
+	public void addDirectAbility(AbstractAbility ability)
+	{	abilityManager.addDirectAbility(ability);
 	}
 	
 	/////////////////////////////////////////////////////////////////

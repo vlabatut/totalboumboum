@@ -1004,10 +1004,10 @@ public class Launcher
 	
 	/*TODO instance NES BM2
 	 * - item veste ignifugée
-	 * - item mystère
-	 * - item accélérateur
-	 * x item shirobon (vie)
-	 * x item bouclier
+	 * X item mystère 		
+	 * X item accélérateur
+	 * X item shirobon (vie)
+	 * X item bouclier
 	 * - item malus
 	 */
 	
@@ -1015,9 +1015,11 @@ public class Launcher
 	 * - site : parler de la possibilité d'inclure des bombes dans le niveau, de base (pas vu dans BM officiel, mais très utilisé dans X-Blast)
 	 * - 		bonus vie
 	 * -		bonus bouclier
+	 * -		bonus mystère
+	 * -		bonus accélérateur
+	 * 
 	 */
 	
-	// accélerer le clignotement?
-	// implémenter le coef de vitesse
-	// rajouter la protec pr rebirth
+	// copier le rythme du clignotement sur nesBM2 voire SBM1?
+	// rajouter la restitution des items ramassés à la mort du perso
 }

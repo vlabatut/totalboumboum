@@ -47,7 +47,7 @@ import fr.free.totalboumboum.tools.FileTools;
 
 public class ItemFactoryLoader extends SpriteFactoryLoader
 {	
-	public static ItemFactory loadItemFactory(String folderPath, String itemName, ArrayList<AbstractAbility> itemAbilities, HashMap<String,ItemFactory> abstractItems) throws ParserConfigurationException, SAXException, IOException, ClassNotFoundException
+	public static ItemFactory loadItemFactory(String folderPath, String itemName, ArrayList<ArrayList<AbstractAbility>> itemAbilities, ArrayList<Float> itemProbabilities, HashMap<String,ItemFactory> abstractItems) throws ParserConfigurationException, SAXException, IOException, ClassNotFoundException
 	{	// init
 		ItemFactory result = new ItemFactory(itemName);
 		Element root = SpriteFactoryLoader.openFile(folderPath);
@@ -84,7 +84,7 @@ public class ItemFactoryLoader extends SpriteFactoryLoader
 		result.setBombset(bombset);
 
 		// ITEM ABILITIES
-		result.setItemAbilities(itemAbilities);
+		result.setItemAbilities(itemAbilities,itemProbabilities);
 		
 		// result
 		initDefaultGestures(gesturePack,Role.ITEM);

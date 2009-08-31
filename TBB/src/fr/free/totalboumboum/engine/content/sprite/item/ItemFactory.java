@@ -74,10 +74,14 @@ public class ItemFactory extends SpriteFactory<Item>
 	/////////////////////////////////////////////////////////////////
 	// ABILITIES		/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	private ArrayList<AbstractAbility> itemAbilities;
+	/** abilities given by this item */
+	private ArrayList<ArrayList<AbstractAbility>> itemAbilities;
+	/** probability associated to the list of abilities **/
+	private ArrayList<Float> itemProbabilities;
 	
-	public void setItemAbilities(ArrayList<AbstractAbility> itemAbilities)
+	public void setItemAbilities(ArrayList<ArrayList<AbstractAbility>> itemAbilities, ArrayList<Float> itemProbabilities)
 	{	this.itemAbilities = itemAbilities;
+		this.itemProbabilities = itemProbabilities;
 	}
 	
 	/////////////////////////////////////////////////////////////////
@@ -93,8 +97,19 @@ public class ItemFactory extends SpriteFactory<Item>
 		initSprite(result);
 	
 		// specific managers
-		// item ability
-		result.addItemAbilities(itemAbilities);
+		// item abilities
+		double proba = Math.random();
+		double total = 0;
+		int index = 0;
+		ArrayList<AbstractAbility> abilities = null;
+		while(index<itemAbilities.size() && abilities==null)
+		{	total = total + itemProbabilities.get(index);
+			if(proba<total)
+				abilities = itemAbilities.get(index);
+			else
+				index ++;
+		}
+		result.addItemAbilities(abilities);
 		// event
 		EventManager eventManager = new ItemEventManager(result);
 		result.setEventManager(eventManager);
@@ -112,12 +127,16 @@ public class ItemFactory extends SpriteFactory<Item>
 	{	if(!finished)
 		{	super.finish();
 			// item abilities
-			{	Iterator<AbstractAbility> it = itemAbilities.iterator();
-				while(it.hasNext())
-				{	AbstractAbility temp = it.next();
-					temp.finish();
-					it.remove();
+			{	for(ArrayList<AbstractAbility> list: itemAbilities)
+				{	Iterator<AbstractAbility> it = list.iterator();
+					while(it.hasNext())
+					{	AbstractAbility temp = it.next();
+						temp.finish();
+						it.remove();
+					}
 				}
+				itemAbilities.clear();
+				itemProbabilities.clear();
 			}
 		}
 	}
