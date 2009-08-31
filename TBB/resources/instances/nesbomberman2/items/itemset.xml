@@ -42,7 +42,7 @@
 		<item name="malus" folder="malus" >
 			<abilities>
 				<ability strength="-1">
-					<name value="SPRITE_WALK_SPEED_MODULATION" />
+					<name value="HERO_WALK_SPEED_MODULATION" />
 				</ability>
 			</abilities>
 		</item>
@@ -83,7 +83,7 @@
 			<!-- speed -->		
 			<abilities>
 				<ability strength="1">
-					<name value="SPRITE_WALK_SPEED_MODULATION" />
+					<name value="HERO_WALK_SPEED_MODULATION" />
 				</ability>
 			</abilities>
 			<!-- through bombs -->		
@@ -109,7 +109,7 @@
 		<item name="speed" folder="speed" >
 			<abilities>
 				<ability strength="1">
-					<name value="SPRITE_WALK_SPEED_MODULATION" />
+					<name value="HERO_WALK_SPEED_MODULATION" />
 				</ability>
 			</abilities>
 		</item>
