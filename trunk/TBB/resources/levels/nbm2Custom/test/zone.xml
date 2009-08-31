@@ -55,12 +55,14 @@
 			</tile>
 			<tile pos="5" >
 				<floor name="marked" />
+				<item name="malus" />
 			</tile>
 			<tile pos="6" >
 				<floor name="marked" />
 			</tile>
 			<tile pos="7" >
 				<floor name="regular" />
+				<item name="random" />
 			</tile>
 			<tile pos="8" >
 				<floor name="regular" />
@@ -74,6 +76,7 @@
 			</tile>
 			<tile pos="1" >
 				<floor name="marked" />
+				<item name="speed" />
 			</tile>
 			<tile pos="2" >
 				<floor name="marked" />

@@ -340,14 +340,15 @@ public abstract class Sprite
 	{	double result;
 		if(boundToSprite==null)
 		{	result = speedCoeff*Configuration.getEngineConfiguration().getSpeedCoeff();
-			StateAbility ability = modulateStateAbility(StateAbilityName.SPRITE_WALK_SPEED_MODULATION);
+			StateAbility ability = modulateStateAbility(StateAbilityName.HERO_WALK_SPEED_MODULATION);
 			// NOTE limitation to WALKING, or not?
 			if(currentGesture.getName()==GestureName.WALKING)
 			{	double coef = 1;
 				int speed = (int)ability.getStrength();
 				int delta = -(int)Math.signum(speed);
+				String name;
 				do
-				{	String name = StateAbilityName.getSpriteWalkSpeed(speed);
+				{	name = StateAbilityName.getSpriteWalkSpeed(speed);
 					if(name!=null) // i.e. if speed is not zero
 					{	ability = modulateStateAbility(name);
 						if(ability.isActive())
