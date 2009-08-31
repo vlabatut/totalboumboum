@@ -890,6 +890,9 @@ public class Launcher
 	 * voire limiter le nombre de joueurs pour une IA à 1 seul, mais sélectionnable plusieurs fois ?
 	 * à voir...
 	 * 
+	 * - SBM1 : copier le rythme du clignotement sur SBM1 (pr invincibilité)
+	 * 			remarque: le clignotement est sensé ralentir quand le temps est presque terminé
+	 * 
 	 * -------------------------------------------------------------------
 	 * - calcul de points : introduire des variables comme le nombre de joueurs (pour définir un bonus pr le joueur qui fait un perfect en survival)
 	 * - gérer le shrink
@@ -1020,6 +1023,5 @@ public class Launcher
 	 * 
 	 */
 	
-	// copier le rythme du clignotement sur nesBM2 voire SBM1?
 	// rajouter la restitution des items ramassés à la mort du perso
 }
