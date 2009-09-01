@@ -99,6 +99,7 @@ public class ItemFactory extends SpriteFactory<Item>
 		// specific managers
 		// item abilities
 		double proba = Math.random();
+//System.out.println("name: "+itemName+" proba: "+proba);		
 		double total = 0;
 		int index = 0;
 		ArrayList<AbstractAbility> abilities = null;

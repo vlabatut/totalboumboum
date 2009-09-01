@@ -148,10 +148,16 @@ public class HeroEventManager extends EventManager
 	private void controlDirection(ControlEvent event)
 	{	// common
 		Direction dir = Direction.valueOf(event.getName());
+		// control inversion?
+		StateAbility ability = sprite.modulateStateAbility(StateAbilityName.HERO_CONTROL_INVERSION);
+		if(ability.isActive())
+			dir = dir.getOpposite();
+		// mode
 		if(event.getMode())
 			controlDirection = controlDirection.put(dir);
 		else
 			controlDirection = controlDirection.drop(dir);
+		
 		// gesture dependant
 		if(gesture.equals(GestureName.JUMPING) || gesture.equals(GestureName.LANDING))
 		{	//NOTE ici il faudra certainement distinguer ON et OFF

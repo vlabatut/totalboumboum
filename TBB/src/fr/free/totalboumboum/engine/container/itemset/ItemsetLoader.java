@@ -102,6 +102,14 @@ public class ItemsetLoader
 		List<Element> elements = root.getChildren(XmlTools.ELT_ABILITIES);
 		for(Element e: elements)
 			loadAbilitiesElement(e,abilities,probabilities);
+		// normalize probas
+		float totalProba = 0;
+		for(Float f: probabilities)
+			totalProba = totalProba + f;
+		for(int i=0;i<probabilities.size();i++)
+		{	Float p = probabilities.get(i)/totalProba;
+			probabilities.set(i,p);
+		}
 		
 		// item factory
 		ItemFactory itemFactory = ItemFactoryLoader.loadItemFactory(individualFolder,name,abilities,probabilities,abstractItems);

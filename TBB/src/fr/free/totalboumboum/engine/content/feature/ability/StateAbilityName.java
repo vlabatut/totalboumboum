@@ -110,6 +110,9 @@ public class StateAbilityName
 	/** gesture duration when the hero cries or exults at the end of a round */
 	public static final String HERO_CELEBRATION_DURATION = "HERO_CELEBRATION_DURATION";
 	
+	/** invert the controls, used for disease items */
+	public static final String HERO_CONTROL_INVERSION = "HERO_CONTROL_INVERSION";
+	
 	/** number of times the hero can be bombed before being eliminated */
 	public static final String HERO_LIFE = "HERO_LIFE";
 

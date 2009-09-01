@@ -1011,7 +1011,7 @@ public class Launcher
 	 * X item accélérateur
 	 * X item shirobon (vie)
 	 * X item bouclier
-	 * - item malus
+	 * X item malus (cf le site)
 	 */
 	
 	/*TODO
@@ -1020,8 +1020,9 @@ public class Launcher
 	 * -		bonus bouclier
 	 * -		bonus mystère
 	 * -		bonus accélérateur
-	 * 
+	 * -		malus (lenteur, inversion)
 	 */
 	
 	// rajouter la restitution des items ramassés à la mort du perso
+	// pb avec changement de vitesse : n'affecte pas le contournement d'obstacles
 }
