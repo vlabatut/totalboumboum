@@ -29,6 +29,7 @@
 			<xsd:enumeration value="BOMB_RANGE" />
 			
 			<xsd:enumeration value="HERO_CELEBRATION_DURATION" />
+			<xsd:enumeration value="HERO_CONTROL_INVERSION" />
 			<xsd:enumeration value="HERO_FIRE_PROTECTION" />
 			<xsd:enumeration value="HERO_LIFE" />
 			<xsd:enumeration value="HERO_PUNCH_DURATION" />

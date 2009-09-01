@@ -40,9 +40,16 @@
 			</abilities>
 		</item>
 		<item name="malus" folder="malus" >
+			<!-- slow down -->
 			<abilities>
-				<ability strength="-1">
+				<ability strength="-1" time="30000" >
 					<name value="HERO_WALK_SPEED_MODULATION" />
+				</ability>
+			</abilities>
+			<!-- control inversion -->
+			<abilities>
+				<ability time="30000" >
+					<name value="HERO_CONTROL_INVERSION" />
 				</ability>
 			</abilities>
 		</item>

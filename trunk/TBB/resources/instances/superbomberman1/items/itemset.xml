@@ -9,9 +9,16 @@
 
 	<concrete-items>
 		<item name="disease" folder="disease" >
+			<!-- slow down -->
 			<abilities>
 				<ability strength="-1">
 					<name value="HERO_WALK_SPEED_MODULATION" />
+				</ability>
+			</abilities>
+			<!-- control inversion -->
+			<abilities>
+				<ability >
+					<name value="HERO_CONTROL_INVERSION" />
 				</ability>
 			</abilities>
 		</item>

@@ -34,7 +34,15 @@ import fr.free.totalboumboum.tools.XmlTools;
 
 public enum Direction
 {
-	NONE,RIGHT,DOWNRIGHT,DOWN,DOWNLEFT,LEFT,UPLEFT,UP,UPRIGHT;
+	NONE,
+	RIGHT,
+	DOWNRIGHT,
+	DOWN,
+	DOWNLEFT,
+	LEFT,
+	UPLEFT,
+	UP,
+	UPRIGHT;
 	
 	public Direction getNext()
 	{	Direction result;
