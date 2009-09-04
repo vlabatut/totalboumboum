@@ -33,6 +33,7 @@ import fr.free.totalboumboum.engine.content.feature.gesture.Gesture;
 import fr.free.totalboumboum.engine.content.feature.gesture.anime.AnimeDirection;
 import fr.free.totalboumboum.engine.content.feature.gesture.anime.AnimeStep;
 import fr.free.totalboumboum.engine.content.sprite.Sprite;
+import fr.free.totalboumboum.tools.ImageTools;
 
 public class AnimeManager
 {	/** sprite possédant ce manager */
@@ -61,6 +62,12 @@ public class AnimeManager
 	private boolean twinkleHide;
 	/** indicates how long the sprite has been twinkling */
 	private double twinkleTime;
+	/** indicates if the sprite should be black because of some blinking going on */
+	private boolean blinkBlack;
+	/** indicates how long the sprite has been blinking */
+	private double blinkTime;
+	/** constant used to modify the blinking image */
+	private float blinkParam = 2f;
 	
 /* ********************************
  * INIT
@@ -209,16 +216,18 @@ public class AnimeManager
 		double milliPeriod = Configuration.getEngineConfiguration().getMilliPeriod();
 		double delta = milliPeriod*sprite.getSpeedCoeff();	
 		currentTime = currentTime + delta;
+		
 		// anime time
 		animeTime = animeTime + delta*forcedDurationCoeff;
 		if(currentAnime.getRepeat() && animeDuration>0)
 		{	while(animeTime>animeDuration)
 				animeTime = animeTime - animeDuration;
 		}
+		
 		// twinkle?
 		StateAbility ability = sprite.modulateStateAbility(StateAbilityName.SPRITE_TWINKLE);
 		if(ability.isActive())
-		{	twinkleTime = twinkleTime + delta;
+		{	twinkleTime = twinkleTime + milliPeriod;
 			// get coef
 			double coef = ability.getStrength();
 			if(coef<=0)
@@ -238,7 +247,7 @@ public class AnimeManager
 					hideDuration = showDuration;
 			}
 			double twinkleDuration = (hideDuration+showDuration)/coef;
-			// NOTE all the previous processing stuff could be done once and for all, if we suppose these abilities don't change
+			// NOTE all the previous processing stuff could be done once and for all, if we suppose these abilities don't change, and the same holds for blinking
 			// process current twinkle state
 			long mod = ((long)twinkleTime) % ((long)twinkleDuration);
 			twinkleHide = mod>showDuration;
@@ -246,6 +255,38 @@ public class AnimeManager
 		else
 		{	twinkleHide = false;
 			twinkleTime = 0;
+		}
+		
+		// blink?
+		ability = sprite.modulateStateAbility(StateAbilityName.SPRITE_BLINK);
+		if(ability.isActive())
+		{	blinkTime = blinkTime + milliPeriod;
+			// get coef
+			double coef = ability.getStrength();
+			if(coef<=0)
+				coef = 1;
+			// get time values
+			ability = sprite.modulateStateAbility(StateAbilityName.SPRITE_BLINK_NORMAL);
+			double normalDuration = ability.getStrength();
+			ability = sprite.modulateStateAbility(StateAbilityName.SPRITE_BLINK_BLACK);
+			double blackDuration = ability.getStrength();
+			if(normalDuration<=0)
+			{	if(blackDuration<=0)
+					blackDuration = 500; // NOTE arbitrary value
+				normalDuration = blackDuration;
+			}
+			else
+			{	if(blackDuration<=0)
+					blackDuration = normalDuration;
+			}
+			double blinkDuration = (blackDuration+normalDuration)/coef;
+			// process current blink state
+			long mod = ((long)blinkTime) % ((long)blinkDuration);
+			blinkBlack = mod>normalDuration;
+		}
+		else
+		{	blinkBlack = false;
+			blinkTime = 0;
 		}
 	}
 	
@@ -287,13 +328,21 @@ public class AnimeManager
 	public boolean hasShadow()
 	{	return currentStep.hasShadow();	
 	}
+	
 	public BufferedImage getShadow()
-	{	return currentStep.getShadow();	
+	{	BufferedImage result = null;
+		if(!twinkleHide)
+		{	result = currentStep.getShadow();
+			if(blinkBlack)
+				result = ImageTools.getDarkenedImage(result,blinkParam);
+		}
+		return result;
 	}
 	
 	public double getShadowXShift()
 	{	return currentStep.getShadowXShift();
 	}
+	
 	public double getShadowYShift()
 	{	return currentStep.getShadowYShift();
 	}
@@ -309,7 +358,10 @@ public class AnimeManager
 	public BufferedImage getCurrentImage()
 	{	BufferedImage result = null;
 		if(!twinkleHide)
-			result = currentStep.getImage();
+		{	result = currentStep.getImage();
+			if(blinkBlack)
+				result = ImageTools.getDarkenedImage(result,blinkParam);
+		}
 		return result;
 	}
 

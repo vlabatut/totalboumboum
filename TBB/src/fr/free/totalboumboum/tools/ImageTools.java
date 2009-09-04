@@ -31,8 +31,11 @@ import java.awt.GraphicsEnvironment;
 import java.awt.RenderingHints;
 import java.awt.geom.AffineTransform;
 import java.awt.image.BufferedImage;
+import java.awt.image.BufferedImageOp;
 import java.awt.image.ColorModel;
+import java.awt.image.ConvolveOp;
 import java.awt.image.IndexColorModel;
+import java.awt.image.Kernel;
 import java.awt.image.WritableRaster;
 import java.io.File;
 import java.io.IOException;
@@ -302,6 +305,19 @@ public class ImageTools
 		result =  getCompatibleImage(result);
 		//
     	return result;    	
+    }
+    
+    /**
+     * process a new version of the image, which is darker if param<1 and lighter if param>1
+     * @param image
+     * @param param
+     * @return
+     */
+    public static BufferedImage getDarkenedImage(BufferedImage image, float param)
+    {	float[] brightKernel = {param};
+        BufferedImageOp bright = new ConvolveOp(new Kernel(1, 1, brightKernel));
+        BufferedImage result = bright.filter(image, null);
+        return result;
     }
 }
 
