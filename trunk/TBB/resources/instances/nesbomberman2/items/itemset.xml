@@ -15,6 +15,7 @@
 				</ability>
 			</abilities>
 		</item>
+		
 		<item name="extraflame" folder="extraflame">
 			<abilities>
 				<ability >
@@ -22,6 +23,7 @@
 				</ability>
 			</abilities>
 		</item>
+		
 		<item name="fireproof" folder="fireproof">
 			<abilities>
 				<ability time="15000">
@@ -32,6 +34,7 @@
 				</ability>
 			</abilities>
 		</item>
+		
 		<item name="life" folder="life">
 			<abilities>
 				<ability uses="1">
@@ -39,9 +42,13 @@
 				</ability>
 			</abilities>
 		</item>
+		
 		<item name="malus" folder="malus" >
 			<!-- slow down -->
 			<abilities>
+				<ability time="30000" >
+					<name value="SPRITE_BLINK" />
+				</ability>
 				<ability strength="-1" time="30000" >
 					<name value="HERO_WALK_SPEED_MODULATION" />
 				</ability>
@@ -49,10 +56,14 @@
 			<!-- control inversion -->
 			<abilities>
 				<ability time="30000" >
+					<name value="SPRITE_BLINK" />
+				</ability>
+				<ability time="30000" >
 					<name value="HERO_CONTROL_INVERSION" />
 				</ability>
 			</abilities>
 		</item>
+		
 		<item name="random" folder="random" >
 			<!-- extra bomb -->		
 			<abilities>
@@ -106,6 +117,7 @@
 				</ability>
 			</abilities>
 		</item>
+		
 		<item name="remotecontrol" folder="remotecontrol" >
 			<abilities>
 				<ability >
@@ -113,6 +125,7 @@
 				</ability>
 			</abilities>
 		</item>
+		
 		<item name="speed" folder="speed" >
 			<abilities>
 				<ability strength="1">
@@ -120,6 +133,7 @@
 				</ability>
 			</abilities>
 		</item>
+		
 		<item name="throughbombs" folder="throughbombs" >
 			<abilities>
 				<ability >
@@ -127,6 +141,7 @@
 				</ability>
 			</abilities>
 		</item>
+		
 		<item name="throughwalls" folder="throughwalls" >
 			<abilities>
 				<ability >
