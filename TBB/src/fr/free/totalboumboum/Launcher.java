@@ -1027,4 +1027,6 @@ public class Launcher
 	// quand on pose une bombe dans du feu, y faut qu'elle explose
 	//		>> vérifier qu'il y a bien un evt d'apparition émis par la bombe à son apparition 
 	//			et que le feu déjà présent dans la case y réagit bien
+	// mettre un seul type de clignotement, dont le paramètre correspond à la couleur de substitution (voire rien du tout pour un twinkle) 
+	// annuler le malus : l'item donne une abilité spécifique "anti-malus"
 }

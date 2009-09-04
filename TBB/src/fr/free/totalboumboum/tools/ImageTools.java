@@ -309,6 +309,7 @@ public class ImageTools
     
     /**
      * process a new version of the image, which is darker if param<1 and lighter if param>1
+     * method taken here: http://java.sun.com/developer/JDCTechTips/2004/tt0210.html
      * @param image
      * @param param
      * @return
