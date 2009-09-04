@@ -342,7 +342,11 @@ public abstract class Sprite
 		{	result = speedCoeff*Configuration.getEngineConfiguration().getSpeedCoeff();
 			StateAbility ability = modulateStateAbility(StateAbilityName.HERO_WALK_SPEED_MODULATION);
 			// NOTE limitation to WALKING, or not?
-			if(currentGesture.getName()==GestureName.WALKING)
+			if(currentGesture.getName()==GestureName.WALKING
+				|| currentGesture.getName()==GestureName.CARRYING
+				|| currentGesture.getName()==GestureName.STANDING
+				|| currentGesture.getName()==GestureName.HOLDING
+				|| currentGesture.getName()==GestureName.PUSHING)
 			{	double coef = 1;
 				int speed = (int)ability.getStrength();
 				int delta = -(int)Math.signum(speed);
