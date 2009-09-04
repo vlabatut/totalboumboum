@@ -424,6 +424,13 @@ if(previousPosX != currentPosX || previousPosY != currentPosY || previousPosZ !=
 		long milliPeriod = Configuration.getEngineConfiguration().getMilliPeriod();
 		double speedCoeff = sprite.getSpeedCoeff();
 		shiftX = xMove*currentTrajectory.getXInteraction()*milliPeriod*speedCoeff/1000;
+//if(sprite instanceof Hero)
+//{	System.out.println("xMove: "+xMove);
+//	System.out.println("currentTrajectory.getXInteraction(): "+currentTrajectory.getXInteraction());
+//	System.out.println("milliPeriod: "+milliPeriod);
+//	System.out.println("speedCoeff: "+speedCoeff);
+//	System.out.println("----------------------------");
+//}
 		shiftY = yMove*currentTrajectory.getYInteraction()*milliPeriod*speedCoeff/1000;
 		shiftZ = 0;
 		
@@ -463,6 +470,8 @@ if(previousPosX != currentPosX || previousPosY != currentPosY || previousPosZ !=
 //	System.out.println("position:"+previousPosX+","+previousPosY+" ("+sprite.getTile().getLine()+","+sprite.getTile().getCol()+") -> "+currentPosX+","+currentPosY+" ("+sprite.getLevel().getTile(currentPosX,currentPosY).getLine()+","+sprite.getLevel().getTile(currentPosX,currentPosY).getCol()+") ["+currentDirection+"]");	
 
 				double dist = Math.sqrt(Math.pow(dx,2)+Math.pow(dy,2));
+//if(sprite instanceof Hero)
+//	System.out.println("distance: "+dist);				
 				MoveZone mz = new MoveZone(sprite,previousPosX,previousPosY,currentPosX,currentPosY,moveDir,moveDir,dist);
 				mz.applyMove();
 				//

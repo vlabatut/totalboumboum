@@ -1024,5 +1024,7 @@ public class Launcher
 	 */
 	
 	// rajouter la restitution des items ramassés à la mort du perso
-	// pb avec changement de vitesse : n'affecte pas le contournement d'obstacles
+	// quand on pose une bombe dans du feu, y faut qu'elle explose
+	//		>> vérifier qu'il y a bien un evt d'apparition émis par la bombe à son apparition 
+	//			et que le feu déjà présent dans la case y réagit bien
 }
