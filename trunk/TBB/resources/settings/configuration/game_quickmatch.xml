@@ -19,6 +19,7 @@
 	</players>
 	<levels>
 		<level pack="nbm2Custom" folder="test" />
+		<level pack="sbm1Custom" folder="debug" />
 	</levels>
 </gameQuickmatch>
 

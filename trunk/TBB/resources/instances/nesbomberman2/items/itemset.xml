@@ -26,11 +26,17 @@
 		
 		<item name="fireproof" folder="fireproof">
 			<abilities>
+				<ability strength="50"  frame="true" time="15000" >
+					<name value="SPRITE_TWINKLE_COLOR"/>
+				</ability>
+				<ability strength="50"  frame="true" time="15000" >
+					<name value="SPRITE_TWINKLE_NORMAL"/>
+				</ability>
+				<ability strength="-1" frame="true" time="15000" >
+					<name value="SPRITE_TWINKLE" />
+				</ability>
 				<ability time="15000">
 					<name value="HERO_FIRE_PROTECTION" />
-				</ability>
-				<ability time="15000" >
-					<name value="SPRITE_TWINKLE" />
 				</ability>
 			</abilities>
 		</item>
@@ -46,17 +52,44 @@
 		<item name="malus" folder="malus" >
 			<!-- slow down -->
 			<abilities>
-				<ability time="30000" >
-					<name value="SPRITE_BLINK" />
+				<ability strength="200"  frame="true" time="30000" >
+					<name value="SPRITE_TWINKLE_COLOR"/>
+				</ability>
+				<ability strength="400"  frame="true" time="30000" >
+					<name value="SPRITE_TWINKLE_NORMAL"/>
+				</ability>
+				<ability strength="1" frame="true" time="30000" > <!-- #000001 almost black -->
+					<name value="SPRITE_TWINKLE" />
 				</ability>
 				<ability strength="-1" time="30000" >
 					<name value="HERO_WALK_SPEED_MODULATION" />
 				</ability>
 			</abilities>
+			<!-- speed up -->
+			<abilities>
+				<ability strength="200"  frame="true" time="30000" >
+					<name value="SPRITE_TWINKLE_COLOR"/>
+				</ability>
+				<ability strength="400"  frame="true" time="30000" >
+					<name value="SPRITE_TWINKLE_NORMAL"/>
+				</ability>
+				<ability strength="1" frame="true" time="30000" > <!-- #000001 almost black -->
+					<name value="SPRITE_TWINKLE" />
+				</ability>
+				<ability strength="maximum" time="30000" >
+					<name value="HERO_WALK_SPEED_MODULATION" />
+				</ability>
+			</abilities>
 			<!-- control inversion -->
 			<abilities>
-				<ability time="30000" >
-					<name value="SPRITE_BLINK" />
+				<ability strength="200"  frame="true" time="30000" >
+					<name value="SPRITE_TWINKLE_COLOR"/>
+				</ability>
+				<ability strength="400"  frame="true" time="30000" >
+					<name value="SPRITE_TWINKLE_NORMAL"/>
+				</ability>
+				<ability strength="1" frame="true" time="30000" > <!-- #000001 almost black -->
+					<name value="SPRITE_TWINKLE" />
 				</ability>
 				<ability time="30000" >
 					<name value="HERO_CONTROL_INVERSION" />

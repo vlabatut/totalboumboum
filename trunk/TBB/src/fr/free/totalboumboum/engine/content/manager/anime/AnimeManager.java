@@ -58,16 +58,14 @@ public class AnimeManager
 	/** coefficient de mofication du temps dû au délai imposé */
 	private double forcedDurationCoeff = 1;
 	
-	/** indicates if the sprite should be hidden because of some twinkle going on */
-	private boolean twinkleHide;
+	/** indicates if the sprite should be colored because of some twinkle going on */
+	private boolean twinkleChange;
+	/** color (or absence of color) used for twinkling */
+	private Integer twinkleColor;
 	/** indicates how long the sprite has been twinkling */
 	private double twinkleTime;
-	/** indicates if the sprite should be black because of some blinking going on */
-	private boolean blinkBlack;
-	/** indicates how long the sprite has been blinking */
-	private double blinkTime;
 	/** constant used to modify the blinking image */
-	private float blinkParam = 2f;
+//	private float blinkParam = 2f;
 	
 /* ********************************
  * INIT
@@ -99,7 +97,7 @@ public class AnimeManager
 	 */
 	public void updateGesture(Gesture gesture, Direction direction, boolean reinit, double forcedDuration)
 	{	currentDirection = direction;
-		twinkleHide = false;
+		twinkleChange = false;
 	
 //if(currentDirection==null)
 //	while(true)System.out.println("null direction");
@@ -226,16 +224,18 @@ public class AnimeManager
 		
 		// twinkle?
 		StateAbility ability = sprite.modulateStateAbility(StateAbilityName.SPRITE_TWINKLE);
-		if(ability.isActive())
+		int colorInt = (int)ability.getStrength();
+		if(colorInt!=0)
 		{	twinkleTime = twinkleTime + milliPeriod;
-			// get coef
-			double coef = ability.getStrength();
-			if(coef<=0)
-				coef = 1;
+			// get color
+			if(colorInt<0)
+				twinkleColor = null;
+			else
+				twinkleColor = colorInt;
 			// get time values
-			ability = sprite.modulateStateAbility(StateAbilityName.SPRITE_TWINKLE_SHOW);
+			ability = sprite.modulateStateAbility(StateAbilityName.SPRITE_TWINKLE_NORMAL);
 			double showDuration = ability.getStrength();
-			ability = sprite.modulateStateAbility(StateAbilityName.SPRITE_TWINKLE_HIDE);
+			ability = sprite.modulateStateAbility(StateAbilityName.SPRITE_TWINKLE_COLOR);
 			double hideDuration = ability.getStrength();
 			if(showDuration<=0)
 			{	if(hideDuration<=0)
@@ -246,48 +246,16 @@ public class AnimeManager
 			{	if(hideDuration<=0)
 					hideDuration = showDuration;
 			}
-			double twinkleDuration = (hideDuration+showDuration)/coef;
+			double twinkleDuration = hideDuration + showDuration;
 			// NOTE all the previous processing stuff could be done once and for all, if we suppose these abilities don't change, and the same holds for blinking
 			// process current twinkle state
 			long mod = ((long)twinkleTime) % ((long)twinkleDuration);
-			twinkleHide = mod>showDuration;
+			twinkleChange = mod>showDuration;
 		}
 		else
-		{	twinkleHide = false;
+		{	twinkleChange = false;
 			twinkleTime = 0;
-		}
-		
-		// blink?
-		ability = sprite.modulateStateAbility(StateAbilityName.SPRITE_BLINK);
-		if(ability.isActive())
-		{	blinkTime = blinkTime + milliPeriod;
-			// get coef
-			double coef = ability.getStrength();
-			if(coef<=0)
-				coef = 1;
-			// get time values
-			ability = sprite.modulateStateAbility(StateAbilityName.SPRITE_BLINK_NORMAL);
-			double normalDuration = ability.getStrength();
-			ability = sprite.modulateStateAbility(StateAbilityName.SPRITE_BLINK_BLACK);
-			double blackDuration = ability.getStrength();
-			if(normalDuration<=0)
-			{	if(blackDuration<=0)
-					blackDuration = 500; // NOTE arbitrary value
-				normalDuration = blackDuration;
-			}
-			else
-			{	if(blackDuration<=0)
-					blackDuration = normalDuration;
-			}
-			double blinkDuration = (blackDuration+normalDuration)/coef;
-			// process current blink state
-			long mod = ((long)blinkTime) % ((long)blinkDuration);
-			blinkBlack = mod>normalDuration;
-		}
-		else
-		{	blinkBlack = false;
-			blinkTime = 0;
-		}
+		}	
 	}
 	
 	/**
@@ -330,12 +298,14 @@ public class AnimeManager
 	}
 	
 	public BufferedImage getShadow()
-	{	BufferedImage result = null;
-		if(!twinkleHide)
-		{	result = currentStep.getShadow();
-			if(blinkBlack)
-				result = ImageTools.getDarkenedImage(result,blinkParam);
+	{	BufferedImage result = currentStep.getShadow();
+		if(twinkleChange)
+		{	if(twinkleColor==null)
+				result = null;
+			else
+				result = ImageTools.getFilledImage(result,twinkleColor);
 		}
+		//result = ImageTools.getDarkenedImage(result,blinkParam);
 		return result;
 	}
 	
@@ -356,12 +326,14 @@ public class AnimeManager
 	 * @return
 	 */
 	public BufferedImage getCurrentImage()
-	{	BufferedImage result = null;
-		if(!twinkleHide)
-		{	result = currentStep.getImage();
-			if(blinkBlack)
-				result = ImageTools.getDarkenedImage(result,blinkParam);
+	{	BufferedImage result = currentStep.getImage();
+		if(twinkleChange)
+		{	if(twinkleColor==null)
+				result = null;
+			else
+				result = ImageTools.getFilledImage(result,twinkleColor);
 		}
+		//result = ImageTools.getDarkenedImage(result,blinkParam);
 		return result;
 	}
 

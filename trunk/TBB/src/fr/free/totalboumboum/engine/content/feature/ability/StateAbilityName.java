@@ -35,13 +35,6 @@ public class StateAbilityName
 	/** higher sprite, should be drawn above (i.e. after) the others */
 	public static final String SPRITE_ABOVE = "SPRITE_ABOVE";
 	
-	/** the sprite is blinking, the strenght corresponds to a speed coefficient */
-	public static final String SPRITE_BLINK = "SPRITE_BLINK";	
-	/** time the sprite is black when blinking (for a x1 coefficient) */
-	public static final String SPRITE_BLINK_BLACK = "SPRITE_BLINK_BLACK";	
-	/** time the sprite is normal when blinking (for a x1 coefficient) */
-	public static final String SPRITE_BLINK_NORMAL = "SPRITE_BLINK_NORMAL";
-	
 	/** gesture duration for when the sprite enter a round */
 	public static final String SPRITE_ENTRY_DURATION = "SPRITE_ENTRY_DURATION";
 	
@@ -60,12 +53,12 @@ public class StateAbilityName
 	/** cross (some?) walls */
 	public static final String SPRITE_TRAVERSE_WALL = "SPRITE_TRAVERSE_WALL";
 	
-	/** the sprite is twinkling, the strenght corresponds to a speed coefficient */
+	/** the sprite is twinkling, the strenght corresponds to the twinkling color in RGB integer */
 	public static final String SPRITE_TWINKLE = "SPRITE_TWINKLE";	
-	/** time the sprite is hidden when twinkling (for a x1 coefficient) */
-	public static final String SPRITE_TWINKLE_HIDE = "SPRITE_TWINKLE_HIDE";	
-	/** time the sprite is shown when twinkling (for a x1 coefficient) */
-	public static final String SPRITE_TWINKLE_SHOW = "SPRITE_TWINKLE_SHOW";
+	/** time the sprite is colored (or hidden) when twinkling */
+	public static final String SPRITE_TWINKLE_COLOR = "SPRITE_TWINKLE_COLOR";	
+	/** time the sprite is normally shown when twinkling */
+	public static final String SPRITE_TWINKLE_NORMAL = "SPRITE_TWINKLE_NORMAL";
 	
 	/////////////////////////////////////////////////////////////////
 	// BLOCKS ABILITIES			/////////////////////////////////////

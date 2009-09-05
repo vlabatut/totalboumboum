@@ -4,9 +4,6 @@
 	<xsd:simpleType name="tStateAbilityPredefined">
 		<xsd:restriction base="xsd:string">
 			<xsd:enumeration value="SPRITE_ABOVE" />
-			<xsd:enumeration value="SPRITE_BLINK" />
-			<xsd:enumeration value="SPRITE_BLINK_BLACK" />
-			<xsd:enumeration value="SPRITE_BLINK_NORMAL" />
 			<xsd:enumeration value="SPRITE_ENTRY_DURATION" />
 			<xsd:enumeration value="SPRITE_FLAT" />
 			<xsd:enumeration value="SPRITE_MOVE_ASSISTANCE" />
@@ -14,8 +11,8 @@
 			<xsd:enumeration value="SPRITE_TRAVERSE_ITEM" />
 			<xsd:enumeration value="SPRITE_TRAVERSE_WALL" />
 			<xsd:enumeration value="SPRITE_TWINKLE" />
-			<xsd:enumeration value="SPRITE_TWINKLE_HIDE" />
-			<xsd:enumeration value="SPRITE_TWINKLE_SHOW" />
+			<xsd:enumeration value="SPRITE_TWINKLE_COLOR" />
+			<xsd:enumeration value="SPRITE_TWINKLE_NORMAL" />
 
 			<xsd:enumeration value="BLOCK_SPAWN" />
 			
@@ -58,6 +55,7 @@
 			<xsd:enumeration value="HERO_WALK_SPEED_P7" />
 			<xsd:enumeration value="HERO_WALK_SPEED_P8" />
 			<xsd:enumeration value="HERO_WALK_SPEED_P9" />
+			<xsd:enumeration value="HERO_WALK_SPEED_P99" />
 		</xsd:restriction>
 	</xsd:simpleType>
 

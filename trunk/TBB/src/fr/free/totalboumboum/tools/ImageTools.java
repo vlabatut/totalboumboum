@@ -63,7 +63,7 @@ public class ImageTools
 	 */
 	public static BufferedImage copyBufferedImage(BufferedImage image)
 	{	int type = image.getType();
-		BufferedImage copy = new BufferedImage(image.getWidth(), image.getHeight(), type/*BufferedImage.TYPE_INT_ARGB*/);
+		BufferedImage copy = new BufferedImage(image.getWidth(),image.getHeight(), type/*BufferedImage.TYPE_INT_ARGB*/);
 	  	// create a graphics context
 	  	Graphics2D g2d = copy.createGraphics();
 	    // g2d.setComposite(AlphaComposite.Src);	  	
@@ -174,7 +174,6 @@ public class ImageTools
 		}
 		return image;
 	}
-    
 
     private static BufferedImage getCompatibleImage(BufferedImage image)
     {	// get the graphical environment
@@ -302,7 +301,7 @@ public class ImageTools
 		g.drawImage(image,0,0,null);
 		g.dispose();
 		// make it compatible
-		result =  getCompatibleImage(result);
+		result = getCompatibleImage(result);
 		//
     	return result;    	
     }
@@ -320,5 +319,38 @@ public class ImageTools
         BufferedImage result = bright.filter(image, null);
         return result;
     }
-}
 
+    public static BufferedImage getFilledImage(BufferedImage image, Integer rgb)
+   	{	BufferedImage result = copyBufferedImage(image);
+    	int width = result.getWidth();
+   		int height = result.getHeight();
+    	for(int x=0;x<width;x++)
+    	{	for(int y=0;y<height;y++)
+    		{	int pixel = result.getRGB(x,y);
+//System.out.println("rgb: "+rgb);
+//System.out.println("x,y: "+x+","+y);    		
+//System.out.println("\tpixel: "+pixel);    		
+//Color pixelColour = new Color(pixel, true);
+				int a = (pixel >> 24) & 0xff;
+//int r = (pixel >> 16) & 0xff;
+//int g = (pixel >> 8) & 0xff;
+//int b = (pixel) & 0xff;
+//System.out.println("\ta,r,g,b: "+a+","+r+","+g+","+b);
+//System.out.println("\ta,r,g,b: "+pixelColour.getAlpha()+","+pixelColour.getRed()+","+pixelColour.getGreen()+","+pixelColour.getBlue());
+    			if(a>0)
+    			{	pixel = rgb + 256*256*256*a;
+//System.out.println("\tpixel2: "+pixel);    		
+//pixelColour = new Color(pixel, true);
+//a = (pixel >> 24) & 0xff;
+//r = (pixel >> 16) & 0xff;
+//g = (pixel >> 8) & 0xff;
+//b = (pixel) & 0xff;
+//System.out.println("\ta,r,g,b: "+pixelColour.getAlpha()+","+pixelColour.getRed()+","+pixelColour.getGreen()+","+pixelColour.getBlue());
+    				result.setRGB(x,y,pixel);
+    			}
+    		}
+    	}
+//System.out.println("--------------------------------");    		
+		return result;
+	}
+}
