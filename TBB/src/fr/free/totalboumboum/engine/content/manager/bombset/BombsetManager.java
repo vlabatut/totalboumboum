@@ -83,6 +83,7 @@ public class BombsetManager
 	public void dropBomb(Bomb bomb)
 	{	StateAbility ability = sprite.modulateStateAbility(StateAbilityName.BOMB_RANGE);
 		int flameRange = (int)ability.getStrength();
+System.out.println("flameRange: "+flameRange);		
 		Direction direction = sprite.getCurrentFacingDirection();
 		ability = sprite.modulateStateAbility(StateAbilityName.BOMB_NUMBER);
 		int droppedBombLimit = (int)ability.getStrength();

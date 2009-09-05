@@ -3,14 +3,6 @@
 		xsi:noNamespaceSchemaLocation="../../../../schemas/abilities.xsd" >
 
 		<!-- STATE -->
-<!-- 	SPRITE_BLINK_BLACK -->
-		<ability strength="320" frame="false" time="-1" uses="-1">
-			<name value="SPRITE_BLINK_BLACK"/>
-		</ability>
-<!-- 	SPRITE_BLINK_NORMAL -->
-		<ability strength="320" frame="false" time="-1" uses="-1">
-			<name value="SPRITE_BLINK_NORMAL"/>
-		</ability>
 <!-- SPRITE_ENTRY_DURATION --> 
 		<ability strength="1000" frame="false" time="-1" uses="-1">
 			<name value="SPRITE_ENTRY_DURATION" />
@@ -22,14 +14,6 @@
 <!-- 	SPRITE_TRAVERSE_ITEM -->
 		<ability strength="1" frame="false" time="-1" uses="-1">
 			<name value="SPRITE_TRAVERSE_ITEM"/>
-		</ability>
-<!-- 	SPRITE_TWINKLE_HIDE -->
-		<ability strength="125" frame="false" time="-1" uses="-1">
-			<name value="SPRITE_TWINKLE_HIDE"/>
-		</ability>
-<!-- 	SPRITE_TWINKLE_SHOW -->
-		<ability strength="250" frame="false" time="-1" uses="-1">
-			<name value="SPRITE_TWINKLE_SHOW"/>
 		</ability>
 <!--  	HERO_CELEBRATION_DURATION --> 
 		<ability strength="4000" frame="false" time="-1" uses="-1">
@@ -66,6 +50,9 @@
 		</ability>
 		<ability strength="2" frame="false" time="-1" uses="-1">
 			<name value="HERO_WALK_SPEED_P4" />
+		</ability>
+		<ability strength="4" frame="false" time="-1" uses="-1">
+			<name value="HERO_WALK_SPEED_P99" />
 		</ability>
 			
 		<!-- ACTION -->
