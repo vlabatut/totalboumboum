@@ -112,6 +112,9 @@ public class StateAbilityName
 	/** gesture duration when the hero cries or exults at the end of a round */
 	public static final String HERO_CELEBRATION_DURATION = "HERO_CELEBRATION_DURATION";
 	
+	/** bomb constipation: the hero can't drop any bombs */
+	public static final String HERO_CONSTIPATION = "HERO_CONSTIPATION";
+	
 	/** invert the controls, used for disease items */
 	public static final String HERO_CONTROL_INVERSION = "HERO_CONTROL_INVERSION";
 	

@@ -565,9 +565,35 @@ public class Level
 	{	
 //time = time + getConfiguration().getMilliPeriod();
 //if(startTime<0) startTime = System.currentTimeMillis();
+		// update floors
 		for(int line=0;line<globalHeight;line++)
 			for(int col=0;col<globalWidth;col++)
-				matrix[line][col].update();		
+				matrix[line][col].updateFloor();		
+
+		// update items
+		for(int line=0;line<globalHeight;line++)
+			for(int col=0;col<globalWidth;col++)
+				matrix[line][col].updateItem();		
+
+		// update blocks
+		for(int line=0;line<globalHeight;line++)
+			for(int col=0;col<globalWidth;col++)
+				matrix[line][col].updateBlock();		
+
+		// update bombs
+		for(int line=0;line<globalHeight;line++)
+			for(int col=0;col<globalWidth;col++)
+				matrix[line][col].updateBombs();		
+
+		// update fires
+		for(int line=0;line<globalHeight;line++)
+			for(int col=0;col<globalWidth;col++)
+				matrix[line][col].updateFires();		
+
+		// update heroes
+		for(int line=0;line<globalHeight;line++)
+			for(int col=0;col<globalWidth;col++)
+				matrix[line][col].updateHeroes();		
 	}
 
 	public void draw(Graphics g)

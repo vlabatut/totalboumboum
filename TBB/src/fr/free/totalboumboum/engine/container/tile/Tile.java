@@ -65,80 +65,81 @@ public class Tile
     /////////////////////////////////////////////////////////////////
 	// UPDATE				/////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	public void update()
-	{	// floor?
-		floor.update();
-		// heroes
-		{	int i=0;
-			while(i<heroes.size())
-			{	Hero temp = heroes.get(i);
-				@SuppressWarnings("unused")
-				double prevPosX = temp.getCurrentPosX();
-				@SuppressWarnings("unused")
-				double prevPosY = temp.getCurrentPosY();
-				temp.update();
-				double tempPosX = temp.getCurrentPosX();
-				double tempPosY = temp.getCurrentPosY();
-				if(temp.isToBeRemovedFromTile())
-				{	heroes.remove(i);
-					level.removeSprite(temp);
-					//NOTE à compléter (défaite)
-				}
-				else if(!containsPoint(tempPosX, tempPosY))
-				{	Tile newTile = level.getTile(tempPosX,tempPosY);
+	public void updateFloor()
+	{	floor.update();
+	}
+	public void updateHeroes()
+	{	int i=0;
+		while(i<heroes.size())
+		{	Hero temp = heroes.get(i);
+			@SuppressWarnings("unused")
+			double prevPosX = temp.getCurrentPosX();
+			@SuppressWarnings("unused")
+			double prevPosY = temp.getCurrentPosY();
+			temp.update();
+			double tempPosX = temp.getCurrentPosX();
+			double tempPosY = temp.getCurrentPosY();
+			if(temp.isToBeRemovedFromTile())
+			{	heroes.remove(i);
+				level.removeSprite(temp);
+				//NOTE à compléter (défaite)
+			}
+			else if(!containsPoint(tempPosX, tempPosY))
+			{	Tile newTile = level.getTile(tempPosX,tempPosY);
 //System.out.println("Tile.update>"+"tile:"+posX+";"+posY+" - case:"+line+";"+col);		
 //System.out.println("Tile.update>"+"sprite:"+tempPosX+";"+tempPosY+" - newCase:"+newTile.getLine()+";"+newTile.getCol());
-					heroes.remove(i);
-					newTile.addHero(temp);		
-				}
-				else
-					i++;
+				heroes.remove(i);
+				newTile.addHero(temp);		
 			}
-		}
-
-		// bombs
-		{	int i=0;
-			while(i<bombs.size())
-			{	Bomb temp = bombs.get(i);
-				@SuppressWarnings("unused")
-				double prevPosX = temp.getCurrentPosX();
-				@SuppressWarnings("unused")
-				double prevPosY = temp.getCurrentPosY();
-				temp.update();
-				double tempPosX = temp.getCurrentPosX();
-				double tempPosY = temp.getCurrentPosY();
-				if(temp.isToBeRemovedFromTile())
-				{	bombs.remove(i);
-					level.removeSprite(temp);
-					//NOTE à compléter (?)
-				}
-				else if(!containsPoint(tempPosX, tempPosY))
-				{	Tile newTile = level.getTile(tempPosX,tempPosY);
-//System.out.println("Tile.update>"+"tile:"+posX+";"+posY+" - case:"+line+";"+col);		
-//System.out.println("Tile.update>"+"sprite:"+tempPosX+";"+tempPosY+" - newCase:"+newTile.getLine()+";"+newTile.getCol());
-					bombs.remove(i);
-					newTile.addBomb(temp);		
-				}
-				else
-					i++;
-			}
-		}
-		
-		// fires
-		{	int i=0;
-			while(i<fires.size())
-			{	Fire temp = fires.get(i);
-				temp.update();
-				if(temp.isToBeRemovedFromTile())
-				{	fires.remove(i);
-					level.removeSprite(temp);
-					//NOTE à compléter (?)
-				}
+			else
 				i++;
-			}
 		}
-		// block
-		if(block!=null)
+	}
+
+	public void updateBombs()
+	{	int i=0;
+		while(i<bombs.size())
+		{	Bomb temp = bombs.get(i);
+			@SuppressWarnings("unused")
+			double prevPosX = temp.getCurrentPosX();
+			@SuppressWarnings("unused")
+			double prevPosY = temp.getCurrentPosY();
+			temp.update();
+			double tempPosX = temp.getCurrentPosX();
+			double tempPosY = temp.getCurrentPosY();
+			if(temp.isToBeRemovedFromTile())
+			{	bombs.remove(i);
+				level.removeSprite(temp);
+				//NOTE à compléter (?)
+			}
+			else if(!containsPoint(tempPosX, tempPosY))
+			{	Tile newTile = level.getTile(tempPosX,tempPosY);
+//System.out.println("Tile.update>"+"tile:"+posX+";"+posY+" - case:"+line+";"+col);		
+//System.out.println("Tile.update>"+"sprite:"+tempPosX+";"+tempPosY+" - newCase:"+newTile.getLine()+";"+newTile.getCol());
+				bombs.remove(i);
+				newTile.addBomb(temp);		
+			}
+			else
+				i++;
+		}
+	}
+		
+	public void updateFires()
+	{	int i=0;
+		while(i<fires.size())
+		{	Fire temp = fires.get(i);
+			temp.update();
+			if(temp.isToBeRemovedFromTile())
+			{	fires.remove(i);
+				level.removeSprite(temp);
+				//NOTE à compléter (?)
+			}
+			i++;
+		}
+	}
+
+	public void updateBlock()
+	{	if(block!=null)
 		{	block.update();
 			if(block.isToBeRemovedFromTile())
 			{	level.removeSprite(block); //NOTE deux lignes inversées, idem pr item
@@ -146,8 +147,10 @@ public class Tile
 				//NOTE à compléter (?)
 			}
 		}		
-		// item
-		if(item!=null)
+	}
+
+	public void updateItem()
+	{	if(item!=null)
 		{	item.update();
 			if(item.isToBeRemovedFromTile())
 			{	level.removeSprite(item); //NOTE deux lignes inversées, idem pr block
