@@ -193,6 +193,7 @@ public class Round implements StatisticHolder, Serializable
 	{	if(!roundOver)
 		{	remainingPlayers --;
 			playersStatus.set(index,new Boolean(false));
+//System.out.println("player out "+index+"("+loop.getTotalTime()+")");			
 		}
 	}
 	public void updateTime(long time)

@@ -9,6 +9,36 @@
 
 	<concrete-items>
 		<item name="disease" folder="disease" >
+			<!-- bomb constipation -->
+			<abilities>
+				<ability strength="320"  frame="true" time="15000" >
+					<name value="SPRITE_TWINKLE_COLOR"/>
+				</ability>
+				<ability strength="320"  frame="true" time="15000" >
+					<name value="SPRITE_TWINKLE_NORMAL"/>
+				</ability>
+				<ability strength="1" frame="true" time="15000" > <!-- #000001 almost black -->
+					<name value="SPRITE_TWINKLE" />
+				</ability>
+				<ability time="30000" >
+					<name value="HERO_CONSTIPATION" />
+				</ability>
+			</abilities>
+			<!-- control inversion -->
+			<abilities>
+				<ability strength="320" frame="true" time="15000" >
+					<name value="SPRITE_TWINKLE_COLOR"/>
+				</ability>
+				<ability strength="320" frame="true" time="15000" >
+					<name value="SPRITE_TWINKLE_NORMAL"/>
+				</ability>
+				<ability strength="1" frame="true" time="15000" > <!-- #000001 almost black -->
+					<name value="SPRITE_TWINKLE" />
+				</ability>
+				<ability >
+					<name value="HERO_CONTROL_INVERSION" />
+				</ability>
+			</abilities>
 			<!-- slow down -->
 			<abilities>
 				<ability strength="320" frame="true" time="15000" >
@@ -37,21 +67,6 @@
 				</ability>
 				<ability strength="100" frame="true">
 					<name value="HERO_WALK_SPEED_MODULATION" />
-				</ability>
-			</abilities>
-			<!-- control inversion -->
-			<abilities>
-				<ability strength="320" frame="true" time="15000" >
-					<name value="SPRITE_TWINKLE_COLOR"/>
-				</ability>
-				<ability strength="320" frame="true" time="15000" >
-					<name value="SPRITE_TWINKLE_NORMAL"/>
-				</ability>
-				<ability strength="1" frame="true" time="15000" > <!-- #000001 almost black -->
-					<name value="SPRITE_TWINKLE" />
-				</ability>
-				<ability >
-					<name value="HERO_CONTROL_INVERSION" />
 				</ability>
 			</abilities>
 		</item>

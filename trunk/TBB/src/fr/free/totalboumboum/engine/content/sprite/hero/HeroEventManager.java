@@ -185,18 +185,21 @@ public class HeroEventManager extends EventManager
 	
 	private void controlDropBomb(ControlEvent event)
 	{	if(event.getMode())
-		{	Bomb bomb = sprite.makeBomb();
-			SpecificDrop action = new SpecificDrop(sprite,bomb);
-			ActionAbility ability = sprite.modulateAction(action);
-			if(ability.isActive())
-			{	sprite.dropBomb(bomb);
-				if(gesture.equals(GestureName.WAITING))
-				{	setWaitDelay();
-					gesture = GestureName.STANDING;
-					sprite.setGesture(gesture,spriteDirection,controlDirection,true);					
+		{	StateAbility ablt = sprite.modulateStateAbility(StateAbilityName.HERO_CONSTIPATION);
+			if(!ablt.isActive())
+			{	Bomb bomb = sprite.makeBomb();
+				SpecificDrop action = new SpecificDrop(sprite,bomb);
+				ActionAbility ability = sprite.modulateAction(action);
+				if(ability.isActive())
+				{	sprite.dropBomb(bomb);
+					if(gesture.equals(GestureName.WAITING))
+					{	setWaitDelay();
+						gesture = GestureName.STANDING;
+						sprite.setGesture(gesture,spriteDirection,controlDirection,true);					
+					}
+					else if(gesture.equals(GestureName.STANDING))
+						setWaitDelay();
 				}
-				else if(gesture.equals(GestureName.STANDING))
-					setWaitDelay();
 			}
 		}
 	}

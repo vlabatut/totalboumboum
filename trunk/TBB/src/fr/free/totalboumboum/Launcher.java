@@ -830,12 +830,15 @@ public class Launcher
 	 * - mise en place d'un fond noir dans le loop panel avant que le niveau ne commence à apparaitre (juste avant le chargement)
 	 * - possibilité de définir des niveaux contenant des bombes, soit directement sur le sol, soit dans des blocks
 	 * - définition des animations d'apparition pour tous les thèmes de SBM1 et NBM2
-	 * - définition d'un système de cligontement pour les sprites
+	 * - définition d'un système de clignotement pour les sprites
+	 * - définition d'un système aléatoire de définition des abilités associées à un item (pour les malus et les surprise)
 	 * - implémentation de l'inversion des commandes
 	 * - implémentation de la gestion des vies, généralisation du moteur pour permettre au joueur de revenir en jeu
 	 * - implémentation des modificateurs de vitesse de déplacement au sol pour les héros
 	 * - implémentation de la résistance au feu
 	 * - nouveau système de maximum pour les StateAbilities (avec une ability supp contenant le suffixe _MAX)
+	 * - correction d'un bug concernant la précédence temporelle de certains évènements, en particulier quand deux joueurs brûlent au cours de la même explosion
+	 * - implémentation de la constipation bombique
 	 * 
 	 * 
 	 * - bug d'affichage quand les flammes se croisent au cours de plusieurs explosions: la dernière n'est pas affichée
@@ -1017,7 +1020,7 @@ public class Launcher
 	 * X item accélérateur
 	 * X item shirobon (vie)
 	 * X item bouclier
-	 * X item malus (rapidité,diarrhée,constipation,retardement+/-,invisibility)
+	 * X item malus (diarrhée,retardement+/-,invisibilité)
 	 */
 	
 	/*TODO
@@ -1026,7 +1029,7 @@ public class Launcher
 	 * -		bonus bouclier
 	 * -		bonus mystère
 	 * -		bonus accélérateur
-	 * -		malus (lenteur,inversion,rapidité)
+	 * -		malus (lenteur,inversion,rapidité,constipation)
 	 */
 	
 	// - rajouter la restitution des items ramassés à la mort du perso
@@ -1034,5 +1037,4 @@ public class Launcher
 	//		>> vérifier qu'il y a bien un evt d'apparition émis par la bombe à son apparition 
 	//			et que le feu déjà présent dans la case y réagit bien
 	// - annuler le malus : l'item donne une abilité spécifique "anti-malus"
-	// - lorsque plusieurs joueurs meurent au cours du même tour, il ne devrait pas y avoir de précédence temporelle (je pensais avoir déjà résolu ce pb non ?)
 }
