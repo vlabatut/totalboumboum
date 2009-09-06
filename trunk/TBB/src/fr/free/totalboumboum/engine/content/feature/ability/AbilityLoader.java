@@ -43,20 +43,15 @@ public class AbilityLoader
 {		
     private static AbstractAbility loadAbilityElement(Element root) throws ClassNotFoundException
     {	AbstractAbility result = null;
-		// max
-		float max = Float.MAX_VALUE;
-		Attribute attribute = root.getAttribute(XmlTools.ATT_MAX_STRENGTH);
-		if(attribute!=null)
-			max = Float.parseFloat(attribute.getValue());
-    	// strength
+		// strength
 		String strengthStr = root.getAttribute(XmlTools.ATT_STRENGTH).getValue().trim().toUpperCase(Locale.ENGLISH);
 		float strength;
 		if(strengthStr.equals(XmlTools.VAL_MAX))
-			strength = Float.MAX_VALUE; //NOTE format de données à inclure dans le XSD
+			strength = Float.MAX_VALUE; //NOTE format de données à inclure dans le XSD (>> actually I removed it)
 		else
 			strength = Float.parseFloat(strengthStr);
     	// frame
-		attribute = root.getAttribute(XmlTools.ATT_FRAME);
+		Attribute attribute = root.getAttribute(XmlTools.ATT_FRAME);
 		boolean frame = Boolean.parseBoolean(attribute.getValue());
     	// uses
 		attribute = root.getAttribute(XmlTools.ATT_USES);
@@ -76,7 +71,6 @@ public class AbilityLoader
 			GeneralAction action = GeneralActionLoader.loadActionElement(temp);
 			result = new ActionAbility(action);				
 		}
-		result.setMax(max);
 		result.setStrength(strength);
 		result.setFrame(frame);
 		result.setUses(uses);

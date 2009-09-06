@@ -107,10 +107,27 @@ public abstract class AiManager extends AbstractAiManager<Integer>
         ownPosition[0] = tile.getCol();
         ownPosition[1] = tile.getLine();
         // propriétés du joueur
-        StateAbility ab = sprite.modulateStateAbility(StateAbilityName.BOMB_RANGE);
-		ownFirePower = (int)ab.getStrength();
-        ab = sprite.modulateStateAbility(StateAbilityName.BOMB_NUMBER);
-		ownBombCount = (int)ab.getStrength() - sprite.getDroppedBombs().size();
+        {	// bomb range
+        	StateAbility ab = sprite.modulateStateAbility(StateAbilityName.BOMB_RANGE);
+			ownFirePower = (int)ab.getStrength();
+	        ab = sprite.modulateStateAbility(StateAbilityName.BOMB_RANGE_MAX);
+			if(ab.isActive())
+			{	int limit = (int)ab.getStrength();
+				if(ownFirePower>limit)
+					ownFirePower = limit;
+			}
+        }
+        {	// bomb number
+        	StateAbility ab = sprite.modulateStateAbility(StateAbilityName.BOMB_NUMBER);
+	        ab = sprite.modulateStateAbility(StateAbilityName.BOMB_NUMBER_MAX);
+			ownBombCount = (int)ab.getStrength();
+			if(ab.isActive())
+			{	int limit = (int)ab.getStrength();
+				if(ownBombCount>limit)
+					ownBombCount = limit;
+			}
+			ownBombCount = ownBombCount - sprite.getDroppedBombs().size();
+        }
 
         // position relative de l'éventuelle bombe
         bombPosition = ArtificialIntelligence.AI_DIR_NONE;
@@ -240,7 +257,7 @@ public abstract class AiManager extends AbstractAiManager<Integer>
 				int tempPlayerData[] = {tempX,tempY,tempDirAI};
 				players.add(tempPlayerData);
 				playersStates.add(!tempPlayer.getSprite().isEnded());
-		        ab = tempPlayer.getSprite().modulateStateAbility(StateAbilityName.BOMB_RANGE);
+				StateAbility ab = tempPlayer.getSprite().modulateStateAbility(StateAbilityName.BOMB_RANGE);
 		        firePowers.add((int)ab.getStrength());
 		        ab = tempPlayer.getSprite().modulateStateAbility(StateAbilityName.BOMB_NUMBER);
 		        bombCounts.add((int)ab.getStrength());
