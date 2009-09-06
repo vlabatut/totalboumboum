@@ -835,6 +835,7 @@ public class Launcher
 	 * - implémentation de la gestion des vies, généralisation du moteur pour permettre au joueur de revenir en jeu
 	 * - implémentation des modificateurs de vitesse de déplacement au sol pour les héros
 	 * - implémentation de la résistance au feu
+	 * - nouveau système de maximum pour les StateAbilities (avec une ability supp contenant le suffixe _MAX)
 	 * 
 	 * 
 	 * - bug d'affichage quand les flammes se croisent au cours de plusieurs explosions: la dernière n'est pas affichée
@@ -1025,7 +1026,7 @@ public class Launcher
 	 * -		bonus bouclier
 	 * -		bonus mystère
 	 * -		bonus accélérateur
-	 * -		malus (lenteur,inversion)
+	 * -		malus (lenteur,inversion,rapidité)
 	 */
 	
 	// - rajouter la restitution des items ramassés à la mort du perso
@@ -1033,10 +1034,5 @@ public class Launcher
 	//		>> vérifier qu'il y a bien un evt d'apparition émis par la bombe à son apparition 
 	//			et que le feu déjà présent dans la case y réagit bien
 	// - annuler le malus : l'item donne une abilité spécifique "anti-malus"
-	// - implémenter le malus de vitesse excessive
-	// 		visiblement le max des abilités n'est plus implémenté (?), par ex. pr la portée y a pas de limite
-	//		il faut voir comment la limite est implémentée en Java
-	//		dans l'idéal faudrait prendre le min de toutes les abilités combinées
-	//		ensuite il suffirait de définir les abilités des heros avec une limite, et celles des items ne seraient pas limitées
-	//		alternativement on pourrait définir (et ça serait plus souple) des abilités spéciales définissant ces bornes
+	// - lorsque plusieurs joueurs meurent au cours du même tour, il ne devrait pas y avoir de précédence temporelle (je pensais avoir déjà résolu ce pb non ?)
 }

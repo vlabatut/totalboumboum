@@ -76,7 +76,6 @@ public class ActionAbility extends AbstractAbility
 		GeneralAction a = action; //NOTE à copier ? (non)
 		result = new ActionAbility(a);
 		result.setFrame(frame);
-		result.setMax(max);
 		result.setStrength(strength);
 		result.setTime(time);
 		result.setUses(uses);

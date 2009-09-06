@@ -61,7 +61,6 @@ public class StateAbility extends AbstractAbility
 	{	StateAbility result;
 		result = new StateAbility(name);
 		result.setFrame(frame);
-		result.setMax(max);
 		result.setStrength(strength);
 		result.setTime(time);
 		result.setUses(uses);

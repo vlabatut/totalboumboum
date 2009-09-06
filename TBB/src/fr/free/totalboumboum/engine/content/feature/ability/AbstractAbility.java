@@ -24,21 +24,11 @@ package fr.free.totalboumboum.engine.content.feature.ability;
 public abstract class AbstractAbility
 {	
 	public AbstractAbility()
-	{	max = Float.MAX_VALUE;
-		strength = 0;
+	{	strength = 0;
 		time = -1;
 		uses = -1;
 	}
 
-	/////////////////////////////////////////////////////////////////
-	// MAX				/////////////////////////////////////////////
-	/////////////////////////////////////////////////////////////////
-	protected float max;
-
-	protected void setMax(float max)
-	{	this.max = max;
-	}
-	
 	/////////////////////////////////////////////////////////////////
 	// STRENGTH			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
@@ -50,10 +40,7 @@ public abstract class AbstractAbility
 	}
 
 	public float getStrength()
-	{	float result = strength;
-		if(strength>max)
-			result = max;
-		return result;
+	{	return strength;
 	}
 	
 	public void modifyStrength(float delta)

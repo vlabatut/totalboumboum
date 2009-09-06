@@ -81,12 +81,30 @@ public class BombsetManager
 	}
 	
 	public void dropBomb(Bomb bomb)
-	{	StateAbility ability = sprite.modulateStateAbility(StateAbilityName.BOMB_RANGE);
-		int flameRange = (int)ability.getStrength();
-System.out.println("flameRange: "+flameRange);		
+	{	// direction
 		Direction direction = sprite.getCurrentFacingDirection();
+		
+		// bomb range
+		StateAbility ability = sprite.modulateStateAbility(StateAbilityName.BOMB_RANGE);
+		int flameRange = (int)ability.getStrength();
+		ability = sprite.modulateStateAbility(StateAbilityName.BOMB_RANGE_MAX);
+		if(ability.isActive())
+		{	int limit = (int)ability.getStrength();
+			if(flameRange>limit)
+				flameRange = limit;
+		}
+//System.out.println("flameRange: "+flameRange);	
+		
+		// bomb number
 		ability = sprite.modulateStateAbility(StateAbilityName.BOMB_NUMBER);
 		int droppedBombLimit = (int)ability.getStrength();
+		ability = sprite.modulateStateAbility(StateAbilityName.BOMB_RANGE_MAX);
+		if(ability.isActive())
+		{	int limit = (int)ability.getStrength();
+			if(droppedBombLimit>limit)
+				droppedBombLimit = limit;
+		}
+		
 		if(droppedBombs.size()<droppedBombLimit)
 		{	if(bomb!=null)
 			{	bomb.setFlameRange(flameRange); //NOTE maybe it should be more consistent to use a specific StateAbility, initialized automatically from the owner when the bomb is made (by the bombfactory)?

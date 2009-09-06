@@ -26,7 +26,9 @@
 			<xsd:enumeration value="BOMB_TRIGGER_CONTROL" />
 			<xsd:enumeration value="BOMB_TRIGGER_TIMER" />
 			<xsd:enumeration value="BOMB_NUMBER" />
+			<xsd:enumeration value="BOMB_NUMBER_MAX" />
 			<xsd:enumeration value="BOMB_RANGE" />
+			<xsd:enumeration value="BOMB_RANGE_MAX" />
 			
 			<xsd:enumeration value="HERO_CELEBRATION_DURATION" />
 			<xsd:enumeration value="HERO_CONTROL_INVERSION" />
