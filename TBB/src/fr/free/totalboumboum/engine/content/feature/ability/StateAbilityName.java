@@ -41,6 +41,9 @@ public class StateAbilityName
 	/** completely flat sprite */
 	public static final String SPRITE_FLAT = "SPRITE_FLAT";
 	
+	/** sprite temporarily invisible */
+	public static final String SPRITE_INVISIBLE = "SPRITE_INVISIBLE";
+	
 	/** when an obstacle is collided, it helps avoiding it (dedicated to heroes, mainly) */
 	public static final String SPRITE_MOVE_ASSISTANCE = "SPRITE_MOVE_ASSISTANCE";
 	
@@ -117,6 +120,9 @@ public class StateAbilityName
 	
 	/** invert the controls, used for disease items */
 	public static final String HERO_CONTROL_INVERSION = "HERO_CONTROL_INVERSION";
+	
+	/** bomb constipation: the hero can't help dropping bombs */
+	public static final String HERO_DIARRHEA = "HERO_DIARRHEA";
 	
 	/** number of times the hero can be bombed before being eliminated */
 	public static final String HERO_LIFE = "HERO_LIFE";

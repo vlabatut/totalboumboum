@@ -35,6 +35,7 @@ import fr.free.totalboumboum.engine.content.feature.action.appear.SpecificAppear
 import fr.free.totalboumboum.engine.content.feature.action.detonate.SpecificDetonate;
 import fr.free.totalboumboum.engine.content.feature.action.trigger.SpecificTrigger;
 import fr.free.totalboumboum.engine.content.feature.event.ActionEvent;
+import fr.free.totalboumboum.engine.content.feature.event.ControlEvent;
 import fr.free.totalboumboum.engine.content.sprite.Sprite;
 import fr.free.totalboumboum.engine.content.sprite.bomb.Bomb;
 import fr.free.totalboumboum.game.statistics.StatisticAction;
@@ -84,59 +85,76 @@ public class BombsetManager
 	{	// direction
 		Direction direction = sprite.getCurrentFacingDirection();
 		
-		// bomb range
-		StateAbility ability = sprite.modulateStateAbility(StateAbilityName.BOMB_RANGE);
-		int flameRange = (int)ability.getStrength();
-		ability = sprite.modulateStateAbility(StateAbilityName.BOMB_RANGE_MAX);
-		if(ability.isActive())
-		{	int limit = (int)ability.getStrength();
-			if(flameRange>limit)
-				flameRange = limit;
-		}
+		// can the bomb appear here?
+		SpecificAppear action = new SpecificAppear(bomb,direction);
+		ActionAbility ablt = bomb.modulateAction(action);
+		if(ablt.isActive())
+		{	// bomb range
+			StateAbility ability = sprite.modulateStateAbility(StateAbilityName.BOMB_RANGE);
+			int flameRange = (int)ability.getStrength();
+			ability = sprite.modulateStateAbility(StateAbilityName.BOMB_RANGE_MAX);
+			if(ability.isActive())
+			{	int limit = (int)ability.getStrength();
+				if(flameRange>limit)
+					flameRange = limit;
+			}
 //System.out.println("flameRange: "+flameRange);	
 		
-		// bomb number
-		ability = sprite.modulateStateAbility(StateAbilityName.BOMB_NUMBER);
-		int droppedBombLimit = (int)ability.getStrength();
-		ability = sprite.modulateStateAbility(StateAbilityName.BOMB_RANGE_MAX);
-		if(ability.isActive())
-		{	int limit = (int)ability.getStrength();
-			if(droppedBombLimit>limit)
-				droppedBombLimit = limit;
-		}
-		
-		if(droppedBombs.size()<droppedBombLimit)
-		{	if(bomb!=null)
-			{	bomb.setFlameRange(flameRange); //NOTE maybe it should be more consistent to use a specific StateAbility, initialized automatically from the owner when the bomb is made (by the bombfactory)?
-				Tile tile = sprite.getTile();
-				SpecificAction specificAction = new SpecificAppear(bomb);
-				ActionAbility ablt = bomb.modulateAction(specificAction);
-				if(ablt.isActive())
-				{	bomb.setCurrentPosX(tile.getPosX());
-					bomb.setCurrentPosY(tile.getPosY());
-					bomb.appear(direction);
-					droppedBombs.offer(bomb);
-					// stats
-					StatisticAction statAction = StatisticAction.DROP_BOMB;
-					long statTime = sprite.getLoopTime();
-					String statActor = sprite.getPlayer().getFileName();
-					String statTarget = bomb.getBombName();
-					StatisticEvent statEvent = new StatisticEvent(statActor,statAction,statTarget,statTime);
-					sprite.addStatisticEvent(statEvent);
-//System.out.println("droppedBombCount:"+droppedBombCount);	
+			// bomb number
+			ability = sprite.modulateStateAbility(StateAbilityName.BOMB_NUMBER);
+			int droppedBombLimit = (int)ability.getStrength();
+			ability = sprite.modulateStateAbility(StateAbilityName.BOMB_RANGE_MAX);
+			if(ability.isActive())
+			{	int limit = (int)ability.getStrength();
+				if(droppedBombLimit>limit)
+					droppedBombLimit = limit;
+			}
+System.out.println("droppedBombLimit: "+droppedBombLimit);	
+System.out.println("droppedBombs.size(): "+droppedBombs.size());	
+			
+			if(droppedBombs.size()<droppedBombLimit)
+			{	if(bomb!=null)
+				{	bomb.setFlameRange(flameRange); //NOTE maybe it should be more consistent to use a specific StateAbility, initialized automatically from the owner when the bomb is made (by the bombfactory)?
+					Tile tile = sprite.getTile();
+					SpecificAction specificAction = new SpecificAppear(bomb);
+					ablt = bomb.modulateAction(specificAction);
+					if(ablt.isActive())
+					{	bomb.setCurrentPosX(tile.getPosX());
+						bomb.setCurrentPosY(tile.getPosY());
+						bomb.appear(direction);
+						droppedBombs.offer(bomb);
+						// stats
+						StatisticAction statAction = StatisticAction.DROP_BOMB;
+						long statTime = sprite.getLoopTime();
+						String statActor = sprite.getPlayer().getFileName();
+						String statTarget = bomb.getBombName();
+						StatisticEvent statEvent = new StatisticEvent(statActor,statAction,statTarget,statTime);
+						sprite.addStatisticEvent(statEvent);
+//System.out.println("droppedBombCount:"+droppedBombCount);
+					}
 				}
 			}
 		}
 	}
 
 	public void update()
-	{	Iterator<Bomb> i = droppedBombs.iterator();
+	{	// dropped bombs
+		Iterator<Bomb> i = droppedBombs.iterator();
 		while(i.hasNext())
 		{	Bomb bomb = i.next();
 			if(bomb.isEnded())
 			{	i.remove();
 //System.out.println("droppedBombCount:"+droppedBombCount);	
 			}
+		}
+		
+		// diarrhea disease
+		StateAbility ab = sprite.modulateStateAbility(StateAbilityName.HERO_DIARRHEA);
+		if(ab.isActive())
+		{	ControlEvent event = new ControlEvent(ControlEvent.DROPBOMB,true);
+			sprite.putControlEvent(event);
+			event = new ControlEvent(ControlEvent.DROPBOMB,false);
+			sprite.putControlEvent(event);
 		}
 	}
 

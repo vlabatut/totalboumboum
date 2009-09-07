@@ -24,6 +24,21 @@
 					<name value="HERO_CONSTIPATION" />
 				</ability>
 			</abilities>
+			<!-- bomb diarrhea-->
+			<abilities>
+				<ability strength="320"  frame="true" time="15000" >
+					<name value="SPRITE_TWINKLE_COLOR"/>
+				</ability>
+				<ability strength="320"  frame="true" time="15000" >
+					<name value="SPRITE_TWINKLE_NORMAL"/>
+				</ability>
+				<ability strength="1" frame="true" time="15000" > <!-- #000001 almost black -->
+					<name value="SPRITE_TWINKLE" />
+				</ability>
+				<ability time="15000" >
+					<name value="HERO_DIARRHEA" />
+				</ability>
+			</abilities>
 			<!-- control inversion -->
 			<abilities>
 				<ability strength="320" frame="true" time="15000" >
@@ -37,6 +52,12 @@
 				</ability>
 				<ability >
 					<name value="HERO_CONTROL_INVERSION" />
+				</ability>
+			</abilities>
+			<!-- invisibility -->
+			<abilities>
+				<ability time="15000" >
+					<name value="SPRITE_INVISIBLE" />
 				</ability>
 			</abilities>
 			<!-- slow down -->

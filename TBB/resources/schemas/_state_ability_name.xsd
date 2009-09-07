@@ -6,6 +6,7 @@
 			<xsd:enumeration value="SPRITE_ABOVE" />
 			<xsd:enumeration value="SPRITE_ENTRY_DURATION" />
 			<xsd:enumeration value="SPRITE_FLAT" />
+			<xsd:enumeration value="SPRITE_INVISIBLE" />
 			<xsd:enumeration value="SPRITE_MOVE_ASSISTANCE" />
 			<xsd:enumeration value="SPRITE_TRAVERSE_BOMB" />
 			<xsd:enumeration value="SPRITE_TRAVERSE_ITEM" />
@@ -33,6 +34,7 @@
 			<xsd:enumeration value="HERO_CELEBRATION_DURATION" />
 			<xsd:enumeration value="HERO_CONSTIPATION" />
 			<xsd:enumeration value="HERO_CONTROL_INVERSION" />
+			<xsd:enumeration value="HERO_DIARRHEA" />
 			<xsd:enumeration value="HERO_FIRE_PROTECTION" />
 			<xsd:enumeration value="HERO_LIFE" />
 			<xsd:enumeration value="HERO_PUNCH_DURATION" />
