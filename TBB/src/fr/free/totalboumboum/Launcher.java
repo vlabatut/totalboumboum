@@ -1020,7 +1020,7 @@ public class Launcher
 	 * X item accélérateur
 	 * X item shirobon (vie)
 	 * X item bouclier
-	 * X item malus (diarrhée,retardement+/-)
+	 * X item malus (retardement+/-)
 	 */
 	
 	/*TODO
@@ -1029,7 +1029,7 @@ public class Launcher
 	 * -		bonus bouclier
 	 * -		bonus mystère
 	 * -		bonus accélérateur
-	 * -		malus (lenteur,inversion,rapidité,constipation,invisibilité)
+	 * -		malus (lenteur,inversion,rapidité,constipation,diarrhée,invisibilité)
 	 */
 	
 	// - rajouter la restitution des items ramassés à la mort du perso

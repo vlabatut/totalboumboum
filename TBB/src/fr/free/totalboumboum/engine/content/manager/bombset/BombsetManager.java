@@ -38,6 +38,7 @@ import fr.free.totalboumboum.engine.content.feature.event.ActionEvent;
 import fr.free.totalboumboum.engine.content.feature.event.ControlEvent;
 import fr.free.totalboumboum.engine.content.sprite.Sprite;
 import fr.free.totalboumboum.engine.content.sprite.bomb.Bomb;
+import fr.free.totalboumboum.engine.content.sprite.hero.Hero;
 import fr.free.totalboumboum.game.statistics.StatisticAction;
 import fr.free.totalboumboum.game.statistics.StatisticEvent;
 
@@ -84,10 +85,11 @@ public class BombsetManager
 	public void dropBomb(Bomb bomb)
 	{	// direction
 		Direction direction = sprite.getCurrentFacingDirection();
-		
+
 		// can the bomb appear here?
 		SpecificAppear action = new SpecificAppear(bomb,direction);
 		ActionAbility ablt = bomb.modulateAction(action);
+//System.out.println(sprite.getCurrentPosX()+": "+ablt.isActive());		
 		if(ablt.isActive())
 		{	// bomb range
 			StateAbility ability = sprite.modulateStateAbility(StateAbilityName.BOMB_RANGE);
@@ -109,8 +111,8 @@ public class BombsetManager
 				if(droppedBombLimit>limit)
 					droppedBombLimit = limit;
 			}
-System.out.println("droppedBombLimit: "+droppedBombLimit);	
-System.out.println("droppedBombs.size(): "+droppedBombs.size());	
+//System.out.println("droppedBombLimit: "+droppedBombLimit);	
+//System.out.println("droppedBombs.size(): "+droppedBombs.size());	
 			
 			if(droppedBombs.size()<droppedBombLimit)
 			{	if(bomb!=null)
@@ -150,11 +152,13 @@ System.out.println("droppedBombs.size(): "+droppedBombs.size());
 		
 		// diarrhea disease
 		StateAbility ab = sprite.modulateStateAbility(StateAbilityName.HERO_DIARRHEA);
+//if(sprite instanceof Hero)
+//System.out.println("diarrhea ("+sprite.getCurrentPosX()+"): "+ab.isActive());		
 		if(ab.isActive())
 		{	ControlEvent event = new ControlEvent(ControlEvent.DROPBOMB,true);
 			sprite.putControlEvent(event);
-			event = new ControlEvent(ControlEvent.DROPBOMB,false);
-			sprite.putControlEvent(event);
+//			event = new ControlEvent(ControlEvent.DROPBOMB,false);
+//			sprite.putControlEvent(event);
 		}
 	}
 

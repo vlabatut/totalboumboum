@@ -74,12 +74,17 @@ public class ControlManager
 	public synchronized void update()
 	{	if(currentControls.size()>0 || controlCodes.size()>0)
 			updateCodes();
-		else if(controlEvents.size()>0)
+		if(controlEvents.size()>0)
 			updateEvents();
 	}
 	
 	private void updateEvents()
-	{	// transmiting the events to the event manager
+	{	
+//if(sprite instanceof Sprite)
+//for(ControlEvent c: controlEvents)
+//	System.out.print(c+" ; ");
+
+		// transmiting the events to the event manager
 		Iterator<ControlEvent> i = controlEvents.iterator();
 		while(i.hasNext())
 		{	ControlEvent temp = i.next();
