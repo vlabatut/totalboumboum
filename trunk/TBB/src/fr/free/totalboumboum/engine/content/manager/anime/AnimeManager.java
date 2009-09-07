@@ -67,6 +67,12 @@ public class AnimeManager
 	/** constant used to modify the blinking image */
 //	private float blinkParam = 2f;
 	
+	/** sprite temporarily invisible */
+	private boolean invisible;
+	/** chance for the sprite not to be invisible when he's supposed to be */
+	private float visibleProbability = 0.02f;
+	
+	
 /* ********************************
  * INIT
  * ********************************
@@ -222,40 +228,49 @@ public class AnimeManager
 				animeTime = animeTime - animeDuration;
 		}
 		
-		// twinkle?
-		StateAbility ability = sprite.modulateStateAbility(StateAbilityName.SPRITE_TWINKLE);
-		int colorInt = (int)ability.getStrength();
-		if(colorInt!=0)
-		{	twinkleTime = twinkleTime + milliPeriod;
-			// get color
-			if(colorInt<0)
-				twinkleColor = null;
-			else
-				twinkleColor = colorInt;
-			// get time values
-			ability = sprite.modulateStateAbility(StateAbilityName.SPRITE_TWINKLE_NORMAL);
-			double showDuration = ability.getStrength();
-			ability = sprite.modulateStateAbility(StateAbilityName.SPRITE_TWINKLE_COLOR);
-			double hideDuration = ability.getStrength();
-			if(showDuration<=0)
-			{	if(hideDuration<=0)
-					hideDuration = 500; // NOTE arbitrary value
-				showDuration = hideDuration;
-			}
-			else
-			{	if(hideDuration<=0)
-					hideDuration = showDuration;
-			}
-			double twinkleDuration = hideDuration + showDuration;
-			// NOTE all the previous processing stuff could be done once and for all, if we suppose these abilities don't change, and the same holds for blinking
-			// process current twinkle state
-			long mod = ((long)twinkleTime) % ((long)twinkleDuration);
-			twinkleChange = mod>showDuration;
+		// invisible?
+		StateAbility ability = sprite.modulateStateAbility(StateAbilityName.SPRITE_INVISIBLE);
+		if(ability.isActive())
+		{	double proba = Math.random();
+			invisible = proba>=visibleProbability;
 		}
-		else
-		{	twinkleChange = false;
-			twinkleTime = 0;
-		}	
+		
+		if(!invisible)
+		{	// twinkle?
+			ability = sprite.modulateStateAbility(StateAbilityName.SPRITE_TWINKLE);
+			int colorInt = (int)ability.getStrength();
+			if(colorInt!=0)
+			{	twinkleTime = twinkleTime + milliPeriod;
+				// get color
+				if(colorInt<0)
+					twinkleColor = null;
+				else
+					twinkleColor = colorInt;
+				// get time values
+				ability = sprite.modulateStateAbility(StateAbilityName.SPRITE_TWINKLE_NORMAL);
+				double showDuration = ability.getStrength();
+				ability = sprite.modulateStateAbility(StateAbilityName.SPRITE_TWINKLE_COLOR);
+				double hideDuration = ability.getStrength();
+				if(showDuration<=0)
+				{	if(hideDuration<=0)
+						hideDuration = 500; // NOTE arbitrary value
+					showDuration = hideDuration;
+				}
+				else
+				{	if(hideDuration<=0)
+						hideDuration = showDuration;
+				}
+				double twinkleDuration = hideDuration + showDuration;
+				// NOTE all the previous processing stuff could be done once and for all, if we suppose these abilities don't change, and the same holds for blinking
+				// process current twinkle state
+				long mod = ((long)twinkleTime) % ((long)twinkleDuration);
+				twinkleChange = mod>showDuration;
+			}
+			else
+			{	twinkleChange = false;
+				twinkleTime = 0;
+			}
+		}
 	}
 	
 	/**
@@ -298,12 +313,15 @@ public class AnimeManager
 	}
 	
 	public BufferedImage getShadow()
-	{	BufferedImage result = currentStep.getShadow();
-		if(twinkleChange)
-		{	if(twinkleColor==null)
-				result = null;
-			else
-				result = ImageTools.getFilledImage(result,twinkleColor);
+	{	BufferedImage result = null;
+		if(!invisible)
+		{	result = currentStep.getShadow();
+			if(twinkleChange)
+			{	if(twinkleColor==null)
+					result = null;
+				else
+					result = ImageTools.getFilledImage(result,twinkleColor);
+			}
 		}
 		//result = ImageTools.getDarkenedImage(result,blinkParam);
 		return result;
@@ -326,12 +344,15 @@ public class AnimeManager
 	 * @return
 	 */
 	public BufferedImage getCurrentImage()
-	{	BufferedImage result = currentStep.getImage();
-		if(twinkleChange)
-		{	if(twinkleColor==null)
-				result = null;
-			else
-				result = ImageTools.getFilledImage(result,twinkleColor);
+	{	BufferedImage result = null;
+		if(!invisible)
+		{	result = currentStep.getImage();
+			if(twinkleChange)
+			{	if(twinkleColor==null)
+					result = null;
+				else
+					result = ImageTools.getFilledImage(result,twinkleColor);
+			}
 		}
 		//result = ImageTools.getDarkenedImage(result,blinkParam);
 		return result;
