@@ -26,6 +26,7 @@ import java.util.Iterator;
 
 import fr.free.totalboumboum.engine.container.tile.Tile;
 import fr.free.totalboumboum.engine.content.feature.ability.StateAbility;
+import fr.free.totalboumboum.engine.content.feature.ability.StateAbilityName;
 import fr.free.totalboumboum.engine.content.sprite.Sprite;
 import fr.free.totalboumboum.engine.content.sprite.bomb.Bomb;
 import fr.free.totalboumboum.engine.content.sprite.bomb.BombFactory;
@@ -83,9 +84,24 @@ public class Bombset
 					goOn = false;
 			}
 			if(goOn)
-			{	BombFactory bf = bombFactories.get(ind);
+			{	// make sprite
+				BombFactory bf = bombFactories.get(ind);
 				result = bf.makeSprite(tile);
+				// set owner
 				result.setOwner(sprite);
+				// set time
+				StateAbility ab = result.modulateStateAbility(StateAbilityName.BOMB_TRIGGER_TIMER);
+				if(ab.isActive())
+				{	float time = ab.getStrength();
+					ab = sprite.modulateStateAbility(StateAbilityName.HERO_BOMB_TIMER_COEFFICIENT);
+					float coef = ab.getStrength();
+					float delta = time*coef - time;
+					StateAbility ab2 = new StateAbility(StateAbilityName.BOMB_TRIGGER_TIMER);
+					ab2.setStrength(delta);
+					result.addDirectAbility(ab2);
+System.out.println("coef:"+coef);			
+System.out.println("time:"+time);					
+				}
 			}
 			else
 				ind++;
