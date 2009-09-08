@@ -1027,4 +1027,5 @@ public class Launcher
 	//		>> vérifier qu'il y a bien un evt d'apparition émis par la bombe à son apparition 
 	//			et que le feu déjà présent dans la case y réagit bien
 	// - annuler le malus : l'item donne une abilité spécifique "anti-malus"
+	// - l'éventuel malus (bonus aussi?) en cours doit être annulé lorsqu'on renait
 }

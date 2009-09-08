@@ -73,7 +73,8 @@ public class BombEventManager extends EventManager
 	}
 
 	private void actionConsume(ActionEvent event)
-	{	if(gesture.equals(GestureName.OSCILLATING) || gesture.equals(GestureName.OSCILLATING_FAILING) 
+	{	if(gesture.equals(GestureName.APPEARING)
+			|| gesture.equals(GestureName.OSCILLATING) || gesture.equals(GestureName.OSCILLATING_FAILING) 
 			|| gesture.equals(GestureName.SLIDING) || gesture.equals(GestureName.SLIDING) 
 			|| gesture.equals(GestureName.STANDING) || gesture.equals(GestureName.STANDING_FAILING))
 		{	StateAbility a = sprite.modulateStateAbility(StateAbilityName.BOMB_EXPLOSION_LATENCY);
@@ -417,7 +418,8 @@ public class BombEventManager extends EventManager
 	{	gesture = GestureName.APPEARING;
 		spriteDirection = direction;
 		sprite.setGesture(gesture,spriteDirection,Direction.NONE,true);
-		sprite.getTile().addSprite(sprite);	
+		sprite.getTile().addSprite(sprite);
+		enterTile();
 	}
 	
 	private void stand()
