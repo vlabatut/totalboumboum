@@ -99,8 +99,8 @@ public class Bombset
 					StateAbility ab2 = new StateAbility(StateAbilityName.BOMB_TRIGGER_TIMER);
 					ab2.setStrength(delta);
 					result.addDirectAbility(ab2);
-System.out.println("coef:"+coef);			
-System.out.println("time:"+time);					
+//System.out.println("coef:"+coef);			
+//System.out.println("time:"+time);					
 				}
 			}
 			else

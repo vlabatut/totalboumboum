@@ -318,7 +318,13 @@ public abstract class Sprite
 	public void setTile(Tile tile)
 	{	this.tile = tile;
 		setToBeRemovedFromTile(false);
-		eventManager.enterTile();
+		String eventName = EngineEvent.TILE_LOWENTER;
+		if(!isOnGround())
+			eventName = EngineEvent.TILE_HIGHENTER;
+		EngineEvent event = new EngineEvent(eventName,this,null,getActualDirection());
+		tile.spreadEvent(event);
+//if(this instanceof Bomb)
+//System.out.println(event);
 	}
 	
 	/////////////////////////////////////////////////////////////////
