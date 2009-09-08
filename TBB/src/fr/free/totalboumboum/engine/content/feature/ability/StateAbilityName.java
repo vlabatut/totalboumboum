@@ -99,19 +99,22 @@ public class StateAbilityName
 	/** delay before explosion for a time bomb */
 	public static final String BOMB_TRIGGER_TIMER = "BOMB_TRIGGER_TIMER";
 	
-	/** number of bombs one can simultaneously drop */
-	public static final String BOMB_NUMBER = "BOMB_NUMBER";
-	/** maximal limit for the number of bombs one can simultaneously drop */
-	public static final String BOMB_NUMBER_MAX = "BOMB_NUMBER_MAX";
-	
-	/** length of the flames produced by a bomb */
-	public static final String BOMB_RANGE = "BOMB_RANGE";
-	/** maximal limit for the length of the flames produced by a bomb */
-	public static final String BOMB_RANGE_MAX = "BOMB_RANGE_MAX";
-	
 	/////////////////////////////////////////////////////////////////
 	// HEROES ABILITIES			/////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
+	/** number of bombs one can simultaneously drop */
+	public static final String HERO_BOMB_NUMBER = "HERO_BOMB_NUMBER";
+	/** maximal limit for the number of bombs one can simultaneously drop */
+	public static final String HERO_BOMB_NUMBER_MAX = "HERO_BOMB_NUMBER_MAX";
+	
+	/** length of the flames produced by a bomb */
+	public static final String HERO_BOMB_RANGE = "HERO_BOMB_RANGE";
+	/** maximal limit for the length of the flames produced by a bomb */
+	public static final String HERO_BOMB_RANGE_MAX = "HERO_BOMB_RANGE_MAX";
+	
+	/** modifier for the time-bomb timer */
+	public static final String HERO_BOMB_TIMER_COEFFICIENT = "HERO_BOMB_TIMER_COEFFICIENT";
+
 	/** gesture duration when the hero cries or exults at the end of a round */
 	public static final String HERO_CELEBRATION_DURATION = "HERO_CELEBRATION_DURATION";
 	

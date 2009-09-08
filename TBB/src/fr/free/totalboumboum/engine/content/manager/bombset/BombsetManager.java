@@ -91,9 +91,9 @@ public class BombsetManager
 //System.out.println(sprite.getCurrentPosX()+": "+ablt.isActive());		
 		if(ablt.isActive())
 		{	// bomb range
-			StateAbility ability = sprite.modulateStateAbility(StateAbilityName.BOMB_RANGE);
+			StateAbility ability = sprite.modulateStateAbility(StateAbilityName.HERO_BOMB_RANGE);
 			int flameRange = (int)ability.getStrength();
-			ability = sprite.modulateStateAbility(StateAbilityName.BOMB_RANGE_MAX);
+			ability = sprite.modulateStateAbility(StateAbilityName.HERO_BOMB_RANGE_MAX);
 			if(ability.isActive())
 			{	int limit = (int)ability.getStrength();
 				if(flameRange>limit)
@@ -102,9 +102,9 @@ public class BombsetManager
 //System.out.println("flameRange: "+flameRange);	
 		
 			// bomb number
-			ability = sprite.modulateStateAbility(StateAbilityName.BOMB_NUMBER);
+			ability = sprite.modulateStateAbility(StateAbilityName.HERO_BOMB_NUMBER);
 			int droppedBombLimit = (int)ability.getStrength();
-			ability = sprite.modulateStateAbility(StateAbilityName.BOMB_RANGE_MAX);
+			ability = sprite.modulateStateAbility(StateAbilityName.HERO_BOMB_RANGE_MAX);
 			if(ability.isActive())
 			{	int limit = (int)ability.getStrength();
 				if(droppedBombLimit>limit)

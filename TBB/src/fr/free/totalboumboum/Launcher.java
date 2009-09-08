@@ -1015,21 +1015,11 @@ public class Launcher
 	 */
 	
 	/*TODO instance NES BM2
-	 * - item veste ignifugée
-	 * X item mystère 		
-	 * X item accélérateur
-	 * X item shirobon (vie)
-	 * X item bouclier
-	 * X item malus (retardement+/-)
+	 * - item veste ignifugée (souffle de l'explosion pas implémenté)
 	 */
 	
 	/*TODO
 	 * - site : parler de la possibilité d'inclure des bombes dans le niveau, de base (pas vu dans BM officiel, mais très utilisé dans X-Blast)
-	 * - 		bonus vie
-	 * -		bonus bouclier
-	 * -		bonus mystère
-	 * -		bonus accélérateur
-	 * -		malus (lenteur,inversion,rapidité,constipation,diarrhée,invisibilité)
 	 */
 	
 	// - rajouter la restitution des items ramassés à la mort du perso

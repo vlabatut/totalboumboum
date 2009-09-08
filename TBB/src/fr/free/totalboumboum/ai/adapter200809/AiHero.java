@@ -114,9 +114,9 @@ public class AiHero extends AiSprite<Hero>
 	{	Hero sprite = getSprite();
 		
 		// bomb range
-		StateAbility ab = sprite.modulateStateAbility(StateAbilityName.BOMB_RANGE);
+		StateAbility ab = sprite.modulateStateAbility(StateAbilityName.HERO_BOMB_RANGE);
         bombRange = (int)ab.getStrength();
-        ab = sprite.modulateStateAbility(StateAbilityName.BOMB_RANGE_MAX);
+        ab = sprite.modulateStateAbility(StateAbilityName.HERO_BOMB_RANGE_MAX);
 		if(ab.isActive())
 		{	int limit = (int)ab.getStrength();
 			if(bombRange>limit)
@@ -124,9 +124,9 @@ public class AiHero extends AiSprite<Hero>
 		}
 		
         // max number of simultaneous bombs
-    	ab = sprite.modulateStateAbility(StateAbilityName.BOMB_NUMBER);
+    	ab = sprite.modulateStateAbility(StateAbilityName.HERO_BOMB_NUMBER);
     	bombNumber = (int)ab.getStrength();
-        ab = sprite.modulateStateAbility(StateAbilityName.BOMB_NUMBER_MAX);
+        ab = sprite.modulateStateAbility(StateAbilityName.HERO_BOMB_NUMBER_MAX);
 		if(ab.isActive())
 		{	int limit = (int)ab.getStrength();
 			if(bombNumber>limit)

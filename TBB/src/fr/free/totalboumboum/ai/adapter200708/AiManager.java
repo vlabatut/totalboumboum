@@ -108,9 +108,9 @@ public abstract class AiManager extends AbstractAiManager<Integer>
         ownPosition[1] = tile.getLine();
         // propriétés du joueur
         {	// bomb range
-        	StateAbility ab = sprite.modulateStateAbility(StateAbilityName.BOMB_RANGE);
+        	StateAbility ab = sprite.modulateStateAbility(StateAbilityName.HERO_BOMB_RANGE);
 			ownFirePower = (int)ab.getStrength();
-	        ab = sprite.modulateStateAbility(StateAbilityName.BOMB_RANGE_MAX);
+	        ab = sprite.modulateStateAbility(StateAbilityName.HERO_BOMB_RANGE_MAX);
 			if(ab.isActive())
 			{	int limit = (int)ab.getStrength();
 				if(ownFirePower>limit)
@@ -118,8 +118,8 @@ public abstract class AiManager extends AbstractAiManager<Integer>
 			}
         }
         {	// bomb number
-        	StateAbility ab = sprite.modulateStateAbility(StateAbilityName.BOMB_NUMBER);
-	        ab = sprite.modulateStateAbility(StateAbilityName.BOMB_NUMBER_MAX);
+        	StateAbility ab = sprite.modulateStateAbility(StateAbilityName.HERO_BOMB_NUMBER);
+	        ab = sprite.modulateStateAbility(StateAbilityName.HERO_BOMB_NUMBER_MAX);
 			ownBombCount = (int)ab.getStrength();
 			if(ab.isActive())
 			{	int limit = (int)ab.getStrength();
@@ -201,7 +201,7 @@ public abstract class AiManager extends AbstractAiManager<Integer>
 		    			{	AbstractAbility a = j.next();
 		    				if(a instanceof StateAbility)
 		    				{	StateAbility sa = (StateAbility) a;
-		    					if(sa.getName().equals(StateAbilityName.BOMB_NUMBER))
+		    					if(sa.getName().equals(StateAbilityName.HERO_BOMB_NUMBER))
 		    					{	found = true;
 		    						zoneMatrix[y][x] = ArtificialIntelligence.AI_BLOCK_ITEM_BOMB;	
 		    					}
@@ -257,9 +257,9 @@ public abstract class AiManager extends AbstractAiManager<Integer>
 				int tempPlayerData[] = {tempX,tempY,tempDirAI};
 				players.add(tempPlayerData);
 				playersStates.add(!tempPlayer.getSprite().isEnded());
-				StateAbility ab = tempPlayer.getSprite().modulateStateAbility(StateAbilityName.BOMB_RANGE);
+				StateAbility ab = tempPlayer.getSprite().modulateStateAbility(StateAbilityName.HERO_BOMB_RANGE);
 		        firePowers.add((int)ab.getStrength());
-		        ab = tempPlayer.getSprite().modulateStateAbility(StateAbilityName.BOMB_NUMBER);
+		        ab = tempPlayer.getSprite().modulateStateAbility(StateAbilityName.HERO_BOMB_NUMBER);
 		        bombCounts.add((int)ab.getStrength());
 			}
 		}
