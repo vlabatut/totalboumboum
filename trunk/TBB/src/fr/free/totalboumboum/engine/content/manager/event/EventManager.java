@@ -96,6 +96,15 @@ public abstract class EventManager
 	/////////////////////////////////////////////////////////////////
 //	public abstract void enterRound(Direction dir);
 	
+	public void enterTile()
+	{	String eventName = EngineEvent.TILE_LOWENTER;
+		if(!sprite.isOnGround())
+			eventName = EngineEvent.TILE_HIGHENTER;
+		EngineEvent event = new EngineEvent(eventName,sprite,null,sprite.getActualDirection());
+		sprite.getTile().spreadEvent(event);
+		
+	}
+	
 	/////////////////////////////////////////////////////////////////
 	// FINISHED			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
