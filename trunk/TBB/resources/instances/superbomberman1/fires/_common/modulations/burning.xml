@@ -18,7 +18,7 @@
 <!--  	APPEAR --> 
 		<modulation frame="true" strength="0" >
 			<action name="APPEAR" direction="ANY" contact="ANY"
-				tilePosition="ANY" orientation="ANY" actor="BLOCK BOMB FLOOR HERO ITEM" target="ANY" />
+				tilePosition="ANY" orientation="ANY" actor="BLOCK FLOOR HERO ITEM" target="ANY" />
 			<actor-restrictions />
 			<target-restrictions />
 			<actor-circumstances contact="ANY" tilePosition="SAME" orientation="ANY" />

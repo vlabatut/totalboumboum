@@ -1023,9 +1023,7 @@ public class Launcher
 	 */
 	
 	// - rajouter la restitution des items ramassés à la mort du perso
-	// - quand on pose une bombe dans du feu, y faut qu'elle explose
-	//		>> vérifier qu'il y a bien un evt d'apparition émis par la bombe à son apparition 
-	//			et que le feu déjà présent dans la case y réagit bien
 	// - annuler le malus : l'item donne une abilité spécifique "anti-malus"
 	// - l'éventuel malus (bonus aussi?) en cours doit être annulé lorsqu'on renait
+	// - empêcher d'appuyer sur esc quand ça exulte déjà (p-ê en testant la modulation sur exultation?)
 }

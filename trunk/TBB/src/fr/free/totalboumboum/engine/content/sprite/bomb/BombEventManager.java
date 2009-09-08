@@ -419,7 +419,6 @@ public class BombEventManager extends EventManager
 		spriteDirection = direction;
 		sprite.setGesture(gesture,spriteDirection,Direction.NONE,true);
 		sprite.getTile().addSprite(sprite);
-		enterTile();
 	}
 	
 	private void stand()
