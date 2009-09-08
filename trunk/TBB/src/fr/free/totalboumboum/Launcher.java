@@ -1025,5 +1025,8 @@ public class Launcher
 	// - rajouter la restitution des items ramassés à la mort du perso
 	// - annuler le malus : l'item donne une abilité spécifique "anti-malus"
 	// - l'éventuel malus (bonus aussi?) en cours doit être annulé lorsqu'on renait
+	//		pour ces trois points: faut associer une durée/utilisation à l'item (en plus des ablt) ce qui permettra de le réinitialiser si nécessaire
+	//			>> sauf que toutes les abilities n'ont pas forcément la même durée dans l'item. faut donc un truc au niveau des abilités
+	//			>> p-ê qu'il faut aussi une abilité "restart when dropped"
 	// - empêcher d'appuyer sur esc quand ça exulte déjà (p-ê en testant la modulation sur exultation?)
 }

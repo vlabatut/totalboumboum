@@ -27,6 +27,8 @@ import java.util.LinkedList;
 
 import fr.free.totalboumboum.engine.content.feature.ability.AbstractAbility;
 import fr.free.totalboumboum.engine.content.feature.ability.ActionAbility;
+import fr.free.totalboumboum.engine.content.feature.ability.StateAbility;
+import fr.free.totalboumboum.engine.content.feature.ability.StateAbilityName;
 import fr.free.totalboumboum.engine.content.feature.action.GeneralAction;
 import fr.free.totalboumboum.engine.content.sprite.Sprite;
 import fr.free.totalboumboum.engine.content.sprite.item.Item;
@@ -50,7 +52,7 @@ public class ItemManager
 	
 	public void update()
 	{	abilities = new ArrayList<AbstractAbility>();
-		// adding the items' abilities
+		// adding the items abilities
 		Iterator<Item> i = collectedItems.iterator();
 		while(i.hasNext())
 		{	Item item = i.next();
@@ -82,7 +84,37 @@ public class ItemManager
 		
 	}
 	public void addItem(Item item, boolean initial)
-	{	collectedItems.offer(item);
+	{	// possibly remove the existing diseases
+		StateAbility ability = item.modulateStateAbility(StateAbilityName.ITEM_CURE_DISEASES);
+		if(ability.isActive())
+		{	Iterator<Item> i = collectedItems.iterator();
+			while(i.hasNext())
+			{	Item temp = i.next();
+				StateAbility ab = temp.modulateStateAbility(StateAbilityName.ITEM_DISEASE);
+				if(ab.isActive())
+				{	i.remove();
+					temp.endSprite();
+				}
+/* NOTE
+ * 	le sprite n'est pas fordément terminé: s'il est relaché ?
+ * faudrait voir les différents cas de figure
+ * y a aussi la contagion à prendre en compte
+ * 
+ * autre question: réfléchir aux ablts, p-ê qu'il y en a qu'il faut regrouper
+ * car elles seraient exclusives.
+ * 
+ * - contagieux ou pas
+ * - guérison par un bonus (ça fait trois états) 
+ * 		>> disparition pure et simple ou malus relaché ?
+ * 		>> réinitialisation du temps du malus, ou bien on continue là où on en était ?
+ * - mêmes questions à la mort du joueur
+ */
+			
+			}
+		}
+		
+		// add the item to the list
+		collectedItems.offer(item);
 		item.setToBeRemovedFromTile(true);
 		ArrayList<AbstractAbility> ab = item.getItemAbilities();
 		Iterator<AbstractAbility> i = ab.iterator();
@@ -93,6 +125,7 @@ public class ItemManager
 				action.addActor(sprite.getRole());
 			}
 		}
+		
 		// stats (doesn't count initial items)
 		if(!initial)
 		{	StatisticAction statAction = StatisticAction.GATHER_ITEM;

@@ -354,7 +354,7 @@ public abstract class Sprite
 				int delta = -(int)Math.signum(speed);
 				String name;
 				do
-				{	name = StateAbilityName.getSpriteWalkSpeed(speed);
+				{	name = StateAbilityName.getHeroWalkSpeed(speed);
 					if(name!=null) // i.e. if speed is not zero
 					{	ability = modulateStateAbility(name);
 						if(ability.isActive())

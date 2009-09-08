@@ -152,7 +152,7 @@ public class StateAbilityName
 	/** coefficient associated to a negative speed  */
 	public static final String HERO_WALK_SPEED_M = "HERO_WALK_SPEED_M";
 		
-	public static String getSpriteWalkSpeed(int speed)
+	public static String getHeroWalkSpeed(int speed)
 	{	String result = null;
 		if(speed<0)
 			result = HERO_WALK_SPEED_M;
@@ -162,4 +162,17 @@ public class StateAbilityName
 			result = result+Math.abs(speed);
 		return result;
 	}
+
+	/////////////////////////////////////////////////////////////////
+	// ITEM ABILITIES			/////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	/** indicates the item cancels all previous diseases */
+	public static final String ITEM_CURE_DISEASES = "ITEM_CURE_DISEASES";
+	
+	/** indicates if the item is a disease */
+	public static final String ITEM_DISEASE = "ITEM_DISEASE";
+	
+	/** indicates if the item is keeped or released by its owner when this one is burnt */
+	public static final String ITEM_RELEASE_ON_DEATH = "ITEM_RELEASE_ON_DEATH";
+	
 }
