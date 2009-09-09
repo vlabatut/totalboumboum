@@ -85,33 +85,20 @@ public class ItemManager
 	}
 	public void addItem(Item item, boolean initial)
 	{	// possibly remove the existing diseases
-		StateAbility ability = item.modulateStateAbility(StateAbilityName.ITEM_CURE_DISEASES);
+		StateAbility ability = item.modulateStateAbility(StateAbilityName.ITEM_CANCEL_GROUP);
 		if(ability.isActive())
-		{	Iterator<Item> i = collectedItems.iterator();
+		{	float groupNumber = ability.getStrength();
+			Iterator<Item> i = collectedItems.iterator();
 			while(i.hasNext())
 			{	Item temp = i.next();
-				StateAbility ab = temp.modulateStateAbility(StateAbilityName.ITEM_DISEASE);
+				StateAbility ab = temp.modulateStateAbility(StateAbilityName.ITEM_GROUP);
 				if(ab.isActive())
-				{	i.remove();
-					temp.endSprite();
+				{	float grpNbr = ab.getStrength();
+					if(grpNbr==groupNumber)
+					{	i.remove();
+						temp.endSprite();
+					}
 				}
-/* NOTE
- * 	le sprite n'est pas fordément terminé: s'il est relaché ?
- * faudrait voir les différents cas de figure
- * y a aussi la contagion à prendre en compte
- * 
- * autre question: réfléchir aux ablts, p-ê qu'il y en a qu'il faut regrouper
- * car elles seraient exclusives.
- * 
- * plutot que disease/non-disease, définir des groupes avec la strength comme numéro de groupe
- * 
- * - contagieux ou pas
- * - guérison par un bonus (ça fait trois états) 
- * 		>> disparition pure et simple ou malus relaché ?
- * 		>> réinitialisation du temps du malus, ou bien on continue là où on en était ?
- * - mêmes questions à la mort du joueur
- */
-			
 			}
 		}
 		

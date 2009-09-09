@@ -63,9 +63,11 @@
 				<xsd:enumeration value="HERO_WALK_SPEED_P9" />
 				<xsd:enumeration value="HERO_WALK_SPEED_P99" />
 				
-				<xsd:enumeration value="ITEM_CURE_DISEASES" />
-				<xsd:enumeration value="ITEM_DISEASE" />
-				<xsd:enumeration value="ITEM_RELEASE_ON_DEATH" />
+				<xsd:enumeration value="ITEM_CANCEL_GROUP" />
+				<xsd:enumeration value="ITEM_CONTAGION_MODE" />
+				<xsd:enumeration value="ITEM_GROUP" />
+				<xsd:enumeration value="ITEM_ON_DEATH_ACTION" />
+				<xsd:enumeration value="ITEM_ON_CANCEL_ACTION" />
 		</xsd:restriction>
 	</xsd:simpleType>
 
