@@ -166,13 +166,19 @@ public class StateAbilityName
 	/////////////////////////////////////////////////////////////////
 	// ITEM ABILITIES			/////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	/** indicates the item cancels all previous diseases */
-	public static final String ITEM_CURE_DISEASES = "ITEM_CURE_DISEASES";
+	/** indicates the item cancels all previous items from the specified group (using strength) */
+	public static final String ITEM_CANCEL_GROUP = "ITEM_GROUP_CANCEL";
 	
-	/** indicates if the item is a disease */
-	public static final String ITEM_DISEASE = "ITEM_DISEASE";
+	/** type of contagion: 0=none 1=share as is 2=share with reinit 3=transmission as is 4=transmission with reinit*/
+	public static final String ITEM_CONTAGION_MODE = "ITEM_CONTAGION_MODE";
+
+	/** indicates if the item is a part of a group (whose number corresponds to the strength) */
+	public static final String ITEM_GROUP = "ITEM_GROUP";
 	
-	/** indicates if the item is keeped or released by its owner when this one is burnt */
-	public static final String ITEM_RELEASE_ON_DEATH = "ITEM_RELEASE_ON_DEATH";
+	/** indicates what to do if the holder dies: 0=disapear 1=release as is 2=release with reinit */
+	public static final String ITEM_ON_DEATH_ACTION = "ITEM_ON_DEATH_ACTION";
+	
+	/** indicates what to do if the item is canceled: 0=disapear 1=release as is 2=release with reinit */
+	public static final String ITEM_ON_CANCEL_ACTION = "ITEM_ON_CANCEL_ACTION";
 	
 }

@@ -3,9 +3,9 @@
 		xsi:noNamespaceSchemaLocation="../../../../../schemas/abilities.xsd" >
 
 		<!-- STATE -->
-<!--  	ITEM_DISEASE --> 
+<!--  	ITEM_GROUP --> 
 		<ability strength="1" frame="false" time="-1" uses="-1">
-			<name value="ITEM_DISEASE" />
+			<name value="ITEM_GROUP" />
 		</ability>
 			
 </abilities>

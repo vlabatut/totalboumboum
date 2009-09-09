@@ -547,16 +547,6 @@ public class Launcher
 // **********************************************************
 
 	/*
-	 * TODO lorsque l'anime attendue est censée s'arrêter (pas de répétition)
-	 * et que le moteur compte sur un evt de fin pour passer à l'anime suivante,
-	 * il y a blocage si l'anime n'est pas définie, et que l'anime par défaut est
-	 * répétée.
-	 * exemple : défaut=marcher, et il manque punch -> le bonhomme ne sort jamais de l'état punching
-	 * >>>>solution : ne jamais compter sur la fin de l'anime, toujours imposer une durée à respecter
-	 * (ce qui permet d'uniformiser le beans pour tous les joueurs)
-	 */
-	
-	/*
 	 * TODO gérer l'apparition des items à la suite d'une élimination,
 	 * comme dans SBM1, avec des volutes de fumée
 	 */
@@ -661,6 +651,13 @@ public class Launcher
 	 * 	- toutes celles qui sont sans limite de portée sont stockées dans un vecteur situé dans Level (et toutes celles de l'état précédent sont retirées de ce même vecteur)
 	 * 	- lors de la validation de 3rdMod, ce vecteur est systématiquement testé en plus des sprites situés près de l'acteur et de la cible 
 	 */
+	
+	/*
+	 * NOTE: les modulations sont ordonnées par priorité dans le fichier XML.
+	 * dans le cas où plusieurs modulations peuvent être appliquées à une action, 
+	 * c'est la première définie dans le fichier XML qui est utilisée.
+	 * il faut donc l'organiser du plus spécifique au plus général.
+	*/
 
 // **********************************************************
 // THEMES/LEVELS
@@ -689,6 +686,16 @@ public class Launcher
 // ANIMES
 // **********************************************************
 		
+	/*
+	 * TODO lorsque l'anime attendue est censée s'arrêter (pas de répétition)
+	 * et que le moteur compte sur un evt de fin pour passer à l'anime suivante,
+	 * il y a blocage si l'anime n'est pas définie, et que l'anime par défaut est
+	 * répétée.
+	 * exemple : défaut=marcher, et il manque punch -> le bonhomme ne sort jamais de l'état punching
+	 * >>>>solution : ne jamais compter sur la fin de l'anime, toujours imposer une durée à respecter
+	 * (ce qui permet d'uniformiser le beans pour tous les joueurs)
+	 */
+	
 	/*
 	 * TODO il faut sécuriser les animations : s'assurer qu'une anime censée
 	 * ne pas être ré-init est bien gaulée. par exemple, pushing doit être gaulée
@@ -776,8 +783,10 @@ public class Launcher
 	
 	
 	
-	
-	
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	
 	
 	
@@ -932,10 +941,6 @@ public class Launcher
 	
 	
 	/*
-	 * TODO au lieu d'utiliser une fonction set sprite qui met à jour les roles des acteurs et targets
-	 * dans les modulations, il faut effectuer cette mise à jour au chargement des modulations, puisqu'à cet
-	 * instant on connait déjà le role de sprite concerné.
-	 * 
 	 * - voir si on peut mettre à jour le parser XML
 	 * - définir la liste de gesture pour chaque type de sprite
 	 * - pour chaque gesture, fixer les actions autorisées 
@@ -945,10 +950,7 @@ public class Launcher
 	 * dans ces dernières, on se place relativement au sprite, qui est actor target ou third.
 	 * surement qqchose à faire de ce coté là
 	 * 
-	 * il faut très certainement aussi mutualiser les firesets, puisque les flammes sont les mêmes pour tout le monde.
-	 * et aussi les explosions, pour les mêmes raisons.
-	 * 
-	 * il faut aussi typer les noms d'action et de gesture, car tous les sprites n'ont pas accès à tous.
+	 * il faut typer les noms d'action et de gesture, car tous les sprites n'ont pas accès à tous.
 	 * difficile vu qu'on ne peut pas sousclasser les types enum
 	 * 
 	 * ça ne me plait pas beaucoup ces actions bidons pour tester les abilities de certains sprites. faut réfléchir à un truc plus propre
@@ -965,24 +967,6 @@ public class Launcher
 	 * ça permettra de savoir ce qui peut être modulé et ce qui ne peut pas l'être
 	 * 		- un sprite n'est a priori pas un obstacle, tout est géré par modulation (y compris pour le feu)
 	 * 
-	 *  >> pr la mutualisation de certains aspects des sprites, suffit de rendre explicite
-	 *  dans le fichier sprite.xml la localisation des composants (animes, traj, etc) avec
-	 *  la possibilité de les foutre en amont. apriori, seulement valable pr bombes, items et themes
-	 *  >>>plus simple: possibilité de réutiliser un autre sprite, en (re)définissant certains de ses composants
-	 * 	pb:
-	 * 		- ordre de chargement des sprites. les modeles doivent être chargés en premier. seule méthode pour ça : scanner tous les sprites dans le dossier (> p-ê long)
-	 * 		  ou alors faire un chargement récursif (si un sprite demandé n'a pas encore été chargé, on le fait desuite >> pose de pb de réorganisation hiérarchique du chargement)
-	 * 		- redéfinition des éléments déjà définis (?)
-	 *  >>>> définir les sprites réutilisables à part, comme des sprites abstraits bien distincts des autres
-	 *  	- pour bombset : 1) charger tous les composants communs
-	 *  					 2) pour les animes, charger seulement les infos nécessaires
-	 *  					 3) écrire dans bombset (ou la structure plus générale) une fonction d'instanciation permettant de charger la couleur voulue
-	 * 
-	 * NOTE: les modulations sont ordonnées par priorité dans le fichier XML.
-	 * dans le cas où plusieurs modulations peuvent être appliquées à une action, 
-	 * c'est la première définie dans le fichier XML qui est utilisée.
-	 * il faut donc l'organiser du plus spécifique au plus général.
-	 * 
 	 * le XML des animes doit avoir soit :
 	 * 	- NONE seule
 	 *  - primaries seules
@@ -991,12 +975,6 @@ public class Launcher
 	 *  - primaries+NONE+composite
 	 * et les gestures définis doivent au moins contenir les nécessaires, et au plus les autorisés
 	 *  il va falloir utiliser XSD 1.1 quand ça sera possible, avec les assertions et associations, cf l'email.
-	 *  
-	 *  NOTE gestion des collisions
-	 *  normalement, le système de modulation doit permettre de parfaitement gérer le déplacement dans les bombes.
-	 *  a voir s'il n'est pas possible d'utiliser ça pour simplifier la gestion actuelle des collisions.
-	 *  rque: comme on teste les sprites sur des positions virtuelles, qu'ils n'occupent pas encore,
-	 *  il faudra construire les actions à tester manuellement (tous les paramètres de type contact, orientation, etc) dans le trajectoryManager
 	 *  
 	 *  DROP ne devrait pas être transitif, mais automatiquement s'appliquer à une bombe.
 	 *  ça permettrait de bien séparer DROP et APPEAR dans l'action (la première pour le sprite posant
@@ -1028,6 +1006,21 @@ public class Launcher
 	//		pour ces trois points: faut associer une durée/utilisation à l'item (en plus des ablt) ce qui permettra de le réinitialiser si nécessaire
 	//			>> sauf que toutes les abilities n'ont pas forcément la même durée dans l'item. faut donc un truc au niveau des abilités
 	//			>> p-ê qu'il faut aussi une abilité "restart when dropped"
+	/* NOTE
+	 * - contagion :
+	 * 		0 pas de contagion
+	 * 		1 contagion partagée avec raz des abilités
+	 * 		2 contagion partagée avec abilités courantes
+	 * 		3 contagion transmise avec raz des abilités
+	 * 		4 contagion transmise avec abilités courantes
+	 * - mort du joueur :
+	 * 		0 disparition pure & simple
+	 * 		- retour en jeu
+	 * 			1 réinitialisation des abilités
+	 * 			2 les abilités continuent pareil
+	 * - guérison par un bonus 
+	 * 		idem
+	 */
+
 	// - empêcher d'appuyer sur esc quand ça exulte déjà (p-ê en testant la modulation sur exultation?)
-	
 }
