@@ -1029,4 +1029,5 @@ public class Launcher
 	//			>> sauf que toutes les abilities n'ont pas forcément la même durée dans l'item. faut donc un truc au niveau des abilités
 	//			>> p-ê qu'il faut aussi une abilité "restart when dropped"
 	// - empêcher d'appuyer sur esc quand ça exulte déjà (p-ê en testant la modulation sur exultation?)
+	
 }

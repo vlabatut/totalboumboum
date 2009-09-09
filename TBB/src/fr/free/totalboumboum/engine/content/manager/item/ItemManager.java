@@ -103,6 +103,8 @@ public class ItemManager
  * autre question: réfléchir aux ablts, p-ê qu'il y en a qu'il faut regrouper
  * car elles seraient exclusives.
  * 
+ * plutot que disease/non-disease, définir des groupes avec la strength comme numéro de groupe
+ * 
  * - contagieux ou pas
  * - guérison par un bonus (ça fait trois états) 
  * 		>> disparition pure et simple ou malus relaché ?
