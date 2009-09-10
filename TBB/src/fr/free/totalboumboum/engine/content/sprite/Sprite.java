@@ -620,16 +620,24 @@ public abstract class Sprite
 	{	itemManager.addInitialItem(item);	
 	}
 	
-	public Item dropRandomItem()
-	{	return itemManager.dropRandomItem();	
+	public void releaseRandomItem()
+	{	itemManager.releaseRandomItem();	
 	}
 	
-	public ArrayList<Item> dropAllItems()
+	public void releaseLastItem()
+	{	itemManager.releaseLastItem();	
+	}
+	
+/*	public ArrayList<Item> dropAllItems()
 	{	return itemManager.dropAllItems();
 	}
-	
+*/	
 	public ArrayList<AbstractAbility> getItemsAbilities()
 	{	return itemManager.getItemAbilities();	
+	}
+	
+	public void spriteEnded()
+	{	itemManager.spriteEnded();		
 	}
 
 	/////////////////////////////////////////////////////////////////

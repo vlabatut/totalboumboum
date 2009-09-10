@@ -330,22 +330,7 @@ public class HeroEventManager extends EventManager
 			sprite.setGesture(gesture,spriteDirection,controlDirection,true);
 		}
 		else if(gesture.equals(GestureName.BURNING))
-		{	// the player is definitely out
-			if(sprite.getPlayer().isOut())
-			{	gesture = GestureName.ENDED;
-				sprite.setGesture(gesture,spriteDirection,Direction.NONE,true);
-				sprite.endSprite();
-			}
-			// the player still's got some lives
-			else
-			{	// put a delay before the rebirth
-				StateAbility ability = sprite.modulateStateAbility(StateAbilityName.HERO_REBIRTH_DELAY);
-				double duration = ability.getStrength();
-				sprite.addDelay(DelayManager.DL_REBIRTH,duration);
-				// hide the sprite
-				gesture = GestureName.HIDING;
-				sprite.setGesture(gesture,spriteDirection,Direction.NONE,true);
-			}
+		{	die();
 		}
 		else if(gesture.equals(GestureName.CRYING)
 				|| gesture.equals(GestureName.EXULTING))
@@ -570,6 +555,28 @@ public class HeroEventManager extends EventManager
 		sprite.addDelay(DelayManager.DL_WAIT,duration);		
 	}
 
+	private void die()
+	{	// manage the items
+		sprite.spriteEnded();
+		
+		// the player is definitely out
+		if(sprite.getPlayer().isOut())
+		{	gesture = GestureName.ENDED;
+			sprite.setGesture(gesture,spriteDirection,Direction.NONE,true);
+			sprite.endSprite();
+		}
+		// the player still's got some lives
+		else
+		{	// put a delay before the rebirth
+			StateAbility ability = sprite.modulateStateAbility(StateAbilityName.HERO_REBIRTH_DELAY);
+			double duration = ability.getStrength();
+			sprite.addDelay(DelayManager.DL_REBIRTH,duration);
+			// hide the sprite
+			gesture = GestureName.HIDING;
+			sprite.setGesture(gesture,spriteDirection,Direction.NONE,true);
+		}
+	}
+	
 	/////////////////////////////////////////////////////////////////
 	// FINISHED			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////

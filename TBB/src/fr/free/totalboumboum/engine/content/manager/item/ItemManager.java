@@ -36,53 +36,41 @@ import fr.free.totalboumboum.game.statistics.StatisticAction;
 import fr.free.totalboumboum.game.statistics.StatisticEvent;
 
 public class ItemManager
-{	private Sprite sprite;
-	private LinkedList<Item> collectedItems;
-	private ArrayList<AbstractAbility> abilities;
-	
+{	
 	public ItemManager(Sprite sprite)
 	{	this.sprite = sprite;
 		collectedItems = new LinkedList<Item>();
 		abilities = new ArrayList<AbstractAbility>();
 	}
 
+	/////////////////////////////////////////////////////////////////
+	// SPRITE			/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	private Sprite sprite;
+	
+	/////////////////////////////////////////////////////////////////
+	// ABILITIES		/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	private ArrayList<AbstractAbility> abilities;
+	
 	public ArrayList<AbstractAbility> getItemAbilities()
 	{	return abilities;
 	}
 	
-	public void update()
-	{	abilities = new ArrayList<AbstractAbility>();
-		// adding the items abilities
-		Iterator<Item> i = collectedItems.iterator();
-		while(i.hasNext())
-		{	Item item = i.next();
-			Iterator<AbstractAbility> j = item.getItemAbilities().iterator();
-			while(j.hasNext())
-			{	// if the ability is over, it's removed from the item's list
-				AbstractAbility ab = j.next();
-				if(ab.getTime()==0 || ab.getUses()==0)
-					j.remove();
-				else
-					abilities.add(ab);
-			}
-			// if the item has no ability remaining, it's removed from the manager's list
-			if(item.getItemAbilities().size()==0)
-			{	i.remove();
-				item.endSprite();
-			}
-		}
+	/////////////////////////////////////////////////////////////////
+	// ITEMS			/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	private LinkedList<Item> collectedItems;
+
+	public void addInitialItem(Item item)
+	{	addItem(item,true);
 	}
-	
-	/* 
-	 * ********************************************
-	 * ITEMS
-	 * ********************************************
-	 */
 	
 	public void addItem(Item item)
 	{	addItem(item,false);
 		
 	}
+	
 	public void addItem(Item item, boolean initial)
 	{	// possibly remove the existing diseases
 		StateAbility ability = item.modulateStateAbility(StateAbilityName.ITEM_CANCEL_GROUP);
@@ -126,15 +114,40 @@ public class ItemManager
 		}
 	}
 	
-	public void addInitialItem(Item item)
-	{	addItem(item,true);
+	public void releaseLastItem()
+	{	if(!collectedItems.isEmpty())
+		{	Item item = collectedItems.getLast();
+			releaseItem(item);
+		}
 	}
 	
-	public Item dropItem()
-	{	return dropItem(collectedItems.size()-1);
+	public void releaseRandomItem()
+	{	if(!collectedItems.isEmpty())
+		{	int index = (int)(Math.random()*collectedItems.size());
+			Item item = collectedItems.get(index);
+			releaseItem(item);
+		}
 	}
-	public Item dropItem(int index)
-	{	Item result = null;
+
+	public void releaseItem(Item item)
+	{	// remove the item from the list
+		collectedItems.remove(item);
+		
+		StateAbility ability = item.modulateStateAbility(StateAbilityName.ITEM_ON_DEATH_ACTION);
+		if(ability.isActive())
+		{
+			//TODO à finir
+		}
+		
+		
+		
+		
+		
+		
+		
+		
+//TODO à effacer		
+		Item result = null;
 		if(index<collectedItems.size())
 		{	result = collectedItems.get(index);
 			collectedItems.remove(index);
@@ -149,19 +162,51 @@ public class ItemManager
 		//
 		return result;
 	}
-	public Item dropRandomItem()
-	{	Item result;
-		int index = (int)(Math.random()*collectedItems.size());
-		result = dropItem(index);
-		return result;
-	}
-	public ArrayList<Item> dropAllItems()
+	
+/*	public ArrayList<Item> dropAllItems()
 	{	ArrayList<Item> result = new ArrayList<Item>();
 		while(collectedItems.size()>0)
 			result.add(dropItem(0));
 		return result;
 	}
-
+*/	
+	
+	/////////////////////////////////////////////////////////////////
+	// ENGINE			/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	public void update()
+	{	abilities = new ArrayList<AbstractAbility>();
+		// adding the items abilities
+		Iterator<Item> i = collectedItems.iterator();
+		while(i.hasNext())
+		{	Item item = i.next();
+			Iterator<AbstractAbility> j = item.getItemAbilities().iterator();
+			while(j.hasNext())
+			{	// if the ability is over, it's removed from the item's list
+				AbstractAbility ab = j.next();
+				if(ab.getTime()==0 || ab.getUses()==0)
+					j.remove();
+				else
+					abilities.add(ab);
+			}
+			// if the item has no ability remaining, it's removed from the manager's list
+			if(item.getItemAbilities().size()==0)
+			{	i.remove();
+				item.endSprite();
+			}
+		}
+	}
+	
+	public void spriteEnded()
+	{	while(!collectedItems.isEmpty())
+		{	Item item = collectedItems.getFirst();
+			releaseItem(item);
+		}
+	}
+	
+	/////////////////////////////////////////////////////////////////
+	// FINISHED			/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
 	private boolean finished = false;
 	
 	public void finish()
