@@ -84,7 +84,7 @@ public class ItemManager
 				{	float grpNbr = ab.getStrength();
 					if(grpNbr==groupNumber)
 					{	i.remove();
-						temp.endSprite();
+						temp.setEnded();
 					}
 				}
 			}
@@ -138,7 +138,8 @@ public class ItemManager
 		{
 			//TODO à finir
 		}
-		
+		else
+			item.endSprite();
 		
 		
 		

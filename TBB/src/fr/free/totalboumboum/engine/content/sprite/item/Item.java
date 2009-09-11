@@ -24,10 +24,8 @@ package fr.free.totalboumboum.engine.content.sprite.item;
 import java.util.ArrayList;
 import java.util.Iterator;
 
-import fr.free.totalboumboum.engine.content.feature.Direction;
 import fr.free.totalboumboum.engine.content.feature.Role;
 import fr.free.totalboumboum.engine.content.feature.ability.AbstractAbility;
-import fr.free.totalboumboum.engine.content.feature.gesture.GestureName;
 import fr.free.totalboumboum.engine.content.sprite.Sprite;
 
 public class Item extends Sprite
@@ -81,12 +79,6 @@ public class Item extends Sprite
 	/////////////////////////////////////////////////////////////////
 	// EXECUTION		/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	public void die()
-	{	gesture = GestureName.ENDED;
-		sprite.setGesture(gesture,spriteDirection,Direction.NONE,true);
-		sprite.endSprite();
-//TODO à faire proprement		
-	}
 	
 	/////////////////////////////////////////////////////////////////
 	// FINISHED			/////////////////////////////////////////////

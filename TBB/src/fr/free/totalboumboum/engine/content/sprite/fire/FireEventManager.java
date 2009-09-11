@@ -77,9 +77,7 @@ public class FireEventManager extends EventManager
 			sprite.setGesture(gesture,spriteDirection,Direction.NONE,true);
 		}
 		else if(gesture.equals(GestureName.BURNING))
-		{	gesture = GestureName.ENDED;
-			sprite.setGesture(gesture,spriteDirection,Direction.NONE,true);
-			sprite.endSprite();
+		{	endSprite();
 		}
 		else if(gesture.equals(GestureName.ENTERING))
 		{	gesture = GestureName.PREPARED;

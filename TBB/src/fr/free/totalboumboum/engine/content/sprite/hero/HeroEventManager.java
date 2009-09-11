@@ -561,9 +561,7 @@ public class HeroEventManager extends EventManager
 		
 		// the player is definitely out
 		if(sprite.getPlayer().isOut())
-		{	gesture = GestureName.ENDED;
-			sprite.setGesture(gesture,spriteDirection,Direction.NONE,true);
-			sprite.endSprite();
+		{	endSprite();
 		}
 		// the player still's got some lives
 		else
