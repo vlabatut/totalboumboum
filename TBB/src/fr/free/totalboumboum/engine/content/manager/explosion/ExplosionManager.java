@@ -23,6 +23,7 @@ package fr.free.totalboumboum.engine.content.manager.explosion;
 
 import java.util.ArrayList;
 
+import fr.free.totalboumboum.configuration.GameVariables;
 import fr.free.totalboumboum.engine.container.tile.Tile;
 import fr.free.totalboumboum.engine.content.feature.Direction;
 import fr.free.totalboumboum.engine.content.feature.ability.AbstractAbility;
@@ -86,8 +87,9 @@ public class ExplosionManager
 		else
 			owner = sprite.getOwner();
 		fire.setOwner(owner);
-		fire.setCurrentPosX(tile.getPosX());
-		fire.setCurrentPosY(tile.getPosY());
+		GameVariables.level.insertSprite(fire,tile);
+//		fire.setCurrentPosX(tile.getPosX());
+//		fire.setCurrentPosY(tile.getPosY());
 		fire.appear(Direction.NONE);
 		
 		// branches

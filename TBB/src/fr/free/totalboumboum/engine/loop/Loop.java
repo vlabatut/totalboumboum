@@ -132,7 +132,7 @@ public class Loop implements Runnable, Serializable
 			players.add(player);
 			// level
 			Hero hero = (Hero)player.getSprite();
-			level.addHero(hero,pl.getLine(),pl.getCol());
+//			level.addHero(hero,pl.getLine(),pl.getCol());
 			// initial items
 			Iterator<String> it = items.iterator();
 			while(it.hasNext())

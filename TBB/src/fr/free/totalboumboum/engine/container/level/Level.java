@@ -43,7 +43,6 @@ import fr.free.totalboumboum.engine.content.feature.ability.StateAbility;
 import fr.free.totalboumboum.engine.content.feature.ability.StateAbilityName;
 import fr.free.totalboumboum.engine.content.feature.event.AbstractEvent;
 import fr.free.totalboumboum.engine.content.sprite.Sprite;
-import fr.free.totalboumboum.engine.content.sprite.hero.Hero;
 import fr.free.totalboumboum.engine.loop.Loop;
 import fr.free.totalboumboum.gui.tools.MessageDisplayer;
 import fr.free.totalboumboum.tools.CalculusTools;
@@ -286,25 +285,21 @@ public class Level
 	/////////////////////////////////////////////////////////////////
 	private ArrayList<Sprite> sprites = new ArrayList<Sprite>();;
 
-	public void addSprite(Sprite sprite)
-	{	sprites.add(sprite);
-	}
-	
 	public void removeSprite(Sprite sprite)
 	{	sprites.remove(sprite);
 	}
-	
+/*	
 	public void addHero(Hero hero, int line, int col)
 	{	matrix[line][col].addSprite(hero);
 		hero.setCurrentPosX(matrix[line][col].getPosX());
 		hero.setCurrentPosY(matrix[line][col].getPosY());
 	}
-	
-	public void initSpriteTile(Sprite sprite, int line, int col)
-	{	Tile tile = matrix[line][col];
+*/	
+	public void insertSprite(Sprite sprite, Tile tile)
+	{	sprites.add(sprite);
 		tile.addSprite(sprite);
-		sprite.setCurrentPosX(matrix[line][col].getPosX());
-		sprite.setCurrentPosY(matrix[line][col].getPosY());
+//		sprite.setCurrentPosX(matrix[line][col].getPosX());
+//		sprite.setCurrentPosY(matrix[line][col].getPosY());
 	}
 
 	/////////////////////////////////////////////////////////////////

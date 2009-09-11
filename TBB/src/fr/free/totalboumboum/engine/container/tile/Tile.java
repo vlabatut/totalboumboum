@@ -89,7 +89,7 @@ public class Tile
 //System.out.println("Tile.update>"+"tile:"+posX+";"+posY+" - case:"+line+";"+col);		
 //System.out.println("Tile.update>"+"sprite:"+tempPosX+";"+tempPosY+" - newCase:"+newTile.getLine()+";"+newTile.getCol());
 				heroes.remove(i);
-				newTile.addHero(temp);		
+				newTile.addHero(temp);
 			}
 			else
 				i++;
@@ -168,7 +168,7 @@ public class Tile
 	private void addHero(Hero hero)
 	{	heroes.add(hero);		
 		hero.setTile(this);
-		level.addSprite(hero);
+//		level.addSprite(hero);
 	}
 	
 	public ArrayList<Hero> getHeroes()
@@ -196,7 +196,7 @@ public class Tile
 	private void addBomb(Bomb bomb)
 	{	bombs.add(bomb);		
 		bomb.setTile(this);
-		level.addSprite(bomb);
+//		level.addSprite(bomb);
 	}
 	
 	public ArrayList<Bomb> getBombs()
@@ -223,7 +223,7 @@ public class Tile
 	private void addFire(Fire fire)
 	{	fires.add(fire);
 		fire.setTile(this);
-		level.addSprite(fire);
+//		level.addSprite(fire);
 	}
 	
 	public ArrayList<Fire> getFires()
@@ -249,10 +249,10 @@ public class Tile
 
 	private void setBlock(Block block)
 	{	this.block = block;
-		block.setCurrentPosX(posX);
-		block.setCurrentPosY(posY);
+//		block.setCurrentPosX(posX);
+//		block.setCurrentPosY(posY);
 		block.setTile(this);
-		level.addSprite(block);
+//		level.addSprite(block);
 	}
 	
 	public Block getBlock()
@@ -285,10 +285,10 @@ public class Tile
 	
 	private void setItem(Item item)
 	{	this.item = item;
-		item.setCurrentPosX(posX);
-		item.setCurrentPosY(posY);
+//		item.setCurrentPosX(posX);
+//		item.setCurrentPosY(posY);
 		item.setTile(this);
-		level.addSprite(item);
+//		level.addSprite(item);
 	}
 /*	
 	public void removeItem()
@@ -321,8 +321,8 @@ public class Tile
 	
 	public void setFloor(Floor floor)
 	{	this.floor = floor;
-		floor.setCurrentPosX(posX);
-		floor.setCurrentPosY(posY);
+//		floor.setCurrentPosX(posX);
+//		floor.setCurrentPosY(posY);
 		floor.setTile(this);
 //		level.addSprite(floor);
 	}

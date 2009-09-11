@@ -124,7 +124,7 @@ public class ItemEventManager extends EventManager
 			// randomly find a tile
 			List<Tile> tileList = GameVariables.level.getTileList();
 			boolean done = false;
-			Tile tile;
+			Tile tile = null;
 			while(!done && tileList.size()>0)
 			{	int index = (int)(Math.random()*tileList.size());
 				tile = tileList.get(index);
@@ -144,15 +144,12 @@ public class ItemEventManager extends EventManager
 			// if not tile : wait for the next iteration
 			if(!done)
 				sprite.addIterDelay(DelayManager.DL_RELEASE,1);
-			// else move the item
+			// else move the item to the tile and make it appear
 			else
-			{	
-				gesture = GestureName.APPEARING;
+			{	gesture = GestureName.APPEARING;
 				sprite.setGesture(gesture,spriteDirection,Direction.NONE,true);
+				tile.addSprite(sprite);
 			}
-		
-		
-		
 		}
 	}
 	
