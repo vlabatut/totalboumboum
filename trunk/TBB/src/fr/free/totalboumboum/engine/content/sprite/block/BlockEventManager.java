@@ -96,9 +96,7 @@ public class BlockEventManager extends EventManager
 			}
 			// cannot spawn
 			else
-			{	gesture = GestureName.ENDED;
-				sprite.setGesture(gesture,spriteDirection,Direction.NONE,true);
-				sprite.endSprite();
+			{	endSprite();
 			}
 			
 			// item ?

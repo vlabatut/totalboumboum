@@ -271,7 +271,7 @@ public abstract class Sprite
 	/** le sprite est terminé, mais le Tile ne l'a pas encore effectivement supprimé*/
 	protected boolean ended;
 	
-	public void endSprite()
+	public void setEnded()
 	{	ended = true;
 		toBeRemovedFromTile = true;
 	}
@@ -581,6 +581,10 @@ public abstract class Sprite
 	{	GameVariables.loop.addStatisticEvent(event);
 	}
 
+	public void endSprite()
+	{	eventManager.endSprite();	
+	}
+	
 	/////////////////////////////////////////////////////////////////
 	// EXPLOSIONS		/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
