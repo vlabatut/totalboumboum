@@ -50,6 +50,7 @@ public class BlockFactory extends SpriteFactory<Block>
 		// PUNCHED
 		// PUNCHING
 		// PUSHING
+		// RELEASED
 		// SLIDING
 		// SLIDING_FAILING
 		// STANDING

@@ -55,6 +55,7 @@ public class FireFactory extends SpriteFactory<Fire>
 		// PUNCHED
 		// PUNCHING
 		// PUSHING
+		// RELEASED
 		// SLIDING
 		// SLIDING_FAILING
 		// SPAWNING

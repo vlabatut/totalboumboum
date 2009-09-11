@@ -71,11 +71,14 @@ public class EngineEvent extends AbstractEvent
 	/** a player is signaled he won */
 	public static final String CELEBRATION_VICTORY = "CELEBRATION_VICTORY";
 
-	/** the engine signals a sprite it must enter the level (i.e. appear) */
+	/** the engine signals a sprite it must enter the level (i.e. just appear in the level) */
 	public static final String ROUND_ENTER = "ROUND_ENTER";
 	/** the engine signals a sprite it must start enteracting (i.e. the actual game is starting) */
 	public static final String ROUND_START = "ROUND_START";
 
+	/** the engine signals a sprite it must stop hidding */
+//	public static final String HIDE_OVER = "HIDE_OVER";
+	
     /////////////////////////////////////////////////////////////////
 	// CONSTRUCTORS			/////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////

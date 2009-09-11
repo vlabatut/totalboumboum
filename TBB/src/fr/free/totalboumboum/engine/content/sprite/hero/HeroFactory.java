@@ -56,6 +56,7 @@ public class HeroFactory extends SpriteFactory<Hero>
 		animeReplacements.put(GestureName.PUNCHING,GestureName.STANDING);
 		// PUSHING
 		animeReplacements.put(GestureName.PUSHING,GestureName.WALKING);
+		// RELEASED
 		// SLIDING
 		// SLIDING_FAILING
 		// SPAWNING

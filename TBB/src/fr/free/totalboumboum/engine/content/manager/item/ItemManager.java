@@ -30,6 +30,7 @@ import fr.free.totalboumboum.engine.content.feature.ability.ActionAbility;
 import fr.free.totalboumboum.engine.content.feature.ability.StateAbility;
 import fr.free.totalboumboum.engine.content.feature.ability.StateAbilityName;
 import fr.free.totalboumboum.engine.content.feature.action.GeneralAction;
+import fr.free.totalboumboum.engine.content.manager.delay.DelayManager;
 import fr.free.totalboumboum.engine.content.sprite.Sprite;
 import fr.free.totalboumboum.engine.content.sprite.item.Item;
 import fr.free.totalboumboum.game.statistics.StatisticAction;
@@ -135,33 +136,24 @@ public class ItemManager
 		
 		StateAbility ability = item.modulateStateAbility(StateAbilityName.ITEM_ON_DEATH_ACTION);
 		if(ability.isActive())
-		{
-			//TODO à finir
+		{	// possibly reinit the item abilities
+			if(ability.getStrength()==2)
+				item.reinitItemAbilities();
+			// release the item
+			item.addIterDelay(DelayManager.DL_RELEASE,1);
+			//EngineEvent event = new EngineEvent(EngineEvent.HIDE_OVER);
+			//item.processEvent(event);
 		}
 		else
 			item.endSprite();
 		
-		
-		
-		
-		
-		
-		
-//TODO à effacer		
-		Item result = null;
-		if(index<collectedItems.size())
-		{	result = collectedItems.get(index);
-			collectedItems.remove(index);
-		}
 		// stats
 		StatisticAction statAction = StatisticAction.LOSE_ITEM;
 		long statTime = sprite.getLoopTime();
 		String statActor = sprite.getPlayer().getFileName();
-		String statTarget = result.getItemName();
+		String statTarget = item.getItemName();
 		StatisticEvent statEvent = new StatisticEvent(statActor,statAction,statTarget,statTime);
 		sprite.addStatisticEvent(statEvent);
-		//
-		return result;
 	}
 	
 /*	public ArrayList<Item> dropAllItems()

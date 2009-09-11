@@ -95,6 +95,9 @@ public enum GestureName
 	/** the sprite is pushing another sprite to make it slide on the ground */
 	PUSHING,
 	
+	/** the sprite (an item) is released on the level (by the hero which possessed it until now) */
+	RELEASED,
+	
 	/** the sprite is sliding on the ground */
 	SLIDING,
 	
