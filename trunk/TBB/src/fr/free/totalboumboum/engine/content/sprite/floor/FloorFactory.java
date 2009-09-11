@@ -48,6 +48,7 @@ public class FloorFactory extends SpriteFactory<Floor>
 		// PUNCHED
 		// PUNCHING
 		// PUSHING
+		// RELEASED
 		// SLIDING
 		// SLIDING_FAILING
 		// SPAWNING

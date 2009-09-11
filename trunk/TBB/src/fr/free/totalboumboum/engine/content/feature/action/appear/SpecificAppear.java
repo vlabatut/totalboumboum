@@ -21,6 +21,7 @@ package fr.free.totalboumboum.engine.content.feature.action.appear;
  * 
  */
 
+import fr.free.totalboumboum.engine.container.tile.Tile;
 import fr.free.totalboumboum.engine.content.feature.Direction;
 import fr.free.totalboumboum.engine.content.feature.action.ActionName;
 import fr.free.totalboumboum.engine.content.feature.action.SpecificAction;
@@ -42,6 +43,10 @@ public class SpecificAppear extends SpecificAction
 {
 	public SpecificAppear(Sprite actor)
 	{	super(ActionName.APPEAR,actor);
+	}
+
+	public SpecificAppear(Sprite actor, Tile tile)
+	{	super(ActionName.APPEAR,actor,tile);
 	}
 
 	public SpecificAppear(Sprite actor, Direction direction)

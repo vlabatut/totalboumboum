@@ -21,6 +21,10 @@ package fr.free.totalboumboum.engine.content.sprite.item;
  * 
  */
 
+import java.util.List;
+
+import fr.free.totalboumboum.configuration.GameVariables;
+import fr.free.totalboumboum.engine.container.tile.Tile;
 import fr.free.totalboumboum.engine.content.feature.Direction;
 import fr.free.totalboumboum.engine.content.feature.ability.ActionAbility;
 import fr.free.totalboumboum.engine.content.feature.ability.StateAbility;
@@ -114,6 +118,41 @@ public class ItemEventManager extends EventManager
 			else
 			{	sprite.addIterDelay(DelayManager.DL_ENTER,1);
 			}
+		}
+		else if(gesture.equals(GestureName.HIDING) && event.getStringParameter().equals(DelayManager.DL_RELEASE))
+		{	spriteDirection = event.getDirection();
+			// randomly find a tile
+			List<Tile> tileList = GameVariables.level.getTileList();
+			boolean done = false;
+			Tile tile;
+			while(!done && tileList.size()>0)
+			{	int index = (int)(Math.random()*tileList.size());
+				tile = tileList.get(index);
+				SpecificAction action = new SpecificAppear(sprite,tile);
+				ActionAbility actionAbility = sprite.modulateAction(action);
+				// can appear >> select this tile
+				if(actionAbility.isActive())
+				{	gesture = GestureName.RELEASED;
+					sprite.setGesture(gesture,spriteDirection,Direction.NONE,true);
+					done = true;
+				}
+				// cannot appear >> remove the tile from the list and re-draw
+				else
+				{	tileList.remove(index);
+				}						
+			}
+			// if not tile : wait for the next iteration
+			if(!done)
+				sprite.addIterDelay(DelayManager.DL_RELEASE,1);
+			// else move the item
+			else
+			{	
+				gesture = GestureName.APPEARING;
+				sprite.setGesture(gesture,spriteDirection,Direction.NONE,true);
+			}
+		
+		
+		
 		}
 	}
 	

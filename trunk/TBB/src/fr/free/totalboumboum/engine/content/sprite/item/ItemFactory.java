@@ -50,6 +50,7 @@ public class ItemFactory extends SpriteFactory<Item>
 		// CRYING
 		// EXULTING
 		// HIDING
+		animeReplacements.put(GestureName.HIDING,GestureName.NONE);
 		// JUMPING
 		// LANDING
 		// OSCILLATING
@@ -57,6 +58,8 @@ public class ItemFactory extends SpriteFactory<Item>
 		// PUNCHED
 		// PUNCHING
 		// PUSHING
+		// RELEASED
+		animeReplacements.put(GestureName.RELEASED,GestureName.APPEARING);
 		// SLIDING
 		// SLIDING_FAILING
 		// SPAWNING
@@ -110,7 +113,7 @@ public class ItemFactory extends SpriteFactory<Item>
 			else
 				index ++;
 		}
-		result.addItemAbilities(abilities);
+		result.initItemAbilities(abilities);
 		// event
 		EventManager eventManager = new ItemEventManager(result);
 		result.setEventManager(eventManager);

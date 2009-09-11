@@ -29,6 +29,7 @@ import java.awt.geom.Rectangle2D;
 import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.List;
 
 import fr.free.totalboumboum.configuration.Configuration;
 import fr.free.totalboumboum.configuration.GameVariables;
@@ -113,15 +114,26 @@ public class Level
 	// TILES MATRIX		/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	private Tile matrix[][];
-
+	private ArrayList<Tile> tileList;
+	
 	public Tile[][] getMatrix()
 	{	return matrix;
 	}
+	
 	public void setMatrix(Tile matrix[][])
 	{	this.matrix = matrix;
+		tileList = new ArrayList<Tile>();
+		for(int line=0;line<globalHeight;line++)
+			for(int col=0;col<globalWidth;col++)
+				tileList.add(matrix[line][col]);		
 	}
+	
 	public Tile getTile(int l, int c)
 	{	return matrix[l][c];	
+	}
+	
+	public List<Tile> getTileList()
+	{	return tileList;
 	}
 
     /////////////////////////////////////////////////////////////////
@@ -286,6 +298,13 @@ public class Level
 	{	matrix[line][col].addSprite(hero);
 		hero.setCurrentPosX(matrix[line][col].getPosX());
 		hero.setCurrentPosY(matrix[line][col].getPosY());
+	}
+	
+	public void initSpriteTile(Sprite sprite, int line, int col)
+	{	Tile tile = matrix[line][col];
+		tile.addSprite(sprite);
+		sprite.setCurrentPosX(matrix[line][col].getPosX());
+		sprite.setCurrentPosY(matrix[line][col].getPosY());
 	}
 
 	/////////////////////////////////////////////////////////////////

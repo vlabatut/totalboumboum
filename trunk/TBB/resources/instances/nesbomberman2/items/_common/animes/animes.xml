@@ -5,6 +5,19 @@
 
 	<gestures>
 	
+		<gesture name="APPEARING" repeat="false" folder="appearing">
+			<direction name="NONE">
+				<step duration="75" file="01.gif" />
+				<step duration="75" file="02.gif" />
+				<step duration="75" file="03.gif" />
+				<step duration="75" file="04.gif" />
+				<step duration="75" file="05.gif" />
+				<step duration="75" file="06.gif" />
+				<step duration="75" file="07.gif" />
+				<step duration="75" file="08.gif" />
+			</direction>
+		</gesture>
+
 		<gesture name="BURNING" repeat="false" folder="burning">
 			<direction name="NONE">
 				<step duration="140" file="1.gif" />

@@ -45,22 +45,31 @@ public class Item extends Sprite
 	/////////////////////////////////////////////////////////////////
 	// ITEM ABILITIES	/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	/** abilities given by this item */
+	/** original abilities given by this item */
+	private ArrayList<AbstractAbility> originalItemAbilities;
+	/** working abilities given by this item */
 	private ArrayList<AbstractAbility> itemAbilities;
 	
 	public ArrayList<AbstractAbility> getItemAbilities()
 	{	return itemAbilities;
 	}
 	
-	public void addItemAbilities(ArrayList<AbstractAbility> abilities)
-	{	Iterator<AbstractAbility> i = abilities.iterator();
+	public void initItemAbilities(ArrayList<AbstractAbility> abilities)
+	{	originalItemAbilities = abilities;
+		Iterator<AbstractAbility> i = abilities.iterator();
 		while(i.hasNext())
 			addItemAbility(i.next());
 	}
-//TODO pb: l'ability s'applique à l'item comme si elle n'était pas distinguée des abilities appartenant effectivement à l'item	
-	public void addItemAbility(AbstractAbility ability)
+
+	private void addItemAbility(AbstractAbility ability)
 	{	AbstractAbility copy = ability.copy();
 		itemAbilities.add(copy);
+	}
+
+	public void reinitItemAbilities()
+	{	// NOTE maybe the old abilities should be killed?
+		itemAbilities.clear();
+		initItemAbilities(originalItemAbilities);
 	}
 	
 	/////////////////////////////////////////////////////////////////

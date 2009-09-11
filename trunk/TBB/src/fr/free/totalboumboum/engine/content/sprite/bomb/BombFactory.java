@@ -59,6 +59,7 @@ public class BombFactory extends SpriteFactory<Bomb> implements Serializable
 		animeReplacements.put(GestureName.PUNCHED,GestureName.STANDING);
 		// PUNCHING
 		// PUSHING
+		// RELEASED
 		// SLIDING
 		animeReplacements.put(GestureName.SLIDING,GestureName.STANDING);
 		// SLIDING_FAILING
