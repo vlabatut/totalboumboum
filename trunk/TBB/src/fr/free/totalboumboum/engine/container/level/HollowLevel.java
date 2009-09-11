@@ -285,20 +285,20 @@ public class HollowLevel implements Serializable
 				matrix[line][col] = new Tile(level,line,col,x,y);
 				if(mFloors[line][col]==null)
 				{	Floor floor = theme.makeFloor(matrix[line][col]);
-					matrix[line][col].setFloor(floor);
+					level.insertSprite(floor,matrix[line][col]);
 				}
 				else
 				{	Floor floor = theme.makeFloor(mFloors[line][col],matrix[line][col]);
-					matrix[line][col].setFloor(floor);
+					level.insertSprite(floor,matrix[line][col]);
 				}
 				if(mBlocks[line][col]!=null)
 				{	Block block = theme.makeBlock(mBlocks[line][col],matrix[line][col]);
-					matrix[line][col].addSprite(block);
+					level.insertSprite(block,matrix[line][col]);
 				
 				}
 				if(mItems[line][col]!=null)
 				{	Item item = itemset.makeItem(mItems[line][col],matrix[line][col]);
-					matrix[line][col].addSprite(item);				
+					level.insertSprite(item,matrix[line][col]);				
 				}
 				if(mBombs[line][col]!=null)
 				{	String temp[] = mBombs[line][col].split(":");
@@ -307,7 +307,7 @@ public class HollowLevel implements Serializable
 					for(int i=0;i<temp.length-1;i++)
 						name = name+temp[i];
 					Bomb bomb = bombset.makeBomb(name,matrix[line][col],range);
-					matrix[line][col].addSprite(bomb);				
+					level.insertSprite(bomb,matrix[line][col]);				
 				}
 			}
 		}

@@ -24,6 +24,7 @@ package fr.free.totalboumboum.engine.content.manager.bombset;
 import java.util.Iterator;
 import java.util.LinkedList;
 
+import fr.free.totalboumboum.configuration.GameVariables;
 import fr.free.totalboumboum.engine.container.bombset.Bombset;
 import fr.free.totalboumboum.engine.container.tile.Tile;
 import fr.free.totalboumboum.engine.content.feature.Direction;
@@ -120,8 +121,9 @@ public class BombsetManager
 					SpecificAction specificAction = new SpecificAppear(bomb);
 					ablt = bomb.modulateAction(specificAction);
 					if(ablt.isActive())
-					{	bomb.setCurrentPosX(tile.getPosX());
-						bomb.setCurrentPosY(tile.getPosY());
+					{	GameVariables.level.insertSprite(bomb,tile);
+//						bomb.setCurrentPosX(tile.getPosX());
+//						bomb.setCurrentPosY(tile.getPosY());
 						bomb.appear(direction);
 						droppedBombs.offer(bomb);
 						// stats
