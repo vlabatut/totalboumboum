@@ -125,8 +125,9 @@ public class ExplosionManager
 						}
 						else
 						{	goOn = true;
-							fire.setCurrentPosX(tempTile.getPosX());
-							fire.setCurrentPosY(tempTile.getPosY());
+							GameVariables.level.insertSprite(fire,tile);
+//							fire.setCurrentPosX(tempTile.getPosX());
+//							fire.setCurrentPosY(tempTile.getPosY());
 							fire.appear(direction);
 						}
 					}

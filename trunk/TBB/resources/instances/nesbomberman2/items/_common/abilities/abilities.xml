@@ -3,6 +3,10 @@
 		xsi:noNamespaceSchemaLocation="../../../../../schemas/abilities.xsd" >
 
 		<!-- STATE -->
+<!--  	SPRITE_ENTRY_DURATION --> 
+		<ability strength="200" frame="false" time="-1" uses="-1">
+			<name value="SPRITE_ENTRY_DURATION" />
+		</ability>
 <!--  	SPRITE_FLAT --> 
 		<ability strength="1" frame="false" time="-1" uses="-1">
 			<name value="SPRITE_FLAT" />
