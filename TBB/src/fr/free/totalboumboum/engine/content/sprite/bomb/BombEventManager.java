@@ -268,6 +268,7 @@ public class BombEventManager extends EventManager
 			// can appear >> appears
 			if(actionAbility.isActive())
 			{	gesture = GestureName.APPEARING;
+//TODO should be ENTERING here, no?			
 				sprite.setGesture(gesture,spriteDirection,Direction.NONE,true);
 			}
 			// cannot appear >> wait for next iteration
@@ -330,6 +331,7 @@ public class BombEventManager extends EventManager
 			{
 				//NOTE prévoir le cas où la bombe ne peut pas péter, il faut le remettre au prochain instant
 				// sauf que certains états prévoient une réinit du timer au changement d'état (ex : bouncing)
+				// >> en fait pas ds toutes les instances. -> mettre un paramètre (ability)
 			}
 		}
 		// flame-caused explosion
