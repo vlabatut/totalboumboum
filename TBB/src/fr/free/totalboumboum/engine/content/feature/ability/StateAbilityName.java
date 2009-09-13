@@ -56,7 +56,7 @@ public class StateAbilityName
 	/** cross (some?) walls */
 	public static final String SPRITE_TRAVERSE_WALL = "SPRITE_TRAVERSE_WALL";
 	
-	/** the sprite is twinkling, the strenght corresponds to the twinkling color in RGB integer */
+	/** the sprite is twinkling, the strenght corresponds to the twinkling color in RGB integer (0=no twinkling, <0=transparent twinkling) */
 	public static final String SPRITE_TWINKLE = "SPRITE_TWINKLE";	
 	/** time the sprite is colored (or hidden) when twinkling */
 	public static final String SPRITE_TWINKLE_COLOR = "SPRITE_TWINKLE_COLOR";	

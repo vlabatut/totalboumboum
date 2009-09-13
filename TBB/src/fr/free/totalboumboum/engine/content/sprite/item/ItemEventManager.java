@@ -146,9 +146,9 @@ public class ItemEventManager extends EventManager
 				sprite.addIterDelay(DelayManager.DL_RELEASE,1);
 			// else move the item to the tile and make it appear
 			else
-			{	gesture = GestureName.APPEARING;
-				sprite.setGesture(gesture,spriteDirection,Direction.NONE,true);
-				tile.addSprite(sprite);
+			{	tile.addSprite(sprite);
+				gesture = GestureName.APPEARING;
+				sprite.setGesture(gesture,spriteDirection,Direction.NONE,true);				
 			}
 		}
 	}
