@@ -1,4 +1,4 @@
-package fr.free.totalboumboum.engine.content.feature.action.punch;
+package fr.free.totalboumboum.engine.content.feature.action.release;
 
 /*
  * Total Boum Boum
@@ -32,56 +32,13 @@ import fr.free.totalboumboum.engine.content.feature.TilePosition;
 import fr.free.totalboumboum.engine.content.feature.action.ActionName;
 import fr.free.totalboumboum.engine.content.feature.action.GeneralAction;
 
-/** 
- * action de balancer un autre objet
- * TRANSITIVE
- * 
- * <p>ABILITY PERFORM
- * 	<br>paramètre: actor=self
- * 	<br>paramètre: target=oui (bomb)
- * 	<br>paramètre: direction=oui
- * 	<br>paramètre: strength=bool
- * 	<br>paramètre: kind=N/D
- * 	<br>paramètre: scope=N/D
- * 	<br>paramètre: restriction=N/D
- * 
- * <p>ABILITY REFUSE
- * 	<br>paramètre: actor=oui (hero)
- * 	<br>paramètre: target=self
- * 	<br>paramètre: direction=oui
- * 	<br>paramètre: strength=bool
- * 	<br>paramètre: kind=N/D
- * 	<br>paramètre: scope=N/D
- * 	<br>paramètre: restriction=N/D
- * 
- * <p>ABILITY PREVENT
- * 	<br>paramètre: actor=oui (hero)
- * 	<br>paramètre: target=oui (bomb)
- * 	<br>paramètre: direction=oui
- * 	<br>paramètre: strength=bool
- * 	<br>paramètre: kind=N/D
- * 	<br>paramètre: scope=N/D
- * 	<br>paramètre: restriction=N/D
- */
-/** 
- * hitting an object to to send it in the air.
- * for instance: hero punching a bomb
- * 
- * 	<br>actor: 			any (probably a hero)
- * 	<br>target: 		any (probably a bomb or another hero)
- * 	<br>direction:		any (not none)
- * 	<br>contact:		any or none
- * 	<br>tilePosition:	same or neighbor
- * 	<br>orientation:	same
- *  
- */
-public class GeneralPunch extends GeneralAction
+public class GeneralRelease extends GeneralAction
 {
 	/////////////////////////////////////////////////////////////////
 	// NAME				/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	/** name of the action */
-	private final ActionName name = ActionName.PUNCH;
+	private final ActionName name = ActionName.RELEASE;
 
 	public ActionName getName()
 	{	return name;	
@@ -93,12 +50,12 @@ public class GeneralPunch extends GeneralAction
 	/** roles of the acting sprite */
 	private static final List<Role> allowedActors = Arrays.asList(new Role[]{
 //		Role.NONE,
-		Role.BLOCK,
-		Role.BOMB,
-		Role.FIRE,
-		Role.FLOOR,
-		Role.HERO,
-		Role.ITEM
+//		Role.BLOCK,
+//		Role.BOMB,
+//		Role.FIRE,
+//		Role.FLOOR,
+		Role.HERO
+//		Role.ITEM
     });
 	
 	@Override
@@ -114,13 +71,13 @@ public class GeneralPunch extends GeneralAction
 	/////////////////////////////////////////////////////////////////
 	/** role of the targeted sprite */
 	private static final List<Role> allowedTargets = Arrays.asList(new Role[]{
-//		Role.NONE,
-		Role.BLOCK,
-		Role.BOMB,
-		Role.FIRE,
-		Role.FLOOR,
-		Role.HERO,
-		Role.ITEM
+		Role.NONE
+//		Role.BLOCK,
+//		Role.BOMB,
+//		Role.FIRE,
+//		Role.FLOOR,
+//		Role.HERO,
+//		Role.ITEM
     });
 	
 	@Override
@@ -178,9 +135,9 @@ public class GeneralPunch extends GeneralAction
 	/////////////////////////////////////////////////////////////////
 	/** positions of the target in termes of tiles */
 	private static final List<TilePosition> allowedTilePositions = Arrays.asList(new TilePosition[]{
-//		TilePosition.UNDEFINED,
+		TilePosition.NONE,
 		TilePosition.NEIGHBOR,
-//		TilePosition.REMOTE,
+		TilePosition.REMOTE,
 		TilePosition.SAME
     });
 	
@@ -197,12 +154,12 @@ public class GeneralPunch extends GeneralAction
 	/////////////////////////////////////////////////////////////////
 	/** compared directions of the target and the action */
 	private static final List<Orientation> allowedOrientations = Arrays.asList(new Orientation[]{
-//		Orientation.NONE,
-//		Orientation.BACK,
+		Orientation.NONE,
+		Orientation.BACK,
 		Orientation.FACE,
-		Orientation.NEUTRAL
-//		Orientation.OTHER,
-     });
+		Orientation.NEUTRAL,
+		Orientation.OTHER,
+    });
 
 	@Override
 	public void addOrientation(Orientation orientation)
@@ -227,7 +184,7 @@ public class GeneralPunch extends GeneralAction
 	/////////////////////////////////////////////////////////////////
 	@Override
 	public String toString()
-	{	String result = "PUNCH";
+	{	String result = "RELEASE";
 		result = result + super.toString();
 		return result;
 	}

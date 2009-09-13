@@ -29,5 +29,18 @@
 			</direction>
 		</gesture>
 
+		<gesture name="DISAPPEARING" repeat="false" folder="appearing">
+			<direction name="NONE">
+				<step duration="15" file="08.gif" />
+				<step duration="15" file="07.gif" />
+				<step duration="15" file="06.gif" />
+				<step duration="15" file="05.gif" />
+				<step duration="15" file="04.gif" />
+				<step duration="15" file="03.gif" />
+				<step duration="15" file="02.gif" />
+				<step duration="15" file="01.gif" />
+			</direction>
+		</gesture>
+
 	</gestures>		
 </animes>

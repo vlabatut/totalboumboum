@@ -37,6 +37,7 @@ import fr.free.totalboumboum.engine.content.feature.action.detonate.SpecificDeto
 import fr.free.totalboumboum.engine.content.feature.action.trigger.SpecificTrigger;
 import fr.free.totalboumboum.engine.content.feature.event.ActionEvent;
 import fr.free.totalboumboum.engine.content.feature.event.ControlEvent;
+import fr.free.totalboumboum.engine.content.feature.gesture.GestureName;
 import fr.free.totalboumboum.engine.content.sprite.Sprite;
 import fr.free.totalboumboum.engine.content.sprite.bomb.Bomb;
 import fr.free.totalboumboum.game.statistics.StatisticAction;
@@ -117,11 +118,11 @@ public class BombsetManager
 			if(droppedBombs.size()<droppedBombLimit)
 			{	if(bomb!=null)
 				{	bomb.setFlameRange(flameRange); //NOTE maybe it should be more consistent to use a specific StateAbility, initialized automatically from the owner when the bomb is made (by the bombfactory)?
-					Tile tile = sprite.getTile();
+					//Tile tile = sprite.getTile();
 					SpecificAction specificAction = new SpecificAppear(bomb);
 					ablt = bomb.modulateAction(specificAction);
 					if(ablt.isActive())
-					{	GameVariables.level.insertSprite(bomb,tile);
+					{	GameVariables.level.insertSpriteTile(bomb);
 //						bomb.setCurrentPosX(tile.getPosX());
 //						bomb.setCurrentPosY(tile.getPosY());
 						bomb.appear(direction);
@@ -145,7 +146,7 @@ public class BombsetManager
 		Iterator<Bomb> i = droppedBombs.iterator();
 		while(i.hasNext())
 		{	Bomb bomb = i.next();
-			if(bomb.isEnded())
+			if(bomb.getCurrentGesture().getName()==GestureName.ENDED)
 			{	i.remove();
 //System.out.println("droppedBombCount:"+droppedBombCount);	
 			}

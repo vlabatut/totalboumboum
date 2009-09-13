@@ -261,13 +261,13 @@ public class BombEventManager extends EventManager
 	}
 
 	private void engDelayOver(EngineEvent event)
-	{	// end of entering
+	{	// could not enter at first, but can now appear (i.e. this happens after the begining of the round)
 		if(gesture.equals(GestureName.NONE) && event.getStringParameter().equals(DelayManager.DL_ENTER))
 		{	SpecificAction action = new SpecificAppear(sprite);
 			ActionAbility actionAbility = sprite.modulateAction(action);
 			// can appear >> appears
 			if(actionAbility.isActive())
-			{	appear(spriteDirection);
+			{	appear();
 			}
 			// cannot appear >> wait for next iteration
 			else
@@ -382,21 +382,23 @@ public class BombEventManager extends EventManager
 	}
 	
 	private void engEnter(EngineEvent event)
-	{	spriteDirection = event.getDirection();
-		SpecificAction action = new SpecificAppear(sprite);
-		ActionAbility actionAbility = sprite.modulateAction(action);
-		// can appear >> appears
-		if(actionAbility.isActive())
-		{	gesture = GestureName.ENTERING;
-			StateAbility stateAbility = sprite.modulateStateAbility(StateAbilityName.SPRITE_ENTRY_DURATION);
-			double duration = stateAbility.getStrength();
-			if(duration<=0)
-				duration = 1;
-			sprite.setGesture(gesture,spriteDirection,Direction.NONE,true,duration);
-		}
-		// cannot appear >> wait for next iteration
-		else
-		{	sprite.addIterDelay(DelayManager.DL_ENTER,1);		
+	{	if(gesture.equals(GestureName.NONE))
+		{	spriteDirection = event.getDirection();
+			SpecificAction action = new SpecificAppear(sprite);
+			ActionAbility actionAbility = sprite.modulateAction(action);
+			// can appear >> appears
+			if(actionAbility.isActive())
+			{	gesture = GestureName.ENTERING;
+				StateAbility stateAbility = sprite.modulateStateAbility(StateAbilityName.SPRITE_ENTRY_DURATION);
+				double duration = stateAbility.getStrength();
+				if(duration<=0)
+					duration = 1;
+				sprite.setGesture(gesture,spriteDirection,Direction.NONE,true,duration);
+			}
+			// cannot appear >> wait for next iteration
+			else
+			{	sprite.addIterDelay(DelayManager.DL_ENTER,1);		
+			}
 		}
 	}
 	
@@ -408,17 +410,17 @@ public class BombEventManager extends EventManager
 
 	/////////////////////////////////////////////////////////////////
 	// ACTIONS			/////////////////////////////////////////////
-	/////////////////////////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////	
 	/*
 	 * action supposedly already tested
 	 */
-	public void appear(Direction direction)
+	private void appear()
 	{	gesture = GestureName.APPEARING;
-		spriteDirection = direction;
 		sprite.setGesture(gesture,spriteDirection,Direction.NONE,true);
-//		sprite.getTile().addSprite(sprite);
+		EngineEvent event = new EngineEvent(EngineEvent.TILE_LOW_ENTER,sprite,null,sprite.getActualDirection()); //TODO to be changed by a GESTURE_CHANGE event (or equiv.)
+		sprite.getTile().spreadEvent(event);
 	}
-	
+
 	private void stand()
 	{	gesture = GestureName.STANDING;
 		StateAbility ability = sprite.modulateStateAbility(StateAbilityName.BOMB_TRIGGER_TIMER);

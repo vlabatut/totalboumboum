@@ -187,10 +187,10 @@ public class GeneralAppear extends GeneralAction
 	private static final List<Orientation> allowedOrientations = Arrays.asList(new Orientation[]{
 		Orientation.NONE
 //		Orientation.BACK,
-//		Orientation.OTHER,
 //		Orientation.FACE,
-//		Orientation.NONE
-    });
+//		Orientation.NEUTRAL,
+//		Orientation.OTHER,
+     });
 
 	@Override
 	public void addOrientation(Orientation orientation)

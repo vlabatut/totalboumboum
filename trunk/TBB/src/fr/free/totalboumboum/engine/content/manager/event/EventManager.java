@@ -21,6 +21,7 @@ package fr.free.totalboumboum.engine.content.manager.event;
  * 
  */
 
+import fr.free.totalboumboum.configuration.GameVariables;
 import fr.free.totalboumboum.engine.content.feature.Direction;
 import fr.free.totalboumboum.engine.content.feature.event.ActionEvent;
 import fr.free.totalboumboum.engine.content.feature.event.ControlEvent;
@@ -94,12 +95,12 @@ public abstract class EventManager
 	/////////////////////////////////////////////////////////////////
 	// EXECUTION		/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-//	public abstract void enterRound(Direction dir);
-	
-	public void endSprite()
+
+	protected void endSprite()
 	{	gesture = GestureName.ENDED;
 		sprite.setGesture(gesture,spriteDirection,Direction.NONE,true);
-		sprite.setEnded();
+		sprite.changeTile(null);
+		GameVariables.level.removeSprite(sprite);
 	}
 	
 	/////////////////////////////////////////////////////////////////

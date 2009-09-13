@@ -65,7 +65,8 @@ public class ItemEventManager extends EventManager
 	}
 		
 	private void actionGather(ActionEvent event)
-	{	//NOTE traitement effectué par l'itemMgr du sprite qui ramasse
+	{	gesture = GestureName.DISAPPEARING;
+		sprite.setGesture(gesture,spriteDirection,Direction.NONE,true);
 	}
 		
 	/////////////////////////////////////////////////////////////////
@@ -99,6 +100,10 @@ public class ItemEventManager extends EventManager
 		else if(gesture.equals(GestureName.BURNING))
 		{	endSprite();
 		}
+		else if(gesture.equals(GestureName.DISAPPEARING))
+		{	gesture = GestureName.HIDING;
+			sprite.setGesture(gesture,spriteDirection,Direction.NONE,true);
+		}
 		else if(gesture.equals(GestureName.ENTERING))
 		{	gesture = GestureName.PREPARED;
 			sprite.setGesture(gesture,spriteDirection,Direction.NONE,true);
@@ -106,13 +111,13 @@ public class ItemEventManager extends EventManager
 	}
 
 	private void engDelayOver(EngineEvent event)
-	{	if(gesture.equals(GestureName.NONE) && event.getStringParameter().equals(DelayManager.DL_ENTER))
+	{	// could not enter at first, but can now appear (i.e. this happens after the begining of the round)
+		if(gesture.equals(GestureName.NONE) && event.getStringParameter().equals(DelayManager.DL_ENTER))
 		{	SpecificAction action = new SpecificAppear(sprite);
 			ActionAbility actionAbility = sprite.modulateAction(action);
 			// can appear >> appears
 			if(actionAbility.isActive())
-			{	gesture = GestureName.APPEARING;
-				sprite.setGesture(gesture,spriteDirection,Direction.NONE,true);
+			{	appear();
 			}
 			// cannot appear >> wait for next iteration
 			else
@@ -124,31 +129,28 @@ public class ItemEventManager extends EventManager
 			// randomly find a tile
 			List<Tile> tileList = GameVariables.level.getTileList();
 			boolean done = false;
-			Tile tile = null;
 			while(!done && tileList.size()>0)
 			{	int index = (int)(Math.random()*tileList.size());
-				tile = tileList.get(index);
-				SpecificAction action = new SpecificAppear(sprite,tile);
+				Tile tile = tileList.get(index);
+				sprite.changeTile(tile);
+				SpecificAction action = new SpecificAppear(sprite);
 				ActionAbility actionAbility = sprite.modulateAction(action);
 				// can appear >> select this tile
 				if(actionAbility.isActive())
-				{	gesture = GestureName.RELEASED;
-					sprite.setGesture(gesture,spriteDirection,Direction.NONE,true);
 					done = true;
-				}
 				// cannot appear >> remove the tile from the list and re-draw
 				else
-				{	tileList.remove(index);
-				}						
+					tileList.remove(index);
 			}
-			// if not tile : wait for the next iteration
+			// if no tile available : wait for the next iteration
 			if(!done)
 				sprite.addIterDelay(DelayManager.DL_RELEASE,1);
 			// else move the item to the tile and make it appear
 			else
-			{	tile.addSprite(sprite);
-				gesture = GestureName.APPEARING;
-				sprite.setGesture(gesture,spriteDirection,Direction.NONE,true);				
+			{	gesture = GestureName.RELEASED;
+				sprite.setGesture(gesture,spriteDirection,Direction.NONE,true);
+				EngineEvent evt = new EngineEvent(EngineEvent.TILE_LOW_ENTER,sprite,null,sprite.getActualDirection()); //TODO to be changed by a GESTURE_CHANGE event (or equiv.)
+				sprite.getTile().spreadEvent(evt);
 			}
 		}
 	}
@@ -180,10 +182,19 @@ public class ItemEventManager extends EventManager
 			sprite.setGesture(gesture,spriteDirection,Direction.NONE,true);
 		}
 	}
-	
+
 	/////////////////////////////////////////////////////////////////
 	// ACTIONS			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
+	/*
+	 * action supposedly already tested
+	 */
+	private void appear()
+	{	gesture = GestureName.APPEARING;
+		sprite.setGesture(gesture,spriteDirection,Direction.NONE,true);
+		EngineEvent event = new EngineEvent(EngineEvent.TILE_LOW_ENTER,sprite,null,sprite.getActualDirection()); //TODO to be changed by a GESTURE_CHANGE event (or equiv.)
+		sprite.getTile().spreadEvent(event);
+	}
 	
 	/////////////////////////////////////////////////////////////////
 	// FINISHED			/////////////////////////////////////////////

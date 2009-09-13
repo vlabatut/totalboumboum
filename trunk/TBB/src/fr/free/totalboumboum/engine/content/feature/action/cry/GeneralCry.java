@@ -167,10 +167,11 @@ public class GeneralCry extends GeneralAction
 	/** compared directions of the target and the action */
 	private static final List<Orientation> allowedOrientations = Arrays.asList(new Orientation[]{
 		Orientation.NONE
-//		Orientation.OPPOSITE,
+//		Orientation.BACK,
+//		Orientation.FACE,
+//		Orientation.NEUTRAL,
 //		Orientation.OTHER,
-//		Orientation.SAME
-    });
+     });
 
 	@Override
 	public void addOrientation(Orientation orientation)

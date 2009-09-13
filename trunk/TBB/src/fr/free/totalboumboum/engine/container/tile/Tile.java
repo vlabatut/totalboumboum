@@ -68,30 +68,14 @@ public class Tile
 	public void updateFloor()
 	{	floor.update();
 	}
+	
 	public void updateHeroes()
 	{	int i=0;
 		while(i<heroes.size())
 		{	Hero temp = heroes.get(i);
-			@SuppressWarnings("unused")
-			double prevPosX = temp.getCurrentPosX();
-			@SuppressWarnings("unused")
-			double prevPosY = temp.getCurrentPosY();
 			temp.update();
-			double tempPosX = temp.getCurrentPosX();
-			double tempPosY = temp.getCurrentPosY();
-			if(temp.isToBeRemovedFromTile())
-			{	heroes.remove(i);
-				level.removeSprite(temp);
-				//NOTE à compléter (défaite)
-			}
-			else if(!containsPoint(tempPosX, tempPosY))
-			{	Tile newTile = level.getTile(tempPosX,tempPosY);
-//System.out.println("Tile.update>"+"tile:"+posX+";"+posY+" - case:"+line+";"+col);		
-//System.out.println("Tile.update>"+"sprite:"+tempPosX+";"+tempPosY+" - newCase:"+newTile.getLine()+";"+newTile.getCol());
-				heroes.remove(i);
-				newTile.addHero(temp);
-			}
-			else
+			// only increment if the current sprite didn't leave the tile
+			if(heroes.get(i)==temp)
 				i++;
 		}
 	}
@@ -100,26 +84,9 @@ public class Tile
 	{	int i=0;
 		while(i<bombs.size())
 		{	Bomb temp = bombs.get(i);
-			@SuppressWarnings("unused")
-			double prevPosX = temp.getCurrentPosX();
-			@SuppressWarnings("unused")
-			double prevPosY = temp.getCurrentPosY();
 			temp.update();
-			double tempPosX = temp.getCurrentPosX();
-			double tempPosY = temp.getCurrentPosY();
-			if(temp.isToBeRemovedFromTile())
-			{	bombs.remove(i);
-				level.removeSprite(temp);
-				//NOTE à compléter (?)
-			}
-			else if(!containsPoint(tempPosX, tempPosY))
-			{	Tile newTile = level.getTile(tempPosX,tempPosY);
-//System.out.println("Tile.update>"+"tile:"+posX+";"+posY+" - case:"+line+";"+col);		
-//System.out.println("Tile.update>"+"sprite:"+tempPosX+";"+tempPosY+" - newCase:"+newTile.getLine()+";"+newTile.getCol());
-				bombs.remove(i);
-				newTile.addBomb(temp);		
-			}
-			else
+			// only increment if the current sprite didn't leave the tile
+			if(bombs.get(i)==temp)
 				i++;
 		}
 	}
@@ -129,34 +96,21 @@ public class Tile
 		while(i<fires.size())
 		{	Fire temp = fires.get(i);
 			temp.update();
-			if(temp.isToBeRemovedFromTile())
-			{	fires.remove(i);
-				level.removeSprite(temp);
-				//NOTE à compléter (?)
-			}
-			i++;
+			// only increment if the current sprite didn't leave the tile
+			if(fires.get(i)==temp)
+				i++;
 		}
 	}
 
 	public void updateBlock()
 	{	if(block!=null)
 		{	block.update();
-			if(block.isToBeRemovedFromTile())
-			{	level.removeSprite(block); //NOTE deux lignes inversées, idem pr item
-				block = null;			
-				//NOTE à compléter (?)
-			}
 		}		
 	}
 
 	public void updateItem()
 	{	if(item!=null)
 		{	item.update();
-			if(item.isToBeRemovedFromTile())
-			{	level.removeSprite(item); //NOTE deux lignes inversées, idem pr block
-				item = null;				
-				//NOTE à compléter (?)
-			}
 		}		
 	}
 		
@@ -167,10 +121,14 @@ public class Tile
 
 	private void addHero(Hero hero)
 	{	heroes.add(hero);		
-		hero.setTile(this);
+//		hero.setTile(this);
 //		level.addSprite(hero);
 	}
 	
+	private void removeHero(Hero hero)
+	{	heroes.remove(hero);	
+	}
+
 	public ArrayList<Hero> getHeroes()
 	{	return heroes;
 	}
@@ -195,10 +153,14 @@ public class Tile
 
 	private void addBomb(Bomb bomb)
 	{	bombs.add(bomb);		
-		bomb.setTile(this);
+//		bomb.setTile(this);
 //		level.addSprite(bomb);
 	}
 	
+	private void removeBomb(Bomb bomb)
+	{	bombs.remove(bomb);	
+	}
+
 	public ArrayList<Bomb> getBombs()
 	{	return bombs;
 	}
@@ -222,10 +184,14 @@ public class Tile
 
 	private void addFire(Fire fire)
 	{	fires.add(fire);
-		fire.setTile(this);
+//		fire.setTile(this);
 //		level.addSprite(fire);
 	}
 	
+	private void removeFire(Fire fire)
+	{	fires.remove(fire);	
+	}
+
 	public ArrayList<Fire> getFires()
 	{	return fires;
 	}
@@ -251,8 +217,13 @@ public class Tile
 	{	this.block = block;
 //		block.setCurrentPosX(posX);
 //		block.setCurrentPosY(posY);
-		block.setTile(this);
+//		block.setTile(this);
 //		level.addSprite(block);
+	}
+	
+	private void unsetBlock(Block block)
+	{	if(this.block==block)
+			this.block = null;	
 	}
 	
 	public Block getBlock()
@@ -287,14 +258,14 @@ public class Tile
 	{	this.item = item;
 //		item.setCurrentPosX(posX);
 //		item.setCurrentPosY(posY);
-		item.setTile(this);
+//		item.setTile(this);
 //		level.addSprite(item);
 	}
-/*	
-	public void removeItem()
-	{	item = null;		
+	
+	private void unsetItem(Item item)
+	{	if(this.item==item)	
+			this.item = null;	
 	}
-*/
 	
 	public void drawItem(Graphics g, boolean flat, boolean onGround, boolean shadow)
 	{	if(item!=null)
@@ -323,10 +294,15 @@ public class Tile
 	{	this.floor = floor;
 //		floor.setCurrentPosX(posX);
 //		floor.setCurrentPosY(posY);
-		floor.setTile(this);
+//		floor.setTile(this);
 //		level.addSprite(floor);
 	}
-	
+
+/*	private void unsetFloor(Floor floor)
+	{	if(this.floor==floor)	
+			this.floor = null;	
+	}
+*/
 	public void drawFloor(Graphics g, boolean flat, boolean onGround, boolean shadow)
 	{	AbstractAbility temp = floor.modulateStateAbility(StateAbilityName.SPRITE_FLAT);
 		if(floor!=null && ((temp!=null && temp.isActive()) == flat) && (floor.isOnGround() == onGround))
@@ -353,6 +329,21 @@ public class Tile
 			addHero((Hero) sprite);
 		else if(sprite instanceof Item)
 			setItem((Item) sprite);
+	}
+
+	public void removeSprite(Sprite sprite)
+	{	if(sprite instanceof Block)
+			unsetBlock((Block) sprite);
+		else if(sprite instanceof Bomb)
+			removeBomb((Bomb) sprite);		
+		else if(sprite instanceof Fire)
+			removeFire((Fire) sprite);		
+//		else if(sprite instanceof Floor)
+//			unsetFloor((Floor) sprite);
+		else if(sprite instanceof Hero)
+			removeHero((Hero) sprite);
+		else if(sprite instanceof Item)
+			unsetItem((Item) sprite);
 	}
 
 	public ArrayList<Sprite> getSprites()

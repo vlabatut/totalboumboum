@@ -61,7 +61,7 @@ public class FireEventManager extends EventManager
 	public void processEvent(EngineEvent event)
 	{	if(event.getName().equals(EngineEvent.ANIME_OVER))
 			engAnimeOver(event);
-		else if(event.getName().equals(EngineEvent.TILE_LOWENTER))
+		else if(event.getName().equals(EngineEvent.TILE_LOW_ENTER))
 			tileEnter(event);
 		else if(event.getName().equals(EngineEvent.TOUCH_GROUND))
 			tileEnter(event);
@@ -102,13 +102,15 @@ public class FireEventManager extends EventManager
 	}
 	
 	private void engEnter(EngineEvent event)
-	{	gesture = GestureName.ENTERING;
-		spriteDirection = event.getDirection();
-		StateAbility ability = sprite.modulateStateAbility(StateAbilityName.SPRITE_ENTRY_DURATION);
-		double duration = ability.getStrength();
-		if(duration<=0)
-			duration = 1;
-		sprite.setGesture(gesture,spriteDirection,Direction.NONE,true,duration);
+	{	if(gesture.equals(GestureName.NONE))
+		{	gesture = GestureName.ENTERING;
+			spriteDirection = event.getDirection();
+			StateAbility ability = sprite.modulateStateAbility(StateAbilityName.SPRITE_ENTRY_DURATION);
+			double duration = ability.getStrength();
+			if(duration<=0)
+				duration = 1;
+			sprite.setGesture(gesture,spriteDirection,Direction.NONE,true,duration);
+		}
 	}
 	
 	private void engStart(EngineEvent event)
@@ -121,15 +123,6 @@ public class FireEventManager extends EventManager
 	/////////////////////////////////////////////////////////////////
 	// ACTIONS			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	/*
-	 * action supposedly already tested
-	 */
-	public void appear(Direction direction)
-	{	gesture = GestureName.APPEARING;
-		spriteDirection = direction;
-		sprite.setGesture(gesture,spriteDirection,Direction.NONE,true);
-//		sprite.getTile().addSprite(sprite);	
-	}
 	
 	/////////////////////////////////////////////////////////////////
 	// FINISHED			/////////////////////////////////////////////

@@ -309,7 +309,7 @@ public class HeroEventManager extends EventManager
 			engIntersectionOff(event);
 		else if(event.getName().equals(EngineEvent.INTERSECTION_ON))
 			engIntersectionOn(event);
-		else if(event.getName().equals(EngineEvent.TILE_LOWENTER))
+		else if(event.getName().equals(EngineEvent.TILE_LOW_ENTER))
 			engTileLowEnter(event);
 		else if(event.getName().equals(EngineEvent.TOUCH_GROUND))
 			engTouchGround(event);
@@ -403,8 +403,7 @@ public class HeroEventManager extends EventManager
 				ability.setTime(duration);
 				sprite.addDirectAbility(ability);
 				// make the sprite to appear
-				gesture = GestureName.APPEARING;
-				sprite.setGesture(gesture,spriteDirection,controlDirection,true);
+				appear();
 			}	
 		}
 	}
@@ -426,7 +425,8 @@ public class HeroEventManager extends EventManager
 					ActionAbility ability = sprite.modulateAction(action);
 					if(ability.isActive())
 					{	sprite.addItem(item);
-						//TODO c'est bizarre : le gesture de l'item n'est pas mis à HIDING au cours de l'opération (?)
+						ActionEvent evt = new ActionEvent(action);
+						item.processEvent(evt);
 					}
 				}
 			}
@@ -441,6 +441,8 @@ public class HeroEventManager extends EventManager
 				ActionAbility ability = sprite.modulateAction(action);
 				if(ability.isActive())
 				{	sprite.addItem(item);
+					ActionEvent evt = new ActionEvent(action);
+					item.processEvent(evt);
 				}
 			}
 		}
@@ -530,13 +532,15 @@ public class HeroEventManager extends EventManager
 	}
 	
 	private void engEnter(EngineEvent event)
-	{	gesture = GestureName.ENTERING;
-		spriteDirection = event.getDirection();
-		StateAbility ability = sprite.modulateStateAbility(StateAbilityName.SPRITE_ENTRY_DURATION);
-		double duration = ability.getStrength();
-		if(duration<=0)
-			duration = 1;
-		sprite.setGesture(gesture,spriteDirection,Direction.NONE,true,duration);		
+	{	if(gesture.equals(GestureName.NONE))
+		{	gesture = GestureName.ENTERING;
+			spriteDirection = event.getDirection();
+			StateAbility ability = sprite.modulateStateAbility(StateAbilityName.SPRITE_ENTRY_DURATION);
+			double duration = ability.getStrength();
+			if(duration<=0)
+				duration = 1;
+			sprite.setGesture(gesture,spriteDirection,Direction.NONE,true,duration);
+		}
 	}
 
 	private void engStart(EngineEvent event)
@@ -549,6 +553,16 @@ public class HeroEventManager extends EventManager
 	/////////////////////////////////////////////////////////////////
 	// ACTIONS			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
+	/*
+	 * action supposedly already tested
+	 */
+	private void appear()
+	{	gesture = GestureName.APPEARING;
+		sprite.setGesture(gesture,spriteDirection,controlDirection,true);
+		EngineEvent event = new EngineEvent(EngineEvent.TILE_LOW_ENTER,sprite,null,sprite.getActualDirection()); //TODO to be changed by a GESTURE_CHANGE event (or equiv.)
+		sprite.getTile().spreadEvent(event);
+	}
+
 	private void setWaitDelay()
 	{	StateAbility ability = sprite.modulateStateAbility(StateAbilityName.HERO_WAIT_DURATION);
 		double duration = ability.getStrength();

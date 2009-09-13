@@ -505,21 +505,25 @@ System.out.println();
 		
 		// updating the flight flag
 		if(!hasFlied && currentPosZ>0)
-			hasFlied = true;
+		{	hasFlied = true;
+			EngineEvent e = new EngineEvent(EngineEvent.LEAVE_GROUND,sprite,null,getActualDirection());
+			sprite.getTile().spreadEvent(e);
+		}
 		
 		// normalizing height at the end of an air move
 		if(isTerminated)
 		{	if(CalculusTools.isRelativelyEqualTo(currentPosZ,0))
 				currentPosZ = 0;
 			//
+			sprite.processEvent(new EngineEvent(EngineEvent.TRAJECTORY_OVER));
 			if(hasFlied && currentPosZ==0)
-			{	sprite.processEvent(new EngineEvent(EngineEvent.TRAJECTORY_OVER));
-				EngineEvent e = new EngineEvent(EngineEvent.TOUCH_GROUND,sprite,null,getActualDirection());
+			{	EngineEvent e = new EngineEvent(EngineEvent.TOUCH_GROUND,sprite,null,getActualDirection());
 				sprite.getTile().spreadEvent(e);
-			}
-			else
-				sprite.processEvent(new EngineEvent(EngineEvent.TRAJECTORY_OVER));
+			}				
 		}
+		
+		// updating the tile
+		updateTile();
 	}
 	
 	/**
@@ -622,6 +626,15 @@ System.out.println();
 			nextTime = nextTime + currentStep.getDuration()/**forcedDurationCoeff*/;
 		}
 		while(nextTime<trajectoryTime && i.hasNext());
+	}
+	
+	private void updateTile()
+	{	// get current and previous tiles
+		Tile previousTile = sprite.getTile();
+		Tile currentTile = GameVariables.level.getTile(currentPosX,currentPosY);
+		// compare them
+		if(previousTile!=currentTile)
+			sprite.changeTile(currentTile);
 	}
 
 /* ********************************

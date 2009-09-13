@@ -283,10 +283,12 @@ public class Level
 	/////////////////////////////////////////////////////////////////
 	// SPRITES				/////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
+	/** all the sprites currently present in the level (even the hiden ones) */
 	private ArrayList<Sprite> sprites = new ArrayList<Sprite>();;
 
 	public void removeSprite(Sprite sprite)
 	{	sprites.remove(sprite);
+		//TODO should be called any time a sprite is supressed from the game
 	}
 /*	
 	public void addHero(Hero hero, int line, int col)
@@ -295,13 +297,14 @@ public class Level
 		hero.setCurrentPosY(matrix[line][col].getPosY());
 	}
 */	
-	public void insertSprite(Sprite sprite, Tile tile)
+	/**
+	 * add a sprite for the first time in the level
+	 */
+	public void insertSpriteTile(Sprite sprite)
 	{	sprites.add(sprite);
-		tile.addSprite(sprite);
-//		sprite.setCurrentPosX(matrix[line][col].getPosX());
-//		sprite.setCurrentPosY(matrix[line][col].getPosY());
+		sprite.getTile().addSprite(sprite);
 	}
-
+	
 	/////////////////////////////////////////////////////////////////
 	// DIRECTIONS			/////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////

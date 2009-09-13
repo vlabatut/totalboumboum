@@ -78,13 +78,15 @@ public class FloorEventManager extends EventManager
 	}
 	
 	private void engEnter(EngineEvent event)
-	{	gesture = GestureName.ENTERING;
-		spriteDirection = event.getDirection();
-		StateAbility ability = sprite.modulateStateAbility(StateAbilityName.SPRITE_ENTRY_DURATION);
-		double duration = ability.getStrength();
-		if(duration<=0)
-			duration = 1;
-		sprite.setGesture(gesture,spriteDirection,Direction.NONE,true,duration);		
+	{	if(gesture.equals(GestureName.NONE))
+		{	gesture = GestureName.ENTERING;
+			spriteDirection = event.getDirection();
+			StateAbility ability = sprite.modulateStateAbility(StateAbilityName.SPRITE_ENTRY_DURATION);
+			double duration = ability.getStrength();
+			if(duration<=0)
+				duration = 1;
+			sprite.setGesture(gesture,spriteDirection,Direction.NONE,true,duration);
+		}
 	}
 
 	private void engStart(EngineEvent event)
