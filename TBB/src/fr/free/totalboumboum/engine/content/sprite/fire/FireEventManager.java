@@ -25,6 +25,7 @@ import fr.free.totalboumboum.engine.container.tile.Tile;
 import fr.free.totalboumboum.engine.content.feature.Direction;
 import fr.free.totalboumboum.engine.content.feature.ability.StateAbility;
 import fr.free.totalboumboum.engine.content.feature.ability.StateAbilityName;
+import fr.free.totalboumboum.engine.content.feature.action.detonate.SpecificDetonate;
 import fr.free.totalboumboum.engine.content.feature.event.ActionEvent;
 import fr.free.totalboumboum.engine.content.feature.event.ControlEvent;
 import fr.free.totalboumboum.engine.content.feature.event.EngineEvent;
@@ -43,7 +44,15 @@ public class FireEventManager extends EventManager
 	/////////////////////////////////////////////////////////////////
 	@Override
 	public void processEvent(ActionEvent event)
-	{	
+	{	if(event.getAction() instanceof SpecificDetonate)
+			SpecificDetonate(event);
+	}
+
+	private void SpecificDetonate(ActionEvent event)
+	{	if(gesture.equals(GestureName.NONE)) 
+		{	spriteDirection = event.getAction().getDirection();
+			appear();
+		}
 	}
 
 	/////////////////////////////////////////////////////////////////
@@ -123,6 +132,15 @@ public class FireEventManager extends EventManager
 	/////////////////////////////////////////////////////////////////
 	// ACTIONS			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
+	/*
+	 * action supposedly already tested
+	 */
+	private void appear()
+	{	gesture = GestureName.APPEARING;
+		sprite.setGesture(gesture,spriteDirection,Direction.NONE,true);
+		EngineEvent event = new EngineEvent(EngineEvent.TILE_LOW_ENTER,sprite,null,sprite.getActualDirection()); //TODO to be changed by a GESTURE_CHANGE event (or equiv.)
+		sprite.getTile().spreadEvent(event);
+	}
 	
 	/////////////////////////////////////////////////////////////////
 	// FINISHED			/////////////////////////////////////////////

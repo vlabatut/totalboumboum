@@ -26,7 +26,6 @@ import java.util.LinkedList;
 
 import fr.free.totalboumboum.configuration.GameVariables;
 import fr.free.totalboumboum.engine.container.bombset.Bombset;
-import fr.free.totalboumboum.engine.container.tile.Tile;
 import fr.free.totalboumboum.engine.content.feature.Direction;
 import fr.free.totalboumboum.engine.content.feature.ability.ActionAbility;
 import fr.free.totalboumboum.engine.content.feature.ability.StateAbility;
@@ -34,6 +33,7 @@ import fr.free.totalboumboum.engine.content.feature.ability.StateAbilityName;
 import fr.free.totalboumboum.engine.content.feature.action.SpecificAction;
 import fr.free.totalboumboum.engine.content.feature.action.appear.SpecificAppear;
 import fr.free.totalboumboum.engine.content.feature.action.detonate.SpecificDetonate;
+import fr.free.totalboumboum.engine.content.feature.action.drop.SpecificDrop;
 import fr.free.totalboumboum.engine.content.feature.action.trigger.SpecificTrigger;
 import fr.free.totalboumboum.engine.content.feature.event.ActionEvent;
 import fr.free.totalboumboum.engine.content.feature.event.ControlEvent;
@@ -83,9 +83,10 @@ public class BombsetManager
 		return result;
 	}
 	
-	public void dropBomb(Bomb bomb)
-	{	// direction
-		Direction direction = sprite.getCurrentFacingDirection();
+	public void dropBomb(SpecificDrop dropAction)
+	{	// init
+		Bomb bomb = (Bomb)dropAction.getTarget();
+		Direction direction = dropAction.getDirection();
 
 		// can the bomb appear here?
 		SpecificAppear action = new SpecificAppear(bomb,direction);
@@ -125,7 +126,8 @@ public class BombsetManager
 					{	GameVariables.level.insertSpriteTile(bomb);
 //						bomb.setCurrentPosX(tile.getPosX());
 //						bomb.setCurrentPosY(tile.getPosY());
-						bomb.appear(direction);
+						ActionEvent evt = new ActionEvent(dropAction);
+						bomb.processEvent(evt);
 						droppedBombs.offer(bomb);
 						// stats
 						StatisticAction statAction = StatisticAction.DROP_BOMB;

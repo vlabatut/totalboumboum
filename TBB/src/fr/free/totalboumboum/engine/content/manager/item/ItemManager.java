@@ -30,8 +30,9 @@ import fr.free.totalboumboum.engine.content.feature.ability.ActionAbility;
 import fr.free.totalboumboum.engine.content.feature.ability.StateAbility;
 import fr.free.totalboumboum.engine.content.feature.ability.StateAbilityName;
 import fr.free.totalboumboum.engine.content.feature.action.GeneralAction;
+import fr.free.totalboumboum.engine.content.feature.action.release.SpecificRelease;
+import fr.free.totalboumboum.engine.content.feature.event.ActionEvent;
 import fr.free.totalboumboum.engine.content.feature.event.EngineEvent;
-import fr.free.totalboumboum.engine.content.manager.delay.DelayManager;
 import fr.free.totalboumboum.engine.content.sprite.Sprite;
 import fr.free.totalboumboum.engine.content.sprite.item.Item;
 import fr.free.totalboumboum.game.statistics.StatisticAction;
@@ -141,7 +142,9 @@ public class ItemManager
 			if(ability.getStrength()==2)
 				item.reinitItemAbilities();
 			// release the item
-			item.addIterDelay(DelayManager.DL_RELEASE,1);
+			SpecificRelease releaseAction = new SpecificRelease(sprite,item);
+			ActionEvent evt = new ActionEvent(releaseAction);
+			item.processEvent(evt);
 			//EngineEvent event = new EngineEvent(EngineEvent.HIDE_OVER);
 			//item.processEvent(event);
 		}

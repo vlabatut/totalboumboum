@@ -29,6 +29,8 @@ import fr.free.totalboumboum.engine.content.feature.Direction;
 import fr.free.totalboumboum.engine.content.feature.ability.AbstractAbility;
 import fr.free.totalboumboum.engine.content.feature.action.SpecificAction;
 import fr.free.totalboumboum.engine.content.feature.action.appear.SpecificAppear;
+import fr.free.totalboumboum.engine.content.feature.action.detonate.SpecificDetonate;
+import fr.free.totalboumboum.engine.content.feature.event.ActionEvent;
 import fr.free.totalboumboum.engine.content.feature.explosion.Explosion;
 import fr.free.totalboumboum.engine.content.sprite.Sprite;
 import fr.free.totalboumboum.engine.content.sprite.fire.Fire;
@@ -90,7 +92,9 @@ public class ExplosionManager
 		GameVariables.level.insertSpriteTile(fire);
 //		fire.setCurrentPosX(tile.getPosX());
 //		fire.setCurrentPosY(tile.getPosY());
-		fire.appear(Direction.NONE);
+		SpecificDetonate detonateAction = new SpecificDetonate(sprite,Direction.NONE);
+		ActionEvent evt = new ActionEvent(detonateAction);
+		fire.processEvent(evt);
 		
 		// branches
 		boolean blocked[] = {false,false,false,false};
@@ -128,7 +132,9 @@ public class ExplosionManager
 							GameVariables.level.insertSpriteTile(fire);
 //							fire.setCurrentPosX(tempTile.getPosX());
 //							fire.setCurrentPosY(tempTile.getPosY());
-							fire.appear(direction);
+							detonateAction = new SpecificDetonate(sprite,direction);
+							evt = new ActionEvent(detonateAction);
+							fire.processEvent(evt);
 						}
 					}
 				}

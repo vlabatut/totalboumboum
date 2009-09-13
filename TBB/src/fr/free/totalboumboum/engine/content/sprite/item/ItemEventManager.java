@@ -33,6 +33,7 @@ import fr.free.totalboumboum.engine.content.feature.action.SpecificAction;
 import fr.free.totalboumboum.engine.content.feature.action.appear.SpecificAppear;
 import fr.free.totalboumboum.engine.content.feature.action.consume.SpecificConsume;
 import fr.free.totalboumboum.engine.content.feature.action.gather.SpecificGather;
+import fr.free.totalboumboum.engine.content.feature.action.release.SpecificRelease;
 import fr.free.totalboumboum.engine.content.feature.event.ActionEvent;
 import fr.free.totalboumboum.engine.content.feature.event.ControlEvent;
 import fr.free.totalboumboum.engine.content.feature.event.EngineEvent;
@@ -55,6 +56,8 @@ public class ItemEventManager extends EventManager
 			actionConsume(event);
 		else if(event.getAction() instanceof SpecificGather)
 			actionGather(event); 
+		else if(event.getAction() instanceof SpecificRelease)
+			actionRelease(event); 
 	}
 
 	private void actionConsume(ActionEvent event)
@@ -67,6 +70,10 @@ public class ItemEventManager extends EventManager
 	private void actionGather(ActionEvent event)
 	{	gesture = GestureName.DISAPPEARING;
 		sprite.setGesture(gesture,spriteDirection,Direction.NONE,true);
+	}
+		
+	private void actionRelease(ActionEvent event)
+	{	appear();
 	}
 		
 	/////////////////////////////////////////////////////////////////

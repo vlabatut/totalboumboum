@@ -75,7 +75,7 @@ public class Tile
 		{	Hero temp = heroes.get(i);
 			temp.update();
 			// only increment if the current sprite didn't leave the tile
-			if(heroes.get(i)==temp)
+			if(i<heroes.size() && heroes.get(i)==temp)
 				i++;
 		}
 	}
@@ -86,7 +86,7 @@ public class Tile
 		{	Bomb temp = bombs.get(i);
 			temp.update();
 			// only increment if the current sprite didn't leave the tile
-			if(bombs.get(i)==temp)
+			if(i<bombs.size() && bombs.get(i)==temp)
 				i++;
 		}
 	}
@@ -97,7 +97,7 @@ public class Tile
 		{	Fire temp = fires.get(i);
 			temp.update();
 			// only increment if the current sprite didn't leave the tile
-			if(fires.get(i)==temp)
+			if(i<fires.size() && fires.get(i)==temp)
 				i++;
 		}
 	}

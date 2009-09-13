@@ -131,10 +131,12 @@ public abstract class SpriteFactoryLoader
 			Gesture gesture = gesturePack.getGesture(gestureName);
 			for(ActionName an: ActionName.values())
 			{	// any action forbidden as an actor except APPEAR (which can be instant, i.e. without anime nor trajectory)
-				if(an!=ActionName.APPEAR)
+				// and consume (workaround for the fires)
+				if(an!=ActionName.APPEAR && an!=ActionName.CONSUME)
 				{	GeneralAction ga = an.createGeneralAction();
 					ga.addActor(role);
 					ga.addAnyTargets();
+					ga.addAnyDirections();
 					ga.addAnyContacts();
 					ga.addAnyOrientations();
 					ga.addAnyTilePositions();
@@ -148,6 +150,7 @@ public abstract class SpriteFactoryLoader
 				{	GeneralAction ga = an.createGeneralAction();
 					ga.addAnyActors();
 					ga.addTarget(role);
+					ga.addAnyDirections();
 					ga.addAnyContacts();
 					ga.addAnyOrientations();
 					ga.addAnyTilePositions();
@@ -161,13 +164,14 @@ public abstract class SpriteFactoryLoader
 			}
 		}
 		{	// gesture ENDED
-			GestureName gestureName = GestureName.NONE;
+			GestureName gestureName = GestureName.ENDED;
 			Gesture gesture = gesturePack.getGesture(gestureName);
 			for(ActionName an: ActionName.values())
 			{	// any action forbidden as an actor
 				{	GeneralAction ga = an.createGeneralAction();
 					ga.addActor(role);
 					ga.addAnyTargets();
+					ga.addAnyDirections();
 					ga.addAnyContacts();
 					ga.addAnyOrientations();
 					ga.addAnyTilePositions();
@@ -181,6 +185,7 @@ public abstract class SpriteFactoryLoader
 				{	GeneralAction ga = an.createGeneralAction();
 					ga.addAnyActors();
 					ga.addTarget(role);
+					ga.addAnyDirections();
 					ga.addAnyContacts();
 					ga.addAnyOrientations();
 					ga.addAnyTilePositions();
@@ -223,6 +228,7 @@ public abstract class SpriteFactoryLoader
 				{	GeneralAction ga = an.createGeneralAction();
 					ga.addActor(role);
 					ga.addAnyTargets();
+					ga.addAnyDirections();
 					ga.addAnyContacts();
 					ga.addAnyOrientations();
 					ga.addAnyTilePositions();
@@ -232,10 +238,12 @@ public abstract class SpriteFactoryLoader
 					am.setGestureName(gestureName);
 					gesture.addModulation(am);
 				}
-				// any action forbidden as a target
+				// any action forbidden as a target except RELEASE (workaround for the items)
+				if(an!=ActionName.RELEASE)
 				{	GeneralAction ga = an.createGeneralAction();
 					ga.addAnyActors();
 					ga.addTarget(role);
+					ga.addAnyDirections();
 					ga.addAnyContacts();
 					ga.addAnyOrientations();
 					ga.addAnyTilePositions();

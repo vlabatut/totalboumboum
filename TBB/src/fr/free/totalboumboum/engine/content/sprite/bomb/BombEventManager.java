@@ -34,6 +34,7 @@ import fr.free.totalboumboum.engine.content.feature.action.SpecificAction;
 import fr.free.totalboumboum.engine.content.feature.action.appear.SpecificAppear;
 import fr.free.totalboumboum.engine.content.feature.action.consume.SpecificConsume;
 import fr.free.totalboumboum.engine.content.feature.action.detonate.SpecificDetonate;
+import fr.free.totalboumboum.engine.content.feature.action.drop.SpecificDrop;
 import fr.free.totalboumboum.engine.content.feature.action.land.SpecificLand;
 import fr.free.totalboumboum.engine.content.feature.action.punch.SpecificPunch;
 import fr.free.totalboumboum.engine.content.feature.action.push.SpecificPush;
@@ -66,6 +67,8 @@ public class BombEventManager extends EventManager
 	public void processEvent(ActionEvent event)
 	{	if(event.getAction() instanceof SpecificConsume)
 			actionConsume(event);
+		else if(event.getAction() instanceof SpecificDrop)
+			actionDrop(event);
 		else if(event.getAction() instanceof SpecificPunch)
 			actionPunch(event);
 		else if(event.getAction() instanceof SpecificTrigger)
@@ -126,6 +129,13 @@ public class BombEventManager extends EventManager
 		{	gesture = GestureName.PUNCHED;
 			spriteDirection = event.getAction().getDirection();
 			sprite.setGesture(gesture,spriteDirection,Direction.NONE,true);
+		}
+	}
+	
+	private void actionDrop(ActionEvent event)
+	{	if(gesture.equals(GestureName.NONE)) 
+		{	spriteDirection = event.getAction().getDirection();
+			appear();
 		}
 	}
 	

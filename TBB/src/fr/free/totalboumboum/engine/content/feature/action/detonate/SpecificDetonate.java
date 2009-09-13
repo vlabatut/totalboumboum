@@ -21,6 +21,10 @@ package fr.free.totalboumboum.engine.content.feature.action.detonate;
  * 
  */
 
+import fr.free.totalboumboum.engine.content.feature.Contact;
+import fr.free.totalboumboum.engine.content.feature.Direction;
+import fr.free.totalboumboum.engine.content.feature.Orientation;
+import fr.free.totalboumboum.engine.content.feature.TilePosition;
 import fr.free.totalboumboum.engine.content.feature.action.ActionName;
 import fr.free.totalboumboum.engine.content.feature.action.SpecificAction;
 import fr.free.totalboumboum.engine.content.sprite.Sprite;
@@ -41,6 +45,11 @@ public class SpecificDetonate extends SpecificAction
 {
 	public SpecificDetonate(Sprite actor)
 	{	super(ActionName.DETONATE,actor);
+	}
+	
+	public SpecificDetonate(Sprite actor, Direction direction)
+	{	super(ActionName.DETONATE,actor,null,direction,Contact.NONE,TilePosition.NONE,Orientation.NONE);
+		
 	}
 /*	
 	/////////////////////////////////////////////////////////////////

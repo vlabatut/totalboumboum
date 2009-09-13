@@ -13,6 +13,7 @@ import fr.free.totalboumboum.engine.content.feature.action.movehigh.GeneralMoveH
 import fr.free.totalboumboum.engine.content.feature.action.movelow.GeneralMoveLow;
 import fr.free.totalboumboum.engine.content.feature.action.punch.GeneralPunch;
 import fr.free.totalboumboum.engine.content.feature.action.push.GeneralPush;
+import fr.free.totalboumboum.engine.content.feature.action.release.GeneralRelease;
 import fr.free.totalboumboum.engine.content.feature.action.trigger.GeneralTrigger;
 
 public enum ActionName
@@ -94,6 +95,8 @@ public enum ActionName
 			result = new GeneralPunch();
 		else if(this==PUSH)
 			result = new GeneralPush();
+		else if(this==RELEASE)
+			result = new GeneralRelease();
 		else if(this==TRIGGER)
 			result = new GeneralTrigger();
 		return result;

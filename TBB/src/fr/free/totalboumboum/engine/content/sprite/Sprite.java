@@ -40,6 +40,7 @@ import fr.free.totalboumboum.engine.content.feature.ability.StateAbilityName;
 import fr.free.totalboumboum.engine.content.feature.action.Circumstance;
 import fr.free.totalboumboum.engine.content.feature.action.GeneralAction;
 import fr.free.totalboumboum.engine.content.feature.action.SpecificAction;
+import fr.free.totalboumboum.engine.content.feature.action.drop.SpecificDrop;
 import fr.free.totalboumboum.engine.content.feature.event.AbstractEvent;
 import fr.free.totalboumboum.engine.content.feature.event.ActionEvent;
 import fr.free.totalboumboum.engine.content.feature.event.ControlEvent;
@@ -467,8 +468,8 @@ public abstract class Sprite
 	{	return bombsetManager.makeBomb();
 	}
 	
-	public void dropBomb(Bomb bomb)
-	{	bombsetManager.dropBomb(bomb);
+	public void dropBomb(SpecificDrop action)
+	{	bombsetManager.dropBomb(action);
 	}
 	
 	public void triggerBomb()
