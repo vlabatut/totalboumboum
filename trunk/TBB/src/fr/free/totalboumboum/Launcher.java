@@ -1060,8 +1060,7 @@ public class Launcher
 
 	// - empêcher d'appuyer sur esc quand ça exulte déjà (p-ê en testant la modulation sur exultation?)
 	// - cas particulier : item apparaissant dans une explosion de bloc, avec un joueur déjà sur le bloc (il a passe-muraille et résistance au feu) : l'item doit être ramassé dès qu'il a fini d'apparaitre, en théorie
+	// - donner la possibilité de définir un item "pied à l'étrier" pr les joueurs qui sont mort et renaissent (plutot que systématiquement donner l'invulnérabilité ?)
 	
-	// TODO pq les flammes sont si rapides / bombes explosent si vite?
 	// pq le perso ne meurt pas quand il se trouve ailleurs qu'au centre de l'explosion (mais dans l'explosion qd même)
-	//		ou bien : pb avec les items, tous les tester car certains (ou une interaction) semblent imuniser au feu
 }

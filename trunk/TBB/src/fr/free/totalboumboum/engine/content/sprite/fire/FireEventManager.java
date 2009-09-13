@@ -128,7 +128,7 @@ public class FireEventManager extends EventManager
 	{	gesture = GestureName.APPEARING;
 		spriteDirection = direction;
 		sprite.setGesture(gesture,spriteDirection,Direction.NONE,true);
-		sprite.getTile().addSprite(sprite);	
+//		sprite.getTile().addSprite(sprite);	
 	}
 	
 	/////////////////////////////////////////////////////////////////

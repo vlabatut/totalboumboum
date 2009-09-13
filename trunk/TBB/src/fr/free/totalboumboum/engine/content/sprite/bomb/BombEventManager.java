@@ -267,9 +267,7 @@ public class BombEventManager extends EventManager
 			ActionAbility actionAbility = sprite.modulateAction(action);
 			// can appear >> appears
 			if(actionAbility.isActive())
-			{	gesture = GestureName.APPEARING;
-//TODO should be ENTERING here, no?			
-				sprite.setGesture(gesture,spriteDirection,Direction.NONE,true);
+			{	appear(spriteDirection);
 			}
 			// cannot appear >> wait for next iteration
 			else
@@ -418,7 +416,7 @@ public class BombEventManager extends EventManager
 	{	gesture = GestureName.APPEARING;
 		spriteDirection = direction;
 		sprite.setGesture(gesture,spriteDirection,Direction.NONE,true);
-		sprite.getTile().addSprite(sprite);
+//		sprite.getTile().addSprite(sprite);
 	}
 	
 	private void stand()

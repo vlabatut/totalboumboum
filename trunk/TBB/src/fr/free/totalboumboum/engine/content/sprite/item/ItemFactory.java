@@ -113,6 +113,9 @@ public class ItemFactory extends SpriteFactory<Item>
 			else
 				index ++;
 		}
+//for(AbstractAbility a: abilities)
+//if(a instanceof StateAbility)
+//System.out.println("\t- "+((StateAbility)a).getName()+", : "+a.getStrength());
 		result.initItemAbilities(abilities);
 		// event
 		EventManager eventManager = new ItemEventManager(result);

@@ -395,11 +395,11 @@ public class HeroEventManager extends EventManager
 				StateAbility ability = sprite.modulateStateAbility(StateAbilityName.HERO_REBIRTH_DURATION);
 				double duration = ability.getStrength();
 				ability = new StateAbility(StateAbilityName.HERO_FIRE_PROTECTION);
-				ability.setStrength(1);
+				ability.setStrength(-1);
 				ability.setTime(duration);
 				sprite.addDirectAbility(ability);
 				ability = new StateAbility(StateAbilityName.SPRITE_TWINKLE);
-				ability.setStrength(1);
+				ability.setStrength(0);
 				ability.setTime(duration);
 				sprite.addDirectAbility(ability);
 				// make the sprite to appear
