@@ -197,12 +197,12 @@ public class GeneralPush extends GeneralAction
 	/////////////////////////////////////////////////////////////////
 	/** compared directions of the target and the action */
 	private static final List<Orientation> allowedOrientations = Arrays.asList(new Orientation[]{
-//		Orientation.UNDEFINED,
-//		Orientation.OPPOSITE,
-//		Orientation.OTHER,
+//		Orientation.NONE,
+//		Orientation.BACK,
 		Orientation.FACE
-//		Orientation.NONE
-    });
+//		Orientation.NEUTRAL,
+//		Orientation.OTHER,
+     });
 
 	@Override
 	public void addOrientation(Orientation orientation)

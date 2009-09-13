@@ -87,7 +87,7 @@ public class ExplosionManager
 		else
 			owner = sprite.getOwner();
 		fire.setOwner(owner);
-		GameVariables.level.insertSprite(fire,tile);
+		GameVariables.level.insertSpriteTile(fire);
 //		fire.setCurrentPosX(tile.getPosX());
 //		fire.setCurrentPosY(tile.getPosY());
 		fire.appear(Direction.NONE);
@@ -125,7 +125,7 @@ public class ExplosionManager
 						}
 						else
 						{	goOn = true;
-							GameVariables.level.insertSprite(fire,tile);
+							GameVariables.level.insertSpriteTile(fire);
 //							fire.setCurrentPosX(tempTile.getPosX());
 //							fire.setCurrentPosY(tempTile.getPosY());
 							fire.appear(direction);

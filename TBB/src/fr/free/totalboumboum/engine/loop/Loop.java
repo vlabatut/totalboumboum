@@ -54,6 +54,9 @@ import fr.free.totalboumboum.engine.content.feature.Direction;
 import fr.free.totalboumboum.engine.content.feature.Role;
 import fr.free.totalboumboum.engine.content.feature.ability.StateAbility;
 import fr.free.totalboumboum.engine.content.feature.ability.StateAbilityName;
+import fr.free.totalboumboum.engine.content.feature.action.SpecificAction;
+import fr.free.totalboumboum.engine.content.feature.action.gather.SpecificGather;
+import fr.free.totalboumboum.engine.content.feature.event.ActionEvent;
 import fr.free.totalboumboum.engine.content.feature.event.EngineEvent;
 import fr.free.totalboumboum.engine.content.sprite.Sprite;
 import fr.free.totalboumboum.engine.content.sprite.hero.Hero;
@@ -136,9 +139,15 @@ public class Loop implements Runnable, Serializable
 			// initial items
 			Iterator<String> it = items.iterator();
 			while(it.hasNext())
-			{	String name = it.next();
+			{	// create item
+				String name = it.next();
 				Item item = itemset.makeItem(name,tile);
+				// add item
 				hero.addInitialItem(item);
+				// hide item
+				SpecificAction action = new SpecificGather(hero,item);
+				ActionEvent evt = new ActionEvent(action);
+				item.processEvent(evt);				
 			}
 			// ai
 			player.initAi();

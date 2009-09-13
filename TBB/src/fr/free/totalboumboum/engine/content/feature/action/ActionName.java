@@ -56,6 +56,9 @@ public enum ActionName
 	/** pushing an object (hero, bomb, wall...) in order to make it move on the ground */
 	PUSH,
 
+	/** hero releasing an item (after he died, for instance) */
+	RELEASE,
+	
 	/** asking for a remote bomb to explode (usually performed by a hero) */
 	TRIGGER;
 	

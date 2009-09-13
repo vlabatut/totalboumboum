@@ -30,6 +30,7 @@ import fr.free.totalboumboum.engine.content.feature.ability.ActionAbility;
 import fr.free.totalboumboum.engine.content.feature.ability.StateAbility;
 import fr.free.totalboumboum.engine.content.feature.ability.StateAbilityName;
 import fr.free.totalboumboum.engine.content.feature.action.GeneralAction;
+import fr.free.totalboumboum.engine.content.feature.event.EngineEvent;
 import fr.free.totalboumboum.engine.content.manager.delay.DelayManager;
 import fr.free.totalboumboum.engine.content.sprite.Sprite;
 import fr.free.totalboumboum.engine.content.sprite.item.Item;
@@ -85,7 +86,8 @@ public class ItemManager
 				{	float grpNbr = ab.getStrength();
 					if(grpNbr==groupNumber)
 					{	i.remove();
-						temp.setEnded();
+						EngineEvent event = new EngineEvent(EngineEvent.END_SPRITE);
+						item.processEvent(event);
 					}
 				}
 			}
@@ -93,7 +95,6 @@ public class ItemManager
 		
 		// add the item to the list
 		collectedItems.offer(item);
-		item.setToBeRemovedFromTile(true);
 		ArrayList<AbstractAbility> ab = item.getItemAbilities();
 		Iterator<AbstractAbility> i = ab.iterator();
 		while(i.hasNext())
@@ -145,7 +146,9 @@ public class ItemManager
 			//item.processEvent(event);
 		}
 		else
-			item.endSprite();
+		{	EngineEvent event = new EngineEvent(EngineEvent.END_SPRITE);
+			item.processEvent(event);
+		}
 		
 		// stats
 		StatisticAction statAction = StatisticAction.LOSE_ITEM;
@@ -185,7 +188,8 @@ public class ItemManager
 			// if the item has no ability remaining, it's removed from the manager's list
 			if(item.getItemAbilities().size()==0)
 			{	i.remove();
-				item.endSprite();
+				EngineEvent event = new EngineEvent(EngineEvent.END_SPRITE);
+				item.processEvent(event);
 			}
 		}
 	}

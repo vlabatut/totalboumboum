@@ -68,7 +68,7 @@ public class Player
 		HeroFactory tempHeroFactory = HeroFactoryLoader.loadHeroFactory(folder,color,base,bombsetMap);
 		sprite = tempHeroFactory.makeSprite(tile);
 //		tile.addSprite(sprite);
-		GameVariables.level.insertSprite(sprite,tile);
+		GameVariables.level.insertSpriteTile(sprite);
 		// control settings
 		int indexCtrSet = profile.getControlSettingsIndex();
 		controlSettings = Configuration.getControlsConfiguration().getControlSettings().get(indexCtrSet);

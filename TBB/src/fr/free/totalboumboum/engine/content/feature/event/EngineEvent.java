@@ -60,11 +60,17 @@ public class EngineEvent extends AbstractEvent
 	public static final String OVERFLYING_OFF = "OVERFLYING_OFF";
 
 	/** a sprite just entered a tile through the ground */
-	public static final String TILE_LOWENTER = "TILE_LOWENTER";
+	public static final String TILE_LOW_ENTER = "TILE_LOW_ENTER";
 	/** a sprite just entered a tile through the air */
-	public static final String TILE_HIGHENTER = "TILE_HIGHENTER";
+	public static final String TILE_HIGH_ENTER = "TILE_HIGH_ENTER";
+	/** a sprite just exit a tile through the ground */
+	public static final String TILE_LOW_EXIT = "TILE_LOW_EXIT";
+	/** a sprite just exit a tile through the air */
+	public static final String TILE_HIGH_EXIT = "TILE_HIGH_EXIT";
 	/** a sprite just landed on the ground */
 	public static final String TOUCH_GROUND = "TOUCH_GROUND";
+	/** a sprite just left the the ground */
+	public static final String LEAVE_GROUND = "LEAVE_GROUND";
 
 	/** a player is signaled he lost */
 	public static final String CELEBRATION_DEFEAT = "CELEBRATION_DEFEAT";
@@ -76,8 +82,13 @@ public class EngineEvent extends AbstractEvent
 	/** the engine signals a sprite it must start enteracting (i.e. the actual game is starting) */
 	public static final String ROUND_START = "ROUND_START";
 
-	/** the engine signals a sprite it must stop hidding */
-//	public static final String HIDE_OVER = "HIDE_OVER";
+	/** the engine signals a sprite it must hide */
+//	public static final String HIDE_DOWN = "HIDE_DOWN";
+	/** the engine signals a sprite it must appear */
+//	public static final String SHOW_UP = "SHOW_UP";
+	
+	/** the engine signals the sprite he as to finish itself */
+	public static final String END_SPRITE = "END_SPRITE";
 	
     /////////////////////////////////////////////////////////////////
 	// CONSTRUCTORS			/////////////////////////////////////////

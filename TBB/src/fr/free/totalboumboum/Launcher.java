@@ -1061,6 +1061,25 @@ public class Launcher
 	// - empêcher d'appuyer sur esc quand ça exulte déjà (p-ê en testant la modulation sur exultation?)
 	// - cas particulier : item apparaissant dans une explosion de bloc, avec un joueur déjà sur le bloc (il a passe-muraille et résistance au feu) : l'item doit être ramassé dès qu'il a fini d'apparaitre, en théorie
 	// - donner la possibilité de définir un item "pied à l'étrier" pr les joueurs qui sont mort et renaissent (plutot que systématiquement donner l'invulnérabilité ?)
+	// - vérifier que le joueur ne perd jamais les items initaux quand il meurt
 	
 	// pq le perso ne meurt pas quand il se trouve ailleurs qu'au centre de l'explosion (mais dans l'explosion qd même)
+	// étudier le fonctionnement de ended (sprite) pr voir quand retirer le sprite de level/tile
+	// faut émettre un évt de sortie à la disparition d'un sprite (mort, masquage, etc)
+	
+	// décomposer le feu en appearing+standing+disapearing, ce qui permettrait de le faire durer aussi longtemps qu'on veut
+	
+	// envoyer un evt de changement d'état pour indiquer par ex que le sprite devient destructible, etc ?
+	
+	
+	/* 
+	 * action immédiate pr apparition >> pb car le changement d'état peut invalider (ou valider) des évènements en attente (ex?)
+	 * comment faire une action retardée mais qui n'entrerait pas en conflit ?
+	 * car si je teste l'apparition à un instant donné, qu'elle est bonne, mais qu'un autre sprite
+	 * apparait dans le même tour, je vais avoir un pb pour réaliser l'apparition du premier sprite
+	 * de plus, ça peut peut être se produire dans d'autres situation ?
+	 * solution : faire une résa ? très compliqué
+	 * autre possibilité : tester l'apparition non pas à l'avance, mais juste avant de la réaliser. si pas possibile, soit on attend soit on tire une autre case...
+	 */
+	
 }

@@ -256,7 +256,7 @@ public abstract class AiManager extends AbstractAiManager<Integer>
 					tempDirAI = ArtificialIntelligence.AI_DIR_NONE;
 				int tempPlayerData[] = {tempX,tempY,tempDirAI};
 				players.add(tempPlayerData);
-				playersStates.add(!tempPlayer.getSprite().isEnded());
+				playersStates.add(!tempPlayer.isOut());
 				StateAbility ab = tempPlayer.getSprite().modulateStateAbility(StateAbilityName.HERO_BOMB_RANGE);
 		        firePowers.add((int)ab.getStrength());
 		        ab = tempPlayer.getSprite().modulateStateAbility(StateAbilityName.HERO_BOMB_NUMBER);

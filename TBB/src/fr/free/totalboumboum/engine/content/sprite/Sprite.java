@@ -74,9 +74,7 @@ import fr.free.totalboumboum.game.statistics.StatisticEvent;
 public abstract class Sprite
 {	
 	public Sprite()
-	{	ended = false;
-		boundSprites = new ArrayList<Sprite>();
-		toBeRemovedFromTile = false;
+	{	boundSprites = new ArrayList<Sprite>();
 		toBeRemovedFromSprite = null;
 		boundToSprite = null;
 		currentGesture = null;
@@ -121,12 +119,10 @@ public abstract class Sprite
 	 * l'animation n'est réinitialisée que si le gesture est modifié
 	 */
 	public void setGesture(GestureName gesture, Direction spriteDirection, Direction controlDirection, boolean reinit, double forcedDuration)
-	{	if(!ended)
-		{	currentGesture = gesturePack.getGesture(gesture);
-			modulationManager.updateGesture(currentGesture,spriteDirection);
-			animeManager.updateGesture(currentGesture,spriteDirection,reinit,forcedDuration);
-			trajectoryManager.updateGesture(currentGesture,spriteDirection,controlDirection,reinit,forcedDuration);
-		}
+	{	currentGesture = gesturePack.getGesture(gesture);
+		modulationManager.updateGesture(currentGesture,spriteDirection);
+		animeManager.updateGesture(currentGesture,spriteDirection,reinit,forcedDuration);
+		trajectoryManager.updateGesture(currentGesture,spriteDirection,controlDirection,reinit,forcedDuration);
 	}
 	public void setGesture(GestureName gesture, Direction spriteDirection, Direction controlDirection, boolean reinit)
 	{	setGesture(gesture, spriteDirection, controlDirection, reinit, 0);
@@ -190,26 +186,24 @@ public abstract class Sprite
 	}
 	
 	public void setBoundToSprite(Sprite boundToSprite)
-	{	if(!ended)
-		{	// traitement seulement si le nouveau boundToSprite lié est différent de l'ancien
-			if(this.boundToSprite!=boundToSprite)
-			{	// on met à jour le trajectoryManager
-				trajectoryManager.setBoundToSprite(boundToSprite);
-				// s'il n'y a pas d'ancien boundToSprite : on déconnecte ce sprite de sa tile
-				if(this.boundToSprite==null)
-					setToBeRemovedFromTile(true);
-				// s'il y a un ancien boundToSprite : on déconnecte ce sprite de ce boundToSprite 
-				else
-					setToBeRemovedFromSprite(this.boundToSprite);
-				// s'il n'y a pas de nouveau boundToSprite : on connecte ce sprite à une Tile
-				if(boundToSprite==null)
-					GameVariables.level.getTile(getCurrentPosX(), getCurrentPosY()).addSprite(this);
-				// s'il y a un nouveau boundToSprite : on connecte ce sprite à ce boundToSprite
-				else
-					boundToSprite.addBoundSprite(this);
-				this.boundToSprite = boundToSprite;
-			}
-		}	
+	{	// traitement seulement si le nouveau boundToSprite lié est différent de l'ancien
+		if(this.boundToSprite!=boundToSprite)
+		{	// on met à jour le trajectoryManager
+			trajectoryManager.setBoundToSprite(boundToSprite);
+			// s'il n'y a pas d'ancien boundToSprite : on déconnecte ce sprite de sa tile
+			if(this.boundToSprite==null)
+				changeTile(null);
+			// s'il y a un ancien boundToSprite : on déconnecte ce sprite de ce boundToSprite 
+			else
+				setToBeRemovedFromSprite(this.boundToSprite);
+			// s'il n'y a pas de nouveau boundToSprite : on connecte ce sprite à une Tile
+			if(boundToSprite==null)
+				changeTile(GameVariables.level.getTile(getCurrentPosX(), getCurrentPosY()));
+			// s'il y a un nouveau boundToSprite : on connecte ce sprite à ce boundToSprite
+			else
+				boundToSprite.addBoundSprite(this);
+			this.boundToSprite = boundToSprite;
+		}
 	}
 	
 	/////////////////////////////////////////////////////////////////
@@ -238,59 +232,29 @@ public abstract class Sprite
 	/////////////////////////////////////////////////////////////////
 	// update the sprite
 	public void update()
-	{	if(!ended)
-		{	abilityManager.update();
-			bombsetManager.update();
-			controlManager.update();
+	{	abilityManager.update();
+		bombsetManager.update();
+		controlManager.update();
 //			eventManager.update();
-			delayManager.update();
-			itemManager.update();
-			animeManager.update();
-			trajectoryManager.update();
-			/*
-			 * NOTE : il est important que le trajectoryManager soit updaté en dernier
-			 * comme ça, un changement de case arrive après avoir traité tous les évènements
-			 * (raisons de synchro)
-			 */
+		delayManager.update();
+		itemManager.update();
+		animeManager.update();
+		trajectoryManager.update();
+		/*
+		 * NOTE : il est important que le trajectoryManager soit updaté en dernier
+		 * comme ça, un changement de case arrive après avoir traité tous les évènements
+		 * (raisons de synchro)
+		 */
 //System.out.println("sx,sy:"+getPositionX()+";"+getPositionY()+" - tx,ty:"+tile.getLine()+";"+tile.getCol());
-			Iterator<Sprite> i = boundSprites.iterator();
-			while(i.hasNext())
-			{	Sprite temp = i.next();
-				temp.update();
-				if(temp.getToBeRemovedFromSprite()==this)
-				{	i.remove();
-					temp.setToBeRemovedFromSprite(null);
-				}
+		Iterator<Sprite> i = boundSprites.iterator();
+		while(i.hasNext())
+		{	Sprite temp = i.next();
+			temp.update();
+			if(temp.getToBeRemovedFromSprite()==this)
+			{	i.remove();
+				temp.setToBeRemovedFromSprite(null);
 			}
 		}
-	}
-	
-	/////////////////////////////////////////////////////////////////
-	// ENDED			/////////////////////////////////////////////
-	/////////////////////////////////////////////////////////////////
-	/** le sprite est terminé, mais le Tile ne l'a pas encore effectivement supprimé*/
-	protected boolean ended;
-	
-	public void setEnded()
-	{	ended = true;
-		toBeRemovedFromTile = true;
-	}
-	
-	public boolean isEnded()
-	{	return ended;	
-	}
-
-	/////////////////////////////////////////////////////////////////
-	// REMOVE FROM TILE	/////////////////////////////////////////////
-	/////////////////////////////////////////////////////////////////
-	protected boolean toBeRemovedFromTile;
-	
-	public void setToBeRemovedFromTile(boolean toBeRemovedFromTile)
-	{	this.toBeRemovedFromTile = toBeRemovedFromTile;	
-	}
-	
-	public boolean isToBeRemovedFromTile()
-	{	return toBeRemovedFromTile;	
 	}
 	
 	/////////////////////////////////////////////////////////////////
@@ -315,18 +279,36 @@ public abstract class Sprite
 	{	return tile;
 	}
 	
+	public void changeTile(Tile newTile)
+	{	if(tile!=newTile)
+		{	// remove from previous tile
+			if(tile!=null)
+			{	String eventName = EngineEvent.TILE_HIGH_EXIT;
+				if(isOnGround())
+					eventName = EngineEvent.TILE_LOW_EXIT;
+				EngineEvent event = new EngineEvent(eventName,this,null,getActualDirection());
+				tile.spreadEvent(event);
+				tile.removeSprite(this);				
+			}
+			// add in new tile
+			if(newTile!=null)
+			{	tile = newTile;
+				tile.addSprite(this);
+				String eventName = EngineEvent.TILE_HIGH_ENTER;
+				if(isOnGround())
+					eventName = EngineEvent.TILE_LOW_ENTER;
+				EngineEvent event = new EngineEvent(eventName,this,null,getActualDirection());
+				tile.spreadEvent(event);
+			}
+		}
+	}
+	
+/*	
 	public void setTile(Tile tile)
 	{	this.tile = tile;
 		setToBeRemovedFromTile(false);
-		String eventName = EngineEvent.TILE_LOWENTER;
-		if(!isOnGround())
-			eventName = EngineEvent.TILE_HIGHENTER;
-		EngineEvent event = new EngineEvent(eventName,this,null,getActualDirection());
-		tile.spreadEvent(event);
-//if(this instanceof Bomb)
-//System.out.println(event);
 	}
-	
+*/	
 	/////////////////////////////////////////////////////////////////
 	// SPEED COEFF		/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
@@ -486,13 +468,11 @@ public abstract class Sprite
 	}
 	
 	public void dropBomb(Bomb bomb)
-	{	if(!ended)
-			bombsetManager.dropBomb(bomb);
+	{	bombsetManager.dropBomb(bomb);
 	}
 	
 	public void triggerBomb()
-	{	if(!ended)
-			bombsetManager.triggerBomb();
+	{	bombsetManager.triggerBomb();
 	}
 	
 	public LinkedList<Bomb> getDroppedBombs()
@@ -513,13 +493,11 @@ public abstract class Sprite
 	}
 	
 	public void putControlCode(ControlCode controlCode)
-	{	if(!ended)
-			controlManager.putControlCode(controlCode);
+	{	controlManager.putControlCode(controlCode);
 	}
 	
 	public void putControlEvent(ControlEvent controlEvent)
-	{	if(!ended)
-			controlManager.putControlEvent(controlEvent);
+	{	controlManager.putControlEvent(controlEvent);
 	}
 
 	/////////////////////////////////////////////////////////////////
@@ -561,14 +539,12 @@ public abstract class Sprite
 	}
 	
 	public void processEvent(AbstractEvent event)
-	{	if(!ended)
-		{	if(event instanceof ActionEvent)
-				eventManager.processEvent((ActionEvent)event);
-			else if(event instanceof ControlEvent)
-				eventManager.processEvent((ControlEvent)event);
-			else if(event instanceof EngineEvent)
-				eventManager.processEvent((EngineEvent)event);
-		}
+	{	if(event instanceof ActionEvent)
+			eventManager.processEvent((ActionEvent)event);
+		else if(event instanceof ControlEvent)
+			eventManager.processEvent((ControlEvent)event);
+		else if(event instanceof EngineEvent)
+			eventManager.processEvent((EngineEvent)event);
 	}
 	
 	public void spreadEvent(AbstractEvent e)
@@ -581,10 +557,6 @@ public abstract class Sprite
 	{	GameVariables.loop.addStatisticEvent(event);
 	}
 
-	public void endSprite()
-	{	eventManager.endSprite();	
-	}
-	
 	/////////////////////////////////////////////////////////////////
 	// EXPLOSIONS		/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
@@ -595,8 +567,7 @@ public abstract class Sprite
 	}
 	
 	public void putExplosion()
-	{	if(!ended)
-			explosionManager.putExplosion();	
+	{	explosionManager.putExplosion();	
 	}
 	
 	public void setFlameRange(int flameRange)

@@ -21,7 +21,6 @@ package fr.free.totalboumboum.engine.content.sprite.bomb;
  * 
  */
 
-import fr.free.totalboumboum.engine.content.feature.Direction;
 import fr.free.totalboumboum.engine.content.feature.Role;
 import fr.free.totalboumboum.engine.content.sprite.Sprite;
 
@@ -53,9 +52,6 @@ public class Bomb extends Sprite
 	/////////////////////////////////////////////////////////////////
 	// EXECUTION		/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	public void appear(Direction direction)
-	{	((BombEventManager)eventManager).appear(direction);		
-	}
 	
 	/////////////////////////////////////////////////////////////////
 	// FINISHED			/////////////////////////////////////////////
