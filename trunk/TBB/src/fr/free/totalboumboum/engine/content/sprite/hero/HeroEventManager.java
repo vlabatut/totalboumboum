@@ -197,7 +197,7 @@ public class HeroEventManager extends EventManager
 //if(!ablt.isActive())
 //	System.out.println();
 				if(ability.isActive())
-				{	sprite.dropBomb(bomb);
+				{	sprite.dropBomb(action);
 					if(gesture.equals(GestureName.WAITING))
 					{	setWaitDelay();
 						gesture = GestureName.STANDING;
