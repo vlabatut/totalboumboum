@@ -208,14 +208,4 @@ public class GeneralMoveHigh extends GeneralAction
 		{	super.finish();
 		}
 	}
-
-	/////////////////////////////////////////////////////////////////
-	// STRING			/////////////////////////////////////////////
-	/////////////////////////////////////////////////////////////////
-	@Override
-	public String toString()
-	{	String result = "MOVEHIGH";
-		result = result + super.toString();
-		return result;
-	}
 }
