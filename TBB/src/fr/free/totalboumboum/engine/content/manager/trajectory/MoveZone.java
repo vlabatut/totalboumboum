@@ -261,7 +261,10 @@ public class MoveZone
 		for(Tile t: tiles)
 		{	ArrayList<Sprite> temp = t.getSprites();
 			for(Sprite s: temp)
-			{	if(s!=source)
+			{	
+//if(s instanceof Item)
+//	System.out.println();
+				if(s!=source)
 				{	PotentialObstacle o = new PotentialObstacle(s,this);
 					if(o.hasIntersection())
 						result.add(o);
@@ -301,9 +304,11 @@ public class MoveZone
 		boolean goOn = usedDirection!=Direction.NONE;
 		while(potentialObstacles.size()>0 && goOn)
 		{	PotentialObstacle po = potentialObstacles.get(0);
+//if(po.getSprite() instanceof Item)
+//	System.out.println();
 			// is it an intersected obstacle?
 			if(po.getContactDistance()<0)
-				addIntersectedSprite(po.getSprite());
+				addIntersectedSprite(po.getSprite()); //NOTE and what if the obstacle is bypassed? shouldn't be in the intersected list
 			// is the potential obstacle an actual obstacle?
 			if(po.isActualObstacle())
 			{	
@@ -378,8 +383,8 @@ public class MoveZone
 			double deltaY = GameVariables.level.getDeltaY(currentY,po.getSprite().getCurrentPosY());
 			Direction d = Direction.getCompositeFromDouble(deltaX,deltaY);
 			dir = usedDirection.drop(d);
-if(dir.isComposite())
-	System.out.println();
+//if(dir.isComposite())
+//	System.out.println();
 		}
 		else
 		{	if(horizontalDistance==verticalDistance && previousDirection.isPrimary()) //workaround, for ergonomics purpose

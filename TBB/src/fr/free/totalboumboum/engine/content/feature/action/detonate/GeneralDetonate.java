@@ -217,14 +217,4 @@ public class GeneralDetonate extends GeneralAction
 		{	super.finish();
 		}
 	}
-
-	/////////////////////////////////////////////////////////////////
-	// STRING			/////////////////////////////////////////////
-	/////////////////////////////////////////////////////////////////
-	@Override
-	public String toString()
-	{	String result = "DETONATE";
-		result = result + super.toString();
-		return result;
-	}
 }

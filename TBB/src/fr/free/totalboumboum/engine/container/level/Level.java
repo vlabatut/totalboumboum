@@ -186,7 +186,7 @@ public class Level
 	public double getVerticalDistance(double x1, double x2, Direction direction)
 	{	x1 = normalizePositionX(x1);
 		x2 = normalizePositionX(x2);
-		double result = processHorizontalDistance(x1,x2,direction);
+		double result = processVerticalDistance(x1,x2,direction);
 		return result;
 	}
 	public double getVerticalDistance(double x1, double x2)

@@ -288,7 +288,7 @@ public abstract class GeneralAction
 	// STRING			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	public String toString()
-	{	String result = "";
+	{	String result = getName().toString();
 		// actors
 		{	result = result+" ( ";
 			for(Role r: actors)

@@ -884,6 +884,7 @@ public class Launcher
 	 * - nouveau système de maximum pour les StateAbilities (avec une ability supp contenant le suffixe _MAX)
 	 * - correction d'un bug concernant la précédence temporelle de certains évènements, en particulier quand deux joueurs brûlent au cours de la même explosion
 	 * - implémentation de la constipation bombique
+	 * - correction d'un gros bug dans le calcul de distances entre sprites situés dans la classe Level
 	 * 
 	 * 
 	 * - bug d'affichage quand les flammes se croisent au cours de plusieurs explosions: la dernière n'est pas affichée
@@ -1074,8 +1075,9 @@ public class Launcher
 
 	/* 
 	 * bugs :
-	 * 	- on peut repasser indéfiniement sur les items en passant par le haut de l'écran, l'anime d'apparition est relancée à chaque fois (pas l'effet par contre)
 	 *  - le bonus mystère semble mal marcher, voire a annulé les autres bonus et la faculté de poser des bombes
+	 *  - pr les items, les modulations de hidding sont dédoublées ??
+	 *  		>> car les gestures par défaut sont crées à la fois pour les sprites abstraits et concrets
 	 */
 	
 }
