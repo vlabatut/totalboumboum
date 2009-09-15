@@ -52,7 +52,7 @@ public class HeroFactoryLoader extends SpriteFactoryLoader
 	/*
 	 * complete the base HeroFactory with graphics and bombset
 	 */
-	public static HeroFactory loadHeroFactory(String folderPath, PredefinedColor color, HeroFactory base, BombsetMap bombsetMap) throws ParserConfigurationException, SAXException, IOException, ClassNotFoundException
+	public static HeroFactory completeHeroFactory(String folderPath, PredefinedColor color, HeroFactory base, BombsetMap bombsetMap) throws ParserConfigurationException, SAXException, IOException, ClassNotFoundException
 	{	// init
 		HeroFactory result = new HeroFactory();
 		Element root = SpriteFactoryLoader.openFile(folderPath);
@@ -88,9 +88,9 @@ public class HeroFactoryLoader extends SpriteFactoryLoader
 		// GENERAL
 		loadGeneralElement(root,result,new HashMap<String,HeroFactory>());
 		GesturePack gesturePack = result.getGesturePack();
-		ArrayList<AbstractAbility> abilities = result.getAbilities();
 
 		// ABILITIES
+		ArrayList<AbstractAbility> abilities = result.getAbilities();
 		folder = folderPath + File.separator+FileTools.FOLDER_ABILITIES;
 		AbilityLoader.loadAbilityPack(folder,abilities);
 

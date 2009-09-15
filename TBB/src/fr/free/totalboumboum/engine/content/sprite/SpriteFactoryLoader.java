@@ -222,8 +222,8 @@ public abstract class SpriteFactoryLoader
 		{	// gesture HIDING
 			GestureName gestureName = GestureName.HIDING;
 			Gesture gesture = gesturePack.getGesture(gestureName);
-if(role==Role.ITEM)
-	System.out.println();
+//if(role==Role.ITEM)
+//	System.out.println();
 			for(ActionName an: ActionName.values())
 			{	// any action forbidden as an actor except APPEAR (which can be instant, i.e. without anime nor trajectory)
 				if(an!=ActionName.APPEAR)
@@ -257,8 +257,8 @@ if(role==Role.ITEM)
 				}
 				// no modulation for the rest
 			}
-if(role==Role.ITEM)
-	System.out.println();
+//if(role==Role.ITEM)
+//	System.out.println();
 		}	
 	}
 	

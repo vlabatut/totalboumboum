@@ -47,7 +47,7 @@ import fr.free.totalboumboum.tools.FileTools;
 
 public class ItemFactoryLoader extends SpriteFactoryLoader
 {	
-	public static ItemFactory loadItemFactory(String folderPath, String itemName, ArrayList<ArrayList<AbstractAbility>> itemAbilities, ArrayList<Float> itemProbabilities, HashMap<String,ItemFactory> abstractItems) throws ParserConfigurationException, SAXException, IOException, ClassNotFoundException
+	public static ItemFactory loadItemFactory(String folderPath, String itemName, ArrayList<ArrayList<AbstractAbility>> itemAbilities, ArrayList<Float> itemProbabilities, HashMap<String,ItemFactory> abstractItems, boolean isAbstract) throws ParserConfigurationException, SAXException, IOException, ClassNotFoundException
 	{	// init
 		ItemFactory result = new ItemFactory(itemName);
 		Element root = SpriteFactoryLoader.openFile(folderPath);
@@ -56,9 +56,9 @@ public class ItemFactoryLoader extends SpriteFactoryLoader
 		// GENERAL
 		loadGeneralElement(root,result,abstractItems);
 		GesturePack gesturePack = result.getGesturePack();
-		ArrayList<AbstractAbility> abilities = result.getAbilities();
 				
 		// ABILITIES
+		ArrayList<AbstractAbility> abilities = result.getAbilities();
 		folder = folderPath+File.separator+FileTools.FOLDER_ABILITIES;
 		AbilityLoader.loadAbilityPack(folder,abilities);
 		
@@ -87,7 +87,8 @@ public class ItemFactoryLoader extends SpriteFactoryLoader
 		result.setItemAbilities(itemAbilities,itemProbabilities);
 		
 		// result
-		initDefaultGestures(gesturePack,Role.ITEM);
+		if(!isAbstract)
+			initDefaultGestures(gesturePack,Role.ITEM);
 		return result;
 	}	
 }

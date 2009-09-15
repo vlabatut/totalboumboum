@@ -65,7 +65,7 @@ public class Player
 		color = this.profile.getSpriteColor();
 		String folder = FileTools.getHeroesPath()+File.separator+this.profile.getSpritePack();
 		folder = folder + File.separator+this.profile.getSpriteFolder();
-		HeroFactory tempHeroFactory = HeroFactoryLoader.loadHeroFactory(folder,color,base,bombsetMap);
+		HeroFactory tempHeroFactory = HeroFactoryLoader.completeHeroFactory(folder,color,base,bombsetMap);
 		sprite = tempHeroFactory.makeSprite(tile);
 //		tile.addSprite(sprite);
 		GameVariables.level.insertSpriteTile(sprite);

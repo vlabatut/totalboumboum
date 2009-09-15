@@ -46,7 +46,7 @@ import fr.free.totalboumboum.tools.FileTools;
 
 public class FireFactoryLoader extends SpriteFactoryLoader
 {	
-	public static FireFactory loadFireFactory(String folderPath, HashMap<String, FireFactory> abstractFires) throws ParserConfigurationException, SAXException, IOException, ClassNotFoundException
+	public static FireFactory loadFireFactory(String folderPath, HashMap<String, FireFactory> abstractFires, boolean isAbstract) throws ParserConfigurationException, SAXException, IOException, ClassNotFoundException
 	{	// init
 		FireFactory result = new FireFactory();
 		Element root = SpriteFactoryLoader.openFile(folderPath);
@@ -55,9 +55,9 @@ public class FireFactoryLoader extends SpriteFactoryLoader
 		// GENERAL
 		loadGeneralElement(root,result,abstractFires);
 		GesturePack gesturePack = result.getGesturePack();
-		ArrayList<AbstractAbility> abilities = result.getAbilities();
 		
 		// ABILITIES
+		ArrayList<AbstractAbility> abilities = result.getAbilities();
 		folder = folderPath+File.separator+FileTools.FOLDER_ABILITIES;
 		AbilityLoader.loadAbilityPack(folder,abilities);
 		
@@ -83,7 +83,8 @@ public class FireFactoryLoader extends SpriteFactoryLoader
 		result.setBombset(bombset);
 
 		// result
-		initDefaultGestures(gesturePack,Role.FIRE);
+		if(!isAbstract)
+			initDefaultGestures(gesturePack,Role.FIRE);
 		return result;
 	}	
 }
