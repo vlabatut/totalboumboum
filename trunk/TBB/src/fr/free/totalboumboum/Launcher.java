@@ -310,7 +310,7 @@ public class Launcher
 	 */
 	
 	/* TODO conseils david :
-	 * 	- champ final
+	 * 	- champ final pr forcer l'initialisation
 	 * 	- écriture courte du for pour iterator
 	 */
 
@@ -351,13 +351,7 @@ public class Launcher
 	 */
 	
 	/*
-	 * TODO il ne faut pas exécuter toutes les IA dans un thread pool, mais au contraire les séparer
-	 * sinon, une seule IA bouclant à l'infini va consommer tous les threads dispo dans le treadpool
-	 * vont être successivement monopolisés par l'IA
-	 */
-	
-	/*
-	 * TODO dans l'API il faut généraliser (tout en simplifiant) les propriétés des sprites, plutot que 
+	 * TODO dans l'API IA il faut généraliser (tout en simplifiant) les propriétés des sprites, plutot que 
 	 * de définir des fonctions spécifiques à chaque fois.
 	 */
 	
@@ -370,10 +364,31 @@ public class Launcher
 	 */
 	
 	/*
-	 * TODO inclure dans l'API des fonction d'action prédéfinies.
+	 * TODO inclure dans l'API IA des fonctions d'action prédéfinies.
 	 * par exemple des fonctions pour le déplacement, on indique où on veut aller et ça détermine à chaque itération
 	 * quelle est l'action à effectuer. étendre à d'autres actions ?
 	 * limitation pédago: on n'utilise plus A*
+	 */
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+// MULTITHREADING	//////////////////////////////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+	/*
+	 * TODO il ne faut pas exécuter toutes les IA dans un thread pool, mais au contraire les séparer
+	 * sinon, une seule IA bouclant à l'infini va consommer tous les threads dispo dans le treadpool
+	 * vont être successivement monopolisés par l'IA
+	 */
+	
+	/*
+	 * TODO une fois qu'on a déterminé les nombres de joueurs, y a moyen de gérer les threads de meilleure manière en :
+	 * 		- créant un executor au niveau du tournoi
+	 * 		- il doit contenir un pool de (nbre d'IA max pvant jouer à la fois)+1(pr loop)
+	 * 		- par la suite, au lieu de créer un thread pour chaque ia ou pour le chargement/loop, on en demande un à l'executor
+	 * http://java.sun.com/javase/6/docs/api/java/util/concurrent/ExecutorService.html
+	 * http://java.sun.com/docs/books/tutorial/essential/concurrency/pools.html
+	 * http://java.sun.com/docs/books/tutorial/essential/concurrency/interrupt.html
+	 * >>> pb: si un thread entre en boucle infinie, il ne sera jamais terminé, donc l'executor devra créer/gérer un thread de plus
 	 */
 	
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -385,20 +400,10 @@ public class Launcher
 	 */						
 	
 	/*
-	 * TODO la durée d'explosion d'une bombe et la durée de burning des sprites doivent être 
-	 * égales (?) ou au moins imposées
-	 */
-	
-	/*
 	 * TODO lorsqu'une bombe est touchée par une flamme, elle bloque la flamme.
 	 * ce qu'on voit passer est la flamme résultant de l'explosion de la bombe.
 	 */
 
-	/*
-	 * TODO le temps d'explosion d'une bombe est propre à la fois à la bombe
-	 * (capacité) et au joueur (certains malus la modulent)
-	 */
-	
 	/*
 	 * TODO dans l'eventMgr de la bombe, quand elle oscille, il faut gérer les sprites
 	 * qui sont en train de la pousser, et non pas en simple contact.
@@ -416,14 +421,6 @@ public class Launcher
 // CONTROLS		//////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-	/*
-	 * TODO les touches doivent implémenter (toutes, et non pas seulement les directions)
-	 * une option 'stop on release'. par exemple, si je reste appuyé sur
-	 * jump, ça doit sauter dès que c'est possible, et ne s'arrêter que quand je
-	 * relâche la touche.
-	 * en fait non, c intéressant pour seulement certaines actions
-	 */
-	
 	/*
 	 * TODO lors de l'implémentation du jeu en réseau,
 	 * une optimisation consiste à ne pas générer des évts par le controleur tant
@@ -444,7 +441,11 @@ public class Launcher
 	 * 		1)explode
 	 *		2)stay still
 	 *		3)implode
-	 * - gérer le déplacement des flammes à la XBlast
+	 * 	pr gérer le déplacement des flammes à la XBlast
+	 * 
+	 * ou alternativement :
+	 * - décomposer le feu en appearing+standing+disapearing, 
+	 * 	ce qui permettrait de le faire durer aussi longtemps qu'on veut
 	 */
 
 	/*
@@ -465,34 +466,9 @@ public class Launcher
 	 */    
 
 	/*
-	 * TODO dans l'EventManager, est-il vraiment nécessaire de synchroniser la méthode update ?
-	 * car on appelle une méthode setGesture dans sprite : quel est le risque d'interblocage réel ?
-	 * à généraliser à toutes les méthodes que j'ai synchronisées
-	 */
-
-	/* TODO lorsqu'un sprite est ended :
-	 * + il faut virer le sprite partout où il est utilisé : gestionnaire de touches, etc. 
-	 * (faire une recherche de référence à la classe hero et sprite)
-	 * + si c'est un héros il faut faire péter toutes ses bombes et relâcher tous ses items
-	 */	
-
-	//TODO le saut ne doit pas être sensible à la vitesse du personnage	-> à voir !
-
-	/*
-	 * TODO plutot que d'utiliser des méthodes synchronisées : 
-	 * utiliser une file synchronisée par définition ?
-	 */
-
-	/*
 	 * TODO dans SBM2, il faut gérer :
 	 * 	- les boss (dans les autres aussi, notamment SBM5)
 	 * 	- les espèces de chars d'assaut présent dans certains niveaux (utilisés par les créatures)
-	 */
-	
-	/*
-	 * TODO il est possible que certaines bombes aient des animes différentes pour chaque direction
-	 * conséquence : il faut toujours orienter un gesture, même si ça n'a pas vraiment de sens a priori.
-	 * ex: bombe missile que l'on pose vers une direction, et qui part en roulant quand elle explose, détruisant le premier obstacle rencontré
 	 */
 	
 	/*
@@ -514,44 +490,12 @@ public class Launcher
 	 */
 	
 	/*
-	 * TODO décomposer, séparer chaque état dans une classe spécifique
-	 * qui définit : 
-	 * 	- les transitions : comment entre-t-on dans cet état, comment passe-t-on dans un autre état
-	 * 	- les réactions : ou plutot les interactions, avec les autres sprites et l'environnement
-	 * les managers, en particulier event et request, utiliseraient ces classes.
-	 * chaque sprite serait caractérisé par l'utilisation d'un certain nombre de ces classes.
-	 */
-		
-	/*
-	 * TODO il faut mettre en place une mémorisation de la dernière action commandée qui n'a pas pu
-	 * être exécutée par un sprite, et tenter de l'exécuter à chaque cycle.
-	 * exemples : 
-	 * 	- remote bombe devant exploser car l'owner est mort, mais ne pouvant pas car bouncing
-	 * 	- item devant apparaître car le bloc a été détruit, mais ne pouvant pas car un joueur/bombe occupe la place
-	 */
-	
-	/*
-	 * TODO il va être nécessaire de définir un gesture indiquant l'absence d'un sprite relativement au jeu :
-	 * 	- item pas encore découvert car le bloc le contenant n'a pas été détruit (équivalent à NONE ?)
-	 * 	- item actuellement utilisé par un joueur (prop: USED)
-	 */
-
-	/*
-	 * TODO les attributs XML respectent la convention java, et non pas XML (avec tirets)
-	 */
-	
-	/*
 	 * TODO dans l'avenir il serait p-ê nécessaire d'utiliser un actionManager,
 	 * qui recevrait une action en paramètre, et l'exécuterait.
 	 * intérêt : décomposition + utile pour un moteur qui serait seulement un player,
 	 * et ne devrait donc pas gérer les tirages aléatoires, mais seulement l'application
 	 * déterministe des actions (le tirage se ferait dans la fonction appelant l'actionMger,
 	 * ie généralement : l'eventMgr)
-	 */
-	
-	/*
-	 * TODO sprite du bad bomberman dans SBM1
-	 * éventuellement les autres persos du monde avec le ring
 	 */
 	
 	/*
@@ -565,17 +509,7 @@ public class Launcher
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 	/*
-	 * TODO gérer l'apparition des items à la suite d'une élimination,
-	 * comme dans SBM1, avec des volutes de fumée
-	 */
-	
-	/*
-	 * TODO il y a aussi à gérer le déplacement des items lors d'une explosion
-	 */
-	
-	/*
-	 * TODO gérer une anime d'apparition de l'item
-	 * voire aussi de disparition
+	 * TODO érer le déplacement des items lors d'une explosion
 	 */
 	
 	/*
@@ -620,15 +554,6 @@ public class Launcher
 	 * - vérifier que quand on fait référence à un bloc par son nom, il existe bien dans le fichier du thème
 	 */
 
-	/* TODO il faut réformer les fichiers de propriétés :
-	 * idée générale : 
-	 * 	- elles différent d'un type d'objet à l'autre
-	 *  - elles décrivent quels fichiers on doit trouver et où
-	 * utilisation :
-	 * 	1) charger les propriétés, permettant d'avoir un aperçu
-	 *  2) éventuellement charger l'objet lui-même grâce aux propriétés 
-	 */
-
 	/*
 	 * TODO lorsqu'on définit une animation ou une trajectoire qui est identique à une autre
 	 * plutot que de faire un copier-coller, permettre de nommer l'animation d'origine.
@@ -637,7 +562,7 @@ public class Launcher
 	
 	/*
 	 * TODO dans les fichiers XML, il faut préciser en attribut de la racine la version
-	 * du fichier utilisée.
+	 * du fichier utilisée (i.e. version du schéma).
 	 */
 	
 	/*
@@ -647,36 +572,31 @@ public class Launcher
 	 */
 	
 	/*
-	 * TODO dans les fichiers XML, dans toutes les références aux XSD, remplacer
-	 * les \ par des / : ça semble marcher tout aussi bien (du moins avec l'éditeur
-	 * d'éclipse)
+	 * TODO les attributs doivent XML respecter la convention java, et non pas XML (avec tirets)
 	 */
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 // TRAJECTORIES		//////////////////////////////////////////////////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 		
-	/*
-	 * TODO
-	 * quand on pose deux bombes en diagonale et qu'on se place dans le cadrant intérieur d'une des cases libres du même carré
-	 * on est bloqué. ce n'est pas vraiment un pb en fait, plus un feature. mais les non-initiés peuvent prendre ça pour un bug.
-	 * (note : point mentionné dans le blog)
-	 */
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 // MODULATIONS	//////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	/* 
 	 * TODO
-	 * dans les modulations third et other, la portée est limitée à la case (ou aux cases). le contact et surtout le remote ne sont pas encore gérés.
+	 * dans les modulations third et other, la portée est limitée à la case (ou aux cases). 
+	 * le contact et surtout le remote ne sont pas encore gérés.
 	 * idée pour centraliser le traitement en cas de portée sans limite:
 	 * 	- dès qu'un sprite change de gesture, ses nouvelles modulations sont analysées
-	 * 	- toutes celles qui sont sans limite de portée sont stockées dans un vecteur situé dans Level (et toutes celles de l'état précédent sont retirées de ce même vecteur)
-	 * 	- lors de la validation de 3rdMod, ce vecteur est systématiquement testé en plus des sprites situés près de l'acteur et de la cible 
+	 * 	- toutes celles qui sont sans limite de portée sont stockées dans un vecteur situé dans Level 
+	 * 		(et toutes celles de l'état précédent sont retirées de ce même vecteur)
+	 * 	- lors de la validation de 3rdMod, ce vecteur est systématiquement testé 
+	 * 		en plus des sprites situés près de l'acteur et de la cible 
 	 */
 	
 	/*
-	 * NOTE: les modulations sont ordonnées par priorité dans le fichier XML.
+	 * NOTE les modulations sont ordonnées par priorité dans le fichier XML.
 	 * dans le cas où plusieurs modulations peuvent être appliquées à une action, 
 	 * c'est la première définie dans le fichier XML qui est utilisée.
 	 * il faut donc l'organiser du plus spécifique au plus général.
@@ -791,68 +711,69 @@ public class Launcher
 	 */
 	
 	/*
-	 * TODO dans les permissions, faut-il passer les forces à 0 et sans framing ?
-	 * de plus, ne faudrait-il pas inclure les interdictions sous la forme de modulations
-	 * avec framing et valeur négative ou nulle ? 
-	 */
-
-	/*
 	 * TODO le système de gestion des actions est clairement à améliorer.
 	 * certaines actions comme gather sont automatiques. certaines actions ont un effet de zone 
 	 * (pr gather : la case).
 	 */
 
 	
-	
-	
-	
-///////////////////////////////////////////////////////////////////////////////////////////////////////////////
-///////////////////////////////////////////////////////////////////////////////////////////////////////////////
-///////////////////////////////////////////////////////////////////////////////////////////////////////////////
-///////////////////////////////////////////////////////////////////////////////////////////////////////////////
-///////////////////////////////////////////////////////////////////////////////////////////////////////////////
-///////////////////////////////////////////////////////////////////////////////////////////////////////////////
-///////////////////////////////////////////////////////////////////////////////////////////////////////////////
-///////////////////////////////////////////////////////////////////////////////////////////////////////////////
-///////////////////////////////////////////////////////////////////////////////////////////////////////////////
-///////////////////////////////////////////////////////////////////////////////////////////////////////////////
-///////////////////////////////////////////////////////////////////////////////////////////////////////////////
-///////////////////////////////////////////////////////////////////////////////////////////////////////////////
-///////////////////////////////////////////////////////////////////////////////////////////////////////////////
-///////////////////////////////////////////////////////////////////////////////////////////////////////////////
-///////////////////////////////////////////////////////////////////////////////////////////////////////////////
-///////////////////////////////////////////////////////////////////////////////////////////////////////////////
-///////////////////////////////////////////////////////////////////////////////////////////////////////////////
-	
-	
-	
-	
-	
-	
-	
-	
-	
-
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+// BUGS CONNUS	//////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+		
 	/*
-	 * TODO BUGS EN COURS
-	 *  - quand on balance une bombe, puis une autre, puis fait péter la première et enfin la seconde 
-	 *  	juste à la fin des flammes de la première, alors l'explosion de la 2nde est circonsrite à la
-	 *  	case où elle atterrit.
-	 *  - l'item kick ne marche pas
-	 *  - quand un mur est détruit (définitivement) par une penetration bomb, l'item n'apparait pas car
+	 * TODO quand on balance une bombe, puis une autre, puis fait péter la première et enfin la seconde 
+	 *  juste à la fin des flammes de la première, alors l'explosion de la 2nde est circonsrite à la
+	 *  case où elle atterrit.
+	 *  
+	 */
+	
+	/*  
+	 *  TODO l'item kick ne marche pas
+	 */
+	
+	/*  
+	 *  TODO quand un mur est détruit (définitivement) par une penetration bomb, l'item n'apparait pas car
 	 *  la flamme de la bombe dure plus longtemps que l'explosion du mur, et détruit l'item aussitôt qu'il apparait
+	 *  >> je pense que ça a été résolu ça, à tester !
 	 */
 	
 	/*
-	 * TODO une fois qu'on a déterminé les nombres de joueurs, y a moyen de gérer les threads de meilleure manière en :
-	 * 		- créant un executor au niveau du tournoi
-	 * 		- il doit contenir un pool de (nbre d'IA max pvant jouer à la fois)+1(pr loop)
-	 * 		- par la suite, au lieu de créer un thread pour chaque ia ou pour le chargement/loop, on en demande un à l'executor
-	 * http://java.sun.com/javase/6/docs/api/java/util/concurrent/ExecutorService.html
-	 * http://java.sun.com/docs/books/tutorial/essential/concurrency/pools.html
-	 * http://java.sun.com/docs/books/tutorial/essential/concurrency/interrupt.html
-	 * >>> pb: si un thread entre en boucle infinie, il ne sera jamais terminé, donc l'executor devra créer/gérer un thread de plus
+	 * TODO
+	 * quand on pose deux bombes en diagonale et qu'on se place dans le cadrant intérieur d'une des cases libres du même carré
+	 * on est bloqué. ce n'est pas vraiment un pb en fait, plus un feature :P . mais les non-initiés peuvent prendre ça pour un bug.
+	 * (note : point mentionné dans le blog)
 	 */
+	
+	
+	
+	
+	
+	
+	
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	
+	
+	
+	
+	
+	
 	
 	/*
 	 * TODO
@@ -906,6 +827,8 @@ public class Launcher
 	 * *******************************************************
 	 * *********************** A FAIRE ***********************
 	 * *******************************************************
+	 * 
+	 * - envoyer un evt de changement de gesture (pour indiquer par ex que le sprite devient destructible, etc ?)
 	 * 
 	 * - GUI : dans les tables, remplacer les labels par une classe custom qui implémenterait l'interface basicPanel
 	 * 
@@ -1025,7 +948,7 @@ public class Launcher
 	/*TODO BUGS
 	 * - il semblerait que la direction dans la SpecificAction et dans la GeneralAction correspondante ne soit pas la même...
 	 * - impossible de poser une bombe quand on est en train de buter contre un mur en direction upleft (et uniquement cette direction pr NES2) et downleft (pr SBM1)
-	 * 	>> viendrait de swing ou du clavier (pb matériel)
+	 * 		>> viendrait de swing ou du clavier (pb matériel ou bas niveau)
 	 * 
 	 */
 	
@@ -1060,24 +983,15 @@ public class Launcher
 	 */
 
 	// - empêcher d'appuyer sur esc quand ça exulte déjà (p-ê en testant la modulation sur exultation?)
+	// 		empêcher toute action pendant l'exultation, en fait...
 	// - cas particulier : item apparaissant dans une explosion de bloc, avec un joueur déjà sur le bloc (il a passe-muraille et résistance au feu) : l'item doit être ramassé dès qu'il a fini d'apparaitre, en théorie
 	// - donner la possibilité de définir un item "pied à l'étrier" pr les joueurs qui sont mort et renaissent (plutot que systématiquement donner l'invulnérabilité ?)
 	// - vérifier que le joueur ne perd jamais les items initaux quand il meurt
+	// - quand le joueur meurt, ses bombes télécommandées doivent exploser
 	
-	// pq le perso ne meurt pas quand il se trouve ailleurs qu'au centre de l'explosion (mais dans l'explosion qd même)
 	// étudier le fonctionnement de ended (sprite) pr voir quand retirer le sprite de level/tile
 	// faut émettre un évt de sortie à la disparition d'un sprite (mort, masquage, etc)
 	
-	// décomposer le feu en appearing+standing+disapearing, ce qui permettrait de le faire durer aussi longtemps qu'on veut
-	
-	// envoyer un evt de changement d'état pour indiquer par ex que le sprite devient destructible, etc ?
 	
 
-	/* 
-	 * bugs :
-	 *  - le bonus mystère semble mal marcher, voire a annulé les autres bonus et la faculté de poser des bombes
-	 *  - pr les items, les modulations de hidding sont dédoublées ??
-	 *  		>> car les gestures par défaut sont crées à la fois pour les sprites abstraits et concrets
-	 */
-	
 }
