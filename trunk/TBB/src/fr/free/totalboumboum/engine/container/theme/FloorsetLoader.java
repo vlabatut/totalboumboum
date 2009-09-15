@@ -91,11 +91,12 @@ public class FloorsetLoader
 		individualFolder = individualFolder+File.separator+attribute.getValue().trim();
 
 		// factory
-		FloorFactory floorFactory = FloorFactoryLoader.loadFloorFactory(individualFolder,abstractFloors);
-		if(type==Type.CONCRETE)
-			result.addFloorFactory(name,floorFactory);
-		else
+		boolean isAbstract = type==Type.ABSTRACT;
+		FloorFactory floorFactory = FloorFactoryLoader.loadFloorFactory(individualFolder,abstractFloors,isAbstract);
+		if(isAbstract)
 			abstractFloors.put(name,floorFactory);
+		else
+			result.addFloorFactory(name,floorFactory);
     }
 
 	/////////////////////////////////////////////////////////////////

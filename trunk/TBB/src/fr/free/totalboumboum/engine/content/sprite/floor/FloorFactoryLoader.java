@@ -48,7 +48,7 @@ import fr.free.totalboumboum.tools.FileTools;
 
 public class FloorFactoryLoader extends SpriteFactoryLoader
 {	
-	public static FloorFactory loadFloorFactory(String folderPath, HashMap<String,FloorFactory> abstractFloors) throws ParserConfigurationException, SAXException, IOException, ClassNotFoundException
+	public static FloorFactory loadFloorFactory(String folderPath, HashMap<String,FloorFactory> abstractFloors, boolean isAbstract) throws ParserConfigurationException, SAXException, IOException, ClassNotFoundException
 	{	// init
 		FloorFactory result = new FloorFactory();
 		Element root = SpriteFactoryLoader.openFile(folderPath);
@@ -57,9 +57,9 @@ public class FloorFactoryLoader extends SpriteFactoryLoader
 		// GENERAL
 		loadGeneralElement(root,result,abstractFloors);	
 		GesturePack gesturePack = result.getGesturePack();
-		ArrayList<AbstractAbility> abilities = result.getAbilities();
 		
 		// ABILITIES
+		ArrayList<AbstractAbility> abilities = result.getAbilities();
 		folder = folderPath+File.separator+FileTools.FOLDER_ABILITIES;
 		AbilityLoader.loadAbilityPack(folder,abilities);
 		
@@ -85,7 +85,8 @@ public class FloorFactoryLoader extends SpriteFactoryLoader
 		result.setBombset(bombset);
 
 		// result
-		initDefaultGestures(gesturePack,Role.FLOOR);
+		if(!isAbstract)
+			initDefaultGestures(gesturePack,Role.FLOOR);
 		return result;
 	}	
 }

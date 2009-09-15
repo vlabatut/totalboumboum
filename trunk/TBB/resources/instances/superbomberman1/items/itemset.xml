@@ -234,11 +234,17 @@
 			</abilities>
 			<!-- vest -->		
 			<abilities>
+				<ability strength="200" frame="true" time="15000" >
+					<name value="SPRITE_TWINKLE_COLOR"/>
+				</ability>
+				<ability strength="400" frame="true" time="15000" >
+					<name value="SPRITE_TWINKLE_NORMAL"/>
+				</ability>
+				<ability strength="16777215" frame="true" time="15000" > <!-- #FFFFFF = white -->
+					<name value="SPRITE_TWINKLE" />
+				</ability>
 				<ability time="15000">
 					<name value="HERO_FIRE_PROTECTION" />
-				</ability>
-				<ability time="15000" >
-					<name value="SPRITE_TWINKLE" />
 				</ability>
 			</abilities>
 		</item>

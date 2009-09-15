@@ -148,11 +148,12 @@ public class FiresetLoader
 		individualFolder = individualFolder+File.separator+attribute.getValue().trim();
 		
 		// fire factory
-		FireFactory fireFactory = FireFactoryLoader.loadFireFactory(individualFolder,abstractFires);
-		if(type==Type.CONCRETE)
-			result.addFireFactory(name,fireFactory);
-		else
+		boolean isAbstract = type==Type.ABSTRACT;
+		FireFactory fireFactory = FireFactoryLoader.loadFireFactory(individualFolder,abstractFires,isAbstract);
+		if(isAbstract)
 			abstractFires.put(name,fireFactory);
+		else
+			result.addFireFactory(name,fireFactory);
     }
 
 	/////////////////////////////////////////////////////////////////

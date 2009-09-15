@@ -175,7 +175,7 @@ public class BombsetLoader
 		// required abilities
 		BombFactory bombFactory;
 		if(type==Type.CONCRETE)
-		{	bombFactory = bombset.getBombFactory(name);		
+		{	bombFactory = bombset.getBombFactory(name);
 			BombFactoryLoader.completeBombFactory(bombFactory,individualFolder,color,bombset,abstractBombs);
 		}
 		else

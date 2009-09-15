@@ -108,13 +108,14 @@ public class BlocksetLoader
 		localFilePath = localFilePath+File.separator+attribute.getValue();
 		
 		// components
-		BlockFactory blockFactory = BlockFactoryLoader.loadBlockFactory(localFilePath,abstractBlocks);
-		if(type==Type.CONCRETE)
+		boolean isAbstract = type==Type.ABSTRACT;
+		BlockFactory blockFactory = BlockFactoryLoader.loadBlockFactory(localFilePath,abstractBlocks,isAbstract);
+		if(isAbstract)
+			abstractBlocks.put(name,blockFactory);
+		else
 		{	String fullname = groupName+Theme.GROUP_SEPARATOR+name;
 			result.addBlockFactory(fullname,blockFactory);		
 		}
-		else
-			abstractBlocks.put(name,blockFactory);
     }
 
 	/////////////////////////////////////////////////////////////////

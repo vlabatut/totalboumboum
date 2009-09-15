@@ -112,13 +112,12 @@ public class ItemsetLoader
 		}
 		
 		// item factory
-		ItemFactory itemFactory = ItemFactoryLoader.loadItemFactory(individualFolder,name,abilities,probabilities,abstractItems);
-		if(type==Type.CONCRETE)
-		{	result.addItemFactory(name,itemFactory);
-		}
+		boolean isAbstract = type==Type.ABSTRACT;
+		ItemFactory itemFactory = ItemFactoryLoader.loadItemFactory(individualFolder,name,abilities,probabilities,abstractItems,isAbstract);
+		if(isAbstract)
+			abstractItems.put(name,itemFactory);
 		else
-		{	abstractItems.put(name,itemFactory);
-		}
+			result.addItemFactory(name,itemFactory);
     }
 	
 	private static void loadAbilitiesElement(Element root, ArrayList<ArrayList<AbstractAbility>> abilities, ArrayList<Float> probabilities) throws ClassNotFoundException
