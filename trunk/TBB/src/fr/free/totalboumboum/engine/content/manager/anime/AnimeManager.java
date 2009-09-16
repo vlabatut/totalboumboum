@@ -316,7 +316,7 @@ public class AnimeManager
 	{	BufferedImage result = null;
 		if(!invisible)
 		{	result = currentStep.getShadow();
-			if(twinkleChange)
+			if(result!=null && twinkleChange)
 			{	if(twinkleColor==null)
 					result = null;
 				else
@@ -347,7 +347,7 @@ public class AnimeManager
 	{	BufferedImage result = null;
 		if(!invisible)
 		{	result = currentStep.getImage();
-			if(twinkleChange)
+			if(result!=null && twinkleChange)
 			{	if(twinkleColor==null)
 					result = null;
 				else

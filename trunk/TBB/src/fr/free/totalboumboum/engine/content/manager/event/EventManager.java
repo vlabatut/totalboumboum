@@ -21,8 +21,14 @@ package fr.free.totalboumboum.engine.content.manager.event;
  * 
  */
 
+import java.util.List;
+
 import fr.free.totalboumboum.configuration.GameVariables;
+import fr.free.totalboumboum.engine.container.tile.Tile;
 import fr.free.totalboumboum.engine.content.feature.Direction;
+import fr.free.totalboumboum.engine.content.feature.ability.ActionAbility;
+import fr.free.totalboumboum.engine.content.feature.action.SpecificAction;
+import fr.free.totalboumboum.engine.content.feature.action.appear.SpecificAppear;
 import fr.free.totalboumboum.engine.content.feature.event.ActionEvent;
 import fr.free.totalboumboum.engine.content.feature.event.ControlEvent;
 import fr.free.totalboumboum.engine.content.feature.event.EngineEvent;
@@ -101,6 +107,25 @@ public abstract class EventManager
 		sprite.setGesture(gesture,spriteDirection,Direction.NONE,true);
 		sprite.changeTile(null);
 		GameVariables.level.removeSprite(sprite);
+	}
+	
+	protected Tile randomlyFindTile()
+	{	Tile result = null;
+		List<Tile> tileList = GameVariables.level.getTileList();
+		while(result==null && tileList.size()>0)
+		{	int index = (int)(Math.random()*tileList.size());
+			Tile tile = tileList.get(index);
+			sprite.changeTile(tile);
+			SpecificAction action = new SpecificAppear(sprite);
+			ActionAbility actionAbility = sprite.modulateAction(action);
+			// can appear >> select this tile
+			if(actionAbility.isActive())
+				result = tile;
+			// cannot appear >> remove the tile from the list and re-draw
+			else
+				tileList.remove(index);
+		}
+		return result;
 	}
 	
 	/////////////////////////////////////////////////////////////////

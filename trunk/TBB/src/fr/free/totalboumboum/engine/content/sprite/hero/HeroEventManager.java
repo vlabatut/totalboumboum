@@ -419,8 +419,8 @@ public class HeroEventManager extends EventManager
 	private void engTileLowEnter(EngineEvent event)
 	{	if(event.getSource()==sprite)
 		{	if(gesture.equals(GestureName.PUSHING) || gesture.equals(GestureName.STANDING) || gesture.equals(GestureName.WALKING))
-			{	Item item = sprite.getTile().getItem();
-				if(item!=null)
+			{	ArrayList<Item> items = sprite.getTile().getItems();
+				for(Item item: items)
 				{	SpecificAction action = new SpecificGather(sprite,item);
 					ActionAbility ability = sprite.modulateAction(action);
 					if(ability.isActive())
@@ -435,8 +435,8 @@ public class HeroEventManager extends EventManager
 	
 	private void engTouchGround(EngineEvent event)
 	{	//if(gesture.equals(GestureConstants.LANDING))
-		{	Item item = sprite.getTile().getItem();
-			if(item!=null)
+		{	ArrayList<Item> items = sprite.getTile().getItems();
+			for(Item item: items)
 			{	SpecificAction action = new SpecificGather(sprite,item);
 				ActionAbility ability = sprite.modulateAction(action);
 				if(ability.isActive())

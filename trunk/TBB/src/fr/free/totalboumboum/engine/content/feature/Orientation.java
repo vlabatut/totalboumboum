@@ -80,7 +80,7 @@ public enum Orientation
 	}	
 
 	public static Orientation getOrientation(Sprite actor, Tile tile)
-	{	Sprite target = tile.getFloor();
+	{	Sprite target = tile.getFloors().get(0);
 		Orientation result = getOrientation(actor,target);
 		return result;
 	}	
