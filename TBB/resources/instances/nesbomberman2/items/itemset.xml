@@ -236,6 +236,16 @@
 				<ability strength="1">
 					<name value="HERO_WALK_SPEED_MODULATION" />
 				</ability>
+				
+				<ability strength="250"  frame="true" time="15000" >
+					<name value="SPRITE_TWINKLE_COLOR"/>
+				</ability>
+				<ability strength="250"  frame="true" time="15000" >
+					<name value="SPRITE_TWINKLE_NORMAL"/>
+				</ability>
+				<ability strength="16711680" frame="true" time="15000" >
+					<name value="SPRITE_TWINKLE" />
+				</ability>				
 			</abilities>
 		</item>
 		

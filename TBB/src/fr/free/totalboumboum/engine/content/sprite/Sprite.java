@@ -295,6 +295,10 @@ public abstract class Sprite
 			if(newTile!=null)
 			{	tile = newTile;
 				tile.addSprite(this);
+				if(!tile.containsPoint(getCurrentPosX(),getCurrentPosY()))
+				{	setCurrentPosX(tile.getPosX());
+					setCurrentPosY(tile.getPosY());
+				}
 				String eventName = EngineEvent.TILE_HIGH_ENTER;
 				if(isOnGround())
 					eventName = EngineEvent.TILE_LOW_ENTER;

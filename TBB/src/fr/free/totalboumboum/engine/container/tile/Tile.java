@@ -58,84 +58,60 @@ public class Tile
 		bombs = new ArrayList<Bomb>(0);
 		heroes = new ArrayList<Hero>(0);
 		fires = new ArrayList<Fire>(0);
-		block = null;
-		item = null;
+		blocks = new ArrayList<Block>(0);
+		items = new ArrayList<Item>(0);
 	}
 		
     /////////////////////////////////////////////////////////////////
 	// UPDATE				/////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	public void updateFloor()
-	{	floor.update();
+	public void updateSprites(Role role)
+	{	if(role==Role.BLOCK)
+			updateSprites(blocks);
+		else if(role==Role.BOMB)
+			updateSprites(bombs);
+		else if(role==Role.FIRE)
+			updateSprites(fires);
+		else if(role==Role.FLOOR)
+			updateSprites(floors);
+		else if(role==Role.HERO)
+			updateSprites(heroes);
+		else if(role==Role.ITEM)
+			updateSprites(items);
 	}
-	
-	public void updateHeroes()
+
+	private <T extends Sprite> void updateSprites(ArrayList<T> sprites)
 	{	int i=0;
-		while(i<heroes.size())
-		{	Hero temp = heroes.get(i);
+		while(i<sprites.size())
+		{	T temp = sprites.get(i);
 			temp.update();
 			// only increment if the current sprite didn't leave the tile
-			if(i<heroes.size() && heroes.get(i)==temp)
+			if(i<sprites.size() && sprites.get(i)==temp)
 				i++;
 		}
 	}
 
-	public void updateBombs()
-	{	int i=0;
-		while(i<bombs.size())
-		{	Bomb temp = bombs.get(i);
-			temp.update();
-			// only increment if the current sprite didn't leave the tile
-			if(i<bombs.size() && bombs.get(i)==temp)
-				i++;
-		}
-	}
-		
-	public void updateFires()
-	{	int i=0;
-		while(i<fires.size())
-		{	Fire temp = fires.get(i);
-			temp.update();
-			// only increment if the current sprite didn't leave the tile
-			if(i<fires.size() && fires.get(i)==temp)
-				i++;
-		}
-	}
-
-	public void updateBlock()
-	{	if(block!=null)
-		{	block.update();
-		}		
-	}
-
-	public void updateItem()
-	{	if(item!=null)
-		{	item.update();
-		}		
-	}
-		
     /////////////////////////////////////////////////////////////////
-	// HERO		/////////////////////////////////////////
+	// DRAW				/////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	private ArrayList<Hero> heroes;
-
-	private void addHero(Hero hero)
-	{	heroes.add(hero);		
-//		hero.setTile(this);
-//		level.addSprite(hero);
+	public void drawSprites(Role role, Graphics g, boolean flat, boolean onGround, boolean shadow)
+	{	if(role==Role.BLOCK)
+			drawSprites(blocks,g,flat,onGround,shadow);
+		else if(role==Role.BOMB)
+			drawSprites(bombs,g,flat,onGround,shadow);
+		else if(role==Role.FIRE)
+			drawSprites(fires,g,flat,onGround,shadow);
+		else if(role==Role.FLOOR)
+			drawSprites(floors,g,flat,onGround,shadow);
+		else if(role==Role.HERO)
+			drawSprites(heroes,g,flat,onGround,shadow);
+		else if(role==Role.ITEM)
+			drawSprites(items,g,flat,onGround,shadow);
 	}
-	
-	private void removeHero(Hero hero)
-	{	heroes.remove(hero);	
-	}
 
-	public ArrayList<Hero> getHeroes()
-	{	return heroes;
-	}
-
-	public void drawHeroes(Graphics g, boolean flat, boolean onGround, boolean shadow)
-	{	for(int i=0;i<heroes.size();i++)
-		{	Hero tempS = heroes.get(i);
+	private <T extends Sprite> void drawSprites(ArrayList<T> sprites, Graphics g, boolean flat, boolean onGround, boolean shadow)
+	{	for(int i=0;i<sprites.size();i++)
+		{	T tempS = sprites.get(i);
 			AbstractAbility temp = tempS.modulateStateAbility(StateAbilityName.SPRITE_FLAT);
 			if(((temp.isActive()) == flat) && (tempS.isOnGround() == onGround))
 				if(shadow)
@@ -143,260 +119,6 @@ public class Tile
 				else
 					drawSprite(g,tempS);
 		}
-	}
-	
-
-    /////////////////////////////////////////////////////////////////
-	// BOMB					/////////////////////////////////////////
-	/////////////////////////////////////////////////////////////////
-	private ArrayList<Bomb> bombs;
-
-	private void addBomb(Bomb bomb)
-	{	bombs.add(bomb);		
-//		bomb.setTile(this);
-//		level.addSprite(bomb);
-	}
-	
-	private void removeBomb(Bomb bomb)
-	{	bombs.remove(bomb);	
-	}
-
-	public ArrayList<Bomb> getBombs()
-	{	return bombs;
-	}
-	
-	public void drawBombs(Graphics g, boolean flat, boolean onGround, boolean shadow)
-	{	for(int i=0;i<bombs.size();i++)
-		{	Bomb tempS = bombs.get(i);
-			AbstractAbility temp = tempS.modulateStateAbility(StateAbilityName.SPRITE_FLAT);
-			if(((temp.isActive()) == flat) && (tempS.isOnGround() == onGround))
-				if(shadow)
-					drawShadow(g,tempS);
-				else
-					drawSprite(g, tempS);
-		}
-	}
-
-	/////////////////////////////////////////////////////////////////
-	// FIRE					/////////////////////////////////////////
-	/////////////////////////////////////////////////////////////////
-	private ArrayList<Fire> fires;
-
-	private void addFire(Fire fire)
-	{	fires.add(fire);
-//		fire.setTile(this);
-//		level.addSprite(fire);
-	}
-	
-	private void removeFire(Fire fire)
-	{	fires.remove(fire);	
-	}
-
-	public ArrayList<Fire> getFires()
-	{	return fires;
-	}
-
-	public void drawFires(Graphics g, boolean flat, boolean onGround, boolean shadow)
-	{	for(int i=0;i<fires.size();i++)
-		{	Fire tempS = fires.get(i);
-			AbstractAbility temp = tempS.modulateStateAbility(StateAbilityName.SPRITE_FLAT);
-			if(((temp!=null && temp.isActive()) == flat) && (tempS.isOnGround() == onGround))
-				if(shadow)
-					drawShadow(g,tempS);
-				else
-					drawSprite(g, tempS);
-		}
-	}
-
-	/////////////////////////////////////////////////////////////////
-	// BLOCK				/////////////////////////////////////////
-	/////////////////////////////////////////////////////////////////
-	private Block block;
-
-	private void setBlock(Block block)
-	{	this.block = block;
-//		block.setCurrentPosX(posX);
-//		block.setCurrentPosY(posY);
-//		block.setTile(this);
-//		level.addSprite(block);
-	}
-	
-	private void unsetBlock(Block block)
-	{	if(this.block==block)
-			this.block = null;	
-	}
-	
-	public Block getBlock()
-	{	return block;
-	}
-	
-	public boolean hasBlock()
-	{	return block!=null;
-	}
-
-	public void drawBlock(Graphics g, boolean flat, boolean onGround, boolean shadow)
-	{	if(block!=null)
-		{	AbstractAbility temp = block.modulateStateAbility(StateAbilityName.SPRITE_FLAT);
-			if(block!=null && ((temp!=null && temp.isActive()) == flat) && (block.isOnGround() == onGround))
-				if(shadow && line!=level.getGlobalHeight()-1) //NOTE a préciser : permet d'éviter que l'ombre de la dernière ligne de blocs soit portée sur la première
-					drawShadow(g,block);
-				else
-					drawSprite(g, block);
-		}
-	}
-
-	/////////////////////////////////////////////////////////////////
-	// ITEM					/////////////////////////////////////////
-	/////////////////////////////////////////////////////////////////
-	private Item item;
-
-	public Item getItem()
-	{	return item;
-	}
-	
-	private void setItem(Item item)
-	{	this.item = item;
-//		item.setCurrentPosX(posX);
-//		item.setCurrentPosY(posY);
-//		item.setTile(this);
-//		level.addSprite(item);
-	}
-	
-	private void unsetItem(Item item)
-	{	if(this.item==item)	
-			this.item = null;	
-	}
-	
-	public void drawItem(Graphics g, boolean flat, boolean onGround, boolean shadow)
-	{	if(item!=null)
-		{	
-//if(fires.size()>0)
-//	System.out.println();
-			AbstractAbility temp = item.modulateStateAbility(StateAbilityName.SPRITE_FLAT);
-			if(item!=null && ((temp!=null && temp.isActive()) == flat) && (item.isOnGround() == onGround))
-				if(shadow)
-					drawShadow(g,item);
-				else
-					drawSprite(g, item);
-		}
-	}
-
-	/////////////////////////////////////////////////////////////////
-	// FLOOR				/////////////////////////////////////////
-	/////////////////////////////////////////////////////////////////
-	private Floor floor;
-
-	public Floor getFloor()
-	{	return floor;
-	}
-	
-	public void setFloor(Floor floor)
-	{	this.floor = floor;
-//		floor.setCurrentPosX(posX);
-//		floor.setCurrentPosY(posY);
-//		floor.setTile(this);
-//		level.addSprite(floor);
-	}
-
-/*	private void unsetFloor(Floor floor)
-	{	if(this.floor==floor)	
-			this.floor = null;	
-	}
-*/
-	public void drawFloor(Graphics g, boolean flat, boolean onGround, boolean shadow)
-	{	AbstractAbility temp = floor.modulateStateAbility(StateAbilityName.SPRITE_FLAT);
-		if(floor!=null && ((temp!=null && temp.isActive()) == flat) && (floor.isOnGround() == onGround))
-		{	if(shadow)
-				drawShadow(g,floor);
-			else
-				drawSprite(g,floor);
-		}
-	}
-
-	/////////////////////////////////////////////////////////////////
-	// GENERAL SPRITES		/////////////////////////////////////////
-	/////////////////////////////////////////////////////////////////
-	public void addSprite(Sprite sprite)
-	{	if(sprite instanceof Block)
-			setBlock((Block) sprite);
-		else if(sprite instanceof Bomb)
-			addBomb((Bomb) sprite);		
-		else if(sprite instanceof Fire)
-			addFire((Fire) sprite);		
-		else if(sprite instanceof Floor)
-			setFloor((Floor) sprite);
-		else if(sprite instanceof Hero)
-			addHero((Hero) sprite);
-		else if(sprite instanceof Item)
-			setItem((Item) sprite);
-	}
-
-	public void removeSprite(Sprite sprite)
-	{	if(sprite instanceof Block)
-			unsetBlock((Block) sprite);
-		else if(sprite instanceof Bomb)
-			removeBomb((Bomb) sprite);		
-		else if(sprite instanceof Fire)
-			removeFire((Fire) sprite);		
-//		else if(sprite instanceof Floor)
-//			unsetFloor((Floor) sprite);
-		else if(sprite instanceof Hero)
-			removeHero((Hero) sprite);
-		else if(sprite instanceof Item)
-			unsetItem((Item) sprite);
-	}
-
-	public ArrayList<Sprite> getSprites()
-	{	ArrayList<Sprite> result = new ArrayList<Sprite>();
-		// floor
-		result.add(floor);
-		// heroes
-		{	Iterator<Hero> i = heroes.iterator();
-			while(i.hasNext())
-				result.add(i.next());
-		}
-		// bombs
-		{	Iterator<Bomb> i = bombs.iterator();
-			while(i.hasNext())
-				result.add(i.next());
-		}
-		// fires
-		{	Iterator<Fire> i = fires.iterator();
-			while(i.hasNext())
-				result.add(i.next());
-		}
-		// block
-		if(block!=null)
-		{	result.add(block);
-		}		
-		// item
-		if(item!=null)
-		{	result.add(item);
-		}		
-		return result;
-	}
-
-	public ArrayList<Sprite> getSprites(Role role)
-	{	ArrayList<Sprite> result = new ArrayList<Sprite>();
-		// floor
-		if(role==Role.FLOOR)
-			result.add(floor);
-		// heroes
-		else if(role==Role.HERO)
-			result.addAll(heroes);
-		// bombs
-		else if(role==Role.BOMB)
-			result.addAll(bombs);
-		// fires
-		else if(role==Role.FIRE)
-			result.addAll(fires);
-		// block
-		else if(role==Role.BLOCK && block!=null)
-			result.add(block);
-		// item
-		else if(role==Role.ITEM && item!=null)
-			result.add(item);
-		return result;
 	}
 
 	/**
@@ -507,17 +229,17 @@ public class Tile
 
 	public void drawSelection(Graphics g, boolean flat, boolean onGround, boolean shadow)
 	{	// floor
-		drawFloor(g,flat,onGround,shadow);
+		drawSprites(Role.FLOOR,g,flat,onGround,shadow);
 		// item
-		drawItem(g,flat,onGround,shadow);
+		drawSprites(Role.ITEM,g,flat,onGround,shadow);
 		// block
-		drawBlock(g,flat,onGround,shadow);
+		drawSprites(Role.BLOCK,g,flat,onGround,shadow);
 		// fires
-		drawFires(g,flat,onGround,shadow);
+		drawSprites(Role.FIRE,g,flat,onGround,shadow);
 		// bombs
-		drawBombs(g,flat,onGround,shadow);
+		drawSprites(Role.BOMB,g,flat,onGround,shadow);
 		// heroes
-		drawHeroes(g,flat,onGround,shadow);
+		drawSprites(Role.HERO,g,flat,onGround,shadow);
 	}	
 
 	/**
@@ -571,6 +293,211 @@ public class Tile
 	}
 		
 	/////////////////////////////////////////////////////////////////
+	// HERO					/////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	private ArrayList<Hero> heroes;
+
+	private void addHero(Hero hero)
+	{	heroes.add(hero);		
+//		hero.setTile(this);
+//		level.addSprite(hero);
+	}
+	
+	private void removeHero(Hero hero)
+	{	heroes.remove(hero);	
+	}
+
+	public ArrayList<Hero> getHeroes()
+	{	return heroes;
+	}
+
+    /////////////////////////////////////////////////////////////////
+	// BOMB					/////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	private ArrayList<Bomb> bombs;
+
+	private void addBomb(Bomb bomb)
+	{	bombs.add(bomb);		
+//		bomb.setTile(this);
+//		level.addSprite(bomb);
+	}
+	
+	private void removeBomb(Bomb bomb)
+	{	bombs.remove(bomb);	
+	}
+
+	public ArrayList<Bomb> getBombs()
+	{	return bombs;
+	}
+	
+	/////////////////////////////////////////////////////////////////
+	// FIRE					/////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	private ArrayList<Fire> fires;
+
+	private void addFire(Fire fire)
+	{	fires.add(fire);
+//		fire.setTile(this);
+//		level.addSprite(fire);
+	}
+	
+	private void removeFire(Fire fire)
+	{	fires.remove(fire);	
+	}
+
+	public ArrayList<Fire> getFires()
+	{	return fires;
+	}
+
+	/////////////////////////////////////////////////////////////////
+	// BLOCK				/////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	private ArrayList<Block> blocks;
+
+	private void addBlock(Block block)
+	{	blocks.add(block);		
+//		block.setTile(this);
+//		level.addSprite(block);
+	}
+
+	private void removeBlock(Block block)
+	{	blocks.remove(block);	
+	}
+	
+	public ArrayList<Block> getBlocks()
+	{	return blocks;
+	}
+	
+	/////////////////////////////////////////////////////////////////
+	// ITEM					/////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	private ArrayList<Item> items;
+
+	private void addItem(Item item)
+	{	items.add(item);		
+//		item.setTile(this);
+//		level.addSprite(item);
+	}
+
+	private void removeItem(Item item)
+	{	items.remove(item);	
+	}
+	
+	public ArrayList<Item> getItems()
+	{	return items;
+	}
+	
+	/////////////////////////////////////////////////////////////////
+	// FLOOR				/////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	private ArrayList<Floor> floors;
+
+	private void addFloor(Floor floor)
+	{	floors.add(floor);		
+//		floor.setTile(this);
+//		level.addSprite(floor);
+	}
+
+	private void removeFloor(Floor floor)
+	{	floors.remove(floor);	
+	}
+
+	public ArrayList<Floor> getFloors()
+	{	return floors;
+	}
+
+	/////////////////////////////////////////////////////////////////
+	// GENERAL SPRITES		/////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	public void addSprite(Sprite sprite)
+	{	if(sprite instanceof Block)
+			addBlock((Block) sprite);
+		else if(sprite instanceof Bomb)
+			addBomb((Bomb) sprite);		
+		else if(sprite instanceof Fire)
+			addFire((Fire) sprite);		
+		else if(sprite instanceof Floor)
+			addFloor((Floor) sprite);
+		else if(sprite instanceof Hero)
+			addHero((Hero) sprite);
+		else if(sprite instanceof Item)
+			addItem((Item) sprite);
+	}
+
+	public void removeSprite(Sprite sprite)
+	{	if(sprite instanceof Block)
+			removeBlock((Block) sprite);
+		else if(sprite instanceof Bomb)
+			removeBomb((Bomb) sprite);		
+		else if(sprite instanceof Fire)
+			removeFire((Fire) sprite);		
+		else if(sprite instanceof Floor)
+			removeFloor((Floor) sprite);
+		else if(sprite instanceof Hero)
+			removeHero((Hero) sprite);
+		else if(sprite instanceof Item)
+			removeItem((Item) sprite);
+	}
+
+	public ArrayList<Sprite> getSprites()
+	{	ArrayList<Sprite> result = new ArrayList<Sprite>();
+		// floor
+		{	Iterator<Floor> i = floors.iterator();
+			while(i.hasNext())
+				result.add(i.next());
+		}
+		// heroes
+		{	Iterator<Hero> i = heroes.iterator();
+			while(i.hasNext())
+				result.add(i.next());
+		}
+		// bombs
+		{	Iterator<Bomb> i = bombs.iterator();
+			while(i.hasNext())
+				result.add(i.next());
+		}
+		// fires
+		{	Iterator<Fire> i = fires.iterator();
+			while(i.hasNext())
+				result.add(i.next());
+		}
+		// block
+		{	Iterator<Block> i = blocks.iterator();
+			while(i.hasNext())
+				result.add(i.next());
+		}
+		// item
+		{	Iterator<Item> i = items.iterator();
+			while(i.hasNext())
+				result.add(i.next());
+		}
+		return result;
+	}
+
+	public ArrayList<Sprite> getSprites(Role role)
+	{	ArrayList<Sprite> result = new ArrayList<Sprite>();
+		// floor
+		if(role==Role.FLOOR)
+			result.addAll(floors);
+		// heroes
+		else if(role==Role.HERO)
+			result.addAll(heroes);
+		// bombs
+		else if(role==Role.BOMB)
+			result.addAll(bombs);
+		// fires
+		else if(role==Role.FIRE)
+			result.addAll(fires);
+		// block
+		else if(role==Role.BLOCK)
+			result.addAll(blocks);
+		// item
+		else if(role==Role.ITEM)
+			result.addAll(items);
+		return result;
+	}
+
+	/////////////////////////////////////////////////////////////////
 	// EVENTS				/////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	public void spreadEvent(AbstractEvent event)
@@ -582,7 +509,8 @@ public class Tile
 	public void spreadEvent(AbstractEvent event, Role role)
 	{	// floor
 		if(role==Role.FLOOR)
-			floor.processEvent(event);
+			for(Sprite sprite: floors)
+				sprite.processEvent(event);
 		// heroes
 		else if(role==Role.HERO)
 			for(Sprite sprite: heroes)
@@ -596,11 +524,13 @@ public class Tile
 			for(Sprite sprite: fires)
 				sprite.processEvent(event);
 		// block
-		else if(role==Role.BLOCK && block!=null)
-			block.processEvent(event);
+		else if(role==Role.BLOCK)
+			for(Sprite sprite: blocks)
+				sprite.processEvent(event);
 		// item
-		else if(role==Role.ITEM && item!=null)
-			item.processEvent(event);
+		else if(role==Role.ITEM)
+			for(Sprite sprite: items)
+				sprite.processEvent(event);
 	}
 
     /////////////////////////////////////////////////////////////////
@@ -648,7 +578,7 @@ public class Tile
 
 	public boolean containsPoint(double x, double y)
 	{	boolean result;
-result = level.getTile(x, y)==this;
+result = level.getTile(x,y)==this;
 /*	
 		result = CalculusTools.isRelativelyGreaterOrEqualThan(x,posX-getDimension()/2);
 		result = result && CalculusTools.isRelativelySmallerThan(x,posX+getDimension()/2); 
@@ -683,9 +613,12 @@ result = level.getTile(x, y)==this;
 	{	if(!finished)
 		{	finished = true;
 			// block
-			if(block!=null)
-			{	block.finish();
-				block = null;
+			{	Iterator<Block> it = blocks.iterator();
+				while(it.hasNext())
+				{	Block temp = it.next();
+					temp.finish();
+					it.remove();
+				}
 			}
 			// bombs
 			{	Iterator<Bomb> it = bombs.iterator();
@@ -704,9 +637,12 @@ result = level.getTile(x, y)==this;
 				}
 			}
 			// floor
-			if(floor!=null)
-			{	floor.finish();
-				floor = null;
+			{	Iterator<Floor> it = floors.iterator();
+				while(it.hasNext())
+				{	Floor temp = it.next();
+					temp.finish();
+					it.remove();
+				}
 			}
 			// heroes
 			{	Iterator<Hero> it = heroes.iterator();
@@ -717,9 +653,12 @@ result = level.getTile(x, y)==this;
 				}
 			}
 			// item
-			if(item!=null)
-			{	item.finish();
-				item= null;
+			{	Iterator<Item> it = items.iterator();
+				while(it.hasNext())
+				{	Item temp = it.next();
+					temp.finish();
+					it.remove();
+				}
 			}
 			// misc
 			level = null;

@@ -121,14 +121,17 @@ public class Level
 	
 	public void setMatrix(Tile matrix[][])
 	{	this.matrix = matrix;
-		tileList = new ArrayList<Tile>();
-		for(int line=0;line<globalHeight;line++)
-			for(int col=0;col<globalWidth;col++)
-				tileList.add(matrix[line][col]);		
 	}
 	
 	public Tile getTile(int l, int c)
 	{	return matrix[l][c];	
+	}
+	
+	public void initTileList()
+	{	tileList = new ArrayList<Tile>();
+		for(int line=0;line<globalHeight;line++)
+			for(int col=0;col<globalWidth;col++)
+				tileList.add(matrix[line][col]);		
 	}
 	
 	public List<Tile> getTileList()
@@ -449,7 +452,8 @@ public class Level
 	// TILE LOCATION	/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	public Tile getTile(double x, double y)
-	{	x = CalculusTools.round(x);
+	{	Tile result = null;
+		x = CalculusTools.round(x);
 		y = CalculusTools.round(y);
 		double difX = x-pixelLeftX;
 		double difY = y-pixelTopY;
@@ -459,7 +463,8 @@ public class Level
 		int rdY = (int)rY;//(int)Math.round(rY);
 		int c = rdX%globalWidth;
 		int l = rdY%globalHeight;
-		return matrix[l][c];
+		result = matrix[l][c];
+		return result;
 	}	
 	public Tile getNeighborTile(int line, int col, Direction direction)
 	{	Tile result;
@@ -585,32 +590,32 @@ public class Level
 		// update floors
 		for(int line=0;line<globalHeight;line++)
 			for(int col=0;col<globalWidth;col++)
-				matrix[line][col].updateFloor();		
+				matrix[line][col].updateSprites(Role.FLOOR);		
 
 		// update items
 		for(int line=0;line<globalHeight;line++)
 			for(int col=0;col<globalWidth;col++)
-				matrix[line][col].updateItem();		
+				matrix[line][col].updateSprites(Role.ITEM);		
 
 		// update blocks
 		for(int line=0;line<globalHeight;line++)
 			for(int col=0;col<globalWidth;col++)
-				matrix[line][col].updateBlock();		
+				matrix[line][col].updateSprites(Role.BLOCK);		
 
 		// update bombs
 		for(int line=0;line<globalHeight;line++)
 			for(int col=0;col<globalWidth;col++)
-				matrix[line][col].updateBombs();		
+				matrix[line][col].updateSprites(Role.BOMB);		
 
 		// update fires
 		for(int line=0;line<globalHeight;line++)
 			for(int col=0;col<globalWidth;col++)
-				matrix[line][col].updateFires();		
+				matrix[line][col].updateSprites(Role.FIRE);		
 
 		// update heroes
 		for(int line=0;line<globalHeight;line++)
 			for(int col=0;col<globalWidth;col++)
-				matrix[line][col].updateHeroes();		
+				matrix[line][col].updateSprites(Role.HERO);		
 	}
 
 	public void draw(Graphics g)
@@ -647,22 +652,22 @@ public class Level
 			 */
 			// floor
 			for(int col=0;col<globalWidth;col++)
-				matrix[line][col].drawFloor(g,false,true,false);
+				matrix[line][col].drawSprites(Role.FLOOR,g,false,true,false);
 			// fires
 			for(int col=0;col<globalWidth;col++)
-				matrix[line][col].drawFires(g,false,true,false);
+				matrix[line][col].drawSprites(Role.FIRE,g,false,true,false);
 			// item
 			for(int col=0;col<globalWidth;col++)
-				matrix[line][col].drawItem(g,false,true,false);
+				matrix[line][col].drawSprites(Role.ITEM,g,false,true,false);
 			// block
 			for(int col=0;col<globalWidth;col++)
-				matrix[line][col].drawBlock(g,false,true,false);
+				matrix[line][col].drawSprites(Role.BLOCK,g,false,true,false);
 			// bombs
 			for(int col=0;col<globalWidth;col++)
-				matrix[line][col].drawBombs(g,false,true,false);
+				matrix[line][col].drawSprites(Role.BOMB,g,false,true,false);
 			// heroes
 			for(int col=0;col<globalWidth;col++)
-				matrix[line][col].drawHeroes(g,false,true,false);
+				matrix[line][col].drawSprites(Role.HERO,g,false,true,false);
 			
 			// shadows from the in-air sprites
 			for(int col=0;col<globalWidth;col++)

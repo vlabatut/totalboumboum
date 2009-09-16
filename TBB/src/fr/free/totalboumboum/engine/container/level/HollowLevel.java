@@ -311,6 +311,7 @@ public class HollowLevel implements Serializable
 				}
 			}
 		}
+		level.initTileList();
 	}
     
 	/////////////////////////////////////////////////////////////////

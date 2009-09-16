@@ -21,9 +21,6 @@ package fr.free.totalboumboum.engine.content.sprite.item;
  * 
  */
 
-import java.util.List;
-
-import fr.free.totalboumboum.configuration.GameVariables;
 import fr.free.totalboumboum.engine.container.tile.Tile;
 import fr.free.totalboumboum.engine.content.feature.Direction;
 import fr.free.totalboumboum.engine.content.feature.ability.ActionAbility;
@@ -73,7 +70,8 @@ public class ItemEventManager extends EventManager
 	}
 		
 	private void actionRelease(ActionEvent event)
-	{	appear();
+	{	spriteDirection = event.getAction().getDirection();
+		released();
 	}
 		
 	/////////////////////////////////////////////////////////////////
@@ -115,6 +113,10 @@ public class ItemEventManager extends EventManager
 		{	gesture = GestureName.PREPARED;
 			sprite.setGesture(gesture,spriteDirection,Direction.NONE,true);
 		}
+		else if(gesture.equals(GestureName.RELEASED))
+		{	gesture = GestureName.STANDING;
+			sprite.setGesture(gesture,spriteDirection,Direction.NONE,true);
+		}
 	}
 
 	private void engDelayOver(EngineEvent event)
@@ -132,33 +134,7 @@ public class ItemEventManager extends EventManager
 			}
 		}
 		else if(gesture.equals(GestureName.HIDING) && event.getStringParameter().equals(DelayManager.DL_RELEASE))
-		{	spriteDirection = event.getDirection();
-			// randomly find a tile
-			List<Tile> tileList = GameVariables.level.getTileList();
-			boolean done = false;
-			while(!done && tileList.size()>0)
-			{	int index = (int)(Math.random()*tileList.size());
-				Tile tile = tileList.get(index);
-				sprite.changeTile(tile);
-				SpecificAction action = new SpecificAppear(sprite);
-				ActionAbility actionAbility = sprite.modulateAction(action);
-				// can appear >> select this tile
-				if(actionAbility.isActive())
-					done = true;
-				// cannot appear >> remove the tile from the list and re-draw
-				else
-					tileList.remove(index);
-			}
-			// if no tile available : wait for the next iteration
-			if(!done)
-				sprite.addIterDelay(DelayManager.DL_RELEASE,1);
-			// else move the item to the tile and make it appear
-			else
-			{	gesture = GestureName.RELEASED;
-				sprite.setGesture(gesture,spriteDirection,Direction.NONE,true);
-				EngineEvent evt = new EngineEvent(EngineEvent.TILE_LOW_ENTER,sprite,null,sprite.getActualDirection()); //TODO to be changed by a GESTURE_CHANGE event (or equiv.)
-				sprite.getTile().spreadEvent(evt);
-			}
+		{	released();
 		}
 	}
 	
@@ -201,6 +177,21 @@ public class ItemEventManager extends EventManager
 		sprite.setGesture(gesture,spriteDirection,Direction.NONE,true);
 		EngineEvent event = new EngineEvent(EngineEvent.TILE_LOW_ENTER,sprite,null,sprite.getActualDirection()); //TODO to be changed by a GESTURE_CHANGE event (or equiv.)
 		sprite.getTile().spreadEvent(event);
+	}
+	
+	private void released()
+	{	// randomly find a tile
+		Tile tile = randomlyFindTile();
+		// if no tile available : wait for the next iteration
+		if(tile==null)
+			sprite.addIterDelay(DelayManager.DL_RELEASE,1);
+		// else move the item to the tile and make it appear
+		else
+		{	gesture = GestureName.RELEASED;
+			sprite.setGesture(gesture,spriteDirection,Direction.NONE,true);
+			EngineEvent evt = new EngineEvent(EngineEvent.TILE_LOW_ENTER,sprite,null,sprite.getActualDirection()); //TODO to be changed by a GESTURE_CHANGE event (or equiv.)
+			sprite.getTile().spreadEvent(evt);
+		}		
 	}
 	
 	/////////////////////////////////////////////////////////////////

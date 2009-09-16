@@ -73,7 +73,7 @@ public enum TilePosition
 	}	
 	
 	public static TilePosition getTilePosition(Sprite actor, Tile tile)
-	{	Sprite target = tile.getFloor();
+	{	Sprite target = tile.getFloors().get(0);
 		TilePosition result = getTilePosition(actor,target);
 		return result;
 	}	

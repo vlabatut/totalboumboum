@@ -62,7 +62,7 @@ public enum Contact
 	}
 	
 	public static Contact getContact(Sprite actor, Tile tile)
-	{	Sprite target = tile.getFloor();
+	{	Sprite target = tile.getFloors().get(0);
 		Contact result = getContact(actor,target);
 		return result;
 	}	
