@@ -60,6 +60,7 @@ public class Tile
 		fires = new ArrayList<Fire>(0);
 		blocks = new ArrayList<Block>(0);
 		items = new ArrayList<Item>(0);
+		floors = new ArrayList<Floor>(0);
 	}
 		
     /////////////////////////////////////////////////////////////////
