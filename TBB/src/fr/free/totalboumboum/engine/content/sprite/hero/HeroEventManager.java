@@ -391,6 +391,8 @@ public class HeroEventManager extends EventManager
 			if(gesture.equals(GestureName.HIDING))
 			{	// reinit the exploser
 				explosedBy = null;
+				// reinit the initial items
+				sprite.reinitInitialItems();
 				// put the protection on
 				StateAbility ability = sprite.modulateStateAbility(StateAbilityName.HERO_REBIRTH_DURATION);
 				double duration = ability.getStrength();

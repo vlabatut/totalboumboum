@@ -59,6 +59,7 @@
 			</tile>
 			<tile pos="6" >
 				<floor name="marked" />
+				<item name="points" />
 			</tile>
 			<tile pos="7" >
 				<floor name="regular" />
@@ -72,25 +73,26 @@
 		<line pos="1">
 			<tile pos="0" >
 				<floor name="marked" />
-				<item name="remotecontrol" />
 			</tile>
 			<tile pos="1" >
 				<floor name="marked" />
-				<item name="speed" />
+				<item name="remotecontrol" />
 			</tile>
 			<tile pos="2" >
 				<floor name="marked" />
-				<item name="throughbombs" />
+				<item name="speed" />
 			</tile>
 			<tile pos="3" >
 				<floor name="marked" />
-				<item name="throughwalls" />
+				<item name="throughbombs" />
 			</tile>
 			<tile pos="4" >
 				<floor name="marked" />
+				<item name="throughwalls" />
 			</tile>
 			<tile pos="5" >
 				<floor name="marked" />
+				<item name="vest" />
 			</tile>
 			<tile pos="6" >
 				<floor name="marked" />

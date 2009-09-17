@@ -64,9 +64,11 @@ public class ItemManager
 	// ITEMS			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	private LinkedList<Item> collectedItems;
-
+	private ArrayList<Item> initialItems = new ArrayList<Item>();
+	
 	public void addInitialItem(Item item)
-	{	addItem(item,true);
+	{	initialItems.add(item);
+		addItem(item,true);
 	}
 	
 	public void addItem(Item item)
@@ -169,6 +171,13 @@ public class ItemManager
 		return result;
 	}
 */	
+	
+	public void reinitInitialItems()
+	{	for(Item item: initialItems)
+		{	item.reinitItemAbilities();
+			addItem(item,true);
+		}		
+	}
 	
 	/////////////////////////////////////////////////////////////////
 	// ENGINE			/////////////////////////////////////////////
