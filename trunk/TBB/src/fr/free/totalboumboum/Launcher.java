@@ -806,6 +806,7 @@ public class Launcher
 	 * - correction d'un bug concernant la précédence temporelle de certains évènements, en particulier quand deux joueurs brûlent au cours de la même explosion
 	 * - implémentation de la constipation bombique
 	 * - correction d'un gros bug dans le calcul de distances entre sprites situés dans la classe Level
+	 * - possibilité d'avoir plusieurs blocs, floors et items dans une même case (par souci de généralisation)
 	 * 
 	 * 
 	 * - bug d'affichage quand les flammes se croisent au cours de plusieurs explosions: la dernière n'est pas affichée
@@ -992,6 +993,6 @@ public class Launcher
 	// étudier le fonctionnement de ended (sprite) pr voir quand retirer le sprite de level/tile
 	// faut émettre un évt de sortie à la disparition d'un sprite (mort, masquage, etc)
 	
-	
+	// pb avec l'ancienne IA (bingol-kentenci)
 
 }

@@ -31,6 +31,7 @@ import fr.free.totalboumboum.engine.content.feature.Direction;
 import fr.free.totalboumboum.engine.content.feature.ability.StateAbility;
 import fr.free.totalboumboum.engine.content.feature.ability.StateAbilityName;
 import fr.free.totalboumboum.engine.content.sprite.Sprite;
+import fr.free.totalboumboum.engine.content.sprite.block.Block;
 import fr.free.totalboumboum.tools.CalculusTools;
 
 public class MoveZone
@@ -304,8 +305,8 @@ public class MoveZone
 		boolean goOn = usedDirection!=Direction.NONE;
 		while(potentialObstacles.size()>0 && goOn)
 		{	PotentialObstacle po = potentialObstacles.get(0);
-//if(po.getSprite() instanceof Item)
-//	System.out.println();
+if(po.getSprite() instanceof Block)
+	System.out.println();
 			// is it an intersected obstacle?
 			if(po.getContactDistance()<0)
 				addIntersectedSprite(po.getSprite()); //NOTE and what if the obstacle is bypassed? shouldn't be in the intersected list

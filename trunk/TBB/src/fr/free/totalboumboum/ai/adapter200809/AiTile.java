@@ -303,8 +303,8 @@ public class AiTile
 			while(i.hasNext())
 			{	Hero h = i.next();
 				GestureName gesture = h.getCurrentGesture().getName();
-				if(!(gesture==GestureName.NONE
-					|| gesture==GestureName.HIDING
+				if(!(/*gesture==GestureName.NONE
+					||*/ gesture==GestureName.HIDING
 					|| gesture==GestureName.ENDED))
 				{	AiHero hero = zone.getHero(h);
 					if(hero==null)

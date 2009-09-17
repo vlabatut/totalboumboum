@@ -186,14 +186,14 @@ public class Level
 	{	return getHorizontalDistance(x1,x2,Direction.NONE);
 	}
 	
-	public double getVerticalDistance(double x1, double x2, Direction direction)
-	{	x1 = normalizePositionX(x1);
-		x2 = normalizePositionX(x2);
-		double result = processVerticalDistance(x1,x2,direction);
+	public double getVerticalDistance(double y1, double y2, Direction direction)
+	{	y1 = normalizePositionY(y1);
+		y2 = normalizePositionY(y2);
+		double result = processVerticalDistance(y1,y2,direction);
 		return result;
 	}
-	public double getVerticalDistance(double x1, double x2)
-	{	return getVerticalDistance(x1,x2,Direction.NONE);
+	public double getVerticalDistance(double y1, double y2)
+	{	return getVerticalDistance(y1,y2,Direction.NONE);
 	}
 	
 	/**

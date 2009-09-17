@@ -536,13 +536,16 @@ System.out.println();
 			// entry
 			manageEntries();
 			
-			// normal update (level and AI)
+			// update level
 			level.update();
-			Iterator<Player> i = players.iterator();
-			while(i.hasNext()/* && entryDelay<0*/)
-			{	Player temp = i.next();
-				if(!temp.isOut())
-					temp.update();
+			// update players (humans and AIs), but only after the entries are done
+//			if(started)
+			{	Iterator<Player> i = players.iterator();
+				while(i.hasNext()/* && entryDelay<0*/)
+				{	Player temp = i.next();
+					if(!temp.isOut())
+						temp.update();
+				}
 			}
 		}
 	}
@@ -681,6 +684,7 @@ System.out.println();
 	private Role[] entryRoles;
 	private Double[] entryDelays;
 	private int entryIndex = 0;
+//	private boolean started = false;
 	
 	private void initEntries()
 	{	entryIndex = 0;
@@ -736,6 +740,7 @@ System.out.println();
 //System.out.println(totalTime+": start");				
 						EngineEvent event = new EngineEvent(EngineEvent.ROUND_START);
 						level.spreadEvent(event);
+//						started = true;
 						done = true;
 					}
 					entryIndex++;
