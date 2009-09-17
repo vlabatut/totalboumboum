@@ -949,28 +949,28 @@ public class BingolKetenci extends ArtificialIntelligence {
 			for (int j = 1; j < ylim; j++) {
 				// S'il y a un mur destructible.On donne +10 points.
 				if (tab[i][j] % 10 == AI_BLOCK_WALL_SOFT) {
-					if (i<xlim-1 && tab[i + 1][j] % 10 != AI_BLOCK_BOMB
+					if (tab[i + 1][j] % 10 != AI_BLOCK_BOMB
 							&& tab[i + 1][j] % 10 != AI_BLOCK_FIRE
 							&& tab[i + 1][j] % 10 != AI_BLOCK_UNKNOWN
 							&& tab[i + 1][j] % 10 != AI_BLOCK_WALL_HARD
 							&& tab[i + 1][j] % 10 != AI_BLOCK_WALL_SOFT) {
 						pCase[i + 1][j] = pCase[i + 1][j] + 10;//a droite
 					}
-					if (i>0 && tab[i - 1][j] % 10 != AI_BLOCK_BOMB
+					if (tab[i - 1][j] % 10 != AI_BLOCK_BOMB
 							&& tab[i - 1][j] % 10 != AI_BLOCK_FIRE
 							&& tab[i - 1][j] % 10 != AI_BLOCK_UNKNOWN
 							&& tab[i - 1][j] % 10 != AI_BLOCK_WALL_HARD
 							&& tab[i - 1][j] % 10 != AI_BLOCK_WALL_SOFT) {
 						pCase[i - 1][j] = pCase[i - 1][j] + 10;//a gauche
 					}
-					if (j>0 && tab[i][j - 1] % 10 != AI_BLOCK_BOMB
+					if (tab[i][j - 1] % 10 != AI_BLOCK_BOMB
 							&& tab[i][j - 1] % 10 != AI_BLOCK_FIRE
 							&& tab[i][j - 1] % 10 != AI_BLOCK_UNKNOWN
 							&& tab[i][j - 1] % 10 != AI_BLOCK_WALL_HARD
 							&& tab[i][j - 1] % 10 != AI_BLOCK_WALL_SOFT) {
 						pCase[i][j - 1] = pCase[i][j - 1] + 10;//en haut
 					}
-					if (j<ylim-1 && tab[i][j + 1] % 10 != AI_BLOCK_BOMB
+					if (tab[i][j + 1] % 10 != AI_BLOCK_BOMB
 							&& tab[i][j + 1] % 10 != AI_BLOCK_FIRE
 							&& tab[i][j + 1] % 10 != AI_BLOCK_UNKNOWN
 							&& tab[i][j + 1] % 10 != AI_BLOCK_WALL_HARD
