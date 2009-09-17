@@ -226,9 +226,10 @@ public class AiTile
 	 */
 	private void updateSprites()
 	{	// block
-		{	Block b = tile.getBlock();
-			if(b!=null)
-			{	GestureName gesture = b.getCurrentGesture().getName();
+		{	block = null;
+			if(tile.getBlocks().size()>0)
+			{	Block b = tile.getBlocks().get(0);
+				GestureName gesture = b.getCurrentGesture().getName();
 				if(!(gesture==GestureName.NONE 
 					|| gesture==GestureName.HIDING
 					|| gesture==GestureName.ENDED))
@@ -240,8 +241,6 @@ public class AiTile
 					block.update(this);
 				}
 			}
-			else
-				block = null;
 		}
 		// bombs
 		{	bombs.clear();
@@ -282,9 +281,10 @@ public class AiTile
 			}
 		}
 		// floor
-		{	Floor f = tile.getFloor();
-			if(f!=null)
-			{	GestureName gesture = f.getCurrentGesture().getName();
+		{	floor = null;
+			if(tile.getFloors().size()>0)
+			{	Floor f = tile.getFloors().get(0);
+				GestureName gesture = f.getCurrentGesture().getName();
 				if(!(gesture==GestureName.NONE
 					|| gesture==GestureName.HIDING
 					|| gesture==GestureName.ENDED))
@@ -296,8 +296,6 @@ public class AiTile
 					floor.update(this);
 				}
 			}
-			else
-				floor = null;
 		}
 		// heroes
 		{	heroes.clear();
@@ -319,9 +317,11 @@ public class AiTile
 			}
 		}
 		// item
-		{	Item i = tile.getItem();
-			if(i!=null)
-			{	GestureName gesture = i.getCurrentGesture().getName();
+		{	item = null;
+			Iterator<Item> it = tile.getItems().iterator();
+			while(item==null && it.hasNext())
+			{	Item i = it.next();
+				GestureName gesture = i.getCurrentGesture().getName();
 				if(!(gesture==GestureName.NONE
 					|| gesture==GestureName.HIDING
 					|| gesture==GestureName.ENDED))
@@ -333,8 +333,6 @@ public class AiTile
 					item.update(this);
 				}
 			}
-			else
-				item = null;
 		}
 	}
 	/**

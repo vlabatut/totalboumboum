@@ -35,9 +35,11 @@ import fr.free.totalboumboum.engine.content.feature.ability.StateAbilityName;
 import fr.free.totalboumboum.engine.content.feature.action.SpecificAction;
 import fr.free.totalboumboum.engine.content.feature.action.consume.SpecificConsume;
 import fr.free.totalboumboum.engine.content.feature.event.ControlEvent;
+import fr.free.totalboumboum.engine.content.feature.gesture.GestureName;
 import fr.free.totalboumboum.engine.content.sprite.Sprite;
 import fr.free.totalboumboum.engine.content.sprite.block.Block;
 import fr.free.totalboumboum.engine.content.sprite.bomb.Bomb;
+import fr.free.totalboumboum.engine.content.sprite.item.Item;
 import fr.free.totalboumboum.engine.loop.Loop;
 import fr.free.totalboumboum.engine.player.Player;
 
@@ -171,15 +173,20 @@ public abstract class AiManager extends AbstractAiManager<Integer>
 	    		// bloc vide
     			zoneMatrix[y][x] = ArtificialIntelligence.AI_BLOCK_EMPTY;
 	    		// mur
-	    		if(temp.getBlock()!=null)
-	    		{	Block b = temp.getBlock();
-	    			SpecificAction action = new SpecificConsume(b);
-	    			// mur indestructible
-	    			if(sprite.isTargetPreventing(action))
-	    				zoneMatrix[y][x] = ArtificialIntelligence.AI_BLOCK_WALL_HARD;
-	    			// mur destructible
-	    			else
-	    				zoneMatrix[y][x] = ArtificialIntelligence.AI_BLOCK_WALL_SOFT;
+	    		if(temp.getBlocks().size()>0)
+	    		{	Block b = temp.getBlocks().get(0);
+	    			GestureName gesture = b.getCurrentGesture().getName();
+	    			if(!(gesture==GestureName.NONE
+						|| gesture==GestureName.HIDING
+						|| gesture==GestureName.ENDED))
+	    			{	SpecificAction action = new SpecificConsume(b);
+		    			// mur indestructible
+		    			if(sprite.isTargetPreventing(action))
+		    				zoneMatrix[y][x] = ArtificialIntelligence.AI_BLOCK_WALL_HARD;
+		    			// mur destructible
+		    			else
+		    				zoneMatrix[y][x] = ArtificialIntelligence.AI_BLOCK_WALL_SOFT;
+	    			}
 	    		}
 	    		// bombe
 	    		else if(temp.getBombs().size()>0)
@@ -192,36 +199,48 @@ public abstract class AiManager extends AbstractAiManager<Integer>
 	    		else if(temp.getFires().size()>0)
 	    			zoneMatrix[y][x] = ArtificialIntelligence.AI_BLOCK_FIRE;
 	    		// bonus/malus
-	    		else if(temp.getItem()!=null)
-	    		{	ArrayList<AbstractAbility> itemAbilities = temp.getItem().getItemAbilities();
+	    		else if(temp.getItems().size()>0)
+	    		{	ArrayList<Item> items = temp.getItems();
+	    			Iterator<Item> it = items.iterator();
 	    			boolean found = false;
-    				// bonus de bombe
-	    			{	Iterator<AbstractAbility> j = itemAbilities.iterator();
-		    			while(j.hasNext() && !found)
-		    			{	AbstractAbility a = j.next();
-		    				if(a instanceof StateAbility)
-		    				{	StateAbility sa = (StateAbility) a;
-		    					if(sa.getName().equals(StateAbilityName.HERO_BOMB_NUMBER))
-		    					{	found = true;
-		    						zoneMatrix[y][x] = ArtificialIntelligence.AI_BLOCK_ITEM_BOMB;	
-		    					}
-		    				}
-		    			}
+	    			while(!found && it.hasNext())
+	    			{	Item item = it.next();
+	    				GestureName gesture = item.getCurrentGesture().getName();
+	    				if(!(gesture==GestureName.NONE
+	    						|| gesture==GestureName.HIDING
+	    						|| gesture==GestureName.ENDED))
+	    				{	ArrayList<AbstractAbility> itemAbilities = item.getItemAbilities();
+			    			// bonus de bombe
+			    			{	Iterator<AbstractAbility> j = itemAbilities.iterator();
+				    			while(j.hasNext() && !found)
+				    			{	AbstractAbility a = j.next();
+				    				if(a instanceof StateAbility)
+				    				{	StateAbility sa = (StateAbility) a;
+				    					if(sa.getName().equals(StateAbilityName.HERO_BOMB_NUMBER))
+				    					{	found = true;
+				    						zoneMatrix[y][x] = ArtificialIntelligence.AI_BLOCK_ITEM_BOMB;	
+				    					}
+				    				}
+				    			}
+			    			}
+			    			// bonus de feu
+			    			if(!found)
+			    			{	Iterator<AbstractAbility> j = itemAbilities.iterator();
+				    			while(j.hasNext() && !found)
+				    			{	//AbstractAbility a = j.next();
+				    				// to avoid blocking situations, any other item is seen as a bomb extra range 
+				    				//if(a.getName().equals(StateAbility.BOMB_RANGE))
+				    				{	found = true;
+					    				zoneMatrix[y][x] = ArtificialIntelligence.AI_BLOCK_ITEM_FIRE;
+				    				}
+				    			}
+			    			}
+			    			if(!found)
+			    			{	found = true;
+			    				zoneMatrix[y][x] = ArtificialIntelligence.AI_BLOCK_UNKNOWN;			    			
+			    			}
+	    				}	    				
 	    			}
-	    			// bonus de feu
-	    			if(!found)
-	    			{	Iterator<AbstractAbility> j = itemAbilities.iterator();
-		    			while(j.hasNext() && !found)
-		    			{	//AbstractAbility a = j.next();
-		    				// to avoid blocking situations, any other item is seen as a bomb extra range 
-		    				//if(a.getName().equals(StateAbility.BOMB_RANGE))
-		    				{	found = true;
-			    				zoneMatrix[y][x] = ArtificialIntelligence.AI_BLOCK_ITEM_FIRE;
-		    				}
-		    			}
-	    			}
-	    			if(!found)
-	    				zoneMatrix[y][x] = ArtificialIntelligence.AI_BLOCK_UNKNOWN;
 	    		}
 	    	}
 	    }

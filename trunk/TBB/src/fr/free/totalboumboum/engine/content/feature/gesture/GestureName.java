@@ -23,9 +23,6 @@ package fr.free.totalboumboum.engine.content.feature.gesture;
 
 public enum GestureName
 {	
-	/** the sprite is not performing any action (hasn't join the zone yet) (automatically generated gesture) */
-	NONE,
-	
 	/** the sprite is suddenly appearing in the zone */
 	APPEARING,
 	
@@ -70,6 +67,9 @@ public enum GestureName
 	
 	/** the sprite is finishing an aerial move (on its own or not) */
 	LANDING,
+	
+	/** the sprite is not performing any action (hasn't join the zone yet) (automatically generated gesture) */
+	NONE,
 	
 	/** the sprite has been slightly pushed, but not enough to be moved yet */ 
 	OSCILLATING,

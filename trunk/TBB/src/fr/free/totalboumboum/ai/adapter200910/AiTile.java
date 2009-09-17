@@ -73,26 +73,17 @@ public class AiTile
 	 */
 	void finish()
 	{	// block
-		if(block!=null)
-		{	block.finish();	
-			block = null;
-		}
+		finishSprites(blocks);
 		// bombs
 		finishSprites(bombs);
 		// fires
 		finishSprites(fires);
 		// floor
-		if(floor!=null)
-		{	floor.finish();	
-			floor = null;
-		}
+		finishSprites(floors);
 		// heroes
 		finishSprites(heroes);
 		// item
-		if(item!=null)
-		{	item.finish();	
-			item = null;
-		}	
+		finishSprites(items);
 	}
 	
 	@Override
@@ -150,27 +141,28 @@ public class AiTile
 	/////////////////////////////////////////////////////////////////
 	// SPRITES			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	/** block éventuellement contenu dans cette case */
-	private AiBlock block = null;
+	/** liste des blocks éventuellement contenus dans cette case */
+	private final ArrayList<AiBlock> blocks = new ArrayList<AiBlock>();
 	/** liste des bombes éventuellement contenues dans cette case */
 	private final ArrayList<AiBomb> bombs = new ArrayList<AiBomb>();
 	/** liste des feux éventuellement contenus dans cette case */
 	private final ArrayList<AiFire> fires = new ArrayList<AiFire>();
-	/** sol de cette case */
-	private AiFloor floor = null;
+	/** liste des sols éventuellement contenus dans cette case */
+	private final ArrayList<AiFloor> floors = new ArrayList<AiFloor>();
 	/** liste des personnages éventuellement contenus dans cette case */
 	private final ArrayList<AiHero> heroes = new ArrayList<AiHero>();
-	/** item éventuellement contenu dans cette case */
-	private AiItem item = null;
+	/** liste des items éventuellement contenus dans cette case */
+	private final ArrayList<AiItem> items = new ArrayList<AiItem>();
 
 	/** 
-	 * renvoie le block contenu dans cette case 
-	 * ou null s'il n'y a pas de block dans cette case
+	 * renvoie la liste des blocks contenus dans cette case 
+	 * (la liste peut être vide)
 	 * 
-	 * @return	le bloc éventuellement contenu dans cette case
+	 * @return	les blocks éventuellement contenus dans cette case
 	 */
-	public AiBlock getBlock()
-	{	return block;	
+	public Collection<AiBlock> getBlocks()
+	{	Collection<AiBlock> result = Collections.unmodifiableCollection(blocks);
+		return result;	
 	}
 	/** 
 	 * renvoie la liste des bombes contenues dans cette case 
@@ -193,13 +185,14 @@ public class AiTile
 		return result;	
 	}
 	/** 
-	 * renvoie le sol de cette case 
-	 * (il y a forcément un sol)
+	 * renvoie les sols de cette case 
+	 * (il y a forcément au moins un sol)
 	 * 
-	 * @return	le sol contenu dans cette case
+	 * @return	les sols contenus dans cette case
 	 */
-	public AiFloor getFloor()
-	{	return floor;	
+	public Collection<AiFloor> getFloors()
+	{	Collection<AiFloor> result = Collections.unmodifiableCollection(floors);
+		return result;	
 	}
 	/** 
 	 * renvoie la liste des personnages contenus dans cette case 
@@ -212,13 +205,14 @@ public class AiTile
 		return result;	
 	}
 	/** 
-	 * renvoie l'item (apparent) contenu dans cette case 
-	 * ou null s'il n'y a pas d'item apparent dans cette case
+	 * renvoie la liste des items contenus dans cette case 
+	 * (la liste peut être vide)
 	 * 
-	 * @return	l'item éventuellement contenu dans cette case
+	 * @return	les items éventuellement contenus dans cette case
 	 */
-	public AiItem getItem()
-	{	return item;	
+	public Collection<AiItem> getItems()
+	{	Collection<AiItem> result = Collections.unmodifiableCollection(items);
+		return result;	
 	}
 	
 	/** 
@@ -226,28 +220,29 @@ public class AiTile
 	 */
 	private void updateSprites()
 	{	// block
-		{	Block b = tile.getBlock();
-			if(b!=null)
-			{	GestureName gesture = b.getCurrentGesture().getName();
-				if(!(gesture==GestureName.NONE 
+		{	blocks.clear();
+			Iterator<Block> it = tile.getBlocks().iterator();
+			while(it.hasNext())
+			{	Block b = it.next();
+				GestureName gesture = b.getCurrentGesture().getName();
+				if(!(gesture==GestureName.NONE
 					|| gesture==GestureName.HIDING
 					|| gesture==GestureName.ENDED))
-				{	block = zone.getBlock(b);
+				{	AiBlock block = zone.getBlock(b);
 					if(block==null)
 					{	block = new AiBlock(this,b);
 						zone.addBlock(block);
 					}
 					block.update(this);
+					blocks.add(block);
 				}
 			}
-			else
-				block = null;
 		}
 		// bombs
 		{	bombs.clear();
-			Iterator<Bomb> i = tile.getBombs().iterator();
-			while(i.hasNext())
-			{	Bomb b = i.next();
+			Iterator<Bomb> it = tile.getBombs().iterator();
+			while(it.hasNext())
+			{	Bomb b = it.next();
 				GestureName gesture = b.getCurrentGesture().getName();
 				if(!(gesture==GestureName.NONE
 					|| gesture==GestureName.HIDING
@@ -264,9 +259,9 @@ public class AiTile
 		}
 		// fires
 		{	fires.clear();
-			Iterator<Fire> i = tile.getFires().iterator();
-			while(i.hasNext())
-			{	Fire f = i.next();
+			Iterator<Fire> it = tile.getFires().iterator();
+			while(it.hasNext())
+			{	Fire f = it.next();
 				GestureName gesture = f.getCurrentGesture().getName();
 				if(!(gesture==GestureName.NONE
 					|| gesture==GestureName.HIDING
@@ -282,28 +277,29 @@ public class AiTile
 			}
 		}
 		// floor
-		{	Floor f = tile.getFloor();
-			if(f!=null)
-			{	GestureName gesture = f.getCurrentGesture().getName();
+		{	floors.clear();
+			Iterator<Floor> it = tile.getFloors().iterator();
+			while(it.hasNext())
+			{	Floor f = it.next();
+				GestureName gesture = f.getCurrentGesture().getName();
 				if(!(gesture==GestureName.NONE
 					|| gesture==GestureName.HIDING
 					|| gesture==GestureName.ENDED))
-				{	floor = zone.getFloor(f);
+				{	AiFloor floor = zone.getFloor(f);
 					if(floor==null)
 					{	floor = new AiFloor(this,f);
 						zone.addFloor(floor);
 					}
 					floor.update(this);
+					floors.add(floor);
 				}
 			}
-			else
-				floor = null;
 		}
 		// heroes
 		{	heroes.clear();
-			Iterator<Hero> i = tile.getHeroes().iterator();
-			while(i.hasNext())
-			{	Hero h = i.next();
+			Iterator<Hero> it = tile.getHeroes().iterator();
+			while(it.hasNext())
+			{	Hero h = it.next();
 				GestureName gesture = h.getCurrentGesture().getName();
 				if(!(gesture==GestureName.NONE
 					|| gesture==GestureName.HIDING
@@ -319,22 +315,23 @@ public class AiTile
 			}
 		}
 		// item
-		{	Item i = tile.getItem();
-			if(i!=null)
-			{	GestureName gesture = i.getCurrentGesture().getName();
+		{	items.clear();
+			Iterator<Item> it = tile.getItems().iterator();
+			while(it.hasNext())
+			{	Item i = it.next();
+				GestureName gesture = i.getCurrentGesture().getName();
 				if(!(gesture==GestureName.NONE
 					|| gesture==GestureName.HIDING
 					|| gesture==GestureName.ENDED))
-				{	item = zone.getItem(i);
+				{	AiItem item = zone.getItem(i);
 					if(item==null)
 					{	item = new AiItem(this,i);
 						zone.addItem(item);
 					}
 					item.update(this);
+					items.add(item);
 				}
 			}
-			else
-				item = null;
 		}
 	}
 	/**
