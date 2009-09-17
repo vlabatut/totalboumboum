@@ -15,7 +15,7 @@ import fr.free.totalboumboum.ai.adapter200708.ArtificialIntelligence;
  * il controle tout d'abord s'il y a un danger pour lui.S'il y en a,il bouge
  * seulement pour se sauver.
  */
-public class CopyOfBingolKetenci extends ArtificialIntelligence {
+public class BingolKetenci1 extends ArtificialIntelligence {
 	private static final long serialVersionUID = 1L;
 	/** position de la derniere bombe qui est mis par AI. */
 	private int lastBombPos[];
@@ -76,7 +76,7 @@ public class CopyOfBingolKetenci extends ArtificialIntelligence {
 	/***************************************************************************
 	 * /** Constructeur.
 	 */
-	public CopyOfBingolKetenci() {
+	public BingolKetenci1() {
 		super("BinglKtnci");
 		lastMove = AI_ACTION_DO_NOTHING;
 
@@ -949,28 +949,28 @@ public class CopyOfBingolKetenci extends ArtificialIntelligence {
 			for (int j = 1; j < ylim; j++) {
 				// S'il y a un mur destructible.On donne +10 points.
 				if (tab[i][j] % 10 == AI_BLOCK_WALL_SOFT) {
-					if (tab[i + 1][j] % 10 != AI_BLOCK_BOMB
+					if (i<xlim-1 && tab[i + 1][j] % 10 != AI_BLOCK_BOMB
 							&& tab[i + 1][j] % 10 != AI_BLOCK_FIRE
 							&& tab[i + 1][j] % 10 != AI_BLOCK_UNKNOWN
 							&& tab[i + 1][j] % 10 != AI_BLOCK_WALL_HARD
 							&& tab[i + 1][j] % 10 != AI_BLOCK_WALL_SOFT) {
 						pCase[i + 1][j] = pCase[i + 1][j] + 10;//a droite
 					}
-					if (tab[i - 1][j] % 10 != AI_BLOCK_BOMB
+					if (i>0 && tab[i - 1][j] % 10 != AI_BLOCK_BOMB
 							&& tab[i - 1][j] % 10 != AI_BLOCK_FIRE
 							&& tab[i - 1][j] % 10 != AI_BLOCK_UNKNOWN
 							&& tab[i - 1][j] % 10 != AI_BLOCK_WALL_HARD
 							&& tab[i - 1][j] % 10 != AI_BLOCK_WALL_SOFT) {
 						pCase[i - 1][j] = pCase[i - 1][j] + 10;//a gauche
 					}
-					if (tab[i][j - 1] % 10 != AI_BLOCK_BOMB
+					if (j>0 && tab[i][j - 1] % 10 != AI_BLOCK_BOMB
 							&& tab[i][j - 1] % 10 != AI_BLOCK_FIRE
 							&& tab[i][j - 1] % 10 != AI_BLOCK_UNKNOWN
 							&& tab[i][j - 1] % 10 != AI_BLOCK_WALL_HARD
 							&& tab[i][j - 1] % 10 != AI_BLOCK_WALL_SOFT) {
 						pCase[i][j - 1] = pCase[i][j - 1] + 10;//en haut
 					}
-					if (tab[i][j + 1] % 10 != AI_BLOCK_BOMB
+					if (j<ylim-1 && tab[i][j + 1] % 10 != AI_BLOCK_BOMB
 							&& tab[i][j + 1] % 10 != AI_BLOCK_FIRE
 							&& tab[i][j + 1] % 10 != AI_BLOCK_UNKNOWN
 							&& tab[i][j + 1] % 10 != AI_BLOCK_WALL_HARD
