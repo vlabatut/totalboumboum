@@ -172,6 +172,9 @@ public class StateAbilityName
 	/** type of contagion: 0=none 1=share as is 2=share with reinit 3=transmission as is 4=transmission with reinit*/
 	public static final String ITEM_CONTAGION_MODE = "ITEM_CONTAGION_MODE";
 
+	/** used for the crown mode (just counting points) */
+	public static final String ITEM_CROWN = "ITEM_CROWN";
+
 	/** indicates if the item is a part of a group (whose number corresponds to the strength) */
 	public static final String ITEM_GROUP = "ITEM_GROUP";
 	

@@ -163,6 +163,14 @@
 			</abilities>
 		</item>
 		
+		<item name="points" folder="points" >
+			<abilities>
+				<ability >
+					<name value="ITEM_CROWN" />
+				</ability>
+			</abilities>
+		</item>
+
 		<item name="random" folder="random" >
 			<!-- extra bomb -->		
 			<abilities>
@@ -233,7 +241,7 @@
 		
 		<item name="speed" folder="speed" >
 			<abilities>
-				<ability strength="1">
+				<ability strength="1" time="15000" >
 					<name value="HERO_WALK_SPEED_MODULATION" />
 				</ability>
 				
@@ -264,6 +272,24 @@
 				</ability>
 			</abilities>
 		</item>
+
+		<item name="vest" folder="vest" >
+			<abilities>
+				<ability strength="50"  frame="true" time="30000" >
+					<name value="SPRITE_TWINKLE_COLOR"/>
+				</ability>
+				<ability strength="50"  frame="true" time="30000" >
+					<name value="SPRITE_TWINKLE_NORMAL"/>
+				</ability>
+				<ability strength="-1" frame="true" time="30000" >
+					<name value="SPRITE_TWINKLE" />
+				</ability>
+				<ability time="30000">
+					<name value="HERO_FIRE_PROTECTION" />
+				</ability>
+			</abilities>
+		</item>
 	</concrete-items>
+
 
 </itemset>

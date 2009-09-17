@@ -992,7 +992,4 @@ public class Launcher
 	
 	// étudier le fonctionnement de ended (sprite) pr voir quand retirer le sprite de level/tile
 	// faut émettre un évt de sortie à la disparition d'un sprite (mort, masquage, etc)
-	
-	// pb avec l'ancienne IA (bingol-kentenci)
-
 }

@@ -619,6 +619,10 @@ public abstract class Sprite
 	public void spriteEnded()
 	{	itemManager.spriteEnded();		
 	}
+	
+	public void reinitInitialItems()
+	{	itemManager.reinitInitialItems();	
+	}
 
 	/////////////////////////////////////////////////////////////////
 	// MODULATIONS		/////////////////////////////////////////////
