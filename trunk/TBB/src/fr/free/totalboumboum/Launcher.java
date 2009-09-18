@@ -807,6 +807,7 @@ public class Launcher
 	 * - implémentation de la constipation bombique
 	 * - correction d'un gros bug dans le calcul de distances entre sprites situés dans la classe Level
 	 * - possibilité d'avoir plusieurs blocs, floors et items dans une même case (par souci de généralisation)
+	 * - système permettant de relacher les items à la mort du joueur
 	 * 
 	 * 
 	 * - bug d'affichage quand les flammes se croisent au cours de plusieurs explosions: la dernière n'est pas affichée
@@ -974,20 +975,16 @@ public class Launcher
 	 * 		2 contagion partagée avec abilités courantes
 	 * 		3 contagion transmise avec raz des abilités
 	 * 		4 contagion transmise avec abilités courantes
-	 * - mort du joueur :
+	 * - guérison par un bonus 
 	 * 		0 disparition pure & simple
 	 * 		- retour en jeu
 	 * 			1 réinitialisation des abilités
 	 * 			2 les abilités continuent pareil
-	 * - guérison par un bonus 
-	 * 		idem
 	 */
 
 	// - empêcher d'appuyer sur esc quand ça exulte déjà (p-ê en testant la modulation sur exultation?)
 	// 		empêcher toute action pendant l'exultation, en fait...
 	// - cas particulier : item apparaissant dans une explosion de bloc, avec un joueur déjà sur le bloc (il a passe-muraille et résistance au feu) : l'item doit être ramassé dès qu'il a fini d'apparaitre, en théorie
-	// - donner la possibilité de définir un item "pied à l'étrier" pr les joueurs qui sont mort et renaissent (plutot que systématiquement donner l'invulnérabilité ?)
-	// - vérifier que le joueur ne perd jamais les items initaux quand il meurt
 	// - quand le joueur meurt, ses bombes télécommandées doivent exploser
 	
 	// étudier le fonctionnement de ended (sprite) pr voir quand retirer le sprite de level/tile
