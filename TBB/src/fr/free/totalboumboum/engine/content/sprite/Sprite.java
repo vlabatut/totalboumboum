@@ -154,7 +154,7 @@ public abstract class Sprite
 	{	String result;
 		result = getClass().getSimpleName();
 		if(tile!=null)
-			result = result+"("+tile.getLine()+","+tile.getCol()+")";
+			result = result+"["+name+"]("+tile.getLine()+","+tile.getCol()+")";
 		result = result+"("+getCurrentPosX()+","+getCurrentPosY()+","+getCurrentPosZ()+")";
 		return result;
 	}
@@ -256,6 +256,10 @@ public abstract class Sprite
 				temp.setToBeRemovedFromSprite(null);
 			}
 		}
+	}
+	
+	public void spriteEnded()
+	{	itemManager.releaseAllItems();		
 	}
 	
 	/////////////////////////////////////////////////////////////////
@@ -593,19 +597,19 @@ public abstract class Sprite
 	}
 	
 	public void addItem(Item item)
-	{	itemManager.addItem(item);	
+	{	itemManager.addIngameItem(item);	
 	}
 	
 	public void addInitialItem(Item item)
 	{	itemManager.addInitialItem(item);	
 	}
 	
-	public void releaseRandomItem()
-	{	itemManager.releaseRandomItem();	
+	public boolean releaseRandomItem()
+	{	return itemManager.releaseRandomItem();	
 	}
 	
-	public void releaseLastItem()
-	{	itemManager.releaseLastItem();	
+	public boolean releaseLastItem()
+	{	return itemManager.releaseLastItem();	
 	}
 	
 /*	public ArrayList<Item> dropAllItems()
@@ -614,10 +618,6 @@ public abstract class Sprite
 */	
 	public ArrayList<AbstractAbility> getItemsAbilities()
 	{	return itemManager.getItemAbilities();	
-	}
-	
-	public void spriteEnded()
-	{	itemManager.spriteEnded();		
 	}
 	
 	public void reinitInitialItems()
