@@ -38,6 +38,7 @@ import fr.free.totalboumboum.engine.content.feature.action.gather.SpecificGather
 import fr.free.totalboumboum.engine.content.feature.action.jump.SpecificJump;
 import fr.free.totalboumboum.engine.content.feature.action.land.SpecificLand;
 import fr.free.totalboumboum.engine.content.feature.action.punch.SpecificPunch;
+import fr.free.totalboumboum.engine.content.feature.action.transmit.SpecificTransmit;
 import fr.free.totalboumboum.engine.content.feature.event.ActionEvent;
 import fr.free.totalboumboum.engine.content.feature.event.ControlEvent;
 import fr.free.totalboumboum.engine.content.feature.event.EngineEvent;
@@ -75,6 +76,8 @@ public class HeroEventManager extends EventManager
 	public void processEvent(ActionEvent event)
 	{	if(event.getAction() instanceof SpecificConsume)
 			actionConsume(event);
+		else if(event.getAction() instanceof SpecificTransmit)
+			actionTransmit(event);
 	}
 	
 	private void actionConsume(ActionEvent event)
@@ -125,6 +128,29 @@ public class HeroEventManager extends EventManager
 				gesture = GestureName.BURNING;
 				sprite.setGesture(gesture,spriteDirection,controlDirection,true);
 			}
+		}
+	}
+
+	private void actionTransmit(ActionEvent event)
+	{	if(gesture.equals(GestureName.APPEARING) 
+			|| gesture.equals(GestureName.BOUNCING) 
+			|| gesture.equals(GestureName.CARRYING) 
+			|| gesture.equals(GestureName.DISAPPEARING) 
+			|| gesture.equals(GestureName.ENTERING)
+			|| gesture.equals(GestureName.HOLDING)
+			|| gesture.equals(GestureName.JUMPING)
+			|| gesture.equals(GestureName.LANDING)
+			|| gesture.equals(GestureName.PICKING)
+			|| gesture.equals(GestureName.PREPARED)
+			|| gesture.equals(GestureName.PUNCHING)
+			|| gesture.equals(GestureName.PUSHING)
+			|| gesture.equals(GestureName.STAGGERING)
+			|| gesture.equals(GestureName.STANDING)
+			|| gesture.equals(GestureName.THROWING)
+			|| gesture.equals(GestureName.WAITING)
+			|| gesture.equals(GestureName.WALKING))
+		{	Item item = ((SpecificTransmit)event.getAction()).getObject();
+			sprite.receiveItem(item);
 		}
 	}
 
@@ -441,7 +467,7 @@ public class HeroEventManager extends EventManager
 				{	SpecificAction action = new SpecificGather(sprite,item);
 					ActionAbility ability = sprite.modulateAction(action);
 					if(ability.isActive())
-					{	sprite.addCollectedItem(item);
+					{	sprite.collectItem(item);
 						ActionEvent evt = new ActionEvent(action);
 						item.processEvent(evt);
 					}
@@ -457,7 +483,7 @@ public class HeroEventManager extends EventManager
 			{	SpecificAction action = new SpecificGather(sprite,item);
 				ActionAbility ability = sprite.modulateAction(action);
 				if(ability.isActive())
-				{	sprite.addCollectedItem(item);
+				{	sprite.collectItem(item);
 					ActionEvent evt = new ActionEvent(action);
 					item.processEvent(evt);
 				}

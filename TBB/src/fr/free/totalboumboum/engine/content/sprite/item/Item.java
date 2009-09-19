@@ -26,6 +26,16 @@ import java.util.Iterator;
 
 import fr.free.totalboumboum.engine.content.feature.Role;
 import fr.free.totalboumboum.engine.content.feature.ability.AbstractAbility;
+import fr.free.totalboumboum.engine.content.manager.ability.AbilityManager;
+import fr.free.totalboumboum.engine.content.manager.anime.AnimeManager;
+import fr.free.totalboumboum.engine.content.manager.bombset.BombsetManager;
+import fr.free.totalboumboum.engine.content.manager.control.ControlManager;
+import fr.free.totalboumboum.engine.content.manager.delay.DelayManager;
+import fr.free.totalboumboum.engine.content.manager.event.EventManager;
+import fr.free.totalboumboum.engine.content.manager.explosion.ExplosionManager;
+import fr.free.totalboumboum.engine.content.manager.item.ItemManager;
+import fr.free.totalboumboum.engine.content.manager.modulation.ModulationManager;
+import fr.free.totalboumboum.engine.content.manager.trajectory.TrajectoryManager;
 import fr.free.totalboumboum.engine.content.sprite.Sprite;
 
 public class Item extends Sprite
@@ -88,6 +98,75 @@ public class Item extends Sprite
 	/////////////////////////////////////////////////////////////////
 	// EXECUTION		/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
+
+	/////////////////////////////////////////////////////////////////
+	// MISC				/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	/**
+	 * copy this item, which is supposed to be hiden (or to have no gesture),
+	 * have no delay, no items, etc.
+	 *  
+	 */
+	public Item copy()
+	{	Item result = new Item();
+	
+		// gesture pack
+		result.setGesturePack(gesturePack);
+		
+		// anime
+		AnimeManager animeManager = new AnimeManager(result);
+		result.setAnimeManager(animeManager);
+		
+		// trajectory
+		TrajectoryManager trajectoryManager = new TrajectoryManager(result);
+		result.setTrajectoryManager(trajectoryManager);
+		
+		// bombset
+		BombsetManager bombsetManager = new BombsetManager(result);
+		bombsetManager.setBombset(getBombsetManager().getBombset());
+		result.setBombsetManager(bombsetManager);
+		
+		// explosion
+		ExplosionManager explosionManager = new ExplosionManager(result);
+		explosionManager.setExplosion(getExplosionManager().getExplosion());
+		result.setExplosionManager(explosionManager);
+		
+		// modulations
+		ModulationManager permissionManager = new ModulationManager(result);
+		result.setModulationManager(permissionManager);
+		
+		// item
+		ItemManager itemManager = new ItemManager(result);
+		result.setItemManager(itemManager);
+		
+		// ability
+		AbilityManager abilityManager = new AbilityManager(result);
+		abilityManager.addDirectAbilities(getDirectAbilities());
+		result.setAbilityManager(abilityManager);
+		
+		// delay
+		DelayManager delayManager = new DelayManager(result);
+		result.setDelayManager(delayManager);
+		
+		// control
+		ControlManager controlManager = new ControlManager(result);
+		result.setControlManager(controlManager);
+		
+		// item abilities
+		result.originalItemAbilities = originalItemAbilities;
+		for(AbstractAbility ability: itemAbilities)
+			result.addItemAbility(ability);
+		
+		// event
+		EventManager eventManager = new ItemEventManager(result);
+		result.setEventManager(eventManager);
+		
+		// misc
+		result.setItemName(itemName);
+		result.initSprite(tile);
+
+		return result;		
+	}
 	
 	/////////////////////////////////////////////////////////////////
 	// FINISHED			/////////////////////////////////////////////

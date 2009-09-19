@@ -963,12 +963,6 @@ public class Launcher
 	 * - site : parler de la possibilité d'inclure des bombes dans le niveau, de base (pas vu dans BM officiel, mais très utilisé dans X-Blast)
 	 */
 	
-	// - rajouter la restitution des items ramassés à la mort du perso
-	// - annuler le malus : l'item donne une abilité spécifique "anti-malus"
-	// - l'éventuel malus (bonus aussi?) en cours doit être annulé lorsqu'on renait
-	//		pour ces trois points: faut associer une durée/utilisation à l'item (en plus des ablt) ce qui permettra de le réinitialiser si nécessaire
-	//			>> sauf que toutes les abilities n'ont pas forcément la même durée dans l'item. faut donc un truc au niveau des abilités
-	//			>> p-ê qu'il faut aussi une abilité "restart when dropped"
 	/* NOTE
 	 * - contagion :
 	 * 		0 pas de contagion
@@ -992,6 +986,4 @@ public class Launcher
 	// faut émettre un évt de sortie à la disparition d'un sprite (mort, masquage, etc)
 	
 	// quand on a le malus diarhée et qu'on meurt, ça pose plein de bombes en rafale (chiant) faut controler que l'action est bien possible, et interdire toute action pendant burn (ou au moins de poser des bombes)
-	// problème de collision : poser une bombe en haut de l'écran, essayer de passer de l'autre coté (en bas) : blocage
-	// rajouter une fonctionalités dans l'API IA pour avoir accès aux distances
 }

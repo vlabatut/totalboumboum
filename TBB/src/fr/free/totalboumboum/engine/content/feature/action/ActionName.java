@@ -14,6 +14,7 @@ import fr.free.totalboumboum.engine.content.feature.action.movelow.GeneralMoveLo
 import fr.free.totalboumboum.engine.content.feature.action.punch.GeneralPunch;
 import fr.free.totalboumboum.engine.content.feature.action.push.GeneralPush;
 import fr.free.totalboumboum.engine.content.feature.action.release.GeneralRelease;
+import fr.free.totalboumboum.engine.content.feature.action.transmit.GeneralTransmit;
 import fr.free.totalboumboum.engine.content.feature.action.trigger.GeneralTrigger;
 
 public enum ActionName
@@ -60,6 +61,9 @@ public enum ActionName
 	/** hero releasing an item (after he died, for instance) */
 	RELEASE,
 	
+	/** an item is transmited from one owner to another one (generally from one hero to another one) */
+	TRANSMIT,
+	
 	/** asking for a remote bomb to explode (usually performed by a hero) */
 	TRIGGER;
 	
@@ -97,6 +101,8 @@ public enum ActionName
 			result = new GeneralPush();
 		else if(this==RELEASE)
 			result = new GeneralRelease();
+		else if(this==TRANSMIT)
+			result = new GeneralTransmit();
 		else if(this==TRIGGER)
 			result = new GeneralTrigger();
 		return result;

@@ -171,6 +171,11 @@ public class StateAbilityName
 	
 	/** type of contagion: 0=none 1=share as is 2=share with reinit 3=transmission as is 4=transmission with reinit*/
 	public static final String ITEM_CONTAGION_MODE = "ITEM_CONTAGION_MODE";
+	public static final int ITEM_CONTAGION_NONE = 0;
+	public static final int ITEM_CONTAGION_SHARE_ONLY = 1;
+	public static final int ITEM_CONTAGION_SHARE_REINIT = 2;
+	public static final int ITEM_CONTAGION_GIVE_ONLY = 3;
+	public static final int ITEM_CONTAGION_GIVE_REINIT = 4;
 
 	/** used for the crown mode (just counting points) */
 	public static final String ITEM_CROWN = "ITEM_CROWN";
@@ -180,8 +185,13 @@ public class StateAbilityName
 	
 	/** indicates what to do if the holder dies: 0=disapear 1=release as is 2=release with reinit */
 	public static final String ITEM_ON_DEATH_ACTION = "ITEM_ON_DEATH_ACTION";
+	public static final int ITEM_ON_DEATH_DISAPEAR = 0;
+	public static final int ITEM_ON_DEATH_RELEASE_ONLY = 1;
+	public static final int ITEM_ON_DEATH_RELEASE_REINIT = 2;
 	
 	/** indicates what to do if the item is canceled: 0=disapear 1=release as is 2=release with reinit */
 	public static final String ITEM_ON_CANCEL_ACTION = "ITEM_ON_CANCEL_ACTION";
-	
+	public static final int ITEM_ON_CANCEL_DISAPEAR = 0;
+	public static final int ITEM_ON_CANCEL_RELEASE_ONLY = 1;
+	public static final int ITEM_ON_CANCEL_RELEASE_REINIT = 2;
 }
