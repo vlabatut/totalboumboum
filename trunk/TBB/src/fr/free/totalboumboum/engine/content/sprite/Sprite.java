@@ -596,20 +596,20 @@ public abstract class Sprite
 	{	this.itemManager = itemManager;
 	}
 	
-	public void addItem(Item item)
-	{	itemManager.addIngameItem(item);	
+	public void addCollectedItem(Item item)
+	{	itemManager.addCollectedItem(item);	
 	}
 	
 	public void addInitialItem(Item item)
 	{	itemManager.addInitialItem(item);	
 	}
 	
-	public boolean releaseRandomItem()
-	{	return itemManager.releaseRandomItem();	
+	public void releaseRandomItem()
+	{	itemManager.releaseRandomItem();	
 	}
 	
-	public boolean releaseLastItem()
-	{	return itemManager.releaseLastItem();	
+	public void releaseLastItem()
+	{	itemManager.releaseLastItem();	
 	}
 	
 /*	public ArrayList<Item> dropAllItems()

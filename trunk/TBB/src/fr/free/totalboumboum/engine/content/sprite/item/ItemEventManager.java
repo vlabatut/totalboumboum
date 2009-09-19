@@ -65,13 +65,17 @@ public class ItemEventManager extends EventManager
 	}
 		
 	private void actionGather(ActionEvent event)
-	{	gesture = GestureName.DISAPPEARING;
-		sprite.setGesture(gesture,spriteDirection,Direction.NONE,true);
+	{	if(gesture.equals(GestureName.STANDING))
+		{	gesture = GestureName.DISAPPEARING;
+			sprite.setGesture(gesture,spriteDirection,Direction.NONE,true);
+		}
 	}
 		
 	private void actionRelease(ActionEvent event)
-	{	spriteDirection = event.getAction().getDirection();
-		released();
+	{	if(gesture.equals(GestureName.HIDING) || gesture.equals(GestureName.NONE))
+		{	spriteDirection = event.getAction().getDirection();
+			released();
+		}
 	}
 		
 	/////////////////////////////////////////////////////////////////
