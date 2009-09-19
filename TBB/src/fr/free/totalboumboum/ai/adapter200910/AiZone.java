@@ -28,6 +28,7 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map.Entry;
 
+import fr.free.totalboumboum.configuration.GameVariables;
 import fr.free.totalboumboum.configuration.profile.PredefinedColor;
 import fr.free.totalboumboum.engine.container.level.Level;
 import fr.free.totalboumboum.engine.container.tile.Tile;
@@ -76,6 +77,9 @@ public class AiZone
 		initOwnHero();
 	}
 	
+	/////////////////////////////////////////////////////////////////
+	// ENGINE			/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
 	/**
 	 * met à jour cette représentation ainsi que tous ses constituants.
 	 */
@@ -102,6 +106,9 @@ public class AiZone
 		ownHero = null;
 	}
 	
+	/////////////////////////////////////////////////////////////////
+	// MISC				/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
 	@Override
 	public boolean equals(Object o)
 	{	boolean result = false;
@@ -209,6 +216,9 @@ public class AiZone
 	{	return width;	
 	}
 	
+	/////////////////////////////////////////////////////////////////
+	// TILES			/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
 	/**
 	 * renvoie la case située dans la zone à la position passée en paramètre.
 	 *   
@@ -274,7 +284,7 @@ public class AiZone
 	 */
 	public Collection<AiTile> getNeighborTiles(AiTile tile)
 	{	Collection<AiTile> result = new ArrayList<AiTile>();
-		ArrayList<Direction> directions = Direction.getAllPrimaries();
+		ArrayList<Direction> directions = Direction.getPrimaryValues();
 		Iterator<Direction> d = directions.iterator();
 		while(d.hasNext())
 		{	Direction dir = d.next();
@@ -291,7 +301,7 @@ public class AiZone
 	 * la case source de coordonnées (5,6).
 	 * <p>
 	 * Cette fonction peut être utile quand on veut savoir dans quelle direction
-	 * il faut se déplacer pour aller de source à target.
+	 * il faut se déplacer pour aller de la case source à la case target.
 	 * <p>
 	 * ATTENTION 1 : si les deux cases ne sont pas des voisines directes (ie. ayant un coté commun),
 	 * il est possible que cette méthode renvoie une direction composite,
@@ -301,7 +311,9 @@ public class AiZone
 	 * ATTENTION 2 : comme les niveaux sont circulaires, il y a toujours deux directions possibles.
 	 * Cette méthode renvoie la direction du plus court chemin (sans considérer les éventuels obstacles).
 	 * Par exemple, pour les cases (2,0) et (2,11) d'un niveau de 12 cases de largeur, le résultat sera
-	 * RIGHT, car LEFT permet également d'atteindre la case, mais en parcourant un chemin plus long. 
+	 * RIGHT, car LEFT permet également d'atteindre la case, mais en parcourant un chemin plus long.
+	 * <br><t> S>>>>>>>>>>T  distance=11
+	 * <br><t>>S..........T> distance=1
 	 * 
 	 * @param source	case de référence
 	 * @param target	case dont on veut connaitre la direction
@@ -311,10 +323,12 @@ public class AiZone
 	{	// differences
 		int dx = target.getCol()-source.getCol();
 		int dy = target.getLine()-source.getLine();
+		
 		// direction
 		Direction temp = Direction.getCompositeFromDouble(dx,dy);
 		Direction tempX = temp.getHorizontalPrimary();
 		Direction tempY = temp.getVerticalPrimary();
+		
 		// distances
 		int distDirX = Math.abs(dx);
 		int distIndirX = getWidth()-distDirX;
@@ -324,6 +338,7 @@ public class AiZone
 		int distIndirY = getHeigh()-distDirY;
 		if(distDirY>distIndirY)
 			tempY = tempY.getOpposite();
+		
 		// result
 		Direction result = Direction.getComposite(tempX,tempY);
 		return result;
@@ -361,6 +376,7 @@ public class AiZone
 	
 	/**
 	 * renvoie la représentation du bloc passé en paramètre.
+	 * 
 	 * @param block	le bloc dont on veut la représentation
 	 * @return	le AiBlock correspondant
 	 */
@@ -605,5 +621,55 @@ public class AiZone
 				found = true;
 			}
 		}
+	}
+
+	/////////////////////////////////////////////////////////////////
+	// DIRECTIONS		/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	/**
+	 * Calcule la direction pour aller du sprite source au sprite target.
+	 * Le niveau est considéré comme cyclique, i.e. le bord de droite est 
+	 * relié au bord de gauche, et le bord du haut est relié au bord du bas.
+	 * Cette méthode considère la direction correspondant à la distance la plus
+	 * courte (qui peut correspondre à un chemin passant par les bords du niveau)
+	 * La direction peut être NONE si jamais les deux sprites sont au même endroits
+	 * 
+	 * @param source	sprite de départ
+	 * @param target	sprite de destination
+	 * @return	la direction pour aller de source vers target
+	 */
+	public Direction getDirection(AiSprite<?> source, AiSprite<?> target)
+	{	Direction result;
+		if(source==null || target==null)
+			result = Direction.NONE;
+		else
+		{	double x1 = source.getPosX();
+			double y1 = source.getPosY();
+			double x2 = target.getPosX();
+			double y2 = target.getPosY();
+			result = getDirection(x1,y1,x2,y2);
+		}
+		return result;		
+	}
+	
+	/**
+	 * Calcule la direction pour aller de la position (x1,y1) à la position (x2,y2)
+	 * Le niveau est considéré comme cyclique, i.e. le bord de droite est 
+	 * relié au bord de gauche, et le bord du haut est relié au bord du bas.
+	 * Cette méthode considère la direction correspondant à la distance la plus
+	 * courte (qui peut correspondre à un chemin passant par les bords du niveau).
+	 * La direction peut être NONE si jamais les deux positions sont équivalentes.
+	 * 
+	 * @param x1	première position horizontale en pixels
+	 * @param y1	première position verticale en pixels
+	 * @param x2	seconde position horizontale en pixels
+	 * @param y2	seconde position verticale en pixels
+	 * @return
+	 */
+	public Direction getDirection(double x1, double x2, double y1, double y2)
+	{	double dx = GameVariables.level.getDeltaX(x1,x2);
+		double dy = GameVariables.level.getDeltaY(y1,y2);
+		Direction result = Direction.getCompositeFromRelativeDouble(dx,dy);
+		return result;
 	}
 }

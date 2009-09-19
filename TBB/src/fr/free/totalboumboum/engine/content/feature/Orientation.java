@@ -6,6 +6,7 @@ import java.util.Locale;
 import org.jdom.Attribute;
 import org.jdom.Element;
 
+import fr.free.totalboumboum.configuration.GameVariables;
 import fr.free.totalboumboum.engine.container.tile.Tile;
 import fr.free.totalboumboum.engine.content.sprite.Sprite;
 import fr.free.totalboumboum.tools.XmlTools;
@@ -62,7 +63,7 @@ public enum Orientation
 		if(facingDir==Direction.NONE || target==null)
 			result = Orientation.NONE;
 		else
-		{	Direction relativeDir = Direction.getCompositeFromSprites(actor,target);
+		{	Direction relativeDir = GameVariables.level.getCompositeFromSprites(actor,target);
 			// actor facing target
 			if(relativeDir.hasCommonComponent(facingDir))
 				result = Orientation.FACE;

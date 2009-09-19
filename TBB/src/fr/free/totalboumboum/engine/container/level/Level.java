@@ -42,6 +42,7 @@ import fr.free.totalboumboum.engine.content.feature.Role;
 import fr.free.totalboumboum.engine.content.feature.ability.StateAbility;
 import fr.free.totalboumboum.engine.content.feature.ability.StateAbilityName;
 import fr.free.totalboumboum.engine.content.feature.event.AbstractEvent;
+import fr.free.totalboumboum.engine.content.manager.trajectory.MoveZone;
 import fr.free.totalboumboum.engine.content.sprite.Sprite;
 import fr.free.totalboumboum.engine.loop.Loop;
 import fr.free.totalboumboum.gui.tools.MessageDisplayer;
@@ -312,8 +313,8 @@ public class Level
 	// DIRECTIONS			/////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	/**
-	 * processes the direction of s2 relatively to s1, if
-	 * considering the shortest path.
+	 * processes the direction from the sprite s1 to the sprite s2, considering the 
+	 * level is cyclic (i.e. using the shortest path).
 	 */
 	public Direction getDirection(Sprite s1, Sprite s2)
 	{	double x1 = s1.getCurrentPosX();
@@ -324,6 +325,10 @@ public class Level
 		return result;
 	}
 	
+	/**
+	 * processes the direction from the location (x1,y1) to the location (x2,y2),
+	 *  considering the level is cyclic (i.e. using the shortest path).
+	 */
 	public Direction getDirection(double x1, double y1, double x2, double y2)
 	{	x1 = normalizePositionX(x1);
 		y1 = normalizePositionY(y1);
@@ -333,6 +338,10 @@ public class Level
 		return result;
 	}
 
+	/**
+	 * processes the direction from the location x1 to the location x2,
+	 *  considering the level is cyclic (i.e. using the shortest path).
+	 */
 	public Direction getHorizontalDirection(double x1, double x2)
 	{	x1 = normalizePositionX(x1);
 		x2 = normalizePositionX(x2);
@@ -340,6 +349,10 @@ public class Level
 		return result;
 	}
 
+	/**
+	 * processes the direction from the location y1 to the location y2,
+	 *  considering the level is cyclic (i.e. using the shortest path).
+	 */
 	public Direction getVerticalDirection(double x1, double x2)
 	{	x1 = normalizePositionX(x1);
 		x2 = normalizePositionX(x2);
@@ -347,6 +360,12 @@ public class Level
 		return result;
 	}
 
+	/**
+	 * processes the overall direction from locations (x1,y1) to (x2,y2),
+	 * considering the level is cyclic. In other words, several
+	 * directions are considered, and the one corresponding to the 
+	 * shortest distance is returned.
+	 */
 	private Direction processDirection(double x1, double y1, double x2, double y2)
 	{	Direction temp;
 		Direction result = Direction.NONE;	
@@ -357,6 +376,13 @@ public class Level
 		return result;
 	}
 	
+	/**
+	 * processes the horizontal direction from locations x1 to x2,
+	 * considering the level is cyclic. In other words, two opposite
+	 * directions are considered, and the one corresponding to the 
+	 * shortest distance is returned.
+	 * The locations are supposed to have been normalized (i.e. they're in the level)
+	 */
 	private Direction processHorizontalDirection(double x1, double x2)
 	{	Direction result;
 		double dx = x2 - x1;
@@ -367,6 +393,13 @@ public class Level
 		return result;
 	}
 	
+	/**
+	 * processes the vertical direction from locations y1 to y2,
+	 * considering the level is cyclic. In other words, two opposite
+	 * directions are considered, and the one corresponding to the 
+	 * shortest distance is returned.
+	 * The locations are supposed to have been normalized (i.e. they're in the level)
+	 */
 	private Direction processVerticalDirection(double y1, double y2)
 	{	Direction result;
 		double dy = y2 - y1;
@@ -378,30 +411,114 @@ public class Level
 	}
 
 	/////////////////////////////////////////////////////////////////
+	// APPROXIMATE DIRECTIONS	/////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	
+	/**
+	 * processes the direction from s1 to s2, considering approximate 
+	 * distance (i.e. it will be NONE even if s1 and s2 are just relatively close).
+	 * It also considers the level circularity, i.e. it will choose the
+	 * directions corresponding to the shortest distances. 
+	 */
+	public Direction getCompositeFromSprites(Sprite s1, Sprite s2)
+	{	Direction result;
+		if(s1==null || s2==null)
+			result = Direction.NONE;
+		else
+		{	double x1 = s1.getCurrentPosX();
+			double y1 = s1.getCurrentPosY();
+			double x2 = s2.getCurrentPosX();
+			double y2 = s2.getCurrentPosY();
+			result = getCompositeFromLocations(x1,y1,x2,y2);
+		}
+		return result;
+	}
+
+	/**
+	 * processes the direction from the sprite in the specified MoveZone to the specified obstacle.
+	 * Approximate distance is considered (i.e. it will be NONE even if s1 and s2 
+	 * are just relatively close). It also considers the level circularity, 
+	 * i.e. it will choose the directions corresponding to the shortest distances 
+	 */
+	public Direction getCompositeFromSprites(MoveZone mz, Sprite obstacle)
+	{	Direction result;
+		if(obstacle==null)
+			result = Direction.NONE;
+		else
+		{	double x1 = mz.getCurrentX();
+			double y1 = mz.getCurrentY();
+			double x2 = obstacle.getCurrentPosX();
+			double y2 = obstacle.getCurrentPosY();
+			result = getCompositeFromLocations(x1,y1,x2,y2);
+		}
+		return result;
+	}
+	
+	/**
+	 * returns the direction from the (x1,y1) location to the (x2,y2) location.
+	 * Warning: consider approximate distance, i.e. will be NONE
+	 * if the locations are relatively close.
+	 * Also: considers the level circularity, i.e. will choose the
+	 * directions corresponding to the shortest distances 
+	 */
+	private Direction getCompositeFromLocations(double x1, double y1, double x2, double y2)
+	{	double dx = GameVariables.level.getDeltaX(x1,x2);
+		double dy = GameVariables.level.getDeltaY(y1,y2);
+		Direction result = Direction.getCompositeFromRelativeDouble(dx,dy);
+		return result;
+	}
+		
+	/////////////////////////////////////////////////////////////////
 	// DELTAS			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
+	/**
+	 * returns the difference between x1 and x2, considering the level
+	 * is cyclic and using the specified direction.
+	 */
 	public double getDeltaX(double x1, double x2, Direction direction)
 	{	x1 = normalizePositionX(x1);
 		x2 = normalizePositionX(x2);
 		double result = processDeltaX(x1,x2,direction);
 		return result;
 	}
+	
+	/**
+	 * returns the difference between x1 and x2, considering the level
+	 * is cyclic. In other words, the delta with the smallest absolute
+	 * value is returned.
+	 */
 	public double getDeltaX(double x1, double x2)
 	{	double result = getDeltaX(x1,x2,Direction.NONE);
 		return result;
 	}
 
+	/**
+	 * returns the difference between y1 and y2, considering the level
+	 * is cyclic and using the specified direction.
+	 */
 	public double getDeltaY(double y1, double y2, Direction direction)
 	{	y1 = normalizePositionY(y1);
 		y2 = normalizePositionY(y2);
 		double result = processDeltaY(y1,y2,direction);
 		return result;
 	}
+	
+	/**
+	 * returns the difference between y1 and y2, considering the level
+	 * is cyclic. In other words, the delta with the smallest absolute
+	 * value is returned.
+	 */
 	public double getDeltaY(double y1, double y2)
 	{	double result = getDeltaY(y1,y2,Direction.NONE);
 		return result;
 	}
 
+	/**
+	 * returns the difference between x1 and x2, using the specified
+	 * direction. Consequently, it may not be the delta with the smallest
+	 * absolute value (i.e. not necessarily the shortest path).
+	 * The locations are supposed to have been normalized (i.e. they're inside the level)
+	 */
 	private double processDeltaX(double x1, double x2, Direction direction)
 	{	double result;
 		double direct = x2 - x1;
@@ -425,6 +542,12 @@ public class Level
 		return result;
 	}
 
+	/**
+	 * returns the difference between y1 and y2, using the specified
+	 * direction. Consequently, it may not be the delta with the smallest
+	 * absolute value (i.e. not necessarily the shortest path)
+	 * The locations are supposed to have been normalized (i.e. they're inside the level)
+	 */
 	private double processDeltaY(double y1, double y2, Direction direction)
 	{	double result;
 		double direct = y2 - y1;

@@ -43,7 +43,6 @@ import fr.free.totalboumboum.engine.content.feature.gesture.anime.AnimesLoader;
 import fr.free.totalboumboum.engine.content.feature.gesture.modulation.ModulationsLoader;
 import fr.free.totalboumboum.engine.content.feature.gesture.trajectory.TrajectoriesLoader;
 import fr.free.totalboumboum.engine.content.sprite.SpriteFactoryLoader;
-import fr.free.totalboumboum.engine.content.sprite.item.ItemFactory;
 import fr.free.totalboumboum.tools.FileTools;
 
 public class FloorFactoryLoader extends SpriteFactoryLoader
@@ -65,7 +64,7 @@ public class FloorFactoryLoader extends SpriteFactoryLoader
 		
 		// ANIMES
 		folder = folderPath+File.separator+FileTools.FOLDER_ANIMES;
-		AnimesLoader.loadAnimes(folder,gesturePack,ItemFactory.getAnimeReplacements());
+		AnimesLoader.loadAnimes(folder,gesturePack,FloorFactory.getAnimeReplacements());
 		
 		//EXPLOSION
 		Explosion exp = loadExplosionElement(root);
