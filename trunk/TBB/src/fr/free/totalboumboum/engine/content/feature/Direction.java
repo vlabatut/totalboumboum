@@ -27,13 +27,14 @@ import java.util.Locale;
 import org.jdom.Attribute;
 import org.jdom.Element;
 
-import fr.free.totalboumboum.engine.content.manager.trajectory.MoveZone;
-import fr.free.totalboumboum.engine.content.sprite.Sprite;
 import fr.free.totalboumboum.tools.CalculusTools;
 import fr.free.totalboumboum.tools.XmlTools;
 
 public enum Direction
 {
+	/////////////////////////////////////////////////////////////////
+	// VALUES			/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
 	NONE,
 	RIGHT,
 	DOWNRIGHT,
@@ -44,6 +45,13 @@ public enum Direction
 	UP,
 	UPRIGHT;
 	
+	/////////////////////////////////////////////////////////////////
+	// ORDER			/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	/**
+	 * returns the next direction according to the following (cycling) order:
+	 * UP,UPRIGHT,RIGHT,DOWNRIGHT,DOWN,DOWNLEFT,LEFT,UPLEFT,UP
+	 */
 	public Direction getNext()
 	{	Direction result;
 		switch(this)
@@ -78,6 +86,10 @@ public enum Direction
 		return result;
 	}
 
+	/**
+	 * returns the previous direction according to the following (cycling) order:
+	 * UP,UPRIGHT,RIGHT,DOWNRIGHT,DOWN,DOWNLEFT,LEFT,UPLEFT,UP
+	 */
 	public Direction getPrevious()
 	{	Direction result;
 		switch(this)
@@ -112,6 +124,36 @@ public enum Direction
 		return result;
 	}
 	
+	/**
+	 * tests if this direction is located just after or just before the specified one,
+	 * according to the following (cycling) order:
+	 * UP,UPRIGHT,RIGHT,DOWNRIGHT,DOWN,DOWNLEFT,LEFT,UPLEFT,UP 
+	 */
+	public boolean isNeighbor(Direction direction)
+	{	return this==direction || getNext()==direction || getPrevious()==direction;
+	}
+
+	/////////////////////////////////////////////////////////////////
+	// GENERAL			/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	/**
+	 * returns the opposite direction (RIGHT for LEFT, UPRIGHT for DOWNLEFT, etc)
+	 * @return
+	 */
+	public Direction getOpposite()
+	{	Direction result = NONE;
+		if(this!=NONE)
+			result = getNext().getNext().getNext().getNext();
+		return result;
+	}
+	
+	/////////////////////////////////////////////////////////////////
+	// PRIMARY DIRECTIONS	/////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	/**
+	 * get the horizontal component of this direction
+	 * (can be NONE, e.g. for DOWN)
+	 */
 	public Direction getHorizontalPrimary()
 	{	Direction result;
 		if(isHorizontal())
@@ -129,6 +171,10 @@ public enum Direction
 		return result;
 	}
 
+	/**
+	 * get the vertical component of this direction
+	 * (can be NONE, e.g. for RIGHT)
+	 */
 	public Direction getVerticalPrimary()
 	{	Direction result;
 		if(isVertical())
@@ -146,8 +192,10 @@ public enum Direction
 		return result;
 	}
 	
-	/*
-	 * case 0 = direction horizontale, case 1 = direction verticale
+	/**
+	 * returns an array with both primary components of this direction
+	 * result[0]: horizontal direction,
+	 * result[1]: vertical direction
 	 */
 	public Direction[] getPrimaries()
 	{	Direction result[] = new Direction[2];
@@ -173,15 +221,10 @@ public enum Direction
 		return result;
 	}
 
-	public Direction getPrimary()
-	{	Direction result = Direction.NONE;
-		if(isHorizontal())
-			result = getHorizontalPrimary();
-		else if(isVertical())
-			result = getVerticalPrimary();
-		return result;	
-	}
-	
+	/**
+	 * returns the next primary direction according to the following (cycling) order:
+	 * UP,RIGHT,DOWN,LEFT,UP
+	 */
 	public Direction getNextPrimary()
 	{	Direction result;
 		if(isPrimary())
@@ -193,6 +236,10 @@ public enum Direction
 		return result;
 	}
 	
+	/**
+	 * returns the previous primary direction according to the following (cycling) order:
+	 * UP,RIGHT,DOWN,LEFT,UP
+	 */
 	public Direction getPreviousPrimary()
 	{	Direction result;
 		if(isPrimary())
@@ -204,7 +251,11 @@ public enum Direction
 		return result;
 	}
 	
-	public static ArrayList<Direction> getAllPrimaries()
+	/**
+	 * returns the list of all primary directions
+	 * @return
+	 */
+	public static ArrayList<Direction> getPrimaryValues()
 	{	ArrayList<Direction> result = new ArrayList<Direction>();
 		result.add(DOWN);
 		result.add(LEFT);
@@ -212,11 +263,10 @@ public enum Direction
 		result.add(UP);
 		return result;
 	}
-
-	public boolean isNeighbor(Direction direction)
-	{	return this==direction || getNext()==direction || getPrevious()==direction;
-	}
 	
+	/**
+	 * tests if this direction is primary (and not composite)
+	 */
 	public boolean isPrimary()
 	{	boolean result;
 		result = this==DOWN || this==LEFT || this==RIGHT || this==UP; 
@@ -224,51 +274,72 @@ public enum Direction
 	}
 
 	/**
-	 * détermine si une direction est vraiment composite
-	 * (et pas seulement une principale ou NONE)
-	 * @return
+	 * tests if this direction is only a vertical primary direction
+	 * (and not a composite one, or NONE)
+	 */
+	public boolean isVertical()
+	{	return this==DOWN || this==UP;
+	}
+
+	/**
+	 * tests if this direction is only a horizontal primary direction
+	 * (and not a composite one, or NONE)
+	 */
+	public boolean isHorizontal()
+	{	return this==LEFT || this==RIGHT;
+	}
+	
+	/**
+	 * returns the horizontal direction corresponding to the specified delta
+	 * (will be NONE iff dx=0)
+	 */
+	public static Direction getHorizontalFromDouble(double dx)
+	{	Direction result = NONE;
+		if(dx>0)
+			result = RIGHT;
+		else if(dx<0)
+			result = LEFT;
+		return result;
+	}
+
+	/**
+	 * returns the vertical direction corresponding to the specified delta
+	 * (will be NONE iff dy=0)
+	 */
+	public static Direction getVerticalFromDouble(double dy)
+	{	Direction result = NONE;
+		if(dy>0)
+			result = DOWN;
+		else if(dy<0)
+			result = UP;
+		return result;
+	}
+	/////////////////////////////////////////////////////////////////
+	// COMPOSITE DIRECTIONS		/////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	/**
+	 * tests if this direction is composite (and not a primary or NONE)
 	 */
 	public boolean isComposite()
 	{	boolean result;
 		result = this==UPRIGHT || this==DOWNLEFT || this==DOWNRIGHT || this==UPLEFT; 
 		return result;
 	}
-	
+
 	/**
-	 * returns the opposite direction (RIGHT for LEFT, UPRIGHT for DOWNLEFT, etc)
-	 * @return
+	 * tests if this direction contains the specified primary component
 	 */
-	public Direction getOpposite()
-	{	Direction result = NONE;
-		if(this!=NONE)
-			result = getNext().getNext().getNext().getNext();
-		return result;
-	}
-	
 	public boolean containsPrimary(Direction d)
 	{	boolean result = getHorizontalPrimary() == d;
 		if(!result)
 			result = getVerticalPrimary() == d;
 		return result;
 	}
-	
-	public static boolean areOpposite(Direction d1, Direction d2)
-	{	boolean result = false;
-		result = d1 == d2.getOpposite();
-		return result;
-	}
-	
-	public boolean isVertical()
-	{	return this==DOWN || this==UP;
-	}
 
-	public boolean isHorizontal()
-	{	return this==LEFT || this==RIGHT;
-	}
-	
 	/**
-	 * les directions passées en paramètres doivent être primaires ou NONE :
-	 * la première est horizontale et la seconde est verticale
+	 * uses the both specified primary (or NONE) directions to
+	 * build and return a composite direction.
+	 * The first specified direction must be horizontal and the second vertical
 	 */
 	public static Direction getComposite(Direction p1, Direction p2)
 	{	Direction resultat = NONE;
@@ -283,6 +354,68 @@ public enum Direction
 		return resultat;
 	}
 	
+	/**
+	 * uses both specified deltas to build and return a composite direction.
+	 * dx represents the difference in location relatively to the x axis,
+	 * whereas dy is for the y axis. 
+	 * The comparison is not relative, i.e. even if dx is almost zero, it's still not zero
+	 * and a direction can be processed.
+	 */
+	public static Direction getCompositeFromDouble(double dx, double dy)
+	{	Direction horizontal = getHorizontalFromDouble(dx);
+		Direction vertical = getVerticalFromDouble(dy);
+		Direction result = getComposite(horizontal,vertical);		
+		return result;
+	}
+	
+	/**
+	 * uses both specified deltas to build and return a composite direction.
+	 * dx represents the difference in location relatively to the x axis,
+	 * whereas dy is for the y axis. 
+	 * The comparison is relative, i.e. if dx is almost zero, it's considered
+	 * to be zero, and the corresponding direction is NONE.
+	 */
+	public static Direction getCompositeFromRelativeDouble(double dx, double dy)
+	{	// horizontal component
+		Direction horizontal;
+		if(CalculusTools.isRelativelyEqualTo(dx,0))
+			horizontal = Direction.NONE;
+		else
+			horizontal = getHorizontalFromDouble(dx);
+		// vertical component
+		Direction vertical;
+		if(CalculusTools.isRelativelyEqualTo(dy,0))
+			vertical = Direction.NONE;
+		else
+			vertical = getVerticalFromDouble(dy);
+		// compose the components
+		Direction result = getComposite(horizontal,vertical);
+		return result;
+	}
+	
+	/**
+	 * tests if this direction and the specified one have common components
+	 */
+	public boolean hasCommonComponent(Direction d)
+	{	boolean result = false; 
+		Direction thisH = getHorizontalPrimary();
+		Direction thisV = getVerticalPrimary();
+		Direction dH = d.getHorizontalPrimary();
+		Direction dV = d.getVerticalPrimary();
+		if(thisH==dH && thisH!=NONE)
+			result = true;
+		else if(thisV==dV && thisV!=NONE)
+			result = true;
+		return result;		
+	}
+
+	/////////////////////////////////////////////////////////////////
+	// TRANSFORMATIONS	/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	/**
+	 * processes the direction resulting from adding the specified
+	 * direction to this direction.
+	 */
 	public Direction put(Direction direction)
 	{	Direction result;
 		Direction p1[] = getPrimaries();
@@ -303,6 +436,10 @@ public enum Direction
 		return result;
 	}	
 
+	/**
+	 * processes the direction resulting from removing the specified
+	 * direction from this direction.
+	 */
 	public Direction drop(Direction direction)
 	{	Direction result;
 		Direction p1[] = getPrimaries();
@@ -323,75 +460,25 @@ public enum Direction
 		return result;
 	}	
 	
-	public static Direction getHorizontalFromDouble(double dx)
-	{	Direction result = NONE;
-		if(dx>0)
-			result = RIGHT;
-		else if(dx<0)
-			result = LEFT;
-		return result;
-	}
-
-	public static Direction getVerticalFromDouble(double dy)
-	{	Direction result = NONE;
-		if(dy>0)
-			result = DOWN;
-		else if(dy<0)
-			result = UP;
-		return result;
-	}
-
-	public static Direction getCompositeFromDouble(double dx, double dy)
-	{	Direction horizontal = getHorizontalFromDouble(dx);
-		Direction vertical = getVerticalFromDouble(dy);
-		Direction result = getComposite(horizontal,vertical);		
-		return result;
-	}
-	
-	/*
-	 * direction from s1 to s2.
-	 * warning: consider approximate distance, i.e. will be NONE
-	 * if s1 and s2 are relatively close.
+	/////////////////////////////////////////////////////////////////
+	// MISC				/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	/**
+	 * tests if the specified directions are opposite, 
+	 * eg. RIGHT and LEFT, UPRIGHT and DOWNLEFT, etc. 
 	 */
-	public static Direction getCompositeFromSprites(Sprite s1, Sprite s2)
-	{	Direction result;
-		if(s1==null || s2==null)
-			result = Direction.NONE;
-		else
-		{	double dx = s2.getCurrentPosX()-s1.getCurrentPosX();
-			double dy = s2.getCurrentPosY()-s1.getCurrentPosY();
-			if(CalculusTools.isRelativelyEqualTo(dx,0) && CalculusTools.isRelativelyEqualTo(dy,0))
-				result = Direction.NONE;
-			else
-				result = getCompositeFromDouble(dx,dy);
-		}
-		return result;
-	}
-	public static Direction getCompositeFromSprites(MoveZone mz, Sprite obstacle)
-	{	Direction result;
-		if(obstacle==null)
-			result = Direction.NONE;
-		else
-		{	double dx = obstacle.getCurrentPosX()-mz.getCurrentX();
-			double dy = obstacle.getCurrentPosY()-mz.getCurrentY();
-			if(CalculusTools.isRelativelyEqualTo(dx,0) && CalculusTools.isRelativelyEqualTo(dy,0))
-				result = Direction.NONE;
-			else
-				result = getCompositeFromDouble(dx,dy);
-		}
+	public static boolean areOpposite(Direction d1, Direction d2)
+	{	boolean result = false;
+		result = d1 == d2.getOpposite();
 		return result;
 	}
 	
-/*	
-	public static Direction getCompositeFromSprite(AbstractSprite s, Tile tile)
-	{	Direction result;
-		double dx = tile.getPosX()-s.getCurrentPosX();
-		double dy = tile.getPosY()-s.getCurrentPosY();
-		result = getCompositeFromDouble(dx, dy);
-		return result;
-	}
-*/	
-
+	/**
+	 * returns an array of two int values corresponding to
+	 * a numeric representation of this direction.
+	 * result[0]: +1=RIGHT, -1=LEFT
+	 * result[1]: +1=DOWN, -1=UP
+	 */
 	public int[] getIntFromDirection()
 	{	int result[] = new int[2];
 		Direction p[] = getPrimaries();
@@ -413,6 +500,9 @@ public enum Direction
 		return result;
 	}
 	
+	/**
+	 * returns a random primary direction
+	 */
 	public static Direction getRandomPrimaryDirection()
 	{	Direction result = NONE;
 		int val = (int)(Math.random()*4);
@@ -433,32 +523,9 @@ public enum Direction
 		return result;
 	}
 	
-	public boolean hasCommonComponent(Direction d)
-	{	boolean result = false; 
-		Direction thisH = getHorizontalPrimary();
-		Direction thisV = getVerticalPrimary();
-		Direction dH = d.getHorizontalPrimary();
-		Direction dV = d.getVerticalPrimary();
-		if(thisH==dH && thisH!=NONE)
-			result = true;
-		else if(thisV==dV && thisV!=NONE)
-			result = true;
-		return result;		
-	}
-/*	
-	public static Direction getDirectionFromString(String string)
-	{	Direction result = NONE;
-		Direction values[] = values();
-		int i=0;
-		while(i<values.length && result==NONE)
-			if(values[i].getString().equalsIgnoreCase(string))
-				result = values[i];
-			else
-				i++;
-		return result;
-	}
-*/
-	
+	/////////////////////////////////////////////////////////////////
+	// LOADING			/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
 	// TODO à utiliser dans tous les loaders
 	/**
 	 * load a direction value.

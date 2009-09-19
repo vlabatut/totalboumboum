@@ -459,24 +459,25 @@ public class AnimesLoader
     	}    	
     }
     
-    private static void completeAnime(GesturePack pack, HashMap<GestureName,GestureName> animesReplacements, GestureName gest, GestureName repl)
-    {	Gesture gesture = pack.getGesture(gest);
-    	// create the gesture if necessary
-    	if(gesture==null)
-    	{	gesture = new Gesture();
-    		gesture.setName(gest);
-    	}
-    	// complete its animes if necessary
-    	if(gesture.hasNoAnimes())
-    	{	// get the replacement animes
-    		GestureName repl2 = animesReplacements.get(repl);
-        	// TODO if a compulsory anime is missing, should be detected here (except for abstract sprite, where it doesn't matter)
-    		if(repl2!=null)
-			{	completeAnime(pack,animesReplacements,repl,repl2);
-				Gesture gesture2 = pack.getGesture(repl);
+    private static void completeAnime(GesturePack pack, HashMap<GestureName,GestureName> animesReplacements, GestureName gestName, GestureName replName)
+    {	if(replName!=null)
+    	{	Gesture gesture = pack.getGesture(gestName);
+	    	// create the gesture if necessary
+	    	if(gesture==null)
+	    	{	gesture = new Gesture();
+	    		gesture.setName(gestName);
+	    	}
+	    	// complete its animes if necessary
+	    	if(gesture.hasNoAnimes())
+	    	{	// get the replacement animes
+	    		GestureName replName2 = animesReplacements.get(replName);
+	        	// TODO if a compulsory anime is missing, should be detected here (except for abstract sprite, where it doesn't matter)
+	    		if(replName2!=null)
+					completeAnime(pack,animesReplacements,replName,replName2);
+				Gesture replacement = pack.getGesture(replName);
 				// set it in the considered gesture
-				gesture.setAnimes(gesture2);
-			}
+				gesture.setAnimes(replacement);
+	    	}
     	}
     }
     

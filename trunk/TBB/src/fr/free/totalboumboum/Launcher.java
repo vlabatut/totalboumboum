@@ -808,6 +808,7 @@ public class Launcher
 	 * - correction d'un gros bug dans le calcul de distances entre sprites situés dans la classe Level
 	 * - possibilité d'avoir plusieurs blocs, floors et items dans une même case (par souci de généralisation)
 	 * - système permettant de relacher les items à la mort du joueur
+	 * - correction dans le calcul de la direction entre deux sprites (le côté circulaire des niveaux n'était pas pris en compte)
 	 * 
 	 * 
 	 * - bug d'affichage quand les flammes se croisent au cours de plusieurs explosions: la dernière n'est pas affichée
@@ -989,4 +990,8 @@ public class Launcher
 	
 	// étudier le fonctionnement de ended (sprite) pr voir quand retirer le sprite de level/tile
 	// faut émettre un évt de sortie à la disparition d'un sprite (mort, masquage, etc)
+	
+	// quand on a le malus diarhée et qu'on meurt, ça pose plein de bombes en rafale (chiant) faut controler que l'action est bien possible, et interdire toute action pendant burn (ou au moins de poser des bombes)
+	// problème de collision : poser une bombe en haut de l'écran, essayer de passer de l'autre coté (en bas) : blocage
+	// rajouter une fonctionalités dans l'API IA pour avoir accès aux distances
 }

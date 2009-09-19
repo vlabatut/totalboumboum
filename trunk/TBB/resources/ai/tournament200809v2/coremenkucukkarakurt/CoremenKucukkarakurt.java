@@ -755,7 +755,7 @@ public class CoremenKucukkarakurt extends ArtificialIntelligence
 	// la methode qui renvoie la liste des voisins 
 	private Collection<AiTile> getClearNeighborTiles(AiTile tile) throws StopRequestException
 	{	Collection<AiTile> result = new ArrayList<AiTile>();
-		ArrayList<Direction> directions = Direction.getAllPrimaries();
+		ArrayList<Direction> directions = Direction.getPrimaryValues();
 		Iterator<Direction> d = directions.iterator();
 		while(d.hasNext())
 		{	Direction dir = d.next();
