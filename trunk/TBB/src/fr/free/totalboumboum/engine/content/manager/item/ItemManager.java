@@ -76,6 +76,7 @@ public class ItemManager
 			addItem(item);
 		}		
 	}
+//TODO the item have to be recreated (tahnks to their name), or else it won't be possible to infect with initial items, and for instance to put a disease as an initial item
 	
 	/////////////////////////////////////////////////////////////////
 	// INGAME ITEMS				/////////////////////////////////////
