@@ -412,10 +412,25 @@ public class HeroEventManager extends EventManager
 
 	private void engIntersectionOff(EngineEvent event)
 	{	//System.out.println(">>>SPR_INTERSECTION_OFF with"+event.getSource());
+
+/*		Sprite intersected = event.getSource();
+		if(intersected == sprite)
+			intersected = event.getTarget();
+		if(intersected instanceof Hero)
+		{	System.out.println("Intersection OFF");
+		
+		}
+*/		
 	}
 
 	private void engIntersectionOn(EngineEvent event)
 	{	//System.out.println(">>>SPR_INTERSECTION_ON with"+event.getSource());
+		Sprite intersected = event.getSource();
+		if(intersected == sprite)
+			intersected = event.getTarget();
+		if(intersected instanceof Hero)
+		{	sprite.contagion(intersected);
+		}
 	}
 
 	private void engTileLowEnter(EngineEvent event)
