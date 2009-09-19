@@ -441,7 +441,7 @@ public class HeroEventManager extends EventManager
 				{	SpecificAction action = new SpecificGather(sprite,item);
 					ActionAbility ability = sprite.modulateAction(action);
 					if(ability.isActive())
-					{	sprite.addItem(item);
+					{	sprite.addCollectedItem(item);
 						ActionEvent evt = new ActionEvent(action);
 						item.processEvent(evt);
 					}
@@ -457,7 +457,7 @@ public class HeroEventManager extends EventManager
 			{	SpecificAction action = new SpecificGather(sprite,item);
 				ActionAbility ability = sprite.modulateAction(action);
 				if(ability.isActive())
-				{	sprite.addItem(item);
+				{	sprite.addCollectedItem(item);
 					ActionEvent evt = new ActionEvent(action);
 					item.processEvent(evt);
 				}
