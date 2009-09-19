@@ -34,6 +34,7 @@ import fr.free.totalboumboum.engine.content.feature.ability.StateAbility;
 import fr.free.totalboumboum.engine.content.feature.ability.StateAbilityName;
 import fr.free.totalboumboum.engine.content.feature.action.GeneralAction;
 import fr.free.totalboumboum.engine.content.feature.action.release.SpecificRelease;
+import fr.free.totalboumboum.engine.content.feature.action.transmit.SpecificTransmit;
 import fr.free.totalboumboum.engine.content.feature.event.ActionEvent;
 import fr.free.totalboumboum.engine.content.feature.event.EngineEvent;
 import fr.free.totalboumboum.engine.content.sprite.Sprite;
@@ -94,7 +95,7 @@ public class ItemManager
 	/////////////////////////////////////////////////////////////////
 	private final LinkedList<Item> collectedItems;
 	
-	public void addCollectedItem(Item item)
+	public void collectItem(Item item)
 	{	// possibly remove the existing diseases
 		StateAbility ability = item.modulateStateAbility(StateAbilityName.ITEM_CANCEL_GROUP);
 		if(ability.isActive())
@@ -140,6 +141,19 @@ public class ItemManager
 		}		
 	}
 	
+	public void receiveItem(Item item)
+	{	// add the item to the list
+		addItem(item,collectedItems);
+		
+		// stats
+		StatisticAction statAction = StatisticAction.RECEIVE_ITEM;
+		long statTime = sprite.getLoopTime();
+		String statActor = sprite.getPlayer().getFileName();
+		String statTarget = item.getItemName();
+		StatisticEvent statEvent = new StatisticEvent(statActor,statAction,statTarget,statTime);
+		sprite.addStatisticEvent(statEvent);
+	}
+	
 	/////////////////////////////////////////////////////////////////
 	// RELEASE ITEMS			/////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
@@ -163,7 +177,7 @@ public class ItemManager
 		StateAbility ability = item.modulateStateAbility(StateAbilityName.ITEM_ON_DEATH_ACTION);
 		if(ability.isActive())
 		{	// possibly reinit the item abilities
-			if(ability.getStrength()==2)
+			if(ability.getStrength()==StateAbilityName.ITEM_ON_DEATH_RELEASE_REINIT)
 				item.reinitItemAbilities();
 			// release the item
 			SpecificRelease releaseAction = new SpecificRelease(sprite,item);
@@ -196,9 +210,48 @@ public class ItemManager
 	/////////////////////////////////////////////////////////////////
 	// CONTAGION		/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	public void contagion(Sprite target)
-	{	
-		
+	public void transmitAllItems(Sprite target)
+	{	// processing the initial items
+		transmitItems(target,initialItems,true);
+
+		// processing the collected items
+		transmitItems(target,collectedItems,false);
+	}
+	
+	private void transmitItems(Sprite target, LinkedList<Item> list, boolean keepItems)
+	{	Iterator<Item> i = list.iterator();
+		while(i.hasNext())
+		{	Item item = i.next();
+			StateAbility ability = item.modulateStateAbility(StateAbilityName.ITEM_CONTAGION_MODE);
+			if(ability.isActive())
+			{	// possibly clone the item
+				if(ability.getStrength()==StateAbilityName.ITEM_CONTAGION_SHARE_ONLY
+					|| ability.getStrength()==StateAbilityName.ITEM_CONTAGION_SHARE_REINIT)
+					item = item.copy();
+				else if(ability.getStrength()==StateAbilityName.ITEM_CONTAGION_GIVE_ONLY
+					|| ability.getStrength()==StateAbilityName.ITEM_CONTAGION_GIVE_REINIT)
+					i.remove();
+					
+				// possibly reinit the item abilities
+				if(ability.getStrength()==StateAbilityName.ITEM_CONTAGION_GIVE_REINIT
+					|| ability.getStrength()==StateAbilityName.ITEM_CONTAGION_SHARE_REINIT)
+					item.reinitItemAbilities();
+				
+				// transmit the item
+				SpecificTransmit transmitAction = new SpecificTransmit(sprite,target,item);
+//TODO this action should be tested first, and so should be the release action				
+				ActionEvent evt = new ActionEvent(transmitAction);
+				target.processEvent(evt);
+
+				// stats
+				StatisticAction statAction = StatisticAction.TRANSMIT_ITEM;
+				long statTime = sprite.getLoopTime();
+				String statActor = sprite.getPlayer().getFileName();
+				String statTarget = item.getItemName();
+				StatisticEvent statEvent = new StatisticEvent(statActor,statAction,statTarget,statTime);
+				sprite.addStatisticEvent(statEvent);
+			}
+		}
 	}
 	
 	/////////////////////////////////////////////////////////////////

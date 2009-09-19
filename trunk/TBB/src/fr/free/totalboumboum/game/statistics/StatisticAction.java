@@ -25,8 +25,10 @@ import java.io.Serializable;
 
 public enum StatisticAction implements Serializable
 {	
-	/* general */
-	DROP_BOMB, LOSE_ITEM, GATHER_ITEM, BOMB_PLAYER, 
+	/* item related */
+	LOSE_ITEM, GATHER_ITEM, TRANSMIT_ITEM, RECEIVE_ITEM,
+	/* bomb related */
+	DROP_BOMB, BOMB_PLAYER,
 	/* paint */
 	WIN_TILE,
 	/* crown */

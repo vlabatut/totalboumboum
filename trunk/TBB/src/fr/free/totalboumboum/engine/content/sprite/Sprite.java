@@ -403,6 +403,10 @@ public abstract class Sprite
 	{	abilityManager.addDirectAbility(ability);
 	}
 	
+	public ArrayList<AbstractAbility> getDirectAbilities()
+	{	return abilityManager.getDirectAbilities();		
+	}
+	
 	/////////////////////////////////////////////////////////////////
 	// ANIMES			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
@@ -575,8 +579,12 @@ public abstract class Sprite
 	{	this.explosionManager = explosionManager;
 	}
 	
-	public void putExplosion()
-	{	explosionManager.putExplosion();	
+	public ExplosionManager getExplosionManager()
+	{	return explosionManager;
+	}
+	
+	public void makeExplosion()
+	{	explosionManager.makeExplosion();	
 	}
 	
 	public void setFlameRange(int flameRange)
@@ -596,8 +604,12 @@ public abstract class Sprite
 	{	this.itemManager = itemManager;
 	}
 	
-	public void addCollectedItem(Item item)
-	{	itemManager.addCollectedItem(item);	
+	public void collectItem(Item item)
+	{	itemManager.collectItem(item);	
+	}
+	
+	public void receiveItem(Item item)
+	{	itemManager.receiveItem(item);	
 	}
 	
 	public void addInitialItem(Item item)
@@ -625,7 +637,7 @@ public abstract class Sprite
 	}
 
 	public void contagion(Sprite target)
-	{	itemManager.contagion(target);	
+	{	itemManager.transmitAllItems(target);	
 	}
 
 	/////////////////////////////////////////////////////////////////

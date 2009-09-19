@@ -55,7 +55,7 @@ public class AbilityManager
 	/////////////////////////////////////////////////////////////////
 	// DIRECT ABILITIES	/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	/** abilities provided before the begining of the round (?) */
+	/** abilities provided before the begining of the round */
 	private final ArrayList<AbstractAbility> directAbilities = new ArrayList<AbstractAbility>();
 	
 	public void addDirectAbilities(ArrayList<AbstractAbility> abilities)
@@ -72,6 +72,10 @@ public class AbilityManager
 		}
 		directAbilities.add(copy);	//NOTE pourquoi toutes ces copies? la question est: qu'est-ce qui est modifié exactement dans l'ability. p-e qu'il n'est pas nécessaire de copier l'action
 		currentAbilities.add(copy.copy());
+	}
+	
+	public ArrayList<AbstractAbility> getDirectAbilities()
+	{	return directAbilities;	
 	}
 	
 	/////////////////////////////////////////////////////////////////

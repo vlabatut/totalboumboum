@@ -73,7 +73,11 @@ public class ExplosionManager
 	{	this.explosion = explosion;	
 	}
 	
-	public void putExplosion()
+	public Explosion getExplosion()
+	{	return explosion;	
+	}
+	
+	public void makeExplosion()
 	{	Tile tile = sprite.getTile();
 		// center
 //NOTE tester l'autorisation d'apparition pour le centre comme on le fait pour les autres parties de l'explosion
