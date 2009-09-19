@@ -61,15 +61,26 @@ public class ItemManager
 	}
 	
 	/////////////////////////////////////////////////////////////////
-	// ITEMS			/////////////////////////////////////////////
+	// INITIAL ITEMS	/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	private LinkedList<Item> collectedItems;
 	private ArrayList<Item> initialItems = new ArrayList<Item>();
-	
+
 	public void addInitialItem(Item item)
 	{	initialItems.add(item);
 		addItem(item);
 	}
+	
+	public void reinitInitialItems()
+	{	for(Item item: initialItems)
+		{	item.reinitItemAbilities();
+			addItem(item);
+		}		
+	}
+	
+	/////////////////////////////////////////////////////////////////
+	// INGAME ITEMS				/////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	private LinkedList<Item> collectedItems;
 	
 	public void addIngameItem(Item item)
 	{	// add item
@@ -116,6 +127,9 @@ public class ItemManager
 		}		
 	}
 	
+	/////////////////////////////////////////////////////////////////
+	// RELEASE ITEMS			/////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
 	public boolean releaseLastItem()
 	{	boolean result = false;
 		int index = collectedItems.size();
@@ -174,19 +188,23 @@ public class ItemManager
 		return result;
 	}
 	
-/*	public ArrayList<Item> dropAllItems()
-	{	ArrayList<Item> result = new ArrayList<Item>();
-		while(collectedItems.size()>0)
-			result.add(dropItem(0));
-		return result;
+	public void releaseAllItems()
+	{	int index = 0;
+		while(index<collectedItems.size())
+		{	Item item = collectedItems.get(index);
+			boolean result = releaseItem(item);
+			if(!result)
+				index++;
+		}
+		collectedItems.clear();
 	}
-*/	
 	
-	public void reinitInitialItems()
-	{	for(Item item: initialItems)
-		{	item.reinitItemAbilities();
-			addItem(item);
-		}		
+	/////////////////////////////////////////////////////////////////
+	// CONTAGION		/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	public void contagion(Sprite target)
+	{	
+		
 	}
 	
 	/////////////////////////////////////////////////////////////////
@@ -214,17 +232,6 @@ public class ItemManager
 				item.processEvent(event);
 			}
 		}
-	}
-	
-	public void releaseAllItems()
-	{	int index = 0;
-		while(index<collectedItems.size())
-		{	Item item = collectedItems.get(index);
-			boolean result = releaseItem(item);
-			if(!result)
-				index++;
-		}
-		collectedItems.clear();
 	}
 	
 	/////////////////////////////////////////////////////////////////
