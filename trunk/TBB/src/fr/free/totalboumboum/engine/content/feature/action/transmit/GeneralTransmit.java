@@ -76,8 +76,8 @@ public class GeneralTransmit extends GeneralAction
 //		Role.BOMB,
 //		Role.FIRE,
 //		Role.FLOOR,
-//		Role.HERO,
-		Role.ITEM
+		Role.HERO,
+//		Role.ITEM
     });
 	
 	@Override

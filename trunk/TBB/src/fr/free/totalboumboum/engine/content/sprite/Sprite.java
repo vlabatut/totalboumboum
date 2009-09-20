@@ -636,7 +636,7 @@ public abstract class Sprite
 	{	itemManager.reinitInitialItems();	
 	}
 
-	public void contagion(Sprite target)
+	public void transmitAllItems(Sprite target)
 	{	itemManager.transmitAllItems(target);	
 	}
 

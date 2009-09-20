@@ -762,10 +762,12 @@ if(sprite instanceof Hero)
 			if(newCollidedSprites.contains(tempSprite))
 				newCollidedSprites.remove(tempSprite);
 			else
-			{	i.remove();
+			{	// remove the sprites
+				i.remove();
+				tempSprite.removeCollidedSprite(sprite);
+				// send events
 				EngineEvent event = new EngineEvent(EngineEvent.COLLIDED_OFF,sprite,tempSprite,getActualDirection());
 				tempSprite.processEvent(event);
-				tempSprite.removeCollidedSprite(sprite);
 				event = new EngineEvent(EngineEvent.COLLIDED_OFF,tempSprite,sprite,getActualDirection().getOpposite());
 				sprite.processEvent(event);				
 			}
@@ -774,10 +776,12 @@ if(sprite instanceof Hero)
 		i = newCollidedSprites.iterator();
 		while(i.hasNext())
 		{	Sprite tempSprite = i.next();
+			// add the sprites
 			collidedSprites.add(tempSprite);
+			tempSprite.addCollidedSprite(sprite);
+			// send events
 			EngineEvent event = new EngineEvent(EngineEvent.COLLIDED_ON,sprite,tempSprite,getActualDirection());
 			tempSprite.processEvent(event);
-			tempSprite.addCollidedSprite(sprite);
 			event = new EngineEvent(EngineEvent.COLLIDED_ON,tempSprite,sprite,getActualDirection().getOpposite());
 			sprite.processEvent(event);
 		}
@@ -833,10 +837,12 @@ if(sprite instanceof Hero)
 			if(newIntersectedSprites.contains(tempSprite))
 				newIntersectedSprites.remove(tempSprite);
 			else
-			{	i.remove();
+			{	// remove the sprites
+				i.remove();
+				tempSprite.removeIntersectedSprite(sprite);
+				// send events
 				EngineEvent event = new EngineEvent(EngineEvent.INTERSECTION_OFF,sprite,tempSprite,getActualDirection());
 				tempSprite.processEvent(event);
-				tempSprite.removeIntersectedSprite(sprite);
 				event = new EngineEvent(EngineEvent.INTERSECTION_OFF,tempSprite,sprite,getActualDirection().getOpposite());
 				sprite.processEvent(event);				
 			}
@@ -845,10 +851,12 @@ if(sprite instanceof Hero)
 		i = newIntersectedSprites.iterator();
 		while(i.hasNext())
 		{	Sprite tempSprite = i.next();
+			// add sprites
 			intersectedSprites.add(tempSprite);
+			tempSprite.addIntersectedSprite(sprite);
+			// send events
 			EngineEvent event = new EngineEvent(EngineEvent.INTERSECTION_ON,sprite,tempSprite,getActualDirection());
 			tempSprite.processEvent(event);
-			tempSprite.addIntersectedSprite(sprite);
 			event = new EngineEvent(EngineEvent.INTERSECTION_ON,tempSprite,sprite,getActualDirection().getOpposite());
 			sprite.processEvent(event);
 		}

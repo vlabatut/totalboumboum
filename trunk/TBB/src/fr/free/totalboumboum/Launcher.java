@@ -846,8 +846,6 @@ public class Launcher
 
 	/* TODO PRIORITÉ HAUTE
 	 * 
-	 * - vérifier qu'on teste bien les modulation avant de réaliser les actions, notament pour release et transmit
-	 * 
 	 * - quand le joueur meurt, ses bombes télécommandées doivent exploser
 	 * 
 	 * - cas particulier : item apparaissant dans une explosion de bloc, avec un joueur déjà sur le bloc 
@@ -929,13 +927,14 @@ public class Launcher
 	 *  	  il va falloir utiliser XSD 1.1 quand ça sera possible, avec les assertions et associations, cf l'email.
 	 * 
 	 * - Actions/Abilities/Modulations
-	 *  	- vérifier qu'avant d'exécuter une action, on vérifie si le sprite concerné (actor) possède bien l'ability
+	 *  	- vérifier qu'avant d'exécuter une action, on vérifie si le sprite concerné (actor) possède bien l'ability (avec modulate)
 	 * 		- pour chaque gesture, fixer les actions autorisées 
 	 * 		- ça ne me plait pas beaucoup ces actions bidons pour tester les abilities de certains sprites. faut réfléchir à un truc plus propre
 	 * 		- il faudrait documenter le comportement par défaut du moteur, i.e. pour chaque type de sprite:
 	 * 			- qu'est-ce qu'il peut faire comme action? quelles sont les transitions? qu'est-ce qui est interdit ?
 	 * 			- ça permettra de savoir ce qui peut être modulé et ce qui ne peut pas l'être
 	 * 		- un sprite n'est a priori pas un obstacle, tout est géré par modulation (y compris pour le feu)
+	 * 
 	 * 
 	 */
 	
@@ -1008,6 +1007,9 @@ public class Launcher
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	
 	/* NOTE
+	 * 
+	 * - pb : les events d'intersection se neutralisent lors du passage d'item
+	 * 
 	 * - guérison par un bonus 
 	 * 		0 disparition pure & simple
 	 * 		- retour en jeu

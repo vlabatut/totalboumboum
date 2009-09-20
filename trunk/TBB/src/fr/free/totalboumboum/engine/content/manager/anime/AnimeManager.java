@@ -363,7 +363,7 @@ public class AnimeManager
 	}
 	
 	public Direction getCurrentDirection()
-	{	return currentDirection;		
+	{	return currentDirection;
 	}
 	
 /* ********************************

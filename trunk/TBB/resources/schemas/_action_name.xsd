@@ -16,6 +16,8 @@
 			<xsd:enumeration value="MOVELOW" />
 			<xsd:enumeration value="PUNCH" />
 			<xsd:enumeration value="PUSH" />
+			<xsd:enumeration value="RELEASE" />
+			<xsd:enumeration value="TRANSMIT" />
 			<xsd:enumeration value="TRIGGER" />
 		</xsd:restriction>
 	</xsd:simpleType>

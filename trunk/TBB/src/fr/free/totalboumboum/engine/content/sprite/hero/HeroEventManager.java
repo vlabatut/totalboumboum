@@ -308,7 +308,8 @@ public class HeroEventManager extends EventManager
 	{	//if(gesture.equals(GestureConstants.PUSHING) || gesture.equals(GestureConstants.STANDING)
 		//	 || gesture.equals(GestureConstants.WAITING) || gesture.equals(GestureConstants.WALKING))
 		if(event.getMode())
-		{	sprite.triggerBomb(); // cette mï¿½thode se charge des controles nï¿½cessaires
+		{	// cette méthode se charge des controles nécessaires
+			sprite.triggerBomb(); 
 		}
 	}
 	
@@ -450,12 +451,13 @@ public class HeroEventManager extends EventManager
 	}
 
 	private void engIntersectionOn(EngineEvent event)
-	{	//System.out.println(">>>SPR_INTERSECTION_ON with"+event.getSource());
-		Sprite intersected = event.getSource();
-		if(intersected == sprite)
-			intersected = event.getTarget();
-		if(intersected instanceof Hero)
-		{	sprite.contagion(intersected);
+	{	//System.out.println(">>>SPR_INTERSECTION_ON<"+sprite+"> with src="+event.getSource()+", trgt="+event.getTarget());
+		Sprite source = event.getSource();
+		if(source instanceof Hero)
+		{	SpecificTransmit transmitAction = new SpecificTransmit(sprite,source);
+			ActionAbility ability = sprite.modulateAction(transmitAction);
+			if(ability.isActive())
+				sprite.transmitAllItems(source);
 		}
 	}
 
