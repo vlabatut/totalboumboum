@@ -71,13 +71,13 @@ public class GeneralRelease extends GeneralAction
 	/////////////////////////////////////////////////////////////////
 	/** role of the targeted sprite */
 	private static final List<Role> allowedTargets = Arrays.asList(new Role[]{
-		Role.NONE
+//		Role.NONE
 //		Role.BLOCK,
 //		Role.BOMB,
 //		Role.FIRE,
 //		Role.FLOOR,
 //		Role.HERO,
-//		Role.ITEM
+		Role.ITEM
     });
 	
 	@Override

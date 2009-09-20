@@ -28,6 +28,13 @@ import fr.free.totalboumboum.engine.content.sprite.item.Item;
 
 public class SpecificTransmit extends SpecificAction
 {
+	/**
+	 * fake action, just for test purposes
+	 */
+	public SpecificTransmit(Sprite actor, Sprite target)
+	{	super(ActionName.TRANSMIT,actor,target);
+	}
+
 	public SpecificTransmit(Sprite actor, Sprite target, Item object)
 	{	super(ActionName.TRANSMIT,actor,target);
 		this.object = object;

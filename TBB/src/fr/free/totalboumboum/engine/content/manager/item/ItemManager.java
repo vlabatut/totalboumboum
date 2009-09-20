@@ -67,26 +67,27 @@ public class ItemManager
 	/////////////////////////////////////////////////////////////////
 	// INITIAL ITEMS	/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
+	private final LinkedList<Item> originalInitialItems = new LinkedList<Item>();
 	private final LinkedList<Item> initialItems = new LinkedList<Item>();
 
 	public void addInitialItem(Item item)
-	{	// add the item to the list
+	{	// record the initial item for future reinit
+		originalInitialItems.add(item);
+		// add the item to the list
 		addItem(item,initialItems);
 	}
 	
-	@SuppressWarnings("unchecked")
 	public void reinitInitialItems()
 	{	// init
 		Tile tile = sprite.getTile();
 		Itemset itemset = GameVariables.level.getItemset();
-		LinkedList<Item> list = (LinkedList<Item>)initialItems.clone();
 		initialItems.clear();
 		
 		// recreate all initial items
-		for(Item item: list)
+		for(Item item: originalInitialItems)
 		{	String name = item.getItemName();
 			itemset.makeItem(name,tile);
-			addInitialItem(item);
+			addItem(item,initialItems);
 		}		
 	}
 	
@@ -130,6 +131,8 @@ public class ItemManager
 	private void addItem(Item item, LinkedList<Item> list)
 	{	// add the item to the list
 		list.offer(item);
+
+		// update roles in abilities
 		ArrayList<AbstractAbility> ab = item.getItemAbilities();
 		Iterator<AbstractAbility> i = ab.iterator();
 		while(i.hasNext())
@@ -158,52 +161,78 @@ public class ItemManager
 	// RELEASE ITEMS			/////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	public void releaseLastItem()
-	{	while(!collectedItems.isEmpty())
-		{	Item item = collectedItems.get(0);
-			releaseItem(item);
+	{	boolean done = false;
+		int index = 0;
+		while(index<collectedItems.size() && !done)
+		{	Item item = collectedItems.get(index);
+			done = releaseItem(item);
+			index++;
 		}
 	}
 	
+	@SuppressWarnings("unchecked")
 	public void releaseRandomItem()
-	{	int index = (int)(Math.random()*collectedItems.size());
-		Item item = collectedItems.get(index);
-		releaseItem(item);
+	{	LinkedList<Item> list = (LinkedList<Item>)collectedItems.clone();
+		boolean done = false;
+		while(!!collectedItems.isEmpty() && !done)
+		{	int index = (int)(Math.random()*collectedItems.size());
+			Item item = collectedItems.get(index);
+			done = releaseItem(item);
+			list.remove(item);
+		}
 	}
 
-	public void releaseItem(Item item)
-	{	// remove the item from the list
-		collectedItems.remove(item);
+	private boolean releaseItem(Item item)
+	{	boolean result = false;
 			
 		StateAbility ability = item.modulateStateAbility(StateAbilityName.ITEM_ON_DEATH_ACTION);
 		if(ability.isActive())
-		{	// possibly reinit the item abilities
-			if(ability.getStrength()==StateAbilityName.ITEM_ON_DEATH_RELEASE_REINIT)
-				item.reinitItemAbilities();
-			// release the item
+		{	// check if the hero can release the item
 			SpecificRelease releaseAction = new SpecificRelease(sprite,item);
-			ActionEvent evt = new ActionEvent(releaseAction);
-			item.processEvent(evt);
-			//EngineEvent event = new EngineEvent(EngineEvent.HIDE_OVER);
-			//item.processEvent(event);
+			ActionAbility ab = sprite.modulateAction(releaseAction);
+			if(ab.isActive())
+			{	// possibly reinit the item abilities
+				if(ability.getStrength()==StateAbilityName.ITEM_ON_DEATH_RELEASE_REINIT)
+					item.reinitItemAbilities();
+				// release the item
+				ActionEvent evt = new ActionEvent(releaseAction);
+				item.processEvent(evt);
+				//EngineEvent event = new EngineEvent(EngineEvent.HIDE_OVER);
+				//item.processEvent(event);
+				result = true;
+			}
 		}
 		else
-		{	EngineEvent event = new EngineEvent(EngineEvent.END_SPRITE);
+		{	// the item is just lost
+			EngineEvent event = new EngineEvent(EngineEvent.END_SPRITE);
 			item.processEvent(event);
+			result = true;
 		}
 		
-		// stats
-		StatisticAction statAction = StatisticAction.LOSE_ITEM;
-		long statTime = sprite.getLoopTime();
-		String statActor = sprite.getPlayer().getFileName();
-		String statTarget = item.getItemName();
-		StatisticEvent statEvent = new StatisticEvent(statActor,statAction,statTarget,statTime);
-		sprite.addStatisticEvent(statEvent);
+		// only if the item could actually be released/lost
+		if(result)
+		{	// remove the item from the list
+			collectedItems.remove(item);
+
+			// stats
+			StatisticAction statAction = StatisticAction.LOSE_ITEM;
+			long statTime = sprite.getLoopTime();
+			String statActor = sprite.getPlayer().getFileName();
+			String statTarget = item.getItemName();
+			StatisticEvent statEvent = new StatisticEvent(statActor,statAction,statTarget,statTime);
+			sprite.addStatisticEvent(statEvent);
+		}
+		
+		return result;
 	}
 	
 	public void releaseAllItems()
-	{	while(!collectedItems.isEmpty())
-		{	Item item = collectedItems.get(0);
-			releaseItem(item);
+	{	int index = 0;
+		while(index<collectedItems.size())
+		{	Item item = collectedItems.get(index);
+			boolean result = releaseItem(item);
+			if(!result)
+				index++;
 		}
 	}
 	
@@ -212,13 +241,13 @@ public class ItemManager
 	/////////////////////////////////////////////////////////////////
 	public void transmitAllItems(Sprite target)
 	{	// processing the initial items
-		transmitItems(target,initialItems,true);
+		transmitItems(target,initialItems);
 
 		// processing the collected items
-		transmitItems(target,collectedItems,false);
+		transmitItems(target,collectedItems);
 	}
 	
-	private void transmitItems(Sprite target, LinkedList<Item> list, boolean keepItems)
+	private void transmitItems(Sprite target, LinkedList<Item> list)
 	{	Iterator<Item> i = list.iterator();
 		while(i.hasNext())
 		{	Item item = i.next();
@@ -239,7 +268,6 @@ public class ItemManager
 				
 				// transmit the item
 				SpecificTransmit transmitAction = new SpecificTransmit(sprite,target,item);
-//TODO this action should be tested first, and so should be the release action				
 				ActionEvent evt = new ActionEvent(transmitAction);
 				target.processEvent(evt);
 
