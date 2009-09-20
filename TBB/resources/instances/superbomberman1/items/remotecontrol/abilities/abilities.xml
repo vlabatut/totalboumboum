@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<abilities xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+		xsi:noNamespaceSchemaLocation="../../../../../schemas/abilities.xsd" >
+
+		<!-- STATE -->
+<!--  	ITEM_ON_DEATH_ACTION --> 
+		<ability strength="2">
+			<name value="ITEM_ON_DEATH_ACTION" />
+		</ability>
+			
+</abilities>

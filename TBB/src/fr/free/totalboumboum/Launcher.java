@@ -775,9 +775,10 @@ public class Launcher
 	
 	
 	
-	/*
-	 * TODO
-	 * 
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+// CHANGE LOG	//////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	/* TODO
 	 * + beta.013
 	 * - correction d'un bug lors du chargement des animations des bombes
 	 * - correction d'un bug lors du chargement des animations mutualisées
@@ -811,165 +812,198 @@ public class Launcher
 	 * - correction dans le calcul de la direction entre deux sprites (le côté circulaire des niveaux n'était pas pris en compte)
 	 * 
 	 * 
+	 */
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+// BUGS				//////////////////////////////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+	/* TODO
+	 * 
+	 * - quand on a le malus diarhée et qu'on meurt, ça pose plein de bombes en rafale (chiant) faut controler que l'action est bien possible, 
+	 *   et interdire toute action pendant burn (ou au moins de poser des bombes)
+	 * 
+	 * - empêcher d'appuyer sur esc quand ça exulte déjà (p-ê en testant la modulation sur exultation?)
+	 * 	 empêcher toute action pendant l'exultation, en fait...
+	 * 
 	 * - bug d'affichage quand les flammes se croisent au cours de plusieurs explosions: la dernière n'est pas affichée
-	 * - sbm1 : le délai de retardement ne doit pas être réinitialisé a la suite d'un punch
-	 * en fait ça reprend exactement où ça ne était au moment ou la bombe touche le sol
+	 * 
 	 * - il y a visiblement un bug dans la GUI quand on commence une partie rapide puis revient au menu principal et en recommence une autre : la précédente ne semble pas complètement réinitialisée
 	 *  >> à voir : p-ê simplement une fausse manip. faire : choisir un seul niveau, commencer, recommencer avec un niveau de plus et voir si le nouveau niveau apparait bien dans la nouvelle partie
+	 *  
+	 * - bug d'affichage dans les notes d'IA, les accents sont affichés avec la police par défaut
 	 * 
-	 * - lors du calcul des points, il faut forcer la présence d'un classement: ça facilite énormément de traitements en aval
-	 *   au pire, si le classement est inutile (ex: simple total), on définit un classement-identité (pts utilisés pr le classement <=> pts marqués)
-	 * - ça serait bien que les joueurs soient affichés dans l'ordre relatif aux points de la limite rencontrée
-	 *   voire on définit explicitement un ordre d'affichage dans la compétition
-	 * - faut afficher explicitement le classement à la fin d'une confrontation
-	 * - dans les résultats :
-	 * 		- afficher par défaut les 4 scores de base
-	 * 		- plus les scores utilisés dans les points et/ou les limites
-	 * 		- si les limites utilisent des points custom, les afficher aussi
+	 * - il semblerait que les directions dans la SpecificAction et dans la GeneralAction correspondante ne soient pas les mêmes...
 	 * 
-	 * *******************************************************
-	 * *********************** A FAIRE ***********************
-	 * *******************************************************
+	 * - impossible de poser une bombe quand on est en train de buter contre un mur en direction upleft (et uniquement cette direction pr NES2) et downleft (pr SBM1)
+	 * 		>> viendrait de swing ou du clavier (pb matériel ou bas niveau)
 	 * 
-	 * - envoyer un evt de changement de gesture (pour indiquer par ex que le sprite devient destructible, etc ?)
+	 */
+	
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+// A FAIRE MOTEUR	//////////////////////////////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+	/* TODO PRIORITÉ HAUTE
+	 * 
+	 * - vérifier qu'on teste bien les modulation avant de réaliser les actions, notament pour release et transmit
+	 * 
+	 * - quand le joueur meurt, ses bombes télécommandées doivent exploser
+	 * 
+	 * - cas particulier : item apparaissant dans une explosion de bloc, avec un joueur déjà sur le bloc 
+	 *  (il a passe-muraille et résistance au feu) : l'item doit être ramassé dès qu'il a fini d'apparaitre, en théorie
+	 * 
+	 * - faut émettre un évt de sortie de case à la disparition d'un sprite (mort, masquage, etc)
+	 * 
+	 * - étudier le fonctionnement de ended (sprite) pr voir quand retirer le sprite de level/tile
+	 * 
+	 * - gérer le shrink
+	 * 
+	 */
+	
+	/* TODO PRIORITÉ BASSE
+	 * 
+	 * - NBM2 : 
+	 * 		- item veste ignifugée (souffle de l'explosion pas implémenté)
+	 * 		  (s'apparente à un push sur un joueur adverse, intéressant pour les instances à venir)
+	 * 
+	 * - SBM1 : 
+	 * 		- le délai de retardement ne doit pas être réinitialisé a la suite d'un punch
+	 * 		  en fait ça reprend exactement où ça ne était au moment ou la bombe touche le sol
+	 * 		- le clignotement d'invincibilité est sensé ralentir quand le temps est presque terminé
+	 * 
+	 * - Évènements :
+	 * 		- envoyer un evt de changement de gesture (pour indiquer par ex que le sprite devient destructible, etc ?)
+	 * 
+	 * - Threads :
+	 * 		- pouvoir modifier l'UPS pour les IA (pour alléger le calcul)
+	 * 
+	 * - Images :
+	 * 		- modifier le loader d'image de manière à ce qu'une image non-trouvée soit remplacée par la croix rouge
+	 * 
+	 * - TournamentsMatches/Rounds :
+	 * 		- possibilité de définir un nom pour tournament/match/round, 
+	 * 		  qui sera affiche en titre de présentation/stats etc. 
+	 * 		  si pas de nom, utilisation d'un nom générique (Round 1 - Prensentation) etc
+	 * 		- faire un paramètre dans les rounds qui permet de déterminer s'ils sont compatibles avec le tournoi 2007-08
+	 * 		- besoin d'une méthode permettant d'exporter un tournoi/match/round, 
+	 * 		  ie de l'écrire entièrement en local (pas de référence à des composants existants)
+	 * 
+	 * - Items :
+	 * 		- définir des noms "human readable" pour les items, histoire de ne pas afficher ces codes internes dans la GUI, en profiter pour introduire une decription, le tout en plusieurs langues. utiliser le code ISO comme paramètre de langue, et l'introduire dans le fichier de langue
+	 * 
+	 * - Stats : 
+	 * 		- nombre de fois qu'un level a été joué
+	 * 
+	 * - Points : 
+	 * 		- calcul : introduire des variables comme le nombre de joueurs 
+	 *  	  (pour définir un bonus pr le joueur qui fait un perfect en survival)
+	 * 		- lors du calcul des points, il faut forcer la présence d'un classement: 
+	 * 		  ça facilite énormément de traitements en aval
+	 *   	  au pire, si le classement est inutile (ex: simple total), on définit un classement-identité 
+	 *   	  (pts utilisés pr le classement <=> pts marqués)
+	 *
+	 * - Limites/Modes de jeu :
+	 * 		- limites exprimées de façon relative (peindre 75% des cases, éliminer la moitié des joueurs...)
+	 * 		- items: 1 item arrêtant la partie, 1 item faisant diminuer le temps restant (anti-temps)
+	 * 		- possibilité de choisir entre le fait que le round s'arrête dès que tout le monde est mort 
+	 * 		  sauf 1, ou dernière flamme terminée
+	 * 		- reformater les modes de jeu : pour paint il suffit de définir des bombes spéciales qui peignent le sol
+	 * 	 	- pour painting, possibilité de définir quelles cases peuvent être repeintes, 
+	 * 		  ce qui permet de poser comme limite un %age de cases repeintes
+	 * 
+	 * - XML :
+	 * 		- voir si on peut mettre à jour le parser XML
+	 * 		- définir la liste de gestures pour chaque type de sprite
+	 *		- le XML des animes doit avoir soit :
+	 * 			- NONE seule
+	 *  		- primaries seules
+	 *  		- primaries+NONE
+	 *  		- primaries+COMPOSITES
+	 *  		- primaries+NONE+composite
+	 * 		- et les gestures définis doivent au moins contenir les nécessaires, et au plus les autorisés
+	 *  	  il va falloir utiliser XSD 1.1 quand ça sera possible, avec les assertions et associations, cf l'email.
+	 * 
+	 * - Actions/Abilities/Modulations
+	 *  	- vérifier qu'avant d'exécuter une action, on vérifie si le sprite concerné (actor) possède bien l'ability
+	 * 		- pour chaque gesture, fixer les actions autorisées 
+	 * 		- ça ne me plait pas beaucoup ces actions bidons pour tester les abilities de certains sprites. faut réfléchir à un truc plus propre
+	 * 		- il faudrait documenter le comportement par défaut du moteur, i.e. pour chaque type de sprite:
+	 * 			- qu'est-ce qu'il peut faire comme action? quelles sont les transitions? qu'est-ce qui est interdit ?
+	 * 			- ça permettra de savoir ce qui peut être modulé et ce qui ne peut pas l'être
+	 * 		- un sprite n'est a priori pas un obstacle, tout est géré par modulation (y compris pour le feu)
+	 * 
+	 */
+	
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+// A FAIRE GUI		//////////////////////////////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+	/* TODO
 	 * 
 	 * - GUI : dans les tables, remplacer les labels par une classe custom qui implémenterait l'interface basicPanel
 	 * 
-	 * - pouvoir modifier l'UPS pour les IA (pour alléger le calcul)
-	 * 
-	 * - profils: simplifier, pas besoin de la double représentation default+selected.
-	 * - réorganiser par rapport aux besoins: joueur pdt le jeu, joueur chargé en dehors du jeu, joueur pas chargé ?
+	 * - profils: 
+	 * 		- simplifier, pas besoin de la double représentation default+selected.
+	 * 		- réorganiser par rapport aux besoins: joueur pdt le jeu, joueur chargé en dehors du jeu, joueur pas chargé ?
 	 * 
 	 * - faire le classement lexicographique gérant les signes diacritiques partout où c'est nécessaire
 	 * 
-	 * - modifier le loader d'image de manière à ce qu'une image non-trouvée soit remplacée par la croix rouge
-	 * 
 	 * - utiliser les tooltips pour afficher les infos trop longues : calcul de points, nombre à virgule dans la colonne des points (décimales cachées), etc.
-	 * - pb de dimension de l'image de fond en fonction de la résolution... (zones pas peintes)
-	 * - results panel : quand il y a trop de rounds dans un match pour que ça rentre à l'écran, ne pas tout afficher
-	 * - possibilité de donner des noms aux matches et aux rounds
 	 * 
-	 * - faire un paramètre dans les rounds qui permet de déterminer s'ils sont compatibles avec le tournoi 2007-08
+	 * - pb de dimension de l'image de fond en fonction de la résolution... (zones pas peintes)
+	 * 
+	 * - results panel : 
+	 * 		- faut afficher explicitement le classement à la fin d'une confrontation
+	 * 		- quand il y a trop de rounds dans un match pour que ça rentre à l'écran, ne pas tout afficher
+	 * 		- ça serait bien que les joueurs soient affichés dans l'ordre relatif aux points de la limite rencontrée
+	 *   	  voire on définit explicitement un ordre d'affichage dans la compétition
+	 * 		- dans les résultats :
+	 * 			- afficher par défaut les 4 scores de base
+	 * 			- plus les scores utilisés dans les points et/ou les limites
+	 * 			- si les limites utilisent des points custom, les afficher aussi
+	 * 		- à la fin du round, faire apparaitre les résultats par transparence
+	 * 
 	 * - tournoi : 1) on choisit les paramètres 2) on choisit les joueurs, le jeu restreint leur nombre pr qu'il soit compatible avec le tournoi, et restreint aussi les IA pour les mêmes raisons
 	 * 
-	 * - besoin d'une méthode permettant d'exporter un tournoi/match/round, ie de l'écrire entièrement en local (pas de référence à des composants existants)
-	 * 
-	 * - bug d'affichage dans les notes d'IA, les accents sont affichés avec la police par défaut
-	 * 
-	 * - stats : nombre de fois qu'un level a été joué
-	 * - champ en plus dans les profils : le classement du joueur, nbre de rouds gagnés/nbre de rounds joués
-	 * - dans les persos : % de rounds gagnés, ou bien nbre de rounds joués
-	 * - tout ça est fait simplement en rajoutant les informations adéquates dans les classes de stat
+	 * - champ en plus 
+	 * 		- dans les profils : le classement du joueur, nbre de rouds gagnés/nbre de rounds joués
+	 * 		- dans les persos : % de rounds gagnés, ou bien nbre de rounds joués
+	 * 		- tout ça est fait simplement en rajoutant les informations adéquates dans les classes de stat
 	 * 
 	 * - lors de la sélection des commandes :
 	 * 		- cliquer sur le bouton d'action fait réagir quelque chose dans la ligne du joueur correspondant
 	 * 		- permet de vérifier qu'on a pris les bonnes commandes (celles qu'on pensait avoir prises)
 	 * 
 	 * - il faudrait séparer les joueurs IA et les joueurs humain dans leur gestion.
-	 * ca permettrait de sélectionner directement l'IA, au lieu du joueur, et donc de ne pas avoir à créer plusieurs
-	 * joueurs avec la même IA quand on veut jouer contre plusieurs versions de la même IA.
-	 * voire limiter le nombre de joueurs pour une IA à 1 seul, mais sélectionnable plusieurs fois ?
-	 * à voir...
-	 * 
-	 * - SBM1 : copier le rythme du clignotement sur SBM1 (pr invincibilité)
-	 * 			remarque: le clignotement est sensé ralentir quand le temps est presque terminé
-	 * 
-	 * -------------------------------------------------------------------
-	 * - calcul de points : introduire des variables comme le nombre de joueurs (pour définir un bonus pr le joueur qui fait un perfect en survival)
-	 * - gérer le shrink
-	 * - dans les autorisations, gérer l'apparition comme une action en soit. si pas possible d'apparaître au début de la partie, faire un atterrissage ?
-	 * - à la fin du round, faire apparaitre les résultats par transparence
-	 * 
-	 * - pour painting, possibilité de définir quelles cases peuvent être repeintes, ce qui permet de poser comme limite un %age de cases repeintes
-	 * - définir des noms "human readable" pour les items, histoire de ne pas afficher ces codes internes dans la GUI, en profiter pour introduire une decription, le tout en plusieurs langues. utiliser le code ISO comme paramètre de langue, et l'introduire dans le fichier de langue
-	 * - possibilité de définir un nom pour tournament/match/round, qui sera affiche en titre de présentation/stats etc. si pas de nom, utilisation d'un nom générique (Round 1 - Prensentation) etc
-	 * - faire un chargement ad hoc des matches, rounds, etc ? fusionner du coup HollowLevel et LevelPreview ? (voir si les objets de ces deux classes sont créés au même moment)
-	 * 
-	 * - redistribution des items lors de la mort d'un joueur (option de round?)
-	 * - possibilité de bloquer certains items (on ne les perd pas lorsqu'on meurt)
-	 * 
-	 * LIMITES & MODES de jeu :
-	 * - limites exprimées de façon relative (peindre 75% des cases, éliminer la moitié des joueurs...)
-	 * - items: 1 item arrêtant la partie, 1 item faisant diminuer le temps restant (anti-temps)
-	 * - possibilité de choisir entre le fait que le round s'arrête dès que tout le monde est mort sauf 1, ou dernière flamme terminée
-	 * reformater les modes de jeu :
-	 * 	- pour paint il suffit de définir des bombes spéciales qui peignent le sol
-	 */
-	
-	
-	
-	
-	
-	
-	
-	
-	/*
-	 * - voir si on peut mettre à jour le parser XML
-	 * - définir la liste de gesture pour chaque type de sprite
-	 * - pour chaque gesture, fixer les actions autorisées 
-	 * - adapter tous les loaders au fait que les constantes exprimées en XML sont maintenant en majuscules, adapter aussi les fichiers xml
-	 * 
-	 * y a manifestement une différence entre GeneralAction et les actions utilisées dans les Ability et Modulation
-	 * dans ces dernières, on se place relativement au sprite, qui est actor target ou third.
-	 * surement qqchose à faire de ce coté là
-	 * 
-	 * il faut typer les noms d'action et de gesture, car tous les sprites n'ont pas accès à tous.
-	 * difficile vu qu'on ne peut pas sousclasser les types enum
-	 * 
-	 * ça ne me plait pas beaucoup ces actions bidons pour tester les abilities de certains sprites. faut réfléchir à un truc plus propre
-	 * 
-	 * le fait d'implémenter l'exécution d'une action dans la SpecificAction correspondante pose des problèmes car la réalisation
-	 * de l'action dépend généralement d'un contexte situé dans l'event manager ou un autre manager.
-	 * il faudrait donc plutot utiliser des méthodes localisées dans ces managers.
-	 * ça implique que les SpecificAction ne sont pas à spécialiser pour chaque role 
-	 * 
-	 * tester le système qui complète les animations automatiquement quand elles sont manquantes dans le fichier XML.
-	 * 
-	 * il faudrait documenter le comportement par défaut du moteur, i.e. pour chaque type de sprite:
-	 * qu'est-ce qu'il peut faire comme action? quelles sont les transitions? qu'est-ce qui est interdit ?
-	 * ça permettra de savoir ce qui peut être modulé et ce qui ne peut pas l'être
-	 * 		- un sprite n'est a priori pas un obstacle, tout est géré par modulation (y compris pour le feu)
-	 * 
-	 * le XML des animes doit avoir soit :
-	 * 	- NONE seule
-	 *  - primaries seules
-	 *  - primaries+NONE
-	 *  - primaries+COMPOSITES
-	 *  - primaries+NONE+composite
-	 * et les gestures définis doivent au moins contenir les nécessaires, et au plus les autorisés
-	 *  il va falloir utiliser XSD 1.1 quand ça sera possible, avec les assertions et associations, cf l'email.
-	 *  
-	 *  DROP ne devrait pas être transitif, mais automatiquement s'appliquer à une bombe.
-	 *  ça permettrait de bien séparer DROP et APPEAR dans l'action (la première pour le sprite posant
-	 *  la bombe et la seconde pour la bombe elle même) et en même temps ça permet
-	 *  de ne pas avoir à créer la bombe avant de la poser, ce qui parait anti-pratique et pas logique du tout.
-	 *  >> connexe: vérifier qu'avant d'exécuter une action, on vérifie si le sprite concerné (actor) possède bien l'ability
-	 *  
-	 *  faudra mettre en place un système de remplacement (croix rouge?) pr quand une anime nécessaire n'est pas trouvée
-	 */
-	
-	/*TODO BUGS
-	 * - il semblerait que la direction dans la SpecificAction et dans la GeneralAction correspondante ne soit pas la même...
-	 * - impossible de poser une bombe quand on est en train de buter contre un mur en direction upleft (et uniquement cette direction pr NES2) et downleft (pr SBM1)
-	 * 		>> viendrait de swing ou du clavier (pb matériel ou bas niveau)
+	 * 		ca permettrait de sélectionner directement l'IA, au lieu du joueur, et donc de ne pas avoir à créer plusieurs
+	 * 		joueurs avec la même IA quand on veut jouer contre plusieurs versions de la même IA.
+	 * 		voire limiter le nombre de joueurs pour une IA à 1 seul, mais sélectionnable plusieurs fois ?
+	 *		 à voir...
 	 * 
 	 */
 	
-	/*TODO instance NES BM2
-	 * - item veste ignifugée (souffle de l'explosion pas implémenté)
-	 */
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+// A FAIRE SITE		//////////////////////////////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	
 	/*TODO
-	 * - site : parler de la possibilité d'inclure des bombes dans le niveau, de base (pas vu dans BM officiel, mais très utilisé dans X-Blast)
+	 * - parler de la possibilité d'inclure des bombes dans le niveau, de base (pas vu dans BM officiel, mais très utilisé dans X-Blast)
+	 * 
+	 * - vidéo avec toutes les nouveautés concernant les items :
+	 * 		- tous les bonus en oeuvre
+	 * 		- tous les malus aussi
+	 * 		- transmission des malus
+	 * 		- relachement des items à la mort
+	 * 		- guérison des malus par ramassage d'item
+	 * 
 	 */
 	
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//EN COURS			//////////////////////////////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	
 	/* NOTE
-	 * - contagion :
-	 * 		0 pas de contagion
-	 * 		1 contagion partagée avec raz des abilités
-	 * 		2 contagion partagée avec abilités courantes
-	 * 		3 contagion transmise avec raz des abilités
-	 * 		4 contagion transmise avec abilités courantes
 	 * - guérison par un bonus 
 	 * 		0 disparition pure & simple
 	 * 		- retour en jeu
@@ -977,13 +1011,4 @@ public class Launcher
 	 * 			2 les abilités continuent pareil
 	 */
 
-	// - empêcher d'appuyer sur esc quand ça exulte déjà (p-ê en testant la modulation sur exultation?)
-	// 		empêcher toute action pendant l'exultation, en fait...
-	// - cas particulier : item apparaissant dans une explosion de bloc, avec un joueur déjà sur le bloc (il a passe-muraille et résistance au feu) : l'item doit être ramassé dès qu'il a fini d'apparaitre, en théorie
-	// - quand le joueur meurt, ses bombes télécommandées doivent exploser
-	
-	// étudier le fonctionnement de ended (sprite) pr voir quand retirer le sprite de level/tile
-	// faut émettre un évt de sortie à la disparition d'un sprite (mort, masquage, etc)
-	
-	// quand on a le malus diarhée et qu'on meurt, ça pose plein de bombes en rafale (chiant) faut controler que l'action est bien possible, et interdire toute action pendant burn (ou au moins de poser des bombes)
 }
