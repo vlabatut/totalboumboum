@@ -767,9 +767,8 @@ if(sprite instanceof Hero)
 				tempSprite.removeCollidedSprite(sprite);
 				// send events
 				EngineEvent event = new EngineEvent(EngineEvent.COLLIDED_OFF,sprite,tempSprite,getActualDirection());
-				tempSprite.processEvent(event);
-				event = new EngineEvent(EngineEvent.COLLIDED_OFF,tempSprite,sprite,getActualDirection().getOpposite());
 				sprite.processEvent(event);				
+				tempSprite.processEvent(event);
 			}
 		}
 		// new collided sprites
@@ -781,9 +780,8 @@ if(sprite instanceof Hero)
 			tempSprite.addCollidedSprite(sprite);
 			// send events
 			EngineEvent event = new EngineEvent(EngineEvent.COLLIDED_ON,sprite,tempSprite,getActualDirection());
-			tempSprite.processEvent(event);
-			event = new EngineEvent(EngineEvent.COLLIDED_ON,tempSprite,sprite,getActualDirection().getOpposite());
 			sprite.processEvent(event);
+			tempSprite.processEvent(event);
 		}
 	}
 	
@@ -842,9 +840,8 @@ if(sprite instanceof Hero)
 				tempSprite.removeIntersectedSprite(sprite);
 				// send events
 				EngineEvent event = new EngineEvent(EngineEvent.INTERSECTION_OFF,sprite,tempSprite,getActualDirection());
-				tempSprite.processEvent(event);
-				event = new EngineEvent(EngineEvent.INTERSECTION_OFF,tempSprite,sprite,getActualDirection().getOpposite());
 				sprite.processEvent(event);				
+				tempSprite.processEvent(event);
 			}
 		}
 		// new intersected sprites
@@ -856,9 +853,8 @@ if(sprite instanceof Hero)
 			tempSprite.addIntersectedSprite(sprite);
 			// send events
 			EngineEvent event = new EngineEvent(EngineEvent.INTERSECTION_ON,sprite,tempSprite,getActualDirection());
-			tempSprite.processEvent(event);
-			event = new EngineEvent(EngineEvent.INTERSECTION_ON,tempSprite,sprite,getActualDirection().getOpposite());
 			sprite.processEvent(event);
+			tempSprite.processEvent(event);
 		}
 	}
 	

@@ -96,6 +96,7 @@
 			</tile>
 			<tile pos="6" >
 				<floor name="marked" />
+				<item name="malus" />
 			</tile>
 			<tile pos="7" >
 				<floor name="regular" />

@@ -1008,8 +1008,6 @@ public class Launcher
 	
 	/* NOTE
 	 * 
-	 * - pb : les events d'intersection se neutralisent lors du passage d'item
-	 * 
 	 * - guérison par un bonus 
 	 * 		0 disparition pure & simple
 	 * 		- retour en jeu
