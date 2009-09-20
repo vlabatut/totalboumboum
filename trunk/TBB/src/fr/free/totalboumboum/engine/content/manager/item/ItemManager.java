@@ -96,23 +96,8 @@ public class ItemManager
 	
 	public void collectItem(Item item)
 	{	// possibly remove the existing diseases
-		StateAbility ability = item.modulateStateAbility(StateAbilityName.ITEM_CANCEL_GROUP);
-		if(ability.isActive())
-		{	float groupNumber = ability.getStrength();
-			Iterator<Item> i = collectedItems.iterator();
-			while(i.hasNext())
-			{	Item temp = i.next();
-				StateAbility ab = temp.modulateStateAbility(StateAbilityName.ITEM_GROUP);
-				if(ab.isActive())
-				{	float grpNbr = ab.getStrength();
-					if(grpNbr==groupNumber)
-					{	i.remove();
-						EngineEvent event = new EngineEvent(EngineEvent.END_SPRITE);
-						item.processEvent(event);
-					}
-				}
-			}
-		}
+		cancelItems(item,initialItems);
+		cancelItems(item,collectedItems);
 		
 		// add the item to the list
 		addItem(item,collectedItems);
@@ -200,8 +185,9 @@ public class ItemManager
 			SpecificRelease releaseAction = new SpecificRelease(sprite,item);
 			ActionAbility ab = sprite.modulateAction(releaseAction);
 			if(ab.isActive())
-			{	// possibly reinit the item abilities
-				if(ability.getStrength()==StateAbilityName.ITEM_ON_DEATH_RELEASE_REINIT)
+			{	int mode = (int)ability.getStrength();
+				// possibly reinit the item abilities
+				if(mode==StateAbilityName.ITEM_ON_DEATH_RELEASE_REINIT)
 					item.reinitItemAbilities();
 				// release the item
 				ActionEvent evt = new ActionEvent(releaseAction);
@@ -244,9 +230,74 @@ public class ItemManager
 				index++;
 		}
 	}
+
+	/////////////////////////////////////////////////////////////////
+	// CANCEL ITEM		/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	private void cancelItems(Item item, LinkedList<Item> list)
+	{	// get the canceled group number
+		StateAbility ability = item.modulateStateAbility(StateAbilityName.ITEM_CANCEL_GROUP);
+		if(ability.isActive())
+		{	float groupNumber = ability.getStrength();
+			
+			// look for items from the same group
+			Iterator<Item> i = list.iterator();
+			while(i.hasNext())
+			{	Item temp = i.next();
+				ability = temp.modulateStateAbility(StateAbilityName.ITEM_GROUP);
+				if(ability.getStrength()==groupNumber)
+				{	// get the canceling mode
+					ability = temp.modulateStateAbility(StateAbilityName.ITEM_ON_CANCEL_ACTION);
+					if(ability.isActive())
+					{	boolean done = false;
+						int mode = (int)ability.getStrength();
+						
+						// the item is just lost
+						if(mode==StateAbilityName.ITEM_ON_CANCEL_DISAPEAR)
+						{	// send an event
+							EngineEvent event = new EngineEvent(EngineEvent.END_SPRITE);
+							item.processEvent(event);
+							done = true;
+						}
+						
+						// the item is released
+						else
+						{	// check if the hero can release the item
+							SpecificRelease releaseAction = new SpecificRelease(sprite,temp);
+							ActionAbility ab = sprite.modulateAction(releaseAction);
+							if(ab.isActive())
+							{	// possibly reinit the item abilities
+								if(ability.getStrength()==StateAbilityName.ITEM_ON_CANCEL_RELEASE_REINIT)
+									temp.reinitItemAbilities();
+								// release the item
+								ActionEvent evt = new ActionEvent(releaseAction);
+								temp.processEvent(evt);
+								done = true;
+							}
+						}
+						
+						// only if the item could actually be released/lost
+						if(done)
+						{	// remove the item from the list
+							i.remove();
+
+							// stats
+							StatisticAction statAction = StatisticAction.LOSE_ITEM;
+							long statTime = sprite.getLoopTime();
+							String statActor = sprite.getPlayer().getFileName();
+							String statTarget = temp.getItemName();
+							StatisticEvent statEvent = new StatisticEvent(statActor,statAction,statTarget,statTime);
+							sprite.addStatisticEvent(statEvent);
+						}
+					}
+				}
+			}
+		}
+		
+	}
 	
 	/////////////////////////////////////////////////////////////////
-	// CONTAGION		/////////////////////////////////////////////
+	// TRANSMIT ITEM	/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	public void transmitAllItems(Sprite target)
 	{	// processing the initial items
