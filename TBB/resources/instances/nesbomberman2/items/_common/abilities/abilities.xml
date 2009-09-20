@@ -11,10 +11,6 @@
 		<ability strength="1" frame="false" time="-1" uses="-1">
 			<name value="SPRITE_FLAT" />
 		</ability>
-<!--  	ITEM_CANCEL_GROUP --> 
-		<ability strength="1" frame="false" time="-1" uses="-1">
-			<name value="ITEM_CANCEL_GROUP" />
-		</ability>
 			
 		<!-- ACTION -->
 <!--  	APPEAR -->

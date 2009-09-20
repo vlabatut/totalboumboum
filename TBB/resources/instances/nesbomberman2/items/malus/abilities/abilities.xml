@@ -13,4 +13,9 @@
 			<name value="ITEM_GROUP" />
 		</ability>
 			
+<!--  	ITEM_ON_CANCEL_ACTION --> 
+		<ability strength="1" frame="false" time="-1" uses="-1">
+			<name value="ITEM_ON_CANCEL_ACTION" />
+		</ability>
+			
 </abilities>

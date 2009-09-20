@@ -167,7 +167,7 @@ public class StateAbilityName
 	// ITEM ABILITIES			/////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	/** indicates the item cancels all previous items from the specified group (using strength) */
-	public static final String ITEM_CANCEL_GROUP = "ITEM_GROUP_CANCEL";
+	public static final String ITEM_CANCEL_GROUP = "ITEM_CANCEL_GROUP";
 	
 	/** type of contagion: 0=none 1=share as is 2=share with reinit 3=transmission as is 4=transmission with reinit*/
 	public static final String ITEM_CONTAGION_MODE = "ITEM_CONTAGION_MODE";
