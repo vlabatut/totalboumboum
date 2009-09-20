@@ -394,12 +394,16 @@ public class HeroEventManager extends EventManager
 	private void engCollidingOn(EngineEvent event)
 	{	//System.out.println(">>>SPR_COLLIDING_ON with "+event.getSource());
 		if(gesture.equals(GestureName.BOUNCING))
-		{	blockedDirection = blockedDirection.getOpposite();
-			sprite.setGesture(gesture,blockedDirection,blockedDirection,false);
+		{	if(event.getSource()==sprite)
+			{	blockedDirection = blockedDirection.getOpposite();
+				sprite.setGesture(gesture,blockedDirection,blockedDirection,false);
+			}
 		}
 		else if(gesture.equals(GestureName.WALKING))
-		{	gesture = GestureName.PUSHING;
-			sprite.setGesture(gesture, spriteDirection,controlDirection,false);
+		{	if(event.getSource()==sprite)
+			{	gesture = GestureName.PUSHING;
+				sprite.setGesture(gesture, spriteDirection,controlDirection,false);
+			}
 		}
 	}
 	
@@ -453,11 +457,15 @@ public class HeroEventManager extends EventManager
 	private void engIntersectionOn(EngineEvent event)
 	{	//System.out.println(">>>SPR_INTERSECTION_ON<"+sprite+"> with src="+event.getSource()+", trgt="+event.getTarget());
 		Sprite source = event.getSource();
-		if(source instanceof Hero)
-		{	SpecificTransmit transmitAction = new SpecificTransmit(sprite,source);
+		Sprite target = event.getTarget();
+		Sprite intersected = source;
+		if(intersected==sprite)
+			intersected = target;
+		if(intersected instanceof Hero)
+		{	SpecificTransmit transmitAction = new SpecificTransmit(sprite,intersected);
 			ActionAbility ability = sprite.modulateAction(transmitAction);
 			if(ability.isActive())
-				sprite.transmitAllItems(source);
+				sprite.transmitAllItems(intersected);
 		}
 	}
 

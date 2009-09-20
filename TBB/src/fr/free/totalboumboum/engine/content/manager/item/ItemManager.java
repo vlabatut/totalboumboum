@@ -46,8 +46,6 @@ public class ItemManager
 {	
 	public ItemManager(Sprite sprite)
 	{	this.sprite = sprite;
-		collectedItems = new LinkedList<Item>();
-		abilities = new ArrayList<AbstractAbility>();
 	}
 
 	/////////////////////////////////////////////////////////////////
@@ -58,7 +56,7 @@ public class ItemManager
 	/////////////////////////////////////////////////////////////////
 	// ABILITIES		/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	private ArrayList<AbstractAbility> abilities;
+	private final ArrayList<AbstractAbility> abilities = new ArrayList<AbstractAbility>();
 	
 	public ArrayList<AbstractAbility> getItemAbilities()
 	{	return abilities;
@@ -94,7 +92,7 @@ public class ItemManager
 	/////////////////////////////////////////////////////////////////
 	// COLLECTED ITEMS			/////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	private final LinkedList<Item> collectedItems;
+	private final LinkedList<Item> collectedItems = new LinkedList<Item>();
 	
 	public void collectItem(Item item)
 	{	// possibly remove the existing diseases
@@ -144,10 +142,15 @@ public class ItemManager
 		}		
 	}
 	
+	/////////////////////////////////////////////////////////////////
+	// RECEIVE ITEMS			/////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	private final LinkedList<Item> receivedItems = new LinkedList<Item>();
+
 	public void receiveItem(Item item)
-	{	// add the item to the list
-		addItem(item,collectedItems);
-		
+	{	// add the item to a special list, which will be merged with collectedItems on the next update
+		receivedItems.add(item);		
+
 		// stats
 		StatisticAction statAction = StatisticAction.RECEIVE_ITEM;
 		long statTime = sprite.getLoopTime();
@@ -155,6 +158,12 @@ public class ItemManager
 		String statTarget = item.getItemName();
 		StatisticEvent statEvent = new StatisticEvent(statActor,statAction,statTarget,statTime);
 		sprite.addStatisticEvent(statEvent);
+}
+	
+	private void mergeReceivedItems()
+	{	for(Item item: receivedItems)
+			addItem(item,collectedItems);
+		receivedItems.clear();
 	}
 	
 	/////////////////////////////////////////////////////////////////
@@ -286,7 +295,11 @@ public class ItemManager
 	// ENGINE			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	public void update()
-	{	abilities = new ArrayList<AbstractAbility>();
+	{	// reinit abilities
+		abilities.clear();
+		
+		// get the items received from other players
+		mergeReceivedItems();
 		
 		// adding the initial items abilities
 		updateAbilities(initialItems,true);
