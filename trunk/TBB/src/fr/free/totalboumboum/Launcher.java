@@ -859,6 +859,10 @@ public class Launcher
 	 * 
 	 * - gérer le shrink
 	 * 
+	 * - implémenter les touches de pause (jeu et IA séparés)
+	 * 
+	 * - remplacer "à vos marques" "pret" "boum!" par des graphismes précalculés
+	 * 
 	 */
 	
 	/* TODO PRIORITÉ BASSE
