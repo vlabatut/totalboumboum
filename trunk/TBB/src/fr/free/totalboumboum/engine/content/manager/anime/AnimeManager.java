@@ -234,9 +234,9 @@ public class AnimeManager
 		{	double proba = Math.random();
 			invisible = proba>=visibleProbability;
 		}
-		
-		if(!invisible)
-		{	// twinkle?
+		else
+		{	invisible = false;
+			// twinkle?
 			ability = sprite.modulateStateAbility(StateAbilityName.SPRITE_TWINKLE);
 			int colorInt = (int)ability.getStrength();
 			if(colorInt!=0)
