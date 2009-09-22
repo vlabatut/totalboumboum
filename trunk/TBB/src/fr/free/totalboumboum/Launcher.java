@@ -817,7 +817,11 @@ public class Launcher
 	 * - possibilité d'avoir plusieurs blocs, floors et items dans une même case (par souci de généralisation)
 	 * - système permettant de relacher les items à la mort du joueur
 	 * - correction dans le calcul de la direction entre deux sprites (le côté circulaire des niveaux n'était pas pris en compte)
-	 * 
+	 * - système de contagion des malus
+	 * - système de guérison des malus
+	 * - possibilité de faire exploser les bombes posées par un joueur quand celui-ci brûle
+	 * - touche END permettant de pauser le jeu
+	 * - touche HOME permettant de pauser seulement les IA 
 	 * 
 	 */
 
@@ -845,6 +849,7 @@ public class Launcher
 	 * - impossible de poser une bombe quand on est en train de buter contre un mur en direction upleft (et uniquement cette direction pr NES2) et downleft (pr SBM1)
 	 * 		>> viendrait de swing ou du clavier (pb matériel ou bas niveau)
 	 * 
+	 * - truc bizarre avec le malus d'accélération : les deux joueurs vont dans le même sens et parfois il y a une espèce de boucle qui empêche de subir les effets complets du malus
 	 */
 	
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -855,10 +860,9 @@ public class Launcher
 	 * 
 	 * - fignoler l'instance SBM1 pour qu'elle soit conforme, au moins sur ce qui a été implémenté jusqu'à présent
 	 * 
-	 * - quand le joueur meurt, ses bombes télécommandées doivent exploser
-	 * 
 	 * - cas particulier : item apparaissant dans une explosion de bloc, avec un joueur déjà sur le bloc 
-	 *  (il a passe-muraille et résistance au feu) : l'item doit être ramassé dès qu'il a fini d'apparaitre, en théorie
+	 *   (il a passe-muraille et résistance au feu) : l'item doit être ramassé dès qu'il a fini d'apparaitre, en théorie
+	 *   ou bien : un héros meurt, un item apparait sous les pieds d'un autre joueur immobile : l'item reste sans que le joueur ne se l'approprie
 	 * 
 	 * - faut émettre un évt de sortie de case à la disparition d'un sprite (mort, masquage, etc)
 	 * 
@@ -866,9 +870,9 @@ public class Launcher
 	 * 
 	 * - gérer le shrink
 	 * 
-	 * - implémenter les touches de pause (jeu et IA séparés)
-	 * 
 	 * - remplacer "à vos marques" "pret" "boum!" par des graphismes précalculés
+	 * 
+	 * - à la fin de la partie, faire disparaitre tout le niveau comme il apparait au début
 	 * 
 	 */
 	

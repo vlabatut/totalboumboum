@@ -67,7 +67,9 @@ public abstract class AbstractAiManager<V>
     private ExecutorService executorAi = null;
     /** future utilisé pour récupérer le résultat de l'IA */
     private Future<V> futureAi;
-
+    /** indique si cette IA était en pause */
+    private boolean paused = false;
+    
     /**
      * renvoie l'IA gérée par cette classe.
      * 
@@ -81,7 +83,7 @@ public abstract class AbstractAiManager<V>
      * Utilise la classe d'IA associée à ce personnage pour mettre à jour les variables
      * qui permettront au moteur du jeu de déplacer le personnage.
      */
-    public final void update()
+    public final void update(boolean aisPause)
     {	// s'il s'agit du premier appel
     	if(executorAi == null)
     	{	ThreadFactory fact = new ThreadFactory()
@@ -92,12 +94,43 @@ public abstract class AbstractAiManager<V>
     			}   		
     		};
     		executorAi = Executors.newSingleThreadExecutor(fact);
+    		// on lance le calcul pour le prochain coup
     		makeCall();
+    	}
+    	// si l'IA était en pause
+    	else if(paused)
+    	{	// sortie de pause ?
+    		if(!aisPause)
+	    	{	// basculement de la pause
+    			paused = false;
+   				// on lance le calcul pour le prochain coup
+				makeCall();	    		
+	    	}    		
     	}
     	// sinon : un appel avait déjà été effectué
     	else
-    	{	// si cet appel est fini :  
-    		if(futureAi.isDone())
+    	{	// passage en pause ?
+    		if(aisPause)
+    		{	// basculement de la pause
+    			paused = true;
+    			// on arrête le joueur
+    			ControlEvent[] events =
+    			{	new ControlEvent(ControlEvent.UP,false),
+					new ControlEvent(ControlEvent.RIGHT,false),
+					new ControlEvent(ControlEvent.DOWN,false),
+					new ControlEvent(ControlEvent.LEFT,false),
+					new ControlEvent(ControlEvent.DROPBOMB,false),
+					new ControlEvent(ControlEvent.JUMP,false),
+					new ControlEvent(ControlEvent.PUNCHBOMB,false),
+					new ControlEvent(ControlEvent.STOPBOMB,false),
+					new ControlEvent(ControlEvent.THROWBOMB,false),
+					new ControlEvent(ControlEvent.TRIGGERBOMB,false)
+    			};
+    			for(ControlEvent event: events)
+					player.getSprite().putControlEvent(event);
+    		}
+    		// pas de passage en pause : cet appel est-il fini ?
+    		else if(futureAi.isDone())
     		{	// on met à jour le joueur
     			try
     			{	V value = futureAi.get();

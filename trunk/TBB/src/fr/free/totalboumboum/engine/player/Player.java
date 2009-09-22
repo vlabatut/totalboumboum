@@ -88,9 +88,9 @@ public class Player
     	}
 	}
 	
-	public void update()
+	public void update(boolean aisPause)
 	{	if(ai!=null)
-			ai.update();
+			ai.update(aisPause);
 	}
 	
 	public String getFileName()
