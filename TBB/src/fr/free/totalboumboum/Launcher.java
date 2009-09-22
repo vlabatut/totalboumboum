@@ -369,6 +369,13 @@ public class Launcher
 	 * quelle est l'action à effectuer. étendre à d'autres actions ?
 	 * limitation pédago: on n'utilise plus A*
 	 */
+	
+	/*
+	 * TODO include dans l'API une fonction d'initialisation de l'IA, appelée lors de sa création
+	 * faudrait passer en paramètre le niveau et des infos style l'instance, etc.
+	 * ça permettrait par exemple, pour une IA qui apprend, de télécharger son fichier de sauvegarde
+	 * (dans son package)
+	 */
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 // MULTITHREADING	//////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -509,7 +516,7 @@ public class Launcher
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 	/*
-	 * TODO érer le déplacement des items lors d'une explosion
+	 * TODO gérer le déplacement des items lors d'une explosion
 	 */
 	
 	/*
@@ -845,6 +852,8 @@ public class Launcher
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 	/* TODO PRIORITÉ HAUTE
+	 * 
+	 * - fignoler l'instance SBM1 pour qu'elle soit conforme, au moins sur ce qui a été implémenté jusqu'à présent
 	 * 
 	 * - quand le joueur meurt, ses bombes télécommandées doivent exploser
 	 * 
