@@ -3,6 +3,10 @@
 		xsi:noNamespaceSchemaLocation="../../../../../schemas/abilities.xsd" >
 
 		<!-- STATE -->
+<!--  	BOMB_ON_DEATH_EXPLODE --> 
+		<ability strength="1" frame="false" time="-1" uses="-1">
+			<name value="BOMB_ON_DEATH_EXPLODE" />
+		</ability>
 <!--  	BOMB_TRIGGER_CONTROL --> 
 		<ability strength="1" frame="false" time="-1" uses="-1">
 			<name value="BOMB_TRIGGER_CONTROL" />

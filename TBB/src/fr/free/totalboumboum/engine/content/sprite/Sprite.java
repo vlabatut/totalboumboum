@@ -259,7 +259,8 @@ public abstract class Sprite
 	}
 	
 	public void spriteEnded()
-	{	itemManager.releaseAllItems();		
+	{	itemManager.releaseAllItems();
+		bombsetManager.triggerAllBombs();
 	}
 	
 	/////////////////////////////////////////////////////////////////

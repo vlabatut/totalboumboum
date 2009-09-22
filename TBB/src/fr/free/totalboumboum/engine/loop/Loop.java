@@ -181,6 +181,8 @@ public class Loop implements Runnable, Serializable
 	private boolean showSpeed = false;
 	private boolean showTime = false;
 	private boolean showFPS = false;
+	private boolean pauseEngine = false;
+	private boolean pauseAis = false;
 	private Lock debugLock = new ReentrantLock();
 
 	public void setShowGrid(boolean showGrid)
@@ -257,6 +259,32 @@ public class Loop implements Runnable, Serializable
 	{	int result;
 		debugLock.lock();
 		result = showSpritesPositions;
+		debugLock.unlock();
+		return result;
+	}
+
+	public void setEnginePause(boolean pauseEngine)
+	{	debugLock.lock();
+		this.pauseEngine = pauseEngine;		
+		debugLock.unlock();
+	}
+	public boolean getEnginePause()
+	{	boolean result;
+		debugLock.lock();
+		result = pauseEngine;
+		debugLock.unlock();
+		return result;
+	}
+
+	public void setAisPause(boolean pauseAis)
+	{	debugLock.lock();
+		this.pauseAis = pauseAis;		
+		debugLock.unlock();
+	}
+	public boolean getAisPause()
+	{	boolean result;
+		debugLock.lock();
+		result = pauseAis;
 		debugLock.unlock();
 		return result;
 	}
@@ -523,7 +551,7 @@ System.out.println();
 	}
 
 	private void update()
-	{	if(!isPaused)
+	{	if(!isPaused() && !getEnginePause())
 		{	long milliPeriod = Configuration.getEngineConfiguration().getMilliPeriod();
 			
 		// celebration ?
@@ -538,13 +566,15 @@ System.out.println();
 			
 			// update level
 			level.update();
-			// update players (humans and AIs), but only after the entries are done
-//			if(started)
-			{	Iterator<Player> i = players.iterator();
+			
+			// update AIs
+//			if(!getAisPause())
+			{	boolean aisPause = getAisPause();
+				Iterator<Player> i = players.iterator();
 				while(i.hasNext()/* && entryDelay<0*/)
 				{	Player temp = i.next();
 					if(!temp.isOut())
-						temp.update();
+						temp.update(aisPause);
 				}
 			}
 		}

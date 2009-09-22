@@ -21,6 +21,7 @@
 			<xsd:enumeration value="BOMB_FAILURE_MAXDURATION" />
 			<xsd:enumeration value="BOMB_FAILURE_MINDURATION" />
 			<xsd:enumeration value="BOMB_FAILURE_PROBABILITY" />
+			<xsd:enumeration value="BOMB_ON_DEATH_EXPLODE" />
 			<xsd:enumeration value="BOMB_PUSH_LATENCY" />
 			<xsd:enumeration value="BOMB_TRIGGER_COLLISION" />
 			<xsd:enumeration value="BOMB_TRIGGER_COMBUSTION" />

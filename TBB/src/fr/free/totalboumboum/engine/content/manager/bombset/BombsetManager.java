@@ -74,7 +74,7 @@ public class BombsetManager
 	}
 	
 	/////////////////////////////////////////////////////////////////
-	// BOMBS			/////////////////////////////////////////////
+	// DROP				/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	protected LinkedList<Bomb> droppedBombs;
 	
@@ -143,6 +143,61 @@ public class BombsetManager
 		}
 	}
 
+	public LinkedList<Bomb> getDroppedBombs()
+	{	return droppedBombs;
+	}
+
+	/////////////////////////////////////////////////////////////////
+	// TRIGGER			/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	public void triggerBomb()
+	{	boolean found = false;
+		Iterator<Bomb> b = droppedBombs.iterator();
+		while(!found && b.hasNext())
+		{	Bomb bomb = b.next();
+			// check if the bomb is remote controlled
+			StateAbility triggerAbility = bomb.modulateStateAbility(StateAbilityName.BOMB_TRIGGER_CONTROL);
+			if(triggerAbility.isActive())
+			{	// check if the bomb can explode
+				SpecificAction action = new SpecificDetonate(bomb);
+				ActionAbility detonateAbility = bomb.modulateAction(action);
+				if(detonateAbility.isActive())
+				{	found = true;
+					// make it explode
+					SpecificAction specificAction = new SpecificTrigger(sprite,bomb);
+					ActionEvent event = new ActionEvent(specificAction);
+					bomb.processEvent(event);				
+				}
+			}
+		}
+	}
+	
+	public void triggerAllBombs()
+	{	for(Bomb bomb: droppedBombs)
+		{	StateAbility ability = bomb.modulateStateAbility(StateAbilityName.BOMB_ON_DEATH_EXPLODE);
+			if(ability.isActive())
+			{	// set failure probability to zero
+				StateAbility failureAbility = new StateAbility(StateAbilityName.BOMB_FAILURE_PROBABILITY);
+				failureAbility.setStrength(0);
+				failureAbility.setFrame(true);
+				bomb.addDirectAbility(failureAbility);
+				
+				// check if the bomb can explose
+				SpecificAction action = new SpecificDetonate(bomb);
+				ActionAbility detonateAbility = bomb.modulateAction(action);
+				if(detonateAbility.isActive())
+				{	// make it explode
+					SpecificAction specificAction = new SpecificTrigger(sprite,bomb);
+					ActionEvent event = new ActionEvent(specificAction);
+					bomb.processEvent(event);				
+				}
+			}
+		}
+	}	
+	
+	/////////////////////////////////////////////////////////////////
+	// UPDATE			/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
 	public void update()
 	{	// dropped bombs
 		Iterator<Bomb> i = droppedBombs.iterator();
@@ -164,25 +219,6 @@ public class BombsetManager
 //			event = new ControlEvent(ControlEvent.DROPBOMB,false);
 //			sprite.putControlEvent(event);
 		}
-	}
-
-	public void triggerBomb()
-	{	boolean found = false;
-		Iterator<Bomb> b = droppedBombs.iterator();
-		while(!found && b.hasNext())
-		{	Bomb bomb = b.next();
-			SpecificAction action = new SpecificDetonate(bomb);
-			if(bomb.modulateStateAbility(StateAbilityName.BOMB_TRIGGER_CONTROL).isActive() && bomb.modulateAction(action).isActive())
-			{	found = true;
-				SpecificAction specificAction = new SpecificTrigger(sprite,bomb);
-				ActionEvent event = new ActionEvent(specificAction);
-				bomb.processEvent(event);				
-			}
-		}
-	}
-	
-	public LinkedList<Bomb> getDroppedBombs()
-	{	return droppedBombs;
 	}
 
 	/////////////////////////////////////////////////////////////////

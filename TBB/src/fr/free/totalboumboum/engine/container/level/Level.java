@@ -753,6 +753,10 @@ public class Level
 			drawTime(g);
 		if(loop.getShowFPS())
 			drawFPS(g);
+		if(loop.getEnginePause())
+			drawEnginePause(g);
+		if(loop.getAisPause())
+			drawAisPause(g);
 		if(messageDisplayer!=null)
 			drawDisplayedText(g);
 	}
@@ -942,6 +946,30 @@ public class Level
 		Rectangle2D box = metrics.getStringBounds(text, g);
 		int x = 10;
 		int y = (int)Math.round(50+box.getHeight()/2);
+		g.drawString(text, x, y);
+	}
+
+	private void drawEnginePause(Graphics g)
+	{	g.setColor(Color.MAGENTA);
+		Font font = new Font("Dialog", Font.PLAIN, 18);
+		g.setFont(font);
+		FontMetrics metrics = g.getFontMetrics(font);
+		String text = "Engine paused";
+		Rectangle2D box = metrics.getStringBounds(text, g);
+		int x = 10;
+		int y = (int)Math.round(70+box.getHeight()/2);
+		g.drawString(text, x, y);
+	}
+
+	private void drawAisPause(Graphics g)
+	{	g.setColor(Color.MAGENTA);
+		Font font = new Font("Dialog", Font.PLAIN, 18);
+		g.setFont(font);
+		FontMetrics metrics = g.getFontMetrics(font);
+		String text = "AIs paused";
+		Rectangle2D box = metrics.getStringBounds(text, g);
+		int x = 10;
+		int y = (int)Math.round(90+box.getHeight()/2);
 		g.drawString(text, x, y);
 	}
 

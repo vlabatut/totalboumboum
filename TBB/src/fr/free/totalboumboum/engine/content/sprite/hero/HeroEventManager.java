@@ -159,7 +159,11 @@ public class HeroEventManager extends EventManager
 	/////////////////////////////////////////////////////////////////
 	@Override
 	public void processEvent(ControlEvent event)
-	{	if(event.getName().equals(ControlEvent.DOWN) || event.getName().equals(ControlEvent.LEFT) || event.getName().equals(ControlEvent.RIGHT) || event.getName().equals(ControlEvent.UP))
+	{	
+System.out.println(event.getName()+","+event.getMode());
+		
+		
+		if(event.getName().equals(ControlEvent.DOWN) || event.getName().equals(ControlEvent.LEFT) || event.getName().equals(ControlEvent.RIGHT) || event.getName().equals(ControlEvent.UP))
 			controlDirection(event);
 		else if(event.getName().equals(ControlEvent.DROPBOMB))
 			controlDropBomb(event);
@@ -169,6 +173,9 @@ public class HeroEventManager extends EventManager
 			controlPunchBomb(event);
 		else if(event.getName().equals(ControlEvent.TRIGGERBOMB))
 			controlTriggerBomb(event);
+System.out.println(spriteDirection+","+controlDirection);
+System.out.println(gesture);
+System.out.println();
 	}
 
 	private void controlDirection(ControlEvent event)
@@ -203,9 +210,11 @@ public class HeroEventManager extends EventManager
 			}
 		}
 		else if(gesture.equals(GestureName.STANDING) || gesture.equals(GestureName.WAITING))
-		{	spriteDirection = controlDirection;
-			gesture = GestureName.WALKING;
-			sprite.setGesture(gesture, spriteDirection,controlDirection,true);
+		{	if(controlDirection!=Direction.NONE)
+			{	spriteDirection = controlDirection;
+				gesture = GestureName.WALKING;
+				sprite.setGesture(gesture, spriteDirection,controlDirection,true);
+			}
 		}
 	}
 	
@@ -623,7 +632,7 @@ public class HeroEventManager extends EventManager
 	}
 
 	private void die()
-	{	// manage the items
+	{	// manage the items and bombs
 		sprite.spriteEnded();
 		
 		// the player is definitely out

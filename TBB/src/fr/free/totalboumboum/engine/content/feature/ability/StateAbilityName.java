@@ -84,6 +84,9 @@ public class StateAbilityName
 	/** probability for a bomb to fail to explose when it's triggered */
 	public static final String BOMB_FAILURE_PROBABILITY = "BOMB_FAILURE_PROBABILITY";
 	
+	/** when the owner of this bomb is burnt, the bomb also explodes */
+	public static final String BOMB_ON_DEATH_EXPLODE = "BOMB_ON_DEATH_EXPLODE";
+
 	/** delay a hero has to push the bomb for before it actually starts sliding */
 	public static final String BOMB_PUSH_LATENCY = "BOMB_PUSH_LATENCY";
 	
