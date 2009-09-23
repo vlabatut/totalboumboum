@@ -7,12 +7,14 @@
 		<ability strength="3" frame="false" time="-1" uses="-1">
 			<name value="ITEM_CONTAGION_MODE" />
 		</ability>
-
 <!--  	ITEM_GROUP --> 
 		<ability strength="1" frame="false" time="-1" uses="-1">
 			<name value="ITEM_GROUP" />
-		</ability>
-			
+		</ability>			
+<!--  	ITEM_INDESTRUCTIBLE --> 
+		<ability strength="1" frame="false" time="-1" uses="-1">
+			<name value="ITEM_INDESTRUCTIBLE" />
+		</ability>			
 <!--  	ITEM_ON_CANCEL_ACTION --> 
 		<ability strength="1" frame="false" time="-1" uses="-1">
 			<name value="ITEM_ON_CANCEL_ACTION" />

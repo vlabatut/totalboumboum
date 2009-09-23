@@ -189,6 +189,9 @@ public class StateAbilityName
 	/** indicates if the item is a part of a group (whose number corresponds to the strength) */
 	public static final String ITEM_GROUP = "ITEM_GROUP";
 	
+	/** used for the crown mode (just counting points) */
+	public static final String ITEM_INDESTRUCTIBLE = "ITEM_INDESTRUCTIBLE";
+
 	/** indicates what to do if the holder dies: 0=disapear 1=release as is 2=release with reinit */
 	public static final String ITEM_ON_DEATH_ACTION = "ITEM_ON_DEATH_ACTION";
 	public static final int ITEM_ON_DEATH_DISAPEAR = 0;
