@@ -84,7 +84,7 @@ public class AltayBasaranoglu extends ArtificialIntelligence {
 			initMatrixBombTimes();
 			initMatrixBombTimes=true;
 		}
-		//maintenant on remplira les temps des bombs poses a la matrice
+		//maintenant on remplira les temps des bombes posees a la matrice
 		long tempMatrixBombTimes[][][]= new long[line][col][2];
 		for (int i = 0; i < line; i++) {
 			checkInterruption();

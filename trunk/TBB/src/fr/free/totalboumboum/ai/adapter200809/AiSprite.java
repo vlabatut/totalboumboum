@@ -76,7 +76,7 @@ public abstract class AiSprite<T extends Sprite>
 	@Override
 	public boolean equals(Object o)
 	{	boolean result = false;
-		if(o instanceof AiSprite)
+		if(o instanceof AiSprite<?>)
 		{	
 //			AiSprite<?> s = (AiSprite<?>)o;	
 //			result = sprite==s.sprite;

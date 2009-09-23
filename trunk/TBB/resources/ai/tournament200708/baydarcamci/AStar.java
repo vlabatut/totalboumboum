@@ -50,8 +50,7 @@ public class AStar implements PathFinder {
 		final Node[] node;
 		int count;
 		boolean f_sorted;
-		@SuppressWarnings("unchecked")
-		HashMap stateMap = new HashMap();
+//		HashMap stateMap = new HashMap();
 
 		NodeList(int size) {
 			node = new Node[size];
@@ -102,9 +101,9 @@ public class AStar implements PathFinder {
 		}
 
 		// How big is the list?
-		int size() {
-			return count;
-		}
+//		int size() {
+//			return count;
+//		}
 		
 		// Is the list empty?
 		boolean isEmpty() {
@@ -135,6 +134,7 @@ public class AStar implements PathFinder {
 
 		int g; // cost of this node + it's predecessors
 		int h; // heuristic estimate of distance to goal
+		@SuppressWarnings("unused")
 		int f; // sum of cumulative cost of predecessors and self and heuristic
 
 		int [] userState;
@@ -151,7 +151,7 @@ public class AStar implements PathFinder {
 		/**
 		 * @see java.lang.Comparable#compareTo(java.lang.Object)
 		 */
-		public int compareTo(Object o) {
+/*		public int compareTo(Object o) {
 			Node n2 = (Node) o;
 			if (this == n2)
 				return 0;
@@ -159,16 +159,16 @@ public class AStar implements PathFinder {
 				return 1;
 			return f > n2.f ? 1 : f == n2.f ? 0 : -1;
 		}
-		
+*/		
 		/**
 		 * Duplicate the incoming node
 		 */
-		void dup(Node src) {
+/*		void dup(Node src) {
 			this.g = src.g;
 			this.h = src.h;
 			this.f = src.f;
 		}
-
+*/
 	}
 
 	
