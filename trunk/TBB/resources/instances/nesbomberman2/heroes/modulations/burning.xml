@@ -9,6 +9,20 @@
 	</other-modulations>
 	
 	<actor-modulations>
+<!--  	CRY --> 
+		<modulation frame="true" strength="0" >
+			<action name="CRY" direction="ANY" contact="ANY"
+				tilePosition="ANY" orientation="ANY" target="ANY" />
+			<actor-restrictions />
+			<target-restrictions />
+		</modulation>
+<!--  	EXULT --> 
+		<modulation frame="true" strength="0" >
+			<action name="EXULT" direction="ANY" contact="ANY"
+				tilePosition="ANY" orientation="ANY" target="ANY" />
+			<actor-restrictions />
+			<target-restrictions />
+		</modulation>
 	</actor-modulations>
 	
 	<target-modulations>

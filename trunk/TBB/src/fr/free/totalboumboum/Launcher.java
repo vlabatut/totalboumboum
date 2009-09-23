@@ -752,6 +752,16 @@ public class Launcher
 	 * (note : point mentionné dans le blog)
 	 */
 	
+	/* TODO
+	 * impossible de poser une bombe quand on est en train de buter contre un mur en direction upleft (et uniquement cette direction pr NES2) et downleft (pr SBM1)
+	 * 		>> ca viendrait de swing ou du clavier (pb matériel ou bas niveau)
+	 */
+	
+	 /* TODO BUGS POTENTIELS (à vérifier)
+	  * 
+	  * - il semblerait que les directions dans la SpecificAction et dans la GeneralAction correspondante ne soient pas les mêmes...
+	  * 
+	  */
 	
 	
 	
@@ -822,6 +832,7 @@ public class Launcher
 	 * - possibilité de faire exploser les bombes posées par un joueur quand celui-ci brûle
 	 * - touche END permettant de pauser le jeu
 	 * - touche HOME permettant de pauser seulement les IA 
+	 * - meilleure gestion de l'exultation/pleur à la fin des manches
 	 * 
 	 */
 
@@ -831,29 +842,9 @@ public class Launcher
 
 	/* TODO
 	 * 
-	 * - pb quand une IA meurt et revient : la représentation dans AiZone n'est pas mise à jour (ou a été supprimée, visiblement)
-	 * 
-	 * - il y a	certainement un problème quand on combine les différents items de vitesse (combinaison arithmétique des modificateurs de force, est-ce cohérent ? >> à voir)
-	 * 
-	 * - quand on a le malus diarhée et qu'on meurt, ça pose plein de bombes en rafale (chiant) faut controler que l'action est bien possible, 
-	 *   et interdire toute action pendant burn (ou au moins de poser des bombes)
-	 * 
-	 * - empêcher d'appuyer sur esc quand ça exulte déjà (p-ê en testant la modulation sur exultation?)
-	 * 	 empêcher toute action pendant l'exultation, en fait...
-	 * 
-	 * - bug d'affichage quand les flammes se croisent au cours de plusieurs explosions: la dernière n'est pas affichée
-	 * 
-	 * - il y a visiblement un bug dans la GUI quand on commence une partie rapide puis revient au menu principal et en recommence une autre : la précédente ne semble pas complètement réinitialisée
-	 *  >> à voir : p-ê simplement une fausse manip. faire : choisir un seul niveau, commencer, recommencer avec un niveau de plus et voir si le nouveau niveau apparait bien dans la nouvelle partie
-	 *  
 	 * - bug d'affichage dans les notes d'IA, les accents sont affichés avec la police par défaut
 	 * 
-	 * - il semblerait que les directions dans la SpecificAction et dans la GeneralAction correspondante ne soient pas les mêmes...
-	 * 
-	 * - impossible de poser une bombe quand on est en train de buter contre un mur en direction upleft (et uniquement cette direction pr NES2) et downleft (pr SBM1)
-	 * 		>> viendrait de swing ou du clavier (pb matériel ou bas niveau)
-	 * 
-	 * - truc bizarre avec le malus d'accélération : les deux joueurs vont dans le même sens et parfois il y a une espèce de boucle qui empêche de subir les effets complets du malus
+	 * - GUI : les résultats ne s'affichent pas automatiquement quand on revient à l'écran du match
 	 */
 	
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -863,6 +854,8 @@ public class Launcher
 	/* TODO PRIORITÉ HAUTE
 	 * 
 	 * - fignoler l'instance SBM1 pour qu'elle soit conforme, au moins sur ce qui a été implémenté jusqu'à présent
+	 * 
+	 * - implémenter l'indestructibilité des malus au feu
 	 * 
 	 * - cas particulier : item apparaissant dans une explosion de bloc, avec un joueur déjà sur le bloc 
 	 *   (il a passe-muraille et résistance au feu) : l'item doit être ramassé dès qu'il a fini d'apparaitre, en théorie

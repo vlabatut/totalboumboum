@@ -134,8 +134,7 @@ public class AStar implements PathFinder {
 
 		int g; // cost of this node + it's predecessors
 		int h; // heuristic estimate of distance to goal
-		@SuppressWarnings("unused")
-		int f; // sum of cumulative cost of predecessors and self and heuristic
+//		int f; // sum of cumulative cost of predecessors and self and heuristic
 
 		int [] userState;
 
@@ -203,7 +202,7 @@ public class AStar implements PathFinder {
 		openList.addNode(start);
 		start.g = 0;
 		start.h = getDistance(from, to);
-		start.f = start.h;
+//		start.f = start.h;
 		end = new Node(to, null);
 		
 		
@@ -351,7 +350,7 @@ public class AStar implements PathFinder {
 			Node newNode = new Node(newState, n);
 			newNode.g = newg;
 			newNode.h = getDistance(newState, end.userState);
-			newNode.f = newNode.g + newNode.h;
+//			newNode.f = newNode.g + newNode.h;
 			if (!openList.addNode(newNode)) {
 				state = SEARCH_STATE_FAILED;
 				cleanup();

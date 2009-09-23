@@ -210,7 +210,7 @@ public class BombsetManager
 		}
 		
 		// diarrhea disease
-		StateAbility ab = sprite.modulateStateAbility(StateAbilityName.HERO_DIARRHEA);
+		StateAbility ab = sprite.modulateStateAbility(StateAbilityName.HERO_BOMB_DIARRHEA);
 //if(sprite instanceof Hero)
 //System.out.println("diarrhea ("+sprite.getCurrentPosX()+"): "+ab.isActive());		
 		if(ab.isActive())
