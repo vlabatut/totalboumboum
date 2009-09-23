@@ -856,6 +856,8 @@ public class Launcher
 	 * 
 	 * - fignoler l'instance SBM1 pour qu'elle soit conforme, au moins sur ce qui a été implémenté jusqu'à présent
 	 * 
+	 * - programmer l'ia suiveuse
+	 * 
 	 * - cas particulier : item apparaissant dans une explosion de bloc, avec un joueur déjà sur le bloc 
 	 *   (il a passe-muraille et résistance au feu) : l'item doit être ramassé dès qu'il a fini d'apparaitre, en théorie
 	 *   ou bien : un héros meurt, un item apparait sous les pieds d'un autre joueur immobile : l'item reste sans que le joueur ne se l'approprie
@@ -1000,29 +1002,9 @@ public class Launcher
 // A FAIRE SITE		//////////////////////////////////////////////////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	
-	/*TODO
-	 * - parler de la possibilité d'inclure des bombes dans le niveau, de base (pas vu dans BM officiel, mais très utilisé dans X-Blast)
-	 * 
-	 * - vidéo avec toutes les nouveautés concernant les items :
-	 * 		- tous les bonus en oeuvre
-	 * 		- tous les malus aussi
-	 * 		- transmission des malus
-	 * 		- relachement des items à la mort
-	 * 		- guérison des malus par ramassage d'item
-	 * 
-	 */
 	
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //EN COURS			//////////////////////////////////////////////////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	
-	/* NOTE
-	 * 
-	 * - guérison par un bonus 
-	 * 		0 disparition pure & simple
-	 * 		- retour en jeu
-	 * 			1 réinitialisation des abilités
-	 * 			2 les abilités continuent pareil
-	 */
-
 }
