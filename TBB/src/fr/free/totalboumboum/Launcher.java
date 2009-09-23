@@ -831,6 +831,10 @@ public class Launcher
 
 	/* TODO
 	 * 
+	 * - pb quand une IA meurt et revient : la représentation dans AiZone n'est pas mise à jour (ou a été supprimée, visiblement)
+	 * 
+	 * - il y a	certainement un problème quand on combine les différents items de vitesse (combinaison arithmétique des modificateurs de force, est-ce cohérent ? >> à voir)
+	 * 
 	 * - quand on a le malus diarhée et qu'on meurt, ça pose plein de bombes en rafale (chiant) faut controler que l'action est bien possible, 
 	 *   et interdire toute action pendant burn (ou au moins de poser des bombes)
 	 * 
