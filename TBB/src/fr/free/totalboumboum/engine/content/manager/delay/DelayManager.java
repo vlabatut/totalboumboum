@@ -32,6 +32,7 @@ import fr.free.totalboumboum.engine.content.sprite.Sprite;
 
 public class DelayManager
 {	
+	public static final String DL_DEFEAT = "DL_DEFEAT";
 	public static final String DL_ENTER = "DL_ENTER";
 	public static final String DL_EXPLOSION = "DL_EXPLOSION";
 	public static final String DL_LATENCY = "DL_LATENCY";
@@ -39,6 +40,7 @@ public class DelayManager
 	public static final String DL_REBIRTH = "DL_REBIRTH";
 	public static final String DL_RELEASE = "DL_RELEASE";
 	public static final String DL_SPAWN = "DL_SPAWN";
+	public static final String DL_VICTORY = "DL_VICTORY";
 	public static final String DL_WAIT = "DL_WAIT";
 	
 

@@ -24,6 +24,7 @@ package fr.free.totalboumboum.engine.content.sprite.hero;
 import java.util.ArrayList;
 import java.util.Iterator;
 
+import fr.free.totalboumboum.configuration.GameVariables;
 import fr.free.totalboumboum.engine.container.tile.Tile;
 import fr.free.totalboumboum.engine.content.feature.Direction;
 import fr.free.totalboumboum.engine.content.feature.ability.ActionAbility;
@@ -160,7 +161,7 @@ public class HeroEventManager extends EventManager
 	@Override
 	public void processEvent(ControlEvent event)
 	{	
-System.out.println(event.getName()+","+event.getMode());
+//System.out.println(event.getName()+","+event.getMode());
 		
 		
 		if(event.getName().equals(ControlEvent.DOWN) || event.getName().equals(ControlEvent.LEFT) || event.getName().equals(ControlEvent.RIGHT) || event.getName().equals(ControlEvent.UP))
@@ -173,9 +174,9 @@ System.out.println(event.getName()+","+event.getMode());
 			controlPunchBomb(event);
 		else if(event.getName().equals(ControlEvent.TRIGGERBOMB))
 			controlTriggerBomb(event);
-System.out.println(spriteDirection+","+controlDirection);
-System.out.println(gesture);
-System.out.println();
+//System.out.println(spriteDirection+","+controlDirection);
+//System.out.println(gesture);
+//System.out.println();
 	}
 
 	private void controlDirection(ControlEvent event)
@@ -218,28 +219,36 @@ System.out.println();
 		}
 	}
 	
+	private double lastDropTime = 0;
 	private void controlDropBomb(ControlEvent event)
 	{	
 //System.out.println("enters ("+sprite.getCurrentPosX()+")");		
 		if(event.getMode())
-		{	StateAbility ablt = sprite.modulateStateAbility(StateAbilityName.HERO_CONSTIPATION);
+		{	// enforcing drop bomb latency
+			StateAbility ablt = sprite.modulateStateAbility(StateAbilityName.HERO_BOMB_DROP_LATENCY);
+			double currentTime = GameVariables.loop.getTotalTime();
+			double elapsedTime = currentTime - lastDropTime;
+			if(elapsedTime>ablt.getStrength())
+			{	ablt = sprite.modulateStateAbility(StateAbilityName.HERO_BOMB_CONSTIPATION);
 //System.out.println("constipation ("+sprite.getCurrentPosX()+"): "+ablt.isActive());		
-			if(!ablt.isActive())
-			{	Bomb bomb = sprite.makeBomb();
-				SpecificDrop action = new SpecificDrop(sprite,bomb);
-				ActionAbility ability = sprite.modulateAction(action);
+				if(!ablt.isActive())
+				{	Bomb bomb = sprite.makeBomb();
+					SpecificDrop action = new SpecificDrop(sprite,bomb);
+					ActionAbility ability = sprite.modulateAction(action);
 //System.out.println("drop ("+sprite.getCurrentPosX()+"): "+ablt.isActive());
 //if(!ablt.isActive())
 //	System.out.println();
-				if(ability.isActive())
-				{	sprite.dropBomb(action);
-					if(gesture.equals(GestureName.WAITING))
-					{	setWaitDelay();
-						gesture = GestureName.STANDING;
-						sprite.setGesture(gesture,spriteDirection,controlDirection,true);					
+					if(ability.isActive())
+					{	lastDropTime = currentTime;
+						sprite.dropBomb(action);
+						if(gesture.equals(GestureName.WAITING))
+						{	setWaitDelay();
+							gesture = GestureName.STANDING;
+							sprite.setGesture(gesture,spriteDirection,controlDirection,true);					
+						}
+						else if(gesture.equals(GestureName.STANDING))
+							setWaitDelay();
 					}
-					else if(gesture.equals(GestureName.STANDING))
-						setWaitDelay();
 				}
 			}
 		}
@@ -448,6 +457,14 @@ System.out.println();
 				appear();
 			}	
 		}
+		// victory delay: time to celebrate
+		else if(event.getStringParameter().equals(DelayManager.DL_VICTORY))
+		{	exult();			
+		}
+		// defeat delay: time to cry
+		else if(event.getStringParameter().equals(DelayManager.DL_DEFEAT))
+		{	cry();			
+		}
 	}
 
 	private void engIntersectionOff(EngineEvent event)
@@ -548,49 +565,11 @@ System.out.println();
 	}
 	
 	private void engVictory(EngineEvent event)
-	{	if(!gesture.equals(GestureName.BURNING))
-		{	SpecificAction specificAction = new SpecificExult(sprite);
-			ActionAbility ability = sprite.modulateAction(specificAction);
-			if(ability.isActive())
-			{	StateAbility ablt = sprite.modulateStateAbility(StateAbilityName.HERO_CELEBRATION_DURATION);
-				double duration = ablt.getStrength();
-				gesture = GestureName.EXULTING;							
-				sprite.setGesture(gesture,spriteDirection,controlDirection,true,duration);
-			}
-			else
-			{
-				//NOTE programmer l'action (execution retardee) quand ce sera possible
-			}		
-		}
-/*		
-		StateAbility ability = sprite.computeAbility(StateAbility.HERO_CELEBRATION_DURATION);
-		double duration = ability.getStrength();
-		gesture = GestureConstants.EXULTING;							
-		sprite.setGesture(gesture,spriteDirection,controlDirection,true,duration);
-*/		
+	{	exult();
 	}
 	
 	private void engDefeat(EngineEvent event)
-	{	if(!gesture.equals(GestureName.BURNING))
-		{	SpecificAction specificAction = new SpecificCry(sprite);
-			ActionAbility ability = sprite.modulateAction(specificAction);
-			if(ability.isActive())
-			{	StateAbility ablt = sprite.modulateStateAbility(StateAbilityName.HERO_CELEBRATION_DURATION);
-				double duration = ablt.getStrength();
-				gesture = GestureName.CRYING;
-				sprite.setGesture(gesture,spriteDirection,controlDirection,true,duration);
-			}
-			else
-			{
-				//NOTE programmer l'action quand ce sera possible
-			}
-		}		
-/*		
-		StateAbility ability = sprite.computeAbility(StateAbility.HERO_CELEBRATION_DURATION);
-		double duration = ability.getStrength();
-		gesture = GestureConstants.CRYING;							
-		sprite.setGesture(gesture,spriteDirection,controlDirection,true,duration);
-*/		
+	{	cry();		
 	}
 	
 	private void engEnter(EngineEvent event)
@@ -628,7 +607,7 @@ System.out.println();
 	private void setWaitDelay()
 	{	StateAbility ability = sprite.modulateStateAbility(StateAbilityName.HERO_WAIT_DURATION);
 		double duration = ability.getStrength();
-		sprite.addDelay(DelayManager.DL_WAIT,duration);		
+		sprite.addDelay(DelayManager.DL_WAIT,duration);
 	}
 
 	private void die()
@@ -649,6 +628,36 @@ System.out.println();
 			gesture = GestureName.HIDING;
 			sprite.setGesture(gesture,spriteDirection,Direction.NONE,true);
 		}
+	}
+	
+	private void exult()
+	{	SpecificAction specificAction = new SpecificExult(sprite);
+		ActionAbility ability = sprite.modulateAction(specificAction);
+		if(ability.isActive())
+		{	StateAbility ablt = sprite.modulateStateAbility(StateAbilityName.HERO_CELEBRATION_DURATION);
+			double duration = ablt.getStrength();
+			gesture = GestureName.EXULTING;							
+			sprite.setGesture(gesture,spriteDirection,controlDirection,true,duration);
+		}
+		else
+		{	// program the victory anime as soon as possible
+			sprite.addIterDelay(DelayManager.DL_VICTORY,1);
+		}
+	}
+	
+	private void cry()
+	{	SpecificAction specificAction = new SpecificCry(sprite);
+		ActionAbility ability = sprite.modulateAction(specificAction);
+		if(ability.isActive())
+		{	StateAbility ablt = sprite.modulateStateAbility(StateAbilityName.HERO_CELEBRATION_DURATION);
+			double duration = ablt.getStrength();
+			gesture = GestureName.CRYING;
+			sprite.setGesture(gesture,spriteDirection,controlDirection,true,duration);
+		}
+		else
+		{	// program the defeat anime as soon as possible
+			sprite.addIterDelay(DelayManager.DL_DEFEAT,1);
+		}		
 	}
 	
 	/////////////////////////////////////////////////////////////////

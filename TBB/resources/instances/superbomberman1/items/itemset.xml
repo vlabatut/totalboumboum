@@ -21,7 +21,7 @@
 					<name value="SPRITE_TWINKLE" />
 				</ability>
 				<ability time="30000" >
-					<name value="HERO_CONSTIPATION" />
+					<name value="HERO_BOMB_CONSTIPATION" />
 				</ability>
 			</abilities>
 			<!-- bomb diarrhea-->
@@ -36,7 +36,7 @@
 					<name value="SPRITE_TWINKLE" />
 				</ability>
 				<ability time="15000" >
-					<name value="HERO_DIARRHEA" />
+					<name value="HERO_BOMB_DIARRHEA" />
 				</ability>
 			</abilities>
 			<!-- bomb short fuse -->
@@ -80,7 +80,7 @@
 				<ability strength="1" frame="true" time="15000" > <!-- #000001 almost black -->
 					<name value="SPRITE_TWINKLE" />
 				</ability>
-				<ability >
+				<ability time="15000">
 					<name value="HERO_CONTROL_INVERSION" />
 				</ability>
 			</abilities>
@@ -101,7 +101,7 @@
 				<ability strength="1" frame="true" time="15000" > <!-- #000001 almost black -->
 					<name value="SPRITE_TWINKLE" />
 				</ability>
-				<ability strength="-1">
+				<ability strength="-1" frame="true" time="15000">
 					<name value="HERO_WALK_SPEED_MODULATION" />
 				</ability>
 			</abilities>
@@ -116,7 +116,7 @@
 				<ability strength="1" frame="true" time="15000" > <!-- #000001 almost black -->
 					<name value="SPRITE_TWINKLE" />
 				</ability>
-				<ability strength="100" frame="true">
+				<ability strength="100" frame="true" time="15000">
 					<name value="HERO_WALK_SPEED_MODULATION" />
 				</ability>
 			</abilities>

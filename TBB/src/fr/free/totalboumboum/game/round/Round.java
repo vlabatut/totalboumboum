@@ -207,8 +207,10 @@ public class Round implements StatisticHolder, Serializable
 	}
 	
 	public void cancelGame()
-	{	getLimits().selectLimit(0);
-		closeGame();
+	{	if(roundOver!=true)
+		{	getLimits().selectLimit(0);
+			closeGame();
+		}
 	}
 	
 	public void closeGame()

@@ -105,6 +105,15 @@ public class StateAbilityName
 	/////////////////////////////////////////////////////////////////
 	// HEROES ABILITIES			/////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
+	/** bomb constipation: the hero can't drop any bombs */
+	public static final String HERO_BOMB_CONSTIPATION = "HERO_BOMB_CONSTIPATION";
+	
+	/** bomb constipation: the hero can't help dropping bombs */
+	public static final String HERO_BOMB_DIARRHEA = "HERO_BOMB_DIARRHEA";
+	
+	/** minimal delay between two dropped bombs */
+	public static final String HERO_BOMB_DROP_LATENCY = "HERO_BOMB_DROP_LATENCY";
+
 	/** number of bombs one can simultaneously drop */
 	public static final String HERO_BOMB_NUMBER = "HERO_BOMB_NUMBER";
 	/** maximal limit for the number of bombs one can simultaneously drop */
@@ -121,14 +130,8 @@ public class StateAbilityName
 	/** gesture duration when the hero cries or exults at the end of a round */
 	public static final String HERO_CELEBRATION_DURATION = "HERO_CELEBRATION_DURATION";
 	
-	/** bomb constipation: the hero can't drop any bombs */
-	public static final String HERO_CONSTIPATION = "HERO_CONSTIPATION";
-	
 	/** invert the controls, used for disease items */
 	public static final String HERO_CONTROL_INVERSION = "HERO_CONTROL_INVERSION";
-	
-	/** bomb constipation: the hero can't help dropping bombs */
-	public static final String HERO_DIARRHEA = "HERO_DIARRHEA";
 	
 	/** number of times the hero can be bombed before being eliminated */
 	public static final String HERO_LIFE = "HERO_LIFE";

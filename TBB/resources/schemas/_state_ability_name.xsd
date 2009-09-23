@@ -28,15 +28,16 @@
 			<xsd:enumeration value="BOMB_TRIGGER_CONTROL" />
 			<xsd:enumeration value="BOMB_TRIGGER_TIMER" />
 			
+			<xsd:enumeration value="HERO_BOMB_DIARRHEA" />
+			<xsd:enumeration value="HERO_BOMB_CONSTIPATION" />
+			<xsd:enumeration value="HERO_BOMB_DROP_LATENCY" />
 			<xsd:enumeration value="HERO_BOMB_NUMBER" />
 				<xsd:enumeration value="HERO_BOMB_NUMBER_MAX" />
 			<xsd:enumeration value="HERO_BOMB_RANGE" />
 				<xsd:enumeration value="HERO_BOMB_RANGE_MAX" />
 			<xsd:enumeration value="HERO_BOMB_TIMER_COEFFICIENT" />
 			<xsd:enumeration value="HERO_CELEBRATION_DURATION" />
-			<xsd:enumeration value="HERO_CONSTIPATION" />
 			<xsd:enumeration value="HERO_CONTROL_INVERSION" />
-			<xsd:enumeration value="HERO_DIARRHEA" />
 			<xsd:enumeration value="HERO_FIRE_PROTECTION" />
 			<xsd:enumeration value="HERO_LIFE" />
 			<xsd:enumeration value="HERO_PUNCH_DURATION" />
