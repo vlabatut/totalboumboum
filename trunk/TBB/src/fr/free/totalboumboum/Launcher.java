@@ -833,6 +833,7 @@ public class Launcher
 	 * - touche END permettant de pauser le jeu
 	 * - touche HOME permettant de pauser seulement les IA 
 	 * - meilleure gestion de l'exultation/pleur à la fin des manches
+	 * - capacité de résistance au feu pour les items (l'item est déplacé au lieu d'être détruit)
 	 * 
 	 */
 
@@ -854,8 +855,6 @@ public class Launcher
 	/* TODO PRIORITÉ HAUTE
 	 * 
 	 * - fignoler l'instance SBM1 pour qu'elle soit conforme, au moins sur ce qui a été implémenté jusqu'à présent
-	 * 
-	 * - implémenter l'indestructibilité des malus au feu
 	 * 
 	 * - cas particulier : item apparaissant dans une explosion de bloc, avec un joueur déjà sur le bloc 
 	 *   (il a passe-muraille et résistance au feu) : l'item doit être ramassé dès qu'il a fini d'apparaitre, en théorie
@@ -944,7 +943,8 @@ public class Launcher
 	 * 			- qu'est-ce qu'il peut faire comme action? quelles sont les transitions? qu'est-ce qui est interdit ?
 	 * 			- ça permettra de savoir ce qui peut être modulé et ce qui ne peut pas l'être
 	 * 		- un sprite n'est a priori pas un obstacle, tout est géré par modulation (y compris pour le feu)
-	 * 
+	 * 		- le coup de l'indestructibilité des items (le fait de réapparaitre ailleurs) pourrait être étendue à tous les sprites
+	 * 			(en particulier les joueurs, ça serait un cas spécial de résistance au feu un peu pénalisante, utilisable un nombre limité de fois, par ex !)
 	 * 
 	 */
 	

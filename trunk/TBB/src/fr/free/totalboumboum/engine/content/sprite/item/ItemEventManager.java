@@ -59,8 +59,18 @@ public class ItemEventManager extends EventManager
 
 	private void actionConsume(ActionEvent event)
 	{	if(gesture.equals(GestureName.STANDING))
-		{	gesture = GestureName.BURNING;
-			sprite.setGesture(gesture,spriteDirection,Direction.NONE,true);
+		{	StateAbility ability = sprite.modulateStateAbility(StateAbilityName.ITEM_INDESTRUCTIBLE);
+			if(ability.isActive())
+			{	// make the item disapear
+				gesture = GestureName.DISAPPEARING;
+				sprite.setGesture(gesture,spriteDirection,Direction.NONE,true);
+				// then release it somewhere
+				sprite.addIterDelay(DelayManager.DL_RELEASE,1);
+			}
+			else
+			{	gesture = GestureName.BURNING;
+				sprite.setGesture(gesture,spriteDirection,Direction.NONE,true);
+			}
 		}
 	}
 		
@@ -137,8 +147,13 @@ public class ItemEventManager extends EventManager
 			{	sprite.addIterDelay(DelayManager.DL_ENTER,1);
 			}
 		}
+		else if(gesture.equals(GestureName.DISAPPEARING) && event.getStringParameter().equals(DelayManager.DL_RELEASE))
+		{	// delay is over too soon, relaunch it
+			sprite.addIterDelay(DelayManager.DL_RELEASE,1);
+		}
 		else if(gesture.equals(GestureName.HIDING) && event.getStringParameter().equals(DelayManager.DL_RELEASE))
-		{	released();
+		{	// the item is released on the ground
+			released();
 		}
 	}
 	
