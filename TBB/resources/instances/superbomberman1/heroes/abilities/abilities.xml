@@ -15,6 +15,14 @@
 		<ability strength="1" frame="false" time="-1" uses="-1">
 			<name value="SPRITE_TRAVERSE_ITEM"/>
 		</ability>
+<!--  	HERO_BOMB_DROP_LATENCY --> 
+		<ability strength="250" frame="false" time="-1" uses="-1">
+			<name value="HERO_BOMB_DROP_LATENCY" />
+		</ability>		
+<!--  	HERO_BOMB_NUMBER_MAX --> 
+		<ability strength="10" frame="false" time="-1" uses="-1">
+			<name value="HERO_BOMB_NUMBER_MAX" />
+		</ability>
 <!--  	HERO_BOMB_RANGE_MAX --> 
 		<ability strength="10" frame="false" time="-1" uses="-1">
 			<name value="HERO_BOMB_NUMBER_MAX" />

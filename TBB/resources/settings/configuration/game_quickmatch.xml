@@ -18,8 +18,7 @@
 		<player file="64" color="YELLOW" controls="2" spritePack="superbomberman1" spriteFolder="shirobon" />
 	</players>
 	<levels>
-		<level pack="nbm2Custom" folder="test" />
-		<level pack="nbm2Custom" folder="battle" />
+		<level pack="sbm1Custom" folder="test3extended" />
 	</levels>
 </gameQuickmatch>
 
