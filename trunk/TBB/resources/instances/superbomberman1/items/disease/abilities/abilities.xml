@@ -3,13 +3,9 @@
 		xsi:noNamespaceSchemaLocation="../../../../../schemas/abilities.xsd" >
 
 		<!-- STATE -->
-<!--  	ITEM_GROUP --> 
+<!--  	ITEM_CONTAGION_MODE --> 
 		<ability strength="1" frame="false" time="-1" uses="-1">
-			<name value="ITEM_GROUP" />
+			<name value="ITEM_CONTAGION_MODE" />
 		</ability>
-<!--  	ITEM_INDESTRUCTIBLE --> 
-		<ability strength="1" frame="false" time="-1" uses="-1">
-			<name value="ITEM_INDESTRUCTIBLE" />
-		</ability>			
-			
+					
 </abilities>

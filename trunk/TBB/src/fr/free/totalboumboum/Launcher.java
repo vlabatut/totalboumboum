@@ -757,6 +757,13 @@ public class Launcher
 	 * 		>> ca viendrait de swing ou du clavier (pb matériel ou bas niveau)
 	 */
 	
+	/* TODO
+	 * cas particulier : item apparaissant dans une explosion de bloc, avec un joueur déjà sur le bloc 
+	 * (il a passe-muraille et résistance au feu) : l'item doit être ramassé dès qu'il a fini d'apparaitre, en théorie
+	 * ou bien : un héros meurt, un item apparait sous les pieds d'un autre joueur immobile : l'item reste sans que le joueur ne se l'approprie
+	 * >> en même temps, ça laisse le choix au joueur de ramasser l'item ou pas, c'est pas mal finalement (si c'est un malus par ex.)
+	 */
+	
 	 /* TODO BUGS POTENTIELS (à vérifier)
 	  * 
 	  * - il semblerait que les directions dans la SpecificAction et dans la GeneralAction correspondante ne soient pas les mêmes...
@@ -843,6 +850,8 @@ public class Launcher
 
 	/* TODO
 	 * 
+	 * - si le héros explose un bloc cntnt un item et entre pdt que l'item apparait, il ne le ramasse pas
+	 * 
 	 * - bug d'affichage dans les notes d'IA, les accents sont affichés avec la police par défaut
 	 * 
 	 * - GUI : les résultats ne s'affichent pas automatiquement quand on revient à l'écran du match
@@ -856,11 +865,9 @@ public class Launcher
 	 * 
 	 * - fignoler l'instance SBM1 pour qu'elle soit conforme, au moins sur ce qui a été implémenté jusqu'à présent
 	 * 
-	 * - programmer l'ia suiveuse
+	 * - terminer les animations des thèmes de NBM2 (apparitions surtout) et, si le temps, de SBM1
 	 * 
-	 * - cas particulier : item apparaissant dans une explosion de bloc, avec un joueur déjà sur le bloc 
-	 *   (il a passe-muraille et résistance au feu) : l'item doit être ramassé dès qu'il a fini d'apparaitre, en théorie
-	 *   ou bien : un héros meurt, un item apparait sous les pieds d'un autre joueur immobile : l'item reste sans que le joueur ne se l'approprie
+	 * - programmer l'ia suiveuse
 	 * 
 	 * - faut émettre un évt de sortie de case à la disparition d'un sprite (mort, masquage, etc)
 	 * 
@@ -1006,5 +1013,11 @@ public class Launcher
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //EN COURS			//////////////////////////////////////////////////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-	
+
+	/**
+	 * HERO_BOMB_DROP_LATENCY
+	 * HERO_WALK_SPEED
+	 * HERO_WAIT_DURATION
+	 * durée des bonus à limite temporelle
+	 */
 }

@@ -9,16 +9,16 @@
 	</other-modulations>
 	
 	<actor-modulations>
-<!--  	DROP --> 
+<!--  	CRY --> 
 		<modulation frame="true" strength="0" >
-			<action name="DROP" direction="ANY" contact="ANY"
+			<action name="CRY" direction="ANY" contact="ANY"
 				tilePosition="ANY" orientation="ANY" target="ANY" />
 			<actor-restrictions />
 			<target-restrictions />
 		</modulation>
-<!--  	CRY --> 
+<!--  	DROP --> 
 		<modulation frame="true" strength="0" >
-			<action name="CRY" direction="ANY" contact="ANY"
+			<action name="DROP" direction="ANY" contact="ANY"
 				tilePosition="ANY" orientation="ANY" target="ANY" />
 			<actor-restrictions />
 			<target-restrictions />
