@@ -4,5 +4,5 @@
 	xsi:noNamespaceSchemaLocation="../../../../../../schemas/sprite.xsd">
 	
 	<general name="Soft wall" base="common" />
-
+ 
 </sprite>

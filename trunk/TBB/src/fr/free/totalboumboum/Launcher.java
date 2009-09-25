@@ -841,6 +841,7 @@ public class Launcher
 	 * - touche HOME permettant de pauser seulement les IA 
 	 * - meilleure gestion de l'exultation/pleur à la fin des manches
 	 * - capacité de résistance au feu pour les items (l'item est déplacé au lieu d'être détruit)
+	 * - blocs laissant passer les flammes mais pas les joueurs ni les bombes (cf niveau story/custom de SBM1)
 	 * 
 	 */
 
@@ -849,8 +850,6 @@ public class Launcher
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 	/* TODO
-	 * 
-	 * - si le héros explose un bloc cntnt un item et entre pdt que l'item apparait, il ne le ramasse pas
 	 * 
 	 * - bug d'affichage dans les notes d'IA, les accents sont affichés avec la police par défaut
 	 * 
@@ -863,9 +862,9 @@ public class Launcher
 
 	/* TODO PRIORITÉ HAUTE
 	 * 
-	 * - fignoler l'instance SBM1 pour qu'elle soit conforme, au moins sur ce qui a été implémenté jusqu'à présent
-	 * 
 	 * - terminer les animations des thèmes de NBM2 (apparitions surtout) et, si le temps, de SBM1
+	 * 
+	 * - invincibilité lors de la réaparition (après une mort)
 	 * 
 	 * - programmer l'ia suiveuse
 	 * 
@@ -891,6 +890,7 @@ public class Launcher
 	 * 		- le délai de retardement ne doit pas être réinitialisé a la suite d'un punch
 	 * 		  en fait ça reprend exactement où ça ne était au moment ou la bombe touche le sol
 	 * 		- le clignotement d'invincibilité est sensé ralentir quand le temps est presque terminé
+	 * 		- item clock : soit rajouter du temps normalement, soit faire un freeze très court?
 	 * 
 	 * - Évènements :
 	 * 		- envoyer un evt de changement de gesture (pour indiquer par ex que le sprite devient destructible, etc ?)
@@ -1009,15 +1009,16 @@ public class Launcher
 // A FAIRE SITE		//////////////////////////////////////////////////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	
+	/**
+	 * - possibilité de définir des items indestructibles (sont juste déplacés)
+	 * - blocs laissant passer le feu mais pas les joueurs, comme dans le niveau story/custom de SBM1
+	 */
 	
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //EN COURS			//////////////////////////////////////////////////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 	/**
-	 * HERO_BOMB_DROP_LATENCY
-	 * HERO_WALK_SPEED
-	 * HERO_WAIT_DURATION
-	 * durée des bonus à limite temporelle
+	 * 
 	 */
 }

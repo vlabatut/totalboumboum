@@ -11,10 +11,10 @@
 		<item name="disease" folder="disease" >
 			<!-- bomb constipation -->
 			<abilities>
-				<ability strength="320"  frame="true" time="20000" >
+				<ability strength="90"  frame="true" time="20000" >
 					<name value="SPRITE_TWINKLE_COLOR"/>
 				</ability>
-				<ability strength="320"  frame="true" time="20000" >
+				<ability strength="90"  frame="true" time="20000" >
 					<name value="SPRITE_TWINKLE_NORMAL"/>
 				</ability>
 				<ability strength="1" frame="true" time="20000" > <!-- #000001 almost black -->
@@ -26,10 +26,10 @@
 			</abilities>
 			<!-- bomb diarrhea-->
 			<abilities>
-				<ability strength="320"  frame="true" time="20000" >
+				<ability strength="90"  frame="true" time="20000" >
 					<name value="SPRITE_TWINKLE_COLOR"/>
 				</ability>
-				<ability strength="320"  frame="true" time="20000" >
+				<ability strength="90"  frame="true" time="20000" >
 					<name value="SPRITE_TWINKLE_NORMAL"/>
 				</ability>
 				<ability strength="1" frame="true" time="20000" > <!-- #000001 almost black -->
@@ -41,10 +41,10 @@
 			</abilities>
 			<!-- bomb short fuse -->
 			<abilities>
-				<ability strength="320"  frame="true" time="20000" >
+				<ability strength="90"  frame="true" time="20000" >
 					<name value="SPRITE_TWINKLE_COLOR"/>
 				</ability>
-				<ability strength="320"  frame="true" time="20000" >
+				<ability strength="90"  frame="true" time="20000" >
 					<name value="SPRITE_TWINKLE_NORMAL"/>
 				</ability>
 				<ability strength="1" frame="true" time="20000" > <!-- #000001 almost black -->
@@ -56,10 +56,10 @@
 			</abilities>
 			<!-- bomb long fuse-->
 			<abilities>
-				<ability strength="320"  frame="true" time="20000" >
+				<ability strength="90"  frame="true" time="20000" >
 					<name value="SPRITE_TWINKLE_COLOR"/>
 				</ability>
-				<ability strength="320"  frame="true" time="20000" >
+				<ability strength="90"  frame="true" time="20000" >
 					<name value="SPRITE_TWINKLE_NORMAL"/>
 				</ability>
 				<ability strength="1" frame="true" time="20000" > <!-- #000001 almost black -->
@@ -71,10 +71,10 @@
 			</abilities>
 			<!-- control inversion -->
 			<abilities>
-				<ability strength="320" frame="true" time="20000" >
+				<ability strength="90" frame="true" time="20000" >
 					<name value="SPRITE_TWINKLE_COLOR"/>
 				</ability>
-				<ability strength="320" frame="true" time="20000" >
+				<ability strength="90" frame="true" time="20000" >
 					<name value="SPRITE_TWINKLE_NORMAL"/>
 				</ability>
 				<ability strength="1" frame="true" time="20000" > <!-- #000001 almost black -->
@@ -92,10 +92,10 @@
 			</abilities>
 			<!-- slow down -->
 			<abilities>
-				<ability strength="320" frame="true" time="20000" >
+				<ability strength="90" frame="true" time="20000" >
 					<name value="SPRITE_TWINKLE_COLOR"/>
 				</ability>
-				<ability strength="320" frame="true" time="20000" >
+				<ability strength="90" frame="true" time="20000" >
 					<name value="SPRITE_TWINKLE_NORMAL"/>
 				</ability>
 				<ability strength="1" frame="true" time="20000" > <!-- #000001 almost black -->
@@ -107,10 +107,10 @@
 			</abilities>
 			<!-- speed up -->
 			<abilities>
-				<ability strength="320" frame="true" time="20000" >
+				<ability strength="90" frame="true" time="20000" >
 					<name value="SPRITE_TWINKLE_COLOR"/>
 				</ability>
-				<ability strength="320" frame="true" time="20000" >
+				<ability strength="90" frame="true" time="20000" >
 					<name value="SPRITE_TWINKLE_NORMAL"/>
 				</ability>
 				<ability strength="1" frame="true" time="20000" > <!-- #000001 almost black -->
@@ -234,10 +234,10 @@
 			</abilities>
 			<!-- vest -->		
 			<abilities>
-				<ability strength="200" frame="true" time="15000" >
+				<ability strength="90" frame="true" time="15000" >
 					<name value="SPRITE_TWINKLE_COLOR"/>
 				</ability>
-				<ability strength="400" frame="true" time="15000" >
+				<ability strength="90" frame="true" time="15000" >
 					<name value="SPRITE_TWINKLE_NORMAL"/>
 				</ability>
 				<ability strength="16777215" frame="true" time="15000" > <!-- #FFFFFF = white -->
@@ -300,10 +300,10 @@
 		
 		<item name="vest" folder="vest">
 			<abilities>
-				<ability strength="200" frame="true" time="15000" >
+				<ability strength="90" frame="true" time="15000" >
 					<name value="SPRITE_TWINKLE_COLOR"/>
 				</ability>
-				<ability strength="400" frame="true" time="15000" >
+				<ability strength="90" frame="true" time="15000" >
 					<name value="SPRITE_TWINKLE_NORMAL"/>
 				</ability>
 				<ability strength="16777215" frame="true" time="15000" > <!-- #FFFFFF = white -->

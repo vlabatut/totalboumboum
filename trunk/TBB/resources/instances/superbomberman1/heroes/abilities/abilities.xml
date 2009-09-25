@@ -56,22 +56,22 @@
 			<name value="HERO_WAIT_DURATION" />
 		</ability>
 <!--  	HERO_WALK_SPEED --> 
-		<ability strength="0.5" frame="false" time="-1" uses="-1">
+		<ability strength="0.42" frame="false" time="-1" uses="-1">
 			<name value="HERO_WALK_SPEED_M1" />
 		</ability>
-		<ability strength="1.25" frame="false" time="-1" uses="-1">
+		<ability strength="1.28" frame="false" time="-1" uses="-1">
 			<name value="HERO_WALK_SPEED_P1" />
 		</ability>
-		<ability strength="1.5" frame="false" time="-1" uses="-1">
+		<ability strength="1.51" frame="false" time="-1" uses="-1">
 			<name value="HERO_WALK_SPEED_P2" />
 		</ability>
 		<ability strength="1.75" frame="false" time="-1" uses="-1">
 			<name value="HERO_WALK_SPEED_P3" />
 		</ability>
-		<ability strength="2" frame="false" time="-1" uses="-1">
+		<ability strength="2.03" frame="false" time="-1" uses="-1">
 			<name value="HERO_WALK_SPEED_P4" />
 		</ability>
-		<ability strength="4" frame="false" time="-1" uses="-1">
+		<ability strength="4.12" frame="false" time="-1" uses="-1">
 			<name value="HERO_WALK_SPEED_P99" />
 		</ability>
 			
