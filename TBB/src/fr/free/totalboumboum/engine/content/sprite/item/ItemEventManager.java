@@ -75,7 +75,7 @@ public class ItemEventManager extends EventManager
 	}
 		
 	private void actionGather(ActionEvent event)
-	{	if(gesture.equals(GestureName.STANDING))
+	{	if(gesture.equals(GestureName.STANDING) || gesture.equals(GestureName.APPEARING))
 		{	gesture = GestureName.DISAPPEARING;
 			sprite.setGesture(gesture,spriteDirection,Direction.NONE,true);
 		}

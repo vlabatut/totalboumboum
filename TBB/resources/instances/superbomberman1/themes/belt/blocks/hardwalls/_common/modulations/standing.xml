@@ -22,15 +22,6 @@
 	</target-modulations>
 	
 	<third-modulations>
-<!--  	APPEAR --> 
-		<modulation frame="true" strength="0" >
-			<action name="APPEAR" direction="ANY" contact="ANY"
-				tilePosition="ANY" orientation="ANY" actor="SOME" />
-			<actor-restrictions />
-			<target-restrictions />
-			<actor-circumstances contact="ANY" tilePosition="ANY" orientation="ANY" />
-			<target-circumstances  />
-		</modulation>
 <!--  	LAND --> 
 		<modulation frame="true" strength="0" >
 			<action name="LAND" direction="ANY" contact="ANY"
