@@ -119,8 +119,8 @@ public class BlockEventManager extends EventManager
 	}
 
 	private void engDelayOver(EngineEvent event)
-	{	if(gesture.equals(GestureName.HIDING))
-		{	SpecificAction specificAction = new SpecificAppear(sprite,Direction.NONE);
+	{	if(gesture.equals(GestureName.HIDING) && event.getStringParameter().equals(DelayManager.DL_SPAWN))
+		{	SpecificAction specificAction = new SpecificAppear(sprite/*,Direction.NONE*/);
 			AbstractAbility ability = sprite.modulateAction(specificAction);
 			if(ability.isActive())
 			{	StateAbility ablt = sprite.modulateStateAbility(StateAbilityName.BLOCK_SPAWN);
@@ -129,8 +129,9 @@ public class BlockEventManager extends EventManager
 				sprite.setGesture(gesture,spriteDirection,Direction.NONE,true);
 			}
 			else
-			{	StateAbility ablt = sprite.modulateStateAbility(StateAbilityName.BLOCK_SPAWN);
-				sprite.addDelay(DelayManager.DL_SPAWN, ablt.getStrength());	
+			{	//StateAbility ablt = sprite.modulateStateAbility(StateAbilityName.BLOCK_SPAWN);
+				sprite.addIterDelay(DelayManager.DL_SPAWN,1);	
+				//sprite.addDelay(DelayManager.DL_SPAWN, ablt.getStrength());	
 			}
 		}
 	}
