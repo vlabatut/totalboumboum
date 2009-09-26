@@ -861,6 +861,12 @@ public class Launcher
 	 * - cliquer sur partie rapide, annuler, cliquer sur tournoi, annuler, cliquer sur partie rapide >> bug
 	 * 
 	 * - GUI : dans les tooltips du tableau des résultats, il manque les numéros des manches
+	 * 
+	 * - bug de collision difficlement reproductible : le joueur va vers le haut, il a l'item pass-walls et il se retrouve 
+	 *   téléporté en dehors du niveau (dans le noir) sur NBM2 custom battlezone.
+	 *   c'est arrivé aussi sur la zone des marais de NBM2. 
+	 *   ça semble se produire quand on se rapproche des limites (verticales?) du niveau
+	 *   et on se retrouve téléporté en (0,0)
 	 */
 	
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -882,6 +888,8 @@ public class Launcher
 	 * - remplacer "à vos marques" "pret" "boum!" par des graphismes précalculés
 	 * 
 	 * - à la fin de la partie, faire disparaitre tout le niveau comme il apparait au début
+	 * 
+	 * - nettoyer tous les tournois, rounds, etc, dans la version clean (et synchro qd nécessaire la version de travail)
 	 * 
 	 */
 	

@@ -21,6 +21,6 @@
 		</time>
 	</limits>
 	
-	<level packname="gsuTournament" name="old" randomLocation="true"/>
+	<level packname="tournament200809" name="old" randomLocation="true"/>
 
 </round>

@@ -5,32 +5,53 @@
 	<variable-tiles>
 		<variable-tile name="tile1">
 			<value proba="0.4" >
-				<block group="softwalls" name="broken"/>
 			</value>
-			<value proba="0.1" >
-				<block group="softwalls" name="regular"/>
+			<value proba="0.3" >
+				<block group="softwalls" name="broken" />
 			</value>
-			<value proba="0.1" >
-				<block group="softwalls" name="regular"/>
+			<value proba="0.06" >
+				<block group="softwalls" name="regular" />
 				<item name="extrabomb" />
 			</value>
-			<value proba="0.1" >
-				<block group="softwalls" name="broken"/>
+			<value proba="0.06" >
+				<block group="softwalls" name="regular" />
 				<item name="extraflame" />
 			</value>
 			<value proba="0.01" >
-				<block group="softwalls" name="regular"/>
-				<item name="remotecontrol" />
+				<block group="softwalls" name="regular" />
+				<item name="fireproof" />
 			</value>
-			<value proba="0.04" >
-				<block group="softwalls" name="regular"/>
-				<item name="throughbombs" />
+			<value proba="0.01" >
+				<block group="softwalls" name="regular" />
+				<item name="life" />
 			</value>
 			<value proba="0.05" >
-				<block group="softwalls" name="broken"/>
+				<block group="softwalls" name="regular" />
+				<item name="malus" />
+			</value>
+			<value proba="0.02" >
+				<block group="softwalls" name="regular" />
+				<item name="random" />
+			</value>
+			<value proba="0.02" >
+				<block group="softwalls" name="regular" />
+				<item name="remotecontrol" />
+			</value>
+			<value proba="0.02" >
+				<block group="softwalls" name="regular" />
+				<item name="speed" />
+			</value>
+			<value proba="0.02" >
+				<block group="softwalls" name="regular" />
+				<item name="throughbombs" />
+			</value>
+			<value proba="0.02" >
+				<block group="softwalls" name="regular" />
 				<item name="throughwalls" />
 			</value>
-			<value proba="0.2" >
+			<value proba="0.01" >
+				<block group="softwalls" name="regular" />
+				<item name="vest" />
 			</value>
 		</variable-tile>
 

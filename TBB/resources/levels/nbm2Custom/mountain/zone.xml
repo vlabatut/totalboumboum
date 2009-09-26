@@ -4,30 +4,54 @@
 	
 	<variable-tiles>
 		<variable-tile name="tile1">
+			<value proba="0.4" >
+			</value>
 			<value proba="0.3" >
 				<block name="softwall" />
 			</value>
-			<value proba="0.1" >
+			<value proba="0.06" >
 				<block name="softwall" />
 				<item name="extrabomb" />
 			</value>
-			<value proba="0.1" >
+			<value proba="0.06" >
 				<block name="softwall" />
 				<item name="extraflame" />
 			</value>
 			<value proba="0.01" >
 				<block name="softwall" />
-				<item name="remotecontrol" />
+				<item name="fireproof" />
 			</value>
-			<value proba="0.04" >
+			<value proba="0.01" >
 				<block name="softwall" />
-				<item name="throughbombs" />
+				<item name="life" />
 			</value>
 			<value proba="0.05" >
 				<block name="softwall" />
+				<item name="malus" />
+			</value>
+			<value proba="0.02" >
+				<block name="softwall" />
+				<item name="random" />
+			</value>
+			<value proba="0.02" >
+				<block name="softwall" />
+				<item name="remotecontrol" />
+			</value>
+			<value proba="0.02" >
+				<block name="softwall" />
+				<item name="speed" />
+			</value>
+			<value proba="0.02" >
+				<block name="softwall" />
+				<item name="throughbombs" />
+			</value>
+			<value proba="0.02" >
+				<block name="softwall" />
 				<item name="throughwalls" />
 			</value>
-			<value proba="0.4" >
+			<value proba="0.01" >
+				<block name="softwall" />
+				<item name="vest" />
 			</value>
 		</variable-tile>
 	</variable-tiles>
