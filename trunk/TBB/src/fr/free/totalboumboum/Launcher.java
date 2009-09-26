@@ -844,7 +844,7 @@ public class Launcher
 	 * - blocs laissant passer les flammes mais pas les joueurs ni les bombes (cf niveau story/custom de SBM1)
 	 * - instance SBM1 plus complète (items, niveaux officiels, nouveaux niveaux custom)
 	 * - meilleure gestion des items initiaux (effectivement distribués au start)
-	 * 
+	 * - correction dans les gestion des blocs spawn
 	 * 
 	 */
 
@@ -854,13 +854,17 @@ public class Launcher
 
 	/* TODO
 	 * 
-	 * - bug d'affichage dans les notes d'IA, les accents sont affichés avec la police par défaut
+	 * - SBM1: malus constipation semble rester même après la fin du clignotement
 	 * 
 	 * - GUI : les résultats ne s'affichent pas automatiquement quand on revient à l'écran du match
 	 * 
 	 * - cliquer sur partie rapide, annuler, cliquer sur tournoi, annuler, cliquer sur partie rapide >> bug
 	 * 
 	 * - GUI : dans les tooltips du tableau des résultats, il manque les numéros des manches
+	 *   
+	 * - l'ombre des blocs de la dernière ligne est portée sur les blocs de la première ligne
+	 * 
+	 * - bug d'affichage dans les notes d'IA, les accents sont affichés avec la police par défaut
 	 * 
 	 * - bug de collision difficlement reproductible : le joueur va vers le haut, il a l'item pass-walls et il se retrouve 
 	 *   téléporté en dehors du niveau (dans le noir) sur NBM2 custom battlezone.
@@ -875,11 +879,13 @@ public class Launcher
 
 	/* TODO PRIORITÉ HAUTE
 	 * 
-	 * - terminer les animations des thèmes de NBM2 (apparitions surtout) et, si le temps, de SBM1
+	 * - nettoyer tous les tournois, rounds, etc, dans la version clean (et synchro qd nécessaire la version de travail)
 	 * 
 	 * - programmer l'ia suiveuse
 	 * 
 	 * - faut émettre un évt de sortie de case à la disparition d'un sprite (mort, masquage, etc)
+	 * 
+	 * - HIDING devrait être un gesture définit automatiquement, non ? pas d'image, sensible à rien, seule action autorisée=apparaitre...
 	 * 
 	 * - étudier le fonctionnement de ended (sprite) pr voir quand retirer le sprite de level/tile
 	 * 
@@ -888,8 +894,6 @@ public class Launcher
 	 * - remplacer "à vos marques" "pret" "boum!" par des graphismes précalculés
 	 * 
 	 * - à la fin de la partie, faire disparaitre tout le niveau comme il apparait au début
-	 * 
-	 * - nettoyer tous les tournois, rounds, etc, dans la version clean (et synchro qd nécessaire la version de travail)
 	 * 
 	 */
 	
@@ -904,6 +908,7 @@ public class Launcher
 	 * 		  en fait ça reprend exactement où ça ne était au moment ou la bombe touche le sol
 	 * 		- le clignotement d'invincibilité est sensé ralentir quand le temps est presque terminé
 	 * 		- item clock : soit rajouter du temps normalement, soit faire un freeze très court?
+	 * 		- spawn : faut décomposer en plusieurs abilities : délay, proba de spawn, nbre de spawn, etc
 	 * 
 	 * - Évènements :
 	 * 		- envoyer un evt de changement de gesture (pour indiquer par ex que le sprite devient destructible, etc ?)
@@ -966,7 +971,12 @@ public class Launcher
 	 * 			- ça permettra de savoir ce qui peut être modulé et ce qui ne peut pas l'être
 	 * 		- un sprite n'est a priori pas un obstacle, tout est géré par modulation (y compris pour le feu)
 	 * 		- le coup de l'indestructibilité des items (le fait de réapparaitre ailleurs) pourrait être étendue à tous les sprites
-	 * 			(en particulier les joueurs, ça serait un cas spécial de résistance au feu un peu pénalisante, utilisable un nombre limité de fois, par ex !)
+	 * 		  (en particulier les joueurs, ça serait un cas spécial de résistance au feu un peu pénalisante, utilisable un nombre limité de fois, par ex !)
+	 * 		- ça serait bien que les paramètres numériques des abilités puissent être définies 
+	 * 		  au chargement (force, durée, utilisation) de façon aléatoire, en fonction de certains paramètres. 
+	 * 		  on pourrait par ex utiliser une liste de valeur numériques : 1=déterministe, 2=bornes pour un tirage au sort
+	 * 		  utile par exemple pour déterminer le nombre de fois qu'un bloc repousse (plutot que de le fixer dans le fichier XML), 
+	 * 		  ou la panne d'une bombe (plutot que de le faire pdt le jeu, et sans utiliser d'ablts spéciales)
 	 * 
 	 */
 	
