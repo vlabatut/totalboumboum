@@ -148,7 +148,8 @@ public class BlockEventManager extends EventManager
 	}
 	
 	private void engStart(EngineEvent event)
-	{	if(gesture.equals(GestureName.PREPARED))
+	{	sprite.startItemManager();
+		if(gesture.equals(GestureName.PREPARED))
 		{	gesture = GestureName.STANDING;
 			sprite.setGesture(gesture,spriteDirection,Direction.NONE,true);
 		}

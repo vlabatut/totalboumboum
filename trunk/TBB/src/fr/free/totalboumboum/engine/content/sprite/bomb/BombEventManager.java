@@ -413,7 +413,8 @@ public class BombEventManager extends EventManager
 	}
 	
 	private void engStart(EngineEvent event)
-	{	if(gesture.equals(GestureName.PREPARED))
+	{	sprite.startItemManager();
+		if(gesture.equals(GestureName.PREPARED))
 		{	stand();
 		}
 	}

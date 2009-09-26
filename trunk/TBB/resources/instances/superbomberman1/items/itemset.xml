@@ -314,6 +314,22 @@
 				</ability>
 			</abilities>
 		</item>		
+		<item name="vestart" folder="vestart">
+			<abilities>
+				<ability strength="90" frame="true" time="3000" >
+					<name value="SPRITE_TWINKLE_COLOR"/>
+				</ability>
+				<ability strength="90" frame="true" time="3000" >
+					<name value="SPRITE_TWINKLE_NORMAL"/>
+				</ability>
+				<ability strength="16777215" frame="true" time="3000" > <!-- #FFFFFF = white -->
+					<name value="SPRITE_TWINKLE" />
+				</ability>
+				<ability time="3000">
+					<name value="HERO_FIRE_PROTECTION" />
+				</ability>
+			</abilities>
+		</item>		
 	</concrete-items>
 
 </itemset>

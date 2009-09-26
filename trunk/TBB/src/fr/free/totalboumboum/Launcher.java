@@ -842,6 +842,9 @@ public class Launcher
 	 * - meilleure gestion de l'exultation/pleur à la fin des manches
 	 * - capacité de résistance au feu pour les items (l'item est déplacé au lieu d'être détruit)
 	 * - blocs laissant passer les flammes mais pas les joueurs ni les bombes (cf niveau story/custom de SBM1)
+	 * - instance SBM1 plus complète (items, niveaux officiels, nouveaux niveaux custom)
+	 * - meilleure gestion des items initiaux (effectivement distribués au start)
+	 * 
 	 * 
 	 */
 
@@ -854,6 +857,10 @@ public class Launcher
 	 * - bug d'affichage dans les notes d'IA, les accents sont affichés avec la police par défaut
 	 * 
 	 * - GUI : les résultats ne s'affichent pas automatiquement quand on revient à l'écran du match
+	 * 
+	 * - cliquer sur partie rapide, annuler, cliquer sur tournoi, annuler, cliquer sur partie rapide >> bug
+	 * 
+	 * - GUI : dans les tooltips du tableau des résultats, il manque les numéros des manches
 	 */
 	
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -863,8 +870,6 @@ public class Launcher
 	/* TODO PRIORITÉ HAUTE
 	 * 
 	 * - terminer les animations des thèmes de NBM2 (apparitions surtout) et, si le temps, de SBM1
-	 * 
-	 * - invincibilité lors de la réaparition (après une mort)
 	 * 
 	 * - programmer l'ia suiveuse
 	 * 
