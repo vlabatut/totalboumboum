@@ -345,18 +345,27 @@ public class ItemManager
 	/////////////////////////////////////////////////////////////////
 	// ENGINE			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
+	/** marker allowing to start updating items only when the round has actually started */
+	private boolean start = false;
+	
+	public void start()
+	{	start = true;	
+	}
+	
 	public void update()
-	{	// reinit abilities
-		abilities.clear();
-		
-		// get the items received from other players
-		mergeReceivedItems();
-		
-		// adding the initial items abilities
-		updateAbilities(initialItems,true);
-
-		// adding the collected items abilities
-		updateAbilities(collectedItems,false);
+	{	if(start)
+		{	// reinit abilities
+			abilities.clear();
+			
+			// get the items received from other players
+			mergeReceivedItems();
+			
+			// adding the initial items abilities
+			updateAbilities(initialItems,true);
+	
+			// adding the collected items abilities
+			updateAbilities(collectedItems,false);
+		}
 	}
 	
 	private void updateAbilities(LinkedList<Item> list, boolean keepItems)

@@ -26,6 +26,7 @@
 	<items>
 		<item name="extrabomb" number="2" />
 		<item name="extraflame" number="3" />
+		<item name="vestart" number="1" />
 	</items>
 	
 </players>
