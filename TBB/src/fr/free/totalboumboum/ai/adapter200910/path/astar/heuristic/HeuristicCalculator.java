@@ -36,7 +36,7 @@ public abstract class HeuristicCalculator
 	private AiTile endTile;	
 
 	/**
-	 * initialise la case terminant le chemin recherché
+	 * initialise/modifie la case terminant le chemin recherché
 	 * @param endTile	la case terminant le chemin
 	 */
 	public void setEndTile(AiTile endTile)

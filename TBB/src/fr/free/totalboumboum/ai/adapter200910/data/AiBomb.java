@@ -53,29 +53,13 @@ public class AiBomb extends AiSprite<Bomb>
 		initColor();
 	}
 
+	/////////////////////////////////////////////////////////////////
+	// PROCESS			/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
 	@Override
 	void update(AiTile tile)
 	{	super.update(tile);
 		updateWorking();
-	}
-
-	@Override
-	void finish()
-	{	super.finish();
-	}
-
-	@Override
-	public String toString()
-	{	StringBuffer result = new StringBuffer();
-		result.append("Bomb: [");
-		result.append(super.toString());
-		result.append(" - type: "+type);
-		result.append(" - clr: "+color);
-		result.append(" - wrk: "+working);
-		result.append(" - dur.: "+normalDuration);
-		result.append(" - rge: "+range);
-		result.append(" ]");
-		return result.toString();
 	}
 
 	/////////////////////////////////////////////////////////////////
@@ -202,5 +186,30 @@ public class AiBomb extends AiSprite<Bomb>
 		{	StateAbility ability = getSprite().modulateStateAbility(StateAbilityName.BOMB_TRIGGER_TIMER);
 			normalDuration = (long)ability.getStrength();		
 		}
+	}
+
+	/////////////////////////////////////////////////////////////////
+	// TEXT				/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	@Override
+	public String toString()
+	{	StringBuffer result = new StringBuffer();
+		result.append("Bomb: [");
+		result.append(super.toString());
+		result.append(" - type: "+type);
+		result.append(" - clr: "+color);
+		result.append(" - wrk: "+working);
+		result.append(" - dur.: "+normalDuration);
+		result.append(" - rge: "+range);
+		result.append(" ]");
+		return result.toString();
+	}
+
+	/////////////////////////////////////////////////////////////////
+	// FINISH			/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	@Override
+	void finish()
+	{	super.finish();
 	}
 }

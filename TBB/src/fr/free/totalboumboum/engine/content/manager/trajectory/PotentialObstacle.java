@@ -98,8 +98,8 @@ public class PotentialObstacle
 		double currentY = moveZone.getCurrentY();		
 		double targetX = moveZone.getTargetX();
 		double targetY = moveZone.getTargetY();		
-		double distX = GameVariables.level.getHorizontalDistance(posX,currentX);
-		double distY = GameVariables.level.getVerticalDistance(posY,currentY);
+		double distX = GameVariables.level.getHorizontalPixelDistance(posX,currentX);
+		double distY = GameVariables.level.getVerticalPixelDistance(posY,currentY);
 		spriteDistance = distX+distY;
 		// if there's already an intersection between the sprite and this potential obstacle
 		if(!CalculusTools.isRelativelyGreaterOrEqualTo(distX,tileDimension) 
@@ -116,8 +116,8 @@ public class PotentialObstacle
 					&& CalculusTools.isRelativelyEqualTo(distY,tileDimension))
 			{	double interX[] = {GameVariables.level.normalizePositionX(posX - tileDimension), GameVariables.level.normalizePositionX(posX + tileDimension)};
 				double interY[] = {GameVariables.level.normalizePositionY(posY - tileDimension), GameVariables.level.normalizePositionY(posY + tileDimension)};
-				double distanceX[] = {GameVariables.level.getHorizontalDistance(interX[0], currentX), GameVariables.level.getHorizontalDistance(interX[1], currentX)};
-				double distanceY[] = {GameVariables.level.getVerticalDistance(interY[0], currentY), GameVariables.level.getVerticalDistance(interY[1], currentY)};
+				double distanceX[] = {GameVariables.level.getHorizontalPixelDistance(interX[0], currentX), GameVariables.level.getHorizontalPixelDistance(interX[1], currentX)};
+				double distanceY[] = {GameVariables.level.getVerticalPixelDistance(interY[0], currentY), GameVariables.level.getVerticalPixelDistance(interY[1], currentY)};
 				double deltaX = GameVariables.level.getDeltaX(currentX,targetX);
 				double deltaY = GameVariables.level.getDeltaY(currentY,targetY);
 				if(CalculusTools.isRelativelyEqualTo(distanceX[0],0) 
@@ -155,8 +155,8 @@ public class PotentialObstacle
 					{	Double interY = moveZone.projectVertically(interX[i]);
 						// if there's an intersection point between the side and the trajectory 
 						if(interY!=null)
-						{	double projectionDist = GameVariables.level.getVerticalDistance(posY,interY);
-							double sourceDist = GameVariables.level.getHorizontalDistance(currentX,interX[i]) + GameVariables.level.getVerticalDistance(currentY,interY);
+						{	double projectionDist = GameVariables.level.getVerticalPixelDistance(posY,interY);
+							double sourceDist = GameVariables.level.getHorizontalPixelDistance(currentX,interX[i]) + GameVariables.level.getVerticalPixelDistance(currentY,interY);
 							// smaller source-intersection distance and (critical projection distance or equal distance and diagonal trajectory) 
 							if(sourceDist<contactDistance && 
 								(!CalculusTools.isRelativelyGreaterOrEqualTo(projectionDist,tileDimension)
@@ -183,8 +183,8 @@ public class PotentialObstacle
 					{	Double interX = moveZone.projectHorizontally(interY[i]);
 						// is there an intersection point between side and trajectory 
 						if(interX!=null)
-						{	double projectionDist = GameVariables.level.getHorizontalDistance(posX,interX);
-							double sourceDist = GameVariables.level.getHorizontalDistance(currentX,interX) + GameVariables.level.getVerticalDistance(currentY,interY[i]);
+						{	double projectionDist = GameVariables.level.getHorizontalPixelDistance(posX,interX);
+							double sourceDist = GameVariables.level.getHorizontalPixelDistance(currentX,interX) + GameVariables.level.getVerticalPixelDistance(currentY,interY[i]);
 							// smaller source-intersection distance and (critical projection distance or equal distance and diagonal trajectory) 
 							if(sourceDist<contactDistance && 
 								(!CalculusTools.isRelativelyGreaterOrEqualTo(projectionDist,tileDimension)
@@ -266,8 +266,8 @@ public class PotentialObstacle
 		targetCircumstance.initCircumstance();
 		
 		// contact
-		double distX = GameVariables.level.getHorizontalDistance(sprite.getCurrentPosX(),moveZone.getCurrentX());
-		double distY = GameVariables.level.getVerticalDistance(sprite.getCurrentPosY(),moveZone.getCurrentY());
+		double distX = GameVariables.level.getHorizontalPixelDistance(sprite.getCurrentPosX(),moveZone.getCurrentX());
+		double distY = GameVariables.level.getVerticalPixelDistance(sprite.getCurrentPosY(),moveZone.getCurrentY());
 		Contact contact = Contact.COLLISION;
 		if(!CalculusTools.isRelativelyGreaterOrEqualTo(distX,tileDimension) && !CalculusTools.isRelativelyGreaterOrEqualTo(distY,tileDimension))
 			// intersection iff the distance is relatively smaller than the tile size  

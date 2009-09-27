@@ -15,17 +15,10 @@
 	</settings>
 	<players>
 		<player file="1" color="CYAN" controls="1" spritePack="nesbomberman2" spriteFolder="shirobon" />
-		<player file="64" color="YELLOW" controls="2" spritePack="superbomberman1" spriteFolder="shirobon" />
-		<player file="59" color="BLUE" controls="0" spritePack="superbomberman5" spriteFolder="shirobon" />
-		<player file="53" color="RED" controls="0" spritePack="superbomberman5" spriteFolder="shirobon" />
-		<player file="18" color="ORANGE" controls="0" spritePack="superbomberman5" spriteFolder="assistantpirate" />
-		<player file="49" color="WHITE" controls="0" spritePack="superbomberman5" spriteFolder="assistantpirate" />
-		<player file="50" color="RUST" controls="0" spritePack="superbomberman5" spriteFolder="assistantpirate" />
-		<player file="60" color="PINK" controls="0" spritePack="superbomberman5" spriteFolder="shirobon" />
-		<player file="55" color="BLACK" controls="0" spritePack="superbomberman5" spriteFolder="shirobon" />
+		<player file="65" color="INDIGO" controls="2" spritePack="nesbomberman2" spriteFolder="shirobon" />
 	</players>
 	<levels>
-		<level pack="sbm1Custom" folder="wide" />
+		<level pack="nbm2Custom" folder="debug" />
 	</levels>
 </gameQuickmatch>
 

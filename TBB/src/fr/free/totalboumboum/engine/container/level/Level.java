@@ -140,79 +140,69 @@ public class Level
 	}
 
     /////////////////////////////////////////////////////////////////
-	// DISTANCES			/////////////////////////////////////////
+	// PIXEL DISTANCES		/////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	/**
-	 * process the manhattan distance
+	 * process the Manhattan distance
 	 */
-	public double getDistance(Sprite s1, Sprite s2, Direction direction)
+	public double getPixelDistance(Sprite s1, Sprite s2, Direction direction)
 	{	double x1 = s1.getCurrentPosX();
 		double y1 = s1.getCurrentPosY();
 		double x2 = s2.getCurrentPosX();
 		double y2 = s2.getCurrentPosY();
-		double result = processDistance(x1,y1,x2,y2,direction);
+		double result = processPixelDistance(x1,y1,x2,y2,direction);
 		return result;
 	}
-	public double getDistance(Sprite s1, Sprite s2)
-	{	return getDistance(s1,s2,Direction.NONE);
+	public double getPixelDistance(Sprite s1, Sprite s2)
+	{	return getPixelDistance(s1,s2,Direction.NONE);
 	}
 	
 	/**
-	 * process the manhattan distance
-	 * @param x1
-	 * @param y1
-	 * @param x2
-	 * @param y2
-	 * @return
+	 * process the Manhattan distance
 	 */
-	public double getDistance(double x1, double y1, double x2, double y2, Direction direction)
+	public double getPixelDistance(double x1, double y1, double x2, double y2, Direction direction)
 	{	x1 = normalizePositionX(x1);
 		y1 = normalizePositionY(y1);
 		x2 = normalizePositionX(x2);
 		y2 = normalizePositionY(y2);
-		double result = processDistance(x1,y1,x2,y2,direction);
+		double result = processPixelDistance(x1,y1,x2,y2,direction);
 		return result;
 	}
-	public double getDistance(double x1, double y1, double x2, double y2)
-	{	return getDistance(x1,y1,x2,y2,Direction.NONE);
+	public double getPixelDistance(double x1, double y1, double x2, double y2)
+	{	return getPixelDistance(x1,y1,x2,y2,Direction.NONE);
 	}
 
-	public double getHorizontalDistance(double x1, double x2, Direction direction)
+	public double getHorizontalPixelDistance(double x1, double x2, Direction direction)
 	{	x1 = normalizePositionX(x1);
 		x2 = normalizePositionX(x2);
-		double result = processHorizontalDistance(x1,x2,direction);
+		double result = processHorizontalPixelDistance(x1,x2,direction);
 		return result;
 	}
-	public double getHorizontalDistance(double x1, double x2)
-	{	return getHorizontalDistance(x1,x2,Direction.NONE);
+	public double getHorizontalPixelDistance(double x1, double x2)
+	{	return getHorizontalPixelDistance(x1,x2,Direction.NONE);
 	}
 	
-	public double getVerticalDistance(double y1, double y2, Direction direction)
+	public double getVerticalPixelDistance(double y1, double y2, Direction direction)
 	{	y1 = normalizePositionY(y1);
 		y2 = normalizePositionY(y2);
-		double result = processVerticalDistance(y1,y2,direction);
+		double result = processVerticalPixelDistance(y1,y2,direction);
 		return result;
 	}
-	public double getVerticalDistance(double y1, double y2)
-	{	return getVerticalDistance(y1,y2,Direction.NONE);
+	public double getVerticalPixelDistance(double y1, double y2)
+	{	return getVerticalPixelDistance(y1,y2,Direction.NONE);
 	}
 	
 	/**
 	 * process the manhattan distance
-	 * @param x1
-	 * @param y1
-	 * @param x2
-	 * @param y2
-	 * @return
 	 */
-	private double processDistance(double x1, double y1, double x2, double y2, Direction direction)
+	private double processPixelDistance(double x1, double y1, double x2, double y2, Direction direction)
 	{	double result = 0;
-		result = result + processHorizontalDistance(x1,x2,direction);
-		result = result + processVerticalDistance(y1,y2,direction);
+		result = result + processHorizontalPixelDistance(x1,x2,direction);
+		result = result + processVerticalPixelDistance(y1,y2,direction);
 		return result;
 	}
 	
-	private double processHorizontalDistance(double x1, double x2, Direction direction)
+	private double processHorizontalPixelDistance(double x1, double x2, Direction direction)
 	{	double result;
 		double dx = x2 - x1;
 		double direct = Math.abs(dx);
@@ -230,7 +220,7 @@ public class Level
 		return result;
 	}
 	
-	private double processVerticalDistance(double y1, double y2, Direction direction)
+	private double processVerticalPixelDistance(double y1, double y2, Direction direction)
 	{	double result;
 		double dy = y2 - y1;
 		double direct = Math.abs(dy);
@@ -240,6 +230,105 @@ public class Level
 			result = Math.min(direct,indirect);
 		else
 		{	Direction d = Direction.getVerticalFromDouble(dy);
+			if(dir==d)
+				result = direct;
+			else
+				result = indirect;
+		}		
+		return result;
+	}
+
+    /////////////////////////////////////////////////////////////////
+	// TILE DISTANCES		/////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	public int getTileDistance(Sprite s1, Sprite s2, Direction direction)
+	{	Tile tile1 = s1.getTile();
+		Tile tile2 = s2.getTile();
+		int result = getTileDistance(tile1,tile2,direction);
+		return result;
+	}
+	public int getTileDistance(Sprite s1, Sprite s2)
+	{	return getTileDistance(s1,s2,Direction.NONE);
+	}
+	public int getTileDistance(Tile tile1, Tile tile2, Direction direction)
+	{	int line1 = tile1.getLine();
+		int col1 = tile1.getCol();
+		int line2 = tile2.getLine();
+		int col2 = tile2.getCol();
+		int result = processTileDistance(line1,col1,line2,col2,direction);
+		return result;
+	}
+	public int getTileDistance(Tile tile1, Tile tile2)
+	{	return getTileDistance(tile1,tile2,Direction.NONE);
+	}
+
+	public int getTileDistance(int line1, int col1, int line2, int col2, Direction direction)
+	{	line1 = normalizePositionLine(line1);
+		col1 = normalizePositionCol(col1);
+		line2 = normalizePositionLine(line2);
+		col2 = normalizePositionCol(col2);
+		int result = processTileDistance(line1,col1,line2,col2,direction);
+		return result;
+	}
+	public int getTileDistance(int line1, int col1, int line2, int col2)
+	{	return getTileDistance(line1,col1,line2,col2,Direction.NONE);
+	}
+
+	public int getHorizontalTileDistance(int col1, int col2, Direction direction)
+	{	col1 = normalizePositionCol(col1);
+		col2 = normalizePositionCol(col2);
+		int result = processHorizontalTileDistance(col1,col2,direction);
+		return result;
+	}
+	public int getHorizontalTileDistance(int col1, int col2)
+	{	return getHorizontalTileDistance(col1,col2,Direction.NONE);
+	}
+	
+	public double getVerticalTileDistance(int line1, int line2, Direction direction)
+	{	line1 = normalizePositionLine(line1);
+		line2 = normalizePositionLine(line2);
+		double result = processVerticalTileDistance(line1,line2,direction);
+		return result;
+	}
+	public double getVerticalTileDistance(int line1, int line2)
+	{	return getVerticalTileDistance(line1,line2,Direction.NONE);
+	}
+	
+	private int processTileDistance(int line1, int col1, int line2, int col2, Direction direction)
+	{	int result = 0;
+		result = result + processHorizontalTileDistance(col1,col2,direction);
+		result = result + processVerticalTileDistance(line1,line2,direction);
+		return result;
+	}
+	
+	private int processHorizontalTileDistance(int col1, int col2, Direction direction)
+	{	int result;
+		int dCol = col2 - col1;
+		int direct = Math.abs(dCol);
+		int indirect = globalWidth - direct;
+		Direction dir = direction.getHorizontalPrimary();
+		if(dir==Direction.NONE)
+			result = Math.min(direct,indirect);
+		else
+		{	Direction d = Direction.getHorizontalFromDouble(dCol);
+			if(dir==d)
+				result = direct;
+			else
+				result = indirect;
+		}		
+		return result;
+	}
+	
+	private int processVerticalTileDistance(int line1, int line2, Direction direction)
+	{	int result;
+		int dLine = line2 - line1;
+		int direct = Math.abs(dLine);
+		int indirect = globalHeight - direct;
+		Direction dir = direction.getVerticalPrimary();
+		if(dir==Direction.NONE)
+			result = Math.min(direct,indirect);
+		else
+		{	Direction d = Direction.getVerticalFromDouble(dLine);
 			if(dir==d)
 				result = direct;
 			else
@@ -623,7 +712,31 @@ public class Level
 		resultat.add(getNeighborTile(line, col, Direction.UP));		
 		return resultat;
 	}	
-	
+
+	public int[] normalizePosition(int line, int col)
+	{	int result[] = new int[2];
+		result[0] = normalizePositionLine(line);
+		result[1] = normalizePositionCol(col);
+		//
+		return result;
+	}
+	public int normalizePositionLine(int line)
+	{	int result = line;
+		while(result<globalHeight)
+			result = result + globalHeight;
+		while(result>globalHeight)
+			result = result - globalHeight;
+		return result;
+	}
+	public int normalizePositionCol(int col)
+	{	int result = col;
+		while(result<globalWidth)
+			result = result + globalWidth;
+		while(result>globalWidth)
+			result = result - globalWidth;
+		return result;
+	}
+
 	/////////////////////////////////////////////////////////////////
 	// PIXEL LOCATION	/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////

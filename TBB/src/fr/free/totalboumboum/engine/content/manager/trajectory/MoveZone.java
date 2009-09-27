@@ -347,9 +347,9 @@ public class MoveZone
 	 */
 	private boolean hasArrived()
 	{	boolean result = true;
-		double distX = GameVariables.level.getHorizontalDistance(currentX,targetX);
+		double distX = GameVariables.level.getHorizontalPixelDistance(currentX,targetX);
 		result = result && CalculusTools.isRelativelyEqualTo(distX,0);
-		double distY = GameVariables.level.getVerticalDistance(currentY,targetY);
+		double distY = GameVariables.level.getVerticalPixelDistance(currentY,targetY);
 		result = result && CalculusTools.isRelativelyEqualTo(distY,0);
 		return result;
 	}
@@ -375,8 +375,8 @@ public class MoveZone
 	
 	private void bypassObstacleCompositeDirection(PotentialObstacle po)
 	{	// process the new direction according to the obstacle position
-		double horizontalDistance = GameVariables.level.getHorizontalDistance(po.getContactX(),po.getSprite().getCurrentPosX());
-		double verticalDistance = GameVariables.level.getVerticalDistance(po.getContactY(),po.getSprite().getCurrentPosY());
+		double horizontalDistance = GameVariables.level.getHorizontalPixelDistance(po.getContactX(),po.getSprite().getCurrentPosX());
+		double verticalDistance = GameVariables.level.getVerticalPixelDistance(po.getContactY(),po.getSprite().getCurrentPosY());
 		Direction dir;
 		if(po.getContactDistance()<0)
 		{	double deltaX = GameVariables.level.getDeltaX(currentX,po.getSprite().getCurrentPosX());

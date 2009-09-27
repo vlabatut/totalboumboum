@@ -71,8 +71,8 @@ public class Astar
 	public AiPath processShortestPath(AiTile startTile, AiTile endTile)
 	{	// initialisation
 		AiPath result = new AiPath();
-		root = new AstarNode(startTile,hero,costCalculator,heuristicCalculator);
 		heuristicCalculator.setEndTile(endTile);
+		root = new AstarNode(startTile,hero,costCalculator,heuristicCalculator);
 		PriorityQueue<AstarNode> queue = new PriorityQueue<AstarNode>(1);
 		queue.offer(root);
 		AstarNode finalNode = null;
@@ -106,6 +106,12 @@ public class Astar
 		{	AiTile tile = finalNode.getTile();
 			result.addTile(0,tile);
 			finalNode = finalNode.getParent();
+		}
+		if(debug)
+		{	System.out.print("Chemin");
+			for(AiTile t: result.getTiles())
+				System.out.print(" : "+t);
+			System.out.println();
 		}
 		
 		return result;
