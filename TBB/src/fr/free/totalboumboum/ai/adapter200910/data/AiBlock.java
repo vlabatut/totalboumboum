@@ -44,13 +44,13 @@ public class AiBlock extends AiSprite<Block>
 	 */
 	AiBlock(AiTile tile, Block sprite)
 	{	super(tile,sprite);
-		updateDestructible();
+		updateAbilities();
 	}	
 	
 	@Override
 	void update(AiTile tile)
 	{	super.update(tile);
-		updateDestructible();
+		updateAbilities();
 	}
 
 	@Override
@@ -69,18 +69,23 @@ public class AiBlock extends AiSprite<Block>
 	}
 
 	/////////////////////////////////////////////////////////////////
-	// DESTRUCTIBLE		/////////////////////////////////////////////
+	// ABILITIES		/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	/** indique si ce mur peut être détruit par une bombe */
 	private boolean destructible;
+	/** indique si ce mur laisse passer les joueurs ayant un item pour traverser les murs */
+	private boolean blockHero;
 	
 	/** 
-	 * initialise l'indicateur de destructibilité de ce bloc 
+	 * met jour les différentes caractéristiques de ce bloc 
 	 */
-	private void updateDestructible()
+	private void updateAbilities()
 	{	Block sprite = getSprite();
+		// destructible
 		SpecificAction action = new SpecificConsume(sprite);
 		destructible = sprite.isTargetPreventing(action);
+		// bloque les personnages
+		action new
 	}	
 
 	/**
@@ -90,5 +95,15 @@ public class AiBlock extends AiSprite<Block>
 	 */
 	public boolean isDestructible()
 	{	return destructible;		
+	}
+
+	/**
+	 * renvoie vrai si ce bloc bloque le passage de tout personnage,
+	 * y compris ceux qui ont le pouvoir de traverser les murs
+	 * 
+	 * @return	vrai ssi le bloc empêche tout personnage de passer
+	 */
+	public boolean hasBlockHero()
+	{	return blockHero;		
 	}
 }

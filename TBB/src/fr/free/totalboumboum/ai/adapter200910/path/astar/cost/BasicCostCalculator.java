@@ -23,14 +23,16 @@ package fr.free.totalboumboum.ai.adapter200910.path.astar.cost;
 
 import fr.free.totalboumboum.ai.adapter200910.data.AiTile;
 
+/**
+ * Classe implémentant l'interface CostCalculator de la manière la plus simple possible.
+ * Ici, le cout pour passer d'une case à l'autre est simplement 1, quelles que soient
+ * les cases considérées.
+ */
 public class BasicCostCalculator implements CostCalculator
 {
-	
 	/** 
-	 * Les deux cases sont supposées être voisines, on se contente de renvoyer leur distance.
-	 * Il est possible de définir des couts plus évolués, en tenant compte par exemple des
-	 * influences négatives dans cette case (pour le joueur) comme la présence de bombe à proximité, etc.,
-	 * et des influences positives telles que la présence de bonus.
+	 * Les deux cases sont supposées être voisines, 
+	 * on se contente de renvoyer leur distance.
 	 * 
 	 * @param start	la case de départ
 	 * @param end	la case d'arrivée

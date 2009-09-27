@@ -23,6 +23,11 @@ package fr.free.totalboumboum.ai.adapter200910.path.astar.heuristic;
 
 import fr.free.totalboumboum.ai.adapter200910.data.AiTile;
 
+/**
+ * implémentation la plus simple d'une heuristique : 
+ * on utilise la distance de Manhattan entre la case de départ et 
+ * la case d'arrivée.
+ */
 public class BasicHeuristicCalculator extends HeuristicCalculator
 {
 	/////////////////////////////////////////////////////////////////

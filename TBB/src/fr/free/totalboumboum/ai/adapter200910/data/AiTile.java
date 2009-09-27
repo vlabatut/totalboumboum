@@ -370,4 +370,39 @@ public class AiTile
 		return result;
 	}
 	
+	/////////////////////////////////////////////////////////////////
+	// ABILITIES		/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	
+	/**
+	 * Teste si le personnage passé en paramètre est capable de traverser
+	 * cette case. Sinon, cela signifie qu'elle contient au moins un
+	 * obstacle que le personnage ne peut pas traverser. On considère deux
+	 * types d'obstacles : ceux qui bloquent le personnage, par exemple un
+	 * mur, et ceux qui le détruisent, par exemple le feu
+	 * 
+	 *  @param hero	le personnage qui veut traverser cette case
+	 *  @return	vrai ssi ce personnage, à cet instant, peut traverser cette case
+	 */
+	public boolean isCrossableBy(AiHero hero)
+	{	boolean result = true;
+		// murs
+		if(!blocks.isEmpty())
+		{	result = hero.hasThroughWall();
+			Iterator<AiBlock> it = blocks.iterator();
+			while(it.hasNext() && result)
+			{	AiBlock b = it.next();
+				result = !b.hasBlockHero();
+				
+			}			
+		}
+		// bombes
+		if(result && !bombs.isEmpty())
+			result = hero.hasThroughBomb();
+		// feu
+		if(result && !fires.isEmpty())
+			result = hero.hasThroughFire();		
+		//
+		return result;
+	}
 }

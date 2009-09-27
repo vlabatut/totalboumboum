@@ -23,6 +23,10 @@ package fr.free.totalboumboum.ai.adapter200910.path.astar.heuristic;
 
 import fr.free.totalboumboum.ai.adapter200910.data.AiTile;
 
+/**
+ * permet de définir une fonction heuristique utilisée par l'algorithme
+ * A* lors de la recherche d'un plus court chemin.
+ */
 public abstract class HeuristicCalculator
 {
 	/////////////////////////////////////////////////////////////////

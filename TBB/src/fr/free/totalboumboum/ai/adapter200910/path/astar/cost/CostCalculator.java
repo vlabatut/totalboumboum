@@ -23,11 +23,18 @@ package fr.free.totalboumboum.ai.adapter200910.path.astar.cost;
 
 import fr.free.totalboumboum.ai.adapter200910.data.AiTile;
 
+/**
+ * permet de définir une fonction de cout utilisée lors de la recherche
+ * avec l'algorithme A*
+ */
 public interface CostCalculator
 {
 	/** 
 	 * calcule le cout de l'action consistant à aller de la case
-	 * start à la case end, sachant que ces deux cases sont voisines
+	 * start à la case end, sachant que ces deux cases sont voisines.
+	 * Il est possible de définir des couts évolués, en tenant compte par exemple des
+	 * influences négatives dans ces cases (pour le joueur) comme la présence de bombe 
+	 * à proximité, etc., et des influences positives telles que la présence de bonus.
 	 * 
 	 * @param start	la case de départ 
 	 * @param end	la case d'arrivée
