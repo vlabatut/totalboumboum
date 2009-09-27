@@ -285,8 +285,7 @@ public class AiTile
 			if(tile.getFloors().size()>0)
 			{	Floor f = tile.getFloors().get(0);
 				GestureName gesture = f.getCurrentGesture().getName();
-				if(!(gesture==GestureName.NONE
-					|| gesture==GestureName.HIDING
+				if(!(gesture==GestureName.HIDING
 					|| gesture==GestureName.ENDED))
 				{	floor = zone.getFloor(f);
 					if(floor==null)
@@ -303,8 +302,7 @@ public class AiTile
 			while(i.hasNext())
 			{	Hero h = i.next();
 				GestureName gesture = h.getCurrentGesture().getName();
-				if(!(/*gesture==GestureName.NONE
-					||*/ gesture==GestureName.HIDING
+				if(!(gesture==GestureName.HIDING
 					|| gesture==GestureName.ENDED))
 				{	AiHero hero = zone.getHero(h);
 					if(hero==null)

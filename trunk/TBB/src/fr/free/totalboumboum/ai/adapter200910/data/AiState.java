@@ -50,6 +50,9 @@ public class AiState
 	{	this.sprite = sprite;
 	}
 	
+	/////////////////////////////////////////////////////////////////
+	// PROCESS			/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
 	/**
 	 * met à jour cet état en fonction de l'évolution du sprite de référence
 	 */
@@ -61,37 +64,6 @@ public class AiState
 		name = AiStateName.makeNameFromGesture(gesture);		
 	}
 	
-	/**
-	 * termine cet objet et libère les ressources occupées
-	 */
-	void finish()
-	{	sprite = null;
-		direction = null;
-		name = null;		
-	}
-	
-	@Override
-	public boolean equals(Object o)
-	{	boolean result = false;
-		if(o instanceof AiState)
-		{	
-//			AiState s = (AiState)o;	
-//			result = name==s.name && direction==s.direction;
-			result = this==o;
-		}
-		return result;
-	}
-
-	@Override
-	public String toString()
-	{	StringBuffer result = new StringBuffer();
-		result.append("(");
-		result.append("name.: "+name);
-		result.append("dir.: "+direction);
-		result.append(")");
-		return result.toString();
-	}
-
 	/////////////////////////////////////////////////////////////////
 	// NAME				/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
@@ -122,5 +94,45 @@ public class AiState
 	 */
 	public Direction getDirection()
 	{	return direction;
+	}
+
+	/////////////////////////////////////////////////////////////////
+	// COMPARISON		/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	@Override
+	public boolean equals(Object o)
+	{	boolean result = false;
+		if(o instanceof AiState)
+		{	
+//			AiState s = (AiState)o;	
+//			result = name==s.name && direction==s.direction;
+			result = this==o;
+		}
+		return result;
+	}
+
+	/////////////////////////////////////////////////////////////////
+	// TEXT				/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	@Override
+	public String toString()
+	{	StringBuffer result = new StringBuffer();
+		result.append("(");
+		result.append("name.: "+name);
+		result.append("dir.: "+direction);
+		result.append(")");
+		return result.toString();
+	}
+
+	/////////////////////////////////////////////////////////////////
+	// FINISH			/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	/**
+	 * termine cet objet et libère les ressources occupées
+	 */
+	void finish()
+	{	sprite = null;
+		direction = null;
+		name = null;		
 	}
 }

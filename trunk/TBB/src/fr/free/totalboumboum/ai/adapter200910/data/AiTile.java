@@ -44,9 +44,7 @@ import fr.free.totalboumboum.engine.content.sprite.item.Item;
  */
 
 public class AiTile
-{	/** représentation de la zone à laquelle cette case appartient */
-	private AiZone zone;
-	/** case du jeu que cette classe représente */
+{	/** case du jeu que cette classe représente */
 	private Tile tile;
 	
 	/**
@@ -57,10 +55,14 @@ public class AiTile
 	AiTile(Tile tile, AiZone zone)
 	{	this.zone = zone;
 		this.tile = tile;
-		initLocation();
+		initTileLocation();
+		initPixelLocation();
 		updateSprites();
 	}
 	
+	/////////////////////////////////////////////////////////////////
+	// PROCESS			/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
 	/**
 	 * met à jour cette case et son contenu
 	 */
@@ -68,45 +70,18 @@ public class AiTile
 	{	updateSprites();		
 	}
 	
-	/**
-	 * termine proprement cette case
-	 */
-	void finish()
-	{	// block
-		finishSprites(blocks);
-		// bombs
-		finishSprites(bombs);
-		// fires
-		finishSprites(fires);
-		// floor
-		finishSprites(floors);
-		// heroes
-		finishSprites(heroes);
-		// item
-		finishSprites(items);
-	}
+	/////////////////////////////////////////////////////////////////
+	// ZONE				/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	/** représentation de la zone à laquelle cette case appartient */
+	private AiZone zone;
 	
-	@Override
-	public boolean equals(Object o)
-	{	boolean result = false;
-		if(o instanceof AiTile)
-		{	
-//			AiTile t = (AiTile)o;	
-//			result = tile==t.tile && zone==t.zone;
-			result = this==o;
-		}
-		return result;
-	}
-	
-	@Override
-	public String toString()
-	{	StringBuffer result = new StringBuffer();
-		result.append("("+line+";"+col+")");
-		return result.toString();
+	public AiZone getZone()
+	{	return zone;	
 	}
 	
 	/////////////////////////////////////////////////////////////////
-	// LOCATION			/////////////////////////////////////////////
+	// TILE LOCATION	/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	/** ligne de la zone contenant cette case */
 	private int line;
@@ -133,9 +108,43 @@ public class AiTile
 	/** 
 	 * initialise les numéros de ligne et colonne de cette case 
 	 */
-	private void initLocation()
-	{	this.line = tile.getLine();
-		this.col = tile.getCol();
+	private void initTileLocation()
+	{	line = tile.getLine();
+		col = tile.getCol();
+	}
+
+	/////////////////////////////////////////////////////////////////
+	// PIXEL LOCATION	/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	/** position de la case en pixels */
+	private double posX;
+	/** position de la case en pixels */
+	private double posY;
+		
+	/** 
+	 * renvoie l'abscisse de la case en pixels
+	 * 
+	 * @return	l'abscisse de cette case
+	 */
+	public double getPosX()
+	{	return posX;	
+	}
+	
+	/** 
+	 * renvoie l'ordonnée de la case en pixels
+	 * 
+	 * @return	l'ordonnée de cette case
+	 */
+	public double getPosY()
+	{	return posY;	
+	}
+	
+	/** 
+	 * initialise la position de cette case en pixels 
+	 */
+	private void initPixelLocation()
+	{	posX = tile.getPosX();
+		posY = tile.getPosY();
 	}
 
 	/////////////////////////////////////////////////////////////////
@@ -282,8 +291,7 @@ public class AiTile
 			while(it.hasNext())
 			{	Floor f = it.next();
 				GestureName gesture = f.getCurrentGesture().getName();
-				if(!(gesture==GestureName.NONE
-					|| gesture==GestureName.HIDING
+				if(!(gesture==GestureName.HIDING 
 					|| gesture==GestureName.ENDED))
 				{	AiFloor floor = zone.getFloor(f);
 					if(floor==null)
@@ -301,8 +309,7 @@ public class AiTile
 			while(it.hasNext())
 			{	Hero h = it.next();
 				GestureName gesture = h.getCurrentGesture().getName();
-				if(!(gesture==GestureName.NONE
-					|| gesture==GestureName.HIDING
+				if(!(gesture==GestureName.HIDING 
 					|| gesture==GestureName.ENDED))
 				{	AiHero hero = zone.getHero(h);
 					if(hero==null)
@@ -333,19 +340,6 @@ public class AiTile
 				}
 			}
 		}
-	}
-	/**
-	 * termine les représentations de sprites passées en paramètre
-	 * @param <T>	type de représentation
-	 * @param list	liste de représentations
-	 */
-	private <T extends AiSprite<?>> void finishSprites(ArrayList<T> list)
-	{	Iterator<T> it = list.iterator();
-		while(it.hasNext())
-		{	T temp = it.next();
-			temp.finish();
-		}
-		list.clear();
 	}
 
 	/////////////////////////////////////////////////////////////////
@@ -403,5 +397,62 @@ public class AiTile
 			result = hero.hasThroughFire();		
 		//
 		return result;
+	}
+
+	/////////////////////////////////////////////////////////////////
+	// MISC				/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	@Override
+	public boolean equals(Object o)
+	{	boolean result = false;
+		if(o instanceof AiTile)
+		{	
+//			AiTile t = (AiTile)o;	
+//			result = tile==t.tile && zone==t.zone;
+			result = this==o;
+		}
+		return result;
+	}
+	
+	@Override
+	public String toString()
+	{	StringBuffer result = new StringBuffer();
+		result.append("("+line+";"+col+")");
+		return result.toString();
+	}
+	
+	/////////////////////////////////////////////////////////////////
+	// FINISH				/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	/**
+	 * termine proprement cette case
+	 */
+	void finish()
+	{	// block
+		finishSprites(blocks);
+		// bombs
+		finishSprites(bombs);
+		// fires
+		finishSprites(fires);
+		// floor
+		finishSprites(floors);
+		// heroes
+		finishSprites(heroes);
+		// item
+		finishSprites(items);
+	}
+
+	/**
+	 * termine les représentations de sprites passées en paramètre
+	 * @param <T>	type de représentation
+	 * @param list	liste de représentations
+	 */
+	private <T extends AiSprite<?>> void finishSprites(ArrayList<T> list)
+	{	Iterator<T> it = list.iterator();
+		while(it.hasNext())
+		{	T temp = it.next();
+			temp.finish();
+		}
+		list.clear();
 	}
 }

@@ -58,25 +58,13 @@ public class AiBlock extends AiSprite<Block>
 		updateAbilities();
 	}	
 	
+	/////////////////////////////////////////////////////////////////
+	// PROCESS			/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
 	@Override
 	void update(AiTile tile)
 	{	super.update(tile);
 		updateAbilities();
-	}
-
-	@Override
-	void finish()
-	{	super.finish();
-	}
-
-	@Override
-	public String toString()
-	{	StringBuffer result = new StringBuffer();
-		result.append("Block: [");
-		result.append(super.toString());
-		result.append(" - destr.: "+destructible);
-		result.append(" ]");
-		return result.toString();
 	}
 
 	/////////////////////////////////////////////////////////////////
@@ -129,4 +117,26 @@ public class AiBlock extends AiSprite<Block>
 	public boolean hasBlockHero()
 	{	return blockHero;		
 	}
+
+	/////////////////////////////////////////////////////////////////
+	// TEXT				/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	@Override
+	public String toString()
+	{	StringBuffer result = new StringBuffer();
+		result.append("Block: [");
+		result.append(super.toString());
+		result.append(" - destr.: "+destructible);
+		result.append(" ]");
+		return result.toString();
+	}
+
+	/////////////////////////////////////////////////////////////////
+	// FINISH			/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	@Override
+	void finish()
+	{	super.finish();
+	}
+
 }

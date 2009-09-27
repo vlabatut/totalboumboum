@@ -1,7 +1,5 @@
 package tournament200809v1.promeneur;
 
-import fr.free.totalboumboum.ai.adapter200809.AiManager;
-
 /*
  * Total Boum Boum
  * Copyright 2008-2009 Vincent Labatut 
@@ -22,6 +20,8 @@ import fr.free.totalboumboum.ai.adapter200809.AiManager;
  * along with Total Boum Boum.  If not, see <http://www.gnu.org/licenses/>.
  * 
  */
+
+import fr.free.totalboumboum.ai.adapter200809.AiManager;
 
 public class AiMain extends AiManager
 {

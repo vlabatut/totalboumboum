@@ -54,30 +54,15 @@ public class AiHero extends AiSprite<Hero>
 		updateAbilities();
 	}
 	
+	/////////////////////////////////////////////////////////////////
+	// PROCESS			/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
 	@Override
 	void update(AiTile tile)
 	{	super.update(tile);
 		updateBombParam();
 		updateWalkingSpeed();
 		updateAbilities();
-	}
-
-	@Override
-	void finish()
-	{	super.finish();
-	}
-
-	@Override
-	public String toString()
-	{	StringBuffer result = new StringBuffer();
-		result.append("Hero: [");
-		result.append(super.toString());
-		result.append(" - bmbCnt.: "+bombCount);
-		result.append(" - bmbNbr.: "+bombNumber);
-		result.append(" - bmbRge.: "+bombRange);
-		result.append(" - color: "+color);
-		result.append(" ]");
-		return result.toString();
 	}
 
 	/////////////////////////////////////////////////////////////////
@@ -252,5 +237,29 @@ public class AiHero extends AiSprite<Hero>
 		// traverser les bombes
 		ability = sprite.modulateStateAbility(StateAbilityName.HERO_FIRE_PROTECTION);
 		throughFire = ability.isActive();
+	}
+
+	/////////////////////////////////////////////////////////////////
+	// TEXT				/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	@Override
+	public String toString()
+	{	StringBuffer result = new StringBuffer();
+		result.append("Hero: [");
+		result.append(super.toString());
+		result.append(" - bmbCnt.: "+bombCount);
+		result.append(" - bmbNbr.: "+bombNumber);
+		result.append(" - bmbRge.: "+bombRange);
+		result.append(" - color: "+color);
+		result.append(" ]");
+		return result.toString();
+	}
+
+	/////////////////////////////////////////////////////////////////
+	// FINISH			/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	@Override
+	void finish()
+	{	super.finish();
 	}
 }

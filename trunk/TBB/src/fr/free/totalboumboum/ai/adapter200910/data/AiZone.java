@@ -41,6 +41,7 @@ import fr.free.totalboumboum.engine.content.sprite.floor.Floor;
 import fr.free.totalboumboum.engine.content.sprite.hero.Hero;
 import fr.free.totalboumboum.engine.content.sprite.item.Item;
 import fr.free.totalboumboum.engine.player.Player;
+import fr.free.totalboumboum.tools.CalculusTools;
 
 /**
  * représente la zone de jeu et tous ces constituants : cases et sprites.
@@ -73,12 +74,12 @@ public class AiZone
 	{	this.level = level;
 		this.player = player;
 		initMatrix();
-		updateMatrix();
+//		updateMatrix();
 		initOwnHero();
 	}
 	
 	/////////////////////////////////////////////////////////////////
-	// ENGINE			/////////////////////////////////////////////
+	// PROCESS			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	/**
 	 * met à jour cette représentation ainsi que tous ses constituants.
@@ -86,39 +87,6 @@ public class AiZone
 	public void update(long elapsedTime)
 	{	updateTime(elapsedTime);
 		updateMatrix();
-	}
-	
-	/**
-	 * termine proprement cette représentation (une fois que l'IA n'en a plus besoin).
-	 */
-	public void finish()
-	{	// matrix
-		for(int line=0;line<height;line++)
-			for(int col=0;col<width;col++)
-				matrix[line][col].finish();
-		// sprites
-		blocks.clear();
-		bombs.clear();
-		fires.clear();
-		floors.clear();
-		heroes.clear();
-		items.clear();
-		ownHero = null;
-	}
-	
-	/////////////////////////////////////////////////////////////////
-	// MISC				/////////////////////////////////////////////
-	/////////////////////////////////////////////////////////////////
-	@Override
-	public boolean equals(Object o)
-	{	boolean result = false;
-		if(o instanceof AiZone)
-		{	
-//			AiZone zone = (AiZone)o;	
-//			result = level==zone.level && player==zone.player;
-			result = this==o;
-		}
-		return result;
 	}
 	
 	/////////////////////////////////////////////////////////////////
@@ -664,12 +632,298 @@ public class AiZone
 	 * @param y1	première position verticale en pixels
 	 * @param x2	seconde position horizontale en pixels
 	 * @param y2	seconde position verticale en pixels
-	 * @return
+	 * @return	la direction correspondant au chemin le plus court
 	 */
 	public Direction getDirection(double x1, double x2, double y1, double y2)
 	{	double dx = GameVariables.level.getDeltaX(x1,x2);
 		double dy = GameVariables.level.getDeltaY(y1,y2);
 		Direction result = Direction.getCompositeFromRelativeDouble(dx,dy);
 		return result;
+	}
+
+	/////////////////////////////////////////////////////////////////
+	// TILE DISTANCES			/////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	/**
+	 * renvoie la distance de Manhattan entre les cases de coordonnées
+	 * (line1,col1) et (line2,col2), exprimée en cases. Attention, le 
+	 * niveau est considéré comme cyclique, 
+	 * i.e. le bord de droite est relié au bord de gauche, et le bord du haut 
+	 * est relié au bord du bas. Cette méthode considère la distance dans la direction
+	 * indiquée par le paramètre direction, qui peut correspondre à un chemin 
+	 * passant par les bords du niveau.
+	 * 
+	 * @param line1	ligne de la première case
+	 * @param col1	colonne de la première case
+	 * @param line2	ligne de la seconde case
+	 * @param col2	colonne de la seconde case
+	 * @param direction	direction à considérer
+	 */
+	public int getTileDistance(int line1, int col1, int line2, int col2, Direction direction)
+	{	int result = level.getTileDistance(line1,col1,line2,col2,direction);
+		return result;
+	}
+
+	/**
+	 * renvoie la distance de Manhattan entre les cases de coordonnées
+	 * (line1,col1) et (line2,col2), exprimée en cases. 
+	 * Attention, le niveau est considéré comme cyclique, 
+	 * i.e. le bord de droite est relié au bord de gauche, et le bord du haut 
+	 * est relié au bord du bas. Cette méthode considère la distance la plus courte
+	 * (qui peut correspondre à un chemin passant par les bords du niveau)
+	 * 
+	 * @param line1	ligne de la première case
+	 * @param col1	colonne de la première case
+	 * @param line2	ligne de la seconde case
+	 * @param col2	colonne de la seconde case
+	 */
+	public int getTileDistance(int line1, int col1, int line2, int col2)
+	{	int result = level.getTileDistance(line1, col1, line2, col2, Direction.NONE);
+		return result;
+	}
+	
+	/**
+	 * renvoie la distance de Manhattan entre les deux cases passées en paramètres,
+	 * exprimée en cases. Attention, le niveau est considéré comme cyclique, i.e. le bord de droite 
+	 * est relié au bord de gauche, et le bord du haut est relié au bord du bas. 
+	 * Cette méthode considère la distance la plus courte
+	 * (qui peut correspondre à un chemin passant par les bords du niveau)
+	 * 
+	 * @param sprite1	première case
+	 * @param sprite2	seconde case
+	 */
+	public int getTileDistance(AiTile tile1, AiTile tile2)
+	{	int result = getTileDistance(tile1,tile2,Direction.NONE);
+		return result;
+	}
+	
+	/**
+	 * renvoie la distance de Manhattan entre les deux cases passées en paramètres,
+	 * exprimée en cases. Attention, le niveau est considéré comme cyclique, i.e. le bord de droite 
+	 * est relié au bord de gauche, et le bord du haut est relié au bord du bas. 
+	 * Cette méthode considère la distance dans la direction
+	 * indiquée par le paramètre direction, qui peut correspondre à un chemin 
+	 * passant par les bords du niveau.
+	 * 
+	 * @param sprite1	première case
+	 * @param sprite2	seconde case
+	 * @param direction	direction à considérer
+	 */
+	public int getTileDistance(AiTile tile1, AiTile tile2, Direction direction)
+	{	int line1 = tile1.getLine();
+		int col1 = tile1.getCol();
+		int line2 = tile2.getLine();
+		int col2 = tile2.getCol();
+		int result = level.getTileDistance(line1,col1,line2,col2);
+		return result;
+	}
+	
+	/**
+	 * renvoie la distance de Manhattan entre les deux sprites passés en paramètres,
+	 * exprimée en cases. Attention, le niveau est considéré comme cyclique, i.e. le bord de droite 
+	 * est relié au bord de gauche, et le bord du haut est relié au bord du bas. 
+	 * Cette méthode considère la distance la plus courte
+	 * (qui peut correspondre à un chemin passant par les bords du niveau)
+	 * 
+	 * @param sprite1	premier sprite
+	 * @param sprite2	second sprite
+	 */
+	public int getTileDistance(AiSprite<?> sprite1, AiSprite<?> sprite2)
+	{	int result = getTileDistance(sprite1,sprite2,Direction.NONE);
+		return result;
+	}
+	
+	/**
+	 * renvoie la distance de Manhattan entre les deux sprites passés en paramètres,
+	 * exprimée en cases. Attention, le niveau est considéré comme cyclique, i.e. le bord de droite 
+	 * est relié au bord de gauche, et le bord du haut est relié au bord du bas. 
+	 * Cette méthode considère la distance dans la direction
+	 * indiquée par le paramètre direction, qui peut correspondre à un chemin 
+	 * passant par les bords du niveau.
+	 * 
+	 * @param sprite1	premier sprite
+	 * @param sprite2	second sprite
+	 * @param direction	direction à considérer
+	 */
+	public int getTileDistance(AiSprite<?> sprite1, AiSprite<?> sprite2, Direction direction)
+	{	AiTile tile1 = sprite1.getTile();
+		AiTile tile2 = sprite2.getTile();
+		int result = getTileDistance(tile1,tile2);
+		return result;
+	}
+	
+	/////////////////////////////////////////////////////////////////
+	// PIXEL DISTANCES			/////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	/**
+	 * renvoie la distance de Manhattan entre les points de coordonnées
+	 * (x1,y1) et (x2,y2), exprimée en pixels. Attention, le niveau est considéré comme cyclique, 
+	 * i.e. le bord de droite est relié au bord de gauche, et le bord du haut 
+	 * est relié au bord du bas. Cette méthode considère la distance la plus courte
+	 * (qui peut correspondre à un chemin passant par les bords du niveau)
+	 * 
+	 * @param x1	abscisse du premier point
+	 * @param y1	ordonnée du premier point
+	 * @param x2	abscisse du second point
+	 * @param y2	ordonnée du second point
+	 */
+	public double getPixelDistance(double x1, double y1, double x2, double y2)
+	{	double result = level.getPixelDistance(x1,y1,x2,y2);
+		return result;
+	}
+	
+	/**
+	 * renvoie la distance de Manhattan entre les points de coordonnées
+	 * (x1,y1) et (x2,y2), exprimée en pixels. Attention, le niveau est considéré comme cyclique, 
+	 * i.e. le bord de droite est relié au bord de gauche, et le bord du haut 
+	 * est relié au bord du bas. Cette méthode considère la distance dans la direction
+	 * indiquée par le paramètre direction, qui peut correspondre à un chemin 
+	 * passant par les bords du niveau.
+	 * 
+	 * @param x1	abscisse du premier point
+	 * @param y1	ordonnée du premier point
+	 * @param x2	abscisse du second point
+	 * @param y2	ordonnée du second point
+	 * @param direction	direction à considérer
+	 */
+	public double getPixelDistance(double x1, double y1, double x2, double y2, Direction direction)
+	{	double result = level.getPixelDistance(x1,y1,x2,y2,direction);
+		return result;
+	}
+	
+	/**
+	 * renvoie la distance de Manhattan entre les deux sprites passés en paramètres,
+	 * exprimée en pixels. Attention, le niveau est considéré comme cyclique, i.e. le bord de droite 
+	 * est relié au bord de gauche, et le bord du haut est relié au bord du bas. 
+	 * Cette méthode considère la distance la plus courte
+	 * (qui peut correspondre à un chemin passant par les bords du niveau)
+	 * 
+	 * @param sprite1	premier sprite
+	 * @param sprite2	second sprite
+	 */
+	public double getPixelDistance(AiSprite<?> sprite1, AiSprite<?> sprite2)
+	{	double result = getPixelDistance(sprite1, sprite2,Direction.NONE);
+		return result;
+	}
+	
+	/**
+	 * renvoie la distance de Manhattan entre les deux sprites passés en paramètres, exprimée en pixels. 
+	 * Attention, le niveau est considéré comme cyclique, i.e. le bord de droite 
+	 * est relié au bord de gauche, et le bord du haut est relié au bord du bas. 
+	 * Cette méthode considère la distance dans la direction indiquée par le 
+	 * paramètre direction, qui peut correspondre à un chemin passant par 
+	 * les bords du niveau.
+	 * 
+	 * @param sprite1	premier sprite
+	 * @param sprite2	second sprite
+	 * @param direction	direction à considérer
+	 */
+	public double getPixelDistance(AiSprite<?> sprite1, AiSprite<?> sprite2, Direction direction)
+	{	double x1 = sprite1.getPosX();
+		double y1 = sprite1.getPosY();
+		double x2 = sprite2.getPosX();
+		double y2 = sprite2.getPosY();
+		double result = level.getPixelDistance(x1,y1,x2,y2,direction);
+		return result;
+	}
+
+	/////////////////////////////////////////////////////////////////
+	// TILE DELTAS				/////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+
+	/////////////////////////////////////////////////////////////////
+	// PIXEL DELTAS				/////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+
+	/////////////////////////////////////////////////////////////////
+	// SAME PIXEL POSITION		/////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	/**
+	 * teste si les deux sprites passés en paramètres occupent la
+	 * même position au pixel près
+	 * 
+	 * @param sprite1	le premier sprite
+	 * @param sprite2	le second sprite
+	 * @return	vrai ssi les deux sprites sont au même endroit
+	 */
+	public boolean hasSamePixelPosition(AiSprite<?> sprite1, AiSprite<?> sprite2)
+	{	boolean result;
+		double x1 = sprite1.getPosX();
+		double y1 = sprite1.getPosY();
+		double x2 = sprite2.getPosX();
+		double y2 = sprite2.getPosY();
+		result = hasSamePixelPosition(x1,y1,x2,y2);
+		return result;
+	}
+	
+	/**
+	 * teste si le sprite passé en paramètre occupent le
+	 * centre de la case passée en paramètre, au pixel près
+	 * 
+	 * @param sprite	le sprite
+	 * @param tile	la case
+	 * @return	vrai ssi le sprite est au centre de la case
+	 */
+	public boolean hasSamePixelPosition(AiSprite<?> sprite, AiTile tile)
+	{	boolean result;	
+		double x1 = sprite.getPosX();
+		double y1 = sprite.getPosY();
+		double x2 = tile.getPosX();
+		double y2 = tile.getPosY();
+		result = hasSamePixelPosition(x1,y1,x2,y2);
+		return result;
+	}
+
+	/**
+	 * teste si les deux points passés en paramètres occupent la
+	 * même position au pixel près
+	 * 
+	 * @param x1	l'abscisse de la première position
+	 * @param y1	l'ordonnée de la première position
+	 * @param x2	l'abscisse de la seconde position
+	 * @param y21	l'ordonnée de la seconde position
+	 * @return	vrai ssi les deux positions sont équivalentes au pixel près
+	 */
+	public boolean hasSamePixelPosition(double x1, double y1, double x2, double y2)
+	{	boolean result = true;	
+		result = result && CalculusTools.isRelativelyEqualTo(x1,x2);
+		result = result && CalculusTools.isRelativelyEqualTo(y1,y2);
+		return result;
+	}
+	
+	/////////////////////////////////////////////////////////////////
+	// MISC				/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	@Override
+	public boolean equals(Object o)
+	{	boolean result = false;
+		if(o instanceof AiZone)
+		{	
+//			AiZone zone = (AiZone)o;	
+//			result = level==zone.level && player==zone.player;
+			result = this==o;
+		}
+		return result;
+	}
+	
+	/////////////////////////////////////////////////////////////////
+	// FINISH			/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	/**
+	 * termine proprement cette représentation (une fois que l'IA n'en a plus besoin).
+	 */
+	public void finish()
+	{	// matrix
+		for(int line=0;line<height;line++)
+			for(int col=0;col<width;col++)
+				matrix[line][col].finish();
+		// sprites
+		blocks.clear();
+		bombs.clear();
+		fires.clear();
+		floors.clear();
+		heroes.clear();
+		items.clear();
+		ownHero = null;
 	}
 }

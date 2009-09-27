@@ -48,6 +48,9 @@ public abstract class AiSprite<T extends Sprite>
 		state = new AiState(sprite);
 	}
 	
+	/////////////////////////////////////////////////////////////////
+	// PROCESS			/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
 	/**
 	 * met à jour cette représentation du sprite
 	 * 
@@ -58,40 +61,6 @@ public abstract class AiSprite<T extends Sprite>
 		updateLocation();
 		updateState();
 		checked = true;
-	}
-
-	/**
-	 * termine proprement ce sprite et libère les ressources qu'il occupait
-	 */
-	void finish()
-	{	// state
-		state.finish();
-		state = null;
-		// misc
-		tile = null;
-		sprite = null;
-		
-	}
-
-	@Override
-	public boolean equals(Object o)
-	{	boolean result = false;
-		if(o instanceof AiSprite<?>)
-		{	
-//			AiSprite<?> s = (AiSprite<?>)o;	
-//			result = sprite==s.sprite;
-			result = this==o;
-		}
-		return result;
-	}
-
-	@Override
-	public String toString()
-	{	StringBuffer result = new StringBuffer();
-		result.append(" ("+getTile().getLine()+";"+getTile().getCol()+")");
-		result.append(" ("+posX+";"+posY+";"+posZ+")");
-		result.append(" - state: "+state.toString());
-		return result.toString();
 	}
 
 	/////////////////////////////////////////////////////////////////
@@ -238,5 +207,48 @@ public abstract class AiSprite<T extends Sprite>
 	{	posX = sprite.getCurrentPosX();
 		posY = sprite.getCurrentPosY();
 		posZ = sprite.getCurrentPosZ();		
+	}
+
+	/////////////////////////////////////////////////////////////////
+	// COMPARISON		/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	@Override
+	public boolean equals(Object o)
+	{	boolean result = false;
+		if(o instanceof AiSprite<?>)
+		{	
+//			AiSprite<?> s = (AiSprite<?>)o;	
+//			result = sprite==s.sprite;
+			result = this==o;
+		}
+		return result;
+	}
+
+	/////////////////////////////////////////////////////////////////
+	// TEXT			/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	@Override
+	public String toString()
+	{	StringBuffer result = new StringBuffer();
+		result.append(" ("+getTile().getLine()+";"+getTile().getCol()+")");
+		result.append(" ("+posX+";"+posY+";"+posZ+")");
+		result.append(" - state: "+state.toString());
+		return result.toString();
+	}
+
+	/////////////////////////////////////////////////////////////////
+	// FINISH			/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	/**
+	 * termine proprement ce sprite et libère les ressources qu'il occupait
+	 */
+	void finish()
+	{	// state
+		state.finish();
+		state = null;
+		// misc
+		tile = null;
+		sprite = null;
+		
 	}
 }

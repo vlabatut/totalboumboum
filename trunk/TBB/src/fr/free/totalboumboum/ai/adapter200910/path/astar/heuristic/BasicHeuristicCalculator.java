@@ -22,6 +22,7 @@ package fr.free.totalboumboum.ai.adapter200910.path.astar.heuristic;
  */
 
 import fr.free.totalboumboum.ai.adapter200910.data.AiTile;
+import fr.free.totalboumboum.ai.adapter200910.data.AiZone;
 
 /**
  * implémentation la plus simple d'une heuristique : 
@@ -30,6 +31,7 @@ import fr.free.totalboumboum.ai.adapter200910.data.AiTile;
  */
 public class BasicHeuristicCalculator extends HeuristicCalculator
 {
+	
 	/////////////////////////////////////////////////////////////////
 	// PROCESS			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
@@ -45,9 +47,8 @@ public class BasicHeuristicCalculator extends HeuristicCalculator
 	public double processHeuristic(AiTile tile)
 	{	double result;
 		AiTile endTile = getEndTile();
-		int dLine = Math.abs(tile.getLine() - endTile.getLine());
-		int dCol = Math.abs(tile.getCol() - endTile.getCol());
-		result = dLine + dCol;
+		AiZone zone = tile.getZone();
+		result = zone.getTileDistance(tile,endTile);
 		return result;
 	}
 }

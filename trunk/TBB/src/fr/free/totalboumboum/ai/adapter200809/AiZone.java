@@ -72,7 +72,7 @@ public class AiZone
 	{	this.level = level;
 		this.player = player;
 		initMatrix();
-		updateMatrix();
+//		updateMatrix();
 		initOwnHero();
 	}
 	

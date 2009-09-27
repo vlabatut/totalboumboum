@@ -568,10 +568,10 @@ System.out.println();
 			level.update();
 			
 			// update AIs
-//			if(!getAisPause())
+			if(hasStarted) // only after the round has started
 			{	boolean aisPause = getAisPause();
 				Iterator<Player> i = players.iterator();
-				while(i.hasNext()/* && entryDelay<0*/)
+				while(i.hasNext())
 				{	Player temp = i.next();
 					if(!temp.isOut())
 						temp.update(aisPause);
@@ -714,7 +714,7 @@ System.out.println();
 	private Role[] entryRoles;
 	private Double[] entryDelays;
 	private int entryIndex = 0;
-//	private boolean started = false;
+	private boolean hasStarted = false;
 	
 	private void initEntries()
 	{	entryIndex = 0;
@@ -770,7 +770,7 @@ System.out.println();
 //System.out.println(totalTime+": start");				
 						EngineEvent event = new EngineEvent(EngineEvent.ROUND_START);
 						level.spreadEvent(event);
-//						started = true;
+						hasStarted = true;
 						done = true;
 					}
 					entryIndex++;

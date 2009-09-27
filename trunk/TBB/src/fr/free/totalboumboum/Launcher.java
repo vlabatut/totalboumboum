@@ -858,6 +858,8 @@ public class Launcher
 	 * 
 	 * - GUI : les résultats ne s'affichent pas automatiquement quand on revient à l'écran du match
 	 * 
+	 * - GUI : édition de profil, quand on a fait "nouveau" ça n'active pas le bouton "modifier"
+	 * 
 	 * - cliquer sur partie rapide, annuler, cliquer sur tournoi, annuler, cliquer sur partie rapide >> bug
 	 * 
 	 * - GUI : dans les tooltips du tableau des résultats, il manque les numéros des manches
@@ -1042,11 +1044,12 @@ public class Launcher
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 	/**
-	 * - tester A*
 	 * - tester la fonction de speed (hero)
 	 * - tester la fonction traversable (tile)
 	 * - tester la fonction update abilities (hero)
 	 * - faire un cout qui donne un très grand cout aux zones susceptibles d'exploser
-	 * 		plutot : rendre paramétrable la fonction déterminant les fils d'un noeud de recherche
+	 * 
+	 * - l'IA ralentit le jeu quand on tente de prendre le controle
+	 * - l'IA change souvent de direction, espèce de déplacement en diagonale bizarre
 	 */
 }

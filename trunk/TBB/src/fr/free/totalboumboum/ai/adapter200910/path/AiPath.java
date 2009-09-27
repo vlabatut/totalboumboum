@@ -44,6 +44,16 @@ public class AiPath
 	}
 	
 	/**
+	 * renvoie la case dont la position est passée en paramètre
+	 *
+	 * @param index	la position de la case demandée
+	 * @return	la case occupant la position indiquée dans ce chemin
+	 */
+	public AiTile getTile(int index)
+	{	return tiles.get(index);	
+	}
+	
+	/**
 	 * ajoute dans ce chemin la case passée en paramètre, 
 	 * en l'insérant à la fin de la séquence de cases
 	 * 

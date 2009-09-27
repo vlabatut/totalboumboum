@@ -44,24 +44,12 @@ public class AiFire extends AiSprite<Fire>
 		initType();
 	}
 
+	/////////////////////////////////////////////////////////////////
+	// PROCESS			/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
 	@Override
 	void update(AiTile tile)
 	{	super.update(tile);
-	}
-
-	@Override
-	void finish()
-	{	super.finish();
-	}
-
-	@Override
-	public String toString()
-	{	StringBuffer result = new StringBuffer();
-		result.append("Fire: [");
-		result.append(super.toString());
-		result.append(" - type: "+type);
-		result.append(" ]");
-		return result.toString();
 	}
 
 	/////////////////////////////////////////////////////////////////
@@ -86,4 +74,24 @@ public class AiFire extends AiSprite<Fire>
 		type = AiFireType.makeFireType(fire.getFiresetName());		
 	}
 	
+	/////////////////////////////////////////////////////////////////
+	// TEXT				/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	@Override
+	public String toString()
+	{	StringBuffer result = new StringBuffer();
+		result.append("Fire: [");
+		result.append(super.toString());
+		result.append(" - type: "+type);
+		result.append(" ]");
+		return result.toString();
+	}
+
+	/////////////////////////////////////////////////////////////////
+	// FINISH			/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	@Override
+	void finish()
+	{	super.finish();
+	}
 }
