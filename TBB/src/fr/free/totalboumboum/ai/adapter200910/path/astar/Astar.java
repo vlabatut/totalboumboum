@@ -1,4 +1,4 @@
-package fr.free.totalboumboum.ai.adapter200910.path;
+package fr.free.totalboumboum.ai.adapter200910.path.astar;
 
 /*
  * Total Boum Boum
@@ -26,6 +26,7 @@ import java.util.PriorityQueue;
 
 import fr.free.totalboumboum.ai.adapter200910.data.AiHero;
 import fr.free.totalboumboum.ai.adapter200910.data.AiTile;
+import fr.free.totalboumboum.ai.adapter200910.path.AiPath;
 import fr.free.totalboumboum.ai.adapter200910.path.astar.cost.CostCalculator;
 import fr.free.totalboumboum.ai.adapter200910.path.astar.heuristic.HeuristicCalculator;
 

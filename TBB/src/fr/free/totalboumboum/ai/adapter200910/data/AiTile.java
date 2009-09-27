@@ -392,8 +392,7 @@ public class AiTile
 			Iterator<AiBlock> it = blocks.iterator();
 			while(it.hasNext() && result)
 			{	AiBlock b = it.next();
-				result = !b.hasBlockHero();
-				
+				result = !b.hasBlockHero();				
 			}			
 		}
 		// bombes
