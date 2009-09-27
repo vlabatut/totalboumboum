@@ -21,8 +21,19 @@ package fr.free.totalboumboum.ai.adapter200910.data;
  * 
  */
 
+import java.util.ArrayList;
+
+import fr.free.totalboumboum.engine.content.feature.Contact;
+import fr.free.totalboumboum.engine.content.feature.Direction;
+import fr.free.totalboumboum.engine.content.feature.Orientation;
+import fr.free.totalboumboum.engine.content.feature.Role;
+import fr.free.totalboumboum.engine.content.feature.TilePosition;
+import fr.free.totalboumboum.engine.content.feature.ability.AbstractAbility;
+import fr.free.totalboumboum.engine.content.feature.action.Circumstance;
+import fr.free.totalboumboum.engine.content.feature.action.GeneralAction;
 import fr.free.totalboumboum.engine.content.feature.action.SpecificAction;
 import fr.free.totalboumboum.engine.content.feature.action.consume.SpecificConsume;
+import fr.free.totalboumboum.engine.content.feature.action.movelow.GeneralMoveLow;
 import fr.free.totalboumboum.engine.content.sprite.block.Block;
 
 /**
@@ -81,11 +92,23 @@ public class AiBlock extends AiSprite<Block>
 	 */
 	private void updateAbilities()
 	{	Block sprite = getSprite();
+		
 		// destructible
-		SpecificAction action = new SpecificConsume(sprite);
-		destructible = sprite.isTargetPreventing(action);
+		SpecificAction specificAction = new SpecificConsume(sprite);
+		destructible = sprite.isTargetPreventing(specificAction);
+
 		// bloque les personnages
-		action new
+		GeneralAction generalAction = new GeneralMoveLow();
+		generalAction.addActor(Role.HERO);
+		generalAction.addDirection(Direction.RIGHT);
+		Circumstance actorCircumstance = new Circumstance();
+		actorCircumstance.addContact(Contact.INTERSECTION);
+		actorCircumstance.addOrientation(Orientation.FACE);
+		actorCircumstance.addTilePosition(TilePosition.SAME);
+		Circumstance targetCircumstance = new Circumstance();
+		ArrayList<AbstractAbility> actorProperties = new ArrayList<AbstractAbility>();
+		ArrayList<AbstractAbility> targetProperties = new ArrayList<AbstractAbility>();
+		blockHero = sprite.isThirdPreventing(generalAction,actorProperties,targetProperties,actorCircumstance,targetCircumstance);
 	}	
 
 	/**

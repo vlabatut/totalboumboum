@@ -21,7 +21,8 @@ package fr.free.totalboumboum.ai.adapter200910.path.astar;
  * 
  */
 
-import java.util.List;
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.PriorityQueue;
 
 import fr.free.totalboumboum.ai.adapter200910.data.AiHero;
@@ -30,6 +31,19 @@ import fr.free.totalboumboum.ai.adapter200910.path.AiPath;
 import fr.free.totalboumboum.ai.adapter200910.path.astar.cost.CostCalculator;
 import fr.free.totalboumboum.ai.adapter200910.path.astar.heuristic.HeuristicCalculator;
 
+/**
+ * Implémentation de l'algorithme A* classique (http://fr.wikipedia.org/wiki/Algorithme_A*)
+ * Cet algorithme permet (entre autres) de trouver le chemin le plus court entre deux cases,
+ * en considérant les obstacles. Il a besoin de trois paramètres :
+ * 		- le personnage qui doit effectuer le trajet entre les deux cases
+ * 		- une fonction de cout, qui permet de définir combien coute une action (ici : le fait de passer d'une case à l'autre)
+ * 		- une fonction heuristique, qui permet d'estimer le cout du chemin restant à parcourir
+ * A noter qu'il s'agit d'une implémentation non-déterministe de l'algorithme.
+ * Cela signifie que la méthode renverra toujours le chemin optimal (i.e. le plus court par
+ * rapport au cout défini), mais s'il existe plusieurs solutions optimales, l'algorithme ne
+ * renverra pas forcément toujours la même (il en choisira une au hasard).
+ * Le but est d'introduire une part de hasard dans les IA, de manière à les rendre moins prévisibles.
+ */
 public class Astar
 {	private static boolean debug = false;
 
@@ -75,7 +89,11 @@ public class Astar
 				finalNode = currentNode;
 			else
 			{	// sinon on récupère les noeuds suivants
-				List<AstarNode> successors = currentNode.getChildren();
+				ArrayList<AstarNode> successors = new ArrayList<AstarNode>(currentNode.getChildren());
+				// on introduit du hasard en permuttant aléatoirement les noeuds suivants
+				// pour cette raison, cette implémentation d'A* ne renverra pas forcément toujours le même résultat :
+				// si plusieurs chemins sont optimaux, elle renverra un de ces chemins (pas toujours le même)
+				Collections.shuffle(successors);
 				// puis on les rajoute dans la file de priorité
 				for(AstarNode node: successors)
 					queue.offer(node);
