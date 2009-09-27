@@ -1,4 +1,4 @@
-package fr.free.totalboumboum.ai.adapter200910;
+package fr.free.totalboumboum.ai.adapter200910.path.astar.cost;
 
 /*
  * Total Boum Boum
@@ -21,33 +21,17 @@ package fr.free.totalboumboum.ai.adapter200910;
  * 
  */
 
-/**
- * types de feux reconnus par l'IA.
- * 	
- */
-public enum AiFireType
+import fr.free.totalboumboum.ai.adapter200910.data.AiTile;
+
+public interface CostCalculator
 {
-	/** feu normal */
-	NORMAL,
-	/** feu pénétrant (pas arrêté par les les objets destructibles) */
-	PENETRATION,
-	/** autre type de feu */
-	OTHER;	
-	
-	/**
-	 * calcule l'AiFireType correspondant au nom de feu passé en paramètre
+	/** 
+	 * calcule le cout de l'action consistant à aller de la case
+	 * start à la case end, sachant que ces deux cases sont voisines
 	 * 
-	 * @param name	nom du feu à traiter
-	 * @return	symbole représentant ce type de feu
+	 * @param start	la case de départ 
+	 * @param end	la case d'arrivée
+	 * @return	le coût du déplacement
 	 */
-	public static AiFireType makeFireType(String name)
-	{	AiFireType result;
-		if(name.equalsIgnoreCase("normal"))
-			result = NORMAL;
-		else if(name.equalsIgnoreCase("penetration"))
-			result = PENETRATION;
-		else
-			result = OTHER;
-		return result;
-	}
+	public double processCost(AiTile start, AiTile end);
 }

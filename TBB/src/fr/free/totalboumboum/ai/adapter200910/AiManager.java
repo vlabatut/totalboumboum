@@ -24,6 +24,9 @@ package fr.free.totalboumboum.ai.adapter200910;
 import java.util.ArrayList;
 
 import fr.free.totalboumboum.ai.AbstractAiManager;
+import fr.free.totalboumboum.ai.adapter200910.communication.AiAction;
+import fr.free.totalboumboum.ai.adapter200910.communication.AiActionName;
+import fr.free.totalboumboum.ai.adapter200910.data.AiZone;
 import fr.free.totalboumboum.configuration.GameVariables;
 import fr.free.totalboumboum.engine.container.level.Level;
 import fr.free.totalboumboum.engine.content.feature.Direction;

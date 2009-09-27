@@ -1,4 +1,7 @@
-package fr.free.totalboumboum.ai.adapter200910;
+package tournament200910.suiveur;
+
+import fr.free.totalboumboum.ai.adapter200910.AiManager;
+
 
 /*
  * Total Boum Boum
@@ -21,10 +24,11 @@ package fr.free.totalboumboum.ai.adapter200910;
  * 
  */
 
-/**
- * exception levée par l'IA quand le moteur du jeu lui demande de se terminer. 
- */
+public class AiMain extends AiManager
+{
 
-public class StopRequestException extends Exception
-{	private static final long serialVersionUID = 1L;	
+	public AiMain()
+	{	super(new Suiveur());
+	}
+	
 }

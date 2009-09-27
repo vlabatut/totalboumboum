@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ai xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../../resources/schemas/ai.xsd">
+	
+	<notes>
+  		<line value="Classes développées pour le projet d'IA de 4ème année de 2009/2010."/>
+  		<line value="Département de génie informatique, Faculté d'ingénieurie et de technologie, Université Galatasaray, Istanbul, Turquie."/>
+  		<line value="Première version"/>
+	</notes>
+
+	<authors>
+		<!-- nom d'un des étudiant -->
+		<author name="Xxxx Yyyyy Zzzzz"/>
+		<!-- nom de l'autre étudiant, etc -->
+		<author name="Xxxx Yyyyy Zzzzz"/>
+	</authors>
+	
+</ai>
+
