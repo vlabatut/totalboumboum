@@ -8,10 +8,11 @@
 	</notes>
 
 	<authors>
-		<!-- nom d'un des étudiant -->
+		<!-- nom d'un des étudiant (à compléter) -->
 		<author name="Xxxx Yyyyy Zzzzz"/>
-		<!-- nom de l'autre étudiant, etc -->
+		<!-- nom de l'autre étudiant (à compléter) -->
 		<author name="Xxxx Yyyyy Zzzzz"/>
+		<!-- vous pouvez rajouter d'autres noms si nécessaire -->
 	</authors>
 	
 </ai>

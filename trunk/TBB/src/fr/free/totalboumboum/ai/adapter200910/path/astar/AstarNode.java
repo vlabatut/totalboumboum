@@ -30,7 +30,7 @@ import fr.free.totalboumboum.ai.adapter200910.path.astar.cost.CostCalculator;
 import fr.free.totalboumboum.ai.adapter200910.path.astar.heuristic.HeuristicCalculator;
 import fr.free.totalboumboum.engine.content.feature.Direction;
 /**
- * Représente un noeud dans l'arbre de recherche A* 
+ * Représente un noeud dans l'arbre de recherche développé par l'algorithme A* 
  */
 public class AstarNode implements Comparable<AstarNode>
 {	

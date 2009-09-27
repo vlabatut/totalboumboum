@@ -37,6 +37,14 @@ import fr.free.totalboumboum.ai.adapter200910.data.AiTile;
 import fr.free.totalboumboum.ai.adapter200910.data.AiZone;
 import fr.free.totalboumboum.engine.content.feature.Direction;
 
+/**
+ * Cette classe implémente une IA relativement stupide, qui se contente
+ * de se promener aléatoirement un peu partout dans le niveau,
+ * en essayant d'éviter les explosions.
+ * 
+ * Attention, il s'agit juste d'un programme exemple, les méthodes ne
+ * sont certainement pas les meilleures !
+ */
 public class Promeneur extends ArtificialIntelligence 
 {
 	/** la case occupée actuellement par le personnage*/
@@ -46,6 +54,12 @@ public class Promeneur extends ArtificialIntelligence
 	/** la dernière case par laquelle on est passé */ 
 	private AiTile previousTile = null;
 	
+	/**
+	 * méthode appelée par le moteur du jeu 
+	 * pour obtenir une action de l'IA
+	 * 
+	 * @throws StopRequestException
+	 */
 	public AiAction processAction() throws StopRequestException
 	{	checkInterruption(); //APPEL OBLIGATOIRE
 
@@ -84,6 +98,11 @@ public class Promeneur extends ArtificialIntelligence
 		return result;
 	}
 
+	/**
+	 * initialisation de l'IA lors du premier appel
+	 * 
+	 * @throws StopRequestException
+	 */
 	private void init() throws StopRequestException
 	{	checkInterruption(); //APPEL OBLIGATOIRE
 		
@@ -95,6 +114,7 @@ public class Promeneur extends ArtificialIntelligence
 	 * Choisit comme destination une case voisine de la case actuellement occupée par l'IA.
 	 * Cette case doit être accessible (pas de mur ou de bombe ou autre obstacle) et doit
 	 * être différente de la case précédemment occupée
+	 * 
 	 * @throws StopRequestException 
 	 */
 	private void pickNextTile() throws StopRequestException
@@ -143,6 +163,13 @@ public class Promeneur extends ArtificialIntelligence
 		}
 	}
 	
+	/**
+	 * détermine quelles sont les cases voisines sans danger
+	 * 
+	 * @param tile	case actuelle
+	 * @return	la liste des cases voisines sans danger
+	 * @throws StopRequestException
+	 */
 	private ArrayList<AiTile> getClearNeighbors(AiTile tile) throws StopRequestException
 	{	checkInterruption(); //APPEL OBLIGATOIRE
 	
@@ -161,6 +188,13 @@ public class Promeneur extends ArtificialIntelligence
 		return result;
 	}
 	
+	/**
+	 * détermine si une case est sans danger
+	 * 
+	 * @param tile	la case à tester
+	 * @return	vrai ssi la case ne contient ni bombe, ni feu, ni bloc
+	 * @throws StopRequestException
+	 */
 	private boolean isClear(AiTile tile) throws StopRequestException
 	{	checkInterruption(); //APPEL OBLIGATOIRE
 	
@@ -172,6 +206,11 @@ public class Promeneur extends ArtificialIntelligence
 		return result;
 	}
 	
+	/**
+	 * détermine la case suivant où se déplacer
+	 * 
+	 * @throws StopRequestException
+	 */
 	private void checkNextTile() throws StopRequestException
 	{	checkInterruption(); //APPEL OBLIGATOIRE
 	

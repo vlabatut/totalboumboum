@@ -677,6 +677,9 @@ public abstract class Sprite
 	public ThirdModulation getThirdModulation(SpecificAction action, Circumstance actorCircumstances, Circumstance targetCircumstances)
 	{	return modulationManager.getThirdModulation(action,actorCircumstances,targetCircumstances);
 	}
+	public ThirdModulation getThirdModulation(GeneralAction action, ArrayList<AbstractAbility> actorProperties, ArrayList<AbstractAbility> targetProperties, Circumstance actorCircumstances, Circumstance targetCircumstances)
+	{	return modulationManager.getThirdModulation(action,actorProperties,targetProperties,actorCircumstances,targetCircumstances);
+	}
 	
 	public StateAbility modulateStateAbility(String name)
 	{	return modulationManager.modulateStateAbility(name);
@@ -692,6 +695,9 @@ public abstract class Sprite
 
 	public boolean isThirdPreventing(SpecificAction action, Circumstance actorCircumstances, Circumstance targetCircumstances)
 	{	return modulationManager.isThirdPreventing(action,actorCircumstances,targetCircumstances);
+	}
+	public boolean isThirdPreventing(GeneralAction action, ArrayList<AbstractAbility> actorProperties, ArrayList<AbstractAbility> targetProperties, Circumstance actorCircumstances, Circumstance targetCircumstances)
+	{	return modulationManager.isThirdPreventing(action,actorProperties,targetProperties,actorCircumstances,targetCircumstances);
 	}
 	
 /*	

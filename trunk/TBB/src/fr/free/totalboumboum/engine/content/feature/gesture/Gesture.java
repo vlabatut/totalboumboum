@@ -27,7 +27,9 @@ import java.util.Iterator;
 import java.util.Map.Entry;
 
 import fr.free.totalboumboum.engine.content.feature.Direction;
+import fr.free.totalboumboum.engine.content.feature.ability.AbstractAbility;
 import fr.free.totalboumboum.engine.content.feature.action.Circumstance;
+import fr.free.totalboumboum.engine.content.feature.action.GeneralAction;
 import fr.free.totalboumboum.engine.content.feature.action.SpecificAction;
 import fr.free.totalboumboum.engine.content.feature.gesture.anime.AnimeDirection;
 import fr.free.totalboumboum.engine.content.feature.gesture.modulation.AbstractModulation;
@@ -192,6 +194,16 @@ public class Gesture
 		while(i.hasNext() && result==null)
 		{	ThirdModulation modulation = i.next();
 			if(modulation.isConcerningAction(action,actorCircumstances,targetCircumstances))
+				result = modulation;
+		}
+		return result;
+	}
+	public ThirdModulation getThirdModulation(GeneralAction action, ArrayList<AbstractAbility> actorProperties, ArrayList<AbstractAbility> targetProperties, Circumstance actorCircumstances, Circumstance targetCircumstances)
+	{	ThirdModulation result = null;
+		Iterator<ThirdModulation> i = thirdModulations.iterator();
+		while(i.hasNext() && result==null)
+		{	ThirdModulation modulation = i.next();
+			if(modulation.isConcerningAction(action,actorProperties,targetProperties,actorCircumstances,targetCircumstances))
 				result = modulation;
 		}
 		return result;

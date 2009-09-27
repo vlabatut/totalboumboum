@@ -138,6 +138,19 @@ public abstract class AbstractActionModulation extends AbstractModulation
 		//	
 		return result;		
 	}
+	public boolean isConcerningAction(GeneralAction generalAction, ArrayList<AbstractAbility> actorProperties, ArrayList<AbstractAbility> targetProperties)
+	{	boolean result;
+		// action
+		result = action.subsume(generalAction);
+		// actor restrictions
+		if(result)
+			result = actorProperties.containsAll(actorRestrictions);
+		// target restrictions
+		if(result)
+			result = actorProperties.containsAll(targetRestrictions);
+		//	
+		return result;		
+	}
 	
 	/**
 	 * modulates the specified ability. This ability has

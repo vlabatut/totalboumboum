@@ -26,9 +26,11 @@ import java.util.Iterator;
 
 import fr.free.totalboumboum.engine.container.tile.Tile;
 import fr.free.totalboumboum.engine.content.feature.Direction;
+import fr.free.totalboumboum.engine.content.feature.ability.AbstractAbility;
 import fr.free.totalboumboum.engine.content.feature.ability.ActionAbility;
 import fr.free.totalboumboum.engine.content.feature.ability.StateAbility;
 import fr.free.totalboumboum.engine.content.feature.action.Circumstance;
+import fr.free.totalboumboum.engine.content.feature.action.GeneralAction;
 import fr.free.totalboumboum.engine.content.feature.action.SpecificAction;
 import fr.free.totalboumboum.engine.content.feature.gesture.Gesture;
 import fr.free.totalboumboum.engine.content.feature.gesture.modulation.ActorModulation;
@@ -155,7 +157,15 @@ public class ModulationManager
 			result = new ThirdModulation(action);
 		return result;
 	}
-	
+	public ThirdModulation getThirdModulation(GeneralAction action, ArrayList<AbstractAbility> actorProperties, ArrayList<AbstractAbility> targetProperties, Circumstance actorCircumstances, Circumstance targetCircumstances)
+	{	ThirdModulation result = null;
+		if(currentGesture!=null)
+			result = currentGesture.getThirdModulation(action,actorProperties,targetProperties,actorCircumstances,targetCircumstances);
+		if(result==null)
+			result = new ThirdModulation(action);
+		return result;
+	}
+
 	/////////////////////////////////////////////////////////////////
 	// ABILITIES			/////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
@@ -292,6 +302,12 @@ public class ModulationManager
 	public boolean isThirdPreventing(SpecificAction action, Circumstance actorCircumstances, Circumstance targetCircumstances)
 	{	boolean result = false;
 		ThirdModulation thirdModulation = sprite.getThirdModulation(action,actorCircumstances,targetCircumstances);
+		result = thirdModulation.getFrame() && thirdModulation.getStrength()<=0;
+		return result;
+	}
+	public boolean isThirdPreventing(GeneralAction action, ArrayList<AbstractAbility> actorProperties, ArrayList<AbstractAbility> targetProperties, Circumstance actorCircumstances, Circumstance targetCircumstances)
+	{	boolean result = false;
+		ThirdModulation thirdModulation = sprite.getThirdModulation(action,actorProperties,targetProperties,actorCircumstances,targetCircumstances);
 		result = thirdModulation.getFrame() && thirdModulation.getStrength()<=0;
 		return result;
 	}

@@ -37,6 +37,11 @@ import fr.free.totalboumboum.ai.adapter200910.data.AiTile;
 import fr.free.totalboumboum.ai.adapter200910.data.AiZone;
 import fr.free.totalboumboum.engine.content.feature.Direction;
 
+/**
+ * cette classe implémente une IA relativement stupide, qui choisit une cible
+ * (un autre joueur), puis essaie de la rejoindre, et enfin se contente de la
+ * suivre partout où elle va.
+ */
 public class Suiveur extends ArtificialIntelligence 
 {
 	/** la case occupée actuellement par le personnage*/
