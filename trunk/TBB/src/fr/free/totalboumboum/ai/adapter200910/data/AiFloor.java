@@ -1,4 +1,4 @@
-package fr.free.totalboumboum.ai.adapter200910;
+package fr.free.totalboumboum.ai.adapter200910.data;
 
 /*
  * Total Boum Boum
@@ -21,27 +21,26 @@ package fr.free.totalboumboum.ai.adapter200910;
  * 
  */
 
-import fr.free.totalboumboum.engine.content.sprite.fire.Fire;
+import fr.free.totalboumboum.engine.content.sprite.floor.Floor;
 
 /**
- * représente un feu du jeu, ie une projection mortelle résultant (généralement) 
- * de l'explosion d'une bombe. 
+ * représente un sol du jeu, ie le graphisme affiché en tant que première couche de toute
+ * case de la zone (et éventuellement recouvert par les autres types de sprites).
  * 
  * @author Vincent
  *
  */
-public class AiFire extends AiSprite<Fire>
+public class AiFloor extends AiSprite<Floor>
 {
 	/**
-	 * crée une représentation du feu passé en paramètre, et contenue dans 
+	 * crée une représentation du sol passé en paramètre, et contenue dans 
 	 * la case passée en paramètre.
 	 * 
 	 * @param tile	case contenant le sprite
 	 * @param sprite	sprite à représenter
 	 */
-	AiFire(AiTile tile, Fire sprite)
-	{	super(tile,sprite);
-		initType();
+	AiFloor(AiTile tile, Floor sprite)
+	{	super(tile,sprite);		
 	}
 
 	@Override
@@ -57,33 +56,10 @@ public class AiFire extends AiSprite<Fire>
 	@Override
 	public String toString()
 	{	StringBuffer result = new StringBuffer();
-		result.append("Fire: [");
+		result.append("Floor: [");
 		result.append(super.toString());
-		result.append(" - type: "+type);
 		result.append(" ]");
 		return result.toString();
 	}
 
-	/////////////////////////////////////////////////////////////////
-	// FIRE				/////////////////////////////////////////////
-	/////////////////////////////////////////////////////////////////
-	/** type du feu */
-	private AiFireType type;
-	
-	/**
-	 * renvoie le type du feu
-	 * @return	une valeur de type AiFireType représentant le type de feu
-	 */
-	public AiFireType getType()
-	{	return type;	
-	}
-	
-	/**
-	 * initialise le type du bombe
-	 */
-	private void initType()
-	{	Fire fire = getSprite();
-		type = AiFireType.makeFireType(fire.getFiresetName());		
-	}
-	
 }

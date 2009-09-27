@@ -1,4 +1,4 @@
-package fr.free.totalboumboum.ai.adapter200910;
+package fr.free.totalboumboum.ai.adapter200910.communication;
 
 /*
  * Total Boum Boum

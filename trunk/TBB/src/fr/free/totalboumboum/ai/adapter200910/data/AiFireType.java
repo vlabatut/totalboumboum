@@ -1,4 +1,4 @@
-package fr.free.totalboumboum.ai.adapter200910;
+package fr.free.totalboumboum.ai.adapter200910.data;
 
 /*
  * Total Boum Boum
@@ -22,38 +22,30 @@ package fr.free.totalboumboum.ai.adapter200910;
  */
 
 /**
- * types de bombes reconnus par l'IA.
+ * types de feux reconnus par l'IA.
  * 	
  */
-public enum AiBombType
+public enum AiFireType
 {
-	/** bombe normale */
+	/** feu normal */
 	NORMAL,
-	/** bombe pénétrante (la flamme n'est pas arrêtée par les les objets destructibles) */
+	/** feu pénétrant (pas arrêté par les les objets destructibles) */
 	PENETRATION,
-	/** bombe télécommandée par le joueur (elle explose quand le joueur le lui demande) */
-	REMOTE,
-	/** bombe à la fois pénétrante et télécommandée */
-	REMOTE_PENTRATION,
-	/** autre type de bombes */
+	/** autre type de feu */
 	OTHER;	
 	
 	/**
-	 * calcule l'AiBombType correspondant au nom de bombe passé en paramètre
+	 * calcule l'AiFireType correspondant au nom de feu passé en paramètre
 	 * 
-	 * @param name	nom de la bombe à traiter
-	 * @return	symbole représentant ce type de bombe
+	 * @param name	nom du feu à traiter
+	 * @return	symbole représentant ce type de feu
 	 */
-	public static AiBombType makeBombType(String name)
-	{	AiBombType result;
+	public static AiFireType makeFireType(String name)
+	{	AiFireType result;
 		if(name.equalsIgnoreCase("normal"))
 			result = NORMAL;
 		else if(name.equalsIgnoreCase("penetration"))
 			result = PENETRATION;
-		else if(name.equalsIgnoreCase("remotecontrol"))
-			result = REMOTE;
-		else if(name.equalsIgnoreCase("remotepenetration"))
-			result = REMOTE_PENTRATION;
 		else
 			result = OTHER;
 		return result;

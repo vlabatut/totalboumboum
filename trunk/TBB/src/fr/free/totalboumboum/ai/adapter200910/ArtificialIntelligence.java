@@ -23,6 +23,11 @@ package fr.free.totalboumboum.ai.adapter200910;
 
 import java.util.concurrent.Callable;
 
+import fr.free.totalboumboum.ai.adapter200910.communication.AiAction;
+import fr.free.totalboumboum.ai.adapter200910.communication.AiActionName;
+import fr.free.totalboumboum.ai.adapter200910.communication.StopRequestException;
+import fr.free.totalboumboum.ai.adapter200910.data.AiZone;
+
 /**
  * classe dont chaque IA doit hériter. La méthode processAction est la méthode 
  * appelée par le gestionnaire d'IA pour l'interroger que la prochaine action 

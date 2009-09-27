@@ -1,4 +1,4 @@
-package fr.free.totalboumboum.ai.adapter200910;
+package fr.free.totalboumboum.ai.adapter200910.data;
 
 /*
  * Total Boum Boum
@@ -69,7 +69,7 @@ public class AiZone
 	 * @param level	niveau à représenter
 	 * @param player	joueur dont le point de vue est à adopter
 	 */
-	AiZone(Level level, Player player)
+	public AiZone(Level level, Player player)
 	{	this.level = level;
 		this.player = player;
 		initMatrix();
@@ -83,7 +83,7 @@ public class AiZone
 	/**
 	 * met à jour cette représentation ainsi que tous ses constituants.
 	 */
-	void update(long elapsedTime)
+	public void update(long elapsedTime)
 	{	updateTime(elapsedTime);
 		updateMatrix();
 	}
@@ -91,7 +91,7 @@ public class AiZone
 	/**
 	 * termine proprement cette représentation (une fois que l'IA n'en a plus besoin).
 	 */
-	void finish()
+	public void finish()
 	{	// matrix
 		for(int line=0;line<height;line++)
 			for(int col=0;col<width;col++)
