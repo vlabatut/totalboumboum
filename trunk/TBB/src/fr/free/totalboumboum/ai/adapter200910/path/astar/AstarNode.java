@@ -1,4 +1,4 @@
-package fr.free.totalboumboum.ai.adapter200910.path;
+package fr.free.totalboumboum.ai.adapter200910.path.astar;
 
 /*
  * Total Boum Boum
