@@ -21,11 +21,10 @@ package fr.free.totalboumboum.ai.adapter200910.path;
  * 
  */
 
-import java.util.ArrayList;
-import java.util.Iterator;
+import java.util.List;
 import java.util.PriorityQueue;
-import java.util.Vector;
 
+import fr.free.totalboumboum.ai.adapter200910.data.AiHero;
 import fr.free.totalboumboum.ai.adapter200910.data.AiTile;
 import fr.free.totalboumboum.ai.adapter200910.path.astar.cost.CostCalculator;
 import fr.free.totalboumboum.ai.adapter200910.path.astar.heuristic.HeuristicCalculator;
@@ -33,27 +32,23 @@ import fr.free.totalboumboum.ai.adapter200910.path.astar.heuristic.HeuristicCalc
 public class Astar
 {	private static boolean debug = false;
 
-	public Astar(CostCalculator costCalculator, HeuristicCalculator heuristicCalculator)
-	{	this.costCalculator = costCalculator;
+	public Astar(AiHero hero, CostCalculator costCalculator, HeuristicCalculator heuristicCalculator)
+	{	this.hero = hero;
+		this.costCalculator = costCalculator;
 		this.heuristicCalculator = heuristicCalculator;
 	}
 
     /////////////////////////////////////////////////////////////////
-	// COST				/////////////////////////////////////////////
+	// DATA				/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
+	/** fonction de cout */
 	private CostCalculator costCalculator = null;
-	
-	
-    /////////////////////////////////////////////////////////////////
-	// HEURISTIC		/////////////////////////////////////////////
-	/////////////////////////////////////////////////////////////////
+	/** fonctin heuristique */
 	private HeuristicCalculator heuristicCalculator = null;
-	
-    /////////////////////////////////////////////////////////////////
-	// ROOT				/////////////////////////////////////////////
-	/////////////////////////////////////////////////////////////////
-	/** root of the seach tree */
+	/** racine de l'arbre de recherche */
 	private AstarNode root = null;
+	/** personnage de référence */
+	private AiHero hero = null;
 		
     /////////////////////////////////////////////////////////////////
 	// PROCESS			/////////////////////////////////////////////
@@ -61,39 +56,39 @@ public class Astar
 	public AiPath processShortestPath(AiTile startTile, AiTile endTile)
 	{	// initialisation
 		AiPath result = new AiPath();
-		root = new AstarNode(startTile,costCalculator,heuristicCalculator);
+		root = new AstarNode(startTile,hero,costCalculator,heuristicCalculator);
 		heuristicCalculator.setEndTile(endTile);
 		PriorityQueue<AstarNode> queue = new PriorityQueue<AstarNode>(1);
 		queue.offer(root);
-		boolean done = false;
-		AstarNode currentNode;
+		AstarNode finalNode = null;
 
 		// traitement
 		do
-		{	currentNode = queue.poll();
-			currentNode.markVisited();
+		{	// on prend le noeud situé en tête de file
+			AstarNode currentNode = queue.poll();
 			if(debug)
 				System.out.println("Visité : "+currentNode.toString());
+			// on teste si on est arrivé à la fin de la recherche
 			if(currentNode.getTile()==endTile)
-				done = true;
+				// si oui on garde le dernier noeud pour ensuite pouvoir reconstruire le chemin solution
+				finalNode = currentNode;
 			else
-			{	Iterator<SearchLink> i = tree.developNode(currentNode);
-				while(i.hasNext())
-				{	SearchLink temp = i.next();
-					prioFifo.offer(temp.getTarget());
-				}
+			{	// sinon on récupère les noeuds suivants
+				List<AstarNode> successors = currentNode.getChildren();
+				// puis on les rajoute dans la file de priorité
+				for(AstarNode node: successors)
+					queue.offer(node);
 			}
 		}
-		while(!queue.isEmpty() && !done);
+		while(!queue.isEmpty() && finalNode==null);
 		
 		// build solution path
-		Vector<SearchLink> path = null;
-		try
-		{	path = tree.getPath(solution);
-			System.out.println(tree.pathToString(path));
+		while(finalNode!=null)
+		{	AiTile tile = finalNode.getTile();
+			result.addTile(0,tile);
+			finalNode = finalNode.getParent();
 		}
-		catch (AbsentNodeException e)
-		{	e.printStackTrace();
-		}
+		
+		return result;
 	}
 }

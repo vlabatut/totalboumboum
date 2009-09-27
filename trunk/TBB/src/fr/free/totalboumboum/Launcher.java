@@ -1042,6 +1042,11 @@ public class Launcher
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 	/**
-	 * 
+	 * - tester A*
+	 * - tester la fonction de speed (hero)
+	 * - tester la fonction traversable (tile)
+	 * - tester la fonction update abilities (hero)
+	 * - faire un cout qui donne un très grand cout aux zones susceptibles d'exploser
+	 * 		plutot : rendre paramétrable la fonction déterminant les fils d'un noeud de recherche
 	 */
 }

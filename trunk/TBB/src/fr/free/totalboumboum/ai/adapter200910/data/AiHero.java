@@ -22,8 +22,12 @@ package fr.free.totalboumboum.ai.adapter200910.data;
  */
 
 import fr.free.totalboumboum.configuration.profile.PredefinedColor;
+import fr.free.totalboumboum.engine.content.feature.Direction;
 import fr.free.totalboumboum.engine.content.feature.ability.StateAbility;
 import fr.free.totalboumboum.engine.content.feature.ability.StateAbilityName;
+import fr.free.totalboumboum.engine.content.feature.gesture.Gesture;
+import fr.free.totalboumboum.engine.content.feature.gesture.GestureName;
+import fr.free.totalboumboum.engine.content.sprite.Sprite;
 import fr.free.totalboumboum.engine.content.sprite.hero.Hero;
 
 /**
@@ -46,12 +50,16 @@ public class AiHero extends AiSprite<Hero>
 	{	super(tile,sprite);
 		initColor();
 		updateBombParam();
+		updateWalkingSpeed();
+		updateAbilities();
 	}
 	
 	@Override
 	void update(AiTile tile)
 	{	super.update(tile);
 		updateBombParam();
+		updateWalkingSpeed();
+		updateAbilities();
 	}
 
 	@Override
@@ -158,5 +166,91 @@ public class AiHero extends AiSprite<Hero>
 	private void initColor()
 	{	Hero sprite = getSprite();
 		color = sprite.getColor();	
+	}
+
+	/////////////////////////////////////////////////////////////////
+	// SPEED			/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	/** vitesse de déplacement au sol du personnage, exprimée en pixel/seconde */
+	private double walkingSpeed;
+	
+	/**
+	 * renvoie la vitesse de déplacement au sol de ce personnage,
+	 * exprimée en pixel/seconde. il ne s'agit pas de la vitesse 
+	 * de déplacement courante, il s'agit de la vitesse du personnage
+	 * quand il marche. Cette vitesse peut être modifiée par certains items.
+	 * 
+	 * @return	la vitesse de déplacement de ce personnage
+	 */
+	public double getWalkingSpeed()
+	{	return walkingSpeed;	
+	}
+	
+	/**
+	 * met à jour la vitesses de déplacement de ce personnage 
+	 */
+	private void updateWalkingSpeed()
+	{	Sprite sprite = getSprite();
+		double speedCoeff = sprite.getSpeedCoeff();
+		Gesture walking = getSprite().getGesturePack().getGesture(GestureName.WALKING);
+		double basicSpeed = walking.getTrajectoryDirection(Direction.RIGHT).getXInteraction();
+		walkingSpeed = speedCoeff*basicSpeed;
+	}
+
+	/////////////////////////////////////////////////////////////////
+	// ABILITIES		/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	/** indique si le personnage peut traverser les murs */
+	private boolean throughWall;
+	/** indique si le personnage peut traverser les bombes */
+	private boolean throughBomb;
+	/** indique si le personnage peut traverser le feu (sans brûler) */
+	private boolean throughFire;
+	
+	/**
+	 * teste si ce personnage est capable de passer
+	 * à travers les (certains) murs
+	 * 
+	 * @return	vrai si le personnage traverse les murs
+	 */
+	public boolean hasThroughWall()
+	{	return throughWall;	
+	}
+
+	/**
+	 * teste si ce personnage est capable de passer
+	 * à travers les bombes
+	 * 
+	 * @return	vrai si le personnage traverse les bombes
+	 */
+	public boolean hasThroughBomb()
+	{	return throughBomb;	
+	}
+
+	/**
+	 * teste si ce personnage est capable de passer
+	 * à travers le feu sans brûler
+	 * 
+	 * @return	vrai si le personnage résiste au feu
+	 */
+	public boolean hasThroughFire()
+	{	return throughFire;	
+	}
+
+	/**
+	 * met à jour les divers pouvoirs du personnage
+	 */
+	private void updateAbilities()
+	{	Sprite sprite = getSprite();
+		StateAbility ability;
+		// traverser les murs
+		ability = sprite.modulateStateAbility(StateAbilityName.SPRITE_TRAVERSE_WALL);
+		throughWall = ability.isActive();
+		// traverser les bombes
+		ability = sprite.modulateStateAbility(StateAbilityName.SPRITE_TRAVERSE_BOMB);
+		throughBomb = ability.isActive();
+		// traverser les bombes
+		ability = sprite.modulateStateAbility(StateAbilityName.HERO_FIRE_PROTECTION);
+		throughFire = ability.isActive();
 	}
 }

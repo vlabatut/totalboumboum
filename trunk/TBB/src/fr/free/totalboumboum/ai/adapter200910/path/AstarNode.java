@@ -22,15 +22,17 @@ package fr.free.totalboumboum.ai.adapter200910.path;
  */
 
 import java.util.ArrayList;
+import java.util.List;
 
+import fr.free.totalboumboum.ai.adapter200910.data.AiHero;
 import fr.free.totalboumboum.ai.adapter200910.data.AiTile;
 import fr.free.totalboumboum.ai.adapter200910.path.astar.cost.CostCalculator;
 import fr.free.totalboumboum.ai.adapter200910.path.astar.heuristic.HeuristicCalculator;
-
+import fr.free.totalboumboum.engine.content.feature.Direction;
 /**
  * Représente un noeud dans l'arbre de recherche A* 
  */
-public class AstarNode
+public class AstarNode implements Comparable<AstarNode>
 {	
 	/**
 	 * Constructeur créant un noeud racine non visité. 
@@ -41,9 +43,11 @@ public class AstarNode
 	 * @param costCalculator	fonction de cout
 	 * @param heuristicCalculator	fonction heuristique
 	 */
-	public AstarNode(AiTile tile, CostCalculator costCalculator, HeuristicCalculator heuristicCalculator)
+	public AstarNode(AiTile tile, AiHero hero, CostCalculator costCalculator, HeuristicCalculator heuristicCalculator)
 	{	// case
 		this.tile = tile;
+		// hero
+		this.hero = hero;
 		// parent
 		parent = null;
 		// profondeur
@@ -54,7 +58,6 @@ public class AstarNode
 		// heuristique
 		this.heuristicCalculator = heuristicCalculator;
 		heuristic = heuristicCalculator.processHeuristic(tile);
-		
 	}
 
 	/**
@@ -66,6 +69,8 @@ public class AstarNode
 	public AstarNode(AiTile tile, AstarNode parent)
 	{	// case
 		this.tile = tile;
+		// hero
+		this.hero = parent.getHero();
 		// parent
 		this.parent = parent;
 		// profondeur
@@ -77,7 +82,6 @@ public class AstarNode
 		// heuristique
 		heuristicCalculator = parent.getHeuristicCalculator();
 		heuristic = heuristicCalculator.processHeuristic(tile);
-		
 	}
 
     /////////////////////////////////////////////////////////////////
@@ -124,6 +128,11 @@ public class AstarNode
 	{	return cost;
 	}
 	
+	/**
+	 * renvoie la fonction de cout de ce noeud
+	 * 
+	 * @return la fonction de cout de ce noeud
+	 */
 	public CostCalculator getCostCalculator()
 	{	return costCalculator;		
 	}
@@ -144,37 +153,26 @@ public class AstarNode
 	{	return heuristic;
 	}
 	
+	/**
+	 * renvoie la fonction heuristique de ce noeud
+	 * 
+	 * @return la fonction heuristique de ce noeud
+	 */
 	public HeuristicCalculator getHeuristicCalculator()
 	{	return heuristicCalculator;		
 	}
 		
-	/////////////////////////////////////////////////////////////////
-	// VISITED			/////////////////////////////////////////////
-	/////////////////////////////////////////////////////////////////
-	/** état de visite */
-	private boolean visited = false;
-	
-	/**
-	 * Marque le noeud comme ayant été visité
-	 */
-	protected void markVisited()
-	{	visited = true;	
-	}
-	
-	/**
-	 * Renvoie l'état de visite du noeud
-	 * @return	vrai si le noeud a été visité.
-	 */
-	public boolean wasVisited()
-	{	return visited;	
-	}
-
     /////////////////////////////////////////////////////////////////
 	// PARENT			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	/** parent du noeud (null pour la racine) */
 	private AstarNode parent = null;
 	
+	/**
+	 * renvoie le parent de ce noeud de recherche
+	 * 
+	 * @return	un noeud de recherche correspondant au parent de ce noeud
+	 */
 	public AstarNode getParent()
 	{	return parent;	
 	}
@@ -183,26 +181,75 @@ public class AstarNode
 	// CHILDREN			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	/** fils du noeud */
-	private final ArrayList<AstarNode> children = new ArrayList<AstarNode>();
+	private ArrayList<AstarNode> children = null;
 	
-	public ArrayList<AstarNode> getChildren()
-	{	return children;
+	/**
+	 * renvoie les fils de ce noeud de recherche
+	 * (ils sont éventuellement calculés si ce n'est pas déjà fait)
+	 * 
+	 * @return	une liste contenant les fils de ce noeud
+	 */
+	public List<AstarNode> getChildren()
+	{	if(children==null)
+			developNode();
+		return children;
 	}
 	
-    /////////////////////////////////////////////////////////////////
+	/**
+	 * utilise la fonction successeur pour calculer les enfants de ce noeud de recherche,
+	 * i.e. pour déterminer quelles sont les cases que l'on peut atteindre à partir
+	 * de la case courante.
+	 */
+	private void developNode()
+	{	children = new ArrayList<AstarNode>();
+		for(Direction direction: Direction.getPrimaryValues())
+		{	AiTile neighbor = tile.getNeighbor(direction);
+			if(neighbor.isCrossableBy(hero))
+			{	AstarNode node = new AstarNode(neighbor,this);
+				children.add(node);			
+			}
+		}
+	}
+	
+	/////////////////////////////////////////////////////////////////
+	// HERO				/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	/** personnage considéré */
+	private AiHero hero = null;
+	
+	/**
+	 * renvoie le personnage de référence pour cette recherche
+	 * 
+	 * @return	le personnage de référence
+	 */
+	public AiHero getHero()
+	{	return hero;	
+	}
+	
+	/////////////////////////////////////////////////////////////////
 	// MISC				/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	public boolean equals(Object object)
-	{	return object == this;		
+	{	boolean result = false;
+		if(object instanceof AstarNode)
+			result = compareTo((AstarNode)object)==0;
+		return result;
 	}
+
+    public int compareTo(AstarNode node)
+    {	int result = 0;
+		double f1 = cost+heuristic;
+    	double f2 = node.getCost()+node.getHeuristic();
+    	if(f1>f2)
+    		result = +1;
+    	else if(f1<f2)
+    		result = -1;
+    	return result;
+    }
 
 	/////////////////////////////////////////////////////////////////
 	// TEXT				/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	/**
-	 * Renvoie une représentation textuelle du noeud. 
-	 * @return	la représentation textuelle du noeud
-	 */
 	public String toString()
 	{	String result;
 		result = "<";

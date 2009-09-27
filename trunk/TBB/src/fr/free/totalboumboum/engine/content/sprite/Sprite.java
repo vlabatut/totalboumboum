@@ -111,6 +111,10 @@ public abstract class Sprite
 	protected GesturePack gesturePack;
 	protected Gesture currentGesture;
 
+	public GesturePack getGesturePack()
+	{	return gesturePack;	
+	}
+	
 	public void setGesturePack(GesturePack gesturePack)
 	{	this.gesturePack = gesturePack;	
 	}
