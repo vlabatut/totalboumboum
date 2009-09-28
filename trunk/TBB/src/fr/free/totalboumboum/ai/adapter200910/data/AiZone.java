@@ -600,7 +600,7 @@ public class AiZone
 	 * relié au bord de gauche, et le bord du haut est relié au bord du bas.
 	 * Cette méthode considère la direction correspondant à la distance la plus
 	 * courte (qui peut correspondre à un chemin passant par les bords du niveau)
-	 * La direction peut être NONE si jamais les deux sprites sont au même endroits
+	 * La direction peut être NONE si jamais les deux sprites sont au même endroit
 	 * 
 	 * @param source	sprite de départ
 	 * @param target	sprite de destination
@@ -615,6 +615,32 @@ public class AiZone
 			double y1 = source.getPosY();
 			double x2 = target.getPosX();
 			double y2 = target.getPosY();
+			result = getDirection(x1,y1,x2,y2);
+		}
+		return result;		
+	}
+	
+	/**
+	 * Calcule la direction pour aller du sprite à la case passés en paramètres.
+	 * Le niveau est considéré comme cyclique, i.e. le bord de droite est 
+	 * relié au bord de gauche, et le bord du haut est relié au bord du bas.
+	 * Cette méthode considère la direction correspondant à la distance la plus
+	 * courte (qui peut correspondre à un chemin passant par les bords du niveau)
+	 * La direction peut être NONE si jamais les deux sprites sont au même endroit
+	 * 
+	 * @param sprite	sprite en déplacement
+	 * @param tile	case de destination
+	 * @return	la direction pour aller du sprite vers la case
+	 */
+	public Direction getDirection(AiSprite<?> sprite, AiTile tile)
+	{	Direction result;
+		if(sprite==null || tile==null)
+			result = Direction.NONE;
+		else
+		{	double x1 = sprite.getPosX();
+			double y1 = sprite.getPosY();
+			double x2 = tile.getPosX();
+			double y2 = tile.getPosY();
 			result = getDirection(x1,y1,x2,y2);
 		}
 		return result;		
@@ -636,7 +662,11 @@ public class AiZone
 	 */
 	public Direction getDirection(double x1, double x2, double y1, double y2)
 	{	double dx = GameVariables.level.getDeltaX(x1,x2);
+		if(CalculusTools.isRelativelyEqualTo(dx,0))
+			dx = 0;
 		double dy = GameVariables.level.getDeltaY(y1,y2);
+		if(CalculusTools.isRelativelyEqualTo(dy,0))
+			dy = 0;
 		Direction result = Direction.getCompositeFromRelativeDouble(dx,dy);
 		return result;
 	}
@@ -769,6 +799,8 @@ public class AiZone
 	 */
 	public double getPixelDistance(double x1, double y1, double x2, double y2)
 	{	double result = level.getPixelDistance(x1,y1,x2,y2);
+		if(CalculusTools.isRelativelyEqualTo(result,0))
+			result = 0;
 		return result;
 	}
 	
@@ -788,6 +820,8 @@ public class AiZone
 	 */
 	public double getPixelDistance(double x1, double y1, double x2, double y2, Direction direction)
 	{	double result = level.getPixelDistance(x1,y1,x2,y2,direction);
+		if(CalculusTools.isRelativelyEqualTo(result,0))
+			result = 0;
 		return result;
 	}
 	
@@ -824,6 +858,8 @@ public class AiZone
 		double x2 = sprite2.getPosX();
 		double y2 = sprite2.getPosY();
 		double result = level.getPixelDistance(x1,y1,x2,y2,direction);
+		if(CalculusTools.isRelativelyEqualTo(result,0))
+			result = 0;
 		return result;
 	}
 

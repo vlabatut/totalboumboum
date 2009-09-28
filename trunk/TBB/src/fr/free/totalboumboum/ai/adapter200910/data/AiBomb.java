@@ -60,6 +60,7 @@ public class AiBomb extends AiSprite<Bomb>
 	void update(AiTile tile)
 	{	super.update(tile);
 		updateWorking();
+		updateTime();
 	}
 
 	/////////////////////////////////////////////////////////////////
@@ -188,6 +189,47 @@ public class AiBomb extends AiSprite<Bomb>
 		}
 	}
 
+	/////////////////////////////////////////////////////////////////
+	// LIFE TIME 		/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	/** temps écoulé depuis que la bombe a été posée, exprimé en ms */
+	private double time = 0;
+	
+	/**
+	 * renvoie le temps écoulé depuis que la bombe a été posée,
+	 * exprimé en millisecondes
+	 * 
+	 * @return	temps exprimé en ms
+	 */
+	public double getTime()
+	{	return time;	
+	}
+	
+	/**
+	 * met à jour le temps écoulé depuis que la bombe a été posée
+	 */
+	private void updateTime()
+	{	Bomb sprite = getSprite();
+		GestureName gesture = sprite.getCurrentGesture().getName();
+		
+		if(gesture==GestureName.STANDING || gesture==GestureName.STANDING_FAILING
+			|| gesture==GestureName.OSCILLATING || gesture==GestureName.OSCILLATING_FAILING
+			|| gesture==GestureName.SLIDING || gesture==GestureName.SLIDING)
+		{	double elapsedTime = getTile().getZone().getElapsedTime();
+			time = time + elapsedTime;
+		}
+		else if(gesture==GestureName.APPEARING
+				|| gesture==GestureName.BOUNCING
+				|| gesture==GestureName.DISAPPEARING
+				|| gesture==GestureName.ENTERING
+				|| gesture==GestureName.HIDING
+				|| gesture==GestureName.LANDING
+				|| gesture==GestureName.NONE
+				|| gesture==GestureName.PREPARED)
+		{	time = 0;		
+		}
+	}
+	
 	/////////////////////////////////////////////////////////////////
 	// TEXT				/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////

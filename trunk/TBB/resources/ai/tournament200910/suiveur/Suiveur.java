@@ -57,23 +57,44 @@ public class Suiveur extends ArtificialIntelligence
 			if(first)
 			{	first = false;
 				AiTile destination = zone.getTile(6,8);
-				mover = new Mover(this,destination);
+				pathManager = new PathManager(this,destination);
+				safetyManager = new SafetyManager(this);
 			}
 			
+			// on met à jour le gestionnaire de sécurité
+			safetyManager.update();
 			// on calcule la direction de déplacement
-			Direction moveDir = mover.update();
-			result = new AiAction(AiActionName.MOVE,moveDir);
+//			Direction moveDir = pathManager.update();
+//			result = new AiAction(AiActionName.MOVE,moveDir);
 		}
 		
 		return result;
 	}
 
 	/////////////////////////////////////////////////////////////////
-	// MOVER				/////////////////////////////////////
+	// PATH MANAGER				/////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	/** classe chargée du déplacement du personnage */
-	private Mover mover = null;
+	private PathManager pathManager = null;
 
+	/////////////////////////////////////////////////////////////////
+	// SAFETY MANAGER				/////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	/** classe chargée de déterminer quelles cases sont sûres */
+	private SafetyManager safetyManager = null;
+
+	public SafetyManager getSafetyManager() throws StopRequestException
+	{	checkInterruption(); //APPEL OBLIGATOIRE
+	
+		return safetyManager;		
+	}
+	
+	public double getSafetyLevel(AiTile tile) throws StopRequestException
+	{	checkInterruption(); //APPEL OBLIGATOIRE
+	
+		return safetyManager.getSafetyLevel(tile);		
+	}
+	
 	/////////////////////////////////////////////////////////////////
 	// CURRENT TILE				/////////////////////////////////////
 	/////////////////////////////////////////////////////////////////

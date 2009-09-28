@@ -107,6 +107,15 @@ public class AiPath
 	{	return tiles.size();	
 	}
 	
+	/**
+	 * teste si ce chemin a une longueur non-nulle
+	 * 
+	 * @return	vrai ssi le chemin ne contient aucune case
+	 */
+	public boolean isEmpty()
+	{	return tiles.size()>0;
+	}
+	
 	/////////////////////////////////////////////////////////////////
 	// COMPARISON		/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
