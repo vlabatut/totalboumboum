@@ -83,7 +83,7 @@ public class AiBlock extends AiSprite<Block>
 		
 		// destructible
 		SpecificAction specificAction = new SpecificConsume(sprite);
-		destructible = sprite.isTargetPreventing(specificAction);
+		destructible = !sprite.isTargetPreventing(specificAction);
 
 		// bloque les personnages
 		GeneralAction generalAction = new GeneralMoveLow();

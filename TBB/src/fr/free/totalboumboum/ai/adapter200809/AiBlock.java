@@ -80,7 +80,7 @@ public class AiBlock extends AiSprite<Block>
 	private void updateDestructible()
 	{	Block sprite = getSprite();
 		SpecificAction action = new SpecificConsume(sprite);
-		destructible = sprite.isTargetPreventing(action);
+		destructible = !sprite.isTargetPreventing(action);
 	}	
 
 	/**

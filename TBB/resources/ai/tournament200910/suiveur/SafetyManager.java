@@ -26,20 +26,29 @@ import java.util.Collection;
 import java.util.List;
 
 import fr.free.totalboumboum.ai.adapter200910.communication.StopRequestException;
+import fr.free.totalboumboum.ai.adapter200910.data.AiBlock;
 import fr.free.totalboumboum.ai.adapter200910.data.AiBomb;
 import fr.free.totalboumboum.ai.adapter200910.data.AiFire;
+import fr.free.totalboumboum.ai.adapter200910.data.AiStateName;
 import fr.free.totalboumboum.ai.adapter200910.data.AiTile;
 import fr.free.totalboumboum.ai.adapter200910.data.AiZone;
-import fr.free.totalboumboum.engine.content.feature.Direction;
 
 /**
  * classe chargée d'extraire de la zone les informations
- * permettant de déterminer le niveau de sûreté des cases
+ * permettant de déterminer le niveau de sûreté des cases.
+ * Une matrice de réels représente la zone de jeu, chaque case
+ * étant représentée par le temps restant avant qu'une flamme ne la
+ * traverse. Donc plus le temps est long, et plus la case est sûre. 
+ * Une valeur infinie signifie que la case n'est pas menacée par une
+ * bombe. Une valeur nulle signifie que la case est actuellement en feu.
+ * Une valeur négative signifie que la case est menacée par une bombe
+ * télécommandée, qui peut exploser n'importe quand (la valeur absolue
+ * de la valeur correspond au temps depuis lequel la bombe a été posée)
  */
 public class SafetyManager
 {	
 	/** interrupteur permettant d'afficher la trace du traitement */
-	private boolean verbose = true;
+	private boolean verbose = false;
 	
 	public SafetyManager(Suiveur ai) throws StopRequestException
 	{	ai.checkInterruption(); //APPEL OBLIGATOIRE
@@ -53,24 +62,31 @@ public class SafetyManager
 	/////////////////////////////////////////////////////////////////
 	// ARTIFICIAL INTELLIGENCE		/////////////////////////////////
 	/////////////////////////////////////////////////////////////////
+	/** IA associée à ce gestionnaire de sûreté */
 	private Suiveur ai;
 
 	/////////////////////////////////////////////////////////////////
 	// MATRIX	/////////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	/** valeur pour une case complètement sûre (temps restant avant explosion : maximal) */
-	public static double SAFE = Double.MAX_VALUE;
+	public static double SAFE = Double.POSITIVE_INFINITY;
 	/** valeur pour une case pas du tout sûre (temps restant avant explosion : aucun) */
 	public static double FIRE = 0;
 	/** matrice contenant les valeurs de sûreté */
 	private double matrix[][];
 	
+	/**
+	 * renvoie la matrice de sureté
+	 */
 	public double[][] getMatrix() throws StopRequestException
 	{	ai.checkInterruption(); //APPEL OBLIGATOIRE
 	
 		return matrix;		
 	}
 	
+	/**
+	 * mise à jour de la matrice de sûreté
+	 */
 	private void updateMatrix(AiZone zone) throws StopRequestException
 	{	ai.checkInterruption(); //APPEL OBLIGATOIRE
 
@@ -87,9 +103,16 @@ public class SafetyManager
 			{	AiTile tile = zone.getTile(line, col);
 				Collection<AiFire> fires = tile.getFires();
 				Collection<AiBomb> bombs = tile.getBombs();
+				Collection<AiBlock> blocks = tile.getBlocks();
 				// s'il y a du feu : valeur zéro (il ne reste pas de temps avant l'explosion)
-				if(fires.size()>0)
+				if(!fires.isEmpty())
 					matrix[line][col] = FIRE;
+				// s'il y a un mur en train de brûler : pareil
+				else if(!blocks.isEmpty())
+				{	AiBlock block = blocks.iterator().next();
+					if(block.getState().getName()==AiStateName.BURNING)
+						matrix[line][col] = FIRE;
+				}
 				// s'il y a une bombe : pour sa portée, la valeur correspond au temps théorique restant avant son explosion
 				// (plus ce temps est court et plus la bombe est dangereuse)
 				else if(bombs.size()>0)
@@ -121,38 +144,27 @@ public class SafetyManager
 	private List<AiBomb> processedBombs;
 	
 	/**
-	 * calcule une liste de cases correspondant à la portée indirecte de la bombe
-	 * passée en paramètre. Le terme "indirecte" signifie que la fonction est récursive : 
-	 * si une case à portée contient une bombe, la portée de cette bombe est rajoutée
+	 * calcule une liste de cases correspondant au souffle indirect de la bombe
+	 * passée en paramètre. Le terme "indirect" signifie que la fonction est récursive : 
+	 * si une case à portée de souffle contient une bombe, le souffle de cette bombe est rajouté
 	 * dans la liste blast, et la bombe est rajoutée dans la liste bombs.
 	 */
 	private List<AiTile> getBlast(AiBomb bomb, List<AiTile> blast, List<AiBomb> bombs) throws StopRequestException
 	{	ai.checkInterruption(); //APPEL OBLIGATOIRE
 	
-		if(!processedBombs.contains(bomb))
-		{	// initialisation
-			processedBombs.add(bomb);
-			int range = bomb.getRange();
+		if(!bombs.contains(bomb))
+		{	bombs.add(bomb);
+		
+			// on récupère le souffle
+			List<AiTile> tempBlast = bomb.getBlast();
+			blast.addAll(tempBlast);
 			
-			// centre
-			AiTile center = bomb.getTile();
-			blast.add(center);
-			bombs.add(bomb);
-			
-			// branches
-			for(Direction direction: Direction.getPrimaryValues())
-			{	AiTile tile = center;
-				for(int i=0;i<range;i++)
-				{	// on rajoute la case dans blast
-					tile = tile.getNeighbor(direction);
-					blast.add(tile);
-					// on teste si la case contient une bombe
-					Collection<AiBomb> bList = tile.getBombs();
-					if(bList.size()>0)
-					{	// si oui, on traite la bombe à son tour
-						AiBomb b = bList.iterator().next();
-						getBlast(b,blast,bombs);
-					}
+			// bombs
+			for(AiTile tile: tempBlast)
+			{	Collection<AiBomb> bList = tile.getBombs();
+				if(bList.size()>0)
+				{	AiBomb b = bList.iterator().next();
+					getBlast(b,blast,bombs);
 				}
 			}
 		}
@@ -160,37 +172,47 @@ public class SafetyManager
 		return blast;
 	}	
 
+	/**
+	 * traite la bombe passée en paramètre
+	 */
 	private void processBomb(AiBomb bomb) throws StopRequestException
 	{	ai.checkInterruption(); //APPEL OBLIGATOIRE
 		
-		// récupération des cases à portée
-		List<AiTile> blast = new ArrayList<AiTile>();
-		List<AiBomb> bombs = new ArrayList<AiBomb>();
-		getBlast(bomb,blast,bombs);
-		
-		// on détermine quelle est la bombe la plus dangereuse (temps le plus court)
-		double value = SAFE;
-		for(AiBomb b: bombs)
-		{	// calcul du temps restant théoriquement avant l'explosion
-			double time = b.getNormalDuration() - b.getTime();
-			// màj de value
-			if(time<value)
-				value = time;
-		}
-		
-		// on met à jour toutes les cases situées à portée
-		for(AiTile t: blast)
-		{	int l = t.getLine();
-			int c = t.getCol();
-			// on modifie seulement si la case n'a pas déjà un niveau de sécurité inférieur
-			if(matrix[l][c]>value)
-				matrix[l][c] = value;						
+		if(!processedBombs.contains(bomb))
+		{	// récupération des cases à portée
+			List<AiTile> blast = new ArrayList<AiTile>();
+			List<AiBomb> bombs = new ArrayList<AiBomb>();
+			getBlast(bomb,blast,bombs);
+			processedBombs.addAll(bombs);
+			
+			// on détermine quelle est la bombe la plus dangereuse (temps le plus court)
+			double value = SAFE;
+			for(AiBomb b: bombs)
+			{	// calcul du temps restant théoriquement avant l'explosion
+				double time = b.getNormalDuration() - b.getTime();
+				// màj de value
+				if(time<value)
+					value = time;
+			}
+			
+			// on met à jour toutes les cases situées à portée
+			for(AiTile t: blast)
+			{	int l = t.getLine();
+				int c = t.getCol();
+				// on modifie seulement si la case n'a pas déjà un niveau de sécurité inférieur
+				if(matrix[l][c]>value)
+					matrix[l][c] = value;						
+			}
 		}
 	}
 
 	/////////////////////////////////////////////////////////////////
 	// TILES		/////////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
+	/**
+	 * renvoie le niveau de sécurité de la case passée en paramètre
+	 * (i.e. le temps restant avant explosion)
+	 */
 	public double getSafetyLevel(AiTile tile) throws StopRequestException
 	{	ai.checkInterruption(); //APPEL OBLIGATOIRE
 	
@@ -200,6 +222,19 @@ public class SafetyManager
 		return result;		
 	}
 
+	/**
+	 * détermine si le niveau de sécurité de la case passée en paramètre
+	 * est maximal (ce traitement n'est pas très subtil : en cas d'explosion potentielle,
+	 * on pourrait calculer le temps nécessaire pour atteindre la case et 
+	 * déterminer si c'est possible de passer dessus avant l'explosion)
+	 */
+	public boolean isSafe(AiTile tile) throws StopRequestException
+	{	ai.checkInterruption(); //APPEL OBLIGATOIRE
+		
+		double level = getSafetyLevel(tile);
+		boolean result = level==SAFE;
+		return result;
+	}
 	
 	/////////////////////////////////////////////////////////////////
 	// PROCESS		/////////////////////////////////////////////////

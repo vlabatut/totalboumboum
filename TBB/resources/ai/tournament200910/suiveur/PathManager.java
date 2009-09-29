@@ -154,7 +154,8 @@ public class PathManager
 				pos1 = hero.getPosY();
 				pos2 = target.getPosY();
 			}
-			result = pos0<pos1 && pos1<pos2 || pos0>pos1 && pos1>pos2;
+			result = pos0<=pos1 && pos1<=pos2 || pos0>=pos1 && pos1>=pos2;
+//TODO pb ici : l'encadrement est toujours vrai puisque le niveau est circulaire !			
 		}
 		return result;
 	}
@@ -171,23 +172,9 @@ public class PathManager
 		Iterator<AiTile> it = path.getTiles().iterator();
 		while(it.hasNext() && result)
 		{	AiTile tile = it.next();
-			result = tile.isCrossableBy(ai.getOwnHero()) && isSafe(tile);
+			result = tile.isCrossableBy(ai.getOwnHero()) && ai.isSafe(tile);
 			
 		}
-		return result;
-	}
-
-	/**
-	 * détermine si le niveau de sécurité de la case passée en paramètre
-	 * est maximal (ce traitement n'est pas très subtil : en cas d'explosion potentielle,
-	 * on pourrait calculer le temps nécessaire pour atteindre la case et 
-	 * déterminer si c'est possible de passer dessus avant l'explosion)
-	 */
-	private boolean isSafe(AiTile tile) throws StopRequestException
-	{	ai.checkInterruption(); //APPEL OBLIGATOIRE
-	
-		double level = ai.getSafetyLevel(tile);
-		boolean result = Double.isInfinite(level);
 		return result;
 	}
 
@@ -221,18 +208,22 @@ public class PathManager
 				// on teste si on est arrivé ou si on a dépassé la case suivante
 				if(hasArrived(tile) || hasCrossed(tile))
 				{	// si oui, on passe à la prochaine case
-					path.removeTile(0);
-					if(path.isEmpty())
-						tile = null;
+					if(path.getLength()>1)
+						tile = path.getTile(1);
 					else
-						tile = path.getTile(0);
+						tile = null;					
 				}
 				// on détermine la direction vers la prochaine case
 				if(tile!=null)
 					result = ai.getZone().getDirection(ai.getOwnHero(),tile);
 			}
 		}
-//System.out.println(result);		
+		
+		if(verbose)
+		{	System.out.println(">>>>>>>>>> PATH MANAGER <<<<<<<<<<");
+			System.out.println("path: "+path);
+			System.out.println("direction: "+result);
+		}
 		return result;
 	}
 }

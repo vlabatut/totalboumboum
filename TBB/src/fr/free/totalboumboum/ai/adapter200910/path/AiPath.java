@@ -113,7 +113,7 @@ public class AiPath
 	 * @return	vrai ssi le chemin ne contient aucune case
 	 */
 	public boolean isEmpty()
-	{	return tiles.size()>0;
+	{	return tiles.size()==0;
 	}
 	
 	/////////////////////////////////////////////////////////////////
@@ -171,5 +171,16 @@ public class AiPath
 				result = false;
 		}		
 		return result;		
+	}
+
+	/////////////////////////////////////////////////////////////////
+	// TEXT				/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	public String toString()
+	{	String result = "[";
+		for(AiTile tile: tiles)
+			result = result + " ("+tile.getLine()+","+tile.getCol()+")";
+		result = result + " ]";
+		return result;
 	}
 }

@@ -643,7 +643,7 @@ public class AiZone
 			double y2 = tile.getPosY();
 			result = getDirection(x1,y1,x2,y2);
 		}
-		return result;		
+		return result;
 	}
 	
 	/**
@@ -660,7 +660,7 @@ public class AiZone
 	 * @param y2	seconde position verticale en pixels
 	 * @return	la direction correspondant au chemin le plus court
 	 */
-	public Direction getDirection(double x1, double x2, double y1, double y2)
+	public Direction getDirection(double x1, double y1, double x2, double y2)
 	{	double dx = GameVariables.level.getDeltaX(x1,x2);
 		if(CalculusTools.isRelativelyEqualTo(dx,0))
 			dx = 0;

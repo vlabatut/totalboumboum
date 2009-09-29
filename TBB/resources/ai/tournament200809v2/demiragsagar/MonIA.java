@@ -573,7 +573,7 @@ public class MonIA extends ArtificialIntelligence {
 			for (int j = 0; j < 17; j++)
 				if (mat[j][i] == -1) {
 					AiTile temp = this.zone.getTile(i, j);
-					if (temp.getBlock().isDestructible())
+					if (!temp.getBlock().isDestructible())
 						sommeHardWall++;
 				}
 		return sommeHardWall;

@@ -45,7 +45,7 @@ import fr.free.totalboumboum.ai.adapter200910.path.astar.heuristic.HeuristicCalc
  * Le but est d'introduire une part de hasard dans les IA, de manière à les rendre moins prévisibles.
  */
 public class Astar
-{	private static boolean debug = false;
+{	private static boolean verbose = true;
 
 	public Astar(AiHero hero, CostCalculator costCalculator, HeuristicCalculator heuristicCalculator)
 	{	this.hero = hero;
@@ -64,29 +64,82 @@ public class Astar
 	private AstarNode root = null;
 	/** personnage de référence */
 	private AiHero hero = null;
+
+	/////////////////////////////////////////////////////////////////
+	// LIMITE			/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	/** limite de hauteur (négatif = pas de limite) */
+	private int maxHeight = -1;
+	/** limite de coût (négatif = pas de limite) */
+	private int maxCost = -1;
+	/** limite de nombre de noeuds (négatif = pas de limite), pas configurable */
+	private int maxNodes = 100000;
+	
+	/**
+	 * limite l'arbre de recherche à une hauteur de maxHeight,
+	 * i.e. quand le noeud courant a une profondeur correspondant à maxHeight,
+	 * l'algorithme se termine et ne renvoie pas de solution (échec).
+	 * (sinon l'arbre peut avoir une hauteur infinie, et l'algorithme
+	 * peut ne jamais s'arrêter)
+	 * 
+	 * @param maxHeight
+	 */
+	public void setMaxHeight(int maxHeight)
+	{	this.maxHeight = maxHeight;	
+	}
+		
+	/**
+	 * limite l'arbre de recherche à un certain cout maxCost, i.e. dès que le
+	 * noeud courant atteint ce cout maximal, l'algorithme se termine et ne
+	 * renvoie pas de solution (échec)
+	 * (ceci permet d'éviter que l'algorithme ne s'arrête jamais quand il n'y
+	 * a pas de solution)
+	 * 
+	 * @param maxCost	le cout maximal que le noeud courant peut atteindre
+	 */
+	public void setMaxCost(int maxCost)
+	{	this.maxCost = maxCost;
+	}
 		
     /////////////////////////////////////////////////////////////////
 	// PROCESS			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	public AiPath processShortestPath(AiTile startTile, AiTile endTile)
-	{	// initialisation
+	{	if(verbose)
+			System.out.println("A*: from "+startTile+" to "+endTile);
+		
+		// initialisation
 		AiPath result = new AiPath();
 		heuristicCalculator.setEndTile(endTile);
 		root = new AstarNode(startTile,hero,costCalculator,heuristicCalculator);
 		PriorityQueue<AstarNode> queue = new PriorityQueue<AstarNode>(1);
 		queue.offer(root);
 		AstarNode finalNode = null;
+		boolean stop = false;
 
 		// traitement
 		do
 		{	// on prend le noeud situé en tête de file
 			AstarNode currentNode = queue.poll();
-			if(debug)
-				System.out.println("Visité : "+currentNode.toString());
+			if(verbose)
+			{	System.out.println("Visited : "+currentNode.toString());
+				System.out.println("Queue length: "+queue.size());
+			}
 			// on teste si on est arrivé à la fin de la recherche
 			if(currentNode.getTile()==endTile)
-				// si oui on garde le dernier noeud pour ensuite pouvoir reconstruire le chemin solution
+			{	// si oui on garde le dernier noeud pour ensuite pouvoir reconstruire le chemin solution
 				finalNode = currentNode;
+				stop = true;
+			}
+			// si l'arbre a atteint la hauteur maximale, on s'arrête
+			else if(maxHeight>0 && currentNode.getDepth()>=maxHeight)
+				stop = true;
+			// si le noeud courant a atteint le cout maximal, on s'arrête
+			else if(maxCost>0 && currentNode.getCost()>=maxCost)
+				stop = true;
+			// si le nombre de noeuds dans la file est trop grand, on s'arrête
+			else if(maxNodes>0 && queue.size()>=maxNodes)
+				stop = true;
 			else
 			{	// sinon on récupère les noeuds suivants
 				ArrayList<AstarNode> successors = new ArrayList<AstarNode>(currentNode.getChildren());
@@ -99,7 +152,7 @@ public class Astar
 					queue.offer(node);
 			}
 		}
-		while(!queue.isEmpty() && finalNode==null);
+		while(!queue.isEmpty() && !stop);
 		
 		// build solution path
 		while(finalNode!=null)
@@ -107,11 +160,11 @@ public class Astar
 			result.addTile(0,tile);
 			finalNode = finalNode.getParent();
 		}
-		if(debug)
-		{	System.out.print("Chemin");
+		if(verbose)
+		{	System.out.print("Path: [");
 			for(AiTile t: result.getTiles())
-				System.out.print(" : "+t);
-			System.out.println();
+				System.out.print(" "+t);
+			System.out.println(" ]");
 		}
 		
 		return result;
