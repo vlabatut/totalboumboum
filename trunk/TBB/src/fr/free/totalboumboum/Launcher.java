@@ -1047,12 +1047,5 @@ public class Launcher
 	 * - tester la fonction de speed (hero)
 	 * - tester la fonction traversable (tile)
 	 * - tester la fonction update abilities (hero)
-	 * 
-	 * - l'IA ralentit le jeu quand on tente de prendre le controle
-	 * - l'IA change souvent de direction, espèce de déplacement en diagonale bizarre
-	 * 
-	 * - déplacer le getBlast dans AiBomb, en incluant le traitement des obstacles ?
-	 * - pb pr compter le temps des bombes qui sont posées dès le début
-	 * - pb : les obstacles ne sont pas gérés lors de l'évaluation du blast
 	 */
 }

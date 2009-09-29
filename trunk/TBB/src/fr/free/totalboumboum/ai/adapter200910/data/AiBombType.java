@@ -34,7 +34,7 @@ public enum AiBombType
 	/** bombe télécommandée par le joueur (elle explose quand le joueur le lui demande) */
 	REMOTE,
 	/** bombe à la fois pénétrante et télécommandée */
-	REMOTE_PENTRATION,
+	REMOTE_PENETRATION,
 	/** autre type de bombes */
 	OTHER;	
 	
@@ -53,7 +53,7 @@ public enum AiBombType
 		else if(name.equalsIgnoreCase("remotecontrol"))
 			result = REMOTE;
 		else if(name.equalsIgnoreCase("remotepenetration"))
-			result = REMOTE_PENTRATION;
+			result = REMOTE_PENETRATION;
 		else
 			result = OTHER;
 		return result;

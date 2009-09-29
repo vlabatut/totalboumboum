@@ -21,7 +21,12 @@ package fr.free.totalboumboum.ai.adapter200910.data;
  * 
  */
 
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
+
 import fr.free.totalboumboum.configuration.profile.PredefinedColor;
+import fr.free.totalboumboum.engine.content.feature.Direction;
 import fr.free.totalboumboum.engine.content.feature.ability.StateAbility;
 import fr.free.totalboumboum.engine.content.feature.ability.StateAbilityName;
 import fr.free.totalboumboum.engine.content.feature.gesture.GestureName;
@@ -106,6 +111,72 @@ public class AiBomb extends AiSprite<Bomb>
 	private void initRange()
 	{	Bomb bomb = getSprite();
 		range = bomb.getFlameRange();
+	}
+	
+	/**
+	 * calcule une liste de cases correspondant au souffle de cette bombe,
+	 * i.e. toutes les cases qui seront atteinte quand elle va exploser.
+	 * Cette méthode tient compte de murs, items, etc., c'est à dire qu'elle
+	 * ne donne que les cases qui seront touchées si la bombe devait exploser
+	 * à l'instant où cette méthode est invoquée. Si un des obstacles à l'explosion
+	 * disparait (par exemple si un joueur rammasse un item qui bloquait l'explosion),
+	 * alors le souffle peut changer.
+	 * 
+	 * @return	une liste de cases correspondant aux cases qui seront touchées par la flamme de cette bombe 
+	 */
+	public List<AiTile> getBlast()
+	{	// init
+		ArrayList<AiTile> result = new ArrayList<AiTile>();
+		AiTile center = getTile();
+		result.add(center);
+		
+		// calcul du souffle
+		for(Direction direction: Direction.getPrimaryValues())
+		{	AiTile tile = center;
+			boolean blocked = false;
+			int i=0;
+			while(i<range && !blocked)
+			{	boolean blasted = true;
+				tile = tile.getNeighbor(direction);
+				// blocs
+				if(!blocked)
+				{	Collection<AiBlock> blocks = tile.getBlocks();
+					if(!blocks.isEmpty())
+					{	AiBlock block = blocks.iterator().next();
+						// si le bloc est destructible, la flamme ne sera pas bloquée uniquement en cas de pénétration
+						if(block.isDestructible())
+						{	if(type!=AiBombType.PENETRATION && type!=AiBombType.REMOTE_PENETRATION)
+								blocked = true;
+						}
+						else
+						{	blocked = true;
+							blasted = false;						
+						}
+					}
+				}
+				// items
+				if(!blocked)
+				{	Collection<AiItem> items = tile.getItems();
+					if(!items.isEmpty())
+					{	blocked = true;
+						blasted = false;
+					}
+				}
+				// bombes
+				if(!blocked)
+				{	Collection<AiBomb> bombs = tile.getBombs();
+					if(!bombs.isEmpty())
+						blocked = true;
+				}
+				// on rajoute éventuellement la case dans blast
+				if(blasted)
+					result.add(tile);
+				// on passe à la case suivante
+				i++;
+			}
+		}
+		
+		return result;
 	}
 	
 	/////////////////////////////////////////////////////////////////

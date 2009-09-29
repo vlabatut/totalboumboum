@@ -64,8 +64,8 @@ public class Suiveur extends ArtificialIntelligence
 			// on met à jour le gestionnaire de sécurité
 			safetyManager.update();
 			// on calcule la direction de déplacement
-//			Direction moveDir = pathManager.update();
-//			result = new AiAction(AiActionName.MOVE,moveDir);
+			Direction moveDir = pathManager.update();
+			result = new AiAction(AiActionName.MOVE,moveDir);
 		}
 		
 		return result;
@@ -93,6 +93,12 @@ public class Suiveur extends ArtificialIntelligence
 	{	checkInterruption(); //APPEL OBLIGATOIRE
 	
 		return safetyManager.getSafetyLevel(tile);		
+	}
+	
+	public boolean isSafe(AiTile tile) throws StopRequestException
+	{	checkInterruption(); //APPEL OBLIGATOIRE
+			
+		return safetyManager.isSafe(tile);
 	}
 	
 	/////////////////////////////////////////////////////////////////
