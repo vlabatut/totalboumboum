@@ -155,7 +155,9 @@ public class PathManager
 				pos2 = target.getPosY();
 			}
 			result = pos0<=pos1 && pos1<=pos2 || pos0>=pos1 && pos1>=pos2;
-//TODO pb ici : l'encadrement est toujours vrai puisque le niveau est circulaire !			
+//TODO pb ici : l'encadrement est toujours vrai puisque le niveau est circulaire !
+			//p-ê carrément laisser tomber la contrainte de passer par le centre des cases ?
+			//et donner comme objectif une position en pixel (pvt être un centre)
 		}
 		return result;
 	}
