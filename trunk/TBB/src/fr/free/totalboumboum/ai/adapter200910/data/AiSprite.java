@@ -133,6 +133,21 @@ public abstract class AiSprite<T extends Sprite>
 	{	state.update();
 	}
 	
+	/**
+	 * indique que le sprite a été éliminé du jeu
+	 */
+	void setEnded()
+	{	state.setEnded();		
+	}
+	
+	/**
+	 * renvoie vrai si ce sprite a été éliminé du jeu
+	 * @return	vrai si le sprite n'est plus en jeu
+	 */
+	public boolean hasEnded()
+	{	return state.getName()==AiStateName.ENDED;	
+	}
+	
 	/////////////////////////////////////////////////////////////////
 	// TILE				/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////

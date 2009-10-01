@@ -94,13 +94,19 @@ public class SafetyManager
 		
 		// on initialise la matrice : toutes les cases sont sûres
 		for(int line=0;line<zone.getHeigh();line++)
+		{	ai.checkInterruption(); //APPEL OBLIGATOIRE
 			for(int col=0;col<zone.getWidth();col++)
-				matrix[line][col] = SAFE;
+			{	ai.checkInterruption(); //APPEL OBLIGATOIRE
+				matrix[line][col] = SAFE;			
+			}
+		}
 		
 		// on rajoute le feu et les cases à portée de bombe
 		for(int line=0;line<zone.getHeigh();line++)
+		{	ai.checkInterruption(); //APPEL OBLIGATOIRE
 			for(int col=0;col<zone.getWidth();col++)
-			{	AiTile tile = zone.getTile(line, col);
+			{	ai.checkInterruption(); //APPEL OBLIGATOIRE
+				AiTile tile = zone.getTile(line, col);
 				Collection<AiFire> fires = tile.getFires();
 				Collection<AiBomb> bombs = tile.getBombs();
 				Collection<AiBlock> blocks = tile.getBlocks();
@@ -120,12 +126,15 @@ public class SafetyManager
 					processBomb(bomb);
 				}
 			}
+		}
 		
 		if(verbose)
 		{	System.out.println(">>>>>>>>>> SAFETY MATRIX <<<<<<<<<<");
 			for(int line=0;line<zone.getHeigh();line++)
-			{	for(int col=0;col<zone.getWidth();col++)
-				{	if(matrix[line][col]==SAFE)
+			{	ai.checkInterruption(); //APPEL OBLIGATOIRE
+				for(int col=0;col<zone.getWidth();col++)
+				{	ai.checkInterruption(); //APPEL OBLIGATOIRE
+					if(matrix[line][col]==SAFE)
 						System.out.printf("\tSAFE");
 					else
 						System.out.printf("\t%.0f",matrix[line][col]);
@@ -161,7 +170,8 @@ public class SafetyManager
 			
 			// bombs
 			for(AiTile tile: tempBlast)
-			{	Collection<AiBomb> bList = tile.getBombs();
+			{	ai.checkInterruption(); //APPEL OBLIGATOIRE
+				Collection<AiBomb> bList = tile.getBombs();
 				if(bList.size()>0)
 				{	AiBomb b = bList.iterator().next();
 					getBlast(b,blast,bombs);
@@ -188,7 +198,8 @@ public class SafetyManager
 			// on détermine quelle est la bombe la plus dangereuse (temps le plus court)
 			double value = SAFE;
 			for(AiBomb b: bombs)
-			{	// calcul du temps restant théoriquement avant l'explosion
+			{	ai.checkInterruption(); //APPEL OBLIGATOIRE
+				// calcul du temps restant théoriquement avant l'explosion
 				double time = b.getNormalDuration() - b.getTime();
 				// màj de value
 				if(time<value)
@@ -197,7 +208,8 @@ public class SafetyManager
 			
 			// on met à jour toutes les cases situées à portée
 			for(AiTile t: blast)
-			{	int l = t.getLine();
+			{	ai.checkInterruption(); //APPEL OBLIGATOIRE
+				int l = t.getLine();
 				int c = t.getCol();
 				// on modifie seulement si la case n'a pas déjà un niveau de sécurité inférieur
 				if(matrix[l][c]>value)
@@ -233,6 +245,14 @@ public class SafetyManager
 		
 		double level = getSafetyLevel(tile);
 		boolean result = level==SAFE;
+		return result;
+	}
+	
+	public AiTile findSafeTile(AiTile origin) throws StopRequestException
+	{	ai.checkInterruption(); //APPEL OBLIGATOIRE
+	
+		AiTile result = ai.getCurrentTile();
+//TODO à compléter
 		return result;
 	}
 	

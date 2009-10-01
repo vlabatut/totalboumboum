@@ -921,17 +921,19 @@ System.out.println();
 
 	private void drawAisPause(Graphics g)
 	{	g.setColor(Color.MAGENTA);
-	
-	
-	
-		Font font = new Font("Dialog", Font.PLAIN, 18);
+		Font font = new Font("Dialog", Font.BOLD, 12);
 		g.setFont(font);
 		FontMetrics metrics = g.getFontMetrics(font);
-		String text = "AIs paused";
+		String text = "AI Paused";
 		Rectangle2D box = metrics.getStringBounds(text, g);
-		int x = 10;
-		int y = (int)Math.round(90+box.getHeight()/2);
-		g.drawString(text, x, y);
+		for(int i=0;i<players.size();i++)
+		{	if(pauseAis.get(i))
+			{	Sprite s = players.get(i).getSprite();
+				int x = (int)Math.round(s.getCurrentPosX()-box.getWidth()/2);
+				int y = (int)Math.round(s.getCurrentPosY()+box.getHeight()/2);
+				g.drawString(text, x, y);
+			}
+		}
 	}
 	
 	/////////////////////////////////////////////////////////////////

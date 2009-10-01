@@ -42,6 +42,9 @@ public enum AiStateName
 	// equivalent gesture: BURNING
 	/** le sprite est en train de brûler */
 	BURNING,
+	// equivalent gesture: ENDED
+	/** le sprite n'est plus en jeu */
+	ENDED,
 	// equivalent gesture: BOUNCING, JUMPING, LANDING, PUNCHED
 	/** le sprite est en l'air (en train de sauter ou de rebondir sur les murs) */
 	FLYING,
@@ -52,7 +55,7 @@ public enum AiStateName
 	/** le sprite se déplace sur le sol */
 	MOVING;
 	
-	// unused gestures: NONE, ENDED, HIDING
+	// unused gestures: NONE, HIDING
 	
 	/**
 	 * convertit une chaine de caractères correspondant à un geste du jeu

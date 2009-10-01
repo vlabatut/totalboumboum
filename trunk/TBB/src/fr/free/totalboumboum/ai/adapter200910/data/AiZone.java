@@ -570,7 +570,8 @@ public class AiZone
 		while(it.hasNext())
 		{	T temp = it.next().getValue();
 			if(!temp.isChecked())
-			{	//Sprite sprite = temp.getSprite();
+			{	temp.setEnded();
+				//Sprite sprite = temp.getSprite();
 				//if(sprite.isEnded())
 					it.remove();
 			}
