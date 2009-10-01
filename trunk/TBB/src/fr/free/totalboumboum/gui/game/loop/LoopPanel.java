@@ -151,7 +151,7 @@ public class LoopPanel extends SimpleMenuPanel implements LoopRenderPanel
 					Dimension dim = Configuration.getVideoConfiguration().getPanelDimension();
 					g.fillRect(0,0,dim.width,dim.height);				
 				}
-				loop.drawLevel(g);
+				loop.draw(g);
 				g.dispose();
 
 				// copy the buffer on the panel

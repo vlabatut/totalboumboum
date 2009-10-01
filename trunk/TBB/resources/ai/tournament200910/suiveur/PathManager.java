@@ -26,6 +26,7 @@ import java.util.Iterator;
 import fr.free.totalboumboum.ai.adapter200910.communication.StopRequestException;
 import fr.free.totalboumboum.ai.adapter200910.data.AiHero;
 import fr.free.totalboumboum.ai.adapter200910.data.AiTile;
+import fr.free.totalboumboum.ai.adapter200910.data.AiZone;
 import fr.free.totalboumboum.ai.adapter200910.path.AiPath;
 import fr.free.totalboumboum.ai.adapter200910.path.astar.Astar;
 import fr.free.totalboumboum.ai.adapter200910.path.astar.cost.BasicCostCalculator;
@@ -46,11 +47,28 @@ public class PathManager
 	public PathManager(Suiveur ai, AiTile destination) throws StopRequestException
 	{	ai.checkInterruption(); //APPEL OBLIGATOIRE
 	
+		init(ai);
+		setDestination(destination);
+	}
+	
+	public PathManager(Suiveur ai, double x, double y) throws StopRequestException
+	{	ai.checkInterruption(); //APPEL OBLIGATOIRE
+	
+		init(ai);
+		setDestination(x,y);
+	}
+	
+	/**
+	 * initialise ce PathManager
+	 */
+	private void init(Suiveur ai) throws StopRequestException
+	{	ai.checkInterruption(); //APPEL OBLIGATOIRE
+		
 		this.ai = ai;
 		costCalculator = new BasicCostCalculator();
 		heuristicCalculator = new BasicHeuristicCalculator();
 		astar = new Astar(ai.getOwnHero(),costCalculator,heuristicCalculator);
-		setDestination(destination);
+		updatePrev();
 	}
 	
 	/////////////////////////////////////////////////////////////////
@@ -62,18 +80,45 @@ public class PathManager
 	/////////////////////////////////////////////////////////////////
 	// DESTINATION	/////////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
+	/** indique si le personnage est arrivé à destination */
+	private boolean arrived;
 	/** la case de destination */
-	private AiTile destination;
+	private AiTile tileDest;
+	/** l'abscisse de destination */
+	private double xDest;
+	/** l'ordonnée de destination */
+	private double yDest;
 	
 	/**
-	 * modifie la case de destination du personnage
+	 * modifie la case de destination du personnage,
+	 * place les coordonnées de destination au centre de cette case,
 	 * et recalcule le chemin.
 	 */
 	public void setDestination(AiTile destination) throws StopRequestException
 	{	ai.checkInterruption(); //APPEL OBLIGATOIRE
-	
-		this.destination = destination;
+		
+		arrived = false;
+		tileDest = destination;
+		xDest = tileDest.getPosX();
+		yDest = tileDest.getPosY();
 		path = astar.processShortestPath(ai.getCurrentTile(),destination);
+	}
+
+	/**
+	 * modifie les coordonnées de destination,
+	 * met à jour automatiquement la case correspondante,
+	 * et recalcule le chemin.
+	 */
+	public void setDestination(double x, double y) throws StopRequestException
+	{	ai.checkInterruption(); //APPEL OBLIGATOIRE
+		
+		arrived = false;
+		AiZone zone = ai.getZone();
+		double normalized[] = zone.normalizePosition(x, y);
+		xDest = normalized[0];
+		yDest = normalized[1];
+		tileDest = zone.getTile(xDest,yDest);
+		path = astar.processShortestPath(ai.getCurrentTile(),tileDest);
 	}
 
 	/*	public boolean hasArrived() throws StopRequestException
@@ -90,22 +135,56 @@ public class PathManager
 	 * détermine si le personnage est arrivé au centre de la case
 	 * passée en paramètre
 	 */
-	private boolean hasArrived(AiTile tile) throws StopRequestException
+/*	private boolean hasArrived(AiTile tile) throws StopRequestException
 	{	ai.checkInterruption(); //APPEL OBLIGATOIRE
 		
 		AiHero ownHero = ai.getOwnHero();
 		boolean result = ai.getZone().hasSamePixelPosition(ownHero,tile);
 		return result;
 	}
-
+*/
 	/**
-	 * détermine si le personnage est arrivé au centre de la case de destination
+	 * détermine si le personnage est arrivé aux coordonnées de destination
 	 */
 	public boolean hasArrived() throws StopRequestException
 	{	ai.checkInterruption(); //APPEL OBLIGATOIRE
 		
-		boolean result = hasArrived(destination);
-		return result;
+		if(!arrived)
+		{	// on teste si le personnage est à peu près situé à la position de destination 
+			AiZone zone = ai.getZone();
+			AiHero ownHero = ai.getOwnHero();
+			double xCurrent = ownHero.getPosX();
+			double yCurrent = ownHero.getPosY();
+			arrived = zone.hasSamePixelPosition(xCurrent,yCurrent,xDest,yDest);
+			// cas particulier : oscillation autour du point d'arrivée
+			if(!arrived)
+			{	Direction prevDir = zone.getDirection(xPrev,yPrev,xDest,yDest);
+				Direction currentDir = zone.getDirection(xCurrent,yCurrent,xDest,yDest);
+				arrived = prevDir.getOpposite()==currentDir;
+			}
+		}
+		
+		return arrived;
+	}
+
+	/////////////////////////////////////////////////////////////////
+	// PREVIOUS LOCATION	/////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	/** abscisse précédente */
+	private double xPrev;
+	/** ordonnée précédente */
+	private double yPrev;	
+	
+	/**
+	 * met à jour la position précédente du personnage,
+	 * exprimée en pixels
+	 */
+	private void updatePrev() throws StopRequestException
+	{	ai.checkInterruption(); //APPEL OBLIGATOIRE
+	
+		AiHero hero = ai.getOwnHero();
+		xPrev = hero.getPosX();
+		yPrev = hero.getPosY();		
 	}
 
 	/////////////////////////////////////////////////////////////////
@@ -125,14 +204,14 @@ public class PathManager
 	
 		AiTile currentTile = ai.getCurrentTile();
 		while(!path.isEmpty() && path.getTile(0)!=currentTile)
-			path.removeTile(0);		
+			path.removeTile(0);
 	}
 	
 	/**
 	 * détermine si le personnage a dépassé la première case du chemin
 	 * en direction de la seconde case
 	 */
-	private boolean hasCrossed(AiTile tile) throws StopRequestException
+/*	private boolean hasCrossed(AiTile tile) throws StopRequestException
 	{	ai.checkInterruption(); //APPEL OBLIGATOIRE
 	
 		boolean result = false;
@@ -155,12 +234,13 @@ public class PathManager
 				pos2 = target.getPosY();
 			}
 			result = pos0<=pos1 && pos1<=pos2 || pos0>=pos1 && pos1>=pos2;
-//TODO pb ici : l'encadrement est toujours vrai puisque le niveau est circulaire !
-			//p-ê carrément laisser tomber la contrainte de passer par le centre des cases ?
-			//et donner comme objectif une position en pixel (pvt être un centre)
 		}
 		return result;
 	}
+//TODO pb ici : l'encadrement est toujours vrai puisque le niveau est circulaire !
+			//p-ê carrément laisser tomber la contrainte de passer par le centre des cases ?
+			//et donner comme objectif une position en pixel (pvt être un centre)
+*/
 	
 	/** 
 	 * teste si le chemin est toujours valide, i.e. s'il
@@ -203,23 +283,21 @@ public class PathManager
 			checkIsOnPath();
 			// si le chemin est vide ou invalide, on le recalcule
 			if(path.isEmpty() || !checkPathValidity())
-				path = astar.processShortestPath(ai.getCurrentTile(),destination);
-			// si le chemin courant est non vide, on poursuit la route
-			if(!path.isEmpty())
-			{	AiTile tile = path.getTile(0);
-				// on teste si on est arrivé ou si on a dépassé la case suivante
-				if(hasArrived(tile) || hasCrossed(tile))
-				{	// si oui, on passe à la prochaine case
-					if(path.getLength()>1)
-						tile = path.getTile(1);
-					else
-						tile = null;					
-				}
-				// on détermine la direction vers la prochaine case
-				if(tile!=null)
-					result = ai.getZone().getDirection(ai.getOwnHero(),tile);
-			}
+				path = astar.processShortestPath(ai.getCurrentTile(),tileDest);
+			// s'il reste deux cases au moins dans le chemin, on se dirige vers la suivante
+			AiTile tile = null;
+			if(path.getLength()>1)
+				tile = path.getTile(1);
+			// sinon, s'il ne reste qu'une seule case, on va au centre
+			else if(path.getLength()>0)
+				tile = path.getTile(0);
+			// on détermine la direction du prochain déplacement
+			if(tile!=null)
+				result = ai.getZone().getDirection(ai.getOwnHero(),tile);			
 		}
+		
+		// mise à jour de la position précédente
+		updatePrev();
 		
 		if(verbose)
 		{	System.out.println(">>>>>>>>>> PATH MANAGER <<<<<<<<<<");

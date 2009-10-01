@@ -89,7 +89,7 @@ public class Player
 	}
 	
 	public void update(boolean aisPause)
-	{	if(ai!=null)
+	{	if(hasAi())
 			ai.update(aisPause);
 	}
 	
@@ -108,6 +108,10 @@ public class Player
 
 	public AbstractAiManager<?> getArtificialIntelligence()
 	{	return ai;
+	}
+	
+	public boolean hasAi()
+	{	return ai!=null;	
 	}
 
 	public Sprite getSprite()

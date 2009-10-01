@@ -45,7 +45,7 @@ import fr.free.totalboumboum.ai.adapter200910.path.astar.heuristic.HeuristicCalc
  * Le but est d'introduire une part de hasard dans les IA, de manière à les rendre moins prévisibles.
  */
 public class Astar
-{	private static boolean verbose = true;
+{	private static boolean verbose = false;
 
 	public Astar(AiHero hero, CostCalculator costCalculator, HeuristicCalculator heuristicCalculator)
 	{	this.hero = hero;
@@ -73,7 +73,7 @@ public class Astar
 	/** limite de coût (négatif = pas de limite) */
 	private int maxCost = -1;
 	/** limite de nombre de noeuds (négatif = pas de limite), pas configurable */
-	private int maxNodes = 100000;
+	private int maxNodes = 10000;
 	
 	/**
 	 * limite l'arbre de recherche à une hauteur de maxHeight,
