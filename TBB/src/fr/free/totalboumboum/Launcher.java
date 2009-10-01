@@ -1048,9 +1048,10 @@ public class Launcher
 	 * - tester la fonction traversable (tile)
 	 * - tester la fonction update abilities (hero)
 	 * 
-	 * - màj l'affichage de la pause d'IA, màj dans le sujet aussi
-	 * - faire fuir l'IA suiveuse quand nécessaire
-	 * - nécessaire de stocker dans AiZone tous les blasts ?
+	 * - compléter l'IA dans safety manager (trouver une case sure)
+	 * - quand l'ia meurt et revient grace à une vie, elle n'a plus le control du personnage
+	 * - bug : j'ai vu l'ia prendre une vie, mourir, relacher la vie, et revenir. 
+	 * 	 et la vie était foncionnelle : je l'ai prise, je suis mort, je suis revenu (sans la relacher cette fois)
 	 * - optimisation de l'API IA:
 	 * 		- faire une seule mise à jour pour les données communes à tous les joueurs
 	 * 			>> difficile à mettre en oeuvre car les IA récupèrent des objets différents pr représenter les sprites

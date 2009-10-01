@@ -21,6 +21,8 @@ package tournament200910.suiveur;
  * 
  */
 
+import java.util.ArrayList;
+
 import fr.free.totalboumboum.ai.adapter200910.ArtificialIntelligence;
 import fr.free.totalboumboum.ai.adapter200910.communication.AiAction;
 import fr.free.totalboumboum.ai.adapter200910.communication.AiActionName;
@@ -36,9 +38,8 @@ import fr.free.totalboumboum.engine.content.feature.Direction;
  * suivre partout où elle va.
  */
 public class Suiveur extends ArtificialIntelligence 
-{
-	private boolean first = true;
-	
+{	
+	@Override
 	public AiAction processAction() throws StopRequestException
 	{	checkInterruption(); //APPEL OBLIGATOIRE
 
@@ -52,49 +53,87 @@ public class Suiveur extends ArtificialIntelligence
 			currentTile = ownHero.getTile();
 			currentX = ownHero.getPosX();
 			currentY = ownHero.getPosY();
+			Direction moveDir = Direction.NONE;
 			
 			// premier appel : on initialise		
 			if(first)
-			{	first = false;
-				AiTile destination = zone.getTile(6,8);
-				pathManager = new PathManager(this,destination);
-				safetyManager = new SafetyManager(this);
-			}
+				init();
 			
 			// on met à jour le gestionnaire de sécurité
 			safetyManager.update();
-			// on calcule la direction de déplacement
-			Direction moveDir = pathManager.update();
+			// si on est en train de fuir : on continue
+			if(escapePathManager!=null)
+			{	moveDir = escapePathManager.update();
+				if(escapePathManager.hasArrived())
+					escapePathManager = null;				
+			}
+			// sinon si on est en danger : on commence à fuir
+			else if(!safetyManager.isSafe(currentTile))
+			{	AiTile safeTile = safetyManager.findSafeTile(currentTile);
+				escapePathManager = new PathManager(this,safeTile);
+				moveDir = escapePathManager.update();
+			}
+			// sinon on se déplace vers la cible
+			else
+			{	// on met la cible à jour
+				updateTarget();
+				if(target!=null)
+					moveDir = targetPathManager.update();			
+			}
 			result = new AiAction(AiActionName.MOVE,moveDir);
 		}
 		
 		return result;
 	}
+	
+	/////////////////////////////////////////////////////////////////
+	// INITIALISATION			/////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	/** variable utilisée uniquement lors de l'initialisation */
+	private boolean first = true;
+
+	private void init() throws StopRequestException
+	{	checkInterruption(); //APPEL OBLIGATOIRE
+
+		first = false;
+		safetyManager = new SafetyManager(this);
+	}
 
 	/////////////////////////////////////////////////////////////////
 	// PATH MANAGER				/////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	/** classe chargée du déplacement du personnage */
-	private PathManager pathManager = null;
-
+	/** classe chargée du déplacement vers la cible */
+	private PathManager targetPathManager = null;
+	/** classe chargée de la fuite du personnage */
+	private PathManager escapePathManager = null;
+	
 	/////////////////////////////////////////////////////////////////
 	// SAFETY MANAGER				/////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	/** classe chargée de déterminer quelles cases sont sûres */
 	private SafetyManager safetyManager = null;
 
+	/**
+	 * renvoie le gestionnaire de sécurité
+	 */
 	public SafetyManager getSafetyManager() throws StopRequestException
 	{	checkInterruption(); //APPEL OBLIGATOIRE
 	
 		return safetyManager;		
 	}
 	
+	/**
+	 * renvoie le niveau de sécurité de la case passée en paramètre
+	 */
 	public double getSafetyLevel(AiTile tile) throws StopRequestException
 	{	checkInterruption(); //APPEL OBLIGATOIRE
 	
 		return safetyManager.getSafetyLevel(tile);		
 	}
 	
+	/**
+	 * détermine si la case passée en paramètre est sûre
+	 */
 	public boolean isSafe(AiTile tile) throws StopRequestException
 	{	checkInterruption(); //APPEL OBLIGATOIRE
 			
@@ -107,6 +146,9 @@ public class Suiveur extends ArtificialIntelligence
 	/** la case occupée actuellement par le personnage */
 	private AiTile currentTile = null;
 
+	/**
+	 * renvoie la case courante
+	 */
 	public AiTile getCurrentTile() throws StopRequestException
 	{	checkInterruption(); //APPEL OBLIGATOIRE
 	
@@ -121,12 +163,18 @@ public class Suiveur extends ArtificialIntelligence
 	/** la position en pixels occupée actuellement par le personnage */
 	private double currentY;
 
+	/**
+	 * renvoie l'abscisse courante (en pixels)
+	 */
 	public double getCurrentX() throws StopRequestException
 	{	checkInterruption(); //APPEL OBLIGATOIRE
 	
 		return currentX;
 	}
 	
+	/**
+	 * renvoie l'ordonnée courante (en pixels)
+	 */
 	public double getCurrentY() throws StopRequestException
 	{	checkInterruption(); //APPEL OBLIGATOIRE
 	
@@ -139,6 +187,9 @@ public class Suiveur extends ArtificialIntelligence
 	/** le personnage dirigé par cette IA */
 	private AiHero ownHero;
 
+	/**
+	 * renvoie le personnage contrôlé par cette IA
+	 */
 	public AiHero getOwnHero() throws StopRequestException
 	{	checkInterruption(); //APPEL OBLIGATOIRE
 	
@@ -151,9 +202,60 @@ public class Suiveur extends ArtificialIntelligence
 	/** la zone de jeu */
 	private AiZone zone;
 
+	/**
+	 * renvoie la zone de jeu
+	 */
 	public AiZone getZone() throws StopRequestException
 	{	checkInterruption(); //APPEL OBLIGATOIRE
 	
 		return zone;
+	}
+
+	/////////////////////////////////////////////////////////////////
+	// TARGET					/////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	/** la cible à suivre (ou null si aucune cible n'existe) */
+	private AiHero target;
+	/** case précédente de la cible */
+	private AiTile targetPreviousTile;
+	
+	/**
+	 * choisit aléatoirement un joueur comme cible à suivre
+	 */
+	private void chooseTarget() throws StopRequestException
+	{	checkInterruption(); //APPEL OBLIGATOIRE
+	
+		target = null;
+		ArrayList<AiHero> heroes = new ArrayList<AiHero>(zone.getHeroes());
+		heroes.remove(ownHero);
+		if(!heroes.isEmpty())
+		{	int index = (int)Math.random()*heroes.size();
+			target = heroes.get(index);
+		}
+	}
+
+	/**
+	 * met à jour la cible, et éventuellement le chemin jusqu'à elle
+	 */
+	private void updateTarget() throws StopRequestException
+	{	checkInterruption(); //APPEL OBLIGATOIRE
+	
+		if(target==null || target.hasEnded())
+		{	chooseTarget();
+			if(target!=null)
+			{	targetPreviousTile = target.getTile(); 
+//				double targetX = target.getPosX();
+//				double targetY = target.getPosY();
+//				targetPathManager = new PathManager(this,targetX,targetY);				
+				targetPathManager = new PathManager(this,targetPreviousTile);
+			}
+		}
+		else
+		{	AiTile targetCurrentTile = target.getTile();
+			if(targetCurrentTile!=targetPreviousTile)
+			{	targetPathManager = new PathManager(this,targetCurrentTile);
+				targetPreviousTile = targetCurrentTile;				
+			}			
+		}
 	}
 }
