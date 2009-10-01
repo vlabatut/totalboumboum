@@ -199,6 +199,21 @@ public class AiZone
 	}
 	
 	/**
+	 * renvoie la case qui contient le pixel passé en paramètre
+	 *   
+	 *  @param	x	abscisse du pixel concerné
+	 *  @param	y	ordonnée du pixel concerné
+	 *  @return	case contenant le pixel situé aux coordonnées spécifiées en paramètres
+	 */
+	public AiTile getTile(double x, double y)
+	{	Tile tile = level.getTile(x, y);
+		int line = tile.getLine();
+		int col = tile.getCol();
+		AiTile result = matrix[line][col];
+		return result;
+	}
+	
+	/**
 	 * renvoie le voisin de la case passée en paramètre, situé dans la direction
 	 * passée en paramètre.
 	 * <p>
@@ -871,6 +886,99 @@ public class AiZone
 	// PIXEL DELTAS				/////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 
+	/////////////////////////////////////////////////////////////////
+	// COORDINATE NORMALIZING	/////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	/**
+	 * prend n'importe quelles coordonnées exprimées en pixels et les normalise
+	 * de manière à ce qu'elles appartiennent à la zone de jeu. Si les coordonnées
+	 * désignent une position située en dehors de la zone de jeu, cette méthode
+	 * utilise la propriété cyclique du niveau pour déterminer une position
+	 * équivalente située dans le niveau.
+	 * 
+	 * @param x	abscisse
+	 * @param y	ordonnée
+	 * @return	un tableau contenant les versions normalisées de x et y
+	 */
+	public double[] normalizePosition(double x, double y)
+	{	return level.normalizePosition(x, y);
+	}
+
+	/**
+	 * prend n'importe quelle abscisse exprimée en pixels et la normalise
+	 * de manière à ce qu'elle appartienne à la zone de jeu. Si la coordonnée
+	 * désigne une position située en dehors de la zone de jeu, cette méthode
+	 * utilise la propriété cyclique du niveau (i.e. le côté gauche et le
+	 * côté droit sont reliés) pour déterminer une position
+	 * équivalente située dans le niveau.
+	 * 
+	 * @param x	abscisse
+	 * @return	la version normalisée de x
+	 */
+	public double normalizePositionX(double x)
+	{	return level.normalizePositionX(x);
+	}
+	
+	/**
+	 * prend n'importe quelle ordonnée exprimée en pixels et la normalise
+	 * de manière à ce qu'elle appartienne à la zone de jeu. Si la coordonnée
+	 * désigne une position située en dehors de la zone de jeu, cette méthode
+	 * utilise la propriété cyclique du niveau (i.e. le côté haut et le
+	 * côté bas sont reliés) pour déterminer une position
+	 * équivalente située dans le niveau.
+	 * 
+	 * @param y	ordonnée
+	 * @return	la version normalisée de y
+	 */
+	public double normalizePositionY(double y)
+	{	return level.normalizePositionY(y);
+	}
+	
+	/**
+	 * prend n'importe quelles coordonnées exprimées en cases et les normalise
+	 * de manière à ce qu'elles appartiennent à la zone de jeu. Si les coordonnées
+	 * désignent une position située en dehors de la zone de jeu, cette méthode
+	 * utilise la propriété cyclique du niveau pour déterminer une position
+	 * équivalente située dans le niveau.
+	 * 
+	 * @param line	ligne de la case
+	 * @param col	colonne de la case
+	 * @return	un tableau contenant les versions normalisées de line et col
+	 */
+	public int[] normalizePosition(int line, int col)
+	{	return level.normalizePosition(line, col);
+	}
+
+	/**
+	 * prend n'importe quelle abscisse exprimée en cases et la normalise
+	 * de manière à ce qu'elle appartienne à la zone de jeu. Si la coordonnée
+	 * désigne une position située en dehors de la zone de jeu, cette méthode
+	 * utilise la propriété cyclique du niveau (i.e. le côté gauche et le
+	 * côté droit sont reliés) pour déterminer une position
+	 * équivalente située dans le niveau.
+	 * 
+	 * @param col	colonne de la case
+	 * @return	la version normalisée de col
+	 */
+	public int normalizePositionCol(int col)
+	{	return level.normalizePositionCol(col);
+	}
+
+	/**
+	 * prend n'importe quelle ordonnée exprimée en cases et la normalise
+	 * de manière à ce qu'elle appartienne à la zone de jeu. Si la coordonnée
+	 * désigne une position située en dehors de la zone de jeu, cette méthode
+	 * utilise la propriété cyclique du niveau (i.e. le côté haut et le
+	 * côté bas sont reliés) pour déterminer une position
+	 * équivalente située dans le niveau.
+	 * 
+	 * @param line	ligne de la case
+	 * @return	la version normalisée de line
+	 */
+	public int normalizePositionLine(int line)
+	{	return level.normalizePositionLine(line);
+	}
+	
 	/////////////////////////////////////////////////////////////////
 	// SAME PIXEL POSITION		/////////////////////////////////////
 	/////////////////////////////////////////////////////////////////

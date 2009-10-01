@@ -21,11 +21,16 @@ package fr.free.totalboumboum.engine.loop;
  * 
  */
 
+import java.awt.Color;
+import java.awt.Font;
+import java.awt.FontMetrics;
 import java.awt.Graphics;
+import java.awt.geom.Rectangle2D;
 import java.io.File;
 import java.io.IOException;
 import java.io.Serializable;
 import java.lang.reflect.InvocationTargetException;
+import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Collections;
@@ -69,6 +74,7 @@ import fr.free.totalboumboum.engine.player.PlayerLocation;
 import fr.free.totalboumboum.game.round.Round;
 import fr.free.totalboumboum.game.statistics.StatisticEvent;
 import fr.free.totalboumboum.tools.FileTools;
+import fr.free.totalboumboum.tools.StringTools;
 
 public class Loop implements Runnable, Serializable
 {	private static final long serialVersionUID = 1L;
@@ -133,6 +139,7 @@ public class Loop implements Runnable, Serializable
 			Profile profile = i.next();
 			Player player = new Player(profile,base,bombsetMap,tile);
 			players.add(player);
+			pauseAis.add(false);
 			// level
 			Hero hero = (Hero)player.getSprite();
 //			level.addHero(hero,pl.getLine(),pl.getCol());
@@ -182,7 +189,7 @@ public class Loop implements Runnable, Serializable
 	private boolean showTime = false;
 	private boolean showFPS = false;
 	private boolean pauseEngine = false;
-	private boolean pauseAis = false;
+	private final ArrayList<Boolean> pauseAis = new ArrayList<Boolean>();
 	private Lock debugLock = new ReentrantLock();
 
 	public void setShowGrid(boolean showGrid)
@@ -276,15 +283,21 @@ public class Loop implements Runnable, Serializable
 		return result;
 	}
 
-	public void setAisPause(boolean pauseAis)
+	public void switchAiPause(int index)
 	{	debugLock.lock();
-		this.pauseAis = pauseAis;		
+		boolean pause = pauseAis.get(index);
+		if(pause)
+			pause = false;
+		else if(players.get(index).getArtificialIntelligence()!=null)
+			pause = true;
+		pauseAis.set(index,pause);
 		debugLock.unlock();
 	}
-	public boolean getAisPause()
+		
+	public boolean getAiPause(int index)
 	{	boolean result;
 		debugLock.lock();
-		result = pauseAis;
+		result = pauseAis.get(index);
 		debugLock.unlock();
 		return result;
 	}
@@ -569,21 +582,16 @@ System.out.println();
 			
 			// update AIs
 			if(hasStarted) // only after the round has started
-			{	boolean aisPause = getAisPause();
-				Iterator<Player> i = players.iterator();
-				while(i.hasNext())
-				{	Player temp = i.next();
-					if(!temp.isOut())
-						temp.update(aisPause);
+			{	for(int i=0;i<players.size();i++)
+				{	Player player = players.get(i);
+					boolean aiPause = pauseAis.get(i);
+					if(!player.isOut())
+						player.update(aiPause);
 				}
 			}
 		}
 	}
 
-	public void drawLevel(Graphics g)
-	{	level.draw(g);
-	}
-	
 	public double getAverageFPS()
 	{	return averageFPS;	
 	}
@@ -809,6 +817,123 @@ System.out.println();
 		sprite.processEvent(event);
 	}
 
+	/////////////////////////////////////////////////////////////////
+	// DRAW				/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	public void draw(Graphics g)
+	{	level.draw(g);
+
+		if(getShowSpeed())
+			drawSpeed(g);
+		if(getShowTime())
+			drawTime(g);
+		if(getShowFPS())
+			drawFPS(g);
+		if(getEnginePause())
+			drawEnginePause(g);
+
+		drawAisPause(g);
+	}
+	
+	private void drawSpeed(Graphics g)
+	{	g.setColor(Color.CYAN);
+		Font font = new Font("Dialog", Font.PLAIN, 18);
+		g.setFont(font);
+		FontMetrics metrics = g.getFontMetrics(font);
+		String text = "Speed: "+Configuration.getEngineConfiguration().getSpeedCoeff();
+		Rectangle2D box = metrics.getStringBounds(text, g);
+		int x = 10;
+		int y = (int)Math.round(10+box.getHeight()/2);
+		g.drawString(text, x, y);
+	}
+	
+	private void drawTime(Graphics g)
+	{	// loop time
+		{	g.setColor(Color.CYAN);
+			Font font = new Font("Dialog", Font.PLAIN, 18);
+			g.setFont(font);
+			FontMetrics metrics = g.getFontMetrics(font);
+			long time = getTotalTime();
+			String text = "Time: "+StringTools.formatTimeWithHours(time);
+			Rectangle2D box = metrics.getStringBounds(text, g);
+			int x = 10;
+			int y = (int)Math.round(30+box.getHeight()/2);
+			g.drawString(text, x, y);
+		}
+/*		
+		// engine time
+		{	g.setColor(Color.GREEN);
+			Font font = new Font("Dialog", Font.PLAIN, 18);
+			g.setFont(font);
+			FontMetrics metrics = g.getFontMetrics(font);
+			String text = "Time: "+StringTools.formatTimeWithHours(time);
+			Rectangle2D box = metrics.getStringBounds(text, g);
+			int x = 10;
+			int y = (int)Math.round(50+box.getHeight()/2);
+			g.drawString(text, x, y);
+		}
+		// actual time
+		{	g.setColor(Color.MAGENTA);
+			Font font = new Font("Dialog", Font.PLAIN, 18);
+			g.setFont(font);
+			FontMetrics metrics = g.getFontMetrics(font);
+			long time = System.currentTimeMillis()-startTime;
+			String text = "Time: "+StringTools.formatTimeWithHours(time);
+			Rectangle2D box = metrics.getStringBounds(text, g);
+			int x = 10;
+			int y = (int)Math.round(70+box.getHeight()/2);
+			g.drawString(text, x, y);
+		}
+*/		
+	}
+
+	private void drawFPS(Graphics g)
+	{	g.setColor(Color.CYAN);
+		Font font = new Font("Dialog", Font.PLAIN, 18);
+		g.setFont(font);
+		FontMetrics metrics = g.getFontMetrics(font);
+		NumberFormat nf = NumberFormat.getInstance();
+		nf.setMaximumFractionDigits(2);
+		nf.setMinimumFractionDigits(2);
+		double fps = getAverageFPS();
+		String fpsStr = nf.format(fps); 
+		double ups = getAverageUPS();
+		String upsStr = nf.format(ups);
+		String thFps = Integer.toString(Configuration.getEngineConfiguration().getFps());
+		String text = "FPS/UPS/Th: "+fpsStr+"/"+upsStr+"/"+thFps;
+		Rectangle2D box = metrics.getStringBounds(text, g);
+		int x = 10;
+		int y = (int)Math.round(50+box.getHeight()/2);
+		g.drawString(text, x, y);
+	}
+
+	private void drawEnginePause(Graphics g)
+	{	g.setColor(Color.MAGENTA);
+		Font font = new Font("Dialog", Font.PLAIN, 18);
+		g.setFont(font);
+		FontMetrics metrics = g.getFontMetrics(font);
+		String text = "Engine paused";
+		Rectangle2D box = metrics.getStringBounds(text, g);
+		int x = 10;
+		int y = (int)Math.round(70+box.getHeight()/2);
+		g.drawString(text, x, y);
+	}
+
+	private void drawAisPause(Graphics g)
+	{	g.setColor(Color.MAGENTA);
+	
+	
+	
+		Font font = new Font("Dialog", Font.PLAIN, 18);
+		g.setFont(font);
+		FontMetrics metrics = g.getFontMetrics(font);
+		String text = "AIs paused";
+		Rectangle2D box = metrics.getStringBounds(text, g);
+		int x = 10;
+		int y = (int)Math.round(90+box.getHeight()/2);
+		g.drawString(text, x, y);
+	}
+	
 	/////////////////////////////////////////////////////////////////
 	// FINISHED			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////

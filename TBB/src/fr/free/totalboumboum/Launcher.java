@@ -1047,5 +1047,13 @@ public class Launcher
 	 * - tester la fonction de speed (hero)
 	 * - tester la fonction traversable (tile)
 	 * - tester la fonction update abilities (hero)
+	 * 
+	 * - màj l'affichage de la pause d'IA, màj dans le sujet aussi
+	 * - faire fuir l'IA suiveuse quand nécessaire
+	 * - nécessaire de stocker dans AiZone tous les blasts ?
+	 * - optimisation de l'API IA:
+	 * 		- faire une seule mise à jour pour les données communes à tous les joueurs
+	 * 			>> difficile à mettre en oeuvre car les IA récupèrent des objets différents pr représenter les sprites
+	 * 		- les IA ont-elles vraiment besoin d'être raffraichies si souvent ? >> non! réduire le taux de raffraichissement 
 	 */
 }

@@ -97,9 +97,37 @@ public class SystemControl implements KeyListener
 			else if ((keyCode == KeyEvent.VK_END))
 			{	loop.setEnginePause(!loop.getEnginePause());
 			}
+			
 			// debug : AIs pause
-			else if ((keyCode == KeyEvent.VK_HOME))
-			{	loop.setAisPause(!loop.getAisPause());
+			else if ((keyCode == KeyEvent.VK_1))
+			{	loop.switchAiPause(0);
+			}
+			else if ((keyCode == KeyEvent.VK_2))
+			{	loop.switchAiPause(1);
+			}
+			else if ((keyCode == KeyEvent.VK_3))
+			{	loop.switchAiPause(2);
+			}
+			else if ((keyCode == KeyEvent.VK_4))
+			{	loop.switchAiPause(3);
+			}
+			else if ((keyCode == KeyEvent.VK_5))
+			{	loop.switchAiPause(4);
+			}
+			else if ((keyCode == KeyEvent.VK_6))
+			{	loop.switchAiPause(5);
+			}
+			else if ((keyCode == KeyEvent.VK_7))
+			{	loop.switchAiPause(6);
+			}
+			else if ((keyCode == KeyEvent.VK_8))
+			{	loop.switchAiPause(7);
+			}
+			else if ((keyCode == KeyEvent.VK_9))
+			{	loop.switchAiPause(8);
+			}
+			else if ((keyCode == KeyEvent.VK_0))
+			{	loop.switchAiPause(9);
 			}
 		}
 	}

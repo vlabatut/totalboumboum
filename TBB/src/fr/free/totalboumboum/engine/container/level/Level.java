@@ -26,12 +26,10 @@ import java.awt.Font;
 import java.awt.FontMetrics;
 import java.awt.Graphics;
 import java.awt.geom.Rectangle2D;
-import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
-import fr.free.totalboumboum.configuration.Configuration;
 import fr.free.totalboumboum.configuration.GameVariables;
 import fr.free.totalboumboum.engine.container.bombset.Bombset;
 import fr.free.totalboumboum.engine.container.fireset.FiresetMap;
@@ -47,7 +45,6 @@ import fr.free.totalboumboum.engine.content.sprite.Sprite;
 import fr.free.totalboumboum.engine.loop.Loop;
 import fr.free.totalboumboum.gui.tools.MessageDisplayer;
 import fr.free.totalboumboum.tools.CalculusTools;
-import fr.free.totalboumboum.tools.StringTools;
 
 public class Level
 {	public Level(Loop loop)				
@@ -854,27 +851,18 @@ public class Level
 				matrix[line][col].updateSprites(Role.HERO);		
 	}
 
+	//NOTE optimisation : à effectuer seulement pour les tiles visibles
 	public void draw(Graphics g)
 	{	drawLevel(g);
+		
 		if(loop.getShowGrid())
 			drawGrid(g);
 		if(loop.getShowTilesPositions()>0)
 			drawTilesPositions(g);
-		if(loop.getShowSpeed())
-			drawSpeed(g);
-		if(loop.getShowTime())
-			drawTime(g);
-		if(loop.getShowFPS())
-			drawFPS(g);
-		if(loop.getEnginePause())
-			drawEnginePause(g);
-		if(loop.getAisPause())
-			drawAisPause(g);
 		if(messageDisplayer!=null)
 			drawDisplayedText(g);
 	}
 
-	//NOTE optimisation : à effectuer seulement pour les tiles visibles
 	private void drawLevel(Graphics g)
 	{	// only the on-ground flat sprites (they don't have shadow)
 		for(int line=0;line<globalHeight;line++)
@@ -990,102 +978,6 @@ public class Level
 		}
 	}
 		
-	private void drawSpeed(Graphics g)
-	{	g.setColor(Color.CYAN);
-		Font font = new Font("Dialog", Font.PLAIN, 18);
-		g.setFont(font);
-		FontMetrics metrics = g.getFontMetrics(font);
-		String text = "Speed: "+Configuration.getEngineConfiguration().getSpeedCoeff();
-		Rectangle2D box = metrics.getStringBounds(text, g);
-		int x = 10;
-		int y = (int)Math.round(10+box.getHeight()/2);
-		g.drawString(text, x, y);
-	}
-	
-	private void drawTime(Graphics g)
-	{	// loop time
-		{	g.setColor(Color.CYAN);
-			Font font = new Font("Dialog", Font.PLAIN, 18);
-			g.setFont(font);
-			FontMetrics metrics = g.getFontMetrics(font);
-			long time = loop.getTotalTime();
-			String text = "Time: "+StringTools.formatTimeWithHours(time);
-			Rectangle2D box = metrics.getStringBounds(text, g);
-			int x = 10;
-			int y = (int)Math.round(30+box.getHeight()/2);
-			g.drawString(text, x, y);
-		}
-/*		
-		// engine time
-		{	g.setColor(Color.GREEN);
-			Font font = new Font("Dialog", Font.PLAIN, 18);
-			g.setFont(font);
-			FontMetrics metrics = g.getFontMetrics(font);
-			String text = "Time: "+StringTools.formatTimeWithHours(time);
-			Rectangle2D box = metrics.getStringBounds(text, g);
-			int x = 10;
-			int y = (int)Math.round(50+box.getHeight()/2);
-			g.drawString(text, x, y);
-		}
-		// actual time
-		{	g.setColor(Color.MAGENTA);
-			Font font = new Font("Dialog", Font.PLAIN, 18);
-			g.setFont(font);
-			FontMetrics metrics = g.getFontMetrics(font);
-			long time = System.currentTimeMillis()-startTime;
-			String text = "Time: "+StringTools.formatTimeWithHours(time);
-			Rectangle2D box = metrics.getStringBounds(text, g);
-			int x = 10;
-			int y = (int)Math.round(70+box.getHeight()/2);
-			g.drawString(text, x, y);
-		}
-*/		
-	}
-
-	private void drawFPS(Graphics g)
-	{	g.setColor(Color.CYAN);
-		Font font = new Font("Dialog", Font.PLAIN, 18);
-		g.setFont(font);
-		FontMetrics metrics = g.getFontMetrics(font);
-		NumberFormat nf = NumberFormat.getInstance();
-		nf.setMaximumFractionDigits(2);
-		nf.setMinimumFractionDigits(2);
-		double fps = loop.getAverageFPS();
-		String fpsStr = nf.format(fps); 
-		double ups = loop.getAverageUPS();
-		String upsStr = nf.format(ups);
-		String thFps = Integer.toString(Configuration.getEngineConfiguration().getFps());
-		String text = "FPS/UPS/Th: "+fpsStr+"/"+upsStr+"/"+thFps;
-		Rectangle2D box = metrics.getStringBounds(text, g);
-		int x = 10;
-		int y = (int)Math.round(50+box.getHeight()/2);
-		g.drawString(text, x, y);
-	}
-
-	private void drawEnginePause(Graphics g)
-	{	g.setColor(Color.MAGENTA);
-		Font font = new Font("Dialog", Font.PLAIN, 18);
-		g.setFont(font);
-		FontMetrics metrics = g.getFontMetrics(font);
-		String text = "Engine paused";
-		Rectangle2D box = metrics.getStringBounds(text, g);
-		int x = 10;
-		int y = (int)Math.round(70+box.getHeight()/2);
-		g.drawString(text, x, y);
-	}
-
-	private void drawAisPause(Graphics g)
-	{	g.setColor(Color.MAGENTA);
-		Font font = new Font("Dialog", Font.PLAIN, 18);
-		g.setFont(font);
-		FontMetrics metrics = g.getFontMetrics(font);
-		String text = "AIs paused";
-		Rectangle2D box = metrics.getStringBounds(text, g);
-		int x = 10;
-		int y = (int)Math.round(90+box.getHeight()/2);
-		g.drawString(text, x, y);
-	}
-
 	/////////////////////////////////////////////////////////////////
 	// EVENTS				/////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
