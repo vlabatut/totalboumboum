@@ -845,7 +845,8 @@ public class Launcher
 	 * - instance SBM1 plus complète (items, niveaux officiels, nouveaux niveaux custom)
 	 * - meilleure gestion des items initiaux (effectivement distribués au start)
 	 * - correction dans les gestion des blocs spawn
-	 * 
+	 * - mise à jour et révision de la strucutre de données de l'API d'IA
+	 * - implémentation de A* dans l'API d'IA
 	 */
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -1049,6 +1050,7 @@ public class Launcher
 	 * - tester la fonction update abilities (hero)
 	 * 
 	 * - compléter l'IA dans safety manager (trouver une case sure)
+	 * 	 utiliser une matrice de cout basée sur la matrice de sécurité+blocs ?
 	 * - quand l'ia meurt et revient grace à une vie, elle n'a plus le control du personnage
 	 * - bug : j'ai vu l'ia prendre une vie, mourir, relacher la vie, et revenir. 
 	 * 	 et la vie était foncionnelle : je l'ai prise, je suis mort, je suis revenu (sans la relacher cette fois)
