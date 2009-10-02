@@ -55,79 +55,109 @@ public class SystemControl implements KeyListener
 				loop.setCanceled(true);
 			
 			// faire renaitre le bonhomme
-			else if ((keyCode == KeyEvent.VK_1))
-			{	//TODO à adapter car ça peut être intéressant pour le débug
+//			else if(keyCode == KeyEvent.VK_1)
+//			{	//TODO à adapter car ça peut être intéressant pour le débug
 				//loop.rebirth();
-			}
+//			}
 
 			// debug : modifier la vitesse
-			else if ((keyCode == KeyEvent.VK_PAGE_UP))
+			else if(keyCode == KeyEvent.VK_PAGE_UP)
 			{	Configuration.getEngineConfiguration().setSpeedCoeff(Configuration.getEngineConfiguration().getSpeedCoeff()*2);
 			}
-			else if ((keyCode == KeyEvent.VK_PAGE_DOWN))
+			else if(keyCode == KeyEvent.VK_PAGE_DOWN)
 			{	Configuration.getEngineConfiguration().setSpeedCoeff(Configuration.getEngineConfiguration().getSpeedCoeff()/2);
 			}
 
 			// debug : grille
-			else if ((keyCode == KeyEvent.VK_F1))
+			else if(keyCode == KeyEvent.VK_F1)
 			{	loop.setShowGrid(!loop.getShowGrid());
 			}
 			// debug : tiles positions
-			else if ((keyCode == KeyEvent.VK_F2))
-			{	loop.setShowTilesPositions((loop.getShowTilesPositions()+1)%3);
+			else if(keyCode == KeyEvent.VK_F2)
+			{	loop.switchShowTilesPositions();
 			}
 			// debug : sprites positions
-			else if ((keyCode == KeyEvent.VK_F3))
-			{	loop.setShowSpritesPositions((loop.getShowSpritesPositions()+1)%3);
+			else if(keyCode == KeyEvent.VK_F3)
+			{	loop.switchShowSpritesPositions();
 			}
 			// debug : FPS/UPS
-			else if ((keyCode == KeyEvent.VK_F4))
-			{	loop.setShowFPS(!loop.getShowFPS());
+			else if(keyCode == KeyEvent.VK_F4)
+			{	loop.switchShowFPS();
 			}
 			// debug : speed coeff
-			else if ((keyCode == KeyEvent.VK_F5))
-			{	loop.setShowSpeed(!loop.getShowSpeed());
+			else if(keyCode == KeyEvent.VK_F5)
+			{	loop.switchShowSpeed();
 			}
 			// debug : time
-			else if ((keyCode == KeyEvent.VK_F6))
-			{	loop.setShowTime(!loop.getShowTime());
+			else if(keyCode == KeyEvent.VK_F6)
+			{	loop.switchShowTime();
 			}
 			
 			// debug : engine pause
-			else if ((keyCode == KeyEvent.VK_END))
-			{	loop.setEnginePause(!loop.getEnginePause());
+			else if(keyCode == KeyEvent.VK_END)
+			{	loop.switchEnginePause();
 			}
 			
 			// debug : AIs pause
-			else if ((keyCode == KeyEvent.VK_1))
-			{	loop.switchAiPause(0);
+			else if(keyCode == KeyEvent.VK_1)
+			{	if(keysPressed.containsKey(KeyEvent.VK_SHIFT))
+					loop.switchAiPause(0);
+				else
+					loop.switchShowAiInfo(0);
 			}
-			else if ((keyCode == KeyEvent.VK_2))
-			{	loop.switchAiPause(1);
+			else if(keyCode == KeyEvent.VK_2)
+			{	if(keysPressed.containsKey(KeyEvent.VK_SHIFT))
+					loop.switchAiPause(1);
+				else
+					loop.switchShowAiInfo(1);
 			}
-			else if ((keyCode == KeyEvent.VK_3))
-			{	loop.switchAiPause(2);
+			else if(keyCode == KeyEvent.VK_3)
+			{	if(keysPressed.containsKey(KeyEvent.VK_SHIFT))
+					loop.switchAiPause(2);
+				else
+					loop.switchShowAiInfo(2);
 			}
-			else if ((keyCode == KeyEvent.VK_4))
-			{	loop.switchAiPause(3);
+			else if(keyCode == KeyEvent.VK_4)
+			{	if(keysPressed.containsKey(KeyEvent.VK_SHIFT))
+					loop.switchAiPause(3);
+				else
+					loop.switchShowAiInfo(3);
 			}
-			else if ((keyCode == KeyEvent.VK_5))
-			{	loop.switchAiPause(4);
+			else if(keyCode == KeyEvent.VK_5)
+			{	if(keysPressed.containsKey(KeyEvent.VK_SHIFT))
+					loop.switchAiPause(4);
+				else
+					loop.switchShowAiInfo(4);
 			}
-			else if ((keyCode == KeyEvent.VK_6))
-			{	loop.switchAiPause(5);
+			else if(keyCode == KeyEvent.VK_6)
+			{	if(keysPressed.containsKey(KeyEvent.VK_SHIFT))
+					loop.switchAiPause(5);
+				else
+					loop.switchShowAiInfo(5);
 			}
-			else if ((keyCode == KeyEvent.VK_7))
-			{	loop.switchAiPause(6);
+			else if(keyCode == KeyEvent.VK_7)
+			{	if(keysPressed.containsKey(KeyEvent.VK_SHIFT))
+					loop.switchAiPause(6);
+				else
+					loop.switchShowAiInfo(6);
 			}
-			else if ((keyCode == KeyEvent.VK_8))
-			{	loop.switchAiPause(7);
+			else if(keyCode == KeyEvent.VK_8)
+			{	if(keysPressed.containsKey(KeyEvent.VK_SHIFT))
+					loop.switchAiPause(7);
+				else
+					loop.switchShowAiInfo(7);
 			}
-			else if ((keyCode == KeyEvent.VK_9))
-			{	loop.switchAiPause(8);
+			else if(keyCode == KeyEvent.VK_9)
+			{	if(keysPressed.containsKey(KeyEvent.VK_SHIFT))
+					loop.switchAiPause(8);
+				else
+					loop.switchShowAiInfo(8);
 			}
-			else if ((keyCode == KeyEvent.VK_0))
-			{	loop.switchAiPause(9);
+			else if(keyCode == KeyEvent.VK_0)
+			{	if(keysPressed.containsKey(KeyEvent.VK_SHIFT))
+					loop.switchAiPause(9);
+				else
+					loop.switchShowAiInfo(9);
 			}
 		}
 	}

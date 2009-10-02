@@ -21,10 +21,13 @@ package tournament200910.suiveur;
  * 
  */
 
+import java.awt.Color;
+import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
+import fr.free.totalboumboum.ai.adapter200910.communication.AiOutput;
 import fr.free.totalboumboum.ai.adapter200910.communication.StopRequestException;
 import fr.free.totalboumboum.ai.adapter200910.data.AiBlock;
 import fr.free.totalboumboum.ai.adapter200910.data.AiBomb;
@@ -54,7 +57,7 @@ public class SafetyManager
 	{	ai.checkInterruption(); //APPEL OBLIGATOIRE
 	
 		this.ai = ai;
-		AiZone zone = ai.getZone();
+		zone = ai.getZone();
 		matrix = new double[zone.getHeigh()][zone.getWidth()];
 		processedBombs = new ArrayList<AiBomb>();
 	}
@@ -74,6 +77,8 @@ public class SafetyManager
 	public static double FIRE = 0;
 	/** matrice contenant les valeurs de sûreté */
 	private double matrix[][];
+	/** zone de jeu */
+	private AiZone zone;
 	
 	/**
 	 * renvoie la matrice de sureté
@@ -87,7 +92,7 @@ public class SafetyManager
 	/**
 	 * mise à jour de la matrice de sûreté
 	 */
-	private void updateMatrix(AiZone zone) throws StopRequestException
+	private void updateMatrix() throws StopRequestException
 	{	ai.checkInterruption(); //APPEL OBLIGATOIRE
 
 		processedBombs.clear();
@@ -248,11 +253,20 @@ public class SafetyManager
 		return result;
 	}
 	
-	public AiTile findSafeTile(AiTile origin) throws StopRequestException
+	public List<AiTile> findSafeTiles(AiTile origin) throws StopRequestException
 	{	ai.checkInterruption(); //APPEL OBLIGATOIRE
 	
-		AiTile result = ai.getCurrentTile();
-//TODO à compléter
+		ArrayList<AiTile> result = new ArrayList<AiTile>();
+		for(int line=0;line<zone.getHeigh();line++)
+		{	ai.checkInterruption(); //APPEL OBLIGATOIRE
+			for(int col=0;col<zone.getWidth();col++)
+			{	ai.checkInterruption(); //APPEL OBLIGATOIRE
+				AiTile tile = zone.getTile(line,col);
+				if(isSafe(tile))
+					result.add(tile);
+			}
+		}
+		
 		return result;
 	}
 	
@@ -264,8 +278,55 @@ public class SafetyManager
 	 */
 	public void update() throws StopRequestException
 	{	ai.checkInterruption(); //APPEL OBLIGATOIRE
+		
+		updateMatrix();
+		updateOutput();
+	}
+
+	/////////////////////////////////////////////////////////////////
+	// OUTPUT		/////////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////	
+	/**
+	 * met à jour la sortie graphique de l'IA en fonction du
+	 * niveau de sûreté calculé
+	 */
+	private void updateOutput() throws StopRequestException
+	{	ai.checkInterruption(); //APPEL OBLIGATOIRE
 	
-		AiZone zone = ai.getZone();
-		updateMatrix(zone);
+		AiOutput output = ai.getOutput();
+	
+		// couleurs des cases
+		for(int line=0;line<zone.getHeigh();line++)
+		{	ai.checkInterruption(); //APPEL OBLIGATOIRE
+			for(int col=0;col<zone.getWidth();col++)
+			{	ai.checkInterruption(); //APPEL OBLIGATOIRE
+				Color color = null;			
+				if(matrix[line][col]==0)
+					color = Color.YELLOW;
+				else if(matrix[line][col]==SAFE)
+					color = Color.WHITE;
+				else if(matrix[line][col]>0)
+					color = Color.RED;
+				else if(matrix[line][col]<0)
+					color = Color.BLACK;
+				output.setTileColor(line,col,color);
+			}
+		}
+		
+		// texte des cases
+		NumberFormat nf = NumberFormat.getInstance();
+		nf.setMaximumFractionDigits(0);
+		for(int line=0;line<zone.getHeigh();line++)
+		{	ai.checkInterruption(); //APPEL OBLIGATOIRE
+			for(int col=0;col<zone.getWidth();col++)
+			{	ai.checkInterruption(); //APPEL OBLIGATOIRE
+				String text = null;			
+				if(matrix[line][col]==SAFE)
+					text = "\u221E";
+				else 
+					text = nf.format(matrix[line][col]); 
+				output.setTileText(line,col,text);
+			}
+		}
 	}
 }

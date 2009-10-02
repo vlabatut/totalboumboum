@@ -22,23 +22,45 @@ package fr.free.totalboumboum.ai.adapter200910.path.astar.cost;
  */
 
 import fr.free.totalboumboum.ai.adapter200910.data.AiTile;
+import fr.free.totalboumboum.ai.adapter200910.path.AiPath;
 
 /**
  * permet de définir une fonction de cout utilisée lors de la recherche
  * avec l'algorithme A*
  */
-public interface CostCalculator
+public abstract class CostCalculator
 {
 	/** 
 	 * calcule le cout de l'action consistant à aller de la case
 	 * start à la case end, sachant que ces deux cases sont voisines.
 	 * Il est possible de définir des couts évolués, en tenant compte par exemple des
-	 * influences négatives dans ces cases (pour le joueur) comme la présence de bombe 
+	 * influences négatives dans ces cases (pour le joueur) comme la présence de bombes 
 	 * à proximité, etc., et des influences positives telles que la présence de bonus.
+	 * Si les deux cases ne sont pas voisines, le résultat est indéterminé.
 	 * 
 	 * @param start	la case de départ 
-	 * @param end	la case d'arrivée
+	 * @param end	la case d'arrivée (qui doit être voisine)
 	 * @return	le coût du déplacement
 	 */
-	public double processCost(AiTile start, AiTile end);
+	public abstract double processCost(AiTile start, AiTile end);
+	
+	/**
+	 * calcule le cout d'un chemin, i.e. la somme des couts des actions
+	 * consistant à passer d'une case du chemin à la suivante.
+	 * @param path
+	 * @return
+	 */
+	public double processCost(AiPath path)
+	{	double result = 0;
+		AiTile previous = null;
+		for(AiTile tile: path.getTiles())
+		{	if(previous==null)
+				previous = tile;
+			else
+			{	double localCost = processCost(previous,tile);
+				result = result + localCost;
+			}			
+		}
+		return result;
+	}
 }

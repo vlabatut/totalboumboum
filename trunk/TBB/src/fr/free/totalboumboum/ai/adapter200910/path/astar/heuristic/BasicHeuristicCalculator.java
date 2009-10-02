@@ -21,13 +21,15 @@ package fr.free.totalboumboum.ai.adapter200910.path.astar.heuristic;
  * 
  */
 
+import java.util.List;
+
 import fr.free.totalboumboum.ai.adapter200910.data.AiTile;
 import fr.free.totalboumboum.ai.adapter200910.data.AiZone;
 
 /**
  * implémentation la plus simple d'une heuristique : 
  * on utilise la distance de Manhattan entre la case de départ et 
- * la case d'arrivée.
+ * la plus proche des cases d'arrivée.
  */
 public class BasicHeuristicCalculator extends HeuristicCalculator
 {
@@ -41,14 +43,18 @@ public class BasicHeuristicCalculator extends HeuristicCalculator
 	 * cf. http://fr.wikipedia.org/wiki/Distance_%28math%C3%A9matiques%29#Distance_sur_des_espaces_vectoriels
 	 * 
 	 * @param tile	la case concernée 
-	 * @return	la distance de Manhattan entre tile et endTile
+	 * @return	la distance de Manhattan entre tile et la plus proche des cases contenues dans endTiles
 	 */
 	@Override
 	public double processHeuristic(AiTile tile)
-	{	double result;
-		AiTile endTile = getEndTile();
+	{	List<AiTile> endTiles = getEndTiles();
 		AiZone zone = tile.getZone();
-		result = zone.getTileDistance(tile,endTile);
+		double result = Integer.MAX_VALUE;
+		for(AiTile endTile: endTiles)
+		{	int dist = zone.getTileDistance(tile,endTile);
+			if(dist<result)
+				result = dist;
+		}
 		return result;
 	}
 }

@@ -21,6 +21,8 @@ package fr.free.totalboumboum.ai.adapter200910.path.astar.heuristic;
  * 
  */
 
+import java.util.List;
+
 import fr.free.totalboumboum.ai.adapter200910.data.AiTile;
 
 /**
@@ -32,25 +34,24 @@ public abstract class HeuristicCalculator
 	/////////////////////////////////////////////////////////////////
 	// END TILE			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	/** case terminant le chemin */
-	private AiTile endTile;	
+	/** liste des cases pouvant terminer le chemin */
+	private List<AiTile> endTiles;	
 
 	/**
-	 * initialise/modifie la case terminant le chemin recherché
-	 * @param endTile	la case terminant le chemin
+	 * initialise/modifie la liste de cases pouvant terminer le chemin recherché
+	 * @param endTiles	les cases terminant le chemin
 	 */
-	public void setEndTile(AiTile endTile)
-	{	this.endTile = endTile;
-		
+	public void setEndTiles(List<AiTile> endTiles)
+	{	this.endTiles = endTiles;		
 	}
 
 	/**
-	 * renvoie la case objectif (i.e. la case terminant
+	 * renvoie la liste de cases objectifs (i.e. les cases terminant
 	 * le chemin recherché)
-	 * @return	la case objectif
+	 * @return	la liste des cases objectifs
 	 */
-	public AiTile getEndTile()
-	{	return endTile;	
+	public List<AiTile> getEndTiles()
+	{	return endTiles;	
 	}
 
 	/////////////////////////////////////////////////////////////////
@@ -58,7 +59,7 @@ public abstract class HeuristicCalculator
 	/////////////////////////////////////////////////////////////////
 	/** 
 	 * calcule la valeur heuristique de la case tile,
-	 * le but étant de se rendre dans la case objectif endTile.
+	 * le but étant de se rendre dans une des cases objectifs
 	 * 
 	 * @param tile	la case concernée 
 	 * @return	l'heuristique de la case
