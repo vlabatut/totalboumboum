@@ -96,6 +96,7 @@ public class Suiveur extends ArtificialIntelligence
 
 		first = false;
 		safetyManager = new SafetyManager(this);
+		targetManager = new PathManager(this,currentTile);
 	}
 
 	/////////////////////////////////////////////////////////////////
@@ -242,19 +243,23 @@ public class Suiveur extends ArtificialIntelligence
 		if(target==null || target.hasEnded())
 		{	chooseTarget();
 			if(target!=null)
-			{	targetPreviousTile = target.getTile(); 
-//				double targetX = target.getPosX();
-//				double targetY = target.getPosY();
-//				targetPathManager = new PathManager(this,targetX,targetY);				
-				targetManager = new PathManager(this,targetPreviousTile);
+			{	AiTile targetCurrentTile = target.getTile();
+				targetManager.setDestination(targetCurrentTile);
+				targetPreviousTile = targetCurrentTile; 
 			}
 		}
 		else
 		{	AiTile targetCurrentTile = target.getTile();
-			if(targetCurrentTile!=targetPreviousTile)
-			{	targetManager = new PathManager(this,targetCurrentTile);
+			if(targetCurrentTile==currentTile)
+			{	double targetX = target.getPosX();
+				double targetY = target.getPosY();
+				targetManager.setDestination(targetX,targetY);				
+			}
+			else if(targetCurrentTile!=targetPreviousTile)
+			{	targetManager.setDestination(targetCurrentTile);
 				targetPreviousTile = targetCurrentTile;				
-			}			
+			}
+			
 		}
 	}
 }

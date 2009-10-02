@@ -64,6 +64,17 @@ public class MatrixCostCalculator extends CostCalculator
 	{	this.costMatrix = costMatrix;		
 	}
 	
+	/**
+	 * met à jour un coût dans la matrice
+	 * 
+	 * @param line	ligne de la case à mettre à jour
+	 * @param col	colonne de la case à mettre à jour
+	 * @param cost	nouveau coût à affecter
+	 */
+	public void setCost(int line, int col, double cost)
+	{	costMatrix[line][col] = cost;
+	}
+	
 	/////////////////////////////////////////////////////////////////
 	// PROCESS			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
