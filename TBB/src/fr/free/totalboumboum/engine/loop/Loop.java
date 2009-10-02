@@ -28,7 +28,7 @@ import java.awt.FontMetrics;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Stroke;
-import java.awt.geom.Line2D;
+import java.awt.geom.Path2D;
 import java.awt.geom.Rectangle2D;
 import java.io.File;
 import java.io.IOException;
@@ -1003,19 +1003,22 @@ System.out.println();
 					for(int j=0;j<paths.size();j++)
 					{	List<Tile> path = paths.get(j);
 						Color color = colors.get(j);
-						if(color!=null)
+						if(color!=null && !path.isEmpty())
 						{	Color paintColor = new Color(color.getRed(),color.getGreen(),color.getBlue(),AI_INFO_ALPHA_LEVEL);
 							g2.setPaint(paintColor);
-							for(int k=0;k<path.size()-1;k++)
-							{	Tile tile0 = path.get(k);
-								double x0 = tile0.getPosX();
-								double y0 = tile0.getPosY();
-								Tile tile1 = path.get(k+1);							
-								double x1 = tile1.getPosX();
-								double y1 = tile1.getPosY();
-								Line2D line = new Line2D.Double(x0,y0,x1,y1);
-								g2.draw(line);
+							Path2D shape = new Path2D.Double();
+							Tile tile = path.get(0);
+							double x = tile.getPosX();
+							double y = tile.getPosY();
+							shape.moveTo(x,y);	
+							for(int k=1;k<path.size();k++)
+							{	tile = path.get(k);							
+								x = tile.getPosX();
+								y = tile.getPosY();
+								//Line2D line = new Line2D.Double(x0,y0,x1,y1);
+								shape.lineTo(x,y);
 							}
+							g2.draw(shape);
 						}
 					}
 					g2.setStroke(prevStroke);
