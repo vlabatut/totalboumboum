@@ -97,67 +97,25 @@ public class SystemControl implements KeyListener
 			else if(keyCode == KeyEvent.VK_END)
 			{	loop.switchEnginePause();
 			}
+			else if(keyCode == KeyEvent.VK_HOME)
+			{	loop.switchEngineStep(true);
+			}
 			
 			// debug : AIs pause
-			else if(keyCode == KeyEvent.VK_1)
-			{	if(keysPressed.containsKey(KeyEvent.VK_SHIFT))
-					loop.switchAiPause(0);
+			else if(keyCode>=KeyEvent.VK_0 && keyCode<=KeyEvent.VK_9)
+			{	int index;
+				if(keyCode==KeyEvent.VK_0)
+					index = 9;
 				else
-					loop.switchShowAiInfo(0);
-			}
-			else if(keyCode == KeyEvent.VK_2)
-			{	if(keysPressed.containsKey(KeyEvent.VK_SHIFT))
-					loop.switchAiPause(1);
+					index = keyCode-KeyEvent.VK_1;
+				if(keysPressed.containsKey(KeyEvent.VK_SHIFT) && keysPressed.get(KeyEvent.VK_SHIFT))
+					loop.switchShowAiPaths(index);
+				else if(keysPressed.containsKey(KeyEvent.VK_ALT) && keysPressed.get(KeyEvent.VK_ALT))
+					loop.switchShowAiTileColors(index);
+				else if(keysPressed.containsKey(KeyEvent.VK_CONTROL) && keysPressed.get(KeyEvent.VK_CONTROL))
+					loop.switchShowAiTileTexts(index);
 				else
-					loop.switchShowAiInfo(1);
-			}
-			else if(keyCode == KeyEvent.VK_3)
-			{	if(keysPressed.containsKey(KeyEvent.VK_SHIFT))
-					loop.switchAiPause(2);
-				else
-					loop.switchShowAiInfo(2);
-			}
-			else if(keyCode == KeyEvent.VK_4)
-			{	if(keysPressed.containsKey(KeyEvent.VK_SHIFT))
-					loop.switchAiPause(3);
-				else
-					loop.switchShowAiInfo(3);
-			}
-			else if(keyCode == KeyEvent.VK_5)
-			{	if(keysPressed.containsKey(KeyEvent.VK_SHIFT))
-					loop.switchAiPause(4);
-				else
-					loop.switchShowAiInfo(4);
-			}
-			else if(keyCode == KeyEvent.VK_6)
-			{	if(keysPressed.containsKey(KeyEvent.VK_SHIFT))
-					loop.switchAiPause(5);
-				else
-					loop.switchShowAiInfo(5);
-			}
-			else if(keyCode == KeyEvent.VK_7)
-			{	if(keysPressed.containsKey(KeyEvent.VK_SHIFT))
-					loop.switchAiPause(6);
-				else
-					loop.switchShowAiInfo(6);
-			}
-			else if(keyCode == KeyEvent.VK_8)
-			{	if(keysPressed.containsKey(KeyEvent.VK_SHIFT))
-					loop.switchAiPause(7);
-				else
-					loop.switchShowAiInfo(7);
-			}
-			else if(keyCode == KeyEvent.VK_9)
-			{	if(keysPressed.containsKey(KeyEvent.VK_SHIFT))
-					loop.switchAiPause(8);
-				else
-					loop.switchShowAiInfo(8);
-			}
-			else if(keyCode == KeyEvent.VK_0)
-			{	if(keysPressed.containsKey(KeyEvent.VK_SHIFT))
-					loop.switchAiPause(9);
-				else
-					loop.switchShowAiInfo(9);
+					loop.switchAiPause(index);
 			}
 		}
 	}

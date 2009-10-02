@@ -146,7 +146,9 @@ public class Loop implements Runnable, Serializable
 			Player player = new Player(profile,base,bombsetMap,tile);
 			players.add(player);
 			pauseAis.add(false);
-			showAiInfo.add(0);
+			showAiPaths.add(false);
+			showAiTileTexts.add(false);
+			showAiTileColors.add(false);
 			// level
 			Hero hero = (Hero)player.getSprite();
 //			level.addHero(hero,pl.getLine(),pl.getCol());
@@ -196,8 +198,11 @@ public class Loop implements Runnable, Serializable
 	private boolean showTime = false;
 	private boolean showFPS = false;
 	private boolean pauseEngine = false;
+	private boolean stepEngine = false;
 	private final ArrayList<Boolean> pauseAis = new ArrayList<Boolean>();
-	private final ArrayList<Integer> showAiInfo = new ArrayList<Integer>();
+	private final ArrayList<Boolean> showAiPaths = new ArrayList<Boolean>();
+	private final ArrayList<Boolean> showAiTileTexts = new ArrayList<Boolean>();
+	private final ArrayList<Boolean> showAiTileColors = new ArrayList<Boolean>();
 	private Lock debugLock = new ReentrantLock();
 
 	public void setShowGrid(boolean showGrid)
@@ -291,6 +296,19 @@ public class Loop implements Runnable, Serializable
 		return result;
 	}
 
+	public void switchEngineStep(boolean value)
+	{	debugLock.lock();
+		stepEngine = value;		
+		debugLock.unlock();
+	}
+	public boolean getEngineStep()
+	{	boolean result;
+		debugLock.lock();
+		result = stepEngine;
+		debugLock.unlock();
+		return result;
+	}
+
 	public void switchAiPause(int index)
 	{	debugLock.lock();
 		if(index<pauseAis.size())
@@ -312,21 +330,55 @@ public class Loop implements Runnable, Serializable
 		return result;
 	}
 
-	public void switchShowAiInfo(int index)
+	public void switchShowAiPaths(int index)
 	{	debugLock.lock();
-		if(index<showAiInfo.size())
-		{	int show = showAiInfo.get(index);
+		if(index<showAiPaths.size())
+		{	boolean show = showAiPaths.get(index);
 			if(players.get(index).getArtificialIntelligence()!=null)
-				show = (show+1)%4;
-			showAiInfo.set(index,show);
+				show = !show;
+			showAiPaths.set(index,show);
+		}
+		debugLock.unlock();
+	}
+	public void switchShowAiTileTexts(int index)
+	{	debugLock.lock();
+		if(index<showAiTileTexts.size())
+		{	boolean show = showAiTileTexts.get(index);
+			if(players.get(index).getArtificialIntelligence()!=null)
+				show = !show;
+			showAiTileTexts.set(index,show);
+		}
+		debugLock.unlock();
+	}
+	public void switchShowAiTileColors(int index)
+	{	debugLock.lock();
+		if(index<showAiTileColors.size())
+		{	boolean show = showAiTileColors.get(index);
+			if(players.get(index).getArtificialIntelligence()!=null)
+				show = !show;
+			showAiTileColors.set(index,show);
 		}
 		debugLock.unlock();
 	}
 		
-	public int getShowAiInfo(int index)
-	{	int result;
+	public boolean getShowAiPaths(int index)
+	{	boolean result;
 		debugLock.lock();
-		result = showAiInfo.get(index);
+		result = showAiPaths.get(index);
+		debugLock.unlock();
+		return result;
+	}
+	public boolean getShowAiTileTexts(int index)
+	{	boolean result;
+		debugLock.lock();
+		result = showAiTileTexts.get(index);
+		debugLock.unlock();
+		return result;
+	}
+	public boolean getShowAiTileColors(int index)
+	{	boolean result;
+		debugLock.lock();
+		result = showAiTileColors.get(index);
 		debugLock.unlock();
 		return result;
 	}
@@ -593,10 +645,11 @@ System.out.println();
 	}
 
 	private void update()
-	{	if(!isPaused() && !getEnginePause())
-		{	long milliPeriod = Configuration.getEngineConfiguration().getMilliPeriod();
+	{	if(!isPaused() && (!getEnginePause() || getEngineStep()))
+		{	switchEngineStep(false);
+			long milliPeriod = Configuration.getEngineConfiguration().getMilliPeriod();
 			
-		// celebration ?
+			// celebration ?
 			if(celebrationDuration>0)
 			{	celebrationDuration = celebrationDuration - (milliPeriod*Configuration.getEngineConfiguration().getSpeedCoeff());
 				if(celebrationDuration<=0)
@@ -613,7 +666,7 @@ System.out.println();
 			if(hasStarted) // only after the round has started
 			{	for(int i=0;i<players.size();i++)
 				{	Player player = players.get(i);
-					boolean aiPause = pauseAis.get(i);
+					boolean aiPause = getAiPause(i);
 					if(!player.isOut())
 						player.update(aiPause);
 				}
@@ -974,10 +1027,9 @@ System.out.println();
 		for(int i=0;i<players.size();i++)
 		{	Player player = players.get(i);
 			if(player.hasAi())
-			{	int switchValue = showAiInfo.get(i);
-				AbstractAiManager<?> aiMgr = player.getArtificialIntelligence();
+			{	AbstractAiManager<?> aiMgr = player.getArtificialIntelligence();
 				// tile colors
-				if(switchValue==1)
+				if(getShowAiTileColors(i))
 				{	Color[][] colors = aiMgr.getTileColors();
 					for(int line=0;line<level.getGlobalHeight();line++)
 					{	for(int col=0;col<level.getGlobalWidth();col++)
@@ -994,7 +1046,7 @@ System.out.println();
 					}
 				}
 				// paths
-				else if(switchValue==2)
+				if(getShowAiPaths(i))
 				{	List<List<Tile>> paths = aiMgr.getPaths();
 					List<Color> colors = aiMgr.getPathColors();
 					Stroke prevStroke = g2.getStroke();
@@ -1024,7 +1076,7 @@ System.out.println();
 					g2.setStroke(prevStroke);
 				}
 				// tile texts
-				else if(switchValue==3)
+				if(getShowAiTileTexts(i))
 				{	g.setColor(Color.MAGENTA);
 					Font font = new Font("Dialog", Font.PLAIN, 15);
 					g.setFont(font);

@@ -15,6 +15,7 @@ public class MonTraitement
 	public MonTraitement(MonIA monIa) throws StopRequestException
 	{	// avant tout : test d'interruption
 		monIa.checkInterruption();
+		
 		// initialisation du champ permettant d'appeler checkInterruption 
 		this.monIa = monIa;	
 	}
@@ -23,6 +24,7 @@ public class MonTraitement
 	public AiAction gagneRound() throws StopRequestException
 	{	// avant tout : test d'interruption
 		monIa.checkInterruption();
+		
 		// traitement qui fait gagner le round
 		AiAction result = null;
 		return result;
