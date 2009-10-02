@@ -42,7 +42,7 @@ import fr.free.totalboumboum.ai.adapter200910.data.AiZone;
  * Une matrice de réels représente la zone de jeu, chaque case
  * étant représentée par le temps restant avant qu'une flamme ne la
  * traverse. Donc plus le temps est long, et plus la case est sûre. 
- * Une valeur infinie signifie que la case n'est pas menacée par une
+ * La valeur maximale (Double.MAX_VALUE) signifie que la case n'est pas menacée par une
  * bombe. Une valeur nulle signifie que la case est actuellement en feu.
  * Une valeur négative signifie que la case est menacée par une bombe
  * télécommandée, qui peut exploser n'importe quand (la valeur absolue
@@ -72,7 +72,7 @@ public class SafetyManager
 	// MATRIX	/////////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	/** valeur pour une case complètement sûre (temps restant avant explosion : maximal) */
-	public static double SAFE = Double.POSITIVE_INFINITY;
+	public static double SAFE = Double.MAX_VALUE;
 	/** valeur pour une case pas du tout sûre (temps restant avant explosion : aucun) */
 	public static double FIRE = 0;
 	/** matrice contenant les valeurs de sûreté */

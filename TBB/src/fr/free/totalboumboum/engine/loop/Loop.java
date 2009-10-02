@@ -1050,7 +1050,8 @@ System.out.println();
 				{	List<List<Tile>> paths = aiMgr.getPaths();
 					List<Color> colors = aiMgr.getPathColors();
 					Stroke prevStroke = g2.getStroke();
-					Stroke stroke = new BasicStroke(40,BasicStroke.CAP_ROUND,BasicStroke.JOIN_ROUND);
+					int thickness = (int)(tileSize/3);
+					Stroke stroke = new BasicStroke(thickness,BasicStroke.CAP_ROUND,BasicStroke.JOIN_ROUND);
 					g2.setStroke(stroke);
 					for(int j=0;j<paths.size();j++)
 					{	List<Tile> path = paths.get(j);

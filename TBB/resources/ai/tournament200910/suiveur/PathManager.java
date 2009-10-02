@@ -273,8 +273,11 @@ public class PathManager
 	/////////////////////////////////////////////////////////////////
 	// A STAR					/////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
+	/** classe implémentant l'algorithme A* */
 	private Astar astar;
+	/** classe implémentant la fonction heuristique */
 	private HeuristicCalculator heuristicCalculator;
+	/** classe implémentant la fonction de coût */
 	private CostCalculator costCalculator;
 
 	/////////////////////////////////////////////////////////////////
@@ -294,16 +297,20 @@ public class PathManager
 			// si le chemin est vide ou invalide, on le recalcule
 			if(path.isEmpty() || !checkPathValidity())
 				path = astar.processShortestPath(ai.getCurrentTile(),tileDest);
-			// s'il reste deux cases au moins dans le chemin, on se dirige vers la suivante
-			AiTile tile = null;
-			if(path.getLength()>1)
-				tile = path.getTile(1);
-			// sinon, s'il ne reste qu'une seule case, on va au centre
-			else if(path.getLength()>0)
-				tile = path.getTile(0);
-			// on détermine la direction du prochain déplacement
-			if(tile!=null)
-				result = zone.getDirection(ai.getOwnHero(),tile);			
+			if(checkPathValidity())
+			{	// s'il reste deux cases au moins dans le chemin, on se dirige vers la suivante
+				if(path.getLength()>1)
+				{	AiTile tile = path.getTile(1);
+					result = zone.getDirection(ai.getOwnHero(),tile);	
+				}
+				// sinon, s'il ne reste qu'une seule case, on va au centre
+				else if(path.getLength()>0)
+				{	AiHero ownHero = ai.getOwnHero();
+					double x1 = ownHero.getPosX();
+					double y1 = ownHero.getPosY();
+					result = zone.getDirection(x1,y1,xDest,yDest);
+				}
+			}
 		}
 		
 		// mise à jour de la position précédente

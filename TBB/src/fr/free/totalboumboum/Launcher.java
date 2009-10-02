@@ -849,6 +849,7 @@ public class Launcher
 	 * - pause individuelle des IA
 	 * - affichage de données relatives aux IA : chemins, vision de la zone de jeu, valeurs case par case, etc.
 	 * - touche spéciale permettant d'exécuter seulement une itération du moteur
+	 * - IA suiveuse : IA de démonstration qui choisit un autre joueur puis le suit
 	 */
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -1056,20 +1057,10 @@ public class Launcher
 	 * - tester la fonction traversable (tile)
 	 * - tester la fonction update abilities (hero)
 	 * 
-	 * 	 utiliser une matrice de cout basée sur la matrice de sécurité+blocs ?
 	 * - quand l'ia meurt et revient grace à une vie, elle n'a plus le control du personnage
 	 * - bug : j'ai vu l'ia prendre une vie, mourir, relacher la vie, et revenir. 
 	 * 	 et la vie était foncionnelle : je l'ai prise, je suis mort, je suis revenu (sans la relacher cette fois)
 	 * - optimisation de l'API IA:
-	 * 		- faire une seule mise à jour pour les données communes à tous les joueurs
-	 * 			>> difficile à mettre en oeuvre car les IA récupèrent des objets différents pr représenter les sprites
 	 * 		- les IA ont-elles vraiment besoin d'être raffraichies si souvent ? >> non! réduire le taux de raffraichissement
-	 * 
-	 * - pb IA :
-	 * 		- fuite : change d'avis tout le temps quand elle est sur la bomb
-	 * 		- filature: parfois commence un chemin qui est dangereux car croise la portée d'une bombe
-	 * 			le chemin est ensuite certainement désavoué, mais resélectionné desuite, et donc hésitation
-	 * 			faudrait empêcher ça dans le chemin, p-ê en utilisant une f de cout pour éviter de passer à porter de bombe
-	 * 			du cp y aurait plus besoin de vérifier la sécurité d'une case
 	 */
 }
