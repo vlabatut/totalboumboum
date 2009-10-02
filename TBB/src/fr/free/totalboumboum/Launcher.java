@@ -838,7 +838,6 @@ public class Launcher
 	 * - système de guérison des malus
 	 * - possibilité de faire exploser les bombes posées par un joueur quand celui-ci brûle
 	 * - touche END permettant de pauser le jeu
-	 * - touche HOME permettant de pauser seulement les IA 
 	 * - meilleure gestion de l'exultation/pleur à la fin des manches
 	 * - capacité de résistance au feu pour les items (l'item est déplacé au lieu d'être détruit)
 	 * - blocs laissant passer les flammes mais pas les joueurs ni les bombes (cf niveau story/custom de SBM1)
@@ -847,6 +846,9 @@ public class Launcher
 	 * - correction dans les gestion des blocs spawn
 	 * - mise à jour et révision de la strucutre de données de l'API d'IA
 	 * - implémentation de A* dans l'API d'IA
+	 * - pause individuelle des IA
+	 * - affichage de données relatives aux IA : chemins, vision de la zone de jeu, valeurs case par case, etc.
+	 * - touche spéciale permettant d'exécuter seulement une itération du moteur
 	 */
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -899,6 +901,8 @@ public class Launcher
 	 * - remplacer "à vos marques" "pret" "boum!" par des graphismes précalculés
 	 * 
 	 * - à la fin de la partie, faire disparaitre tout le niveau comme il apparait au début
+	 * 
+	 * - faire un log automatique energistrant toutes les commandes et positions, histoire d'avoir une trace des bugs
 	 * 
 	 */
 	
@@ -1059,6 +1063,13 @@ public class Launcher
 	 * - optimisation de l'API IA:
 	 * 		- faire une seule mise à jour pour les données communes à tous les joueurs
 	 * 			>> difficile à mettre en oeuvre car les IA récupèrent des objets différents pr représenter les sprites
-	 * 		- les IA ont-elles vraiment besoin d'être raffraichies si souvent ? >> non! réduire le taux de raffraichissement 
+	 * 		- les IA ont-elles vraiment besoin d'être raffraichies si souvent ? >> non! réduire le taux de raffraichissement
+	 * 
+	 * - pb IA :
+	 * 		- fuite : change d'avis tout le temps quand elle est sur la bomb
+	 * 		- filature: parfois commence un chemin qui est dangereux car croise la portée d'une bombe
+	 * 			le chemin est ensuite certainement désavoué, mais resélectionné desuite, et donc hésitation
+	 * 			faudrait empêcher ça dans le chemin, p-ê en utilisant une f de cout pour éviter de passer à porter de bombe
+	 * 			du cp y aurait plus besoin de vérifier la sécurité d'une case
 	 */
 }

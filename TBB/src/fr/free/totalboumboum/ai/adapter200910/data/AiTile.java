@@ -398,7 +398,7 @@ public class AiTile
 		}
 		// bombes
 		if(result && !bombs.isEmpty())
-			result = hero.hasThroughBomb();
+			result = hero.hasThroughBomb() || hero.getTile()==this;
 		// feu
 		if(result && !fires.isEmpty())
 			result = hero.hasThroughFire();		
