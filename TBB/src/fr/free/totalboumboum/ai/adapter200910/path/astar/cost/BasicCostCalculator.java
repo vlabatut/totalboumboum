@@ -24,11 +24,11 @@ package fr.free.totalboumboum.ai.adapter200910.path.astar.cost;
 import fr.free.totalboumboum.ai.adapter200910.data.AiTile;
 
 /**
- * Classe implémentant l'interface CostCalculator de la manière la plus simple possible.
+ * Classe étendant la classe abstraite CostCalculator de la manière la plus simple possible.
  * Ici, le cout pour passer d'une case à l'autre est simplement 1, quelles que soient
  * les cases considérées.
  */
-public class BasicCostCalculator implements CostCalculator
+public class BasicCostCalculator extends CostCalculator
 {
 	/** 
 	 * Les deux cases sont supposées être voisines, 

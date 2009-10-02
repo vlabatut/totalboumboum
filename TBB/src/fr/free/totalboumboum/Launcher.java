@@ -871,9 +871,11 @@ public class Launcher
 	 * 
 	 * - bug de collision difficlement reproductible : le joueur va vers le haut, il a l'item pass-walls et il se retrouve 
 	 *   téléporté en dehors du niveau (dans le noir) sur NBM2 custom battlezone.
-	 *   c'est arrivé aussi sur la zone des marais de NBM2. 
-	 *   ça semble se produire quand on se rapproche des limites (verticales?) du niveau
-	 *   et on se retrouve téléporté en (0,0)
+	 *   	- c'est arrivé aussi sur la zone des marais de NBM2. 
+	 *   	- ça semble se produire quand on se rapproche des limites (verticales?) du niveau
+	 *   	  et on se retrouve téléporté en (0,0)
+	 *   	- ça arrive aussi sur le niveau débug : quand l'ia suiveuse passe de l'autre coté, droite>gauche,
+	 *   	  le perso se retrouve parfois téléporté en 0,0 aussi
 	 */
 	
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -1038,6 +1040,7 @@ public class Launcher
 	/**
 	 * - possibilité de définir des items indestructibles (sont juste déplacés)
 	 * - blocs laissant passer le feu mais pas les joueurs, comme dans le niveau story/custom de SBM1
+	 * - parler des nouveaux outils de dev de l'IA : API améliorée, visualisation des couleurs, texte, et chemin
 	 */
 	
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -1049,7 +1052,6 @@ public class Launcher
 	 * - tester la fonction traversable (tile)
 	 * - tester la fonction update abilities (hero)
 	 * 
-	 * - compléter l'IA dans safety manager (trouver une case sure)
 	 * 	 utiliser une matrice de cout basée sur la matrice de sécurité+blocs ?
 	 * - quand l'ia meurt et revient grace à une vie, elle n'a plus le control du personnage
 	 * - bug : j'ai vu l'ia prendre une vie, mourir, relacher la vie, et revenir. 

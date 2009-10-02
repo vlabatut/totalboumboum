@@ -25,6 +25,7 @@ import java.util.concurrent.Callable;
 
 import fr.free.totalboumboum.ai.adapter200910.communication.AiAction;
 import fr.free.totalboumboum.ai.adapter200910.communication.AiActionName;
+import fr.free.totalboumboum.ai.adapter200910.communication.AiOutput;
 import fr.free.totalboumboum.ai.adapter200910.communication.StopRequestException;
 import fr.free.totalboumboum.ai.adapter200910.data.AiZone;
 
@@ -77,8 +78,11 @@ public abstract class ArtificialIntelligence implements Callable<AiAction>
 	@Override
 	public final AiAction call()
 	{	AiAction result;
+		// on réinitialise la sortie de l'IA
+		reinitOutput();
 		try
-		{	result = processAction();		
+		{	// on calcule la prochaine action à effectuer
+			result = processAction();		
 		}
 		catch (StopRequestException e)
 		{	result = new AiAction(AiActionName.NONE);
@@ -115,6 +119,7 @@ public abstract class ArtificialIntelligence implements Callable<AiAction>
 	 */
 	public void setPercepts(AiZone percepts)
 	{	this.percepts = percepts;
+		output = new AiOutput(percepts);
 	}
 
 	/**
@@ -122,5 +127,31 @@ public abstract class ArtificialIntelligence implements Callable<AiAction>
 	 */
 	void finish()
 	{	percepts = null;
+	}
+
+	/////////////////////////////////////////////////////////////////
+	// OUTPUTS			/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	/** sortie graphique de l'IA */
+	private AiOutput output;
+	
+	/** 
+	 * renvoie la sortie graphique de l'IA, 
+	 * afin d'afficher des informations par dessus la zone de jeu
+	 * (utile lors du débogage). Le programme peut modifier cet objet
+	 * pour colorer des cases et afficher des chemins ou du texte
+	 * 
+	 * @return	la sortie de l'IA
+	 */
+	public AiOutput getOutput()
+	{	return output;
+	}
+
+	/**
+	 * réinitialise la sortie graphique de l'IA.
+	 * Méthode appelée automatiquement avant chaque itération de l'IA.
+	 */
+	private void reinitOutput()
+	{	output.reinit();
 	}
 }

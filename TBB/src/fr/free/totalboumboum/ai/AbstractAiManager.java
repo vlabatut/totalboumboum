@@ -21,8 +21,10 @@ package fr.free.totalboumboum.ai;
  * 
  */
 
+import java.awt.Color;
 import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.List;
 import java.util.concurrent.Callable;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.ExecutorService;
@@ -32,6 +34,9 @@ import java.util.concurrent.ThreadFactory;
 
 
 
+import fr.free.totalboumboum.configuration.GameVariables;
+import fr.free.totalboumboum.engine.container.level.Level;
+import fr.free.totalboumboum.engine.container.tile.Tile;
 import fr.free.totalboumboum.engine.content.feature.event.ControlEvent;
 import fr.free.totalboumboum.engine.player.Player;
 
@@ -61,7 +66,7 @@ public abstract class AbstractAiManager<V>
     /////////////////////////////////////////////////////////////////
 	// THREAD			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-    /** object implementing the IA behaviour */
+    /** objet implementant le comportement de l'IA */
 	private Callable<V> ai;
     /** gestionnaire de threads pour exécuter l'IA */
     private ExecutorService executorAi = null;
@@ -131,15 +136,18 @@ public abstract class AbstractAiManager<V>
     		}
     		// pas de passage en pause : cet appel est-il fini ?
     		else if(futureAi.isDone())
-    		{	// on met à jour le joueur
-    			try
-    			{	V value = futureAi.get();
+    		{	try
+    			{	// on récupère les réactions de l'IA
+    				V value = futureAi.get();
+    				// on les convertit et les envoie au moteur
     				ArrayList<ControlEvent> events = convertReaction(value);
     				Iterator<ControlEvent> it = events.iterator();
     				while(it.hasNext())
     				{	ControlEvent event = it.next();
     					player.getSprite().putControlEvent(event);
     				}
+    				// on met à jour les sorties de l'IA
+    				updateOutput();
 				}
     			catch (InterruptedException e)
     			{	e.printStackTrace();
@@ -203,7 +211,14 @@ public abstract class AbstractAiManager<V>
      * @param player	joueur contrôlé par l'IA
      */
     public void init(String instance, Player player)
-	{	this.player = player;
+	{	// input
+    	this.player = player;
+		// output
+		Level level = GameVariables.level;
+		int height = level.getGlobalHeight();
+		int width = level.getGlobalWidth();
+		tileColors = new Color[height][width];
+		tileTexts = new String[height][width];
 	}
 		
 	/**
@@ -238,4 +253,58 @@ public abstract class AbstractAiManager<V>
 	 * percepts deviennent inutiles.
 	 */
 	public abstract void finishPercepts();
+	
+    /////////////////////////////////////////////////////////////////
+	// OUTPUT			/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	/** couleurs associées aux cases (ou null pour aucune couleur */
+	private Color[][] tileColors;
+	/** texte à afficher sur les cases (ou null pour aucun texte) */
+	private String[][] tileTexts;
+	/** chemins à afficher */
+	private final List<List<Tile>> paths = new ArrayList<List<Tile>>();
+	/** couleurs des chemins à afficher */
+	private final List<Color> pathColors = new ArrayList<Color>();
+	
+	/**
+	 * met à jour la représentation des sorties de l'IA
+	 * qui est destinée au moteur
+	 */
+	protected abstract void updateOutput();
+	
+	/**
+	 * renvoie les couleurs des cases
+	 * 
+	 * @return	matrice de couleurs
+	 */
+	public Color[][] getTileColors()
+	{	return tileColors;
+	}
+
+	/**
+	 * renvoie les textes à afficher sur les cases
+	 * 
+	 * @return	matrice de textes
+	 */
+	public String[][] getTileTexts()
+	{	return tileTexts;
+	}
+
+	/**
+	 * renvoie la liste de chemins à afficher
+	 * 
+	 * @return	liste de vecteurs de cases contigües représentant des chemins
+	 */
+	public List<List<Tile>> getPaths()
+	{	return paths;
+	}
+
+	/**
+	 * renvoie les couleurs des chemins à afficher
+	 * 
+	 * @return	liste de couleurs
+	 */
+	public List<Color> getPathColors()
+	{	return pathColors;
+	}
 }

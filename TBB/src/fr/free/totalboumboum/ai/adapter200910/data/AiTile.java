@@ -44,10 +44,7 @@ import fr.free.totalboumboum.engine.content.sprite.item.Item;
  */
 
 public class AiTile
-{	/** case du jeu que cette classe représente */
-	private Tile tile;
-	
-	/**
+{	/**
 	 * construit une représentation de la case passée en paramètre
 	 * @param tile	case représentée
 	 * @param zone	zone contenant la représentation
@@ -78,6 +75,16 @@ public class AiTile
 	
 	public AiZone getZone()
 	{	return zone;	
+	}
+	
+	/////////////////////////////////////////////////////////////////
+	// ENGINE TILE		/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	/** case du jeu que cette classe représente */
+	private Tile tile;
+	
+	public Tile getTile()
+	{	return tile;
 	}
 	
 	/////////////////////////////////////////////////////////////////

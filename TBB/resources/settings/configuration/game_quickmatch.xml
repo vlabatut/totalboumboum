@@ -14,12 +14,11 @@
 		</points>
 	</settings>
 	<players>
-		<player file="1" color="CYAN" controls="1" spritePack="nesbomberman2" spriteFolder="shirobon" />
-		<player file="18" color="ORANGE" controls="2" spritePack="superbomberman5" spriteFolder="assistantpirate" />
-		<player file="65" color="INDIGO" controls="0" spritePack="nesbomberman2" spriteFolder="shirobon" />
+		<player file="65" color="INDIGO" controls="2" spritePack="nesbomberman2" spriteFolder="shirobon" />
+		<player file="1" color="CYAN" controls="1" spritePack="superbomberman5" spriteFolder="assistantpirate" />
 	</players>
 	<levels>
-		<level pack="nbm2Custom" folder="debug" />
+		<level pack="tournament200809" folder="part1" />
 	</levels>
 </gameQuickmatch>
 

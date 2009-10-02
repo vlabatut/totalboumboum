@@ -62,23 +62,22 @@ public class Suiveur extends ArtificialIntelligence
 			// on met à jour le gestionnaire de sécurité
 			safetyManager.update();
 			// si on est en train de fuir : on continue
-			if(escapePathManager!=null)
-			{	moveDir = escapePathManager.update();
-				if(escapePathManager.hasArrived())
-					escapePathManager = null;				
+			if(escapeManager!=null)
+			{	if(escapeManager.hasArrived())
+					escapeManager = null;
+				else
+					moveDir = escapeManager.update();
 			}
 			// sinon si on est en danger : on commence à fuir
 			else if(!safetyManager.isSafe(currentTile))
-			{	AiTile safeTile = safetyManager.findSafeTile(currentTile);
-				escapePathManager = new PathManager(this,safeTile);
-				moveDir = escapePathManager.update();
+			{	escapeManager = new EscapeManager(this);
+				moveDir = escapeManager.update();
 			}
 			// sinon on se déplace vers la cible
 			else
-			{	// on met la cible à jour
-				updateTarget();
+			{	updateTarget();
 				if(target!=null)
-					moveDir = targetPathManager.update();			
+					moveDir = targetManager.update();			
 			}
 			result = new AiAction(AiActionName.MOVE,moveDir);
 		}
@@ -100,12 +99,12 @@ public class Suiveur extends ArtificialIntelligence
 	}
 
 	/////////////////////////////////////////////////////////////////
-	// PATH MANAGER				/////////////////////////////////////
+	// PATH MANAGERS			/////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	/** classe chargée du déplacement vers la cible */
-	private PathManager targetPathManager = null;
+	private PathManager targetManager = null;
 	/** classe chargée de la fuite du personnage */
-	private PathManager escapePathManager = null;
+	private EscapeManager escapeManager = null;
 	
 	/////////////////////////////////////////////////////////////////
 	// SAFETY MANAGER				/////////////////////////////////////
@@ -247,13 +246,13 @@ public class Suiveur extends ArtificialIntelligence
 //				double targetX = target.getPosX();
 //				double targetY = target.getPosY();
 //				targetPathManager = new PathManager(this,targetX,targetY);				
-				targetPathManager = new PathManager(this,targetPreviousTile);
+				targetManager = new PathManager(this,targetPreviousTile);
 			}
 		}
 		else
 		{	AiTile targetCurrentTile = target.getTile();
 			if(targetCurrentTile!=targetPreviousTile)
-			{	targetPathManager = new PathManager(this,targetCurrentTile);
+			{	targetManager = new PathManager(this,targetCurrentTile);
 				targetPreviousTile = targetCurrentTile;				
 			}			
 		}

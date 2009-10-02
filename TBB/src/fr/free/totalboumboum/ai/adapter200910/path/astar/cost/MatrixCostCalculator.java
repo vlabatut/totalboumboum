@@ -24,7 +24,7 @@ package fr.free.totalboumboum.ai.adapter200910.path.astar.cost;
 import fr.free.totalboumboum.ai.adapter200910.data.AiTile;
 
 /**
- * Classe implémentant l'interface CostCalculator grâce à une matrice de coûts.
+ * Classe étendant la classe abstraite CostCalculator grâce à une matrice de coûts.
  * Ici, le cout pour passer d'une case à l'autre dépend uniquement de la case
  * de destination. Ce cout est égal à la valeur associée à la case dans la matrice
  * de cout fournie. Cette matrice doit faire la même taille que la zone de jeu.
@@ -35,7 +35,7 @@ import fr.free.totalboumboum.ai.adapter200910.data.AiTile;
  * un cout infini (avec Double.POSITIVE_INFINITY) aux cases qu'on veut interdire
  * au personnage parce qu'elles sont trop dangereuses. 
  */
-public class MatrixCostCalculator implements CostCalculator
+public class MatrixCostCalculator extends CostCalculator
 {
 	/**
 	 * initialise la fonction de cout. On doit obligatoirement

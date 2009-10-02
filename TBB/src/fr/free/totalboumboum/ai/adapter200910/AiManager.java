@@ -21,14 +21,20 @@ package fr.free.totalboumboum.ai.adapter200910;
  * 
  */
 
+import java.awt.Color;
 import java.util.ArrayList;
+import java.util.List;
 
 import fr.free.totalboumboum.ai.AbstractAiManager;
 import fr.free.totalboumboum.ai.adapter200910.communication.AiAction;
 import fr.free.totalboumboum.ai.adapter200910.communication.AiActionName;
+import fr.free.totalboumboum.ai.adapter200910.communication.AiOutput;
+import fr.free.totalboumboum.ai.adapter200910.data.AiTile;
 import fr.free.totalboumboum.ai.adapter200910.data.AiZone;
+import fr.free.totalboumboum.ai.adapter200910.path.AiPath;
 import fr.free.totalboumboum.configuration.GameVariables;
 import fr.free.totalboumboum.engine.container.level.Level;
+import fr.free.totalboumboum.engine.container.tile.Tile;
 import fr.free.totalboumboum.engine.content.feature.Direction;
 import fr.free.totalboumboum.engine.content.feature.event.ControlEvent;
 import fr.free.totalboumboum.engine.loop.Loop;
@@ -57,7 +63,7 @@ public abstract class AiManager extends AbstractAiManager<AiAction>
 	}
 
     /////////////////////////////////////////////////////////////////
-	// PERCEPTS			/////////////////////////////////////////////
+	// FINISH			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	/**
 	 * termine proprement le gestionnaire de manière à libérer les ressources 
@@ -88,6 +94,7 @@ public abstract class AiManager extends AbstractAiManager<AiAction>
 		percepts = new AiZone(level,player);
 		ArtificialIntelligence ai = ((ArtificialIntelligence)getAi());
 		ai.setPercepts(percepts);
+		output = ai.getOutput();
 	}
 
 	@Override
@@ -202,4 +209,59 @@ public abstract class AiManager extends AbstractAiManager<AiAction>
 		// new direction
 		lastMove = direction;
 	}
+
+    /////////////////////////////////////////////////////////////////
+	// OUTPUT			/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	/** sortie de l'IA */
+	private AiOutput output;
+	
+	/**
+	 * tout doit être recopié pour des histoires de synchronisation
+	 * (on ne veut pas que l'IA modifie ses sorties pendant que
+	 * le moteur du jeu est en train d'y accéder)
+	 */
+	@Override
+	protected void updateOutput()
+	{	// tile colors
+		{	Color[][] aiMatrix = output.getTileColors();
+			Color[][] engineMatrix = getTileColors();
+			for(int line=0;line<aiMatrix.length;line++)
+				for(int col=0;col<aiMatrix[0].length;col++)
+					engineMatrix[line][col] = aiMatrix[line][col];
+		}
+		
+		// tile texts
+		{	String[][] aiMatrix = output.getTileTexts();
+			String[][] engineMatrix = getTileTexts();
+			for(int line=0;line<aiMatrix.length;line++)
+				for(int col=0;col<aiMatrix[0].length;col++)
+					engineMatrix[line][col] = aiMatrix[line][col];
+		}
+		
+		// paths
+		{	List<AiPath> aiPaths = output.getPaths();
+			List<List<Tile>> enginePaths = getPaths();
+			enginePaths.clear();
+			List<Color> aiPathColors = output.getPathColors();
+			List<Color> enginePathColors = getPathColors();
+			enginePathColors.clear();
+			for(int index=0;index<aiPaths.size();index++)
+			{	// color
+				Color color = aiPathColors.get(index);
+				enginePathColors.add(color);
+				// path
+				AiPath aiPath = aiPaths.get(index);
+				List<Tile> path = new ArrayList<Tile>();
+				enginePaths.add(path);
+				for(AiTile aiTile: aiPath.getTiles())
+				{	int line = aiTile.getLine();
+					int col = aiTile.getCol();
+					Tile tile = level.getTile(line,col);
+					path.add(tile);
+				}
+			}
+		}
+	}
+
 }

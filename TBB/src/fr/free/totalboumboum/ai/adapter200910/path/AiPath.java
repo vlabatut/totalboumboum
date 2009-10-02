@@ -27,8 +27,7 @@ import java.util.Iterator;
 import fr.free.totalboumboum.ai.adapter200910.data.AiTile;
 
 public class AiPath
-{
-	
+{	
     /////////////////////////////////////////////////////////////////
 	// TILES			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
@@ -114,6 +113,19 @@ public class AiPath
 	 */
 	public boolean isEmpty()
 	{	return tiles.size()==0;
+	}
+	
+	/**
+	 * renvoie la dernière case du chemin,
+	 * ou null s'il n'y a pas de case dans ce chemin
+	 * 
+	 * @return	la dernière case du chemin ou null en cas d'erreur
+	 */
+	public AiTile getLastTile()
+	{	AiTile result = null;
+		if(!tiles.isEmpty())
+			result = tiles.get(tiles.size()-1);
+		return result;
 	}
 	
 	/////////////////////////////////////////////////////////////////

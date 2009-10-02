@@ -23,6 +23,7 @@ package tournament200910.suiveur;
 
 import java.awt.Color;
 import java.util.Iterator;
+import java.util.List;
 
 import fr.free.totalboumboum.ai.adapter200910.communication.AiOutput;
 import fr.free.totalboumboum.ai.adapter200910.communication.StopRequestException;
@@ -31,55 +32,52 @@ import fr.free.totalboumboum.ai.adapter200910.data.AiTile;
 import fr.free.totalboumboum.ai.adapter200910.data.AiZone;
 import fr.free.totalboumboum.ai.adapter200910.path.AiPath;
 import fr.free.totalboumboum.ai.adapter200910.path.astar.Astar;
-import fr.free.totalboumboum.ai.adapter200910.path.astar.cost.BasicCostCalculator;
 import fr.free.totalboumboum.ai.adapter200910.path.astar.cost.CostCalculator;
+import fr.free.totalboumboum.ai.adapter200910.path.astar.cost.MatrixCostCalculator;
 import fr.free.totalboumboum.ai.adapter200910.path.astar.heuristic.BasicHeuristicCalculator;
 import fr.free.totalboumboum.ai.adapter200910.path.astar.heuristic.HeuristicCalculator;
 import fr.free.totalboumboum.engine.content.feature.Direction;
 
 /**
- * classe chargée d'implémenter un déplacement, 
- * en respectant un chemin donné
+ * classe chargée d'implémenter un déplacement de fuite,
+ * (personnage menacé par une ou plusieurs bombes) 
  */
-public class PathManager
+public class EscapeManager
 {
 	/** interrupteur permettant d'afficher la trace du traitement */
 	private boolean verbose = false;
 
 	/**
-	 * crée un PathManager chargé d'amener le personnage à la position (x,y)
-	 * exprimée en pixels
+	 * crée un EscapeManager chargé d'amener le personnage au centre d'une case sûre
 	 */
-	public PathManager(Suiveur ai, double x, double y) throws StopRequestException
+	public EscapeManager(Suiveur ai) throws StopRequestException
 	{	ai.checkInterruption(); //APPEL OBLIGATOIRE
 	
-		init(ai);
-		setDestination(x,y);
-	}
-	
-	/**
-	 * crée un PathManager chargé d'amener le personnage au centre de la case
-	 * passée en paramètre
-	 */
-	public PathManager(Suiveur ai, AiTile destination) throws StopRequestException
-	{	ai.checkInterruption(); //APPEL OBLIGATOIRE
-	
-		init(ai);
-		setDestination(destination);
-	}
-	
-	/**
-	 * initialise ce PathManager
-	 */
-	private void init(Suiveur ai) throws StopRequestException
-	{	ai.checkInterruption(); //APPEL OBLIGATOIRE
-		
 		this.ai = ai;
 		zone = ai.getZone();
-		costCalculator = new BasicCostCalculator();
+		
+		// init la matrice de coût : on prend l'opposé du niveau de sûreté
+		// i.e. : plus le temps avant l'explosion est long, plus le coût est faible 
+		double safetyMatrix[][] = ai.getSafetyManager().getMatrix();
+		double costMatrix[][] = new double[zone.getHeigh()][zone.getWidth()];
+		for(int line=0;line<zone.getHeigh();line++)
+		{	ai.checkInterruption(); //APPEL OBLIGATOIRE
+			for(int col=0;col<zone.getWidth();col++)
+			{	ai.checkInterruption(); //APPEL OBLIGATOIRE
+				costMatrix[line][col] = -safetyMatrix[line][col];
+			}
+		}
+		
+		// init A*
+		costCalculator = new MatrixCostCalculator(costMatrix);
 		heuristicCalculator = new BasicHeuristicCalculator();
 		astar = new Astar(ai.getOwnHero(),costCalculator,heuristicCalculator);
-		updatePrev();
+		
+		// init destinations
+		arrived = false;
+		AiHero ownHero = ai.getOwnHero();
+		possibleDest = ai.getSafetyManager().findSafeTiles(ownHero.getTile());
+		updatePath();
 	}
 	
 	/////////////////////////////////////////////////////////////////
@@ -88,114 +86,36 @@ public class PathManager
 	/** l'IA concernée par ce gestionnaire de chemin */
 	private Suiveur ai;
 	/** zone de jeu */
-	private AiZone zone;
+	private AiZone zone;	
 	
 	/////////////////////////////////////////////////////////////////
 	// DESTINATION	/////////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	/** indique si le personnage est arrivé à destination */
 	private boolean arrived;
-	/** la case de destination sélectionnée */
+	/** la case de destination sélectionnée pour la fuite */
 	private AiTile tileDest;
-	/** l'abscisse de destination */
-	private double xDest;
-	/** l'ordonnée de destination */
-	private double yDest;
-	
-	/**
-	 * modifie la case de destination du personnage,
-	 * place les coordonnées de destination au centre de cette case,
-	 * et recalcule le chemin.
-	 */
-	public void setDestination(AiTile destination) throws StopRequestException
-	{	ai.checkInterruption(); //APPEL OBLIGATOIRE
-		
-		arrived = false;
-		tileDest = destination;
-		xDest = tileDest.getPosX();
-		yDest = tileDest.getPosY();
-		path = astar.processShortestPath(ai.getCurrentTile(),destination);
-	}
+	/** destinations potentielles */
+	private List<AiTile> possibleDest;
 
 	/**
-	 * modifie les coordonnées de destination,
-	 * met à jour automatiquement la case correspondante,
-	 * et recalcule le chemin.
-	 */
-	public void setDestination(double x, double y) throws StopRequestException
-	{	ai.checkInterruption(); //APPEL OBLIGATOIRE
-		
-		arrived = false;
-		double normalized[] = zone.normalizePosition(x, y);
-		xDest = normalized[0];
-		yDest = normalized[1];
-		tileDest = zone.getTile(xDest,yDest);
-		path = astar.processShortestPath(ai.getCurrentTile(),tileDest);
-	}
-
-	/*	public boolean hasArrived() throws StopRequestException
-	{	ai.checkInterruption(); //APPEL OBLIGATOIRE
-	
-		boolean result = true;
-		result = result && destination.getPosX()==ai.getCurrentX();
-		result = result && destination.getPosY()==ai.getCurrentY();
-		return result;
-	}
-*/	
-
-	/**
-	 * détermine si le personnage est arrivé au centre de la case
-	 * passée en paramètre
-	 */
-/*	private boolean hasArrived(AiTile tile) throws StopRequestException
-	{	ai.checkInterruption(); //APPEL OBLIGATOIRE
-		
-		AiHero ownHero = ai.getOwnHero();
-		boolean result = ai.getZone().hasSamePixelPosition(ownHero,tile);
-		return result;
-	}
-*/
-	/**
-	 * détermine si le personnage est arrivé aux coordonnées de destination
+	 * détermine si le personnage est arrivé dans la case de destination.
+	 * S'il n'y a pas de case de destination, on considère que le personnage
+	 * est arrivé.
 	 */
 	public boolean hasArrived() throws StopRequestException
 	{	ai.checkInterruption(); //APPEL OBLIGATOIRE
 		
 		if(!arrived)
-		{	// on teste si le personnage est à peu près situé à la position de destination 
-			AiHero ownHero = ai.getOwnHero();
-			double xCurrent = ownHero.getPosX();
-			double yCurrent = ownHero.getPosY();
-			arrived = zone.hasSamePixelPosition(xCurrent,yCurrent,xDest,yDest);
-			// cas particulier : oscillation autour du point d'arrivée
-			if(!arrived && path.getLength()==1)
-			{	Direction prevDir = zone.getDirection(xPrev,yPrev,xDest,yDest);
-				Direction currentDir = zone.getDirection(xCurrent,yCurrent,xDest,yDest);
-				arrived = prevDir.getOpposite()==currentDir;
+		{	if(tileDest==null)
+				arrived = true;
+			else
+			{	AiTile currentTile = ai.getCurrentTile();
+				arrived = currentTile==tileDest;			
 			}
 		}
 		
 		return arrived;
-	}
-
-	/////////////////////////////////////////////////////////////////
-	// PREVIOUS LOCATION	/////////////////////////////////////////
-	/////////////////////////////////////////////////////////////////
-	/** abscisse précédente */
-	private double xPrev;
-	/** ordonnée précédente */
-	private double yPrev;	
-	
-	/**
-	 * met à jour la position précédente du personnage,
-	 * exprimée en pixels
-	 */
-	private void updatePrev() throws StopRequestException
-	{	ai.checkInterruption(); //APPEL OBLIGATOIRE
-	
-		AiHero hero = ai.getOwnHero();
-		xPrev = hero.getPosX();
-		yPrev = hero.getPosY();		
 	}
 
 	/////////////////////////////////////////////////////////////////
@@ -204,15 +124,22 @@ public class PathManager
 	/** le chemin à suivre */
 	private AiPath path;
 	
+	private void updatePath() throws StopRequestException
+	{	ai.checkInterruption(); //APPEL OBLIGATOIRE
+		
+		path = astar.processShortestPath(ai.getCurrentTile(),possibleDest);
+		tileDest = path.getLastTile();
+	}
+	
 	/**
 	 * vérifie que le personnage est bien sur le chemin pré-calculé,
-	 * en supprimant si besoin les cases inutiles.
+	 * en supprimant si besoin les cases inutiles (car précedant la case courante).
 	 * Si le personnage n'est plus sur le chemin, alors le chemin
 	 * est vide après l'exécution de cette méthode.
 	 */
 	private void checkIsOnPath() throws StopRequestException
 	{	ai.checkInterruption(); //APPEL OBLIGATOIRE
-	
+		
 		AiTile currentTile = ai.getCurrentTile();
 		while(!path.isEmpty() && path.getTile(0)!=currentTile)
 		{	ai.checkInterruption(); //APPEL OBLIGATOIRE
@@ -220,42 +147,9 @@ public class PathManager
 		}
 	}
 	
-	/**
-	 * détermine si le personnage a dépassé la première case du chemin
-	 * en direction de la seconde case
-	 */
-/*	private boolean hasCrossed(AiTile tile) throws StopRequestException
-	{	ai.checkInterruption(); //APPEL OBLIGATOIRE
-	
-		boolean result = false;
-		if(path.getLength()>1)
-		{	AiHero hero = ai.getOwnHero();
-			AiTile source = path.getTile(0);
-			AiTile target = path.getTile(1);
-			Direction direction = ai.getZone().getDirection(source,target);
-			double pos0;
-			double pos1;
-			double pos2;
-			if(direction.isHorizontal())
-			{	pos0 = source.getPosX();
-				pos1 = hero.getPosX();
-				pos2 = target.getPosX();
-			}
-			else
-			{	pos0 = source.getPosY();
-				pos1 = hero.getPosY();
-				pos2 = target.getPosY();
-			}
-			result = pos0<=pos1 && pos1<=pos2 || pos0>=pos1 && pos1>=pos2;
-		}
-		return result;
-	}
-*/
-	
 	/** 
-	 * teste si le chemin est toujours valide, i.e. s'il
-	 * est toujours sûr et si aucun obstacle n'est apparu
-	 * depuis la dernière itération
+	 * teste si le chemin est toujours valide, i.e. si
+	 * aucun obstacle n'est apparu depuis la dernière itération
 	 */
 	private boolean checkPathValidity() throws StopRequestException
 	{	ai.checkInterruption(); //APPEL OBLIGATOIRE
@@ -265,7 +159,7 @@ public class PathManager
 		while(it.hasNext() && result)
 		{	ai.checkInterruption(); //APPEL OBLIGATOIRE
 			AiTile tile = it.next();
-			result = tile.isCrossableBy(ai.getOwnHero()) && ai.isSafe(tile);			
+			result = tile.isCrossableBy(ai.getOwnHero());			
 		}
 		return result;
 	}
@@ -293,7 +187,7 @@ public class PathManager
 			checkIsOnPath();
 			// si le chemin est vide ou invalide, on le recalcule
 			if(path.isEmpty() || !checkPathValidity())
-				path = astar.processShortestPath(ai.getCurrentTile(),tileDest);
+				updatePath();
 			// s'il reste deux cases au moins dans le chemin, on se dirige vers la suivante
 			AiTile tile = null;
 			if(path.getLength()>1)
@@ -306,13 +200,11 @@ public class PathManager
 				result = zone.getDirection(ai.getOwnHero(),tile);			
 		}
 		
-		// mise à jour de la position précédente
-		updatePrev();
 		// mise à jour de la sortie
 		updateOutput();
-		
+
 		if(verbose)
-		{	System.out.println(">>>>>>>>>> PATH MANAGER <<<<<<<<<<");
+		{	System.out.println(">>>>>>>>>> ESCAPE MANAGER <<<<<<<<<<");
 			System.out.println("path: "+path);
 			System.out.println("direction: "+result);
 		}
@@ -331,7 +223,7 @@ public class PathManager
 		
 		if(path!=null && !path.isEmpty())	
 		{	AiOutput output = ai.getOutput();
-			Color color = Color.BLACK;
+			Color color = Color.RED;
 			output.addPath(path, color);
 		}
 	}
