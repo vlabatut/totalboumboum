@@ -456,9 +456,9 @@ public class Level
 	{	Direction temp;
 		Direction result = Direction.NONE;	
 		temp = processHorizontalDirection(x1,x2);
-		result.put(temp);
+		result = result.put(temp);
 		temp = processVerticalDirection(y1,y2);
-		result.put(temp);
+		result = result.put(temp);
 		return result;
 	}
 	

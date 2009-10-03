@@ -388,7 +388,7 @@ public class AiTile
 	public boolean isCrossableBy(AiHero hero)
 	{	boolean result = true;
 		// murs
-		if(!blocks.isEmpty())
+		if(!blocks.isEmpty() && hero.getTile()!=this)
 		{	result = hero.hasThroughWall();
 			Iterator<AiBlock> it = blocks.iterator();
 			while(it.hasNext() && result)

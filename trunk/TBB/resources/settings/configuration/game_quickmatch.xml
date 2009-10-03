@@ -18,7 +18,7 @@
 		<player file="1" color="CYAN" controls="1" spritePack="superbomberman5" spriteFolder="assistantpirate" />
 	</players>
 	<levels>
-		<level pack="tournament200809" folder="part1" />
+		<level pack="nbm2Custom" folder="debug" />
 	</levels>
 </gameQuickmatch>
 
