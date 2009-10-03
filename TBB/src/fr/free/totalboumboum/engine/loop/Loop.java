@@ -79,6 +79,7 @@ import fr.free.totalboumboum.engine.player.Player;
 import fr.free.totalboumboum.engine.player.PlayerLocation;
 import fr.free.totalboumboum.game.round.Round;
 import fr.free.totalboumboum.game.statistics.StatisticEvent;
+import fr.free.totalboumboum.tools.CalculusTools;
 import fr.free.totalboumboum.tools.FileTools;
 import fr.free.totalboumboum.tools.StringTools;
 
@@ -1059,17 +1060,40 @@ System.out.println();
 						if(color!=null && !path.isEmpty())
 						{	Color paintColor = new Color(color.getRed(),color.getGreen(),color.getBlue(),AI_INFO_ALPHA_LEVEL);
 							g2.setPaint(paintColor);
+							Tile tile2 = path.get(0);
+							double x1,x2 = tile2.getPosX();
+							double y1,y2 = tile2.getPosY();
 							Path2D shape = new Path2D.Double();
-							Tile tile = path.get(0);
-							double x = tile.getPosX();
-							double y = tile.getPosY();
-							shape.moveTo(x,y);	
-							for(int k=1;k<path.size();k++)
-							{	tile = path.get(k);							
-								x = tile.getPosX();
-								y = tile.getPosY();
-								//Line2D line = new Line2D.Double(x0,y0,x1,y1);
-								shape.lineTo(x,y);
+							shape.moveTo(x2,y2);
+							int k = 1;
+							while(k<path.size())
+							{	// tiles
+								x1 = x2;
+								y1 = y2;
+								tile2 = path.get(k);							
+								x2 = tile2.getPosX();
+								y2 = tile2.getPosY();
+								// directions (to manage the case where the path cross the level off-scree)
+								Direction direction12 = level.getDirection(x1,y1,x2,y2);
+								int[] intDir12 = direction12.getIntFromDirection();
+								Direction direction21 = direction12.getOpposite();
+								int[] intDir21 = direction21.getIntFromDirection();
+								// alternative locations
+								double x1b = x2 + intDir21[0]*tileSize;
+								double y1b = y2 + intDir21[1]*tileSize;
+								double x2b = x1 + intDir12[0]*tileSize;
+								double y2b = y1 + intDir12[1]*tileSize;
+								// compare actual and theoretical positions
+								if(!CalculusTools.isRelativelyEqualTo(x1,x1b) || !CalculusTools.isRelativelyEqualTo(y1,y1b))
+								{	shape.lineTo(x2b,y2b);
+									g2.draw(shape);
+									shape = new Path2D.Double();
+									shape.moveTo(x1b,y1b);
+									shape.lineTo(x2,y2);
+								}
+								else
+									shape.lineTo(x2,y2);
+								k++;
 							}
 							g2.draw(shape);
 						}

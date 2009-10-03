@@ -77,7 +77,7 @@ public class Suiveur extends ArtificialIntelligence
 			else
 			{	updateTarget();
 				if(target!=null)
-					moveDir = targetManager.update();			
+					moveDir = targetManager.update();
 			}
 			result = new AiAction(AiActionName.MOVE,moveDir);
 		}

@@ -161,7 +161,7 @@ public class PathManager
 	public boolean hasArrived() throws StopRequestException
 	{	ai.checkInterruption(); //APPEL OBLIGATOIRE
 		
-		if(!arrived)
+//		if(!arrived)
 		{	// on teste si le personnage est à peu près situé à la position de destination 
 			AiHero ownHero = ai.getOwnHero();
 			double xCurrent = ownHero.getPosX();
@@ -265,7 +265,9 @@ public class PathManager
 		while(it.hasNext() && result)
 		{	ai.checkInterruption(); //APPEL OBLIGATOIRE
 			AiTile tile = it.next();
-			result = tile.isCrossableBy(ai.getOwnHero()) && ai.isSafe(tile);			
+			result = tile.isCrossableBy(ai.getOwnHero()) && ai.isSafe(tile);
+			if(!result)
+				System.out.println();
 		}
 		return result;
 	}

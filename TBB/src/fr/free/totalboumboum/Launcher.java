@@ -858,6 +858,8 @@ public class Launcher
 
 	/* TODO
 	 * 
+	 * - deux persos entrant en même temps sur une case contenant un item le ramassent toutes les  deux (testé avec suiveur)
+	 * 
 	 * - SBM1: malus constipation semble rester même après la fin du clignotement
 	 * 
 	 * - GUI : les résultats ne s'affichent pas automatiquement quand on revient à l'écran du match
@@ -865,6 +867,7 @@ public class Launcher
 	 * - GUI : édition de profil, quand on a fait "nouveau" ça n'active pas le bouton "modifier"
 	 * 
 	 * - cliquer sur partie rapide, annuler, cliquer sur tournoi, annuler, cliquer sur partie rapide >> bug
+	 * 	 peut-être lié : cliquer sur partie rapide, maison, repartie rapide : rien d'affiché
 	 * 
 	 * - GUI : dans les tooltips du tableau des résultats, il manque les numéros des manches
 	 *   
@@ -879,6 +882,8 @@ public class Launcher
 	 *   	  et on se retrouve téléporté en (0,0)
 	 *   	- ça arrive aussi sur le niveau débug : quand l'ia suiveuse passe de l'autre coté, droite>gauche,
 	 *   	  le perso se retrouve parfois téléporté en 0,0 aussi
+	 *   	- pour le reproduire (à tester) : se déplacer horizontalement sur la dernière ligne du niveau en se faisant suivre par l'IA, 
+	 *   	  de droite à gauche, et arrivé au coin bas gauche elle devrait disparaitre (p-ê faut-il être un peu à cheval avec la 1ère ligne)
 	 */
 	
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -1062,5 +1067,10 @@ public class Launcher
 	 * 	 et la vie était foncionnelle : je l'ai prise, je suis mort, je suis revenu (sans la relacher cette fois)
 	 * - optimisation de l'API IA:
 	 * 		- les IA ont-elles vraiment besoin d'être raffraichies si souvent ? >> non! réduire le taux de raffraichissement
+	 * 
+	 * - tester si les chemins de l'ia traversent le feu quand elle est invulnérable
+	 * - tester si les chemins de l'ia traversent les murs quand elle peut passer à travers
+	 * - changement incessant de chemin target alors qu'il n'y a pas d'obstacles
+	 * - bug : l'IA essaie parfois de passer à travers les murs (pb dans AiBlock ou AiTile) 
 	 */
 }
