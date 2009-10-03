@@ -90,9 +90,9 @@ public class AiBlock extends AiSprite<Block>
 		generalAction.addActor(Role.HERO);
 		generalAction.addDirection(Direction.RIGHT);
 		Circumstance actorCircumstance = new Circumstance();
-		actorCircumstance.addContact(Contact.INTERSECTION);
+		actorCircumstance.addContact(Contact.COLLISION);
 		actorCircumstance.addOrientation(Orientation.FACE);
-		actorCircumstance.addTilePosition(TilePosition.SAME);
+		actorCircumstance.addTilePosition(TilePosition.NEIGHBOR);
 		Circumstance targetCircumstance = new Circumstance();
 		ArrayList<AbstractAbility> actorProperties = new ArrayList<AbstractAbility>();
 		ArrayList<AbstractAbility> targetProperties = new ArrayList<AbstractAbility>();
