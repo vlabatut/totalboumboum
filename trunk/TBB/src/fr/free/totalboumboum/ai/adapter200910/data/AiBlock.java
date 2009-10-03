@@ -29,9 +29,12 @@ import fr.free.totalboumboum.engine.content.feature.Orientation;
 import fr.free.totalboumboum.engine.content.feature.Role;
 import fr.free.totalboumboum.engine.content.feature.TilePosition;
 import fr.free.totalboumboum.engine.content.feature.ability.AbstractAbility;
+import fr.free.totalboumboum.engine.content.feature.ability.StateAbility;
+import fr.free.totalboumboum.engine.content.feature.ability.StateAbilityName;
 import fr.free.totalboumboum.engine.content.feature.action.Circumstance;
 import fr.free.totalboumboum.engine.content.feature.action.GeneralAction;
 import fr.free.totalboumboum.engine.content.feature.action.SpecificAction;
+import fr.free.totalboumboum.engine.content.feature.action.appear.GeneralAppear;
 import fr.free.totalboumboum.engine.content.feature.action.consume.SpecificConsume;
 import fr.free.totalboumboum.engine.content.feature.action.movelow.GeneralMoveLow;
 import fr.free.totalboumboum.engine.content.sprite.block.Block;
@@ -55,7 +58,8 @@ public class AiBlock extends AiSprite<Block>
 	 */
 	AiBlock(AiTile tile, Block sprite)
 	{	super(tile,sprite);
-		updateAbilities();
+		updateDestructible();
+		updateCollisions();
 	}	
 	
 	/////////////////////////////////////////////////////////////////
@@ -64,39 +68,89 @@ public class AiBlock extends AiSprite<Block>
 	@Override
 	void update(AiTile tile)
 	{	super.update(tile);
-		updateAbilities();
+		updateDestructible();
+		updateCollisions();
 	}
 
 	/////////////////////////////////////////////////////////////////
-	// ABILITIES		/////////////////////////////////////////////
+	// DESTRUCTIBLE		/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	/** indique si ce mur peut être détruit par une bombe */
+	/** indique si ce bloc peut être détruit par une bombe */
 	private boolean destructible;
-	/** indique si ce mur laisse passer les joueurs ayant un item pour traverser les murs */
-	private boolean blockHero;
-	
+
 	/** 
-	 * met jour les différentes caractéristiques de ce bloc 
+	 * met jour l'indicateur de destructibilité 
 	 */
-	private void updateAbilities()
+	private void updateDestructible()
 	{	Block sprite = getSprite();
-		
-		// destructible
 		SpecificAction specificAction = new SpecificConsume(sprite);
 		destructible = !sprite.isTargetPreventing(specificAction);
+	}
 
+	/////////////////////////////////////////////////////////////////
+	// COLLISIONS		/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	/** indique si ce bloc laisse passer les joueurs */
+	private StopType stopHeroes;
+	/** indique si ce bloc laisse passer le feu */
+	private StopType stopFires;
+	
+	/** 
+	 * met jour les différentes caractéristiques de ce bloc
+	 * concernant la gestion des collisions avec les autres sprites
+	 */
+	private void updateCollisions()
+	{	Block sprite = getSprite();
+		
 		// bloque les personnages
-		GeneralAction generalAction = new GeneralMoveLow();
-		generalAction.addActor(Role.HERO);
-		generalAction.addDirection(Direction.RIGHT);
-		Circumstance actorCircumstance = new Circumstance();
-		actorCircumstance.addContact(Contact.COLLISION);
-		actorCircumstance.addOrientation(Orientation.FACE);
-		actorCircumstance.addTilePosition(TilePosition.NEIGHBOR);
-		Circumstance targetCircumstance = new Circumstance();
-		ArrayList<AbstractAbility> actorProperties = new ArrayList<AbstractAbility>();
-		ArrayList<AbstractAbility> targetProperties = new ArrayList<AbstractAbility>();
-		blockHero = sprite.isThirdPreventing(generalAction,actorProperties,targetProperties,actorCircumstance,targetCircumstance);
+		{	GeneralAction generalAction = new GeneralMoveLow();
+			generalAction.addActor(Role.HERO);
+			generalAction.addDirection(Direction.RIGHT);
+			Circumstance actorCircumstance = new Circumstance();
+			actorCircumstance.addContact(Contact.COLLISION);
+			actorCircumstance.addOrientation(Orientation.FACE);
+			actorCircumstance.addTilePosition(TilePosition.NEIGHBOR);
+			Circumstance targetCircumstance = new Circumstance();
+			ArrayList<AbstractAbility> actorProperties = new ArrayList<AbstractAbility>();
+			ArrayList<AbstractAbility> targetProperties = new ArrayList<AbstractAbility>();
+			boolean temp = sprite.isThirdPreventing(generalAction,actorProperties,targetProperties,actorCircumstance,targetCircumstance);
+			if(temp)
+			{	StateAbility ability = new StateAbility(StateAbilityName.SPRITE_TRAVERSE_WALL);
+				actorProperties.add(ability);
+				temp = sprite.isThirdPreventing(generalAction,actorProperties,targetProperties,actorCircumstance,targetCircumstance);
+				if(temp)
+					stopHeroes = StopType.WEAK_STOP;
+				else
+					stopHeroes = StopType.STRONG_STOP;
+			}
+			else
+				stopHeroes = StopType.NO_STOP;
+		}
+
+		// bloque le feu
+		{	GeneralAction generalAction = new GeneralAppear();
+			generalAction.addActor(Role.FIRE);
+			generalAction.addDirection(Direction.NONE);
+			Circumstance actorCircumstance = new Circumstance();
+			actorCircumstance.addContact(Contact.INTERSECTION);
+			actorCircumstance.addOrientation(Orientation.NEUTRAL);
+			actorCircumstance.addTilePosition(TilePosition.SAME);
+			Circumstance targetCircumstance = new Circumstance();
+			ArrayList<AbstractAbility> actorProperties = new ArrayList<AbstractAbility>();
+			ArrayList<AbstractAbility> targetProperties = new ArrayList<AbstractAbility>();
+			boolean temp = sprite.isThirdPreventing(generalAction,actorProperties,targetProperties,actorCircumstance,targetCircumstance);
+			if(temp)
+			{	StateAbility ability = new StateAbility(StateAbilityName.SPRITE_TRAVERSE_WALL);
+				actorProperties.add(ability);
+				temp = sprite.isThirdPreventing(generalAction,actorProperties,targetProperties,actorCircumstance,targetCircumstance);
+				if(temp)
+					stopFires = StopType.WEAK_STOP;
+				else
+					stopFires = StopType.STRONG_STOP;
+			}
+			else
+				stopFires = StopType.NO_STOP;
+		}
 	}	
 
 	/**
@@ -108,14 +162,32 @@ public class AiBlock extends AiSprite<Block>
 	{	return destructible;		
 	}
 
-	/**
-	 * renvoie vrai si ce bloc bloque le passage de tout personnage,
-	 * y compris ceux qui ont le pouvoir de traverser les murs
-	 * 
-	 * @return	vrai ssi le bloc empêche tout personnage de passer
-	 */
-	public boolean hasBlockHero()
-	{	return blockHero;		
+	public boolean isCrossableBy(AiSprite<?> sprite)
+	{	// par défaut, on bloque
+		boolean result = false;
+		// si le sprite considéré est un personnage
+		if(sprite instanceof AiHero)
+		{	AiHero hero = (AiHero) sprite;
+			if(hero.getTile()==getTile()) //simplification
+				result = true;
+			else if(stopHeroes==StopType.NO_STOP)
+				result = true;
+			else if(stopHeroes==StopType.WEAK_STOP)
+				result = hero.hasThroughBlocks();
+			else if(stopHeroes==StopType.STRONG_STOP)
+				result = false;
+		}
+		// si le sprite considéré est un feu
+		else if(sprite instanceof AiFire)
+		{	AiFire fire = (AiFire) sprite;
+			if(stopFires==StopType.NO_STOP)
+				result = true;
+			else if(stopFires==StopType.WEAK_STOP)
+				result = fire.hasThroughBlocks();
+			else if(stopFires==StopType.STRONG_STOP)
+				result = false;
+		}
+		return result;
 	}
 
 	/////////////////////////////////////////////////////////////////
@@ -138,5 +210,4 @@ public class AiBlock extends AiSprite<Block>
 	void finish()
 	{	super.finish();
 	}
-
 }

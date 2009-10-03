@@ -1071,6 +1071,7 @@ public class Launcher
 	 * - tester si les chemins de l'ia traversent le feu quand elle est invulnérable
 	 * - tester si les chemins de l'ia traversent les murs quand elle peut passer à travers
 	 * - changement incessant de chemin target alors qu'il n'y a pas d'obstacles
-	 * - bug : l'IA essaie parfois de passer à travers les murs (pb dans AiBlock ou AiTile) 
+	 * - bug : l'IA essaie parfois de passer à travers les murs (pb dans AiBlock ou AiTile)
+	 * - utiliser les nvelles fonctionnalités de l'API concernant le type de bombe pour calculer le blast, et vérif que c pas utilisé ailleurs 
 	 */
 }
