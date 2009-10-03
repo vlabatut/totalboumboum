@@ -51,7 +51,7 @@ public class AiHero extends AiSprite<Hero>
 		initColor();
 		updateBombParam();
 		updateWalkingSpeed();
-		updateAbilities();
+		updateCollisions();
 	}
 	
 	/////////////////////////////////////////////////////////////////
@@ -62,7 +62,7 @@ public class AiHero extends AiSprite<Hero>
 	{	super.update(tile);
 		updateBombParam();
 		updateWalkingSpeed();
-		updateAbilities();
+		updateCollisions();
 	}
 
 	/////////////////////////////////////////////////////////////////
@@ -183,14 +183,14 @@ public class AiHero extends AiSprite<Hero>
 	}
 
 	/////////////////////////////////////////////////////////////////
-	// ABILITIES		/////////////////////////////////////////////
+	// COLLISIONS		/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	/** indique si le personnage peut traverser les murs */
-	private boolean throughWall;
+	private boolean throughBlocks;
 	/** indique si le personnage peut traverser les bombes */
-	private boolean throughBomb;
+	private boolean throughBombs;
 	/** indique si le personnage peut traverser le feu (sans brûler) */
-	private boolean throughFire;
+	private boolean throughFires;
 	
 	/**
 	 * teste si ce personnage est capable de passer
@@ -198,8 +198,8 @@ public class AiHero extends AiSprite<Hero>
 	 * 
 	 * @return	vrai si le personnage traverse les murs
 	 */
-	public boolean hasThroughWall()
-	{	return throughWall;	
+	public boolean hasThroughBlocks()
+	{	return throughBlocks;	
 	}
 
 	/**
@@ -208,8 +208,8 @@ public class AiHero extends AiSprite<Hero>
 	 * 
 	 * @return	vrai si le personnage traverse les bombes
 	 */
-	public boolean hasThroughBomb()
-	{	return throughBomb;	
+	public boolean hasThroughBombs()
+	{	return throughBombs;	
 	}
 
 	/**
@@ -218,25 +218,34 @@ public class AiHero extends AiSprite<Hero>
 	 * 
 	 * @return	vrai si le personnage résiste au feu
 	 */
-	public boolean hasThroughFire()
-	{	return throughFire;	
+	public boolean hasThroughFires()
+	{	return throughFires;	
 	}
 
 	/**
 	 * met à jour les divers pouvoirs du personnage
 	 */
-	private void updateAbilities()
+	private void updateCollisions()
 	{	Sprite sprite = getSprite();
 		StateAbility ability;
 		// traverser les murs
 		ability = sprite.modulateStateAbility(StateAbilityName.SPRITE_TRAVERSE_WALL);
-		throughWall = ability.isActive();
+		throughBlocks = ability.isActive();
 		// traverser les bombes
 		ability = sprite.modulateStateAbility(StateAbilityName.SPRITE_TRAVERSE_BOMB);
-		throughBomb = ability.isActive();
-		// traverser les bombes
+		throughBombs = ability.isActive();
+		// traverser le feu
 		ability = sprite.modulateStateAbility(StateAbilityName.HERO_FIRE_PROTECTION);
-		throughFire = ability.isActive();
+		throughFires = ability.isActive();
+	}
+	
+	public boolean isCrossableBy(AiSprite<?> sprite)
+	{	boolean result = false;
+		if(sprite instanceof AiFire)
+			result = true;
+		else
+			result = sprite.isCrossableBy(this);		
+		return result;
 	}
 
 	/////////////////////////////////////////////////////////////////

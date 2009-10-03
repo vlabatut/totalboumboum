@@ -22,32 +22,14 @@ package fr.free.totalboumboum.ai.adapter200910.data;
  */
 
 /**
- * types de feux reconnus par l'IA.
- * 	
+ * types de blocages possibles pour un sprite
  */
-public enum AiFireType
+public enum StopType
 {
-	/** feu normal */
-	NORMAL,
-	/** feu pénétrant (pas arrêté par les les objets destructibles) */
-	PENETRATION,
-	/** autre type de feu */
-	OTHER;	
-	
-	/**
-	 * calcule l'AiFireType correspondant au nom de feu passé en paramètre
-	 * 
-	 * @param name	nom du feu à traiter
-	 * @return	symbole représentant ce type de feu
-	 */
-	public static AiFireType makeFireType(String name)
-	{	AiFireType result;
-		if(name.equalsIgnoreCase("normal"))
-			result = NORMAL;
-		else if(name.equalsIgnoreCase("penetration"))
-			result = PENETRATION;
-		else
-			result = OTHER;
-		return result;
-	}
+	/** laisse passer n'importe quel sprite */
+	NO_STOP,
+	/** laisse passer seulement les sprites ayant un pouvoir spécial */
+	WEAK_STOP,
+	/** ne laisse passer aucun sprite */
+	STRONG_STOP;		
 }

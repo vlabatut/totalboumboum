@@ -21,6 +21,20 @@ package fr.free.totalboumboum.ai.adapter200910.data;
  * 
  */
 
+import java.util.ArrayList;
+
+import fr.free.totalboumboum.engine.content.feature.Contact;
+import fr.free.totalboumboum.engine.content.feature.Direction;
+import fr.free.totalboumboum.engine.content.feature.Orientation;
+import fr.free.totalboumboum.engine.content.feature.Role;
+import fr.free.totalboumboum.engine.content.feature.TilePosition;
+import fr.free.totalboumboum.engine.content.feature.ability.AbstractAbility;
+import fr.free.totalboumboum.engine.content.feature.ability.StateAbility;
+import fr.free.totalboumboum.engine.content.feature.ability.StateAbilityName;
+import fr.free.totalboumboum.engine.content.feature.action.Circumstance;
+import fr.free.totalboumboum.engine.content.feature.action.GeneralAction;
+import fr.free.totalboumboum.engine.content.feature.action.appear.GeneralAppear;
+import fr.free.totalboumboum.engine.content.feature.action.movelow.GeneralMoveLow;
 import fr.free.totalboumboum.engine.content.sprite.item.Item;
 
 /**
@@ -43,6 +57,7 @@ public class AiItem extends AiSprite<Item>
 	AiItem(AiTile tile, Item sprite)
 	{	super(tile,sprite);
 		initType();
+		updateCollisions();
 	}
 
 	/////////////////////////////////////////////////////////////////
@@ -51,6 +66,7 @@ public class AiItem extends AiSprite<Item>
 	@Override
 	void update(AiTile tile)
 	{	super.update(tile);
+		updateCollisions();
 	}
 
 	/////////////////////////////////////////////////////////////////
@@ -77,7 +93,103 @@ public class AiItem extends AiSprite<Item>
 	}
 	
 	/////////////////////////////////////////////////////////////////
-	// TEXT			/////////////////////////////////////////////
+	// COLLISIONS		/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	/** indique si ce bloc laisse passer les joueurs */
+	private StopType stopBombs;
+	/** indique si ce bloc laisse passer le feu */
+	private StopType stopFires;
+
+	/** 
+	 * met jour les différentes caractéristiques de ce bloc
+	 * concernant la gestion des collisions avec les autres sprites
+	 */
+	private void updateCollisions()
+	{	Item sprite = getSprite();
+		
+		// bloque les bombes
+		{	GeneralAction generalAction = new GeneralMoveLow();
+			generalAction.addActor(Role.BOMB);
+			generalAction.addDirection(Direction.RIGHT);
+			Circumstance actorCircumstance = new Circumstance();
+			actorCircumstance.addContact(Contact.COLLISION);
+			actorCircumstance.addOrientation(Orientation.FACE);
+			actorCircumstance.addTilePosition(TilePosition.NEIGHBOR);
+			Circumstance targetCircumstance = new Circumstance();
+			ArrayList<AbstractAbility> actorProperties = new ArrayList<AbstractAbility>();
+			ArrayList<AbstractAbility> targetProperties = new ArrayList<AbstractAbility>();
+			boolean temp = sprite.isThirdPreventing(generalAction,actorProperties,targetProperties,actorCircumstance,targetCircumstance);
+			if(temp)
+			{	StateAbility ability = new StateAbility(StateAbilityName.SPRITE_TRAVERSE_ITEM);
+				actorProperties.add(ability);
+				temp = sprite.isThirdPreventing(generalAction,actorProperties,targetProperties,actorCircumstance,targetCircumstance);
+				if(temp)
+					stopBombs = StopType.WEAK_STOP;
+				else
+					stopBombs = StopType.STRONG_STOP;
+			}
+			else
+				stopBombs = StopType.NO_STOP;
+		}
+
+		// bloque le feu
+		{	GeneralAction generalAction = new GeneralAppear();
+			generalAction.addActor(Role.FIRE);
+			generalAction.addDirection(Direction.NONE);
+			Circumstance actorCircumstance = new Circumstance();
+			actorCircumstance.addContact(Contact.INTERSECTION);
+			actorCircumstance.addOrientation(Orientation.NEUTRAL);
+			actorCircumstance.addTilePosition(TilePosition.SAME);
+			Circumstance targetCircumstance = new Circumstance();
+			ArrayList<AbstractAbility> actorProperties = new ArrayList<AbstractAbility>();
+			ArrayList<AbstractAbility> targetProperties = new ArrayList<AbstractAbility>();
+			boolean temp = sprite.isThirdPreventing(generalAction,actorProperties,targetProperties,actorCircumstance,targetCircumstance);
+			if(temp)
+			{	StateAbility ability = new StateAbility(StateAbilityName.SPRITE_TRAVERSE_ITEM);
+				actorProperties.add(ability);
+				temp = sprite.isThirdPreventing(generalAction,actorProperties,targetProperties,actorCircumstance,targetCircumstance);
+				if(temp)
+					stopFires = StopType.WEAK_STOP;
+				else
+					stopFires = StopType.STRONG_STOP;
+			}
+			else
+				stopFires = StopType.NO_STOP;
+		}
+	}	
+
+	public boolean isCrossableBy(AiSprite<?> sprite)
+	{	// par défaut, on bloque
+		boolean result = false;
+		// si le sprite considéré est un personnage
+		if(sprite instanceof AiHero)
+		{	result = false;
+		}
+		// si le sprite considéré est un feu
+		else if(sprite instanceof AiFire)
+		{	AiFire fire = (AiFire) sprite;
+			if(stopFires==StopType.NO_STOP)
+				result = true;
+			else if(stopFires==StopType.WEAK_STOP)
+				result = fire.hasThroughItems();
+			else if(stopFires==StopType.STRONG_STOP)
+				result = false;
+		}
+		// si le sprite considéré est une bombe
+		else if(sprite instanceof AiBomb)
+		{	AiBomb bomb = (AiBomb) sprite;
+			if(stopBombs==StopType.NO_STOP)
+				result = true;
+			else if(stopBombs==StopType.WEAK_STOP)
+				result = bomb.hasThroughItems();
+			else if(stopBombs==StopType.STRONG_STOP)
+				result = false;
+		}
+		return result;
+	}
+	
+	/////////////////////////////////////////////////////////////////
+	// TEXT				/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	@Override
 	public String toString()

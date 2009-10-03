@@ -21,6 +21,9 @@ package fr.free.totalboumboum.ai.adapter200910.data;
  * 
  */
 
+import fr.free.totalboumboum.engine.content.feature.ability.StateAbility;
+import fr.free.totalboumboum.engine.content.feature.ability.StateAbilityName;
+import fr.free.totalboumboum.engine.content.sprite.Sprite;
 import fr.free.totalboumboum.engine.content.sprite.fire.Fire;
 
 /**
@@ -41,7 +44,7 @@ public class AiFire extends AiSprite<Fire>
 	 */
 	AiFire(AiTile tile, Fire sprite)
 	{	super(tile,sprite);
-		initType();
+		updateCollisions();
 	}
 
 	/////////////////////////////////////////////////////////////////
@@ -50,28 +53,80 @@ public class AiFire extends AiSprite<Fire>
 	@Override
 	void update(AiTile tile)
 	{	super.update(tile);
+		updateCollisions();
 	}
 
 	/////////////////////////////////////////////////////////////////
-	// FIRE				/////////////////////////////////////////////
+	// COLLISIONS		/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	/** type du feu */
-	private AiFireType type;
+	/** indique si le feu peut traverser les murs */
+	private boolean throughBlocks;
+	/** indique si le feu peut traverser les bombes */
+	private boolean throughBombs;
+	/** indique si le feu peut traverser les items */
+	private boolean throughItems;
 	
 	/**
-	 * renvoie le type du feu
-	 * @return	une valeur de type AiFireType représentant le type de feu
+	 * teste si ce feu est capable de passer
+	 * à travers les (certains) murs
+	 * 
+	 * @return	vrai si le feu traverse les murs
 	 */
-	public AiFireType getType()
-	{	return type;	
+	public boolean hasThroughBlocks()
+	{	return throughBlocks;	
 	}
-	
+
 	/**
-	 * initialise le type du bombe
+	 * teste si ce feu est capable de passer
+	 * à travers les bombes
+	 * 
+	 * @return	vrai si le feu traverse les bombes
 	 */
-	private void initType()
-	{	Fire fire = getSprite();
-		type = AiFireType.makeFireType(fire.getFiresetName());		
+	public boolean hasThroughBombs()
+	{	return throughBombs;	
+	}
+
+	/**
+	 * teste si ce feu est capable de passer
+	 * à travers les items
+	 * 
+	 * @return	vrai si le feu traverse les items
+	 */
+	public boolean hasThroughItems()
+	{	return throughItems;
+	}
+
+	/**
+	 * met à jour les diverse propriétés de ce feu
+	 * liée à la gestion des collisions
+	 */
+	private void updateCollisions()
+	{	Sprite sprite = getSprite();
+		StateAbility ability;
+		// traverser les murs
+		ability = sprite.modulateStateAbility(StateAbilityName.SPRITE_TRAVERSE_WALL);
+		throughBlocks = ability.isActive();
+		// traverser les bombes
+		ability = sprite.modulateStateAbility(StateAbilityName.SPRITE_TRAVERSE_BOMB);
+		throughBombs = ability.isActive();
+		// traverser les items
+		ability = sprite.modulateStateAbility(StateAbilityName.SPRITE_TRAVERSE_ITEM);
+		throughItems = ability.isActive();
+	}
+
+	public boolean isCrossableBy(AiSprite<?> sprite)
+	{	// par défaut, on bloque
+		boolean result = false;
+		// si le sprite considéré est un personnage
+		if(sprite instanceof AiHero)
+		{	AiHero hero = (AiHero) sprite;
+			result = hero.hasThroughFires();
+		}
+		else if(sprite instanceof AiHero)
+		{	AiBomb bomb = (AiBomb) sprite;
+			result = !bomb.hasExplosionTrigger();
+		}
+		return result;
 	}
 	
 	/////////////////////////////////////////////////////////////////
@@ -82,7 +137,6 @@ public class AiFire extends AiSprite<Fire>
 	{	StringBuffer result = new StringBuffer();
 		result.append("Fire: [");
 		result.append(super.toString());
-		result.append(" - type: "+type);
 		result.append(" ]");
 		return result.toString();
 	}

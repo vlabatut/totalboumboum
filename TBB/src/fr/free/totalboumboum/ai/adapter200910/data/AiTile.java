@@ -373,36 +373,61 @@ public class AiTile
 	
 	/////////////////////////////////////////////////////////////////
 	// ABILITIES		/////////////////////////////////////////////
-	/////////////////////////////////////////////////////////////////
-	
+	/////////////////////////////////////////////////////////////////	
 	/**
-	 * Teste si le personnage passé en paramètre est capable de traverser
+	 * Teste si le sprite passé en paramètre est capable de traverser
 	 * cette case. Sinon, cela signifie qu'elle contient au moins un
-	 * obstacle que le personnage ne peut pas traverser. On considère deux
-	 * types d'obstacles : ceux qui bloquent le personnage, par exemple un
-	 * mur, et ceux qui le détruisent, par exemple le feu
+	 * obstacle que le personnage ne peut pas traverser. 
+	 * Tous les sprites ne sont pas sensibles aux mêmes obstacles,
+	 * cela dépend à la fois du type des sprites considérés (Hero,
+	 * Bomb, Item, Block, etc) et des pouvoirs courants (passer à travers
+	 * les murs, passer à travers les bombes, etc). Le feu peut constituer
+	 * un obstacle, notamment pour les sprite de tyep Hero.
+	 * cf. les méthodes de même nom dans les classes filles de AiSprite
 	 * 
-	 *  @param hero	le personnage qui veut traverser cette case
-	 *  @return	vrai ssi ce personnage, à cet instant, peut traverser cette case
+	 *  @param sprite	le sprite qui veut traverser cette case
+	 *  @return	vrai ssi ce sprite , à cet instant, peut traverser cette case
 	 */
-	public boolean isCrossableBy(AiHero hero)
+	public boolean isCrossableBy(AiSprite<?> sprite)
 	{	boolean result = true;
 		// murs
-		if(!blocks.isEmpty() && hero.getTile()!=this)
-		{	result = hero.hasThroughWall();
-			Iterator<AiBlock> it = blocks.iterator();
-			while(it.hasNext() && result)
-			{	AiBlock b = it.next();
-				result = !b.hasBlockHero();				
-			}			
-		}
+		if(result)
+			result = isCrossableBy(sprite,blocks);
 		// bombes
-		if(result && !bombs.isEmpty())
-			result = hero.hasThroughBomb() || hero.getTile()==this;
+		if(result)
+			result = isCrossableBy(sprite,bombs);
 		// feu
-		if(result && !fires.isEmpty())
-			result = hero.hasThroughFire();		
+		if(result)
+			result = isCrossableBy(sprite,fires);
+		// heroes
+		if(result)
+			result = isCrossableBy(sprite,heroes);
+		// item
+		if(result)
+			result = isCrossableBy(sprite,items);
 		//
+		return result;
+	}
+	
+	/**
+	 * fonction auxiliaire utilisée pour déterminer si cette
+	 * case est traversable par le sprite passé en paramètre.
+	 * (cette fonction réalise le traitement relativement à 
+	 * la liste de sprite passée en paramètre)
+	 * 
+	 * @param sprite	le sprite qui veut traverser cette case
+	 * @param list	les sprites de cette case à tester
+	 * @return	vrai si le sprite peut traverser tous les sprites de la liste
+	 */
+	private <T extends AiSprite<?>> boolean isCrossableBy(AiSprite<?> sprite, ArrayList<T> list)
+	{	boolean result = true;
+		if(!list.isEmpty())
+		{	Iterator<T> it = list.iterator();
+			while(it.hasNext() && result)
+			{	T s = it.next();
+				result = s.isCrossableBy(sprite);				
+			}
+		}
 		return result;
 	}
 
