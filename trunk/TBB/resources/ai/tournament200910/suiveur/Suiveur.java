@@ -46,23 +46,19 @@ public class Suiveur extends ArtificialIntelligence
 	public AiAction processAction() throws StopRequestException
 	{	checkInterruption(); //APPEL OBLIGATOIRE
 
-		zone = getPercepts();
-		ownHero = zone.getOwnHero();				
+		// premier appel : on initialise		
+		if(ownHero == null)
+			init();
+	
 		AiAction result = new AiAction(AiActionName.NONE);
 		
-		// si ownHero est null, c'est que l'IA est morte : inutile de continuer
-		if(ownHero!=null)
+		// si le personnage controlé a été éliminé, inutile de continuer
+		if(!ownHero.hasEnded())
 		{	// on met à jour la position de l'ia dans la zone
-			currentTile = ownHero.getTile();
-			currentX = ownHero.getPosX();
-			currentY = ownHero.getPosY();
+			updateLocation();
 			if(verbose)
 				System.out.println(ownHero.getColor()+": ("+currentTile.getLine()+","+currentTile.getCol()+") ("+currentX+","+currentY+")");
 			Direction moveDir = Direction.NONE;
-			
-			// premier appel : on initialise		
-			if(first)
-				init();
 			
 			// on met à jour le gestionnaire de sécurité
 			safetyManager.update();
@@ -73,17 +69,21 @@ public class Suiveur extends ArtificialIntelligence
 				else
 					moveDir = escapeManager.update();
 			}
+			
 			// sinon si on est en danger : on commence à fuir
 			else if(!safetyManager.isSafe(currentTile))
 			{	escapeManager = new EscapeManager(this);
 				moveDir = escapeManager.update();
 			}
+			
 			// sinon on se déplace vers la cible
 			else
 			{	updateTarget();
 				if(target!=null)
 					moveDir = targetManager.update();
 			}
+			
+			// on met à jour la direction renvoyée au moteur du jeu
 			result = new AiAction(AiActionName.MOVE,moveDir);
 		}
 		
@@ -93,13 +93,14 @@ public class Suiveur extends ArtificialIntelligence
 	/////////////////////////////////////////////////////////////////
 	// INITIALISATION			/////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	/** variable utilisée uniquement lors de l'initialisation */
-	private boolean first = true;
-
 	private void init() throws StopRequestException
 	{	checkInterruption(); //APPEL OBLIGATOIRE
 
-		first = false;
+		zone = getPercepts();
+		ownHero = zone.getOwnHero();
+	
+		updateLocation();
+		
 		safetyManager = new SafetyManager(this);
 		targetManager = new PathManager(this,currentTile);
 	}
@@ -182,15 +183,24 @@ public class Suiveur extends ArtificialIntelligence
 	 */
 	public double getCurrentY() throws StopRequestException
 	{	checkInterruption(); //APPEL OBLIGATOIRE
-	
+		
 		return currentY;
+	}
+	
+	private void updateLocation() throws StopRequestException
+	{	checkInterruption(); //APPEL OBLIGATOIRE
+		
+		currentTile = ownHero.getTile();
+		currentX = ownHero.getPosX();
+		currentY = ownHero.getPosY();
+				
 	}
 
 	/////////////////////////////////////////////////////////////////
 	// OWN HERO					/////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	/** le personnage dirigé par cette IA */
-	private AiHero ownHero;
+	private AiHero ownHero = null;
 
 	/**
 	 * renvoie le personnage contrôlé par cette IA
@@ -205,7 +215,7 @@ public class Suiveur extends ArtificialIntelligence
 	// PERCEPTS					/////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	/** la zone de jeu */
-	private AiZone zone;
+	private AiZone zone = null;
 
 	/**
 	 * renvoie la zone de jeu

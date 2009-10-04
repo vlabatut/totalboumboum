@@ -45,7 +45,7 @@ public class EngineConfiguration
 	/** speed coefficient */
 	private double speedCoeff; //NOTE speedcoeff à descendre au niveau de loop, car il peut dépendre du level
 	/** ai updates per second */
-	private int aiUps = 10;
+	private int aiUps = 50;
 	/** ai update period */
 	private long aiPeriod = (long)(1000.0/aiUps);
 

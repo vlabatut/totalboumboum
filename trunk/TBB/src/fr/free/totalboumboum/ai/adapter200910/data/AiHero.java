@@ -128,6 +128,8 @@ public class AiHero extends AiSprite<Hero>
 
 		// number of bombs currently dropped
     	bombCount = sprite.getDroppedBombs().size();
+    	
+    	//System.out.println(getSprite().getColor()+": bombRange="+bombRange+" bombNumber="+bombNumber+" bombCount="+bombCount);    	
 	}
 	
 	/////////////////////////////////////////////////////////////////
@@ -180,6 +182,7 @@ public class AiHero extends AiSprite<Hero>
 		Gesture walking = getSprite().getGesturePack().getGesture(GestureName.WALKING);
 		double basicSpeed = walking.getTrajectoryDirection(Direction.RIGHT).getXInteraction();
 		walkingSpeed = speedCoeff*basicSpeed;
+		//System.out.println(getSprite().getColor()+": walkingSpeed="+walkingSpeed);
 	}
 
 	/////////////////////////////////////////////////////////////////
