@@ -18,14 +18,14 @@
 
  		<limits>
 			<confrontation>
-				<points local="false" name="basicTournament" />
+				<points local="false" name="TournamentBasic" />
 				<threshold value="3" />
 			</confrontation>
  		</limits>
 
 	 	
 		<matches randomOrder="false">
-			<match local="false" name="matchCourt" />
+			<match local="false" name="ShortMatch" />
 		</matches>
 
 	</sequence>

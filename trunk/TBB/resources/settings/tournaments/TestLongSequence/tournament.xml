@@ -18,16 +18,17 @@
 
  		<limits>
 			<confrontation>
-				<points local="false" name="basicTournament" />
+				<points local="false" name="TournamentBasic" />
 				<threshold value="3" />
 			</confrontation>
  		</limits>
 
 	 	
 		<matches randomOrder="false">
-			<match local="false" name="matchLong" />
-			<match local="false" name="matchLong" />
-			<match local="true" name="match03" />
+			<match local="false" name="SBM1custom" />
+			<match local="false" name="SBM1official" />
+			<match local="false" name="NBM2custom" />
+			<match local="false" name="NBM2official" />
 		</matches>
 
 	</sequence>
