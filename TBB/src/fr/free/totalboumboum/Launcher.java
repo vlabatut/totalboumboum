@@ -43,6 +43,7 @@ import javax.xml.parsers.ParserConfigurationException;
 import org.xml.sax.SAXException;
 
 import fr.free.totalboumboum.configuration.Configuration;
+import fr.free.totalboumboum.engine.log.logstats.LogstatsLoader;
 import fr.free.totalboumboum.gui.data.configuration.GuiConfiguration;
 import fr.free.totalboumboum.gui.data.configuration.misc.MiscConfiguration;
 import fr.free.totalboumboum.gui.frames.NormalFrame;
@@ -94,6 +95,8 @@ public class Launcher
 		// initalize GUI
 		updateSplash(splash,GuiTools.STARTUP_MESSAGES[GuiTools.STARTUP_INIT]);
 		GuiTools.init();
+		// load engine stats
+		LogstatsLoader.loadLogstats();
 		// startup finished
 		updateSplash(splash,GuiTools.STARTUP_MESSAGES[GuiTools.STARTUP_DONE]);
 		
@@ -175,6 +178,8 @@ public class Launcher
 		// initalize GUI
 		System.out.println(GuiTools.STARTUP_MESSAGES[GuiTools.STARTUP_INIT]);
 		GuiTools.quickInit();
+		// load engine stats
+		LogstatsLoader.loadLogstats();
 		// done
 		System.out.println(GuiTools.STARTUP_MESSAGES[GuiTools.STARTUP_DONE]);
 		
@@ -850,6 +855,7 @@ public class Launcher
 	 * - affichage de données relatives aux IA : chemins, vision de la zone de jeu, valeurs case par case, etc.
 	 * - touche spéciale permettant d'exécuter seulement une itération du moteur
 	 * - IA suiveuse : IA de démonstration qui choisit un autre joueur puis le suit
+	 * - gestion des IA : mise en place d'UPS, limité par défaut à 10 Hz, afin de décharger le moteur du jeu
 	 */
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -857,8 +863,6 @@ public class Launcher
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 	/* TODO
-	 * 
-	 * - SBM1: malus constipation semble rester même après la fin du clignotement
 	 * 
 	 * - GUI : les résultats ne s'affichent pas automatiquement quand on revient à l'écran du match
 	 * 
@@ -872,6 +876,13 @@ public class Launcher
 	 * - l'ombre des blocs de la dernière ligne est portée sur les blocs de la première ligne
 	 * 
 	 * - bug d'affichage dans les notes d'IA, les accents sont affichés avec la police par défaut
+	 * 
+	 * - bug : j'ai vu l'ia prendre une vie, mourir, relacher la vie, et revenir. 
+	 * 	 et la vie était foncionnelle : je l'ai prise, je suis mort, je suis revenu (sans la relacher cette fois)
+	 *   >> pas réussi à reproduire ça...
+	 * 
+	 * - la pause d'IA reste même si le joueur est mort, et je ne sais pas pq, au débug le moteur n'exécute pas le code affichant le texte !
+	 * 
 	 */
 	
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -882,11 +893,7 @@ public class Launcher
 	 * 
 	 * - nettoyer tous les tournois, rounds, etc, dans la version clean (et synchro qd nécessaire la version de travail)
 	 * 
-	 * - programmer l'ia suiveuse
-	 * 
 	 * - faut émettre un évt de sortie de case à la disparition d'un sprite (mort, masquage, etc)
-	 * 
-	 * - HIDING devrait être un gesture définit automatiquement, non ? pas d'image, sensible à rien, seule action autorisée=apparaitre...
 	 * 
 	 * - étudier le fonctionnement de ended (sprite) pr voir quand retirer le sprite de level/tile
 	 * 
@@ -897,6 +904,8 @@ public class Launcher
 	 * - à la fin de la partie, faire disparaitre tout le niveau comme il apparait au début
 	 * 
 	 * - faire un log automatique energistrant toutes les commandes et positions, histoire d'avoir une trace des bugs
+	 * 
+	 * - faire un compteur du nombre d'exécutions du jeu
 	 * 
 	 */
 	
@@ -966,6 +975,7 @@ public class Launcher
 	 *  	  il va falloir utiliser XSD 1.1 quand ça sera possible, avec les assertions et associations, cf l'email.
 	 * 
 	 * - Actions/Abilities/Modulations
+	 * 		- HIDING devrait être un gesture définit automatiquement, non ? pas d'image, sensible à rien, seule action autorisée=apparaitre...
 	 *  	- vérifier qu'avant d'exécuter une action, on vérifie si le sprite concerné (actor) possède bien l'ability (avec modulate)
 	 * 		- pour chaque gesture, fixer les actions autorisées 
 	 * 		- ça ne me plait pas beaucoup ces actions bidons pour tester les abilities de certains sprites. faut réfléchir à un truc plus propre
@@ -1049,10 +1059,6 @@ public class Launcher
 	 * - tester la fonction de speed (hero)
 	 * - tester la fonction update abilities (hero)
 	 * 
-	 * - quand l'ia meurt et revient grace à une vie, elle n'a plus le control du personnage
-	 * - bug : j'ai vu l'ia prendre une vie, mourir, relacher la vie, et revenir. 
-	 * 	 et la vie était foncionnelle : je l'ai prise, je suis mort, je suis revenu (sans la relacher cette fois)
-	 * - optimisation de l'API IA:
-	 * 		- les IA ont-elles vraiment besoin d'être raffraichies si souvent ? >> non! réduire le taux de raffraichissement
+	 * - quand l'ia meurt et revient grace à une vie, elle n'a plus le controle du personnage
 	 */
 }

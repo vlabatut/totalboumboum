@@ -148,7 +148,7 @@ buttonStats.setEnabled(false);
 			replaceWith(tournamentContainer);
 	    }
 		else if(e.getActionCommand().equals(GuiKeys.MENU_MAIN_BUTTON_QUIT))
-		{	getFrame().exit();
+		{	getFrame().exit(false);
 	    }
 		else if(e.getActionCommand().equals(GuiKeys.MENU_MAIN_BUTTON_TOURNAMENT))
 		{	if(tournamentContainer==null)

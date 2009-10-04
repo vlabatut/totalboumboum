@@ -35,6 +35,7 @@ public class FileTools
 	public static final String EXTENSION_CLASS = ".class";
 	public static final String EXTENSION_FONT = ".ttf";
 	public static final String EXTENSION_JAVA = ".java";
+	public static final String EXTENSION_LOG = ".log";
 	public static final String EXTENSION_SCHEMA = ".xsd";
 	public static final String EXTENSION_TEXT = ".txt";
 	//
@@ -76,6 +77,7 @@ public class FileTools
 	public static final String FILE_LEVEL = "level";
 	public static final String FILE_LANGUAGE = "language";
 	public static final String FILE_LEVELS = "levels";
+	public static final String FILE_LOGSTATS = "logstats";
 	public static final String FILE_MATCH = "match";
 	public static final String FILE_MATCHES = "matches";
 	public static final String FILE_MATRICES = "matrices";
@@ -125,6 +127,7 @@ public class FileTools
 	public static final String FOLDER_ITEMS = "items";
 	public static final String FOLDER_INSTANCES = "instances";
 	public static final String FOLDER_LEVELS = "levels";
+	public static final String FOLDER_LOGS = "logs";
 	public static final String FOLDER_MATCHES = "matches";
 	public static final String FOLDER_MINE = "mine";
 	public static final String FOLDER_MODULATIONS = "modulations";
@@ -167,6 +170,10 @@ public class FileTools
 
 	public static String getLevelsPath()
 	{	return getResourcesPath()+File.separator+FOLDER_LEVELS;		
+	}
+	
+	public static String getLogsPath()
+	{	return getResourcesPath()+File.separator+FOLDER_LOGS;		
 	}
 	
 	public static String getSchemasPath()

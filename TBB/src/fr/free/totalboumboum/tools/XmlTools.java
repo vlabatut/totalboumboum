@@ -137,6 +137,7 @@ public class XmlTools
 	public static final String ELT_LOCAL = "local";
 	public static final String ELT_LOCATION = "location";
 	public static final String ELT_LOCATIONS = "locations";
+	public static final String ELT_LOGSTATS = "logstats";
 	public static final String ELT_MATCH = "match";
 	public static final String ELT_MATCHES = "matches";
 	public static final String ELT_MATRIX = "matrix";
@@ -171,9 +172,11 @@ public class XmlTools
 	public static final String ELT_PROPERTIES = "properties";
 	public static final String ELT_QUICKMATCH = "quickmatch";
 	public static final String ELT_QUICKSTART = "quickstart";
+	public static final String ELT_QUICK_LAUNCH = "quickLaunch";
 	public static final String ELT_RANKINGS = "rankings";
 	public static final String ELT_RANKPOINTS = "rankpoints";
 	public static final String ELT_REFERENCE = "reference";
+	public static final String ELT_REGULAR_LAUNCH = "regularLaunch";
 	public static final String ELT_ROUND = "round";
 	public static final String ELT_ROUNDS = "rounds";
 	public static final String ELT_SCORE = "score";
@@ -241,6 +244,7 @@ public class XmlTools
 	public static final String ATT_COMPARATOR = "comparator";
 	public static final String ATT_CONTACT = "contact";
 	public static final String ATT_CONTROLS = "controls";
+	public static final String ATT_COUNT = "count";
 	public static final String ATT_DEFAULT = "default";
 	public static final String ATT_DIRECTION = "direction";
 	public static final String ATT_DRAW = "draw";

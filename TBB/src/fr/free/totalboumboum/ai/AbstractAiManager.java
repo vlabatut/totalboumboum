@@ -170,7 +170,9 @@ public abstract class AbstractAiManager<V>
      * afin que celle ci calcule la prochaine action à effectuer.
      */
     private final void makeCall()
-    {	updatePercepts();
+    {	
+//    	System.out.println(player.getColor()+":"+GameVariables.loop.getTotalTime());    	
+    	updatePercepts();
      	futureAi = executorAi.submit(ai);
     }
     

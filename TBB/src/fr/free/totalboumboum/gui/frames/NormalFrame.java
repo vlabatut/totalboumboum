@@ -39,6 +39,7 @@ import fr.free.totalboumboum.gui.tools.FullRepaintManager;
 
 import java.awt.BorderLayout;
 import java.awt.Container;
+import java.awt.event.WindowEvent;
 import java.io.File;
 import java.io.IOException;
 
@@ -151,7 +152,7 @@ public class NormalFrame extends AbstractFrame implements MenuContainer
 		catch (IOException e)
 		{	e.printStackTrace();
 		}
-		exit();
+		exit(false);
 	}
 
 	/////////////////////////////////////////////////////////////////
@@ -172,6 +173,14 @@ public class NormalFrame extends AbstractFrame implements MenuContainer
 		layeredPane.remove(modalDialogPanel);
 		modalDialogPanel = null;
 		repaint();
+	}
+
+	/////////////////////////////////////////////////////////////////
+	// WINDOW LISTENER	/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	@Override
+	public void windowClosing(WindowEvent e)
+	{	exit(false);
 	}
 }
 
