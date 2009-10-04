@@ -134,6 +134,13 @@ public class BlockEventManager extends EventManager
 				//sprite.addDelay(DelayManager.DL_SPAWN, ablt.getStrength());	
 			}
 		}
+		//
+		else if(event.getStringParameter().equals(DelayManager.DL_START))
+		{	if(gesture.equals(GestureName.PREPARED))
+				start();
+			else
+				sprite.addIterDelay(DelayManager.DL_START,1);
+		}
 	}
 	
 	private void engEnter(EngineEvent event)
@@ -149,17 +156,23 @@ public class BlockEventManager extends EventManager
 	}
 	
 	private void engStart(EngineEvent event)
-	{	sprite.startItemManager();
-		if(gesture.equals(GestureName.PREPARED))
-		{	gesture = GestureName.STANDING;
-			sprite.setGesture(gesture,spriteDirection,Direction.NONE,true);
+	{	if(gesture.equals(GestureName.PREPARED))
+		{	start();
+		}
+		else if(gesture.equals(GestureName.ENTERING))
+		{	sprite.addIterDelay(DelayManager.DL_START,1);			
 		}
 	}
 
 	/////////////////////////////////////////////////////////////////
 	// ACTIONS			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-
+	private void start()
+	{	sprite.startItemManager();
+		gesture = GestureName.STANDING;
+		sprite.setGesture(gesture,spriteDirection,Direction.NONE,true);
+	}
+	
 	/////////////////////////////////////////////////////////////////
 	// FINISHED			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////

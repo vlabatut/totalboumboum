@@ -355,6 +355,13 @@ public class BombEventManager extends EventManager
 				}
 			}
 		}
+		//
+		else if(event.getStringParameter().equals(DelayManager.DL_START))
+		{	if(gesture.equals(GestureName.PREPARED))
+				start();
+			else
+				sprite.addIterDelay(DelayManager.DL_START,1);
+		}
 	}
 
 	private void engTrajectoryOver(EngineEvent event)
@@ -413,9 +420,11 @@ public class BombEventManager extends EventManager
 	}
 	
 	private void engStart(EngineEvent event)
-	{	sprite.startItemManager();
-		if(gesture.equals(GestureName.PREPARED))
-		{	stand();
+	{	if(gesture.equals(GestureName.PREPARED))
+		{	start();
+		}
+		else if(gesture.equals(GestureName.ENTERING))
+		{	sprite.addIterDelay(DelayManager.DL_START,1);			
 		}
 	}
 
@@ -444,6 +453,11 @@ public class BombEventManager extends EventManager
 			sprite.setGesture(gesture,spriteDirection,Direction.NONE,true);		
 	}
 
+	private void start()
+	{	sprite.startItemManager();
+		stand();
+	}
+	
 	/////////////////////////////////////////////////////////////////
 	// FINISHED			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////

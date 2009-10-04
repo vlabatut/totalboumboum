@@ -471,6 +471,13 @@ public class HeroEventManager extends EventManager
 		else if(event.getStringParameter().equals(DelayManager.DL_DEFEAT))
 		{	cry();			
 		}
+		//
+		else if(event.getStringParameter().equals(DelayManager.DL_START))
+		{	if(gesture.equals(GestureName.PREPARED))
+				start();
+			else
+				sprite.addIterDelay(DelayManager.DL_START,1);
+		}
 	}
 
 	private void engIntersectionOff(EngineEvent event)
@@ -591,10 +598,11 @@ public class HeroEventManager extends EventManager
 	}
 
 	private void engStart(EngineEvent event)
-	{	sprite.startItemManager();
-		if(gesture.equals(GestureName.PREPARED))
-		{	gesture = GestureName.STANDING;
-			sprite.setGesture(gesture,spriteDirection,Direction.NONE,true);
+	{	if(gesture.equals(GestureName.PREPARED))
+		{	start();
+		}
+		else if(gesture.equals(GestureName.ENTERING))
+		{	sprite.addIterDelay(DelayManager.DL_START,1);
 		}
 	}
 	
@@ -665,6 +673,12 @@ public class HeroEventManager extends EventManager
 		{	// program the defeat anime as soon as possible
 			sprite.addIterDelay(DelayManager.DL_DEFEAT,1);
 		}		
+	}
+	
+	private void start()	
+	{	sprite.startItemManager();
+		gesture = GestureName.STANDING;
+		sprite.setGesture(gesture,spriteDirection,Direction.NONE,true);
 	}
 	
 	/////////////////////////////////////////////////////////////////

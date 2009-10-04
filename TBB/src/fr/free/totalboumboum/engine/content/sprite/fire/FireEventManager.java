@@ -30,6 +30,7 @@ import fr.free.totalboumboum.engine.content.feature.event.ActionEvent;
 import fr.free.totalboumboum.engine.content.feature.event.ControlEvent;
 import fr.free.totalboumboum.engine.content.feature.event.EngineEvent;
 import fr.free.totalboumboum.engine.content.feature.gesture.GestureName;
+import fr.free.totalboumboum.engine.content.manager.delay.DelayManager;
 import fr.free.totalboumboum.engine.content.manager.event.EventManager;
 import fr.free.totalboumboum.engine.content.sprite.Sprite;
 
@@ -70,6 +71,8 @@ public class FireEventManager extends EventManager
 	public void processEvent(EngineEvent event)
 	{	if(event.getName().equals(EngineEvent.ANIME_OVER))
 			engAnimeOver(event);
+		else if(event.getName().equals(EngineEvent.DELAY_OVER))
+			engDelayOver(event);
 		else if(event.getName().equals(EngineEvent.TILE_LOW_ENTER))
 			tileEnter(event);
 		else if(event.getName().equals(EngineEvent.TOUCH_GROUND))
@@ -110,6 +113,15 @@ public class FireEventManager extends EventManager
 		}
 	}
 	
+	private void engDelayOver(EngineEvent event)
+	{	if(event.getStringParameter().equals(DelayManager.DL_START))
+		{	if(gesture.equals(GestureName.PREPARED))
+				start();
+			else
+				sprite.addIterDelay(DelayManager.DL_START,1);
+		}
+	}
+	
 	private void engEnter(EngineEvent event)
 	{	if(gesture.equals(GestureName.NONE))
 		{	gesture = GestureName.ENTERING;
@@ -123,10 +135,11 @@ public class FireEventManager extends EventManager
 	}
 	
 	private void engStart(EngineEvent event)
-	{	sprite.startItemManager();
-		if(gesture.equals(GestureName.PREPARED))
-		{	gesture = GestureName.STANDING;
-			sprite.setGesture(gesture,spriteDirection,Direction.NONE,true);
+	{	if(gesture.equals(GestureName.PREPARED))
+		{	start();
+		}
+		else if(gesture.equals(GestureName.ENTERING))
+		{	sprite.addIterDelay(DelayManager.DL_START,1);			
 		}
 	}
 
@@ -141,6 +154,12 @@ public class FireEventManager extends EventManager
 		sprite.setGesture(gesture,spriteDirection,Direction.NONE,true);
 		EngineEvent event = new EngineEvent(EngineEvent.TILE_LOW_ENTER,sprite,null,sprite.getActualDirection()); //TODO to be changed by a GESTURE_CHANGE event (or equiv.)
 		sprite.getTile().spreadEvent(event);
+	}
+	
+	private void start()
+	{	sprite.startItemManager();
+		gesture = GestureName.STANDING;
+		sprite.setGesture(gesture,spriteDirection,Direction.NONE,true);
 	}
 	
 	/////////////////////////////////////////////////////////////////
