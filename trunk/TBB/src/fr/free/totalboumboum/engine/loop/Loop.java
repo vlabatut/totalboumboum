@@ -412,6 +412,7 @@ public class Loop implements Runnable, Serializable
 	// ENGINE			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	private long totalTime = 0;
+	private long aiTime = 0;
 	/** 
 	 * Number of frames with a delay of 0 ms before the animation thread yields
 	 * to other running threads. 
@@ -546,6 +547,7 @@ public class Loop implements Runnable, Serializable
 		beforeTime = gameStartTime;
 		afterTime = gameStartTime;
 		totalTime = 0;
+		aiTime = 0;
 
 //		setLooping(true);
 		while(/*isLooping() && */!isOver())
@@ -592,7 +594,7 @@ public class Loop implements Runnable, Serializable
 			/* If frame animation is taking too long, update the game state
 			   without rendering it, to get the updates/sec nearer to the required FPS. */
 			int skips = 0;
-			while (excess>milliPeriod 
+			while (excess>milliPeriod
 //					&& skips<MAX_FRAME_SKIPS
 					)
 			{	excess = excess - milliPeriod;
@@ -648,7 +650,6 @@ System.out.println();
 	private void update()
 	{	if(!isPaused() && (!getEnginePause() || getEngineStep()))
 		{	switchEngineStep(false);
-			long milliPeriod = Configuration.getEngineConfiguration().getMilliPeriod();
 			
 			// celebration ?
 			if(celebrationDuration>0)
@@ -665,11 +666,15 @@ System.out.println();
 			
 			// update AIs
 			if(hasStarted) // only after the round has started
-			{	for(int i=0;i<players.size();i++)
-				{	Player player = players.get(i);
-					boolean aiPause = getAiPause(i);
-					if(!player.isOut())
-						player.update(aiPause);
+			{	aiTime = aiTime + milliPeriod;
+				if(aiTime >= Configuration.getEngineConfiguration().getAiPeriod())
+				{	aiTime = 0;
+					for(int i=0;i<players.size();i++)
+					{	Player player = players.get(i);
+						boolean aiPause = getAiPause(i);
+						if(!player.isOut())
+							player.update(aiPause);
+					}
 				}
 			}
 		}
@@ -1012,8 +1017,9 @@ System.out.println();
 		String text = "AI Paused";
 		Rectangle2D box = metrics.getStringBounds(text, g);
 		for(int i=0;i<players.size();i++)
-		{	if(pauseAis.get(i))
-			{	Sprite s = players.get(i).getSprite();
+		{	Player player = players.get(i);
+			if(pauseAis.get(i) && !player.isOut())
+			{	Sprite s = player.getSprite();
 				int x = (int)Math.round(s.getCurrentPosX()-box.getWidth()/2);
 				int y = (int)Math.round(s.getCurrentPosY()+box.getHeight()/2);
 				g.drawString(text, x, y);

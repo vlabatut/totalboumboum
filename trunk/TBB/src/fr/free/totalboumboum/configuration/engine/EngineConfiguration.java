@@ -36,11 +36,18 @@ public class EngineConfiguration
 	// TIMING			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	private boolean autoFps;
+	/** frames per second */
 	private int fps;
+	/** engine update persiod in milliseconds */
 	private long milliPeriod;
+	/** engine update persiod in nanoseconds */
 	private long nanoPeriod;
-	//NOTE speedcoeff à descendre au niveau de loop, car il peut dépendre du level
-	private double speedCoeff;
+	/** speed coefficient */
+	private double speedCoeff; //NOTE speedcoeff à descendre au niveau de loop, car il peut dépendre du level
+	/** ai updates per second */
+	private int aiUps = 10;
+	/** ai update period */
+	private long aiPeriod = (long)(1000.0/aiUps);
 
 	public void setAutoFps(boolean autoFps)
 	{	this.autoFps = autoFps;		
@@ -51,7 +58,7 @@ public class EngineConfiguration
 	
 	public void setFps(int fps)
 	{	this.fps = fps;
-		milliPeriod = (long) 1000.0 / fps;
+		milliPeriod = (long) (1000.0 / fps);
 		nanoPeriod = milliPeriod * 1000000L;
 	}
 	public int getFps()
@@ -62,6 +69,13 @@ public class EngineConfiguration
 	}
 	public long getNanoPeriod()
 	{	return nanoPeriod;
+	}
+	
+	public int getAiUps()
+	{	return aiUps;
+	}
+	public long getAiPeriod()
+	{	return aiPeriod;
 	}
 
 	public double getSpeedCoeff()

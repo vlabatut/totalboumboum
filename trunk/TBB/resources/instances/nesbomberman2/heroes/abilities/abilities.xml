@@ -3,7 +3,7 @@
 		xsi:noNamespaceSchemaLocation="../../../../schemas/abilities.xsd" >
 
 		<!-- STATE -->
-<!-- SPRITE_ENTRY_DURATION --> 
+<!--	SPRITE_ENTRY_DURATION --> 
 		<ability strength="1000" frame="false" time="-1" uses="-1">
 			<name value="SPRITE_ENTRY_DURATION" />
 		</ability>
@@ -16,7 +16,7 @@
 			<name value="SPRITE_TRAVERSE_ITEM"/>
 		</ability>
 <!--  	HERO_BOMB_DROP_LATENCY --> 
-		<ability strength="250" frame="false" time="-1" uses="-1">
+		<ability strength="100" frame="false" time="-1" uses="-1">
 			<name value="HERO_BOMB_DROP_LATENCY" />
 		</ability>		
 <!--  	HERO_BOMB_NUMBER_MAX --> 
