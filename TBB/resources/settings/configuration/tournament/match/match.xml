@@ -6,21 +6,22 @@
  	<notes>
  		<line value="Here goes a short description of the match." />
  		<line value="Author: Vincent Labatut" />
- 		<line value="Date: 28-09-2008" />
+ 		<line value="Date: 25-09-2008" />
  	</notes>
  	
 	<author value="Vincent Labatut" />
 
 	<limits>
 		<confrontation>
-			<points local="false" name="basicMatch" />
- 			<threshold value="3" />
+			<points local="true" name="points" />
+			<threshold value="5" />
 		</confrontation>
 	</limits>
 
-	
  	<rounds randomOrder="false" >
-  		<round local="true" name="round00" />
+  		<round local="true" name="round" />
+  		<round local="true" name="round" />
+  		<round local="true" name="round" />
   	</rounds>
 	
 </match>
