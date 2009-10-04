@@ -241,7 +241,7 @@ public class Suiveur extends ArtificialIntelligence
 	{	checkInterruption(); //APPEL OBLIGATOIRE
 	
 		target = null;
-		ArrayList<AiHero> heroes = new ArrayList<AiHero>(zone.getHeroes());
+		ArrayList<AiHero> heroes = new ArrayList<AiHero>(zone.getRemainingHeroes());
 		heroes.remove(ownHero);
 		if(!heroes.isEmpty())
 		{	int index = (int)Math.random()*heroes.size();

@@ -373,7 +373,7 @@ public class Level
 	/////////////////////////////////////////////////////////////////
 	// SPRITES				/////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	/** all the sprites currently present in the level (even the hiden ones) */
+	/** all the sprites currently present in the level (even the hidden ones) */
 	private ArrayList<Sprite> sprites = new ArrayList<Sprite>();;
 
 	public void removeSprite(Sprite sprite)
