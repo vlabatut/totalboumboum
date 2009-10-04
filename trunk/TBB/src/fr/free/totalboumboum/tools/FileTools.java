@@ -148,6 +148,7 @@ public class FileTools
 	public static final String FOLDER_SOURCE = "src";
 	public static final String FOLDER_STATISTICS = "statistics";
 	public static final String FOLDER_THEMES = "themes";
+	public static final String FOLDER_TOURNAMENT = "tournament";
 	public static final String FOLDER_TOURNAMENTS = "tournaments";
 	public static final String FOLDER_TRAJECTORIES = "trajectories";
 	public static final String FOLDER_XML = "xml";

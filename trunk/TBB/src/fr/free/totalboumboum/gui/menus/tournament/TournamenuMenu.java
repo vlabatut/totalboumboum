@@ -126,27 +126,14 @@ public class TournamenuMenu extends InnerMenuPanel
 	public void initTournament()
 	{	// init configuration
 		tournamentConfiguration = Configuration.getGameConfiguration().getTournamentConfiguration().copy();
-		loadTournament();
 		if(!tournamentConfiguration.getUseLastPlayers())
-			tournamentConfiguration.reinitPlayers();		
-		if(!tournamentConfiguration.getUseLastTournament())
-			tournamentConfiguration.reinitTournament();
-		// set panel
-		playersData.setTournamentConfiguration(tournamentConfiguration);
-		container.setDataPart(playersData);
-		setButtonsPlayers();
-	}
-
-	private void setTournamentPlayers()
-	{	ArrayList<Profile> selectedProfiles = playersData.getSelectedProfiles();
-		AbstractTournament tournament = tournamentConfiguration.getTournament();
-		tournament.setProfiles(selectedProfiles);
-	}
-	
-	private void loadTournament()
-	{	try
-		{	tournamentConfiguration.loadLastTournament();
-			//tournamentConfiguration.setTournament(tournament);
+			tournamentConfiguration.reinitPlayers();
+		
+		try
+		{	if(!tournamentConfiguration.getUseLastTournament())
+				tournamentConfiguration.reinitTournament();
+			else
+				tournamentConfiguration.loadLastTournament();
 		}
 		catch (ParserConfigurationException e)
 		{	e.printStackTrace();
@@ -160,6 +147,16 @@ public class TournamenuMenu extends InnerMenuPanel
 		catch (ClassNotFoundException e)
 		{	e.printStackTrace();
 		}
+		// set panel
+		playersData.setTournamentConfiguration(tournamentConfiguration);
+		container.setDataPart(playersData);
+		setButtonsPlayers();
+	}
+
+	private void setTournamentPlayers()
+	{	ArrayList<Profile> selectedProfiles = playersData.getSelectedProfiles();
+		AbstractTournament tournament = tournamentConfiguration.getTournament();
+		tournament.setProfiles(selectedProfiles);
 	}
 	
 	private void setTournamentSettings()
