@@ -1059,7 +1059,6 @@ public class Launcher
 
 	/**
 	 * - tester la fonction de speed (hero)
-	 * - tester la fonction traversable (tile)
 	 * - tester la fonction update abilities (hero)
 	 * 
 	 * - quand l'ia meurt et revient grace à une vie, elle n'a plus le control du personnage
@@ -1069,9 +1068,6 @@ public class Launcher
 	 * 		- les IA ont-elles vraiment besoin d'être raffraichies si souvent ? >> non! réduire le taux de raffraichissement
 	 * 
 	 * - tester si les chemins de l'ia traversent le feu quand elle est invulnérable
-	 * - tester si les chemins de l'ia traversent les murs quand elle peut passer à travers
 	 * - changement incessant de chemin target alors qu'il n'y a pas d'obstacles
-	 * - bug : l'IA essaie parfois de passer à travers les murs (pb dans AiBlock ou AiTile)
-	 * - utiliser les nvelles fonctionnalités de l'API concernant le type de bombe pour calculer le blast, et vérif que c pas utilisé ailleurs 
 	 */
 }

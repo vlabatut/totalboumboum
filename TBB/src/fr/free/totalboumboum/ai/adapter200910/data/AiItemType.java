@@ -31,6 +31,8 @@ public enum AiItemType
 	EXTRA_BOMB,
 	/** les bombes du joueur explosent plus loin */
 	EXTRA_FLAME,
+	/** effet négatif sur le joueur (ralentissement, constipation, etc.) */
+	MALUS,
 	/** le joueur peut frapper dans une bombe et ainsi l'envoyer plus loin */
 	PUNCH,
 	/** autre type d'item */
@@ -48,6 +50,8 @@ public enum AiItemType
 			result = EXTRA_BOMB;
 		else if(name.equalsIgnoreCase("extraflame"))
 			result = EXTRA_FLAME;
+		else if(name.equalsIgnoreCase("malus") || name.equalsIgnoreCase("disease"))
+			result = MALUS;
 		else if(name.equalsIgnoreCase("punch"))
 			result = PUNCH;
 		else

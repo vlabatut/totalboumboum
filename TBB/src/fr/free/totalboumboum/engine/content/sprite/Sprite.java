@@ -25,6 +25,7 @@ import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.LinkedList;
+import java.util.List;
 
 import fr.free.totalboumboum.configuration.Configuration;
 import fr.free.totalboumboum.configuration.GameVariables;
@@ -588,8 +589,8 @@ public abstract class Sprite
 	{	return explosionManager;
 	}
 	
-	public void makeExplosion()
-	{	explosionManager.makeExplosion();	
+	public List<Tile> makeExplosion(boolean fake)
+	{	return explosionManager.makeExplosion(fake);	
 	}
 	
 	public void setFlameRange(int flameRange)

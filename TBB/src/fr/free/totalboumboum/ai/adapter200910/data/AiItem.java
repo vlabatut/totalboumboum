@@ -96,9 +96,9 @@ public class AiItem extends AiSprite<Item>
 	// COLLISIONS		/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	/** indique si ce bloc laisse passer les joueurs */
-	private StopType stopBombs;
+	private AiStopType stopBombs;
 	/** indique si ce bloc laisse passer le feu */
-	private StopType stopFires;
+	private AiStopType stopFires;
 
 	/** 
 	 * met jour les différentes caractéristiques de ce bloc
@@ -124,12 +124,12 @@ public class AiItem extends AiSprite<Item>
 				actorProperties.add(ability);
 				temp = sprite.isThirdPreventing(generalAction,actorProperties,targetProperties,actorCircumstance,targetCircumstance);
 				if(temp)
-					stopBombs = StopType.WEAK_STOP;
+					stopBombs = AiStopType.STRONG_STOP;
 				else
-					stopBombs = StopType.STRONG_STOP;
+					stopBombs = AiStopType.WEAK_STOP;
 			}
 			else
-				stopBombs = StopType.NO_STOP;
+				stopBombs = AiStopType.NO_STOP;
 		}
 
 		// bloque le feu
@@ -149,12 +149,12 @@ public class AiItem extends AiSprite<Item>
 				actorProperties.add(ability);
 				temp = sprite.isThirdPreventing(generalAction,actorProperties,targetProperties,actorCircumstance,targetCircumstance);
 				if(temp)
-					stopFires = StopType.WEAK_STOP;
+					stopFires = AiStopType.STRONG_STOP;
 				else
-					stopFires = StopType.STRONG_STOP;
+					stopFires = AiStopType.WEAK_STOP;
 			}
 			else
-				stopFires = StopType.NO_STOP;
+				stopFires = AiStopType.NO_STOP;
 		}
 	}	
 
@@ -168,21 +168,21 @@ public class AiItem extends AiSprite<Item>
 		// si le sprite considéré est un feu
 		else if(sprite instanceof AiFire)
 		{	AiFire fire = (AiFire) sprite;
-			if(stopFires==StopType.NO_STOP)
+			if(stopFires==AiStopType.NO_STOP)
 				result = true;
-			else if(stopFires==StopType.WEAK_STOP)
+			else if(stopFires==AiStopType.WEAK_STOP)
 				result = fire.hasThroughItems();
-			else if(stopFires==StopType.STRONG_STOP)
+			else if(stopFires==AiStopType.STRONG_STOP)
 				result = false;
 		}
 		// si le sprite considéré est une bombe
 		else if(sprite instanceof AiBomb)
 		{	AiBomb bomb = (AiBomb) sprite;
-			if(stopBombs==StopType.NO_STOP)
+			if(stopBombs==AiStopType.NO_STOP)
 				result = true;
-			else if(stopBombs==StopType.WEAK_STOP)
+			else if(stopBombs==AiStopType.WEAK_STOP)
 				result = bomb.hasThroughItems();
-			else if(stopBombs==StopType.STRONG_STOP)
+			else if(stopBombs==AiStopType.STRONG_STOP)
 				result = false;
 		}
 		return result;

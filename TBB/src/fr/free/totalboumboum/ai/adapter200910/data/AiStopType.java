@@ -24,7 +24,7 @@ package fr.free.totalboumboum.ai.adapter200910.data;
 /**
  * types de blocages possibles pour un sprite
  */
-public enum StopType
+public enum AiStopType
 {
 	/** laisse passer n'importe quel sprite */
 	NO_STOP,

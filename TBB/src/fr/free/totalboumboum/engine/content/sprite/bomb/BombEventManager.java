@@ -95,7 +95,7 @@ public class BombEventManager extends EventManager
 			else
 			{	gesture = GestureName.BURNING;
 				sprite.setGesture(gesture,spriteDirection,Direction.NONE,true);
-				sprite.makeExplosion();
+				sprite.makeExplosion(false);
 			}
 		}
 	}
@@ -117,7 +117,7 @@ public class BombEventManager extends EventManager
 			else
 			{	gesture = GestureName.BURNING;
 				sprite.setGesture(gesture,spriteDirection,Direction.NONE,true);
-				sprite.makeExplosion();							
+				sprite.makeExplosion(false);							
 			}
 		}
 	}
@@ -323,7 +323,7 @@ public class BombEventManager extends EventManager
 						else
 						{	gesture = GestureName.BURNING;
 							sprite.setGesture(gesture,spriteDirection,Direction.NONE,true);
-							sprite.makeExplosion();							
+							sprite.makeExplosion(false);							
 						}
 					}
 					// is the bomb failing ?
@@ -331,7 +331,7 @@ public class BombEventManager extends EventManager
 					{	// explosion
 						gesture = GestureName.BURNING;
 						sprite.setGesture(gesture,spriteDirection,Direction.NONE,true);
-						sprite.makeExplosion();							
+						sprite.makeExplosion(false);							
 					}
 				}
 			}
@@ -351,7 +351,7 @@ public class BombEventManager extends EventManager
 				if(ablt.isActive())
 				{	gesture = GestureName.BURNING;
 					sprite.setGesture(gesture,spriteDirection,Direction.NONE,true);
-					sprite.makeExplosion();							
+					sprite.makeExplosion(false);							
 				}
 			}
 		}

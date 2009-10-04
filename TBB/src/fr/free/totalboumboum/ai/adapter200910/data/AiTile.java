@@ -22,9 +22,9 @@ package fr.free.totalboumboum.ai.adapter200910.data;
  */
 
 import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Collections;
+import java.util.HashMap;
 import java.util.Iterator;
+import java.util.List;
 
 import fr.free.totalboumboum.engine.container.tile.Tile;
 import fr.free.totalboumboum.engine.content.feature.Direction;
@@ -158,17 +158,17 @@ public class AiTile
 	// SPRITES			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	/** liste des blocks éventuellement contenus dans cette case */
-	private final ArrayList<AiBlock> blocks = new ArrayList<AiBlock>();
+	private final List<AiBlock> blocks = new ArrayList<AiBlock>();
 	/** liste des bombes éventuellement contenues dans cette case */
-	private final ArrayList<AiBomb> bombs = new ArrayList<AiBomb>();
+	private final List<AiBomb> bombs = new ArrayList<AiBomb>();
 	/** liste des feux éventuellement contenus dans cette case */
-	private final ArrayList<AiFire> fires = new ArrayList<AiFire>();
+	private final List<AiFire> fires = new ArrayList<AiFire>();
 	/** liste des sols éventuellement contenus dans cette case */
-	private final ArrayList<AiFloor> floors = new ArrayList<AiFloor>();
+	private final List<AiFloor> floors = new ArrayList<AiFloor>();
 	/** liste des personnages éventuellement contenus dans cette case */
-	private final ArrayList<AiHero> heroes = new ArrayList<AiHero>();
+	private final List<AiHero> heroes = new ArrayList<AiHero>();
 	/** liste des items éventuellement contenus dans cette case */
-	private final ArrayList<AiItem> items = new ArrayList<AiItem>();
+	private final List<AiItem> items = new ArrayList<AiItem>();
 
 	/** 
 	 * renvoie la liste des blocks contenus dans cette case 
@@ -176,9 +176,8 @@ public class AiTile
 	 * 
 	 * @return	les blocks éventuellement contenus dans cette case
 	 */
-	public Collection<AiBlock> getBlocks()
-	{	Collection<AiBlock> result = Collections.unmodifiableCollection(blocks);
-		return result;	
+	public List<AiBlock> getBlocks()
+	{	return blocks;	
 	}
 	/** 
 	 * renvoie la liste des bombes contenues dans cette case 
@@ -186,9 +185,8 @@ public class AiTile
 	 * 
 	 * @return	les bombes éventuellement contenues dans cette case
 	 */
-	public Collection<AiBomb> getBombs()
-	{	Collection<AiBomb> result = Collections.unmodifiableCollection(bombs);
-		return result;	
+	public List<AiBomb> getBombs()
+	{	return bombs;	
 	}
 	/** 
 	 * renvoie la liste des feux contenus dans cette case 
@@ -196,9 +194,8 @@ public class AiTile
 	 * 
 	 * @return	les feux éventuellement contenus dans cette case
 	 */
-	public Collection<AiFire> getFires()
-	{	Collection<AiFire> result = Collections.unmodifiableCollection(fires);
-		return result;	
+	public List<AiFire> getFires()
+	{	return fires;	
 	}
 	/** 
 	 * renvoie les sols de cette case 
@@ -206,9 +203,8 @@ public class AiTile
 	 * 
 	 * @return	les sols contenus dans cette case
 	 */
-	public Collection<AiFloor> getFloors()
-	{	Collection<AiFloor> result = Collections.unmodifiableCollection(floors);
-		return result;	
+	public List<AiFloor> getFloors()
+	{	return floors;	
 	}
 	/** 
 	 * renvoie la liste des personnages contenus dans cette case 
@@ -216,9 +212,8 @@ public class AiTile
 	 * 
 	 * @return	les personnages éventuellement contenus dans cette case
 	 */
-	public Collection<AiHero> getHeroes()
-	{	Collection<AiHero> result = Collections.unmodifiableCollection(heroes);
-		return result;	
+	public List<AiHero> getHeroes()
+	{	return heroes;	
 	}
 	/** 
 	 * renvoie la liste des items contenus dans cette case 
@@ -226,9 +221,8 @@ public class AiTile
 	 * 
 	 * @return	les items éventuellement contenus dans cette case
 	 */
-	public Collection<AiItem> getItems()
-	{	Collection<AiItem> result = Collections.unmodifiableCollection(items);
-		return result;	
+	public List<AiItem> getItems()
+	{	return items;	
 	}
 	
 	/** 
@@ -350,28 +344,6 @@ public class AiTile
 	}
 
 	/////////////////////////////////////////////////////////////////
-	// TILES			/////////////////////////////////////////////
-	/////////////////////////////////////////////////////////////////
-
-	/**
-	 * renvoie le voisin de cette case passée en paramètre, situé dans la direction
-	 * passée en paramètre.
-	 * ATTENTION : les niveaux sont circulaires, ce qui signifie que le voisin
-	 * d'une case située au bord du niveau est une case située sur l'autre bord.
-	 * Par exemple, dans un niveau contenant width colonnes, pour une case située
-	 * à la position (ligne,0), le voisin de gauche est la case située à la position
-	 * (ligne,width-1). Même chose pour les bordures haut et bas.
-	 * 
-	 * @param direction	direction dans laquelle le voisin se trouve
-	 * @return	le voisin de cette case, situé dans la direction indiquée
-	 */
-	public AiTile getNeighbor(Direction direction)
-	{	AiTile result;
-		result = zone.getNeighborTile(this,direction);
-		return result;
-	}
-	
-	/////////////////////////////////////////////////////////////////
 	// ABILITIES		/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////	
 	/**
@@ -382,7 +354,7 @@ public class AiTile
 	 * cela dépend à la fois du type des sprites considérés (Hero,
 	 * Bomb, Item, Block, etc) et des pouvoirs courants (passer à travers
 	 * les murs, passer à travers les bombes, etc). Le feu peut constituer
-	 * un obstacle, notamment pour les sprite de tyep Hero.
+	 * un obstacle, notamment pour les sprite de tyep Hero.</br>
 	 * cf. les méthodes de même nom dans les classes filles de AiSprite
 	 * 
 	 *  @param sprite	le sprite qui veut traverser cette case
@@ -419,7 +391,7 @@ public class AiTile
 	 * @param list	les sprites de cette case à tester
 	 * @return	vrai si le sprite peut traverser tous les sprites de la liste
 	 */
-	private <T extends AiSprite<?>> boolean isCrossableBy(AiSprite<?> sprite, ArrayList<T> list)
+	private <T extends AiSprite<?>> boolean isCrossableBy(AiSprite<?> sprite, List<T> list)
 	{	boolean result = true;
 		if(!list.isEmpty())
 		{	Iterator<T> it = list.iterator();
@@ -428,6 +400,65 @@ public class AiTile
 				result = s.isCrossableBy(sprite);				
 			}
 		}
+		return result;
+	}
+
+	/////////////////////////////////////////////////////////////////
+	// NEIGHBORS		/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	/** voisins de cette case dans les quatre directions principales */
+	private final HashMap<Direction,AiTile> neighbors = new HashMap<Direction, AiTile>();
+	
+	/**
+	 * initialise une fois pour toutes les voisins de la case,
+	 * pour ne pas avoir à les recalculer à chaque appel de la méthode
+	 * getNeighbors.
+	 */
+	void initNeighbors()
+	{	ArrayList<Direction> directions = Direction.getPrimaryValues();
+		for(Direction direction: directions)
+		{	Tile neighbor = tile.getNeighbor(direction);
+			int line = neighbor.getLine();
+			int col = neighbor.getCol();
+			AiTile aiNeighbor = getZone().getTile(line,col);
+			neighbors.put(direction,aiNeighbor);
+		}
+	}
+	
+	/**
+	 * renvoie le voisin de cette case passée en paramètre, situé dans la direction
+	 * passée en paramètre. Attention, seulement les directions primaires sont
+	 * utilisées (UP, RIGHT, DOWN, LEFT) : pas de direction composite (UPLEFT, etc.).
+	 * Dans le cas contraire, la fonction renvoie null.</br>
+	 * ATTENTION : les niveaux sont circulaires, ce qui signifie que le voisin
+	 * d'une case située au bord du niveau est une case située sur l'autre bord.
+	 * Par exemple, dans un niveau contenant width colonnes, pour une case située
+	 * à la position (ligne,0), le voisin de gauche est la case située à la position
+	 * (ligne,width-1). Même chose pour les bordures haut et bas.
+	 * 
+	 * @param direction	direction dans laquelle le voisin se trouve
+	 * @return	le voisin de cette case, situé dans la direction indiquée (ou null si la direction n'est pas primaire)
+	 */
+	public AiTile getNeighbor(Direction direction)
+	{	return neighbors.get(direction);		
+	}
+	
+	/**
+	 * renvoie la liste des voisins de cette case.
+	 * Il s'agit des voisins directs situés en haut, à gauche, en bas et à droite.</br>
+	 * 
+	 * ATTENTION : les niveaux sont circulaires, ce qui signifie que le voisin
+	 * d'une case située au bord du niveau est une case située sur l'autre bord.
+	 * Par exemple, dans un niveau contenant width colonnes, pour une case située
+	 * à la position (ligne,0), le voisin de gauche est la case située à la position
+	 * (ligne,width-1). Même chose pour les bordures haut et bas.
+	 * 
+	 * @return	la liste des voisins situés en haut, à gauche, en bas et à droite de la case passée en paramètre
+	 */
+	public List<AiTile> getNeighbors()
+	{	List<AiTile> result = new ArrayList<AiTile>();
+		for(Direction direction: Direction.getPrimaryValues())
+			result.add(neighbors.get(direction));
 		return result;
 	}
 
@@ -475,11 +506,12 @@ public class AiTile
 	}
 
 	/**
-	 * termine les représentations de sprites passées en paramètre
+	 * termine les représentations de sprites passées en paramètres
+	 * 
 	 * @param <T>	type de représentation
 	 * @param list	liste de représentations
 	 */
-	private <T extends AiSprite<?>> void finishSprites(ArrayList<T> list)
+	private <T extends AiSprite<?>> void finishSprites(List<T> list)
 	{	Iterator<T> it = list.iterator();
 		while(it.hasNext())
 		{	T temp = it.next();
