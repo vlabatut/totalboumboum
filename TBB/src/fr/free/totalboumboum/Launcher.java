@@ -864,6 +864,8 @@ public class Launcher
 
 	/* TODO
 	 * 
+	 * - GUI : reload la structure du dernier tournoi, alors que ça devrait pas
+	 * 
 	 * - GUI : les résultats ne s'affichent pas automatiquement quand on revient à l'écran du match
 	 * 
 	 * - GUI : édition de profil, quand on a fait "nouveau" ça n'active pas le bouton "modifier"
