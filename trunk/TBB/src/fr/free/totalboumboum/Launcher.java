@@ -1001,6 +1001,8 @@ public class Launcher
 
 	/* TODO
 	 * 
+	 * - pour les tournois, le chargement/sélection du tournoi doit précéder le choix des joueurs
+	 * 
 	 * - GUI : dans les tables, remplacer les labels par une classe custom qui implémenterait l'interface basicPanel
 	 * 
 	 * - profils: 
