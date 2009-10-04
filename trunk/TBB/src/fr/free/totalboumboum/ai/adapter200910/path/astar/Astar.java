@@ -36,11 +36,13 @@ import fr.free.totalboumboum.ai.adapter200910.path.astar.heuristic.HeuristicCalc
  * Implémentation de l'algorithme A* (http://fr.wikipedia.org/wiki/Algorithme_A*) adapté au
  * cas où on a le choix entre plusieurs objectifs alternatifs. S'il y a un seul objectif, 
  * cette implémentation correspond à un A* classique.</br>
+ * 
  * Cet algorithme permet (entre autres) de trouver le chemin le plus court entre deux cases,
  * en considérant les obstacles. Il a besoin de trois paramètres :
  * 		- le personnage qui doit effectuer le trajet entre les deux cases
  * 		- une fonction de coût, qui permet de définir combien coute une action (ici : le fait de passer d'une case à l'autre)
  * 		- une fonction heuristique, qui permet d'estimer le cout du chemin restant à parcourir</br>
+ * 
  * A noter qu'il s'agit d'une implémentation non-déterministe de l'algorithme.
  * Cela signifie que la méthode renverra toujours le chemin optimal (i.e. le plus court par
  * rapport au cout défini), mais s'il existe plusieurs solutions optimales, l'algorithme ne

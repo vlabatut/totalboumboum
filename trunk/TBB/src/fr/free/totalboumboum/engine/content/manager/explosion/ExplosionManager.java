@@ -22,6 +22,7 @@ package fr.free.totalboumboum.engine.content.manager.explosion;
  */
 
 import java.util.ArrayList;
+import java.util.List;
 
 import fr.free.totalboumboum.configuration.GameVariables;
 import fr.free.totalboumboum.engine.container.tile.Tile;
@@ -77,111 +78,97 @@ public class ExplosionManager
 	{	return explosion;	
 	}
 	
-	public void makeExplosion()
-	{	Tile tile = sprite.getTile();
-		// center
-//NOTE tester l'autorisation d'apparition pour le centre comme on le fait pour les autres parties de l'explosion
-//(la bombe peut avoir le droit d'exploser sans que le feu n'ait le droit d'apparaître)
-		Fire fire;
-		if(flameRange==0)
-			fire = explosion.makeFire("outside",tile);
-		else
-			fire = explosion.makeFire("inside",tile);
+	/**
+	 * create the explosion and returns the list of concerned tiles
+	 * 
+	 * @param fake	false if one just wants the tile list and not the actual explosion
+	 * @return	the list of tiles to be put on fire
+	 */
+	public List<Tile> makeExplosion(boolean fake)
+	{	// init
+		List<Tile> result = new ArrayList<Tile>();
+		Tile tile = sprite.getTile();
 		Sprite owner;
 		if(sprite.getOwner()==null)
 			owner = sprite;
 		else
 			owner = sprite.getOwner();
-		fire.setOwner(owner);
-		GameVariables.level.insertSpriteTile(fire);
-//		fire.setCurrentPosX(tile.getPosX());
-//		fire.setCurrentPosY(tile.getPosY());
-		SpecificDetonate detonateAction = new SpecificDetonate(sprite,Direction.NONE);
-		ActionEvent evt = new ActionEvent(detonateAction);
-		fire.processEvent(evt);
+		
+		// center
+		{	Fire fire;
+			if(flameRange==0)
+				fire = explosion.makeFire("outside",tile);
+			else
+				fire = explosion.makeFire("inside",tile);
+			fire.setOwner(owner);
+			SpecificAction specificAction = new SpecificAppear(fire,Direction.NONE);
+			AbstractAbility ability = fire.modulateAction(specificAction);
+			if(!fake)
+			{	if(!ability.isActive())
+				{	fire.consumeTile(tile);
+				}
+				else
+				{	GameVariables.level.insertSpriteTile(fire);
+					SpecificDetonate detonateAction = new SpecificDetonate(sprite,Direction.NONE);
+					ActionEvent evt = new ActionEvent(detonateAction);
+					fire.processEvent(evt);
+				}
+			}
+			result.add(tile);
+		}
 		
 		// branches
-		boolean blocked[] = {false,false,false,false};
-		Tile tiles[] = {tile,tile,tile,tile};
-		Direction directions[] = {Direction.DOWN, Direction.LEFT, Direction.RIGHT, Direction.UP};
-		ArrayList<Tile> processed = new ArrayList<Tile>();
-		processed.add(tile);
-		boolean goOn = true;
-		int length = 1;
-		while(goOn && length<=flameRange)
-		{	goOn = false;
-			// increase the explosion
-			for(int i=0;i<directions.length;i++)
-			{	if(!blocked[i])
-				{	// get the tile
-					Direction direction = directions[i];
-					Tile tempTile = tiles[i].getNeighbor(direction);
-					tiles[i] = tempTile;
-					if(!processed.contains(tempTile))
-					{	processed.add(tempTile);
-						if(length==flameRange)
-							fire = explosion.makeFire("outside",tempTile); //TODO remplacer ces chaines de caractères par des valeurs énumérées
-						else
-							fire = explosion.makeFire("inside",tempTile);
-						fire.setOwner(owner);
-						SpecificAction specificAction = new SpecificAppear(fire,direction);
-						AbstractAbility ability = fire.modulateAction(specificAction);
-						blocked[i] = !ability.isActive();
-						if(blocked[i])
-						{	fire.consumeTile(tempTile);
-							blocked[i] = true;
-						}
-						else
-						{	goOn = true;
-							GameVariables.level.insertSpriteTile(fire);
-//							fire.setCurrentPosX(tempTile.getPosX());
-//							fire.setCurrentPosY(tempTile.getPosY());
-							detonateAction = new SpecificDetonate(sprite,direction);
-							evt = new ActionEvent(detonateAction);
-							fire.processEvent(evt);
+		{	boolean blocked[] = {false,false,false,false};
+			Tile tiles[] = {tile,tile,tile,tile};
+			Direction directions[] = {Direction.DOWN, Direction.LEFT, Direction.RIGHT, Direction.UP};
+			ArrayList<Tile> processed = new ArrayList<Tile>();
+			processed.add(tile);
+			boolean goOn = true;
+			int length = 1;
+			while(goOn && length<=flameRange)
+			{	goOn = false;
+				// increase the explosion
+				for(int i=0;i<directions.length;i++)
+				{	if(!blocked[i])
+					{	// get the tile
+						Direction direction = directions[i];
+						Tile tempTile = tiles[i].getNeighbor(direction);
+						tiles[i] = tempTile;
+						if(!processed.contains(tempTile))
+						{	processed.add(tempTile);
+							Fire fire;
+							if(length==flameRange)
+								fire = explosion.makeFire("outside",tempTile); //TODO remplacer ces chaines de caractères par des valeurs énumérées
+							else
+								fire = explosion.makeFire("inside",tempTile);
+							fire.setOwner(owner);
+							SpecificAction specificAction = new SpecificAppear(fire,direction);
+							AbstractAbility ability = fire.modulateAction(specificAction);
+							blocked[i] = !ability.isActive();
+							if(!fake)
+							{	if(blocked[i])
+								{	fire.consumeTile(tempTile);
+									blocked[i] = true;
+								}
+								else
+								{	goOn = true;
+									GameVariables.level.insertSpriteTile(fire);
+									SpecificDetonate detonateAction = new SpecificDetonate(sprite,direction);
+									ActionEvent evt = new ActionEvent(detonateAction);
+									fire.processEvent(evt);
+								}
+							}
+							result.add(tile);
 						}
 					}
 				}
+				length++;
 			}
-			length++;
 		}
+		
+		return result;
 	}	
 	
-/*	private void makeBranch(int power, Direction dir)
-	{	Tile tile = sprite.getTile();
-		int length = 1;
-		boolean blocking;		
-		Tile tileTemp = tile.getNeighbor(dir);
-		SpecificAction specificAction;
-		do
-		{	Fire fire;
-			if(length==power)
-				fire = explosion.makeFire("outside",tileTemp); //TODO remplacer ces chaines de caractères par des valeurs énumérées
-			else
-				fire = explosion.makeFire("inside",tileTemp);
-			Sprite owner;
-			if(sprite.getOwner()==null)
-				owner = sprite;
-			else
-				owner = sprite.getOwner();
-			fire.setOwner(owner);
-			specificAction = new SpecificAppear(fire,tileTemp,dir);
-			AbstractAbility ability = fire.modulateAction(specificAction);
-			blocking = !ability.isActive();
-			if(blocking)
-				fire.consumeTile(tileTemp);
-			else
-			{	tileTemp.addSprite(fire);
-				fire.setCurrentPosX(tileTemp.getPosX());
-				fire.setCurrentPosY(tileTemp.getPosY());
-				fire.appear(dir);
-				length++;
-				tileTemp = tileTemp.getNeighbor(dir);
-			}
-		}
-		while(!blocking && length<=power);
-	}
-*/	
 	/////////////////////////////////////////////////////////////////
 	// FINISHED			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////

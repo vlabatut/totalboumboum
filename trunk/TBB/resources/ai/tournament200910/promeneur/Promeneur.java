@@ -24,6 +24,7 @@ package tournament200910.promeneur;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Iterator;
+import java.util.List;
 
 import fr.free.totalboumboum.ai.adapter200910.ArtificialIntelligence;
 import fr.free.totalboumboum.ai.adapter200910.communication.AiAction;
@@ -135,7 +136,7 @@ public class Promeneur extends ArtificialIntelligence
 			AiTile tempTile = null;
 			Direction dir = getPercepts().getDirection(previousTile,currentTile);
 			if(dir!=Direction.NONE)
-			{	tempTile =  getPercepts().getNeighborTile(currentTile, dir);
+			{	tempTile =  currentTile.getNeighbor(dir);
 				if(tiles.contains(tempTile))
 					tiles.remove(tempTile);
 			}
@@ -174,7 +175,7 @@ public class Promeneur extends ArtificialIntelligence
 	{	checkInterruption(); //APPEL OBLIGATOIRE
 	
 		// liste des cases autour de la case de référence
-		Collection<AiTile> neighbors = getPercepts().getNeighborTiles(tile);
+		List<AiTile> neighbors = tile.getNeighbors();
 		// on garde les cases sans bloc ni bombe ni feu
 		ArrayList<AiTile> result = new ArrayList<AiTile>();
 		Iterator<AiTile> it = neighbors.iterator();

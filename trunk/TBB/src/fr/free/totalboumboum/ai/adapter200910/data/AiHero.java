@@ -243,6 +243,8 @@ public class AiHero extends AiSprite<Hero>
 	{	boolean result = false;
 		if(sprite instanceof AiFire)
 			result = true;
+		else if(sprite instanceof AiHero)
+			result = true;
 		else
 			result = sprite.isCrossableBy(this);		
 		return result;

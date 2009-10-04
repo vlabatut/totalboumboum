@@ -22,10 +22,9 @@ package fr.free.totalboumboum.ai.adapter200910.data;
  */
 
 import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Collections;
 import java.util.HashMap;
 import java.util.Iterator;
+import java.util.List;
 import java.util.Map.Entry;
 
 import fr.free.totalboumboum.configuration.GameVariables;
@@ -45,8 +44,8 @@ import fr.free.totalboumboum.tools.CalculusTools;
 
 /**
  * représente la zone de jeu et tous ces constituants : cases et sprites.
- * Il s'agit de la classe principale des percepts auxquels l'IA a accès.
- * <p>
+ * Il s'agit de la classe principale des percepts auxquels l'IA a accès.</br>
+ * 
  * A chaque fois que l'IA est sollicitée par le jeu pour connaître l'action
  * qu'elle veut effectuer, cette représentation est mise à jour. L'IA ne reçoit
  * pas une nouvelle AiZone : l'AiZone existante est modifiée en fonction de l'évolution
@@ -63,6 +62,7 @@ public class AiZone
 	/**
 	 * construit une représentation du niveau passé en paramètre,
 	 * du point de vue du joueur passé en paramètre.
+	 * 
 	 * @param level	niveau à représenter
 	 * @param player	joueur dont le point de vue est à adopter
 	 */
@@ -93,6 +93,7 @@ public class AiZone
 	
 	/**
 	 * renvoie le temps écoulé depuis la mise à jour précédente
+	 * 
 	 * @return	le temps écoulé exprimé en millisecondes
 	 */
 	public long getElapsedTime()
@@ -101,6 +102,7 @@ public class AiZone
 	
 	/**
 	 * met à jour le temps écoulé depuis la dernière mise à jour
+	 * 
 	 * @param elapsedTime
 	 */
 	private void updateTime(long elapsedTime)
@@ -144,7 +146,11 @@ public class AiZone
 				matrix[lineIndex][colIndex] = aiTile;
 			}
 		}
-	}
+		
+		for(int lineIndex=0;lineIndex<height;lineIndex++)
+			for(int colIndex=0;colIndex<width;colIndex++)
+				matrix[lineIndex][colIndex].initNeighbors();
+	}	
 	
 	/**
 	 * met à jour la matrice en fonction de l'évolution du jeu
@@ -174,7 +180,7 @@ public class AiZone
 	
 	/** 
 	 * renvoie la hauteur totale (y compris les éventuelles cases situées hors de l'écran)
-	 *  de la zone de jeu exprimée en cases (ie: nombre de lignes)
+	 * de la zone de jeu exprimée en cases (ie: nombre de lignes)
 	 *  
 	 *  @return	hauteur de la zone
 	 */
@@ -184,7 +190,7 @@ public class AiZone
 	
 	/** 
 	 * renvoie la largeur totale (y compris les éventuelles cases situées hors de l'écran)
-	 *  de la zone de jeu exprimée en cases (ie: nombre de colonnes)
+	 * de la zone de jeu exprimée en cases (ie: nombre de colonnes)
 	 *  
 	 *  @return	largeur de la zone
 	 */
@@ -220,85 +226,20 @@ public class AiZone
 		AiTile result = matrix[line][col];
 		return result;
 	}
-	
-	/**
-	 * renvoie le voisin de la case passée en paramètre, situé dans la direction
-	 * passée en paramètre.
-	 * <p>
-	 * ATTENTION : les niveaux sont circulaires, ce qui signifie que le voisin
-	 * d'une case située au bord du niveau est une case située sur l'autre bord.
-	 * Par exemple, dans un niveau contenant width colonnes, pour une case située
-	 * à la position (ligne,0), le voisin de gauche est la case située à la position
-	 * (ligne,width-1). Même chose pour les bordures haut et bas.
-	 * 
-	 * @param line	ligne de la case dont on veut le voisin
-	 * @param col	colonne de la case dont on veut le voisin
-	 * @param direction	direction dans laquelle le voisin se trouve
-	 * @return	le voisin de la case passée en paramètre et situé dans la direction indiquée
-	 */
-	public AiTile getNeighborTile(AiTile tile, Direction direction)
-	{	AiTile result = null;
-		int c,col=tile.getCol();
-		int l,line=tile.getLine();
-		Direction p[] = direction.getPrimaries(); 
-		//
-		if(p[0]==Direction.LEFT)
-			c = (col+width-1)%width;
-		else if(p[0]==Direction.RIGHT)
-			c = (col+1)%width;
-		else
-			c = col;
-		//
-		if(p[1]==Direction.UP)
-			l = (line+height-1)%height;
-		else if(p[1]==Direction.DOWN)
-			l = (line+1)%height;
-		else
-			l = line;
-		//
-		result = getTile(l,c);
-		return result;
-	}
-	
-	/**
-	 * renvoie la liste des voisins de la case passée en paramètre.
-	 * Il s'agit des voisins directs situés en haut, à gauche, en bas et à droite.
-	 * <p>
-	 * ATTENTION : les niveaux sont circulaires, ce qui signifie que le voisin
-	 * d'une case située au bord du niveau est une case située sur l'autre bord.
-	 * Par exemple, dans un niveau contenant width colonnes, pour une case située
-	 * à la position (ligne,0), le voisin de gauche est la case située à la position
-	 * (ligne,width-1). Même chose pour les bordures haut et bas.
-	 * 
-	 * @param tile	la case dont on veut les voisins
-	 * @return	la liste des voisins situés en haut, à gauche, en bas et à droite de la case passée en paramètre
-	 */
-	public Collection<AiTile> getNeighborTiles(AiTile tile)
-	{	Collection<AiTile> result = new ArrayList<AiTile>();
-		ArrayList<Direction> directions = Direction.getPrimaryValues();
-		Iterator<Direction> d = directions.iterator();
-		while(d.hasNext())
-		{	Direction dir = d.next();
-			AiTile neighbor = getNeighborTile(tile, dir);
-			result.add(neighbor);
-		}
-		result = Collections.unmodifiableCollection(result);
-		return result;
-	}
-	
+		
 	/**
 	 * renvoie la direction de la case target relativement à la case source.
 	 * Par exemple, la case target de coordonnées (5,5) est à droite de
-	 * la case source de coordonnées (5,6).
-	 * <p>
+	 * la case source de coordonnées (5,6).</br>
+	 * 
 	 * Cette fonction peut être utile quand on veut savoir dans quelle direction
-	 * il faut se déplacer pour aller de la case source à la case target.
-	 * <p>
+	 * il faut se déplacer pour aller de la case source à la case target.</br>
+	 * 
 	 * ATTENTION 1 : si les deux cases ne sont pas des voisines directes (ie. ayant un coté commun),
 	 * il est possible que cette méthode renvoie une direction composite,
 	 * c'est à dire : DOWNLEFT, DOWNRIGHT, UPLEFT ou UPRIGHT. Référez-vous à 
-	 * la classe Direction pour plus d'informations sur ces valeurs. 
-	 * <p>
+	 * la classe Direction pour plus d'informations sur ces valeurs.</br>
+	 *  
 	 * ATTENTION 2 : comme les niveaux sont circulaires, il y a toujours deux directions possibles.
 	 * Cette méthode renvoie la direction du plus court chemin (sans considérer les éventuels obstacles).
 	 * Par exemple, pour les cases (2,0) et (2,11) d'un niveau de 12 cases de largeur, le résultat sera
@@ -360,8 +301,8 @@ public class AiZone
 	 * 
 	 * @return	liste de tous les blocs contenus dans cette zone
 	 */
-	public Collection<AiBlock> getBlocks()
-	{	Collection<AiBlock> result = Collections.unmodifiableCollection(blocks.values());
+	public List<AiBlock> getBlocks()
+	{	List<AiBlock> result = new ArrayList<AiBlock>(blocks.values());
 		return result;	
 	}
 	
@@ -394,13 +335,14 @@ public class AiZone
 	 * 
 	 * @return	liste de toutes les bombes contenues dans cette zone
 	 */
-	public Collection<AiBomb> getBombs()
-	{	Collection<AiBomb> result = Collections.unmodifiableCollection(bombs.values());
+	public List<AiBomb> getBombs()
+	{	List<AiBomb> result = new ArrayList<AiBomb>(bombs.values());
 		return result;	
 	}
 	
 	/**
 	 * renvoie la représentation de la bombe passée en paramètre.
+	 * 
 	 * @param bomb	la bombz dont on veut la représentation
 	 * @return	le AiBomb correspondant
 	 */
@@ -427,13 +369,14 @@ public class AiZone
 	 * 
 	 * @return	liste de tous les feux contenus dans cette zone
 	 */
-	public Collection<AiFire> getFires()
-	{	Collection<AiFire> result = Collections.unmodifiableCollection(fires.values());
+	public List<AiFire> getFires()
+	{	List<AiFire> result = new ArrayList<AiFire>(fires.values());
 		return result;	
 	}
 	
 	/**
 	 * renvoie la représentation du feu passé en paramètre.
+	 * 
 	 * @param fire	le feu dont on veut la représentation
 	 * @return	le AiFire correspondant
 	 */
@@ -459,13 +402,14 @@ public class AiZone
 	 * 
 	 * @return	liste de tous les sols contenus dans cette zone
 	 */
-	public Collection<AiFloor> getFloors()
-	{	Collection<AiFloor> result = Collections.unmodifiableCollection(floors.values());
+	public List<AiFloor> getFloors()
+	{	List<AiFloor> result = new ArrayList<AiFloor>(floors.values());
 		return result;	
 	}
 	
 	/**
 	 * renvoie la représentation du sol passé en paramètre.
+	 * 
 	 * @param floor	le sol dont on veut la représentation
 	 * @return	le AiFloor correspondant
 	 */
@@ -492,13 +436,14 @@ public class AiZone
 	 * 
 	 * @return	liste de tous les joueurs contenus dans cette zone
 	 */
-	public Collection<AiHero> getHeroes()
-	{	Collection<AiHero> result = Collections.unmodifiableCollection(heroes.values());
+	public List<AiHero> getHeroes()
+	{	List<AiHero> result = new ArrayList<AiHero>(heroes.values());
 		return result;	
 	}
 	
 	/**
 	 * renvoie la représentation du personnage passé en paramètre.
+	 * 
 	 * @param hero	le personnage dont on veut la représentation
 	 * @return	le AiHero correspondant
 	 */
@@ -525,13 +470,14 @@ public class AiZone
 	 * 
 	 * @return	liste de tous les items contenus dans cette zone
 	 */
-	public Collection<AiItem> getItems()
-	{	Collection<AiItem> result = Collections.unmodifiableCollection(items.values());
+	public List<AiItem> getItems()
+	{	List<AiItem> result = new ArrayList<AiItem>(items.values());
 		return result;	
 	}
 	
 	/**
 	 * renvoie la représentation de l'item passé en paramètre.
+	 * 
 	 * @param item	l'item dont on veut la représentation
 	 * @return	le AiItem correspondant
 	 */

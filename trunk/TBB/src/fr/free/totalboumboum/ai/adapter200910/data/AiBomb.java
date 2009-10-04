@@ -22,10 +22,10 @@ package fr.free.totalboumboum.ai.adapter200910.data;
  */
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
 
 import fr.free.totalboumboum.configuration.profile.PredefinedColor;
+import fr.free.totalboumboum.engine.container.tile.Tile;
 import fr.free.totalboumboum.engine.content.feature.Contact;
 import fr.free.totalboumboum.engine.content.feature.Direction;
 import fr.free.totalboumboum.engine.content.feature.Orientation;
@@ -39,7 +39,6 @@ import fr.free.totalboumboum.engine.content.feature.action.GeneralAction;
 import fr.free.totalboumboum.engine.content.feature.action.appear.GeneralAppear;
 import fr.free.totalboumboum.engine.content.feature.action.movelow.GeneralMoveLow;
 import fr.free.totalboumboum.engine.content.feature.gesture.GestureName;
-import fr.free.totalboumboum.engine.content.sprite.block.Block;
 import fr.free.totalboumboum.engine.content.sprite.bomb.Bomb;
 
 /**
@@ -65,6 +64,7 @@ public class AiBomb extends AiSprite<Bomb>
 		initRange();
 		initColor();
 		updateWorking();
+		updateBlast();
 		updateCollisions();
 	}
 
@@ -75,6 +75,7 @@ public class AiBomb extends AiSprite<Bomb>
 	void update(AiTile tile)
 	{	super.update(tile);
 		updateWorking();
+		updateBlast();
 		updateTime();
 		updateCollisions();
 	}
@@ -156,6 +157,8 @@ public class AiBomb extends AiSprite<Bomb>
 	/////////////////////////////////////////////////////////////////
 	/** portée de la bombe, ie. : nombre de cases occupées par sa flamme */
 	private int range;
+	/** liste des cases qui vont subir l'explosion de la bombe */
+	private final List<AiTile> blast = new ArrayList<AiTile>();
 	
 	/**
 	 * renvoie la portée de la bombe
@@ -186,60 +189,23 @@ public class AiBomb extends AiSprite<Bomb>
 	 * @return	une liste de cases correspondant aux cases qui seront touchées par la flamme de cette bombe 
 	 */
 	public List<AiTile> getBlast()
-	{	// init
-		ArrayList<AiTile> result = new ArrayList<AiTile>();
-		AiTile center = getTile();
-		result.add(center);
-		
-		// calcul du souffle
-		for(Direction direction: Direction.getPrimaryValues())
-		{	AiTile tile = center;
-			boolean blocked = false;
-			int i=0;
-			while(i<range && !blocked)
-			{	boolean blasted = true;
-				tile = tile.getNeighbor(direction);
-				// blocs
-				if(!blocked)
-				{	Collection<AiBlock> blocks = tile.getBlocks();
-					if(!blocks.isEmpty())
-					{	AiBlock block = blocks.iterator().next();
-						blocked = block.is
-//TODO inutile de faire des fonctions généralistes : on traine en interne au cas par cas						
-						// si le bloc est destructible, la flamme ne sera pas bloquée uniquement en cas de pénétration
-						if(block.isDestructible())
-						{	if(type!=AiBombType.PENETRATION && type!=AiBombType.REMOTE_PENETRATION)
-								blocked = true;
-						}
-						else
-						{	blocked = true;
-							blasted = false;						
-						}
-					}
-				}
-				// items
-				if(!blocked)
-				{	Collection<AiItem> items = tile.getItems();
-					if(!items.isEmpty())
-					{	blocked = true;
-						blasted = false;
-					}
-				}
-				// bombes
-				if(!blocked)
-				{	Collection<AiBomb> bombs = tile.getBombs();
-					if(!bombs.isEmpty())
-						blocked = true;
-				}
-				// on rajoute éventuellement la case dans blast
-				if(blasted)
-					result.add(tile);
-				// on passe à la case suivante
-				i++;
-			}
+	{	return blast;	
+	}
+
+	/**
+	 * met à jour la liste des cases qui seront touchées par
+	 * l'explosion de cette bombe
+	 */
+	public void updateBlast()
+	{	Bomb bomb = getSprite();
+		List<Tile> tiles = bomb.getExplosionManager().makeExplosion(true); 
+		blast.clear();
+		for(Tile tile: tiles)
+		{	int line = tile.getLine();
+			int col = tile.getCol();
+			AiTile t = getTile().getZone().getTile(line,col);
+			blast.add(t);
 		}
-		
-		return result;
 	}
 	
 	/////////////////////////////////////////////////////////////////
@@ -341,9 +307,9 @@ public class AiBomb extends AiSprite<Bomb>
 	// COLLISIONS		/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	/** indique si cette bombe laisse passer les joueurs */
-	private StopType stopHeroes;
+	private AiStopType stopHeroes;
 	/** indique si cette bombe laisse passer le feu */
-	private StopType stopFires;
+	private AiStopType stopFires;
 	/** indique si cette bombe peut traverser les items */
 	private boolean throughItems;
 
@@ -381,12 +347,12 @@ public class AiBomb extends AiSprite<Bomb>
 				actorProperties.add(ability);
 				temp = sprite.isThirdPreventing(generalAction,actorProperties,targetProperties,actorCircumstance,targetCircumstance);
 				if(temp)
-					stopHeroes = StopType.WEAK_STOP;
+					stopHeroes = AiStopType.STRONG_STOP;
 				else
-					stopHeroes = StopType.STRONG_STOP;
+					stopHeroes = AiStopType.WEAK_STOP;
 			}
 			else
-				stopHeroes = StopType.NO_STOP;
+				stopHeroes = AiStopType.NO_STOP;
 		}
 
 		// bloque le feu
@@ -406,12 +372,12 @@ public class AiBomb extends AiSprite<Bomb>
 				actorProperties.add(ability);
 				temp = sprite.isThirdPreventing(generalAction,actorProperties,targetProperties,actorCircumstance,targetCircumstance);
 				if(temp)
-					stopFires = StopType.WEAK_STOP;
+					stopFires = AiStopType.STRONG_STOP;
 				else
-					stopFires = StopType.STRONG_STOP;
+					stopFires = AiStopType.WEAK_STOP;
 			}
 			else
-				stopFires = StopType.NO_STOP;
+				stopFires = AiStopType.NO_STOP;
 		}
 	}	
 
@@ -423,21 +389,21 @@ public class AiBomb extends AiSprite<Bomb>
 		{	AiHero hero = (AiHero) sprite;
 			if(hero.getTile()==getTile()) //simplification
 				result = true;
-			else if(stopHeroes==StopType.NO_STOP)
+			else if(stopHeroes==AiStopType.NO_STOP)
 				result = true;
-			else if(stopHeroes==StopType.WEAK_STOP)
+			else if(stopHeroes==AiStopType.WEAK_STOP)
 				result = hero.hasThroughBombs();
-			else if(stopHeroes==StopType.STRONG_STOP)
+			else if(stopHeroes==AiStopType.STRONG_STOP)
 				result = false;
 		}
 		// si le sprite considéré est un feu
 		else if(sprite instanceof AiFire)
 		{	AiFire fire = (AiFire) sprite;
-			if(stopFires==StopType.NO_STOP)
+			if(stopFires==AiStopType.NO_STOP)
 				result = true;
-			else if(stopFires==StopType.WEAK_STOP)
+			else if(stopFires==AiStopType.WEAK_STOP)
 				result = fire.hasThroughBombs();
-			else if(stopFires==StopType.STRONG_STOP)
+			else if(stopFires==AiStopType.STRONG_STOP)
 				result = false;
 		}
 		return result;
