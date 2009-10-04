@@ -3,6 +3,7 @@
 		xsi:noNamespaceSchemaLocation="../../../../../schemas/modulations.xsd" >
 	
 	<gesture name="BURNING" file="burning.xml" />
+	<gesture name="DISAPPEARING" file="disappearing.xml" />
 	<gesture name="STANDING" file="standing.xml" />
 
 </modulations>

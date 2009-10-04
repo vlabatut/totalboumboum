@@ -32,6 +32,7 @@ import fr.free.totalboumboum.ai.adapter200910.communication.StopRequestException
 import fr.free.totalboumboum.ai.adapter200910.data.AiBlock;
 import fr.free.totalboumboum.ai.adapter200910.data.AiBomb;
 import fr.free.totalboumboum.ai.adapter200910.data.AiFire;
+import fr.free.totalboumboum.ai.adapter200910.data.AiHero;
 import fr.free.totalboumboum.ai.adapter200910.data.AiStateName;
 import fr.free.totalboumboum.ai.adapter200910.data.AiTile;
 import fr.free.totalboumboum.ai.adapter200910.data.AiZone;
@@ -106,29 +107,33 @@ public class SafetyManager
 			}
 		}
 		
-		// on rajoute le feu et les cases à portée de bombe
-		for(int line=0;line<zone.getHeigh();line++)
-		{	ai.checkInterruption(); //APPEL OBLIGATOIRE
-			for(int col=0;col<zone.getWidth();col++)
+		AiHero ownHero = ai.getOwnHero();
+		// si le personnage est sensible au feu, on tient compte des explosions en cours et à venir
+		if(!ownHero.hasThroughFires())
+		{	for(int line=0;line<zone.getHeigh();line++)
 			{	ai.checkInterruption(); //APPEL OBLIGATOIRE
-				AiTile tile = zone.getTile(line, col);
-				Collection<AiFire> fires = tile.getFires();
-				Collection<AiBomb> bombs = tile.getBombs();
-				Collection<AiBlock> blocks = tile.getBlocks();
-				// s'il y a du feu : valeur zéro (il ne reste pas de temps avant l'explosion)
-				if(!fires.isEmpty())
-					matrix[line][col] = FIRE;
-				// s'il y a un mur en train de brûler : pareil
-				else if(!blocks.isEmpty())
-				{	AiBlock block = blocks.iterator().next();
-					if(block.getState().getName()==AiStateName.BURNING)
-						matrix[line][col] = FIRE;
-				}
-				// s'il y a une bombe : pour sa portée, la valeur correspond au temps théorique restant avant son explosion
-				// (plus ce temps est court et plus la bombe est dangereuse)
-				else if(bombs.size()>0)
-				{	AiBomb bomb = bombs.iterator().next();
-					processBomb(bomb);
+				for(int col=0;col<zone.getWidth();col++)
+				{	ai.checkInterruption(); //APPEL OBLIGATOIRE
+					AiTile tile = zone.getTile(line, col);
+					Collection<AiFire> fires = tile.getFires();
+					Collection<AiBomb> bombs = tile.getBombs();
+					Collection<AiBlock> blocks = tile.getBlocks();
+					// s'il y a du feu : valeur zéro (il ne reste pas de temps avant l'explosion)
+					if(!fires.isEmpty())
+					{	matrix[line][col] = FIRE;				
+					}
+					// s'il y a un mur en train de brûler : pareil
+					else if(!blocks.isEmpty())
+					{	AiBlock block = blocks.iterator().next();
+						if(block.getState().getName()==AiStateName.BURNING)
+							matrix[line][col] = FIRE;
+					}
+					// s'il y a une bombe : pour sa portée, la valeur correspond au temps théorique restant avant son explosion
+					// (plus ce temps est court et plus la bombe est dangereuse)
+					else if(bombs.size()>0)
+					{	AiBomb bomb = bombs.iterator().next();
+						processBomb(bomb);
+					}
 				}
 			}
 		}

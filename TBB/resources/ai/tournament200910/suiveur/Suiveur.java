@@ -39,6 +39,9 @@ import fr.free.totalboumboum.engine.content.feature.Direction;
  */
 public class Suiveur extends ArtificialIntelligence 
 {	
+	/** interrupteur permettant d'afficher la trace du traitement */
+	private boolean verbose = false;
+
 	@Override
 	public AiAction processAction() throws StopRequestException
 	{	checkInterruption(); //APPEL OBLIGATOIRE
@@ -53,6 +56,8 @@ public class Suiveur extends ArtificialIntelligence
 			currentTile = ownHero.getTile();
 			currentX = ownHero.getPosX();
 			currentY = ownHero.getPosY();
+			if(verbose)
+				System.out.println(ownHero.getColor()+": ("+currentTile.getLine()+","+currentTile.getCol()+") ("+currentX+","+currentY+")");
 			Direction moveDir = Direction.NONE;
 			
 			// premier appel : on initialise		

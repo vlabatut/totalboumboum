@@ -266,8 +266,8 @@ public class PathManager
 		{	ai.checkInterruption(); //APPEL OBLIGATOIRE
 			AiTile tile = it.next();
 			result = tile.isCrossableBy(ai.getOwnHero()) && ai.isSafe(tile);
-			if(!result)
-				System.out.println();
+//			if(!result)
+//				System.out.println();
 		}
 		return result;
 	}

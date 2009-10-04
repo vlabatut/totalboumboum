@@ -221,7 +221,10 @@ public abstract class AiSprite<T extends Sprite>
 	private void updateLocation()
 	{	posX = sprite.getCurrentPosX();
 		posY = sprite.getCurrentPosY();
-		posZ = sprite.getCurrentPosZ();		
+		posZ = sprite.getCurrentPosZ();
+		
+//if(Double.isNaN(posX))
+//	System.out.println("error");
 	}
 
 	/////////////////////////////////////////////////////////////////
