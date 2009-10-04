@@ -14,7 +14,7 @@
 	<author value="Vincent Labatut" />
 
 	<single>
-		<match local="false" name="matchLong" />
+		<match local="false" name="LongMatch" />
 	</single>		
 		
 </tournament>
