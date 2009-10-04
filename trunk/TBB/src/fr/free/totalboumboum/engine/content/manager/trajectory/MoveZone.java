@@ -162,6 +162,8 @@ public class MoveZone
 		}
 		else
 		{	a = GameVariables.level.getDeltaY(targetY,currentY)/GameVariables.level.getDeltaX(targetX,currentX);
+			if(a==-0.0)
+				a = 0.0;
 			b = currentY - a*currentX;
 		}		
 	}
@@ -374,13 +376,19 @@ public class MoveZone
 	}
 	
 	private void bypassObstacleCompositeDirection(PotentialObstacle po)
-	{	// process the new direction according to the obstacle position
-		double horizontalDistance = GameVariables.level.getHorizontalPixelDistance(po.getContactX(),po.getSprite().getCurrentPosX());
-		double verticalDistance = GameVariables.level.getVerticalPixelDistance(po.getContactY(),po.getSprite().getCurrentPosY());
+	{	// init
+		double contactX = po.getContactX();
+		double contactY = po.getContactY();
+		double obstacleX = po.getSprite().getCurrentPosX();
+		double obstacleY = po.getSprite().getCurrentPosY();
+		
+		// process the new direction according to the obstacle position
+		double horizontalDistance = GameVariables.level.getHorizontalPixelDistance(contactX,obstacleX);
+		double verticalDistance = GameVariables.level.getVerticalPixelDistance(contactY,obstacleY);
 		Direction dir;
 		if(po.getContactDistance()<0)
-		{	double deltaX = GameVariables.level.getDeltaX(currentX,po.getSprite().getCurrentPosX());
-			double deltaY = GameVariables.level.getDeltaY(currentY,po.getSprite().getCurrentPosY());
+		{	double deltaX = GameVariables.level.getDeltaX(currentX,obstacleX);
+			double deltaY = GameVariables.level.getDeltaY(currentY,obstacleY);
 			Direction d = Direction.getCompositeFromDouble(deltaX,deltaY);
 			dir = usedDirection.drop(d);
 //if(dir.isComposite())
@@ -555,25 +563,31 @@ public class MoveZone
 				currentY = GameVariables.level.normalizePositionY(currentY + deltaY);
 			}
 			else
-			{	// else : must solve equation (interstion point)
-				// 		line: y = ax + b
-				//		circle: (x-currentX)²+(y-currentY)² = fuel²
+			{	// else : must solve equation (intersection point)
+				// 		line: y' = ax' + b
+				//		circle: (x'-x)²+(y'-y)² = fuel²
+				//		>> (x'-x)²+(ax'+b-y)² = fuel²
+				//		>> x'²+x²-2x'x+(ax'+b)²+y²-2(ax'+b)y - fuel² = 0
+				//		>> x'²+x²-2x'x+a²x'²+b²+2abx'+y²-2ax'y-2by - fuel² = 0
+				//		>> x'²(1+a²) + x'(2ab-2x-2ay) + (x²+y²+b²-2by-fuel²) = 0
 				double discA = a*a + 1;
 				double discB = 2*a*b - 2*currentX - 2*a*currentY;
-				double discC = b*b + currentX*currentX - 2*b*currentY + currentY*currentY - fuel*fuel;
+				double discC = currentX*currentX + currentY*currentY + b*b - 2*b*currentY - fuel*fuel;
 				double discDelta = discB*discB - 4*discA*discC;
-				double x1 = (-discB + Math.sqrt(discDelta))/(2*discA);
-				double x2 = (-discB - Math.sqrt(discDelta))/(2*discA);
-				Direction moveDir = Direction.getHorizontalFromDouble(deltaX);
-				Direction tempDir = Direction.getHorizontalFromDouble(x1-currentX);
-				double solutionX = x1;
-				if(tempDir!=moveDir)
-					solutionX = x2;
-				double solutionY = a*solutionX + b;
-				// update
+				// enough fuel for computation
+				if(discDelta>=0)
+				{	double x1 = (-discB + Math.sqrt(discDelta))/(2*discA);
+					double x2 = (-discB - Math.sqrt(discDelta))/(2*discA);
+					Direction moveDir = Direction.getHorizontalFromDouble(deltaX);
+					Direction tempDir = Direction.getHorizontalFromDouble(x1-currentX);
+					double solutionX = x1;
+					if(tempDir!=moveDir)
+						solutionX = x2;
+					double solutionY = a*solutionX + b;
+					currentX = GameVariables.level.normalizePositionX(solutionX);
+					currentY = GameVariables.level.normalizePositionY(solutionY);
+				}
 				fuel = 0; 
-				currentX = GameVariables.level.normalizePositionX(solutionX);
-				currentY = GameVariables.level.normalizePositionY(solutionY);			
 /*				
 				deltaX = Math.signum(deltaX)*fuelX;
 				deltaY = Math.signum(deltaY)*fuelY;

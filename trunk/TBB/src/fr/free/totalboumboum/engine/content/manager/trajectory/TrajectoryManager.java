@@ -521,7 +521,9 @@ System.out.println();
 				sprite.getTile().spreadEvent(e);
 			}				
 		}
-		
+if(Double.isNaN(currentPosX) || Double.isNaN(currentPosY))
+	System.out.println("AZDSOIP¨PMJP");
+	
 		// updating the tile
 		updateTile();
 	}

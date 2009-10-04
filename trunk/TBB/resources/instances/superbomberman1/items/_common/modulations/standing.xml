@@ -54,7 +54,7 @@
 			<target-circumstances  />
 		</modulation>
 <!--  	MOVELOW --> 
-		<!-- ability to go through bombs -> not an obstacle -->
+		<!-- ability to go through items -> not an obstacle -->
 		<modulation frame="false" strength="0" >
 			<action name="MOVELOW" direction="ANY" contact="ANY"
 				tilePosition="ANY" orientation="ANY" actor="SOME" />

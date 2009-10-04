@@ -196,7 +196,7 @@ public class AiBomb extends AiSprite<Bomb>
 	 * met à jour la liste des cases qui seront touchées par
 	 * l'explosion de cette bombe
 	 */
-	public void updateBlast()
+	private void updateBlast()
 	{	Bomb bomb = getSprite();
 		List<Tile> tiles = bomb.getExplosionManager().makeExplosion(true); 
 		blast.clear();
@@ -343,7 +343,7 @@ public class AiBomb extends AiSprite<Bomb>
 			ArrayList<AbstractAbility> targetProperties = new ArrayList<AbstractAbility>();
 			boolean temp = sprite.isThirdPreventing(generalAction,actorProperties,targetProperties,actorCircumstance,targetCircumstance);
 			if(temp)
-			{	StateAbility ability = new StateAbility(StateAbilityName.SPRITE_TRAVERSE_WALL);
+			{	StateAbility ability = new StateAbility(StateAbilityName.SPRITE_TRAVERSE_BOMB);
 				actorProperties.add(ability);
 				temp = sprite.isThirdPreventing(generalAction,actorProperties,targetProperties,actorCircumstance,targetCircumstance);
 				if(temp)
@@ -368,7 +368,7 @@ public class AiBomb extends AiSprite<Bomb>
 			ArrayList<AbstractAbility> targetProperties = new ArrayList<AbstractAbility>();
 			boolean temp = sprite.isThirdPreventing(generalAction,actorProperties,targetProperties,actorCircumstance,targetCircumstance);
 			if(temp)
-			{	StateAbility ability = new StateAbility(StateAbilityName.SPRITE_TRAVERSE_WALL);
+			{	StateAbility ability = new StateAbility(StateAbilityName.SPRITE_TRAVERSE_BOMB);
 				actorProperties.add(ability);
 				temp = sprite.isThirdPreventing(generalAction,actorProperties,targetProperties,actorCircumstance,targetCircumstance);
 				if(temp)

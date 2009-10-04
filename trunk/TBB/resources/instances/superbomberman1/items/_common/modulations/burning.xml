@@ -16,6 +16,13 @@
 	</actor-modulations>
 	
 	<target-modulations>
+<!--  	GATHER --> 
+		<modulation frame="true" strength="0" >
+			<action name="GATHER" direction="ANY" contact="ANY"
+				tilePosition="ANY" orientation="ANY" actor="SOME" />
+			<actor-restrictions />
+			<target-restrictions />
+		</modulation>
 	</target-modulations>
 	
 	<third-modulations>
@@ -58,7 +65,7 @@
 			<target-circumstances  />
 		</modulation>
 <!--  	MOVELOW --> 
-		<!-- ability to go through bombs -> not an obstacle -->
+		<!-- ability to go through items -> not an obstacle -->
 		<modulation frame="false" strength="0" >
 			<action name="MOVELOW" direction="ANY" contact="ANY"
 				tilePosition="ANY" orientation="ANY" actor="SOME" />

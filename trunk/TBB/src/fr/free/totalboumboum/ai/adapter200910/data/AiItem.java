@@ -163,7 +163,7 @@ public class AiItem extends AiSprite<Item>
 		boolean result = false;
 		// si le sprite considéré est un personnage
 		if(sprite instanceof AiHero)
-		{	result = false;
+		{	result = true;
 		}
 		// si le sprite considéré est un feu
 		else if(sprite instanceof AiFire)

@@ -858,8 +858,6 @@ public class Launcher
 
 	/* TODO
 	 * 
-	 * - deux persos entrant en même temps sur une case contenant un item le ramassent toutes les  deux (testé avec suiveur)
-	 * 
 	 * - SBM1: malus constipation semble rester même après la fin du clignotement
 	 * 
 	 * - GUI : les résultats ne s'affichent pas automatiquement quand on revient à l'écran du match
@@ -874,16 +872,6 @@ public class Launcher
 	 * - l'ombre des blocs de la dernière ligne est portée sur les blocs de la première ligne
 	 * 
 	 * - bug d'affichage dans les notes d'IA, les accents sont affichés avec la police par défaut
-	 * 
-	 * - bug de collision difficlement reproductible : le joueur va vers le haut, il a l'item pass-walls et il se retrouve 
-	 *   téléporté en dehors du niveau (dans le noir) sur NBM2 custom battlezone.
-	 *   	- c'est arrivé aussi sur la zone des marais de NBM2. 
-	 *   	- ça semble se produire quand on se rapproche des limites (verticales?) du niveau
-	 *   	  et on se retrouve téléporté en (0,0)
-	 *   	- ça arrive aussi sur le niveau débug : quand l'ia suiveuse passe de l'autre coté, droite>gauche,
-	 *   	  le perso se retrouve parfois téléporté en 0,0 aussi
-	 *   	- pour le reproduire (à tester) : se déplacer horizontalement sur la dernière ligne du niveau en se faisant suivre par l'IA, 
-	 *   	  de droite à gauche, et arrivé au coin bas gauche elle devrait disparaitre (p-ê faut-il être un peu à cheval avec la 1ère ligne)
 	 */
 	
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -1066,8 +1054,5 @@ public class Launcher
 	 * 	 et la vie était foncionnelle : je l'ai prise, je suis mort, je suis revenu (sans la relacher cette fois)
 	 * - optimisation de l'API IA:
 	 * 		- les IA ont-elles vraiment besoin d'être raffraichies si souvent ? >> non! réduire le taux de raffraichissement
-	 * 
-	 * - tester si les chemins de l'ia traversent le feu quand elle est invulnérable
-	 * - changement incessant de chemin target alors qu'il n'y a pas d'obstacles
 	 */
 }

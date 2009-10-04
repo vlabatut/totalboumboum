@@ -158,7 +158,10 @@ public class ExplosionManager
 									fire.processEvent(evt);
 								}
 							}
-							result.add(tile);
+							else
+							{	goOn = !blocked[i];
+							}
+							result.add(tempTile);
 						}
 					}
 				}

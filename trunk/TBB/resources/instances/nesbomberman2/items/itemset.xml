@@ -276,16 +276,16 @@
 
 		<item name="vest" folder="vest" >
 			<abilities>
-				<ability strength="50"  frame="true" time="30000" >
+				<ability strength="50"  frame="true" time="300000" >
 					<name value="SPRITE_TWINKLE_COLOR"/>
 				</ability>
-				<ability strength="50"  frame="true" time="30000" >
+				<ability strength="50"  frame="true" time="300000" >
 					<name value="SPRITE_TWINKLE_NORMAL"/>
 				</ability>
-				<ability strength="-1" frame="true" time="30000" >
+				<ability strength="-1" frame="true" time="300000" >
 					<name value="SPRITE_TWINKLE" />
 				</ability>
-				<ability time="30000">
+				<ability time="300000">
 					<name value="HERO_FIRE_PROTECTION" />
 				</ability>
 			</abilities>
