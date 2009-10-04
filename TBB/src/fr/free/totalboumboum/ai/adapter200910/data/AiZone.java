@@ -174,8 +174,6 @@ public class AiZone
 		removeUnchecked(floors);
 		removeUnchecked(heroes);
 		removeUnchecked(items);
-		if(ownHero!=null && !ownHero.isChecked())
-			ownHero = null;
 	}
 	
 	/** 

@@ -1056,9 +1056,6 @@ public class Launcher
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 	/**
-	 * - tester la fonction de speed (hero)
-	 * - tester la fonction update abilities (hero)
-	 * 
 	 * - quand l'ia meurt et revient grace à une vie, elle n'a plus le controle du personnage
 	 */
 }

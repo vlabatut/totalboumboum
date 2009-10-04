@@ -34,6 +34,8 @@ import fr.free.totalboumboum.ai.adapter200910.data.AiBlock;
 import fr.free.totalboumboum.ai.adapter200910.data.AiBomb;
 import fr.free.totalboumboum.ai.adapter200910.data.AiFire;
 import fr.free.totalboumboum.ai.adapter200910.data.AiHero;
+import fr.free.totalboumboum.ai.adapter200910.data.AiState;
+import fr.free.totalboumboum.ai.adapter200910.data.AiStateName;
 import fr.free.totalboumboum.ai.adapter200910.data.AiTile;
 import fr.free.totalboumboum.ai.adapter200910.data.AiZone;
 import fr.free.totalboumboum.engine.content.feature.Direction;
@@ -48,13 +50,6 @@ import fr.free.totalboumboum.engine.content.feature.Direction;
  */
 public class Promeneur extends ArtificialIntelligence 
 {
-	/** la case occupée actuellement par le personnage*/
-	private AiTile currentTile;
-	/** la case sur laquelle on veut aller */
-	private AiTile nextTile = null;
-	/** la dernière case par laquelle on est passé */ 
-	private AiTile previousTile = null;
-	
 	/**
 	 * méthode appelée par le moteur du jeu 
 	 * pour obtenir une action de l'IA
@@ -63,18 +58,17 @@ public class Promeneur extends ArtificialIntelligence
 	 */
 	public AiAction processAction() throws StopRequestException
 	{	checkInterruption(); //APPEL OBLIGATOIRE
-
-		AiZone zone = getPercepts();
-		AiHero ownHero = zone.getOwnHero();
+		
 		AiAction result = new AiAction(AiActionName.NONE);
-		// si ownHero est null, c'est que l'IA est morte : inutile de continuer
-		if(ownHero!=null)
+		
+		// premier appel : on initialise l'IA
+		if(ownHero == null)
+			init();		
+		
+		// si le personnage controlé a été éliminé, inutile de continuer
+		if(!ownHero.hasEnded())
 		{	// on met à jour la position de l'ia dans la zone
 			currentTile = ownHero.getTile();
-			
-			// premier appel : on initialise l'IA
-			if(nextTile == null)
-				init();
 			
 			// arrivé à destination : on choisit une nouvelle destination
 			if(currentTile==nextTile)
@@ -99,6 +93,9 @@ public class Promeneur extends ArtificialIntelligence
 		return result;
 	}
 
+	/////////////////////////////////////////////////////////////////
+	// INITIALISATION			/////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
 	/**
 	 * initialisation de l'IA lors du premier appel
 	 * 
@@ -106,11 +103,33 @@ public class Promeneur extends ArtificialIntelligence
 	 */
 	private void init() throws StopRequestException
 	{	checkInterruption(); //APPEL OBLIGATOIRE
-		
+	
+		zone = getPercepts();
+		ownHero = zone.getOwnHero();
+	
+		currentTile = ownHero.getTile();
 		nextTile = currentTile;		
 		previousTile = currentTile;		
 	}
 	
+	/** la case occupée actuellement par le personnage*/
+	private AiTile currentTile;
+	/** la case sur laquelle on veut aller */
+	private AiTile nextTile = null;
+	/** la dernière case par laquelle on est passé */ 
+	private AiTile previousTile = null;
+
+	/////////////////////////////////////////////////////////////////
+	// PERCEPTS					/////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	/** les percepts */
+	private AiZone zone;
+	/** le personnage commandé par cette IA */
+	private AiHero ownHero;
+	
+	/////////////////////////////////////////////////////////////////
+	// CASES					/////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
 	/**
 	 * Choisit comme destination une case voisine de la case actuellement occupée par l'IA.
 	 * Cette case doit être accessible (pas de mur ou de bombe ou autre obstacle) et doit
