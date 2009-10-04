@@ -34,8 +34,6 @@ import fr.free.totalboumboum.ai.adapter200910.data.AiBlock;
 import fr.free.totalboumboum.ai.adapter200910.data.AiBomb;
 import fr.free.totalboumboum.ai.adapter200910.data.AiFire;
 import fr.free.totalboumboum.ai.adapter200910.data.AiHero;
-import fr.free.totalboumboum.ai.adapter200910.data.AiState;
-import fr.free.totalboumboum.ai.adapter200910.data.AiStateName;
 import fr.free.totalboumboum.ai.adapter200910.data.AiTile;
 import fr.free.totalboumboum.ai.adapter200910.data.AiZone;
 import fr.free.totalboumboum.engine.content.feature.Direction;

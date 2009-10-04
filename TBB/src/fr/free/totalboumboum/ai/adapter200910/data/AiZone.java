@@ -83,6 +83,7 @@ public class AiZone
 	public void update(long elapsedTime)
 	{	updateTime(elapsedTime);
 		updateMatrix();
+		updateSpriteLists();
 	}
 	
 	/////////////////////////////////////////////////////////////////
@@ -157,23 +158,23 @@ public class AiZone
 	 */
 	private void updateMatrix()
 	{	// démarque tous les sprites
-		uncheckAll(blocks);
-		uncheckAll(bombs);
-		uncheckAll(fires);
-		uncheckAll(floors);
-		uncheckAll(heroes);
-		uncheckAll(items);
+		uncheckAll(blockMap);
+		uncheckAll(bombMap);
+		uncheckAll(fireMap);
+		uncheckAll(floorMap);
+		uncheckAll(heroMap);
+		uncheckAll(itemMap);
 		// met à jour chaque case et sprite 
 		for(int line=0;line<height;line++)
 			for(int col=0;col<width;col++)
 				matrix[line][col].update();
 		// supprime les sprites non-marqués
-		removeUnchecked(blocks);
-		removeUnchecked(bombs);
-		removeUnchecked(fires);
-		removeUnchecked(floors);
-		removeUnchecked(heroes);
-		removeUnchecked(items);
+		removeUnchecked(blockMap);
+		removeUnchecked(bombMap);
+		removeUnchecked(fireMap);
+		removeUnchecked(floorMap);
+//		removeUnchecked(heroes);
+		removeUnchecked(itemMap);
 	}
 	
 	/** 
@@ -275,33 +276,32 @@ public class AiZone
 	}
 	
 	/////////////////////////////////////////////////////////////////
-	// SPRITES			/////////////////////////////////////////////
+	// BLOCKS			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	/** liste des blocks contenus dans cette zone */
-	private final HashMap<Block,AiBlock> blocks = new HashMap<Block,AiBlock>();
-	/** liste des bombes contenues dans cette zone */
-	private final HashMap<Bomb,AiBomb> bombs = new HashMap<Bomb,AiBomb>();
-	/** liste des feux contenus dans cette zone */
-	private final HashMap<Fire,AiFire> fires = new HashMap<Fire,AiFire>();
-	/** liste des sols contenus dans cette zone */
-	private final HashMap<Floor,AiFloor> floors = new HashMap<Floor,AiFloor>();
-	/** liste des personnages contenus dans cette zone */
-	private final HashMap<Hero,AiHero> heroes = new HashMap<Hero,AiHero>();
-	/** liste des items contenus dans cette zone */
-	private final HashMap<Item,AiItem> items = new HashMap<Item,AiItem>();
+	/** liste interne des blocks contenus dans cette zone */
+	private final HashMap<Block,AiBlock> blockMap = new HashMap<Block,AiBlock>();
+	/** liste externe des blocks contenus dans cette zone */
+	private final List<AiBlock> blockList = new ArrayList<AiBlock>();
 	
 	/** 
 	 * renvoie la liste des blocks contenues dans cette zone
 	 * (la liste peut être vide). 
-	 * Cette instance de liste change à chaque appel de l'IA. 
-	 * Il ne faut donc pas réutiliser la même liste, mais redemander la nouvelle
-	 * liste en utilisant cette méthode.
 	 * 
 	 * @return	liste de tous les blocs contenus dans cette zone
 	 */
 	public List<AiBlock> getBlocks()
-	{	List<AiBlock> result = new ArrayList<AiBlock>(blocks.values());
-		return result;	
+	{	return blockList;	
+	}
+	
+	/**
+	 * met à jour la liste externe des blocs
+	 */
+	private void updateBlockList()
+	{	blockList.clear();
+		for(Entry<Block,AiBlock> entry: blockMap.entrySet())
+		{	AiBlock block = entry.getValue();
+			blockList.add(block);
+		}
 	}
 	
 	/**
@@ -311,7 +311,7 @@ public class AiZone
 	 * @return	le AiBlock correspondant
 	 */
 	AiBlock getBlock(Block block)
-	{	return blocks.get(block);
+	{	return blockMap.get(block);
 	}
 	
 	/**
@@ -321,21 +321,36 @@ public class AiZone
 	 * @param block	le bloc à rajouter à la liste
 	 */
 	void addBlock(AiBlock block)
-	{	blocks.put(block.getSprite(),block);	
+	{	blockMap.put(block.getSprite(),block);	
 	}
+	
+	/////////////////////////////////////////////////////////////////
+	// BOMBS			/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	/** liste interne des bombes contenues dans cette zone */
+	private final HashMap<Bomb,AiBomb> bombMap = new HashMap<Bomb,AiBomb>();
+	/** liste externe des bombes contenues dans cette zone */
+	private final List<AiBomb> bombList = new ArrayList<AiBomb>();
 	
 	/** 
 	 * renvoie la liste des bombes contenues dans cette zone 
 	 * (la liste peut être vide)
-	 * Cette instance de liste change à chaque appel de l'IA. 
-	 * Il ne faut donc pas réutiliser la même liste, mais redemander la nouvelle
-	 * liste en utilisant cette méthode.
 	 * 
 	 * @return	liste de toutes les bombes contenues dans cette zone
 	 */
 	public List<AiBomb> getBombs()
-	{	List<AiBomb> result = new ArrayList<AiBomb>(bombs.values());
-		return result;	
+	{	return bombList;	
+	}
+	
+	/**
+	 * met à jour la liste externe des bombes
+	 */
+	private void updateBombList()
+	{	bombList.clear();
+		for(Entry<Bomb,AiBomb> entry: bombMap.entrySet())
+		{	AiBomb bomb = entry.getValue();
+			bombList.add(bomb);
+		}
 	}
 	
 	/**
@@ -345,7 +360,7 @@ public class AiZone
 	 * @return	le AiBomb correspondant
 	 */
 	AiBomb getBomb(Bomb bomb)
-	{	return bombs.get(bomb);
+	{	return bombMap.get(bomb);
 	}
 	
 	/**
@@ -355,21 +370,36 @@ public class AiZone
 	 * @param bomb	la bombe à rajouter à la liste
 	 */
 	void addBomb(AiBomb bomb)
-	{	bombs.put(bomb.getSprite(),bomb);	
+	{	bombMap.put(bomb.getSprite(),bomb);	
 	}
+	
+	/////////////////////////////////////////////////////////////////
+	// FIRES			/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	/** liste interne des feux contenus dans cette zone */
+	private final HashMap<Fire,AiFire> fireMap = new HashMap<Fire,AiFire>();
+	/** liste externe des feux contenus dans cette zone */
+	private final List<AiFire> fireList = new ArrayList<AiFire>();
 	
 	/** 
 	 * renvoie la liste des feux contenus dans cette zone 
 	 * (la liste peut être vide)
-	 * Cette instance de liste change à chaque appel de l'IA. 
-	 * Il ne faut donc pas réutiliser la même liste, mais redemander la nouvelle
-	 * liste en utilisant cette méthode.
 	 * 
 	 * @return	liste de tous les feux contenus dans cette zone
 	 */
 	public List<AiFire> getFires()
-	{	List<AiFire> result = new ArrayList<AiFire>(fires.values());
-		return result;	
+	{	return fireList;	
+	}
+	
+	/**
+	 * met à jour la liste externe des feux
+	 */
+	private void updateFireList()
+	{	fireList.clear();
+		for(Entry<Fire,AiFire> entry: fireMap.entrySet())
+		{	AiFire fire = entry.getValue();
+			fireList.add(fire);
+		}
 	}
 	
 	/**
@@ -379,7 +409,7 @@ public class AiZone
 	 * @return	le AiFire correspondant
 	 */
 	AiFire getFire(Fire fire)
-	{	return fires.get(fire);
+	{	return fireMap.get(fire);
 	}
 	
 	/**
@@ -389,20 +419,35 @@ public class AiZone
 	 * @param fire	le feu à rajouter à la liste
 	 */
 	void addFire(AiFire fire)
-	{	fires.put(fire.getSprite(),fire);	
+	{	fireMap.put(fire.getSprite(),fire);	
 	}
 	
+	/////////////////////////////////////////////////////////////////
+	// FLOORS			/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	/** liste interne des sols contenus dans cette zone */
+	private final HashMap<Floor,AiFloor> floorMap = new HashMap<Floor,AiFloor>();
+	/** liste externe des sols contenus dans cette zone */
+	private final List<AiFloor> floorList = new ArrayList<AiFloor>();
+
 	/** 
 	 * renvoie la liste des sols contenus dans cette zone 
-	 * Cette instance de liste change à chaque appel de l'IA. 
-	 * Il ne faut donc pas réutiliser la même liste, mais redemander la nouvelle
-	 * liste en utilisant cette méthode.
 	 * 
 	 * @return	liste de tous les sols contenus dans cette zone
 	 */
 	public List<AiFloor> getFloors()
-	{	List<AiFloor> result = new ArrayList<AiFloor>(floors.values());
-		return result;	
+	{	return floorList;	
+	}
+	
+	/**
+	 * met à jour la liste externe des sols
+	 */
+	private void updateFloorList()
+	{	floorList.clear();
+		for(Entry<Floor,AiFloor> entry: floorMap.entrySet())
+		{	AiFloor floor = entry.getValue();
+			floorList.add(floor);
+		}
 	}
 	
 	/**
@@ -412,7 +457,7 @@ public class AiZone
 	 * @return	le AiFloor correspondant
 	 */
 	AiFloor getFloor(Floor floor)
-	{	return floors.get(floor);
+	{	return floorMap.get(floor);
 	}
 	
 	/**
@@ -422,21 +467,52 @@ public class AiZone
 	 * @param floor	le sol à rajouter à la liste
 	 */
 	void addFloor(AiFloor floor)
-	{	floors.put(floor.getSprite(),floor);	
+	{	floorMap.put(floor.getSprite(),floor);	
 	}
 	
+	/////////////////////////////////////////////////////////////////
+	// HEROES			/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	/** liste interne des personnages contenus dans cette zone */
+	private final HashMap<Hero,AiHero> heroMap = new HashMap<Hero,AiHero>();
+	/** liste externe de tous les personnages contenus dans cette zone */
+	private final List<AiHero> heroList = new ArrayList<AiHero>();
+	/** liste externe des personnages restant encore dans cette zone */
+	private final List<AiHero> remainingHeroList = new ArrayList<AiHero>();
+	
 	/** 
-	 * renvoie la liste des personnages contenus dans cette zone 
-	 * (les joueurs éliminés n'apparaissent plus dans cette liste ni dans cette représentation de la zone)
-	 * Cette instance de liste change à chaque appel de l'IA. 
-	 * Il ne faut donc pas réutiliser la même liste, mais redemander la nouvelle
-	 * liste en utilisant cette méthode.
+	 * renvoie la liste des personnages contenus dans cette zone,
+	 * y compris ceux qui ont été éliminés. 
 	 * 
 	 * @return	liste de tous les joueurs contenus dans cette zone
 	 */
 	public List<AiHero> getHeroes()
-	{	List<AiHero> result = new ArrayList<AiHero>(heroes.values());
-		return result;	
+	{	return heroList;	
+	}
+	
+	/** 
+	 * renvoie la liste des personnages contenus dans cette zone, 
+	 * sauf ceux qui ont été éliminés ou qui ne sont pas actuellement
+	 * en jeu.
+	 * 
+	 * @return	liste de tous les joueurs contenus dans cette zone
+	 */
+	public List<AiHero> getRemainingHeroes()
+	{	return remainingHeroList;	
+	}
+	
+	/**
+	 * met à jour les listes externes des personnages
+	 */
+	private void updateHeroLists()
+	{	heroList.clear();
+		remainingHeroList.clear();
+		for(Entry<Hero,AiHero> entry: heroMap.entrySet())
+		{	AiHero hero = entry.getValue();
+			heroList.add(hero);
+			if(!hero.hasEnded())
+				remainingHeroList.add(hero);
+		}
 	}
 	
 	/**
@@ -446,7 +522,7 @@ public class AiZone
 	 * @return	le AiHero correspondant
 	 */
 	AiHero getHero(Hero hero)
-	{	return heroes.get(hero);
+	{	return heroMap.get(hero);
 	}
 	
 	/**
@@ -456,21 +532,36 @@ public class AiZone
 	 * @param hero	le personnage à rajouter à la liste
 	 */
 	void addHero(AiHero hero)
-	{	heroes.put(hero.getSprite(),hero);	
+	{	heroMap.put(hero.getSprite(),hero);	
 	}
+	
+	/////////////////////////////////////////////////////////////////
+	// ITEMS			/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	/** liste interne des items contenus dans cette zone */
+	private final HashMap<Item,AiItem> itemMap = new HashMap<Item,AiItem>();
+	/** liste externe des items contenus dans cette zone */
+	private final List<AiItem> itemList = new ArrayList<AiItem>();
 	
 	/** 
 	 * renvoie la liste des items apparents contenus dans cette zone 
 	 * (la liste peut être vide)
-	 * Cette instance de liste change à chaque appel de l'IA. 
-	 * Il ne faut donc pas réutiliser la même liste, mais redemander la nouvelle
-	 * liste en utilisant cette méthode.
 	 * 
 	 * @return	liste de tous les items contenus dans cette zone
 	 */
 	public List<AiItem> getItems()
-	{	List<AiItem> result = new ArrayList<AiItem>(items.values());
-		return result;	
+	{	return itemList;	
+	}
+	
+	/**
+	 * met à jour la liste externe des items
+	 */
+	private void updateItemList()
+	{	itemList.clear();
+		for(Entry<Item,AiItem> entry: itemMap.entrySet())
+		{	AiItem item = entry.getValue();
+			itemList.add(item);
+		}
 	}
 	
 	/**
@@ -480,7 +571,7 @@ public class AiZone
 	 * @return	le AiItem correspondant
 	 */
 	AiItem getItem(Item item)
-	{	return items.get(item);
+	{	return itemMap.get(item);
 	}
 	
 	/**
@@ -490,9 +581,12 @@ public class AiZone
 	 * @param item	l'item à rajouter à la liste
 	 */
 	void addItem(AiItem item)
-	{	items.put(item.getSprite(),item);	
+	{	itemMap.put(item.getSprite(),item);	
 	}
 	
+	/////////////////////////////////////////////////////////////////
+	// ALL SPRITES		/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
 	/**
 	 * démarque toutes les représentations de sprites d'une liste determinée en fonction du type
 	 * T paramétrant cette méthode. Méthode appelée au début de la mise à jour :
@@ -525,11 +619,24 @@ public class AiZone
 			{	temp.setEnded();
 				//Sprite sprite = temp.getSprite();
 				//if(sprite.isEnded())
+				if(!(temp instanceof AiHero)) //we always keep the hero, cause they may come back...
 					it.remove();
 			}
 		}
 	}
 
+	/**
+	 * met à jour toutes les listes externes de sprites
+	 */
+	private void updateSpriteLists()
+	{	updateBlockList();
+		updateBombList();
+		updateFireList();
+		updateFloorList();
+		updateHeroLists();
+		updateItemList();
+	}
+	
 	/////////////////////////////////////////////////////////////////
 	// OWN HERO			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
@@ -548,7 +655,7 @@ public class AiZone
 	 */
 	private void initOwnHero()
 	{	PredefinedColor color = player.getColor(); 
-		Iterator<Entry<Hero,AiHero>> i = heroes.entrySet().iterator();
+		Iterator<Entry<Hero,AiHero>> i = heroMap.entrySet().iterator();
 		boolean found = false;
 		while(i.hasNext() && !found)
 		{	AiHero temp = i.next().getValue();
@@ -1015,12 +1122,12 @@ public class AiZone
 			for(int col=0;col<width;col++)
 				matrix[line][col].finish();
 		// sprites
-		blocks.clear();
-		bombs.clear();
-		fires.clear();
-		floors.clear();
-		heroes.clear();
-		items.clear();
+		blockMap.clear();
+		bombMap.clear();
+		fireMap.clear();
+		floorMap.clear();
+		heroMap.clear();
+		itemMap.clear();
 		ownHero = null;
 	}
 }

@@ -103,7 +103,7 @@ public class Item extends Sprite
 	// MISC				/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	/**
-	 * copy this item, which is supposed to be hiden (or to have no gesture),
+	 * copy this item, which is supposed to be hidden (or to have no gesture),
 	 * have no delay, no items, etc.
 	 *  
 	 */
