@@ -40,6 +40,7 @@ public class DelayManager
 	public static final String DL_REBIRTH = "DL_REBIRTH";
 	public static final String DL_RELEASE = "DL_RELEASE";
 	public static final String DL_SPAWN = "DL_SPAWN";
+	public static final String DL_START = "DL_START";
 	public static final String DL_VICTORY = "DL_VICTORY";
 	public static final String DL_WAIT = "DL_WAIT";
 	
