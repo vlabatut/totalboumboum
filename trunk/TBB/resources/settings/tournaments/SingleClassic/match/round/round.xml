@@ -4,7 +4,7 @@
 	xsi:noNamespaceSchemaLocation="../../../schemas/round.xsd">
 	
  	<notes>
- 		<line value="Here goes a short description of the round." />
+ 		<line value="SBM1 level, classic battle rules." />
  		<line value="Author: Vincent Labatut" />
  		<line value="Date: 27-09-2008" />
  	</notes>
