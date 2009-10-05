@@ -371,8 +371,8 @@ public class HanciToprak extends ArtificialIntelligence {
 		Integer lastMove_ters = null;
 		lastMove_ters = opposite_dirextion(lastMove_);
 		
-		for (int m = 0; m < temp.size(); m++)
-			System.out.println(temp.get(m));
+//		for (int m = 0; m < temp.size(); m++)
+//			System.out.println(temp.get(m));
 		
 		if (lastMove_ters == 1 || lastMove_ters == 2) {
 			for (int i = 0; i < temp.size(); i++) {
@@ -615,14 +615,14 @@ public class HanciToprak extends ArtificialIntelligence {
 
 	public void printMatrix(int[][] matrix) {
 		
-		for (int i1 = 0; i1 < matrix[0].length; i1++) {
-			for (int i2 = 0; i2 < matrix.length; i2++) {
+//		for (int i1 = 0; i1 < matrix[0].length; i1++) {
+//			for (int i2 = 0; i2 < matrix.length; i2++) {
 
-				System.out.print(matrix[i2][i1] + " ");
-			}
-			System.out.println();
-		}
-		System.out.println("bizim matris");
+//				System.out.print(matrix[i2][i1] + " ");
+//			}
+//			System.out.println();
+//		}
+//		System.out.println("bizim matris");
 
 	}
 }
