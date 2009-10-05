@@ -301,8 +301,8 @@ public class SahinYildirim extends ArtificialIntelligence {
 
 					PointFind temp = i.next();
 
-					System.out.print("premier while** Fils = "
-							+ temp.nodeYazdir());
+//					System.out.print("premier while** Fils = "
+//							+ temp.nodeYazdir());
 
 					prqFils.offer(temp);
 
@@ -328,9 +328,9 @@ public class SahinYildirim extends ArtificialIntelligence {
 							path.add(addToPath(prqFils.peek(), node));
 						}
 
-						for (int j = 0; j < path.size(); j++)
-							System.out.print("**" + path.get(j) + " Count = "
-									+ count);
+//						for (int j = 0; j < path.size(); j++)
+//							System.out.print("**" + path.get(j) + " Count = "
+//									+ count);
 						prq.clear();
 						prq.addAll(prqFils);
 
@@ -386,9 +386,9 @@ public class SahinYildirim extends ArtificialIntelligence {
 										.offer(perler.get(0).getChildVector()
 												.get(j));
 
-							for (int j = 0; j < path.size(); j++)
-								System.out.print("*get(0)*" + path.get(j)
-										+ " Count = " + count);
+//							for (int j = 0; j < path.size(); j++)
+//								System.out.print("*get(0)*" + path.get(j)
+//										+ " Count = " + count);
 
 							perler.clear();
 
@@ -424,9 +424,9 @@ public class SahinYildirim extends ArtificialIntelligence {
 										.offer(perler.get(1).getChildVector()
 												.get(j));
 
-							for (int j = 0; j < path.size(); j++)
-								System.out.print("*get(1)*" + path.get(j)
-										+ " Count = " + count);
+//							for (int j = 0; j < path.size(); j++)
+//								System.out.print("*get(1)*" + path.get(j)
+//										+ " Count = " + count);
 							perler.clear();
 
 							prqFils.clear();
@@ -453,9 +453,9 @@ public class SahinYildirim extends ArtificialIntelligence {
 						}
 					}
 
-					for (int j = 0; j < path.size(); j++)
-						System.out.print("*get(1)*" + path.get(j) + " Count = "
-								+ count);
+//					for (int j = 0; j < path.size(); j++)
+//						System.out.print("*get(1)*" + path.get(j) + " Count = "
+//								+ count);
 					lastPoint = node.getRootPoint();
 					perler.clear();
 					prq.addAll(prqFils);
@@ -604,12 +604,12 @@ public class SahinYildirim extends ArtificialIntelligence {
 	private int getCost(int x, int y, int move, int pereCost) {
 		int cost = pereCost;
 
-		System.out.print("ilk Cost = " + cost);
+//		System.out.print("ilk Cost = " + cost);
 		int differnce;//la distance de cette point au point target
 		if (move == ArtificialIntelligence.AI_ACTION_GO_DOWN) {
 			differnce = getDistance(x, y + 1, pointFind.getRootPoint().x,
 					pointFind.getRootPoint().y);
-			System.out.print(" DownCostDifference = " + differnce);
+//			System.out.print(" DownCostDifference = " + differnce);
 
 			cost = cost + differnce;
 
@@ -621,7 +621,7 @@ public class SahinYildirim extends ArtificialIntelligence {
 		} else if (move == ArtificialIntelligence.AI_ACTION_GO_UP) {
 			differnce = getDistance(x, y - 1, pointFind.getRootPoint().x,
 					pointFind.getRootPoint().y);
-			System.out.print(" UPCostDifference = " + differnce);
+//			System.out.print(" UPCostDifference = " + differnce);
 			cost = cost + differnce;
 			if (getZoneMatrix()[x][y - 1] == ArtificialIntelligence.AI_BLOCK_WALL_SOFT)
 				cost = cost + 10;
@@ -632,7 +632,7 @@ public class SahinYildirim extends ArtificialIntelligence {
 		} else if (move == ArtificialIntelligence.AI_ACTION_GO_LEFT) {
 			differnce = getDistance(x - 1, y, pointFind.getRootPoint().x,
 					pointFind.getRootPoint().y);
-			System.out.print(" LeftCostDifference = " + differnce);
+//			System.out.print(" LeftCostDifference = " + differnce);
 			cost = cost + differnce;
 			if (getZoneMatrix()[x - 1][y] == ArtificialIntelligence.AI_BLOCK_WALL_SOFT)
 				cost = cost + 10;
@@ -642,7 +642,7 @@ public class SahinYildirim extends ArtificialIntelligence {
 		} else if (move == ArtificialIntelligence.AI_ACTION_GO_RIGHT) {
 			differnce = getDistance(x + 1, y, pointFind.getRootPoint().x,
 					pointFind.getRootPoint().y);
-			System.out.print(" RightCostDifference = " + differnce);
+//			System.out.print(" RightCostDifference = " + differnce);
 			cost = cost + differnce;
 			if (getZoneMatrix()[x + 1][y] == ArtificialIntelligence.AI_BLOCK_WALL_SOFT)
 				cost = cost + 10;

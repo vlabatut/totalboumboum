@@ -25,13 +25,13 @@ public class Map {
 	}
 	
 	public static void printMap (){
-		System.out.println();
-		for ( int i = 0 ; i < 15 ; i++ ){
-			for ( int j = 0 ; j < 17 ; j++ ){
-				System.out.print( getValue(j, i) + " ");
-			}
-			System.out.println();
-		}
+//		System.out.println();
+//		for ( int i = 0 ; i < 15 ; i++ ){
+//			for ( int j = 0 ; j < 17 ; j++ ){
+//				System.out.print( getValue(j, i) + " ");
+//			}
+//			System.out.println();
+//		}
 	}
 	
 	public static int[][] getMap() {

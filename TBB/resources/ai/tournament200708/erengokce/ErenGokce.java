@@ -93,7 +93,7 @@ public class ErenGokce extends ArtificialIntelligence {
 				//au cas ou il y a un pb avec l'algorithme aetoile
 				if(result==AI_ACTION_DO_NOTHING)
 				{
-					System.out.println("Second Algorithm of Protection");
+//					System.out.println("Second Algorithm of Protection");
 					if(bombpos[0]==own[0])
 					{
 						if(right&&lastmove!=AI_ACTION_GO_LEFT)
@@ -281,7 +281,7 @@ public class ErenGokce extends ArtificialIntelligence {
 	private int shrinkDanger(boolean up,boolean down,boolean left,boolean right,int x,int y) throws ExecutionException
 	{
 		//on traite le shrink comme un bombe a pouvoir 4
-		System.out.println("Shrink Danger");
+//		System.out.println("Shrink Danger");
 		int action=AI_ACTION_DO_NOTHING;
 		MoveQueue queue=new MoveQueue(x,y);
 		Node root=new Node(x,y,new Node());
@@ -480,25 +480,25 @@ public class ErenGokce extends ArtificialIntelligence {
 	{
 		if(once<=0)
 		{
-			System.out.println("X: "+startx+" Y: "+starty);
+//			System.out.println("X: "+startx+" Y: "+starty);
 			if(down&&right)
 				{
-				System.out.println("ltc");
+//				System.out.println("ltc");
 				ltc=true;
 				}
 			if(down&&left)
 				{
-				System.out.println("rtc");
+//				System.out.println("rtc");
 				rtc=true;
 				}
 			if(up&&right)
 				{
-				System.out.println("ldc");
+//				System.out.println("ldc");
 				ldc=true;
 				}
 			if(up&&left)
 				{
-				System.out.println("rdc");
+//				System.out.println("rdc");
 				rdc=true;
 				}
 			once++;	

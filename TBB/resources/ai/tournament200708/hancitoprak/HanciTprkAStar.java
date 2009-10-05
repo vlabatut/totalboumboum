@@ -150,7 +150,7 @@ public class HanciTprkAStar {
 		//
 		// fin.setParent(memoire);
 
-		System.out.println("findPathteyim ");
+//		System.out.println("findPathteyim ");
 		int xc;
 		int yc;
 		open.clear();
@@ -159,21 +159,21 @@ public class HanciTprkAStar {
 		HanciTprkNode courante = debut;
 		HanciTprkNode temp_node = null;
 
-		System.out.println("debut: " + debut.getX() + debut.getY());
-		System.out.println("fin: " + fin.getX() + fin.getY());
+//		System.out.println("debut: " + debut.getX() + debut.getY());
+//		System.out.println("fin: " + fin.getX() + fin.getY());
 
 		courante.setCost(0);
 		// courante.setParent(null);
 		open.add(courante);
 
-		System.out.println("opensize: " + open.size());
+//		System.out.println("opensize: " + open.size());
 		while (!inClosedList(fin)) {
-			System.out.println("whilea dondum");
-			System.out.println("opensize: " + open.size());
+//			System.out.println("whilea dondum");
+//			System.out.println("opensize: " + open.size());
 			if (!inClosedList(courante)) {
 				closed.add(courante);
-				System.out.println("!inClosedList(courante):" + courante.getX()
-						+ courante.getY());
+//				System.out.println("!inClosedList(courante):" + courante.getX()
+//						+ courante.getY());
 
 				xc = courante.getX();
 				yc = courante.getY();
@@ -228,7 +228,7 @@ public class HanciTprkAStar {
 								yc + 1)));
 
 				}
-				System.out.println("temp_node = courante");
+//				System.out.println("temp_node = courante");
 				temp_node = courante;
 
 			}
@@ -250,25 +250,25 @@ public class HanciTprkAStar {
 
 		fin.setParent(temp_node);
 
-		System.out.println("findPatht bitti ");
+//		System.out.println("findPatht bitti ");
 	}
 
 	public void ajoutOuverte(HanciTprkNode courante, HanciTprkNode adjacente) {
-		System.out.println("ajoutouvertteyim");
+//		System.out.println("ajoutouvertteyim");
 		int g = courante.getCost()
 				+ ((adjacente.getX() == courante.getX() || adjacente.getY() == courante
 						.getY()) ? 10 : 15);
-		System.out.println("gsi:" + g);
+//		System.out.println("gsi:" + g);
 		int h = (Math.abs(adjacente.getX() - fin.getX()) + Math.abs(adjacente
 				.getY()
 				- fin.getY()));
-		System.out.println("hsi:" + h);
+//		System.out.println("hsi:" + h);
 		int f = g + h;
-		System.out.println("fsi:" + f);
+//		System.out.println("fsi:" + f);
 		// for(int i=0;i<open.size();i++)
 		// System.out.println(open.get(i).getX()+open.get(i).getY());
 		if (inOpenList(adjacente)) {
-			System.out.println("inOpenList(adjacente)");
+//			System.out.println("inOpenList(adjacente)");
 			if (adjacente.getF() > f) {
 				adjacente.setCost(g);
 				adjacente.setF(f);
@@ -283,8 +283,8 @@ public class HanciTprkAStar {
 			adjacente.setParent(courante);
 			open.add(adjacente);
 
-			System.out.println("ajoutouvertte sunu ekledim: "
-					+ adjacente.getX() + " " + adjacente.getY());
+//			System.out.println("ajoutouvertte sunu ekledim: "
+//					+ adjacente.getX() + " " + adjacente.getY());
 		}
 
 	}
@@ -301,8 +301,8 @@ public class HanciTprkAStar {
 
 	public void initialiser(HanciTprkNode debut, HanciTprkNode fin,
 			int[][] matrix) {
-		System.out.println("initialisenin icindeyim");
-		System.out.println();
+//		System.out.println("initialisenin icindeyim");
+//		System.out.println();
 
 		this.debut = debut;
 		this.fin = fin;
@@ -312,11 +312,11 @@ public class HanciTprkAStar {
 				// if(matrix[i2][i1]==0)
 				// System.out.print("000 ");
 				// else
-				System.out.print(matrix[i2][i1] + " ");
+//				System.out.print(matrix[i2][i1] + " ");
 			}
-			System.out.println();
+//			System.out.println();
 		}
-		System.out.println("bizim matris");
+//		System.out.println("bizim matris");
 
 		for (int i1 = 0; i1 < pos[0].length; i1++) {
 			for (int i2 = 0; i2 < pos.length; i2++) {
@@ -324,11 +324,11 @@ public class HanciTprkAStar {
 				// if(matrix[i2][i1]==0)
 				// System.out.print("000 ");
 				// else
-				System.out.print(pos[i2][i1] + " ");
+//				System.out.print(pos[i2][i1] + " ");
 			}
-			System.out.println();
+//			System.out.println();
 		}
-		System.out.println("obur matris");
+//		System.out.println("obur matris");
 
 		for (int i = 0; i < 17; i++) {
 			for (int j = 0; j < 15; j++) {
@@ -337,7 +337,7 @@ public class HanciTprkAStar {
 
 			}
 		}
-		System.out.println("initialisenin icinde forlarti bitrdim");
+//		System.out.println("initialisenin icinde forlarti bitrdim");
 
 		findPath(debut);
 		Path();

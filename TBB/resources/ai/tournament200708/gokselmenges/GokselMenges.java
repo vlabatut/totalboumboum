@@ -878,7 +878,9 @@ return points;
 				}
 			}
 			catch(Exception ee)
-			{System.out.println(ee.toString()); }
+			{
+//				System.out.println(ee.toString()); 
+			}
 		}
 		for (int i = preresult.size()-1;i>=0;i--)
 		{
@@ -1259,9 +1261,9 @@ return points;
 		int[][] zoneMatrix=BetterMatrix();
 
 		for(int i1=0;i1<zoneMatrix[0].length;i1++)
-		{	for(int i2=0;i2<zoneMatrix.length;i2++)
-				System.out.print(zoneMatrix[i2][i1]+" ");
-			System.out.println();
+		{	//for(int i2=0;i2<zoneMatrix.length;i2++)
+				//System.out.print(zoneMatrix[i2][i1]+" ");
+			//System.out.println();
 		}
 	}
 	
