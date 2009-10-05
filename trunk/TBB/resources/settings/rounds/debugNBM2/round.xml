@@ -13,7 +13,7 @@
 
 	<limits>
 		<time>
-			<points local="false" name="basicSurvival" />
+			<points local="false" name="RoundSurvival" />
  			<threshold value="9000000" />
 		</time>
 	</limits>

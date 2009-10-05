@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <logstats xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="..\..\resources\schemas\logstats.xsd">
-	<regularLaunch count="34" time="9266" />
-	<quickLaunch count="8" time="394" />
+	<regularLaunch count="35" time="9365" />
+	<quickLaunch count="10" time="482" />
 </logstats>
 
