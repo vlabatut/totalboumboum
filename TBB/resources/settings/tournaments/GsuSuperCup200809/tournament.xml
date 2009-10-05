@@ -3,7 +3,7 @@
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
 	xsi:noNamespaceSchemaLocation="../../../schemas/tournament.xsd">
 	
-	<general name="Super-coupe de Galatasaray"/>
+	<general name="Super-coupe de Galatasaray I"/>
 
  	<notes>
  		<line value="Match opposant les deux premiers 2007/08 aux deux premiers 2008/09." />

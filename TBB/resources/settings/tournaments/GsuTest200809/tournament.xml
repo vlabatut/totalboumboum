@@ -3,7 +3,7 @@
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
 	xsi:noNamespaceSchemaLocation="../../../schemas/tournament.xsd">
 	
-	<general name="Tournament-simple de test"/>
+	<general name="Tournoi simple de test"/>
 
  	<notes>
  		<line value="Tournoi simple utilisé pour testers les implémentations partielles des IA de l'année 2008/09." />

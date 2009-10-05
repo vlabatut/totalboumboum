@@ -22,6 +22,7 @@ package fr.free.totalboumboum.engine.container.bombset;
  */
 
 import java.io.IOException;
+import java.io.Serializable;
 import java.util.HashMap;
 
 import javax.xml.parsers.ParserConfigurationException;
@@ -30,8 +31,9 @@ import org.xml.sax.SAXException;
 
 import fr.free.totalboumboum.configuration.profile.PredefinedColor;
 
-public class BombsetMap
-{
+public class BombsetMap implements Serializable
+{	private static final long serialVersionUID = 1L;
+
 	/////////////////////////////////////////////////////////////////
 	// BOMBSETS			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////

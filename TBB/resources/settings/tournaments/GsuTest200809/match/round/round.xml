@@ -4,7 +4,7 @@
 	xsi:noNamespaceSchemaLocation="../../../../../schemas/round.xsd">
 	
  	<notes>
- 		<line value="Here goes a short description of the round." />
+ 		<line value="Manche utilisée pour évaluer les IA de l'édition 2008/09 à mi-développement." />
  		<line value="Author: Vincent Labatut" />
  		<line value="Date: 16-11-2008" />
  	</notes>

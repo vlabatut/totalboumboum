@@ -1,5 +1,7 @@
 package fr.free.totalboumboum.engine.content.feature.ability;
 
+import java.io.Serializable;
+
 /*
  * Total Boum Boum
  * Copyright 2008-2009 Vincent Labatut 
@@ -27,8 +29,9 @@ package fr.free.totalboumboum.engine.content.feature.ability;
  * (hence no enum type)
  *
  */
-public class StateAbilityName
-{
+public class StateAbilityName implements Serializable
+{	private static final long serialVersionUID = 1L;
+
 	/////////////////////////////////////////////////////////////////
 	// GENERAL ABILITIES		/////////////////////////////////////
 	/////////////////////////////////////////////////////////////////

@@ -21,6 +21,7 @@ package fr.free.totalboumboum.engine.container.bombset;
  * 
  */
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Iterator;
 
@@ -31,8 +32,9 @@ import fr.free.totalboumboum.engine.content.sprite.Sprite;
 import fr.free.totalboumboum.engine.content.sprite.bomb.Bomb;
 import fr.free.totalboumboum.engine.content.sprite.bomb.BombFactory;
 
-public class Bombset
-{	
+public class Bombset implements Serializable
+{	private static final long serialVersionUID = 1L;
+
 	public Bombset()
 	{	bombFactories = new ArrayList<BombFactory>();
 		requiredAbilities = new ArrayList<ArrayList<StateAbility>>();

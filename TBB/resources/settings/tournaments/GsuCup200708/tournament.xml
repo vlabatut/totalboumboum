@@ -3,7 +3,7 @@
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
 	xsi:noNamespaceSchemaLocation="../../../schemas/tournament.xsd">
 	
-	<general name="Tournoi de Galatasaray 1"/>
+	<general name="Tournoi de Galatasaray I"/>
 
  	<notes>
  		<line value="Remake du 1er tournoi d'évaluation pour le projet d'IA de la GSÜ." />

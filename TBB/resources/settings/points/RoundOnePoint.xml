@@ -4,30 +4,22 @@
 	xsi:noNamespaceSchemaLocation="../../schemas/point.xsd">
 	
 	<notes>
-		<line value="Players #1,2,3,4+ get 10,6,3,1,0 pts." />
-		<line value="If some players have the same number of points, secondary scores are used: bombings, then items, then bombs." />
-		<line value="If there's still a draw, points are shared." />
+		<line value="Just one point for the winner." />
 	</notes>
 
-	<rankpoints invert="false" exaequoShare="true">
+	<rankpoints invert="false" exaequoShare="false">
 		<rankings>
-			<total />
-			<scores type="BOMBINGS"/>
-			<scores type="ITEMS"/>
-			<scores type="BOMBS"/>
+			<scores type="TIME" />
 		</rankings>	
 		<values>
-			<value value="10" />
-			<value value="6" />
-			<value value="3" />
 			<value value="1" />
 		</values>
 	</rankpoints>
 	
-<!-- 
+<!-- 	
 	<discretize>
 		<rankings >
-			<total />
+			<scores type="time" />
 			<scores type="bombings"/>
 			<scores type="items"/>
 			<scores type="bombs"/>
@@ -37,15 +29,17 @@
 			<threshold value="2" />
 			<threshold value="3" />
 			<threshold value="4" />
+			<threshold value="5" />
 		</thresholds>
 		<values>
-			<value value="10" />
-			<value value="6" />
-			<value value="3" />
+			<value value="12" />
+			<value value="8" />
+			<value value="5" />
+			<value value="2" />
 			<value value="1" />
 			<value value="0" />
 		</values>
 	</discretize>
  -->
- 		
+		
 </points>

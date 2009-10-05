@@ -22,7 +22,8 @@ package fr.free.totalboumboum.engine.content.feature.ability;
  */
 
 public class StateAbility extends AbstractAbility
-{	
+{	private static final long serialVersionUID = 1L;
+
 	public StateAbility(String name)
 	{	super();
 		this.name = name;
