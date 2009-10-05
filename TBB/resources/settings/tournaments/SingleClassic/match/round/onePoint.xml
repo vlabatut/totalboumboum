@@ -4,12 +4,10 @@
 	xsi:noNamespaceSchemaLocation="../../../../../schemas/point.xsd">
 	
 	<notes>
-		<line value="Players #1,2,3,4,5+ get 12,8,5,2,1,0 pts." />
-		<line value="If some players have the same number of points, scores are used: bombings, then items, then bombs." />
-		<line value="If there's still a draw, points are shared." />
+		<line value="Just one point for the winner." />
 	</notes>
 
-	<rankpoints invert="false" exaequoShare="true">
+	<rankpoints invert="false" exaequoShare="false">
 		<rankings>
 			<scores type="TIME" />
 		</rankings>	
