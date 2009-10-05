@@ -386,14 +386,15 @@ buttonStatistics.setEnabled(false);
 	@Override
 	public void roundOver()
 	{	saveTournament();
-/*	
-		SwingUtilities.invokeLater(new Runnable()
-		{	public void run()
-			{	tournamentResults.refresh();
-				buttonResults.doClick();
-			}
-		});
-*/			
+		// refresh only the Single match tournaments
+		if(tournament instanceof SingleTournament)
+		{	SwingUtilities.invokeLater(new Runnable()
+			{	public void run()
+				{	tournamentResults.refresh();
+					buttonResults.doClick();
+				}
+			});
+		}
 	}
 
 	@Override
