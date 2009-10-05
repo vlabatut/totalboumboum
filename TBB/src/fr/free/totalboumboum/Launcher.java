@@ -1003,6 +1003,8 @@ public class Launcher
 
 	/* TODO
 	 * 
+	 * - options pour enchainer tous les rounds d'un tournoi automatiquement sans avoir à appuyer sur les touches "suivant"
+	 * 
 	 * - pour les tournois, le chargement/sélection du tournoi doit précéder le choix des joueurs
 	 * 
 	 * - GUI : dans les tables, remplacer les labels par une classe custom qui implémenterait l'interface basicPanel

@@ -4,9 +4,10 @@
 	xsi:noNamespaceSchemaLocation="../../../schemas/match.xsd">
 	
  	<notes>
- 		<line value="Here goes a short description of the match." />
+ 		<line value="This long match uses only NBM2 official levels." />
+ 		<line value="It has 7 rounds." />
  		<line value="Author: Vincent Labatut" />
- 		<line value="Date: 25-09-2008" />
+ 		<line value="Date: 25-09-2009" />
  	</notes>
  	
 	<author value="Vincent Labatut" />
@@ -15,7 +16,7 @@
 
 		<confrontation>
 			<points local="false" name="MatchBasic" />
-			<threshold value="10" />
+			<threshold value="7" />
 		</confrontation>
 	
  <!-- 		
