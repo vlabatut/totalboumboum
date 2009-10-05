@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <archive xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="..\..\..\resources\schemas\archive.xsd">
-	<tournament name="Super-coupe de Galatasaray" type="SINGLE" />
-	<played matches="0" rounds="1" />
-	<dates start="2009-10-05T21:54:35" save="2009-10-05T21:55:39" />
+	<tournament name="Tournament-séquence court" type="SEQUENCE" />
+	<played matches="1" rounds="1" />
+	<dates start="2009-10-05T22:20:22" save="2009-10-05T22:32:45" />
 	<players>
 		<player name="0708.Kurtuluş+Özsoy" />
 		<player name="0708.Kılıç+Pala" />
