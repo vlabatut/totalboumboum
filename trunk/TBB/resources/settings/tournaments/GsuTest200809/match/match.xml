@@ -4,7 +4,7 @@
 	xsi:noNamespaceSchemaLocation="../../../../schemas/match.xsd">
 	
  	<notes>
- 		<line value="Here goes a short description of the match." />
+ 		<line value="Rencontre utilisé pour évaluer les IA de l'édition 2008/09 à mi-développement." />
  		<line value="Author: Vincent Labatut" />
  		<line value="Date: 28-11-2008" />
  	</notes>
@@ -26,7 +26,7 @@
 	</limits>
 
  	<rounds randomOrder="false" >
-  		<round local="true" name="roundPart1" />
+  		<round local="true" name="round" />
   	</rounds>
 	
 </match>

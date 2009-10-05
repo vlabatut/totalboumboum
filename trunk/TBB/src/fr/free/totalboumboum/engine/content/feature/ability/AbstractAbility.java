@@ -1,5 +1,7 @@
 package fr.free.totalboumboum.engine.content.feature.ability;
 
+import java.io.Serializable;
+
 /*
  * Total Boum Boum
  * Copyright 2008-2009 Vincent Labatut 
@@ -21,8 +23,9 @@ package fr.free.totalboumboum.engine.content.feature.ability;
  * 
  */
 
-public abstract class AbstractAbility
-{	
+public abstract class AbstractAbility implements Serializable
+{	private static final long serialVersionUID = 1L;
+
 	public AbstractAbility()
 	{	strength = 0;
 		time = -1;

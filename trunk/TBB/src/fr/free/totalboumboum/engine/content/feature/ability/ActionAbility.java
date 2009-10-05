@@ -26,7 +26,8 @@ import fr.free.totalboumboum.engine.content.feature.action.GeneralAction;
 import fr.free.totalboumboum.engine.content.feature.action.SpecificAction;
 
 public class ActionAbility extends AbstractAbility
-{	
+{	private static final long serialVersionUID = 1L;
+	
 	public ActionAbility(GeneralAction action)
 	{	super();
 		this.action = action;

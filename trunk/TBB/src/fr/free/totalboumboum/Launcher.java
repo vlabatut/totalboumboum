@@ -864,6 +864,8 @@ public class Launcher
 
 	/* TODO
 	 * 
+	 * - tournoi : n'affiche pas le détail des matches...
+	 * 
 	 * - GUI : reload la structure du dernier tournoi, alors que ça devrait pas
 	 * 
 	 * - GUI : les résultats ne s'affichent pas automatiquement quand on revient à l'écran du match
