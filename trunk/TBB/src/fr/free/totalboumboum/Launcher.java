@@ -730,24 +730,17 @@ public class Launcher
 
 	
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-// BUGS CONNUS	//////////////////////////////////////////////////////////////////////////////////////////////////////////////
+// KNOWN, WAITING BUGS	//////////////////////////////////////////////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 		
 	/*
-	 * TODO quand on balance une bombe, puis une autre, puis fait péter la première et enfin la seconde 
-	 *  juste à la fin des flammes de la première, alors l'explosion de la 2nde est circonsrite à la
-	 *  case où elle atterrit.
-	 *  
+	 * TODO
+	 *	l'ombre des blocs de la dernière ligne est portée sur les blocs de la première ligne
+	 *	c'est normal. pour l'éviter, il faudrait traiter un cas assez particulier... à voir
 	 */
 	
 	/*  
 	 *  TODO l'item kick ne marche pas
-	 */
-	
-	/*  
-	 *  TODO quand un mur est détruit (définitivement) par une penetration bomb, l'item n'apparait pas car
-	 *  la flamme de la bombe dure plus longtemps que l'explosion du mur, et détruit l'item aussitôt qu'il apparait
-	 *  >> je pense que ça a été résolu ça, à tester !
 	 */
 	
 	/*
@@ -856,6 +849,8 @@ public class Launcher
 	 * - touche spéciale permettant d'exécuter seulement une itération du moteur
 	 * - IA suiveuse : IA de démonstration qui choisit un autre joueur puis le suit
 	 * - gestion des IA : mise en place d'UPS, limité par défaut à 10 Hz, afin de décharger le moteur du jeu
+	 * - révision des tournois/rencontres/manches existants
+	 * - correction d'un bug dans la GUI qui empêchait l'affichage automatique des résultats pour les tournois simples
 	 */
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -864,21 +859,16 @@ public class Launcher
 
 	/* TODO
 	 * 
-	 * - tournoi : n'affiche pas le détail des matches...
-	 * 
-	 * - GUI : reload la structure du dernier tournoi, alors que ça devrait pas
-	 * 
-	 * - GUI : les résultats ne s'affichent pas automatiquement quand on revient à l'écran du match
+	 * - GUI tournoi : n'affiche pas le détail des matches...
 	 * 
 	 * - GUI : édition de profil, quand on a fait "nouveau" ça n'active pas le bouton "modifier"
+	 * 	 d'ailleurs ça devrait faire comme pour un nouveau slot d'enregistrement : ca devrait demander le nom dans un dialogue modal
 	 * 
 	 * - cliquer sur partie rapide, annuler, cliquer sur tournoi, annuler, cliquer sur partie rapide >> bug
 	 * 	 peut-être lié : cliquer sur partie rapide, maison, repartie rapide : rien d'affiché
 	 * 
 	 * - GUI : dans les tooltips du tableau des résultats, il manque les numéros des manches
 	 *   
-	 * - l'ombre des blocs de la dernière ligne est portée sur les blocs de la première ligne
-	 * 
 	 * - bug d'affichage dans les notes d'IA, les accents sont affichés avec la police par défaut
 	 * 
 	 * - bug : j'ai vu l'ia prendre une vie, mourir, relacher la vie, et revenir. 
@@ -887,6 +877,9 @@ public class Launcher
 	 * 
 	 * - la pause d'IA reste même si le joueur est mort, et je ne sais pas pq, au débug le moteur n'exécute pas le code affichant le texte !
 	 * 
+	 * - quand on balance une bombe, puis une autre, puis fait péter la première et enfin la seconde 
+	 *   juste à la fin des flammes de la première, alors l'explosion de la 2nde est circonsrite à la
+	 *   case où elle atterrit.
 	 */
 	
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -895,7 +888,10 @@ public class Launcher
 
 	/* TODO PRIORITÉ HAUTE
 	 * 
-	 * - nettoyer tous les tournois, rounds, etc, dans la version clean (et synchro qd nécessaire la version de travail)
+	 * - faire un log automatique energistrant toutes les commandes et positions, histoire d'avoir une trace des bugs
+	 * 
+	 * - rajouter dans le logstat :
+	 * 		- nombre de bombes posées (ça sera dans les stats de toute façon)
 	 * 
 	 * - faut émettre un évt de sortie de case à la disparition d'un sprite (mort, masquage, etc)
 	 * 
@@ -906,10 +902,6 @@ public class Launcher
 	 * - remplacer "à vos marques" "pret" "boum!" par des graphismes précalculés
 	 * 
 	 * - à la fin de la partie, faire disparaitre tout le niveau comme il apparait au début
-	 * 
-	 * - faire un log automatique energistrant toutes les commandes et positions, histoire d'avoir une trace des bugs
-	 * 
-	 * - faire un compteur du nombre d'exécutions du jeu
 	 * 
 	 */
 	
@@ -1064,6 +1056,6 @@ public class Launcher
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 	/**
-	 * - révision des tournois et cie...
+	 * - 
 	 */
 }
