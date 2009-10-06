@@ -862,6 +862,8 @@ public class Launcher
 	 * - correction d'un bug dans la GUI qui empêchait l'affichage automatique des résultats pour les tournois simples
 	 * - correction d'un bug dans la GUI qui empêchait l'affichage complet de la description d'un tournoi de type coupe
 	 * - correction d'un bug dans la GUI : dans les tooltips du tableau des résultats, il manquait les numéros des manches
+	 * - correction d'un bug dans la GUI : dans les résultats, certaines colonnes n'étaient pas assez larges
+	 * 
 	 */
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////

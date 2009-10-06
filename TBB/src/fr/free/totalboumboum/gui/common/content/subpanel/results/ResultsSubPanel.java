@@ -99,6 +99,17 @@ public class ResultsSubPanel extends TableSubPanel
 				type = GuiKeys.TOURNAMENT;
 			prefix = GuiKeys.COMMON_RESULTS+type;
 				
+			// col widths
+			int headerHeight = getHeaderHeight();
+			int portraitWidth = headerHeight;
+			int nameWidth = headerHeight;
+			int scoresWidth[] = {headerHeight,headerHeight,headerHeight,headerHeight};
+			int timeWidth = headerHeight;
+			int confrontationsWidth[] = new int[confrontationsCount];
+			Arrays.fill(confrontationsWidth,headerHeight);
+			int totalWidth = headerHeight;
+			int pointsWidth = headerHeight;
+			
 			// headers
 			int col = 0;
 			{	String headerPrefix = prefix+GuiKeys.HEADER;
@@ -133,7 +144,13 @@ public class ResultsSubPanel extends TableSubPanel
 					String text = GuiConfiguration.getMiscConfiguration().getLanguage().getText(key);
 					String tooltip = GuiConfiguration.getMiscConfiguration().getLanguage().getText(key+GuiKeys.TOOLTIP);
 					for(int c=0;c<confrontationsCount;c++)
-						setLabelText(0,col+c,text+(c+1),tooltip+" "+(c+1));
+					{	String tempText = text+(c+1);
+						String tempTooltip = tooltip+" "+(c+1);
+						setLabelText(0,col+c,tempText,tempTooltip);
+						int temp = GuiTools.getPixelWidth(getLineFontSize()+4,tempText); //NOTE the +4 should not be there, but getPixelWidth underestimates the width (or there's a margin in JLabels?). same thing with other calls to this function in this class 
+						if(temp>confrontationsWidth[c])
+							confrontationsWidth[c] = temp;
+					}
 					col = col+confrontationsCount;
 				}
 				if(showTotal && !(statisticHolder instanceof Round))
@@ -148,17 +165,7 @@ public class ResultsSubPanel extends TableSubPanel
 				}
 			}
 			
-			// col widths
-			int headerHeight = getHeaderHeight();
-			int portraitWidth = headerHeight;
-			int nameWidth = headerHeight;
-			int scoresWidth[] = {headerHeight,headerHeight,headerHeight,headerHeight};
-			int timeWidth = headerHeight;
-			int confrontationsWidth[] = new int[confrontationsCount];
-			Arrays.fill(confrontationsWidth,headerHeight);
-			int totalWidth = headerHeight;
-			int pointsWidth = headerHeight;
-			
+			// init
 			StatisticBase stats = statisticHolder.getStats();
 			ArrayList<StatisticBase> confrontationStats = stats.getConfrontationStats();
 			ArrayList<Profile> players = statisticHolder.getProfiles();
@@ -217,7 +224,7 @@ public class ResultsSubPanel extends TableSubPanel
 						int alpha = GuiTools.ALPHA_TABLE_REGULAR_BACKGROUND_LEVEL1;
 						Color bg = new Color(clr.getRed(),clr.getGreen(),clr.getBlue(),alpha);
 						setLabelBackground(line,col,bg);
-						int temp = GuiTools.getPixelWidth(getLineFontSize(),text);
+						int temp = GuiTools.getPixelWidth(getLineFontSize()+1,text);
 						if(temp>scoresWidth[j])
 							scoresWidth[j] = temp;
 						col++;
@@ -231,7 +238,7 @@ public class ResultsSubPanel extends TableSubPanel
 					int alpha = GuiTools.ALPHA_TABLE_REGULAR_BACKGROUND_LEVEL1;
 					Color bg = new Color(clr.getRed(),clr.getGreen(),clr.getBlue(),alpha);
 					setLabelBackground(line,col,bg);			
-					int temp = GuiTools.getPixelWidth(getLineFontSize(),text);
+					int temp = GuiTools.getPixelWidth(getLineFontSize()+1,text);
 					if(temp>timeWidth)
 						timeWidth = temp;
 					col++;
@@ -252,7 +259,7 @@ public class ResultsSubPanel extends TableSubPanel
 						int alpha = GuiTools.ALPHA_TABLE_REGULAR_BACKGROUND_LEVEL2;
 						Color bg = new Color(clr.getRed(),clr.getGreen(),clr.getBlue(),alpha);
 						setLabelBackground(line,col,bg);			
-						int temp = GuiTools.getPixelWidth(getLineFontSize(),text);
+						int temp = GuiTools.getPixelWidth(getLineFontSize()+1,text);
 						if(temp>confrontationsWidth[cfrt])
 							confrontationsWidth[cfrt] = temp;
 						cfrt++;
@@ -271,7 +278,7 @@ public class ResultsSubPanel extends TableSubPanel
 					int alpha = GuiTools.ALPHA_TABLE_REGULAR_BACKGROUND_LEVEL3;
 					Color bg = new Color(clr.getRed(),clr.getGreen(),clr.getBlue(),alpha);
 					setLabelBackground(line,col,bg);			
-					int temp = GuiTools.getPixelWidth(getLineFontSize(),text);
+					int temp = GuiTools.getPixelWidth(getLineFontSize()+1,text);
 					if(temp>totalWidth)
 						totalWidth = temp;
 					col++;
@@ -288,7 +295,7 @@ public class ResultsSubPanel extends TableSubPanel
 					int alpha = GuiTools.ALPHA_TABLE_REGULAR_BACKGROUND_LEVEL3;
 					Color bg = new Color(clr.getRed(),clr.getGreen(),clr.getBlue(),alpha);
 					setLabelBackground(line,col,bg);			
-					int temp = GuiTools.getPixelWidth(getLineFontSize(),text);
+					int temp = GuiTools.getPixelWidth(getLineFontSize()+1,text);
 					if(temp>pointsWidth)
 						pointsWidth = temp;
 					col++;;
