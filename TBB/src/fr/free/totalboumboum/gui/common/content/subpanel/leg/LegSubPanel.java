@@ -39,6 +39,7 @@ import fr.free.totalboumboum.game.tournament.cup.CupPart;
 import fr.free.totalboumboum.game.tournament.cup.CupTournament;
 import fr.free.totalboumboum.gui.common.content.subpanel.part.PartSubPanel;
 import fr.free.totalboumboum.gui.common.content.subpanel.part.PartSubPanelListener;
+import fr.free.totalboumboum.gui.common.structure.subpanel.inside.EmptyContentPanel;
 import fr.free.totalboumboum.gui.common.structure.subpanel.outside.EmptySubPanel;
 import fr.free.totalboumboum.gui.tools.GuiKeys;
 import fr.free.totalboumboum.gui.tools.GuiTools;
@@ -47,7 +48,8 @@ public class LegSubPanel extends EmptySubPanel implements MouseListener, PartSub
 {	private static final long serialVersionUID = 1L;
 
 	public LegSubPanel(int width, int height)
-	{	super(width,height);
+	{	super(width,height,Mode.BORDER);
+		EmptyContentPanel dataPanel = getDataPanel();
 	
 		// background
 		{	Color bg = GuiTools.COLOR_COMMON_BACKGROUND;
@@ -55,19 +57,21 @@ public class LegSubPanel extends EmptySubPanel implements MouseListener, PartSub
 		}
 		
 		// layout
-		{	BoxLayout layout = new BoxLayout(this,BoxLayout.PAGE_AXIS); 
-			setLayout(layout);
+		{	BoxLayout layout = new BoxLayout(dataPanel,BoxLayout.PAGE_AXIS); 
+			dataPanel.setLayout(layout);
 		}
 		
 		// sizes
-		int buttonsHeight = (int)(height*0.06);
-		int partsHeight = height - 4*GuiTools.subPanelMargin - 2*buttonsHeight;
-		int buttonsWidth = width - 2*GuiTools.subPanelMargin;
-		int partsWidth = width - 2*GuiTools.subPanelMargin;
+		int dataheight = getDataHeight();
+		int datawidth = getDataWidth();
+		int buttonsHeight = (int)(dataheight*0.06);
+		int partsHeight = dataheight - 2*GuiTools.subPanelMargin - 2*buttonsHeight;
+		int buttonsWidth = datawidth;
+		int partsWidth = datawidth;
 		int externalButtonsWidth = (buttonsWidth - 2*GuiTools.subPanelMargin)/3;
 		int centralButtonWidth = buttonsWidth - 2*GuiTools.subPanelMargin - 2*externalButtonsWidth;
 		
-		add(Box.createVerticalGlue());
+		dataPanel.setOpaque(false);
 
 		// buttons up panel
 		{	upPanel = new JPanel();
@@ -85,7 +89,6 @@ public class LegSubPanel extends EmptySubPanel implements MouseListener, PartSub
 				upPanel.setMaximumSize(dim);
 			}
 			
-			upPanel.add(Box.createRigidArea(new Dimension(GuiTools.subPanelMargin,GuiTools.subPanelMargin)));
 			// left
 			{	JLabel label = new JLabel();
 				label.setOpaque(true);
@@ -133,12 +136,11 @@ public class LegSubPanel extends EmptySubPanel implements MouseListener, PartSub
 				label.addMouseListener(this);
 				upPanel.add(label);
 			}
-//			upPanel.add(Box.createHorizontalGlue());
 			
-			add(upPanel);
+			dataPanel.add(upPanel);
 		}
 
-		add(Box.createVerticalGlue());
+		dataPanel.add(Box.createVerticalGlue());
 
 		// parts panel
 		{	partsPanel = new JPanel();
@@ -153,10 +155,10 @@ public class LegSubPanel extends EmptySubPanel implements MouseListener, PartSub
 				partsPanel.setPreferredSize(dim);
 				partsPanel.setMaximumSize(dim);
 			}
-			add(partsPanel);
+			dataPanel.add(partsPanel);
 		}
 		
-		add(Box.createVerticalGlue());
+		dataPanel.add(Box.createVerticalGlue());
 
 		// buttons down panel
 		{	downPanel = new JPanel();
@@ -173,7 +175,6 @@ public class LegSubPanel extends EmptySubPanel implements MouseListener, PartSub
 				downPanel.setMaximumSize(dim);
 			}
 			
-			downPanel.add(Box.createRigidArea(new Dimension(GuiTools.subPanelMargin,GuiTools.subPanelMargin)));
 			// left
 			{	JLabel label = new JLabel();
 				label.setOpaque(true);
@@ -221,13 +222,10 @@ public class LegSubPanel extends EmptySubPanel implements MouseListener, PartSub
 				label.addMouseListener(this);
 				downPanel.add(label);
 			}
-//			downPanel.add(Box.createHorizontalGlue());
 			
-			add(downPanel);
+			dataPanel.add(downPanel);
 		}
 		
-		add(Box.createVerticalGlue());
-
 		// leg
 		setLeg(null,2);
 	}
@@ -235,9 +233,9 @@ public class LegSubPanel extends EmptySubPanel implements MouseListener, PartSub
 	/////////////////////////////////////////////////////////////////
 	// PANELS			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	private static final int COL_LEFT = 1;
-	private static final int COL_CENTER = 3;
-	private static final int COL_RIGHT = 5;
+	private static final int COL_LEFT = 0;
+	private static final int COL_CENTER = 2;
+	private static final int COL_RIGHT = 4;
 	private JPanel upPanel;
 	private JPanel downPanel;
 	private JPanel partsPanel;
@@ -369,10 +367,10 @@ public class LegSubPanel extends EmptySubPanel implements MouseListener, PartSub
 	}
 
 	private void refreshList()
-	{	int index = GuiTools.indexOfComponent(this,partsPanel);
-		remove(partsPanel);
+	{	int index = GuiTools.indexOfComponent(getDataPanel(),partsPanel);
+		getDataPanel().remove(partsPanel);
 		partsPanel = pagePanels.get(currentPage);
-		add(partsPanel,index);
+		getDataPanel().add(partsPanel,index);
 		validate();
 		repaint();
 	}

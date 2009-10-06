@@ -133,7 +133,7 @@ public class ResultsSubPanel extends TableSubPanel
 					String text = GuiConfiguration.getMiscConfiguration().getLanguage().getText(key);
 					String tooltip = GuiConfiguration.getMiscConfiguration().getLanguage().getText(key+GuiKeys.TOOLTIP);
 					for(int c=0;c<confrontationsCount;c++)
-						setLabelText(0,col+c,text+(c+1),tooltip);
+						setLabelText(0,col+c,text+(c+1),tooltip+" "+(c+1));
 					col = col+confrontationsCount;
 				}
 				if(showTotal && !(statisticHolder instanceof Round))

@@ -750,23 +750,32 @@ public class Launcher
 	 * (note : point mentionné dans le blog)
 	 */
 	
-	/* TODO
+	/* 
+	 * TODO
 	 * impossible de poser une bombe quand on est en train de buter contre un mur en direction upleft (et uniquement cette direction pr NES2) et downleft (pr SBM1)
 	 * 		>> ca viendrait de swing ou du clavier (pb matériel ou bas niveau)
 	 */
 	
-	/* TODO
+	/* 
+	 * TODO
 	 * cas particulier : item apparaissant dans une explosion de bloc, avec un joueur déjà sur le bloc 
 	 * (il a passe-muraille et résistance au feu) : l'item doit être ramassé dès qu'il a fini d'apparaitre, en théorie
 	 * ou bien : un héros meurt, un item apparait sous les pieds d'un autre joueur immobile : l'item reste sans que le joueur ne se l'approprie
 	 * >> en même temps, ça laisse le choix au joueur de ramasser l'item ou pas, c'est pas mal finalement (si c'est un malus par ex.)
 	 */
 	
-	 /* TODO BUGS POTENTIELS (à vérifier)
+	 /* 
+	  * TODO BUGS POTENTIELS (à vérifier)
 	  * 
 	  * - il semblerait que les directions dans la SpecificAction et dans la GeneralAction correspondante ne soient pas les mêmes...
 	  * 
 	  */
+	
+	/*
+	 * TODO
+	 * bug d'affichage dans les notes d'IA, les accents sont affichés avec la police par défaut
+	 * >> pas trouvé la cause de ce beans... (et c'est pas faut d'avoir cherché !)
+	 */
 	
 	
 	
@@ -851,6 +860,8 @@ public class Launcher
 	 * - gestion des IA : mise en place d'UPS, limité par défaut à 10 Hz, afin de décharger le moteur du jeu
 	 * - révision des tournois/rencontres/manches existants
 	 * - correction d'un bug dans la GUI qui empêchait l'affichage automatique des résultats pour les tournois simples
+	 * - correction d'un bug dans la GUI qui empêchait l'affichage complet de la description d'un tournoi de type coupe
+	 * - correction d'un bug dans la GUI : dans les tooltips du tableau des résultats, il manquait les numéros des manches
 	 */
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -859,23 +870,17 @@ public class Launcher
 
 	/* TODO
 	 * 
-	 * - GUI tournoi : n'affiche pas le détail des matches...
-	 * 
 	 * - GUI : édition de profil, quand on a fait "nouveau" ça n'active pas le bouton "modifier"
 	 * 	 d'ailleurs ça devrait faire comme pour un nouveau slot d'enregistrement : ca devrait demander le nom dans un dialogue modal
 	 * 
 	 * - cliquer sur partie rapide, annuler, cliquer sur tournoi, annuler, cliquer sur partie rapide >> bug
 	 * 	 peut-être lié : cliquer sur partie rapide, maison, repartie rapide : rien d'affiché
 	 * 
-	 * - GUI : dans les tooltips du tableau des résultats, il manque les numéros des manches
-	 *   
-	 * - bug d'affichage dans les notes d'IA, les accents sont affichés avec la police par défaut
-	 * 
 	 * - bug : j'ai vu l'ia prendre une vie, mourir, relacher la vie, et revenir. 
 	 * 	 et la vie était foncionnelle : je l'ai prise, je suis mort, je suis revenu (sans la relacher cette fois)
 	 *   >> pas réussi à reproduire ça...
 	 * 
-	 * - la pause d'IA reste même si le joueur est mort, et je ne sais pas pq, au débug le moteur n'exécute pas le code affichant le texte !
+	 * - la pause d'IA reste même si le joueur est mort, et je ne sais pas pq : au débug le moteur n'exécute pas le code affichant le texte !
 	 * 
 	 * - quand on balance une bombe, puis une autre, puis fait péter la première et enfin la seconde 
 	 *   juste à la fin des flammes de la première, alors l'explosion de la 2nde est circonsrite à la
