@@ -68,6 +68,8 @@ public enum AiStateName
 	{	AiStateName result = null;
 		if(gesture==GestureName.BURNING)
 			result = AiStateName.BURNING;
+		else if(gesture==GestureName.ENDED)
+			result = AiStateName.ENDED;
 		else if(gesture==GestureName.BOUNCING
 				|| gesture==GestureName.JUMPING
 				|| gesture==GestureName.LANDING
@@ -92,5 +94,4 @@ public enum AiStateName
 			result = AiStateName.MOVING;		
 		return result;
 	}
-
 }

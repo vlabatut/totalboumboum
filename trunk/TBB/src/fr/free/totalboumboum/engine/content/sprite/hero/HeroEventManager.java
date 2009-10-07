@@ -508,10 +508,11 @@ public class HeroEventManager extends EventManager
 		}
 	}
 
+	@SuppressWarnings("unchecked")
 	private void engTileLowEnter(EngineEvent event)
 	{	if(event.getSource()==sprite)
 		{	if(gesture.equals(GestureName.PUSHING) || gesture.equals(GestureName.STANDING) || gesture.equals(GestureName.WALKING))
-			{	ArrayList<Item> items = sprite.getTile().getItems();
+			{	ArrayList<Item> items = (ArrayList<Item>)sprite.getTile().getItems().clone();
 				for(Item item: items)
 				{	SpecificAction action = new SpecificGather(sprite,item);
 					ActionAbility ability = sprite.modulateAction(action);

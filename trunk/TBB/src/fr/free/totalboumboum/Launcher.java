@@ -864,6 +864,7 @@ public class Launcher
 	 * - correction d'un bug dans la GUI : dans les tooltips du tableau des résultats, il manquait les numéros des manches
 	 * - correction d'un bug dans la GUI : dans les résultats, certaines colonnes n'étaient pas assez larges
 	 * - correction d'une erreur dans le cassage d'égalité lors d'un tournoi de type coupe
+	 * - correction d'un bug dans les menus qui empêchait de revenir à une partie rapide abandonnée avant la fin des options
 	 * 
 	 */
 
@@ -875,9 +876,6 @@ public class Launcher
 	 * 
 	 * - GUI : édition de profil, quand on a fait "nouveau" ça n'active pas le bouton "modifier"
 	 * 	 d'ailleurs ça devrait faire comme pour un nouveau slot d'enregistrement : ca devrait demander le nom dans un dialogue modal
-	 * 
-	 * - cliquer sur partie rapide, annuler, cliquer sur tournoi, annuler, cliquer sur partie rapide >> bug
-	 * 	 peut-être lié : cliquer sur partie rapide, maison, repartie rapide : rien d'affiché
 	 * 
 	 * - bug : j'ai vu l'ia prendre une vie, mourir, relacher la vie, et revenir. 
 	 * 	 et la vie était foncionnelle : je l'ai prise, je suis mort, je suis revenu (sans la relacher cette fois)
@@ -1066,7 +1064,5 @@ public class Launcher
 	/**
 	 * - réinitialiser les valeurs des compteurs de logstats
 	 * - faudra tester en entier tous les tournois prédéfinis
-	 * 
-	 * - corriger directement la fonction calculant la taille du texte en surestimant le beans 
 	 */
 }

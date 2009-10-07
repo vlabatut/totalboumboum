@@ -204,9 +204,9 @@ public class QuickMatchMenu extends InnerMenuPanel implements DataPanelListener
 			result = true;
 		}		
 		// existing (unfinished) tournament
-		else if(tournament.hasBegun())
+		else if(!tournament.hasBegun())
 			//replaceWith(matchPanel);
-			result = false;
+			result = true;
 		return result;
 	}
 

@@ -82,9 +82,9 @@ public class QuickMatchContainer extends MenuPanel implements MenuContainer
 	@Override
 	public void setMenuPanel(MenuPanel newPanel)
 	{	if(this.menuPart!=null)
-		remove(this.menuPart);
-		this.menuPart = newPanel;
-	//	this.menuPart.refresh();
+			remove(menuPart);
+		menuPart = newPanel;
+	//	menuPart.refresh();
 		add(menuPart);
 		validate();
 		repaint();		
