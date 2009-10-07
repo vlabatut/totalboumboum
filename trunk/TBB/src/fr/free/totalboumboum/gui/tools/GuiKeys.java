@@ -45,6 +45,7 @@ public class GuiKeys
 	public static final String AUTOSAVE = "Autosave";
 	public static final String AVAILABLE = "Available";
 	public static final String BACK = "Back";
+	public static final String BACKGROUND = "Background";
 	public static final String BEFORE = "Before";
 	public static final String BLACK = "Black";
 	public static final String BLUE = "Blue";
@@ -58,6 +59,7 @@ public class GuiKeys
 	public static final String BROWSER = "Browser";
 	public static final String BUTTON = "Button";
 	public static final String CANCEL = "Cancel";
+	public static final String CHANGE = "Change";
 	public static final String COLOR = "Color";
 	public static final String COLORS = "Colors";
 	public static final String COMMON = "Common";
@@ -82,12 +84,14 @@ public class GuiKeys
 	public static final String DISCRETIZE = "Discretize";
 	public static final String DOWN = "Down";
 	public static final String DRAW = "Draw";
+	public static final String EDIT = "Edit";
 	public static final String FALSE = "False";
 	public static final String FILE = "File";
 	public static final String FINISH = "Finish";
 	public static final String FIRESETMAP = "Firesetmap";
 	public static final String FIXED = "Fixed";
 	public static final String FOLDER = "Folder";
+	public static final String FONT = "Font";
 	public static final String GAME = "Game";
 	public static final String GO = "Go";
 	public static final String GRASS = "Grass";
@@ -96,14 +100,17 @@ public class GuiKeys
 	public static final String GUI = "Gui";
 	public static final String HEADER = "Header";
 	public static final String HERO = "Hero";
+	public static final String HEROES = "Heroes";
 	public static final String HUMAN = "Human";
 	public static final String IMAGE = "Image";
 	public static final String INDIGO = "Indigo";
 	public static final String INITIAL = "Initial";
 	public static final String INSTANCE = "Instance";
+	public static final String INSTANCES = "Instances";
 	public static final String INVERTED = "Inverted";
 	public static final String ITEMS = "Items";
 	public static final String ITEMSET = "Itemset";
+	public static final String LANGUAGE = "Language";
 	public static final String LAST_STANDING = "LastStanding";
 	public static final String LEAGUE = "League";
 	public static final String LEFT = "Left";
@@ -111,6 +118,7 @@ public class GuiKeys
 	public static final String LEVEL = "Level";
 	public static final String LEVELS = "Levels";
 	public static final String LIMIT = "Limit";
+	public static final String LINE = "Line";
 	public static final String LIST = "List";
 	public static final String LOAD = "Load";
 	public static final String LOCATION = "Location";
@@ -120,16 +128,19 @@ public class GuiKeys
 	public static final String MENU = "Menu";
 	public static final String MESSAGES = "Messages";
 	public static final String MINUS = "Minus";
+	public static final String MODIFY = "Modify";
 	public static final String NAME = "Name";
 	public static final String NEW = "New";
 	public static final String NEXT = "Next";
 	public static final String NO_SHARE = "NoShare";
 	public static final String NO_CONTROLS = "NoControls";
 	public static final String NONE = "None";
+	public static final String NOTES = "Notes";
 	public static final String OPTIONS = "Options";
 	public static final String ORANGE = "Orange";
 	public static final String ORDER = "Order";
 	public static final String PACK = "Pack";
+	public static final String PACKAGE = "Package";
 	public static final String PAGEDOWN = "PageDown";
 	public static final String PAGEUP = "PageUp";
 	public static final String PAINTINGS = "Paintings";
@@ -161,6 +172,7 @@ public class GuiKeys
 	public static final String READY = "Ready";
 	public static final String RED = "Red";
 	public static final String REGULAR = "Regular";
+	public static final String RESET = "Reset";
 	public static final String RESOURCES = "Resources";
 	public static final String RESULTS = "Results";
 	public static final String RIGHT = "Right";
@@ -173,6 +185,7 @@ public class GuiKeys
 	public static final String SET = "Set";
 	public static final String SETTINGS = "Settings";
 	public static final String SINGLE = "Single";
+	public static final String SIZE = "Size";
 	public static final String SPRITE = "Sprite";
 	public static final String START = "Start";
 	public static final String ULTRAMARINE = "Ultramarine";
@@ -187,6 +200,7 @@ public class GuiKeys
 	public static final String TOOLTIP = "Tooltip";
 	public static final String TOTAL = "Total";
 	public static final String TOURNAMENT = "Tournament";
+	public static final String TOURNAMENTS = "Tournaments";
 	public static final String TRANSFER = "Transfer";
 	public static final String TRUE = "True";
 	public static final String TYPE = "Type";
@@ -224,49 +238,58 @@ public class GuiKeys
 	public static final String MENU_ABOUT_TITLE = MENU_ABOUT+TITLE;
 
 	/* RESOURCES */
-	public static final String MENU_RESOURCES_BUTTON = "MenuResourcesButton";
-	public static final String MENU_RESOURCES_BUTTON_AI = MENU_RESOURCES_BUTTON+"Ai";
-	public static final String MENU_RESOURCES_BUTTON_BACK = MENU_RESOURCES_BUTTON+"Back";
-	public static final String MENU_RESOURCES_BUTTON_HEROES = MENU_RESOURCES_BUTTON+"Heroes";
-	public static final String MENU_RESOURCES_BUTTON_INSTANCES = MENU_RESOURCES_BUTTON+"Instances";
-	public static final String MENU_RESOURCES_BUTTON_LEVELS = MENU_RESOURCES_BUTTON+"Levels";
-	public static final String MENU_RESOURCES_BUTTON_MATCHES = MENU_RESOURCES_BUTTON+"Matches";
-	public static final String MENU_RESOURCES_BUTTON_ROUNDS = MENU_RESOURCES_BUTTON+"Rounds";
-	public static final String MENU_RESOURCES_BUTTON_TOURNAMENTS = MENU_RESOURCES_BUTTON+"Tournaments";
+	public static final String MENU_RESOURCES = MENU+RESOURCES;
+	public static final String MENU_RESOURCES_BUTTON = MENU_RESOURCES+BUTTON;
+	public static final String MENU_RESOURCES_BUTTON_AI = MENU_RESOURCES_BUTTON+AI;
+	public static final String MENU_RESOURCES_BUTTON_BACK = MENU_RESOURCES_BUTTON+BACK;
+	public static final String MENU_RESOURCES_BUTTON_HEROES = MENU_RESOURCES_BUTTON+HEROES;
+	public static final String MENU_RESOURCES_BUTTON_INSTANCES = MENU_RESOURCES_BUTTON+INSTANCES;
+	public static final String MENU_RESOURCES_BUTTON_LEVELS = MENU_RESOURCES_BUTTON+LEVELS;
+	public static final String MENU_RESOURCES_BUTTON_MATCHES = MENU_RESOURCES_BUTTON+MATCHES;
+	public static final String MENU_RESOURCES_BUTTON_ROUNDS = MENU_RESOURCES_BUTTON+ROUNDS;
+	public static final String MENU_RESOURCES_BUTTON_TOURNAMENTS = MENU_RESOURCES_BUTTON+TOURNAMENTS;
 		/* AI */
 			/* BUTTON */
-			public static final String MENU_RESOURCES_AI_BUTTON = "MenuResourcesAiButton";	
-			public static final String MENU_RESOURCES_AI_BUTTON_BACK = MENU_RESOURCES_AI_BUTTON+"Back";	
+			public static final String MENU_RESOURCES_AI = MENU_RESOURCES+AI;	
+			public static final String MENU_RESOURCES_AI_BUTTON = MENU_RESOURCES_AI+BUTTON;	
+			public static final String MENU_RESOURCES_AI_BUTTON_BACK = MENU_RESOURCES_AI_BUTTON+BACK;	
 			/* SELECT */
-			public static final String MENU_RESOURCES_AI_SELECT_TITLE = "MenuResourcesAiSelectTitle";
-			public static final String MENU_RESOURCES_AI_SELECT_NOTES = "MenuResourcesAiSelectNotes";
+			public static final String MENU_RESOURCES_AI_SELECT = MENU_RESOURCES_AI+SELECT;
+			public static final String MENU_RESOURCES_AI_SELECT_TITLE = MENU_RESOURCES_AI_SELECT+TITLE;
+			public static final String MENU_RESOURCES_AI_SELECT_NOTES = MENU_RESOURCES_AI_SELECT+NOTES;
 		/* HERO */
-			public static final String MENU_RESOURCES_HERO_TITLE = "MenuResourcesHeroTitle";
+		public static final String MENU_RESOURCES_HERO = MENU_RESOURCES+HERO;
+		public static final String MENU_RESOURCES_HERO_TITLE = MENU_RESOURCES_HERO+TITLE;
 			/* BUTTON */
-			public static final String MENU_RESOURCES_HERO_BUTTON = "MenuResourcesHeroButton";	
-			public static final String MENU_RESOURCES_HERO_BUTTON_BACK = MENU_RESOURCES_HERO_BUTTON+"Back";	
+			public static final String MENU_RESOURCES_HERO_BUTTON = MENU_RESOURCES_HERO+BUTTON;	
+			public static final String MENU_RESOURCES_HERO_BUTTON_BACK = MENU_RESOURCES_HERO_BUTTON+BACK;	
 		/* LEVEL */
+		public static final String MENU_RESOURCES_LEVEL = MENU_RESOURCES+LEVEL;	
 			/* BUTTON */
-			public static final String MENU_RESOURCES_LEVEL_BUTTON = "MenuResourcesLevelButton";	
-			public static final String MENU_RESOURCES_LEVEL_BUTTON_BACK = MENU_RESOURCES_LEVEL_BUTTON+"Back";	
+			public static final String MENU_RESOURCES_LEVEL_BUTTON = MENU_RESOURCES_LEVEL+BUTTON;	
+			public static final String MENU_RESOURCES_LEVEL_BUTTON_BACK = MENU_RESOURCES_LEVEL_BUTTON+BACK;	
 			/* SELECT */
-			public static final String MENU_RESOURCES_LEVEL_SELECT_TITLE = "MenuResourcesLevelSelectTitle";
+			public static final String MENU_RESOURCES_LEVEL_SELECT = MENU_RESOURCES_LEVEL+SELECT;
+			public static final String MENU_RESOURCES_LEVEL_SELECT_TITLE = MENU_RESOURCES_LEVEL_SELECT+TITLE;
 				/* FOLDER */
-				public static final String MENU_RESOURCES_LEVEL_SELECT_FOLDER_PAGEDOWN = "MenuResourcesLevelSelectFolderPageDown";
-				public static final String MENU_RESOURCES_LEVEL_SELECT_FOLDER_PAGEUP = "MenuResourcesLevelSelectFolderPageUp";
-				public static final String MENU_RESOURCES_LEVEL_SELECT_FOLDER_PARENT = "MenuResourcesLevelSelectFolderParent";
+				public static final String MENU_RESOURCES_LEVEL_SELECT_FOLDER = MENU_RESOURCES_LEVEL_SELECT+FOLDER;
+				public static final String MENU_RESOURCES_LEVEL_SELECT_FOLDER_PAGEDOWN = MENU_RESOURCES_LEVEL_SELECT_FOLDER+PAGEDOWN;
+				public static final String MENU_RESOURCES_LEVEL_SELECT_FOLDER_PAGEUP = MENU_RESOURCES_LEVEL_SELECT_FOLDER+PAGEUP;
+				public static final String MENU_RESOURCES_LEVEL_SELECT_FOLDER_PARENT = MENU_RESOURCES_LEVEL_SELECT_FOLDER+PARENT;
 				/* PACKAGES */
-				public static final String MENU_RESOURCES_LEVEL_SELECT_PACKAGE_PAGEDOWN = "MenuResourcesLevelSelectPackagePageDown";
-				public static final String MENU_RESOURCES_LEVEL_SELECT_PACKAGE_PAGEUP = "MenuResourcesLevelSelectPackagePageUp";
+				public static final String MENU_RESOURCES_LEVEL_SELECT_PACKAGE = MENU_RESOURCES_LEVEL_SELECT+PACKAGE;
+				public static final String MENU_RESOURCES_LEVEL_SELECT_PACKAGE_PAGEDOWN = MENU_RESOURCES_LEVEL_SELECT_PACKAGE+PAGEDOWN;
+				public static final String MENU_RESOURCES_LEVEL_SELECT_PACKAGE_PAGEUP = MENU_RESOURCES_LEVEL_SELECT_PACKAGE+PAGEUP;
 				/* PREVIEW */
-				public static final String MENU_RESOURCES_LEVEL_SELECT_PREVIEW_AUTHOR = "MenuResourcesLevelSelectPreviewAuthor";
-				public static final String MENU_RESOURCES_LEVEL_SELECT_PREVIEW_IMAGE = "MenuResourcesLevelSelectPreviewImage";
-				public static final String MENU_RESOURCES_LEVEL_SELECT_PREVIEW_INSTANCE = "MenuResourcesLevelSelectPreviewInstance";
-				public static final String MENU_RESOURCES_LEVEL_SELECT_PREVIEW_NAME = "MenuResourcesLevelSelectPreviewName";
-				public static final String MENU_RESOURCES_LEVEL_SELECT_PREVIEW_PACKAGE = "MenuResourcesLevelSelectPreviewPackage";
-				public static final String MENU_RESOURCES_LEVEL_SELECT_PREVIEW_SIZE = "MenuResourcesLevelSelectPreviewSize";
-				public static final String MENU_RESOURCES_LEVEL_SELECT_PREVIEW_SOURCE = "MenuResourcesLevelSelectPreviewSource";
-				public static final String MENU_RESOURCES_LEVEL_SELECT_PREVIEW_THEME = "MenuResourcesLevelSelectPreviewTheme";
+				public static final String MENU_RESOURCES_LEVEL_SELECT_PREVIEW = MENU_RESOURCES_LEVEL_SELECT+PREVIEW;
+				public static final String MENU_RESOURCES_LEVEL_SELECT_PREVIEW_AUTHOR = MENU_RESOURCES_LEVEL_SELECT_PREVIEW+AUTHOR;
+				public static final String MENU_RESOURCES_LEVEL_SELECT_PREVIEW_IMAGE = MENU_RESOURCES_LEVEL_SELECT_PREVIEW+IMAGE;
+				public static final String MENU_RESOURCES_LEVEL_SELECT_PREVIEW_INSTANCE = MENU_RESOURCES_LEVEL_SELECT_PREVIEW+INSTANCE;
+				public static final String MENU_RESOURCES_LEVEL_SELECT_PREVIEW_NAME = MENU_RESOURCES_LEVEL_SELECT_PREVIEW+NAME;
+				public static final String MENU_RESOURCES_LEVEL_SELECT_PREVIEW_PACKAGE = MENU_RESOURCES_LEVEL_SELECT_PREVIEW+PACKAGE;
+				public static final String MENU_RESOURCES_LEVEL_SELECT_PREVIEW_SIZE = MENU_RESOURCES_LEVEL_SELECT_PREVIEW+SIZE;
+				public static final String MENU_RESOURCES_LEVEL_SELECT_PREVIEW_SOURCE = MENU_RESOURCES_LEVEL_SELECT_PREVIEW+SOURCE;
+				public static final String MENU_RESOURCES_LEVEL_SELECT_PREVIEW_THEME = MENU_RESOURCES_LEVEL_SELECT_PREVIEW+THEME;
 		/* MATCH */
 		public static final String MENU_RESOURCES_MATCH_TITLE = "MenuResourcesMatchTitle";
 			/* BUTTON */
@@ -385,20 +408,25 @@ public class GuiKeys
 				public static final String MENU_OPTIONS_GAME_TOURNAMENT_TOURNAMENT_TRUE = MENU_OPTIONS_GAME_TOURNAMENT_TOURNAMENT+TRUE;
 				public static final String MENU_OPTIONS_GAME_TOURNAMENT_TOURNAMENT_USE = MENU_OPTIONS_GAME_TOURNAMENT_TOURNAMENT+USE;
 		/* GUI */
-		public static final String MENU_OPTIONS_GUI_TITLE = "MenuOptionsGuiTitle";
+		public static final String MENU_OPTIONS_GUI = MENU_OPTIONS+GUI;
+		public static final String MENU_OPTIONS_GUI_TITLE = MENU_OPTIONS_GUI+TITLE;
 			/* LINE */
+			public static final String MENU_OPTIONS_GUI_LINE = MENU_OPTIONS_GUI+LINE;
 				/* LANGUAGE */
-				public static final String MENU_OPTIONS_GUI_LINE_LANGUAGE_TITLE = "MenuOptionsGuiLineLanguageTitle";
-				public static final String MENU_OPTIONS_GUI_LINE_LANGUAGE_NEXT = "MenuOptionsGuiLineLanguageNext";
-				public static final String MENU_OPTIONS_GUI_LINE_LANGUAGE_PREVIOUS = "MenuOptionsGuiLineLanguagePrevious";
+				public static final String MENU_OPTIONS_GUI_LINE_LANGUAGE = MENU_OPTIONS_GUI_LINE+LANGUAGE;
+				public static final String MENU_OPTIONS_GUI_LINE_LANGUAGE_TITLE = MENU_OPTIONS_GUI_LINE_LANGUAGE+TITLE;
+				public static final String MENU_OPTIONS_GUI_LINE_LANGUAGE_NEXT = MENU_OPTIONS_GUI_LINE_LANGUAGE+NEXT;
+				public static final String MENU_OPTIONS_GUI_LINE_LANGUAGE_PREVIOUS = MENU_OPTIONS_GUI_LINE_LANGUAGE+PREVIOUS;
 				/* FONT */
-				public static final String MENU_OPTIONS_GUI_LINE_FONT_TITLE = "MenuOptionsGuiLineFontTitle";
-				public static final String MENU_OPTIONS_GUI_LINE_FONT_NEXT = "MenuOptionsGuiLineFontNext";
-				public static final String MENU_OPTIONS_GUI_LINE_FONT_PREVIOUS = "MenuOptionsGuiLineFontPrevious";
+				public static final String MENU_OPTIONS_GUI_LINE_FONT = MENU_OPTIONS_GUI_LINE+FONT;
+				public static final String MENU_OPTIONS_GUI_LINE_FONT_TITLE = MENU_OPTIONS_GUI_LINE_FONT+TITLE;
+				public static final String MENU_OPTIONS_GUI_LINE_FONT_NEXT = MENU_OPTIONS_GUI_LINE_FONT+NEXT;
+				public static final String MENU_OPTIONS_GUI_LINE_FONT_PREVIOUS = MENU_OPTIONS_GUI_LINE_FONT+PREVIOUS;
 				/* BACKGROUND */
-				public static final String MENU_OPTIONS_GUI_LINE_BACKGROUND_TITLE = "MenuOptionsGuiLineBackgroundTitle";
-				public static final String MENU_OPTIONS_GUI_LINE_BACKGROUND_NEXT = "MenuOptionsGuiLineBackgroundNext";
-				public static final String MENU_OPTIONS_GUI_LINE_BACKGROUND_PREVIOUS = "MenuOptionsGuiLineBackgroundPrevious";
+				public static final String MENU_OPTIONS_GUI_LINE_BACKGROUND = MENU_OPTIONS_GUI_LINE+BACKGROUND;
+				public static final String MENU_OPTIONS_GUI_LINE_BACKGROUND_TITLE = MENU_OPTIONS_GUI_LINE_BACKGROUND+TITLE;
+				public static final String MENU_OPTIONS_GUI_LINE_BACKGROUND_NEXT = MENU_OPTIONS_GUI_LINE_BACKGROUND+NEXT;
+				public static final String MENU_OPTIONS_GUI_LINE_BACKGROUND_PREVIOUS = MENU_OPTIONS_GUI_LINE_BACKGROUND+PREVIOUS;
 		/* VIDEO */
 		public static final String MENU_OPTIONS_VIDEO_TITLE = "MenuOptionsVideoTitle";
 			/* LINE */
@@ -416,29 +444,40 @@ public class GuiKeys
 				public static final String MENU_OPTIONS_VIDEO_LINE_BORDER_COLOR_TITLE = MENU_OPTIONS_VIDEO_LINE_BORDER_COLOR+TITLE;
 			
 	/* PROFILES */
+	public static final String MENU_PROFILES = MENU+PROFILES;
 		/* BUTTON */
-		public static final String MENU_PROFILES_BUTTON = "MenuProfilesButton";
-		public static final String MENU_PROFILES_BUTTON_BACK = MENU_PROFILES_BUTTON+"Back";
-		public static final String MENU_PROFILES_BUTTON_CANCEL = "MenuProfilesButtonCancel";
-		public static final String MENU_PROFILES_BUTTON_CONFIRM = "MenuProfilesButtonConfirm";
-		public static final String MENU_PROFILES_BUTTON_DELETE = "MenuProfilesButtonDelete";
-		public static final String MENU_PROFILES_BUTTON_MODIFY = "MenuProfilesButtonModify";
-		public static final String MENU_PROFILES_BUTTON_NEW = "MenuProfilesButtonNew";
+		public static final String MENU_PROFILES_BUTTON = MENU_PROFILES+BUTTON;
+		public static final String MENU_PROFILES_BUTTON_BACK = MENU_PROFILES_BUTTON+BACK;
+		public static final String MENU_PROFILES_BUTTON_CANCEL = MENU_PROFILES_BUTTON+CANCEL;
+		public static final String MENU_PROFILES_BUTTON_CONFIRM = MENU_PROFILES_BUTTON+CONFIRM;
+		public static final String MENU_PROFILES_BUTTON_DELETE = MENU_PROFILES_BUTTON+DELETE;
+		public static final String MENU_PROFILES_BUTTON_MODIFY = MENU_PROFILES_BUTTON+MODIFY;
+		public static final String MENU_PROFILES_BUTTON_NEW = MENU_PROFILES_BUTTON+NEW;
 		/* EDIT */
-		public static final String MENU_PROFILES_EDIT_TITLE = "MenuProfilesEditTitle";		
-		public static final String MENU_PROFILES_EDIT_AI = "MenuProfilesEditAi";
-		public static final String MENU_PROFILES_EDIT_AI_CHANGE = "MenuProfilesEditAiChange";
-		public static final String MENU_PROFILES_EDIT_AI_RESET = "MenuProfilesEditAiReset";
-		public static final String MENU_PROFILES_EDIT_COLOR = "MenuProfilesEditColor";
-		public static final String MENU_PROFILES_EDIT_COLOR_NEXT = "MenuProfilesEditColorNext";
-		public static final String MENU_PROFILES_EDIT_COLOR_PREVIOUS = "MenuProfilesEditColorPrevious";
-		public static final String MENU_PROFILES_EDIT_HERO = "MenuProfilesEditHero";
-		public static final String MENU_PROFILES_EDIT_HERO_CHANGE = "MenuProfilesEditHeroChange";
-		public static final String MENU_PROFILES_EDIT_NAME = "MenuProfilesEditName";
-		public static final String MENU_PROFILES_EDIT_NAME_CHANGE = "MenuProfilesEditNameChange";
+		public static final String MENU_PROFILES_EDIT = MENU_PROFILES+EDIT;		
+		public static final String MENU_PROFILES_EDIT_TITLE = MENU_PROFILES_EDIT+TITLE;		
+		public static final String MENU_PROFILES_EDIT_AI = MENU_PROFILES_EDIT+AI;
+		public static final String MENU_PROFILES_EDIT_AI_CHANGE = MENU_PROFILES_EDIT_AI+CHANGE;
+		public static final String MENU_PROFILES_EDIT_AI_RESET = MENU_PROFILES_EDIT_AI+RESET;
+		public static final String MENU_PROFILES_EDIT_COLOR = MENU_PROFILES_EDIT+COLOR;
+		public static final String MENU_PROFILES_EDIT_COLOR_NEXT = MENU_PROFILES_EDIT_COLOR+NEXT;
+		public static final String MENU_PROFILES_EDIT_COLOR_PREVIOUS = MENU_PROFILES_EDIT_COLOR+PREVIOUS;
+		public static final String MENU_PROFILES_EDIT_HERO = MENU_PROFILES_EDIT+HERO;
+		public static final String MENU_PROFILES_EDIT_HERO_CHANGE = MENU_PROFILES_EDIT_HERO+CHANGE;
+		public static final String MENU_PROFILES_EDIT_NAME = MENU_PROFILES_EDIT+NAME;
+		public static final String MENU_PROFILES_EDIT_NAME_CHANGE = MENU_PROFILES_EDIT_NAME+CHANGE;
+		/* DELETE */
+		public static final String MENU_PROFILES_DELETE = MENU_PROFILES+DELETE;
+		public static final String MENU_PROFILES_DELETE_QUESTION = MENU_PROFILES_DELETE+QUESTION;
+		public static final String MENU_PROFILES_DELETE_TITLE = MENU_PROFILES_DELETE+TITLE;
+		/* NEW */
+		public static final String MENU_PROFILES_NEW = MENU_PROFILES+NEW;
+		public static final String MENU_PROFILES_NEW_NAME = MENU_PROFILES_NEW+NAME;
+		public static final String MENU_PROFILES_NEW_QUESTION = MENU_PROFILES_NEW+QUESTION;
+		public static final String MENU_PROFILES_NEW_TITLE = MENU_PROFILES_NEW+TITLE;
 		/* SELECT */
-		public static final String MENU_PROFILES_SELECT_TITLE = "MenuProfilesSelectTitle";
-		public static final String MENU_PROFILES_SELECT_NEW_PROFILE = "MenuProfilesSelectNewProfile";
+		public static final String MENU_PROFILES_SELECT = MENU_PROFILES+SELECT;
+		public static final String MENU_PROFILES_SELECT_TITLE = MENU_PROFILES_SELECT+TITLE;
 	/* QUICKMATCH */	
 	public static final String MENU_QUICKMATCH = MENU+QUICKMATCH;
 		/* LEVELS */
@@ -565,6 +604,14 @@ public class GuiKeys
 			public static final String GAME_SAVE_BUTTON_CONFIRM = GAME_SAVE_BUTTON+CONFIRM;
 			public static final String GAME_SAVE_BUTTON_DELETE = GAME_SAVE_BUTTON+DELETE;
 			public static final String GAME_SAVE_BUTTON_NEW = GAME_SAVE_BUTTON+NEW;
+			/* CONFIRM */
+			public static final String GAME_SAVE_CONFIRM = GAME_SAVE+CONFIRM;
+			public static final String GAME_SAVE_CONFIRM_QUESTION = GAME_SAVE_CONFIRM+QUESTION;
+			public static final String GAME_SAVE_CONFIRM_TITLE = GAME_SAVE_CONFIRM+TITLE;
+			/* DELETE */
+			public static final String GAME_SAVE_DELETE = GAME_SAVE+DELETE;
+			public static final String GAME_SAVE_DELETE_QUESTION = GAME_SAVE_DELETE+QUESTION;
+			public static final String GAME_SAVE_DELETE_TITLE = GAME_SAVE_DELETE+TITLE;
 			/* NEW */
 			public static final String GAME_SAVE_NEW = GAME_SAVE+NEW;
 			public static final String GAME_SAVE_NEW_NAME = GAME_SAVE_NEW+NAME;

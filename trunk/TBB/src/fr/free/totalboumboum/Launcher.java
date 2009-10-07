@@ -865,7 +865,10 @@ public class Launcher
 	 * - correction d'un bug dans la GUI : dans les résultats, certaines colonnes n'étaient pas assez larges
 	 * - correction d'une erreur dans le cassage d'égalité lors d'un tournoi de type coupe
 	 * - correction d'un bug dans les menus qui empêchait de revenir à une partie rapide abandonnée avant la fin des options
-	 * 
+	 * - correction d'un bug dans le dialogue modal de question : le bouton annuler était désactivé
+	 * - ajout d'un menu modal demandant le nom lors de la création d'un nouveau profil
+	 * - ajout d'un menu modal de confirmation de suppression de sauvegarde, pareil pour les profils
+	 * - ajout d'un menu modal de confirmation d'écrasement de sauvegarde
 	 */
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////

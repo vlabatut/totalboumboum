@@ -41,6 +41,9 @@ import fr.free.totalboumboum.configuration.profile.ProfileSaver;
 import fr.free.totalboumboum.configuration.profile.ProfilesConfiguration;
 import fr.free.totalboumboum.configuration.profile.ProfilesConfigurationSaver;
 import fr.free.totalboumboum.configuration.profile.SpriteInfo;
+import fr.free.totalboumboum.gui.common.structure.dialog.outside.InputModalDialogPanel;
+import fr.free.totalboumboum.gui.common.structure.dialog.outside.ModalDialogPanelListener;
+import fr.free.totalboumboum.gui.common.structure.dialog.outside.QuestionModalDialogPanel;
 import fr.free.totalboumboum.gui.common.structure.panel.SplitMenuPanel;
 import fr.free.totalboumboum.gui.common.structure.panel.data.DataPanelListener;
 import fr.free.totalboumboum.gui.common.structure.panel.menu.InnerMenuPanel;
@@ -51,7 +54,7 @@ import fr.free.totalboumboum.gui.tools.GuiKeys;
 import fr.free.totalboumboum.gui.tools.GuiTools;
 import fr.free.totalboumboum.tools.FileTools;
 
-public class SelectedProfileMenu extends InnerMenuPanel implements DataPanelListener
+public class SelectedProfileMenu extends InnerMenuPanel implements DataPanelListener,ModalDialogPanelListener
 {	private static final long serialVersionUID = 1L;
 	
 	private SelectedProfileData profileData;
@@ -118,44 +121,13 @@ public class SelectedProfileMenu extends InnerMenuPanel implements DataPanelList
 		{	replaceWith(parent);
 	    }
 		else if(e.getActionCommand().equals(GuiKeys.MENU_PROFILES_BUTTON_NEW))
-		{	try
-			{	// refresh counter
-				ProfilesConfiguration profilesConfig = Configuration.getProfilesConfiguration();
-				int lastProfile = profilesConfig.getLastProfileIndex();
-				int nextProfile = lastProfile+1;
-				profilesConfig.setLastProfileIndex(nextProfile);
-				// create profile
-				Profile newProfile = new Profile();
-				String key = GuiKeys.MENU_PROFILES_SELECT_NEW_PROFILE;
-				String name = GuiConfiguration.getMiscConfiguration().getLanguage().getText(key);
-				newProfile.setName(name);
-				SpriteInfo spriteInfo = newProfile.getDefaultSprite();
-				String spritePack = "superbomberman1";
-				spriteInfo.setPack(spritePack);
-				String spriteFolder = "shirobon";
-				spriteInfo.setFolder(spriteFolder);
-				PredefinedColor spriteColor = PredefinedColor.WHITE;
-				spriteInfo.setColor(spriteColor);
-				// create file
-				String fileName = Integer.toString(nextProfile)/*+FileTools.EXTENSION_DATA*/;			
-				ProfileSaver.saveProfile(newProfile, fileName);
-				// add/save in config
-				profilesConfig.addProfile(fileName, name);
-				ProfilesConfigurationSaver.saveProfilesConfiguration(profilesConfig);
-				// rebuild panel
-				profileData = new SelectedProfileData(container);
-				container.setDataPart(profileData);
-				profileData.setSelectedProfile(fileName);
-			}
-			catch (ParserConfigurationException e1)
-			{	e1.printStackTrace();
-			}
-			catch (SAXException e1)
-			{	e1.printStackTrace();
-			}
-			catch (IOException e1)
-			{	e1.printStackTrace();
-			}
+		{	String key = GuiKeys.MENU_PROFILES_NEW_TITLE;
+			ArrayList<String> text = new ArrayList<String>();
+			text.add(GuiConfiguration.getMiscConfiguration().getLanguage().getText(GuiKeys.MENU_PROFILES_NEW_QUESTION));
+			String defaultText = GuiConfiguration.getMiscConfiguration().getLanguage().getText(GuiKeys.MENU_PROFILES_NEW_NAME);
+			inputPanel = new InputModalDialogPanel(getMenuParent(),key,text,defaultText);
+			inputPanel.addListener(this);
+			getFrame().setModalDialog(inputPanel);
 	    }
 		else if(e.getActionCommand().equals(GuiKeys.MENU_PROFILES_BUTTON_MODIFY))
 		{	Profile profile = profileData.getSelectedProfile();
@@ -166,7 +138,85 @@ public class SelectedProfileMenu extends InnerMenuPanel implements DataPanelList
 			}
 	    }
 		else if(e.getActionCommand().equals(GuiKeys.MENU_PROFILES_BUTTON_DELETE))
-		{	Profile profile = profileData.getSelectedProfile();
+		{	String key = GuiKeys.MENU_PROFILES_DELETE_TITLE;
+			ArrayList<String> text = new ArrayList<String>();
+			text.add(GuiConfiguration.getMiscConfiguration().getLanguage().getText(GuiKeys.MENU_PROFILES_DELETE_QUESTION));
+			questionPanel = new QuestionModalDialogPanel(getMenuParent(),key,text);
+			questionPanel.addListener(this);
+			getFrame().setModalDialog(questionPanel);
+	    }
+	} 
+	
+	/////////////////////////////////////////////////////////////////
+	// CONTENT PANEL	/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	public void refresh()
+	{	//
+	}
+
+	/////////////////////////////////////////////////////////////////
+	// DATA PANEL LISTENER	/////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	@Override
+	public void dataPanelSelectionChanged()
+	{	refreshButtons();
+	}
+
+	/////////////////////////////////////////////////////////////////
+	// MODAL DIALOG PANEL LISTENER	/////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	private InputModalDialogPanel inputPanel = null;
+	private QuestionModalDialogPanel questionPanel = null;
+	
+	@Override
+	public void modalDialogButtonClicked(String buttonCode)
+	{	getFrame().unsetModalDialog();
+		if(inputPanel!=null)
+		{	String input = inputPanel.getInput();
+			inputPanel = null;
+			if(buttonCode.equals(GuiKeys.COMMON_DIALOG_CONFIRM))
+			{	// create & save
+				try
+				{	// refresh counter
+					ProfilesConfiguration profilesConfig = Configuration.getProfilesConfiguration();
+					int lastProfile = profilesConfig.getLastProfileIndex();
+					int nextProfile = lastProfile+1;
+					profilesConfig.setLastProfileIndex(nextProfile);
+					// create profile
+					Profile newProfile = new Profile();
+					newProfile.setName(input);
+					SpriteInfo spriteInfo = newProfile.getDefaultSprite();
+					String spritePack = "superbomberman1";
+					spriteInfo.setPack(spritePack);
+					String spriteFolder = "shirobon";
+					spriteInfo.setFolder(spriteFolder);
+					PredefinedColor spriteColor = PredefinedColor.WHITE;
+					spriteInfo.setColor(spriteColor);
+					// create file
+					String fileName = Integer.toString(nextProfile)/*+FileTools.EXTENSION_DATA*/;			
+					ProfileSaver.saveProfile(newProfile, fileName);
+					// add/save in config
+					profilesConfig.addProfile(fileName,input);
+					ProfilesConfigurationSaver.saveProfilesConfiguration(profilesConfig);
+					// rebuild panel
+					profileData = new SelectedProfileData(container);
+					container.setDataPart(profileData);
+					profileData.setSelectedProfile(fileName);
+				}
+				catch (ParserConfigurationException e1)
+				{	e1.printStackTrace();
+				}
+				catch (SAXException e1)
+				{	e1.printStackTrace();
+				}
+				catch (IOException e1)
+				{	e1.printStackTrace();
+				}
+			}
+		}
+		else if(questionPanel!=null)
+		{	questionPanel = null;				
+			Profile profile = profileData.getSelectedProfile();
 			if(profile!=null)
 			{	try
 				{	String profileFile = profileData.getSelectedProfileFile();
@@ -191,23 +241,7 @@ public class SelectedProfileMenu extends InnerMenuPanel implements DataPanelList
 				catch (IOException e1)
 				{	e1.printStackTrace();
 				}
-				
 			}
-	    }
-	} 
-	
-	/////////////////////////////////////////////////////////////////
-	// CONTENT PANEL	/////////////////////////////////////////////
-	/////////////////////////////////////////////////////////////////
-	public void refresh()
-	{	//
-	}
-
-	/////////////////////////////////////////////////////////////////
-	// DATA PANEL LISTENER	/////////////////////////////////////////
-	/////////////////////////////////////////////////////////////////
-	@Override
-	public void dataPanelSelectionChanged()
-	{	refreshButtons();
+		}
 	}
 }

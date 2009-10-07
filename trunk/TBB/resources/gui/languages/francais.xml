@@ -287,9 +287,19 @@
 				<text name="NameChange" value="Modifier le nom" tooltip="Modifier le nom du profil" />
 			</group>
 
+			<group name="Delete">
+				<text name="Question" value="Êtes-vous sûr de vouloir supprimer ce profil ?" tooltip="Êtes-vous sûr de vouloir supprimer ce profil ?" />
+				<text name="Title" value="Suppression de profil" tooltip="Suppression de profil" />
+			</group>
+
+			<group name="New">
+				<text name="Name" value="Nouveau profil" />
+				<text name="Question" value="Entrez le nom du nouveau profil" tooltip="Entrez le nom du nouveau profil" />
+				<text name="Title" value="Nom du profil" tooltip="Nom du nouveau profil" />
+			</group>
+
 			<group name="Select">
 				<text name="Title" value="Liste des profils" tooltip="Liste de tous les profils existants" />
-				<text name="NewProfile" value="Nouveau profil" tooltip="Nouveau profil" />
 			</group>
 			
 		</group>	
@@ -427,10 +437,18 @@
 				<text name="Delete" value="Supprimer" tooltip="Supprimer l'enregistrement sélectionné" />
 				<text name="New" value="Créer" tooltip="Créer un nouvel enregistrement" />
 			</group>
+			<group name="Confirm">
+				<text name="Question" value="Êtes-vous sûr de vouloir écraser cette sauvegarde ?" tooltip="Êtes-vous sûr de vouloir écraser cette sauvegarde ?" />
+				<text name="Title" value="Écrasement" tooltip="Écrasement" />
+			</group>
+			<group name="Delete">
+				<text name="Question" value="Êtes-vous sûr de vouloir supprimer cette sauvegarde ?" tooltip="Êtes-vous sûr de vouloir supprimer cette sauvegarde ?" />
+				<text name="Title" value="Suppression" tooltip="Suppression de sauvegarde" />
+			</group>
 			<group name="New">
 				<text name="Name" value="Nouvel enregistrement" />
 				<text name="Question" value="Entrez le nom de la nouvelle sauvegarde" tooltip="Entrez le nom de la nouvelle sauvegarde" />
-				<text name="Title" value="Nom de la sauvegarde" tooltip="Nom de la nouvelle sauvegarde" />
+				<text name="Title" value="Nom" tooltip="Nom de la nouvelle sauvegarde" />
 			</group>
 		</group>
 

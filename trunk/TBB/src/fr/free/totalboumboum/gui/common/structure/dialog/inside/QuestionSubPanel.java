@@ -168,5 +168,9 @@ public class QuestionSubPanel extends ModalDialogSubPanel implements MouseListen
 		{	String code = GuiKeys.COMMON_DIALOG_CONFIRM;
 			fireModalDialogButtonClicked(code);
 		}
+		else if(component==buttonCancel)
+		{	String code = GuiKeys.COMMON_DIALOG_CANCEL;
+			fireModalDialogButtonClicked(code);
+		}
 	}
 }
