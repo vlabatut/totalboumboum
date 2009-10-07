@@ -863,6 +863,7 @@ public class Launcher
 	 * - correction d'un bug dans la GUI qui empêchait l'affichage complet de la description d'un tournoi de type coupe
 	 * - correction d'un bug dans la GUI : dans les tooltips du tableau des résultats, il manquait les numéros des manches
 	 * - correction d'un bug dans la GUI : dans les résultats, certaines colonnes n'étaient pas assez larges
+	 * - correction d'une erreur dans le cassage d'égalité lors d'un tournoi de type coupe
 	 * 
 	 */
 
@@ -1065,5 +1066,7 @@ public class Launcher
 	/**
 	 * - réinitialiser les valeurs des compteurs de logstats
 	 * - faudra tester en entier tous les tournois prédéfinis
+	 * 
+	 * - corriger directement la fonction calculant la taille du texte en surestimant le beans 
 	 */
 }
