@@ -320,6 +320,11 @@ public class GuiKeys
 		public static final String MENU_OPTIONS_BUTTON_NEXT = MENU_OPTIONS_BUTTON+NEXT;
 		public static final String MENU_OPTIONS_BUTTON_PREVIOUS = MENU_OPTIONS_BUTTON+PREVIOUS;
 		public static final String MENU_OPTIONS_BUTTON_VIDEO = MENU_OPTIONS_BUTTON+VIDEO;
+		/* CONFIRM */
+		public static final String MENU_OPTIONS_CONFIRM = MENU_OPTIONS+CONFIRM;
+		public static final String MENU_OPTIONS_CONFIRM_QUESTION = MENU_OPTIONS_CONFIRM+QUESTION;
+		public static final String MENU_OPTIONS_CONFIRM_TITLE = MENU_OPTIONS_CONFIRM+TITLE;
+		
 		/* ADVANCED */
 		public static final String MENU_OPTIONS_ADVANCED_TITLE = "MenuOptionsAdvancedTitle";
 			/* LINE */

@@ -33,6 +33,8 @@ import javax.xml.parsers.ParserConfigurationException;
 
 import org.xml.sax.SAXException;
 
+import fr.free.totalboumboum.gui.common.structure.dialog.outside.ModalDialogPanelListener;
+import fr.free.totalboumboum.gui.common.structure.dialog.outside.QuestionModalDialogPanel;
 import fr.free.totalboumboum.gui.common.structure.panel.SplitMenuPanel;
 import fr.free.totalboumboum.gui.common.structure.panel.menu.InnerMenuPanel;
 import fr.free.totalboumboum.gui.common.structure.panel.menu.MenuPanel;
@@ -42,7 +44,7 @@ import fr.free.totalboumboum.gui.data.configuration.misc.MiscConfigurationSaver;
 import fr.free.totalboumboum.gui.tools.GuiKeys;
 import fr.free.totalboumboum.gui.tools.GuiTools;
 
-public class GuiMenu extends InnerMenuPanel
+public class GuiMenu extends InnerMenuPanel implements ModalDialogPanelListener
 {	private static final long serialVersionUID = 1L;
 	
 	@SuppressWarnings("unused")
@@ -90,31 +92,17 @@ public class GuiMenu extends InnerMenuPanel
 				restart = true;
 			else if(!miscConfiguration.getBackgroundName().equals(GuiConfiguration.getMiscConfiguration().getBackgroundName()))
 				restart = true;
-			GuiConfiguration.setMiscConfiguration(miscConfiguration);
-			try
-			{	MiscConfigurationSaver.saveMiscConfiguration(GuiConfiguration.getMiscConfiguration());
-			}
-			catch (IllegalArgumentException e1)
-			{	e1.printStackTrace();
-			}
-			catch (SecurityException e1)
-			{	e1.printStackTrace();
-			}
-			catch (ParserConfigurationException e1)
-			{	e1.printStackTrace();
-			}
-			catch (SAXException e1)
-			{	e1.printStackTrace();
-			}
-			catch (IOException e1)
-			{	e1.printStackTrace();
-			}
 			if(restart)
-				getFrame().restart();
-//TODO propager éventuellement au round (car il n'y a pas modification mais remplacement, donc si c déjà affecté à un player..
+			{	String key = GuiKeys.MENU_OPTIONS_CONFIRM_TITLE;
+				ArrayList<String> text = new ArrayList<String>();
+				text.add(GuiConfiguration.getMiscConfiguration().getLanguage().getText(GuiKeys.MENU_OPTIONS_CONFIRM_QUESTION));
+				questionModal = new QuestionModalDialogPanel(getMenuParent(),key,text);
+				questionModal.addListener(this);
+				getFrame().setModalDialog(questionModal);
+			}
 			else
-				replaceWith(parent);
-	    }
+				confirm(restart);
+		}
 		else if(e.getActionCommand().equals(GuiKeys.MENU_OPTIONS_BUTTON_CANCEL))
 		{	replaceWith(parent);
 	    }
@@ -122,5 +110,49 @@ public class GuiMenu extends InnerMenuPanel
 	
 	public void refresh()
 	{	//
+	}
+
+	private void confirm(boolean restart)
+	{	MiscConfiguration miscConfiguration = guiData.getMiscConfiguration();
+		GuiConfiguration.setMiscConfiguration(miscConfiguration);
+		try
+		{	MiscConfigurationSaver.saveMiscConfiguration(GuiConfiguration.getMiscConfiguration());
+		}
+		catch (IllegalArgumentException e1)
+		{	e1.printStackTrace();
+		}
+		catch (SecurityException e1)
+		{	e1.printStackTrace();
+		}
+		catch (ParserConfigurationException e1)
+		{	e1.printStackTrace();
+		}
+		catch (SAXException e1)
+		{	e1.printStackTrace();
+		}
+		catch (IOException e1)
+		{	e1.printStackTrace();
+		}
+		if(restart)
+			getFrame().restart();
+//TODO propager éventuellement au round (car il n'y a pas modification mais remplacement, donc si c déjà affecté à un player..
+		else
+			replaceWith(parent);
+	}
+
+	/////////////////////////////////////////////////////////////////
+	// MODAL DIALOG PANEL LISTENER	/////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	private QuestionModalDialogPanel questionModal = null;
+	
+	@Override
+	public void modalDialogButtonClicked(String buttonCode)
+	{	getFrame().unsetModalDialog();
+		if(questionModal!=null)
+		{	questionModal = null;
+			if(buttonCode.equals(GuiKeys.COMMON_DIALOG_CONFIRM))
+			{	confirm(true);			
+			}
+		}
 	}
 }
