@@ -1033,6 +1033,7 @@ public class GuiTools
 	 */
 	public static int getPixelWidth(float fontSize, String text)
 	{	int result;
+		fontSize = fontSize + 4;
 		Font font = GuiConfiguration.getMiscConfiguration().getFont().deriveFont(fontSize);
 		graphics.setFont(font);
 		FontMetrics metrics = graphics.getFontMetrics(font);

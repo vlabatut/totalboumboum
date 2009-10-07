@@ -173,7 +173,7 @@ public class AiZone
 		removeUnchecked(bombMap);
 		removeUnchecked(fireMap);
 		removeUnchecked(floorMap);
-//		removeUnchecked(heroes);
+		removeUnchecked(heroMap);
 		removeUnchecked(itemMap);
 	}
 	
@@ -614,7 +614,9 @@ public class AiZone
 	private <U extends Sprite, T extends AiSprite<?>> void removeUnchecked(HashMap<U,T> list)
 	{	Iterator<Entry<U,T>> it = list.entrySet().iterator();
 		while(it.hasNext())
-		{	T temp = it.next().getValue();
+		{	Entry<U,T> entry = it.next();
+			T temp = entry.getValue();
+			//U sprite = entry.getKey();
 			if(!temp.isChecked())
 			{	temp.setEnded();
 				//Sprite sprite = temp.getSprite();
