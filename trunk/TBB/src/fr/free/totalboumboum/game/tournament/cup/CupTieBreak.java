@@ -129,16 +129,25 @@ public class CupTieBreak implements Serializable
 			// update rankings in part
 			for(int i=0;i<relativeRanks.length;i++)
 			{	if(relativeRanks[i]!=problematicTie)
-				{	// delete old rank
+				{	// get profile
 					Profile profile = tie.get(i);
-					tie.remove(profile);
+					tie.set(i,null);
 					// insert new rank
 					int newRank = relativeRanks[i];
 					ranks.addProfile(newRank,profile);
 				}				
 			}
 			
-			// if at least one tie was remove, then the tie-break was successful
+			// delete old rank
+			int i=0;
+			while(i<tie.size())
+			{	if(tie.get(i)==null)
+					tie.remove(i);
+				else
+					i++;
+			}
+			
+			// if at least one tie was removed, then the tie-break was successful
 			result = tie.size() != tiedPlayersCount;
 			
 		}
