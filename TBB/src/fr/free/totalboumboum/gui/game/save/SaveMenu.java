@@ -38,6 +38,7 @@ import fr.free.totalboumboum.game.archive.GameArchive;
 import fr.free.totalboumboum.game.tournament.AbstractTournament;
 import fr.free.totalboumboum.gui.common.structure.dialog.outside.InputModalDialogPanel;
 import fr.free.totalboumboum.gui.common.structure.dialog.outside.ModalDialogPanelListener;
+import fr.free.totalboumboum.gui.common.structure.dialog.outside.QuestionModalDialogPanel;
 import fr.free.totalboumboum.gui.common.structure.panel.SplitMenuPanel;
 import fr.free.totalboumboum.gui.common.structure.panel.data.DataPanelListener;
 import fr.free.totalboumboum.gui.common.structure.panel.menu.InnerMenuPanel;
@@ -132,37 +133,26 @@ public class SaveMenu extends InnerMenuPanel implements DataPanelListener,ModalD
 			ArrayList<String> text = new ArrayList<String>();
 			text.add(GuiConfiguration.getMiscConfiguration().getLanguage().getText(GuiKeys.GAME_SAVE_NEW_QUESTION));
 			String defaultText = GuiConfiguration.getMiscConfiguration().getLanguage().getText(GuiKeys.GAME_SAVE_NEW_NAME);
-			inputPanel = new InputModalDialogPanel(getMenuParent(),key,text,defaultText);
-			inputPanel.addListener(this);
-			getFrame().setModalDialog(inputPanel);
+			inputModalNew = new InputModalDialogPanel(getMenuParent(),key,text,defaultText);
+			inputModalNew.addListener(this);
+			getFrame().setModalDialog(inputModalNew);
 
 	    }
 		if(e.getActionCommand().equals(GuiKeys.GAME_SAVE_BUTTON_DELETE))
-		{	GameArchive selectedArchive = levelData.getSelectedGameArchive();
-			if(selectedArchive!=null)
-			{	String folder = selectedArchive.getFolder();
-				String path = baseFolder+File.separator+folder;
-				File file = new File(path);
-				FileTools.deleteDirectory(file);
-				levelData.refresh();			
-			}
+		{	String key = GuiKeys.GAME_SAVE_DELETE_TITLE;
+			ArrayList<String> text = new ArrayList<String>();
+			text.add(GuiConfiguration.getMiscConfiguration().getLanguage().getText(GuiKeys.GAME_SAVE_DELETE_QUESTION));
+			questionModalDelete = new QuestionModalDialogPanel(getMenuParent(),key,text);
+			questionModalDelete.addListener(this);
+			getFrame().setModalDialog(questionModalDelete);
 	    }
 		else if(e.getActionCommand().equals(GuiKeys.GAME_SAVE_BUTTON_CONFIRM))
-		{	try
-			{	String folder = levelData.getSelectedGameArchive().getFolder();
-				GameArchive.saveGame(folder,tournament);
-			}
-			catch (ParserConfigurationException e1)
-			{	e1.printStackTrace();
-			}
-			catch (SAXException e1)
-			{	e1.printStackTrace();
-			}
-			catch (IOException e1)
-			{	e1.printStackTrace();
-			}
-			//
-			replaceWith(parent);
+		{	String key = GuiKeys.GAME_SAVE_CONFIRM_TITLE;
+			ArrayList<String> text = new ArrayList<String>();
+			text.add(GuiConfiguration.getMiscConfiguration().getLanguage().getText(GuiKeys.GAME_SAVE_CONFIRM_QUESTION));
+			questionModalConfirm = new QuestionModalDialogPanel(getMenuParent(),key,text);
+			questionModalConfirm.addListener(this);
+			getFrame().setModalDialog(questionModalConfirm);
 	    }
 	} 
 	
@@ -184,31 +174,67 @@ public class SaveMenu extends InnerMenuPanel implements DataPanelListener,ModalD
 	/////////////////////////////////////////////////////////////////
 	// MODAL DIALOG PANEL LISTENER	/////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	private InputModalDialogPanel inputPanel;
+	private InputModalDialogPanel inputModalNew = null;
+	private QuestionModalDialogPanel questionModalDelete = null;
+	private QuestionModalDialogPanel questionModalConfirm = null;
 	
 	@Override
 	public void modalDialogButtonClicked(String buttonCode)
-	{	// dialog
-		String input = inputPanel.getInput();
-		getFrame().unsetModalDialog();
-		inputPanel = null;
-		if(buttonCode.equals(GuiKeys.COMMON_DIALOG_CONFIRM))
-		{	// create & save
-			try
-			{	GameArchive.saveGame(input,tournament);
+	{	getFrame().unsetModalDialog();
+		if(inputModalNew!=null)
+		{	String input = inputModalNew.getInput();
+			inputModalNew = null;
+			if(buttonCode.equals(GuiKeys.COMMON_DIALOG_CONFIRM))
+			{	// create & save
+				try
+				{	GameArchive.saveGame(input,tournament);
+				}
+				catch (ParserConfigurationException e1)
+				{	e1.printStackTrace();
+				}
+				catch (SAXException e1)
+				{	e1.printStackTrace();
+				}
+				catch (IOException e1)
+				{	e1.printStackTrace();
+				}
+//				getDataPart().refresh();
+//				refreshButtons();
+				replaceWith(parent);
 			}
-			catch (ParserConfigurationException e1)
-			{	e1.printStackTrace();
+		}
+		else if(questionModalDelete!=null)
+		{	questionModalDelete = null;				
+			GameArchive selectedArchive = levelData.getSelectedGameArchive();
+			if(buttonCode.equals(GuiKeys.COMMON_DIALOG_CONFIRM))
+			{	if(selectedArchive!=null)
+				{	String folder = selectedArchive.getFolder();
+					String path = baseFolder+File.separator+folder;
+					File file = new File(path);
+					FileTools.deleteDirectory(file);
+					levelData.refresh();
+				}
 			}
-			catch (SAXException e1)
-			{	e1.printStackTrace();
+		}
+		else if(questionModalConfirm!=null)
+		{	questionModalConfirm = null;				
+			if(buttonCode.equals(GuiKeys.COMMON_DIALOG_CONFIRM))
+			{	try
+				{	String folder = levelData.getSelectedGameArchive().getFolder();
+					GameArchive.saveGame(folder,tournament);
+				}
+				catch (ParserConfigurationException e1)
+				{	e1.printStackTrace();
+				}
+				catch (SAXException e1)
+				{	e1.printStackTrace();
+				}
+				catch (IOException e1)
+				{	e1.printStackTrace();
+				}
+				//
+				replaceWith(parent);
 			}
-			catch (IOException e1)
-			{	e1.printStackTrace();
-			}
-//			getDataPart().refresh();
-//			refreshButtons();
-			replaceWith(parent);
 		}
 	}
 }

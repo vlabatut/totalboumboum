@@ -34,7 +34,7 @@ This product includes softwares developed by:
   	Copyright 2000-2007 JDOM Project
   	http://www.jdom.org
   + Various AI students from Galatasaray University:
-    Some classes in resources/ai (see classes for details)
+    Most classes in resources/ai (see classes for details)
     Copyright 2007-2009 their respective authors
     http://gsu.edu.tr - GSU, Istanbul, Turkey
 
@@ -51,7 +51,8 @@ These fonts were completed by Vincent Labatut
 
 -----------------------------------------------------------------------
 
-This product uses icons designed by:
+This product uses icons derived from a work by:
   + Everaldo Coelho for Crystal Project Icons:
     see resources/gui/buttons/license for details
     http://www.everaldo.com/crystal
+Modifications by Vincent Labatut
