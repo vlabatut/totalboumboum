@@ -869,6 +869,8 @@ public class Launcher
 	 * - ajout d'un menu modal demandant le nom lors de la création d'un nouveau profil
 	 * - ajout d'un menu modal de confirmation de suppression de sauvegarde, pareil pour les profils
 	 * - ajout d'un menu modal de confirmation d'écrasement de sauvegarde
+	 * - ajout d'un menu modal lorsque les options demandant un redémarrage du jeu sont modifiées
+	 * - correction d'une erreur dans la traduction anglaise de l'interface
 	 */
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -876,9 +878,6 @@ public class Launcher
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 	/* TODO
-	 * 
-	 * - GUI : édition de profil, quand on a fait "nouveau" ça n'active pas le bouton "modifier"
-	 * 	 d'ailleurs ça devrait faire comme pour un nouveau slot d'enregistrement : ca devrait demander le nom dans un dialogue modal
 	 * 
 	 * - bug : j'ai vu l'ia prendre une vie, mourir, relacher la vie, et revenir. 
 	 * 	 et la vie était foncionnelle : je l'ai prise, je suis mort, je suis revenu (sans la relacher cette fois)

@@ -119,6 +119,11 @@
 				<text name="Video" value="Video" tooltip="Modify the video settings" />
 			</group>
 			
+			<group name="Confirm">
+				<text name="Question" value="Warning : these modifications will cause the game to restart" tooltip="These modifications will cause the game to restart" />
+				<text name="Title" value="Warning" tooltip="Game restart needed" />
+			</group>
+			
 			<group name="Advanced">
 				<text name="Title" value="Advanced settings" tooltip="Modify advanced settings" />
 				<group name="Line">
@@ -348,7 +353,7 @@
 				<group name="Points">
 					<group name="Ranks">
 						<text name="Title" value="Rank" tooltip="Round rankings" />
-						<text name="Values" value="#" tooltip="Player ranked #" />
+						<text name="Value" value="#" tooltip="Player ranked #" />
 					</group>
 					<group name="Draw">
 						<text name="Autokill" value="Mutual bombing" tooltip="Draw if the last players kill each other" />

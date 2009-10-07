@@ -36,13 +36,16 @@ import org.xml.sax.SAXException;
 import fr.free.totalboumboum.configuration.Configuration;
 import fr.free.totalboumboum.configuration.video.VideoConfiguration;
 import fr.free.totalboumboum.configuration.video.VideoConfigurationSaver;
+import fr.free.totalboumboum.gui.common.structure.dialog.outside.ModalDialogPanelListener;
+import fr.free.totalboumboum.gui.common.structure.dialog.outside.QuestionModalDialogPanel;
 import fr.free.totalboumboum.gui.common.structure.panel.SplitMenuPanel;
 import fr.free.totalboumboum.gui.common.structure.panel.menu.InnerMenuPanel;
 import fr.free.totalboumboum.gui.common.structure.panel.menu.MenuPanel;
+import fr.free.totalboumboum.gui.data.configuration.GuiConfiguration;
 import fr.free.totalboumboum.gui.tools.GuiKeys;
 import fr.free.totalboumboum.gui.tools.GuiTools;
 
-public class VideoMenu extends InnerMenuPanel
+public class VideoMenu extends InnerMenuPanel implements ModalDialogPanelListener
 {	private static final long serialVersionUID = 1L;
 	
 	@SuppressWarnings("unused")
@@ -87,30 +90,16 @@ public class VideoMenu extends InnerMenuPanel
 			if(!videoConfiguration.getPanelDimension().equals(Configuration.getVideoConfiguration().getPanelDimension())
 				|| videoConfiguration.getFullScreen()!=Configuration.getVideoConfiguration().getFullScreen())
 				restart = true;
-			Configuration.setVideoConfiguration(videoConfiguration);
-			try
-			{	VideoConfigurationSaver.saveVideoConfiguration(Configuration.getVideoConfiguration());
-			}
-			catch (IllegalArgumentException e1)
-			{	e1.printStackTrace();
-			}
-			catch (SecurityException e1)
-			{	e1.printStackTrace();
-			}
-			catch (ParserConfigurationException e1)
-			{	e1.printStackTrace();
-			}
-			catch (SAXException e1)
-			{	e1.printStackTrace();
-			}
-			catch (IOException e1)
-			{	e1.printStackTrace();
-			}
 			if(restart)
-				getFrame().restart();
+			{	String key = GuiKeys.MENU_OPTIONS_CONFIRM_TITLE;
+				ArrayList<String> text = new ArrayList<String>();
+				text.add(GuiConfiguration.getMiscConfiguration().getLanguage().getText(GuiKeys.MENU_OPTIONS_CONFIRM_QUESTION));
+				questionModal = new QuestionModalDialogPanel(getMenuParent(),key,text);
+				questionModal.addListener(this);
+				getFrame().setModalDialog(questionModal);
+			}
 			else
-//TODO propager éventuellement au round (car il n'y a pas modification mais remplacement, donc si c déjà affecté à un player..
-				replaceWith(parent);
+				confirm(restart);
 	    }
 		else if(e.getActionCommand().equals(GuiKeys.MENU_OPTIONS_BUTTON_CANCEL))
 		{	replaceWith(parent);
@@ -119,5 +108,49 @@ public class VideoMenu extends InnerMenuPanel
 	
 	public void refresh()
 	{	//
+	}
+	
+	private void confirm(boolean restart)
+	{	VideoConfiguration videoConfiguration = videoData.getVideoConfiguration();
+		Configuration.setVideoConfiguration(videoConfiguration);
+		try
+		{	VideoConfigurationSaver.saveVideoConfiguration(Configuration.getVideoConfiguration());
+		}
+		catch (IllegalArgumentException e1)
+		{	e1.printStackTrace();
+		}
+		catch (SecurityException e1)
+		{	e1.printStackTrace();
+		}
+		catch (ParserConfigurationException e1)
+		{	e1.printStackTrace();
+		}
+		catch (SAXException e1)
+		{	e1.printStackTrace();
+		}
+		catch (IOException e1)
+		{	e1.printStackTrace();
+		}
+		if(restart)
+			getFrame().restart();
+		else
+//TODO propager éventuellement au round (car il n'y a pas modification mais remplacement, donc si c déjà affecté à un player..
+			replaceWith(parent);
+	}
+
+	/////////////////////////////////////////////////////////////////
+	// MODAL DIALOG PANEL LISTENER	/////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	private QuestionModalDialogPanel questionModal = null;
+	
+	@Override
+	public void modalDialogButtonClicked(String buttonCode)
+	{	getFrame().unsetModalDialog();
+		if(questionModal!=null)
+		{	questionModal = null;
+			if(buttonCode.equals(GuiKeys.COMMON_DIALOG_CONFIRM))
+			{	confirm(true);			
+			}
+		}
 	}
 }
