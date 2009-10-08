@@ -120,7 +120,6 @@ public class HollowLevel implements Serializable
 		double globalUpY = posY - (visibleUpLine+visibleHeight/2.0)*GameVariables.scaledTileDimension;
     	level.setTilePositions(globalWidth,globalHeight,globalLeftX,globalUpY);
 		
-//NOTE il y a une ligne horizontale dans les borders au dessus du niveau (forcer le zoomFactor à 1 pour la faire apparaitre)		
 		// border
 		double downBorderY;
 		double horizontalBorderHeight;

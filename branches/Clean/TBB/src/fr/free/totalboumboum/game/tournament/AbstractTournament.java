@@ -49,8 +49,7 @@ public abstract class AbstractTournament implements StatisticHolder, Serializabl
 	public abstract void finish();
 	
 	public void cancel()
-	{	// TODO à compléter (sauver stats?)
-		tournamentOver = true;
+	{	tournamentOver = true;
 	}
 	
 	public boolean hasBegun()

@@ -310,7 +310,7 @@ public class MoveZone
 //	System.out.println();
 			// is it an intersected obstacle?
 			if(po.getContactDistance()<0)
-				addIntersectedSprite(po.getSprite()); //NOTE and what if the obstacle is bypassed? shouldn't be in the intersected list
+				addIntersectedSprite(po.getSprite());
 			// is the potential obstacle an actual obstacle?
 			if(po.isActualObstacle())
 			{	

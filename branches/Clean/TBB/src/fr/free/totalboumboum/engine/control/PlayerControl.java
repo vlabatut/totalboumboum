@@ -71,10 +71,6 @@ public class PlayerControl implements KeyListener
 	    }
 	}
 
-/*
- * TODO non-system keys should not be listened to when in pause 
- */
-	
 	@Override
 	public void keyReleased(KeyEvent e)
 	{	int keyCode = e.getKeyCode();
@@ -87,7 +83,7 @@ public class PlayerControl implements KeyListener
 
 	@Override
 	public void keyTyped(KeyEvent arg0)
-	{	// NOTE a priori inutile ici
+	{	
 	}
 	
 	/////////////////////////////////////////////////////////////////

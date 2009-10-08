@@ -127,7 +127,6 @@ if(ff==null)
 if(bf==null)
 	System.out.println(name);
 		Block result = bf.makeSprite(tile);
-//NOTE dans ce type de méthode, il faut tester si le nom passé en paramètre a bien été trouvé !	
 		//result.initGesture();
 		return result;
 	}

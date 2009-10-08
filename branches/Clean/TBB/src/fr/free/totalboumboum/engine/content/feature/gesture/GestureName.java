@@ -124,6 +124,4 @@ public enum GestureName
 	
 	/** the sprite is moving on the ground on its own */
 	WALKING;
-	
-	//TODO synchroniser avec les AIStateName
 }

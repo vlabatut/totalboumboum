@@ -159,18 +159,18 @@ public abstract class SpecificAction
 	 */
 /*	public ActionAbility computeAbility()
 	{	// actor original ability 
-		ActionAbility result = actor.getAbility(this); //TODO écrire getAbility(action), les autres sont-ils utiles?
+		ActionAbility result = actor.getAbility(this);
 		result = (ActionAbility)result.copy();
 		
 		// actor modulation
 		if(result.isActive())
 		{	ActorModulation actorModulation = actor.getActorModulation(this);
-			if(actorModulation!=null) //TODO peut être que c'est plus simple de renvoyer systmétiquement une modulation, mais avec une puissance de 0?
-				result = actorModulation.modulate(result); //TODO écrire cette méthode aussi, qui renvoie une nouvelle ability		
+			if(actorModulation!=null)
+				result = actorModulation.modulate(result);		
 		}
 		
 		// target modulation (if there's one!)
-		if(result.isActive() && target!=null)//TODO quand on cherche une modulation pour un sprite donné, ça dépend de son gesture courant. si pas de gesture, alors il renvoie null
+		if(result.isActive() && target!=null)
 		{	TargetModulation targetModulation = target.getTargetModulation(this);
 			if(targetModulation!=null)
 				result = targetModulation.modulate(result); 		
@@ -212,7 +212,6 @@ public abstract class SpecificAction
 	// COMPARISON		/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 /*
- * TODO is it necessary?
 	public boolean equals(Object action)
 	{	boolean result = false;
 		if(action instanceof SpecificAction<?>)
@@ -254,7 +253,6 @@ public abstract class SpecificAction
 		return result;
 	}
 /*	
- * TODO is it necessary ?
 	public SpecificAction copy()
 	{	SpecificAction result;
 		result = new SpecificAction(name);

@@ -64,8 +64,6 @@ public class Level
 	// THEME				/////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 /*
- TODO semblait inutile, dc désactivé 
- (également dans HollowLevel.loadTheme() et Level.finish())
 	private Theme theme;
 
 	public void setTheme(Theme theme)
@@ -378,7 +376,6 @@ public class Level
 
 	public void removeSprite(Sprite sprite)
 	{	sprites.remove(sprite);
-		//TODO should be called any time a sprite is supressed from the game
 	}
 /*	
 	public void addHero(Hero hero, int line, int col)
@@ -764,12 +761,10 @@ public class Level
 	{	return isInsidePositionX(x) && isInsidePositionY(y);		
 	}
 	public boolean isInsidePositionX(double x)
-	{	//NOTE comparaison relative?
-		return x>=pixelLeftX && x<=pixelLeftX+pixelWidth;
+	{	return x>=pixelLeftX && x<=pixelLeftX+pixelWidth;
 	}
 	public boolean isInsidePositionY(double y)
-	{	//NOTE comparaison relative?
-		return y>=pixelTopY && y<=pixelTopY+pixelHeight;
+	{	return y>=pixelTopY && y<=pixelTopY+pixelHeight;
 	}
 	
 	/////////////////////////////////////////////////////////////////
@@ -851,7 +846,6 @@ public class Level
 				matrix[line][col].updateSprites(Role.HERO);		
 	}
 
-	//NOTE optimisation : à effectuer seulement pour les tiles visibles
 	public void draw(Graphics g)
 	{	drawLevel(g);
 		

@@ -77,8 +77,7 @@ public class Item extends Sprite
 	}
 
 	public void reinitItemAbilities()
-	{	// NOTE maybe the old abilities should be killed?
-		itemAbilities.clear();
+	{	itemAbilities.clear();
 		initItemAbilities(originalItemAbilities);
 	}
 	

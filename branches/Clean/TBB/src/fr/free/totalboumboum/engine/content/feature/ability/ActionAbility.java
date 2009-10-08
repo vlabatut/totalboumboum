@@ -72,7 +72,7 @@ public class ActionAbility extends AbstractAbility
 	/////////////////////////////////////////////////////////////////
 	public AbstractAbility copy()
 	{	ActionAbility result;
-		GeneralAction a = action; //NOTE à copier ? (non)
+		GeneralAction a = action;
 		result = new ActionAbility(a);
 		result.setFrame(frame);
 		result.setStrength(strength);

@@ -114,7 +114,7 @@ public class BombFactory extends SpriteFactory<Bomb> implements Serializable
 	{	BombFactory result = new BombFactory(bombName);
 		result.setAbilities(abilities);
 		result.setBase(base);
-		result.setBombset(null); //TODO to be completed later (?)
+		result.setBombset(null);
 		result.setExplosion(explosion);
 		result.setGesturePack(gesturePack.copy());
 		result.setName(name);

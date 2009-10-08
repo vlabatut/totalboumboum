@@ -402,7 +402,7 @@ public class Loop implements Runnable, Serializable
 		}
 		// waking the process thread up
 		cond.signal();
-		loadLock.unlock();	//NOTE modif	
+		loadLock.unlock();	
 	}
 	public LoopRenderPanel getPanel()
 	{	return panel;
@@ -522,7 +522,7 @@ public class Loop implements Runnable, Serializable
 		catch (NoSuchMethodException e)
 		{	e.printStackTrace();
 		}
-		loadLock.unlock(); //NOTE modif
+		loadLock.unlock();
 	}
 	
 //long totalUpdateTime=0;
@@ -823,7 +823,7 @@ System.out.println();
 //System.out.println(entryRoles[i]+":"+duration);
 			if(i<entryRoles.length-1)
 				duration = duration/2; //so that sprites appear almost at the same time
-			entryDelays[i+1] = duration/*+Configuration.getEngineConfiguration().getMilliPeriod()*/;//NOTE a little more time, just too be sure it goes OK
+			entryDelays[i+1] = duration/*+Configuration.getEngineConfiguration().getMilliPeriod()*/;
 			entryTexts[i] = entryRoles[i].toString(); //actually not used, but hey...
 		}
 		// unset the messages (for quicklaunch)

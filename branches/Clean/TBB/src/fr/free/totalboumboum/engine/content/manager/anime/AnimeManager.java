@@ -123,7 +123,6 @@ public class AnimeManager
 			currentAnime.setGestureName(gesture.getName());
 			AnimeStep as = new AnimeStep();
 			currentAnime.add(as);
-			//TODO à supprimer si le chargement d'animations est finalisé de manière à éviter cette situation (= anime vide)
 		}
 		if(reinit)
 		{	isTerminated = false;
@@ -159,7 +158,7 @@ public class AnimeManager
 			if(animeDuration == 0)
 			{	forcedDurationCoeff = 1;
 				totalDuration = forcedDuration;
-				isTerminated = false; //NOTE was true, but should not : it's supposed to be over only when the forcedDuration is over
+				isTerminated = false;
 			}			
 			// actual anime
 			else
@@ -253,7 +252,7 @@ public class AnimeManager
 				double hideDuration = ability.getStrength();
 				if(showDuration<=0)
 				{	if(hideDuration<=0)
-						hideDuration = 500; // NOTE arbitrary value
+						hideDuration = 500;
 					showDuration = hideDuration;
 				}
 				else
@@ -261,7 +260,6 @@ public class AnimeManager
 						hideDuration = showDuration;
 				}
 				double twinkleDuration = hideDuration + showDuration;
-				// NOTE all the previous processing stuff could be done once and for all, if we suppose these abilities don't change, and the same holds for blinking
 				// process current twinkle state
 				long mod = ((long)twinkleTime) % ((long)twinkleDuration);
 				twinkleChange = mod>showDuration;

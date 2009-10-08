@@ -337,9 +337,6 @@ public class BombEventManager extends EventManager
 			}
 			else
 			{
-				//NOTE prévoir le cas où la bombe ne peut pas péter, il faut le remettre au prochain instant
-				// sauf que certains états prévoient une réinit du timer au changement d'état (ex : bouncing)
-				// >> en fait pas ds toutes les instances. -> mettre un paramètre (ability)
 			}
 		}
 		// flame-caused explosion
@@ -437,7 +434,7 @@ public class BombEventManager extends EventManager
 	private void appear()
 	{	gesture = GestureName.APPEARING;
 		sprite.setGesture(gesture,spriteDirection,Direction.NONE,true);
-		EngineEvent event = new EngineEvent(EngineEvent.TILE_LOW_ENTER,sprite,null,sprite.getActualDirection()); //TODO to be changed by a GESTURE_CHANGE event (or equiv.)
+		EngineEvent event = new EngineEvent(EngineEvent.TILE_LOW_ENTER,sprite,null,sprite.getActualDirection());
 		sprite.getTile().spreadEvent(event);
 	}
 

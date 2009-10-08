@@ -70,7 +70,6 @@ public class GesturePack
 	
 	public Gesture getGesture(GestureName name)
 	{	Gesture result = gestures.get(name);
-		//NOTE créer le gesture s'il est manquant?
 		return result;
 	}
 

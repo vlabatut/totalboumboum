@@ -194,11 +194,11 @@ public class Profile implements Serializable
 		result.controlSettingsIndex = controlSettingsIndex;
 		result.name = name;
 		result.fileName = fileName;
-		result.portraits = portraits; //TODO copy
+		result.portraits = portraits;
 		
 		result.defaultSprite = defaultSprite.copy();
 		result.selectedSprite = selectedSprite.copy();
-		result.spriteControl = spriteControl;//TODO copy
+		result.spriteControl = spriteControl;
 		
 		return result;
 	}

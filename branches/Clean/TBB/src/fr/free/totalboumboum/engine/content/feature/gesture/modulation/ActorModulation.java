@@ -53,7 +53,7 @@ public class ActorModulation extends AbstractActionModulation
 	// COPY			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	public ActorModulation copy()
-	{	GeneralAction actionCopy = action; //NOTE doesn't seem necessary to copy the action (same thing for target and third modulation)
+	{	GeneralAction actionCopy = action;
 		ActorModulation result = new ActorModulation(actionCopy);
 		// actor restrictions
 		{	Iterator<AbstractAbility> it = actorRestrictions.iterator();

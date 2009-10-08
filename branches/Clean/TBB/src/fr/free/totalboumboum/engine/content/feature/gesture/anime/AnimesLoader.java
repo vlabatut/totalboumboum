@@ -471,7 +471,6 @@ public class AnimesLoader
 	    	if(gesture.hasNoAnimes())
 	    	{	// get the replacement animes
 	    		GestureName replName2 = animesReplacements.get(replName);
-	        	// TODO if a compulsory anime is missing, should be detected here (except for abstract sprite, where it doesn't matter)
 	    		if(replName2!=null)
 					completeAnime(pack,animesReplacements,replName,replName2);
 				Gesture replacement = pack.getGesture(replName);

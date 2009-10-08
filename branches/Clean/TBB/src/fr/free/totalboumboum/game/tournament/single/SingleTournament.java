@@ -42,7 +42,6 @@ public class SingleTournament extends AbstractTournament
 	@Override
 	public void init()
 	{	begun = true;
-		// NOTE vérifier si le nombre de joueurs sélectionnés correspond
 		stats = new StatisticTournament(this);
 		stats.initStartDate();
 	}
@@ -56,7 +55,7 @@ public class SingleTournament extends AbstractTournament
 
 	@Override
 	public void finish()
-	{	//NOTE et les matches ? (dans SequenceTournament aussi)
+	{	
 	}
 
 	/////////////////////////////////////////////////////////////////
@@ -85,7 +84,6 @@ public class SingleTournament extends AbstractTournament
 		{	panel.tournamentOver();
 			stats.initEndDate();		
 		}
-//NOTE ou bien : panel.matchOver();		
 	}
 
 	public void roundOver()

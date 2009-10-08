@@ -47,7 +47,7 @@ public class AbilityLoader
 		String strengthStr = root.getAttribute(XmlTools.ATT_STRENGTH).getValue().trim().toUpperCase(Locale.ENGLISH);
 		float strength;
 		if(strengthStr.equals(XmlTools.VAL_MAX))
-			strength = Float.MAX_VALUE; //NOTE format de données à inclure dans le XSD (>> actually I removed it)
+			strength = Float.MAX_VALUE;
 		else
 			strength = Float.parseFloat(strengthStr);
     	// frame

@@ -163,7 +163,6 @@ buttonStatistics.setEnabled(false);
 			}
 			else if(tournament instanceof LeagueTournament)
 			{
-				// NOTE à compléter
 			}
 			else if(tournament instanceof SingleTournament)
 			{	tournament.progress();

@@ -65,7 +65,6 @@ public class CupTournament extends AbstractTournament
 		firstLegPlayersdistribution = distri.get(index);
 //firstLegPlayersdistribution = distri.get(0);			
 		
-		// NOTE vérifier si le nombre de joueurs sélectionnés correspond
 		currentIndex = 0;
 		currentLeg = legs.get(currentIndex);
 		currentLeg.init();

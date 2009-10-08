@@ -311,12 +311,9 @@ public class PotentialObstacle
 			specificAction = new SpecificMoveHigh(source,usedDirection);
 		
 		// testing the action
-		//	TODO ça serait plus logique d'utiliser le résultat de la modulation
-		//	(ça tiendrait compte d'interactions entre les différents modulateurs). 
-		//	mais ça serait aussi plus long, donc à voir...
 		result = sprite.isThirdPreventing(specificAction,actorCircumstance,targetCircumstance);
 				
-/* NOTE OLD VERSION		
+/* 		
 		// with intersection
 		if(!CalculusTools.isRelativelyGreaterOrEqualTo(distX,tileDimension) && !CalculusTools.isRelativelyGreaterOrEqualTo(distY,tileDimension))
 //		if(distX<tileDimension && distY<tileDimension)
@@ -333,9 +330,6 @@ public class PotentialObstacle
 					specificAction = new SpecificMoveLow(source,usedDirection);
 				else
 					specificAction = new SpecificMoveHigh(source,usedDirection);
-				//  TODO ça serait plus logique d'utiliser le résultat de la modulation (ça tiendrait
-				//  compte d'interactions entre les différents modulateurs). mais ça serait aussi plus long,
-				//  donc à voir... (même remarque 20 lignes dessous)
 				if(sprite.isThirdPreventing(specificAction))
 				{	double deltaX = GameVariables.level.getDeltaX(moveZone.getCurrentX(),sprite.getCurrentPosX());
 					double deltaY = GameVariables.level.getDeltaY(moveZone.getCurrentY(),sprite.getCurrentPosY());

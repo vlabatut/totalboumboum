@@ -43,7 +43,7 @@ public class EngineConfiguration
 	/** engine update persiod in nanoseconds */
 	private long nanoPeriod;
 	/** speed coefficient */
-	private double speedCoeff; //NOTE speedcoeff à descendre au niveau de loop, car il peut dépendre du level
+	private double speedCoeff;
 	/** ai updates per second */
 	private int aiUps = 50;
 	/** ai update period */

@@ -134,7 +134,6 @@ public class VideoMenu extends InnerMenuPanel implements ModalDialogPanelListene
 		if(restart)
 			getFrame().restart();
 		else
-//TODO propager éventuellement au round (car il n'y a pas modification mais remplacement, donc si c déjà affecté à un player..
 			replaceWith(parent);
 	}
 

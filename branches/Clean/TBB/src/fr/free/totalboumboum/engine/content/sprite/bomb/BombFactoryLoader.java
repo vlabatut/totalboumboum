@@ -96,7 +96,6 @@ public class BombFactoryLoader extends SpriteFactoryLoader
 		String baseStr = result.getBase();
 		if(baseStr!=null)
 		{	String path = abstractBombs.get(baseStr)+File.separator+FileTools.FOLDER_ANIMES;
-			// NOTE this won't work in case of multiple inheritance (only the direct parent's animation will be loaded)
 			if(color==null)
 				AnimesLoader.loadAnimes(path,gesturePack,BombFactory.getAnimeReplacements());
 			else

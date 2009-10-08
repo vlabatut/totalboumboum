@@ -32,50 +32,50 @@ public class LeagueTournament extends AbstractTournament
 
 	@Override
 	public void matchOver() {
-		// TODO Auto-generated method stub
+		//  Auto-generated method stub
 		
 	}
 	
 	@Override
 	public void roundOver() {
-		// TODO Auto-generated method stub
+		//  Auto-generated method stub
 		
 	}
 	
 	@Override
 	public void finish() {
-		// TODO Auto-generated method stub
+		//  Auto-generated method stub
 		
 	}
 
 	@Override
 	public Match getCurrentMatch() {
-		// TODO Auto-generated method stub
+		//  Auto-generated method stub
 		return null;
 	}
 
 	@Override
 	public void init()
 	{
-		// TODO Auto-generated method stub
+		//  Auto-generated method stub
 		
 	}
 
 	@Override
 	public void progress() {
-		// TODO Auto-generated method stub
+		//  Auto-generated method stub
 		
 	}
 
 	@Override
 	public Set<Integer> getAllowedPlayerNumbers()
-	{	// TODO Auto-generated method stub
+	{	//  Auto-generated method stub
 		return null;			
 	}
 
 	@Override
 	public Ranks getOrderedPlayers() {
-		// TODO Auto-generated method stub
+		//  Auto-generated method stub
 		return null;
 	}
 

@@ -124,7 +124,7 @@ public class Bombset implements Serializable
 		{	BombFactory bombFactory = it.next();
 			if(bombFactory.getBombName().equalsIgnoreCase(name))
 			{	result = bombFactory.makeSprite(tile);
-				result.setFlameRange(flameRange); //NOTE this is performed in BombsetManager.dropBomb() for the Heroes. Maybe should it be normalized ? use an ability ? (cf note in BombsetMgr)
+				result.setFlameRange(flameRange);
 			}
 		}
 		return result;

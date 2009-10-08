@@ -70,7 +70,7 @@ public class AbilityManager
 		{	ActionAbility ab = (ActionAbility)copy;
 			ab.getAction().addActor(sprite.getRole());
 		}
-		directAbilities.add(copy);	//NOTE pourquoi toutes ces copies? la question est: qu'est-ce qui est modifié exactement dans l'ability. p-e qu'il n'est pas nécessaire de copier l'action
+		directAbilities.add(copy);
 		currentAbilities.add(copy.copy());
 	}
 	
@@ -160,7 +160,7 @@ if(modulationAbilities.size()>0)
 		if(itemAbilities.contains(ability))
 			a = itemAbilities.get(itemAbilities.indexOf(ability));
 		else if(directAbilities.contains(ability))
-			a = directAbilities.get(directAbilities.indexOf(ability)); //TODO questionable
+			a = directAbilities.get(directAbilities.indexOf(ability));
 		if(a!=null)
 			a.modifyUse(delta);
 	}

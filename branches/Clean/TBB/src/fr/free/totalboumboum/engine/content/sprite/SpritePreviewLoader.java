@@ -66,7 +66,7 @@ public class SpritePreviewLoader
 		loadSource = true;
 		Element root = SpriteFactoryLoader.openFile(folder);
 		SpritePreview result = loadSpriteElement(root,folder,abstractPreviews);
-		result.setPack(null);//TODO à compléter en extrayant le pack du chemin folder
+		result.setPack(null);
 		result.setFolder(new File(folder).getName());
 		return result;
 	}

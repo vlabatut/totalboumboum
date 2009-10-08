@@ -90,8 +90,7 @@ public class Round implements StatisticHolder, Serializable
 	}
 	
 	public void cancel()
-	{	// TODO à compléter
-		match.cancel();
+	{	match.cancel();
 	}
 	
 	public void progress() throws IllegalArgumentException, SecurityException, ParserConfigurationException, SAXException, IOException, ClassNotFoundException, IllegalAccessException, NoSuchFieldException
@@ -201,7 +200,7 @@ public class Round implements StatisticHolder, Serializable
 		{	stats.updateTime(time,this);			
 			if(getLimits().testLimit(this))
 				closeGame();
-//			else TODO à voir quand on s'occupera d'afficher les points en temps réel dans la GUI
+//			else
 //				stats.computePoints(getPointProcessor());
 		}
 	}

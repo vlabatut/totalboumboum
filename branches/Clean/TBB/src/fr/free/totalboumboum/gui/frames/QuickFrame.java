@@ -138,8 +138,7 @@ public class QuickFrame extends AbstractFrame implements ActionListener, LoopRen
 	@Override
 	public void paintScreen()
 	{	Graphics g = bufferStrategy.getDrawGraphics();
-		// draw stuff in the buffer
-//NOTE: draw background?	
+		// draw stuff in the buffer	
 		loop.draw(g);
 		g.dispose();
 		// copy the buffer on the panel

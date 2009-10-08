@@ -206,9 +206,6 @@ public class TrajectoryManager
 			// update forced shifts
 			if(forcedPositionTime>0)
 				correctForcedShifts();
-			/* NOTE en cas de trajectoire repeat : 
-			 * ne faut-il pas réinitialiser la position forcée à chaque répétition ?
-			 */
 		}
 	}
 
@@ -272,9 +269,6 @@ public class TrajectoryManager
 		double gapX = theoreticalX - currentPosX;
 		double gapY = theoreticalY - currentPosY;
 		double gapZ = theoreticalZ - currentPosZ;
-		/* NOTE on pourrait échelonner la correction, mais on choisit l'approche brutale
-		 * quitte à affiner par la suite si nécessaire
-		 */
 		currentPosX = currentPosX + gapX;
 		currentPosY = currentPosY + gapY;
 		currentPosZ = currentPosZ + gapZ;
@@ -720,8 +714,7 @@ if(Double.isNaN(currentPosX) || Double.isNaN(currentPosY))
  * ********************************
  */		
 	private void updateCollidedSprites(ArrayList<Sprite> newCollidedSprites)
-	{	//NOTE faut-il distinquer les changements de direction ?
-		Iterator<Sprite> i;
+	{	Iterator<Sprite> i;
 		
 /*		
 //		if(newCollidedSprites.size()>0)

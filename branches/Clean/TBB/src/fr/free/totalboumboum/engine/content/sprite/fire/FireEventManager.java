@@ -152,7 +152,7 @@ public class FireEventManager extends EventManager
 	private void appear()
 	{	gesture = GestureName.APPEARING;
 		sprite.setGesture(gesture,spriteDirection,Direction.NONE,true);
-		EngineEvent event = new EngineEvent(EngineEvent.TILE_LOW_ENTER,sprite,null,sprite.getActualDirection()); //TODO to be changed by a GESTURE_CHANGE event (or equiv.)
+		EngineEvent event = new EngineEvent(EngineEvent.TILE_LOW_ENTER,sprite,null,sprite.getActualDirection());
 		sprite.getTile().spreadEvent(event);
 	}
 	

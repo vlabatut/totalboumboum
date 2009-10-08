@@ -66,7 +66,6 @@ public class SequenceTournament extends AbstractTournament
 		if(randomizeMatches)
 			randomizeMatches();
 		
-		// NOTE vérifier si le nombre de joueurs sélectionnés correspond
 		currentIndex = 0;
 		stats = new StatisticTournament(this);
 		stats.initStartDate();

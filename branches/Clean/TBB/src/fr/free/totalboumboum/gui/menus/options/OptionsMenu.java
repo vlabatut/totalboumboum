@@ -178,8 +178,7 @@ public class OptionsMenu extends InnerMenuPanel
 			}
 	    }
 		else if(e.getActionCommand().equals(GuiKeys.MENU_OPTIONS_BUTTON_GAME))
-		{	// TODO certainement à compléter
-			GameSplitPanel gamePanel = new GameSplitPanel(container.getMenuContainer(),container);
+		{	GameSplitPanel gamePanel = new GameSplitPanel(container.getMenuContainer(),container);
 			replaceWith(gamePanel);
 	    }
 		else if(e.getActionCommand().equals(GuiKeys.MENU_OPTIONS_BUTTON_CONTROLS))

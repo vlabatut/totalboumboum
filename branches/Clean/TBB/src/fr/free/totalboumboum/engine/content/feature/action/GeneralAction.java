@@ -39,38 +39,6 @@ import fr.free.totalboumboum.engine.content.sprite.Sprite;
  */
 public abstract class GeneralAction
 {	
-	
-	/* NOTE in tile position: 
-	 * 	- FAR was changed into REMOTE, 
-	 * 	- the meaning of same was changed (before no tile for actor -> same), 
-	 * 	- undefined was added 
-	 */
-
-	/*NOTE
-	 * - there's not always a direction (the actor can perform an undirected gesture)
-	 * - there's always an actor
-	 * - there may be no target
-	 * - in that case orientation and tile position are irrelevant
-	 */
-	
-	/*NOTE
-	 * 
-	 * il semble qu'on a parfois besoin d'une position sous forme de case.
-	 * dans ce cas là, on peut passer la case (ou ses coordonnées) lors de la création de l'action,
-	 * qui initialise ses champs en conséquence.
-	 * 
-	 * il semble logique de laisser la gestion complète des autorisations de transition aux modulations
-	 * donc pas la peine de les coder en dur comme c'est actuellement fait dans les event managers
-	 * 
-	 * ability fait-elle partie de isPossible ? a priori, je dirais oui.
-	 * donc: 	isPossible=compatibilité avec l'action générale + ability
-	 * 			isAllowed=modulation
-	 * en fait non, c'est trop lié aux modulations. il vaut mieux faire:
-	 * 		isPossible=compatiblité avec l'action générale
-	 * 		isAllowed=ability modulée
-	 * 
-	 */
-	
 	/////////////////////////////////////////////////////////////////
 	// NAME				/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
