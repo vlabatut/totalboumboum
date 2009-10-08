@@ -1,25 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <archive xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="..\..\..\resources\schemas\archive.xsd">
-	<tournament name="Tournoi de Galatasaray 2" type="CUP" />
-	<played matches="2" rounds="1" />
-	<dates start="2009-01-08T18:17:14" save="2009-01-08T18:18:24" />
+	<tournament name="Super-coupe de Galatasaray I" type="SINGLE" />
+	<played matches="0" rounds="0" />
+	<dates start="2009-10-08T21:42:28" save="2009-10-08T21:42:44" />
 	<players>
-		<player name="Akkaya+Danacioğlu" />
-		<player name="Dayioğlugil+Geçkalan" />
-		<player name="Adatepe" />
-		<player name="Altay+Basaranoğlu" />
-		<player name="Medeni+Uluer" />
-		<player name="Demirağ+Şagar" />
-		<player name="Çöremen+Küçükkarakürt" />
-		<player name="Günalp+Yürtsever" />
-		<player name="Devecioğlu+Korkmaz" />
-		<player name="Erişik+Pektaş" />
-		<player name="Kökciyan+Mazmanoğlu" />
-		<player name="Joueur humain" />
-		<player name="Akpolat+Şener" />
-		<player name="Bilgin+Karabağ" />
-		<player name="Çalışkan+Cap+Doğaner" />
-		<player name="Tırtıl+Tomruk" />
+		<player name="0809v2.Altay+Basaranoğlu" />
+		<player name="0809v2.Erişik+Pektaş" />
+		<player name="0708.Kılıç+Pala" />
+		<player name="0708.Bingöl+Ketenci" />
 	</players>
 </archive>
 
