@@ -1006,7 +1006,5 @@ public class Launcher
 
 	/**
 	 * - réinitialiser les valeurs des compteurs de logstats
-	 * - faudra tester en entier tous les tournois prédéfinis
-	 * - mettre une limite à A* dans suiveur sinon ça surcharge quand pas de chemin
 	 */
 }

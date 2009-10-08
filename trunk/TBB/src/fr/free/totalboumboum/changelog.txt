@@ -306,4 +306,6 @@
 - ajout d'un menu modal de confirmation d'écrasement de sauvegarde
 - ajout d'un menu modal lorsque les options demandant un redémarrage du jeu sont modifiées
 - correction d'une erreur dans la traduction anglaise de l'interface
+- correction de quelques erreurs dans AiBomb
+- amélioration de l'implémentation d'A* pour ne pas considérer les chemins qui passent plusieurs fois par la même case
 

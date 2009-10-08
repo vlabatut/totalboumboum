@@ -1,24 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <gameTournament xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="..\..\..\resources\schemas\game_tournament.xsd">
 	<options useLastPlayers="true" useLastTournament="true" autoload="false" autosave="true" />
-	<tournament name="GsuCup200809" />
+	<tournament name="SequenceLong" />
 	<players>
-		<player file="51" color="GREY" controls="0" spritePack="superbomberman5" spriteFolder="shirobon" />
-		<player file="52" color="PURPLE" controls="0" spritePack="superbomberman5" spriteFolder="shirobon" />
-		<player file="53" color="RED" controls="0" spritePack="superbomberman5" spriteFolder="shirobon" />
-		<player file="54" color="WHITE" controls="0" spritePack="superbomberman5" spriteFolder="shirobon" />
-		<player file="55" color="YELLOW" controls="0" spritePack="superbomberman5" spriteFolder="shirobon" />
-		<player file="56" color="INDIGO" controls="0" spritePack="superbomberman5" spriteFolder="shirobon" />
-		<player file="57" color="RUST" controls="0" spritePack="superbomberman5" spriteFolder="shirobon" />
-		<player file="58" color="ULTRAMARINE" controls="0" spritePack="superbomberman5" spriteFolder="shirobon" />
-		<player file="59" color="BLUE" controls="0" spritePack="superbomberman5" spriteFolder="shirobon" />
-		<player file="60" color="ORANGE" controls="0" spritePack="superbomberman5" spriteFolder="shirobon" />
-		<player file="61" color="GREEN" controls="0" spritePack="superbomberman5" spriteFolder="shirobon" />
-		<player file="62" color="CYAN" controls="0" spritePack="superbomberman5" spriteFolder="shirobon" />
-		<player file="63" color="BLACK" controls="0" spritePack="superbomberman5" spriteFolder="shirobon" />
-		<player file="1" color="GRASS" controls="0" spritePack="superbomberman5" spriteFolder="assistantpirate" />
-		<player file="65" color="PINK" controls="0" spritePack="nesbomberman2" spriteFolder="shirobon" />
-		<player file="18" color="BROWN" controls="0" spritePack="superbomberman5" spriteFolder="assistantpirate" />
+		<player file="53" color="RED" controls="1" spritePack="superbomberman5" spriteFolder="shirobon" />
+		<player file="59" color="BLUE" controls="2" spritePack="superbomberman5" spriteFolder="shirobon" />
+		<player file="65" color="PINK" controls="3" spritePack="nesbomberman2" spriteFolder="shirobon" />
+		<player file="18" color="ORANGE" controls="4" spritePack="superbomberman5" spriteFolder="assistantpirate" />
 	</players>
 </gameTournament>
 
