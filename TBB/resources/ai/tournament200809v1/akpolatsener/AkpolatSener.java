@@ -97,7 +97,6 @@ public class AkpolatSener extends ArtificialIntelligence {
 			try {
 				selectTile(currentTile);
 			} catch (Exception e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 		} else

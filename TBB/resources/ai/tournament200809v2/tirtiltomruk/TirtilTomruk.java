@@ -199,7 +199,7 @@ public class TirtilTomruk extends ArtificialIntelligence {
 		 } 
 		 catch (InterruptedException e) 
 		 { 
-		 //TODO Auto-generated catch block 
+		 // Auto-generated catch block 
 			 e.printStackTrace();
 		}*/
 		
@@ -222,7 +222,7 @@ public class TirtilTomruk extends ArtificialIntelligence {
 
 		
 		 /* Test asd = new Test(getPercepts(),this); try { asd.test(); } catch
-		  (InterruptedException e) { // TODO Auto-generated catch block
+		  (InterruptedException e) { //  Auto-generated catch block
 		  e.printStackTrace(); } return new AiAction(AiActionName.NONE);
 		 */
 		

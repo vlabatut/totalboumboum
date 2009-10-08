@@ -852,7 +852,7 @@ public class AltayBasaranoglu extends ArtificialIntelligence {
 	}
 
 	private boolean isVisited(long[][][] matrixBombTimes, int line, int col) throws StopRequestException {
-		// TODO Auto-generated method stub
+		//  Auto-generated method stub
 		checkInterruption();
 		return matrixBombTimes[line][col][1] == VISITED;
 	}
@@ -864,7 +864,7 @@ public class AltayBasaranoglu extends ArtificialIntelligence {
 	}
 
 	private void markVisited(long[][][] matrixBombTimes, int line, int col) throws StopRequestException {
-		// TODO Auto-generated method stub
+		//  Auto-generated method stub
 		checkInterruption();
 		matrixBombTimes[line][col][1] = VISITED;
 		

@@ -34,7 +34,7 @@ public class AStar {
 
 	public void init() {
 		links = new Vector<LienRecherche>();
-		// TODO daha sonra new constractor kurulabilir
+		// daha sonra new constractor kurulabilir
 	}
 
 	public void formeLien(Node parent, Node fils) {
