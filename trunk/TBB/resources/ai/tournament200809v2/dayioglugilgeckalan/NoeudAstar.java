@@ -43,7 +43,7 @@ public class NoeudAstar implements Comparator<Noeud> {
 		n_1 = noeud1.getHeuristic(goal)+  noeud1.getCout();
 		 n_2=noeud2.getHeuristic(goal)+  noeud2.getCout();
 	} catch (StopRequestException e) {
-		// TODO Auto-generated catch block
+		//  Auto-generated catch block
 		n_1 = 0;
 		n_2 = 0;
 	}

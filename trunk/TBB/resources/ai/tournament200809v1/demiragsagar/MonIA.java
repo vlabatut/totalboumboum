@@ -81,7 +81,7 @@ public class MonIA extends ArtificialIntelligence {
 			} else if (bombes.isEmpty() && monAttack.olmadikac && zone.getFires().isEmpty()) {
 				if(debug) System.out.println("kacmayi birak");
 				monAttack.olmadikac = false;
-				//TODO sacma
+				//sacma
 				olmadikacilk=false;
 				this.estIntermediaire = false;
 				monAttack=null;
@@ -93,7 +93,6 @@ public class MonIA extends ArtificialIntelligence {
 				this.getBombes();
 				esc = new Escape(bombes);
 				target = esc.getEscape(caseCourant, zone);
-				//TODO: 
 				if(olmadikacilk==false) {
 					olmadikacilk=true;
 					return new AiAction(AiActionName.NONE);
@@ -149,7 +148,6 @@ public class MonIA extends ArtificialIntelligence {
 		try {
 			checkInterruption();
 		} catch (StopRequestException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		this.zoneHeight = 9;
@@ -162,7 +160,7 @@ public class MonIA extends ArtificialIntelligence {
 		try {
 			checkInterruption();
 		} catch (StopRequestException e) {
-			// TODO Auto-generated catch block
+			// Auto-generated catch block
 			e.printStackTrace();
 		}
 		// fonction verifiant si l'ia est arrive a la case cible
@@ -183,7 +181,7 @@ public class MonIA extends ArtificialIntelligence {
 		try {
 			checkInterruption();
 		} catch (StopRequestException e) {
-			// TODO Auto-generated catch block
+			// Auto-generated catch block
 			e.printStackTrace();
 		}
 		AiHero enemy = null;
@@ -191,7 +189,7 @@ public class MonIA extends ArtificialIntelligence {
 			try {
 				checkInterruption();
 			} catch (StopRequestException e) {
-				// TODO Auto-generated catch block
+				// Auto-generated catch block
 				e.printStackTrace();
 			}
 			if (i.getColor() != this.ownHero.getColor())
@@ -206,7 +204,7 @@ public class MonIA extends ArtificialIntelligence {
 		try {
 			checkInterruption();
 		} catch (StopRequestException e) {
-			// TODO Auto-generated catch block
+			// Auto-generated catch block
 			e.printStackTrace();
 		}
 		bombes.clear();
@@ -215,7 +213,7 @@ public class MonIA extends ArtificialIntelligence {
 				try {
 					checkInterruption();
 				} catch (StopRequestException e) {
-					// TODO Auto-generated catch block
+					// Auto-generated catch block
 					e.printStackTrace();
 				}
 				bombes.add(i.getTile());
