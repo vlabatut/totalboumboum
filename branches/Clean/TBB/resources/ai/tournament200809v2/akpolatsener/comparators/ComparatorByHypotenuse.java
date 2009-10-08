@@ -57,7 +57,7 @@ public class ComparatorByHypotenuse implements Comparator<AiTile> {
 				else
 					result = -1;
 			} catch (StopRequestException e) {
-				// TODO Auto-generated catch block
+				//  Auto-generated catch block
 				e.printStackTrace();
 			}
 		} else {
@@ -68,7 +68,7 @@ public class ComparatorByHypotenuse implements Comparator<AiTile> {
 				else
 					result = 1;
 			} catch (StopRequestException e) {
-				// TODO Auto-generated catch block
+				//  Auto-generated catch block
 				e.printStackTrace();
 			}
 		}

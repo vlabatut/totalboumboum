@@ -208,7 +208,7 @@ public class SearchNode {
 		try {
 			node = new SearchNode(mu);
 		} catch (StopRequestException e) {
-			// TODO Auto-generated catch block
+			//  Auto-generated catch block
 			e.printStackTrace();
 		}
 		node = (SearchNode) object;

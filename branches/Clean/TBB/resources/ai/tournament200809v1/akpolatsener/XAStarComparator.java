@@ -27,7 +27,6 @@ public class XAStarComparator implements Comparator<XTile>
 					result = -1;
 			}
 		} catch (StopRequestException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 
