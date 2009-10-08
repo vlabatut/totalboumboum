@@ -148,7 +148,7 @@ public class ExplosionManager
 							if(!fake)
 							{	if(blocked[i])
 								{	fire.consumeTile(tempTile);
-									blocked[i] = true;
+									//blocked[i] = true;
 								}
 								else
 								{	goOn = true;
@@ -159,7 +159,7 @@ public class ExplosionManager
 								}
 							}
 							else
-							{	goOn = !blocked[i];
+							{	goOn = goOn || !blocked[i];
 							}
 							result.add(tempTile);
 						}
