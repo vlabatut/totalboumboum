@@ -35,10 +35,14 @@ import fr.free.totalboumboum.ai.adapter200910.path.astar.heuristic.HeuristicCalc
 /**
  * Implémentation de l'algorithme A* (http://fr.wikipedia.org/wiki/Algorithme_A*) adapté au
  * cas où on a le choix entre plusieurs objectifs alternatifs. S'il y a un seul objectif, 
- * cette implémentation correspond à un A* classique.</br>
+ * cette implémentation correspond à peu près à un A* classique. Il y a quand même une modification,
+ * puisque les noeuds d'état apparaissant déjà dans des noeuds de recherche ancêtre sont
+ * écartés lorsqu'un noeud de recherch est développé. En d'autres termes, l'algorithme évite
+ * de chercher des chemins qui passent plusieurs fois par la même case, ce qui l'empêche de
+ * boucler à l'infini.</br>
  * 
- * Cet algorithme permet (entre autres) de trouver le chemin le plus court entre deux cases,
- * en considérant les obstacles. Il a besoin de trois paramètres :
+ * Cette implémentation trouved donc le chemin le plus court entre deux cases,
+ * en considérant les obstacles. Elle a besoin de trois paramètres :
  * 		- le personnage qui doit effectuer le trajet entre les deux cases
  * 		- une fonction de coût, qui permet de définir combien coute une action (ici : le fait de passer d'une case à l'autre)
  * 		- une fonction heuristique, qui permet d'estimer le cout du chemin restant à parcourir</br>
@@ -84,8 +88,10 @@ public class Astar
 	 * limite l'arbre de recherche à une hauteur de maxHeight,
 	 * i.e. quand le noeud courant a une profondeur correspondant à maxHeight,
 	 * l'algorithme se termine et ne renvoie pas de solution (échec).
-	 * (sinon l'arbre peut avoir une hauteur infinie, et l'algorithme
-	 * peut ne jamais s'arrêter)
+	 * Dans des cas extrêmes, l'arbre peut avoir une hauteur considérable,
+	 * ce qui peut provoquer un dépassement mémoire. Ce paramètre permet d'éviter
+	 * de déclencher ce type d'exception. A noter qu'un paramètre non-configurable
+	 * limite déjà le nombre de noeuds dans l'arbre.
 	 * 
 	 * @param maxHeight
 	 */
@@ -97,8 +103,10 @@ public class Astar
 	 * limite l'arbre de recherche à un certain cout maxCost, i.e. dès que le
 	 * noeud courant atteint ce cout maximal, l'algorithme se termine et ne
 	 * renvoie pas de solution (échec)
-	 * (ceci permet d'éviter que l'algorithme ne s'arrête jamais quand il n'y
-	 * a pas de solution)
+	 * Dans des cas extrêmes, l'arbre peut avoir une hauteur considérable,
+	 * ce qui peut provoquer un dépassement mémoire. Ce paramètre permet d'éviter
+	 * de déclencher ce type d'exception. A noter qu'un paramètre non-configurable
+	 * limite déjà le nombre de noeuds dans l'arbre.
 	 * 
 	 * @param maxCost	le cout maximal que le noeud courant peut atteindre
 	 */

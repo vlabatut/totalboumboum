@@ -177,6 +177,20 @@ public class AstarNode implements Comparable<AstarNode>
 	{	return parent;	
 	}
 	
+	/**
+	 * détermine si la case passée en paramètre a déjà été traitée,
+	 * i.e. si elle apparait dans les noeuds de recherche ancêtres
+	 * 
+	 * @param tile	case à tester
+	 * @return	vrai si la case a déjà été traitée
+	 */
+	private boolean hasBeenExplored(AiTile tile)
+	{	boolean result = this.tile==tile;
+		if(parent!=null && !result)
+			result = parent.hasBeenExplored(tile);
+		return result;
+	}
+	
     /////////////////////////////////////////////////////////////////
 	// CHILDREN			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
@@ -204,7 +218,7 @@ public class AstarNode implements Comparable<AstarNode>
 	{	children = new ArrayList<AstarNode>();
 		for(Direction direction: Direction.getPrimaryValues())
 		{	AiTile neighbor = tile.getNeighbor(direction);
-			if(neighbor.isCrossableBy(hero))
+			if(neighbor.isCrossableBy(hero) && !hasBeenExplored(neighbor))
 			{	AstarNode node = new AstarNode(neighbor,this);
 				children.add(node);			
 			}
