@@ -101,8 +101,10 @@ public class SafetyManager
 		// on initialise la matrice : toutes les cases sont sûres
 		for(int line=0;line<zone.getHeigh();line++)
 		{	ai.checkInterruption(); //APPEL OBLIGATOIRE
+			
 			for(int col=0;col<zone.getWidth();col++)
 			{	ai.checkInterruption(); //APPEL OBLIGATOIRE
+				
 				matrix[line][col] = SAFE;			
 			}
 		}
@@ -112,8 +114,10 @@ public class SafetyManager
 		if(!ownHero.hasThroughFires())
 		{	for(int line=0;line<zone.getHeigh();line++)
 			{	ai.checkInterruption(); //APPEL OBLIGATOIRE
+				
 				for(int col=0;col<zone.getWidth();col++)
 				{	ai.checkInterruption(); //APPEL OBLIGATOIRE
+					
 					AiTile tile = zone.getTile(line, col);
 					Collection<AiFire> fires = tile.getFires();
 					Collection<AiBomb> bombs = tile.getBombs();
@@ -142,8 +146,10 @@ public class SafetyManager
 		{	System.out.println(">>>>>>>>>> SAFETY MATRIX <<<<<<<<<<");
 			for(int line=0;line<zone.getHeigh();line++)
 			{	ai.checkInterruption(); //APPEL OBLIGATOIRE
+				
 				for(int col=0;col<zone.getWidth();col++)
 				{	ai.checkInterruption(); //APPEL OBLIGATOIRE
+					
 					if(matrix[line][col]==SAFE)
 						System.out.printf("\tSAFE");
 					else
@@ -181,6 +187,7 @@ public class SafetyManager
 			// bombs
 			for(AiTile tile: tempBlast)
 			{	ai.checkInterruption(); //APPEL OBLIGATOIRE
+				
 				Collection<AiBomb> bList = tile.getBombs();
 				if(bList.size()>0)
 				{	AiBomb b = bList.iterator().next();
@@ -209,6 +216,7 @@ public class SafetyManager
 			double value = SAFE;
 			for(AiBomb b: bombs)
 			{	ai.checkInterruption(); //APPEL OBLIGATOIRE
+				
 				// calcul du temps restant théoriquement avant l'explosion
 				double time = b.getNormalDuration() - b.getTime();
 				// màj de value
@@ -219,6 +227,7 @@ public class SafetyManager
 			// on met à jour toutes les cases situées à portée
 			for(AiTile t: blast)
 			{	ai.checkInterruption(); //APPEL OBLIGATOIRE
+				
 				int l = t.getLine();
 				int c = t.getCol();
 				// on modifie seulement si la case n'a pas déjà un niveau de sécurité inférieur
@@ -264,8 +273,10 @@ public class SafetyManager
 		ArrayList<AiTile> result = new ArrayList<AiTile>();
 		for(int line=0;line<zone.getHeigh();line++)
 		{	ai.checkInterruption(); //APPEL OBLIGATOIRE
+			
 			for(int col=0;col<zone.getWidth();col++)
 			{	ai.checkInterruption(); //APPEL OBLIGATOIRE
+				
 				AiTile tile = zone.getTile(line,col);
 				if(isSafe(tile))
 					result.add(tile);
@@ -303,8 +314,10 @@ public class SafetyManager
 		// couleurs des cases
 		for(int line=0;line<zone.getHeigh();line++)
 		{	ai.checkInterruption(); //APPEL OBLIGATOIRE
+			
 			for(int col=0;col<zone.getWidth();col++)
 			{	ai.checkInterruption(); //APPEL OBLIGATOIRE
+				
 				Color color = null;			
 				if(matrix[line][col]==0)
 					color = Color.YELLOW;
@@ -323,8 +336,10 @@ public class SafetyManager
 		nf.setMaximumFractionDigits(0);
 		for(int line=0;line<zone.getHeigh();line++)
 		{	ai.checkInterruption(); //APPEL OBLIGATOIRE
+			
 			for(int col=0;col<zone.getWidth();col++)
 			{	ai.checkInterruption(); //APPEL OBLIGATOIRE
+				
 				String text = null;			
 				if(matrix[line][col]==SAFE)
 					text = "\u221E";

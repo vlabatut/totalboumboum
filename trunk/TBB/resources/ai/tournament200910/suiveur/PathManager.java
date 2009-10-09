@@ -216,6 +216,7 @@ public class PathManager
 		AiTile currentTile = ai.getCurrentTile();
 		while(!path.isEmpty() && path.getTile(0)!=currentTile)
 		{	ai.checkInterruption(); //APPEL OBLIGATOIRE
+			
 			path.removeTile(0);
 		}
 	}
@@ -264,6 +265,7 @@ public class PathManager
 		Iterator<AiTile> it = path.getTiles().iterator();
 		while(it.hasNext() && result)
 		{	ai.checkInterruption(); //APPEL OBLIGATOIRE
+			
 			AiTile tile = it.next();
 			result = tile.isCrossableBy(ai.getOwnHero()) && ai.isSafe(tile);
 //			if(!result)

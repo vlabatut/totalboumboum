@@ -1005,6 +1005,7 @@ public class Launcher
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 	/**
-	 * - réinitialiser les valeurs des compteurs de logstats
+	 * - il faut pouvoir être capable de déterminer si un perso est malade, voire contagieux
+	 * - infos sup sur les adversaires : propriétés des bombes qu'ils peuvent poser, pour pouvoir calculer les blasts
 	 */
 }
