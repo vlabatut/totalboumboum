@@ -51,7 +51,7 @@ public class EscapeManager
 	 */
 	public EscapeManager(Suiveur ai) throws StopRequestException
 	{	ai.checkInterruption(); //APPEL OBLIGATOIRE
-	
+		
 		this.ai = ai;
 		zone = ai.getZone();
 		
@@ -132,6 +132,7 @@ public class EscapeManager
 		AiTile currentTile = ai.getCurrentTile();
 		while(!path.isEmpty() && path.getTile(0)!=currentTile)
 		{	ai.checkInterruption(); //APPEL OBLIGATOIRE
+			
 			path.removeTile(0);
 		}
 	}
@@ -153,6 +154,7 @@ public class EscapeManager
 		Iterator<AiTile> it = path.getTiles().iterator();
 		while(it.hasNext() && result)
 		{	ai.checkInterruption(); //APPEL OBLIGATOIRE
+			
 			AiTile tile = it.next();
 			result = tile.isCrossableBy(ai.getOwnHero());			
 		}
@@ -177,8 +179,10 @@ public class EscapeManager
 		double safetyMatrix[][] = ai.getSafetyManager().getMatrix();
 		for(int line=0;line<zone.getHeigh();line++)
 		{	ai.checkInterruption(); //APPEL OBLIGATOIRE
+			
 			for(int col=0;col<zone.getWidth();col++)
 			{	ai.checkInterruption(); //APPEL OBLIGATOIRE
+				
 				double cost = -safetyMatrix[line][col];
 				costCalculator.setCost(line,col,cost);
 			}
