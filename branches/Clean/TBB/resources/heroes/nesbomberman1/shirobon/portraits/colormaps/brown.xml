@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<colormap xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+		xsi:noNamespaceSchemaLocation="../../../../../schemas/colormap.xsd" >
+	
+	<color index="00" red="000" green="000" blue="000" /> <!-- contours -->
+	<color index="01" red="164" green="105" blue="069" /> <!-- corps -->
+	<color index="02" red="199" green="126" blue="198" /> <!-- visage -->
+	<color index="03" red="136" green="072" blue="032" /> <!-- tete -->
+	 
+</colormap>
