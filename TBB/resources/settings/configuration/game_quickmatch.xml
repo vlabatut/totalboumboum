@@ -15,11 +15,11 @@
 	</settings>
 	<players>
 		<player file="1" color="CYAN" controls="1" spritePack="nesbomberman2" spriteFolder="shirobon" />
-		<player file="65" color="INDIGO" controls="2" spritePack="nesbomberman2" spriteFolder="shirobon" />
+		<player file="65" color="INDIGO" controls="2" spritePack="nesbomberman1" spriteFolder="shirobon" />
 		<player file="18" color="ORANGE" controls="3" spritePack="superbomberman5" spriteFolder="assistantpirate" />
 	</players>
 	<levels>
-		<level pack="sbm1Official" folder="story_3_08" />
+		<level pack="nbm1Custom" folder="classic" />
 	</levels>
 </gameQuickmatch>
 
