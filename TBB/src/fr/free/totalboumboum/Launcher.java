@@ -811,6 +811,9 @@ public class Launcher
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	/* TODO
 	 * + beta.014
+	 * - nouvelle version de shirobon issu de NBM1
+	 * - nouvelle instance : NES Bomberman 1
+	 * - 2 nouveaux niveaux pour illustrer l'instance NBM1
 	 * - 
 	 */
 
@@ -1007,6 +1010,8 @@ public class Launcher
 	/**
 	 * - il faut pouvoir être capable de déterminer si un perso est malade, voire contagieux
 	 * - infos sup sur les adversaires : propriétés des bombes qu'ils peuvent poser, pour pouvoir calculer les blasts
+	 * 
+	 * - dans NBM1, on prend l'item quand on passe au centre de l'item, pas quand on entre simplement sur la case
 	 * 
 	 */
 }
