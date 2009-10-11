@@ -870,12 +870,18 @@ public class Level
 				matrix[line][col].drawSelection(g,true,true,false);
 		
 		// the rest line by line
+		// first: ground shadows from the last line (for graphical reasons)
+		for(int col=0;col<globalWidth;col++)
+			matrix[globalHeight-1][col].drawSelection(g,false,true,true);
+		// then the rest
 		for(int line=0;line<globalHeight;line++)
 		{	// shadows from the non-flat on-ground sprites
-			for(int col=0;col<globalWidth;col++)
-				matrix[line][col].drawSelection(g,false,true,true);
+			if(line<globalHeight-1)
+			{	for(int col=0;col<globalWidth;col++)
+					matrix[line][col].drawSelection(g,false,true,true);
+			}
 			/*
-			 * the non-flat on-ground sprites themselves
+			 * the non-flat on-ground sprites themselves:
 			 * each different kind is processed separately for graphical reasons
 			 */
 			// floor

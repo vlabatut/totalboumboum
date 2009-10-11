@@ -737,6 +737,7 @@ public class Launcher
 	 * TODO
 	 *	l'ombre des blocs de la dernière ligne est portée sur les blocs de la première ligne
 	 *	c'est normal. pour l'éviter, il faudrait traiter un cas assez particulier... à voir
+	 *	>> tentative de résolution mise en place, à voir
 	 */
 	
 	/*  
