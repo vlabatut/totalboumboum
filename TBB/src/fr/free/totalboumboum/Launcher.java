@@ -1001,7 +1001,6 @@ public class Launcher
 	/**
 	 * - possibilité de définir des items indestructibles (sont juste déplacés)
 	 * - blocs laissant passer le feu mais pas les joueurs, comme dans le niveau story/custom de SBM1
-	 * - parler des nouveaux outils de dev de l'IA : API améliorée, visualisation des couleurs, texte, et chemin
 	 */
 	
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
