@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<controls
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+	xsi:noNamespaceSchemaLocation="../../schemas/controls.xsd">
+	
+	<!-- directions -->
+	<event name="DOWN" autofire="true">
+		<on key="VK_DOWN" />
+		<off key="VK_DOWN" />
+	</event>
+	<event name="LEFT" autofire="true">
+		<on key="VK_LEFT" />
+		<off key="VK_LEFT" />
+	</event>
+	<event name="RIGHT" autofire="true">
+		<on key="VK_RIGHT" />
+		<off key="VK_RIGHT" />
+	</event>
+	<event name="UP" autofire="true">
+		<on key="VK_UP" />
+		<off key="VK_UP" />
+	</event>
+	
+	<!-- actions -->
+	<event name="DROPBOMB" autofire="true">
+		<on key="VK_Q" />
+		<off key="VK_Q" />
+	</event>
+<!-- 	
+	<event name="JUMP" autofire="true">
+		<on key="VK_J" />
+		<off key="VK_J" />
+	</event>
+ -->
+ 	<event name="PUNCHBOMB" autofire="false">
+		<on key="VK_X" />
+		<off key="VK_X" />
+	</event>
+<!-- 	
+	<event name="TRIGGERBOMB" autofire="false">
+		<on key="VK_S" />
+		<off key="VK_S" />
+	</event>
+ -->
+	
+</controls>

@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<colormap xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+		xsi:noNamespaceSchemaLocation="../../../../../../schemas/colormap.xsd" >
+		
+ 	<color index="00" red="252" green="252" blue="252" /> <!-- reflet -->
+	<color index="01" red="145" green="122" blue="166" /> <!-- clair -->
+	<color index="02" red="158" green="089" blue="219" /> <!-- foncé -->
+	
+</colormap>

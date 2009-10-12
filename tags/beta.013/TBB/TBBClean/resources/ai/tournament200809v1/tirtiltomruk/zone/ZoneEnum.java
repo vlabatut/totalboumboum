@@ -1,0 +1,5 @@
+package tournament200809v1.tirtiltomruk.zone;
+
+public enum ZoneEnum {
+	CARACTERE,RIVAL,BOMBE,FEUPOSSIBLE,FEU,BONUSFEU,BONUSBOMBE,BLOCDEST,BLOCINDEST,LIBRE
+}

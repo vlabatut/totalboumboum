@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<floorset 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+		xsi:noNamespaceSchemaLocation="../../../../../schemas/floorset.xsd" >
+
+	<abstract-floors>
+		<floor name="common" folder="_common" />
+	</abstract-floors>
+
+	<concrete-floors>
+		<floor name="regular" folder="regular" />
+	</concrete-floors>
+
+</floorset>
