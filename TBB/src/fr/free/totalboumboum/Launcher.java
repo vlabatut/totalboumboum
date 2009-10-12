@@ -1025,5 +1025,7 @@ public class Launcher
 	 * - dans la fonction de cout, permettre de définir le cout pour passer d'une case à une autre (est-ce nécessaire?)
 	 * 	 comme ça on peut tenir compte du temps restant avant que la bombe explose
 	 * 	 car on est tjrs supposé arriver de la case voisine, donc a priori le temps nécessaire est tjrs le même
+	 *   >> possibilité de définir sa propre fonction successeur ? comme ça on peut interdire les cases dont le cout est trop élevé?
+	 *   >> en fait non, suffit de définir une fonction de cout qui compare le temps restant dans la case et le cout du noeud courant. donc faut donner un accès au noeud de recherche demandant le développement
 	 */
 }
