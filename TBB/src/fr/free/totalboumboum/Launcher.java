@@ -1008,8 +1008,10 @@ public class Launcher
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 	/**
-	 * - il faut pouvoir être capable de déterminer si un perso est malade, voire contagieux
-	 * - infos sup sur les adversaires : propriétés des bombes qu'ils peuvent poser, pour pouvoir calculer les blasts
+	 * - percepts à rajouter
+	 * 		- il faut pouvoir être capable de déterminer si un perso est malade, voire contagieux
+	 * 		- infos sup sur les adversaires : propriétés des bombes qu'ils peuvent poser, pour pouvoir calculer les blasts
+	 * 		- il faut savoir quels items sont distribués dans le niveau, et les autres infos accessibles aux joueurs comme le temps de la partie, etc
 	 * 
 	 * - dans NBM1, on prend l'item quand on passe au centre de l'item, pas quand on entre simplement sur la case
 	 * - prochaines étapes :
@@ -1019,5 +1021,9 @@ public class Launcher
 	 * 		- réseau
 	 * 		- sortir de bêta
 	 * 
+	 * 
+	 * - dans la fonction de cout, permettre de définir le cout pour passer d'une case à une autre (est-ce nécessaire?)
+	 * 	 comme ça on peut tenir compte du temps restant avant que la bombe explose
+	 * 	 car on est tjrs supposé arriver de la case voisine, donc a priori le temps nécessaire est tjrs le même
 	 */
 }
