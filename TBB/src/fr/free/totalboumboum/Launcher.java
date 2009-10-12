@@ -1013,6 +1013,12 @@ public class Launcher
 	 * - infos sup sur les adversaires : propriétés des bombes qu'ils peuvent poser, pour pouvoir calculer les blasts
 	 * 
 	 * - dans NBM1, on prend l'item quand on passe au centre de l'item, pas quand on entre simplement sur la case
+	 * - prochaines étapes :
+	 * 		- stats
+	 * 		- sons
+	 * 		- BM'83
+	 * 		- réseau
+	 * 		- sortir de bêta
 	 * 
 	 */
 }
