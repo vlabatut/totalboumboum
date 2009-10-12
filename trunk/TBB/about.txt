@@ -33,6 +33,10 @@ This product includes softwares developed by:
   	JDOM library
   	Copyright 2000-2007 JDOM Project
   	http://www.jdom.org
+  + JRS - Java Ranking Service
+  	JRES library
+  	Copyright 2005-2006 JRS project
+  	https://jrs.dev.java.net/
   + Various AI students from Galatasaray University:
     Most classes in resources/ai (see classes for details)
     Copyright 2007-2009 their respective authors
