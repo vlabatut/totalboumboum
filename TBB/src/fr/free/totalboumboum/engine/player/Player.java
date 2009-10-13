@@ -33,7 +33,6 @@ import org.xml.sax.SAXException;
 import fr.free.totalboumboum.ai.AbstractAiManager;
 import fr.free.totalboumboum.ai.AiLoader;
 import fr.free.totalboumboum.configuration.Configuration;
-import fr.free.totalboumboum.configuration.RoundVariables;
 import fr.free.totalboumboum.configuration.controls.ControlSettings;
 import fr.free.totalboumboum.configuration.profile.PredefinedColor;
 import fr.free.totalboumboum.configuration.profile.Profile;
@@ -43,6 +42,7 @@ import fr.free.totalboumboum.engine.content.sprite.Sprite;
 import fr.free.totalboumboum.engine.content.sprite.hero.HeroFactory;
 import fr.free.totalboumboum.engine.content.sprite.hero.HeroFactoryLoader;
 import fr.free.totalboumboum.engine.control.PlayerControl;
+import fr.free.totalboumboum.game.round.RoundVariables;
 import fr.free.totalboumboum.tools.FileTools;
 
 public class Player

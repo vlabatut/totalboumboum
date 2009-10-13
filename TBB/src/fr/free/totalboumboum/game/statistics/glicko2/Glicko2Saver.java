@@ -31,7 +31,7 @@ import jrs.RankingService;
 
 import fr.free.totalboumboum.tools.FileTools;
 
-public class RanksSaver
+public class Glicko2Saver
 {
 	public static void saveStatistics(RankingService rankingService) throws IOException
 	{	// init files

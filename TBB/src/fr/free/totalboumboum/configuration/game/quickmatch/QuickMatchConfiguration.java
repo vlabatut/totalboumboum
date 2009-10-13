@@ -23,8 +23,8 @@ package fr.free.totalboumboum.configuration.game.quickmatch;
 
 import java.util.ArrayList;
 
-import fr.free.totalboumboum.configuration.GameConstants;
 import fr.free.totalboumboum.configuration.profile.ProfilesSelection;
+import fr.free.totalboumboum.game.GameConstants;
 
 public class QuickMatchConfiguration
 {

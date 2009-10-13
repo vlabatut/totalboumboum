@@ -34,11 +34,11 @@ import java.util.concurrent.ThreadFactory;
 
 
 
-import fr.free.totalboumboum.configuration.RoundVariables;
 import fr.free.totalboumboum.engine.container.level.Level;
 import fr.free.totalboumboum.engine.container.tile.Tile;
 import fr.free.totalboumboum.engine.content.feature.event.ControlEvent;
 import fr.free.totalboumboum.engine.player.Player;
+import fr.free.totalboumboum.game.round.RoundVariables;
 
 /**
  * 

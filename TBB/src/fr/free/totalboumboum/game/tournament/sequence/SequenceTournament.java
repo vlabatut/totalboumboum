@@ -30,8 +30,8 @@ import java.util.Random;
 import java.util.Set;
 import java.util.TreeSet;
 
-import fr.free.totalboumboum.configuration.GameConstants;
 import fr.free.totalboumboum.configuration.profile.Profile;
+import fr.free.totalboumboum.game.GameConstants;
 import fr.free.totalboumboum.game.limit.Limits;
 import fr.free.totalboumboum.game.limit.TournamentLimit;
 import fr.free.totalboumboum.game.match.Match;

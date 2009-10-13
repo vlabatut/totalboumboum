@@ -1,4 +1,4 @@
-package fr.free.totalboumboum;
+package fr.free.totalboumboum.game.statistics.glicko2;
 
 import java.io.BufferedReader;
 import java.io.FileReader;

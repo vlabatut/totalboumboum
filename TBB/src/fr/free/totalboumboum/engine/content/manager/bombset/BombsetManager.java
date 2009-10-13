@@ -24,7 +24,6 @@ package fr.free.totalboumboum.engine.content.manager.bombset;
 import java.util.Iterator;
 import java.util.LinkedList;
 
-import fr.free.totalboumboum.configuration.RoundVariables;
 import fr.free.totalboumboum.engine.container.bombset.Bombset;
 import fr.free.totalboumboum.engine.content.feature.Direction;
 import fr.free.totalboumboum.engine.content.feature.ability.ActionAbility;
@@ -40,6 +39,7 @@ import fr.free.totalboumboum.engine.content.feature.event.ControlEvent;
 import fr.free.totalboumboum.engine.content.feature.gesture.GestureName;
 import fr.free.totalboumboum.engine.content.sprite.Sprite;
 import fr.free.totalboumboum.engine.content.sprite.bomb.Bomb;
+import fr.free.totalboumboum.game.round.RoundVariables;
 import fr.free.totalboumboum.game.statistics.raw.StatisticAction;
 import fr.free.totalboumboum.game.statistics.raw.StatisticEvent;
 

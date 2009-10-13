@@ -28,7 +28,6 @@ import java.util.LinkedList;
 import java.util.List;
 
 import fr.free.totalboumboum.configuration.Configuration;
-import fr.free.totalboumboum.configuration.RoundVariables;
 import fr.free.totalboumboum.configuration.controls.ControlSettings;
 import fr.free.totalboumboum.configuration.profile.PredefinedColor;
 import fr.free.totalboumboum.engine.container.tile.Tile;
@@ -66,6 +65,7 @@ import fr.free.totalboumboum.engine.content.sprite.bomb.Bomb;
 import fr.free.totalboumboum.engine.content.sprite.item.Item;
 import fr.free.totalboumboum.engine.control.ControlCode;
 import fr.free.totalboumboum.engine.player.Player;
+import fr.free.totalboumboum.game.round.RoundVariables;
 import fr.free.totalboumboum.game.statistics.raw.StatisticEvent;
 
 /* 

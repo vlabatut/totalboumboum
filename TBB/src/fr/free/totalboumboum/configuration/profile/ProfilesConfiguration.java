@@ -26,7 +26,7 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map.Entry;
 
-import fr.free.totalboumboum.configuration.GameConstants;
+import fr.free.totalboumboum.game.GameConstants;
 
 public class ProfilesConfiguration
 {

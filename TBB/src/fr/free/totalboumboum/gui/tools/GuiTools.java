@@ -45,7 +45,7 @@ import javax.swing.JLabel;
 import javax.swing.JToggleButton;
 
 import fr.free.totalboumboum.configuration.Configuration;
-import fr.free.totalboumboum.configuration.GameConstants;
+import fr.free.totalboumboum.game.GameConstants;
 import fr.free.totalboumboum.gui.common.structure.ButtonAware;
 import fr.free.totalboumboum.gui.data.configuration.GuiConfiguration;
 import fr.free.totalboumboum.tools.ImageTools;

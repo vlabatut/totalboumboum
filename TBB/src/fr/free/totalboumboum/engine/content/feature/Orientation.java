@@ -6,9 +6,9 @@ import java.util.Locale;
 import org.jdom.Attribute;
 import org.jdom.Element;
 
-import fr.free.totalboumboum.configuration.RoundVariables;
 import fr.free.totalboumboum.engine.container.tile.Tile;
 import fr.free.totalboumboum.engine.content.sprite.Sprite;
+import fr.free.totalboumboum.game.round.RoundVariables;
 import fr.free.totalboumboum.tools.XmlTools;
 
 /*
