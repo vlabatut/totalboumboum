@@ -36,8 +36,8 @@ import fr.free.totalboumboum.game.limit.Limits;
 import fr.free.totalboumboum.game.limit.TournamentLimit;
 import fr.free.totalboumboum.game.match.Match;
 import fr.free.totalboumboum.game.rank.Ranks;
-import fr.free.totalboumboum.game.statistics.StatisticMatch;
-import fr.free.totalboumboum.game.statistics.StatisticTournament;
+import fr.free.totalboumboum.game.statistics.raw.StatisticMatch;
+import fr.free.totalboumboum.game.statistics.raw.StatisticTournament;
 import fr.free.totalboumboum.game.tournament.AbstractTournament;
 
 public class SequenceTournament extends AbstractTournament

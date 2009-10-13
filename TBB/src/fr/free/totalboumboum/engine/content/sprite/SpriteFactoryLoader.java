@@ -32,7 +32,7 @@ import javax.xml.parsers.ParserConfigurationException;
 import org.jdom.Element;
 import org.xml.sax.SAXException;
 
-import fr.free.totalboumboum.configuration.GameVariables;
+import fr.free.totalboumboum.configuration.RoundVariables;
 import fr.free.totalboumboum.engine.content.feature.Role;
 import fr.free.totalboumboum.engine.content.feature.ability.AbstractAbility;
 import fr.free.totalboumboum.engine.content.feature.action.ActionName;
@@ -271,7 +271,7 @@ public abstract class SpriteFactoryLoader
 		Element elt = root.getChild(XmlTools.ELT_EXPLOSION);
 		if(elt!=null)
 		{	String name = elt.getAttribute(XmlTools.ATT_NAME).getValue().trim();
-			String folder = GameVariables.instancePath+File.separator+FileTools.FOLDER_EXPLOSIONS;
+			String folder = RoundVariables.instancePath+File.separator+FileTools.FOLDER_EXPLOSIONS;
 			folder = folder + File.separator+name;
 			explosion = ExplosionLoader.loadExplosion(folder);
 		}

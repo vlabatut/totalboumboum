@@ -1013,6 +1013,7 @@ public class Launcher
 	 * 		- il faut pouvoir être capable de déterminer si un perso est malade, voire contagieux
 	 * 		- infos sup sur les adversaires : propriétés des bombes qu'ils peuvent poser, pour pouvoir calculer les blasts
 	 * 		- il faut savoir quels items sont distribués dans le niveau, et les autres infos accessibles aux joueurs comme le temps de la partie, etc
+	 * 		- créer un log des commandes (désactivable)
 	 * 
 	 * - dans NBM1, on prend l'item quand on passe au centre de l'item, pas quand on entre simplement sur la case
 	 * - prochaines étapes :

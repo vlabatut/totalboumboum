@@ -34,7 +34,7 @@ import java.util.concurrent.ThreadFactory;
 
 
 
-import fr.free.totalboumboum.configuration.GameVariables;
+import fr.free.totalboumboum.configuration.RoundVariables;
 import fr.free.totalboumboum.engine.container.level.Level;
 import fr.free.totalboumboum.engine.container.tile.Tile;
 import fr.free.totalboumboum.engine.content.feature.event.ControlEvent;
@@ -216,7 +216,7 @@ public abstract class AbstractAiManager<V>
 	{	// input
     	this.player = player;
 		// output
-		Level level = GameVariables.level;
+		Level level = RoundVariables.level;
 		int height = level.getGlobalHeight();
 		int width = level.getGlobalWidth();
 		tileColors = new Color[height][width];

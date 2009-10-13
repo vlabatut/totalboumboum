@@ -28,8 +28,8 @@ import java.util.Set;
 import fr.free.totalboumboum.configuration.profile.Profile;
 import fr.free.totalboumboum.game.match.Match;
 import fr.free.totalboumboum.game.rank.Ranks;
-import fr.free.totalboumboum.game.statistics.StatisticMatch;
-import fr.free.totalboumboum.game.statistics.StatisticTournament;
+import fr.free.totalboumboum.game.statistics.raw.StatisticMatch;
+import fr.free.totalboumboum.game.statistics.raw.StatisticTournament;
 import fr.free.totalboumboum.game.tournament.AbstractTournament;
 
 public class SingleTournament extends AbstractTournament

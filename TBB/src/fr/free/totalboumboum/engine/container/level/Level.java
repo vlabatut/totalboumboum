@@ -30,7 +30,7 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
-import fr.free.totalboumboum.configuration.GameVariables;
+import fr.free.totalboumboum.configuration.RoundVariables;
 import fr.free.totalboumboum.engine.container.bombset.Bombset;
 import fr.free.totalboumboum.engine.container.fireset.FiresetMap;
 import fr.free.totalboumboum.engine.container.itemset.Itemset;
@@ -91,8 +91,8 @@ public class Level
 		this.globalHeight = globalHeight;
 		this.pixelLeftX = globalLeftX;
 		this.pixelTopY = globalUpY;
-		this.pixelWidth = globalWidth*GameVariables.scaledTileDimension;
-		this.pixelHeight = globalHeight*GameVariables.scaledTileDimension;
+		this.pixelWidth = globalWidth*RoundVariables.scaledTileDimension;
+		this.pixelHeight = globalHeight*RoundVariables.scaledTileDimension;
 	}
 	public double getGlobalLeftX()
 	{	return pixelLeftX;
@@ -548,8 +548,8 @@ public class Level
 	 * directions corresponding to the shortest distances 
 	 */
 	private Direction getCompositeFromLocations(double x1, double y1, double x2, double y2)
-	{	double dx = GameVariables.level.getDeltaX(x1,x2);
-		double dy = GameVariables.level.getDeltaY(y1,y2);
+	{	double dx = RoundVariables.level.getDeltaX(x1,x2);
+		double dy = RoundVariables.level.getDeltaY(y1,y2);
 		Direction result = Direction.getCompositeFromRelativeDouble(dx,dy);
 		return result;
 	}
@@ -666,8 +666,8 @@ public class Level
 		y = CalculusTools.round(y);
 		double difX = x-pixelLeftX;
 		double difY = y-pixelTopY;
-		double rX = difX/GameVariables.scaledTileDimension;
-		double rY = difY/GameVariables.scaledTileDimension;
+		double rX = difX/RoundVariables.scaledTileDimension;
+		double rY = difY/RoundVariables.scaledTileDimension;
 		int rdX = (int)rX;//(int)Math.round(rX);
 		int rdY = (int)rY;//(int)Math.round(rY);
 		int c = rdX%globalWidth;
@@ -939,7 +939,7 @@ public class Level
 			for(int col=0;col<globalWidth;col++)
 			{	Tile temp = matrix[line][col];
 				g.drawLine((int)temp.getPosX(), (int)temp.getPosY(), (int)temp.getPosX(), (int)temp.getPosY());
-				g.drawRect((int)(temp.getPosX()-GameVariables.scaledTileDimension/2), (int)(temp.getPosY()-GameVariables.scaledTileDimension/2), (int)GameVariables.scaledTileDimension, (int)GameVariables.scaledTileDimension);
+				g.drawRect((int)(temp.getPosX()-RoundVariables.scaledTileDimension/2), (int)(temp.getPosY()-RoundVariables.scaledTileDimension/2), (int)RoundVariables.scaledTileDimension, (int)RoundVariables.scaledTileDimension);
 			}
 	}
 
@@ -1032,7 +1032,7 @@ public class Level
 
 	public void updateMessageDisplayer(int index)
 	{	if(index>=0)
-			messageDisplayer = GameVariables.messageDisplayers[index];
+			messageDisplayer = RoundVariables.messageDisplayers[index];
 		else
 			messageDisplayer = null;
 	}

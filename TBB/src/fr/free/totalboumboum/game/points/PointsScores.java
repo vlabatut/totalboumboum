@@ -21,9 +21,9 @@ package fr.free.totalboumboum.game.points;
  * 
  */
 
-import fr.free.totalboumboum.game.statistics.Score;
-import fr.free.totalboumboum.game.statistics.StatisticBase;
-import fr.free.totalboumboum.game.statistics.StatisticHolder;
+import fr.free.totalboumboum.game.statistics.raw.Score;
+import fr.free.totalboumboum.game.statistics.raw.StatisticBase;
+import fr.free.totalboumboum.game.statistics.raw.StatisticHolder;
 
 /**
  * This PointsProcessor sends back one score as a result

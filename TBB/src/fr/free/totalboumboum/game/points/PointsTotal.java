@@ -21,8 +21,8 @@ package fr.free.totalboumboum.game.points;
  * 
  */
 
-import fr.free.totalboumboum.game.statistics.StatisticBase;
-import fr.free.totalboumboum.game.statistics.StatisticHolder;
+import fr.free.totalboumboum.game.statistics.raw.StatisticBase;
+import fr.free.totalboumboum.game.statistics.raw.StatisticHolder;
 
 /**
  * This PointsProcessor calculates its result by sending back 

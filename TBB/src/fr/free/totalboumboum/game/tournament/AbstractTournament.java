@@ -33,8 +33,8 @@ import org.xml.sax.SAXException;
 import fr.free.totalboumboum.configuration.profile.Profile;
 import fr.free.totalboumboum.configuration.profile.ProfileLoader;
 import fr.free.totalboumboum.game.match.Match;
-import fr.free.totalboumboum.game.statistics.StatisticHolder;
-import fr.free.totalboumboum.game.statistics.StatisticTournament;
+import fr.free.totalboumboum.game.statistics.raw.StatisticHolder;
+import fr.free.totalboumboum.game.statistics.raw.StatisticTournament;
 
 public abstract class AbstractTournament implements StatisticHolder, Serializable
 {	private static final long serialVersionUID = 1L;

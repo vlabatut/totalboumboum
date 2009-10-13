@@ -24,7 +24,7 @@ package fr.free.totalboumboum.game.limit;
 import java.util.ArrayList;
 
 import fr.free.totalboumboum.game.points.PointsProcessor;
-import fr.free.totalboumboum.game.statistics.StatisticHolder;
+import fr.free.totalboumboum.game.statistics.raw.StatisticHolder;
 
 /**
  * this limit is based on the number of players remaining in a round.

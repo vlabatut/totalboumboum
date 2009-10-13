@@ -38,7 +38,7 @@ import org.jdom.Element;
 import org.xml.sax.SAXException;
 
 import fr.free.totalboumboum.configuration.Configuration;
-import fr.free.totalboumboum.configuration.GameVariables;
+import fr.free.totalboumboum.configuration.RoundVariables;
 import fr.free.totalboumboum.configuration.profile.PredefinedColor;
 import fr.free.totalboumboum.engine.content.feature.Direction;
 import fr.free.totalboumboum.engine.content.feature.ImageShift;
@@ -91,7 +91,7 @@ public class AnimesLoader
 		
 		// bound height
 		double boundHeight = 0;
-		double zoomFactor = GameVariables.zoomFactor;
+		double zoomFactor = RoundVariables.zoomFactor;
 		attribute = root.getAttribute(XmlTools.ATT_BOUND_HEIGHT);
 		if(attribute!=null)
 		{	double temp = Double.parseDouble(attribute.getValue());

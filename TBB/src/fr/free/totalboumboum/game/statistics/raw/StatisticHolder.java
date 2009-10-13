@@ -1,4 +1,4 @@
-package fr.free.totalboumboum.game.statistics;
+package fr.free.totalboumboum.game.statistics.raw;
 
 /*
  * Total Boum Boum

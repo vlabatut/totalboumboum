@@ -33,7 +33,7 @@ import javax.xml.parsers.ParserConfigurationException;
 
 import org.xml.sax.SAXException;
 
-import fr.free.totalboumboum.configuration.GameVariables;
+import fr.free.totalboumboum.configuration.RoundVariables;
 import fr.free.totalboumboum.configuration.profile.Profile;
 import fr.free.totalboumboum.engine.container.level.HollowLevel;
 import fr.free.totalboumboum.engine.loop.Loop;
@@ -42,9 +42,9 @@ import fr.free.totalboumboum.game.limit.Limits;
 import fr.free.totalboumboum.game.limit.RoundLimit;
 import fr.free.totalboumboum.game.match.Match;
 import fr.free.totalboumboum.game.rank.Ranks;
-import fr.free.totalboumboum.game.statistics.StatisticEvent;
-import fr.free.totalboumboum.game.statistics.StatisticHolder;
-import fr.free.totalboumboum.game.statistics.StatisticRound;
+import fr.free.totalboumboum.game.statistics.raw.StatisticEvent;
+import fr.free.totalboumboum.game.statistics.raw.StatisticHolder;
+import fr.free.totalboumboum.game.statistics.raw.StatisticRound;
 
 public class Round implements StatisticHolder, Serializable
 {	private static final long serialVersionUID = 1L;
@@ -115,8 +115,8 @@ public class Round implements StatisticHolder, Serializable
 		panel = null;
 		playersStatus.clear();
 		stats = null;
-		GameVariables.level = null;
-		GameVariables.loop = null;
+		RoundVariables.level = null;
+		RoundVariables.loop = null;
 		// garbage collect
 		Runtime rt = Runtime.getRuntime();
 		rt.gc(); 

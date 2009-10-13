@@ -1,4 +1,4 @@
-package fr.free.totalboumboum.game.statistics;
+package fr.free.totalboumboum.game.statistics.raw;
 
 /*
  * Total Boum Boum
@@ -22,55 +22,60 @@ package fr.free.totalboumboum.game.statistics;
  */
 
 import java.util.ArrayList;
-import fr.free.totalboumboum.game.match.Match;
 
-public class StatisticMatch extends StatisticBase
+import fr.free.totalboumboum.game.round.Round;
+
+public class StatisticRound extends StatisticBase
 {
 	private static final long serialVersionUID = 1L;
 
-	public StatisticMatch(Match match)
-	{	super(match);
+	public StatisticRound(Round round)
+	{	super(round);
+	}
+	
+	/////////////////////////////////////////////////////////////////
+	// STATISTIC EVENTS	/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	private final ArrayList<StatisticEvent> events = new ArrayList<StatisticEvent>();
+	
+	public ArrayList<StatisticEvent> getStatisticEvents()
+	{	return events;
 	}
 
-	/////////////////////////////////////////////////////////////////
-	// STATISTIC ROUNDS		/////////////////////////////////////////
-	/////////////////////////////////////////////////////////////////
-	private final ArrayList<StatisticRound> rounds = new ArrayList<StatisticRound>();
-
-	public ArrayList<StatisticRound> getStatisticRounds()
-	{	return rounds;
-	}
-
-	public void addStatisticRound(StatisticRound round)
-	{	// round stats
-		rounds.add(round);
+	public void addStatisticEvent(StatisticEvent event)
+	{	// events
+		events.add(event);
 		// scores
-		for (Score score : Score.values())
-		{	long[] currentScores = getScores(score);
-			long[] roundScores = round.getScores(score);
-			for(int i=0;i<roundScores.length;i++)
-				currentScores[i] = currentScores[i] + roundScores[i];
-		}
-		// partial points
-		float[] roundPoints = round.getPoints();
-		for(int i=0;i<getTotal().length;i++)
-			getTotal()[i] = getTotal()[i] + roundPoints[i];
-		// time
-		long time = getTotalTime() + round.getTotalTime();
-		setTotalTime(time);
+		for(Score s: Score.values())
+			s.process(this, event);
 	}
 
 	@Override
 	public int getConfrontationCount()
-	{	int result = rounds.size();
+	{	// useless for round
+		int result = 0;
 		return result;
 	}
-	
+
 	@Override
 	public ArrayList<StatisticBase> getConfrontationStats()
 	{	ArrayList<StatisticBase> result = new ArrayList<StatisticBase>();
-		for(StatisticRound r: rounds)
-			result.add(r);
 		return result;
+	}
+	
+	/////////////////////////////////////////////////////////////////
+	// STATISTIC EVENTS	/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	public void updateTime(long time, Round round)
+	{	setTotalTime(time);
+		long[] sc = getScores(Score.TIME);
+		for(int i=0;i<sc.length;i++)
+		{	if(round.getPlayersStatus().get(i))
+				sc[i] = time;
+		}
+	}
+
+	public void finalizeTime(Round round)
+	{	updateTime(getTotalTime()+1, round);
 	}
 }

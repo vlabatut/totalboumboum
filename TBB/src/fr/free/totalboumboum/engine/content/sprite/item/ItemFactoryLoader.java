@@ -32,7 +32,7 @@ import javax.xml.parsers.ParserConfigurationException;
 import org.jdom.Element;
 import org.xml.sax.SAXException;
 
-import fr.free.totalboumboum.configuration.GameVariables;
+import fr.free.totalboumboum.configuration.RoundVariables;
 import fr.free.totalboumboum.engine.container.bombset.Bombset;
 import fr.free.totalboumboum.engine.content.feature.Role;
 import fr.free.totalboumboum.engine.content.feature.ability.AbilityLoader;
@@ -80,7 +80,7 @@ public class ItemFactoryLoader extends SpriteFactoryLoader
 		TrajectoriesLoader.loadTrajectories(folder,gesturePack);
 		
 		// BOMBSET
-		Bombset bombset = GameVariables.level.getBombset();
+		Bombset bombset = RoundVariables.level.getBombset();
 		result.setBombset(bombset);
 
 		// ITEM ABILITIES

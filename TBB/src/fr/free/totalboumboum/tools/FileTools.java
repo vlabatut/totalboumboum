@@ -30,14 +30,15 @@ import java.io.IOException;
 
 public class FileTools
 {
-	public static final String EXTENSION_XML = ".xml";
-	public static final String EXTENSION_DATA = ".data";
+	public static final String EXTENSION_BACKUP = ".backup";
 	public static final String EXTENSION_CLASS = ".class";
+	public static final String EXTENSION_DATA = ".data";
 	public static final String EXTENSION_FONT = ".ttf";
 	public static final String EXTENSION_JAVA = ".java";
 	public static final String EXTENSION_LOG = ".log";
 	public static final String EXTENSION_SCHEMA = ".xsd";
 	public static final String EXTENSION_TEXT = ".txt";
+	public static final String EXTENSION_XML = ".xml";
 	//
 	public static final String FILE_ABILITIES = "abilities";
 	public static final String FILE_ABOUT = "about";
@@ -122,6 +123,7 @@ public class FileTools
 	public static final String FOLDER_FIRES = "fires";
 	public static final String FOLDER_FLOORS = "floors";
 	public static final String FOLDER_GAMES = "games";
+	public static final String FOLDER_GLICKO2 = "glicko2";
 	public static final String FOLDER_GRAPHICS = "graphics";
 	public static final String FOLDER_HEROES = "heroes";
 	public static final String FOLDER_ITEMS = "items";
@@ -138,6 +140,7 @@ public class FileTools
 	public static final String FOLDER_POINTS = "points";
 	public static final String FOLDER_PORTRAITS = "portraits";
 	public static final String FOLDER_PROFILES = "profiles";
+	public static final String FOLDER_RAW = "raw";
 	public static final String FOLDER_REMOTE = "remote";
 	public static final String FOLDER_ROUNDS = "rounds";
 	public static final String FOLDER_RESOURCES = "resources";
@@ -212,6 +215,12 @@ public class FileTools
 
 	public static String getStatisticsPath()
 	{	return getResourcesPath()+File.separator+FOLDER_STATISTICS;		
+	}
+	public static String getRawStatisticsPath()
+	{	return getStatisticsPath()+File.separator+FOLDER_RAW;		
+	}
+	public static String getGlicko2Path()
+	{	return getStatisticsPath()+File.separator+FOLDER_GLICKO2;		
 	}
 
 

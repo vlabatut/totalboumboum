@@ -24,7 +24,7 @@ package fr.free.totalboumboum.engine.content.sprite.hero;
 import java.util.ArrayList;
 import java.util.Iterator;
 
-import fr.free.totalboumboum.configuration.GameVariables;
+import fr.free.totalboumboum.configuration.RoundVariables;
 import fr.free.totalboumboum.engine.container.tile.Tile;
 import fr.free.totalboumboum.engine.content.feature.Direction;
 import fr.free.totalboumboum.engine.content.feature.ability.ActionAbility;
@@ -51,8 +51,8 @@ import fr.free.totalboumboum.engine.content.sprite.bomb.Bomb;
 import fr.free.totalboumboum.engine.content.sprite.fire.Fire;
 import fr.free.totalboumboum.engine.content.sprite.item.Item;
 import fr.free.totalboumboum.engine.player.Player;
-import fr.free.totalboumboum.game.statistics.StatisticAction;
-import fr.free.totalboumboum.game.statistics.StatisticEvent;
+import fr.free.totalboumboum.game.statistics.raw.StatisticAction;
+import fr.free.totalboumboum.game.statistics.raw.StatisticEvent;
 
 public class HeroEventManager extends EventManager
 {	
@@ -231,7 +231,7 @@ public class HeroEventManager extends EventManager
 				|| gesture.equals(GestureName.HIDING) || gesture.equals(GestureName.WAITING))
 			{	// enforcing drop bomb latency
 				StateAbility ablt = sprite.modulateStateAbility(StateAbilityName.HERO_BOMB_DROP_LATENCY);
-				double currentTime = GameVariables.loop.getTotalTime();
+				double currentTime = RoundVariables.loop.getTotalTime();
 				double elapsedTime = currentTime - lastDropTime;
 				if(elapsedTime>ablt.getStrength())
 				{	ablt = sprite.modulateStateAbility(StateAbilityName.HERO_BOMB_CONSTIPATION);

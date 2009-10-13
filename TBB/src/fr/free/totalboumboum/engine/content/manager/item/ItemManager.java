@@ -25,7 +25,7 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.LinkedList;
 
-import fr.free.totalboumboum.configuration.GameVariables;
+import fr.free.totalboumboum.configuration.RoundVariables;
 import fr.free.totalboumboum.engine.container.itemset.Itemset;
 import fr.free.totalboumboum.engine.container.tile.Tile;
 import fr.free.totalboumboum.engine.content.feature.ability.AbstractAbility;
@@ -39,8 +39,8 @@ import fr.free.totalboumboum.engine.content.feature.event.ActionEvent;
 import fr.free.totalboumboum.engine.content.feature.event.EngineEvent;
 import fr.free.totalboumboum.engine.content.sprite.Sprite;
 import fr.free.totalboumboum.engine.content.sprite.item.Item;
-import fr.free.totalboumboum.game.statistics.StatisticAction;
-import fr.free.totalboumboum.game.statistics.StatisticEvent;
+import fr.free.totalboumboum.game.statistics.raw.StatisticAction;
+import fr.free.totalboumboum.game.statistics.raw.StatisticEvent;
 
 public class ItemManager
 {	
@@ -78,7 +78,7 @@ public class ItemManager
 	public void reinitInitialItems()
 	{	// init
 		Tile tile = sprite.getTile();
-		Itemset itemset = GameVariables.level.getItemset();
+		Itemset itemset = RoundVariables.level.getItemset();
 		initialItems.clear();
 		
 		// recreate all initial items

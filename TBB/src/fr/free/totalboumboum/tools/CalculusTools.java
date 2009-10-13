@@ -23,7 +23,7 @@ package fr.free.totalboumboum.tools;
 
 import java.util.ArrayList;
 
-import fr.free.totalboumboum.configuration.GameVariables;
+import fr.free.totalboumboum.configuration.RoundVariables;
 
 public class CalculusTools
 {	
@@ -33,21 +33,21 @@ public class CalculusTools
 	public static boolean isRelativelySmallerThan(double a, double b)
 	{	boolean result = false;
 		double temp = b-a;
-		result = temp>GameVariables.toleranceCoefficient;
+		result = temp>RoundVariables.toleranceCoefficient;
 		return result;
 	}
 
 	public static boolean isRelativelyGreaterThan(double a, double b)
 	{	boolean result = false;
 		double temp = a-b;
-		result = temp>GameVariables.toleranceCoefficient;
+		result = temp>RoundVariables.toleranceCoefficient;
 		return result;
 	}
 	
 	public static boolean isRelativelyEqualTo(double a, double b)
 	{	boolean result = false;
 		double temp = Math.abs(b-a);
-		result = temp<=GameVariables.toleranceCoefficient;
+		result = temp<=RoundVariables.toleranceCoefficient;
 		return result;
 	}
 	

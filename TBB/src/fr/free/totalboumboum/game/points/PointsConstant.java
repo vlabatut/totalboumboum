@@ -23,8 +23,8 @@ package fr.free.totalboumboum.game.points;
 
 import java.text.NumberFormat;
 
-import fr.free.totalboumboum.game.statistics.StatisticBase;
-import fr.free.totalboumboum.game.statistics.StatisticHolder;
+import fr.free.totalboumboum.game.statistics.raw.StatisticBase;
+import fr.free.totalboumboum.game.statistics.raw.StatisticHolder;
 
 /**
  * This PointsProcessor always send the same real value as a result

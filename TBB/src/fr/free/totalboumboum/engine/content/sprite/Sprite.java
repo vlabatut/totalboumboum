@@ -28,7 +28,7 @@ import java.util.LinkedList;
 import java.util.List;
 
 import fr.free.totalboumboum.configuration.Configuration;
-import fr.free.totalboumboum.configuration.GameVariables;
+import fr.free.totalboumboum.configuration.RoundVariables;
 import fr.free.totalboumboum.configuration.controls.ControlSettings;
 import fr.free.totalboumboum.configuration.profile.PredefinedColor;
 import fr.free.totalboumboum.engine.container.tile.Tile;
@@ -66,7 +66,7 @@ import fr.free.totalboumboum.engine.content.sprite.bomb.Bomb;
 import fr.free.totalboumboum.engine.content.sprite.item.Item;
 import fr.free.totalboumboum.engine.control.ControlCode;
 import fr.free.totalboumboum.engine.player.Player;
-import fr.free.totalboumboum.game.statistics.StatisticEvent;
+import fr.free.totalboumboum.game.statistics.raw.StatisticEvent;
 
 /* 
  * Sprite possédant un status :
@@ -204,7 +204,7 @@ public abstract class Sprite
 				setToBeRemovedFromSprite(this.boundToSprite);
 			// s'il n'y a pas de nouveau boundToSprite : on connecte ce sprite à une Tile
 			if(boundToSprite==null)
-				changeTile(GameVariables.level.getTile(getCurrentPosX(), getCurrentPosY()));
+				changeTile(RoundVariables.level.getTile(getCurrentPosX(), getCurrentPosY()));
 			// s'il y a un nouveau boundToSprite : on connecte ce sprite à ce boundToSprite
 			else
 				boundToSprite.addBoundSprite(this);
@@ -573,7 +573,7 @@ public abstract class Sprite
 	}
 	
 	public void addStatisticEvent(StatisticEvent event)
-	{	GameVariables.loop.addStatisticEvent(event);
+	{	RoundVariables.loop.addStatisticEvent(event);
 	}
 
 	/////////////////////////////////////////////////////////////////
@@ -826,7 +826,7 @@ public abstract class Sprite
 	// TIME			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	public long getLoopTime()
-	{	return GameVariables.loop.getTotalTime();		
+	{	return RoundVariables.loop.getTotalTime();		
 	}
 	
 	/////////////////////////////////////////////////////////////////
