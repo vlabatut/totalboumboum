@@ -53,7 +53,7 @@ import org.xml.sax.SAXException;
 import fr.free.totalboumboum.ai.AbstractAiManager;
 import fr.free.totalboumboum.configuration.Configuration;
 import fr.free.totalboumboum.configuration.GameConstants;
-import fr.free.totalboumboum.configuration.GameVariables;
+import fr.free.totalboumboum.configuration.RoundVariables;
 import fr.free.totalboumboum.configuration.profile.Profile;
 import fr.free.totalboumboum.engine.container.bombset.BombsetMap;
 import fr.free.totalboumboum.engine.container.itemset.Itemset;
@@ -78,7 +78,7 @@ import fr.free.totalboumboum.engine.control.SystemControl;
 import fr.free.totalboumboum.engine.player.Player;
 import fr.free.totalboumboum.engine.player.PlayerLocation;
 import fr.free.totalboumboum.game.round.Round;
-import fr.free.totalboumboum.game.statistics.StatisticEvent;
+import fr.free.totalboumboum.game.statistics.raw.StatisticEvent;
 import fr.free.totalboumboum.tools.CalculusTools;
 import fr.free.totalboumboum.tools.FileTools;
 import fr.free.totalboumboum.tools.StringTools;
@@ -103,7 +103,7 @@ public class Loop implements Runnable, Serializable
 		HollowLevel hollowLevel = round.getHollowLevel();
 		hollowLevel.initLevel(this);
 		level = hollowLevel.getLevel();
-		GameVariables.setLoop(this);
+		RoundVariables.setLoop(this);
 		hollowLevel.loadFiresetMap();
 		loadStepOver();
 		hollowLevel.loadBombsets();
@@ -115,7 +115,7 @@ public class Loop implements Runnable, Serializable
 		loadStepOver();
 
 		// load players : common stuff
-		String baseFolder = GameVariables.instancePath+File.separator+FileTools.FOLDER_HEROES;
+		String baseFolder = RoundVariables.instancePath+File.separator+FileTools.FOLDER_HEROES;
 		HeroFactory base = HeroFactoryLoader.loadHeroFactory(baseFolder,bombsetMap);
 //		loadStepOver();		
 		// load players : individual stuff
@@ -835,7 +835,7 @@ System.out.println();
 //	System.out.println("entryDelays["+i+"]="+entryDelays[i]);
 	
 		// init the message displayers
-		GameVariables.initMessageDisplayers(entryTexts);
+		RoundVariables.initMessageDisplayers(entryTexts);
 	}
 
 	private void manageEntries()
@@ -1030,7 +1030,7 @@ System.out.println();
 	private static final int AI_INFO_ALPHA_LEVEL = 100;
 	private void drawAisInfo(Graphics g)
 	{	Graphics2D g2 = (Graphics2D)g;
-		double tileSize = GameVariables.scaledTileDimension;
+		double tileSize = RoundVariables.scaledTileDimension;
 		for(int i=0;i<players.size();i++)
 		{	Player player = players.get(i);
 			if(player.hasAi())

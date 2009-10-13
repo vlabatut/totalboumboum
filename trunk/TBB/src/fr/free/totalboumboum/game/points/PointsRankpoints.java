@@ -25,8 +25,8 @@ import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.Iterator;
 
-import fr.free.totalboumboum.game.statistics.StatisticBase;
-import fr.free.totalboumboum.game.statistics.StatisticHolder;
+import fr.free.totalboumboum.game.statistics.raw.StatisticBase;
+import fr.free.totalboumboum.game.statistics.raw.StatisticHolder;
 
 /**
  * This PointsProcessor process the rankings in function of  the results coming 

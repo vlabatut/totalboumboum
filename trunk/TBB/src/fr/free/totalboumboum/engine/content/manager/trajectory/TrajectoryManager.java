@@ -25,7 +25,7 @@ import java.util.ArrayList;
 import java.util.Iterator;
 
 import fr.free.totalboumboum.configuration.Configuration;
-import fr.free.totalboumboum.configuration.GameVariables;
+import fr.free.totalboumboum.configuration.RoundVariables;
 import fr.free.totalboumboum.engine.container.tile.Tile;
 import fr.free.totalboumboum.engine.content.feature.Direction;
 import fr.free.totalboumboum.engine.content.feature.event.EngineEvent;
@@ -327,7 +327,7 @@ public class TrajectoryManager
 			}
 			else
 			{	// or relative to a tile ?
-				Tile tempTile = GameVariables.level.getTile(initX, initY);
+				Tile tempTile = RoundVariables.level.getTile(initX, initY);
 				double futureX = initX + originalX;
 				double centerX = tempTile.getPosX();
 				relativeX = futureX - centerX;
@@ -460,7 +460,7 @@ if(previousPosX != currentPosX || previousPosY != currentPosY || previousPosZ !=
 			Direction moveDir = Direction.getCompositeFromDouble(dx, dy);
 			
 			// normalizing an absolute position (if not bound)
-			double temp[] = GameVariables.level.normalizePosition(currentPosX, currentPosY);
+			double temp[] = RoundVariables.level.normalizePosition(currentPosX, currentPosY);
 			currentPosX = temp[0];
 			currentPosY = temp[1];
 			
@@ -633,7 +633,7 @@ if(Double.isNaN(currentPosX) || Double.isNaN(currentPosY))
 	private void updateTile()
 	{	// get current and previous tiles
 		Tile previousTile = sprite.getTile();
-		Tile currentTile = GameVariables.level.getTile(currentPosX,currentPosY);
+		Tile currentTile = RoundVariables.level.getTile(currentPosX,currentPosY);
 		// compare them
 		if(previousTile!=currentTile)
 			sprite.changeTile(currentTile);

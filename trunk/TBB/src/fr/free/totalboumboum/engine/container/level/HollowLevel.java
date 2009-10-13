@@ -34,7 +34,7 @@ import org.xml.sax.SAXException;
 
 import fr.free.totalboumboum.configuration.Configuration;
 import fr.free.totalboumboum.configuration.GameConstants;
-import fr.free.totalboumboum.configuration.GameVariables;
+import fr.free.totalboumboum.configuration.RoundVariables;
 import fr.free.totalboumboum.engine.container.bombset.Bombset;
 import fr.free.totalboumboum.engine.container.bombset.BombsetMap;
 import fr.free.totalboumboum.engine.container.fireset.FiresetLoader;
@@ -82,7 +82,7 @@ public class HollowLevel implements Serializable
 	public void initLevel(Loop loop)
 	{	// init
     	level = new Level(loop);
-    	GameVariables.setInstanceName(instanceName);
+    	RoundVariables.setInstanceName(instanceName);
 		Dimension panelDim = Configuration.getVideoConfiguration().getPanelDimension();
     	double sizeX = panelDim.width;
     	double sizeY = panelDim.height;
@@ -106,18 +106,18 @@ public class HollowLevel implements Serializable
 		double ratioX = (int)(sizeX/visibleWidth)/standardTileDimension;
 		double ratioY = (int)(sizeY/visibleHeight)/standardTileDimension;
 		double zoomFactor = Math.min(ratioX,ratioY);
-		GameVariables.setZoomFactor(zoomFactor);
+		RoundVariables.setZoomFactor(zoomFactor);
 //configuration.setZoomFactor(1.0f);
 		
 		// position
 		double posX = sizeX/2;
 		double posY = sizeY/2;
-		double visibleLeftX = posX - visibleWidth*GameVariables.scaledTileDimension/2/* + tileDimension/2*/;
-		double visibleUpY = posY - visibleHeight*GameVariables.scaledTileDimension/2 /*+ tileDimension/2*/;
+		double visibleLeftX = posX - visibleWidth*RoundVariables.scaledTileDimension/2/* + tileDimension/2*/;
+		double visibleUpY = posY - visibleHeight*RoundVariables.scaledTileDimension/2 /*+ tileDimension/2*/;
 //		double globalLeftX = posX - globalWidth*tileDimension/2;
 //		double globalUpY = posY - globalHeight*tileDimension/2;
-		double globalLeftX = posX - (visibleLeftCol+visibleWidth/2.0)*GameVariables.scaledTileDimension;
-		double globalUpY = posY - (visibleUpLine+visibleHeight/2.0)*GameVariables.scaledTileDimension;
+		double globalLeftX = posX - (visibleLeftCol+visibleWidth/2.0)*RoundVariables.scaledTileDimension;
+		double globalUpY = posY - (visibleUpLine+visibleHeight/2.0)*RoundVariables.scaledTileDimension;
     	level.setTilePositions(globalWidth,globalHeight,globalLeftX,globalUpY);
 		
 //NOTE il y a une ligne horizontale dans les borders au dessus du niveau (forcer le zoomFactor à 1 pour la faire apparaitre)		
@@ -133,13 +133,13 @@ public class HollowLevel implements Serializable
 		double upBorderY = 0;
 		double horizontalBorderWidth = sizeX;
 		if(displayMaximize)
-		{	downBorderY = globalUpY+globalHeight*GameVariables.scaledTileDimension+1;
+		{	downBorderY = globalUpY+globalHeight*RoundVariables.scaledTileDimension+1;
 			if(globalUpY>0)
 				horizontalBorderHeight = globalUpY;
 			else
 				horizontalBorderHeight = 0;
 			verticalBorderY = horizontalBorderHeight+1;
-			rightBorderX = globalLeftX+globalWidth*GameVariables.scaledTileDimension+1;
+			rightBorderX = globalLeftX+globalWidth*RoundVariables.scaledTileDimension+1;
 			if(globalLeftX>0)
 				verticalBorderWidth = globalLeftX;
 			else
@@ -147,10 +147,10 @@ public class HollowLevel implements Serializable
 			verticalBorderHeight = sizeY-2*horizontalBorderHeight+1;
 		}
 		else
-		{	downBorderY = visibleUpY+visibleHeight*GameVariables.scaledTileDimension+1;
+		{	downBorderY = visibleUpY+visibleHeight*RoundVariables.scaledTileDimension+1;
 			horizontalBorderHeight = visibleUpY;
 			verticalBorderY = visibleUpY;
-			rightBorderX = visibleLeftX+visibleWidth*GameVariables.scaledTileDimension+1;
+			rightBorderX = visibleLeftX+visibleWidth*RoundVariables.scaledTileDimension+1;
 			verticalBorderWidth = visibleLeftX;
 			verticalBorderHeight = sizeY-2*horizontalBorderHeight+1;
 		}
@@ -280,8 +280,8 @@ public class HollowLevel implements Serializable
 		// init tiles
 		for(int line=0;line<globalHeight;line++)
 		{	for(int col=0;col<globalWidth;col++)
-			{	double x = globalLeftX + GameVariables.scaledTileDimension/2 + col*GameVariables.scaledTileDimension;
-				double y = globalUpY + GameVariables.scaledTileDimension/2 + line*GameVariables.scaledTileDimension;
+			{	double x = globalLeftX + RoundVariables.scaledTileDimension/2 + col*RoundVariables.scaledTileDimension;
+				double y = globalUpY + RoundVariables.scaledTileDimension/2 + line*RoundVariables.scaledTileDimension;
 				matrix[line][col] = new Tile(level,line,col,x,y);
 				if(mFloors[line][col]==null)
 				{	Floor floor = theme.makeFloor(matrix[line][col]);

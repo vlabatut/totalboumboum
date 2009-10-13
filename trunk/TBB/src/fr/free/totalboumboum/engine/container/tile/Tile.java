@@ -31,7 +31,7 @@ import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.Iterator;
 
-import fr.free.totalboumboum.configuration.GameVariables;
+import fr.free.totalboumboum.configuration.RoundVariables;
 import fr.free.totalboumboum.engine.container.level.Level;
 import fr.free.totalboumboum.engine.content.feature.Direction;
 import fr.free.totalboumboum.engine.content.feature.Role;
@@ -132,7 +132,7 @@ public class Tile
 			double pY = s.getCurrentPosY()+s.getYShift();
 			double pZ = s.getCurrentPosZ();
 			pX = pX - ((double)image.getWidth())/2;
-			pY = pY - image.getHeight() + GameVariables.scaledTileDimension/2;
+			pY = pY - image.getHeight() + RoundVariables.scaledTileDimension/2;
 			//
 			ArrayList<Double> listX = new ArrayList<Double>(0);
 			ArrayList<Double> listY = new ArrayList<Double>(0);
@@ -184,7 +184,7 @@ public class Tile
 				g.setColor(Color.WHITE);
 			else if(s instanceof Fire)
 				g.setColor(Color.BLACK);
-			if(GameVariables.loop.getShowSpritesPositions()==1)
+			if(RoundVariables.loop.getShowSpritesPositions()==1)
 			{	// coordonnées
 				Font font = new Font("Dialog", Font.BOLD, 12);
 				g.setFont(font);
@@ -195,7 +195,7 @@ public class Tile
 				int y = (int)Math.round(s.getCurrentPosY()+box.getHeight()/2);
 				g.drawString(text, x, y);
 			}
-			else if(GameVariables.loop.getShowSpritesPositions()==2)
+			else if(RoundVariables.loop.getShowSpritesPositions()==2)
 			{	// coordonnées
 				Font font = new Font("Dialog", Font.BOLD, 12);
 				g.setFont(font);
@@ -252,7 +252,7 @@ public class Tile
 		{	double pX = s.getCurrentPosX()+s.getShadowXShift();
 			double pY = s.getCurrentPosY()+s.getShadowYShift();
 			pX = pX - ((double)image.getWidth())/2;
-			pY = pY - image.getHeight() + GameVariables.scaledTileDimension/2;
+			pY = pY - image.getHeight() + RoundVariables.scaledTileDimension/2;
 			//
 			ArrayList<Double> listX = new ArrayList<Double>(0);
 			ArrayList<Double> listY = new ArrayList<Double>(0);

@@ -24,8 +24,8 @@ package fr.free.totalboumboum.game.points;
 import java.text.NumberFormat;
 import java.util.ArrayList;
 
-import fr.free.totalboumboum.game.statistics.StatisticBase;
-import fr.free.totalboumboum.game.statistics.StatisticHolder;
+import fr.free.totalboumboum.game.statistics.raw.StatisticBase;
+import fr.free.totalboumboum.game.statistics.raw.StatisticHolder;
 
 /**
  * This PointsProcessor discretizes the points definition set and associates 

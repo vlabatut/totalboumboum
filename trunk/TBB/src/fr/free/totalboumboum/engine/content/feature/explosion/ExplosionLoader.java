@@ -29,7 +29,7 @@ import javax.xml.parsers.ParserConfigurationException;
 import org.jdom.Element;
 import org.xml.sax.SAXException;
 
-import fr.free.totalboumboum.configuration.GameVariables;
+import fr.free.totalboumboum.configuration.RoundVariables;
 import fr.free.totalboumboum.engine.container.fireset.Fireset;
 import fr.free.totalboumboum.tools.FileTools;
 import fr.free.totalboumboum.tools.XmlTools;
@@ -58,7 +58,7 @@ public class ExplosionLoader
     	// fire
     	Element elt = root.getChild(XmlTools.ELT_FIRESET);
     	String name = elt.getAttribute(XmlTools.ATT_NAME).getValue().trim();
-		Fireset fireset = GameVariables.level.getFiresetMap().getFireset(name);
+		Fireset fireset = RoundVariables.level.getFiresetMap().getFireset(name);
     	
 		//
     	result.setFireset(fireset);

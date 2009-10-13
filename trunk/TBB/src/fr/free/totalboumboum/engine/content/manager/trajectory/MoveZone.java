@@ -25,7 +25,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 
-import fr.free.totalboumboum.configuration.GameVariables;
+import fr.free.totalboumboum.configuration.RoundVariables;
 import fr.free.totalboumboum.engine.container.tile.Tile;
 import fr.free.totalboumboum.engine.content.feature.Direction;
 import fr.free.totalboumboum.engine.content.feature.ability.StateAbility;
@@ -161,7 +161,7 @@ public class MoveZone
 			b = null;
 		}
 		else
-		{	a = GameVariables.level.getDeltaY(targetY,currentY)/GameVariables.level.getDeltaX(targetX,currentX);
+		{	a = RoundVariables.level.getDeltaY(targetY,currentY)/RoundVariables.level.getDeltaX(targetX,currentX);
 			if(a==-0.0)
 				a = 0.0;
 			b = currentY - a*currentX;
@@ -176,7 +176,7 @@ public class MoveZone
 			x = b;
 		else
 			x = (y-b)/a;
-		x = GameVariables.level.normalizePositionX(x);
+		x = RoundVariables.level.normalizePositionX(x);
 		return x;
 	}
 	
@@ -186,7 +186,7 @@ public class MoveZone
 			y = null;
 		else
 			y = a*x + b;
-		y = GameVariables.level.normalizePositionY(y);
+		y = RoundVariables.level.normalizePositionY(y);
 		return y;
 	}
 
@@ -229,23 +229,23 @@ public class MoveZone
 	private ArrayList<Tile> getCrossedTiles()
 	{	ArrayList<Tile> result = new ArrayList<Tile>();
 		// init
-		double tileDimension = GameVariables.scaledTileDimension;
-		double upleftX = GameVariables.level.normalizePositionX(Math.min(currentX,targetX) - tileDimension);
-		double upleftY = GameVariables.level.normalizePositionY(Math.min(currentY,targetY) - tileDimension);
-		double downrightX = GameVariables.level.normalizePositionX(Math.max(currentX,targetX) + tileDimension);
-		double downrightY = GameVariables.level.normalizePositionY(Math.max(currentY,targetY) + tileDimension);
-		Tile upleftTile = GameVariables.level.getTile(upleftX,upleftY);
-		Tile downrightTile = GameVariables.level.getTile(downrightX,downrightY);
+		double tileDimension = RoundVariables.scaledTileDimension;
+		double upleftX = RoundVariables.level.normalizePositionX(Math.min(currentX,targetX) - tileDimension);
+		double upleftY = RoundVariables.level.normalizePositionY(Math.min(currentY,targetY) - tileDimension);
+		double downrightX = RoundVariables.level.normalizePositionX(Math.max(currentX,targetX) + tileDimension);
+		double downrightY = RoundVariables.level.normalizePositionY(Math.max(currentY,targetY) + tileDimension);
+		Tile upleftTile = RoundVariables.level.getTile(upleftX,upleftY);
+		Tile downrightTile = RoundVariables.level.getTile(downrightX,downrightY);
 		// process
-		int width = GameVariables.level.getGlobalWidth();
-		int height = GameVariables.level.getGlobalHeight();
+		int width = RoundVariables.level.getGlobalWidth();
+		int height = RoundVariables.level.getGlobalHeight();
 		int sLine = upleftTile.getLine();
 		int tLine = (downrightTile.getLine()+1)%height;
 		int sCol = upleftTile.getCol();
 		int tCol = (downrightTile.getCol()+1)%width;
 		for(int line=sLine;line!=tLine;line=(line+1)%height)
 		{	for(int col=sCol;col!=tCol;col=(col+1)%width)
-			{	Tile temp = GameVariables.level.getTile(line,col);
+			{	Tile temp = RoundVariables.level.getTile(line,col);
 				result.add(temp);
 			}
 		}
@@ -349,9 +349,9 @@ public class MoveZone
 	 */
 	private boolean hasArrived()
 	{	boolean result = true;
-		double distX = GameVariables.level.getHorizontalPixelDistance(currentX,targetX);
+		double distX = RoundVariables.level.getHorizontalPixelDistance(currentX,targetX);
 		result = result && CalculusTools.isRelativelyEqualTo(distX,0);
-		double distY = GameVariables.level.getVerticalPixelDistance(currentY,targetY);
+		double distY = RoundVariables.level.getVerticalPixelDistance(currentY,targetY);
 		result = result && CalculusTools.isRelativelyEqualTo(distY,0);
 		return result;
 	}
@@ -383,12 +383,12 @@ public class MoveZone
 		double obstacleY = po.getSprite().getCurrentPosY();
 		
 		// process the new direction according to the obstacle position
-		double horizontalDistance = GameVariables.level.getHorizontalPixelDistance(contactX,obstacleX);
-		double verticalDistance = GameVariables.level.getVerticalPixelDistance(contactY,obstacleY);
+		double horizontalDistance = RoundVariables.level.getHorizontalPixelDistance(contactX,obstacleX);
+		double verticalDistance = RoundVariables.level.getVerticalPixelDistance(contactY,obstacleY);
 		Direction dir;
 		if(po.getContactDistance()<0)
-		{	double deltaX = GameVariables.level.getDeltaX(currentX,obstacleX);
-			double deltaY = GameVariables.level.getDeltaY(currentY,obstacleY);
+		{	double deltaX = RoundVariables.level.getDeltaX(currentX,obstacleX);
+			double deltaY = RoundVariables.level.getDeltaY(currentY,obstacleY);
 			Direction d = Direction.getCompositeFromDouble(deltaX,deltaY);
 			dir = usedDirection.drop(d);
 //if(dir.isComposite())
@@ -454,19 +454,19 @@ public class MoveZone
 			Direction dir;
 			double dist;
 			if(usedDirection.isHorizontal())
-			{	double dy = GameVariables.level.getDeltaY(po.getSprite().getCurrentPosY(),currentY);
+			{	double dy = RoundVariables.level.getDeltaY(po.getSprite().getCurrentPosY(),currentY);
 				dist = Math.abs(dy);
 				dir = Direction.getVerticalFromDouble(dy);
 			}
 			else
-			{	double dx = GameVariables.level.getDeltaX(po.getSprite().getCurrentPosX(),currentX);
+			{	double dx = RoundVariables.level.getDeltaX(po.getSprite().getCurrentPosX(),currentX);
 				dist = Math.abs(dx);
 				dir = Direction.getHorizontalFromDouble(dx);
 			}
 			// has the sprite an assistance?
 			StateAbility ability = source.modulateStateAbility(StateAbilityName.SPRITE_MOVE_ASSISTANCE);
 			double tolerance = ability.getStrength();
-			double margin = tolerance*GameVariables.scaledTileDimension;
+			double margin = tolerance*RoundVariables.scaledTileDimension;
 			if(tolerance==0)
 				margin = Double.MAX_VALUE;
 			if(dir!=Direction.NONE && CalculusTools.isRelativelyGreaterThan(dist,margin))
@@ -474,8 +474,8 @@ public class MoveZone
 				double avoid[] = po.getSafePosition(currentX,currentY,dir);
 				// check if it's worth moving in this direction (i.e. no other obstacles in the way)
 				int d[] = initialDirection.getIntFromDirection();
-				double tX = GameVariables.level.normalizePositionX(avoid[0]+d[0]);
-				double tY = GameVariables.level.normalizePositionY(avoid[1]+d[1]);
+				double tX = RoundVariables.level.normalizePositionX(avoid[0]+d[0]);
+				double tY = RoundVariables.level.normalizePositionY(avoid[1]+d[1]);
 				MoveZone fake = new MoveZone(source,avoid[0],avoid[1],tX,tY,initialDirection,initialDirection,2);
 				fake.applyMove();
 				// then try to avoid the obstacle
@@ -491,8 +491,8 @@ public class MoveZone
 					else
 					{	int tmp[]=usedDirection.getIntFromDirection();
 						double tmp2[] = {tmp[0]*fuel,tmp[1]*fuel};
-						targetX = GameVariables.level.normalizePositionX(currentX + tmp2[0]);
-						targetY = GameVariables.level.normalizePositionY(currentY + tmp2[1]);
+						targetX = RoundVariables.level.normalizePositionX(currentX + tmp2[0]);
+						targetY = RoundVariables.level.normalizePositionY(currentY + tmp2[1]);
 					}
 					for(Sprite s: mz.getCollidedSprites())
 						addCollidedSprite(s);
@@ -543,8 +543,8 @@ public class MoveZone
 	 */
 	private boolean moveToPoint(double destX, double destY)
 	{	boolean result;
-		double deltaX = GameVariables.level.getDeltaX(currentX,destX);
-		double deltaY = GameVariables.level.getDeltaY(currentY,destY);
+		double deltaX = RoundVariables.level.getDeltaX(currentX,destX);
+		double deltaY = RoundVariables.level.getDeltaY(currentY,destY);
 		double dist = Math.sqrt(Math.pow(deltaX,2)+Math.pow(deltaY,2));
 		// enough fuel
 		if(fuel>=dist)
@@ -560,7 +560,7 @@ public class MoveZone
 			if(vertical)
 			{	deltaY = fuel*Math.signum(deltaY);
 				fuel = 0;
-				currentY = GameVariables.level.normalizePositionY(currentY + deltaY);
+				currentY = RoundVariables.level.normalizePositionY(currentY + deltaY);
 			}
 			else
 			{	// else : must solve equation (intersection point)
@@ -584,8 +584,8 @@ public class MoveZone
 					if(tempDir!=moveDir)
 						solutionX = x2;
 					double solutionY = a*solutionX + b;
-					currentX = GameVariables.level.normalizePositionX(solutionX);
-					currentY = GameVariables.level.normalizePositionY(solutionY);
+					currentX = RoundVariables.level.normalizePositionX(solutionX);
+					currentY = RoundVariables.level.normalizePositionY(solutionY);
 				}
 				fuel = 0; 
 /*				

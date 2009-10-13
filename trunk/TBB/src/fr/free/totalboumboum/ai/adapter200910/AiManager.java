@@ -32,7 +32,7 @@ import fr.free.totalboumboum.ai.adapter200910.communication.AiOutput;
 import fr.free.totalboumboum.ai.adapter200910.data.AiTile;
 import fr.free.totalboumboum.ai.adapter200910.data.AiZone;
 import fr.free.totalboumboum.ai.adapter200910.path.AiPath;
-import fr.free.totalboumboum.configuration.GameVariables;
+import fr.free.totalboumboum.configuration.RoundVariables;
 import fr.free.totalboumboum.engine.container.level.Level;
 import fr.free.totalboumboum.engine.container.tile.Tile;
 import fr.free.totalboumboum.engine.content.feature.Direction;
@@ -89,8 +89,8 @@ public abstract class AiManager extends AbstractAiManager<AiAction>
 	@Override
 	public void init(String instance, Player player)
 	{	super.init(instance,player);
-		loop = GameVariables.loop;
-		level = GameVariables.level;
+		loop = RoundVariables.loop;
+		level = RoundVariables.level;
 		percepts = new AiZone(level,player);
 		ArtificialIntelligence ai = ((ArtificialIntelligence)getAi());
 		ai.setPercepts(percepts);

@@ -34,7 +34,7 @@ import org.jdom.Attribute;
 import org.jdom.Element;
 import org.xml.sax.SAXException;
 
-import fr.free.totalboumboum.configuration.GameVariables;
+import fr.free.totalboumboum.configuration.RoundVariables;
 import fr.free.totalboumboum.engine.content.feature.Direction;
 import fr.free.totalboumboum.engine.content.feature.ImageShift;
 import fr.free.totalboumboum.engine.content.feature.gesture.Gesture;
@@ -76,7 +76,7 @@ public class TrajectoriesLoader
      */
     @SuppressWarnings("unchecked")
 	private static void loadGestureElement(Element root, GesturePack pack) throws IOException
-    {	double zoomFactor = GameVariables.zoomFactor;
+    {	double zoomFactor = RoundVariables.zoomFactor;
     	// name
 		String name = root.getAttribute(XmlTools.ATT_NAME).getValue().toUpperCase(Locale.ENGLISH);
 		GestureName gestureName = GestureName.valueOf(name);

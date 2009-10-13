@@ -23,7 +23,7 @@ package fr.free.totalboumboum.engine.content.manager.event;
 
 import java.util.List;
 
-import fr.free.totalboumboum.configuration.GameVariables;
+import fr.free.totalboumboum.configuration.RoundVariables;
 import fr.free.totalboumboum.engine.container.tile.Tile;
 import fr.free.totalboumboum.engine.content.feature.Direction;
 import fr.free.totalboumboum.engine.content.feature.ability.ActionAbility;
@@ -106,12 +106,12 @@ public abstract class EventManager
 	{	gesture = GestureName.ENDED;
 		sprite.setGesture(gesture,spriteDirection,Direction.NONE,true);
 		sprite.changeTile(null);
-		GameVariables.level.removeSprite(sprite);
+		RoundVariables.level.removeSprite(sprite);
 	}
 	
 	protected Tile randomlyFindTile()
 	{	Tile result = null;
-		List<Tile> tileList = GameVariables.level.getTileList();
+		List<Tile> tileList = RoundVariables.level.getTileList();
 		while(result==null && tileList.size()>0)
 		{	int index = (int)(Math.random()*tileList.size());
 			Tile tile = tileList.get(index);

@@ -34,7 +34,7 @@ import fr.free.totalboumboum.game.points.PointsRankings;
 import fr.free.totalboumboum.game.points.PointsRankpoints;
 import fr.free.totalboumboum.game.points.PointsScores;
 import fr.free.totalboumboum.game.points.PointsTotal;
-import fr.free.totalboumboum.game.statistics.Score;
+import fr.free.totalboumboum.game.statistics.raw.Score;
 import fr.free.totalboumboum.gui.common.structure.subpanel.outside.SubPanel;
 import fr.free.totalboumboum.gui.common.structure.subpanel.outside.TableSubPanel;
 import fr.free.totalboumboum.gui.data.configuration.GuiConfiguration;

@@ -24,7 +24,7 @@ package fr.free.totalboumboum.engine.content.manager.explosion;
 import java.util.ArrayList;
 import java.util.List;
 
-import fr.free.totalboumboum.configuration.GameVariables;
+import fr.free.totalboumboum.configuration.RoundVariables;
 import fr.free.totalboumboum.engine.container.tile.Tile;
 import fr.free.totalboumboum.engine.content.feature.Direction;
 import fr.free.totalboumboum.engine.content.feature.ability.AbstractAbility;
@@ -108,7 +108,7 @@ public class ExplosionManager
 				{	fire.consumeTile(tile);
 				}
 				else
-				{	GameVariables.level.insertSpriteTile(fire);
+				{	RoundVariables.level.insertSpriteTile(fire);
 					SpecificDetonate detonateAction = new SpecificDetonate(sprite,Direction.NONE);
 					ActionEvent evt = new ActionEvent(detonateAction);
 					fire.processEvent(evt);
@@ -152,7 +152,7 @@ public class ExplosionManager
 								}
 								else
 								{	goOn = true;
-									GameVariables.level.insertSpriteTile(fire);
+									RoundVariables.level.insertSpriteTile(fire);
 									SpecificDetonate detonateAction = new SpecificDetonate(sprite,direction);
 									ActionEvent evt = new ActionEvent(detonateAction);
 									fire.processEvent(evt);

@@ -27,7 +27,7 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map.Entry;
 
-import fr.free.totalboumboum.configuration.GameVariables;
+import fr.free.totalboumboum.configuration.RoundVariables;
 import fr.free.totalboumboum.configuration.profile.PredefinedColor;
 import fr.free.totalboumboum.engine.container.level.Level;
 import fr.free.totalboumboum.engine.container.tile.Tile;
@@ -738,10 +738,10 @@ public class AiZone
 	 * @return	la direction correspondant au chemin le plus court
 	 */
 	public Direction getDirection(double x1, double y1, double x2, double y2)
-	{	double dx = GameVariables.level.getDeltaX(x1,x2);
+	{	double dx = RoundVariables.level.getDeltaX(x1,x2);
 		if(CalculusTools.isRelativelyEqualTo(dx,0))
 			dx = 0;
-		double dy = GameVariables.level.getDeltaY(y1,y2);
+		double dy = RoundVariables.level.getDeltaY(y1,y2);
 		if(CalculusTools.isRelativelyEqualTo(dy,0))
 			dy = 0;
 		Direction result = Direction.getCompositeFromRelativeDouble(dx,dy);

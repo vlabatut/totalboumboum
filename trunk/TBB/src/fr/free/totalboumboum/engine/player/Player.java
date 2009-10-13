@@ -33,7 +33,7 @@ import org.xml.sax.SAXException;
 import fr.free.totalboumboum.ai.AbstractAiManager;
 import fr.free.totalboumboum.ai.AiLoader;
 import fr.free.totalboumboum.configuration.Configuration;
-import fr.free.totalboumboum.configuration.GameVariables;
+import fr.free.totalboumboum.configuration.RoundVariables;
 import fr.free.totalboumboum.configuration.controls.ControlSettings;
 import fr.free.totalboumboum.configuration.profile.PredefinedColor;
 import fr.free.totalboumboum.configuration.profile.Profile;
@@ -68,7 +68,7 @@ public class Player
 		HeroFactory tempHeroFactory = HeroFactoryLoader.completeHeroFactory(folder,color,base,bombsetMap);
 		sprite = tempHeroFactory.makeSprite(tile);
 //		tile.addSprite(sprite);
-		GameVariables.level.insertSpriteTile(sprite);
+		RoundVariables.level.insertSpriteTile(sprite);
 		// control settings
 		int indexCtrSet = profile.getControlSettingsIndex();
 		controlSettings = Configuration.getControlsConfiguration().getControlSettings().get(indexCtrSet);
@@ -84,7 +84,7 @@ public class Player
 	{	// artificial intelligence
     	if(this.profile.getAiName() != null)
     	{	ai = AiLoader.loadAi(profile.getAiName(), profile.getAiPackname());
-    		ai.init(GameVariables.instanceName,this);
+    		ai.init(RoundVariables.instanceName,this);
     	}
 	}
 	
@@ -125,7 +125,7 @@ public class Player
 	
 	public void setOut()
 	{	playerOut = true;
-		GameVariables.loop.playerOut(this);	
+		RoundVariables.loop.playerOut(this);	
 	}
 	public boolean isOut()
 	{	return playerOut;	

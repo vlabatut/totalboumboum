@@ -1,4 +1,4 @@
-package fr.free.totalboumboum.game.statistics;
+package fr.free.totalboumboum.game.statistics.raw;
 
 /*
  * Total Boum Boum
@@ -22,60 +22,54 @@ package fr.free.totalboumboum.game.statistics;
  */
 
 import java.util.ArrayList;
-import fr.free.totalboumboum.game.tournament.AbstractTournament;
+import fr.free.totalboumboum.game.match.Match;
 
-public class StatisticTournament extends StatisticBase
+public class StatisticMatch extends StatisticBase
 {
 	private static final long serialVersionUID = 1L;
-	
-	public StatisticTournament(AbstractTournament tournament)
-	{	super(tournament);
-	}
-	
-	/////////////////////////////////////////////////////////////////
-	// STATISTIC MATCHES	/////////////////////////////////////////
-	/////////////////////////////////////////////////////////////////
-	private final ArrayList<StatisticMatch> matches = new ArrayList<StatisticMatch>();
-	
-	public ArrayList<StatisticMatch> getStatisticMatches()
-	{	return matches;
+
+	public StatisticMatch(Match match)
+	{	super(match);
 	}
 
-	public void addStatisticMatch(StatisticMatch match)
-	{	// matches stats
-		matches.add(match);
+	/////////////////////////////////////////////////////////////////
+	// STATISTIC ROUNDS		/////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	private final ArrayList<StatisticRound> rounds = new ArrayList<StatisticRound>();
+
+	public ArrayList<StatisticRound> getStatisticRounds()
+	{	return rounds;
+	}
+
+	public void addStatisticRound(StatisticRound round)
+	{	// round stats
+		rounds.add(round);
 		// scores
 		for (Score score : Score.values())
 		{	long[] currentScores = getScores(score);
-			long[] matchScores = match.getScores(score);
-			for(int i=0;i<matchScores.length;i++)
-			{	String playerName = match.getPlayers().get(i);
-				int index = getPlayers().indexOf(playerName);
-				currentScores[index] = currentScores[index] + matchScores[i];			
-			}
+			long[] roundScores = round.getScores(score);
+			for(int i=0;i<roundScores.length;i++)
+				currentScores[i] = currentScores[i] + roundScores[i];
 		}
-		// total
-		float[] matchPoints = match.getPoints();
-		for(int i=0;i<matchPoints.length;i++)
-		{	String playerName = match.getPlayers().get(i);
-			int index = getPlayers().indexOf(playerName);
-			getTotal()[index] = getTotal()[index] + matchPoints[i];
-		}
+		// partial points
+		float[] roundPoints = round.getPoints();
+		for(int i=0;i<getTotal().length;i++)
+			getTotal()[i] = getTotal()[i] + roundPoints[i];
 		// time
-		long time = getTotalTime() + match.getTotalTime();
+		long time = getTotalTime() + round.getTotalTime();
 		setTotalTime(time);
 	}
 
 	@Override
 	public int getConfrontationCount()
-	{	int result = matches.size();
+	{	int result = rounds.size();
 		return result;
 	}
-
+	
 	@Override
 	public ArrayList<StatisticBase> getConfrontationStats()
 	{	ArrayList<StatisticBase> result = new ArrayList<StatisticBase>();
-		for(StatisticMatch r: matches)
+		for(StatisticRound r: rounds)
 			result.add(r);
 		return result;
 	}

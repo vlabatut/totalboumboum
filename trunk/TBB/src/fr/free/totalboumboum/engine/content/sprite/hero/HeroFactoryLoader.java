@@ -32,7 +32,7 @@ import javax.xml.parsers.ParserConfigurationException;
 import org.jdom.Element;
 import org.xml.sax.SAXException;
 
-import fr.free.totalboumboum.configuration.GameVariables;
+import fr.free.totalboumboum.configuration.RoundVariables;
 import fr.free.totalboumboum.configuration.profile.PredefinedColor;
 import fr.free.totalboumboum.engine.container.bombset.Bombset;
 import fr.free.totalboumboum.engine.container.bombset.BombsetMap;
@@ -67,7 +67,7 @@ public class HeroFactoryLoader extends SpriteFactoryLoader
 		AnimesLoader.loadAnimes(folder,gesturePack,color,HeroFactory.getAnimeReplacements());
 		
 		// BOMBSET
-		folder = GameVariables.instancePath+File.separator+FileTools.FOLDER_BOMBS;
+		folder = RoundVariables.instancePath+File.separator+FileTools.FOLDER_BOMBS;
 		Bombset bombset = bombsetMap.loadBombset(folder,color);
 		result.setBombset(bombset);
 

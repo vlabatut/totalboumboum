@@ -31,7 +31,7 @@ import fr.free.totalboumboum.tools.FileTools;
  * 
  */
 
-public class GameVariables
+public class RoundVariables
 {
 	/////////////////////////////////////////////////////////////////
 	// INSTANCE PATH		/////////////////////////////////////////
@@ -40,8 +40,8 @@ public class GameVariables
 	public static String instancePath;
 	
     public static void setInstanceName(String instanceName)
-    {	GameVariables.instanceName = instanceName;
-    	GameVariables.instancePath = FileTools.getInstancesPath()+File.separator+instanceName;
+    {	RoundVariables.instanceName = instanceName;
+    	RoundVariables.instancePath = FileTools.getInstancesPath()+File.separator+instanceName;
     }
 
 	/////////////////////////////////////////////////////////////////
@@ -51,8 +51,8 @@ public class GameVariables
 	public static Loop loop;
 	
 	public static void setLoop(Loop loop)
-	{	GameVariables.loop = loop;
-		GameVariables.level = loop.getLevel();		
+	{	RoundVariables.loop = loop;
+		RoundVariables.level = loop.getLevel();		
 	}
 	
 	/////////////////////////////////////////////////////////////////
@@ -63,7 +63,7 @@ public class GameVariables
 	public static double scaledTileDimension;
 
 	public static void setZoomFactor(double zoomFactor)
-	{	GameVariables.zoomFactor = zoomFactor;
+	{	RoundVariables.zoomFactor = zoomFactor;
 		toleranceCoefficient = zoomFactor*GameConstants.TOLERANCE;
 		scaledTileDimension = GameConstants.STANDARD_TILE_DIMENSION*zoomFactor;
 	}
