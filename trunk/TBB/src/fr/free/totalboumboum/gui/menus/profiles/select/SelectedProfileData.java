@@ -135,7 +135,8 @@ public class SelectedProfileData extends EntitledDataPanel implements FileBrowse
 			selectedProfile = null;
 		else
 		{	try
-			{	selectedProfile = ProfileLoader.loadProfile(file);			
+			{	int id = Integer.parseInt(file);
+				selectedProfile = ProfileLoader.loadProfile(id);			
 			}
 			catch (IllegalArgumentException e)
 			{	e.printStackTrace();

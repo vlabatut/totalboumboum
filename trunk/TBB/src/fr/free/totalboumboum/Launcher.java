@@ -1022,5 +1022,8 @@ public class Launcher
 	 * 		- BM'83
 	 * 		- réseau
 	 * 		- sortir de bêta
+	 * 
+	 * - glicko
+	 * 		- en fait ça devrait être un ranking normal, car il ne peut pas gérer automatiquement le nombre de rounds joués puisqu'il ne l'enregistre pas
 	 */
 }

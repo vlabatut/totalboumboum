@@ -39,7 +39,7 @@ public abstract class StatisticBase implements Serializable
 	{	totalTime = 0;
 		// players
 		for(Profile p: holder.getProfiles())
-		{	String player = p.getFileName();
+		{	String player = Integer.toString(p.getId());
 			players.add(player);
 		}
 		// points

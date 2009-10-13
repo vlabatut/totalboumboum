@@ -41,7 +41,8 @@ public class ProfilesSelectionLoader
 
 	private static void loadPlayerElement(Element root, ProfilesSelection result)
 	{	// file
-		String fileName = root.getAttributeValue(XmlTools.ATT_FILE);
+		String idStr = root.getAttributeValue(XmlTools.ATT_FILE);
+		int id = Integer.parseInt(idStr);
 		
 		// color
 		String colorStr = root.getAttributeValue(XmlTools.ATT_COLOR);
@@ -56,6 +57,6 @@ public class ProfilesSelectionLoader
 		String spritePack = root.getAttributeValue(XmlTools.ATT_SPRITE_PACK);
 		String[] hero = {spritePack,spriteFolder};
 		
-		result.addProfile(fileName,color,controlsIndex,hero);
+		result.addProfile(id,color,controlsIndex,hero);
 	}
 }

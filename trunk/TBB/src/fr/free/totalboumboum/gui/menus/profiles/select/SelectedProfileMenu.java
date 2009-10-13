@@ -23,7 +23,6 @@ package fr.free.totalboumboum.gui.menus.profiles.select;
 
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
-import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 
@@ -35,12 +34,8 @@ import javax.xml.parsers.ParserConfigurationException;
 import org.xml.sax.SAXException;
 
 import fr.free.totalboumboum.configuration.Configuration;
-import fr.free.totalboumboum.configuration.profile.PredefinedColor;
 import fr.free.totalboumboum.configuration.profile.Profile;
-import fr.free.totalboumboum.configuration.profile.ProfileSaver;
 import fr.free.totalboumboum.configuration.profile.ProfilesConfiguration;
-import fr.free.totalboumboum.configuration.profile.ProfilesConfigurationSaver;
-import fr.free.totalboumboum.configuration.profile.SpriteInfo;
 import fr.free.totalboumboum.gui.common.structure.dialog.outside.InputModalDialogPanel;
 import fr.free.totalboumboum.gui.common.structure.dialog.outside.ModalDialogPanelListener;
 import fr.free.totalboumboum.gui.common.structure.dialog.outside.QuestionModalDialogPanel;
@@ -52,7 +47,6 @@ import fr.free.totalboumboum.gui.data.configuration.GuiConfiguration;
 import fr.free.totalboumboum.gui.menus.profiles.edit.EditProfileSplitPanel;
 import fr.free.totalboumboum.gui.tools.GuiKeys;
 import fr.free.totalboumboum.gui.tools.GuiTools;
-import fr.free.totalboumboum.tools.FileTools;
 
 public class SelectedProfileMenu extends InnerMenuPanel implements DataPanelListener,ModalDialogPanelListener
 {	private static final long serialVersionUID = 1L;
@@ -177,27 +171,9 @@ public class SelectedProfileMenu extends InnerMenuPanel implements DataPanelList
 			if(buttonCode.equals(GuiKeys.COMMON_DIALOG_CONFIRM))
 			{	// create & save
 				try
-				{	// refresh counter
+				{	// create profile
 					ProfilesConfiguration profilesConfig = Configuration.getProfilesConfiguration();
-					int lastProfile = profilesConfig.getLastProfileIndex();
-					int nextProfile = lastProfile+1;
-					profilesConfig.setLastProfileIndex(nextProfile);
-					// create profile
-					Profile newProfile = new Profile();
-					newProfile.setName(input);
-					SpriteInfo spriteInfo = newProfile.getDefaultSprite();
-					String spritePack = "superbomberman1";
-					spriteInfo.setPack(spritePack);
-					String spriteFolder = "shirobon";
-					spriteInfo.setFolder(spriteFolder);
-					PredefinedColor spriteColor = PredefinedColor.WHITE;
-					spriteInfo.setColor(spriteColor);
-					// create file
-					String fileName = Integer.toString(nextProfile)/*+FileTools.EXTENSION_DATA*/;			
-					ProfileSaver.saveProfile(newProfile, fileName);
-					// add/save in config
-					profilesConfig.addProfile(fileName,input);
-					ProfilesConfigurationSaver.saveProfilesConfiguration(profilesConfig);
+					String fileName = profilesConfig.createProfile(input);
 					// rebuild panel
 					profileData = new SelectedProfileData(container);
 					container.setDataPart(profileData);
@@ -219,15 +195,9 @@ public class SelectedProfileMenu extends InnerMenuPanel implements DataPanelList
 			Profile profile = profileData.getSelectedProfile();
 			if(profile!=null)
 			{	try
-				{	String profileFile = profileData.getSelectedProfileFile();
-					// delete file
-					String path = FileTools.getProfilesPath()+File.separator+profileFile+FileTools.EXTENSION_XML;
-					File file = new File(path);
-					file.delete();
-					// delete entry in config
+				{	// delete profile
 					ProfilesConfiguration profilesConfig = Configuration.getProfilesConfiguration();
-					profilesConfig.removeProfile(profileFile);
-					ProfilesConfigurationSaver.saveProfilesConfiguration(profilesConfig);
+					profilesConfig.deleteProfile(profile);	
 					// rebuild panel
 					profileData = new SelectedProfileData(container);
 					container.setDataPart(profileData);

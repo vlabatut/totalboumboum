@@ -35,7 +35,7 @@ public class Glicko2Loader
 {
 	public static void loadStatistics(RankingService rankingService) throws NumberFormatException, IOException
 	{	// init path
-		String path = FileTools.getGlicko2Path()+File.pathSeparator+FileTools.FILE_STATISTICS+FileTools.EXTENSION_DATA;
+		String path = FileTools.getGlicko2Path()+File.separator+FileTools.FILE_STATISTICS+FileTools.EXTENSION_DATA;
 
 		// open text file
 		BufferedReader br = new BufferedReader(new FileReader(path));
@@ -50,7 +50,7 @@ public class Glicko2Loader
 			double ratingDeviation = Double.parseDouble(fields[index++]);
 			double ratingVolatility = Double.parseDouble(fields[index++]);
 			PlayerRating playerRating = new PlayerRating(playerId,rating,ratingDeviation,ratingVolatility);
-			rankingService.registerPlayer(playerId, playerRating);
+			rankingService.registerPlayer(playerId,playerRating);
 		}
 		br.close();
         // TODO: if problem while reading the file, should restaure and use the backup 

@@ -21,12 +21,22 @@ package fr.free.totalboumboum.configuration.profile;
  * 
  */
 
+import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map.Entry;
 
+import javax.xml.parsers.ParserConfigurationException;
+
+import jrs.RankingService;
+
+import org.xml.sax.SAXException;
+
 import fr.free.totalboumboum.game.GameConstants;
+import fr.free.totalboumboum.game.statistics.GameStatistics;
+import fr.free.totalboumboum.tools.FileTools;
 
 public class ProfilesConfiguration
 {
@@ -58,8 +68,8 @@ public class ProfilesConfiguration
 	{	profiles.put(file,name);
 	}
 	
-	public void removeProfile(String file)
-	{	profiles.remove(file);		
+	public void removeProfile(int id)
+	{	profiles.remove(id);		
 	}
 	
 	public int getLastProfileIndex()
@@ -68,6 +78,54 @@ public class ProfilesConfiguration
 
 	public void setLastProfileIndex(int lastProfileIndex)
 	{	this.lastProfileIndex = lastProfileIndex;
+	}
+	
+	public String createProfile(String name) throws IOException, ParserConfigurationException, SAXException
+	{	// refresh counter
+		int lastProfile = getLastProfileIndex();
+		int nextProfile = lastProfile+1;
+		setLastProfileIndex(nextProfile);
+		
+		// create profile
+		Profile newProfile = new Profile();
+		newProfile.setName(name);
+		SpriteInfo spriteInfo = newProfile.getDefaultSprite();
+		String spritePack = "superbomberman1";
+		spriteInfo.setPack(spritePack);
+		String spriteFolder = "shirobon";
+		spriteInfo.setFolder(spriteFolder);
+		PredefinedColor spriteColor = PredefinedColor.WHITE;
+		spriteInfo.setColor(spriteColor);
+		
+		// create file
+		String fileName = Integer.toString(nextProfile)/*+FileTools.EXTENSION_DATA*/;			
+		ProfileSaver.saveProfile(newProfile, fileName);
+		
+		// add/save in config
+		addProfile(fileName,name);
+		ProfilesConfigurationSaver.saveProfilesConfiguration(this);
+		
+		// register in ranking service
+		RankingService rankingService = GameStatistics.getRankingService();
+		rankingService.registerPlayer(nextProfile);
+		
+		return fileName;
+	}
+	
+	public void deleteProfile(Profile profile) throws ParserConfigurationException, SAXException, IOException
+	{	// delete file
+		int id = profile.getId();
+		String path = FileTools.getProfilesPath()+File.separator+id+FileTools.EXTENSION_XML;
+		File file = new File(path);
+		file.delete();
+		
+		// delete entry in config
+		removeProfile(id);
+		ProfilesConfigurationSaver.saveProfilesConfiguration(this);
+		
+		// remove from ranking service
+		RankingService rankingService = GameStatistics.getRankingService();
+		rankingService.deregisterPlayer(id);
 	}
 	
 	/////////////////////////////////////////////////////////////////
@@ -137,11 +195,11 @@ public class ProfilesConfiguration
 	public static ProfilesSelection getSelection(ArrayList<Profile> profiles)
 	{	ProfilesSelection result = new ProfilesSelection();
 		for(Profile p: profiles)
-		{	String file = p.getFileName();
+		{	int id = p.getId();
 			PredefinedColor color = p.getSpriteColor();
 			int controlsIndex = p.getControlSettingsIndex();
 			String[] hero = {p.getSpritePack(),p.getSpriteFolder()};
-			result.addProfile(file,color,controlsIndex,hero);			
+			result.addProfile(id,color,controlsIndex,hero);			
 		}
 		return result;
 	}

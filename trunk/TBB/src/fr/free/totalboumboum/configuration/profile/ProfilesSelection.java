@@ -27,9 +27,9 @@ public class ProfilesSelection
 {
 	public ProfilesSelection copy()
 	{	ProfilesSelection result = new ProfilesSelection();
-		for(int i=0;i<fileNames.size();i++)
+		for(int i=0;i<ids.size();i++)
 		{	String hero[] = {heroes.get(i)[0],heroes.get(i)[1]};
-			result.addProfile(fileNames.get(i),colors.get(i),controls.get(i),hero);		
+			result.addProfile(ids.get(i),colors.get(i),controls.get(i),hero);		
 		}
 		return result;
 	}
@@ -40,10 +40,10 @@ public class ProfilesSelection
 		{	ProfilesSelection profilesSelection = (ProfilesSelection)object;
 			int i=0;
 			result = getProfileCount()==profilesSelection.getProfileCount();
-			while(i<fileNames.size() && result)
+			while(i<ids.size() && result)
 			{	result = colors.get(i)==profilesSelection.getColor(i);
 				result = result && controls.get(i).equals(profilesSelection.getControlsIndex(i));
-				result = result && fileNames.get(i).equals(profilesSelection.getFileName(i));
+				result = result && ids.get(i).equals(profilesSelection.getIds(i));
 				result = result && heroes.get(i)[0].equals(profilesSelection.getHero(i)[0]);
 				result = result && heroes.get(i)[1].equals(profilesSelection.getHero(i)[1]);
 				i++;
@@ -58,23 +58,23 @@ public class ProfilesSelection
 	// GENERAL				/////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	public int getProfileCount()
-	{	return fileNames.size();
+	{	return ids.size();
 	}
 
-	public void addProfile(String file, PredefinedColor color, int controlsIndex, String hero[])
-	{	fileNames.add(file);
+	public void addProfile(int id, PredefinedColor color, int controlsIndex, String hero[])
+	{	ids.add(id);
 		colors.add(color);
 		controls.add(controlsIndex);
 		heroes.add(hero);
 	}
 
 	/////////////////////////////////////////////////////////////////
-	// FILENAMES			/////////////////////////////////////////
+	// IDs					/////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	private final ArrayList<String> fileNames = new ArrayList<String>();
+	private final ArrayList<Integer> ids = new ArrayList<Integer>();
 	
-	public String getFileName(int index)
-	{	return fileNames.get(index);	
+	public Integer getIds(int index)
+	{	return ids.get(index);	
 	}	
 
 	/////////////////////////////////////////////////////////////////

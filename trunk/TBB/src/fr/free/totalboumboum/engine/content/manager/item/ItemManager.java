@@ -105,7 +105,7 @@ public class ItemManager
 		// stats
 		StatisticAction statAction = StatisticAction.GATHER_ITEM;
 		long statTime = sprite.getLoopTime();
-		String statActor = sprite.getPlayer().getFileName();
+		String statActor = Integer.toString(sprite.getPlayer().getId());
 		String statTarget = item.getItemName();
 		StatisticEvent statEvent = new StatisticEvent(statActor,statAction,statTarget,statTime);
 		sprite.addStatisticEvent(statEvent);
@@ -139,7 +139,7 @@ public class ItemManager
 		// stats
 		StatisticAction statAction = StatisticAction.RECEIVE_ITEM;
 		long statTime = sprite.getLoopTime();
-		String statActor = sprite.getPlayer().getFileName();
+		String statActor = Integer.toString(sprite.getPlayer().getId());
 		String statTarget = item.getItemName();
 		StatisticEvent statEvent = new StatisticEvent(statActor,statAction,statTarget,statTime);
 		sprite.addStatisticEvent(statEvent);
@@ -212,7 +212,7 @@ public class ItemManager
 			// stats
 			StatisticAction statAction = StatisticAction.LOSE_ITEM;
 			long statTime = sprite.getLoopTime();
-			String statActor = sprite.getPlayer().getFileName();
+			String statActor = Integer.toString(sprite.getPlayer().getId());
 			String statTarget = item.getItemName();
 			StatisticEvent statEvent = new StatisticEvent(statActor,statAction,statTarget,statTime);
 			sprite.addStatisticEvent(statEvent);
@@ -284,7 +284,7 @@ public class ItemManager
 							// stats
 							StatisticAction statAction = StatisticAction.LOSE_ITEM;
 							long statTime = sprite.getLoopTime();
-							String statActor = sprite.getPlayer().getFileName();
+							String statActor = Integer.toString(sprite.getPlayer().getId());
 							String statTarget = temp.getItemName();
 							StatisticEvent statEvent = new StatisticEvent(statActor,statAction,statTarget,statTime);
 							sprite.addStatisticEvent(statEvent);
@@ -334,7 +334,7 @@ public class ItemManager
 				// stats
 				StatisticAction statAction = StatisticAction.TRANSMIT_ITEM;
 				long statTime = sprite.getLoopTime();
-				String statActor = sprite.getPlayer().getFileName();
+				String statActor = Integer.toString(sprite.getPlayer().getId());
 				String statTarget = item.getItemName();
 				StatisticEvent statEvent = new StatisticEvent(statActor,statAction,statTarget,statTime);
 				sprite.addStatisticEvent(statEvent);
