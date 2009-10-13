@@ -26,7 +26,6 @@ import java.util.Iterator;
 import java.util.Vector;
 
 import fr.free.totalboumboum.ai.AbstractAiManager;
-import fr.free.totalboumboum.configuration.RoundVariables;
 import fr.free.totalboumboum.engine.container.tile.Tile;
 import fr.free.totalboumboum.engine.content.feature.Direction;
 import fr.free.totalboumboum.engine.content.feature.ability.AbstractAbility;
@@ -42,6 +41,7 @@ import fr.free.totalboumboum.engine.content.sprite.bomb.Bomb;
 import fr.free.totalboumboum.engine.content.sprite.item.Item;
 import fr.free.totalboumboum.engine.loop.Loop;
 import fr.free.totalboumboum.engine.player.Player;
+import fr.free.totalboumboum.game.round.RoundVariables;
 
 public abstract class AiManager extends AbstractAiManager<Integer>
 {	private boolean debug = false;

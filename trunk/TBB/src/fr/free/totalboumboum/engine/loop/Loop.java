@@ -52,8 +52,6 @@ import org.xml.sax.SAXException;
 
 import fr.free.totalboumboum.ai.AbstractAiManager;
 import fr.free.totalboumboum.configuration.Configuration;
-import fr.free.totalboumboum.configuration.GameConstants;
-import fr.free.totalboumboum.configuration.RoundVariables;
 import fr.free.totalboumboum.configuration.profile.Profile;
 import fr.free.totalboumboum.engine.container.bombset.BombsetMap;
 import fr.free.totalboumboum.engine.container.itemset.Itemset;
@@ -77,7 +75,9 @@ import fr.free.totalboumboum.engine.content.sprite.item.Item;
 import fr.free.totalboumboum.engine.control.SystemControl;
 import fr.free.totalboumboum.engine.player.Player;
 import fr.free.totalboumboum.engine.player.PlayerLocation;
+import fr.free.totalboumboum.game.GameConstants;
 import fr.free.totalboumboum.game.round.Round;
+import fr.free.totalboumboum.game.round.RoundVariables;
 import fr.free.totalboumboum.game.statistics.raw.StatisticEvent;
 import fr.free.totalboumboum.tools.CalculusTools;
 import fr.free.totalboumboum.tools.FileTools;

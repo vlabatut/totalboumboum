@@ -31,7 +31,7 @@ import jrs.RankingService;
 
 import fr.free.totalboumboum.tools.FileTools;
 
-public class RanksLoader
+public class Glicko2Loader
 {
 	public static void loadStatistics(RankingService rankingService) throws NumberFormatException, IOException
 	{	// init path

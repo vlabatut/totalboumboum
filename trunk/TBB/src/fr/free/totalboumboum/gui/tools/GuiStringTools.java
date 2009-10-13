@@ -3,8 +3,8 @@ package fr.free.totalboumboum.gui.tools;
 import java.awt.Color;
 import java.util.ArrayList;
 
-import fr.free.totalboumboum.configuration.GameConstants;
 import fr.free.totalboumboum.configuration.profile.PredefinedColor;
+import fr.free.totalboumboum.game.GameConstants;
 import fr.free.totalboumboum.gui.data.configuration.GuiConfiguration;
 
 public class GuiStringTools

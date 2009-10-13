@@ -24,7 +24,6 @@ package fr.free.totalboumboum.engine.content.manager.explosion;
 import java.util.ArrayList;
 import java.util.List;
 
-import fr.free.totalboumboum.configuration.RoundVariables;
 import fr.free.totalboumboum.engine.container.tile.Tile;
 import fr.free.totalboumboum.engine.content.feature.Direction;
 import fr.free.totalboumboum.engine.content.feature.ability.AbstractAbility;
@@ -35,6 +34,7 @@ import fr.free.totalboumboum.engine.content.feature.event.ActionEvent;
 import fr.free.totalboumboum.engine.content.feature.explosion.Explosion;
 import fr.free.totalboumboum.engine.content.sprite.Sprite;
 import fr.free.totalboumboum.engine.content.sprite.fire.Fire;
+import fr.free.totalboumboum.game.round.RoundVariables;
 
 public class ExplosionManager
 {	

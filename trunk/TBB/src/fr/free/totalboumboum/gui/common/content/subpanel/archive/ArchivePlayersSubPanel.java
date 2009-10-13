@@ -24,7 +24,7 @@ package fr.free.totalboumboum.gui.common.content.subpanel.archive;
 import java.awt.Color;
 import java.util.ArrayList;
 
-import fr.free.totalboumboum.configuration.GameConstants;
+import fr.free.totalboumboum.game.GameConstants;
 import fr.free.totalboumboum.game.archive.GameArchive;
 import fr.free.totalboumboum.gui.common.structure.subpanel.outside.SubPanel;
 import fr.free.totalboumboum.gui.common.structure.subpanel.outside.TableSubPanel;

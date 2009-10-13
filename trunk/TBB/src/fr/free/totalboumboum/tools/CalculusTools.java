@@ -23,7 +23,7 @@ package fr.free.totalboumboum.tools;
 
 import java.util.ArrayList;
 
-import fr.free.totalboumboum.configuration.RoundVariables;
+import fr.free.totalboumboum.game.round.RoundVariables;
 
 public class CalculusTools
 {	

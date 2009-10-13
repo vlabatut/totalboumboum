@@ -1,4 +1,4 @@
-package fr.free.totalboumboum.configuration;
+package fr.free.totalboumboum.game;
 
 /*
  * Total Boum Boum

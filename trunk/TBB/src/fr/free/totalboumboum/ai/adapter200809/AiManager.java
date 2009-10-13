@@ -24,12 +24,12 @@ package fr.free.totalboumboum.ai.adapter200809;
 import java.util.ArrayList;
 
 import fr.free.totalboumboum.ai.AbstractAiManager;
-import fr.free.totalboumboum.configuration.RoundVariables;
 import fr.free.totalboumboum.engine.container.level.Level;
 import fr.free.totalboumboum.engine.content.feature.Direction;
 import fr.free.totalboumboum.engine.content.feature.event.ControlEvent;
 import fr.free.totalboumboum.engine.loop.Loop;
 import fr.free.totalboumboum.engine.player.Player;
+import fr.free.totalboumboum.game.round.RoundVariables;
 
 /**
  * 

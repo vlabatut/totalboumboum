@@ -27,7 +27,7 @@ import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.Set;
 
-import fr.free.totalboumboum.configuration.GameConstants;
+import fr.free.totalboumboum.game.GameConstants;
 
 public class StringTools
 {

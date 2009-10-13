@@ -1,12 +1,14 @@
-package fr.free.totalboumboum.configuration;
+package fr.free.totalboumboum.game.round;
 
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.io.File;
 
+import fr.free.totalboumboum.configuration.Configuration;
 import fr.free.totalboumboum.engine.container.level.Level;
 import fr.free.totalboumboum.engine.loop.Loop;
+import fr.free.totalboumboum.game.GameConstants;
 import fr.free.totalboumboum.gui.tools.MessageDisplayer;
 import fr.free.totalboumboum.tools.FileTools;
 

@@ -28,9 +28,9 @@ import javax.xml.parsers.ParserConfigurationException;
 
 import org.xml.sax.SAXException;
 
-import fr.free.totalboumboum.configuration.GameConstants;
 import fr.free.totalboumboum.configuration.controls.ControlSettings;
 import fr.free.totalboumboum.configuration.controls.ControlSettingsLoader;
+import fr.free.totalboumboum.game.GameConstants;
 
 public class ControlsConfigurationLoader
 {	
