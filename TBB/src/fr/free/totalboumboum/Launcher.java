@@ -815,7 +815,8 @@ public class Launcher
 	 * - nouvelle version de shirobon issu de NBM1
 	 * - nouvelle instance : NES Bomberman 1
 	 * - 2 nouveaux niveaux pour illustrer l'instance NBM1
-	 * - 
+	 * - API IA : A* modifié pour pouvoir utiliser n'importe quelle fonction successeur
+	 * - API IA : accès à la taille des cases
 	 */
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -1012,7 +1013,6 @@ public class Launcher
 	 * 		- il faut pouvoir être capable de déterminer si un perso est malade, voire contagieux
 	 * 		- infos sup sur les adversaires : propriétés des bombes qu'ils peuvent poser, pour pouvoir calculer les blasts
 	 * 		- il faut savoir quels items sont distribués dans le niveau, et les autres infos accessibles aux joueurs comme le temps de la partie, etc
-	 * 		- on doit pouvoir connaitre la taille des cases
 	 * 
 	 * - dans NBM1, on prend l'item quand on passe au centre de l'item, pas quand on entre simplement sur la case
 	 * - prochaines étapes :
@@ -1021,12 +1021,5 @@ public class Launcher
 	 * 		- BM'83
 	 * 		- réseau
 	 * 		- sortir de bêta
-	 * 
-	 * 
-	 * - dans la fonction de cout, permettre de définir le cout pour passer d'une case à une autre (est-ce nécessaire?)
-	 * 	 comme ça on peut tenir compte du temps restant avant que la bombe explose
-	 * 	 car on est tjrs supposé arriver de la case voisine, donc a priori le temps nécessaire est tjrs le même
-	 *   >> possibilité de définir sa propre fonction successeur ? comme ça on peut interdire les cases dont le cout est trop élevé?
-	 *   >> en fait non, suffit de définir une fonction de cout qui compare le temps restant dans la case et le cout du noeud courant. donc faut donner un accès au noeud de recherche demandant le développement
 	 */
 }

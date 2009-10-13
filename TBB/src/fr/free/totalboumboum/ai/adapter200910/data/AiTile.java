@@ -26,6 +26,7 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 
+import fr.free.totalboumboum.configuration.GameVariables;
 import fr.free.totalboumboum.engine.container.tile.Tile;
 import fr.free.totalboumboum.engine.content.feature.Direction;
 import fr.free.totalboumboum.engine.content.feature.gesture.GestureName;
@@ -52,6 +53,7 @@ public class AiTile
 	AiTile(Tile tile, AiZone zone)
 	{	this.zone = zone;
 		this.tile = tile;
+		size = GameVariables.scaledTileDimension;
 		initTileLocation();
 		initPixelLocation();
 		updateSprites();
@@ -154,6 +156,21 @@ public class AiTile
 		posY = tile.getPosY();
 	}
 
+	/////////////////////////////////////////////////////////////////
+	// TILE SIZE		/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	/** longueur d'un côté de la case en pixels */
+	private double size;
+		
+	/** 
+	 * renvoie la taille de la case en pixels
+	 * 
+	 * @return	longueur d'un côté de la case en pixels
+	 */
+	public double getSize()
+	{	return size;	
+	}
+	
 	/////////////////////////////////////////////////////////////////
 	// SPRITES			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////

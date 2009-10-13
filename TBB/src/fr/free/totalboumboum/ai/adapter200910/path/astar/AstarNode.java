@@ -28,7 +28,7 @@ import fr.free.totalboumboum.ai.adapter200910.data.AiHero;
 import fr.free.totalboumboum.ai.adapter200910.data.AiTile;
 import fr.free.totalboumboum.ai.adapter200910.path.astar.cost.CostCalculator;
 import fr.free.totalboumboum.ai.adapter200910.path.astar.heuristic.HeuristicCalculator;
-import fr.free.totalboumboum.engine.content.feature.Direction;
+import fr.free.totalboumboum.ai.adapter200910.path.astar.successor.SuccessorCalculator;
 /**
  * Représente un noeud dans l'arbre de recherche développé par l'algorithme A* 
  */
@@ -43,7 +43,7 @@ public class AstarNode implements Comparable<AstarNode>
 	 * @param costCalculator	fonction de cout
 	 * @param heuristicCalculator	fonction heuristique
 	 */
-	public AstarNode(AiTile tile, AiHero hero, CostCalculator costCalculator, HeuristicCalculator heuristicCalculator)
+	public AstarNode(AiTile tile, AiHero hero, CostCalculator costCalculator, HeuristicCalculator heuristicCalculator, SuccessorCalculator successorCalculator)
 	{	// case
 		this.tile = tile;
 		// hero
@@ -58,6 +58,8 @@ public class AstarNode implements Comparable<AstarNode>
 		// heuristique
 		this.heuristicCalculator = heuristicCalculator;
 		heuristic = heuristicCalculator.processHeuristic(tile);
+		// successeurs
+		this.successorCalculator = successorCalculator;
 	}
 
 	/**
@@ -82,6 +84,8 @@ public class AstarNode implements Comparable<AstarNode>
 		// heuristique
 		heuristicCalculator = parent.getHeuristicCalculator();
 		heuristic = heuristicCalculator.processHeuristic(tile);
+		// successeurs
+		successorCalculator = parent.getSuccessorCalculator();
 	}
 
     /////////////////////////////////////////////////////////////////
@@ -196,6 +200,17 @@ public class AstarNode implements Comparable<AstarNode>
 	/////////////////////////////////////////////////////////////////
 	/** fils du noeud */
 	private ArrayList<AstarNode> children = null;
+	/** calculateur des successeurs */
+	private SuccessorCalculator successorCalculator;
+	
+	/**
+	 * renvoie la fonction successeur de ce noeud
+	 * 
+	 * @return la fonction successeur de ce noeud
+	 */
+	public SuccessorCalculator getSuccessorCalculator()
+	{	return successorCalculator;		
+	}
 	
 	/**
 	 * renvoie les fils de ce noeud de recherche
@@ -216,9 +231,11 @@ public class AstarNode implements Comparable<AstarNode>
 	 */
 	private void developNode()
 	{	children = new ArrayList<AstarNode>();
-		for(Direction direction: Direction.getPrimaryValues())
-		{	AiTile neighbor = tile.getNeighbor(direction);
-			if(neighbor.isCrossableBy(hero) && !hasBeenExplored(neighbor))
+		List<AiTile> neighbors = successorCalculator.processSuccessors(this);
+		for(AiTile neighbor: neighbors)
+		{	// on ne garde pas les états qui appartiennent déjà au chemin contenant le noeud de recherche courant
+			// i.e. les états qui apparaissent dans des noeuds ancêtres du noeud courant
+			if(!hasBeenExplored(neighbor))
 			{	AstarNode node = new AstarNode(neighbor,this);
 				children.add(node);			
 			}
