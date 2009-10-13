@@ -43,8 +43,8 @@ public class ProfileLoader
 		int size = profilesSelection.getProfileCount();
 		for(int i=0;i<size;i++)
 		{	// profile
-			String name = profilesSelection.getFileName(i);
-			Profile profile = loadProfile(name);
+			int id = profilesSelection.getIds(i);
+			Profile profile = loadProfile(id);
 			SpriteInfo selectedSprite = profile.getSelectedSprite();
 			// sprite
 			String packName = profilesSelection.getHero(i)[0];
@@ -65,14 +65,14 @@ public class ProfileLoader
 		return result;
 	}
 
-	public static Profile loadProfile(String fileName) throws ParserConfigurationException, SAXException, IOException, IllegalArgumentException, SecurityException, IllegalAccessException, NoSuchFieldException, ClassNotFoundException
+	public static Profile loadProfile(int id) throws ParserConfigurationException, SAXException, IOException, IllegalArgumentException, SecurityException, IllegalAccessException, NoSuchFieldException, ClassNotFoundException
 	{	String profilesFolder = FileTools.getProfilesPath();
-		File dataFile = new File(profilesFolder+File.separator+fileName+FileTools.EXTENSION_XML);
+		File dataFile = new File(profilesFolder+File.separator+id+FileTools.EXTENSION_XML);
 		String schemaFolder = FileTools.getSchemasPath();
 		File schemaFile = new File(schemaFolder+File.separator+FileTools.FILE_PROFILE+FileTools.EXTENSION_SCHEMA);
 		Element root = XmlTools.getRootFromFile(dataFile,schemaFile);
 		Profile result = new Profile();
-		result.setFileName(fileName);
+		result.setId(id);
 		loadProfileElement(root,result);
 		return result;
 	}

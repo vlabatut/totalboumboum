@@ -102,7 +102,7 @@ public class HeroEventManager extends EventManager
 					}
 					if(spr instanceof Hero)
 					{	Hero temp = (Hero)spr;
-						explosedBy = temp.getPlayer().getFileName();
+						explosedBy = Integer.toString(temp.getPlayer().getId());
 					}
 //if(explosedBy==null)
 //	System.out.println();
@@ -111,7 +111,7 @@ public class HeroEventManager extends EventManager
 				StatisticAction statAction = StatisticAction.BOMB_PLAYER;
 				long statTime = sprite.getLoopTime();
 				String statActor = explosedBy;
-				String statTarget = sprite.getPlayer().getFileName();
+				String statTarget = Integer.toString(sprite.getPlayer().getId());
 				StatisticEvent statEvent = new StatisticEvent(statActor,statAction,statTarget,statTime);
 				sprite.addStatisticEvent(statEvent);
 				// other lifes remaining?

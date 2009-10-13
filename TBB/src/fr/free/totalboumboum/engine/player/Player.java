@@ -93,8 +93,8 @@ public class Player
 			ai.update(aisPause);
 	}
 	
-	public String getFileName()
-	{	return profile.getFileName();
+	public int getId()
+	{	return profile.getId();
 	}
 	public String getName()
 	{	return profile.getName();

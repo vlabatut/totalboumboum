@@ -35,8 +35,8 @@ public class Glicko2Saver
 {
 	public static void saveStatistics(RankingService rankingService) throws IOException
 	{	// init files
-		String path = FileTools.getGlicko2Path()+File.pathSeparator+FileTools.FILE_STATISTICS+FileTools.EXTENSION_DATA;
-		String backup = FileTools.getGlicko2Path()+File.pathSeparator+FileTools.FILE_STATISTICS+FileTools.EXTENSION_BACKUP;
+		String path = FileTools.getGlicko2Path()+File.separator+FileTools.FILE_STATISTICS+FileTools.EXTENSION_DATA;
+		String backup = FileTools.getGlicko2Path()+File.separator+FileTools.FILE_STATISTICS+FileTools.EXTENSION_BACKUP;
 		File backupFile = new File(backup);
 		File previousFile = new File(path);
 		

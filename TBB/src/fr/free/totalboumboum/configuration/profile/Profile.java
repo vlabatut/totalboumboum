@@ -50,19 +50,6 @@ public class Profile implements Serializable
 	}
 
 	/////////////////////////////////////////////////////////////////
-	// FILE				/////////////////////////////////////////////
-	/////////////////////////////////////////////////////////////////
-	private String fileName;
-
-	public String getFileName()
-	{	return fileName;
-	}
-	
-	public void setFileName(String fileName)
-	{	this.fileName = fileName;
-	}
-
-	/////////////////////////////////////////////////////////////////
 	// SPRITES			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	private SpriteInfo defaultSprite;
@@ -170,6 +157,19 @@ public class Profile implements Serializable
 	}
 
 	/////////////////////////////////////////////////////////////////
+	// ID				/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	private int id = -1;
+	
+	public int getId()
+	{	return id;	
+	}
+	
+	public void setId(int id)
+	{	this.id = id;	
+	}
+	
+	/////////////////////////////////////////////////////////////////
 	// RANK				/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	private int rank = 0;
@@ -193,7 +193,7 @@ public class Profile implements Serializable
 		
 		result.controlSettingsIndex = controlSettingsIndex;
 		result.name = name;
-		result.fileName = fileName;
+		result.id = id;
 		result.portraits = portraits; //TODO copy
 		
 		result.defaultSprite = defaultSprite.copy();
@@ -207,7 +207,7 @@ public class Profile implements Serializable
 	{	boolean result = false;
 		if(o instanceof Profile)
 		{	Profile temp = (Profile) o;
-			result = temp.getFileName().equalsIgnoreCase(fileName);
+			result = temp.getId() == id;
 		}
 		return result;
 	}
