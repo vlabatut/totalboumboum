@@ -31,6 +31,8 @@ import fr.free.totalboumboum.ai.adapter200910.data.AiTile;
 import fr.free.totalboumboum.ai.adapter200910.path.AiPath;
 import fr.free.totalboumboum.ai.adapter200910.path.astar.cost.CostCalculator;
 import fr.free.totalboumboum.ai.adapter200910.path.astar.heuristic.HeuristicCalculator;
+import fr.free.totalboumboum.ai.adapter200910.path.astar.successor.BasicSuccessorCalculator;
+import fr.free.totalboumboum.ai.adapter200910.path.astar.successor.SuccessorCalculator;
 
 /**
  * Implémentation de l'algorithme A* (http://fr.wikipedia.org/wiki/Algorithme_A*) adapté au
@@ -57,9 +59,14 @@ public class Astar
 {	private static boolean verbose = false;
 
 	public Astar(AiHero hero, CostCalculator costCalculator, HeuristicCalculator heuristicCalculator)
+	{	this(hero,costCalculator,heuristicCalculator,new BasicSuccessorCalculator());
+	}
+	
+	public Astar(AiHero hero, CostCalculator costCalculator, HeuristicCalculator heuristicCalculator, SuccessorCalculator successorCalculator)
 	{	this.hero = hero;
 		this.costCalculator = costCalculator;
 		this.heuristicCalculator = heuristicCalculator;
+		this.successorCalculator = successorCalculator;
 	}
 
     /////////////////////////////////////////////////////////////////
@@ -67,8 +74,10 @@ public class Astar
 	/////////////////////////////////////////////////////////////////
 	/** fonction de cout */
 	private CostCalculator costCalculator = null;
-	/** fonctin heuristique */
+	/** fonction heuristique */
 	private HeuristicCalculator heuristicCalculator = null;
+	/** fonction successeur */
+	private SuccessorCalculator successorCalculator = null;
 	/** racine de l'arbre de recherche */
 	private AstarNode root = null;
 	/** personnage de référence */
@@ -156,7 +165,7 @@ public class Astar
 		// initialisation
 		AiPath result = new AiPath();
 		heuristicCalculator.setEndTiles(endTiles);
-		root = new AstarNode(startTile,hero,costCalculator,heuristicCalculator);
+		root = new AstarNode(startTile,hero,costCalculator,heuristicCalculator,successorCalculator);
 		PriorityQueue<AstarNode> queue = new PriorityQueue<AstarNode>(1);
 		queue.offer(root);
 		AstarNode finalNode = null;
