@@ -22,12 +22,15 @@ package fr.free.totalboumboum.game.statistics;
  */
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map.Entry;
 
 import fr.free.totalboumboum.game.statistics.glicko2.Glicko2Loader;
 import fr.free.totalboumboum.game.statistics.glicko2.Glicko2Saver;
+import fr.free.totalboumboum.game.statistics.raw.StatisticRound;
 import jrs.GameResults;
 import jrs.RankingService;
-import jrs.ResultsBasedRankingService;
 
 public class GameStatistics
 {
@@ -36,30 +39,69 @@ public class GameStatistics
 	/////////////////////////////////////////////////////////////////
 	public static void loadStatistics() throws NumberFormatException, IOException
 	{	// glicko2 ranking service
-		rankingService = new ResultsBasedRankingService();
-		Glicko2Loader.loadStatistics(rankingService);
+		Glicko2Loader.loadStatistics(rankingService,roundCounts);
 	}
 	
 	public static void saveStatistics() throws IOException
-	{	Glicko2Saver.saveStatistics(rankingService);
+	{	Glicko2Saver.saveStatistics(rankingService,roundCounts);
 	}
 
 	/////////////////////////////////////////////////////////////////
+	// ROUND COUNT		/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	private static final int updatePeriod = 10;
+	private static final HashMap<Integer,Integer> roundCounts = new HashMap<Integer, Integer>();
+	
+	
+	/////////////////////////////////////////////////////////////////
 	// RANKING SERVICE	/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	private static RankingService rankingService;
+	private static final RankingService rankingService = new RankingService();
 
 	public static RankingService getRankingService()
 	{	return rankingService;
 	}
 	
-	public void update()
+	public static void update(StatisticRound stats)
 	{	
-		
+		// create the game results objects
 		GameResults gameResults = new GameResults();
+		/*		if(isTeamGame())
+		{	Iterator teamNames = teamScores.keySet().iterator();
+			while (teamNames.hasNext())
+			{	String teamName = (String)teamNames.next();
+				Iterator playerIds = getTeam(teamName).getPlayerIds().iterator();
+				while (playerIds.hasNext())
+				{	String playerId = (String)playerIds.next();
+					double playerScore = ((Integer)playerScores.get(playerId)).doubleValue();
+					gameResults.addPlayerResults(teamName, playerId,playerScore);
+				}
+				double teamScore = ((Integer)teamScores.get(teamName)).doubleValue();
+				gameResults.setTeamResults(teamName, teamScore);
+			}
+		}
+		else*/
+		{	float[] points = stats.getPoints();
+			ArrayList<String> players = stats.getPlayers();
+			for(int index=0;index<points.length;index++)
+			{	int playerId = Integer.parseInt(players.get(index));
+				double playerScore = points[index];
+				gameResults.addPlayerResults(playerId,playerScore);
+			}
+		}
 		
 		// update rankings
 		rankingService.postResults(gameResults);
+		
+		// possibly make a service update
+		int total = 0;
+		for(Entry<Integer,Integer> entry: roundCounts.entrySet())
+		{	int roundCount = entry.getValue();
+			total = total + roundCount;
+		}
+		float average = total/(float)roundCounts.size();
+		if(average>=updatePeriod)
+			rankingService.endPeriod();
 		
 		// save new rankings
 		try

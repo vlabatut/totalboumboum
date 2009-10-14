@@ -25,6 +25,7 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
+import java.util.HashMap;
 
 import jrs.PlayerRating;
 import jrs.RankingService;
@@ -33,7 +34,7 @@ import fr.free.totalboumboum.tools.FileTools;
 
 public class Glicko2Loader
 {
-	public static void loadStatistics(RankingService rankingService) throws NumberFormatException, IOException
+	public static void loadStatistics(RankingService rankingService, HashMap<Integer,Integer> roundCounts) throws NumberFormatException, IOException
 	{	// init path
 		String path = FileTools.getGlicko2Path()+File.separator+FileTools.FILE_STATISTICS+FileTools.EXTENSION_DATA;
 
@@ -46,11 +47,15 @@ public class Glicko2Loader
 		{	int index = 0;
 			String[] fields = line.split("\\|");
 			int playerId = Integer.parseInt(fields[index++]);
+			int roundCount = Integer.parseInt(fields[index++]);
 			double rating = Double.parseDouble(fields[index++]);
 			double ratingDeviation = Double.parseDouble(fields[index++]);
 			double ratingVolatility = Double.parseDouble(fields[index++]);
+			// adding the player in the rating service
 			PlayerRating playerRating = new PlayerRating(playerId,rating,ratingDeviation,ratingVolatility);
 			rankingService.registerPlayer(playerId,playerRating);
+			// adding the player count
+			roundCounts.put(playerId,roundCount);
 		}
 		br.close();
         // TODO: if problem while reading the file, should restaure and use the backup 

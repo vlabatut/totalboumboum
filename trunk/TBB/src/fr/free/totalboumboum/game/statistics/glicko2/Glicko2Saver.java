@@ -25,6 +25,7 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.HashMap;
 
 import jrs.PlayerRating;
 import jrs.RankingService;
@@ -33,7 +34,7 @@ import fr.free.totalboumboum.tools.FileTools;
 
 public class Glicko2Saver
 {
-	public static void saveStatistics(RankingService rankingService) throws IOException
+	public static void saveStatistics(RankingService rankingService, HashMap<Integer,Integer> roundCounts) throws IOException
 	{	// init files
 		String path = FileTools.getGlicko2Path()+File.separator+FileTools.FILE_STATISTICS+FileTools.EXTENSION_DATA;
 		String backup = FileTools.getGlicko2Path()+File.separator+FileTools.FILE_STATISTICS+FileTools.EXTENSION_BACKUP;
@@ -48,9 +49,11 @@ public class Glicko2Saver
         PrintWriter pw = new PrintWriter(new FileWriter(path));
         for(Object o:rankingService.getPlayers())
         {	int id = (Integer)o;
+        	int roundCount = roundCounts.get(id);
 	        PlayerRating playerRating = rankingService.getPlayerRating(o);
 	        StringBuffer record = new StringBuffer();
 	        record.append(id).append("|");
+	        record.append(roundCount).append("|");
 	        record.append(playerRating.getRating()).append("|");
 	        record.append(playerRating.getRatingDeviation()).append("|");
 	        record.append(playerRating.getRatingVolatility());
