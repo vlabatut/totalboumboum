@@ -3,10 +3,11 @@ package fr.free.totalboumboum.game.statistics.glicko2;
 import java.io.File;
 import java.io.FileFilter;
 import java.io.IOException;
+import java.util.HashMap;
 
 import fr.free.totalboumboum.tools.FileTools;
 
-import jrs.ResultsBasedRankingService;
+import jrs.RankingService;
 
 public class Glicko2Init {
 
@@ -17,7 +18,9 @@ public class Glicko2Init {
 	{	// change ranking properties
 		
 		// create ranking service
-		ResultsBasedRankingService rankingService = new ResultsBasedRankingService();
+		RankingService rankingService = new RankingService();
+		// create round counts
+		HashMap<Integer,Integer> roundCounts = new HashMap<Integer, Integer>();
 		
 		// register all existing players
 		String folderStr = FileTools.getProfilesPath();
@@ -40,11 +43,13 @@ public class Glicko2Init {
 			int id = Integer.parseInt(idStr);
 			System.out.println(id);
 			rankingService.registerPlayer(id);
+			roundCounts.put(id,0);
 		}
+		
 		
 		// save the rankings
 		try
-		{	Glicko2Saver.saveStatistics(rankingService);
+		{	Glicko2Saver.saveStatistics(rankingService,roundCounts);
 		}
 		catch (IOException e)
 		{	e.printStackTrace();

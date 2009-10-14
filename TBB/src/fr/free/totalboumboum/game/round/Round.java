@@ -41,6 +41,7 @@ import fr.free.totalboumboum.game.limit.Limits;
 import fr.free.totalboumboum.game.limit.RoundLimit;
 import fr.free.totalboumboum.game.match.Match;
 import fr.free.totalboumboum.game.rank.Ranks;
+import fr.free.totalboumboum.game.statistics.GameStatistics;
 import fr.free.totalboumboum.game.statistics.raw.StatisticEvent;
 import fr.free.totalboumboum.game.statistics.raw.StatisticHolder;
 import fr.free.totalboumboum.game.statistics.raw.StatisticRound;
@@ -132,9 +133,10 @@ public class Round implements StatisticHolder, Serializable
 	
 	public void loopOver()
 	{	match.roundOver();
+		stats.initEndDate();
+		GameStatistics.update(stats);
 		if(panel!=null)
 		{	panel.roundOver();
-			stats.initEndDate();
 		}
 	}
 	
@@ -235,6 +237,9 @@ public class Round implements StatisticHolder, Serializable
 	// RESULTS			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 
+	/**
+	 * process the players ranks depending on the points they scored during the round
+	 */
 	private int[] getRanks(float[] pts)
 	{	int[] result = new int[getProfiles().size()];
 		for(int i=0;i<result.length;i++)
