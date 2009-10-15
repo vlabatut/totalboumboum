@@ -30,12 +30,11 @@ import java.util.Map.Entry;
 
 import javax.xml.parsers.ParserConfigurationException;
 
-import jrs.RankingService;
-
 import org.xml.sax.SAXException;
 
 import fr.free.totalboumboum.game.GameData;
 import fr.free.totalboumboum.game.statistics.GameStatistics;
+import fr.free.totalboumboum.game.statistics.glicko2.jrs.RankingService;
 import fr.free.totalboumboum.tools.FileTools;
 
 public class ProfilesConfiguration

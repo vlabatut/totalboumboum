@@ -22,18 +22,20 @@ package fr.free.totalboumboum.game.statistics.glicko2;
  */
 
 import java.io.File;
-import java.io.FileWriter;
+import java.io.FileOutputStream;
 import java.io.IOException;
-import java.io.PrintWriter;
-import java.util.HashMap;
+import java.io.ObjectOutputStream;
+import java.util.Iterator;
+import java.util.TreeSet;
 
 import fr.free.totalboumboum.game.statistics.glicko2.jrs.PlayerRating;
 import fr.free.totalboumboum.game.statistics.glicko2.jrs.RankingService;
 import fr.free.totalboumboum.tools.FileTools;
 
 public class Glicko2Saver
-{
-	public static void saveStatistics(RankingService<Integer> rankingService, HashMap<Integer,Integer> roundCounts) throws IOException
+{	private static final boolean verbose = true;
+
+	public static void saveStatistics(RankingService rankingService) throws IOException
 	{	// init files
 		String path = FileTools.getGlicko2Path()+File.separator+FileTools.FILE_STATISTICS+FileTools.EXTENSION_DATA;
 		String backup = FileTools.getGlicko2Path()+File.separator+FileTools.FILE_STATISTICS+FileTools.EXTENSION_BACKUP;
@@ -44,21 +46,30 @@ public class Glicko2Saver
 		backupFile.delete();
 		previousFile.renameTo(backupFile);
 		
-		// write the rankings for each registered player
-        PrintWriter pw = new PrintWriter(new FileWriter(path));
-        for(Integer id:rankingService.getPlayers())
-        {	int roundCount = roundCounts.get(id);
-	        PlayerRating<Integer> playerRating = rankingService.getPlayerRating(id);
-	        StringBuffer record = new StringBuffer();
-	        record.append(id).append("|");
-	        record.append(roundCount).append("|");
-	        record.append(playerRating.getRating()).append("|");
-	        record.append(playerRating.getRatingDeviation()).append("|");
-	        record.append(playerRating.getRatingVolatility());
-	        //System.out.println("Writing '" + record + "' to '" + dataStoreFile.getAbsolutePath() + "'");
-	        pw.println(record);
-        }
-        pw.flush();
-        pw.close();
+		// write the rankings
+		File file = new File(path);
+		FileOutputStream fileOut = new FileOutputStream(file);
+		ObjectOutputStream out = new ObjectOutputStream(fileOut);
+		out.writeObject(rankingService);
+		
+		// display rankings (debug)
+		if(verbose)
+		{	// process rankings
+			TreeSet<PlayerRating> playerRatings = new TreeSet<PlayerRating>();
+			Iterator<Integer> playerIds = rankingService.getPlayers().iterator();
+			while(playerIds.hasNext())
+			{	int playerId = playerIds.next();
+				PlayerRating playerRating = rankingService.getPlayerRating(playerId);
+				playerRatings.add(playerRating);
+			}
+			// display rankings
+			for(PlayerRating pr: playerRatings)
+			{	int playerId = (Integer)pr.getPlayerId();
+				double rating = pr.getRating();
+				double ratingDeviation = pr.getRatingDeviation();
+				double volatility = pr.getRatingVolatility();rankingService.getPlayerRating(playerId)
+				System.out.println(playerId+"\t"+rating+"\t"+ratingDeviation+"\t"+volatility);				
+			}
+		}
 	}
 }

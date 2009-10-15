@@ -23,40 +23,31 @@ package fr.free.totalboumboum.game.statistics;
 
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map.Entry;
 
 import fr.free.totalboumboum.game.statistics.glicko2.Glicko2Loader;
 import fr.free.totalboumboum.game.statistics.glicko2.Glicko2Saver;
+import fr.free.totalboumboum.game.statistics.glicko2.jrs.GameResults;
+import fr.free.totalboumboum.game.statistics.glicko2.jrs.RankingService;
 import fr.free.totalboumboum.game.statistics.raw.StatisticRound;
-import jrs.GameResults;
-import jrs.RankingService;
 
 public class GameStatistics
 {
 	/////////////////////////////////////////////////////////////////
 	// FILE ACCESS		/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	public static void loadStatistics() throws NumberFormatException, IOException
+	public static void loadStatistics() throws IOException, ClassNotFoundException
 	{	// glicko2 ranking service
-		Glicko2Loader.loadStatistics(rankingService,roundCounts);
+		rankingService = Glicko2Loader.loadStatistics();
 	}
 	
 	public static void saveStatistics() throws IOException
-	{	Glicko2Saver.saveStatistics(rankingService,roundCounts);
+	{	Glicko2Saver.saveStatistics(rankingService);
 	}
 
 	/////////////////////////////////////////////////////////////////
-	// ROUND COUNT		/////////////////////////////////////////////
-	/////////////////////////////////////////////////////////////////
-	private static final int updatePeriod = 10;
-	private static final HashMap<Integer,Integer> roundCounts = new HashMap<Integer, Integer>();
-	
-	
-	/////////////////////////////////////////////////////////////////
 	// RANKING SERVICE	/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	private static final RankingService rankingService = new RankingService();
+	private static RankingService rankingService;
 
 	public static RankingService getRankingService()
 	{	return rankingService;
@@ -86,32 +77,12 @@ public class GameStatistics
 			for(int index=0;index<points.length;index++)
 			{	int playerId = Integer.parseInt(players.get(index));
 				double playerScore = points[index];
-				// init game result
 				gameResults.addPlayerResults(playerId,playerScore);
-				// update round count
-				int roundCount = roundCounts.get(playerId);
-				roundCount++;
-				roundCounts.put(playerId,roundCount);
 			}
 		}
 		
 		// update rankings
 		rankingService.postResults(gameResults);
-		
-		// possibly make a service update
-		int total = 0;
-		for(Entry<Integer,Integer> entry: roundCounts.entrySet())
-		{	int roundCount = entry.getValue();
-			total = total + roundCount;
-		}
-		float average = total/(float)roundCounts.size();
-		if(average>=updatePeriod)
-		{	// update rankings
-			rankingService.endPeriod();
-			// reinit round counts
-			for(Integer id: roundCounts.keySet())
-				roundCounts.put(id,0);
-		}
 		
 		// save new rankings
 		try
