@@ -27,14 +27,13 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.HashMap;
 
-import jrs.PlayerRating;
-import jrs.RankingService;
-
+import fr.free.totalboumboum.game.statistics.glicko2.jrs.PlayerRating;
+import fr.free.totalboumboum.game.statistics.glicko2.jrs.RankingService;
 import fr.free.totalboumboum.tools.FileTools;
 
 public class Glicko2Loader
 {
-	public static void loadStatistics(RankingService rankingService, HashMap<Integer,Integer> roundCounts) throws NumberFormatException, IOException
+	public static void loadStatistics(RankingService<Integer> rankingService, HashMap<Integer,Integer> roundCounts) throws NumberFormatException, IOException
 	{	// init path
 		String path = FileTools.getGlicko2Path()+File.separator+FileTools.FILE_STATISTICS+FileTools.EXTENSION_DATA;
 
@@ -52,7 +51,7 @@ public class Glicko2Loader
 			double ratingDeviation = Double.parseDouble(fields[index++]);
 			double ratingVolatility = Double.parseDouble(fields[index++]);
 			// adding the player in the rating service
-			PlayerRating playerRating = new PlayerRating(playerId,rating,ratingDeviation,ratingVolatility);
+			PlayerRating<Integer> playerRating = new PlayerRating<Integer>(playerId,rating,ratingDeviation,ratingVolatility);
 			rankingService.registerPlayer(playerId,playerRating);
 			// adding the player count
 			roundCounts.put(playerId,roundCount);
