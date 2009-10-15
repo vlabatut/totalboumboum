@@ -24,6 +24,10 @@ package fr.free.totalboumboum.game.statistics;
 import java.io.IOException;
 import java.util.ArrayList;
 
+import javax.xml.parsers.ParserConfigurationException;
+
+import org.xml.sax.SAXException;
+
 import fr.free.totalboumboum.game.statistics.glicko2.Glicko2Loader;
 import fr.free.totalboumboum.game.statistics.glicko2.Glicko2Saver;
 import fr.free.totalboumboum.game.statistics.glicko2.jrs.GameResults;
@@ -40,7 +44,7 @@ public class GameStatistics
 		rankingService = Glicko2Loader.loadStatistics();
 	}
 	
-	public static void saveStatistics() throws IOException
+	public static void saveStatistics() throws IOException, IllegalArgumentException, SecurityException, ParserConfigurationException, SAXException, IllegalAccessException, NoSuchFieldException, ClassNotFoundException
 	{	Glicko2Saver.saveStatistics(rankingService);
 	}
 
@@ -89,6 +93,27 @@ public class GameStatistics
 		{	saveStatistics();
 		}
 		catch (IOException e)
+		{	e.printStackTrace();
+		}
+		catch (IllegalArgumentException e)
+		{	e.printStackTrace();
+		}
+		catch (SecurityException e)
+		{	e.printStackTrace();
+		}
+		catch (ParserConfigurationException e)
+		{	e.printStackTrace();
+		}
+		catch (SAXException e)
+		{	e.printStackTrace();
+		}
+		catch (IllegalAccessException e)
+		{	e.printStackTrace();
+		}
+		catch (NoSuchFieldException e)
+		{	e.printStackTrace();
+		}
+		catch (ClassNotFoundException e)
 		{	e.printStackTrace();
 		}
 	}

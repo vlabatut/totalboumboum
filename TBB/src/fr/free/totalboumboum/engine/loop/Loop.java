@@ -643,8 +643,8 @@ System.out.println();
 				setCanceled(false);
 			}
 		}
-		panel.loopOver();
 		round.loopOver();
+		panel.loopOver();
 	}
 
 	private void update()
