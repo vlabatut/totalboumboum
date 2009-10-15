@@ -67,7 +67,7 @@ public class Glicko2Saver
 			{	int playerId = (Integer)pr.getPlayerId();
 				double rating = pr.getRating();
 				double ratingDeviation = pr.getRatingDeviation();
-				double volatility = pr.getRatingVolatility();rankingService.getPlayerRating(playerId)
+				double volatility = pr.getRatingVolatility();
 				System.out.println(playerId+"\t"+rating+"\t"+ratingDeviation+"\t"+volatility);				
 			}
 		}
