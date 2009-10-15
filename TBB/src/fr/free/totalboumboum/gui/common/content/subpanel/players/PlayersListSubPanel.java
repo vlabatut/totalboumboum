@@ -34,7 +34,7 @@ import javax.swing.JLabel;
 import fr.free.totalboumboum.configuration.Configuration;
 import fr.free.totalboumboum.configuration.profile.Portraits;
 import fr.free.totalboumboum.configuration.profile.Profile;
-import fr.free.totalboumboum.game.GameConstants;
+import fr.free.totalboumboum.game.GameData;
 import fr.free.totalboumboum.gui.common.structure.subpanel.outside.SubPanel;
 import fr.free.totalboumboum.gui.common.structure.subpanel.outside.TableSubPanel;
 import fr.free.totalboumboum.gui.tools.GuiKeys;
@@ -235,7 +235,7 @@ public class PlayersListSubPanel extends TableSubPanel implements MouseListener
 		{	Profile profile = players.get(pos[0]-1);
 			int index = profile.getControlSettingsIndex();
 			if(profile.hasAi())
-			{	if(index==GameConstants.CONTROL_COUNT)
+			{	if(index==GameData.CONTROL_COUNT)
 					index = 0;
 				else
 					index = Configuration.getProfilesConfiguration().getNextFreeControls(players,index);

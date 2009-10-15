@@ -49,7 +49,7 @@ import fr.free.totalboumboum.engine.content.sprite.bomb.Bomb;
 import fr.free.totalboumboum.engine.content.sprite.floor.Floor;
 import fr.free.totalboumboum.engine.content.sprite.item.Item;
 import fr.free.totalboumboum.engine.loop.Loop;
-import fr.free.totalboumboum.game.GameConstants;
+import fr.free.totalboumboum.game.GameData;
 import fr.free.totalboumboum.game.round.RoundVariables;
 import fr.free.totalboumboum.tools.FileTools;
 import fr.free.totalboumboum.tools.XmlTools;
@@ -99,7 +99,7 @@ public class HollowLevel implements Serializable
 		}
 		
 		// zoom factor
-		double standardTileDimension = GameConstants.STANDARD_TILE_DIMENSION;
+		double standardTileDimension = GameData.STANDARD_TILE_DIMENSION;
 //		double trueRatioX = sizeX/visibleWidth/standardTileDimension;
 //		double trueRatioY = sizeY/visibleHeight/standardTileDimension;
 //		double trueZoom = Math.min(trueRatioX,trueRatioY);

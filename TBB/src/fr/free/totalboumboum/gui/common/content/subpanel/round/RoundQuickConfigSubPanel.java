@@ -29,7 +29,7 @@ import javax.swing.JLabel;
 
 import fr.free.totalboumboum.configuration.game.quickmatch.QuickMatchConfiguration;
 import fr.free.totalboumboum.configuration.game.quickmatch.QuickMatchDraw;
-import fr.free.totalboumboum.game.GameConstants;
+import fr.free.totalboumboum.game.GameData;
 import fr.free.totalboumboum.gui.common.structure.subpanel.inside.Line;
 import fr.free.totalboumboum.gui.common.structure.subpanel.outside.LinesSubPanel;
 import fr.free.totalboumboum.gui.common.structure.subpanel.outside.SubPanel;
@@ -77,8 +77,8 @@ public class RoundQuickConfigSubPanel extends LinesSubPanel implements MouseList
 		reinit(LINE_COUNT,1);
 		int iconWidth = getLineHeight();
 		int nameWidth = (int)(getDataWidth()*0.33);
-		int pointsRanksWidth = (getDataWidth() - nameWidth - GameConstants.CONTROL_COUNT*GuiTools.subPanelMargin) / GameConstants.CONTROL_COUNT;
-		int firstPointsRankWidth = getDataWidth() - nameWidth - GameConstants.CONTROL_COUNT*GuiTools.subPanelMargin - (GameConstants.CONTROL_COUNT-1)*pointsRanksWidth;
+		int pointsRanksWidth = (getDataWidth() - nameWidth - GameData.CONTROL_COUNT*GuiTools.subPanelMargin) / GameData.CONTROL_COUNT;
+		int firstPointsRankWidth = getDataWidth() - nameWidth - GameData.CONTROL_COUNT*GuiTools.subPanelMargin - (GameData.CONTROL_COUNT-1)*pointsRanksWidth;
 		int pointsValuesWidth = pointsRanksWidth - 2*GuiTools.subPanelMargin - 2*iconWidth;
 //		getDataWidth() - nameWidth - 7*GuiTools.subPanelMargin - (GameConstants.CONTROL_COUNT-1)*pointsRanksWidth;
 		int firstPointsValuesWidth = firstPointsRankWidth - 2*GuiTools.subPanelMargin - 2*iconWidth;
@@ -191,7 +191,7 @@ public class RoundQuickConfigSubPanel extends LinesSubPanel implements MouseList
 			
 			// points ranks
 			{	Line ln = getLine(LINE_POINTS_RANKS);
-				for(int i=0;i<GameConstants.CONTROL_COUNT;i++)
+				for(int i=0;i<GameData.CONTROL_COUNT;i++)
 					ln.addLabel(0);
 				int col = 0;
 				// name
@@ -204,7 +204,7 @@ public class RoundQuickConfigSubPanel extends LinesSubPanel implements MouseList
 					col++;
 				}
 				// values
-				for(int i=1;i<=GameConstants.CONTROL_COUNT;i++)
+				for(int i=1;i<=GameData.CONTROL_COUNT;i++)
 				{	String text = GuiConfiguration.getMiscConfiguration().getLanguage().getText(GuiKeys.MENU_QUICKMATCH_SETTINGS_POINTS_RANKS_VALUE)+i; 
 					String tooltip = GuiConfiguration.getMiscConfiguration().getLanguage().getText(GuiKeys.MENU_QUICKMATCH_SETTINGS_POINTS_RANKS_VALUE+GuiKeys.TOOLTIP)+i; 
 					ln.setLabelText(col,text,tooltip);
@@ -224,7 +224,7 @@ public class RoundQuickConfigSubPanel extends LinesSubPanel implements MouseList
 			
 			// points values
 			{	Line ln = getLine(LINE_POINTS_VALUES);
-				for(int i=0;i<GameConstants.CONTROL_COUNT;i++)
+				for(int i=0;i<GameData.CONTROL_COUNT;i++)
 				{	ln.addLabel(0);
 					ln.addLabel(0);
 					ln.addLabel(0);
@@ -240,7 +240,7 @@ public class RoundQuickConfigSubPanel extends LinesSubPanel implements MouseList
 					col++;
 				}
 				// values
-				for(int i=0;i<GameConstants.CONTROL_COUNT;i++)
+				for(int i=0;i<GameData.CONTROL_COUNT;i++)
 				{	// minus button
 					{	ln.setLabelMinWidth(col,iconWidth);
 						ln.setLabelPrefWidth(col,iconWidth);

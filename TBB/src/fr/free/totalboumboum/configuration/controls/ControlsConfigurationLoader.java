@@ -30,7 +30,7 @@ import org.xml.sax.SAXException;
 
 import fr.free.totalboumboum.configuration.controls.ControlSettings;
 import fr.free.totalboumboum.configuration.controls.ControlSettingsLoader;
-import fr.free.totalboumboum.game.GameConstants;
+import fr.free.totalboumboum.game.GameData;
 
 public class ControlsConfigurationLoader
 {	
@@ -38,7 +38,7 @@ public class ControlsConfigurationLoader
 	{	ControlsConfiguration result = new ControlsConfiguration();
 		NumberFormat nf = NumberFormat.getInstance();
 		nf.setMinimumIntegerDigits(2);
-		for(int i=1;i<=GameConstants.CONTROL_COUNT;i++)
+		for(int i=1;i<=GameData.CONTROL_COUNT;i++)
 		{	String fileName = nf.format(i);
 			ControlSettings controlSettings = ControlSettingsLoader.loadControlSettings(fileName);
 			result.putControlSettings(i,controlSettings);

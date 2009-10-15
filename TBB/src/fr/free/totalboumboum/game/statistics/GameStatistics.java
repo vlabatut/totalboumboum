@@ -86,7 +86,12 @@ public class GameStatistics
 			for(int index=0;index<points.length;index++)
 			{	int playerId = Integer.parseInt(players.get(index));
 				double playerScore = points[index];
+				// init game result
 				gameResults.addPlayerResults(playerId,playerScore);
+				// update round count
+				int roundCount = roundCounts.get(playerId);
+				roundCount++;
+				roundCounts.put(playerId,roundCount);
 			}
 		}
 		
@@ -101,7 +106,12 @@ public class GameStatistics
 		}
 		float average = total/(float)roundCounts.size();
 		if(average>=updatePeriod)
+		{	// update rankings
 			rankingService.endPeriod();
+			// reinit round counts
+			for(Integer id: roundCounts.keySet())
+				roundCounts.put(id,0);
+		}
 		
 		// save new rankings
 		try

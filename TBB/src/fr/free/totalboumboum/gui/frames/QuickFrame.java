@@ -35,7 +35,7 @@ import fr.free.totalboumboum.configuration.profile.ProfileLoader;
 import fr.free.totalboumboum.configuration.profile.ProfilesSelection;
 import fr.free.totalboumboum.engine.loop.Loop;
 import fr.free.totalboumboum.engine.loop.LoopRenderPanel;
-import fr.free.totalboumboum.game.GameConstants;
+import fr.free.totalboumboum.game.GameData;
 import fr.free.totalboumboum.game.match.Match;
 import fr.free.totalboumboum.game.round.Round;
 import fr.free.totalboumboum.game.round.RoundRenderPanel;
@@ -71,7 +71,7 @@ public class QuickFrame extends AbstractFrame implements ActionListener, LoopRen
 	
 	public QuickFrame() throws IllegalArgumentException, SecurityException, ParserConfigurationException, SAXException, IOException, IllegalAccessException, NoSuchFieldException, ClassNotFoundException
 	{	// init
-		super("TBB v."+GameConstants.VERSION+" (Quicklaunch)");
+		super("TBB v."+GameData.VERSION+" (Quicklaunch)");
 
 		// panel size
 		Dimension contentDimension = Configuration.getVideoConfiguration().getPanelDimension();

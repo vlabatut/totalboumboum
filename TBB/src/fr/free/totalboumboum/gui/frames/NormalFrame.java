@@ -29,7 +29,7 @@ import javax.xml.parsers.ParserConfigurationException;
 import org.xml.sax.SAXException;
 
 import fr.free.totalboumboum.configuration.Configuration;
-import fr.free.totalboumboum.game.GameConstants;
+import fr.free.totalboumboum.game.GameData;
 import fr.free.totalboumboum.gui.common.structure.MenuContainer;
 import fr.free.totalboumboum.gui.common.structure.dialog.outside.ModalDialogPanel;
 import fr.free.totalboumboum.gui.common.structure.panel.menu.MenuPanel;
@@ -50,7 +50,7 @@ public class NormalFrame extends AbstractFrame implements MenuContainer
 
 	public NormalFrame() throws ParserConfigurationException, SAXException, IOException, IllegalArgumentException, SecurityException, IllegalAccessException, NoSuchFieldException, ClassNotFoundException
 	{	// init
-		super("TBB v."+GameConstants.VERSION);
+		super("TBB v."+GameData.VERSION);
 		
 		// UI manager
 		UIManager.put("MenuItemUI","CustomMenuItemUI");

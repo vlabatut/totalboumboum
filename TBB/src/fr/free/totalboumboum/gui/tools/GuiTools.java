@@ -45,7 +45,7 @@ import javax.swing.JLabel;
 import javax.swing.JToggleButton;
 
 import fr.free.totalboumboum.configuration.Configuration;
-import fr.free.totalboumboum.game.GameConstants;
+import fr.free.totalboumboum.game.GameData;
 import fr.free.totalboumboum.gui.common.structure.ButtonAware;
 import fr.free.totalboumboum.gui.data.configuration.GuiConfiguration;
 import fr.free.totalboumboum.tools.ImageTools;
@@ -72,16 +72,18 @@ public class GuiTools
 	public static final int STARTUP_CONFIG = 1;
 	public static final int STARTUP_GUI = 2;
 	public static final int STARTUP_INIT = 3;
-	public static final int STARTUP_DONE = 4;
+	public static final int STARTUP_STATS = 4;
+	public static final int STARTUP_DONE = 5;
 	public static final String STARTUP_MESSAGES[] = 
 	{	"[Loading XML schemas]",
 		"[Loading configuration]",
 		"[Loading GUI]",
 		"[Initializing GUI]",
+		"[Loading statistics]",
 		"[Done]"
 	};
 	public static final String STARTUP_LEGAL[] = 
-	{	"Total Boum Boum version "+GameConstants.VERSION,
+	{	"Total Boum Boum version "+GameData.VERSION,
 		new Character('\u00A9').toString()+" 2008-2009 Vincent Labatut",
 		"Licensed under the GPL v2"
 	};

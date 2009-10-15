@@ -24,7 +24,7 @@ package fr.free.totalboumboum.configuration.game.quickmatch;
 import java.util.ArrayList;
 
 import fr.free.totalboumboum.configuration.profile.ProfilesSelection;
-import fr.free.totalboumboum.game.GameConstants;
+import fr.free.totalboumboum.game.GameData;
 
 public class QuickMatchConfiguration
 {
@@ -178,7 +178,7 @@ public class QuickMatchConfiguration
 	{	levelsRandomOrder = false;
 		playersRandomLocation = false;
 		points = new ArrayList<Integer>();
-		for(int i=0;i<GameConstants.CONTROL_COUNT;i++)
+		for(int i=0;i<GameData.CONTROL_COUNT;i++)
 			points.set(i,0);
 		pointsShare = false;
 		pointsDraw = QuickMatchDraw.BOTH;

@@ -44,6 +44,8 @@ import org.xml.sax.SAXException;
 
 import fr.free.totalboumboum.configuration.Configuration;
 import fr.free.totalboumboum.engine.log.logstats.LogstatsLoader;
+import fr.free.totalboumboum.game.GameData;
+import fr.free.totalboumboum.game.statistics.GameStatistics;
 import fr.free.totalboumboum.gui.data.configuration.GuiConfiguration;
 import fr.free.totalboumboum.gui.data.configuration.misc.MiscConfiguration;
 import fr.free.totalboumboum.gui.frames.NormalFrame;
@@ -96,9 +98,12 @@ public class Launcher
 		updateSplash(splash,GuiTools.STARTUP_MESSAGES[GuiTools.STARTUP_INIT]);
 		GuiTools.init();
 		// load engine stats
+		updateSplash(splash,GuiTools.STARTUP_MESSAGES[GuiTools.STARTUP_STATS]);
 		LogstatsLoader.loadLogstats();
+		GameStatistics.loadStatistics();
 		// startup finished
 		updateSplash(splash,GuiTools.STARTUP_MESSAGES[GuiTools.STARTUP_DONE]);
+		GameData.quickMode = false;
 		
 		// create GUI
 		SwingUtilities.invokeLater(new Runnable()
@@ -182,6 +187,7 @@ public class Launcher
 		LogstatsLoader.loadLogstats();
 		// done
 		System.out.println(GuiTools.STARTUP_MESSAGES[GuiTools.STARTUP_DONE]);
+		GameData.quickMode = true;
 		
 		// create GUI
 		SwingUtilities.invokeLater(new Runnable()

@@ -4,7 +4,7 @@ import java.awt.Color;
 import java.util.ArrayList;
 
 import fr.free.totalboumboum.configuration.profile.PredefinedColor;
-import fr.free.totalboumboum.game.GameConstants;
+import fr.free.totalboumboum.game.GameData;
 import fr.free.totalboumboum.gui.data.configuration.GuiConfiguration;
 
 public class GuiStringTools
@@ -30,7 +30,7 @@ public class GuiStringTools
 			result = GuiTools.getPixelWidth(fontSize,text);
 		}
 		// control number X
-		for(int index=1;index<=GameConstants.CONTROL_COUNT;index++)
+		for(int index=1;index<=GameData.CONTROL_COUNT;index++)
 		{	// text
 			String text = GuiConfiguration.getMiscConfiguration().getLanguage().getText(GuiKeys.COMMON_PLAYERS_LIST_DATA_CONTROLS)+index;
 			controlTexts.add(text);

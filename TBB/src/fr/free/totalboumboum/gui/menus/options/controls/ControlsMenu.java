@@ -36,7 +36,7 @@ import org.xml.sax.SAXException;
 import fr.free.totalboumboum.configuration.Configuration;
 import fr.free.totalboumboum.configuration.controls.ControlSettings;
 import fr.free.totalboumboum.configuration.controls.ControlsConfigurationSaver;
-import fr.free.totalboumboum.game.GameConstants;
+import fr.free.totalboumboum.game.GameData;
 import fr.free.totalboumboum.gui.common.structure.panel.SplitMenuPanel;
 import fr.free.totalboumboum.gui.common.structure.panel.menu.InnerMenuPanel;
 import fr.free.totalboumboum.gui.common.structure.panel.menu.MenuPanel;
@@ -57,7 +57,7 @@ public class ControlsMenu extends InnerMenuPanel
 	@SuppressWarnings("unused")
 	private JButton buttonCancel;
 
-	private ControlsData controlsData[] = new ControlsData[GameConstants.CONTROL_COUNT];
+	private ControlsData controlsData[] = new ControlsData[GameData.CONTROL_COUNT];
 	
 	private int selected = 0;
 

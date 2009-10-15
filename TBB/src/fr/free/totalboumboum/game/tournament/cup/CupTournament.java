@@ -34,7 +34,7 @@ import java.util.TreeSet;
 import java.util.Map.Entry;
 
 import fr.free.totalboumboum.configuration.profile.Profile;
-import fr.free.totalboumboum.game.GameConstants;
+import fr.free.totalboumboum.game.GameData;
 import fr.free.totalboumboum.game.match.Match;
 import fr.free.totalboumboum.game.rank.Ranks;
 import fr.free.totalboumboum.game.statistics.raw.StatisticMatch;
@@ -117,7 +117,7 @@ public class CupTournament extends AbstractTournament
 	@Override
 	public Set<Integer> getAllowedPlayerNumbers()
 	{	Set<Integer> result = new TreeSet<Integer>();
-		for(int i=0;i<=GameConstants.MAX_PROFILES_COUNT;i++)
+		for(int i=0;i<=GameData.MAX_PROFILES_COUNT;i++)
 		{	HashMap<Integer,ArrayList<ArrayList<Integer>>> distri = processPlayerDistribution(i);
 			if(distri.size()>0)
 				result.add(i);

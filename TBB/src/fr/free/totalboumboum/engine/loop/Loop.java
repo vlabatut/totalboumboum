@@ -75,7 +75,7 @@ import fr.free.totalboumboum.engine.content.sprite.item.Item;
 import fr.free.totalboumboum.engine.control.SystemControl;
 import fr.free.totalboumboum.engine.player.Player;
 import fr.free.totalboumboum.engine.player.PlayerLocation;
-import fr.free.totalboumboum.game.GameConstants;
+import fr.free.totalboumboum.game.GameData;
 import fr.free.totalboumboum.game.round.Round;
 import fr.free.totalboumboum.game.round.RoundVariables;
 import fr.free.totalboumboum.game.statistics.raw.StatisticEvent;
@@ -815,7 +815,7 @@ System.out.println();
 	private void initEntries()
 	{	entryIndex = 0;
 		entryRoles = new Role[]{Role.FLOOR,Role.BLOCK,Role.ITEM,Role.BOMB,Role.HERO};
-		entryDelays = new Double[]{0d,0d,0d,0d,0d,0d,GameConstants.READY_TIME,GameConstants.SET_TIME,GameConstants.GO_TIME};
+		entryDelays = new Double[]{0d,0d,0d,0d,0d,0d,GameData.READY_TIME,GameData.SET_TIME,GameData.GO_TIME};
 		String[] entryTexts = new String[]{null,null,null,null,null,panel.getMessageTextReady(),panel.getMessageTextSet(),panel.getMessageTextGo()};
 		// set the roles
 		for(int i=0;i<entryRoles.length;i++)

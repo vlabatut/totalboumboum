@@ -34,7 +34,7 @@ import org.xml.sax.SAXException;
 
 import fr.free.totalboumboum.configuration.profile.ProfilesSelection;
 import fr.free.totalboumboum.configuration.profile.ProfilesSelectionLoader;
-import fr.free.totalboumboum.game.GameConstants;
+import fr.free.totalboumboum.game.GameData;
 import fr.free.totalboumboum.tools.FileTools;
 import fr.free.totalboumboum.tools.XmlTools;
 
@@ -130,7 +130,7 @@ public class QuickMatchConfigurationLoader
 	private static void loadPointsElement(Element root, QuickMatchConfiguration result)
 	{	// values
 		ArrayList<Integer> points = new ArrayList<Integer>();
-		for(int i=0;i<GameConstants.CONTROL_COUNT;i++)
+		for(int i=0;i<GameData.CONTROL_COUNT;i++)
 			points.add(0);
 		List<Element> list = root.getChildren(XmlTools.ELT_VALUE);
 		for(Element e:list)
