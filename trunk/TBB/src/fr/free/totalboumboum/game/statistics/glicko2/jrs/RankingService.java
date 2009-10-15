@@ -1,14 +1,40 @@
-/*
- * RankingService.java
- *
- */
-
 package fr.free.totalboumboum.game.statistics.glicko2.jrs;
 
+/*
+ * JRS Library
+ * 
+ * BSD License
+ * Copyright (c) 2006-2007 JRS Project
+ * All rights reserved.
+ * Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
+ * 		* Redistributions of source code must retain the above copyright notice, this list of conditions and the following disclaimer.
+ * 		* Redistributions in binary form must reproduce the above copyright notice, this list of conditions and the following disclaimer in the documentation and/or other materials provided with the distribution.
+ *  	* Neither the name of the JRS Project nor the names of its contributors may be used to endorse or promote products derived from this software without specific prior written permission.
+ *  
+ * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" 
+ * AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, 
+ * THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. 
+ * IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, 
+ * SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; 
+ * LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, 
+ * WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF 
+ * THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+ * 
+ * This library was modified by Vincent Labatut to be used in the Total Boum Boum project
+ */
+
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Iterator;
+import java.util.LinkedHashSet;
+import java.util.List;
+import java.util.Map;
 import java.util.Set;
+import java.util.TreeMap;
+import java.util.TreeSet;
 
 /** The ranking service.
   * <p>
@@ -26,7 +52,7 @@ import java.util.Set;
   *
   * @author Derek Hilder
   */
-public class RankingService<T> implements Serializable {
+public class RankingService implements Serializable {
     private static final long serialVersionUID = 1L;
         
     // For timing the caculatePlayerRatings() method.
@@ -35,13 +61,13 @@ public class RankingService<T> implements Serializable {
     /** A map of player ratings indexed by player id. 
       * (ie. <code>Map&lt;Object, PlayerRating&gt;</code>)
       */
-    HashMap<K, V> playerRatings;
+    HashMap<Integer,PlayerRating> playerRatings;
     
     /** A map of each players' list of game results for the current rating
       * period, indexed by player id.
       * (ie. <code>Map&lt;Object, List&lt;PairWiseGameResult&gt;&gt;</code>)
       */
-    HashMap currentPeriodGameResults;
+    HashMap<Integer,List<PairWiseGameResult>> currentPeriodGameResults;
         
     /** List of RankingServiceListeners to notify when rating periods begin
       * and end.
@@ -58,8 +84,8 @@ public class RankingService<T> implements Serializable {
       * players' ratings.
       */
     public RankingService() {
-        playerRatings = new HashMap();
-        currentPeriodGameResults = new HashMap();
+        playerRatings = new HashMap<Integer, PlayerRating>();
+        currentPeriodGameResults = new HashMap<Integer, List<PairWiseGameResult>>();
         listeners = new ArrayList<RankingServiceListener>();
         periodCount = 0;
     }
@@ -78,7 +104,7 @@ public class RankingService<T> implements Serializable {
         clearResults();
 
         // Notify listeners that the period has ended.
-        Iterator listenersIter = listeners.iterator();
+        Iterator<RankingServiceListener> listenersIter = listeners.iterator();
         while (listenersIter.hasNext()) {
             RankingServiceListener listener = (RankingServiceListener)listenersIter.next();
             listener.endRatingPeriod(RankingService.this, periodCount);
@@ -113,12 +139,12 @@ public class RankingService<T> implements Serializable {
       * @param playerId 
       *     A unique identifier for the player.
       */
-    public void registerPlayer(Object playerId) {
+    public void registerPlayer(Integer playerId) {
         
         double rating = Double.parseDouble(System.getProperty("jrs.defaultRating", "1500"));
         double ratingDeviation = Double.parseDouble(System.getProperty("jrs.defaultRatingDeviation", "350"));
         double ratingVolatility = Double.parseDouble(System.getProperty("jrs.defaultRatingVolatility", "0.06"));
-        PlayerRating<T> playerRating = new PlayerRating<T>(playerId, rating, ratingDeviation, ratingVolatility);
+        PlayerRating playerRating = new PlayerRating(playerId, rating, ratingDeviation, ratingVolatility);
         
         registerPlayer(playerId, playerRating);
     }
@@ -129,7 +155,7 @@ public class RankingService<T> implements Serializable {
       * @param playerId 
       *     A unique identifier for the player.
       */
-    public synchronized void registerPlayer(Object playerId, PlayerRating playerRating) {
+    public synchronized void registerPlayer(Integer playerId, PlayerRating playerRating) {
         playerRatings.put(playerId, playerRating);
         currentPeriodGameResults.put(playerId, new PairWiseGameResultsList());
     }
@@ -144,7 +170,7 @@ public class RankingService<T> implements Serializable {
       * @todo
       *     To be implemented.
       */
-    public void deregisterPlayer(Object playerId) {
+    public void deregisterPlayer(Integer playerId) {
     }
     
     /** Get a list of the ids of the players registered with the service.
@@ -152,7 +178,7 @@ public class RankingService<T> implements Serializable {
       * @return 
       *     A Set of Objects representing the ids of the players.
       */
-    public synchronized Set<T> getPlayers() {
+    public synchronized Set<Integer> getPlayers() {
         return Collections.unmodifiableSet(playerRatings.keySet());
     }
 
@@ -182,23 +208,23 @@ public class RankingService<T> implements Serializable {
             // E lost to A, E lost to B, E lost to C, E lost to D
             // F lost to A, F lost to B, F lost to C, F lost to D
             
-            Iterator teamIds = gameResults.getTeams().iterator();
+            Iterator<Integer> teamIds = gameResults.getTeams().iterator();
             while (teamIds.hasNext()) {
-                Object teamId = teamIds.next();
+            	Integer teamId = teamIds.next();
                 double teamScore = gameResults.getTeamResults(teamId);
-                Iterator teamMemberIds = gameResults.getTeamMembers(teamId).iterator();
+                Iterator<Integer> teamMemberIds = gameResults.getTeamMembers(teamId).iterator();
                 while (teamMemberIds.hasNext()) {
-                    Object teamMemberId = teamMemberIds.next();
-                    List teamMemberCurrentPeriodResults = (List)currentPeriodGameResults.get(teamMemberId);
+                    Integer teamMemberId = teamMemberIds.next();
+                    List<PairWiseGameResult> teamMemberCurrentPeriodResults = currentPeriodGameResults.get(teamMemberId);
                     ((PairWiseGameResultsList)teamMemberCurrentPeriodResults).incrementNumberOfGamesPlayed();
-                    Iterator opposingTeamIds = gameResults.getTeams().iterator();
+                    Iterator<Integer> opposingTeamIds = gameResults.getTeams().iterator();
                     while (opposingTeamIds.hasNext()) {
-                        Object opposingTeamId = opposingTeamIds.next();
+                    	Integer opposingTeamId = opposingTeamIds.next();
                         if (!opposingTeamId.equals(teamId)) {
                             double opposingTeamScore = gameResults.getTeamResults(opposingTeamId);
-                            Iterator opposingTeamMemberIds = gameResults.getTeamMembers(opposingTeamId).iterator();
+                            Iterator<Integer> opposingTeamMemberIds = gameResults.getTeamMembers(opposingTeamId).iterator();
                             while (opposingTeamMemberIds.hasNext()) {
-                                Object opposingTeamMemberId = opposingTeamMemberIds.next();
+                            	Integer opposingTeamMemberId = opposingTeamMemberIds.next();
                                 if (Math.abs(teamScore - opposingTeamScore) <= drawThreshhold) {
                                     teamMemberCurrentPeriodResults.add(new PairWiseGameResult(opposingTeamMemberId, 0.5));
                                 }
@@ -215,9 +241,9 @@ public class RankingService<T> implements Serializable {
             }
         }
         else {
-            Iterator playerIds = gameResults.getPlayers().iterator();
+            Iterator<Integer> playerIds = gameResults.getPlayers().iterator();
             while (playerIds.hasNext()) {
-                Object playerId = playerIds.next();
+            	Integer playerId = playerIds.next();
                 double playerScore = gameResults.getPlayerResults(playerId);
                 
                 // Compare this player's score to the score of every other
@@ -228,11 +254,11 @@ public class RankingService<T> implements Serializable {
                 // within the value of the rs.drawThreshhold property), add the
                 // draw result to the player's results list.
                 
-                List playersCurrentPeriodResults = (List)currentPeriodGameResults.get(playerId);
+                List<PairWiseGameResult> playersCurrentPeriodResults = currentPeriodGameResults.get(playerId);
                 ((PairWiseGameResultsList)playersCurrentPeriodResults).incrementNumberOfGamesPlayed();
-                Iterator opponentIds = gameResults.getPlayers().iterator();
+                Iterator<Integer> opponentIds = gameResults.getPlayers().iterator();
                 while (opponentIds.hasNext()) {
-                    Object opponentId = opponentIds.next();
+                	Integer opponentId = opponentIds.next();
                     if (!opponentId.equals(playerId)) {
                         double opponentScore = gameResults.getPlayerResults(opponentId);
                         if (Math.abs(playerScore - opponentScore) <= drawThreshhold) {
@@ -273,21 +299,21 @@ public class RankingService<T> implements Serializable {
       *     try calculating the values once and caching them, and see if there
       *     is much improvement in execution time.
       */
-    HashMap computePlayerRatings(Map prePeriodRatings, Map periodGameResults) {
+    HashMap<Integer,PlayerRating> computePlayerRatings(Map<Integer,PlayerRating> prePeriodRatings, Map<Integer,List<PairWiseGameResult>> periodGameResults) {
         
         long start = System.currentTimeMillis();
         
-        HashMap postPeriodPlayerRatings = new HashMap();
+        HashMap<Integer,PlayerRating> postPeriodPlayerRatings = new HashMap<Integer,PlayerRating>();
         
         // The Glicko2 system constant that constrains the change in volatility
         // over time. Reasonable values range from 0.3 to 1.2
         double T = Double.parseDouble(System.getProperty("jrs.glicko2SystemConstant", "1.0"));
                 
-        Iterator playerIds = prePeriodRatings.keySet().iterator();
+        Iterator<Integer> playerIds = prePeriodRatings.keySet().iterator();
         while (playerIds.hasNext()) {
             
-            Object playerId = playerIds.next();
-            PlayerRating<T> prePeriodPlayerRating = (PlayerRating<T>)prePeriodRatings.get(playerId);
+            Integer playerId = playerIds.next();
+            PlayerRating prePeriodPlayerRating = (PlayerRating)prePeriodRatings.get(playerId);
             
             // Convert the ratings and RDs onto the Glicko-2 scale.
             double rating = prePeriodPlayerRating.getGlicko2Rating();
@@ -298,7 +324,7 @@ public class RankingService<T> implements Serializable {
             double postPeriodRatingDeviation = ratingDeviation;
             double postPeriodRatingVolatility = ratingVolatility;
             
-            List gameResultsList = (List)periodGameResults.get(playerId);
+            List<PairWiseGameResult> gameResultsList = periodGameResults.get(playerId);
             if (gameResultsList == null || gameResultsList.isEmpty()) {
                 // This is the special case where the player did not compete in any
                 // games during the rating period. In this case the player's rating and
@@ -310,7 +336,7 @@ public class RankingService<T> implements Serializable {
                 // Compute the estimated variance of the player's rating based only
                 // on game outcomes.
                 double variance = 0;
-                Iterator gameResults = ((List)periodGameResults.get(playerId)).iterator();
+                Iterator<PairWiseGameResult> gameResults = periodGameResults.get(playerId).iterator();
                 while (gameResults.hasNext()) {
                     PairWiseGameResult gameResult = (PairWiseGameResult)gameResults.next();
                     PlayerRating opponentPlayerRating = (PlayerRating)prePeriodRatings.get(gameResult.getOpponentId());
@@ -327,7 +353,7 @@ public class RankingService<T> implements Serializable {
                 // Compute the estimated improvement in rating by comparing the pre-period
                 // rating to the performance rating based only on game outcomes
                 double performanceRatingFromGameOutcomes = 0;
-                gameResults = ((List)periodGameResults.get(playerId)).iterator();
+                gameResults = periodGameResults.get(playerId).iterator();
                 while (gameResults.hasNext()) {
                     PairWiseGameResult gameResult = (PairWiseGameResult)gameResults.next();
                     PlayerRating opponentPlayerRating = (PlayerRating)prePeriodRatings.get(gameResult.getOpponentId());
@@ -379,7 +405,7 @@ public class RankingService<T> implements Serializable {
                 }
 
                 performanceRatingFromGameOutcomes = 0;
-                gameResults = ((List)periodGameResults.get(playerId)).iterator();
+                gameResults = periodGameResults.get(playerId).iterator();
                 while (gameResults.hasNext()) {
                     PairWiseGameResult gameResult = (PairWiseGameResult)gameResults.next();
                     PlayerRating opponentPlayerRating = (PlayerRating)prePeriodRatings.get(gameResult.getOpponentId());
@@ -405,8 +431,7 @@ public class RankingService<T> implements Serializable {
             
             // Convert the ratings and rating deviations back to original scale,
             // then add the new rating to the post period ratings list.
-            PlayerRating postPeriodPlayerRating = 
-                new PlayerRating(playerId, postPeriodRating, postPeriodRatingDeviation, postPeriodRatingVolatility, true);
+            PlayerRating postPeriodPlayerRating = new PlayerRating(playerId, postPeriodRating, postPeriodRatingDeviation, postPeriodRatingVolatility, true);
             postPeriodPlayerRatings.put(playerId, postPeriodPlayerRating);
         }
         
@@ -439,9 +464,9 @@ public class RankingService<T> implements Serializable {
     /** Clear each players' list of game results.
       */
     synchronized void clearResults() {
-        Iterator playerIds = currentPeriodGameResults.keySet().iterator();
+        Iterator<Integer> playerIds = currentPeriodGameResults.keySet().iterator();
         while (playerIds.hasNext()) {
-            Object playerId = playerIds.next();
+        	Integer playerId = playerIds.next();
             currentPeriodGameResults.put(playerId, new PairWiseGameResultsList());
         }
     }
@@ -454,7 +479,7 @@ public class RankingService<T> implements Serializable {
       *     An instance of PlayerRating representing the most recently computed
       *     rating for the player.
       */
-    public synchronized PlayerRating getPlayerRating(Object playerId) {
+    public synchronized PlayerRating getPlayerRating(Integer playerId) {
         return (PlayerRating)playerRatings.get(playerId);
     }
     
@@ -467,7 +492,7 @@ public class RankingService<T> implements Serializable {
       *     A <code>Set</code> of <code>Match</code> objects, ordered from
       *     best to worst.
       */
-    public Set getMatches(Object playerId) {
+    public Set<Match> getMatches(Integer playerId) {
         return getMatches(playerId, getPlayers());
     }
         
@@ -483,7 +508,7 @@ public class RankingService<T> implements Serializable {
       *     A <code>Set</code> of <code>Match</code> objects, ordered from
       *     best to worst.
       */
-    public Set getMatches(Object playerId, int numMatches) {
+    public Set<Match> getMatches(Integer playerId, int numMatches) {
         return getMatches(playerId, getPlayers(), numMatches);
     }
         
@@ -499,7 +524,7 @@ public class RankingService<T> implements Serializable {
       *     A <code>Set</code> of <code>Match</code> objects, ordered from
       *     best to worst.
       */
-    public Set getMatches(Object playerId, Set playerList) {
+    public Set<Match> getMatches(Integer playerId, Set<Integer> playerList) {
         return getMatches(playerId, playerList, playerList.size());
     }
         
@@ -517,15 +542,15 @@ public class RankingService<T> implements Serializable {
       *     A <code>Set</code> of <code>Match</code> objects, ordered from
       *     best to worst.
       */
-    public synchronized Set getMatches(Object playerId, Set playerList, int numMatches) {
+	public synchronized Set<Match> getMatches(Integer playerId, Set<Integer> playerList, int numMatches) {
         
-        TreeSet matches = new TreeSet();
+        TreeSet<Match> matches = new TreeSet<Match>();
         
         PlayerRating playerRating = (PlayerRating)playerRatings.get(playerId);
         
-        Iterator pids = playerList.iterator();
+        Iterator<Integer> pids = playerList.iterator();
         while (pids.hasNext()) {
-            Object pid = pids.next();
+        	Integer pid = pids.next();
             if (!pid.equals(playerId)) {
                 PlayerRating pr = (PlayerRating)playerRatings.get(pid);
                 double probOfDraw = 
@@ -537,8 +562,8 @@ public class RankingService<T> implements Serializable {
         }
         
         if ((matches.size() > 0) && (numMatches < matches.size())) {
-            Object last = matches.toArray()[numMatches];
-            matches = (TreeSet)matches.headSet(last);
+            Match last = (Match)(matches.toArray()[numMatches]);
+            matches = new TreeSet<Match>(matches.headSet(last));
         }
         
         return matches;
@@ -564,18 +589,18 @@ public class RankingService<T> implements Serializable {
       *
       * @deprecated
       */
-    public synchronized Set getGameMatches(Object playerId, List listOfPlayerLists) {
+    public synchronized Set<GameMatch> getGameMatches(Integer playerId, List<Set<Integer>> listOfPlayerLists) {
         
-        TreeSet gameMatches = new TreeSet();
+        TreeSet<GameMatch> gameMatches = new TreeSet<GameMatch>();
         
-        Iterator playerLists = listOfPlayerLists.iterator();
+        Iterator<Set<Integer>> playerLists = listOfPlayerLists.iterator();
         while (playerLists.hasNext()) {
-            Set playerList = (Set)playerLists.next();
+            Set<Integer> playerList = playerLists.next();
             double ratingSum = 0;
             double ratingDeviationSum = 0;
             double probOfDrawSum = 0;
-            Set matches = getMatches(playerId, playerList);
-            Iterator matchesIter = matches.iterator();
+            Set<Match> matches = getMatches(playerId, playerList);
+            Iterator<Match> matchesIter = matches.iterator();
             while (matchesIter.hasNext()) {
                 Match match = (Match)matchesIter.next();
                 ratingSum += match.getRating();
@@ -585,7 +610,7 @@ public class RankingService<T> implements Serializable {
             double aveRating = ratingSum / matches.size();
             double aveRatingDeviation = ratingDeviationSum / matches.size();
             double aveProbOfDraw = probOfDrawSum / matches.size();
-            Game game = new DefaultGame("SomeGameId", new HashSet(playerList));
+            Game game = new DefaultGame(1, new HashSet<Integer>(playerList));
             GameMatch gameMatch = new GameMatch(game, aveRating, aveRatingDeviation, aveProbOfDraw);
             gameMatches.add(gameMatch);
         }
@@ -610,12 +635,12 @@ public class RankingService<T> implements Serializable {
       * @return
       *     An ordered Set of Game objects.
       */
-    public LinkedHashSet orderByBestMatch(Object playerId, Map playerLists) {
-        HashSet games = new HashSet();
-        Iterator gameIds = playerLists.keySet().iterator();
+    public LinkedHashSet<Game> orderByBestMatch(Integer playerId, Map<Integer,Set<Integer>> playerLists) {
+        HashSet<Game> games = new HashSet<Game>();
+        Iterator<Integer> gameIds = playerLists.keySet().iterator();
         while (gameIds.hasNext()) {
-            Object gameId = gameIds.next();
-            Set playerList = (Set)playerLists.get(gameId);
+        	Integer gameId = gameIds.next();
+            Set<Integer> playerList = playerLists.get(gameId);
             Game game = new DefaultGame(gameId, playerList);
             games.add(game);
         }
@@ -631,21 +656,23 @@ public class RankingService<T> implements Serializable {
       * @return
       *     An ordered Set of Game objects.
       */
-    public synchronized LinkedHashSet orderByBestMatch(Object playerId, Set games) {
+    public synchronized LinkedHashSet<Game> orderByBestMatch(Integer playerId, Set<Game> games) {
         
-        TreeMap orderedGamesList = new TreeMap();
+        TreeMap<Double,Game> orderedGamesList = new TreeMap<Double, Game>();
         
         PlayerRating playerRating = getPlayerRating(playerId);
         
-        Iterator gamesIter = games.iterator();
+        Iterator<Game> gamesIter = games.iterator();
         while (gamesIter.hasNext()) {
             Game game = (Game)gamesIter.next();
-            Object gameId = game.getId();
-            Set playerList = game.getParticipantIds();
+            @SuppressWarnings("unused")
+			Integer gameId = game.getId();
+            @SuppressWarnings("unused")
+			Set<Integer> playerList = game.getParticipantIds();
             double probOfDrawSum = 0;
-            Iterator participantIds = game.getParticipantIds().iterator();
+            Iterator<Integer> participantIds = game.getParticipantIds().iterator();
             while (participantIds.hasNext()) {
-                Object participantId = participantIds.next();
+            	Integer participantId = participantIds.next();
                 PlayerRating participantPlayerRating = getPlayerRating(participantId);
                 double probOfDraw = calculateProbabilityOfDraw(playerRating.getRating(), 
                                                                playerRating.getRatingDeviation(),
@@ -657,7 +684,7 @@ public class RankingService<T> implements Serializable {
             orderedGamesList.put(new Double(-aveProbOfDraw), game);
         }
         
-        return new LinkedHashSet(orderedGamesList.values());
+        return new LinkedHashSet<Game>(orderedGamesList.values());
     }
     
     /** Get the details of how the player matches up against the specified game.
@@ -670,7 +697,7 @@ public class RankingService<T> implements Serializable {
       *     An instance of GameMatch which provides details about the game and
       *     how it matches up against the player.
       */
-    public synchronized GameMatch getGameMatchDetails(Object playerId, Game game) {
+    public synchronized GameMatch getGameMatchDetails(Integer playerId, Game game) {
 
         double ratingSum = 0;
         double ratingDeviationSum = 0;
@@ -679,8 +706,8 @@ public class RankingService<T> implements Serializable {
         // Get the Match object that contains the probability
         // of a draw against each of the players in the game's
         // player list. 
-        Set matches = getMatches(playerId, game.getParticipantIds());
-        Iterator matchesIter = matches.iterator();
+        Set<Match> matches = getMatches(playerId, game.getParticipantIds());
+        Iterator<Match> matchesIter = matches.iterator();
         while (matchesIter.hasNext()) {
             Match match = (Match)matchesIter.next();
             ratingSum += match.getRating();

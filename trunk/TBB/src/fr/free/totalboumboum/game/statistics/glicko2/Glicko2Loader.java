@@ -21,42 +21,27 @@ package fr.free.totalboumboum.game.statistics.glicko2;
  * 
  */
 
-import java.io.BufferedReader;
 import java.io.File;
-import java.io.FileReader;
+import java.io.FileInputStream;
 import java.io.IOException;
-import java.util.HashMap;
+import java.io.ObjectInputStream;
 
-import fr.free.totalboumboum.game.statistics.glicko2.jrs.PlayerRating;
 import fr.free.totalboumboum.game.statistics.glicko2.jrs.RankingService;
 import fr.free.totalboumboum.tools.FileTools;
 
 public class Glicko2Loader
 {
-	public static void loadStatistics(RankingService<Integer> rankingService, HashMap<Integer,Integer> roundCounts) throws NumberFormatException, IOException
+	public static RankingService loadStatistics() throws IOException, ClassNotFoundException
 	{	// init path
 		String path = FileTools.getGlicko2Path()+File.separator+FileTools.FILE_STATISTICS+FileTools.EXTENSION_DATA;
-
-		// open text file
-		BufferedReader br = new BufferedReader(new FileReader(path));
 		
-		// read the file content and update the ranking service
-		String line;
-		while((line = br.readLine()) != null)
-		{	int index = 0;
-			String[] fields = line.split("\\|");
-			int playerId = Integer.parseInt(fields[index++]);
-			int roundCount = Integer.parseInt(fields[index++]);
-			double rating = Double.parseDouble(fields[index++]);
-			double ratingDeviation = Double.parseDouble(fields[index++]);
-			double ratingVolatility = Double.parseDouble(fields[index++]);
-			// adding the player in the rating service
-			PlayerRating<Integer> playerRating = new PlayerRating<Integer>(playerId,rating,ratingDeviation,ratingVolatility);
-			rankingService.registerPlayer(playerId,playerRating);
-			// adding the player count
-			roundCounts.put(playerId,roundCount);
-		}
-		br.close();
-        // TODO: if problem while reading the file, should restaure and use the backup 
+		// read the rankings
+		File file = new File(path);
+		FileInputStream fileOut = new FileInputStream(file);
+		ObjectInputStream in = new ObjectInputStream(fileOut);
+		RankingService result = (RankingService) in.readObject();
+		return result;
+		
+		// TODO: if problem while reading the file, should restaure and use the backup 
 	}
 }

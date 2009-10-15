@@ -1,9 +1,27 @@
-/*
- * GameResults.java
- *
- */
-
 package fr.free.totalboumboum.game.statistics.glicko2.jrs;
+
+/*
+ * JRS Library
+ * 
+ * BSD License
+ * Copyright (c) 2006-2007 JRS Project
+ * All rights reserved.
+ * Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
+ * 		* Redistributions of source code must retain the above copyright notice, this list of conditions and the following disclaimer.
+ * 		* Redistributions in binary form must reproduce the above copyright notice, this list of conditions and the following disclaimer in the documentation and/or other materials provided with the distribution.
+ *  	* Neither the name of the JRS Project nor the names of its contributors may be used to endorse or promote products derived from this software without specific prior written permission.
+ *  
+ * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" 
+ * AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, 
+ * THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. 
+ * IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, 
+ * SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; 
+ * LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, 
+ * WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF 
+ * THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+ * 
+ * This library was modified by Vincent Labatut to be used in the Total Boum Boum project
+ */
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -18,34 +36,34 @@ import java.util.Set;
   *
   * @author Derek Hilder
   */
-public class GameResults<T> implements Serializable {
+public class GameResults implements Serializable {
     private static final long serialVersionUID = 1L;
     
     /** A list of the players' results, indexed by player id.
       * <p>
       * <code>Map&lt;Object pid, Double score&gt;</code> 
       */
-    private HashMap<T,Double> playerResults;
+    private HashMap<Integer,Double> playerResults;
     
     /** A list of the teams' results, indexed by team id.
       * <p>
       * <code>Map&lt;Object tid, Double score&gt;</code> 
       */
-    private HashMap<T,Double> teamResults;
+    private HashMap<Integer,Double> teamResults;
     
     /** A list of the members of each team.
       * <p>
       * <code>Map&lt;Object tid, List&lt;Object pid&gt;&gt;</code>
       */
-    private HashMap<T,ArrayList<T>> teamMembers;
+    private HashMap<Integer,List<Integer>> teamMembers;
     
     /** Create an empty GameResults object. Use the <code>addPlayerResults</code>
       * methods to add each player's results.
       */
     public GameResults() {
-        playerResults = new HashMap<T, Double>();
-        teamResults = new HashMap<T, Double>();
-        teamMembers = new HashMap<T, ArrayList<T>>();
+        playerResults = new HashMap<Integer, Double>();
+        teamResults = new HashMap<Integer, Double>();
+        teamMembers = new HashMap<Integer, List<Integer>>();
     }
     
     /** Add the results for a player in a multiplayer game.
@@ -55,7 +73,7 @@ public class GameResults<T> implements Serializable {
       * @param score 
       *     The player's individual score at the end of the game.
       */
-    public void addPlayerResults(T playerId, double score) {
+    public void addPlayerResults(Integer playerId, double score) {
         // In a multiplayer game, assign each player to their own team.
         addPlayerResults(playerId, playerId, score);
     }
@@ -75,16 +93,16 @@ public class GameResults<T> implements Serializable {
       * scores of each of team's members. This can be override with
       * the <code>setTeamResult</code> method. </i>
       */
-    public void addPlayerResults(T teamId, T playerId, double score) {
+    public void addPlayerResults(Integer teamId, Integer playerId, double score) {
         
         // Add the player's results
         playerResults.put(playerId, new Double(score));
         
         // Add the player to the specified team
         if (teamMembers.get(teamId) == null) {
-            teamMembers.put(teamId, new ArrayList<T>());
+            teamMembers.put(teamId, new ArrayList<Integer>());
         }
-        ((List<T>)teamMembers.get(teamId)).add(playerId);
+        teamMembers.get(teamId).add(playerId);
         
         // Set the team's result to be the sum of its members' scores
         setTeamResults(teamId, getTeamResults(teamId) + score);
@@ -105,7 +123,7 @@ public class GameResults<T> implements Serializable {
       * @return 
       *     A Set of Objects representing the team ids.
       */
-    public Set<T> getTeams() {
+    public Set<Integer> getTeams() {
         return teamMembers.keySet();
     }
     
@@ -116,7 +134,7 @@ public class GameResults<T> implements Serializable {
       * @return 
       *     The team's results for the game. 
       */
-    public double getTeamResults(Object teamId) {
+    public double getTeamResults(Integer teamId) {
         Double teamResult = (Double)teamResults.get(teamId);
         if (teamResult == null) {
             return 0;
@@ -136,7 +154,7 @@ public class GameResults<T> implements Serializable {
       * @param score 
       *     The team's result, or score.
       */
-    public void setTeamResults(T teamId, double score) {
+    public void setTeamResults(Integer teamId, double score) {
         teamResults.put(teamId, new Double(score));
     }
     
@@ -147,8 +165,8 @@ public class GameResults<T> implements Serializable {
       * @return 
       *     A List of Objects representing the ids of the players on the team.
       */
-    public List<T> getTeamMembers(T teamId) {
-        return (List<T>)teamMembers.get(teamId);
+    public List<Integer> getTeamMembers(Integer teamId) {
+        return teamMembers.get(teamId);
     }
     
     /** Get a list of all the players that played in the game.
@@ -156,7 +174,7 @@ public class GameResults<T> implements Serializable {
       * @return 
       *     A Set of Objects representing the ids of the players.
       */
-    public Set<T> getPlayers() {
+    public Set<Integer> getPlayers() {
         return playerResults.keySet();
     }
     
@@ -167,7 +185,7 @@ public class GameResults<T> implements Serializable {
       * @return 
       *     The player's results, or score.
       */
-    public double getPlayerResults(T playerId) {
-        return ((Double)playerResults.get(playerId)).doubleValue();
+    public double getPlayerResults(Integer playerId) {
+        return playerResults.get(playerId).doubleValue();
     }
 }

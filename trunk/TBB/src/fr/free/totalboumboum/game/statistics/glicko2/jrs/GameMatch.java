@@ -1,9 +1,27 @@
-/*
- * GameMatch.java
- *
- */
-
 package fr.free.totalboumboum.game.statistics.glicko2.jrs;
+
+/*
+ * JRS Library
+ * 
+ * BSD License
+ * Copyright (c) 2006-2007 JRS Project
+ * All rights reserved.
+ * Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
+ * 		* Redistributions of source code must retain the above copyright notice, this list of conditions and the following disclaimer.
+ * 		* Redistributions in binary form must reproduce the above copyright notice, this list of conditions and the following disclaimer in the documentation and/or other materials provided with the distribution.
+ *  	* Neither the name of the JRS Project nor the names of its contributors may be used to endorse or promote products derived from this software without specific prior written permission.
+ *  
+ * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" 
+ * AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, 
+ * THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. 
+ * IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, 
+ * SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; 
+ * LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, 
+ * WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF 
+ * THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+ * 
+ * This library was modified by Vincent Labatut to be used in the Total Boum Boum project
+ */
 
 import java.io.Serializable;
 import java.util.Set;
@@ -17,10 +35,10 @@ import java.util.Set;
   *
   * @author Derek Hilder
   */
-public class GameMatch<T> implements Comparable<T>, Serializable {
+public class GameMatch implements Comparable<GameMatch>, Serializable {
     private static final long serialVersionUID = 1L;
 
-    private Game<T> game;
+    private Game game;
     private double aveRating;
     private double aveRatingDeviation;
     private double aveProbabilityOfDraw;
@@ -35,7 +53,7 @@ public class GameMatch<T> implements Comparable<T>, Serializable {
       *     The average probability that each player in the game would draw
       *     against the player requesting the matche.
       */
-    GameMatch(Game<T> game, double aveRating, double aveRatingDeviation, double aveProbabilityOfDraw) {
+    GameMatch(Game game, double aveRating, double aveRatingDeviation, double aveProbabilityOfDraw) {
         this.game = game;
         this.aveRating = aveRating;
         this.aveRatingDeviation = aveRatingDeviation;
@@ -55,9 +73,7 @@ public class GameMatch<T> implements Comparable<T>, Serializable {
       *     An int greater than 0 indicates this object is greater than the object specified.
       *     0 indicates the objects are equal.
       */
-    @SuppressWarnings("unchecked")
-	public int compareTo(T o) {
-        GameMatch<T> gm = (GameMatch<T>)o;
+    public int compareTo(GameMatch gm) {
         return (new Double(aveProbabilityOfDraw).compareTo(new Double(gm.aveProbabilityOfDraw))) * -1;
     }
 
@@ -66,11 +82,11 @@ public class GameMatch<T> implements Comparable<T>, Serializable {
       * @return 
       *     A Set of Objects representing the players' ids.
       */
-    public Set<T> getPlayerIds() {
+    public Set<Integer> getPlayerIds() {
         return game.getParticipantIds();
     }
 
-    public Game<T> getGame() {
+    public Game getGame() {
         return game;
     }
     

@@ -1,9 +1,27 @@
-/*
- * Match.java
- *
- */
-
 package fr.free.totalboumboum.game.statistics.glicko2.jrs;
+
+/*
+ * JRS Library
+ * 
+ * BSD License
+ * Copyright (c) 2006-2007 JRS Project
+ * All rights reserved.
+ * Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
+ * 		* Redistributions of source code must retain the above copyright notice, this list of conditions and the following disclaimer.
+ * 		* Redistributions in binary form must reproduce the above copyright notice, this list of conditions and the following disclaimer in the documentation and/or other materials provided with the distribution.
+ *  	* Neither the name of the JRS Project nor the names of its contributors may be used to endorse or promote products derived from this software without specific prior written permission.
+ *  
+ * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" 
+ * AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, 
+ * THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. 
+ * IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, 
+ * SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; 
+ * LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, 
+ * WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF 
+ * THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+ * 
+ * This library was modified by Vincent Labatut to be used in the Total Boum Boum project
+ */
 
 import java.io.Serializable;
 
@@ -12,10 +30,10 @@ import java.io.Serializable;
   *
   * @author Derek Hilder
   */
-public class Match<T> implements Comparable<T>, Serializable {
+public class Match implements Comparable<Match>, Serializable {
     private static final long serialVersionUID = 1L;
 
-    private T playerId;
+    private Integer playerId;
     private double rating;
     private double ratingDeviation;
     private double probabilityOfDraw;
@@ -32,7 +50,7 @@ public class Match<T> implements Comparable<T>, Serializable {
       *     The proability that the player requesting the match will 
       *     draw against the player being matched.
       */
-    Match(T playerId, double rating, double ratingDeviation, double probabilityOfDraw) {
+    Match(Integer playerId, double rating, double ratingDeviation, double probabilityOfDraw) {
         this.playerId = playerId;
         this.rating = rating;
         this.ratingDeviation = ratingDeviation;
@@ -47,7 +65,12 @@ public class Match<T> implements Comparable<T>, Serializable {
       *     <code>true</code> if the objects are equal.
       */
     public boolean equals(Object o) {
-        return (compareTo(o) == 0);
+        boolean result = false;
+    	if(o instanceof Match)
+        {	Match m = (Match)o;
+        	result = compareTo(m)==0;
+        }
+    	return result;
     }
 
     /** Compare this object to specified object. Specifically, if this object
@@ -63,9 +86,7 @@ public class Match<T> implements Comparable<T>, Serializable {
       *     An int greater than 0 indicates this object is greater than the object specified.
       *     0 indicates the objects are equal.
       */
-    @SuppressWarnings("unchecked")
-	public int compareTo(Object o) {
-        Match<T> m = (Match<T>)o;
+    public int compareTo(Match m) {
         return (new Double(probabilityOfDraw).compareTo(new Double(m.probabilityOfDraw))) * -1;
     }
 
@@ -74,7 +95,7 @@ public class Match<T> implements Comparable<T>, Serializable {
       * @return 
       *     A player id.
       */
-    public Object getPlayerId() {
+    public Integer getPlayerId() {
         return playerId;
     }
 
