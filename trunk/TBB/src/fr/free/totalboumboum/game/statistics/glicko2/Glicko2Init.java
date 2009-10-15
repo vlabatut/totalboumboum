@@ -5,7 +5,7 @@ import java.io.FileFilter;
 import java.io.IOException;
 import java.util.HashMap;
 
-import fr.free.totalboumboum.game.statistics.glicko2.jrs.RankingService;
+import fr.free.totalboumboum.game.statistics.glicko2.jrs.ResultsBasedRankingService;
 import fr.free.totalboumboum.tools.FileTools;
 
 public class Glicko2Init {
@@ -17,7 +17,7 @@ public class Glicko2Init {
 	{	// change ranking properties
 		
 		// create ranking service
-		RankingService<Integer> rankingService = new RankingService<Integer>();
+		ResultsBasedRankingService<Integer> rankingService = new ResultsBasedRankingService<Integer>();
 		// create round counts
 		HashMap<Integer,Integer> roundCounts = new HashMap<Integer, Integer>();
 		

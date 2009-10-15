@@ -34,9 +34,10 @@ This product includes softwares developed by:
   	Copyright 2000-2007 JDOM Project
   	http://www.jdom.org
   + JRS - Java Ranking Service
-  	JRES library
+  	Classes in the fr.free.totalboumboum.game.statistics.glicko2.jrs package
   	Copyright 2005-2006 JRS project
-  	https://jrs.dev.java.net/
+  	https://jrs.dev.java.net
+  	These classes were modified by Vincent Labatut to use generecity and allow serialization
   + Various AI students from Galatasaray University:
     Most classes in resources/ai (see classes for details)
     Copyright 2007-2009 their respective authors
