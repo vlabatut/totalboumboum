@@ -8,10 +8,5 @@
 			<attribute name="javadoc_location" value="http://www.jdom.org/docs/apidocs"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry kind="lib" path="resources/lib/jrs.jar" sourcepath="docs/jrs/src.zip">
-		<attributes>
-			<attribute name="javadoc_location" value="jar:platform:/resource/TBB/docs/jrs/api.zip!/api"/>
-		</attributes>
-	</classpathentry>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

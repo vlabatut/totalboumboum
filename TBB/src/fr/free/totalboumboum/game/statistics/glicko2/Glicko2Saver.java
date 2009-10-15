@@ -27,14 +27,13 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.HashMap;
 
-import jrs.PlayerRating;
-import jrs.RankingService;
-
+import fr.free.totalboumboum.game.statistics.glicko2.jrs.PlayerRating;
+import fr.free.totalboumboum.game.statistics.glicko2.jrs.RankingService;
 import fr.free.totalboumboum.tools.FileTools;
 
 public class Glicko2Saver
 {
-	public static void saveStatistics(RankingService rankingService, HashMap<Integer,Integer> roundCounts) throws IOException
+	public static void saveStatistics(RankingService<Integer> rankingService, HashMap<Integer,Integer> roundCounts) throws IOException
 	{	// init files
 		String path = FileTools.getGlicko2Path()+File.separator+FileTools.FILE_STATISTICS+FileTools.EXTENSION_DATA;
 		String backup = FileTools.getGlicko2Path()+File.separator+FileTools.FILE_STATISTICS+FileTools.EXTENSION_BACKUP;
@@ -47,10 +46,9 @@ public class Glicko2Saver
 		
 		// write the rankings for each registered player
         PrintWriter pw = new PrintWriter(new FileWriter(path));
-        for(Object o:rankingService.getPlayers())
-        {	int id = (Integer)o;
-        	int roundCount = roundCounts.get(id);
-	        PlayerRating playerRating = rankingService.getPlayerRating(o);
+        for(Integer id:rankingService.getPlayers())
+        {	int roundCount = roundCounts.get(id);
+	        PlayerRating<Integer> playerRating = rankingService.getPlayerRating(id);
 	        StringBuffer record = new StringBuffer();
 	        record.append(id).append("|");
 	        record.append(roundCount).append("|");
