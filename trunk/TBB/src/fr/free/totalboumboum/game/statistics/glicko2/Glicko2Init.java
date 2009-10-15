@@ -23,7 +23,6 @@ package fr.free.totalboumboum.game.statistics.glicko2;
 
 import java.io.File;
 import java.io.FileFilter;
-import java.io.IOException;
 
 import fr.free.totalboumboum.game.statistics.glicko2.jrs.ResultsBasedRankingService;
 import fr.free.totalboumboum.tools.FileTools;
@@ -66,7 +65,7 @@ public class Glicko2Init {
 		try
 		{	Glicko2Saver.saveStatistics(rankingService);
 		}
-		catch (IOException e)
+		catch (Exception e)
 		{	e.printStackTrace();
 		}
 	}

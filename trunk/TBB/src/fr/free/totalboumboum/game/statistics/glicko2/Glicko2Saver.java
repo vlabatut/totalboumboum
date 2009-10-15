@@ -28,6 +28,12 @@ import java.io.ObjectOutputStream;
 import java.util.Iterator;
 import java.util.TreeSet;
 
+import javax.xml.parsers.ParserConfigurationException;
+
+import org.xml.sax.SAXException;
+
+import fr.free.totalboumboum.configuration.profile.Profile;
+import fr.free.totalboumboum.configuration.profile.ProfileLoader;
 import fr.free.totalboumboum.game.statistics.glicko2.jrs.PlayerRating;
 import fr.free.totalboumboum.game.statistics.glicko2.jrs.RankingService;
 import fr.free.totalboumboum.tools.FileTools;
@@ -35,7 +41,7 @@ import fr.free.totalboumboum.tools.FileTools;
 public class Glicko2Saver
 {	private static final boolean verbose = true;
 
-	public static void saveStatistics(RankingService rankingService) throws IOException
+	public static void saveStatistics(RankingService rankingService) throws IOException, IllegalArgumentException, SecurityException, ParserConfigurationException, SAXException, IllegalAccessException, NoSuchFieldException, ClassNotFoundException
 	{	// init files
 		String path = FileTools.getGlicko2Path()+File.separator+FileTools.FILE_STATISTICS+FileTools.EXTENSION_DATA;
 		String backup = FileTools.getGlicko2Path()+File.separator+FileTools.FILE_STATISTICS+FileTools.EXTENSION_BACKUP;
@@ -63,12 +69,14 @@ public class Glicko2Saver
 				playerRatings.add(playerRating);
 			}
 			// display rankings
+			System.out.println("\n######### RANKINGS #########");
 			for(PlayerRating pr: playerRatings)
 			{	int playerId = (Integer)pr.getPlayerId();
+				Profile profile = ProfileLoader.loadProfile(playerId);
 				double rating = pr.getRating();
 				double ratingDeviation = pr.getRatingDeviation();
 				double volatility = pr.getRatingVolatility();
-				System.out.println(playerId+"\t"+rating+"\t"+ratingDeviation+"\t"+volatility);				
+				System.out.println(profile.getName()+"\t\t"+playerId+"\t"+rating+"\t"+ratingDeviation+"\t"+volatility);				
 			}
 		}
 	}

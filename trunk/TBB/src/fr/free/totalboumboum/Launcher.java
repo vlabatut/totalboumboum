@@ -823,6 +823,8 @@ public class Launcher
 	 * - 2 nouveaux niveaux pour illustrer l'instance NBM1
 	 * - API IA : A* modifié pour pouvoir utiliser n'importe quelle fonction successeur
 	 * - API IA : accès à la taille des cases
+	 * - ajout du système Glicko2
+	 * - adaptation de Glicko2 (serializable, généricité)
 	 */
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -1029,6 +1031,9 @@ public class Launcher
 	 * 		- sortir de bêta
 	 * 
 	 * 	- créer un log des commandes (désactivable)
-	 *  - faire une option qui enchaîne automatiquement les rounds/matches d'un match/tournoi 
+	 *  - faire une option qui enchaîne automatiquement les rounds/matches d'un match/tournoi
+	 *  - glicko:
+	 *  	- pouvoir gauler les infos style nbre de rounds joués depuis la denrière mise à jour
+	 *  	- mettre à jour la GUI avec le rang des joueurs au classement Glicko2 
 	 */
 }
