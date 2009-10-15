@@ -8,7 +8,7 @@ import java.io.File;
 import fr.free.totalboumboum.configuration.Configuration;
 import fr.free.totalboumboum.engine.container.level.Level;
 import fr.free.totalboumboum.engine.loop.Loop;
-import fr.free.totalboumboum.game.GameConstants;
+import fr.free.totalboumboum.game.GameData;
 import fr.free.totalboumboum.gui.tools.MessageDisplayer;
 import fr.free.totalboumboum.tools.FileTools;
 
@@ -66,8 +66,8 @@ public class RoundVariables
 
 	public static void setZoomFactor(double zoomFactor)
 	{	RoundVariables.zoomFactor = zoomFactor;
-		toleranceCoefficient = zoomFactor*GameConstants.TOLERANCE;
-		scaledTileDimension = GameConstants.STANDARD_TILE_DIMENSION*zoomFactor;
+		toleranceCoefficient = zoomFactor*GameData.TOLERANCE;
+		scaledTileDimension = GameData.STANDARD_TILE_DIMENSION*zoomFactor;
 	}
 
 	/////////////////////////////////////////////////////////////////

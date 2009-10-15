@@ -27,7 +27,7 @@ import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.Set;
 
-import fr.free.totalboumboum.game.GameConstants;
+import fr.free.totalboumboum.game.GameData;
 
 public class StringTools
 {
@@ -64,7 +64,7 @@ public class StringTools
 			temp.append(value);
 			boolean serie = true;
 			int first = value;
-			for(int index=value+1;index<=GameConstants.MAX_PROFILES_COUNT+1;index++)
+			for(int index=value+1;index<=GameData.MAX_PROFILES_COUNT+1;index++)
 			{	if(playerNumbers.contains(index))
 				{	if(!serie)
 					{	serie = true;

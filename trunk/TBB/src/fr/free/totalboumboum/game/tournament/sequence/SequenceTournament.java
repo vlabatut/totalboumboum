@@ -31,7 +31,7 @@ import java.util.Set;
 import java.util.TreeSet;
 
 import fr.free.totalboumboum.configuration.profile.Profile;
-import fr.free.totalboumboum.game.GameConstants;
+import fr.free.totalboumboum.game.GameData;
 import fr.free.totalboumboum.game.limit.Limits;
 import fr.free.totalboumboum.game.limit.TournamentLimit;
 import fr.free.totalboumboum.game.match.Match;
@@ -155,7 +155,7 @@ public class SequenceTournament extends AbstractTournament
 	@Override
 	public Set<Integer> getAllowedPlayerNumbers()
 	{	TreeSet<Integer> result = new TreeSet<Integer>();
-		for(int i=0;i<=GameConstants.MAX_PROFILES_COUNT;i++)
+		for(int i=0;i<=GameData.MAX_PROFILES_COUNT;i++)
 			result.add(i);
 		for(Match m:matches)
 		{	Set<Integer> temp = m.getAllowedPlayerNumbers();

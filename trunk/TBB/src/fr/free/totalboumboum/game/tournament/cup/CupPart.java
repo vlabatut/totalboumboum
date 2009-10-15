@@ -6,7 +6,7 @@ import java.util.Collections;
 import java.util.Iterator;
 
 import fr.free.totalboumboum.configuration.profile.Profile;
-import fr.free.totalboumboum.game.GameConstants;
+import fr.free.totalboumboum.game.GameData;
 import fr.free.totalboumboum.game.match.Match;
 import fr.free.totalboumboum.game.rank.Ranks;
 
@@ -149,7 +149,7 @@ public class CupPart implements Serializable
 	{	// keep only (meaninful) ties
 		int result = -1;
 		int i = 1;
-		while(i<=GameConstants.CONTROL_COUNT && result<0)
+		while(i<=GameData.CONTROL_COUNT && result<0)
 		{	ArrayList<Profile> list = ranks.getProfilesFromRank(i);
 			if(list!=null && list.size()>1)
 			{	int j = 0;

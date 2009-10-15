@@ -34,7 +34,7 @@ import jrs.RankingService;
 
 import org.xml.sax.SAXException;
 
-import fr.free.totalboumboum.game.GameConstants;
+import fr.free.totalboumboum.game.GameData;
 import fr.free.totalboumboum.game.statistics.GameStatistics;
 import fr.free.totalboumboum.tools.FileTools;
 
@@ -145,8 +145,8 @@ public class ProfilesConfiguration
 		boolean found = false;
 		int result = 0;
 		int test = 1;
-		while(!found && test<=GameConstants.CONTROL_COUNT)
-		{	int temp = (start+test)%(GameConstants.CONTROL_COUNT+1);
+		while(!found && test<=GameData.CONTROL_COUNT)
+		{	int temp = (start+test)%(GameData.CONTROL_COUNT+1);
 			if(occupied.contains(temp))
 				test++;
 			else

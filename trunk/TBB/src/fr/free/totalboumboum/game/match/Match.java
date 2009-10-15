@@ -38,7 +38,7 @@ import javax.xml.parsers.ParserConfigurationException;
 import org.xml.sax.SAXException;
 
 import fr.free.totalboumboum.configuration.profile.Profile;
-import fr.free.totalboumboum.game.GameConstants;
+import fr.free.totalboumboum.game.GameData;
 import fr.free.totalboumboum.game.limit.Limits;
 import fr.free.totalboumboum.game.limit.MatchLimit;
 import fr.free.totalboumboum.game.rank.Ranks;
@@ -186,7 +186,7 @@ public class Match implements StatisticHolder, Serializable
 	
 	public Set<Integer> getAllowedPlayerNumbers()
 	{	TreeSet<Integer> result = new TreeSet<Integer>();
-		for(int i=0;i<=GameConstants.MAX_PROFILES_COUNT;i++)
+		for(int i=0;i<=GameData.MAX_PROFILES_COUNT;i++)
 			result.add(i);
 		for(Round r:rounds)
 		{	Set<Integer> temp = r.getAllowedPlayerNumbers();

@@ -37,6 +37,7 @@ import fr.free.totalboumboum.configuration.profile.Profile;
 import fr.free.totalboumboum.engine.container.level.HollowLevel;
 import fr.free.totalboumboum.engine.loop.Loop;
 import fr.free.totalboumboum.engine.player.PlayerLocation;
+import fr.free.totalboumboum.game.GameData;
 import fr.free.totalboumboum.game.limit.Limits;
 import fr.free.totalboumboum.game.limit.RoundLimit;
 import fr.free.totalboumboum.game.match.Match;
@@ -134,7 +135,8 @@ public class Round implements StatisticHolder, Serializable
 	public void loopOver()
 	{	match.roundOver();
 		stats.initEndDate();
-		GameStatistics.update(stats);
+		if(!GameData.quickMode)
+			GameStatistics.update(stats);
 		if(panel!=null)
 		{	panel.roundOver();
 		}
