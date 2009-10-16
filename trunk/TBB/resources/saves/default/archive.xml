@@ -1,25 +1,25 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <archive xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="..\..\..\resources\schemas\archive.xsd">
-	<tournament name="Tournoi de Galatasaray II" type="CUP" />
-	<played matches="12" rounds="5" />
-	<dates start="2009-10-15T22:40:39" save="2009-10-15T23:38:26" />
+	<tournament name="Tournoi de Galatasaray I" type="CUP" />
+	<played matches="4" rounds="13" />
+	<dates start="2009-10-16T07:18:23" save="2009-10-16T07:56:03" />
 	<players>
-		<player name="0809v2.Dayioğlugil+Geçkalan" />
-		<player name="0809v2.Akkaya+Danacioğlu" />
-		<player name="0809v2.Demirağ+Şagar" />
-		<player name="0809v2.Bilgin+Karabağ" />
-		<player name="0809v2.Erişik+Pektaş" />
-		<player name="Promeneur 2" />
-		<player name="0809v2.Çöremen+Küçükkarakürt" />
-		<player name="Joueur humain" />
-		<player name="0809v2.Akpolat+Şener" />
-		<player name="0809v2.Tırtıl+Tomruk" />
-		<player name="0809v2.Altay+Basaranoğlu" />
-		<player name="Promeneur" />
-		<player name="0809v2.Kökciyan+Mazmanoğlu" />
-		<player name="0809v2.Devecioğlu+Korkmaz" />
-		<player name="0809v2.Medeni+Uluer" />
-		<player name="0809v2.Günalp+Yürtsever" />
+		<player name="0708.Kurtuluş+Özsoy" />
+		<player name="0708.Baydar+Camcı" />
+		<player name="0708.Göksel+Mengeş" />
+		<player name="0708.Keçer+Yaman" />
+		<player name="0708.Eren+Gökçe" />
+		<player name="0708.Başman+Sandallı" />
+		<player name="0708.Göksay+Köse" />
+		<player name="0708.Hanci+Toprak" />
+		<player name="0708.Çamaş+Demirbaş" />
+		<player name="0708.Çağlayan+Elmas" />
+		<player name="0708.Kılıç+Pala" />
+		<player name="0708.Okan+Yüksel" />
+		<player name="0708.Demirkol+Doğan" />
+		<player name="0708.Bingöl+Ketenci" />
+		<player name="0708.Şahin+Yıldırım" />
+		<player name="0708.Cirit+Mutlu" />
 	</players>
 </archive>
 
