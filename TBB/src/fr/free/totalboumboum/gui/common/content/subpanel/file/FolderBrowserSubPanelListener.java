@@ -1,4 +1,4 @@
-package fr.free.totalboumboum.gui.common.content.subpanel.browser;
+package fr.free.totalboumboum.gui.common.content.subpanel.file;
 
 /*
  * Total Boum Boum
@@ -21,8 +21,8 @@ package fr.free.totalboumboum.gui.common.content.subpanel.browser;
  * 
  */
 
-public interface FileBrowserSubPanelListener
+public interface FolderBrowserSubPanelListener
 {
-	public void fileBrowserSelectionChanged();
-	public void fileBrowserParentReached();
+	public void packBrowserSelectionChanged();
+	public void packBrowserParentReached();
 }
