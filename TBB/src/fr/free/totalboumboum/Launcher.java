@@ -824,8 +824,9 @@ public class Launcher
 	 * - API IA : A* modifié pour pouvoir utiliser n'importe quelle fonction successeur
 	 * - API IA : accès à la taille des cases
 	 * - ajout du système Glicko2
-	 * - adaptation de Glicko2 (serializable, généricité, nouvelles méthodes)
+	 * - adaptation de Glicko2 (serializable, généricité, nouvelles méthodes...)
 	 * - ajout du rang dans les panels affichant la liste des joueurs d'un tournoi/match
+	 * - nouvelles classes pour gérer les statistiques globales du jeu : nombre de rounds joués par joueur, nombre de bombes posées, etc.
 	 */
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -1033,10 +1034,9 @@ public class Launcher
 	 * 
 	 * 	- créer un log des commandes (désactivable)
 	 *  - faire une option qui enchaîne automatiquement les rounds/matches d'un match/tournoi
-	 *  - glicko:
-	 *  	- pouvoir gauler les infos style nbre de rounds joués depuis la denrière mise à jour
 	 *  - écran stats
 	 *  	- rajouter les stats de base (nombre de matches joués, etc)
-	 *  	- possibilité d'enregistrer/déregistrer un joueur dans le classement glicko-2 
+	 *  	- possibilité d'enregistrer/déregistrer un joueur dans le classement glicko-2
+	 *  - considérer le fait de séparer les suicide des bombeds-bombings 
 	 */
 }

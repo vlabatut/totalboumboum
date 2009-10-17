@@ -46,14 +46,17 @@ public class GameStatistics
 	// FILE ACCESS		/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	public static void loadStatistics() throws IOException, ClassNotFoundException
-	{	// glicko2 ranking service
-		rankingService = Glicko2Loader.loadStatistics();
+	{	// overall statistics
 		playersStats = OverallStatsLoader.loadStatistics();
+		// glicko2 ranking service
+		rankingService = Glicko2Loader.loadStatistics();		
 	}
 	
 	public static void saveStatistics() throws IOException, IllegalArgumentException, SecurityException, ParserConfigurationException, SAXException, IllegalAccessException, NoSuchFieldException, ClassNotFoundException
-	{	Glicko2Saver.saveStatistics(rankingService);
+	{	// overall statistics
 		OverallStatsSaver.saveStatistics(playersStats);
+		// glicko2 ranking service
+		Glicko2Saver.saveStatistics(rankingService);		
 	}
 
 	/////////////////////////////////////////////////////////////////
