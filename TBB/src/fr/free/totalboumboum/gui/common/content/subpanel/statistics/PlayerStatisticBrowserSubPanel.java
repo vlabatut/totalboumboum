@@ -24,196 +24,136 @@ package fr.free.totalboumboum.gui.common.content.subpanel.statistics;
 import java.awt.Color;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.io.IOException;
 import java.text.Collator;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.HashMap;
 import java.util.Iterator;
+import java.util.List;
 import java.util.Locale;
+import java.util.TreeSet;
 import java.util.Map.Entry;
 
 import javax.swing.JLabel;
+import javax.xml.parsers.ParserConfigurationException;
+
+import org.xml.sax.SAXException;
 
 import fr.free.totalboumboum.gui.common.structure.subpanel.inside.TableContentPanel;
+import fr.free.totalboumboum.gui.common.structure.subpanel.outside.LinesSubPanel;
 import fr.free.totalboumboum.gui.common.structure.subpanel.outside.SubPanel;
 import fr.free.totalboumboum.gui.common.structure.subpanel.outside.TableSubPanel;
 import fr.free.totalboumboum.gui.tools.GuiKeys;
 import fr.free.totalboumboum.gui.tools.GuiTools;
+import fr.free.totalboumboum.statistics.GameStatistics;
+import fr.free.totalboumboum.statistics.detailed.Score;
+import fr.free.totalboumboum.statistics.general.PlayerStats;
+import fr.free.totalboumboum.statistics.glicko2.jrs.RankingService;
 
-public class PlayerStatisticBrowserSubPanel extends TableSubPanel implements MouseListener
+public class PlayerStatisticBrowserSubPanel extends LinesSubPanel implements MouseListener, PlayerStatisticsSubPanelListener
 {	private static final long serialVersionUID = 1L;
-	private static final int LINES = 20;
+	private static final int LINES = 2;
 
 	public PlayerStatisticBrowserSubPanel(int width, int height)
-	{	super(width,height,SubPanel.Mode.BORDER,LINES,1,1,false);
+	{	super(width,height,SubPanel.Mode.BORDER,LINES,1,false);
 		
 		// pages
-		setFileNames(null);
+		setPlayersIds(null,16);
 	}
 	
 	/////////////////////////////////////////////////////////////////
 	// PAGES			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	private HashMap<String,String> fileNames;
-	ArrayList<Entry<String,String>> names;
-	private int linePrevious;
-	private int lineParent;
-	private int lineNext;
-	private int controlTotalCount;
-	private int controlUpCount;
-	private int selectedRow;
+	private List<Integer> playersIds;
+	private final static int COL_PREVIOUS = 0;
+	private final static int COL_NEXT = 1;
 	private int currentPage = 0;
-	private ArrayList<TableContentPanel> listPanels;
+	private ArrayList<PlayerStatisticsSubPanel> listPanels;
 	private int pageCount;	
+	private int lines;
 	
-	public HashMap<String,String> getFileNames()
-	{	return fileNames;	
+	public List<Integer> getPlayersIds()
+	{	return playersIds;	
 	}
 	
-	public void setFileNames(HashMap<String,String> fileNames)
+	public void setPlayersIds(List<Integer> playersIds, int lines)
 	{	// init
-		this.fileNames = fileNames;
-		if(fileNames==null)
-			this.fileNames = new HashMap<String, String>();
-		listPanels = new ArrayList<TableContentPanel>();
+		this.lines = 16;
+		this.playersIds = playersIds;
+		if(playersIds==null)
+			this.playersIds = new ArrayList<Integer>();
+		listPanels = new ArrayList<PlayerStatisticsSubPanel>();
 		currentPage = 0;
-		selectedRow = -1; fireFileBrowserSelectionChanged();
 		
 		// size
-		linePrevious = 0;
-		lineParent = 1;
-		lineNext = LINES-1;
-		controlUpCount = 1;
-		if(showParent)
-			controlUpCount = 2;
-		controlTotalCount = controlUpCount+1;
-		int cols = 1;
-		
-		initNames();
 		pageCount = getPageCount();
-//		int textMaxWidth = getDataWidth() - 2*GuiTools.subPanelMargin;
-		int textMaxWidth = getDataWidth();
+		int menuHeight = (int)(1.5*(getDataHeight() - lines*GuiTools.panelMargin)/(lines+1));
+		int panelHeight = getDataHeight() - menuHeight - GuiTools.panelMargin;
 		
+		// sorting players
+		TreeSet<Integer> temp = new TreeSet<Integer>(comparator);
+		List<Integer> sortedPlayersIds = new ArrayList<Integer>(temp);
+		
+		// building all pages
+		int index = 0;
 		for(int panelIndex=0;panelIndex<pageCount;panelIndex++)
-		{	TableContentPanel listPanel = new TableContentPanel(getDataWidth(),getDataHeight(),LINES,cols,false);
-			listPanel.setColSubMinWidth(0,textMaxWidth);
-			listPanel.setColSubPrefWidth(0,textMaxWidth);
-			listPanel.setColSubMaxWidth(0,textMaxWidth);
-			
-			// data
-			int line = controlUpCount;
-			int nameIndex = panelIndex*(LINES-controlTotalCount);
-			while(line<LINES && nameIndex<names.size())
-			{	Color bg = GuiTools.COLOR_TABLE_REGULAR_BACKGROUND;
-				Entry<String,String> entry = names.get(nameIndex);
-				String name = entry.getValue();
-				listPanel.setLabelBackground(line,0,bg);
-				listPanel.setLabelText(line,0,name,name);
-				JLabel label = listPanel.getLabel(line,0);
-				label.addMouseListener(this);
-				nameIndex++;
-				line++;
-			}			
-			// page up
-			{	Color bg = GuiTools.COLOR_TABLE_HEADER_BACKGROUND;
-				listPanel.setLabelBackground(linePrevious,0,bg);
-				String key = GuiKeys.COMMON_BROWSER_FILE_PAGEUP;
-				listPanel.setLabelKey(linePrevious,0,key,true);
-				JLabel label = listPanel.getLabel(linePrevious,0);
-				label.addMouseListener(this);
+		{	// build the players list
+			int i = 0;
+			List<Integer> idList = new ArrayList<Integer>();
+			while(index<sortedPlayersIds.size() && i<lines)
+			{	idList.add(sortedPlayersIds.get(index));
+				index++;
+				i++;
 			}
-			// parent
-			if(showParent)
-			{	Color bg = GuiTools.COLOR_TABLE_HEADER_BACKGROUND;
-				listPanel.setLabelBackground(lineParent,0,bg);
-				String key = GuiKeys.COMMON_BROWSER_FILE_PARENT;
-				listPanel.setLabelKey(lineParent,0,key,false);
-				JLabel label = listPanel.getLabel(lineParent,0);
-				label.addMouseListener(this);
+			// build the panel			
+			PlayerStatisticsSubPanel panel = new PlayerStatisticsSubPanel(getDataWidth(),panelHeight);
+			try
+			{	panel.setPlayerIds(idList,lines);
 			}
-			// page down
-			{	Color bg = GuiTools.COLOR_TABLE_HEADER_BACKGROUND;
-				listPanel.setLabelBackground(lineNext,0,bg);
-				String key = GuiKeys.COMMON_BROWSER_FILE_PAGEDOWN;
-				listPanel.setLabelKey(lineNext,0,key,true);
-				JLabel label = listPanel.getLabel(lineNext,0);
-				label.addMouseListener(this);
+			catch (IllegalArgumentException e)
+			{	e.printStackTrace();
 			}
-			listPanels.add(listPanel);
+			catch (SecurityException e)
+			{	e.printStackTrace();
+			}
+			catch (ParserConfigurationException e)
+			{	e.printStackTrace();
+			}
+			catch (SAXException e)
+			{	e.printStackTrace();
+			}
+			catch (IOException e)
+			{	e.printStackTrace();
+			}
+			catch (IllegalAccessException e)
+			{	e.printStackTrace();
+			}
+			catch (NoSuchFieldException e)
+			{	e.printStackTrace();
+			}
+			catch (ClassNotFoundException e)
+			{	e.printStackTrace();
+			}
+			// add to list
+			listPanels.add(panel);
 		}
 		
 		refreshList();
 	}
-
-	private void initNames()
-	{	names = new ArrayList<Entry<String,String>>(fileNames.entrySet());
-		Collections.sort(names,new Comparator<Entry<String,String>>()
-		{	@Override
-			public int compare(Entry<String,String> arg0, Entry<String,String> arg1)
-			{	int result;
-				String name0 = arg0.getValue();
-				String name1 = arg1.getValue();
-				Collator collator = Collator.getInstance(Locale.ENGLISH);
-				result = collator.compare(name0,name1);
-				return result;
-			}
-		});
-	}
 	
 	private int getPageCount()
-	{	int result = names.size()/(LINES-controlTotalCount);
-		if(names.size()%(LINES-controlTotalCount)>0)
+	{	int result = playersIds.size()/LINES;
+		if(playersIds.size()%LINES>0)
 			result++;
 		else if(result==0)
 			result = 1;
 		return result;
 	}		
 	
-	public String getSelectedFileName()
-	{	String result = null;
-		if(selectedRow!=-1)
-		{	int selectedIndex = (selectedRow-controlUpCount)+currentPage*(LINES-controlTotalCount);
-			Entry<String,String> entry = names.get(selectedIndex);
-			result = entry.getKey();		
-		}
-		return result;
-	}
-	
-	public void setSelectedFileName(String fileName)
-	{	Iterator<Entry<String,String>> it = names.iterator();
-		boolean found = false;
-		int index = 0;
-		while(it.hasNext() && !found)
-		{	Entry<String,String> entry = it.next();
-			if(entry.getKey().equalsIgnoreCase(fileName))
-				found = true;
-			else
-				index++;
-		}
-		if(found)
-		{	currentPage = index/(LINES-controlTotalCount);
-			refreshList();
-			int row = index%(LINES-controlTotalCount)+controlUpCount;
-			selectName(row);
-		}
-	}
-	
-	private void selectName(int row)
-	{	TableContentPanel table = listPanels.get(currentPage);
-		// unselect the previous selected line
-		if(selectedRow!=-1)
-			table.setLabelBackground(selectedRow,0,GuiTools.COLOR_TABLE_REGULAR_BACKGROUND);
-		// select the new line
-		selectedRow = row;
-		if(selectedRow!=-1)
-			table.setLabelBackground(selectedRow,0,GuiTools.COLOR_TABLE_SELECTED_BACKGROUND);
-		// update listeners
-		fireFileBrowserSelectionChanged();
-	}
-
 	private void refreshList()
-	{	TableContentPanel p = listPanels.get(currentPage);
+	{	PlayerStatisticsSubPanel p = listPanels.get(currentPage);
 		setDataPanel(p);
 		validate();
 		repaint();
@@ -226,18 +166,264 @@ public class PlayerStatisticBrowserSubPanel extends TableSubPanel implements Mou
 	}
 
 	/////////////////////////////////////////////////////////////////
-	// DISPLAY			/////////////////////////////////////////////
+	// SORT				/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	private boolean showParent = true;
+	private Comparator<Integer> comparator;
 	
-	public boolean getShowParent()
-	{	return showParent;
+	public void setSort(RankCriterion sort)
+	{	if(sort==RankCriterion.MEAN)
+		{	comparator = new Comparator<Integer>()
+			{	@Override
+				public int compare(Integer playerId1, Integer playerId2)
+				{	int result;
+					RankingService rankingService = GameStatistics.getRankingService();
+					double value1 = rankingService.getPlayerRating(playerId1).getRating();
+					double value2 = rankingService.getPlayerRating(playerId2).getRating();
+					if(value1>value2)
+						result = 1;
+					else if(value1<value2)
+						result = -1;
+					else
+						result = 0;
+					return result;
+				}
+			};			
+		}
+		else if(sort==RankCriterion.ROUNDCOUNT)
+		{	comparator = new Comparator<Integer>()
+			{	@Override
+				public int compare(Integer playerId1, Integer playerId2)
+				{	int result;
+					RankingService rankingService = GameStatistics.getRankingService();
+					double value1 = rankingService.getPlayerRating(playerId1).getRoundcount();
+					double value2 = rankingService.getPlayerRating(playerId2).getRoundcount();
+					if(value1>value2)
+						result = 1;
+					else if(value1<value2)
+						result = -1;
+					else
+						result = 0;
+					return result;
+				}
+			};			
+		}
+		else if(sort==RankCriterion.BOMBS)
+		{	comparator = new Comparator<Integer>()
+			{	@Override
+				public int compare(Integer playerId1, Integer playerId2)
+				{	int result;
+					HashMap<Integer,PlayerStats> playersStats = GameStatistics.getPlayersStats();
+					double value1 = playersStats.get(playerId1).getScore(Score.BOMBS);
+					double value2 = playersStats.get(playerId2).getScore(Score.BOMBS);
+					if(value1>value2)
+						result = 1;
+					else if(value1<value2)
+						result = -1;
+					else
+						result = 0;
+					return result;
+				}
+			};			
+		}
+		else if(sort==RankCriterion.ITEMS)
+		{	comparator = new Comparator<Integer>()
+			{	@Override
+				public int compare(Integer playerId1, Integer playerId2)
+				{	int result;
+					HashMap<Integer,PlayerStats> playersStats = GameStatistics.getPlayersStats();
+					double value1 = playersStats.get(playerId1).getScore(Score.ITEMS);
+					double value2 = playersStats.get(playerId2).getScore(Score.ITEMS);
+					if(value1>value2)
+						result = 1;
+					else if(value1<value2)
+						result = -1;
+					else
+						result = 0;
+					return result;
+				}
+			};			
+		}
+		else if(sort==RankCriterion.BOMBEDS)
+		{	comparator = new Comparator<Integer>()
+			{	@Override
+				public int compare(Integer playerId1, Integer playerId2)
+				{	int result;
+					HashMap<Integer,PlayerStats> playersStats = GameStatistics.getPlayersStats();
+					double value1 = playersStats.get(playerId1).getScore(Score.BOMBEDS);
+					double value2 = playersStats.get(playerId2).getScore(Score.BOMBEDS);
+					if(value1>value2)
+						result = 1;
+					else if(value1<value2)
+						result = -1;
+					else
+						result = 0;
+					return result;
+				}
+			};			
+		}
+		else if(sort==RankCriterion.BOMBINGS)
+		{	comparator = new Comparator<Integer>()
+			{	@Override
+				public int compare(Integer playerId1, Integer playerId2)
+				{	int result;
+					HashMap<Integer,PlayerStats> playersStats = GameStatistics.getPlayersStats();
+					double value1 = playersStats.get(playerId1).getScore(Score.BOMBINGS);
+					double value2 = playersStats.get(playerId2).getScore(Score.BOMBINGS);
+					if(value1>value2)
+						result = 1;
+					else if(value1<value2)
+						result = -1;
+					else
+						result = 0;
+					return result;
+				}
+			};			
+		}
+		else if(sort==RankCriterion.CROWNS)
+		{	comparator = new Comparator<Integer>()
+			{	@Override
+				public int compare(Integer playerId1, Integer playerId2)
+				{	int result;
+					HashMap<Integer,PlayerStats> playersStats = GameStatistics.getPlayersStats();
+					double value1 = playersStats.get(playerId1).getScore(Score.CROWNS);
+					double value2 = playersStats.get(playerId2).getScore(Score.CROWNS);
+					if(value1>value2)
+						result = 1;
+					else if(value1<value2)
+						result = -1;
+					else
+						result = 0;
+					return result;
+				}
+			};			
+		}
+		else if(sort==RankCriterion.PAINTINGS)
+		{	comparator = new Comparator<Integer>()
+			{	@Override
+				public int compare(Integer playerId1, Integer playerId2)
+				{	int result;
+					HashMap<Integer,PlayerStats> playersStats = GameStatistics.getPlayersStats();
+					double value1 = playersStats.get(playerId1).getScore(Score.CROWNS);
+					double value2 = playersStats.get(playerId2).getScore(Score.CROWNS);
+					if(value1>value2)
+						result = 1;
+					else if(value1<value2)
+						result = -1;
+					else
+						result = 0;
+					return result;
+				}
+			};			
+		}
+		else if(sort==RankCriterion.TIME_PLAYED)
+		{	comparator = new Comparator<Integer>()
+			{	@Override
+				public int compare(Integer playerId1, Integer playerId2)
+				{	int result;
+					HashMap<Integer,PlayerStats> playersStats = GameStatistics.getPlayersStats();
+					double value1 = playersStats.get(playerId1).getScore(Score.TIME);
+					double value2 = playersStats.get(playerId2).getScore(Score.TIME);
+					if(value1>value2)
+						result = 1;
+					else if(value1<value2)
+						result = -1;
+					else
+						result = 0;
+					return result;
+				}
+			};			
+		}
+		else if(sort==RankCriterion.ROUNDS_PLAYED)
+		{	comparator = new Comparator<Integer>()
+			{	@Override
+				public int compare(Integer playerId1, Integer playerId2)
+				{	int result;
+					HashMap<Integer,PlayerStats> playersStats = GameStatistics.getPlayersStats();
+					double value1 = playersStats.get(playerId1).getRoundsPlayed();
+					double value2 = playersStats.get(playerId2).getRoundsPlayed();
+					if(value1>value2)
+						result = 1;
+					else if(value1<value2)
+						result = -1;
+					else
+						result = 0;
+					return result;
+				}
+			};			
+		}
+		else if(sort==RankCriterion.ROUNDS_WON)
+		{	comparator = new Comparator<Integer>()
+			{	@Override
+				public int compare(Integer playerId1, Integer playerId2)
+				{	int result;
+					HashMap<Integer,PlayerStats> playersStats = GameStatistics.getPlayersStats();
+					double value1 = playersStats.get(playerId1).getRoundsWon();
+					double value2 = playersStats.get(playerId2).getRoundsWon();
+					if(value1>value2)
+						result = 1;
+					else if(value1<value2)
+						result = -1;
+					else
+						result = 0;
+					return result;
+				}
+			};			
+		}
+		else if(sort==RankCriterion.ROUNDS_DRAWN)
+		{	comparator = new Comparator<Integer>()
+			{	@Override
+				public int compare(Integer playerId1, Integer playerId2)
+				{	int result;
+					HashMap<Integer,PlayerStats> playersStats = GameStatistics.getPlayersStats();
+					double value1 = playersStats.get(playerId1).getRoundsDrawn();
+					double value2 = playersStats.get(playerId2).getRoundsDrawn();
+					if(value1>value2)
+						result = 1;
+					else if(value1<value2)
+						result = -1;
+					else
+						result = 0;
+					return result;
+				}
+			};			
+		}
+		else if(sort==RankCriterion.ROUNDS_LOST)
+		{	comparator = new Comparator<Integer>()
+			{	@Override
+				public int compare(Integer playerId1, Integer playerId2)
+				{	int result;
+					HashMap<Integer,PlayerStats> playersStats = GameStatistics.getPlayersStats();
+					double value1 = playersStats.get(playerId1).getRoundsLost();
+					double value2 = playersStats.get(playerId2).getRoundsLost();
+					if(value1>value2)
+						result = 1;
+					else if(value1<value2)
+						result = -1;
+					else
+						result = 0;
+					return result;
+				}
+			};			
+		}
+	
+		setPlayersIds(playersIds,lines);
 	}
-
-	public void setShowParent(boolean showParent)
-	{	this.showParent = showParent;
-		refresh();
-	}
+	
+	public enum RankCriterion
+	{	MEAN,
+		ROUNDCOUNT,
+		BOMBS,
+		BOMBINGS,
+		BOMBEDS,
+		ITEMS,
+		CROWNS,
+		PAINTINGS,
+		TIME_PLAYED,
+		ROUNDS_PLAYED,
+		ROUNDS_WON,
+		ROUNDS_DRAWN,
+		ROUNDS_LOST,		
+	}	
 	
 	/////////////////////////////////////////////////////////////////
 	// MOUSE LISTENER	/////////////////////////////////////////////
@@ -317,5 +503,18 @@ public class PlayerStatisticBrowserSubPanel extends TableSubPanel implements Mou
 	private void fireFileBrowserParentClicked()
 	{	for(PlayerStatisticBrowserSubPanelListener listener: listeners)
 			listener.fileBrowserParentReached();
+	}
+
+	/////////////////////////////////////////////////////////////////
+	// PLAYER STATISTIC SUBPANEL LISTENER	/////////////////////////
+	/////////////////////////////////////////////////////////////////
+	@Override
+	public void playerStatisticsPlayerRegistered(int playerId)
+	{	// TODO Auto-generated method stub		
+	}
+
+	@Override
+	public void playerStatisticsPlayerUnregistered(int playerId)
+	{	// TODO Auto-generated method stub		
 	}
 }

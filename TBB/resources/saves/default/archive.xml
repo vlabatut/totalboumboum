@@ -2,7 +2,7 @@
 <archive xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="..\..\..\resources\schemas\archive.xsd">
 	<tournament name="Super-coupe de Galatasaray I" type="SINGLE" />
 	<played matches="1" rounds="5" />
-	<dates start="2009-10-17T19:25:48" save="2009-10-17T19:31:13" />
+	<dates start="2009-10-17T23:24:50" save="2009-10-17T23:30:11" />
 	<players>
 		<player name="0708.Hanci+Toprak" />
 		<player name="0708.Bingöl+Ketenci" />

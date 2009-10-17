@@ -496,7 +496,7 @@ public class RankingService implements Serializable {
       *     rating for the player.
       */
     public synchronized PlayerRating getPlayerRating(Integer playerId) {
-        return (PlayerRating)playerRatings.get(playerId);
+        return playerRatings.get(playerId);
     }
     
     /**

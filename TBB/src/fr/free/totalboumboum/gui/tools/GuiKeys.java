@@ -137,8 +137,7 @@ public class GuiKeys
 	public static final String NAME = "Name";
 	public static final String NEW = "New";
 	public static final String NEXT = "Next";
-	public static final String NO_SHARE = "NoShare";
-	public static final String NO_CONTROLS = "NoControls";
+	public static final String NO = "No";
 	public static final String NONE = "None";
 	public static final String NOTES = "Notes";
 	public static final String OPTIONS = "Options";
@@ -177,6 +176,8 @@ public class GuiKeys
 	public static final String RANKPOINTS = "Rankpoints";
 	public static final String READY = "Ready";
 	public static final String RED = "Red";
+	public static final String 
+REGISTER = "Register";
 	public static final String REGULAR = "Regular";
 	public static final String RESET = "Reset";
 	public static final String RESOURCES = "Resources";
@@ -214,6 +215,7 @@ public class GuiKeys
 	public static final String TYPES = "Types";
 	public static final String ULTRAMARINE = "Ultramarine";
 	public static final String UNDECIDED = "Undecided";
+	public static final String UNREGISTER = "Unregister";
 	public static final String UP = "Up";
 	public static final String USE = "Use";
 	public static final String VALUE = "Value";
@@ -510,6 +512,11 @@ public class GuiKeys
 				public static final String MENU_STATISTICS_PLAYER_COMMON_DATA = MENU_STATISTICS_PLAYER_COMMON+DATA;
 				public static final String MENU_STATISTICS_PLAYER_COMMON_DATA_COMPUTER = MENU_STATISTICS_PLAYER_COMMON_DATA+COMPUTER;
 				public static final String MENU_STATISTICS_PLAYER_COMMON_DATA_HUMAN = MENU_STATISTICS_PLAYER_COMMON_DATA+HUMAN;
+				public static final String MENU_STATISTICS_PLAYER_COMMON_DATA_NO_RANK = MENU_STATISTICS_PLAYER_COMMON_DATA+NO+RANK;
+				/* BUTTON */
+				public static final String MENU_STATISTICS_PLAYER_COMMON_BUTTON = MENU_STATISTICS_PLAYER_COMMON+BUTTON;
+				public static final String MENU_STATISTICS_PLAYER_COMMON_BUTTON_REGISTER = MENU_STATISTICS_PLAYER_COMMON_BUTTON+REGISTER;
+				public static final String MENU_STATISTICS_PLAYER_COMMON_BUTTON_UNREGISTER = MENU_STATISTICS_PLAYER_COMMON_BUTTON+UNREGISTER;
 			/* GLICKO2 */
 			public static final String MENU_STATISTICS_PLAYER_GLICKO2 = MENU_STATISTICS_PLAYER+GLICKO2;
 			public static final String MENU_STATISTICS_PLAYER_GLICKO2_TITLE = MENU_STATISTICS_PLAYER_GLICKO2+TITLE;
@@ -925,7 +932,7 @@ public class GuiKeys
 			public static final String COMMON_PLAYERS_LIST_DATA_COMPUTER = COMMON_PLAYERS_LIST_DATA+COMPUTER;
 			public static final String COMMON_PLAYERS_LIST_DATA_CONTROLS = COMMON_PLAYERS_LIST_DATA+CONTROLS;
 			public static final String COMMON_PLAYERS_LIST_DATA_HUMAN = COMMON_PLAYERS_LIST_DATA+HUMAN;
-			public static final String COMMON_PLAYERS_LIST_DATA_NO_CONTROLS = COMMON_PLAYERS_LIST_DATA+NO_CONTROLS;
+			public static final String COMMON_PLAYERS_LIST_DATA_NO_CONTROLS = COMMON_PLAYERS_LIST_DATA+NO+CONTROLS;
 		/* SELECTION */
 		public static final String COMMON_PLAYERS_SELECTION = COMMON_PLAYERS+SELECTION;
 			/* HEADER */
@@ -964,7 +971,7 @@ public class GuiKeys
 			public static final String COMMON_POINTS_MATCH_DATA_CROWNS = COMMON_POINTS_MATCH_DATA+CROWNS;
 			public static final String COMMON_POINTS_MATCH_DATA_INVERTED = COMMON_POINTS_MATCH_DATA+INVERTED;
 			public static final String COMMON_POINTS_MATCH_DATA_ITEMS = COMMON_POINTS_MATCH_DATA+ITEMS;
-			public static final String COMMON_POINTS_MATCH_DATA_NOSHARE = COMMON_POINTS_MATCH_DATA+NO_SHARE;
+			public static final String COMMON_POINTS_MATCH_DATA_NOSHARE = COMMON_POINTS_MATCH_DATA+NO+SHARE;
 			public static final String COMMON_POINTS_MATCH_DATA_PAINTINGS = COMMON_POINTS_MATCH_DATA+PAINTINGS;
 			public static final String COMMON_POINTS_MATCH_DATA_PARTIAL = COMMON_POINTS_MATCH_DATA+PARTIAL;
 			public static final String COMMON_POINTS_MATCH_DATA_REGULAR = COMMON_POINTS_MATCH_DATA+REGULAR;
@@ -990,7 +997,7 @@ public class GuiKeys
 			public static final String COMMON_POINTS_ROUND_DATA_CROWNS = COMMON_POINTS_ROUND_DATA+CROWNS;
 			public static final String COMMON_POINTS_ROUND_DATA_INVERTED = COMMON_POINTS_ROUND_DATA+INVERTED;
 			public static final String COMMON_POINTS_ROUND_DATA_ITEMS = COMMON_POINTS_ROUND_DATA+ITEMS;
-			public static final String COMMON_POINTS_ROUND_DATA_NOSHARE = COMMON_POINTS_ROUND_DATA+NO_SHARE;
+			public static final String COMMON_POINTS_ROUND_DATA_NOSHARE = COMMON_POINTS_ROUND_DATA+NO+SHARE;
 			public static final String COMMON_POINTS_ROUND_DATA_PAINTINGS = COMMON_POINTS_ROUND_DATA+PAINTINGS;
 			public static final String COMMON_POINTS_ROUND_DATA_PARTIAL = COMMON_POINTS_ROUND_DATA+PARTIAL;
 			public static final String COMMON_POINTS_ROUND_DATA_REGULAR = COMMON_POINTS_ROUND_DATA+REGULAR;
@@ -1016,7 +1023,7 @@ public class GuiKeys
 			public static final String COMMON_POINTS_TOURNAMENT_DATA_CROWNS = COMMON_POINTS_TOURNAMENT_DATA+CROWNS;
 			public static final String COMMON_POINTS_TOURNAMENT_DATA_INVERTED = COMMON_POINTS_TOURNAMENT_DATA+INVERTED;
 			public static final String COMMON_POINTS_TOURNAMENT_DATA_ITEMS = COMMON_POINTS_TOURNAMENT_DATA+ITEMS;
-			public static final String COMMON_POINTS_TOURNAMENT_DATA_NOSHARE = COMMON_POINTS_TOURNAMENT_DATA+NO_SHARE;
+			public static final String COMMON_POINTS_TOURNAMENT_DATA_NOSHARE = COMMON_POINTS_TOURNAMENT_DATA+NO+SHARE;
 			public static final String COMMON_POINTS_TOURNAMENT_DATA_PAINTINGS = COMMON_POINTS_TOURNAMENT_DATA+PAINTINGS;
 			public static final String COMMON_POINTS_TOURNAMENT_DATA_PARTIAL = COMMON_POINTS_TOURNAMENT_DATA+PARTIAL;
 			public static final String COMMON_POINTS_TOURNAMENT_DATA_REGULAR = COMMON_POINTS_TOURNAMENT_DATA+REGULAR;

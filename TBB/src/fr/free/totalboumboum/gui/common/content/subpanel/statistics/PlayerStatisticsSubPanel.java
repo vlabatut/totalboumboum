@@ -29,19 +29,17 @@ import java.io.IOException;
 import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Iterator;
+import java.util.List;
+import java.util.Set;
 
 import javax.swing.JLabel;
 import javax.xml.parsers.ParserConfigurationException;
 
 import org.xml.sax.SAXException;
 
-import fr.free.totalboumboum.configuration.Configuration;
 import fr.free.totalboumboum.configuration.profile.Portraits;
 import fr.free.totalboumboum.configuration.profile.Profile;
 import fr.free.totalboumboum.configuration.profile.ProfileLoader;
-import fr.free.totalboumboum.game.GameData;
-import fr.free.totalboumboum.game.round.Round;
 import fr.free.totalboumboum.statistics.GameStatistics;
 import fr.free.totalboumboum.statistics.general.PlayerStats;
 import fr.free.totalboumboum.statistics.glicko2.jrs.PlayerRating;
@@ -50,20 +48,19 @@ import fr.free.totalboumboum.statistics.detailed.Score;
 import fr.free.totalboumboum.gui.common.structure.subpanel.outside.SubPanel;
 import fr.free.totalboumboum.gui.common.structure.subpanel.outside.TableSubPanel;
 import fr.free.totalboumboum.gui.tools.GuiKeys;
-import fr.free.totalboumboum.gui.tools.GuiStringTools;
 import fr.free.totalboumboum.gui.tools.GuiTools;
 import fr.free.totalboumboum.tools.StringTools;
 
 public class PlayerStatisticsSubPanel extends TableSubPanel implements MouseListener
 {	private static final long serialVersionUID = 1L;
 	private static final int LINES = 16+1;
-	private static final int COLS = 2;
+	private static final int COLS = 3;
 	
 	public PlayerStatisticsSubPanel(int width, int height)
 	{	super(width,height,SubPanel.Mode.BORDER,LINES,1,COLS,true);
 		
 		try
-		{	setPlayerIds(null,null,LINES-1);
+		{	setPlayerIds(null,LINES);
 		}
 		catch (Exception e)
 		{	e.printStackTrace();
@@ -73,22 +70,19 @@ public class PlayerStatisticsSubPanel extends TableSubPanel implements MouseList
 	/////////////////////////////////////////////////////////////////
 	// PLAYER IDS		/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	private ArrayList<Integer> playerIds;
-	private ArrayList<Integer> playerRanks;
+	private List<Integer> playerIds;
 	private int lines;
 	
-	public ArrayList<Integer> getPlayerIds()
+	public List<Integer> getPlayerIds()
 	{	return playerIds;	
 	}
 	
-	public void setPlayerIds(ArrayList<Integer> playerIds, ArrayList<Integer> playerRanks, int lines) throws IllegalArgumentException, SecurityException, ParserConfigurationException, SAXException, IOException, IllegalAccessException, NoSuchFieldException, ClassNotFoundException
+	public void setPlayerIds(List<Integer> playerIds, int lines) throws IllegalArgumentException, SecurityException, ParserConfigurationException, SAXException, IOException, IllegalAccessException, NoSuchFieldException, ClassNotFoundException
 	{	if(playerIds==null)
-		{	playerIds = new ArrayList<Integer>();
-			playerRanks = new ArrayList<Integer>();
-		}
+			playerIds = new ArrayList<Integer>();		
 		this.playerIds = playerIds;
-		this.playerRanks = playerRanks;
-
+		this.lines = lines;
+		
 		// sizes
 		int cols = COLS;
 		if(showPortrait) 
@@ -115,10 +109,11 @@ public class PlayerStatisticsSubPanel extends TableSubPanel implements MouseList
 			cols++;
 		if(showTimePlayed) 
 			cols++;
-		reinit(lines,cols);
+		reinit(lines+1,cols);
 		
 		// col widths
 		int headerHeight = getHeaderHeight();
+		int buttonWidth = headerHeight;
 		int rankWidth = headerHeight;
 		int portraitWidth = headerHeight;
 		int typeWidth = headerHeight;
@@ -135,6 +130,9 @@ public class PlayerStatisticsSubPanel extends TableSubPanel implements MouseList
 
 		// headers
 		{	int col = 0;
+			// button
+			{	col++;
+			}
 			// rank
 			{	String key = GuiKeys.MENU_STATISTICS_PLAYER_COMMON_HEADER_RANK;
 				setLabelKey(0,col,key,true);
@@ -241,7 +239,6 @@ public class PlayerStatisticsSubPanel extends TableSubPanel implements MouseList
 			{	// init
 				int col = 0;
 				int playerId = playerIds.get(line-1);
-				int playerRank = playerRanks.get(line-1);
 				Profile profile = ProfileLoader.loadProfile(playerId);
 				PlayerRating playerRating = rankingService.getPlayerRating(playerId);
 				PlayerStats playerStats = playersStats.get(playerId);
@@ -250,13 +247,31 @@ public class PlayerStatisticsSubPanel extends TableSubPanel implements MouseList
 				int alpha = GuiTools.ALPHA_TABLE_REGULAR_BACKGROUND_LEVEL3;
 				Color bg = new Color(clr.getRed(),clr.getGreen(),clr.getBlue(),alpha);
 				setLineBackground(line,bg);
+				// button
+				{	String key;
+					if(playerRating==null)
+						key = GuiKeys.MENU_STATISTICS_PLAYER_COMMON_BUTTON_REGISTER;
+					else
+						key = GuiKeys.MENU_STATISTICS_PLAYER_COMMON_BUTTON_UNREGISTER;
+					setLabelKey(line,col,key,true);
+					col++;
+					JLabel label = getLabel(line,col);
+					label.addMouseListener(this);
+					col++;
+				}
 				// rank
-				{	String text = Integer.toString(playerRank);
-					String tooltip = text;
-					setLabelText(line,col,text,tooltip);
-					int temp = GuiTools.getPixelWidth(getLineFontSize(),text);
-					if(temp>rankWidth)
-						rankWidth = temp;
+				{	if(playerRating==null)
+					{	String text = Integer.toString(rankingService.getPlayerRank(playerId));
+						String tooltip = text;
+						setLabelText(line,col,text,tooltip);
+						int temp = GuiTools.getPixelWidth(getLineFontSize(),text);
+						if(temp>rankWidth)
+							rankWidth = temp;
+					}
+					else
+					{	String key = GuiKeys.MENU_STATISTICS_PLAYER_COMMON_DATA_NO_RANK;
+						setLabelKey(line,col,key,false);
+					}
 					col++;
 				}
 				// portrait
@@ -408,6 +423,13 @@ public class PlayerStatisticsSubPanel extends TableSubPanel implements MouseList
 		// col widths
 		{	int nameWidth = getDataWidth() - (cols-1)*GuiTools.subPanelMargin;
 			int col = 0;
+			// buttons
+			{	setColSubMinWidth(col,buttonWidth);
+				setColSubPrefWidth(col,buttonWidth);
+				setColSubMaxWidth(col,buttonWidth);
+				nameWidth = nameWidth - buttonWidth;
+				col++;
+			}
 			// rank
 			{	setColSubMinWidth(col,rankWidth);
 				setColSubPrefWidth(col,rankWidth);
@@ -522,8 +544,6 @@ public class PlayerStatisticsSubPanel extends TableSubPanel implements MouseList
 				setColSubMaxWidth(colName,nameWidth);
 			}
 		}		
-		// NOTE rang, portrait, type (IA/Humain), nom, moyenne, e-t, volatilité, scores(bombes, items, kills, deaths), rounds, victoires, nul, défaites, temps
-		// NOTE rang et nom obligatoires
 	}
 	
 	/////////////////////////////////////////////////////////////////
@@ -545,7 +565,7 @@ public class PlayerStatisticsSubPanel extends TableSubPanel implements MouseList
 	public void setShowPortrait(boolean showPortrait)
 	{	this.showPortrait = showPortrait;
 		try
-		{	setPlayerIds(playerIds,playerRanks,lines-1);
+		{	setPlayerIds(playerIds,lines);
 		}
 		catch (Exception e)
 		{	e.printStackTrace();
@@ -555,7 +575,7 @@ public class PlayerStatisticsSubPanel extends TableSubPanel implements MouseList
 	public void setShowType(boolean showType)
 	{	this.showType = showType;
 		try
-		{	setPlayerIds(playerIds,playerRanks,lines-1);
+		{	setPlayerIds(playerIds,lines);
 		}
 		catch (Exception e)
 		{	e.printStackTrace();
@@ -565,7 +585,7 @@ public class PlayerStatisticsSubPanel extends TableSubPanel implements MouseList
 	public void setShowMean(boolean showMean)
 	{	this.showMean = showMean;
 		try
-		{	setPlayerIds(playerIds,playerRanks,lines-1);
+		{	setPlayerIds(playerIds,lines);
 		}
 		catch (Exception e)
 		{	e.printStackTrace();
@@ -575,7 +595,7 @@ public class PlayerStatisticsSubPanel extends TableSubPanel implements MouseList
 	public void setShowStdev(boolean showStdev)
 	{	this.showStdev = showStdev;
 		try
-		{	setPlayerIds(playerIds,playerRanks,lines-1);
+		{	setPlayerIds(playerIds,lines);
 		}
 		catch (Exception e)
 		{	e.printStackTrace();
@@ -585,7 +605,7 @@ public class PlayerStatisticsSubPanel extends TableSubPanel implements MouseList
 	public void setShowVolatility(boolean showVolatility)
 	{	this.showVolatility = showVolatility;
 		try
-		{	setPlayerIds(playerIds,playerRanks,lines-1);
+		{	setPlayerIds(playerIds,lines);
 		}
 		catch (Exception e)
 		{	e.printStackTrace();
@@ -595,7 +615,7 @@ public class PlayerStatisticsSubPanel extends TableSubPanel implements MouseList
 	public void setShowRoundcount(boolean showRoundcount)
 	{	this.showRoundcount = showRoundcount;
 		try
-		{	setPlayerIds(playerIds,playerRanks,lines-1);
+		{	setPlayerIds(playerIds,lines);
 		}
 		catch (Exception e)
 		{	e.printStackTrace();
@@ -605,7 +625,7 @@ public class PlayerStatisticsSubPanel extends TableSubPanel implements MouseList
 	public void setShowScores(boolean showScores)
 	{	this.showScores = showScores;
 		try
-		{	setPlayerIds(playerIds,playerRanks,lines-1);
+		{	setPlayerIds(playerIds,lines);
 		}
 		catch (Exception e)
 		{	e.printStackTrace();
@@ -615,7 +635,7 @@ public class PlayerStatisticsSubPanel extends TableSubPanel implements MouseList
 	public void setShowRoundsPlayed(boolean showRoundsPlayed)
 	{	this.showRoundsPlayed = showRoundsPlayed;
 		try
-		{	setPlayerIds(playerIds,playerRanks,lines-1);
+		{	setPlayerIds(playerIds,lines);
 		}
 		catch (Exception e)
 		{	e.printStackTrace();
@@ -625,7 +645,7 @@ public class PlayerStatisticsSubPanel extends TableSubPanel implements MouseList
 	public void setShowRoundsWon(boolean showRoundsWon)
 	{	this.showRoundsWon = showRoundsWon;
 		try
-		{	setPlayerIds(playerIds,playerRanks,lines-1);
+		{	setPlayerIds(playerIds,lines);
 		}
 		catch (Exception e)
 		{	e.printStackTrace();
@@ -635,7 +655,7 @@ public class PlayerStatisticsSubPanel extends TableSubPanel implements MouseList
 	public void setShowRoundsLost(boolean showRoundsLost)
 	{	this.showRoundsLost = showRoundsLost;
 		try
-		{	setPlayerIds(playerIds,playerRanks,lines-1);
+		{	setPlayerIds(playerIds,lines);
 		}
 		catch (Exception e)
 		{	e.printStackTrace();
@@ -645,7 +665,7 @@ public class PlayerStatisticsSubPanel extends TableSubPanel implements MouseList
 	public void setShowRoundsDrawn(boolean showRoundsDrawn)
 	{	this.showRoundsDrawn = showRoundsDrawn;
 		try
-		{	setPlayerIds(playerIds,playerRanks,lines-1);
+		{	setPlayerIds(playerIds,lines);
 		}
 		catch (Exception e)
 		{	e.printStackTrace();
@@ -655,7 +675,7 @@ public class PlayerStatisticsSubPanel extends TableSubPanel implements MouseList
 	public void setShowTimePlayed(boolean showTimePlayed)
 	{	this.showTimePlayed = showTimePlayed;
 		try
-		{	setPlayerIds(playerIds,playerRanks,lines-1);
+		{	setPlayerIds(playerIds,lines);
 		}
 		catch (Exception e)
 		{	e.printStackTrace();
@@ -685,20 +705,15 @@ public class PlayerStatisticsSubPanel extends TableSubPanel implements MouseList
 	public void mousePressed(MouseEvent e)
 	{	JLabel label = (JLabel)e.getComponent();
 		int[] pos = getLabelPositionSimple(label);
-		// controls
-		if(pos[1]==2)
-		{	Profile profile = players.get(pos[0]-1);
-			int index = profile.getControlSettingsIndex();
-			if(profile.hasAi())
-			{	if(index==GameData.CONTROL_COUNT)
-					index = 0;
-				else
-					index = Configuration.getProfilesConfiguration().getNextFreeControls(players,index);
-			}
+		// add/remove
+		if(pos[0]>0 && pos[1]==1)
+		{	int playerId = playerIds.get(pos[0]-1);
+			RankingService rankingService = GameStatistics.getRankingService();
+			Set<Integer> playersIds = rankingService.getPlayers();
+			if(playersIds.contains(playerId))
+				firePlayerStatisticsPlayerRegistered(playerId);
 			else
-				index = Configuration.getProfilesConfiguration().getNextFreeControls(players,index);
-			profile.setControlSettingsIndex(index);
-			setLabelText(pos[0],pos[1],controlTexts.get(index),controlTooltips.get(index));
+				firePlayerStatisticsPlayerUnregistered(playerId);
 		}
 	}
 
@@ -707,20 +722,27 @@ public class PlayerStatisticsSubPanel extends TableSubPanel implements MouseList
 	{	
 	}
 
-	// NOTE rang, portrait, type (IA/Humain), nom, moyenne, e-t, volatilité, scores
-	public enum RankCriterion
-	{	MEAN,
-		ROUNDCOUNT,
-		BOMBS,
-		BOMBINGS,
-		BOMBEDS,
-		ITEMS,
-		CROWNS,
-		PAINTINGS,
-		TIME_PLAYED,
-		ROUNDS_PLAYED,
-		ROUNDS_WON,
-		ROUNDS_DRAWN,
-		ROUNDS_LOST,		
+	/////////////////////////////////////////////////////////////////
+	// LISTENERS		/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	private ArrayList<PlayerStatisticsSubPanelListener> listeners = new ArrayList<PlayerStatisticsSubPanelListener>();
+	
+	public void addListener(PlayerStatisticsSubPanelListener listener)
+	{	if(!listeners.contains(listener))
+			listeners.add(listener);		
+	}
+
+	public void removeListener(PlayerStatisticsSubPanelListener listener)
+	{	listeners.remove(listener);		
+	}
+	
+	private void firePlayerStatisticsPlayerRegistered(int playerId)
+	{	for(PlayerStatisticsSubPanelListener listener: listeners)
+			listener.playerStatisticsPlayerRegistered(playerId);
+	}
+
+	private void firePlayerStatisticsPlayerUnregistered(int playerId)
+	{	for(PlayerStatisticsSubPanelListener listener: listeners)
+			listener.playerStatisticsPlayerUnregistered(playerId);
 	}
 }
