@@ -63,14 +63,20 @@ public class Glicko2Saver
 		if(verbose)
 		{	SortedSet<PlayerRating> playerRatings = rankingService.getSortedPlayerRatings();
 			System.out.println("\n######### GLICKO-2 RANKINGS #########");
+			int total = 0;
+			int players = 0;
 			for(PlayerRating pr: playerRatings)
 			{	int playerId = (Integer)pr.getPlayerId();
 				Profile profile = ProfileLoader.loadProfile(playerId);
 				double rating = pr.getRating();
 				double ratingDeviation = pr.getRatingDeviation();
 				double volatility = pr.getRatingVolatility();
-				System.out.println(profile.getName()+"\t\t"+playerId+"\t"+rating+"\t"+ratingDeviation+"\t"+volatility);				
+				int roundcount = pr.getRoundcount();
+				System.out.println(profile.getName()+"\t\t"+playerId+"\t"+rating+"\t"+ratingDeviation+"\t"+volatility+"\t"+roundcount);				
+				total = total + roundcount;
+				players ++;
 			}
+			System.out.println("total;average rounds played since last update: "+total+";"+(total/(float)players));
 		}
 	}
 

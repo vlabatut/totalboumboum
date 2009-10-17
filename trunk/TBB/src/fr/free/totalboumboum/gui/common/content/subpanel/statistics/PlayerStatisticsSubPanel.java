@@ -74,6 +74,7 @@ public class PlayerStatisticsSubPanel extends TableSubPanel implements MouseList
 	// PLAYER IDS		/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	private ArrayList<Integer> playerIds;
+	private ArrayList<Integer> playerRanks;
 	private int lines;
 	
 	public ArrayList<Integer> getPlayerIds()
@@ -82,8 +83,11 @@ public class PlayerStatisticsSubPanel extends TableSubPanel implements MouseList
 	
 	public void setPlayerIds(ArrayList<Integer> playerIds, ArrayList<Integer> playerRanks, int lines) throws IllegalArgumentException, SecurityException, ParserConfigurationException, SAXException, IOException, IllegalAccessException, NoSuchFieldException, ClassNotFoundException
 	{	if(playerIds==null)
-			playerIds = new ArrayList<Integer>();
+		{	playerIds = new ArrayList<Integer>();
+			playerRanks = new ArrayList<Integer>();
+		}
 		this.playerIds = playerIds;
+		this.playerRanks = playerRanks;
 
 		// sizes
 		int cols = COLS;
@@ -314,7 +318,7 @@ public class PlayerStatisticsSubPanel extends TableSubPanel implements MouseList
 				}
 				// roundcount
 				if(showRoundcount)
-				{	int roundcount = playerRating.getRatingVolatility();
+				{	int roundcount = playerRating.getRoundcount();
 					String text = Integer.toString(roundcount);
 					String tooltip = text;
 					setLabelText(line,col,text,tooltip);
@@ -540,62 +544,122 @@ public class PlayerStatisticsSubPanel extends TableSubPanel implements MouseList
 	
 	public void setShowPortrait(boolean showPortrait)
 	{	this.showPortrait = showPortrait;
-		setPlayerIds(playerIds,lines-1);
+		try
+		{	setPlayerIds(playerIds,playerRanks,lines-1);
+		}
+		catch (Exception e)
+		{	e.printStackTrace();
+		}
 	}
 
 	public void setShowType(boolean showType)
 	{	this.showType = showType;
-		setPlayerIds(playerIds,lines-1);
+		try
+		{	setPlayerIds(playerIds,playerRanks,lines-1);
+		}
+		catch (Exception e)
+		{	e.printStackTrace();
+		}
 	}
 
 	public void setShowMean(boolean showMean)
 	{	this.showMean = showMean;
-		setPlayerIds(playerIds,lines-1);
+		try
+		{	setPlayerIds(playerIds,playerRanks,lines-1);
+		}
+		catch (Exception e)
+		{	e.printStackTrace();
+		}
 	}
 
 	public void setShowStdev(boolean showStdev)
 	{	this.showStdev = showStdev;
-		setPlayerIds(playerIds,lines-1);
+		try
+		{	setPlayerIds(playerIds,playerRanks,lines-1);
+		}
+		catch (Exception e)
+		{	e.printStackTrace();
+		}
 	}
 
 	public void setShowVolatility(boolean showVolatility)
 	{	this.showVolatility = showVolatility;
-		setPlayerIds(playerIds,lines-1);
+		try
+		{	setPlayerIds(playerIds,playerRanks,lines-1);
+		}
+		catch (Exception e)
+		{	e.printStackTrace();
+		}
 	}
 
 	public void setShowRoundcount(boolean showRoundcount)
 	{	this.showRoundcount = showRoundcount;
-		setPlayerIds(playerIds,lines-1);
+		try
+		{	setPlayerIds(playerIds,playerRanks,lines-1);
+		}
+		catch (Exception e)
+		{	e.printStackTrace();
+		}
 	}
 
 	public void setShowScores(boolean showScores)
 	{	this.showScores = showScores;
-		setPlayerIds(playerIds,lines-1);
+		try
+		{	setPlayerIds(playerIds,playerRanks,lines-1);
+		}
+		catch (Exception e)
+		{	e.printStackTrace();
+		}
 	}
 
 	public void setShowRoundsPlayed(boolean showRoundsPlayed)
 	{	this.showRoundsPlayed = showRoundsPlayed;
-		setPlayerIds(playerIds,lines-1);
+		try
+		{	setPlayerIds(playerIds,playerRanks,lines-1);
+		}
+		catch (Exception e)
+		{	e.printStackTrace();
+		}
 	}
 
 	public void setShowRoundsWon(boolean showRoundsWon)
 	{	this.showRoundsWon = showRoundsWon;
-		setPlayerIds(playerIds,lines-1);
+		try
+		{	setPlayerIds(playerIds,playerRanks,lines-1);
+		}
+		catch (Exception e)
+		{	e.printStackTrace();
+		}
 	}
 
 	public void setShowRoundsLost(boolean showRoundsLost)
 	{	this.showRoundsLost = showRoundsLost;
-		setPlayerIds(playerIds,lines-1);
+		try
+		{	setPlayerIds(playerIds,playerRanks,lines-1);
+		}
+		catch (Exception e)
+		{	e.printStackTrace();
+		}
 	}
 
 	public void setShowRoundsDrawn(boolean showRoundsDrawn)
 	{	this.showRoundsDrawn = showRoundsDrawn;
-		setPlayerIds(playerIds,lines-1);
+		try
+		{	setPlayerIds(playerIds,playerRanks,lines-1);
+		}
+		catch (Exception e)
+		{	e.printStackTrace();
+		}
 	}
 
 	public void setShowTimePlayed(boolean showTimePlayed)
 	{	this.showTimePlayed = showTimePlayed;
-		setPlayerIds(playerIds,lines-1);
+		try
+		{	setPlayerIds(playerIds,playerRanks,lines-1);
+		}
+		catch (Exception e)
+		{	e.printStackTrace();
+		}
 	}
 
 	/////////////////////////////////////////////////////////////////

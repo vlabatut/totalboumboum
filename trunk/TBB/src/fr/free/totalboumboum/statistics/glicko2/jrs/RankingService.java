@@ -217,6 +217,11 @@ public class RankingService implements Serializable {
                 Iterator<Integer> teamMemberIds = gameResults.getTeamMembers(teamId).iterator();
                 while (teamMemberIds.hasNext()) {
                     Integer teamMemberId = teamMemberIds.next();
+
+                    // NOTE added by Vincent to keep track of the rounds played since last update
+                	PlayerRating playerRating = getPlayerRating(teamMemberId);
+                	playerRating.incrementRoundcount();
+                    
                     List<PairWiseGameResult> teamMemberCurrentPeriodResults = currentPeriodGameResults.get(teamMemberId);
                     ((PairWiseGameResultsList)teamMemberCurrentPeriodResults).incrementNumberOfGamesPlayed();
                     Iterator<Integer> opposingTeamIds = gameResults.getTeams().iterator();
@@ -246,6 +251,11 @@ public class RankingService implements Serializable {
             Iterator<Integer> playerIds = gameResults.getPlayers().iterator();
             while (playerIds.hasNext()) {
             	Integer playerId = playerIds.next();
+            	
+            	// NOTE added by Vincent to keep track of the rounds played since last update
+            	PlayerRating playerRating = getPlayerRating(playerId);
+            	playerRating.incrementRoundcount();
+            	
                 double playerScore = gameResults.getPlayerResults(playerId);
                 
                 // Compare this player's score to the score of every other
@@ -316,6 +326,10 @@ public class RankingService implements Serializable {
             
             Integer playerId = playerIds.next();
             PlayerRating prePeriodPlayerRating = (PlayerRating)prePeriodRatings.get(playerId);
+            
+        	// NOTE added by Vincent to keep track of the rounds played since last update
+            prePeriodPlayerRating.reinitRoundcount();
+            
             
             // Convert the ratings and RDs onto the Glicko-2 scale.
             double rating = prePeriodPlayerRating.getGlicko2Rating();

@@ -45,6 +45,7 @@ public class PlayerRating implements Comparable<PlayerRating>, Serializable {
     protected double rating;
     protected double ratingDeviation;
     protected double ratingVolatility;
+    protected int roundcount = 0;
     
     
     /** Create a PlayerRating instance using rating parameters specified in the
@@ -198,6 +199,38 @@ public class PlayerRating implements Comparable<PlayerRating>, Serializable {
       */
     void setRatingVolatility(double ratingVolatility) {
         this.ratingVolatility = ratingVolatility;
+    }
+    
+    /**
+     * Returns the number of rounds played since the last rating update
+     * 
+     * @return
+     * 		an integer corresponding to a number of rounds
+     * @author
+     * 		Vincent
+     */
+    public int getRoundcount()
+    {	return roundcount;    	
+    }
+    
+    /**
+     * Increments the number of rounds played since the last rating update
+     * 
+     * @author
+     * 		Vincent
+     */
+    public void incrementRoundcount()
+    {	roundcount++;    	
+    }
+    
+    /**
+     * Reset to zero the number of rounds played since the last rating update
+     * 
+     * @author
+     * 		Vincent
+     */
+    public void reinitRoundcount()
+    {	roundcount = 0;    	
     }
     
     /** Determine if the object is equals to this <code>PlayerRating</code> object.
