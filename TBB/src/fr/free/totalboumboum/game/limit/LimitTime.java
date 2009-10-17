@@ -22,8 +22,8 @@ package fr.free.totalboumboum.game.limit;
  */
 
 import fr.free.totalboumboum.game.points.PointsProcessor;
-import fr.free.totalboumboum.statistics.raw.StatisticBase;
-import fr.free.totalboumboum.statistics.raw.StatisticHolder;
+import fr.free.totalboumboum.statistics.detailed.StatisticBase;
+import fr.free.totalboumboum.statistics.detailed.StatisticHolder;
 
 /**
  * this limit is based on time. In a round, a similar limit could be defined 

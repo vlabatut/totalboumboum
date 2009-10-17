@@ -199,4 +199,40 @@ public class CalculusTools
 		
 		return result;
 	}
+
+	/////////////////////////////////////////////////////////////////
+	// ORDERING			/////////////////////////////////////////////
+	/////////////////////////////////////////////////////////////////
+	/**
+	 * process an array of ranks, each one corresponding to a player,
+	 * according to the points in input.
+	 * eg: {1,3,2} means the player 0 came first, player 1 came 
+	 * third and player 2 came second
+	 */
+	public static int[] getRanks(float[] pts)
+	{	// init
+		int[] result = new int[pts.length];
+		for(int i=0;i<result.length;i++)
+			result[i] = 1;
+		// process ranks
+		for(int i=0;i<result.length-1;i++)
+		{	for(int j=i+1;j<result.length;j++)
+			{	if(pts[i]<pts[j])
+					result[i] = result[i] + 1;
+				else if(pts[i]>pts[j])
+					result[j] = result[j] + 1;
+			}
+		}	
+		//
+		return result;
+	}
+
+	public static ArrayList<Integer> getWinners(float[] points)
+	{	ArrayList<Integer> result = new ArrayList<Integer>();
+		int[] ranks = CalculusTools.getRanks(points);
+		for(int i=0;i<ranks.length;i++)
+			if(ranks[i]==1 && points[i]>0)
+				result.add(i);
+		return result;
+	}
 }

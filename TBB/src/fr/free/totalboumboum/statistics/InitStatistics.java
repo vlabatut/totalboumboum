@@ -1,4 +1,13 @@
-package fr.free.totalboumboum.game.points;
+package fr.free.totalboumboum.statistics;
+
+import java.io.IOException;
+
+import javax.xml.parsers.ParserConfigurationException;
+
+import org.xml.sax.SAXException;
+
+import fr.free.totalboumboum.statistics.general.OverallStatsSaver;
+import fr.free.totalboumboum.statistics.glicko2.Glicko2Saver;
 
 /*
  * Total Boum Boum
@@ -21,25 +30,12 @@ package fr.free.totalboumboum.game.points;
  * 
  */
 
-import java.io.Serializable;
-import java.util.ArrayList;
-
-import fr.free.totalboumboum.statistics.detailed.StatisticHolder;
-
-public abstract class PointsProcessor implements Serializable
-{	private static final long serialVersionUID = 1L;
-	
-	public abstract float[] process(StatisticHolder holder);
-	
-	/////////////////////////////////////////////////////////////////
-	// NOTES			/////////////////////////////////////////////
-	/////////////////////////////////////////////////////////////////
-	private final ArrayList<String> notes = new ArrayList<String>();
-
-	public void setNotes(ArrayList<String> notes)
-	{	this.notes.addAll(notes);
-	}
-	public ArrayList<String> getNotes()
-	{	return notes;
+public class InitStatistics
+{	
+	public static void main(String[] args) throws IllegalArgumentException, SecurityException, IOException, ParserConfigurationException, SAXException, IllegalAccessException, NoSuchFieldException, ClassNotFoundException
+	{	//if(false)
+			Glicko2Saver.init();
+		//else
+			OverallStatsSaver.init(); 
 	}
 }

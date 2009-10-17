@@ -24,7 +24,7 @@ package fr.free.totalboumboum.game.limit;
 import java.io.Serializable;
 
 import fr.free.totalboumboum.game.points.PointsProcessor;
-import fr.free.totalboumboum.statistics.raw.StatisticHolder;
+import fr.free.totalboumboum.statistics.detailed.StatisticHolder;
 
 public interface Limit extends Serializable
 {

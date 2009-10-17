@@ -78,7 +78,7 @@ import fr.free.totalboumboum.engine.player.PlayerLocation;
 import fr.free.totalboumboum.game.GameData;
 import fr.free.totalboumboum.game.round.Round;
 import fr.free.totalboumboum.game.round.RoundVariables;
-import fr.free.totalboumboum.statistics.raw.StatisticEvent;
+import fr.free.totalboumboum.statistics.detailed.StatisticEvent;
 import fr.free.totalboumboum.tools.CalculusTools;
 import fr.free.totalboumboum.tools.FileTools;
 import fr.free.totalboumboum.tools.StringTools;

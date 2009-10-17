@@ -23,8 +23,8 @@ package fr.free.totalboumboum.game.points;
 
 import java.util.ArrayList;
 
-import fr.free.totalboumboum.statistics.raw.StatisticBase;
-import fr.free.totalboumboum.statistics.raw.StatisticHolder;
+import fr.free.totalboumboum.statistics.detailed.StatisticBase;
+import fr.free.totalboumboum.statistics.detailed.StatisticHolder;
 
 /**
  * This PointsProcessor calculates its result by summing all the 

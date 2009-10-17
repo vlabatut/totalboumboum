@@ -39,9 +39,9 @@ import fr.free.totalboumboum.gui.common.structure.subpanel.outside.TableSubPanel
 import fr.free.totalboumboum.gui.data.configuration.GuiConfiguration;
 import fr.free.totalboumboum.gui.tools.GuiKeys;
 import fr.free.totalboumboum.gui.tools.GuiTools;
-import fr.free.totalboumboum.statistics.raw.Score;
-import fr.free.totalboumboum.statistics.raw.StatisticBase;
-import fr.free.totalboumboum.statistics.raw.StatisticHolder;
+import fr.free.totalboumboum.statistics.detailed.Score;
+import fr.free.totalboumboum.statistics.detailed.StatisticBase;
+import fr.free.totalboumboum.statistics.detailed.StatisticHolder;
 import fr.free.totalboumboum.tools.StringTools;
 
 public class ResultsSubPanel extends TableSubPanel
@@ -354,7 +354,7 @@ public class ResultsSubPanel extends TableSubPanel
 				nameWidth = nameWidth - pointsWidth;
 				col++;
 			}
-			if(showPortrait) 
+			if(showName) 
 			{	setColSubMinWidth(colName,nameWidth);
 				setColSubPrefWidth(colName,nameWidth);
 				setColSubMaxWidth(colName,nameWidth);

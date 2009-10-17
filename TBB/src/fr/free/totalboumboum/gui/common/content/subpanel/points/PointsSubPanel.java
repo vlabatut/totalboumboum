@@ -39,7 +39,7 @@ import fr.free.totalboumboum.gui.common.structure.subpanel.outside.TableSubPanel
 import fr.free.totalboumboum.gui.data.configuration.GuiConfiguration;
 import fr.free.totalboumboum.gui.tools.GuiKeys;
 import fr.free.totalboumboum.gui.tools.GuiTools;
-import fr.free.totalboumboum.statistics.raw.Score;
+import fr.free.totalboumboum.statistics.detailed.Score;
 
 public class PointsSubPanel extends TableSubPanel
 {	private static final long serialVersionUID = 1L;
