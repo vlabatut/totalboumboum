@@ -1,4 +1,4 @@
-package fr.free.totalboumboum.statistics.glicko2;
+package fr.free.totalboumboum.statistics.general;
 
 /*
  * Total Boum Boum
@@ -26,7 +26,7 @@ import java.io.FileFilter;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectOutputStream;
-import java.util.SortedSet;
+import java.util.HashMap;
 
 import javax.xml.parsers.ParserConfigurationException;
 
@@ -34,18 +34,15 @@ import org.xml.sax.SAXException;
 
 import fr.free.totalboumboum.configuration.profile.Profile;
 import fr.free.totalboumboum.configuration.profile.ProfileLoader;
-import fr.free.totalboumboum.statistics.glicko2.jrs.PlayerRating;
-import fr.free.totalboumboum.statistics.glicko2.jrs.RankingService;
-import fr.free.totalboumboum.statistics.glicko2.jrs.ResultsBasedRankingService;
 import fr.free.totalboumboum.tools.FileTools;
 
-public class Glicko2Saver
+public class OverallStatsSaver
 {	private static final boolean verbose = true;
 
-	public static void saveStatistics(RankingService rankingService) throws IOException, IllegalArgumentException, SecurityException, ParserConfigurationException, SAXException, IllegalAccessException, NoSuchFieldException, ClassNotFoundException
+	public static void saveStatistics(HashMap<Integer,PlayerStats> playersStats) throws IOException, IllegalArgumentException, SecurityException, ParserConfigurationException, SAXException, IllegalAccessException, NoSuchFieldException, ClassNotFoundException
 	{	// init files
-		String path = FileTools.getGlicko2Path()+File.separator+FileTools.FILE_STATISTICS+FileTools.EXTENSION_DATA;
-		String backup = FileTools.getGlicko2Path()+File.separator+FileTools.FILE_STATISTICS+FileTools.EXTENSION_BACKUP;
+		String path = FileTools.getOverallStatisticsPath()+File.separator+FileTools.FILE_STATISTICS+FileTools.EXTENSION_DATA;
+		String backup = FileTools.getOverallStatisticsPath()+File.separator+FileTools.FILE_STATISTICS+FileTools.EXTENSION_BACKUP;
 		File backupFile = new File(backup);
 		File previousFile = new File(path);
 		
@@ -57,28 +54,23 @@ public class Glicko2Saver
 		File file = new File(path);
 		FileOutputStream fileOut = new FileOutputStream(file);
 		ObjectOutputStream out = new ObjectOutputStream(fileOut);
-		out.writeObject(rankingService);
+		out.writeObject(playersStats);
 		
-		// display rankings (debug)
+		// display written data (debug)
 		if(verbose)
-		{	SortedSet<PlayerRating> playerRatings = rankingService.getSortedPlayerRatings();
-			System.out.println("\n######### GLICKO-2 RANKINGS #########");
-			for(PlayerRating pr: playerRatings)
-			{	int playerId = (Integer)pr.getPlayerId();
+		{	System.out.println("\n######### OVERALL STATISTICS #########");
+			for(PlayerStats playerStats: playersStats.values())
+			{	int playerId = playerStats.getPlayerId();
+				String text = playerStats.toString();
 				Profile profile = ProfileLoader.loadProfile(playerId);
-				double rating = pr.getRating();
-				double ratingDeviation = pr.getRatingDeviation();
-				double volatility = pr.getRatingVolatility();
-				System.out.println(profile.getName()+"\t\t"+playerId+"\t"+rating+"\t"+ratingDeviation+"\t"+volatility);				
+				System.out.println(profile.getName()+text);				
 			}
 		}
 	}
 
 	public static void init() throws IllegalArgumentException, SecurityException, IOException, ParserConfigurationException, SAXException, IllegalAccessException, NoSuchFieldException, ClassNotFoundException
-	{	// change ranking properties
-		
-		// create ranking service
-		ResultsBasedRankingService rankingService = new ResultsBasedRankingService();
+	{	// create stats map
+		HashMap<Integer,PlayerStats> playersStats = new HashMap<Integer, PlayerStats>();
 		
 		// register all existing players
 		String folderStr = FileTools.getProfilesPath();
@@ -100,10 +92,11 @@ public class Glicko2Saver
 			String idStr = file.getName().substring(0,length-extLength);
 			int id = Integer.parseInt(idStr);
 			System.out.println(id);
-			rankingService.registerPlayer(id);
+			PlayerStats playerStats = new PlayerStats(id);
+			playersStats.put(id,playerStats);
 		}
 		
 		// save the rankings
-		saveStatistics(rankingService);
+		saveStatistics(playersStats);
 	}
 }

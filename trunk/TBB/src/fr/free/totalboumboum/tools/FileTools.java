@@ -118,6 +118,7 @@ public class FileTools
 	public static final String FOLDER_DATA = "data";
 	public static final String FOLDER_DEFAULT = "default";
 	public static final String FOLDER_DEFAULT_BACKUP = "default_backup";
+	public static final String FOLDER_DETAILED = "detailed";
 	public static final String FOLDER_EXPLOSIONS = "explosions";
 	public static final String FOLDER_FIRE = "fire";
 	public static final String FOLDER_FIRES = "fires";
@@ -134,6 +135,7 @@ public class FileTools
 	public static final String FOLDER_MINE = "mine";
 	public static final String FOLDER_MODULATIONS = "modulations";
 	public static final String FOLDER_NORMAL = "normal";
+	public static final String FOLDER_OVERALL = "overall";
 	public static final String FOLDER_PENETRATION = "penetration";
 	public static final String FOLDER_PERMISSIONS = "permissions";
 	public static final String FOLDER_PLAYERS = "players";
@@ -216,11 +218,14 @@ public class FileTools
 	public static String getStatisticsPath()
 	{	return getResourcesPath()+File.separator+FOLDER_STATISTICS;		
 	}
-	public static String getRawStatisticsPath()
-	{	return getStatisticsPath()+File.separator+FOLDER_RAW;		
+	public static String getDetailedStatisticsPath()
+	{	return getStatisticsPath()+File.separator+FOLDER_DETAILED;		
 	}
 	public static String getGlicko2Path()
 	{	return getStatisticsPath()+File.separator+FOLDER_GLICKO2;		
+	}
+	public static String getOverallStatisticsPath()
+	{	return getStatisticsPath()+File.separator+FOLDER_OVERALL;		
 	}
 
 

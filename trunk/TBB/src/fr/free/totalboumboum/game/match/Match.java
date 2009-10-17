@@ -44,9 +44,10 @@ import fr.free.totalboumboum.game.limit.MatchLimit;
 import fr.free.totalboumboum.game.rank.Ranks;
 import fr.free.totalboumboum.game.round.Round;
 import fr.free.totalboumboum.game.tournament.AbstractTournament;
-import fr.free.totalboumboum.statistics.raw.StatisticHolder;
-import fr.free.totalboumboum.statistics.raw.StatisticMatch;
-import fr.free.totalboumboum.statistics.raw.StatisticRound;
+import fr.free.totalboumboum.statistics.detailed.StatisticHolder;
+import fr.free.totalboumboum.statistics.detailed.StatisticMatch;
+import fr.free.totalboumboum.statistics.detailed.StatisticRound;
+import fr.free.totalboumboum.tools.CalculusTools;
 
 public class Match implements StatisticHolder, Serializable
 {	private static final long serialVersionUID = 1L;
@@ -205,28 +206,6 @@ public class Match implements StatisticHolder, Serializable
 	// RESULTS			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 
-	/**
-	 * process an array of ranks, each one corresponding to a player,
-	 * according to the points in input.
-	 * eg: {1,3,2} means the player 0 came first, player 1 came 
-	 * third and player 2 came second
-	 */
-	private int[] getRanks(float[] pts)
-	{	int[] result = new int[getProfiles().size()];
-		for(int i=0;i<result.length;i++)
-			result[i] = 1;
-
-		for(int i=0;i<result.length-1;i++)
-		{	for(int j=i+1;j<result.length;j++)
-			{	if(pts[i]<pts[j])
-					result[i] = result[i] + 1;
-				else if(pts[i]>pts[j])
-					result[j] = result[j] + 1;
-			}
-		}	
-
-		return result;
-	}
 	
 	public Ranks getOrderedPlayers()
 	{	Ranks result = new Ranks();
@@ -237,11 +216,11 @@ public class Match implements StatisticHolder, Serializable
 		int ranks[];
 		int ranks2[];
 		if(isOver())
-		{	ranks = getRanks(points);
-			ranks2 = getRanks(total);
+		{	ranks = CalculusTools.getRanks(points);
+			ranks2 = CalculusTools.getRanks(total);
 		}
 		else
-		{	ranks = getRanks(total);
+		{	ranks = CalculusTools.getRanks(total);
 			ranks2 = new int[ranks.length];
 			Arrays.fill(ranks2,0);
 		}

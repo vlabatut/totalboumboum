@@ -43,9 +43,10 @@ import fr.free.totalboumboum.game.limit.RoundLimit;
 import fr.free.totalboumboum.game.match.Match;
 import fr.free.totalboumboum.game.rank.Ranks;
 import fr.free.totalboumboum.statistics.GameStatistics;
-import fr.free.totalboumboum.statistics.raw.StatisticEvent;
-import fr.free.totalboumboum.statistics.raw.StatisticHolder;
-import fr.free.totalboumboum.statistics.raw.StatisticRound;
+import fr.free.totalboumboum.statistics.detailed.StatisticEvent;
+import fr.free.totalboumboum.statistics.detailed.StatisticHolder;
+import fr.free.totalboumboum.statistics.detailed.StatisticRound;
+import fr.free.totalboumboum.tools.CalculusTools;
 
 public class Round implements StatisticHolder, Serializable
 {	private static final long serialVersionUID = 1L;
@@ -239,26 +240,6 @@ public class Round implements StatisticHolder, Serializable
 	// RESULTS			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 
-	/**
-	 * process the players ranks depending on the points they scored during the round
-	 */
-	private int[] getRanks(float[] pts)
-	{	int[] result = new int[getProfiles().size()];
-		for(int i=0;i<result.length;i++)
-			result[i] = 1;
-
-		for(int i=0;i<result.length-1;i++)
-		{	for(int j=i+1;j<result.length;j++)
-			{	if(pts[i]<pts[j])
-					result[i] = result[i] + 1;
-				else if(pts[i]>pts[j])
-					result[j] = result[j] + 1;
-			}
-		}	
-
-		return result;
-	}
-	
 	public Ranks getOrderedPlayers()
 	{	Ranks result = new Ranks();
 		// points
@@ -268,11 +249,11 @@ public class Round implements StatisticHolder, Serializable
 		int ranks[];
 		int ranks2[];
 		if(isOver())
-		{	ranks = getRanks(points);
-			ranks2 = getRanks(total);
+		{	ranks = CalculusTools.getRanks(points);
+			ranks2 = CalculusTools.getRanks(total);
 		}
 		else
-		{	ranks = getRanks(total);
+		{	ranks = CalculusTools.getRanks(total);
 			ranks2 = new int[ranks.length];
 			Arrays.fill(ranks2,0);
 		}
@@ -310,12 +291,8 @@ public class Round implements StatisticHolder, Serializable
 	}
 	
 	public ArrayList<Integer> getWinners()
-	{	ArrayList<Integer> result = new ArrayList<Integer>();
-		float[] points = stats.getPoints();
-		int[] ranks = getRanks(points);
-		for(int i=0;i<ranks.length;i++)
-			if(ranks[i]==1 && points[i]>0)
-				result.add(i);
+	{	float[] points = stats.getPoints();
+		ArrayList<Integer> result = CalculusTools.getWinners(points);
 		return result;
 	}
 

@@ -25,11 +25,16 @@ import java.awt.Color;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.image.BufferedImage;
+import java.io.IOException;
 import java.text.NumberFormat;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Iterator;
 
 import javax.swing.JLabel;
+import javax.xml.parsers.ParserConfigurationException;
+
+import org.xml.sax.SAXException;
 
 import fr.free.totalboumboum.configuration.Configuration;
 import fr.free.totalboumboum.configuration.profile.Portraits;
@@ -37,10 +42,11 @@ import fr.free.totalboumboum.configuration.profile.Profile;
 import fr.free.totalboumboum.configuration.profile.ProfileLoader;
 import fr.free.totalboumboum.game.GameData;
 import fr.free.totalboumboum.game.round.Round;
-import fr.free.totalboumboum.game.statistics.GameStatistics;
-import fr.free.totalboumboum.game.statistics.glicko2.jrs.PlayerRating;
-import fr.free.totalboumboum.game.statistics.glicko2.jrs.RankingService;
-import fr.free.totalboumboum.game.statistics.raw.Score;
+import fr.free.totalboumboum.statistics.GameStatistics;
+import fr.free.totalboumboum.statistics.general.PlayerStats;
+import fr.free.totalboumboum.statistics.glicko2.jrs.PlayerRating;
+import fr.free.totalboumboum.statistics.glicko2.jrs.RankingService;
+import fr.free.totalboumboum.statistics.detailed.Score;
 import fr.free.totalboumboum.gui.common.structure.subpanel.outside.SubPanel;
 import fr.free.totalboumboum.gui.common.structure.subpanel.outside.TableSubPanel;
 import fr.free.totalboumboum.gui.tools.GuiKeys;
@@ -56,7 +62,12 @@ public class PlayerStatisticsSubPanel extends TableSubPanel implements MouseList
 	public PlayerStatisticsSubPanel(int width, int height)
 	{	super(width,height,SubPanel.Mode.BORDER,LINES,1,COLS,true);
 		
-		setPlayerIds(null,null,LINES-1);
+		try
+		{	setPlayerIds(null,null,LINES-1);
+		}
+		catch (Exception e)
+		{	e.printStackTrace();
+		}
 	}
 		
 	/////////////////////////////////////////////////////////////////
@@ -69,7 +80,7 @@ public class PlayerStatisticsSubPanel extends TableSubPanel implements MouseList
 	{	return playerIds;	
 	}
 	
-	public void setPlayerIds(ArrayList<Integer> playerIds, ArrayList<Integer> playerRanks, int lines)
+	public void setPlayerIds(ArrayList<Integer> playerIds, ArrayList<Integer> playerRanks, int lines) throws IllegalArgumentException, SecurityException, ParserConfigurationException, SAXException, IOException, IllegalAccessException, NoSuchFieldException, ClassNotFoundException
 	{	if(playerIds==null)
 			playerIds = new ArrayList<Integer>();
 		this.playerIds = playerIds;
@@ -142,26 +153,31 @@ public class PlayerStatisticsSubPanel extends TableSubPanel implements MouseList
 				setLabelKey(0,col,key,true);
 				col++;
 			}
+			// mean
 			if(showMean) 
 			{	String key = GuiKeys.MENU_STATISTICS_PLAYER_GLICKO2_HEADER_MEAN;
 				setLabelKey(0,col,key,true);
 				col++;
 			}
+			// standard-deviation
 			if(showStdev) 
 			{	String key = GuiKeys.MENU_STATISTICS_PLAYER_GLICKO2_HEADER_STANDARD_DEVIATION;
 				setLabelKey(0,col,key,true);
 				col++;
 			}
+			// volatility
 			if(showVolatility) 
 			{	String key = GuiKeys.MENU_STATISTICS_PLAYER_GLICKO2_HEADER_VOLATILITY;
 				setLabelKey(0,col,key,true);
 				col++;
 			}
+			// roundcount
 			if(showRoundcount) 
 			{	String key = GuiKeys.MENU_STATISTICS_PLAYER_GLICKO2_HEADER_ROUND_COUNT;
 				setLabelKey(0,col,key,true);
 				col++;
 			}
+			//scores
 			if(showScores) 
 			{	String headerPrefix = GuiKeys.MENU_STATISTICS_PLAYER_SCORES_HEADER;
 				String keys[] = 
@@ -174,26 +190,31 @@ public class PlayerStatisticsSubPanel extends TableSubPanel implements MouseList
 					setLabelKey(0,col+c,keys[c],true);
 				col = col+keys.length;
 			}
+			// rounds played
 			if(showRoundsPlayed) 
 			{	String key = GuiKeys.MENU_STATISTICS_PLAYER_CONFRONTATIONS_HEADER_ROUNDS_PLAYED;
 				setLabelKey(0,col,key,true);
 				col++;
 			}
+			// rounds won
 			if(showRoundsWon) 
 			{	String key = GuiKeys.MENU_STATISTICS_PLAYER_CONFRONTATIONS_HEADER_ROUNDS_WON;
 				setLabelKey(0,col,key,true);
 				col++;
 			}
+			// rounds drawn
 			if(showRoundsDrawn) 
 			{	String key = GuiKeys.MENU_STATISTICS_PLAYER_CONFRONTATIONS_HEADER_ROUNDS_DRAWN;
 				setLabelKey(0,col,key,true);
 				col++;
 			}
+			// rounds lost
 			if(showRoundsLost) 
 			{	String key = GuiKeys.MENU_STATISTICS_PLAYER_CONFRONTATIONS_HEADER_ROUNDS_LOST;
 				setLabelKey(0,col,key,true);
 				col++;
 			}
+			// time played
 			if(showTimePlayed) 
 			{	String key = GuiKeys.MENU_STATISTICS_PLAYER_CONFRONTATIONS_HEADER_TIME_PLAYED;
 				setLabelKey(0,col,key,true);
@@ -204,6 +225,7 @@ public class PlayerStatisticsSubPanel extends TableSubPanel implements MouseList
 		// data
 		{	// init
 			RankingService rankingService = GameStatistics.getRankingService();
+			HashMap<Integer,PlayerStats> playersStats = GameStatistics.getPlayersStats();
 			NumberFormat nfText = NumberFormat.getInstance();
 			nfText.setMaximumFractionDigits(2);
 			nfText.setMinimumFractionDigits(2);
@@ -218,6 +240,7 @@ public class PlayerStatisticsSubPanel extends TableSubPanel implements MouseList
 				int playerRank = playerRanks.get(line-1);
 				Profile profile = ProfileLoader.loadProfile(playerId);
 				PlayerRating playerRating = rankingService.getPlayerRating(playerId);
+				PlayerStats playerStats = playersStats.get(playerId);
 				// color
 				Color clr = profile.getSpriteColor().getColor();
 				int alpha = GuiTools.ALPHA_TABLE_REGULAR_BACKGROUND_LEVEL3;
@@ -289,13 +312,24 @@ public class PlayerStatisticsSubPanel extends TableSubPanel implements MouseList
 						volatilityWidth = temp;
 					col++;
 				}
+				// roundcount
+				if(showRoundcount)
+				{	int roundcount = playerRating.getRatingVolatility();
+					String text = Integer.toString(roundcount);
+					String tooltip = text;
+					setLabelText(line,col,text,tooltip);
+					int temp = GuiTools.getPixelWidth(getLineFontSize(),text);
+					if(temp>roundcountWidth)
+						volatilityWidth = temp;
+					col++;
+				}
 				// scores
 				if(showScores)
 				{	String[] scores = 
-					{	nfText.format(stats.getScores(Score.BOMBS)[profileIndex]),
-						nfText.format(stats.getScores(Score.ITEMS)[profileIndex]),
-						nfText.format(stats.getScores(Score.BOMBEDS)[profileIndex]),
-						nfText.format(stats.getScores(Score.BOMBINGS)[profileIndex]),
+					{	nfText.format(playerStats.getScore(Score.BOMBS)),
+						nfText.format(playerStats.getScore(Score.ITEMS)),
+						nfText.format(playerStats.getScore(Score.BOMBEDS)),
+						nfText.format(playerStats.getScore(Score.BOMBINGS)),
 					};
 					for(int j=0;j<scores.length;j++)
 					{	String text = scores[j];
@@ -309,8 +343,8 @@ public class PlayerStatisticsSubPanel extends TableSubPanel implements MouseList
 				}			
 				// rounds played
 				if(showRoundsPlayed)
-				{	int roundsPlayed = ;
-					String text = Integer.toString(roundsPlayed);
+				{	long roundsPlayed = playerStats.getRoundsPlayed();
+					String text = Long.toString(roundsPlayed);
 					String tooltip = text;
 					setLabelText(line,col,text,tooltip);
 					int temp = GuiTools.getPixelWidth(getLineFontSize(),text);
@@ -320,8 +354,8 @@ public class PlayerStatisticsSubPanel extends TableSubPanel implements MouseList
 				}
 				// rounds won
 				if(showRoundsWon)
-				{	int roundsWon = ;
-					String text = Integer.toString(roundsWon);
+				{	long roundsWon = playerStats.getRoundsWon();
+					String text = Long.toString(roundsWon);
 					String tooltip = text;
 					setLabelText(line,col,text,tooltip);
 					int temp = GuiTools.getPixelWidth(getLineFontSize(),text);
@@ -331,8 +365,8 @@ public class PlayerStatisticsSubPanel extends TableSubPanel implements MouseList
 				}
 				// rounds drawn
 				if(showRoundsDrawn)
-				{	int roundsDrawn = ;
-					String text = Integer.toString(roundsDrawn);
+				{	long roundsDrawn = playerStats.getRoundsDrawn();
+					String text = Long.toString(roundsDrawn);
 					String tooltip = text;
 					setLabelText(line,col,text,tooltip);
 					int temp = GuiTools.getPixelWidth(getLineFontSize(),text);
@@ -342,8 +376,8 @@ public class PlayerStatisticsSubPanel extends TableSubPanel implements MouseList
 				}
 				// rounds lost
 				if(showRoundsLost)
-				{	int roundsLost = ;
-					String text = Integer.toString(roundsLost);
+				{	long roundsLost = playerStats.getRoundsLost();
+					String text = Long.toString(roundsLost);
 					String tooltip = text;
 					setLabelText(line,col,text,tooltip);
 					int temp = GuiTools.getPixelWidth(getLineFontSize(),text);
@@ -353,7 +387,7 @@ public class PlayerStatisticsSubPanel extends TableSubPanel implements MouseList
 				}
 				// time played
 				if(showTimePlayed)
-				{	long timePlayed = ;
+				{	long timePlayed = playerStats.getScore(Score.TIME);
 					String text = StringTools.formatTimeWithSeconds(timePlayed);
 					String tooltip = text;
 					setLabelText(line,col,text,tooltip);
@@ -367,19 +401,125 @@ public class PlayerStatisticsSubPanel extends TableSubPanel implements MouseList
 			}
 		}
 		
+		// col widths
+		{	int nameWidth = getDataWidth() - (cols-1)*GuiTools.subPanelMargin;
+			int col = 0;
+			// rank
+			{	setColSubMinWidth(col,rankWidth);
+				setColSubPrefWidth(col,rankWidth);
+				setColSubMaxWidth(col,rankWidth);
+				nameWidth = nameWidth - rankWidth;
+				col++;
+			}
+			// portrait
+			if(showPortrait) 
+			{	setColSubMinWidth(col,portraitWidth);
+				setColSubPrefWidth(col,portraitWidth);
+				setColSubMaxWidth(col,portraitWidth);
+				nameWidth = nameWidth - portraitWidth;
+				col++;
+			}
+			// type
+			if(showType) 
+			{	setColSubMinWidth(col,typeWidth);
+				setColSubPrefWidth(col,typeWidth);
+				setColSubMaxWidth(col,typeWidth);
+				nameWidth = nameWidth - typeWidth;
+				col++;
+			}
+			// name
+			int colName = col;
+			col++;
+			// mean
+			if(showMean) 
+			{	setColSubMinWidth(col,meanWidth);
+				setColSubPrefWidth(col,meanWidth);
+				setColSubMaxWidth(col,meanWidth);
+				nameWidth = nameWidth - meanWidth;
+				col++;
+			}
+			// standard-deviation
+			if(showStdev) 
+			{	setColSubMinWidth(col,stdevWidth);
+				setColSubPrefWidth(col,stdevWidth);
+				setColSubMaxWidth(col,stdevWidth);
+				nameWidth = nameWidth - stdevWidth;
+				col++;
+			}
+			// volatility
+			if(showVolatility) 
+			{	setColSubMinWidth(col,volatilityWidth);
+				setColSubPrefWidth(col,volatilityWidth);
+				setColSubMaxWidth(col,volatilityWidth);
+				nameWidth = nameWidth - volatilityWidth;
+				col++;
+			}
+			// roundcount
+			if(showRoundcount) 
+			{	setColSubMinWidth(col,roundcountWidth);
+				setColSubPrefWidth(col,roundcountWidth);
+				setColSubMaxWidth(col,roundcountWidth);
+				nameWidth = nameWidth - roundcountWidth;
+				col++;
+			}
+			// scores
+			if(showScores) 
+			{	for(int i=0;i<scoresWidth.length;i++)
+				{	setColSubMinWidth(col,scoresWidth[i]);
+					setColSubPrefWidth(col,scoresWidth[i]);
+					setColSubMaxWidth(col,scoresWidth[i]);
+					nameWidth = nameWidth - scoresWidth[i];
+					col++;
+				}
+			}
+			// rounds played
+			if(showRoundsPlayed) 
+			{	setColSubMinWidth(col,roundsPlayedWidth);
+				setColSubPrefWidth(col,roundsPlayedWidth);
+				setColSubMaxWidth(col,roundsPlayedWidth);
+				nameWidth = nameWidth - roundsPlayedWidth;
+				col++;
+			}
+			// rounds won
+			if(showRoundsWon) 
+			{	setColSubMinWidth(col,roundsWonWidth);
+				setColSubPrefWidth(col,roundsWonWidth);
+				setColSubMaxWidth(col,roundsWonWidth);
+				nameWidth = nameWidth - roundsWonWidth;
+				col++;
+			}
+			// rounds drawn
+			if(showRoundsDrawn) 
+			{	setColSubMinWidth(col,roundsDrawnWidth);
+				setColSubPrefWidth(col,roundsDrawnWidth);
+				setColSubMaxWidth(col,roundsDrawnWidth);
+				nameWidth = nameWidth - roundsDrawnWidth;
+				col++;
+			}
+			// rounds lost
+			if(showRoundsLost) 
+			{	setColSubMinWidth(col,roundsLostWidth);
+				setColSubPrefWidth(col,roundsLostWidth);
+				setColSubMaxWidth(col,roundsLostWidth);
+				nameWidth = nameWidth - roundsLostWidth;
+				col++;
+			}
+			// time played 
+			if(showTimePlayed) 
+			{	setColSubMinWidth(col,timePlayedWidth);
+				setColSubPrefWidth(col,timePlayedWidth);
+				setColSubMaxWidth(col,timePlayedWidth);
+				nameWidth = nameWidth - timePlayedWidth;
+				col++;
+			}
+			// name
+			{	setColSubMinWidth(colName,nameWidth);
+				setColSubPrefWidth(colName,nameWidth);
+				setColSubMaxWidth(colName,nameWidth);
+			}
+		}		
 		// NOTE rang, portrait, type (IA/Humain), nom, moyenne, e-t, volatilité, scores(bombes, items, kills, deaths), rounds, victoires, nul, défaites, temps
 		// NOTE rang et nom obligatoires
-		
-		
-		
-		
-		int rankWidth = getRanksWidth();
-		rankWidth = Math.max(iconWidth,rankWidth);
-		int nameWidth = getDataWidth() - (cols-1)*GuiTools.subPanelMargin - 2*iconWidth - rankWidth;
-		if(showControls)
-			nameWidth = nameWidth - controlWidth;
-		
-		
 	}
 	
 	/////////////////////////////////////////////////////////////////

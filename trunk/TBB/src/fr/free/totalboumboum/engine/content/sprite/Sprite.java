@@ -66,7 +66,7 @@ import fr.free.totalboumboum.engine.content.sprite.item.Item;
 import fr.free.totalboumboum.engine.control.ControlCode;
 import fr.free.totalboumboum.engine.player.Player;
 import fr.free.totalboumboum.game.round.RoundVariables;
-import fr.free.totalboumboum.statistics.raw.StatisticEvent;
+import fr.free.totalboumboum.statistics.detailed.StatisticEvent;
 
 /* 
  * Sprite possédant un status :

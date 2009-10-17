@@ -1,4 +1,4 @@
-package fr.free.totalboumboum.game.points;
+package fr.free.totalboumboum.statistics.detailed;
 
 /*
  * Total Boum Boum
@@ -24,22 +24,13 @@ package fr.free.totalboumboum.game.points;
 import java.io.Serializable;
 import java.util.ArrayList;
 
-import fr.free.totalboumboum.statistics.detailed.StatisticHolder;
+public class Statistics implements Serializable
+{
+	private static final long serialVersionUID = 1L;
 
-public abstract class PointsProcessor implements Serializable
-{	private static final long serialVersionUID = 1L;
+	private final ArrayList<StatisticTournament> tournaments = new ArrayList<StatisticTournament>();
 	
-	public abstract float[] process(StatisticHolder holder);
-	
-	/////////////////////////////////////////////////////////////////
-	// NOTES			/////////////////////////////////////////////
-	/////////////////////////////////////////////////////////////////
-	private final ArrayList<String> notes = new ArrayList<String>();
-
-	public void setNotes(ArrayList<String> notes)
-	{	this.notes.addAll(notes);
-	}
-	public ArrayList<String> getNotes()
-	{	return notes;
+	public void addGame(StatisticTournament tournament)
+	{	tournaments.add(tournament);
 	}
 }

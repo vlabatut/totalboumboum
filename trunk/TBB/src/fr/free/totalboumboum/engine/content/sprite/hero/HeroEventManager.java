@@ -51,8 +51,8 @@ import fr.free.totalboumboum.engine.content.sprite.fire.Fire;
 import fr.free.totalboumboum.engine.content.sprite.item.Item;
 import fr.free.totalboumboum.engine.player.Player;
 import fr.free.totalboumboum.game.round.RoundVariables;
-import fr.free.totalboumboum.statistics.raw.StatisticAction;
-import fr.free.totalboumboum.statistics.raw.StatisticEvent;
+import fr.free.totalboumboum.statistics.detailed.StatisticAction;
+import fr.free.totalboumboum.statistics.detailed.StatisticEvent;
 
 public class HeroEventManager extends EventManager
 {	

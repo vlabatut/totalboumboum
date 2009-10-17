@@ -69,7 +69,7 @@ import fr.free.totalboumboum.gui.menus.quickmatch.PlayersData;
 import fr.free.totalboumboum.gui.menus.quickmatch.SettingsData;
 import fr.free.totalboumboum.gui.tools.GuiKeys;
 import fr.free.totalboumboum.gui.tools.GuiTools;
-import fr.free.totalboumboum.statistics.raw.Score;
+import fr.free.totalboumboum.statistics.detailed.Score;
 
 public class QuickMatchMenu extends InnerMenuPanel implements DataPanelListener
 {	private static final long serialVersionUID = 1L;

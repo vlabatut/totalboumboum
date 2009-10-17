@@ -1,4 +1,4 @@
-package fr.free.totalboumboum.statistics.glicko2;
+package fr.free.totalboumboum.statistics.general;
 
 /*
  * Total Boum Boum
@@ -25,21 +25,22 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
+import java.util.HashMap;
 
-import fr.free.totalboumboum.statistics.glicko2.jrs.RankingService;
 import fr.free.totalboumboum.tools.FileTools;
 
-public class Glicko2Loader
+public class OverallStatsLoader
 {
-	public static RankingService loadStatistics() throws IOException, ClassNotFoundException
+	@SuppressWarnings("unchecked")
+	public static HashMap<Integer,PlayerStats> loadStatistics() throws IOException, ClassNotFoundException
 	{	// init path
-		String path = FileTools.getGlicko2Path()+File.separator+FileTools.FILE_STATISTICS+FileTools.EXTENSION_DATA;
+		String path = FileTools.getOverallStatisticsPath()+File.separator+FileTools.FILE_STATISTICS+FileTools.EXTENSION_DATA;
 		
 		// read the rankings
 		File file = new File(path);
 		FileInputStream fileOut = new FileInputStream(file);
 		ObjectInputStream in = new ObjectInputStream(fileOut);
-		RankingService result = (RankingService) in.readObject();
+		HashMap<Integer,PlayerStats> result = (HashMap<Integer,PlayerStats>) in.readObject();
 		return result;		
 		// TODO: if problem while reading the file, should restaure and use the backup 
 	}
