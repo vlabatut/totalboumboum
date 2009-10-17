@@ -33,8 +33,10 @@ import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+import java.util.SortedSet;
 import java.util.TreeMap;
 import java.util.TreeSet;
+import java.util.Map.Entry;
 
 /** The ranking service.
   * <p>
@@ -481,6 +483,50 @@ public class RankingService implements Serializable {
       */
     public synchronized PlayerRating getPlayerRating(Integer playerId) {
         return (PlayerRating)playerRatings.get(playerId);
+    }
+    
+    /**
+     * Get the ordered list of players' ratings
+     * 
+     * @return	
+     * 		an SortedSet
+     * @author 
+     * 		Vincent Labatut
+     */
+    public synchronized SortedSet<PlayerRating> getSortedPlayerRatings()
+    {	SortedSet<PlayerRating> result = new TreeSet<PlayerRating>();
+		Iterator<Entry<Integer,PlayerRating>> it = playerRatings.entrySet().iterator();
+		while(it.hasNext())
+		{	Entry<Integer,PlayerRating> entry = it.next();
+			//int playerId = entry.getKey();
+			PlayerRating playerRating = entry.getValue();
+			result.add(playerRating);
+		}
+		return result;
+    }
+    
+    /**
+     * Process a player's rank (starting from rank 1, not zero)
+     * 
+     * @param playerId
+      *     A unique identifier for the player.
+     * @return
+     * 		An integer representing the player's rank
+     * @author 
+     * 		Vincent Labatut
+     */
+    public synchronized int getPlayerRank(Integer playerId)
+    {	SortedSet<PlayerRating> sortedRatings = getSortedPlayerRatings();
+    	int result = 0;
+		boolean done = false;
+		Iterator<PlayerRating> it = sortedRatings.iterator();
+		while(it.hasNext() && !done)
+		{	result++;
+			PlayerRating playerRating = it.next();
+			if(playerRating.getPlayerId().equals(playerId))
+				done = true;
+		}
+		return result;
     }
     
     /** From the list of all registered players, rank them according to their

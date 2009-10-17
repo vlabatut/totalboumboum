@@ -35,6 +35,8 @@ import fr.free.totalboumboum.configuration.Configuration;
 import fr.free.totalboumboum.configuration.profile.Portraits;
 import fr.free.totalboumboum.configuration.profile.Profile;
 import fr.free.totalboumboum.game.GameData;
+import fr.free.totalboumboum.game.statistics.GameStatistics;
+import fr.free.totalboumboum.game.statistics.glicko2.jrs.RankingService;
 import fr.free.totalboumboum.gui.common.structure.subpanel.outside.SubPanel;
 import fr.free.totalboumboum.gui.common.structure.subpanel.outside.TableSubPanel;
 import fr.free.totalboumboum.gui.tools.GuiKeys;
@@ -53,7 +55,7 @@ public class PlayersListSubPanel extends TableSubPanel implements MouseListener
 	}
 		
 	/////////////////////////////////////////////////////////////////
-	// PROFILES	/////////////////////////////////////////////
+	// PROFILES			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	private ArrayList<Profile> players;
 	ArrayList<String> controlTexts;
@@ -132,7 +134,8 @@ public class PlayersListSubPanel extends TableSubPanel implements MouseListener
 		}
 		
 		// data
-		{	Iterator<Profile> i = players.iterator();
+		{	RankingService rankingService = GameStatistics.getRankingService();
+			Iterator<Profile> i = players.iterator();
 			int line = 1;
 			while(i.hasNext())
 			{	int col = 0;
@@ -175,8 +178,10 @@ public class PlayersListSubPanel extends TableSubPanel implements MouseListener
 				// rank
 				{	NumberFormat nf = NumberFormat.getInstance();
 					nf.setMinimumFractionDigits(0);
-					String text = "-";
-					String tooltip = "-";
+					int playerId = profile.getId();
+					int playerRank = rankingService.getPlayerRank(playerId);
+					String text = Integer.toString(playerRank);
+					String tooltip = text;
 					setLabelText(line,col,text,tooltip);
 					col++;
 				}
