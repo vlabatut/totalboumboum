@@ -42,6 +42,7 @@ public class GuiFileTools
 	public final static String FILE_DEATHS = "deaths.png";
 	public final static String FILE_DIMENSION = "dimension.png";
 	public final static String FILE_DISCRETIZE = "discretize.png";
+	public final static String FILE_DRAW = "draw.png";
 	public final static String FILE_EDIT = "edit.png";
 	public final static String FILE_FALSE = "false.png";
 	public final static String FILE_FRAGS = "frags.png";
@@ -57,7 +58,9 @@ public class GuiFileTools
 	public final static String FILE_KILLS = "kills.png";
 	public final static String FILE_LEVEL = "level.png";
 	public final static String FILE_LIMITS = "limits.png";
+	public final static String FILE_LOSE = "lose.png";
 	public final static String FILE_MINUS = "minus.png";
+	public final static String FILE_MEAN = "mean.png";
 	public final static String FILE_MISC = "misc.png";
 	public final static String FILE_NAME = "name.png";
 	public final static String FILE_NEXT = "next.png";
@@ -78,11 +81,14 @@ public class GuiFileTools
 	public final static String FILE_SCORE = "score.png";
 	public final static String FILE_SHARE = "share.png";
 	public final static String FILE_SOURCE = "source.png";
+	public final static String FILE_STDEV = "stdev.png";
 	public final static String FILE_THEME = "theme.png";
 	public final static String FILE_TIME = "time.png";
 	public final static String FILE_TITLE = "title.png";
 	public final static String FILE_TOTAL = "total.png";
 	public final static String FILE_TRUE = "true.png";
+	public final static String FILE_VOLATILITY = "volatility.png";
+	public final static String FILE_WIN = "win.png";
 
 	// folders
 	public static final String FOLDER_BACKGROUNDS = "backgrounds";

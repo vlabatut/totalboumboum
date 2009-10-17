@@ -313,7 +313,8 @@ public class GuiTools
 				GuiKeys.COMMON_RESULTS_ROUND_HEADER_BOMBS,
 				GuiKeys.COMMON_LIMIT_TOURNAMENT_HEADER_BOMBS,
 				GuiKeys.COMMON_LIMIT_ROUND_HEADER_BOMBS,
-				GuiKeys.COMMON_LIMIT_ROUND_HEADER_BOMBS
+				GuiKeys.COMMON_LIMIT_ROUND_HEADER_BOMBS,
+				GuiKeys.MENU_STATISTICS_PLAYER_SCORES_HEADER_BOMBS
 			};
 			loadTableImages(folder,uses);
 		}
@@ -349,6 +350,8 @@ public class GuiTools
 				GuiKeys.COMMON_LIMIT_MATCH_HEADER_CONFRONTATIONS,
 				GuiKeys.COMMON_MATCH_ROUND_COUNT,
 				GuiKeys.COMMON_ARCHIVE_CONFRONTATIONS,
+				GuiKeys.MENU_STATISTICS_PLAYER_GLICKO2_HEADER_ROUND_COUNT,
+				GuiKeys.MENU_STATISTICS_PLAYER_CONFRONTATIONS_HEADER_ROUNDS_PLAYED
 			};
 			loadTableImages(folder,uses);
 		}
@@ -369,7 +372,8 @@ public class GuiTools
 				GuiKeys.COMMON_RESULTS_ROUND_HEADER_CROWNS,
 				GuiKeys.COMMON_LIMIT_TOURNAMENT_HEADER_CROWNS,
 				GuiKeys.COMMON_LIMIT_MATCH_HEADER_CROWNS,
-				GuiKeys.COMMON_LIMIT_ROUND_HEADER_CROWNS
+				GuiKeys.COMMON_LIMIT_ROUND_HEADER_CROWNS,
+				GuiKeys.MENU_STATISTICS_PLAYER_SCORES_HEADER_CROWNS
 			};
 			loadTableImages(folder,uses);
 		}
@@ -393,7 +397,8 @@ public class GuiTools
 				GuiKeys.COMMON_RESULTS_ROUND_HEADER_BOMBEDS,
 				GuiKeys.COMMON_LIMIT_TOURNAMENT_HEADER_BOMBEDS,
 				GuiKeys.COMMON_LIMIT_MATCH_HEADER_BOMBEDS,
-				GuiKeys.COMMON_LIMIT_ROUND_HEADER_BOMBEDS
+				GuiKeys.COMMON_LIMIT_ROUND_HEADER_BOMBEDS,
+				GuiKeys.MENU_STATISTICS_PLAYER_SCORES_HEADER_BOMBEDS
 			};
 			loadTableImages(folder,uses);
 		}
@@ -414,6 +419,13 @@ public class GuiTools
 			};
 			loadTableImages(folder,uses);
 		}
+		// draw
+		{	String folder = baseFolder+GuiFileTools.FILE_DRAW;
+			String[] uses =
+			{	GuiKeys.MENU_STATISTICS_PLAYER_CONFRONTATIONS_HEADER_ROUNDS_DRAWN
+			};
+			loadTableImages(folder,uses);
+		}
 		// false
 		{	String folder = baseFolder+GuiFileTools.FILE_FALSE;
 			String[] uses =
@@ -431,7 +443,8 @@ public class GuiTools
 				GuiKeys.COMMON_RESULTS_TOURNAMENT_HEADER_PORTRAIT,
 				GuiKeys.COMMON_RESULTS_MATCH_HEADER_PORTRAIT,
 				GuiKeys.COMMON_RESULTS_ROUND_HEADER_PORTRAIT,
-				GuiKeys.COMMON_PLAYERS_LIST_HEADER_HERO
+				GuiKeys.COMMON_PLAYERS_LIST_HEADER_HERO,
+				GuiKeys.MENU_STATISTICS_PLAYER_COMMON_HEADER_PORTRAIT
 			};
 			loadTableImages(folder,uses);
 			loadTableImages(folder,uses);
@@ -460,7 +473,8 @@ public class GuiTools
 				GuiKeys.COMMON_LIMIT_TOURNAMENT_HEADER_ITEMS,
 				GuiKeys.COMMON_LIMIT_MATCH_HEADER_ITEMS,
 				GuiKeys.COMMON_LIMIT_ROUND_HEADER_ITEMS,
-				GuiKeys.COMMON_ITEMS_AVAILABLE_TITLE
+				GuiKeys.COMMON_ITEMS_AVAILABLE_TITLE,
+				GuiKeys.MENU_STATISTICS_PLAYER_SCORES_HEADER_ITEMS
 			};
 			loadTableImages(folder,uses);
 		}
@@ -481,7 +495,8 @@ public class GuiTools
 				GuiKeys.COMMON_RESULTS_ROUND_HEADER_BOMBINGS,
 				GuiKeys.COMMON_LIMIT_TOURNAMENT_HEADER_BOMBINGS,
 				GuiKeys.COMMON_LIMIT_MATCH_HEADER_BOMBINGS,
-				GuiKeys.COMMON_LIMIT_ROUND_HEADER_BOMBINGS
+				GuiKeys.COMMON_LIMIT_ROUND_HEADER_BOMBINGS,
+				GuiKeys.MENU_STATISTICS_PLAYER_SCORES_HEADER_BOMBINGS
 			};
 			loadTableImages(folder,uses);
 		}
@@ -502,6 +517,20 @@ public class GuiTools
 			};
 			loadTableImages(folder,uses);
 		}
+		// lose
+		{	String folder = baseFolder+GuiFileTools.FILE_LOSE;
+			String[] uses =
+			{	GuiKeys.MENU_STATISTICS_PLAYER_CONFRONTATIONS_HEADER_ROUNDS_LOST
+			};
+			loadTableImages(folder,uses);
+		}
+		// mean
+		{	String folder = baseFolder+GuiFileTools.FILE_MEAN;
+			String[] uses =
+			{	GuiKeys.MENU_STATISTICS_PLAYER_GLICKO2_HEADER_MEAN
+			};
+			loadTableImages(folder,uses);
+		}
 		// misc
 		{	String folder = baseFolder+GuiFileTools.FILE_MISC;
 			String[] uses =
@@ -519,10 +548,11 @@ public class GuiTools
 				GuiKeys.COMMON_RESULTS_MATCH_HEADER_NAME,
 				GuiKeys.COMMON_RESULTS_ROUND_HEADER_NAME,
 				GuiKeys.COMMON_PROFILES_NAME,
-				GuiKeys.MENU_PROFILES_EDIT_NAME,
 				GuiKeys.COMMON_PLAYERS_SELECTION_HEADER_PROFILE,
 				GuiKeys.COMMON_ARCHIVE_PLAYERS,
-				GuiKeys.COMMON_PART_PLAYER
+				GuiKeys.COMMON_PART_PLAYER,
+				GuiKeys.MENU_PROFILES_EDIT_NAME,
+				GuiKeys.MENU_STATISTICS_PLAYER_COMMON_HEADER_NAME
 			};
 			loadTableImages(folder,uses);
 		}
@@ -554,7 +584,8 @@ public class GuiTools
 				GuiKeys.COMMON_RESULTS_ROUND_HEADER_PAINTINGS,
 				GuiKeys.COMMON_LIMIT_TOURNAMENT_HEADER_PAINTINGS,
 				GuiKeys.COMMON_LIMIT_MATCH_HEADER_PAINTINGS,
-				GuiKeys.COMMON_LIMIT_ROUND_HEADER_PAINTINGS
+				GuiKeys.COMMON_LIMIT_ROUND_HEADER_PAINTINGS,
+				GuiKeys.MENU_STATISTICS_PLAYER_SCORES_HEADER_PAINTINGS
 			};
 			loadTableImages(folder,uses);
 		}
@@ -603,7 +634,8 @@ public class GuiTools
 				GuiKeys.COMMON_RESULTS_TOURNAMENT_HEADER_PROFILE,
 				GuiKeys.COMMON_RESULTS_MATCH_HEADER_PROFILE,
 				GuiKeys.COMMON_RESULTS_ROUND_HEADER_PROFILE,
-				GuiKeys.COMMON_PLAYERS_SELECTION_HEADER_TYPE
+				GuiKeys.COMMON_PLAYERS_SELECTION_HEADER_TYPE,
+				GuiKeys.MENU_STATISTICS_PLAYER_COMMON_HEADER_TYPE
 			};
 			loadTableImages(folder,uses);
 		}
@@ -617,7 +649,8 @@ public class GuiTools
 				GuiKeys.COMMON_POINTS_TOURNAMENT_HEADER_RANKPOINTS,
 				GuiKeys.COMMON_POINTS_MATCH_HEADER_RANKPOINTS,
 				GuiKeys.COMMON_POINTS_ROUND_HEADER_RANKPOINTS,
-				GuiKeys.COMMON_PART_RANK
+				GuiKeys.COMMON_PART_RANK,
+				GuiKeys.MENU_STATISTICS_PLAYER_COMMON_HEADER_RANK
 			};
 			loadTableImages(folder,uses);
 		}
@@ -646,6 +679,13 @@ public class GuiTools
 			};
 			loadTableImages(folder,uses);
 		}
+		// standard-deviation
+		{	String folder = baseFolder+GuiFileTools.FILE_STDEV;
+			String[] uses =
+			{	GuiKeys.MENU_STATISTICS_PLAYER_GLICKO2_HEADER_STANDARD_DEVIATION
+			};
+			loadTableImages(folder,uses);
+		}
 		// theme
 		{	String folder = baseFolder+GuiFileTools.FILE_THEME;
 			String[] uses =
@@ -663,7 +703,8 @@ public class GuiTools
 				GuiKeys.COMMON_LIMIT_TOURNAMENT_HEADER_TIME,
 				GuiKeys.COMMON_LIMIT_MATCH_HEADER_TIME,
 				GuiKeys.COMMON_LIMIT_ROUND_HEADER_TIME,
-				GuiKeys.COMMON_ARCHIVE_START
+				GuiKeys.COMMON_ARCHIVE_START,
+				GuiKeys.MENU_STATISTICS_PLAYER_CONFRONTATIONS_HEADER_TIME_PLAYED
 			};
 			loadTableImages(folder,uses);
 		}
@@ -695,6 +736,20 @@ public class GuiTools
 		{	String folder = baseFolder+GuiFileTools.FILE_TRUE;
 			String[] uses =
 			{	GuiKeys.COMMON_DIALOG_CONFIRM
+			};
+			loadTableImages(folder,uses);
+		}
+		// volatility
+		{	String folder = baseFolder+GuiFileTools.FILE_VOLATILITY;
+			String[] uses =
+			{	GuiKeys.MENU_STATISTICS_PLAYER_GLICKO2_HEADER_VOLATILITY
+			};
+			loadTableImages(folder,uses);
+		}
+		// win
+		{	String folder = baseFolder+GuiFileTools.FILE_WIN;
+			String[] uses =
+			{	GuiKeys.MENU_STATISTICS_PLAYER_CONFRONTATIONS_HEADER_ROUNDS_WON
 			};
 			loadTableImages(folder,uses);
 		}
