@@ -224,7 +224,7 @@ public class PointsSubPanel extends TableSubPanel
 			if(exaequoShare)
 				name = prefix+GuiKeys.DATA+GuiKeys.SHARE;
 			else
-				name = prefix+GuiKeys.DATA+GuiKeys.NO_SHARE;
+				name = prefix+GuiKeys.DATA+GuiKeys.NO+GuiKeys.SHARE;
 			image = GuiTools.getIcon(name);
 			tooltip = GuiConfiguration.getMiscConfiguration().getLanguage().getText(name+GuiKeys.TOOLTIP);
 			dt.add(image);

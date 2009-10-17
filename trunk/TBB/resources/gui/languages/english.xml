@@ -322,6 +322,11 @@
 					<group name="Data">
 						<text name="Computer" value="Computer"  tooltip="Computer-controlled player" />
 						<text name="Human" value="Human"  tooltip="Human player" />
+						<text name="NoRank" value="-"  tooltip="This player is not ranked" />
+					</group>
+					<group name="Button">
+						<text name="Register" value="Register"  tooltip="Register the player to the ranking system" />
+						<text name="Unregister" value="Unregister"  tooltip="Unregister the player from the ranking system" />
 					</group>
 				</group>
 
