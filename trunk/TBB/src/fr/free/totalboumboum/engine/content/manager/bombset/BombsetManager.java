@@ -40,8 +40,8 @@ import fr.free.totalboumboum.engine.content.feature.gesture.GestureName;
 import fr.free.totalboumboum.engine.content.sprite.Sprite;
 import fr.free.totalboumboum.engine.content.sprite.bomb.Bomb;
 import fr.free.totalboumboum.game.round.RoundVariables;
-import fr.free.totalboumboum.game.statistics.raw.StatisticAction;
-import fr.free.totalboumboum.game.statistics.raw.StatisticEvent;
+import fr.free.totalboumboum.statistics.raw.StatisticAction;
+import fr.free.totalboumboum.statistics.raw.StatisticEvent;
 
 public class BombsetManager
 {	

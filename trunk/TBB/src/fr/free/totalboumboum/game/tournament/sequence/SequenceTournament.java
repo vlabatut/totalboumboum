@@ -36,9 +36,9 @@ import fr.free.totalboumboum.game.limit.Limits;
 import fr.free.totalboumboum.game.limit.TournamentLimit;
 import fr.free.totalboumboum.game.match.Match;
 import fr.free.totalboumboum.game.rank.Ranks;
-import fr.free.totalboumboum.game.statistics.raw.StatisticMatch;
-import fr.free.totalboumboum.game.statistics.raw.StatisticTournament;
 import fr.free.totalboumboum.game.tournament.AbstractTournament;
+import fr.free.totalboumboum.statistics.raw.StatisticMatch;
+import fr.free.totalboumboum.statistics.raw.StatisticTournament;
 
 public class SequenceTournament extends AbstractTournament
 {	private static final long serialVersionUID = 1L;

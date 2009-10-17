@@ -35,11 +35,11 @@ import javax.swing.SwingConstants;
 import fr.free.totalboumboum.configuration.profile.Profile;
 import fr.free.totalboumboum.game.rank.Ranks;
 import fr.free.totalboumboum.game.round.Round;
-import fr.free.totalboumboum.game.statistics.raw.Score;
-import fr.free.totalboumboum.game.statistics.raw.StatisticRound;
 import fr.free.totalboumboum.gui.data.configuration.GuiConfiguration;
 import fr.free.totalboumboum.gui.tools.SpringUtilities;
 import fr.free.totalboumboum.gui.tools.GuiTools;
+import fr.free.totalboumboum.statistics.raw.Score;
+import fr.free.totalboumboum.statistics.raw.StatisticRound;
 import fr.free.totalboumboum.tools.StringTools;
 
 public class QuickResults extends JPanel

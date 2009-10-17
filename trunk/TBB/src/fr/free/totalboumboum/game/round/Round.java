@@ -42,10 +42,10 @@ import fr.free.totalboumboum.game.limit.Limits;
 import fr.free.totalboumboum.game.limit.RoundLimit;
 import fr.free.totalboumboum.game.match.Match;
 import fr.free.totalboumboum.game.rank.Ranks;
-import fr.free.totalboumboum.game.statistics.GameStatistics;
-import fr.free.totalboumboum.game.statistics.raw.StatisticEvent;
-import fr.free.totalboumboum.game.statistics.raw.StatisticHolder;
-import fr.free.totalboumboum.game.statistics.raw.StatisticRound;
+import fr.free.totalboumboum.statistics.GameStatistics;
+import fr.free.totalboumboum.statistics.raw.StatisticEvent;
+import fr.free.totalboumboum.statistics.raw.StatisticHolder;
+import fr.free.totalboumboum.statistics.raw.StatisticRound;
 
 public class Round implements StatisticHolder, Serializable
 {	private static final long serialVersionUID = 1L;

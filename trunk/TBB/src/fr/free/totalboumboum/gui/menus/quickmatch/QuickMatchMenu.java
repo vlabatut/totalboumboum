@@ -58,7 +58,6 @@ import fr.free.totalboumboum.game.points.PointsRankpoints;
 import fr.free.totalboumboum.game.points.PointsScores;
 import fr.free.totalboumboum.game.points.PointsTotal;
 import fr.free.totalboumboum.game.round.Round;
-import fr.free.totalboumboum.game.statistics.raw.Score;
 import fr.free.totalboumboum.game.tournament.single.SingleTournament;
 import fr.free.totalboumboum.gui.common.structure.panel.SplitMenuPanel;
 import fr.free.totalboumboum.gui.common.structure.panel.data.DataPanelListener;
@@ -70,6 +69,7 @@ import fr.free.totalboumboum.gui.menus.quickmatch.PlayersData;
 import fr.free.totalboumboum.gui.menus.quickmatch.SettingsData;
 import fr.free.totalboumboum.gui.tools.GuiKeys;
 import fr.free.totalboumboum.gui.tools.GuiTools;
+import fr.free.totalboumboum.statistics.raw.Score;
 
 public class QuickMatchMenu extends InnerMenuPanel implements DataPanelListener
 {	private static final long serialVersionUID = 1L;

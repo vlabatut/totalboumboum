@@ -31,7 +31,7 @@ import org.xml.sax.SAXException;
 
 import fr.free.totalboumboum.game.points.PointsProcessor;
 import fr.free.totalboumboum.game.points.PointsProcessorLoader;
-import fr.free.totalboumboum.game.statistics.raw.Score;
+import fr.free.totalboumboum.statistics.raw.Score;
 import fr.free.totalboumboum.tools.XmlTools;
 
 public class LimitLoader
