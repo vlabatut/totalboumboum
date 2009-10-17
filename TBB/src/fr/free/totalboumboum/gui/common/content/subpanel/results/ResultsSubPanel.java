@@ -33,15 +33,15 @@ import fr.free.totalboumboum.configuration.profile.Profile;
 import fr.free.totalboumboum.game.match.Match;
 import fr.free.totalboumboum.game.rank.Ranks;
 import fr.free.totalboumboum.game.round.Round;
-import fr.free.totalboumboum.game.statistics.raw.Score;
-import fr.free.totalboumboum.game.statistics.raw.StatisticBase;
-import fr.free.totalboumboum.game.statistics.raw.StatisticHolder;
 import fr.free.totalboumboum.game.tournament.AbstractTournament;
 import fr.free.totalboumboum.gui.common.structure.subpanel.outside.SubPanel;
 import fr.free.totalboumboum.gui.common.structure.subpanel.outside.TableSubPanel;
 import fr.free.totalboumboum.gui.data.configuration.GuiConfiguration;
 import fr.free.totalboumboum.gui.tools.GuiKeys;
 import fr.free.totalboumboum.gui.tools.GuiTools;
+import fr.free.totalboumboum.statistics.raw.Score;
+import fr.free.totalboumboum.statistics.raw.StatisticBase;
+import fr.free.totalboumboum.statistics.raw.StatisticHolder;
 import fr.free.totalboumboum.tools.StringTools;
 
 public class ResultsSubPanel extends TableSubPanel

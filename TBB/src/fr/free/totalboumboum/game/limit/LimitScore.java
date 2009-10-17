@@ -22,9 +22,9 @@ package fr.free.totalboumboum.game.limit;
  */
 
 import fr.free.totalboumboum.game.points.PointsProcessor;
-import fr.free.totalboumboum.game.statistics.raw.Score;
-import fr.free.totalboumboum.game.statistics.raw.StatisticBase;
-import fr.free.totalboumboum.game.statistics.raw.StatisticHolder;
+import fr.free.totalboumboum.statistics.raw.Score;
+import fr.free.totalboumboum.statistics.raw.StatisticBase;
+import fr.free.totalboumboum.statistics.raw.StatisticHolder;
 
 /**
  * this limit is based on a given score (time, bombings, items...).
