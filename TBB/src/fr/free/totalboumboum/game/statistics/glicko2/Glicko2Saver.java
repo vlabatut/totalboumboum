@@ -25,8 +25,7 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectOutputStream;
-import java.util.Iterator;
-import java.util.TreeSet;
+import java.util.SortedSet;
 
 import javax.xml.parsers.ParserConfigurationException;
 
@@ -60,15 +59,7 @@ public class Glicko2Saver
 		
 		// display rankings (debug)
 		if(verbose)
-		{	// process rankings
-			TreeSet<PlayerRating> playerRatings = new TreeSet<PlayerRating>();
-			Iterator<Integer> playerIds = rankingService.getPlayers().iterator();
-			while(playerIds.hasNext())
-			{	int playerId = playerIds.next();
-				PlayerRating playerRating = rankingService.getPlayerRating(playerId);
-				playerRatings.add(playerRating);
-			}
-			// display rankings
+		{	SortedSet<PlayerRating> playerRatings = rankingService.getSortedPlayerRatings();
 			System.out.println("\n######### RANKINGS #########");
 			for(PlayerRating pr: playerRatings)
 			{	int playerId = (Integer)pr.getPlayerId();

@@ -79,11 +79,13 @@ public class GuiKeys
 	public static final String DATA = "Data";
 	public static final String DELETE = "Delete";
 	public static final String DESCRIPTION = "Description";
+	public static final String DEVIATION = "Deviation";
 	public static final String DIALOG = "Dialog";
 	public static final String DIMENSION = "Dimension";
 	public static final String DISCRETIZE = "Discretize";
 	public static final String DOWN = "Down";
 	public static final String DRAW = "Draw";
+	public static final String DRAWN = "Drawn";
 	public static final String EDIT = "Edit";
 	public static final String FALSE = "False";
 	public static final String FILE = "File";
@@ -93,6 +95,7 @@ public class GuiKeys
 	public static final String FOLDER = "Folder";
 	public static final String FONT = "Font";
 	public static final String GAME = "Game";
+	public static final String GLICKO2 = "Glicko2";
 	public static final String GO = "Go";
 	public static final String GRASS = "Grass";
 	public static final String GREEN = "Green";
@@ -122,9 +125,11 @@ public class GuiKeys
 	public static final String LIST = "List";
 	public static final String LOAD = "Load";
 	public static final String LOCATION = "Location";
+	public static final String LOST = "Lost";
 	public static final String MAIN = "Main";
 	public static final String MATCH = "Match";
 	public static final String MATCHES = "Matches";
+	public static final String MEAN = "Mean";
 	public static final String MENU = "Menu";
 	public static final String MESSAGES = "Messages";
 	public static final String MINUS = "Minus";
@@ -149,6 +154,7 @@ public class GuiKeys
 	public static final String PARTIAL = "Partial";
 	public static final String PINK = "Pink";
 	public static final String PLAY = "Play";
+	public static final String PLAYED = "Played";
 	public static final String PLAYER = "Player";
 	public static final String PLAYERS = "Players";
 	public static final String PLUS = "Plus";
@@ -180,19 +186,20 @@ public class GuiKeys
 	public static final String ROUNDS = "Rounds";
 	public static final String RUST = "Rust";
 	public static final String SAVE = "Save";
+	public static final String SCORE = "Score";
+	public static final String SCORES = "Scores";
 	public static final String SELECT = "Select";
+	public static final String SELECTION = "Selection";
 	public static final String SEQUENCE = "Sequence";
 	public static final String SET = "Set";
 	public static final String SETTINGS = "Settings";
+	public static final String SHARE = "Share";
 	public static final String SINGLE = "Single";
 	public static final String SIZE = "Size";
-	public static final String SPRITE = "Sprite";
-	public static final String START = "Start";
-	public static final String ULTRAMARINE = "Ultramarine";
-	public static final String SCORE = "Score";
-	public static final String SHARE = "Share";
-	public static final String SELECTION = "Selection";
 	public static final String SOURCE = "Source";
+	public static final String SPRITE = "Sprite";
+	public static final String STANDARD = "Standard";
+	public static final String START = "Start";
 	public static final String STATISTICS = "Statistics";
 	public static final String THEME = "Theme";
 	public static final String TIME = "Time";
@@ -205,6 +212,7 @@ public class GuiKeys
 	public static final String TRUE = "True";
 	public static final String TYPE = "Type";
 	public static final String TYPES = "Types";
+	public static final String ULTRAMARINE = "Ultramarine";
 	public static final String UNDECIDED = "Undecided";
 	public static final String UP = "Up";
 	public static final String USE = "Use";
@@ -212,7 +220,9 @@ public class GuiKeys
 	public static final String VALUES = "Values";
 	public static final String VAR = "Var";
 	public static final String VIDEO = "Video";
+	public static final String VOLATILITY = "Volatility";
 	public static final String WHITE = "White";
+	public static final String WON = "Won";
 	public static final String YELLOW = "Yellow";
 	public static final String YOK = "Yok";
 	
@@ -483,6 +493,54 @@ public class GuiKeys
 		/* SELECT */
 		public static final String MENU_PROFILES_SELECT = MENU_PROFILES+SELECT;
 		public static final String MENU_PROFILES_SELECT_TITLE = MENU_PROFILES_SELECT+TITLE;
+		
+	/* STATISTICS */	
+	public static final String MENU_STATISTICS = MENU+STATISTICS;
+		/* PLAYER */
+		public static final String MENU_STATISTICS_PLAYER = MENU_STATISTICS+PLAYER;
+			/* COMMON */
+			public static final String MENU_STATISTICS_PLAYER_COMMON = MENU_STATISTICS_PLAYER+COMMON;
+				/* HEADER */
+				public static final String MENU_STATISTICS_PLAYER_COMMON_HEADER = MENU_STATISTICS_PLAYER_COMMON+HEADER;
+				public static final String MENU_STATISTICS_PLAYER_COMMON_HEADER_NAME = MENU_STATISTICS_PLAYER_COMMON_HEADER+NAME;
+				public static final String MENU_STATISTICS_PLAYER_COMMON_HEADER_PORTRAIT = MENU_STATISTICS_PLAYER_COMMON_HEADER+PORTRAIT;
+				public static final String MENU_STATISTICS_PLAYER_COMMON_HEADER_RANK = MENU_STATISTICS_PLAYER_COMMON_HEADER+RANK;
+				public static final String MENU_STATISTICS_PLAYER_COMMON_HEADER_TYPE = MENU_STATISTICS_PLAYER_COMMON_HEADER+TYPE;
+				/* DATA */
+				public static final String MENU_STATISTICS_PLAYER_COMMON_DATA = MENU_STATISTICS_PLAYER_COMMON+DATA;
+				public static final String MENU_STATISTICS_PLAYER_COMMON_DATA_COMPUTER = MENU_STATISTICS_PLAYER_COMMON_DATA+COMPUTER;
+				public static final String MENU_STATISTICS_PLAYER_COMMON_DATA_HUMAN = MENU_STATISTICS_PLAYER_COMMON_DATA+HUMAN;
+			/* GLICKO2 */
+			public static final String MENU_STATISTICS_PLAYER_GLICKO2 = MENU_STATISTICS_PLAYER+GLICKO2;
+			public static final String MENU_STATISTICS_PLAYER_GLICKO2_TITLE = MENU_STATISTICS_PLAYER_GLICKO2+TITLE;
+				/* HEADER */
+				public static final String MENU_STATISTICS_PLAYER_GLICKO2_HEADER = MENU_STATISTICS_PLAYER_GLICKO2+HEADER;
+				public static final String MENU_STATISTICS_PLAYER_GLICKO2_HEADER_MEAN = MENU_STATISTICS_PLAYER_GLICKO2_HEADER+MEAN;
+				public static final String MENU_STATISTICS_PLAYER_GLICKO2_HEADER_ROUND_COUNT = MENU_STATISTICS_PLAYER_GLICKO2_HEADER+ROUND+COUNT;
+				public static final String MENU_STATISTICS_PLAYER_GLICKO2_HEADER_STANDARD_DEVIATION = MENU_STATISTICS_PLAYER_GLICKO2_HEADER+STANDARD+DEVIATION;
+				public static final String MENU_STATISTICS_PLAYER_GLICKO2_HEADER_VOLATILITY = MENU_STATISTICS_PLAYER_GLICKO2_HEADER+VOLATILITY;
+			/* SCORES */
+			public static final String MENU_STATISTICS_PLAYER_SCORES = MENU_STATISTICS_PLAYER+SCORES;
+			public static final String MENU_STATISTICS_PLAYER_SCORES_TITLE = MENU_STATISTICS_PLAYER_SCORES+TITLE;
+				/* HEADER */
+				public static final String MENU_STATISTICS_PLAYER_SCORES_HEADER = MENU_STATISTICS_PLAYER_SCORES+HEADER;
+				public static final String MENU_STATISTICS_PLAYER_SCORES_HEADER_BOMBINGS = MENU_STATISTICS_PLAYER_SCORES_HEADER+BOMBINGS;
+				public static final String MENU_STATISTICS_PLAYER_SCORES_HEADER_BOMBEDS = MENU_STATISTICS_PLAYER_SCORES_HEADER+BOMBEDS;
+				public static final String MENU_STATISTICS_PLAYER_SCORES_HEADER_BOMBS = MENU_STATISTICS_PLAYER_SCORES_HEADER+BOMBS;
+				public static final String MENU_STATISTICS_PLAYER_SCORES_HEADER_CROWNS = MENU_STATISTICS_PLAYER_SCORES_HEADER+CROWNS;
+				public static final String MENU_STATISTICS_PLAYER_SCORES_HEADER_ITEMS = MENU_STATISTICS_PLAYER_SCORES_HEADER+ITEMS;
+				public static final String MENU_STATISTICS_PLAYER_SCORES_HEADER_PAINTINGS = MENU_STATISTICS_PLAYER_SCORES_HEADER+PAINTINGS;
+			/* CONFRONTATIONS */
+			public static final String MENU_STATISTICS_PLAYER_CONFRONTATIONS = MENU_STATISTICS_PLAYER+CONFRONTATIONS;
+			public static final String MENU_STATISTICS_PLAYER_CONFRONTATIONS_TITLE = MENU_STATISTICS_PLAYER_CONFRONTATIONS+TITLE;
+				/* HEADER */
+				public static final String MENU_STATISTICS_PLAYER_CONFRONTATIONS_HEADER = MENU_STATISTICS_PLAYER_CONFRONTATIONS+HEADER;
+				public static final String MENU_STATISTICS_PLAYER_CONFRONTATIONS_HEADER_ROUNDS_DRAWN = MENU_STATISTICS_PLAYER_CONFRONTATIONS_HEADER+ROUNDS+DRAWN;
+				public static final String MENU_STATISTICS_PLAYER_CONFRONTATIONS_HEADER_ROUNDS_LOST = MENU_STATISTICS_PLAYER_CONFRONTATIONS_HEADER+ROUNDS+LOST;
+				public static final String MENU_STATISTICS_PLAYER_CONFRONTATIONS_HEADER_ROUNDS_WON = MENU_STATISTICS_PLAYER_CONFRONTATIONS_HEADER+ROUNDS+WON;
+				public static final String MENU_STATISTICS_PLAYER_CONFRONTATIONS_HEADER_ROUNDS_PLAYED = MENU_STATISTICS_PLAYER_CONFRONTATIONS_HEADER+ROUNDS+PLAYED;
+				public static final String MENU_STATISTICS_PLAYER_CONFRONTATIONS_HEADER_TIME_PLAYED = MENU_STATISTICS_PLAYER_CONFRONTATIONS_HEADER+TIME+PLAYED;
+		
 	/* QUICKMATCH */	
 	public static final String MENU_QUICKMATCH = MENU+QUICKMATCH;
 		/* LEVELS */

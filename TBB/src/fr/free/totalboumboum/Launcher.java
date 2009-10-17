@@ -824,7 +824,8 @@ public class Launcher
 	 * - API IA : A* modifié pour pouvoir utiliser n'importe quelle fonction successeur
 	 * - API IA : accès à la taille des cases
 	 * - ajout du système Glicko2
-	 * - adaptation de Glicko2 (serializable, généricité)
+	 * - adaptation de Glicko2 (serializable, généricité, nouvelles méthodes)
+	 * - ajout du rang dans les panels affichant la liste des joueurs d'un tournoi/match
 	 */
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -1034,6 +1035,8 @@ public class Launcher
 	 *  - faire une option qui enchaîne automatiquement les rounds/matches d'un match/tournoi
 	 *  - glicko:
 	 *  	- pouvoir gauler les infos style nbre de rounds joués depuis la denrière mise à jour
-	 *  	- mettre à jour la GUI avec le rang des joueurs au classement Glicko2 
+	 *  - écran stats
+	 *  	- rajouter les stats de base (nombre de matches joués, etc)
+	 *  	- possibilité d'enregistrer/déregistrer un joueur dans le classement glicko-2 
 	 */
 }

@@ -147,7 +147,7 @@ public class ResultsSubPanel extends TableSubPanel
 					{	String tempText = text+(c+1);
 						String tempTooltip = tooltip+" "+(c+1);
 						setLabelText(0,col+c,tempText,tempTooltip);
-						int temp = GuiTools.getPixelWidth(getLineFontSize(),tempText); //NOTE the +4 should not be there, but getPixelWidth underestimates the width (or there's a margin in JLabels?). same thing with other calls to this function in this class 
+						int temp = GuiTools.getPixelWidth(getLineFontSize(),tempText); 
 						if(temp>confrontationsWidth[c])
 							confrontationsWidth[c] = temp;
 					}
