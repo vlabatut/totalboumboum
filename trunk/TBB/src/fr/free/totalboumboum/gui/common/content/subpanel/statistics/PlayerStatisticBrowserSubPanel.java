@@ -74,9 +74,14 @@ public class PlayerStatisticBrowserSubPanel extends EmptySubPanel implements Mou
 			dataPanel.setLayout(layout);
 		}
 		
+		// sizes
+		int buttonHeight = GuiTools.subPanelTitleHeight;
+		int upWidth = (getDataWidth() - GuiTools.subPanelMargin)/2;
+		int downWidth = getDataWidth()- upWidth - GuiTools.subPanelMargin;
+		int mainPanelHeight = getDataHeight() - buttonHeight - GuiTools.subPanelMargin;
+		
 		// main panel
-		{	int mainPanelHeight = getDataHeight() - buttonHeight - GuiTools.panelMargin;
-			mainPanel = new JPanel();
+		{	mainPanel = new JPanel();
 			Dimension dimension = new Dimension(getDataWidth(),mainPanelHeight);
 			mainPanel.setMinimumSize(dimension);
 			mainPanel.setPreferredSize(dimension);
@@ -84,26 +89,21 @@ public class PlayerStatisticBrowserSubPanel extends EmptySubPanel implements Mou
 			dataPanel.add(mainPanel);
 		}
 		
-		add(Box.createRigidArea(new Dimension(GuiTools.subPanelMargin,GuiTools.subPanelMargin)));
+		dataPanel.add(Box.createRigidArea(new Dimension(GuiTools.subPanelMargin,GuiTools.subPanelMargin)));
 		
 		// buttons
 		{	// buttons panel
 			JPanel buttonsPanel = new JPanel();
+			buttonsPanel.setOpaque(false);
 			Dimension dimension = new Dimension(getDataWidth(),buttonHeight);
 			buttonsPanel.setMinimumSize(dimension);
 			buttonsPanel.setPreferredSize(dimension);
 			buttonsPanel.setMaximumSize(dimension);
-			BoxLayout layout = new BoxLayout(buttonsPanel,BoxLayout.PAGE_AXIS); 
+			BoxLayout layout = new BoxLayout(buttonsPanel,BoxLayout.LINE_AXIS); 
 			buttonsPanel.setLayout(layout);
 			buttonsPanel.setAlignmentY(Component.CENTER_ALIGNMENT);
 			buttonsPanel.setAlignmentX(Component.CENTER_ALIGNMENT);
-			dataPanel.add(buttonsPanel);
 			
-			// sizes
-			int buttonHeight = GuiTools.subPanelTitleHeight;
-			int upWidth = (getDataWidth() - GuiTools.subPanelTitleHeight)/2;
-			int downWidth = getDataWidth()- upWidth - GuiTools.subPanelTitleHeight;
-
 			// up button
 			{	JLabel label = new JLabel();
 				label.setOpaque(true);
@@ -134,7 +134,8 @@ public class PlayerStatisticBrowserSubPanel extends EmptySubPanel implements Mou
 				label.setVerticalAlignment(JLabel.CENTER);
 				label.addMouseListener(this);
 				buttonsPanel.add(label);
-			}			
+			}
+			dataPanel.add(buttonsPanel);
 		}
 		
 		// pages
@@ -151,7 +152,6 @@ public class PlayerStatisticBrowserSubPanel extends EmptySubPanel implements Mou
 	private ArrayList<PlayerStatisticsSubPanel> listPanels;
 	private int pageCount;	
 	private int lines;
-	private int buttonHeight;
 	private JPanel mainPanel;
 	
 	public List<Integer> getPlayersIds()
@@ -160,10 +160,10 @@ public class PlayerStatisticBrowserSubPanel extends EmptySubPanel implements Mou
 	
 	public void setPlayersIds(List<Integer> playersIds, int lines)
 	{	// init
-		this.lines = 16;
-		this.playersIds = playersIds;
+		this.lines = lines;
 		if(playersIds==null)
-			this.playersIds = new ArrayList<Integer>();		
+			playersIds = new ArrayList<Integer>();		
+		this.playersIds = playersIds;
 		listPanels = new ArrayList<PlayerStatisticsSubPanel>();
 		
 		// init
@@ -173,6 +173,8 @@ public class PlayerStatisticBrowserSubPanel extends EmptySubPanel implements Mou
 		
 		// sorting players
 		TreeSet<Integer> temp = new TreeSet<Integer>(comparator);
+		for(Integer playerId:playersIds)
+			temp.add(playerId);
 		List<Integer> sortedPlayersIds;;
 		if(inverted)
 		{	sortedPlayersIds = new ArrayList<Integer>();
@@ -240,13 +242,14 @@ public class PlayerStatisticBrowserSubPanel extends EmptySubPanel implements Mou
 	}		
 	
 	private void refreshList()
-	{	// remove the old panel
-		int index = GuiTools.indexOfComponent(getDataPanel(),mainPanel);
-		remove(index);
+	{	EmptyContentPanel dataPanel = getDataPanel();
+		// remove the old panel
+		int index = GuiTools.indexOfComponent(dataPanel,mainPanel);
+		dataPanel.remove(index);
 		
 		// put the new one
 		mainPanel = listPanels.get(currentPage);
-		add(mainPanel,index);
+		dataPanel.add(mainPanel,index);
 		
 		// refresh
 		validate();
@@ -603,5 +606,68 @@ public class PlayerStatisticBrowserSubPanel extends EmptySubPanel implements Mou
 		else
 			setSort(rankCriterion);
 		refreshList();
+	}
+
+	/////////////////////////////////////////////////////////////////
+	// DISPLAY								/////////////////////////
+	/////////////////////////////////////////////////////////////////
+	public void setShowPortrait(boolean showPortrait)
+	{	for(PlayerStatisticsSubPanel panel: listPanels)
+			panel.setShowPortrait(showPortrait);
+	}
+
+	public void setShowType(boolean showType)
+	{	for(PlayerStatisticsSubPanel panel: listPanels)
+			panel.setShowType(showType);
+	}
+
+	public void setShowMean(boolean showMean)
+	{	for(PlayerStatisticsSubPanel panel: listPanels)
+			panel.setShowMean(showMean);
+	}
+
+	public void setShowStdev(boolean showStdev)
+	{	for(PlayerStatisticsSubPanel panel: listPanels)
+			panel.setShowStdev(showStdev);
+	}
+
+	public void setShowVolatility(boolean showVolatility)
+	{	for(PlayerStatisticsSubPanel panel: listPanels)
+			panel.setShowVolatility(showVolatility);
+	}
+
+	public void setShowRoundcount(boolean showRoundcount)
+	{	for(PlayerStatisticsSubPanel panel: listPanels)
+			panel.setShowRoundcount(showRoundcount);
+	}
+
+	public void setShowScores(boolean showScores)
+	{	for(PlayerStatisticsSubPanel panel: listPanels)
+			panel.setShowScores(showScores);
+	}
+
+	public void setShowRoundsPlayed(boolean showRoundsPlayed)
+	{	for(PlayerStatisticsSubPanel panel: listPanels)
+			panel.setShowRoundsPlayed(showRoundsPlayed);
+	}
+
+	public void setShowRoundsWon(boolean showRoundsWon)
+	{	for(PlayerStatisticsSubPanel panel: listPanels)
+			panel.setShowRoundsWon(showRoundsWon);
+	}
+
+	public void setShowRoundsLost(boolean showRoundsLost)
+	{	for(PlayerStatisticsSubPanel panel: listPanels)
+			panel.setShowRoundsLost(showRoundsLost);
+	}
+
+	public void setShowRoundsDrawn(boolean showRoundsDrawn)
+	{	for(PlayerStatisticsSubPanel panel: listPanels)
+			panel.setShowRoundsDrawn(showRoundsDrawn);
+	}
+
+	public void setShowTimePlayed(boolean showTimePlayed)
+	{	for(PlayerStatisticsSubPanel panel: listPanels)
+			panel.setShowTimePlayed(showTimePlayed);
 	}
 }

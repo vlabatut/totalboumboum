@@ -45,6 +45,7 @@ import fr.free.totalboumboum.gui.menus.explore.ExploreSplitPanel;
 import fr.free.totalboumboum.gui.menus.options.OptionsSplitPanel;
 import fr.free.totalboumboum.gui.menus.profiles.select.SelectedProfileSplitPanel;
 import fr.free.totalboumboum.gui.menus.quickmatch.QuickMatchContainer;
+import fr.free.totalboumboum.gui.menus.statistics.players.PlayerStatisticsSplitPanel;
 import fr.free.totalboumboum.gui.menus.tournament.TournamenuContainer;
 import fr.free.totalboumboum.gui.tools.GuiKeys;
 import fr.free.totalboumboum.gui.tools.GuiTools;
@@ -73,7 +74,6 @@ public class MainMenu extends SimpleMenuPanel implements ModalDialogPanelListene
 		add(Box.createRigidArea(new Dimension(0,GuiTools.buttonVerticalSpace)));
 		buttonProfiles = GuiTools.createButton(GuiKeys.MENU_MAIN_BUTTON_PROFILES,buttonWidth,buttonHeight,fontSize,this);
 		buttonStats = GuiTools.createButton(GuiKeys.MENU_MAIN_BUTTON_STATISTICS,buttonWidth,buttonHeight,fontSize,this);
-buttonStats.setEnabled(false);
 		buttonResources = GuiTools.createButton(GuiKeys.MENU_MAIN_BUTTON_RESOURCES,buttonWidth,buttonHeight,fontSize,this);
 		add(Box.createRigidArea(new Dimension(0,GuiTools.buttonVerticalSpace)));
 		buttonTournament = GuiTools.createButton(GuiKeys.MENU_MAIN_BUTTON_TOURNAMENT,buttonWidth,buttonHeight,fontSize,this);
@@ -92,6 +92,7 @@ buttonStats.setEnabled(false);
 	private JButton buttonOptions;
 	@SuppressWarnings("unused")
 	private JButton buttonProfiles;
+	@SuppressWarnings("unused")
 	private JButton buttonStats;
 	@SuppressWarnings("unused")
 	private JButton buttonResources;
@@ -139,7 +140,8 @@ buttonStats.setEnabled(false);
 			replaceWith(exploreMenuPanel);
 	    }
 		else if(e.getActionCommand().equals(GuiKeys.MENU_MAIN_BUTTON_STATISTICS))
-		{	
+		{	PlayerStatisticsSplitPanel statisticsMenuPanel = new PlayerStatisticsSplitPanel(getMenuContainer(),this);
+			replaceWith(statisticsMenuPanel);
 	    }
 		else if(e.getActionCommand().equals(GuiKeys.MENU_MAIN_BUTTON_LOAD))
 		{	if(tournamentContainer==null)

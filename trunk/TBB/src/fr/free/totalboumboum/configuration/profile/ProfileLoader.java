@@ -22,8 +22,10 @@ package fr.free.totalboumboum.configuration.profile;
  */
 
 import java.io.File;
+import java.io.FileFilter;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Locale;
 
 import javax.xml.parsers.ParserConfigurationException;
@@ -147,5 +149,35 @@ public class ProfileLoader
 		folder = folder + File.separator + spriteFoldername;
 		Portraits portraits = PortraitsLoader.loadPortraits(folder,spriteColor);
 		profile.setPortraits(portraits);
+    }
+    
+    public static List<Integer> getIdsList()
+    {	ArrayList<Integer> result = new ArrayList<Integer>();
+    	
+    	// get folder
+    	String folderStr = FileTools.getProfilesPath();
+		File folder = new File(folderStr);
+		FileFilter filter = new FileFilter()
+		{	@Override
+			public boolean accept(File pathname)
+			{	String name = pathname.getName();
+				int length = name.length();
+				int extLength = FileTools.EXTENSION_XML.length();
+				String ext = name.substring(length-extLength,length);
+				return ext.equalsIgnoreCase(FileTools.EXTENSION_XML);
+			}			
+		};
+		
+		// get files
+		File[] files = folder.listFiles(filter);
+		for(File file: files)
+		{	int length = file.getName().length();
+			int extLength = FileTools.EXTENSION_XML.length();
+			String idStr = file.getName().substring(0,length-extLength);
+			int id = Integer.parseInt(idStr);
+			result.add(id);
+		}
+    
+    	return result;
     }
 }

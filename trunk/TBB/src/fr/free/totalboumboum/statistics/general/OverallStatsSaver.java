@@ -22,11 +22,11 @@ package fr.free.totalboumboum.statistics.general;
  */
 
 import java.io.File;
-import java.io.FileFilter;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectOutputStream;
 import java.util.HashMap;
+import java.util.List;
 
 import javax.xml.parsers.ParserConfigurationException;
 
@@ -72,26 +72,12 @@ public class OverallStatsSaver
 	{	// create stats map
 		HashMap<Integer,PlayerStats> playersStats = new HashMap<Integer, PlayerStats>();
 		
+		// get ids list
+	    List<Integer> idsList = ProfileLoader.getIdsList();
+
 		// register all existing players
-		String folderStr = FileTools.getProfilesPath();
-		File folder = new File(folderStr);
-		FileFilter filter = new FileFilter()
-		{	@Override
-			public boolean accept(File pathname)
-			{	String name = pathname.getName();
-				int length = name.length();
-				int extLength = FileTools.EXTENSION_XML.length();
-				String ext = name.substring(length-extLength,length);
-				return ext.equalsIgnoreCase(FileTools.EXTENSION_XML);
-			}			
-		};
-		File[] files = folder.listFiles(filter);
-		for(File file: files)
-		{	int length = file.getName().length();
-			int extLength = FileTools.EXTENSION_XML.length();
-			String idStr = file.getName().substring(0,length-extLength);
-			int id = Integer.parseInt(idStr);
-			System.out.println(id);
+		for(Integer id: idsList)
+		{	System.out.println(id);
 			PlayerStats playerStats = new PlayerStats(id);
 			playersStats.put(id,playerStats);
 		}

@@ -47,7 +47,7 @@ public class PlayerStatisticsMenu extends InnerMenuPanel
 	@SuppressWarnings("unused")
 	private JButton buttonBack;
 
-	private PlayerStatisticsData aiData;
+	private PlayerStatisticsData statsData;
 
 	public PlayerStatisticsMenu(SplitMenuPanel container, MenuPanel parent)
 	{	super(container, parent);
@@ -62,23 +62,21 @@ public class PlayerStatisticsMenu extends InnerMenuPanel
 		// sizes
 		int buttonWidth = getWidth();
 		int buttonHeight = GuiTools.buttonTextHeight;
-		ArrayList<String> texts = GuiKeys.getKeysLike(GuiKeys.MENU_RESOURCES_AI_BUTTON);
+		ArrayList<String> texts = GuiKeys.getKeysLike(GuiKeys.MENU_STATISTICS_PLAYER_BUTTON);
 		int fontSize = GuiTools.getOptimalFontSize(buttonWidth*0.8, buttonHeight*0.9, texts);
 
 		// buttons
 		add(Box.createVerticalGlue());
 		buttonGlicko2 = GuiTools.createButton(GuiKeys.MENU_STATISTICS_PLAYER_BUTTON_GLICKO2,buttonWidth,buttonHeight,fontSize,this);
-		add(Box.createVerticalGlue());
 		buttonScores = GuiTools.createButton(GuiKeys.MENU_STATISTICS_PLAYER_BUTTON_SCORES,buttonWidth,buttonHeight,fontSize,this);
-		add(Box.createVerticalGlue());
 		buttonConfrontations = GuiTools.createButton(GuiKeys.MENU_STATISTICS_PLAYER_BUTTON_CONFRONTATIONS,buttonWidth,buttonHeight,fontSize,this);
 		add(Box.createRigidArea(new Dimension(0,GuiTools.buttonVerticalSpace)));
 		buttonBack = GuiTools.createButton(GuiKeys.MENU_RESOURCES_AI_BUTTON_BACK,buttonWidth,buttonHeight,fontSize,this);
 		add(Box.createVerticalGlue());		
 
 		// panels
-		aiData = new PlayerStatisticsData(container);
-		container.setDataPart(aiData);
+		statsData = new PlayerStatisticsData(container);
+		container.setDataPart(statsData);
 	}
 	
 	public void actionPerformed(ActionEvent e)
@@ -86,13 +84,13 @@ public class PlayerStatisticsMenu extends InnerMenuPanel
 		{	replaceWith(parent);
 	    }
 		else if(e.getActionCommand().equals(GuiKeys.MENU_STATISTICS_PLAYER_BUTTON_GLICKO2))
-		{	
+		{	statsData.setView(GuiKeys.MENU_STATISTICS_PLAYER_BUTTON_GLICKO2);
 		}
 		else if(e.getActionCommand().equals(GuiKeys.MENU_STATISTICS_PLAYER_BUTTON_SCORES))
-		{	
+		{	statsData.setView(GuiKeys.MENU_STATISTICS_PLAYER_BUTTON_SCORES);
 		}
 		else if(e.getActionCommand().equals(GuiKeys.MENU_STATISTICS_PLAYER_BUTTON_CONFRONTATIONS))
-		{	
+		{	statsData.setView(GuiKeys.MENU_STATISTICS_PLAYER_BUTTON_CONFRONTATIONS);
 		}
 	} 
 	
