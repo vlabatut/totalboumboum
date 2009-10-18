@@ -311,17 +311,12 @@
 
 <!-- STATISTICS MENU -->	
 		<group name="Statistics">
-			<group name="Button">
-			</group>
 			<group name="Player">
-				<group name="Glicko2">
-					<text name="Title" value="Glicko-2 rankings" tooltip="Glicko-2 rankings for locally registered players" />
-				</group>
-				<group name="Scores">
-					<text name="Title" value="Score rankings" tooltip="Score rankings" />
-				</group>
-				<group name="Confrontations">
-					<text name="Title" value="Confrontations rankings" tooltip="Confrontation rankings" />
+				<text name="Title" value="Players rankings" tooltip="Rankings for locally registered players" />
+				<group name="Button">
+					<text name="Glicko2" value="Glicko-2" tooltip="Glicko-2 rankings for locally registered players" />
+					<text name="Scores" value="Scores" tooltip="Score rankings" />
+					<text name="Confrontations" value="Confrontations" tooltip="Confrontation rankings" />
 				</group>
 			</group>
 		</group>

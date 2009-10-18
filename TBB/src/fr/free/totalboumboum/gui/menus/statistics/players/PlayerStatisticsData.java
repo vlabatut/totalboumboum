@@ -21,171 +21,89 @@ package fr.free.totalboumboum.gui.menus.statistics.players;
  * 
  */
 
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Iterator;
+import java.util.List;
 
-import javax.swing.Box;
-import javax.swing.BoxLayout;
-import javax.xml.parsers.ParserConfigurationException;
-
-import org.xml.sax.SAXException;
-
-import fr.free.totalboumboum.ai.AiPreview;
-import fr.free.totalboumboum.ai.AiPreviewLoader;
-import fr.free.totalboumboum.gui.common.content.subpanel.ai.AiSubPanel;
-import fr.free.totalboumboum.gui.common.content.subpanel.file.PackBrowserSubPanel;
-import fr.free.totalboumboum.gui.common.content.subpanel.file.PackBrowserSubPanelListener;
+import fr.free.totalboumboum.configuration.profile.ProfileLoader;
+import fr.free.totalboumboum.gui.common.content.subpanel.statistics.PlayerStatisticBrowserSubPanel;
 import fr.free.totalboumboum.gui.common.structure.panel.SplitMenuPanel;
 import fr.free.totalboumboum.gui.common.structure.panel.data.EntitledDataPanel;
-import fr.free.totalboumboum.gui.common.structure.subpanel.BasicPanel;
-import fr.free.totalboumboum.gui.common.structure.subpanel.container.TextSubPanel;
-import fr.free.totalboumboum.gui.common.structure.subpanel.container.SubPanel.Mode;
-import fr.free.totalboumboum.gui.common.structure.subpanel.content.TextContentPanel;
 import fr.free.totalboumboum.gui.tools.GuiKeys;
-import fr.free.totalboumboum.gui.tools.GuiTools;
-import fr.free.totalboumboum.tools.FileTools;
 
-public class PlayerStatisticsData extends EntitledDataPanel implements PackBrowserSubPanelListener
+public class PlayerStatisticsData extends EntitledDataPanel
 {	
 	private static final long serialVersionUID = 1L;
-	private static final float SPLIT_RATIO = 0.5f;
 	
-	private AiSubPanel infosPanel;
-	private TextSubPanel notesPanel;
-	private PackBrowserSubPanel packPanel;
-	
-	private AiPreview selectedAi;
+	private static final int LINES = 16;
+	private PlayerStatisticBrowserSubPanel mainPanel;
 	
 	public PlayerStatisticsData(SplitMenuPanel container)
 	{	super(container);
 
 		// title
-		setTitleKey(GuiKeys.MENU_RESOURCES_AI_SELECT_TITLE);
-		BasicPanel mainPanel;
+		setTitleKey(GuiKeys.MENU_STATISTICS_PLAYER_TITLE);
+		
 		// data
-		{	mainPanel = new BasicPanel(dataWidth,dataHeight);
-			{	BoxLayout layout = new BoxLayout(mainPanel,BoxLayout.LINE_AXIS); 
-				mainPanel.setLayout(layout);
-			}
-			
-			int margin = GuiTools.panelMargin;
-			int leftWidth = (int)(dataWidth*SPLIT_RATIO); 
-			int rightWidth = dataWidth - leftWidth - margin; 
-			mainPanel.setOpaque(false);
-			
-			// list panel
-			{	int listWidth = leftWidth;
-				int listHeight = dataHeight;
-				packPanel = new PackBrowserSubPanel(listWidth,listHeight);
-				String baseFolder = FileTools.getAiPath();
-				ArrayList<String> targetFiles = new ArrayList<String>();
-				targetFiles.add(FileTools.FILE_AI+FileTools.EXTENSION_XML);
-				targetFiles.add(FileTools.FILE_AI_MAIN_CLASS+FileTools.EXTENSION_CLASS);
-				packPanel.setFolder(baseFolder,targetFiles);
-				packPanel.addListener(this);
-				mainPanel.add(packPanel);
-			}
-			
-			mainPanel.add(Box.createHorizontalGlue());
-			
-			// preview panel
-			{	BasicPanel previewPanel = new BasicPanel(rightWidth,dataHeight);
-				{	BoxLayout layout = new BoxLayout(previewPanel,BoxLayout.PAGE_AXIS); 
-					previewPanel.setLayout(layout);
-				}
-				previewPanel.setOpaque(false);
-				
-				int upHeight = (int)(dataHeight*0.5); 
-				int downHeight = dataHeight - upHeight - margin; 
-				
-				infosPanel = new AiSubPanel(rightWidth,upHeight);
-				previewPanel.add(infosPanel);
-
-				previewPanel.add(Box.createVerticalGlue());
-
-				notesPanel = new TextSubPanel(rightWidth,downHeight,Mode.TITLE);
-				String key = GuiKeys.MENU_RESOURCES_AI_SELECT_NOTES;
-				notesPanel.setTitleKey(key,true);
-				float fontSize = notesPanel.getTitleFontSize()/2;
-				notesPanel.setFontSize(fontSize);
-				TextContentPanel textPanel = notesPanel.getDataPanel();
-				textPanel.setBackground(GuiTools.COLOR_TABLE_NEUTRAL_BACKGROUND);
-				previewPanel.add(notesPanel);
-				
-				mainPanel.add(previewPanel);
-			}
-			
+		{	// create panel
+			mainPanel = new PlayerStatisticBrowserSubPanel(dataWidth,dataHeight);
 			setDataPart(mainPanel);
+			
+			// set players ids
+			setView(GuiKeys.MENU_STATISTICS_PLAYER_BUTTON_GLICKO2);
+			List<Integer> playersIds = ProfileLoader.getIdsList();
+			mainPanel.setPlayersIds(playersIds,LINES);
 		}
 	}
 
-	private void refreshPreview()
-	{	// infos
-		infosPanel.setAiPreview(selectedAi);
-		// notes
-		ArrayList<String> notesValues;
-		TextContentPanel textPanel = notesPanel.getDataPanel();
-		// no player selected
-		if(selectedAi==null)
-		{	notesValues = new ArrayList<String>();
-			textPanel.setBackground(GuiTools.COLOR_TABLE_NEUTRAL_BACKGROUND);
-		}
-		// one player selected
-		else
-		{	notesValues = selectedAi.getNotes();
-			textPanel.setBackground(GuiTools.COLOR_TABLE_REGULAR_BACKGROUND);
-		}
-		// refresh
-		String text = "";
-		Iterator<String> i = notesValues.iterator();
-		while (i.hasNext())
-		{	String temp = i.next();
-			text = text + temp + "\n";
-		}
-		notesPanel.setText(text);
-	}
-
-	/////////////////////////////////////////////////////////////////
-	// SELECTED AI					/////////////////////////////////
-	/////////////////////////////////////////////////////////////////
-	public AiPreview getSelectedAiPreview()
-	{	return selectedAi;
-	}
-
-	/////////////////////////////////////////////////////////////////
-	// CONTENT PANEL				/////////////////////////////////
-	/////////////////////////////////////////////////////////////////
 	@Override
 	public void refresh()
-	{	// nothing to do here
+	{	//
 	}
 	
 	/////////////////////////////////////////////////////////////////
-	// PACK BROWSER LISTENER		/////////////////////////////////
+	// MENU INTERACTION				/////////////////////////////////
 	/////////////////////////////////////////////////////////////////
-	@Override
-	public void packBrowserSelectionChanged()
-	{	String pack = packPanel.getSelectedPack();
-		String folder = packPanel.getSelectedName();
-		if(pack==null || folder==null)
-			selectedAi = null;
-		else
-		{	
-			try
-			{	selectedAi = AiPreviewLoader.loadAiPreview(pack,folder);
-			}
-			catch (ParserConfigurationException e)
-			{	e.printStackTrace();
-			}
-			catch (SAXException e)
-			{	e.printStackTrace();
-			}
-			catch (IOException e)
-			{	e.printStackTrace();
-			}
+	public void setView(String view)
+	{	if(view.equals(GuiKeys.MENU_STATISTICS_PLAYER_BUTTON_GLICKO2))
+		{	mainPanel.setShowPortrait(true);
+			mainPanel.setShowType(true);
+			mainPanel.setShowMean(true);
+			mainPanel.setShowStdev(true);
+			mainPanel.setShowVolatility(true);
+			mainPanel.setShowRoundcount(true);
+			mainPanel.setShowRoundsPlayed(false);
+			mainPanel.setShowRoundsWon(false);
+			mainPanel.setShowRoundsDrawn(false);
+			mainPanel.setShowRoundsLost(false);
+			mainPanel.setShowTimePlayed(false);
+			mainPanel.setShowScores(false);			
 		}
-		refreshPreview();
-		fireDataPanelSelectionChange();
+		else if(view.equals(GuiKeys.MENU_STATISTICS_PLAYER_BUTTON_SCORES))
+		{	mainPanel.setShowPortrait(true);
+			mainPanel.setShowType(true);
+			mainPanel.setShowMean(false);
+			mainPanel.setShowStdev(false);
+			mainPanel.setShowVolatility(false);
+			mainPanel.setShowRoundcount(false);
+			mainPanel.setShowRoundsPlayed(false);
+			mainPanel.setShowRoundsWon(false);
+			mainPanel.setShowRoundsDrawn(false);
+			mainPanel.setShowRoundsLost(false);
+			mainPanel.setShowTimePlayed(false);
+			mainPanel.setShowScores(true);		
+		}
+		else if(view.equals(GuiKeys.MENU_STATISTICS_PLAYER_BUTTON_CONFRONTATIONS))
+		{	mainPanel.setShowPortrait(true);
+			mainPanel.setShowType(true);
+			mainPanel.setShowMean(false);
+			mainPanel.setShowStdev(false);
+			mainPanel.setShowVolatility(false);
+			mainPanel.setShowRoundcount(false);
+			mainPanel.setShowRoundsPlayed(true);
+			mainPanel.setShowRoundsWon(true);
+			mainPanel.setShowRoundsDrawn(true);
+			mainPanel.setShowRoundsLost(true);
+			mainPanel.setShowTimePlayed(true);
+			mainPanel.setShowScores(false);		
+		}
 	}
 }

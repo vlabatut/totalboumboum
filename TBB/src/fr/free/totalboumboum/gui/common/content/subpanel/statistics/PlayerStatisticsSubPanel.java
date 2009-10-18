@@ -59,6 +59,7 @@ public class PlayerStatisticsSubPanel extends TableSubPanel implements MouseList
 	
 	public PlayerStatisticsSubPanel(int width, int height)
 	{	super(width,height,SubPanel.Mode.NOTHING,LINES,1,COLS,true);
+		setOpaque(false);
 		
 		try
 		{	setPlayerIds(null,LINES);
@@ -92,7 +93,7 @@ public class PlayerStatisticsSubPanel extends TableSubPanel implements MouseList
 		if(showType) 
 			cols++;
 		if(showMean) 
-			cols = cols+4;
+			cols++;
 		if(showStdev) 
 			cols++;
 		if(showVolatility) 
@@ -100,7 +101,7 @@ public class PlayerStatisticsSubPanel extends TableSubPanel implements MouseList
 		if(showRoundcount) 
 			cols++;
 		if(showScores) 
-			cols++;
+			cols = cols+4;
 		if(showRoundsPlayed) 
 			cols++;
 		if(showRoundsWon) 
