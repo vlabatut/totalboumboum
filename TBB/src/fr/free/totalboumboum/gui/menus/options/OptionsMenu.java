@@ -123,7 +123,7 @@ public class OptionsMenu extends InnerMenuPanel
 			{	e1.printStackTrace();
 			}
 		}
-	else if(e.getActionCommand().equals(GuiKeys.MENU_OPTIONS_BUTTON_GUI))
+		else if(e.getActionCommand().equals(GuiKeys.MENU_OPTIONS_BUTTON_GUI))
 		{	try
 			{	GuiSplitPanel guiPanel = new GuiSplitPanel(container.getMenuContainer(),container);
 				replaceWith(guiPanel);

@@ -22,42 +22,40 @@ package fr.free.totalboumboum.gui.common.content.subpanel.statistics;
  */
 
 import java.awt.Color;
+import java.awt.Component;
+import java.awt.Dimension;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.io.IOException;
-import java.text.Collator;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.Comparator;
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.List;
-import java.util.Locale;
 import java.util.TreeSet;
-import java.util.Map.Entry;
 
+import javax.swing.Box;
 import javax.swing.BoxLayout;
 import javax.swing.JLabel;
+import javax.swing.JPanel;
 import javax.xml.parsers.ParserConfigurationException;
 
 import org.xml.sax.SAXException;
 
 import fr.free.totalboumboum.gui.common.structure.subpanel.container.EmptySubPanel;
-import fr.free.totalboumboum.gui.common.structure.subpanel.container.LinesSubPanel;
 import fr.free.totalboumboum.gui.common.structure.subpanel.container.SubPanel;
-import fr.free.totalboumboum.gui.common.structure.subpanel.container.TableSubPanel;
 import fr.free.totalboumboum.gui.common.structure.subpanel.content.EmptyContentPanel;
-import fr.free.totalboumboum.gui.common.structure.subpanel.content.TableContentPanel;
 import fr.free.totalboumboum.gui.tools.GuiKeys;
 import fr.free.totalboumboum.gui.tools.GuiTools;
 import fr.free.totalboumboum.statistics.GameStatistics;
 import fr.free.totalboumboum.statistics.detailed.Score;
 import fr.free.totalboumboum.statistics.general.PlayerStats;
+import fr.free.totalboumboum.statistics.glicko2.jrs.PlayerRating;
 import fr.free.totalboumboum.statistics.glicko2.jrs.RankingService;
 
 public class PlayerStatisticBrowserSubPanel extends EmptySubPanel implements MouseListener, PlayerStatisticsSubPanelListener
 {	private static final long serialVersionUID = 1L;
-	private static final int LINES = 2;
+	private final static int COL_PREVIOUS = 0;
+	private final static int COL_NEXT = 2;
 
 	public PlayerStatisticBrowserSubPanel(int width, int height)
 	{	super(width,height,SubPanel.Mode.BORDER);
@@ -76,26 +74,85 @@ public class PlayerStatisticBrowserSubPanel extends EmptySubPanel implements Mou
 			dataPanel.setLayout(layout);
 		}
 		
-		// sizes
-		buttonHeight = GuiTools.subPanelTitleHeight;
-		subpanelHeight = getDataHeight() - buttonHeight - GuiTools.panelMargin;
+		// main panel
+		{	int mainPanelHeight = getDataHeight() - buttonHeight - GuiTools.panelMargin;
+			mainPanel = new JPanel();
+			Dimension dimension = new Dimension(getDataWidth(),mainPanelHeight);
+			mainPanel.setMinimumSize(dimension);
+			mainPanel.setPreferredSize(dimension);
+			mainPanel.setMaximumSize(dimension);
+			dataPanel.add(mainPanel);
+		}
+		
+		add(Box.createRigidArea(new Dimension(GuiTools.subPanelMargin,GuiTools.subPanelMargin)));
+		
+		// buttons
+		{	// buttons panel
+			JPanel buttonsPanel = new JPanel();
+			Dimension dimension = new Dimension(getDataWidth(),buttonHeight);
+			buttonsPanel.setMinimumSize(dimension);
+			buttonsPanel.setPreferredSize(dimension);
+			buttonsPanel.setMaximumSize(dimension);
+			BoxLayout layout = new BoxLayout(buttonsPanel,BoxLayout.PAGE_AXIS); 
+			buttonsPanel.setLayout(layout);
+			buttonsPanel.setAlignmentY(Component.CENTER_ALIGNMENT);
+			buttonsPanel.setAlignmentX(Component.CENTER_ALIGNMENT);
+			dataPanel.add(buttonsPanel);
+			
+			// sizes
+			int buttonHeight = GuiTools.subPanelTitleHeight;
+			int upWidth = (getDataWidth() - GuiTools.subPanelTitleHeight)/2;
+			int downWidth = getDataWidth()- upWidth - GuiTools.subPanelTitleHeight;
+
+			// up button
+			{	JLabel label = new JLabel();
+				label.setOpaque(true);
+				label.setBackground(GuiTools.COLOR_TABLE_HEADER_BACKGROUND);
+				Dimension dim = new Dimension(upWidth,buttonHeight);
+				label.setMinimumSize(dim);
+				label.setPreferredSize(dim);
+				label.setMaximumSize(dim);
+				String key = GuiKeys.COMMON_STATISTICS_PLAYER_COMMON_BUTTON_PREVIOUS;
+				GuiTools.setLabelKey(label,key,true);
+				label.setHorizontalAlignment(JLabel.CENTER);
+				label.setVerticalAlignment(JLabel.CENTER);
+				label.addMouseListener(this);
+				buttonsPanel.add(label);
+			}
+			buttonsPanel.add(Box.createRigidArea(new Dimension(GuiTools.subPanelMargin,GuiTools.subPanelMargin)));
+			// down
+			{	JLabel label = new JLabel();
+				label.setOpaque(true);
+				label.setBackground(GuiTools.COLOR_TABLE_HEADER_BACKGROUND);
+				Dimension dim = new Dimension(downWidth,buttonHeight);
+				label.setMinimumSize(dim);
+				label.setPreferredSize(dim);
+				label.setMaximumSize(dim);
+				String key = GuiKeys.COMMON_STATISTICS_PLAYER_COMMON_BUTTON_NEXT;
+				GuiTools.setLabelKey(label,key,true);
+				label.setHorizontalAlignment(JLabel.CENTER);
+				label.setVerticalAlignment(JLabel.CENTER);
+				label.addMouseListener(this);
+				buttonsPanel.add(label);
+			}			
+		}
 		
 		// pages
+		currentPage = 0;
 		setPlayersIds(null,16);
+		setSort(RankCriterion.MEAN);
 	}
 	
 	/////////////////////////////////////////////////////////////////
 	// PAGES			/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	private List<Integer> playersIds;
-	private final static int COL_PREVIOUS = 0;
-	private final static int COL_NEXT = 1;
 	private int currentPage = 0;
 	private ArrayList<PlayerStatisticsSubPanel> listPanels;
 	private int pageCount;	
 	private int lines;
 	private int buttonHeight;
-	private int subpanelHeight;
+	private JPanel mainPanel;
 	
 	public List<Integer> getPlayersIds()
 	{	return playersIds;	
@@ -106,16 +163,24 @@ public class PlayerStatisticBrowserSubPanel extends EmptySubPanel implements Mou
 		this.lines = 16;
 		this.playersIds = playersIds;
 		if(playersIds==null)
-			this.playersIds = new ArrayList<Integer>();
+			this.playersIds = new ArrayList<Integer>();		
 		listPanels = new ArrayList<PlayerStatisticsSubPanel>();
-		currentPage = 0;
 		
-		// size
+		// init
 		pageCount = getPageCount();
+		if(currentPage>=pageCount)
+			currentPage = pageCount-1;
 		
 		// sorting players
 		TreeSet<Integer> temp = new TreeSet<Integer>(comparator);
-		List<Integer> sortedPlayersIds = new ArrayList<Integer>(temp);
+		List<Integer> sortedPlayersIds;;
+		if(inverted)
+		{	sortedPlayersIds = new ArrayList<Integer>();
+			for(Integer i: temp)
+				sortedPlayersIds.add(0,i);
+		}
+		else
+			sortedPlayersIds = new ArrayList<Integer>(temp);
 		
 		// building all pages
 		int index = 0;
@@ -129,7 +194,8 @@ public class PlayerStatisticBrowserSubPanel extends EmptySubPanel implements Mou
 				i++;
 			}
 			// build the panel			
-			PlayerStatisticsSubPanel panel = new PlayerStatisticsSubPanel(getDataWidth(),subpanelHeight);
+			int mainPanelHeight = mainPanel.getPreferredSize().height;
+			PlayerStatisticsSubPanel panel = new PlayerStatisticsSubPanel(getDataWidth(),mainPanelHeight);
 			try
 			{	panel.setPlayerIds(idList,lines);
 			}
@@ -165,8 +231,8 @@ public class PlayerStatisticBrowserSubPanel extends EmptySubPanel implements Mou
 	}
 	
 	private int getPageCount()
-	{	int result = playersIds.size()/LINES;
-		if(playersIds.size()%LINES>0)
+	{	int result = playersIds.size()/lines;
+		if(playersIds.size()%lines>0)
 			result++;
 		else if(result==0)
 			result = 1;
@@ -174,9 +240,15 @@ public class PlayerStatisticBrowserSubPanel extends EmptySubPanel implements Mou
 	}		
 	
 	private void refreshList()
-	{	setPlayersIds(playersIds,lines);
-		PlayerStatisticsSubPanel p = listPanels.get(currentPage);
+	{	// remove the old panel
+		int index = GuiTools.indexOfComponent(getDataPanel(),mainPanel);
+		remove(index);
 		
+		// put the new one
+		mainPanel = listPanels.get(currentPage);
+		add(mainPanel,index);
+		
+		// refresh
 		validate();
 		repaint();
 	}
@@ -188,7 +260,9 @@ public class PlayerStatisticBrowserSubPanel extends EmptySubPanel implements Mou
 	/////////////////////////////////////////////////////////////////
 	// SORT				/////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////
+	private RankCriterion rankCriterion = null;
 	private Comparator<Integer> comparator;
+	private boolean inverted = false;
 	
 	public void setSort(RankCriterion sort)
 	{	if(sort==RankCriterion.MEAN)
@@ -197,8 +271,14 @@ public class PlayerStatisticBrowserSubPanel extends EmptySubPanel implements Mou
 				public int compare(Integer playerId1, Integer playerId2)
 				{	int result;
 					RankingService rankingService = GameStatistics.getRankingService();
-					double value1 = rankingService.getPlayerRating(playerId1).getRating();
-					double value2 = rankingService.getPlayerRating(playerId2).getRating();
+					PlayerRating playerRating1 = rankingService.getPlayerRating(playerId1);
+					PlayerRating playerRating2 = rankingService.getPlayerRating(playerId2);
+					double value1 = 0;
+					if(playerRating1!=null)
+						value1 = playerRating1.getRating();
+					double value2 = 0;
+					if(playerRating2!=null)
+						value2 = playerRating2.getRating();
 					if(value1>value2)
 						result = 1;
 					else if(value1<value2)
@@ -215,8 +295,14 @@ public class PlayerStatisticBrowserSubPanel extends EmptySubPanel implements Mou
 				public int compare(Integer playerId1, Integer playerId2)
 				{	int result;
 					RankingService rankingService = GameStatistics.getRankingService();
-					double value1 = rankingService.getPlayerRating(playerId1).getRoundcount();
-					double value2 = rankingService.getPlayerRating(playerId2).getRoundcount();
+					PlayerRating playerRating1 = rankingService.getPlayerRating(playerId1);
+					PlayerRating playerRating2 = rankingService.getPlayerRating(playerId2);
+					double value1 = 0;
+					if(playerRating1!=null)
+						value1 = playerRating1.getRoundcount();
+					double value2 = 0;
+					if(playerRating2!=null)
+						value2 = playerRating2.getRoundcount();
 					if(value1>value2)
 						result = 1;
 					else if(value1<value2)
@@ -426,7 +512,13 @@ public class PlayerStatisticBrowserSubPanel extends EmptySubPanel implements Mou
 			};			
 		}
 	
-		setPlayersIds(playersIds,lines);
+		if(rankCriterion!=null)
+		{	rankCriterion = sort;
+			setPlayersIds(playersIds,lines);
+		}
+		else
+		{	rankCriterion = sort;
+		}
 	}
 	
 	public enum RankCriterion
@@ -466,33 +558,21 @@ public class PlayerStatisticBrowserSubPanel extends EmptySubPanel implements Mou
 	@Override
 	public void mousePressed(MouseEvent e)
 	{	JLabel label = (JLabel)e.getComponent();
-		int[] pos = listPanels.get(currentPage).getLabelPosition(label);
+		int pos = GuiTools.indexOfComponent(mainPanel,label);
 		
 		// previous page
-		if(pos[0]==linePrevious)
+		if(pos==COL_PREVIOUS)
 		{	if(currentPage>0)
-			{	selectName(-1);
-				currentPage--;
+			{	currentPage--;
 				refreshList();
 			}
 		}
 		// parent
-		else if(pos[0]==lineParent && showParent)
-		{	selectName(-1);
-			refreshList();
-			fireFileBrowserParentClicked();
-		}
-		// next page
-		else if(pos[0]==lineNext)
+		else if(pos==COL_NEXT)
 		{	if(currentPage<getPageCount()-1)
-			{	selectName(-1);
-				currentPage++;
+			{	currentPage++;
 				refreshList();
 			}
-		}
-		// select a name
-		else if(pos[0]>=0)
-		{	selectName(pos[0]);
 		}
 	}
 	
@@ -502,39 +582,26 @@ public class PlayerStatisticBrowserSubPanel extends EmptySubPanel implements Mou
 	}
 	
 	/////////////////////////////////////////////////////////////////
-	// LISTENERS		/////////////////////////////////////////////
-	/////////////////////////////////////////////////////////////////
-	private ArrayList<PlayerStatisticBrowserSubPanelListener> listeners = new ArrayList<PlayerStatisticBrowserSubPanelListener>();
-	
-	public void addListener(PlayerStatisticBrowserSubPanelListener listener)
-	{	if(!listeners.contains(listener))
-			listeners.add(listener);		
-	}
-
-	public void removeListener(PlayerStatisticBrowserSubPanelListener listener)
-	{	listeners.remove(listener);		
-	}
-	
-	private void fireFileBrowserSelectionChanged()
-	{	for(PlayerStatisticBrowserSubPanelListener listener: listeners)
-			listener.fileBrowserSelectionChanged();
-	}
-
-	private void fireFileBrowserParentClicked()
-	{	for(PlayerStatisticBrowserSubPanelListener listener: listeners)
-			listener.fileBrowserParentReached();
-	}
-
-	/////////////////////////////////////////////////////////////////
 	// PLAYER STATISTIC SUBPANEL LISTENER	/////////////////////////
 	/////////////////////////////////////////////////////////////////
 	@Override
 	public void playerStatisticsPlayerRegistered(int playerId)
-	{	// TODO Auto-generated method stub		
+	{	GameStatistics.getRankingService().registerPlayer(playerId);
+		refreshList();
 	}
 
 	@Override
 	public void playerStatisticsPlayerUnregistered(int playerId)
-	{	// TODO Auto-generated method stub		
+	{	GameStatistics.getRankingService().deregisterPlayer(playerId);
+		refreshList();
+	}
+
+	@Override
+	public void playerStatisticsComparatorChanged(RankCriterion rankCriterion)
+	{	if(this.rankCriterion==rankCriterion)
+			inverted = !inverted;
+		else
+			setSort(rankCriterion);
+		refreshList();
 	}
 }

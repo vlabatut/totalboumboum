@@ -1,5 +1,7 @@
 package fr.free.totalboumboum.gui.common.content.subpanel.statistics;
 
+import fr.free.totalboumboum.gui.common.content.subpanel.statistics.PlayerStatisticBrowserSubPanel.RankCriterion;
+
 /*
  * Total Boum Boum
  * Copyright 2008-2009 Vincent Labatut 
@@ -25,4 +27,5 @@ public interface PlayerStatisticsSubPanelListener
 {
 	public void playerStatisticsPlayerRegistered(int playerId);
 	public void playerStatisticsPlayerUnregistered(int playerId);
+	public void playerStatisticsComparatorChanged(RankCriterion rankCriterion);
 }
