@@ -32,7 +32,7 @@ import javax.swing.SwingConstants;
 
 import fr.free.totalboumboum.gui.common.structure.panel.SplitMenuPanel;
 import fr.free.totalboumboum.gui.common.structure.subpanel.BasicPanel;
-import fr.free.totalboumboum.gui.common.structure.subpanel.outside.EmptySubPanel;
+import fr.free.totalboumboum.gui.common.structure.subpanel.container.EmptySubPanel;
 import fr.free.totalboumboum.gui.data.configuration.GuiConfiguration;
 import fr.free.totalboumboum.gui.tools.GuiKeys;
 import fr.free.totalboumboum.gui.tools.GuiTools;

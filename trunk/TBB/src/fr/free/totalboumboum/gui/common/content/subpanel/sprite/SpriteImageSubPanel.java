@@ -32,9 +32,9 @@ import javax.swing.JLabel;
 
 import fr.free.totalboumboum.configuration.profile.PredefinedColor;
 import fr.free.totalboumboum.engine.content.sprite.SpritePreview;
-import fr.free.totalboumboum.gui.common.structure.subpanel.inside.Column;
-import fr.free.totalboumboum.gui.common.structure.subpanel.outside.ColumnsSubPanel;
-import fr.free.totalboumboum.gui.common.structure.subpanel.outside.SubPanel;
+import fr.free.totalboumboum.gui.common.structure.subpanel.container.ColumnsSubPanel;
+import fr.free.totalboumboum.gui.common.structure.subpanel.container.SubPanel;
+import fr.free.totalboumboum.gui.common.structure.subpanel.content.Column;
 import fr.free.totalboumboum.gui.data.configuration.GuiConfiguration;
 import fr.free.totalboumboum.gui.tools.GuiKeys;
 import fr.free.totalboumboum.gui.tools.GuiTools;

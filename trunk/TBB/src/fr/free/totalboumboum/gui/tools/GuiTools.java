@@ -1157,7 +1157,7 @@ public class GuiTools
 	// titles
 	private final static float SUBPANEL_TITLE_RATIO = 1.5f; // subpanel title height relatively to panel margin
 	public static int subPanelTitleHeight; // height of a subpanel title bar relatively to the height of a panel title
-	public final static float TABLE_HEADER_RATIO = 1.2f; //header high relatively to line height
+	public final static float TABLE_HEADER_RATIO = 1.2f; //header height relatively to line height
 
 	// panel split
 	public final static float VERTICAL_SPLIT_RATIO = 0.25f;
@@ -1190,7 +1190,6 @@ public class GuiTools
 		subPanelMargin = (int)(height*SUBPANEL_MARGIN_RATIO);
 		
 		// titles
-		subPanelTitleHeight = (int)(panelMargin*SUBPANEL_TITLE_RATIO);
 		subPanelTitleHeight = (int)(panelMargin*SUBPANEL_TITLE_RATIO);
 		
 		// buttons
