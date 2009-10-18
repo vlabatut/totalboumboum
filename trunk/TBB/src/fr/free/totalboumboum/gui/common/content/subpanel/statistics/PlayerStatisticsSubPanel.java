@@ -45,6 +45,7 @@ import fr.free.totalboumboum.statistics.general.PlayerStats;
 import fr.free.totalboumboum.statistics.glicko2.jrs.PlayerRating;
 import fr.free.totalboumboum.statistics.glicko2.jrs.RankingService;
 import fr.free.totalboumboum.statistics.detailed.Score;
+import fr.free.totalboumboum.gui.common.content.subpanel.statistics.PlayerStatisticBrowserSubPanel.RankCriterion;
 import fr.free.totalboumboum.gui.common.structure.subpanel.container.SubPanel;
 import fr.free.totalboumboum.gui.common.structure.subpanel.container.TableSubPanel;
 import fr.free.totalboumboum.gui.tools.GuiKeys;
@@ -57,7 +58,7 @@ public class PlayerStatisticsSubPanel extends TableSubPanel implements MouseList
 	private static final int COLS = 3;
 	
 	public PlayerStatisticsSubPanel(int width, int height)
-	{	super(width,height,SubPanel.Mode.BORDER,LINES,1,COLS,true);
+	{	super(width,height,SubPanel.Mode.NOTHING,LINES,1,COLS,true);
 		
 		try
 		{	setPlayerIds(null,LINES);
@@ -72,6 +73,7 @@ public class PlayerStatisticsSubPanel extends TableSubPanel implements MouseList
 	/////////////////////////////////////////////////////////////////
 	private List<Integer> playerIds;
 	private int lines;
+	private RankCriterion[] rankCriterions;
 	
 	public List<Integer> getPlayerIds()
 	{	return playerIds;	
@@ -110,6 +112,7 @@ public class PlayerStatisticsSubPanel extends TableSubPanel implements MouseList
 		if(showTimePlayed) 
 			cols++;
 		reinit(lines+1,cols);
+		rankCriterions = new RankCriterion[cols];
 		
 		// col widths
 		int headerHeight = getHeaderHeight();
@@ -131,95 +134,117 @@ public class PlayerStatisticsSubPanel extends TableSubPanel implements MouseList
 		// headers
 		{	int col = 0;
 			// button
-			{	col++;
+			{	rankCriterions[col] = null;
+				col++;
 			}
 			// rank
-			{	String key = GuiKeys.MENU_STATISTICS_PLAYER_COMMON_HEADER_RANK;
+			{	String key = GuiKeys.COMMON_STATISTICS_PLAYER_COMMON_HEADER_RANK;
 				setLabelKey(0,col,key,true);
+				rankCriterions[col] = RankCriterion.MEAN;
 				col++;
 			}
 			// portrait
 			if(showPortrait) 
-			{	String key = GuiKeys.MENU_STATISTICS_PLAYER_COMMON_HEADER_PORTRAIT;
+			{	String key = GuiKeys.COMMON_STATISTICS_PLAYER_COMMON_HEADER_PORTRAIT;
 				setLabelKey(0,col,key,true);
+				rankCriterions[col] = null;
 				col++;
 			}
 			// type
 			if(showType) 
-			{	String key = GuiKeys.MENU_STATISTICS_PLAYER_COMMON_HEADER_TYPE;
+			{	String key = GuiKeys.COMMON_STATISTICS_PLAYER_COMMON_HEADER_TYPE;
 				setLabelKey(0,col,key,true);
+				rankCriterions[col] = null;
 				col++;
 			}
 			// name
-			{	String key = GuiKeys.MENU_STATISTICS_PLAYER_COMMON_HEADER_NAME;
+			{	String key = GuiKeys.COMMON_STATISTICS_PLAYER_COMMON_HEADER_NAME;
 				setLabelKey(0,col,key,true);
+				rankCriterions[col] = null;
 				col++;
 			}
 			// mean
 			if(showMean) 
-			{	String key = GuiKeys.MENU_STATISTICS_PLAYER_GLICKO2_HEADER_MEAN;
+			{	String key = GuiKeys.COMMON_STATISTICS_PLAYER_GLICKO2_HEADER_MEAN;
 				setLabelKey(0,col,key,true);
+				rankCriterions[col] = RankCriterion.MEAN;
 				col++;
 			}
 			// standard-deviation
 			if(showStdev) 
-			{	String key = GuiKeys.MENU_STATISTICS_PLAYER_GLICKO2_HEADER_STANDARD_DEVIATION;
+			{	String key = GuiKeys.COMMON_STATISTICS_PLAYER_GLICKO2_HEADER_STANDARD_DEVIATION;
 				setLabelKey(0,col,key,true);
+				rankCriterions[col] = null;
 				col++;
 			}
 			// volatility
 			if(showVolatility) 
-			{	String key = GuiKeys.MENU_STATISTICS_PLAYER_GLICKO2_HEADER_VOLATILITY;
+			{	String key = GuiKeys.COMMON_STATISTICS_PLAYER_GLICKO2_HEADER_VOLATILITY;
 				setLabelKey(0,col,key,true);
+				rankCriterions[col] = null;
 				col++;
 			}
 			// roundcount
 			if(showRoundcount) 
-			{	String key = GuiKeys.MENU_STATISTICS_PLAYER_GLICKO2_HEADER_ROUND_COUNT;
+			{	String key = GuiKeys.COMMON_STATISTICS_PLAYER_GLICKO2_HEADER_ROUND_COUNT;
 				setLabelKey(0,col,key,true);
+				rankCriterions[col] = RankCriterion.ROUNDCOUNT;
 				col++;
 			}
 			//scores
 			if(showScores) 
-			{	String headerPrefix = GuiKeys.MENU_STATISTICS_PLAYER_SCORES_HEADER;
+			{	String headerPrefix = GuiKeys.COMMON_STATISTICS_PLAYER_SCORES_HEADER;
 				String keys[] = 
 				{	headerPrefix+GuiKeys.BOMBS,
 					headerPrefix+GuiKeys.ITEMS,
 					headerPrefix+GuiKeys.BOMBEDS,
 					headerPrefix+GuiKeys.BOMBINGS
 				};
+				RankCriterion rc[] = 
+				{	RankCriterion.BOMBS,
+					RankCriterion.ITEMS,
+					RankCriterion.BOMBEDS,
+					RankCriterion.BOMBINGS
+				};
 				for(int c=0;c<keys.length;c++)
-					setLabelKey(0,col+c,keys[c],true);
+				{	setLabelKey(0,col+c,keys[c],true);
+					rankCriterions[col+c] = rc[c];				
+				}
 				col = col+keys.length;
 			}
 			// rounds played
 			if(showRoundsPlayed) 
-			{	String key = GuiKeys.MENU_STATISTICS_PLAYER_CONFRONTATIONS_HEADER_ROUNDS_PLAYED;
+			{	String key = GuiKeys.COMMON_STATISTICS_PLAYER_CONFRONTATIONS_HEADER_ROUNDS_PLAYED;
 				setLabelKey(0,col,key,true);
+				rankCriterions[col] = RankCriterion.ROUNDS_PLAYED;
 				col++;
 			}
 			// rounds won
 			if(showRoundsWon) 
-			{	String key = GuiKeys.MENU_STATISTICS_PLAYER_CONFRONTATIONS_HEADER_ROUNDS_WON;
+			{	String key = GuiKeys.COMMON_STATISTICS_PLAYER_CONFRONTATIONS_HEADER_ROUNDS_WON;
 				setLabelKey(0,col,key,true);
+				rankCriterions[col] = RankCriterion.ROUNDS_WON;
 				col++;
 			}
 			// rounds drawn
 			if(showRoundsDrawn) 
-			{	String key = GuiKeys.MENU_STATISTICS_PLAYER_CONFRONTATIONS_HEADER_ROUNDS_DRAWN;
+			{	String key = GuiKeys.COMMON_STATISTICS_PLAYER_CONFRONTATIONS_HEADER_ROUNDS_DRAWN;
 				setLabelKey(0,col,key,true);
+				rankCriterions[col] = RankCriterion.ROUNDS_DRAWN;
 				col++;
 			}
 			// rounds lost
 			if(showRoundsLost) 
-			{	String key = GuiKeys.MENU_STATISTICS_PLAYER_CONFRONTATIONS_HEADER_ROUNDS_LOST;
+			{	String key = GuiKeys.COMMON_STATISTICS_PLAYER_CONFRONTATIONS_HEADER_ROUNDS_LOST;
 				setLabelKey(0,col,key,true);
+				rankCriterions[col] = RankCriterion.ROUNDS_LOST;
 				col++;
 			}
 			// time played
 			if(showTimePlayed) 
-			{	String key = GuiKeys.MENU_STATISTICS_PLAYER_CONFRONTATIONS_HEADER_TIME_PLAYED;
+			{	String key = GuiKeys.COMMON_STATISTICS_PLAYER_CONFRONTATIONS_HEADER_TIME_PLAYED;
 				setLabelKey(0,col,key,true);
+				rankCriterions[col] = RankCriterion.TIME_PLAYED;
 				col++;
 			}
 		}
@@ -250,9 +275,9 @@ public class PlayerStatisticsSubPanel extends TableSubPanel implements MouseList
 				// button
 				{	String key;
 					if(playerRating==null)
-						key = GuiKeys.MENU_STATISTICS_PLAYER_COMMON_BUTTON_REGISTER;
+						key = GuiKeys.COMMON_STATISTICS_PLAYER_COMMON_BUTTON_REGISTER;
 					else
-						key = GuiKeys.MENU_STATISTICS_PLAYER_COMMON_BUTTON_UNREGISTER;
+						key = GuiKeys.COMMON_STATISTICS_PLAYER_COMMON_BUTTON_UNREGISTER;
 					setLabelKey(line,col,key,true);
 					col++;
 					JLabel label = getLabel(line,col);
@@ -269,7 +294,7 @@ public class PlayerStatisticsSubPanel extends TableSubPanel implements MouseList
 							rankWidth = temp;
 					}
 					else
-					{	String key = GuiKeys.MENU_STATISTICS_PLAYER_COMMON_DATA_NO_RANK;
+					{	String key = GuiKeys.COMMON_STATISTICS_PLAYER_COMMON_DATA_NO_RANK;
 						setLabelKey(line,col,key,false);
 					}
 					col++;
@@ -286,9 +311,9 @@ public class PlayerStatisticsSubPanel extends TableSubPanel implements MouseList
 				{	String aiName = profile.getAiName();
 					String key;
 					if(aiName==null)
-						key = GuiKeys.MENU_STATISTICS_PLAYER_COMMON_DATA_HUMAN;
+						key = GuiKeys.COMMON_STATISTICS_PLAYER_COMMON_DATA_HUMAN;
 					else
-						key = GuiKeys.MENU_STATISTICS_PLAYER_COMMON_DATA_COMPUTER;
+						key = GuiKeys.COMMON_STATISTICS_PLAYER_COMMON_DATA_COMPUTER;
 					setLabelKey(line,col,key,true);
 					col++;
 				}
@@ -701,12 +726,18 @@ public class PlayerStatisticsSubPanel extends TableSubPanel implements MouseList
 	{	
 	}
 	
+	// NOTE button, rank, portrait, type, name, mean, stdev, volatility, rouncount,	scores*4, played, won, drawn, lost, time 	
 	@Override
 	public void mousePressed(MouseEvent e)
 	{	JLabel label = (JLabel)e.getComponent();
 		int[] pos = getLabelPositionSimple(label);
+		// change order
+		if(pos[0]==0)
+		{	RankCriterion rankCriterion = rankCriterions[pos[1]];
+			firePlayerStatisticsComparatorChanged(rankCriterion);
+		}
 		// add/remove
-		if(pos[0]>0 && pos[1]==1)
+		else if(pos[1]==1)
 		{	int playerId = playerIds.get(pos[0]-1);
 			RankingService rankingService = GameStatistics.getRankingService();
 			Set<Integer> playersIds = rankingService.getPlayers();
@@ -744,5 +775,10 @@ public class PlayerStatisticsSubPanel extends TableSubPanel implements MouseList
 	private void firePlayerStatisticsPlayerUnregistered(int playerId)
 	{	for(PlayerStatisticsSubPanelListener listener: listeners)
 			listener.playerStatisticsPlayerUnregistered(playerId);
+	}
+
+	private void firePlayerStatisticsComparatorChanged(RankCriterion rankCriterion)
+	{	for(PlayerStatisticsSubPanelListener listener: listeners)
+			listener.playerStatisticsComparatorChanged(rankCriterion);
 	}
 }

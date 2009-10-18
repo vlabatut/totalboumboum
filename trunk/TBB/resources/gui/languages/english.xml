@@ -311,56 +311,17 @@
 
 <!-- STATISTICS MENU -->	
 		<group name="Statistics">
+			<group name="Button">
+			</group>
 			<group name="Player">
-				<group name="Common">
-					<group name="Header">
-						<text name="Name" value="Name"  tooltip="Player name" />
-						<text name="Portrait" value="Character"  tooltip="Player character" />
-						<text name="Rank" value="#"  tooltip="Player ranking" />
-						<text name="Type" value="Human/Computer"  tooltip="Human or computer-controlled" />
-					</group>
-					<group name="Data">
-						<text name="Computer" value="Computer"  tooltip="Computer-controlled player" />
-						<text name="Human" value="Human"  tooltip="Human player" />
-						<text name="NoRank" value="-"  tooltip="This player is not ranked" />
-					</group>
-					<group name="Button">
-						<text name="Register" value="Register"  tooltip="Register the player to the ranking system" />
-						<text name="Unregister" value="Unregister"  tooltip="Unregister the player from the ranking system" />
-					</group>
-				</group>
-
 				<group name="Glicko2">
 					<text name="Title" value="Glicko-2 rankings" tooltip="Glicko-2 rankings for locally registered players" />
-					<group name="Header">
-						<text name="Mean" value="Mean"  tooltip="Mean level" />
-						<text name="Roundcount" value="Played"  tooltip="Number of rounds played since the last update" />
-						<text name="StandardDeviation" value="Standard-deviation"  tooltip="Standard-deviation" />
-						<text name="Volatility" value="Volatility"  tooltip="Player volatility" />
-					</group>
 				</group>
-
 				<group name="Scores">
 					<text name="Title" value="Score rankings" tooltip="Score rankings" />
-					<group name="Header">
-						<text name="Bombings" value="Bombings"  tooltip="Total number of players bombed" />
-						<text name="Bombeds" value="Bombeds"  tooltip="Total number of times the player was bombed" />
-						<text name="Bombs" value="Bombs"  tooltip="Total number of bombs dropped" />
-						<text name="Crowns" value="Crowns"  tooltip="Total number of crowns gathered" />
-						<text name="Items" value="Items"  tooltip="Total number of items gathered" />
-						<text name="Paintings" value="Paintings"  tooltip="Total number of tiles painted" />
-					</group>
 				</group>
-
 				<group name="Confrontations">
 					<text name="Title" value="Confrontations rankings" tooltip="Confrontation rankings" />
-					<group name="Header">
-						<text name="RoundsDrawn" value="Drawn rounds"  tooltip="Total number of drawn rounds" />
-						<text name="RoundsLost" value="Lost rounds"  tooltip="Total number of lost rounds" />
-						<text name="RoundsPlayed" value="Total rounds"  tooltip="Total number of played rounds" />
-						<text name="RoundsWon" value="Won rounds"  tooltip="Total number of rounds wons" />
-						<text name="TimePlayed" value="Total time"  tooltip="Total time played" />
-					</group>
 				</group>
 			</group>
 		</group>
@@ -967,6 +928,61 @@
 			<text name="LevelFolder" value="Level"  tooltip="Level name for this round" />
 			<text name="LevelPack" value="Package"  tooltip="Level package for this round" />
 			<text name="Title" value="Title" tooltip="Name of this round" />
+		</group>
+
+<!-- STATISTICS -->	
+		<group name="Statistics">
+			<group name="Player">
+				<group name="Common">
+					<group name="Header">
+						<text name="Name" value="Name"  tooltip="Player name" />
+						<text name="Portrait" value="Character"  tooltip="Player character" />
+						<text name="Rank" value="#"  tooltip="Player ranking" />
+						<text name="Type" value="Human/Computer"  tooltip="Human or computer-controlled" />
+					</group>
+					<group name="Data">
+						<text name="Computer" value="Computer"  tooltip="Computer-controlled player" />
+						<text name="Human" value="Human"  tooltip="Human player" />
+						<text name="NoRank" value="-"  tooltip="This player is not ranked" />
+					</group>
+					<group name="Button">
+						<text name="Register" value="Register"  tooltip="Register the player to the ranking system" />
+						<text name="Unregister" value="Unregister"  tooltip="Unregister the player from the ranking system" />
+						<text name="Next" value="Next page"  tooltip="Go to the next ranking page" />
+						<text name="Previous" value="Previous page"  tooltip="Go to the previous ranking page" />
+					</group>
+				</group>
+
+				<group name="Glicko2">
+					<group name="Header">
+						<text name="Mean" value="Mean"  tooltip="Mean level" />
+						<text name="Roundcount" value="Played"  tooltip="Number of rounds played since the last update" />
+						<text name="StandardDeviation" value="Standard-deviation"  tooltip="Standard-deviation" />
+						<text name="Volatility" value="Volatility"  tooltip="Player volatility" />
+					</group>
+				</group>
+
+				<group name="Scores">
+					<group name="Header">
+						<text name="Bombings" value="Bombings"  tooltip="Total number of players bombed" />
+						<text name="Bombeds" value="Bombeds"  tooltip="Total number of times the player was bombed" />
+						<text name="Bombs" value="Bombs"  tooltip="Total number of bombs dropped" />
+						<text name="Crowns" value="Crowns"  tooltip="Total number of crowns gathered" />
+						<text name="Items" value="Items"  tooltip="Total number of items gathered" />
+						<text name="Paintings" value="Paintings"  tooltip="Total number of tiles painted" />
+					</group>
+				</group>
+
+				<group name="Confrontations">
+					<group name="Header">
+						<text name="RoundsDrawn" value="Drawn rounds"  tooltip="Total number of drawn rounds" />
+						<text name="RoundsLost" value="Lost rounds"  tooltip="Total number of lost rounds" />
+						<text name="RoundsPlayed" value="Total rounds"  tooltip="Total number of played rounds" />
+						<text name="RoundsWon" value="Won rounds"  tooltip="Total number of rounds wons" />
+						<text name="TimePlayed" value="Total time"  tooltip="Total time played" />
+					</group>
+				</group>
+			</group>
 		</group>
 
 <!-- SPRITE  -->
