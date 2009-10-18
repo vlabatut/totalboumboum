@@ -47,8 +47,8 @@ import fr.free.totalboumboum.gui.common.content.subpanel.transfer.TransferSubPan
 import fr.free.totalboumboum.gui.common.structure.panel.SplitMenuPanel;
 import fr.free.totalboumboum.gui.common.structure.panel.data.EntitledDataPanel;
 import fr.free.totalboumboum.gui.common.structure.subpanel.BasicPanel;
-import fr.free.totalboumboum.gui.common.structure.subpanel.outside.ImageSubPanel;
-import fr.free.totalboumboum.gui.common.structure.subpanel.outside.SubPanel.Mode;
+import fr.free.totalboumboum.gui.common.structure.subpanel.container.ImageSubPanel;
+import fr.free.totalboumboum.gui.common.structure.subpanel.container.SubPanel.Mode;
 import fr.free.totalboumboum.gui.data.configuration.GuiConfiguration;
 import fr.free.totalboumboum.gui.tools.GuiKeys;
 import fr.free.totalboumboum.gui.tools.GuiTools;

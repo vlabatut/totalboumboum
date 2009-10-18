@@ -39,8 +39,8 @@ import fr.free.totalboumboum.game.tournament.cup.CupPart;
 import fr.free.totalboumboum.game.tournament.cup.CupTournament;
 import fr.free.totalboumboum.gui.common.content.subpanel.part.PartSubPanel;
 import fr.free.totalboumboum.gui.common.content.subpanel.part.PartSubPanelListener;
-import fr.free.totalboumboum.gui.common.structure.subpanel.inside.EmptyContentPanel;
-import fr.free.totalboumboum.gui.common.structure.subpanel.outside.EmptySubPanel;
+import fr.free.totalboumboum.gui.common.structure.subpanel.container.EmptySubPanel;
+import fr.free.totalboumboum.gui.common.structure.subpanel.content.EmptyContentPanel;
 import fr.free.totalboumboum.gui.tools.GuiKeys;
 import fr.free.totalboumboum.gui.tools.GuiTools;
 
@@ -49,7 +49,10 @@ public class LegSubPanel extends EmptySubPanel implements MouseListener, PartSub
 
 	public LegSubPanel(int width, int height)
 	{	super(width,height,Mode.BORDER);
+	
+		// set panel
 		EmptyContentPanel dataPanel = getDataPanel();
+		dataPanel.setOpaque(false);
 	
 		// background
 		{	Color bg = GuiTools.COLOR_COMMON_BACKGROUND;
@@ -71,8 +74,6 @@ public class LegSubPanel extends EmptySubPanel implements MouseListener, PartSub
 		int externalButtonsWidth = (buttonsWidth - 2*GuiTools.subPanelMargin)/3;
 		int centralButtonWidth = buttonsWidth - 2*GuiTools.subPanelMargin - 2*externalButtonsWidth;
 		
-		dataPanel.setOpaque(false);
-
 		// buttons up panel
 		{	upPanel = new JPanel();
 			upPanel.setOpaque(false);

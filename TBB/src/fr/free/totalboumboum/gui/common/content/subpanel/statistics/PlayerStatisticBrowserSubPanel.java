@@ -36,15 +36,18 @@ import java.util.Locale;
 import java.util.TreeSet;
 import java.util.Map.Entry;
 
+import javax.swing.BoxLayout;
 import javax.swing.JLabel;
 import javax.xml.parsers.ParserConfigurationException;
 
 import org.xml.sax.SAXException;
 
-import fr.free.totalboumboum.gui.common.structure.subpanel.inside.TableContentPanel;
-import fr.free.totalboumboum.gui.common.structure.subpanel.outside.LinesSubPanel;
-import fr.free.totalboumboum.gui.common.structure.subpanel.outside.SubPanel;
-import fr.free.totalboumboum.gui.common.structure.subpanel.outside.TableSubPanel;
+import fr.free.totalboumboum.gui.common.structure.subpanel.container.EmptySubPanel;
+import fr.free.totalboumboum.gui.common.structure.subpanel.container.LinesSubPanel;
+import fr.free.totalboumboum.gui.common.structure.subpanel.container.SubPanel;
+import fr.free.totalboumboum.gui.common.structure.subpanel.container.TableSubPanel;
+import fr.free.totalboumboum.gui.common.structure.subpanel.content.EmptyContentPanel;
+import fr.free.totalboumboum.gui.common.structure.subpanel.content.TableContentPanel;
 import fr.free.totalboumboum.gui.tools.GuiKeys;
 import fr.free.totalboumboum.gui.tools.GuiTools;
 import fr.free.totalboumboum.statistics.GameStatistics;
@@ -52,12 +55,30 @@ import fr.free.totalboumboum.statistics.detailed.Score;
 import fr.free.totalboumboum.statistics.general.PlayerStats;
 import fr.free.totalboumboum.statistics.glicko2.jrs.RankingService;
 
-public class PlayerStatisticBrowserSubPanel extends LinesSubPanel implements MouseListener, PlayerStatisticsSubPanelListener
+public class PlayerStatisticBrowserSubPanel extends EmptySubPanel implements MouseListener, PlayerStatisticsSubPanelListener
 {	private static final long serialVersionUID = 1L;
 	private static final int LINES = 2;
 
 	public PlayerStatisticBrowserSubPanel(int width, int height)
-	{	super(width,height,SubPanel.Mode.BORDER,LINES,1,false);
+	{	super(width,height,SubPanel.Mode.BORDER);
+
+		// set panel
+		EmptyContentPanel dataPanel = getDataPanel();
+		dataPanel.setOpaque(false);
+		
+		// background
+		{	Color bg = GuiTools.COLOR_COMMON_BACKGROUND;
+			setBackground(bg);
+		}
+		
+		// layout
+		{	BoxLayout layout = new BoxLayout(dataPanel,BoxLayout.PAGE_AXIS); 
+			dataPanel.setLayout(layout);
+		}
+		
+		// sizes
+		buttonHeight = GuiTools.subPanelTitleHeight;
+		subpanelHeight = getDataHeight() - buttonHeight - GuiTools.panelMargin;
 		
 		// pages
 		setPlayersIds(null,16);
@@ -73,6 +94,8 @@ public class PlayerStatisticBrowserSubPanel extends LinesSubPanel implements Mou
 	private ArrayList<PlayerStatisticsSubPanel> listPanels;
 	private int pageCount;	
 	private int lines;
+	private int buttonHeight;
+	private int subpanelHeight;
 	
 	public List<Integer> getPlayersIds()
 	{	return playersIds;	
@@ -89,8 +112,6 @@ public class PlayerStatisticBrowserSubPanel extends LinesSubPanel implements Mou
 		
 		// size
 		pageCount = getPageCount();
-		int menuHeight = (int)(1.5*(getDataHeight() - lines*GuiTools.panelMargin)/(lines+1));
-		int panelHeight = getDataHeight() - menuHeight - GuiTools.panelMargin;
 		
 		// sorting players
 		TreeSet<Integer> temp = new TreeSet<Integer>(comparator);
@@ -108,7 +129,7 @@ public class PlayerStatisticBrowserSubPanel extends LinesSubPanel implements Mou
 				i++;
 			}
 			// build the panel			
-			PlayerStatisticsSubPanel panel = new PlayerStatisticsSubPanel(getDataWidth(),panelHeight);
+			PlayerStatisticsSubPanel panel = new PlayerStatisticsSubPanel(getDataWidth(),subpanelHeight);
 			try
 			{	panel.setPlayerIds(idList,lines);
 			}
@@ -153,16 +174,15 @@ public class PlayerStatisticBrowserSubPanel extends LinesSubPanel implements Mou
 	}		
 	
 	private void refreshList()
-	{	PlayerStatisticsSubPanel p = listPanels.get(currentPage);
-		setDataPanel(p);
+	{	setPlayersIds(playersIds,lines);
+		PlayerStatisticsSubPanel p = listPanels.get(currentPage);
+		
 		validate();
 		repaint();
 	}
 	
 	public void refresh()
-	{	String selectedFileName = getSelectedFileName();
-		setFileNames(fileNames);
-		setSelectedFileName(selectedFileName);
+	{	setPlayersIds(playersIds,lines);
 	}
 
 	/////////////////////////////////////////////////////////////////

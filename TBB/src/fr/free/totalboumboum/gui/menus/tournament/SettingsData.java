@@ -36,8 +36,8 @@ import fr.free.totalboumboum.gui.common.content.subpanel.tournament.TournamentMi
 import fr.free.totalboumboum.gui.common.structure.panel.SplitMenuPanel;
 import fr.free.totalboumboum.gui.common.structure.panel.data.EntitledDataPanel;
 import fr.free.totalboumboum.gui.common.structure.subpanel.BasicPanel;
-import fr.free.totalboumboum.gui.common.structure.subpanel.outside.TableSubPanel;
-import fr.free.totalboumboum.gui.common.structure.subpanel.outside.SubPanel.Mode;
+import fr.free.totalboumboum.gui.common.structure.subpanel.container.TableSubPanel;
+import fr.free.totalboumboum.gui.common.structure.subpanel.container.SubPanel.Mode;
 import fr.free.totalboumboum.gui.menus.tournament.select.SelectTournamentSplitPanel;
 import fr.free.totalboumboum.gui.tools.GuiKeys;
 import fr.free.totalboumboum.gui.tools.GuiTools;

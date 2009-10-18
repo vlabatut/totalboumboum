@@ -1037,6 +1037,8 @@ public class Launcher
 	 *  - écran stats
 	 *  	- rajouter les stats de base (nombre de matches joués, etc)
 	 *  	- possibilité d'enregistrer/déregistrer un joueur dans le classement glicko-2
-	 *  - considérer le fait de séparer les suicide des bombeds-bombings 
+	 *  - considérer le fait de séparer les suicide des bombeds-bombings
+	 *  - possibilité d'avance-rapide sur les matches à IA only
+	 *  - possibilité de configurer l'UPS des IA dans la GUI 
 	 */
 }

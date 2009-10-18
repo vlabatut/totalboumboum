@@ -45,8 +45,8 @@ import fr.free.totalboumboum.gui.common.content.subpanel.players.PlayersSelectio
 import fr.free.totalboumboum.gui.common.structure.panel.SplitMenuPanel;
 import fr.free.totalboumboum.gui.common.structure.panel.data.EntitledDataPanel;
 import fr.free.totalboumboum.gui.common.structure.subpanel.BasicPanel;
-import fr.free.totalboumboum.gui.common.structure.subpanel.outside.TableSubPanel;
-import fr.free.totalboumboum.gui.common.structure.subpanel.outside.SubPanel.Mode;
+import fr.free.totalboumboum.gui.common.structure.subpanel.container.TableSubPanel;
+import fr.free.totalboumboum.gui.common.structure.subpanel.container.SubPanel.Mode;
 import fr.free.totalboumboum.gui.menus.options.game.quickstart.hero.SelectHeroSplitPanel;
 import fr.free.totalboumboum.gui.menus.options.game.quickstart.profile.SelectProfileSplitPanel;
 import fr.free.totalboumboum.gui.menus.options.game.quickstart.round.SelectRoundSplitPanel;

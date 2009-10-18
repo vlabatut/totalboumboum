@@ -39,9 +39,9 @@ import fr.free.totalboumboum.gui.common.content.subpanel.file.PackBrowserSubPane
 import fr.free.totalboumboum.gui.common.structure.panel.SplitMenuPanel;
 import fr.free.totalboumboum.gui.common.structure.panel.data.EntitledDataPanel;
 import fr.free.totalboumboum.gui.common.structure.subpanel.BasicPanel;
-import fr.free.totalboumboum.gui.common.structure.subpanel.inside.TextContentPanel;
-import fr.free.totalboumboum.gui.common.structure.subpanel.outside.TextSubPanel;
-import fr.free.totalboumboum.gui.common.structure.subpanel.outside.SubPanel.Mode;
+import fr.free.totalboumboum.gui.common.structure.subpanel.container.TextSubPanel;
+import fr.free.totalboumboum.gui.common.structure.subpanel.container.SubPanel.Mode;
+import fr.free.totalboumboum.gui.common.structure.subpanel.content.TextContentPanel;
 import fr.free.totalboumboum.gui.tools.GuiKeys;
 import fr.free.totalboumboum.gui.tools.GuiTools;
 import fr.free.totalboumboum.tools.FileTools;

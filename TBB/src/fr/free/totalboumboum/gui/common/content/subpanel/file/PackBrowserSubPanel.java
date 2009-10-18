@@ -37,9 +37,9 @@ import java.util.Locale;
 
 import javax.swing.JLabel;
 
-import fr.free.totalboumboum.gui.common.structure.subpanel.inside.TableContentPanel;
-import fr.free.totalboumboum.gui.common.structure.subpanel.outside.SubPanel;
-import fr.free.totalboumboum.gui.common.structure.subpanel.outside.TableSubPanel;
+import fr.free.totalboumboum.gui.common.structure.subpanel.container.SubPanel;
+import fr.free.totalboumboum.gui.common.structure.subpanel.container.TableSubPanel;
+import fr.free.totalboumboum.gui.common.structure.subpanel.content.TableContentPanel;
 import fr.free.totalboumboum.gui.tools.GuiKeys;
 import fr.free.totalboumboum.gui.tools.GuiTools;
 
