@@ -26,6 +26,7 @@ import java.util.HashMap;
 
 import fr.free.totalboumboum.statistics.detailed.Score;
 import fr.free.totalboumboum.tools.StringTools;
+import fr.free.totalboumboum.tools.StringTools.TimeUnit;
 
 public class PlayerStats implements Serializable
 {	private static final long serialVersionUID = 1L;
@@ -124,7 +125,7 @@ public class PlayerStats implements Serializable
 		for(Score score: Score.values())
 		{	String text = Long.toString(scores.get(score));
 			if(score==Score.TIME)
-				text = StringTools.formatTimeWithSeconds(scores.get(score));
+				text = StringTools.formatTime(scores.get(score),TimeUnit.HOUR,TimeUnit.MILLISECOND);
 			result = result+" "+score.toString()+": "+text;
 		}
 		return result;

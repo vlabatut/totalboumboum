@@ -37,6 +37,7 @@ import fr.free.totalboumboum.gui.data.configuration.GuiConfiguration;
 import fr.free.totalboumboum.gui.tools.GuiKeys;
 import fr.free.totalboumboum.gui.tools.GuiTools;
 import fr.free.totalboumboum.tools.StringTools;
+import fr.free.totalboumboum.tools.StringTools.TimeUnit;
 
 public class RoundQuickConfigSubPanel extends LinesSubPanel implements MouseListener
 {	private static final long serialVersionUID = 1L;
@@ -379,7 +380,7 @@ public class RoundQuickConfigSubPanel extends LinesSubPanel implements MouseList
 		if(time<=0)
 			text = new Character('\u221E').toString();
 		else 
-			text = StringTools.formatTimeWithSeconds(time);
+			text = StringTools.formatTime(time,TimeUnit.SECOND,TimeUnit.MILLISECOND);
 		String tooltip = text;
 		getLine(LINE_TIME_LIMIT).setLabelText(2,text,tooltip);
 	}

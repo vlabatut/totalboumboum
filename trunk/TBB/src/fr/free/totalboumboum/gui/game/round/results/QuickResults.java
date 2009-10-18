@@ -41,6 +41,7 @@ import fr.free.totalboumboum.gui.tools.GuiTools;
 import fr.free.totalboumboum.statistics.detailed.Score;
 import fr.free.totalboumboum.statistics.detailed.StatisticRound;
 import fr.free.totalboumboum.tools.StringTools;
+import fr.free.totalboumboum.tools.StringTools.TimeUnit;
 
 public class QuickResults extends JPanel
 {	
@@ -173,7 +174,7 @@ sc = "Time";
 							break;
 					}
 */					
-sc = StringTools.formatTimeWithSeconds(stats.getScores(Score.TIME)[profileIndex]);
+sc = StringTools.formatTime(stats.getScores(Score.TIME)[profileIndex],TimeUnit.SECOND,TimeUnit.MILLISECOND);
 					String[] scores = 
 					{	nf.format(stats.getScores(Score.BOMBS)[profileIndex]),
 						nf.format(stats.getScores(Score.ITEMS)[profileIndex]),

@@ -28,10 +28,10 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
-import java.util.TreeSet;
 
 import javax.swing.Box;
 import javax.swing.BoxLayout;
@@ -172,17 +172,14 @@ public class PlayerStatisticBrowserSubPanel extends EmptySubPanel implements Mou
 			currentPage = pageCount-1;
 		
 		// sorting players
-		TreeSet<Integer> temp = new TreeSet<Integer>(comparator);
-		for(Integer playerId:playersIds)
-			temp.add(playerId);
-		List<Integer> sortedPlayersIds;;
+		List<Integer> sortedPlayersIds = new ArrayList<Integer>(playersIds);
+		Collections.sort(sortedPlayersIds,comparator);
 		if(inverted)
-		{	sortedPlayersIds = new ArrayList<Integer>();
+		{	List<Integer> temp = sortedPlayersIds;
+			sortedPlayersIds = new ArrayList<Integer>();
 			for(Integer i: temp)
 				sortedPlayersIds.add(0,i);
 		}
-		else
-			sortedPlayersIds = new ArrayList<Integer>(temp);
 		
 		// building all pages
 		int index = 0;

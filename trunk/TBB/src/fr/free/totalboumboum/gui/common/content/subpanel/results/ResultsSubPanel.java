@@ -43,6 +43,7 @@ import fr.free.totalboumboum.statistics.detailed.Score;
 import fr.free.totalboumboum.statistics.detailed.StatisticBase;
 import fr.free.totalboumboum.statistics.detailed.StatisticHolder;
 import fr.free.totalboumboum.tools.StringTools;
+import fr.free.totalboumboum.tools.StringTools.TimeUnit;
 
 public class ResultsSubPanel extends TableSubPanel
 {	private static final long serialVersionUID = 1L;
@@ -232,7 +233,7 @@ public class ResultsSubPanel extends TableSubPanel
 				}			
 				// time
 				if(showTime)
-				{	String text = StringTools.formatTimeWithSeconds(stats.getScores(Score.TIME)[profileIndex]);
+				{	String text = StringTools.formatTime(stats.getScores(Score.TIME)[profileIndex],TimeUnit.SECOND,TimeUnit.MILLISECOND);
 					String tooltip = text;
 					setLabelText(line,col,text,tooltip);
 					int alpha = GuiTools.ALPHA_TABLE_REGULAR_BACKGROUND_LEVEL1;
