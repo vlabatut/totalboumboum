@@ -51,6 +51,7 @@ import fr.free.totalboumboum.gui.common.structure.subpanel.container.TableSubPan
 import fr.free.totalboumboum.gui.tools.GuiKeys;
 import fr.free.totalboumboum.gui.tools.GuiTools;
 import fr.free.totalboumboum.tools.StringTools;
+import fr.free.totalboumboum.tools.StringTools.TimeUnit;
 
 public class PlayerStatisticsSubPanel extends TableSubPanel implements MouseListener
 {	private static final long serialVersionUID = 1L;
@@ -85,6 +86,7 @@ public class PlayerStatisticsSubPanel extends TableSubPanel implements MouseList
 			playerIds = new ArrayList<Integer>();		
 		this.playerIds = playerIds;
 		this.lines = lines;
+		lines = lines + 1;
 		
 		// sizes
 		int cols = COLS;
@@ -112,7 +114,7 @@ public class PlayerStatisticsSubPanel extends TableSubPanel implements MouseList
 			cols++;
 		if(showTimePlayed) 
 			cols++;
-		reinit(lines+1,cols);
+		reinit(lines,cols);
 		rankCriterions = new RankCriterion[cols];
 		
 		// col widths
@@ -261,7 +263,7 @@ public class PlayerStatisticsSubPanel extends TableSubPanel implements MouseList
 			nfTooltip.setMaximumFractionDigits(6);
 			// process each playerId
 			int line = 1;
-			while(line<=lines && line<=playerIds.size())
+			while(line<lines && line<=playerIds.size())
 			{	// init
 				int col = 0;
 				int playerId = playerIds.get(line-1);
@@ -280,7 +282,6 @@ public class PlayerStatisticsSubPanel extends TableSubPanel implements MouseList
 					else
 						key = GuiKeys.COMMON_STATISTICS_PLAYER_COMMON_BUTTON_UNREGISTER;
 					setLabelKey(line,col,key,true);
-					col++;
 					JLabel label = getLabel(line,col);
 					label.addMouseListener(this);
 					col++;
@@ -371,10 +372,10 @@ public class PlayerStatisticsSubPanel extends TableSubPanel implements MouseList
 				// scores
 				if(showScores)
 				{	String[] scores = 
-					{	nfText.format(playerStats.getScore(Score.BOMBS)),
-						nfText.format(playerStats.getScore(Score.ITEMS)),
-						nfText.format(playerStats.getScore(Score.BOMBEDS)),
-						nfText.format(playerStats.getScore(Score.BOMBINGS)),
+					{	Long.toString(playerStats.getScore(Score.BOMBS)),
+						Long.toString(playerStats.getScore(Score.ITEMS)),
+						Long.toString(playerStats.getScore(Score.BOMBEDS)),
+						Long.toString(playerStats.getScore(Score.BOMBINGS)),
 					};
 					for(int j=0;j<scores.length;j++)
 					{	String text = scores[j];
@@ -433,8 +434,8 @@ public class PlayerStatisticsSubPanel extends TableSubPanel implements MouseList
 				// time played
 				if(showTimePlayed)
 				{	long timePlayed = playerStats.getScore(Score.TIME);
-					String text = StringTools.formatTimeWithSeconds(timePlayed);
-					String tooltip = text;
+					String text = StringTools.formatTime(timePlayed,TimeUnit.HOUR,TimeUnit.MINUTE);
+					String tooltip = StringTools.formatTime(timePlayed,TimeUnit.HOUR,TimeUnit.MILLISECOND);
 					setLabelText(line,col,text,tooltip);
 					int temp = GuiTools.getPixelWidth(getLineFontSize(),text);
 					if(temp>timePlayedWidth)

@@ -31,30 +31,48 @@ import fr.free.totalboumboum.game.GameData;
 
 public class StringTools
 {
-	public static String formatTimeWithHours(long time)
-	{	String result;
-		NumberFormat nf = NumberFormat.getInstance();
-		nf.setMinimumIntegerDigits(2);
-		String hours = nf.format(time/3600000);	time = time%3600000;
-		String minutes = nf.format(time/60000);	time = time%60000;
-		String seconds = nf.format(time/1000);	time = time%1000;
-		nf = NumberFormat.getInstance();
-		nf.setMinimumIntegerDigits(3);
-		String milliseconds = nf.format(time);
-		result = hours+"h"+minutes+"m"+seconds+"s"+milliseconds+"ms";
+	public static String formatTime(long time, TimeUnit biggest, TimeUnit smallest)
+	{	String result = null;
+		if(biggest.compareTo(smallest)>0)
+		{	result = "";
+			NumberFormat nf = NumberFormat.getInstance();
+			nf.setMinimumIntegerDigits(2);
+			nf = NumberFormat.getInstance();
+			if(biggest==TimeUnit.HOUR)
+			{	String hours = nf.format(time/3600000);
+				time = time%3600000;			
+				result = result + hours+"h";
+			}
+			if(biggest==TimeUnit.MINUTE || smallest==TimeUnit.MINUTE || (biggest.compareTo(TimeUnit.MINUTE)>0 && smallest.compareTo(TimeUnit.MINUTE)<0))
+			{	String minutes = nf.format(time/60000);
+				time = time%60000;
+				result = result + minutes;
+				if(biggest==TimeUnit.MINUTE || smallest!=TimeUnit.MINUTE)
+					result = result+"m";
+			}
+			if(biggest==TimeUnit.SECOND || smallest==TimeUnit.SECOND || (biggest.compareTo(TimeUnit.SECOND)>0 && smallest.compareTo(TimeUnit.SECOND)<0))
+			{	String seconds = nf.format(time/1000);
+				time = time%1000;
+				result = result + seconds;
+				if(biggest==TimeUnit.SECOND || smallest!=TimeUnit.SECOND)
+					result = result+"s";
+			}
+			if(smallest==TimeUnit.MILLISECOND)
+			{	nf.setMinimumIntegerDigits(3);
+				String milliseconds = nf.format(time);
+				result = result + milliseconds;
+				if(biggest==TimeUnit.MILLISECOND)
+					result = result+"ms";
+			}
+		}
 		return result;
 	}
 
-	public static String formatTimeWithSeconds(long time)
-	{	String result;
-		NumberFormat nf = NumberFormat.getInstance();
-		nf.setMinimumIntegerDigits(2);
-		String seconds = nf.format(time/1000);	time = time%1000;
-		nf = NumberFormat.getInstance();
-		nf.setMinimumIntegerDigits(3);
-		String milliseconds = nf.format(time);
-		result = seconds+"''"+milliseconds;
-		return result;
+	public enum TimeUnit
+	{	MILLISECOND,
+		SECOND,
+		MINUTE,
+		HOUR;
 	}
 	
 	public static String formatAllowedPlayerNumbers(Set<Integer> playerNumbers)

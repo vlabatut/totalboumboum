@@ -1034,11 +1034,14 @@ public class Launcher
 	 * 
 	 * 	- créer un log des commandes (désactivable)
 	 *  - faire une option qui enchaîne automatiquement les rounds/matches d'un match/tournoi
-	 *  - écran stats
-	 *  	- rajouter les stats de base (nombre de matches joués, etc)
-	 *  	- possibilité d'enregistrer/déregistrer un joueur dans le classement glicko-2
 	 *  - considérer le fait de séparer les suicide des bombeds-bombings
 	 *  - possibilité d'avance-rapide sur les matches à IA only
 	 *  - possibilité de configurer l'UPS des IA dans la GUI 
+	 *  - écran stats
+	 *  	- boutons marchent pas
+	 *  	- ça rame
+	 *  	- init tout surchargé
+	 *  	- icones AI/Humain pas reconnues
+	 *  	- icone de la moyenne à rabaisser au niveau des autres (stdev et volat)
 	 */
 }

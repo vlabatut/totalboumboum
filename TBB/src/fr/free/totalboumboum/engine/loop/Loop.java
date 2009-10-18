@@ -82,6 +82,7 @@ import fr.free.totalboumboum.statistics.detailed.StatisticEvent;
 import fr.free.totalboumboum.tools.CalculusTools;
 import fr.free.totalboumboum.tools.FileTools;
 import fr.free.totalboumboum.tools.StringTools;
+import fr.free.totalboumboum.tools.StringTools.TimeUnit;
 
 public class Loop implements Runnable, Serializable
 {	private static final long serialVersionUID = 1L;
@@ -944,7 +945,7 @@ System.out.println();
 			g.setFont(font);
 			FontMetrics metrics = g.getFontMetrics(font);
 			long time = getTotalTime();
-			String text = "Time: "+StringTools.formatTimeWithHours(time);
+			String text = "Time: "+StringTools.formatTime(time,TimeUnit.HOUR,TimeUnit.MILLISECOND);
 			Rectangle2D box = metrics.getStringBounds(text, g);
 			int x = 10;
 			int y = (int)Math.round(30+box.getHeight()/2);
