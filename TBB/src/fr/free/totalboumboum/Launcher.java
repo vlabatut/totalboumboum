@@ -1037,11 +1037,12 @@ public class Launcher
 	 *  - considérer le fait de séparer les suicide des bombeds-bombings
 	 *  - possibilité d'avance-rapide sur les matches à IA only
 	 *  - possibilité de configurer l'UPS des IA dans la GUI 
+	 *  - est-ce que le quick mode gère les stats ??
 	 *  - écran stats
-	 *  	- boutons marchent pas
+	 *  	- boutons en-tête marchent pas
 	 *  	- ça rame
-	 *  	- init tout surchargé
-	 *  	- icones AI/Humain pas reconnues
 	 *  	- icone de la moyenne à rabaisser au niveau des autres (stdev et volat)
+	 *  	- toogle boutons  pas de la bonne taille dans le menu
+	 *  	>> faut tout mettre dans une seule classe, c'est trop la merde d'avoir décomposer en deux classes, en fait.
 	 */
 }

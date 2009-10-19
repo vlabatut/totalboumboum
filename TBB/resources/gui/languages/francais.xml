@@ -947,6 +947,8 @@
 						<text name="Computer" value="Ordinateur"  tooltip="Joueur contrôlé par l'ordinateur" />
 						<text name="Human" value="Humain"  tooltip="Joueur contrôlé par un être humain" />
 						<text name="NoRank" value="-"  tooltip="Ce joueur n'est pas classé" />
+						<text name="Mean" value="Moy."  />
+						<text name="Total" value="Total"  />
 					</group>
 					<group name="Button">
 						<text name="Register" value="Ajouter"  tooltip="Ajouter le joueur dans le classement" />
@@ -959,7 +961,7 @@
 				<group name="Glicko2">
 					<group name="Header">
 						<text name="Mean" value="Moyenne"  tooltip="Moyenne" />
-						<text name="Roundcount" value="Joués"  tooltip="Nombre de manches jouées depuis la dernière mise-à-jour" />
+						<text name="RoundCount" value="Joués"  tooltip="Nombre de manches jouées depuis la dernière mise-à-jour" />
 						<text name="StandardDeviation" value="Écart-type"  tooltip="Écart-type" />
 						<text name="Volatility" value="Régularité"  tooltip="Régularité du joueur" />
 					</group>

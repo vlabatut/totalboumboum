@@ -773,7 +773,8 @@ public class GuiTools
 				GuiKeys.COMMON_RESULTS_TOURNAMENT_DATA_COMPUTER,
 				GuiKeys.COMMON_RESULTS_MATCH_DATA_COMPUTER,
 				GuiKeys.COMMON_RESULTS_ROUND_DATA_COMPUTER,
-				GuiKeys.COMMON_PLAYERS_SELECTION_DATA_COMPUTER
+				GuiKeys.COMMON_PLAYERS_SELECTION_DATA_COMPUTER,
+				GuiKeys.COMMON_STATISTICS_PLAYER_COMMON_DATA_COMPUTER
 			};
 			loadTableImages(folder,uses);
 		}
@@ -832,7 +833,8 @@ public class GuiTools
 				GuiKeys.COMMON_RESULTS_TOURNAMENT_DATA_HUMAN,
 				GuiKeys.COMMON_RESULTS_MATCH_DATA_HUMAN,
 				GuiKeys.COMMON_RESULTS_ROUND_DATA_HUMAN,
-				GuiKeys.COMMON_PLAYERS_SELECTION_DATA_HUMAN
+				GuiKeys.COMMON_PLAYERS_SELECTION_DATA_HUMAN,
+				GuiKeys.COMMON_STATISTICS_PLAYER_COMMON_DATA_HUMAN
 			};
 			loadTableImages(folder,uses);
 		}
@@ -1341,6 +1343,7 @@ public class GuiTools
 	{	JButton result = new JButton();
 		initButton(result,name,width,height,panel);
 		result.setAlignmentX(Component.CENTER_ALIGNMENT);
+		result.setAlignmentY(Component.CENTER_ALIGNMENT);
 		// font
 		Font font = GuiConfiguration.getMiscConfiguration().getFont().deriveFont((float)fontSize);
 		result.setFont(font);
@@ -1351,6 +1354,7 @@ public class GuiTools
 	public static JToggleButton createToggleButton(String name, int width, int height, int fontSize, ButtonAware panel)
 	{	JToggleButton result = new JToggleButton();
 		initButton(result,name,width,height,panel);
+		result.setAlignmentX(Component.CENTER_ALIGNMENT);
 		result.setAlignmentY(Component.CENTER_ALIGNMENT);
 		// font
 		Font font = GuiConfiguration.getMiscConfiguration().getFont().deriveFont((float)fontSize);

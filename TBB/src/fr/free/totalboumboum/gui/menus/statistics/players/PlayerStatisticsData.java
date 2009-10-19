@@ -64,7 +64,7 @@ public class PlayerStatisticsData extends EntitledDataPanel
 	/////////////////////////////////////////////////////////////////
 	public void setView(String view)
 	{	if(view.equals(GuiKeys.MENU_STATISTICS_PLAYER_BUTTON_GLICKO2))
-		{	mainPanel.setShowPortrait(true);
+		{	mainPanel.setShowPortrait(false);
 			mainPanel.setShowType(true);
 			mainPanel.setShowMean(true);
 			mainPanel.setShowStdev(true);
@@ -78,7 +78,7 @@ public class PlayerStatisticsData extends EntitledDataPanel
 			mainPanel.setShowScores(false);			
 		}
 		else if(view.equals(GuiKeys.MENU_STATISTICS_PLAYER_BUTTON_SCORES))
-		{	mainPanel.setShowPortrait(true);
+		{	mainPanel.setShowPortrait(false);
 			mainPanel.setShowType(true);
 			mainPanel.setShowMean(false);
 			mainPanel.setShowStdev(false);
@@ -92,7 +92,7 @@ public class PlayerStatisticsData extends EntitledDataPanel
 			mainPanel.setShowScores(true);		
 		}
 		else if(view.equals(GuiKeys.MENU_STATISTICS_PLAYER_BUTTON_CONFRONTATIONS))
-		{	mainPanel.setShowPortrait(true);
+		{	mainPanel.setShowPortrait(false);
 			mainPanel.setShowType(true);
 			mainPanel.setShowMean(false);
 			mainPanel.setShowStdev(false);
