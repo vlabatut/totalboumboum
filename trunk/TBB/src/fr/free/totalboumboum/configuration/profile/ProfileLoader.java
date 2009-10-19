@@ -25,6 +25,7 @@ import java.io.File;
 import java.io.FileFilter;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
 
@@ -67,6 +68,15 @@ public class ProfileLoader
 		return result;
 	}
 
+	public static HashMap<Integer,Profile> loadProfiles(List<Integer> playersIds) throws IllegalArgumentException, SecurityException, ParserConfigurationException, SAXException, IOException, IllegalAccessException, NoSuchFieldException, ClassNotFoundException
+	{	HashMap<Integer,Profile> result = new HashMap<Integer, Profile>();
+		for(Integer playerId: playersIds)
+		{	Profile profile = loadProfile(playerId);
+			result.put(playerId,profile);
+		}
+		return result;
+	}
+	
 	public static Profile loadProfile(int id) throws ParserConfigurationException, SAXException, IOException, IllegalArgumentException, SecurityException, IllegalAccessException, NoSuchFieldException, ClassNotFoundException
 	{	String profilesFolder = FileTools.getProfilesPath();
 		File dataFile = new File(profilesFolder+File.separator+id+FileTools.EXTENSION_XML);

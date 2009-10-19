@@ -21,10 +21,17 @@ package fr.free.totalboumboum.gui.menus.statistics.players;
  * 
  */
 
+import java.io.IOException;
+import java.util.HashMap;
 import java.util.List;
 
+import javax.xml.parsers.ParserConfigurationException;
+
+import org.xml.sax.SAXException;
+
+import fr.free.totalboumboum.configuration.profile.Profile;
 import fr.free.totalboumboum.configuration.profile.ProfileLoader;
-import fr.free.totalboumboum.gui.common.content.subpanel.statistics.PlayerStatisticBrowserSubPanel;
+import fr.free.totalboumboum.gui.common.content.subpanel.statistics.PlayerStatisticSubPanel;
 import fr.free.totalboumboum.gui.common.structure.panel.SplitMenuPanel;
 import fr.free.totalboumboum.gui.common.structure.panel.data.EntitledDataPanel;
 import fr.free.totalboumboum.gui.tools.GuiKeys;
@@ -34,7 +41,7 @@ public class PlayerStatisticsData extends EntitledDataPanel
 	private static final long serialVersionUID = 1L;
 	
 	private static final int LINES = 16;
-	private PlayerStatisticBrowserSubPanel mainPanel;
+	private PlayerStatisticSubPanel mainPanel;
 	
 	public PlayerStatisticsData(SplitMenuPanel container)
 	{	super(container);
@@ -44,13 +51,41 @@ public class PlayerStatisticsData extends EntitledDataPanel
 		
 		// data
 		{	// create panel
-			mainPanel = new PlayerStatisticBrowserSubPanel(dataWidth,dataHeight);
+			mainPanel = new PlayerStatisticSubPanel(dataWidth,dataHeight);
 			setDataPart(mainPanel);
 			
 			// set players ids
 			setView(GuiKeys.MENU_STATISTICS_PLAYER_BUTTON_GLICKO2);
 			List<Integer> playersIds = ProfileLoader.getIdsList();
-			mainPanel.setPlayersIds(playersIds,LINES);
+			HashMap<Integer, Profile> profilesMap;
+			try
+			{	profilesMap = ProfileLoader.loadProfiles(playersIds);
+				mainPanel.setPlayersIds(profilesMap,LINES);
+			}
+			catch (IllegalArgumentException e)
+			{	e.printStackTrace();
+			}
+			catch (SecurityException e)
+			{	e.printStackTrace();
+			}
+			catch (ParserConfigurationException e)
+			{	e.printStackTrace();
+			}
+			catch (SAXException e)
+			{	e.printStackTrace();
+			}
+			catch (IOException e)
+			{	e.printStackTrace();
+			}
+			catch (IllegalAccessException e)
+			{	e.printStackTrace();
+			}
+			catch (NoSuchFieldException e)
+			{	e.printStackTrace();
+			}
+			catch (ClassNotFoundException e)
+			{	e.printStackTrace();
+			}
 		}
 	}
 
@@ -63,7 +98,9 @@ public class PlayerStatisticsData extends EntitledDataPanel
 	// MENU INTERACTION				/////////////////////////////////
 	/////////////////////////////////////////////////////////////////
 	public void setView(String view)
-	{	if(view.equals(GuiKeys.MENU_STATISTICS_PLAYER_BUTTON_GLICKO2))
+	{	HashMap<Integer,Profile> profiles = mainPanel.getPlayersProfiles();
+		mainPanel.setPlayersIds(null,LINES);
+		if(view.equals(GuiKeys.MENU_STATISTICS_PLAYER_BUTTON_GLICKO2))
 		{	mainPanel.setShowPortrait(false);
 			mainPanel.setShowType(true);
 			mainPanel.setShowMean(true);
@@ -105,5 +142,6 @@ public class PlayerStatisticsData extends EntitledDataPanel
 			mainPanel.setShowTimePlayed(true);
 			mainPanel.setShowScores(false);		
 		}
+		mainPanel.setPlayersIds(profiles,LINES);		
 	}
 }
