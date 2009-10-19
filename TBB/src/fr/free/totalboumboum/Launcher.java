@@ -1042,5 +1042,9 @@ public class Launcher
 	 *  - écran stats
 	 *  	- boutons suppression marchent pas non plus >> deregisterPlayer pas implémentée
 	 *  	- accélérer encore l'affichage des données ?
+	 *  	- options pour les stats ?
+	 *  		- bouton pour réinitialiser les stats
+	 *  		- paramètres de glicko2
+	 *  	- mettre en plus clair les exclus du classement glicko
 	 */
 }
