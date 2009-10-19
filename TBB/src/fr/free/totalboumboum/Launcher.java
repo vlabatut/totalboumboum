@@ -827,6 +827,7 @@ public class Launcher
 	 * - adaptation de Glicko2 (serializable, généricité, nouvelles méthodes...)
 	 * - ajout du rang dans les panels affichant la liste des joueurs d'un tournoi/match
 	 * - nouvelles classes pour gérer les statistiques globales du jeu : nombre de rounds joués par joueur, nombre de bombes posées, etc.
+	 * - quelques bugs corrigés dans l'interface graphique, notamment en ce qui concerne le calcul des largeurs de colonnes dans certaines tables
 	 */
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -1039,10 +1040,7 @@ public class Launcher
 	 *  - possibilité de configurer l'UPS des IA dans la GUI 
 	 *  - est-ce que le quick mode gère les stats ??
 	 *  - écran stats
-	 *  	- boutons en-tête marchent pas
-	 *  	- ça rame
-	 *  	- icone de la moyenne à rabaisser au niveau des autres (stdev et volat)
-	 *  	- toogle boutons  pas de la bonne taille dans le menu
-	 *  	>> faut tout mettre dans une seule classe, c'est trop la merde d'avoir décomposer en deux classes, en fait.
+	 *  	- boutons suppression marchent pas non plus >> deregisterPlayer pas implémentée
+	 *  	- accélérer encore l'affichage des données ?
 	 */
 }

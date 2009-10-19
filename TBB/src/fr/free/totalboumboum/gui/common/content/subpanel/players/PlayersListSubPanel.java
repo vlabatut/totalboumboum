@@ -82,53 +82,34 @@ public class PlayersListSubPanel extends TableSubPanel implements MouseListener
 		controlTexts = new ArrayList<String>();
 		controlTooltips = new ArrayList<String>();
 		int controlWidth = GuiStringTools.initControlsTexts(getLineFontSize(),controlTexts,controlTooltips);
-		int rankWidth = getRanksWidth();
-		rankWidth = Math.max(iconWidth,rankWidth);
-		int nameWidth = getDataWidth() - (cols-1)*GuiTools.subPanelMargin - 2*iconWidth - rankWidth;
-		if(showControls)
-			nameWidth = nameWidth - controlWidth;
+		int rankWidth = iconWidth;
 
 		// headers
 		{	int col = 0;
 			// hero
 			{	String key = GuiKeys.COMMON_PLAYERS_LIST_HEADER_HERO;
 				setLabelKey(0,col,key,true);
-				setColSubMinWidth(col,iconWidth);
-				setColSubPrefWidth(col,iconWidth);
-				setColSubMaxWidth(col,iconWidth);
 				col++;
 			}
 			// profile
 			{	String key = GuiKeys.COMMON_PLAYERS_LIST_HEADER_PROFILE;
 				setLabelKey(0,col,key,true);
-				setColSubMinWidth(col,iconWidth);
-				setColSubPrefWidth(col,iconWidth);
-				setColSubMaxWidth(col,iconWidth);
 				col++;
 			}
 			// controls
 			if(showControls)
 			{	String key = GuiKeys.COMMON_PLAYERS_LIST_HEADER_CONTROLS;
 				setLabelKey(0,col,key,true);
-				setColSubMinWidth(col,controlWidth);
-				setColSubPrefWidth(col,controlWidth);
-				setColSubMaxWidth(col,controlWidth);
 				col++;
 			}			
 			// name
 			{	String key = GuiKeys.COMMON_PLAYERS_LIST_HEADER_NAME;
 				setLabelKey(0,col,key,true);
-				setColSubMinWidth(col,nameWidth);
-				setColSubPrefWidth(col,nameWidth);
-				setColSubMaxWidth(col,nameWidth);
 				col++;
 			}
 			// rank
 			{	String key = GuiKeys.COMMON_PLAYERS_LIST_HEADER_RANK;
 				setLabelKey(0,col,key,true);
-				setColSubMinWidth(col,rankWidth);
-				setColSubPrefWidth(col,rankWidth);
-				setColSubMaxWidth(col,rankWidth);
 				col++;
 			}
 		}
@@ -180,6 +161,9 @@ public class PlayersListSubPanel extends TableSubPanel implements MouseListener
 					nf.setMinimumFractionDigits(0);
 					int playerId = profile.getId();
 					int playerRank = rankingService.getPlayerRank(playerId);
+					int temp = GuiTools.getPixelWidth(getLineFontSize(),Integer.toString(playerRank));
+					if(temp>rankWidth)
+						rankWidth = temp;
 					String text = Integer.toString(playerRank);
 					String tooltip = text;
 					setLabelText(line,col,text,tooltip);
@@ -189,17 +173,44 @@ public class PlayersListSubPanel extends TableSubPanel implements MouseListener
 				line++;
 			}
 		}
-	}
-	
-	private int getRanksWidth()
-	{	int result = 0;
-		for(Profile p: players)
-		{	int rank = p.getRank();
-			int temp = GuiTools.getPixelWidth(getLineFontSize(),Integer.toString(rank));
-			if(temp>result)
-				result = temp;
+		
+		// widths
+		{	int nameWidth = getDataWidth() - (cols-1)*GuiTools.subPanelMargin - 2*iconWidth - rankWidth;
+			if(showControls)
+				nameWidth = nameWidth - controlWidth;
+			int col = 0;
+			// hero
+			{	setColSubMinWidth(col,iconWidth);
+				setColSubPrefWidth(col,iconWidth);
+				setColSubMaxWidth(col,iconWidth);
+				col++;
+			}
+			// profile
+			{	setColSubMinWidth(col,iconWidth);
+				setColSubPrefWidth(col,iconWidth);
+				setColSubMaxWidth(col,iconWidth);
+				col++;
+			}
+			// controls
+			if(showControls)
+			{	setColSubMinWidth(col,controlWidth);
+				setColSubPrefWidth(col,controlWidth);
+				setColSubMaxWidth(col,controlWidth);
+				col++;
+			}			
+			// name
+			{	setColSubMinWidth(col,nameWidth);
+				setColSubPrefWidth(col,nameWidth);
+				setColSubMaxWidth(col,nameWidth);
+				col++;
+			}
+			// rank
+			{	setColSubMinWidth(col,rankWidth);
+				setColSubPrefWidth(col,rankWidth);
+				setColSubMaxWidth(col,rankWidth);
+				col++;
+			}
 		}
-		return result;
 	}
 	
 	/////////////////////////////////////////////////////////////////
